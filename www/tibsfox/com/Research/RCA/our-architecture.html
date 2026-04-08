@@ -118,6 +118,112 @@
       </tbody>
     </table>
 
+    <!-- DEEP EXTRACTION: CROSS-CUTTING SYNTHESIS FROM ALL 8 PAPERS -->
+    <h2>Cross-Cutting Synthesis &mdash; 8 Recurring Themes</h2>
+    <p>Analysis across all 8 deeply extracted sources reveals recurring themes that cut across AI agent debugging, cloud RCA, LLM reasoning failures, and SRE practice. These themes are not isolated findings &mdash; they reinforce each other and converge on a coherent set of architectural principles.</p>
+
+    <table>
+      <thead><tr><th>#</th><th>Theme</th><th>Sources</th><th>Implication</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Architecture &gt; Model capability</strong></td><td>Kim et al., Riddell et al.</td><td>Failures persist across all model tiers; system design matters more than model selection</td></tr>
+        <tr><td>2</td><td><strong>Hallucination is universal</strong></td><td>Kim et al., AgentRx, Riddell et al.</td><td>Appears as a top failure across all studies; requires structural mitigation, not just prompting</td></tr>
+        <tr><td>3</td><td><strong>Multi-modal fusion is essential</strong></td><td>Wang &amp; Qi survey, DynaCausal, Fang et al.</td><td>Combining metrics + logs + traces consistently outperforms single-signal approaches</td></tr>
+        <tr><td>4</td><td><strong>Dynamic &gt; Static</strong></td><td>DynaCausal</td><td>13&ndash;18% degradation with static graphs; systems must adapt to changing conditions</td></tr>
+        <tr><td>5</td><td><strong>Simpler can be better</strong></td><td>Riddell et al., Kim et al.</td><td>Straight-Shot matches complex workflows; prompt engineering alone fails; right-size complexity</td></tr>
+        <tr><td>6</td><td><strong>Blame-free learning</strong></td><td>Google SRE, AgentRx</td><td>Blameless culture + taxonomized failures = systematic learning without stigma</td></tr>
+        <tr><td>7</td><td><strong>Traces can hurt</strong></td><td>Riddell et al.</td><td>Removing traces improved accuracy by 6&ndash;7% &mdash; warns against naive data maximalism</td></tr>
+        <tr><td>8</td><td><strong>74.38% of failures recur</strong></td><td>Wang &amp; Qi survey</td><td>Validates investment in pattern learning and skill persistence</td></tr>
+      </tbody>
+    </table>
+
+    <!-- DEEP EXTRACTION: DIRECT ARCHITECTURE RECOMMENDATIONS -->
+    <h2>Direct Architecture Recommendations</h2>
+    <p>Concrete findings from the literature mapped to specific recommendations for gsd-skill-creator:</p>
+
+    <table>
+      <thead><tr><th>Finding</th><th>Source</th><th>Recommendation</th></tr></thead>
+      <tbody>
+        <tr><td>Inter-agent communication enrichment reduces failures 15pp</td><td>Kim et al.</td><td>Formalize agent handoff protocols beyond simple context passing</td></tr>
+        <tr><td>Constraint synthesis from tool schemas</td><td>AgentRx</td><td>Auto-generate MCP tool guards from schema definitions</td></tr>
+        <tr><td>9-category failure taxonomy</td><td>AgentRx</td><td>Adopt in gsd-forensics for standardized failure classification</td></tr>
+        <tr><td>74.38% failure recurrence</td><td>Wang &amp; Qi survey</td><td>Prioritize persistent pattern learning in skill-creator</td></tr>
+        <tr><td>Dynamic causal graphs outperform static by 13&ndash;18%</td><td>DynaCausal</td><td>Build dynamic dependency tracking, not static dependency declarations</td></tr>
+        <tr><td>Goal-based diagnostic routing</td><td>Fang et al.</td><td>Different diagnostic paths for triage (gsd-fast) vs deep investigation (gsd-forensics)</td></tr>
+        <tr><td>Anchoring bias: 15&ndash;45% accuracy loss</td><td>Riddell et al.</td><td>Explicit de-anchoring steps in multi-hypothesis investigation</td></tr>
+        <tr><td>Trace data distracts models</td><td>Riddell et al.</td><td>Filter and summarize rather than dump raw traces to agents</td></tr>
+        <tr><td>Auditable validation logs</td><td>AgentRx</td><td>Every agent decision should produce reviewable evidence</td></tr>
+        <tr><td>Blameless postmortem template</td><td>Google SRE</td><td>Standardize gsd-forensics output format on Google&rsquo;s 7-section template</td></tr>
+      </tbody>
+    </table>
+
+    <!-- DEEP EXTRACTION: CONSOLIDATED IMPLICATIONS -->
+    <h2>Consolidated Implications for Our Architecture</h2>
+    <p>Each of the 8 deeply extracted papers included specific implications for gsd-skill-creator. Consolidated by architectural area:</p>
+
+    <h3>Agent Communication &amp; Handoffs</h3>
+    <div class="card">
+      <ul>
+        <li>Our multi-agent architecture (GSD executor, verifier, planner) must address inter-agent communication explicitly &mdash; richer protocol design is more impactful than model upgrades (Kim et al.)</li>
+        <li>State tracking across agent handoffs (context-handoff skill, beads-state) is architecturally critical, not optional (Kim et al.)</li>
+        <li>Formalize agent handoff protocols: the 15 percentage point improvement from communication enrichment is the single largest actionable finding</li>
+      </ul>
+    </div>
+
+    <h3>Constraint Synthesis &amp; Guards</h3>
+    <div class="card">
+      <ul>
+        <li>The constraint synthesis pattern (tool schemas + domain policies &rarr; executable guards) maps directly to our hook system and security-hygiene skill (AgentRx)</li>
+        <li>The constraint-from-schema approach can be applied to our MCP tool definitions to auto-generate guards (AgentRx blog)</li>
+        <li>Open-source AgentRx availability means direct integration into our diagnostic pipeline is feasible (CC BY 4.0)</li>
+      </ul>
+    </div>
+
+    <h3>Failure Classification &amp; Forensics</h3>
+    <div class="card">
+      <ul>
+        <li>The 9-category taxonomy provides a concrete classification for our gsd-forensics skill to adopt (AgentRx)</li>
+        <li>&ldquo;Critical Failure Step&rdquo; identification is exactly what our witness-observer and polecat-worker need for stalled-agent detection (AgentRx)</li>
+        <li>Our gsd-forensics skill should follow blameless postmortem principles &mdash; focus on systemic causes, not &ldquo;which model is bad&rdquo; (Google SRE)</li>
+        <li>The postmortem template structure should be the output format of gsd-forensics (Google SRE)</li>
+        <li>Trigger criteria map to our phase/milestone completion checks &mdash; define explicit thresholds for when forensic investigation is warranted (Google SRE)</li>
+      </ul>
+    </div>
+
+    <h3>Research Co-Processor &amp; Diagnostics</h3>
+    <div class="card">
+      <ul>
+        <li>Hallucination and incomplete exploration are the top risks for our research co-processor pipeline; constraint-based guard rails at each agent step are essential (Kim et al.)</li>
+        <li>The trace distraction finding is critical: more data is not always better &mdash; our research co-processor must filter and summarize rather than dump raw traces (Riddell et al.)</li>
+        <li>Anchoring bias (15&ndash;45% accuracy reduction) maps directly to our agent workflows &mdash; first-hypothesis stickiness is a real threat; our planner/verifier split helps but may need explicit de-anchoring steps (Riddell et al.)</li>
+        <li>Belief update failure (RF-09) explains why our agents sometimes persist with wrong approaches &mdash; we need explicit &ldquo;evidence review&rdquo; checkpoints in phase execution (Riddell et al.)</li>
+        <li>Metric data is the most valuable signal type; prioritize structured metrics (test counts, build times, error rates) over raw log dumps in diagnostic pipelines (Riddell et al.)</li>
+      </ul>
+    </div>
+
+    <h3>Dynamic Dependency &amp; Causal Reasoning</h3>
+    <div class="card">
+      <ul>
+        <li>The dynamic causal graph approach is directly applicable to our multi-agent dependency chains &mdash; phase dependencies, skill activation sequences, and agent handoffs form a dynamic graph (DynaCausal)</li>
+        <li>The &ldquo;deviation intensity&rdquo; trap (where the most visibly broken thing is not the root cause) maps to our debugging experience &mdash; the loudest test failure is often a downstream symptom (DynaCausal)</li>
+        <li>SCO&rsquo;s causal ordering constraint is a principle we should adopt: when diagnosing GSD pipeline failures, always rank upstream causes above downstream symptoms (DynaCausal)</li>
+        <li>Contrastive learning (normal vs anomalous embeddings) could improve our pgvector-based pattern matching for mission failure detection (DynaCausal)</li>
+      </ul>
+    </div>
+
+    <h3>Pattern Learning &amp; Knowledge Architecture</h3>
+    <div class="card">
+      <ul>
+        <li>The 74.38% recurrence rate validates our approach of persistent learning via skills &mdash; most failures repeat, so learned patterns have high reuse value (Wang &amp; Qi survey)</li>
+        <li>Multi-modal fusion is the trend; our architecture already combines multiple signal types (git history, test results, phase plans, execution traces) &mdash; formalizing this as RCA input is natural (Wang &amp; Qi survey)</li>
+        <li>Knowledge graph approaches align with our pgvector + Rosetta cluster architecture (Wang &amp; Qi survey)</li>
+        <li>The survey&rsquo;s evaluation framework (MTTD, MTTR, interpretability, generalizability) gives us concrete metrics for measuring our research co-processor (Wang &amp; Qi survey)</li>
+        <li>The 7-goal framework maps remarkably well to our architecture: data correlation (Rosetta clusters), robustness (beads-state crash recovery), adaptive learning (skill-creator observation loop), real-time (GSD fast/quick paths), interpretability (session reports), multi-granularity (phase &rarr; plan &rarr; code), actionability (gsd-do routing) (Fang et al.)</li>
+        <li>The point-finding vs graph-building distinction is critical &mdash; our gsd-forensics should build propagation graphs, not just identify single failure points (Fang et al.)</li>
+        <li>The effectiveness-data-cost triangle is our token-budget constraint in different clothes (Fang et al.)</li>
+        <li>Cultural reinforcement through &ldquo;reading clubs&rdquo; and &ldquo;wheel of misfortune&rdquo; suggests we should build a failure pattern library that skills can learn from (Google SRE)</li>
+      </ul>
+    </div>
+
     <!-- CORPUS CROSS-REFERENCES -->
     <h2>Corpus Cross-References</h2>
     <p>Pipeline analysis identified <strong>237 related projects</strong> across 3 knowledge domains with 42 keyword matches &mdash; the highest connectivity of any module.</p>
