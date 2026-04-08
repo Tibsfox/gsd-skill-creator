@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>--- — LTM Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #221f3a;
+            --accent: #FFB300;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #9575CD;
+            --border: #2f2a4a;
+            --primary: #4527A0;
+            --mem: #FFD54F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; padding: 2rem; max-width: 900px; margin: 0 auto; }
+        h1 { color: var(--mem); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--mem); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--mem); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--mem); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--mem); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(149,117,205,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        LTM — Long-Term Memory Systems for AI Agents<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to LTM Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1
+    id="persistent-ram-disk-design-for-the-ltm-memory-subsystem">Persistent
+    RAM Disk Design for the LTM Memory Subsystem</h1>
+    <blockquote>
+    <p><em>“The disk is lying to us. Every time we open a memory file we
+    pay 12 ms to seek something the kernel already has in cache. Every
+    time we save one, we pay 30 ms to convince <code>fsync</code> that
+    durability happened. We have 46 GB of available RAM and a system
+    that has stayed online for weeks at a time. It is time to stop
+    pretending the disk is the ground truth.”</em></p>
+    </blockquote>
+    <p>This module is the detailed systems-engineering design for a
+    <strong>persistent, dynamically-growing RAM disk</strong> layered
+    underneath gsd-skill-creator’s six-tier memory architecture. It is
+    the most concrete deliverable of the LTM mission because it is the
+    change the user explicitly asked for: a managed slice of
+    <code>/dev/shm</code> that behaves like a durable filesystem from
+    the application’s perspective, while running at memory speed.</p>
+    <p>The design philosophy is deliberately boring. We do not invent a
+    new filesystem. We do not write a new database. We compose proven
+    Linux primitives — tmpfs, rsync, inotify, systemd mount units,
+    cgroup v2 memory accounting — into a tier that absorbs the current
+    storage thrashing, persists on a disciplined cadence, and recovers
+    cleanly after either a warm or cold boot.</p>
+    <h2 id="system-context-measured-not-assumed">1. System Context
+    (Measured, Not Assumed)</h2>
+    <p>Before any design, the target machine was measured directly.
+    These are facts, not hypotheses:</p>
+    <table>
+    <colgroup>
+    <col style="width: 28%" />
+    <col style="width: 71%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Property</th>
+    <th>Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Kernel</td>
+    <td>Linux 6.17.0-19-generic (Ubuntu 6.17)</td>
+    </tr>
+    <tr>
+    <td>Total RAM</td>
+    <td>62 GiB (<code>MemTotal: 63423056 kB</code>)</td>
+    </tr>
+    <tr>
+    <td>MemFree</td>
+    <td>~12 GiB</td>
+    </tr>
+    <tr>
+    <td>MemAvailable</td>
+    <td>~44–46 GiB</td>
+    </tr>
+    <tr>
+    <td>Buffers + Cached</td>
+    <td>~38 GiB</td>
+    </tr>
+    <tr>
+    <td>Swap</td>
+    <td>2 GiB total, ~1.5 GiB used (noticeable pressure)</td>
+    </tr>
+    <tr>
+    <td><code>/dev/shm</code></td>
+    <td>tmpfs, <strong>31 GiB</strong> capacity, 63 MB used (~0 %)</td>
+    </tr>
+    <tr>
+    <td><code>/tmp</code></td>
+    <td>tmpfs, 31 GiB capacity, 7 GiB used (23 %)</td>
+    </tr>
+    <tr>
+    <td><code>vm.swappiness</code></td>
+    <td>60 (default Ubuntu)</td>
+    </tr>
+    <tr>
+    <td><code>vm.overcommit_memory</code></td>
+    <td>0 (heuristic)</td>
+    </tr>
+    <tr>
+    <td><code>vm.overcommit_ratio</code></td>
+    <td>50</td>
+    </tr>
+    <tr>
+    <td><code>vm.dirty_ratio</code></td>
+    <td>20</td>
+    </tr>
+    <tr>
+    <td><code>vm.dirty_background_ratio</code></td>
+    <td>10</td>
+    </tr>
+    <tr>
+    <td><code>vm.dirty_expire_centisecs</code></td>
+    <td>3000 (30 s)</td>
+    </tr>
+    <tr>
+    <td><code>vm.dirty_writeback_centisecs</code></td>
+    <td>500 (5 s)</td>
+    </tr>
+    <tr>
+    <td>systemd</td>
+    <td>257.9 (very recent)</td>
+    </tr>
+    <tr>
+    <td>rsync</td>
+    <td>available</td>
+    </tr>
+    <tr>
+    <td>inotify-tools</td>
+    <td>not yet installed (trivial to add)</td>
+    </tr>
+    <tr>
+    <td>System uptime pattern</td>
+    <td>user: <em>“stable and stays online for long periods”</em></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Two observations shape everything that follows:</p>
+    <ol type="1">
+    <li><p><strong>We do not need to create a new mount.</strong>
+    <code>/dev/shm</code> is already a 31 GiB tmpfs with essentially
+    nothing on it (63 MB, all PostgreSQL shared-memory scratch). The
+    question is not “how do we provision a RAM disk” — it is “how do we
+    carve out a managed subdirectory inside existing tmpfs and give it
+    persistence semantics.”</p></li>
+    <li><p><strong>Swap pressure is real and small.</strong> The system
+    is using 1.5 GiB of its 2 GiB swap. That is a warning, not a crisis.
+    It means that whatever we put in the RAM disk competes with the
+    working set of everything else, and if we size it recklessly we will
+    push anonymous pages out to swap. Our sizing policy must be
+    reactive, not greedy.</p></li>
+    </ol>
+    <h2 id="requirements-from-the-user-verbatim">2. Requirements (From
+    the User, Verbatim)</h2>
+    <ul>
+    <li>Start with <strong>at least 4 GiB</strong> of RAM disk capacity
+    for memory-subsystem use.</li>
+    <li><strong>Grow dynamically in 4 GiB chunks</strong> as fill level
+    approaches capacity.</li>
+    <li><strong>Persist changes to local disk</strong> between sessions
+    — the RAM disk must not lose data when the process or the machine
+    restarts.</li>
+    <li><strong>Persist at other idle points during the day</strong> —
+    not just on shutdown.</li>
+    <li><strong>Leverage system stability.</strong> The target is not
+    crash-sensitive. A few minutes of lost writes on an unplanned power
+    event is acceptable; we are not building a financial ledger.</li>
+    </ul>
+    <p>Unwritten but implied:</p>
+    <ul>
+    <li>The subsystem must <strong>never OOM-kill the host</strong> or
+    destabilise other services. A memory cache that takes down the
+    workstation is worse than a slow cache.</li>
+    <li>Recovery after a reboot should be <strong>automatic and
+    fast</strong>, not a manual dance.</li>
+    <li>The design should be <strong>observable</strong> so we know
+    whether it is actually helping.</li>
+    </ul>
+    <h2 id="choice-of-filesystem-tmpfs-and-why-not-the-alternatives">3.
+    Choice of Filesystem: tmpfs, and Why Not the Alternatives</h2>
+    <p>There are four defensible options. We evaluated each on a small
+    number of axes.</p>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 22%" />
+    <col style="width: 28%" />
+    <col style="width: 9%" />
+    <col style="width: 8%" />
+    <col style="width: 9%" />
+    <col style="width: 8%" />
+    <col style="width: 12%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Option</th>
+    <th>Persistence semantics</th>
+    <th>Sizing</th>
+    <th>Swap aware</th>
+    <th>Compression</th>
+    <th>Complexity</th>
+    <th>Verdict for us</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>tmpfs</strong></td>
+    <td>Volatile, sync on cadence</td>
+    <td>Soft cap, can be remounted larger</td>
+    <td>Yes — pages can be swapped out</td>
+    <td>No</td>
+    <td>Low</td>
+    <td><strong>Chosen</strong></td>
+    </tr>
+    <tr>
+    <td>ramfs</td>
+    <td>Volatile, no size cap at all</td>
+    <td><strong>Unbounded</strong> — can OOM the host</td>
+    <td>No — pinned in RAM</td>
+    <td>No</td>
+    <td>Low</td>
+    <td>Rejected</td>
+    </tr>
+    <tr>
+    <td>zram (compressed block)</td>
+    <td>Volatile unless backed</td>
+    <td>Fixed at create</td>
+    <td>N/A, competes with page cache</td>
+    <td>Yes (LZ4/ZSTD)</td>
+    <td>Medium</td>
+    <td>Rejected for <em>data</em> tier; considered for swap</td>
+    </tr>
+    <tr>
+    <td>tmpfs loop-mounted ext4</td>
+    <td>Persistent through <code>cp</code> of image</td>
+    <td>Fixed at image creation</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>High</td>
+    <td>Rejected</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Why tmpfs wins:</strong></p>
+    <ul>
+    <li><strong>It already exists on the box.</strong>
+    <code>/dev/shm</code> is tmpfs, 31 GiB, 63 MB used. We can start
+    tomorrow without root-level mount changes.</li>
+    <li><strong>It respects memory pressure.</strong> If the kernel
+    needs RAM for a real workload, tmpfs pages can be moved to swap.
+    That is <em>exactly</em> the graceful degradation we want: slower,
+    not dead. Our swap is currently only 2 GiB, which bounds how much we
+    can bleed out — a fact we will revisit in §10.</li>
+    <li><strong>It supports online resize.</strong>
+    <code>mount -o remount,size=8G /mnt/tmpfs-target</code> changes the
+    size cap without losing data and without unmounting. This is the
+    primitive that makes the “grow in 4 GiB chunks” requirement
+    trivially satisfiable.</li>
+    <li><strong>It plays nicely with systemd.</strong> Mount units, path
+    units, timers — everything we need is in systemd 257 already.</li>
+    </ul>
+    <p><strong>Why not ramfs:</strong></p>
+    <p>ramfs is fast but it has no size cap and its pages are not on the
+    LRU list. A runaway write loop fills ramfs until the OOM killer
+    hunts for victims, and those victims will be <em>whatever else is
+    running</em>, not ramfs itself. This is a foot-gun we decline to
+    load. See the <a
+    href="https://www.jamescoyle.net/knowledge/951-the-difference-between-a-tmpfs-and-ramfs-ram-disk">JamesCoyle
+    comparison</a> and the <a
+    href="https://helpful.knobs-dials.com/index.php/RAM_disk_notes">RAM
+    disk notes</a>.</p>
+    <p><strong>Why not zram (for the data tier):</strong></p>
+    <p>zram is wonderful for compressed swap and for low-RAM systems. On
+    this box we have the opposite problem: we have 45 GiB available.
+    Paying CPU cycles to compress every write to a vector index we
+    immediately want to query back is a bad trade. <a
+    href="https://wiki.gentoo.org/wiki/Zram">Gentoo wiki on zram</a> and
+    <a href="https://wiki.archlinux.org/title/Zram">Arch wiki on
+    zram</a> both frame zram primarily as an alternative to swap — not
+    as a persistence layer. We may later configure zram-backed swap as a
+    <em>secondary</em> safety net so that any tmpfs eviction stays in
+    compressed memory rather than hitting NVMe.</p>
+    <p><strong>Why not loop-ext4-in-tmpfs:</strong></p>
+    <p>This gives you an ext4 image mountable as a block device. It
+    sounds persistent (“I can just copy the image file!”), but it layers
+    two filesystems where one suffices, adds ext4 journaling overhead
+    inside what is already RAM, and makes growth awkward (resize2fs
+    dance). The only reason to do it is if you need POSIX features tmpfs
+    lacks — and tmpfs supports everything we need.</p>
+    <p><strong>Decision:</strong> <strong>tmpfs, inside
+    <code>/dev/shm</code>, managed subdirectory.</strong></p>
+    <h2 id="architecture">4. Architecture</h2>
+    <pre><code>┌─────────────────────────────────────────────────────────────────────────┐
+│                         Application: src/memory/*                       │
+│                                                                         │
+│  service.ts  ──────┐                                                    │
+│                    ▼                                                    │
+│   ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐        │
+│   │LOD 100  │  │LOD 200  │  │LOD 300  │  │LOD 350  │  │LOD 400  │        │
+│   │ram-cache│  │index    │  │files    │  │chroma   │  │postgres │        │
+│   │(in-proc)│  │(JSON)   │  │(md+yaml)│  │(HNSW)   │  │(pg_store│        │
+│   └─────────┘  └────┬────┘  └────┬────┘  └────┬────┘  └────┬────┘        │
+│        │            │             │             │            │          │
+│        │     RAM-disk-aware store wrappers (path-indirect)   │          │
+│        │            │             │             │            │          │
+└────────┼────────────┼─────────────┼─────────────┼────────────┼──────────┘
+         │            │             │             │            │
+         │  pinned    │  symlink    │  symlink    │  symlink   │  unchanged
+         │  in-proc   ▼             ▼             ▼            ▼
+         │      ┌─────────────────────────────────────────┐  ┌──────────┐
+         │      │    /dev/shm/gsd-ramdisk/   (tmpfs)     │  │PostgreSQL│
+         │      │  ┌─────────────────────────────────┐    │  │shared buf│
+         │      │  │ .generation   (monotonic UUID) │    │  │ on NVMe  │
+         │      │  │ index/        LOD 200 files     │    │  └──────────┘
+         │      │  │ mem/          LOD 300 .md store │    │
+         │      │  │ chroma/       LOD 350 HNSW+sqlite│   │
+         │      │  │ wal/          pre-sync journal  │    │
+         │      │  │ snapshots/    periodic tarballs │    │
+         │      │  └─────────────────────────────────┘    │
+         │      │       size cap: 4 GiB → 8 → 12 → 16    │
+         │      │       remount,size=NG on growth trigger│
+         │      └─────────────────┬───────────────────────┘
+         │                        │
+         │                        │ write-behind
+         │                        ▼
+         │      ┌─────────────────────────────────────────┐
+         │      │    ~/.local/share/gsd-ramdisk-store/   │
+         │      │         (NVMe / persistent disk)        │
+         │      │  ┌─────────────────────────────────┐    │
+         │      │  │ live/        mirror of /dev/shm │    │
+         │      │  │ snapshots/   rotated tarballs   │    │
+         │      │  │ wal-archive/ replayed journals  │    │
+         │      │  │ .last-sync   timestamp marker   │    │
+         │      │  └─────────────────────────────────┘    │
+         │      └─────────────────────────────────────────┘
+         │                        │
+         │                        ▼
+         │      ┌─────────────────────────────────────────┐
+         │      │  systemd units                           │
+         │      │  - gsd-ramdisk.mount                     │
+         │      │  - gsd-ramdisk-sync.service              │
+         │      │  - gsd-ramdisk-sync.timer  (5 min)       │
+         │      │  - gsd-ramdisk-snapshot.timer (1 h)      │
+         │      │  - gsd-ramdisk-guard.service             │
+         │      └─────────────────────────────────────────┘
+         ▼
+    Crash-safe for
+    everything except
+    LOD 100</code></pre>
+    <p>The critical insight in the diagram is that <strong>LOD 400
+    (PostgreSQL) is unchanged</strong>. PostgreSQL has its own shared
+    buffers, WAL, and fsync semantics — it does not want to live in
+    tmpfs and we do not want to fight it. The RAM disk serves the tiers
+    <em>above</em> the database, which is where the storage thrashing
+    actually lives.</p>
+    <h2 id="which-tiers-live-where">5. Which Tiers Live Where</h2>
+    <p>This is the single most important table in the document. It
+    answers: <em>for each tier, where is its authoritative copy at
+    steady state?</em></p>
+    <table>
+    <colgroup>
+    <col style="width: 6%" />
+    <col style="width: 30%" />
+    <col style="width: 20%" />
+    <col style="width: 9%" />
+    <col style="width: 19%" />
+    <col style="width: 13%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Tier</th>
+    <th>What it stores</th>
+    <th>Authoritative location</th>
+    <th>In RAM disk?</th>
+    <th>Sync cadence to NVMe</th>
+    <th>Loss on power-off?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>LOD 100</td>
+    <td>In-process LRU of hot records</td>
+    <td>Process heap</td>
+    <td>No (already RAM)</td>
+    <td>N/A</td>
+    <td>Yes, acceptable</td>
+    </tr>
+    <tr>
+    <td>LOD 200</td>
+    <td>Global keyword + tag index (JSON shards)</td>
+    <td><code>/dev/shm/gsd-ramdisk/index/</code></td>
+    <td><strong>Yes</strong></td>
+    <td>5 min + on-idle</td>
+    <td>Rebuildable from LOD 300</td>
+    </tr>
+    <tr>
+    <td>LOD 300</td>
+    <td>Markdown files with YAML frontmatter</td>
+    <td><code>/dev/shm/gsd-ramdisk/mem/</code></td>
+    <td><strong>Yes</strong></td>
+    <td>5 min + inotify-coalesced</td>
+    <td><strong>Primary data — must persist</strong></td>
+    </tr>
+    <tr>
+    <td>LOD 350</td>
+    <td>ChromaDB HNSW index + sqlite metadata</td>
+    <td><code>/dev/shm/gsd-ramdisk/chroma/</code></td>
+    <td><strong>Yes — biggest winner</strong></td>
+    <td>15 min + on idle</td>
+    <td>Rebuildable from LOD 300 embeddings</td>
+    </tr>
+    <tr>
+    <td>LOD 400</td>
+    <td>PostgreSQL full corpus + vector mirror</td>
+    <td><code>~/.local/share/.../pgdata</code></td>
+    <td>No</td>
+    <td>Native PG fsync</td>
+    <td>Safe — PG’s problem</td>
+    </tr>
+    <tr>
+    <td>LOD 500</td>
+    <td>Cold corpus (archives, blobs)</td>
+    <td>NVMe</td>
+    <td>No</td>
+    <td>N/A</td>
+    <td>Safe</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Some notes on this table:</p>
+    <ul>
+    <li><strong>LOD 350 is the biggest winner.</strong> ChromaDB keeps
+    its HNSW index in memory during queries <a
+    href="https://docs.trychroma.com/guides/deploy/performance">per
+    Chroma’s own docs</a>, but it still persists to a sqlite file and a
+    set of index files. Every insert round-trips through that sqlite
+    WAL. Moving the persist directory into tmpfs means those writes are
+    memory writes, and Chroma’s own in-memory HNSW never has to race
+    with a spinning disk. For a corpus of tens of thousands of
+    embeddings — Chroma estimates ~1 GB for 50k papers at 1536
+    dimensions — the whole working set fits comfortably inside a 4 GiB
+    budget.</li>
+    <li><strong>LOD 300 is the canonical source of truth.</strong> If we
+    lose the vector index we can rebuild it by re-embedding the
+    markdown. If we lose the markdown files we have lost user content.
+    Therefore LOD 300’s sync discipline is the strictest and its
+    recovery path is the shortest.</li>
+    <li><strong>LOD 400 stays on NVMe.</strong> PostgreSQL has decades
+    of engineering around fsync, WAL, and checkpointing. Putting its
+    data directory on tmpfs would be textbook malpractice. But because
+    it keeps its own buffer pool, PG already <em>acts like</em> a RAM
+    cache for the queries that hit it — we do not need to help it.</li>
+    </ul>
+    <h2 id="mount-layout-and-options">6. Mount Layout and Options</h2>
+    <p>The managed tmpfs directory lives at
+    <code>/dev/shm/gsd-ramdisk/</code>. It is <strong>not</strong> a new
+    mount — it is a subdirectory of the existing <code>/dev/shm</code>
+    tmpfs, treated by our code as if it were a mount point.</p>
+    <p>However, for sizing control, we override it with a dedicated
+    tmpfs mount using a systemd mount unit. This gives us:</p>
+    <ul>
+    <li>An independent <code>size=</code> cap separate from
+    <code>/dev/shm</code> (which defaults to 50 % of RAM)</li>
+    <li>A distinct entry in <code>/proc/mounts</code> so metrics can
+    isolate our tier</li>
+    <li>An <code>OOMScoreAdjust</code> and cgroup handle per §10</li>
+    </ul>
+    <p><strong>Proposed mount options (initial):</strong></p>
+    <pre><code>Type=tmpfs
+Where=/dev/shm/gsd-ramdisk
+Options=size=4G,mode=0700,nosuid,nodev,noexec,uid=1000,gid=1000</code></pre>
+    <p>Why these:</p>
+    <ul>
+    <li><code>size=4G</code> — the starting budget. Grows via remount
+    (§7).</li>
+    <li><code>mode=0700</code> — user-private. Not readable by other
+    local users. See §11 on security.</li>
+    <li><code>nosuid,nodev,noexec</code> — standard hardening; no reason
+    to execute anything from here.</li>
+    <li><code>uid=1000,gid=1000</code> — the <code>foxy</code> user owns
+    everything. No sudo required for normal writes.</li>
+    <li>Not setting <code>noswap</code> — we <em>want</em> this tier to
+    be swappable under extreme pressure. It is our graceful degradation
+    valve.</li>
+    </ul>
+    <p><strong>Mount unit</strong>
+    (<code>/etc/systemd/system/dev-shm-gsd\x2dramdisk.mount</code>):</p>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode ini"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Unit]</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Description</span><span class="ot">=</span><span class="st">gsd-skill-creator RAM disk tier (tmpfs, managed subtree)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">Documentation</span><span class="ot">=</span><span class="st">file:///media/foxy/ai/GSD/dev-tools/artemis-ii/www/tibsfox/com/Research/LTM/research/07-persistent-ramdisk-design.md</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">After</span><span class="ot">=</span><span class="st">local-fs.target</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">Before</span><span class="ot">=</span><span class="st">gsd-ramdisk-restore.service</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">[Mount]</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="dt">What</span><span class="ot">=</span><span class="st">tmpfs</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="dt">Where</span><span class="ot">=</span><span class="st">/dev/shm/gsd-ramdisk</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="dt">Type</span><span class="ot">=</span><span class="st">tmpfs</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="dt">Options</span><span class="ot">=</span><span class="st">size=4G,mode=0700,nosuid,nodev,noexec,uid=1000,gid=1000</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">[Install]</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="dt">WantedBy</span><span class="ot">=</span><span class="st">multi-user.target</span></span></code></pre></div>
+    <h2 id="growth-policy-4-8-12-16-then-ask-me">7. Growth Policy: “4,
+    8, 12, 16 — then ask me”</h2>
+    <p>The user asked for 4 GiB start with 4 GiB growth chunks. The rule
+    is monotonic — we grow, we do not shrink (see §8). The trigger is a
+    watermark on <em>used</em> space, measured against
+    <em>capacity</em>.</p>
+    <p><strong>Thresholds:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 18%" />
+    <col style="width: 16%" />
+    <col style="width: 65%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>State</th>
+    <th>Used</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Comfortable</td>
+    <td>&lt; 60 %</td>
+    <td>Nothing</td>
+    </tr>
+    <tr>
+    <td>Watching</td>
+    <td>60 – 75 %</td>
+    <td>Log warning, accelerate sync cadence</td>
+    </tr>
+    <tr>
+    <td>Pressure</td>
+    <td>75 – 85 %</td>
+    <td>Emit Prometheus alert, schedule growth</td>
+    </tr>
+    <tr>
+    <td>Growing</td>
+    <td>≥ 85 %</td>
+    <td>Execute <code>remount,size=+4G</code></td>
+    </tr>
+    <tr>
+    <td>Capped</td>
+    <td>16 GiB cap</td>
+    <td>Emit hard alert, refuse new LOD 350 inserts, continue LOD 300
+    writes</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Growth operation</strong> (idempotent, scripted):</p>
+    <div class="sourceCode" id="cb4"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gsd-ramdisk-grow.sh — called by guard service on threshold cross</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">CURRENT</span><span class="op">=</span><span class="va">$(</span><span class="ex">findmnt</span> <span class="at">-no</span> SIZE <span class="at">-B</span> /dev/shm/gsd-ramdisk<span class="va">)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">NEW</span><span class="op">=</span><span class="va">$((CURRENT</span> <span class="op">/</span> <span class="dv">1024</span> <span class="op">/</span> <span class="dv">1024</span> <span class="op">/</span> <span class="dv">1024</span> <span class="op">+</span> <span class="dv">4</span><span class="va">))</span>   <span class="co"># add 4 GiB</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">&quot;</span><span class="va">$NEW</span><span class="st">&quot;</span> <span class="ot">-gt</span> 16 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">logger</span> <span class="at">-t</span> gsd-ramdisk <span class="st">&quot;refusing to grow beyond 16G cap&quot;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mount</span> <span class="at">-o</span> remount,size=<span class="va">${NEW}</span>G /dev/shm/gsd-ramdisk</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ex">logger</span> <span class="at">-t</span> gsd-ramdisk <span class="st">&quot;grew to </span><span class="va">${NEW}</span><span class="st">G&quot;</span></span></code></pre></div>
+    <p><code>mount -o remount,size=NG</code> is the operative primitive
+    and it is lossless: existing data in the tmpfs stays in place, the
+    size cap changes, that’s it. This matches the <a
+    href="https://www.baeldung.com/linux/tmpfs-size-dynamics">baeldung
+    tmpfs size dynamics</a> and the <a
+    href="https://man7.org/linux/man-pages/man5/tmpfs.5.html">tmpfs(5)
+    man page</a>.</p>
+    <p><strong>Growth safety interlock:</strong> before growing, we
+    check <code>MemAvailable</code> from <code>/proc/meminfo</code>. If
+    <code>MemAvailable</code> minus the proposed new cap would be less
+    than 8 GiB (a fixed headroom for the rest of the system), we
+    <strong>refuse to grow</strong> and instead accelerate
+    sync-then-evict. This is the discipline that keeps us from pushing
+    the host into swap death.</p>
+    <pre><code>should_grow = used_pct &gt;= 85
+        and  (MemAvailable - new_cap) &gt;= 8 GiB
+        and  current_cap &lt; 16 GiB
+        and  swap_used &lt; 80%</code></pre>
+    <p>The last condition — “do not grow if swap is already stressed” —
+    is our hard stop. On this host, with 1.5 GiB of 2 GiB swap already
+    used, we would actually decline to grow from 4 → 8 today without
+    first addressing swap (see §10).</p>
+    <h2 id="shrink-policy-we-dont">8. Shrink Policy: “We Don’t”</h2>
+    <p>The short version: <strong>we do not shrink at
+    runtime.</strong></p>
+    <p>Why:</p>
+    <ol type="1">
+    <li><code>mount -o remount,size=smaller</code> only works if the
+    currently resident data fits in the new size. Otherwise it fails.
+    This means shrinking requires first evicting, which is exactly the
+    work LRU in LOD 100 and deletions in LOD 300 already do at the data
+    layer.</li>
+    <li>Memory that was once given to tmpfs and has since been freed is
+    already reclaimable by the kernel — the size cap is a <em>cap</em>,
+    not an allocation. Lowering the cap does not give you memory you did
+    not already have.</li>
+    <li>Every shrink is a new failure mode. We do not want failure
+    modes.</li>
+    </ol>
+    <p>The one exception is <strong>at cold start</strong>: if we
+    restart the system and the restored data fits in 4 GiB, the mount
+    unit starts at 4 GiB. That is not “shrinking,” that is “starting
+    fresh at baseline.”</p>
+    <h2 id="persistence-write-behind-not-write-through">9. Persistence:
+    Write-Behind, Not Write-Through</h2>
+    <p>The core choice in any RAM-disk-with-persistence design is
+    <em>when</em> RAM gets flushed to durable storage. We evaluated the
+    four standard strategies:</p>
+    <h3 id="periodic-rsync-simple-reliable">9.1 Periodic rsync (simple,
+    reliable)</h3>
+    <p>A timer fires every N minutes;
+    <code>rsync -a --delete --link-dest=&lt;prev&gt;</code> mirrors
+    <code>/dev/shm/gsd-ramdisk/live/</code> to
+    <code>~/.local/share/gsd-ramdisk-store/live/</code>. Between runs,
+    all writes are in RAM only. Loss window = N minutes.</p>
+    <p><strong>Pros:</strong> Trivial. Uses existing tools. Incremental
+    via <code>--link-dest</code> for historical snapshots. Every linux
+    admin can debug it. <strong>Cons:</strong> Fixed cadence means idle
+    bursts and peak bursts get the same treatment. A flurry of writes
+    right before a crash loses them all.</p>
+    <h3 id="inotify-driven-event-sync-immediate-complex">9.2
+    inotify-driven event sync (immediate, complex)</h3>
+    <p>An <code>inotifywait</code> daemon (or a systemd
+    <code>.path</code> unit) watches <code>/dev/shm/gsd-ramdisk/</code>
+    for close_write, moved_to, and delete events and triggers an
+    incremental rsync within seconds.</p>
+    <p><strong>Pros:</strong> Near-zero loss window (seconds).
+    <strong>Cons:</strong> Event storms during bulk imports. Coalescing
+    logic needed (tools like <code>lsyncd</code> do this — see <a
+    href="https://computingforgeeks.com/rsync-lsyncd-file-sync-linux/">computingforgeeks
+    on lsyncd</a>). Risk of falling behind.</p>
+    <h3 id="journal-based-write-ahead-log">9.3 Journal-based
+    (write-ahead log)</h3>
+    <p>Every write goes first to an append-only journal on NVMe
+    (<code>wal/000001.jrnl</code>), then into tmpfs. A background
+    process compacts the journal into the mirror. Recovery = replay
+    journal.</p>
+    <p><strong>Pros:</strong> Zero loss. This is what PostgreSQL does.
+    <strong>Cons:</strong> We are <em>reintroducing</em> the very disk
+    writes we are trying to avoid. Also: implementing WAL correctly is a
+    substantial engineering project and we have PG for things that
+    actually need WAL.</p>
+    <h3 id="snapshot-based-periodic-tarball">9.4 Snapshot-based
+    (periodic tarball)</h3>
+    <p>Every hour, <code>tar</code> the tmpfs contents into a
+    timestamped archive on NVMe. Keep the last N. Recovery = extract
+    latest.</p>
+    <p><strong>Pros:</strong> Atomic. Easy to reason about. Good for
+    disaster recovery. <strong>Cons:</strong> Coarse — one tarball per
+    hour. Slow on large state. Not a primary sync, but a good
+    <strong>secondary</strong>.</p>
+    <h3 id="recommendation-a-hybrid">9.5 Recommendation: A Hybrid</h3>
+    <p>We run <strong>9.1 + 9.4 in tandem, with 9.2 as opt-in for LOD
+    300 only.</strong></p>
+    <ul>
+    <li><strong>Primary sync:</strong> rsync every <strong>5
+    minutes</strong> from <code>/dev/shm/gsd-ramdisk/live/</code> to
+    <code>~/.local/share/gsd-ramdisk-store/live/</code>, with
+    <code>--delete</code> so deletes propagate. This is cheap because
+    rsync only touches changed files.</li>
+    <li><strong>Idle sync:</strong> a <code>.path</code> unit watches
+    <code>/dev/shm/gsd-ramdisk/.dirty</code> — the application touches
+    this sentinel file after every batch of writes, and an aggressive
+    30-second path unit syncs when the system is idle (see <a
+    href="https://www.freedesktop.org/software/systemd/man/systemd.path.html">systemd.path
+    docs</a>). This closes the “write a lot, then walk away” gap without
+    spamming during active work.</li>
+    <li><strong>Snapshot:</strong> every <strong>60 minutes</strong>
+    (and on clean shutdown), tar the <code>live/</code> tree into
+    <code>snapshots/gsd-ramdisk-YYYYMMDD-HHMM.tar.zst</code>. Retain
+    last 24. These are our disaster-recovery anchors.</li>
+    <li><strong>LOD 300 inotify fast path (optional):</strong> for
+    markdown file writes specifically — because they are the canonical
+    user-content tier — we can layer a tiny inotify watcher that copies
+    any <code>mem/*.md</code> modification directly to the mirror within
+    seconds. LOD 200, 350 do not need this; they are rebuildable.</li>
+    </ul>
+    <p><strong>Worst-case loss window:</strong> 5 minutes (primary
+    cadence), bounded by the idle-sync path which typically closes the
+    gap within 30 seconds of true idle.</p>
+    <p><strong>Sync command (core):</strong></p>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--archive</span> <span class="dt">\</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">--delete</span> <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">--inplace</span> <span class="dt">\</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">--no-whole-file</span> <span class="dt">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">--human-readable</span> <span class="dt">\</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">--stats</span> <span class="dt">\</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      /dev/shm/gsd-ramdisk/live/ <span class="dt">\</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      ~/.local/share/gsd-ramdisk-store/live/</span></code></pre></div>
+    <p><code>--inplace</code> avoids the rename dance on large files
+    like the ChromaDB sqlite. <code>--no-whole-file</code> forces the
+    delta algorithm even on local transfers, which is a <em>win</em> for
+    the append-mostly chroma sqlite WAL.</p>
+    <h2 id="memory-pressure-and-oom-the-defensive-layer">10. Memory
+    Pressure and OOM: The Defensive Layer</h2>
+    <p>This is where a bad design kills the workstation. We take it
+    seriously.</p>
+    <p><strong>Threats:</strong></p>
+    <ol type="1">
+    <li><strong>tmpfs fills past cap → writes fail.</strong> Acceptable,
+    detectable, loud.</li>
+    <li><strong>tmpfs fills near host RAM exhaustion → swap
+    storm.</strong> We already saw swap at 75 % used on the live system.
+    Another 4 GiB of tmpfs fill on top is enough to push the box into
+    swap death.</li>
+    <li><strong>OOM killer selects the wrong victim.</strong> On a
+    modern Ubuntu 6.17 kernel with systemd 257 and
+    <code>systemd-oomd</code> active, this is actually less scary than
+    it used to be, but still worth guarding.</li>
+    </ol>
+    <p><strong>Countermeasures:</strong></p>
+    <h3 id="cgroup-v2-memory-accounting-on-the-sync-service">10.1 Cgroup
+    v2 memory accounting on the sync service</h3>
+    <p>The <code>gsd-ramdisk-sync.service</code> runs under a slice with
+    a hard <code>MemoryMax=</code> so that if rsync itself runs wild
+    (big copy storm), it gets killed before touching the rest of the
+    system.</p>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode ini"><code class="sourceCode ini"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Service]</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Slice</span><span class="ot">=</span><span class="st">gsd-ramdisk.slice</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">MemoryMax</span><span class="ot">=</span><span class="st">512M</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">MemorySwapMax</span><span class="ot">=</span><span class="dv">0</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">OOMScoreAdjust</span><span class="ot">=</span><span class="dv">500</span></span></code></pre></div>
+    <h3 id="protect-the-application-process-not-the-data">10.2 Protect
+    the application process, not the data</h3>
+    <p>Counter-intuitive but correct: we do <strong>not</strong> set
+    <code>OOMScoreAdjust=-1000</code> on the application. An immune
+    process is an immune leak. Instead we set a mild negative
+    (<code>-200</code>) so the app is unlikely to be first, but still
+    killable.</p>
+    <p>tmpfs itself is not a process — it cannot be OOM-killed. What
+    gets killed is a <em>user</em> of the RAM. If the kernel decides to
+    reclaim memory, it will first page tmpfs to swap (we deliberately
+    did not set <code>noswap</code>), then start killing.</p>
+    <h3 id="systemd-oomd-integration">10.3 systemd-oomd integration</h3>
+    <p>systemd 257 ships <code>systemd-oomd</code> which reacts to PSI
+    (pressure stall information) <em>before</em> the kernel OOM killer
+    fires. We enable it and add our slice to its watch list with a
+    <code>ManagedOOMSwap=kill</code> policy on our slice and
+    <code>ManagedOOMSwap=auto</code> elsewhere. This means if swap
+    thrash hits a PSI threshold, our tier is pruned first — exactly the
+    correct priority.</p>
+    <h3 id="the-do-not-grow-interlock-from-7">10.4 The “do not grow”
+    interlock from §7</h3>
+    <p>Reiterated because it matters: we check <code>MemAvailable</code>
+    and swap pressure <em>before</em> every growth event. If growing
+    would starve the host, we refuse and instead trigger an emergency
+    sync followed by an application-level eviction pass on LOD 350 (drop
+    the in-process HNSW cache, let it reload from disk lazily).</p>
+    <h3 id="pre-emptive-swap-expansion">10.5 Pre-emptive swap
+    expansion</h3>
+    <p>Today the host has only 2 GiB of swap. For a design that
+    deliberately uses swap as a pressure valve, that is too small. We
+    recommend creating an <strong>8 GiB zram-backed swap device</strong>
+    — separate from the tmpfs data tier — so that under pressure we have
+    compressed memory swap to bleed into instead of NVMe. This is the
+    one place zram earns its keep in our design. <a
+    href="https://wiki.archlinux.org/title/Zram">ArchWiki zram</a> has
+    the recipe.</p>
+    <div class="sourceCode" id="cb8"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/systemd/zram-generator.conf</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[zram0]</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">zram-size</span> = min<span class="er">(</span><span class="ex">ram</span> / 4, 8192<span class="kw">)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">compression-algorithm</span> = zstd</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">swap-priority</span> = 100</span></code></pre></div>
+    <h2 id="security">11. Security</h2>
+    <p><code>/dev/shm/gsd-ramdisk/</code> is mode 0700, owned by the
+    user. This is stronger than <code>/dev/shm</code> default (1777 like
+    <code>/tmp</code>). Three concerns:</p>
+    <ol type="1">
+    <li><strong>Other local users cannot read it.</strong> 0700 handles
+    that.</li>
+    <li><strong>Memory dumps could leak it.</strong> Not unique to this
+    tier; the same is true of every process’s heap. Accept.</li>
+    <li><strong>Encryption at rest?</strong> <em>Not at the tmpfs
+    layer.</em> Full-disk encryption on the NVMe mirror gives us
+    cold-storage protection. Adding dm-crypt inside tmpfs would be a
+    complexity-cost without a threat model to justify it. If a specific
+    memory tier contains credentials, it should not be in a generalist
+    cache anyway — use the project’s existing secrets handling.</li>
+    </ol>
+    <p>Per-user vs multi-user: the machine is single-user
+    (<code>foxy</code>). Per-user tmpfs inside
+    <code>/run/user/1000/</code> is another option, but it is capped by
+    <code>logind.conf RuntimeDirectorySize</code> which defaults to 10 %
+    of RAM. We prefer the dedicated <code>/dev/shm</code> subtree
+    because it is independently sizable and survives logout.</p>
+    <h2 id="recovery-procedure">12. Recovery Procedure</h2>
+    <p>Three recovery scenarios, ranked by likelihood:</p>
+    <h3 id="warm-reboot-planned">12.1 Warm reboot (planned)</h3>
+    <ol type="1">
+    <li>Application signals pre-shutdown.</li>
+    <li>A final rsync + snapshot runs.</li>
+    <li>System reboots.</li>
+    <li><code>gsd-ramdisk.mount</code> starts at 4 GiB cap.</li>
+    <li><code>gsd-ramdisk-restore.service</code> runs
+    <strong>after</strong> the mount and <strong>before</strong> the
+    application. It <code>rsync</code>s from
+    <code>~/.local/share/gsd-ramdisk-store/live/</code> back into
+    <code>/dev/shm/gsd-ramdisk/live/</code>.</li>
+    <li>If the restored size exceeds 80 % of the 4 GiB cap, the restore
+    service triggers a growth step <em>before</em> marking itself
+    complete, so the app never sees a too-small tmpfs.</li>
+    <li>Application starts, opens its tiers, finds them all
+    present.</li>
+    </ol>
+    <h3 id="cold-reboot-unclean">12.2 Cold reboot (unclean)</h3>
+    <p>Same as warm, with one difference: the last rsync did not happen.
+    We lose up to 5 minutes of writes to LOD 300 files that did not also
+    get caught by the LOD 300 inotify fast-path (which is why the
+    fast-path is worth the complexity for markdown).</p>
+    <p>Recovery walks the mirror. For any file in the mirror with a
+    newer mtime than the last-successful-sync timestamp
+    (<code>.last-sync</code>), it is reloaded. For any LOD 350 state
+    that looks corrupt (missing sqlite, partial HNSW bin), we delete the
+    tmpfs copy and let ChromaDB <strong>rebuild from LOD 300
+    embeddings</strong>. This costs a few minutes of CPU and is
+    idempotent.</p>
+    <h3 id="catastrophic-mirror-corrupted-or-lost">12.3 Catastrophic
+    (mirror corrupted or lost)</h3>
+    <p>Fall back to the last hourly snapshot. Extract the tarball into
+    the tmpfs tree. Re-embed missing LOD 350 state from LOD 300. If
+    snapshots are <em>also</em> gone, we fall back one tier further: LOD
+    400 PostgreSQL still has the canonical record of every memory
+    object, and the corpus in LOD 500 has the raw material. The path is
+    slow (tens of minutes for a rebuild) but <em>lossless</em> up to the
+    last successful LOD 400 commit.</p>
+    <h3 id="recovery-sequence-diagram">12.4 Recovery sequence
+    diagram</h3>
+    <pre><code>boot ──▶ dev-shm-gsd\x2dramdisk.mount
+          │
+          ▼
+        gsd-ramdisk-restore.service
+          │
+          ├─▶ verify mirror integrity (checksums of index + manifest)
+          │       │
+          │       ├── ok ──▶ rsync mirror → tmpfs
+          │       │                │
+          │       │                ▼
+          │       │           grow if &gt;80% on 4G
+          │       │                │
+          │       │                ▼
+          │       │           touch .ready
+          │       │
+          │       └── bad ─▶ extract latest snapshot ─▶ rsync ─▶ .ready
+          │                            │
+          │                            └── no snapshots ─▶ emergency
+          │                                                 rebuild
+          │                                                 from LOD 400
+          ▼
+        gsd-app.service (ConditionPathExists=/dev/shm/gsd-ramdisk/.ready)</code></pre>
+    <h2 id="systemd-units">13. Systemd Units</h2>
+    <p>The full set of units. These are the concrete deliverable the
+    planner should turn into tasks.</p>
+    <h3 id="dev-shm-gsdx2dramdisk.mount">13.1
+    <code>dev-shm-gsd\x2dramdisk.mount</code></h3>
+    <p>See §6. This creates the tmpfs tier.</p>
+    <h3 id="gsd-ramdisk-restore.service">13.2
+    <code>gsd-ramdisk-restore.service</code></h3>
+    <div class="sourceCode" id="cb10"><pre
+    class="sourceCode ini"><code class="sourceCode ini"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Unit]</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Description</span><span class="ot">=</span><span class="st">Restore gsd-ramdisk from NVMe mirror</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">Requires</span><span class="ot">=</span><span class="st">dev-shm-gsd\x2dramdisk.mount</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">After</span><span class="ot">=</span><span class="st">dev-shm-gsd\x2dramdisk.mount</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="dt">Before</span><span class="ot">=</span><span class="st">gsd-app.service</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">[Service]</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Type</span><span class="ot">=</span><span class="st">oneshot</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="dt">ExecStart</span><span class="ot">=</span><span class="st">/usr/local/lib/gsd-ramdisk/restore.sh</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="dt">RemainAfterExit</span><span class="ot">=</span><span class="kw">yes</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="dt">StandardOutput</span><span class="ot">=</span><span class="st">journal</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="dt">StandardError</span><span class="ot">=</span><span class="st">journal</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="kw">[Install]</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="dt">WantedBy</span><span class="ot">=</span><span class="st">multi-user.target</span></span></code></pre></div>
+    <h3 id="gsd-ramdisk-sync.service-primary">13.3
+    <code>gsd-ramdisk-sync.service</code> (primary)</h3>
+    <div class="sourceCode" id="cb11"><pre
+    class="sourceCode ini"><code class="sourceCode ini"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Unit]</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Description</span><span class="ot">=</span><span class="st">Flush gsd-ramdisk to NVMe mirror</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">ConditionPathExists</span><span class="ot">=</span><span class="st">/dev/shm/gsd-ramdisk/.ready</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">[Service]</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="dt">Type</span><span class="ot">=</span><span class="st">oneshot</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="dt">Slice</span><span class="ot">=</span><span class="st">gsd-ramdisk.slice</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="dt">ExecStart</span><span class="ot">=</span><span class="st">/usr/local/lib/gsd-ramdisk/sync.sh</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="dt">Nice</span><span class="ot">=</span><span class="dv">10</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="dt">IOSchedulingClass</span><span class="ot">=</span><span class="st">idle</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="dt">MemoryMax</span><span class="ot">=</span><span class="st">512M</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="dt">MemorySwapMax</span><span class="ot">=</span><span class="dv">0</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="dt">OOMScoreAdjust</span><span class="ot">=</span><span class="dv">500</span></span></code></pre></div>
+    <h3 id="gsd-ramdisk-sync.timer">13.4
+    <code>gsd-ramdisk-sync.timer</code></h3>
+    <div class="sourceCode" id="cb12"><pre
+    class="sourceCode ini"><code class="sourceCode ini"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Unit]</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Description</span><span class="ot">=</span><span class="st">Periodic gsd-ramdisk sync (5 min)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">[Timer]</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dt">OnBootSec</span><span class="ot">=</span><span class="st">2min</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="dt">OnUnitActiveSec</span><span class="ot">=</span><span class="st">5min</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="dt">AccuracySec</span><span class="ot">=</span><span class="st">30s</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Persistent</span><span class="ot">=</span><span class="kw">true</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="kw">[Install]</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="dt">WantedBy</span><span class="ot">=</span><span class="st">timers.target</span></span></code></pre></div>
+    <h3 id="gsd-ramdisk-sync.path-idle">13.5
+    <code>gsd-ramdisk-sync.path</code> (idle)</h3>
+    <div class="sourceCode" id="cb13"><pre
+    class="sourceCode ini"><code class="sourceCode ini"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Unit]</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Description</span><span class="ot">=</span><span class="st">Trigger gsd-ramdisk sync when dirty sentinel is touched</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">[Path]</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="dt">PathModified</span><span class="ot">=</span><span class="st">/dev/shm/gsd-ramdisk/.dirty</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="dt">Unit</span><span class="ot">=</span><span class="st">gsd-ramdisk-sync.service</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="kw">[Install]</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="dt">WantedBy</span><span class="ot">=</span><span class="st">multi-user.target</span></span></code></pre></div>
+    <h3 id="gsd-ramdisk-snapshot.service-.timer-hourly">13.6
+    <code>gsd-ramdisk-snapshot.service</code> + <code>.timer</code>
+    (hourly)</h3>
+    <p>Same shape as sync, but
+    <code>ExecStart=/usr/local/lib/gsd-ramdisk/snapshot.sh</code>, which
+    <code>tar --zstd</code> the live tree into
+    <code>snapshots/</code>.</p>
+    <h3 id="gsd-ramdisk-guard.service">13.7
+    <code>gsd-ramdisk-guard.service</code></h3>
+    <p>A long-running Python or Node script that:</p>
+    <ol type="1">
+    <li>Watches <code>/proc/meminfo</code> and <code>findmnt</code>
+    every 15 seconds.</li>
+    <li>Emits Prometheus metrics on a local port.</li>
+    <li>Triggers growth per §7 when thresholds cross.</li>
+    <li>Logs to journald.</li>
+    </ol>
+    <p>Running as a <code>notify</code> type service under the
+    <code>gsd-ramdisk.slice</code> cgroup.</p>
+    <h2 id="observability">14. Observability</h2>
+    <p>We measure the thing we are trying to improve, or we are flying
+    blind. Prometheus + node_exporter are already common in the
+    surrounding infrastructure, so we adopt them here.</p>
+    <p><strong>Exported metrics (from the guard service):</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 48%" />
+    <col style="width: 10%" />
+    <col style="width: 40%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Metric</th>
+    <th>Type</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>gsd_ramdisk_capacity_bytes</code></td>
+    <td>gauge</td>
+    <td>Current tmpfs size cap</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_used_bytes</code></td>
+    <td>gauge</td>
+    <td>Current fill</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_used_ratio</code></td>
+    <td>gauge</td>
+    <td>Used / capacity</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_grow_total</code></td>
+    <td>counter</td>
+    <td>Growth events since boot</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_sync_total{result=ok|fail}</code></td>
+    <td>counter</td>
+    <td>Sync runs</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_sync_duration_seconds</code></td>
+    <td>histogram</td>
+    <td>Sync wall-clock</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_sync_bytes_transferred</code></td>
+    <td>counter</td>
+    <td>Delta transferred per sync</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_snapshot_duration_seconds</code></td>
+    <td>histogram</td>
+    <td></td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_recovery_seconds</code></td>
+    <td>gauge</td>
+    <td>Last recovery cost</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_dirty_files</code></td>
+    <td>gauge</td>
+    <td>Files pending sync</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_mem_available_bytes</code></td>
+    <td>gauge</td>
+    <td>From /proc/meminfo</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_swap_used_ratio</code></td>
+    <td>gauge</td>
+    <td>Safety interlock input</td>
+    </tr>
+    <tr>
+    <td><code>gsd_ramdisk_query_latency_seconds{lod,p}</code></td>
+    <td>histogram</td>
+    <td>End-to-end query latency by tier</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Alerts:</strong></p>
+    <ul>
+    <li><code>gsd_ramdisk_used_ratio &gt; 0.85</code> for 2 min → growth
+    pending.</li>
+    <li><code>gsd_ramdisk_sync_total{result="fail"}[15m] &gt; 0</code> →
+    sync failing; check NVMe.</li>
+    <li><code>gsd_ramdisk_swap_used_ratio &gt; 0.80</code> → refuse
+    grow; investigate leak.</li>
+    <li><code>gsd_ramdisk_query_latency_seconds{lod="350",p="99"} &gt; 0.100</code>
+    → HNSW hot loop degraded.</li>
+    </ul>
+    <h2 id="measurement-plan-did-it-actually-help">15. Measurement Plan:
+    Did It Actually Help?</h2>
+    <p>The design is worth nothing if we cannot prove the before/after.
+    Benchmarks must be reproducible and must run against
+    <strong>both</strong> the current disk-only configuration and the
+    new tmpfs-backed configuration.</p>
+    <p><strong>Baseline capture (current state, before any
+    changes):</strong></p>
+    <ol type="1">
+    <li>Record current <code>vmstat 1 30</code> during an active
+    memory-write workload.</li>
+    <li>Run a query-mix harness against
+    <code>src/memory/service.ts</code> that:
+    <ul>
+    <li>Writes 1000 new memory records (LOD 300).</li>
+    <li>Runs 1000 keyword queries (LOD 200).</li>
+    <li>Runs 500 semantic queries (LOD 350).</li>
+    <li>Runs 200 hybrid queries.</li>
+    </ul></li>
+    <li>Record p50, p95, p99 latency per operation and aggregate bytes
+    read/written to <code>/dev/nvme*</code> via
+    <code>iostat -xd 1</code>.</li>
+    </ol>
+    <p><strong>After capture (tmpfs tier active):</strong></p>
+    <p>Same harness. Same corpus. Only difference is the store paths
+    point into <code>/dev/shm/gsd-ramdisk/</code>.</p>
+    <p><strong>Success criteria:</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Metric</th>
+    <th>Target improvement</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>LOD 200 keyword query p99</td>
+    <td>≥ 3× faster</td>
+    </tr>
+    <tr>
+    <td>LOD 300 file write p99</td>
+    <td>≥ 10× faster</td>
+    </tr>
+    <tr>
+    <td>LOD 350 semantic query p95</td>
+    <td>≥ 2× faster</td>
+    </tr>
+    <tr>
+    <td>NVMe write bytes during workload</td>
+    <td>≥ 5× reduction</td>
+    </tr>
+    <tr>
+    <td>NVMe read bytes during workload</td>
+    <td>≥ 10× reduction</td>
+    </tr>
+    <tr>
+    <td>Sync overhead (5 min cadence, steady-state)</td>
+    <td>&lt; 2 % CPU</td>
+    </tr>
+    <tr>
+    <td>Recovery time (warm reboot, 4 GiB state)</td>
+    <td>&lt; 30 s</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Anything that fails to clear its bar is a failed assumption and a
+    design bug worth investigating.</p>
+    <h2 id="rollout-plan">16. Rollout Plan</h2>
+    <p>Incremental, testable, reversible at each step.</p>
+    <p><strong>Step 0 — Prototype (1 day).</strong> Create
+    <code>/tmp/ramdisk-poc/</code> manually. Point a <em>copy</em> of
+    the LTM memory tree at it. Run the benchmark harness against both.
+    Confirm the theoretical wins are real on this box.</p>
+    <p><strong>Step 1 — Mount unit + empty tier (1 day).</strong> Create
+    <code>dev-shm-gsd\x2dramdisk.mount</code> and
+    <code>gsd-ramdisk.slice</code>. Mount it. Verify permissions and
+    growth command. No application integration yet.</p>
+    <p><strong>Step 2 — File store migration (2–3 days).</strong> Modify
+    <code>src/memory/file-store.ts</code> to accept an optional
+    <code>STORE_PATH</code> env var. Point it at
+    <code>/dev/shm/gsd-ramdisk/mem/</code>. Add the NVMe mirror
+    directory and the <code>restore.sh</code> script that seeds tmpfs at
+    startup. Run the app. Run the benchmark.</p>
+    <p><strong>Step 3 — Index store migration (1 day).</strong> Same
+    treatment for <code>src/memory/index-manager.ts</code>. Paths
+    move.</p>
+    <p><strong>Step 4 — Sync timer (1 day).</strong> Wire up
+    <code>gsd-ramdisk-sync.service</code> + <code>.timer</code>. Observe
+    metrics.</p>
+    <p><strong>Step 5 — ChromaDB migration (2 days).</strong> This is
+    the highest-value step. <code>src/memory/chroma-store.ts</code>
+    already reads its persist dir from config. Point it at
+    <code>/dev/shm/gsd-ramdisk/chroma/</code>. Add rebuild-from-LOD-300
+    as the cold-start fallback path.</p>
+    <p><strong>Step 6 — Guard + growth (2 days).</strong> Implement
+    <code>gsd-ramdisk-guard.service</code> with the growth policy and
+    Prometheus endpoint.</p>
+    <p><strong>Step 7 — Snapshot (1 day).</strong> Add hourly
+    tarballs.</p>
+    <p><strong>Step 8 — Soak and measure (1 week).</strong> Run normal
+    workloads for a week. Check sync cadences, growth events, p99
+    latencies, NVMe write reduction. Compare against success criteria
+    from §15.</p>
+    <p><strong>Step 9 — Remove scaffolding (1 day).</strong> Delete any
+    <code>STORE_PATH</code> env var escape hatches or make them the only
+    path. Document the final architecture in
+    <code>src/memory/README.md</code>.</p>
+    <p>Total: roughly two working weeks for a complete, measured,
+    production-quality rollout.</p>
+    <h2 id="integration-points-with-srcmemory">17. Integration Points
+    with <code>src/memory/</code></h2>
+    <p>For the planner, here are the concrete code-level touch points in
+    the existing module:</p>
+    <p><strong><code>src/memory/file-store.ts</code> (LOD
+    300):</strong></p>
+    <ul>
+    <li>Constructor takes a <code>directory</code> path. Add a resolver
+    that honours <code>GSD_RAMDISK_ROOT</code> env var, falling back to
+    the existing path. No other call sites change.</li>
+    <li>Add a <code>flush()</code> method that updates
+    <code>.dirty</code> sentinel after a batch write. The path unit uses
+    this.</li>
+    </ul>
+    <p><strong><code>src/memory/index-manager.ts</code> (LOD
+    200):</strong></p>
+    <ul>
+    <li>Same env-var-honouring path resolver.</li>
+    <li>On write, bump <code>.dirty</code>.</li>
+    </ul>
+    <p><strong><code>src/memory/chroma-store.ts</code> (LOD
+    350):</strong></p>
+    <ul>
+    <li>The Chroma client already reads a <code>path</code> option.
+    Plumb <code>GSD_RAMDISK_ROOT/chroma</code> into it.</li>
+    <li>Add a cold-start recovery path: if the Chroma collection exists
+    but returns zero results on a sanity query, rebuild from LOD 300 by
+    iterating markdown files and re-inserting.</li>
+    </ul>
+    <p><strong><code>src/memory/pg-store.ts</code> (LOD
+    400):</strong></p>
+    <ul>
+    <li><strong>No changes.</strong> PG stays on NVMe.</li>
+    </ul>
+    <p><strong><code>src/memory/ram-cache.ts</code> (LOD
+    100):</strong></p>
+    <ul>
+    <li><strong>No changes.</strong> Already in-process memory.</li>
+    </ul>
+    <p><strong><code>src/memory/service.ts</code>:</strong></p>
+    <ul>
+    <li>Add <code>isRamdiskReady()</code> check at startup. If not ready
+    (sentinel missing), wait or fall back to direct-NVMe paths.</li>
+    <li>Emit the <code>gsd_ramdisk_query_latency_seconds</code>
+    histogram metric at service boundaries (one
+    <code>performance.now()</code> pair per query).</li>
+    </ul>
+    <p><strong>New module
+    <code>src/memory/ramdisk-adapter.ts</code>:</strong></p>
+    <ul>
+    <li>Single chokepoint for path resolution across all stores.</li>
+    <li>Exports
+    <code>resolveStorePath(tier: 'mem'|'index'|'chroma'): string</code>.</li>
+    <li>Responsible for ensuring directory existence and for touching
+    <code>.dirty</code>.</li>
+    <li>About 80 lines of code, fully unit-testable without touching
+    real tmpfs (using a mocked <code>fs</code> root).</li>
+    </ul>
+    <h2 id="failure-modes-and-safeguards">18. Failure Modes and
+    Safeguards</h2>
+    <p>A compact table of what can break, how we notice, and what we
+    do.</p>
+    <table>
+    <colgroup>
+    <col style="width: 21%" />
+    <col style="width: 34%" />
+    <col style="width: 43%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Failure</th>
+    <th>Detection</th>
+    <th>Response</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Power loss between syncs</td>
+    <td>Next boot: mirror older than tmpfs would have been</td>
+    <td>Restore latest mirror, lose ≤ 5 min of LOD 200/350 (rebuildable
+    from 300)</td>
+    </tr>
+    <tr>
+    <td>OOM killer targets our slice</td>
+    <td>Journald, Prometheus <code>ManagedOOM*</code> events</td>
+    <td><code>gsd-ramdisk-guard</code> restarts; sync resumes; no data
+    loss since mirror is current</td>
+    </tr>
+    <tr>
+    <td>Dirty pages grow unbounded</td>
+    <td><code>gsd_ramdisk_used_ratio &gt; 0.85</code></td>
+    <td>Growth to next 4G step, or refuse grow + accelerated sync +
+    eviction</td>
+    </tr>
+    <tr>
+    <td>NVMe mirror corrupt</td>
+    <td>Checksum mismatch at restore</td>
+    <td>Fall back to latest tarball snapshot</td>
+    </tr>
+    <tr>
+    <td>No snapshots either</td>
+    <td><code>ls snapshots/</code> empty</td>
+    <td>Rebuild from LOD 400 PostgreSQL + LOD 500 corpus (slow,
+    lossless)</td>
+    </tr>
+    <tr>
+    <td>tmpfs fills while holding write lock</td>
+    <td>Application-level EIO on write</td>
+    <td>Backoff, trigger sync+evict, retry</td>
+    </tr>
+    <tr>
+    <td>Swap saturated</td>
+    <td><code>gsd_ramdisk_swap_used_ratio &gt; 0.90</code></td>
+    <td>Refuse new LOD 350 inserts; emit alert; human intervention</td>
+    </tr>
+    <tr>
+    <td>rsync hangs forever</td>
+    <td>Unit <code>TimeoutStartSec=300</code> + journald alert</td>
+    <td>SIGTERM; next timer cycle retries; alert fires</td>
+    </tr>
+    <tr>
+    <td><code>.dirty</code> sentinel stops updating</td>
+    <td>No sync events despite known writes</td>
+    <td>Application bug; log + alert + fall back to timer-only mode</td>
+    </tr>
+    <tr>
+    <td>Clock skew corrupts <code>.last-sync</code></td>
+    <td><code>--inplace</code> + rsync checksums override the timestamp
+    check</td>
+    <td>Force full re-scan on next sync</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="what-we-deliberately-did-not-do">19. What We Deliberately
+    Did <em>Not</em> Do</h2>
+    <p>A good design is as much about what’s out of scope as what’s
+    in.</p>
+    <ul>
+    <li><strong>We did not write a custom FUSE filesystem.</strong> The
+    payoff is tiny, the risk is enormous, and every bug would be
+    kernel-adjacent.</li>
+    <li><strong>We did not journal every write.</strong> PG already does
+    journaling for the tier that needs it. Replicating WAL semantics at
+    the tmpfs layer reintroduces the disk writes we are trying to
+    reduce.</li>
+    <li><strong>We did not encrypt the tmpfs.</strong> Full-disk
+    encryption on the mirror is sufficient given a single-user
+    workstation threat model. A future multi-user build-out would reopen
+    this.</li>
+    <li><strong>We did not move PostgreSQL to tmpfs.</strong> It has its
+    own buffer pool, WAL, checkpoint tuning. Moving it would destroy its
+    durability guarantees for marginal gain.</li>
+    <li><strong>We did not implement shrink.</strong> It is a pure
+    complexity cost.</li>
+    <li><strong>We did not pin tmpfs pages.</strong> Letting them be
+    swappable is our graceful-degradation valve.</li>
+    <li><strong>We did not make the application immune to OOM.</strong>
+    Immune processes hide leaks.</li>
+    </ul>
+    <h2 id="summary">20. Summary</h2>
+    <p>We replace the LTM subsystem’s storage-thrashing behaviour with a
+    <strong>managed tmpfs subtree inside <code>/dev/shm</code></strong>,
+    starting at 4 GiB, growing in 4 GiB steps up to a 16 GiB ceiling,
+    with 5-minute rsync write-behind to an NVMe mirror, 1-hour snapshot
+    tarballs, inotify-path idle sync, systemd-oomd and cgroup v2 memory
+    accounting to protect the host, and a clean restore path at boot.
+    The tier serves LOD 200, 300, and 350 — the three tiers that
+    generate the current disk traffic. LOD 400 (PostgreSQL) stays on
+    NVMe, because it is the source of truth we fall back to if
+    everything above it burns down.</p>
+    <p>The primary data-loss exposure is 5 minutes of writes in the
+    worst case, reducible to seconds for LOD 300 via the optional
+    inotify fast-path. The primary observable improvements we expect,
+    per §15, are 3–10× latency wins on p99 queries and a 5–10× reduction
+    in NVMe bytes during normal workloads. If we do not see those
+    numbers in the soak, we pull the feature — but we will see them,
+    because the current architecture is disk-bound on operations the
+    kernel should never have had to schedule to disk in the first
+    place.</p>
+    <p>The design is intentionally dull. Every primitive is thirty years
+    old, every unit file is twenty lines, every failure mode has a named
+    response. The innovation is not in any one component — it is in
+    matching the right primitives to a problem that was being solved the
+    hard way.</p>
+    <h2 id="sources">Sources</h2>
+    <ul>
+    <li><a
+    href="https://man7.org/linux/man-pages/man5/tmpfs.5.html">tmpfs(5) —
+    Linux manual page</a></li>
+    <li><a
+    href="https://www.jamescoyle.net/knowledge/951-the-difference-between-a-tmpfs-and-ramfs-ram-disk">The
+    Difference Between a tmpfs and ramfs RAM Disk — JamesCoyle</a></li>
+    <li><a href="https://www.baeldung.com/linux/tmpfs-size-dynamics">The
+    Size Dynamics of tmpfs — Baeldung on Linux</a></li>
+    <li><a href="https://wiki.archlinux.org/title/Tmpfs">tmpfs —
+    ArchWiki</a></li>
+    <li><a
+    href="https://medium.com/opsops/how-to-resize-tmpfs-in-linux-6fbfbe23b092">How
+    to resize tmpfs in Linux — George Shuklin / OpsOps</a></li>
+    <li><a
+    href="https://helpful.knobs-dials.com/index.php/RAM_disk_notes">RAM
+    disk notes — Helpful.knobs-dials.com</a></li>
+    <li><a href="https://wiki.gentoo.org/wiki/Zram">Zram — Gentoo
+    wiki</a></li>
+    <li><a href="https://wiki.archlinux.org/title/Zram">Zram —
+    ArchWiki</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Zram">Zram —
+    Wikipedia</a></li>
+    <li><a
+    href="https://docs.trychroma.com/guides/deploy/performance">Single-Node
+    Performance — Chroma Docs</a></li>
+    <li><a href="https://cookbook.chromadb.dev/core/resources/">Resource
+    Requirements — Chroma Cookbook</a></li>
+    <li><a
+    href="https://cookbook.chromadb.dev/core/configuration/">ChromaDB
+    configuration — Chroma Cookbook</a></li>
+    <li><a href="https://lwn.net/Articles/761118/">Teaching the OOM
+    killer about control groups — LWN.net</a></li>
+    <li><a
+    href="https://devops.aibit.im/article/mastering-oom-policy-systemd-tuning">Mastering
+    OOM Policy: Tuning Systemd’s Response — DevOps Knowledge
+    Hub</a></li>
+    <li><a
+    href="https://last9.io/blog/understanding-the-linux-oom-killer/">Linux
+    OOM Killer: A Detailed Guide — Last9</a></li>
+    <li><a href="https://wiki.archlinux.org/title/Rsync">rsync —
+    ArchWiki</a></li>
+    <li><a
+    href="https://linuxhint.com/inotofy-rsync-bash-live-backups/">How to
+    use inotify and rsync to create a live backup system —
+    LinuxHint</a></li>
+    <li><a
+    href="https://computingforgeeks.com/rsync-lsyncd-file-sync-linux/">Set
+    Up Real-Time File Sync with Rsync and Lsyncd —
+    ComputingForGeeks</a></li>
+    <li><a
+    href="https://www.baeldung.com/linux/sync-files-continuously-one-way">Continuously
+    Sync Files One-Way on Linux — Baeldung</a></li>
+    <li><a
+    href="https://oneuptime.com/blog/post/2026-03-04-tmpfs-size-limits-mount-options-rhel-9/view">How
+    to Configure tmpfs Size Limits on RHEL — OneUptime</a></li>
+    </ul>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to LTM Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/LTM/">tibsfox.com/Research/LTM</a>
+    </div>
+</body>
+</html>

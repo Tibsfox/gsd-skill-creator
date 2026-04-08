@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compilers &amp; Build Systems &mdash; C &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cee">
+  <header>
+    <h1>Compilers &amp; Build Systems</h1>
+    <div class="subtitle">GCC, Clang/LLVM, MSVC, TCC, Make, CMake, Meson, Ninja, GDB, Valgrind, Sanitizers</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="stdlib.html">libc</a>
+      <a href="compilers.html" class="active">Compilers</a>
+      <a href="systems.html">Systems</a>
+      <a href="abi.html">ABI</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      C has two reigning compilers (GCC and Clang), half a dozen viable alternatives, and a build-system ecosystem that is notorious for being simultaneously the most and least mature of any language. The compilation toolchain for C is ancient, layered, and everywhere &mdash; because C is everywhere.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- GCC                                                           -->
+    <!-- ============================================================ -->
+
+    <h2>GCC &mdash; GNU Compiler Collection</h2>
+    <div class="card">
+      <p><strong>Richard Stallman, 1987.</strong> Originally the GNU C Compiler. Renamed to Compiler Collection in 1999 when it had grown well beyond C. In 1997 the <strong>EGCS fork</strong> appeared out of frustration with FSF&rsquo;s slow release cadence; EGCS became the official GCC in April 1999. License: GPLv3+ with the GCC Runtime Library Exception (so programs compiled by GCC aren&rsquo;t forced into GPL).</p>
+    </div>
+
+    <h3>GCC Version Timeline</h3>
+    <table>
+      <thead><tr><th>Version</th><th>Release</th><th>Highlights</th></tr></thead>
+      <tbody>
+        <tr><td>GCC 1.0</td><td>Mar 1987</td><td>Stallman&rsquo;s initial release</td></tr>
+        <tr><td>GCC 2.0</td><td>Feb 1992</td><td>C++ frontend (g++)</td></tr>
+        <tr><td>GCC 3.0</td><td>Jun 2001</td><td>Post-EGCS, new C++ ABI</td></tr>
+        <tr><td>GCC 4.0</td><td>Apr 2005</td><td><strong>Tree-SSA</strong> optimization framework, GIMPLE IR</td></tr>
+        <tr><td>GCC 4.8</td><td>Mar 2013</td><td>AddressSanitizer / ThreadSanitizer integrated</td></tr>
+        <tr><td>GCC 10</td><td>May 2020</td><td>Static analyzer <code>-fanalyzer</code> introduced</td></tr>
+        <tr><td>GCC 13</td><td>Apr 2023</td><td>Modula-2 frontend; Rust (gccrs) in tree but not ready</td></tr>
+        <tr><td>GCC 14</td><td>May 2024</td><td>C23 mostly complete</td></tr>
+        <tr><td><strong>GCC 15.2</strong></td><td><strong>Aug 2025</strong></td><td>Current stable. Full C23, improved LTO</td></tr>
+        <tr><td>GCC 16.0</td><td>targeted Mar 2026</td><td>Development. Additional front-ends: COBOL (Apr 2025), Algol 68 (Nov 2025)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>GCC Supported Languages (2026)</h3>
+    <p>C, C++, Objective-C, Objective-C++, Fortran, Ada, Go, D, Modula-2, COBOL, Rust (gccrs), Algol 68 &mdash; plus associated runtime libraries.</p>
+
+    <h3>GCC Pipeline</h3>
+    <div class="card">
+      <p>Source &rarr; <strong>Frontend</strong> (language-specific parsing) &rarr; <strong>GENERIC</strong> (language-independent tree) &rarr; <strong>GIMPLE</strong> (3-address form, SSA) &rarr; <strong>Tree-SSA optimizations</strong> &rarr; <strong>RTL</strong> (Register Transfer Language, low-level) &rarr; <strong>Target machine code</strong></p>
+      <p>This multi-stage IR is why GCC can share optimization passes across languages. A Fortran program and a C program both go through GIMPLE.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CLANG/LLVM                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>Clang / LLVM</h2>
+    <div class="card">
+      <p><strong>Chris Lattner, University of Illinois at Urbana-Champaign, 2000.</strong> LLVM (Low Level Virtual Machine) started as Lattner&rsquo;s master&rsquo;s thesis. <strong>Clang</strong> (the C language family frontend) was added in 2007, sponsored by Apple. LLVM 1.0 released 2003; Clang became usable for C around 2009.</p>
+      <p><strong>License:</strong> Originally UIUC license, now Apache 2.0 with LLVM Exception. Permissive &mdash; companies can build proprietary products on top.</p>
+    </div>
+
+    <h3>Why Clang Won Apple</h3>
+    <p>Apple had been contributing to GCC for years but grew frustrated with GCC&rsquo;s GPL licensing (which conflicted with Apple&rsquo;s need to ship compiler libraries in their SDK) and monolithic architecture (hard to use GCC as a library for IDEs and refactoring tools). Clang solved both: permissive license + modular, library-based design. Apple became the primary sponsor. By macOS 10.7 (2011), Clang was the default compiler. By macOS 10.9 (2013), GCC was gone from Xcode entirely.</p>
+
+    <h3>LLVM Beyond Clang</h3>
+    <table>
+      <thead><tr><th>Project</th><th>Language</th><th>How It Uses LLVM</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Clang</strong></td><td>C/C++/Objective-C/CUDA</td><td>The flagship C family frontend</td></tr>
+        <tr><td><strong>Rust</strong></td><td>Rust</td><td>Official Rust compiler (rustc) uses LLVM as backend</td></tr>
+        <tr><td><strong>Swift</strong></td><td>Swift</td><td>Apple&rsquo;s language, LLVM-native</td></tr>
+        <tr><td><strong>Julia</strong></td><td>Julia</td><td>JIT compiler built on LLVM</td></tr>
+        <tr><td><strong>Zig</strong></td><td>Zig</td><td>Originally LLVM, now self-hosting with LLVM fallback</td></tr>
+        <tr><td><strong>Crystal</strong></td><td>Crystal</td><td>Ruby-like language compiled via LLVM</td></tr>
+        <tr><td><strong>CUDA</strong></td><td>CUDA C++</td><td>NVIDIA&rsquo;s nvcc now uses LLVM</td></tr>
+        <tr><td><strong>Intel oneAPI</strong></td><td>C/C++/Fortran</td><td>Intel switched from their proprietary compiler to LLVM-based in 2021</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- MSVC AND OTHERS                                               -->
+    <!-- ============================================================ -->
+
+    <h2>MSVC &amp; Other Compilers</h2>
+    <table>
+      <thead><tr><th>Compiler</th><th>Creator</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>MSVC</strong> (Microsoft Visual C++)</td><td>Microsoft, 1993</td><td>Windows default. MSVC 17.x (Visual Studio 2022). Own frontend, own ABI. Recent C11/C17/C23 support improvements after years of lagging</td></tr>
+        <tr><td><strong>TinyCC (TCC)</strong></td><td>Fabrice Bellard</td><td>Tiny fast C compiler. Compiles itself in &lt; 1 second. Used for JIT-like scripting, bootstrap, and education</td></tr>
+        <tr><td><strong>Intel oneAPI DPC++/C++</strong></td><td>Intel</td><td>Switched from proprietary to LLVM-based in 2021. Optimized for Intel CPUs + GPUs</td></tr>
+        <tr><td><strong>PCC</strong> (Portable C Compiler)</td><td>Stephen C. Johnson, Bell Labs, 1978</td><td>Historical. Revived by the OpenBSD team. One of the first retargetable C compilers</td></tr>
+        <tr><td><strong>chibicc</strong></td><td>Rui Ueyama (creator of lld, mold)</td><td>Educational C compiler that grows feature by feature. Used to teach compiler internals</td></tr>
+        <tr><td><strong>cproc</strong></td><td>Michael Forney</td><td>Small C11 compiler using QBE backend</td></tr>
+        <tr><td><strong>SDCC</strong></td><td>Small Device C Compiler</td><td>Targets 8-bit microcontrollers (8051, Z80, PIC)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- BUILD SYSTEMS                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>Build Systems</h2>
+
+    <h3>make &mdash; The Original</h3>
+    <div class="card">
+      <p><strong>Stuart Feldman, Bell Labs, 1976.</strong> Written to solve Feldman&rsquo;s frustration with rebuilding C programs manually. The entire concept of dependency-based build systems came from this project. &ldquo;The dollar sign is the most expensive mistake I ever made,&rdquo; Feldman later said of <code>$</code> for variable expansion &mdash; but the fundamental model of <em>targets</em>, <em>dependencies</em>, and <em>recipes</em> has never been seriously challenged.</p>
+    </div>
+    <pre><code># Makefile
+CFLAGS = -Wall -Wextra -O2
+LDFLAGS = -lm
+
+program: main.o util.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $&lt;
+
+clean:
+	rm -f *.o program</code></pre>
+
+    <h3>GNU Autotools &mdash; The Terrible But Essential Toolchain</h3>
+    <p><code>configure</code> + <code>automake</code> + <code>autoconf</code> + <code>libtool</code>. The classic <code>./configure &amp;&amp; make &amp;&amp; make install</code> that everyone has typed thousands of times. Generates portable shell scripts that detect platform capabilities. Notoriously slow and cryptic, but <em>extraordinarily</em> portable &mdash; this is how tarballs have worked since the 1990s.</p>
+
+    <h3>CMake &mdash; Now Dominant</h3>
+    <div class="card">
+      <p><strong>Kitware, 2000.</strong> Originally built to support ITK (Insight Toolkit) for medical image analysis. Generates native build files (Makefiles, Ninja files, Visual Studio projects, Xcode projects) from a high-level <code>CMakeLists.txt</code> description. <strong>Now the de facto standard for new C/C++ projects.</strong> Complex and verbose, but wins on portability.</p>
+    </div>
+    <pre><code># CMakeLists.txt
+cmake_minimum_required(VERSION 3.20)
+project(myapp VERSION 1.0 LANGUAGES C)
+
+add_executable(myapp main.c util.c)
+target_compile_features(myapp PUBLIC c_std_23)
+target_compile_options(myapp PRIVATE -Wall -Wextra)
+target_link_libraries(myapp PRIVATE m)</code></pre>
+
+    <h3>Meson &mdash; The Python-Based Challenger</h3>
+    <p><strong>Jussi Pakkanen, 2013.</strong> Written in Python, emits Ninja build files. Syntax is deliberately not Turing-complete &mdash; &ldquo;you shouldn&rsquo;t need to debug your build system.&rdquo; Adopted by GNOME, systemd, and many newer projects.</p>
+
+    <h3>Ninja &mdash; The Ultra-Fast Executor</h3>
+    <div class="card">
+      <p><strong>Evan Martin, Google, 2010.</strong> Deliberately not a build <em>system</em> &mdash; it&rsquo;s a build <em>executor</em>. Designed to be the backend target of other tools (CMake, Meson, Bazel). Handles tens of thousands of targets in milliseconds. Originally built to replace Make in the Chrome build system.</p>
+    </div>
+
+    <h3>Bazel &mdash; Google&rsquo;s Monorepo Build</h3>
+    <p>Google-developed build system for monorepos. Hermetic, reproducible, caches everything. Used internally at Google for two decades before being open-sourced. Adopted by Envoy, Istio, and other Google-adjacent projects.</p>
+
+    <!-- ============================================================ -->
+    <!-- PACKAGE MANAGERS                                              -->
+    <!-- ============================================================ -->
+
+    <h2>Package Managers for C/C++</h2>
+    <table>
+      <thead><tr><th>Manager</th><th>Creator</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Conan</strong></td><td>JFrog</td><td>Python-based. Strong CMake integration. The most mature C/C++ package manager</td></tr>
+        <tr><td><strong>vcpkg</strong></td><td>Microsoft, 2016</td><td>Built on CMake. Port-based, builds from source. Cross-platform</td></tr>
+        <tr><td><strong>Spack</strong></td><td>LLNL, 2013</td><td>Scientific computing focus. Handles multiple compiler versions, MPI, GPU libraries</td></tr>
+        <tr><td><strong>Hunter</strong></td><td>Community</td><td>CMake-based, header-only and static-only focus</td></tr>
+        <tr><td><strong>xrepo</strong></td><td>xmake project</td><td>Part of the xmake build system ecosystem</td></tr>
+        <tr><td><strong>System PMs</strong></td><td>Various</td><td><code>apt</code>, <code>yum</code>, <code>pacman</code>, <code>brew</code>, <code>pkgsrc</code> &mdash; how most C libraries actually get installed</td></tr>
+      </tbody>
+    </table>
+    <p>None of these achieved CPAN-scale dominance. C&rsquo;s packaging story is still largely <em>system package manager + source tarball + Git</em>.</p>
+
+    <!-- ============================================================ -->
+    <!-- DEBUGGERS                                                     -->
+    <!-- ============================================================ -->
+
+    <h2>Debuggers</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><strong>GDB</strong> (GNU Debugger)</td><td>1986. Richard Stallman. The canonical Unix debugger. Scripts via Python. Remote debugging via gdbserver</td></tr>
+        <tr><td><strong>LLDB</strong></td><td>LLVM&rsquo;s debugger, 2010+. Apple-sponsored. Same license as LLVM. Default on macOS</td></tr>
+        <tr><td><strong>rr</strong> (Mozilla)</td><td>Record-and-replay debugging. Run a program once under rr, then replay deterministically forward <em>and backward</em>. Changed how hard bugs are investigated</td></tr>
+        <tr><td><strong>WinDbg</strong></td><td>Microsoft&rsquo;s kernel and user-mode debugger. The standard for Windows crash dump analysis</td></tr>
+        <tr><td><strong>strace / ltrace</strong></td><td>System call and library call tracing. Often faster than GDB for &ldquo;what is this process doing?&rdquo;</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- SANITIZERS                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>Sanitizers &mdash; Runtime Bug Detection</h2>
+    <div class="card">
+      <p>Modern compilers include <strong>sanitizers</strong> &mdash; compile-time instrumentation that adds runtime checks for specific bug classes. Both GCC and Clang support them. Enable with <code>-fsanitize=...</code>.</p>
+    </div>
+    <table>
+      <thead><tr><th>Sanitizer</th><th>Flag</th><th>Detects</th></tr></thead>
+      <tbody>
+        <tr><td><strong>AddressSanitizer (ASan)</strong></td><td><code>-fsanitize=address</code></td><td>Use-after-free, buffer overflows, double-free, memory leaks (on exit)</td></tr>
+        <tr><td><strong>ThreadSanitizer (TSan)</strong></td><td><code>-fsanitize=thread</code></td><td>Data races, deadlocks in multithreaded code</td></tr>
+        <tr><td><strong>MemorySanitizer (MSan)</strong></td><td><code>-fsanitize=memory</code></td><td>Use of uninitialized memory (Clang only)</td></tr>
+        <tr><td><strong>UndefinedBehaviorSanitizer (UBSan)</strong></td><td><code>-fsanitize=undefined</code></td><td>Signed overflow, alignment violations, null deref, array OOB</td></tr>
+        <tr><td><strong>LeakSanitizer (LSan)</strong></td><td><code>-fsanitize=leak</code></td><td>Standalone leak detector (subset of ASan)</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Valgrind</strong> (Julian Seward, 2002) is the historical alternative &mdash; a dynamic binary instrumentation framework with Memcheck for memory errors. Slower than sanitizers (20&times; vs 2&times;) but works on unmodified binaries.</p>
+
+    <!-- ============================================================ -->
+    <!-- STATIC ANALYZERS                                              -->
+    <!-- ============================================================ -->
+
+    <h2>Static Analyzers</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Clang Static Analyzer</strong></td><td>Part of Clang. Runs as <code>scan-build</code>. Detects memory leaks, null derefs, use-after-free</td></tr>
+        <tr><td><strong>GCC <code>-fanalyzer</code></strong></td><td>Added in GCC 10 (2020). Symbolic execution-based static analysis</td></tr>
+        <tr><td><strong>Cppcheck</strong></td><td>Open source, focused on fewer false positives than warnings</td></tr>
+        <tr><td><strong>Coverity</strong></td><td>Commercial (Synopsys). Used by many open source projects via the Coverity Scan program</td></tr>
+        <tr><td><strong>PVS-Studio</strong></td><td>Commercial. Famous for detailed bug reports on open-source projects</td></tr>
+        <tr><td><strong>Frama-C</strong></td><td>Formal verification. Supports ACSL specifications. Used in safety-critical certification</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- IDE TOOLING                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>IDE &amp; Editor Tooling</h2>
+    <div class="card">
+      <p><strong>clangd</strong> is Clang&rsquo;s language server (LSP). It provides autocomplete, go-to-definition, diagnostics, and refactoring to any LSP-compatible editor. Combined with VS Code, Neovim, Emacs, or any other LSP-aware editor, <code>clangd</code> gives you IDE-quality C/C++ support anywhere.</p>
+      <p><strong>The modern minimal C development stack:</strong> VS Code + clangd + CMake Tools + CodeLLDB. Cross-platform. Free. Good enough for the Linux kernel.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>SYS</td><td>Systems Administration</td><td>Every C tool on every system was built with one of these compilers</td></tr>
+        <tr><td>GSD2</td><td>GSD Skill Creator</td><td>Tauri&rsquo;s Rust backend uses LLVM; our C FFI calls through it</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Language Core</a></li>
+        <li><a href="stdlib.html">Standard Library</a></li>
+        <li><a href="systems.html">Systems Programming</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Compilers &amp; Build Systems &middot; C &mdash; The Substrate &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

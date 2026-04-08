@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta Integration &mdash; Punch Cards &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-pch">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">C     THE SAME PATTERNS WEARING DIFFERENT CLOTHES</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="hardware.html">Hardware</a>
+      <a href="workflow.html">Workflow</a>
+      <a href="loop.html">The Loop</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="modern.html">Modern AI</a>
+      <a href="mvp.html">MVP</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Same engineering patterns, different hardware. The punch card deck, the Unix pipe, the CI/CD pipeline, the AI agent tool call &mdash; all are variants of the same underlying idea: <em>prepare input carefully, submit to a processing unit, examine the output, iterate</em>.
+    </blockquote>
+
+    <h2>The Same Pattern Across 60 Years</h2>
+
+    <table>
+      <thead><tr><th>Era</th><th>Input Form</th><th>Execution Unit</th><th>Output Form</th><th>Examination Tool</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1965 Batch</strong></td><td>Card deck</td><td>IBM 360 operator queue</td><td>Green-bar printout</td><td>Human reading at a desk</td></tr>
+        <tr><td><strong>1975 Time-sharing</strong></td><td>Terminal commands</td><td>TSO / CMS / Multics</td><td>Terminal output</td><td>Scroll buffer</td></tr>
+        <tr><td><strong>1985 Workstation</strong></td><td>Source files + Makefile</td><td>Local cc / f77</td><td>Compiled binary</td><td>Terminal, dbx</td></tr>
+        <tr><td><strong>1995 PC</strong></td><td>IDE project</td><td>Visual Studio build</td><td>Exe + debug symbols</td><td>GUI debugger</td></tr>
+        <tr><td><strong>2005 Web</strong></td><td>Git commit</td><td>CI build server</td><td>Test report + artifacts</td><td>Build logs</td></tr>
+        <tr><td><strong>2015 Cloud</strong></td><td>Git push</td><td>CI/CD pipeline (Jenkins, GitHub Actions)</td><td>Deployed container</td><td>Observability dashboard</td></tr>
+        <tr><td><strong>2026 AI Agent</strong></td><td>Prompt + tool spec</td><td>LLM + tool runtime</td><td>Tool outputs + reasoning</td><td>Context log, structured results</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Direct Pattern Translations</h2>
+
+    <h3>Card Deck &harr; Unix Pipe &harr; CI Pipeline &harr; Tool Call</h3>
+    <pre>
+# 1965: Submit a deck
+//JOB1   JOB  (ACCT),'COMPILE AND RUN'
+//STEP1  EXEC PGM=IEYFORT
+//SYSIN  DD *
+      PROGRAM MAIN
+      ...
+      END
+/*
+
+# 1980: Unix pipe
+cat data.txt | awk '{print $2}' | sort | uniq -c | sort -rn | head
+
+# 2005: CI pipeline
+jobs:
+  test:
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
+      - run: npm run build
+
+# 2026: AI agent tool call
+{"tool": "edit_file",
+ "params": {"path": "src/main.ts", "old": "foo", "new": "bar"}}</pre>
+
+    <p>All four are the same pattern: <strong>prepare a specification, submit to an execution unit, observe the output</strong>. The specification grows more structured over time (cards &rarr; text &rarr; YAML &rarr; JSON) but the fundamental rhythm is identical.</p>
+
+    <h3>Core Dump &harr; Stack Trace &harr; Error Log</h3>
+    <pre>
+! 1965: Core dump (hex listing of memory at crash)
+ABEND S0C7  USER=PAYROLL  ADDR=00A47B2C
+R1=00000001 R2=FFFFFFFF R3=00000000 R4=80000000
+00A47B00: 58 30 D0 44 58 40 D0 48 1F 04 1F 00 ...
+
+# 1995: Stack trace
+Segmentation fault (core dumped)
+#0  0x08048432 in compute_average (values=0x0, n=10)
+    at stats.c:47
+#1  0x08048510 in main (argc=1, argv=0xbffff764)
+    at main.c:23
+
+# 2026: Error log / tool result
+{"status": "error",
+ "message": "TypeError: Cannot read property 'length' of undefined",
+ "location": "src/stats.ts:47:12",
+ "stack": ["computeAverage@stats.ts:47", "main@main.ts:23"]}</pre>
+
+    <p>All three represent the same thing: <strong>the machine failed, here&rsquo;s what was going on when it did, figure out the bug</strong>. The format is progressively more structured, more machine-readable, and more self-explanatory &mdash; but the programmer still has to read it carefully and think about what went wrong.</p>
+
+    <h3>Backup Deck &harr; Source Control &harr; Git Branch</h3>
+    <pre>
+# 1965: Duplicate the deck before making changes
+run_through_reproducer(original_deck) -> backup_deck
+store_in_filing_cabinet(backup_deck, label="v3.2 working")
+
+# 1985: RCS / SCCS
+ci -u -m"working version" main.f
+# If changes break: co -r1.1 main.f
+
+# 1995: CVS
+cvs commit -m "working version"
+# If changes break: cvs update -r 1.1 main.c
+
+# 2005: Git
+git commit -m "working version"
+# If changes break: git reset --hard HEAD~1
+
+# 2026: Phase manifest + git
+gsd:execute-phase  # commits atomically at green-test boundaries
+# If changes break: gsd:undo (with dependency awareness)</pre>
+
+    <h3>Operator Scheduling &harr; Agent Orchestration</h3>
+    <table>
+      <thead><tr><th>1965 Computer Operator</th><th>2026 Orchestration Agent</th></tr></thead>
+      <tbody>
+        <tr><td>Reads priorities on submitted decks</td><td>Reads mission metadata and budgets</td></tr>
+        <tr><td>Schedules jobs on machine availability</td><td>Dispatches agents via sling-dispatch</td></tr>
+        <tr><td>Mounts tapes and disk packs</td><td>Loads chipsets and MCP servers</td></tr>
+        <tr><td>Monitors console for errors</td><td>witness-observer patrols agent health</td></tr>
+        <tr><td>Restarts failed jobs</td><td>Restarts failed agents with backoff</td></tr>
+        <tr><td>Tracks shift reports</td><td>Generates session reports</td></tr>
+        <tr><td>Writes log book entries</td><td>Writes to <code>.beads/</code> state files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Cross-Era Translation Table</h2>
+
+    <table>
+      <thead><tr><th>Punch Card Era</th><th>REPL Era</th><th>AI Agent Era</th></tr></thead>
+      <tbody>
+        <tr><td>Coding sheet</td><td>Text editor</td><td>Task specification / prompt</td></tr>
+        <tr><td>Keypunch</td><td>Typing</td><td>Tool call construction</td></tr>
+        <tr><td>Card deck</td><td>Source file</td><td>Committed plan file</td></tr>
+        <tr><td>Submission window</td><td>Command line</td><td>Agent dispatch</td></tr>
+        <tr><td>Operator</td><td>Shell</td><td>Orchestration agent</td></tr>
+        <tr><td>Machine time</td><td>CPU seconds</td><td>Tokens</td></tr>
+        <tr><td>Core memory</td><td>RAM</td><td>Context window</td></tr>
+        <tr><td>JCL</td><td>Makefile / shell script</td><td>System prompt / CLAUDE.md</td></tr>
+        <tr><td>Printout</td><td>Terminal output</td><td>Tool result + reasoning log</td></tr>
+        <tr><td>Desk-check</td><td>Code review</td><td>Plan review</td></tr>
+        <tr><td>Core dump</td><td>Stack trace</td><td>Error log + context</td></tr>
+        <tr><td>Backup deck</td><td>RCS/CVS/Git</td><td>Phase manifest + git</td></tr>
+        <tr><td>Sorter / collator</td><td>sort / uniq / join</td><td>Pipeline tools + MCP utilities</td></tr>
+        <tr><td>Subroutine library</td><td>Package / module</td><td>MCP tool / skill</td></tr>
+        <tr><td>Unit record equipment rack</td><td>Unix toolbox</td><td>Chipset (Gastown, Northbridge, etc.)</td></tr>
+        <tr><td>Overnight turnaround</td><td>Seconds-to-minutes iteration</td><td>Seconds-to-minutes per tool call</td></tr>
+        <tr><td>Green card (JCL reference)</td><td>man page</td><td>Tool documentation in context</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Deeper Rosetta Stone</h2>
+
+    <p>These are not forced correspondences or analogies. They are the same fundamental engineering patterns, wearing different clothes in different eras, because the patterns are responses to <em>the same underlying problem</em>: how do you get useful work done when every action has a cost, when observation requires care, when iteration requires discipline, when cooperation between specialized components requires clear interfaces?</p>
+
+    <p>Every programmer who has worked seriously in any of these eras recognizes the patterns in the others. The 1965 programmer who lives to see AI agents in 2026 doesn&rsquo;t need to learn new concepts &mdash; they need to learn new vocabulary for concepts they already understand. The 2026 engineer who reads an old IBM 360 manual discovers that their &ldquo;new&rdquo; framework was anticipated, often in remarkable detail, by people who couldn&rsquo;t have imagined the hardware but fully understood the patterns.</p>
+
+    <div class="card philosophy-card">
+      <p><strong>The Rosetta Stone hypothesis:</strong> the fundamental rhythms of engineering under constraint are independent of the specific technology. The rhythms &mdash; design before act, minimum viable first step, observe carefully, iterate deliberately, checkpoint working states, specialize tools, orchestrate specialists &mdash; are properties of the problem domain, not the tools. They will be rediscovered, under different names, by every generation that encounters expensive iterative work under constraint. The engineers who study the history cut to the answer. The engineers who don&rsquo;t spend years reinventing it.</p>
+    </div>
+
+    <h2>Related Research Projects</h2>
+
+    <table>
+      <thead><tr><th>Project</th><th>Connection to Punch Cards</th></tr></thead>
+      <tbody>
+        <tr><td><a href="../FOR/">FOR &mdash; Fortran</a></td><td>The language you punched onto the cards. First high-level language, 1957, IBM 704.</td></tr>
+        <tr><td><a href="../CEE/">CEE &mdash; C Programming</a></td><td>The systems language that displaced assembly. Still 80-column friendly.</td></tr>
+        <tr><td><a href="../ASM/">ASM &mdash; Assembly</a></td><td>What the cards compiled to. The layer just above machine code.</td></tr>
+        <tr><td><a href="../MLC/">MLC &mdash; Machine Language</a></td><td>The actual bits. What punch card holes represented in the machine.</td></tr>
+        <tr><td><a href="../CLI/">CLI &mdash; Art of the CLI</a></td><td>What replaced the card reader. Interactive terminals, 1970s-80s.</td></tr>
+        <tr><td><a href="../RXX/">RXX &mdash; Rexx &amp; ARexx</a></td><td>The scripting language born of mainframe batch culture. Cowlishaw at IBM Hursley 1979.</td></tr>
+        <tr><td><a href="../MPC/">MPC &mdash; Math Co-Processor</a></td><td>The modern GPU-accelerated math engine. Where GSD-OS&rsquo;s CUDA work lives.</td></tr>
+        <tr><td><a href="../JAV/">JAV &mdash; Java</a></td><td>&ldquo;Write once run anywhere&rdquo; &mdash; 40 years late to FORTRAN&rsquo;s achievement of the same thing.</td></tr>
+        <tr><td><a href="../PRL/">PRL &mdash; Perl &amp; PHP</a></td><td>Scripting languages that made interactive programming cheap. The end of batch discipline.</td></tr>
+        <tr><td><a href="../SNK/">SNK &mdash; Python</a></td><td>The language that most AI agent work happens in today. REPL culture at its peak.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="hardware.html">The Physical Reality</a></li>
+        <li><a href="workflow.html">The Programmer&rsquo;s Day</a></li>
+        <li><a href="loop.html">The Six-Step Loop</a></li>
+        <li><a href="philosophy.html">Constraints as Craft</a></li>
+        <li><a href="modern.html">AI Agents &amp; Tokens</a></li>
+        <li><a href="mvp.html">Minimum Viable Program</a></li>
+        <li><a href="constraints.html">Doing More With Less</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rosetta Integration &middot; Punch Cards &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

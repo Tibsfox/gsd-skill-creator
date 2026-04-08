@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Heritage &mdash; Lisp &amp; Functional Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-lsp">
+  <header>
+    <h1>AI Heritage</h1>
+    <div class="subtitle">1958&ndash;1990: The symbolic era &mdash; SHRDLU, MYCIN, MACSYMA, CYC, the expert system boom, and why every AI program of thirty years was written in Lisp</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language Core</a>
+      <a href="metaprogramming.html">Metaprogramming</a>
+      <a href="ai-heritage.html" class="active">AI Heritage</a>
+      <a href="ml-neural-genetic.html">ML &amp; Neural</a>
+      <a href="machines.html">Lisp Machines</a>
+      <a href="dialects.html">Dialects</a>
+      <a href="emacs-clojure.html">Emacs &amp; Clojure</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="rosetta.html">Rosetta</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <p>&ldquo;The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it.&rdquo;</p>
+      <cite>&mdash; Dartmouth Summer Research Project proposal, McCarthy, Minsky, Rochester, Shannon (1955)</cite>
+    </blockquote>
+
+    <h2>Dartmouth 1956: The Founding Event</h2>
+
+    <p>In the summer of 1956, four men &mdash; John McCarthy, Marvin Minsky, Nathaniel Rochester, and Claude Shannon &mdash; convened a two-month workshop at Dartmouth College that is universally considered the founding event of artificial intelligence as a discipline. The proposal document, dated August 31, 1955, was titled &ldquo;A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence.&rdquo; It is the first recorded use of the term &ldquo;artificial intelligence&rdquo; in a professional context. McCarthy coined it precisely to distinguish the new field from &ldquo;cybernetics.&rdquo;</p>
+
+    <p>The attendees included, beyond the four organizers, <strong>Allen Newell</strong> and <strong>Herbert Simon</strong> (who brought the Logic Theorist, a running program that proved theorems in Whitehead and Russell&rsquo;s <em>Principia Mathematica</em>), <strong>Arthur Samuel</strong> (who brought his checkers-playing program), <strong>Ray Solomonoff</strong> (inductive inference), <strong>Oliver Selfridge</strong> (pattern recognition), and others. They left Hanover convinced of two things: first, that intelligence could be mechanized; second, that the tools available &mdash; FORTRAN, IPL, assembly &mdash; were inadequate to the task.</p>
+
+    <p>McCarthy returned to MIT with a problem nagging at him: the programs he wanted to write were not numerical. They manipulated symbols. They built and rebuilt tree-shaped data structures. They backtracked. They recurred. They needed, above all, a way to treat code and data as interchangeable, because the hallmark of intelligent behavior seemed to be the ability to write and rewrite one&rsquo;s own rules. By 1958, he had built Lisp.</p>
+
+    <h2>Why Lisp Was the Natural Choice</h2>
+
+    <p>By 1960 the properties that would make Lisp the AI language of choice were all in place, and they were not chosen by committee. They emerged from the problem:</p>
+
+    <div class="card">
+      <ol>
+        <li><strong>Symbolic computing.</strong> A symbol in Lisp is a first-class datum. You can bind values to symbols at runtime, pass symbols as arguments, compare them, store them in lists. This is exactly what a theorem prover, a natural language parser, or a planning system needs.</li>
+        <li><strong>Recursion.</strong> Lisp was the first widely-used language to support recursive function definitions naturally. FORTRAN in 1958 did not allow recursion. For AI, recursion was not optional: every tree walk, every search, every parse was naturally recursive.</li>
+        <li><strong>Garbage collection.</strong> McCarthy invented it for Lisp, publishing the first description in 1960. The alternative &mdash; manual memory management &mdash; made long-running symbolic programs impossible to write.</li>
+        <li><strong>Dynamic typing.</strong> An AI program rewriting an expression tree cannot commit in advance to the types it will encounter.</li>
+        <li><strong>First-class functions.</strong> A function in Lisp is a value. It can be passed, returned, stored, and (most importantly for AI) constructed at runtime. This is the mechanism by which a Lisp program can write another Lisp program.</li>
+        <li><strong>The REPL.</strong> The Read-Eval-Print Loop made Lisp the first language in which the developer and the running program shared an address space. Live coding was invented for AI research because AI research required it.</li>
+        <li><strong>Homoiconicity.</strong> Because Lisp code is written as S-expressions and S-expressions are Lisp data, a Lisp program can construct another Lisp program and execute it. Every program that writes another program &mdash; every compiler, every template engine, every code generator &mdash; is performing an operation that Lisp made trivial.</li>
+      </ol>
+    </div>
+
+    <p>These seven properties were not a wish list. They were the minimum viable toolkit for the problems McCarthy, Minsky, and their students wanted to solve.</p>
+
+    <h2>The Great AI Programs of the 1960s and 1970s</h2>
+
+    <p>A sampling, by no means exhaustive, of programs that defined AI as a field. Every one was written in Lisp, and every one was deeply shaped by what Lisp made easy.</p>
+
+    <h3>STUDENT (Daniel Bobrow, 1964)</h3>
+    <p>Bobrow&rsquo;s MIT PhD thesis at the AI Lab. STUDENT read high-school algebra word problems in a constrained subset of English, extracted the relations, built a system of equations, and solved it. <em>&ldquo;If the number of customers Tom gets is twice the square of 20 percent of the number of advertisements he runs, and the number of advertisements is 45, then what is the number of customers Tom gets?&rdquo;</em> STUDENT handled it. 10,000 lines of Lisp. It established that natural language processing was tractable for bounded domains.</p>
+
+    <h3>ELIZA (Joseph Weizenbaum, 1966)</h3>
+    <p>Weizenbaum wrote ELIZA at MIT not as a serious AI project but as a demonstration of how shallow pattern-matching could simulate understanding. The DOCTOR script imitated a Rogerian psychotherapist. &ldquo;Men are all alike.&rdquo; &mdash; &ldquo;IN WHAT WAY?&rdquo; &mdash; &ldquo;They&rsquo;re always bugging us about something or other.&rdquo; &mdash; &ldquo;CAN YOU THINK OF A SPECIFIC EXAMPLE?&rdquo; Weizenbaum was horrified by how readily people anthropomorphized his program, and wrote <em>Computer Power and Human Reason</em> (1976) as a rebuttal to the AI community&rsquo;s excessive optimism.</p>
+
+    <h3>DENDRAL (Feigenbaum, Buchanan, Lederberg, 1965&ndash;1983)</h3>
+    <p>The first expert system. Started at Stanford as a collaboration between Feigenbaum (AI) and Joshua Lederberg (Nobel laureate in genetics, working on Mars life-detection experiments for NASA). DENDRAL inferred molecular structure from mass spectrometer data, encoding hundreds of rules from organic chemists. Ran on the DEC PDP-10 in Interlisp. DENDRAL&rsquo;s legacy is enormous: it proved that domain expertise, encoded symbolically, could produce expert-level performance in a narrow domain.</p>
+
+    <h3>MACSYMA (Moses, Martin, Engelman, 1968&ndash;1982)</h3>
+    <p>The most sophisticated symbolic mathematics system of the 20th century, a direct ancestor of Mathematica and Maple. MACSYMA grew into a <em>million-line</em> Lisp system capable of symbolic integration, differential equation solving, Laplace transforms, tensor manipulation. Ran on the PDP-10 under ITS and later on Lisp machines. Its descendant <strong>Maxima</strong> is still actively developed as free software. Stephen Wolfram, designing Mathematica, studied MACSYMA carefully; Mathematica&rsquo;s expression tree representation, its pattern-matching rewrite semantics, its notebook interface &mdash; all are recognizable MACSYMA ideas.</p>
+
+    <h3>SHRDLU (Terry Winograd, 1970)</h3>
+    <p>Winograd&rsquo;s MIT PhD thesis. SHRDLU was a natural language interface to a simulated &ldquo;blocks world&rdquo; &mdash; a tabletop with colored geometric solids. The program could understand, plan, and answer questions about the world:</p>
+
+<pre><code>&gt; Pick up a big red block.
+  OK.
+&gt; Grasp the pyramid.
+  I DON'T UNDERSTAND WHICH PYRAMID YOU MEAN.
+&gt; Find a block which is taller than the one you are
+  holding and put it into the box.
+  BY "IT", I ASSUME YOU MEAN THE BLOCK WHICH IS
+  TALLER THAN THE ONE I AM HOLDING.
+  OK.
+&gt; What does the box contain?
+  THE BLUE PYRAMID AND THE BLUE BLOCK.
+&gt; What is the pyramid supported by?
+  THE BOX.</code></pre>
+
+    <p>SHRDLU&rsquo;s performance, in a 1971 film demonstration, convinced many researchers that full natural language understanding was &ldquo;just around the corner.&rdquo; It was not; SHRDLU&rsquo;s success depended entirely on the tiny, fully formalized microworld. But as a proof of concept, it is still astonishing. 200,000 lines of Lisp and MicroPlanner.</p>
+
+    <h3>PLANNER and MicroPlanner (Hewitt; Sussman/Winograd/Charniak, 1969&ndash;1971)</h3>
+    <p>Carl Hewitt at MIT designed PLANNER as a goal-directed programming language embedded in Lisp. It introduced pattern-directed invocation &mdash; procedures could be called not by name but by matching a pattern on the goal. Ancestor of Prolog&rsquo;s resolution, of rule-based systems, and of the Actor model. Hewitt&rsquo;s frustration with PLANNER led him to invent the Actor model in 1973, which shaped Erlang, Akka, Scala actors, and the early design of Smalltalk-72.</p>
+
+    <h3>Shakey the Robot (SRI, 1966&ndash;1972)</h3>
+    <p>The first mobile robot that could reason about its own actions. Shakey ran STRIPS (Stanford Research Institute Problem Solver), a planner invented by Richard Fikes and Nils Nilsson that introduced the STRIPS action representation still used in planning research today. All Lisp. Shakey is preserved at the Computer History Museum in Mountain View.</p>
+
+    <h3>HEARSAY-II (Reddy, Lesser, Erman, CMU, 1976)</h3>
+    <p>Speech understanding system built on the blackboard architecture. Multiple knowledge sources &mdash; acoustic, phonetic, lexical, syntactic, semantic &mdash; wrote hypotheses to a shared blackboard, triggering further processing. HEARSAY-II understood 1000-word-vocabulary continuous speech. Blackboard architecture became a lasting pattern.</p>
+
+    <h3>PROSPECTOR (SRI, 1978)</h3>
+    <p>Expert system for mineral exploration; successfully identified a molybdenum deposit at Mount Tolman, Washington, worth an estimated $100 million. Built in INTERLISP. One of the most frequently cited early commercial AI successes.</p>
+
+    <div class="card amber">
+      <p><strong>In the period 1960&ndash;1985, there was no AI program of note written in any language other than Lisp.</strong> None. The equivalence between the two words was not rhetorical. If you were an AI researcher, you wrote Lisp. If you wrote Lisp, you were &mdash; statistically &mdash; an AI researcher.</p>
+    </div>
+
+    <h2>MYCIN and the Rule-Based Paradigm</h2>
+
+    <p>MYCIN, developed at Stanford by <strong>Edward Shortliffe</strong> as his 1974 dissertation, was a decision-support system for the diagnosis and treatment of bacterial infections. It asked the physician a series of questions and used roughly 600 production rules to infer the likely pathogen and recommend an antibiotic regimen.</p>
+
+<pre><code>IF  the infection is primary-bacteremia, AND
+    the site of the culture is one of the sterile sites, AND
+    the suspected portal of entry is the gastrointestinal tract,
+THEN there is suggestive evidence (0.7) that the identity of
+     the organism is bacteroides.</code></pre>
+
+    <p>The <code>(0.7)</code> is a certainty factor &mdash; MYCIN&rsquo;s ad-hoc approach to uncertainty. Certainty factors are not probabilities, but they worked well enough in practice for MYCIN to reach performance comparable to expert infectious disease physicians in blind evaluations.</p>
+
+    <p>MYCIN was written in Interlisp. It was never deployed clinically &mdash; legal liability concerns in the 1970s prevented that &mdash; but it established the <strong>rule-based production-system paradigm</strong>. Its most lasting contribution was the separation Shortliffe and Buchanan enforced between the <em>inference engine</em> and the <em>knowledge base</em>. The same engine could be repurposed for a different domain by swapping in a different rule set. This was made explicit in <strong>EMYCIN</strong> (&ldquo;Empty MYCIN&rdquo;), the first expert system shell.</p>
+
+    <h2>XCON and the Business Case</h2>
+
+    <p>If MYCIN was the research showcase, <strong>XCON</strong> was the financial vindication. Developed by John McDermott at Carnegie Mellon starting in 1978 in collaboration with DEC, its task was mundane: configure VAX computer systems. A VAX order could specify thousands of components, and human configurers routinely missed compatibility constraints, leading to shipped orders that could not be assembled on the customer site.</p>
+
+    <p>XCON was an OPS5 program (OPS5 being a production rule language developed at CMU by Charles Forgy, implemented in Lisp, using Forgy&rsquo;s <strong>Rete algorithm</strong>). By 1984, XCON contained over 3,000 rules and handled the configuration of every VAX DEC shipped. DEC reported annual savings of approximately <strong>$25 million</strong>, later revised upward to <strong>$40 million per year</strong>. XCON was the first clear demonstration that a symbolic AI system could produce large, sustained, quantifiable economic value.</p>
+
+    <h2>The Rete Algorithm &mdash; Still Running the World</h2>
+
+    <p>Forgy&rsquo;s crucial contribution was the Rete algorithm (1979, 1982), which matches rules against working memory in time proportional to the <em>changes</em> in working memory rather than to the total number of rules. Rete made expert systems with thousands of rules computationally feasible. It is still the dominant algorithm in business rules engines:</p>
+
+    <ul>
+      <li><strong>Drools</strong> (JBoss/Red Hat) &mdash; Java rules engine, Rete-based</li>
+      <li><strong>IBM ODM</strong> &mdash; Operational Decision Manager</li>
+      <li><strong>CLIPS</strong> &mdash; C Language Integrated Production System (NASA, 1986)</li>
+      <li><strong>JESS</strong> &mdash; Java Expert System Shell (Sandia, 1995)</li>
+    </ul>
+
+    <p>Production rule systems are the workhorse of loan underwriting, insurance claim processing, fraud detection, and regulatory compliance. The software is called &ldquo;business rules management&rdquo; now, not &ldquo;expert systems,&rdquo; but the architecture is unchanged. Rete-based engines today handle trillions of dollars of transactions annually.</p>
+
+    <h2>CYC: The Quest for Common Sense</h2>
+
+    <p><strong>Doug Lenat&rsquo;s CYC</strong> project, begun in 1984, is the most ambitious symbolic AI undertaking ever attempted. Lenat&rsquo;s thesis was that expert systems were brittle because they lacked common sense &mdash; the ocean of implicit background knowledge that every human brings to every situation. CYC&rsquo;s goal was to encode that ocean by hand. Lenat estimated ten million rules as the threshold for &ldquo;critical mass,&rdquo; beyond which CYC would be able to learn additional rules from reading text.</p>
+
+    <p>CYC was founded at MCC (Microelectronics and Computer Technology Corporation) in Austin, Texas &mdash; a consortium formed in response to the Japanese Fifth Generation Computer Systems project. In 1994, Lenat spun out Cycorp as an independent company. CYC is still, in 2026, under active development &mdash; now 40+ years old. It contains more than <strong>twenty-five million assertions</strong> as of the most recent estimates.</p>
+
+    <p>CYC is a paradoxical monument. Its technical accomplishments are real: its ontology, its representation language (CycL, a Lisp-influenced predicate calculus), its inference engine. But it has failed, by any reasonable measure, to deliver on its original promise. The reasons are the reasons the entire expert system era failed.</p>
+
+    <h2>The Expert System Boom and Bust</h2>
+
+    <div class="timeline">
+      <div class="timeline-entry">
+        <span class="timeline-year">1980&ndash;1983</span>
+        <span class="timeline-title">Early optimism</span>
+        <p>Research results from MYCIN, XCON, PROSPECTOR convinced venture capitalists that AI was ready for commercialization. Symbolics and LMI founded. Teknowledge, Inference Corporation, IntelliCorp, Carnegie Group founded as expert system vendors.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1984&ndash;1987</span>
+        <span class="timeline-title">The boom</span>
+        <p>Worldwide AI hardware and software sales approached $1 billion annually. Major corporations (Du Pont, American Express, Ford, Boeing, TI) established internal AI groups. Business magazines ran cover stories. Japan announced its Fifth Generation project. DARPA&rsquo;s Strategic Computing Initiative poured $600 million into AI research, 1983&ndash;1993.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1987&ndash;1992</span>
+        <span class="timeline-title">The crash</span>
+        <p>Expert systems failed to deliver promised productivity gains. Maintenance costs ballooned as rule bases grew past a few hundred rules. Lisp machines became obsolete overnight as Sun workstations running cheaper Common Lisp caught up. Symbolics&rsquo; stock fell from $30 to $0.50. LMI went bankrupt in 1987. By 1992, the AI departments inside the Fortune 500 had been disbanded. The &ldquo;Second AI Winter.&rdquo;</p>
+      </div>
+    </div>
+
+    <h2>What Killed Them</h2>
+
+    <p>The expert system failure is one of the most studied disappointments in computing history. Four fundamental problems:</p>
+
+    <h3>Brittleness</h3>
+    <p>An expert system handles the cases its rules cover. On any case that falls outside &mdash; even by a little &mdash; it fails, often silently and often catastrophically. MYCIN could diagnose bacteremia, but if a patient presented with a viral infection, MYCIN had no &ldquo;I don&rsquo;t know&rdquo; response; it would produce a confident wrong answer. The failure mode was specifically that the system did not know the limits of its own knowledge.</p>
+
+    <h3>The knowledge acquisition bottleneck</h3>
+    <p>Writing rules required two people: a domain expert and a &ldquo;knowledge engineer&rdquo; who translated the expert&rsquo;s tacit knowledge into formal rules. This process was slow, expensive, and often impossible. Experts disagreed. Experts could not articulate what they knew. Experts changed their minds. The knowledge engineer became a bottleneck, and the bottleneck could not be parallelized.</p>
+
+    <h3>Maintenance hell</h3>
+    <p>A rule base is not a modular system. Adding a new rule can interact unpredictably with existing rules. When an expert system produced a wrong answer, finding out why required tracing the firing chain through potentially thousands of rules. As rule bases grew past 500 rules, maintenance cost grew super-linearly. XCON eventually grew to over 10,000 rules and required a full-time team of maintainers; its maintenance cost consumed most of the $40 million in annual savings it produced.</p>
+
+    <h3>Symbols are not grounded</h3>
+    <p>The deepest problem, identified by Stevan Harnad in his 1990 paper &ldquo;The Symbol Grounding Problem,&rdquo; was that the symbols in an expert system had no connection to the world. MYCIN&rsquo;s symbol <code>BACTEROIDES</code> was a string of letters. It had no causal connection to an actual bacterium. This critique foreshadowed the neural network revival: neural networks, by contrast, learn representations that are anchored to sensor data. The same critique previews the current debate about large language models: do they ground their symbols, or are they very large rule bases in disguise?</p>
+
+    <h2>What We Kept</h2>
+
+    <p>The expert system era is often treated as a total failure. This is unfair. Several enduring contributions remain:</p>
+
+    <ul>
+      <li><strong>The Rete algorithm</strong> still powers business rules engines handling trillions of dollars of transactions. CLIPS, JESS, Drools, IBM ODM all trace their lineage to OPS5.</li>
+      <li><strong>The separation of knowledge from inference</strong> remains a cornerstone design principle. Modern knowledge graphs &mdash; Google&rsquo;s Knowledge Graph, Wikidata, DBpedia &mdash; are the intellectual descendants of CYC&rsquo;s ontology.</li>
+      <li><strong>Ontology engineering</strong> as a discipline comes directly from CYC and from Stanford&rsquo;s Ontolingua/KIF efforts.</li>
+      <li><strong>The insight that intelligence requires symbols</strong> was not wrong. It was incomplete. The current neurosymbolic research program (see <a href="ml-neural-genetic.html">ML, Neural, Genetic</a>) is the partial vindication of the symbolic AI thesis.</li>
+    </ul>
+
+    <h2>Why Symbolic AI Required a Symbolic Language</h2>
+
+    <p>The dominant paradigm in AI from 1956 to approximately 1986 was &ldquo;symbolic AI&rdquo; (later called GOFAI, &ldquo;Good Old-Fashioned AI,&rdquo; by John Haugeland in 1985). The core commitment was that intelligence consists in the manipulation of symbolic representations of the world. A &ldquo;block&rdquo; in SHRDLU is not a vector of pixels; it is a symbol <code>B1</code> with properties <code>(color red)</code>, <code>(shape block)</code>, <code>(size big)</code>, <code>(on-top-of B2)</code>. Reasoning is the transformation of such symbol structures by inference rules.</p>
+
+    <p>This paradigm has a natural language: one in which symbols are first-class, rules can be written as data, new rules can be constructed at runtime, the inferential engine can be modified while it runs, and the entire structure is inspectable at any moment. That language is Lisp. No other language of the era even pretended to compete. FORTRAN was for physics. COBOL was for business records. ALGOL was for algorithms on arrays. APL was for mathematics on arrays. Only Lisp treated symbols as the primary object of computation.</p>
+
+    <div class="lambda-box">
+      <h3>// The Entangled Vocabulary //</h3>
+      <p>The consequence was that the <em>intellectual content</em> of AI research became entangled with Lisp&rsquo;s conceptual vocabulary. When a researcher thought &ldquo;let me add an environment to this interpreter,&rdquo; they were thinking in Lisp. When they thought &ldquo;let me use a continuation to implement backtracking,&rdquo; they were thinking in Lisp. When they thought &ldquo;let me write a macro that turns a rule into an inference procedure,&rdquo; they were thinking in Lisp.</p>
+      <p>The boundary between &ldquo;using Lisp&rdquo; and &ldquo;doing AI&rdquo; became, for twenty-five years, impossible to locate.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Pages</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="language.html">Language Core</a></li>
+        <li><a href="metaprogramming.html">Metaprogramming</a></li>
+        <li><a href="ml-neural-genetic.html">ML, Neural, Genetic</a></li>
+        <li><a href="machines.html">Lisp Machines</a></li>
+        <li><a href="dialects.html">Dialects</a></li>
+        <li><a href="emacs-clojure.html">Emacs &amp; Clojure</a></li>
+        <li><a href="philosophy.html">Philosophy</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>AI Heritage &middot; Lisp &amp; Functional Programming &middot; PNW Research Series</p>
+    <p><a href="../index.html">PNW Research Series</a> &middot; <a href="index.html">Back to Overview</a></p>
+  </footer>
+</body>
+</html>

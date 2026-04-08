@@ -203,7 +203,9 @@
     { id: 'WYR', name: 'Weyerhaeuser', path: 'WYR/index.html' },
     { id: 'WSB', name: 'Small Business', path: 'WSB/index.html' },
     { id: 'YNT', name: "Yuri's Night", path: 'YNT/index.html' },
-    { id: 'YTB', name: 'YouTube Deep Research', path: 'YTB/index.html' }
+    { id: 'YTB', name: 'YouTube Deep Research', path: 'YTB/index.html' },
+    { id: 'AIP', name: 'AI Papers Digest', path: 'AIP/index.html' },
+    { id: 'SCI', name: 'Science Research', path: 'SCI/index.html' }
   ];
 
   var clusters = [
@@ -215,10 +217,10 @@
     { name: 'Business', color: '#42A5F5', ids: ['ACC','WSB','BCM','BLA','FCC'] },
     { name: 'Vision', color: '#AB47BC', ids: ['ROF','SPA','NWC','SMF','WCN','OTM'] },
     { name: 'Broadcasting', color: '#26A69A', ids: ['RBH','KPZ','KSM','KUB','WLF','C89','MIX','SGL','CBC','IBC','SVB','DFQ','AMR','TVH','ALV','SNX','LNT','CCT','CNA'] },
-    { name: 'Science', color: '#5C6BC0', ids: ['BHK','LGW','SET','SGM','BNY','ABM','CHS','AMS'] },
+    { name: 'Science', color: '#5C6BC0', ids: ['BHK','LGW','SET','SGM','BNY','ABM','CHS','AMS','SCI'] },
     { name: 'Music', color: '#EF5350', ids: ['WAL','DDA','GRV','PJM','SNY','COI','GGT','GTP','CDP','KGX','HJX','B52','CAR','TKH','DPM','DRN','SMP','BMR','SOC','CRY','SRG','PRS','ABL','FLS','OCT','SFH','GRG','MDB','S36','SPS'] },
     { name: 'Space', color: '#1E88E5', ids: ['CYG','SMB','GRB','BHC','LTS','YNT','MST'] },
-    { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR','FLT','SAA','FAIS','MAS','AGT','GSI','ALR','APD','YTB'] },
+    { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR','FLT','SAA','FAIS','MAS','AGT','GSI','ALR','APD','YTB','AIP'] },
     { name: 'Graphics', color: '#8E24AA', ids: ['NEH','VKD','VKS'] }
   ];
 

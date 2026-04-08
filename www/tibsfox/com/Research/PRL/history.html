@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Culture &mdash; Perl &amp; PHP &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-prl">
+  <header>
+    <h1>History &amp; Culture</h1>
+    <div class="subtitle">Larry Wall, the CGI Era, Camel Books, JAPH, Perl Poetry, and 37 Years of Evolution</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Perl Core</a>
+      <a href="text-processing.html">Text &amp; NLP</a>
+      <a href="cpan.html">CPAN</a>
+      <a href="sysadmin.html">Sysadmin</a>
+      <a href="php.html">PHP</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="history.html" class="active">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Perl was not born from computer science. It was born from linguistics. Larry Wall studied linguistics at UC Berkeley and Seattle Pacific University before working at JPL and Unisys. He was a linguist who happened to write code, and this distinction is not cosmetic &mdash; it is the defining fact of Perl&rsquo;s existence. Where most language designers came from mathematics and formal logic, Wall came from the study of how humans actually communicate: messily, contextually, with redundancy, with multiple valid ways to say the same thing.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- LARRY WALL                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>Larry Wall &mdash; The Linguist Who Built a Language</h2>
+    <div class="card">
+      <p><strong>TMTOWTDI</strong> &mdash; &ldquo;There&rsquo;s More Than One Way To Do It&rdquo; (pronounced &ldquo;tim-toady&rdquo;). Natural languages do not enforce a single correct way to express an idea. Neither would Perl.</p>
+      <p><strong>The Three Virtues of a Programmer:</strong></p>
+      <ol>
+        <li><strong>Laziness</strong> &mdash; Makes you write labor-saving programs and document what you wrote so you don&rsquo;t have to answer so many questions about it.</li>
+        <li><strong>Impatience</strong> &mdash; The anger you feel when the computer is being lazy. Makes you write programs that anticipate your needs.</li>
+        <li><strong>Hubris</strong> &mdash; Excessive pride that makes you write programs other people won&rsquo;t want to say bad things about.</li>
+      </ol>
+      <p>Wall described Perl as a <strong>&ldquo;postmodern programming language&rdquo;</strong> (Linux World, 1999): where modernist languages sought one true paradigm, Perl borrowed freely and without apology. Regex from sed/awk, file handling from shell, data structures from C, report formatting from COBOL, OO from wherever it felt like. A bricolage united by practical utility, not theoretical purity.</p>
+    </div>
+
+    <h3>The O&rsquo;Reilly Animal Books</h3>
+    <p>The <strong>Camel Book</strong> (<em>Programming Perl</em>) became Perl&rsquo;s bible. The <strong>Llama Book</strong> (<em>Learning Perl</em>) became the curriculum. The camel became the mascot. This was part of O&rsquo;Reilly&rsquo;s tradition of animal engravings on technical covers &mdash; so recognizable that &ldquo;the camel book&rdquo; needed no further explanation. You could walk into any sysadmin&rsquo;s office and see a shelf of animals: the camel, the llama, the owl (<em>sed &amp; awk</em>), the horse (<em>Unix in a Nutshell</em>). That bookshelf was the curriculum of a generation.</p>
+
+    <!-- ============================================================ -->
+    <!-- TIMELINE                                                      -->
+    <!-- ============================================================ -->
+
+    <h2>Timeline &mdash; 37 Years of Perl</h2>
+    <table>
+      <thead><tr><th>Year</th><th>Version</th><th>Milestone</th></tr></thead>
+      <tbody>
+        <tr><td>1987</td><td><strong>Perl 1.0</strong></td><td>Released to <code>comp.sources.misc</code> on December 18. A &ldquo;replacement for awk and sed.&rdquo;</td></tr>
+        <tr><td>1988&ndash;89</td><td>Perl 2&ndash;3</td><td>Henry Spencer&rsquo;s regex engine. Binary data support. Spread via tar files and Usenet.</td></tr>
+        <tr><td>1991</td><td><strong>Perl 4</strong></td><td>Shipped alongside the first Camel Book. The version that went mainstream.</td></tr>
+        <tr><td>1994</td><td><strong>Perl 5</strong></td><td><strong>Complete rewrite.</strong> Modules, references, OOP (<code>bless</code>), lexical scoping, XS. The version that conquered the web.</td></tr>
+        <tr><td>1995</td><td>CPAN launches</td><td>The Comprehensive Perl Archive Network. The model every later package manager would follow.</td></tr>
+        <tr><td>2000</td><td>Perl 6 announced</td><td>360 RFCs submitted. The design process begins &mdash; and keeps going.</td></tr>
+        <tr><td>2007</td><td>Perl 5.10</td><td><code>say</code>, smart match, named captures.</td></tr>
+        <tr><td>2014</td><td>Perl 5.20</td><td>Subroutine signatures (experimental).</td></tr>
+        <tr><td>2019</td><td><strong>Raku</strong></td><td>Perl 6 officially renamed. Both languages free to evolve independently.</td></tr>
+        <tr><td>2022</td><td>Perl 5.36</td><td>Subroutine signatures stable. <code>use v5.36</code> enables strict/warnings/signatures.</td></tr>
+        <tr><td>2023</td><td>Perl 5.38</td><td>Class feature (experimental). Unicode 15.0.</td></tr>
+        <tr><td>2025</td><td>Perl 5.42</td><td>The <code>class</code> keyword progressing toward stable. Current version: <strong>5.42.2</strong>.</td></tr>
+      </tbody>
+    </table>
+    <div class="card">
+      <p><strong>The Perl 6 / Raku saga:</strong> At the Perl Conference in 2000, Larry Wall announced Perl 6. It became a legendary example of second-system effect. Grammars as first-class citizens, a type system, multiple dispatch, lazy evaluation, junctions. The running joke: Perl 6 would be released &ldquo;by Christmas&rdquo; &mdash; without specifying which Christmas. The 2019 rename to <strong>Raku</strong> was liberation in both directions.</p>
+      <p>Perl 5 is not dead. It is not even dying. It is the cockroach of programming languages &mdash; unkillable, everywhere, quietly doing its job in the walls of civilization.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE CGI ERA                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>The CGI Era &mdash; Perl Built the Dynamic Web</h2>
+    <p>Before PHP. Before Python on the web. Before Rails, Node.js, or any of it &mdash; there was Perl and CGI.</p>
+    <div class="card">
+      <p>The <strong>Common Gateway Interface</strong> let a web server execute an external program and return its output as HTTP. The program could be any language, but in practice it was almost always Perl: already on every Unix system, superb at text processing, and HTTP is a text protocol.</p>
+    </div>
+    <pre><code>#!/usr/bin/perl
+print "Content-type: text/html\n\n";
+print "&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;\n";</code></pre>
+
+    <h3>The Cultural Artifacts</h3>
+    <table>
+      <thead><tr><th>Artifact</th><th>Significance</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Matt&rsquo;s Script Archive</strong></td><td>Free Perl CGI scripts: guestbooks, counters, form handlers. Millions of downloads. Ubiquitous on early web. Security nightmares, but they <em>worked</em> and got people building.</td></tr>
+        <tr><td><strong>CGI.pm</strong></td><td>Lincoln Stein&rsquo;s module for parsing form data, generating HTML, handling uploads. The interface between Perl and the web. Every CGI programmer knew it.</td></tr>
+        <tr><td><strong>mod_perl</strong></td><td>Embedded Perl in Apache. Persistent connections, startup scripts, full Apache API. The &ldquo;2000% speedup&rdquo; claim. Powerful but complex.</td></tr>
+        <tr><td><strong>Web counters</strong></td><td>The &ldquo;You are visitor #12,847&rdquo; badge. Written in Perl. Stored counts in flat files. The first dynamic content most people ever saw on the web.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- CULTURE                                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Perl Culture &mdash; Where Code Meets Art</h2>
+
+    <h3>JAPH &mdash; &ldquo;Just Another Perl Hacker&rdquo;</h3>
+    <p>A tradition of writing programs whose output is &ldquo;Just another Perl hacker,&rdquo; using the most creative (often obfuscated) code possible. Started by Randal Schwartz. A signature, a calling card, and a flex.</p>
+
+    <h3>Obfuscated Perl Contest</h3>
+    <p>Inspired by the Obfuscated C Contest. Entries are working programs compressed into unreadable, beautiful monstrosities. Perl&rsquo;s syntax flexibility makes it uniquely suited to this art form.</p>
+
+    <h3>Perl Poetry</h3>
+    <p>Programs that are simultaneously valid Perl and valid poetry. Larry Wall&rsquo;s linguistic heritage at its purest. The <code>/x</code> modifier and flexible syntax make Perl the only language where this is genuinely possible.</p>
+
+    <h3>Perl Golf</h3>
+    <p>Solve a problem in the fewest characters possible. The opposite of readable code, and a celebration of Perl&rsquo;s expressive density.</p>
+
+    <h3>The Perl Advent Calendar</h3>
+    <p>24 days of Perl articles in December, running since 2000. A community tradition of sharing knowledge and celebrating the language.</p>
+
+    <h3>Perl Mongers</h3>
+    <p><strong>230+ local user groups worldwide.</strong> <code>pm.org</code> coordinates them. From London.pm to Tokyo.pm, these groups are where Perl programmers meet, teach, and maintain the community that keeps the language alive.</p>
+
+    <!-- ============================================================ -->
+    <!-- WHO STILL USES PERL                                           -->
+    <!-- ============================================================ -->
+
+    <h2>Who Still Uses Perl</h2>
+    <table>
+      <thead><tr><th>Organization</th><th>How They Use Perl</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Booking.com</strong></td><td>One of the largest Perl codebases in production. Thousands of developers. The most prominent &ldquo;Perl at scale&rdquo; story.</td></tr>
+        <tr><td><strong>cPanel</strong></td><td>The world&rsquo;s most popular web hosting control panel. Millions of servers. Written in Perl.</td></tr>
+        <tr><td><strong>DuckDuckGo</strong></td><td>Privacy-focused search engine. Perl backend.</td></tr>
+        <tr><td><strong>Amazon</strong> (early)</td><td>The original Amazon.com was Perl. Jeff Bezos&rsquo;s team chose it for rapid development.</td></tr>
+        <tr><td><strong>IMDB</strong> (early)</td><td>Started as Col Needham&rsquo;s Perl scripts for movie data on Usenet.</td></tr>
+        <tr><td><strong>Craigslist</strong></td><td>Originally Perl. Craig Newmark&rsquo;s email list &rarr; website &rarr; institution.</td></tr>
+        <tr><td><strong>Slashdot</strong></td><td>&ldquo;News for Nerds&rdquo; &mdash; Slash engine, written in Perl, defined internet culture.</td></tr>
+        <tr><td><strong>Movable Type</strong></td><td>The blogging platform that predated WordPress. Perl.</td></tr>
+        <tr><td><strong>Bioinformatics</strong></td><td>BioPerl is foundational in genomics. Perl parsed the Human Genome Project data.</td></tr>
+        <tr><td><strong>Every Unix sysadmin</strong></td><td>The invisible infrastructure. Cron jobs, log parsers, deployment scripts, monitoring.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- THE PERL FOUNDATION                                           -->
+    <!-- ============================================================ -->
+
+    <h2>The Perl &amp; Raku Foundation</h2>
+    <div class="card">
+      <p>Supports Perl and Raku development. Key activities:</p>
+      <ul>
+        <li><strong>TPRC</strong> (The Perl and Raku Conference) &mdash; annual community gathering</li>
+        <li><strong>Perl Toolchain Summit</strong> &mdash; annual sprint to maintain CPAN, PAUSE, MetaCPAN</li>
+        <li><strong>Grants</strong> &mdash; funding for core development and community projects</li>
+        <li><strong>Fastmail&rsquo;s $10,000 donation</strong> (2026) &mdash; corporate support continues</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>STA</td><td>Entertainment &amp; Media</td><td>Slashdot, IMDB, early web culture &mdash; all Perl</td></tr>
+        <tr><td>SYS</td><td>Systems Administration</td><td>The sysadmin&rsquo;s primary scripting language for 25+ years</td></tr>
+        <tr><td>BRC</td><td>Community Infrastructure</td><td>Perl Mongers (230+ groups), the conference circuit, mailing lists</td></tr>
+        <tr><td>BPS</td><td>Biological Physics</td><td>BioPerl &mdash; the Human Genome Project&rsquo;s data pipeline</td></tr>
+        <tr><td>FFA</td><td>Creative &amp; Cultural</td><td>Perl poetry, obfuscated code, JAPH &mdash; code as art form</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Perl Core Language</a></li>
+        <li><a href="php.html">PHP &mdash; The Web Sibling</a></li>
+        <li><a href="sysadmin.html">Systems Administration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>History &amp; Culture &middot; Perl &amp; PHP &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GC &amp; Runtime &mdash; Go</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gol">
+  <header>
+    <h1>GC &amp; Runtime</h1>
+    <div class="subtitle">Concurrent Tri-Color Mark-and-Sweep, Sub-Millisecond Pauses, GOGC, GOMEMLIMIT, pprof, The &ldquo;No Knobs&rdquo; Philosophy</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="concurrency.html">Concurrency</a>
+      <a href="gc.html" class="active">GC</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Go&rsquo;s GC is radically simpler than the JVM&rsquo;s: one collector, one tuning knob (GOGC), and sub-millisecond pauses. The trade-off: lower throughput than Java&rsquo;s Parallel GC for batch workloads. The bet: most Go programs are network services where latency matters more than throughput.
+    </blockquote>
+
+    <h2>The Collector</h2>
+    <div class="card">
+      <p>Go uses a <strong>concurrent, non-generational, non-compacting, tri-color mark-and-sweep</strong> collector. It runs concurrently with the application, with two very short STW pauses (typically &lt;1 ms each):</p>
+      <ol>
+        <li><strong>Mark Setup</strong> (STW) &mdash; enable write barrier, scan stacks for roots</li>
+        <li><strong>Mark</strong> (concurrent) &mdash; trace from roots, mark reachable objects</li>
+        <li><strong>Mark Termination</strong> (STW) &mdash; drain remaining work, disable write barrier</li>
+        <li><strong>Sweep</strong> (concurrent) &mdash; reclaim unmarked memory, lazy per-span</li>
+      </ol>
+    </div>
+
+    <h3>What Go deliberately does NOT do</h3>
+    <table>
+      <thead><tr><th>Feature</th><th>JVM has it</th><th>Go&rsquo;s choice</th></tr></thead>
+      <tbody>
+        <tr><td>Generational GC</td><td>Yes (young + old)</td><td>No &mdash; traces the whole heap every cycle</td></tr>
+        <tr><td>Compaction</td><td>Yes (move objects)</td><td>No &mdash; uses size classes and spans instead</td></tr>
+        <tr><td>Multiple collectors</td><td>7+ choices</td><td>One collector, period</td></tr>
+        <tr><td>Hundreds of tuning flags</td><td>Yes</td><td>GOGC + GOMEMLIMIT, that&rsquo;s it</td></tr>
+      </tbody>
+    </table>
+
+    <h2>GC Evolution</h2>
+    <div class="timeline">
+      <div class="event"><span class="year">Go 1.0</span> Stop-the-world collector. Pauses could be hundreds of milliseconds.</div>
+      <div class="event"><span class="year">Go 1.3</span> Precise GC (can identify all pointers). Previously conservative.</div>
+      <div class="event"><span class="year">Go 1.5</span> <strong>Concurrent GC</strong> &mdash; tri-color mark-and-sweep, write barrier, &lt;10 ms pauses. Rick Hudson&rsquo;s breakthrough.</div>
+      <div class="event"><span class="year">Go 1.8</span> Sub-millisecond pauses typical. Eliminated most remaining STW work.</div>
+      <div class="event"><span class="year">Go 1.19</span> <strong>GOMEMLIMIT</strong> &mdash; soft memory limit, reducing OOM risk in containers.</div>
+    </div>
+
+    <h2>Tuning: GOGC and GOMEMLIMIT</h2>
+
+<pre><code># GOGC: target heap growth ratio (default 100 = 100% growth before GC)
+GOGC=200 ./myapp     # less frequent GC, higher throughput, more memory
+GOGC=50  ./myapp     # more frequent GC, lower memory, more CPU on GC
+GOGC=off ./myapp     # disable GC entirely (for short-lived processes)
+
+# GOMEMLIMIT (Go 1.19+): soft memory ceiling
+GOMEMLIMIT=1GiB ./myapp  # GC tries to stay under 1 GiB
+# Combine both:
+GOGC=100 GOMEMLIMIT=512MiB ./myapp</code></pre>
+
+    <div class="card green">
+      <p><strong>The &ldquo;no knobs&rdquo; philosophy:</strong> Go deliberately avoids the JVM&rsquo;s hundreds of GC flags. Rick Hudson: &ldquo;If the GC needs a lot of tuning, the GC is broken.&rdquo; GOGC controls the CPU/memory trade-off. GOMEMLIMIT prevents OOM in bounded environments. That&rsquo;s it.</p>
+    </div>
+
+    <h2>Memory Allocator</h2>
+    <ul>
+      <li><strong>Size classes</strong> &mdash; objects are allocated into spans of fixed size classes (8 bytes to 32 KB)</li>
+      <li><strong>mcache</strong> &mdash; per-P (per-processor) allocation cache, lock-free</li>
+      <li><strong>mcentral</strong> &mdash; shared cache of spans per size class</li>
+      <li><strong>mheap</strong> &mdash; the global heap, backed by OS memory</li>
+      <li>Large objects (&gt;32 KB) allocated directly from mheap</li>
+      <li>No compaction &mdash; fragmentation is managed by size classes</li>
+    </ul>
+
+    <h2>Profiling with pprof</h2>
+    <p>Go has the best built-in profiling of any language. <code>runtime/pprof</code> for CLI apps, <code>net/http/pprof</code> for live servers:</p>
+
+<pre><code>import _ "net/http/pprof"
+// then: go tool pprof http://localhost:6060/debug/pprof/heap
+// or:   go tool pprof http://localhost:6060/debug/pprof/profile?seconds=30</code></pre>
+
+    <table>
+      <thead><tr><th>Profile</th><th>What it shows</th></tr></thead>
+      <tbody>
+        <tr><td><code>/debug/pprof/profile</code></td><td>CPU profile (30 seconds by default)</td></tr>
+        <tr><td><code>/debug/pprof/heap</code></td><td>Heap allocations (live objects)</td></tr>
+        <tr><td><code>/debug/pprof/allocs</code></td><td>All allocations (including freed)</td></tr>
+        <tr><td><code>/debug/pprof/goroutine</code></td><td>All goroutine stacks</td></tr>
+        <tr><td><code>/debug/pprof/block</code></td><td>Blocking profile (channel/mutex waits)</td></tr>
+        <tr><td><code>/debug/pprof/mutex</code></td><td>Mutex contention profile</td></tr>
+        <tr><td><code>/debug/pprof/threadcreate</code></td><td>OS thread creation</td></tr>
+        <tr><td><code>/debug/pprof/trace</code></td><td>Execution trace (<code>go tool trace</code>)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Execution Tracer</h2>
+    <p><code>runtime/trace</code> and <code>go tool trace</code> give a microsecond-resolution view of goroutine scheduling, GC events, syscalls, and network I/O. Far more detailed than profiles &mdash; shows exactly what happened, when, on which processor.</p>
+
+    <h2>Escape Analysis</h2>
+    <p>The Go compiler decides at compile time whether a value can stay on the stack (cheap) or must escape to the heap (requires GC). <code>go build -gcflags="-m"</code> shows escape analysis decisions. Reducing heap escapes is the #1 performance optimization in Go.</p>
+
+    <h2>Memory Model</h2>
+    <p>Go&rsquo;s memory model (go.dev/ref/mem) defines happens-before relationships for concurrent access. Goroutine creation, channel operations, mutex lock/unlock, and sync.Once all establish happens-before edges. Reads/writes of shared variables without synchronization are data races (undefined behavior).</p>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>JGC</td><td>JVM GC</td><td>Go&rsquo;s GC is radically simpler: one collector, two knobs. JVM has 7+ collectors, hundreds of flags. Different design philosophies.</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>Rust has no GC at all. Go trades throughput for simplicity. Rust trades learning curve for zero pauses.</td></tr>
+        <tr><td>JTS</td><td>JavaScript</td><td>V8&rsquo;s Orinoco GC is generational (unlike Go&rsquo;s non-generational). Both target low latency.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Language</a></li>
+        <li><a href="concurrency.html">Concurrency</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="education.html">Learn</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>GC &amp; Runtime &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

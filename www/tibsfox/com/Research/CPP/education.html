@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Resources &mdash; C++ and Object-Oriented Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cpp">
+  <header>
+    <h1>Learning Resources</h1>
+    <div class="subtitle">Books, Online Courses, Conferences, Communities &mdash; How to Actually Learn Modern C++</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="oop.html">OOP</a>
+      <a href="templates.html">Templates</a>
+      <a href="stdlib.html">STL</a>
+      <a href="modern.html">Modern C++</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html" class="active">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;Do not try to learn the whole language. Learn modern C++ &mdash; the subset that the Core Guidelines recommend &mdash; and treat the rest as legacy that you&rsquo;ll meet when you need to.&rdquo;
+    </blockquote>
+
+    <h2>The Good News</h2>
+    <p>C++ has a deserved reputation for being hard to learn well. The good news is that the <strong>modern syllabus is much shorter and saner than the historical one</strong>. You don&rsquo;t need to learn everything; you need to learn the modern core well, and pick up the legacy parts when you encounter them. Books written in 2018 or later assume modern style from the start, and resources like cppreference.com and the Core Guidelines give you a canonical source of truth for every idiom.</p>
+
+    <h2>A Recommended Progression</h2>
+
+    <div class="timeline">
+      <div class="event"><span class="year">1</span> <strong>Start: <em>A Tour of C++</em></strong> (Stroustrup, 3rd edition 2022, ~240 pages) &mdash; a fast on-ramp for working programmers. Covers modern style and everything you need to read modern code.</div>
+      <div class="event"><span class="year">2</span> <strong>Depth: <em>Programming: Principles and Practice Using C++</em></strong> (Stroustrup, 3rd ed. 2024) for beginners, or <strong><em>Accelerated C++</em></strong> (Koenig &amp; Moo, 2000) &mdash; older but still one of the cleanest intros, teaches modern style by starting with the standard library.</div>
+      <div class="event"><span class="year">3</span> <strong>Idiom: <em>Effective Modern C++</em></strong> (Scott Meyers, 2014) &mdash; 42 specific items on C++11/14 idioms. The single most useful book for someone who already knows the basics.</div>
+      <div class="event"><span class="year">4</span> <strong>Reference: cppreference.com</strong> &mdash; the canonical day-to-day lookup. Better than the standard itself for practical use. Always the first place to check what a function actually does.</div>
+      <div class="event"><span class="year">5</span> <strong>Free online: learncpp.com</strong> &mdash; a free online tutorial maintained for years. Excellent for self-study from zero.</div>
+      <div class="event"><span class="year">6</span> <strong>Videos: CppCon on YouTube</strong> &mdash; the annual C++ conference. Talks by Stroustrup, Sutter, Lakos, Carruth, Parent, and dozens of others. The &ldquo;Back to Basics&rdquo; track is particularly good for learners.</div>
+      <div class="event"><span class="year">7</span> <strong>Short-form: C++ Weekly</strong> by Jason Turner &mdash; a long-running YouTube series, one technique per video.</div>
+      <div class="event"><span class="year">8</span> <strong>Canon: C++ Core Guidelines</strong> &mdash; Stroustrup and Sutter&rsquo;s living document at <code>isocpp.github.io/CppCoreGuidelines/</code>. Opinionated and very useful as a reference for &ldquo;is this idiom recommended?&rdquo;</div>
+    </div>
+
+    <h2>The Canonical Book Corpus</h2>
+
+    <h3>By Stroustrup</h3>
+    <table>
+      <thead><tr><th>Title</th><th>Edition / Year</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><em>The C++ Programming Language</em></td><td>1st 1985 &middot; 2nd 1991 &middot; 3rd 1997 &middot; 4th 2013</td><td>The definitive reference. 4th edition is 1,376 pages and covers C++11. A 5th edition has been discussed but not yet published.</td></tr>
+        <tr><td><em>A Tour of C++</em></td><td>1st 2013 &middot; 2nd 2018 &middot; 3rd 2022</td><td>Compact modern overview, ~240 pages. Covers C++20 in the 3rd edition. The best starting point for experienced programmers.</td></tr>
+        <tr><td><em>Programming: Principles and Practice Using C++</em></td><td>1st 2008 &middot; 2nd 2014 &middot; 3rd 2024</td><td>Stroustrup&rsquo;s textbook for programmers who are just learning to program. 1,000+ pages.</td></tr>
+        <tr><td><em>The Design and Evolution of C++</em></td><td>1994</td><td>Stroustrup&rsquo;s own history of the design decisions. 461 pages. Essential for understanding <em>why</em> C++ is the way it is.</td></tr>
+        <tr><td><em>The C++ Core Guidelines</em></td><td>Living document, with Herb Sutter</td><td>Free online at <code>isocpp.github.io/CppCoreGuidelines/</code>. Opinionated, exhaustive, kept current.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>By Scott Meyers</h3>
+    <table>
+      <thead><tr><th>Title</th><th>Year</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><em>Effective C++</em></td><td>1st 1992, 3rd 2005</td><td>55 specific ways to improve your programs and designs. The original.</td></tr>
+        <tr><td><em>More Effective C++</em></td><td>1996</td><td>35 additional items.</td></tr>
+        <tr><td><em>Effective STL</em></td><td>2001</td><td>50 items specifically about the STL.</td></tr>
+        <tr><td><em>Effective Modern C++</em></td><td>2014</td><td>42 items on C++11/14 idioms. <strong>The single most useful book for writing modern C++ well.</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3>By Herb Sutter</h3>
+    <ul>
+      <li><em>Exceptional C++</em> (2000) &mdash; 47 engineering puzzles, based on Guru of the Week</li>
+      <li><em>More Exceptional C++</em> (2002) &mdash; 40 more</li>
+      <li><em>Exceptional C++ Style</em> (2005)</li>
+      <li>Co-author of the <em>C++ Core Guidelines</em></li>
+    </ul>
+
+    <h3>Advanced and Specialized</h3>
+    <table>
+      <thead><tr><th>Title</th><th>Author(s)</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td><em>Modern C++ Design</em></td><td>Andrei Alexandrescu, 2001</td><td>Template metaprogramming, policy-based design, Loki library. The book that taught a generation how to do TMP.</td></tr>
+        <tr><td><em>C++ Templates: The Complete Guide</em></td><td>Vandevoorde, Josuttis, Gregor, 2nd ed. 2017</td><td>The definitive template book. 832 pages. Covers everything from basics to variadics, SFINAE, concepts.</td></tr>
+        <tr><td><em>The C++ Standard Library</em></td><td>Nicolai Josuttis, 2nd ed. 2012</td><td>The STL and standard library, 1,120 pages. The reference if you need to know exactly what a library component does.</td></tr>
+        <tr><td><em>C++ Concurrency in Action</em></td><td>Anthony Williams, 2nd ed. 2019</td><td>The book on C++ concurrency. Williams was the implementer of Boost.Thread and a member of WG21 concurrency subgroup.</td></tr>
+        <tr><td><em>Elements of Programming</em></td><td>Stepanov &amp; McJones, 2009</td><td>The mathematical foundations of generic programming. Dense and rewarding.</td></tr>
+        <tr><td><em>From Mathematics to Generic Programming</em></td><td>Stepanov &amp; Rose, 2014</td><td>More accessible than EoP. Traces generic programming from Euclid to the STL.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Beginner-friendly textbooks</h3>
+    <ul>
+      <li><em>Accelerated C++</em> (Andrew Koenig &amp; Barbara Moo, 2000) &mdash; still considered one of the cleanest on-ramps. Teaches by starting with the standard library.</li>
+      <li><em>C++ Primer</em> (Lippman, Lajoie, Moo, 5th ed. 2012) &mdash; 976 pages, thorough, covers C++11.</li>
+      <li><em>C++ Crash Course</em> (Josh Lospinoso, 2019) &mdash; newer, focused on modern style.</li>
+    </ul>
+
+    <h2>Online Resources</h2>
+    <table>
+      <thead><tr><th>Resource</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td><strong>cppreference.com</strong></td><td>The canonical day-to-day reference. Community-maintained, accurate, searchable. Includes examples for almost every library component and language feature.</td></tr>
+        <tr><td><strong>isocpp.org</strong></td><td>Official home of the ISO C++ committee. News, articles, standards drafts, FAQ.</td></tr>
+        <tr><td><strong>learncpp.com</strong></td><td>Free tutorial site. Modern style. Good for self-study from zero.</td></tr>
+        <tr><td><strong>Compiler Explorer</strong> (<code>godbolt.org</code>)</td><td>Matt Godbolt&rsquo;s online sandbox. Paste code, see assembly output, try multiple compilers side by side.</td></tr>
+        <tr><td><strong>C++ Core Guidelines</strong></td><td>Stroustrup &amp; Sutter&rsquo;s canonical style guide at <code>isocpp.github.io/CppCoreGuidelines/</code>.</td></tr>
+        <tr><td><strong>The C++ Standard Library Reference</strong></td><td>Draft standards at <code>eel.is/c++draft/</code>. For the dedicated.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Video Channels and Talks</h2>
+    <ul>
+      <li><strong>CppCon</strong> &mdash; annual conference in Aurora, Colorado. All talks on YouTube (CppCon channel). The &ldquo;Back to Basics&rdquo; track is specifically designed for learners.</li>
+      <li><strong>C++Now</strong> (formerly BoostCon) &mdash; smaller, more advanced conference in Aspen, Colorado. Talks on YouTube.</li>
+      <li><strong>Meeting C++</strong> &mdash; European C++ conference in Berlin. Talks on YouTube.</li>
+      <li><strong>C++ Weekly</strong> &mdash; Jason Turner&rsquo;s short-form YouTube series, one technique per episode, 8+ years running.</li>
+      <li><strong>The Cherno</strong> &mdash; game-development-flavored C++ tutorials on YouTube. Good for beginners who want a project-based path.</li>
+      <li><strong>Code Blacksmith</strong>, <strong>The Coding Train</strong>, and others for project-focused tutorials.</li>
+    </ul>
+
+    <h2>Communities</h2>
+    <ul>
+      <li><strong>r/cpp</strong> on Reddit &mdash; active community, weekly link threads</li>
+      <li><strong>#include Discord</strong> (<code>include.cpp</code>) &mdash; friendly, moderated, beginner-welcoming</li>
+      <li><strong>cpplang Slack</strong> (invite via <code>cpplang.slack.com</code>) &mdash; channels for every subtopic</li>
+      <li><strong>Stack Overflow &mdash; [c++] tag</strong> &mdash; high-quality answers on specific problems</li>
+      <li><strong>isocpp.org forums</strong> &mdash; official discussion</li>
+    </ul>
+
+    <h2>Conferences and Events</h2>
+    <table>
+      <thead><tr><th>Event</th><th>Location</th><th>Cadence</th></tr></thead>
+      <tbody>
+        <tr><td>CppCon</td><td>Aurora, CO, USA</td><td>Annual, September</td></tr>
+        <tr><td>C++Now</td><td>Aspen, CO, USA</td><td>Annual, May</td></tr>
+        <tr><td>Meeting C++</td><td>Berlin, Germany</td><td>Annual, November</td></tr>
+        <tr><td>ACCU</td><td>Bristol, UK</td><td>Annual, April</td></tr>
+        <tr><td>Core C++</td><td>Tel Aviv, Israel</td><td>Annual</td></tr>
+        <tr><td>using std::cpp</td><td>Madrid, Spain</td><td>Annual</td></tr>
+      </tbody>
+    </table>
+
+    <h2>A Reading Order That Works</h2>
+    <div class="card green">
+      <ol>
+        <li><em>A Tour of C++</em> (Stroustrup, 3rd ed.) &mdash; 1 week, serious read</li>
+        <li>learncpp.com sections 1&ndash;10 &mdash; hands-on, write code alongside</li>
+        <li><em>Effective Modern C++</em> (Meyers) &mdash; 2&ndash;3 weeks, work through every item</li>
+        <li>cppreference.com &mdash; reference as you go</li>
+        <li>C++ Core Guidelines &mdash; skim once, return to often</li>
+        <li>A real project in modern style &mdash; CMake, Conan/vcpkg, Catch2 or gtest, ASan in CI</li>
+        <li>CppCon &ldquo;Back to Basics&rdquo; track on YouTube &mdash; fill gaps</li>
+        <li><em>C++ Templates: The Complete Guide</em> or <em>C++ Concurrency in Action</em> &mdash; go deep on the area that matters for your work</li>
+      </ol>
+      <p>This progression takes several months of part-time study and produces a programmer who can read and write modern C++ confidently. It is <em>much</em> less than &ldquo;learn all of C++.&rdquo;</p>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>Perl has the Camel/Llama/Alpaca books. C++ has its own animal-free canon (Stroustrup, Meyers, Alexandrescu).</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>Python has <em>Fluent Python</em>, <em>Python Cookbook</em>; C++ has its Effective series and the Core Guidelines.</td></tr>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td>K&amp;R is 272 pages. TC++PL 4th edition is 1,376 pages. The size difference tells a story.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">C++ Core Language</a></li>
+        <li><a href="oop.html">Object-Oriented C++</a></li>
+        <li><a href="templates.html">Templates &amp; Generic Programming</a></li>
+        <li><a href="stdlib.html">Standard Template Library</a></li>
+        <li><a href="modern.html">Modern C++ (C++11&ndash;26)</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Learning Resources &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

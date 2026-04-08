@@ -982,7 +982,7 @@ mv .planning/debug/{slug}.md .planning/debug/resolved/
 **Check planning config:**
 
 ```bash
-COMMIT_PLANNING_DOCS=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js state load --raw | grep '^commit_docs=' | cut -d= -f2)
+COMMIT_PLANNING_DOCS=$(node ~/.claude/get-shit-done/bin/gsd-tools.js state load --raw | grep '^commit_docs=' | cut -d= -f2)
 ```
 
 **Commit the fix:**

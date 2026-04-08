@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education &mdash; Ada</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ada">
+  <header>
+    <h1>Learning Resources</h1>
+    <div class="subtitle">Books, tutorials, courses, and the Ada community &mdash; from first contact to DO-178C certification</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="concurrency.html">Concurrency</a>
+      <a href="history.html">History</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="safety-critical.html">Safety-Critical</a>
+      <a href="spark.html">SPARK</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html" class="active">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The hardest thing about learning Ada is getting past the verbosity. Every tutorial has a moment where a beginner says &ldquo;why do I have to write this name <em>three times</em>?&rdquo; and the answer is, in effect, <em>because the compiler is your friend and wants you to be sure</em>. Two weeks in, the verbosity stops feeling like a tax and starts feeling like armor. After a month, you start missing it when you go back to C or Python.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- LEARNING PATH                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>A Recommended Learning Path</h2>
+
+    <div class="provenance-ladder">
+      <ol>
+        <li><strong>Install GNAT and Alire.</strong> <code>alr</code> is the modern Ada package manager (since 2018). It installs GNAT and handles dependencies. On Linux: <code>curl -L https://github.com/alire-project/alire/releases/latest/download/alr-linux.zip -o alr.zip; unzip</code>. Or use the AdaCore GNAT Community Edition for a single-download experience.</li>
+        <li><strong>Read <em>Programming in Ada 2012 with a Preview of Ada 2022</em> by John Barnes.</strong> This is the single best Ada textbook ever written, and it has been continuously revised for 40 years. Start with the sequential chapters, then move to the tasking chapters. Barnes was on the Green team that designed Ada in 1979; he knows what every design decision was for.</li>
+        <li><strong>Work through <em>learn.adacore.com</em>.</strong> AdaCore&rsquo;s free online course is excellent and interactive. It runs GNAT in your browser via a WebAssembly build, so you can try examples without installing anything. Covers core Ada, Ada for embedded, SPARK, and concurrency.</li>
+        <li><strong>Read <em>Concurrent and Real-Time Programming in Ada</em> by Alan Burns and Andy Wellings.</strong> The canonical reference for Ada concurrency. If you want to understand protected objects, the Real-Time Annex, Ravenscar, and response-time analysis, this is the book. Revised for Ada 2005 and Ada 2012.</li>
+        <li><strong>Write a small concurrent program.</strong> A bounded buffer with a producer task and a consumer task is the rite of passage. Extend it to multiple producers, multiple consumers, and watch the protected object handle all the synchronization automatically.</li>
+        <li><strong>Try SPARK.</strong> Start with a simple procedure, add <code>with Pre</code> and <code>with Post</code> contracts, run <code>gnatprove</code>, and watch the SMT solvers discharge your proof obligations. The AdaCore SPARK tutorial is where most people start.</li>
+        <li><strong>Read the Ada Reference Manual (ARM 2012 or ARM 202x).</strong> Yes, the standard itself. It is dense but readable &mdash; Ada&rsquo;s reference manual is one of the more approachable programming language standards. Use it as a lookup reference.</li>
+        <li><strong>Read a real Ada codebase.</strong> AdaCore&rsquo;s GNAT compiler source is written in Ada. So is the GNATcoll library, GNAT.Sockets, many Alire packages, and a lot of open-source projects on GitHub. Reading real code is how you start thinking in Ada idioms.</li>
+        <li><strong>Subscribe to the Ada-Europe newsletter and join r/ada.</strong> The community is small but active. Questions from beginners are almost always welcomed.</li>
+        <li><strong>If you are going to use Ada professionally, get the SPARK Discovery training.</strong> AdaCore offers a multi-day course that takes you from zero to proving absence of run-time errors on real code. Worth the money if your employer is paying.</li>
+      </ol>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- BOOKS                                                         -->
+    <!-- ============================================================ -->
+
+    <h2>The Canonical Books</h2>
+
+    <table>
+      <thead><tr><th>Title</th><th>Author(s)</th><th>Year</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Programming in Ada 2012 (with a preview of Ada 2022)</strong></td>
+          <td>John Barnes</td>
+          <td>Multiple editions, latest 2022</td>
+          <td>The definitive textbook, continuously revised since 1982</td>
+        </tr>
+        <tr>
+          <td><strong>Concurrent and Real-Time Programming in Ada</strong></td>
+          <td>Alan Burns &amp; Andy Wellings</td>
+          <td>3rd edition, 2007</td>
+          <td>The tasking and real-time reference</td>
+        </tr>
+        <tr>
+          <td><strong>Real-Time Systems and Programming Languages</strong></td>
+          <td>Alan Burns &amp; Andy Wellings</td>
+          <td>4th edition, 2009</td>
+          <td>Real-time theory alongside Ada practice</td>
+        </tr>
+        <tr>
+          <td><strong>Ada 2012 Reference Manual (ARM)</strong></td>
+          <td>ISO/IEC 8652:2012</td>
+          <td>2012 (2023 update)</td>
+          <td>The standard itself, freely downloadable from ada-auth.org</td>
+        </tr>
+        <tr>
+          <td><strong>Rationale for Ada 2012</strong></td>
+          <td>John Barnes</td>
+          <td>2013</td>
+          <td>Design decisions and motivation for each feature</td>
+        </tr>
+        <tr>
+          <td><strong>High Integrity Software: The SPARK Approach</strong></td>
+          <td>John Barnes</td>
+          <td>2003</td>
+          <td>The classic SPARK book (predates SPARK 2014 but still useful)</td>
+        </tr>
+        <tr>
+          <td><strong>Building High Integrity Applications with SPARK</strong></td>
+          <td>John W. McCormick &amp; Peter C. Chapin</td>
+          <td>2015</td>
+          <td>Modern SPARK 2014 textbook</td>
+        </tr>
+        <tr>
+          <td><strong>Ada 95 Problem Solving and Program Design</strong></td>
+          <td>Michael Feldman &amp; Elliot Koffman</td>
+          <td>1999 (3rd ed)</td>
+          <td>Classic CS-1 textbook using Ada 95</td>
+        </tr>
+        <tr>
+          <td><strong>Ada Distilled</strong></td>
+          <td>Richard Riehle</td>
+          <td>Multiple editions</td>
+          <td>Short, free introduction to Ada 95</td>
+        </tr>
+        <tr>
+          <td><strong>Ada for Software Engineers</strong></td>
+          <td>Mordechai Ben-Ari</td>
+          <td>2nd edition, 2009</td>
+          <td>Concise, rigorous, aimed at working programmers</td>
+        </tr>
+        <tr>
+          <td><strong>Real-Time Concurrency and Programming (Ada version)</strong></td>
+          <td>Luis Miguel Pinho (ed.)</td>
+          <td>Multiple papers</td>
+          <td>Academic treatment of real-time Ada</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- ONLINE                                                        -->
+    <!-- ============================================================ -->
+
+    <h2>Online Resources</h2>
+
+    <table>
+      <thead><tr><th>Resource</th><th>Type</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>learn.adacore.com</strong></td><td>Interactive course</td><td>AdaCore&rsquo;s free tutorial platform; runs GNAT in the browser; covers core Ada, embedded, SPARK, concurrency</td></tr>
+        <tr><td><strong>docs.adacore.com</strong></td><td>Reference</td><td>GNAT manuals, GNATprove user guide, all toolchain documentation</td></tr>
+        <tr><td><strong>ada-auth.org</strong></td><td>Reference</td><td>Ada Reference Manual, Rationales, standard history, ISO standards</td></tr>
+        <tr><td><strong>adaic.org</strong></td><td>Portal</td><td>Ada Information Clearinghouse; links to everything</td></tr>
+        <tr><td><strong>Alire (alire.ada.dev)</strong></td><td>Package manager</td><td>Modern Ada/SPARK package registry, 300+ libraries as of 2026</td></tr>
+        <tr><td><strong>GNAT Community Edition</strong></td><td>Toolchain</td><td>Free AdaCore compiler and IDE, updated yearly</td></tr>
+        <tr><td><strong>Ada on Rosetta Code</strong></td><td>Code examples</td><td>Hundreds of small programs in Ada, good for idiom learning</td></tr>
+        <tr><td><strong>r/ada (Reddit)</strong></td><td>Community</td><td>Active, friendly, beginner-welcoming</td></tr>
+        <tr><td><strong>comp.lang.ada (Usenet)</strong></td><td>Community</td><td>The old-school forum, still populated by experts, archived on Google Groups</td></tr>
+        <tr><td><strong>#ada on Libera.Chat</strong></td><td>IRC</td><td>Real-time chat with working Ada programmers</td></tr>
+        <tr><td><strong>Ada-Europe</strong></td><td>Conference</td><td>Annual conference since 1980s; papers published in Springer LNCS</td></tr>
+        <tr><td><strong>Ada User Journal</strong></td><td>Journal</td><td>Ada Europe&rsquo;s quarterly, covers language, implementation, applications</td></tr>
+        <tr><td><strong>HILT (High Integrity Language Technology)</strong></td><td>Conference</td><td>ACM workshop on high-integrity languages and tools</td></tr>
+        <tr><td><strong>SPARK Discovery series</strong></td><td>Tutorial</td><td>AdaCore&rsquo;s guided SPARK tutorial with worked examples</td></tr>
+        <tr><td><strong>Ada FAQ</strong></td><td>Reference</td><td>Comp.lang.ada FAQ, maintained by Magnus Kempe</td></tr>
+        <tr><td><strong>Ada User Group</strong> (regional)</td><td>Meetups</td><td>London, Paris, Stockholm, Madrid, and others</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- FIRST SESSION                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>Your First Session</h2>
+
+    <p>Install Alire and use it to bootstrap a project:</p>
+
+    <pre><code>$ alr init --bin hello
+$ cd hello
+$ alr build
+$ alr run
+
+Hello, world!</code></pre>
+
+    <p>The generated <code>src/hello.adb</code> looks like this:</p>
+
+    <pre><code>with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Hello is
+begin
+   Put_Line ("Hello, world!");
+end Hello;</code></pre>
+
+    <p>Now try a concurrent version &mdash; save this as <code>src/hello.adb</code>:</p>
+
+    <pre><code>with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Hello is
+   task type Worker (ID : Positive);
+
+   task body Worker is
+   begin
+      for I in 1 .. 3 loop
+         Put_Line ("Worker" &amp; Positive'Image (ID) &amp;
+                   " iteration" &amp; Integer'Image (I));
+         delay 0.05;
+      end loop;
+   end Worker;
+
+   W1 : Worker (ID =&gt; 1);
+   W2 : Worker (ID =&gt; 2);
+   W3 : Worker (ID =&gt; 3);
+begin
+   Put_Line ("Main started");
+end Hello;</code></pre>
+
+    <p>Run it. Three worker tasks start in parallel, each prints three messages, and the main procedure waits (automatically) for all of them to finish before returning. No explicit join. No thread library. Just three task declarations.</p>
+
+    <p>Congratulations &mdash; you have now used more concurrency primitives than the majority of working programmers use in a year.</p>
+
+    <!-- ============================================================ -->
+    <!-- COURSES                                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Courses and Academic Programs</h2>
+
+    <p>Ada is taught in these contexts as of 2026:</p>
+    <ul>
+      <li><strong>European universities with safety-critical or real-time programs.</strong> University of York (Burns/Wellings for decades), University of Padua, IRISA Rennes, Universidad Polit&eacute;cnica de Madrid, Technical University of Munich, KU Leuven, Uppsala University.</li>
+      <li><strong>US military academies and defense-affiliated programs.</strong> Naval Postgraduate School, West Point, several state universities with DoD grants.</li>
+      <li><strong>Industrial training programs.</strong> AdaCore runs multi-day courses in the US and Europe. EuroAda training events. In-house Airbus, Thales, and BAE training.</li>
+      <li><strong>MOOCs.</strong> AdaCore&rsquo;s learn.adacore.com covers the interactive learning side without a formal course structure.</li>
+      <li><strong>Summer schools.</strong> The ESA-funded Summer School on Real-Time Systems (SSRTS) at different European locations.</li>
+    </ul>
+
+    <!-- ============================================================ -->
+    <!-- COMMUNITY                                                     -->
+    <!-- ============================================================ -->
+
+    <h2>The Community</h2>
+
+    <div class="card bronze">
+      <p><strong>Small, technical, older-skewing, globally distributed.</strong> The Ada community is perhaps a few thousand active practitioners worldwide, heavily concentrated in European aerospace, defense, and rail industries. It skews older than the average programming community &mdash; the median Ada programmer has been in the industry for 20+ years &mdash; and it is unusually friendly to newcomers in consequence. Questions from beginners get patient, detailed answers.</p>
+      <p><strong>The flagship organizations:</strong></p>
+      <ul>
+        <li><strong>Ada-Europe</strong> &mdash; European organization hosting the annual conference and publishing the Ada User Journal since the 1980s.</li>
+        <li><strong>ACM SIGAda</strong> &mdash; historically the ACM&rsquo;s Ada special interest group; hosted HILT until its dormancy in the late 2010s.</li>
+        <li><strong>AdaCore</strong> &mdash; the commercial sponsor and the largest employer of Ada programmers worldwide. Organizes Ada Users Day annually.</li>
+        <li><strong>Ada Information Clearinghouse</strong> (AdaIC) &mdash; adaic.org, the portal for standards and community news.</li>
+      </ul>
+      <p><strong>Places to ask questions:</strong></p>
+      <ul>
+        <li><strong>r/ada on Reddit</strong> &mdash; active, friendly, responds within hours.</li>
+        <li><strong>Stack Overflow, tag <code>ada</code></strong> &mdash; smaller than many language tags but well-curated.</li>
+        <li><strong>Ada-Europe mailing lists</strong> &mdash; academic and industrial, low-volume.</li>
+        <li><strong>AdaCore&rsquo;s GitHub Discussions</strong> &mdash; good for tooling questions.</li>
+        <li><strong>comp.lang.ada</strong> &mdash; the old Usenet group is dormant but the archive is valuable.</li>
+        <li><strong>#ada on Libera.Chat</strong> &mdash; small, real-time, experts present.</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TIPS                                                          -->
+    <!-- ============================================================ -->
+
+    <h2>Tips for Surviving the Learning Curve</h2>
+
+    <ol>
+      <li><strong>Embrace verbosity.</strong> Writing out the full name of a procedure, specifying parameter modes, and declaring types precisely feels tedious at first. It is the price of the compile-time guarantees that make Ada worth using. Stop fighting it.</li>
+      <li><strong>Use <code>with</code> and <code>use</code> carefully.</strong> <code>with</code> imports a package (you must use qualified names). <code>use</code> opens a package into your scope. Beginners over-use <code>use</code> and end up with ambiguity errors. Experienced Ada programmers use <code>use type</code> and selective <code>use</code> at subprogram scope.</li>
+      <li><strong>Define types for every quantity.</strong> Don&rsquo;t pass <code>Integer</code> around. Define <code>type Temperature_C is range -40 .. 120;</code>. The compiler will catch bugs you never knew you were making.</li>
+      <li><strong>Use <code>pragma Assert</code> and <code>Pre</code>/<code>Post</code>.</strong> Contracts in Ada 2012 are the cheapest formal verification available. Turn them on; let them catch your off-by-one errors at runtime; if you want more, use SPARK to prove them statically.</li>
+      <li><strong>Learn packages before anything else.</strong> Everything in Ada lives in a package. Understanding <code>package</code> / <code>package body</code> / <code>private</code> is the prerequisite for reading anyone else&rsquo;s Ada code.</li>
+      <li><strong>Read the error messages slowly.</strong> GNAT&rsquo;s errors are dense but precise. They name the exact line, the exact type mismatch, and often the fix. Don&rsquo;t skim them.</li>
+      <li><strong>Use Alire.</strong> The pre-Alire days of Ada dependency management were a mess. Alire (<code>alr</code>) is the modern answer and it works well. Use it from your first project.</li>
+      <li><strong>When you get to concurrency, start with protected objects.</strong> Rendezvous feels more fundamental but it is harder to get right. Protected objects are the primary synchronization primitive for modern Ada and they handle 90% of cases cleanly.</li>
+      <li><strong>Try SPARK early.</strong> Don&rsquo;t wait until &ldquo;you really need it.&rdquo; Adding a few contracts to a small program and running <code>gnatprove</code> is a revelation. You will understand Ada&rsquo;s philosophy much faster once you have seen the compiler prove something about your code.</li>
+      <li><strong>Read John Barnes twice.</strong> First pass: skim to understand the language. Second pass: read slowly to understand the design decisions. Barnes is one of the designers; his explanations of <em>why</em> are unique.</li>
+    </ol>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">The Core Language</a></li>
+        <li><a href="concurrency.html">Concurrency &amp; Real-Time</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="implementations.html">Implementations &amp; Tooling</a></li>
+        <li><a href="safety-critical.html">Safety-Critical Applications</a></li>
+        <li><a href="spark.html">SPARK &amp; Formal Verification</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Ada &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

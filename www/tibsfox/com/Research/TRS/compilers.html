@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Compiler Implementations &mdash; Trace Scheduling &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-trs">
+  <header>
+    <h1>Modern Compiler Implementations</h1>
+    <div class="subtitle">GCC, LLVM, IMPACT, Trimaran, Open64 &mdash; The Compiler Infrastructure That Implements Trace Scheduling and Its Descendants</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="algorithms.html">Algorithms</a>
+      <a href="vliw.html">VLIW</a>
+      <a href="ai-crossover.html">AI Crossover</a>
+      <a href="compilers.html" class="active">Compilers</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;Even though pure VLIW is niche, trace scheduling concepts &mdash; superblock formation, if-conversion, PGO, software pipelining &mdash; are in every major compiler.&rdquo;
+    </blockquote>
+
+    <!-- ===== Section 1: GCC Scheduling ===== -->
+    <h2>GCC &mdash; The GNU Compiler Collection</h2>
+
+    <div class="card">
+      <p>GCC implements instruction scheduling in two passes, both controlled by the <code>-fschedule-insns</code> and <code>-fschedule-insns2</code> flags. The first pass runs before register allocation; the second runs after. The scheduling engine is a list-scheduling framework that uses machine-specific descriptions to model functional units, latencies, and pipeline hazards.</p>
+    </div>
+
+    <h3>Key Scheduling Infrastructure</h3>
+
+    <table>
+      <thead><tr><th>Component</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>-fschedule-insns</code></td><td>Pre-register-allocation scheduling. Aggressive ILP extraction; may increase register pressure.</td></tr>
+        <tr><td><code>-fschedule-insns2</code></td><td>Post-register-allocation scheduling. Cleans up spill code, schedules around register constraints. This is the pass most users encounter.</td></tr>
+        <tr><td>Superblock formation</td><td>GCC forms superblocks for scheduling regions that span multiple basic blocks. Tail duplication eliminates side entries.</td></tr>
+        <tr><td>If-conversion</td><td>GCC performs if-conversion to transform short conditional branches into predicated or conditional-move sequences, enabling hyperblock-like scheduling on targets that support conditional execution (ARM, Itanium).</td></tr>
+        <tr><td>Machine descriptions (<code>.md</code> files)</td><td>Each target architecture defines its functional units, instruction latencies, pipeline stages, and resource constraints in a <code>.md</code> (machine description) file. The scheduler uses these to model resource availability.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Profile-Guided Optimization in GCC</h3>
+
+    <p>GCC supports PGO via a two-phase process:</p>
+
+    <ol>
+      <li><code>-fprofile-generate</code> &mdash; Instruments the program to record branch frequencies, function call counts, and value profiles during execution.</li>
+      <li><code>-fprofile-use</code> &mdash; Recompiles using the collected profile data to guide:
+        <ul>
+          <li>Block reordering (hot blocks first for better I-cache behavior)</li>
+          <li>Function inlining decisions (inline hot callees)</li>
+          <li>Superblock formation and trace selection (schedule the hot path)</li>
+          <li>Loop unrolling decisions (unroll hot loops more aggressively)</li>
+          <li>Branch hint generation (for targets that support them)</li>
+        </ul>
+      </li>
+    </ol>
+
+    <p>This two-phase process descends directly from Fisher&rsquo;s profile-driven compilation idea (1981). PGO typically improves GCC-compiled code by 10&ndash;20% on benchmarks with representative training inputs.</p>
+
+    <!-- ===== Section 2: LLVM Scheduling ===== -->
+    <h2>LLVM &mdash; The LLVM Compiler Infrastructure</h2>
+
+    <div class="card blue">
+      <p>LLVM&rsquo;s scheduling infrastructure is more modular than GCC&rsquo;s, with multiple scheduling passes and a pluggable framework for machine-specific scheduling strategies.</p>
+    </div>
+
+    <h3>Key Scheduling Components</h3>
+
+    <table>
+      <thead><tr><th>Component</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>SelectionDAGISel</code></td><td>Instruction selection via DAG pattern matching. Converts LLVM IR to target-specific machine instructions organized as a DAG. Initial scheduling happens here.</td></tr>
+        <tr><td><code>MachineScheduler</code></td><td>The primary post-instruction-selection scheduler. Uses a bidirectional list-scheduling approach (can schedule top-down, bottom-up, or both). Tracks register pressure during scheduling to avoid excessive spilling.</td></tr>
+        <tr><td><code>ScheduleDAG</code> framework</td><td>The generic DAG-based scheduling framework. Builds the dependency DAG (SUnit nodes, SDep edges with latency information), computes critical paths, and drives the scheduling heuristic.</td></tr>
+        <tr><td><code>PostRAScheduler</code></td><td>Post-register-allocation scheduling pass. Handles scheduling of spill/reload code and final instruction ordering.</td></tr>
+        <tr><td>TableGen (<code>.td</code> files)</td><td>LLVM uses TableGen to define machine descriptions declaratively. Each target describes its instruction set, functional units (via <code>SchedModel</code>), latencies, and pipeline resources. The scheduler reads these descriptions at compile time.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>LLVM PGO</h3>
+
+    <p>LLVM supports PGO through instrumentation-based profiling (<code>-fprofile-instr-generate</code> / <code>-fprofile-instr-use</code>) and sampling-based profiling (via <code>llvm-profdata</code> and AutoFDO). PGO instrumentation attaches precise branch-weight and indirect-call target metadata directly to IR instructions, driving block scheduling, hot/cold splitting, branch hint reordering, and inlining decisions.</p>
+
+    <!-- ===== Section 3: The IMPACT Compiler ===== -->
+    <h2>The IMPACT Compiler (UIUC)</h2>
+
+    <div class="card amber">
+      <p><strong>The research compiler that defined modern ILP techniques.</strong> Built by <strong>Wen-mei Hwu&rsquo;s</strong> IMPACT group at the University of Illinois at Urbana-Champaign, IMPACT was the vehicle for the superblock and hyperblock research that refined Fisher&rsquo;s trace scheduling into practical compiler technology.</p>
+    </div>
+
+    <h3>Key Contributions from IMPACT</h3>
+
+    <ul>
+      <li><strong>Superblock formation</strong> &mdash; trace selection + tail duplication to create single-entry, multiple-exit scheduling regions (Hwu, Mahlke, Chen, 1993)</li>
+      <li><strong>Hyperblock formation</strong> &mdash; if-conversion + predication to merge multiple paths into a single predicated stream (Mahlke, 1992)</li>
+      <li><strong>Modulo scheduling for superblocks</strong> &mdash; extending software pipelining beyond simple loops to complex loop bodies with internal control flow</li>
+      <li><strong>Speculative execution support</strong> &mdash; compiler techniques for safe and unsafe speculation, deferred exception handling</li>
+      <li><strong>Profile-guided compilation</strong> &mdash; extensive use of profiling data to guide all optimization decisions</li>
+    </ul>
+
+    <p>IMPACT was not a production compiler &mdash; it targeted research architectures (HPL-PD, the Itanium-like experimental machine description). But its algorithms were adopted by production compilers: GCC&rsquo;s superblock formation, LLVM&rsquo;s if-conversion, and the Intel compiler&rsquo;s Itanium scheduling all trace their lineage to IMPACT research.</p>
+
+    <!-- ===== Section 4: Trimaran ===== -->
+    <h2>Trimaran (1999)</h2>
+
+    <p><strong>Trimaran</strong> was an open-source compiler infrastructure for ILP research, developed as a successor to the IMPACT compiler by a consortium including UIUC, NYU, and HP Labs. It provided a complete compilation and simulation environment for EPIC/VLIW research.</p>
+
+    <h3>Architecture</h3>
+
+    <table>
+      <thead><tr><th>Component</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Elcor</strong></td><td>The back-end compiler. Performs instruction scheduling (list scheduling, superblock scheduling, modulo scheduling), register allocation, and code emission for the HPL-PD machine description.</td></tr>
+        <tr><td><strong>HPL-PD</strong></td><td>The machine description language developed at HP Labs for parameterized VLIW/EPIC machine models. Specifies functional units, latencies, register files, predication support, and speculation support.</td></tr>
+        <tr><td><strong>Simu</strong></td><td>A cycle-accurate simulator for HPL-PD machines. Allows evaluating the performance of compiled code without building hardware.</td></tr>
+        <tr><td><strong>OpenIMPACT</strong></td><td>The front-end and middle-end (derived from IMPACT). Handles parsing, optimization, superblock/hyperblock formation, and profile-guided decisions.</td></tr>
+      </tbody>
+    </table>
+
+    <p>Trimaran was widely used in academic research throughout the 2000s. Many Ph.D. dissertations on VLIW scheduling, predication, and compiler optimization used Trimaran as their experimental platform. The project is no longer actively maintained but remains a valuable reference for ILP research.</p>
+
+    <!-- ===== Section 5: Open64 ===== -->
+    <h2>Open64 / Pro64</h2>
+
+    <p><strong>Open64</strong> (originally <strong>Pro64</strong>) was SGI&rsquo;s and Intel&rsquo;s open-source compiler for IA-64 (Itanium), released under the GPL. It was one of the most sophisticated production compilers ever built for a VLIW-like target.</p>
+
+    <h3>Key Features for VLIW/EPIC</h3>
+
+    <ul>
+      <li><strong>Global instruction scheduling</strong> with superblock and hyperblock support</li>
+      <li><strong>Software pipelining</strong> (modulo scheduling) with rotating register file support for Itanium</li>
+      <li><strong>If-conversion</strong> using Itanium&rsquo;s 64 predicate registers</li>
+      <li><strong>Speculative code motion</strong> using Itanium&rsquo;s ld.s (speculative load) and ld.a/chk.a (advanced load/check) instructions</li>
+      <li><strong>Inter-procedural analysis and optimization</strong> (IPA) for whole-program scheduling</li>
+      <li><strong>Aggressive PGO</strong> with feedback-directed optimization at every stage</li>
+    </ul>
+
+    <p>Open64 demonstrated what was possible with a fully optimizing VLIW/EPIC compiler, but also exposed the limits: even with aggressive optimization, Itanium code was often full of NOPs on irregular workloads. The compiler could not overcome the fundamental information deficit &mdash; runtime behavior that was unknowable at compile time.</p>
+
+    <!-- ===== Section 6: Profile-Guided Optimization ===== -->
+    <h2>Profile-Guided Optimization (PGO / FDO)</h2>
+
+    <div class="card">
+      <p><strong>The chicken-and-egg problem.</strong> Trace scheduling needs profile data to select the right traces. Profile data requires running the program. But you need to compile the program before you can run it. The solution: compile twice.</p>
+    </div>
+
+    <h3>The PGO Pipeline</h3>
+
+    <ol>
+      <li><strong>Instrumented build.</strong> Compile with profiling instrumentation. The resulting binary records branch frequencies, function call counts, and value profiles during execution.</li>
+      <li><strong>Training runs.</strong> Execute the instrumented binary on <strong>representative inputs</strong>. The profile is only as good as the inputs &mdash; if training inputs are unrepresentative, the selected traces will be suboptimal.</li>
+      <li><strong>Profile analysis.</strong> Process the raw profiling data into a profile database (edge weights, block frequencies, call frequencies).</li>
+      <li><strong>Optimized build.</strong> Recompile using the profile data. The compiler uses profile-weighted trace selection, profile-guided inlining, profile-guided block placement, and profile-guided loop optimization.</li>
+    </ol>
+
+    <h3>The Representative Inputs Problem</h3>
+
+    <p>PGO&rsquo;s effectiveness depends entirely on the quality of the training inputs. If the training workload differs from the production workload, the compiler optimizes for the wrong traces. This is the compiler analog of the AI orchestration challenge of optimizing for the wrong task distribution.</p>
+
+    <p>Solutions include:</p>
+    <ul>
+      <li><strong>Multiple training runs</strong> with diverse inputs, merging profiles</li>
+      <li><strong>AutoFDO</strong> (Automatic Feedback-Directed Optimization) &mdash; uses hardware performance counters and sampling to collect profiles from production binaries without instrumentation overhead</li>
+      <li><strong>BOLT</strong> (Binary Optimization and Layout Tool, developed at Facebook/Meta) &mdash; post-link-time optimization using production profiles to reorder code, improving I-cache behavior</li>
+    </ul>
+
+    <!-- ===== Section 7: Machine Descriptions ===== -->
+    <h2>Machine Descriptions &mdash; How Compilers Model VLIW Machines</h2>
+
+    <p>The compiler&rsquo;s scheduling algorithm needs a formal model of the target machine. This <strong>machine description</strong> specifies:</p>
+
+    <table>
+      <thead><tr><th>Element</th><th>Description</th><th>Example (TI C6x)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Functional units</strong></td><td>Types and counts of execution units</td><td>2&times; .L (logic), 2&times; .S (shift), 2&times; .M (multiply), 2&times; .D (data/load-store)</td></tr>
+        <tr><td><strong>Instruction latencies</strong></td><td>Cycles from issue to result availability</td><td>Integer add: 1, multiply: 2, load: 5</td></tr>
+        <tr><td><strong>Reservation tables</strong></td><td>Which functional unit(s) an instruction occupies and for how many cycles</td><td>Multiply occupies .M for 1 cycle, result available after 2</td></tr>
+        <tr><td><strong>Issue width</strong></td><td>Maximum operations per instruction word</td><td>8 operations per 256-bit fetch packet</td></tr>
+        <tr><td><strong>Register file</strong></td><td>Number and types of registers</td><td>32 general-purpose registers per side (A and B banks)</td></tr>
+        <tr><td><strong>Pipeline constraints</strong></td><td>Cross-path restrictions, bank conflicts, branch delay slots</td><td>1 cross-path read per cycle per side</td></tr>
+      </tbody>
+    </table>
+
+    <p>In GCC, machine descriptions are encoded in <code>.md</code> files using a Lisp-like syntax. In LLVM, they are encoded in <code>.td</code> (TableGen) files with a declarative syntax. Both systems generate scheduling tables at compiler build time that the runtime scheduler consults.</p>
+
+    <!-- ===== Section 8: Ideas That Survived ===== -->
+    <h2>Trace Scheduling Ideas That Survived into Modern Compilers</h2>
+
+    <div class="card blue">
+      <p><strong>The lasting legacy.</strong> Even though pure VLIW is niche, trace scheduling concepts are in <strong>every major compiler</strong>. The ideas Fisher pioneered became the foundation of modern compiler scheduling, regardless of target architecture.</p>
+    </div>
+
+    <table>
+      <thead><tr><th>Concept</th><th>Origin</th><th>Modern Compiler Usage</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Profile-guided optimization</strong></td><td>Fisher, 1981</td><td>GCC (<code>-fprofile-use</code>), LLVM (PGO, AutoFDO), ICC, MSVC. Standard practice for performance-critical software.</td></tr>
+        <tr><td><strong>Superblock formation</strong></td><td>Hwu/Mahlke, 1992</td><td>GCC superblock pass, LLVM block placement. Used for both scheduling and code layout optimization.</td></tr>
+        <tr><td><strong>If-conversion</strong></td><td>Mahlke hyperblock, 1992</td><td>GCC if-conversion pass, LLVM SimplifyCFG + select lowering. Transforms branches to conditional moves/selects on all targets.</td></tr>
+        <tr><td><strong>Software pipelining</strong></td><td>Rau, 1994</td><td>GCC modulo scheduling (for IA-64, PowerPC, SPARC), LLVM MachinePipeliner. Essential for VLIW DSP targets.</td></tr>
+        <tr><td><strong>Global code motion</strong></td><td>Fisher trace scheduling, 1981</td><td>GCC and LLVM move instructions across blocks in their scheduling passes. Superblock scheduling is a restricted form of trace scheduling.</td></tr>
+        <tr><td><strong>Speculative code motion</strong></td><td>IMPACT/Itanium research</td><td>GCC and LLVM support speculative scheduling on targets with hardware support (Itanium ld.s, ARM conditional execution).</td></tr>
+        <tr><td><strong>Machine description framework</strong></td><td>Fisher/ELI-512 machine model</td><td>GCC .md files, LLVM TableGen .td files. Every target architecture has a formal machine description.</td></tr>
+        <tr><td><strong>List scheduling with critical-path priority</strong></td><td>Bulldog compiler (Ellis, 1985)</td><td>The default scheduling algorithm in both GCC and LLVM. The fundamental workhorse of instruction scheduling.</td></tr>
+      </tbody>
+    </table>
+
+    <p>The irony of trace scheduling&rsquo;s legacy is that its most enduring contributions are not in VLIW compilation per se, but in the <strong>general-purpose compiler infrastructure</strong> that it inspired. PGO, superblock formation, if-conversion, and list scheduling are used every day by compilers targeting x86, ARM, RISC-V, and other superscalar architectures &mdash; architectures that use hardware, not software, for dynamic scheduling. Fisher&rsquo;s ideas live on in every compiler, even on machines he did not design them for.</p>
+
+    <!-- ===== Cross-Links ===== -->
+    <div class="cross-links">
+      <h4>Cross-Links</h4>
+      <ul>
+        <li><a href="history.html">History</a> &mdash; Fisher, the Bulldog compiler, and the origins of these techniques</li>
+        <li><a href="algorithms.html">Algorithms</a> &mdash; Detailed pseudocode for the scheduling algorithms these compilers implement</li>
+        <li><a href="vliw.html">VLIW Architectures</a> &mdash; The hardware targets: ELI-512, Multiflow, Itanium, C6x, Hexagon</li>
+        <li><a href="ai-crossover.html">AI Crossover</a> &mdash; PGO as mission-history-guided optimization, machine descriptions as chipset configurations</li>
+        <li><a href="education.html">Learn</a> &mdash; Where to learn more: LLVM scheduling docs, Hennessy &amp; Patterson, Fisher&rsquo;s papers</li>
+      </ul>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Research context.</strong> This module draws on GCC and LLVM source code and documentation, the IMPACT compiler publications (Hwu et al.), the Trimaran project documentation, the Open64/Pro64 release notes, and the PGO/AutoFDO/BOLT research papers. Compiler version details are current as of April 2026.
+    </div>
+  </main>
+
+  <footer>
+    <p>Modern Compiler Implementations &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern C++ &mdash; C++ and Object-Oriented Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cpp">
+  <header>
+    <h1>Modern C++ (C++11 &rarr; C++26)</h1>
+    <div class="subtitle">auto, Lambdas, Move Semantics, Smart Pointers, Concepts, Coroutines, Modules, Ranges</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="oop.html">OOP</a>
+      <a href="templates.html">Templates</a>
+      <a href="stdlib.html">STL</a>
+      <a href="modern.html" class="active">Modern C++</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;C++11 feels like a new language.&rdquo; &mdash; <strong>Bjarne Stroustrup</strong>. The quote is often repeated and it is not marketing. The 2011 standard genuinely changed how working programmers write the language, and every three-year standard since has continued that trajectory.
+    </blockquote>
+
+    <h2>Three Lives</h2>
+    <p>C++ has lived several lives. The first, as <strong>C with Classes</strong> (1979), was a gentle extension of C that added information hiding and constructors. The second, after the <strong>1998 standard</strong>, was an industrial-strength multi-paradigm language, but one whose idioms were still mostly C-with-templates. The third life began in <strong>2011</strong> and has not yet ended. C++11, C++14, C++17, C++20, and C++23 have together turned the language into something that &mdash; when used with modern style &mdash; looks almost nothing like the angle-bracket-and-pointer-arithmetic dialect of the 1990s.</p>
+
+    <div class="card">
+      <p><strong>The Core Guidelines philosophy</strong> (Stroustrup and Sutter):</p>
+      <ul>
+        <li>Write code that is <strong>clear, correct, fast, and maintainable</strong> &mdash; in that order, with the understanding that modern C++ usually lets you have all four.</li>
+        <li>Prefer <strong>expressing intent in types</strong>, not in comments.</li>
+        <li>Let the compiler and the standard library do the work. If you are managing memory by hand, you are usually wrong.</li>
+        <li>Use <strong>value semantics</strong> as a default. Use indirection only when you genuinely need shared identity.</li>
+      </ul>
+    </div>
+
+    <h2>C++11 &mdash; The Big Shift</h2>
+
+    <h3>auto and type deduction</h3>
+    <p>Before C++11, every variable needed its full type spelled out. With templates, that meant things like <code>std::map&lt;std::string, std::vector&lt;MyEvent&gt;&gt;::const_iterator it = events.begin();</code>. C++11&rsquo;s <code>auto</code> lets the compiler pick the exact type, including subtle const-ness and reference qualifiers:</p>
+
+<pre><code>auto it = events.begin();
+auto w  = std::make_unique&lt;Widget&gt;(42, "hello");
+const auto&amp; row = matrix[i];</code></pre>
+
+    <h3>Range-based for</h3>
+    <p>One of the most-used C++11 features. Eliminated an entire category of off-by-one bugs. Works on any type with <code>begin()</code>/<code>end()</code>:</p>
+
+<pre><code>for (const auto&amp; event : events) {
+    process(event);
+}</code></pre>
+
+    <h3>Lambda expressions</h3>
+    <p>Anonymous function objects that made the standard algorithms pleasant. The square brackets are the <strong>capture list</strong>:</p>
+
+<pre><code>auto threshold = 5;
+auto count = std::count_if(nums.begin(), nums.end(),
+    [threshold](int n) { return n &gt; threshold; });
+
+// Captures:  []   nothing
+//            [=]  everything by value
+//            [&amp;]  everything by reference
+//            [x, &amp;y]  mix</code></pre>
+
+    <p>C++14 added <strong>generic lambdas</strong> (<code>auto</code> parameters). C++20 added <strong>template parameter lists</strong> for lambdas and several refinements.</p>
+
+    <h3>nullptr, enum class, = default / = delete</h3>
+
+<pre><code>void f(int);
+void f(char*);
+f(nullptr);                     // unambiguous — picks the pointer overload
+
+enum class Color { Red, Green, Blue };
+enum class Signal { Red, Yellow, Green };
+Color c = Color::Red;           // must qualify; no silent int conversion
+
+struct NonCopyable {
+    NonCopyable() = default;
+    NonCopyable(const NonCopyable&amp;) = delete;
+    NonCopyable&amp; operator=(const NonCopyable&amp;) = delete;
+};</code></pre>
+
+    <h2>Smart Pointers as Memory Safety</h2>
+    <p>The Core Guidelines are blunt: <strong>in modern C++, you should rarely if ever write <code>new</code> or <code>delete</code> yourself.</strong></p>
+
+    <table>
+      <thead><tr><th>Tool</th><th>Use when</th></tr></thead>
+      <tbody>
+        <tr><td><code>std::unique_ptr&lt;T&gt;</code></td><td>The default. Single owner, move-only, zero overhead.</td></tr>
+        <tr><td><code>std::shared_ptr&lt;T&gt;</code></td><td>Genuine shared ownership. Costs atomic ref counting.</td></tr>
+        <tr><td><code>std::weak_ptr&lt;T&gt;</code></td><td>Break shared ownership cycles; non-owning observer.</td></tr>
+        <tr><td>Raw <code>T*</code></td><td>Non-owning observation only. Prefer references when null is not allowed.</td></tr>
+        <tr><td><code>T&amp;</code></td><td>Non-owning reference to an object known to exist.</td></tr>
+      </tbody>
+    </table>
+
+<pre><code>auto widget = std::make_unique&lt;Widget&gt;(42, "hello");
+// widget owns the Widget; destroyed when widget goes out of scope
+std::unique_ptr&lt;Widget&gt; moved = std::move(widget);    // ownership transfer
+
+auto sp = std::make_shared&lt;Widget&gt;(42, "hello");
+auto sp2 = sp;                                         // refcount = 2</code></pre>
+
+    <h2>Move Semantics and Perfect Forwarding</h2>
+    <p>Move semantics is the foundation under all smart pointer work. Some objects own resources that are expensive to copy but cheap to <em>transfer</em>. A <strong>move constructor</strong> takes an rvalue reference and steals the source&rsquo;s resources, leaving it in a valid-but-unspecified state.</p>
+
+<pre><code>// Move constructor steals the heap buffer
+Buffer(Buffer&amp;&amp; other) noexcept
+    : data_(other.data_), size_(other.size_) {
+    other.data_ = nullptr;
+    other.size_ = 0;
+}
+
+// std::move is a CAST, not a function that moves
+std::vector&lt;std::string&gt; dest;
+dest.push_back(std::move(source));   // source is now valid-but-unspecified
+
+// Perfect forwarding: preserve value category through a generic function
+template &lt;typename T, typename... Args&gt;
+auto make(Args&amp;&amp;... args) {
+    return T(std::forward&lt;Args&gt;(args)...);
+}</code></pre>
+
+    <div class="card green">
+      <p><strong>Guaranteed copy elision</strong> (C++17): a function that returns a prvalue cannot invoke a copy or move constructor at all &mdash; the returned object is constructed directly into the caller&rsquo;s storage. This makes functions that return non-copyable, non-moveable types legal and useful.</p>
+    </div>
+
+    <h2>Concurrency (C++11 &rarr; C++20)</h2>
+    <p>Before C++11, concurrency was a platform problem: POSIX pthreads, Win32 threads, or Boost.Thread, and you hoped the optimizer didn&rsquo;t reorder loads and stores in ways that broke your locks. <strong>C++11 adopted a memory model</strong> that defines what concurrent access means, what counts as a data race (always UB), and what synchronization primitives establish <em>happens-before</em>. It added a standard threading library at the same time:</p>
+
+    <table>
+      <thead><tr><th>Header / Type</th><th>Standard</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>std::thread</code></td><td>C++11</td><td>A thread of execution</td></tr>
+        <tr><td><code>std::mutex</code>, <code>recursive_mutex</code>, <code>shared_mutex</code> (C++17)</td><td>C++11/17</td><td>Locks</td></tr>
+        <tr><td><code>std::lock_guard</code>, <code>unique_lock</code>, <code>scoped_lock</code> (C++17)</td><td>C++11/17</td><td>RAII lock wrappers</td></tr>
+        <tr><td><code>std::condition_variable</code></td><td>C++11</td><td>Wait/notify</td></tr>
+        <tr><td><code>std::atomic&lt;T&gt;</code></td><td>C++11</td><td>Lock-free atomics with explicit memory ordering</td></tr>
+        <tr><td><code>std::future</code>, <code>promise</code>, <code>async</code>, <code>packaged_task</code></td><td>C++11</td><td>Async result protocol</td></tr>
+        <tr><td><code>std::jthread</code></td><td>C++20</td><td>Joining thread with cooperative cancellation (<code>stop_token</code>)</td></tr>
+        <tr><td><code>std::barrier</code>, <code>latch</code>, <code>counting_semaphore</code>, <code>binary_semaphore</code></td><td>C++20</td><td>Coordination primitives</td></tr>
+        <tr><td><code>std::atomic_ref&lt;T&gt;</code></td><td>C++20</td><td>Atomic ops on objects you don&rsquo;t own</td></tr>
+        <tr><td><code>co_await</code>, <code>co_yield</code>, <code>co_return</code>, <code>&lt;coroutine&gt;</code></td><td>C++20</td><td>Low-level coroutine machinery</td></tr>
+        <tr><td><code>std::generator&lt;T&gt;</code></td><td>C++23</td><td>First standard coroutine type</td></tr>
+      </tbody>
+    </table>
+
+<pre><code>#include &lt;future&gt;
+
+int slow_compute(int n) { return n * n; }
+
+std::future&lt;int&gt; f = std::async(std::launch::async, slow_compute, 12);
+// do other work ...
+int result = f.get();</code></pre>
+
+    <h2>C++14 &mdash; Refinement</h2>
+    <ul>
+      <li><strong>Generic lambdas</strong> &mdash; <code>[](auto x, auto y) { return x + y; }</code></li>
+      <li><strong><code>std::make_unique&lt;T&gt;()</code></strong> &mdash; was missing from C++11 for no good reason</li>
+      <li><strong>Return type deduction for functions</strong> &mdash; <code>auto f() { return expr; }</code></li>
+      <li><strong>Variable templates</strong> &mdash; <code>template &lt;typename T&gt; constexpr T pi = T(3.14159...);</code></li>
+      <li><strong>Relaxed <code>constexpr</code></strong> &mdash; multiple statements, if/for/while allowed in constexpr functions</li>
+    </ul>
+
+    <h2>C++17 &mdash; The Practical Standard</h2>
+    <ul>
+      <li><strong><code>std::optional</code>, <code>std::variant</code>, <code>std::any</code></strong> &mdash; vocabulary types for sum types and type-erased values</li>
+      <li><strong>Structured bindings</strong> &mdash; <code>auto [key, value] = *map.begin();</code></li>
+      <li><strong><code>if constexpr</code></strong> &mdash; compile-time branches inside templates</li>
+      <li><strong>Parallel algorithms</strong> &mdash; execution policies for most of <code>&lt;algorithm&gt;</code></li>
+      <li><strong><code>std::filesystem</code></strong> &mdash; from Boost.Filesystem into std</li>
+      <li><strong>Fold expressions</strong> &mdash; <code>(args + ...)</code> for variadic templates</li>
+      <li><strong>Guaranteed copy elision</strong> &mdash; return prvalues now construct in place</li>
+      <li><strong><code>std::string_view</code></strong> &mdash; non-owning view over a character sequence</li>
+      <li><strong>Nested namespaces</strong> &mdash; <code>namespace a::b::c { ... }</code></li>
+    </ul>
+
+    <h2>C++20 &mdash; The Big Four</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Concepts</h4>
+        <p>Named, checkable constraints on template parameters. Better error messages. <code>template &lt;std::integral T&gt;</code>.</p>
+      </div>
+      <div class="pillar">
+        <h4>Modules</h4>
+        <p>An alternative to <code>#include</code>. Faster compilation, macro hygiene, explicit interfaces. <code>import std;</code> (C++23 extension).</p>
+      </div>
+      <div class="pillar">
+        <h4>Coroutines</h4>
+        <p>Stackless coroutines via <code>co_await</code>/<code>co_yield</code>/<code>co_return</code>. Low-level machinery; library authors provide the high-level types.</p>
+      </div>
+      <div class="pillar">
+        <h4>Ranges</h4>
+        <p>Eric Niebler&rsquo;s range-v3 library, standardized. Lazy views compose via <code>|</code>. Range-constrained algorithms with projections.</p>
+      </div>
+    </div>
+
+    <p>Plus: the spaceship operator <code>&lt;=&gt;</code>, three-way comparison, calendar &amp; time zones in <code>&lt;chrono&gt;</code>, <code>std::format</code>, designated initializers, and <code>consteval</code> / <code>constinit</code>.</p>
+
+<pre><code>#include &lt;ranges&gt;
+auto squared_evens =
+    v | std::views::filter([](int n) { return n % 2 == 0; })
+      | std::views::transform([](int n) { return n * n; })
+      | std::views::take(3);
+
+// Concept-constrained template
+template &lt;std::integral T&gt;
+T add(T a, T b) { return a + b; }
+
+// Spaceship
+struct Money {
+    int cents;
+    auto operator&lt;=&gt;(const Money&amp;) const = default;  // all 6 relational ops
+};</code></pre>
+
+    <h2>C++23 &mdash; Quality of Life</h2>
+    <ul>
+      <li><strong><code>std::expected&lt;T, E&gt;</code></strong> &mdash; return-value alternative to exceptions</li>
+      <li><strong><code>std::mdspan</code></strong> &mdash; multidimensional non-owning view, for numerical code</li>
+      <li><strong><code>std::print</code> and <code>std::println</code></strong> &mdash; format-based output, finally</li>
+      <li><strong>Deducing <code>this</code></strong> (P0847) &mdash; explicit object parameter; unifies const/non-const and value/reference method overloads</li>
+      <li><strong><code>std::generator</code></strong> &mdash; first standard coroutine type</li>
+      <li><strong><code>&lt;stacktrace&gt;</code></strong> &mdash; standard stack trace capture</li>
+      <li><strong>Multidimensional subscript</strong> &mdash; <code>m[i, j]</code></li>
+      <li><strong><code>std::ranges::to</code></strong> &mdash; materialize a lazy view into a container</li>
+      <li>Many ranges and views improvements</li>
+    </ul>
+
+    <h2>C++26 &mdash; On the Horizon</h2>
+    <ul>
+      <li><strong>Reflection</strong> (P2996) &mdash; static compile-time introspection of types, the feature C++ has chased for decades</li>
+      <li><strong><code>std::simd</code></strong> &mdash; portable SIMD, without intrinsics</li>
+      <li><strong>Linear algebra</strong> (P1673) &mdash; <code>std::linalg</code> as a BLAS-style interface built on <code>mdspan</code></li>
+      <li><strong>Contracts</strong> &mdash; preconditions, postconditions, assertions as part of function declarations</li>
+      <li><strong>Executors</strong> &mdash; <code>std::execution</code> with sender/receiver, the foundation for async/scheduler work</li>
+      <li><strong><code>std::inplace_vector</code></strong> &mdash; fixed-capacity stack-allocated vector</li>
+      <li>More ranges, more views, more quality-of-life</li>
+    </ul>
+
+    <h2>The Safety Profiles Response</h2>
+    <div class="card amber">
+      <p>Stroustrup&rsquo;s recent work on <strong>safety profiles</strong> is C++&rsquo;s most direct response to Rust, the US government&rsquo;s push for memory-safe languages, and the broader industry conversation about CVEs caused by C and C++ bugs. The idea: define static-analysis-enforceable subsets of the language &mdash; &ldquo;no use of raw owning pointers,&rdquo; &ldquo;no out-of-bounds array access,&rdquo; &ldquo;no uninitialized reads&rdquo; &mdash; that compilers can check and enforce as compile errors.</p>
+      <p>The argument: almost all the safety issues people care about can be eliminated by static analysis on <em>modern</em> C++ code, without rewriting in another language. Skeptics counter that Rust&rsquo;s borrow checker provides guarantees around aliasing that no purely-additive C++ profile can match. The practical advice has not changed: write modern C++, use smart pointers and value semantics, run tests under ASan and UBSan, run clang-tidy in CI.</p>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td>Modern C++ is a different language from the C dialect; the shift is toward value semantics and RAII, away from C-style manual memory management</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>The memory-safety debate &mdash; NSA 2022, White House ONCD Feb 2024 &mdash; has driven the Safety Profiles response in C++26</td></tr>
+        <tr><td>AIH</td><td>AI History</td><td>PyTorch and TensorFlow are modern C++: smart pointers, lambdas, coroutines in the async layers</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">C++ Core Language</a></li>
+        <li><a href="oop.html">Object-Oriented C++</a></li>
+        <li><a href="templates.html">Templates &amp; Generic Programming</a></li>
+        <li><a href="stdlib.html">Standard Template Library</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Modern C++ &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tunnel That Became the Target -- VPN &amp; Remote Access
+Operations — SNO Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2a2a;
+            --accent: #FF9100;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4DB6AC;
+            --border: #2a3a3a;
+            --primary: #004D40;
+            --net: #A5D6A7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(77,182,172,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNO — Systems Network Operations<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNO Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1
+    id="the-tunnel-that-became-the-target-vpn-remote-access-operations">The
+    Tunnel That Became the Target – VPN &amp; Remote Access
+    Operations</h1>
+    <h2 id="every-connection-is-a-promise">Every Connection Is a
+    Promise</h2>
+    <p>A VPN tunnel is a promise: that the traffic flowing through it is
+    confidential, that the endpoints on either side are who they claim
+    to be, that the path between them cannot be observed, intercepted,
+    or tampered with. For decades, this promise was the foundation of
+    remote connectivity. Branch offices connected to headquarters
+    through IPsec tunnels. Remote workers dialed into SSL VPN portals.
+    The tunnel was the perimeter, extended across hostile networks to
+    wherever the organization needed to reach.</p>
+    <p>Then the tunnels themselves became targets. Ivanti Connect
+    Secure, the successor to Pulse Secure, suffered a cascade of
+    zero-day vulnerabilities in 2024 and 2025 that gave unauthenticated
+    attackers remote code execution on VPN gateways – the very devices
+    organizations trusted to protect their networks. Fortinet’s SSL VPN
+    service, running on tens of thousands of FortiGate appliances
+    worldwide, was exploited through a series of critical flaws, and
+    attackers developed a symlink persistence technique that maintained
+    access even after patches were applied. Cisco AnyConnect, the most
+    widely deployed enterprise VPN client in the world, accumulated
+    privilege escalation and denial-of-service vulnerabilities that
+    eroded confidence in the client-side security model.</p>
+    <p>The promise did not break because the cryptography failed.
+    AES-256 remains unbroken. IKEv2 handshakes still resist
+    man-in-the-middle attacks. The promise broke because the software
+    implementing it – the VPN appliances, the client agents, the
+    management planes – carried the same vulnerability surface as any
+    other complex network service, but with the additional consequence
+    that compromising a VPN gateway compromises the trust boundary
+    itself.</p>
+    <p>This module covers the operational reality of VPN and remote
+    access in 2026: how to run IPsec and WireGuard tunnels reliably, how
+    to scale remote access for thousands of concurrent users, how to
+    make split-tunnel decisions that balance security and performance,
+    how to migrate toward Zero Trust Network Access without abandoning
+    the VPN infrastructure that still carries production traffic, and
+    how to monitor, troubleshoot, and defend the tunnels that
+    remain.</p>
+    <h2 id="site-to-site-vpn-ipsec-ikev2-in-production">Site-to-Site VPN
+    – IPsec IKEv2 in Production</h2>
+    <h3 id="the-two-phases">The Two Phases</h3>
+    <p>IPsec site-to-site VPN operation is built on two negotiation
+    phases that establish nested layers of security. Understanding these
+    phases operationally – not just theoretically – is what separates a
+    tunnel that stays up from one that drops at 2 AM and pages the
+    on-call engineer.</p>
+    <p><strong>Phase 1 (IKE SA)</strong> establishes a secure,
+    authenticated channel between the two VPN peers. In IKEv2, this
+    happens through the IKE_SA_INIT exchange (four messages that
+    negotiate cryptographic parameters and perform a Diffie-Hellman key
+    exchange) followed by the IKE_AUTH exchange (which authenticates
+    both peers using pre-shared keys, certificates, or EAP). The result
+    is an IKE Security Association – an encrypted management channel
+    that protects all subsequent negotiations. The IKE SA has a
+    configurable lifetime, typically 24 hours (86,400 seconds), after
+    which it renegotiates. Operational failures in Phase 1 are almost
+    always mismatched parameters: the two sides proposing different
+    encryption algorithms, different DH groups, different authentication
+    methods, or mismatched identities.</p>
+    <p><strong>Phase 2 (IPsec SA / Child SA)</strong> negotiates the
+    actual tunnel that carries user traffic. The Child SA specifies the
+    encryption and integrity algorithms for the data plane (ESP –
+    Encapsulating Security Payload), the traffic selectors that define
+    which source and destination subnets the tunnel protects, and
+    whether Perfect Forward Secrecy is enabled. The IPsec SA lifetime is
+    shorter than the IKE SA – typically 3,600 seconds (one hour) or
+    measured in kilobytes of data transferred. When the IPsec SA
+    expires, a new one is negotiated under the protection of the
+    existing IKE SA, so rekeying is seamless if the IKE SA is
+    healthy.</p>
+    <p><strong>Perfect Forward Secrecy (PFS)</strong> performs a fresh
+    Diffie-Hellman exchange during each Phase 2 negotiation, ensuring
+    that compromise of one session’s keys does not compromise past or
+    future sessions. PFS adds computational overhead to each rekey event
+    but is considered mandatory in any security-conscious deployment.
+    Without PFS, an attacker who compromises the Phase 1 key material
+    can decrypt all Phase 2 traffic retroactively.</p>
+    <h3 id="cipher-suite-selection">Cipher Suite Selection</h3>
+    <p>Cipher suite selection is where policy meets operational reality.
+    The suites must be strong enough to meet compliance requirements and
+    resist current threats, but they must also be supported by both
+    endpoints and performant enough for the traffic volume the tunnel
+    carries.</p>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 35%" />
+    <col style="width: 22%" />
+    <col style="width: 22%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Component</th>
+    <th>Recommended (2026)</th>
+    <th>Acceptable</th>
+    <th>Deprecated</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Encryption</td>
+    <td>AES-256-GCM</td>
+    <td>AES-128-GCM</td>
+    <td>3DES, DES, AES-CBC without GCM</td>
+    </tr>
+    <tr>
+    <td>Integrity</td>
+    <td>SHA-384, SHA-512</td>
+    <td>SHA-256</td>
+    <td>SHA-1, MD5</td>
+    </tr>
+    <tr>
+    <td>DH Group</td>
+    <td>Group 20 (384-bit ECP), Group 21 (521-bit ECP)</td>
+    <td>Group 19 (256-bit ECP), Group 14 (2048-bit MODP)</td>
+    <td>Groups 1, 2, 5 (768/1024/1536-bit MODP)</td>
+    </tr>
+    <tr>
+    <td>PRF</td>
+    <td>PRF_HMAC_SHA2_384</td>
+    <td>PRF_HMAC_SHA2_512</td>
+    <td>PRF_HMAC_SHA1</td>
+    </tr>
+    <tr>
+    <td>Authentication</td>
+    <td>ECDSA-384 certificates</td>
+    <td>RSA-3072+ certificates</td>
+    <td>PSK (acceptable for lab/low-risk), RSA-2048</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The NSA’s CNSA 2.0 suite, currently in IETF draft status,
+    introduces post-quantum requirements for IPsec: the primary key
+    exchange uses P-384 ECDH, with a mandatory additional key exchange
+    using ML-KEM-1024 (the post-quantum KEM formerly known as
+    CRYSTALS-Kyber) performed during IKE_INTERMEDIATE. Organizations
+    processing national security information should track the CNSA 2.0
+    IPsec profile draft and begin evaluating IKEv2 implementations that
+    support the additional key exchange mechanism. For commercial
+    enterprises, the current recommendation is to deploy P-384 ECDH
+    (Group 20) with AES-256-GCM, which provides the strongest classical
+    security and positions the deployment for a smoother transition when
+    post-quantum requirements become mandatory.</p>
+    <h3 id="dead-peer-detection">Dead Peer Detection</h3>
+    <p>Dead Peer Detection, described in RFC 3706, is the mechanism by
+    which IPsec peers determine whether the other side of the tunnel is
+    still alive. DPD works by sending R-U-THERE messages during idle
+    periods – if a peer has not received any IPsec traffic for a
+    configurable interval (the “worry metric”), it sends an R-U-THERE
+    and expects an R-U-THERE-ACK in response. If no acknowledgment
+    arrives after a configurable number of retries, the peer declares
+    the tunnel dead and tears down the Security Associations.</p>
+    <p>The operational subtlety of DPD is that its parameters are not
+    negotiated between peers – each side configures its own interval and
+    retry count independently. A common misconfiguration is setting the
+    DPD interval too aggressively (say, 10 seconds with 3 retries),
+    which causes tunnels to flap on lossy WAN links where occasional
+    packet drops are normal. The pragmatic configuration for most
+    production deployments is a 30-second interval with 5 retries,
+    giving 150 seconds of tolerance before declaring a peer dead. For
+    tunnels over unreliable links (satellite, cellular backup), increase
+    to 60 seconds with 5 retries.</p>
+    <p>On Palo Alto firewalls, tunnel monitoring augments DPD with ICMP
+    probes to a specific destination IP behind the remote peer,
+    providing application-layer liveness verification beyond the
+    IKE-level DPD mechanism. On Cisco IOS/IOS-XE, DPD is configured with
+    <code>crypto isakmp keepalive</code> and integrates with routing
+    failover when multiple tunnels provide redundancy.</p>
+    <h3 id="tunnel-monitoring-operations">Tunnel Monitoring
+    Operations</h3>
+    <p>Production IPsec tunnels require continuous monitoring beyond
+    DPD. The operational monitoring checklist includes:</p>
+    <ul>
+    <li><strong>IKE SA state</strong>: Is Phase 1 established? When does
+    it expire? Has rekey succeeded?</li>
+    <li><strong>IPsec SA state</strong>: Are Child SAs active for all
+    expected traffic selectors? What are the byte/packet counters? Are
+    they incrementing (indicating traffic flow)?</li>
+    <li><strong>Encapsulation counters</strong>: ESP encrypt/decrypt
+    counts, authentication failures (indicates tampering or
+    misconfiguration), replay window drops (indicates packet reordering
+    beyond the anti-replay window)</li>
+    <li><strong>Rekey events</strong>: Timestamp of last successful
+    rekey, failures (often the first symptom of a developing
+    problem)</li>
+    <li><strong>MTU/fragmentation</strong>: PMTUD failures,
+    fragmentation reassembly errors (discussed in the troubleshooting
+    section)</li>
+    </ul>
+    <p>On FortiGate: <code>diagnose vpn ike gateway list</code> and
+    <code>diagnose vpn tunnel list</code> provide the essential
+    operational view. On Palo Alto: <code>show vpn ipsec-sa</code> and
+    <code>show vpn ike-sa</code> with <code>show vpn flow</code>. On
+    Cisco: <code>show crypto ikev2 sa detailed</code> and
+    <code>show crypto ipsec sa</code>.</p>
+    <h2 id="wireguard-operations">WireGuard Operations</h2>
+    <h3 id="architecture-and-simplicity">Architecture and
+    Simplicity</h3>
+    <p>WireGuard operates on a fundamentally different philosophy from
+    IPsec. Where IPsec is a framework of negotiable algorithms,
+    configurable parameters, and complex state machines, WireGuard is an
+    opinionated protocol with a fixed cryptographic suite: Curve25519
+    for key exchange, ChaCha20-Poly1305 for symmetric encryption,
+    BLAKE2s for hashing, and SipHash for hashtable keys. There is
+    nothing to negotiate, nothing to misconfigure, and no cipher suite
+    mismatch to debug at 3 AM.</p>
+    <p>The operational model is peer-based. Each WireGuard interface has
+    a private key and a list of peers, where each peer is identified by
+    its public key and associated with a set of AllowedIPs – the IP
+    addresses and subnets that should be routed to that peer. This is
+    the single most important concept in WireGuard operations:
+    AllowedIPs serves simultaneously as a routing table and an access
+    control mechanism. When a packet arrives from a peer, WireGuard
+    checks that the source IP falls within that peer’s AllowedIPs; if
+    not, the packet is silently dropped. When the host wants to send a
+    packet, WireGuard looks up the destination in the AllowedIPs of all
+    configured peers to determine which peer should receive it.</p>
+    <p>This dual role of AllowedIPs is the source of most WireGuard
+    misconfigurations. A common mistake in site-to-site setups is
+    setting AllowedIPs to only the peer’s tunnel IP (e.g.,
+    <code>10.0.0.2/32</code>) without including the remote site’s LAN
+    subnet (e.g., <code>192.168.100.0/24</code>). The tunnel comes up,
+    pings between tunnel endpoints work, but traffic to the remote LAN
+    never enters the tunnel because WireGuard has no AllowedIPs entry
+    telling it where to route those packets. The fix is straightforward:
+    AllowedIPs must include every subnet that should be reachable
+    through that peer.</p>
+    <h3 id="peer-management-and-key-rotation">Peer Management and Key
+    Rotation</h3>
+    <p>WireGuard peer management is stateless at the configuration level
+    – peers are defined in the configuration file or added dynamically
+    via the <code>wg set</code> command. The <code>wg-quick</code>
+    utility wraps the raw <code>wg</code> commands with convenience
+    features: it brings up the interface, assigns addresses, configures
+    routing (based on AllowedIPs), sets DNS, and executes pre/post
+    scripts.</p>
+    <p>Key rotation in WireGuard requires deliberate operational
+    procedure because the protocol itself has no built-in key rotation
+    mechanism. Unlike IPsec, which renegotiates keys automatically based
+    on SA lifetimes, WireGuard key pairs are static until manually
+    replaced. The recommended rotation procedure:</p>
+    <ol type="1">
+    <li>Generate a new key pair on the peer:
+    <code>wg genkey | tee private.key | wg pubkey &gt; public.key</code></li>
+    <li>Update the peer’s local configuration with the new private
+    key</li>
+    <li>Update the remote peer’s configuration with the new public
+    key</li>
+    <li>Bring the interface down and up (or use <code>wg set</code> for
+    live updates)</li>
+    <li>Verify connectivity: <code>wg show</code> displays the latest
+    handshake timestamp and transfer counters</li>
+    <li>Remove the old peer entry from the remote side</li>
+    </ol>
+    <p>The critical operational detail is that existing sessions
+    continue using the old keys until the next handshake attempt
+    (WireGuard initiates a new handshake approximately every 2 minutes
+    if traffic is flowing, or after 5 minutes of silence). Maximum
+    disruption during rotation is typically 3-5 minutes. For
+    zero-downtime rotation, add the new peer configuration before
+    removing the old one, creating a brief window where both key pairs
+    are valid.</p>
+    <p>A practical rotation schedule for most environments is 90 days
+    for key pairs and monthly for any pre-shared keys used as an
+    additional layer. Store keys in a secrets manager, not in plaintext
+    configuration files on disk.</p>
+    <h3 id="monitoring">Monitoring</h3>
+    <p>WireGuard monitoring is minimalist by design. The
+    <code>wg show</code> command provides the essential operational
+    view: each peer’s public key, endpoint address and port, allowed
+    IPs, latest handshake timestamp, and transfer counters (bytes
+    received and sent). A peer whose latest handshake is more than 5
+    minutes old and whose transfer counters are not incrementing is
+    effectively disconnected.</p>
+    <p>For production monitoring, export <code>wg show</code> output to
+    your monitoring system at regular intervals. The key metrics are:
+    latest handshake age (alert if &gt; 5 minutes for always-on peers),
+    transfer rate (detect throughput anomalies), and peer count (detect
+    unauthorized peer additions or missing peers after configuration
+    changes). Prometheus exporters exist for WireGuard that scrape these
+    metrics into standard time-series monitoring.</p>
+    <h2 id="remote-access-vpn-at-scale">Remote Access VPN at Scale</h2>
+    <h3 id="ssl-vpn-platforms">SSL VPN Platforms</h3>
+    <p>Remote access VPN for enterprise workforces is dominated by three
+    platforms, each backed by a major firewall vendor and each carrying
+    the operational characteristics – and vulnerabilities – of its
+    parent ecosystem.</p>
+    <p><strong>Palo Alto GlobalProtect</strong> operates as a tightly
+    integrated extension of the Palo Alto NGFW platform. The
+    GlobalProtect agent on the endpoint establishes an SSL or IPsec
+    tunnel to a GlobalProtect gateway (which is a feature of the PAN-OS
+    firewall, not a separate appliance). The portal component handles
+    client configuration distribution, and HIP (Host Information
+    Profile) checks enforce device posture requirements before granting
+    access. GlobalProtect’s always-on mode establishes the tunnel before
+    user login (pre-logon / machine tunnel using certificate
+    authentication), ensuring that domain-joined devices can reach
+    Active Directory and receive Group Policy updates even before the
+    user authenticates. The maximum concurrent user capacity depends on
+    the firewall model: the PA-5450 supports up to 60,000 concurrent
+    GlobalProtect users, while the PA-3400 series handles 5,000-10,000
+    depending on model.</p>
+    <p><strong>Cisco AnyConnect</strong> (now Cisco Secure Client) is
+    the most widely deployed enterprise VPN client in the world, running
+    on the ASA (Adaptive Security Appliance) and Firepower Threat
+    Defense platforms. AnyConnect supports SSL (TLS) and IKEv2/IPsec
+    transport, with DTLS (Datagram TLS) for latency-sensitive traffic
+    like voice and video that performs poorly over TCP-based SSL
+    tunnels. The client supports per-app VPN, posture assessment via the
+    ISE (Identity Services Engine) integration, and network visibility
+    module for endpoint telemetry. Scaling is hardware-dependent: the
+    ASA 5585-X supports up to 10,000 concurrent sessions, while the
+    Firepower 4100/9300 series scales to 10,000-20,000. Cisco’s
+    transition from AnyConnect to Secure Client brought a renamed binary
+    but the same core architecture, creating a confusing period where
+    documentation references both names interchangeably.</p>
+    <p><strong>Fortinet FortiClient</strong> connects to FortiGate
+    firewalls over SSL VPN or IPsec and integrates with FortiClient EMS
+    (Endpoint Management Server) for centralized deployment and
+    compliance enforcement. FortiClient’s strength is its integration
+    with the broader Fortinet Security Fabric – telemetry from the VPN
+    client feeds into FortiAnalyzer for logging, FortiSIEM for
+    correlation, and FortiEDR for endpoint detection. FortiGate scaling
+    is aggressive for the price point: the FortiGate 600F supports
+    16,000 concurrent SSL VPN users, and the 3700F series reaches
+    30,000. However, the SSL VPN attack surface on FortiGate has been
+    the target of repeated critical vulnerabilities, which any
+    operations team must weigh against the capacity and integration
+    benefits.</p>
+    <table>
+    <colgroup>
+    <col style="width: 11%" />
+    <col style="width: 12%" />
+    <col style="width: 23%" />
+    <col style="width: 16%" />
+    <col style="width: 12%" />
+    <col style="width: 24%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Platform</th>
+    <th>Transport</th>
+    <th>Max Users (high-end)</th>
+    <th>Posture Check</th>
+    <th>Always-On</th>
+    <th>Vulnerability History</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>GlobalProtect</td>
+    <td>SSL, IPsec</td>
+    <td>~60,000 (PA-5450)</td>
+    <td>HIP profiles</td>
+    <td>Pre-logon + user tunnel</td>
+    <td>Moderate; fewer critical CVEs</td>
+    </tr>
+    <tr>
+    <td>Cisco Secure Client</td>
+    <td>SSL, DTLS, IKEv2</td>
+    <td>~20,000 (FP 9300)</td>
+    <td>ISE integration</td>
+    <td>Machine + user tunnel</td>
+    <td>Moderate; privilege escalation</td>
+    </tr>
+    <tr>
+    <td>FortiClient</td>
+    <td>SSL, IPsec</td>
+    <td>~30,000 (FG 3700F)</td>
+    <td>EMS compliance</td>
+    <td>Certificate-based</td>
+    <td>Severe; repeated RCE in sslvpnd</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="concurrent-user-capacity-planning">Concurrent User Capacity
+    Planning</h3>
+    <p>Capacity planning for remote access VPN is not a simple matter of
+    checking the vendor’s maximum session count. The actual bottleneck
+    is usually one of three resources, rarely advertised as prominently
+    as the session count:</p>
+    <p><strong>Crypto throughput</strong>: Every VPN session requires
+    encryption and decryption of all traffic. A firewall that handles 10
+    Gbps of plaintext inspection may deliver only 3-5 Gbps of IPsec
+    throughput, depending on cipher suite and hardware offload
+    capabilities. SSL VPN throughput is typically lower than IPsec
+    because TLS operates in the software stack rather than being
+    offloaded to crypto ASICs.</p>
+    <p><strong>Memory</strong>: Each concurrent VPN session consumes
+    memory for session state, routing entries, and buffered packets. On
+    Cisco ASA, each AnyConnect session uses approximately 1-2 MB of RAM.
+    On FortiGate, SSL VPN sessions consume memory proportional to the
+    configured tunnel MTU and buffer sizes. Running out of memory causes
+    session drops, not graceful denial.</p>
+    <p><strong>CPU for authentication</strong>: The authentication burst
+    at 9 AM Monday morning – when thousands of users establish VPN
+    connections simultaneously – can saturate the CPU even if
+    steady-state throughput is well within capacity. Certificate-based
+    authentication is more CPU-intensive than PSK (due to RSA/ECDSA
+    operations), and SAML-based authentication adds round-trip latency
+    to external IdPs. Pre-provision session tokens or use authentication
+    offload to dedicated RADIUS/LDAP proxies to smooth the morning
+    surge.</p>
+    <h2 id="split-tunnel-vs-full-tunnel">Split Tunnel vs Full
+    Tunnel</h2>
+    <h3 id="the-decision-framework">The Decision Framework</h3>
+    <p>Split tunneling routes only corporate-destined traffic through
+    the VPN tunnel while allowing internet-bound traffic to flow
+    directly from the user’s local internet connection. Full tunneling
+    routes all traffic through the VPN tunnel, regardless of
+    destination. The decision between them is one of the most
+    consequential choices in remote access architecture, and it is not
+    purely technical – it carries compliance, security, performance, and
+    user experience implications that must be weighed together.</p>
+    <p><strong>Full tunnel advantages</strong>: All traffic is visible
+    to the corporate security stack (proxy, DLP, IDS/IPS, DNS
+    filtering). Logging captures every user connection for audit and
+    forensics. There is no possibility of the endpoint simultaneously
+    communicating with the internet and the corporate network,
+    eliminating a class of pivot attacks where a compromised endpoint
+    bridges the two environments.</p>
+    <p><strong>Full tunnel costs</strong>: Every byte of Netflix,
+    YouTube, Teams video, and Windows Update traffic flows through the
+    corporate WAN, consuming VPN concentrator capacity, internet egress
+    bandwidth, and adding latency to every connection. During the
+    COVID-19 remote work expansion, organizations running full-tunnel
+    VPNs saw concentrator saturation within days as tens of thousands of
+    users funneled all traffic through infrastructure designed for a
+    fraction of the workforce.</p>
+    <p><strong>Split tunnel advantages</strong>: Only corporate traffic
+    traverses the tunnel, reducing VPN concentrator load by 60-80% in
+    typical deployments. SaaS applications (Microsoft 365, Google
+    Workspace, Salesforce, Zoom) reach the nearest cloud edge directly
+    rather than hairpinning through corporate infrastructure,
+    dramatically improving performance and reducing latency. Microsoft
+    explicitly recommends split tunneling for Microsoft 365 traffic and
+    publishes the IP ranges and URLs that should be excluded from the
+    tunnel.</p>
+    <p><strong>Split tunnel risks</strong>: Internet-bound traffic from
+    the endpoint is not inspected by the corporate security stack. A
+    compromised endpoint can exfiltrate data directly to the internet
+    without passing through the DLP. DNS queries to non-corporate
+    destinations are not logged. The endpoint operates in a dual-homed
+    state that increases its attack surface.</p>
+    <h3 id="compliance-implications">Compliance Implications</h3>
+    <p><strong>PCI-DSS</strong>: Organizations processing payment card
+    data face the strongest compliance pressure toward full tunneling.
+    PCI-DSS requires that all remote access to the Cardholder Data
+    Environment (CDE) be logged, monitored, and controlled. While
+    PCI-DSS does not explicitly mandate full tunneling by name, the
+    logging and monitoring requirements in Requirement 10 effectively
+    require that all VPN user activity be visible to the corporate
+    security infrastructure. Split tunneling is possible under PCI-DSS
+    only if the split is configured so that all CDE-destined traffic
+    routes through the tunnel and is logged, and the compliance team
+    accepts the risk that non-CDE traffic is not monitored. Most QSAs
+    (Qualified Security Assessors) will push for full tunneling in PCI
+    scope to avoid scope creep arguments.</p>
+    <p><strong>HIPAA</strong>: Similar to PCI-DSS, HIPAA’s security rule
+    requires access controls and audit logging for all access to
+    electronic protected health information (ePHI). Full tunneling
+    simplifies compliance but is not explicitly required.</p>
+    <p><strong>SOC 2</strong>: Split tunneling is generally acceptable
+    for SOC 2 if the organization can demonstrate that corporate
+    resources are adequately protected and monitored regardless of the
+    tunnel mode.</p>
+    <h3 id="the-modern-compromise-selective-split-tunneling">The Modern
+    Compromise: Selective Split Tunneling</h3>
+    <p>The pragmatic approach in 2026 is selective split tunneling –
+    sometimes called “include” or “exclude” mode split tunneling. Rather
+    than choosing binary full or split, organizations define specific
+    categories of traffic that bypass the tunnel:</p>
+    <ul>
+    <li>Microsoft 365 Optimize endpoints (per Microsoft’s published
+    list)</li>
+    <li>Zoom/Teams/WebEx media traffic (UDP ranges)</li>
+    <li>SaaS applications accessed through a CASB or SSE that provides
+    independent logging</li>
+    <li>Operating system update traffic (Windows Update, macOS Software
+    Update)</li>
+    </ul>
+    <p>Everything else routes through the tunnel. This preserves
+    security visibility for corporate and unknown destinations while
+    eliminating the bandwidth and latency penalty for high-volume,
+    well-understood SaaS traffic. Palo Alto GlobalProtect, Cisco Secure
+    Client, and FortiClient all support this selective model through
+    configurable exclude routes.</p>
+    <h2 id="ztna-migration-from-traditional-vpn">ZTNA Migration from
+    Traditional VPN</h2>
+    <h3 id="why-organizations-are-migrating">Why Organizations Are
+    Migrating</h3>
+    <p>The migration from traditional VPN to Zero Trust Network Access
+    is not driven by a single event but by a convergence of pressures.
+    VPN concentrators are single points of failure that must be exposed
+    to the internet – they have public IP addresses, they accept
+    connections from any source, and they run complex codebases that
+    have proven repeatedly vulnerable. VPN grants network-level access:
+    once connected, the user can reach any resource permitted by their
+    network segment, regardless of whether they need it. VPN performance
+    degrades as user count scales, particularly for distributed
+    workforces connecting to cloud-hosted applications through a
+    centralized VPN gateway.</p>
+    <p>ZTNA replaces this model with per-application access. Instead of
+    connecting to a network and then accessing applications, the user
+    authenticates to a ZTNA broker, which evaluates identity, device
+    posture, and context, and then brokers a connection to the specific
+    application – without granting the user any network-level access to
+    the environment where the application runs. The application itself
+    can be invisible to the internet, reachable only through the ZTNA
+    broker.</p>
+    <h3 id="major-ztna-platforms">Major ZTNA Platforms</h3>
+    <p><strong>Zscaler Private Access (ZPA)</strong> routes user traffic
+    through the Zscaler Zero Trust Exchange – a global cloud platform
+    with over 150 data centers. Application connectors deployed inside
+    the customer’s network establish outbound-only connections to the
+    Zscaler cloud, meaning no inbound firewall rules, no public IP
+    addresses, and no exposed attack surface for the applications. ZPA
+    evaluates user identity (integrated with any SAML/OIDC IdP), device
+    posture (via the Zscaler Client Connector agent), and
+    application-specific policy before brokering the connection. Pricing
+    runs approximately $8-15/user/month, scaling with module count.
+    ZPA’s strength is its maturity and integration with Zscaler Internet
+    Access (ZIA) for a complete SSE stack.</p>
+    <p><strong>Cloudflare Access</strong> uses Cloudflare’s global
+    network (310+ cities, 300+ data centers) to provide ZTNA for web
+    applications, SSH, RDP, and arbitrary TCP/UDP protocols. The
+    cloudflared tunnel agent, deployed alongside applications, creates
+    outbound-only connections to Cloudflare’s edge, and Access policies
+    enforce identity and device posture checks before permitting
+    connections. Cloudflare’s architectural advantage is that the same
+    network handles CDN, DDoS mitigation, DNS, and ZTNA, eliminating the
+    need for separate infrastructure for each function. Pricing is
+    approximately $7-12/user/month and competitive with Zscaler at
+    enterprise scale.</p>
+    <p><strong>Palo Alto Prisma Access</strong> extends the Palo Alto
+    NGFW security stack into a cloud-delivered model. Prisma Access
+    provides both ZTNA (replacing VPN for application access) and
+    cloud-delivered SD-WAN (replacing MPLS for branch connectivity). The
+    differentiator is that Prisma Access applies the same PAN-OS
+    security policy – App-ID, Threat Prevention, WildFire sandboxing –
+    to ZTNA traffic that a physical firewall applies to on-premises
+    traffic, providing continuity for organizations deeply invested in
+    the Palo Alto ecosystem. Prisma Access is the only vendor recognized
+    as a Leader across all three relevant Gartner Magic Quadrants:
+    SD-WAN, Single-Vendor SASE, and Security Service Edge.</p>
+    <p><strong>Tailscale and Headscale</strong> occupy a different
+    segment: mesh VPN with zero-trust principles, built on WireGuard.
+    Tailscale creates a peer-to-peer encrypted mesh network using
+    WireGuard tunnels, coordinated by a central control plane that
+    handles key distribution, ACL policy, and NAT traversal. Headscale
+    is the open-source, self-hosted implementation of the Tailscale
+    control plane, providing the same mesh architecture without
+    depending on Tailscale’s SaaS service. The migration path from
+    traditional VPN to Tailscale is operationally simpler than
+    enterprise ZTNA platforms: install the Tailscale client, define ACLs
+    in a version-controlled policy file, and users can reach tagged
+    resources based on identity and group membership. The limitation is
+    that Tailscale/Headscale provide network-level mesh connectivity
+    rather than per-application brokered access – it is a better VPN,
+    not a replacement for VPN-as-a-concept.</p>
+    <table>
+    <colgroup>
+    <col style="width: 14%" />
+    <col style="width: 19%" />
+    <col style="width: 23%" />
+    <col style="width: 27%" />
+    <col style="width: 14%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Platform</th>
+    <th>Architecture</th>
+    <th>Per-App Access</th>
+    <th>Network Footprint</th>
+    <th>Best For</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Zscaler ZPA</td>
+    <td>Cloud broker, outbound connectors</td>
+    <td>Yes</td>
+    <td>150+ DCs</td>
+    <td>Large enterprise, regulated industries</td>
+    </tr>
+    <tr>
+    <td>Cloudflare Access</td>
+    <td>Edge-native, cloudflared tunnels</td>
+    <td>Yes</td>
+    <td>310+ cities</td>
+    <td>Developer-friendly, web-app heavy</td>
+    </tr>
+    <tr>
+    <td>Prisma Access</td>
+    <td>Cloud-delivered NGFW</td>
+    <td>Yes</td>
+    <td>Palo Alto PoPs</td>
+    <td>Palo Alto ecosystem, SD-WAN convergence</td>
+    </tr>
+    <tr>
+    <td>Tailscale/Headscale</td>
+    <td>WireGuard mesh, peer-to-peer</td>
+    <td>No (network-level)</td>
+    <td>Self-hosted or SaaS</td>
+    <td>DevOps, small-to-mid orgs, overlay nets</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="coexistence-during-transition">Coexistence During
+    Transition</h3>
+    <p>No organization migrates from VPN to ZTNA in a single cutover.
+    The transition period – which typically spans 6-18 months – requires
+    both systems to coexist. The operational playbook for
+    coexistence:</p>
+    <ol type="1">
+    <li><strong>Inventory applications by access method</strong>:
+    Categorize every application as VPN-only, ZTNA-ready, or already
+    internet-facing. Web applications are the easiest to migrate; legacy
+    client-server applications with custom protocols are the
+    hardest.</li>
+    <li><strong>Deploy ZTNA connectors alongside VPN
+    infrastructure</strong>: ZTNA connectors (Zscaler App Connectors,
+    cloudflared, Prisma Access agents) run inside the same network
+    segments as the applications they protect. They do not interfere
+    with existing VPN tunnels.</li>
+    <li><strong>Migrate by application, not by user</strong>: Move one
+    application at a time to ZTNA, test thoroughly, then move the next.
+    Users will connect through both VPN (for unmigrated applications)
+    and ZTNA (for migrated ones) simultaneously.</li>
+    <li><strong>Maintain VPN as fallback</strong>: Keep VPN
+    infrastructure operational until every application has been migrated
+    and verified through ZTNA. Reduce VPN capacity as usage drops, but
+    do not decommission until ZTNA covers 100% of access.</li>
+    <li><strong>Monitor both paths</strong>: Log VPN connection attempts
+    after an application has been migrated to ZTNA – any remaining VPN
+    traffic to that application indicates missed users, automation, or
+    service accounts that were not part of the migration plan.</li>
+    </ol>
+    <h2 id="vpn-monitoring-and-troubleshooting">VPN Monitoring and
+    Troubleshooting</h2>
+    <h3 id="mtu-mss-and-fragmentation">MTU, MSS, and Fragmentation</h3>
+    <p>The most common and most misunderstood VPN operational problem is
+    MTU-related fragmentation. The standard Ethernet MTU is 1500 bytes.
+    IPsec ESP adds overhead: 20 bytes for the outer IP header, 8 bytes
+    for the UDP header (if NAT-T is enabled), 8 bytes for the ESP
+    header, 2-16 bytes for ESP padding, 12-32 bytes for the ESP
+    authentication trailer. The effective MTU inside the tunnel drops to
+    approximately 1400-1420 bytes depending on the cipher and NAT
+    traversal configuration.</p>
+    <p>When an application sends a 1500-byte packet into the tunnel, the
+    VPN device must either fragment the packet (adding the overhead of
+    fragmentation and reassembly, which can cause 20-30% throughput
+    reduction) or drop it and rely on Path MTU Discovery (PMTUD) to
+    signal the sender to reduce its packet size. PMTUD works by setting
+    the Don’t Fragment (DF) bit on packets – when a router along the
+    path cannot forward the packet without fragmentation, it sends an
+    ICMP “Fragmentation Needed” message back to the sender.</p>
+    <p>The problem is that many firewalls, misconfigured ACLs, and
+    security appliances along the path block ICMP, breaking PMTUD. The
+    sender never learns that its packets are too large, keeps sending
+    1500-byte packets, and the tunnel silently drops them. The symptom
+    is maddening: small packets (pings, DNS queries) work fine, but
+    large transfers (file copies, web page loads with large payloads)
+    hang or fail.</p>
+    <p>The operational fix is to clamp the TCP MSS (Maximum Segment
+    Size) on the VPN device. MSS clamping rewrites the MSS value in TCP
+    SYN packets as they enter the tunnel, telling the remote endpoint to
+    use smaller segments that fit within the tunnel MTU without
+    fragmentation. On Cisco: <code>ip tcp adjust-mss 1360</code>. On
+    FortiGate: <code>set tcp-mss-sender 1360</code> and
+    <code>set tcp-mss-receiver 1360</code> in the VPN phase2
+    configuration. On Palo Alto: set the MSS adjustment in the tunnel
+    interface configuration. The typical safe value is 1360 bytes for
+    IPsec with NAT-T, or 1380 bytes for IPsec without NAT-T.</p>
+    <h3 id="nat-traversal">NAT Traversal</h3>
+    <p>IPsec ESP (protocol 50) is not a TCP or UDP protocol – it sits
+    directly on IP, which means NAT devices that rewrite port numbers
+    cannot process it. NAT Traversal (NAT-T, RFC 3947) solves this by
+    encapsulating ESP packets inside UDP port 4500. IKEv2 detects NAT
+    during the IKE_SA_INIT exchange by including NAT_DETECTION_SOURCE_IP
+    and NAT_DETECTION_DESTINATION_IP notifications; if either side
+    detects that NAT is present on the path, both sides automatically
+    switch to UDP encapsulation.</p>
+    <p>The operational implications: ensure that UDP 500 (IKE) and UDP
+    4500 (NAT-T/ESP) are permitted through all firewalls and ACLs on the
+    path. Do not assume that because IPsec uses “protocol 50” you need
+    to permit IP protocol 50 – if NAT-T is active (and it usually is,
+    because most paths traverse at least one NAT device), the traffic
+    will be UDP 4500 and protocol 50 will never appear on the wire.</p>
+    <h3 id="esp-vs-udp-encapsulation">ESP vs UDP Encapsulation</h3>
+    <p>When NAT-T is not needed, ESP runs directly on IP (protocol
+    number 50), which is more efficient – no UDP header overhead, no
+    port number consumption, and some hardware platforms can offload raw
+    ESP more efficiently than UDP-encapsulated ESP. The decision is not
+    usually manual: IKEv2’s NAT detection determines the encapsulation
+    automatically. However, some environments force UDP encapsulation
+    even without NAT, either for firewall traversal (some firewalls
+    block non-TCP/UDP IP protocols) or to enable stateful firewall
+    tracking (firewalls can track UDP sessions but cannot meaningfully
+    track raw ESP).</p>
+    <h2 id="key-rotation-operations">Key Rotation Operations</h2>
+    <h3 id="ike-sa-and-ipsec-sa-lifetimes">IKE SA and IPsec SA
+    Lifetimes</h3>
+    <p>IKE SA lifetime (Phase 1) controls how often the management
+    channel renegotiates. Standard production value: 86,400 seconds (24
+    hours). Shorter values increase security (limiting the window of key
+    exposure) but increase CPU load from renegotiation.</p>
+    <p>IPsec SA lifetime (Phase 2) controls how often the data tunnel
+    rekeys. Standard production value: 3,600 seconds (1 hour) or 100 MB,
+    whichever comes first. With PFS enabled, each rekey performs a new
+    DH exchange – computationally expensive but cryptographically
+    essential.</p>
+    <p>Both sides must agree on lifetime values, or more precisely, the
+    SA will rekey at the shorter of the two configured lifetimes. A
+    common source of tunnel flaps is asymmetric lifetimes: if one side
+    is configured for 3,600 seconds and the other for 28,800 seconds,
+    the short-lived side will attempt to rekey every hour while the
+    long-lived side does not expect renegotiation for eight hours. The
+    result depends on implementation: some platforms handle this
+    gracefully, others experience brief outages during rekey as the SA
+    states temporarily diverge.</p>
+    <h3 id="psk-rotation-procedures">PSK Rotation Procedures</h3>
+    <p>Pre-shared key rotation in IPsec requires coordination because
+    the PSK must be changed on both sides simultaneously (or within the
+    current IKE SA lifetime). The operational procedure:</p>
+    <ol type="1">
+    <li>Schedule a maintenance window (or accept that the tunnel will
+    drop briefly)</li>
+    <li>Change the PSK on both peers</li>
+    <li>Clear the existing IKE SA on both sides to force renegotiation
+    with the new PSK</li>
+    <li>Verify Phase 1 and Phase 2 establishment</li>
+    <li>Document the rotation in the change management system</li>
+    </ol>
+    <p>For organizations with dozens or hundreds of site-to-site
+    tunnels, PSK rotation becomes operationally untenable – this is the
+    primary driver toward certificate-based VPN authentication, where
+    certificate renewal is automated through a PKI and does not require
+    manual coordination between tunnel endpoints.</p>
+    <h3 id="certificate-based-vpn-authentication">Certificate-Based VPN
+    Authentication</h3>
+    <p>Certificate-based authentication replaces PSKs with X.509
+    certificates issued by the organization’s PKI. Each VPN endpoint
+    presents its certificate during IKE_AUTH, and the peer validates it
+    against the trusted CA chain. Certificates carry advantages over
+    PSKs: they can be individually revoked (through CRL or OCSP), they
+    bind authentication to a specific identity (the certificate
+    subject), and they can be automatically renewed before expiry.</p>
+    <p>The operational complexity shifts from PSK coordination to PKI
+    management: ensuring the CA is available and properly secured,
+    monitoring certificate expiry, configuring CRL distribution points
+    or OCSP responders, and handling certificate enrollment for new
+    devices (SCEP or EST protocols). A well-managed PKI makes VPN key
+    rotation automatic and invisible; a poorly managed one turns
+    certificate expiry into unplanned outages.</p>
+    <h2 id="always-on-vpn">Always-On VPN</h2>
+    <h3 id="device-tunnel-vs-user-tunnel">Device Tunnel vs User
+    Tunnel</h3>
+    <p>Always-on VPN architectures distinguish between the device tunnel
+    – established before user login, using machine certificates for
+    authentication – and the user tunnel – established after login,
+    using user credentials or certificates.</p>
+    <p><strong>Device tunnel</strong> provides pre-logon connectivity
+    that enables domain join, Group Policy processing, SCCM management,
+    and password reset for domain accounts (the user cannot change their
+    expired password if they cannot reach the domain controller). Device
+    tunnel typically uses IKEv2 on Windows and profile-based
+    configuration on macOS. Microsoft’s Always On VPN implementation
+    replaced the deprecated DirectAccess technology starting with
+    Windows 10 and provides both device and user tunnel capabilities
+    using native Windows VPN client capabilities, configured through MDM
+    (Intune) or PowerShell.</p>
+    <p><strong>User tunnel</strong> establishes after authentication and
+    typically provides broader access than the device tunnel, which is
+    usually restricted to management infrastructure. The user tunnel may
+    use different authentication (e.g., SAML with MFA) and different
+    routing (wider split tunnel or full tunnel).</p>
+    <p>GlobalProtect implements both modes: pre-logon (device tunnel
+    equivalent using machine certificate) and user-logon (user tunnel
+    with SAML, LDAP, or certificate authentication). The two tunnels can
+    connect to different gateways with different security policies,
+    providing management-plane connectivity through pre-logon and
+    user-plane connectivity after authentication.</p>
+    <h3 id="windows-directaccess-legacy">Windows DirectAccess –
+    Legacy</h3>
+    <p>Microsoft DirectAccess, introduced in Windows 7 Enterprise and
+    Windows Server 2008 R2, provided always-on, certificate-based remote
+    access using IPv6 transition technologies (6to4, Teredo, IP-HTTPS).
+    DirectAccess was architecturally ahead of its time – it provided
+    seamless, policy-managed connectivity without user interaction – but
+    its dependency on IPv6, its requirement for Windows Enterprise
+    edition, and its complex deployment (requiring either edge or
+    behind-NAT topology with specific certificate requirements) limited
+    adoption. Microsoft deprecated DirectAccess in favor of Always On
+    VPN in Windows 10/11 and Windows Server 2016+. Organizations still
+    running DirectAccess should plan migration to Always On VPN or a
+    third-party ZTNA solution; DirectAccess receives security patches
+    but no new features and will eventually leave support entirely.</p>
+    <h2 id="sd-wan-as-vpn-replacement">SD-WAN as VPN Replacement</h2>
+    <h3 id="from-tunnel-to-fabric">From Tunnel to Fabric</h3>
+    <p>SD-WAN does not replace VPN so much as subsume it. A traditional
+    site-to-site VPN connects two endpoints through a single encrypted
+    tunnel over a single WAN link. SD-WAN creates an application-aware
+    fabric across multiple WAN links (MPLS, broadband, LTE/5G,
+    satellite), dynamically routing traffic based on application
+    requirements, link performance, and policy.</p>
+    <p>The VPN functionality – encrypting traffic between sites – is a
+    feature of SD-WAN, not its purpose. SD-WAN adds application
+    identification (steering Zoom to the lowest-latency link while
+    routing bulk backup to the cheapest link), real-time link quality
+    monitoring (packet loss, latency, jitter measured per-link and
+    per-application), automatic failover (shifting traffic from a
+    degraded link in sub-second timeframes), and centralized
+    orchestration (deploying routing and security policy across hundreds
+    of sites from a single console).</p>
+    <p>For organizations with more than 10-15 branch sites still running
+    MPLS + IPsec hub-and-spoke VPN, the economic case for SD-WAN is
+    compelling: replace expensive MPLS circuits with commodity broadband
+    (at 50-80% cost reduction), add cellular backup for resilience, and
+    gain application-aware routing that MPLS and IPsec never provided.
+    The Gartner Magic Quadrant for SD-WAN Infrastructure recognizes
+    Fortinet, Palo Alto Networks (via Prisma SD-WAN), VMware (VeloCloud,
+    now under Broadcom), and Cisco (Viptela/Catalyst SD-WAN) as
+    Leaders.</p>
+    <h3 id="sase-convergence">SASE Convergence</h3>
+    <p>The trajectory of both SD-WAN and remote access VPN is
+    convergence into Secure Access Service Edge (SASE), which combines
+    SD-WAN networking with Security Service Edge (SSE) security
+    functions: SWG (Secure Web Gateway), CASB (Cloud Access Security
+    Broker), ZTNA, DLP, and FWaaS. SASE collapses the distinction
+    between site-to-site VPN (SD-WAN replaces it), remote access VPN
+    (ZTNA replaces it), and web security (SWG/CASB replaces the proxy).
+    The operational implication is that organizations evaluating VPN
+    refresh or expansion should consider whether a SASE architecture –
+    purchased from a single vendor or assembled from best-of-breed
+    components – provides a more sustainable path than investing further
+    in traditional VPN infrastructure.</p>
+    <h2 id="real-incidents-when-vpn-became-the-attack-vector">Real
+    Incidents: When VPN Became the Attack Vector</h2>
+    <h3
+    id="ivantipulse-secure-the-chain-that-would-not-end">Ivanti/Pulse
+    Secure – The Chain That Would Not End</h3>
+    <p>The Ivanti Connect Secure (formerly Pulse Secure) vulnerability
+    saga is a case study in cascading failure. The timeline:</p>
+    <ul>
+    <li><strong>December 2023</strong>: Exploitation of CVE-2023-46805
+    (authentication bypass) and CVE-2024-21887 (command injection)
+    begins. Volexity discovers the campaign and publishes findings on
+    January 10, 2024.</li>
+    <li><strong>January 2024</strong>: CISA issues Emergency Directive
+    24-01, ordering all federal agencies to disconnect Ivanti Connect
+    Secure appliances. Patches are delayed; mitigations prove
+    bypassable.</li>
+    <li><strong>February 2024</strong>: Additional vulnerabilities
+    CVE-2024-21888 (privilege escalation) and CVE-2024-21893 (SSRF) are
+    disclosed. Ivanti releases patches on January 31 and February 1 for
+    multiple versions.</li>
+    <li><strong>Mid-December 2024</strong>: Exploitation of
+    CVE-2025-0282 (unauthenticated stack-based buffer overflow enabling
+    remote code execution) begins before disclosure.</li>
+    <li><strong>January 8, 2025</strong>: Ivanti discloses CVE-2025-0282
+    and CVE-2025-0283.</li>
+    <li><strong>February 11, 2025</strong>: Ivanti Connect Secure
+    22.7R2.6 patches CVE-2025-22457.</li>
+    <li><strong>April 3, 2025</strong>: CVE-2025-22457 is disclosed as
+    actively exploited in the wild by suspected China-nexus threat
+    actors, affecting Connect Secure, Pulse Connect Secure, Policy
+    Secure, and ZTA Gateways.</li>
+    </ul>
+    <p>The operational lesson is not just “patch faster” – it is that
+    VPN appliances are high-value targets precisely because they sit at
+    the trust boundary. An attacker who compromises the VPN gateway has
+    bypassed the entire perimeter security model. Organizations running
+    Ivanti/Pulse Secure should evaluate whether the cumulative risk
+    profile justifies continued use, or whether migration to an
+    alternative VPN platform or ZTNA architecture is warranted.</p>
+    <h3
+    id="fortinet-ssl-vpn-the-symlink-that-survived-patching">Fortinet
+    SSL VPN – The Symlink That Survived Patching</h3>
+    <p>Fortinet’s SSL VPN service on FortiGate appliances suffered three
+    major vulnerabilities: CVE-2022-42475, CVE-2023-27997, and
+    CVE-2024-21762 (CVSS 9.6, out-of-bounds write in sslvpnd enabling
+    unauthenticated remote code execution). Each was exploited in the
+    wild. But the most operationally alarming development came in April
+    2025: Fortinet disclosed that attackers who had exploited these
+    earlier vulnerabilities had created symbolic links inside the
+    FortiOS user filesystem that connected to the root filesystem,
+    placed in a directory used to serve SSL VPN language files. These
+    symlinks survived patching – when organizations applied the fix for
+    the original vulnerability, the attacker’s persistence mechanism
+    remained in place, providing continued read-only access to the
+    device’s configuration files, including credentials.</p>
+    <p>By April 15, 2025, the Shadowserver Foundation reported 16,620
+    internet-exposed Fortinet devices compromised with the symlink
+    backdoor: 7,886 in Asia, 3,766 in Europe, 3,217 in North America.
+    CISA issued an advisory on April 11, 2025. Fortinet’s remediation
+    required upgrading to specific FortiOS versions (7.6.2, 7.4.7,
+    7.2.11, 7.0.17, or 6.4.16) that included detection and removal of
+    the malicious symlink, and the company recommended disabling SSL VPN
+    as a mitigation until the patch was applied.</p>
+    <p>The lesson is that patching a vulnerability does not guarantee
+    removal of the attacker. Post-exploitation persistence – through
+    symlinks, web shells, modified binaries, scheduled tasks, or
+    firmware implants – can survive the patch that closes the original
+    entry point. VPN appliance patching must be accompanied by integrity
+    verification: factory reset and rebuild from known-good firmware
+    when exploitation is suspected.</p>
+    <h3 id="cisco-anyconnect-death-by-a-thousand-cuts">Cisco AnyConnect
+    – Death by a Thousand Cuts</h3>
+    <p>Cisco AnyConnect (Secure Client) has not suffered a single
+    catastrophic zero-day on the scale of Ivanti or Fortinet’s SSL VPN,
+    but it has accumulated a steady stream of vulnerabilities that
+    collectively erode operational confidence. CVE-2023-20178 provided
+    privilege escalation to SYSTEM on Windows through a vulnerability
+    exploitable by any authenticated local user. CVE-2023-20240 and
+    CVE-2023-20241 allowed authenticated local denial of service through
+    out-of-bounds memory reads. A vulnerability in IKEv2 processing
+    allowed unauthenticated remote denial of service through crafted
+    packets. CVE-2024-20502 affected the AnyConnect VPN server on Meraki
+    MX appliances, allowing unauthenticated remote DoS through crafted
+    HTTPS requests.</p>
+    <p>The pattern is not a single devastating flaw but a broad attack
+    surface: the VPN client runs with high privileges on every endpoint,
+    processing untrusted network input from the VPN gateway, parsing
+    complex protocol messages, and managing cryptographic operations.
+    Every one of those functions is a potential vulnerability
+    surface.</p>
+    <h2 id="vpn-migration-checklist">VPN Migration Checklist</h2>
+    <h3 id="phase-0-assessment-weeks-1-2">Phase 0: Assessment (Weeks
+    1-2)</h3>
+    <ul class="task-list">
+    <li><label><input type="checkbox" />Inventory all VPN
+    infrastructure: site-to-site tunnels, remote access gateways, client
+    versions</label></li>
+    <li><label><input type="checkbox" />Document current user count,
+    peak concurrent sessions, and growth trajectory</label></li>
+    <li><label><input type="checkbox" />Catalog all applications
+    accessed through VPN, categorized by protocol and ZTNA
+    readiness</label></li>
+    <li><label><input type="checkbox" />Assess current VPN vulnerability
+    posture: patch levels, CVE exposure, Integrity Verification Tool
+    results</label></li>
+    <li><label><input type="checkbox" />Define target architecture: VPN
+    refresh, ZTNA migration, or hybrid coexistence</label></li>
+    </ul>
+    <h3 id="phase-1-parallel-deployment-weeks-3-8">Phase 1: Parallel
+    Deployment (Weeks 3-8)</h3>
+    <ul class="task-list">
+    <li><label><input type="checkbox" />Deploy ZTNA connectors alongside
+    existing VPN infrastructure</label></li>
+    <li><label><input type="checkbox" />Migrate web applications first
+    (lowest risk, fastest validation)</label></li>
+    <li><label><input type="checkbox" />Maintain VPN as primary access
+    path; ZTNA as secondary/opt-in</label></li>
+    <li><label><input type="checkbox" />Establish monitoring for both
+    paths: connection success rates, latency, user experience
+    metrics</label></li>
+    </ul>
+    <h3 id="phase-2-progressive-migration-weeks-9-20">Phase 2:
+    Progressive Migration (Weeks 9-20)</h3>
+    <ul class="task-list">
+    <li><label><input type="checkbox" />Migrate applications by
+    category: web apps, then SSH/RDP, then client-server, then legacy
+    protocols</label></li>
+    <li><label><input type="checkbox" />Shift user defaults from
+    VPN-primary to ZTNA-primary for migrated applications</label></li>
+    <li><label><input type="checkbox" />Reduce VPN concentrator capacity
+    as load decreases</label></li>
+    <li><label><input type="checkbox" />Monitor VPN traffic for
+    unmigrated applications and service accounts</label></li>
+    </ul>
+    <h3 id="phase-3-vpn-decommission-weeks-21-26">Phase 3: VPN
+    Decommission (Weeks 21-26)</h3>
+    <ul class="task-list">
+    <li><label><input type="checkbox" />Verify zero VPN traffic to all
+    migrated applications for 30 consecutive days</label></li>
+    <li><label><input type="checkbox" />Migrate remaining edge cases
+    (legacy protocols, partner connections, automation)</label></li>
+    <li><label><input type="checkbox" />Decommission VPN concentrators
+    or retain in cold standby for disaster recovery</label></li>
+    <li><label><input type="checkbox" />Update network diagrams,
+    runbooks, and incident response procedures</label></li>
+    </ul>
+    <h2 id="looking-forward">Looking Forward</h2>
+    <p>The VPN is not dead. IPsec site-to-site tunnels will carry
+    production traffic for years to come – they are well-understood,
+    standards-based, interoperable across vendors, and cryptographically
+    sound. WireGuard is displacing IPsec in environments that value
+    simplicity and performance over feature richness and compliance
+    certifications. Remote access VPN is being replaced, not by a better
+    VPN, but by a different architecture entirely – one where the
+    network grants no implicit trust, where access is brokered
+    per-application rather than per-network, and where the attack
+    surface of the access gateway is minimized by eliminating the
+    gateway’s exposure to the internet.</p>
+    <p>The operational discipline does not change: know what tunnels you
+    have, monitor them continuously, rotate keys on schedule, patch the
+    endpoints that terminate them, and verify that patching actually
+    removed the attacker – not just the vulnerability. The tunnel is a
+    promise. Keep it.</p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNO Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNO/">tibsfox.com/Research/SNO</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backus-Naur Form &mdash; ALGOL, BNF &amp; Context-Free Grammars</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alg">
+  <header>
+    <h1>Backus-Naur Form</h1>
+    <div class="subtitle">Backus&rsquo;s 1959 notation, Naur&rsquo;s 1960 Report, Knuth&rsquo;s 1964 renaming, and the 67-year shelf life of <code>::=</code></div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="report60.html">The Report</a>
+      <a href="bnf.html" class="active">BNF</a>
+      <a href="cfg.html">Context-Free Grammars</a>
+      <a href="parsers.html">Parsers</a>
+      <a href="influence.html">Influence</a>
+      <a href="wirth.html">Wirth Family</a>
+      <a href="rosetta.html">Rosetta</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <p>&ldquo;Before BNF, writing a compiler for a language meant negotiating with the language&rsquo;s manual. After BNF, writing a compiler meant mechanically following a grammar.&rdquo;</p>
+    </blockquote>
+
+    <h2>Before BNF</h2>
+
+    <p>In 1958, programming language manuals were written in prose. The Fortran 0 manual described the language in English sentences, with syntax tables, examples, and occasional flowcharts. The COBOL spec used a metalanguage of capitals and lowercase, but it could not describe nested expression structure because it had no recursion. Iverson&rsquo;s notation (which became APL) was its own idiosyncratic formalism. Every language was its own island.</p>
+
+    <p>The pre-BNF world had no standard way to answer the question &ldquo;is this string a legal program?&rdquo; Every implementation guessed. Every implementation disagreed on the edge cases. Portability was a matter of skill, not specification.</p>
+
+    <h2>John Backus and the 1959 ICIP Paper</h2>
+
+    <p>John Warner Backus (1924&ndash;2007) came out of the IBM Pure Science department, led the FORTRAN development team from 1954, and by 1957 had shipped the first FORTRAN compiler on the IBM 704. FORTRAN succeeded beyond anyone&rsquo;s expectations. By 1958 Backus had standing &mdash; the kind of standing that let him speak to international committees about what should come next.</p>
+
+    <p>In June 1959, UNESCO convened the <strong>International Conference on Information Processing (ICIP)</strong> in Paris. Backus presented a paper titled <em>The Syntax and Semantics of the Proposed International Algebraic Language of the Zurich ACM-GAMM Conference</em>. The paper appears in the conference proceedings (UNESCO, 1960) and it is the place where BNF first appears in print.</p>
+
+    <p>Backus&rsquo;s motivation was concrete. The Zurich report for ALGOL 58 was ambiguous in places. Backus wanted a notation that could describe the syntactic structures of the language precisely enough that two independent readers &mdash; or a human and a machine &mdash; would agree on what strings were legal.</p>
+
+    <h3>The Notation Backus Introduced</h3>
+
+    <p>The syntactic notation in the paper has these ingredients:</p>
+
+    <ul>
+      <li><strong>Metavariables</strong> enclosed in angle brackets. A metavariable like <code>&lt;integer&gt;</code> names a class of strings. Today we call these non-terminals.</li>
+      <li><strong>Literal symbols</strong> written as themselves, standing for the characters that appear in the actual language. Today we call these terminals.</li>
+      <li><strong>The metasymbol <code>:&equiv;</code></strong> (in Backus&rsquo;s paper; Naur changed it to <code>::=</code> in the ALGOL 60 Report). This separates a metavariable from its definition.</li>
+      <li><strong>The metasymbol <code>or</code></strong> between alternatives. Naur replaced this with the vertical bar <code>|</code>.</li>
+      <li><strong>Concatenation</strong> by juxtaposition. Writing <code>&lt;a&gt;&lt;b&gt;</code> means &ldquo;a string in the class <code>&lt;a&gt;</code> followed by a string in the class <code>&lt;b&gt;</code>.&rdquo;</li>
+    </ul>
+
+    <p>Backus gave examples like these (modernizing his typography to Naur&rsquo;s):</p>
+
+<pre class="bnf"><span class="nt">&lt;digit&gt;</span>   <span class="meta">::=</span> <span class="t">0</span> <span class="meta">|</span> <span class="t">1</span> <span class="meta">|</span> <span class="t">2</span> <span class="meta">|</span> <span class="t">3</span> <span class="meta">|</span> <span class="t">4</span> <span class="meta">|</span> <span class="t">5</span> <span class="meta">|</span> <span class="t">6</span> <span class="meta">|</span> <span class="t">7</span> <span class="meta">|</span> <span class="t">8</span> <span class="meta">|</span> <span class="t">9</span>
+<span class="nt">&lt;integer&gt;</span> <span class="meta">::=</span> <span class="nt">&lt;digit&gt;</span> <span class="meta">|</span> <span class="nt">&lt;integer&gt;</span> <span class="nt">&lt;digit&gt;</span></pre>
+
+    <p>The second rule is the critical one. It is recursive: <code>&lt;integer&gt;</code> is defined in terms of itself. Finitely many rules describe infinitely many strings. This was the thing that did not exist in COBOL&rsquo;s metalanguage, and its absence was the reason COBOL&rsquo;s metalanguage could not describe expressions.</p>
+
+    <h2>Emil Post, 1943</h2>
+
+    <p>Backus was careful to cite his source. In a footnote in the 1959 paper, Backus credits <strong>Emil Post&rsquo;s <em>Formal Reductions of the General Combinatorial Decision Problem</em></strong> (American Journal of Mathematics, 1943) for the idea of production systems &mdash; rules of the form &ldquo;if you see this pattern, you can rewrite it as that pattern&rdquo; &mdash; as the formal substrate he was building on.</p>
+
+    <p>Post had used productions as a tool for undecidability proofs, showing that the word problem for a Post canonical system is in general undecidable. Post&rsquo;s productions were far more general than Backus&rsquo;s: they allowed context on both sides of the rewrite rule and could express any recursively enumerable set. Backus restricted Post&rsquo;s system to a particular shape &mdash; rules where the left-hand side is a single non-terminal &mdash; and got exactly the class of grammars that Chomsky, three years earlier, had called context-free.</p>
+
+    <div class="card">
+      <p>The footnote is a historical hinge. It is the rare case where the practical notation cites the theoretical ancestor, sixteen years back, explicitly. Most programmers who used BNF over the next six decades never read Post&rsquo;s 1943 paper. But Backus had, and he said so.</p>
+    </div>
+
+    <h2>Peter Naur and the 1960 Report</h2>
+
+    <p>Peter Naur, a Danish astronomer turned computer scientist, had been involved in the ALGOL 58 effort and was the editor of the committee that produced the ALGOL 60 Report. Naur read Backus&rsquo;s 1959 paper, saw that the notation was exactly what the Report needed, and &mdash; crucially &mdash; decided to use it throughout. The committee met in Paris in January 1960, and the <em>Report on the Algorithmic Language ALGOL 60</em>, edited by Naur with thirteen co-authors, was published later that year in <em>CACM</em> (May 1960).</p>
+
+    <p>Naur made several small but consequential cleanups:</p>
+
+    <ul>
+      <li>He replaced Backus&rsquo;s <code>:&equiv;</code> with <code>::=</code>. This is the form that became canonical.</li>
+      <li>He replaced Backus&rsquo;s <code>or</code> with the vertical bar <code>|</code>.</li>
+      <li>He standardized the typography &mdash; italic angle-bracketed identifiers for non-terminals, Roman typeface for terminals.</li>
+      <li>He used the notation <em>consistently</em>, for every syntactic class in the language. <strong>The Report is the first document where a complete major programming language is given a complete formal grammar.</strong></li>
+    </ul>
+
+    <p>The ALGOL 60 Report&rsquo;s grammar fits in the middle portion of a roughly 40-page document. Read today, it is startlingly modern. The conditional statement:</p>
+
+<pre class="bnf"><span class="nt">&lt;if statement&gt;</span>         <span class="meta">::=</span> <span class="nt">&lt;if clause&gt;</span> <span class="nt">&lt;unconditional statement&gt;</span>
+<span class="nt">&lt;if clause&gt;</span>            <span class="meta">::=</span> <span class="t">if</span> <span class="nt">&lt;Boolean expression&gt;</span> <span class="t">then</span>
+<span class="nt">&lt;conditional statement&gt;</span> <span class="meta">::=</span> <span class="nt">&lt;if statement&gt;</span>
+                         <span class="meta">|</span> <span class="nt">&lt;if statement&gt;</span> <span class="t">else</span> <span class="nt">&lt;statement&gt;</span>
+                         <span class="meta">|</span> <span class="nt">&lt;if clause&gt;</span> <span class="nt">&lt;for statement&gt;</span>
+                         <span class="meta">|</span> <span class="nt">&lt;label&gt;</span> <span class="t">:</span> <span class="nt">&lt;conditional statement&gt;</span></pre>
+
+    <p>These are exactly the rules a modern compiler textbook would write. Notice the dangling-else problem right there in the grammar: the first alternative of <code>&lt;conditional statement&gt;</code> ends with an <code>&lt;if statement&gt;</code>, the second adds an <code>else</code>. The grammar is ambiguous and the Report handles the ambiguity by disambiguation commentary in the prose. Ambiguity in the grammar was known and accepted at the time; the engineering reflex to eliminate it came later.</p>
+
+    <h2>Knuth&rsquo;s 1964 Letter: The Renaming</h2>
+
+    <p>The notation in the Report was called &ldquo;Backus Normal Form&rdquo; in the first wave of papers that cited the Report &mdash; Backus was the originator, and &ldquo;normal form&rdquo; was a respectful gesture toward formal language theory. <strong>Donald Knuth</strong>, then a graduate student at Caltech and already deep in compiler work, wrote a letter to the editor of <em>CACM</em> in December 1964 pointing out that the notation was not a &ldquo;normal form&rdquo; in the technical sense (a normal form is a canonical representative of an equivalence class of objects; BNF is not that). Knuth proposed renaming it &ldquo;Backus Naur Form&rdquo; to credit Naur&rsquo;s contribution and to drop the inaccurate &ldquo;normal.&rdquo;</p>
+
+    <p>The letter was short, two paragraphs, and decisive. By the late 1960s &ldquo;Backus-Naur Form&rdquo; was the standard name. Knuth&rsquo;s letter is one of the most-cited two-paragraph communications in the history of computer science.</p>
+
+    <h2>A Complete BNF Grammar</h2>
+
+    <p>Here is a complete BNF grammar for arithmetic expressions, stratified to get correct precedence and left-associativity:</p>
+
+<pre class="bnf"><span class="nt">&lt;expr&gt;</span>   <span class="meta">::=</span> <span class="nt">&lt;term&gt;</span>
+         <span class="meta">|</span> <span class="nt">&lt;expr&gt;</span> <span class="t">"+"</span> <span class="nt">&lt;term&gt;</span>
+         <span class="meta">|</span> <span class="nt">&lt;expr&gt;</span> <span class="t">"-"</span> <span class="nt">&lt;term&gt;</span>
+
+<span class="nt">&lt;term&gt;</span>   <span class="meta">::=</span> <span class="nt">&lt;factor&gt;</span>
+         <span class="meta">|</span> <span class="nt">&lt;term&gt;</span> <span class="t">"*"</span> <span class="nt">&lt;factor&gt;</span>
+         <span class="meta">|</span> <span class="nt">&lt;term&gt;</span> <span class="t">"/"</span> <span class="nt">&lt;factor&gt;</span>
+
+<span class="nt">&lt;factor&gt;</span> <span class="meta">::=</span> <span class="nt">&lt;number&gt;</span>
+         <span class="meta">|</span> <span class="t">"("</span> <span class="nt">&lt;expr&gt;</span> <span class="t">")"</span>
+
+<span class="nt">&lt;number&gt;</span> <span class="meta">::=</span> <span class="nt">&lt;digit&gt;</span> <span class="meta">|</span> <span class="nt">&lt;number&gt;</span> <span class="nt">&lt;digit&gt;</span>
+<span class="nt">&lt;digit&gt;</span>  <span class="meta">::=</span> <span class="t">"0"</span> <span class="meta">|</span> <span class="t">"1"</span> <span class="meta">|</span> <span class="t">"2"</span> <span class="meta">|</span> <span class="t">"3"</span> <span class="meta">|</span> <span class="t">"4"</span>
+         <span class="meta">|</span> <span class="t">"5"</span> <span class="meta">|</span> <span class="t">"6"</span> <span class="meta">|</span> <span class="t">"7"</span> <span class="meta">|</span> <span class="t">"8"</span> <span class="meta">|</span> <span class="t">"9"</span></pre>
+
+    <p>Three observations about this grammar:</p>
+
+    <ol>
+      <li><strong>Precedence is stratified.</strong> <code>&lt;factor&gt;</code> is tighter than <code>&lt;term&gt;</code> is tighter than <code>&lt;expr&gt;</code>. When you parse <code>1 + 2 * 3</code>, the <code>*</code> must be grouped first because the grammar only admits <code>2 * 3</code> as a term.</li>
+      <li><strong>Associativity is encoded by recursion direction.</strong> <code>&lt;expr&gt; ::= &lt;expr&gt; "+" &lt;term&gt;</code> is left-recursive, making <code>+</code> left-associative. Right-recursion would make it right-associative.</li>
+      <li><strong>Left recursion is a problem for top-down parsers.</strong> A recursive-descent parser calling <code>expr()</code> that calls <code>expr()</code> as its first action will loop forever. This is the practical dividing line between parser families.</li>
+    </ol>
+
+    <h2>EBNF &mdash; Wirth&rsquo;s Extensions</h2>
+
+    <p>Niklaus Wirth, reviewing the notation in 1977, wrote the paper <em>&ldquo;What Can We Do About the Unnecessary Diversity of Notation for Syntactic Definitions&rdquo;</em> (CACM, November 1977). His proposal was <strong>Extended Backus-Naur Form (EBNF)</strong>, which added three natural extensions:</p>
+
+    <ul>
+      <li><strong>Optional elements</strong> in square brackets: <code>[ ... ]</code></li>
+      <li><strong>Repetition</strong> in curly braces: <code>{ ... }</code> (zero or more)</li>
+      <li><strong>Grouping</strong> in parentheses: <code>( ... )</code></li>
+      <li><strong>String literals</strong> in quotes: <code>"..."</code></li>
+    </ul>
+
+    <p>With these additions, the arithmetic expression grammar becomes much more compact:</p>
+
+<pre class="bnf"><span class="nt">expr</span>   <span class="meta">=</span> <span class="nt">term</span> { ( <span class="t">"+"</span> <span class="meta">|</span> <span class="t">"-"</span> ) <span class="nt">term</span> } .
+<span class="nt">term</span>   <span class="meta">=</span> <span class="nt">factor</span> { ( <span class="t">"*"</span> <span class="meta">|</span> <span class="t">"/"</span> ) <span class="nt">factor</span> } .
+<span class="nt">factor</span> <span class="meta">=</span> <span class="nt">number</span> <span class="meta">|</span> <span class="t">"("</span> <span class="nt">expr</span> <span class="t">")"</span> .
+<span class="nt">number</span> <span class="meta">=</span> <span class="nt">digit</span> { <span class="nt">digit</span> } .
+<span class="nt">digit</span>  <span class="meta">=</span> <span class="t">"0"</span> <span class="meta">|</span> <span class="t">"1"</span> <span class="meta">|</span> <span class="t">"2"</span> <span class="meta">|</span> <span class="t">"3"</span> <span class="meta">|</span> <span class="t">"4"</span>
+       <span class="meta">|</span> <span class="t">"5"</span> <span class="meta">|</span> <span class="t">"6"</span> <span class="meta">|</span> <span class="t">"7"</span> <span class="meta">|</span> <span class="t">"8"</span> <span class="meta">|</span> <span class="t">"9"</span> .</pre>
+
+    <p>The iteration braces <code>{ ... }</code> eliminate the need for left recursion, which is particularly valuable for top-down parsers. Wirth used EBNF in the Pascal manual and in every subsequent language he designed (Modula, Modula-2, Oberon). ISO standardized a version in 1996 as <strong>ISO/IEC 14977:1996 Extended BNF</strong>.</p>
+
+    <h2>ABNF and Internet Protocols</h2>
+
+    <p><strong>Augmented BNF (ABNF)</strong>, specified in <strong>RFC 5234</strong> (2008, updating RFC 2234), is the variant of BNF used throughout the Internet Engineering Task Force&rsquo;s protocol specifications. HTTP, SMTP, SIP, URI, JSON, and countless other IETF standards use ABNF to specify their message formats.</p>
+
+    <p>ABNF differs from standard BNF in small ways:</p>
+
+    <ul>
+      <li><code>/</code> instead of <code>|</code> for alternation</li>
+      <li>Repetition is <code>n*m</code> (at least n, at most m) prefixed to the element</li>
+      <li>Case-insensitive strings by default</li>
+      <li>Numeric character values, e.g. <code>%x20-7E</code> for printable ASCII</li>
+      <li>Incremental alternatives with <code>=/</code></li>
+    </ul>
+
+    <p>A fragment from RFC 7230 (HTTP/1.1) showing ABNF in use:</p>
+
+<pre class="bnf">HTTP-message    <span class="meta">=</span> start-line
+                  *( header-field CRLF )
+                  CRLF
+                  [ message-body ]
+
+start-line      <span class="meta">=</span> request-line / status-line
+
+request-line    <span class="meta">=</span> method SP request-target SP HTTP-version CRLF
+
+method          <span class="meta">=</span> token
+
+header-field    <span class="meta">=</span> field-name <span class="t">":"</span> OWS field-value OWS</pre>
+
+    <p>Every HTTP parser in existence derives from this grammar. Nginx, Apache, Node.js http module, Go net/http, Rust hyper, Python urllib &mdash; all implementing the same ABNF productions, all traceable back through Backus to the ALGOL 60 Report.</p>
+
+    <h2>PEG &mdash; The Modern Alternative</h2>
+
+    <p>Bryan Ford&rsquo;s 2004 paper <em>&ldquo;Parsing Expression Grammars: A Recognition-Based Syntactic Foundation&rdquo;</em> (POPL 2004) introduced <strong>Parsing Expression Grammars (PEGs)</strong> as an alternative to BNF-style context-free grammars. A PEG looks similar to an EBNF grammar but has one crucial difference: its alternation operator is <strong>ordered</strong>. Where BNF&rsquo;s <code>A | B</code> means &ldquo;either A or B, both are valid parses,&rdquo; PEG&rsquo;s <code>A / B</code> means &ldquo;try A first, and only try B if A fails.&rdquo;</p>
+
+    <p>The consequence: PEGs cannot be ambiguous. The ordered-choice operator picks a single parse tree deterministically. This eliminates the dangling-else problem at the grammar level. It also makes PEGs easier to reason about for programmers who want a clear operational model of parsing.</p>
+
+    <p>PEG features that BNF lacks:</p>
+
+    <ul>
+      <li><strong>Ordered alternation</strong> <code>A / B</code> instead of <code>|</code></li>
+      <li><strong>And-predicate</strong> <code>&amp;A</code> &mdash; lookahead: succeed if A would match, but consume nothing</li>
+      <li><strong>Not-predicate</strong> <code>!A</code> &mdash; negative lookahead</li>
+      <li><strong>Greedy repetition</strong> <code>A*</code>, <code>A+</code> &mdash; always consumes maximally, no backtracking</li>
+    </ul>
+
+    <p>Packrat parsing (Ford&rsquo;s companion paper, 2002) showed that PEGs can be parsed in linear time by memoizing intermediate results. This makes PEG+packrat a competitive technique for modern parser generators. Python switched to a PEG-based parser in 2020 (Python 3.9). Guido van Rossum wrote extensively about the switch.</p>
+
+    <div class="divider">::=  |  §  |  ::=</div>
+
+    <div class="cross-links">
+      <h4>Related Pages</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Committees</a></li>
+        <li><a href="report60.html">The ALGOL 60 Report</a></li>
+        <li><a href="cfg.html">Context-Free Grammars</a></li>
+        <li><a href="parsers.html">Parser Technology</a></li>
+        <li><a href="influence.html">The Algol Family</a></li>
+        <li><a href="wirth.html">Wirth Family</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Backus-Naur Form &middot; ALGOL, BNF &amp; Context-Free Grammars &middot; PNW Research Series</p>
+    <p><a href="../index.html">PNW Research Series</a> &middot; <a href="index.html">Back to Overview</a></p>
+  </footer>
+</body>
+</html>

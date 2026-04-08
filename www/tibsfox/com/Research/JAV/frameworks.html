@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frameworks &amp; Enterprise &mdash; Java and the JVM</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jav">
+  <header>
+    <h1>Frameworks &amp; Enterprise</h1>
+    <div class="subtitle">Spring, Jakarta EE, Quarkus, Hibernate, Android, Big Data &mdash; Java&rsquo;s Industrial Ecosystem</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="oop.html">OOP</a>
+      <a href="jvm.html">JVM</a>
+      <a href="frameworks.html" class="active">Frameworks</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Java the language matters, but Java the <em>ecosystem</em> is why Java still runs the world&rsquo;s banks, airline reservation systems, trading desks, Android phones, data lakes, and most of the infrastructure underneath modern search, streaming, and analytics.
+    </blockquote>
+
+    <h2>Spring Framework &mdash; The Defining Framework</h2>
+    <div class="card blue">
+      <p><strong>Rod Johnson</strong> introduced Spring in his 2002 book <em>Expert One-on-One J2EE Design and Development</em> (Wrox). The book was a sharp critique of EJB 2.x &mdash; overly heavyweight, hard to test, dependent on app servers. Spring was the working alternative: a plain-old-Java-object (POJO) framework with dependency injection, AOP, and transactional abstractions.</p>
+      <p>Twenty years later, Spring is the single most influential Java library ever written. <strong>Spring Boot</strong> (2014) made it convention-over-configuration, production-ready, and microservice-friendly &mdash; and became the default way to start a Java service.</p>
+    </div>
+
+    <h3>Spring Boot &mdash; REST controller</h3>
+<pre><code>@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity&lt;UserDto&gt; getUser(@PathVariable Long id) {
+        return userService.findById(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity&lt;UserDto&gt; create(@Valid @RequestBody CreateUserRequest req) {
+        UserDto created = userService.create(req);
+        return ResponseEntity
+            .created(URI.create("/api/users/" + created.id()))
+            .body(created);
+    }
+}</code></pre>
+
+    <h3>The Spring ecosystem</h3>
+    <table>
+      <thead><tr><th>Project</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Spring Framework</strong></td><td>IoC container, DI, AOP, data access, MVC, transactions</td></tr>
+        <tr><td><strong>Spring Boot</strong></td><td>Convention over configuration, embedded server, starters, actuator</td></tr>
+        <tr><td><strong>Spring Data</strong></td><td>Repository abstraction over JPA, MongoDB, Redis, Elasticsearch, Cassandra, Neo4j</td></tr>
+        <tr><td><strong>Spring Security</strong></td><td>Authentication and authorization framework</td></tr>
+        <tr><td><strong>Spring Cloud</strong></td><td>Microservice patterns: config, discovery, circuit breakers, gateway</td></tr>
+        <tr><td><strong>Spring WebFlux</strong></td><td>Reactive stack built on Project Reactor, non-blocking I/O</td></tr>
+        <tr><td><strong>Spring Batch</strong></td><td>Large-scale batch processing (ETL, reporting)</td></tr>
+        <tr><td><strong>Spring Integration</strong></td><td>Enterprise Integration Patterns for messaging</td></tr>
+        <tr><td><strong>Spring for GraphQL</strong></td><td>GraphQL server support</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>Corporate trajectory:</strong> SpringSource (2006) &rarr; VMware (2009) &rarr; Pivotal (2013) &rarr; VMware again (2019) &rarr; Broadcom (2023). Spring&rsquo;s development has survived four corporate parents and remains the dominant Java framework.</p>
+
+    <h2>Jakarta EE &mdash; The Standard Stack</h2>
+    <p>J2EE (1999) &rarr; Java EE (2006) &rarr; <strong>Jakarta EE</strong> (2018, after Oracle donated Java EE to the Eclipse Foundation). The trademark change meant the <code>javax.*</code> package prefix was renamed to <code>jakarta.*</code> in Jakarta EE 9 &mdash; a disruptive but necessary step.</p>
+
+    <table>
+      <thead><tr><th>API</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Servlets / JSP / JSF</strong></td><td>Web tier: HTTP handling, templating, component framework</td></tr>
+        <tr><td><strong>JPA</strong> (Jakarta Persistence)</td><td>ORM standard. Hibernate is the reference implementation.</td></tr>
+        <tr><td><strong>EJB</strong></td><td>Enterprise JavaBeans. Legacy; still used but rarely chosen for new projects.</td></tr>
+        <tr><td><strong>JMS</strong> (Jakarta Messaging)</td><td>Messaging abstraction; backed by ActiveMQ, IBM MQ, etc.</td></tr>
+        <tr><td><strong>JAX-RS</strong> (Jakarta REST)</td><td>REST APIs with annotations</td></tr>
+        <tr><td><strong>CDI</strong> (Contexts and Dependency Injection)</td><td>Standard DI, Weld reference implementation</td></tr>
+        <tr><td><strong>JTA</strong> (Jakarta Transactions)</td><td>Distributed transaction coordination</td></tr>
+        <tr><td><strong>Bean Validation</strong></td><td>JSR 303 &mdash; declarative validation (<code>@NotNull</code>, <code>@Size</code>, <code>@Email</code>)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Application servers</h3>
+    <ul>
+      <li><strong>Tomcat</strong> &mdash; servlet container only; the most widely deployed</li>
+      <li><strong>Jetty</strong>, <strong>Undertow</strong> &mdash; lightweight servlet containers, Spring Boot defaults</li>
+      <li><strong>WildFly</strong> (Red Hat, formerly JBoss) &mdash; full Jakarta EE</li>
+      <li><strong>GlassFish</strong> (Eclipse, Oracle reference) &mdash; full Jakarta EE</li>
+      <li><strong>Open Liberty</strong> (IBM) &mdash; modular Jakarta EE + MicroProfile</li>
+      <li><strong>Payara</strong> &mdash; GlassFish fork, commercial support</li>
+      <li><strong>TomEE</strong> &mdash; Tomcat + Jakarta EE</li>
+    </ul>
+
+    <h2>Modern Lightweight Frameworks</h2>
+    <p>The 2018&ndash;2020 wave brought a new generation of frameworks optimized for microservices, fast startup, and GraalVM Native Image:</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Quarkus</h4>
+        <p>Red Hat, 2019. &ldquo;Supersonic subatomic Java.&rdquo; Kubernetes-native, GraalVM Native Image first-class. Build-time metadata resolution makes Native Image painless.</p>
+      </div>
+      <div class="pillar">
+        <h4>Micronaut</h4>
+        <p>Object Computing, 2018. Compile-time DI instead of runtime reflection. Fast startup, low memory.</p>
+      </div>
+      <div class="pillar">
+        <h4>Helidon</h4>
+        <p>Oracle, 2018. MicroProfile compliant. Helidon SE (reactive functional) and Helidon MP (MicroProfile/Jakarta EE).</p>
+      </div>
+      <div class="pillar">
+        <h4>Dropwizard</h4>
+        <p>2011. Opinionated &ldquo;operations&rdquo; framework. Combines Jetty + Jersey + Jackson + Metrics + Guava. Production-ready out of the box.</p>
+      </div>
+    </div>
+
+    <p>Plus: <strong>Javalin</strong> (lightweight Kotlin/Java web framework), <strong>Spark Framework</strong> (Sinatra-inspired micro, not to be confused with Apache Spark), <strong>Vert.x</strong> (Eclipse, reactive, polyglot).</p>
+
+    <h2>ORM and Data Access</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Author</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hibernate</strong></td><td>Gavin King, 2001</td><td>The original Java ORM; JPA reference implementation. The project that shaped JPA itself.</td></tr>
+        <tr><td><strong>JPA</strong></td><td>JSR 220/317/338, now Jakarta Persistence</td><td>The standard spec. Annotations: <code>@Entity</code>, <code>@Id</code>, <code>@OneToMany</code>, etc.</td></tr>
+        <tr><td><strong>EclipseLink</strong></td><td>Eclipse Foundation</td><td>Reference implementation of JPA. Descended from TopLink.</td></tr>
+        <tr><td><strong>MyBatis</strong></td><td>Formerly iBatis</td><td>SQL-mapping framework; you write the SQL, MyBatis maps results to objects. Not an ORM.</td></tr>
+        <tr><td><strong>jOOQ</strong></td><td>Lukas Eder</td><td>Type-safe SQL DSL. Generates Java classes from your schema.</td></tr>
+        <tr><td><strong>Spring Data JPA</strong></td><td>Spring</td><td>Repository abstraction over JPA with query methods by convention</td></tr>
+        <tr><td><strong>R2DBC</strong></td><td>R2DBC SIG</td><td>Reactive relational database connectivity (non-blocking)</td></tr>
+      </tbody>
+    </table>
+
+<pre><code>// Spring Data JPA repository &mdash; no implementation needed
+public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
+    Optional&lt;User&gt; findByEmail(String email);
+    List&lt;User&gt; findByStatusOrderByCreatedAtDesc(Status status);
+
+    @Query("SELECT u FROM User u WHERE u.department.name = :dept")
+    List&lt;User&gt; inDepartment(@Param("dept") String dept);
+}</code></pre>
+
+    <h2>Android &mdash; Java&rsquo;s Second Life</h2>
+    <p>Android Inc. was founded in 2003 and acquired by Google in 2005. Android 1.0 shipped in September 2008. Java was the primary language from the start, via the <strong>Dalvik VM</strong> (later replaced by <strong>ART</strong>, Android Runtime). Android uses Java source compiled to Java bytecode, then transformed to Dalvik bytecode (<code>.dex</code>).</p>
+
+    <ul>
+      <li><strong>Google v. Oracle</strong> (2010&ndash;2021) &mdash; the decade-long lawsuit over Android&rsquo;s use of Java APIs. US Supreme Court ruled April 5, 2021 that Google&rsquo;s use was fair use.</li>
+      <li><strong>Android Studio</strong> (IntelliJ-based, 2013) &mdash; the official IDE</li>
+      <li><strong>Kotlin</strong> as official Android language since 2017, but Java is still widely used</li>
+      <li><strong>Jetpack libraries</strong> &mdash; the modern Android standard library</li>
+    </ul>
+
+    <h2>Big Data &mdash; The JVM&rsquo;s Data Infrastructure Empire</h2>
+    <p>Almost every piece of open-source big-data infrastructure is Java or JVM-based. This is where Java wins the domain that Python claims elsewhere:</p>
+
+    <table>
+      <thead><tr><th>System</th><th>Origin</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hadoop</strong></td><td>Doug Cutting, Mike Cafarella, 2006</td><td>HDFS + MapReduce + YARN. Named after Cutting&rsquo;s son&rsquo;s toy elephant.</td></tr>
+        <tr><td><strong>Apache Spark</strong></td><td>Matei Zaharia, AMPLab Berkeley, 2009 &rarr; Databricks 2013</td><td>In-memory distributed compute. Scala core, Java/Python/R APIs.</td></tr>
+        <tr><td><strong>Apache Kafka</strong></td><td>LinkedIn, 2011</td><td>Distributed event streaming platform. Scala and Java.</td></tr>
+        <tr><td><strong>Apache Flink</strong></td><td>Stratosphere/TU Berlin, 2014</td><td>Stream processing at scale</td></tr>
+        <tr><td><strong>Apache Cassandra</strong></td><td>Facebook, 2008</td><td>Wide-column NoSQL database. Java.</td></tr>
+        <tr><td><strong>Elasticsearch</strong></td><td>Shay Banon, 2010</td><td>Distributed search engine built on Lucene</td></tr>
+        <tr><td><strong>Apache Lucene</strong></td><td>Doug Cutting, 1999</td><td>The search library underneath Elasticsearch, Solr, Neo4j</td></tr>
+        <tr><td><strong>Apache Solr</strong></td><td>CNET, 2004</td><td>Enterprise search server on Lucene</td></tr>
+        <tr><td><strong>Neo4j</strong></td><td>Neo Technology, 2007</td><td>Graph database, Java</td></tr>
+        <tr><td><strong>Trino</strong> (formerly PrestoSQL)</td><td>Facebook, 2012</td><td>Distributed SQL query engine</td></tr>
+        <tr><td><strong>Apache Druid</strong></td><td>Metamarkets, 2011</td><td>Real-time analytics database</td></tr>
+        <tr><td><strong>Apache ZooKeeper</strong></td><td>Yahoo, 2008</td><td>Coordination service for distributed systems</td></tr>
+        <tr><td><strong>Apache Beam</strong></td><td>Google, 2016</td><td>Unified batch/stream model</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <p><strong>Why so much big data is Java:</strong> the JVM&rsquo;s excellent multi-threading, mature GC, huge library ecosystem, cross-platform operation, enterprise acceptance, deep profiling toolchain, and a decade of production experience running long-lived daemons under load.</p>
+    </div>
+
+    <h2>Financial / Trading</h2>
+    <ul>
+      <li><strong>LMAX Disruptor</strong> &mdash; Martin Thompson&rsquo;s low-latency ring buffer, used in trading exchanges</li>
+      <li><strong>Chronicle</strong> suite (Peter Lawrey) &mdash; high-performance messaging and persistence</li>
+      <li><strong>Aeron</strong> &mdash; efficient messaging (also Martin Thompson)</li>
+      <li><strong>Azul Zing / Prime</strong> &mdash; C4 pauseless GC for HFT workloads</li>
+    </ul>
+
+    <p>Java in HFT is a distinct world: deterministic GC, off-heap allocation, lock-free data structures, busy-wait spinlocks. Not Jane Street (OCaml), but much of the rest of HFT outside FPGA paths.</p>
+
+    <h2>Messaging and Integration</h2>
+    <ul>
+      <li><strong>Kafka</strong> &mdash; the de facto event streaming standard</li>
+      <li><strong>RabbitMQ</strong> &mdash; AMQP, general-purpose message broker (Erlang, but Java clients everywhere)</li>
+      <li><strong>ActiveMQ</strong> (Apache), <strong>Artemis</strong> &mdash; JMS brokers</li>
+      <li><strong>Spring Integration</strong>, <strong>Apache Camel</strong> &mdash; enterprise integration pattern implementations</li>
+      <li><strong>gRPC-Java</strong> &mdash; Google&rsquo;s RPC framework</li>
+      <li><strong>graphql-java</strong>, <strong>DGS</strong> (Netflix) &mdash; GraphQL servers</li>
+    </ul>
+
+    <h2>Observability</h2>
+    <ul>
+      <li><strong>Micrometer</strong> &mdash; metrics facade; Spring Boot&rsquo;s default</li>
+      <li><strong>OpenTelemetry Java agent</strong> &mdash; vendor-neutral tracing, metrics, logs</li>
+      <li><strong>JFR</strong> (Java Flight Recorder) &mdash; the &ldquo;native&rdquo; profiling format, now open source</li>
+      <li><strong>New Relic, Datadog, Dynatrace, AppDynamics</strong> &mdash; all Java-first APM vendors</li>
+    </ul>
+
+    <h2>Enterprise Architecture Patterns</h2>
+    <table>
+      <thead><tr><th>Era</th><th>Pattern</th></tr></thead>
+      <tbody>
+        <tr><td>1999&ndash;2005</td><td>Servlets + JSP, with <code>struts</code>/WebWork for MVC</td></tr>
+        <tr><td>2003&ndash;2010</td><td>EJB 2 (painful), then EJB 3 (better); Hibernate ORM</td></tr>
+        <tr><td>2004&ndash;2014</td><td>Spring + Hibernate became the de facto stack</td></tr>
+        <tr><td>2014&ndash;today</td><td>Spring Boot microservices, embedded servers, containerization</td></tr>
+        <tr><td>2018&ndash;today</td><td>Lightweight alternatives: Quarkus, Micronaut, Helidon + GraalVM Native Image</td></tr>
+        <tr><td>2021&ndash;today</td><td>Virtual threads for &ldquo;thread-per-request&rdquo; simplicity at microservice scale</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>BRC</td><td>Community Infrastructure</td><td>Elasticsearch/Lucene power search on many community platforms; Cassandra and Kafka the data layer</td></tr>
+        <tr><td>AIH</td><td>AI History</td><td>Weka, Mallet, Deeplearning4j &mdash; the Java ML stack before Python won</td></tr>
+        <tr><td>MPC</td><td>Math Co-Processor</td><td>Apache Commons Math, ND4J, Colt &mdash; numerical libraries on the JVM</td></tr>
+        <tr><td>SYS</td><td>Systems Administration</td><td>Spring Boot Actuator, JMX, Micrometer, JFR for production ops</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>Log4Shell (CVE-2021-44228) as a canonical dependency-vulnerability case study</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Java Language</a></li>
+        <li><a href="oop.html">Object-Oriented Java</a></li>
+        <li><a href="jvm.html">JVM &amp; Concurrency</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Frameworks &amp; Enterprise &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

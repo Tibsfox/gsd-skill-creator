@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rexx &amp; ARexx &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rxx">
+  <header>
+    <h1>Rexx &amp; ARexx</h1>
+    <div class="subtitle">A Practical Approach to Programming &mdash; From IBM Mainframes to Amiga IPC to GSD-OS on GPU</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="parse.html">PARSE</a>
+      <a href="ports.html">Ports &amp; IPC</a>
+      <a href="porting.html">Porting</a>
+      <a href="amiga.html">Amiga</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>ADDRESS 'GSD-OS'</strong><br>
+      "The purpose of the Rexx language is to be a <em>personal programming language</em> &mdash; both in the sense that it makes programming easier, and in the sense that it can be a pleasure to use."<br>
+      &mdash; Mike Cowlishaw, <em>The REXX Language: A Practical Approach to Programming</em>, 1985
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- RESEARCH PROGRAM STATISTICS                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value amber">47</span><span class="stat-label">Years of REXX</span></div>
+      <div class="stat"><span class="stat-value green">36</span><span class="stat-label">Years of ARexx</span></div>
+      <div class="stat"><span class="stat-value red">3</span><span class="stat-label">Port Stages</span></div>
+      <div class="stat"><span class="stat-value warm">&infin;</span><span class="stat-label">NUMERIC DIGITS</span></div>
+      <div class="stat"><span class="stat-value">1</span><span class="stat-label">Vision: GSD-OS</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why Rexx? Why now?</strong> Because ARexx is the soul of the Amiga, and the Amiga is the soul of this project. ARexx&rsquo;s port system &mdash; where any application can script any other application through named message ports &mdash; is the most elegant inter-process communication model ever deployed on a personal computer. It predated COM, AppleScript, D-Bus, and MCP by years. It ran on a machine with 512KB of RAM. And its principles are exactly what GSD-OS needs: a universal scripting layer that connects tools, agents, and co-processors through message passing.</p>
+      <p>This is not just a research project. This is the architectural blueprint for bringing ARexx back &mdash; first as a modern language implementation, then as native x86-64 for performance, then as CUDA kernels running on the GPU. The escalation ladder, applied to a language.</p>
+      <p><strong>Research method:</strong> Primary sources (Cowlishaw&rsquo;s book, ANSI X3.274, ARexx documentation, Regina/ooRexx source), cross-reference against 289-project PNW Research Series corpus, Rosetta translation mapping, porting feasibility analysis</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE PORT SYSTEM                                               -->
+    <!-- ============================================================ -->
+
+    <h2>The ARexx Port System &mdash; IPC Done Right</h2>
+
+    <div class="port-diagram">
+      <span class="comment">/* The ARexx port system: any application talks to any application */</span><br><br>
+      <span class="port-name">[ARexx Script]</span> <span class="arrow">&rarr;</span> ADDRESS '<span class="port-name">IMAGEFX</span>' <span class="arrow">&rarr;</span> <span class="msg">"LOAD FILE picture.iff"</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">&larr;</span> <span class="result">RC=0 RESULT="loaded"</span><br><br>
+      <span class="port-name">[ARexx Script]</span> <span class="arrow">&rarr;</span> ADDRESS '<span class="port-name">GOLDED.1</span>' <span class="arrow">&rarr;</span> <span class="msg">"OPEN FILE readme.txt"</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">&larr;</span> <span class="result">RC=0 RESULT="42 lines"</span><br><br>
+      <span class="port-name">[ARexx Script]</span> <span class="arrow">&rarr;</span> ADDRESS '<span class="port-name">DOPUS.1</span>' <span class="arrow">&rarr;</span> <span class="msg">"COPY FROM ram: TO work:"</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">&larr;</span> <span class="result">RC=0 RESULT="5 files copied"</span><br><br>
+      <span class="comment">/* One script. Three applications. Zero shared libraries. */</span><br>
+      <span class="comment">/* Just named ports, string messages, and string results. */</span>
+    </div>
+
+    <div class="card port-card">
+      <p><strong>The insight:</strong> ARexx ports are <em>exactly</em> MCP tools. A named endpoint that accepts string commands and returns string results. The Model Context Protocol (2024) reinvented what Commodore shipped in 1990. Our implementation will make this explicit: ARexx ports ARE MCP tools. <code>ADDRESS 'TOOL_NAME'</code> IS a tool call. The script IS the agent. The port IS the server.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE PORTING PIPELINE                                          -->
+    <!-- ============================================================ -->
+
+    <h2>The Three-Stage Porting Pipeline</h2>
+
+    <div class="port-pipeline">
+      <ol>
+        <li><strong>Stage 1: Modern Language Port</strong> &mdash; TypeScript implementation within gsd-skill-creator. Full REXX interpreter: lexer, parser, AST, evaluator. ARexx ports mapped to MCP tool calls. <code>PARSE</code> engine, arbitrary precision <code>NUMERIC DIGITS</code>, stem variables. Integrates with existing infrastructure. <em>Goal: run real ARexx scripts against real MCP tools.</em></li>
+        <li><strong>Stage 2: x86-64 Native Assembly</strong> &mdash; Hand-written x86-64 NASM interpreter. String operations via SSE4.2 (<code>PCMPESTRI</code>). Arbitrary precision via multi-register arithmetic. Port system via Unix domain sockets and shared memory. Zero dependencies. <em>Goal: the fastest REXX interpreter on Earth.</em></li>
+        <li><strong>Stage 3: CUDA GPU Port</strong> &mdash; REXX interpreter running on GPU as part of the GSD math co-processor. One thread block = one script instance. Warp-cooperative string operations. Shared memory = variable pool. Global memory = port buffers. <code>INTERPRET</code> becomes dispatch table lookup. <em>Goal: 10,000 concurrent REXX scripts on GPU for batch processing, Monte Carlo, parameter sweeps.</em></li>
+      </ol>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODULE OVERVIEW                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-history">History</span></div>
+        <h3>History &amp; Design</h3>
+        <p>Mike Cowlishaw at IBM Hursley (1979). William S. Hawes and ARexx on Amiga (1987). ANSI X3.274-1996 standardization. The philosophy of &ldquo;A Practical Approach to Programming.&rdquo; REXX&rsquo;s influence on Python, Perl, and modern scripting.</p>
+        <p><strong>Key:</strong> People, timeline, design philosophy, standardization</p>
+      </a>
+
+      <a href="language.html" class="category-card">
+        <div><span class="cluster-badge cluster-core">Core</span></div>
+        <h3>Language Reference</h3>
+        <p>The typeless string model. NUMERIC DIGITS for arbitrary precision. Variables and stems (compound variables). Control structures: DO, IF, SELECT, SIGNAL, INTERPRET. 70+ built-in functions. The complete language for porting.</p>
+        <p><strong>Key:</strong> Syntax, semantics, built-in functions, porting reference</p>
+      </a>
+
+      <a href="parse.html" class="category-card">
+        <div><span class="cluster-badge cluster-parse">PARSE</span></div>
+        <h3>The PARSE Engine</h3>
+        <p>REXX&rsquo;s killer feature: template-based string parsing. Word patterns, positional patterns, literal patterns, variable patterns. PARSE ARG, PARSE VAR, PARSE PULL, PARSE VALUE. The parsing algorithm in detail &mdash; critical for all three port stages.</p>
+        <p><strong>Key:</strong> Template grammar, algorithm, implementation guide</p>
+      </a>
+
+      <a href="ports.html" class="category-card">
+        <div><span class="cluster-badge cluster-port">Ports</span></div>
+        <h3>Ports &amp; IPC</h3>
+        <p>The ARexx port system: exec.library message passing, RexxMsg structures, ADDRESS instruction, host command interface. How applications implemented ARexx support. Mapping to modern IPC: D-Bus, MCP, gRPC. The port system as GSD-OS&rsquo;s IPC layer.</p>
+        <p><strong>Key:</strong> Port architecture, message format, modern mapping, MCP bridge</p>
+      </a>
+
+      <a href="porting.html" class="category-card">
+        <div><span class="cluster-badge cluster-arch">Arch</span></div>
+        <h3>Porting Architecture</h3>
+        <p>Three-stage pipeline: TypeScript interpreter &rarr; x86-64 assembly &rarr; CUDA GPU. Interpreter design, memory layouts, register allocation, GPU thread model. The INTERPRET challenge. Integration with GSD-OS and the math co-processor.</p>
+        <p><strong>Key:</strong> Interpreter design, assembly patterns, CUDA architecture</p>
+      </a>
+
+      <a href="amiga.html" class="category-card">
+        <div><span class="cluster-badge cluster-amiga">Amiga</span></div>
+        <h3>The Amiga Connection</h3>
+        <p>exec.library and the message-passing OS. ARexx as system integration glue. The applications that made it work: ImageFX, Directory Opus, GoldEd, ProTracker. Why Amiga principles matter for GSD-OS. The exec.library &rarr; GSD-OS mapping.</p>
+        <p><strong>Key:</strong> Amiga OS architecture, application ecosystem, design principles</p>
+      </a>
+
+      <a href="rosetta.html" class="category-card">
+        <div><span class="cluster-badge cluster-rosetta">Rosetta</span></div>
+        <h3>Rosetta Integration</h3>
+        <p>REXX &harr; Python &harr; Bash &harr; Perl &harr; TypeScript translation patterns. PARSE vs regex. Stems vs dictionaries/maps. ARexx ports vs Unix pipes vs MCP tools. The escalation ladder extended.</p>
+        <p><strong>Key:</strong> Cross-language patterns, PARSE vs regex, IPC comparison</p>
+      </a>
+
+      <a href="education.html" class="category-card">
+        <div><span class="cluster-badge cluster-edu">Education</span></div>
+        <h3>Learning Resources</h3>
+        <p>Cowlishaw&rsquo;s <em>The REXX Language</em>. The ANSI standard. Regina REXX for practice. Open Object Rexx documentation. ARexx guides from the Amiga community. RexxLA (Rexx Language Association).</p>
+        <p><strong>Key:</strong> Books, implementations, community, practice</p>
+      </a>
+
+      <a href="implementations.html" class="category-card">
+        <div><span class="cluster-badge cluster-impl">Impl</span></div>
+        <h3>Implementations</h3>
+        <p>Regina REXX (Mark Hessling), Open Object Rexx (IBM/RexxLA), NetRexx (JVM), BRexx (embedded), OS/2 REXX, ARexx. Source analysis for porting. What each implementation teaches us.</p>
+        <p><strong>Key:</strong> Open-source implementations, source study, architecture lessons</p>
+      </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- REXX AT A GLANCE                                              -->
+    <!-- ============================================================ -->
+
+    <h2>REXX at a Glance</h2>
+    <table>
+      <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Name</td><td><strong>REXX</strong> &mdash; REstructured eXtended eXecutor</td></tr>
+        <tr><td>Creator</td><td>Mike Cowlishaw, IBM UK Laboratories, Hursley</td></tr>
+        <tr><td>First release</td><td>1979 (internal IBM), 1982 (VM/CMS product)</td></tr>
+        <tr><td>Standard</td><td>ANSI X3.274-1996</td></tr>
+        <tr><td>Type system</td><td>Typeless &mdash; everything is a string</td></tr>
+        <tr><td>Arithmetic</td><td>Arbitrary precision via NUMERIC DIGITS</td></tr>
+        <tr><td>Killer feature</td><td>PARSE instruction (template-based string parsing)</td></tr>
+        <tr><td>Philosophy</td><td>&ldquo;A Practical Approach to Programming&rdquo;</td></tr>
+        <tr><td>Paradigm</td><td>Imperative, unstructured → structured, extensible</td></tr>
+        <tr><td>Key platforms</td><td>VM/CMS, OS/2, AmigaOS, TSO, z/OS, Windows, Linux</td></tr>
+        <tr><td>ARexx creator</td><td>William S. Hawes (1987, shipped with AmigaOS 2.0 in 1990)</td></tr>
+        <tr><td>ARexx innovation</td><td>Named message ports for inter-application scripting</td></tr>
+        <tr><td>Open implementations</td><td>Regina, ooRexx, NetRexx, BRexx</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- THE AMIGA-MCP CONNECTION                                      -->
+    <!-- ============================================================ -->
+
+    <h2>ARexx Ports = MCP Tools</h2>
+
+    <table>
+      <thead><tr><th>ARexx (1990)</th><th>MCP (2024)</th><th>Equivalence</th></tr></thead>
+      <tbody>
+        <tr><td>Named port (&ldquo;IMAGEFX&rdquo;)</td><td>Tool name (&ldquo;read_file&rdquo;)</td><td>Named endpoint for commands</td></tr>
+        <tr><td><code>ADDRESS 'PORT' "command"</code></td><td>Tool call with parameters</td><td>Send command, wait for result</td></tr>
+        <tr><td><code>RC</code> (return code)</td><td>Success/error status</td><td>Completion status</td></tr>
+        <tr><td><code>RESULT</code> (result string)</td><td>Tool result (JSON)</td><td>Return value</td></tr>
+        <tr><td><code>SHOW('P')</code></td><td>Tool discovery / list_tools</td><td>Enumerate available endpoints</td></tr>
+        <tr><td>RexxMsg structure</td><td>Tool call JSON schema</td><td>Message format</td></tr>
+        <tr><td>ARexx script</td><td>AI agent / prompt</td><td>The orchestrator</td></tr>
+        <tr><td>Application with port</td><td>MCP server</td><td>The service provider</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card arch-card">
+      <p><strong>The vision:</strong> In GSD-OS, every MCP tool is an ARexx port. Every ARexx script is an agent. The <code>ADDRESS</code> instruction is how agents invoke tools. The <code>PARSE</code> instruction is how they process results. Arbitrary precision <code>NUMERIC DIGITS</code> powers the math co-processor. And when you need 10,000 concurrent agents, you launch them on the GPU.</p>
+      <p>Commodore got there first. We&rsquo;re bringing it back.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- REXX CODE SAMPLE                                              -->
+    <!-- ============================================================ -->
+
+    <h2>A Taste of REXX</h2>
+
+    <pre>
+/* Classic REXX: readable, practical, human-friendly */
+SAY "Enter a number:"
+PULL number
+
+IF DATATYPE(number, 'N') THEN DO
+  NUMERIC DIGITS 100              /* 100-digit precision */
+  factorial = 1
+  DO i = 1 TO number
+    factorial = factorial * i
+  END
+  SAY number"! =" factorial
+END
+ELSE
+  SAY "That's not a number."</pre>
+
+    <pre>
+/* ARexx: orchestrating applications through ports */
+ADDRESS 'IMAGEFX'                 /* talk to ImageFX */
+"LOAD FILE 'photo.iff'"          /* load an image */
+"SCALE 640 480"                   /* resize it */
+"FILTER SHARPEN 50"               /* apply sharpening */
+
+ADDRESS 'DOPUS.1'                 /* switch to Directory Opus */
+"COPY FROM 'ram:photo.iff' TO 'work:output/'"
+
+ADDRESS 'GOLDED.1'                /* switch to GoldED text editor */
+"OPEN FILE 'work:output/log.txt'"
+"INSERT 'Processed photo.iff at' DATE() TIME()"
+
+SAY "Done. Three applications. One script."</pre>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CLI</td><td>The Art of the CLI</td><td>REXX as the scripting layer above bash. ARexx ports as IPC beyond pipes.</td></tr>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>REXX predates Perl (1979 vs 1987). PARSE vs regex. Cowlishaw vs Wall.</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>REXX influenced Python&rsquo;s readability philosophy. Guido knew REXX from ABC.</td></tr>
+        <tr><td>ASM</td><td>Assembly Language</td><td>Stage 2 target. x86-64 REXX interpreter. The Amiga escalation ladder.</td></tr>
+        <tr><td>MLC</td><td>Machine Language</td><td>Understanding instruction encoding for the assembly port.</td></tr>
+        <tr><td>MPC</td><td>Math Co-Processor</td><td>NUMERIC DIGITS on GPU. CUDA integration. Stage 3 target.</td></tr>
+        <tr><td>CEE</td><td>C Programming</td><td>ARexx was written in C. Regina REXX is C. The implementation language.</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>Potential Stage 1 alternative. Memory safety for interpreter.</td></tr>
+        <tr><td>JTS</td><td>JavaScript &amp; TypeScript</td><td>Stage 1 implementation language. MCP integration via existing stack.</td></tr>
+        <tr><td>GOL</td><td>Go</td><td>Alternative for port system (goroutines map well to concurrent ports).</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="history.html">History &amp; Design</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="parse.html">The PARSE Engine</a></li>
+        <li><a href="ports.html">Ports &amp; IPC</a></li>
+        <li><a href="porting.html">Porting Architecture</a></li>
+        <li><a href="amiga.html">The Amiga Connection</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="implementations.html">Implementations</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rexx &amp; ARexx &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

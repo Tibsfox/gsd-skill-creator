@@ -361,8 +361,8 @@ Output: [Artifacts created]
 </objective>
 
 <execution_context>
-@/home/foxy/.claude/get-shit-done/workflows/execute-plan.md
-@/home/foxy/.claude/get-shit-done/templates/summary.md
+@~/.claude/get-shit-done/workflows/execute-plan.md
+@~/.claude/get-shit-done/templates/summary.md
 </execution_context>
 
 <context>
@@ -684,7 +684,7 @@ Triggered by `--gaps` flag. Creates plans to address verification or UAT failure
 **1. Find gap sources:**
 
 ```bash
-PHASE_DIR=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js find-phase "$PHASE_ARG" --raw)
+PHASE_DIR=$(node ~/.claude/get-shit-done/bin/gsd-tools.js find-phase "$PHASE_ARG" --raw)
 
 # Check for VERIFICATION.md (code verification gaps)
 ls "$PHASE_DIR"/*-VERIFICATION.md 2>/dev/null
@@ -794,7 +794,7 @@ Group by plan, dimension, severity.
 ### Step 6: Commit
 
 ```bash
-node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js commit "fix($PHASE): revise plans based on checker feedback" --files .planning/phases/$PHASE-*/$PHASE-*-PLAN.md
+node ~/.claude/get-shit-done/bin/gsd-tools.js commit "fix($PHASE): revise plans based on checker feedback" --files .planning/phases/$PHASE-*/$PHASE-*-PLAN.md
 ```
 
 ### Step 7: Return Revision Summary
@@ -837,7 +837,7 @@ If STATE.md missing but .planning/ exists, offer to reconstruct or continue with
 **Load planning config:**
 
 ```bash
-COMMIT_PLANNING_DOCS=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js state load --raw | grep '^commit_docs=' | cut -d= -f2)
+COMMIT_PLANNING_DOCS=$(node ~/.claude/get-shit-done/bin/gsd-tools.js state load --raw | grep '^commit_docs=' | cut -d= -f2)
 ```
 </step>
 
@@ -906,7 +906,7 @@ done
 
 <step name="gather_phase_context">
 ```bash
-PHASE_DIR=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js find-phase "$PHASE" --raw)
+PHASE_DIR=$(node ~/.claude/get-shit-done/bin/gsd-tools.js find-phase "$PHASE" --raw)
 
 cat "$PHASE_DIR"/*-CONTEXT.md 2>/dev/null   # From /gsd:discuss-phase
 cat "$PHASE_DIR"/*-RESEARCH.md 2>/dev/null   # From /gsd:research-phase
@@ -1008,7 +1008,7 @@ Plans:
 
 <step name="git_commit">
 ```bash
-node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js commit "docs($PHASE): create phase plan" --files .planning/phases/$PHASE-*/$PHASE-*-PLAN.md .planning/ROADMAP.md
+node ~/.claude/get-shit-done/bin/gsd-tools.js commit "docs($PHASE): create phase plan" --files .planning/phases/$PHASE-*/$PHASE-*-PLAN.md .planning/ROADMAP.md
 ```
 </step>
 

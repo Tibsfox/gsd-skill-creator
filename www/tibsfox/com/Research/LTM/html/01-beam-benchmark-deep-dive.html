@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEAM Benchmark Deep Dive — LTM Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #221f3a;
+            --accent: #FFB300;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #9575CD;
+            --border: #2f2a4a;
+            --primary: #4527A0;
+            --mem: #FFD54F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; padding: 2rem; max-width: 900px; margin: 0 auto; }
+        h1 { color: var(--mem); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--mem); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--mem); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--mem); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--mem); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(149,117,205,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        LTM — Long-Term Memory Systems for AI Agents<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to LTM Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="beam-benchmark-deep-dive">BEAM Benchmark Deep Dive</h1>
+    <p><strong>Module:</strong> LTM Research Series, Module 01
+    <strong>Primary source:</strong> Tavakoli, Salemi, Ye, Abdalla,
+    Zamani, Mitchell — <em>Beyond a Million Tokens: Benchmarking and
+    Enhancing Long-Term Memory in LLMs</em> (ICLR 2026)
+    <strong>Repository:</strong>
+    https://github.com/mohammadtavakoli78/BEAM <strong>ArXiv:</strong>
+    https://arxiv.org/abs/2510.27246 <strong>OpenReview:</strong>
+    https://openreview.net/forum?id=y59hf5lrMn <strong>Date
+    compiled:</strong> 2026-04-08 <strong>Audience:</strong>
+    memory-system designers, long-context LLM researchers,
+    gsd-skill-creator LTM mission team</p>
+    <hr />
+    <h2 id="why-beam-matters">1. Why BEAM Matters</h2>
+    <p>Until late 2025, the long-term memory evaluation landscape was a
+    patchwork. LoCoMo, LongMemEval, and MemBench each measured
+    <em>some</em> aspects of conversational memory, but they shared
+    three structural weaknesses that BEAM was designed to repair:</p>
+    <ol type="1">
+    <li><p><strong>Domain monoculture.</strong> Prior benchmarks
+    concentrated overwhelmingly on personal-life dialogue — casual
+    chit-chat, fictional relationships, daily-life trivia. Technical
+    reasoning, code, finance, and medicine were underrepresented or
+    absent. That made it impossible to tell whether a memory system
+    generalized or whether it had merely memorized the shape of
+    gossip.</p></li>
+    <li><p><strong>Length ceilings far below production usage.</strong>
+    Most memory benchmarks topped out at roughly 100K–500K tokens. By
+    2025, frontier models shipped million-token context windows, and
+    real deployments routinely accumulated multi-million-token histories
+    (agent loops, research sessions, long-running assistants). No
+    benchmark tested what happens past a million tokens, let alone at
+    ten million.</p></li>
+    <li><p><strong>Partial ability coverage.</strong> Each benchmark
+    probed a subset of what “memory” means. Some tested recall. Some
+    tested reasoning. None systematically covered the <em>ten</em>
+    distinct capabilities that a useful long-term memory system actually
+    needs.</p></li>
+    </ol>
+    <p>BEAM directly addresses all three. It spans four length tiers up
+    to 10 million tokens, draws conversations from coding, math, health,
+    finance, and personal domains, and partitions memory into ten
+    orthogonal abilities — three of them novel to the literature — with
+    2,000 validated probing questions distributed across them. It is, as
+    of this writing, the most rigorous public evaluation of long-term
+    conversational memory in LLMs.</p>
+    <p>The second contribution of the paper — LIGHT, a cognitively
+    inspired memory framework — is interesting on its own, but the
+    benchmark itself is the lasting artifact. LIGHT will be superseded.
+    The ten-ability taxonomy and the 10M-token test bed are likely to
+    persist as reference points for the next several years of memory
+    research.</p>
+    <hr />
+    <h2 id="the-ten-memory-abilities">2. The Ten Memory Abilities</h2>
+    <p>BEAM decomposes “long-term memory” into ten abilities, each
+    probed separately. Three abilities — <strong>Abstention</strong>,
+    <strong>Contradiction Resolution</strong>, and <strong>Event
+    Ordering</strong> — are novel contributions of this paper. The
+    remaining seven are adapted from prior benchmarks but now evaluated
+    at unprecedented context lengths.</p>
+    <h3 id="abstention-novel">2.1 Abstention <em>(novel)</em></h3>
+    <p><strong>Definition:</strong> “Evaluates whether a model withholds
+    answers when evidence is missing.”</p>
+    <p>The ability to say “I don’t know” is a surprisingly weak point
+    for LLMs. When asked about something not present in the conversation
+    history, a well-calibrated memory system should refuse — not
+    hallucinate a plausible-sounding answer. Abstention questions in
+    BEAM deliberately reference information the conversation never
+    contained. A correct response acknowledges the absence; an incorrect
+    response invents.</p>
+    <p><em>Example probe shape:</em> “What did I say my sister’s name
+    was?” — when no sister was ever mentioned.</p>
+    <p>Notably, abstention is the <strong>easiest</strong> ability on
+    BEAM: all methods score highest here. It turns out that at long
+    contexts, retrieval-augmented pipelines naturally abstain more often
+    because their retrievers simply fail to surface relevant chunks,
+    which the generator then interprets as “not enough information.”
+    This means abstention scores can be misleading — high abstention can
+    signal either good calibration <em>or</em> retrieval failure. BEAM’s
+    per-ability reporting lets readers disentangle these.</p>
+    <h3 id="contradiction-resolution-novel">2.2 Contradiction Resolution
+    <em>(novel)</em></h3>
+    <p><strong>Definition:</strong> “Tests the capacity to detect and
+    reconcile inconsistent statements across widely separated
+    turns.”</p>
+    <p>This is the <strong>hardest</strong> ability on BEAM. Across all
+    models and methods tested — including LIGHT — contradiction
+    resolution scores near the floor. Scores in the 0.025–0.037 range
+    are common at 100K tokens, meaning models correctly reconcile
+    contradictions roughly 3% of the time.</p>
+    <p>The setup: during the conversation, a user makes some statement
+    (“I’m allergic to peanuts”), and later — often hundreds of thousands
+    of tokens later — makes an incompatible statement (“I had a peanut
+    butter sandwich for lunch every day this week”). The probe asks the
+    model to recognize the inconsistency and produce the reconciled
+    truth. Even million-token-context LLMs, given the full dialogue,
+    cannot reliably do this.</p>
+    <p>Why? Contradiction detection requires holding two claims in
+    working memory simultaneously <em>and</em> noticing their semantic
+    conflict. Retrieval systems tend to return one or the other claim
+    but not both. Long-context attention diffuses across the window and
+    fails to surface the conflict. This is the single clearest open
+    problem the benchmark reveals.</p>
+    <h3 id="event-ordering-novel">2.3 Event Ordering
+    <em>(novel)</em></h3>
+    <p><strong>Definition:</strong> “Assesses whether a model can
+    recognize and reconstruct the sequence of evolving information.”</p>
+    <p>Uniquely among the ten abilities, Event Ordering is scored using
+    the <strong>Kendall tau-b rank correlation coefficient</strong> —
+    which measures both the presence of events in the answer
+    <em>and</em> their ordering. Standard nugget scoring (binary
+    satisfaction per atomic fact) would miss order errors, so the paper
+    introduces this specialized metric.</p>
+    <p><em>Example probe:</em> Given a conversation about a user’s
+    career progression, “List the jobs the user held in chronological
+    order.” An answer that lists all jobs but misorders them receives
+    partial credit proportional to the rank correlation.</p>
+    <h3 id="information-extraction">2.4 Information Extraction</h3>
+    <p><strong>Definition:</strong> “Measures recall of entities and
+    factual details in long histories.”</p>
+    <p>The classic memory task: did the model remember a specific fact
+    that appeared somewhere in the conversation? Information Extraction
+    is typically the second-best-performing ability, which matches
+    intuition — dense retrieval is good at surfacing specific entities
+    when queries are well-formed.</p>
+    <h3 id="instruction-following">2.5 Instruction Following</h3>
+    <p><strong>Definition:</strong> “Examines sustained adherence to
+    user-specified constraints over long contexts.”</p>
+    <p>A user might say “from now on, always respond in bullet points.”
+    Hundreds of thousands of tokens later, does the model still comply?
+    Instruction Following probes these long-range behavioral
+    commitments. It is distinct from in-context instructions in a single
+    prompt — here the instruction might have been issued 500K tokens
+    ago.</p>
+    <h3 id="knowledge-update">2.6 Knowledge Update</h3>
+    <p><strong>Definition:</strong> “Evaluates revising stored facts as
+    new ones appear.”</p>
+    <p>Closely related to contradiction resolution, but distinct: the
+    user updates a fact (not contradictory, just newer), and the model
+    must use the <em>new</em> value. “I live in Boston.” … [200K tokens
+    later] … “I just moved to Seattle.” Probe: “Where do I live?”
+    Correct answer: Seattle. A memory system that returns the older fact
+    fails.</p>
+    <h3 id="multi-session-multi-hop-reasoning">2.7 Multi-Session /
+    Multi-Hop Reasoning</h3>
+    <p><strong>Definition:</strong> “Probes inference that integrates
+    evidence across multiple, non-adjacent dialogue segments.”</p>
+    <p>The paper uses both “Multi-Session Reasoning” and “Multi-Hop
+    Reasoning” for this ability — they refer to the same thing. The
+    model must combine two or more facts from different parts of the
+    conversation to derive a new fact not explicitly stated. Classic
+    chain-of-reasoning over distant memory.</p>
+    <p><em>Example:</em> Fact A at turn 50: “My birthday is March 15.”
+    Fact B at turn 800: “I was born in 1992.” Probe at turn 1200: “How
+    old will I be on my next birthday?” Requires retrieving both facts,
+    doing arithmetic, and reasoning about the current date.</p>
+    <h3 id="preference-following">2.8 Preference Following</h3>
+    <p><strong>Definition:</strong> “Captures personalized responses
+    that adapt to evolving preferences.”</p>
+    <p>Preferences are a special class of long-lived facts: the user
+    states likes, dislikes, constraints, and these should persist.
+    Preference Following distinguishes from Instruction Following by
+    being softer — not directives but taste. “I prefer vegetarian food.”
+    The model should remember this when recommending restaurants 300K
+    tokens later.</p>
+    <h3 id="summarization">2.9 Summarization</h3>
+    <p><strong>Definition:</strong> “Assesses the ability to abstract
+    and compress dialogue content.”</p>
+    <p>Can the model produce a faithful summary of a portion of the
+    conversation? This is the ability where LIGHT shows the
+    <strong>largest relative improvement</strong> — +160.6% over vanilla
+    baselines — because the scratchpad component essentially
+    pre-computes rolling summaries that the final response generator can
+    draw on.</p>
+    <h3 id="temporal-reasoning">2.10 Temporal Reasoning</h3>
+    <p><strong>Definition:</strong> “Tests reasoning about explicit and
+    implicit time relations.”</p>
+    <p>Can the model answer “how long ago did I tell you about the job
+    interview?” or “did event A happen before event B?” Explicit
+    temporal markers are easier; implicit reasoning (“last winter,”
+    “when I was still working at the startup”) is harder. LIGHT shows
+    strong gains here (+56.3%) because the episodic memory index
+    preserves timestamps that vanilla attention muddles.</p>
+    <hr />
+    <h2 id="dataset-construction">3. Dataset Construction</h2>
+    <p>BEAM’s 100 conversations and 2,000 questions were not scraped or
+    crowd-sourced. They were generated through a five-stage synthetic
+    pipeline with human validation at the end. Understanding this
+    pipeline matters because it determines what the benchmark can and
+    cannot measure.</p>
+    <h3 id="length-tiers">3.1 Length Tiers</h3>
+    <table>
+    <thead>
+    <tr>
+    <th>Tier</th>
+    <th>Conversations</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>128K tokens</td>
+    <td>20</td>
+    <td>Baseline — comparable to prior benchmarks</td>
+    </tr>
+    <tr>
+    <td>500K tokens</td>
+    <td>35</td>
+    <td>Mid-range, approximating typical long chats</td>
+    </tr>
+    <tr>
+    <td>1M tokens</td>
+    <td>35</td>
+    <td>Frontier-context stress test</td>
+    </tr>
+    <tr>
+    <td>10M tokens</td>
+    <td>10</td>
+    <td>Beyond-frontier test</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The asymmetric distribution — fewer conversations at the extreme
+    — reflects cost. A 10M-token synthetic conversation is expensive to
+    generate, verify, and evaluate. Ten is enough to surface qualitative
+    failure modes without breaking the compute budget.</p>
+    <h3 id="stage-1-conversation-plans">3.2 Stage 1: Conversation
+    Plans</h3>
+    <p>Each conversation begins as a structured seed containing:</p>
+    <ul>
+    <li><strong>Domain</strong> — coding, math, health, finance,
+    personal, etc.</li>
+    <li><strong>Title/theme</strong> — the overarching narrative
+    arc.</li>
+    <li><strong>Subtopics</strong> — 15–20 narrative threads that will
+    weave through the dialogue.</li>
+    <li><strong>User profile</strong> — name, age, gender, profession,
+    MBTI personality type.</li>
+    <li><strong>Relationship graph</strong> — who the user knows and
+    how.</li>
+    <li><strong>Explicit timeline</strong> — a calendar of events that
+    will be referenced.</li>
+    </ul>
+    <p>For conversations at or below 1M tokens, a single LLM-generated
+    plan suffices. For 10M-token conversations, the pipeline uses one of
+    two expansion strategies:</p>
+    <ul>
+    <li><strong>Sequential Expansion</strong> — ten interlocking plans
+    chained by successive events (time-ordered).</li>
+    <li><strong>Hierarchical Decomposition</strong> — ten interlocking
+    plans organized by topical segment (theme-ordered).</li>
+    </ul>
+    <p>Plans are then augmented with three <strong>targeted bullet
+    points</strong> per sub-plan: one for a contradiction the
+    conversation must contain, one for a knowledge update, and one for
+    an instruction the user will issue. These bullets are the anchors
+    against which probing questions will later be generated — they
+    guarantee that every conversation contains testable events for every
+    ability.</p>
+    <h3 id="stage-2-user-utterance-generation">3.3 Stage 2: User
+    Utterance Generation</h3>
+    <p>Each sub-plan’s bullets are divided into K contiguous batches.
+    Per batch, an LLM — specifically <strong>LLaMA-3.3 70B</strong> —
+    generates I user questions conditioned on:</p>
+    <ul>
+    <li>The conversation seed (profile, timeline, relationships)</li>
+    <li>The current batch of bullets</li>
+    <li>All preceding batches (for local coherence)</li>
+    <li>Earlier sub-plan context (for global coherence)</li>
+    </ul>
+    <p>The K and I hyperparameters vary by domain and target length;
+    specifics live in Table 6 of the paper.</p>
+    <h3 id="stage-3-assistant-utterance-generation">3.4 Stage 3:
+    Assistant Utterance Generation</h3>
+    <p>The assistant side is generated by iterative role-playing. An
+    assistant LLM and a user LLM alternate, but the pipeline also
+    includes two interaction modules:</p>
+    <ul>
+    <li><strong>Question-detection:</strong> if the assistant’s response
+    includes a counter-question requiring the user to reply, the
+    pipeline enforces a follow-up turn.</li>
+    <li><strong>Follow-up detection:</strong> if a clarifying or
+    elaborative user question is warranted, one is generated.</li>
+    </ul>
+    <p>Loop thresholds cap both at two exchanges (δ₁ = δ₂ = 2),
+    preventing runaway follow-up cascades.</p>
+    <p>The assistant conditions on the conversation seed, prior
+    sub-plans, a summary of the last M turns, and compressed summaries
+    of earlier content. This mirrors how a realistic long-context agent
+    would operate and keeps the generated dialogue locally coherent over
+    millions of tokens.</p>
+    <h3 id="stage-4-probing-question-generation">3.5 Stage 4: Probing
+    Question Generation</h3>
+    <p>With the conversation complete, <strong>GPT-4.1-mini</strong>
+    generates candidate probing questions. For each target memory
+    ability, the model selects candidate bullet points from the plan,
+    then produces:</p>
+    <ul>
+    <li>A question</li>
+    <li>A candidate answer</li>
+    <li>Source identifiers pointing to the dialogue locations needed to
+    answer it</li>
+    </ul>
+    <p>For 10M-token dialogues, a sliding window across the ten
+    sub-plans preserves topical locality — probes are not generated from
+    random global positions but from semantically coherent slices.
+    Ability-specific prompts (Prompts 10–19 in Appendix H of the paper)
+    guide the generator.</p>
+    <p>Candidate questions are <strong>reviewed by human
+    annotators</strong>. Invalid questions are discarded;
+    inconsistencies are corrected. From the validated set, two questions
+    per ability are selected per conversation, yielding <strong>20
+    validated probes per conversation × 100 conversations = 2,000 total
+    questions</strong>.</p>
+    <h3 id="stage-5-evaluation-nugget-creation">3.6 Stage 5: Evaluation
+    Nugget Creation</h3>
+    <p>For each validated question, annotators decompose the reference
+    answer into <strong>atomic, self-contained criteria</strong> that a
+    system response must satisfy — “nuggets.” A response is then scored
+    by an LLM judge against each nugget:</p>
+    <ul>
+    <li><strong>0</strong> — nugget unsatisfied</li>
+    <li><strong>0.5</strong> — nugget partially satisfied</li>
+    <li><strong>1</strong> — nugget fully satisfied</li>
+    </ul>
+    <p>Final score per question is the mean over nuggets. The exception,
+    again, is <strong>Event Ordering</strong>, which uses Kendall tau-b
+    to measure both presence <em>and</em> order.</p>
+    <h3 id="human-quality-validation">3.7 Human Quality Validation</h3>
+    <p>The 100 conversations were rated by human annotators on three
+    axes:</p>
+    <ul>
+    <li><strong>Coherence:</strong> 4.53 / 5</li>
+    <li><strong>Realism:</strong> 4.57 / 5</li>
+    <li><strong>Complexity:</strong> 4.64 / 5</li>
+    </ul>
+    <p>These scores matter. Synthetic long-context benchmarks have
+    historically suffered from plausibility gaps — conversations that
+    are long but shallow or inconsistent. BEAM’s human ratings above 4.5
+    across all three axes indicate the generation pipeline produced
+    dialogues that human reviewers found believable.</p>
+    <hr />
+    <h2 id="domain-breakdown">4. Domain Breakdown</h2>
+    <p>The paper describes BEAM as “multi-domain” and reviewers confirm
+    this was a deliberate departure from LoCoMo / LongMemEval /
+    MemBench, which restricted themselves to personal-life scenarios.
+    Appendix B.3.1 details domain coverage; the visible summary reports
+    conversations drawn from:</p>
+    <ul>
+    <li><strong>Personal life</strong> (traditional baseline — family,
+    relationships, daily routines)</li>
+    <li><strong>Coding and technical discussion</strong> (software
+    projects, debugging sessions, architectural conversations)</li>
+    <li><strong>Mathematics</strong> (problem-solving dialogues, proof
+    walkthroughs)</li>
+    <li><strong>Health and medical</strong> (symptom tracking, treatment
+    plans, long-term conditions)</li>
+    <li><strong>Finance</strong> (budgeting, investment planning,
+    account tracking)</li>
+    <li><strong>Travel and logistics</strong> (multi-trip planning,
+    itinerary updates)</li>
+    <li><strong>Career progression</strong> (job changes, skill
+    development, professional goals)</li>
+    </ul>
+    <p>The paper does not publish a precise per-domain count of
+    conversations; the available text says “diverse domains” and
+    “topical diversity reviewed by human annotators.” For derivative
+    research, this is a minor gap — the conversations are public, so
+    domain counts can be computed from the released dataset.</p>
+    <hr />
+    <h2 id="baselines-and-scores">5. Baselines and Scores</h2>
+    <p>BEAM evaluates four backbone LLMs, each under three conditions:
+    <strong>Vanilla</strong> (full context, no memory system),
+    <strong>RAG</strong> (retrieval-augmented), and
+    <strong>LIGHT</strong> (the paper’s proposed framework).</p>
+    <h3 id="models-tested">5.1 Models Tested</h3>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 17%" />
+    <col style="width: 45%" />
+    <col style="width: 17%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Model</th>
+    <th>Type</th>
+    <th>Context window</th>
+    <th>Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>GPT-4.1-nano</td>
+    <td>Proprietary</td>
+    <td>1M</td>
+    <td>Frontier proprietary baseline</td>
+    </tr>
+    <tr>
+    <td>Gemini-2.0-flash</td>
+    <td>Proprietary</td>
+    <td>1M</td>
+    <td>Frontier proprietary baseline</td>
+    </tr>
+    <tr>
+    <td>Qwen2.5-32B-AWQ</td>
+    <td>Open-source</td>
+    <td>128K (32K under LIGHT)</td>
+    <td>Mid-size open baseline</td>
+    </tr>
+    <tr>
+    <td>Llama-4-Maverick-fp8</td>
+    <td>Open-source</td>
+    <td>128K</td>
+    <td>Large open baseline</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="aggregate-results">5.2 Aggregate Results</h3>
+    <p><strong>At 100K tokens:</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Model</th>
+    <th>Vanilla</th>
+    <th>RAG</th>
+    <th>LIGHT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Qwen2.5-32B</td>
+    <td>0.280</td>
+    <td>0.269</td>
+    <td>0.311</td>
+    </tr>
+    <tr>
+    <td>Llama-4-Maverick</td>
+    <td>0.240</td>
+    <td>0.323</td>
+    <td>0.358</td>
+    </tr>
+    <tr>
+    <td>Gemini-2.0-flash</td>
+    <td>0.242</td>
+    <td>0.280</td>
+    <td>0.294</td>
+    </tr>
+    <tr>
+    <td>GPT-4.1-nano</td>
+    <td>0.239</td>
+    <td>0.309</td>
+    <td>0.345</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>At 1M tokens:</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Model</th>
+    <th>Vanilla</th>
+    <th>RAG</th>
+    <th>LIGHT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Qwen2.5-32B</td>
+    <td>0.193</td>
+    <td>0.285</td>
+    <td>0.309</td>
+    </tr>
+    <tr>
+    <td>Llama-4-Maverick</td>
+    <td>0.259</td>
+    <td>0.307</td>
+    <td>0.336</td>
+    </tr>
+    <tr>
+    <td>Gemini-2.0-flash</td>
+    <td>0.199</td>
+    <td>0.271</td>
+    <td>0.284</td>
+    </tr>
+    <tr>
+    <td>GPT-4.1-nano</td>
+    <td>0.191</td>
+    <td>0.302</td>
+    <td>0.336</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>At 10M tokens:</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Model</th>
+    <th>Vanilla</th>
+    <th>RAG</th>
+    <th>LIGHT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Llama-4-Maverick</td>
+    <td>0.104</td>
+    <td>0.249</td>
+    <td>0.266</td>
+    </tr>
+    <tr>
+    <td>GPT-4.1-nano</td>
+    <td>0.109</td>
+    <td>0.218</td>
+    <td>0.226</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Two observations dominate these tables.</p>
+    <p><strong>First</strong>, absolute scores are low —
+    <em>everywhere</em>. The best single score at 100K tokens is 0.358
+    (Llama + LIGHT). At 10M tokens, the best is 0.266. Even with
+    state-of-the-art models and state-of-the-art memory frameworks, more
+    than two-thirds of probing questions are answered incorrectly or
+    only partially correctly. Long-term memory in LLMs is, empirically,
+    nowhere near solved.</p>
+    <p><strong>Second</strong>, vanilla full-context performance
+    <strong>collapses</strong> as conversations lengthen. GPT-4.1-nano
+    at 100K vanilla scores 0.239; at 10M vanilla it scores 0.109 — a 54%
+    relative drop. Llama-4-Maverick drops from 0.240 to 0.104, a 57%
+    relative drop. The million-token context window is not the solution
+    to long-term memory; it is a mirage. Throwing more context at the
+    problem without structured memory actively hurts.</p>
+    <h3 id="relative-improvements">5.3 Relative Improvements</h3>
+    <p>Expressed as gains over vanilla baselines, LIGHT’s contribution
+    grows with conversation length:</p>
+    <ul>
+    <li><strong>100K:</strong> +49.1% (Llama), +44.3%
+    (GPT-4.1-nano)</li>
+    <li><strong>1M:</strong> +60.1% (Qwen), +75.9% (GPT-4.1-nano)</li>
+    <li><strong>10M:</strong> +155.7% (Llama), +107.3%
+    (GPT-4.1-nano)</li>
+    </ul>
+    <p>The headline average improvement — 3.5%–12.69% over the
+    <em>strongest baselines</em> — undersells this picture. Over RAG,
+    LIGHT is a modest improvement. Over vanilla full-context, LIGHT is
+    transformative at extreme lengths, more than doubling scores at 10M
+    tokens. The right comparison depends on what you’re trying to
+    beat.</p>
+    <hr />
+    <h2 id="light-framework-architecture">6. LIGHT Framework
+    Architecture</h2>
+    <p>LIGHT (Long-term Index, General scratchpad, Hierarchical
+    Three-memory framework, though the acronym is loose in the paper) is
+    a cognitively inspired architecture that equips any backbone LLM
+    with three complementary memory systems plus a filtering layer.</p>
+    <h3 id="component-1-episodic-memory-long-term-index">6.1 Component
+    1: Episodic Memory (Long-term Index)</h3>
+    <p>The episodic memory component mirrors declarative long-term
+    memory in human cognition. After each user–assistant turn, LIGHT
+    invokes <strong>Qwen2.5-32B-AWQ</strong> to extract key–value pairs
+    and a summary of the interaction:</p>
+    <ul>
+    <li><strong>Keys</strong> represent entities (people, places,
+    concepts, objects).</li>
+    <li><strong>Values</strong> capture attributes or descriptive
+    details about those entities.</li>
+    </ul>
+    <p>These key–value items and summaries are embedded using
+    <strong>BAAI/bge-small-en-v1.5</strong> and stored in a vector
+    database. At inference time, the user’s question is embedded and
+    compared against stored keys; the top <em>k</em> nearest neighbors
+    are returned.</p>
+    <p>The default retrieval budget is <strong>k = 15</strong>,
+    determined by ablation (see §7). Retrieval budgets of 10 or 20 both
+    degraded performance — 10 surfaced too little, 20 introduced
+    noise.</p>
+    <h3 id="component-2-working-memory-short-term-buffer">6.2 Component
+    2: Working Memory (Short-term Buffer)</h3>
+    <p>Working memory is the simplest component: the most recent
+    <em>z</em> dialogue pairs of the conversation are included verbatim
+    in the prompt, without filtering. This provides continuity for
+    references to the immediately preceding context — resolving
+    pronouns, following multi-turn topics, handling recent
+    clarifications.</p>
+    <p>Notably, ablation shows that at shorter lengths (500K and 1M
+    tokens) <strong>removing working memory slightly <em>improves</em>
+    performance</strong>. Recent context can introduce noise for
+    questions about distant events. At 10M tokens, removing working
+    memory costs 5.7% — so the component pays off only when the
+    conversation is long enough that local and global contexts are
+    clearly separated.</p>
+    <h3 id="component-3-scratchpad-accumulated-facts">6.3 Component 3:
+    Scratchpad (Accumulated Facts)</h3>
+    <p>The scratchpad is LIGHT’s most novel component. It’s an
+    iteratively compressed semantic layer that accumulates salient
+    facts, user instructions, and contextual updates throughout the
+    conversation.</p>
+    <p>After each dialogue pair, the LLM reasons over the current and
+    preceding turn and extracts “salient content.” This content is
+    merged into the scratchpad. When the scratchpad exceeds <strong>30K
+    tokens</strong>, it is compressed back down to <strong>15K
+    tokens</strong> — a rolling 2:1 compression that keeps the
+    scratchpad bounded.</p>
+    <p>At inference time, the scratchpad is processed by a filtering
+    pipeline:</p>
+    <ol type="1">
+    <li><strong>Semantic chunking</strong> divides the scratchpad into
+    coherent chunks.</li>
+    <li><strong>Binary relevance classification</strong> — an LLM
+    assigns each chunk a yes/no label relative to the user’s current
+    question.</li>
+    <li><strong>Retention</strong> — only chunks labeled yes are passed
+    to the final generator.</li>
+    </ol>
+    <p>This filtering layer is critical. Ablation shows that removing
+    the noise filter costs between 2.2% (at 100K) and 8.3% (at 10M). The
+    scratchpad without filtering introduces nearly as much noise as it
+    eliminates.</p>
+    <h3 id="integration-at-inference">6.4 Integration at Inference</h3>
+    <p>When a new question arrives, LIGHT assembles the prompt as
+    follows (Listing 44 in the paper’s appendix):</p>
+    <ol type="1">
+    <li>Retrieve top-15 items from <strong>episodic memory</strong>
+    using the question as query.</li>
+    <li>Include the most recent <em>z</em> turns as <strong>working
+    memory</strong>.</li>
+    <li>Run the <strong>scratchpad</strong> through semantic chunking
+    and relevance filtering, keeping only relevant chunks.</li>
+    <li>Combine all three memory representations with the question.</li>
+    <li>Pass to the backbone LLM for response generation.</li>
+    </ol>
+    <p>The architecture is deliberately modular. Any of the three memory
+    systems can be swapped (different retrievers, different chunking
+    strategies, different filter models) without rewriting the others.
+    This matters because it means the framework is a research
+    <em>platform</em>, not just a single proposed system.</p>
+    <hr />
+    <h2 id="ablation-studies">7. Ablation Studies</h2>
+    <p>The paper performs two sets of ablations: component removal and
+    retrieval budget sensitivity.</p>
+    <h3 id="component-ablations">7.1 Component Ablations</h3>
+    <p>Components removed one at a time, with performance deltas
+    measured across length tiers:</p>
+    <p><strong>100K tokens:</strong> - Remove episodic memory: no change
+    - Remove scratchpad: –1.1% - Remove working memory: –1.6% - Remove
+    noise filter: –2.2%</p>
+    <p><strong>500K tokens:</strong> - Remove episodic memory: harmful -
+    Remove scratchpad: harmful - Remove working memory: slight
+    improvement - Remove noise filter: harmful</p>
+    <p><strong>1M tokens:</strong> - Remove episodic memory: harmful -
+    Remove scratchpad: harmful - Remove working memory: slight
+    improvement - Remove noise filter: harmful</p>
+    <p><strong>10M tokens:</strong> - Remove episodic memory: –8.5% -
+    Remove scratchpad: –3.7% - Remove working memory: –5.7% - Remove
+    noise filter: –8.3%</p>
+    <p><strong>Conclusion from the paper:</strong> “Each module
+    contributes increasingly as context length grows, and the full
+    architecture consistently achieves the best performance.”</p>
+    <p>Three specific insights from these numbers are worth
+    highlighting:</p>
+    <ol type="1">
+    <li><p><strong>Episodic memory is the single most important
+    component at scale.</strong> At 10M tokens, removing retrieval costs
+    8.5% — more than any other single ablation. Long-term memory is,
+    fundamentally, a retrieval problem.</p></li>
+    <li><p><strong>The noise filter is nearly as important as retrieval
+    itself</strong> (–8.3% at 10M). Raw scratchpad content, dropped into
+    the prompt unfiltered, nearly neutralizes the benefit of having a
+    scratchpad at all. This is an underappreciated finding: memory is
+    not just about what you store but about what you <em>suppress</em>
+    at recall time.</p></li>
+    <li><p><strong>Working memory is a double-edged sword.</strong> At
+    mid-range lengths it is marginally harmful; at extreme lengths it is
+    helpful. This suggests that for questions about <em>the current
+    topic</em>, recent turns help; for questions about <em>distant
+    topics</em>, recent turns pollute the prompt with irrelevant
+    continuation.</p></li>
+    </ol>
+    <h3 id="retrieval-budget-sensitivity">7.2 Retrieval Budget
+    Sensitivity</h3>
+    <p>Testing k ∈ {5, 10, 15, 20}:</p>
+    <ul>
+    <li><strong>k = 15</strong> is optimal across all length tiers
+    (+7.39% at 100K, +10.75% at 500K, +6.79% at 1M, +6.3% at 10M).</li>
+    <li><strong>k = 20</strong> degrades slightly due to noisy context —
+    more retrieval is not better.</li>
+    <li><strong>k = 10</strong> is mixed: helpful at shorter lengths,
+    harmful at 10M.</li>
+    <li><strong>k = 5</strong> underperforms everywhere — too little
+    coverage.</li>
+    </ul>
+    <p>The stability of k = 15 across a 100× length range is striking.
+    It suggests that the relevant “memory surface” for any given
+    question is bounded — once you’ve pulled the top 15 items,
+    additional retrieval adds noise faster than signal.</p>
+    <hr />
+    <h2 id="failure-modes">8. Failure Modes</h2>
+    <p>Appendix G of the paper catalogs qualitative error categories
+    across all ten abilities. Patterns that recur:</p>
+    <p><strong>Contradiction Resolution is nearly broken across the
+    board.</strong> Scores near 0.025–0.037 at 100K tokens mean models
+    correctly reconcile contradictions about 3% of the time. This is the
+    single clearest open problem the benchmark identifies. Current
+    architectures — vanilla attention, RAG, and LIGHT — all struggle to
+    surface two conflicting claims simultaneously.</p>
+    <p><strong>Retrieval failures propagate as abstention
+    inflation.</strong> When the retriever fails to find relevant
+    chunks, downstream models often abstain. This makes abstention
+    scores artificially high and masks upstream failure. Any memory
+    benchmark should report abstention alongside retrieval recall, not
+    in isolation.</p>
+    <p><strong>Temporal reasoning collapses under implicit time
+    relations.</strong> Explicit dates and durations are tractable;
+    implicit markers (“last winter,” “a few months ago”) are not. This
+    is a language-understanding problem layered on top of a
+    memory-retrieval problem.</p>
+    <p><strong>Instruction persistence decays roughly monotonically with
+    distance.</strong> An instruction issued at turn 50 is respected at
+    turn 100, sometimes at turn 500, rarely at turn 5000. The decay
+    curve is steep.</p>
+    <p><strong>Preference drift is common.</strong> Models remember that
+    a preference exists but not its specific content — remembering “the
+    user has dietary restrictions” while forgetting “vegetarian, no
+    dairy.” This is partial-recall failure, distinct from total-recall
+    failure.</p>
+    <p><strong>Summarization quality drops as distance grows.</strong>
+    Summarizing the last ten turns is easy; summarizing turns 100-200
+    out of 10000 is hard. Compression quality is length-dependent in a
+    way that naive memory systems do not account for.</p>
+    <p>One observation from the paper is worth quoting directly:
+    <em>“All methods — including ours — perform strongest in abstention
+    and weakest in contradiction resolution, indicating that
+    contradiction detection remains a challenging open
+    problem.”</em></p>
+    <hr />
+    <h2 id="per-ability-results-100k-illustrative-slice">9. Per-Ability
+    Results (100K Illustrative Slice)</h2>
+    <p>The following table shows Qwen2.5 and Llama-4-Maverick scores at
+    100K tokens to illustrate the ability-by-ability texture:</p>
+    <table>
+    <colgroup>
+    <col style="width: 11%" />
+    <col style="width: 16%" />
+    <col style="width: 12%" />
+    <col style="width: 13%" />
+    <col style="width: 17%" />
+    <col style="width: 13%" />
+    <col style="width: 15%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Ability</th>
+    <th>Qwen Vanilla</th>
+    <th>Qwen RAG</th>
+    <th>Qwen LIGHT</th>
+    <th>Llama Vanilla</th>
+    <th>Llama RAG</th>
+    <th>Llama LIGHT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Abstention</td>
+    <td>0.300</td>
+    <td>0.650</td>
+    <td>0.475</td>
+    <td>0.200</td>
+    <td>0.800</td>
+    <td>0.600</td>
+    </tr>
+    <tr>
+    <td>Contradiction Resolution</td>
+    <td>0.031</td>
+    <td>0.025</td>
+    <td>0.037</td>
+    <td>0.025</td>
+    <td>0.031</td>
+    <td>0.031</td>
+    </tr>
+    <tr>
+    <td>Event Ordering</td>
+    <td>0.192</td>
+    <td>0.201</td>
+    <td>0.205</td>
+    <td>0.190</td>
+    <td>0.162</td>
+    <td>0.166</td>
+    </tr>
+    <tr>
+    <td>Information Extraction</td>
+    <td>0.425</td>
+    <td>0.338</td>
+    <td>0.479</td>
+    <td>0.510</td>
+    <td>0.392</td>
+    <td>0.518</td>
+    </tr>
+    <tr>
+    <td>Instruction Following</td>
+    <td>0.400</td>
+    <td>0.375</td>
+    <td>0.362</td>
+    <td>0.412</td>
+    <td>0.375</td>
+    <td>0.412</td>
+    </tr>
+    <tr>
+    <td>Knowledge Update</td>
+    <td>0.437</td>
+    <td>0.275</td>
+    <td>0.362</td>
+    <td>0.300</td>
+    <td>0.350</td>
+    <td>0.450</td>
+    </tr>
+    <tr>
+    <td>Multi-Hop Reasoning</td>
+    <td>0.222</td>
+    <td>0.203</td>
+    <td>0.281</td>
+    <td>0.152</td>
+    <td>0.225</td>
+    <td>0.353</td>
+    </tr>
+    <tr>
+    <td>Preference Following</td>
+    <td>0.554</td>
+    <td>0.379</td>
+    <td>0.566</td>
+    <td>0.450</td>
+    <td>0.512</td>
+    <td>0.625</td>
+    </tr>
+    <tr>
+    <td>Summarization</td>
+    <td>0.128</td>
+    <td>0.074</td>
+    <td>0.232</td>
+    <td>0.065</td>
+    <td>0.111</td>
+    <td>0.238</td>
+    </tr>
+    <tr>
+    <td>Temporal Reasoning</td>
+    <td>0.112</td>
+    <td>0.162</td>
+    <td>0.112</td>
+    <td>0.100</td>
+    <td>0.275</td>
+    <td>0.187</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Several patterns jump out.</p>
+    <p><strong>RAG sometimes hurts.</strong> Look at Qwen on Information
+    Extraction: vanilla 0.425, RAG 0.338. RAG actively degrades recall
+    because retrieval surfaces near-duplicates or context-stripped
+    fragments that confuse the generator. LIGHT rescues this (0.479) by
+    combining retrieval with the scratchpad’s accumulated context.</p>
+    <p><strong>Abstention does not correlate with overall
+    skill.</strong> Llama-4-Maverick + RAG scores 0.800 on abstention —
+    the highest number in the table — but its overall average is
+    middling. High abstention means the model is refusing more often,
+    not that it is reasoning more correctly.</p>
+    <p><strong>LIGHT’s largest gains are in Summarization and Multi-Hop
+    Reasoning.</strong> Llama Summarization goes from 0.065 (vanilla) to
+    0.238 (LIGHT) — a 3.7× improvement. Multi-Hop goes from 0.152 to
+    0.353, a 2.3× improvement. These are the abilities where the
+    scratchpad component provides the most leverage: rolling summaries
+    pre-compute what summarization probes want, and the episodic index
+    provides the multi-hop substrate.</p>
+    <p><strong>Contradiction Resolution is stuck near zero regardless of
+    method.</strong> No configuration scores above 0.037. This is not a
+    LIGHT limitation — it is a fundamental open problem.</p>
+    <p>Aggregated across all models and conditions, LIGHT’s relative
+    gains by ability are:</p>
+    <ul>
+    <li><strong>Summarization:</strong> +160.6%</li>
+    <li><strong>Preference Following:</strong> +76.5%</li>
+    <li><strong>Temporal Reasoning:</strong> +56.3%</li>
+    <li><strong>Instruction Following:</strong> +39.5%</li>
+    <li><strong>Multi-Hop Reasoning:</strong> +27.2%</li>
+    </ul>
+    <hr />
+    <h2 id="implications-for-memory-system-designers">10. Implications
+    for Memory System Designers</h2>
+    <p>For anyone building long-term memory for LLM agents — which, for
+    gsd-skill-creator’s LTM mission, is us — BEAM provides ten concrete
+    lessons.</p>
+    <h3 id="measure-all-ten-abilities-not-just-recall">10.1 Measure all
+    ten abilities, not just recall</h3>
+    <p>The industry’s default memory benchmark is usually “can the model
+    recall a fact?” BEAM demonstrates that this is the <em>easiest</em>
+    ability class. A memory system that nails Information Extraction can
+    still be useless because it fails Contradiction Resolution, Temporal
+    Reasoning, or Event Ordering. When we evaluate our own architecture,
+    we need all ten dimensions in the scorecard.</p>
+    <h3 id="long-context-is-not-memory">10.2 Long context is not
+    memory</h3>
+    <p>The headline finding of BEAM is that million-token context
+    windows, used naively, collapse on long conversations. Vanilla
+    GPT-4.1-nano at 10M tokens scores 0.109 — essentially unusable.
+    Context-window size is a necessary condition for long-term memory,
+    but it is not sufficient. Memory is an architectural problem, not a
+    capacity problem.</p>
+    <h3
+    id="structured-retrieval-with-a-bounded-budget-beats-unbounded-attention">10.3
+    Structured retrieval with a bounded budget beats unbounded
+    attention</h3>
+    <p>The k = 15 retrieval budget is surprisingly stable across 100×
+    length variation. This suggests that the relevant memory surface for
+    any given question is bounded. Design implication: when building a
+    memory retrieval layer, optimize for precision at a small k, not
+    recall at a large k. Returning 100 chunks and letting the model sort
+    them out is a losing strategy.</p>
+    <h3 id="filter-what-you-remember-before-you-use-it">10.4 Filter what
+    you remember before you use it</h3>
+    <p>The noise filter in LIGHT is almost as important as the memory
+    itself. Removing it costs 8.3% at 10M tokens — nearly matching the
+    cost of removing episodic retrieval. Raw memory dumps are noisy;
+    relevance gating is essential. Any memory system that pulls content
+    and injects it verbatim into the prompt is leaving a huge amount of
+    accuracy on the table.</p>
+    <h3 id="rolling-summaries-scratchpads-are-high-leverage">10.5
+    Rolling summaries (“scratchpads”) are high-leverage</h3>
+    <p>LIGHT’s scratchpad component drives the +160.6% gain on
+    Summarization and +27.2% on Multi-Hop Reasoning. A scratchpad is
+    conceptually cheap — an LLM extracts salient facts after each turn,
+    compresses when bounded — but it provides a pre-computed substrate
+    that downstream queries can exploit. This is a free lunch for memory
+    systems.</p>
+    <h3
+    id="three-memory-types-episodic-working-scratchpad-are-a-defensible-minimum">10.6
+    Three memory types (episodic, working, scratchpad) are a defensible
+    minimum</h3>
+    <p>Ablation shows each of the three memory types carries its weight
+    at 10M tokens. Single-memory architectures (pure retrieval, pure
+    recent-context, pure summary) underperform the three-way
+    combination. When designing our own memory, “which memory type” is
+    the wrong question — the right question is “how do our memory types
+    compose.”</p>
+    <h3 id="contradiction-resolution-is-the-open-frontier">10.7
+    Contradiction resolution is the open frontier</h3>
+    <p>No current memory architecture handles contradiction resolution
+    well. If a research program can demonstrably improve this ability,
+    it will leapfrog the field. This is the single most valuable
+    research direction BEAM identifies. Possible attack vectors:
+    explicit contradiction-detection modules, two-claim retrieval
+    (surface <em>pairs</em> of claims, not single claims), or
+    temporal-delta tracking.</p>
+    <h3 id="abstention-scores-must-be-reported-alongside-recall">10.8
+    Abstention scores must be reported alongside recall</h3>
+    <p>A memory system that refuses to answer looks well-calibrated —
+    but may just be retrieval-broken. When evaluating our architecture,
+    we should report abstention rate alongside recall precision so that
+    “safe silence” is distinguishable from “informed silence.”</p>
+    <h3 id="working-memory-is-dangerous-in-the-mid-range">10.9 Working
+    memory is dangerous in the mid-range</h3>
+    <p>The ablation finding that removing working memory slightly
+    improves 500K and 1M performance is counter-intuitive but consistent
+    with noise theory. Recent-turn context contains a lot of material
+    unrelated to the current query. For memory systems targeting
+    conversations in the 500K–1M range, working memory should be
+    <em>optional</em> — included only when the question is about local
+    continuity, excluded when the question is about distant facts. This
+    is a routing decision we should expose.</p>
+    <h3 id="evaluate-at-lengths-beyond-your-target-deployment">10.10
+    Evaluate at lengths beyond your target deployment</h3>
+    <p>BEAM’s 10M-token tier is deliberate: by stress-testing 10× beyond
+    realistic deployment, you find failure modes that don’t surface at
+    deployment length. When we evaluate our memory system, we should run
+    it at 2–10× the length we actually care about. If it breaks at 10×
+    but works at 1×, we know we’ve earned no safety margin.</p>
+    <hr />
+    <h2 id="what-beam-does-not-measure">11. What BEAM Does Not
+    Measure</h2>
+    <p>For honest engineering, the gaps matter as much as the
+    coverage.</p>
+    <p><strong>Write latency.</strong> BEAM measures read-side accuracy.
+    It does not measure how long episodic memory ingestion, scratchpad
+    updates, or compression passes take. A memory system that scores
+    well but is too slow for real-time use fails in production. This is
+    left to the implementer.</p>
+    <p><strong>Storage footprint.</strong> No disk-size or
+    memory-footprint numbers. LIGHT’s scratchpad bounds at 30K → 15K
+    tokens; episodic memory is a vector store of unknown final size. For
+    embedded or resource-constrained deployments, these numbers
+    matter.</p>
+    <p><strong>Cross-conversation generalization.</strong> BEAM tests
+    memory <em>within</em> a conversation. It does not test memory
+    <em>across</em> conversations — the ability for a system to carry
+    context from one session into another. Many real agents need this.
+    BEAM is silent on it.</p>
+    <p><strong>Online update latency.</strong> Can the memory system
+    handle streaming updates at production rates? The paper’s evaluation
+    is batch. Real deployments are online.</p>
+    <p><strong>Cost.</strong> LIGHT runs multiple LLM calls per turn
+    (extraction, compression, filtering). This is invisible in the
+    benchmark scores but very visible in the cloud bill.</p>
+    <p><strong>Robustness to adversarial inputs.</strong> The synthetic
+    generation pipeline assumes well-intentioned users. Adversarial
+    inputs — prompt injection into the memory layer, contradictory facts
+    planted deliberately, memory poisoning — are out of scope.</p>
+    <p>These gaps are not criticisms of BEAM; they are reasonable scope
+    decisions for a first benchmark. They are things we must measure
+    ourselves when evaluating a production memory system.</p>
+    <hr />
+    <h2 id="conclusion-beam-as-reference-point">12. Conclusion: BEAM as
+    Reference Point</h2>
+    <p>BEAM establishes four things that will anchor long-term memory
+    research for the next several years:</p>
+    <ol type="1">
+    <li><strong>A ten-ability taxonomy</strong> that carves the memory
+    problem into orthogonal measurable slices.</li>
+    <li><strong>A 10M-token test bed</strong> that exposes failure modes
+    invisible at shorter lengths.</li>
+    <li><strong>A rigorous synthetic generation pipeline</strong>
+    validated by human quality ratings above 4.5/5.</li>
+    <li><strong>An open baseline (LIGHT)</strong> that proves structured
+    memory beats naive long-context by large margins, especially at
+    scale.</li>
+    </ol>
+    <p>For gsd-skill-creator’s LTM mission, BEAM is the right reference
+    point. We should adopt its ten-ability framework as our evaluation
+    scorecard, run our memory architecture against its 100 conversations
+    and 2,000 probing questions, and report per-ability scores alongside
+    averages. If we beat LIGHT on Contradiction Resolution, we have
+    something worth publishing. If we match LIGHT on the other nine
+    while running at a fraction of the cost, we have something worth
+    shipping.</p>
+    <p>The most important thing BEAM does is honest: it reports low
+    absolute scores, admits contradiction resolution is broken, shows
+    that long context without structure collapses, and publishes its
+    failure modes. This is the culture memory research needs. The next
+    benchmark will build on BEAM. The ten abilities — especially the
+    three novel ones — will almost certainly persist.</p>
+    <hr />
+    <h2 id="sources">Sources</h2>
+    <ul>
+    <li><a href="https://github.com/mohammadtavakoli78/BEAM">BEAM GitHub
+    repository</a> — primary artifact, README, code, evaluation
+    scripts</li>
+    <li><a href="https://arxiv.org/abs/2510.27246">BEAM on ArXiv
+    (2510.27246)</a> — ICLR 2026 paper</li>
+    <li><a href="https://arxiv.org/html/2510.27246">BEAM HTML on
+    ArXiv</a> — full paper text with tables</li>
+    <li><a href="https://openreview.net/forum?id=y59hf5lrMn">OpenReview
+    record</a> — reviewer discussion and paper PDF</li>
+    <li><a
+    href="https://hindsight.vectorize.io/blog/2026/04/02/beam-sota">Hindsight
+    blog: “Hindsight Is #1 on BEAM”</a> — early independent run against
+    BEAM, April 2026</li>
+    <li><a
+    href="https://www.researchgate.net/publication/397188711_Beyond_a_Million_Tokens_Benchmarking_and_Enhancing_Long-Term_Memory_in_LLMs">ResearchGate
+    mirror</a> — alternate access</li>
+    <li><a href="https://www.alphaxiv.org/abs/2510.27246">alphaXiv
+    discussion</a> — community annotations</li>
+    </ul>
+    <hr />
+    <p><strong>Next module:</strong>
+    <code>02-ltm-architectural-patterns.md</code> — surveys memory
+    architectures beyond LIGHT (Memory3, MemoryLLM, Generative Agents,
+    Mem0, Letta/MemGPT) and maps them onto BEAM’s ten-ability
+    framework.</p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to LTM Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/LTM/">tibsfox.com/Research/LTM</a>
+    </div>
+</body>
+</html>

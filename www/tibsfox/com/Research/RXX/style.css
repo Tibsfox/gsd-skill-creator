@@ -1,0 +1,366 @@
+/* RXX — Rexx & ARexx: A Practical Approach to Programming
+   Amiga palette: Workbench blue, copper bar amber, Paula chip warm,
+   Kickstart dark, Boing ball red, CLI green
+   Base layout from ../../brand.css */
+
+/* 1. COLOR PALETTE & SEMANTIC OVERRIDES */
+
+:root {
+  --rxx-blue: #0055AA;
+  --rxx-blue-mid: #0066CC;
+  --rxx-blue-light: #E8F0FE;
+  --rxx-blue-dark: #003366;
+  --rxx-blue-wb: #AAAAEE;
+  --rxx-amber: #FF8800;
+  --rxx-amber-light: #FFF3E0;
+  --rxx-amber-dark: #CC5500;
+  --rxx-amber-copper: #FF6600;
+  --rxx-warm: #FFAA44;
+  --rxx-warm-light: #FFF8ED;
+  --rxx-green: #33BB33;
+  --rxx-green-light: #E8F5E9;
+  --rxx-green-dark: #1A7A1A;
+  --rxx-red: #DD2222;
+  --rxx-red-light: #FDE8E8;
+  --rxx-kick: #1A1A2E;
+  --rxx-kick-mid: #2A2A42;
+  --rxx-kick-light: #3A3A56;
+  --rxx-gray-bg: #F5F5F8;
+  --rxx-gray-50: #F8F8FA;
+  --rxx-gray-100: #EEEFF3;
+  --rxx-gray-200: #D8DAE0;
+  --rxx-gray-300: #C0C2CC;
+  --rxx-gray-500: #6A6D7A;
+  --rxx-gray-700: #363840;
+  --rxx-gray-900: #16171C;
+
+  --page-bg: var(--rxx-gray-bg);
+  --page-text: var(--rxx-gray-900);
+  --page-text-light: var(--rxx-gray-500);
+  --link: var(--rxx-blue);
+  --link-hover: var(--rxx-blue-dark);
+  --accent: var(--rxx-blue);
+  --accent-light: var(--rxx-blue-light);
+  --accent-dark: var(--rxx-blue-dark);
+  --card-bg: #FFFFFF;
+  --card-border: var(--rxx-gray-200);
+  --card-shadow: rgba(22, 23, 28, 0.08);
+  --border: var(--rxx-gray-200);
+  --content-width: 58rem;
+}
+
+/* 2. BODY */
+
+body {
+  background: var(--rxx-gray-bg) !important;
+  color: var(--rxx-gray-900) !important;
+}
+
+/* 3. HEADER — Amiga Workbench aesthetic */
+
+header {
+  background: linear-gradient(135deg, var(--rxx-kick), var(--rxx-blue-dark), var(--rxx-blue)) !important;
+  border-bottom: 3px solid var(--rxx-amber) !important;
+  position: relative;
+}
+
+/* Copper bar effect */
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--rxx-red) 0%, var(--rxx-amber-copper) 25%,
+    var(--rxx-warm) 50%, var(--rxx-amber-copper) 75%,
+    var(--rxx-red) 100%);
+}
+
+header h1 {
+  color: var(--rxx-blue-wb) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace !important;
+}
+header .subtitle {
+  color: var(--rxx-amber) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  font-size: 0.85rem !important;
+}
+
+header nav a {
+  color: rgba(170, 170, 238, 0.65) !important;
+  border-color: transparent !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  font-size: 0.8rem !important;
+}
+header nav a:hover, header nav a.active {
+  color: var(--rxx-blue-wb) !important;
+  border-color: var(--rxx-amber) !important;
+}
+
+/* 4. BLOCKQUOTE — Amiga CLI style */
+
+blockquote {
+  border-left: 3px solid var(--rxx-amber) !important;
+  background: var(--rxx-kick) !important;
+  color: var(--rxx-blue-wb) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  padding: 1.25rem 1.5rem !important;
+  border-radius: 0.375rem !important;
+}
+blockquote strong { color: var(--rxx-amber) !important; }
+blockquote em { color: var(--rxx-warm) !important; }
+blockquote code { color: var(--rxx-green) !important; background: transparent !important; border: none !important; }
+
+/* 5. TABLES */
+
+thead tr { background: var(--rxx-blue-dark) !important; color: #FFFFFF !important; }
+thead th { color: #FFFFFF !important; font-family: 'JetBrains Mono', monospace !important; font-size: 0.85rem; }
+tbody tr:nth-child(even) { background: var(--rxx-gray-100); }
+tbody tr:hover { background: var(--rxx-blue-light); }
+
+/* 6. CARDS */
+
+.card {
+  border-left: 4px solid var(--rxx-amber);
+  background: var(--rxx-amber-light);
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin: 1.25rem 0;
+}
+
+.card.port-card {
+  border-left-color: var(--rxx-green-dark);
+  background: var(--rxx-green-light);
+}
+
+.card.arch-card {
+  border-left-color: var(--rxx-red);
+  background: var(--rxx-red-light);
+}
+
+/* 7. CODE BLOCKS — Kickstart dark */
+
+pre {
+  background: var(--rxx-kick) !important;
+  border: 1px solid var(--rxx-kick-light) !important;
+  border-radius: 0.375rem;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--rxx-blue-wb) !important;
+}
+
+code {
+  background: var(--rxx-gray-100);
+  border: 1px solid var(--rxx-gray-200);
+  border-radius: 0.375rem;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  padding: 0.15rem 0.35rem;
+  font-size: 0.875em;
+}
+
+pre code {
+  padding: 0;
+  border: none;
+  background: transparent !important;
+  color: inherit !important;
+}
+
+/* REXX syntax highlighting in pre blocks */
+pre .keyword { color: var(--rxx-amber); font-weight: 700; }
+pre .string { color: var(--rxx-green); }
+pre .comment { color: var(--rxx-gray-500); font-style: italic; }
+pre .function { color: var(--rxx-warm); }
+pre .port { color: var(--rxx-red); font-weight: 700; }
+
+/* 8. STATS GRID */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.stat {
+  background: var(--rxx-kick);
+  border: 1px solid var(--rxx-kick-light);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 3px var(--card-shadow);
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--rxx-blue-wb);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--rxx-gray-300);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.stat-value.amber { color: var(--rxx-amber); }
+.stat-value.green { color: var(--rxx-green); }
+.stat-value.red { color: var(--rxx-red); }
+.stat-value.warm { color: var(--rxx-warm); }
+
+/* 9. KEY NUMBERS */
+
+.key-number { font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+.key-number.confirmed { color: var(--rxx-blue-dark); }
+
+/* 10. FORMULA / REXX EXPRESSION */
+
+.formula {
+  background: var(--rxx-kick);
+  border: 1px solid var(--rxx-amber);
+  border-radius: 0.375rem;
+  padding: 0.75rem 1.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  text-align: center;
+  margin: 1rem 0;
+  color: var(--rxx-amber);
+}
+
+/* 11. CATEGORY GRID */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.category-card {
+  background: var(--card-bg);
+  border: 1px solid var(--rxx-gray-200);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  display: block;
+}
+.category-card:hover {
+  box-shadow: 0 4px 12px var(--card-shadow);
+  border-color: var(--rxx-blue);
+}
+.category-card h3 { margin-top: 0.5rem; color: var(--rxx-blue-dark); }
+
+/* 12. CLUSTER BADGES */
+
+.cluster-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.cluster-badge.cluster-core { background: var(--rxx-blue-light); color: var(--rxx-blue-dark); }
+.cluster-badge.cluster-parse { background: var(--rxx-amber-light); color: var(--rxx-amber-dark); }
+.cluster-badge.cluster-port { background: var(--rxx-green-light); color: var(--rxx-green-dark); }
+.cluster-badge.cluster-arch { background: var(--rxx-red-light); color: var(--rxx-red); }
+.cluster-badge.cluster-amiga { background: #F3E5F5; color: #6A1B9A; }
+.cluster-badge.cluster-gpu { background: #FFF8E1; color: #F57F17; }
+.cluster-badge.cluster-rosetta { background: #FCE4EC; color: #C62828; }
+.cluster-badge.cluster-edu { background: #E8F5E9; color: #2E7D32; }
+.cluster-badge.cluster-history { background: #FFF3E0; color: #E65100; }
+.cluster-badge.cluster-impl { background: #E0F7FA; color: #006064; }
+
+/* 13. CROSS-LINKS */
+
+.cross-links {
+  background: var(--rxx-gray-100);
+  border: 1px solid var(--rxx-gray-200);
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin-top: 2rem;
+}
+.cross-links h4 { margin-top: 0; color: var(--rxx-gray-700); }
+.cross-links ul { columns: 2; column-gap: 2rem; }
+
+/* 14. PORT DIAGRAM */
+
+.port-diagram {
+  background: var(--rxx-kick);
+  border: 2px solid var(--rxx-amber);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  overflow-x: auto;
+  color: var(--rxx-blue-wb);
+}
+
+.port-diagram .port-name { color: var(--rxx-amber); font-weight: 700; }
+.port-diagram .msg { color: var(--rxx-green); }
+.port-diagram .result { color: var(--rxx-warm); }
+.port-diagram .arrow { color: var(--rxx-red); }
+
+/* 15. PORTING PIPELINE */
+
+.port-pipeline {
+  background: linear-gradient(135deg, var(--rxx-kick), var(--rxx-blue-dark));
+  border: 2px solid var(--rxx-amber);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.port-pipeline ol { counter-reset: stage; list-style: none; padding-left: 0; }
+.port-pipeline li {
+  counter-increment: stage;
+  padding: 0.75rem 0 0.75rem 3rem;
+  position: relative;
+  border-left: 2px solid var(--rxx-kick-light);
+  margin-left: 1rem;
+  color: var(--rxx-gray-300);
+}
+.port-pipeline li strong { color: var(--rxx-amber); }
+.port-pipeline li code { color: var(--rxx-green); background: transparent; border: none; }
+.port-pipeline li::before {
+  content: counter(stage);
+  position: absolute;
+  left: -1rem;
+  background: var(--rxx-amber);
+  color: var(--rxx-kick);
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 1.75rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.port-pipeline li:last-child { border-left-color: transparent; }
+
+/* 16. FOOTER */
+
+footer {
+  border-top: 1px solid var(--rxx-gray-200);
+  background: var(--rxx-kick);
+  color: var(--rxx-gray-300);
+}
+footer a { color: var(--rxx-blue-wb) !important; }

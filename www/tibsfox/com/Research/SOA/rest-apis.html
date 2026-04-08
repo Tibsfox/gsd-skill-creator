@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REST &amp; Modern APIs &mdash; SOA</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-soa">
+  <header>
+    <h1>REST &amp; Modern APIs</h1>
+    <div class="subtitle">Fielding, the Richardson Maturity Model, OpenAPI, GraphQL, AsyncAPI &mdash; the simpler approach that beat SOAP</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="principles.html">Principles</a>
+      <a href="history.html">History</a>
+      <a href="enterprise-soa.html">Enterprise SOA</a>
+      <a href="rest-apis.html" class="active">REST &amp; APIs</a>
+      <a href="microservices-mesh.html">Microservices</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      REST won because it was approximately right and simple, not because it was exactly right. Fielding&rsquo;s 2000 dissertation described how the web actually worked; most of the APIs that call themselves &ldquo;RESTful&rdquo; are not, by his definition. It didn&rsquo;t matter. By 2010, REST + JSON was the default way to build a web API, and every front-end developer with an iPhone app agreed.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- 1. FIELDING'S REST                                            -->
+    <!-- ============================================================ -->
+
+    <h2>1. Fielding&rsquo;s REST (2000)</h2>
+
+    <p><strong>Roy Thomas Fielding</strong>, PhD dissertation at UC Irvine, 2000: <em>Architectural Styles and the Design of Network-based Software Architectures</em>. 180 pages. Chapter 5 defines REST. It is probably the most-read PhD dissertation in software architecture history.</p>
+
+    <h3>The six constraints of REST</h3>
+
+    <div class="card">
+      <ol>
+        <li><strong>Client-server</strong> separation.</li>
+        <li><strong>Statelessness</strong> &mdash; each request contains all the information needed; no server-side session state.</li>
+        <li><strong>Cacheability</strong> &mdash; responses must label themselves as cacheable or not.</li>
+        <li><strong>Uniform interface</strong> &mdash; the defining constraint, itself four sub-constraints:
+          <ul>
+            <li>Identification of resources (URIs)</li>
+            <li>Manipulation of resources through representations</li>
+            <li>Self-descriptive messages</li>
+            <li><strong>HATEOAS</strong> &mdash; Hypermedia As The Engine Of Application State</li>
+          </ul>
+        </li>
+        <li><strong>Layered system</strong> &mdash; clients cannot tell if they&rsquo;re talking to the server or an intermediary.</li>
+        <li><strong>Code-on-demand</strong> (optional) &mdash; servers can extend client functionality by transferring executable code (e.g., JavaScript).</li>
+      </ol>
+    </div>
+
+    <p>The argument: the Web is an implementation of REST. HTTP + URIs + HTML (or JSON) forms a REST architecture, and the Web&rsquo;s success &mdash; its scalability, resilience, ability to evolve over decades &mdash; is attributable to these constraints. Fielding was not inventing something new; he was giving a name and systematic description to what the Web already was.</p>
+
+    <h3>REST as a critique of RPC</h3>
+
+    <p>The dissertation contains an implicit and often-explicit critique of the RPC tradition. RPC tries to make a distributed system look like a local program by hiding the network; REST embraces the network by exposing it.</p>
+
+    <p>When Fielding was asked years later whether SOAP/WSDL architectures were &ldquo;RESTful,&rdquo; his response: no, they were RPC systems mislabeled as Web architectures. SOAP used HTTP only as a transport for tunneling method calls. It ignored HTTP verbs (almost all SOAP calls were POSTs), ignored URIs (all calls went to the same endpoint with an operation name in the body), ignored caching, and ignored content negotiation.</p>
+
+    <!-- ============================================================ -->
+    <!-- 2. RICHARDSON MATURITY MODEL                                  -->
+    <!-- ============================================================ -->
+
+    <h2>2. The Richardson Maturity Model (2008)</h2>
+
+    <p>In 2008, software architect <strong>Leonard Richardson</strong> gave a QCon San Francisco talk proposing a four-level maturity model. Martin Fowler popularized it in a March 2010 blog post: <em>&ldquo;Richardson Maturity Model: steps toward the glory of REST.&rdquo;</em></p>
+
+    <div class="maturity-ladder">
+      <ol>
+        <li><strong>Level 0: The Swamp of POX</strong> &mdash; single endpoint, single HTTP verb (usually POST). The service uses HTTP as a tunnel for XML messages. SOAP lives here. XML-RPC lives here.</li>
+        <li><strong>Level 1: Resources</strong> &mdash; distinct URIs for distinct resources, but still typically one verb.</li>
+        <li><strong>Level 2: HTTP Verbs</strong> &mdash; GET, POST, PUT, DELETE in their standard semantics; meaningful HTTP status codes. <em>Most &ldquo;REST APIs&rdquo; in production live here.</em></li>
+        <li><strong>Level 3: Hypermedia Controls (HATEOAS)</strong> &mdash; responses include links to related resources; clients navigate by following links rather than constructing URIs. <em>Almost nobody.</em></li>
+      </ol>
+    </div>
+
+    <p>Fielding himself noted that <strong>only Level 3 is actually REST</strong>. Levels 0, 1, 2 are HTTP-based APIs but not REST architectures. The vast majority of &ldquo;RESTful APIs&rdquo; are Level 2, and Fielding-purists continue to point this out, to the continued annoyance of everyone else.</p>
+
+    <!-- ============================================================ -->
+    <!-- 3. WHY REST WON                                               -->
+    <!-- ============================================================ -->
+
+    <h2>3. Why &ldquo;RESTful&rdquo; Won</h2>
+
+    <p>For all the pedantry about what REST really was, the name won. By 2010, &ldquo;RESTful API&rdquo; was the default thing you built when someone asked for a web API:</p>
+
+    <ul>
+      <li><strong>JSON over XML.</strong> Around 2006, a grassroots shift from XML to JSON happened in the Rails and Django communities. JSON was simpler, more compact, and native to JavaScript.</li>
+      <li><strong>The iPhone effect.</strong> iPhone launched June 2007, App Store July 2008. Every company suddenly needed a mobile backend. REST+JSON was perfect; SOAP+XML was a disaster.</li>
+      <li><strong>Tooling disappeared.</strong> You did not need a WSDL compiler. <code>curl | jq</code> replaced an entire category of code generation.</li>
+      <li><strong>Documentation by example.</strong> Instead of a 2000-line WSDL, REST APIs were documented by human-written pages showing example requests and responses.</li>
+      <li><strong>The Rails movement.</strong> Ruby on Rails 1.0 (December 2005), Rails 2.0 (December 2007) made REST-by-convention the standard way to build Rails applications.</li>
+      <li><strong>Twitter and the public API era.</strong> Twitter&rsquo;s 2006 API proved that public APIs could be simple and popular.</li>
+    </ul>
+
+    <p>The lesson: <em>approximately-right-but-simple almost always beats exactly-right-but-complicated in infrastructure technology</em>.</p>
+
+    <!-- ============================================================ -->
+    <!-- 4. HTTP AS THE PROTOCOL                                       -->
+    <!-- ============================================================ -->
+
+    <h2>4. HTTP as the REST Protocol</h2>
+
+    <h3>Verbs and semantics</h3>
+
+    <table>
+      <thead><tr><th>Verb</th><th>Semantics</th><th>Idempotent?</th><th>Safe?</th></tr></thead>
+      <tbody>
+        <tr><td><code>GET</code></td><td>Retrieve a representation of a resource</td><td>Yes</td><td>Yes (no side effects)</td></tr>
+        <tr><td><code>HEAD</code></td><td>Like GET but only headers</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td><code>POST</code></td><td>Create a new resource, or non-idempotent action</td><td>No</td><td>No</td></tr>
+        <tr><td><code>PUT</code></td><td>Create or replace a resource at a specific URI</td><td>Yes</td><td>No</td></tr>
+        <tr><td><code>PATCH</code></td><td>Partial update</td><td>Debatable</td><td>No</td></tr>
+        <tr><td><code>DELETE</code></td><td>Remove a resource</td><td>Yes</td><td>No</td></tr>
+        <tr><td><code>OPTIONS</code></td><td>Describe communication options (CORS preflight)</td><td>Yes</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Status codes (the important ones)</h3>
+
+    <ul>
+      <li><strong>2xx Success:</strong> 200 OK, 201 Created, 202 Accepted, 204 No Content</li>
+      <li><strong>3xx Redirect:</strong> 301 Moved Permanently, 302 Found, 304 Not Modified (cache still valid)</li>
+      <li><strong>4xx Client error:</strong> 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 409 Conflict, 422 Unprocessable Entity, 429 Too Many Requests</li>
+      <li><strong>5xx Server error:</strong> 500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout</li>
+    </ul>
+
+    <h3>Headers that matter</h3>
+
+    <ul>
+      <li><strong>Authentication:</strong> <code>Authorization: Bearer ...</code>, <code>Authorization: Basic ...</code></li>
+      <li><strong>Content negotiation:</strong> <code>Accept: application/json</code>, <code>Content-Type: application/json</code></li>
+      <li><strong>Caching:</strong> <code>Cache-Control</code>, <code>ETag</code>, <code>If-None-Match</code>, <code>Last-Modified</code>, <code>If-Modified-Since</code></li>
+      <li><strong>Rate limiting:</strong> <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>Retry-After</code></li>
+      <li><strong>Idempotency:</strong> <code>Idempotency-Key</code> (Stripe pattern)</li>
+      <li><strong>Versioning:</strong> <code>API-Version</code>, or vendor media types</li>
+      <li><strong>Tracing:</strong> <code>traceparent</code>, <code>tracestate</code> (W3C Trace Context)</li>
+    </ul>
+
+    <!-- ============================================================ -->
+    <!-- 5. OPENAPI                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>5. OpenAPI / Swagger</h2>
+
+    <p>Swagger was started by <strong>Tony Tam</strong> at Wordnik around 2011. Swagger 1.0, 1.1, 1.2, 2.0 became the de facto REST API description language. In 2015, Swagger 2.0 was donated to the Linux Foundation as the <strong>OpenAPI Initiative</strong>, and Swagger 2.0 was renamed OpenAPI 2.0. OpenAPI 3.0 (2017), 3.1 (2021).</p>
+
+    <pre><code>openapi: 3.1.0
+info:
+  title: Users API
+  version: 1.0.0
+paths:
+  /users/{id}:
+    get:
+      summary: Get a user by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+components:
+  schemas:
+    User:
+      type: object
+      required: [id, name, email, created_at]
+      properties:
+        id:         { type: integer }
+        name:       { type: string }
+        email:      { type: string, format: email }
+        created_at: { type: string, format: date-time }</code></pre>
+
+    <h3>OpenAPI tooling</h3>
+
+    <ul>
+      <li><strong>Swagger UI</strong> &mdash; interactive API documentation</li>
+      <li><strong>Swagger Editor</strong> &mdash; browser-based YAML editor with live preview</li>
+      <li><strong>Swagger Codegen / OpenAPI Generator</strong> &mdash; client and server stubs in every language</li>
+      <li><strong>Stoplight</strong> &mdash; API design platform</li>
+      <li><strong>Redocly</strong> &mdash; OpenAPI toolchain with better docs rendering</li>
+      <li><strong>SwaggerHub</strong> &mdash; SmartBear&rsquo;s hosted collaboration platform</li>
+      <li><strong>Spectral</strong> &mdash; linting for OpenAPI specs</li>
+      <li><strong>Prism</strong> &mdash; mock server from an OpenAPI spec</li>
+    </ul>
+
+    <h3>Contract-first vs code-first</h3>
+
+    <p>Two workflows:</p>
+
+    <ul>
+      <li><strong>Contract-first:</strong> write the OpenAPI YAML, generate stubs, fill in implementations. Better for API-first companies.</li>
+      <li><strong>Code-first:</strong> write annotated Java/Go/Python/C# code, generate OpenAPI from it. Better for code-centric teams.</li>
+    </ul>
+
+    <p>The &ldquo;API-first&rdquo; movement &mdash; Stripe, Twilio, Plaid, Adyen, SendGrid &mdash; treats the API as the product. Contract-first is the natural workflow for this culture.</p>
+
+    <!-- ============================================================ -->
+    <!-- 6. ASYNCAPI                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>6. AsyncAPI &mdash; OpenAPI for Async</h2>
+
+    <p>Founded 2016 by <strong>Fran M&eacute;ndez</strong>. AsyncAPI 1.x, 2.x, 3.x. Describes Kafka topics, MQTT channels, AMQP exchanges, WebSockets. The async equivalent to OpenAPI, filling the gap that OpenAPI explicitly ignores.</p>
+
+    <pre><code>asyncapi: 3.0.0
+info:
+  title: User Service Events
+  version: 1.0.0
+channels:
+  user.created:
+    address: user.created
+    messages:
+      userCreated:
+        $ref: '#/components/messages/UserCreated'
+components:
+  messages:
+    UserCreated:
+      payload:
+        type: object
+        properties:
+          userId: { type: integer }
+          email:  { type: string }
+          ts:     { type: string, format: date-time }</code></pre>
+
+    <p>Tooling: AsyncAPI Generator, Microcks (mocking), Studio (browser editor).</p>
+
+    <!-- ============================================================ -->
+    <!-- 7. GRAPHQL                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>7. GraphQL</h2>
+
+    <p>Facebook internal 2012, public release 2015. Original authors: <strong>Lee Byron</strong> and <strong>Dan Schafer</strong>.</p>
+
+    <pre><code># Schema (SDL)
+type Query {
+  user(id: ID!): User
+  users(limit: Int = 10): [User!]!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  posts(limit: Int = 5): [Post!]!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  body: String!
+}
+
+# Query
+query {
+  user(id: "123") {
+    name
+    posts(limit: 3) {
+      title
+    }
+  }
+}</code></pre>
+
+    <p>The client specifies exactly which fields it wants. The server returns exactly those fields. This solves the &ldquo;over-fetching&rdquo; and &ldquo;under-fetching&rdquo; problems of REST for clients with diverse needs &mdash; typically mobile apps.</p>
+
+    <h3>GraphQL servers</h3>
+
+    <ul>
+      <li><strong>Apollo</strong> &mdash; the commercial leader; Apollo Server, Apollo Client, Apollo Federation</li>
+      <li><strong>Relay</strong> &mdash; Facebook&rsquo;s reference client</li>
+      <li><strong>Hasura</strong> &mdash; auto-generates GraphQL from a Postgres database</li>
+      <li><strong>PostGraphile</strong> &mdash; similar, PostgreSQL-focused</li>
+      <li><strong>DGS</strong> &mdash; Netflix&rsquo;s GraphQL framework</li>
+      <li><strong>graphql-js, graphql-go, graphql-java, Juniper (Rust), Strawberry/Graphene (Python)</strong></li>
+    </ul>
+
+    <h3>GraphQL federation</h3>
+
+    <p>Apollo Federation lets multiple backend services contribute to a single GraphQL schema. A gateway stitches together partial schemas from each service. This is GraphQL&rsquo;s answer to microservices: each service exposes its own slice of the schema, and the federation gateway presents a unified query surface.</p>
+
+    <h3>The operational complexity of GraphQL</h3>
+
+    <div class="card warn">
+      <p>GraphQL is a specific-case win, not a REST replacement:</p>
+      <ul>
+        <li><strong>The N+1 problem.</strong> A naive implementation fetching posts for users issues one query per user. The solution is <strong>DataLoader</strong> &mdash; batch and cache field resolutions within a single request.</li>
+        <li><strong>HTTP caching breaks.</strong> All GraphQL queries go to a single endpoint (usually POST), so CDNs and proxy caches don&rsquo;t help.</li>
+        <li><strong>Rate limiting is harder.</strong> A single query can be infinitely expensive. Tools like query complexity analysis are required.</li>
+        <li><strong>Authorization granularity is harder</strong> &mdash; you have to check every field resolver.</li>
+      </ul>
+      <p>When GraphQL fits (mobile clients with over-fetching problems, API aggregation across services, rapid front-end iteration), it fits very well. When it doesn&rsquo;t, it adds operational complexity without benefit.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 8. API-FIRST COMPANIES                                        -->
+    <!-- ============================================================ -->
+
+    <h2>8. The API-First Movement</h2>
+
+    <p>A generation of companies treated their API as the product. Some well-known examples:</p>
+
+    <ul>
+      <li><strong>Stripe</strong> &mdash; payments. Pioneered idempotency keys, versioning via date headers, obsessive API documentation. Every engineer interacts with the API before writing code.</li>
+      <li><strong>Twilio</strong> &mdash; communications (SMS, voice). REST APIs for phone calls.</li>
+      <li><strong>Plaid</strong> &mdash; financial data access. Bank account integration via a single API.</li>
+      <li><strong>SendGrid</strong> &mdash; transactional email (acquired by Twilio).</li>
+      <li><strong>Algolia</strong> &mdash; search as a service.</li>
+      <li><strong>Auth0</strong> &mdash; authentication as a service (acquired by Okta).</li>
+      <li><strong>Cloudinary</strong> &mdash; image/video API.</li>
+      <li><strong>Mapbox</strong> &mdash; maps API.</li>
+    </ul>
+
+    <p>The common traits: excellent documentation, first-class SDKs in every major language, version stability (Stripe is famous for never breaking old API versions), uniform error handling, webhooks for async notifications, idempotency for safe retries. These companies showed that a well-designed REST API could be a billion-dollar product.</p>
+
+    <!-- ============================================================ -->
+    <!-- 9. VERSIONING                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>9. REST API Versioning</h2>
+
+    <h3>URL versioning</h3>
+
+    <p><code>/api/v1/users/123</code>. Simplest, most debuggable. Technically violates REST&rsquo;s uniform-interface principle. Wins in practice.</p>
+
+    <h3>Header versioning</h3>
+
+    <p><code>Accept: application/vnd.github.v3+json</code>. Cleaner URLs but harder to test with a browser or curl.</p>
+
+    <h3>Date-based versioning (Stripe)</h3>
+
+    <p><code>Stripe-Version: 2024-06-20</code>. Each API change gets a date. Clients pin a version and get that version&rsquo;s behavior forever. Stripe maintains every version that has ever existed, back-compatibly. The cost is huge but the benefit &mdash; never breaking customers &mdash; is enormous.</p>
+
+    <h3>No versioning (Protobuf)</h3>
+
+    <p>Additive schema evolution only. Add optional fields, never remove, never reuse field numbers. gRPC follows this discipline.</p>
+
+    <!-- ============================================================ -->
+    <!-- 10. THE PRAGMATIC MIX                                         -->
+    <!-- ============================================================ -->
+
+    <h2>10. The Pragmatic Mix in 2026</h2>
+
+    <div class="card teal">
+      <p>A typical modern API surface uses several paradigms in different places:</p>
+      <ul>
+        <li><strong>REST + JSON</strong> for public APIs and partner integrations</li>
+        <li><strong>gRPC + Protobuf</strong> for internal service-to-service calls (see <a href="microservices-mesh.html">microservices page</a>)</li>
+        <li><strong>GraphQL</strong> for mobile client aggregation</li>
+        <li><strong>WebSockets</strong> for real-time browser updates</li>
+        <li><strong>Server-Sent Events</strong> for server push to browsers</li>
+        <li><strong>Webhooks</strong> for async notifications to partners</li>
+        <li><strong>Kafka / AsyncAPI</strong> for internal event streaming</li>
+      </ul>
+      <p>Each is the right tool for a specific boundary. The mistake is picking one paradigm and forcing it everywhere.</p>
+    </div>
+
+    <h2>11. What REST Got Right</h2>
+
+    <ul>
+      <li><strong>HTTP verbs as semantics.</strong> GET means read, PUT means replace, DELETE means remove. The browser, the CDN, and the load balancer all understand.</li>
+      <li><strong>URIs as identity.</strong> Every resource has a name you can link to, bookmark, share, cache.</li>
+      <li><strong>Status codes as a vocabulary.</strong> 404 means not found in every language.</li>
+      <li><strong>JSON as the lingua franca.</strong> Every programming language in 2026 can read and write JSON out of the box.</li>
+      <li><strong>Plain HTTP caching.</strong> ETags, <code>If-None-Match</code>, CDN invalidation &mdash; all free if you use REST correctly.</li>
+      <li><strong>Debuggability.</strong> <code>curl</code> + a browser + your dev tools. No special client needed.</li>
+    </ul>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="principles.html">Principles &amp; Concepts</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="enterprise-soa.html">Enterprise SOA (SOAP era)</a></li>
+        <li><a href="microservices-mesh.html">Microservices &amp; Service Mesh</a></li>
+        <li><a href="implementations.html">Implementations &amp; Stacks</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Service-Oriented Architecture &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

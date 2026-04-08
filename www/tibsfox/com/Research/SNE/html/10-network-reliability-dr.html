@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Reliability &amp; Disaster
+Recovery — SNE Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2236;
+            --accent: #00BFA5;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #40C4FF;
+            --border: #2a3a4a;
+            --primary: #0D47A1;
+            --net: #80DEEA;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(64,196,255,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNE — Systems Network Engineering<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNE Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="network-reliability-disaster-recovery">Network Reliability
+    &amp; Disaster Recovery</h1>
+    <blockquote>
+    <p><strong>Domain:</strong> Systems Network Engineering
+    <strong>Module:</strong> 10 – Keeping Packets Flowing When
+    Everything Fails <strong>Through-line:</strong> <em>A network is
+    only as reliable as the assumptions you failed to test. Every cable
+    can be cut, every switch can crash, every BGP session can flap.
+    Network reliability engineering is not about preventing failure –
+    that is impossible. It is about designing systems where failure is
+    contained, detected in milliseconds, and recovered from before users
+    notice. The five-nines target of 99.999% availability permits 5
+    minutes and 15 seconds of downtime per year. Achieving that number
+    requires redundancy at every layer (device, link, path, site),
+    sub-second failure detection through BFD, pre-computed repair paths,
+    and a testing culture that pulls cables on purpose.</em></p>
+    </blockquote>
+    <hr />
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ol type="1">
+    <li><a href="#1-redundancy-design-principles">Redundancy Design
+    Principles</a></li>
+    <li><a href="#2-the-availability-nines-table">The Availability Nines
+    Table</a></li>
+    <li><a href="#3-convergence-time-engineering">Convergence Time
+    Engineering</a></li>
+    <li><a href="#4-bfd----bidirectional-forwarding-detection">BFD –
+    Bidirectional Forwarding Detection</a></li>
+    <li><a href="#5-graceful-restart-and-non-stop-forwarding">Graceful
+    Restart and Non-Stop Forwarding</a></li>
+    <li><a href="#6-network-dr-testing">Network DR Testing</a></li>
+    <li><a href="#7-submarine-cable-resilience">Submarine Cable
+    Resilience</a></li>
+    <li><a href="#8-mttr-and-spare-parts-strategy">MTTR and Spare Parts
+    Strategy</a></li>
+    <li><a href="#9-network-redundancy-anti-patterns">Network Redundancy
+    Anti-Patterns</a></li>
+    <li><a href="#10-real-world-architectures">Real-World
+    Architectures</a></li>
+    <li><a
+    href="#11-availability-calculations-and-design-patterns">Availability
+    Calculations and Design Patterns</a></li>
+    <li><a href="#12-cross-references">Cross-References</a></li>
+    <li><a href="#13-sources">Sources</a></li>
+    </ol>
+    <hr />
+    <h2 id="redundancy-design-principles">1. Redundancy Design
+    Principles</h2>
+    <p>Network redundancy operates at four distinct layers. Designing
+    for only one while neglecting the others creates an illusion of
+    reliability that collapses under real-world failure conditions.</p>
+    <h3 id="the-four-redundancy-layers">1.1 The Four Redundancy
+    Layers</h3>
+    <table>
+    <colgroup>
+    <col style="width: 12%" />
+    <col style="width: 31%" />
+    <col style="width: 15%" />
+    <col style="width: 41%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Layer</th>
+    <th>Protects Against</th>
+    <th>Example</th>
+    <th>Failure Mode Without It</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Device</strong></td>
+    <td>Hardware failure (PSU, supervisor, line card)</td>
+    <td>Dual supervisors, stacked switches, redundant PSU</td>
+    <td>Single switch failure takes down a floor</td>
+    </tr>
+    <tr>
+    <td><strong>Link</strong></td>
+    <td>Cable cut, transceiver failure, port failure</td>
+    <td>Dual-homed connections, LAG bundles, diverse fiber</td>
+    <td>One cable cut severs connectivity</td>
+    </tr>
+    <tr>
+    <td><strong>Path</strong></td>
+    <td>Routing failure, congestion, intermediate device failure</td>
+    <td>ECMP, multiple IGP paths, BGP multipath</td>
+    <td>Traffic black-holed when intermediate router fails</td>
+    </tr>
+    <tr>
+    <td><strong>Site</strong></td>
+    <td>Facility-level disaster (power, fire, flood)</td>
+    <td>Geographically separated DCs, multi-region</td>
+    <td>Entire site loss takes down all services</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="dual-homed-connections">1.2 Dual-Homed Connections</h3>
+    <p>Dual-homing connects a device or site to two independent upstream
+    points. No single cable cut or upstream device failure should
+    isolate the downstream device. Three requirements for effective
+    dual-homing:</p>
+    <ul>
+    <li><strong>Diverse physical paths.</strong> The two uplinks must
+    not share conduit, duct bank, or building entry point. Two cables in
+    the same trench are one backhoe away from simultaneous failure. The
+    industry term is “diverse path routing” – the paths must be
+    physically separated at every point along the route.</li>
+    <li><strong>Independent upstream devices.</strong> Connecting both
+    uplinks to the same upstream switch provides link redundancy but not
+    device redundancy. True dual-homing terminates on different
+    switches, ideally in different racks or rooms.</li>
+    <li><strong>Active-active preferred.</strong> Active-standby wastes
+    half the purchased bandwidth and introduces failover delay. Modern
+    designs use ECMP or MC-LAG (multi-chassis link aggregation) to keep
+    both paths forwarding simultaneously.</li>
+    </ul>
+    <h3 id="nspof-analysis-and-redundancy-models">1.3 NSPOF Analysis and
+    Redundancy Models</h3>
+    <p>The No Single Point of Failure analysis reviews every component
+    in the path between endpoints. For each: “If this fails, does
+    traffic still flow?” Three redundancy models define spare capacity:
+    <strong>N+1</strong> (one additional unit beyond what is needed –
+    cost-efficient), <strong>N+N</strong> (equal spares – allows
+    maintenance plus one unplanned failure), and <strong>2N</strong>
+    (completely independent parallel system – gold standard for
+    financial and carrier networks).</p>
+    <hr />
+    <h2 id="the-availability-nines-table">2. The Availability Nines
+    Table</h2>
+    <table>
+    <colgroup>
+    <col style="width: 18%" />
+    <col style="width: 20%" />
+    <col style="width: 22%" />
+    <col style="width: 20%" />
+    <col style="width: 18%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Availability</th>
+    <th>Downtime/Year</th>
+    <th>Downtime/Month</th>
+    <th>Downtime/Week</th>
+    <th>Common Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>99%</td>
+    <td>3d 15h 36m</td>
+    <td>7h 18m</td>
+    <td>1h 41m</td>
+    <td>Two nines</td>
+    </tr>
+    <tr>
+    <td>99.9%</td>
+    <td>8h 46m</td>
+    <td>43m 50s</td>
+    <td>10m 5s</td>
+    <td>Three nines</td>
+    </tr>
+    <tr>
+    <td>99.95%</td>
+    <td>4h 23m</td>
+    <td>21m 55s</td>
+    <td>5m 2s</td>
+    <td>Three and a half</td>
+    </tr>
+    <tr>
+    <td>99.99%</td>
+    <td>52m 36s</td>
+    <td>4m 23s</td>
+    <td>1m 1s</td>
+    <td>Four nines</td>
+    </tr>
+    <tr>
+    <td>99.999%</td>
+    <td>5m 15s</td>
+    <td>26.3s</td>
+    <td>6.0s</td>
+    <td>Five nines</td>
+    </tr>
+    <tr>
+    <td>99.9999%</td>
+    <td>31.5s</td>
+    <td>2.6s</td>
+    <td>0.6s</td>
+    <td>Six nines</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Three nines (99.9%)</strong> – Achievable with basic
+    redundancy and manual failover. A single 8-hour outage consumes the
+    annual budget. Most small business networks operate here. This is
+    the SLA floor for cloud providers on individual VMs.</p>
+    <p><strong>Four nines (99.99%)</strong> – Requires automated
+    failover, redundant paths, proactive monitoring. Enterprise data
+    center target. A single 5-minute BGP convergence event repeated 10
+    times consumes the entire budget.</p>
+    <p><strong>Five nines (99.999%)</strong> – 5 minutes 15 seconds per
+    year. A single 30-second failover consumes 10% of the annual budget.
+    Requires sub-second detection (BFD), pre-computed backup paths,
+    hitless upgrades, rigorous change management. Carrier-grade and
+    financial network target.</p>
+    <p><strong>Six nines (99.9999%)</strong> – 31.5 seconds per year.
+    Requires fully redundant 2N architectures with independent failure
+    domains. Telecom switching target (NEBS Level 3). Theoretical for
+    most network designs.</p>
+    <p>Each additional nine roughly doubles infrastructure cost. Most
+    organizations find their economic optimum between 99.95% and
+    99.99%.</p>
+    <hr />
+    <h2 id="convergence-time-engineering">3. Convergence Time
+    Engineering</h2>
+    <p>Convergence time is the interval between a failure occurring and
+    all routers having updated forwarding tables to route around it.
+    During convergence, packets destined for the failed path are
+    dropped. Detection dominates the timeline.</p>
+    <pre><code>FAILURE --&gt; [Detection] --&gt; [Notification] --&gt; [Computation] --&gt; [FIB Update]
+             ~50ms-40s       ~1-5s              ~10ms-1s          ~10ms</code></pre>
+    <p>Without BFD, OSPF detection takes 40 seconds (4x 10-second
+    hello). BGP takes 180 seconds (3x 60-second keepalive).</p>
+    <h3 id="ospf-convergence-tuning">3.1 OSPF Convergence Tuning</h3>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 26%" />
+    <col style="width: 20%" />
+    <col style="width: 32%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Phase</th>
+    <th>Default</th>
+    <th>Tuned</th>
+    <th>Mechanism</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Detection</td>
+    <td>40s</td>
+    <td>50ms</td>
+    <td>BFD replaces hello-based detection</td>
+    </tr>
+    <tr>
+    <td>LSA generation</td>
+    <td>5s wait</td>
+    <td>0ms initial, 50ms incremental</td>
+    <td><code>timers throttle lsa</code></td>
+    </tr>
+    <tr>
+    <td>SPF computation</td>
+    <td>5s wait</td>
+    <td>50ms initial, 200ms incremental</td>
+    <td><code>timers throttle spf</code></td>
+    </tr>
+    <tr>
+    <td>FIB update</td>
+    <td>Immediate</td>
+    <td>Immediate</td>
+    <td>Hardware-dependent</td>
+    </tr>
+    </tbody>
+    </table>
+    <pre><code>router ospf 1
+ timers throttle lsa 0 50 5000
+ timers throttle spf 50 200 5000
+ timers pacing flood 10</code></pre>
+    <p>The throttle parameters follow the pattern
+    <code>(initial-delay, incremental-delay, max-delay)</code>. The
+    initial SPF runs 50ms after the first LSA arrives. If additional
+    LSAs arrive during computation, subsequent SPF runs are delayed by
+    200ms increments, up to a 5-second maximum. This prevents SPF storms
+    during large-scale failures while still allowing sub-second
+    convergence for single-link failures.</p>
+    <h3 id="bgp-convergence-tuning">3.2 BGP Convergence Tuning</h3>
+    <p>BGP was designed for policy, not speed. Key mechanisms:
+    <strong>BFD</strong> (reduces detection from 180s to 50ms),
+    <strong>BGP Prefix Independent Convergence (PIC)</strong>
+    (pre-installs backup paths in FIB – sub-second data plane failover
+    even while BGP control plane reconverges), and <strong>BGP
+    Add-Path</strong> (advertises multiple paths per prefix, giving
+    downstream routers pre-installed backups). Real-world
+    implementations have demonstrated 72ms end-to-end convergence with
+    these techniques combined [15].</p>
+    <h3 id="ip-fast-reroute-and-loop-free-alternates">3.3 IP Fast
+    Reroute and Loop-Free Alternates</h3>
+    <p>IPFRR (RFC 5286) pre-computes loop-free alternate next hops. When
+    a link fails, the router immediately redirects without waiting for
+    IGP convergence – only a FIB swap is needed, taking approximately
+    10ms. Remote LFA (RFC 7490) tunnels to a repair node when no direct
+    LFA exists. Topology-Independent LFA (TI-LFA) uses Segment Routing
+    to steer traffic along the post-convergence path, eliminating the
+    tunnel requirement and providing 100% coverage for any topology.
+    Combined with BFD at 50ms detection, total failover reaches
+    approximately 60ms.</p>
+    <hr />
+    <h2 id="bfd-bidirectional-forwarding-detection">4. BFD –
+    Bidirectional Forwarding Detection</h2>
+    <p>BFD (RFC 5880) is a lightweight, protocol-independent mechanism
+    for detecting forwarding path failures, operating in the data plane.
+    It detects failures in as little as 50 milliseconds – roughly 800
+    times faster than default OSPF timers.</p>
+    <p>Each endpoint sends periodic BFD control packets. Missing a
+    configurable number (the detect multiplier) declares the session
+    down and notifies all registered clients (OSPF, BGP, IS-IS, static
+    routes, MPLS).</p>
+    <pre><code>Transmit interval:   50ms      Detection time: 50ms x 3 = 150ms
+Detect multiplier:   3         Aggressive:     10ms x 3 = 30ms (hardware-assisted)</code></pre>
+    <p><strong>Asynchronous mode</strong> (standard): periodic packets,
+    session down on missed multiplier. This is the mode used in
+    virtually all production deployments. <strong>Demand mode</strong>
+    (rare): polling-based, reduces bandwidth but increases detection
+    time. <strong>Echo function</strong>: packets looped by remote
+    endpoint, tests the complete forwarding path including line cards
+    and ASICs rather than just the control plane.</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Protocol</th>
+    <th>BFD RFC</th>
+    <th>Replaces</th>
+    <th>Improvement</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>OSPF</td>
+    <td>RFC 5882</td>
+    <td>40s dead timer</td>
+    <td>40s to 150ms</td>
+    </tr>
+    <tr>
+    <td>BGP</td>
+    <td>RFC 5882</td>
+    <td>180s hold timer</td>
+    <td>180s to 150ms</td>
+    </tr>
+    <tr>
+    <td>IS-IS</td>
+    <td>RFC 5882</td>
+    <td>30s hello</td>
+    <td>30s to 150ms</td>
+    </tr>
+    <tr>
+    <td>Static routes</td>
+    <td>Vendor-specific</td>
+    <td>No detection</td>
+    <td>Infinite to 150ms</td>
+    </tr>
+    <tr>
+    <td>MPLS LSP</td>
+    <td>RFC 5884</td>
+    <td>No detection</td>
+    <td>Infinite to 150ms</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Configuration example (Cisco IOS-XE for
+    OSPF):</strong></p>
+    <pre><code>interface GigabitEthernet0/0
+ bfd interval 50 min_rx 50 multiplier 3
+
+router ospf 1
+ bfd all-interfaces</code></pre>
+    <p><strong>Multihop BFD</strong> (RFC 5883) extends detection across
+    multiple L3 hops for eBGP multihop sessions where peers are not
+    directly connected. Uses UDP port 4784 (vs. 3784 for single-hop) and
+    requires explicit source/destination address configuration. The
+    limitation is that it cannot distinguish between failure of the
+    remote endpoint and failure of an intermediate hop.</p>
+    <hr />
+    <h2 id="graceful-restart-and-non-stop-forwarding">5. Graceful
+    Restart and Non-Stop Forwarding</h2>
+    <p>When a router’s control plane restarts (software upgrade, process
+    crash, supervisor switchover), the data plane can continue
+    forwarding using the last-known routing table – if GR is configured.
+    Without GR, a control plane restart triggers adjacency drops, route
+    withdrawal, traffic rerouting or black-holing, and a full
+    reconvergence cycle taking 30 seconds to several minutes.</p>
+    <h3 id="ospf-graceful-restart-rfc-3623">5.1 OSPF Graceful Restart
+    (RFC 3623)</h3>
+    <p>The restarting router sends a Grace-LSA (Type 9 opaque LSA) to
+    neighbors before restarting, containing a grace period (60-180s) and
+    restart reason (planned or unplanned). Neighbors enter
+    <strong>helper mode</strong>: they continue advertising the
+    restarting router’s links as up, continue forwarding to it, and skip
+    SPF for its topology changes. They exit helper mode when the grace
+    period expires, topology changes elsewhere, or the router signals
+    completion. Result: zero packet loss during the restart.</p>
+    <h3 id="bgp-graceful-restart-rfc-4724">5.2 BGP Graceful Restart (RFC
+    4724)</h3>
+    <p>When the TCP session drops, the receiving speaker marks routes as
+    “stale” but keeps them for the configured restart time (default
+    120s). The restarting speaker re-establishes the session and sends
+    an End-of-RIB marker when it has re-advertised all routes. Stale
+    routes not refreshed are then deleted. GR is safe only when the
+    network is stable during restart – primarily a planned maintenance
+    mechanism. If the network topology changes during the restart
+    period, stale routes may be incorrect.</p>
+    <h3 id="nsf-with-stateful-switchover">5.3 NSF with Stateful
+    Switchover</h3>
+    <p>On chassis routers with redundant supervisors, NSF pairs with
+    SSO. The standby maintains a synchronized copy of interface status,
+    protocol adjacencies, ACLs, and QoS policies. On failure: standby
+    takes over (0.5-3 seconds), data plane continues forwarding with
+    existing FIB, new active supervisor initiates graceful restart for
+    all protocols. The entire event is invisible to transit traffic.</p>
+    <hr />
+    <h2 id="network-dr-testing">6. Network DR Testing</h2>
+    <p>A redundancy design is only as reliable as the last time it was
+    tested. Networks that have never experienced a failure will fail in
+    unexpected ways when one eventually occurs.</p>
+    <h3 id="failover-drills">6.1 Failover Drills</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 19%" />
+    <col style="width: 47%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Drill Type</th>
+    <th>Tests</th>
+    <th>Expected Result</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Cable pull</strong></td>
+    <td>Link redundancy</td>
+    <td>BFD detects &lt;200ms, traffic shifts, near-zero loss</td>
+    </tr>
+    <tr>
+    <td><strong>Device reboot</strong></td>
+    <td>Device redundancy, GR/NSF</td>
+    <td>SSO/NSF maintains forwarding, &lt;1s impact</td>
+    </tr>
+    <tr>
+    <td><strong>Circuit failover</strong></td>
+    <td>WAN path redundancy</td>
+    <td>BGP reconverges to backup, shifts within BFD time</td>
+    </tr>
+    <tr>
+    <td><strong>Site failover</strong></td>
+    <td>Site redundancy</td>
+    <td>GSLB redirects users, data replication current</td>
+    </tr>
+    <tr>
+    <td><strong>Control plane crash</strong></td>
+    <td>NSF/GR</td>
+    <td>Forwarding continues, GR rebuilds state, &lt;3s impact</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The <strong>cable-pull test</strong> is the most fundamental DR
+    test: physically remove a cable from a running production port and
+    measure detection time, reroute time, packet loss, and restoration
+    time. It is an unambiguous, instantaneous, Layer 1 failure with no
+    graceful shutdown or protocol notification. If the network cannot
+    survive a cable pull cleanly, it cannot survive anything more
+    complex.</p>
+    <h3 id="chaos-engineering-for-networks">6.2 Chaos Engineering for
+    Networks</h3>
+    <p>Controlled failure injection in production to discover weaknesses
+    before uncontrolled failures do. Network chaos experiments include:
+    link failure injection via SDN controllers or router APIs, BGP
+    session teardown to verify backup path activation, latency injection
+    using <code>tc</code> on Linux or policy-map on Cisco, packet loss
+    injection to simulate gray failures (degraded but not dead circuits
+    – harder to detect than hard failures and often more damaging), DNS
+    failure simulation, and full site blackhole to test GSLB
+    failover.</p>
+    <p><strong>Tools:</strong> <code>tc</code> (Linux traffic control),
+    Gremlin (commercial chaos platform), Toxiproxy (Shopify, TCP-level
+    proxy), GNS3/EVE-NG (pre-production simulation), Batfish (offline
+    config analysis).</p>
+    <p><strong>Game days</strong> exercise the human response alongside
+    the technical: on-call escalation, communication, decision-making. A
+    failure scenario unknown to the on-call team, real-time monitoring,
+    and post-exercise review with timeline reconstruction.</p>
+    <hr />
+    <h2 id="submarine-cable-resilience">7. Submarine Cable
+    Resilience</h2>
+    <p>Over 95% of intercontinental data traverses submarine cables. As
+    of 2025, TeleGeography documents 570 in-service systems with 1,712
+    landing points, plus 81 planned [13].</p>
+    <h3 id="geographic-chokepoints">7.1 Geographic Chokepoints</h3>
+    <table>
+    <thead>
+    <tr>
+    <th>Chokepoint</th>
+    <th>Cables</th>
+    <th>Primary Risk</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Strait of Malacca</td>
+    <td>20+</td>
+    <td>Shipping, anchoring, seismic</td>
+    </tr>
+    <tr>
+    <td>Bab el-Mandeb / Red Sea</td>
+    <td>12-16</td>
+    <td>Conflict, shipping, anchor drags</td>
+    </tr>
+    <tr>
+    <td>English Channel</td>
+    <td>30+</td>
+    <td>Fishing trawlers, dense shipping</td>
+    </tr>
+    <tr>
+    <td>Strait of Luzon</td>
+    <td>15+</td>
+    <td>Typhoons, seismic, submarine landslides</td>
+    </tr>
+    <tr>
+    <td>Mediterranean</td>
+    <td>20+</td>
+    <td>Fishing, anchoring, seismic zones</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Route diversity is critical. An organization relying on a single
+    cable system between two continents has a single point of failure at
+    the intercontinental layer. Best practice requires contracts with
+    carriers using at least two physically diverse cable systems,
+    landing at different stations, preferably transiting different
+    geographic chokepoints.</p>
+    <h3 id="notable-cable-cuts">7.2 Notable Cable Cuts</h3>
+    <p><strong>Tonga 2022:</strong> The Hunga Tonga volcanic eruption on
+    January 15, 2022 shredded the 827 km Tonga Cable across
+    approximately 50 km with 4-5 distinct breaks. The eruption’s
+    pyroclastic flows and debris currents destroyed the cable beyond
+    simple repair. Tonga lost all international internet for days;
+    satellite provided only kilobit-per-second speeds through Inmarsat
+    BGAN terminals. The volcanic ash plume initially blocked even
+    satellite communications. Full repair took five weeks. Lesson:
+    single-cable island nations face existential connectivity risk
+    [16].</p>
+    <p><strong>Red Sea 2024:</strong> Four major cables (AAE-1,
+    Seacom/TGN-EA, EIG) severed in February 2024 by the dragging anchor
+    of MV Rubymar, a cargo ship sunk by a Houthi anti-ship missile. An
+    estimated 25% of data traffic between Asia and Europe was disrupted
+    – the Red Sea carries 16 cable systems connecting these continents.
+    Repair took nearly six months because Houthi-controlled waters
+    prevented repair ship access. Alcatel Submarine Networks declared
+    force majeure, and the 2Africa Pearls cable extension was
+    indefinitely delayed. Lesson: route diversity must account for
+    political stability, not just geography [17].</p>
+    <p><strong>Other significant events:</strong> Taiwan earthquakes
+    (2006, 2023) severed Luzon Strait cables via undersea landslides.
+    Egypt anchor drags (2008) disrupted 70% of India’s internet
+    connectivity. Svalbard cable cut (2022) highlighted sabotage
+    vulnerability of single-cable routes.</p>
+    <hr />
+    <h2 id="mttr-and-spare-parts-strategy">8. MTTR and Spare Parts
+    Strategy</h2>
+    <table>
+    <thead>
+    <tr>
+    <th>Component</th>
+    <th>Target MTTR</th>
+    <th>Spare Strategy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Transceiver (SFP/QSFP)</td>
+    <td>15 min</td>
+    <td>On-site, 10-20% spares per site</td>
+    </tr>
+    <tr>
+    <td>Line card</td>
+    <td>30 min</td>
+    <td>On-site for critical chassis</td>
+    </tr>
+    <tr>
+    <td>Power supply</td>
+    <td>30 min</td>
+    <td>On-site (spare for the spare)</td>
+    </tr>
+    <tr>
+    <td>Chassis/switch</td>
+    <td>2-4 hours</td>
+    <td>Pre-staged warm spare or 4-hour RMA</td>
+    </tr>
+    <tr>
+    <td>WAN circuit</td>
+    <td>4-24 hours</td>
+    <td>Diverse backup (always active)</td>
+    </tr>
+    <tr>
+    <td>Submarine cable</td>
+    <td>2-6 weeks</td>
+    <td>Route diversity via different system</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>RMA tiers:</strong> NBD (24-48h, included with support),
+    4-hour (15-25% of hardware cost per year), 2-hour (25-40%), on-site
+    sparing (one-time hardware cost). For a $50K spine switch, buying a
+    cold spare achieves 15-minute swap vs. 4-hour RMA wait and pays for
+    itself in four years of avoided RMA fees.</p>
+    <p><strong>Spare management discipline:</strong> Spares must run the
+    same firmware as production (quarterly updates), carry a baseline
+    configuration template, and undergo periodic power-on testing
+    (quarterly) to catch dead capacitors or failed flash storage.</p>
+    <p><strong>Availability formula:</strong>
+    <code>A = MTBF / (MTBF + MTTR)</code>. With MTBF of 50,000 hours and
+    MTTR of 4 hours (RMA): 99.992%. Same device with on-site spare (MTTR
+    15 min): 99.9995%. Reducing MTTR has far larger impact on
+    availability than increasing MTBF.</p>
+    <hr />
+    <h2 id="network-redundancy-anti-patterns">9. Network Redundancy
+    Anti-Patterns</h2>
+    <p><strong>Fate sharing:</strong> Two “redundant” components sharing
+    a hidden common dependency. Both WAN circuits using the same
+    last-mile fiber. Both DNS servers on the same hypervisor. Both power
+    supplies on the same UPS. Prevention: trace the full dependency
+    chain for each redundant element – if they converge at any point,
+    they fate-share.</p>
+    <p><strong>Asymmetric routing:</strong> Outbound via Path A, return
+    via Path B. Stateful devices (firewalls, NAT gateways) see half the
+    conversation and drop traffic. Prevention: symmetric routing
+    policies (local-preference, MED, AS-path prepending), stateful
+    session synchronization between redundant firewalls, or
+    asymmetry-tolerant stateless ACLs.</p>
+    <p><strong>Split-brain:</strong> Both units in a redundant pair
+    believe they are active. Causes duplicate IP addresses, conflicting
+    route advertisements, data corruption. Happens when the heartbeat
+    link fails and each unit assumes the other is dead. Prevention:
+    dedicated out-of-band heartbeat links, multiple heartbeat
+    mechanisms, quorum with a third witness node, fencing
+    mechanisms.</p>
+    <p><strong>Hidden dependencies:</strong> Network devices depending
+    on DNS for their management interface (if DNS fails, you cannot SSH
+    to fix DNS). RADIUS/TACACS over the managed network (network failure
+    locks operators out). NTP dependencies for certificate validation on
+    routing protocol authentication. Prevention: out-of-band management
+    network independent of the production data plane.</p>
+    <p><strong>Convergence oscillation:</strong> A flapping link causing
+    repeated failover/failback, each a convergence event with packet
+    loss. A link that flaps 100 times per hour causes 100 convergence
+    events. Prevention: BFD dampening, interface dampening, route
+    dampening, and root cause repair of the underlying issue (bad
+    transceiver, marginal fiber, software bug).</p>
+    <hr />
+    <h2 id="real-world-architectures">10. Real-World Architectures</h2>
+    <h3 id="google-b4-wan">10.1 Google B4 WAN</h3>
+    <p>Private SD-WAN connecting Google data centers globally (SIGCOMM
+    2013, updated 2018). Centralized traffic engineering with a global
+    TE server recomputes flows on failure within seconds. Hierarchical
+    control plane (“B4 and After”) partitions into domains for fault
+    isolation – a controller failure affects only its domain. Runs links
+    near 100% utilization because centralized TE redistributes instantly
+    (traditional networks keep 30-40% headroom). Merchant silicon
+    switches with OpenFlow enable commodity sparing and rapid
+    replacement. Orion (NSDI 2021) is the next-generation SDN platform,
+    a modular microservice architecture with a publish-subscribe
+    database running both Jupiter (data center) and B4 (WAN) networks
+    [10][11][12].</p>
+    <h3 id="cloudflare-backbone">10.2 Cloudflare Backbone</h3>
+    <p>330+ cities, 120+ countries, 300+ Tbps capacity as of 2024. Every
+    Cloudflare IP announced from every data center via BGP anycast – BGP
+    convergence IS the failover mechanism. When a data center fails, its
+    BGP announcements withdraw and traffic shifts to the next nearest
+    location automatically. Each site is locally autonomous and
+    processes all services independently, eliminating hidden
+    dependencies on central control. During the AAE-1 Red Sea cable
+    disruption, Cloudflare’s diverse backbone paths maintained flat
+    round-trip times while third-party transit providers experienced
+    severe congestion. Backbone capacity has grown 500% since 2021
+    [14].</p>
+    <h3 id="aws-network-architecture">10.3 AWS Network Architecture</h3>
+    <p>Minimum three AZs per Region, each with independent power,
+    cooling, and networking. AZs separated up to 100 km but connected by
+    redundant dedicated metro fiber with sub-2ms round-trip latency,
+    enabling synchronous database replication (RPO=0). Nine million
+    kilometers of fiber globally. All inter-AZ traffic encrypted via
+    hardware-accelerated encryption. 38 Regions and 120+ AZs as of 2025,
+    with each new Region maintaining the minimum three-AZ redundancy
+    model [15].</p>
+    <hr />
+    <h2 id="availability-calculations-and-design-patterns">11.
+    Availability Calculations and Design Patterns</h2>
+    <h3 id="series-and-parallel-availability">11.1 Series and Parallel
+    Availability</h3>
+    <p><strong>Series</strong> (all must work):
+    <code>A_total = A1 x A2 x A3</code>. Ten components at 99.9% each:
+    <code>0.999^10 = 99.0%</code>. Every component in the path degrades
+    total availability.</p>
+    <p><strong>Parallel</strong> (any must work):
+    <code>A_total = 1 - (1 - A1)(1 - A2)</code>. Two at 99%:
+    <code>1 - 0.01^2 = 99.99%</code>. Two individually mediocre
+    components in parallel achieve excellent availability. This is why
+    redundancy is the primary tool for availability improvement – more
+    effective than increasing individual component reliability.</p>
+    <p><strong>Compound calculation:</strong> A campus path through a
+    single access switch (99.95%), redundant distribution pair (each
+    99.95%, parallel = 99.999975%), redundant core pair (each 99.99%,
+    parallel = 99.99999%), and dual WAN circuits (each 99.9%, parallel =
+    99.9999%) yields:
+    <code>0.9995 x 0.99999975 x 0.9999999 x 0.999999 = 99.95%</code>.
+    The single non-redundant access switch dominates overall
+    availability.</p>
+    <h3 id="design-patterns">11.2 Design Patterns</h3>
+    <p><strong>Active-active ECMP:</strong> Both paths forward
+    simultaneously using hash-based flow distribution. Sub-second
+    failover – surviving paths absorb traffic immediately. Full
+    bandwidth utilization. Requires session synchronization if stateful
+    devices are in the path.</p>
+    <p><strong>Active-standby (VRRP/HSRP):</strong> One device active,
+    one monitoring. On failure, standby assumes the virtual IP. Simple,
+    no asymmetric routing. Wastes 50% capacity, 1-3 second failover
+    (tunable lower with BFD).</p>
+    <p><strong>Anycast:</strong> Same IP from multiple locations via
+    BGP. Clients routed to nearest instance. Global distribution,
+    automatic geographic failover. Excellent for DNS and CDN. Not
+    suitable for long-lived stateful TCP sessions.</p>
+    <p><strong>Spine-leaf fabric:</strong> Every leaf to every spine,
+    deterministic one-hop latency through spine layer. N+1 spine design
+    tolerates any single spine failure. No spanning tree. Linear
+    scale-out.</p>
+    <p><strong>Stretched cluster:</strong> Active-active data centers
+    with Layer 2 extension via EVPN-VXLAN. Near-zero RTO for site
+    failure. Complex, with split-brain risk if the inter-site link
+    fails. Requires careful failure domain design.</p>
+    <hr />
+    <h2 id="cross-references">12. Cross-References</h2>
+    <table>
+    <colgroup>
+    <col style="width: 38%" />
+    <col style="width: 61%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Module</th>
+    <th>Relationship</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><a href="01-network-architecture-design.md">01. Architecture
+    &amp; Design</a></td>
+    <td>Redundancy applied to topologies</td>
+    </tr>
+    <tr>
+    <td><a href="02-routing-switching-operations.md">02. Routing &amp;
+    Switching</a></td>
+    <td>BGP/OSPF operations underpinning convergence</td>
+    </tr>
+    <tr>
+    <td><a href="04-load-balancing-traffic-engineering.md">04. Traffic
+    Engineering</a></td>
+    <td>ECMP, anycast, GSLB as redundancy mechanisms</td>
+    </tr>
+    <tr>
+    <td><a href="05-network-security-engineering.md">05. Security
+    Engineering</a></td>
+    <td>Firewall HA, DDoS mitigation</td>
+    </tr>
+    <tr>
+    <td><a href="06-cloud-networking.md">06. Cloud Networking</a></td>
+    <td>AWS AZs, transit gateways, cloud-native redundancy</td>
+    </tr>
+    <tr>
+    <td><a href="07-observability-troubleshooting.md">07.
+    Observability</a></td>
+    <td>Monitoring that detects failures and measures convergence</td>
+    </tr>
+    <tr>
+    <td>DRP (Disaster Recovery Planning)</td>
+    <td>Broader DR framework; this module covers the network layer</td>
+    </tr>
+    <tr>
+    <td>TCP (Protocol)</td>
+    <td>TCP behavior during failover: RST, retransmit, connection
+    migration</td>
+    </tr>
+    <tr>
+    <td>FEC (Forward Error Correction)</td>
+    <td>Physical layer resilience complementing network layer
+    redundancy</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="sources">13. Sources</h2>
+    <ol type="1">
+    <li>RFC 5880 – Bidirectional Forwarding Detection (BFD), Katz &amp;
+    Ward, IETF, 2010</li>
+    <li>RFC 5882 – Generic Application of BFD, Katz &amp; Ward, IETF,
+    2010</li>
+    <li>RFC 5883 – BFD for Multihop Paths, Katz &amp; Ward, IETF,
+    2010</li>
+    <li>RFC 5884 – BFD for MPLS LSPs, Aggarwal et al., IETF, 2010</li>
+    <li>RFC 3623 – Graceful OSPF Restart, Moy et al., IETF, 2003</li>
+    <li>RFC 4724 – Graceful Restart Mechanism for BGP, Sangli et al.,
+    IETF, 2007</li>
+    <li>RFC 5286 – IP Fast Reroute: Loop-Free Alternates, Atlas &amp;
+    Zinin, IETF, 2008</li>
+    <li>RFC 7490 – Remote LFA Fast Reroute, Bryant et al., IETF,
+    2015</li>
+    <li>Cisco IOS-XE Configuration Guide – BFD, OSPF NSF, BGP Graceful
+    Restart</li>
+    <li>Jain et al., “B4: Experience with a Globally-Deployed Software
+    Defined WAN,” SIGCOMM 2013</li>
+    <li>Jain et al., “B4 and After,” SIGCOMM 2018</li>
+    <li>Ferguson et al., “Orion: Google’s SDN Control Plane,” NSDI
+    2021</li>
+    <li>TeleGeography Submarine Cable Map, 2025 – 570 in-service
+    systems, 1,712 landings</li>
+    <li>“The Backbone Behind Cloudflare’s Connectivity Cloud,”
+    Cloudflare Blog, July 2024</li>
+    <li>“Building Resilience: Inside AWS’s Nine Million Kilometers of
+    Fiber,” AWS Blog, 2024</li>
+    <li>“Tonga’s Likely Lengthy Internet Outage,” Cloudflare Blog,
+    January 2022</li>
+    <li>Washington Post, “Three Red Sea underwater data cables have been
+    cut,” March 2024</li>
+    <li>Arista EOS 4.35.2F – BFD Documentation</li>
+    <li>Juniper TechLibrary – BFD Configuration, Graceful Restart</li>
+    <li>Splunk, “What Is Five 9s in Availability Metrics?”</li>
+    </ol>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNE Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNE/">tibsfox.com/Research/SNE</a>
+    </div>
+</body>
+</html>

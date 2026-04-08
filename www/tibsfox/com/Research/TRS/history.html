@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Theory &mdash; Trace Scheduling &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-trs">
+  <header>
+    <h1>History &amp; Theory</h1>
+    <div class="subtitle">From the ILP Problem to the Bulldog Compiler &mdash; How a Yale PhD Student Changed Compiler Design Forever</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html" class="active">History</a>
+      <a href="algorithms.html">Algorithms</a>
+      <a href="vliw.html">VLIW</a>
+      <a href="ai-crossover.html">AI Crossover</a>
+      <a href="compilers.html">Compilers</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;The key insight of trace scheduling is simple: if you want to find parallelism, you must look beyond the boundaries of a single basic block.&rdquo; &mdash; adapted from Fisher, 1981
+    </blockquote>
+
+    <!-- ===== Section 1: The ILP Problem ===== -->
+    <h2>The ILP Problem</h2>
+
+    <div class="card">
+      <p><strong>The fundamental tension.</strong> The Von Neumann model specifies a single thread of control: instructions execute one after another. By the late 1970s, processor designers had built hardware capable of issuing multiple operations per cycle &mdash; pipelined, superscalar, with replicated functional units. But the sequential instruction stream emitted by compilers could not keep those units busy. A processor with four integer ALUs, two floating-point units, and two load/store ports might initiate eight operations per cycle, yet the program might have only one or two independent instructions available at any given moment.</p>
+    </div>
+
+    <p>This gap between what the hardware <em>could</em> do and what the software <em>asked</em> it to do became known as the <strong>instruction-level parallelism (ILP) wall</strong>. The processor had abundant resources for parallel execution, but the sequential instruction stream contained insufficient parallelism to keep those resources busy.</p>
+
+    <h3>Amdahl&rsquo;s Law at the Instruction Level</h3>
+
+    <p>Amdahl&rsquo;s Law states that speedup from parallelization is limited by the sequential fraction. At the instruction level, the &ldquo;sequential fraction&rdquo; is not a fixed property of the algorithm &mdash; it depends on <strong>data dependencies</strong> between instructions and on the <strong>control flow</strong> of the program. Chains of dependent instructions create <strong>critical paths</strong> that bound the minimum execution time regardless of available hardware. The ILP available in a program is the ratio of total work to critical-path length.</p>
+
+    <h3>The Branch Density Problem</h3>
+
+    <p>The difficulty is that <strong>basic blocks are very small</strong>. Extensive measurements throughout the 1980s and 1990s consistently showed:</p>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value amber">15&ndash;25%</span><span class="stat-label">Dynamic branch frequency</span></div>
+      <div class="stat"><span class="stat-value">4&ndash;7</span><span class="stat-label">Avg basic block size</span></div>
+      <div class="stat"><span class="stat-value steel">1.5&ndash;2.5</span><span class="stat-label">ILP within a basic block</span></div>
+      <div class="stat"><span class="stat-value blue">5&ndash;10</span><span class="stat-label">ILP with trace scheduling</span></div>
+    </div>
+
+    <p>Control-intensive programs (compilers, operating systems, interpreters, database engines) have even smaller basic blocks, sometimes averaging 3&ndash;4 instructions. Scientific and numerical programs tend toward 8&ndash;12. These measurements have been replicated across many architectures and confirmed by Hennessy and Patterson in <em>Computer Architecture: A Quantitative Approach</em>.</p>
+
+    <p>If the average basic block contains 5 instructions and some of those are dependent on each other, the ILP available within a single basic block is typically 1.5 to 2.5. A 4-wide VLIW processor scheduling within basic blocks alone would sustain, at best, about 2 operations per cycle &mdash; far below its peak throughput. <strong>This is the fundamental limitation that trace scheduling was designed to overcome.</strong></p>
+
+    <h3>Empirical ILP Studies</h3>
+
+    <table>
+      <thead><tr><th>Study</th><th>Year</th><th>Key Finding</th></tr></thead>
+      <tbody>
+        <tr><td>David Wall (DEC WRL)</td><td>1991</td><td>With realistic window (64&ndash;256 insns) and 95% branch prediction: ILP &asymp; 2&ndash;5 for integer, 3&ndash;8 for FP. Unlimited window &amp; perfect prediction: 10&ndash;60 for integer.</td></tr>
+        <tr><td>Lam &amp; Wilson</td><td>1992</td><td>Trace scheduling achieves ILP of 5&ndash;10 on scientific programs, 2&ndash;3 on control-intensive integer code.</td></tr>
+        <tr><td>Austin &amp; Sohi</td><td>1992</td><td>Many programs exhibit repetitive instruction sequences exploitable for additional parallelism.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card amber">
+      <p><strong>The consensus.</strong> Substantial ILP exists in most programs &mdash; far more than basic-block scheduling can exploit. Practical achievable ILP is limited by branch prediction accuracy, memory latency, and the compiler/hardware&rsquo;s ability to look ahead. Trace scheduling can approach the limits for floating-point programs but falls short for integer programs due to irregular control flow.</p>
+    </div>
+
+    <!-- ===== Section 2: Josh Fisher ===== -->
+    <h2>Joseph A. Fisher &mdash; The Central Figure</h2>
+
+    <div class="card blue">
+      <p><strong>Josh Fisher</strong> (born July 22, 1946, Bronx, New York) is universally recognized as the inventor of trace scheduling and the VLIW architectural concept. His work represents one of the most important contributions to the compiler-architecture interface in the history of computing.</p>
+    </div>
+
+    <h3>Education</h3>
+    <p>Fisher earned a B.A. in mathematics from New York University in 1968, then pursued graduate studies at the <strong>Courant Institute of Mathematical Sciences</strong> at NYU &mdash; one of the premier research institutions in applied mathematics and computer science. He received his Ph.D. in computer science in 1979 with a dissertation titled <em>&ldquo;The Optimization of Horizontal Microcode Within and Beyond Basic Blocks: An Application of Processor Scheduling with Resources.&rdquo;</em></p>
+
+    <p>Fisher&rsquo;s dissertation addressed the problem of compacting horizontal microcode &mdash; the low-level control words that drive the functional units of a processor. His key contribution was extending compaction <em>beyond</em> basic blocks, to sequences of micro-operations spanning multiple branch points. In doing so, he developed the <strong>trace scheduling</strong> algorithm and coined the term <strong>instruction-level parallelism (ILP)</strong>.</p>
+
+    <h3>Yale University (1979&ndash;1984)</h3>
+    <p>Fisher joined Yale as an assistant professor in 1979 (promoted to associate professor in 1983). At Yale he pursued two interconnected research lines:</p>
+    <ol>
+      <li><strong>Trace scheduling as a compilation technique</strong> &mdash; refining the algorithm, developing trace-selection heuristics, studying code-size costs of compensation code, and demonstrating effectiveness on real programs.</li>
+      <li><strong>VLIW architecture design</strong> &mdash; Fisher realized trace scheduling was most effective on machines with very wide instruction words, designed from the ground up to exploit compiler-found parallelism. He coined the term <strong>&ldquo;VLIW&rdquo;</strong> and published the foundational VLIW paper at ISCA 1983: <em>&ldquo;Very Long Instruction Word Architectures and the ELI-512.&rdquo;</em></li>
+    </ol>
+
+    <h3>Awards &amp; Recognition</h3>
+    <table>
+      <thead><tr><th>Award</th><th>Year</th><th>Significance</th></tr></thead>
+      <tbody>
+        <tr><td>NSF Presidential Young Investigator&rsquo;s Award</td><td>1984</td><td>Early-career research excellence</td></tr>
+        <tr><td>Connecticut Entrepreneur of the Year</td><td>1987</td><td>Co-founding Multiflow Computer</td></tr>
+        <tr><td>HP Fellow / HP Senior Fellow</td><td>2000 / 2002</td><td>Highest technical ranks at Hewlett-Packard</td></tr>
+        <tr><td>Eckert-Mauchly Award (ACM/IEEE)</td><td>2003</td><td>Most prestigious award in computer architecture &mdash; &ldquo;25 years of seminal contributions to ILP&rdquo;</td></tr>
+        <tr><td>B. Ramakrishna Rau Award</td><td>2012</td><td>Named after Fisher&rsquo;s VLIW contemporary, recognizing foundational VLIW work</td></tr>
+      </tbody>
+    </table>
+
+    <p>Fisher co-authored <em>Embedded Computing: A VLIW Approach to Architecture, Compilers and Tools</em> (Morgan Kaufmann, 2005) with Paolo Faraboschi and Cliff Young.</p>
+
+    <!-- ===== Section 3: The 1981 Paper ===== -->
+    <h2>The 1981 Paper &mdash; The Foundational Document</h2>
+
+    <div class="card">
+      <p><strong>&ldquo;Trace Scheduling: A Technique for Global Microcode Compaction&rdquo;</strong> was published in <em>IEEE Transactions on Computers</em>, vol. C-30, no. 7, July 1981, pp. 478&ndash;490. It has garnered over 1,700 citations, making it one of the most influential papers in the history of compiler design and computer architecture.</p>
+    </div>
+
+    <p>Fisher observed that existing compaction techniques worked only within basic blocks &mdash; they could rearrange micro-operations within a single straight-line sequence but could not move operations across branches. Since basic blocks were typically small (4&ndash;7 micro-operations), available parallelism was severely limited.</p>
+
+    <p>The proposed solution was deceptively simple:</p>
+
+    <div class="callout">
+      Select the most frequently executed path through the program (a &ldquo;trace&rdquo;), treat it as a single scheduling unit, compact it as if it were one large basic block, and then insert compensation code to handle the less-frequently-executed paths.
+    </div>
+
+    <h3>The Algorithm in Four Steps</h3>
+    <ol>
+      <li><strong>Trace selection</strong> &mdash; Using execution profile data (or static heuristics), identify the most frequently executed trace: a linear sequence of basic blocks connected by the most probable branch edges.</li>
+      <li><strong>Data dependency analysis</strong> &mdash; Build a DAG of data dependencies for all operations in the trace, ignoring control-flow boundaries.</li>
+      <li><strong>Compaction</strong> &mdash; Use a list-scheduling algorithm to pack the trace&rsquo;s operations into horizontal microinstructions, subject to the target machine&rsquo;s resource constraints.</li>
+      <li><strong>Bookkeeping</strong> &mdash; For each operation moved across a control-flow boundary, insert a copy on the off-trace path(s) to ensure correctness.</li>
+    </ol>
+
+    <p>The paper proved that the bookkeeping rules were sufficient to maintain correctness and introduced the concept of <strong>profile-driven compilation</strong> &mdash; using runtime execution frequencies to guide optimization decisions. This idea, now ubiquitous as <strong>profile-guided optimization (PGO)</strong>, was radical in 1981.</p>
+
+    <!-- ===== Section 4: The Key Insight ===== -->
+    <h2>The Key Insight &mdash; Traces as Scheduling Units</h2>
+
+    <p>A <strong>trace</strong> is a sequence of basic blocks (B<sub>1</sub>, B<sub>2</sub>, ..., B<sub>k</sub>) connected by the most likely control-flow edges, forming a linear path through the CFG. The trace is treated as a single, large basic block for scheduling purposes. The compiler builds a unified data-dependency DAG for all operations in the trace, combining operations from all constituent blocks. Branch instructions within the trace are included as nodes but the control-flow edges they represent are <em>ignored</em> for scheduling.</p>
+
+    <p>The result is a DAG with significantly more operations than any single basic block &mdash; and therefore significantly more opportunities for parallelism. An operation from B<sub>3</sub> that is independent of all operations in B<sub>1</sub> can be scheduled in the same instruction as an operation from B<sub>1</sub>, even though they were originally in different basic blocks separated by two branches.</p>
+
+    <h3>Compensation Code &mdash; The Correctness Mechanism</h3>
+
+    <p>When the scheduler moves an operation across a control-flow boundary, it may violate semantics for paths that do not follow the trace. Two fundamental types of code motion require compensation:</p>
+
+    <table>
+      <thead><tr><th>Motion Type</th><th>Direction</th><th>Compensation Required</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Above-the-join</strong></td><td>Operation moved upward past a join point (trace entry)</td><td>Insert copy on off-trace incoming path so the operation still executes when control arrives via the off-trace predecessor</td></tr>
+        <tr><td><strong>Below-the-branch</strong></td><td>Operation moved downward past a branch (trace exit)</td><td>Insert copy on off-trace outgoing path so the operation still executes when control departs via the off-trace successor</td></tr>
+      </tbody>
+    </table>
+
+    <p>Compensation code comes at the price of <strong>increased code size</strong>. Measurements at Multiflow showed an average code-size increase of approximately 6% for the SPEC89 benchmarks &mdash; a modest price for the parallelism gains. However, for programs with complex, irregular control flow, the increase can be larger.</p>
+
+    <!-- ===== Section 5: ELI-512 ===== -->
+    <h2>ELI-512 &mdash; Fisher&rsquo;s VLIW Machine</h2>
+
+    <div class="card steel">
+      <p>The <strong>ELI-512</strong> (Enormously Long Instruction &mdash; 512 bits) was the VLIW machine design developed by Fisher and his Yale group as a concrete target for the trace scheduling compiler. The &ldquo;512&rdquo; referred to the target instruction word width; in later iterations the word exceeded 1,200 bits.</p>
+    </div>
+
+    <table>
+      <thead><tr><th>Property</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Instruction word</td><td>Over 500 bits (later exceeding 1,200 bits), encoding 10 to 30 RISC-level operations per cycle</td></tr>
+        <tr><td>Functional units</td><td>Multiple integer ALUs, FP units, memory ports, and branch units, all controlled directly by fields in the instruction word</td></tr>
+        <tr><td>Hardware interlocks</td><td><strong>None.</strong> The compiler was solely responsible for avoiding hazards. Incorrect scheduling produced silent wrong results.</td></tr>
+        <tr><td>Dynamic scheduling</td><td><strong>None.</strong> No reorder buffer, no reservation stations, no register renaming. All intelligence in the compiler.</td></tr>
+        <tr><td>Physical hardware</td><td>Never built as a physical machine. Compiler practicality demonstrated at Yale.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ===== Section 6: The Bulldog Compiler ===== -->
+    <h2>The Bulldog Compiler</h2>
+
+    <p><strong>John Ellis</strong>, supervised by Fisher at Yale, built the <strong>Bulldog compiler</strong> as his doctoral dissertation &mdash; the first complete trace scheduling compiler implementation. Ellis&rsquo;s dissertation won the <strong>ACM Doctoral Dissertation Award in 1985</strong>. The Bulldog compiler introduced several key techniques:</p>
+
+    <ul>
+      <li>Trace scheduling for finding parallelism across basic block boundaries</li>
+      <li>Memory reference and memory bank disambiguation for increasing memory bandwidth</li>
+      <li>New code-generation algorithms for VLIW targets</li>
+    </ul>
+
+    <p>Other Yale graduate students who contributed to the ELI project include John Ruttenberg and Alexandru Nicolau.</p>
+
+    <!-- ===== Section 7: Multiflow Computer ===== -->
+    <h2>Multiflow Computer (1984&ndash;1990)</h2>
+
+    <div class="card amber">
+      <p><strong>The commercial VLIW venture.</strong> In 1984, Fisher, John O&rsquo;Donnell (who led the ELI hardware project), and John Ruttenberg co-founded <strong>Multiflow Computer, Inc.</strong> in Branford, Connecticut. The mission: commercialize VLIW technology by building and selling general-purpose VLIW minisupercomputers.</p>
+    </div>
+
+    <p>Multiflow delivered its first working VLIW minisupercomputers &mdash; the <strong>TRACE series</strong> &mdash; in early 1987 to three beta sites: Grumman Aircraft, Sikorsky Helicopter, and the Supercomputer Research Center.</p>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">7/14/28</span><span class="stat-label">Ops per instruction</span></div>
+      <div class="stat"><span class="stat-value amber">50+</span><span class="stat-label">Operations in flight</span></div>
+      <div class="stat"><span class="stat-value steel">1024</span><span class="stat-label">Bits per instruction</span></div>
+      <div class="stat"><span class="stat-value red">1990</span><span class="stat-label">Ceased operations</span></div>
+    </div>
+
+    <p>The Multiflow compiler used trace scheduling to find and exploit ILP beyond basic blocks, and its performance on numerical codes was impressive. But the company struggled commercially. The machines were expensive, the compiler was complex, and the market for minisupercomputers was shrinking. Multiflow went out of business around 1990.</p>
+
+    <p>After Multiflow ceased operations, Fisher joined <strong>Hewlett-Packard Laboratories</strong>, where he continued work on ILP, VLIW, and compiler technology. He contributed to HP&rsquo;s PA-WideWord architecture and the <strong>IA-64/EPIC</strong> architecture developed jointly with Intel. He was named HP Fellow (2000) and HP Senior Fellow (2002), retiring in 2006.</p>
+
+    <!-- ===== Section 8: Superblocks and Hyperblocks ===== -->
+    <h2>Superblocks &amp; Hyperblocks</h2>
+
+    <p>Fisher&rsquo;s trace scheduling worked, but it had a significant practical problem: the bookkeeping was complex and expensive. When a trace included <strong>side entries</strong> &mdash; points where execution could join the trace from off-trace code &mdash; the compensation code requirements became unwieldy.</p>
+
+    <h3>Superblocks (Hwu, Mahlke, Chen &mdash; 1992&ndash;1993)</h3>
+
+    <p>Wen-mei Hwu and Scott Mahlke at the <strong>IMPACT group at the University of Illinois</strong> addressed this with the <strong>superblock</strong>: a single-entry, multiple-exit scheduling region formed by trace selection followed by <strong>tail duplication</strong>. Published in the <em>Journal of Supercomputing</em> (vol. 7, pp. 229&ndash;248, 1993), the superblock eliminated above-the-join bookkeeping by ensuring that no execution could enter the region from the side.</p>
+
+    <table>
+      <thead><tr><th>Property</th><th>Trace</th><th>Superblock</th></tr></thead>
+      <tbody>
+        <tr><td>Entry points</td><td>Multiple (side entries allowed)</td><td><strong>Single</strong> (no side entries)</td></tr>
+        <tr><td>Exit points</td><td>Multiple</td><td>Multiple</td></tr>
+        <tr><td>Above-the-join compensation</td><td>Required</td><td><strong>Eliminated</strong></td></tr>
+        <tr><td>Code size impact</td><td>Compensation code</td><td>Tail duplication (controlled growth)</td></tr>
+        <tr><td>Scheduling freedom</td><td>Constrained by side entries</td><td>Fully free within region</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Hyperblocks (Mahlke &mdash; 1992)</h3>
+
+    <p>The <strong>hyperblock</strong> extended superblocks further by incorporating <strong>predicated execution</strong>: instead of executing compensation code on off-trace paths, the hardware could conditionally execute instructions based on predicate registers, effectively merging multiple paths into a single predicated stream. Mahlke&rsquo;s paper <em>&ldquo;Effective Compiler Support for Predicated Execution Using the Hyperblock&rdquo;</em> (25th Annual International Symposium on Microarchitecture, 1992) showed hyperblocks were highly effective for a wide range of superscalar and VLIW processors.</p>
+
+    <p>Predication uses <strong>if-conversion</strong> to transform control flow into data flow: instead of branching, both paths execute, and a predicate register selects which results are committed. This eliminates branches entirely within the hyperblock, removing a major source of scheduling constraints.</p>
+
+    <!-- ===== Section 9: The Three Steps ===== -->
+    <h2>The Three Steps &mdash; Trace Selection, Compaction, Bookkeeping</h2>
+
+    <div class="card">
+      <p>Trace scheduling operates as an iterative three-step process, repeated until all code is scheduled:</p>
+    </div>
+
+    <ol>
+      <li><strong>Trace selection</strong> &mdash; Identify the most frequently executed path through the CFG using profile data or static heuristics. Start at the hottest basic block and greedily extend forward (most probable successor) and backward (most probable predecessor). Stop at loop back-edges, maximum length, or profitability threshold.</li>
+      <li><strong>Trace compaction</strong> &mdash; Build a data-dependency DAG for all operations in the trace, ignoring control-flow boundaries. Schedule via list scheduling: cycle by cycle, issue the highest-priority ready operation to an available functional unit. Priority = critical-path length from operation to DAG exit.</li>
+      <li><strong>Bookkeeping</strong> &mdash; Insert compensation code at every point where an operation crossed a control-flow boundary. Mark the trace&rsquo;s blocks as scheduled. Update the CFG with any new compensation blocks. Repeat from step 1.</li>
+    </ol>
+
+    <p>The order matters: the first trace gets the most scheduling freedom (no constraints from prior traces). Subsequent traces are constrained by compensation code from earlier traces. The greedy strategy &mdash; scheduling the hottest trace first &mdash; ensures the most frequently executed code gets the best schedule.</p>
+
+    <!-- ===== Cross-Links ===== -->
+    <div class="cross-links">
+      <h4>Cross-Links</h4>
+      <ul>
+        <li><a href="algorithms.html">Algorithms</a> &mdash; Detailed pseudocode for trace selection, list scheduling, and bookkeeping</li>
+        <li><a href="vliw.html">VLIW Architectures</a> &mdash; The machines trace scheduling was built for: ELI-512, Multiflow, Itanium, Hexagon</li>
+        <li><a href="ai-crossover.html">AI Crossover</a> &mdash; How the trace scheduling framework maps onto AI agent orchestration</li>
+        <li><a href="compilers.html">Compilers</a> &mdash; Modern implementations in GCC, LLVM, IMPACT, and Trimaran</li>
+        <li><a href="rosetta.html">Rosetta</a> &mdash; Trace scheduling in the context of scheduling paradigms: superscalar, EPIC, GPU</li>
+      </ul>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Research context.</strong> This module draws primarily on Fisher&rsquo;s original publications (1981, 1983), the Bulldog compiler thesis (Ellis, 1985), the superblock/hyperblock papers (Hwu, Mahlke, 1992&ndash;1993), Wall&rsquo;s ILP study (1991), and the Freudenberger &amp; Ruttenberg compensation code analysis (ACM TOPLAS, 1994). All factual claims have been verified against primary sources.
+    </div>
+  </main>
+
+  <footer>
+    <p>History &amp; Theory &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

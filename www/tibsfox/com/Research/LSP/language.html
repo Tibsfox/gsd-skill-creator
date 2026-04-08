@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Core &mdash; Lisp &amp; Functional Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-lsp">
+  <header>
+    <h1>Language Core</h1>
+    <div class="subtitle">S-expressions, lambda calculus, the meta-circular evaluator, CLOS, the numeric tower, and conditions &mdash; the building blocks</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html" class="active">Language Core</a>
+      <a href="metaprogramming.html">Metaprogramming</a>
+      <a href="ai-heritage.html">AI Heritage</a>
+      <a href="ml-neural-genetic.html">ML &amp; Neural</a>
+      <a href="machines.html">Lisp Machines</a>
+      <a href="dialects.html">Dialects</a>
+      <a href="emacs-clojure.html">Emacs &amp; Clojure</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="rosetta.html">Rosetta</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <p>&ldquo;Yes, that was the big revelation to me when I was in graduate school &mdash; when I finally understood that the half page of code on the bottom of page 13 of the Lisp 1.5 manual was Lisp in itself. These were <em>Maxwell&rsquo;s Equations of Software</em>! This is the whole world of programming in a few lines that I can put my hand over.&rdquo;</p>
+      <cite>&mdash; Alan Kay, on the meta-circular evaluator</cite>
+    </blockquote>
+
+    <h2>Atoms and Cons Cells</h2>
+
+    <p>Lisp has two building blocks. That is not an exaggeration.</p>
+
+    <ol>
+      <li><strong>Atoms</strong> &mdash; symbols, numbers, strings, characters, the empty list <code>nil</code>, and a few other self-contained values.</li>
+      <li><strong>Cons cells</strong> &mdash; pairs of two things. Written <code>(a . b)</code> where <code>a</code> is the <em>car</em> and <code>b</em> is the <em>cdr</em>.</li>
+    </ol>
+
+    <p>A list is a chain of cons cells where each <code>cdr</code> points to the next cell and the final <code>cdr</code> is <code>nil</code>.</p>
+
+<pre><code>(cons 1 (cons 2 (cons 3 nil)))   ; =&gt; (1 2 3)
+(1 . (2 . (3 . nil)))            ; same thing, dotted notation
+(1 2 3)                          ; same thing, sugar</code></pre>
+
+    <p>The list <code>(1 2 3)</code> is not a primitive. It is three cons cells chained together, terminated by <code>nil</code>. You can tell when somebody really understands Lisp: they stop seeing lists and start seeing cons cells.</p>
+
+    <p>The primitive functions are <code>cons</code> (build a pair), <code>car</code> (first), <code>cdr</code> (rest, pronounced &ldquo;cudder,&rdquo; from &ldquo;contents of the decrement register&rdquo; &mdash; a 1959 IBM 704 detail that stuck), <code>null?</code>, <code>eq?</code>, and <code>atom?</code>. Given those six primitives plus <code>lambda</code>, <code>quote</code>, and <code>cond</code>, you have a complete programming language. McCarthy proved it in 1960.</p>
+
+    <h2>S-Expressions and Homoiconicity</h2>
+
+    <p>An <strong>S-expression</strong> (for &ldquo;symbolic expression&rdquo;) is recursively defined:</p>
+
+<pre><code>sexp ::= atom | (sexp . sexp)</code></pre>
+
+    <p>An S-expression is either an atom or a cons cell of two S-expressions. That&rsquo;s it. Every Lisp program, every Lisp data structure, every Lisp configuration file, every Lisp AST node is an S-expression. There is no distinction between &ldquo;source code format&rdquo; and &ldquo;data format&rdquo; and &ldquo;serialization format.&rdquo; They are all the same thing.</p>
+
+    <div class="card amber">
+      <p><strong>Compare to the modern world.</strong> We have source code in Python or JavaScript. ASTs in a completely different format (trees of classes with visitor patterns). Configuration in YAML, JSON, TOML, INI. IPC in Protobuf, MessagePack, Thrift, Cap&rsquo;n Proto. Query languages in SQL, GraphQL, LINQ. Build systems in Makefile, Bazel, CMake. Templates in Jinja, ERB, Handlebars.</p>
+      <p>Every one of these is an attempt to reinvent S-expressions badly. Every parser built for each of these is a reinvention of what <code>read</code> does for free in Lisp.</p>
+    </div>
+
+    <p>A language is <strong>homoiconic</strong> if its source code representation is a primary data structure of the language itself. Lisp is the original homoiconic language. Program text = list data = AST. Every time you see a modern framework reach for string templating, code generation scripts, macro preprocessors, plugin systems, annotation processors, reflection, or dynamic bytecode emission, you are watching a non-homoiconic language strain to do what Lisp does as a side effect of its data model.</p>
+
+    <h2>Quote: The Dark Room of Lisp</h2>
+
+    <p>The single most important primitive in Lisp is <code>quote</code>. Understanding <code>quote</code> is the difference between programming in Lisp and programming in a language that happens to use parentheses.</p>
+
+    <p>When you type <code>(+ 1 2)</code> in a Lisp REPL, the <strong>reader</strong> parses that text into a data structure: a list of three elements, the symbol <code>+</code>, the number <code>1</code>, the number <code>2</code>. The <strong>evaluator</strong> then looks at that list, sees that <code>+</code> is a function, evaluates the arguments, and calls the function. The result is <code>3</code>.</p>
+
+    <p>But what if you want the <em>list itself</em>, not the result of evaluating it? You quote it:</p>
+
+<pre><code>(quote (+ 1 2))    ; =&gt; (+ 1 2) &mdash; a three-element list
+'(+ 1 2)           ; same, with reader sugar</code></pre>
+
+    <p>Quote means &ldquo;don&rsquo;t evaluate this &mdash; give me the data structure the reader built.&rdquo; Everything to the right of the quote is frozen as data.</p>
+
+    <p>Quote is the wormhole between the two worlds Lisp lives in: <strong>code</strong> (what the evaluator sees) and <strong>data</strong> (what cons cells actually contain). Quote takes you from code to data. <code>eval</code> takes you back.</p>
+
+<pre><code>(eval '(+ 1 2))    ; =&gt; 3
+
+(let ((op '+)
+      (args '(1 2)))
+  (eval (cons op args)))   ; =&gt; 3</code></pre>
+
+    <p>You can build a program as data and then run it. This is the ground floor of metaprogramming.</p>
+
+    <h2>The Reader-Eval-Print Loop</h2>
+
+    <p>The canonical Lisp pipeline has three stages:</p>
+
+<pre><code>text  &rarr;  [READER]  &rarr;  data  &rarr;  [EVALUATOR]  &rarr;  value  &rarr;  [PRINTER]  &rarr;  text</code></pre>
+
+    <p>The <strong>reader</strong> is a parser that consumes characters and produces cons cells, symbols, and numbers. Exposed as <code>read</code>. The <strong>evaluator</strong> takes data from the reader and reduces it to a value. Exposed as <code>eval</code>. The <strong>printer</strong> takes a value and produces text. Exposed as <code>print</code>.</p>
+
+    <p>A REPL is literally:</p>
+
+<pre><code>(loop (print (eval (read))))</code></pre>
+
+    <p>Read, Eval, Print, Loop. The acronym is the implementation. Every piece is an ordinary function you can call, override, replace, or compose.</p>
+
+    <h2>Lambda: The Universal Function Constructor</h2>
+
+    <p>Alonzo Church invented the lambda calculus in the 1930s as a formal system for computation. Lisp embeds the lambda calculus almost directly.</p>
+
+<pre><code>(lambda (x) (* x x))     ; a function that squares its argument
+((lambda (x) (* x x)) 5) ; =&gt; 25
+
+(define square (lambda (x) (* x x)))
+(square 5)               ; =&gt; 25</code></pre>
+
+    <p>In fact, <code>(define (square x) (* x x))</code> is just sugar for the lambda form. The lambda is the primitive; named functions are lambdas with a label.</p>
+
+    <h3>Closures</h3>
+
+    <p>A closure is a function packaged with the environment in which it was defined. When a lambda references a free variable, the closure remembers where that variable lives and what it was bound to.</p>
+
+<pre><code>(define (make-adder n)
+  (lambda (x) (+ x n)))
+
+(define add5 (make-adder 5))
+(define add10 (make-adder 10))
+
+(add5 3)     ; =&gt; 8
+(add10 3)    ; =&gt; 13</code></pre>
+
+    <p>Each call to <code>make-adder</code> creates a new environment with its own <code>n</code>. The returned lambda closes over that environment. Even after <code>make-adder</code> returns, the environment persists as long as something references the closure.</p>
+
+    <p>Closures are the reason Lisp has objects for free. An object is just a closure over some state with a dispatcher. <code>count</code> here is entirely private. Only the closure has access. This is encapsulation without a class system:</p>
+
+<pre><code>(define (make-counter)
+  (let ((count 0))
+    (lambda (msg)
+      (case msg
+        ((inc) (set! count (+ count 1)))
+        ((dec) (set! count (- count 1)))
+        ((get) count)))))
+
+(define c (make-counter))
+(c 'inc) (c 'inc) (c 'inc) (c 'dec)
+(c 'get)    ; =&gt; 2</code></pre>
+
+    <h2>Church Encoding: Everything from Lambdas</h2>
+
+    <p>Church showed you don&rsquo;t need booleans, numbers, pairs, or lists as primitives. You can encode them all with lambdas.</p>
+
+<pre><code>(define church-true  (lambda (a b) a))
+(define church-false (lambda (a b) b))
+(define church-if    (lambda (c t f) (c t f)))
+
+(define church-zero  (lambda (f x) x))
+(define church-one   (lambda (f x) (f x)))
+(define church-two   (lambda (f x) (f (f x))))
+
+(define church-succ
+  (lambda (n) (lambda (f x) (f (n f x)))))
+
+(define church-pair
+  (lambda (a b) (lambda (selector) (selector a b))))
+(define church-first  (lambda (p) (p (lambda (a b) a))))
+(define church-second (lambda (p) (p (lambda (a b) b))))</code></pre>
+
+    <p>Given only <code>lambda</code>, you can build every data structure and every control flow construct. Lisp&rsquo;s primitives (<code>cons</code>, <code>if</code>, numbers) are conveniences, not necessities.</p>
+
+    <h2>The Y Combinator: Anonymous Recursion</h2>
+
+    <p>How do you write a recursive function without giving it a name? The function needs to reference itself, but if it&rsquo;s anonymous, there&rsquo;s nothing to reference. The solution is the fixed-point combinator:</p>
+
+<pre><code>(define Y
+  (lambda (f)
+    ((lambda (x) (f (lambda (v) ((x x) v))))
+     (lambda (x) (f (lambda (v) ((x x) v)))))))
+
+(define factorial
+  (Y (lambda (fact)
+       (lambda (n)
+         (if (= n 0) 1 (* n (fact (- n 1))))))))
+
+(factorial 5)    ; =&gt; 120</code></pre>
+
+    <p>There is no <code>define</code> inside the lambda. The function has no name. Y manufactures self-reference out of pure lambda applications. The derivation of Y is a rite of passage for every functional programmer.</p>
+
+    <h2>The Meta-Circular Evaluator</h2>
+
+    <div class="lambda-box">
+      <h3>// Maxwell&rsquo;s Equations of Software //</h3>
+      <p>In April 1960, John McCarthy published a paper that introduced S-expressions, conditional expressions, recursive function definitions, and something more audacious: <code>eval</code> &mdash; a function that takes a Lisp expression (as data) and returns its value. Defined in Lisp itself. An interpreter for the language, written in the language. Twenty-some lines of code. A perfectly recursive definition.</p>
+      <p>Steve Russell read the paper, realized it could be implemented, and wrote the first actual Lisp interpreter. This is the <em>meta-circular evaluator</em>: a Lisp interpreter written in Lisp. The recursion mirrors itself. It&rsquo;s self-describing.</p>
+    </div>
+
+    <p>The architecture is two mutually recursive functions. <strong><code>eval</code></strong> takes an expression and an environment and returns a value. <strong><code>apply</code></strong> takes a procedure and a list of argument values and returns a value. <code>eval</code> dispatches on the type of expression; <code>apply</code> dispatches on the type of procedure.</p>
+
+    <h3>A minimal meta-circular evaluator in under 50 lines</h3>
+
+<pre><code>(define (meval exp env)
+  (cond
+    ((number? exp) exp)
+    ((string? exp) exp)
+    ((symbol? exp) (lookup exp env))
+    ((eq? (car exp) 'quote) (cadr exp))
+    ((eq? (car exp) 'if)
+     (if (meval (cadr exp) env)
+         (meval (caddr exp) env)
+         (meval (cadddr exp) env)))
+    ((eq? (car exp) 'lambda)
+     (list 'closure (cadr exp) (cddr exp) env))
+    ((eq? (car exp) 'define)
+     (extend-env! (cadr exp) (meval (caddr exp) env) env))
+    (else
+     (mapply (meval (car exp) env)
+             (map (lambda (e) (meval e env)) (cdr exp))))))
+
+(define (mapply proc args)
+  (cond
+    ((procedure? proc) (apply proc args))
+    ((eq? (car proc) 'closure)
+     (let ((params (cadr proc))
+           (body   (caddr proc))
+           (env    (cadddr proc)))
+       (meval-seq body (extend-env params args env))))
+    (else (error "unknown procedure" proc))))</code></pre>
+
+    <p>You can now evaluate Lisp programs inside Lisp:</p>
+
+<pre><code>(meval '((lambda (x) (* x x)) 5) (initial-env))   ; =&gt; 25
+(meval '(if (= 1 2) 'a 'b) (initial-env))         ; =&gt; b</code></pre>
+
+    <p>You have just written a Lisp interpreter in Lisp. In 40 lines. The moment you internalize this is the moment everything changes.</p>
+
+    <h3>Futamura projections: compilers from interpreters</h3>
+
+    <p>Yoshihiko Futamura observed in 1971 that if you have an interpreter for language L written in language H, and you have a <strong>partial evaluator</strong> (a program that specializes another program with respect to some of its inputs), then:</p>
+
+    <ul>
+      <li><strong>First Futamura projection</strong>: Partially evaluate the interpreter with respect to a specific source program. The result is a compiled version of that program in H.</li>
+      <li><strong>Second Futamura projection</strong>: Partially evaluate the partial evaluator with respect to the interpreter. The result is a compiler from L to H.</li>
+      <li><strong>Third Futamura projection</strong>: Partially evaluate the partial evaluator with respect to itself. The result is a <em>compiler generator</em> &mdash; a program that takes an interpreter and produces a compiler.</li>
+    </ul>
+
+    <p>This works. PyPy&rsquo;s tracing JIT effectively implements the first and second projections for Python. The punchline: <strong>a compiler is an interpreter that has been specialized away.</strong> Every language with a meta-circular evaluator is implicitly a compiler too.</p>
+
+    <h2>CLOS: The Common Lisp Object System</h2>
+
+    <p>Most OOP languages have <strong>single dispatch</strong>: a method call <code>obj.method(args)</code> looks up the method on <code>obj</code>&rsquo;s class. Dispatch is based on one object &mdash; the receiver.</p>
+
+    <p>CLOS has <strong>multiple dispatch</strong>: a generic function call <code>(method obj1 obj2 obj3)</code> looks at the types of all the arguments and picks the most specific matching method. Dispatch is based on all the arguments.</p>
+
+<pre><code>(defgeneric collide (a b))
+
+(defmethod collide ((a asteroid) (b asteroid))
+  (print "Two asteroids bump"))
+
+(defmethod collide ((a ship) (b asteroid))
+  (print "Ship takes damage"))
+
+(defmethod collide ((a asteroid) (b ship))
+  (print "Asteroid takes damage"))
+
+(defmethod collide ((a ship) (b ship))
+  (print "Ships exchange fire"))</code></pre>
+
+    <p>In a single-dispatch language, you&rsquo;d have to put the logic on <code>Ship</code> or <code>Asteroid</code>, which means one class has to know about the other. In CLOS, the generic function owns the dispatch, and any combination of classes can have a method. New classes can add methods for existing generic functions without modifying any existing class.</p>
+
+    <h3>Method combinations</h3>
+
+    <p>CLOS generic functions support <strong>method combinations</strong> &mdash; multiple methods that all run as part of a single generic function call:</p>
+
+<pre><code>(defmethod draw :before ((s shape)) (log-drawing-start s))
+(defmethod draw ((s circle)) (draw-circle s))
+(defmethod draw :after ((s shape)) (log-drawing-end s))
+(defmethod draw :around ((s shape))
+  (with-lock *draw-lock* (call-next-method)))</code></pre>
+
+    <p>One call to <code>(draw c)</code> on a circle runs: :around, then :before, then primary, then :after. This is aspect-oriented programming without the plugin or the annotation processor. It&rsquo;s just CLOS.</p>
+
+    <h3>The metaobject protocol (MOP)</h3>
+
+    <p>CLOS classes are themselves objects. An instance of <code>point</code> is an object. The <code>point</code> class is also an object &mdash; specifically, an instance of <code>standard-class</code>, which is itself an instance of <code>standard-class</code>. It turtles all the way down, bottoming out at a cyclic base case.</p>
+
+    <p>The <strong>metaobject protocol</strong> (MOP) is the published API that lets you inspect and modify the behavior of the CLOS implementation. You can subclass <code>standard-class</code> to make a new class type, intercept slot reads and writes, add persistence transparently, add type-checking transparently, implement prototype-based objects on top of CLOS classes.</p>
+
+    <p><em>The Art of the Metaobject Protocol</em> (1991) by Kiczales, des Rivières, and Bobrow is the book that introduced the MOP concept. Kiczales later led the AspectJ project, which brought CLOS&rsquo;s before/after/around ideas to Java. Every serious language designer has read AMOP.</p>
+
+    <h3>Influence</h3>
+
+    <p><strong>Python</strong> borrowed single-dispatch methods and the descriptor protocol from CLOS. <strong>Ruby</strong> borrowed open classes and method-missing. <strong>Julia</strong> is essentially CLOS without inheritance-based encapsulation &mdash; it has multiple dispatch as its primary abstraction mechanism. <strong>Dylan</strong> was an attempt to put CLOS into a non-parenthetical syntax; it had a beautiful design and almost no users.</p>
+
+    <h2>The Numeric Tower</h2>
+
+    <p>Common Lisp has a rich hierarchy of numeric types, often called the <strong>numeric tower</strong>:</p>
+
+<pre><code>number
+&#9500;&#9472;&#9472; real
+&#9474;   &#9500;&#9472;&#9472; rational
+&#9474;   &#9474;   &#9500;&#9472;&#9472; integer
+&#9474;   &#9474;   &#9474;   &#9500;&#9472;&#9472; fixnum (machine word)
+&#9474;   &#9474;   &#9474;   &#9492;&#9472;&#9472; bignum (arbitrary precision)
+&#9474;   &#9474;   &#9492;&#9472;&#9472; ratio (exact fractions, e.g., 1/3)
+&#9474;   &#9492;&#9472;&#9472; float (short, single, double, long)
+&#9492;&#9472;&#9472; complex (real + imaginary)</code></pre>
+
+    <p>The operations preserve exactness when possible and promote automatically when needed:</p>
+
+<pre><code>(+ 1/2 1/3)      ; =&gt; 5/6            ratio + ratio = ratio
+(* 1/3 3)        ; =&gt; 1              exact!
+(sqrt -1)        ; =&gt; #C(0 1)        returns complex
+(expt 2 1000)    ; =&gt; (~300 digit bignum)
+(reduce #'+ (loop repeat 10 collect 1/10))   ; =&gt; 1    (exact!)
+(reduce #'+ (loop repeat 10 collect 0.1))    ; =&gt; 1.0000001  (float error)</code></pre>
+
+    <p>Floating point is fast and convenient but lies about numbers. With the numeric tower, you compute exactly. Only when you explicitly ask for a float do you get inexact arithmetic. This is why Common Lisp is still the go-to language for symbolic math and experimental number theory.</p>
+
+    <h2>Conditions and Restarts</h2>
+
+    <p>This is the best-kept secret of Common Lisp: its error handling is radically more powerful than what any mainstream language offers. It is not &ldquo;exceptions, but different.&rdquo; It is a completely different model.</p>
+
+    <p>In most languages, when an error occurs, the stack unwinds until something catches the exception. The caller decides how to recover. The code that detected the error is gone by the time recovery happens &mdash; it&rsquo;s just a corpse on the stack.</p>
+
+    <p>In Common Lisp, when a condition is signaled, the stack <em>does not unwind immediately</em>. The condition handler runs in the context of the signaling code and can decide what to do. The handler can invoke a <strong>restart</strong> &mdash; a named recovery strategy that the signaling code published. The signaling code continues running with that recovery applied.</p>
+
+<pre><code>(define-condition invalid-input (error)
+  ((value :initarg :value :accessor invalid-input-value)))
+
+(defun process (x)
+  (restart-case
+      (if (numberp x)
+          (* x 2)
+          (error 'invalid-input :value x))
+    (use-zero () 0)
+    (use-value (v) v)
+    (retry-with (new) (process new))))
+
+(handler-bind
+    ((invalid-input
+      (lambda (c)
+        (invoke-restart 'retry-with 42))))
+  (process "not a number"))
+;; =&gt; 84</code></pre>
+
+    <p>The handler is completely decoupled from the restart list. The function offers recovery strategies; the caller picks one based on policy. This is error handling as a negotiation between caller and callee, not as a unilateral stack unwind.</p>
+
+    <div class="card amber">
+      <p>No other mainstream language has this. Not Python. Not Ruby. Not Java. Not Rust. They all unwind on error. Common Lisp unwinds only when it chooses to, and restarts let the code publish recovery options in advance. When a long-running computation fails deep in its call tree, the interactive debugger pops up showing you the error and the list of restarts. You can fix the problem, pick a restart to continue, and the computation resumes from the point of failure. You don&rsquo;t lose hours of computation because of a typo.</p>
+    </div>
+
+    <h2>Tail Call Optimization</h2>
+
+    <p>A tail call is a function call in tail position &mdash; the last thing a function does before returning. In a language with tail-call optimization (TCO), the compiler reuses the current stack frame for the tail call instead of pushing a new one. Scheme mandates TCO in the language spec. Common Lisp doesn&rsquo;t, but all serious implementations provide it.</p>
+
+<pre><code>;; NOT tail-recursive &mdash; the `*` happens after the recursive call
+(define (fact n)
+  (if (= n 0) 1 (* n (fact (- n 1)))))
+
+;; Tail-recursive &mdash; recursive call is the last thing
+(define (fact n)
+  (define (loop i acc)
+    (if (= i 0) acc (loop (- i 1) (* i acc))))
+  (loop n 1))</code></pre>
+
+    <p>TCO is not an optimization in the trivial sense. It is the thing that makes functional iteration possible. Without it, you are forced back to imperative loops. With it, you can write any iteration as a recursive function and rely on the compiler.</p>
+
+    <h2>Continuations and call/cc</h2>
+
+    <p>Scheme&rsquo;s <code>call-with-current-continuation</code> (abbreviated <code>call/cc</code>) captures &ldquo;the rest of the computation&rdquo; as a first-class function. This is the most powerful control operator any language has exposed. From <code>call/cc</code> you can implement exceptions, generators, coroutines, green threads, backtracking search, and effect systems &mdash; all as library code, not language extensions.</p>
+
+<pre><code>;; Exception-like escape
+(call/cc
+ (lambda (escape)
+   (for-each
+    (lambda (x)
+      (if (negative? x)
+          (escape 'found-negative)
+          (process x)))
+    some-list)))</code></pre>
+
+    <p>Continuations are a direct extension of the lambda calculus. In continuation-passing style (CPS), every function takes an extra argument &mdash; the &ldquo;what to do next&rdquo; &mdash; and instead of returning, calls that continuation with its result. Every Lisp (and every language with a compiler) can be rewritten in CPS. The lambda calculus is that flexible.</p>
+
+    <div class="cross-links">
+      <h4>Related Pages</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="metaprogramming.html">Metaprogramming &amp; Macros</a></li>
+        <li><a href="ai-heritage.html">AI Heritage</a></li>
+        <li><a href="ml-neural-genetic.html">ML, Neural, Genetic</a></li>
+        <li><a href="machines.html">Lisp Machines</a></li>
+        <li><a href="dialects.html">Dialects</a></li>
+        <li><a href="emacs-clojure.html">Emacs &amp; Clojure</a></li>
+        <li><a href="philosophy.html">Philosophy</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Language Core &middot; Lisp &amp; Functional Programming &middot; PNW Research Series</p>
+    <p><a href="../index.html">PNW Research Series</a> &middot; <a href="index.html">Back to Overview</a></p>
+  </footer>
+</body>
+</html>

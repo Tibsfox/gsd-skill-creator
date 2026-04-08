@@ -188,6 +188,19 @@
       <div class="stat"><span class="stat-value green">16</span><span class="stat-label">Failure Types Identified</span></div>
     </div>
 
+    <h3>Models Tested</h3>
+    <table>
+      <thead><tr><th>Model</th><th>Provider</th><th>Parameters</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Llama 3.2</strong></td><td>Meta</td><td>3B</td></tr>
+        <tr><td><strong>Qwen 3</strong></td><td>Alibaba</td><td>4B, 32B</td></tr>
+        <tr><td><strong>Llama 3.3</strong></td><td>Meta</td><td>70B</td></tr>
+        <tr><td><strong>Command R+</strong></td><td>Cohere</td><td>104B</td></tr>
+        <tr><td><strong>DeepSeek-R1</strong></td><td>DeepSeek</td><td>70B (distilled)</td></tr>
+      </tbody>
+    </table>
+    <p>Two agentic workflows (ReAct, Plan-and-Execute) plus a non-agentic Straight-Shot baseline were tested across all 6 models.</p>
+
     <h3>Per-Hypothesis Failures (RF-01 to RF-08)</h3>
     <table>
       <thead><tr><th>ID</th><th>Name</th><th>Description</th></tr></thead>
@@ -235,6 +248,41 @@
         <li><strong>&ldquo;No single model dominates across all RCA subtasks&rdquo;</strong> &mdash; model selection should reflect target RCA objective rather than model size alone</li>
       </ul>
     </div>
+
+    <h3>Accuracy and Workflow Results</h3>
+    <div class="card">
+      <p><strong>Localization accuracy (HA@3):</strong></p>
+      <ul>
+        <li>Qwen 3 32B achieved the highest overall: <strong>0.36</strong> (GAIA), <strong>0.09</strong> (OpenRCA)</li>
+        <li>Plan-and-Execute workflow: <strong>77&ndash;87% failure rate</strong> for the smallest models (hit recursion limits)</li>
+        <li>Straight-Shot (non-agentic) often equaled or surpassed complex agentic workflows for core localization</li>
+      </ul>
+      <p><strong>Propagation path recovery (PA@3):</strong></p>
+      <ul>
+        <li>Agentic workflows improved path validity for capable models: Llama 3.3 improved from <strong>0.61 &rarr; 0.73 &rarr; 0.78</strong> across Straight-Shot &rarr; ReAct &rarr; Plan-and-Execute</li>
+        <li>Smaller models achieved only <strong>23&ndash;50% tool coverage</strong> in agentic settings &mdash; they could not effectively use the tools available to them</li>
+      </ul>
+    </div>
+
+    <h3>Universal Failures Across All Models</h3>
+    <div class="card">
+      <ul>
+        <li><strong>Highest prevalence:</strong> Unsupported causal claims, temporal ordering violations, fabricated evidence</li>
+        <li><strong>Strongest negative association with correctness (15&ndash;45% accuracy reduction):</strong> Anchoring bias, repetitive reasoning, arbitrary triage, belief-update failures</li>
+        <li><strong>RCA-specific reasoning failures</strong> (metric misinterpretation, provenance confusion) appeared uniformly across all model families regardless of scale</li>
+      </ul>
+    </div>
+
+    <h3>Modality Sensitivity</h3>
+    <table>
+      <thead><tr><th>Modality</th><th>Effect When Withheld</th><th>Interpretation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Metrics</strong></td><td>Localization reduced by <strong>7&ndash;15%</strong></td><td>Most essential modality for RCA</td></tr>
+        <tr><td><strong>Logs</strong></td><td>Fault-type accuracy degraded by <strong>13%</strong></td><td>Critical for failure classification</td></tr>
+        <tr><td><strong>Traces</strong></td><td>Accuracy <strong>improved by 6&ndash;7%</strong> when removed</td><td>Models distracted by voluminous, noisy trace data</td></tr>
+      </tbody>
+    </table>
+    <p>The trace finding is counter-intuitive and critical: <strong>more data is not always better</strong>. Voluminous trace data overwhelmed model reasoning capacity rather than aiding it.</p>
 
     <h3>Mitigation Recommendations from the Literature</h3>
     <div class="card">

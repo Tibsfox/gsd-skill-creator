@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Origins &mdash; Prolog &amp; Logic Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-plg">
+  <header>
+    <h1>History &amp; Origins</h1>
+    <div class="subtitle">Marseille 1972 &mdash; Kowalski, Colmerauer, Warren &mdash; the Fifth Generation project &mdash; the winter &mdash; the quiet persistent influence</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="history.html" class="active">History</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="expert-systems.html">Expert Systems</a>
+      <a href="constraint-lp.html">CLP</a>
+      <a href="datalog-asp.html">Datalog &amp; ASP</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      To tell the story of Prolog is to tell the story of a dream that logic itself could be a programming language &mdash; that the careful axioms of Frege, Herbrand, and Gentzen could be made to <em>run</em> on a machine. It is a story that begins in Princeton and Edinburgh, passes through a sunlit office at the Luminy campus of Aix-Marseille, detours through a massive Japanese state project intended to leapfrog American computing, and ends in a quiet, persistent influence that reaches into the 2020s through Datalog query engines, neuro-symbolic AI, and static-analysis tools that nobody calls &ldquo;Prolog&rdquo; anymore.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- PART I - PREHISTORY                                           -->
+    <!-- ============================================================ -->
+
+    <h2>Part I &mdash; Prehistory (1930&ndash;1971)</h2>
+
+    <h3>The logical inheritance</h3>
+
+    <p>By the time Alain Colmerauer sat down in Marseille in 1971, mathematical logic had been making itself ready for a computer for roughly forty years. <strong>Jacques Herbrand</strong>, the brilliant young French logician who died in a climbing accident on the Massif des &Eacute;crins in 1931 at the age of twenty-three, left behind a theorem that would become Prolog&rsquo;s semantic foundation &mdash; that first-order logical validity could be reduced to a question about propositional logic via ground instances. Thoralf Skolem contributed Skolem functions. <strong>Gerhard Gentzen</strong>&rsquo;s 1935 sequent calculus and cut-elimination theorem would later become a key intuition in the proof-search strategies of logic programming.</p>
+
+    <p>In 1936, Church and Turing independently showed that no mechanical procedure could decide arbitrary first-order validity. The result was devastating to Hilbert&rsquo;s program but clarifying for everyone who wanted to build automated theorem provers: one could not hope to decide everything, but one could still hope to make a machine that found proofs when proofs existed.</p>
+
+    <p>By 1960, <strong>Hao Wang</strong>&rsquo;s <em>Toward Mechanical Mathematics</em> had verified all 220 propositional theorems of the <em>Principia</em> in nine minutes on an IBM 704. <strong>Newell, Shaw, and Simon&rsquo;s Logic Theorist</strong> (1956) had proved 38 of the first 52 theorems of Principia, sometimes more elegantly than Whitehead and Russell themselves &mdash; Russell reportedly replied that he &ldquo;wished he and Whitehead had known of it before wasting so much time.&rdquo; <strong>Davis and Putnam</strong> published their procedure in 1960, the ancestor of every modern SAT solver.</p>
+
+    <h3>Robinson&rsquo;s unification and resolution (1965)</h3>
+
+    <p>The single most important event on the road to Prolog occurred in January 1965 in the <em>Journal of the ACM</em>. <strong>John Alan Robinson</strong> &mdash; an English-born philosopher turned logician at Argonne and then Syracuse &mdash; published <em>A Machine-Oriented Logic Based on the Resolution Principle</em>. The paper had two parts:</p>
+
+    <ol>
+      <li><strong>Resolution</strong> &mdash; a single inference rule that subsumed nearly all traditional rules of logic, lifted to first-order via careful handling of variables.</li>
+      <li><strong>Unification</strong> &mdash; a terminating algorithm for finding the <em>most general unifier</em> (MGU) that makes two atomic formulas identical by substitution.</li>
+    </ol>
+
+    <p>Together they gave, for the first time, a single uniform proof procedure for first-order logic that operated on the structure of formulas themselves. Robinson&rsquo;s refutation-completeness theorem guaranteed that any unsatisfiable set of clauses has a resolution proof of the empty clause. Robinson himself later joked that logic programming &ldquo;happened <em>to</em> resolution, not because of it.&rdquo; Without the 1965 paper, Prolog could not exist.</p>
+
+    <h3>Green&rsquo;s QA3 and the &ldquo;programming in logic&rdquo; dream (1969)</h3>
+
+    <p><strong>Cordell Green</strong>, a Stanford graduate student working with McCarthy and Raphael, asked a deceptively simple question: could a resolution theorem prover be used to <em>compute answers</em>? His trick was the <em>answer literal</em> &mdash; a fresh predicate that collected the binding of a variable. When the prover succeeded and derived the empty clause, the accumulated unifier told you <em>which</em> value worked. Green had discovered that <strong>resolution + unification = computation</strong>. His 1969 IJCAI paper <em>Application of Theorem Proving to Problem Solving</em> was the earliest use of the phrase &ldquo;programming in logic.&rdquo; But Green went on to program synthesis and left the language design to others.</p>
+
+    <h3>Hewitt&rsquo;s PLANNER and the procedural rival (1969&ndash;1972)</h3>
+
+    <p>At almost exactly the same moment, <strong>Carl Hewitt</strong> at MIT was going in the opposite direction. His <em>PLANNER</em> (1969) argued that real reasoning required <em>control</em> &mdash; procedural attachments, hints about how to search. A subset, MICRO-PLANNER, was implemented by Sussman, Charniak, and Winograd in 1970 and became famous as the language underlying <strong>Winograd&rsquo;s SHRDLU</strong> blocks-world system. The Hewitt line and the Robinson-Green line were in direct ideological opposition. Kowalski&rsquo;s 1974 paper would be framed almost entirely as a response to Hewitt: a demonstration that Horn clauses could have a procedural reading that gave all the control Hewitt wanted, without sacrificing the declarative meaning. Hewitt went on to develop the Actor model in 1973, which inspired Erlang and Smalltalk-72. Logic programming and actors are siblings born of the same dispute.</p>
+
+    <h3>The Edinburgh scene</h3>
+
+    <p>Edinburgh in the late 1960s was one of the two or three most important places in the world for AI research. <strong>Bernard Meltzer</strong> ran a weekly seminar in the Department of Computational Logic that attracted nearly everyone who would later be called a logic programming pioneer: Kowalski, Pat Hayes, Donald Kuehner, Boyer and Moore, Mike Gordon, Alan Bundy, Gordon Plotkin.</p>
+
+    <p><strong>Robert Kowalski</strong> came to Edinburgh in 1966 on a Fulbright. Between 1966 and 1970, he and Kuehner produced refinements to Robinson&rsquo;s resolution, culminating in <strong>SL-resolution</strong> (Kowalski &amp; Kuehner, 1971) &mdash; the direct precursor to Prolog&rsquo;s execution model. If you pick the leftmost literal, restrict to Horn clauses, and try clauses in a fixed order, SL-resolution becomes something that looks exactly like a Prolog interpreter running top-down, left-to-right, depth-first. It was already there in 1971.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART II - BIRTH                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Part II &mdash; The Birth of Prolog (1971&ndash;1974)</h2>
+
+    <h3>Alain Colmerauer&rsquo;s journey to Marseille</h3>
+
+    <p><strong>Alain Colmerauer</strong> (1941&ndash;2017) was born in Carcassonne, in the south of France. He entered ENSIMAG in 1963, earning a doctorate in 1967 at Grenoble under Louis Bolliet on operator precedence parsing. From 1967 to 1970 he worked at the Universit&eacute; de Montr&eacute;al on the TAUM machine-translation project, where he invented <strong>Q-systems</strong> &mdash; a formalism for writing transformational grammars as systems of production rules on tree structures. Q-systems would later power TAUM-METEO, the first operationally successful machine translation system (Canadian weather bulletins, English to French, in real time).</p>
+
+    <p>In 1970 Colmerauer returned to France, to the newly created Universit&eacute; d&rsquo;Aix-Marseille II at the Luminy campus &mdash; a sun-drenched hillside overlooking the Mediterranean calanques. He was 29. He recruited a small team: Philippe Roussel (young engineer), Robert Pasero (linguistics), Henry Kanoui. The task: build a system that could answer questions posed in natural French about a database of facts.</p>
+
+    <h3>The Kowalski-Colmerauer encounter (summer 1971)</h3>
+
+    <div class="card scholarly">
+      <p>In the summer of 1971, Kowalski traveled from Edinburgh to Marseille to give a talk. The visit lasted only a few days. It was one of the most consequential meetings in the history of programming languages.</p>
+      <p>Colmerauer had been reading Green&rsquo;s QA3 papers and was drawn to the idea that logic could compute answers, not merely prove theorems. But he couldn&rsquo;t see how to make it efficient for natural-language analysis. Kowalski arrived carrying the missing ingredient: <strong>SL-resolution</strong>, and the realization that Horn clauses were both <em>computationally tractable</em> and <em>sufficient</em> for a vast range of problems.</p>
+      <p>In Colmerauer&rsquo;s retrospective <em>The Birth of Prolog</em> (1992/1996) he recalls the moment vividly. Kowalski explained SL-resolution on the blackboard. Colmerauer recognized almost immediately that for Horn clauses the whole resolution process simplified enormously. The selection function could simply pick the leftmost atom. The search could be depth-first. The whole machinery collapsed into something that looked like a recursive procedure with pattern matching. They spent the visit &ldquo;in a state of increasing excitement.&rdquo;</p>
+      <p>Kowalski went back to Edinburgh and pursued the theoretical line. Colmerauer and Roussel went back to Marseille and decided to <em>build it</em>.</p>
+    </div>
+
+    <h3>Philippe Roussel and Prolog 0 (1972)</h3>
+
+    <p>Between late 1971 and mid-1972, <strong>Philippe Roussel</strong> wrote the first Prolog interpreter &mdash; in ALGOL-W first, then reimplemented in FORTRAN on an IBM 360/67 at the Marseille computing centre. Colmerauer calls this &ldquo;Prolog 0&rdquo; in his retrospective. It is the ancestor of every Prolog system that followed.</p>
+
+    <p>The name came from <strong>Jacqueline Roussel</strong>, Philippe&rsquo;s wife. Roussel came home one evening struggling to name the system; she suggested <em>Programmation en Logique</em>, which contracted naturally to &ldquo;PROLOG.&rdquo; The acronym stuck. (English writers later expanded it as &ldquo;Programming in Logic,&rdquo; but the original is French.)</p>
+
+    <p>The first serious application, published in 1973, was a French natural-language question-answering system by Colmerauer, Pasero, Roussel, and Kanoui &mdash; <em>Un syst&egrave;me de communication homme-machine en fran&ccedil;ais</em>. It could answer questions about a small geography and family database, in passable French, with grammar and reasoning both expressed in Prolog clauses. Colmerauer later said that writing this system convinced him Prolog was a <em>general-purpose</em> language, not a specialized tool for theorem proving.</p>
+
+    <h3>The 1973 Marseille Prolog and the cut</h3>
+
+    <p>By mid-1973, Prolog 0 was replaced by Prolog 1 &mdash; cleaner, with better memory management and a handful of arithmetic built-ins. The 1973 version introduced the <strong>cut</strong> operator (written <code>/</code> at first, later standardized as <code>!</code>) &mdash; Colmerauer&rsquo;s concession to Hewitt-style procedural control. Kowalski disliked it because it broke the declarative reading, but it was essential to making Prolog programs run fast enough to be useful.</p>
+
+    <p>The now-familiar notation appeared here: <code>head(X, Y) :- body1(X, Z), body2(Z, Y).</code> with periods ending clauses, uppercase for variables, lowercase for atoms. Colmerauer wrote that the uppercase/lowercase convention was &ldquo;an aesthetic choice made over coffee one afternoon.&rdquo;</p>
+
+    <p>Colmerauer&rsquo;s team distributed magnetic tapes of the FORTRAN source to anyone who wrote asking for them. The tapes went to Edinburgh, Warsaw, Budapest, IBM Yorktown, and dozens of universities. <strong>Colmerauer famously refused to patent anything about Prolog</strong>, saying that logic could not be patented and &ldquo;what belongs to everyone cannot be sold.&rdquo; He maintained this position for the rest of his life.</p>
+
+    <h3>Kowalski&rsquo;s 1974 paper: Algorithm = Logic + Control</h3>
+
+    <p>In August 1974, at the IFIP Congress in Stockholm, Kowalski presented <em>Predicate Logic as Programming Language</em>. Twelve pages. The single document that most people cite as the foundation of logic programming as a field. He summarized it in the slogan that would become the movement&rsquo;s motto:</p>
+
+    <div class="horn-clause">Algorithm = Logic + Control</div>
+
+    <p>A program has two parts &mdash; what it computes (the logic) and how it computes it (the control) &mdash; and in an ideal world the programmer writes the logic and leaves the control to the system. Kowalski&rsquo;s 1979 book <em>Logic for Problem Solving</em> was the first textbook on logic programming and for nearly a decade was the only one.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART III - EDINBURGH                                          -->
+    <!-- ============================================================ -->
+
+    <h2>Part III &mdash; The Edinburgh Era (1977&ndash;1983)</h2>
+
+    <h3>David H. D. Warren and DEC-10 Prolog</h3>
+
+    <p><strong>David Harold Douglas Warren</strong> (born 1950, Cambridge mathematics then Edinburgh AI) thought the Marseille FORTRAN interpreter was slow and ugly, and decided to write a better one. His 1977 Ph.D. thesis <em>Applied Logic &mdash; Its Use and Implementation as a Programming Tool</em> described a compiler that translated Prolog clauses into DEC-10 machine code.</p>
+
+    <p>Where Marseille Prolog ran at ~1,000 logical inferences per second, Warren&rsquo;s DEC-10 compiler ran at <strong>10,000 to 40,000 LIPS</strong>. A 10&times; to 40&times; speedup was not incremental &mdash; it meant Prolog was now fast enough to be considered seriously as a production language.</p>
+
+    <p>The 1977 DEC-10 Prolog manual, written by Warren with Byrd and Pereira, introduced what everyone would come to call <strong>Edinburgh syntax</strong> &mdash; the standard that spread and became the basis of ISO Prolog. Square-bracket list notation <code>[H|T]</code>, standard I/O (<code>read</code>, <code>write</code>, <code>nl</code>), debugging primitives (<code>trace</code>, <code>spy</code>), and dynamic database predicates (<code>assert</code>, <code>retract</code>) all came from this team. By 1979, DEC-10 Prolog was the Prolog people meant when they said &ldquo;Prolog.&rdquo;</p>
+
+    <h3>The Edinburgh circle: Byrd, Pereira, O&rsquo;Keefe</h3>
+
+    <p><strong>Lawrence Byrd</strong> introduced the <strong>Byrd box model</strong> in 1980: every procedure is a box with four ports &mdash; <em>call, exit, redo, fail</em>. Every Prolog debugger in use today is based on this model.</p>
+
+    <p><strong>Fernando Pereira</strong>, a Portuguese linguist-turned-computer-scientist, did his Ph.D. under Warren. In 1980 he and Warren published <em>Definite Clause Grammars for Language Analysis</em> in Artificial Intelligence 13(3), introducing <strong>DCGs</strong> &mdash; the notation that still makes Prolog the language of choice for computational linguistics. The 1980 paper is probably the single most-cited Prolog paper ever written. Pereira would later leave Edinburgh for SRI and Penn, becoming a founding figure of <em>statistical</em> NLP &mdash; ironically, one of the forces that would eventually supplant Prolog in NLP research.</p>
+
+    <p><strong>Richard A. O&rsquo;Keefe</strong>, a New Zealand-born programmer of unusual care, refined meta-predicates like <code>bagof</code> and <code>setof</code> and insisted Prolog code be <em>portable</em>. In 1990 he wrote <strong><em>The Craft of Prolog</em></strong> (MIT Press), which opens with &ldquo;elegance is not optional&rdquo; and remains the canonical guide to idiomatic Prolog in 2026.</p>
+
+    <h3>The Warren Abstract Machine (1983)</h3>
+
+    <p>In October 1983, Warren (now at SRI in Menlo Park) published SRI Technical Note 309: <em>An Abstract Prolog Instruction Set</em>. 35 pages. One of the most consequential technical reports in the history of programming languages. It specified what is now universally called the <strong>Warren Abstract Machine</strong> (WAM) &mdash; a virtual machine for Prolog with about 40 instructions, a precise memory model (heap, stack, trail, PDL), and a register-based execution strategy.</p>
+
+    <p>The WAM is to Prolog roughly what the JVM is to Java &mdash; except that the WAM preceded Java by more than a decade. Almost every serious Prolog system since 1983 is a WAM descendant. See the <a href="implementations.html">implementations page</a> for technical detail.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART IV - FIFTH GENERATION                                    -->
+    <!-- ============================================================ -->
+
+    <h2>Part IV &mdash; The Fifth Generation (1982&ndash;1992)</h2>
+
+    <h3>Japan&rsquo;s great bet</h3>
+
+    <p>In October 1981, Japan&rsquo;s Ministry of International Trade and Industry (MITI) announced the <strong>Fifth Generation Computer Systems Project</strong> (FGCS). Ten years, ~&yen;57 billion (~$400M), goal: leapfrog American and European computing by building, from scratch, a new kind of computer optimized for AI &mdash; and specifically for logic programming.</p>
+
+    <p>The announcement was a thunderclap. Feigenbaum and McCorduck&rsquo;s 1983 book <em>The Fifth Generation</em> sold hundreds of thousands of copies and helped set off defensive funding in the US (<strong>DARPA Strategic Computing Initiative</strong>, $1B over ten years), Europe (<strong>ESPRIT</strong>), and the UK (<strong>Alvey Programme</strong>). Prolog was, suddenly and improbably, a matter of industrial policy.</p>
+
+    <p>The project was led by <strong>Kazuhiro Fuchi</strong> at the newly established Institute for New Generation Computer Technology (ICOT) in Tokyo. The bet was that parallel Prolog would become the native language of a new generation of machines. ICOT&rsquo;s policy was to publish everything and distribute software freely &mdash; unusual openness for a large government program.</p>
+
+    <h3>The PIM machines and KL1</h3>
+
+    <p>ICOT built several <strong>Parallel Inference Machines</strong>: PIM/p, PIM/c, PIM/m, PIM/i. The most sophisticated, PIM/p-512, ran 512 processors by 1992 and hit tens of millions of LIPS on favorable benchmarks. The language running on them was <strong>KL1</strong> (Kernel Language 1), based on <strong>Kazunori Ueda&rsquo;s Guarded Horn Clauses</strong> (GHC, 1985) &mdash; a committed-choice parallel logic programming language with clean dataflow semantics. Chikayama implemented the KLIC compiler and continued maintaining it as open source after the project ended.</p>
+
+    <h3>Why it &ldquo;failed&rdquo;</h3>
+
+    <div class="card">
+      <p>The conventional verdict is that the Fifth Generation project failed. The nuance is more interesting. What failed was the <strong>industrial-policy bet</strong>: the idea that investing in logic programming and parallel hardware would let Japan leapfrog the US in AI. What <em>did not</em> fail was the computer science. ICOT produced excellent research, trained a generation of world-class computer scientists, and pushed the boundaries of what was known about parallel logic programming implementation.</p>
+      <p>The technical bet &mdash; parallel logic programming with committed choice as the right model for AI computation &mdash; was undermined by two things the planners could not have foreseen:</p>
+      <ol>
+        <li><strong>Moore&rsquo;s law on commodity hardware.</strong> Sun SPARC and DEC Alpha workstations delivered raw integer performance that made specialized parallel machines economically unviable.</li>
+        <li><strong>The statistical revolution in AI.</strong> Pearl&rsquo;s 1988 <em>Probabilistic Reasoning</em>, neural networks, large corpora &mdash; the field moved toward numeric computation on data and away from symbolic reasoning.</li>
+      </ol>
+      <p>In 1982, nobody could have predicted that a graphics card designed for rendering polygons would, twenty-five years later, be the dominant computing substrate for AI. The FGCS bet was technically sound given the information available at the time.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PART V - COMMERCIAL AND WINTER                                -->
+    <!-- ============================================================ -->
+
+    <h2>Part V &mdash; The Commercial Era and the AI Winter</h2>
+
+    <h3>Quintus Prolog and the commercial boom</h3>
+
+    <p><strong>Quintus Computer Systems</strong> was founded in 1984 in Palo Alto by several ex-Edinburgh Prolog people, including Byrd, Warren, and Pereira. Quintus Prolog, released late 1984, was the first production-quality commercial Prolog system &mdash; WAM-based, C-implemented, portable across Unix workstations. Licenses sold for $2,000&ndash;$5,000 per seat. Quintus was acquired by Intergraph in 1989, then by SICS in 1998, where it became the basis of the <strong>SICStus Prolog</strong> lineage that continues today.</p>
+
+    <p>The late 1980s also produced <strong>BIM Prolog</strong> (Brussels, pioneered integrated CLP), <strong>IF/Prolog</strong> (Munich, industrial applications including DaimlerChrysler parts configuration), <strong>LPA Prolog</strong> (UK, MacProlog in 1986 and WinProlog in 1991), <strong>ALS Prolog</strong> (Massachusetts, 32-bit native compilation), and <strong>Arity Prolog</strong> (dominant on IBM PC MS-DOS).</p>
+
+    <h3>Turbo Prolog and the Borland experiment (1986)</h3>
+
+    <p>Borland &mdash; of Turbo Pascal fame &mdash; released <strong>Turbo Prolog</strong> in 1986 at $99.95. An order of magnitude less than any existing commercial Prolog. It was licensed from the Prolog Development Center (PDC) in Copenhagen. For thousands of PC hobbyists, it was the first Prolog they ever saw.</p>
+
+    <p>But Turbo Prolog was <em>strongly typed</em> and incompatible with Edinburgh Prolog. Richard O&rsquo;Keefe argued in a famous 1988 Usenet post that Turbo Prolog &ldquo;was not actually Prolog at all.&rdquo; It evolved separately into what is now <strong>Visual Prolog</strong>, which Prolog purists still dispute but which has a stable European commercial user base.</p>
+
+    <h3>ISO Prolog (1995)</h3>
+
+    <p>ISO/IEC JTC 1/SC 22 established Working Group WG17 for Prolog in 1987. The convener was Roger Scowen of the UK&rsquo;s National Physical Laboratory. After eight years of work, <strong>ISO/IEC 13211-1:1995 (Prolog &mdash; Part 1: General core)</strong> was published in June 1995, 199 pages. Part 2 (Modules) followed in 2000 but remained controversial and rarely fully implemented. The standard established a baseline but did not eliminate the dialect problem &mdash; tabling, constraint logic programming, modules, and foreign interfaces remain implementation-specific.</p>
+
+    <h3>The AI winter and the symbolic retreat</h3>
+
+    <p>The expert-system boom of the early 1980s had fueled Prolog&rsquo;s rise. By 1987, the limitations were painfully clear: expert systems were brittle, didn&rsquo;t handle uncertainty, were hard to maintain. The expert-system companies began to fold. Symbolics filed Chapter 11 in 1993. Prolog, guilty by association, lost most of its industrial momentum.</p>
+
+    <p>When the winter ended with the rise of statistical machine learning, Prolog was no longer part of the mainstream story. It became a niche language &mdash; still taught in academic AI courses, still used in compiler front-ends and NLP and constraint solving, but no longer on the cutting edge of what &ldquo;AI&rdquo; meant.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART VI - THE AFTERLIFE                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Part VI &mdash; The Quiet Afterlife (1995&ndash;present)</h2>
+
+    <h3>SWI-Prolog becomes the default</h3>
+
+    <p>In Amsterdam, <strong>Jan Wielemaker</strong> had been quietly maintaining SWI-Prolog since 1987, originally as a tool for knowledge-representation research. By the mid-2000s, SWI had become the de facto free Prolog: cross-platform, well-documented, BSD-licensed, with strong constraint libraries, a production HTTP server, and the SWISH browser-based notebook. See <a href="implementations.html">implementations</a>.</p>
+
+    <h3>Datalog&rsquo;s industrial comeback</h3>
+
+    <p>Starting around 2010, <strong>Datalog</strong> &mdash; the function-symbol-free fragment of Prolog that database theorists had been studying since the 1970s &mdash; began appearing in industrial tools. GitHub&rsquo;s <strong>CodeQL</strong> (n&eacute;e Semmle) is a Datalog engine for security analysis. Oracle Labs&rsquo; <strong>Souffle</strong> compiles Datalog to high-performance C++ for static analysis. VMware&rsquo;s <strong>Differential Datalog</strong> does incremental evaluation. The Rust borrow checker, <strong>Polonius</strong>, is a Datalog engine. Java pointer analysis (Doop) is Datalog. None of these tools call themselves &ldquo;Prolog&rdquo; &mdash; but they are logic programming in production at industrial scale.</p>
+
+    <h3>Answer Set Programming and neuro-symbolic AI</h3>
+
+    <p><strong>Answer Set Programming</strong>, based on Gelfond and Lifschitz&rsquo;s 1988 stable model semantics, became a serious paradigm via the Potassco group&rsquo;s <strong>clingo</strong> solver. ASP is used in bioinformatics, AI planning, combinatorial optimization.</p>
+
+    <p>The 2020s brought <strong>neuro-symbolic AI</strong>: DeepProbLog, Scallop, Logic Tensor Networks. LLMs generating Prolog/ASP as a reasoning layer. The &ldquo;LLMs can&rsquo;t plan&rdquo; discourse has renewed interest in symbolic methods. Logic programming is having a quiet renaissance in the 2020s that would have astonished the 1990s AI community that declared it dead.</p>
+
+    <h3>Colmerauer&rsquo;s death (2017)</h3>
+
+    <div class="card gold">
+      <p>Alain Colmerauer died in Marseille on May 12, 2017, at the age of 76. In his last decade he had continued to work on natural-language processing and on a project to revive Prolog II&rsquo;s rational-tree model in modern settings. Obituaries in <em>Le Monde</em>, <em>Communications of the ACM</em>, and the Association for Logic Programming newsletter all emphasized the same few facts: that he had invented a programming language by refusing to patent it, that he had insisted on openness as a matter of principle, and that he had always, when asked, given credit to Robinson for unification, to Kowalski for the theoretical insight, and to Roussel for actually building the thing.</p>
+      <p>Kowalski, still active in logic programming research at Imperial College, wrote an appreciation that described the 1971 Marseille encounter as &ldquo;the single most important week of my academic life.&rdquo; Warren, also still active, wrote that Colmerauer had built &ldquo;the language that taught a generation of computer scientists what declarative programming could mean.&rdquo; These are not small claims.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TIMELINE                                                      -->
+    <!-- ============================================================ -->
+
+    <h2>Timeline</h2>
+
+    <table>
+      <thead><tr><th>Year</th><th>Event</th></tr></thead>
+      <tbody>
+        <tr><td>1930</td><td>Herbrand&rsquo;s theorem (reduces first-order validity to propositional)</td></tr>
+        <tr><td>1935</td><td>Gentzen&rsquo;s sequent calculus and cut-elimination</td></tr>
+        <tr><td>1956</td><td>Newell, Shaw, Simon&rsquo;s Logic Theorist on the JOHNNIAC</td></tr>
+        <tr><td>1960</td><td>Davis-Putnam procedure published</td></tr>
+        <tr><td>1965</td><td><strong>Robinson&rsquo;s resolution + unification paper</strong> (JACM)</td></tr>
+        <tr><td>1969</td><td>Green&rsquo;s QA3; Hewitt&rsquo;s PLANNER</td></tr>
+        <tr><td>1971</td><td>Kowalski &amp; Kuehner SL-resolution; Kowalski-Colmerauer Marseille meeting</td></tr>
+        <tr><td>1972</td><td><strong>Prolog 0 in FORTRAN on IBM 360/67</strong>, Marseille (Roussel)</td></tr>
+        <tr><td>1973</td><td>French NL Q&amp;A system; cut operator; Edinburgh-style notation</td></tr>
+        <tr><td>1974</td><td>Kowalski&rsquo;s <em>Predicate Logic as Programming Language</em> (IFIP)</td></tr>
+        <tr><td>1977</td><td>Warren&rsquo;s DEC-10 Prolog compiler (Edinburgh syntax)</td></tr>
+        <tr><td>1979</td><td>Kowalski&rsquo;s <em>Logic for Problem Solving</em> book</td></tr>
+        <tr><td>1980</td><td>Pereira &amp; Warren DCG paper; Byrd box model; Debrecen workshop</td></tr>
+        <tr><td>1981</td><td>Japan announces the Fifth Generation project</td></tr>
+        <tr><td>1982</td><td>First ICLP in Marseille; Prolog II with rational trees; Clocksin &amp; Mellish <em>Programming in Prolog</em></td></tr>
+        <tr><td>1983</td><td><strong>Warren Abstract Machine</strong> (SRI Tech Note 309); DARPA SCI; ESPRIT; Alvey</td></tr>
+        <tr><td>1984</td><td>Quintus Computer Systems founded; SICStus Prolog started</td></tr>
+        <tr><td>1985</td><td>Ueda&rsquo;s GHC; SWI-Prolog started in Amsterdam</td></tr>
+        <tr><td>1986</td><td>Borland Turbo Prolog; Bratko textbook first edition; Art of Prolog (Sterling &amp; Shapiro)</td></tr>
+        <tr><td>1987</td><td>ISO WG17 established; start of AI winter</td></tr>
+        <tr><td>1988</td><td>Gelfond &amp; Lifschitz stable model semantics (ASP foundations); Kowalski CACM retrospective</td></tr>
+        <tr><td>1989</td><td>Quintus acquired by Intergraph</td></tr>
+        <tr><td>1990</td><td>O&rsquo;Keefe <em>The Craft of Prolog</em> (MIT Press); Mercury started in Melbourne</td></tr>
+        <tr><td>1991</td><td>A&iuml;t-Kaci&rsquo;s WAM tutorial</td></tr>
+        <tr><td>1992</td><td>FGCS project ends; Colmerauer &amp; Roussel <em>The Birth of Prolog</em> written</td></tr>
+        <tr><td>1993</td><td>Symbolics Chapter 11; end of AI winter</td></tr>
+        <tr><td>1995</td><td><strong>ISO/IEC 13211-1:1995</strong> published</td></tr>
+        <tr><td>1998</td><td>Quintus acquired by SICS</td></tr>
+        <tr><td>2000</td><td>ISO 13211-2 (Modules) published</td></tr>
+        <tr><td>2011</td><td>IBM Watson wins Jeopardy with Prolog in its NLP pipeline</td></tr>
+        <tr><td>2015</td><td>SWI-Prolog relicensed to BSD-2-Clause</td></tr>
+        <tr><td>2016</td><td>Souffle Datalog released; Flix announced</td></tr>
+        <tr><td>2017</td><td>Colmerauer dies in Marseille, age 76</td></tr>
+        <tr><td>2018</td><td>Polonius (Rust borrow checker) announced; Differential Datalog from VMware</td></tr>
+        <tr><td>2019</td><td>DeepProbLog; the neuro-symbolic revival begins</td></tr>
+        <tr><td>2020s</td><td>LLM + symbolic reasoning research; Scryer Prolog rises; GitHub CodeQL at scale</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- KEY FIGURES                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Key Figures</h2>
+
+    <table>
+      <thead><tr><th>Person</th><th>Contribution</th></tr></thead>
+      <tbody>
+        <tr><td><strong>J. Alan Robinson</strong> (1930&ndash;2016)</td><td>Unification and resolution (1965)</td></tr>
+        <tr><td><strong>Cordell Green</strong> (b. 1941)</td><td>QA3, the answer literal, the phrase &ldquo;programming in logic&rdquo; (1969)</td></tr>
+        <tr><td><strong>Robert Kowalski</strong> (b. 1941)</td><td>SL-resolution, procedural interpretation of Horn clauses, &ldquo;Algorithm = Logic + Control&rdquo;</td></tr>
+        <tr><td><strong>Alain Colmerauer</strong> (1941&ndash;2017)</td><td>Father of Prolog; Q-systems; Prolog I and II; refused to patent</td></tr>
+        <tr><td><strong>Philippe Roussel</strong></td><td>First Prolog implementation (1972, FORTRAN)</td></tr>
+        <tr><td><strong>David H. D. Warren</strong> (b. 1950)</td><td>DEC-10 compiler (1977); WAM (1983); parallel Prolog research</td></tr>
+        <tr><td><strong>Lawrence Byrd</strong></td><td>Byrd box debugging model; Quintus co-founder</td></tr>
+        <tr><td><strong>Fernando Pereira</strong></td><td>Definite Clause Grammars (1980); later a founder of statistical NLP</td></tr>
+        <tr><td><strong>Richard A. O&rsquo;Keefe</strong></td><td><em>The Craft of Prolog</em> (1990); meta-predicate design; ISO standards work</td></tr>
+        <tr><td><strong>Ivan Bratko</strong></td><td><em>Prolog Programming for AI</em> (1986, still in print)</td></tr>
+        <tr><td><strong>Leon Sterling &amp; Ehud Shapiro</strong></td><td><em>The Art of Prolog</em> (1986)</td></tr>
+        <tr><td><strong>Peter Van Roy</strong></td><td>Aquarius compiler; later CTM textbook and Oz/Mozart</td></tr>
+        <tr><td><strong>Kazuhiro Fuchi</strong></td><td>Director of ICOT, Fifth Generation project</td></tr>
+        <tr><td><strong>Kazunori Ueda</strong></td><td>Guarded Horn Clauses; KL1</td></tr>
+        <tr><td><strong>Mats Carlsson</strong></td><td>SICStus Prolog; CLP(FD) reference implementation</td></tr>
+        <tr><td><strong>Jan Wielemaker</strong></td><td>SWI-Prolog (1987&ndash;present)</td></tr>
+        <tr><td><strong>Markus Triska</strong></td><td>The Power of Prolog; modern pure-Prolog advocacy; SWI clpfd</td></tr>
+        <tr><td><strong>Mark Thom</strong></td><td>Scryer Prolog (Rust implementation, strict ISO)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Primary Sources</h2>
+    <ul>
+      <li><strong>Alain Colmerauer &amp; Philippe Roussel</strong>, <em>The Birth of Prolog</em> (1992, published in HOPL-II volume 1996)</li>
+      <li><strong>Robert Kowalski</strong>, <em>The Early Years of Logic Programming</em>, CACM 31(1), 1988</li>
+      <li><strong>Robert Kowalski</strong>, <em>Predicate Logic as Programming Language</em>, IFIP Congress 1974</li>
+      <li><strong>J. Alan Robinson</strong>, <em>A Machine-Oriented Logic Based on the Resolution Principle</em>, JACM 12(1), 1965</li>
+      <li><strong>David H. D. Warren</strong>, <em>An Abstract Prolog Instruction Set</em>, SRI Tech Note 309, October 1983</li>
+      <li><strong>Fernando Pereira &amp; David H. D. Warren</strong>, <em>Definite Clause Grammars for Language Analysis</em>, Artificial Intelligence 13(3), 1980</li>
+      <li><strong>Hassan A&iuml;t-Kaci</strong>, <em>Warren&rsquo;s Abstract Machine: A Tutorial Reconstruction</em>, 1991 (free PDF)</li>
+      <li><strong>Ehud Shapiro</strong>, <em>The Fifth Generation Project &mdash; A Trip Report</em>, CACM 26(9), 1983, and retrospectives thereafter</li>
+      <li><strong>Jacques Cohen</strong>, <em>A View of the Origins and Development of Prolog</em>, CACM 31(1), 1988</li>
+      <li><strong>Richard O&rsquo;Keefe</strong>, <em>The Craft of Prolog</em>, MIT Press, 1990</li>
+    </ul>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">The Language Itself</a></li>
+        <li><a href="implementations.html">Implementations &amp; Tooling</a></li>
+        <li><a href="expert-systems.html">Expert Systems &amp; NLP</a></li>
+        <li><a href="constraint-lp.html">Constraint Logic Programming</a></li>
+        <li><a href="datalog-asp.html">Datalog &amp; Answer Set Programming</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Prolog &amp; Logic Programming &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

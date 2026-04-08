@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object-Oriented Java &mdash; Java and the JVM</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jav">
+  <header>
+    <h1>Object-Oriented Java</h1>
+    <div class="subtitle">Classes, Interfaces, Inheritance, Polymorphism, Records, Sealed Hierarchies &mdash; The Four Pillars, Java-Style</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="oop.html" class="active">OOP</a>
+      <a href="jvm.html">JVM</a>
+      <a href="frameworks.html">Frameworks</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Java is the language that made object-oriented programming <em>mandatory</em>. For 25 years, every piece of Java code had to live inside a class. Java 21 finally relaxed that with unnamed classes &mdash; but the OO model remains the defining abstraction.
+    </blockquote>
+
+    <h2>The Four Pillars, Java-Style</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Encapsulation</h4>
+        <p><code>private</code> fields + public getters/setters &mdash; the JavaBeans convention. Access modifiers enforced at the JVM level, not just compile time. <code>public</code>, <code>protected</code>, package-private (default), <code>private</code>.</p>
+      </div>
+      <div class="pillar">
+        <h4>Inheritance</h4>
+        <p><strong>Single inheritance only</strong> via <code>extends</code>. <code>java.lang.Object</code> is the ancestor of every class. Multiple interface inheritance via <code>implements</code>. Sealed classes (Java 17) for closed hierarchies.</p>
+      </div>
+      <div class="pillar">
+        <h4>Polymorphism</h4>
+        <p>Every non-<code>final</code> method is virtual <em>by default</em> &mdash; the opposite of C++. Dynamic dispatch via the JVM&rsquo;s <code>invokevirtual</code>/<code>invokeinterface</code>. Pattern matching for switch (Java 21) adds structural polymorphism.</p>
+      </div>
+      <div class="pillar">
+        <h4>Abstraction</h4>
+        <p>Abstract classes + interfaces + generics. Interfaces gained default methods in Java 8 to enable library evolution. Records (Java 16) for data-oriented abstractions.</p>
+      </div>
+    </div>
+
+    <h2>Class Basics</h2>
+    <p>A class declaration can include fields, methods, constructors, nested classes, and static and instance initializer blocks. The compiler produces one <code>.class</code> file per class.</p>
+
+<pre><code>package com.example.banking;
+
+public class Account {
+    private final String owner;
+    private double balance;
+
+    public Account(String owner, double initial) {
+        this.owner = owner;
+        this.balance = initial;
+    }
+
+    public String owner() { return owner; }
+    public double balance() { return balance; }
+
+    public void deposit(double amount) {
+        if (amount &lt;= 0) throw new IllegalArgumentException("must be positive");
+        balance += amount;
+    }
+
+    public void withdraw(double amount) {
+        if (amount &gt; balance) throw new IllegalStateException("insufficient funds");
+        balance -= amount;
+    }
+}</code></pre>
+
+    <h2>The Object Class</h2>
+    <p><code>java.lang.Object</code> is the root of every Java class hierarchy. Every class you write extends <code>Object</code> (directly or transitively). <code>Object</code> contributes these methods that every class gets for free (and usually needs to override):</p>
+
+    <table>
+      <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>equals(Object)</code></td><td>Logical equality. Must be reflexive, symmetric, transitive, consistent, and <code>x.equals(null)</code> must be false.</td></tr>
+        <tr><td><code>hashCode()</code></td><td>Consistent with <code>equals</code>: equal objects must have equal hash codes.</td></tr>
+        <tr><td><code>toString()</code></td><td>Human-readable representation. The debugger, logger, and <code>String</code> concatenation all use it.</td></tr>
+        <tr><td><code>getClass()</code></td><td>Runtime <code>Class&lt;?&gt;</code> token, used by reflection.</td></tr>
+        <tr><td><code>clone()</code></td><td>Shallow copy; part of the flawed <code>Cloneable</code> design.</td></tr>
+        <tr><td><code>wait()</code>, <code>notify()</code>, <code>notifyAll()</code></td><td>Legacy monitor-based concurrency primitives.</td></tr>
+        <tr><td><code>finalize()</code> &mdash; <em>deprecated</em></td><td>Called by the GC before reclaiming the object. Replaced by <code>Cleaner</code>.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card amber">
+      <p>The <strong>equals/hashCode contract</strong> is the single most-violated Java rule. Joshua Bloch devotes two full chapters of <em>Effective Java</em> to getting it right. Records (Java 16) auto-generate both correctly; use them whenever you can.</p>
+    </div>
+
+    <h2>Inheritance</h2>
+    <p>Java supports only <strong>single inheritance of implementation</strong>. A class <code>extends</code> at most one superclass:</p>
+
+<pre><code>public abstract class Animal {
+    protected final String name;
+    public Animal(String name) { this.name = name; }
+    public abstract String speak();
+    public String name() { return name; }
+}
+
+public class Dog extends Animal {
+    private final String breed;
+    public Dog(String name, String breed) {
+        super(name);                 // call superclass constructor
+        this.breed = breed;
+    }
+    @Override
+    public String speak() { return name + ": woof!"; }
+}</code></pre>
+
+    <p>Rules:</p>
+    <ul>
+      <li>Subclass constructors must call a superclass constructor explicitly via <code>super(&hellip;)</code>, or the compiler inserts an implicit <code>super()</code> call to the no-arg constructor.</li>
+      <li>Fields are initialized in this order: static fields and static blocks first (per class, in declaration order); then instance fields and instance blocks during construction.</li>
+      <li><code>final</code> classes cannot be subclassed. <code>final</code> methods cannot be overridden.</li>
+      <li><code>@Override</code> annotation is optional but strongly recommended &mdash; it catches typos that would otherwise silently create a new method instead of an override.</li>
+    </ul>
+
+    <h2>Interfaces</h2>
+    <p>Interfaces describe behavior without implementation. A class <code>implements</code> as many interfaces as it wants. Before Java 8, interfaces could only declare method signatures. Java 8 added <strong>default methods</strong>:</p>
+
+<pre><code>public interface Greeter {
+    String name();
+
+    // Default method &mdash; Java 8
+    default String greet() {
+        return "Hello, " + name() + "!";
+    }
+
+    // Static method &mdash; Java 8
+    static Greeter anonymous() {
+        return () -&gt; "stranger";
+    }
+}
+
+public class Person implements Greeter {
+    private final String name;
+    public Person(String name) { this.name = name; }
+    public String name() { return name; }
+}</code></pre>
+
+    <p>Why default methods were added: to evolve interfaces in the standard library (especially <code>Collection</code>, which gained <code>stream()</code>, <code>forEach()</code>, etc.) without breaking every existing implementation.</p>
+
+    <h3>Functional interfaces (Java 8)</h3>
+    <p>An interface with exactly one abstract method (a <strong>SAM</strong>, Single Abstract Method) is a <em>functional interface</em>. Lambda expressions and method references can be used wherever a functional interface is expected:</p>
+
+<pre><code>@FunctionalInterface
+public interface Transformer&lt;T, R&gt; {
+    R apply(T input);
+}
+
+Transformer&lt;String, Integer&gt; length = s -&gt; s.length();
+Transformer&lt;String, Integer&gt; length2 = String::length;</code></pre>
+
+    <h2>Abstract Classes vs Interfaces</h2>
+    <table>
+      <thead><tr><th>Concern</th><th>Abstract class</th><th>Interface</th></tr></thead>
+      <tbody>
+        <tr><td>Multiple inheritance</td><td>No (single parent)</td><td>Yes (many interfaces)</td></tr>
+        <tr><td>Instance state</td><td>Yes (fields)</td><td>No (only <code>public static final</code> constants)</td></tr>
+        <tr><td>Constructors</td><td>Yes</td><td>No</td></tr>
+        <tr><td>Method implementations</td><td>Yes (any)</td><td>Since Java 8: default + static + private (Java 9)</td></tr>
+        <tr><td>Access control</td><td>All modifiers</td><td><code>public</code> (and <code>private</code> on helpers since Java 9)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card green">
+      <p><strong>Modern guidance:</strong> Prefer interfaces for most abstractions (single inheritance of implementation is a sharp constraint). Use abstract classes only when you genuinely need shared state or shared protected helpers.</p>
+    </div>
+
+    <h2>The Slicing Problem &mdash; Java Doesn&rsquo;t Have It</h2>
+    <p>Unlike C++, Java references are always pointer-like. A variable of type <code>Shape</code> does not hold a <code>Shape</code> value &mdash; it holds a <em>reference</em> to some object, which might be a <code>Circle</code>, a <code>Square</code>, or any subtype. There is no slicing; polymorphism just works:</p>
+
+<pre><code>Shape s = new Circle(2.0);    // s holds a reference; the object is still a Circle
+System.out.println(s.area()); // dispatches to Circle.area()</code></pre>
+
+    <h2>Records (Java 16, JEP 395)</h2>
+    <p>Records are data-oriented classes with auto-generated boilerplate. One line gives you a constructor, accessors, <code>equals</code>, <code>hashCode</code>, and <code>toString</code>:</p>
+
+<pre><code>public record Point(double x, double y) {
+    // Compact constructor for validation / normalization
+    public Point {
+        if (Double.isNaN(x) || Double.isNaN(y))
+            throw new IllegalArgumentException("NaN");
+    }
+
+    // Additional methods allowed
+    public double distanceToOrigin() {
+        return Math.sqrt(x * x + y * y);
+    }
+}
+
+var p = new Point(3, 4);
+System.out.println(p);                 // Point[x=3.0, y=4.0]
+System.out.println(p.distanceToOrigin()); // 5.0</code></pre>
+
+    <p>Records are <strong>implicitly final</strong>, their fields are <strong>final</strong>, and they cannot extend another class (but can implement interfaces). Use cases: DTOs, value objects, tuples, event records, immutable state.</p>
+
+    <h2>Sealed Classes (Java 17, JEP 409)</h2>
+    <p>A sealed type declares the exact list of permitted subtypes. This enables <strong>exhaustive pattern matching</strong>:</p>
+
+<pre><code>public sealed interface Shape
+    permits Circle, Square, Triangle {}
+
+public record Circle(double r) implements Shape {}
+public record Square(double side) implements Shape {}
+public record Triangle(double base, double height) implements Shape {}
+
+// Exhaustive &mdash; compiler rejects adding a Shape without updating this
+public static double area(Shape s) {
+    return switch (s) {
+        case Circle c -&gt; Math.PI * c.r() * c.r();
+        case Square sq -&gt; sq.side() * sq.side();
+        case Triangle t -&gt; 0.5 * t.base() * t.height();
+    };
+}</code></pre>
+
+    <p>Subtypes of a sealed class must be declared <code>final</code>, <code>sealed</code>, or <code>non-sealed</code>. <code>non-sealed</code> re-opens the hierarchy for arbitrary extension (rare, for framework extension points).</p>
+
+    <h2>Pattern Matching for switch (Java 21)</h2>
+    <p>Type patterns, record deconstruction, and guarded patterns combine to replace visitor pattern boilerplate with a clean switch:</p>
+
+<pre><code>String describe(Shape s) {
+    return switch (s) {
+        case Circle(double r) when r &gt; 100 -&gt; "huge circle";
+        case Circle(double r) -&gt; "circle of radius " + r;
+        case Square(double side) -&gt; "square of side " + side;
+        case Triangle(double b, double h) -&gt; "triangle " + b + "&times;" + h;
+    };
+}</code></pre>
+
+    <h2>The Collections Framework</h2>
+    <p>Added to Java 1.2 (&ldquo;Java 2,&rdquo; December 1998), designed primarily by <strong>Joshua Bloch</strong> and <strong>Doug Lea</strong>. It replaced the ad-hoc <code>Vector</code>, <code>Hashtable</code>, and <code>Enumeration</code> with a systematic hierarchy.</p>
+
+    <table>
+      <thead><tr><th>Implementation</th><th>Backing</th><th>Typical use</th></tr></thead>
+      <tbody>
+        <tr><td><code>ArrayList</code></td><td>Resizable array</td><td>The default list; fast indexed access</td></tr>
+        <tr><td><code>LinkedList</code></td><td>Doubly linked</td><td>Rare; usually <code>ArrayDeque</code> is better</td></tr>
+        <tr><td><code>HashSet</code> / <code>HashMap</code></td><td>Hash table</td><td>O(1) average</td></tr>
+        <tr><td><code>TreeSet</code> / <code>TreeMap</code></td><td>Red-black tree</td><td>Sorted iteration; range queries</td></tr>
+        <tr><td><code>LinkedHashMap</code></td><td>Hash + doubly linked</td><td>Insertion-order iteration; LRU cache base</td></tr>
+        <tr><td><code>ArrayDeque</code></td><td>Array ring buffer</td><td>Stack/queue; preferred over <code>Stack</code> and <code>LinkedList</code></td></tr>
+        <tr><td><code>PriorityQueue</code></td><td>Binary heap</td><td>Min-heap operations</td></tr>
+        <tr><td><code>ConcurrentHashMap</code></td><td>Lock striping / CAS</td><td>Concurrent access; scales on multi-core</td></tr>
+        <tr><td><code>CopyOnWriteArrayList</code></td><td>Immutable snapshot</td><td>Read-heavy; rare writes</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Exceptions &mdash; The Checked Experiment</h2>
+    <p>Java is the only mainstream language to enforce <em>checked</em> exceptions: exceptions that must be declared or caught, not merely thrown. Three categories:</p>
+
+    <ul>
+      <li><strong><code>Error</code></strong> &mdash; unchecked, VM-level problems (<code>OutOfMemoryError</code>, <code>StackOverflowError</code>). Don&rsquo;t catch.</li>
+      <li><strong><code>RuntimeException</code></strong> &mdash; unchecked, programming errors (<code>NullPointerException</code>, <code>IllegalArgumentException</code>, <code>IndexOutOfBoundsException</code>).</li>
+      <li><strong>Other <code>Exception</code>s</strong> &mdash; checked, recoverable conditions (<code>IOException</code>, <code>SQLException</code>).</li>
+    </ul>
+
+    <div class="card amber">
+      <p>The checked exception experiment is widely regarded as Java&rsquo;s most controversial design choice. Modern wisdom (Bloch, Goetz, and the broader Java community): use unchecked exceptions for most cases. Kotlin, Scala, and C# all chose not to follow.</p>
+    </div>
+
+    <h2>Design Patterns in Java</h2>
+    <p>The Gang of Four book predates Java (1994), but its patterns are idiomatic in Java. Some classic examples:</p>
+
+    <table>
+      <thead><tr><th>Pattern</th><th>Idiomatic Java form</th></tr></thead>
+      <tbody>
+        <tr><td>Singleton</td><td>Enum with single constant (Bloch&rsquo;s preferred form)</td></tr>
+        <tr><td>Builder</td><td>Static nested <code>Builder</code> class with fluent setters</td></tr>
+        <tr><td>Factory Method</td><td>Static <code>of(&hellip;)</code> or <code>valueOf(&hellip;)</code> method</td></tr>
+        <tr><td>Observer</td><td>Listener interfaces, or <code>java.util.concurrent.Flow</code> (Java 9)</td></tr>
+        <tr><td>Strategy</td><td>Functional interface + lambda</td></tr>
+        <tr><td>Decorator</td><td>Wrapping classes (<code>BufferedReader</code> wrapping <code>FileReader</code>)</td></tr>
+        <tr><td>Visitor</td><td><code>switch</code> pattern matching with sealed interfaces (Java 21)</td></tr>
+        <tr><td>Iterator</td><td>Built-in via <code>Iterable</code>/<code>Iterator</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CPP</td><td>C++</td><td>Java keeps the four pillars but removes multiple inheritance, operator overloading, and value types &mdash; Gosling&rsquo;s simplifications</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>Python is duck-typed; Java is nominally typed. Pattern matching is bringing them closer.</td></tr>
+        <tr><td>GOF</td><td>Design Patterns</td><td>The Gang of Four patterns are idiomatic in Java; many are now built into the standard library</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>NullPointerException, ClassCastException, ConcurrentModificationException &mdash; the top Java failure modes</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Java Language</a></li>
+        <li><a href="jvm.html">JVM &amp; Concurrency</a></li>
+        <li><a href="frameworks.html">Frameworks &amp; Enterprise</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Object-Oriented Java &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

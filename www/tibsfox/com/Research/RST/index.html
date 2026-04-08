@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rust &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rst">
+  <header>
+    <h1>Rust</h1>
+    <div class="subtitle">Memory Safety Without Garbage Collection &mdash; Ownership, Borrowing, Fearless Concurrency, and the Language Rewriting the Infrastructure Layer</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="ownership.html">Ownership</a>
+      <a href="traits.html">Traits &amp; Types</a>
+      <a href="async.html">Async &amp; Concurrency</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="unsafe.html">Unsafe &amp; FFI</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;Rust is a language empowering everyone to build reliable and efficient software.&rdquo; &mdash; The official Rust tagline. More bluntly: Rust proves that memory safety, thread safety, and zero-cost abstractions are not a triangle &mdash; you can have all three, if you are willing to let the compiler be your strictest reviewer.
+    </blockquote>
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value green">0</span><span class="stat-label">GC Pauses (Ever)</span></div>
+      <div class="stat"><span class="stat-value blue">0</span><span class="stat-label">Data Races (In Safe Code)</span></div>
+      <div class="stat"><span class="stat-value purple">8+</span><span class="stat-label">Years &ldquo;Most Loved&rdquo;</span></div>
+      <div class="stat"><span class="stat-value yellow">150K+</span><span class="stat-label">Crates on crates.io</span></div>
+      <div class="stat"><span class="stat-value red">2024</span><span class="stat-label">Latest Edition</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why Rust?</strong> Rust is the language that answers the question every C and C++ programmer has asked for decades: &ldquo;Can I have performance <em>and</em> safety?&rdquo; The answer is yes &mdash; at the cost of a stricter compiler and a steeper learning curve. Rust&rsquo;s <strong>ownership system</strong> and <strong>borrow checker</strong> eliminate use-after-free, double-free, dangling pointers, and data races at compile time, without a garbage collector, without a runtime, and without sacrificing performance. The result is a systems programming language that is as fast as C/C++ and as safe as Java, and has eaten into both of their territories: Linux kernel, Chromium, Android, AWS, Cloudflare, Discord, Figma, npm, and the entire modern build-tools ecosystem (esbuild, SWC, Turbopack, Biome, Rolldown).</p>
+      <p><strong>Research method:</strong> Primary sources (rust-lang.org, doc.rust-lang.org/book, crates.io, the Rust RFC process, Rust Foundation announcements), canonical books (Klabnik &amp; Nichols, Blandy/Orendorff/Tindall, Gjengset, Bos), and cross-reference against the 284-project PNW Research Series corpus.</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <h2>The Three Promises</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Memory Safety</h4>
+        <p>No null pointers, no dangling references, no use-after-free, no double-free, no buffer overflows &mdash; all enforced at compile time by the <strong>ownership system</strong> and <strong>borrow checker</strong>. No garbage collector needed.</p>
+      </div>
+      <div class="pillar">
+        <h4>Fearless Concurrency</h4>
+        <p>No data races in safe Rust. The type system (<code>Send</code> + <code>Sync</code> traits) proves at compile time that shared state is accessed correctly. <code>Arc&lt;Mutex&lt;T&gt;&gt;</code> is the pattern; the compiler catches everything else.</p>
+      </div>
+      <div class="pillar">
+        <h4>Zero-Cost Abstractions</h4>
+        <p>Iterators, closures, generics, traits &mdash; all compile to the same machine code you&rsquo;d write by hand. No runtime overhead. No virtual dispatch unless you ask for it (<code>dyn Trait</code>). The same promise as C++, but enforced.</p>
+      </div>
+      <div class="pillar">
+        <h4>No Runtime</h4>
+        <p>No garbage collector. No VM. No green threads (since 1.0). Ahead-of-time compiled to native machine code via LLVM. Predictable performance. Suitable for kernels, firmware, and real-time systems.</p>
+      </div>
+    </div>
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="ownership.html" class="category-card">
+        <div><span class="cluster-badge cluster-own">Ownership</span></div>
+        <h3>Ownership &amp; Borrowing</h3>
+        <p>THE defining feature. Every value has exactly one owner. Borrowing rules: any number of <code>&amp;T</code> OR exactly one <code>&amp;mut T</code>. Lifetimes. The borrow checker. NLL. Move semantics. <code>Copy</code> and <code>Clone</code>.</p>
+        <p><strong>Key:</strong> Ownership, borrowing, lifetimes, the borrow checker</p>
+      </a>
+
+      <a href="traits.html" class="category-card">
+        <div><span class="cluster-badge cluster-trait">Traits &amp; Types</span></div>
+        <h3>Traits, Generics, Enums, Error Handling</h3>
+        <p>Traits as interfaces/typeclasses. Monomorphized generics. Algebraic data types (<code>enum</code>). <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code>. Pattern matching. Smart pointers (<code>Box</code>, <code>Rc</code>, <code>Arc</code>). Iterators. Collections.</p>
+        <p><strong>Key:</strong> Type system, pattern matching, error handling</p>
+      </a>
+
+      <a href="async.html" class="category-card">
+        <div><span class="cluster-badge cluster-async">Async &amp; Concurrency</span></div>
+        <h3>Async/Await, Threads, Tokio, Rayon</h3>
+        <p><code>async fn</code>, <code>.await</code>, the <code>Future</code> trait. Tokio (the dominant runtime). <code>Send</code>/<code>Sync</code>. Threads, <code>Arc&lt;Mutex&lt;T&gt;&gt;</code>, channels, atomics. Rayon for data parallelism. Pin and Unpin.</p>
+        <p><strong>Key:</strong> Async model, runtime choice, fearless concurrency</p>
+      </a>
+
+      <a href="ecosystem.html" class="category-card">
+        <div><span class="cluster-badge cluster-eco">Ecosystem</span></div>
+        <h3>Cargo, Crates, Tooling, Applications</h3>
+        <p>Cargo (the best package manager in systems programming). crates.io. Essential crates: serde, tokio, clap, axum, reqwest, tracing. CLI tools (ripgrep, fd, bat). Infrastructure (Firecracker, Pingora, Deno, SWC). Embedded. WebAssembly.</p>
+        <p><strong>Key:</strong> Cargo, crate ecosystem, real-world adoption</p>
+      </a>
+
+      <a href="unsafe.html" class="category-card">
+        <div><span class="cluster-badge cluster-unsafe">Unsafe &amp; FFI</span></div>
+        <h3>Unsafe Rust, FFI, Memory Layout</h3>
+        <p><code>unsafe</code> blocks: raw pointers, <code>extern "C"</code>, <code>#[repr(C)]</code>. Interior mutability (<code>Cell</code>, <code>RefCell</code>, <code>UnsafeCell</code>). <code>bindgen</code> and <code>cbindgen</code>. Drop and RAII. <code>PhantomData</code>. Zero-sized types.</p>
+        <p><strong>Key:</strong> The escape hatch, C interop, memory layout</p>
+      </a>
+
+      <a href="rosetta.html" class="category-card">
+        <div><span class="cluster-badge cluster-rosetta">Rosetta</span></div>
+        <h3>Rosetta Integration</h3>
+        <p>Rust vs C++ (the main comparison), Rust vs Go, Rust vs Java, Rust vs C. When to use Rust vs each. The &ldquo;rewrite it in Rust&rdquo; movement. The escalation ladder with Rust as the modern challenger to C++.</p>
+        <p><strong>Key:</strong> Cross-language comparison, adoption drivers</p>
+      </a>
+
+      <a href="education.html" class="category-card">
+        <div><span class="cluster-badge cluster-edu">Education</span></div>
+        <h3>Learning Resources</h3>
+        <p><em>The Rust Programming Language</em> (&ldquo;The Book&rdquo;, free online), <em>Programming Rust</em>, <em>Rust for Rustaceans</em>, <em>Rust in Action</em>, <em>Atomics and Locks</em>. Rustlings. Exercism. RustConf, EuroRust, Rust Nation.</p>
+        <p><strong>Key:</strong> Canon, online resources, communities</p>
+      </a>
+
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-history">History</span></div>
+        <h3>History &amp; Evolution</h3>
+        <p>Graydon Hoare (2006), Mozilla sponsorship, Servo, Rust 1.0 (May 2015), editions (2015/2018/2021/2024), Mozilla layoffs, Rust Foundation (2021), Linux kernel (6.1), the safety narrative (NSA/White House/CISA).</p>
+        <p><strong>Key:</strong> Timeline, people, governance, adoption milestones</p>
+      </a>
+    </div>
+
+    <h2>Rust at a Glance</h2>
+    <table>
+      <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Current edition</td><td><strong>Rust 2024</strong> (stable in Rust 1.85, February 2025)</td></tr>
+        <tr><td>First stable release</td><td><strong>Rust 1.0</strong> (May 15, 2015)</td></tr>
+        <tr><td>Creator</td><td>Graydon Hoare (personal project ~2006, Mozilla sponsorship 2009)</td></tr>
+        <tr><td>Current steward</td><td>Rust Foundation (founded February 2021; AWS, Google, Huawei, Microsoft, Mozilla)</td></tr>
+        <tr><td>Paradigms</td><td>Multi: imperative, functional, generic, concurrent; no classical OOP inheritance</td></tr>
+        <tr><td>Type system</td><td>Static, strong, affine (ownership), nominal + structural (traits), monomorphized generics</td></tr>
+        <tr><td>Memory model</td><td><strong>Ownership + borrowing + lifetimes</strong>. No GC. RAII for cleanup.</td></tr>
+        <tr><td>Compilation</td><td>Ahead-of-time via LLVM to native machine code. Also: cranelift (debug), GCC backend (experimental)</td></tr>
+        <tr><td>Concurrency</td><td>Threads + async/await. <code>Send</code>/<code>Sync</code> enforce safety at compile time. No data races in safe code.</td></tr>
+        <tr><td>Release cadence</td><td>6-week release train (stable, beta, nightly). Editions every 3 years.</td></tr>
+        <tr><td>Package manager</td><td><strong>Cargo</strong> + <strong>crates.io</strong> (~150K crates)</td></tr>
+        <tr><td>Mascot</td><td>Ferris the crab</td></tr>
+        <tr><td>Key strength</td><td>Memory safety + thread safety + performance, all at compile time</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Timeline</h2>
+    <div class="timeline">
+      <div class="event"><span class="year">~2006</span> <strong>Graydon Hoare starts Rust</strong> as a personal project. A fungus &ldquo;over-engineered for survival.&rdquo;</div>
+      <div class="event"><span class="year">2009</span> <strong>Mozilla sponsors</strong> Rust development.</div>
+      <div class="event"><span class="year">2010</span> First public release (Rust 0.1). Servo browser engine work begins.</div>
+      <div class="event"><span class="year">May 2015</span> <strong>Rust 1.0</strong> &mdash; stability guarantee. 6-week release train begins.</div>
+      <div class="event"><span class="year">Nov 2017</span> <strong>Firefox 57 Quantum</strong> ships with Servo&rsquo;s <strong>Stylo</strong> CSS engine (Rust in production in a browser).</div>
+      <div class="event"><span class="year">Dec 2018</span> <strong>Rust 2018 Edition</strong> &mdash; NLL, module reform, async foundations.</div>
+      <div class="event"><span class="year">Nov 2019</span> <strong>Async/await stabilized</strong> (Rust 1.39).</div>
+      <div class="event"><span class="year">Aug 2020</span> <strong>Mozilla layoffs</strong> &mdash; much of the Rust team is let go. Community concern about governance.</div>
+      <div class="event"><span class="year">Feb 2021</span> <strong>Rust Foundation</strong> formed (AWS, Google, Huawei, Microsoft, Mozilla).</div>
+      <div class="event"><span class="year">Oct 2021</span> <strong>Rust 2021 Edition</strong> &mdash; disjoint capture, <code>IntoIterator</code> for arrays.</div>
+      <div class="event"><span class="year">Dec 2022</span> <strong>Linux kernel 6.1</strong> ships with Rust support (first kernel code in a language other than C and assembly).</div>
+      <div class="event"><span class="year">Nov 2022</span> <strong>NSA guidance</strong> recommends Rust as a memory-safe alternative to C/C++.</div>
+      <div class="event"><span class="year">Feb 2024</span> <strong>White House ONCD report</strong> names Rust explicitly as a memory-safe language.</div>
+      <div class="event"><span class="year">Feb 2025</span> <strong>Rust 2024 Edition</strong> (Rust 1.85).</div>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CPP</td><td>C++</td><td>Rust&rsquo;s primary competitor and predecessor. RAII + smart pointers by convention (C++) vs ownership + borrow checker by enforcement (Rust).</td></tr>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td>Rust targets C&rsquo;s niche: kernels, drivers, firmware. <code>extern "C"</code> FFI. Linux kernel adoption.</td></tr>
+        <tr><td>JTS</td><td>JavaScript &amp; TypeScript</td><td>Deno (Rust), SWC (Rust), Turbopack (Rust), Biome (Rust), Rolldown (Rust) &mdash; the JS build-tool rewrite wave.</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>Java has GC; Rust has ownership. Both are memory-safe; different trade-offs. Rust in Android AOSP.</td></tr>
+        <tr><td>JGC</td><td>JVM GC</td><td>Rust eliminates the need for GC entirely. The philosophical opposite of JGC&rsquo;s tuning-triangle approach.</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>PyO3 and maturin let you write Python extensions in Rust instead of C. Polars (Rust) competes with Pandas.</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>Memory safety bugs are the #1 root cause class in C/C++ codebases. Rust eliminates the category.</td></tr>
+        <tr><td>SYS</td><td>Systems Administration</td><td>ripgrep, fd, bat, starship, nushell, bottom &mdash; the modern CLI toolkit is Rust.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="ownership.html">Ownership &amp; Borrowing</a></li>
+        <li><a href="traits.html">Traits, Generics, Error Handling</a></li>
+        <li><a href="async.html">Async &amp; Concurrency</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="unsafe.html">Unsafe &amp; FFI</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rust &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

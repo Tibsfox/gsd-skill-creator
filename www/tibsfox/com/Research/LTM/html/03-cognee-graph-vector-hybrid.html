@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognee: Graph + Vector Hybrid Memory — LTM Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #221f3a;
+            --accent: #FFB300;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #9575CD;
+            --border: #2f2a4a;
+            --primary: #4527A0;
+            --mem: #FFD54F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; padding: 2rem; max-width: 900px; margin: 0 auto; }
+        h1 { color: var(--mem); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--mem); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--mem); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--mem); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--mem); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(149,117,205,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        LTM — Long-Term Memory Systems for AI Agents<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to LTM Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="cognee-graph-vector-hybrid-memory">Cognee: Graph + Vector
+    Hybrid Memory</h1>
+    <p><strong>LTM Research Module 03</strong> <strong>Date:</strong>
+    2026-04-08 <strong>Branch:</strong> artemis-ii
+    <strong>Audience:</strong> gsd-skill-creator maintainers evaluating
+    a graph layer for long-term memory</p>
+    <hr />
+    <h2 id="executive-summary">Executive Summary</h2>
+    <p>Cognee is an open-source “AI memory engine” built by topoteretes
+    that occupies a specific and increasingly contested spot in the LTM
+    landscape: the hybrid of a knowledge graph and a vector index,
+    unified under a single pipeline API and a single query surface
+    (<code>cognee.search()</code>). Unlike Mem0 (which treats memory as
+    a set of tagged fact strings in a vector store) and unlike Graphiti
+    (which is graph-first over Neo4j and emphasizes temporal edges),
+    Cognee starts from the premise that neither graph structure nor
+    vector similarity is sufficient on its own for multi-hop reasoning,
+    and that the <em>interface between them</em> is where most of the
+    engineering value lives.</p>
+    <p>The claim is testable and Cognee publishes the test. On a
+    24-question subset of HotPotQA, run 45 times each on Modal Cloud,
+    Cognee’s optimized Graph Completion with Chain-of-Thought
+    configuration scored 0.93 human-like correctness, 0.85 DeepEval
+    correctness, 0.84 F1, and 0.69 exact match, beating Mem0, LightRAG,
+    and Graphiti in the same harness. The reported improvements from
+    their own previous configuration are dramatic: +25% human
+    correctness, +49% DeepEval correctness, +314% F1, and +1618% exact
+    match. Those last two deltas aren’t typos, they’re artifacts of a
+    system that previously almost never produced exact-match strings and
+    now, with Chain-of-Thought over graph triples, does.</p>
+    <p>For gsd-skill-creator, the relevance is concrete. Our current LTM
+    architecture has <strong>no graph component</strong>. We have
+    embeddings, we have a vector store, we have agents that retrieve by
+    similarity and feed context into an LLM. This works for single-fact
+    recall. It does not work for questions that require traversing
+    relationships — “which skills have I authored that depend on the
+    trust-relationship provider” is a query that similarity search will
+    approximate badly and graph traversal will answer exactly. Cognee is
+    not the only path to adding graph structure, but it is the most
+    mature open-source project in this space that has published a
+    reproducible benchmark, and it deserves a close read before we
+    commit to any design.</p>
+    <p><strong>Primary recommendation:</strong> Read this module
+    end-to-end. Then treat Cognee as a reference architecture to study,
+    not necessarily an SDK to adopt wholesale. Its Python-only SDK is a
+    hard blocker for a TypeScript/Rust/GLSL codebase, and its pipeline
+    complexity is real. But its Extract-Cognify-Load (ECL) framework,
+    its nine-retriever taxonomy, and especially its Graph Completion
+    Chain-of-Thought retriever give us a vocabulary and a set of
+    patterns we can reimplement in our own stack. The graph is the
+    important part. The Python wrapper is not.</p>
+    <hr />
+    <h2 id="architecture-ontologies-knowledge-graphs-and-vector-dbs">1.
+    Architecture: Ontologies, Knowledge Graphs, and Vector DBs</h2>
+    <p>Cognee describes itself as a “living knowledge graph” but this
+    framing is slightly misleading. Internally the system is three
+    stores working in concert, not one:</p>
+    <ol type="1">
+    <li><p><strong>A graph store.</strong> This holds entities (called
+    DataPoints), their properties, and the typed edges between them.
+    Supported backends include Neo4j, FalkorDB, Kuzu, NetworkX
+    (in-memory), and PostgreSQL with graph extensions. The local-first
+    default stack uses <strong>Kuzu</strong>, an embedded property graph
+    database written in C++ that runs in-process with no server —
+    conceptually similar to DuckDB but for graphs.</p></li>
+    <li><p><strong>A vector store.</strong> This holds embeddings of
+    text chunks, summaries, and DataPoint descriptions. Cognee supports
+    roughly 29 backends at last count, including Qdrant, LanceDB,
+    Milvus, Weaviate, Pinecone, Redis, and pgvector. The local-first
+    default is <strong>LanceDB</strong>, again embedded and
+    file-backed.</p></li>
+    <li><p><strong>A relational/metadata store.</strong> SQLite by
+    default, PostgreSQL in production. This holds pipeline state,
+    document provenance, user and tenant isolation, permissions, and the
+    task execution log.</p></li>
+    </ol>
+    <p>These three stores are not independent silos. The pipeline
+    guarantees that every DataPoint written to the graph has at least
+    one embedded description in the vector store, and that the
+    relational store carries the mapping between them. The query layer
+    exploits this: a vector search returns chunk IDs, those IDs resolve
+    to graph nodes, and graph traversal expands context from there. This
+    is the “hybrid” in hybrid retrieval — it is not “run both searches
+    and union the results,” it is “use the vector search to locate
+    anchors in the graph, then let graph structure do the
+    reasoning.”</p>
+    <p>Ontologies are the fourth conceptual layer, but Cognee’s
+    treatment of them is lighter than the marketing suggests. The system
+    supports <strong>RDF-based ontologies</strong> and can ground
+    extracted entities against a supplied schema, but the documentation
+    is thin and most users rely on <strong>auto-generated
+    ontologies</strong> derived from Pydantic models during extraction.
+    In practice, this means you write a Pydantic <code>BaseModel</code>
+    describing the entity types you expect — say, <code>Skill</code>,
+    <code>Agent</code>, <code>Dependency</code>, <code>Commit</code> —
+    and Cognee’s LLM-driven extraction step tries to fit chunks of input
+    text into instances of those models. The Pydantic schema <em>is</em>
+    the ontology for most deployments. True RDF-grounded ontologies
+    exist but are used in a minority of production setups.</p>
+    <p>This matters for us. If we were to adopt Cognee-style patterns in
+    gsd-skill-creator, the natural ontology is already sitting in our
+    source tree: <code>Skill</code>, <code>Agent</code>,
+    <code>Chipset</code>, <code>Team</code>, <code>Phase</code>,
+    <code>Task</code>, <code>Wave</code>, <code>Commit</code>. These are
+    already TypeScript interfaces. Translating them to Pydantic (or to
+    whatever schema language our re-implementation uses) is
+    mechanical.</p>
+    <hr />
+    <h2 id="the-ecl-pipeline-extract-cognify-load">2. The ECL Pipeline:
+    Extract, Cognify, Load</h2>
+    <p>The arXiv paper <em>Optimizing the Interface Between Knowledge
+    Graphs and LLMs for Complex Reasoning</em> (arXiv:2505.24478)
+    formalizes Cognee’s pipeline as <strong>ECL — Extract, Cognify,
+    Load</strong>. This is the most important piece of architectural
+    vocabulary Cognee introduces and it is worth learning even if we
+    never touch their code.</p>
+    <h3 id="extract">Extract</h3>
+    <p>Heterogeneous input in, normalized content out. Cognee ingests
+    38+ data types including PDFs, Word docs, Excel, Markdown, HTML,
+    audio (transcribed), images (captioned by vision models), and full
+    database connections (Databricks, BigQuery, Snowflake, PostgreSQL).
+    The extract phase handles format detection, text extraction, OCR
+    where needed, and chunking. Chunks are typically paragraph-sized and
+    are the atomic unit that flows into the next stage.</p>
+    <h3 id="cognify">Cognify</h3>
+    <p>The meaningful work happens here. Cognify is Cognee’s term for
+    the combined operation of entity extraction, relation extraction,
+    attribute extraction, and graph construction. It is driven by LLM
+    calls templated through two key prompts:</p>
+    <ul>
+    <li><strong><code>graph_prompt</code></strong> — instructs the LLM
+    to read a chunk and emit a structured list of entities, relations,
+    and attributes. The prompt can be single-step (“return all entities
+    and their relations”) or incremental (“first identify entities, then
+    for each entity identify its attributes, then identify relations
+    between entities”). The incremental version produces better graphs
+    but costs more tokens.</li>
+    <li><strong><code>qa_system_prompt</code></strong> — instructs the
+    LLM on tone, verbosity, and format when generating final answers at
+    retrieval time. This is separate from extraction and is tuned
+    independently.</li>
+    </ul>
+    <p>The output of Cognify is a set of DataPoints ready to be written
+    to the graph, plus the chunk-level embeddings ready to be written to
+    the vector store.</p>
+    <h3 id="load">Load</h3>
+    <p>The write phase. DataPoints go to the graph backend (Kuzu, Neo4j,
+    whatever), embeddings go to the vector backend (LanceDB, Qdrant,
+    whatever), and provenance/metadata goes to the relational backend
+    (SQLite, Postgres). Load is transactional in the sense that a single
+    Cognify run either fully commits to all three stores or rolls back —
+    though the exact transaction semantics depend on the chosen
+    backends, and truly atomic cross-store writes are not
+    guaranteed.</p>
+    <p><strong>ECL as a mental model</strong> is strictly more powerful
+    than RAG’s “chunk + embed + store” because it adds the structured
+    extraction step. And it is strictly less rigid than traditional ETL
+    because Cognify is LLM-driven and can handle arbitrary input. The
+    cost is latency and token spend: cognifying a 10,000-word document
+    might make dozens of LLM calls and take 30-60 seconds. This is
+    Cognee’s biggest practical weakness at scale.</p>
+    <hr />
+    <h2 id="datapoints-and-tasks-the-programming-model">3. DataPoints
+    and Tasks: The Programming Model</h2>
+    <p>Cognee’s programming model is built on two primitives.</p>
+    <p><strong>DataPoints</strong> are the nodes in the knowledge graph.
+    Every DataPoint has a UUID, a type (from the Pydantic ontology), a
+    set of properties, a human-readable description (which gets
+    embedded), and a set of relations to other DataPoints. A
+    <code>Skill</code> DataPoint might have properties
+    <code>{name, version, author, trigger_phrase}</code> and relations
+    <code>{depends_on → Skill, created_by → Agent, uses → Chipset}</code>.
+    DataPoints are the unit of memory.</p>
+    <p><strong>Tasks</strong> are the nodes in the pipeline graph. A
+    task is a function that consumes one kind of input and produces
+    another — chunk a document, extract entities from a chunk, resolve
+    entity coreferences, write DataPoints to the store. Tasks compose
+    into <strong>pipelines</strong>, and pipelines are how
+    <code>cognee.cognify()</code> actually works under the hood. The
+    default pipeline is opinionated and works out of the box, but users
+    can write custom tasks to handle domain-specific extraction, which
+    is how Cognee adapts to weird data sources.</p>
+    <p>The two-primitive model is clean and maps well to what we already
+    do in gsd-skill-creator. Our equivalent of a Task is a skill action
+    or an agent phase. Our equivalent of a DataPoint is a file in
+    <code>.planning/</code> or a trust-relationship record. The pattern
+    is there. What Cognee adds is (a) the explicit graph of DataPoints
+    as first-class infrastructure, and (b) a declarative pipeline DSL
+    for composing extraction steps.</p>
+    <hr />
+    <h2 id="the-nine-retrievers">4. The Nine Retrievers</h2>
+    <p>This is the most practically useful part of Cognee’s architecture
+    and the part most worth stealing. Cognee defines nine named
+    retriever classes, all inheriting from <code>BaseRetriever</code>
+    with two methods: <code>get_context(query)</code> returns raw
+    evidence, and <code>get_completion(query)</code> returns a
+    natural-language answer. <code>cognee.search()</code> picks the
+    right retriever based on a <code>SearchType</code> enum
+    argument.</p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Retriever</th>
+    <th>What it does</th>
+    <th>Best for</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>SummariesRetriever</strong></td>
+    <td>Vector search over pre-written summaries</td>
+    <td>Fast overview queries</td>
+    </tr>
+    <tr>
+    <td><strong>ChunksRetriever</strong></td>
+    <td>Vector search returning raw text fragments</td>
+    <td>Direct citation lookups</td>
+    </tr>
+    <tr>
+    <td><strong>CompletionRetriever</strong></td>
+    <td>Standard RAG: retrieve chunks, stuff into prompt, generate</td>
+    <td>Baseline QA</td>
+    </tr>
+    <tr>
+    <td><strong>GraphCompletionRetriever</strong></td>
+    <td>Vector search finds anchor nodes, then expand graph triples,
+    serialize as text, generate</td>
+    <td>Single-hop graph QA</td>
+    </tr>
+    <tr>
+    <td><strong>GraphSummaryCompletionRetriever</strong></td>
+    <td>Like GraphCompletion but summarizes the graph context before
+    passing to the LLM</td>
+    <td>Large subgraph queries</td>
+    </tr>
+    <tr>
+    <td><strong>GraphCompletionContextExtensionRetriever</strong></td>
+    <td>Iteratively expands graph context across multiple retrieval
+    rounds</td>
+    <td>Multi-hop requiring breadth</td>
+    </tr>
+    <tr>
+    <td><strong>GraphCompletionCotRetriever</strong></td>
+    <td>The star of the show. Chain-of-thought over graph context:
+    generate initial answer, reflect, ask a follow-up question,
+    re-retrieve, refine, repeat</td>
+    <td>Complex multi-hop reasoning</td>
+    </tr>
+    <tr>
+    <td><strong>CypherSearchRetriever</strong></td>
+    <td>Run raw Cypher against Neo4j or compatible graph store</td>
+    <td>Power users, known queries</td>
+    </tr>
+    <tr>
+    <td><strong>NaturalLanguageRetriever</strong></td>
+    <td>LLM translates natural language to Cypher, runs it, retries on
+    failure</td>
+    <td>Ad-hoc exploration</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The taxonomy is the insight here. Most RAG systems give you one
+    retriever and call it a day. Cognee’s observation is that different
+    query shapes require different retrieval strategies, and dispatching
+    between them is itself a research problem. The
+    <code>SearchType</code> enum is the surface where that dispatch
+    happens.</p>
+    <p>The <strong>GraphCompletionCotRetriever</strong> is worth special
+    attention because it is the one that produced those eye-popping
+    benchmark numbers. It works like this:</p>
+    <ol type="1">
+    <li>Vector-search the user’s query against DataPoint descriptions to
+    find seed nodes.</li>
+    <li>Expand one or two hops of graph triples around those seeds.</li>
+    <li>Serialize the triples as structured text (“Alice → authored →
+    Skill A; Skill A → depends_on → Skill B; Skill B → created_by →
+    Bob”).</li>
+    <li>Pass the serialized graph plus the original question to the LLM
+    and ask for an initial answer.</li>
+    <li>Prompt the LLM to reflect on whether the answer is complete and,
+    if not, to propose a follow-up question that would fill the
+    gap.</li>
+    <li>Use the follow-up question as a new seed for another
+    vector+graph retrieval.</li>
+    <li>Append the new context and repeat steps 4-6 for N rounds
+    (default ~3).</li>
+    <li>Return the final refined answer plus the full reasoning
+    trace.</li>
+    </ol>
+    <p>The magic isn’t any single step — steps 1-4 are just GraphRAG
+    with a triple serialization format. The magic is step 5, the
+    reflection loop. Cognee’s benchmark data suggests this is where the
+    +1618% exact-match delta comes from: on multi-hop HotPotQA
+    questions, a single pass finds the first-hop evidence but misses the
+    second-hop bridge. The reflection loop <em>notices</em> it is
+    missing the second hop and goes back to get it.</p>
+    <p>This pattern is reimplementable in any language. It does not
+    require Cognee’s Python SDK. It does require a graph store,
+    embeddings, and an LLM with good instruction-following. We have all
+    three available.</p>
+    <hr />
+    <h2 id="ontologies-user-defined-or-auto-generated">5. Ontologies:
+    User-Defined or Auto-Generated?</h2>
+    <p>Both, with a strong lean toward auto-generated in practice.</p>
+    <p>The supported modes: - <strong>Pydantic-model-as-ontology
+    (default).</strong> User supplies Pydantic <code>BaseModel</code>
+    classes. Cognee’s extraction prompts are templated with the model
+    schema and the LLM is instructed to populate instances. This is how
+    90% of Cognee users define their ontology. - <strong>RDF/OWL
+    ontologies.</strong> User supplies an RDF file. Cognee grounds
+    extracted entities against it, preferring exact class matches. This
+    mode exists, is documented thinly, and is used mostly in enterprise
+    deployments where a domain ontology already exists. - <strong>Fully
+    unstructured.</strong> No ontology at all. Cognee’s default
+    graph_prompt extracts “whatever entities and relations make sense”
+    and the schema emerges from the data. This produces messy graphs but
+    requires zero upfront work.</p>
+    <p>Our natural fit is the Pydantic model approach, adapted to
+    TypeScript. We already have interfaces for all the domain objects we
+    care about. A small zod/JSON Schema → extraction-prompt translator
+    would let us reuse those definitions as the ontology without a
+    second source of truth.</p>
+    <hr />
+    <h2 id="contradictions-updates-and-temporal-reasoning">6.
+    Contradictions, Updates, and Temporal Reasoning</h2>
+    <p>This is where Cognee’s story is weakest and where we need to be
+    most careful if we adopt its patterns.</p>
+    <p><strong>Contradictions.</strong> Cognee’s default behavior is
+    append-only. If you ingest “Alice lives in Seattle” and later ingest
+    “Alice lives in Portland,” you get two
+    <code>Alice-livesIn-City</code> edges in the graph and the retriever
+    may surface either or both. There is no built-in conflict
+    resolution. The documentation suggests users handle this via custom
+    tasks that deduplicate or supersede, but there is no first-class
+    “this edge replaces that edge” primitive. Compare this to Graphiti,
+    which makes temporal supersession a first-class concept with
+    <code>valid_from</code> and <code>invalidated_at</code> timestamps
+    on every edge.</p>
+    <p><strong>Updates.</strong> <code>cognee.cognify()</code> re-run on
+    the same document does not cleanly update the existing graph. The
+    default behavior is to append new DataPoints, producing duplicates.
+    Users who need true updates typically write a custom task that diffs
+    extracted entities against existing ones and performs merges — this
+    is left as an exercise.</p>
+    <p><strong>Temporal reasoning.</strong> Cognee’s schema has no
+    native time dimension. DataPoints can carry <code>created_at</code>
+    properties if the ontology defines them, and relations can carry
+    timestamps, but the retrievers do not reason about time-ordering by
+    default. The Hindsight vs Cognee comparison published on
+    vectorize.io flags this explicitly as a limitation: “offers no
+    temporal reasoning capabilities for time-aware queries.” Cognee’s
+    own research roadmap mentions a DeepEval partnership for
+    memory-specific evaluation including temporal reasoning, which reads
+    as an acknowledgment that the capability is not yet there.</p>
+    <p>For our use case, this matters. gsd-skill-creator tracks skill
+    authorship, commits, phase transitions, wave boundaries — time is
+    everywhere. If we adopt Cognee-style graph memory without a temporal
+    model, we will hit the same wall Cognee has. The fix is not hard
+    conceptually — put <code>valid_from</code> and <code>valid_to</code>
+    on every edge, and have the retriever filter by query time — but it
+    is not free, and it is not in Cognee today.</p>
+    <hr />
+    <h2 id="llm-integration">7. LLM Integration</h2>
+    <p>Cognee integrates with LLMs via <strong>LiteLLM</strong>, which
+    gives it access to effectively every major provider and most local
+    runtimes through a single interface:</p>
+    <ul>
+    <li><strong>OpenAI</strong> (GPT-4o, GPT-4 family, default for most
+    users).</li>
+    <li><strong>Anthropic</strong> (Claude family, well supported).</li>
+    <li><strong>Local models</strong> via Ollama, LM Studio, vLLM,
+    llama.cpp — anything LiteLLM speaks.</li>
+    <li><strong>Other hosted providers</strong> including Gemini,
+    Anyscale, Groq, Together, Mistral.</li>
+    </ul>
+    <p>Configuration is environment-variable driven: set
+    <code>LLM_PROVIDER</code>, <code>LLM_MODEL</code>,
+    <code>LLM_API_KEY</code>, and the system picks up the change.
+    Extraction and generation can use different models, which is a
+    useful cost optimization — extract with a cheap model, generate
+    final answers with a smart one.</p>
+    <p>Embeddings are configured separately via
+    <code>EMBEDDING_PROVIDER</code> and <code>EMBEDDING_MODEL</code>.
+    Cognee supports OpenAI embeddings, local sentence-transformers, and
+    anything else LiteLLM can dispatch to. Our existing default
+    (<code>all-MiniLM-L6-v2</code>) would drop in cleanly.</p>
+    <hr />
+    <h2 id="the-cognee.search-api">8. The <code>cognee.search()</code>
+    API</h2>
+    <p>The user-facing query surface is deceptively simple:</p>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> <span class="cf">await</span> cognee.search(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    query_text<span class="op">=</span><span class="st">&quot;What skills depend on trust-relationship-provider?&quot;</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    query_type<span class="op">=</span>SearchType.GRAPH_COMPLETION_COT,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    top_k<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+    <p>The <code>SearchType</code> enum is the dispatch mechanism to the
+    nine retrievers. Values include <code>SUMMARIES</code>,
+    <code>CHUNKS</code>, <code>COMPLETION</code>,
+    <code>GRAPH_COMPLETION</code>,
+    <code>GRAPH_SUMMARY_COMPLETION</code>,
+    <code>GRAPH_COMPLETION_CONTEXT_EXTENSION</code>,
+    <code>GRAPH_COMPLETION_COT</code>, <code>CYPHER</code>, and
+    <code>NATURAL_LANGUAGE</code>. The API handles permission filtering
+    (tenant isolation is enforced at the retrieval layer), result
+    formatting, and error recovery.</p>
+    <p>Under the hood, <code>search()</code> does three things: 1.
+    Instantiates the right retriever class based on
+    <code>query_type</code>. 2. Calls
+    <code>retriever.get_context(query)</code> to gather evidence. 3.
+    Calls <code>retriever.get_completion(query)</code> to generate the
+    final answer, passing the context forward.</p>
+    <p>This two-method split is worth noting. Separating
+    context-gathering from answer-generation means you can cache
+    context, audit what was retrieved, or feed the context into a
+    different model for answer generation. It also means the retriever
+    can return “no answer, here’s what I found” without forcing a
+    hallucinated response.</p>
+    <hr />
+    <h2 id="scaling-what-happens-at-100k-and-1m-memories">9. Scaling:
+    What Happens at 100K and 1M Memories?</h2>
+    <p>Cognee’s public benchmarks are on small datasets. The HotPotQA
+    evaluation uses 24 questions. The primary use cases cited in their
+    materials are “institutional knowledge extraction” for mid-sized
+    document corpuses — think a company wiki, a research archive, a
+    product documentation set. The Medium article from Reveriano
+    explicitly notes: “further evaluation is necessary to assess its
+    performance and scalability when handling large-scale
+    databases.”</p>
+    <p>What we can infer from the architecture:</p>
+    <p><strong>At 100K DataPoints</strong>, the bottleneck is likely the
+    graph backend. Kuzu (the local default) is fast for single-hop
+    queries but multi-hop traversal across 100K nodes depends heavily on
+    edge density. Neo4j with proper indexes handles this comfortably.
+    LanceDB handles 100K embeddings without breathing hard. SQLite for
+    metadata is fine. The user-visible concern at this scale is probably
+    <strong>Cognify latency</strong> — ingesting 100K DataPoints’ worth
+    of source material is many hours of LLM calls and many dollars of
+    token spend.</p>
+    <p><strong>At 1M DataPoints</strong>, Kuzu may start to strain
+    depending on query patterns. PostgreSQL with graph extensions, or
+    FalkorDB, become more attractive. Neo4j Enterprise handles this
+    routinely. The vector store should migrate from LanceDB to Qdrant or
+    Milvus for better concurrency. SQLite should migrate to Postgres.
+    Cognify latency at this scale is impractical for single-machine
+    ingestion — users would need to parallelize across workers.</p>
+    <p><strong>Beyond 1M</strong>, you are off the end of Cognee’s
+    tested envelope. Nobody has published benchmarks at this scale. The
+    architecture does not preclude scaling but the out-of-the-box
+    defaults do not support it.</p>
+    <p>For gsd-skill-creator, our realistic memory footprint is probably
+    in the 10K-100K range per domain (skills, agents, missions,
+    commits). This is squarely within Cognee’s comfort zone and scaling
+    is not our first concern. If we ever wanted to store every commit
+    across every branch as a memory, that’s a million-plus and we’d need
+    a different strategy.</p>
+    <hr />
+    <h2 id="criticisms-and-known-limitations">10. Criticisms and Known
+    Limitations</h2>
+    <p>The honest picture of Cognee’s weaknesses:</p>
+    <ol type="1">
+    <li><p><strong>Python-only SDK.</strong> This is the biggest blocker
+    for us. gsd-skill-creator is TypeScript + Rust + GLSL. We cannot
+    call Cognee in-process. We would need a sidecar Python service with
+    an HTTP or gRPC interface, which adds deployment complexity and a
+    runtime dependency we do not currently have. This alone probably
+    rules out adopting Cognee as our SDK.</p></li>
+    <li><p><strong>Pipeline complexity.</strong> Simple ingestion is “6
+    lines of code.” Custom extraction for non-trivial domains requires
+    writing Pydantic models, custom tasks, and sometimes custom prompts.
+    The docs lag the API, so deep customization often means reading
+    source code.</p></li>
+    <li><p><strong>No native temporal reasoning.</strong> Flagged
+    already. This is a real gap for memory systems that need to reason
+    about change over time.</p></li>
+    <li><p><strong>Append-only by default.</strong> Updates and
+    contradictions require custom handling.</p></li>
+    <li><p><strong>Cognify latency and cost.</strong> Every ingested
+    document triggers multiple LLM calls. For a large corpus or frequent
+    updates, this adds up. Cognee mitigates with caching and incremental
+    extraction but the fundamental cost is real.</p></li>
+    <li><p><strong>Documentation lag.</strong> The project moves fast,
+    the docs move slower, and there are capabilities in the API that
+    aren’t documented yet. Users end up reading test files and source
+    code.</p></li>
+    <li><p><strong>Cloud offering still young.</strong> Cognee Cloud is
+    new. Most production deployments are self-hosted, which means you
+    own the ops burden for three databases (graph + vector +
+    relational).</p></li>
+    <li><p><strong>No public benchmark at scale.</strong> Strong numbers
+    on 24 HotPotQA questions is informative but not a replacement for
+    results on larger corpora. The forthcoming DeepEval memory-specific
+    benchmark will help when it lands.</p></li>
+    <li><p><strong>Ontology support is lighter than marketed.</strong>
+    RDF grounding exists but most users fall back to
+    Pydantic-as-ontology. If you want formal ontology alignment, you
+    will be writing glue code.</p></li>
+    <li><p><strong>Multi-database ops complexity.</strong> SQLite +
+    LanceDB + Kuzu locally is fine. Postgres + Qdrant + Neo4j in
+    production is three systems to monitor, back up, and upgrade
+    independently.</p></li>
+    </ol>
+    <hr />
+    <h2 id="what-this-means-for-gsd-skill-creator">11. What This Means
+    for gsd-skill-creator</h2>
+    <p>Pulling the threads together:</p>
+    <p><strong>The graph idea is right.</strong> Hybrid graph + vector
+    memory beats vector-only for multi-hop queries. Cognee’s benchmark
+    is the clearest evidence we have, and the pattern (vector search
+    finds anchors → graph traversal finds relations → serialized triples
+    feed the LLM → reflection loop fills gaps) is sound. Our current
+    vector-only LTM will hit a ceiling on queries that require
+    traversing our own domain relationships, and we will notice this as
+    “the system seems forgetful about how things connect.” Adding a
+    graph layer is the fix.</p>
+    <p><strong>Cognee-the-SDK is probably not the right adoption
+    path.</strong> Python-only rules it out for in-process use in our
+    TypeScript/Rust codebase. A Python sidecar is possible but adds
+    runtime complexity we have been deliberately avoiding.</p>
+    <p><strong>Cognee-the-reference-architecture is absolutely the right
+    study material.</strong> The ECL pipeline, the DataPoints + Tasks
+    programming model, the nine-retriever taxonomy, and especially the
+    Graph Completion Chain-of-Thought retriever are patterns we can
+    reimplement in our own stack. The vocabulary alone is worth
+    stealing.</p>
+    <p><strong>Our probable path:</strong></p>
+    <ol type="1">
+    <li><p><strong>Add a graph store</strong> to the LTM architecture.
+    Candidates: Kuzu (embeddable, fast, matches Cognee’s default), Neo4j
+    (heaviest, most powerful), in-memory NetworkX-style (simplest,
+    rebuilds from source each session). For a first implementation,
+    embeddable-and-in-process is the right tradeoff.</p></li>
+    <li><p><strong>Define the ontology in TypeScript.</strong> Our
+    domain objects (Skill, Agent, Chipset, Mission, Phase, Wave, Commit,
+    Trust-Relationship) become the node types. Our existing
+    relationships become the edge types.</p></li>
+    <li><p><strong>Build a Cognify-equivalent extraction
+    pipeline.</strong> For now, this can be specific to our domain — we
+    do not need to handle arbitrary PDFs. We need to extract DataPoints
+    from our own source tree, our <code>.planning/</code> directory, our
+    commit history, our skill definitions. This is a more constrained
+    problem than Cognee’s.</p></li>
+    <li><p><strong>Implement a GraphCompletionCot-style
+    retriever.</strong> Vector search for anchors, graph expansion for
+    context, triple serialization, LLM generation, reflection loop. This
+    is maybe 400 lines of TypeScript on top of our existing vector store
+    and a graph library.</p></li>
+    <li><p><strong>Add temporal awareness from day one.</strong> Every
+    edge gets <code>valid_from</code> and <code>valid_to</code>. The
+    retriever filters by query time. This is the one place we explicitly
+    improve on Cognee rather than copying it.</p></li>
+    <li><p><strong>Benchmark against our own corpus.</strong> Cognee’s
+    HotPotQA numbers are informative but not directly applicable. We
+    should build a small eval set of multi-hop questions over our own
+    domain (“which skills did Claude-Opus-4.6 author that depend on the
+    trust-relationship chipset and were introduced after v1.40?”) and
+    measure vector-only vs graph+vector vs graph+vector+CoT.</p></li>
+    </ol>
+    <p>The goal is not to become Cognee. The goal is to learn what
+    Cognee learned, skip the mistakes it made (Python-only, no temporal
+    model, append-only updates), and end up with a memory layer that
+    fits our stack and our domain. This module is the first half of that
+    work. The second half is the design doc that follows.</p>
+    <hr />
+    <h2 id="sources">Sources</h2>
+    <ul>
+    <li><a href="https://www.cognee.ai/">Cognee homepage</a> — product
+    overview, ECL pipeline description, deployment options</li>
+    <li><a
+    href="https://www.cognee.ai/research-and-evaluation-results">Cognee
+    research and evaluation results</a> — HotPotQA benchmark, comparison
+    with Mem0/Graphiti/LightRAG, optimization deltas</li>
+    <li><a href="https://github.com/topoteretes/cognee">Cognee GitHub
+    repository</a> — source, supported backends, example code,
+    architecture notes</li>
+    <li><a
+    href="https://www.cognee.ai/blog/deep-dives/the-art-of-intelligent-retrieval-unlocking-the-power-of-search">Cognee:
+    The art of intelligent retrieval</a> — nine-retriever taxonomy,
+    BaseRetriever interface, SearchType dispatch</li>
+    <li><a
+    href="https://www.cognee.ai/blog/deep-dives/ai-memory-evals-0825">Cognee
+    AI memory evaluations</a> — full benchmark methodology, 45 runs,
+    DeepEval integration</li>
+    <li><a href="https://arxiv.org/html/2505.24478v1">arXiv:2505.24478 —
+    Optimizing the Interface Between Knowledge Graphs and LLMs for
+    Complex Reasoning</a> — ECL framework formalization, prompt
+    templates, evaluation harness</li>
+    <li><a
+    href="https://medium.com/@reveriano.francisco/knowledge-graphs-vs-agentic-rag-part-1-2480895da8ec">Knowledge
+    Graphs with Cognee (Medium, Francisco Reveriano)</a> — practical
+    usage, RDF ontologies, scaling observations</li>
+    <li><a
+    href="https://vectorize.io/articles/hindsight-vs-cognee">Hindsight
+    vs Cognee: AI Agent Memory Comparison (vectorize.io)</a> —
+    local-first stack (SQLite/LanceDB/Kuzu), limitations, Python-only
+    blocker, temporal reasoning gap</li>
+    <li><a
+    href="https://aclanthology.org/2024.findings-acl.11.pdf">Graph
+    Chain-of-Thought (ACL 2024 Findings)</a> — academic foundation for
+    graph-CoT reasoning patterns</li>
+    <li><a href="https://arxiv.org/pdf/2511.01633">Scaling Graph
+    Chain-of-Thought Reasoning (arXiv:2511.01633)</a> — multi-agent
+    extensions of the graph-CoT pattern</li>
+    </ul>
+    <p><strong>Confidence:</strong> HIGH for architecture, retriever
+    taxonomy, benchmark numbers, ECL framework (verified across multiple
+    official sources). MEDIUM for scaling claims and internal pipeline
+    details (inferred from docs and third-party coverage, not
+    stress-tested). LOW for ontology depth and RDF grounding specifics
+    (docs are thin, most users use Pydantic fallback).</p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to LTM Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/LTM/">tibsfox.com/Research/LTM</a>
+    </div>
+</body>
+</html>

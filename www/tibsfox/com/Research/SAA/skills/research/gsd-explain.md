@@ -17,7 +17,7 @@ Activate when the user:
 
 ## What This Skill Does
 
-1. **Reads the workflow file** from `/home/foxy/.claude/get-shit-done/workflows/`
+1. **Reads the workflow file** from `~/.claude/get-shit-done/workflows/`
 2. **Parses the workflow structure** (trigger, purpose, process steps)
 3. **Explains in plain language** what will happen
 4. **Shows file previews** (what files will be created/modified)

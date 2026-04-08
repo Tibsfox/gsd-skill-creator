@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Go Language &mdash; Go (Golang)</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gol">
+  <header>
+    <h1>Go Language</h1>
+    <div class="subtitle">Types, Structs, Interfaces, Generics, Error Handling, Packages, Slices, Maps, Functions</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html" class="active">Language</a>
+      <a href="concurrency.html">Concurrency</a>
+      <a href="gc.html">GC</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;Go is a language designed by people who write C and aimed at people who write Java and work at Google.&rdquo; &mdash; A community quip that captures the design center: C&rsquo;s performance instincts with Java&rsquo;s safety expectations, minus both languages&rsquo; complexity.
+    </blockquote>
+
+    <h2>Types</h2>
+    <table>
+      <thead><tr><th>Category</th><th>Types</th><th>Zero value</th></tr></thead>
+      <tbody>
+        <tr><td>Boolean</td><td><code>bool</code></td><td><code>false</code></td></tr>
+        <tr><td>Integer</td><td><code>int</code>, <code>int8</code>&ndash;<code>int64</code>, <code>uint</code>, <code>uint8</code>&ndash;<code>uint64</code>, <code>uintptr</code></td><td><code>0</code></td></tr>
+        <tr><td>Float</td><td><code>float32</code>, <code>float64</code></td><td><code>0</code></td></tr>
+        <tr><td>Complex</td><td><code>complex64</code>, <code>complex128</code></td><td><code>0</code></td></tr>
+        <tr><td>String</td><td><code>string</code> (immutable UTF-8 bytes)</td><td><code>""</code></td></tr>
+        <tr><td>Byte/Rune</td><td><code>byte</code> (= <code>uint8</code>), <code>rune</code> (= <code>int32</code>, Unicode code point)</td><td><code>0</code></td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>Every type has a zero value.</strong> Numeric types are <code>0</code>, booleans are <code>false</code>, strings are <code>""</code>, pointers/slices/maps/channels/interfaces are <code>nil</code>. The Go Proverb: &ldquo;Make the zero value useful.&rdquo;</p>
+
+    <h2>Variables</h2>
+<pre><code>var name string = "Foxy"     // explicit type
+var age = 42                  // type inferred
+count := 10                   // short declaration (inside functions only)
+const pi = 3.14159            // compile-time constant
+const (
+    StatusOK    = 0
+    StatusError = 1 + iota    // iota: auto-incrementing constant generator
+)</code></pre>
+
+    <h2>Functions</h2>
+<pre><code>// Multiple return values
+func divide(a, b float64) (float64, error) {
+    if b == 0 {
+        return 0, fmt.Errorf("division by zero")
+    }
+    return a / b, nil
+}
+
+// Named return values
+func swap(a, b int) (x, y int) {
+    return b, a
+}
+
+// Variadic
+func sum(nums ...int) int {
+    total := 0
+    for _, n := range nums { total += n }
+    return total
+}
+
+// First-class / closures
+func makeAdder(base int) func(int) int {
+    return func(x int) int { return base + x }
+}
+
+// Defer: runs when the enclosing function returns (LIFO order)
+func readFile(path string) ([]byte, error) {
+    f, err := os.Open(path)
+    if err != nil { return nil, err }
+    defer f.Close()
+    return io.ReadAll(f)
+}</code></pre>
+
+    <h2>Structs</h2>
+<pre><code>type User struct {
+    ID    int64  `json:"id"`
+    Name  string `json:"name"`
+    Email string `json:"email"`
+}
+
+// Method with pointer receiver (can modify the struct)
+func (u *User) SetName(name string) { u.Name = name }
+
+// Method with value receiver (read-only copy)
+func (u User) String() string { return fmt.Sprintf("%s <%s>", u.Name, u.Email) }
+
+// Embedding (composition, not inheritance)
+type Admin struct {
+    User           // promoted fields and methods
+    Level string
+}</code></pre>
+
+    <h2>Interfaces</h2>
+    <div class="card">
+      <p><strong>Implicit satisfaction:</strong> A type implements an interface simply by having the right methods. No <code>implements</code> keyword. This is Go&rsquo;s version of duck typing at compile time.</p>
+    </div>
+
+<pre><code>type Reader interface { Read(p []byte) (n int, err error) }
+type Writer interface { Write(p []byte) (n int, err error) }
+type ReadWriter interface { Reader; Writer }  // interface embedding
+
+// io.Reader is the canonical example:
+// *os.File, *bytes.Buffer, *strings.Reader, *http.Response.Body
+// all implement Reader without declaring it.
+
+// The empty interface (any) accepts all types
+func printAnything(v any) { fmt.Println(v) }
+
+// Type assertion
+if s, ok := v.(string); ok {
+    fmt.Println("string:", s)
+}
+
+// Type switch
+switch v := x.(type) {
+case string:  fmt.Println("string:", v)
+case int:     fmt.Println("int:", v)
+default:      fmt.Println("other")
+}</code></pre>
+
+    <h2>Generics (Go 1.18)</h2>
+<pre><code>// Generic function with type constraint
+func Map[T, U any](s []T, f func(T) U) []U {
+    result := make([]U, len(s))
+    for i, v := range s { result[i] = f(v) }
+    return result
+}
+
+// Type constraint using interface
+type Number interface {
+    ~int | ~int64 | ~float64
+}
+
+func Sum[T Number](nums []T) T {
+    var total T
+    for _, n := range nums { total += n }
+    return total
+}
+
+// Usage
+doubled := Map([]int{1, 2, 3}, func(n int) int { return n * 2 })</code></pre>
+
+    <h2>Error Handling</h2>
+<pre><code>// The error interface
+type error interface { Error() string }
+
+// The "if err != nil" pattern
+result, err := doSomething()
+if err != nil {
+    return fmt.Errorf("doSomething failed: %w", err) // wrap with %w
+}
+
+// Error wrapping and checking (Go 1.13+)
+if errors.Is(err, os.ErrNotExist) { /* sentinel error check */ }
+
+var pathErr *os.PathError
+if errors.As(err, &amp;pathErr) { /* type-specific error handling */ }
+
+// Custom error type
+type ValidationError struct {
+    Field   string
+    Message string
+}
+func (e *ValidationError) Error() string {
+    return fmt.Sprintf("%s: %s", e.Field, e.Message)
+}</code></pre>
+
+    <div class="card orange">
+      <p><strong>Why <code>if err != nil</code>?</strong> Go chose explicit error returns over exceptions because exceptions hide control flow. Rob Pike: &ldquo;Errors are values.&rdquo; You can store them, pass them, compose them. The verbosity is the trade-off for clarity.</p>
+    </div>
+
+    <h2>Slices, Arrays, Maps</h2>
+<pre><code>// Array (fixed size, value type)
+var a [5]int
+
+// Slice (dynamic, reference to underlying array)
+s := []int{1, 2, 3}
+s = append(s, 4, 5)
+sub := s[1:3] // [2, 3] — shares underlying array
+
+// Map
+m := map[string]int{"a": 1, "b": 2}
+m["c"] = 3
+v, ok := m["d"]  // ok is false if key missing
+delete(m, "a")
+
+// Range
+for i, v := range s { fmt.Println(i, v) }
+for k, v := range m { fmt.Println(k, v) }</code></pre>
+
+    <h2>Pointers</h2>
+<pre><code>x := 42
+p := &amp;x          // p is *int, points to x
+fmt.Println(*p)  // 42 (dereference)
+*p = 100         // x is now 100
+
+// No pointer arithmetic in Go (unlike C)
+// Pointers are for: avoiding copies, modifying values, nil-able types</code></pre>
+
+    <h2>Control Flow</h2>
+<pre><code>// for is the ONLY loop keyword
+for i := 0; i &lt; 10; i++ { }    // C-style
+for i &lt; 10 { }                  // while-style
+for { }                          // infinite
+for i, v := range collection { } // range
+
+// if with init statement
+if err := doThing(); err != nil { return err }
+
+// switch (no fallthrough by default!)
+switch day {
+case "Mon", "Tue", "Wed", "Thu", "Fri":
+    fmt.Println("weekday")
+default:
+    fmt.Println("weekend")
+}</code></pre>
+
+    <h2>Packages and Modules</h2>
+<pre><code>// go.mod
+module github.com/tibsfox/myapp
+go 1.24
+require (
+    github.com/gin-gonic/gin v1.10.0
+    go.uber.org/zap v1.27.0
+)
+
+// import
+import (
+    "fmt"
+    "net/http"
+    "github.com/gin-gonic/gin"
+)</code></pre>
+
+    <p>Capitalized names are <strong>exported</strong> (public). Lowercase names are <strong>unexported</strong> (package-private). No <code>public</code>/<code>private</code> keywords needed.</p>
+
+    <h2>Defer, Panic, Recover</h2>
+    <ul>
+      <li><code>defer</code> &mdash; schedules a call to run when the function returns (LIFO). Used for cleanup (close files, unlock mutexes, flush buffers).</li>
+      <li><code>panic</code> &mdash; unrecoverable error. Unwinds the stack, running deferred functions. NOT for normal error handling.</li>
+      <li><code>recover</code> &mdash; called inside a deferred function, catches a panic and returns the value. Used in libraries to prevent panics from crashing the caller.</li>
+    </ul>
+
+    <h2>Testing</h2>
+<pre><code>// math_test.go
+func TestAdd(t *testing.T) {
+    tests := []struct {
+        a, b, want int
+    }{
+        {1, 2, 3},
+        {0, 0, 0},
+        {-1, 1, 0},
+    }
+    for _, tt := range tests {
+        t.Run(fmt.Sprintf("%d+%d", tt.a, tt.b), func(t *testing.T) {
+            got := Add(tt.a, tt.b)
+            if got != tt.want {
+                t.Errorf("Add(%d, %d) = %d, want %d", tt.a, tt.b, got, tt.want)
+            }
+        })
+    }
+}</code></pre>
+
+    <p><strong>Table-driven tests</strong> are the idiomatic Go testing pattern. No assertion library needed (though <code>testify</code> is popular).</p>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CEE</td><td>C</td><td>Go inherits C syntax and value-type semantics; Ken Thompson co-created both</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>Go uses interfaces (structural); Rust uses traits (nominal). Both avoid inheritance.</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>Go interfaces are implicit; Java interfaces are explicit. Both GC&rsquo;d.</td></tr>
+        <tr><td>JTS</td><td>TypeScript</td><td>Both use structural typing for interfaces. Go is compiled; TS erases.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="concurrency.html">Concurrency</a></li>
+        <li><a href="gc.html">GC &amp; Runtime</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="education.html">Learn</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Go Language &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

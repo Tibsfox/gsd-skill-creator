@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Orchestration &mdash; AI Papers Research Digest &mdash; PNW Research Series</title>
+<link rel="stylesheet" href="../../brand.css"><link rel="stylesheet" href="style.css"><script src="../series.js" defer></script>
+</head><body class="project-aip"><header><h1>Agent Orchestration</h1>
+<div class="subtitle">AI Papers Research Digest &mdash; Artemis II Mission Research</div>
+<nav>
+      <a href="index.html">Overview</a>
+      <a href="agent-orchestration.html" class="active">Agent Orchestration</a>
+      <a href="mcp-cybersecurity.html">MCP &amp; Cybersecurity</a>
+      <a href="multimodal-evaluation.html">Multimodal Evaluation</a>
+      <a href="code-hallucination.html">Code &amp; Hallucination</a>
+      <a href="hacker-news.html">Hacker News Intel</a>
+</nav></header><main>
+<div class="card" style="margin-bottom:1.5rem"><p><strong>Co-Processor:</strong> 87 cross-refs, 8 passes against 270-project corpus.</p></div>
+<h1>Agent Orchestration Papers</h1>
+<p class="meta">Deep Research Module 1 of 5 &mdash; April 2026 arXiv Discoveries<br>
+Compiled: April 8, 2026 | Artemis II Research Series</p>
+
+<p>The spring 2026 arXiv landscape reveals a rapidly maturing field of agent orchestration, moving beyond simple tool-calling paradigms into structured memory systems, verifiable reasoning, theory-of-mind emergence, and epistemological questions about what it means for a machine to "understand." This module examines eight key papers and research threads that collectively define the state of the art in agent intelligence, coordination, and evaluation.</p>
+
+<h2>1. Structured Memory and Verifiable Action in Coupled Control Agents</h2>
+
+<p>The question of how autonomous agents maintain coherent state across long interaction horizons has emerged as one of the central challenges in agent orchestration. The early months of 2026 have produced several important contributions to what is now being called the "memory infrastructure" paradigm&mdash;the idea that memory is not merely a convenience for agents but a fundamental architectural requirement that determines the ceiling of agent capability.</p>
+
+<h3>1.1 The Agent Cognitive Compressor (ACC)</h3>
+
+<p>The paper "AI Agents Need Memory Control Over More Context" (arXiv:2601.11653) introduces the Agent Cognitive Compressor (ACC), a cognitively inspired memory controller that replaces naive transcript replay with a bounded Compressed Cognitive State (CCS). The core insight is that agents operating in extended sessions&mdash;whether in software engineering, customer support, or research&mdash;accumulate interaction transcripts that quickly exceed practical context windows. Rather than truncating or summarizing, ACC maintains a structured cognitive state that preserves decision-relevant information while discarding surface-level conversation artifacts.</p>
+
+<blockquote>"Memory control for agents is not a luxury feature but an architectural necessity. Without bounded compression, agent capability degrades linearly with interaction length, regardless of the underlying model's capability."</blockquote>
+
+<h3>1.2 Verifiable Agent Execution: Right to History</h3>
+
+<p>The "Right to History" framework (arXiv:2602.20214) takes a complementary approach by formalizing verifiable agent action. The paper proposes five system invariants with structured proof sketches, implemented in a system called PunkGo, that guarantee individuals have access to a complete, tamper-evident record of every AI agent action on their hardware. This addresses a growing concern in multi-agent deployments: when agents operate autonomously, how do users verify what actually happened?</p>
+
+<p>The framework defines verifiable action records as append-only logs with cryptographic integrity guarantees, ensuring that even in coupled multi-agent scenarios&mdash;where Agent A's output becomes Agent B's input&mdash;the full causal chain remains auditable. This has immediate practical implications for regulated industries deploying agent orchestration systems.</p>
+
+<h3>1.3 Intrinsic Memory Agents</h3>
+
+<p>The "Intrinsic Memory Agents" framework (arXiv:2508.08997) extends structured memory to heterogeneous multi-agent systems. Rather than sharing a single memory pool across agents, each agent maintains role-aligned intrinsic memory that evolves with its outputs. This preserves specialized perspectives&mdash;a security auditor agent's memory naturally emphasizes different aspects of a codebase than a performance optimizer agent&mdash;while still enabling coordination through explicit memory exchange protocols.</p>
+
+<table>
+<tr><th>System</th><th>Memory Model</th><th>Verification</th><th>Multi-Agent Support</th></tr>
+<tr><td>ACC</td><td>Compressed Cognitive State</td><td>Bounded guarantees</td><td>Single-agent focus</td></tr>
+<tr><td>PunkGo (Right to History)</td><td>Append-only verifiable logs</td><td>Cryptographic proofs</td><td>Causal chain tracking</td></tr>
+<tr><td>Intrinsic Memory Agents</td><td>Role-aligned per-agent memory</td><td>None explicit</td><td>Native multi-agent</td></tr>
+</table>
+
+<h2>2. Code Review Agents: Industry Claims vs. Empirical Reality</h2>
+
+<p>Perhaps the most sobering paper in the agent orchestration space this quarter is "From Industry Claims to Empirical Reality: An Empirical Study of Code Review Agents in Pull Requests" (arXiv:2604.03196), accepted at MSR 2026. The paper by Chowdhury, Banik, Ferdous, and Shamim systematically dismantles the prevailing industry narrative that autonomous code review agents (CRAs) can handle the majority of pull requests without human intervention.</p>
+
+<h3>2.1 The Industry Claim</h3>
+
+<p>Multiple vendors have claimed their CRAs can manage 80% or more of PRs in open-source repositories without human involvement. These claims have driven significant enterprise adoption, with companies reducing their human review workforce based on projected CRA capabilities.</p>
+
+<h3>2.2 The Empirical Reality</h3>
+
+<p>The researchers analyzed 19,450 pull requests from AIDev, focusing on 3,109 unique PRs in commented review state. Their findings are stark:</p>
+
+<ul>
+<li><strong>Merge rate gap</strong>: CRA-only PRs achieved a 45.20% merge rate versus 68.37% for human-only reviews&mdash;a 23.17 percentage point deficit.</li>
+<li><strong>Signal quality</strong>: 60.2% of closed CRA-only PRs fell into the 0-30% signal range, meaning less than one-third of their feedback was actionable.</li>
+<li><strong>Systemic failure</strong>: 12 of 13 CRAs tested exhibited average signal ratios below 60%.</li>
+</ul>
+
+<blockquote>"The gap between industry claims and empirical performance is not marginal&mdash;it is structural. CRA-only reviews produce predominantly noisy feedback that does not reliably improve code quality."</blockquote>
+
+<h3>2.3 Signal Quality Taxonomy</h3>
+
+<table>
+<tr><th>Signal Range</th><th>Classification</th><th>CRA-Only Distribution</th></tr>
+<tr><td>0-30%</td><td>Predominantly noisy</td><td>60.2%</td></tr>
+<tr><td>31-59%</td><td>More noise than signal</td><td>~20%</td></tr>
+<tr><td>60-79%</td><td>More signal than noise</td><td>~15%</td></tr>
+<tr><td>80-100%</td><td>Predominantly actionable</td><td>~5%</td></tr>
+</table>
+
+<p>The implication for agent orchestration is clear: code review remains a domain where human-agent collaboration substantially outperforms fully autonomous operation. The paper recommends CRAs as augmentation tools rather than replacements, a finding with broad implications for other high-stakes agent deployment scenarios.</p>
+
+<h3>2.4 Deeper Analysis: Why CRAs Fail on Complex PRs</h3>
+
+<p>The paper's findings can be decomposed into several failure modes that have implications beyond code review. First, CRAs exhibit what the authors term "surface-level fixation"&mdash;a tendency to comment on style violations, naming conventions, and minor formatting issues while missing architectural problems, race conditions, or subtle logic errors. This pattern is consistent with the observation that LLMs are more effective at pattern-matching (which catches surface violations) than at multi-step reasoning (which is required for deep code understanding).</p>
+
+<p>Second, CRAs generate false positives at rates that undermine developer trust. When 60.2% of feedback falls in the predominantly noisy range, developers learn to ignore CRA comments entirely, including the minority that are actionable. This "cry wolf" effect means that even accurate CRA feedback is discounted, reducing the effective signal to near zero in teams where trust has eroded. The human psychology of trust calibration is as important as the technical quality of the feedback.</p>
+
+<p>Third, the 23.17 percentage point merge rate gap likely understates the true performance difference, because many CRA-only PRs that eventually merge may have required additional work to address issues the CRA missed&mdash;work that would have been caught earlier in a human-reviewed process. The paper does not measure time-to-merge or post-merge defect rates, which could reveal even larger quality gaps.</p>
+
+<p>These findings have direct implications for the broader agent orchestration field. Any agent system operating in a domain with high stakes (security, medicine, finance) should be evaluated not just on its accuracy but on its false positive rate and the resulting impact on human trust. An agent that is 80% accurate but generates sufficient noise to erode human trust may produce worse outcomes than a 60% accurate agent whose lower volume of feedback is consistently actionable.</p>
+
+<h2>3. Reflective Context Learning: Optimization Primitives for Agent Loops</h2>
+
+<p>The reflective learning paradigm&mdash;where agents improve their own performance by analyzing past interactions&mdash;has seen rapid development in early 2026, with three key papers establishing the theoretical and practical foundations.</p>
+
+<h3>3.1 Combee: Scaling Prompt Learning</h3>
+
+<p>Combee (arXiv:2604.04247) addresses a fundamental limitation of existing prompt learning methods: they work well for single agents but fail to scale to parallel multi-agent settings. The framework introduces a Map-Shuffle-Reduce paradigm for prompt optimization:</p>
+
+<ul>
+<li><strong>Map</strong>: Multiple agents process distinct context shards in parallel, generating local reflections.</li>
+<li><strong>Shuffle</strong>: Reflections are duplicated and shuffled across agents to prevent information loss and ensure diverse perspective integration.</li>
+<li><strong>Reduce</strong>: A hierarchical parallel scan algorithm aggregates local updates into a coherent global context without overwhelming the LLM context curator.</li>
+</ul>
+
+<p>Evaluations on AppWorld, Terminal-Bench, Formula, and FiNER demonstrate that Combee achieves up to 17x speedup over previous methods like ACE and GEPA, with comparable or better accuracy at equivalent cost. The dynamic batch size controller balances quality and latency, making it practical for production deployments.</p>
+
+<h3>3.2 Experiential Reflective Learning (ERL)</h3>
+
+<p>The Experiential Reflective Learning framework (arXiv:2603.24639) takes a complementary approach by enabling rapid environment adaptation through experience-based heuristic generation. Rather than optimizing prompts, ERL reflects on complete task trajectories and outcomes to generate transferable heuristics&mdash;actionable lessons that generalize across tasks within a domain. The key distinction from prompt learning is that ERL produces explicit, human-readable heuristics ("when encountering a timeout error in API calls, check the retry configuration before investigating the endpoint") rather than implicit prompt modifications. These heuristics can be inspected, edited, and curated by human operators, providing a governance layer that pure prompt optimization lacks.</p>
+
+<p>ERL's trajectory reflection mechanism operates at a higher level of abstraction than individual interaction reflection. Rather than asking "what went wrong in this response?", ERL asks "what pattern of actions led to success or failure across this sequence of interactions?" This temporal abstraction captures causal relationships between actions that single-step reflection cannot detect&mdash;for example, the insight that gathering requirements before writing code reduces revision cycles, even though each individual coding step appears optimal in isolation.</p>
+
+<h3>3.3 GEPA: Reflective Prompt Evolution</h3>
+
+<p>GEPA (arXiv:2507.19457) establishes that reflective prompt evolution can outperform reinforcement learning for certain agent optimization tasks. The system samples complete trajectories&mdash;reasoning chains, tool calls, and outputs&mdash;then reflects on them in natural language to diagnose problems, propose prompt updates, and test improvements. The key finding is that natural language reflection provides a sufficiently rich optimization signal for many agent tasks, avoiding the complexity and instability of RL-based approaches.</p>
+
+<h2>4. Schema-Aware Planning with Knowledge Graphs</h2>
+
+<p>The integration of knowledge graphs with LLM-based planning has progressed significantly, with schema-aware approaches addressing the brittleness of purely neural planning systems.</p>
+
+<h3>4.1 HVR: Hierarchical Planning with KG-RAG and Symbolic Verification</h3>
+
+<p>The HVR framework (arXiv:2504.04578), by Cornelio, Petruzzellis, and Lio, represents the most complete integration of knowledge graph reasoning with LLM planning to date. The system decomposes complex tasks into manageable subtasks, further expanded into executable atomic action sequences. A Symbolic Validator ensures formal correctness and functions as a failure detector by aligning expected and observed world states at each planning step.</p>
+
+<p>The key innovation is the use of schema-aware RAG over knowledge graphs rather than raw text retrieval. By leveraging the ontological structure of the knowledge graph, the system can validate that generated plans respect domain constraints&mdash;for example, ensuring a robotic manipulation plan doesn't sequence steps that violate physical causality.</p>
+
+<h3>4.2 Agentic DAG-Orchestrated Planning</h3>
+
+<p>The A.DOT Planner (arXiv:2603.14229) compiles natural language queries into Directed Acyclic Graph (DAG) plans where each node maps to an atomic sub-query over the appropriate data source. The framework applies both structural and semantic validation before execution, with schema awareness enabling automatic detection of impossible or contradictory plan steps. This approach has shown particular promise for multi-hop question answering across heterogeneous data sources, where schema understanding prevents the generation of queries that reference non-existent relations or entities.</p>
+
+<h2>5. Theory-of-Mind in LLM Poker Agents (Readable Minds)</h2>
+
+<p>The "Readable Minds" paper (arXiv:2604.04157) by Lin and Hou represents a landmark finding: LLM agents can develop functional theory-of-mind (ToM) through dynamic interaction, without explicit ToM training. The research, submitted to PNAS, uses Texas Hold'em poker as a naturalistic testbed for studying opponent modeling and strategic deception.</p>
+
+<h3>5.1 Experimental Design</h3>
+
+<p>The researchers employed a rigorous 2x2 factorial design crossing memory (present/absent) with domain knowledge (present/absent), with five replications per condition (N=20 experiments, approximately 6,000 agent-hand observations). This design isolates the contributions of memory and domain expertise to ToM emergence.</p>
+
+<h3>5.2 Critical Discovery: Memory Is the Key</h3>
+
+<p>The central finding is that persistent memory is both necessary and sufficient for ToM-like behavior emergence. Agents with memory reached Theory of Mind Levels 3-5 (predictive to recursive modeling), while agents without memory remained at Level 0 across all replications, regardless of domain knowledge.</p>
+
+<table>
+<tr><th>Condition</th><th>Memory</th><th>Domain Knowledge</th><th>ToM Level</th></tr>
+<tr><td>Full</td><td>Present</td><td>Present</td><td>3-5 (recursive modeling)</td></tr>
+<tr><td>Memory Only</td><td>Present</td><td>Absent</td><td>3-5 (equivalent)</td></tr>
+<tr><td>Knowledge Only</td><td>Absent</td><td>Present</td><td>0</td></tr>
+<tr><td>Baseline</td><td>Absent</td><td>Absent</td><td>0</td></tr>
+</table>
+
+<h3>5.3 Strategic Deception and GTO Deviation</h3>
+
+<p>Agents with developed ToM selectively departed from Game Theory Optimal (GTO) play in situations where their opponent models suggested exploitable tendencies. This mirrors expert human poker strategy, where optimal play is abandoned in favor of exploitative play when opponents reveal patterns. The crucial finding is that domain expertise enhanced the precision of deception but was not required for its emergence&mdash;agents without poker knowledge developed equivalent ToM levels but produced less refined exploitation strategies.</p>
+
+<blockquote>"ToM-like behavior in LLMs is not a latent capability waiting to be elicited by the right prompt, but rather an emergent phenomenon that requires specific cognitive infrastructure. This parallels developmental findings in humans, where ToM emerges in conjunction with working memory and executive function development."</blockquote>
+
+<h3>5.4 Transparency Through Natural Language</h3>
+
+<p>A distinctive feature of the study is that all mental models are expressed in natural language and directly readable, providing a transparent window into AI social cognition. Unlike neural ToM approaches that require probe training or interpretability tools, the LLM poker agents' opponent models are inspectable as structured text, enabling direct analysis of the reasoning behind strategic decisions.</p>
+
+<h3>5.5 Developmental Parallels and Cognitive Architecture Implications</h3>
+
+<p>The finding that memory is the gating factor for ToM emergence has striking parallels with developmental psychology research on human children. In humans, ToM development (typically between ages 3-5) correlates strongly with working memory capacity and executive function development. Children with better working memory pass false-belief tasks earlier and develop more sophisticated social reasoning. The poker agent results suggest an analogous relationship: without persistent memory to scaffold temporal pattern detection, the computational equivalent of ToM cannot emerge regardless of the underlying model's raw capability.</p>
+
+<p>This developmental parallel opens a productive research direction: if other aspects of human cognitive development can be replicated by providing appropriate infrastructure to LLM agents, what other capabilities might emerge? Executive function, metacognition, and long-term planning are all capabilities that develop in concert with working memory in humans. The Readable Minds results suggest that providing agents with richer cognitive infrastructure&mdash;not just memory but also self-monitoring, goal hierarchies, and temporal reasoning modules&mdash;could unlock capabilities that current prompt-engineering approaches cannot reach.</p>
+
+<p>The transparency of natural language mental models also distinguishes this work from the black-box nature of most neural network research. Because the agents express their opponent models in plain text ("Player B tends to bluff on the river when the pot is large and they have position"), researchers can directly inspect, evaluate, and debug the reasoning process. This transparency has practical implications for agent orchestration: if agents in production systems expressed their decision-making rationale in inspectable natural language, operators could audit agent behavior without requiring interpretability tools or post-hoc analysis.</p>
+
+<h2>6. Reflective Context Learning: Deeper Technical Analysis</h2>
+
+<p>The three reflective learning papers merit deeper technical analysis because they address a problem that is often underestimated in agent orchestration: how agents improve their own performance over time without human intervention or explicit retraining.</p>
+
+<h3>6.1 The Prompt as a Living Object</h3>
+
+<p>Combee's formulation of the prompt as "a living object that evolves during deployment" represents a conceptual shift from prompts as static instructions to prompts as learned artifacts. In traditional LLM usage, prompts are crafted by humans and remain fixed during deployment. In Combee's framework, prompts undergo continuous optimization through a generate-reflect-update loop: agents interact with tasks, reflect on outcomes, and iteratively revise the shared context based on accumulated experience. The prompt becomes a compressed representation of the agent's task-specific knowledge, updated continuously rather than fixed at deployment time.</p>
+
+<p>This has practical implications for agent deployment. Rather than spending extensive human effort on prompt engineering before deployment, organizations can deploy agents with reasonable initial prompts and let the reflective learning process optimize them in production. The 17x speedup over prior methods makes this practical for production systems where prompt updates need to happen on the order of minutes, not hours.</p>
+
+<h3>6.2 The Map-Shuffle-Reduce Innovation in Detail</h3>
+
+<p>Combee's parallel learning algorithm deserves close examination because it solves a problem that naive parallelization cannot. When multiple agents learn independently, they converge on different local optima based on the specific tasks they encountered. Aggregating their learned prompts through simple averaging or majority voting loses the distinctive insights each agent developed. The shuffle mechanism addresses this by redistributing reflections across agents before the reduce step, ensuring that each agent's aggregation incorporates diverse perspectives rather than just its own experience. The dynamic batch size controller then balances the quality of aggregation (larger batches capture more diversity) against the latency of the update cycle (smaller batches produce faster updates), adapting to the real-time requirements of the deployment environment.</p>
+
+<h2>7. Profile-Then-Reason: Bounded Semantic Complexity for Agent Systems</h2>
+
+<p>The challenge of managing semantic complexity in multi-agent systems has emerged as a critical concern in 2026 as deployments scale. The "Agent Contracts" framework (arXiv:2601.08815) proposes a formal framework for resource-bounded autonomous AI systems, introducing the concept of explicit contracts that define the computational and semantic boundaries within which agents operate.</p>
+
+<p>The profiling approach follows a two-phase pattern: first, characterize the semantic complexity of the task environment (the "profile" phase), then allocate agent resources and select reasoning strategies appropriate to that complexity level (the "reason" phase). This prevents the common failure mode where agents apply expensive reasoning strategies to trivial tasks, or conversely, attempt lightweight heuristics on problems that require deep reasoning.</p>
+
+<p>Research from the broader agentic AI taxonomy literature (arXiv:2601.12560) classifies agent architectures along multiple dimensions including perception, self-action, mutual interaction, and evolution. The profile-then-reason paradigm maps naturally onto this taxonomy, with profiling determining the appropriate level of each capability for a given task.</p>
+
+<h2>7. Comparative Reversal Learning: Adapting to Changed Facts</h2>
+
+<p>A pressing problem for deployed agent systems is handling factual updates&mdash;when information the agent was trained on or has internalized becomes outdated or contradicted. The 2026 literature addresses this through several lenses:</p>
+
+<h3>7.1 Catastrophic Forgetting in Sequential Fine-Tuning</h3>
+
+<p>The paper "Catastrophic Forgetting in LLMs: A Comparative Analysis Across Language Tasks" (arXiv:2504.01241) examines what happens when LLMs are sequentially fine-tuned on multiple NLU tasks. The finding that smaller models like Phi-3.5-mini effectively minimize forgetting while maintaining learning capabilities suggests that agent systems may benefit from using smaller, more frequently updated specialist models rather than monolithic foundation models for fact-sensitive tasks.</p>
+
+<h3>7.2 Machine Unlearning and Its Limits</h3>
+
+<p>"Unlearning Isn't Deletion" (arXiv:2505.16831) investigates whether machine unlearning techniques actually remove information from LLMs. The finding that unlearned information can often be recovered raises serious concerns for agent systems that need to respect data deletion requests or update factual knowledge. If reversal learning merely suppresses rather than eliminates old associations, agents may exhibit "ghost knowledge"&mdash;seemingly forgotten facts that resurface under specific prompting conditions.</p>
+
+<h3>7.3 Practical Implications for Agent Orchestration</h3>
+
+<p>For orchestration systems managing fleets of agents, these findings suggest that fact-updating should not rely on model-level interventions alone. Instead, a layered approach combining RAG with authoritative knowledge bases, explicit version-controlled fact stores, and runtime verification against ground truth sources provides more reliable factual currency than any single learning-based approach.</p>
+
+<h2>8. A Model of Understanding in Deep Learning Systems</h2>
+
+<p>The most philosophically ambitious paper in this collection, "A Model of Understanding in Deep Learning Systems" (arXiv:2604.04171) by David Peter Wallis Freeborn of Northeastern University London, tackles a question that has implications far beyond academic philosophy: do deep learning systems actually understand what they process?</p>
+
+<h3>8.1 The Framework</h3>
+
+<p>Freeborn proposes that an agent understands a property of a target system when it satisfies three conditions: (1) it contains an adequate internal model that tracks real regularities, (2) that model is coupled to the target by stable bridge principles, and (3) it supports reliable prediction. By this framework, the author argues that contemporary deep learning systems often can and do achieve genuine understanding. This is a deliberately inclusive definition that avoids the common philosophical move of defining understanding in a way that a priori excludes machines. Instead, it provides criteria that can be empirically evaluated for any system, biological or artificial.</p>
+
+<p>The paper engages with existing philosophical positions on machine understanding, including Searle's Chinese Room argument and more recent formulations from the philosophy of science. Freeborn argues that the Chinese Room intuition fails because it conflates understanding at the system level with understanding at the component level&mdash;individual neurons do not understand, but the system of neurons may, just as individual Chinese Room operators do not understand Chinese but the room-as-a-system might. This systems-level perspective is essential for evaluating agent orchestration architectures, where understanding is distributed across multiple components rather than localized in any single agent.</p>
+
+<h3>8.2 The Fractured Understanding Hypothesis</h3>
+
+<p>However, this understanding falls short of the scientific ideal in three specific ways, which Freeborn labels the "Fractured Understanding Hypothesis":</p>
+
+<ul>
+<li><strong>Symbolic misalignment</strong>: Learned representations are often misaligned with the target domain's natural variables. A model may reliably predict chemical properties without representing atoms and bonds in any recognizable form.</li>
+<li><strong>Non-reductive</strong>: Understanding is not explicitly reductive&mdash;the system cannot decompose its knowledge into more fundamental principles.</li>
+<li><strong>Weakly unifying</strong>: Competence is distributed across locally reliable fragments rather than unified into a small stock of reusable principles.</li>
+</ul>
+
+<blockquote>"Contemporary deep learning systems achieve what might be called fractured understanding: reliable prediction over specific domains, achieved through mechanisms that bear no symbolic resemblance to the target domain's natural description language."</blockquote>
+
+<h3>8.3 Implications for Agent Orchestration</h3>
+
+<p>The Fractured Understanding Hypothesis has direct implications for agent orchestration design. If understanding in neural systems is inherently fragmented rather than unified, then the multi-agent paradigm&mdash;where different agents hold complementary fragments of understanding&mdash;may be more natural to the medium than single-agent architectures attempting unified reasoning. This provides theoretical grounding for the empirical observation that ensemble and multi-agent approaches often outperform monolithic models on complex tasks.</p>
+
+<h2>9. Cross-Cutting Analysis: Memory, Planning, and Reasoning Architectures</h2>
+
+<p>Stepping back from individual papers, the agent orchestration research of early 2026 reveals deep architectural patterns that cut across all eight research threads. These patterns suggest the field is converging on a shared understanding of what effective agent systems require, even as implementations diverge.</p>
+
+<h3>9.1 The Memory-Planning-Verification Triad</h3>
+
+<p>The most consistent architectural pattern across the surveyed literature is a three-layer design consisting of persistent memory, structured planning, and runtime verification. The Readable Minds paper demonstrates that without persistent memory, agents cannot develop the cognitive scaffolding needed for advanced reasoning (ToM Levels 3-5 require temporal pattern detection that is impossible without memory). The HVR framework shows that without structured planning through knowledge graph-aware decomposition, agents generate plans that violate domain constraints even when the underlying LLM has adequate domain knowledge. And the Right to History work demonstrates that without runtime verification, there is no way to ensure agents actually executed their plans as intended.</p>
+
+<p>This triad maps naturally onto classical AI architectures (memory corresponds to the agent's world model, planning to its deliberation system, and verification to its monitoring loop), but the 2026 implementations add a critical new dimension: all three layers operate over natural language rather than symbolic representations. This enables flexibility and generalization that symbolic systems lack, but introduces the fragility and hallucination risks that the Code Review Agents paper documents so thoroughly.</p>
+
+<h3>9.2 The Scalability Question</h3>
+
+<p>Combee's Map-Shuffle-Reduce paradigm for parallel prompt learning highlights a fundamental tension in agent orchestration: methods that work for single agents often fail at scale. The 17x speedup Combee achieves over prior methods is not merely an engineering optimization but a reflection of a deeper principle: parallel agent systems require fundamentally different optimization algorithms than sequential ones. The shuffle mechanism, which duplicates and randomly distributes reflections across parallel agents, prevents the information loss that occurs when each agent optimizes independently. This is analogous to the exploration-exploitation tradeoff in reinforcement learning, but applied at the meta-level of agent self-improvement.</p>
+
+<p>The implications extend beyond prompt learning. Any agent orchestration system that deploys multiple agents in parallel faces the same challenge: how to aggregate distributed learning without losing the diversity that makes parallelism valuable. Combee's answer&mdash;explicit diversity preservation through shuffling combined with hierarchical aggregation through parallel scans&mdash;provides a template that could be adapted to other aspects of multi-agent coordination, including task allocation, conflict resolution, and shared world model maintenance.</p>
+
+<h3>9.3 The Semantic Complexity Gradient</h3>
+
+<p>The Agent Contracts framework introduces the concept of bounded semantic complexity, where the resources allocated to an agent's reasoning are calibrated to the difficulty of the current task. This "profile-then-reason" approach has practical implications for cost management in production agent systems: a simple code formatting task should not invoke the same reasoning depth as a complex architectural decision. The challenge is automating the profiling step, since misclassifying a hard problem as easy leads to superficial results, while misclassifying an easy problem as hard wastes resources.</p>
+
+<p>The Code Review Agents paper provides empirical evidence for this gradient: CRAs performed adequately on simple, well-structured PRs but failed on complex ones requiring domain understanding. A semantic complexity profiler could route simple PRs to fully automated CRA review while flagging complex ones for human involvement, potentially achieving the 80% automation rate that industry claims but only on the subset of PRs where automation is actually effective.</p>
+
+<h3>9.4 The Understanding Gap</h3>
+
+<p>Freeborn's Fractured Understanding Hypothesis provides the theoretical framework for understanding why all the other papers' findings are the way they are. Code review agents fail on complex PRs because their understanding of code is fractured&mdash;locally reliable but not unified into principles that transfer across codebases. Poker agents develop ToM only with memory because fragmented understanding requires temporal scaffolding to cohere into predictive models. Knowledge graph planning outperforms pure LLM planning because the graph provides the unifying structure that the LLM's fractured understanding lacks.</p>
+
+<p>This suggests a research program for the next generation of agent orchestration: rather than fighting against fractured understanding, design architectures that explicitly compose fragments. Multi-agent systems can be seen as an architectural response to fractured understanding, where each agent contributes its fragment and the orchestration layer provides the unifying structure. The key insight from the Readable Minds paper is that this composition can emerge naturally when agents have appropriate infrastructure (memory), rather than requiring explicit engineering.</p>
+
+<h3>9.5 Implications for Production Systems</h3>
+
+<p>For practitioners designing production agent orchestration systems, the research surveyed here suggests several concrete design principles:</p>
+
+<ul>
+<li><strong>Invest in memory infrastructure before adding agents</strong>. The Readable Minds finding that memory is both necessary and sufficient for ToM emergence suggests that adding persistent, structured memory to a single agent may yield greater capability improvements than adding more agents without memory.</li>
+<li><strong>Calibrate autonomy to task complexity</strong>. The Code Review Agents study demonstrates that fully autonomous operation fails on complex tasks. Systems should dynamically route tasks based on estimated complexity, with human involvement increasing proportionally.</li>
+<li><strong>Build verification into the orchestration layer, not the agent</strong>. The Right to History and HVR frameworks both show that verification is more reliable when implemented as an architectural constraint (append-only logs, symbolic validators) rather than a model capability (self-checking).</li>
+<li><strong>Plan for reflective learning at scale</strong>. Combee demonstrates that single-agent learning methods do not scale to parallel settings. Orchestration systems should incorporate parallel-aware learning from the start, with explicit mechanisms for aggregating and distributing insights across agents.</li>
+<li><strong>Accept fractured understanding as a feature</strong>. Rather than pursuing unified understanding in individual agents, leverage the multi-agent paradigm to compose understanding fragments, using knowledge graphs and structured memory as the unifying substrate.</li>
+</ul>
+
+<h2>Synthesis: The State of Agent Orchestration in April 2026</h2>
+
+<p>The agent orchestration research of early 2026 marks a transition from proof-of-concept demonstrations to principled engineering. The field is developing the theoretical foundations, evaluation methodologies, and architectural patterns needed to build agent systems that are not just capable but reliable, verifiable, and improvable over time.</p>
+
+<p>Several cross-cutting themes emerge from this research landscape:</p>
+
+<ul>
+<li><strong>Memory as infrastructure</strong>: The Readable Minds and ACC papers converge on memory as the critical enabler of advanced agent behavior, from ToM emergence to long-horizon task completion.</li>
+<li><strong>Humility about autonomy</strong>: The code review agents study provides a needed corrective to industry hype, demonstrating that human-agent collaboration significantly outperforms full automation in high-stakes domains.</li>
+<li><strong>Scalable reflection</strong>: Combee's Map-Shuffle-Reduce paradigm shows that reflective learning can scale to parallel multi-agent settings, a prerequisite for production deployment.</li>
+<li><strong>Theoretical maturation</strong>: The Fractured Understanding Hypothesis and verifiable action frameworks indicate the field is developing the conceptual vocabulary needed to reason rigorously about agent capabilities and limitations.</li>
+</ul>
+
+<h2>Bibliography</h2>
+
+<ol>
+<li class="citation">Chowdhury, K., Banik, D., Ferdous, K.M., &amp; Shamim, S.I. (2026). "From Industry Claims to Empirical Reality: An Empirical Study of Code Review Agents in Pull Requests." <em>MSR 2026</em>. arXiv:2604.03196.</li>
+<li class="citation">Lin, H.-T. &amp; Hou, T.-Y. (2026). "Readable Minds: Emergent Theory-of-Mind-Like Behavior in LLM Poker Agents." Submitted to <em>PNAS</em>. arXiv:2604.04157.</li>
+<li class="citation">Freeborn, D.P.W. (2026). "A Model of Understanding in Deep Learning Systems." arXiv:2604.04171.</li>
+<li class="citation">Combee authors (2026). "Combee: Scaling Prompt Learning for Self-Improving Language Model Agents." arXiv:2604.04247.</li>
+<li class="citation">Cornelio, C., Petruzzellis, F., &amp; Lio, P. (2025). "Hierarchical Planning for Complex Tasks with Knowledge Graph-RAG and Symbolic Verification." <em>ICML 2025</em>. arXiv:2504.04578.</li>
+<li class="citation">ERL authors (2026). "Experiential Reflective Learning for Self-Improving LLM Agents." arXiv:2603.24639.</li>
+<li class="citation">GEPA authors (2025). "GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning." arXiv:2507.19457.</li>
+<li class="citation">ACC authors (2026). "AI Agents Need Memory Control Over More Context." arXiv:2601.11653.</li>
+<li class="citation">PunkGo authors (2026). "Right to History: A Sovereignty Kernel for Verifiable AI Agent Execution." arXiv:2602.20214.</li>
+<li class="citation">Agent Contracts authors (2026). "Agent Contracts: A Formal Framework for Resource-Bounded Autonomous AI Systems." arXiv:2601.08815.</li>
+<li class="citation">Catastrophic Forgetting authors (2026). "Catastrophic Forgetting in LLMs: A Comparative Analysis Across Language Tasks." arXiv:2504.01241.</li>
+<li class="citation">Unlearning authors (2025). "Unlearning Isn't Deletion: Investigating Reversibility of Machine Unlearning in LLMs." arXiv:2505.16831.</li>
+</ol></main>
+<footer><p>AI Papers Research Digest &mdash; Project AIP &mdash; <a href="index.html">Back to Overview</a></p>
+<p>Part of the <a href="../index.html">PNW Research Series</a> &middot; Research Co-Processor v2 &middot; April 2026</p></footer></body></html>

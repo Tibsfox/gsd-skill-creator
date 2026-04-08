@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Evolution &mdash; JavaScript &amp; TypeScript</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jts">
+  <header>
+    <h1>History &amp; Evolution</h1>
+    <div class="subtitle">From 10 Days in May 1995 to 2 Million npm Packages &mdash; 30 Years of JavaScript and TypeScript</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">JavaScript</a>
+      <a href="typescript.html">TypeScript</a>
+      <a href="runtimes.html">Runtimes</a>
+      <a href="frameworks.html">Frameworks</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html" class="active">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;I was recruited to do &lsquo;Scheme for the browser.&rsquo; I was under orders to make the language look like Java.&rdquo; &mdash; <strong>Brendan Eich</strong>, describing how JavaScript was born under contradictory constraints.
+    </blockquote>
+
+    <h2>Origins (1995)</h2>
+    <p><strong>Brendan Eich</strong> was hired at Netscape Communications in April 1995. Netscape needed a scripting language for its browser to complement Java applets &mdash; something lightweight that &ldquo;non-programmers&rdquo; could use. In <strong>10 days in May 1995</strong>, Eich wrote the first prototype, originally called <strong>Mocha</strong>.</p>
+
+    <p>The design drew from five sources: <strong>Scheme</strong> (closures, first-class functions), <strong>Self</strong> (prototype-based inheritance), <strong>Java</strong> (C-family syntax, the <code>new</code> operator), <strong>HyperTalk</strong> (event-driven model), and <strong>AWK</strong> (type coercion). The result was a language that was simultaneously functional, object-oriented, and imperative &mdash; and pleased nobody&rsquo;s purists.</p>
+
+    <p>Mocha was renamed <strong>LiveScript</strong> in September 1995, then <strong>JavaScript</strong> in December 1995. The &ldquo;Java&rdquo; name was a trademark licensing deal with Sun Microsystems to ride the Java hype wave. It is the most expensive naming confusion in the history of computing.</p>
+
+    <p>JavaScript first shipped in <strong>Netscape Navigator 2.0</strong> (March 1996).</p>
+
+    <h2>Browser Wars and Standardization (1996&ndash;1999)</h2>
+    <p>Microsoft reverse-engineered JavaScript as <strong>JScript</strong> for Internet Explorer 3 (August 1996). Incompatibilities between the two were brutal: <code>document.all</code> vs <code>document.getElementById</code>, layers vs divs, incompatible event models. The DHTML era was a nightmare of browser sniffing.</p>
+
+    <p>To escape vendor lock-in, Netscape submitted JavaScript to <strong>Ecma International</strong> for standardization. The <strong>TC39 committee</strong> was formed with delegates from Sun, Netscape, Microsoft, IBM, and others.</p>
+
+    <div class="timeline">
+      <div class="event"><span class="year">Jun 1997</span> <strong>ECMA-262 1st edition</strong> &mdash; ECMAScript 1. Guy Steele as editor.</div>
+      <div class="event"><span class="year">Jun 1998</span> <strong>ECMAScript 2</strong> &mdash; editorial alignment with ISO/IEC 16262.</div>
+      <div class="event"><span class="year">Dec 1999</span> <strong>ECMAScript 3</strong> &mdash; regex, try/catch, better string handling. Waldemar Horwat as editor. The stable base for a decade.</div>
+    </div>
+
+    <h2>The Lost Years (1999&ndash;2005)</h2>
+    <p>ECMAScript 4 was ambitious: classes, modules, types, generators, optional typing. The committee split into camps. <strong>Mozilla + Adobe</strong> (ActionScript 3 was based on the ES4 draft) pushed forward. <strong>Microsoft + Yahoo</strong> (represented by <strong>Douglas Crockford</strong>) opposed. By 2008, ES4 was politically dead &mdash; the committee agreed to &ldquo;reset&rdquo; and ship ES3.1 as ES5 instead.</p>
+
+    <p>Crockford published <strong><em>JavaScript: The Good Parts</em></strong> (O&rsquo;Reilly, May 2008) &mdash; a thin, opinionated book that argued JavaScript had a beautiful language hiding inside its ugly parts. The book rehabilitated JavaScript&rsquo;s reputation among serious programmers. Crockford also invented <strong>JSON</strong> as a subset of JavaScript&rsquo;s object literal syntax, giving the web its dominant data interchange format.</p>
+
+    <h2>AJAX and the Rebirth (2005)</h2>
+    <p>In February 2005, <strong>Jesse James Garrett</strong> published an essay coining the term <strong>AJAX</strong> (Asynchronous JavaScript + XML). <strong>Google Maps</strong> and <strong>Gmail</strong> demonstrated the pattern: fetch data from the server without reloading the page, update the DOM in place, and give web applications the feel of desktop software.</p>
+
+    <p><strong>jQuery 1.0</strong> (<strong>John Resig</strong>, August 2006) normalized the DOM across browsers: <code>$(selector).method()</code> replaced hundreds of lines of browser-sniffing code. jQuery was the dominant front-end library from 2006 to ~2013. At its peak, it was loaded by over 70% of the top million websites.</p>
+
+    <h2>ECMAScript 5 (December 2009)</h2>
+    <p>The successful follow-up to the failed ES4. Edited by <strong>Allen Wirfs-Brock</strong>. Added: <code>"use strict"</code>, native JSON, <code>Object.create</code>, <code>Array</code> iteration methods (<code>map</code>, <code>filter</code>, <code>reduce</code>, <code>forEach</code>, <code>some</code>, <code>every</code>), property descriptors, getters and setters.</p>
+
+    <h2>Node.js (November 2009)</h2>
+    <div class="card green">
+      <p><strong>Ryan Dahl</strong> presented Node.js at <strong>JSConf EU in November 2009</strong>. The pitch: non-blocking I/O with JavaScript&rsquo;s callback model, powered by Google&rsquo;s V8 engine and a new cross-platform I/O library called <strong>libuv</strong>. JavaScript broke out of the browser.</p>
+      <p><strong>npm</strong> (<strong>Isaac Schlueter</strong>, 2010) gave Node a package manager that would grow to become the world&rsquo;s largest software registry.</p>
+    </div>
+
+    <h2>TypeScript (October 2012)</h2>
+    <div class="card">
+      <p><strong>Anders Hejlsberg</strong> at Microsoft (previously Turbo Pascal, Delphi, C#) publicly announced TypeScript on <strong>October 1, 2012</strong>. TypeScript 0.8 was the first public release. The goal: add optional static typing to JavaScript without breaking compatibility. All valid JS is valid TS.</p>
+      <p>Early adoption was slow. The pivotal moment came when Google chose TypeScript for the <strong>Angular 2 rewrite</strong> (announced 2015, shipped 2016). By 2018, TypeScript was the fastest-growing language on GitHub. By 2024, most new projects are TypeScript-first.</p>
+    </div>
+
+    <h2>ECMAScript 6 / ES2015 (June 2015)</h2>
+    <p>The biggest language upgrade since the original. Edited by <strong>Allen Wirfs-Brock</strong>. Took 6 years to ship. Added: <code>let</code>/<code>const</code>, arrow functions, classes, template literals, destructuring, default parameters, rest/spread, <code>Promise</code>, <code>Map</code>/<code>Set</code>/<code>WeakMap</code>/<code>WeakSet</code>, <code>Symbol</code>, iterators/generators, and <strong>ES Modules</strong> (<code>import</code>/<code>export</code>).</p>
+
+    <p>The committee simultaneously adopted an <strong>annual release cadence</strong>: ES2016, ES2017, ES2018, &hellip; with a fixed cut date. No more multi-year delays.</p>
+
+    <h2>The Annual Cadence (ES2016&ndash;ES2024)</h2>
+    <table>
+      <thead><tr><th>Year</th><th>Key additions</th></tr></thead>
+      <tbody>
+        <tr><td>ES2016</td><td><code>Array.includes</code>, exponentiation <code>**</code></td></tr>
+        <tr><td>ES2017</td><td><code>async</code>/<code>await</code>, shared memory, <code>Object.entries</code>/<code>values</code></td></tr>
+        <tr><td>ES2018</td><td>Spread in objects, async iterators, regex lookbehind</td></tr>
+        <tr><td>ES2019</td><td><code>Array.flat</code>, <code>Object.fromEntries</code>, optional catch</td></tr>
+        <tr><td>ES2020</td><td>Optional chaining <code>?.</code>, nullish coalescing <code>??</code>, BigInt, <code>globalThis</code>, dynamic <code>import()</code></td></tr>
+        <tr><td>ES2021</td><td><code>String.replaceAll</code>, logical assignment, <code>WeakRef</code>, <code>Promise.any</code></td></tr>
+        <tr><td>ES2022</td><td>Top-level <code>await</code>, class fields, private fields <code>#</code>, <code>Error.cause</code></td></tr>
+        <tr><td>ES2023</td><td><code>Array.findLast</code>, Change Array by Copy (<code>toSorted</code>, <code>toReversed</code>)</td></tr>
+        <tr><td>ES2024</td><td>Well-formed Unicode, grouped RegExp, <code>Promise.withResolvers</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Module Wars</h2>
+    <p>The decade-long transition from CommonJS (<code>require</code>) to ES Modules (<code>import</code>) has been one of the most painful ecosystem migrations in any language:</p>
+
+    <ul>
+      <li><strong>2009:</strong> CommonJS (<code>require</code>/<code>module.exports</code>) ships with Node.js</li>
+      <li><strong>2015:</strong> ES Modules spec published; no runtime supports it yet</li>
+      <li><strong>2017&ndash;2019:</strong> Browsers gain native <code>&lt;script type="module"&gt;</code></li>
+      <li><strong>2019&ndash;2021:</strong> Node.js adds experimental ESM support; dual CJS/ESM packages emerge</li>
+      <li><strong>2022+:</strong> Node.js <code>"type": "module"</code> in package.json; dual-package hell with <code>.mjs</code>/<code>.cjs</code> extensions</li>
+    </ul>
+
+    <h2>Key People</h2>
+    <table>
+      <thead><tr><th>Person</th><th>Contribution</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Brendan Eich</strong></td><td>Created JavaScript (1995). Co-founded Mozilla. Later founded Brave (privacy browser).</td></tr>
+        <tr><td><strong>Douglas Crockford</strong></td><td><em>JavaScript: The Good Parts</em>. JSLint. JSON inventor. Yahoo/PayPal.</td></tr>
+        <tr><td><strong>John Resig</strong></td><td>jQuery. Khan Academy.</td></tr>
+        <tr><td><strong>Ryan Dahl</strong></td><td>Node.js (2009). Deno (2018). Twice transformed JavaScript.</td></tr>
+        <tr><td><strong>Isaac Schlueter</strong></td><td>npm founder. Former npm CEO.</td></tr>
+        <tr><td><strong>Anders Hejlsberg</strong></td><td>TypeScript (2012). Previously Turbo Pascal, Delphi, C#.</td></tr>
+        <tr><td><strong>Jordan Walke</strong></td><td>Created React at Facebook (2013).</td></tr>
+        <tr><td><strong>Evan You</strong></td><td>Vue.js (2014), Vite (2020).</td></tr>
+        <tr><td><strong>Rich Harris</strong></td><td>Rollup (2015), Svelte (2016), SvelteKit.</td></tr>
+        <tr><td><strong>Dan Abramov</strong></td><td>Redux (2015), React core team member.</td></tr>
+        <tr><td><strong>Sebastian McKenzie</strong></td><td>Babel (2014), Rome/Biome.</td></tr>
+        <tr><td><strong>TJ Holowaychuk</strong></td><td>Express.js, Koa, ~500 npm packages. Later moved to Go.</td></tr>
+        <tr><td><strong>Jeremy Ashkenas</strong></td><td>CoffeeScript, Backbone.js, Underscore.js.</td></tr>
+        <tr><td><strong>Guillermo Rauch</strong></td><td>Socket.IO, Vercel, backed Next.js.</td></tr>
+        <tr><td><strong>Jarred Sumner</strong></td><td>Bun (2022). Zig + JavaScriptCore.</td></tr>
+        <tr><td><strong>Sindre Sorhus</strong></td><td>~1,000 npm packages. Prolific open-source contributor.</td></tr>
+        <tr><td><strong>Miško Hevery</strong></td><td>AngularJS (2010), Angular 2 (2016), Qwik (2021).</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The TC39 Process</h2>
+    <table>
+      <thead><tr><th>Stage</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>0 &mdash; Strawman</td><td>Anyone can propose an idea</td></tr>
+        <tr><td>1 &mdash; Proposal</td><td>TC39 agrees to explore it; has a champion</td></tr>
+        <tr><td>2 &mdash; Draft</td><td>Formal spec text written</td></tr>
+        <tr><td>3 &mdash; Candidate</td><td>Complete spec; needs implementation feedback</td></tr>
+        <tr><td>4 &mdash; Finished</td><td>Two implementations ship; will be in the next annual release</td></tr>
+      </tbody>
+    </table>
+
+    <p>The TC39 meets roughly every two months with delegates from browser vendors, framework authors, and the broader community. Proposals can take years to move from Stage 1 to Stage 4. Some never make it &mdash; the pipeline proposal, the decorators saga, and the module blocks proposal are all examples of long-lived Stage 2+ proposals.</p>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>JAV</td><td>Java</td><td>The name: a trademark deal. The language: no relation beyond C-family syntax.</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>V8&rsquo;s team (Lars Bak) came from HotSpot; the V8 codebase is C++</td></tr>
+        <tr><td>PRL</td><td>Perl</td><td>The CGI/DHTML era ran Perl on the server and JavaScript in the browser</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>Node.js and Python compete for backend web services; JavaScript won the frontend permanently</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">JavaScript Core</a></li>
+        <li><a href="typescript.html">TypeScript</a></li>
+        <li><a href="runtimes.html">Engines &amp; Runtimes</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="education.html">Learn</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>History &amp; Evolution &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

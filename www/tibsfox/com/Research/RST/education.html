@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Resources &mdash; Rust</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rst">
+  <header>
+    <h1>Learning Resources</h1>
+    <div class="subtitle">Books, Online, Conferences, Communities &mdash; How to Actually Learn Rust</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="ownership.html">Ownership</a>
+      <a href="traits.html">Traits</a>
+      <a href="async.html">Async</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="unsafe.html">Unsafe</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html" class="active">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Rust has the most welcoming community and the best free documentation of any systems programming language. &ldquo;The Book&rdquo; is genuinely good, the compiler errors are genuinely helpful, and the community genuinely wants you to succeed. The hard part is the borrow checker, not the people.
+    </blockquote>
+
+    <h2>The Canonical Book Corpus</h2>
+
+    <h3>Essential (all free online)</h3>
+    <table>
+      <thead><tr><th>Book</th><th>Authors</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><em>The Rust Programming Language</em> (&ldquo;The Book&rdquo;)</td><td>Steve Klabnik &amp; Carol Nichols</td><td>The official intro. Free at doc.rust-lang.org/book/. <strong>Start here.</strong> Also published by No Starch Press.</td></tr>
+        <tr><td><em>Rust by Example</em></td><td>Community</td><td>Free at doc.rust-lang.org/rust-by-example/. Learn by doing, short examples.</td></tr>
+        <tr><td><em>The Rustonomicon</em></td><td>Community</td><td>The dark arts of unsafe Rust. Free at doc.rust-lang.org/nomicon/. Read after The Book.</td></tr>
+        <tr><td><em>The Async Book</em></td><td>Community</td><td>Free at rust-lang.github.io/async-book/. Async/await, futures, runtimes.</td></tr>
+        <tr><td><em>The Cargo Book</em></td><td>Community</td><td>Free at doc.rust-lang.org/cargo/. Cargo, workspaces, features, publishing.</td></tr>
+        <tr><td><em>The Reference</em></td><td>Community</td><td>Free at doc.rust-lang.org/reference/. The language reference (not the spec, which doesn&rsquo;t exist yet).</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Published books</h3>
+    <table>
+      <thead><tr><th>Book</th><th>Authors</th><th>Year</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><em>Programming Rust</em></td><td>Jim Blandy, Jason Orendorff, Leonora Tindall</td><td>2nd ed. 2021</td><td>O&rsquo;Reilly. The comprehensive reference. Covers ownership, traits, async, unsafe, FFI. 700+ pages.</td></tr>
+        <tr><td><em>Rust for Rustaceans</em></td><td>Jon Gjengset</td><td>2021</td><td>No Starch Press. For intermediate-to-advanced Rust programmers. Covers interior mutability, unsafe patterns, async internals, macros.</td></tr>
+        <tr><td><em>Rust in Action</em></td><td>Tim McNamara</td><td>2021</td><td>Manning. Project-based, covers systems programming topics (networking, filesystems, OS concepts).</td></tr>
+        <tr><td><em>Rust Atomics and Locks</em></td><td>Mara Bos</td><td>2023</td><td>O&rsquo;Reilly. Free online at marabos.nl. THE book on low-level concurrency in Rust. Covers atomics, memory ordering, locks, channels.</td></tr>
+        <tr><td><em>Zero To Production in Rust</em></td><td>Luca Palmieri</td><td>2022</td><td>Backend web development with actix-web. Test-driven, production-focused.</td></tr>
+        <tr><td><em>Command-Line Rust</em></td><td>Ken Youens-Clark</td><td>2022</td><td>O&rsquo;Reilly. Build CLI tools; good for learning by doing.</td></tr>
+        <tr><td><em>Hands-on Rust</em></td><td>Herbert Wolverson</td><td>2022</td><td>Game development with bracket-lib. Fun entry point.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Interactive Learning</h2>
+    <table>
+      <thead><tr><th>Resource</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Rustlings</strong></td><td>Small exercises that teach Rust basics. <code>rustup component add rustlings</code>. Fix broken code to make tests pass.</td></tr>
+        <tr><td><strong>Exercism Rust track</strong></td><td>exercism.org/tracks/rust &mdash; 100+ exercises with mentoring.</td></tr>
+        <tr><td><strong>Rust Playground</strong></td><td>play.rust-lang.org &mdash; run Rust in the browser.</td></tr>
+        <tr><td><strong>Tour of Rust</strong></td><td>tourofrust.com &mdash; step-by-step browser-based tour.</td></tr>
+        <tr><td><strong>Comprehensive Rust</strong></td><td>Google&rsquo;s internal Rust course, open-sourced. google.github.io/comprehensive-rust/. 3-day curriculum.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Video Channels</h2>
+    <ul>
+      <li><strong>Jon Gjengset</strong> (<em>@jonhoo</em>) &mdash; deep-dive live-coding sessions on advanced Rust topics. The best intermediate-to-advanced Rust content on YouTube. Crust of Rust series.</li>
+      <li><strong>Let&rsquo;s Get Rusty</strong> (Bogdan) &mdash; The Book as video, chapter by chapter. Good for beginners.</li>
+      <li><strong>No Boilerplate</strong> (Tris Oaten) &mdash; short, punchy videos on Rust philosophy and features.</li>
+      <li><strong>The Primeagen</strong> &mdash; Rust + performance + systems thinking.</li>
+      <li><strong>Fireship</strong> &mdash; Rust in 100 seconds, fast overviews.</li>
+      <li><strong>Rustconf</strong> and <strong>EuroRust</strong> talks &mdash; on YouTube, annual.</li>
+    </ul>
+
+    <h2>Conferences</h2>
+    <table>
+      <thead><tr><th>Event</th><th>Location</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td><strong>RustConf</strong></td><td>USA (varies)</td><td>The official annual Rust conference</td></tr>
+        <tr><td><strong>Rust Nation UK</strong></td><td>London</td><td>UK-focused</td></tr>
+        <tr><td><strong>EuroRust</strong></td><td>Europe (varies)</td><td>European community</td></tr>
+        <tr><td><strong>RustLab</strong></td><td>Florence, Italy</td><td>European</td></tr>
+        <tr><td><strong>Oxidize</strong></td><td>Berlin</td><td>Embedded Rust focus</td></tr>
+        <tr><td><strong>RustFest</strong></td><td>Various (historical)</td><td>Community-run, paused</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Communities</h2>
+    <ul>
+      <li><strong>r/rust</strong> on Reddit &mdash; active, helpful, well-moderated</li>
+      <li><strong>users.rust-lang.org</strong> &mdash; official user forum</li>
+      <li><strong>internals.rust-lang.org</strong> &mdash; language design discussion</li>
+      <li><strong>Rust Discord</strong> (unofficial but large)</li>
+      <li><strong>Rust Zulip</strong> &mdash; the official development chat</li>
+      <li><strong>This Week in Rust</strong> &mdash; weekly newsletter of Rust news, blog posts, and crate releases</li>
+      <li><strong>Stack Overflow [rust] tag</strong></li>
+    </ul>
+
+    <h2>Online References</h2>
+    <ul>
+      <li><strong>docs.rs</strong> &mdash; auto-generated documentation for every crate on crates.io</li>
+      <li><strong>lib.rs</strong> &mdash; curated crate discovery (better than crates.io browsing)</li>
+      <li><strong>cheats.rs</strong> &mdash; Rust cheat sheet; language reference in one page</li>
+      <li><strong>The Rust RFC Book</strong> &mdash; every RFC ever accepted, with full discussion history</li>
+    </ul>
+
+    <h2>A Reading Order That Works</h2>
+    <div class="card green">
+      <ol>
+        <li><strong>&ldquo;The Book&rdquo;</strong> (Klabnik &amp; Nichols, free online) &mdash; read it cover to cover, do the exercises</li>
+        <li><strong>Rustlings</strong> &mdash; fix broken code to reinforce ownership, borrowing, traits</li>
+        <li><strong>Build something real:</strong> a CLI tool with <code>clap</code>, an HTTP server with <code>axum</code>, or a game with <code>bracket-lib</code></li>
+        <li><strong><em>Programming Rust</em></strong> (Blandy/Orendorff/Tindall) &mdash; the comprehensive reference when you hit walls</li>
+        <li><strong>Jon Gjengset&rsquo;s Crust of Rust videos</strong> &mdash; for intermediate topics (iterators, smart pointers, async)</li>
+        <li><strong><em>Rust for Rustaceans</em></strong> (Gjengset) &mdash; when you&rsquo;re comfortable with ownership and want to go deep</li>
+        <li><strong><em>Rust Atomics and Locks</em></strong> (Bos) &mdash; when you need low-level concurrency</li>
+        <li><strong>Read <code>ripgrep</code> source</strong> &mdash; Andrew Gallant&rsquo;s code is the gold standard for idiomatic Rust</li>
+        <li><strong>The Rustonomicon</strong> &mdash; when you need unsafe</li>
+      </ol>
+      <p>This progression takes several months of serious study and produces a programmer who can write production Rust confidently.</p>
+    </div>
+
+    <h2>The Borrow Checker Experience</h2>
+    <div class="card">
+      <p>Every Rust learner hits a wall with the borrow checker. This is normal. The typical arc:</p>
+      <ol>
+        <li><strong>Week 1-2:</strong> &ldquo;This is nice, it&rsquo;s like C++ but cleaner.&rdquo;</li>
+        <li><strong>Week 3-4:</strong> &ldquo;WHY WON&rsquo;T THIS COMPILE.&rdquo; The borrow checker rejects your design. You fight it.</li>
+        <li><strong>Week 5-8:</strong> &ldquo;Oh. The borrow checker was right. My design was wrong.&rdquo; You redesign.</li>
+        <li><strong>Month 3+:</strong> &ldquo;I think in ownership now. The borrow checker catches things I didn&rsquo;t even know were bugs.&rdquo;</li>
+        <li><strong>Month 6+:</strong> &ldquo;I miss the borrow checker when I write other languages.&rdquo;</li>
+      </ol>
+      <p>The compiler error messages are genuinely excellent &mdash; they explain what went wrong, why, and often suggest the fix. Trust them.</p>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CPP</td><td>C++</td><td>Stroustrup/Meyers/Alexandrescu is the C++ book canon; Klabnik/Gjengset/Bos is Rust&rsquo;s</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>Bloch&rsquo;s <em>Effective Java</em> inspired the &ldquo;idiomatic wisdom&rdquo; format; Rust doesn&rsquo;t have one yet but Gjengset comes closest</td></tr>
+        <tr><td>JTS</td><td>JavaScript</td><td>JavaScript has Haverbeke/Crockford/Simpson; Rust has Klabnik/Gjengset/Blandy</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="ownership.html">Ownership &amp; Borrowing</a></li>
+        <li><a href="traits.html">Traits &amp; Types</a></li>
+        <li><a href="async.html">Async &amp; Concurrency</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="unsafe.html">Unsafe &amp; FFI</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Learning Resources &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1657,7 +1657,7 @@ Query &rarr; [Retrieve Docs] &rarr; [Quality Evaluator]
                     </tr>
                     <tr>
                         <td><strong>Connection</strong></td>
-                        <td>maple@tibsfox (local PostgreSQL)</td>
+                        <td>foxy@localhost (local PostgreSQL)</td>
                     </tr>
                     <tr>
                         <td><strong>Schema</strong></td>
@@ -1693,7 +1693,7 @@ Query &rarr; [Retrieve Docs] &rarr; [Quality Evaluator]
                 <pre class="code-content"><code><span class="comment"># Agentic RAG with tool use</span>
 <span class="keyword">class</span> <span class="function">AgenticRAG</span>:
     <span class="keyword">def</span> <span class="function">__init__</span>(self):
-        self.vector_db = PgVectorStore(<span class="string">"maple@tibsfox"</span>, schema=<span class="string">"artemis"</span>)
+        self.vector_db = PgVectorStore(<span class="string">"foxy@localhost"</span>, schema=<span class="string">"artemis"</span>)
         self.web_search = WebSearchTool()
         self.code_search = GrepTool()
         self.evaluator = QualityEvaluator()

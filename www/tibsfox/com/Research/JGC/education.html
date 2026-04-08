@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Resources &mdash; JVM GC &amp; Memory Management</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jgc">
+  <header>
+    <h1>Learning Resources</h1>
+    <div class="subtitle">Books, Blogs, Talks, Tools, and the People Who Actually Understand GC</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="collectors.html">Collectors</a>
+      <a href="memory.html">Memory</a>
+      <a href="tuning.html">Tuning</a>
+      <a href="monitoring.html">Monitoring</a>
+      <a href="diagnostics.html">Diagnostics</a>
+      <a href="containers.html">Containers</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html" class="active">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      GC tuning wisdom is unusually concentrated. A few books, a few blogs, a few people. If you read every page by Shipilev, Goetz, Pangin, Lea, Kennke, and Oaks, you have read most of the corpus.
+    </blockquote>
+
+    <h2>The Canonical Book Corpus</h2>
+
+    <h3>Essential</h3>
+    <table>
+      <thead><tr><th>Book</th><th>Authors</th><th>Year</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><em>The Garbage Collection Handbook</em></td><td>Richard Jones, Antony Hosking, Eliot Moss</td><td>2nd ed. 2023</td><td><strong>The academic canon.</strong> Not Java-specific &mdash; covers every serious GC algorithm in the literature. If you&rsquo;re going to read one GC book, read this one.</td></tr>
+        <tr><td><em>Java Performance: The Definitive Guide</em></td><td>Scott Oaks</td><td>2nd ed. 2020</td><td>The practical companion. HotSpot internals, GC tuning, JIT, profiling, JMH.</td></tr>
+        <tr><td><em>Optimizing Java</em></td><td>Ben Evans, James Gough, Chris Newland</td><td>2018</td><td>Practical JVM performance engineering. Good chapter on understanding JIT compilation output.</td></tr>
+        <tr><td><em>Java Concurrency in Practice</em></td><td>Brian Goetz, Tim Peierls, Joshua Bloch, Joseph Bowbeer, David Holmes, Doug Lea</td><td>2006</td><td>The book on <code>java.util.concurrent</code> and the JMM. Indirect relevance to GC: concurrent algorithms use memory differently.</td></tr>
+        <tr><td><em>Effective Java</em></td><td>Joshua Bloch</td><td>3rd ed. 2018</td><td>Items on allocation discipline, immutability, equals/hashCode, weak and soft references.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Advanced / niche</h3>
+    <ul>
+      <li><em>Java Performance Companion</em> &mdash; Charlie Hunt, Monica Beckwith, Poonam Parhar, Bengt R&ouml;tzlin (2016) &mdash; G1 internals, CDS</li>
+      <li><em>Java Performance</em> &mdash; Charlie Hunt &amp; Binu John (2012) &mdash; the pre-modern era, still useful for HotSpot architecture</li>
+      <li><em>Systems Performance</em> (Brendan Gregg, 2nd ed. 2020) &mdash; Linux perf tools, flame graphs, not Java-specific but applies</li>
+      <li><em>BPF Performance Tools</em> (Brendan Gregg, 2019) &mdash; eBPF-based profiling including JVM USDT probes</li>
+    </ul>
+
+    <h2>The People</h2>
+
+    <table>
+      <thead><tr><th>Person</th><th>Role</th><th>Where to find them</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Aleksey Shipilev</strong></td><td>JMH, concurrency, GC performance engineering</td><td>shipilev.net, Red Hat, countless JVMLS/CppCon/ JavaOne talks</td></tr>
+        <tr><td><strong>Brian Goetz</strong></td><td>Java Language Architect, Project Amber</td><td>Oracle, Inside Java podcast, JVM Language Summit</td></tr>
+        <tr><td><strong>Doug Lea</strong></td><td><code>java.util.concurrent</code>, CAS primitives</td><td>SUNY Oswego, JSR 166 papers</td></tr>
+        <tr><td><strong>Andrei Pangin</strong></td><td>async-profiler, Odnoklassniki</td><td>GitHub (async-profiler), Devoxx talks</td></tr>
+        <tr><td><strong>Roman Kennke</strong></td><td>Shenandoah GC lead</td><td>Red Hat; shenandoah-dev mailing list; openjdk.org</td></tr>
+        <tr><td><strong>Christine Flood</strong></td><td>Shenandoah co-author</td><td>Red Hat</td></tr>
+        <tr><td><strong>Per Liden</strong></td><td>ZGC architect</td><td>Oracle; JVMLS talks</td></tr>
+        <tr><td><strong>Stefan Johansson</strong></td><td>ZGC, generational ZGC</td><td>Oracle</td></tr>
+        <tr><td><strong>Thomas Schatzl</strong></td><td>G1 GC maintainer</td><td>Oracle; JVMLS talks</td></tr>
+        <tr><td><strong>Erik &Ouml;sterlund</strong></td><td>ZGC colored pointers, GC barriers</td><td>Oracle</td></tr>
+        <tr><td><strong>Charlie Hunt</strong></td><td>Java Performance author, HotSpot engineer</td><td>Oracle, Salesforce</td></tr>
+        <tr><td><strong>Monica Beckwith</strong></td><td>G1 tuning, Java Performance Companion</td><td>Microsoft, formerly Azul</td></tr>
+        <tr><td><strong>Gil Tene</strong></td><td>Azul CTO, HdrHistogram, Java and response time</td><td>Azul; &ldquo;Latency Tip of the Day&rdquo;</td></tr>
+        <tr><td><strong>Kirk Pepperdine</strong></td><td>Performance tuning, JavaOne</td><td><em>Java Performance Tuning</em></td></tr>
+        <tr><td><strong>Scott Oaks</strong></td><td><em>Java Performance: The Definitive Guide</em></td><td>Oracle, Wayfair</td></tr>
+        <tr><td><strong>Martin Thompson</strong></td><td>LMAX Disruptor, Aeron, mechanical sympathy</td><td>Real Logic; Aeron</td></tr>
+        <tr><td><strong>Peter Lawrey</strong></td><td>Chronicle Software, low-latency Java</td><td>Chronicle; blog</td></tr>
+        <tr><td><strong>Jon Schneider</strong></td><td>Micrometer</td><td>Netflix (formerly Pivotal)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Blogs</h2>
+    <ul>
+      <li><strong>shipilev.net</strong> &mdash; Aleksey Shipilev&rsquo;s collected writing. GC essentials, JMM, allocation performance. Read it all.</li>
+      <li><strong>inside.java</strong> &mdash; Oracle&rsquo;s official developer blog. Brian Goetz, Ron Pressler, Alan Bateman.</li>
+      <li><strong>mail.openjdk.org/mailman/listinfo/hotspot-gc-dev</strong> &mdash; the primary source. Everything important happens here.</li>
+      <li><strong>openjdk.org/jeps/</strong> &mdash; JEP index. Every new feature and many rejected proposals.</li>
+      <li><strong>brendangregg.com</strong> &mdash; performance observability, not Java-specific but applies</li>
+      <li><strong>Azul blog</strong> (azul.com/blog) &mdash; C4, low-latency, GC deep dives</li>
+      <li><strong>Red Hat Developer Blog</strong> &mdash; Shenandoah, Quarkus, OpenJDK builds</li>
+      <li><strong>Datadog Engineering Blog</strong> &mdash; production JVM observability</li>
+      <li><strong>Netflix Tech Blog</strong> &mdash; Atlas, Spectator, large-scale JVM operations</li>
+      <li><strong>Chronicle Software blog</strong> &mdash; off-heap, low-latency patterns</li>
+    </ul>
+
+    <h2>Talks to Watch (YouTube)</h2>
+    <ul>
+      <li>Aleksey Shipilev &mdash; <em>&ldquo;Shenandoah GC&rdquo;</em>, <em>&ldquo;GC Pause Unexpectedly Long? Check Your Safepoints&rdquo;</em>, <em>&ldquo;JVM Performance Puzzlers&rdquo;</em></li>
+      <li>Gil Tene &mdash; <em>&ldquo;Understanding Java Garbage Collection&rdquo;</em>, <em>&ldquo;How NOT to Measure Latency&rdquo;</em></li>
+      <li>Monica Beckwith &mdash; <em>&ldquo;G1 Garbage Collector Performance Tuning&rdquo;</em></li>
+      <li>Thomas Schatzl &mdash; various G1 internals talks at JVMLS</li>
+      <li>Per Liden &mdash; <em>&ldquo;ZGC: The Next Generation Garbage Collector&rdquo;</em></li>
+      <li>Brian Goetz &mdash; <em>&ldquo;Language Futures&rdquo;</em> annual keynotes</li>
+      <li>Kirk Pepperdine &mdash; <em>&ldquo;The Art of Java Performance Tuning&rdquo;</em></li>
+      <li>Cliff Click &mdash; <em>&ldquo;A Crash Course in Modern Hardware&rdquo;</em>, original HotSpot C2 architect</li>
+      <li>CppCon and JVM Language Summit archives on YouTube</li>
+    </ul>
+
+    <h2>Tools &mdash; the Practitioner&rsquo;s Kit</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Source</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>JDK Mission Control (JMC)</strong></td><td>Adoptium, Oracle</td><td>Viewing JFR recordings; the flagship JVM profiler UI</td></tr>
+        <tr><td><strong>async-profiler</strong></td><td>github.com/async-profiler</td><td>Sampling profiler with flame graphs</td></tr>
+        <tr><td><strong>JMH</strong></td><td>openjdk.org/projects/code-tools/jmh</td><td>The only credible microbenchmark harness</td></tr>
+        <tr><td><strong>Eclipse MAT</strong></td><td>eclipse.org/mat</td><td>Heap dump analyzer with dominator tree, leak suspects</td></tr>
+        <tr><td><strong>GCViewer</strong></td><td>github.com/chewiebug/GCViewer</td><td>Open-source GC log analyzer</td></tr>
+        <tr><td><strong>GCEasy.io</strong></td><td>gceasy.io</td><td>Web-based GC log analysis</td></tr>
+        <tr><td><strong>FastThread.io</strong></td><td>fastthread.io</td><td>Web-based thread dump analyzer</td></tr>
+        <tr><td><strong>VisualVM</strong></td><td>visualvm.github.io</td><td>All-purpose JVM inspector</td></tr>
+        <tr><td><strong>jconsole</strong></td><td>JDK</td><td>Basic JMX client bundled with the JDK</td></tr>
+        <tr><td><strong>Compiler Explorer</strong></td><td>godbolt.org</td><td>See what the JIT actually produces</td></tr>
+        <tr><td><strong>JITWatch</strong></td><td>github.com/AdoptOpenJDK/jitwatch</td><td>Analyze JIT log output</td></tr>
+        <tr><td><strong>HdrHistogram</strong></td><td>hdrhistogram.org</td><td>High-precision latency histograms</td></tr>
+        <tr><td><strong>bpftrace</strong> / <strong>bcc</strong></td><td>iovisor.org</td><td>eBPF-based tracing, JVM USDT probes</td></tr>
+      </tbody>
+    </table>
+
+    <h2>A Reading Order That Works</h2>
+    <div class="card green">
+      <ol>
+        <li><strong>Start with GC logs.</strong> Enable unified logging on a real workload. Open the file in GCViewer. Stare at it until the shapes make sense.</li>
+        <li><strong>Read Shipilev&rsquo;s &ldquo;JVM Anatomy Quarks&rdquo;</strong> series on shipilev.net. Short, dense, essential.</li>
+        <li><strong>Watch Gil Tene&rsquo;s &ldquo;Understanding Java Garbage Collection&rdquo;</strong> talk. 60 minutes, changes how you think about it.</li>
+        <li><strong><em>Java Performance: The Definitive Guide</em></strong> by Scott Oaks &mdash; work through it, try the examples</li>
+        <li><strong>Get your hands on JFR.</strong> Record a real app. Load it into JMC. Explore every tab.</li>
+        <li><strong>Eclipse MAT</strong> with a real heap dump. Dominator tree. Retained size. Do the tutorial.</li>
+        <li><strong><em>The Garbage Collection Handbook</em></strong> &mdash; slow, dense, worth it. The theory that underlies everything.</li>
+        <li><strong>The OpenJDK JEP index.</strong> Read every GC-related JEP from the last 5 years.</li>
+        <li><strong>Subscribe to hotspot-gc-dev.</strong> Lurk for a month; you&rsquo;ll learn more than most books can teach.</li>
+        <li><strong>Tune a real workload.</strong> Measure before, measure after, write it down. This is the only way to become fast at it.</li>
+      </ol>
+    </div>
+
+    <h2>Communities</h2>
+    <ul>
+      <li><strong>r/java</strong> on Reddit &mdash; broad community, some GC content</li>
+      <li><strong>Stack Overflow [garbage-collection] [jvm] [g1gc] [zgc] tags</strong> &mdash; specific Q&amp;A</li>
+      <li><strong>OpenJDK dev lists</strong> &mdash; hotspot-gc-dev, jdk-dev, zgc-dev, shenandoah-dev</li>
+      <li><strong>Friends of jClarity</strong> &mdash; Java Champions Slack</li>
+      <li><strong>Discord / Together Java</strong> &mdash; general Java community with performance channels</li>
+    </ul>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>JAV</td><td>Java and the JVM</td><td>General Java book canon (Bloch, Horstmann, Goetz)</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>Stroustrup, Meyers, Alexandrescu &mdash; a similar small but deep canon for a different language</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>Canonical incident response practices cross over to JVM incident work</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="collectors.html">Garbage Collectors Deep Dive</a></li>
+        <li><a href="memory.html">Memory Spaces &amp; Layout</a></li>
+        <li><a href="tuning.html">GC Tuning &amp; Flag Reference</a></li>
+        <li><a href="monitoring.html">Monitoring &amp; Metrics</a></li>
+        <li><a href="diagnostics.html">Heap Dumps &amp; Diagnostics</a></li>
+        <li><a href="containers.html">Containers &amp; Kubernetes</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Learning Resources &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

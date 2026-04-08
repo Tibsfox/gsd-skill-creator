@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constraint Logic Programming &mdash; Prolog &amp; Logic Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-plg">
+  <header>
+    <h1>Constraint Logic Programming</h1>
+    <div class="subtitle">CLP(FD), CLP(R), CHR &mdash; Sudoku in 20 lines, airline crew scheduling, industrial optimization &mdash; the reason Prolog stays commercially relevant</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="history.html">History</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="expert-systems.html">Expert Systems</a>
+      <a href="constraint-lp.html" class="active">CLP</a>
+      <a href="datalog-asp.html">Datalog &amp; ASP</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      If there&rsquo;s one idea that kept Prolog commercially relevant through the 1990s and 2000s, it&rsquo;s Constraint Logic Programming. Jaffar and Lassez&rsquo;s 1987 insight was profound but simple: Prolog&rsquo;s unification step is already a specific kind of constraint solving &mdash; equations over the Herbrand universe. What if you replaced unification with a general constraint solver over some other domain? Integers, reals, booleans, sets?
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- 1. JAFFAR-LASSEZ                                              -->
+    <!-- ============================================================ -->
+
+    <h2>1. The Jaffar-Lassez Scheme (1987)</h2>
+
+    <p>The scheme was formalized by <strong>Joxan Jaffar and Jean-Louis Lassez</strong> in their 1987 POPL paper <em>Constraint Logic Programming</em>. They showed that you get a family of languages <strong>CLP(X)</strong>, where X is the constraint domain.</p>
+
+    <table>
+      <thead><tr><th>Language</th><th>Domain</th><th>Typical use</th></tr></thead>
+      <tbody>
+        <tr><td><strong>CLP(Herbrand)</strong></td><td>Terms, equations</td><td>Ordinary Prolog</td></tr>
+        <tr><td><strong>CLP(FD)</strong></td><td>Integers in bounded domains</td><td>Scheduling, puzzles, combinatorics</td></tr>
+        <tr><td><strong>CLP(R)</strong></td><td>Linear arithmetic over the reals</td><td>Engineering, finance, modeling</td></tr>
+        <tr><td><strong>CLP(Q)</strong></td><td>Rationals (exact arithmetic)</td><td>Correctness-critical numerics</td></tr>
+        <tr><td><strong>CLP(B)</strong></td><td>Booleans</td><td>SAT-like small problems</td></tr>
+        <tr><td><strong>CHR</strong></td><td>User-defined constraint rules</td><td>Custom solvers, type inference</td></tr>
+      </tbody>
+    </table>
+
+    <p>Each of these can be efficient for its domain because the solver is specialized. You don&rsquo;t need to generate and test &mdash; the solver prunes the search tree as you go, often dramatically. The result is a family of languages that combine Prolog&rsquo;s declarative expressiveness with the efficiency of modern constraint solvers.</p>
+
+    <!-- ============================================================ -->
+    <!-- 2. CLP(FD)                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>2. CLP(FD): The Workhorse</h2>
+
+    <p><strong>CLP(FD)</strong> &mdash; finite domain constraints &mdash; is where CLP really shines. Domains are typically integers in a bounded range; constraints are equalities, inequalities, arithmetic relations, <code>all_different</code>, <code>element</code>, and global constraints like <code>cumulative</code>.</p>
+
+    <h3>N-Queens &mdash; CLP(FD) hello world</h3>
+
+    <pre><code>:- use_module(library(clpfd)).
+
+queens(N, Qs) :-
+    length(Qs, N),
+    Qs ins 1..N,
+    safe(Qs),
+    labeling([ff], Qs).
+
+safe([]).
+safe([Q|Qs]) :- safe(Qs, Q, 1), safe(Qs).
+
+safe([], _, _).
+safe([Q|Qs], Q0, D0) :-
+    Q0 #\= Q,
+    abs(Q0 - Q) #\= D0,
+    D1 #= D0 + 1,
+    safe(Qs, Q0, D1).</code></pre>
+
+    <p>The <code>ins 1..N</code> constraint says each queen must be on some row in the range. The <code>#\=</code> and <code>abs</code> constraints encode non-attacking rules. <code>labeling([ff], Qs)</code> invokes a first-fail search strategy. For N=25 this runs in milliseconds. For N=100 it finishes in under a second.</p>
+
+    <h3>Sudoku in 20 lines</h3>
+
+    <pre><code>:- use_module(library(clpfd)).
+
+sudoku(Rows) :-
+    length(Rows, 9), maplist(same_length(Rows), Rows),
+    append(Rows, Vs), Vs ins 1..9,
+    maplist(all_distinct, Rows),
+    transpose(Rows, Columns),
+    maplist(all_distinct, Columns),
+    Rows = [A,B,C,D,E,F,G,H,I],
+    blocks(A, B, C), blocks(D, E, F), blocks(G, H, I),
+    maplist(label, Rows).
+
+blocks([], [], []).
+blocks([A,B,C|Bs1], [D,E,F|Bs2], [G,H,I|Bs3]) :-
+    all_distinct([A,B,C,D,E,F,G,H,I]),
+    blocks(Bs1, Bs2, Bs3).</code></pre>
+
+    <p>Given a puzzle with some cells fixed and others unbound, this solves it in milliseconds. The constraints &mdash; each row, column, and 3x3 block contains all-different values from 1 to 9 &mdash; are expressed declaratively. The <code>all_distinct</code> global constraint maintains a propagation network that prunes search aggressively.</p>
+
+    <!-- ============================================================ -->
+    <!-- 3. INDUSTRIAL                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>3. Industrial Planning and Scheduling</h2>
+
+    <p>Here&rsquo;s where CLP made its serious money. <strong>Crew scheduling for airlines</strong> &mdash; figuring out which pilots and flight attendants work which flights, respecting contractual rules about rest periods, home bases, qualifications, seniority, and union agreements &mdash; is a combinatorial problem of breathtaking complexity. The constraint graph has tens of thousands of variables and millions of constraints.</p>
+
+    <div class="card">
+      <p><strong>SICStus Prolog</strong>, developed at SICS (now RISE), became the go-to tool because its CLP(FD) implementation was industrial-strength and supported the global constraints (<code>cumulative</code>, <code>disjunctive</code>, <code>diffn</code>, <code>circuit</code>) that scheduling problems need. <strong>Carmen Systems</strong> (now part of Jeppesen, part of Boeing) built crew scheduling systems on SICStus for <strong>Lufthansa, KLM</strong>, and other major airlines. The systems ran for decades.</p>
+      <p>Other industrial CLP applications through the 1990s and 2000s:</p>
+      <ul>
+        <li><strong>Railway scheduling</strong> in Sweden and Germany</li>
+        <li><strong>Train dispatching</strong> at SNCF (France) using ILOG&rsquo;s CP Optimizer (descended from CHIP)</li>
+        <li><strong>Harbor crane scheduling</strong> at container terminals</li>
+        <li><strong>Satellite observation scheduling</strong> at ESA and NASA</li>
+        <li><strong>Factory floor scheduling</strong> at various manufacturers</li>
+        <li><strong>Nurse rostering</strong> in hospitals (a notoriously hard problem with soft preferences)</li>
+        <li><strong>Vehicle routing</strong> for delivery fleets (before Google Maps Directions API commoditized parts of this)</li>
+      </ul>
+    </div>
+
+    <p>The tools evolved. <strong>ILOG CP</strong> (originally CHIP from ECRC Munich, then Solver, now IBM CP Optimizer) was a C++ library with a rule-based modeling front end. <strong>ECLiPSe</strong> (originally ECRC, maintained at Imperial College) was an open-source Prolog with strong CLP. <strong>Choco</strong> (Nantes) and <strong>Gecode</strong> (Uppsala/Catalyst) were C++/Java constraint solvers with Prolog-like interfaces. <strong>Google OR-Tools</strong> is the modern inheritor in many ways &mdash; not Prolog syntax, but the same modeling and solving tradition.</p>
+
+    <!-- ============================================================ -->
+    <!-- 4. CLP(R), CLP(Q), CLP(B)                                     -->
+    <!-- ============================================================ -->
+
+    <h2>4. CLP(R), CLP(Q), CLP(B)</h2>
+
+    <h3>CLP(R) &mdash; linear real arithmetic</h3>
+
+    <pre><code>?- use_module(library(clpr)).
+
+?- {X + Y =&lt; 10, X - Y &gt;= 2, X &gt;= 0, Y &gt;= 0}.
+% {X - Y &gt;= 2, X + Y =&lt; 10, Y &gt;= 0, X &gt;= 2}</code></pre>
+
+    <p>The solver keeps track of constraints symbolically and simplifies them as new constraints come in. You can query for specific solutions or just leave the constraint store as a symbolic representation. Useful for economic modeling, engineering design, and any problem where you reason about continuous quantities.</p>
+
+    <h3>CLP(Q) &mdash; rationals for exact arithmetic</h3>
+
+    <p>The same but over rationals, which gives exact arithmetic at the cost of speed. When you need to know that your solver will not give you off-by-one-bit answers due to floating-point round-off, CLP(Q) is the ticket.</p>
+
+    <h3>CLP(B) &mdash; booleans</h3>
+
+    <pre><code>?- use_module(library(clpb)).
+
+?- sat(X * Y + ~X * Z), labeling([X, Y, Z]).
+X = 0, Y = 0, Z = 1 ;
+X = 0, Y = 1, Z = 1 ;
+X = 1, Y = 1, Z = 0 ;
+X = 1, Y = 1, Z = 1.</code></pre>
+
+    <p>Essentially a SAT solver wrapped in Prolog syntax. Rarely the right choice for large SAT problems &mdash; use a real SAT solver &mdash; but convenient for small boolean reasoning embedded in Prolog programs.</p>
+
+    <!-- ============================================================ -->
+    <!-- 5. CHR                                                        -->
+    <!-- ============================================================ -->
+
+    <h2>5. CHR &mdash; Constraint Handling Rules</h2>
+
+    <p><strong>Constraint Handling Rules</strong>, developed by <strong>Thom Fr&uuml;hwirth</strong> in the early 1990s, are a committed-choice language for implementing constraint solvers. Where CLP(FD) gives you a fixed set of constraint propagators, CHR lets you write your own. A CHR program is a set of rules of three forms:</p>
+
+    <ul>
+      <li><strong>Simplification</strong>: <code>Head1, Head2, ... &lt;=&gt; Guard | Body.</code> (replace the heads with the body)</li>
+      <li><strong>Propagation</strong>: <code>Head1, Head2, ... ==&gt; Guard | Body.</code> (add the body without removing the heads)</li>
+      <li><strong>Simpagation</strong>: <code>Head1 \ Head2 &lt;=&gt; Guard | Body.</code> (remove Head2, keep Head1, add body)</li>
+    </ul>
+
+    <p>Example &mdash; a solver for the less-than relation:</p>
+
+    <pre><code>:- chr_constraint leq/2.
+
+reflexivity  @ leq(X, X) &lt;=&gt; true.
+antisymmetry @ leq(X, Y), leq(Y, X) &lt;=&gt; X = Y.
+idempotence  @ leq(X, Y) \ leq(X, Y) &lt;=&gt; true.
+transitivity @ leq(X, Y), leq(Y, Z) ==&gt; leq(X, Z).</code></pre>
+
+    <p>Load this, assert some constraints, and CHR computes the transitive closure, detects equalities from antisymmetry, removes duplicates, and catches <code>X &lt;= X</code> as trivially true. CHR has been used to implement union-find, graph algorithms, type inference, and custom domain-specific constraint solvers. CHR is Turing-complete &mdash; in fact, it can efficiently simulate Turing machines, term rewriting, and many other computational models. <em>One of the most elegant rule languages ever designed, sitting right there in SWI-Prolog waiting to be used.</em></p>
+
+    <!-- ============================================================ -->
+    <!-- 6. CLP VS SAT/SMT                                             -->
+    <!-- ============================================================ -->
+
+    <h2>6. CLP vs Modern SAT/SMT Solvers</h2>
+
+    <p>The honest modern question: why use CLP when you have <strong>Z3</strong>, <strong>CVC5</strong>, and <strong>Yices</strong>?</p>
+
+    <p>Modern SMT (Satisfiability Modulo Theories) solvers are astonishingly powerful. Z3, developed at Microsoft Research by <strong>Leonardo de Moura and Nikolaj Bj&oslash;rner</strong>, handles propositional logic, linear arithmetic over integers and reals, bit vectors, arrays, quantifiers, and more, in a single integrated solver. It&rsquo;s used in program verification, test generation, scheduling, puzzle solving, cryptographic analysis. The Python bindings make it accessible to anyone.</p>
+
+    <pre><code># Z3 Python: N-queens
+from z3 import *
+
+def nqueens(n):
+    qs = [Int(f'q_{i}') for i in range(n)]
+    s = Solver()
+    for q in qs:
+        s.add(q &gt;= 0, q &lt; n)
+    s.add(Distinct(qs))
+    for i in range(n):
+        for j in range(i+1, n):
+            s.add(qs[i] - qs[j] != i - j)
+            s.add(qs[i] - qs[j] != j - i)
+    if s.check() == sat:
+        return [s.model()[q].as_long() for q in qs]
+    return None</code></pre>
+
+    <p>This is typically faster than the Prolog version for large N. So why CLP?</p>
+
+    <div class="card">
+      <ol>
+        <li><strong>Tight integration with symbolic computation.</strong> If your problem has a significant search component mixed with symbolic processing &mdash; parsing, term manipulation, rule firing &mdash; Prolog&rsquo;s native support for these things makes the overall program shorter and clearer.</li>
+        <li><strong>Optimization and labeling strategies.</strong> CLP(FD) gives you fine control over search heuristics (first-fail, most-constrained, ffc, domain splitting) that SMT solvers abstract away.</li>
+        <li><strong>Custom global constraints.</strong> For truly specialized problems (scheduling with unusual resource rules), rolling your own propagator in CHR can beat a generic SMT encoding.</li>
+        <li><strong>Explanation and debugging.</strong> Prolog&rsquo;s execution model makes it relatively easy to trace why a solution was found (or not). SMT solvers are more opaque.</li>
+        <li><strong>Legacy.</strong> Aviation scheduling software that&rsquo;s been in production for 25 years doesn&rsquo;t get rewritten just because Z3 is shiny.</li>
+      </ol>
+      <p><strong>The honest synthesis:</strong> SMT solvers have eaten a large chunk of what CLP used to be used for, especially when the problem is close to &ldquo;plain constraints with some arithmetic.&rdquo; CLP still dominates when you need custom propagators, tight search control, or integration with symbolic computation.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 7. MARKUS TRISKA AND THE MODERN SCHOOL                        -->
+    <!-- ============================================================ -->
+
+    <h2>7. The Modern Pure-CLP School</h2>
+
+    <p><strong>Markus Triska</strong>&rsquo;s <em>The Power of Prolog</em> and the SWI-Prolog <code>library(clpfd)</code> together represent the strongest modern argument for CLP-centric Prolog. Triska&rsquo;s thesis is that <em>most Prolog arithmetic code should use CLP(FD) instead of <code>is/2</code></em>, because CLP(FD) is:</p>
+
+    <ul>
+      <li><strong>Relational</strong> &mdash; works in all modes (you can ask &ldquo;what X satisfies this?&rdquo;)</li>
+      <li><strong>Pure</strong> &mdash; no side effects, no extra-logical operators</li>
+      <li><strong>Correct</strong> &mdash; avoids the is/2 gotcha and its floundering cousins</li>
+      <li><strong>Often faster</strong> &mdash; constraint propagation prunes search before you need it</li>
+    </ul>
+
+    <p>The <strong>Scryer Prolog</strong> community (Mark Thom&rsquo;s Rust implementation) takes this to its logical conclusion: strict ISO Prolog plus clpfd, with cut and assert/retract treated as last resorts. This is the modern pure-CLP school, and if you are starting fresh with Prolog today, it is the cleanest place to start.</p>
+
+    <h2>Where Logic Programming Earns Its Keep</h2>
+
+    <div class="card gold">
+      <p>CLP is the answer to the question &ldquo;what does Prolog do that nothing else does as well?&rdquo; For combinatorial problems with custom constraints, tight search heuristics, and a need for integration with symbolic processing, nothing else in the mainstream ecosystem matches it. Airlines still schedule crews with it. Factories still plan shifts with it. Hospitals still roster nurses with it. The problems are old, the solutions are decades-old, and the payoff is measured in millions of dollars per deployment.</p>
+      <p>The frontier of this work is drifting toward SMT solvers and specialized OR tools. But the lineage is continuous, and the same concepts &mdash; constraint propagation, arc consistency, global constraints, branch-and-bound, labeling heuristics &mdash; show up in all the modern tools. Learning CLP(FD) is learning the ideas that keep getting reinvented under new names.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">The Language Itself</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="implementations.html">Implementations &amp; Tooling</a></li>
+        <li><a href="expert-systems.html">Expert Systems &amp; NLP</a></li>
+        <li><a href="datalog-asp.html">Datalog &amp; Answer Set Programming</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Prolog &amp; Logic Programming &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

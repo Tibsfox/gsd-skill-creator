@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta &mdash; Prolog &amp; Logic Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-plg">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">Prolog &harr; Haskell &harr; miniKanren &harr; Datalog &harr; SQL &harr; Z3 &harr; Python</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="history.html">History</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="expert-systems.html">Expert Systems</a>
+      <a href="constraint-lp.html">CLP</a>
+      <a href="datalog-asp.html">Datalog &amp; ASP</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The point of the Rosetta project isn&rsquo;t that every language is the same. It&rsquo;s that translating a problem <em>between</em> paradigms teaches you what the problem really is. Write it in Prolog and you learn what is declarative about it. Write it in SQL and you learn what is relational. Write it in Haskell and you learn what is compositional. Write it in Z3 and you learn what is a constraint.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- A SMALL EXAMPLE ACROSS PARADIGMS                              -->
+    <!-- ============================================================ -->
+
+    <h2>One Problem, Seven Languages &mdash; Family Relationships</h2>
+    <p>The classic introductory Prolog example: given parent facts, compute grandparents, siblings, and ancestors. Watch how each paradigm reshapes the same problem.</p>
+
+    <h3>Prolog (the reference)</h3>
+    <pre><code>parent(tom, bob).
+parent(tom, liz).
+parent(bob, ann).
+parent(bob, pat).
+parent(pat, jim).
+
+grandparent(X, Z) :- parent(X, Y), parent(Y, Z).
+
+sibling(X, Y) :- parent(P, X), parent(P, Y), X \= Y.
+
+ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+
+?- ancestor(tom, jim).
+true.
+
+?- grandparent(tom, X).
+X = ann ; X = pat.</code></pre>
+
+    <h3>Datalog (no function symbols, guaranteed terminating)</h3>
+    <pre><code>.decl parent(p: symbol, c: symbol)
+.decl grandparent(gp: symbol, gc: symbol)
+.decl ancestor(a: symbol, d: symbol)
+
+parent("tom", "bob").
+parent("tom", "liz").
+parent("bob", "ann").
+parent("bob", "pat").
+parent("pat", "jim").
+
+grandparent(X, Z) :- parent(X, Y), parent(Y, Z).
+
+ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+
+.output ancestor</code></pre>
+    <p>This is Souffle syntax. The Datalog program is nearly identical but <em>always terminates</em> because there are no function symbols and the fact base is finite.</p>
+
+    <h3>SQL (recursive CTEs)</h3>
+    <pre><code>CREATE TABLE parent (p TEXT, c TEXT);
+INSERT INTO parent VALUES
+  ('tom','bob'), ('tom','liz'), ('bob','ann'),
+  ('bob','pat'), ('pat','jim');
+
+-- grandparents
+SELECT p1.p AS gp, p2.c AS gc
+FROM parent p1 JOIN parent p2 ON p1.c = p2.p;
+
+-- ancestors (recursive CTE)
+WITH RECURSIVE ancestor(a, d) AS (
+  SELECT p, c FROM parent
+  UNION
+  SELECT a.a, p.c FROM ancestor a JOIN parent p ON a.d = p.p
+)
+SELECT * FROM ancestor;</code></pre>
+    <p>SQL with recursive CTEs (SQL:1999) is Turing-complete and in practice is the &ldquo;Datalog that everyone already has installed.&rdquo; The shape of the query is the same.</p>
+
+    <h3>miniKanren (in Scheme/Racket/Clojure)</h3>
+    <pre><code>(define (parento p c)
+  (conde
+    ((== p 'tom) (== c 'bob))
+    ((== p 'tom) (== c 'liz))
+    ((== p 'bob) (== c 'ann))
+    ((== p 'bob) (== c 'pat))
+    ((== p 'pat) (== c 'jim))))
+
+(define (ancestoro a d)
+  (conde
+    ((parento a d))
+    ((fresh (m) (parento a m) (ancestoro m d)))))
+
+(run* (q) (ancestoro 'tom q))
+; => (bob liz ann pat jim)</code></pre>
+    <p>miniKanren is a tiny, pure, embedded relational DSL. It lives in ~200 lines of host language. Popular in Scheme, Clojure (<code>core.logic</code>), Racket, and Python (<code>pykanren</code>).</p>
+
+    <h3>Haskell (list comprehensions as logic programming)</h3>
+    <pre><code>parent :: [(String, String)]
+parent = [("tom","bob"),("tom","liz"),("bob","ann"),
+          ("bob","pat"),("pat","jim")]
+
+grandparent :: String -&gt; [String]
+grandparent gp = [gc | (p1, c1) &lt;- parent, p1 == gp,
+                       (p2, gc) &lt;- parent, p2 == c1]
+
+-- Fixed-point ancestor relation
+ancestor :: [(String, String)]
+ancestor = go parent
+  where
+    go rel = let rel' = rel ++ [(a, c) | (a, b) &lt;- rel,
+                                         (b', c) &lt;- parent, b == b']
+             in if rel == rel' then rel else go rel'</code></pre>
+    <p>Haskell&rsquo;s list comprehensions are <em>syntactic Prolog</em> &mdash; the connection is explicit in the comprehension calculus literature (Wadler, 1987).</p>
+
+    <h3>Python (declarative via pyDatalog or networkx)</h3>
+    <pre><code>from pyDatalog import pyDatalog as pdl
+
+pdl.create_terms('parent, ancestor, grandparent, X, Y, Z')
+
++parent('tom', 'bob')
++parent('tom', 'liz')
++parent('bob', 'ann')
++parent('bob', 'pat')
++parent('pat', 'jim')
+
+grandparent(X, Z) &lt;= parent(X, Y) &amp; parent(Y, Z)
+ancestor(X, Y)    &lt;= parent(X, Y)
+ancestor(X, Y)    &lt;= parent(X, Z) &amp; ancestor(Z, Y)
+
+print(ancestor('tom', Y))
+# [('bob',), ('liz',), ('ann',), ('pat',), ('jim',)]</code></pre>
+    <p>pyDatalog is one of several Python libraries that embed logic programming &mdash; others include PyKE, problog.py, and PySwip (full SWI-Prolog bridge).</p>
+
+    <h3>Z3 (constraint solving)</h3>
+    <pre><code>from z3 import *
+
+P = Function('parent', StringSort(), StringSort(), BoolSort())
+A = Function('ancestor', StringSort(), StringSort(), BoolSort())
+
+facts = [P(StringVal('tom'), StringVal('bob')),
+         P(StringVal('tom'), StringVal('liz')),
+         P(StringVal('bob'), StringVal('ann')),
+         P(StringVal('bob'), StringVal('pat')),
+         P(StringVal('pat'), StringVal('jim'))]
+
+# ancestor as fixed point: encode recursively via ForAll
+# (Z3 handles fixed points via Datalog fixedpoint engine, muZ)</code></pre>
+    <p>Z3 has a built-in Datalog/muZ fixed-point engine. You can feed it rules directly. In production, <strong>Z3&rsquo;s fixed-point engine</strong> is often how modern projects do Datalog-style queries without installing a separate tool.</p>
+
+    <!-- ============================================================ -->
+    <!-- PARADIGM TRANSLATION TABLE                                    -->
+    <!-- ============================================================ -->
+
+    <h2>Paradigm Translation Table</h2>
+
+    <table>
+      <thead><tr>
+        <th>Concept</th><th>Prolog</th><th>Datalog</th><th>SQL</th><th>Haskell</th><th>Python</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>Fact</td>
+          <td><code>parent(tom, bob).</code></td>
+          <td><code>parent("tom","bob").</code></td>
+          <td>INSERT row</td>
+          <td>List element</td>
+          <td>Dict entry</td>
+        </tr>
+        <tr>
+          <td>Rule</td>
+          <td><code>gp(X,Z):-p(X,Y),p(Y,Z).</code></td>
+          <td>Same</td>
+          <td>JOIN query</td>
+          <td>List comprehension</td>
+          <td>Generator + filter</td>
+        </tr>
+        <tr>
+          <td>Query</td>
+          <td><code>?- gp(tom, X).</code></td>
+          <td><code>.output gp</code></td>
+          <td>SELECT</td>
+          <td>Function call</td>
+          <td>Function call</td>
+        </tr>
+        <tr>
+          <td>Variable</td>
+          <td><code>X, Y, _</code></td>
+          <td>Same</td>
+          <td>Column alias</td>
+          <td>Pattern binding</td>
+          <td>Loop variable</td>
+        </tr>
+        <tr>
+          <td>Recursion</td>
+          <td>Native</td>
+          <td>Native</td>
+          <td>WITH RECURSIVE</td>
+          <td>let/where</td>
+          <td>Function + call stack</td>
+        </tr>
+        <tr>
+          <td>Negation</td>
+          <td><code>\+ goal</code> (as failure)</td>
+          <td>Stratified</td>
+          <td>NOT EXISTS</td>
+          <td><code>not</code></td>
+          <td><code>not</code></td>
+        </tr>
+        <tr>
+          <td>Unification</td>
+          <td>Core operation</td>
+          <td>Same</td>
+          <td>Implicit in JOIN</td>
+          <td>Pattern matching</td>
+          <td>Not native</td>
+        </tr>
+        <tr>
+          <td>Backtracking</td>
+          <td>Native on <code>;</code></td>
+          <td>Bottom-up, no bt</td>
+          <td>All results at once</td>
+          <td>List-monad</td>
+          <td>Generators / itertools</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- WHEN TO REACH FOR LOGIC PROGRAMMING                           -->
+    <!-- ============================================================ -->
+
+    <h2>When Logic Programming Beats Everything Else</h2>
+
+    <div class="card">
+      <p><strong>Recursive fact-base queries.</strong> &ldquo;Given these rules and these facts, what follows?&rdquo; Datalog and Prolog express this in five lines; an imperative version is 50+.</p>
+      <p><strong>Combinatorial search and constraints.</strong> N-queens, Sudoku, scheduling, graph coloring. CLP(FD) and ASP have first-class propagation and search that you&rsquo;d reimplement by hand in Python.</p>
+      <p><strong>Symbolic reasoning.</strong> Theorem proving, type inference, program analysis. The Rust borrow checker (Polonius) is literally Datalog. Java pointer analysis (Doop) is Datalog. Infer is not, but the moral equivalent.</p>
+      <p><strong>Natural-language grammars.</strong> DCGs remain one of the most concise ways to write a parser for a non-trivial grammar, especially for linguistic formalisms (HPSG, CCG).</p>
+      <p><strong>Hypothesis testing via unification.</strong> Configuration, planning, diagnosis, legal reasoning, rule engines. The expert-system lineage.</p>
+    </div>
+
+    <h2>When Logic Programming Loses</h2>
+
+    <div class="card">
+      <p><strong>Number-crunching and linear algebra.</strong> Use NumPy, Julia, Fortran, CUDA. Prolog&rsquo;s arithmetic is procedural and slow.</p>
+      <p><strong>Imperative state machines.</strong> Use Go, Rust, C. Prolog can model them but it&rsquo;s awkward.</p>
+      <p><strong>Machine learning.</strong> Use PyTorch, JAX. Logic programming is a <em>collaborator</em> to ML (neuro-symbolic), not a replacement.</p>
+      <p><strong>UI and I/O-heavy code.</strong> Use anything else. Prolog has HTTP servers (SWI&rsquo;s is very good), but nobody reaches for it first.</p>
+    </div>
+
+    <h2>Translation Heuristics</h2>
+
+    <ol>
+      <li><strong>From Prolog to SQL:</strong> Ground facts become tables; unification becomes JOIN; recursion becomes <code>WITH RECURSIVE</code>; negation-as-failure becomes <code>NOT EXISTS</code>.</li>
+      <li><strong>From Prolog to Haskell:</strong> Facts become list elements; rules become list comprehensions; unification becomes pattern matching; backtracking becomes the list monad.</li>
+      <li><strong>From Prolog to Python:</strong> Use a library (pyDatalog, PySwip, problog, or embed miniKanren). Do not try to reimplement unification by hand unless you&rsquo;re writing a toy.</li>
+      <li><strong>From Prolog to Datalog:</strong> Remove function symbols; stratify negation; trust bottom-up evaluation.</li>
+      <li><strong>From imperative to Prolog:</strong> Invert control &mdash; describe the <em>solution</em>, not the <em>procedure</em>. Let unification and search do the work. If you find yourself writing explicit loops, you&rsquo;re not speaking Prolog yet.</li>
+    </ol>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">The Language Itself</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="implementations.html">Implementations &amp; Tooling</a></li>
+        <li><a href="expert-systems.html">Expert Systems &amp; NLP</a></li>
+        <li><a href="constraint-lp.html">Constraint Logic Programming</a></li>
+        <li><a href="datalog-asp.html">Datalog &amp; ASP</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Prolog &amp; Logic Programming &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

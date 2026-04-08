@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Evolution &mdash; Assembly Language</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-asm">
+  <header>
+    <h1>History &amp; Evolution</h1>
+    <div class="subtitle">From Punch Cards to RISC-V &mdash; 80 Years of Machine-Level Programming</div>
+    <nav>
+      <a href="index.html">Overview</a> <a href="x86.html">x86-64</a> <a href="arm.html">ARM64</a> <a href="microarch.html">Microarch</a> <a href="tools.html">Tools</a> <a href="modern.html">Modern</a> <a href="rosetta.html">Rosetta</a> <a href="education.html">Learn</a> <a href="history.html" class="active">History</a>
+    </nav>
+  </header>
+  <main>
+    <blockquote>Before assemblers, programmers wrote raw binary on punch cards. The invention of symbolic assembly &mdash; giving names to opcodes and addresses &mdash; was one of the most important abstractions in computing history.</blockquote>
+
+    <h2>Timeline</h2>
+    <div class="timeline">
+      <div class="event"><span class="year">1945</span> <strong>von Neumann architecture</strong> &mdash; stored-program concept. Instructions and data in the same memory.</div>
+      <div class="event"><span class="year">1947</span> <strong>Kathleen Booth</strong> (Birkbeck) writes the first assembly language concepts.</div>
+      <div class="event"><span class="year">1949</span> <strong>EDSAC</strong> (Cambridge) &mdash; Maurice Wilkes and David Wheeler use initial orders (a primitive assembler). Wheeler&rsquo;s work earns him the first CS PhD.</div>
+      <div class="event"><span class="year">1954</span> <strong>Nathaniel Rochester</strong> writes the first symbolic assembler for the IBM 701.</div>
+      <div class="event"><span class="year">1964</span> <strong>IBM System/360</strong> &mdash; BAL (Basic Assembly Language). 16 GPRs, byte addressing. The architecture that dominated mainframes for decades.</div>
+      <div class="event"><span class="year">1970</span> <strong>PDP-11</strong> (DEC) &mdash; MACRO-11 assembler. Clean, orthogonal design. Inspired C.</div>
+      <div class="event"><span class="year">1974</span> <strong>Intel 8080</strong> &mdash; the first widely-used microprocessor assembly language.</div>
+      <div class="event"><span class="year">1975</span> <strong>MOS 6502</strong> &mdash; Apple II, Commodore 64, NES. Simple, beloved.</div>
+      <div class="event"><span class="year">1976</span> <strong>Zilog Z80</strong> &mdash; CP/M, ZX Spectrum, TI calculators.</div>
+      <div class="event"><span class="year">1978</span> <strong>Intel 8086</strong> &mdash; the start of the x86 lineage. 16-bit, segmented memory.</div>
+      <div class="event"><span class="year">1979</span> <strong>Motorola 68000</strong> &mdash; Amiga, Atari ST, Mac, Sega Genesis. Clean 32-bit-ish design.</div>
+      <div class="event"><span class="year">1980</span> <strong>RISC concept</strong> &mdash; John Hennessy (MIPS, Stanford) and David Patterson (RISC-I, Berkeley).</div>
+      <div class="event"><span class="year">1985</span> <strong>ARM</strong> &mdash; Acorn RISC Machine, designed by Sophie Wilson and Steve Furber.</div>
+      <div class="event"><span class="year">1985</span> <strong>Intel 80386</strong> &mdash; 32-bit x86. Protected mode. Virtual memory. The foundation of modern x86.</div>
+      <div class="event"><span class="year">1993</span> <strong>Pentium</strong> &mdash; superscalar x86 (two pipelines).</div>
+      <div class="event"><span class="year">1995</span> <strong>Pentium Pro</strong> &mdash; out-of-order execution (P6 microarchitecture). Changed everything.</div>
+      <div class="event"><span class="year">1997</span> <strong>MMX</strong> &mdash; first x86 SIMD. 64-bit packed integer operations.</div>
+      <div class="event"><span class="year">1999</span> <strong>SSE</strong> &mdash; 128-bit SIMD, packed floating-point.</div>
+      <div class="event"><span class="year">2003</span> <strong>AMD64 (x86-64)</strong> &mdash; AMD extends x86 to 64-bit. Intel adopts it as EM64T/Intel 64.</div>
+      <div class="event"><span class="year">2007</span> <strong>iPhone</strong> &mdash; ARM processors become the dominant CPU family by volume.</div>
+      <div class="event"><span class="year">2010</span> <strong>RISC-V</strong> &mdash; open-source ISA, UC Berkeley. Krste Asanovic, Andrew Waterman.</div>
+      <div class="event"><span class="year">2011</span> <strong>AVX</strong> &mdash; 256-bit SIMD on x86.</div>
+      <div class="event"><span class="year">2012</span> <strong>Compiler Explorer</strong> launched by Matt Godbolt. Changed how people learn assembly.</div>
+      <div class="event"><span class="year">2016</span> <strong>AVX-512</strong> &mdash; 512-bit SIMD.</div>
+      <div class="event"><span class="year">2018</span> <strong>Spectre/Meltdown</strong> disclosed. Changed CPU design philosophy.</div>
+      <div class="event"><span class="year">2020</span> <strong>Apple M1</strong> &mdash; ARM-based desktop CPU. Proved ARM can match x86 performance.</div>
+    </div>
+
+    <h2>CISC vs RISC</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>CISC</h4>
+        <p><strong>Complex Instruction Set.</strong> Variable-length instructions, many addressing modes, memory-to-memory operations. x86, VAX, S/360. &ldquo;Do more per instruction.&rdquo; The decoder is complex; the programmer has rich tools.</p>
+      </div>
+      <div class="pillar">
+        <h4>RISC</h4>
+        <p><strong>Reduced Instruction Set.</strong> Fixed-length instructions, load/store only, large register files. ARM, MIPS, RISC-V, SPARC. &ldquo;Do less per instruction, but do it faster.&rdquo; Simpler decoder, more registers, easier to pipeline.</p>
+      </div>
+      <div class="pillar">
+        <h4>The Blur</h4>
+        <p>Modern x86 is <em>externally</em> CISC but <em>internally</em> RISC: the decoder translates x86 instructions into micro-ops that execute on a RISC-like core. The distinction matters less than it did in 1985.</p>
+      </div>
+      <div class="pillar">
+        <h4>The Winners</h4>
+        <p><strong>x86-64</strong> won desktops/servers via backward compatibility. <strong>ARM</strong> won mobile/embedded via power efficiency. <strong>RISC-V</strong> is the open challenger. MIPS, SPARC, PowerPC, Itanium lost.</p>
+      </div>
+    </div>
+
+    <h2>Key People</h2>
+    <table>
+      <thead><tr><th>Person</th><th>Contribution</th></tr></thead>
+      <tbody>
+        <tr><td><strong>John von Neumann</strong></td><td>Stored-program concept (1945). The architecture that all modern computers use.</td></tr>
+        <tr><td><strong>Kathleen Booth</strong></td><td>First assembly language concepts (1947, Birkbeck College).</td></tr>
+        <tr><td><strong>Maurice Wilkes</strong></td><td>EDSAC (1949), microprogramming. Turing Award 1967.</td></tr>
+        <tr><td><strong>David Wheeler</strong></td><td>First subroutine concept, EDSAC initial orders. First CS PhD.</td></tr>
+        <tr><td><strong>John Hennessy</strong></td><td>MIPS architecture (Stanford). Turing Award 2017 (with Patterson).</td></tr>
+        <tr><td><strong>David Patterson</strong></td><td>RISC-I (Berkeley), RISC-V. Turing Award 2017 (with Hennessy).</td></tr>
+        <tr><td><strong>Sophie Wilson</strong></td><td>ARM instruction set designer (Acorn, 1985). One of the most important chip designers in history.</td></tr>
+        <tr><td><strong>Steve Furber</strong></td><td>ARM hardware designer. Later SpiNNaker neuromorphic computing.</td></tr>
+        <tr><td><strong>Krste Asanovic</strong></td><td>RISC-V co-creator (UC Berkeley, 2010).</td></tr>
+        <tr><td><strong>Jim Keller</strong></td><td>AMD K8 (x86-64), Apple A4/A5, AMD Zen, Tesla, Tenstorrent. The itinerant CPU architect.</td></tr>
+        <tr><td><strong>Matt Godbolt</strong></td><td>Compiler Explorer (2012). Changed how an entire generation learns assembly.</td></tr>
+        <tr><td><strong>Agner Fog</strong></td><td>x86 optimization manuals and instruction tables. The performance reference.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CEE</td><td>C</td><td>PDP-11 assembly influenced C&rsquo;s design. Dennis Ritchie and Ken Thompson worked on both.</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>C++&rsquo;s zero-cost abstraction promise: the assembly should be as good as handwritten.</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>Rust makes the same zero-cost promise. <code>rustc --emit asm</code> proves it.</td></tr>
+      </tbody>
+    </table>
+    <div class="cross-links"><h4>Related Modules</h4><ul><li><a href="index.html">Overview</a></li><li><a href="x86.html">x86-64</a></li><li><a href="arm.html">ARM64</a></li><li><a href="microarch.html">Microarchitecture</a></li><li><a href="tools.html">Tools</a></li><li><a href="modern.html">Modern Uses</a></li><li><a href="rosetta.html">Rosetta</a></li><li><a href="education.html">Learn</a></li></ul></div>
+  </main>
+  <footer><p>History &amp; Evolution &middot; PNW Research Series &middot; April 2026</p><p><a href="../index.html">PNW Research Series</a></p></footer>
+</body>
+</html>

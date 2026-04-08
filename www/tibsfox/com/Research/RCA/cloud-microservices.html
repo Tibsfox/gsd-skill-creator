@@ -114,6 +114,41 @@
       </ol>
     </div>
 
+    <h3>Standard Benchmarks</h3>
+    <p>The survey identifies four widely-used microservice testbeds for RCA evaluation:</p>
+    <table>
+      <thead><tr><th>Benchmark</th><th>Type</th><th>Services</th><th>Used By</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TrainTicket</strong></td><td>E-commerce (ticket booking)</td><td>41 microservices</td><td>MicroRCA, CORAL, CloudRCA</td></tr>
+        <tr><td><strong>Sockshop</strong></td><td>E-commerce (socks)</td><td>13 microservices</td><td>Sieve, FacGraph, DejAVu</td></tr>
+        <tr><td><strong>OnlineBoutique</strong></td><td>E-commerce (Google demo)</td><td>11 microservices</td><td>DynaCausal, Nezha</td></tr>
+        <tr><td><strong>SocialNetwork</strong></td><td>Social media</td><td>36 microservices</td><td>MULAN, DiagFusion, GROOT</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Evaluation Metrics</h3>
+    <div class="card">
+      <ul>
+        <li><strong>MTTD</strong> (Mean Time to Detect) &mdash; How quickly the system identifies an anomaly</li>
+        <li><strong>MTTR</strong> (Mean Time to Recover) &mdash; How quickly the system returns to normal operation</li>
+        <li><strong>Accuracy / Precision / Recall</strong> &mdash; Standard classification metrics for root cause identification</li>
+        <li><strong>Top-N Accuracy (AC@K)</strong> &mdash; Whether the true root cause appears in the top K candidates</li>
+        <li><strong>MRR</strong> (Mean Reciprocal Rank) &mdash; Average inverse rank of the first correct root cause</li>
+      </ul>
+    </div>
+
+    <h3>Future Research Directions</h3>
+    <div class="card">
+      <ol>
+        <li><strong>Multi-modal data integration</strong> beyond metrics/traces/logs &mdash; incorporating code changes, config diffs, deployment events</li>
+        <li><strong>Graph neural network advancement</strong> for service dependency modeling</li>
+        <li><strong>LLM application expansion</strong> with improved confidence estimation and hallucination detection</li>
+        <li><strong>Knowledge graph enrichment</strong> and causal reasoning over accumulated incident data</li>
+        <li><strong>Cascading failure analysis</strong> and proactive prevention before cascades propagate</li>
+        <li><strong>Integration with automated remediation</strong> &mdash; closing the loop from diagnosis to fix</li>
+      </ol>
+    </div>
+
     <!-- DEEP EXTRACTION: DYNACAUSAL FULL RESULTS (arXiv:2510.22613) -->
     <h2>DynaCausal &mdash; Full Results</h2>
     <p>Deep extraction from Zhang et al. (arXiv:2510.22613, Oct 2025) provides complete benchmark results for DynaCausal&rsquo;s dynamic causality-aware RCA framework.</p>
@@ -208,6 +243,24 @@
         <li>No existing work generates comprehensive propagation paths with validated causal edges</li>
         <li>SRE seeking rapid mitigation (MTTR) needs different RCA than developer pursuing permanent fixes (MTBF) &mdash; this distinction is absent from conventional surveys</li>
       </ul>
+    </div>
+
+    <!-- CLOUD INCIDENT MANAGEMENT LIFECYCLE -->
+    <h2>Cloud Incident Management Lifecycle</h2>
+    <p>Fang et al. formalize the cloud incident management lifecycle (per Google&rsquo;s SRE practice) as a 6-stage process where RCA operates throughout with evolving granularity:</p>
+    <table>
+      <thead><tr><th>Stage</th><th>RCA Role</th><th>Granularity</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. Preparation</strong></td><td>Build observability, define SLOs, establish runbooks</td><td>System-wide</td></tr>
+        <tr><td><strong>2. Detection</strong></td><td>Anomaly identification across metrics, logs, traces</td><td>Service-level</td></tr>
+        <tr><td><strong>3. Localization (RCA)</strong></td><td>Identify faulty service or component</td><td>Broad &mdash; rapid triage</td></tr>
+        <tr><td><strong>4. Mitigation</strong></td><td>Stop the bleeding &mdash; rollback, reroute, scale</td><td>Narrowing to specific actions</td></tr>
+        <tr><td><strong>5. Resolution</strong></td><td>Permanent fix for the underlying issue</td><td>Highly specific &mdash; code/config level</td></tr>
+        <tr><td><strong>6. Improvement</strong></td><td>Postmortem, pattern learning, prevention</td><td>System-wide again &mdash; organizational learning</td></tr>
+      </tbody>
+    </table>
+    <div class="card">
+      <p>The key insight: <strong>SRE seeking rapid mitigation (MTTR) needs fundamentally different RCA than a developer pursuing permanent fixes (MTBF)</strong>. Stage 3 requires broad, fast localization; Stage 5 requires deep, precise root cause identification. This distinction is absent from most conventional RCA surveys and frameworks.</p>
     </div>
 
     <!-- CORPUS CROSS-REFERENCES -->

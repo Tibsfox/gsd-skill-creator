@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Systems Operations &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-soo">
+  <header>
+    <h1>Systems Operations</h1>
+    <div class="subtitle">SysOps &mdash; The Operational Discipline of Running Production Systems &mdash; Artemis II Mission Research</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="html/01-deployment-release-engineering.html">Deploy</a>
+      <a href="html/02-incident-management-response.html">Incidents</a>
+      <a href="html/03-change-management-control.html">Change</a>
+      <a href="html/04-capacity-planning-scaling.html">Capacity</a>
+      <a href="html/05-cost-optimization-finops.html">FinOps</a>
+      <a href="html/06-high-availability-resilience.html">HA</a>
+      <a href="html/07-runbook-automation-toil.html">Runbooks</a>
+      <a href="html/08-performance-engineering.html">Perf</a>
+      <a href="html/09-compliance-governance-operations.html">Compliance</a>
+      <a href="html/10-oncall-operational-culture.html">On-Call</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      SYA teaches you what a filesystem is. SOO teaches you how to manage storage capacity at 3 AM when the alerts fire. Systems Administration is what you know. Systems Operations is what you do. This research digest covers the operational discipline &mdash; deployment strategies, incident management, change control, capacity planning, cost optimization, resilience engineering, runbook automation, performance tuning, compliance operations, and the human side of on-call culture. Ten modules, one through-line: keeping production running.
+    </blockquote>
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">SysOps</span><span class="stat-label">Discipline</span></div>
+      <div class="stat"><span class="stat-value">13</span><span class="stat-label">Rosetta Clusters</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Industry Domains</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Scope:</strong> The operational practices, processes, and decision-making of running production systems. Distinct from SYA (technical fundamentals) and SOP (procedure documentation).</p>
+      <p><strong>Sources:</strong> Google SRE, AWS Well-Architected, DORA State of DevOps, FinOps Foundation, ITIL 4, real-world postmortems, production case studies</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="html/01-deployment-release-engineering.html" class="category-card">
+        <div><span class="cluster-badge cluster-deploy">Deploy</span></div>
+        <h3>01. Deployment &amp; Release Engineering</h3>
+        <p>Blue/green, canary, rolling updates, feature flags, GitOps deployment, database migrations, rollback strategies, release trains, CI/CD pipeline operations. From Amazon&rsquo;s one-box to Netflix&rsquo;s Spinnaker.</p>
+      </a>
+
+      <a href="html/02-incident-management-response.html" class="category-card">
+        <div><span class="cluster-badge cluster-incident">Incidents</span></div>
+        <h3>02. Incident Management &amp; Response</h3>
+        <p>Severity classification, incident commander role, war room operations, communication protocols, escalation paths, post-incident review, status pages, tooling ecosystem (PagerDuty, Rootly, FireHydrant). MTTA/MTTD/MTTR/MTBF.</p>
+      </a>
+
+      <a href="html/03-change-management-control.html" class="category-card">
+        <div><span class="cluster-badge cluster-change">Change</span></div>
+        <h3>03. Change Management &amp; Control</h3>
+        <p>ITIL 4 change enablement, CAB evolution, risk assessment, maintenance windows, change freeze policies, rollback plans, CMDB, compliance evidence, continuous delivery as change management.</p>
+      </a>
+
+      <a href="html/04-capacity-planning-scaling.html" class="category-card">
+        <div><span class="cluster-badge cluster-capacity">Capacity</span></div>
+        <h3>04. Capacity Planning &amp; Scaling</h3>
+        <p>Demand forecasting, horizontal vs vertical scaling, autoscaling patterns (HPA/VPA/KEDA), load testing (k6/Locust), resource right-sizing, queue theory (Little&rsquo;s Law), headroom planning, cloud capacity reservations.</p>
+      </a>
+
+      <a href="html/05-cost-optimization-finops.html" class="category-card">
+        <div><span class="cluster-badge cluster-finops">FinOps</span></div>
+        <h3>05. Cost Optimization &amp; FinOps</h3>
+        <p>Cloud cost anatomy, FinOps Framework (Inform/Optimize/Operate), reserved instances, spot instance strategies, right-sizing, showback/chargeback, unit economics, architectural cost optimization, governance guardrails.</p>
+      </a>
+
+      <a href="html/06-high-availability-resilience.html" class="category-card">
+        <div><span class="cluster-badge cluster-ha">HA</span></div>
+        <h3>06. High Availability &amp; Resilience</h3>
+        <p>SLAs/SLOs/SLIs, error budgets, redundancy patterns, failover operations, chaos engineering in practice, DR testing, multi-region architectures, circuit breakers, graceful degradation, blast radius containment.</p>
+      </a>
+
+      <a href="html/07-runbook-automation-toil.html" class="category-card">
+        <div><span class="cluster-badge cluster-runbook">Runbooks</span></div>
+        <h3>07. Runbook Automation &amp; Toil</h3>
+        <p>Runbook design patterns, toil measurement and budgets (Google&rsquo;s 50% rule), automation ROI calculation, self-healing patterns, ChatOps, decision trees, human-in-the-loop automation, operational debt.</p>
+      </a>
+
+      <a href="html/08-performance-engineering.html" class="category-card">
+        <div><span class="cluster-badge cluster-perf">Perf</span></div>
+        <h3>08. Performance Engineering</h3>
+        <p>Latency budgets, profiling in production, database query optimization, caching strategies (Redis, CDN, application), load balancer tuning, kernel parameters, benchmarking methodology, performance regression detection.</p>
+      </a>
+
+      <a href="html/09-compliance-governance-operations.html" class="category-card">
+        <div><span class="cluster-badge cluster-compliance">Compliance</span></div>
+        <h3>09. Compliance &amp; Governance Operations</h3>
+        <p>SOC2 operational controls, audit preparation, access reviews, change evidence collection, log retention policies, vulnerability management operations, patch cycles, GRC tooling, compliance-as-code.</p>
+      </a>
+
+      <a href="html/10-oncall-operational-culture.html" class="category-card">
+        <div><span class="cluster-badge cluster-oncall">On-Call</span></div>
+        <h3>10. On-Call &amp; Operational Culture</h3>
+        <p>Rotation design, compensation models, alert fatigue mitigation, cognitive load management, handoff protocols, operational reviews, blameless culture, burnout prevention (67% rate), team topologies for ops.</p>
+      </a>
+    </div>
+
+    <h2>Cross-References</h2>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series Projects</h4>
+      <ul>
+        <li><a href="../SYA/index.html">SYA &mdash; Systems Administration</a></li>
+        <li><a href="../SOP/index.html">SOP &mdash; Engineering Standard Operating Procedures</a></li>
+        <li><a href="../OAA/index.html">OAA &mdash; Operations &amp; Admin Automation</a></li>
+        <li><a href="../RCA/index.html">RCA &mdash; Root Cause Analysis</a></li>
+        <li><a href="../K8S/index.html">K8S &mdash; Kubernetes Ecosystem</a></li>
+        <li><a href="../DRP/index.html">DRP &mdash; Disaster Recovery</a></li>
+        <li><a href="../OPS/index.html">OPS &mdash; OpenStack Cloud Platform</a></li>
+        <li><a href="../CERN/index.html">CERN &mdash; CERN Computing Infrastructure</a></li>
+        <li><a href="../HPC/index.html">HPC &mdash; High-Performance Computing</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Rosetta Cluster:</strong> Infrastructure &middot; SOO sits at the operational center of the Infrastructure cluster. SYA provides the technical knowledge base; SOO provides the operational playbook. RCA provides the diagnostic methodology when things go wrong. DRP provides the recovery procedures. Together they form the complete operational lifecycle.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Systems Operations &middot; Infrastructure Cluster &middot; 10 research modules &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

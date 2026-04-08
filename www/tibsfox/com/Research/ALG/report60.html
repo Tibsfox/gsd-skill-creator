@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The ALGOL 60 Report &mdash; ALGOL, BNF &amp; Context-Free Grammars</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alg">
+  <header>
+    <h1>The ALGOL 60 Report</h1>
+    <div class="subtitle">Block structure, call-by-name, proper recursion, Jensen&rsquo;s device, and the 20-page document that taught the world how to specify a language</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="report60.html" class="active">The Report</a>
+      <a href="bnf.html">BNF</a>
+      <a href="cfg.html">Context-Free Grammars</a>
+      <a href="parsers.html">Parsers</a>
+      <a href="influence.html">Influence</a>
+      <a href="wirth.html">Wirth Family</a>
+      <a href="rosetta.html">Rosetta</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <p>&ldquo;The Report is a classic in the literature of programming language definition. Its authors resolved many issues that were left unresolved in previous languages, and at the same time left a specification that was sufficiently precise for the language to be implemented.&rdquo;</p>
+      <cite>&mdash; Peter Naur, 20 years later</cite>
+    </blockquote>
+
+    <h2>The Three Languages of ALGOL</h2>
+
+    <p>The ALGOL 60 Report opens with a distinction that no previous language specification had made clearly. ALGOL, it says, is not one language but three:</p>
+
+    <ul>
+      <li>The <strong>reference language</strong> is the one specified in the Report. It uses a notation with Greek letters, boldface keywords, and genuine mathematical symbols (<code>&times;</code>, <code>&divide;</code>, <code>&le;</code>, <code>&ge;</code>, <code>&rarr;</code>, <code>&ne;</code>). This is the canonical form.</li>
+      <li>The <strong>publication language</strong> is what you would print in a journal. It could use different typographical conventions as long as the mapping back to the reference language was clear. Boldface keywords. True mathematical notation.</li>
+      <li>The <strong>hardware language</strong> is whatever a particular implementation actually accepts. Since most machines of 1960 could not display Greek letters or boldface, implementations had to ASCII-ify. This led to <strong>stropping</strong>: marking keywords with apostrophes, quotes, or dots to distinguish them from identifiers &mdash; <code>'BEGIN'</code> or <code>.BEGIN</code> or <code>"BEGIN"</code>.</li>
+    </ul>
+
+    <p>The three-language ideal was a response to a real problem. In 1960, you might write an algorithm at Copenhagen, send it to a colleague at Munich, who would read it on a machine in Zurich, who would then implement it at Berkeley. Each machine had different character sets, different keyboards, different terminal capabilities. The reference/publication/hardware distinction let all three talk to each other.</p>
+
+    <div class="card">
+      <p><strong>The publication language ideal:</strong> ALGOL programs were supposed to be typeset for journals using real mathematical notation. Keywords in boldface. Relational operators as proper mathematical symbols. Subscripts as actual subscripts. When you read an ALGOL 60 paper in <em>Communications of the ACM</em> from 1961, you are reading the language as it was meant to be seen. When you type ALGOL into a teletype, you are reading the hardware language, an approximation. The reference language sits between them, connecting the two.</p>
+    </div>
+
+    <h2>Block Structure and Lexical Scope</h2>
+
+    <p>If ALGOL 60 had given us nothing but block structure, it would still be one of the most important languages in history. Every block-structured language &mdash; C, Pascal, Ada, Modula-2, Oberon, Java, C#, JavaScript, Rust, Go, Swift &mdash; is a direct descendant.</p>
+
+    <h3>The Block as a Unit</h3>
+
+    <p>A <strong>block</strong> in ALGOL 60 is a sequence of declarations followed by a sequence of statements, enclosed in <code>begin</code> and <code>end</code>:</p>
+
+<pre><code>begin
+  integer i, j;
+  real x;
+  i := 0;
+  x := 3.14;
+  j := i + 1
+end</code></pre>
+
+    <p>The declarations introduce names; the statements use them. The names are <em>local</em> to the block: they come into existence when control enters the <code>begin</code>, and they cease to exist when control leaves the <code>end</code>.</p>
+
+    <p>This sounds utterly obvious today. It was not obvious in 1960. Fortran had no blocks. COBOL had paragraphs and sections but no lexical nesting. Assembly had labels and nothing else. The idea that a program could be a tree of nested scopes, each with its own declarations, was a genuine invention.</p>
+
+    <h3>Nested Blocks and Shadowing</h3>
+
+<pre><code>begin
+  integer x;
+  x := 1;
+  begin
+    integer y;
+    y := x + 1;
+    begin
+      integer x;
+      x := y * 2;
+      comment inner x shadows outer x
+    end;
+    comment here x is 1 again, y is 2
+  end;
+  comment here only x (=1) is visible
+end</code></pre>
+
+    <p>When the inner block declares its own <code>x</code>, the outer <code>x</code> is <em>shadowed</em> &mdash; not destroyed, just hidden. This is <strong>lexical scoping</strong>: the meaning of a name at a given point in the program text is determined by the innermost enclosing declaration of that name.</p>
+
+    <h3>The Stack Discipline and the Display</h3>
+
+    <p>Blocks nest. When control enters a block, we push that block&rsquo;s locals onto an allocation area; when control exits, we pop them off. The <strong>stack discipline</strong> is what makes ALGOL 60 efficiently compilable. A block&rsquo;s locals live at a known offset from the top of the stack at the moment the block is active.</p>
+
+    <p>For nested procedures with lexical scope, Dijkstra introduced the <strong>display</strong>: an array indexed by static nesting level, where <code>display[k]</code> always points to the activation record of the enclosing block at level <code>k</code>. Accessing a variable at level <code>k</code> becomes <code>display[k] + offset</code>, two loads instead of walking a chain. Dijkstra described this in his 1960 paper on recursive procedures; the Burroughs B5000 implemented it in hardware.</p>
+
+    <h2>Proper Recursion</h2>
+
+    <p>Fortran I (1957) explicitly forbade recursion. The compiler allocated local variables <em>statically</em> &mdash; each subroutine had one activation record permanently assigned to it. A recursive call would silently corrupt the program.</p>
+
+    <p>ALGOL 60 took the opposite position. Section 5.4.4 of the Report makes recursion explicit. McCarthy (fresh from Lisp) insisted on it. Dijkstra argued that recursion was the natural consequence of block structure, and that a language which could not express recursive definitions was fighting against mathematics itself.</p>
+
+<pre><code>integer procedure factorial(n); value n; integer n;
+begin
+  if n = 0 then
+    factorial := 1
+  else
+    factorial := n * factorial(n - 1)
+end</code></pre>
+
+    <p>Note the assignment-to-function-name syntax: the result of an ALGOL 60 typed procedure is whatever value has been assigned to the procedure&rsquo;s name inside the body. There is no <code>return</code> statement &mdash; that would come in Pascal, C, and their descendants.</p>
+
+    <h3>Knuth&rsquo;s &ldquo;Man or Boy?&rdquo; Test</h3>
+
+    <p>In 1964, Donald Knuth published a short test program designed to separate real ALGOL 60 implementations from fake ones. Any implementation that truly supported all of: proper lexical scoping, proper recursion, non-local access via a display, and call-by-name with thunks, would produce a specific sequence of outputs. Any implementation that cut corners would crash, loop, or produce wrong answers.</p>
+
+<pre><code>begin
+  real procedure A(k, x1, x2, x3, x4, x5);
+    value k; integer k;
+  begin
+    real procedure B;
+    begin
+      k := k - 1;
+      B := A := A(k, B, x1, x2, x3, x4)
+    end;
+    if k &lt;= 0 then A := x4 + x5 else B
+  end;
+  outreal(A(10, 1, -1, -1, 1, 0))
+end</code></pre>
+
+    <p>Knuth called it the &ldquo;Man or Boy?&rdquo; test because an ALGOL 60 compiler that handled it correctly was a &ldquo;man&rdquo;; one that did not was a &ldquo;boy.&rdquo; The expected output for <code>A(10, 1, -1, -1, 1, 0)</code> is <strong>-67</strong>. Getting this right requires juggling non-local access through multiple levels of the display, call-by-name thunks that reference outer variables by aliasing, and recursive procedures whose formal parameters are themselves procedures. It was the hardest ALGOL 60 test case ever devised, and it separated compilers that were faithful to the Report from those that cheated.</p>
+
+    <h2>Call-By-Value vs Call-By-Name</h2>
+
+    <p>Call-by-name is the single weirdest thing in ALGOL 60. It is also the feature that most influenced theoretical computer science, inspired the development of denotational semantics, and &mdash; in a direct line &mdash; led to the lazy evaluation of Haskell and the by-name parameters of Scala.</p>
+
+    <h3>Call-by-Value</h3>
+
+    <p>The easy case. When you call a procedure and pass an expression as a parameter, the expression is evaluated <em>once</em> at the call site, and the resulting value is bound to the formal parameter. Subsequent uses of the formal parameter look up that stored value.</p>
+
+<pre><code>integer procedure square(n); value n; integer n;
+begin square := n * n end</code></pre>
+
+    <p>ALGOL 60 required explicit marking for value parameters via <code>value n</code>; otherwise, the default was call-by-name.</p>
+
+    <h3>Call-by-Name: The Copy Rule</h3>
+
+    <p>Call-by-name is specified by the <strong>copy rule</strong>. The compiler does not evaluate the actual parameter. Instead, it substitutes the <em>text</em> of the actual parameter expression in place of every reference to the formal parameter inside the body, as if by textual replacement, and <em>then</em> evaluates the resulting body.</p>
+
+    <p>Put another way: every reference to the formal parameter inside the body re-evaluates the actual parameter expression, <em>in the caller&rsquo;s scope</em>, <em>every time</em>.</p>
+
+<pre><code>integer procedure double(x); integer x;
+begin double := x + x end</code></pre>
+
+    <p>No <code>value x</code> &mdash; so <code>x</code> is call-by-name. If you call <code>double(f())</code> where <code>f</code> is a procedure with side effects, then <code>f</code> is called <strong>twice</strong>, once for each reference to <code>x</code> in the body.</p>
+
+    <h3>Thunks</h3>
+
+    <p>How do you implement call-by-name? You cannot literally substitute text, because the procedure body is already compiled. Instead, the compiler generates a small anonymous procedure &mdash; a <strong>thunk</strong> &mdash; for each by-name actual parameter. The thunk, when called, evaluates the actual parameter expression in the caller&rsquo;s environment (it has access to the caller&rsquo;s variables via the display) and returns the current value.</p>
+
+    <p>The term <strong>thunk</strong> was coined for exactly this purpose, reportedly by Peter Ingerman in 1961. Folklore has it that it was chosen because the value of the parameter had &ldquo;already been <em>thought</em> about&rdquo; by the time the procedure used it &mdash; the past tense of <em>think</em> being, jokingly, <em>thunk</em>. The word stuck, and is now the standard term in compiler literature for a zero-argument closure that lazily computes a value.</p>
+
+    <h2>Jensen&rsquo;s Device</h2>
+
+    <p>The most famous use of call-by-name is <strong>Jensen&rsquo;s device</strong>, named after Jørn Jensen, Peter Naur&rsquo;s colleague at Regnecentralen in Copenhagen. Jensen&rsquo;s device exploits call-by-name to build a crude form of higher-order function &mdash; a decade before ML and twenty years before anyone was using the phrase <em>first-class functions</em> in mainstream programming.</p>
+
+    <div class="report-box">
+      <h3>&sect; The Idea</h3>
+      <p>Pass an expression as a by-name parameter, along with a by-name parameter that is a <em>variable used inside that expression</em>. When the procedure body mutates the variable and then references the expression, the expression re-evaluates with the new value of the variable. You have effectively passed a function of one argument using only call-by-name.</p>
+    </div>
+
+    <p>The classic summation procedure:</p>
+
+<pre><code>real procedure sum(i, lo, hi, term);
+  value lo, hi;
+  integer i, lo, hi;
+  real term;
+begin
+  real s;
+  s := 0;
+  for i := lo step 1 until hi do
+    s := s + term;
+  sum := s
+end</code></pre>
+
+    <p>The parameters <code>lo</code> and <code>hi</code> are passed by value &mdash; they are just numbers. But <code>i</code> and <code>term</code> are by-name. You call it like this:</p>
+
+<pre><code>real total;
+integer k;
+total := sum(k, 1, 100, k * k)</code></pre>
+
+    <p>Inside <code>sum</code>, the <code>for</code> loop increments <code>k</code> from 1 to 100 (because <code>i</code> is by-name and aliased to <code>k</code>). For each value of <code>k</code>, the reference to <code>term</code> inside the loop re-evaluates <code>k * k</code> in the caller&rsquo;s scope, using the <em>current</em> value of <code>k</code>. The result is the sum of squares from 1 to 100.</p>
+
+    <p>You have, in effect, just written <code>sum(f) = &Sigma; f(k)</code> for <code>k = 1..100</code>, passing <code>f</code> as the expression <code>k * k</code> and <code>k</code> as the summation variable. <strong>This is a lambda in disguise.</strong> Without higher-order functions, without lambda expressions, without function types, Jensen figured out how to pass functions around.</p>
+
+    <p>You can use the same trick for integration, sorting by a key function, searching with a predicate &mdash; anywhere you would pass a function today.</p>
+
+    <h2>The Aliasing Problem: Why swap Fails</h2>
+
+    <p>Jensen&rsquo;s device is elegant. Call-by-name also has a notorious failure mode. Consider the obvious <code>swap</code> procedure:</p>
+
+<pre><code>procedure swap(a, b); integer a, b;
+begin
+  integer t;
+  t := a;
+  a := b;
+  b := t
+end</code></pre>
+
+    <p>With call-by-name, calling <code>swap(i, j)</code> works fine. Now call <code>swap(i, A[i])</code>. This should swap <code>i</code> and <code>A[i]</code>. But here is what happens:</p>
+
+    <ol>
+      <li><code>t := a</code> &mdash; look up <code>a</code>, which is the thunk for <code>i</code>. Current value: say, <code>3</code>. So <code>t := 3</code>.</li>
+      <li><code>a := b</code> &mdash; look up <code>b</code>, which is the thunk for <code>A[i]</code>. Current <code>i</code> is <code>3</code>, so look up <code>A[3]</code>. Say it is <code>99</code>. Assign <code>99</code> to <code>a</code>, which means assigning <code>99</code> to <code>i</code>. Now <code>i = 99</code>.</li>
+      <li><code>b := t</code> &mdash; assign <code>t</code> (which is 3) to <code>b</code>. <code>b</code> is the thunk for <code>A[i]</code>. But <code>i</code> is now <code>99</code>, so this assigns <code>3</code> to <code>A[99]</code>, not to <code>A[3]</code>.</li>
+    </ol>
+
+    <p>The array element we were trying to swap with is still untouched. We have corrupted <code>A[99]</code> instead. The by-name semantics <em>re-evaluates the subscript expression every time we reference <code>b</code></em>, and because step 2 mutated <code>i</code>, step 3 references a different array element.</p>
+
+    <div class="card red">
+      <p>This is the aliasing problem, and it cannot be fixed by clever programming. It is a fundamental consequence of the copy-rule semantics. It made generic utility procedures like <code>swap</code> dangerous to write in ALGOL 60. This bug &mdash; or rather the recognition of it &mdash; was part of what killed call-by-name in mainstream language design.</p>
+    </div>
+
+    <h2>The Descendants of Call-By-Name</h2>
+
+    <p>Call-by-name did not die. It was reborn in cleaner form in several places:</p>
+
+    <ul>
+      <li><strong>Lazy evaluation (call-by-need)</strong> is call-by-name with memoization: the expression is evaluated the first time the formal parameter is referenced, and the result is cached so subsequent references reuse it. <strong>Haskell</strong> is built entirely on call-by-need. Clean and Miranda before it, the same.</li>
+      <li><strong>Scala&rsquo;s by-name parameters:</strong> Scala has explicit <code>=&gt; T</code> parameter types that behave exactly like ALGOL 60 call-by-name. Used heavily for control abstractions, assertions, and logging.</li>
+      <li><strong>Lisp macros</strong> are essentially call-by-name at the syntactic level. The macro arguments are re-inserted into the body textually.</li>
+      <li><strong>Denotational semantics:</strong> Strachey and Wadsworth&rsquo;s 1974 paper &ldquo;Continuations: A Mathematical Semantics for Handling Full Jumps&rdquo; developed the mathematical framework for describing languages like ALGOL 60 precisely. Strachey&rsquo;s earlier work on the semantics of call-by-name directly motivated the development of lambda-calculus-based language semantics, which eventually became the foundation of all modern programming language theory.</li>
+    </ul>
+
+    <p>Haskell exists because ALGOL had call-by-name.</p>
+
+    <h2>Control Flow</h2>
+
+    <h3>If-Then-Else</h3>
+
+    <p>ALGOL 60 had <code>if</code> as both a statement and an expression. The expression form was John McCarthy&rsquo;s contribution:</p>
+
+<pre><code>x := if y &gt; 0 then y else -y</code></pre>
+
+    <p>This was new in 1960. Fortran&rsquo;s arithmetic IF was a control-flow statement, not an expression that returned a value. The if-expression is now standard in every language with any functional sensibility: Scheme, ML, Haskell, Rust, Kotlin, Scala, modern Python (via the <code>a if c else b</code> form).</p>
+
+    <h3>The For Loop</h3>
+
+    <p>ALGOL 60&rsquo;s <code>for</code> loop is almost bizarrely flexible:</p>
+
+<pre><code>for i := 1 step 2 until 100 do S;          comment 1, 3, 5, ..., 99;
+for i := 1, 3, 5, 7, 11 do S;               comment explicit list;
+for i := 1 step 2 until 10, 20 step 5 until 50, 100 do S;  comment mixed;
+for i := 1 step 1 while x &lt; 100 do S;      comment while condition;</code></pre>
+
+    <p>The for-list can mix steps, explicit values, while clauses. This was too clever and led to genuine difficulties compiling it correctly. Pascal and its descendants simplified to a cleaner form. But it was a design choice: the committee believed iteration should be expressible as a declarative specification of the sequence of values the index took.</p>
+
+    <h3>The Dangling Else</h3>
+
+    <p>ALGOL 60 introduced the notorious &ldquo;dangling else&rdquo; ambiguity:</p>
+
+<pre><code>if A then if B then S1 else S2</code></pre>
+
+    <p>Does <code>S2</code> belong to the inner <code>if</code> or the outer? The Report&rsquo;s convention was that <code>else</code> binds to the nearest unmatched <code>if</code>. This is a context-free grammar ambiguity that every subsequent block-structured language has had to handle somehow &mdash; usually by the same convention, sometimes by forcing braces. Python eliminates it by using indentation. Go eliminates it by requiring braces always.</p>
+
+    <h2>Hoare&rsquo;s Quicksort &mdash; Algorithm 64</h2>
+
+    <p>The most cited algorithm in computing was first published in ALGOL 60. Here is Hoare&rsquo;s <em>Algorithm 64: Quicksort</em> from <em>Communications of the ACM</em>, July 1961, with the <em>Algorithm 65: Find</em> (the partition procedure) as its helper:</p>
+
+<pre><code>procedure quicksort (A, M, N);
+  value M, N;
+  array A; integer M, N;
+  comment Quicksort. Sorts A[M:N] in place;
+begin
+  integer I, J;
+  if M &lt; N then
+  begin
+    partition (A, M, N, I, J);
+    quicksort (A, M, J);
+    quicksort (A, I, N)
+  end
+end quicksort;
+
+procedure partition (A, M, N, I, J);
+  value M, N;
+  array A; integer M, N, I, J;
+begin
+  real F;
+  I := M;
+  J := N;
+  F := A[(M+N) div 2];
+up: if A[I] &lt; F then
+    begin I := I + 1; goto up end;
+down: if A[J] &gt; F then
+    begin J := J - 1; goto down end;
+  if I &lt;= J then
+  begin
+    real t;
+    t := A[I]; A[I] := A[J]; A[J] := t;
+    I := I + 1; J := J - 1
+  end;
+  if I &lt;= J then goto up
+end partition;</code></pre>
+
+    <p>Note the use of <code>goto</code> with labels (<code>up:</code>, <code>down:</code>) &mdash; this was before Dijkstra&rsquo;s 1968 letter made gotos unfashionable. Note the <code>comment</code> syntax. Note <code>div</code> for integer division. Note the block-structured <code>begin</code>/<code>end</code> with local variable <code>t</code>. This is ALGOL 60 exactly as Naur specified it.</p>
+
+    <p>Every Quicksort implementation in every language since is a translation of this code. Hoare won the Turing Award in 1980, partly on the strength of this algorithm.</p>
+
+    <h2>Common Lisp of Europe</h2>
+
+    <p>ALGOL 60 was to Europe what Lisp was to MIT: the language of the theoretical computing community. Dijkstra, Wirth, Hoare, Dahl, Nygaard, Bauer, Samelson, Randell, van Wijngaarden &mdash; nearly every European computer science pioneer of the 1960s and 1970s learned their craft on ALGOL 60. The language shaped how they thought about programming, and when they built their own languages &mdash; Pascal, Simula, Concurrent Pascal, Modula, Oberon &mdash; they carried ALGOL&rsquo;s sensibilities with them.</p>
+
+    <p>Meanwhile in America, FORTRAN and COBOL dominated commercial work, and Lisp owned the research AI world. Europe&rsquo;s programming culture was shaped by a language that America barely noticed. The gap mattered: European universities taught structured programming, formal specification, compiler theory, and correctness proofs, all rooted in ALGOL 60. American universities taught Fortran numerical methods and, later, C systems programming.</p>
+
+    <p>Some of this cultural divide is still visible today in the difference between the Pascal/Modula/Oberon teaching tradition (European) and the C/Unix professional tradition (American). The two converged in Java, C#, Rust, and Go &mdash; all of which are, in different proportions, ALGOL-family languages that inherited both traditions.</p>
+
+    <div class="divider">::=  |  §  |  ::=</div>
+
+    <div class="cross-links">
+      <h4>Related Pages</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Committees</a></li>
+        <li><a href="bnf.html">Backus-Naur Form</a></li>
+        <li><a href="cfg.html">Context-Free Grammars</a></li>
+        <li><a href="parsers.html">Parser Technology</a></li>
+        <li><a href="influence.html">The Algol Family</a></li>
+        <li><a href="wirth.html">Wirth Family</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>The ALGOL 60 Report &middot; ALGOL, BNF &amp; Context-Free Grammars &middot; PNW Research Series</p>
+    <p><a href="../index.html">PNW Research Series</a> &middot; <a href="index.html">Back to Overview</a></p>
+  </footer>
+</body>
+</html>

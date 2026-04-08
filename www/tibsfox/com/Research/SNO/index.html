@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Systems Network Operations &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sno">
+  <header>
+    <h1>Systems Network Operations</h1>
+    <div class="subtitle">NetOps &mdash; Running, Monitoring &amp; Maintaining Production Networks &mdash; Artemis II Mission Research</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="html/01-network-monitoring-alerting.html">Monitoring</a>
+      <a href="html/02-network-change-operations.html">Change</a>
+      <a href="html/03-network-incident-response.html">Incidents</a>
+      <a href="html/04-ip-address-management.html">IPAM</a>
+      <a href="html/05-certificate-pki-operations.html">PKI</a>
+      <a href="html/06-network-capacity-operations.html">Capacity</a>
+      <a href="html/07-firewall-acl-operations.html">Firewall</a>
+      <a href="html/08-vpn-remote-access-operations.html">VPN</a>
+      <a href="html/09-network-documentation-cmdb.html">Docs</a>
+      <a href="html/10-network-team-vendor-management.html">Team</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      SNE designs the spine-leaf fabric. SNO keeps it running at 3 AM when a BGP peer flaps, a certificate expires, or a carrier reports a fiber cut on your primary circuit. Network engineering is architecture. Network operations is the daily discipline of monitoring, maintaining, documenting, and defending the network that everything else depends on.
+    </blockquote>
+
+    <h2>Research Program Statistics</h2>
+    <div class="stats">
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">NetOps</span><span class="stat-label">Discipline</span></div>
+      <div class="stat"><span class="stat-value">13</span><span class="stat-label">Rosetta Clusters</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Ops Domains</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Scope:</strong> The day-to-day operational practices of running production networks. Distinct from SNE (network design/engineering) and SYA (admin fundamentals).</p>
+      <p><strong>Sources:</strong> NOC best practices, ITIL network processes, carrier SLA frameworks, IPAM vendor docs, PKI operations guides, real-world network incident reports</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <h2>Module Overview</h2>
+    <div class="category-grid">
+      <a href="html/01-network-monitoring-alerting.html" class="category-card">
+        <div><span class="cluster-badge cluster-monitor">Monitor</span></div>
+        <h3>01. Network Monitoring &amp; Alerting</h3>
+        <p>NOC operations and staffing models. Alert threshold design (static, dynamic, anomaly-based). Escalation procedures. Dashboard design for network ops. SLA monitoring and uptime tracking. Uptime calculation and reporting.</p>
+      </a>
+
+      <a href="html/02-network-change-operations.html" class="category-card">
+        <div><span class="cluster-badge cluster-change">Change</span></div>
+        <h3>02. Network Change Operations</h3>
+        <p>Maintenance window scheduling for network. Change control adapted for network devices. Pre-change and post-change verification scripts. Config backup and rollback procedures. Emergency change process for network.</p>
+      </a>
+
+      <a href="html/03-network-incident-response.html" class="category-card">
+        <div><span class="cluster-badge cluster-incident">Incidents</span></div>
+        <h3>03. Network Incident Response</h3>
+        <p>Network outage triage methodology. Packet loss and latency investigation. BGP hijack detection and response. Cable cut procedures and carrier escalation. Network-specific war room operations.</p>
+      </a>
+
+      <a href="html/04-ip-address-management.html" class="category-card">
+        <div><span class="cluster-badge cluster-ipam">IPAM</span></div>
+        <h3>04. IP Address Management</h3>
+        <p>IPAM tools (NetBox, Infoblox, BlueCat, phpIPAM). DHCP operations at scale. IPv4 exhaustion strategies (NAT, RFC 1918 reuse, address reclamation). IPv6 transition operations. Subnet planning and allocation policies.</p>
+      </a>
+
+      <a href="html/05-certificate-pki-operations.html" class="category-card">
+        <div><span class="cluster-badge cluster-pki">PKI</span></div>
+        <h3>05. Certificate &amp; PKI Operations</h3>
+        <p>TLS certificate lifecycle management. ACME and Let&rsquo;s Encrypt at scale. Certificate rotation automation. Expiry monitoring and alerting. mTLS operations. Internal CA management (step-ca, Vault PKI). The 90-day cert reality.</p>
+      </a>
+
+      <a href="html/06-network-capacity-operations.html" class="category-card">
+        <div><span class="cluster-badge cluster-capacity">Capacity</span></div>
+        <h3>06. Network Capacity Operations</h3>
+        <p>Bandwidth utilization tracking and trending. Upgrade planning and scheduling. Circuit ordering and provisioning. ISP and carrier relationship management. Peering operations (IX membership, bilateral peering). Transit cost optimization.</p>
+      </a>
+
+      <a href="html/07-firewall-acl-operations.html" class="category-card">
+        <div><span class="cluster-badge cluster-firewall">Firewall</span></div>
+        <h3>07. Firewall &amp; ACL Operations</h3>
+        <p>Rule lifecycle management (request, review, implement, verify, expire). Rule review cadence and cleanup. Emergency access procedures. Compliance audit for firewall policies. Shadow and redundant rule detection. Policy optimization.</p>
+      </a>
+
+      <a href="html/08-vpn-remote-access-operations.html" class="category-card">
+        <div><span class="cluster-badge cluster-vpn">VPN</span></div>
+        <h3>08. VPN &amp; Remote Access Operations</h3>
+        <p>Site-to-site VPN management (IPsec, WireGuard). Remote access VPN scaling. Split tunnel decisions and security trade-offs. ZTNA migration from traditional VPN. VPN monitoring and troubleshooting. Key rotation operations.</p>
+      </a>
+
+      <a href="html/09-network-documentation-cmdb.html" class="category-card">
+        <div><span class="cluster-badge cluster-docs">Docs</span></div>
+        <h3>09. Network Documentation &amp; CMDB</h3>
+        <p>Network diagram standards (draw.io, Netbox topology, Visio). Cable management and labeling. Port mapping and patch panel documentation. As-built documentation. Audit readiness. Documentation-as-code for networks.</p>
+      </a>
+
+      <a href="html/10-network-team-vendor-management.html" class="category-card">
+        <div><span class="cluster-badge cluster-team">Team</span></div>
+        <h3>10. Network Team &amp; Vendor Management</h3>
+        <p>NOC staffing models (24/7, follow-the-sun, hybrid). Carrier SLA enforcement and credit claiming. Vendor escalation procedures. RMA tracking and spare parts. Circuit inventory management. Contract negotiation for network services.</p>
+      </a>
+    </div>
+
+    <h2>Cross-References</h2>
+    <div class="cross-links">
+      <h4>Related PNW Research Series Projects</h4>
+      <ul>
+        <li><a href="../SNE/index.html">SNE &mdash; Systems Network Engineering</a></li>
+        <li><a href="../SOO/index.html">SOO &mdash; Systems Operations</a></li>
+        <li><a href="../SYA/index.html">SYA &mdash; Systems Administration</a></li>
+        <li><a href="../DNS/index.html">DNS &mdash; DNS Protocol</a></li>
+        <li><a href="../TCP/index.html">TCP &mdash; TCP/IP Protocol</a></li>
+        <li><a href="../RCA/index.html">RCA &mdash; Root Cause Analysis</a></li>
+        <li><a href="../DRP/index.html">DRP &mdash; Disaster Recovery</a></li>
+        <li><a href="../SRD/index.html">SRD &mdash; SSH &amp; Remote Desktop</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Rosetta Cluster:</strong> Infrastructure &middot; SNO completes the network lifecycle: SNE designs and builds, SNO runs and maintains. Together with SOO (systems operations) and RCA (diagnosis), they form the operational core of the Infrastructure cluster.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Systems Network Operations &middot; Infrastructure Cluster &middot; 10 research modules &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

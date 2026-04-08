@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safety-Critical Applications &mdash; Ada</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ada">
+  <header>
+    <h1>Safety-Critical Applications</h1>
+    <div class="subtitle">Where Ada actually lives &mdash; Airbus, Boeing, ESA, Paris Metro, Eurofighter, and the Ariane 501 story the press got wrong</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="concurrency.html">Concurrency</a>
+      <a href="history.html">History</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="safety-critical.html" class="active">Safety-Critical</a>
+      <a href="spark.html">SPARK</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      When an airliner rolls onto a runway in Toulouse, when a driverless metro train pulls out of Paris Ch&acirc;telet, when a reactor trip signal arms itself in a nuclear I&amp;C cabinet, there is a very good chance that the software making real-time decisions was written in Ada. For four decades the language has accumulated a body of working, certified, fielded code in environments where a wrong bit can kill people.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- PART I - WHY ADA                                              -->
+    <!-- ============================================================ -->
+
+    <h2>Part I &mdash; Why Ada in Safety-Critical Systems</h2>
+
+    <p>Ada did not win this position by being fashionable. It won it by matching &mdash; structurally and culturally &mdash; the requirements of regulated engineering. Seven reasons stand out:</p>
+
+    <div class="card">
+      <ol>
+        <li><strong>Strong nominal typing catches unit-conversion errors at compile time.</strong> A value of type <code>Metres</code> cannot be silently added to a value of type <code>Feet</code>. The 1999 Mars Climate Orbiter loss &mdash; where Lockheed produced pound-seconds while JPL expected newton-seconds &mdash; is the textbook case of what nominal unit types exist to prevent.</li>
+        <li><strong>Explicit semantics &mdash; bugs have nowhere to hide.</strong> Every operation has a named, specified meaning. Overloading resolution is strict; visibility rules are strict; elaboration order is specified. When two Ada compilers disagree, one is non-conforming. In C, two compilers can disagree and both be &ldquo;right.&rdquo;</li>
+        <li><strong>No undefined behavior.</strong> C has roughly 200 undefined behaviors in the ISO standard. Ada has essentially none. You can reason about an Ada program.</li>
+        <li><strong>No implicit conversions.</strong> Ada refuses to convert between numeric types implicitly, even when the conversion would be lossless. Tedious in the small; in the large, it surfaces exactly the places where a value crosses a type boundary.</li>
+        <li><strong>Runtime checks by default.</strong> Range violations, array bounds, discriminant validity, null dereferences &mdash; all checked automatically. In SPARK these become compile-time obligations.</li>
+        <li><strong>Mandatory validation &mdash; no compiler divergence.</strong> From 1983 through 1998, the DoD operated the Ada Compiler Validation Capability (ACVC). The successor ACATS is still maintained. Ada compilers do not drift.</li>
+        <li><strong>Cultural match.</strong> Ada came out of a culture where the cost of a bug was measured in lost lives and crashed spacecraft. Industries with the same cost structure recognized it as &ldquo;their kind of language.&rdquo;</li>
+      </ol>
+      <p>The practical consequence: safety-critical software is not about writing code; it is about producing <strong>certification evidence</strong>. You must show the regulator that the code satisfies the requirements, the tests exercise the code, the compilers are qualified, the targets are understood. Ada plus the standards built around it (DO-178C, EN 50128, IEC 61508) gives you a ready-made story the regulator has seen before.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PART II - AVIATION                                            -->
+    <!-- ============================================================ -->
+
+    <h2>Part II &mdash; Aerospace and Avionics</h2>
+
+    <h3>Boeing 777</h3>
+
+    <p>Entered service June 1995. About <strong>70 percent</strong> of the 777&rsquo;s onboard software is Ada. Highlights:</p>
+
+    <ul>
+      <li><strong>Primary Flight Computer (PFC)</strong> &mdash; three triply-redundant channels built by GEC-Marconi Avionics (later BAE Systems) in Rochester, UK, using three different processor families (AMD 29050, Motorola 68040, Intel 80486) with three differently-compiled images of essentially the same Ada code. The dissimilar-hardware, dissimilar-compilation approach was adopted specifically to mitigate common-mode failures.</li>
+      <li><strong>Aircraft Information Management System (AIMS)</strong> &mdash; Honeywell cabinets centralizing Flight Management, displays, data acquisition, and maintenance.</li>
+      <li><strong>Flight Management Computer (FMC)</strong> &mdash; in Ada for the usual reasons: the arithmetic is unforgiving, the units matter, the lifecycle is decades.</li>
+    </ul>
+
+    <h3>Airbus fly-by-wire heritage</h3>
+
+    <p>Airbus is the single biggest industrial consumer of Ada in the world. The A320 program (launched 1984, first revenue service April 1988) introduced production fly-by-wire to commercial aviation, with ELAC (Elevator and Aileron Computer) and SEC (Spoiler and Elevator Computer) flight control code in Ada.</p>
+
+    <ul>
+      <li><strong>A320, A321, A319, A318</strong> &mdash; first-generation FBW.</li>
+      <li><strong>A330, A340</strong> &mdash; refined second generation.</li>
+      <li><strong>A380</strong> &mdash; the double-decker. Published figures cite approximately <strong>2 million lines of Ada</strong> for flight control, flight management, cabin pressurization. Three primary flight control computers (PRIMs) and three secondary (SECs) from two suppliers (Thales and GE Aviation) for dissimilar redundancy.</li>
+      <li><strong>A350 XWB</strong> &mdash; continues the Ada fly-by-wire tradition, with more non-critical logic migrated to SCADE model-based code generation. Flight-control kernels remain Ada.</li>
+      <li><strong>A400M</strong> &mdash; military transport, Ada/SPARK flight control.</li>
+    </ul>
+
+    <p>Toulouse is arguably the world capital of industrial Ada.</p>
+
+    <h3>Fighters and helicopters</h3>
+
+    <ul>
+      <li><strong>Eurofighter Typhoon</strong> (UK/Germany/Italy/Spain) &mdash; flight control, sensor fusion, defensive aids.</li>
+      <li><strong>Dassault Rafale</strong> &mdash; flight control and mission computer.</li>
+      <li><strong>Saab JAS 39 Gripen</strong> &mdash; flight control, mission computer.</li>
+      <li><strong>F-22 Raptor</strong> &mdash; avionics and radar signal processing are Ada-dominant.</li>
+      <li><strong>F-35 Lightning II</strong> &mdash; originally partly Ada, but the program moved toward C++ under a 2005 Lockheed Martin decision. The F-35 is the most-cited example of a US program that moved away from Ada; its delays and software difficulties are sometimes used in the opposite direction as an argument for having stayed with Ada.</li>
+      <li><strong>NH90</strong>, <strong>Tiger/Tigre</strong>, <strong>AW101 Merlin</strong> &mdash; helicopter mission computers.</li>
+    </ul>
+
+    <p>A passenger in 2026 flying Boeing, Airbus, Embraer, Bombardier, or Dassault is, with very high probability, aboard an aircraft whose flight-critical loops are Ada. The Ada code in those fleets is older than most of the passengers.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART III - SPACE                                              -->
+    <!-- ============================================================ -->
+
+    <h2>Part III &mdash; Space Systems and the Ariane 5 Story</h2>
+
+    <h3>The Ariane 5 Flight 501 failure &mdash; what actually happened</h3>
+
+    <p>On 4 June 1996 at Kourou, French Guiana, Ariane 5&rsquo;s maiden flight (Flight 501) self-destructed 37 seconds after lift-off, destroying four Cluster science satellites and a half-billion dollars of hardware. It is probably the most famous software failure in history, and it is almost universally mis-reported.</p>
+
+    <div class="card caution">
+      <p>The actual sequence:</p>
+      <ol>
+        <li>The Inertial Reference System (SRI, <em>Syst&egrave;me de R&eacute;f&eacute;rence Inertielle</em>) was reused essentially unchanged from Ariane 4. Its software included an alignment function that continued to run for about 40 seconds <em>after lift-off</em>, even though on Ariane 5 it was not operationally needed &mdash; a vestigial behavior from Ariane 4, where a last-minute hold could reuse the alignment data.</li>
+        <li>One of the SRI computations converted a 64-bit floating-point value &mdash; the horizontal bias (BH) &mdash; to a 16-bit signed integer. On Ariane 4, the numerical range made this conversion safe. On Ariane 5, the first-stage trajectory produced a much larger horizontal velocity, and the floating-point value exceeded the 32,767 limit.</li>
+        <li>The conversion was protected against overflow in four other places but <strong>not</strong> in this one &mdash; the protection had been removed because analysis of the Ariane 4 trajectory showed the value stayed within range, and the team had decided to budget CPU on the 80C86 for other computations.</li>
+        <li>The conversion raised an Ada <code>Operand_Error</code> exception at T+36.7 seconds. The exception was not caught locally. The SRI runtime handled it by <strong>shutting down the processor</strong> &mdash; the reasonable policy for a <em>hardware</em> fault but catastrophic here because the fault was a software issue on correct hardware.</li>
+        <li>Both SRIs (primary and backup, with identical software) shut down within milliseconds of each other, sending diagnostic data on the bus that the main computer interpreted as flight data. That &ldquo;data&rdquo; was garbage, showing a nose-down attitude of about 90 degrees, which caused the autopilot to command full nozzle deflection on the solid boosters.</li>
+        <li>Mechanical stresses caused the boosters to begin separating. The range safety system destroyed the vehicle.</li>
+      </ol>
+    </div>
+
+    <h3>What the Lions inquiry actually said</h3>
+
+    <p>The inquiry was chaired by mathematician Jacques-Louis Lions (Coll&egrave;ge de France) and issued its report on 19 July 1996. The report is short, technical, and devastatingly clear:</p>
+
+    <ul>
+      <li>The failure was caused by <strong>specification and validation errors</strong>, not by a software implementation error.</li>
+      <li>Ariane 4 SRI code was reused on Ariane 5 <strong>without re-analyzing the trajectory envelope</strong> or re-running validation with Ariane 5 flight data.</li>
+      <li>The alignment function that produced the overflow was <strong>not needed at all</strong> after lift-off on Ariane 5 &mdash; vestigial code.</li>
+      <li>The runtime policy of shutting down on an unhandled <code>Operand_Error</code> was appropriate for a hardware-fault scenario but inappropriate for a software-cause scenario.</li>
+      <li>The test bench used to validate the SRI did not include Ariane 5 flight data; there had been a management decision not to include it because the SRI was &ldquo;qualified&rdquo; by its Ariane 4 heritage.</li>
+    </ul>
+
+    <p><strong>The report did not say Ada was the cause.</strong> It did not criticize the language. It explicitly noted that the Ada runtime did its job by raising and propagating the exception; the failure was in requirements engineering, reuse analysis, and validation &mdash; activities that happen before any line of code is written. In the tech press, the failure was widely reported as &ldquo;an Ada exception crashed the rocket.&rdquo; This reading is almost exactly backwards.</p>
+
+    <h3>Ariane 5 post-501</h3>
+
+    <p>After Flight 501 the SRI code was modified, and Ariane 5 went on to fly <strong>117 successful missions over 27 years</strong>. The last Ariane 5 launch (VA261) went up on 5 July 2023, carrying two commercial communication satellites. Over its service life Ariane 5 became the most reliable heavy-lift launcher in commercial service. Not bad for a rocket whose maiden flight became the world&rsquo;s most-cited software horror story.</p>
+
+    <h3>Other space programs</h3>
+
+    <ul>
+      <li><strong>Ariane 4</strong> &mdash; 116 flights, 97%+ success rate, Ada 83.</li>
+      <li><strong>Ariane 6</strong> &mdash; successor to Ariane 5, first flight 9 July 2024. Ada and SPARK, with increased SPARK use.</li>
+      <li><strong>Vega</strong>, <strong>Vega C</strong> &mdash; small solid-fuel launchers, Ada-based.</li>
+      <li><strong>BepiColombo</strong> (2018 Mercury orbiter), <strong>Solar Orbiter</strong> (2020), <strong>JUICE</strong> (2023 Jupiter Icy Moons Explorer), <strong>Gaia</strong> (2013), <strong>Rosetta/Philae</strong>, <strong>ExoMars</strong>, <strong>Herschel/Planck</strong>, <strong>Sentinel</strong> &mdash; ESA missions on bare-metal LEON with ORK+ Ravenscar runtime.</li>
+      <li><strong>Canadarm2</strong> (ISS Mobile Servicing System) &mdash; Canadian Space Agency / MDA.</li>
+      <li><strong>NASA Mars rovers</strong> &mdash; Sojourner (1997) used Ada tasking; Curiosity (2012) and Perseverance (2021) use multi-language stacks with Ada components.</li>
+      <li><strong>Cassini</strong> (1997), <strong>Galileo</strong> (1989) &mdash; Ada in significant portions of spacecraft software.</li>
+    </ul>
+
+    <!-- ============================================================ -->
+    <!-- PART IV - RAIL                                                -->
+    <!-- ============================================================ -->
+
+    <h2>Part IV &mdash; Railways and Signaling</h2>
+
+    <p>Rail is the second industry where Ada is dominant, and in the EU it is probably the single most important driver of new Ada work today. The reason is <strong>EN 50128</strong>.</p>
+
+    <h3>Paris M&eacute;tro Line 14 &mdash; the first driverless line</h3>
+
+    <p>Line 14 (M&eacute;t&eacute;or) opened in 1998 as the first fully automated driverless line on the Paris M&eacute;tro. Its signaling and train control system, built by Matra Transport (later Siemens Mobility) under the name <strong>SAET-METEOR</strong>, was developed in Ada and in Atelier B (for the B-Method formal specification parts). The line has carried well over a billion passengers with no signaling-caused safety incident. It is the longest-running proof that formally developed, Ada-based transit control can run a major urban line for decades.</p>
+
+    <h3>Other major rail systems</h3>
+
+    <ul>
+      <li><strong>Docklands Light Railway (DLR)</strong> &mdash; driverless from 1987 opening. Alstom/Thales ATC.</li>
+      <li><strong>London Underground</strong> &mdash; Jubilee Line Extension, Central/Northern/Sub-Surface resignalling. Westinghouse Rail Systems / Siemens Mobility.</li>
+      <li><strong>TGV, ICE</strong> &mdash; TVM-430 signaling for French LGV, LZB and ETCS for German ICE.</li>
+      <li><strong>Eurotunnel</strong> &mdash; rolling stock control and signaling.</li>
+      <li><strong>ETCS (European Train Control System)</strong> &mdash; EU&rsquo;s unified signaling standard, rolling out across Europe. Multiple implementations from Alstom, Siemens, Hitachi Rail, Thales use Ada.</li>
+      <li><strong>Shinkansen D-ATC/DS-ATC</strong> &mdash; portions of JR East and JR West signaling.</li>
+      <li><strong>Driverless metros</strong>: Copenhagen Metro (2002), Singapore MRT (multiple lines), Barcelona L9/L10, Rome Line C, Milan M5, Lyon Line D, Dubai Metro, Vancouver SkyTrain.</li>
+    </ul>
+
+    <!-- ============================================================ -->
+    <!-- PART V - ATC, DEFENSE, MEDICAL, NUCLEAR                       -->
+    <!-- ============================================================ -->
+
+    <h2>Part V &mdash; Air Traffic Control, Defense, Medical, Nuclear</h2>
+
+    <h3>Air Traffic Control</h3>
+
+    <ul>
+      <li><strong>Eurocontrol iFACTS</strong> (NATS, UK) &mdash; upper-airspace conflict detection and trajectory prediction at Swanwick. SPARK in the safety-critical core. See the <a href="spark.html">SPARK page</a>.</li>
+      <li><strong>NAV CANADA CAATS</strong> &mdash; Canadian Automated Air Traffic System, replacing legacy JOVIAL with Ada.</li>
+      <li><strong>German DFS P1/VAFORIT</strong> &mdash; Deutsche Flugsicherung.</li>
+      <li><strong>Italian SELEX-ES ATM systems</strong>.</li>
+    </ul>
+
+    <h3>Defense</h3>
+
+    <ul>
+      <li><strong>UK Type 23/45 destroyers</strong>, <strong>French Horizon</strong>, <strong>Italian Orizzonte</strong> &mdash; naval combat management systems.</li>
+      <li><strong>Missile defense systems</strong> &mdash; the historical backbone of US DoD Ada use.</li>
+      <li><strong>Radar and sensor fusion</strong>, <strong>command and control</strong> &mdash; residual from the DoD mandate era.</li>
+    </ul>
+
+    <h3>Medical Devices</h3>
+
+    <p>Post-Therac-25 (the 1985&ndash;1987 radiation therapy accidents that killed or severely injured at least six patients), the medical device industry turned to formal methods. Ada shows up in radiation therapy machines, some infusion pumps, pacemakers and ICDs, surgical robots. FDA Class III devices, especially those governed by IEC 62304, often choose Ada for the Class C (highest risk) components.</p>
+
+    <h3>Nuclear Instrumentation and Control</h3>
+
+    <p>Reactor protection systems at Westinghouse and Framatome. Canadian CANDU reactor I&amp;C. Safety-classified control systems per IEC 61513. The IEC 60880 standard for nuclear software explicitly permits Ada and cites it as a preferred language. Why: Ada&rsquo;s determinism and compile-time guarantees are especially valuable in nuclear applications where the cost of a bug is incalculable.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART VI - STANDARDS                                           -->
+    <!-- ============================================================ -->
+
+    <h2>Part VI &mdash; Certification Standards</h2>
+
+    <p>Where Ada and SPARK shine is the intersection with certification standards &mdash; and there are many:</p>
+
+    <table>
+      <thead><tr><th>Standard</th><th>Industry</th><th>Level</th><th>Ada / SPARK relevance</th></tr></thead>
+      <tbody>
+        <tr><td><strong>DO-178C</strong> (+ DO-333)</td><td>Airborne software</td><td>DAL A&ndash;E</td><td>SPARK approved as a tool qualification target via DO-333 formal methods supplement</td></tr>
+        <tr><td><strong>DO-254</strong></td><td>Airborne hardware</td><td>DAL A&ndash;E</td><td>Often paired with DO-178C Ada software</td></tr>
+        <tr><td><strong>IEC 61508</strong></td><td>General functional safety</td><td>SIL 1&ndash;4</td><td>Ada explicitly recognized</td></tr>
+        <tr><td><strong>EN 50128</strong></td><td>Railway software</td><td>SSIL 0&ndash;4</td><td>SPARK explicitly recognized</td></tr>
+        <tr><td><strong>IEC 61513</strong>, <strong>IEC 60880</strong></td><td>Nuclear I&amp;C</td><td>Class 1A&ndash;3</td><td>Ada is a preferred language</td></tr>
+        <tr><td><strong>ISO 26262</strong></td><td>Automotive functional safety</td><td>ASIL A&ndash;D</td><td>Ada/SPARK applicable but less common than C/C++</td></tr>
+        <tr><td><strong>IEC 62304</strong></td><td>Medical device software</td><td>Class A&ndash;C</td><td>Ada in Class C components</td></tr>
+        <tr><td><strong>Common Criteria</strong></td><td>Security</td><td>EAL 1&ndash;7</td><td>EAL 6/7 requires formal verification &mdash; SPARK dominates</td></tr>
+        <tr><td><strong>ECSS-Q-ST-80</strong></td><td>ESA space</td><td>Category A&ndash;D</td><td>Ada + Ravenscar on LEON</td></tr>
+      </tbody>
+    </table>
+
+    <p>MISRA rules for C have Ada analogues, but <strong>Ada is mostly MISRA-compliant by default</strong> &mdash; the things MISRA tries to stop C programmers from doing are either impossible in Ada or flagged by the compiler.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART VII - THE PATTERN                                        -->
+    <!-- ============================================================ -->
+
+    <h2>Part VII &mdash; The Pattern</h2>
+
+    <div class="card defense">
+      <p>Everywhere you find Ada concurrency in production, you find the same requirements:</p>
+      <ol>
+        <li><strong>Real-time deadlines</strong> that must be met.</li>
+        <li><strong>Safety-critical or mission-critical</strong> correctness requirements.</li>
+        <li><strong>Long-term maintainability</strong> (software lives for decades).</li>
+        <li><strong>Certification</strong> against some standard.</li>
+        <li><strong>Budget and schedule pressure</strong> that requires finding bugs at compile time rather than in flight tests.</li>
+      </ol>
+      <p>Ada&rsquo;s concurrency model was designed for exactly these requirements, and forty-three years later it is still the best choice for them. The A320 has flown since 1988. Paris M&eacute;tro Line 14 has been driverless since 1998. The C130J has been in service since 1999. iFACTS went live in 2011. Canadarm2 is still on the ISS. That code is going to keep running for decades; its maintainers are not going to rewrite it; and every time a new variant ships &mdash; a new 777X, a new A321XLR, a new Eurofighter tranche, a new Metro line &mdash; the Ada content goes up, not down.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">The Core Language</a></li>
+        <li><a href="concurrency.html">Concurrency &amp; Real-Time</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="implementations.html">Implementations &amp; Tooling</a></li>
+        <li><a href="spark.html">SPARK &amp; Formal Verification</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Ada &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

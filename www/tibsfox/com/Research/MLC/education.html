@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Learn &mdash; MLC</title><link rel="stylesheet" href="../../brand.css"><link rel="stylesheet" href="style.css"><script src="../series.js" defer></script></head>
+<body class="project-mlc">
+  <header><h1>Learning Resources</h1><div class="subtitle">How to Learn Machine Code &mdash; Hex Editors, objdump, Compiler Explorer, Reverse Engineering</div>
+    <nav><a href="index.html">Overview</a> <a href="encoding.html">Encoding</a> <a href="execution.html">Execution</a> <a href="formats.html">Formats</a> <a href="microcode.html">Microcode</a> <a href="security.html">Security</a> <a href="rosetta.html">Rosetta</a> <a href="education.html" class="active">Learn</a> <a href="history.html">History</a></nav></header>
+  <main>
+    <blockquote>Nobody learns machine code in isolation. You learn it by reading compiler output, by disassembling binaries, by stepping through code in a debugger, and by doing CTF challenges. The tools ARE the curriculum.</blockquote>
+
+    <h2>Books</h2>
+    <table>
+      <thead><tr><th>Book</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><em>Computer Systems: A Programmer&rsquo;s Perspective</em> (CS:APP, Bryant &amp; O&rsquo;Hallaron)</td><td>THE textbook for understanding how machine code relates to C. Chapter 3 covers x86-64 machine-level programming.</td></tr>
+        <tr><td><em>Computer Organization and Design</em> (Patterson &amp; Hennessy)</td><td>ISA and instruction encoding from the hardware perspective.</td></tr>
+        <tr><td><em>Reverse Engineering for Beginners</em> (Dennis Yurichev)</td><td>Free online. Comprehensive reverse engineering through machine code reading.</td></tr>
+        <tr><td><em>Practical Binary Analysis</em> (Dennis Andriesse)</td><td>ELF format, disassembly, binary instrumentation, symbolic execution.</td></tr>
+        <tr><td><strong>Intel SDM</strong></td><td>5000+ page reference. Volume 2 is the complete instruction encoding reference.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Tools as Curriculum</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>What you learn</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Compiler Explorer</strong> (godbolt.org)</td><td>Write C/Rust/Go, see the machine code (shown as assembly). The bridge.</td></tr>
+        <tr><td><code>objdump -d</code></td><td>Disassemble binaries. See hex bytes alongside assembly mnemonics.</td></tr>
+        <tr><td><code>xxd</code> / <code>hexdump</code></td><td>Raw hex dump of any file. See the actual bytes.</td></tr>
+        <tr><td><code>readelf -a</code></td><td>ELF structure: headers, sections, symbols, relocations.</td></tr>
+        <tr><td><strong>GDB</strong> with <code>layout asm</code></td><td>Step through machine code one instruction at a time. See registers change.</td></tr>
+        <tr><td><strong>Ghidra</strong></td><td>Reverse engineering: decompile machine code back to C-like pseudocode.</td></tr>
+        <tr><td><strong>ImHex</strong></td><td>Modern hex editor with pattern language for parsing binary formats.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>A Learning Path</h2>
+    <div class="card">
+      <ol>
+        <li><strong>Compiler Explorer:</strong> write <code>int add(int a, int b) { return a + b; }</code> in C. Read the assembly. Note the hex bytes on the left.</li>
+        <li><strong><code>gcc -c -o add.o add.c &amp;&amp; objdump -d add.o</code></strong> &mdash; see the hex bytes that <em>are</em> the machine code</li>
+        <li><strong><code>xxd add.o | head -20</code></strong> &mdash; see the raw bytes of the ELF file including the machine code</li>
+        <li><strong>CS:APP chapter 3</strong> &mdash; systematic treatment of x86-64 machine-level programming</li>
+        <li><strong>A CTF challenge</strong> (pwn category) &mdash; forces you to understand machine code for exploitation</li>
+        <li><strong>Ghidra</strong> on a small binary &mdash; reverse engineering is the practical motivator</li>
+      </ol>
+    </div>
+
+    <h2>Online Resources</h2>
+    <ul>
+      <li><strong>pwn.college</strong> &mdash; ASU&rsquo;s free course on binary exploitation</li>
+      <li><strong>LiveOverflow</strong> (YouTube) &mdash; binary exploitation, CTF walkthroughs</li>
+      <li><strong>x86 instruction reference</strong> (felixcloutier.com) &mdash; searchable, extracted from Intel SDM</li>
+      <li><strong>Ben Eater</strong> (YouTube) &mdash; building a CPU from scratch, understanding how bits become operations</li>
+    </ul>
+
+    <h2>Corpus Cross-References</h2>
+    <table><thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead><tbody>
+      <tr><td>ASM</td><td>Assembly</td><td>Learn assembly first, then see its machine code representation</td></tr>
+      <tr><td>CEE</td><td>C</td><td>CS:APP teaches machine code through C &mdash; the most direct mapping</td></tr>
+    </tbody></table>
+    <div class="cross-links"><h4>Related Modules</h4><ul><li><a href="index.html">Overview</a></li><li><a href="encoding.html">Encoding</a></li><li><a href="execution.html">Execution</a></li><li><a href="formats.html">Formats</a></li><li><a href="microcode.html">Microcode</a></li><li><a href="security.html">Security</a></li><li><a href="rosetta.html">Rosetta</a></li><li><a href="history.html">History</a></li></ul></div>
+  </main>
+  <footer><p>Learn &middot; PNW Research Series &middot; April 2026</p><p><a href="../index.html">PNW Research Series</a></p></footer>
+</body></html>

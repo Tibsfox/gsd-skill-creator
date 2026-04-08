@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta Integration &mdash; Rexx &amp; ARexx &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rxx">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">PARSE vs regex &mdash; stems vs dicts &mdash; ports vs pipes</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="parse.html">PARSE</a>
+      <a href="ports.html">Ports &amp; IPC</a>
+      <a href="porting.html">Porting</a>
+      <a href="amiga.html">Amiga</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>ADDRESS 'ROSETTA'</strong><br>
+      REXX was designed before Perl, before Python, before Tcl. Its ideas influenced them all. Translating between REXX and modern languages reveals both what we&rsquo;ve gained and what we&rsquo;ve lost.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- TIMELINE                                                      -->
+    <!-- ============================================================ -->
+
+    <h2>Scripting Language Timeline</h2>
+    <table>
+      <thead><tr><th>Year</th><th>Language</th><th>Creator</th><th>Relation to REXX</th></tr></thead>
+      <tbody>
+        <tr><td>1979</td><td><strong>REXX</strong></td><td>Mike Cowlishaw</td><td>&mdash;</td></tr>
+        <tr><td>1987</td><td><strong>Perl</strong></td><td>Larry Wall</td><td>Different philosophy: &ldquo;TIMTOWTDI&rdquo; vs REXX&rsquo;s simplicity. Perl chose regex; REXX chose PARSE.</td></tr>
+        <tr><td>1987</td><td><strong>ARexx</strong></td><td>William S. Hawes</td><td>REXX + Amiga port system. The IPC innovation.</td></tr>
+        <tr><td>1988</td><td><strong>Tcl</strong></td><td>John Ousterhout</td><td>Similar &ldquo;everything is a string&rdquo; model. Tcl&rsquo;s Tk = ARexx&rsquo;s ports (embedding in apps).</td></tr>
+        <tr><td>1991</td><td><strong>Python</strong></td><td>Guido van Rossum</td><td>Readability-first design influenced by REXX (via ABC). <code>NUMERIC DIGITS</code> &rarr; Python&rsquo;s arbitrary-precision integers.</td></tr>
+        <tr><td>1993</td><td><strong>AppleScript</strong></td><td>Apple</td><td>English-like syntax + app scripting. ARexx ports &rarr; AppleEvents.</td></tr>
+        <tr><td>1993</td><td><strong>Ruby</strong></td><td>Yukihiro Matsumoto</td><td>Influenced by Perl (which was influenced by the need REXX already filled).</td></tr>
+        <tr><td>1995</td><td><strong>JavaScript</strong></td><td>Brendan Eich</td><td>Dynamic typing, string-centric in early versions.</td></tr>
+        <tr><td>2006</td><td><strong>PowerShell</strong></td><td>Jeffrey Snover</td><td>Object pipeline vs REXX&rsquo;s string pipeline. Both designed for OS scripting.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- PARSE vs REGEX                                                -->
+    <!-- ============================================================ -->
+
+    <h2>PARSE vs Regular Expressions</h2>
+
+    <div class="card">
+      <p><strong>The fundamental difference:</strong> Regex describes what to <em>match</em>. PARSE describes what to <em>extract</em>. Regex finds patterns in text. PARSE decomposes text into named variables according to a template. For structured data (logs, configs, CSV, fixed-width), PARSE is often clearer and faster than regex.</p>
+    </div>
+
+    <h3>Extract Fields from a Log Line</h3>
+    <table>
+      <thead><tr><th>Language</th><th>Code</th></tr></thead>
+      <tbody>
+        <tr><td>REXX</td><td><code>PARSE VAR line ip ' - - [' timestamp '] "' method ' ' path ' ' . '" ' status ' ' size</code></td></tr>
+        <tr><td>Perl</td><td><code>my ($ip, $ts, $method, $path, $status, $size) = $line =~ /^(\S+) - - \[([^\]]+)\] "(\S+) (\S+) [^"]*" (\d+) (\d+)/</code></td></tr>
+        <tr><td>Python</td><td><code>m = re.match(r'^(\S+) - - \[([^\]]+)\] "(\S+) (\S+) [^"]*" (\d+) (\d+)', line)</code></td></tr>
+        <tr><td>Bash + awk</td><td><code>echo "$line" | awk '{print $1, $4, $6, $7, $9, $10}'</code></td></tr>
+      </tbody>
+    </table>
+    <p>The REXX PARSE version reads like a description of the format. The regex versions encode the same information as an opaque pattern string.</p>
+
+    <h3>Parse a URL</h3>
+    <pre>
+/* REXX: parse a URL into components */
+url = "https://api.example.com:8080/v2/users?id=42"
+PARSE VAR url protocol '://' host ':' port '/' path '?' query
+
+/* Result: protocol="https" host="api.example.com"
+           port="8080" path="v2/users" query="id=42" */</pre>
+
+    <pre>
+# Python equivalent
+from urllib.parse import urlparse
+p = urlparse("https://api.example.com:8080/v2/users?id=42")
+# p.scheme, p.hostname, p.port, p.path, p.query</pre>
+
+    <h3>When PARSE Wins</h3>
+    <table>
+      <thead><tr><th>Task</th><th>PARSE</th><th>Regex</th></tr></thead>
+      <tbody>
+        <tr><td>Fixed-width fields</td><td>Positional patterns: <code>PARSE VAR line name 1 20 dept 21 30</code></td><td>Regex with counted groups: verbose</td></tr>
+        <tr><td>Word-based extraction</td><td><code>PARSE VAR line word1 word2 rest</code></td><td><code>line.split()[0:2]</code> (comparable)</td></tr>
+        <tr><td>Literal delimiters</td><td><code>PARSE VAR csv field1 ',' field2 ',' field3</code></td><td><code>csv.split(',')</code> (comparable)</td></tr>
+        <tr><td>Mixed format</td><td>Combine positional + literal + word patterns in one template</td><td>Multiple regex passes or complex groups</td></tr>
+      </tbody>
+    </table>
+
+    <h3>When Regex Wins</h3>
+    <table>
+      <thead><tr><th>Task</th><th>PARSE</th><th>Regex</th></tr></thead>
+      <tbody>
+        <tr><td>Pattern matching (find, not extract)</td><td>No native pattern matching</td><td>Core purpose of regex</td></tr>
+        <tr><td>Repetition/quantifiers</td><td>Must loop manually</td><td><code>.*</code>, <code>+</code>, <code>{n,m}</code></td></tr>
+        <tr><td>Character classes</td><td>Use VERIFY function</td><td><code>[a-z]</code>, <code>\d</code>, <code>\w</code></td></tr>
+        <tr><td>Backreferences</td><td>Not supported</td><td><code>\1</code>, named groups</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- COMMON OPERATIONS                                             -->
+    <!-- ============================================================ -->
+
+    <h2>Common Operations Across Languages</h2>
+
+    <h3>Variable Assignment &amp; Types</h3>
+    <table>
+      <thead><tr><th>Language</th><th>Code</th><th>Type System</th></tr></thead>
+      <tbody>
+        <tr><td>REXX</td><td><code>name = "Alice"; age = 30</code></td><td>Typeless (everything is a string)</td></tr>
+        <tr><td>Python</td><td><code>name = "Alice"; age = 30</code></td><td>Dynamic (str, int are different types)</td></tr>
+        <tr><td>Perl</td><td><code>$name = "Alice"; $age = 30;</code></td><td>Dynamic (scalar context)</td></tr>
+        <tr><td>Bash</td><td><code>name="Alice"; age=30</code></td><td>Typeless (everything is a string)</td></tr>
+        <tr><td>TypeScript</td><td><code>let name = "Alice"; let age = 30;</code></td><td>Static (string, number)</td></tr>
+      </tbody>
+    </table>
+    <p>REXX and Bash share the &ldquo;everything is a string&rdquo; model. Python and TypeScript distinguish types. This is the core porting challenge: REXX&rsquo;s <code>"42" + 1</code> = <code>"43"</code> must work transparently.</p>
+
+    <h3>Associative Arrays / Dictionaries</h3>
+    <table>
+      <thead><tr><th>Language</th><th>Code</th></tr></thead>
+      <tbody>
+        <tr><td>REXX (stems)</td><td><code>color.sky = "blue"; color.grass = "green"; SAY color.sky</code></td></tr>
+        <tr><td>Python</td><td><code>color = {"sky": "blue", "grass": "green"}; print(color["sky"])</code></td></tr>
+        <tr><td>Perl</td><td><code>my %color = (sky => "blue", grass => "green"); print $color{sky};</code></td></tr>
+        <tr><td>Bash</td><td><code>declare -A color; color[sky]="blue"; echo ${color[sky]}</code></td></tr>
+        <tr><td>TypeScript</td><td><code>const color: Record&lt;string, string&gt; = {sky: "blue"}; console.log(color.sky);</code></td></tr>
+      </tbody>
+    </table>
+    <p>REXX stems are unique: <code>student.1.name</code>, <code>student.1.grade</code> — multi-level compound keys as a single dot-separated string. No other language has this natively.</p>
+
+    <h3>Arbitrary Precision Arithmetic</h3>
+    <table>
+      <thead><tr><th>Language</th><th>Code</th></tr></thead>
+      <tbody>
+        <tr><td>REXX</td><td><code>NUMERIC DIGITS 100; SAY 2**256</code></td></tr>
+        <tr><td>Python</td><td><code>print(2**256)</code> (built-in arbitrary precision integers)</td></tr>
+        <tr><td>Perl</td><td><code>use Math::BigInt; print Math::BigInt->new(2)->bpow(256);</code></td></tr>
+        <tr><td>JavaScript</td><td><code>console.log(2n ** 256n)</code> (BigInt, integers only)</td></tr>
+        <tr><td>Bash</td><td><code>echo "2^256" | bc</code> (external tool)</td></tr>
+      </tbody>
+    </table>
+    <p>REXX does arbitrary precision <em>decimal</em> arithmetic, not just integers. <code>NUMERIC DIGITS 100; SAY 1/3</code> gives 100 digits. Python integers are arbitrary but floats are IEEE 754. This is why REXX&rsquo;s <code>0.1 + 0.2 = 0.3</code> (correct) while Python&rsquo;s <code>0.1 + 0.2 = 0.30000000000000004</code>.</p>
+
+    <!-- ============================================================ -->
+    <!-- IPC COMPARISON                                                -->
+    <!-- ============================================================ -->
+
+    <h2>Inter-Process Communication Comparison</h2>
+
+    <table>
+      <thead><tr><th>System</th><th>Year</th><th>Model</th><th>Discovery</th><th>Data Format</th><th>Similarity to ARexx</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ARexx ports</strong></td><td>1987</td><td>Named message ports, request-response</td><td><code>SHOW('P')</code></td><td>Strings</td><td>&mdash;</td></tr>
+        <tr><td>Unix pipes</td><td>1973</td><td>Byte streams, producer-consumer</td><td>None (explicit)</td><td>Bytes/text</td><td>Low: one-directional, no naming</td></tr>
+        <tr><td>COM/OLE</td><td>1993</td><td>Interface-based, method calls</td><td>Registry</td><td>Typed (VARIANT)</td><td>Medium: app automation, but typed and complex</td></tr>
+        <tr><td>AppleScript/AppleEvents</td><td>1993</td><td>Apple Event descriptors</td><td>App dictionaries</td><td>Typed descriptors</td><td>High: app scripting, English-like syntax</td></tr>
+        <tr><td>D-Bus</td><td>2002</td><td>Named services, method calls</td><td>Bus introspection</td><td>Typed (signature)</td><td>High: named endpoints, discovery, message passing</td></tr>
+        <tr><td>gRPC</td><td>2015</td><td>Service definitions, RPC calls</td><td>Reflection</td><td>Protobuf (binary)</td><td>Medium: request-response, but compiled schemas</td></tr>
+        <tr><td><strong>MCP</strong></td><td>2024</td><td>Named tools, request-response</td><td><code>list_tools</code></td><td>JSON</td><td><strong>Very high: named endpoints, string results, discovery, orchestration</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="card port-card">
+      <p><strong>The MCP connection:</strong> ARexx&rsquo;s <code>ADDRESS 'IMAGEFX' "LOAD FILE picture.iff"</code> is structurally identical to an MCP tool call: invoke a named service with a string command, wait for a string result. ARexx scripts orchestrating multiple applications through ports ARE agents coordinating tools through MCP. The protocol is the same. The names have changed.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE ESCALATION LADDER EXTENDED                                -->
+    <!-- ============================================================ -->
+
+    <h2>The Escalation Ladder &mdash; Extended</h2>
+
+    <table>
+      <thead><tr><th>Rung</th><th>Code</th><th>When to Use</th><th>REXX Connection</th></tr></thead>
+      <tbody>
+        <tr><td>1. Bash / sh</td><td><a href="../CLI/">CLI</a></td><td>Glue, automation, pipes</td><td>REXX replaces bash for complex scripting (same rung, more power)</td></tr>
+        <tr><td>2. REXX / ARexx</td><td><strong>RXX</strong></td><td>Application scripting, IPC, arbitrary precision, PARSE-heavy parsing</td><td>This project. The missing rung restored.</td></tr>
+        <tr><td>3. Perl</td><td><a href="../PRL/">PRL</a></td><td>Text processing, regex, CPAN</td><td>Perl chose regex where REXX chose PARSE. Complementary.</td></tr>
+        <tr><td>4. Python</td><td><a href="../SNK/">SNK</a></td><td>General purpose, data science, ML</td><td>Python&rsquo;s readability philosophy was influenced by REXX via ABC.</td></tr>
+        <tr><td>5. C</td><td><a href="../CEE/">CEE</a></td><td>Systems, kernel, performance</td><td>ARexx was written in C. Regina is C. The implementation language.</td></tr>
+        <tr><td>6. Assembly</td><td><a href="../ASM/">ASM</a></td><td>Boot loaders, SIMD, reverse engineering</td><td>Stage 2: x86-64 REXX interpreter.</td></tr>
+        <tr><td>7. Machine code</td><td><a href="../MLC/">MLC</a></td><td>Binary patching, firmware</td><td>Understanding what the assembly compiles to.</td></tr>
+        <tr><td>8. GPU (CUDA)</td><td><a href="../MPC/">MPC</a></td><td>Parallel computation</td><td>Stage 3: REXX on GPU. 10,000 concurrent scripts.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Research Projects</h4>
+      <ul>
+        <li><a href="../CLI/">CLI &mdash; The Art of the CLI</a></li>
+        <li><a href="../PRL/">PRL &mdash; Perl &amp; PHP</a></li>
+        <li><a href="../SNK/">SNK &mdash; Python</a></li>
+        <li><a href="../CEE/">CEE &mdash; C Programming</a></li>
+        <li><a href="../ASM/">ASM &mdash; Assembly Language</a></li>
+        <li><a href="../MLC/">MLC &mdash; Machine Language</a></li>
+        <li><a href="../RST/">RST &mdash; Rust</a></li>
+        <li><a href="../JTS/">JTS &mdash; JavaScript &amp; TypeScript</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rosetta Integration &middot; Rexx &amp; ARexx &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -107,6 +107,149 @@
       </tbody>
     </table>
 
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: FIVE WHYS LIMITATIONS                       -->
+    <!-- ============================================================ -->
+
+    <h2>Five Whys &mdash; The Four Fundamental Flaws</h2>
+    <p>Card (2017, <em>BMJ Quality &amp; Safety</em>) provides the definitive critique, arguing Five Whys &ldquo;should be abandoned&rdquo; for patient safety RCA:</p>
+    <table>
+      <thead><tr><th>Flaw</th><th>Description</th><th>Impact on RCA</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Linear forcing</strong></td><td>Single causal chain only</td><td>Misses parallel and interacting causes</td></tr>
+        <tr><td><strong>Single-pathway</strong></td><td>Channels analyst down one &ldquo;why&rdquo; chain</td><td>Systematically excludes parallel causal factors</td></tr>
+        <tr><td><strong>Single root cause assumption</strong></td><td>Insists on arriving at one cause</td><td>Ignores systemic multi-factor incidents</td></tr>
+        <tr><td><strong>Distal-link fallacy</strong></td><td>Assumes most distant cause is best intervention point</td><td>No empirical basis for this assumption</td></tr>
+      </tbody>
+    </table>
+    <div class="card">
+      <p><strong>Non-repeatability:</strong> Different analysts applying Five Whys to the same incident arrive at different root causes. This is a fundamental validation failure &mdash; the technique produces non-reproducible results.</p>
+      <p><strong>Historical irony:</strong> Teruyuki Minoura, former Toyota managing director, himself criticized the method as &ldquo;too basic&rdquo; for adequate root cause depth, citing investigators stopping at symptoms rather than deeper causes.</p>
+      <p><strong>Original purpose:</strong> Five Whys was designed by Toyoda and Ohno to understand needed <em>product features</em>, not to perform failure RCA. Its migration to RCA represents a repurposing that outstripped the method&rsquo;s structural capacity.</p>
+    </div>
+    <p>Barsalou &amp; Starzynska (2023, <em>Quality Innovation Prosperity</em>, n=43) provide the <strong>first empirical industry survey</strong> of Five Whys usage: <strong>Ishikawa diagrams</strong> are &ldquo;by far the quality tool used the most with Five Whys&rdquo; &mdash; far exceeding all other companion tools combined. This validates a Five Whys + Fishbone combined workflow as the de facto industrial standard.</p>
+
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: FISHBONE EFFECTIVENESS                      -->
+    <!-- ============================================================ -->
+
+    <h2>Ishikawa Fishbone &mdash; Quantitative Evidence</h2>
+    <p>Kumah et al. (2024, <em>Global Journal on Quality and Safety in Healthcare</em>) document a six-step process with a case study from Nyaho Medical Centre, Ghana:</p>
+    <div class="stats">
+      <div class="stat"><span class="stat-value green">81.8%</span><span class="stat-label">Needlestick Injury Reduction</span></div>
+      <div class="stat"><span class="stat-value blue">11 &rarr; 2</span><span class="stat-label">Cases (2018&ndash;2021)</span></div>
+    </div>
+    <p>The spatial layout directly addresses the Five Whys&rsquo; linear-forcing flaw by allowing multiple causal branches simultaneously. <strong>Documented limitation:</strong> fishbone diagrams &ldquo;could generate both irrelevant and relevant potential root causes,&rdquo; potentially leading to unfocused improvement strategies. Best used as the <em>starting point</em> for a structured improvement cycle, not as a standalone deliverable.</p>
+
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: FTA 60-YEAR RESEARCH CORPUS                 -->
+    <!-- ============================================================ -->
+
+    <h2>Fault Tree Analysis &mdash; 60 Years of Research</h2>
+    <p>Yazdi et al. (2023, <em>Quality and Reliability Engineering International</em>) bibliometric review: <span class="key-number confirmed">7,995 publications</span> in Scopus (2011&ndash;2021), with accelerating growth after 2019.</p>
+
+    <h3>FTA Timeline</h3>
+    <table>
+      <thead><tr><th>Year</th><th>Milestone</th></tr></thead>
+      <tbody>
+        <tr><td>1962</td><td>H.A. Watson at Bell Labs develops FTA for Minuteman I ICBM</td></tr>
+        <tr><td>1963&ndash;64</td><td>Boeing and AVCO expand FTA to Minuteman II</td></tr>
+        <tr><td>1965</td><td>Boeing presents FTA at System Safety Symposium, Seattle</td></tr>
+        <tr><td>1970</td><td>FAA mandates FTA via 14 CFR 25.1309 airworthiness regulations</td></tr>
+        <tr><td>1975</td><td>NRC incorporates FTA into Probabilistic Risk Assessment</td></tr>
+        <tr><td>1992</td><td>OSHA recognizes FTA in Process Safety Management standard</td></tr>
+        <tr><td>2023</td><td><strong>60%</strong> of world nuclear plants use RiskSpectrum for FTA</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Five Classical Deficiencies Driving Modern Improvements</h3>
+    <table>
+      <thead><tr><th>Deficiency</th><th>Description</th><th>Modern Solution</th></tr></thead>
+      <tbody>
+        <tr><td>Static structure</td><td>Cannot model time-dependent failures</td><td>Dynamic FTA</td></tr>
+        <tr><td>Crisp probability requirement</td><td>Real-world data is imprecise</td><td>Fuzzy FTA</td></tr>
+        <tr><td>Binary state assumption</td><td>No degradation modeling</td><td>Multi-state FTA</td></tr>
+        <tr><td>Independence assumption</td><td>Cannot model common-cause failures</td><td>Bayesian network integration</td></tr>
+        <tr><td>No updating mechanism</td><td>Cannot incorporate new evidence</td><td>Bayesian updating</td></tr>
+      </tbody>
+    </table>
+
+    <h3>FTA Mathematical Foundations</h3>
+    <table>
+      <thead><tr><th>Gate Type</th><th>Probability Formula</th><th>Application</th></tr></thead>
+      <tbody>
+        <tr><td>AND gate</td><td>P(top) = P(A) &times; P(B)</td><td>Requires multiple simultaneous failures</td></tr>
+        <tr><td>OR gate</td><td>P(top) &asymp; P(A) + P(B) when P &lt; 0.1</td><td>Any single failure triggers top event</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Minimal cut sets</strong> &mdash; the minimum combinations of basic events that cause the top event &mdash; are the core qualitative analysis step in FTA.</p>
+
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: FMEA 20-YEAR EVIDENCE                       -->
+    <!-- ============================================================ -->
+
+    <h2>FMEA &mdash; 20-Year Healthcare Evidence Base</h2>
+    <p>Vecchia et al. (2025, <em>Healthcare</em>) scoping review of <span class="key-number confirmed">163 studies</span> (2003&ndash;2023) across 32 countries:</p>
+    <div class="stats">
+      <div class="stat"><span class="stat-value red">9,564</span><span class="stat-label">Failure Modes Identified</span></div>
+      <div class="stat"><span class="stat-value blue">62.51</span><span class="stat-label">Mean per Study</span></div>
+      <div class="stat"><span class="stat-value green">74.85%</span><span class="stat-label">Produced Corrective Actions</span></div>
+      <div class="stat"><span class="stat-value amber">32</span><span class="stat-label">Countries</span></div>
+    </div>
+    <table>
+      <thead><tr><th>Study Design</th><th>N</th><th>%</th></tr></thead>
+      <tbody>
+        <tr><td>Prospective analytical</td><td>112</td><td><strong>68.7%</strong></td></tr>
+        <tr><td>Quality improvement</td><td>33</td><td>20.3%</td></tr>
+        <tr><td>Systematic reviews</td><td>6</td><td>3.7%</td></tr>
+        <tr><td>Randomized trials</td><td><strong>1</strong></td><td><strong>0.6%</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="card">
+      <p><strong>Specific outcomes:</strong> Catheter-related bloodstream infections reduced from <span class="key-number confirmed">5.19% to 1.42%</span> after FMEA-driven interventions. Sri Lanka case study (Anjalee et al., 2021): 90 failure modes identified, 66 prioritized, &ldquo;overcrowded dispensing counters&rdquo; implicated in 57 failure modes &mdash; leading to redesigned dispensing tables.</p>
+      <p><strong>Evidence gap:</strong> Only 1 randomized trial in 163 studies. FMEA&rsquo;s dominance (68.7% prospective) confirms its unique role as a <em>proactive</em> risk identification tool, but causal evidence for effectiveness remains thin.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: SWISS CHEESE COMPREHENSION PROBLEM          -->
+    <!-- ============================================================ -->
+
+    <h2>Swiss Cheese Model &mdash; The Comprehension Paradox</h2>
+    <p>Perneger (2005, <em>BMC Health Services Research</em>, n=85 self-reported experts): the most widely recognized safety framework is poorly understood even by professionals who claim familiarity.</p>
+    <table>
+      <thead><tr><th>Model Component</th><th>Correct Answers</th><th>Interpretation</th></tr></thead>
+      <tbody>
+        <tr><td>System improvement (&ldquo;plugging a hole&rdquo;)</td><td><strong>89.4%</strong></td><td>Best understood</td></tr>
+        <tr><td>Arrow (hazard path)</td><td>70.0%</td><td>Moderate</td></tr>
+        <tr><td>Overall comprehension</td><td><span class="key-number confirmed">66.5%</span></td><td>Far below mastery</td></tr>
+        <tr><td>Cheese slices (barriers)</td><td>60.0%</td><td>Moderate</td></tr>
+        <tr><td>Holes (weaknesses)</td><td>54.0%</td><td>Below adequate</td></tr>
+        <tr><td><strong>Active error representation</strong></td><td><strong>30.6%</strong></td><td><strong>Devastating</strong></td></tr>
+      </tbody>
+    </table>
+    <p>Wiegmann et al. (2022, <em>Journal of Patient Safety</em>) operationalize the metaphor through the <strong>HFACS four-level taxonomy</strong>, converting the abstract model into a structured investigation checklist. Critical distinctions: not every hole causes harm (system resilience), and one-to-many / many-to-one failure mapping patterns require multi-level investigation.</p>
+
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: METHOD SELECTION FRAMEWORK                  -->
+    <!-- ============================================================ -->
+
+    <h2>Method Selection Framework</h2>
+    <p>Doggett (2005, <em>Quality Management Journal</em>) provides 8 performance criteria for choosing the right classical RCA method:</p>
+    <table>
+      <thead><tr><th>Criterion</th><th>Five Whys</th><th>Ishikawa</th><th>FTA</th><th>FMEA</th><th>Swiss Cheese</th></tr></thead>
+      <tbody>
+        <tr><td>Causal yield</td><td>Low</td><td>High</td><td>High</td><td>Very High</td><td>Medium</td></tr>
+        <tr><td>Interdependencies</td><td>None</td><td>Low</td><td>High</td><td>Low</td><td>High</td></tr>
+        <tr><td>Quantification</td><td>None</td><td>None</td><td>Yes (probability)</td><td>Yes (RPN)</td><td>Qualitative</td></tr>
+        <tr><td>Team stimulation</td><td>Low</td><td>High</td><td>Low</td><td>Medium</td><td>Medium</td></tr>
+        <tr><td>Training required</td><td>None</td><td>Minimal</td><td>Significant</td><td>Moderate</td><td>Significant</td></tr>
+        <tr><td>Evidence base</td><td>Weak</td><td>Moderate</td><td>Strong (7,995 papers)</td><td>Strong (163 studies)</td><td>Moderate</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The RCA-to-Control Gap</h3>
+    <p>Card, Ward &amp; Clarkson (2012, <em>Journal of Healthcare Risk Management</em>, University of Cambridge): successful root cause identification does <strong>not</strong> automatically translate to successful risk control. Healthcare risk managers do not systematically apply the hierarchy of risk controls (elimination &gt; substitution &gt; engineering &gt; administrative &gt; PPE) when designing action plans after RCA. Existing tools support the <em>analysis</em> phase well but provide inadequate support for the <em>control planning</em> phase &mdash; a blind spot shared by <em>the entire classical toolkit</em>.</p>
+
     <!-- CORPUS CROSS-REFERENCES -->
     <h2>Corpus Cross-References</h2>
     <p>Pipeline analysis identified <strong>37 related projects</strong> across 5 knowledge domains with 30 keyword matches.</p>

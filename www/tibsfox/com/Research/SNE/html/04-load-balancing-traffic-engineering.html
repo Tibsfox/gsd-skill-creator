@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: Load Balancing &amp; Traffic
+Engineering — SNE Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2236;
+            --accent: #00BFA5;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #40C4FF;
+            --border: #2a3a4a;
+            --primary: #0D47A1;
+            --net: #80DEEA;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(64,196,255,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNE — Systems Network Engineering<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNE Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="module-4-load-balancing-traffic-engineering">Module 4: Load
+    Balancing &amp; Traffic Engineering</h1>
+    <h2 id="overview">Overview</h2>
+    <p>Load balancing and traffic engineering occupy the critical
+    junction between network architecture and application delivery.
+    Where routing protocols determine how packets find paths through a
+    network, traffic engineering determines which paths they should take
+    – and load balancing ensures that the endpoints receiving those
+    packets can actually handle the volume. These are not luxuries
+    bolted onto existing networks. They are the mechanisms that separate
+    a network that works from a network that works under load, under
+    failure, under geographic distribution, and under the relentless
+    growth of traffic that defines modern infrastructure.</p>
+    <p>The distinction matters because the failure mode is different
+    from most networking problems. A misconfigured route produces an
+    immediate, diagnosable outage. Poor traffic engineering produces
+    something worse: a network that works perfectly at 30% utilization
+    and collapses unpredictably at 70%. The symptoms are intermittent
+    latency spikes, mysterious connection resets, asymmetric load across
+    supposedly identical servers, and capacity that exists on paper but
+    cannot be reached in practice. These are the problems that traffic
+    engineering solves, and they are problems that get harder – not
+    easier – as networks grow.</p>
+    <p>This module maps the full landscape: from Layer 4 packet-level
+    decisions to Layer 7 application-aware routing, from single-rack
+    load balancers to global anycast networks spanning hundreds of
+    cities, from classical DiffServ QoS to modern segment routing
+    traffic engineering. The real-world systems that demonstrate these
+    principles at scale – Google’s Maglev, Meta’s Katran, Cloudflare’s
+    Unimog – are examined not as case studies in abstraction but as
+    concrete implementations whose design decisions illuminate the
+    trade-offs that every network engineer faces.</p>
+    <hr />
+    <h2 id="layer-4-vs-layer-7-load-balancing">1. Layer 4 vs Layer 7
+    Load Balancing</h2>
+    <p>The most fundamental decision in load balancer selection is the
+    layer at which it operates. This is not merely a feature checkbox –
+    it determines the performance ceiling, the failure modes, the
+    operational complexity, and the class of routing decisions the
+    balancer can make.</p>
+    <h3 id="layer-4-load-balancing">1.1 Layer 4 Load Balancing</h3>
+    <p>A Layer 4 load balancer operates at the transport layer, making
+    forwarding decisions based on IP addresses and TCP/UDP port numbers.
+    It does not inspect the payload. It does not parse HTTP headers. It
+    does not understand application semantics. This constraint is also
+    its strength.</p>
+    <p><strong>How it works:</strong> The load balancer receives a TCP
+    SYN packet, selects a backend server using a configured algorithm
+    (round-robin, weighted, hash-based), and either rewrites the
+    destination IP (NAT mode) or encapsulates the packet for delivery
+    (DSR/tunneling mode). All subsequent packets in that connection
+    follow the same path – the load balancer maintains a connection
+    table mapping the 5-tuple (source IP, source port, destination IP,
+    destination port, protocol) to a specific backend.</p>
+    <p><strong>Performance characteristics:</strong> Because L4 load
+    balancers do not need to terminate TCP connections or parse
+    application data, they can process packets at line rate. A single
+    commodity server running an optimized L4 balancer can saturate a 10
+    Gbps link with small packets. Google’s Maglev achieves this by
+    processing packets in userspace with kernel bypass, and Meta’s
+    Katran achieves it using XDP programs that intercept packets before
+    they even reach the kernel networking stack.</p>
+    <p><strong>When to use L4:</strong></p>
+    <ul>
+    <li>High-throughput scenarios where every microsecond of latency
+    matters</li>
+    <li>TCP/UDP services that do not require content-aware routing
+    (databases, game servers, DNS)</li>
+    <li>The first tier of a multi-tier load balancing architecture,
+    distributing to L7 balancers</li>
+    <li>When Direct Server Return (DSR) is needed to keep return traffic
+    off the balancer</li>
+    </ul>
+    <p><strong>Limitations:</strong> An L4 balancer cannot route based
+    on HTTP path, hostname, cookie, or header. It cannot perform TLS
+    termination (it can pass through TLS but cannot inspect the
+    encrypted content). It cannot do content-based health checks beyond
+    TCP connection success. It treats all traffic on a port
+    identically.</p>
+    <h3 id="layer-7-load-balancing">1.2 Layer 7 Load Balancing</h3>
+    <p>A Layer 7 load balancer terminates the client connection and
+    establishes a separate connection to the backend. Between those two
+    connections, it has full visibility into the application protocol –
+    HTTP headers, URI paths, query parameters, cookies, gRPC service
+    names, WebSocket upgrade requests.</p>
+    <p><strong>How it works:</strong> The client completes a TCP
+    handshake and TLS negotiation with the load balancer (not the
+    backend). The load balancer parses the request, applies routing
+    rules, selects a backend, and proxies the request over a separate
+    connection. This “split connection” model means the load balancer
+    manages two distinct TCP state machines per request.</p>
+    <p><strong>Routing capabilities:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 50%" />
+    <col style="width: 23%" />
+    <col style="width: 26%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Routing Dimension</th>
+    <th>Example</th>
+    <th>Use Case</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Host header</td>
+    <td><code>api.example.com</code> vs
+    <code>www.example.com</code></td>
+    <td>Multi-tenant routing</td>
+    </tr>
+    <tr>
+    <td>URI path</td>
+    <td><code>/api/v2/users</code> vs <code>/static/images</code></td>
+    <td>Microservice routing</td>
+    </tr>
+    <tr>
+    <td>HTTP method</td>
+    <td><code>GET</code> vs <code>POST</code></td>
+    <td>Read replica vs primary routing</td>
+    </tr>
+    <tr>
+    <td>Cookie/header</td>
+    <td><code>session_id</code>, <code>X-Feature-Flag</code></td>
+    <td>Sticky sessions, canary deployments</td>
+    </tr>
+    <tr>
+    <td>gRPC service</td>
+    <td><code>UserService.GetProfile</code></td>
+    <td>Service-level routing in gRPC mesh</td>
+    </tr>
+    <tr>
+    <td>Client certificate</td>
+    <td>mTLS identity</td>
+    <td>Zero-trust backend selection</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Performance characteristics:</strong> L7 load balancing
+    is inherently more expensive than L4. Terminating TLS, parsing HTTP,
+    and managing two connection pools per request consumes CPU and
+    memory. A high-end L7 proxy handles tens of thousands of requests
+    per second per core – orders of magnitude less than an L4 balancer
+    measured in packets per second. The trade-off is capability, not
+    performance.</p>
+    <h3 id="comparison-matrix">1.3 Comparison Matrix</h3>
+    <table>
+    <colgroup>
+    <col style="width: 35%" />
+    <col style="width: 32%" />
+    <col style="width: 32%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Property</th>
+    <th>Layer 4</th>
+    <th>Layer 7</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>OSI layer</td>
+    <td>Transport (TCP/UDP)</td>
+    <td>Application (HTTP/gRPC/etc.)</td>
+    </tr>
+    <tr>
+    <td>Routing granularity</td>
+    <td>IP + port (5-tuple)</td>
+    <td>URL, headers, cookies, payload</td>
+    </tr>
+    <tr>
+    <td>TLS handling</td>
+    <td>Passthrough only</td>
+    <td>Full termination and re-encryption</td>
+    </tr>
+    <tr>
+    <td>Connection model</td>
+    <td>Single connection (forwarded)</td>
+    <td>Split connection (proxied)</td>
+    </tr>
+    <tr>
+    <td>Throughput ceiling</td>
+    <td>10-100 Gbps per node</td>
+    <td>10K-100K RPS per core</td>
+    </tr>
+    <tr>
+    <td>Latency overhead</td>
+    <td>Sub-millisecond (&lt; 100 us typical)</td>
+    <td>1-5 ms (TLS + parsing)</td>
+    </tr>
+    <tr>
+    <td>Health checking</td>
+    <td>TCP connect, UDP response</td>
+    <td>HTTP status, body content, gRPC health</td>
+    </tr>
+    <tr>
+    <td>Session persistence</td>
+    <td>Source IP hash</td>
+    <td>Cookie-based, header-based</td>
+    </tr>
+    <tr>
+    <td>Observability</td>
+    <td>Connection counts, bytes</td>
+    <td>Request rates, latency percentiles, error rates</td>
+    </tr>
+    <tr>
+    <td>Typical deployment</td>
+    <td>Edge/first-tier, database, DNS</td>
+    <td>API gateway, web frontend, microservice mesh</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="the-two-tier-pattern">1.4 The Two-Tier Pattern</h3>
+    <p>Most production architectures use both layers in a two-tier
+    topology:</p>
+    <pre><code>Internet Traffic
+       |
+  [Anycast/BGP]
+       |
+  [L4 Load Balancer]    &lt;-- Distributes across L7 pool, handles DDoS at packet level
+       |
+  [L7 Load Balancer]    &lt;-- Content routing, TLS termination, canary, rate limiting
+   /   |   \
+[App] [App] [App]       &lt;-- Application backends</code></pre>
+    <p>The L4 tier provides raw throughput, DDoS resilience (it can drop
+    malicious packets before they consume L7 resources), and horizontal
+    scaling of the L7 tier. The L7 tier provides intelligent routing,
+    observability, and application-aware health checking. This is
+    exactly the architecture that Google, Meta, and Cloudflare use in
+    production.</p>
+    <hr />
+    <h2 id="hardware-vs-software-load-balancers">2. Hardware vs Software
+    Load Balancers</h2>
+    <h3 id="hardware-load-balancers">2.1 Hardware Load Balancers</h3>
+    <p>Hardware load balancers are purpose-built appliances with custom
+    ASICs or FPGAs for packet processing. The two dominant vendors are
+    F5 Networks (BIG-IP) and Citrix (ADC, formerly NetScaler).</p>
+    <p><strong>F5 BIG-IP:</strong></p>
+    <p>F5 BIG-IP is a full application delivery controller providing
+    L4-L7 load balancing, SSL offload, WAF, and programmability via
+    iRules (a Tcl-based scripting language). The hardware line uses
+    custom FPGAs for SSL acceleration and packet processing. F5 has
+    expanded into software (BIG-IP Virtual Edition) and SaaS (F5
+    Distributed Cloud), but the hardware appliance remains the core of
+    its installed base in enterprise data centers.</p>
+    <p><strong>Citrix ADC (NetScaler):</strong></p>
+    <p>Citrix ADC provides similar functionality with a reputation for
+    strong SSL performance and Citrix ecosystem integration. It uses a
+    custom FreeBSD-derived OS and provides programmability through
+    responder and rewrite policies. In the load balancer market segment,
+    Citrix ADC holds approximately 7.7% market share versus F5 BIG-IP’s
+    3.5%, though these numbers are complicated by the dominance of
+    cloud-native solutions – AWS Elastic Load Balancer alone commands
+    over 66% of deployments.</p>
+    <p><strong>The decline of hardware LB:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 29%" />
+    <col style="width: 37%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Factor</th>
+    <th>Hardware</th>
+    <th>Software</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Cost per unit</td>
+    <td>$50K-$500K+</td>
+    <td>$0 (open source) to $50K/yr (enterprise)</td>
+    </tr>
+    <tr>
+    <td>Scaling model</td>
+    <td>Vertical (buy bigger box)</td>
+    <td>Horizontal (add instances)</td>
+    </tr>
+    <tr>
+    <td>Provisioning time</td>
+    <td>Weeks (procurement + rack)</td>
+    <td>Minutes (container/VM)</td>
+    </tr>
+    <tr>
+    <td>Automation</td>
+    <td>Limited API, vendor-specific</td>
+    <td>Full API, infrastructure-as-code native</td>
+    </tr>
+    <tr>
+    <td>Failure domain</td>
+    <td>Single appliance</td>
+    <td>Distributed, no SPOF</td>
+    </tr>
+    <tr>
+    <td>Innovation cycle</td>
+    <td>18-24 month hardware refresh</td>
+    <td>Continuous software releases</td>
+    </tr>
+    <tr>
+    <td>Cloud compatibility</td>
+    <td>None (physical only)</td>
+    <td>Native to any cloud</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The market trajectory is unmistakable. Cloud-native load
+    balancers (AWS ALB/NLB, GCP Cloud Load Balancing, Azure Load
+    Balancer) and open-source software load balancers have captured the
+    growth segment. Hardware LB retains a role in legacy enterprise
+    environments and regulated industries where appliance-based security
+    certification matters, but no greenfield architecture should specify
+    hardware load balancers in 2026.</p>
+    <h3 id="software-load-balancers">2.2 Software Load Balancers</h3>
+    <p>The software load balancer landscape has consolidated around four
+    dominant projects, each with a distinct architectural
+    philosophy.</p>
+    <p><strong>HAProxy:</strong></p>
+    <p>The gold standard for raw L4/L7 load balancing performance.
+    HAProxy is a single-process, event-driven proxy that achieves
+    extraordinary throughput through careful memory management and
+    zero-copy techniques. It is the load balancer that other load
+    balancers benchmark against. HAProxy consistently delivers 50,000+
+    requests per second in HTTP/1.1 benchmarks while consuming
+    approximately 50 MB of memory. Its configuration language is
+    declarative and specific to load balancing – it does not try to be a
+    web server or an API gateway. HAProxy Technologies offers an
+    enterprise edition with a management API, WAF module, and commercial
+    support.</p>
+    <p><strong>nginx:</strong></p>
+    <p>Originally a web server, nginx’s reverse proxy and load balancing
+    capabilities have made it the most widely deployed L7 proxy in the
+    world. nginx provides the best balance of features for HTTP-centric
+    workloads: mature HTTP/3 (QUIC) support since version 1.25.0,
+    built-in caching, static file serving, and a familiar configuration
+    syntax. It handles approximately 40,000+ RPS in benchmarks with ~80
+    MB memory consumption. F5 acquired nginx in 2019; the commercial
+    nginx Plus adds dynamic reconfiguration, active health checks, and a
+    dashboard. The community open-source version remains actively
+    developed.</p>
+    <p><strong>Envoy Proxy:</strong></p>
+    <p>Purpose-built for service mesh and cloud-native architectures.
+    Envoy was created at Lyft and donated to the CNCF, where it became
+    the data plane for Istio, AWS App Mesh, and numerous service mesh
+    implementations. Envoy’s defining feature is its xDS (discovery
+    service) API, which allows control planes to dynamically configure
+    every aspect of the proxy without restarts or config reloads. This
+    makes Envoy the standard choice for environments where routing rules
+    change continuously – Kubernetes service meshes, canary deployments,
+    A/B testing frameworks. Envoy consumes more resources (~150 MB
+    memory) and delivers slightly lower raw throughput (~35,000+ RPS)
+    than HAProxy or nginx, but its programmability and observability
+    (native distributed tracing, detailed metrics, access logging) are
+    unmatched.</p>
+    <p><strong>Traefik:</strong></p>
+    <p>An automatic, cloud-native reverse proxy designed for container
+    orchestration. Traefik watches Kubernetes, Docker, Consul, and other
+    service registries and automatically configures routes as services
+    appear and disappear. It trades raw performance for operational
+    simplicity – there is no configuration file to manage for dynamic
+    services. Traefik is the default ingress proxy for many
+    small-to-medium Kubernetes deployments and Docker Compose setups.
+    Its enterprise edition (TraefikEE) adds high availability,
+    distributed configuration, and advanced traffic management.</p>
+    <h3 id="software-load-balancer-decision-matrix">2.3 Software Load
+    Balancer Decision Matrix</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 20%" />
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    <col style="width: 20%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Criterion</th>
+    <th>HAProxy</th>
+    <th>nginx</th>
+    <th>Envoy</th>
+    <th>Traefik</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Peak throughput</td>
+    <td>Highest</td>
+    <td>High</td>
+    <td>Moderate</td>
+    <td>Moderate</td>
+    </tr>
+    <tr>
+    <td>Memory footprint</td>
+    <td>~50 MB</td>
+    <td>~80 MB</td>
+    <td>~150 MB</td>
+    <td>~100 MB</td>
+    </tr>
+    <tr>
+    <td>HTTP/3 (QUIC)</td>
+    <td>Experimental</td>
+    <td>Stable (1.25+)</td>
+    <td>Stable</td>
+    <td>Stable</td>
+    </tr>
+    <tr>
+    <td>Dynamic reconfiguration</td>
+    <td>Reload required</td>
+    <td>Reload required</td>
+    <td>xDS API (no restart)</td>
+    <td>Auto-discovery</td>
+    </tr>
+    <tr>
+    <td>Service mesh integration</td>
+    <td>Manual</td>
+    <td>Manual</td>
+    <td>Native (Istio, etc.)</td>
+    <td>Limited</td>
+    </tr>
+    <tr>
+    <td>Kubernetes native</td>
+    <td>Via Ingress controller</td>
+    <td>Via Ingress controller</td>
+    <td>Via Gateway API</td>
+    <td>Auto-discovery native</td>
+    </tr>
+    <tr>
+    <td>Distributed tracing</td>
+    <td>Plugin</td>
+    <td>Plugin</td>
+    <td>Native (Zipkin, Jaeger)</td>
+    <td>Plugin</td>
+    </tr>
+    <tr>
+    <td>Best for</td>
+    <td>High-perf L4/L7</td>
+    <td>Web serving + LB</td>
+    <td>Service mesh, cloud-native</td>
+    <td>Container auto-routing</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="global-server-load-balancing-gslb">3. Global Server Load
+    Balancing (GSLB)</h2>
+    <p>GSLB distributes traffic across geographically distributed data
+    centers. Unlike local load balancing (which selects a server within
+    a site), GSLB selects the site itself. The mechanism is almost
+    always DNS-based: the GSLB system acts as the authoritative DNS
+    server for the service’s domain and returns different IP addresses
+    based on the client’s location, the health of each site, and
+    configured policies.</p>
+    <h3 id="gslb-architectures">3.1 GSLB Architectures</h3>
+    <p><strong>F5 BIG-IP GTM (now BIG-IP DNS):</strong></p>
+    <p>F5’s Global Traffic Manager operates as an intelligent DNS server
+    that monitors the health and performance of backend pools across
+    multiple data centers. It supports topology-based routing,
+    round-robin, ratio, least connections, and QoS-based selection. GTM
+    integrates tightly with local BIG-IP LTM instances for real-time
+    health data. This is the traditional enterprise GSLB solution and
+    remains common in organizations with existing F5 investments.</p>
+    <p><strong>AWS Route 53:</strong></p>
+    <p>Amazon’s DNS service provides GSLB through routing policies:</p>
+    <table>
+    <colgroup>
+    <col style="width: 27%" />
+    <col style="width: 37%" />
+    <col style="width: 34%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Policy</th>
+    <th>Mechanism</th>
+    <th>Use Case</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Simple</td>
+    <td>Single record</td>
+    <td>No load balancing needed</td>
+    </tr>
+    <tr>
+    <td>Weighted</td>
+    <td>Percentage-based distribution</td>
+    <td>Canary deployments, gradual migration</td>
+    </tr>
+    <tr>
+    <td>Latency</td>
+    <td>Network latency measurement</td>
+    <td>Performance optimization</td>
+    </tr>
+    <tr>
+    <td>Failover</td>
+    <td>Health-check driven</td>
+    <td>Active/passive DR</td>
+    </tr>
+    <tr>
+    <td>Geolocation</td>
+    <td>Client geography (country/continent)</td>
+    <td>Compliance, localization</td>
+    </tr>
+    <tr>
+    <td>Geoproximity</td>
+    <td>Adjustable geographic bias</td>
+    <td>Fine-tuned traffic steering</td>
+    </tr>
+    <tr>
+    <td>Multivalue answer</td>
+    <td>Multiple healthy IPs</td>
+    <td>Simple DNS-level distribution</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Route 53 latency-based routing measures network latency between
+    the client’s resolver and each AWS region, returning the record for
+    the region with the lowest latency. This is not geographic proximity
+    – a client in Portland, Oregon might be routed to us-west-2 (Oregon)
+    or us-west-1 (N. California) depending on real network conditions,
+    not straight-line distance.</p>
+    <p><strong>Other cloud GSLB:</strong></p>
+    <ul>
+    <li><strong>Azure Traffic Manager:</strong> DNS-based, supports
+    priority, weighted, performance, geographic, multivalue, and subnet
+    routing</li>
+    <li><strong>Google Cloud DNS:</strong> Supports geolocation routing
+    policies and weighted round-robin; integrates with Cloud Load
+    Balancing for a combined GSLB + L7 solution</li>
+    <li><strong>Cloudflare Load Balancing:</strong> DNS-based with
+    steering policies (off, random, hash, geo, dynamic latency), health
+    monitoring, and automatic failover</li>
+    </ul>
+    <h3 id="gslb-limitations">3.2 GSLB Limitations</h3>
+    <p>DNS-based GSLB has inherent limitations that network engineers
+    must understand:</p>
+    <ol type="1">
+    <li><p><strong>TTL-bounded convergence:</strong> When a site fails,
+    the GSLB system changes the DNS response, but clients cache the old
+    IP for the duration of the DNS TTL. Setting TTL to 30 seconds
+    improves convergence but increases DNS query volume. Setting TTL to
+    300 seconds reduces query volume but means 5 minutes of potential
+    downtime during failover.</p></li>
+    <li><p><strong>Resolver opacity:</strong> The GSLB system sees the
+    DNS resolver’s IP, not the end client’s IP. EDNS Client Subnet (ECS,
+    RFC 7871) partially solves this by including the client’s subnet in
+    the DNS query, but not all resolvers support it.</p></li>
+    <li><p><strong>No connection awareness:</strong> DNS returns an IP
+    address before the client connects. The GSLB system cannot factor in
+    current connection count, server CPU utilization, or response time
+    at the moment of the DNS query – only at the granularity of health
+    check intervals.</p></li>
+    </ol>
+    <hr />
+    <h2 id="dns-based-load-balancing">4. DNS-Based Load Balancing</h2>
+    <p>Beyond GSLB, DNS itself serves as a load balancing mechanism
+    through several techniques.</p>
+    <h3 id="dns-round-robin">4.1 DNS Round-Robin</h3>
+    <p>The simplest form: the authoritative DNS server returns multiple
+    A/AAAA records for a hostname, cycling their order with each query.
+    Client behavior is implementation-dependent – most clients connect
+    to the first IP in the list, so rotating the order distributes
+    connections.</p>
+    <p><strong>Advantages:</strong> Zero infrastructure required, works
+    with any DNS server, no single point of failure.</p>
+    <p><strong>Disadvantages:</strong> No health checking (dead servers
+    remain in rotation until manually removed), no awareness of server
+    load, unequal distribution due to client-side caching and resolver
+    behavior.</p>
+    <h3 id="weighted-dns">4.2 Weighted DNS</h3>
+    <p>Records are returned with different frequencies based on
+    configured weights. A server with weight 70 appears in 70% of
+    responses; a server with weight 30 appears in 30%. Route 53,
+    Cloudflare, and PowerDNS all support this natively.</p>
+    <p><strong>Use case:</strong> Gradual traffic migration between data
+    centers. Set the old DC to weight 90 and the new DC to weight 10,
+    monitor, then shift gradually. This is the DNS equivalent of a
+    canary deployment.</p>
+    <h3 id="geodns">4.3 GeoDNS</h3>
+    <p>The authoritative server maps client resolver IPs (or EDNS Client
+    Subnet) to geographic regions and returns region-specific records. A
+    query from a European resolver gets a European server IP; an Asian
+    query gets an Asian IP.</p>
+    <p><strong>Implementation options:</strong> - <strong>PowerDNS with
+    GeoIP backend:</strong> Open source, uses MaxMind GeoIP databases -
+    <strong>Cloudflare DNS:</strong> Built-in geolocation steering -
+    <strong>Route 53 geolocation routing:</strong> Country and continent
+    granularity - <strong>NS1:</strong> Advanced traffic management with
+    filter chains combining geo, cost, and performance data</p>
+    <hr />
+    <h2 id="anycast-engineering">5. Anycast Engineering</h2>
+    <p>Anycast is the technique of announcing the same IP address from
+    multiple physical locations using BGP. When a client sends a packet
+    to an anycast address, the network’s BGP routing delivers it to the
+    topologically nearest announcement point. This is not a DNS trick –
+    it operates at the network layer, below application awareness.</p>
+    <h3 id="how-bgp-anycast-works">5.1 How BGP Anycast Works</h3>
+    <p>Each anycast site runs a BGP speaker that advertises the same IP
+    prefix (e.g., <code>198.51.100.0/24</code>) to its upstream
+    providers. The global BGP routing table converges to direct each
+    source AS toward the nearest announcement. “Nearest” in BGP terms
+    means fewest AS hops by default, though local preference, MED, and
+    community-based policies modify this.</p>
+    <pre><code>                    +-----------+
+               +--&gt; | Site: SJC | --&gt; BGP: 198.51.100.0/24
+               |    +-----------+
+ Client (PDX) -+
+               |    +-----------+
+               +--&gt; | Site: SEA | --&gt; BGP: 198.51.100.0/24  &lt;-- Selected (fewer hops)
+                    +-----------+
+
+                    +-----------+
+ Client (LHR) ---&gt; | Site: AMS | --&gt; BGP: 198.51.100.0/24  &lt;-- Selected (nearest)
+                    +-----------+</code></pre>
+    <h3 id="anycast-for-stateless-protocols">5.2 Anycast for Stateless
+    Protocols</h3>
+    <p>Anycast works naturally with stateless protocols like DNS. A DNS
+    query is a single request-response pair – if a subsequent query goes
+    to a different anycast site, the client does not notice. This is why
+    all major public DNS resolvers (Cloudflare 1.1.1.1, Google 8.8.8.8,
+    Quad9 9.9.9.9) use anycast. Cloudflare’s anycast network spans 310+
+    cities, ensuring that DNS queries are answered by a nearby server
+    regardless of the client’s location.</p>
+    <h3 id="anycast-for-stateful-protocols-tcp">5.3 Anycast for Stateful
+    Protocols (TCP)</h3>
+    <p>TCP is stateful – packets belonging to a single connection must
+    reach the same server. BGP route changes (caused by link failures,
+    maintenance, or convergence events) can shift an anycast destination
+    mid-connection, breaking TCP state. Solutions include:</p>
+    <ol type="1">
+    <li><p><strong>Connection tracking at the anycast site:</strong> The
+    L4 load balancer at each site (e.g., Maglev, Katran, Unimog)
+    maintains connection tables. If a route fluctuation causes a packet
+    to arrive at a site that did not originate the connection, the site
+    can use consistent hashing to forward it to the correct backend, or
+    it can use cross-site connection state sharing.</p></li>
+    <li><p><strong>ECMP stability:</strong> Within a single anycast
+    site, ECMP distributes packets across load balancer instances.
+    Consistent hashing algorithms (like Maglev hashing) ensure that
+    adding or removing a balancer instance disrupts minimal existing
+    connections.</p></li>
+    <li><p><strong>Short-lived connections:</strong> For HTTP/1.1 with
+    keep-alive and HTTP/2, connections are relatively short-lived. The
+    probability of a BGP route change during a single connection’s
+    lifetime is low. For long-lived connections (WebSockets, gRPC
+    streams), the risk is higher and must be mitigated by
+    application-level reconnection logic.</p></li>
+    </ol>
+    <h3 id="cloudflares-anycast-network">5.4 Cloudflare’s Anycast
+    Network</h3>
+    <p>Cloudflare operates one of the largest anycast networks in the
+    world. Every Cloudflare data center (310+ cities) announces the same
+    IP ranges. This architecture provides:</p>
+    <ul>
+    <li><strong>DDoS absorption:</strong> Attack traffic is distributed
+    across all sites proportionally to the attacker’s topological
+    proximity, preventing volumetric concentration at any single
+    point</li>
+    <li><strong>Latency reduction:</strong> Users connect to the nearest
+    data center automatically, without DNS-based steering or GSLB</li>
+    <li><strong>Operational simplicity:</strong> No per-site IP
+    addressing, no geographic DNS configuration, no failover logic – BGP
+    handles it</li>
+    </ul>
+    <p>Cloudflare’s Unimog load balancer operates at each site to
+    distribute traffic across servers within the data center. Unimog is
+    an XDP-based L4 load balancer that runs in the kernel’s network
+    driver, intercepting packets before they reach the kernel network
+    stack. Unimog achieves uniform load distribution across
+    heterogeneous server hardware and supports “soft-unicast” – a
+    technique where multiple servers share a single IPv4 address for
+    egress traffic, with Unimog redirecting response packets to the
+    correct physical server.</p>
+    <hr />
+    <h2 id="traffic-shaping-and-quality-of-service-qos">6. Traffic
+    Shaping and Quality of Service (QoS)</h2>
+    <h3 id="the-diffserv-model">6.1 The DiffServ Model</h3>
+    <p>Differentiated Services (DiffServ, RFC 2474/2475) is the dominant
+    QoS architecture for IP networks. It replaces the earlier IntServ
+    (Integrated Services) model, which required per-flow state at every
+    router and did not scale.</p>
+    <p>DiffServ operates on traffic aggregates, not individual flows.
+    Packets are marked with a 6-bit Differentiated Services Code Point
+    (DSCP) in the IP header. Routers treat packets with the same DSCP
+    value identically – the per-hop behavior (PHB) is determined by the
+    DSCP, not by per-flow state.</p>
+    <p><strong>Standard PHBs:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 12%" />
+    <col style="width: 30%" />
+    <col style="width: 25%" />
+    <col style="width: 32%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>PHB</th>
+    <th>DSCP Value</th>
+    <th>Behavior</th>
+    <th>Typical Use</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Default (BE)</td>
+    <td>0</td>
+    <td>Best effort</td>
+    <td>Bulk data, web browsing</td>
+    </tr>
+    <tr>
+    <td>Expedited Forwarding (EF)</td>
+    <td>46</td>
+    <td>Low loss, low delay, low jitter</td>
+    <td>VoIP, real-time video</td>
+    </tr>
+    <tr>
+    <td>Assured Forwarding (AF)</td>
+    <td>AF11-AF43</td>
+    <td>4 classes x 3 drop precedences</td>
+    <td>Business applications, tiered service</td>
+    </tr>
+    <tr>
+    <td>Class Selector (CS)</td>
+    <td>CS0-CS7</td>
+    <td>Backward compatibility with IP precedence</td>
+    <td>Legacy network integration</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="traffic-policing-vs-traffic-shaping">6.2 Traffic Policing vs
+    Traffic Shaping</h3>
+    <p>These two mechanisms both enforce rate limits, but they behave
+    differently when traffic exceeds the configured rate.</p>
+    <p><strong>Traffic policing</strong> drops or re-marks packets that
+    exceed the rate. It is stateless – each packet is measured against
+    the token bucket independently. Policing is applied at ingress
+    (incoming traffic) because there is no buffer to hold excess packets
+    before they enter the network.</p>
+    <p><strong>Traffic shaping</strong> buffers packets that exceed the
+    rate and transmits them later when the rate drops below the
+    configured limit. Shaping smooths traffic bursts into a steady
+    stream. It is applied at egress (outgoing traffic) because the
+    shaper needs a buffer to hold delayed packets.</p>
+    <table>
+    <colgroup>
+    <col style="width: 34%" />
+    <col style="width: 34%" />
+    <col style="width: 31%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Property</th>
+    <th>Policing</th>
+    <th>Shaping</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Action on excess</td>
+    <td>Drop or re-mark</td>
+    <td>Buffer and delay</td>
+    </tr>
+    <tr>
+    <td>Direction</td>
+    <td>Ingress or egress</td>
+    <td>Egress only</td>
+    </tr>
+    <tr>
+    <td>Latency impact</td>
+    <td>None (dropped)</td>
+    <td>Increased (buffered)</td>
+    </tr>
+    <tr>
+    <td>Buffer required</td>
+    <td>No</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td>TCP behavior</td>
+    <td>Causes retransmissions</td>
+    <td>Smooths without retransmission</td>
+    </tr>
+    <tr>
+    <td>Use case</td>
+    <td>Service provider edge, access control</td>
+    <td>WAN edge, traffic smoothing</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Practical guidance:</strong> Use policing at the network
+    edge to enforce contracted rates (e.g., a service provider limiting
+    a customer to their purchased bandwidth). Use shaping on egress
+    interfaces to smooth bursty traffic before it enters a WAN link,
+    reducing TCP retransmissions and improving application
+    performance.</p>
+    <h3 id="congestion-management">6.3 Congestion Management</h3>
+    <p>When an interface’s output queue fills, the router must decide
+    which packets to forward and which to drop. Three mechanisms address
+    this:</p>
+    <ol type="1">
+    <li><p><strong>Tail drop:</strong> The simplest algorithm – when the
+    queue is full, drop all arriving packets. This causes TCP global
+    synchronization where many flows reduce their window simultaneously,
+    then increase simultaneously, producing oscillating
+    throughput.</p></li>
+    <li><p><strong>Weighted Random Early Detection (WRED):</strong>
+    Begins randomly dropping packets before the queue is full, with
+    higher-priority traffic (lower DSCP drop precedence) dropped at a
+    lower rate. This prevents global synchronization by causing
+    individual flows to back off at different times.</p></li>
+    <li><p><strong>Priority queuing with weighted fair queuing:</strong>
+    Traffic is classified into queues. A strict priority queue (for EF
+    traffic like voice) is always serviced first. Remaining bandwidth is
+    shared among other queues using weighted fair queuing, where each
+    class receives bandwidth proportional to its configured
+    weight.</p></li>
+    </ol>
+    <hr />
+    <h2 id="equal-cost-multipath-ecmp">7. Equal-Cost Multipath
+    (ECMP)</h2>
+    <p>ECMP is the backbone of modern data center traffic distribution.
+    When a routing protocol discovers multiple paths to the same
+    destination with equal cost, ECMP installs all paths in the
+    forwarding table and distributes traffic across them.</p>
+    <h3 id="hash-based-forwarding">7.1 Hash-Based Forwarding</h3>
+    <p>ECMP does not load-balance per-packet (which would cause
+    out-of-order delivery and destroy TCP performance). Instead, it
+    hashes specific packet header fields to select a next hop. All
+    packets with the same hash map to the same path, ensuring per-flow
+    consistency.</p>
+    <p><strong>Common hash inputs:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 36%" />
+    <col style="width: 27%" />
+    <col style="width: 36%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Hash Fields</th>
+    <th>Protocol</th>
+    <th>Granularity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Src IP + Dst IP</td>
+    <td>L3 only</td>
+    <td>Coarse (one path per IP pair)</td>
+    </tr>
+    <tr>
+    <td>Src IP + Dst IP + Protocol + Src Port + Dst Port</td>
+    <td>L3+L4 (5-tuple)</td>
+    <td>Fine (one path per flow)</td>
+    </tr>
+    <tr>
+    <td>Inner headers (after decapsulation)</td>
+    <td>VXLAN/GRE/IPIP</td>
+    <td>Required for encapsulated traffic</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="hash-polarization">7.2 Hash Polarization</h3>
+    <p>Hash polarization occurs when adjacent routers use the same hash
+    algorithm with the same seed. The result: traffic that was
+    “balanced” across 4 paths at hop N all maps to the same single path
+    at hop N+1, because the same hash inputs produce the same output on
+    both routers.</p>
+    <p><strong>Prevention:</strong> - <strong>Unique hash seeds per
+    router:</strong> Most modern platforms (Arista, Cumulus/NVIDIA,
+    Juniper) support configurable hash seeds. Directly connected routers
+    should never share a seed. - <strong>Algorithm
+    diversification:</strong> Use different hash fields at different
+    tiers of the network (e.g., 3-tuple at spine, 5-tuple at leaf). -
+    <strong>Resilient hashing:</strong> When a next hop is added or
+    removed, only flows mapped to the changed hop are redistributed.
+    Other flows maintain their existing path assignment, minimizing
+    disruption.</p>
+    <h3 id="flow-pinning-and-elephant-flows">7.3 Flow Pinning and
+    Elephant Flows</h3>
+    <p>ECMP distributes traffic evenly when flows are numerous and
+    small. A single large flow (an “elephant flow” – a database
+    replication stream, a backup job, a video transfer) can saturate one
+    ECMP path while others sit idle.</p>
+    <p><strong>Detection and mitigation:</strong> -
+    <strong>Flowlet-based switching:</strong> Instead of pinning
+    per-flow, pin per-flowlet (a burst of packets within a flow
+    separated by idle gaps). When a gap occurs, re-hash to a potentially
+    different path. This exploits the fact that TCP sends data in bursts
+    due to congestion window dynamics. - <strong>Weighted ECMP:</strong>
+    Assign different weights to paths based on observed utilization.
+    Overloaded paths receive less traffic. - <strong>Adaptive load
+    balancing (ALB):</strong> Some switches (Arista, Broadcom
+    Memory-Cells and Dynamic Load Balancing) detect elephant flows in
+    hardware and re-pin them to underutilized paths.</p>
+    <hr />
+    <h2 id="segment-routing-traffic-engineering-sr-te">8. Segment
+    Routing Traffic Engineering (SR-TE)</h2>
+    <p>Segment Routing is the most significant evolution in WAN traffic
+    engineering since MPLS-TE. It encodes the packet’s path as an
+    ordered list of instructions – segments – in the packet header
+    itself. The network forwards the packet by processing segments one
+    at a time, without per-flow state at intermediate routers.</p>
+    <h3 id="sr-mpls">8.1 SR-MPLS</h3>
+    <p>In SR-MPLS, segments are encoded as MPLS labels. Each label
+    identifies either a node (a node SID that routes to a specific
+    router) or an adjacency (an adjacency SID that forces the packet
+    through a specific link). The source router pushes a stack of
+    labels; each intermediate router pops the top label and forwards
+    based on the next.</p>
+    <p><strong>Advantage over RSVP-TE:</strong> RSVP-TE requires
+    per-tunnel state at every router along the path. For N tunnels
+    through M routers, the state is O(N x M). SR-MPLS pushes all
+    forwarding instructions into the packet header – intermediate
+    routers maintain zero per-tunnel state. This eliminates the scaling
+    wall that made RSVP-TE unmanageable in large networks.</p>
+    <h3 id="srv6">8.2 SRv6</h3>
+    <p>SRv6 encodes segments as IPv6 addresses in a Segment Routing
+    Header (SRH). Each segment is a 128-bit IPv6 address that identifies
+    a function at a specific node – forward, decapsulate, apply a VPN
+    context, or invoke a custom network function.</p>
+    <p><strong>The micro-SID (uSID) optimization:</strong> A full SRH
+    with multiple 128-bit addresses adds significant overhead. uSID
+    compresses segments into 16-bit or 32-bit identifiers packed within
+    a single 128-bit container, reducing header overhead while retaining
+    SRv6’s programmability. The FRRouting 10.5 release (2025) added
+    support for multiple uSID locators, the F4816 format, and
+    coexistence of SRv6 uSID with MPLS within the same VRF.</p>
+    <p><strong>2025-2026 developments:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 50%" />
+    <col style="width: 50%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Development</th>
+    <th>Significance</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>AI backend traffic engineering (Alibaba, Cisco, Microsoft,
+    NVIDIA)</td>
+    <td>SRv6 enables deterministic path placement for GPU workloads</td>
+    </tr>
+    <tr>
+    <td>SONiC integration</td>
+    <td>SRv6 in open-source switch OS for data center use cases</td>
+    </tr>
+    <tr>
+    <td>EANTC multi-vendor interop (174 test combinations, 19
+    vendors)</td>
+    <td>SR-MPLS and SRv6 maturing as multi-vendor standards</td>
+    </tr>
+    <tr>
+    <td>FRRouting 10.5 uSID enhancements</td>
+    <td>Open-source routing suite gaining production SRv6
+    capabilities</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="sr-te-vs-classical-mpls-te">8.3 SR-TE vs Classical
+    MPLS-TE</h3>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 22%" />
+    <col style="width: 30%" />
+    <col style="width: 22%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Property</th>
+    <th>RSVP-TE</th>
+    <th>SR-MPLS TE</th>
+    <th>SRv6 TE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Per-flow state at transit</td>
+    <td>Yes (O(N x M))</td>
+    <td>No</td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>Signaling protocol</td>
+    <td>RSVP-TE</td>
+    <td>None (IGP extensions)</td>
+    <td>None (IGP extensions)</td>
+    </tr>
+    <tr>
+    <td>Header overhead</td>
+    <td>Single MPLS label</td>
+    <td>Label stack (variable)</td>
+    <td>SRH with IPv6 addresses</td>
+    </tr>
+    <tr>
+    <td>Fast reroute</td>
+    <td>Facility backup (slow)</td>
+    <td>TI-LFA (&lt; 50 ms)</td>
+    <td>TI-LFA (&lt; 50 ms)</td>
+    </tr>
+    <tr>
+    <td>SDN controller integration</td>
+    <td>Complex (stateful PCE)</td>
+    <td>Natural (stateless)</td>
+    <td>Natural (stateless)</td>
+    </tr>
+    <tr>
+    <td>Multi-domain</td>
+    <td>Difficult</td>
+    <td>Binding SIDs</td>
+    <td>Native (IPv6 reachability)</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="cdn-integration-as-traffic-engineering">9. CDN Integration
+    as Traffic Engineering</h2>
+    <p>Content Delivery Networks are, at their core, traffic engineering
+    systems. A CDN’s primary function is to place content close to users
+    and direct user requests to the nearest cached copy. This is traffic
+    engineering operating at the application layer with global
+    scope.</p>
+    <h3 id="cdn-traffic-steering-mechanisms">9.1 CDN Traffic Steering
+    Mechanisms</h3>
+    <table>
+    <colgroup>
+    <col style="width: 27%" />
+    <col style="width: 32%" />
+    <col style="width: 40%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Mechanism</th>
+    <th>How It Works</th>
+    <th>Latency Impact</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>DNS-based steering</td>
+    <td>CDN authoritative DNS returns the nearest edge IP</td>
+    <td>One RTT for DNS resolution</td>
+    </tr>
+    <tr>
+    <td>Anycast</td>
+    <td>Edge servers share IP addresses via BGP</td>
+    <td>Zero additional latency (routing-level)</td>
+    </tr>
+    <tr>
+    <td>HTTP redirect</td>
+    <td>Origin responds with 302 to nearest edge URL</td>
+    <td>One additional RTT</td>
+    </tr>
+    <tr>
+    <td>Client-side selection</td>
+    <td>JavaScript/app selects edge based on latency probes</td>
+    <td>Requires initial measurement</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="the-modern-cdn-architecture">9.2 The Modern CDN
+    Architecture</h3>
+    <p>Modern CDNs have evolved beyond simple caching into programmable
+    edge computing platforms:</p>
+    <p><strong>Akamai</strong> operates 4,100+ points of presence and
+    remains the largest CDN by traffic volume. Its EdgeWorkers platform
+    allows custom JavaScript logic at the edge, transforming the CDN
+    from a passive cache into an active request processing layer.
+    Akamai’s density of edge servers reduces regional congestion during
+    flash crowds (Black Friday, live events, game launches).</p>
+    <p><strong>Fastly</strong> takes an engineering-led approach with
+    its Compute platform (formerly Compute@Edge), running compiled Wasm
+    modules at the edge with sub-millisecond cold starts. Fastly
+    achieves the lowest mean network latency among North American and
+    European CDNs (17 ms average TTFB). Its Varnish-derived caching
+    engine gives operators granular control over cache behavior through
+    VCL (Varnish Configuration Language) and its successor Compute.</p>
+    <p><strong>Cloudflare</strong> leverages its anycast network to
+    serve CDN traffic from the same infrastructure that handles its DNS,
+    DDoS, and zero-trust products. Every Cloudflare server in every data
+    center can cache content – there is no distinction between “edge”
+    and “origin” tiers within the network. Workers (V8 isolates) provide
+    programmable edge compute.</p>
+    <hr />
+    <h2 id="real-world-systems">10. Real-World Systems</h2>
+    <h3 id="google-maglev">10.1 Google Maglev</h3>
+    <p>Maglev is Google’s network load balancer, in production since
+    2008 and documented in a USENIX NSDI 2016 paper. It is a distributed
+    L4 load balancer running on commodity Linux servers.</p>
+    <p><strong>Architecture:</strong> Network routers distribute packets
+    to Maglev machines via ECMP. Each Maglev machine matches packets to
+    services and selects backends using consistent hashing. The Maglev
+    hash algorithm is specifically designed for this purpose: it
+    provides both good distribution (even load across backends) and
+    minimal disruption (adding or removing a backend reassigns only 1/N
+    of existing connections, where N is the number of backends).</p>
+    <p><strong>Key design decisions:</strong> - <strong>Kernel
+    bypass:</strong> Maglev takes full ownership of the NIC, bypassing
+    the Linux kernel network stack entirely. This eliminates per-packet
+    system call overhead and allows packet processing at line rate. -
+    <strong>Connection tracking + consistent hashing:</strong> The
+    connection table provides fast lookup for existing connections. For
+    new connections, the Maglev hash provides consistent backend
+    selection that survives the addition or removal of Maglev instances
+    in the ECMP pool. - <strong>No special hardware:</strong> Maglev
+    runs on the same commodity servers as any other Google service.
+    Capacity scales by adding servers, not by buying bigger
+    appliances.</p>
+    <p><strong>Performance:</strong> A single Maglev machine saturates a
+    10 Gbps link with small packets. Google runs Maglev at every edge
+    PoP, providing the first-tier L4 load balancing for all Google Cloud
+    external Network Load Balancers.</p>
+    <h3 id="meta-facebook-katran">10.2 Meta (Facebook) Katran</h3>
+    <p>Katran is Meta’s second-generation L4 load balancer, open-sourced
+    in 2018. It replaced a first-generation IPVS-based system.</p>
+    <p><strong>Architecture:</strong> Katran is an XDP/BPF program that
+    attaches to the NIC driver. Packets are processed before reaching
+    the Linux kernel network stack – even before netfilter, conntrack,
+    or the routing table. This is the earliest possible interception
+    point in the Linux packet path.</p>
+    <p><strong>Key design decisions:</strong> - <strong>XDP +
+    BPF:</strong> By using the kernel’s BPF virtual machine attached at
+    the XDP hook, Katran avoids kernel bypass entirely (unlike Maglev’s
+    DPDK approach). This means it coexists with the normal Linux
+    networking stack – the server can simultaneously run Katran for load
+    balancing and use the kernel stack for management traffic. -
+    <strong>Lockless, per-CPU maps:</strong> Katran’s BPF program uses
+    per-CPU data structures, eliminating lock contention. Performance
+    scales linearly with the number of NIC receive queues. - <strong>DSR
+    with IPIP encapsulation:</strong> Katran forwards packets to
+    backends using IP-in-IP encapsulation in Direct Server Return mode.
+    The backend decapsulates and responds directly to the client,
+    keeping return traffic off the load balancer. - <strong>Maglev
+    hashing:</strong> Katran uses an extended version of Google’s Maglev
+    consistent hash for backend selection, providing the same
+    minimal-disruption properties during backend pool changes.</p>
+    <h3 id="cloudflare-unimog">10.3 Cloudflare Unimog</h3>
+    <p>Unimog is Cloudflare’s intra-data-center L4 load balancer,
+    deployed across all 310+ Cloudflare locations.</p>
+    <p><strong>Architecture:</strong> Like Katran, Unimog uses XDP/BPF
+    for packet processing. Its distinctive contribution is the
+    “soft-unicast” technique: multiple servers in a data center share a
+    single IPv4 address for outgoing traffic. When response packets
+    return to the data center (addressed to the shared IP), Unimog’s XDP
+    program on each server inspects the packet and either processes it
+    locally (if it belongs to a connection on this server) or forwards
+    it to the correct server via a lightweight encapsulation. This
+    enables Cloudflare to share scarce IPv4 address space across servers
+    without traditional NAT.</p>
+    <p><strong>Results:</strong> Unimog deployment produced dramatically
+    more uniform load distribution across servers in production data
+    centers. Before Unimog, ECMP alone resulted in uneven load due to
+    hash collisions, heterogeneous server hardware, and varying
+    per-connection resource costs. Unimog’s load-aware distribution
+    compensates for these factors.</p>
+    <h3 id="comparison-of-hyperscaler-l4-load-balancers">10.4 Comparison
+    of Hyperscaler L4 Load Balancers</h3>
+    <table>
+    <colgroup>
+    <col style="width: 17%" />
+    <col style="width: 26%" />
+    <col style="width: 22%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Property</th>
+    <th>Google Maglev</th>
+    <th>Meta Katran</th>
+    <th>Cloudflare Unimog</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Year deployed</td>
+    <td>2008</td>
+    <td>2018</td>
+    <td>2020</td>
+    </tr>
+    <tr>
+    <td>Open source</td>
+    <td>No (paper only)</td>
+    <td>Yes (GitHub)</td>
+    <td>No (blog post)</td>
+    </tr>
+    <tr>
+    <td>Packet interception</td>
+    <td>DPDK (kernel bypass)</td>
+    <td>XDP (in-kernel)</td>
+    <td>XDP (in-kernel)</td>
+    </tr>
+    <tr>
+    <td>Forwarding mode</td>
+    <td>GRE/IPIP to GFE</td>
+    <td>IPIP DSR</td>
+    <td>XDP redirect + encap</td>
+    </tr>
+    <tr>
+    <td>Hash algorithm</td>
+    <td>Maglev consistent hash</td>
+    <td>Extended Maglev hash</td>
+    <td>Custom consistent hash</td>
+    </tr>
+    <tr>
+    <td>Connection tracking</td>
+    <td>Yes (hash table)</td>
+    <td>Yes (BPF maps)</td>
+    <td>Yes (BPF maps)</td>
+    </tr>
+    <tr>
+    <td>Scaling unit</td>
+    <td>Commodity server</td>
+    <td>Commodity server</td>
+    <td>Existing edge server</td>
+    </tr>
+    <tr>
+    <td>Unique innovation</td>
+    <td>Consistent hash algorithm</td>
+    <td>Lockless per-CPU BPF</td>
+    <td>Soft-unicast IP sharing</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="traffic-flow-diagrams">11. Traffic Flow Diagrams</h2>
+    <h3 id="two-tier-load-balancing-with-anycast">11.1 Two-Tier Load
+    Balancing with Anycast</h3>
+    <pre><code>                          Internet
+                             |
+                    [BGP Anycast Routing]
+                    /        |        \
+              +---------+ +--------+ +--------+
+              | PoP-SEA | | PoP-DFW| | PoP-IAD|    Anycast PoPs
+              +---------+ +--------+ +--------+
+                  |            |          |
+              [L4 LB]     [L4 LB]    [L4 LB]       Maglev/Katran/Unimog
+              /    \       /    \      /    \
+          [L7 LB] [L7]  [L7] [L7]  [L7] [L7]      Envoy/nginx
+          / | \                                      
+       [App][App][App]                               Backends</code></pre>
+    <h3 id="gslb-with-regional-failover">11.2 GSLB with Regional
+    Failover</h3>
+    <pre><code> Client DNS Query: app.example.com
+        |
+ [GSLB Authoritative DNS]
+    |           |           |
+ Health OK?  Health OK?  Health FAIL
+    |           |           |
+  US-West     EU-West    AP-South (withdrawn)
+  10.1.0.1    10.2.0.1   
+    |           |
+ [Regional LB] [Regional LB]
+    |           |
+ [App Pool]   [App Pool]</code></pre>
+    <h3 id="ecmp-in-a-spine-leaf-fabric">11.3 ECMP in a Spine-Leaf
+    Fabric</h3>
+    <pre><code>          [Spine-1] ---- [Spine-2] ---- [Spine-3]
+          / | \ \        / | \ \        / | \ \
+         /  |  \ \      /  |  \ \      /  |  \ \
+  [Leaf-1] [Leaf-2] [Leaf-3] [Leaf-4]
+   | | |    | | |    | | |    | | |
+  Servers  Servers  Servers  Servers
+
+  Flow A: Leaf-1 -&gt; Spine-2 -&gt; Leaf-3  (hash = 0x7A -&gt; Spine-2)
+  Flow B: Leaf-1 -&gt; Spine-1 -&gt; Leaf-3  (hash = 0x3F -&gt; Spine-1)
+  Flow C: Leaf-1 -&gt; Spine-3 -&gt; Leaf-3  (hash = 0xB2 -&gt; Spine-3)
+  
+  Each flow consistently uses one path. Aggregate traffic is distributed.</code></pre>
+    <h3 id="segment-routing-path-selection">11.4 Segment Routing Path
+    Selection</h3>
+    <pre><code>  Source: Router A (Seattle)
+  Destination: Router F (New York)
+  
+  Without SR-TE: IGP shortest path
+  A -&gt; B -&gt; D -&gt; F  (3 hops, congested link B-D)
+  
+  With SR-TE: Explicit segment list [A, C, E, F]
+  A -&gt; C -&gt; E -&gt; F  (3 hops, avoids congested B-D)
+  
+  Packet header at A:
+  [IPv6 | SRH: Seg[2]=C, Seg[1]=E, Seg[0]=F | Payload]
+  
+  At C: pop segment, forward to E
+  At E: pop segment, forward to F
+  At F: process payload (all segments consumed)</code></pre>
+    <hr />
+    <h2 id="decision-framework">12. Decision Framework</h2>
+    <h3 id="when-to-use-what">When to Use What</h3>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 67%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Scenario</th>
+    <th>Recommended Approach</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Single data center, &lt; 10K RPS</td>
+    <td>nginx or HAProxy, L7</td>
+    </tr>
+    <tr>
+    <td>Single data center, &gt; 100K RPS</td>
+    <td>L4 (IPVS or Katran) + L7 (Envoy) two-tier</td>
+    </tr>
+    <tr>
+    <td>Multi-region, active-active</td>
+    <td>GSLB (Route 53 latency) + per-region L4/L7</td>
+    </tr>
+    <tr>
+    <td>Global latency-sensitive (DNS, CDN)</td>
+    <td>BGP anycast + per-PoP L4</td>
+    </tr>
+    <tr>
+    <td>Kubernetes microservices</td>
+    <td>Envoy (via Istio/Cilium Gateway API)</td>
+    </tr>
+    <tr>
+    <td>WAN traffic optimization</td>
+    <td>SR-MPLS or SRv6 TE with SDN controller</td>
+    </tr>
+    <tr>
+    <td>Legacy enterprise with F5</td>
+    <td>Migrate to software LB on next hardware refresh</td>
+    </tr>
+    <tr>
+    <td>Real-time media (voice/video)</td>
+    <td>DiffServ EF marking + priority queuing + shaping</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="the-three-questions">The Three Questions</h3>
+    <p>Every load balancing and traffic engineering decision reduces to
+    three questions:</p>
+    <ol type="1">
+    <li><strong>What layer?</strong> Can the routing decision be made
+    from IP + port alone (L4), or does it require application awareness
+    (L7)?</li>
+    <li><strong>What scope?</strong> Is traffic distributed within a
+    rack, within a data center, across regions, or globally?</li>
+    <li><strong>What failure mode?</strong> When something breaks – a
+    server, a link, a site – how quickly must traffic shift, and how
+    much disruption is acceptable?</li>
+    </ol>
+    <p>The answers to these questions determine the architecture. The
+    technologies described in this module are the tools for implementing
+    that architecture. The art of traffic engineering is matching the
+    right tools to the right scope at the right layer, and understanding
+    that the answer is almost always “multiple layers, working
+    together.”</p>
+    <hr />
+    <h2 id="sources-and-references">Sources and References</h2>
+    <ul>
+    <li>Google, “Maglev: A Fast and Reliable Software Network Load
+    Balancer,” USENIX NSDI 2016</li>
+    <li>Meta Engineering, “Open-sourcing Katran, a scalable network load
+    balancer,” 2018</li>
+    <li>Cloudflare Blog, “Unimog – Cloudflare’s edge load balancer,”
+    2020</li>
+    <li>Cisco, “Compare Traffic Policy and Traffic Shape to Limit
+    Bandwidth”</li>
+    <li>Juniper Networks, “ECMP Flow-Based Forwarding”</li>
+    <li>NVIDIA/Cumulus Linux, “Equal Cost Multipath Load Sharing –
+    Hardware ECMP”</li>
+    <li>Segment-Routing.net, “SRv6 Conference Paris, March 2025”</li>
+    <li>Cisco Live 2025, “Introduction to Segment Routing and SRv6”
+    (BRKMPL-1207)</li>
+    <li>RFC 2474/2475, Differentiated Services Architecture</li>
+    <li>RFC 7871, Client Subnet in DNS Queries (EDNS Client Subnet)</li>
+    <li>RFC 8986, Segment Routing over IPv6 (SRv6) Network
+    Programming</li>
+    <li>AWS Documentation, “Amazon Route 53 Routing Policies”</li>
+    <li>Noction, “BGP Anycast Best Practices and Configurations”</li>
+    </ul>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNE Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNE/">tibsfox.com/Research/SNE</a>
+    </div>
+</body>
+</html>

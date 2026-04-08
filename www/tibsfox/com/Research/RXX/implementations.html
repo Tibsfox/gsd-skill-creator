@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementations &mdash; Rexx &amp; ARexx &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rxx">
+  <header>
+    <h1>Implementations</h1>
+    <div class="subtitle">Regina &middot; ooRexx &middot; NetRexx &middot; BRexx &middot; ARexx &mdash; Source Study for Porting</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="parse.html">PARSE</a>
+      <a href="ports.html">Ports &amp; IPC</a>
+      <a href="porting.html">Porting</a>
+      <a href="amiga.html">Amiga</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>ADDRESS 'SOURCE-CODE'</strong><br>
+      Every open-source REXX implementation teaches something. Regina teaches portability. BRexx teaches minimalism. ooRexx teaches OO extension. NetRexx teaches cross-language bridging. Each informs a different stage of our port.
+    </blockquote>
+
+    <h2>Implementation Comparison</h2>
+    <table>
+      <thead><tr><th>Implementation</th><th>Author</th><th>Language</th><th>LOC (approx)</th><th>License</th><th>Our Use</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Regina REXX</strong></td><td>Mark Hessling</td><td>C</td><td>~90,000</td><td>LGPL</td><td>Primary reference. Compliance testing. Most portable.</td></tr>
+        <tr><td><strong>Open Object Rexx</strong></td><td>IBM &rarr; RexxLA</td><td>C++</td><td>~200,000</td><td>CPL/EPL</td><td>OO extensions study. Community stewardship model.</td></tr>
+        <tr><td><strong>NetRexx</strong></td><td>Mike Cowlishaw</td><td>Java</td><td>~40,000</td><td>ICU License</td><td>Cross-language bridging patterns. JVM integration.</td></tr>
+        <tr><td><strong>BRexx</strong></td><td>Vasilis Vlachoudis</td><td>C</td><td>~15,000</td><td>GPL</td><td>Minimal interpreter architecture. GPU port reference.</td></tr>
+        <tr><td><strong>Rexx/imc</strong></td><td>Ian Collier</td><td>C</td><td>~20,000</td><td>GPL</td><td>Clean academic implementation. Interpreter internals study.</td></tr>
+        <tr><td><strong>ARexx</strong></td><td>William S. Hawes</td><td>C (68K)</td><td>~30,000*</td><td>Proprietary</td><td>Port system reference. The implementation we&rsquo;re porting.</td></tr>
+      </tbody>
+    </table>
+    <p>* ARexx source code is not publicly available, but the behavior is thoroughly documented and the binary has been extensively reverse-engineered by the Amiga community.</p>
+
+    <h2>Regina REXX</h2>
+    <div class="card">
+      <p><strong>Mark Hessling</strong>&rsquo;s Regina REXX is the most portable REXX implementation. It runs on Linux, Windows, macOS, OS/2, and numerous other platforms. It is ANSI X3.274-1996 compliant with extensions. Available via <code>apt install regina-rexx</code> on Debian/Ubuntu.</p>
+    </div>
+
+    <h3>Architecture Lessons for Our Port</h3>
+    <ul>
+      <li><strong>Tokenizer:</strong> Regina&rsquo;s lexer handles the &ldquo;no reserved words&rdquo; challenge with a two-pass approach: first pass identifies clause structure, second pass disambiguates instructions vs. commands.</li>
+      <li><strong>PARSE engine:</strong> Template compilation produces an internal representation that&rsquo;s evaluated against the source string. Our TypeScript port should follow this pattern.</li>
+      <li><strong>Numeric engine:</strong> Regina implements decimal arithmetic with configurable precision. Study <code>rexxmath.c</code> for the algorithm.</li>
+      <li><strong>Variable pool:</strong> Hash table with separate handling for simple variables and stems. Stem resolution chains through dot-separated components.</li>
+    </ul>
+
+    <h2>BRexx — The Minimal Implementation</h2>
+    <div class="card arch-card">
+      <p><strong>Vasilis Vlachoudis</strong>&rsquo;s BRexx is critical for our GPU port. At ~15,000 lines of C, it proves that a functional REXX interpreter can be tiny. BRexx strips away everything non-essential while maintaining ANSI compliance for core features. Its memory footprint (~60KB binary) is small enough to fit in GPU shared memory.</p>
+    </div>
+
+    <h3>What BRexx Teaches About GPU Porting</h3>
+    <ul>
+      <li><strong>Fixed-size string buffers</strong> instead of dynamic allocation — maps directly to GPU shared memory</li>
+      <li><strong>Simple hash tables</strong> for variables — implementable in GPU shared memory</li>
+      <li><strong>Compact bytecode</strong> representation — fits in GPU constant memory</li>
+      <li><strong>No external dependencies</strong> — essential for GPU kernel code</li>
+    </ul>
+
+    <h2>Open Object Rexx (ooRexx)</h2>
+    <p>IBM donated Object REXX to open source in 2004. <strong>RexxLA</strong> (Rexx Language Association) maintains it. ooRexx adds classes, methods, message passing (OO-style), and collection classes to standard REXX. The OO extensions are backward-compatible &mdash; every classic REXX program runs unchanged.</p>
+
+    <h3>Relevant for Our Port</h3>
+    <ul>
+      <li><strong>Message passing in OO context</strong> parallels ARexx port messages. ooRexx&rsquo;s <code>~send</code> method is conceptually similar to <code>ADDRESS</code>.</li>
+      <li><strong>Collection classes</strong> (List, Queue, Set, Bag, Table, Directory) show how to extend stems to proper data structures.</li>
+      <li><strong>Concurrency support</strong> (ooRexx has threads with message-based synchronization) informs our multi-script GPU execution model.</li>
+    </ul>
+
+    <h2>NetRexx — REXX on the JVM</h2>
+    <p>Mike Cowlishaw created NetRexx in 1996 as a JVM language that brings REXX readability to the Java ecosystem. NetRexx compiles to Java bytecode and can use any Java class directly.</p>
+
+    <h3>Cross-Language Bridging Lessons</h3>
+    <ul>
+      <li><strong>How Cowlishaw himself</strong> mapped REXX semantics to a typed host language</li>
+      <li><strong>String-to-type conversion</strong> strategies for a REXX-on-JVM bridge</li>
+      <li><strong>PARSE on JVM:</strong> NetRexx implements PARSE as a compiled method — study for our TypeScript approach</li>
+    </ul>
+
+    <h2>OS/2 REXX — Deep System Integration</h2>
+    <p>IBM shipped REXX with OS/2, where it served as the Workplace Shell scripting language. OS/2 REXX had the deepest system integration of any REXX implementation before ARexx:</p>
+    <ul>
+      <li><strong>Workplace Shell scripting:</strong> Desktop objects, folders, and settings all scriptable</li>
+      <li><strong>REXXUTIL:</strong> System utility function library (file operations, registry access, process management)</li>
+      <li><strong>SOM integration:</strong> System Object Model bridging from REXX to compiled objects</li>
+    </ul>
+
+    <p>OS/2 REXX&rsquo;s relationship to the Workplace Shell is the closest parallel to ARexx&rsquo;s relationship to AmigaOS &mdash; both were the scripting glue for their entire operating system.</p>
+
+    <h2>Source Study Plan for Our Port</h2>
+
+    <table>
+      <thead><tr><th>Stage</th><th>Primary Source</th><th>Study Focus</th></tr></thead>
+      <tbody>
+        <tr><td>Stage 1 (TypeScript)</td><td>Regina REXX + NetRexx</td><td>Interpreter architecture, PARSE compilation, ANSI compliance, cross-language bridging</td></tr>
+        <tr><td>Stage 2 (x86-64)</td><td>BRexx + Regina</td><td>Minimal interpreter core, variable pool layout, string operations in C (translate to asm)</td></tr>
+        <tr><td>Stage 3 (CUDA)</td><td>BRexx</td><td>Minimal footprint, fixed-size buffers, no-allocation patterns</td></tr>
+        <tr><td>Port system</td><td>ARexx docs + ooRexx threading</td><td>RexxMsg protocol, port management, concurrent execution</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Design</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="parse.html">The PARSE Engine</a></li>
+        <li><a href="ports.html">Ports &amp; IPC</a></li>
+        <li><a href="porting.html">Porting Architecture</a></li>
+        <li><a href="amiga.html">The Amiga Connection</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Implementations &middot; Rexx &amp; ARexx &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

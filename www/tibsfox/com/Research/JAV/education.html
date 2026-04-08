@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Resources &mdash; Java and the JVM</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jav">
+  <header>
+    <h1>Learning Resources</h1>
+    <div class="subtitle">Books, Online Courses, Conferences, Communities &mdash; How to Actually Learn Modern Java</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="oop.html">OOP</a>
+      <a href="jvm.html">JVM</a>
+      <a href="frameworks.html">Frameworks</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html" class="active">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Java has 30 years of accumulated wisdom, most of which is still relevant and a surprising amount of which is free online. The good news: the <em>canonical</em> book corpus is small and well-curated, and the best references (Bloch, Goetz, Gosling) cover 90% of what you need.
+    </blockquote>
+
+    <h2>A Recommended Progression</h2>
+    <div class="timeline">
+      <div class="event"><span class="year">1</span> <strong>Start: <em>Core Java</em> or <em>Head First Java</em></strong> if you&rsquo;re new to programming; <strong><em>Effective Java</em> (Bloch, 3rd ed. 2018)</strong> if you already know C++/C#/Kotlin and want to learn Java idioms quickly.</div>
+      <div class="event"><span class="year">2</span> <strong>Reference: <em>The Java Language Specification</em></strong> (Gosling, Joy, Steele, Bracha, Buckley) &mdash; free at docs.oracle.com. The authoritative source.</div>
+      <div class="event"><span class="year">3</span> <strong>Concurrency: <em>Java Concurrency in Practice</em></strong> (Goetz, Peierls, Bloch, Bowbeer, Holmes, Lea, 2006) &mdash; the definitive book on <code>java.util.concurrent</code> and the JMM. Still the reference 20 years later.</div>
+      <div class="event"><span class="year">4</span> <strong>Modern style: <em>Modern Java in Action</em></strong> (Urma, Fusco, Mycroft, 2018) &mdash; lambdas, streams, <code>Optional</code>, reactive. Covers Java 8&ndash;9 thoroughly.</div>
+      <div class="event"><span class="year">5</span> <strong>JVM internals: <em>Java Performance: The Definitive Guide</em></strong> (Scott Oaks, 2nd ed. 2020) or <strong><em>Optimizing Java</em></strong> (Evans/Gough/Newland, 2018).</div>
+      <div class="event"><span class="year">6</span> <strong>dev.java</strong> &mdash; Oracle&rsquo;s free tutorials, updated for Java 21. The closest thing to an official learning site.</div>
+      <div class="event"><span class="year">7</span> <strong>Baeldung.com</strong> &mdash; the largest independent Java tutorial site. Search &ldquo;baeldung X&rdquo; for almost any topic and you&rsquo;ll find a working example.</div>
+      <div class="event"><span class="year">8</span> <strong>A real project: Spring Boot + Maven or Gradle + JUnit 5 + AssertJ + Testcontainers.</strong> Read other people&rsquo;s Spring Boot code on GitHub. Read Brian Goetz&rsquo;s JEPs.</div>
+    </div>
+
+    <h2>The Canonical Book Corpus</h2>
+
+    <h3>Specifications (free online)</h3>
+    <table>
+      <thead><tr><th>Title</th><th>Authors</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><em>The Java Language Specification</em> (JLS)</td><td>Gosling, Joy, Steele, Bracha, Buckley</td><td>Current edition for Java 21 is the 21st. Free at docs.oracle.com.</td></tr>
+        <tr><td><em>The Java Virtual Machine Specification</em> (JVMS)</td><td>Lindholm, Yellin, Bracha, Buckley</td><td>Separate document; describes the bytecode instruction set and runtime.</td></tr>
+        <tr><td><em>The Java API Specification</em></td><td>Oracle</td><td>Javadoc for the standard library. The day-to-day reference.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>By Joshua Bloch (the idiomatic canon)</h3>
+    <ul>
+      <li><em>Effective Java</em> &mdash; 1st ed. 2001, 2nd ed. 2008 (Java 5/6), <strong>3rd ed. 2018 (Java 7/8/9)</strong>. 90 items. Every Java programmer should read this.</li>
+      <li><em>Java Puzzlers</em> (with Neal Gafter, 2005) &mdash; 95 tricky puzzles that teach edge cases. Entertaining and instructive.</li>
+    </ul>
+
+    <h3>By Brian Goetz &amp; team</h3>
+    <ul>
+      <li><em>Java Concurrency in Practice</em> (2006) &mdash; with Peierls, Bloch, Bowbeer, Holmes, Lea. The book on Java concurrency. Still the authoritative text for threads and the JMM, even in the Loom era.</li>
+    </ul>
+
+    <h3>Introductions and textbooks</h3>
+    <table>
+      <thead><tr><th>Title</th><th>Author</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><em>Core Java</em> (Vol 1 &amp; 2)</td><td>Cay Horstmann</td><td>Thirteen editions and counting. The most complete intro.</td></tr>
+        <tr><td><em>Head First Java</em></td><td>Kathy Sierra, Bert Bates</td><td>Visually engaging intro for beginners.</td></tr>
+        <tr><td><em>Thinking in Java</em></td><td>Bruce Eckel</td><td>4 editions (1998&ndash;2006). Long, thorough, opinionated.</td></tr>
+        <tr><td><em>Java: The Complete Reference</em></td><td>Herbert Schildt</td><td>13 editions. Reference-style.</td></tr>
+        <tr><td><em>Modern Java in Action</em></td><td>Urma, Fusco, Mycroft</td><td>2018. Java 8/9 modern style.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Performance and internals</h3>
+    <ul>
+      <li><em>Java Performance: The Definitive Guide</em> &mdash; Scott Oaks, 2nd ed. 2020</li>
+      <li><em>Optimizing Java</em> &mdash; Ben Evans, James Gough, Chris Newland, 2018</li>
+      <li><em>The Garbage Collection Handbook</em> &mdash; Richard Jones, Antony Hosking, Eliot Moss, 2nd ed. 2023 (not Java-specific, but indispensable)</li>
+    </ul>
+
+    <h3>Spring and enterprise</h3>
+    <ul>
+      <li><em>Spring in Action</em> &mdash; Craig Walls, 6th ed.</li>
+      <li><em>Pro Spring 6</em> &mdash; Iuliana Cosmina et al.</li>
+      <li><em>Cloud Native Java</em> &mdash; Josh Long, Kenny Bastani</li>
+      <li><em>Spring Boot: Up and Running</em> &mdash; Mark Heckler</li>
+    </ul>
+
+    <h2>Online Resources</h2>
+    <table>
+      <thead><tr><th>Resource</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td><strong>dev.java</strong></td><td>Oracle&rsquo;s official learning portal. Free tutorials updated for recent Java versions.</td></tr>
+        <tr><td><strong>docs.oracle.com/java</strong></td><td>The JLS, JVMS, and Javadoc. Authoritative.</td></tr>
+        <tr><td><strong>Baeldung</strong></td><td>The largest independent Java tutorial site. Almost any topic has a Baeldung post.</td></tr>
+        <tr><td><strong>JEP Index</strong> (<code>openjdk.org/jeps</code>)</td><td>Every JEP ever. The best way to follow new features in detail.</td></tr>
+        <tr><td><strong>OpenJDK Mailing Lists</strong></td><td>Language and JVM design discussion happens in the open.</td></tr>
+        <tr><td><strong>Inside Java</strong> (<code>inside.java</code>)</td><td>Oracle&rsquo;s developer blog, conference talks, and &ldquo;Inside Java Podcast.&rdquo;</td></tr>
+        <tr><td><strong>Java Magazine</strong></td><td>Oracle&rsquo;s quarterly publication, free online.</td></tr>
+        <tr><td><strong>InfoQ Java</strong></td><td>News and interviews.</td></tr>
+        <tr><td><strong>CodeRanch</strong> (formerly JavaRanch)</td><td>One of the oldest Java Q&amp;A communities</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Video Channels and Talks</h2>
+    <ul>
+      <li><strong>Inside Java / Java on YouTube</strong> &mdash; Oracle&rsquo;s official channel. Brian Goetz, Mark Reinhold, Ron Pressler keynotes.</li>
+      <li><strong>Devoxx</strong> &mdash; the largest independent Java conference (Belgium, UK, France, Poland, Ukraine, Morocco). All talks on YouTube.</li>
+      <li><strong>JavaOne / Oracle Code One</strong> &mdash; Oracle&rsquo;s annual event.</li>
+      <li><strong>JFokus</strong> (Stockholm), <strong>JPoint</strong> / <strong>JBreak</strong> (Russia), <strong>JavaZone</strong> (Oslo), <strong>VoxxedDays</strong> series &mdash; regional conferences</li>
+      <li><strong>SpringOne</strong> &mdash; Spring ecosystem conference</li>
+      <li><strong>KotlinConf</strong> &mdash; JetBrains&rsquo; Kotlin conference</li>
+      <li><strong>ScalaDays</strong> &mdash; Scala conference</li>
+    </ul>
+
+    <h2>Communities</h2>
+    <ul>
+      <li><strong>r/java</strong> on Reddit</li>
+      <li><strong>Stack Overflow &mdash; [java] tag</strong> &mdash; the highest-traffic Q&amp;A site in the world</li>
+      <li><strong>Java community Discord servers</strong> (Together Java, etc.)</li>
+      <li><strong>Spring community forums</strong> at <code>community.spring.io</code></li>
+      <li><strong>OpenJDK dev lists</strong> (amber-dev, loom-dev, panama-dev, &hellip;)</li>
+    </ul>
+
+    <h2>Tooling You Want Early</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SDKMAN!</strong></td><td>Manage multiple JDK installations (<code>sdk install java 21.0.4-tem</code>)</td></tr>
+        <tr><td><strong>IntelliJ IDEA Community</strong></td><td>Free, excellent. Learn the keyboard shortcuts; they pay for themselves.</td></tr>
+        <tr><td><strong>Spring Initializr</strong> (<code>start.spring.io</code>)</td><td>Generate a Spring Boot starter project</td></tr>
+        <tr><td><strong>JShell</strong></td><td>Built-in REPL (Java 9+). Run <code>jshell</code> from the command line.</td></tr>
+        <tr><td><strong>Compiler Explorer</strong> (<code>godbolt.org</code>)</td><td>See the JIT&rsquo;s output for a snippet of Java</td></tr>
+        <tr><td><strong>VisualVM</strong> / <strong>JConsole</strong></td><td>Attach to a running JVM, see threads and memory</td></tr>
+        <tr><td><strong>JFR</strong> (<code>jcmd</code>)</td><td>Start a Flight Recorder session from the command line</td></tr>
+      </tbody>
+    </table>
+
+    <h2>A Reading Order That Works</h2>
+    <div class="card green">
+      <ol>
+        <li><em>Head First Java</em> or <em>Core Java</em> &mdash; 2&ndash;4 weeks, hands-on</li>
+        <li>dev.java tutorials &mdash; a week, work through the examples</li>
+        <li><em>Effective Java</em> (Bloch, 3rd ed.) &mdash; 3&ndash;4 weeks, one item per sitting</li>
+        <li>Build something: a Spring Boot REST service with a database, tests with JUnit 5 + AssertJ + Testcontainers</li>
+        <li><em>Java Concurrency in Practice</em> &mdash; before you write anything concurrent in anger</li>
+        <li>Baeldung as you go for &ldquo;how do I do X&rdquo; questions</li>
+        <li><em>Modern Java in Action</em> &mdash; streams, <code>Optional</code>, functional style</li>
+        <li>JEP index for each LTS release, read the features that interest you</li>
+        <li>Once you&rsquo;re confident: <em>Java Performance</em> or <em>Optimizing Java</em></li>
+      </ol>
+      <p>This progression takes several months of serious study and produces a programmer who can write modern Java with confidence and read any Java codebase.</p>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CPP</td><td>C++</td><td>Stroustrup and Meyers vs Gosling and Bloch &mdash; two canonical book traditions for related languages</td></tr>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>Perl has the Camel/Llama/Alpaca books; Java has Bloch/Goetz/Horstmann</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>Python&rsquo;s <em>Fluent Python</em> is the closest analogue to <em>Effective Java</em> &mdash; idiomatic-wisdom books</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Java Language</a></li>
+        <li><a href="oop.html">Object-Oriented Java</a></li>
+        <li><a href="jvm.html">JVM &amp; Concurrency</a></li>
+        <li><a href="frameworks.html">Frameworks &amp; Enterprise</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Learning Resources &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

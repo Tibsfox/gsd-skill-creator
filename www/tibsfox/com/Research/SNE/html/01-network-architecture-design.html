@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Architecture &amp; Design — SNE Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2236;
+            --accent: #00BFA5;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #40C4FF;
+            --border: #2a3a4a;
+            --primary: #0D47A1;
+            --net: #80DEEA;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(64,196,255,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNE — Systems Network Engineering<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNE Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="network-architecture-design">Network Architecture &amp;
+    Design</h1>
+    <blockquote>
+    <p><strong>Domain:</strong> Systems Network Engineering
+    <strong>Module:</strong> 1 – Architecture, Topology, and Capacity
+    Planning <strong>Through-line:</strong> <em>Every packet traverses a
+    topology that someone designed. The difference between a network
+    that scales and one that collapses under load is not the equipment –
+    it is the architecture. Campus hierarchies, data center fabrics, WAN
+    overlays, and cloud interconnects each solve the same fundamental
+    problem: how to move data between endpoints with predictable
+    latency, sufficient bandwidth, and graceful failure modes. The
+    engineering discipline is in choosing the right topology for the
+    traffic pattern, the right oversubscription ratio for the budget,
+    and the right vendor ecosystem for the operational team.</em></p>
+    </blockquote>
+    <hr />
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ol type="1">
+    <li><a href="#1-foundations-why-topology-matters">Foundations: Why
+    Topology Matters</a></li>
+    <li><a href="#2-campus-network-design">Campus Network
+    Design</a></li>
+    <li><a href="#3-data-center-fabrics">Data Center Fabrics</a></li>
+    <li><a href="#4-the-clos-topology">The CLOS Topology</a></li>
+    <li><a href="#5-wan-design">WAN Design</a></li>
+    <li><a href="#6-cloud-integrated-topologies">Cloud-Integrated
+    Topologies</a></li>
+    <li><a href="#7-capacity-planning">Capacity Planning</a></li>
+    <li><a href="#8-hyperscaler-case-studies">Hyperscaler Case
+    Studies</a></li>
+    <li><a href="#9-greenfield-vs-brownfield">Greenfield vs
+    Brownfield</a></li>
+    <li><a href="#10-topology-comparison-matrix">Topology Comparison
+    Matrix</a></li>
+    <li><a href="#11-design-decision-matrix">Design Decision
+    Matrix</a></li>
+    <li><a href="#12-cross-references">Cross-References</a></li>
+    <li><a href="#13-sources">Sources</a></li>
+    </ol>
+    <hr />
+    <h2 id="foundations-why-topology-matters">1. Foundations: Why
+    Topology Matters</h2>
+    <p>Network architecture is the discipline of selecting, sizing, and
+    interconnecting network devices to meet application requirements.
+    The topology – the geometric arrangement of nodes and links –
+    determines everything downstream: latency bounds, failure domains,
+    capacity scaling, and operational complexity. A topology that
+    matches the traffic pattern performs well. A topology that fights
+    the traffic pattern creates bottlenecks, asymmetric paths, and
+    cascading failures.</p>
+    <p>Three principles govern all modern network architecture:</p>
+    <p><strong>Hierarchy reduces complexity.</strong> Flat networks are
+    simple to draw but impossible to troubleshoot at scale. Hierarchical
+    designs create layers of abstraction – access, distribution, core –
+    where each layer has a defined role, a bounded failure domain, and
+    clear scaling rules. The Cisco campus reference architecture
+    formalized this in the 1990s. It remains the dominant model for
+    enterprise LANs.</p>
+    <p><strong>East-west traffic demands fat fabrics.</strong>
+    Traditional north-south architectures (client to server, through a
+    core) assumed most traffic entered and exited the data center.
+    Virtualization, microservices, and distributed storage inverted
+    this. Modern data centers generate 70-80% of their traffic between
+    servers in the same facility. Spine-leaf fabrics exist specifically
+    to provide non-blocking east-west bandwidth.</p>
+    <p><strong>Overlay decouples logical from physical.</strong> SD-WAN,
+    EVPN-VXLAN, and cloud networking all share the same insight: the
+    logical topology that applications see does not need to match the
+    physical topology that cables create. Overlays enable policy-driven
+    forwarding, multi-tenancy, and topology abstraction. The cost is
+    encapsulation overhead and operational complexity in the control
+    plane.</p>
+    <hr />
+    <h2 id="campus-network-design">2. Campus Network Design</h2>
+    <h3 id="the-three-tier-model">The Three-Tier Model</h3>
+    <p>The Cisco campus reference architecture defines three
+    hierarchical layers, each with a distinct function [1][2]:</p>
+    <pre><code>                    +-----------+
+                    |   CORE    |  High-speed backbone
+                    +-----------+  L3 routing, no policy
+                   /      |      \
+          +-------+  +-------+  +-------+
+          | DIST  |  | DIST  |  | DIST  |  Aggregation
+          +-------+  +-------+  +-------+  Policy, filtering, QoS
+          /   |   \
+    +----+ +----+ +----+
+    |ACC | |ACC | |ACC |   Access layer
+    +----+ +----+ +----+   End-user connectivity</code></pre>
+    <p><strong>Access layer.</strong> The connection point for end
+    devices – workstations, phones, wireless access points, printers.
+    Access switches provide port security (802.1X), VLAN assignment, PoE
+    for wireless APs and IP phones, and basic QoS marking. The access
+    layer is where users meet the network. Design decisions here
+    determine port density, PoE budget, and uplink bandwidth to the
+    distribution layer. Typical campus access switches provide 24 or 48
+    ports of 1GbE with 1-2 uplinks of 10GbE or 25GbE to the distribution
+    layer.</p>
+    <p><strong>Distribution layer.</strong> The policy enforcement
+    point. Distribution switches aggregate traffic from multiple access
+    switches, apply access control lists, perform inter-VLAN routing,
+    implement QoS policies, and define the boundary between Layer 2
+    (access) and Layer 3 (core). The distribution layer is where routing
+    protocols run, where redundancy is implemented via HSRP/VRRP, and
+    where traffic summarization reduces the routing table size visible
+    to the core. Each distribution block – a pair of distribution
+    switches and their connected access switches – forms an independent
+    failure domain.</p>
+    <p><strong>Core layer.</strong> The high-speed transport backbone.
+    The core connects distribution blocks to each other and to external
+    resources (data center, WAN edge, internet edge). The core’s design
+    imperative is speed and availability – no packet filtering, no
+    policy application, no complex access lists. Every CPU cycle at the
+    core is dedicated to forwarding. Core switches are typically
+    chassis-based platforms (Cisco Catalyst 9600, Arista 7800R) with
+    100GbE or 400GbE interfaces and redundant supervisors.</p>
+    <h3 id="collapsed-core">Collapsed Core</h3>
+    <p>For campuses with fewer than 1,000 users and no more than three
+    distribution blocks, the core and distribution layers can be
+    combined into a single “collapsed core” layer [2]. This reduces
+    hardware cost and management complexity at the expense of
+    scalability. The collapsed core switch performs both
+    aggregation/policy and high-speed transport. This is the default
+    choice for single-building deployments, small branch offices, and
+    campus environments that do not need geographic separation between
+    distribution blocks.</p>
+    <p>The decision to separate the core is driven by two factors: the
+    number of distribution blocks (three or more requires a dedicated
+    core) and geographic distance (multiple buildings require a physical
+    core backbone to avoid costly fiber runs between distribution
+    switches).</p>
+    <h3 id="modern-campus-cisco-sd-access">Modern Campus: Cisco
+    SD-Access</h3>
+    <p>Cisco’s current campus architecture overlays SD-Access on top of
+    the physical three-tier or collapsed-core topology. SD-Access uses
+    VXLAN tunnels between fabric edge nodes (access switches), fabric
+    border nodes (WAN/DC edge), and a control plane based on LISP
+    (Locator/ID Separation Protocol). Cisco DNA Center serves as the
+    centralized controller. The physical hierarchy remains – spine-leaf
+    or three-tier – but the logical topology is abstracted into virtual
+    networks (VNs) and scalable groups. This is Cisco’s intent-based
+    networking architecture for the campus, and it is the direction all
+    new Cisco campus deployments are moving toward.</p>
+    <hr />
+    <h2 id="data-center-fabrics">3. Data Center Fabrics</h2>
+    <h3 id="spine-leaf-architecture">Spine-Leaf Architecture</h3>
+    <p>The spine-leaf topology is the dominant data center network
+    architecture. Every leaf switch connects to every spine switch.
+    There are no direct links between spine switches, and no direct
+    links between leaf switches. This creates a two-tier CLOS fabric
+    with predictable latency: every server-to-server path traverses
+    exactly one leaf, one spine, and one leaf – three hops, always
+    [3][4].</p>
+    <pre><code>        S1      S2      S3      S4        Spine layer
+       /|\ \   /|\ \   /|\ \   /|\ \     (no cross-links)
+      / | \  X  | \  X  | \  X  | \
+     /  |  \/  \|  \/  \|  \/  \|  \
+    L1  L2  L3  L4  L5  L6  L7  L8       Leaf layer
+    ||  ||  ||  ||  ||  ||  ||  ||        (server connections)
+   svr svr svr svr svr svr svr svr</code></pre>
+    <p><strong>Why spine-leaf dominates:</strong></p>
+    <ul>
+    <li><strong>Predictable latency.</strong> Every path is the same
+    length: leaf-spine-leaf. No variable-hop paths. No spanning tree
+    convergence. ECMP (Equal-Cost Multi-Path) load balances across all
+    spine switches simultaneously.</li>
+    <li><strong>Horizontal scaling.</strong> Adding a new leaf switch
+    adds server ports without changing the spine layer. Adding a new
+    spine switch adds bisection bandwidth without changing the leaf
+    layer. The two scaling axes are independent.</li>
+    <li><strong>Failure isolation.</strong> Losing a single spine switch
+    reduces total bisection bandwidth by 1/N (where N is the number of
+    spines) but does not disconnect any leaf. Losing a single leaf
+    disconnects only the servers attached to that leaf.</li>
+    </ul>
+    <h3 id="cisco-aci-application-centric-infrastructure">Cisco ACI
+    (Application Centric Infrastructure)</h3>
+    <p>Cisco ACI is an SDN platform built on Nexus 9000 series
+    spine-leaf hardware [5]. The fabric is controlled by the Application
+    Policy Infrastructure Controller (APIC) – a cluster of three or more
+    controllers that define policy in terms of application profiles,
+    endpoint groups (EPGs), and contracts (access rules between EPGs).
+    The physical topology is spine-leaf, but the operational model is
+    policy-driven: administrators define which applications can
+    communicate, and the APIC programs the hardware forwarding tables
+    accordingly.</p>
+    <p>ACI fabric specifications: minimum deployment is 2 spine + 2 leaf
+    + 3 APIC. Maximum scale is 500 leaf switches per fabric. Starting
+    from ACI release 4.1, multi-tier leaf topologies are supported,
+    allowing a Tier 2 leaf layer beneath the standard leaf layer for
+    vertical expansion – useful for connecting legacy devices or
+    extending the fabric to adjacent rooms without running fiber back to
+    the spine.</p>
+    <h3 id="arista-evpn-vxlan">Arista EVPN-VXLAN</h3>
+    <p>Arista’s approach to the data center fabric uses the same
+    spine-leaf physical topology but with an open, standards-based
+    overlay: EVPN (Ethernet VPN) as the control plane and VXLAN (Virtual
+    Extensible LAN) as the data plane [6]. EVPN distributes MAC and IP
+    reachability information via BGP, enabling multi-tenancy, Layer 2
+    extension across Layer 3 boundaries, and distributed anycast
+    gateways. Each leaf switch acts as a VTEP (VXLAN Tunnel Endpoint),
+    encapsulating and decapsulating VXLAN frames.</p>
+    <p>Arista’s Validated Designs (AVD) provide a reference architecture
+    for Layer 3 leaf-spine with EVPN-VXLAN, including symmetric IRB
+    (Integrated Routing and Bridging) for combined L2/L3 forwarding,
+    MLAG (Multi-Chassis Link Aggregation) for leaf-level redundancy, and
+    integration with automation tools like Ansible and Arista’s AVD
+    collection for configuration generation and deployment.</p>
+    <p>The key architectural difference: Cisco ACI is a proprietary
+    policy model with vendor lock-in to Nexus hardware and APIC
+    controllers. Arista EVPN-VXLAN uses IETF standards (RFC 7432, RFC
+    8365) and can interoperate with switches from multiple vendors. The
+    tradeoff is that ACI provides a more opinionated, integrated
+    management experience, while EVPN-VXLAN provides flexibility and
+    vendor independence at the cost of more operational complexity in
+    stitching together the control plane, automation, and
+    monitoring.</p>
+    <hr />
+    <h2 id="the-clos-topology">4. The CLOS Topology</h2>
+    <h3 id="history-and-theory">History and Theory</h3>
+    <p>Charles Clos published “A Study of Non-Blocking Switching
+    Networks” in the Bell System Technical Journal in 1953 [7]. Working
+    at Bell Laboratories, Clos solved a specific telephone switching
+    problem: how to interconnect a large number of input lines to a
+    large number of output lines using smaller, cheaper crossbar
+    switches arranged in stages, rather than a single enormous crossbar.
+    The key insight was that a multi-stage arrangement of small switches
+    could be made non-blocking – guaranteeing that any idle input can be
+    connected to any idle output without rearranging existing
+    connections – if the middle stage has enough switches.</p>
+    <p>For a three-stage CLOS network with n inputs per ingress switch,
+    n outputs per egress switch, and m middle-stage switches, the
+    network is <strong>strictly non-blocking</strong> when:</p>
+    <pre><code>m &gt;= 2n - 1</code></pre>
+    <p>This means the middle stage needs roughly twice as many switches
+    as there are ports per edge switch. In a data center context, this
+    translates directly to the number of spine switches relative to the
+    port count of each leaf switch.</p>
+    <h3 id="fat-tree-topology">Fat-Tree Topology</h3>
+    <p>The fat-tree, introduced by Charles Leiserson at MIT in 1985, is
+    a specialization of the CLOS topology for computer interconnects
+    [8]. The defining characteristic is that link bandwidth increases
+    (gets “fatter”) as you move toward the root of the tree, eliminating
+    the bandwidth bottleneck that afflicts simple tree topologies.
+    Al-Fares, Loukissas, and Vahdat formalized the k-port fat-tree for
+    data centers in their 2008 SIGCOMM paper, “A Scalable, Commodity
+    Datacenter Network Architecture” [9].</p>
+    <p>For a fat-tree built from k-port switches with L levels:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Parameter</th>
+    <th>Formula</th>
+    <th>Example (k=48, L=3)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Host ports per leaf</td>
+    <td>k/2</td>
+    <td>24</td>
+    </tr>
+    <tr>
+    <td>Uplink ports per leaf</td>
+    <td>k/2</td>
+    <td>24</td>
+    </tr>
+    <tr>
+    <td>Number of spine switches</td>
+    <td>(k/2)^2</td>
+    <td>576</td>
+    </tr>
+    <tr>
+    <td>Number of leaf switches</td>
+    <td>k^2/2</td>
+    <td>1,152</td>
+    </tr>
+    <tr>
+    <td>Maximum hosts</td>
+    <td>k^3/4</td>
+    <td>27,648</td>
+    </tr>
+    <tr>
+    <td>Bisection bandwidth</td>
+    <td>k^3/4 * link_speed</td>
+    <td>27,648 * 10G = 276 Tb/s</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The fat-tree provides full bisection bandwidth – 1:1
+    oversubscription – when fully populated. In practice, operators
+    deploy fewer spine switches to save cost, accepting controlled
+    oversubscription (2:1, 3:1, or 4:1) based on traffic analysis.</p>
+    <h3 id="three-stage-vs-five-stage-clos">Three-Stage vs Five-Stage
+    CLOS</h3>
+    <p>A two-tier spine-leaf is a three-stage CLOS (ingress leaf, spine,
+    egress leaf). When the number of leaf switches exceeds the port
+    count of the spine switches, the fabric must add a “super-spine”
+    layer, creating a five-stage CLOS:</p>
+    <pre><code>         Super-Spine
+        /     |     \
+    Spine   Spine   Spine        (pod-level spines)
+    / | \   / | \   / | \
+   L  L  L L  L  L L  L  L      (leaf switches)</code></pre>
+    <p>Each group of leaf + spine switches forms a “pod.” The
+    super-spine connects pods. This is how hyperscaler fabrics scale
+    beyond the port count of individual switches. Google’s Jupiter and
+    Meta’s F16 both use multi-stage CLOS topologies with pod-level
+    aggregation and cross-pod interconnection layers.</p>
+    <hr />
+    <h2 id="wan-design">5. WAN Design</h2>
+    <h3 id="hub-and-spoke">Hub-and-Spoke</h3>
+    <p>The simplest WAN topology connects all remote sites (spokes) to a
+    central hub. All inter-site traffic transits the hub. This is
+    cost-effective for small deployments (fewer than 20 sites) where
+    most traffic flows between branch and data center rather than
+    between branches [10].</p>
+    <p><strong>Advantages:</strong> Centralized security inspection,
+    simple routing, minimal circuit cost (N-1 links for N sites).
+    <strong>Disadvantages:</strong> Hub is a single point of failure,
+    all traffic hairpins through the hub adding latency, hub bandwidth
+    is the bottleneck for inter-branch communication.</p>
+    <h3 id="full-mesh">Full Mesh</h3>
+    <p>Every site connects directly to every other site. This provides
+    optimal latency (one-hop between any pair) and maximum redundancy.
+    The cost is link count: a full mesh of N sites requires N*(N-1)/2
+    links. For 10 sites, this is 45 links. For 50 sites, 1,225 links.
+    Full mesh is practical only for small numbers of critical sites –
+    typically the core backbone connecting 3-8 major data centers or
+    regional hubs [10].</p>
+    <h3 id="partial-mesh-and-dmvpn">Partial Mesh and DMVPN</h3>
+    <p>Partial mesh connects high-traffic site pairs directly while
+    using a hub for low-traffic pairs. This balances cost against
+    performance. Cisco’s Dynamic Multipoint VPN (DMVPN) automates this:
+    a hub-and-spoke VPN baseline is established, and when two spokes
+    need to communicate directly, DMVPN dynamically builds a
+    spoke-to-spoke tunnel on demand [11]. The tunnel tears down after a
+    period of inactivity. This gives the cost structure of hub-and-spoke
+    with the latency characteristics of mesh for active flows.</p>
+    <h3 id="sd-wan-overlay">SD-WAN Overlay</h3>
+    <p>SD-WAN decouples the logical WAN topology from the physical
+    transport. The overlay control plane (centralized controller) builds
+    tunnels across any available underlay – MPLS, broadband internet,
+    LTE/5G – and steers traffic based on application policy. The
+    physical circuits become commoditized transport; the intelligence
+    moves to software [12].</p>
+    <p>Cisco Catalyst SD-WAN (formerly Viptela) uses four components:
+    the SD-WAN Manager (centralized GUI and configuration), the SD-WAN
+    Controller (control plane, distributes routes via OMP – Overlay
+    Management Protocol), the SD-WAN Validator (authenticates and
+    orchestrates edge device connections), and the WAN Edge routers
+    (data plane at each site).</p>
+    <p>VMware VeloCloud (now Broadcom SD-WAN) takes a cloud-first
+    approach with gateway nodes at cloud on-ramps. The key architectural
+    difference is that VeloCloud gateways are deployed at cloud exchange
+    points, providing optimized paths to SaaS applications without
+    requiring dedicated circuits.</p>
+    <p><strong>WAN Topology Comparison:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 15%" />
+    <col style="width: 26%" />
+    <col style="width: 14%" />
+    <col style="width: 18%" />
+    <col style="width: 9%" />
+    <col style="width: 15%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Topology</th>
+    <th>Links (N sites)</th>
+    <th>Latency</th>
+    <th>Redundancy</th>
+    <th>Cost</th>
+    <th>Use Case</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Hub-and-Spoke</td>
+    <td>N-1</td>
+    <td>High (hairpin)</td>
+    <td>Low (hub SPOF)</td>
+    <td>Low</td>
+    <td>&lt; 20 sites, centralized apps</td>
+    </tr>
+    <tr>
+    <td>Full Mesh</td>
+    <td>N*(N-1)/2</td>
+    <td>Optimal</td>
+    <td>Maximum</td>
+    <td>Very high</td>
+    <td>3-8 backbone sites</td>
+    </tr>
+    <tr>
+    <td>Partial Mesh</td>
+    <td>Variable</td>
+    <td>Mixed</td>
+    <td>Medium</td>
+    <td>Medium</td>
+    <td>Regional hubs + branches</td>
+    </tr>
+    <tr>
+    <td>DMVPN</td>
+    <td>N-1 base + dynamic</td>
+    <td>Low for active flows</td>
+    <td>Medium</td>
+    <td>Low-medium</td>
+    <td>Branch-heavy, VPN</td>
+    </tr>
+    <tr>
+    <td>SD-WAN</td>
+    <td>Transport-agnostic</td>
+    <td>Policy-driven</td>
+    <td>High</td>
+    <td>Medium</td>
+    <td>Modern enterprise WAN</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="cloud-integrated-topologies">6. Cloud-Integrated
+    Topologies</h2>
+    <h3 id="hybrid-cloud-connectivity">Hybrid Cloud Connectivity</h3>
+    <p>Connecting on-premises networks to cloud providers requires
+    dedicated circuits that bypass the public internet. The three major
+    providers offer similar services with different names [13][14]:</p>
+    <table>
+    <colgroup>
+    <col style="width: 18%" />
+    <col style="width: 33%" />
+    <col style="width: 20%" />
+    <col style="width: 27%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Provider</th>
+    <th>Dedicated Circuit</th>
+    <th>Bandwidth</th>
+    <th>Peering Model</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>AWS</td>
+    <td>Direct Connect</td>
+    <td>1-100 Gbps</td>
+    <td>Private/Public VIF at Direct Connect location</td>
+    </tr>
+    <tr>
+    <td>Azure</td>
+    <td>ExpressRoute</td>
+    <td>50 Mbps-100 Gbps</td>
+    <td>Private/Microsoft peering via partner circuit</td>
+    </tr>
+    <tr>
+    <td>Google Cloud</td>
+    <td>Cloud Interconnect</td>
+    <td>10-200 Gbps</td>
+    <td>Dedicated or Partner interconnect</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Each service establishes BGP peering between the customer’s edge
+    router and the cloud provider’s edge at a colocation facility. The
+    customer advertises on-premises prefixes; the cloud provider
+    advertises VPC/VNet routes. Traffic flows over the dedicated circuit
+    rather than the public internet, providing predictable latency,
+    consistent bandwidth, and private addressing.</p>
+    <h3 id="multi-cloud-interconnect">Multi-Cloud Interconnect</h3>
+    <p>Connecting two cloud providers to each other adds complexity.
+    Three architectural patterns exist [13]:</p>
+    <p><strong>Pattern 1: On-premises hub.</strong> Both cloud providers
+    connect via dedicated circuits to the customer’s data center, which
+    routes between them. This uses existing infrastructure but hairpins
+    all cross-cloud traffic through the customer’s WAN. Latency equals
+    the sum of both circuit latencies plus on-premises forwarding.</p>
+    <p><strong>Pattern 2: Cloud exchange.</strong> A third-party
+    provider (Equinix Cloud Exchange, Megaport, PacketFabric) terminates
+    both cloud circuits at a shared exchange point. Cross-cloud traffic
+    routes through the exchange fabric. This eliminates the on-premises
+    hairpin and provides a purpose-built interconnection point. Equinix
+    operates exchanges in 70+ metros worldwide.</p>
+    <p><strong>Pattern 3: Direct cloud-to-cloud.</strong> AWS and Azure
+    (and increasingly Google Cloud) support direct peering between their
+    networks at shared colocation facilities. AWS Interconnect (launched
+    2024) enables direct private connectivity from AWS to Azure, Google
+    Cloud, and Oracle Cloud without requiring customer-owned hardware at
+    the exchange point.</p>
+    <h3 id="transit-gateway-and-hub-spoke-in-the-cloud">Transit Gateway
+    and Hub-Spoke in the Cloud</h3>
+    <p>Within a single cloud provider, the hub-spoke pattern reappears.
+    AWS Transit Gateway connects multiple VPCs through a central hub,
+    enabling shared services (DNS, security inspection, egress
+    filtering) without building full mesh VPC peering. Azure Virtual WAN
+    provides equivalent functionality with automatic spoke-to-spoke
+    routing via Microsoft’s backbone. Google Cloud uses Network
+    Connectivity Center as the hub for both cloud and on-premises
+    spokes.</p>
+    <p>The pattern is consistent across all three providers: a
+    centralized transit resource that aggregates routing, applies
+    policy, and forwards between connected networks. This is the cloud
+    equivalent of the campus distribution layer – an aggregation and
+    policy point between access (individual VPCs/workloads) and core
+    (internet, cross-region, cross-cloud).</p>
+    <hr />
+    <h2 id="capacity-planning">7. Capacity Planning</h2>
+    <h3 id="oversubscription-ratios">Oversubscription Ratios</h3>
+    <p>Oversubscription is the ratio of total downstream (access-facing)
+    bandwidth to total upstream bandwidth at any aggregation point. A
+    48-port leaf switch with 48 x 25GbE server ports (1,200 Gbps
+    downstream) and 6 x 100GbE uplinks (600 Gbps upstream) has a 2:1
+    oversubscription ratio [15].</p>
+    <p><strong>Industry-standard oversubscription ratios:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 43%" />
+    <col style="width: 21%" />
+    <col style="width: 34%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Network Tier</th>
+    <th>Ratio</th>
+    <th>Rationale</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Campus access-to-distribution</td>
+    <td>20:1</td>
+    <td>User endpoints are bursty, low average utilization</td>
+    </tr>
+    <tr>
+    <td>Campus distribution-to-core</td>
+    <td>4:1</td>
+    <td>Aggregated traffic is smoother, predictable</td>
+    </tr>
+    <tr>
+    <td>DC leaf-to-spine (general)</td>
+    <td>3:1</td>
+    <td>Standard for mixed workloads</td>
+    </tr>
+    <tr>
+    <td>DC leaf-to-spine (storage)</td>
+    <td>1.5:1 or 1:1</td>
+    <td>Storage traffic is sustained, latency-sensitive</td>
+    </tr>
+    <tr>
+    <td>DC leaf-to-spine (HPC/AI)</td>
+    <td>1:1</td>
+    <td>Non-blocking required for collective operations</td>
+    </tr>
+    <tr>
+    <td>WAN access circuit</td>
+    <td>10:1-20:1</td>
+    <td>WAN bandwidth is expensive</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The critical insight: oversubscription is not a fixed number – it
+    is a design parameter driven by traffic analysis. A data center
+    running mostly stateless web servers can tolerate 3:1 because
+    individual servers burst but the aggregate is smooth. A data center
+    running distributed training on GPU clusters requires 1:1 because
+    all-reduce operations create synchronized, full-bandwidth traffic
+    patterns that cannot tolerate contention.</p>
+    <h3 id="bandwidth-modeling">Bandwidth Modeling</h3>
+    <p>Capacity planning starts with traffic matrix analysis: for each
+    pair of endpoints (or groups of endpoints), what is the expected
+    bandwidth demand? The traffic matrix drives topology selection, link
+    sizing, and oversubscription decisions.</p>
+    <p><strong>Step 1: Measure.</strong> Collect NetFlow/sFlow data from
+    existing switches to build a baseline traffic matrix. Identify the
+    top talkers, the dominant flow patterns (north-south vs east-west),
+    and the peak-to-average ratio.</p>
+    <p><strong>Step 2: Project.</strong> Estimate growth based on
+    application roadmap, user growth, and infrastructure expansion.
+    Network capacity should be planned for 3-5 years, with headroom for
+    burst absorption. A common planning target is 50-60% average
+    utilization at peak, leaving 40-50% headroom for bursts and
+    growth.</p>
+    <p><strong>Step 3: Size.</strong> Map the projected traffic matrix
+    to topology options. Calculate oversubscription ratios at each
+    aggregation point. Verify that no link or node is a bottleneck.
+    Iterate: if the initial topology creates hotspots, add spine
+    switches (data center) or redistribute aggregation (campus) to
+    rebalance.</p>
+    <p><strong>Step 4: Validate.</strong> Model failure scenarios. When
+    a spine switch fails, does the remaining capacity still meet demand?
+    When a WAN circuit fails, does the backup path handle the load?
+    Capacity planning must account for N-1 (single failure) and
+    sometimes N-2 (double failure) scenarios.</p>
+    <h3 id="bill-of-materials-considerations">Bill of Materials
+    Considerations</h3>
+    <p>Network equipment procurement involves four cost categories:</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 35%" />
+    <col style="width: 38%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Category</th>
+    <th>Typical Split</th>
+    <th>Key Variables</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Hardware (switches, routers)</td>
+    <td>40-50%</td>
+    <td>Port density, forwarding capacity, PoE budget</td>
+    </tr>
+    <tr>
+    <td>Optics (transceivers, cables)</td>
+    <td>20-30%</td>
+    <td>Distance, speed, single-mode vs multi-mode</td>
+    </tr>
+    <tr>
+    <td>Software (licenses, subscriptions)</td>
+    <td>15-25%</td>
+    <td>Feature licensing, SDN controller seats</td>
+    </tr>
+    <tr>
+    <td>Installation and cabling</td>
+    <td>5-15%</td>
+    <td>Structured cabling, fiber runs, rack space</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Optics cost is frequently underestimated. A 100GbE QSFP28
+    transceiver costs $50-200 depending on reach and vendor. A 400GbE
+    QSFP-DD transceiver costs $200-1,000. In a spine-leaf fabric with 32
+    spine switches and 128 leaf switches, the optic count is 32 * 128 *
+    2 (one on each end) = 8,192 transceivers. At $150 each, that is
+    $1.2M in optics alone. Third-party optics from vendors like FS.com
+    or Finisar/II-VI can reduce this by 50-70%, but compatibility
+    validation is required.</p>
+    <hr />
+    <h2 id="hyperscaler-case-studies">8. Hyperscaler Case Studies</h2>
+    <h3 id="google-jupiter">Google Jupiter</h3>
+    <p>Jupiter is Google’s data center network fabric, now in its fifth
+    generation. The architecture has evolved from a standard CLOS
+    topology to a hybrid direct-connect + optical circuit switching
+    design [16][17][18].</p>
+    <p><strong>Generation timeline and capabilities:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 23%" />
+    <col style="width: 13%" />
+    <col style="width: 28%" />
+    <col style="width: 34%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Generation</th>
+    <th>Year</th>
+    <th>Bisection BW</th>
+    <th>Key Innovation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Firehose (1st gen)</td>
+    <td>~2004</td>
+    <td>~100 Gbps</td>
+    <td>First in-house DC network</td>
+    </tr>
+    <tr>
+    <td>Watchtower (2nd gen)</td>
+    <td>~2008</td>
+    <td>~10 Tbps</td>
+    <td>Merchant silicon adoption</td>
+    </tr>
+    <tr>
+    <td>Saturn (3rd gen)</td>
+    <td>~2012</td>
+    <td>~100 Tbps</td>
+    <td>Software-defined networking</td>
+    </tr>
+    <tr>
+    <td>Jupiter (4th gen)</td>
+    <td>2015</td>
+    <td>1.3 Pbps</td>
+    <td>CLOS topology at scale, centralized TE</td>
+    </tr>
+    <tr>
+    <td>Jupiter Evolving (5th gen)</td>
+    <td>2022-present</td>
+    <td>13 Pbps</td>
+    <td>OCS, direct-connect, Orion SDN</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The current Jupiter fabric introduces three architectural shifts
+    that represent the state of the art in data center networking:</p>
+    <p><strong>Optical Circuit Switching (OCS).</strong> MEMS-based
+    optical circuit switches dynamically reconfigure physical
+    connectivity between aggregation blocks. Instead of fixed fiber
+    connections between pods, OCS allows the fabric to rewire itself
+    based on traffic demand. This enables a direct-connect topology
+    where aggregation blocks can be connected to any other block without
+    transiting a fixed spine layer.</p>
+    <p><strong>Orion SDN.</strong> Google’s centralized SDN controller,
+    deployed in production since 2016, programs forwarding rules across
+    the entire fabric. Orion enables traffic engineering at fabric scale
+    – shifting flows between paths based on real-time utilization and
+    demand. This is the control plane that makes OCS useful: without
+    centralized traffic engineering, dynamic topology reconfiguration
+    would create routing instability.</p>
+    <p><strong>Direct-connect topology.</strong> Jupiter Evolving moved
+    from a strict CLOS hierarchy to a direct-connect model where
+    aggregation blocks peer with each other through OCS. This reduces
+    hop count for intra-block traffic and enables non-uniform bandwidth
+    allocation – blocks that need more bandwidth between them get more
+    optical circuits.</p>
+    <p>The result: 5x higher speed and capacity, 30% reduction in capex,
+    41% reduction in power, 10% reduction in flow completion time, 30%
+    throughput improvement, and 50x less downtime compared to the best
+    previous-generation alternatives [17].</p>
+    <h3 id="meta-f16">Meta F16</h3>
+    <p>Meta’s F16 fabric, introduced in 2019, uses 16 single-chip spine
+    planes of 128-port 100GbE switches (Minipack platform, built with
+    Edgecore based on Meta’s open-compute designs) [19]. The naming
+    convention is straightforward: F4 used 4 fabric planes, F16 uses 16.
+    F16 delivers four times the capacity of F4 without requiring 400GbE
+    optics – it achieves scale through switch count rather than port
+    speed.</p>
+    <p><strong>Regional interconnection with HGRID.</strong> F16 spine
+    switches connect directly to Meta’s HGRID regional backbone,
+    flattening the regional network. A Meta campus typically contains
+    six data center buildings, each with its own F16 fabric. HGRID
+    connects all six fabrics into a single regional network with
+    petabit-scale east-west bandwidth. This eliminates the traditional
+    data center interconnect (DCI) tier – fabric spine switches
+    <em>are</em> the regional backbone edge.</p>
+    <p>The architectural insight from Meta’s design: you can scale
+    bandwidth by adding more parallel forwarding planes rather than by
+    increasing individual link speed. This avoids the power and cost
+    penalties of leading-edge optics and uses proven, commodity 100GbE
+    technology.</p>
+    <h3 id="microsoft-swan">Microsoft SWAN</h3>
+    <p>SWAN (Software-driven Wide Area Network) is Microsoft’s
+    inter-datacenter WAN, deployed since 2013 and now carrying over 90%
+    of traffic between Microsoft datacenters across 280,000+ km of
+    optical fiber and 150+ points of presence [20][21].</p>
+    <p>SWAN’s architecture separates the WAN into three tiers of
+    traffic: interactive (latency-sensitive, highest priority), elastic
+    (throughput-sensitive, medium priority – bulk data replication), and
+    background (best-effort, lowest priority). A centralized controller
+    allocates bandwidth to each service class based on demand and
+    priority, then programs label-switched paths across the WAN
+    routers.</p>
+    <p><strong>Key innovations:</strong></p>
+    <ul>
+    <li><strong>Congestion-free network updates.</strong> When the
+    controller reprograms forwarding paths, it uses a multi-step update
+    procedure with reserved scratch capacity to guarantee that no link
+    is overloaded during the transition. This avoids the packet loss and
+    congestion that result from naive in-place reconfiguration.</li>
+    <li><strong>Near-optimal utilization.</strong> SWAN carries 60% more
+    traffic than traditional MPLS traffic engineering and comes within
+    2% of the theoretical optimum. This translates directly to reduced
+    WAN circuit spend.</li>
+    <li><strong>OneWAN unification.</strong> In 2023, Microsoft
+    published “OneWAN is better than two” at NSDI, describing the
+    unification of their previously split WAN architectures (one for
+    cloud, one for corporate) into a single shared fabric, further
+    improving utilization.</li>
+    </ul>
+    <hr />
+    <h2 id="greenfield-vs-brownfield">9. Greenfield vs Brownfield</h2>
+    <p>The decision framework for new network deployments vs upgrades to
+    existing infrastructure involves five dimensions [22]:</p>
+    <table>
+    <colgroup>
+    <col style="width: 31%" />
+    <col style="width: 34%" />
+    <col style="width: 34%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Dimension</th>
+    <th>Greenfield</th>
+    <th>Brownfield</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Cost profile</strong></td>
+    <td>High upfront, low ongoing</td>
+    <td>Lower upfront, higher ongoing (tech debt)</td>
+    </tr>
+    <tr>
+    <td><strong>Timeline</strong></td>
+    <td>6-18 months</td>
+    <td>2-6 months</td>
+    </tr>
+    <tr>
+    <td><strong>Risk</strong></td>
+    <td>Integration risk (new=untested)</td>
+    <td>Compatibility risk (new+old=fragile)</td>
+    </tr>
+    <tr>
+    <td><strong>Architecture freedom</strong></td>
+    <td>Full – choose optimal topology</td>
+    <td>Constrained by existing cabling, power, space</td>
+    </tr>
+    <tr>
+    <td><strong>Operational impact</strong></td>
+    <td>None during build (parallel)</td>
+    <td>Migration windows, phased cutover</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="when-to-go-greenfield">When to Go Greenfield</h3>
+    <ul>
+    <li>The existing network is end-of-life and unsupported</li>
+    <li>Traffic patterns have fundamentally changed (north-south to
+    east-west)</li>
+    <li>The topology cannot scale further (e.g., three-tier DC needs
+    spine-leaf)</li>
+    <li>A new building, campus, or data center is being built</li>
+    <li>The operational team can support a parallel environment during
+    transition</li>
+    </ul>
+    <h3 id="when-to-go-brownfield">When to Go Brownfield</h3>
+    <ul>
+    <li>The existing topology is fundamentally sound but needs
+    capacity</li>
+    <li>Vendor relationships and operational skills are invested</li>
+    <li>Budget constraints prevent full replacement</li>
+    <li>Uptime requirements preclude extended migration windows</li>
+    <li>The existing cable plant can be reused</li>
+    </ul>
+    <h3 id="the-hybrid-approach">The Hybrid Approach</h3>
+    <p>Most real-world deployments are hybrid: brownfield in the
+    existing core (upgrade line cards, add capacity) with greenfield at
+    the edge (new spine-leaf fabric for a new workload tier, new SD-WAN
+    overlay on existing circuits). The key discipline is defining a
+    clean architectural boundary between old and new – a demarcation
+    point where the brownfield network hands off to the greenfield
+    deployment with well-defined interfaces and routing adjacencies.</p>
+    <hr />
+    <h2 id="topology-comparison-matrix">10. Topology Comparison
+    Matrix</h2>
+    <table>
+    <colgroup>
+    <col style="width: 10%" />
+    <col style="width: 20%" />
+    <col style="width: 9%" />
+    <col style="width: 20%" />
+    <col style="width: 17%" />
+    <col style="width: 13%" />
+    <col style="width: 6%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Topology</th>
+    <th>Scale (endpoints)</th>
+    <th>Latency</th>
+    <th>Oversubscription</th>
+    <th>Failure Impact</th>
+    <th>Complexity</th>
+    <th>Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Three-tier campus</td>
+    <td>200-50,000</td>
+    <td>3-5 hops variable</td>
+    <td>20:1 access, 4:1 dist</td>
+    <td>Layer-dependent</td>
+    <td>Medium</td>
+    <td>Medium</td>
+    </tr>
+    <tr>
+    <td>Collapsed core</td>
+    <td>50-1,000</td>
+    <td>2-3 hops</td>
+    <td>20:1 access</td>
+    <td>Broader blast radius</td>
+    <td>Low</td>
+    <td>Low</td>
+    </tr>
+    <tr>
+    <td>Spine-leaf (2-tier)</td>
+    <td>100-10,000 servers</td>
+    <td>3 hops fixed</td>
+    <td>1:1 to 4:1 tunable</td>
+    <td>Proportional spine loss</td>
+    <td>Medium</td>
+    <td>Medium-high</td>
+    </tr>
+    <tr>
+    <td>5-stage CLOS</td>
+    <td>10,000-100,000+</td>
+    <td>5 hops fixed</td>
+    <td>1:1 to 3:1</td>
+    <td>Pod-isolated</td>
+    <td>High</td>
+    <td>High</td>
+    </tr>
+    <tr>
+    <td>Hub-and-spoke WAN</td>
+    <td>2-50 sites</td>
+    <td>High (hairpin)</td>
+    <td>N/A</td>
+    <td>Hub = total failure</td>
+    <td>Low</td>
+    <td>Low</td>
+    </tr>
+    <tr>
+    <td>Full mesh WAN</td>
+    <td>3-8 sites</td>
+    <td>Optimal (1 hop)</td>
+    <td>N/A</td>
+    <td>Graceful (one link)</td>
+    <td>High</td>
+    <td>Very high</td>
+    </tr>
+    <tr>
+    <td>SD-WAN overlay</td>
+    <td>10-10,000 sites</td>
+    <td>Policy-driven</td>
+    <td>Transport-dependent</td>
+    <td>Transport-diverse</td>
+    <td>Medium</td>
+    <td>Medium</td>
+    </tr>
+    <tr>
+    <td>Cloud transit hub</td>
+    <td>2-100 VPCs</td>
+    <td>Cloud-native</td>
+    <td>Cloud-managed</td>
+    <td>Hub = partition</td>
+    <td>Low</td>
+    <td>Usage-based</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="design-decision-matrix">11. Design Decision Matrix</h2>
+    <p>When selecting a network architecture, the decision depends on
+    the interaction of five primary variables. This matrix maps common
+    scenarios to recommended topologies:</p>
+    <table>
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 25%" />
+    <col style="width: 11%" />
+    <col style="width: 12%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Scenario</th>
+    <th>Traffic Pattern</th>
+    <th>Scale</th>
+    <th>Budget</th>
+    <th>Recommended Topology</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Single-building campus</td>
+    <td>North-south</td>
+    <td>&lt; 500 users</td>
+    <td>Moderate</td>
+    <td>Collapsed core</td>
+    </tr>
+    <tr>
+    <td>Multi-building campus</td>
+    <td>North-south</td>
+    <td>500-5,000</td>
+    <td>Adequate</td>
+    <td>Three-tier with L3 distribution</td>
+    </tr>
+    <tr>
+    <td>Large campus</td>
+    <td>Mixed</td>
+    <td>5,000+</td>
+    <td>Enterprise</td>
+    <td>Three-tier with SD-Access overlay</td>
+    </tr>
+    <tr>
+    <td>New data center, general compute</td>
+    <td>70% east-west</td>
+    <td>&lt; 5,000 servers</td>
+    <td>Standard</td>
+    <td>2-tier spine-leaf, 3:1 oversubscription</td>
+    </tr>
+    <tr>
+    <td>Data center, AI/HPC workloads</td>
+    <td>Burst east-west</td>
+    <td>Any</td>
+    <td>Performance-first</td>
+    <td>2-tier spine-leaf, 1:1 non-blocking</td>
+    </tr>
+    <tr>
+    <td>Hyperscale data center</td>
+    <td>All-to-all</td>
+    <td>50,000+ servers</td>
+    <td>Scale economics</td>
+    <td>5-stage CLOS with OCS</td>
+    </tr>
+    <tr>
+    <td>Small WAN (&lt; 20 sites)</td>
+    <td>Branch-to-DC</td>
+    <td>Regional</td>
+    <td>Limited</td>
+    <td>Hub-and-spoke + SD-WAN</td>
+    </tr>
+    <tr>
+    <td>Enterprise WAN (20-200 sites)</td>
+    <td>Mixed</td>
+    <td>National</td>
+    <td>Moderate</td>
+    <td>SD-WAN, dual-hub, partial mesh</td>
+    </tr>
+    <tr>
+    <td>Backbone WAN (3-8 DCs)</td>
+    <td>DC-to-DC replication</td>
+    <td>Global</td>
+    <td>Large</td>
+    <td>Full mesh + TE</td>
+    </tr>
+    <tr>
+    <td>Hybrid cloud</td>
+    <td>Cloud + on-prem</td>
+    <td>Variable</td>
+    <td>Usage-based</td>
+    <td>Direct Connect/ExpressRoute + Transit GW</td>
+    </tr>
+    <tr>
+    <td>Multi-cloud</td>
+    <td>Cross-cloud</td>
+    <td>Variable</td>
+    <td>Premium</td>
+    <td>Cloud exchange (Equinix/Megaport)</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="the-oversubscription-decision-tree">The Oversubscription
+    Decision Tree</h3>
+    <pre><code>Is the workload latency-sensitive and bandwidth-intensive?
+  YES → Is it synchronized (AI collective, parallel storage)?
+    YES → 1:1 non-blocking fabric (no oversubscription)
+    NO  → 1.5:1 to 2:1 (storage, database clusters)
+  NO  → Is the traffic pattern predictable?
+    YES → 3:1 (web servers, microservices)
+    NO  → 2:1 to 3:1 with monitoring and scaling plan</code></pre>
+    <hr />
+    <h2 id="cross-references">12. Cross-References</h2>
+    <ul>
+    <li><strong>Module 02 (Routing &amp; Switching Operations):</strong>
+    BGP, OSPF, EVPN control plane details for the fabrics described
+    here</li>
+    <li><strong>Module 03 (Network Automation):</strong> NAPALM, Nornir,
+    Ansible for deploying and managing these topologies</li>
+    <li><strong>Module 04 (Traffic Engineering):</strong> ECMP, segment
+    routing, and traffic shaping across spine-leaf and WAN fabrics</li>
+    <li><strong>Module 06 (Cloud Networking):</strong> VPC design,
+    transit gateway, and service mesh details for cloud-integrated
+    topologies</li>
+    <li><strong>Module 10 (Network Reliability):</strong> Redundancy
+    design, convergence time, and failure modes for the architectures
+    above</li>
+    <li><strong>SNE cross-series:</strong> TCP (transport fundamentals),
+    DNS (naming infrastructure), K8S (container networking overlay), DRP
+    (disaster recovery planning)</li>
+    </ul>
+    <hr />
+    <h2 id="sources">13. Sources</h2>
+    <ol type="1">
+    <li>Cisco Campus LAN and Wireless LAN Design Guide. Cisco Design
+    Zone.
+    https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html</li>
+    <li>Cisco Enterprise Campus 3.0 Architecture: Overview and
+    Framework.
+    https://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Campus/campover.html</li>
+    <li>“What Is Spine-Leaf Architecture?” TechTarget.
+    https://www.techtarget.com/searchdatacenter/definition/Leaf-spine</li>
+    <li>“Spine and Leaf Architecture 101.” Corning.
+    https://www.corning.com/data-center/worldwide/en/home/solutions/spine-and-leaf-architecture-101.html</li>
+    <li>Cisco Application Centric Infrastructure Design Guide.
+    https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/cisco-application-centric-infrastructure-design-guide.html</li>
+    <li>Arista EVPN VXLAN Design Guide and CI Workshop.
+    https://labguides.testdrive.arista.com/2025.1/automation/ci_avd_l3ls/overview/</li>
+    <li>Clos, C. “A Study of Non-Blocking Switching Networks.” Bell
+    System Technical Journal, 1953.</li>
+    <li>Leiserson, C.E. “Fat-trees: Universal networks for
+    hardware-efficient supercomputing.” IEEE Transactions on Computers,
+    1985.</li>
+    <li>Al-Fares, M., Loukissas, A., Vahdat, A. “A Scalable, Commodity
+    Datacenter Network Architecture.” ACM SIGCOMM 2008.
+    https://saubhik.github.io/papers/html/alfares2008fattree.html</li>
+    <li>“Hub-and-Spoke in Modern WANs: Still Relevant in 2025?” Network
+    Journey.
+    https://networkjourney.com/hub-and-spoke-in-modern-wans-still-relevant-in-2025-ccnp-enterprise/</li>
+    <li>Cisco Dynamic Multipoint VPN Data Sheet.
+    https://www.cisco.com/c/en/us/products/collateral/security/dynamic-multipoint-vpn-dmvpn/data_sheet_c78-468520.html</li>
+    <li>Cisco Catalyst SD-WAN Design Guide.
+    https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html</li>
+    <li>“Designing private network connectivity between AWS and
+    Microsoft Azure.” AWS Blog.
+    https://aws.amazon.com/blogs/modernizing-with-aws/designing-private-network-connectivity-aws-azure/</li>
+    <li>“Patterns for connecting other cloud service providers with
+    Google Cloud.” Google Cloud Architecture Center.
+    https://cloud.google.com/architecture/patterns-for-connecting-other-csps-with-gcp</li>
+    <li>“Oversubscription in Networking.” Noction.
+    https://www.noction.com/blog/oversubscription-in-networking</li>
+    <li>“Jupiter Rising: A Decade of Clos Topologies and Centralized
+    Control.” ACM SIGCOMM 2015.
+    https://conferences.sigcomm.org/sigcomm/2015/pdf/papers/p183.pdf</li>
+    <li>“Jupiter Evolving: Transforming Google’s Datacenter Network via
+    Optical Circuit Switches and Software-Defined Networking.” ACM
+    SIGCOMM 2022. https://dl.acm.org/doi/10.1145/3544216.3544265</li>
+    <li>“Jupiter now scales to 13 Petabits per second.” Google Cloud
+    Blog.
+    https://cloud.google.com/blog/products/networking/speed-scale-reliability-25-years-of-data-center-networking</li>
+    <li>“Reinventing our data center network with F16, Minipack.” Meta
+    Engineering Blog.
+    https://engineering.fb.com/2019/03/14/data-center-engineering/f16-minipack/</li>
+    <li>Hong, C-Y. et al. “Achieving High Utilization with
+    Software-Driven WAN.” ACM SIGCOMM 2013.
+    https://conferences.sigcomm.org/sigcomm/2013/papers/sigcomm/p15.pdf</li>
+    <li>“Born in the research lab a decade ago, SWAN continues to
+    accelerate networking in the Microsoft Cloud.” Microsoft Research.
+    https://www.microsoft.com/en-us/research/blog/born-in-the-research-lab-a-decade-ago-swan-continues-to-accelerate-networking-in-the-microsoft-cloud/</li>
+    <li>“Greenfield vs Brownfield Data Centers: The Strategic Decision.”
+    Pure Storage.
+    https://blog.purestorage.com/purely-technical/greenfield-vs-brownfield-data-centers/</li>
+    </ol>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNE Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNE/">tibsfox.com/Research/SNE</a>
+    </div>
+</body>
+</html>

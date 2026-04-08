@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service-Oriented Architecture &amp; Programming &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-soa">
+  <header>
+    <h1>Service-Oriented Architecture &amp; Programming</h1>
+    <div class="subtitle">CORBA &rarr; SOAP &rarr; REST &rarr; gRPC &rarr; Microservices &rarr; Service Mesh &mdash; Four Decades of Distributed Systems, Two Hype Cycles, One Enduring Idea</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="principles.html">Principles</a>
+      <a href="history.html">History</a>
+      <a href="enterprise-soa.html">Enterprise SOA</a>
+      <a href="rest-apis.html">REST &amp; APIs</a>
+      <a href="microservices-mesh.html">Microservices</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every team will expose their data and functionality through service interfaces. There will be no other form of interprocess communication allowed. All service interfaces, without exception, must be designed from the ground up to be externalizable. Anyone who doesn&rsquo;t do this will be fired. &mdash; <em>Jeff Bezos, internal Amazon memo, 2002 (as leaked by Steve Yegge in 2011)</em>
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- STATS                                                         -->
+    <!-- ============================================================ -->
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value teal">42+</span><span class="stat-label">Years of RPC</span></div>
+      <div class="stat"><span class="stat-value amber">2002</span><span class="stat-label">Bezos Mandate</span></div>
+      <div class="stat"><span class="stat-value">2014</span><span class="stat-label">Microservices (Fowler)</span></div>
+      <div class="stat"><span class="stat-value teal">2009</span><span class="stat-label">&ldquo;SOA is Dead&rdquo;</span></div>
+      <div class="stat"><span class="stat-value amber">&infin;</span><span class="stat-label">And Yet Here We Are</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Service-oriented programming</strong> is the practice of decomposing systems into independently deployable services communicating through contracts. It is the dominant paradigm for how modern software is built at scale &mdash; every major cloud provider, every fintech, every streaming service, every modern bank. And yet it has been <em>declared dead</em> at least once (Anne Thomas Manes, January 2009) and <em>rebranded</em> at least twice (SOA &rarr; microservices &rarr; cloud native).</p>
+      <p>This research series traces the idea through four decades: from the 1984 Birrell &amp; Nelson RPC paper through CORBA and DCOM, the SOAP/WSDL/UDDI enterprise era, the WS-* swamp, the REST reaction, the microservices crystallization, the Kubernetes + service mesh era, and the current &ldquo;maybe we went too far&rdquo; correction. It covers the principles that are genuinely timeless, the technologies that came and went, and the surprising degree to which Jeff Bezos&rsquo; 2002 memo to Amazon engineers turned out to be right about everything.</p>
+      <p><strong>Research method:</strong> Primary sources (Fielding&rsquo;s 2000 dissertation, Fowler/Lewis 2014 article, Bezos memo via Yegge, SOA Manifesto, Hohpe &amp; Woolf EIP book), OASIS/W3C specifications, CNCF documentation, Sam Newman&rsquo;s books, Martin Fowler&rsquo;s bliki, Google SRE book, cross-reference against 296-project PNW Research Series corpus.</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- RICHARDSON MATURITY LADDER                                    -->
+    <!-- ============================================================ -->
+
+    <h2>The Service Maturity Ladder</h2>
+    <p>Drawing loose inspiration from Leonard Richardson&rsquo;s maturity model for REST, but extended to cover the whole arc of service-oriented thinking:</p>
+
+    <div class="maturity-ladder">
+      <ol>
+        <li><strong>In-process</strong> &mdash; function calls in the same binary. Fast, reliable, tightly coupled. The monolith.</li>
+        <li><strong>Remote Procedure Call</strong> &mdash; function calls over the wire. Birrell &amp; Nelson 1984. The abstraction leaks, but you keep the function-call mental model.</li>
+        <li><strong>Component-oriented</strong> &mdash; CORBA, DCOM, EJB. Objects and method dispatch over a network. The 1990s answer.</li>
+        <li><strong>XML Web Services</strong> &mdash; SOAP, WSDL, UDDI, WS-*. Contract-first, platform-agnostic, stack-heavy. The enterprise SOA era.</li>
+        <li><strong>Resource-oriented REST</strong> &mdash; HTTP verbs, URIs as nouns, JSON payloads. The reaction that won the web.</li>
+        <li><strong>API-first microservices</strong> &mdash; small services, independent deployment, decentralized data, team topology. The 2014 crystallization.</li>
+        <li><strong>Service mesh &amp; cloud native</strong> &mdash; Kubernetes substrate, sidecar proxies, mTLS, distributed tracing, GitOps. The 2018+ operating model.</li>
+        <li><strong>Event-driven &amp; durable execution</strong> &mdash; Kafka streams, CQRS, Temporal/Cadence workflows, sagas. The 2020s maturity.</li>
+      </ol>
+    </div>
+
+    <p>Each rung adds capabilities but also complexity. Most systems should pick the lowest rung that meets their needs. The failure mode of enterprise SOA was climbing rungs 4&ndash;7 before the organization could handle rung 3. The failure mode of cloud native is the opposite: climbing rung 7 for a system that would have been fine at rung 2.</p>
+
+    <!-- ============================================================ -->
+    <!-- MODULE OVERVIEW                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="principles.html" class="category-card">
+        <div><span class="cluster-badge cluster-principle">Principles</span></div>
+        <h3>Principles &amp; Concepts</h3>
+        <p>Contract-first design, loose coupling, idempotency, eventual consistency, orchestration vs choreography, service boundaries via DDD, observability&rsquo;s three pillars, the 2009 SOA Manifesto, CAP theorem, the 12-Factor App. The conceptual core of service-oriented thinking.</p>
+        <p><strong>Key:</strong> Contracts, coupling, consistency, observability</p>
+      </a>
+
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-hist">History</span></div>
+        <h3>History &amp; Origins</h3>
+        <p>Birrell &amp; Nelson RPC 1984 &rarr; CORBA (1991) &rarr; DCOM &rarr; J2EE &rarr; SOAP (1999) &rarr; WS-* swamp &rarr; REST (2000) &rarr; Bezos mandate (2002) &rarr; Netflix migration &rarr; Fowler/Lewis microservices (2014) &rarr; Kubernetes &rarr; service mesh. Two hype cycles, one enduring idea.</p>
+        <p><strong>Key:</strong> Timeline, people, hype cycles, the Bezos memo</p>
+      </a>
+
+      <a href="enterprise-soa.html" class="category-card">
+        <div><span class="cluster-badge cluster-ent">Enterprise</span></div>
+        <h3>Enterprise SOA (SOAP era)</h3>
+        <p>The classical stack: SOAP envelopes, WSDL contracts, UDDI registries, WS-Security, WS-ReliableMessaging, BPEL workflows, Enterprise Service Buses. Apache Axis/CXF, IBM WebSphere, WebLogic, TIBCO, Sonic, Mule, webMethods. Why it had the right ideas and the wrong implementations.</p>
+        <p><strong>Key:</strong> SOAP, WSDL, WS-*, ESB, BPEL, governance</p>
+      </a>
+
+      <a href="rest-apis.html" class="category-card">
+        <div><span class="cluster-badge cluster-mod">REST</span></div>
+        <h3>REST &amp; Modern APIs</h3>
+        <p>Roy Fielding&rsquo;s 2000 dissertation. The Richardson Maturity Model. HTTP verbs, status codes, resource modeling. OpenAPI/Swagger as the de facto spec. GraphQL as the alternative query model. AsyncAPI for event-driven. The API-first movement: Stripe, Twilio, Plaid. Why REST + JSON beat SOAP.</p>
+        <p><strong>Key:</strong> Fielding, OpenAPI, GraphQL, API-first</p>
+      </a>
+
+      <a href="microservices-mesh.html" class="category-card">
+        <div><span class="cluster-badge cluster-mod">Microservices</span></div>
+        <h3>Microservices &amp; Service Mesh</h3>
+        <p>Martin Fowler &amp; James Lewis, March 2014: nine characteristics of microservice architecture. Amazon&rsquo;s two-pizza teams. Netflix&rsquo;s migration 2009&ndash;2016. Docker (2013), Kubernetes (2014), the CNCF (2015). Linkerd (2016), Envoy, Istio (2017). The critique: distributed monoliths, nanoservices, the pendulum swing back.</p>
+        <p><strong>Key:</strong> Fowler, Bezos mandate, K8s, Istio, Linkerd</p>
+      </a>
+
+      <a href="implementations.html" class="category-card">
+        <div><span class="cluster-badge cluster-impl">Implementations</span></div>
+        <h3>Implementations &amp; Stacks</h3>
+        <p>gRPC (Google 2015) + Protocol Buffers. Apache Kafka (LinkedIn 2011). Kubernetes. Istio + Envoy. OpenTelemetry. Serverless: Lambda, Knative. Durable execution: Temporal, Cadence, Step Functions. Observability: Prometheus, Grafana, Jaeger. Platform engineering: Backstage, Port.</p>
+        <p><strong>Key:</strong> gRPC, Kafka, K8s, Istio, Temporal, OpenTel</p>
+      </a>
+
+      <a href="rosetta.html" class="category-card">
+        <div><span class="cluster-badge cluster-rosetta">Rosetta</span></div>
+        <h3>Rosetta Integration</h3>
+        <p>The same &ldquo;get a user by ID&rdquo; operation across paradigms: CORBA IDL, SOAP/WSDL, REST/OpenAPI, gRPC/protobuf, GraphQL, event-driven/Kafka. When each paradigm wins. When each loses. Translation heuristics.</p>
+        <p><strong>Key:</strong> Paradigm comparison, translation patterns</p>
+      </a>
+
+      <a href="education.html" class="category-card">
+        <div><span class="cluster-badge cluster-edu">Education</span></div>
+        <h3>Learning Resources</h3>
+        <p>The canonical books: Hohpe &amp; Woolf <em>Enterprise Integration Patterns</em>, Sam Newman <em>Building Microservices</em>, Martin Kleppmann <em>Designing Data-Intensive Applications</em>, Google <em>SRE Book</em>, Gregor Hohpe <em>Cloud Strategy</em>, Mark Richards <em>Software Architecture: The Hard Parts</em>. The canonical essays: Fielding&rsquo;s dissertation, Fowler/Lewis microservices, the Bezos memo.</p>
+        <p><strong>Key:</strong> Books, essays, community, community</p>
+      </a>
+
+      <a href="principles.html" class="category-card">
+        <div><span class="cluster-badge cluster-principle">Patterns</span></div>
+        <h3>Enterprise Integration Patterns</h3>
+        <p>Gregor Hohpe and Bobby Woolf, 2003. 65 patterns from Message Channel to Content-Based Router to Saga. Still the canonical reference twenty-three years later. Every Kafka topic, every Kubernetes service, every Istio VirtualService is an EIP pattern with a new name.</p>
+        <p><strong>Key:</strong> EIP, messaging patterns, Camel, Kafka mapping</p>
+      </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE ONE-LINER HISTORY                                         -->
+    <!-- ============================================================ -->
+
+    <h2>The One-Liner History</h2>
+
+    <table>
+      <thead><tr><th>Year</th><th>What</th><th>Why it mattered</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1984</strong></td><td>Birrell &amp; Nelson: <em>Implementing Remote Procedure Calls</em></td><td>The foundational paper. RPC as a first-class idea.</td></tr>
+        <tr><td><strong>1988</strong></td><td>OSF DCE, Sun ONC RPC</td><td>Distributed computing as standardized infrastructure.</td></tr>
+        <tr><td><strong>1991</strong></td><td>CORBA 1.0 (OMG)</td><td>The first industry-wide distributed object standard.</td></tr>
+        <tr><td><strong>1996</strong></td><td>Microsoft DCOM, MTS</td><td>Component computing on Windows.</td></tr>
+        <tr><td><strong>1998</strong></td><td>XML-RPC (Dave Winer), J2EE announced</td><td>Two paths: simple and elaborate.</td></tr>
+        <tr><td><strong>1999</strong></td><td>SOAP 1.0 (Microsoft + DevelopMentor + UserLand)</td><td>XML-based web services are born.</td></tr>
+        <tr><td><strong>2000</strong></td><td>Roy Fielding&rsquo;s REST dissertation</td><td>The idea that eventually beat SOAP.</td></tr>
+        <tr><td><strong>2001</strong></td><td>WSDL 1.1, UDDI 1.0, Protocol Buffers (internal Google)</td><td>The full enterprise SOA stack assembled.</td></tr>
+        <tr><td><strong>2002</strong></td><td><strong>Bezos API mandate memo</strong></td><td>Amazon goes service-oriented; the template for AWS.</td></tr>
+        <tr><td><strong>2003</strong></td><td>Hohpe &amp; Woolf EIP book; Eric Evans DDD book</td><td>The canonical patterns. Bounded contexts as service boundaries.</td></tr>
+        <tr><td><strong>2007</strong></td><td>BPEL 2.0 (OASIS); Apache Camel 1.0</td><td>Peak enterprise SOA.</td></tr>
+        <tr><td><strong>2009</strong></td><td><em>SOA Manifesto</em> (Rotterdam); Anne Thomas Manes <em>&ldquo;SOA is Dead&rdquo;</em></td><td>The movement both matures and dies in the same year.</td></tr>
+        <tr><td><strong>2011</strong></td><td>Apache Kafka open-sourced; Steve Yegge leaks the Bezos memo</td><td>Event streaming and the public cultural reset.</td></tr>
+        <tr><td><strong>2013</strong></td><td>Docker 1.0</td><td>Containers as the deployment unit.</td></tr>
+        <tr><td><strong>2014</strong></td><td><strong>Fowler &amp; Lewis: <em>Microservices</em></strong>; AWS Lambda; Kubernetes announced</td><td>The term crystallizes. The substrate arrives.</td></tr>
+        <tr><td><strong>2015</strong></td><td>gRPC public release; Kubernetes 1.0; GraphQL public release; CNCF founded</td><td>The modern stack takes shape.</td></tr>
+        <tr><td><strong>2016</strong></td><td>Linkerd 0.1 (Buoyant); Envoy (Lyft)</td><td>Service mesh is invented.</td></tr>
+        <tr><td><strong>2017</strong></td><td>Istio 0.1 (Google, IBM, Lyft)</td><td>Service mesh becomes a category.</td></tr>
+        <tr><td><strong>2019</strong></td><td>OpenTelemetry (OpenCensus + OpenTracing merger)</td><td>Observability standardized.</td></tr>
+        <tr><td><strong>2020</strong></td><td>Dapr 0.1 (Microsoft); W3C Trace Context</td><td>Distributed runtime patterns.</td></tr>
+        <tr><td><strong>2023</strong></td><td>Amazon Prime Video blog: &ldquo;we moved back to a monolith&rdquo;</td><td>The pendulum starts to swing.</td></tr>
+        <tr><td><strong>2024&ndash;26</strong></td><td>Platform engineering, durable execution, WebAssembly services</td><td>The current frontier.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- WHY SOA REFUSES TO DIE                                        -->
+    <!-- ============================================================ -->
+
+    <h2>Why Service-Oriented Refuses to Die</h2>
+
+    <div class="card amber">
+      <p><strong>The short version:</strong> past a certain scale, you cannot build software any other way. The organizational and technical forces that made Amazon issue the 2002 memo are the same forces that made Netflix migrate in 2009, that made Uber and Airbnb and Stripe service-oriented from day one, and that are forcing today&rsquo;s AI-era companies to follow the same pattern.</p>
+      <p><strong>The long version:</strong></p>
+      <ol>
+        <li><strong>Conway&rsquo;s Law is real.</strong> Mel Conway&rsquo;s 1968 observation &mdash; &ldquo;organizations produce designs which are copies of their communication structures&rdquo; &mdash; applies in full force. Services become the technical encoding of team boundaries. Past 20 engineers, monolithic development slows down.</li>
+        <li><strong>Independent deployment is a capability multiplier.</strong> A team that can deploy its own service without coordinating with 50 others ships features 10&times; faster. The cost of microservices is the overhead; the benefit is the deployment independence.</li>
+        <li><strong>Failure isolation.</strong> A single bad deploy taking down the checkout system is catastrophic for a monolith. For a service-oriented system, it&rsquo;s an incident contained to one service with well-defined blast radius.</li>
+        <li><strong>Technology polyglotism.</strong> Python for ML, Go for the gateway, Rust for the hot path, TypeScript for the UI &mdash; service boundaries let each team use the right tool.</li>
+        <li><strong>Evolutionary architecture.</strong> You can rewrite one service in a weekend. You cannot rewrite a monolith at all.</li>
+      </ol>
+      <p><strong>The punchline:</strong> &ldquo;Microservices&rdquo; is what we called SOA when we figured out how to actually do it. The enterprise SOA era failed because it tried to solve an organizational problem with ESB licenses. The microservices era succeeded because Docker, Kubernetes, and cloud computing made the operational cost manageable. The ideas are the same. The tools are better.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- WHERE SOA ACTUALLY RUNS                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Where Service-Oriented Actually Runs</h2>
+
+    <table>
+      <thead><tr><th>Company / System</th><th>Scale</th><th>Architecture</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Amazon AWS</strong></td><td>Hundreds of services</td><td>Each AWS service is an independent service team following the Bezos memo</td></tr>
+        <tr><td><strong>Netflix</strong></td><td>~1000 microservices</td><td>Java/Spring Boot, own OSS stack (Eureka, Hystrix, Zuul) + AWS</td></tr>
+        <tr><td><strong>Uber</strong></td><td>~4000 microservices</td><td>Go, Java, Python, with their own tracing (Jaeger) and RPC (TChannel/Thrift)</td></tr>
+        <tr><td><strong>Airbnb</strong></td><td>Thousands</td><td>Kubernetes + Istio + gRPC + Kafka</td></tr>
+        <tr><td><strong>Stripe</strong></td><td>API-first from day one</td><td>Idempotency keys, OpenAPI, Ruby monolith with services around it</td></tr>
+        <tr><td><strong>Spotify</strong></td><td>Thousands of services</td><td>Pioneered &ldquo;squads,&rdquo; Backstage IDP, mixed stack</td></tr>
+        <tr><td><strong>Google</strong></td><td>Millions of RPC endpoints</td><td>Internal gRPC (originally Stubby), Borg, Spanner, BigTable; their SRE practices became the book</td></tr>
+        <tr><td><strong>LinkedIn</strong></td><td>Thousands of services</td><td>Kafka (which they invented), Rest.li, Java/Scala stack</td></tr>
+        <tr><td><strong>Twitter / X</strong></td><td>Scribe &rarr; Finagle era</td><td>Scala, Finagle, Thrift, moved from Ruby monolith 2010&ndash;2014</td></tr>
+        <tr><td><strong>Shopify</strong></td><td>Modular monolith</td><td>Explicitly chose a &ldquo;majestic monolith&rdquo; with service boundaries; Ruby on Rails</td></tr>
+        <tr><td><strong>Legacy banks, insurance, telecom</strong></td><td>Enterprise SOA</td><td>Still running SOAP/WSDL/ESB from the 2000s, gradually modernizing</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified connections across the 296-project PNW Research Series corpus:</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>JAV</td><td>Java &amp; the JVM</td><td>J2EE, EJB, Spring, JAX-WS, JAX-RS — the enterprise Java and services lineage</td></tr>
+        <tr><td>JGC</td><td>JVM GC &amp; Memory</td><td>Why GC pauses matter for service SLOs</td></tr>
+        <tr><td>GOL</td><td>Go (Golang)</td><td>The microservices language; Docker, Kubernetes, Istio, Prometheus, Envoy all in Go</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>The modern high-performance service implementation language; Linkerd2 data plane in Rust</td></tr>
+        <tr><td>CEE</td><td>C Programming</td><td>Envoy in C++, many proxies and brokers</td></tr>
+        <tr><td>PCH</td><td>Python Computational History</td><td>Python for ML services, FastAPI, Celery workers</td></tr>
+        <tr><td>JTS</td><td>JavaScript &amp; TypeScript</td><td>Node.js services, API gateways, React/Next consumers</td></tr>
+        <tr><td>ADA</td><td>Ada Concurrency</td><td>Contrast with in-language concurrency; Ada solved problems SOA re-solves at the network level</td></tr>
+        <tr><td>PLG</td><td>Prolog &amp; Logic Programming</td><td>Datalog and rule engines as policy services (OPA, Rego)</td></tr>
+        <tr><td>ASM</td><td>Assembly Language</td><td>Wire protocols at the byte level — Protobuf varints, SOAP serialization</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="principles.html">Principles &amp; Concepts</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="enterprise-soa.html">Enterprise SOA (SOAP era)</a></li>
+        <li><a href="rest-apis.html">REST &amp; Modern APIs</a></li>
+        <li><a href="microservices-mesh.html">Microservices &amp; Service Mesh</a></li>
+        <li><a href="implementations.html">Implementations &amp; Stacks</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Service-Oriented Architecture &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

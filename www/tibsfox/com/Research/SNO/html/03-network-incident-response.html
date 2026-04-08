@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Incident Response — SNO Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2a2a;
+            --accent: #FF9100;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4DB6AC;
+            --border: #2a3a3a;
+            --primary: #004D40;
+            --net: #A5D6A7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(77,182,172,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNO — Systems Network Operations<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNO Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="network-incident-response">Network Incident Response</h1>
+    <blockquote>
+    <p><strong>Domain:</strong> Network Outage Triage, Packet Loss
+    Investigation, BGP Security, DDoS Mitigation, and War Room
+    Operations <strong>Module:</strong> 3 – Outage Triage Methodology,
+    Packet Loss and Latency Investigation, BGP Hijack Detection, Cable
+    Cut Procedures, DDoS Response, Spanning Tree Incidents, DNS
+    Resolution Failures, War Room Operations
+    <strong>Through-line:</strong> <em>Every network incident begins
+    with the same question: is it us or is it them? The answer
+    determines whether you open a carrier ticket or restart a daemon.
+    Getting this wrong costs minutes when seconds matter. Network
+    incident response is not heroics – it is methodology. A structured
+    triage separates signal from noise, isolates the fault domain in
+    logarithmic time, and routes the incident to the team that can fix
+    it. The best NOC engineers are not faster at typing commands. They
+    are faster at eliminating possibilities. They know that a BGP
+    withdrawal looks different from a fiber cut, that ICMP rate-limiting
+    at a transit hop is not real packet loss, that a spanning tree
+    reconvergence takes exactly 30 seconds in classic STP and something
+    went wrong if it takes 31. This module covers the operational
+    disciplines of network incident response: how to triage, how to
+    investigate, how to escalate, and how to recover – with the
+    real-world incidents that prove why each discipline
+    matters.</em></p>
+    </blockquote>
+    <hr />
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ol type="1">
+    <li><a href="#1-network-outage-triage-methodology">Network Outage
+    Triage Methodology</a></li>
+    <li><a href="#2-packet-loss-investigation">Packet Loss
+    Investigation</a></li>
+    <li><a href="#3-latency-investigation">Latency
+    Investigation</a></li>
+    <li><a href="#4-bgp-hijack-detection-and-response">BGP Hijack
+    Detection and Response</a></li>
+    <li><a href="#5-cable-cut-procedures">Cable Cut Procedures</a></li>
+    <li><a href="#6-ddos-response">DDoS Response</a></li>
+    <li><a href="#7-spanning-tree-incidents">Spanning Tree
+    Incidents</a></li>
+    <li><a href="#8-dns-resolution-failures">DNS Resolution
+    Failures</a></li>
+    <li><a href="#9-network-war-room-operations">Network War Room
+    Operations</a></li>
+    <li><a href="#10-real-world-incidents">Real-World Incidents</a></li>
+    <li><a href="#11-triage-flowcharts">Triage Flowcharts</a></li>
+    <li><a href="#12-cross-references">Cross-References</a></li>
+    <li><a href="#13-sources">Sources</a></li>
+    </ol>
+    <hr />
+    <h2 id="network-outage-triage-methodology">1. Network Outage Triage
+    Methodology</h2>
+    <p>The first sixty seconds of a network outage determine its
+    trajectory. A disciplined triage methodology prevents the two most
+    expensive mistakes in incident response: chasing the wrong problem
+    and escalating to the wrong team. Every outage can be decomposed
+    along three axes, and answering these three questions in order is
+    the fastest path to isolation [1].</p>
+    <h3 id="the-three-axis-triage">The Three-Axis Triage</h3>
+    <p><strong>Axis 1: Is it us or upstream?</strong></p>
+    <p>This is the single most important question. If your upstream
+    provider’s fiber is cut, no amount of debugging your own routers
+    will help. If your router has a bad line card, no amount of calling
+    the carrier will help. The distinction determines who acts.</p>
+    <pre><code>AXIS 1: US OR UPSTREAM?
+================================================================
+
+  Check your own infrastructure first (30 seconds):
+  
+  1. Can you reach your own gateway?
+     ping &lt;default-gateway&gt;
+     |
+     +-- NO  --&gt; Local problem. Check interface, cable, switch port.
+     |
+     +-- YES --&gt; Continue to step 2
+     
+  2. Can you reach the next hop beyond your gateway?
+     traceroute -m 3 &lt;known-external-ip&gt;
+     |
+     +-- Fails at hop 1-2 --&gt; Your edge device or uplink
+     |
+     +-- Fails at hop 3+  --&gt; Upstream problem. Open carrier ticket.
+     
+  3. Cross-check with out-of-band monitoring:
+     - Check carrier status page
+     - Check looking glass from carrier&#39;s perspective
+     - Check @&lt;carrier&gt;status on social media
+     - SMS/call from your phone (not on the affected network)</code></pre>
+    <p><strong>Axis 2: Single device or widespread?</strong></p>
+    <p>A single device failure is a hardware or configuration problem. A
+    widespread failure is a routing, DNS, or infrastructure problem. The
+    scope determines the response team and the urgency.</p>
+    <pre><code>AXIS 2: SCOPE OF IMPACT
+================================================================
+
+  1. Is it one device?
+     - One host cannot reach the internet
+     - One switch port is down
+     - One server is unreachable
+     --&gt; Local troubleshooting: cable, NIC, port config, VLAN
+     
+  2. Is it one site?
+     - All users at one location are affected
+     - All devices behind one uplink are affected
+     --&gt; Uplink failure, routing issue, or WAN circuit problem
+     
+  3. Is it one service?
+     - Web works, but email does not
+     - External sites work, but one SaaS provider does not
+     --&gt; DNS, application, or specific path problem
+     
+  4. Is it everything?
+     - All sites, all services, all users
+     --&gt; Core infrastructure: BGP, DNS, DHCP, or backbone failure</code></pre>
+    <p><strong>Axis 3: Control plane or data plane?</strong></p>
+    <p>This distinction is critical and often overlooked. The control
+    plane builds the forwarding table (BGP, OSPF, STP, ARP). The data
+    plane forwards packets according to that table. A control plane
+    failure means routes are wrong or missing. A data plane failure
+    means the route is correct but packets are being dropped or
+    corrupted in transit [2].</p>
+    <pre><code>AXIS 3: CONTROL PLANE vs DATA PLANE
+================================================================
+
+  CONTROL PLANE SYMPTOMS:
+  - Routes appear/disappear in routing table
+  - BGP sessions flapping (syslog: BGP-5-ADJCHANGE)
+  - OSPF adjacencies dropping (syslog: OSPF-5-ADJCHG)
+  - Routing loops (TTL exceeded, packets bouncing)
+  - ARP table incomplete (no MAC for destination)
+  - STP reconvergence (topology change notifications)
+  - &quot;No route to host&quot; errors
+  
+  Verification:
+    show ip route &lt;destination&gt;       # Is the route present?
+    show ip bgp summary               # Are BGP peers established?
+    show ip ospf neighbor              # Are OSPF adjacencies full?
+    show spanning-tree summary         # Any topology changes?
+  
+  DATA PLANE SYMPTOMS:
+  - Route exists, but packets are dropped
+  - Interface error counters incrementing (CRC, input errors)
+  - High packet loss with correct routing
+  - Packets forwarded but corrupted
+  - QoS drops (tail drop, WRED)
+  - Hardware forwarding table full (TCAM exhaustion)
+  
+  Verification:
+    show interfaces &lt;int&gt;              # Error counters
+    show platform hardware fed &lt;x&gt;     # TCAM utilization
+    show policy-map interface &lt;int&gt;    # QoS drops
+    show controllers &lt;int&gt;            # Hardware-level errors</code></pre>
+    <h3 id="triage-timing-targets">Triage Timing Targets</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Phase</th>
+    <th>Target</th>
+    <th>What Happens</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Detection to acknowledgment</td>
+    <td>&lt; 5 minutes</td>
+    <td>Monitoring alert fires, on-call acknowledges</td>
+    </tr>
+    <tr>
+    <td>Acknowledgment to triage</td>
+    <td>&lt; 15 minutes</td>
+    <td>Three-axis assessment complete</td>
+    </tr>
+    <tr>
+    <td>Triage to escalation</td>
+    <td>&lt; 5 minutes</td>
+    <td>Correct team engaged, bridge opened</td>
+    </tr>
+    <tr>
+    <td>Escalation to mitigation</td>
+    <td>Varies</td>
+    <td>Depends on fault domain</td>
+    </tr>
+    <tr>
+    <td>Mitigation to resolution</td>
+    <td>Varies</td>
+    <td>Root cause fixed, not just worked around</td>
+    </tr>
+    <tr>
+    <td>Resolution to postmortem</td>
+    <td>&lt; 72 hours</td>
+    <td>Incident report written, reviewed</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="packet-loss-investigation">2. Packet Loss Investigation</h2>
+    <p>Packet loss is the most common network complaint and the most
+    frequently misdiagnosed. The critical skill is determining
+    <em>where</em> in the path the loss occurs and <em>why</em>. Packet
+    loss has distinct signatures depending on its cause, and each cause
+    requires a different remediation [3].</p>
+    <h3 id="interface-error-counters">Interface Error Counters</h3>
+    <p>Every network interface maintains counters that record errors at
+    the physical and data-link layers. These counters are the first
+    place to look when investigating packet loss, because they tell you
+    whether the problem is physical (bad cable, bad SFP, electromagnetic
+    interference) or logical (buffer overflow, QoS drops, MTU
+    mismatch).</p>
+    <p><strong>Error counter taxonomy:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Counter</th>
+    <th>What It Means</th>
+    <th>Common Cause</th>
+    <th>Severity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>CRC errors</strong></td>
+    <td>Frame check sequence failed – bits changed in transit</td>
+    <td>Bad cable, bad SFP, EMI, duplex mismatch</td>
+    <td>HIGH – data corruption</td>
+    </tr>
+    <tr>
+    <td><strong>Runts</strong></td>
+    <td>Frame smaller than 64 bytes (minimum Ethernet frame)</td>
+    <td>Collision (half duplex), bad NIC, cable fault</td>
+    <td>HIGH – indicates physical layer problem</td>
+    </tr>
+    <tr>
+    <td><strong>Giants</strong></td>
+    <td>Frame larger than interface MTU</td>
+    <td>MTU mismatch, jumbo frames on non-jumbo link</td>
+    <td>MEDIUM – usually misconfiguration</td>
+    </tr>
+    <tr>
+    <td><strong>Input errors</strong></td>
+    <td>Aggregate of CRC + runts + other input-side errors</td>
+    <td>Various physical layer issues</td>
+    <td>HIGH – must decompose</td>
+    </tr>
+    <tr>
+    <td><strong>Output errors</strong></td>
+    <td>Frames that could not be transmitted</td>
+    <td>Interface congestion, speed mismatch</td>
+    <td>MEDIUM – check queue drops</td>
+    </tr>
+    <tr>
+    <td><strong>Collisions</strong></td>
+    <td>Frames collided during transmission</td>
+    <td>Half duplex (should not exist on full duplex)</td>
+    <td>HIGH if unexpected – duplex mismatch</td>
+    </tr>
+    <tr>
+    <td><strong>Late collisions</strong></td>
+    <td>Collision detected after first 64 bytes sent</td>
+    <td>Cable too long, duplex mismatch, bad NIC</td>
+    <td>CRITICAL – almost always duplex mismatch</td>
+    </tr>
+    <tr>
+    <td><strong>Input queue drops</strong></td>
+    <td>Packets dropped because input queue is full</td>
+    <td>CPU overload processing control plane traffic</td>
+    <td>HIGH – indicates device under stress</td>
+    </tr>
+    <tr>
+    <td><strong>Output queue drops</strong></td>
+    <td>Packets dropped because output queue is full</td>
+    <td>Interface congestion, traffic exceeds capacity</td>
+    <td>MEDIUM – normal under load, tune QoS</td>
+    </tr>
+    <tr>
+    <td><strong>Ignored</strong></td>
+    <td>Packets dropped because input buffer is full</td>
+    <td>Sustained high traffic, small buffer allocation</td>
+    <td>HIGH – needs buffer tuning or capacity upgrade</td>
+    </tr>
+    <tr>
+    <td><strong>Overrun</strong></td>
+    <td>Hardware receive buffer overflow</td>
+    <td>Traffic burst exceeds hardware capacity</td>
+    <td>HIGH – hardware limitation</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Reading interface counters:</strong></p>
+    <pre><code>! Cisco IOS/IOS-XE
+show interfaces GigabitEthernet0/1
+  5 minute input rate 450000000 bits/sec, 37000 packets/sec
+  5 minute output rate 320000000 bits/sec, 28000 packets/sec
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 output errors, 0 collisions, 0 interface resets
+
+! Arista EOS
+show interfaces Ethernet1 counters errors
+
+! Junos
+show interfaces ge-0/0/0 extensive | match error
+
+! Linux
+ip -s link show eth0
+ethtool -S eth0 | grep -i error</code></pre>
+    <p><strong>Critical interpretation rule:</strong> Error counters are
+    cumulative since the last clear. A counter showing 47 CRC errors
+    means nothing without context. You need the <em>rate</em>. Clear the
+    counters (<code>clear counters &lt;interface&gt;</code>), wait a
+    known interval, then check again. If 47 CRC errors accumulated in 5
+    minutes, that is a serious problem. If they accumulated over 6
+    months, it is noise.</p>
+    <h3 id="traceroute-and-mtr-for-loss-isolation">Traceroute and MTR
+    for Loss Isolation</h3>
+    <p>MTR (My Traceroute) is the primary tool for isolating where in
+    the path packet loss occurs. It combines traceroute’s hop-by-hop
+    path discovery with sustained ping statistics, providing loss
+    percentage, average latency, jitter, and worst-case latency at every
+    hop [4].</p>
+    <pre><code>HOST: source                           Loss%   Snt   Last   Avg  Best  Wrst StDev
+  1.|-- 10.0.0.1 (gateway)             0.0%   200    0.3   0.4   0.2   1.1   0.1
+  2.|-- isp-pe.example.net             0.0%   200    2.8   3.0   2.5   5.2   0.4
+  3.|-- core-rtr.isp.net              22.5%   200   11.4  12.1  10.8  48.2   6.3
+  4.|-- ix-peer.exchange.net           0.0%   200   14.9  15.2  14.5  18.1   0.5
+  5.|-- edge.destination.com           0.0%   200   16.1  16.4  15.8  19.3   0.6</code></pre>
+    <p><strong>The five rules of MTR interpretation:</strong></p>
+    <ol type="1">
+    <li><p><strong>Loss at a single hop that does not persist downstream
+    is NOT real packet loss.</strong> Hop 3 above shows 22.5% loss, but
+    hops 4 and 5 show 0%. The router at hop 3 is rate-limiting ICMP
+    TTL-exceeded messages. Transit traffic is flowing fine. ISP core
+    routers deprioritize ICMP to protect the control plane CPU.</p></li>
+    <li><p><strong>Loss that begins at a hop and persists through all
+    subsequent hops IS real packet loss.</strong> If hops 3, 4, and 5
+    all showed 22.5%, the problem is at or before hop 3.</p></li>
+    <li><p><strong>Always run MTR in both directions.</strong> Internet
+    routing is asymmetric. The return path may traverse entirely
+    different routers. Loss on the return path appears as loss at the
+    source but cannot be diagnosed from a unidirectional test. Ask the
+    remote end to run MTR back toward you.</p></li>
+    <li><p><strong>Use sufficient probes.</strong> 10 probes is
+    statistically meaningless. Run at least 100 probes
+    (<code>mtr -c 200</code>) over several minutes. Brief micro-bursts
+    of loss require sustained observation to detect.</p></li>
+    <li><p><strong>Asterisks do not mean failure.</strong> Many transit
+    routers are configured to silently drop ICMP. Missing hops in the
+    trace do not indicate a problem as long as subsequent hops respond
+    normally.</p></li>
+    </ol>
+    <h3 id="where-packet-loss-occurs-the-taxonomy">Where Packet Loss
+    Occurs: The Taxonomy</h3>
+    <pre><code>PACKET LOSS LOCATION MAP
+================================================================
+
+  Source --&gt; [NIC] --&gt; [Switch port] --&gt; [Uplink] --&gt; [WAN] --&gt; [Destination]
+     |         |           |              |           |            |
+     |     NIC errors   Port errors    Uplink      Carrier     Remote
+     |     driver bug   VLAN mismatch  congestion  fiber cut   host issue
+     |     MTU issue    STP blocking   QoS drops   BGP issue   firewall
+     |                  duplex issue   TCAM full   congestion   rate limit
+     
+  Layer 1: CRC, runts, giants     --&gt; Physical problem
+  Layer 2: STP blocking, VLAN     --&gt; Switching problem
+  Layer 3: Routing, ACL, TCAM     --&gt; Forwarding problem
+  Layer 4: Firewall, NAT, QoS     --&gt; Policy problem</code></pre>
+    <hr />
+    <h2 id="latency-investigation">3. Latency Investigation</h2>
+    <p>Latency has three components: propagation delay (speed of light
+    in fiber), serialization delay (time to clock bits onto the wire),
+    and queuing delay (time spent waiting in buffers). The first two are
+    fixed by physics and link speed. The third is variable and is where
+    latency problems almost always live [5].</p>
+    <h3 id="per-hop-latency-analysis">Per-Hop Latency Analysis</h3>
+    <pre><code>HOST: source                           Loss%   Snt   Last   Avg  Best  Wrst StDev
+  1.|-- gateway.local                   0.0%   200    0.4   0.5   0.3   1.2   0.1
+  2.|-- isp-pe.example.net              0.0%   200    3.1   3.2   2.8   4.5   0.3
+  3.|-- core.isp-west.net               0.0%   200   12.3  12.5  11.8  15.2   0.5
+  4.|-- core.isp-east.net               0.0%   200   42.1  42.5  41.8  45.3   0.6
+  5.|-- edge.destination.com            0.0%   200   43.2  43.5  42.9  46.1   0.5</code></pre>
+    <p><strong>Interpretation:</strong> The jump from 12.5ms at hop 3 to
+    42.5ms at hop 4 represents a 30ms increase. This is consistent with
+    a transcontinental fiber path (speed of light in fiber is
+    approximately 200,000 km/s, or roughly 5ms per 1,000km). A 30ms jump
+    suggests approximately 6,000km of fiber – consistent with US west
+    coast to east coast. This is physics, not a problem.</p>
+    <p><strong>What IS a problem:</strong> If hop 3 to hop 4 normally
+    shows 30ms but today shows 90ms, the extra 60ms is queuing delay –
+    congestion on that link. Compare to historical baseline.</p>
+    <h3 id="bufferbloat-detection">Bufferbloat Detection</h3>
+    <p>Bufferbloat occurs when network equipment has excessively large
+    buffers that absorb bursts without dropping packets, but introduce
+    enormous queuing delay. The symptom is that latency increases
+    dramatically under load while packet loss remains near zero – the
+    opposite of what classical congestion management expects [6].</p>
+    <p><strong>Detection methodology:</strong></p>
+    <pre><code>BUFFERBLOAT DETECTION
+================================================================
+
+  1. Measure baseline latency (no load):
+     ping -c 50 &lt;destination&gt;
+     Record: avg latency, jitter
+     
+  2. Saturate the link (create load):
+     iperf3 -c &lt;destination&gt; -t 30    (TCP, saturate downstream)
+     
+  3. Measure latency DURING load (simultaneously):
+     ping -c 50 &lt;destination&gt;
+     Record: avg latency, jitter
+     
+  4. Compare:
+     Baseline: 15ms avg, 2ms jitter
+     Under load: 15ms avg, 3ms jitter  --&gt; No bufferbloat (good)
+     Under load: 350ms avg, 80ms jitter --&gt; Severe bufferbloat
+     
+  Rule of thumb:
+    - &lt; 5ms increase under load: Excellent (AQM working)
+    - 5-30ms increase: Acceptable
+    - 30-100ms increase: Moderate bufferbloat
+    - &gt; 100ms increase: Severe bufferbloat -- needs AQM</code></pre>
+    <p><strong>Dedicated test tools:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Tool</th>
+    <th>Method</th>
+    <th>What It Measures</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Waveform bufferbloat test</td>
+    <td>Browser-based, concurrent up/down + latency</td>
+    <td>Latency under load, grades A-F</td>
+    </tr>
+    <tr>
+    <td>flent (RRUL test)</td>
+    <td>CLI, Realtime Response Under Load</td>
+    <td>Per-flow latency, bandwidth, CDF plots</td>
+    </tr>
+    <tr>
+    <td>DSLReports speed test</td>
+    <td>Browser-based (now limited availability)</td>
+    <td>Bandwidth + bufferbloat grade</td>
+    </tr>
+    <tr>
+    <td>irtt</td>
+    <td>CLI, isochronous round-trip time</td>
+    <td>Precise latency measurement under controlled load</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Remediation:</strong> Active Queue Management (AQM).
+    Modern solutions include fq_codel (fair queuing with controlled
+    delay) and CAKE (Common Applications Kept Enhanced). Both are
+    available in Linux and OpenWrt. CAKE is the current state of the art
+    – it combines AQM, flow isolation, and traffic shaping into a single
+    queuing discipline [6].</p>
+    <h3 id="qos-misconfiguration-symptoms">QoS Misconfiguration
+    Symptoms</h3>
+    <p>QoS misconfiguration is a common source of latency and jitter
+    problems that does not show up as packet loss until queues are full.
+    The symptoms are subtle: voice calls sound robotic, video freezes
+    momentarily, interactive SSH sessions feel sluggish, but bulk
+    transfers work fine.</p>
+    <pre><code>QoS MISCONFIGURATION CHECKLIST
+================================================================
+
+  1. Are DSCP markings being preserved across the path?
+     - Some transit providers strip or remark DSCP to 0
+     - Test: capture at ingress and egress, compare DSCP values
+     
+  2. Is the correct traffic being matched?
+     - show policy-map interface &lt;int&gt;
+     - Check: does the &quot;match&quot; criteria actually match the traffic?
+     - Common mistake: matching on port 5060 (SIP) but not
+       on the RTP media ports (dynamic range 10000-20000)
+     
+  3. Are queues actually servicing traffic?
+     - show policy-map interface &lt;int&gt;
+     - Check: queue drops vs packets serviced ratio
+     - If priority queue has drops, bandwidth allocation is wrong
+     
+  4. Is shaping rate correct?
+     - If you shape to 100 Mbps but the circuit is 50 Mbps,
+       packets pass the shaper and hit the carrier&#39;s policer,
+       which drops without regard to DSCP priority
+     - Shape to SLIGHTLY below contracted rate (e.g., 48 Mbps)
+     
+  5. Is the policer on the right interface?
+     - Input vs output matters
+     - Common mistake: policy applied to wrong direction</code></pre>
+    <hr />
+    <h2 id="bgp-hijack-detection-and-response">4. BGP Hijack Detection
+    and Response</h2>
+    <p>A BGP hijack occurs when an autonomous system originates a prefix
+    it does not own, causing some or all of the Internet to route
+    traffic for that prefix to the hijacker instead of the legitimate
+    owner. BGP has no built-in authentication of origin – any AS can
+    announce any prefix, and its neighbors will accept it by default.
+    This is the fundamental vulnerability that RPKI and ROV are designed
+    to address [7].</p>
+    <h3 id="how-bgp-hijacks-work">How BGP Hijacks Work</h3>
+    <pre><code>BGP HIJACK MECHANICS
+================================================================
+
+  Normal state:
+  AS64500 (legitimate owner) announces 203.0.113.0/24
+  All Internet traffic for 203.0.113.0/24 reaches AS64500
+  
+  Hijack (origin hijack):
+  AS66666 (attacker) announces 203.0.113.0/24
+  Some ASes prefer AS66666&#39;s route (shorter AS path, closer peer)
+  Traffic is split -- some reaches AS64500, some goes to AS66666
+  
+  Hijack (more-specific prefix):
+  AS66666 announces 203.0.113.0/25 and 203.0.113.128/25
+  Longest prefix match ALWAYS wins in BGP
+  ALL traffic now goes to AS66666 (most devastating variant)
+  
+  Route leak (accidental hijack):
+  AS64501 (transit customer) receives 203.0.113.0/24 from AS64500
+  AS64501 accidentally re-announces it to AS64502 (another provider)
+  AS64502 propagates it globally
+  Traffic takes suboptimal path through AS64501</code></pre>
+    <h3 id="detection-tools-and-monitoring">Detection Tools and
+    Monitoring</h3>
+    <p><strong>RPKI and Route Origin Validation (ROV):</strong></p>
+    <p>RPKI (Resource Public Key Infrastructure) allows IP prefix
+    holders to cryptographically sign Route Origin Authorizations (ROAs)
+    that specify which ASes are authorized to originate their prefixes.
+    Routers performing ROV check incoming BGP announcements against the
+    RPKI database and can reject or deprioritize announcements that
+    violate the ROA [8].</p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>RPKI State</th>
+    <th>Meaning</th>
+    <th>Recommended Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Valid</td>
+    <td>ROA exists, announcement matches</td>
+    <td>Accept (prefer)</td>
+    </tr>
+    <tr>
+    <td>Invalid</td>
+    <td>ROA exists, announcement does NOT match</td>
+    <td>Reject or deprioritize</td>
+    </tr>
+    <tr>
+    <td>Not Found</td>
+    <td>No ROA exists for this prefix</td>
+    <td>Accept (default)</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>BGP Route Collectors and Looking Glasses:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Resource</th>
+    <th>URL</th>
+    <th>What It Provides</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>RIPE RIS (Routing Information Service)</td>
+    <td>stat.ripe.net</td>
+    <td>BGP updates, AS path history, BGPlay visualization</td>
+    </tr>
+    <tr>
+    <td>RouteViews (University of Oregon)</td>
+    <td>routeviews.org</td>
+    <td>Multi-vantage-point BGP data, MRT dumps</td>
+    </tr>
+    <tr>
+    <td>Cloudflare Radar</td>
+    <td>radar.cloudflare.com/routing</td>
+    <td>Real-time BGP hijack detection, RPKI validation</td>
+    </tr>
+    <tr>
+    <td>BGPStream (CAIDA)</td>
+    <td>bgpstream.com</td>
+    <td>Real-time and historical BGP data API</td>
+    </tr>
+    <tr>
+    <td>Hurricane Electric BGP Toolkit</td>
+    <td>bgp.he.net</td>
+    <td>AS info, prefix lookup, looking glass</td>
+    </tr>
+    <tr>
+    <td>MANRS Observatory</td>
+    <td>observatory.manrs.org</td>
+    <td>Routing security metrics per AS</td>
+    </tr>
+    <tr>
+    <td>BGPalerter</td>
+    <td>github.com/nttgin/BGPalerter</td>
+    <td>Self-hosted real-time monitoring for your prefixes</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>BGPalerter</strong> is particularly valuable for network
+    operators. It is a pre-configured, self-hosted monitoring tool that
+    watches your prefixes in real-time and alerts on visibility loss,
+    RPKI invalid announcements, hijacks, and ROA misconfiguration. It
+    requires minimal configuration – provide your prefixes and ASN, and
+    it begins monitoring immediately via public route collector feeds
+    [9].</p>
+    <h3 id="incident-response-for-hijacked-prefixes">Incident Response
+    for Hijacked Prefixes</h3>
+    <pre><code>BGP HIJACK RESPONSE PROCEDURE
+================================================================
+
+  DETECTION (T+0):
+  Alert from BGPalerter, Cloudflare Radar, or customer reports
+  
+  CONFIRMATION (T+0 to T+5 min):
+  1. Check RIPE RIS/BGPlay: is another AS originating your prefix?
+  2. Check RouteViews looking glass: from how many vantage points?
+  3. Verify your own BGP: are you still announcing the prefix?
+  4. Check RPKI: is the hijacker&#39;s announcement RPKI-invalid?
+     (If your ROA is in place, ROV-enabled networks reject it)
+  
+  MITIGATION (T+5 to T+30 min):
+  5. If possible, announce more-specific prefixes:
+     If you announce /24, announce two /25s
+     (Only if your RIR allocation allows and ROAs cover them)
+  6. Contact the offending AS directly (NOC contact via PeeringDB)
+  7. Contact your upstream transit providers:
+     - Ask them to filter the hijacker&#39;s announcement
+     - Provide evidence (BGPlay screenshots, looking glass output)
+  8. Report to your RIR (RIPE, ARIN, APNIC, etc.)
+  
+  ESCALATION (T+30 min to T+2 hours):
+  9. If the hijacker is unresponsive:
+     - Contact the hijacker&#39;s upstream providers
+     - File abuse reports with transit providers
+     - Engage your RIR&#39;s security response team
+  10. Post to network operator mailing lists (NANOG, RIPE NCC)
+  
+  PREVENTION (post-incident):
+  11. If you do not have ROAs: create them NOW
+  12. Deploy BGPalerter or equivalent for continuous monitoring
+  13. Set max-prefix limits on all BGP sessions
+  14. Implement prefix filters on all customer BGP sessions</code></pre>
+    <h3 id="rpki-deployment-status">RPKI Deployment Status</h3>
+    <p>As of 2025, RPKI ROV deployment has reached significant but not
+    universal coverage. Major networks including Cloudflare, Google,
+    Amazon, Microsoft, AT&amp;T, NTT, and many European and Asian
+    carriers now perform ROV. However, the ecosystem still has gaps. A
+    “stealthy” hijack can evade detection when the victim’s ROV-enabled
+    neighbors correctly reject the invalid announcement (so the victim’s
+    control plane looks normal), but traffic is silently rerouted
+    through legacy non-ROV networks along the data plane path [10].</p>
+    <p>ASPA (AS Provider Authorization) is an emerging standard that
+    extends RPKI protection to address route leaks in addition to origin
+    hijacks. ASPA allows an AS to publish its authorized upstream
+    providers to the RPKI, enabling ASes along the path to verify that
+    BGP announcements follow valley-free routing rules [11].</p>
+    <hr />
+    <h2 id="cable-cut-procedures">5. Cable Cut Procedures</h2>
+    <p>Fiber cuts are the most common cause of major network outages. A
+    single backhoe in the wrong place can sever dozens of fibers
+    carrying terabits of traffic. Responding to a cable cut requires
+    immediate traffic rerouting, carrier coordination, and customer
+    communication – simultaneously [12].</p>
+    <h3 id="carrier-escalation-timeline">Carrier Escalation
+    Timeline</h3>
+    <pre><code>CABLE CUT RESPONSE TIMELINE
+================================================================
+
+  T+0:      Monitoring alerts fire. Multiple circuits drop simultaneously.
+            Interface counters show light loss (RX power drops to -inf dBm).
+            BGP sessions drop on affected circuits.
+            
+  T+2 min:  Confirm cable cut vs equipment failure:
+            - Multiple circuits on same path fail simultaneously = cut
+            - Single circuit fails = equipment or SFP failure
+            - Check carrier status page and social media
+            
+  T+5 min:  Open carrier trouble ticket (HIGHEST SEVERITY):
+            - Circuit IDs affected
+            - Time of failure
+            - Monitoring evidence (interface status, light levels)
+            - Request ETR (estimated time to repair)
+            
+  T+10 min: Activate traffic rerouting:
+            - BGP: announce prefixes through alternate transit
+            - MPLS: TE tunnel re-optimization
+            - SD-WAN: automatic failover should have occurred
+            - Verify failover is working (test from external vantage)
+            
+  T+15 min: Customer communication (first update):
+            - &quot;We have identified a carrier fiber cut affecting...&quot;
+            - &quot;Traffic has been rerouted to diverse paths...&quot;
+            - &quot;We are working with &lt;carrier&gt; for repair timeline...&quot;
+            
+  T+30 min: Get ETR from carrier. Typical repair timelines:
+            - Underground metro: 4-12 hours
+            - Long-haul buried: 8-24 hours
+            - Aerial (pole-mounted): 2-8 hours
+            - Submarine cable: 5-14 DAYS
+            
+  T+1 hr:   Second customer update with ETR
+  
+  T+2 hr:   Escalate within carrier if no ETR received
+             Contact carrier account manager (not just NOC)
+             
+  Ongoing:  Hourly updates to customers until resolved
+            Monitor backup paths for capacity saturation
+            Prepare for primary path restoration and failback</code></pre>
+    <h3 id="diversity-verification">Diversity Verification</h3>
+    <p>A cable cut only causes an outage if your traffic has no
+    alternate path. Diversity verification confirms that your “diverse”
+    circuits actually traverse physically separate paths – a claim that
+    carriers sometimes make loosely.</p>
+    <pre><code>DIVERSITY VERIFICATION CHECKLIST
+================================================================
+
+  1. Physical path diversity:
+     - Do the two circuits enter the building through different conduits?
+     - Do they traverse different street-level paths?
+     - Do they use different carrier vaults and manholes?
+     - Are they on different ring segments (if ring topology)?
+     
+  2. Carrier diversity:
+     - Different carriers? (True diversity)
+     - Same carrier, different fiber? (Usually diverse, verify)
+     - Same carrier, &quot;diverse&quot; but same conduit? (NOT diverse)
+     
+  3. Building entry diversity:
+     - Different building entry points?
+     - Different riser paths inside the building?
+     - Different meet-me rooms (in colo)?
+     
+  4. Route diversity proof:
+     - Request carrier&#39;s KMZ/KML files showing physical path
+     - Overlay on map -- look for points where paths converge
+     - Single points of convergence = single points of failure
+     
+  5. Long-haul diversity:
+     - Railroad right-of-way: many carriers share the same route
+     - Two &quot;diverse&quot; carriers may follow the same railroad for 200 miles
+     - True long-haul diversity requires different geographic corridors</code></pre>
+    <h3 id="traffic-rerouting-during-a-cut">Traffic Rerouting During a
+    Cut</h3>
+    <p>When a primary circuit fails, traffic must reroute automatically
+    or be manually redirected. The mechanism depends on the network
+    architecture:</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Technology</th>
+    <th>Reroute Mechanism</th>
+    <th>Convergence Time</th>
+    <th>Operator Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>BGP (multi-homed)</td>
+    <td>Withdraw route, prefer alternate next-hop</td>
+    <td>30-90 seconds (default timers)</td>
+    <td>Verify alternate path has capacity</td>
+    </tr>
+    <tr>
+    <td>BGP (with BFD)</td>
+    <td>BFD detects failure in ms, triggers BGP withdraw</td>
+    <td>1-3 seconds</td>
+    <td>Ensure BFD is configured on all critical peers</td>
+    </tr>
+    <tr>
+    <td>MPLS TE (FRR)</td>
+    <td>Fast Reroute to pre-computed backup tunnel</td>
+    <td>50ms</td>
+    <td>Pre-configure backup tunnels</td>
+    </tr>
+    <tr>
+    <td>SD-WAN</td>
+    <td>Automatic failover to secondary transport</td>
+    <td>1-10 seconds</td>
+    <td>Verify SLA-based path selection is active</td>
+    </tr>
+    <tr>
+    <td>OSPF/IS-IS</td>
+    <td>SPF recalculation</td>
+    <td>1-5 seconds (with tuned timers)</td>
+    <td>None – automatic</td>
+    </tr>
+    <tr>
+    <td>Static routes (floating)</td>
+    <td>Higher-metric static route activates</td>
+    <td>Immediate on link failure</td>
+    <td>Crude but reliable for simple topologies</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="ddos-response">6. DDoS Response</h2>
+    <p>A Distributed Denial of Service attack overwhelms the target’s
+    network capacity, compute resources, or both. The response must
+    happen faster than the attack can saturate the infrastructure, which
+    means pre-positioning mitigation capabilities before an attack
+    occurs. Trying to deploy DDoS mitigation during an active attack is
+    like buying insurance while the house is on fire [13].</p>
+    <h3 id="attack-classification">Attack Classification</h3>
+    <pre><code>DDoS ATTACK TAXONOMY
+================================================================
+
+  VOLUMETRIC (Layer 3-4):
+  - Goal: Saturate bandwidth (fill the pipe)
+  - Methods: UDP flood, DNS amplification, NTP amplification,
+             memcached amplification, SSDP reflection
+  - Scale: 100 Gbps to 3+ Tbps
+  - Detection: Interface utilization spikes, flow data shows
+               massive inbound traffic from many sources
+  - Mitigation: Upstream scrubbing, blackhole routing
+  
+  PROTOCOL (Layer 3-4):
+  - Goal: Exhaust device state tables
+  - Methods: SYN flood, ACK flood, fragmentation attacks
+  - Scale: Millions of packets/sec
+  - Detection: Connection table exhaustion, high PPS with low BPS,
+               firewall/LB state table full
+  - Mitigation: SYN cookies, rate limiting, scrubbing
+  
+  APPLICATION (Layer 7):
+  - Goal: Exhaust application resources
+  - Methods: HTTP floods, Slowloris, DNS query floods,
+             API abuse, credential stuffing
+  - Scale: Thousands of requests/sec (low bandwidth)
+  - Detection: Application response time increases, error rates
+               spike, CPU/memory exhaustion on servers
+  - Mitigation: WAF rules, rate limiting, CAPTCHA, behavioral analysis</code></pre>
+    <h3 id="mitigation-procedures">Mitigation Procedures</h3>
+    <p><strong>Remotely Triggered Blackhole Routing (RTBH):</strong></p>
+    <p>RTBH is the nuclear option – it drops ALL traffic to the targeted
+    IP address, including legitimate traffic. Use it when the attack
+    threatens collateral damage to other services sharing the same
+    network infrastructure. RTBH is implemented by advertising the
+    attacked IP to your upstream providers with a blackhole community,
+    causing them to null-route traffic destined for that IP before it
+    enters your network [14].</p>
+    <pre><code>RTBH ACTIVATION
+================================================================
+
+  1. Identify attacked destination IP (from flow data, interface stats)
+  
+  2. On your trigger router, create a host route with the
+     blackhole next-hop and community:
+     
+     ip route 203.0.113.50/32 192.0.2.1 tag 666
+     
+     route-map BLACKHOLE permit 10
+       match tag 666
+       set community &lt;upstream-ASN&gt;:666
+       set ip next-hop 192.0.2.1
+     
+     (192.0.2.1 is pointed at null0 on all routers)
+     
+  3. Redistribute this route into BGP toward your upstream:
+     Upstream provider recognizes the blackhole community
+     and null-routes the prefix at their edge
+     
+  4. Attack traffic is dropped upstream before it enters your network
+  
+  5. IMPORTANT: Only blackhole the ATTACKED IP, not your entire prefix
+     Blackholing a /24 when only one /32 is attacked causes a
+     self-inflicted denial of service
+  
+  6. Monitor: once attack subsides, REMOVE the blackhole route
+     Test incrementally -- remove and watch for attack resumption</code></pre>
+    <p><strong>Scrubbing Center Activation:</strong></p>
+    <p>Scrubbing centers (Cloudflare Magic Transit, Akamai Prolexic, AWS
+    Shield Advanced, Radware) inspect traffic in real-time, filter
+    attack traffic, and forward only clean traffic to your network.
+    Unlike blackhole routing, scrubbing preserves legitimate traffic
+    [15].</p>
+    <pre><code>SCRUBBING CENTER ACTIVATION
+================================================================
+
+  PRE-POSITIONED (always-on):
+  - Traffic always flows through scrubbing center
+  - No activation delay
+  - Higher cost, minimal additional latency
+  - Best for frequently targeted organizations
+  
+  ON-DEMAND (activated during attack):
+  1. Detect attack (monitoring, flow analysis, NOC)
+  2. Contact scrubbing provider or activate via API/portal
+  3. Redirect traffic to scrubbing center:
+     - BGP: Provider announces your prefix from their AS
+       (more-specific or with shorter AS path)
+     - DNS: Change authoritative records to point to scrubbing IPs
+     - GRE/IPsec tunnel: Clean traffic tunneled back to you
+  4. Activation time: 5-15 minutes (BGP propagation)
+  5. Verify clean traffic is arriving, attack traffic is being dropped
+  
+  HYBRID (common in practice):
+  - Always-on for DNS and web (Cloudflare, Akamai)
+  - On-demand for network layer (transit scrubbing)
+  - Volumetric attacks handled at network edge
+  - Application attacks handled at WAF/CDN layer</code></pre>
+    <h3 id="upstream-coordination">Upstream Coordination</h3>
+    <p>DDoS mitigation often requires coordination with upstream
+    providers, Internet exchanges, and sometimes law enforcement.
+    Establish these relationships before an attack.</p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Contact</th>
+    <th>When to Engage</th>
+    <th>What They Can Do</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Transit provider NOC</strong></td>
+    <td>Volumetric attack exceeding your capacity</td>
+    <td>Apply upstream ACLs, blackhole, rate limit</td>
+    </tr>
+    <tr>
+    <td><strong>IX (Internet Exchange)</strong></td>
+    <td>Attack traffic arriving via peering</td>
+    <td>Block specific source ASes at the IX fabric</td>
+    </tr>
+    <tr>
+    <td><strong>Colocation provider</strong></td>
+    <td>Physical infrastructure at risk (power, cooling)</td>
+    <td>Cross-connect changes, emergency capacity</td>
+    </tr>
+    <tr>
+    <td><strong>Scrubbing provider</strong></td>
+    <td>On-demand activation needed</td>
+    <td>Begin scrubbing, provide attack forensics</td>
+    </tr>
+    <tr>
+    <td><strong>Law enforcement (FBI IC3, NCA)</strong></td>
+    <td>Extortion (ransom DDoS), data theft</td>
+    <td>Investigation, takedown of C2 infrastructure</td>
+    </tr>
+    <tr>
+    <td><strong>ISACs (sector-specific)</strong></td>
+    <td>Coordinated attacks against your sector</td>
+    <td>Shared intelligence, collective defense</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="spanning-tree-incidents">7. Spanning Tree Incidents</h2>
+    <p>Spanning tree incidents are among the most destructive network
+    events because they affect the Layer 2 foundation that everything
+    else relies on. A spanning tree loop can bring down an entire campus
+    network in seconds by creating a broadcast storm that saturates all
+    links, overwhelms switch CPUs, and makes the network completely
+    unusable [16].</p>
+    <h3 id="how-stp-loops-form">How STP Loops Form</h3>
+    <pre><code>STP LOOP FORMATION
+================================================================
+
+  Normal operation (STP converged):
+  
+  Root Bridge (SW1) -- priority 4096
+       |            \
+       |             \
+     [SW2]          [SW3]
+       |    blocked    |
+       +------X--------+    &lt;-- STP blocks one path to prevent loop
+       
+  Loop trigger scenarios:
+  
+  1. Rogue switch connected with lower priority:
+     User plugs in unmanaged switch with default priority (32768)
+     --&gt; If it has lower bridge ID, it claims root
+     --&gt; All ports reconverge, 30-50 second outage (classic STP)
+     --&gt; With RSTP: 1-6 seconds, but still disruptive
+     
+  2. Unidirectional link failure:
+     BPDUs stop flowing in one direction (bad cable, bad SFP)
+     Switch thinks root bridge is gone
+     Blocked port transitions to forwarding
+     Both paths now forward --&gt; LOOP
+     
+  3. BPDU not received (CPU overload):
+     Switch CPU is overwhelmed (broadcast storm, control plane attack)
+     BPDUs are not processed in time
+     Max-age timer expires (20 seconds)
+     Blocked ports transition to forwarding --&gt; LOOP INTENSIFIES</code></pre>
+    <h3 id="loop-detection-and-response">Loop Detection and
+    Response</h3>
+    <p><strong>Symptoms of a spanning tree loop:</strong></p>
+    <ul>
+    <li>Interface utilization jumps to 100% on multiple ports
+    simultaneously</li>
+    <li>CPU on all switches in the broadcast domain spikes to 100%</li>
+    <li>MAC address table flapping (same MAC seen on multiple
+    ports)</li>
+    <li>Broadcast storm – syslog flooded with messages</li>
+    <li>Network becomes completely unresponsive</li>
+    <li>Switch management interfaces unreachable</li>
+    </ul>
+    <p><strong>Emergency response:</strong></p>
+    <pre><code>STP LOOP EMERGENCY RESPONSE
+================================================================
+
+  1. IDENTIFY the loop physically:
+     - Which switches have 100% CPU and saturated uplinks?
+     - Check port LED activity -- looped ports blink frantically
+     - show spanning-tree summary -- look for topology changes
+     - show mac address-table -- look for MAC flapping
+     
+  2. BREAK the loop immediately:
+     - Shut down the suspected looped port: shutdown
+     - If you cannot identify the port, shut down all
+       non-essential access ports on the affected switch
+     - Monitor: does CPU drop? Does traffic normalize?
+     
+  3. FIND ROOT CAUSE:
+     - show spanning-tree root -- who is root bridge?
+     - Is it the INTENDED root bridge?
+     - show spanning-tree detail -- look for topology change counters
+     - Check for unauthorized switches (LLDP/CDP neighbors)
+     
+  4. PREVENT RECURRENCE:
+     - BPDU Guard on all access ports (err-disable on BPDU receipt)
+     - Root Guard on all ports where root should never be learned
+     - Loop Guard on all non-designated ports
+     - Set explicit root bridge priority (4096 for primary, 8192 for secondary)</code></pre>
+    <h3 id="stp-protection-features">STP Protection Features</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>What It Does</th>
+    <th>Where to Apply</th>
+    <th>Failure Mode</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>BPDU Guard</strong></td>
+    <td>Err-disables port if BPDU received</td>
+    <td>Access ports (with PortFast)</td>
+    <td>Port shuts down (safe)</td>
+    </tr>
+    <tr>
+    <td><strong>Root Guard</strong></td>
+    <td>Prevents port from becoming root port</td>
+    <td>Ports facing non-root switches</td>
+    <td>Port goes to root-inconsistent (blocking)</td>
+    </tr>
+    <tr>
+    <td><strong>Loop Guard</strong></td>
+    <td>Prevents blocked port from transitioning to forwarding on BPDU
+    loss</td>
+    <td>Non-designated ports</td>
+    <td>Port goes to loop-inconsistent (blocking)</td>
+    </tr>
+    <tr>
+    <td><strong>UDLD (Unidirectional Link Detection)</strong></td>
+    <td>Detects and disables unidirectional links</td>
+    <td>Fiber uplinks</td>
+    <td>Err-disables port</td>
+    </tr>
+    <tr>
+    <td><strong>Storm Control</strong></td>
+    <td>Rate-limits broadcast/multicast/unicast floods</td>
+    <td>All ports</td>
+    <td>Drops excess frames or shuts port</td>
+    </tr>
+    <tr>
+    <td><strong>PortFast</strong></td>
+    <td>Skips STP listening/learning, goes straight to forwarding</td>
+    <td>Access ports ONLY</td>
+    <td>Immediate forwarding (loop risk if misapplied)</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Critical rule:</strong> BPDU Guard and PortFast must
+    always be deployed together on access ports. PortFast without BPDU
+    Guard creates a loop vulnerability – if someone plugs a switch into
+    a PortFast port, it bypasses STP and immediately creates a potential
+    loop. BPDU Guard ensures that if a BPDU is received on a PortFast
+    port (indicating a switch, not an end device), the port is shut
+    down.</p>
+    <hr />
+    <h2 id="dns-resolution-failures">8. DNS Resolution Failures</h2>
+    <p>DNS is the single most common root cause of “the network is down”
+    reports that are not actually network problems. When DNS fails,
+    every application that depends on name resolution fails – web,
+    email, API calls, service discovery, certificate validation,
+    authentication (Kerberos, LDAP). The network is working perfectly,
+    but nothing can find anything [17].</p>
+    <h3 id="recursive-vs-authoritative-diagnosis">Recursive vs
+    Authoritative Diagnosis</h3>
+    <p>The critical first step is determining whether the failure is in
+    the recursive resolver (your side) or the authoritative server
+    (their side). These are fundamentally different problems with
+    different owners.</p>
+    <pre><code>DNS FAILURE DIAGNOSIS
+================================================================
+
+  Step 1: Test with your recursive resolver (system default):
+    dig example.com A
+    --&gt; SERVFAIL? Timeout? NXDOMAIN? Wrong answer?
+    
+  Step 2: Test with a public recursive resolver:
+    dig @8.8.8.8 example.com A
+    dig @1.1.1.1 example.com A
+    |
+    +-- Works with public resolver, fails with yours:
+    |   YOUR recursive resolver is broken
+    |   --&gt; Check resolver service health (named, unbound, PowerDNS recursor)
+    |   --&gt; Check resolver&#39;s upstream connectivity
+    |   --&gt; Check resolver&#39;s cache (poisoned? stale?)
+    |   --&gt; Check firewall allowing UDP/TCP 53 outbound from resolver
+    |
+    +-- Fails with public resolver too:
+    |   The AUTHORITATIVE side is broken
+    |   --&gt; Continue to step 3
+    |
+    +-- Works with public resolver AND yours:
+        Intermittent issue or already resolved
+        --&gt; Check TTLs, caching behavior
+    
+  Step 3: Query authoritative servers directly:
+    dig +trace example.com A
+    (Walks from root -&gt; TLD -&gt; authoritative)
+    |
+    +-- Referral to authoritative servers works,
+    |   but authoritative servers do not respond:
+    |   --&gt; Authoritative servers are down or unreachable
+    |   --&gt; Contact domain owner / DNS provider
+    |
+    +-- Referral chain is broken at TLD level:
+    |   --&gt; Delegation is wrong (NS records at registrar)
+    |   --&gt; Domain expired
+    |   --&gt; Registrar issue
+    |
+    +-- Authoritative returns wrong answer:
+        --&gt; Zone file error
+        --&gt; DNS hijack (check DNSSEC, compare with historical data)</code></pre>
+    <h3 id="common-dns-failure-modes">Common DNS Failure Modes</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Failure</th>
+    <th>Symptom</th>
+    <th>Root Cause</th>
+    <th>Resolution</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>SERVFAIL</td>
+    <td>Recursive returns SERVFAIL</td>
+    <td>DNSSEC validation failure, authoritative timeout</td>
+    <td>Check DNSSEC chain, check authoritative availability</td>
+    </tr>
+    <tr>
+    <td>NXDOMAIN</td>
+    <td>Domain not found</td>
+    <td>Expired domain, broken delegation, typo</td>
+    <td>Check registrar, check NS records at TLD</td>
+    </tr>
+    <tr>
+    <td>Timeout</td>
+    <td>No response</td>
+    <td>Firewall blocking DNS, resolver overloaded, authoritative
+    down</td>
+    <td>Check firewall rules, check resolver health</td>
+    </tr>
+    <tr>
+    <td>Wrong IP</td>
+    <td>Resolves to unexpected address</td>
+    <td>DNS hijack, stale cache, misconfigured zone</td>
+    <td>Flush cache, check authoritative zone, check DNSSEC</td>
+    </tr>
+    <tr>
+    <td>Slow resolution</td>
+    <td>2-5 second delays</td>
+    <td>Resolver overloaded, authoritative slow, TCP fallback</td>
+    <td>Check resolver metrics, check authoritative response time</td>
+    </tr>
+    <tr>
+    <td>Partial failure</td>
+    <td>Some records resolve, others don’t</td>
+    <td>Zone transfer failure (secondary out of date), missing
+    records</td>
+    <td>Check SOA serial, compare primary and secondary</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="dnssec-failure-investigation">DNSSEC Failure
+    Investigation</h3>
+    <p>DNSSEC failures present as SERVFAIL at the recursive resolver
+    because the resolver validates the cryptographic chain and rejects
+    invalid responses. The user sees a complete failure, but the DNS
+    data exists – it just fails validation.</p>
+    <div class="sourceCode" id="cb20"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if DNSSEC is the problem:</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Query with validation (normal):</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> @8.8.8.8 example.com A</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># --&gt; SERVFAIL</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Query without validation (bypass DNSSEC):</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> @8.8.8.8 +cd example.com A</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># --&gt; Returns answer (the data is there, but DNSSEC invalid)</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># If +cd returns an answer but normal query fails:</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># DNSSEC chain is broken somewhere</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Trace the DNSSEC chain:</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> +trace +dnssec example.com A</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Look for: missing RRSIG, expired signatures, DS/DNSKEY mismatch</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual validation:</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Use dnsviz.net -- it renders the full DNSSEC chain graphically</span></span></code></pre></div>
+    <hr />
+    <h2 id="network-war-room-operations">9. Network War Room
+    Operations</h2>
+    <p>When a major network incident escalates beyond a single
+    engineer’s ability to resolve, you open a war room (sometimes called
+    a bridge call or incident bridge). The war room is a coordinated
+    response structure where multiple teams work in parallel under a
+    single incident commander [18].</p>
+    <h3 id="who-to-call">Who to Call</h3>
+    <pre><code>NETWORK INCIDENT ESCALATION MATRIX
+================================================================
+
+  YOUR ORGANIZATION:
+  +-- NOC (Network Operations Center)
+  |   First responder. Triage, initial diagnosis, standard runbooks.
+  |   Escalates to engineering when runbook exhausted.
+  |
+  +-- Network Engineering
+  |   Deep technical expertise. Routing, switching, protocol analysis.
+  |   Owns complex troubleshooting and configuration changes.
+  |
+  +-- Security Operations (if suspected attack)
+  |   DDoS, hijack, breach. Forensics and threat intelligence.
+  |
+  +-- Application / SRE teams
+      Determine application impact. Activate app-level failover.
+      Provide customer-facing communication content.
+
+  EXTERNAL:
+  +-- Carrier / ISP NOC
+  |   Circuit failures, backbone issues, BGP problems upstream.
+  |   Dial the number on the circuit order. Use circuit ID, not
+  |   account number. Carrier NOCs respond to circuit IDs.
+  |
+  +-- Internet Exchange (IX) NOC
+  |   Peering port issues, IX fabric problems.
+  |   Contact via IX member portal or emergency number.
+  |
+  +-- Colocation Provider NOC
+  |   Power, cooling, physical access, cross-connect issues.
+  |   Usually 24/7 phone + portal.
+  |
+  +-- DNS Provider
+  |   If using external DNS (Cloudflare, Route53, NS1, Dyn).
+  |   Check their status page first, then open ticket.
+  |
+  +-- DDoS Scrubbing Provider
+  |   Activate on-demand scrubbing. Provide attack details.
+  |   Pre-established relationship required (cannot onboard during attack).
+  |
+  +-- Hardware Vendor TAC
+      Cisco TAC, Juniper JTAC, Arista TAC.
+      Severity 1 for production-down. Provide show tech output.</code></pre>
+    <h3 id="war-room-structure">War Room Structure</h3>
+    <pre><code>WAR ROOM ROLES
+================================================================
+
+  INCIDENT COMMANDER (IC):
+  - Owns the incident. Makes decisions. Controls the bridge.
+  - Does NOT troubleshoot. Coordinates others.
+  - Tracks timeline, assigns tasks, manages escalations.
+  
+  SCRIBE:
+  - Documents everything: timeline, actions, findings, decisions.
+  - Maintains the incident channel (Slack, Teams) with timestamped updates.
+  - Produces the postmortem timeline after resolution.
+  
+  TECHNICAL LEAD (per domain):
+  - Network engineer for network issues
+  - Systems engineer for server/application issues
+  - Security engineer for security incidents
+  - Each lead troubleshoots their domain and reports to IC.
+  
+  COMMUNICATIONS LEAD:
+  - Drafts customer-facing updates
+  - Posts to status page
+  - Coordinates with support team for customer escalations
+  - IC approves communications before they go out.
+  
+  LIAISON (for external parties):
+  - On the phone with the carrier NOC
+  - Relaying information between carrier and IC
+  - Tracking carrier ticket numbers and ETRs</code></pre>
+    <h3 id="war-room-discipline">War Room Discipline</h3>
+    <ol type="1">
+    <li><strong>One conversation at a time.</strong> The IC controls the
+    bridge. Side conversations go to side channels.</li>
+    <li><strong>State your name before speaking.</strong> “This is Sarah
+    from network engineering. I found…”</li>
+    <li><strong>Report findings, not theories.</strong> “Interface Gi0/1
+    shows 45,000 CRC errors in the last 10 minutes” not “I think the
+    cable is bad.”</li>
+    <li><strong>IC asks for updates on a cadence.</strong> Every 15
+    minutes: “Network team, what is your current status?”</li>
+    <li><strong>Document everything.</strong> The scribe captures every
+    action, finding, and decision with timestamps.</li>
+    <li><strong>Postmortem within 72 hours.</strong> The war room is not
+    over when the incident is resolved. It is over when the postmortem
+    is complete.</li>
+    </ol>
+    <hr />
+    <h2 id="real-world-incidents">10. Real-World Incidents</h2>
+    <h3 id="facebook-dns-outage-october-4-2021">Facebook DNS Outage –
+    October 4, 2021</h3>
+    <p><strong>Duration:</strong> Approximately 6 hours (15:39 UTC to
+    ~21:05 UTC)</p>
+    <p><strong>Impact:</strong> Facebook, Instagram, WhatsApp,
+    Messenger, and Oculus services globally unavailable. Facebook’s
+    internal tools also failed, preventing engineers from diagnosing the
+    problem remotely.</p>
+    <p><strong>Root cause:</strong> During routine maintenance, a
+    command intended to assess global backbone capacity inadvertently
+    disconnected all of Facebook’s data centers from each other and from
+    the Internet. The backbone is the network that connects Facebook’s
+    globally distributed data centers. When the backbone went down,
+    Facebook’s DNS servers – which were still operational – detected
+    that they could no longer reach the data centers and automatically
+    withdrew their BGP route announcements [19].</p>
+    <p><strong>Cascade mechanism:</strong></p>
+    <pre><code>FACEBOOK OCTOBER 2021 -- CASCADE
+================================================================
+
+  1. Maintenance command disconnects backbone
+     (intended: assess capacity; actual: withdrew all backbone routes)
+     
+  2. Data centers become isolated from each other
+     
+  3. DNS servers detect they cannot reach data centers
+     DNS servers are designed to withdraw BGP if backends are unreachable
+     (safety feature to prevent serving stale/wrong data)
+     
+  4. DNS servers withdraw BGP announcements for their own IP prefixes
+     The DNS servers at 129.134.30.0/23 and 185.89.218.0/23 disappear
+     
+  5. The rest of the Internet cannot resolve facebook.com, instagram.com, etc.
+     Not because DNS is broken -- because DNS IPs are UNREACHABLE
+     
+  6. Recovery requires physical access to data center equipment
+     Remote management tools also depended on Facebook&#39;s internal DNS
+     Engineers had to physically travel to data centers
+     Access control systems partially depended on Facebook infrastructure</code></pre>
+    <p><strong>Lessons learned:</strong> - DNS servers should not
+    automatically withdraw BGP advertisements without human confirmation
+    - Out-of-band management must not depend on the infrastructure it
+    manages - Physical access procedures must not depend on
+    network-connected systems - A single automation system should not
+    have the ability to disconnect all backbone links simultaneously -
+    BGP withdrawal as a safety mechanism can make recovery harder than
+    the original failure</p>
+    <h3
+    id="centurylinklevel-3-flowspec-incident-august-30-2020">CenturyLink/Level
+    3 Flowspec Incident – August 30, 2020</h3>
+    <p><strong>Duration:</strong> Approximately 5 hours (10:00 UTC to
+    ~15:30 UTC)</p>
+    <p><strong>Impact:</strong> CenturyLink/Level 3 is one of the
+    largest Tier 1 ISPs globally. The outage affected their entire
+    network and cascaded to thousands of downstream networks, impacting
+    Amazon, Cloudflare, Twitter, Xbox Live, Hulu, Discord, Reddit,
+    Steam, and many others. Approximately 3.5% of all global Internet
+    traffic was affected [20].</p>
+    <p><strong>Root cause:</strong> A BGP Flowspec rule – intended to
+    block unwanted traffic for a specific customer – was implemented
+    with wildcard matching instead of being scoped to the specific IP
+    address. Flowspec is a BGP extension that allows distributing
+    traffic filtering rules via BGP updates. The misconfigured flowspec
+    rule propagated across CenturyLink’s entire internal network,
+    causing BGP sessions to flap network-wide.</p>
+    <pre><code>CENTURYLINK AUGUST 2020 -- FLOWSPEC CASCADE
+================================================================
+
+  1. Operator creates flowspec rule to block traffic for customer
+     INTENDED: Block traffic to specific IP 203.0.113.50
+     ACTUAL: Wildcard match -- blocks traffic matching broad criteria
+     
+  2. Flowspec rule propagates via iBGP to all CenturyLink routers
+     (Flowspec rules are distributed like BGP routes)
+     
+  3. Routers begin dropping traffic matching the wildcard rule
+     Legitimate traffic dropped across the backbone
+     
+  4. BGP sessions begin flapping as routers lose connectivity
+     BGP update volume spikes from ~1.5 MB to &gt;26 MB per 15 minutes
+     
+  5. Cascading failure: route flapping causes convergence storms
+     Every BGP peer of CenturyLink sees route withdrawals and updates
+     Downstream networks lose routes to CenturyLink-connected destinations
+     
+  6. Recovery: NOC deploys global config change to block the
+     offending flowspec announcement
+     BGP sessions re-establish and routes reconverge</code></pre>
+    <p><strong>Lessons learned:</strong> - Flowspec rules must be
+    validated before deployment (peer review, staging) - Flowspec should
+    have scope limiters (max prefix impact, community-based distribution
+    control) - A single operator command should not be able to affect
+    the entire backbone - BGP update rate monitoring should trigger
+    automated circuit breakers - Tier 1 outages have asymmetric impact –
+    they affect thousands of downstream networks</p>
+    <h3 id="cloudflare-1.1.1.1-bgp-hijack-june-2019">Cloudflare 1.1.1.1
+    BGP Hijack – June 2019</h3>
+    <p><strong>Duration:</strong> Approximately 2 hours for the hijack
+    component</p>
+    <p><strong>Impact:</strong> Cloudflare’s public DNS resolver at
+    1.1.1.1 was unreachable from portions of the Internet due to a
+    combination of a BGP origin hijack and a route leak.</p>
+    <p><strong>Root cause:</strong> Two simultaneous issues compounded
+    each other. Eletronet S.A. (AS267613, a Brazilian ISP) began
+    announcing 1.1.1.1/32 – a more-specific prefix than Cloudflare’s
+    1.1.1.0/24. Because BGP always prefers the most-specific prefix
+    (longest prefix match), networks that received this announcement
+    routed 1.1.1.1 traffic to Eletronet instead of Cloudflare.
+    Separately, a misconfiguration at Allegheny Technologies (AS396531)
+    in Pennsylvania leaked Cloudflare routes to Verizon, which
+    propagated them further [21].</p>
+    <p><strong>Lessons learned:</strong> - RPKI with ROV would have
+    prevented this – 1.1.1.0/24 has a valid ROA for Cloudflare’s AS -
+    More-specific prefix hijacks (/32 vs /24) are devastating because
+    longest-match always wins - Operators should filter announcements
+    more specific than /24 in IPv4 (most networks do) - Multiple
+    simultaneous routing anomalies compound each other unpredictably -
+    Public infrastructure (1.1.1.1 DNS) must be monitored from diverse
+    external vantage points</p>
+    <h3 id="common-patterns-across-major-incidents">Common Patterns
+    Across Major Incidents</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Pattern</th>
+    <th>Facebook 2021</th>
+    <th>CenturyLink 2020</th>
+    <th>Cloudflare 2019</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Single human action triggered cascade</td>
+    <td>Yes (maintenance cmd)</td>
+    <td>Yes (flowspec rule)</td>
+    <td>Yes (misconfig)</td>
+    </tr>
+    <tr>
+    <td>Automation amplified the failure</td>
+    <td>Yes (DNS withdrew BGP)</td>
+    <td>Yes (flowspec via iBGP)</td>
+    <td>Yes (BGP propagation)</td>
+    </tr>
+    <tr>
+    <td>Recovery was harder than expected</td>
+    <td>Yes (locked out of systems)</td>
+    <td>Yes (global config change)</td>
+    <td>Yes (required external coordination)</td>
+    </tr>
+    <tr>
+    <td>Impacted far beyond direct customers</td>
+    <td>Yes (WhatsApp global)</td>
+    <td>Yes (3.5% of Internet)</td>
+    <td>Yes (DNS for millions)</td>
+    </tr>
+    <tr>
+    <td>Prevention existed but was not deployed</td>
+    <td>Partial (no safeguard on backbone cmd)</td>
+    <td>Yes (flowspec validation)</td>
+    <td>Yes (RPKI/ROV, prefix filtering)</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="triage-flowcharts">11. Triage Flowcharts</h2>
+    <h3 id="master-triage-something-is-wrong-with-the-network">Master
+    Triage: “Something is Wrong with the Network”</h3>
+    <pre><code>MASTER NETWORK TRIAGE FLOWCHART
+================================================================
+
+  REPORT: &quot;Something is wrong with the network&quot;
+  |
+  v
+  1. How many users/devices are affected?
+  |
+  +-- ONE user/device
+  |   --&gt; Is it one application or all?
+  |       +-- One app --&gt; DNS? Firewall rule? App server down?
+  |       +-- All apps --&gt; Cable? Switch port? VLAN? DHCP?
+  |
+  +-- MULTIPLE users, ONE site
+  |   --&gt; Check uplink from site to core
+  |       +-- Uplink down? --&gt; Cable cut? SFP? Switch failure?
+  |       +-- Uplink up? --&gt; Routing issue? VLAN trunk? STP?
+  |
+  +-- MULTIPLE users, MULTIPLE sites
+  |   --&gt; Core infrastructure problem
+  |       +-- Can internal sites reach each other? 
+  |       |   +-- NO --&gt; Core routing, backbone, STP loop
+  |       |   +-- YES --&gt; External connectivity (BGP, transit, DNS)
+  |       |
+  |       +-- Check BGP: show ip bgp summary
+  |       |   +-- Peers down --&gt; Upstream failure, carrier issue
+  |       |   +-- Peers up, routes missing --&gt; Route filtering, hijack
+  |       |
+  |       +-- Check DNS: dig @your-resolver example.com
+  |           +-- Timeout --&gt; Resolver down, firewall, upstream DNS
+  |           +-- SERVFAIL --&gt; DNSSEC, authoritative failure
+  |           +-- Works --&gt; Not a DNS problem, continue Layer 3-4
+  |
+  +-- EVERYTHING is down
+      --&gt; Total infrastructure failure
+          +-- Power? (check UPS, generator)
+          +-- Core switch/router? (console access, check status)
+          +-- STP loop? (check for broadcast storm symptoms)
+          +-- BGP/routing? (all external routes withdrawn?)</code></pre>
+    <h3 id="bgp-incident-triage">BGP Incident Triage</h3>
+    <pre><code>BGP INCIDENT TRIAGE
+================================================================
+
+  ALERT: BGP peer state change / route withdrawal / hijack detection
+  |
+  v
+  1. Which BGP sessions are affected?
+  |
+  +-- Single peer
+  |   --&gt; Interface down? (show interface)
+  |       +-- YES --&gt; Physical layer: cable, SFP, carrier circuit
+  |       +-- NO  --&gt; BGP config? Authentication? Prefix limit exceeded?
+  |           show ip bgp neighbor &lt;peer&gt; | include state|error|reset
+  |
+  +-- Multiple peers
+  |   --&gt; All on same physical link?
+  |       +-- YES --&gt; Link/card failure
+  |       +-- NO  --&gt; Control plane issue (CPU, memory, process crash)
+  |           show processes cpu sorted | head 10
+  |           show memory summary
+  |
+  +-- All peers
+      --&gt; Total BGP failure
+          +-- BGP process running? (show ip bgp summary)
+          +-- CPU overload? (route leak causing convergence storm?)
+          +-- Configuration change? (show archive log config all)
+          +-- Upstream event? (check RIPE RIS, carrier status)
+  
+  2. Is your prefix being hijacked?
+  |
+  +-- Check: stat.ripe.net/widget/routing-status#&lt;your-prefix&gt;
+  +-- Check: bgp.he.net (AS report for your ASN)
+  +-- Check: BGPalerter alerts
+  |
+  +-- YES, hijack detected:
+  |   --&gt; Follow BGP Hijack Response Procedure (Section 4)
+  |
+  +-- NO, your prefix is correctly originated:
+      --&gt; The issue is reachability FROM external networks TO you
+      --&gt; Check upstream BGP sessions, transit provider status</code></pre>
+    <h3 id="packet-loss-triage">Packet Loss Triage</h3>
+    <pre><code>PACKET LOSS TRIAGE
+================================================================
+
+  SYMPTOM: Packet loss detected (monitoring, user report, MTR)
+  |
+  v
+  1. Run MTR to destination (both directions, 200 probes):
+     mtr -rwbzc 200 &lt;destination&gt;
+  |
+  +-- Loss at first hop (your gateway)
+  |   --&gt; Layer 1-2 problem on YOUR side
+  |       Check: cable, switch port errors, duplex, VLAN
+  |       show interfaces &lt;port&gt; | include error|CRC|runt
+  |
+  +-- Loss starts mid-path, persists to destination
+  |   --&gt; Transit/ISP problem
+  |       Identify the hop where loss begins
+  |       Determine the carrier for that hop (reverse DNS, whois)
+  |       Open ticket with carrier, provide MTR evidence
+  |
+  +-- Loss at one mid-path hop only (destination is clean)
+  |   --&gt; ICMP rate limiting (NOT real packet loss)
+  |       Verify: destination shows 0% loss
+  |       Action: None -- this is normal ISP router behavior
+  |
+  +-- Loss only at destination
+  |   --&gt; Destination host problem
+  |       Check: host NIC, host firewall, host CPU, rate limiting
+  |       Verify with different protocols (TCP vs ICMP vs UDP)
+  |
+  +-- Intermittent loss (appears and disappears)
+      --&gt; Run extended MTR (1000+ probes over 30+ minutes)
+      --&gt; Correlate with time of day (congestion patterns)
+      --&gt; Check interface error counters for incrementing CRC/errors
+      --&gt; Check for micro-loops during routing convergence</code></pre>
+    <hr />
+    <h2 id="cross-references">12. Cross-References</h2>
+    <ul>
+    <li><strong>Module 01 (Monitoring &amp; Alerting):</strong> Alerting
+    systems must be tuned to detect the incident patterns described here
+    – BGP peer state changes, interface error rate thresholds, bandwidth
+    utilization spikes, DNS resolution failures</li>
+    <li><strong>Module 02 (Change Operations):</strong> Many incidents
+    are caused by changes. The change control process must include
+    pre-change verification, rollback procedures, and post-change
+    monitoring to catch incidents early</li>
+    <li><strong>Module 05 (Certificate &amp; PKI):</strong> Certificate
+    expiration can look like a network incident – TLS handshake failures
+    produce “connection refused” symptoms that get reported as “network
+    down”</li>
+    <li><strong>Module 07 (Firewall &amp; ACL):</strong> Firewall rule
+    changes are a common cause of single-service outages. ACL audit logs
+    are essential during triage to determine if a recent change caused
+    the problem</li>
+    <li><strong>Module 09 (Documentation &amp; CMDB):</strong> Accurate
+    documentation of carrier circuits, diversity paths, and escalation
+    contacts is critical during a war room. Outdated documentation
+    delays resolution</li>
+    <li><strong>Module 10 (Team &amp; Vendor Management):</strong>
+    Carrier escalation procedures, vendor TAC contacts, and NOC staffing
+    directly support the war room operations described here</li>
+    <li><strong>SNE Module 02 (Routing &amp; Switching):</strong> BGP,
+    OSPF, and STP protocol mechanics underpin the control-plane
+    diagnosis in this module</li>
+    <li><strong>SNE Module 07 (Observability):</strong> MTR
+    interpretation, interface error counter analysis, and DNS
+    troubleshooting are shared between operations and engineering</li>
+    <li><strong>SNE Module 10 (Reliability &amp; DR):</strong> BFD,
+    ECMP, and fast-reroute mechanisms are the first line of automated
+    incident response</li>
+    <li><strong>RCA (Root Cause Analysis):</strong> Post-incident
+    analysis methodology. Every incident described here should produce
+    an RCA document</li>
+    <li><strong>DRP (Disaster Recovery):</strong> Cable cut procedures
+    and total infrastructure failure overlap with DR planning</li>
+    </ul>
+    <hr />
+    <h2 id="sources">13. Sources</h2>
+    <ol type="1">
+    <li>Cisco. “Troubleshoot STP Problems and Related Design
+    Considerations.” Document ID 10556.
+    https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10556-16.html</li>
+    <li>Cisco. “Troubleshoot STP Issues on Catalyst Switches.” Document
+    ID 28943.
+    https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/28943-170.html</li>
+    <li>Cisco. “Interface Counters and Error Counters.” Configuration
+    Guide.
+    https://www.cisco.com/c/en/us/support/docs/routers/10000-series-routers/26gillaume-interface-errors.html</li>
+    <li>APNIC Blog. “How to properly interpret a traceroute or MTR.”
+    March 2022.
+    https://blog.apnic.net/2022/03/28/how-to-properly-interpret-a-traceroute-or-mtr/</li>
+    <li>DigitalOcean. “How To Use Traceroute and MTR to Diagnose Network
+    Issues.”
+    https://www.digitalocean.com/community/tutorials/how-to-use-traceroute-and-mtr-to-diagnose-network-issues</li>
+    <li>Bufferbloat.net. “Tests for Bufferbloat.”
+    https://www.bufferbloat.net/projects/bloat/wiki/Tests_for_Bufferbloat/</li>
+    <li>Cloudflare. “Cloudflare Radar’s new BGP origin hijack detection
+    system.” Blog Post.
+    https://blog.cloudflare.com/bgp-hijack-detection/</li>
+    <li>RFC 6810 – The Resource Public Key Infrastructure (RPKI) to
+    Router Protocol. IETF, 2013.
+    https://www.rfc-editor.org/rfc/rfc6810</li>
+    <li>NTT. “BGPalerter: BGP and RPKI monitoring tool.” GitHub.
+    https://github.com/nttgin/BGPalerter</li>
+    <li>APNIC Blog. “Understanding stealthy BGP hijacking risk in the
+    ROV era.” October 2025.
+    https://blog.apnic.net/2025/10/16/understanding-stealthy-bgp-hijacking-risk-in-the-rov-era/</li>
+    <li>NDSS Symposium. “Securing BGP ASAP: ASPA and other Post-ROV
+    Defenses.” 2025.
+    https://www.ndss-symposium.org/wp-content/uploads/2025-675-paper.pdf</li>
+    <li>Equinix. “Remotely Triggered Black Hole Services.” Product
+    Documentation.
+    https://docs.equinix.com/internet-exchange/ix-rtbh-guide/</li>
+    <li>FastNetMon. “BGP Blackhole Automation for DDoS Mitigation.”
+    2026.
+    https://fastnetmon.com/2026/01/06/bgp-blackhole-automation-for-ddos-mitigation/</li>
+    <li>Akamai. “What Is Blackhole (RTBH) Routing?” Glossary.
+    https://www.akamai.com/glossary/what-is-blackhole-routing</li>
+    <li>Cloudflare. “Magic Transit: DDoS Protection for Networks.”
+    https://www.cloudflare.com/magic-transit/</li>
+    <li>Cisco. “Spanning Tree Loop Troubleshooting and Safeguards.”
+    Community Knowledge Base.
+    https://community.cisco.com/t5/networking-knowledge-base/spanning-tree-loop-troubleshooting-and-safeguards/ta-p/3115040</li>
+    <li>ISC. BIND 9 Administrator Reference Manual.
+    https://bind9.readthedocs.io/</li>
+    <li>Juniper Networks. “BPDU Protection for Spanning-Tree Protocols.”
+    Junos OS Documentation.
+    https://www.juniper.net/documentation/us/en/software/junos/stp-l2/topics/topic-map/spanning-tree-bpdu-protection.html</li>
+    <li>Meta Engineering. “More details about the October 4 outage.”
+    October 5, 2021.
+    https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/</li>
+    <li>Cloudflare Blog. “August 30th 2020: Analysis of
+    CenturyLink/Level(3) outage.” August 30, 2020.
+    https://blog.cloudflare.com/analysis-of-todays-centurylink-level-3-outage/</li>
+    <li>Cloudflare Community. “Incident: Route Leak Impacting
+    Cloudflare.” June 2019.
+    https://community.cloudflare.com/t/incident-route-leak-impacting-cloudflare/93732</li>
+    <li>University of Oregon. “RouteViews Project.”
+    https://www.routeviews.org/routeviews/</li>
+    <li>RIPE NCC. “RIS Tools and Web Interfaces.”
+    https://www.ripe.net/analyse/archived-projects/ris-tools-web-interfaces/</li>
+    <li>NIST. “NIST Releases Test Tools to Accelerate Adoption of
+    Emerging Route Leak Mitigation Standards.” August 2025.
+    https://www.nist.gov/news-events/news/2025/08/nist-releases-test-tools-accelerate-adoption-emerging-route-leak-mitigation</li>
+    <li>Cloudflare Blog. “Understanding how Facebook disappeared from
+    the Internet.” October 2021.
+    https://blog.cloudflare.com/october-2021-facebook-outage/</li>
+    <li>ThousandEyes. “CenturyLink / Level 3 Outage Analysis.” August
+    2020.
+    https://blog.thousandeyes.com/centurylink-level-3-outage-analysis/</li>
+    </ol>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNO Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNO/">tibsfox.com/Research/SNO</a>
+    </div>
+</body>
+</html>

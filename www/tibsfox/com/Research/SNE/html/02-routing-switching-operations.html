@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routing &amp; Switching Operations — SNE Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2236;
+            --accent: #00BFA5;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #40C4FF;
+            --border: #2a3a4a;
+            --primary: #0D47A1;
+            --net: #80DEEA;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(64,196,255,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNE — Systems Network Engineering<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNE Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="routing-switching-operations">Routing &amp; Switching
+    Operations</h1>
+    <blockquote>
+    <p><strong>Domain:</strong> Systems Network Engineering
+    <strong>Module:</strong> 2 – BGP, IGP, VLAN, VRF, MPLS, EVPN-VXLAN
+    &amp; SD-WAN <strong>Through-line:</strong> <em>A network’s control
+    plane is a distributed database that converges on a shared view of
+    reachability. BGP is the slow, cautious diplomat negotiating between
+    autonomous systems. OSPF and IS-IS are the town criers flooding news
+    within one domain. MPLS is the postal service that stamps labels and
+    forwards without looking inside. EVPN-VXLAN is the modern overlay
+    that decouples where things are from how to reach them. The
+    operational discipline is knowing which plane you are
+    troubleshooting and which knob you are turning.</em></p>
+    </blockquote>
+    <hr />
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ol type="1">
+    <li><a href="#1-control-plane-vs-data-plane">Control Plane vs Data
+    Plane</a></li>
+    <li><a href="#2-bgp-operations">BGP Operations</a></li>
+    <li><a href="#3-bgp-route-filtering">BGP Route Filtering</a></li>
+    <li><a href="#4-bgp-communities-and-traffic-engineering">BGP
+    Communities and Traffic Engineering</a></li>
+    <li><a href="#5-route-origin-validation-irr-and-rpki">Route Origin
+    Validation: IRR and RPKI</a></li>
+    <li><a href="#6-ospf-area-design">OSPF Area Design</a></li>
+    <li><a href="#7-is-is-for-data-center">IS-IS for Data
+    Center</a></li>
+    <li><a href="#8-igp-comparison-table">IGP Comparison Table</a></li>
+    <li><a href="#9-vlan-architecture">VLAN Architecture</a></li>
+    <li><a href="#10-vrf-segmentation">VRF Segmentation</a></li>
+    <li><a href="#11-mpls-fundamentals-and-l3vpn">MPLS Fundamentals and
+    L3VPN</a></li>
+    <li><a href="#12-evpn-vxlan-for-data-center-overlay">EVPN-VXLAN for
+    Data Center Overlay</a></li>
+    <li><a href="#13-sd-wan-overlay-engineering">SD-WAN Overlay
+    Engineering</a></li>
+    <li><a href="#14-operational-decision-matrix">Operational Decision
+    Matrix</a></li>
+    <li><a href="#15-cross-references">Cross-References</a></li>
+    <li><a href="#16-sources">Sources</a></li>
+    </ol>
+    <hr />
+    <h2 id="control-plane-vs-data-plane">1. Control Plane vs Data
+    Plane</h2>
+    <p>Every network device operates across three distinct planes, and
+    conflating them is the root cause of most operational
+    misunderstanding. The control plane builds the forwarding
+    information base (FIB). The data plane moves packets using that FIB.
+    The management plane is you, typing commands or pushing API
+    calls.</p>
+    <pre><code>THE THREE PLANES OF NETWORK OPERATION
+================================================================
+
+  MANAGEMENT PLANE
+  +-------------------------------------------------+
+  |  CLI / API / NMS / Ansible / NETCONF            |
+  |  Human or automation configures policy           |
+  |  Runs on general-purpose CPU                     |
+  +-------------------------------------------------+
+         |  Configuration
+         v
+  CONTROL PLANE
+  +-------------------------------------------------+
+  |  BGP / OSPF / IS-IS / STP / VRRP / BFD         |
+  |  Routing protocols exchange reachability info     |
+  |  Builds RIB -&gt; compiles FIB                      |
+  |  Runs on route processor (CPU)                   |
+  +-------------------------------------------------+
+         |  FIB / LFIB / MAC table
+         v
+  DATA PLANE (FORWARDING PLANE)
+  +-------------------------------------------------+
+  |  Packet lookup -&gt; forward / drop / encapsulate   |
+  |  ASIC / MEMORY / TCAM / NPU                     |
+  |  Wire-speed, per-packet decisions                |
+  |  No protocol intelligence, just table lookups    |
+  +-------------------------------------------------+</code></pre>
+    <h3 id="operational-implications">Operational Implications</h3>
+    <p><strong>Control plane protection</strong> is critical. A DDoS
+    attack targeting the route processor (e.g., flooding BGP OPEN
+    messages) can crash routing, even though the data plane ASICs are
+    barely loaded. CoPP (Control Plane Policing) rate-limits traffic
+    destined to the CPU, protecting protocol adjacencies [1].</p>
+    <p><strong>Data plane independence</strong> means that when a
+    control plane reconverges after a link failure, the data plane
+    continues forwarding on stale FIB entries until updated. This is the
+    basis of Graceful Restart (GR) and Non-Stop Forwarding (NSF) – the
+    data plane keeps working while the control plane reboots.</p>
+    <p><strong>Troubleshooting discipline:</strong> When packets are
+    being dropped, first determine which plane is failing. If
+    <code>show ip route</code> shows the correct path but packets still
+    drop, the problem is data plane (ACL, MTU, TCAM overflow). If the
+    route is missing, the problem is control plane (adjacency,
+    filtering, redistribution). If you cannot log in, the problem is
+    management plane.</p>
+    <hr />
+    <h2 id="bgp-operations">2. BGP Operations</h2>
+    <p>BGP (Border Gateway Protocol) version 4 is the sole exterior
+    gateway protocol of the Internet, specified in RFC 4271 (2006) with
+    updates through RFC 9234 (2022) for route leak prevention. BGP is a
+    path-vector protocol that makes policy decisions based on AS_PATH,
+    communities, MED, and local preference rather than pure
+    shortest-path calculation [2].</p>
+    <h3 id="ebgp-peering">eBGP Peering</h3>
+    <p>External BGP peers reside in different autonomous systems. The
+    default eBGP TTL is 1, meaning peers must be directly connected
+    unless multihop is configured. eBGP modifies the AS_PATH on every
+    advertisement, which provides natural loop prevention.</p>
+    <pre><code>eBGP PEERING -- CISCO IOS-XE
+================================================================
+
+router bgp 65001
+ bgp log-neighbor-changes
+ neighbor 198.51.100.1 remote-as 65002
+ neighbor 198.51.100.1 description Transit-Provider-Alpha
+ neighbor 198.51.100.1 password 7 &lt;encrypted&gt;
+ !
+ address-family ipv4 unicast
+  neighbor 198.51.100.1 activate
+  neighbor 198.51.100.1 route-map TRANSIT-IN in
+  neighbor 198.51.100.1 route-map TRANSIT-OUT out
+  neighbor 198.51.100.1 prefix-list BOGONS in
+  neighbor 198.51.100.1 maximum-prefix 750000 85
+ exit-address-family</code></pre>
+    <pre><code>eBGP PEERING -- JUNIPER JUNOS
+================================================================
+
+protocols {
+    bgp {
+        group transit-alpha {
+            type external;
+            peer-as 65002;
+            neighbor 198.51.100.1 {
+                description &quot;Transit Provider Alpha&quot;;
+                authentication-key &quot;$9$encrypted&quot;;
+                import transit-in;
+                export transit-out;
+                prefix-limit {
+                    maximum 750000;
+                    teardown 85;
+                }
+            }
+        }
+    }
+}</code></pre>
+    <h3 id="ibgp-and-route-reflectors">iBGP and Route Reflectors</h3>
+    <p>Internal BGP peers share the same AS number. iBGP has a critical
+    rule: routes learned from one iBGP peer are never advertised to
+    another iBGP peer. This prevents loops but requires a full mesh of
+    iBGP sessions (N*(N-1)/2 peers), which does not scale. Route
+    reflectors (RFC 4456) solve this by allowing a designated router to
+    reflect routes to its clients [3].</p>
+    <pre><code>iBGP WITH ROUTE REFLECTORS
+================================================================
+
+                     +----------+
+                     |  RR-1    |  (route reflector)
+                     |  AS 65001|
+                     +----+-----+
+                    /     |      \
+                   /      |       \     RR-client sessions
+                  /       |        \
+          +------+  +-----+--+  +---+----+
+          | PE-1 |  |  PE-2  |  | PE-3   |
+          +------+  +--------+  +--------+
+          Client     Client      Client
+
+    RR reflects routes from one client to all other clients.
+    Non-client peers still require full mesh among themselves.
+    Two RR clusters recommended for redundancy.</code></pre>
+    <h3 id="looking-glasses-and-route-servers">Looking Glasses and Route
+    Servers</h3>
+    <p>Looking glasses are public web interfaces that allow anyone to
+    query a network’s BGP table without direct access. Major ones
+    include RIPE RIS (ris.ripe.net), RouteViews (routeviews.org), and
+    Hurricane Electric (bgp.he.net). Route servers at Internet Exchange
+    Points (IXPs) provide multilateral peering, reducing the number of
+    bilateral eBGP sessions from O(n^2) to O(n) [4].</p>
+    <hr />
+    <h2 id="bgp-route-filtering">3. BGP Route Filtering</h2>
+    <p>Route filtering is the primary mechanism for implementing BGP
+    policy. Accepting all routes from all peers without filtering is the
+    equivalent of running a mail server with no spam filter.</p>
+    <h3 id="prefix-lists">Prefix Lists</h3>
+    <p>Prefix lists match on network address and prefix length. They are
+    evaluated sequentially with an implicit deny at the end.</p>
+    <pre><code>PREFIX LIST FILTERING -- CISCO IOS
+================================================================
+
+! Accept only prefixes between /8 and /24 from transit
+ip prefix-list TRANSIT-PREFIXES seq 5 permit 0.0.0.0/0 ge 8 le 24
+!
+! Deny RFC 1918 and bogon space
+ip prefix-list BOGONS seq 5 deny 10.0.0.0/8 le 32
+ip prefix-list BOGONS seq 10 deny 172.16.0.0/12 le 32
+ip prefix-list BOGONS seq 15 deny 192.168.0.0/16 le 32
+ip prefix-list BOGONS seq 20 deny 100.64.0.0/10 le 32
+ip prefix-list BOGONS seq 25 deny 0.0.0.0/0
+ip prefix-list BOGONS seq 30 deny 0.0.0.0/0 ge 25
+ip prefix-list BOGONS seq 100 permit 0.0.0.0/0 le 32</code></pre>
+    <h3 id="as-path-filters">AS-Path Filters</h3>
+    <p>AS-path access lists use regular expressions to match the AS_PATH
+    attribute. They are essential for preventing route leaks and
+    enforcing peer relationships.</p>
+    <pre><code>AS-PATH FILTERING
+================================================================
+
+! Accept only routes originated by the peer (single AS in path)
+ip as-path access-list 10 permit ^65002$
+!
+! Accept routes transiting through the peer
+ip as-path access-list 20 permit ^65002_
+!
+! Deny routes with private AS numbers in the path
+ip as-path access-list 30 deny _6451[2-9]_
+ip as-path access-list 30 deny _6452[0-9]_
+ip as-path access-list 30 deny _6453[0-5]_
+ip as-path access-list 30 deny _65[0-9][0-9][0-9]_
+ip as-path access-list 30 permit .*</code></pre>
+    <h3 id="filtering-best-practices">Filtering Best Practices</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Filter Type</th>
+    <th>Applied Where</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Prefix list (inbound)</td>
+    <td>All eBGP peers</td>
+    <td>Block bogons, too-specific prefixes, own prefixes</td>
+    </tr>
+    <tr>
+    <td>Prefix list (outbound)</td>
+    <td>All eBGP peers</td>
+    <td>Advertise only owned prefixes</td>
+    </tr>
+    <tr>
+    <td>AS-path filter (inbound)</td>
+    <td>Customer peers</td>
+    <td>Accept only customer-originated routes</td>
+    </tr>
+    <tr>
+    <td>AS-path filter (outbound)</td>
+    <td>Transit peers</td>
+    <td>Prevent becoming a transit for peers</td>
+    </tr>
+    <tr>
+    <td>Maximum prefix limit</td>
+    <td>All eBGP peers</td>
+    <td>Protect against route table explosion</td>
+    </tr>
+    <tr>
+    <td>ORF (Outbound Route Filtering)</td>
+    <td>Large peering</td>
+    <td>Push filters to the sender to reduce update volume</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="bgp-communities-and-traffic-engineering">4. BGP Communities
+    and Traffic Engineering</h2>
+    <p>BGP communities are transitive attributes that tag routes with
+    metadata. They are the primary mechanism for signaling policy
+    between ASes without direct configuration on the remote router.
+    Three types exist: standard (RFC 1997), extended (RFC 4360), and
+    large (RFC 8092) [5][6].</p>
+    <h3 id="standard-communities-rfc-1997">Standard Communities (RFC
+    1997)</h3>
+    <p>Standard communities are 32-bit values typically written as
+    ASN:VALUE. Four well-known communities have globally defined
+    behavior:</p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Community</th>
+    <th>Value</th>
+    <th>Behavior</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>NO_EXPORT</td>
+    <td>0xFFFFFF01</td>
+    <td>Do not advertise to eBGP peers</td>
+    </tr>
+    <tr>
+    <td>NO_ADVERTISE</td>
+    <td>0xFFFFFF02</td>
+    <td>Do not advertise to any peer (iBGP or eBGP)</td>
+    </tr>
+    <tr>
+    <td>NO_EXPORT_SUBCONFED</td>
+    <td>0xFFFFFF03</td>
+    <td>Do not advertise outside the local confederation sub-AS</td>
+    </tr>
+    <tr>
+    <td>NOPEER</td>
+    <td>0xFFFFFF04</td>
+    <td>Do not advertise to bilateral peers (RFC 3765)</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>RFC 8642 clarifies that well-known communities must not be
+    stripped or modified by any BGP speaker, even in the absence of
+    explicit policy.</p>
+    <h3 id="large-communities-rfc-8092">Large Communities (RFC
+    8092)</h3>
+    <p>Large communities use a 96-bit format:
+    GlobalAdmin:LocalData1:LocalData2, where the global administrator is
+    a full 32-bit ASN. This solves the namespace collision problem that
+    standard communities face with 32-bit ASNs, where the 16-bit ASN
+    field in standard communities cannot represent ASNs above 65535.</p>
+    <h3 id="traffic-engineering-with-communities">Traffic Engineering
+    with Communities</h3>
+    <p>Communities enable traffic engineering by signaling intent from
+    the customer to the provider. Common patterns:</p>
+    <pre><code>COMMUNITY-BASED TRAFFIC ENGINEERING
+================================================================
+
+! Provider AS 65001 defines action communities:
+!   65001:100  = Announce to all peers
+!   65001:200  = Announce to transit only
+!   65001:300  = Announce to IXP peers only
+!   65001:666  = Blackhole this prefix
+!   65001:1nnn = Prepend 1x to peer ASN nnn
+!   65001:2nnn = Prepend 2x to peer ASN nnn
+!   65001:3nnn = Prepend 3x to peer ASN nnn
+!   65001:9nnn = Do not announce to peer ASN nnn
+
+! Customer sets community to prepend 2x toward AS 65010:
+router bgp 65050
+ route-map ANNOUNCE-TO-TRANSIT permit 10
+  set community 65001:2010 additive
+  match ip address prefix-list MY-PREFIXES</code></pre>
+    <h3 id="blackhole-communities">Blackhole Communities</h3>
+    <p>RTBH (Remotely Triggered Black Hole) routing uses communities to
+    signal upstream providers to drop traffic destined for an attacked
+    prefix. RFC 7999 defines the well-known blackhole community
+    (BLACKHOLE, 65535:666). A customer advertises a /32 host route with
+    this community, and the provider installs a null route, dropping
+    attack traffic at the network edge rather than the victim [7].</p>
+    <hr />
+    <h2 id="route-origin-validation-irr-and-rpki">5. Route Origin
+    Validation: IRR and RPKI</h2>
+    <p>Route origin validation answers one question: is this AS
+    authorized to originate this prefix? Without it, any AS can announce
+    any prefix, and BGP will happily propagate the hijack.</p>
+    <h3 id="internet-routing-registry-irr">Internet Routing Registry
+    (IRR)</h3>
+    <p>IRR databases (RADB, RIPE, ARIN, APNIC, AfriNIC) store route
+    objects that declare which ASes may originate which prefixes.
+    Operators query IRR to build prefix filters.</p>
+    <pre><code>IRR ROUTE OBJECT
+================================================================
+
+route:       203.0.113.0/24
+descr:       Example Network
+origin:      AS65001
+mnt-by:      MAINT-EXAMPLE
+source:      RADB</code></pre>
+    <p>The IRR system’s weakness is that registration is voluntary,
+    objects go stale, and some databases do not require proof of address
+    ownership. This makes IRR necessary but insufficient.</p>
+    <h3 id="rpki-resource-public-key-infrastructure">RPKI (Resource
+    Public Key Infrastructure)</h3>
+    <p>RPKI is the cryptographic successor to IRR. It uses X.509
+    certificates chained to the five Regional Internet Registries (RIRs)
+    as trust anchors. A Route Origin Authorization (ROA) is a signed
+    object that states: “prefix P of maximum length L is authorized to
+    be originated by AS A” [8].</p>
+    <pre><code>RPKI VALIDATION STATES
+================================================================
+
+  Route         ROA           Result
+  -------       -------       --------
+  203.0.113.0/24  AS65001/24  VALID    -- prefix and AS match ROA
+  203.0.113.0/24  AS65099/24  INVALID  -- AS does not match ROA
+  198.51.100.0/24 (no ROA)    UNKNOWN  -- no ROA exists for this prefix
+  203.0.113.0/25  AS65001/24  INVALID  -- /25 exceeds maxLength /24</code></pre>
+    <h3 id="rov-deployment">ROV Deployment</h3>
+    <p>Route Origin Validation (ROV) is the act of checking received BGP
+    routes against RPKI data and acting on the result. As of early 2026,
+    approximately 393,000 IPv4 and 86,000 IPv6 ROAs exist in the global
+    RPKI system, covering roughly 40% of routed prefix-AS pairs.
+    However, only about 12% of ASes perform full ROV with reject-invalid
+    policy. The FCC now requires large US providers to file BGP security
+    plans, including ROA coverage targets of 90% or higher [8].</p>
+    <pre><code>RPKI ROV -- CISCO IOS-XE
+================================================================
+
+router bgp 65001
+ bgp rpki server tcp 10.0.0.50 port 8282 refresh 300
+ !
+ address-family ipv4 unicast
+  ! Drop RPKI-invalid routes
+  neighbor 198.51.100.1 route-map RPKI-FILTER in
+!
+route-map RPKI-FILTER deny 10
+ match rpki invalid
+route-map RPKI-FILTER permit 20
+ ! VALID and UNKNOWN both accepted; prefer VALID with higher local-pref
+ set local-preference 200
+ match rpki valid
+route-map RPKI-FILTER permit 30</code></pre>
+    <hr />
+    <h2 id="ospf-area-design">6. OSPF Area Design</h2>
+    <p>OSPF (Open Shortest Path First) version 2 (RFC 2328 for IPv4) and
+    version 3 (RFC 5340 for IPv6) is the most widely deployed IGP in
+    enterprise networks. OSPF divides an autonomous system into areas to
+    limit the scope of link-state flooding and SPF calculations. Area 0
+    (backbone) is mandatory and all other areas must connect to it,
+    either directly or through virtual links [9].</p>
+    <h3 id="area-types">Area Types</h3>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Area Type</th>
+    <th>Type 1/2 LSAs</th>
+    <th>Type 3 LSAs</th>
+    <th>Type 4/5 LSAs</th>
+    <th>Type 7 LSAs</th>
+    <th>Default Route</th>
+    <th>ASBR Allowed</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Normal</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Optional</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td>Stub</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Injected by ABR</td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>Totally Stubby</td>
+    <td>Yes</td>
+    <td>No (default only)</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Injected by ABR</td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>NSSA</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes (translated to Type 5 at ABR)</td>
+    <td>Optional</td>
+    <td>Yes (Type 7)</td>
+    </tr>
+    <tr>
+    <td>Totally NSSA</td>
+    <td>Yes</td>
+    <td>No (default only)</td>
+    <td>No</td>
+    <td>Yes (translated to Type 5 at ABR)</td>
+    <td>Injected by ABR</td>
+    <td>Yes (Type 7)</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="when-to-use-each-area-type">When to Use Each Area Type</h3>
+    <p><strong>Stub areas</strong> are appropriate for branch offices or
+    remote sites with a single exit point. They filter external routes
+    (Type 5 LSAs), replacing them with a default route from the ABR.
+    This shrinks the LSDB and routing table on stub routers.</p>
+    <p><strong>Totally stubby areas</strong> go further by also
+    filtering inter-area summary routes (Type 3 LSAs). Only intra-area
+    routes and a single default route remain. Use these for truly leaf
+    sites that need no knowledge of the broader topology.</p>
+    <p><strong>NSSA (Not-So-Stubby Area)</strong> solves a specific
+    problem: you need stub-area benefits (no external routes from the
+    core) but you also have a local ASBR that must redistribute external
+    routes into OSPF. The ASBR generates Type 7 LSAs, which propagate
+    within the NSSA. The ABR translates Type 7 to Type 5 for flooding
+    into the rest of the OSPF domain [10].</p>
+    <p><strong>Virtual links</strong> are a workaround, not a design
+    pattern. They create a logical tunnel through a transit area to
+    connect a discontiguous area to the backbone. The transit area must
+    be a normal area (not stub or NSSA). If you find yourself needing a
+    virtual link, reconsider the physical topology first.</p>
+    <pre><code>OSPF AREA DESIGN -- CISCO IOS
+================================================================
+
+router ospf 1
+ router-id 10.0.0.1
+ !
+ ! Area 0 -- backbone
+ network 10.0.0.0 0.0.0.255 area 0
+ !
+ ! Area 10 -- stub (branch site, single exit)
+ area 10 stub
+ network 10.10.0.0 0.0.255.255 area 10
+ !
+ ! Area 20 -- NSSA (has local ASBR redistributing static)
+ area 20 nssa default-information-originate
+ network 10.20.0.0 0.0.255.255 area 20
+ !
+ ! Area 30 -- totally stubby (leaf site)
+ area 30 stub no-summary
+ network 10.30.0.0 0.0.255.255 area 30</code></pre>
+    <hr />
+    <h2 id="is-is-for-data-center">7. IS-IS for Data Center</h2>
+    <p>IS-IS (Intermediate System to Intermediate System) is an ISO
+    link-state protocol (ISO 10589) adapted for IP routing in RFC 1195
+    and extended through numerous RFCs. While OSPF dominates enterprise
+    networks, IS-IS has become the preferred IGP underlay for
+    large-scale data center fabrics, particularly at hyperscaler and
+    tier-1 service provider scale [11].</p>
+    <h3 id="why-is-is-in-the-data-center">Why IS-IS in the Data
+    Center</h3>
+    <p><strong>No area 0 requirement.</strong> IS-IS has no mandatory
+    backbone area. The “backbone” is simply the contiguous set of Level
+    2 routers. Areas are defined per-router (a router is in one area),
+    not per-link (OSPF assigns areas to interfaces). This simplifies
+    spine-leaf designs where every spine is L2 and every leaf is L1/L2
+    or L1.</p>
+    <p><strong>TLV extensibility.</strong> IS-IS encodes all information
+    as Type-Length-Value triplets, making it straightforward to add new
+    capabilities without protocol changes. IPv6 support, traffic
+    engineering extensions, and segment routing SIDs were all added as
+    new TLVs without touching the core protocol.</p>
+    <p><strong>Wide metrics.</strong> Original IS-IS metrics were 6-bit
+    (0-63), far too narrow for modern networks. RFC 3784 defines wide
+    metrics as 24-bit (0-16,777,215), enabling fine-grained traffic
+    engineering. Wide metrics are mandatory in any modern IS-IS
+    deployment.</p>
+    <p><strong>Protocol independence from IP.</strong> IS-IS runs
+    directly over Layer 2 (ISO CLNP), not over IP. This means IS-IS
+    adjacencies form even when IP is misconfigured, which can be both an
+    advantage (bootstrapping) and a risk (harder to filter).</p>
+    <h3 id="level-1-level-2-hierarchy">Level 1 / Level 2 Hierarchy</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Level</th>
+    <th>Scope</th>
+    <th>Equivalent OSPF Concept</th>
+    <th>DC Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Level 1 (L1)</td>
+    <td>Intra-area routing within a single IS-IS area</td>
+    <td>OSPF intra-area routes</td>
+    <td>Leaf-to-spine within a pod</td>
+    </tr>
+    <tr>
+    <td>Level 2 (L2)</td>
+    <td>Inter-area routing across the IS-IS backbone</td>
+    <td>OSPF area 0 / inter-area</td>
+    <td>Spine-to-spine, super-spine</td>
+    </tr>
+    <tr>
+    <td>Level 1/2 (L1/L2)</td>
+    <td>Router participates in both levels</td>
+    <td>OSPF ABR</td>
+    <td>Spine routers connecting pods to backbone</td>
+    </tr>
+    </tbody>
+    </table>
+    <pre><code>IS-IS SPINE-LEAF UNDERLAY -- ARISTA EOS
+================================================================
+
+router isis DC-FABRIC
+   net 49.0001.0100.0000.0001.00
+   is-type level-2-only
+   !
+   address-family ipv4 unicast
+   !
+   address-family ipv6 unicast
+!
+interface Ethernet1
+   description to-leaf-1
+   isis enable DC-FABRIC
+   isis metric 10
+   isis network point-to-point
+!
+! All links as point-to-point eliminates DIS election overhead.
+! Level-2-only is standard for flat DC fabrics (no L1/L2 boundary).
+! Wide metrics enabled by default on modern implementations.</code></pre>
+    <h3 id="data-center-is-is-design-principles">Data Center IS-IS
+    Design Principles</h3>
+    <ol type="1">
+    <li><strong>Use level-2-only</strong> for flat spine-leaf fabrics.
+    L1/L2 hierarchy adds complexity without benefit when the fabric is a
+    single administrative domain.</li>
+    <li><strong>Point-to-point links everywhere.</strong> Spine-leaf
+    links are always point-to-point. Configuring them as such avoids DIS
+    (Designated Intermediate System) election and reduces LSP
+    flooding.</li>
+    <li><strong>BFD for sub-second failure detection.</strong> IS-IS
+    hello timers default to 10 seconds. BFD provides 50ms detection,
+    critical for data center convergence targets.</li>
+    <li><strong>Overload bit for maintenance.</strong> Setting the IS-IS
+    overload bit (<code>set-overload-bit</code>) causes other routers to
+    avoid transiting through this router, enabling graceful
+    maintenance.</li>
+    </ol>
+    <hr />
+    <h2 id="igp-comparison-table">8. IGP Comparison Table</h2>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>OSPF v2/v3</th>
+    <th>IS-IS</th>
+    <th>eBGP (as DC underlay)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Algorithm</td>
+    <td>Dijkstra SPF</td>
+    <td>Dijkstra SPF</td>
+    <td>Best path selection (not SPF)</td>
+    </tr>
+    <tr>
+    <td>Runs over</td>
+    <td>IP (protocol 89)</td>
+    <td>Layer 2 (ISO)</td>
+    <td>TCP port 179</td>
+    </tr>
+    <tr>
+    <td>Area model</td>
+    <td>Per-interface</td>
+    <td>Per-router</td>
+    <td>No areas (AS-based)</td>
+    </tr>
+    <tr>
+    <td>Backbone requirement</td>
+    <td>Area 0 mandatory</td>
+    <td>L2 backbone (implicit)</td>
+    <td>None</td>
+    </tr>
+    <tr>
+    <td>Metric width</td>
+    <td>16-bit (24-bit TE)</td>
+    <td>24-bit (wide)</td>
+    <td>Multiple attributes</td>
+    </tr>
+    <tr>
+    <td>Authentication</td>
+    <td>MD5, SHA (RFC 5709)</td>
+    <td>HMAC-MD5, generic crypto</td>
+    <td>MD5, TCP-AO</td>
+    </tr>
+    <tr>
+    <td>IPv6 support</td>
+    <td>Separate protocol (OSPFv3)</td>
+    <td>TLV extension (same protocol)</td>
+    <td>Same protocol (AFI/SAFI)</td>
+    </tr>
+    <tr>
+    <td>Segment routing</td>
+    <td>Yes (OSPFv2/v3 extensions)</td>
+    <td>Yes (TLV extensions)</td>
+    <td>Not applicable (overlay)</td>
+    </tr>
+    <tr>
+    <td>Scaling limit (practical)</td>
+    <td>~100 routers per area</td>
+    <td>~100 routers per level</td>
+    <td>Thousands (no flooding)</td>
+    </tr>
+    <tr>
+    <td>Primary use case</td>
+    <td>Enterprise campus, mid-size DC</td>
+    <td>Large DC, SP core</td>
+    <td>Hyperscale DC underlay (RFC 7938)</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>RFC 7938 documents the use of eBGP as the sole routing protocol
+    for data center fabrics at hyperscale, eliminating IGP entirely.
+    Each rack or leaf gets a unique private ASN, and eBGP sessions run
+    on every spine-leaf link. This approach scales to thousands of
+    switches because BGP has no flooding domain [12].</p>
+    <hr />
+    <h2 id="vlan-architecture">9. VLAN Architecture</h2>
+    <p>VLANs (Virtual Local Area Networks, IEEE 802.1Q) segment a
+    physical switch into multiple broadcast domains. The 12-bit VLAN ID
+    field supports 4,094 usable VLANs (1-4094, with 0 and 4095
+    reserved).</p>
+    <h3 id="access-and-trunk-ports">Access and Trunk Ports</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Port Mode</th>
+    <th>Function</th>
+    <th>Tagged Frames</th>
+    <th>Untagged Frames</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Access</td>
+    <td>Connects end hosts</td>
+    <td>Strips tag, assigns to configured VLAN</td>
+    <td>Accepted, placed in port VLAN</td>
+    </tr>
+    <tr>
+    <td>Trunk</td>
+    <td>Connects switches</td>
+    <td>Passes all allowed VLANs with 802.1Q tag</td>
+    <td>Placed in native VLAN</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="native-vlan-security">Native VLAN Security</h3>
+    <p>The native VLAN is the VLAN used for untagged frames on a trunk
+    port. The default is VLAN 1. This creates a well-known attack
+    vector: <strong>VLAN hopping</strong> via double-tagging
+    (802.1Q-in-802.1Q). An attacker on an access port in VLAN 1 sends a
+    frame with two 802.1Q tags. The first switch strips the outer tag
+    (native VLAN), and the second switch forwards based on the inner
+    tag, delivering the frame to a VLAN the attacker should not reach
+    [13].</p>
+    <p><strong>Mitigation:</strong></p>
+    <pre><code>NATIVE VLAN HARDENING -- CISCO IOS
+================================================================
+
+! 1. Change native VLAN to an unused VLAN
+interface GigabitEthernet0/1
+ switchport trunk native vlan 999
+!
+! 2. Tag native VLAN frames explicitly
+vlan dot1q tag native
+!
+! 3. Prune all VLANs not needed on each trunk
+interface GigabitEthernet0/1
+ switchport trunk allowed vlan 10,20,30
+!
+! 4. Disable DTP negotiation
+interface GigabitEthernet0/1
+ switchport nonegotiate
+!
+! 5. Put unused ports in a black-hole VLAN and shut them down
+interface range GigabitEthernet0/10-24
+ switchport access vlan 998
+ shutdown</code></pre>
+    <h3 id="vlan-pruning">VLAN Pruning</h3>
+    <p>VTP (VLAN Trunking Protocol) pruning or manual pruning with
+    <code>switchport trunk allowed vlan</code> restricts which VLANs are
+    carried on each trunk link. Without pruning, every broadcast,
+    unknown unicast, and multicast frame floods across every trunk in
+    the VTP domain, wasting bandwidth and violating the principle of
+    least privilege.</p>
+    <hr />
+    <h2 id="vrf-segmentation">10. VRF Segmentation</h2>
+    <p>VRF (Virtual Routing and Forwarding) creates isolated routing
+    instances on a single physical router. Each VRF maintains its own
+    RIB, FIB, and set of interfaces. VRF-Lite is the basic form without
+    MPLS; full VRF with MPLS enables L3VPN across a provider backbone
+    [14].</p>
+    <h3 id="multi-tenancy-design">Multi-Tenancy Design</h3>
+    <pre><code>VRF SEGMENTATION -- MULTI-TENANT
+================================================================
+
+  Physical Router
+  +------------------------------------------------+
+  |                                                  |
+  |  VRF: TENANT-A          VRF: TENANT-B           |
+  |  +------------------+   +------------------+    |
+  |  | RIB: 10.0.0.0/8  |   | RIB: 10.0.0.0/8 |    |
+  |  | Interface: Gi0/1 |   | Interface: Gi0/2 |    |
+  |  | Default via .1   |   | Default via .1   |    |
+  |  +------------------+   +------------------+    |
+  |                                                  |
+  |  VRF: MANAGEMENT        Global routing table     |
+  |  +------------------+   +------------------+    |
+  |  | OOB management   |   | Internet/transit |    |
+  |  | Interface: Gi0/0 |   | Interface: Gi0/3 |    |
+  |  +------------------+   +------------------+    |
+  +------------------------------------------------+
+
+  Each VRF has completely independent routing.
+  10.0.0.0/8 in TENANT-A is different from 10.0.0.0/8 in TENANT-B.
+  Route leaking between VRFs requires explicit configuration.</code></pre>
+    <pre><code>VRF CONFIGURATION -- CISCO IOS-XE
+================================================================
+
+vrf definition TENANT-A
+ rd 65001:100
+ address-family ipv4
+  route-target export 65001:100
+  route-target import 65001:100
+ exit-address-family
+!
+interface GigabitEthernet0/1
+ vrf forwarding TENANT-A
+ ip address 10.1.1.1 255.255.255.0
+!
+router bgp 65001
+ address-family ipv4 vrf TENANT-A
+  neighbor 10.1.1.2 remote-as 65100
+  neighbor 10.1.1.2 activate
+ exit-address-family</code></pre>
+    <h3 id="vrf-use-cases">VRF Use Cases</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Use Case</th>
+    <th>Implementation</th>
+    <th>Benefit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Multi-tenancy</td>
+    <td>Separate VRF per tenant</td>
+    <td>Overlapping IP space, isolation</td>
+    </tr>
+    <tr>
+    <td>Security zones</td>
+    <td>VRF per zone (DMZ, internal, guest)</td>
+    <td>Enforce traffic through firewall</td>
+    </tr>
+    <tr>
+    <td>Management OOB</td>
+    <td>Dedicated management VRF</td>
+    <td>Management traffic isolated from production</td>
+    </tr>
+    <tr>
+    <td>Shared services</td>
+    <td>Route leaking to a shared VRF</td>
+    <td>Centralized DNS, NTP, monitoring accessible by all tenants</td>
+    </tr>
+    <tr>
+    <td>Compliance</td>
+    <td>PCI/HIPAA scoped to a VRF</td>
+    <td>Audit scope reduced to specific VRF</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="mpls-fundamentals-and-l3vpn">11. MPLS Fundamentals and
+    L3VPN</h2>
+    <p>MPLS (Multiprotocol Label Switching) inserts a 32-bit label
+    header between the Layer 2 and Layer 3 headers. Label Distribution
+    Protocol (LDP, RFC 5036) or RSVP-TE distributes labels. Routers
+    perform label operations (push, swap, pop) rather than IP
+    longest-prefix-match lookups, enabling traffic engineering and VPN
+    services [15].</p>
+    <h3 id="label-operations">Label Operations</h3>
+    <pre><code>MPLS LABEL STACK
+================================================================
+
+  +----------+-----------+-----------+----------+
+  | L2 Header| MPLS Label| IP Header | Payload  |
+  +----------+-----------+-----------+----------+
+               |
+               v
+  +--------+---+----+---+---+
+  | Label  | TC | S | TTL   |  32 bits total
+  | 20 bit | 3b | 1 | 8 bit |
+  +--------+----+---+-------+
+  
+  Label:  Switching identifier (0-1,048,575)
+  TC:     Traffic Class (QoS, formerly EXP)
+  S:      Bottom of Stack (1 = last label)
+  TTL:    Time to live (decremented at each hop)
+
+  Operations:
+  PUSH  -- Ingress PE adds label(s) to packet
+  SWAP  -- Transit P router swaps top label
+  POP   -- Egress PE (or penultimate hop) removes label</code></pre>
+    <h3 id="l3vpn-architecture-rfc-4364">L3VPN Architecture (RFC
+    4364)</h3>
+    <p>MPLS L3VPN allows a service provider to offer private IP routing
+    to customers over a shared MPLS backbone. The architecture has three
+    roles:</p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Role</th>
+    <th>Device</th>
+    <th>Function</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>CE (Customer Edge)</td>
+    <td>Customer router</td>
+    <td>Peers with PE via eBGP, OSPF, or static</td>
+    </tr>
+    <tr>
+    <td>PE (Provider Edge)</td>
+    <td>Provider edge router</td>
+    <td>Maintains per-customer VRF, exchanges VPNv4 routes via
+    MP-BGP</td>
+    </tr>
+    <tr>
+    <td>P (Provider)</td>
+    <td>Core router</td>
+    <td>Label switches only, no customer route knowledge</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Route Distinguisher (RD)</strong> is a 64-bit value
+    prepended to customer IPv4 prefixes to create globally unique VPNv4
+    addresses. Format: ASN:NN or IP:NN. The RD’s sole purpose is
+    uniqueness; it does not affect route import/export.</p>
+    <p><strong>Route Target (RT)</strong> is a BGP extended community
+    that defines VPN membership. <code>route-target export</code> tags
+    routes leaving a VRF. <code>route-target import</code> controls
+    which tagged routes a VRF will accept. The RT is the policy
+    mechanism; the RD is the uniqueness mechanism. They are frequently
+    confused but serve entirely different purposes [16].</p>
+    <pre><code>L3VPN DATA FLOW
+================================================================
+
+  Customer A               MPLS Backbone              Customer A
+  Site 1                                               Site 2
+  
+  [CE1]---eBGP---[PE1]====MPLS=====[PE2]---eBGP---[CE2]
+                   |                  |
+  1. CE1 sends    2. PE1 imports     4. PE2 receives
+     10.1.0.0/16     into VRF-A,       VPNv4 route,
+     via eBGP        creates VPNv4     imports to VRF-A
+                     100:1:10.1.0.0   (RT 65001:100)
+                  3. PE1 advertises  5. PE2 advertises
+                     VPNv4 to PE2       10.1.0.0/16 to
+                     via MP-iBGP        CE2 via eBGP
+                     with RT 65001:100
+                     and two labels:
+                     transport + VPN</code></pre>
+    <hr />
+    <h2 id="evpn-vxlan-for-data-center-overlay">12. EVPN-VXLAN for Data
+    Center Overlay</h2>
+    <p>EVPN (Ethernet VPN, RFC 7432) combined with VXLAN (RFC 7348) is
+    the modern standard for data center network virtualization. EVPN
+    provides a BGP-based control plane for MAC/IP learning and
+    distribution, while VXLAN provides the data plane encapsulation.
+    Together they replace the flood-and-learn behavior of traditional
+    bridging with a control-plane-driven model [17][18].</p>
+    <h3 id="why-evpn-vxlan-replaced-flood-and-learn">Why EVPN-VXLAN
+    Replaced Flood-and-Learn</h3>
+    <p>Traditional VXLAN (multicast-based or ingress replication) has no
+    control plane. MAC addresses are learned by flooding, leading to
+    unnecessary BUM (Broadcast, Unknown unicast, Multicast) traffic
+    across the fabric. EVPN solves this by distributing MAC and IP
+    information via MP-BGP, enabling:</p>
+    <ul>
+    <li><strong>Known unicast forwarding</strong> without flooding</li>
+    <li><strong>ARP/ND suppression</strong> (the VTEP answers ARP
+    requests from its BGP-learned table)</li>
+    <li><strong>Multi-homing with active-active forwarding</strong>
+    (ESI-based, replacing MLAG)</li>
+    <li><strong>Integrated routing and bridging (IRB)</strong> in the
+    overlay</li>
+    <li><strong>Host mobility</strong> (MAC moves detected and
+    advertised via BGP)</li>
+    </ul>
+    <h3 id="evpn-route-types">EVPN Route Types</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1</td>
+    <td>Ethernet Auto-Discovery</td>
+    <td>Multi-homing, aliasing, mass withdrawal</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>MAC/IP Advertisement</td>
+    <td>MAC address learning, host IP binding</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>Inclusive Multicast</td>
+    <td>BUM traffic handling (ingress replication list)</td>
+    </tr>
+    <tr>
+    <td>4</td>
+    <td>Ethernet Segment</td>
+    <td>DF (Designated Forwarder) election for multi-homing</td>
+    </tr>
+    <tr>
+    <td>5</td>
+    <td>IP Prefix</td>
+    <td>L3 routing in overlay (inter-VNI, external)</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="vxlan-encapsulation">VXLAN Encapsulation</h3>
+    <pre><code>VXLAN FRAME FORMAT
+================================================================
+
+  Outer Ethernet | Outer IP | Outer UDP | VXLAN Header | Original Frame
+                              dst: 4789   VNI: 24 bits
+                                          (16M segments)
+
+  +----------+----------+----------+----------+----------+
+  | Outer L2 | Outer IP | UDP 4789 | VXLAN Hdr| Inner L2 |  Inner Payload
+  | 14 bytes | 20 bytes | 8 bytes  | 8 bytes  | 14 bytes |
+  +----------+----------+----------+----------+----------+
+                                    |
+                                    +-&gt; VNI maps to VLAN/bridge domain
+                                        50 bytes overhead total</code></pre>
+    <h3 id="configuration-example">Configuration Example</h3>
+    <pre><code>EVPN-VXLAN SPINE-LEAF -- ARISTA EOS
+================================================================
+
+! Leaf switch configuration
+vlan 10
+   name WEB-TIER
+!
+interface Vxlan1
+   vxlan source-interface Loopback1
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+!
+router bgp 65001
+   neighbor SPINE peer group
+   neighbor SPINE remote-as 65000
+   neighbor SPINE send-community extended
+   neighbor 10.0.0.1 peer group SPINE
+   neighbor 10.0.0.2 peer group SPINE
+   !
+   vlan 10
+      rd auto
+      route-target both 10010:10010
+      redistribute learned
+   !
+   address-family evpn
+      neighbor SPINE activate</code></pre>
+    <h3 id="evpn-vxlan-vs-mpls-l3vpn">EVPN-VXLAN vs MPLS L3VPN</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Dimension</th>
+    <th>EVPN-VXLAN</th>
+    <th>MPLS L3VPN</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Primary domain</td>
+    <td>Data center overlay</td>
+    <td>WAN / service provider</td>
+    </tr>
+    <tr>
+    <td>Encapsulation</td>
+    <td>VXLAN (UDP 4789)</td>
+    <td>MPLS labels</td>
+    </tr>
+    <tr>
+    <td>Control plane</td>
+    <td>MP-BGP (EVPN AFI/SAFI)</td>
+    <td>MP-BGP (VPNv4/VPNv6)</td>
+    </tr>
+    <tr>
+    <td>L2 and L3</td>
+    <td>Both (integrated bridging + routing)</td>
+    <td>L3 only (L2VPN is separate)</td>
+    </tr>
+    <tr>
+    <td>Multi-tenancy</td>
+    <td>VNI-based (24-bit, 16M segments)</td>
+    <td>VRF + RD/RT (label-based)</td>
+    </tr>
+    <tr>
+    <td>Underlay requirements</td>
+    <td>IP reachability (any IGP or eBGP)</td>
+    <td>MPLS LDP or RSVP-TE</td>
+    </tr>
+    <tr>
+    <td>Multi-homing</td>
+    <td>ESI with active-active (native)</td>
+    <td>CE dual-homing (limited active-active)</td>
+    </tr>
+    <tr>
+    <td>Standards maturity</td>
+    <td>RFC 7432 (2015), RFC 8365 (2018)</td>
+    <td>RFC 4364 (2006), highly mature</td>
+    </tr>
+    <tr>
+    <td>Interoperability</td>
+    <td>Good (open standards, multi-vendor)</td>
+    <td>Excellent (decades of deployment)</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="sd-wan-overlay-engineering">13. SD-WAN Overlay
+    Engineering</h2>
+    <p>SD-WAN (Software-Defined Wide Area Network) separates the WAN
+    control plane from the data plane, centralizing policy management
+    while distributing forwarding across commodity internet links, MPLS,
+    and LTE/5G. It is an overlay technology that creates encrypted
+    tunnels over multiple underlay transports and steers traffic based
+    on application awareness and real-time path quality [19].</p>
+    <h3 id="architecture-components">Architecture Components</h3>
+    <p>All major SD-WAN platforms share a common architectural pattern
+    with vendor-specific naming:</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Component</th>
+    <th>Cisco Catalyst SD-WAN</th>
+    <th>VMware VeloCloud</th>
+    <th>Fortinet SD-WAN</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Orchestrator</td>
+    <td>vManage</td>
+    <td>VCO (Orchestrator)</td>
+    <td>FortiManager</td>
+    </tr>
+    <tr>
+    <td>Controller</td>
+    <td>vSmart</td>
+    <td>VCG (Gateway)</td>
+    <td>FortiManager</td>
+    </tr>
+    <tr>
+    <td>Edge device</td>
+    <td>vEdge / cEdge</td>
+    <td>VCE (Edge)</td>
+    <td>FortiGate</td>
+    </tr>
+    <tr>
+    <td>Underlay mgmt</td>
+    <td>vBond (zero-touch)</td>
+    <td>VCO activation</td>
+    <td>FortiZTP</td>
+    </tr>
+    <tr>
+    <td>Security</td>
+    <td>Integrated or Umbrella</td>
+    <td>Cloud Security Service</td>
+    <td>FortiGuard (native NGFW)</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="vendor-comparison">Vendor Comparison</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>Cisco Catalyst SD-WAN</th>
+    <th>VMware VeloCloud</th>
+    <th>Fortinet SD-WAN</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Security approach</td>
+    <td>Separate (Umbrella SASE) or integrated UTM</td>
+    <td>Partner-integrated, cloud-first</td>
+    <td>Native NGFW on every edge</td>
+    </tr>
+    <tr>
+    <td>Best for</td>
+    <td>Large enterprise with existing Cisco estate</td>
+    <td>Multi-cloud SaaS optimization</td>
+    <td>Security-first branch consolidation</td>
+    </tr>
+    <tr>
+    <td>Zero-trust</td>
+    <td>Segment-based, per-VPN</td>
+    <td>Application-based</td>
+    <td>Zone-based NGFW policies</td>
+    </tr>
+    <tr>
+    <td>Deployment model</td>
+    <td>On-prem controllers or cloud-hosted</td>
+    <td>Cloud-managed primarily</td>
+    <td>On-prem or FortiSASE</td>
+    </tr>
+    <tr>
+    <td>Transport independence</td>
+    <td>MPLS, Internet, LTE, satellite</td>
+    <td>MPLS, Internet, LTE</td>
+    <td>MPLS, Internet, LTE, 5G</td>
+    </tr>
+    <tr>
+    <td>Application awareness</td>
+    <td>DPI + Microsoft 365/SaaS optimization</td>
+    <td>DMPO (Dynamic Multi-Path Optimization)</td>
+    <td>DPI + application steering</td>
+    </tr>
+    <tr>
+    <td>Segmentation</td>
+    <td>VPN-based (VRF equivalent)</td>
+    <td>Segment-based profiles</td>
+    <td>VDOM + zone-based</td>
+    </tr>
+    <tr>
+    <td>Pricing model</td>
+    <td>Per-device subscription</td>
+    <td>Per-edge bandwidth tier</td>
+    <td>Per-device, bundled security</td>
+    </tr>
+    <tr>
+    <td>Strength</td>
+    <td>Scalability, enterprise features, segmentation</td>
+    <td>Cloud/SaaS performance, ease of use</td>
+    <td>Integrated security, total cost</td>
+    </tr>
+    <tr>
+    <td>Weakness</td>
+    <td>Complexity, licensing cost</td>
+    <td>Limited on-prem control, dependency on gateways</td>
+    <td>Less mature orchestration at scale</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="sd-wan-traffic-steering">SD-WAN Traffic Steering</h3>
+    <p>The defining operational capability of SD-WAN is
+    application-aware routing. Unlike traditional WAN routing (choose
+    the path with the lowest IGP metric or BGP local preference), SD-WAN
+    measures real-time path characteristics – latency, jitter, packet
+    loss – and steers applications to the transport that meets their
+    SLA.</p>
+    <pre><code>SD-WAN APPLICATION-AWARE ROUTING
+================================================================
+
+  Branch Office
+  +------------------------------------------+
+  |  SD-WAN Edge                              |
+  |                                            |
+  |  App Classification (DPI)                  |
+  |  +-----------+  +-----------+  +--------+ |
+  |  | Voice/RTP |  | O365/SaaS |  | Bulk   | |
+  |  | Latency   |  | Loss      |  | Best   | |
+  |  | &lt;30ms     |  | &lt;0.1%     |  | Effort | |
+  |  +-----+-----+  +-----+-----+  +---+----+ |
+  |        |              |             |       |
+  +--------|--------------|-------------|-------+
+           |              |             |
+     +-----v---+    +-----v---+   +----v----+
+     |  MPLS   |    | Internet|   | LTE/5G  |
+     | Primary |    | Primary |   | Failover|
+     | for VoIP|    | for SaaS|   | for all |
+     +---------+    +---------+   +---------+
+
+  SLA Policies:
+  - Voice: Latency &lt;30ms, jitter &lt;10ms, loss &lt;0.1%
+    -&gt; Prefer MPLS; failover to Internet if SLA violated
+  - SaaS: Loss &lt;0.5%, latency &lt;100ms
+    -&gt; Prefer direct Internet (local breakout)
+  - Bulk: Best effort
+    -&gt; Use cheapest available transport</code></pre>
+    <hr />
+    <h2 id="operational-decision-matrix">14. Operational Decision
+    Matrix</h2>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Scenario</th>
+    <th>Recommended Protocol/Technology</th>
+    <th>Rationale</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Enterprise campus core</td>
+    <td>OSPF</td>
+    <td>Mature, well-understood, sufficient scale for &lt;100 routers
+    per area</td>
+    </tr>
+    <tr>
+    <td>Large DC underlay (&gt;500 switches)</td>
+    <td>eBGP (RFC 7938)</td>
+    <td>No flooding domain, scales with unique ASN per leaf</td>
+    </tr>
+    <tr>
+    <td>Medium DC underlay (&lt;200 switches)</td>
+    <td>IS-IS (L2-only) or OSPF</td>
+    <td>Either works; IS-IS if SR is planned</td>
+    </tr>
+    <tr>
+    <td>DC overlay / network virtualization</td>
+    <td>EVPN-VXLAN</td>
+    <td>Standards-based, multi-vendor, replaces flood-and-learn</td>
+    </tr>
+    <tr>
+    <td>Service provider WAN VPN</td>
+    <td>MPLS L3VPN</td>
+    <td>Proven at scale, QoS via MPLS TC bits</td>
+    </tr>
+    <tr>
+    <td>Multi-site enterprise WAN</td>
+    <td>SD-WAN</td>
+    <td>Application-aware, multi-transport, centralized policy</td>
+    </tr>
+    <tr>
+    <td>Internet edge / peering</td>
+    <td>eBGP with RPKI ROV</td>
+    <td>Policy control, path selection, route security</td>
+    </tr>
+    <tr>
+    <td>Multi-tenant routing</td>
+    <td>VRF (Lite or MPLS-backed)</td>
+    <td>Isolation with overlapping address space support</td>
+    </tr>
+    <tr>
+    <td>Branch VLAN segmentation</td>
+    <td>802.1Q with pruning</td>
+    <td>Standard, but migrating to micro-segmentation for new
+    builds</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="cross-references">15. Cross-References</h2>
+    <blockquote>
+    <p><strong>Related:</strong> <a
+    href="01-network-architecture-design.md">Network Architecture &amp;
+    Design</a> – spine-leaf and CLOS topologies that these routing
+    protocols operate on. <a
+    href="03-network-automation-netdevops.md">Network Automation &amp;
+    NetDevOps</a> – automating the configuration of BGP, OSPF, VLANs,
+    and VRF with Ansible/NAPALM. <a
+    href="04-load-balancing-traffic-engineering.md">Load Balancing &amp;
+    Traffic Engineering</a> – ECMP and segment routing build on the IGP
+    foundations here. <a
+    href="05-network-security-engineering.md">Network Security
+    Engineering</a> – firewall zone design uses VRF segmentation, CoPP
+    protects control plane. <a href="06-cloud-networking.md">Cloud
+    Networking</a> – VPC routing, transit gateways, and hybrid
+    connectivity extend these patterns into cloud. <a
+    href="10-network-reliability-dr.md">Network Reliability &amp; DR</a>
+    – BFD, GR, NSF, and convergence engineering depend on understanding
+    the control/data plane split.</p>
+    </blockquote>
+    <p><strong>Series cross-references:</strong> - <strong>TCP (TCP/IP
+    Protocol):</strong> TCP carries BGP sessions (port 179); BGP’s
+    reliability depends entirely on TCP’s guaranteed delivery -
+    <strong>DNS (DNS Protocol):</strong> GSLB and GeoDNS are traffic
+    engineering at the application layer, complementing BGP TE at the
+    network layer - <strong>SYA (Systems Admin):</strong> VLAN
+    configuration, interface management, and routing table inspection
+    are daily sysadmin operations - <strong>SOO (Systems
+    Operations):</strong> Change management and maintenance windows for
+    routing protocol changes require operational discipline -
+    <strong>K8S (Kubernetes):</strong> Calico uses BGP for pod
+    networking; Cilium uses VXLAN or Geneve for overlay; service mesh
+    networking builds on these L3/L4 foundations - <strong>DRP (Disaster
+    Recovery):</strong> MPLS TE Fast Reroute, BGP graceful restart, and
+    VRF-aware failover are DR mechanisms at the network layer -
+    <strong>CMH (Computational Mesh):</strong> Mesh overlay networking
+    shares architectural DNA with EVPN-VXLAN’s control-plane-driven
+    forwarding model - <strong>RFC (RFC Archive):</strong> BGP (RFC
+    4271), OSPF (RFC 2328), IS-IS (RFC 1195), MPLS (RFC 3031), EVPN (RFC
+    7432), VXLAN (RFC 7348)</p>
+    <hr />
+    <h2 id="sources">16. Sources</h2>
+    <ol type="1">
+    <li>Cisco Systems. “Control Plane Policing Implementation Best
+    Practices.” Cisco IOS-XE Configuration Guide.</li>
+    <li>Rekhter, Y., Li, T., and Hares, S. “A Border Gateway Protocol 4
+    (BGP-4).” RFC 4271, IETF, January 2006. Status: Draft Standard.</li>
+    <li>Bates, T., Chen, E., and Chandra, R. “BGP Route Reflection: An
+    Alternative to Full Mesh Internal BGP (IBGP).” RFC 4456, IETF, April
+    2006.</li>
+    <li>University of Oregon. “RouteViews Project.” routeviews.org.
+    Active BGP data collection since 1997.</li>
+    <li>Chandra, R., Traina, P., and Li, T. “BGP Communities Attribute.”
+    RFC 1997, IETF, August 1996.</li>
+    <li>Heitz, J., Snijders, J., Patel, K., Bagdonas, I., and Hilliard,
+    N. “BGP Large Communities Attribute.” RFC 8092, IETF, February
+    2017.</li>
+    <li>King, T., Dietzel, C., Snijders, J., Doering, G., and Hankins,
+    G. “BLACKHOLE Community.” RFC 7999, IETF, October 2016.</li>
+    <li>Cloudflare Blog. “Helping Build a Safer Internet by Measuring
+    BGP RPKI Route Origin Validation.” blog.cloudflare.com. NIST RPKI
+    Monitor. rpki-monitor.antd.nist.gov.</li>
+    <li>Moy, J. “OSPF Version 2.” RFC 2328, IETF, April 1998. Status:
+    Internet Standard.</li>
+    <li>Cisco Systems. “Configure the OSPF Not-So-Stubby Area (NSSA).”
+    cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/6208-nssa.html.</li>
+    <li>International Organization for Standardization. “Information
+    Technology – Telecommunications and Information Exchange Between
+    Systems – Intermediate System to Intermediate System Intra-Domain
+    Routeing Information Exchange Protocol.” ISO 10589:2002. RFC 1195
+    (IP extensions).</li>
+    <li>Lapukhov, P., Premji, A., and Mitchell, J. “Use of BGP for
+    Routing in Large-Scale Data Centers.” RFC 7938, IETF, August
+    2016.</li>
+    <li>IEEE. “IEEE Standard for Local and Metropolitan Area Networks –
+    Bridges and Bridged Networks.” IEEE 802.1Q-2022.</li>
+    <li>Cisco Systems. “VRF Configuration Guide.” Cisco IOS-XE.</li>
+    <li>Rosen, E., Viswanathan, A., and Callon, R. “Multiprotocol Label
+    Switching Architecture.” RFC 3031, IETF, January 2001.</li>
+    <li>Rosen, E. and Rekhter, Y. “BGP/MPLS IP Virtual Private Networks
+    (VPNs).” RFC 4364, IETF, February 2006. Status: Proposed
+    Standard.</li>
+    <li>Sajassi, A., Aggarwal, R., Bitar, N., Isaac, A., Uttaro, J.,
+    Drake, J., and Henderickx, W. “BGP MPLS-Based Ethernet VPN.” RFC
+    7432, IETF, February 2015.</li>
+    <li>Lasserre, M., Balus, F., Morin, T., Bitar, N., and Sajassi, A.
+    “A Network Virtualization Overlay Solution Using Ethernet VPN
+    (EVPN).” RFC 8365, IETF, March 2018.</li>
+    <li>MEF Forum. “SD-WAN Service Attributes and Services.” MEF 70.1,
+    January 2021.</li>
+    <li>Uttaro, J., Filsfils, C., Alcaide, J., and Decraene, B. “BGP
+    Link-State.” RFC 9552, IETF, December 2023.</li>
+    <li>Bush, R. and Austein, R. “The Resource Public Key Infrastructure
+    (RPKI) to Router Protocol, Version 2.” RFC 9286, IETF, June
+    2022.</li>
+    </ol>
+    <hr />
+    <p><em>Systems Network Engineering – Module 2: Routing &amp;
+    Switching Operations. The control plane converges. The data plane
+    delivers. The operator understands which is which.</em></p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNE Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNE/">tibsfox.com/Research/SNE</a>
+    </div>
+</body>
+</html>

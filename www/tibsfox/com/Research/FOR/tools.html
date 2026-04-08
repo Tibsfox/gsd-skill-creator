@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools &amp; Compilers &mdash; Fortran &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-for">
+  <header>
+    <h1>Tools &amp; Compilers</h1>
+    <div class="subtitle">$ gfortran -O3 -march=native -fopenmp prog.f90 -o prog</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="arrays.html">Arrays</a>
+      <a href="hpc.html">HPC</a>
+      <a href="parallel.html">Parallel</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>! gfortran -O3 -fimplicit-none -Wall</strong><br>
+      Choose your compiler by domain: free defaults (GFortran), performance leader (ifx), GPU (nvfortran), strict standards (NAG), modern interactivity (LFortran).
+    </blockquote>
+
+    <h2>GFortran (GNU Fortran)</h2>
+    <div class="card">
+      <p>Part of GCC. Ships with every Linux distribution. As of GCC 15 (April 2025), supported versions are GCC 13, 14, 15.</p>
+      <p><strong>Standards support:</strong> Full F95, most F2003/2008, partial F2018, early F2023.<br>
+      <strong>License:</strong> GPLv3 with runtime exception.<br>
+      <strong>Install:</strong> <code>sudo apt install gfortran</code> / <code>brew install gcc</code></p>
+    </div>
+
+    <pre>
+# Compile a single file
+gfortran -O3 -march=native -Wall -Wextra prog.f90 -o prog
+
+# With OpenMP
+gfortran -O3 -fopenmp prog.f90 -o prog
+
+# Strict standards mode
+gfortran -std=f2018 -fimplicit-none -Wall prog.f90 -o prog
+
+# Multi-file build
+gfortran -c module.f90 main.f90
+gfortran module.o main.o -o prog -lblas -llapack
+
+# Common flags
+-O0 / -O1 / -O2 / -O3      # optimization levels
+-Og                         # optimize for debugging
+-g                          # debug symbols
+-ffree-form / -ffixed-form  # source form override
+-ffree-line-length-none     # no line length limit
+-fcheck=all                 # runtime bounds checking
+-finit-real=nan             # initialize reals to NaN (catches uninitialized use)
+-fbacktrace                 # backtrace on crash</pre>
+
+    <h2>Intel ifx (oneAPI)</h2>
+    <div class="card">
+      <p>Intel&rsquo;s LLVM-based Fortran compiler. The successor to <code>ifort</code> (end-of-life late 2024). Free for personal use since 2024.</p>
+      <p><strong>Best on:</strong> x86-64 (AVX-512), Intel GPUs.<br>
+      <strong>Bundled with:</strong> MKL (Math Kernel Library), VTune, Advisor, Inspector.<br>
+      <strong>Install:</strong> Intel oneAPI Base + HPC Toolkit.</p>
+    </div>
+
+    <pre>
+# Standard build
+ifx -O3 -xHost prog.f90 -o prog
+
+# With MKL (BLAS/LAPACK)
+ifx -O3 prog.f90 -o prog -qmkl
+
+# OpenMP
+ifx -O3 -qopenmp prog.f90 -o prog
+
+# OpenMP target offload (Intel GPU)
+ifx -O3 -fiopenmp -fopenmp-targets=spir64 prog.f90 -o prog</pre>
+
+    <h2>nvfortran (NVIDIA HPC SDK)</h2>
+    <div class="card">
+      <p>NVIDIA&rsquo;s Fortran compiler. Successor to PGI Fortran (acquired 2013). LLVM-based with NVIDIA backends.</p>
+      <p><strong>Best for:</strong> GPU offloading. CUDA Fortran. OpenACC. <code>do concurrent</code> &rarr; GPU kernels.<br>
+      <strong>License:</strong> Free for non-commercial use.</p>
+    </div>
+
+    <pre>
+# Standard CPU build
+nvfortran -O3 -fast prog.f90 -o prog
+
+# OpenACC GPU offload
+nvfortran -O3 -acc -gpu=cc80 prog.f90 -o prog
+
+# DO CONCURRENT to GPU (no annotations needed!)
+nvfortran -O3 -stdpar=gpu prog.f90 -o prog
+
+# CUDA Fortran (kernel attribute)
+nvfortran -O3 -cuda prog.cuf -o prog
+
+# OpenMP target offload
+nvfortran -O3 -mp=gpu prog.f90 -o prog</pre>
+
+    <h2>NAG Fortran</h2>
+    <div class="card">
+      <p>Commercial. The reference for <strong>standards conformance</strong> and diagnostics. Used to validate that code is portable, not GFortran-specific.</p>
+      <p><strong>Role:</strong> Compliance oracle. Run your code through NAG to find non-standard usage.<br>
+      <strong>Strength:</strong> Catches more bugs at compile time than any other Fortran compiler.</p>
+    </div>
+
+    <h2>LFortran</h2>
+    <div class="card">
+      <p>The new hotness. LLVM-based. Interactive REPL. Jupyter kernel. Lazy compilation. Built by Ond&#345;ej &#268;ert&iacute;k and the fortran-lang community.</p>
+      <p><strong>Status (2026):</strong> 1.0.0 released late 2025. Production-ready for many use cases. Active development.<br>
+      <strong>Unique:</strong> Type-in-and-run REPL for Fortran. First time in 69 years.</p>
+    </div>
+
+    <pre>
+# Install LFortran
+pip install lfortran                     # via pip
+# Or download from lfortran.org
+
+# Interactive REPL
+lfortran
+&gt;&gt;&gt; integer :: i
+&gt;&gt;&gt; do i = 1, 5
+...   print *, i*i
+... end do
+            1
+            4
+            9
+           16
+           25
+
+# Compile
+lfortran prog.f90 -o prog
+
+# Run as Jupyter kernel
+jupyter notebook  # select Fortran kernel</pre>
+
+    <h2>Flang (LLVM)</h2>
+    <div class="card">
+      <p>LLVM&rsquo;s official Fortran frontend. The long-term replacement strategy for many backends. Apache 2.0 license. Backed by Arm, AMD, NVIDIA, and others.</p>
+      <p><strong>Status (2026):</strong> Production for most F95 code, increasing F2018/2023 coverage. Used by AMD AOCC and partially by nvfortran.</p>
+    </div>
+
+    <h2>Compiler Flags Reference</h2>
+
+    <table>
+      <thead><tr><th>Flag (GFortran)</th><th>Purpose</th><th>ifx Equivalent</th></tr></thead>
+      <tbody>
+        <tr><td><code>-O3</code></td><td>Aggressive optimization</td><td><code>-O3</code></td></tr>
+        <tr><td><code>-march=native</code></td><td>Use all host CPU features</td><td><code>-xHost</code></td></tr>
+        <tr><td><code>-fopenmp</code></td><td>Enable OpenMP</td><td><code>-qopenmp</code></td></tr>
+        <tr><td><code>-fcheck=all</code></td><td>Runtime array bounds checking</td><td><code>-check all</code></td></tr>
+        <tr><td><code>-fimplicit-none</code></td><td>Require IMPLICIT NONE everywhere</td><td><code>-implicitnone</code></td></tr>
+        <tr><td><code>-Wall -Wextra</code></td><td>All warnings</td><td><code>-warn all</code></td></tr>
+        <tr><td><code>-std=f2018</code></td><td>Strict F2018 standard mode</td><td><code>-stand f18</code></td></tr>
+        <tr><td><code>-fbacktrace</code></td><td>Backtrace on runtime errors</td><td><code>-traceback</code></td></tr>
+        <tr><td><code>-g</code></td><td>Debug symbols</td><td><code>-g</code></td></tr>
+        <tr><td><code>-pg</code></td><td>Profiling (gprof)</td><td><code>-p</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Recommended Modern Setup (2026)</h2>
+
+    <ol>
+      <li><strong>Compiler:</strong> GFortran (free) or ifx (free for personal, fastest on Intel)</li>
+      <li><strong>Build:</strong> fpm for new projects, CMake for mixed-language projects</li>
+      <li><strong>Editor:</strong> VS Code with Modern Fortran extension + fortls</li>
+      <li><strong>Library:</strong> stdlib for modern data structures and numerical primitives</li>
+      <li><strong>Tests:</strong> test-drive for unit tests</li>
+      <li><strong>Docs:</strong> FORD for HTML documentation</li>
+      <li><strong>Standards:</strong> <code>-std=f2018 -fimplicit-none</code> as the floor; validate with NAG for portability</li>
+      <li><strong>GPU (if needed):</strong> nvfortran with <code>do concurrent</code> or OpenACC</li>
+    </ol>
+
+    <pre>
+# The full modern Fortran greenfield project
+fpm new myproject --app --lib --test
+cd myproject
+$EDITOR fpm.toml                         # add stdlib, test-drive
+fpm build --compiler gfortran --flag "-O3 -fimplicit-none -Wall"
+fpm test
+fpm run</pre>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="ecosystem.html">Modern Ecosystem</a></li>
+        <li><a href="parallel.html">Parallel Fortran</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Tools &amp; Compilers &middot; Fortran &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

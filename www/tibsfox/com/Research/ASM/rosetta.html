@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta Integration &mdash; Assembly Language</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-asm">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">Assembly&rsquo;s Place in the Stack &mdash; How Every Language Becomes Assembly</div>
+    <nav>
+      <a href="index.html">Overview</a> <a href="x86.html">x86-64</a> <a href="arm.html">ARM64</a> <a href="microarch.html">Microarch</a> <a href="tools.html">Tools</a> <a href="modern.html">Modern</a> <a href="rosetta.html" class="active">Rosetta</a> <a href="education.html">Learn</a> <a href="history.html">History</a>
+    </nav>
+  </header>
+  <main>
+    <blockquote>Every language in this research series &mdash; C, C++, Rust, Go, Java, JavaScript, Python, Perl &mdash; eventually becomes assembly. Assembly is the final representation before the transistors switch.</blockquote>
+
+    <h2>How Each Language Becomes Assembly</h2>
+    <table>
+      <thead><tr><th>Language</th><th>Path to assembly</th></tr></thead>
+      <tbody>
+        <tr><td><strong>C</strong></td><td><code>gcc -S</code> &rarr; assembly &rarr; <code>as</code> &rarr; object &rarr; <code>ld</code> &rarr; binary. The most direct path.</td></tr>
+        <tr><td><strong>C++</strong></td><td>Same as C. Templates are instantiated, vtables are laid out, RAII is constructor/destructor calls.</td></tr>
+        <tr><td><strong>Rust</strong></td><td><code>rustc --emit asm</code>. Ownership compiles away. The output looks like C&rsquo;s.</td></tr>
+        <tr><td><strong>Go</strong></td><td>Go compiler &rarr; Go assembly (Plan 9 syntax) &rarr; machine code. <code>go tool compile -S</code>.</td></tr>
+        <tr><td><strong>Java</strong></td><td>javac &rarr; bytecode &rarr; JIT (C1/C2) &rarr; assembly at runtime. <code>-XX:+PrintAssembly</code>.</td></tr>
+        <tr><td><strong>JavaScript</strong></td><td>V8: parse &rarr; Ignition bytecode &rarr; TurboFan &rarr; assembly at runtime. <code>--print-opt-code</code>.</td></tr>
+        <tr><td><strong>Python</strong></td><td>CPython bytecode interpreted in C; C is compiled to assembly. NumPy calls BLAS (Fortran/C &rarr; assembly).</td></tr>
+        <tr><td><strong>Perl</strong></td><td>Interpreted in C; the Perl interpreter is compiled to assembly.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The ABI &mdash; The Contract Between Languages and Assembly</h2>
+    <div class="card">
+      <p>The <strong>Application Binary Interface</strong> is the contract that makes cross-language interop possible. It defines: register usage, calling conventions, stack alignment, struct layout, name mangling, exception handling tables, and thread-local storage. The <strong>C ABI</strong> (System V AMD64 on Linux, AAPCS64 on ARM) is the lingua franca &mdash; every language that calls C (via FFI) must speak the C ABI.</p>
+    </div>
+
+    <h2>C Was Designed as &ldquo;Portable Assembly&rdquo;</h2>
+    <p>Dennis Ritchie designed C at Bell Labs (1972) specifically to be close enough to assembly that a systems programmer could predict what the compiler would emit, while being portable enough to run on different architectures. The result: C maps to assembly more directly than any other high-level language. The <a href="../CEE/index.html">CEE research project</a> covers this lineage.</p>
+
+    <h2>The Escalation Ladder (Complete)</h2>
+    <ol>
+      <li><strong>Bash</strong> &mdash; interpreted by a C program (compiled to assembly)</li>
+      <li><strong>Perl / Python / JavaScript</strong> &mdash; interpreted or JIT-compiled; the runtime is C/C++ (compiled to assembly)</li>
+      <li><strong>Java / Go / C#</strong> &mdash; compiled to bytecode, then JIT-compiled to assembly</li>
+      <li><strong>Rust / C++</strong> &mdash; compiled to assembly via LLVM or GCC</li>
+      <li><strong>C</strong> &mdash; compiled to assembly (&ldquo;portable assembly&rdquo;)</li>
+      <li><strong>Assembly</strong> &mdash; <em>you are here</em>. One step above machine code.</li>
+      <li><strong>Machine code</strong> &mdash; raw binary opcodes the CPU decodes</li>
+      <li><strong>Microarchitecture</strong> &mdash; how the CPU <em>executes</em> the machine code (pipeline, OOO, caches)</li>
+      <li><strong>Transistors</strong> &mdash; the physics layer</li>
+    </ol>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CEE</td><td>C</td><td>C is the closest high-level language to assembly. <code>gcc -S</code> reveals the mapping.</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>Templates, vtables, RAII, exceptions &mdash; all have assembly-level implementations visible in Compiler Explorer.</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>Ownership compiles away. <code>rustc --emit asm</code> shows the result is C-like.</td></tr>
+        <tr><td>GOL</td><td>Go</td><td>Go has its own assembly syntax (Plan 9 heritage). <code>go tool compile -S</code>.</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>JIT compilers are assembly generators. <code>-XX:+PrintAssembly</code> reveals HotSpot&rsquo;s output.</td></tr>
+        <tr><td>JTS</td><td>JavaScript</td><td>V8 TurboFan&rsquo;s output is x86/ARM assembly. WebAssembly is a virtual assembly.</td></tr>
+      </tbody>
+    </table>
+    <div class="cross-links"><h4>Related Modules</h4><ul><li><a href="index.html">Overview</a></li><li><a href="x86.html">x86-64</a></li><li><a href="arm.html">ARM64</a></li><li><a href="microarch.html">Microarchitecture</a></li><li><a href="tools.html">Tools</a></li><li><a href="modern.html">Modern Uses</a></li><li><a href="education.html">Learn</a></li><li><a href="history.html">History</a></li></ul></div>
+  </main>
+  <footer><p>Rosetta Integration &middot; PNW Research Series &middot; April 2026</p><p><a href="../index.html">PNW Research Series</a></p></footer>
+</body>
+</html>

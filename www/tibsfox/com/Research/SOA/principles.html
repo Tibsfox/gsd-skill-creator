@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Principles &amp; Concepts &mdash; SOA</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-soa">
+  <header>
+    <h1>Principles &amp; Concepts</h1>
+    <div class="subtitle">Contracts, loose coupling, idempotency, CAP, orchestration vs choreography, observability&rsquo;s three pillars &mdash; the conceptual core</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="principles.html" class="active">Principles</a>
+      <a href="history.html">History</a>
+      <a href="enterprise-soa.html">Enterprise SOA</a>
+      <a href="rest-apis.html">REST &amp; APIs</a>
+      <a href="microservices-mesh.html">Microservices</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      A service is an <em>independently deployable, independently scalable, independently evolvable unit of functionality, exposed through an explicit contract, communicating over a network.</em> Every word in that definition is doing work. Forget any of them and you don&rsquo;t have a service &mdash; you have a distributed monolith, or a library, or a bad abstraction waiting to break.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- 1. WHAT SERVICE-ORIENTED MEANS                                -->
+    <!-- ============================================================ -->
+
+    <h2>1. What &ldquo;Service-Oriented&rdquo; Actually Means</h2>
+
+    <div class="card">
+      <ul>
+        <li><strong>Independently deployable.</strong> You can push a new version without coordinating a simultaneous release of any other service. This is the property that distinguishes a service from a library. If your &ldquo;microservices&rdquo; have to be deployed in lockstep, you have a distributed monolith with extra latency.</li>
+        <li><strong>Independently scalable.</strong> 100 copies of this service, 2 copies of that one. GPU box here, cheap ARM node there. Shared-fate scaling is a failure mode.</li>
+        <li><strong>Independently evolvable.</strong> The team that owns this service can change its internal implementation without asking anyone. This is what makes service-oriented thinking useful for <em>organizations</em>, not just machines.</li>
+        <li><strong>Explicit contract.</strong> The only thing outside the service that matters is the promise it makes about its interface. Everything inside is private.</li>
+        <li><strong>Over a network.</strong> The channel is a wire: variable latency, packet loss, partial failures, serialization, timeouts. It is nothing like a function call.</li>
+      </ul>
+    </div>
+
+    <h3>Units of decomposition</h3>
+
+    <table>
+      <thead><tr><th>Unit</th><th>Binding</th><th>Address space</th><th>Deploy unit</th><th>Failure domain</th></tr></thead>
+      <tbody>
+        <tr><td>Function</td><td>Compile/link</td><td>Same</td><td>Same binary</td><td>Same process</td></tr>
+        <tr><td>Object</td><td>Runtime</td><td>Same</td><td>Same binary</td><td>Same process</td></tr>
+        <tr><td>Module / Package</td><td>Build time</td><td>Same</td><td>Same binary</td><td>Same process</td></tr>
+        <tr><td>Library</td><td>Link time</td><td>Same</td><td>Co-deployed</td><td>Same process</td></tr>
+        <tr><td>Process</td><td>OS fork/exec</td><td>Separate</td><td>Same host</td><td>Per-process</td></tr>
+        <tr><td><strong>Service</strong></td><td><strong>Runtime / discovery</strong></td><td><strong>Separate</strong></td><td><strong>Per-service</strong></td><td><strong>Per-service</strong></td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- 2. SOA MANIFESTO                                              -->
+    <!-- ============================================================ -->
+
+    <h2>2. The SOA Manifesto (2009)</h2>
+
+    <p>Signed at the SOA Symposium in Rotterdam on <strong>October 23, 2009</strong>. Deliberately echoing the Agile Manifesto (2001), signed by Thomas Erl, Nicolai Josuttis, Mark Little, Grady Booch, Jim Webber, Herbj&ouml;rn Wilhelmsen, John deVadoss, and about two dozen others.</p>
+
+    <div class="callout">
+      Business value over technical strategy<br>
+      Strategic goals over project-specific benefits<br>
+      Intrinsic interoperability over custom integration<br>
+      Shared services over specific-purpose implementations<br>
+      Flexibility over optimization<br>
+      Evolutionary refinement over pursuit of initial perfection
+    </div>
+
+    <p>&ldquo;That is, while we value the items on the right, we value the items on the left more.&rdquo;</p>
+
+    <h3>Thomas Erl&rsquo;s eight SOA design principles</h3>
+
+    <ol>
+      <li><strong>Standardized Service Contract</strong></li>
+      <li><strong>Service Loose Coupling</strong></li>
+      <li><strong>Service Abstraction</strong></li>
+      <li><strong>Service Reusability</strong></li>
+      <li><strong>Service Autonomy</strong></li>
+      <li><strong>Service Statelessness</strong></li>
+      <li><strong>Service Discoverability</strong></li>
+      <li><strong>Service Composability</strong></li>
+    </ol>
+
+    <p>These principles, formulated in 2005, describe microservices accurately. Reading Erl&rsquo;s 2005 book in 2020 feels strangely prescient. The principles were always right; the implementations needed to be simpler.</p>
+
+    <!-- ============================================================ -->
+    <!-- 3. CONTRACT-FIRST                                             -->
+    <!-- ============================================================ -->
+
+    <h2>3. Contract-First Design</h2>
+
+    <p>The contract is the most important thing. Every generation of service-oriented technology has its own Interface Definition Language:</p>
+
+    <table>
+      <thead><tr><th>Era</th><th>IDL</th><th>Format</th></tr></thead>
+      <tbody>
+        <tr><td>CORBA (1991)</td><td>CORBA IDL</td><td>Text</td></tr>
+        <tr><td>SOAP (2000)</td><td>WSDL 1.1 / 2.0</td><td>XML</td></tr>
+        <tr><td>Google internal (2001)</td><td>Protocol Buffers (.proto)</td><td>Binary + codegen</td></tr>
+        <tr><td>Facebook internal (2007)</td><td>Thrift</td><td>Binary + codegen</td></tr>
+        <tr><td>REST (2011)</td><td>Swagger / OpenAPI</td><td>YAML / JSON</td></tr>
+        <tr><td>GraphQL (2015)</td><td>SDL (Schema Definition Language)</td><td>Text</td></tr>
+        <tr><td>gRPC (2015)</td><td>Protocol Buffers</td><td>Binary + codegen</td></tr>
+        <tr><td>Event-driven (2016)</td><td>AsyncAPI</td><td>YAML / JSON</td></tr>
+      </tbody>
+    </table>
+
+    <p>The &ldquo;schema as contract&rdquo; mindset has a few corollaries:</p>
+
+    <ul>
+      <li><strong>Contract testing.</strong> Pact, Spring Cloud Contract, and consumer-driven contract tests verify that the producer still satisfies what consumers expect.</li>
+      <li><strong>Backward compatibility as a discipline.</strong> Protobuf&rsquo;s &ldquo;do not reuse field numbers&rdquo; rule is the clearest statement. OpenAPI&rsquo;s deprecation pragma is a softer version.</li>
+      <li><strong>Schema evolution over versioning.</strong> Adding optional fields is safe; removing or reusing fields is not.</li>
+    </ul>
+
+    <!-- ============================================================ -->
+    <!-- 4. LOOSE COUPLING                                             -->
+    <!-- ============================================================ -->
+
+    <h2>4. Loose Coupling &mdash; The Fundamental Virtue</h2>
+
+    <p>Definition: services can evolve independently without breaking each other. Four dimensions:</p>
+
+    <ul>
+      <li><strong>Temporal decoupling</strong> &mdash; async messaging. Producer does not wait for consumer.</li>
+      <li><strong>Format decoupling</strong> &mdash; schema tolerance. The &ldquo;tolerant reader&rdquo; pattern.</li>
+      <li><strong>Location decoupling</strong> &mdash; service discovery. Callers do not hardcode URLs.</li>
+      <li><strong>Implementation decoupling</strong> &mdash; language independence. What runs behind the contract is the callee&rsquo;s choice.</li>
+    </ul>
+
+    <p><strong>Postel&rsquo;s Law as an SOA principle:</strong> &ldquo;Be conservative in what you send, liberal in what you accept.&rdquo; Send only well-formed messages; accept anything you can make sense of.</p>
+
+    <h3>Anti-patterns</h3>
+
+    <div class="card warn">
+      <ul>
+        <li><strong>Shared databases.</strong> Two services reading/writing the same tables is the classic coupling violation. The database schema becomes a contract nobody owns.</li>
+        <li><strong>Distributed transactions.</strong> Two-phase commit across services couples their availability. If one is down, both are down. Starbucks does not use two-phase commit.</li>
+        <li><strong>Tight API contracts.</strong> Requiring exact field matches, failing on unknown fields, forbidding optional additions.</li>
+        <li><strong>Synchronous chains.</strong> Service A calls B calls C calls D. A chain is only as available as the product of its links.</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 5. DDD BOUNDARIES                                             -->
+    <!-- ============================================================ -->
+
+    <h2>5. Service Boundaries and Domain-Driven Design</h2>
+
+    <p><strong>Eric Evans</strong>, <em>Domain-Driven Design</em> (Addison-Wesley, 2003) &mdash; &ldquo;the blue book.&rdquo; The book that changed SOA.</p>
+
+    <p>The central DDD concepts that matter for service decomposition:</p>
+
+    <ul>
+      <li><strong>Bounded context</strong> &mdash; a boundary within which a domain model is consistent. Different bounded contexts can have different models for the same concept (&ldquo;Customer&rdquo; in billing is not the same &ldquo;Customer&rdquo; in support).</li>
+      <li><strong>Ubiquitous language</strong> &mdash; within a bounded context, developers and domain experts share one vocabulary.</li>
+      <li><strong>Aggregate root</strong> &mdash; the entry point to a cluster of entities that must remain transactionally consistent.</li>
+      <li><strong>Context map</strong> &mdash; the diagram showing how bounded contexts relate to each other.</li>
+    </ul>
+
+    <p><strong>Bounded contexts make the best service boundaries.</strong> Within a context, coupling is cheap; across contexts, it must be explicit. Vaughn Vernon&rsquo;s <em>Implementing Domain-Driven Design</em> (2013) is the practical follow-up.</p>
+
+    <!-- ============================================================ -->
+    <!-- 6. COMMUNICATION PATTERNS                                     -->
+    <!-- ============================================================ -->
+
+    <h2>6. Communication Patterns</h2>
+
+    <table>
+      <thead><tr><th>Pattern</th><th>Example</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td>Synchronous request-response</td><td>HTTP, gRPC unary</td><td>Need an answer now</td></tr>
+        <tr><td>Async fire-and-forget</td><td>One-way RPC, event emit</td><td>Notification, logging</td></tr>
+        <tr><td>Async request-reply</td><td>Message queue + correlation ID</td><td>Slow operations with callbacks</td></tr>
+        <tr><td>Publish-subscribe</td><td>Kafka topic, MQTT</td><td>Decoupled consumers</td></tr>
+        <tr><td>Point-to-point queue</td><td>RabbitMQ, SQS</td><td>Work distribution</td></tr>
+        <tr><td>Competing consumers</td><td>Kafka consumer group</td><td>Load balancing</td></tr>
+        <tr><td>Streaming (bidirectional)</td><td>gRPC streaming, WebSockets</td><td>Real-time, long-lived</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Message brokers vs log-based streaming</h3>
+
+    <p>A message broker (RabbitMQ, ActiveMQ, SQS) delivers a message to one consumer and then it&rsquo;s gone. A log-based stream (Kafka, Pulsar, Kinesis) stores messages for a retention period; new consumers can replay from the beginning. <strong>The log is the source of truth.</strong> This difference is foundational for event sourcing and for Jay Kreps&rsquo; 2014 essay <em>The Log: What every software engineer should know about real-time data&rsquo;s unifying abstraction</em>.</p>
+
+    <!-- ============================================================ -->
+    <!-- 7. ORCHESTRATION VS CHOREOGRAPHY                              -->
+    <!-- ============================================================ -->
+
+    <h2>7. Orchestration vs Choreography</h2>
+
+    <div class="card teal">
+      <p><strong>Orchestration:</strong> a central coordinator directs the services. BPEL, Apache Airflow, Temporal, Cadence, AWS Step Functions, Camunda. The conductor knows the whole score.</p>
+      <p><strong>Choreography:</strong> services react to events and trigger each other. Kafka-driven event flows, AWS EventBridge, domain events. Each dancer knows their own moves.</p>
+      <p><strong>Trade-offs:</strong> Orchestration gives central visibility and easier debugging; it creates a single point of coupling. Choreography gives decentralized evolution and resilience; it makes the overall flow harder to reason about.</p>
+      <p>Most mature systems use both: orchestration for specific long-running workflows (purchase order, loan approval) and choreography for reactive event flows (user signed up &rarr; send welcome email).</p>
+    </div>
+
+    <h3>The Saga pattern</h3>
+
+    <p>Distributed transactions across services are impossible in the general case. The saga pattern is the accepted substitute: a sequence of local transactions, each with a compensating action that undoes it if a later step fails. First described by H&eacute;ctor Garcia-Molina and Kenneth Salem in a 1987 paper, rediscovered by the microservices community around 2015. Two flavors: orchestrated (central saga coordinator) and choreographed (events trigger next step).</p>
+
+    <!-- ============================================================ -->
+    <!-- 8. IDEMPOTENCY                                                -->
+    <!-- ============================================================ -->
+
+    <h2>8. Idempotency</h2>
+
+    <p>An operation is <strong>idempotent</strong> if executing it multiple times produces the same result as executing it once. In distributed systems, this is not optional &mdash; it is the only way to survive network retries safely.</p>
+
+    <ul>
+      <li><strong>HTTP idempotent methods:</strong> GET, HEAD, PUT, DELETE, OPTIONS. <strong>Non-idempotent:</strong> POST (unless you make it so).</li>
+      <li><strong>Idempotency keys</strong> &mdash; Stripe&rsquo;s pattern. The client sends a unique key with each create operation; the server stores the key and the result, and returns the same result for any retry with the same key.</li>
+      <li><strong>Delivery semantics:</strong> &ldquo;at most once,&rdquo; &ldquo;at least once,&rdquo; &ldquo;exactly once.&rdquo; The third is an impossibility; what you actually get is &ldquo;at least once delivery with idempotent handlers,&rdquo; which behaves like exactly once.</li>
+      <li><strong>Inbox / Outbox patterns</strong> for idempotent event processing across database transactions.</li>
+    </ul>
+
+    <!-- ============================================================ -->
+    <!-- 9. EVENTUAL CONSISTENCY AND CAP                               -->
+    <!-- ============================================================ -->
+
+    <h2>9. Eventual Consistency and CAP</h2>
+
+    <h3>Eric Brewer&rsquo;s CAP theorem</h3>
+
+    <p>Conjectured by Eric Brewer at the ACM PODC 2000 keynote. Formally proved by Seth Gilbert and Nancy Lynch at MIT in 2002. Informally stated: in the presence of a network partition, a distributed system can guarantee either consistency or availability, but not both.</p>
+
+    <div class="callout">
+      C &rarr; A &rarr; P: pick any two, but during a partition you&rsquo;re really picking between C and A.
+    </div>
+
+    <p><strong>Daniel Abadi&rsquo;s PACELC extension</strong> (2010) adds: even when not partitioned, there is a trade-off between latency and consistency. PACELC says: if partitioned (P), choose between availability (A) and consistency (C); else (E), choose between latency (L) and consistency (C).</p>
+
+    <h3>ACID vs BASE</h3>
+
+    <ul>
+      <li><strong>ACID:</strong> Atomicity, Consistency, Isolation, Durability. Classical database transactions.</li>
+      <li><strong>BASE:</strong> Basically Available, Soft state, Eventual consistency. Coined by Pritchett at eBay. Trades strong consistency for availability at scale.</li>
+    </ul>
+
+    <h3>Consistency models from strong to weak</h3>
+
+    <ol>
+      <li><strong>Linearizable</strong> &mdash; all operations appear to happen at a single point in time.</li>
+      <li><strong>Sequential</strong> &mdash; operations appear in some total order.</li>
+      <li><strong>Causal</strong> &mdash; causally related operations preserve order.</li>
+      <li><strong>Read-your-writes</strong> &mdash; you see your own updates.</li>
+      <li><strong>Monotonic read</strong> &mdash; successive reads never go backward in time.</li>
+      <li><strong>Eventual</strong> &mdash; if no new updates, all replicas converge.</li>
+    </ol>
+
+    <p><strong>CRDTs</strong> (Conflict-free Replicated Data Types, Shapiro et al., 2011) and <strong>vector clocks</strong> (Lamport 1978, Fidge 1988) are the mathematical tools for reasoning about eventual consistency.</p>
+
+    <!-- ============================================================ -->
+    <!-- 10. SERVICE DISCOVERY + FAULT TOLERANCE                       -->
+    <!-- ============================================================ -->
+
+    <h2>10. Service Discovery</h2>
+
+    <ul>
+      <li><strong>Client-side discovery</strong> &mdash; the client looks up service instances itself. Eureka, Consul.</li>
+      <li><strong>Server-side discovery</strong> &mdash; a load balancer routes. AWS ALB, Kubernetes Service.</li>
+      <li><strong>DNS-based</strong> &mdash; SRV records, Kubernetes internal DNS.</li>
+      <li><strong>Registry-based</strong> &mdash; Consul, etcd, Zookeeper, Eureka.</li>
+    </ul>
+
+    <h2>11. Fault Tolerance Patterns</h2>
+
+    <p>Michael Nygard&rsquo;s <em>Release It!</em> (2007, 2nd ed 2018) is the canonical reference.</p>
+
+    <ul>
+      <li><strong>Circuit breaker</strong> &mdash; after N failures, stop calling the downstream for T seconds. Prevents cascading failures.</li>
+      <li><strong>Bulkhead</strong> &mdash; isolate pools of resources so one overloaded dependency doesn&rsquo;t drain them all.</li>
+      <li><strong>Timeout</strong> &mdash; every network call has a deadline. Default timeouts are the enemy.</li>
+      <li><strong>Retry with exponential backoff and jitter</strong> &mdash; retrying immediately creates thundering herds; retrying with <code>sleep(random(1, 2^attempt))</code> does not.</li>
+      <li><strong>Retry budgets</strong> &mdash; cap the total retry traffic as a percentage of real traffic.</li>
+      <li><strong>Graceful degradation</strong> &mdash; return a stale cached response or a partial result instead of failing hard.</li>
+      <li><strong>Chaos engineering</strong> &mdash; Netflix Chaos Monkey (2011). Deliberately break things to prove the system survives.</li>
+    </ul>
+
+    <!-- ============================================================ -->
+    <!-- 12. OBSERVABILITY                                             -->
+    <!-- ============================================================ -->
+
+    <h2>12. Observability &mdash; The Three Pillars</h2>
+
+    <table>
+      <thead><tr><th>Pillar</th><th>What it answers</th><th>Typical stack</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Logs</strong></td><td>What happened?</td><td>ELK, Loki, Splunk, Datadog</td></tr>
+        <tr><td><strong>Metrics</strong></td><td>How much? How often? How fast?</td><td>Prometheus, Grafana, InfluxDB, Datadog</td></tr>
+        <tr><td><strong>Traces</strong></td><td>Where did this request go?</td><td>Jaeger, Zipkin, Tempo, Honeycomb, Lightstep</td></tr>
+      </tbody>
+    </table>
+
+    <h3>OpenTelemetry &mdash; the standard</h3>
+
+    <p>OpenTelemetry was formed in 2019 by merging OpenCensus (Google) and OpenTracing (CNCF). It provides a vendor-neutral API and SDK for instrumenting code, a wire protocol (OTLP), and collectors. The <strong>W3C Trace Context</strong> spec (2020) standardizes how trace IDs propagate across service boundaries via the <code>traceparent</code> HTTP header.</p>
+
+    <h3>Distributed tracing &mdash; the Dapper lineage</h3>
+
+    <p>Ben Sigelman et al., <em>Dapper: a Large-Scale Distributed Systems Tracing Infrastructure</em> (Google technical report, 2010). The paper that created the distributed tracing category. Twitter&rsquo;s <strong>Zipkin</strong> (2012) was the first open-source clone; Uber&rsquo;s <strong>Jaeger</strong> (2015) the next generation; OpenTelemetry the unification.</p>
+
+    <h3>SLI / SLO / SLA &mdash; the SRE vocabulary</h3>
+
+    <p>From the Google SRE book (Betsy Beyer et al., O&rsquo;Reilly, 2016):</p>
+
+    <ul>
+      <li><strong>SLI</strong> (Service Level Indicator) &mdash; a measurement, e.g., &ldquo;fraction of requests that return 200 within 200ms.&rdquo;</li>
+      <li><strong>SLO</strong> (Service Level Objective) &mdash; a target for that measurement, e.g., &ldquo;99.9% of requests return within 200ms over a 28-day window.&rdquo;</li>
+      <li><strong>SLA</strong> (Service Level Agreement) &mdash; the SLO plus the consequences of missing it (usually a contractual refund).</li>
+      <li><strong>Error budget</strong> &mdash; the allowed failure rate. If your SLO is 99.9% and your window is 28 days, you have ~40 minutes of &ldquo;budget&rdquo; to spend on outages, deploys, and experiments.</li>
+    </ul>
+
+    <p>Charity Majors (Honeycomb) has made the case for &ldquo;observability&rdquo; as a discipline distinct from &ldquo;monitoring&rdquo;: monitoring tells you about known unknowns; observability helps you investigate unknown unknowns.</p>
+
+    <!-- ============================================================ -->
+    <!-- 13. API DESIGN, VERSIONING, GRANULARITY                       -->
+    <!-- ============================================================ -->
+
+    <h2>13. API Design Philosophies</h2>
+
+    <table>
+      <thead><tr><th>Style</th><th>Unit</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>RPC (operation-centric)</td><td>Method call</td><td>SOAP, gRPC, Thrift, most &ldquo;REST APIs&rdquo;</td></tr>
+        <tr><td>Resource (noun-centric)</td><td>URI + verb</td><td>Fielding&rsquo;s REST, OData</td></tr>
+        <tr><td>Query (declarative)</td><td>Query document</td><td>GraphQL, OData <code>$filter</code></td></tr>
+        <tr><td>Event (fact-centric)</td><td>Immutable event</td><td>CQRS, Event Sourcing, Kafka</td></tr>
+      </tbody>
+    </table>
+
+    <h2>14. Versioning and Evolution</h2>
+
+    <ul>
+      <li><strong>URL versioning</strong> &mdash; <code>/api/v1/</code>. Simplest. Breaks REST&rsquo;s uniform-interface principle but wins in practice.</li>
+      <li><strong>Header versioning</strong> &mdash; <code>Accept: application/vnd.company.v1+json</code>. Cleaner but harder to debug.</li>
+      <li><strong>No versioning</strong> &mdash; additive schema evolution only. Protobuf&rsquo;s approach.</li>
+      <li><strong>Deprecation pragmas</strong> &mdash; OpenAPI marks fields as deprecated; give consumers time to migrate.</li>
+    </ul>
+
+    <p>The &ldquo;additive only&rdquo; rule: new versions only add optional fields. Never remove. Never reuse. It breaks down over time &mdash; in practice, every API has a hard break eventually &mdash; but deferring the break for five years is worth the restraint.</p>
+
+    <h2>15. Service Granularity</h2>
+
+    <div class="card">
+      <ul>
+        <li><strong>Too coarse:</strong> distributed monolith. All the operational cost of services, none of the deployment independence.</li>
+        <li><strong>Too fine:</strong> nanoservices. Death by network call. Every business operation touches 40 services.</li>
+        <li><strong>The right size:</strong> <em>a service is the unit a team can own end-to-end and deploy independently</em>. Amazon&rsquo;s two-pizza team heuristic (a team small enough to be fed by two pizzas). A bounded context. A business capability.</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 16. STATELESSNESS                                             -->
+    <!-- ============================================================ -->
+
+    <h2>16. Statelessness vs State</h2>
+
+    <p>Stateless services are easier to scale: run 100 copies, load-balance across them, replace any copy at any time. State lives in databases, caches, or dedicated state stores. The <strong>12-Factor App</strong> (Heroku, 2011) is the principled statement of this pattern.</p>
+
+    <p>The exception is the <strong>actor model</strong>: Erlang, Akka, Orleans, Dapr Actors. Stateful services where each actor is a logical unit with its own state, addressable by ID, single-threaded internally. Used for game servers, real-time collaboration, chat, some IoT scenarios.</p>
+
+    <!-- ============================================================ -->
+    <!-- 17. SECURITY                                                  -->
+    <!-- ============================================================ -->
+
+    <h2>17. Security</h2>
+
+    <h3>Authentication</h3>
+
+    <ul>
+      <li><strong>OAuth 2.0</strong> (RFC 6749, 2012) &mdash; the authorization framework.</li>
+      <li><strong>OpenID Connect</strong> (OIDC, 2014) &mdash; authentication on top of OAuth.</li>
+      <li><strong>JWT</strong> (JSON Web Token, RFC 7519) &mdash; the token format.</li>
+      <li><strong>mTLS</strong> &mdash; mutual TLS. Both sides authenticate with certificates. Service mesh baseline.</li>
+    </ul>
+
+    <h3>Authorization</h3>
+
+    <ul>
+      <li><strong>RBAC</strong> &mdash; Role-Based Access Control. Users have roles, roles have permissions.</li>
+      <li><strong>ABAC</strong> &mdash; Attribute-Based Access Control. Rules based on user/resource/environment attributes.</li>
+      <li><strong>OPA</strong> (Open Policy Agent) &mdash; policy-as-code engine using the Rego language. CNCF graduated.</li>
+      <li><strong>Zanzibar-style</strong> (Google, 2019) &mdash; relationship-based access control for massive scale. Inspired SpiceDB, AuthZed, OpenFGA.</li>
+    </ul>
+
+    <h3>Zero trust</h3>
+
+    <p>Services should not trust each other by default, even inside the same datacenter. Every call is authenticated, every call is authorized, every call is encrypted. Service mesh mTLS makes this the baseline.</p>
+
+    <!-- ============================================================ -->
+    <!-- 18. THE MENTAL MODEL                                          -->
+    <!-- ============================================================ -->
+
+    <h2>18. The SOA Mental Model</h2>
+
+    <div class="card amber">
+      <p>After all the vocabulary, what does it <em>feel like</em> to think service-oriented?</p>
+      <ol>
+        <li><strong>Systems as collections of services communicating through contracts.</strong> Not modules in a process. Not classes in a class hierarchy. Independently deployable boundaries with explicit promises.</li>
+        <li><strong>Services as evolvable units with independent lifecycles.</strong> Each service is a product with a team, not a component in a project.</li>
+        <li><strong>Network calls as expensive, unreliable, and asynchronous by default.</strong> Every remote call can time out, retry, duplicate, or succeed in unexpected ways.</li>
+        <li><strong>Data ownership as the key organizational principle.</strong> Whoever owns the data owns the service. No shared databases.</li>
+        <li><strong>The Inverse Conway Maneuver.</strong> If Conway&rsquo;s Law says architecture mirrors organization, then deliberately organizing teams around the architecture you want is the way to get that architecture.</li>
+        <li><strong>Service-oriented thinking is org-chart-aware architecture.</strong> You cannot decompose a system further than the teams are willing to decompose their ownership.</li>
+      </ol>
+      <p>The hardest thing about learning this way of thinking is letting go of the function-call mental model. Services are not remote function calls. They are independently evolvable systems communicating over an unreliable network. Two months in, you stop being surprised when the network fails. Six months in, you stop being surprised when it succeeds in unexpected ways. A year in, you have opinions about idempotency keys.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="enterprise-soa.html">Enterprise SOA (SOAP era)</a></li>
+        <li><a href="rest-apis.html">REST &amp; Modern APIs</a></li>
+        <li><a href="microservices-mesh.html">Microservices &amp; Service Mesh</a></li>
+        <li><a href="implementations.html">Implementations &amp; Stacks</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Service-Oriented Architecture &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

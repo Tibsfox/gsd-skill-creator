@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta Integration &mdash; JavaScript &amp; TypeScript</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jts">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">JavaScript in Context &mdash; The Naming Trap, Cross-Language Comparison, and the Ubiquity Argument</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">JavaScript</a>
+      <a href="typescript.html">TypeScript</a>
+      <a href="runtimes.html">Runtimes</a>
+      <a href="frameworks.html">Frameworks</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;Java is to JavaScript as ham is to hamster.&rdquo; &mdash; the oldest running joke in programming, and one of the most expensive naming decisions in the history of computing.
+    </blockquote>
+
+    <h2>JavaScript is NOT Java</h2>
+    <div class="card red">
+      <p>In December 1995, Netscape licensed the &ldquo;Java&rdquo; trademark from Sun to ride the Java hype wave. The result: thirty years of confusion. JavaScript is a <strong>dynamically typed, prototype-based, single-threaded</strong> language with first-class functions, closures, and an event-driven execution model. It shares almost nothing with Java except C-like syntax, curly braces, and the string &ldquo;Java&rdquo; in the name.</p>
+    </div>
+
+    <h2>Cross-Language Comparison</h2>
+    <table>
+      <thead><tr><th>Language</th><th>Typing</th><th>OOP model</th><th>Runtime</th><th>Concurrency</th></tr></thead>
+      <tbody>
+        <tr><td><strong>JavaScript</strong></td><td>Dynamic, weak</td><td>Prototype-based + classes (sugar)</td><td>V8/SpiderMonkey/JSC</td><td>Single-threaded event loop + Workers</td></tr>
+        <tr><td><strong>TypeScript</strong></td><td>Static structural (erased)</td><td>Same as JS (types erase)</td><td>Compiles to JS</td><td>Same as JS</td></tr>
+        <tr><td><strong>Python</strong></td><td>Dynamic, strong</td><td>Class-based, multiple inheritance</td><td>CPython VM</td><td>GIL + asyncio</td></tr>
+        <tr><td><strong>Java</strong></td><td>Static, nominal</td><td>Class-based, single inheritance</td><td>JVM (HotSpot)</td><td>Threads + j.u.c. + virtual threads</td></tr>
+        <tr><td><strong>C#</strong></td><td>Static, nominal (reified generics)</td><td>Class-based, single inheritance</td><td>.NET CLR</td><td>Task/async + threads</td></tr>
+        <tr><td><strong>Go</strong></td><td>Static, structural (interfaces)</td><td>Structural (no classes/inheritance)</td><td>Native + GC</td><td>Goroutines + channels</td></tr>
+        <tr><td><strong>Rust</strong></td><td>Static, affine</td><td>Trait-based (no inheritance)</td><td>Native (no GC)</td><td>Threads + async</td></tr>
+        <tr><td><strong>C++</strong></td><td>Static, nominal + templates</td><td>Class-based, multiple inheritance</td><td>Native (no GC)</td><td>Threads, atomics, coroutines</td></tr>
+        <tr><td><strong>Ruby</strong></td><td>Dynamic, strong</td><td>Class-based, mixins</td><td>CRuby VM</td><td>GVL + Ractors</td></tr>
+        <tr><td><strong>Dart</strong></td><td>Static, optional</td><td>Class-based, single + mixins</td><td>Dart VM / AOT</td><td>Isolates</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Same Program, Different Languages</h2>
+
+    <h3>JavaScript (modern)</h3>
+<pre><code>const shapes = [
+  { type: "circle", r: 2.0 },
+  { type: "square", side: 3.0 },
+];
+
+function area(shape) {
+  switch (shape.type) {
+    case "circle": return Math.PI * shape.r ** 2;
+    case "square": return shape.side ** 2;
+  }
+}
+
+for (const s of shapes) console.log(area(s));</code></pre>
+
+    <h3>TypeScript (discriminated union)</h3>
+<pre><code>type Circle = { type: "circle"; r: number };
+type Square = { type: "square"; side: number };
+type Shape = Circle | Square;
+
+function area(s: Shape): number {
+  switch (s.type) {
+    case "circle": return Math.PI * s.r ** 2;
+    case "square": return s.side ** 2;
+  }
+}
+
+const shapes: Shape[] = [
+  { type: "circle", r: 2.0 },
+  { type: "square", side: 3.0 },
+];
+shapes.forEach(s =&gt; console.log(area(s)));</code></pre>
+
+    <h3>Python</h3>
+<pre><code>import math
+from dataclasses import dataclass
+
+@dataclass
+class Circle:
+    r: float
+    def area(self): return math.pi * self.r ** 2
+
+@dataclass
+class Square:
+    side: float
+    def area(self): return self.side ** 2
+
+shapes = [Circle(2.0), Square(3.0)]
+for s in shapes:
+    print(s.area())</code></pre>
+
+    <h3>Java (sealed + records, Java 21)</h3>
+<pre><code>sealed interface Shape permits Circle, Square {}
+record Circle(double r) implements Shape {}
+record Square(double side) implements Shape {}
+
+double area(Shape s) {
+    return switch (s) {
+        case Circle c -&gt; Math.PI * c.r() * c.r();
+        case Square sq -&gt; sq.side() * sq.side();
+    };
+}</code></pre>
+
+    <h2>TypeScript vs Java Generics &mdash; Erasure Both Ways</h2>
+    <div class="card">
+      <p>A curious parallel: both Java and TypeScript erase generic type information at runtime. Java generics (2004) use type erasure to maintain bytecode backwards compatibility. TypeScript (2012) uses type erasure because it <em>must</em> &mdash; it compiles to JavaScript, which has no type system at all.</p>
+      <p>The result: in both languages, you cannot ask &ldquo;is this a <code>List&lt;String&gt;</code>?&rdquo; at runtime. In Java, you can at least check <code>instanceof List</code>. In TypeScript, at runtime you have only <code>typeof</code> (primitives) and <code>instanceof</code> (constructor chain). For anything more, you need runtime validation (Zod, io-ts, Valibot in TS; Jackson/Gson in Java).</p>
+    </div>
+
+    <h2>TypeScript vs C# &mdash; The Hejlsberg Connection</h2>
+    <div class="card purple">
+      <p><strong>Anders Hejlsberg</strong> designed both C# and TypeScript. C# (2000) is nominally typed with reified generics &mdash; type info survives at runtime. TypeScript (2012) is <em>structurally</em> typed with erased generics. Why the difference? C# controls its own runtime (.NET CLR); TypeScript must produce plain JavaScript. Structural typing was the pragmatic choice: it lets you pass a <code>{name: string}</code> wherever a <code>Named</code> interface is expected, without declaring <code>implements Named</code>. This duck-typing-at-compile-time is what makes TS feel &ldquo;light&rdquo; compared to Java or C# while still catching type errors.</p>
+    </div>
+
+    <h2>JavaScript vs Python &mdash; The Dynamic Sibling Rivalry</h2>
+    <p>Both are dynamically typed, garbage-collected, and optimized for developer productivity. The ecosystems don&rsquo;t overlap much:</p>
+
+    <table>
+      <thead><tr><th>Dimension</th><th>JavaScript / TypeScript</th><th>Python</th></tr></thead>
+      <tbody>
+        <tr><td>Primary domain</td><td>Web frontend + full-stack</td><td>Data science, ML, scripting</td></tr>
+        <tr><td>Type system option</td><td>TypeScript (structural, erased)</td><td><code>typing</code> module (hints, not enforced)</td></tr>
+        <tr><td>Concurrency</td><td>Event loop + Workers</td><td>GIL + asyncio + multiprocessing</td></tr>
+        <tr><td>Package registry</td><td>npm (2M+)</td><td>PyPI (500K+)</td></tr>
+        <tr><td>Build tools</td><td>Dozens (webpack, Vite, esbuild, &hellip;)</td><td>Fewer (pip, poetry, uv)</td></tr>
+        <tr><td>Runtime speed</td><td>V8 JIT is fast; 10&ndash;50&times; CPython</td><td>CPython is slow; NumPy/PyTorch C++ underneath</td></tr>
+        <tr><td>Framework churn</td><td>Legendary (new framework weekly)</td><td>Stable (Django, Flask, FastAPI)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>On the Escalation Ladder</h2>
+    <p>From the PRL and CPP research projects:</p>
+    <ul>
+      <li><strong>Bash</strong> &mdash; shell glue</li>
+      <li><strong>JavaScript / TypeScript / Python / Perl</strong> &mdash; dynamic/high-level scripting. JS owns the browser; Python owns data science; Perl owns text processing.</li>
+      <li><strong>Java / C#</strong> &mdash; managed enterprise runtimes</li>
+      <li><strong>C++ / Rust</strong> &mdash; systems programming</li>
+      <li><strong>C</strong> &mdash; the substrate</li>
+    </ul>
+
+    <p>JavaScript is the only language on this ladder that runs natively in <em>every web browser on earth</em>. That is its superpower and the reason Atwood&rsquo;s Law holds: if you need to ship to a browser, you will eventually write JavaScript (or something that compiles to it).</p>
+
+    <h2>When to Reach for JavaScript / TypeScript</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Yes, use JS/TS</h4>
+        <p>Web frontends (React, Vue, Svelte). Full-stack web apps (Next.js, SvelteKit). API servers (Express, Fastify, NestJS). Mobile (React Native). Desktop (Electron, Tauri). Edge functions (Workers, Deno Deploy). Rapid prototyping.</p>
+      </div>
+      <div class="pillar">
+        <h4>Consider JS/TS</h4>
+        <p>CLI tools (Commander, Yargs, Oclif). Build tools (if you&rsquo;re in the JS ecosystem). Serverless functions. Real-time services (Socket.IO, WebSocket).</p>
+      </div>
+      <div class="pillar">
+        <h4>Probably use something else</h4>
+        <p>Data science/ML (Python). Systems programming (Rust, C++). Embedded (C). Enterprise with existing Java/C# stacks. HFT (C++, Java with Azul). Batch processing (Java/Spark). Numerical computing (Python, Julia, C++).</p>
+      </div>
+      <div class="pillar">
+        <h4>Do NOT use JS</h4>
+        <p>Kernel development. Hard real-time systems. Bare-metal firmware. Anything where a GC pause is unacceptable. Anything where the npm dependency tree is a security risk you can&rsquo;t tolerate.</p>
+      </div>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>JAV</td><td>Java</td><td>The naming confusion; TypeScript&rsquo;s erasure mirrors Java&rsquo;s</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>V8 and SpiderMonkey are C++; Bun uses Zig (C-level)</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>The dynamic sibling: different domains, similar typing philosophy</td></tr>
+        <tr><td>CEE</td><td>C</td><td>libuv is C; Zig (Bun) targets the C ABI</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">JavaScript Core</a></li>
+        <li><a href="typescript.html">TypeScript Type System</a></li>
+        <li><a href="runtimes.html">Engines &amp; Runtimes</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rosetta Integration &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

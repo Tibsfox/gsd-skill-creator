@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Uses &mdash; Assembly Language</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-asm">
+  <header>
+    <h1>Where Assembly Is Still Written</h1>
+    <div class="subtitle">Bootloaders, Kernel Entry, Crypto, SIMD Codecs, JIT Backends, Exploit Dev, Hardware Bring-Up</div>
+    <nav>
+      <a href="index.html">Overview</a> <a href="x86.html">x86-64</a> <a href="arm.html">ARM64</a> <a href="microarch.html">Microarch</a> <a href="tools.html">Tools</a> <a href="modern.html" class="active">Modern</a> <a href="rosetta.html">Rosetta</a> <a href="education.html">Learn</a> <a href="history.html">History</a>
+    </nav>
+  </header>
+  <main>
+    <blockquote>Nobody writes entire applications in assembly. But every major software system has critical paths that are hand-written assembly &mdash; where the compiler cannot match a human who understands the microarchitecture.</blockquote>
+
+    <h2>Where Hand-Written Assembly Lives in 2026</h2>
+    <table>
+      <thead><tr><th>Domain</th><th>Examples</th><th>Why assembly</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Bootloaders</strong></td><td>GRUB stage 1, UEFI stubs, firmware reset vectors</td><td>No runtime, no stack, no C until you set them up</td></tr>
+        <tr><td><strong>Kernel entry</strong></td><td>Linux <code>arch/x86/entry/</code>, <code>arch/arm64/kernel/entry.S</code></td><td>Syscall dispatch, interrupt handlers, mode switching</td></tr>
+        <tr><td><strong>Context switches</strong></td><td>Register save/restore in every OS scheduler</td><td>Must save and restore ALL registers; C can&rsquo;t express this</td></tr>
+        <tr><td><strong>Cryptography</strong></td><td>OpenSSL, BoringSSL, libsodium, WolfSSL</td><td>Constant-time code (prevent timing side-channels), AES-NI, SHA-NI, CLMUL</td></tr>
+        <tr><td><strong>Video codecs</strong></td><td>ffmpeg, x264, x265, dav1d (AV1), libaom, libvpx</td><td>SIMD hot paths: DCT, motion estimation, deblocking filters</td></tr>
+        <tr><td><strong>Compression</strong></td><td>zlib-ng, lz4, zstd SIMD paths, brotli</td><td>SIMD for parallel byte matching, CRC32 via hardware instruction</td></tr>
+        <tr><td><strong>Hashing</strong></td><td>CRC32C (SSE4.2), SHA-NI, AES-NI</td><td>Hardware instructions are 10&ndash;100&times; faster than software</td></tr>
+        <tr><td><strong>JIT backends</strong></td><td>V8 TurboFan, HotSpot C2, LuaJIT, .NET RyuJIT</td><td>JIT compilers emit assembly; the emitter itself is in C++/Rust but the output is assembly</td></tr>
+        <tr><td><strong>Reverse engineering</strong></td><td>Malware analysis, CTF competitions, vulnerability research</td><td>Reading assembly is the primary skill; Ghidra and IDA are the tools</td></tr>
+        <tr><td><strong>Exploit development</strong></td><td>Shellcode, ROP chains, buffer overflow payloads</td><td>Exploits are written in assembly because they run at the machine level</td></tr>
+        <tr><td><strong>Hardware bring-up</strong></td><td>First code on new silicon, BIOS/UEFI, bare-metal testing</td><td>No OS, no C runtime, just registers and memory-mapped I/O</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The &ldquo;Compiler Is Usually Smarter&rdquo; Rule</h2>
+    <div class="card amber">
+      <p>Modern optimizing compilers (GCC -O2, Clang -O2, MSVC /O2) produce assembly that is <strong>better than most humans can write</strong>. The compiler knows the microarchitecture, the pipeline, the register allocation constraints, and the instruction scheduling rules. Hand-written assembly is justified <em>only</em> when:</p>
+      <ul>
+        <li>The compiler <strong>cannot use</strong> the instruction you need (AES-NI, CPUID, special system registers)</li>
+        <li>The code must be <strong>constant-time</strong> (crypto) and the compiler might optimize away your timing protections</li>
+        <li>You need to control <strong>exact register state</strong> (context switches, interrupt handlers)</li>
+        <li>You are writing a <strong>JIT compiler</strong> that emits machine code at runtime</li>
+        <li>You are doing <strong>reverse engineering</strong> or <strong>exploit development</strong></li>
+      </ul>
+    </div>
+
+    <h2>SIMD in Practice</h2>
+<pre><code>; AVX2: multiply 8 floats in parallel
+vmovups ymm0, [rdi]          ; load 8 floats from array A
+vmovups ymm1, [rsi]          ; load 8 floats from array B
+vmulps  ymm2, ymm0, ymm1    ; multiply all 8 in parallel
+vmovups [rdx], ymm2          ; store 8 results</code></pre>
+
+    <p>This single AVX2 sequence processes 8 multiplications in one instruction. The equivalent C loop would take 8 iterations. SIMD is why video decoding, image processing, and machine learning inference run as fast as they do.</p>
+
+    <h2>Security: Assembly-Level Attacks</h2>
+    <div class="card red">
+      <ul>
+        <li><strong>Buffer overflow</strong> &mdash; write past a buffer to overwrite the return address on the stack. Classic exploitation technique (Morris worm, 1988).</li>
+        <li><strong>ROP (Return-Oriented Programming)</strong> &mdash; chain small instruction sequences (&ldquo;gadgets&rdquo;) ending in <code>ret</code> to build arbitrary computation without injecting code.</li>
+        <li><strong>Shellcode</strong> &mdash; hand-crafted assembly injected into a vulnerable process. Must be position-independent, often avoid null bytes.</li>
+        <li><strong>Spectre/Meltdown</strong> &mdash; microarchitectural side-channel attacks that leak data via speculative execution (cache timing).</li>
+      </ul>
+      <p><strong>Defenses:</strong> Stack canaries, ASLR, DEP/NX (non-executable stack), Control-Flow Integrity (CFI), Shadow Stack (Intel CET), retpoline.</p>
+    </div>
+
+    <h2>WebAssembly &mdash; The Virtual Assembly</h2>
+    <p>WebAssembly (Wasm) is a <strong>stack-based virtual ISA</strong> designed for the browser (and increasingly for server-side). It is NOT real assembly &mdash; it&rsquo;s an intermediate representation that JIT compilers translate to real assembly (x86-64 or ARM64) at runtime. But it occupies the same conceptual role: &ldquo;the lowest level the programmer can target.&rdquo;</p>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CEE</td><td>C</td><td>Linux kernel entry points, bootloaders, and crypto primitives mix C and assembly</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>Rust&rsquo;s <code>asm!</code> macro for inline assembly; embedded Rust uses assembly startup code</td></tr>
+        <tr><td>JTS</td><td>JavaScript</td><td>V8 TurboFan&rsquo;s output IS assembly; Wasm is the &ldquo;assembly of the web&rdquo;</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>HotSpot C2 JIT output is assembly; <code>-XX:+PrintAssembly</code></td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>Buffer overflows, ROP, Spectre &mdash; security incidents at the assembly level</td></tr>
+      </tbody>
+    </table>
+    <div class="cross-links"><h4>Related Modules</h4><ul><li><a href="index.html">Overview</a></li><li><a href="x86.html">x86-64</a></li><li><a href="arm.html">ARM64</a></li><li><a href="microarch.html">Microarchitecture</a></li><li><a href="tools.html">Tools</a></li><li><a href="rosetta.html">Rosetta</a></li><li><a href="education.html">Learn</a></li><li><a href="history.html">History</a></li></ul></div>
+  </main>
+  <footer><p>Modern Uses &middot; PNW Research Series &middot; April 2026</p><p><a href="../index.html">PNW Research Series</a></p></footer>
+</body>
+</html>

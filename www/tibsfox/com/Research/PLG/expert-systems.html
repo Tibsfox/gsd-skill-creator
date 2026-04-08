@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expert Systems &amp; NLP &mdash; Prolog &amp; Logic Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-plg">
+  <header>
+    <h1>Expert Systems &amp; NLP</h1>
+    <div class="subtitle">The original killer app &mdash; MYCIN, PROSPECTOR, XCON, DCGs, CHAT-80, the statistical eclipse, and the neuro-symbolic revival</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="history.html">History</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="expert-systems.html" class="active">Expert Systems</a>
+      <a href="constraint-lp.html">CLP</a>
+      <a href="datalog-asp.html">Datalog &amp; ASP</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Logic programming was invented for natural language processing. This point is often forgotten. Alain Colmerauer in 1972 didn&rsquo;t set out to create a general programming language; he was building a French question-answering system. He wanted to take a text in French, a question in French, and have a computer answer the question. Prolog was the tool he built for the job. This is why unification is its core operation: because unification is what you need for parsing with feature structures and for question-matching.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- PART I - EXPERT SYSTEMS                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Part I &mdash; Expert Systems: The Original Killer App</h2>
+
+    <h3>MYCIN and the birth of the paradigm</h3>
+
+    <p><strong>MYCIN</strong> was a medical diagnostic and therapy recommendation system developed at Stanford from 1972 to 1978, primarily by <strong>Edward Shortliffe</strong> for his PhD, with Bruce Buchanan and Stanley Cohen. Given information about a patient with a blood infection, it recommended an antibiotic and dose. It worked by chaining backward through ~600 rules of the form:</p>
+
+    <pre><code>IF the site of the culture is blood
+   AND the gram stain of the organism is gram-negative
+   AND the morphology is rod
+THEN there is suggestive evidence (0.6) that the identity of the organism is enterobacteriaceae.</code></pre>
+
+    <p>MYCIN was written in <em>Interlisp</em>, not Prolog &mdash; Prolog was still a curiosity in Marseille. But MYCIN had two properties that became the template for everything:</p>
+
+    <ol>
+      <li><strong>Separation of knowledge from inference.</strong> Rules were declarative facts; a separate engine chased them. Swap rules, build a different system.</li>
+      <li><strong>Certainty factors.</strong> A crude but effective numeric calculus for uncertainty &mdash; not quite probability, not quite fuzzy logic, but physicians could express degrees of confidence.</li>
+    </ol>
+
+    <p>A blinded 1979 Stanford panel found MYCIN&rsquo;s recommendations as good or better than the infectious-disease faculty&rsquo;s. It was never clinically deployed &mdash; liability, lack of electronic records, regulatory suspicion &mdash; but the demonstration was enough. Expert systems were real. The stripped-down shell <strong>EMYCIN</strong> spawned a whole product category, and by the early 1980s there were dozens of shells.</p>
+
+    <h3>PROSPECTOR and the Mount Tolman deposit</h3>
+
+    <p><strong>PROSPECTOR</strong> (SRI International, 1976&ndash;1983, Richard Duda, Peter Hart, Nils Nilsson) used rules with a Bayesian inference network to evaluate mineral prospects. Its most famous moment: in 1980, it predicted a previously unknown molybdenum deposit at <strong>Mount Tolman in Washington State</strong> &mdash; worth an estimated $100 million. The prediction became the canonical &ldquo;expert system saved the day&rdquo; case study, repeated in every introductory AI textbook for a decade. Whether it deserved that status is debatable (the area had been partially surveyed), but the mythology was powerful. <em>Money could be made from encoded expertise.</em></p>
+
+    <h3>R1/XCON &mdash; the business case</h3>
+
+    <p><strong>R1</strong> (later <strong>XCON</strong>) was built at CMU by <strong>John McDermott</strong> in 1978&ndash;1980 and deployed at DEC in 1980 to configure VAX minicomputer orders &mdash; making sure parts fit, power and cooling were adequate, cables long enough. XCON was written in <strong>OPS5</strong>, a production-rule language from the Rete algorithm tradition. By 1986 it had ~6,200 rules. DEC&rsquo;s internal analyses claimed XCON saved them $25 million a year. This number was repeated and amplified until it became the justifying story for the entire first-generation AI industry.</p>
+
+    <p>OPS5/Rete was forward-chaining (given facts, find rules that fire) rather than Prolog&rsquo;s backward-chaining. This was a better fit for XCON&rsquo;s incremental style, but the influence flowed both ways: Prolog programmers learned forward-chaining techniques, and the rule-based mindset spread widely.</p>
+
+    <h3>CLASSIC, KL-ONE, and Description Logics</h3>
+
+    <p>Running parallel to the rule-based tradition was the <strong>frame-based</strong> and <strong>description logic</strong> tradition, starting with Minsky&rsquo;s frames and <strong>Ron Brachman&rsquo;s KL-ONE</strong> at BBN in the late 1970s. The key insight: if you described a concept (&ldquo;a person with three or more children&rdquo;), the system could automatically place it in the right spot in a taxonomy it was building &mdash; <strong>subsumption reasoning</strong>. This is much more powerful than simple inheritance.</p>
+
+    <p>The KL-ONE lineage ran through <strong>LOOM</strong> (USC/ISI), <strong>CLASSIC</strong> (AT&amp;T Bell Labs, 1991), and eventually settled on the name <strong>description logic</strong>. Description logics are carefully designed subsets of first-order logic with decidable classification, subsumption, and consistency checking. They became the formal backbone of <strong>OWL</strong>, the Web Ontology Language. Medical terminologies like <strong>SNOMED CT</strong> and biomedical ontologies like the <strong>Gene Ontology</strong> are all expressed in description logic underneath. <em>The pharmaceutical industry quietly runs on DL reasoners.</em></p>
+
+    <h3>Why expert systems &ldquo;failed&rdquo; &mdash; and what they did well</h3>
+
+    <div class="card">
+      <p>By the early 1990s the expert systems bubble had burst. Many shells and startups folded. Venture capital moved to databases and the early web. But the failure was less total than the narrative suggests:</p>
+      <ol>
+        <li><strong>Shells failed as general products.</strong> Building a generic &ldquo;expert system shell&rdquo; businesses could buy and load with their own knowledge was a commercial dead end.</li>
+        <li><strong>Rules survived as business logic.</strong> Production rule systems morphed into <strong>business rule engines</strong> like <em>Drools</em> (JBoss), <em>ILOG Rules</em> (now IBM ODM), and <em>Corticon</em>. Today&rsquo;s insurance underwriting, credit scoring, and regulatory compliance systems still run on descendants of OPS5. They just don&rsquo;t call themselves &ldquo;expert systems&rdquo; anymore.</li>
+        <li><strong>Medical decision support kept going.</strong> Drug interaction checkers, clinical pathway tools, and diagnostic support in electronic health records are all rule-based. Catching errors and surfacing relevant information is what expert systems were always actually good at.</li>
+        <li><strong>Tax software ate a different market.</strong> TurboTax, H&amp;R Block, and their enterprise cousins are all rule-based: &ldquo;if line 37 is greater than line 45 and you qualify for the credit on Schedule M, then&hellip;&rdquo; The tax code is a knowledge base of breathtaking size.</li>
+        <li><strong>Legal reasoning persisted in niches.</strong> The British legal-reasoning community led by Marek Sergot and Bob Kowalski produced the famous <strong>British Nationality Act</strong> formalization &mdash; a rendering of the 1981 Act in Prolog, used to explore the formal properties of legislation.</li>
+      </ol>
+      <p>What expert systems did well was <strong>capture stable, explicit, high-stakes expertise in narrow domains</strong>. They did badly when the domain was fluid, the knowledge was tacit, or the stakes demanded absolute reliability. Modern machine learning has the opposite profile. This is why the modern frontier is neuro-symbolic: combine the two.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PART II - NLP                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>Part II &mdash; Natural Language Processing: Prolog&rsquo;s Deepest Niche</h2>
+
+    <h3>Colmerauer&rsquo;s original vision</h3>
+
+    <p>Colmerauer&rsquo;s first demo, around 1973, answered questions about a little story in French involving a boy and a dog. A few dozen sentences, a tiny grammar, a handful of questions. It wasn&rsquo;t impressive by modern standards, but it established that the idea worked. Logic programming and natural language had found each other, and for the next twenty years the romance would shape both fields.</p>
+
+    <h3>Definite Clause Grammars: the parsing workhorse</h3>
+
+    <p>The central abstraction, formalized by Pereira and Warren in their 1980 paper, is the <strong>DCG</strong>. A DCG is a notation for context-free grammars that compiles directly into Prolog clauses. A trivial English fragment:</p>
+
+    <pre><code>sentence --> noun_phrase, verb_phrase.
+
+noun_phrase --> determiner, noun.
+noun_phrase --> proper_noun.
+
+verb_phrase --> verb, noun_phrase.
+verb_phrase --> verb.
+
+determiner --> [the].
+determiner --> [a].
+noun --> [dog].
+noun --> [cat].
+proper_noun --> [alice].
+verb --> [sees].
+verb --> [chases].</code></pre>
+
+    <p>A query <code>?- phrase(sentence, [the, dog, chases, a, cat]).</code> returns <code>true</code>. And crucially, <code>?- phrase(sentence, S).</code> enumerates all the sentences the grammar can produce, because Prolog&rsquo;s search machinery runs backward as easily as forward. One description serves as recognizer, parser, and generator.</p>
+
+    <p>DCGs can carry arbitrary Prolog computation in curly braces, so you can build abstract syntax trees as you parse, or layer feature structures for agreement. The <code>Num</code> variable shared on both sides of a rule enforces subject-verb agreement by unification alone. <em>Extraordinarily expressive for the amount of code involved.</em></p>
+
+    <h3>CHAT-80 &mdash; geographic Q&amp;A (1981&ndash;82)</h3>
+
+    <p><strong>CHAT-80</strong> by Pereira and Warren answered English questions about world geography &mdash; capitals, populations, areas, borders, rivers. &ldquo;What countries border Denmark?&rdquo; &ldquo;Which country in Europe has the largest population?&rdquo; &ldquo;Is there a lake in Africa bigger than Lake Victoria?&rdquo;</p>
+
+    <p>The whole system was about 2000 lines of Prolog running on a DEC-10. It mapped English to a formal query language and evaluated queries against a fact base of ~1000 countries, cities, rivers, and oceans. The crucial contribution was showing that <strong>compositional semantic interpretation</strong> could be done in Prolog: the parser produced logical forms and the Q&amp;A engine evaluated them. This architecture &mdash; parse to logical form, evaluate against a knowledge base &mdash; became the template for subsequent NLP Q&amp;A research.</p>
+
+    <p>CHAT-80&rsquo;s source is still available. It was ported to SWI-Prolog and runs today. You can load it up, ask geographic questions in English from 1982, and get correct answers. <em>Not many pieces of software from that era still work.</em></p>
+
+    <h3>The Core Language Engine and beyond</h3>
+
+    <p>By the late 1980s, Prolog-based NLP was mature enough for an ambitious multi-year project: SRI International&rsquo;s <strong>Core Language Engine (CLE)</strong>, led by <strong>Hiyan Alshawi</strong>. CLE was a reusable domain-independent engine with a broad-coverage English grammar, a compositional semantics module, domain mapping to database queries, and generation. CLE was used commercially in several SRI projects and informed the design of the <strong>Spoken Language Translator</strong>, an early end-to-end speech translation system for travel booking (English, Swedish, French). The pipeline was: speech recognition &rarr; CLE parse &rarr; semantic transfer &rarr; CLE generation &rarr; speech synthesis. Prolog all the way through.</p>
+
+    <h3>LFG, HPSG, CCG in Prolog</h3>
+
+    <p>Three grammar formalisms dominated 1990s computational linguistics, and all three had substantial Prolog implementations:</p>
+
+    <ul>
+      <li><strong>LFG</strong> (Lexical-Functional Grammar, Bresnan &amp; Kaplan) separates c-structure (constituent tree) from f-structure (feature graph). The XLE was C, but academic LFG teaching is almost always in Prolog.</li>
+      <li><strong>HPSG</strong> (Head-driven Phrase Structure Grammar, Pollard &amp; Sag) encodes everything as typed feature structures. The <strong>ALE</strong> system (Bob Carpenter, CMU, 1992) was a Prolog implementation with sophisticated type inference.</li>
+      <li><strong>CCG</strong> (Combinatory Categorial Grammar, Mark Steedman) encodes grammar as type-driven combinators that implement elegantly in Prolog or Haskell.</li>
+    </ul>
+
+    <p>All three reached for Prolog for the same reason: unification and backtracking are free, feature structures are natural, and the code looks like the formalism.</p>
+
+    <h3>The statistical eclipse (2000s)</h3>
+
+    <p>Starting around 2000, symbolic NLP &mdash; and with it, Prolog NLP &mdash; went into eclipse. Statistical methods started working better. Penn Treebank&ndash;trained parsers, IBM Models for machine translation, Markov models for POS tagging, and eventually neural networks outperformed carefully hand-built rule systems on shared benchmarks. By 2005 it was hard to get a symbolic NLP paper accepted at ACL or EMNLP. By 2015, with the deep learning wave, the discipline had largely become neural.</p>
+
+    <p>But this wasn&rsquo;t because rule systems were bad. It was because benchmarks rewarded average accuracy on a test set drawn from the same distribution as the training data &mdash; which is what statistical methods excel at. Rule systems are better at unusual inputs, at explainability, at hard constraints, at domain adaptation. Benchmarks didn&rsquo;t measure any of that.</p>
+
+    <h3>Watson and Jeopardy (2011)</h3>
+
+    <p>In 2011, <strong>IBM Watson</strong> defeated Ken Jennings on <em>Jeopardy!</em> Most of the coverage emphasized the machine-learning pipeline. Almost nobody reported that at the heart of Watson&rsquo;s English-language understanding was a <strong>Prolog-based deep parser</strong>. Adam Lally&rsquo;s paper <em>Natural Language Processing With Prolog in the IBM Watson System</em> (2012) documented this: Prolog handled the deep syntactic and semantic parsing, producing structured representations that the downstream machine-learning components could consume.</p>
+
+    <p>It is a historical irony worth sitting with: the most famous AI triumph of the 2010s had Prolog inside.</p>
+
+    <h3>Modern revival: neuro-symbolic NLP</h3>
+
+    <p>Around 2018&ndash;2020 the pendulum started swinging back. Large neural language models proved amazing at surface fluency but bad at compositional reasoning, multi-hop inference, and respecting hard constraints. Researchers started looking for ways to combine neural and symbolic methods.</p>
+
+    <p><strong>Semantic parsing</strong> &mdash; translating natural language into logical forms or programs &mdash; became a huge applied area. Modern semantic parsers are seq-to-seq neural models that generate SQL, SPARQL, lambda calculus, or Datalog as output. The formal language acts as an intermediate representation executable against a database or ontology. <em>This is the CLE architecture of 1988 with a better front end.</em></p>
+
+    <p><strong>DeepProbLog</strong> (Robin Manhaeve, Luc De Raedt, KU Leuven, 2018) extends ProbLog (probabilistic Prolog) with neural network predicates:</p>
+
+    <pre><code>nn(digit_net, [Image], Digit, [0,1,2,3,4,5,6,7,8,9]).
+
+addition(Image1, Image2, Sum) :-
+    digit(Image1, D1),
+    digit(Image2, D2),
+    Sum is D1 + D2.</code></pre>
+
+    <p>The <code>nn/4</code> declaration says &ldquo;the predicate <code>digit</code> is implemented by a neural network.&rdquo; The system learns the neural weights and the probabilistic logic program jointly, pushing gradients through both. This lets you learn &ldquo;the sum of two handwritten digit images&rdquo; from just labeled sums, without ever labeling individual digits. <strong>Neural perception plus symbolic reasoning.</strong></p>
+
+    <p><strong>Scallop</strong> (University of Pennsylvania, 2022+) generalizes this to a differentiable Datalog-like language embedded in Python. <strong>Logic Tensor Networks</strong> (Serafini &amp; Garcez, 2016) encode first-order logic formulas as differentiable tensor operations.</p>
+
+    <p>The common thread: logic programming is returning to NLP through the back door, as the symbolic half of hybrid systems. The goals are composition, explanation, and constraint satisfaction &mdash; exactly the things neural systems are weakest at and logic systems are strongest at.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART III - THEOREM PROVING                                    -->
+    <!-- ============================================================ -->
+
+    <h2>Part III &mdash; Theorem Proving</h2>
+
+    <h3>Resolution theorem provers</h3>
+
+    <p>Prolog restricts resolution to Horn clauses with a specific search strategy, making it efficient but incomplete. Full resolution provers aim for completeness and power at the cost of speed.</p>
+
+    <p><strong>Otter</strong> (Argonne, William McCune) was the landmark resolution prover of the 1980s&ndash;90s. Its most celebrated achievement: McCune&rsquo;s EQP variant proved in 1996 that <strong>Robbins algebras are Boolean algebras</strong>, a question open for 63 years. <strong>Prover9</strong> (also McCune, 2005+) and <strong>Mace4</strong> are still used in quasigroup and loop theory.</p>
+
+    <p><strong>Vampire</strong> (University of Manchester, Andrei Voronkov) is the modern state-of-the-art first-order prover, implementing superposition, resolution, and paramodulation. It has won the CASC theorem-proving competition almost every year since 1999. Vampire is the backend for Isabelle/HOL&rsquo;s <strong>Sledgehammer</strong> tactic &mdash; which is how many Isabelle users actually get their proofs done.</p>
+
+    <h3>Lambda Prolog and higher-order logic programming</h3>
+
+    <p><strong>&lambda;Prolog</strong> (Dale Miller and Gopalan Nadathur, late 1980s) extends Prolog with higher-order unification, lambda terms, implication and universal quantification in goals, and hypothetical reasoning. It elegantly expresses manipulation of syntax with binders &mdash; programming language semantics, tactics, natural-language quantifiers.</p>
+
+    <p>The canonical example is writing a type checker for the lambda calculus in about six lines, using higher-order abstract syntax. First-order Prolog can&rsquo;t natively express this because the object-language variables get confused with meta-language variables. Lambda Prolog handles it cleanly.</p>
+
+    <p>Lambda Prolog has two main modern implementations: <strong>Teyjus</strong> (1990s) and <strong>ELPI</strong> (Sacerdoti Coen, Tassi, 2015+, Inria). ELPI is fast, well-engineered, and is actually used as the tactic language for the <strong>Coq</strong> proof assistant via the <strong>Coq-Elpi</strong> plugin. Lambda Prolog has found a practical home: it&rsquo;s how Coq programmers extend their proof assistant with custom proof search.</p>
+
+    <h3>Modern proof assistants as adjacent cousins</h3>
+
+    <p><strong>Isabelle</strong> (Cambridge, TU Munich), <strong>Coq</strong> (Inria, now Rocq), and <strong>Lean</strong> (Microsoft Research, now Lean 4) are the three dominant interactive proof assistants. None are Prolog, but all are deeply influenced by logic programming and use logic-programming techniques for automation.</p>
+
+    <p>Isabelle was used to verify the <strong>seL4 microkernel</strong> &mdash; a landmark in full-system formal verification (Data61/NICTA, 2009). Coq was used for the <strong>Four Color Theorem</strong> (Gonthier, 2005) and the <strong>Feit-Thompson odd order theorem</strong> (Gonthier et al., 2012). Lean is being used for the <strong>Liquid Tensor Experiment</strong> (Peter Scholze&rsquo;s theorem) and the ongoing <strong>mathlib</strong> project.</p>
+
+    <p>The boundary with logic programming is blurry. Many of the techniques &mdash; unification, proof search, tactic composition &mdash; come straight from the logic-programming tradition. Many of the people working on them came through Prolog first.</p>
+
+    <h3>Prolog as a quick-and-dirty theorem prover</h3>
+
+    <p>One of Prolog&rsquo;s charms is that you can build a theorem prover in about 20 lines:</p>
+
+    <pre><code>% Tableau-style prover for full first-order logic (sketch)
+prove(F, Hyps) :- member(F, Hyps), !.
+prove(and(F, G), Hyps) :- prove(F, Hyps), prove(G, Hyps).
+prove(or(F, _), Hyps) :- prove(F, Hyps).
+prove(or(_, G), Hyps) :- prove(G, Hyps).
+prove(imp(F, G), Hyps) :- prove(G, [F|Hyps]).
+prove(all(X, F), Hyps) :- copy_term(F, F1), prove(F1, Hyps).</code></pre>
+
+    <p>Not a serious prover, but enough to teach the ideas and enough for quick experiments. Prolog&rsquo;s ability to host theorem-prover prototypes is one of its pedagogical strengths. Melvin Fitting&rsquo;s textbook <em>First-Order Logic and Automated Theorem Proving</em> uses Prolog throughout.</p>
+
+    <h3>Protocol verification and the Needham-Schroeder bug</h3>
+
+    <p>In 1995, Gavin Lowe at Oxford used the <strong>FDR</strong> model checker to find a previously unknown attack on the <strong>Needham-Schroeder public-key protocol</strong> &mdash; a cryptographic authentication protocol proposed in 1978 and believed secure for seventeen years. FDR is based on CSP, not Prolog, but similar results came from logic-programming tools: <strong>BAN logic</strong> (Burrows, Abadi, Needham), the <strong>Athena</strong> tool, and modern descendants in <strong>ProVerif</strong> and <strong>Tamarin</strong>. When Amazon Web Services wanted to verify its IAM policies, it reached for <strong>Zelkova</strong>, an SMT-based tool inspired by these traditions. The broader lesson: formal methods for protocol verification are largely built from logic-programming DNA.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">The Language Itself</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="implementations.html">Implementations &amp; Tooling</a></li>
+        <li><a href="constraint-lp.html">Constraint Logic Programming</a></li>
+        <li><a href="datalog-asp.html">Datalog &amp; Answer Set Programming</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Prolog &amp; Logic Programming &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

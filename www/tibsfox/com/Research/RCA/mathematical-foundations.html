@@ -149,6 +149,183 @@
       </tbody>
     </table>
 
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: PEARL'S DO-CALCULUS COMPLETENESS            -->
+    <!-- ============================================================ -->
+
+    <h2>Pearl&rsquo;s Do-Calculus &mdash; Complete Rules</h2>
+    <p>Deep extraction from Pearl (2009/2010, <em>Statistics Surveys</em>, <em>Intl. J. Biostatistics</em>). The three rules are <strong>complete</strong> &mdash; repeated application can eliminate the do-operator from any identifiable causal quantity (Huang &amp; Valtorta, 2006; Shpitser &amp; Pearl, 2006).</p>
+    <div class="card">
+      <p><strong>Rule 1 (Observation insertion/deletion):</strong> P(y|do(x), z, w) = P(y|do(x), w) if Y &perp; Z | {X, W} in G<sub>X&#772;</sub></p>
+      <p><strong>Rule 2 (Action/observation exchange):</strong> P(y|do(x), do(z), w) = P(y|do(x), z, w) if Y &perp; Z | {X, W} in G<sub>X&#772;, Z&#818;</sub></p>
+      <p><strong>Rule 3 (Intervention insertion/deletion):</strong> P(y|do(x), do(z), w) = P(y|do(x), w) if Y &perp; Z | {X, W} in G<sub>X&#772;, Z(W)&#772;</sub></p>
+      <p>If these rules cannot eliminate do(), the effect is <strong>provably non-identifiable</strong> from observational data alone.</p>
+    </div>
+
+    <h3>The Define-Assume-Identify-Estimate Protocol</h3>
+    <table>
+      <thead><tr><th>Step</th><th>Action</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Define</strong></td><td>Express target quantity Q as Q(M)</td><td>Formal causal query</td></tr>
+        <tr><td><strong>Assume</strong></td><td>Encode causal assumptions as DAG</td><td>Graphical model</td></tr>
+        <tr><td><strong>Identify</strong></td><td>Check if Q computable from P(v)</td><td>Identifiability proof</td></tr>
+        <tr><td><strong>Estimate</strong></td><td>Compute statistical estimate or bounds</td><td>Numerical answer</td></tr>
+      </tbody>
+    </table>
+    <p>For RCA: Level 1 (association) = &ldquo;A and B co-occur&rdquo; &mdash; insufficient. Level 2 (intervention) = &ldquo;fixing A reduces B by 73%&rdquo; &mdash; actionable. Level 3 (counterfactual) = &ldquo;given this failure, would it have occurred if A had been normal?&rdquo; &mdash; forensic.</p>
+
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: BAYESIAN NETWORK BENCHMARKS                 -->
+    <!-- ============================================================ -->
+
+    <h2>Bayesian Networks &mdash; Benchmark Evidence</h2>
+    <p>Ou et al. (2026, <em>J. Process Control</em>) evaluate a two-stage FDD-BN framework on the Tennessee Eastman Process (52 variables, 28 fault scenarios) and Industrial Penicillin Simulation:</p>
+    <div class="card">
+      <p><strong>Key finding:</strong> ML-based fault detection (LSTM-AE, OCSVM) is robust and consistent, but <strong>automated causal structure learning does not consistently yield accurate networks</strong> for effective root cause analysis. Structure learning is the bottleneck &mdash; inference works well once the graph is correct.</p>
+    </div>
+
+    <h3>Structure Learning Algorithm Comparison</h3>
+    <table>
+      <thead><tr><th>Algorithm</th><th>Type</th><th>Scalability</th><th>DAG Quality</th></tr></thead>
+      <tbody>
+        <tr><td>PC</td><td>Constraint-based</td><td>O(p<sup>d</sup>) worst-case</td><td>Good on sparse graphs</td></tr>
+        <tr><td>GES</td><td>Score-based</td><td>Polynomial for sparse</td><td>Consistent under assumptions</td></tr>
+        <tr><td>NOTEARS</td><td>Continuous optimization</td><td>Handles medium-scale</td><td>Variable (depends on nonlinearity)</td></tr>
+        <tr><td>DirectLiNGAM</td><td>Functional model</td><td>O(p<sup>3</sup>)</td><td>Identifiable (unique DAG)</td></tr>
+      </tbody>
+    </table>
+    <p>Fusion-learning (Ademujimi &amp; Prabhu, 2021): combining NLP-extracted qualitative models with quantitative sensor data achieved <strong>SHD = 5</strong> for top 6 faults vs. expert-derived structure. Domain knowledge integration significantly improves DAG quality over pure data-driven approaches.</p>
+
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: GRAPH CENTRALITY PERFORMANCE                -->
+    <!-- ============================================================ -->
+
+    <h2>Graph-Theoretic Fault Localization &mdash; Empirical Results</h2>
+    <p>Alpha centrality (Katz variant) on directed fault graphs, supplemented by the comprehensive 21-method benchmark from &ldquo;Root Cause Analysis for Microservices based on Causal Inference: How Far Are We?&rdquo; (ArXiv 2408.13729).</p>
+
+    <h3>Centrality Measure Performance</h3>
+    <table>
+      <thead><tr><th>Centrality Measure</th><th>Threshold 0.6</th><th>Threshold 0.7</th><th>Threshold 0.8</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Alpha Centrality</strong></td><td><strong>96.37%</strong></td><td><strong>93.80%</strong></td><td><strong>93.17%</strong></td></tr>
+        <tr><td>Eigenvector</td><td>88.89%</td><td>65.30%</td><td>60.30%</td></tr>
+        <tr><td>Closeness</td><td>76.69%</td><td>61.51%</td><td>42.32%</td></tr>
+      </tbody>
+    </table>
+
+    <h3>21-Method Benchmark on Real Microservice Systems (Avg@5)</h3>
+    <table>
+      <thead><tr><th>Method</th><th>Avg@5</th><th>Runtime</th></tr></thead>
+      <tbody>
+        <tr><td><strong>BARO / NSigma</strong></td><td><strong>0.94&ndash;1.00</strong></td><td><strong>0.01 s</strong></td></tr>
+        <tr><td>CausalRCA</td><td>0.97&ndash;0.98</td><td>51&ndash;1,326 s</td></tr>
+        <tr><td>CIRCA</td><td>0.94&ndash;0.98</td><td>Moderate</td></tr>
+        <tr><td>PC, Granger, LiNGAM, RUN, etc.</td><td>0.04&ndash;0.47</td><td>0.17&ndash;1,095 s</td></tr>
+      </tbody>
+    </table>
+    <div class="card">
+      <p><strong>Counter-intuitive finding:</strong> Simple statistical baselines (NSigma, BARO) often <strong>outperform complex causal discovery</strong> on real systems when failure time is precisely known. The runtime ratio between simplest and most complex methods spans <span class="key-number confirmed">5 orders of magnitude</span> (0.01s to 1,095s). All causal graph construction methods achieve F1 &le; 0.54 on synthetic benchmarks, degrading to 0.30&ndash;0.38 at 50 nodes.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: TRANSFER ENTROPY                            -->
+    <!-- ============================================================ -->
+
+    <h2>Transfer Entropy &mdash; Directed Information Flow</h2>
+    <p>Schreiber (2000, <em>Physical Review Letters</em>) introduced the information-theoretic gold standard for directed causal discovery:</p>
+    <div class="formula">
+      T<sub>X&rarr;Y</sub> = H(Y<sub>t</sub> | Y<sub>t-1:t-L</sub>) &minus; H(Y<sub>t</sub> | Y<sub>t-1:t-L</sub>, X<sub>t-1:t-L</sub>)
+    </div>
+    <p>Equivalently: T<sub>X&rarr;Y</sub> = I(Y<sub>t</sub>; X<sub>t-1:t-L</sub> | Y<sub>t-1:t-L</sub>) &mdash; conditional mutual information that conditions out shared history.</p>
+
+    <h3>Information-Theoretic Measures Comparison</h3>
+    <table>
+      <thead><tr><th>Measure</th><th>Directional?</th><th>Nonlinear?</th><th>Model-Free?</th><th>Computational Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Mutual Information</td><td>No</td><td>Yes</td><td>Yes</td><td>O(N log N)</td></tr>
+        <tr><td>Time-Delayed MI</td><td>Weak</td><td>Yes</td><td>Yes</td><td>O(N log N)</td></tr>
+        <tr><td><strong>Transfer Entropy</strong></td><td><strong>Yes</strong></td><td><strong>Yes</strong></td><td><strong>Yes</strong></td><td>O(N &middot; k<sup>2d</sup>)</td></tr>
+        <tr><td>Granger Causality</td><td>Yes</td><td>No (linear)</td><td>No (VAR)</td><td>O(N &middot; p<sup>2</sup>)</td></tr>
+        <tr><td>Conditional MI</td><td>Yes</td><td>Yes</td><td>Yes</td><td>O(N &middot; k<sup>3d</sup>)</td></tr>
+      </tbody>
+    </table>
+    <p>Transfer entropy reduces to Granger causality for Gaussian VAR processes, but captures nonlinear causal dependencies that Granger misses. Lag-specific TE (recent work) enables estimation of <strong>fault propagation delays</strong> &mdash; critical for root cause sequencing in multi-stage systems.</p>
+
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: GRANGER CAUSALITY EXTENSIONS                -->
+    <!-- ============================================================ -->
+
+    <h2>Granger Causality &mdash; From 1969 to Neural GC</h2>
+    <p>Granger (1969, <em>Econometrica</em>, Nobel Prize 2003) to Lin et al. (2024, AAAI). Review by Shojaie &amp; Fox (2022, <em>Annual Review of Statistics</em>).</p>
+
+    <h3>Seven Restrictive Assumptions</h3>
+    <table>
+      <thead><tr><th>#</th><th>Assumption</th><th>Violation Impact</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Continuous-valued series</td><td>Cannot handle categorical/count data</td></tr>
+        <tr><td>2</td><td>Linear dynamics</td><td>Misses nonlinear causal mechanisms</td></tr>
+        <tr><td>3</td><td>Discrete regular time grid</td><td>Fails for irregular sampling</td></tr>
+        <tr><td>4</td><td>Known lag order</td><td>Misspecification biases results</td></tr>
+        <tr><td>5</td><td>Stationarity</td><td>Non-stationary series yield spurious causality</td></tr>
+        <tr><td>6</td><td>Perfect observation</td><td>Measurement error inflates false negatives</td></tr>
+        <tr><td>7</td><td>No hidden confounders</td><td>Confounders create spurious causality</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Extensions Timeline</h3>
+    <table>
+      <thead><tr><th>Year</th><th>Extension</th><th>Key Advance</th></tr></thead>
+      <tbody>
+        <tr><td>1969</td><td>Original definition (Granger)</td><td>Spectral + VAR formulation</td></tr>
+        <tr><td>2000</td><td>Transfer entropy (Schreiber)</td><td>Model-free nonlinear extension</td></tr>
+        <tr><td>2007</td><td>Lasso VAR (Fujita et al.)</td><td>High-dimensional networks</td></tr>
+        <tr><td>2009</td><td>Group Lasso (Lozano et al.)</td><td>Joint lag/causality selection</td></tr>
+        <tr><td>2019</td><td>Neural GC &mdash; MLP/LSTM (Tank et al.)</td><td>Nonlinear deep learning</td></tr>
+        <tr><td>2024</td><td>RUN &mdash; contrastive + neural (Lin et al.)</td><td>Microservice RCA application</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- DEEP EXTRACTION: UNIFIED RCA MATHEMATICS                     -->
+    <!-- ============================================================ -->
+
+    <h2>The RCA Mathematical Pipeline</h2>
+    <p>The five mathematical frameworks form a natural pipeline for root cause analysis in production systems:</p>
+    <div class="card">
+      <ol>
+        <li><strong>Information Theory</strong> &mdash; entropy-based anomaly detection identifies affected variables and narrows the search space via MI feature selection</li>
+        <li><strong>Granger Causality</strong> &mdash; temporal causal discovery builds directed causal graphs from metric time series</li>
+        <li><strong>Graph Theory</strong> &mdash; centrality measures (Alpha, PageRank) rank nodes by causal influence on the graph</li>
+        <li><strong>Bayesian Networks</strong> &mdash; probabilistic inference computes P(Root Cause | Observed Symptoms) with evidence propagation</li>
+        <li><strong>Structural Causal Models</strong> &mdash; do-calculus for &ldquo;what if we fix X?&rdquo; and counterfactuals for forensic attribution</li>
+      </ol>
+    </div>
+
+    <h3>Key Numbers for Practitioners</h3>
+    <table>
+      <thead><tr><th>Metric</th><th>Value</th><th>Context</th></tr></thead>
+      <tbody>
+        <tr><td>Alpha centrality accuracy</td><td><strong>96.37%</strong></td><td>Fault localization at 0.6 threshold</td></tr>
+        <tr><td>Best causal graph F1</td><td>0.54</td><td>DirectLiNGAM on 10-node synthetic</td></tr>
+        <tr><td>Best Avg@5 on real systems</td><td><strong>0.94&ndash;1.00</strong></td><td>BARO/NSigma with known failure time</td></tr>
+        <tr><td>Runtime ratio (simple:complex)</td><td>1 : 100,000</td><td>NSigma (0.01s) vs RUN (1,095s)</td></tr>
+        <tr><td>BN structure learning SHD</td><td>5</td><td>Fused model vs expert (6 top faults)</td></tr>
+        <tr><td>Data sensitivity range</td><td>0.13 &rarr; 0.79</td><td>RCD Avg@5 with 10&times; more data</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Five Fundamental Tensions</h3>
+    <table>
+      <thead><tr><th>Tension</th><th>Trade-off</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Accuracy vs. Speed</strong></td><td>0.01s answers at 90% accuracy often beat 1,000s answers at 95%</td></tr>
+        <tr><td><strong>Identifiability vs. Practicality</strong></td><td>do-calculus requires correct graphs; graph F1 rarely exceeds 0.50</td></tr>
+        <tr><td><strong>Linearity vs. Generality</strong></td><td>Granger/BN assume linearity; TE/neural handle nonlinearity at higher cost</td></tr>
+        <tr><td><strong>Observability vs. Confounding</strong></td><td>Hidden confounders generate spurious links no test can detect</td></tr>
+        <tr><td><strong>Structure vs. Anomaly Detection</strong></td><td>Simple anomaly scoring often outperforms elaborate causal discovery</td></tr>
+      </tbody>
+    </table>
+
     <!-- CORPUS CROSS-REFERENCES -->
     <h2>Corpus Cross-References</h2>
     <p>Pipeline analysis identified <strong>229 related projects</strong> across 3 knowledge domains with 14 keyword matches.</p>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garbage Collectors Deep Dive &mdash; JVM GC &amp; Memory Management</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jgc">
+  <header>
+    <h1>Garbage Collectors Deep Dive</h1>
+    <div class="subtitle">Serial, Parallel, G1, ZGC, Shenandoah, Epsilon, Azul C4 &mdash; Every Modern Collector and How It Works</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="collectors.html" class="active">Collectors</a>
+      <a href="memory.html">Memory</a>
+      <a href="tuning.html">Tuning</a>
+      <a href="monitoring.html">Monitoring</a>
+      <a href="diagnostics.html">Diagnostics</a>
+      <a href="containers.html">Containers</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every JVM GC is an implementation of a handful of classical ideas, composed differently to hit different points on the three-way trade-off: pause time, throughput, and footprint.
+    </blockquote>
+
+    <h2>GC Theory Primer</h2>
+
+    <h3>The Weak Generational Hypothesis</h3>
+    <p>The single most influential empirical observation in GC design: <strong>most objects die young</strong>. Decades of production heap telemetry confirm that the lifetime distribution of allocated objects is strongly bimodal &mdash; the vast majority become unreachable within milliseconds of allocation; a small minority survive for the entire process lifetime. This is the justification for <strong>generational garbage collection</strong>: if you can cheaply identify the newly-allocated region and collect only that, you reclaim most of the garbage for a fraction of the cost of scanning the entire heap.</p>
+
+    <h3>Three tracing algorithms</h3>
+    <table>
+      <thead><tr><th>Algorithm</th><th>Mechanism</th><th>Trade-off</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mark-Sweep</strong></td><td>Mark all reachable objects; add unmarked to a free list.</td><td>Simple, cheap per-object; leaves heap fragmented.</td></tr>
+        <tr><td><strong>Mark-Compact</strong></td><td>After marking, slide live objects together to eliminate holes.</td><td>Restores contiguous free space; needs extra compact pass + reference updates.</td></tr>
+        <tr><td><strong>Copying (Scavenge)</strong></td><td>Divide region in two; on collection, evacuate live to the other half; flip.</td><td>Work is proportional to live data; costs 50% headroom.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>STW, Concurrent, Parallel</h3>
+    <p>These three terms are orthogonal but often conflated:</p>
+    <ul>
+      <li><strong>Stop-the-world (STW).</strong> All mutator threads are halted at a safepoint. Simple to reason about; hostile to latency.</li>
+      <li><strong>Parallel.</strong> The GC uses multiple GC threads. Still STW, but faster because work is divided across CPUs. &ldquo;Parallel&rdquo; does not imply concurrent with the application.</li>
+      <li><strong>Concurrent.</strong> The GC runs at the same time as application threads. Requires <em>barriers</em> to keep the collector and mutator coherent.</li>
+    </ul>
+
+    <p>Modern low-pause collectors (G1, ZGC, Shenandoah) use a combination: short parallel STW phases (initial mark, final mark) bracketing long concurrent phases (concurrent mark, concurrent relocate).</p>
+
+    <h3>Barriers, card tables, remembered sets</h3>
+    <div class="card">
+      <p><strong>Barriers</strong> are code emitted by the JIT around heap accesses to maintain GC invariants concurrently with the mutator. Two families:</p>
+      <ul>
+        <li><strong>Write barriers</strong> &mdash; run on pointer stores. Used by generational collectors to record old-to-young pointers; used by concurrent markers (SATB) to remember overwritten references.</li>
+        <li><strong>Read barriers (load barriers)</strong> &mdash; run on pointer loads. Used by concurrent relocating collectors (ZGC, Shenandoah) to intercept loads of potentially-relocated references and forward them.</li>
+      </ul>
+      <p>A <strong>card table</strong> is a coarse bitmap that divides the heap into equal cards (typically 512 bytes in HotSpot). A write barrier sets the corresponding card bit. At collection time, the GC scans only dirty cards.</p>
+      <p>A <strong>remembered set</strong> is a finer structure that explicitly lists, for each region, the set of other regions that contain pointers into it. G1 uses per-region remembered sets.</p>
+    </div>
+
+    <h3>Safepoints and TTSP</h3>
+    <p>A <strong>safepoint</strong> is a point in compiled code where the JVM knows the thread&rsquo;s register state well enough to walk its stack precisely. When the GC needs to stop the world, it sets a flag; each mutator thread polls that flag at safepoint locations (method entry, loop back-edges, call returns) and suspends itself. The time between setting the flag and the last mutator reaching its next safepoint is called <strong>time-to-safepoint (TTSP)</strong> &mdash; a hidden latency source. JDK 10+ uses <strong>thread-local handshakes</strong> (JEP 312) to stop individual threads without a global safepoint.</p>
+
+    <h3>Precise GC</h3>
+    <p><strong>The HotSpot JVM is precise.</strong> Every compiled method carries an <strong>OopMap</strong> (ordinary-object-pointer map) for each safepoint, listing exactly which stack slots and registers hold references. This is what makes compacting and evacuating collectors safe &mdash; every pointer can be updated to the new location.</p>
+
+    <h2>Serial GC</h2>
+    <p>The simplest collector in HotSpot. Single-threaded, fully stop-the-world.</p>
+
+<pre><code>java -XX:+UseSerialGC -jar app.jar</code></pre>
+
+    <ul>
+      <li><strong>Young generation:</strong> copying collector with Eden + two survivor spaces</li>
+      <li><strong>Old generation:</strong> mark-sweep-compact</li>
+      <li><strong>Throughput:</strong> surprisingly competitive for small heaps (no concurrency overhead)</li>
+      <li><strong>Pause time:</strong> proportional to heap size; unusable for large heaps</li>
+      <li><strong>Footprint:</strong> minimal &mdash; no remembered sets, no concurrent marking structures</li>
+      <li><strong>Use when:</strong> small heaps (&lt; 100 MB), embedded, single-core, short-lived CLI processes</li>
+    </ul>
+
+    <h2>Parallel GC &mdash; The Throughput Collector</h2>
+
+<pre><code>java -XX:+UseParallelGC -jar app.jar</code></pre>
+
+    <p>Multi-threaded, still fully stop-the-world. Design goal: spend as little total CPU on GC as possible, regardless of individual pause length.</p>
+
+    <ul>
+      <li><strong>Young generation:</strong> parallel copying collector. N GC threads divide Eden into strips and evacuate in parallel.</li>
+      <li><strong>Old generation:</strong> parallel mark-sweep-compact. In modern JDKs (8+), parallel old is the default when <code>UseParallelGC</code> is enabled.</li>
+      <li><strong>Throughput:</strong> highest of any HotSpot collector for CPU-bound batch work.</li>
+      <li><strong>Pause time:</strong> longer than concurrent collectors; old-gen collections can pause for seconds on multi-GB heaps.</li>
+      <li><strong>Default in Java 8</strong> for server-class machines; still best for batch jobs where latency doesn&rsquo;t matter.</li>
+    </ul>
+
+    <h2>CMS (Concurrent Mark Sweep) &mdash; Removed</h2>
+    <div class="card red">
+      <p><strong>CMS is deprecated and removed.</strong> The <strong>Concurrent Mark Sweep</strong> collector (<code>-XX:+UseConcMarkSweepGC</code>) was the JVM&rsquo;s first serious attempt at low-pause old-generation collection. It did concurrent marking and sweeping, with STW pauses only for initial mark and remark. But it never compacted, which meant fragmentation would eventually trigger a long full GC.</p>
+      <p>Deprecated in Java 9 (<strong>JEP 291</strong>), removed in Java 14 (<strong>JEP 363</strong>). G1 replaced it for the same niche.</p>
+    </div>
+
+    <h2>G1 &mdash; Garbage First, The Modern Default</h2>
+
+<pre><code>java -XX:+UseG1GC -jar app.jar</code></pre>
+
+    <p>The default collector since Java 9. Region-based heap with typical regions of 1&ndash;32 MB. Young and old regions are mixed across the heap, not in separate contiguous areas.</p>
+
+    <div class="card green">
+      <p><strong>Key architectural ideas:</strong></p>
+      <ul>
+        <li><strong>Region-based heap</strong> &mdash; divided into 2048 regions by default, sized as a power of 2 between 1 MB and 32 MB.</li>
+        <li><strong>Per-region remembered sets</strong> &mdash; so any region can be collected independently.</li>
+        <li><strong>Incremental evacuation</strong> &mdash; G1 collects a subset of regions per pause, not the whole heap.</li>
+        <li><strong>Predictable pause target</strong> via <code>-XX:MaxGCPauseMillis</code>. G1 schedules which regions to collect to meet the target.</li>
+        <li><strong>SATB</strong> (Snapshot-At-The-Beginning) marking &mdash; concurrent marker uses a write barrier to remember overwritten references.</li>
+        <li><strong>Mixed collections</strong> &mdash; between full marking cycles, G1 collects young + some old regions.</li>
+        <li><strong>Humongous objects</strong> (&gt; 50% of a region) live in dedicated contiguous humongous regions.</li>
+      </ul>
+    </div>
+
+    <p><strong>Sweet spot:</strong> heaps from ~4 GB to ~32 GB; usable at hundreds of GB with tuning. Signs you need to tune G1: to-space exhaustion, long mixed GC pauses, humongous object allocation.</p>
+
+    <h2>ZGC &mdash; Sub-10ms Pauses at TB Scale</h2>
+
+<pre><code>java -XX:+UseZGC -XX:+ZGenerational -jar app.jar</code></pre>
+
+    <p>Introduced as experimental in Java 11, production-ready in Java 15, <strong>generational ZGC landed in Java 21</strong> (JEP 439). The ultra-low-pause collector.</p>
+
+    <div class="card purple">
+      <p><strong>The ZGC innovations:</strong></p>
+      <ul>
+        <li><strong>Colored pointers</strong> &mdash; historically 42-bit addresses with metadata in high bits (mark0, mark1, remapped, finalizable). Java 18+ uses multi-mapped memory for some platforms.</li>
+        <li><strong>Load barriers</strong> on every reference load &mdash; the read barrier intercepts loads of relocated references and forwards them to the new location.</li>
+        <li><strong>Concurrent everything</strong> &mdash; marking, relocation, reference processing all run concurrently with the mutator.</li>
+        <li><strong>Page-based</strong> &mdash; ZGC has its own page structure separate from OS pages; three page sizes (small, medium, large).</li>
+        <li><strong>Target:</strong> &lt; 10 ms max pause regardless of heap size; scales to multi-TB heaps.</li>
+        <li><strong>Memory overhead:</strong> historically ~3&times; the live set; generational ZGC improves this significantly.</li>
+      </ul>
+      <p>Generational ZGC (Java 21, JEP 439): Young and Old generations, but still entirely concurrent. Most workloads with generational patterns can now use ZGC without the old throughput penalty.</p>
+    </div>
+
+    <h2>Shenandoah &mdash; Red Hat&rsquo;s Low-Pause Alternative</h2>
+
+<pre><code>java -XX:+UseShenandoahGC -jar app.jar</code></pre>
+
+    <p>Red Hat&rsquo;s OpenJDK collector, built by <strong>Christine Flood</strong> and <strong>Roman Kennke</strong>. Similar pause goals to ZGC but a different approach.</p>
+
+    <ul>
+      <li><strong>Brooks pointers</strong> historically (now Load Reference Barriers) &mdash; a forwarding pointer in every object&rsquo;s header that directs reads and writes to the current location.</li>
+      <li><strong>Concurrent compaction</strong> &mdash; live objects are relocated while the mutator runs.</li>
+      <li><strong>Heuristics:</strong> <code>adaptive</code> (default), <code>static</code>, <code>compact</code>, <code>aggressive</code>, <code>passive</code>.</li>
+      <li><strong>Target:</strong> &lt; 10 ms max pause regardless of heap size.</li>
+      <li><strong>Availability:</strong> OpenJDK builds from Red Hat, Adoptium, Azul, BellSoft; not in Oracle JDK historically.</li>
+    </ul>
+
+    <h2>Epsilon &mdash; The No-Op Collector</h2>
+
+<pre><code>java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -jar app.jar</code></pre>
+
+    <div class="card yellow">
+      <p><strong>Epsilon allocates but never collects.</strong> It exists for very specific use cases:</p>
+      <ul>
+        <li>Short-lived processes that die before exhausting the heap (CLI tools, benchmarks)</li>
+        <li>Benchmarking the allocator itself</li>
+        <li>Testing VM performance without GC interference</li>
+        <li>Measuring the &ldquo;GC tax&rdquo; of a real workload by comparison</li>
+      </ul>
+      <p>The JVM dies with <code>OutOfMemoryError</code> when the heap exhausts. That&rsquo;s the whole design.</p>
+    </div>
+
+    <h2>Azul C4 &mdash; The Commercial Pauseless Collector</h2>
+    <p>Part of <strong>Azul Zing / Prime</strong>. C4 (Continuously Concurrent Compacting Collector) was the <em>first</em> truly pauseless concurrent compacting GC, predating ZGC by years.</p>
+
+    <ul>
+      <li><strong>Load Value Barrier (LVB)</strong> &mdash; concurrent read barrier</li>
+      <li><strong>Guaranteed bounded pause time</strong> at TB heaps</li>
+      <li>Used heavily in <strong>high-frequency trading</strong> and financial services</li>
+      <li>Commercial; requires Azul&rsquo;s JVM</li>
+      <li>Many of the techniques eventually influenced ZGC and Shenandoah</li>
+    </ul>
+
+    <h2>OpenJ9 Collectors</h2>
+    <p><strong>Eclipse OpenJ9</strong> (formerly IBM J9) is an alternative JVM implementation with its own collector family:</p>
+
+    <table>
+      <thead><tr><th>Policy</th><th>Style</th></tr></thead>
+      <tbody>
+        <tr><td><code>-Xgcpolicy:gencon</code></td><td>Generational concurrent (default). Similar philosophy to G1.</td></tr>
+        <tr><td><code>-Xgcpolicy:balanced</code></td><td>Region-based with similarities to G1.</td></tr>
+        <tr><td><code>-Xgcpolicy:optthruput</code></td><td>Throughput-optimized.</td></tr>
+        <tr><td><code>-Xgcpolicy:optavgpause</code></td><td>Optimized for average pause time.</td></tr>
+        <tr><td><code>-Xgcpolicy:metronome</code></td><td>Realtime GC with deterministic pause bounds.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Collector Selection Matrix</h2>
+    <table>
+      <thead><tr><th>Workload</th><th>Heap size</th><th>Pause SLA</th><th>Recommended collector</th></tr></thead>
+      <tbody>
+        <tr><td>CLI tool / embedded</td><td>&lt; 100 MB</td><td>N/A</td><td>Serial</td></tr>
+        <tr><td>Batch / ETL</td><td>Any</td><td>None (throughput)</td><td>Parallel</td></tr>
+        <tr><td>Default server</td><td>4 GB &ndash; 32 GB</td><td>&lt; 200 ms</td><td>G1</td></tr>
+        <tr><td>Large latency-sensitive</td><td>32 GB &ndash; 16 TB</td><td>&lt; 10 ms</td><td>ZGC (generational)</td></tr>
+        <tr><td>Large latency-sensitive (alt)</td><td>Any</td><td>&lt; 10 ms</td><td>Shenandoah</td></tr>
+        <tr><td>HFT / ultra-low-latency</td><td>Any</td><td>Microseconds</td><td>Azul C4 (commercial)</td></tr>
+        <tr><td>Short-lived benchmark</td><td>Small</td><td>N/A</td><td>Epsilon</td></tr>
+        <tr><td>Native binary, instant startup</td><td>Small</td><td>Cold-start</td><td>GraalVM Native Image + Serial</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>JAV</td><td>Java and the JVM</td><td>Language-level overview; this project goes into the collectors themselves</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>HotSpot, G1, ZGC, Shenandoah are all implemented in C++</td></tr>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td>The primitive memory ops underlying every collector</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="memory.html">Memory Spaces &amp; Layout</a></li>
+        <li><a href="tuning.html">GC Tuning &amp; Flag Reference</a></li>
+        <li><a href="monitoring.html">Monitoring &amp; Metrics</a></li>
+        <li><a href="diagnostics.html">Heap Dumps &amp; Diagnostics</a></li>
+        <li><a href="containers.html">Containers &amp; Kubernetes</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Garbage Collectors Deep Dive &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

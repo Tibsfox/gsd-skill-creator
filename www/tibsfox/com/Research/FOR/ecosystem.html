@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Ecosystem &mdash; Fortran &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-for">
+  <header>
+    <h1>Modern Ecosystem</h1>
+    <div class="subtitle">$ fpm new project --app --lib  ! the renaissance is real</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="arrays.html">Arrays</a>
+      <a href="hpc.html">HPC</a>
+      <a href="parallel.html">Parallel</a>
+      <a href="ecosystem.html" class="active">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>! Fortran 2026</strong><br>
+      A language frequently declared dead by outsiders has undergone a quiet but determined renaissance. <em>fpm</em>, <em>stdlib</em>, <em>LFortran</em>, <em>Flang</em> &mdash; modern tooling for the first time in decades.
+    </blockquote>
+
+    <h2>The Compiler Landscape (2026)</h2>
+
+    <table>
+      <thead><tr><th>Compiler</th><th>Vendor</th><th>License</th><th>Strengths</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>GFortran</strong></td><td>GNU / GCC</td><td>GPLv3</td><td>Ubiquitous, free, full F95, most F2003/2008</td><td>Default everywhere. Linux distros, BSDs.</td></tr>
+        <tr><td><strong>ifx (Intel)</strong></td><td>Intel oneAPI</td><td>Free for personal use</td><td>Best x86-64 performance, MKL integration, AVX-512</td><td>Production HPC on Intel hardware</td></tr>
+        <tr><td><strong>NAG Fortran</strong></td><td>NAG</td><td>Commercial</td><td>Best diagnostics, strict standards conformance</td><td>Portability validation, compliance testing</td></tr>
+        <tr><td><strong>nvfortran</strong></td><td>NVIDIA HPC SDK</td><td>Free non-commercial</td><td>CUDA Fortran, OpenACC, DO CONCURRENT &rarr; GPU</td><td>GPU offloading, NVIDIA hardware</td></tr>
+        <tr><td><strong>AOCC Fortran</strong></td><td>AMD</td><td>Free</td><td>Tuned for Zen cores, AMD math libraries</td><td>EPYC and Threadripper HPC</td></tr>
+        <tr><td><strong>HPE Cray Fortran</strong></td><td>HPE</td><td>Vendor-locked</td><td>Coarrays, supercomputer-tuned</td><td>Cray supercomputers</td></tr>
+        <tr><td><strong>IBM XL Fortran</strong></td><td>IBM</td><td>Commercial</td><td>Power architecture, AIX integration</td><td>IBM Power systems</td></tr>
+        <tr><td><strong>LFortran</strong></td><td>fortran-lang</td><td>BSD</td><td>Interactive REPL, Jupyter kernel, lazy compilation, modern tooling</td><td>Teaching, prototyping, the new hotness</td></tr>
+        <tr><td><strong>Flang</strong></td><td>LLVM</td><td>Apache 2.0</td><td>Long-term LLVM frontend, increasing F2018/2023 coverage</td><td>The future replacement for many backends</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <p><strong>Five years ago</strong> the answer was &ldquo;GFortran, and maybe Intel if you paid for it.&rdquo; In 2026 there are nine compilers worth knowing, with two brand-new LLVM-based frontends (LFortran and Flang) genuinely competing with the long-established GFortran. Intel made <code>ifx</code> free for personal use in 2024; NVIDIA made <code>nvfortran</code> free for non-commercial use. The barriers to high-performance Fortran are gone.</p>
+    </div>
+
+    <h2>fpm — The Fortran Package Manager</h2>
+
+    <p>The single most transformative tool in modern Fortran. Modeled on Rust&rsquo;s Cargo. Simple TOML manifest, fetches dependencies, builds modern Fortran projects. The way to start a new Fortran project in 2026.</p>
+
+    <pre>
+# Install fpm
+brew install fpm                         # macOS
+cargo install fortran-fpm                # via Cargo (yes, really)
+# Or download binary from github.com/fortran-lang/fpm
+
+# Create a new project
+fpm new myproject --app --lib --test
+cd myproject
+
+# Build, test, run
+fpm build                                # builds with gfortran by default
+fpm build --compiler ifx                 # build with Intel
+fpm test                                 # run tests
+fpm run                                  # run the executable</pre>
+
+    <pre>
+# fpm.toml
+name = "myproject"
+version = "0.1.0"
+license = "MIT"
+author = "Foxy"
+
+[build]
+auto-executables = true
+auto-tests = true
+
+[dependencies]
+stdlib = "*"
+test-drive = { git = "https://github.com/fortran-lang/test-drive" }
+
+[[executable]]
+name = "myapp"
+source-dir = "app"
+main = "main.f90"</pre>
+
+    <h2>stdlib — The Fortran Standard Library</h2>
+
+    <p>Community effort to give Fortran a modern standard library. Inspired by Python&rsquo;s stdlib and Rust&rsquo;s std. Fixes the historical complaint that every Fortran project had to reinvent string manipulation, hash maps, and statistical primitives.</p>
+
+    <table>
+      <thead><tr><th>Module</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>stdlib_io</code></td><td>Text file I/O, TOML loading, NumPy npy/npz</td></tr>
+        <tr><td><code>stdlib_string_type</code> / <code>stdlib_strings</code></td><td>Modern string type, split/join/replace/strip/find</td></tr>
+        <tr><td><code>stdlib_linalg</code></td><td>BLAS/LAPACK-backed: inverse, det, eigenvalues, SVD, least squares</td></tr>
+        <tr><td><code>stdlib_stats</code></td><td>Mean, variance, covariance, median, quantile, correlation</td></tr>
+        <tr><td><code>stdlib_stats_distribution_*</code></td><td>Random variates: normal, uniform, exponential, gamma</td></tr>
+        <tr><td><code>stdlib_random</code></td><td>Modern PRNGs (xoshiro, PCG)</td></tr>
+        <tr><td><code>stdlib_quadrature</code></td><td>Numerical integration: trapezoidal, Simpson, Gauss-Legendre</td></tr>
+        <tr><td><code>stdlib_specialfunctions</code></td><td>Gamma, beta, error function, Bessel, Legendre</td></tr>
+        <tr><td><code>stdlib_hash_maps</code></td><td>Hash map containers (finally!)</td></tr>
+        <tr><td><code>stdlib_logger</code></td><td>Structured logging</td></tr>
+        <tr><td><code>stdlib_ansi</code></td><td>Terminal colors and formatting</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Build Systems</h2>
+
+    <table>
+      <thead><tr><th>Tool</th><th>Use Case</th></tr></thead>
+      <tbody>
+        <tr><td><strong>fpm</strong></td><td>New modern Fortran projects. The default for greenfield work.</td></tr>
+        <tr><td><strong>CMake</strong></td><td>Mixed C/C++/Fortran projects. Complex multi-target builds. The de facto cross-platform standard.</td></tr>
+        <tr><td><strong>Make</strong></td><td>Legacy codebases, hand-written dependency tracking. Most existing scientific code.</td></tr>
+        <tr><td><strong>Meson</strong></td><td>Good Fortran support, used in some scientific projects.</td></tr>
+        <tr><td><strong>Autotools</strong></td><td>Legacy (LAPACK, etc.). Painful but ubiquitous.</td></tr>
+        <tr><td><strong>Spack</strong></td><td>HPC package manager. The way to install a 200-package scientific stack on a supercomputer.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Editors and IDEs</h2>
+
+    <table>
+      <thead><tr><th>Tool</th><th>Approach</th></tr></thead>
+      <tbody>
+        <tr><td><strong>VS Code + Modern Fortran</strong></td><td>Most popular. Maintained by fortran-lang. Pairs with fortls for full LSP.</td></tr>
+        <tr><td><strong>fortls</strong></td><td>Fortran Language Server. Python-based. Works with any LSP-capable editor: VS Code, Neovim, Emacs, Helix, Sublime.</td></tr>
+        <tr><td><strong>Neovim + LSP</strong></td><td>tree-sitter-fortran for syntax + nvim-lspconfig + fortls. The terminal power user setup.</td></tr>
+        <tr><td><strong>Emacs f90-mode</strong></td><td>Long-standing built-in mode + eglot/lsp-mode for fortls.</td></tr>
+        <tr><td><strong>Eclipse Photran</strong></td><td>Once the most capable Fortran IDE. Refactoring operations no other tool matches. Declining with Eclipse.</td></tr>
+        <tr><td><strong>Visual Studio + Intel</strong></td><td>Windows HPC, engineering shops, Intel oneAPI users.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Testing &amp; Quality</h2>
+
+    <table>
+      <thead><tr><th>Tool</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>test-drive</strong></td><td>Lightweight unit testing for fpm projects. The de facto modern standard.</td></tr>
+        <tr><td><strong>pFUnit</strong></td><td>NASA&rsquo;s parallel Fortran testing framework. MPI-aware. The choice for HPC codes.</td></tr>
+        <tr><td><strong>vegetables</strong></td><td>BDD-style testing framework.</td></tr>
+        <tr><td><strong>fypp</strong></td><td>Python preprocessor for Fortran metaprogramming.</td></tr>
+        <tr><td><strong>findent</strong></td><td>Format-preserving indenter for fixed and free form. Useful for legacy cleanup.</td></tr>
+        <tr><td><strong>fprettify</strong></td><td>Python tool that re-indents free-form Fortran. The closest Fortran has to <code>gofmt</code>.</td></tr>
+        <tr><td><strong>FORD</strong></td><td>Standard Fortran documentation generator. Like Doxygen but Fortran-aware.</td></tr>
+        <tr><td><strong>gcov / lcov</strong></td><td>Code coverage with GFortran builds.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Community Hubs</h2>
+
+    <table>
+      <thead><tr><th>Resource</th><th>What It Is</th></tr></thead>
+      <tbody>
+        <tr><td><strong>fortran-lang.org</strong></td><td>The community hub. Tutorials, news, package registry, discourse forum.</td></tr>
+        <tr><td><strong>Fortran Discourse</strong></td><td>discourse.fortran-lang.org. Active forum. The center of the modern community.</td></tr>
+        <tr><td><strong>r/fortran</strong></td><td>Active Reddit community.</td></tr>
+        <tr><td><strong>J3 (US) / WG5 (ISO)</strong></td><td>Standards committees. Active development of new Fortran standards.</td></tr>
+        <tr><td><strong>FortranCon</strong></td><td>Annual community conference.</td></tr>
+        <tr><td><strong>github.com/fortran-lang</strong></td><td>fpm, stdlib, fortls, test-drive, Modern Fortran extension &mdash; all maintained here.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card std-card">
+      <p><strong>The renaissance:</strong> For the first time in decades, you can <code>fpm new myproject</code>, edit in VS Code with Modern Fortran extension and fortls intelligence, depend on stdlib for modern data structures, build with GFortran or ifx, test with test-drive, document with FORD, deploy as a single binary &mdash; and the result is competitive with anything in modern scientific computing. The Fortran community spent the 2020s building the tooling Fortran always deserved.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="hpc.html">HPC &amp; Scientific Computing</a></li>
+        <li><a href="parallel.html">Parallel Fortran</a></li>
+        <li><a href="tools.html">Tools &amp; Compilers</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Modern Ecosystem &middot; Fortran &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

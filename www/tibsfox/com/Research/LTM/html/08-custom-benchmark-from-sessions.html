@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTM-08: Custom Benchmark from Session
+Data — LTM Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #221f3a;
+            --accent: #FFB300;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #9575CD;
+            --border: #2f2a4a;
+            --primary: #4527A0;
+            --mem: #FFD54F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; padding: 2rem; max-width: 900px; margin: 0 auto; }
+        h1 { color: var(--mem); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--mem); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--mem); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--mem); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--mem); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(149,117,205,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        LTM — Long-Term Memory Systems for AI Agents<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to LTM Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="ltm-08-custom-benchmark-from-session-data">LTM-08: Custom
+    Benchmark from Session Data</h1>
+    <p><strong>Series:</strong> Long-Term Memory (LTM) Research
+    <strong>Module:</strong> 08 <strong>Status:</strong> Design
+    specification <strong>Date:</strong> 2026-04-08
+    <strong>Branch:</strong> artemis-ii</p>
+    <h2 id="abstract">Abstract</h2>
+    <p>Public memory benchmarks — LoCoMo, LongMemEval, BEAM — measure
+    generic scenarios. They do not measure <em>our</em> workload. This
+    module specifies a complete benchmark methodology that uses
+    gsd-skill-creator’s 129 ingested conversation sessions (16,928
+    turns, stored in PostgreSQL <code>artemis</code> schema) as an
+    evaluation dataset. The benchmark mirrors BEAM’s ten memory ability
+    categories but grounds every question in real turns we authored. It
+    is strictly local — the session data is private and never leaves the
+    machine. The deliverable is a test harness that a CI run can execute
+    on every commit, a scoring rubric that combines exact match,
+    LLM-as-judge, and ranking metrics, and a regression-detection policy
+    that alerts when any category drops more than 5 percent
+    week-over-week. This is the measurement backbone for LTM-09 and
+    every subsequent memory-architecture change.</p>
+    <hr />
+    <h2 id="why-build-our-own-benchmark">1. Why Build Our Own
+    Benchmark</h2>
+    <p>Three reasons, each sufficient on its own:</p>
+    <ol type="1">
+    <li><strong>Distribution mismatch.</strong> LoCoMo sessions are
+    simulated multi-day dialogs between fictional personas. LongMemEval
+    questions target a synthetic chat assistant. Our workload is a
+    single researcher-operator (Foxy) driving 190+ research missions,
+    21,000+ tests, Rust/TS/GLSL stacks, and 13 Rosetta clusters.
+    Accuracy on public benchmarks is a weak predictor of accuracy on our
+    conversations because our topic distribution, temporal structure,
+    and reference patterns differ.</li>
+    <li><strong>Privacy constraint.</strong> Our sessions contain Fox
+    Companies IP, personal timeline details, and unpublished research.
+    We cannot submit them to any hosted LLM, and we cannot publish them.
+    The benchmark must run entirely local, on the PostgreSQL instance at
+    <code>maple@tibsfox</code> with schema <code>artemis</code>.</li>
+    <li><strong>Measurement discipline.</strong> Every improvement
+    proposed in LTM-09 (embedding upgrades, scoring changes, reranker
+    experiments) is guesswork until we can measure a delta. Without a
+    scoring harness, we are building on intuition. BEAM’s categories are
+    the right taxonomy; BEAM’s data is the wrong fit.</li>
+    </ol>
+    <p>The goal is a benchmark that a single command
+    (<code>npm run bench:memory</code>) runs in under ten minutes,
+    produces a per-category score table, flags regressions, and never
+    sends a byte off-machine.</p>
+    <hr />
+    <h2 id="dataset-inventory">2. Dataset Inventory</h2>
+    <h3 id="raw-material">2.1 Raw Material</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Asset</th>
+    <th>Count</th>
+    <th>Source</th>
+    <th>Storage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Conversation sessions</td>
+    <td>129</td>
+    <td>Claude Code history, manual ingest</td>
+    <td><code>artemis.conversation_sessions</code></td>
+    </tr>
+    <tr>
+    <td>Conversation turns</td>
+    <td>16,928</td>
+    <td>Each user/assistant/tool message</td>
+    <td><code>artemis.conversation_turns</code></td>
+    </tr>
+    <tr>
+    <td>Distinct projects</td>
+    <td>~20</td>
+    <td>Branch/project tags on sessions</td>
+    <td><code>sessions.project</code> column</td>
+    </tr>
+    <tr>
+    <td>Distinct branches</td>
+    <td>~15</td>
+    <td><code>sessions.branch</code> column</td>
+    <td><code>sessions.branch</code> column</td>
+    </tr>
+    <tr>
+    <td>Span</td>
+    <td>~8 months</td>
+    <td><code>started_at</code> min/max</td>
+    <td></td>
+    </tr>
+    <tr>
+    <td>Avg turns per session</td>
+    <td>131</td>
+    <td>16,928 / 129</td>
+    <td></td>
+    </tr>
+    <tr>
+    <td>Median content length</td>
+    <td>~380 chars</td>
+    <td>Estimated from ingest logs</td>
+    <td></td>
+    </tr>
+    <tr>
+    <td>HNSW embedding index</td>
+    <td>vector(384)</td>
+    <td>all-MiniLM-L6-v2</td>
+    <td><code>idx_turns_embedding</code></td>
+    </tr>
+    <tr>
+    <td>Full-text GIN index</td>
+    <td>English tsvector</td>
+    <td></td>
+    <td><code>idx_turns_fulltext</code></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The schema already satisfies the benchmark’s access patterns. No
+    migration is required; we add a new schema
+    <code>artemis_bench</code> alongside for test metadata only.</p>
+    <h3 id="partitioning-strategy">2.2 Partitioning Strategy</h3>
+    <p>Splitting by session (not by turn) is mandatory. Turn-level
+    splits leak — turn N+1 inside the same session trivially predicts
+    turn N. We target a 70/15/15 split on a 129-session pool.</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Split</th>
+    <th>Sessions</th>
+    <th>Purpose</th>
+    <th>Selection</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Train</td>
+    <td>90</td>
+    <td>Prompt refinement, judge calibration, retrieval tuning</td>
+    <td>Stratified by project cluster</td>
+    </tr>
+    <tr>
+    <td>Validation</td>
+    <td>20</td>
+    <td>Hyperparameter sweeps, early-stopping regression checks</td>
+    <td>Held out during question generation iteration</td>
+    </tr>
+    <tr>
+    <td>Holdout</td>
+    <td>19</td>
+    <td>Never touched except for final scoring</td>
+    <td>Locked at benchmark creation, hash-sealed</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Stratification keys are: primary project (<code>project</code>),
+    time period (quarter), and topic cluster (derived from
+    <code>topics</code> array). The stratifier ensures that NASA Mission
+    Series sessions, Seattle 360 sessions, LTM research sessions, and
+    operational sessions each appear proportionally in all three
+    splits.</p>
+    <p>Leakage prevention rules: - <strong>No cross-session prompt
+    context.</strong> A question generated from session S tests
+    retrieval of evidence from session S plus the broader corpus, never
+    from sessions in another split. - <strong>Question-generator LLM
+    sees train only.</strong> When we iteratively refine prompts, the
+    LLM only consumes train-split sessions. Validation and holdout are
+    quarantined. - <strong>Hash-sealed holdout.</strong> At benchmark
+    creation, we store SHA-256 of each holdout session’s turn content in
+    a manifest file. Any accidental mutation fails the integrity check.
+    - <strong>Embedding index freeze for holdout runs.</strong> When
+    scoring on holdout, we use a specific commit SHA of the
+    index-manager code so retrieval is reproducible.</p>
+    <h3 id="dataset-stats-table-to-populate-at-build">2.3 Dataset Stats
+    Table (to populate at build)</h3>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> artemis_bench.dataset_stats <span class="kw">AS</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  bs.<span class="kw">split</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> s.<span class="kw">id</span>)                           <span class="kw">AS</span> sessions,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(t.<span class="kw">id</span>)                                    <span class="kw">AS</span> turns,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">AVG</span>(s.turn_count):<span class="ch">:int</span>                         <span class="kw">AS</span> avg_turns_per_session,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">MIN</span>(s.started_at)                              <span class="kw">AS</span> earliest,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">MAX</span>(<span class="fu">COALESCE</span>(s.ended_at, s.started_at))        <span class="kw">AS</span> latest,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> s.project)                      <span class="kw">AS</span> distinct_projects,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> s.branch)                       <span class="kw">AS</span> distinct_branches</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> artemis_bench.split_assignment bs</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> artemis.conversation_sessions s <span class="kw">ON</span> s.<span class="kw">id</span> <span class="op">=</span> bs.session_id</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> artemis.conversation_turns t    <span class="kw">ON</span> t.session_id <span class="op">=</span> s.<span class="kw">id</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> bs.<span class="kw">split</span>;</span></code></pre></div>
+    <p>Running this view at benchmark init gives us the canonical stats
+    banner for every report.</p>
+    <hr />
+    <h2 id="question-generation-methodology">3. Question Generation
+    Methodology</h2>
+    <p>The benchmark needs roughly 1,000 questions — 100 per BEAM
+    category. BEAM uses 200 per category on a larger corpus; 100 is a
+    practical target for 129 sessions and leaves headroom to grow to 200
+    as ingest continues.</p>
+    <h3 id="pipeline">3.1 Pipeline</h3>
+    <pre><code>session turns  -&gt;  category-specific prompt  -&gt;  LLM generator  -&gt;
+    draft (Q, A, evidence turn_ids, category, difficulty)  -&gt;
+    automated filter  -&gt;  human review gate  -&gt;  sealed question bank</code></pre>
+    <h3 id="generator-choice">3.2 Generator Choice</h3>
+    <p>Three options, with tradeoffs:</p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Generator</th>
+    <th>Pros</th>
+    <th>Cons</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>GPT-4o via API</td>
+    <td>Highest quality, best at nuanced prompts</td>
+    <td>Sends session content off-machine — <strong>disqualified by
+    privacy</strong></td>
+    </tr>
+    <tr>
+    <td>Claude Sonnet via API</td>
+    <td>Same concern</td>
+    <td>Disqualified</td>
+    </tr>
+    <tr>
+    <td>Local Llama 3.1 70B (quantized)</td>
+    <td>Fully local, fits on RTX 4060 Ti 8GB only with heavy
+    quantization</td>
+    <td>Lower fluency for subtle categories</td>
+    </tr>
+    <tr>
+    <td>Local Qwen2.5 32B or 14B</td>
+    <td>Runs comfortably on 8GB with 4-bit</td>
+    <td>Good instruction-following, strong enough for this task</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Decision: local Qwen2.5 14B-Instruct at Q4_K_M
+    quantization via llama.cpp or ollama.</strong> The generator never
+    sees holdout data. Questions go through a human review gate
+    regardless, so generator quality is not the final quality bar.</p>
+    <h3 id="prompt-contract">3.3 Prompt Contract</h3>
+    <p>Every category prompt produces a JSON record:</p>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;category&quot;</span><span class="fu">:</span> <span class="st">&quot;temporal_reasoning&quot;</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;difficulty&quot;</span><span class="fu">:</span> <span class="st">&quot;medium&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;question&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;answer&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;answer_type&quot;</span><span class="fu">:</span> <span class="st">&quot;short_text | list | yes_no | date | number&quot;</span><span class="fu">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;evidence_turn_ids&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;turn-uuid-1&quot;</span><span class="ot">,</span> <span class="st">&quot;turn-uuid-2&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;evidence_quotes&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;exact span from turn 1&quot;</span><span class="ot">,</span> <span class="st">&quot;exact span from turn 2&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;session_id&quot;</span><span class="fu">:</span> <span class="st">&quot;uuid&quot;</span><span class="fu">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;requires_multi_session&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;notes&quot;</span><span class="fu">:</span> <span class="st">&quot;optional rationale&quot;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <p>The generator must emit <code>evidence_quotes</code> as exact
+    substrings of the referenced turns. A post-filter verifies substring
+    presence and discards any record that fails.</p>
+    <h3 id="human-review-gate">3.4 Human Review Gate</h3>
+    <p>For each draft question, a reviewer answers four checkboxes:</p>
+    <ol type="1">
+    <li>Is the question answerable from the cited evidence alone?</li>
+    <li>Is the answer correct?</li>
+    <li>Does the question actually exercise the stated category?</li>
+    <li>Is the question free of trivial giveaways (e.g., the answer
+    appearing verbatim in the question)?</li>
+    </ol>
+    <p>A question passes only with four checks. Reviewer load: ~1,000
+    questions * ~20 seconds each = ~5.5 hours. Acceptable one-time cost.
+    Refinement cycles happen on validation split only.</p>
+    <h3 id="per-category-generation-prompts">3.5 Per-Category Generation
+    Prompts</h3>
+    <p>The following ten prompts are ready to drop into a generator
+    script. Each includes a concrete example using plausible session
+    content.</p>
+    <h4 id="abstention">3.5.1 Abstention</h4>
+    <p><strong>Goal:</strong> questions where the correct answer is “I
+    don’t know” or “not enough information.”</p>
+    <pre><code>You will see 5 conversation turns from a session about {project}.
+Generate a question that appears answerable from these turns but
+actually is NOT — the session never states the answer. The correct
+response is an abstention phrase. Include in `notes` which specific
+fact is missing.</code></pre>
+    <p><em>Example (hypothetical session about Seattle 360 engine):</em>
+    Turns mention that degree 57 is line art for “Orca pod, Commencement
+    Bay.” Generated question: <em>“What color palette did we choose for
+    degree 57?”</em> Answer: <em>“The session does not specify the color
+    palette.”</em> Evidence quotes document the turns where palette was
+    mentioned only for adjacent degrees, not 57.</p>
+    <h4 id="contradiction-resolution">3.5.2 Contradiction
+    Resolution</h4>
+    <p><strong>Goal:</strong> evidence conflicts across turns; test
+    whether retrieval surfaces both and the resolver picks the later or
+    more authoritative one.</p>
+    <pre><code>Scan the session for cases where a statement is later corrected,
+updated, or contradicted. Generate a question whose answer requires
+noting both statements and selecting the later or more authoritative
+one. The `evidence_turn_ids` must include both conflicting turns.</code></pre>
+    <p><em>Example:</em> Turn 42 says “v1.49.190 is the latest release.”
+    Turn 187 says “v1.49.192 is the latest release.” Generated question:
+    <em>“What was the final release version on 2026-03-31?”</em> Answer:
+    <em>“v1.49.192.”</em></p>
+    <h4 id="event-ordering">3.5.3 Event Ordering</h4>
+    <p><strong>Goal:</strong> reconstructing temporal sequence when only
+    relative cues exist.</p>
+    <pre><code>Identify 3-5 distinct events in the session (tool runs, decisions,
+file writes, commits). Generate a question asking the order in which
+they occurred. The answer is an ordered list. Evidence quotes should
+include temporal markers (timestamps, &quot;then&quot;, &quot;after&quot;, &quot;before&quot;).</code></pre>
+    <p><em>Example:</em> <em>“Order these four events chronologically:
+    (a) decision to use pgvector, (b) ingestion of first 50 sessions,
+    (c) HNSW index creation, (d) migration to all-MiniLM-L6-v2
+    embeddings.”</em></p>
+    <h4 id="information-extraction">3.5.4 Information Extraction</h4>
+    <p><strong>Goal:</strong> recalling a specific entity, number, or
+    fact.</p>
+    <pre><code>Find a specific factual claim in the session — a filename, a version
+number, a person&#39;s name, a test count, a file size, a config value.
+Generate a direct factual question. Answer is a single value or
+short phrase. This is the easiest category; prioritize diversity
+over difficulty.</code></pre>
+    <p><em>Example:</em> <em>“How many tests are in the test suite as of
+    this session?”</em> Answer: <em>“21,298.”</em></p>
+    <h4 id="instruction-following">3.5.5 Instruction Following</h4>
+    <p><strong>Goal:</strong> sustained constraint adherence across many
+    turns — the memory system must recall earlier directives and honor
+    them in later responses.</p>
+    <pre><code>Identify an instruction given early in the session that should bind
+later responses (e.g., &quot;use simple quoting&quot;, &quot;no co-author line&quot;,
+&quot;lowest verbosity&quot;). Generate a question asking what the binding
+constraint is and whether a specific later action honored it.</code></pre>
+    <p><em>Example:</em> <em>“Early in this session, what quoting style
+    was specified for commit messages, and did the commit at turn 219
+    follow it?”</em></p>
+    <h4 id="knowledge-update">3.5.6 Knowledge Update</h4>
+    <p><strong>Goal:</strong> test revision of facts — something was
+    true, then changed.</p>
+    <pre><code>Identify a fact that was stated as true and later updated. Generate
+a question asking for the CURRENT value (not the original). Distinct
+from contradiction because the update is a legitimate state change,
+not a correction of error.</code></pre>
+    <p><em>Example:</em> <em>“What is the current target date for
+    v1.50?”</em> (original session turn said April 7; later turn revised
+    to April 21). Answer: <em>“April 21, 2026.”</em></p>
+    <h4 id="multi-session-reasoning">3.5.7 Multi-Session Reasoning</h4>
+    <p><strong>Goal:</strong> synthesize evidence from two or more
+    non-adjacent sessions. This category requires cross-session
+    retrieval.</p>
+    <pre><code>Pick two sessions from the same project cluster separated by at
+least one day. Identify a fact from session A that is elaborated,
+refined, or contradicted in session B. Generate a question whose
+answer requires both. Set `requires_multi_session: true`.</code></pre>
+    <p><em>Example:</em> Session A (Feb 15) introduces Cedar as “filter
+    + ledger.” Session B (Mar 21) adds “Trust: ‘Trust no one’ — earned,
+    not given.” Question: <em>“What is Cedar’s role in the muse team and
+    what trust principle governs it?”</em></p>
+    <h4 id="preference-following">3.5.8 Preference Following</h4>
+    <p><strong>Goal:</strong> recall user preferences stated anywhere in
+    history, test whether the system applies them.</p>
+    <pre><code>Find a user preference statement (&quot;I prefer X&quot;, &quot;never do Y&quot;,
+&quot;always use Z&quot;). Generate a question asking whether a specific
+proposed action respects the preference.</code></pre>
+    <p><em>Example:</em> <em>“The user stated a preference about
+    Co-Authored-By lines. Would adding one to a commit respect this
+    preference?”</em> Answer: <em>“No — the user finds Co-Authored-By
+    lines intrusive.”</em></p>
+    <h4 id="summarization">3.5.9 Summarization</h4>
+    <p><strong>Goal:</strong> abstractive compression of a span of
+    turns.</p>
+    <pre><code>Pick a contiguous span of 20-50 turns on a single topic. Generate a
+question asking for a summary of the span at a specified length
+(one sentence, three bullets, etc.). Answer is the reference summary;
+scoring is LLM-judge (semantic equivalence), not exact match.</code></pre>
+    <p><em>Example:</em> <em>“In three bullet points, summarize the
+    decision process that led to adopting pgvector over ChromaDB in this
+    session.”</em></p>
+    <h4 id="temporal-reasoning">3.5.10 Temporal Reasoning</h4>
+    <p><strong>Goal:</strong> explicit and implicit time relations.</p>
+    <pre><code>Find a turn with an explicit date/time reference and another turn
+whose time is only inferable from context. Generate a question
+requiring reasoning about elapsed duration or ordering.</code></pre>
+    <p><em>Example:</em> <em>“How many days elapsed between the first
+    mention of pgvector in this session and the first successful HNSW
+    index build?”</em></p>
+    <h3 id="target-distribution">3.6 Target Distribution</h3>
+    <table>
+    <thead>
+    <tr>
+    <th>Category</th>
+    <th>Target count</th>
+    <th>Difficulty mix (easy / med / hard)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Abstention</td>
+    <td>100</td>
+    <td>20 / 50 / 30</td>
+    </tr>
+    <tr>
+    <td>Contradiction Resolution</td>
+    <td>100</td>
+    <td>10 / 50 / 40</td>
+    </tr>
+    <tr>
+    <td>Event Ordering</td>
+    <td>100</td>
+    <td>20 / 50 / 30</td>
+    </tr>
+    <tr>
+    <td>Information Extraction</td>
+    <td>100</td>
+    <td>40 / 40 / 20</td>
+    </tr>
+    <tr>
+    <td>Instruction Following</td>
+    <td>100</td>
+    <td>20 / 50 / 30</td>
+    </tr>
+    <tr>
+    <td>Knowledge Update</td>
+    <td>100</td>
+    <td>20 / 50 / 30</td>
+    </tr>
+    <tr>
+    <td>Multi-Session Reasoning</td>
+    <td>100</td>
+    <td>10 / 40 / 50</td>
+    </tr>
+    <tr>
+    <td>Preference Following</td>
+    <td>100</td>
+    <td>30 / 50 / 20</td>
+    </tr>
+    <tr>
+    <td>Summarization</td>
+    <td>100</td>
+    <td>20 / 50 / 30</td>
+    </tr>
+    <tr>
+    <td>Temporal Reasoning</td>
+    <td>100</td>
+    <td>20 / 50 / 30</td>
+    </tr>
+    <tr>
+    <td><strong>Total</strong></td>
+    <td><strong>1,000</strong></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Difficulty labels come from the generator and are verified during
+    human review.</p>
+    <hr />
+    <h2 id="scoring-rubric">4. Scoring Rubric</h2>
+    <h3 id="three-scorers-routed-by-answer-type">4.1 Three Scorers,
+    Routed by Answer Type</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Answer type</th>
+    <th>Scorer</th>
+    <th>Categories</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Short factual (string, number, date, list)</td>
+    <td>Exact match (normalized)</td>
+    <td>Info Extraction, Temporal Reasoning (numeric), Knowledge Update
+    (factual)</td>
+    </tr>
+    <tr>
+    <td>Yes/no, abstention</td>
+    <td>Regex / keyword match on canonical phrases</td>
+    <td>Abstention, Preference Following</td>
+    </tr>
+    <tr>
+    <td>Open-ended text</td>
+    <td>LLM-as-judge (local Qwen2.5 14B)</td>
+    <td>Summarization, Multi-Session Reasoning, Instruction
+    Following</td>
+    </tr>
+    <tr>
+    <td>Ranked retrieval</td>
+    <td>Recall@K, MRR, nDCG</td>
+    <td>All categories (retrieval sub-score)</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="exact-match-normalization">4.2 Exact Match
+    Normalization</h3>
+    <ul>
+    <li>Lowercase</li>
+    <li>Strip whitespace</li>
+    <li>Collapse punctuation to single spaces</li>
+    <li>Date parsing via a tolerant parser (accepts “April 21, 2026”,
+    “2026-04-21”, “Apr 21 2026”)</li>
+    <li>Number parsing with tolerance
+    (<code>21,298 == 21298</code>)</li>
+    <li>For list answers: set equality after normalization</li>
+    </ul>
+    <h3 id="llm-as-judge-protocol">4.3 LLM-as-Judge Protocol</h3>
+    <p>Memori’s approach uses GPT-4.1-mini as judge. We cannot. Instead,
+    we use the same local Qwen2.5 14B used for generation, but in a
+    pinned evaluation configuration (temperature 0, seed fixed, one-shot
+    calibration example). The judge prompt:</p>
+    <pre><code>You will be given a question, a reference answer, and a candidate
+answer. Score the candidate on a 0-3 scale:
+
+0: incorrect or contradictory
+1: partially correct, missing key elements
+2: substantively correct, minor gaps
+3: fully correct and complete
+
+Respond with only the integer score.
+
+Question: {q}
+Reference: {ref}
+Candidate: {cand}</code></pre>
+    <p>Judge calibration: we run 50 questions through the judge twice
+    with different seeds and flag any divergence &gt;= 1. Calibration
+    drift above 5 percent triggers judge replacement.</p>
+    <h3 id="retrieval-sub-score">4.4 Retrieval Sub-Score</h3>
+    <p>For every question, the system returns a ranked list of turn_ids
+    as its working context. We measure:</p>
+    <ul>
+    <li><strong>Recall@5:</strong> fraction of ground-truth evidence
+    turn_ids in top 5</li>
+    <li><strong>Recall@20:</strong> same at top 20</li>
+    <li><strong>MRR:</strong> mean reciprocal rank of the first correct
+    evidence turn_id</li>
+    <li><strong>nDCG@10:</strong> rewards correct retrieval at higher
+    ranks</li>
+    </ul>
+    <p>Retrieval sub-score is orthogonal to answer correctness. A system
+    can retrieve perfectly and still answer wrong (generation bug) or
+    retrieve poorly and still answer right (lucky guess or in-training
+    knowledge). Tracking both surfaces where breakage lives.</p>
+    <h3 id="composite-category-score">4.5 Composite Category Score</h3>
+    <p>For category C:</p>
+    <pre><code>score_C = 0.6 * answer_accuracy + 0.4 * retrieval_score</code></pre>
+    <p>where <code>answer_accuracy</code> is the mean of exact-match or
+    judge-normalized scores (judge scores divided by 3), and
+    <code>retrieval_score</code> is Recall@20.</p>
+    <p>The 60/40 weight gives primacy to answer correctness while still
+    rewarding retrieval improvements that have not yet translated into
+    better answers.</p>
+    <h3 id="overall-weighted-score">4.6 Overall Weighted Score</h3>
+    <p>BEAM weights all categories equally. We deviate: Multi-Session
+    Reasoning gets 1.5x weight because it is the hardest and the most
+    diagnostic of our architecture; Information Extraction gets 0.75x
+    because it is the easiest and dominates if not dampened.
+    Summarization and Preference Following get 1.0x.</p>
+    <pre><code>overall = (1.5 * multi_session + 0.75 * info_extraction + sum(1.0 * other_8))
+           / (1.5 + 0.75 + 8.0)</code></pre>
+    <hr />
+    <h2 id="test-harness-architecture">5. Test Harness Architecture</h2>
+    <p>The harness is TypeScript, lives in
+    <code>src/memory/__tests__/bench/</code>, and reuses the existing
+    <code>pg-store.ts</code> and <code>service.ts</code> modules. No new
+    runtime dependencies.</p>
+    <h3 id="directory-layout">5.1 Directory Layout</h3>
+    <pre><code>src/memory/__tests__/bench/
+  ├── README.md
+  ├── run.ts                  # entry point, CLI
+  ├── load-questions.ts       # reads from artemis_bench.questions
+  ├── run-question.ts         # executes one question end-to-end
+  ├── scorers/
+  │   ├── exact-match.ts
+  │   ├── llm-judge.ts
+  │   └── retrieval.ts
+  ├── systems/
+  │   ├── baseline-keyword.ts # naive tsvector full-text
+  │   ├── baseline-vector.ts  # HNSW only
+  │   └── current.ts          # hybrid-scorer (what we ship)
+  ├── report/
+  │   ├── html.ts
+  │   ├── json.ts
+  │   └── regression-check.ts
+  └── fixtures/
+      └── judge-calibration.json</code></pre>
+    <h3 id="database-objects">5.2 Database Objects</h3>
+    <div class="sourceCode" id="cb18"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">SCHEMA</span> <span class="cf">IF</span> <span class="kw">NOT</span> <span class="kw">EXISTS</span> artemis_bench;</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> artemis_bench.split_assignment (</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  session_id   UUID <span class="kw">PRIMARY</span> <span class="kw">KEY</span> <span class="kw">REFERENCES</span> artemis.conversation_sessions(<span class="kw">id</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">split</span>        TEXT <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (<span class="kw">split</span> <span class="kw">IN</span> (<span class="st">&#39;train&#39;</span>,<span class="st">&#39;val&#39;</span>,<span class="st">&#39;holdout&#39;</span>)),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  assigned_at  TIMESTAMPTZ <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> now()</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> artemis_bench.questions (</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">id</span>                    UUID <span class="kw">PRIMARY</span> <span class="kw">KEY</span> <span class="kw">DEFAULT</span> gen_random_uuid(),</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">category</span>              TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  difficulty            TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  question              TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  answer                TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  answer_type           TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  evidence_turn_ids     TEXT[] <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  evidence_quotes       TEXT[] <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  session_id            UUID <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">REFERENCES</span> artemis.conversation_sessions(<span class="kw">id</span>),</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  requires_multi_session <span class="dt">BOOLEAN</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="kw">false</span>,</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">split</span>                 TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  reviewed_by           TEXT,</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  reviewed_at           TIMESTAMPTZ,</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  review_passed         <span class="dt">BOOLEAN</span>,</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  generator_version     TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  content_hash          TEXT <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> artemis_bench.runs (</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">id</span>              UUID <span class="kw">PRIMARY</span> <span class="kw">KEY</span> <span class="kw">DEFAULT</span> gen_random_uuid(),</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>  started_at      TIMESTAMPTZ <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> now(),</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>  finished_at     TIMESTAMPTZ,</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>  git_sha         TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>  <span class="kw">system</span>          TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,  <span class="co">-- &#39;baseline-keyword&#39; | &#39;baseline-vector&#39; | &#39;current&#39;</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>  <span class="kw">split</span>           TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>  config_json     JSONB <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>  overall_score   <span class="dt">NUMERIC</span>,</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>  duration_ms     <span class="dt">INT</span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> artemis_bench.results (</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>  run_id          UUID <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">REFERENCES</span> artemis_bench.runs(<span class="kw">id</span>) <span class="kw">ON</span> <span class="kw">DELETE</span> <span class="kw">CASCADE</span>,</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>  question_id     UUID <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">REFERENCES</span> artemis_bench.questions(<span class="kw">id</span>),</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>  <span class="kw">category</span>        TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>  answer_score    <span class="dt">NUMERIC</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>  recall_at_5     <span class="dt">NUMERIC</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>  recall_at_20    <span class="dt">NUMERIC</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>  mrr             <span class="dt">NUMERIC</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>  ndcg_at_10      <span class="dt">NUMERIC</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>  latency_ms      <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>  tokens_in       <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>  tokens_out      <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>  retrieved_turns TEXT[] <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>  response_text   TEXT,</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (run_id, question_id)</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">INDEX</span> idx_results_category <span class="kw">ON</span> artemis_bench.results (<span class="kw">category</span>);</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">INDEX</span> idx_runs_git_sha     <span class="kw">ON</span> artemis_bench.runs (git_sha);</span></code></pre></div>
+    <h3 id="run-entry-point">5.3 Run Entry Point</h3>
+    <div class="sourceCode" id="cb19"><pre
+    class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">// src/memory/__tests__/bench/run.ts</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { loadQuestions } <span class="im">from</span> <span class="st">&#39;./load-questions&#39;</span><span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { runQuestion } <span class="im">from</span> <span class="st">&#39;./run-question&#39;</span><span class="op">;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { systems } <span class="im">from</span> <span class="st">&#39;./systems&#39;</span><span class="op">;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { emitReport } <span class="im">from</span> <span class="st">&#39;./report/html&#39;</span><span class="op">;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { checkRegression } <span class="im">from</span> <span class="st">&#39;./report/regression-check&#39;</span><span class="op">;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">main</span>(opts<span class="op">:</span> BenchOpts) {</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> questions <span class="op">=</span> <span class="cf">await</span> <span class="fu">loadQuestions</span>(opts<span class="op">.</span><span class="at">split</span>)<span class="op">;</span>   <span class="co">// &#39;val&#39; or &#39;holdout&#39;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> system <span class="op">=</span> systems[opts<span class="op">.</span><span class="at">system</span>]<span class="op">;</span>                 <span class="co">// &#39;current&#39; by default</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> runId <span class="op">=</span> <span class="cf">await</span> <span class="fu">startRun</span>(opts)<span class="op">;</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> q <span class="kw">of</span> questions) {</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> <span class="fu">runQuestion</span>(system<span class="op">,</span> q)<span class="op">;</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="fu">recordResult</span>(runId<span class="op">,</span> q<span class="op">,</span> result)<span class="op">;</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> summary <span class="op">=</span> <span class="cf">await</span> <span class="fu">finalizeRun</span>(runId)<span class="op">;</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="fu">emitReport</span>(runId<span class="op">,</span> summary)<span class="op">;</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (opts<span class="op">.</span><span class="at">split</span> <span class="op">===</span> <span class="st">&#39;val&#39;</span>) {</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> regressed <span class="op">=</span> <span class="cf">await</span> <span class="fu">checkRegression</span>(runId<span class="op">,</span> summary)<span class="op">;</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (regressed<span class="op">.</span><span class="at">length</span>) <span class="bu">process</span><span class="op">.</span><span class="at">exitCode</span> <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+    <h3 id="baselines">5.4 Baselines</h3>
+    <p>Three systems run on every benchmark invocation:</p>
+    <ol type="1">
+    <li><strong>baseline-keyword</strong> — pure PostgreSQL
+    <code>tsvector</code> full-text match (<code>ts_rank</code> over
+    <code>idx_turns_fulltext</code>). No embeddings. No reranking. The
+    floor.</li>
+    <li><strong>baseline-vector</strong> — pure HNSW vector search on
+    the 384-dim embedding. No keyword fallback. Tests the embedding
+    space in isolation.</li>
+    <li><strong>current</strong> — the production
+    <code>hybrid-scorer.ts</code> path: vector + keyword fusion with
+    whatever weights and reranker we ship today.</li>
+    </ol>
+    <p>Expected score ordering at v1:
+    <code>keyword &lt; vector &lt; current</code>. Any inversion is a
+    bug.</p>
+    <h3 id="question-execution-contract">5.5 Question Execution
+    Contract</h3>
+    <div class="sourceCode" id="cb20"><pre
+    class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> MemorySystem {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">retrieve</span>(query<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> k<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>RetrievalResult[]<span class="op">&gt;;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">answer</span>(query<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> retrieved<span class="op">:</span> RetrievalResult[])<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>AnswerResult<span class="op">&gt;;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> RetrievalResult {</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  turnId<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  score<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  content<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> AnswerResult {</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  text<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  tokensIn<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  tokensOut<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  latencyMs<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+    <p>For the <code>current</code> system, <code>answer()</code> feeds
+    retrieved turns into a local Qwen2.5 14B (same model as judge,
+    different config). The answer model never sees holdout ground
+    truth.</p>
+    <hr />
+    <h2 id="metrics-dashboard">6. Metrics Dashboard</h2>
+    <p>The dashboard is a single HTML page written to
+    <code>.benchmarks/reports/{run_id}.html</code> after each run and a
+    rolling <code>.benchmarks/reports/latest.html</code>.</p>
+    <h3 id="primary-panels">6.1 Primary Panels</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Panel</th>
+    <th>Content</th>
+    <th>Source</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Headline</td>
+    <td>Overall weighted score, delta vs previous run</td>
+    <td><code>runs.overall_score</code></td>
+    </tr>
+    <tr>
+    <td>Category bars</td>
+    <td>10-row bar chart, score 0-1, with last-run ghost bar</td>
+    <td><code>results</code> grouped by category</td>
+    </tr>
+    <tr>
+    <td>Latency distribution</td>
+    <td>p50, p95, p99 by system</td>
+    <td><code>results.latency_ms</code></td>
+    </tr>
+    <tr>
+    <td>Token efficiency</td>
+    <td>Tokens per correct answer — our Memori analog</td>
+    <td><code>sum(tokens_in) / count(answer_score &gt;= 0.66)</code></td>
+    </tr>
+    <tr>
+    <td>Retrieval quality</td>
+    <td>Recall@20 and MRR by category</td>
+    <td><code>results.recall_at_20</code>, <code>results.mrr</code></td>
+    </tr>
+    <tr>
+    <td>Failure gallery</td>
+    <td>10 lowest-scoring questions with system output</td>
+    <td><code>results</code> ordered by <code>answer_score</code></td>
+    </tr>
+    <tr>
+    <td>System comparison</td>
+    <td><code>keyword</code> vs <code>vector</code> vs
+    <code>current</code> side-by-side</td>
+    <td>Joined by <code>run_id</code> per git_sha</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="token-efficiency-the-memori-metric">6.2 Token Efficiency —
+    the Memori Metric</h3>
+    <p>Memori’s blog reports 1,294 tokens per correct answer vs a naive
+    baseline’s 26,000. That ratio — not raw accuracy — is the most
+    honest measure of memory system value. We compute:</p>
+    <pre><code>token_efficiency = total_tokens_in / count(answer_score &gt;= 0.66)</code></pre>
+    <p>where <code>0.66</code> corresponds to judge score 2 out of 3
+    (substantively correct). We track this per system and per category,
+    and we alert if our system’s ratio degrades by more than 20
+    percent.</p>
+    <h3 id="cost-per-query">6.3 Cost Per Query</h3>
+    <p>Even though we run locally, we attach a synthetic cost for
+    portability:</p>
+    <pre><code>cost = (tokens_in / 1000) * 0.00015 + (tokens_out / 1000) * 0.0006</code></pre>
+    <p>(rates: GPT-4o-mini as of early 2026). This lets us compare to
+    published benchmarks that use hosted models.</p>
+    <hr />
+    <h2 id="ci-integration">7. CI Integration</h2>
+    <p>The benchmark must run automatically, otherwise it rots. Three
+    tiers:</p>
+    <h3 id="per-commit-smoke">7.1 Per-Commit (Smoke)</h3>
+    <p>On every push to <code>artemis-ii</code>, a GitHub Actions
+    workflow runs
+    <code>npm run bench:memory -- --split val --sample 100 --system current</code>.
+    Total wall time target: under 3 minutes. The sample is stratified
+    across all 10 categories (10 questions each). Fails the build if the
+    sample score drops &gt;= 10 percent from the main-branch
+    baseline.</p>
+    <div class="sourceCode" id="cb23"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/bench-memory.yml</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> bench-memory</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">push</span><span class="kw">,</span><span class="at"> pull_request</span><span class="kw">]</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">bench</span><span class="kw">:</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> self-hosted</span><span class="co">  # required: local Postgres + local LLM</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm ci</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm run bench:memory -- --split val --sample 100</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/upload-artifact@v4</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">name</span><span class="kw">:</span><span class="at"> bench-report</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">path</span><span class="kw">:</span><span class="at"> .benchmarks/reports/latest.html</span></span></code></pre></div>
+    <h3 id="nightly-full-validation">7.2 Nightly (Full Validation)</h3>
+    <p>Cron 03:00 local, full val split (all 200 val questions), all
+    three systems. Produces the full HTML report and posts a summary
+    comment to any open PR.</p>
+    <h3 id="weekly-holdout">7.3 Weekly (Holdout)</h3>
+    <p>Sunday 03:00, full holdout split. Results are sealed — the
+    holdout number is the official score for the week. Reviewers see it
+    only after the run completes; iteration on holdout is forbidden.</p>
+    <h3 id="local-dev">7.4 Local Dev</h3>
+    <p><code>npm run bench:memory -- --quick</code> runs a 50-question
+    validation sample in under 90 seconds for fast iteration.
+    <code>npm run bench:memory -- --category multi_session_reasoning</code>
+    runs a single category.</p>
+    <hr />
+    <h2 id="regression-detection">8. Regression Detection</h2>
+    <h3 id="policy">8.1 Policy</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Signal</th>
+    <th>Threshold</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Overall score drops vs main baseline</td>
+    <td>&gt;= 5 percent</td>
+    <td>PR comment, non-blocking</td>
+    </tr>
+    <tr>
+    <td>Any category drops</td>
+    <td>&gt;= 10 percent</td>
+    <td>PR comment, non-blocking</td>
+    </tr>
+    <tr>
+    <td>Any category drops</td>
+    <td>&gt;= 20 percent</td>
+    <td>CI failure, blocking</td>
+    </tr>
+    <tr>
+    <td>Multi-session score drops</td>
+    <td>&gt;= 15 percent</td>
+    <td>CI failure, blocking (high-value category)</td>
+    </tr>
+    <tr>
+    <td>Latency p95 increases</td>
+    <td>&gt;= 2x</td>
+    <td>PR comment, non-blocking</td>
+    </tr>
+    <tr>
+    <td>Token efficiency degrades</td>
+    <td>&gt;= 20 percent</td>
+    <td>PR comment, non-blocking</td>
+    </tr>
+    <tr>
+    <td>Retrieval recall@20 drops across all categories</td>
+    <td>&gt;= 10 percent</td>
+    <td>CI failure, blocking</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Blocking failures can be overridden with a
+    <code>bench-override</code> commit trailer and a one-line
+    justification. The trailer is logged to a review channel weekly.</p>
+    <h3 id="implementation">8.2 Implementation</h3>
+    <div class="sourceCode" id="cb24"><pre
+    class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">// src/memory/__tests__/bench/report/regression-check.ts</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">checkRegression</span>(runId<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> summary<span class="op">:</span> RunSummary) {</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> baseline <span class="op">=</span> <span class="cf">await</span> <span class="fu">getMainBranchBaseline</span>()<span class="op">;</span>  <span class="co">// cached, refreshed weekly</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> failures<span class="op">:</span> <span class="dt">string</span>[] <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (summary<span class="op">.</span><span class="at">overall</span> <span class="op">&lt;</span> baseline<span class="op">.</span><span class="at">overall</span> <span class="op">*</span> <span class="fl">0.95</span>) {</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    failures<span class="op">.</span><span class="fu">push</span>(<span class="vs">`overall -</span><span class="sc">${</span><span class="fu">pct</span>(summary<span class="op">.</span><span class="at">overall</span><span class="op">,</span> baseline<span class="op">.</span><span class="at">overall</span>)<span class="sc">}</span><span class="vs">%`</span>)<span class="op">;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> cat <span class="kw">of</span> CATEGORIES) {</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> drop <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> summary<span class="op">.</span><span class="at">byCategory</span>[cat] <span class="op">/</span> baseline<span class="op">.</span><span class="at">byCategory</span>[cat]<span class="op">;</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (drop <span class="op">&gt;=</span> <span class="fl">0.20</span>) failures<span class="op">.</span><span class="fu">push</span>(<span class="vs">`</span><span class="sc">${</span>cat<span class="sc">}</span><span class="vs"> -</span><span class="sc">${</span>(drop<span class="op">*</span><span class="dv">100</span>)<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">% BLOCKING`</span>)<span class="op">;</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> (drop <span class="op">&gt;=</span> <span class="fl">0.10</span>) failures<span class="op">.</span><span class="fu">push</span>(<span class="vs">`</span><span class="sc">${</span>cat<span class="sc">}</span><span class="vs"> -</span><span class="sc">${</span>(drop<span class="op">*</span><span class="dv">100</span>)<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">% warn`</span>)<span class="op">;</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (summary<span class="op">.</span><span class="at">byCategory</span><span class="op">.</span><span class="at">multi_session_reasoning</span> <span class="op">&lt;</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>      baseline<span class="op">.</span><span class="at">byCategory</span><span class="op">.</span><span class="at">multi_session_reasoning</span> <span class="op">*</span> <span class="fl">0.85</span>) {</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    failures<span class="op">.</span><span class="fu">push</span>(<span class="st">&#39;multi-session drop exceeds 15% BLOCKING&#39;</span>)<span class="op">;</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> failures<span class="op">;</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+    <h3 id="baseline-refresh">8.3 Baseline Refresh</h3>
+    <p>The “main baseline” refreshes automatically when
+    <code>main</code> advances: the nightly job on main commits new
+    baseline values to a committed JSON file at
+    <code>.benchmarks/baseline.json</code>. This prevents a drifting
+    baseline from hiding real regressions on PRs.</p>
+    <hr />
+    <h2 id="cross-validation-with-public-benchmarks">9. Cross-Validation
+    With Public Benchmarks</h2>
+    <p>Running our architecture on LoCoMo and LongMemEval gives us three
+    things:</p>
+    <ol type="1">
+    <li><strong>External calibration.</strong> If our score on LoCoMo
+    tracks published results, our harness is trustworthy. If it diverges
+    wildly, we have a bug in scoring before we even think about
+    architecture.</li>
+    <li><strong>Shared vocabulary.</strong> Reviewers from outside our
+    project can interpret LoCoMo scores; they cannot interpret ours.
+    Having both lets us publish comparable numbers in LTM papers without
+    leaking private sessions.</li>
+    <li><strong>Coverage check.</strong> LoCoMo emphasizes multi-turn
+    persona chat; BEAM covers the 10-category taxonomy we adopted; our
+    custom benchmark stresses research-operator workloads. Running all
+    three detects capabilities our own data doesn’t exercise.</li>
+    </ol>
+    <h3 id="implementation-plan">9.1 Implementation Plan</h3>
+    <ul>
+    <li><strong>LoCoMo ingest:</strong> download public LoCoMo questions
+    and conversations into <code>artemis_public.locomo_sessions</code>
+    (separate schema so it never pollutes <code>artemis.*</code>). Our
+    <code>MemorySystem</code> interface is identical, so
+    <code>run-question.ts</code> already works.</li>
+    <li><strong>LongMemEval ingest:</strong> same pattern into
+    <code>artemis_public.longmemeval_sessions</code>.</li>
+    <li><strong>BEAM ingest:</strong> if and when public, same
+    pattern.</li>
+    <li><strong>Parallel reporting:</strong> the dashboard shows four
+    columns — custom, LoCoMo, LongMemEval, BEAM — and flags any category
+    where we regress on one but not another.</li>
+    </ul>
+    <h3 id="what-cross-validation-cannot-do">9.2 What Cross-Validation
+    Cannot Do</h3>
+    <p>It cannot validate privacy-sensitive categories (Preference
+    Following grounded in personal history, Knowledge Update on Fox
+    Companies IP). Those live only in the custom benchmark.
+    Cross-validation is a sanity check, not a replacement.</p>
+    <hr />
+    <h2 id="privacy-controls">10. Privacy Controls</h2>
+    <p>Non-negotiable rules:</p>
+    <ol type="1">
+    <li><strong>Session data never leaves the machine.</strong> No
+    hosted LLM. No telemetry. No uploaded reports. The
+    <code>.benchmarks/reports/</code> directory is gitignored.</li>
+    <li><strong>Generator and judge are local.</strong> Qwen2.5 14B via
+    llama.cpp or ollama, running on the RTX 4060 Ti. Models pulled via
+    <code>ollama pull</code> once, then offline.</li>
+    <li><strong>Schema isolation.</strong> <code>artemis_bench</code> is
+    a separate schema. A single
+    <code>REVOKE ALL ON SCHEMA artemis_bench FROM PUBLIC</code> hardens
+    it.</li>
+    <li><strong>Hash-sealed holdout.</strong> Holdout session content
+    hashes are committed to git (not the content, just hashes).
+    Integrity check at every run catches accidental mutation or
+    exfiltration.</li>
+    <li><strong>Publish numbers, not questions.</strong> Weekly holdout
+    scores can be published as aggregate numbers
+    (<code>overall: 0.74, multi_session: 0.61</code>). Individual
+    questions and session content are never published.</li>
+    <li><strong>Redaction for shared reports.</strong> If we ever paste
+    a failure example into an external discussion, a redactor script
+    replaces proper nouns, filenames, and personal identifiers with
+    placeholders. The redactor lives at
+    <code>src/memory/__tests__/bench/redact.ts</code>.</li>
+    <li><strong>Manifest audit.</strong> A script lists every file
+    created by the benchmark and verifies it is either in
+    <code>.benchmarks/</code> (gitignored) or in
+    <code>.benchmarks/baseline.json</code> (committed, numbers only).
+    Run weekly.</li>
+    </ol>
+    <hr />
+    <h2 id="build-plan">11. Build Plan</h2>
+    <h3 id="phase-a-infrastructure-1-day">Phase A: Infrastructure (1
+    day)</h3>
+    <ol type="1">
+    <li>Create <code>artemis_bench</code> schema and the five
+    tables.</li>
+    <li>Write the split assigner
+    (<code>scripts/bench/assign-splits.ts</code>) that stratifies and
+    inserts rows into <code>split_assignment</code>.</li>
+    <li>Hash-seal holdout manifest committed at
+    <code>.benchmarks/holdout-manifest.sha256</code>.</li>
+    <li>Set up local Qwen2.5 14B via ollama, verify generation and
+    judging against a 5-question fixture.</li>
+    </ol>
+    <h3 id="phase-b-question-generation-3-days">Phase B: Question
+    Generation (3 days)</h3>
+    <ol start="5" type="1">
+    <li>Write one generator per category
+    (<code>scripts/bench/generate/{category}.ts</code>) using the
+    prompts in section 3.5.</li>
+    <li>Run on train split, produce ~1,200 candidates (20 percent
+    overgeneration for filter slack).</li>
+    <li>Automated filter: verify evidence quotes are substrings, answer
+    type matches, difficulty label present.</li>
+    <li>Human review gate: interactive CLI that shows question +
+    evidence + answer and asks for 4 checkboxes. ~5.5 hours of
+    review.</li>
+    <li>Commit final question bank (references only, not content) to
+    git.</li>
+    </ol>
+    <h3 id="phase-c-harness-2-days">Phase C: Harness (2 days)</h3>
+    <ol start="10" type="1">
+    <li>Implement <code>run.ts</code>, <code>run-question.ts</code>, the
+    three scorers, and the three baseline systems.</li>
+    <li>Implement report HTML emitter and regression checker.</li>
+    <li>Wire <code>npm run bench:memory</code> script.</li>
+    </ol>
+    <h3 id="phase-d-ci-half-day">Phase D: CI (half day)</h3>
+    <ol start="13" type="1">
+    <li>Add <code>.github/workflows/bench-memory.yml</code>.</li>
+    <li>First main-branch baseline commit to
+    <code>.benchmarks/baseline.json</code>.</li>
+    <li>Nightly and weekly cron jobs.</li>
+    </ol>
+    <h3 id="phase-e-cross-validation-2-days-optional-at-launch">Phase E:
+    Cross-Validation (2 days, optional at launch)</h3>
+    <ol start="16" type="1">
+    <li>LoCoMo and LongMemEval ingest scripts.</li>
+    <li>Parallel reporting in the dashboard.</li>
+    </ol>
+    <p><strong>Total: ~8 days for the full build, ~6 days for launch
+    without cross-validation.</strong></p>
+    <hr />
+    <h2 id="success-criteria">12. Success Criteria</h2>
+    <p>The benchmark is usable when:</p>
+    <ul class="task-list">
+    <li><label><input type="checkbox" checked="" />1,000 reviewed
+    questions across 10 categories in
+    <code>artemis_bench.questions</code></label></li>
+    <li><label><input type="checkbox" checked="" />Three baseline
+    systems run end-to-end on val and holdout splits</label></li>
+    <li><label><input type="checkbox" checked="" />Overall score,
+    per-category scores, and token efficiency reported in
+    HTML</label></li>
+    <li><label><input type="checkbox" checked="" />CI blocks PRs that
+    regress a category &gt;= 20 percent</label></li>
+    <li><label><input type="checkbox" checked="" />Holdout integrity
+    check passes at every run</label></li>
+    <li><label><input type="checkbox" checked="" />Privacy manifest
+    audit passes weekly</label></li>
+    <li><label><input type="checkbox" checked="" />First
+    <code>current</code> vs <code>baseline-vector</code> vs
+    <code>baseline-keyword</code> comparison is committed to git as the
+    reference point for LTM-09</label></li>
+    </ul>
+    <hr />
+    <h2 id="open-questions-for-ltm-09">13. Open Questions for
+    LTM-09</h2>
+    <p>This module specifies <em>measurement</em>. The next module uses
+    the numbers. Questions this benchmark will answer:</p>
+    <ol type="1">
+    <li>Does raising the HNSW <code>ef_search</code> parameter improve
+    multi-session score enough to justify latency cost?</li>
+    <li>Does a reranker stage (cross-encoder) improve retrieval enough
+    that answer accuracy follows?</li>
+    <li>Does extending embeddings from 384-dim to 768-dim improve
+    contradiction resolution?</li>
+    <li>Does a session-summary compression layer (pre-retrieval) improve
+    token efficiency without hurting accuracy?</li>
+    <li>What is our actual token-per-correct-answer number today, and
+    how does it compare to Memori’s published 1,294?</li>
+    <li>Which categories benefit most from hybrid scoring vs pure
+    vector, and are the hybrid weights tuned per category or
+    globally?</li>
+    </ol>
+    <p>None of these can be answered today because we have no way to
+    measure the deltas. After this module ships, all six become
+    straightforward experiments.</p>
+    <hr />
+    <h2 id="summary">14. Summary</h2>
+    <p>We own 129 conversation sessions and 16,928 turns of real
+    operational memory work. Public memory benchmarks do not and cannot
+    measure our workload, and even if they could, our privacy
+    constraints rule them out. This module specifies a complete
+    replacement: stratified 70/15/15 session-level splits, 1,000
+    human-reviewed questions across BEAM’s 10 categories generated by a
+    local Qwen2.5 14B from train-split sessions, a TypeScript harness
+    reusing our existing <code>pg-store.ts</code> and
+    <code>hybrid-scorer.ts</code>, three scorers (exact match, local LLM
+    judge, retrieval metrics), three baseline systems (keyword, vector,
+    current) for comparison, a token-efficiency metric modeled on
+    Memori’s 1,294-vs-26,000 ratio, three-tier CI (per-commit smoke,
+    nightly full val, weekly holdout), and a regression policy with
+    blocking thresholds on multi-session and overall categories.
+    Cross-validation against LoCoMo and LongMemEval provides external
+    calibration. Everything runs local; session content never leaves the
+    machine; only aggregate numbers are ever published. An eight-day
+    build plan takes us from empty schema to CI-integrated benchmark.
+    This is the measurement substrate LTM-09 and every memory change
+    after it depends on.</p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to LTM Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/LTM/">tibsfox.com/Research/LTM</a>
+    </div>
+</body>
+</html>

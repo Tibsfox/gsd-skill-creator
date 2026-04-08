@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Containers &amp; Kubernetes &mdash; JVM GC &amp; Memory Management</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jgc">
+  <header>
+    <h1>Containers &amp; Kubernetes</h1>
+    <div class="subtitle">cgroups, UseContainerSupport, MaxRAMPercentage, OOMKilled Diagnosis, Sizing Requests and Limits</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="collectors.html">Collectors</a>
+      <a href="memory.html">Memory</a>
+      <a href="tuning.html">Tuning</a>
+      <a href="monitoring.html">Monitoring</a>
+      <a href="diagnostics.html">Diagnostics</a>
+      <a href="containers.html" class="active">Containers</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Running the JVM in a container is not the same as running it on bare metal. The rules about memory, CPU, and lifecycle are different. Ignoring that difference is the single most common source of &ldquo;our Java pods keep getting OOMKilled&rdquo; in 2026.
+    </blockquote>
+
+    <h2>The Container-Aware JVM</h2>
+    <p>Before Java 8u131, the JVM ignored cgroups entirely. It read the host machine&rsquo;s total RAM and CPU count and sized itself accordingly. A Java container on a 64-core host saw 64 cores and allocated GC threads for all of them &mdash; even when the cgroup limited it to 1 core. Heap auto-sizing pulled the host RAM, not the cgroup limit. The result was predictable: containers ran out of memory constantly.</p>
+
+    <div class="card green">
+      <p><strong><code>-XX:+UseContainerSupport</code></strong> (added in 8u191, default in Java 10+) tells the JVM to read cgroup limits for RAM and CPU. In Java 15+, cgroup v2 support is also solid. <em>Every production JVM in a container should have this default-on.</em></p>
+    </div>
+
+    <h2>The New Sizing Flags</h2>
+    <p>Modern container-aware sizing uses <strong>percentages of the cgroup limit</strong>, not absolute sizes:</p>
+
+    <table>
+      <thead><tr><th>Flag</th><th>Default</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>-XX:InitialRAMPercentage=N</code></td><td>1.5625%</td><td>Initial heap as fraction of cgroup memory limit</td></tr>
+        <tr><td><code>-XX:MaxRAMPercentage=N</code></td><td>25%</td><td>Max heap as fraction of cgroup memory limit</td></tr>
+        <tr><td><code>-XX:MinRAMPercentage=N</code></td><td>50%</td><td>Min heap on small containers</td></tr>
+        <tr><td><code>-XX:ActiveProcessorCount=N</code></td><td>auto</td><td>Override CPU count (for edge cases)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card amber">
+      <p><strong>The defaults are conservative.</strong> 25% of the container limit for the heap leaves three-quarters for Metaspace, code cache, thread stacks, direct memory, JIT compilation, and native libraries. For most Java workloads this is <em>too conservative</em>. Typical production starting points:</p>
+      <ul>
+        <li>Small container (256 MB&ndash;1 GB): 50&ndash;60%</li>
+        <li>Medium container (1&ndash;4 GB): 70&ndash;75%</li>
+        <li>Large container (4&ndash;32 GB): 75&ndash;80%</li>
+        <li>Very large (&gt; 32 GB): 80&ndash;85%</li>
+      </ul>
+      <p>Measure. Never assume.</p>
+    </div>
+
+    <h2>The Gap Between Heap and RSS</h2>
+    <p>In a container, setting <code>-Xmx2g</code> in a 2 GB pod is a <strong>guaranteed OOMKilled</strong>. The heap is only part of the JVM&rsquo;s memory footprint.</p>
+
+<pre><code>Container memory limit:   2048 MB
+  - Java heap (-Xmx):     1024 MB  (50%)
+  - Metaspace:             256 MB
+  - Code cache:            128 MB
+  - Thread stacks (50 &times; 1 MB):  50 MB
+  - Direct memory:         256 MB  (Netty, Kafka, Lucene)
+  - JIT working memory:     64 MB
+  - JVM internals:         128 MB
+  - Native libraries:       96 MB
+  = Total JVM:            2002 MB
+  + Safety margin:          46 MB
+  = Container limit:      2048 MB</code></pre>
+
+    <p>Every number above is measurable via NMT + monitoring. Never guess.</p>
+
+    <h2>Kubernetes Resource Requests and Limits</h2>
+
+    <div class="card">
+      <p><strong>For JVM pods, set requests == limits.</strong> This places the pod in the Guaranteed QoS class and eliminates memory throttling / eviction surprises. Different from stateless Go or Rust services where bursty memory is fine.</p>
+    </div>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: my-java-service
+spec:
+  containers:
+  - name: app
+    image: my-java-app:1.0
+    resources:
+      requests:
+        memory: &quot;2Gi&quot;
+        cpu: &quot;1000m&quot;
+      limits:
+        memory: &quot;2Gi&quot;
+        cpu: &quot;2000m&quot;
+    env:
+    - name: JAVA_OPTS
+      value: &gt;-
+        -XX:MaxRAMPercentage=75.0
+        -XX:+UseG1GC
+        -XX:+AlwaysPreTouch
+        -XX:+HeapDumpOnOutOfMemoryError
+        -XX:HeapDumpPath=/var/dumps/
+        -Xlog:gc*=info:file=/var/log/gc.log
+    volumeMounts:
+    - name: dumps
+      mountPath: /var/dumps
+  volumes:
+  - name: dumps
+    persistentVolumeClaim:
+      claimName: heap-dumps</code></pre>
+
+    <h2>Diagnosing OOMKilled</h2>
+
+    <div class="card red">
+      <p><strong>OOMKilled is NOT the same as OutOfMemoryError.</strong></p>
+      <ul>
+        <li><strong>OutOfMemoryError</strong> &mdash; the JVM heap (or Metaspace or direct memory) exceeded its Java-managed limit. A Java exception is thrown; the app can log it; a heap dump can be written.</li>
+        <li><strong>OOMKilled</strong> &mdash; the Linux kernel (via cgroup memory.oom_control) killed the JVM process because the whole container exceeded the cgroup limit. SIGKILL. No exception. No heap dump unless it was already being written.</li>
+      </ul>
+    </div>
+
+    <h3>Investigation checklist</h3>
+    <ol>
+      <li><code>kubectl describe pod &lt;pod&gt;</code> &mdash; confirms OOMKilled reason</li>
+      <li><code>kubectl logs &lt;pod&gt; --previous</code> &mdash; look at the dying process&rsquo;s last output</li>
+      <li>Prometheus: <code>container_memory_working_set_bytes</code> over the hour before the kill &mdash; was it trending up steadily, or did it spike?</li>
+      <li>NMT baseline from a healthy pod &mdash; compare to the last-known state of the dying pod</li>
+      <li>Check direct memory allocations: Netty, Kafka, Lucene, Chronicle, Aeron</li>
+      <li>Check Metaspace growth (classloader leaks)</li>
+      <li>Check thread count growth (stack memory)</li>
+      <li>Check JIT code cache size</li>
+    </ol>
+
+    <h2>cgroup v1 vs v2</h2>
+    <table>
+      <thead><tr><th>Aspect</th><th>cgroup v1</th><th>cgroup v2</th></tr></thead>
+      <tbody>
+        <tr><td>Files</td><td><code>/sys/fs/cgroup/memory/&hellip;</code></td><td><code>/sys/fs/cgroup/&hellip;</code> (unified)</td></tr>
+        <tr><td>Memory limit file</td><td><code>memory.limit_in_bytes</code></td><td><code>memory.max</code></td></tr>
+        <tr><td>Swap accounting</td><td>Separate</td><td>Unified with RAM</td></tr>
+        <tr><td>JVM support</td><td>Since 8u131</td><td>Since Java 15 (solid)</td></tr>
+        <tr><td>Kubernetes default</td><td>Older nodes</td><td>Newer distributions</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Liveness and Readiness Probes</h2>
+    <div class="card orange">
+      <p><strong>Liveness probes should not trigger a GC.</strong> A common mistake: a liveness probe hits an endpoint that allocates a bunch of objects, which degrades the health check itself. Under load, the probe times out, Kubernetes kills the pod, and a cascade begins.</p>
+      <p>Good practice:</p>
+      <ul>
+        <li>Liveness: trivial HTTP 200 endpoint that does <em>nothing</em> but prove the process is alive</li>
+        <li>Readiness: actually checks dependencies, DB connections, caches</li>
+        <li>Startup probe: gives the JVM time to warm up (JIT + CDS + first requests)</li>
+      </ul>
+    </div>
+
+    <h2>Swap &mdash; Turn It Off</h2>
+    <div class="card red">
+      <p>Kubernetes strongly recommends (and historically required) <strong>swap disabled</strong> on all nodes. This is correct for Java workloads: a JVM with swap will eventually page heap memory out, and the next GC will page it back in one slow disk I/O at a time. A 200 ms GC target becomes a 60-second stall.</p>
+      <p>Modern Kubernetes (1.28+) has experimental swap support, but for JVM pods the answer remains: no swap. Size the container correctly instead.</p>
+    </div>
+
+    <h2>Sidecars and Startup Time</h2>
+    <p>The JVM&rsquo;s traditional weak point is cold startup. A Spring Boot app can take 5&ndash;20 seconds to reach a steady state, during which it&rsquo;s consuming CPU for JIT compilation while also trying to serve traffic.</p>
+
+    <h3>Startup time optimizations</h3>
+    <ul>
+      <li><strong>CDS (Class Data Sharing)</strong> &mdash; share the JDK class metadata across JVMs</li>
+      <li><strong>AppCDS</strong> &mdash; share your app&rsquo;s classes too; generate with <code>-XX:ArchiveClassesAtExit</code></li>
+      <li><strong>AOT compilation</strong> &mdash; compile hot methods ahead of time</li>
+      <li><strong>GraalVM Native Image</strong> &mdash; compile the whole app to a native binary; tens of milliseconds to start</li>
+      <li><strong>CRaC (Coordinated Restore at Checkpoint)</strong> &mdash; checkpoint a warm JVM, restore later with JIT state intact</li>
+      <li><strong>Project Leyden</strong> &mdash; the ongoing OpenJDK work on static images and ahead-of-time compilation</li>
+    </ul>
+
+    <h2>Dockerfile Best Practices for JVM</h2>
+
+<pre><code>FROM eclipse-temurin:21-jre-alpine AS runtime
+
+WORKDIR /app
+COPY target/app.jar .
+
+# Non-root user
+RUN addgroup -S javauser &amp;&amp; adduser -S javauser -G javauser
+USER javauser
+
+ENV JAVA_OPTS=&quot;\
+  -XX:MaxRAMPercentage=75.0 \
+  -XX:InitialRAMPercentage=75.0 \
+  -XX:+UseG1GC \
+  -XX:+AlwaysPreTouch \
+  -XX:+HeapDumpOnOutOfMemoryError \
+  -XX:HeapDumpPath=/var/dumps/ \
+  -Xlog:gc*=info:file=/var/log/gc.log:time,uptime:filecount=5,filesize=10m \
+  -XX:NativeMemoryTracking=summary&quot;
+
+ENTRYPOINT [&quot;sh&quot;, &quot;-c&quot;, &quot;java $JAVA_OPTS -jar app.jar&quot;]</code></pre>
+
+    <h2>Observability in the Cluster</h2>
+    <ul>
+      <li><strong>cAdvisor</strong> &mdash; built into kubelet, exposes <code>container_memory_*</code> metrics</li>
+      <li><strong>node_exporter</strong> &mdash; node-level memory, swap, page cache</li>
+      <li><strong>kube-state-metrics</strong> &mdash; pod lifecycle, OOMKilled events, restart counts</li>
+      <li><strong>Prometheus + Grafana</strong> &mdash; the standard stack</li>
+      <li><strong>Micrometer</strong> in the app &mdash; JVM-level detail above cAdvisor</li>
+    </ul>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>JAV</td><td>Java and the JVM</td><td>Language-level context</td></tr>
+        <tr><td>SYS</td><td>Systems Administration</td><td>cgroups, systemd, Linux namespaces</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>OOMKilled is a canonical cloud-era incident pattern</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="collectors.html">Garbage Collectors Deep Dive</a></li>
+        <li><a href="memory.html">Memory Spaces &amp; Layout</a></li>
+        <li><a href="tuning.html">GC Tuning &amp; Flag Reference</a></li>
+        <li><a href="monitoring.html">Monitoring &amp; Metrics</a></li>
+        <li><a href="diagnostics.html">Heap Dumps &amp; Diagnostics</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Containers &amp; Kubernetes &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

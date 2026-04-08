@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Language &amp; Machine Code &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mlc">
+  <header>
+    <h1>Machine Language &amp; Machine Code</h1>
+    <div class="subtitle">Raw Binary Opcodes, Instruction Encoding, Binary Formats, Microcode &mdash; The Layer Below Assembly</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="encoding.html">Encoding</a>
+      <a href="execution.html">Execution</a>
+      <a href="formats.html">Binary Formats</a>
+      <a href="microcode.html">Microcode</a>
+      <a href="security.html">Security</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Machine code is the actual binary patterns a CPU decodes and executes. Not text, not mnemonics &mdash; raw bits. Every &ldquo;instruction&rdquo; is a specific bit pattern that the decoder recognizes. Assembly language is a human-readable representation of machine code; machine code is what the CPU actually runs.
+    </blockquote>
+
+    <h2>Research Program Statistics</h2>
+    <div class="stats">
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value blue">0/1</span><span class="stat-label">The Only Alphabet</span></div>
+      <div class="stat"><span class="stat-value amber">1&ndash;15</span><span class="stat-label">x86 Instruction Bytes</span></div>
+      <div class="stat"><span class="stat-value purple">4</span><span class="stat-label">ARM Instruction Bytes (always)</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why machine code?</strong> The <a href="../ASM/index.html">ASM project</a> covered assembly language &mdash; the human-readable layer. This project goes one level deeper: into the <em>actual binary patterns</em> the CPU decodes. Understanding machine code means understanding instruction encoding (how bits map to operations), binary formats (ELF, PE, Mach-O), the fetch-decode-execute cycle, microcode, and the security implications of raw code execution. This is the layer where compilers produce output, JIT compilers emit bytes, exploits craft payloads, and the CPU&rsquo;s decoder turns bits into electrical signals.</p>
+    </div>
+
+    <h2>The Escalation Ladder &mdash; Machine Code&rsquo;s Place</h2>
+    <p>One step below assembly, one step above the transistors:</p>
+    <ul>
+      <li><strong>High-level languages</strong> (Python, Java, Go, Rust, C++, C) &mdash; compiled or JIT-compiled</li>
+      <li><strong>Assembly language</strong> &mdash; human-readable mnemonics (<a href="../ASM/index.html">ASM project</a>)</li>
+      <li><strong>Machine code</strong> &mdash; <em>you are here</em>. Raw binary opcodes. <code>48 89 E5</code> = <code>mov rbp, rsp</code>.</li>
+      <li><strong>Microcode</strong> (CISC) &mdash; micro-operations inside the CPU that implement machine instructions</li>
+      <li><strong>Logic gates</strong> &mdash; AND, OR, NOT, XOR implemented in transistors</li>
+      <li><strong>Transistors</strong> &mdash; the physics layer</li>
+    </ul>
+
+    <h2>A Concrete Example</h2>
+    <div class="card blue">
+      <p>The x86-64 instruction <code>mov rbp, rsp</code> is encoded as the bytes <code>48 89 E5</code>:</p>
+      <ul>
+        <li><code>48</code> = REX prefix with W bit set (64-bit operand)</li>
+        <li><code>89</code> = opcode for <code>mov r/m64, r64</code></li>
+        <li><code>E5</code> = ModR/M byte: mod=11 (register), reg=100 (rsp), r/m=101 (rbp)</li>
+      </ul>
+      <p>The CPU&rsquo;s decoder reads these 3 bytes, determines the operation (move rsp into rbp), and sends the appropriate control signals to the register file. This entire process takes one clock cycle in the decode stage of the pipeline.</p>
+    </div>
+
+    <h2>Module Overview</h2>
+    <div class="category-grid">
+      <a href="encoding.html" class="category-card">
+        <div><span class="cluster-badge cluster-enc">Encoding</span></div>
+        <h3>Instruction Encoding</h3>
+        <p>How bits become instructions. x86-64 variable-length encoding (REX, ModR/M, SIB). ARM64 fixed 32-bit encoding. RISC-V R/I/S/B/U/J types. Worked encoding examples. NOP patterns.</p>
+      </a>
+      <a href="execution.html" class="category-card">
+        <div><span class="cluster-badge cluster-exec">Execution</span></div>
+        <h3>Fetch-Decode-Execute</h3>
+        <p>The fundamental CPU loop. From bits to transistors. ALU, control unit, register file. Pipeline, OOO, branch prediction, speculative execution. Virtual memory, interrupts, system calls, JIT.</p>
+      </a>
+      <a href="formats.html" class="category-card">
+        <div><span class="cluster-badge cluster-fmt">Binary Formats</span></div>
+        <h3>ELF, PE, Mach-O</h3>
+        <p>Executable file formats: ELF (Linux), PE/COFF (Windows), Mach-O (macOS). Linking, relocations, dynamic loading, PLT/GOT. Debug info (DWARF, PDB). Code signing.</p>
+      </a>
+      <a href="microcode.html" class="category-card">
+        <div><span class="cluster-badge cluster-enc">Microcode</span></div>
+        <h3>Microcode &amp; Micro-Ops</h3>
+        <p>The layer below machine code in CISC CPUs. x86 instructions decoded to micro-ops. Microcode ROM. Firmware updates. Why RISC doesn&rsquo;t need microcode. The uop cache.</p>
+      </a>
+      <a href="security.html" class="category-card">
+        <div><span class="cluster-badge cluster-sec">Security</span></div>
+        <h3>Machine Code Security</h3>
+        <p>Shellcode, ROP, NOP sleds, polymorphic code. Packers and protectors. Binary analysis (static + dynamic). Code signing. Spectre/Meltdown at the machine code level.</p>
+      </a>
+      <a href="rosetta.html" class="category-card">
+        <div><span class="cluster-badge cluster-rosetta">Rosetta</span></div>
+        <h3>Rosetta Integration</h3>
+        <p>Machine code as the universal output of all software. How every compiler, JIT, and runtime produces machine code. WebAssembly as virtual machine code.</p>
+      </a>
+      <a href="education.html" class="category-card">
+        <div><span class="cluster-badge cluster-edu">Learn</span></div>
+        <h3>Learning Resources</h3>
+        <p>Patterson &amp; Hennessy, Intel SDM, hex editors, Compiler Explorer, reverse engineering as the practical path. objdump, readelf, GDB at the machine code level.</p>
+      </a>
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-history">History</span></div>
+        <h3>History</h3>
+        <p>Before assemblers: raw binary on punch cards. EDSAC, Manchester Baby. The stored-program concept. From plugboards to opcodes. CAFEBABE and other magic numbers.</p>
+      </a>
+    </div>
+
+    <h2>Machine Code at a Glance</h2>
+    <table>
+      <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>What it is</td><td>Raw binary patterns the CPU decodes and executes</td></tr>
+        <tr><td>Representation</td><td>Binary (bits), typically displayed as hexadecimal bytes</td></tr>
+        <tr><td>x86-64 instruction size</td><td>Variable: 1&ndash;15 bytes (average ~4)</td></tr>
+        <tr><td>ARM64 instruction size</td><td>Fixed: always 4 bytes (32 bits)</td></tr>
+        <tr><td>RISC-V instruction size</td><td>4 bytes (32 bits), or 2 bytes with C extension</td></tr>
+        <tr><td>Relationship to assembly</td><td>Assembly is a human-readable representation; machine code is the binary</td></tr>
+        <tr><td>Who produces it</td><td>Compilers (GCC, Clang, MSVC, rustc), assemblers (NASM, GAS), JIT compilers (V8, HotSpot)</td></tr>
+        <tr><td>Who consumes it</td><td>The CPU&rsquo;s instruction decoder</td></tr>
+        <tr><td>Stored in</td><td>.text section of ELF/PE/Mach-O executables</td></tr>
+        <tr><td>Key tool</td><td><code>objdump -d</code> (disassemble machine code back to assembly)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>ASM</td><td>Assembly Language</td><td>Assembly is the human-readable representation of machine code. One-to-one mapping.</td></tr>
+        <tr><td>CEE</td><td>C</td><td><code>gcc -c</code> produces object files containing machine code. <code>objdump -d</code> reveals it.</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>Every C++ abstraction (templates, vtables, RAII) compiles to machine code visible in Compiler Explorer.</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>Ownership compiles away. The machine code is indistinguishable from C&rsquo;s.</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>HotSpot JIT produces machine code from bytecode at runtime.</td></tr>
+        <tr><td>JTS</td><td>JavaScript</td><td>V8 TurboFan produces machine code from JavaScript at runtime. WebAssembly is a virtual machine code.</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>Buffer overflows, ROP, Spectre &mdash; security vulnerabilities at the machine code level.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="encoding.html">Instruction Encoding</a></li>
+        <li><a href="execution.html">Fetch-Decode-Execute</a></li>
+        <li><a href="formats.html">Binary Formats</a></li>
+        <li><a href="microcode.html">Microcode</a></li>
+        <li><a href="security.html">Security</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="education.html">Learn</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Machine Language &amp; Machine Code &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -177,6 +177,20 @@
       <p><strong>Stigmatizing frequent postmortems</strong> by individuals or teams creates cultures where incidents get &ldquo;swept under the rug,&rdquo; increasing organizational risk. If postmortems are seen as punishment, people stop reporting incidents. The postmortem frequency of a team should be viewed as a signal of transparency, not incompetence.</p>
     </div>
 
+    <h3>Cloud Incident Management Lifecycle</h3>
+    <p>Google&rsquo;s incident management lifecycle (formalized by Fang et al., arXiv:2510.19593) shows how RCA granularity evolves through six stages:</p>
+    <div class="card">
+      <ol>
+        <li><strong>Preparation</strong> &rarr; Build observability, define SLOs, establish runbooks</li>
+        <li><strong>Detection</strong> &rarr; Anomaly identification across metrics, logs, traces</li>
+        <li><strong>Localization (RCA)</strong> &rarr; Broad triage to identify faulty service</li>
+        <li><strong>Mitigation</strong> &rarr; Stop the bleeding &mdash; rollback, reroute, scale</li>
+        <li><strong>Resolution</strong> &rarr; Permanent fix at code/config level</li>
+        <li><strong>Improvement</strong> &rarr; Postmortem, pattern learning, organizational prevention</li>
+      </ol>
+      <p>RCA at Stage 3 (rapid triage, MTTR-focused) is fundamentally different from RCA at Stage 5 (permanent fix, MTBF-focused). This dual-purpose nature of RCA is often overlooked. See <a href="cloud-microservices.html">Cloud &amp; Microservices</a> for the full lifecycle table.</p>
+    </div>
+
     <h3>Automation Efforts</h3>
     <p>Google&rsquo;s &ldquo;Postmortems at Google&rdquo; working group coordinates:</p>
     <div class="card">

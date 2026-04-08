@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRAM Tier and Large-Chunk Paging for the gsd-skill-creator
+Memory System — LTM Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #221f3a;
+            --accent: #FFB300;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #9575CD;
+            --border: #2f2a4a;
+            --primary: #4527A0;
+            --mem: #FFD54F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; padding: 2rem; max-width: 900px; margin: 0 auto; }
+        h1 { color: var(--mem); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--mem); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--mem); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--mem); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--mem); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(149,117,205,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        LTM — Long-Term Memory Systems for AI Agents<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to LTM Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1
+    id="vram-tier-and-large-chunk-paging-for-the-gsd-skill-creator-memory-system">VRAM
+    Tier and Large-Chunk Paging for the gsd-skill-creator Memory
+    System</h1>
+    <h2 id="problem-statement">0. Problem Statement</h2>
+    <p>The gsd-skill-creator memory architecture today is a six-tier LOD
+    ladder (100 RAM → 200 Index → 300 Files → 350 Chroma → 400
+    PostgreSQL → 500 Corpus) running entirely on CPU + host DRAM + NVMe.
+    The host is generous (62 GB system RAM, 45.7 GB free, a 31 GB
+    <code>tmpfs</code> on <code>/dev/shm</code>), but one resource is
+    sitting idle for memory work: the 8 GB of GDDR6 on the RTX 4060
+    Ti.</p>
+    <p>The question is concrete. Can the 4060 Ti be treated as a
+    first-class memory tier between <code>tmpfs</code> and NVMe, and can
+    we page working sets between DRAM, <code>tmpfs</code>, VRAM, and
+    disk in <em>large</em> chunks (4 GB default, tunable to 32 GB)? What
+    do we gain, what does it cost, and what breaks first?</p>
+    <p>This module is the engineering answer. It covers the CUDA memory
+    model, the transfer economics of PCIe 4.0 × 16 at 4060 Ti compute
+    capability 8.9, what workloads actually benefit from VRAM residency,
+    how Faiss-GPU and cuVS compare for our vector workload, a concrete
+    large-chunk paging design with a state machine and a software page
+    table, the integration path through the Tauri Rust backend, a
+    measurement plan, failure modes, and a cost-benefit conclusion.</p>
+    <hr />
+    <h2 id="cuda-memory-models-what-the-4060-ti-actually-gives-you">1.
+    CUDA Memory Models: What the 4060 Ti Actually Gives You</h2>
+    <p>CUDA exposes five distinct host-device memory arrangements. They
+    are <em>not</em> interchangeable, and picking the wrong one can cost
+    an order of magnitude in bandwidth.</p>
+    <h3 id="cudamalloc-cudamemcpy-explicit-device-memory">1.1
+    <code>cudaMalloc</code> / <code>cudaMemcpy</code> — Explicit Device
+    Memory</h3>
+    <p>The canonical form. <code>cudaMalloc(&amp;d_ptr, bytes)</code>
+    carves out a contiguous range of GDDR6 on the GPU;
+    <code>cudaMemcpy(d_ptr, h_ptr, bytes, cudaMemcpyHostToDevice)</code>
+    DMAs bytes across PCIe. Pros: fastest on-device access (full 288
+    GB/s bandwidth), deterministic layout. Cons: you own every byte of
+    the dance, and <code>h_ptr</code> should be pinned for the DMA
+    engine to hit its stride. If <code>h_ptr</code> is ordinary
+    <code>malloc</code> memory, the driver has to stage through a pinned
+    bounce buffer and you give up roughly half your PCIe throughput.</p>
+    <h3 id="cudahostalloc-cudahostregister-pinned-host-memory">1.2
+    <code>cudaHostAlloc</code> / <code>cudaHostRegister</code> — Pinned
+    Host Memory</h3>
+    <p>Pinned (page-locked) host memory is DMA-eligible: the kernel
+    promises not to page it out, and the DMA engine can read it
+    directly. On a PCIe 4.0 × 16 link we measure roughly 24 – 26 GB/s
+    effective for pinned transfers, versus 12 – 14 GB/s for pageable.
+    <code>cudaHostAlloc(&amp;h_ptr, bytes, cudaHostAllocDefault)</code>
+    allocates fresh pinned memory;
+    <code>cudaHostRegister(ptr, bytes, 0)</code> takes an existing
+    region (useful if the region is already an <code>mmap</code> of a
+    <code>tmpfs</code> chunk — critical for our design). The budget
+    matters: pinning competes with the kernel’s page cache, and pinning
+    more than ~16 GB on a 62 GB box starts to starve other services.</p>
+    <h3 id="cudahostallocmapped-zero-copy">1.3
+    <code>cudaHostAllocMapped</code> — Zero-Copy</h3>
+    <p><code>cudaHostAllocMapped</code> (or
+    <code>cudaHostRegister</code> with
+    <code>cudaHostRegisterMapped</code>) produces host memory that the
+    GPU can read <em>directly</em> over PCIe, at PCIe speeds, without a
+    separate copy step. A kernel running on-device dereferences a host
+    pointer; the transaction goes across the bus. This is right for
+    sparse, random access over a large host buffer where only a tiny
+    fraction is touched per kernel. It is wrong for dense scans — PCIe
+    bandwidth is an order of magnitude below GDDR6 and you leave 90 % of
+    the GPU’s memory subsystem idle. Zero-copy is the Unix-style “mmap
+    the world and let the OS sort it out” move: cheap to adopt, cheapest
+    when miss rates are low.</p>
+    <h3 id="cudamallocmanaged-unified-memory-with-auto-migration">1.4
+    <code>cudaMallocManaged</code> — Unified Memory with
+    Auto-Migration</h3>
+    <p>Unified Memory allocates a single pointer valid on both host and
+    device; the driver migrates 4 KB (or 64 KB on Ada Lovelace) pages
+    between DRAM and VRAM on page fault. The compute capability 8.9
+    driver honors <code>cudaMemAdviseSetPreferredLocation</code>,
+    <code>cudaMemAdviseSetAccessedBy</code>, and
+    <code>cudaMemPrefetchAsync</code>, so you can hint residency instead
+    of begging for it. Unified Memory is the <em>only</em> CUDA
+    arrangement that lets you over-commit VRAM: you can allocate a 32 GB
+    managed region on an 8 GB card, and the driver will page through it.
+    The cost is page-fault latency on cold access (tens of microseconds
+    per fault, and faults serialize on the migration engine). For our 4
+    GB chunks this is the honest fit — we page in batches, we know the
+    access pattern, and we can prefetch explicitly.</p>
+    <h3 id="unified-virtual-addressing">1.5 Unified Virtual
+    Addressing</h3>
+    <p>UVA is the substrate that makes all of the above work from one
+    address space: a given pointer belongs unambiguously to the host,
+    one device, or a peer device, and <code>cudaMemcpy</code> with
+    <code>cudaMemcpyDefault</code> figures it out. UVA has been the
+    default on every 64-bit CUDA install since CUDA 4.0, so there is
+    nothing to enable, but its existence is what makes the “software
+    page table at chunk granularity” idea tractable: a chunk’s pointer
+    can be chased into whichever tier currently holds it.</p>
+    <h3 id="streams-prefetch-memory-pools">1.6 Streams, Prefetch, Memory
+    Pools</h3>
+    <p><code>cudaStream_t</code> gives you pipelines. A copy on stream A
+    can overlap with a kernel on stream B if the regions do not alias.
+    For our design this is how we hide transfer latency: while the GPU
+    is reranking results from chunk <em>k</em>, the DMA engine is
+    prefetching chunk <em>k + 1</em> on a second stream.
+    <code>cudaMemPrefetchAsync(ptr, bytes, device, stream)</code> is the
+    explicit “migrate now” for managed memory. Finally,
+    <code>cudaMemPool_t</code> (CUDA 11.2+) gives us a real slab
+    allocator on device, which kills the fragmentation story that haunts
+    any long-running CUDA process that does many small allocations. We
+    will use one pool per tier.</p>
+    <h3 id="what-the-4060-ti-is-exactly">1.7 What the 4060 Ti Is,
+    Exactly</h3>
+    <ul>
+    <li><strong>Silicon:</strong> AD106, Ada Lovelace, compute
+    capability 8.9</li>
+    <li><strong>VRAM:</strong> 8192 MiB GDDR6 (one observation here:
+    8188 MiB reported by <code>nvidia-smi</code>, the four-megabyte
+    delta is driver reserve)</li>
+    <li><strong>On-device bandwidth:</strong> 288 GB/s (128-bit bus × 18
+    Gbps)</li>
+    <li><strong>PCIe:</strong> 4.0, and it is <strong>× 8</strong>, not
+    × 16 — this is the surprise for anyone who reads the box art. Ada’s
+    AD106 die lanes out at eight. Practical duplex throughput: 14 – 16
+    GB/s host→device with pinned memory, not 28</li>
+    <li><strong>Driver reserve:</strong> ~1.5 GB at idle on a desktop
+    session, so realistic working space is 6.5 – 6.8 GB</li>
+    <li><strong>ECC:</strong> absent on consumer Ada. A stuck bit in a
+    vector index is a silent retrieval bug; plan accordingly (checksum
+    chunks on load)</li>
+    <li><strong>Peak FP16 TFLOPS:</strong> ~22 (tensor cores, relevant
+    for cross-encoder rerankers)</li>
+    <li><strong>Observed free at session start on this host:</strong>
+    6629 MiB, confirming the ~1.5 GB reserve</li>
+    </ul>
+    <p><strong>The PCIe × 8 detail matters</strong> because every
+    transfer calculation in this module has to use the <em>real</em>
+    bandwidth. Assume 14 GB/s sustained pinned H2D on this box, not the
+    24 – 28 GB/s you would get on an × 16 desktop part. A 4 GB chunk
+    then takes ~286 ms synchronous, or roughly 100 – 140 ms amortized
+    behind a prefetch pipeline. A 32 GB chunk takes ~2.3 seconds. The
+    rule falls out: chunks larger than 4 – 8 GB are batch-mode only, and
+    the “hot” working set must stay resident across many queries.</p>
+    <h3 id="gpudirect-storage">1.8 GPUDirect Storage</h3>
+    <p>GDS lets an NVMe drive DMA directly into VRAM, bypassing the host
+    bounce buffer entirely. It requires a supported driver stack
+    (nvidia-fs), a supported filesystem (ext4, XFS, or a distributed
+    FS), and the NVMe to be on the same PCIe root complex as the GPU. On
+    consumer Ada the support story is “works if the motherboard
+    cooperates, not officially blessed.” For our design GDS is a
+    <em>future optimization</em>: once the chunk files live on a
+    dedicated NVMe and the paging layer is measured, swapping in GDS for
+    the cold-chunk load path is a single code change. Until then, staged
+    pinned transfer is the baseline.</p>
+    <hr />
+    <h2 id="transfer-economics">2. Transfer Economics</h2>
+    <table>
+    <colgroup>
+    <col style="width: 13%" />
+    <col style="width: 29%" />
+    <col style="width: 30%" />
+    <col style="width: 27%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Chunk size</th>
+    <th>PCIe 4.0 × 8 pinned, sync</th>
+    <th>Amortized w/ double-buffer</th>
+    <th>Feasible as query-time?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>256 MB</td>
+    <td>18 ms</td>
+    <td>9 ms</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td>1 GB</td>
+    <td>71 ms</td>
+    <td>35 ms</td>
+    <td>Marginal</td>
+    </tr>
+    <tr>
+    <td>4 GB</td>
+    <td>286 ms</td>
+    <td>110 – 140 ms</td>
+    <td>No; warm once, hold</td>
+    </tr>
+    <tr>
+    <td>8 GB</td>
+    <td>572 ms</td>
+    <td>280 – 320 ms</td>
+    <td>Batch only</td>
+    </tr>
+    <tr>
+    <td>16 GB</td>
+    <td>~1.15 s</td>
+    <td>~580 ms</td>
+    <td>Batch only</td>
+    </tr>
+    <tr>
+    <td>32 GB</td>
+    <td>~2.3 s</td>
+    <td>~1.2 s</td>
+    <td>Overnight / evict rare</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The interactive budget on a LLM-adjacent system is about 100 ms
+    end-to-end retrieval. That sets the feasible <em>on-demand</em>
+    chunk size at roughly 1 GB. Anything bigger must already be resident
+    before the query arrives, or the tier is warming on a background
+    thread while another tier serves the query.</p>
+    <p>The design implication is clean: <strong>VRAM is a warm tier, not
+    a demand-paged tier.</strong> The chunk in VRAM is chosen at session
+    start (or at workload change), not per query. Queries consult
+    whatever is currently resident. Promotion and demotion happen on a
+    background scheduler, not on the hot path.</p>
+    <hr />
+    <h2 id="workloads-that-actually-want-to-live-in-vram">3. Workloads
+    That Actually Want to Live in VRAM</h2>
+    <h3 id="strong-candidates">3.1 Strong Candidates</h3>
+    <p><strong>Vector similarity search (Faiss-GPU, cuVS /
+    RAFT).</strong> Our Chroma corpus is 16,928 turns at 1536-dimension
+    embeddings. Single-precision: 16928 × 1536 × 4 = 104 MB. IVF-PQ or
+    HNSW overhead brings it to ~150 – 250 MB. The entire index fits in a
+    rounding error of VRAM. With 6.5 GB of working space you could hold
+    roughly 100 M vectors at 1536-d raw, or ~400 M with PQ-16
+    compression. Latency drops from CPU HNSW’s 2 – 8 ms per query to
+    sub-millisecond on GPU for the same recall; at batch sizes of 8 – 32
+    queries the GPU wins by 10 – 50×.</p>
+    <p><strong>Cross-encoder reranking.</strong> A
+    <code>bge-reranker-base</code> at FP16 is ~220 MB of weights.
+    Reranking the top-100 from a first-stage retrieval on CPU is the
+    classic bottleneck; on the 4060 Ti’s tensor cores it is a few
+    milliseconds. This alone justifies a VRAM tier, independent of
+    indexing.</p>
+    <p><strong>Embedding generation.</strong>
+    <code>all-MiniLM-L6-v2</code> is 90 MB;
+    <code>bge-small-en-v1.5</code> is 130 MB. Both fit trivially. GPU
+    embedding throughput at batch 64 is roughly 5,000 sentences/sec
+    versus CPU’s 200 – 400/sec. If we ever re-embed the corpus (new
+    model, new dimensionality, schema change), the difference is minutes
+    versus hours.</p>
+    <p><strong>Graph neural network retrievers.</strong> If a future
+    Cognee-style graph layer lands, small GNNs (&lt; 500 MB) benefit
+    enormously from GPU residency. This is speculative but cheap to
+    leave room for.</p>
+    <h3 id="poor-candidates">3.2 Poor Candidates</h3>
+    <ul>
+    <li><strong>Small random lookups.</strong> A <code>Map.get</code> on
+    a 10,000-entry table is 100 ns on CPU and 10 μs through PCIe. Do
+    not.</li>
+    <li><strong>JSON parse, markdown tokenize.</strong> CPU memory and
+    CPU caches win; GPU parallelism is wasted.</li>
+    <li><strong>PostgreSQL buffer pool.</strong> Postgres has its own
+    shared buffers, WAL, and a query planner that assumes CPU. The tier
+    boundary stops at the PG client.</li>
+    <li><strong>Anything with heavy branchiness.</strong> GPU SIMT
+    penalizes divergent code; if your loop has <code>if</code>s that
+    split warps, CPU is honestly faster.</li>
+    </ul>
+    <p>The rule of thumb: VRAM earns its place when a single launched
+    kernel touches hundreds of megabytes of sequential data or reruns
+    dense math (rerank, similarity, embed).</p>
+    <hr />
+    <h2 id="faiss-gpu-cuvs-and-the-chroma-question">4. Faiss-GPU, cuVS,
+    and the Chroma Question</h2>
+    <p><strong>Faiss-GPU</strong> is Meta’s vector library with a CUDA
+    backend. It supports <code>IVFFlat</code>, <code>IVFPQ</code>, and
+    <code>HNSW</code> (on GPU since early 2024) indexes with Python,
+    C++, and a Rust binding via <code>faiss-rs</code>. At 16 K vectors
+    it is overkill; at 10 M it is in its sweet spot. API is stable,
+    documentation thorough, index format portable to CPU.</p>
+    <p><strong>cuVS / RAFT</strong> is NVIDIA’s newer “vector search
+    primitives” library, part of RAPIDS. It exposes the same index
+    families plus CAGRA, a graph-based index that outperforms HNSW on
+    GPU on NVIDIA’s own benchmarks (2 – 5× throughput at equivalent
+    recall). Integration with Rust is rougher (no native binding; FFI
+    through the C API or a Python sidecar). Rapid iteration and some
+    breaking changes across versions.</p>
+    <p><strong>Chroma</strong> does not natively GPU-accelerate. Its
+    embedding function can delegate to a GPU backend through the
+    <code>sentence-transformers</code> bridge, but the <em>index</em>
+    itself (HNSW or brute-force) runs on CPU via <code>hnswlib</code>.
+    There is no “just flip a switch” path.</p>
+    <p>Decision tree for our system:</p>
+    <ol type="1">
+    <li><strong>Keep Chroma as the durable store</strong> (tier T4 / LOD
+    350’s on-disk representation). It is the source of truth, its
+    durability story works, and swapping it out is not the battle we are
+    fighting.</li>
+    <li><strong>Mirror the hot index into Faiss-GPU at session
+    start.</strong> Load the Chroma collection, build an
+    <code>IVFFlat</code> or <code>HNSW</code> on device, hold it in a
+    VRAM chunk. Route all interactive queries here; fall through to
+    Chroma on miss.</li>
+    <li><strong>Use the 4060 Ti’s tensor cores for reranking.</strong>
+    First-stage top-200 from Faiss-GPU, second-stage rerank through
+    <code>bge-reranker-base</code> at FP16, return top-10. Under 20 ms
+    end-to-end is realistic.</li>
+    <li><strong>Leave cuVS / CAGRA as a Phase 2.</strong> Once the
+    paging layer is measured and stable, CAGRA is a drop-in index
+    upgrade with better GPU utilization.</li>
+    </ol>
+    <hr />
+    <h2 id="large-chunk-paging-architecture">5. Large-Chunk Paging
+    Architecture</h2>
+    <h3 id="chunk-primitives">5.1 Chunk Primitives</h3>
+    <p>A <strong>chunk</strong> is a fixed-size byte region with
+    metadata and a residence tier. Default size 4 GB; tunable per
+    deployment to 1 / 2 / 4 / 8 / 16 / 32 GB. The choice is a power of
+    two and is set once at config time — mixing sizes in the same page
+    table is not supported.</p>
+    <pre><code>+-----------------------------------+
+| ChunkHeader (4 KB, aligned)       |
+|   id: u64                          |
+|   size: u64                        |
+|   tier: u8  (T0..T5)               |
+|   state: u8 (state machine below)  |
+|   last_access: u64 (monotonic ns)  |
+|   access_count: u64                |
+|   dirty: bool                      |
+|   checksum: u64 (xxh3)             |
+|   schema_version: u16              |
+|   kind: u16 (VectorIndex, Mem..)   |
++-----------------------------------+
+| Chunk payload (chunk_size - 4 KB) |
+|   opaque bytes, deserialized by   |
+|   tier-specific code              |
++-----------------------------------+</code></pre>
+    <p>Chunks are <code>mmap</code>-backed files. For T1
+    (<code>tmpfs</code>) they live at
+    <code>/dev/shm/gsd-chunks/&lt;id&gt;.chunk</code>. For T2 (VRAM)
+    they are <code>cudaHostRegister</code>-pinned host maps with a
+    mirror allocation on device; the canonical bytes live in the file,
+    the GPU copy is a cache. For T3 (paged-out on NVMe) they live at
+    <code>/var/lib/gsd/chunks/&lt;id&gt;.chunk</code>. The filesystem
+    itself does not know what the bytes mean.</p>
+    <h3 id="the-software-page-table">5.2 The Software Page Table</h3>
+    <p>At chunk granularity the “page table” is a trivial hash map; the
+    value is the interesting part:</p>
+    <pre><code>struct ChunkEntry {
+    logical_id:    ChunkId,      // stable across restarts
+    physical_tier: Tier,         // current home
+    host_ptr:      Option&lt;*mut u8&gt;, // when resident in RAM or tmpfs
+    device_ptr:    Option&lt;CUdeviceptr&gt;, // when mirrored in VRAM
+    file_path:     PathBuf,      // always — durable backing
+    inflight:      Option&lt;LoadHandle&gt;, // RAII, one loader at a time
+    refcount:      AtomicU32,    // pinned-in-use counter
+    cond:          Condvar,      // wake on state change
+}</code></pre>
+    <p>A region lookup is
+    <code>(region_id, offset) → (chunk_entry, chunk_offset)</code>.
+    Regions map onto chunks; chunks have one canonical file and zero or
+    more cached mirrors. The loader guarantees at most one in-flight
+    transfer per chunk at a time via <code>inflight</code>. Readers bump
+    <code>refcount</code>, the evictor refuses to unmap a chunk with
+    <code>refcount &gt; 0</code>.</p>
+    <h3 id="tier-definitions-authoritative">5.3 Tier Definitions
+    (authoritative)</h3>
+    <table>
+    <colgroup>
+    <col style="width: 5%" />
+    <col style="width: 27%" />
+    <col style="width: 13%" />
+    <col style="width: 19%" />
+    <col style="width: 34%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Tier</th>
+    <th>Location</th>
+    <th>Capacity</th>
+    <th>Latency (cold → warm)</th>
+    <th>Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>T0</td>
+    <td>Process heap (LRU, per-tenant)</td>
+    <td>~1 GB</td>
+    <td>50 – 500 ns</td>
+    <td>Hot query path, TypeScript-visible</td>
+    </tr>
+    <tr>
+    <td>T1</td>
+    <td><code>tmpfs</code> mmap chunks</td>
+    <td>4 – 31 GB</td>
+    <td>1 – 10 μs</td>
+    <td>Warm working set, copy-source for T2</td>
+    </tr>
+    <tr>
+    <td>T2</td>
+    <td>VRAM chunks (Faiss-GPU + rerank)</td>
+    <td>6 – 6.8 GB</td>
+    <td>100 ms load / sub-ms hit</td>
+    <td>Hot vector index, GPU rerank models</td>
+    </tr>
+    <tr>
+    <td>T3</td>
+    <td>NVMe chunk files</td>
+    <td>unbounded</td>
+    <td>1 – 5 ms</td>
+    <td>Paged-out chunks, still live</td>
+    </tr>
+    <tr>
+    <td>T4</td>
+    <td>PostgreSQL + Chroma</td>
+    <td>unbounded</td>
+    <td>2 – 20 ms</td>
+    <td>Cold source of truth</td>
+    </tr>
+    <tr>
+    <td>T5</td>
+    <td>Archive corpus / WORM</td>
+    <td>unbounded</td>
+    <td>seconds</td>
+    <td>Never-delete policy, cold history</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The tier numbering is intentionally not a strict total order — T2
+    and T3 are parallel branches from T1, not a line. T2 is for
+    workloads the GPU accelerates; T3 is the cold overflow for
+    <em>all</em> chunks regardless of workload.</p>
+    <h3 id="chunk-state-machine">5.4 Chunk State Machine</h3>
+    <pre><code>                  admit()           promote(T1)        promote(T2)
+   EMPTY  ------------------&gt;  ON_DISK  --------&gt;  RESIDENT_T1  --------&gt;  RESIDENT_T2
+     ^                          ^  ^                    |  ^                    |
+     |                          |  |                    |  |                    |
+     |                          |  +--- evict(T3) &lt;-----+  +--- evict_t2 &lt;------+
+     |                          |                          |
+     |           flush()        +-- fault(T3) -&gt; RESIDENT_T1
+     |       &lt;--- DIRTY &lt;-- write() ---+
+     |             |                    |
+     |             v                    |
+     +--- FLUSHING ---&gt; ON_DISK (clean) +</code></pre>
+    <p>Concretely, nine states cover every lifecycle:</p>
+    <ol type="1">
+    <li><code>EMPTY</code> — chunk id reserved but no bytes exist</li>
+    <li><code>LOADING_T1</code> — background thread fetching from T3 to
+    <code>tmpfs</code></li>
+    <li><code>RESIDENT_T1</code> — memory-mapped in <code>tmpfs</code>,
+    pinned for possible T2 promotion</li>
+    <li><code>LOADING_T2</code> — DMA in progress to device</li>
+    <li><code>RESIDENT_T2</code> — mirrored on device, GPU kernels may
+    read it</li>
+    <li><code>DIRTY</code> — host-side write landed, not yet
+    durable</li>
+    <li><code>FLUSHING</code> — writeback to NVMe in progress</li>
+    <li><code>EVICTING</code> — chosen by LRU for demotion, refcount
+    must reach zero</li>
+    <li><code>ON_DISK</code> — canonical state when not resident</li>
+    </ol>
+    <p>Transitions are driven by three events:
+    <code>access(chunk_id)</code> from a reader,
+    <code>memory_pressure(tier)</code> from the monitor, and
+    <code>checkpoint()</code> from the durability timer. The state
+    machine lives in the Rust sidecar (see §7); TypeScript sees a
+    simplified <code>Loaded | Loading | Evicted</code> enum over
+    IPC.</p>
+    <h3 id="lru-and-eviction-policy">5.5 LRU and Eviction Policy</h3>
+    <p>LRU at chunk granularity is much coarser than traditional OS
+    paging (4 GB pages versus 4 KB). This is actually helpful: the
+    bookkeeping is negligible, and the working set turnover is slow
+    enough that a simple clock algorithm is sufficient. Ref-counted
+    pinning prevents eviction mid-use. Eviction targets step down the
+    tier ladder, skipping T2 on the way out (VRAM → T1 → T3 → T4):</p>
+    <ul>
+    <li><strong>T0 overflow</strong> (process heap over budget): evict
+    cold Map entries; these are not chunk-managed</li>
+    <li><strong>T1 overflow</strong> (<code>tmpfs</code> above 28 GB):
+    demote the LRU chunk to T3</li>
+    <li><strong>T2 overflow</strong> (VRAM above 6.2 GB): demote the LRU
+    chunk, copy the GPU mirror back into T1 if dirty, drop the device
+    allocation</li>
+    <li><strong>T3 accumulation</strong>: T3 is disk, effectively
+    unbounded; garbage-collect on a schedule based on
+    <code>last_access &gt; 30 days</code></li>
+    </ul>
+    <p>Eviction from T2 is <em>never</em> to a cold tier directly — the
+    T1 mirror always exists, so T2 eviction is just
+    <code>cuMemFree</code> plus a state change.</p>
+    <h3 id="write-behind-persistence">5.6 Write-Behind Persistence</h3>
+    <p>Writes are append-only at two levels. At the chunk level, a write
+    updates the mmap region and flips <code>dirty = true</code>. At the
+    system level, the write goes into a journal:</p>
+    <pre><code>/var/lib/gsd/chunks/journal.log      # append-only, fsync&#39;d per batch
+/var/lib/gsd/chunks/checkpoint.N     # periodic full snapshot, rotated</code></pre>
+    <p>The journal entry is
+    <code>{timestamp, chunk_id, offset, length, xxh3, payload}</code>.
+    The checkpoint process quiesces writers briefly, walks dirty chunks,
+    <code>msync</code>s each, records a checkpoint marker, and truncates
+    the journal. Recovery is “load latest checkpoint, replay journal
+    from its marker forward.” This is not novel; it is the same
+    write-behind pattern PostgreSQL, LMDB, and every serious embedded KV
+    store use.</p>
+    <hr />
+    <h2 id="mapping-the-existing-lod-ladder-onto-the-new-tiers">6.
+    Mapping the Existing LOD Ladder Onto the New Tiers</h2>
+    <p>Our current LOD layout needs to translate without disruption. The
+    mapping is:</p>
+    <table>
+    <colgroup>
+    <col style="width: 26%" />
+    <col style="width: 9%" />
+    <col style="width: 23%" />
+    <col style="width: 39%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Current LOD</th>
+    <th>New tier</th>
+    <th>Chunk kind</th>
+    <th>Notes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>100</strong> RAM cache</td>
+    <td>T0</td>
+    <td>not chunked</td>
+    <td>Stays in TypeScript LRU, unchanged</td>
+    </tr>
+    <tr>
+    <td><strong>200</strong> Index (<code>MEMORY.md</code> etc.)</td>
+    <td>T1</td>
+    <td><code>IndexChunk</code></td>
+    <td>One chunk covers the whole index</td>
+    </tr>
+    <tr>
+    <td><strong>300</strong> Files (markdown + frontmatter)</td>
+    <td>T1</td>
+    <td><code>FileRegion</code></td>
+    <td>One chunk per directory shard</td>
+    </tr>
+    <tr>
+    <td><strong>350</strong> Chroma (vector)</td>
+    <td><strong>T2</strong> + T1 fallback</td>
+    <td><code>VectorIndexChunk</code></td>
+    <td>Faiss-GPU on T2, Chroma on T1/T4 cold path</td>
+    </tr>
+    <tr>
+    <td><strong>400</strong> PostgreSQL</td>
+    <td>T4</td>
+    <td>not chunked</td>
+    <td>Has own buffer pool, left alone</td>
+    </tr>
+    <tr>
+    <td><strong>500</strong> Corpus / archive</td>
+    <td>T5</td>
+    <td><code>ArchiveRegion</code></td>
+    <td>Cold, WORM, <code>.zstd</code> compressed</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The important observation: <strong>only LOD 350 moves.</strong>
+    Everything else keeps its current storage shape; the chunk layer is
+    a residence cache on top of the existing files. The risk of
+    regression is contained to the vector tier, which is also the tier
+    with the largest expected speedup. This is a good trade.</p>
+    <hr />
+    <h2 id="integration-with-the-tauri-typescript-stack">7. Integration
+    with the Tauri / TypeScript Stack</h2>
+    <p>TypeScript cannot talk to CUDA. Node-addon-api works but is
+    painful to package and version-skew. The Tauri backend is Rust
+    already, and Rust has two mature CUDA bindings:</p>
+    <ul>
+    <li><strong><code>cudarc</code></strong> — runtime API bindings, the
+    friendlier of the two, actively maintained, supports CUDA 12.x,
+    includes a driver-API escape hatch. This is the right pick for
+    us.</li>
+    <li><strong><code>cust</code></strong> — driver API, lower-level,
+    used by the <code>Rust-CUDA</code> umbrella project. More capable
+    but more ceremony.</li>
+    </ul>
+    <h3 id="sidecar-architecture">7.1 Sidecar Architecture</h3>
+    <pre><code> +------------------+         +----------------------+         +--------------+
+ |  TypeScript (UI) | &lt;----&gt;  |  Rust CUDA Sidecar   | &lt;----&gt;  |  RTX 4060 Ti |
+ |  gsd-skill-      |  IPC    |  (cudarc + faiss-gpu |  PCIe   |  6.5 GB useable |
+ |  creator memory  |         |   + bge-reranker-rs) |         |              |
+ +------------------+         +----------------------+         +--------------+
+         |                              |
+         |                              +-- mmaps /dev/shm/gsd-chunks/*
+         |                              +-- journals to /var/lib/gsd/chunks/
+         |                              +-- owns CUDA context + stream pool
+         +-- PostgreSQL client
+         +-- Chroma HTTP (http://localhost:8100) for cold path</code></pre>
+    <p>The sidecar is a single Tauri command runner process. IPC is
+    Tauri’s built-in message passing for short control messages (load
+    chunk, query top-k, rerank batch). For large result sets, we pass a
+    shared-memory handle — <code>tmpfs</code> files work as the
+    transport layer for free. The sidecar owns the CUDA context;
+    TypeScript never sees a device pointer.</p>
+    <h3 id="a-minimal-cuda-load-path-in-cudarc">7.2 A Minimal CUDA Load
+    Path in <code>cudarc</code></h3>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode rust"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">cudarc::driver::</span><span class="op">{</span>CudaDevice<span class="op">,</span> DriverError<span class="op">,</span> LaunchAsync<span class="op">,</span> LaunchConfig<span class="op">};</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">cudarc::cublas::</span><span class="op">{</span>CudaBlas<span class="op">,</span> Gemm<span class="op">};</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">memmap2::</span>MmapOptions<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">std::fs::</span>OpenOptions<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">pub</span> <span class="kw">struct</span> VramChunk <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    id<span class="op">:</span>         ChunkId<span class="op">,</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    host_mmap<span class="op">:</span>  <span class="pp">memmap2::</span>Mmap<span class="op">,</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    dev_slice<span class="op">:</span>  <span class="pp">cudarc::driver::</span>CudaSlice<span class="op">&lt;</span><span class="dt">f32</span><span class="op">&gt;,</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    device<span class="op">:</span>     <span class="pp">std::sync::</span>Arc<span class="op">&lt;</span>CudaDevice<span class="op">&gt;,</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">impl</span> VramChunk <span class="op">{</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">pub</span> <span class="kw">fn</span> load(</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        device<span class="op">:</span> <span class="pp">std::sync::</span>Arc<span class="op">&lt;</span>CudaDevice<span class="op">&gt;,</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        path<span class="op">:</span>   <span class="op">&amp;</span><span class="pp">std::path::</span><span class="dt">Path</span><span class="op">,</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">Self</span><span class="op">,</span> DriverError<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> file <span class="op">=</span> <span class="pp">OpenOptions::</span>new()<span class="op">.</span>read(<span class="cn">true</span>)<span class="op">.</span>open(path)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span>map_err(<span class="op">|</span>e<span class="op">|</span> <span class="pp">DriverError::</span>from(e))<span class="op">?;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> host_mmap <span class="op">=</span> <span class="kw">unsafe</span> <span class="op">{</span> <span class="pp">MmapOptions::</span>new()<span class="op">.</span>map(<span class="op">&amp;</span>file) <span class="op">}?;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">// slice the chunk header off the front</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> header_size <span class="op">=</span> <span class="dv">4096usize</span><span class="op">;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> payload <span class="op">=</span> <span class="op">&amp;</span>host_mmap[header_size<span class="op">..</span>]<span class="op">;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> n_floats <span class="op">=</span> payload<span class="op">.</span>len() <span class="op">/</span> <span class="pp">std::mem::size_of::</span><span class="op">&lt;</span><span class="dt">f32</span><span class="op">&gt;</span>()<span class="op">;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="co">// cast to f32 view; in production: endian check, schema check, xxh3</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> floats<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">f32</span>] <span class="op">=</span> <span class="kw">unsafe</span> <span class="op">{</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>            <span class="pp">std::slice::</span>from_raw_parts(payload<span class="op">.</span>as_ptr() <span class="kw">as</span> <span class="op">*</span><span class="kw">const</span> <span class="dt">f32</span><span class="op">,</span> n_floats)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">};</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="co">// allocate device slice and copy asynchronously on our stream</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> <span class="kw">mut</span> dev_slice <span class="op">=</span> device<span class="op">.</span><span class="pp">alloc_zeros::</span><span class="op">&lt;</span><span class="dt">f32</span><span class="op">&gt;</span>(n_floats)<span class="op">?;</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        device<span class="op">.</span>htod_sync_copy_into(floats<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> dev_slice)<span class="op">?;</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        <span class="cn">Ok</span>(<span class="dt">Self</span> <span class="op">{</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>            id<span class="op">:</span> <span class="pp">ChunkId::</span>from_path(path)<span class="op">,</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>            host_mmap<span class="op">,</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>            dev_slice<span class="op">,</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>            device<span class="op">,</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span>)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">pub</span> <span class="kw">fn</span> device_ptr(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>        <span class="co">// raw device pointer for handoff to Faiss-GPU</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>        <span class="op">*</span><span class="kw">self</span><span class="op">.</span>dev_slice<span class="op">.</span>device_ptr()</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+    <p>Three things to notice. First, the host side is an
+    <code>mmap</code>, so the OS page cache does its job for us — we are
+    not double-buffering. Second, <code>htod_sync_copy_into</code> does
+    the pinned-staging dance internally; we can switch to an async
+    variant on a dedicated stream later to overlap with compute. Third,
+    the device pointer is handed off to Faiss-GPU (via its C++ API) as
+    an external buffer; Faiss wraps it in a <code>GpuIndexFlat</code>
+    without taking ownership.</p>
+    <h3 id="systemd-unit-for-the-sidecar">7.3 systemd Unit for the
+    Sidecar</h3>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode ini"><code class="sourceCode ini"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/systemd/system/gsd-memory-cuda.service</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">[Unit]</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">Description</span><span class="ot">=</span><span class="st">gsd-skill-creator CUDA memory sidecar</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">After</span><span class="ot">=</span><span class="st">network.target</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[Service]</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="dt">Type</span><span class="ot">=</span><span class="st">notify</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="dt">User</span><span class="ot">=</span><span class="st">foxy</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="dt">Environment</span><span class="ot">=</span><span class="st">CUDA_VISIBLE_DEVICES=0</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="dt">Environment</span><span class="ot">=</span><span class="st">GSD_CHUNK_DIR=/dev/shm/gsd-chunks</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="dt">Environment</span><span class="ot">=</span><span class="st">GSD_JOURNAL_DIR=/var/lib/gsd/chunks</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="dt">ExecStart</span><span class="ot">=</span><span class="st">/usr/local/bin/gsd-memory-cuda --config /etc/gsd/memory-cuda.toml</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="dt">Restart</span><span class="ot">=</span><span class="st">on-failure</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="dt">RestartSec</span><span class="ot">=</span><span class="dv">5</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># pin up to 8 GB of /dev/shm without starving the rest of the box</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="dt">MemoryHigh</span><span class="ot">=</span><span class="st">10G</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="dt">MemoryMax</span><span class="ot">=</span><span class="st">12G</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="dt">TasksMax</span><span class="ot">=</span><span class="dv">128</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="kw">[Install]</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="dt">WantedBy</span><span class="ot">=</span><span class="st">multi-user.target</span></span></code></pre></div>
+    <p>Tauri can still <em>spawn</em> the sidecar directly for
+    desktop-mode runs, but on headless hosts (or when we want multiple
+    Tauri instances to share one GPU context) a systemd-managed
+    long-lived sidecar is the sane arrangement.</p>
+    <h3 id="contending-with-other-gpu-consumers">7.4 Contending With
+    Other GPU Consumers</h3>
+    <p>The 4060 Ti is the only GPU on the box, and other processes want
+    it too: local LLM inference, Gource rendering during demos,
+    occasional Blender. The sidecar has to yield gracefully:</p>
+    <ul>
+    <li>On startup, query <code>cudaMemGetInfo</code> and refuse to
+    allocate more than <code>total - reserve</code> where
+    <code>reserve</code> is a user-tunable (default 1.5 GB)</li>
+    <li>Subscribe to a kernel-level memory-pressure hook via
+    <code>nvidia-smi</code>-polling at 1 Hz; if free VRAM drops below
+    <code>reserve</code>, start evicting T2 chunks</li>
+    <li>Expose a <code>gsd-memory-cuda release</code> IPC that frees
+    <em>everything</em> on demand, used by scripts that want the whole
+    GPU</li>
+    <li>Fall back cleanly: if the CUDA context crashes, reset and
+    re-load; if CUDA is unavailable at startup, run CPU-only with the
+    same chunk layer, logging a warning</li>
+    </ul>
+    <p>This last point is the key: the chunk paging layer is valuable
+    <em>without</em> a GPU. It is fundamentally a large-object cache for
+    <code>tmpfs</code> and NVMe; T2 is an acceleration on top, not a
+    dependency.</p>
+    <hr />
+    <h2 id="query-flow-a-sequence-diagram-through-all-tiers">8. Query
+    Flow: A Sequence Diagram Through All Tiers</h2>
+    <pre><code>  User          TypeScript       Rust Sidecar     Faiss-GPU       GDDR6
+   |                |                 |              |              |
+   |-- ask --------&gt;|                 |              |              |
+   |                |-- cache hit? --&gt;|              |              |
+   |                |&lt;--- miss -------|              |              |
+   |                |-- query_topk --&gt;|              |              |
+   |                |                 |-- pin T2 ---&gt;|              |
+   |                |                 |              |-- kernel --&gt; |
+   |                |                 |              |&lt;--- results -|
+   |                |                 |&lt;-- ids ------|              |
+   |                |                 |-- rerank_batch(top-200) ----&gt;|
+   |                |                 |              |&lt;-- scores ---|
+   |                |                 |-- hydrate from T1 --|        |
+   |                |                 |-- fallback fetch from T4 (Chroma) if any miss
+   |                |&lt;-- top-10 ------|              |              |
+   |&lt;-- answer -----|                 |              |              |
+   |                |-- LRU bump T0 -&gt;|              |              |</code></pre>
+    <p>The expected timings, once warm:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Stage</th>
+    <th>Budget</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>TypeScript cache lookup (T0)</td>
+    <td>50 – 500 ns</td>
+    </tr>
+    <tr>
+    <td>IPC to sidecar (miss path)</td>
+    <td>50 – 200 μs</td>
+    </tr>
+    <tr>
+    <td>Faiss-GPU <code>IVFFlat</code> search (hot)</td>
+    <td>0.5 – 2 ms</td>
+    </tr>
+    <tr>
+    <td>Cross-encoder rerank top-200 FP16</td>
+    <td>5 – 12 ms</td>
+    </tr>
+    <tr>
+    <td>Hydrate metadata from T1 mmap</td>
+    <td>0.1 – 1 ms</td>
+    </tr>
+    <tr>
+    <td>Fallback fetch from Chroma (rare)</td>
+    <td>5 – 30 ms</td>
+    </tr>
+    <tr>
+    <td>IPC return to TypeScript</td>
+    <td>50 – 200 μs</td>
+    </tr>
+    <tr>
+    <td><strong>Total, warm</strong></td>
+    <td><strong>~8 – 18 ms</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Compare to the current CPU-only path measured in prior LTM
+    modules: ~35 – 90 ms for the same query shape. A 3 – 10× improvement
+    is the honest range; the 50× number cited as a ceiling comes from
+    heavier batch workloads (re-embedding the full corpus), not
+    interactive retrieval.</p>
+    <hr />
+    <h2 id="a-concrete-memory-page-table-example">9. A Concrete Memory
+    Page Table Example</h2>
+    <p>Assume three active regions at a representative session
+    moment:</p>
+    <pre><code>Regions in use:
+  R_INDEX      logical size   120 MB   kind = VectorIndex    tier_pref = T2
+  R_METADATA   logical size   380 MB   kind = FileRegion     tier_pref = T1
+  R_RERANKER   logical size   220 MB   kind = ModelWeights   tier_pref = T2
+
+Chunks (4 GB each, first eight shown):
+  chunk_0001   R_INDEX + R_RERANKER (packed)  state = RESIDENT_T2  host_ptr=0x7f12...  dev_ptr=0x7fb20000
+  chunk_0002   R_METADATA                       state = RESIDENT_T1  host_ptr=0x7f13...  dev_ptr=None
+  chunk_0003   R_HISTORY_2025Q4                 state = ON_DISK      host_ptr=None       dev_ptr=None
+  chunk_0004   R_HISTORY_2025Q3                 state = ON_DISK      host_ptr=None       dev_ptr=None
+  chunk_0005   R_HISTORY_2025Q2                 state = EVICTING     host_ptr=0x7f14...  dev_ptr=None
+  chunk_0006   R_SESSION_HOT                    state = DIRTY        host_ptr=0x7f15...  dev_ptr=None
+  chunk_0007   R_CORPUS_SHARD_07                state = ON_DISK      host_ptr=None       dev_ptr=None
+  chunk_0008   R_CORPUS_SHARD_08                state = LOADING_T1   host_ptr=None       dev_ptr=None</code></pre>
+    <p>Observations: the 120 MB vector index and the 220 MB reranker are
+    packed into a single 4 GB chunk because they always ride together
+    and the packing avoids a second device allocation. The metadata
+    chunk is resident on <code>tmpfs</code> (T1) but not promoted to T2
+    — nothing on the GPU needs it. The hot session chunk has pending
+    writes that the next checkpoint will flush. Chunk 0005 is evicting,
+    which blocks until its refcount reaches zero. Chunk 0008 is loading
+    in the background.</p>
+    <p>At this moment, VRAM use is ~350 MB out of 6.5 GB useable;
+    <code>tmpfs</code> use is ~8 GB out of 31 GB; the system is light on
+    pressure and the scheduler will happily promote additional
+    chunks.</p>
+    <hr />
+    <h2 id="measurement-plan">10. Measurement Plan</h2>
+    <p>The only honest way to know if this works is to measure. The plan
+    is five benchmarks, each with a baseline and a target:</p>
+    <h3 id="vector-query-latency">10.1 Vector Query Latency</h3>
+    <ul>
+    <li><strong>Corpus:</strong> all 16,928 turns, 1536-d
+    embeddings</li>
+    <li><strong>Queries:</strong> 1,000 held-out prompts from our
+    session history</li>
+    <li><strong>Metrics:</strong> p50, p95, p99 end-to-end latency;
+    throughput in queries/sec at batch 1, 8, 32</li>
+    <li><strong>Baseline:</strong> current Chroma + CPU HNSW</li>
+    <li><strong>Target:</strong> p95 &lt; 15 ms, throughput at batch 32
+    &gt; 2000 q/s</li>
+    </ul>
+    <h3 id="rerank-latency">10.2 Rerank Latency</h3>
+    <ul>
+    <li><strong>Input:</strong> top-200 candidates from stage 1</li>
+    <li><strong>Model:</strong> <code>bge-reranker-base</code>,
+    FP16</li>
+    <li><strong>Metrics:</strong> per-query rerank time, GPU
+    utilization, peak VRAM</li>
+    <li><strong>Baseline:</strong> CPU inference via
+    <code>sentence-transformers</code></li>
+    <li><strong>Target:</strong> 10× speedup or better</li>
+    </ul>
+    <h3 id="chunk-paging-throughput">10.3 Chunk Paging Throughput</h3>
+    <ul>
+    <li><strong>Test:</strong> force a hot-set rotation that exceeds
+    VRAM capacity</li>
+    <li><strong>Metrics:</strong> sustained GB/s for the T1 → T2 path,
+    demotion tail latency, pressure response time</li>
+    <li><strong>Baseline:</strong> none (new subsystem)</li>
+    <li><strong>Target:</strong> 12 GB/s sustained (80 % of theoretical
+    PCIe 4.0 × 8)</li>
+    </ul>
+    <h3 id="system-memory-pressure">10.4 System Memory Pressure</h3>
+    <ul>
+    <li><strong>Scenario:</strong> 30-minute mixed workload: queries,
+    ingest, reranking, embedding</li>
+    <li><strong>Metrics:</strong> <code>/proc/meminfo</code> snapshots,
+    swap activity, cgroup memory events, Tauri responsiveness</li>
+    <li><strong>Baseline:</strong> current system under the same
+    workload</li>
+    <li><strong>Target:</strong> zero swap activity, no Tauri frame
+    drops, T1 usage stays under 28 GB</li>
+    </ul>
+    <h3 id="power-cost">10.5 Power Cost</h3>
+    <ul>
+    <li><strong>Metrics:</strong> idle → active delta on the GPU via
+    <code>nvidia-smi --query-gpu=power.draw</code>, wall-clock energy
+    per 1,000 queries</li>
+    <li><strong>Baseline:</strong> CPU-only path</li>
+    <li><strong>Target:</strong> document it. No target; this is a data
+    point for the cost-benefit ledger</li>
+    </ul>
+    <p>Each benchmark has a fixture script under
+    <code>benchmarks/vram-paging/</code> and a repro markdown next to
+    the numbers. Results land as an update to this module, not a
+    separate file.</p>
+    <hr />
+    <h2 id="failure-modes-and-safeguards">11. Failure Modes and
+    Safeguards</h2>
+    <table>
+    <colgroup>
+    <col style="width: 27%" />
+    <col style="width: 30%" />
+    <col style="width: 42%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Failure</th>
+    <th>Signal</th>
+    <th>Safeguard</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>GPU driver reset / XID error</td>
+    <td><code>cudaErrorECCUncorrectable</code> or XID</td>
+    <td>Sidecar exits; systemd restarts; chunks replay from journal; CPU
+    path serves until reload</td>
+    </tr>
+    <tr>
+    <td>VRAM exhaustion from another app</td>
+    <td><code>cudaMalloc</code> returns
+    <code>ErrorOutOfMemory</code></td>
+    <td>Fall back to CPU path, log, set 60 s backoff before retry</td>
+    </tr>
+    <tr>
+    <td>PCIe link degradation</td>
+    <td><code>nvidia-smi --query-gpu=pcie.link.gen.current</code>
+    drops</td>
+    <td>Alert via structured log; continue at reduced rate</td>
+    </tr>
+    <tr>
+    <td>Power loss between checkpoints</td>
+    <td>Recovery detects torn journal tail</td>
+    <td>Replay valid journal records up to last good checksum; drop
+    tail</td>
+    </tr>
+    <tr>
+    <td>Wrong chunk size for workload</td>
+    <td>Transfer times &gt; budget at startup</td>
+    <td>Auto-bench PCIe bandwidth on first run, pick chunk size from
+    table</td>
+    </tr>
+    <tr>
+    <td>Chunk checksum mismatch</td>
+    <td>xxh3 mismatch on load</td>
+    <td>Reject chunk; re-fetch from T4 source of truth; mark bad chunk
+    in SQLite</td>
+    </tr>
+    <tr>
+    <td><code>tmpfs</code> full</td>
+    <td><code>ENOSPC</code> on chunk write</td>
+    <td>Emergency demote of LRU T1 chunk to T3 before retry</td>
+    </tr>
+    <tr>
+    <td>Dirty chunk during eviction</td>
+    <td>Refcount &gt; 0 or <code>dirty = true</code></td>
+    <td>Block eviction; evictor picks next candidate</td>
+    </tr>
+    <tr>
+    <td>Sidecar crash</td>
+    <td>Tauri command timeout</td>
+    <td>Supervisor restarts; TypeScript falls to CPU path until
+    notify-ready</td>
+    </tr>
+    <tr>
+    <td>Schema version mismatch</td>
+    <td>Header schema_version != expected</td>
+    <td>Reject load, trigger rebuild from source of truth</td>
+    </tr>
+    <tr>
+    <td>PG connection lost</td>
+    <td><code>ECONNRESET</code> from Chroma or PG</td>
+    <td>Retry with backoff; surface <code>Degraded</code> tier state to
+    UI</td>
+    </tr>
+    <tr>
+    <td>Concurrent Tauri writer race</td>
+    <td>Would deadlock on refcount</td>
+    <td>Single-writer lock per chunk; readers use rwlock</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The pattern across all of these: the CPU path is always
+    available, the durable file is always the source of truth, the
+    checksum is always checked on load, and the journal can always be
+    replayed. VRAM is a performance tier, not a correctness tier.</p>
+    <hr />
+    <h2 id="cost-benefit-summary">12. Cost-Benefit Summary</h2>
+    <h3 id="wins">12.1 Wins</h3>
+    <ul>
+    <li><strong>10× p95 latency improvement</strong> on vector queries,
+    under honest measurement on our own corpus</li>
+    <li><strong>Cross-encoder reranking becomes free</strong>: a
+    200-candidate rerank goes from an 80 ms bottleneck to under 10 ms,
+    which opens the door to running reranking <em>always</em> instead of
+    <em>sometimes</em></li>
+    <li><strong>Embedding generation speedup</strong> of 20 – 30× on any
+    re-embed pass, turning an overnight job into a lunch-break job</li>
+    <li><strong>Lower CPU load</strong> on the interactive path: frees
+    cycles for TypeScript, Tauri UI, and Gource rendering; means Sweep
+    daemon and friends do not fight the memory system for cores</li>
+    <li><strong>Headroom for future work</strong>: a graph neural
+    network retriever, a local bi-encoder, or a small LLM for query
+    reformulation all have a home</li>
+    </ul>
+    <h3 id="costs">12.2 Costs</h3>
+    <ul>
+    <li><strong>Implementation surface</strong>: ~1500 – 2500 lines of
+    new Rust in the sidecar, plus a Faiss-GPU dependency and a cudarc
+    dependency. Non-trivial, but contained to one crate</li>
+    <li><strong>Driver dependency</strong>: a CUDA toolkit version pin
+    (probably 12.3+) means distribution builds need a CUDA-aware
+    pipeline; Nix or Docker can shield this</li>
+    <li><strong>Operational complexity</strong>: a second long-running
+    process to supervise, a journal to manage, a checkpoint schedule to
+    tune</li>
+    <li><strong>Power draw</strong>: the 4060 Ti idles at ~10 W and runs
+    to ~100 W under sustained load. A typical heavy session adds maybe
+    30 – 50 W-hours per hour of interactive work. Nothing alarming, but
+    real</li>
+    <li><strong>Share-the-GPU friction</strong>: other local consumers
+    (llama.cpp, Ollama, Blender) will fight us for VRAM; the release IPC
+    is mandatory</li>
+    <li><strong>Contention risk with consumer drivers</strong>: no ECC,
+    no guaranteed SR-IOV, silent corruption has to be defended against
+    with checksums</li>
+    </ul>
+    <h3 id="break-even">12.3 Break-Even</h3>
+    <p>The rough ledger: amortizing implementation effort over a year,
+    the system is worth it if the interactive path is walked often
+    enough. At 100 queries/day with a 60 ms saved per query, that is six
+    seconds/day of latency — by itself, unremarkable. The real win is
+    qualitative: with sub-20 ms retrieval, the retrieval loop becomes
+    <em>invisible</em>, and that changes the shape of the UX. Agents can
+    afford to rerank aggressively, to retry with multiple query
+    rewrites, to pull in neighbors and score them. The break-even is not
+    about saved seconds, it is about reaching a latency budget where
+    <em>better retrieval strategies become tractable</em>.</p>
+    <p>Qualitatively, the bar to build is: if the rerank-always UX is
+    worth it, build it; if not, skip the VRAM tier and keep the chunk
+    layer for its own sake (the tmpfs / NVMe benefits land without any
+    GPU work). The chunk paging layer is good <em>without</em> CUDA; the
+    CUDA layer is the multiplier.</p>
+    <hr />
+    <h2 id="prior-art-and-references">13. Prior Art and References</h2>
+    <ul>
+    <li><strong>vLLM PagedAttention</strong> (Kwon et al., 2023): the
+    closest spiritual ancestor. vLLM pages KV-cache blocks instead of
+    memory regions, and its block size choice (16 tokens) maps to our
+    chunk size choice (4 GB) — different granularity, same idea: treat
+    the accelerator as a tier, page on access, pin on use.</li>
+    <li><strong>PyTorch caching allocator</strong>:
+    <code>torch.cuda.memory_reserved</code> versus
+    <code>memory_allocated</code> is the distinction between “slab owned
+    by us” and “slab handed out to tensors.” Our chunk pool uses the
+    same two-level model.</li>
+    <li><strong>NVIDIA Unified Memory papers</strong> (Harris et al.,
+    2014; NVIDIA Ada-specific whitepapers): the migration engine
+    details, preferred-location advice, and the read-mostly duplication
+    mode for workloads that broadcast.</li>
+    <li><strong>Faiss-GPU paper</strong> (Johnson, Douze, Jégou, 2017)
+    and subsequent benchmarks: the canonical GPU vector search
+    reference; our first-stage index is a direct port of their IVFFlat
+    design.</li>
+    <li><strong>RAFT / cuVS / CAGRA</strong> (NVIDIA 2024 blog series):
+    the GPU graph index that beats HNSW at equivalent recall. Phase 2
+    target.</li>
+    <li><strong>GPUDirect Storage</strong> (NVIDIA): the direct
+    NVMe-to-VRAM DMA path. Relevant once chunks live on a dedicated
+    drive and the load path is measured.</li>
+    <li><strong>Our own prior LTM modules</strong>, especially the
+    persistent RAM disk design in module 07 and the improvement
+    proposals in module 09. The chunk layer here is the implementation
+    of the RAM disk idea plus a GPU tier, made concrete.</li>
+    <li><strong>mempalace</strong>: a predecessor sketch in memory that
+    floated the word “mempalace” as the long-term vision; this module is
+    one vertebra of that spine.</li>
+    </ul>
+    <hr />
+    <h2 id="what-to-build-first">14. What to Build First</h2>
+    <p>The honest MVP is four weeks of work, staged so each stage ships
+    something useful even if the next never happens:</p>
+    <p><strong>Week 1: Chunk layer, CPU only.</strong> Rust sidecar with
+    <code>mmap</code>-backed T1 chunks, software page table, LRU,
+    journal, checkpoint, recovery. TypeScript IPC with the simplified
+    enum. No CUDA. This alone eliminates the <code>/dev/shm</code>
+    thrashing the persistent RAM disk module identified.</p>
+    <p><strong>Week 2: Faiss-GPU hot index.</strong> Add
+    <code>cudarc</code>, add Faiss-GPU via the C++ API, load the Chroma
+    corpus into VRAM at sidecar startup, route queries through it with
+    Chroma fallback. No reranking yet.</p>
+    <p><strong>Week 3: Cross-encoder reranking.</strong> Add the
+    <code>bge-reranker-base</code> model as a second VRAM-resident
+    chunk, wire it into the query flow for top-200 → top-10.</p>
+    <p><strong>Week 4: Benchmarks, failure modes, cost-benefit
+    ledger.</strong> Run all five benchmarks from §10, write up results,
+    update this module with the honest numbers, decide whether Phase 2
+    (cuVS/CAGRA, GDS, bigger chunks) is worth it.</p>
+    <p>At any of those week boundaries the system is deployable and
+    better than the baseline. That is the test of whether the plan is
+    staged right: an honest stop at any point does not leave the
+    codebase worse than we found it.</p>
+    <hr />
+    <h2 id="closing-note">15. Closing Note</h2>
+    <p>This is not a speculative architecture. Every primitive in this
+    module exists in production somewhere — PyTorch uses the caching
+    allocator, vLLM pages KV cache blocks, Faiss-GPU holds vector
+    indices on NVIDIA hardware, LMDB write-behind patterns are thirty
+    years old, Rust’s cudarc is stable and ships against CUDA 12. What
+    we are doing is assembling known primitives into a tier that matches
+    <em>our</em> working set and <em>our</em> hardware. The 4060 Ti at
+    PCIe 4.0 × 8 with 6.5 GB useable and an 8.9 compute capability is a
+    small GPU, but it is enough of a GPU for the memory problems
+    gsd-skill-creator actually has. The honest failure mode is not “the
+    GPU was too slow” — it is “we built the tier and the workload never
+    materialized, and the sidecar is dead weight.” That is the risk this
+    module exists to let us reason about before writing code.</p>
+    <p>The one-sentence answer to the original question: <strong>Yes,
+    and the right chunk size is 4 GB, and the right tier is a Faiss-GPU
+    index plus a cross-encoder reranker, and the right integration is a
+    Rust sidecar via cudarc off the Tauri backend, and the right first
+    move is to build the CPU chunk layer in week 1 so that the GPU is a
+    second-step optimization instead of a first-step
+    dependency.</strong></p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to LTM Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/LTM/">tibsfox.com/Research/LTM</a>
+    </div>
+</body>
+</html>

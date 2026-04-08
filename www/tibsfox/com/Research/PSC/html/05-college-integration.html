@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Political Science &amp; Complex Plane: College of Knowledge
+Integration — PSC Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1e1e3a;
+            --accent: #6A1B9A;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #42A5F5;
+            --border: #2a2a4a;
+            --primary: #4A148C;
+            --blue: #1565C0;
+            --formula: #CE93D8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--formula); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--formula); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--formula); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--formula); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--formula); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(66,165,245,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        PSC — Political Science, History &amp; the Complex Plane<br>
+        <em>z(t) = R(t) + i&middot;X(t)</em> &middot;
+        <a href="../index.html">Back to PSC Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1
+    id="political-science-complex-plane-college-of-knowledge-integration">Political
+    Science &amp; Complex Plane: College of Knowledge Integration</h1>
+    <blockquote>
+    <p><strong>Domain:</strong> Political Science, History &amp; the
+    Complex Plane <strong>Module:</strong> 5 – College of Knowledge
+    Integration <strong>Through-line:</strong> <em>Knowledge does not
+    live in disciplinary silos. The complex plane is a mathematical
+    object, a political instrument, a philosophical provocation, and a
+    computational substrate simultaneously. This module documents how
+    the Political Science &amp; Complex Plane research mission
+    integrates with the College of Knowledge’s cross-departmental
+    architecture — where political data analysis meets statistical
+    tooling, where phase-space dynamics meet dynamical systems theory,
+    where social contract philosophy meets the formal logic of
+    governance design, and where the narrative spans of The Hundred
+    Voices find their computational analogues in the modular histories
+    of Module 2. The department at .college/polsci-history/ is the
+    institutional home of this integration.</em></p>
+    </blockquote>
+    <hr />
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ol type="1">
+    <li><a href="#1-department-architecture">Department Architecture</a>
+    <ul>
+    <li>1.1 <a href="#11-directory-structure">Directory
+    Structure</a></li>
+    <li>1.2 <a href="#12-the-five-wings">The Five Wings</a></li>
+    <li>1.3 <a href="#13-entry-point-and-learning-arcs">Entry Point and
+    Learning Arcs</a></li>
+    </ul></li>
+    <li><a href="#2-rosetta-panel-design">Rosetta Panel Design</a>
+    <ul>
+    <li>2.1 <a href="#21-python-political-data-analysis">Python:
+    Political Data Analysis</a></li>
+    <li>2.2 <a href="#22-julia-phase-space-and-dynamical-systems">Julia:
+    Phase Space and Dynamical Systems</a></li>
+    <li>2.3 <a
+    href="#23-r-statistical-political-science-and-v-dem-tools">R:
+    Statistical Political Science and V-Dem Tools</a></li>
+    <li>2.4 <a
+    href="#24-sql-historical-event-database-and-idea-indices">SQL:
+    Historical Event Database and IDEA Indices</a></li>
+    </ul></li>
+    <li><a href="#3-cross-departmental-links">Cross-Departmental
+    Links</a>
+    <ul>
+    <li>3.1 <a
+    href="#31-mathematics-complex-plane-phase-space-attractor-theory">Mathematics:
+    Complex Plane, Phase Space, Attractor Theory</a></li>
+    <li>3.2 <a
+    href="#32-literature-the-hundred-voices-and-historiography-as-genre">Literature:
+    The Hundred Voices and Historiography as Genre</a></li>
+    <li>3.3 <a
+    href="#33-philosophy-social-contract-ethics-of-governance-epistemology-of-power">Philosophy:
+    Social Contract, Ethics of Governance, Epistemology of
+    Power</a></li>
+    <li>3.4 <a
+    href="#34-economics-political-economy-bretton-woods-neoliberalism-and-democracy">Economics:
+    Political Economy, Bretton Woods, Neoliberalism and
+    Democracy</a></li>
+    <li>3.5 <a
+    href="#35-computer-science-complex-adaptive-systems-and-information-environments">Computer
+    Science: Complex Adaptive Systems and Information
+    Environments</a></li>
+    </ul></li>
+    <li><a href="#4-primary-texts">Primary Texts</a></li>
+    <li><a href="#5-data-sources-in-the-department-archive">Data Sources
+    in the Department Archive</a></li>
+    <li><a href="#6-gsd-cross-links">GSD Cross-Links</a></li>
+    <li><a href="#7-sources">Sources</a></li>
+    </ol>
+    <hr />
+    <h2 id="department-architecture">1. Department Architecture</h2>
+    <h3 id="directory-structure">1.1 Directory Structure</h3>
+    <p>The Political Science / History department lives at
+    <code>.college/polsci-history/</code> within the College of
+    Knowledge <code>.college/</code> root directory. The Rosetta Core
+    architecture requires that every concept be expressed in at least 3
+    languages across 3 computational paradigms. The department follows
+    the College’s standard structure with research-mission-specific
+    enrichments:</p>
+    <pre><code>.college/polsci-history/
+├── CURRICULUM.md           -- Department overview, five wings, learning arcs
+├── CROSS_LINKS.md          -- Cross-departmental connections, shared concepts
+├── ROSETTA.md              -- Multi-language / multi-paradigm core
+├── modules/
+│   ├── 01-foundations/     -- Systems theory, complexity, power
+│   ├── 02-historical-arc/  -- Westphalia to present, 2026 backsliding crisis
+│   ├── 03-current/         -- 2020–2026 sliding crisis, quantitative baseline
+│   ├── 04-complex/         -- Complex plane, mathematical framework
+│   └── 05-integration/     -- Cross-departmental synthesis
+├── rosetta/
+│   ├── python/             -- Political data analysis (pandas, networkx)
+│   ├── r/                  -- Statistical political science (V-Dem tools)
+│   ├── julia/              -- Phase space, dynamical systems modeling
+│   └── sql/                -- Historical event database, IDEA indices
+├── texts/
+│   ├── primary-sources/    -- Locke, Rousseau, Kant excerpts
+│   └── data-sources/       -- V-Dem codebook, IDEA indices
+└── gsd-links/              -- Cross-refs to The Space Between, Hundred Voices</code></pre>
+    <p>The department is a new addition to the College, created as the
+    institutional home for the analytical vocabulary developed in this
+    research mission. It is designed to be extensible: future research
+    missions that engage political science, comparative government, or
+    historical analysis can draw on the department’s wings and rosetta
+    panels without duplicating foundational infrastructure.</p>
+    <h3 id="the-five-wings">1.2 The Five Wings</h3>
+    <p>The department is organized around five wings that map directly
+    to the five modules of the research mission:</p>
+    <p><strong>Wing 1 — Foundations: Systems Theory, Complexity, and
+    Power</strong> Conceptual foundations: what is a political system;
+    what is power; why complexity theory rather than linear analysis;
+    introduction to phase space and attractors as political concepts;
+    the Westphalian state as the primary unit of analysis and its
+    limitations. This wing introduces the analytical vocabulary that all
+    subsequent wings presuppose. Key concepts: polsci-system-dynamics,
+    polsci-power-theory, polsci-complexity-foundations,
+    polsci-attractor-basins.</p>
+    <p><strong>Wing 2 — Historical Arc: Westphalia to the
+    Present</strong> The history of the Westphalian system read through
+    the dual-axis framework. Six phase transitions: state formation,
+    industrial era, interwar collapse, post-1945 reconstruction,
+    decolonization, Cold War end and false stability, and the current
+    third wave of autocratization. This wing operationalizes the
+    historiographic methods of the History Department (causation,
+    periodization, turning points) applied to political system dynamics.
+    Key concepts: polsci-westphalian-system, polsci-phase-transitions,
+    polsci-third-wave.</p>
+    <p><strong>Wing 3 — Current Global State: Quantitative
+    Baseline</strong> The empirical content of Module 3: V-Dem
+    methodology and data, EIU Democracy Index, International IDEA
+    indices, Carnegie Endowment case analysis. Regional signal analysis.
+    The Kettering Foundation mechanism of imaginary-axis capture.
+    Democratic resilience indicators. This wing is the department’s
+    primary quantitative wing — where the rosetta panels (Python, R,
+    SQL) are most directly engaged. Key concepts:
+    polsci-vdem-methodology, polsci-erosion-mechanisms,
+    polsci-resilience-signals, polsci-regional-analysis.</p>
+    <p><strong>Wing 4 — Complex Plane Framework: Mathematical
+    Formalization</strong> The formal mathematical content of Module 4:
+    z(t) = R(t) + i·X(t); the complex modulus as stability measure; the
+    phase angle as the gap between experience and institution; attractor
+    basin typology; Euler’s formula and The Space Between connection;
+    Lyapunov stability and political systems. This wing bridges directly
+    to the Mathematics Department’s Complex Analysis wing. Key concepts:
+    polsci-complex-plane-political, polsci-phase-angle-interpretation,
+    polsci-attractor-typology, polsci-euler-political.</p>
+    <p><strong>Wing 5 — Integration: Cross-Departmental
+    Synthesis</strong> The integrative content of this module: how the
+    five research modules map onto the College’s cross-departmental
+    architecture; the rosetta panel system; primary text relationships;
+    data source architecture. This wing is meta-departmental: it
+    documents the department’s relationships rather than its primary
+    content. Key concepts: polsci-integration-mapping,
+    polsci-rosetta-architecture, polsci-cross-links.</p>
+    <h3 id="entry-point-and-learning-arcs">1.3 Entry Point and Learning
+    Arcs</h3>
+    <p><strong>Entry point:</strong> <code>polsci-system-dynamics</code>
+    — What is a political system and why does systems theory matter for
+    analyzing it. This concept is maximally accessible (no mathematical
+    prerequisites), introduces the central vocabulary, and creates
+    forward dependencies to all five wings.</p>
+    <p><strong>Learning Arc A — The Quantitative Track:</strong>
+    <code>polsci-system-dynamics</code> →
+    <code>polsci-complexity-foundations</code> →
+    <code>polsci-vdem-methodology</code> →
+    <code>polsci-erosion-mechanisms</code> →
+    <code>polsci-complex-plane-political</code> →
+    <code>polsci-phase-angle-interpretation</code>. This arc is designed
+    for learners with quantitative backgrounds who want to move quickly
+    to the mathematical framework. Rosetta panels: Python → R → Julia
+    sequence.</p>
+    <p><strong>Learning Arc B — The Historical Track:</strong>
+    <code>polsci-system-dynamics</code> →
+    <code>polsci-westphalian-system</code> →
+    <code>polsci-phase-transitions</code> →
+    <code>polsci-third-wave</code> →
+    <code>polsci-erosion-mechanisms</code> →
+    <code>polsci-resilience-signals</code>. This arc is designed for
+    learners with historical backgrounds approaching political science
+    through narrative and periodization. Cross-links to the History
+    Department’s wings are dense on this arc. Primary texts are
+    introduced early.</p>
+    <p><strong>Learning Arc C — The Philosophy Track:</strong>
+    <code>polsci-system-dynamics</code> →
+    <code>polsci-power-theory</code> → [Philosophy Department: social
+    contract concepts] → <code>polsci-erosion-mechanisms</code> →
+    [Philosophy Department: ethics of governance] →
+    <code>polsci-resilience-signals</code>. This arc moves through the
+    Philosophy Department’s social contract and ethics wings before
+    returning to the empirical content of Wing 3. Locke, Rousseau, and
+    Kant excerpts are central texts on this arc.</p>
+    <p><strong>Learning Arc D — The Mathematical Deep Dive:</strong>
+    <code>polsci-complexity-foundations</code> →
+    <code>polsci-attractor-basins</code> → [Mathematics Department:
+    complex numbers] → <code>polsci-complex-plane-political</code> →
+    [Mathematics Department: Euler’s formula] →
+    <code>polsci-phase-angle-interpretation</code> →
+    <code>polsci-attractor-typology</code>. This arc requires the
+    Mathematics Department’s Complex Analysis wing as a co-requisite and
+    produces the deepest engagement with the formal framework.</p>
+    <hr />
+    <h2 id="rosetta-panel-design">2. Rosetta Panel Design</h2>
+    <p>The Rosetta Core architecture requires every department concept
+    to be expressed in at least 3 computational languages across 3
+    paradigms. The Political Science / History department uses four
+    languages, each chosen for its ecological fitness for a different
+    analytical task within the research mission.</p>
+    <h3 id="python-political-data-analysis">2.1 Python: Political Data
+    Analysis</h3>
+    <p><strong>Paradigm role:</strong> General-purpose data analysis;
+    network analysis; information environment modeling.</p>
+    <p><strong>Primary libraries:</strong> <code>pandas</code> (data
+    manipulation and V-Dem/IDEA dataset handling), <code>networkx</code>
+    (political actor networks, influence mapping),
+    <code>matplotlib</code> / <code>seaborn</code> (visualization of
+    democracy indices over time), <code>numpy</code> (numerical
+    computation for complex number representations).</p>
+    <p><strong>Core panel concepts:</strong></p>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Panel concept: Loading and analyzing V-Dem country-year data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># V-Dem Liberal Democracy Index time series — US case</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>vdem <span class="op">=</span> pd.read_csv(<span class="st">&#39;vdem_v14.csv&#39;</span>, low_memory<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>us <span class="op">=</span> vdem[vdem[<span class="st">&#39;country_name&#39;</span>] <span class="op">==</span> <span class="st">&#39;United States of America&#39;</span>][</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&#39;year&#39;</span>, <span class="st">&#39;v2x_libdem&#39;</span>, <span class="st">&#39;v2x_polyarchy&#39;</span>, <span class="st">&#39;v2x_civlib&#39;</span>]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>].copy()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># The real component: institutional democracy level</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>us[<span class="st">&#39;R_t&#39;</span>] <span class="op">=</span> us[<span class="st">&#39;v2x_libdem&#39;</span>]</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Approximate imaginary component from civil liberties index</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># (full imaginary axis requires Pew/WVS survey integration)</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>us[<span class="st">&#39;X_t_proxy&#39;</span>] <span class="op">=</span> us[<span class="st">&#39;v2x_civlib&#39;</span>]</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Complex political state representation</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>us[<span class="st">&#39;z_t&#39;</span>] <span class="op">=</span> us[<span class="st">&#39;R_t&#39;</span>] <span class="op">+</span> <span class="ot">1j</span> <span class="op">*</span> us[<span class="st">&#39;X_t_proxy&#39;</span>]</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>us[<span class="st">&#39;modulus&#39;</span>] <span class="op">=</span> np.<span class="bu">abs</span>(us[<span class="st">&#39;z_t&#39;</span>])</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>us[<span class="st">&#39;phase_angle_deg&#39;</span>] <span class="op">=</span> np.angle(us[<span class="st">&#39;z_t&#39;</span>], deg<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(us[us[<span class="st">&#39;year&#39;</span>] <span class="op">&gt;=</span> <span class="dv">2000</span>][[<span class="st">&#39;year&#39;</span>, <span class="st">&#39;R_t&#39;</span>, <span class="st">&#39;X_t_proxy&#39;</span>, <span class="st">&#39;modulus&#39;</span>, <span class="st">&#39;phase_angle_deg&#39;</span>]])</span></code></pre></div>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Panel concept: Network analysis of autocratization contagion</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Political influence graph: directed edges from major to influenced states</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Edge weights = V-Dem disinformation spread index (v2smgovdom)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>autocratizing <span class="op">=</span> [<span class="st">&#39;Hungary&#39;</span>, <span class="st">&#39;Turkey&#39;</span>, <span class="st">&#39;Serbia&#39;</span>, <span class="st">&#39;Poland (2015-2023)&#39;</span>]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>G.add_nodes_from(autocratizing)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Centrality as proxy for imaginary-axis influence range</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>centrality <span class="op">=</span> nx.betweenness_centrality(G)</span></code></pre></div>
+    <p><strong>Wing alignment:</strong> Python panels are used most
+    densely in Wing 3 (current global state quantitative analysis) and
+    Wing 4 (complex plane numerical computation). The language’s
+    strength in data wrangling and the availability of V-Dem and IDEA
+    datasets as CSV downloads make it the primary data pipeline language
+    for the department.</p>
+    <h3 id="julia-phase-space-and-dynamical-systems">2.2 Julia: Phase
+    Space and Dynamical Systems</h3>
+    <p><strong>Paradigm role:</strong> High-performance numerical
+    computation; dynamical systems modeling; phase portrait
+    visualization; stability analysis.</p>
+    <p><strong>Primary libraries:</strong>
+    <code>DifferentialEquations.jl</code> (ODE/SDE systems for political
+    dynamics), <code>Plots.jl</code> (phase portraits),
+    <code>LinearAlgebra</code> (Jacobian stability analysis),
+    <code>Makie.jl</code> (publication-quality visualization).</p>
+    <p><strong>Core panel concepts:</strong></p>
+    <div class="sourceCode" id="cb4"><pre
+    class="sourceCode julia"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Panel concept: Phase portrait of political system dynamics</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DifferentialEquations</span>, <span class="bu">Plots</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple model: democratic erosion as a dynamical system</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># R(t) = institutional democracy, X(t) = citizen legitimacy experience</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># dR/dt = α·R - β·R·(1 - X)   (institutions erode when legitimacy depleted)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># dX/dt = γ·X - δ·X·(1 - R)   (legitimacy erodes when institutions weaken)</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">democratic_dynamics!</span>(du, u, p, t)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    R, X <span class="op">=</span> u</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    α, β, γ, δ <span class="op">=</span> p</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    du[<span class="fl">1</span>] <span class="op">=</span> α <span class="op">*</span> R <span class="op">-</span> β <span class="op">*</span> R <span class="op">*</span> (<span class="fl">1</span> <span class="op">-</span> X)   <span class="co"># institutional democracy</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    du[<span class="fl">2</span>] <span class="op">=</span> γ <span class="op">*</span> X <span class="op">-</span> δ <span class="op">*</span> X <span class="op">*</span> (<span class="fl">1</span> <span class="op">-</span> R)   <span class="co"># experiential legitimacy</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># US trajectory 2016-2021: α=0.1, β=0.4, γ=0.05, δ=0.2</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span>]</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>u0 <span class="op">=</span> [<span class="fl">0.85</span>, <span class="fl">0.80</span>]   <span class="co"># V-Dem LDI and estimated X(t) at start of period</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>tspan <span class="op">=</span> (<span class="fl">0.0</span>, <span class="fl">5.0</span>)  <span class="co"># 5-year window</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> <span class="fu">ODEProblem</span>(democratic_dynamics!, u0, tspan, p)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> <span class="fu">solve</span>(prob, <span class="fu">Tsit5</span>())</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot phase portrait in the complex plane</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sol, vars<span class="op">=</span>(<span class="fl">1</span>, <span class="fl">2</span>), xlabel<span class="op">=</span><span class="st">&quot;R(t) — Institutional Democracy&quot;</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>     ylabel<span class="op">=</span><span class="st">&quot;X(t) — Citizen Legitimacy Experience&quot;</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>     title<span class="op">=</span><span class="st">&quot;Phase Portrait: Democratic System Trajectory&quot;</span>)</span></code></pre></div>
+    <div class="sourceCode" id="cb5"><pre
+    class="sourceCode julia"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Panel concept: Attractor stability analysis via Jacobian eigenvalues</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">LinearAlgebra</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Jacobian at equilibrium point (consolidated democracy attractor)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">jacobian_at_equilibrium</span>(R_eq, X_eq, α, β, γ, δ)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    J <span class="op">=</span> [α <span class="op">-</span> <span class="fu">β*</span>(<span class="fl">1</span> <span class="op">-</span> X_eq)    β<span class="op">*</span>R_eq;</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>         δ<span class="op">*</span>X_eq               γ <span class="op">-</span> <span class="fu">δ*</span>(<span class="fl">1</span> <span class="op">-</span> R_eq)]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> J</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="fu">jacobian_at_equilibrium</span>(<span class="fl">0.85</span>, <span class="fl">0.80</span>, <span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>eigenvalues <span class="op">=</span> <span class="fu">eigvals</span>(J)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative real parts of all eigenvalues =&gt; stable attractor</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Positive real part =&gt; unstable (saddle point or repeller)</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">&quot;Eigenvalues: &quot;</span>, eigenvalues)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">&quot;Stability: &quot;</span>, <span class="fu">all</span>(<span class="fu">real</span>(λ) <span class="op">&lt;</span> <span class="fl">0</span> <span class="cf">for</span> λ <span class="kw">in</span> eigenvalues) ? <span class="st">&quot;Stable&quot;</span> <span class="op">:</span> <span class="st">&quot;Unstable&quot;</span>)</span></code></pre></div>
+    <p><strong>Wing alignment:</strong> Julia panels are most densely
+    used in Wing 4 (complex plane mathematical framework) and Wing 1
+    (foundations — attractor basin theory). Julia is chosen for its
+    performance on numerical ODE solving, which becomes necessary when
+    modeling multi-country coupled political systems or long historical
+    trajectories.</p>
+    <h3 id="r-statistical-political-science-and-v-dem-tools">2.3 R:
+    Statistical Political Science and V-Dem Tools</h3>
+    <p><strong>Paradigm role:</strong> Statistical inference;
+    V-Dem-native analysis tools; causal inference for political science;
+    regression and panel data methods.</p>
+    <p><strong>Primary libraries:</strong> <code>vdemdata</code>
+    (official V-Dem R package with direct dataset access),
+    <code>democracyData</code> (multiple democracy indices in one
+    interface), <code>tidyverse</code> (data manipulation and
+    visualization), <code>lme4</code> (multilevel models for
+    country-year panel data), <code>MatchIt</code> (propensity score
+    matching for causal inference on democratic outcomes).</p>
+    <p><strong>Core panel concepts:</strong></p>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Panel concept: V-Dem Liberal Democracy Index regional analysis</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vdemdata)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load V-Dem dataset via official package</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>vdem <span class="ot">&lt;-</span> vdem</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Regional LDI trajectories 2000-2024</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>regional_trends <span class="ot">&lt;-</span> vdem <span class="sc">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, e_regionpol_6C) <span class="sc">%&gt;%</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_ldi =</span> <span class="fu">mean</span>(v2x_libdem, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_ldi =</span> <span class="fu">sd</span>(v2x_libdem, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_countries =</span> <span class="fu">n</span>(),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_autocratizing =</span> <span class="fu">sum</span>(v2x_libdem <span class="sc">&lt;</span> <span class="fu">lag</span>(v2x_libdem, <span class="dv">3</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># The 91 vs 88 finding: count regime types in 2024</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>regime_counts_2024 <span class="ot">&lt;-</span> vdem <span class="sc">%&gt;%</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(v2x_regime) <span class="sc">%&gt;%</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">regime_label =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    v2x_regime <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Closed Autocracy&quot;</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    v2x_regime <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Electoral Autocracy&quot;</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    v2x_regime <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Electoral Democracy&quot;</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    v2x_regime <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;Liberal Democracy&quot;</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Panel concept: Modeling democratic resilience with multilevel regression</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Dependent variable: recovery from autocratization episode (binary)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictors: civil society strength, GDP, international anchors, episode duration</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>resilience_model <span class="ot">&lt;-</span> <span class="fu">glmer</span>(</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  recovered <span class="sc">~</span> cs_strength <span class="sc">+</span> log_gdp_pc <span class="sc">+</span> eu_member <span class="sc">+</span> episode_years <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> country) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> start_year_decade),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> autocratization_episodes,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resilience_model)</span></code></pre></div>
+    <p><strong>Wing alignment:</strong> R panels are the primary
+    language for Wing 3 (quantitative global state analysis) and for the
+    department’s data science interface. The <code>vdemdata</code>
+    package provides direct programmatic access to the V-Dem dataset,
+    making R the language of choice for replication of the module’s
+    quantitative findings. Statistical causal inference methods
+    (instrumental variables, difference-in-differences) for political
+    science questions are also natively R-ecologically.</p>
+    <h3 id="sql-historical-event-database-and-idea-indices">2.4 SQL:
+    Historical Event Database and IDEA Indices</h3>
+    <p><strong>Paradigm role:</strong> Structured historical event
+    storage; IDEA indices querying; longitudinal data retrieval;
+    cross-country comparison.</p>
+    <p><strong>Primary schema:</strong> The department’s SQL schema
+    stores four categories of data: (1) country-year democracy index
+    values from all four tracking systems; (2) historical political
+    events at the episode level; (3) IDEA erosion alert records with
+    timestamps and affected institutional categories; (4) cross-country
+    comparison queries for the research mission’s regional analysis.</p>
+    <p><strong>Core panel concepts:</strong></p>
+    <div class="sourceCode" id="cb8"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Panel concept: IDEA erosion alert density analysis</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> idea_erosion_alerts (</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    alert_id        <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    country         TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    alert_date      <span class="dt">DATE</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span>            <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> (<span class="fu">EXTRACT</span>(<span class="dt">YEAR</span> <span class="kw">FROM</span> alert_date)) STORED,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">month</span>           <span class="dt">INTEGER</span> <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> (<span class="fu">EXTRACT</span>(<span class="dt">MONTH</span> <span class="kw">FROM</span> alert_date)) STORED,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    affected_domain TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,  <span class="co">-- judicial, electoral, civil_society, media, executive</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    severity        TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,  <span class="co">-- watch, alert, confirmed</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    notes           TEXT</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">-- The 20-alert finding: Jan-Apr 2025 rate vs. prior years</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> <span class="dt">month</span> <span class="kw">BETWEEN</span> <span class="dv">1</span> <span class="kw">AND</span> <span class="dv">4</span>) <span class="kw">AS</span> alerts_jan_apr,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> alerts_full_year</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> idea_erosion_alerts</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">2021</span> <span class="kw">AND</span> <span class="dv">2025</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">year</span>;</span></code></pre></div>
+    <div class="sourceCode" id="cb9"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Panel concept: Autocratization episode database</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> autocratization_episodes (</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    episode_id      <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    country         TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    start_year      <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    end_year        <span class="dt">INTEGER</span>,           <span class="co">-- NULL if ongoing</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    outcome         TEXT,              <span class="co">-- recovered, consolidated, ongoing</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    peak_ldi        <span class="dt">NUMERIC</span>(<span class="dv">4</span>,<span class="dv">3</span>),      <span class="co">-- highest LDI value at episode start</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    trough_ldi      <span class="dt">NUMERIC</span>(<span class="dv">4</span>,<span class="dv">3</span>),      <span class="co">-- lowest LDI during episode</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    ldi_decline     <span class="dt">NUMERIC</span>(<span class="dv">4</span>,<span class="dv">3</span>) <span class="kw">GENERATED</span> ALWAYS <span class="kw">AS</span> (peak_ldi <span class="op">-</span> trough_ldi) STORED,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    mechanism       TEXT,              <span class="co">-- backsliding, coup, invasion, constitutional</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    international_anchor TEXT          <span class="co">-- eu_member, asean, none, au_member</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">-- V-Dem 76-episode recovery rate analysis</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    outcome,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_episodes,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ROUND</span>(<span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">*</span> <span class="fl">100.0</span> <span class="op">/</span> <span class="fu">SUM</span>(<span class="fu">COUNT</span>(<span class="op">*</span>)) <span class="kw">OVER</span>(), <span class="dv">1</span>) <span class="kw">AS</span> pct,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AVG</span>(end_year <span class="op">-</span> start_year) <span class="kw">AS</span> avg_duration_years,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AVG</span>(ldi_decline) <span class="kw">AS</span> avg_ldi_decline</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> autocratization_episodes</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> end_year <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> outcome;</span></code></pre></div>
+    <div class="sourceCode" id="cb10"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Panel concept: Complex plane coordinates from multi-source data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> complex_plane_coordinates <span class="kw">AS</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    d.country,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    d.<span class="dt">year</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    d.v2x_libdem <span class="kw">AS</span> R_t,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">COALESCE</span>(s.legitimacy_score, d.v2x_civlib) <span class="kw">AS</span> X_t_proxy,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">SQRT</span>(<span class="fu">POWER</span>(d.v2x_libdem, <span class="dv">2</span>) <span class="op">+</span> <span class="fu">POWER</span>(<span class="fu">COALESCE</span>(s.legitimacy_score, d.v2x_civlib), <span class="dv">2</span>)) <span class="kw">AS</span> modulus,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    DEGREES(<span class="fu">ATAN2</span>(<span class="fu">COALESCE</span>(s.legitimacy_score, d.v2x_civlib), d.v2x_libdem)) <span class="kw">AS</span> phase_angle_deg</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> democracy_indices d</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> survey_legitimacy s <span class="kw">ON</span> d.country <span class="op">=</span> s.country <span class="kw">AND</span> d.<span class="dt">year</span> <span class="op">=</span> s.<span class="dt">year</span>;</span></code></pre></div>
+    <p><strong>Wing alignment:</strong> SQL panels serve Wings 2, 3, and
+    the integration function of Wing 5. The historical event database
+    provides the structured storage layer for the episodic history of
+    Module 2; the IDEA indices schema provides the alert tracking
+    infrastructure referenced in Module 3; the complex plane view
+    provides a queryable representation of the mathematical framework
+    from Module 4.</p>
+    <hr />
+    <h2 id="cross-departmental-links">3. Cross-Departmental Links</h2>
+    <h3 id="mathematics-complex-plane-phase-space-attractor-theory">3.1
+    Mathematics: Complex Plane, Phase Space, Attractor Theory</h3>
+    <p><strong>Link type:</strong> Formal bridge</p>
+    <p><strong>Shared concepts:</strong></p>
+    <p>The Mathematics Department’s Complex Analysis wing
+    (<code>.college/departments/mathematics/</code>) provides the
+    foundational mathematical vocabulary on which Wing 4 of this
+    department is built. Specifically:</p>
+    <ul>
+    <li><p><strong>Complex numbers</strong> (math concept:
+    <code>complex-numbers</code>): The political state representation
+    z(t) = R(t) + i·X(t) is an application of complex number arithmetic.
+    The mathematical operations — modulus, argument, conjugate — have
+    direct political interpretations. This concept must be established
+    in the Mathematics Department before it can be applied
+    here.</p></li>
+    <li><p><strong>Euler’s formula</strong> (math concept:
+    <code>euler-formula</code>): The connection between the unit circle
+    of <em>The Space Between</em> and the political complex plane runs
+    through Euler’s formula e^(iθ) = cos θ + i sin θ. A political system
+    on the unit circle (|z| = 1) is in perfect energetic balance between
+    real and imaginary components. Rotation around the unit circle
+    encodes the periodicity of democratic and autocratic cycles — the
+    first, second, and now third waves of democratization and
+    autocratization are rotational structure, not random noise.</p></li>
+    <li><p><strong>Phase space</strong> (math concept: inherited from
+    Calculus wing and complex analysis): The concept of phase space —
+    “all the states the system can possibly occupy over time” — is
+    applied directly in Wings 1 and 4. Attractor basins in the political
+    phase space correspond to stable regime types. The Mathematics
+    Department’s treatment of dynamical systems provides the formal
+    foundation; this department provides the political
+    interpretation.</p></li>
+    </ul>
+    <p><strong>Pedagogical note:</strong> Learners approaching this
+    department through Learning Arc D (mathematical deep dive) should
+    complete the Mathematics Department’s complex analysis wing before
+    Wing 4. Learners approaching through other arcs can engage Wing 4 at
+    a conceptual level without the full mathematical formalism.</p>
+    <p><strong>Active shared concept table:</strong></p>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 29%" />
+    <col style="width: 31%" />
+    <col style="width: 38%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>This Department</th>
+    <th>Mathematics Dept.</th>
+    <th>Shared Formal Object</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>polsci-complex-plane-political</td>
+    <td>complex-numbers</td>
+    <td>z = R + iX arithmetic</td>
+    </tr>
+    <tr>
+    <td>polsci-euler-political</td>
+    <td>euler-formula</td>
+    <td>e^(iθ) = cos θ + i sin θ</td>
+    </tr>
+    <tr>
+    <td>polsci-attractor-typology</td>
+    <td>(future: dynamical systems wing)</td>
+    <td>Lyapunov stability</td>
+    </tr>
+    <tr>
+    <td>polsci-phase-angle-interpretation</td>
+    <td>trigonometric functions</td>
+    <td>arctan(X/R)</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3
+    id="literature-the-hundred-voices-and-historiography-as-genre">3.2
+    Literature: The Hundred Voices and Historiography as Genre</h3>
+    <p><strong>Link type:</strong> Narrative bridge</p>
+    <p><strong>Shared concepts:</strong></p>
+    <p>The Literature Department’s primary contribution to this research
+    mission is through <em>The Hundred Voices</em> — the literary
+    project that spans the same historical arc as Module 2, from the
+    consolidation of the Westphalian state system to the present crisis.
+    The shared concept is not a mathematical object but a structural
+    one: both the historical arc of Module 2 and <em>The Hundred
+    Voices</em> are organized around the same understanding that
+    individual human experience (the imaginary axis) and structural
+    historical forces (the real axis) are simultaneous, interacting, and
+    not reducible to each other.</p>
+    <p><strong>Historiography as genre:</strong> The Literature
+    Department’s treatment of historiography — history writing as a
+    literary form with conventions, rhetorical purposes, and
+    epistemological constraints — connects directly to Wing 2’s
+    engagement with how political history is periodized and narrated.
+    Francis Fukuyama’s “end of history” thesis (discussed in Module 2,
+    Section 2.3.5) is as much a literary event as a political science
+    claim: it deployed the conventions of historical narrative to argue
+    for the closure of historical possibility. Postcolonial theory
+    (Fanon, Said, Spivak) — introduced in Module 2’s decolonization
+    section — is primarily a literature-department intervention into
+    political science, arguing that the dominant historical narratives
+    occlude the imaginary-axis experience of colonized peoples.</p>
+    <p><strong>Cross-link concepts:</strong></p>
+    <ul>
+    <li><code>polsci-westphalian-narrative</code> ↔︎ Literature
+    Department: historiography as genre</li>
+    <li><code>polsci-decolonization-imaginary</code> ↔︎ Literature
+    Department: postcolonial theory (Said, Fanon)</li>
+    <li><code>polsci-third-wave-narrative</code> ↔︎ <em>The Hundred
+    Voices</em>: contemporary historical spans</li>
+    </ul>
+    <p><strong>GSD cross-link:</strong> <em>The Hundred Voices</em> is
+    referenced in <code>.college/polsci-history/gsd-links/</code> as a
+    primary narrative anchor for the historical arc. The mission
+    tracking philosophy (see GSD memory: mission-tracking-philosophy) —
+    sources first, iterative refinement — is itself a
+    literary-historical method applied to research practice.</p>
+    <h3
+    id="philosophy-social-contract-ethics-of-governance-epistemology-of-power">3.3
+    Philosophy: Social Contract, Ethics of Governance, Epistemology of
+    Power</h3>
+    <p><strong>Link type:</strong> Conceptual bridge</p>
+    <p><strong>Shared concepts:</strong></p>
+    <p>The Philosophy Department’s Ethics and Epistemology wings provide
+    the normative and epistemological foundations on which the empirical
+    analysis of this research mission implicitly rests. Political
+    science as practiced in Modules 1–4 makes choices about what counts
+    as democracy, what counts as erosion, and what counts as evidence —
+    all of which are philosophical commitments, not purely empirical
+    ones.</p>
+    <p><strong>Social contract theory:</strong> The primary texts wing
+    of this department (Section 4) anchors the research mission in the
+    canonical political philosophy texts: Locke’s <em>Second Treatise of
+    Government</em>, Rousseau’s <em>Social Contract</em>, and Kant’s
+    <em>Perpetual Peace</em>. These texts are not historical
+    curiosities; they are the conceptual vocabulary through which
+    democratic theory — as codified in V-Dem’s methodology, the
+    Universal Declaration of Human Rights, and the post-1945
+    institutional architecture — still operates. The V-Dem Liberal
+    Democracy Index’s components — civil liberties, rule of law,
+    independent judiciary — are operationalizations of concepts first
+    articulated in social contract theory.</p>
+    <p>The complex-plane framework’s imaginary axis — citizen experience
+    of legitimacy — is a formalization of Rousseau’s <em>volonté
+    générale</em> (general will): the sense in which citizens
+    collectively experience their governance as legitimate or
+    illegitimate, prior to and independently of formal institutional
+    arrangements. This connection is not metaphorical; it is
+    structural.</p>
+    <p><strong>Ethics of governance:</strong> The Philosophy
+    Department’s applied ethics concepts apply directly to the normative
+    questions this research mission raises but does not answer: Is it
+    permissible to describe a government as autocratizing before its
+    formal institutional collapse? What are the obligations of
+    democratic states toward backsliding neighbors? What is the ethics
+    of international democracy promotion? These questions are not within
+    the scope of Modules 1–4, but they are the natural next-step
+    questions that serious engagement with the empirical content
+    generates. The Philosophy Department’s ethics wing is the designated
+    space for them.</p>
+    <p><strong>Epistemology of power:</strong> The Philosophy
+    Department’s epistemology concepts — justified true belief, social
+    epistemology, the epistemics of expert testimony — connect to the
+    research mission’s methodological choices. Why trust V-Dem over EIU
+    when they diverge? How do we know that the Kettering Foundation’s
+    mechanism is correct? What is the epistemological status of the
+    complex-plane framework — is it a description of reality or a useful
+    fiction? These are philosophy-of-social-science questions that Wing
+    1 (foundations) raises and that the Philosophy Department’s
+    epistemology wing addresses.</p>
+    <p><strong>Cross-link concepts:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 34%" />
+    <col style="width: 34%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>This Department</th>
+    <th>Philosophy Dept.</th>
+    <th>Shared Question</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>polsci-vdem-methodology</td>
+    <td>phil-epistemology-expert</td>
+    <td>What justifies privileging specific measurement systems?</td>
+    </tr>
+    <tr>
+    <td>polsci-imaginary-axis-legitimacy</td>
+    <td>phil-social-contract</td>
+    <td>Rousseau’s general will as imaginary axis</td>
+    </tr>
+    <tr>
+    <td>polsci-erosion-mechanisms</td>
+    <td>phil-ethics-governance</td>
+    <td>Normative assessment of backsliding</td>
+    </tr>
+    <tr>
+    <td>polsci-complexity-foundations</td>
+    <td>phil-epistemology-science</td>
+    <td>Status of complex-systems claims in social science</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3
+    id="economics-political-economy-bretton-woods-neoliberalism-and-democracy">3.4
+    Economics: Political Economy, Bretton Woods, Neoliberalism and
+    Democracy</h3>
+    <p><strong>Link type:</strong> Structural bridge</p>
+    <p><strong>Shared concepts:</strong></p>
+    <p>The Economics Department connects to this research mission at
+    multiple points where political and economic systems are
+    structurally entangled — not as background context but as
+    co-determining forces.</p>
+    <p><strong>Bretton Woods as imaginary-axis project:</strong> The
+    1945 reconstruction analyzed in Module 2 (Section 2.3.3) was
+    simultaneously a political architecture (UN Charter, Universal
+    Declaration) and an economic architecture (Bretton Woods — IMF,
+    World Bank, GATT). The economic architecture was designed to solve
+    the problem that the interwar period had revealed: that economic
+    instability (the Great Depression) was the primary driver of the
+    imaginary-axis collapse that preceded fascism. Bretton Woods was an
+    attempt to stabilize the global economic imaginary axis — to ensure
+    that citizens would not again experience economic conditions so
+    destabilizing that they would accept authoritarian alternatives. The
+    Economics Department’s treatment of international monetary systems
+    and the post-war economic order connects directly to Wing 2’s
+    account of the 1945 reconstruction.</p>
+    <p><strong>Neoliberalism and democratic backsliding:</strong> The
+    relationship between neoliberal economic restructuring and
+    democratic erosion is contested in the empirical political science
+    literature. Several accounts of the third wave of autocratization
+    emphasize the role of economic inequality — particularly the extreme
+    wealth concentration that followed the deregulation wave of the
+    1980s–2000s — in generating the citizen grievance that authoritarian
+    populism exploits. Przeworski’s work on economic crisis and
+    democratic transitions (referenced in Module 3) quantifies this
+    relationship. The Economics Department’s treatment of inequality,
+    financialization, and political economy connects these
+    literatures.</p>
+    <p><strong>Political economy of disinformation:</strong> Nearly half
+    of autocratizing governments are actively spreading disinformation,
+    per V-Dem 2025. The economics of disinformation — why it is cheap to
+    produce and expensive to counter; how platform incentive structures
+    amplify it; what the market-failure analysis looks like — connect
+    the Economics Department’s industrial organization and public goods
+    concepts to the mechanism described in Module 3, Section 3.</p>
+    <p><strong>Cross-link concepts:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 34%" />
+    <col style="width: 34%" />
+    <col style="width: 31%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>This Department</th>
+    <th>Economics Dept.</th>
+    <th>Shared Domain</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>polsci-phase-transitions (1945)</td>
+    <td>econ-bretton-woods</td>
+    <td>Post-war economic stabilization as democratic
+    infrastructure</td>
+    </tr>
+    <tr>
+    <td>polsci-erosion-mechanisms</td>
+    <td>econ-inequality-democracy</td>
+    <td>Economic preconditions for populist autocratization</td>
+    </tr>
+    <tr>
+    <td>polsci-imaginary-axis-capture</td>
+    <td>econ-information-markets</td>
+    <td>Market failures in political information environments</td>
+    </tr>
+    <tr>
+    <td>polsci-third-wave</td>
+    <td>econ-neoliberalism</td>
+    <td>Contested relationship between market liberalization and
+    democratic health</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3
+    id="computer-science-complex-adaptive-systems-and-information-environments">3.5
+    Computer Science: Complex Adaptive Systems and Information
+    Environments</h3>
+    <p><strong>Link type:</strong> Systems bridge</p>
+    <p><strong>Shared concepts:</strong></p>
+    <p>The Computer Science Department connects to this research mission
+    through two channels: the formal theory of complex adaptive systems
+    (CAS) — which provides the theoretical underpinning for treating
+    political systems as complex systems — and the empirical study of
+    information environments and their effects on democratic
+    legitimacy.</p>
+    <p><strong>Complex adaptive systems:</strong> The CAS framework —
+    agents, emergence, feedback loops, phase transitions,
+    self-organization — is the formal theoretical home of the political
+    system model developed in this research mission. Political systems
+    are paradigmatic complex adaptive systems: they consist of large
+    numbers of agents (citizens, institutions, leaders) interacting
+    through local rules (laws, norms, incentives) to produce emergent
+    global behavior (regime types, policy outcomes) that is not
+    straightforwardly predictable from the individual-level rules. The
+    Computer Science Department’s treatment of CAS — whether through
+    agent-based modeling, network theory, or formal complexity theory —
+    provides the computational implementation layer for the conceptual
+    framework this department introduces.</p>
+    <p><strong>Information environments and democracy:</strong> The
+    V-Dem finding that nearly half of autocratizing governments are
+    actively spreading disinformation connects directly to the Computer
+    Science Department’s treatment of information environments, platform
+    dynamics, and algorithmic amplification. The mechanism of
+    imaginary-axis capture (Module 3, Section 3) is, in computational
+    terms, an information environment intervention: the autocratizing
+    government changes the epistemic environment in which citizens form
+    beliefs about political normalcy. This is a computer science problem
+    (how do information cascades work; what is the dynamics of belief
+    propagation in social networks) as much as a political science
+    problem.</p>
+    <p><strong>The Rosetta panel architecture itself:</strong> The
+    multi-language, multi-paradigm Rosetta Core that this department
+    uses — expressing every concept in Python, Julia, R, and SQL — is
+    itself a computer science contribution to knowledge architecture.
+    The principle that knowledge gains robustness through expression in
+    multiple computational paradigms parallels Unison’s
+    content-addressed code architecture (referenced in GSD memory:
+    unison-special-focus): knowledge that survives translation across
+    paradigms is more likely to be genuinely structural than knowledge
+    that only survives in one computational language.</p>
+    <p><strong>Cross-link concepts:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 30%" />
+    <col style="width: 41%" />
+    <col style="width: 28%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>This Department</th>
+    <th>Computer Science Dept.</th>
+    <th>Shared Domain</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>polsci-complexity-foundations</td>
+    <td>cs-complex-adaptive-systems</td>
+    <td>Agent-based models of political dynamics</td>
+    </tr>
+    <tr>
+    <td>polsci-imaginary-axis-capture</td>
+    <td>cs-information-environments</td>
+    <td>Disinformation as information-environment engineering</td>
+    </tr>
+    <tr>
+    <td>polsci-rosetta-architecture</td>
+    <td>cs-programming-paradigms</td>
+    <td>Multi-paradigm knowledge expression</td>
+    </tr>
+    <tr>
+    <td>polsci-attractor-typology</td>
+    <td>cs-network-theory</td>
+    <td>Regime type stability as network attractor</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="primary-texts">4. Primary Texts</h2>
+    <p>The department’s <code>texts/primary-sources/</code> directory
+    contains excerpts from the canonical texts of political philosophy
+    that underpin the research mission’s conceptual vocabulary. These
+    texts are not historical background; they are the conceptual
+    infrastructure of the democratic theory that the empirical
+    measurement systems are designed to track.</p>
+    <p><strong>John Locke — <em>Second Treatise of Government</em>
+    (1689)</strong> Key excerpts: Chapter II (the state of nature and
+    natural law as the pre-political baseline — the conceptual origin of
+    the imaginary axis); Chapter VIII (tacit consent and the conditions
+    of political legitimacy — directly connected to the Kettering
+    Foundation’s finding about citizen experiential preferences
+    remaining democratic even under authoritarian conditions); Chapter
+    XIX (the dissolution of government and when revolution is justified
+    — the conceptual framework for the Bangladesh case study in Module
+    3).</p>
+    <p><strong>Jean-Jacques Rousseau — <em>The Social Contract</em>
+    (1762)</strong> Key excerpts: Book I, Chapter 6 (the social contract
+    itself — the formalization of collective political commitment that
+    the imaginary axis represents); Book II, Chapter 3 (the general will
+    versus the will of all — the distinction between structural citizen
+    preference for democratic governance and what citizens can be
+    induced to express or accept in a captured information environment);
+    Book III, Chapter 18 (the abuse of government — the sequence of
+    institutional degradation that Module 3’s mechanism describes).</p>
+    <p><strong>Immanuel Kant — <em>Perpetual Peace</em> (1795)</strong>
+    Key excerpts: First Definitive Article (republican constitution as
+    the structural precondition for peace — the real-axis institutional
+    requirement); Second Definitive Article (the law of peoples as
+    international institutional anchor — the external anchor effect
+    documented in Module 3’s resilience analysis); First Supplement (the
+    guarantee of perpetual peace through natural mechanism — a
+    proto-complex-systems argument that well-designed political
+    institutions tend toward stable equilibria).</p>
+    <p><strong>Reading protocol:</strong> These texts are read in this
+    department not as objects of textual interpretation (that is the
+    Literature Department’s function) but as conceptual sources for the
+    vocabulary that contemporary political science operationalizes. The
+    goal is to trace the lineage of current measurement concepts back to
+    their philosophical origins — to understand why V-Dem measures what
+    it measures by understanding what Locke and Rousseau thought they
+    were theorizing.</p>
+    <hr />
+    <h2 id="data-sources-in-the-department-archive">5. Data Sources in
+    the Department Archive</h2>
+    <p>The department’s <code>texts/data-sources/</code> directory
+    archives the primary data sources for the research mission, with
+    documentation sufficient to enable replication of the module’s
+    quantitative findings.</p>
+    <p><strong>V-Dem Codebook (Version 14, 2025)</strong> The V-Dem
+    codebook is the methodological specification for the Varieties of
+    Democracy dataset — the world’s most comprehensive democracy
+    measurement project, covering 31 million data points, 202 countries,
+    from 1789 to the present, produced by 4,000+ country experts and a
+    core team at the University of Gothenburg. The codebook documents:
+    the conceptualization of each of V-Dem’s five democracy principles
+    (electoral, liberal, participatory, deliberative, egalitarian); the
+    measurement methodology (expert surveys with Bayesian statistical
+    aggregation); the index construction formulas; the confidence
+    intervals for each indicator; and the codebook’s own epistemological
+    limitations.</p>
+    <p>Key indicators for this research mission: <code>v2x_libdem</code>
+    (Liberal Democracy Index — the primary real-axis measure);
+    <code>v2x_civlib</code> (Civil Liberties Index — proxy for imaginary
+    axis); <code>v2x_polyarchy</code> (Electoral Democracy Index);
+    <code>v2smgovdom</code> (government disinformation indicator);
+    <code>v2cseeorgs</code> (civil society organizational power).</p>
+    <p><strong>International IDEA Global State of Democracy Indices
+    (Version 9)</strong> The IDEA GSoD indices cover 173 countries from
+    1975 to 2024 across five attributes of democracy (Representation,
+    Rights, Rule of Law, Participation, Administration). The Version 9
+    release corresponds to the 2025 annual report. The IDEA dataset is
+    distinct from V-Dem in its use of aggregated factual data (election
+    results, judicial independence rulings, press freedom records)
+    rather than expert surveys — making it methodologically
+    complementary. Where V-Dem and IDEA agree, the signal is robust;
+    where they diverge, the divergence is itself informative about
+    measurement assumptions.</p>
+    <p>The erosion alert system is documented in the GSoD methodology:
+    alerts are triggered when a country’s indicator scores cross a
+    defined threshold in a negative direction within a rolling 5-year
+    window. The 20 alerts in January–April 2025 referenced in Module 3
+    are drawn from this system.</p>
+    <p><strong>EIU Democracy Index 2024</strong> The Economist
+    Intelligence Unit’s Democracy Index covers 167 countries across five
+    categories: electoral process and pluralism, functioning of
+    government, political participation, political culture, and civil
+    liberties. The EIU is notable for its regime type classification
+    (full democracy, flawed democracy, hybrid regime, authoritarian
+    regime), which provides a categorical rather than continuous measure
+    — useful for the attractor basin interpretation of the complex
+    plane.</p>
+    <p>The global average score of 5.17/10 and the 6.6% population in
+    full democracies are EIU 2024 headline findings. The EIU’s
+    methodology relies more heavily on analyst judgment than V-Dem or
+    IDEA, which creates both flexibility (it can incorporate recent
+    events quickly) and limitations (analyst subjectivity is harder to
+    calibrate).</p>
+    <hr />
+    <h2 id="gsd-cross-links">6. GSD Cross-Links</h2>
+    <p>The department maintains explicit cross-references to the broader
+    GSD project context in
+    <code>.college/polsci-history/gsd-links/</code>. These references
+    locate the research mission within the living research program of
+    which it is a part.</p>
+    <p><strong>The Space Between (Artemis II mission subtitle)</strong>
+    The subtitle “The Space Between the Moon and the Earth” gives the
+    Artemis II mission its mathematical theme: the space between is the
+    complex plane itself — the region of numbers that are neither purely
+    real nor purely imaginary. The political complex plane z(t) = R(t) +
+    i·X(t) is a formalization of the space between institutional reality
+    (real axis) and lived experience (imaginary axis). The mathematics
+    of The Space Between — Euler’s formula, the unit circle, complex
+    modulus — are applied directly in Module 4 of this research mission.
+    The cross-link is explicit and structural, not decorative.</p>
+    <p><strong>The Hundred Voices</strong> <em>The Hundred Voices</em>
+    is the literary project spanning the same historical arc as Module
+    2: from the consolidation of the Westphalian state system to the
+    contemporary backsliding crisis. The hundred voices are the
+    imaginary axis made narrative — the individual human experiences of
+    political systems across the phases analyzed in Module 2. Where
+    Module 2 maps the trajectory of political systems in the complex
+    plane, <em>The Hundred Voices</em> maps the trajectory of those who
+    live inside them. The cross-link between this research mission and
+    <em>The Hundred Voices</em> is a bridge between the quantitative and
+    the narrative — between the real and imaginary axes in a different
+    sense than the mathematical one.</p>
+    <p><strong>Artemis II research program philosophy</strong> The
+    mission tracking philosophy (sources-first research, iterative
+    refinement, reusable methodology for future missions) governs how
+    this research mission was conducted. The department’s
+    <code>gsd-links/</code> directory documents the methodological
+    commitments that connect this mission to the broader research
+    program: the commitment to primary sources over secondary synthesis;
+    the iterative refinement of modules through feedback; the explicit
+    tracking of what is not yet known; the reusability of the
+    department’s wings and rosetta panels for future political science
+    research missions.</p>
+    <hr />
+    <h2 id="sources">7. Sources</h2>
+    <h3 id="department-architecture-references">Department Architecture
+    References</h3>
+    <ul>
+    <li>V-Dem Institute. <em>Codebook: Varieties of Democracy
+    (V-Dem)</em>, Version 14. University of Gothenburg, 2025.</li>
+    <li>International IDEA. <em>Global State of Democracy Indices</em>,
+    Version 9. Stockholm, 2025.</li>
+    <li>Economist Intelligence Unit. <em>Democracy Index 2024: Living in
+    a Flawed Democracy</em>. London, 2024.</li>
+    </ul>
+    <h3 id="primary-texts-cited">Primary Texts Cited</h3>
+    <ul>
+    <li>Locke, J. <em>Second Treatise of Government</em>. 1689. Ed. C.B.
+    Macpherson. Hackett, 1980.</li>
+    <li>Rousseau, J.-J. <em>The Social Contract</em>. 1762. Trans.
+    Maurice Cranston. Penguin, 1968.</li>
+    <li>Kant, I. <em>Perpetual Peace: A Philosophical Sketch</em>. 1795.
+    Trans. Ted Humphrey. Hackett, 1983.</li>
+    </ul>
+    <h3 id="complex-adaptive-systems">Complex Adaptive Systems</h3>
+    <ul>
+    <li>Holland, J.H. <em>Hidden Order: How Adaptation Builds
+    Complexity</em>. Addison-Wesley, 1995.</li>
+    <li>Cairney, P. “Complexity Theory in Political Science and Public
+    Policy.” <em>Political Studies Review</em> 10(3), 2012.</li>
+    <li>Autioniemi, J. and Jalonen, H. “A Complexity Theory Perspective
+    on Politico-Administrative Systems.” <em>International Public
+    Management Journal</em>, 2024.</li>
+    </ul>
+    <h3 id="cross-departmental-sources">Cross-Departmental Sources</h3>
+    <ul>
+    <li>Fanon, F. <em>The Wretched of the Earth</em>. 1961. Trans.
+    Richard Philcox. Grove Press, 2004. [Literature bridge: postcolonial
+    imaginary axis]</li>
+    <li>Said, E. <em>Orientalism</em>. Pantheon Books, 1978. [Literature
+    bridge: narrative and power]</li>
+    <li>Polanyi, K. <em>The Great Transformation</em>. Farrar &amp;
+    Rinehart, 1944. [Economics bridge: market society and political
+    legitimacy]</li>
+    <li>Mazzucato, M. <em>The Entrepreneurial State</em>. Anthem Press,
+    2013. [Economics bridge: political economy of innovation and
+    democracy]</li>
+    </ul>
+    <h3 id="cross-module-references">Cross-Module References</h3>
+    <ul>
+    <li><strong>Module 3</strong> (Current Global State): Quantitative
+    indicators, V-Dem/IDEA/EIU data referenced in Rosetta SQL panel
+    schema.</li>
+    <li><strong>Module 4</strong> (Mathematical Framework): Complex
+    plane formalization applied in Julia and Python rosetta panels.</li>
+    <li><strong>The Space Between</strong>: Euler’s formula connection
+    documented in
+    <code>.college/polsci-history/gsd-links/space-between.md</code>.</li>
+    </ul>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to PSC Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/PSC/">tibsfox.com/Research/PSC</a>
+    </div>
+</body>
+</html>

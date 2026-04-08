@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta Integration &mdash; C++ and Object-Oriented Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cpp">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">Cross-Language Translation &mdash; C++ in Context of C, Rust, Java, Python, Go, and the Escalation Ladder</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="oop.html">OOP</a>
+      <a href="templates.html">Templates</a>
+      <a href="stdlib.html">STL</a>
+      <a href="modern.html">Modern C++</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      C++ sits at the pivot of the escalation ladder &mdash; high enough to model the problem domain in classes, low enough to count cache lines. Every other language in this table is defined, in part, by its answer to some question C++ already has an answer for.
+    </blockquote>
+
+    <h2>The Escalation Ladder Revisited</h2>
+    <p>From the PRL research project&rsquo;s opening quote, the sysadmin&rsquo;s escalation ladder:</p>
+
+    <div class="escalation-ladder" style="border: 2px solid var(--cpp-indigo); background: linear-gradient(180deg, var(--cpp-indigo-light), var(--cpp-steel-light));">
+      <ol>
+        <li><strong>Bash</strong> &mdash; pipes, loops, one-liners. Glue at the shell level.</li>
+        <li><strong>Perl / Python</strong> &mdash; dynamic languages. Real data structures, proper regex, libraries. See <a href="../PRL/index.html">PRL</a>, <a href="../SNK/index.html">SNK</a>.</li>
+        <li><strong>C</strong> &mdash; systems programming. No runtime, close to the metal. See <a href="../CEE/index.html">CEE</a>.</li>
+        <li><strong>C++</strong> &mdash; <em>where objects meet the metal</em>. Full OOP, generics, templates, zero-overhead abstractions, <em>and</em> everything C gives you.</li>
+        <li><strong>Assembly</strong> &mdash; when C++ is too abstract. Boot loaders, interrupt handlers, SIMD optimization.</li>
+        <li><strong>Machine Code / Microcode</strong> &mdash; patching binaries, firmware.</li>
+        <li><strong>Mathematics</strong> &mdash; define the problem formally.</li>
+        <li><strong>Philosophy</strong> &mdash; what <em>is</em> the problem?</li>
+        <li><strong>Ask Your Sysadmin</strong> &mdash; &ldquo;Hey Foxy? Can you fix this? ^.^&rdquo;</li>
+      </ol>
+    </div>
+
+    <p>C++ is the rung where two questions meet: &ldquo;can I model this problem as objects?&rdquo; and &ldquo;can I afford <em>any</em> runtime overhead?&rdquo; If both answers matter, C++ is often the only option that doesn&rsquo;t force you to compromise one for the other.</p>
+
+    <h2>Cross-Language Comparison</h2>
+    <table>
+      <thead><tr><th>Language</th><th>Type system</th><th>Memory</th><th>OOP model</th><th>Runtime</th></tr></thead>
+      <tbody>
+        <tr><td><strong>C++</strong></td><td>Static, strong, nominal, generics</td><td>Manual + RAII + smart pointers</td><td>Class-based, multiple inheritance, virtual + templates</td><td>None (ahead-of-time to native)</td></tr>
+        <tr><td><strong>C</strong></td><td>Static, weak, structural</td><td>Manual (<code>malloc</code>/<code>free</code>)</td><td>None (structs + function pointers)</td><td>None</td></tr>
+        <tr><td><strong>Rust</strong></td><td>Static, strong, affine, generics + traits</td><td>Ownership + borrow checker</td><td>Trait-based (no inheritance)</td><td>None</td></tr>
+        <tr><td><strong>Java</strong></td><td>Static, strong, nominal, generics (erased)</td><td>Garbage collected</td><td>Class-based, single inheritance + interfaces</td><td>JVM</td></tr>
+        <tr><td><strong>C#</strong></td><td>Static, strong, nominal, generics (reified)</td><td>Garbage collected</td><td>Class-based, single inheritance + interfaces</td><td>.NET CLR</td></tr>
+        <tr><td><strong>Go</strong></td><td>Static, strong, structural, generics (since 1.18)</td><td>Garbage collected</td><td>Structural (no inheritance)</td><td>Goroutine runtime</td></tr>
+        <tr><td><strong>Python</strong></td><td>Dynamic, strong, duck-typed + hints</td><td>Reference counted + GC</td><td>Class-based, multiple inheritance (MRO)</td><td>CPython VM</td></tr>
+        <tr><td><strong>Swift</strong></td><td>Static, strong, nominal, generics + protocols</td><td>ARC (automatic reference counting)</td><td>Class-based + protocol-oriented</td><td>Swift runtime</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Same Program, Different Languages &mdash; A Class with Polymorphism</h2>
+
+    <h3>C++</h3>
+<pre><code>#include &lt;memory&gt;
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+
+class Shape {
+public:
+    virtual ~Shape() = default;
+    virtual double area() const = 0;
+};
+
+class Circle : public Shape {
+    double r_;
+public:
+    explicit Circle(double r) : r_(r) {}
+    double area() const override { return 3.14159 * r_ * r_; }
+};
+
+int main() {
+    std::vector&lt;std::unique_ptr&lt;Shape&gt;&gt; shapes;
+    shapes.push_back(std::make_unique&lt;Circle&gt;(2.0));
+    for (const auto&amp; s : shapes)
+        std::cout &lt;&lt; s-&gt;area() &lt;&lt; '\n';
+}</code></pre>
+
+    <h3>Rust (trait-based, no inheritance)</h3>
+<pre><code>trait Shape {
+    fn area(&amp;self) -&gt; f64;
+}
+
+struct Circle { r: f64 }
+impl Shape for Circle {
+    fn area(&amp;self) -&gt; f64 { 3.14159 * self.r * self.r }
+}
+
+fn main() {
+    let shapes: Vec&lt;Box&lt;dyn Shape&gt;&gt; = vec![Box::new(Circle { r: 2.0 })];
+    for s in &amp;shapes { println!("{}", s.area()); }
+}</code></pre>
+
+    <h3>Java</h3>
+<pre><code>abstract class Shape { abstract double area(); }
+class Circle extends Shape {
+    private final double r;
+    Circle(double r) { this.r = r; }
+    @Override double area() { return 3.14159 * r * r; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;Shape&gt; shapes = List.of(new Circle(2.0));
+        for (Shape s : shapes) System.out.println(s.area());
+    }
+}</code></pre>
+
+    <h3>Python</h3>
+<pre><code>class Shape:
+    def area(self): raise NotImplementedError
+
+class Circle(Shape):
+    def __init__(self, r): self.r = r
+    def area(self): return 3.14159 * self.r * self.r
+
+shapes = [Circle(2.0)]
+for s in shapes:
+    print(s.area())</code></pre>
+
+    <h2>C vs C++ &mdash; The Substrate and Its Refinement</h2>
+    <p>C++ is famously described as &ldquo;a better C.&rdquo; The truth is more interesting: the two languages share a substrate (syntax, preprocessor, type system foundations, ABI) but diverge wildly in their idioms:</p>
+
+    <table>
+      <thead><tr><th>Concept</th><th>C idiom</th><th>C++ idiom</th></tr></thead>
+      <tbody>
+        <tr><td>Memory management</td><td><code>malloc</code> / <code>free</code></td><td>RAII, smart pointers, containers</td></tr>
+        <tr><td>Encapsulation</td><td>Opaque structs in header, static functions in .c</td><td><code>private</code> class members</td></tr>
+        <tr><td>Polymorphism</td><td>Function pointer tables in structs</td><td>Virtual functions + vtables (or templates)</td></tr>
+        <tr><td>Generics</td><td>Macros, <code>void*</code>, <code>_Generic</code> (C11)</td><td>Templates with type safety</td></tr>
+        <tr><td>Error handling</td><td>Return codes, errno</td><td>Exceptions or <code>std::expected</code></td></tr>
+        <tr><td>String handling</td><td><code>char*</code>, <code>strcpy</code>, manual length</td><td><code>std::string</code>, <code>std::string_view</code></td></tr>
+        <tr><td>Dynamic arrays</td><td>Pointer + size + capacity, manual realloc</td><td><code>std::vector</code></td></tr>
+        <tr><td>Hash maps</td><td>None in the standard library; roll your own or use a library</td><td><code>std::unordered_map</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2>C++ vs Rust &mdash; The Modern Challenger</h2>
+    <div class="card">
+      <p>Rust (Mozilla, 2010) is the language C++ is most actively measuring itself against in the 2020s. The key Rust innovation is the <strong>borrow checker</strong> &mdash; a compile-time alias-and-lifetime analysis that prevents data races and use-after-free at the type level, without a runtime. C++ has no equivalent; its answer is <strong>discipline plus RAII plus sanitizers plus Safety Profiles</strong>.</p>
+      <p>Where Rust wins: the borrow checker rules out entire categories of bugs; <code>Cargo</code> makes dependency management painless; error messages are better; the culture is safety-first by default.</p>
+      <p>Where C++ still wins: 40+ years of libraries, ABI stability, template metaprogramming expressiveness, multi-paradigm flexibility (you can write C-style code when you want to), presence in every major industry and codebase, and the ability to optimize at the level of individual cache lines.</p>
+      <p>Many projects are starting as <strong>interop</strong>: new Rust code at the edges of existing C++ codebases (Firefox, Chromium, Linux kernel since 6.1, parts of Windows kernel).</p>
+    </div>
+
+    <h2>C++ vs Python &mdash; The Scientific Stack Mirror</h2>
+    <p>Python dominates data science, machine learning, and scientific computing &mdash; but <em>the heavy lifting is C++</em>. NumPy&rsquo;s ndarray is C. SciPy wraps Fortran and C. PyTorch and TensorFlow are <em>C++</em> libraries with Python bindings. This two-language pattern is so pervasive it has a name: &ldquo;the two-language problem.&rdquo; Python gives you interactivity, exploration, and glue; C++ gives you the kernels that actually run the work.</p>
+
+    <p>See <a href="../SNK/index.html">SNK &mdash; The Snake (Python)</a> for the full story on how Python built on top of C and C++.</p>
+
+    <h2>&ldquo;How Did They Do It in C++?&rdquo; &mdash; The Cookbook Method</h2>
+    <p>From the PRL research project: CPAN serves as a <strong>cookbook</strong> for Perl. You find a similar problem, read the source, adapt it. C++ has the same practice through:</p>
+
+    <ul>
+      <li><strong>Boost</strong> (boost.org) &mdash; decades of idiomatic C++, the library incubator for the standard</li>
+      <li><strong>cppreference.com</strong> &mdash; searchable canonical reference with worked examples</li>
+      <li><strong>GitHub</strong> &mdash; the world&rsquo;s largest open-source C++ corpus</li>
+      <li><strong>Compiler Explorer</strong> &mdash; paste code, see assembly output, verify the optimizer is doing what you expect</li>
+      <li><strong>C++ Core Guidelines</strong> &mdash; Stroustrup and Sutter&rsquo;s living canon of &ldquo;is this idiom recommended?&rdquo;</li>
+    </ul>
+
+    <h2>When to Reach for C++</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Yes, use C++</h4>
+        <p>Performance-critical work where runtime overhead matters. Game engines. Browsers. Databases. HFT. Scientific kernels. Embedded with enough ROM. When you want OOP <em>and</em> you want to count cache lines.</p>
+      </div>
+      <div class="pillar">
+        <h4>Maybe use C++</h4>
+        <p>Desktop applications. System services. CLI tools that must be fast. Numerical libraries with Python bindings. Anything where the deployment story tolerates a native binary.</p>
+      </div>
+      <div class="pillar">
+        <h4>Probably use something else</h4>
+        <p>Web services (Go, Rust, Java). Scripts (Python, Perl). Prototypes (Python). New memory-safety-critical greenfield work (Rust). Anywhere the toolchain complexity isn&rsquo;t worth the performance.</p>
+      </div>
+      <div class="pillar">
+        <h4>Do NOT use C++</h4>
+        <p>One-off data processing (Python). Shell glue (bash). A team that won&rsquo;t commit to modern idioms (the language punishes partial buy-in).</p>
+      </div>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>Siblings on the escalation ladder: PRL is dynamic-high-level, CPP is static-low-level</td></tr>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td>C is what C++ compiles down to, conceptually; the ABI is shared</td></tr>
+        <tr><td>SNK</td><td>Python &mdash; The Snake</td><td>The two-language problem: Python the interface, C++ the engine</td></tr>
+        <tr><td>AIH</td><td>AI History</td><td>Every major ML framework is Python-on-top-of-C++</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">C++ Core Language</a></li>
+        <li><a href="oop.html">Object-Oriented C++</a></li>
+        <li><a href="templates.html">Templates &amp; Generic Programming</a></li>
+        <li><a href="stdlib.html">Standard Template Library</a></li>
+        <li><a href="modern.html">Modern C++ (C++11&ndash;26)</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rosetta Integration &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

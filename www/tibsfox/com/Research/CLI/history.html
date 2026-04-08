@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Evolution &mdash; The Art of the CLI &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cli">
+  <header>
+    <h1>$ History &amp; Evolution</h1>
+    <div class="subtitle">foxy@artemis:~/Research/CLI$ history | head -55 # years of commands</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html" class="active">History</a>
+      <a href="shells.html">Shells</a>
+      <a href="scripting.html">Scripting</a>
+      <a href="tools.html">Toolkit</a>
+      <a href="terminal.html">Terminal</a>
+      <a href="culture.html">Culture</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>$</strong> The shell as we know it did not arrive fully formed. It is the product of a lineage that begins with mechanical teletypes clattering at 110 baud, passes through the phosphor glow of DEC's video terminals, and arrives at today's GPU-rendered terminal emulators running shells that manipulate structured data as fluently as plain text.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- TELETYPES                                                     -->
+    <!-- ============================================================ -->
+
+    <h2>1. Teletypes: Where &ldquo;TTY&rdquo; Comes From</h2>
+
+    <p>Before computers had screens, they had teletypes. The Teletype Corporation manufactured electromechanical teleprinters from the 1920s onward, originally for telegraph and Telex networks. When the earliest interactive computers needed a human interface, the teletype was the obvious choice: a mature, mass-produced device for converting between text and electrical signals.</p>
+
+    <p>The <strong>Teletype Model 33 (ASR-33)</strong>, introduced in 1963, became the canonical computer terminal:</p>
+
+    <table>
+      <thead><tr><th>Specification</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Speed</td><td>10 characters/second (110 baud)</td></tr>
+        <tr><td>Character set</td><td>ASCII (7-bit, 128 characters)</td></tr>
+        <tr><td>Paper width</td><td>8.5 inches (80 columns at 10 cpi)</td></tr>
+        <tr><td>Weight</td><td>~35 pounds</td></tr>
+        <tr><td>Cost (1963)</td><td>~$750 ($7,500 in 2025 dollars)</td></tr>
+      </tbody>
+    </table>
+
+    <p>The ASR-33 was the device Ken Thompson and Dennis Ritchie used when they created Unix on the PDP-7 in 1969. Its physical characteristics shaped Unix in ways that persist today:</p>
+
+    <div class="card">
+      <p><strong>Short, lowercase commands</strong> (<code>ls</code>, <code>cp</code>, <code>rm</code>, <code>cat</code>) reflect a world where every character was physically struck by a mechanical typehead.</p>
+      <p><strong>CR+LF.</strong> The carriage physically returned (CR, ASCII 13) and paper advanced (LF, ASCII 10). This is why Windows uses <code>\r\n</code> and Unix uses <code>\n</code> &mdash; Unix assumed a driver that handled the translation.</p>
+      <p><strong>No backspace.</strong> Paper couldn&rsquo;t unprint. The <code>#</code> character was Unix&rsquo;s original erase character, <code>@</code> the kill character &mdash; conventions predating video terminals.</p>
+    </div>
+
+    <p>The abbreviation <strong>tty</strong> entered Unix&rsquo;s DNA from the start. Even in 2026, on a machine that has never been near a teletype, <code>tty</code> returns the pseudo-terminal device name: <code>/dev/pts/3</code>. The kernel&rsquo;s terminal subsystem still implements line discipline, echo, and canonical-mode editing because the abstraction was designed for teletypes, and the abstraction survived.</p>
+
+    <!-- ============================================================ -->
+    <!-- VIDEO TERMINALS                                               -->
+    <!-- ============================================================ -->
+
+    <h2>2. Video Terminals: DEC&rsquo;s Empire</h2>
+
+    <p>The fundamental limitation of the teletype: it could only append. The video display terminal replaced paper with a CRT screen, enabling cursor movement, screen clearing, and full-screen applications.</p>
+
+    <h3>VT52 (1975)</h3>
+    <p>DEC&rsquo;s first widely adopted video terminal. 24 lines, 80 columns. Supported cursor addressing via escape sequences (<code>ESC A</code> = cursor up, <code>ESC H</code> = cursor home). Established the pattern of ESC as a control introducer.</p>
+
+    <h3>VT100 (1978) &mdash; The Standard</h3>
+
+    <table>
+      <thead><tr><th>Specification</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Display</td><td>24 lines &times; 80 columns (132-column mode available)</td></tr>
+        <tr><td>Screen</td><td>12&Prime; monochrome CRT (green or amber phosphor)</td></tr>
+        <tr><td>Processor</td><td>Intel 8080</td></tr>
+        <tr><td>Escape sequences</td><td>ANSI X3.64 compliant</td></tr>
+        <tr><td>Communication</td><td>RS-232, up to 19,200 baud</td></tr>
+        <tr><td>Price (1978)</td><td>~$1,800 ($8,500 in 2025 dollars)</td></tr>
+      </tbody>
+    </table>
+
+    <p>The VT100 was the most influential terminal ever manufactured. It was the first widely available terminal to implement <strong>ANSI X3.64</strong> escape codes. Because the VT100 was so popular, every other manufacturer had to be &ldquo;VT100 compatible,&rdquo; and every terminal emulator written since implements VT100 as its baseline. The 80&times;24 geometry became the de facto standard &mdash; <code>stty size</code> on a fresh terminal: <code>24 80</code>.</p>
+
+    <h3>Later DEC Terminals</h3>
+    <table>
+      <thead><tr><th>Model</th><th>Year</th><th>Key Addition</th></tr></thead>
+      <tbody>
+        <tr><td>VT220</td><td>1983</td><td>8-bit character support, user-defined keys</td></tr>
+        <tr><td>VT320</td><td>1987</td><td>Multiple sessions, enhanced character sets</td></tr>
+        <tr><td>VT420</td><td>1990</td><td>Final refinements; hardware terminals dying</td></tr>
+      </tbody>
+    </table>
+
+    <p>Other notable terminals: <strong>Wyse 50/60</strong> (corporate standard), <strong>Televideo 925/950</strong> (business), <strong>IBM 3270</strong> (block-mode mainframe terminal), <strong>Heathkit H19</strong> (VT52-compatible kit terminal).</p>
+
+    <!-- ============================================================ -->
+    <!-- 80 COLUMNS                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>3. The 80-Column Standard</h2>
+
+    <div class="card">
+      <p><strong>1928:</strong> IBM&rsquo;s 80-column punch card (Herman Hollerith&rsquo;s revised format) &mdash; 12 rows &times; 80 columns, one character per column. Billions manufactured. Buildings designed around them.</p>
+      <p><strong>1978:</strong> The VT100 defaulted to 80 columns. Programs expecting 80-column card input got 80-column terminal output. FORTRAN assumed 80 columns (1-5 labels, 6 continuation, 7-72 code, 73-80 sequence). COBOL used all 80.</p>
+      <p><strong>2026:</strong> PEP 8 recommends 79 characters. The Linux kernel style guide recommends 80. Go&rsquo;s <code>gofmt</code> naturally produces short lines. The standard relaxes to 100-120 in many guides, but 80 remains the gravitational center.</p>
+    </div>
+
+    <h3>40 Columns: The Home Computer Aesthetic</h3>
+    <table>
+      <thead><tr><th>System</th><th>Columns</th><th>Year</th></tr></thead>
+      <tbody>
+        <tr><td>Apple II</td><td>40</td><td>1977</td></tr>
+        <tr><td>Commodore PET</td><td>40</td><td>1977</td></tr>
+        <tr><td>TRS-80 Model I</td><td>64</td><td>1977</td></tr>
+        <tr><td>Atari 800</td><td>40</td><td>1979</td></tr>
+        <tr><td>Commodore 64</td><td>40</td><td>1982</td></tr>
+        <tr><td>IBM PC (CGA)</td><td>40 or 80</td><td>1981</td></tr>
+      </tbody>
+    </table>
+
+    <p>NTSC television bandwidth couldn&rsquo;t cleanly resolve 80 columns at consumer price points. Half the canvas, twice the creativity &mdash; the BBS scene, PETSCII art, and an entire generation learned to code in 40 characters of width.</p>
+
+    <!-- ============================================================ -->
+    <!-- SHELL HISTORY                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>4. The Shell Lineage</h2>
+
+    <h3>Pre-Unix: CTSS and Multics (1963-1965)</h3>
+    <p><strong>CTSS RUNCOM</strong> (1963) at MIT &mdash; the concept of executing stored command sequences. The abbreviation <strong>rc</strong> (&ldquo;run commands&rdquo;) is the direct ancestor of <code>.bashrc</code>.</p>
+    <p><strong>Louis Pouzin</strong> coined &ldquo;shell&rdquo; for the Multics command interpreter: a program that surrounds the kernel like a shell surrounds a nut. The word, and the concept, followed Ken Thompson from Multics to Unix.</p>
+
+    <h3>Thompson Shell (1971)</h3>
+    <p>Ken Thompson&rsquo;s <code>/bin/sh</code> for V1 Unix. ~900 lines of C. Supported I/O redirection (<code>&gt;</code>, <code>&lt;</code>), background execution (<code>&amp;</code>), and &mdash; after Doug McIlroy&rsquo;s insistence &mdash; <strong>pipes</strong> (<code>|</code>, added in V3 Unix, 1973). No variables, no control flow, no scripting. Just commands and pipes.</p>
+
+    <h3>Bourne Shell (1979)</h3>
+    <p><strong>Stephen Bourne</strong>, British computer scientist (PhD from Cambridge on ALGOL 68), at Bell Labs. V7 Unix. The first real scripting language: variables (<code>$HOME</code>), control flow (<code>if/fi</code>, <code>case/esac</code>, <code>for/do/done</code>), here-documents, trap, command substitution. The reversed-keyword delimiters reflected his ALGOL background. Every <code>#!/bin/sh</code> script written in 45 years traces back to Bourne&rsquo;s design.</p>
+
+    <h3>C Shell (1978)</h3>
+    <p><strong>Bill Joy</strong> at UC Berkeley (2BSD). Designed for interactive use: history substitution (<code>!!</code>), aliases, job control (Ctrl-Z, <code>bg</code>, <code>fg</code>). C-like scripting syntax was widely criticized &mdash; Tom Christiansen&rsquo;s &ldquo;Csh Programming Considered Harmful&rdquo; (1995) is gospel: <em>use csh interactively if you like; write scripts in sh.</em></p>
+
+    <h3>KornShell (1983)</h3>
+    <p><strong>David Korn</strong> at Bell Labs. Combined Bourne&rsquo;s scripting with csh&rsquo;s interactive features. First Bourne-compatible shell with command-line editing (emacs and vi modes), coprocesses (<code>|&amp;</code>), associative arrays (ksh93), arithmetic (<code>$(( ))</code>). Default on commercial Unix (AIX, HP-UX, Solaris). POSIX shell standard is essentially &ldquo;ksh88 minus the ksh-specific parts.&rdquo;</p>
+
+    <h3>Bash (1989)</h3>
+    <p><strong>Brian Fox</strong> for the GNU Project, at Richard Stallman&rsquo;s request. Written from scratch (no AT&T code). <strong>Chet Ramey</strong> became sole maintainer in 1994 &mdash; one of the longest single-maintainer tenures in free software. POSIX.2 compliant with GNU extensions. Readline, programmable completion, arrays, process substitution. Default on most Linux distributions. The shell you can count on being present.</p>
+
+    <table>
+      <thead><tr><th>Version</th><th>Year</th><th>Key Additions</th></tr></thead>
+      <tbody>
+        <tr><td>1.0</td><td>1989</td><td>Initial release, Bourne shell compatibility</td></tr>
+        <tr><td>2.0</td><td>1996</td><td>Indexed arrays, <code>select</code>, extended globbing</td></tr>
+        <tr><td>3.0</td><td>2004</td><td><code>=~</code> regex matching in <code>[[ ]]</code></td></tr>
+        <tr><td>4.0</td><td>2009</td><td>Associative arrays, <code>coproc</code>, <code>mapfile</code></td></tr>
+        <tr><td>5.0</td><td>2019</td><td><code>EPOCHSECONDS</code>, <code>BASH_ARGV0</code>, <code>local -</code></td></tr>
+        <tr><td>5.2</td><td>2022</td><td>Latest stable. 33 years of evolution.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Zsh (1990)</h3>
+    <p><strong>Paul Falstad</strong> at Princeton. Named after Zhong Shao&rsquo;s login name. The maximalist shell: extended globbing with qualifiers, spell correction, loadable modules, themeable prompts. <strong>oh-my-zsh</strong> (Robby Russell, 2009) made it mainstream. <strong>Powerlevel10k</strong> (Roman Perepelitsa, 2019) pushed prompt customization to its limit. macOS default since Catalina (2019).</p>
+
+    <h3>Fish (2005)</h3>
+    <p><strong>Axel Liljencrantz</strong>. &ldquo;Finally, a command line shell for the 90s.&rdquo; Syntax highlighting and autosuggestions out of the box. Web-based configuration. Deliberately not POSIX &mdash; the philosophy is that POSIX syntax is a historical accident, not a design ideal. Rewritten in Rust for v4.0 (2024). User-friendly heresy.</p>
+
+    <h3>PowerShell (2006)</h3>
+    <p><strong>Jeffrey Snover</strong> at Microsoft. The <strong>Monad Manifesto</strong> (2002) proposed an object pipeline instead of text. .NET integration. Cross-platform since 2016. A fundamentally different philosophy: structured data instead of text streams.</p>
+
+    <h3>Modern Renaissance (2020s)</h3>
+    <p><strong>Nushell</strong> (structured data tables), <strong>Oil/Oils</strong> (fixing bash&rsquo;s syntax), <strong>Elvish</strong> (functional shell), <strong>Xonsh</strong> (Python + shell hybrid), <strong>Murex</strong> (typed pipelines). The shell is not done evolving.</p>
+
+    <!-- ============================================================ -->
+    <!-- ANSI ESCAPE CODES                                             -->
+    <!-- ============================================================ -->
+
+    <h2>5. ANSI Escape Codes</h2>
+
+    <p>The ANSI X3.64 standard (1979, later ECMA-48) formalized escape sequences for terminal control. Every sequence begins with <code>ESC [</code> (the <strong>Control Sequence Introducer</strong>, CSI):</p>
+
+    <pre>
+ESC[1m     -- bold
+ESC[31m    -- red foreground
+ESC[42m    -- green background
+ESC[0m     -- reset all attributes
+ESC[2J     -- clear entire screen
+ESC[H      -- cursor to home position
+ESC[10;20H -- cursor to row 10, column 20</pre>
+
+    <h3>Color Evolution</h3>
+    <table>
+      <thead><tr><th>Era</th><th>Colors</th><th>Escape Syntax</th></tr></thead>
+      <tbody>
+        <tr><td>Original ANSI</td><td>8 (+ bright variants = 16)</td><td><code>ESC[30-37m</code> / <code>ESC[90-97m</code></td></tr>
+        <tr><td>256-color (xterm)</td><td>256</td><td><code>ESC[38;5;Nm</code> (fg) / <code>ESC[48;5;Nm</code> (bg)</td></tr>
+        <tr><td>True color (24-bit)</td><td>16.7 million</td><td><code>ESC[38;2;R;G;Bm</code></td></tr>
+      </tbody>
+    </table>
+
+    <p>SGR (Select Graphic Rendition) controls bold, italic, underline, strikethrough, blink, reverse video, and colors. The VT100 implemented the standard; every terminal emulator since has followed.</p>
+
+    <!-- ============================================================ -->
+    <!-- TERMCAP/TERMINFO                                              -->
+    <!-- ============================================================ -->
+
+    <h2>6. termcap &rarr; terminfo &rarr; ncurses</h2>
+
+    <p>Not all terminals spoke the same escape dialect. The solution was a database of terminal capabilities:</p>
+
+    <table>
+      <thead><tr><th>System</th><th>Author</th><th>Year</th><th>Format</th></tr></thead>
+      <tbody>
+        <tr><td>termcap</td><td>Bill Joy (UC Berkeley)</td><td>1978</td><td>Text file, capability names</td></tr>
+        <tr><td>terminfo</td><td>Mark Horton (AT&amp;T)</td><td>1981</td><td>Compiled binary, faster lookup</td></tr>
+        <tr><td>ncurses</td><td>Thomas Dickey</td><td>1993</td><td>Library wrapping terminfo</td></tr>
+      </tbody>
+    </table>
+
+    <p>The <code>TERM</code> environment variable tells the curses layer which capabilities to assume. <code>TERM=xterm-256color</code> means: xterm-compatible sequences, 256 colors. Setting it wrong causes visual glitches. This database-of-capabilities pattern &mdash; where programs ask &ldquo;can this terminal do X?&rdquo; instead of assuming &mdash; is why terminal applications work across vastly different environments.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="shells.html">Shells Compared</a></li>
+        <li><a href="scripting.html">Shell Scripting</a></li>
+        <li><a href="tools.html">The Unix Toolkit</a></li>
+        <li><a href="terminal.html">Terminals &amp; Emulators</a></li>
+        <li><a href="culture.html">Culture &amp; Art</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>History &amp; Evolution &middot; The Art of the CLI &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>
