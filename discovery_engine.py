@@ -474,8 +474,9 @@ def run_discovery(sources=None, dry_run=False):
     else:
         print("\nNo new discoveries this run.")
 
-    state['runs'] = state.get('runs', 0) + 1
-    save_state(state)
+    if not dry_run:
+        state['runs'] = state.get('runs', 0) + 1
+        save_state(state)
 
     print(f"\n{'='*40}")
     print(f"Total this run: {len(all_discoveries)} discoveries")
