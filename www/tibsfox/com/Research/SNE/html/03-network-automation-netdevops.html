@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Automation &amp; NetDevOps — SNE Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2236;
+            --accent: #00BFA5;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #40C4FF;
+            --border: #2a3a4a;
+            --primary: #0D47A1;
+            --net: #80DEEA;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(64,196,255,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNE — Systems Network Engineering<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNE Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="network-automation-netdevops">Network Automation &amp;
+    NetDevOps</h1>
+    <blockquote>
+    <p><strong>Domain:</strong> Network Configuration Management,
+    Model-Driven Programmability, and CI/CD for Infrastructure
+    <strong>Module:</strong> 3 – Automation Frameworks, Data Models,
+    Streaming Telemetry, and the NetDevOps Pipeline
+    <strong>Through-line:</strong> <em>A network configured by hand is a
+    network that cannot explain itself. Every CLI session is an
+    unversioned, unreviewed, untested change to production
+    infrastructure. The transformation from CLI to API is not a tooling
+    upgrade – it is the adoption of software engineering discipline in a
+    domain that has historically operated without it. YANG models are
+    the schema. NETCONF and gNMI are the transport. Ansible, NAPALM, and
+    Nornir are the execution engines. Git is the audit trail. Batfish is
+    the compiler. Together they form the stack that makes network
+    changes as reviewable, testable, and reversible as application
+    code.</em></p>
+    </blockquote>
+    <hr />
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ol type="1">
+    <li><a href="#1-the-cli-to-api-transformation">The CLI-to-API
+    Transformation</a></li>
+    <li><a href="#2-ansible-for-network-automation">Ansible for Network
+    Automation</a></li>
+    <li><a href="#3-napalm-vendor-abstraction-layer">NAPALM: Vendor
+    Abstraction Layer</a></li>
+    <li><a href="#4-nornir-python-native-automation">Nornir:
+    Python-Native Automation</a></li>
+    <li><a href="#5-tool-comparison-ansible-vs-napalm-vs-nornir">Tool
+    Comparison: Ansible vs NAPALM vs Nornir</a></li>
+    <li><a href="#6-yang-data-models">YANG Data Models</a></li>
+    <li><a href="#7-netconf-and-restconf">NETCONF and RESTCONF</a></li>
+    <li><a href="#8-gnmi-and-streaming-telemetry">gNMI and Streaming
+    Telemetry</a></li>
+    <li><a href="#9-network-cicd-pipelines">Network CI/CD
+    Pipelines</a></li>
+    <li><a href="#10-config-drift-detection-and-remediation">Config
+    Drift Detection and Remediation</a></li>
+    <li><a href="#11-batfish-pre-deployment-verification">Batfish:
+    Pre-Deployment Verification</a></li>
+    <li><a href="#12-intent-based-networking">Intent-Based
+    Networking</a></li>
+    <li><a href="#13-source-of-truth-netbox-and-nautobot">Source of
+    Truth: NetBox and Nautobot</a></li>
+    <li><a href="#14-infrastructure-as-code-for-networks">Infrastructure
+    as Code for Networks</a></li>
+    <li><a href="#15-the-complete-netdevops-pipeline">The Complete
+    NetDevOps Pipeline</a></li>
+    <li><a href="#16-cross-references">Cross-References</a></li>
+    <li><a href="#17-sources">Sources</a></li>
+    </ol>
+    <hr />
+    <h2 id="the-cli-to-api-transformation">1. The CLI-to-API
+    Transformation</h2>
+    <p>For decades, network engineers configured devices by typing
+    commands into a serial console or SSH session. Each vendor had its
+    own syntax. Cisco IOS commands bore no resemblance to Juniper JunOS
+    commands. Configuration changes were made live, in production, one
+    device at a time, with no version control, no peer review, and no
+    rollback mechanism beyond the engineer’s memory of what was changed
+    [1].</p>
+    <p>The CLI-to-API transformation is the fundamental shift underlying
+    everything in this module. It is not merely a change in tooling – it
+    is the application of software engineering principles to network
+    operations.</p>
+    <h3 id="what-changed">What Changed</h3>
+    <pre><code>THE CLI-TO-API TRANSFORMATION
+================================================================
+
+  BEFORE (CLI Era)                    AFTER (API Era)
+  +----------------------+            +----------------------+
+  | SSH to each device   |            | API call to each     |
+  | Type commands        |            |   device or controller|
+  | Hope syntax is right |            | Structured data in   |
+  | No version control   |            | Version-controlled   |
+  | No peer review       |            | Peer-reviewed configs|
+  | No pre-deploy test   |            | Pre-deploy validated |
+  | Rollback = memory    |            | Rollback = git revert|
+  +----------------------+            +----------------------+
+
+  Key enablers:
+    YANG models    --&gt; Structured schema for configuration
+    NETCONF/gNMI   --&gt; Programmatic transport protocols
+    Ansible/Nornir --&gt; Execution frameworks
+    NAPALM         --&gt; Vendor abstraction
+    Git            --&gt; Version control + audit trail
+    Batfish        --&gt; Pre-deployment verification
+    NetBox         --&gt; Source of truth</code></pre>
+    <p>The transformation happened in stages. First came screen-scraping
+    tools like Expect and RANCID that automated CLI interactions but
+    still treated device output as unstructured text. Then came SNMP for
+    monitoring (but not configuration). NETCONF (RFC 4741, 2006; revised
+    RFC 6241, 2011) introduced structured, transactional configuration
+    management. OpenConfig brought vendor-neutral YANG models. gNMI
+    added high-performance streaming telemetry. Each layer built on the
+    previous one, but the destination was always the same: network
+    configuration as structured, versioned, testable data [2].</p>
+    <h3 id="the-three-layers">The Three Layers</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Layer</th>
+    <th>Old World</th>
+    <th>New World</th>
+    <th>Standard</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Data model</td>
+    <td>Vendor CLI syntax</td>
+    <td>YANG models (RFC 7950)</td>
+    <td>OpenConfig, IETF, vendor-native</td>
+    </tr>
+    <tr>
+    <td>Transport</td>
+    <td>SSH + screen scrape</td>
+    <td>NETCONF, RESTCONF, gNMI</td>
+    <td>RFC 6241, RFC 8040, OpenConfig gNMI</td>
+    </tr>
+    <tr>
+    <td>Execution</td>
+    <td>Manual typing</td>
+    <td>Ansible, Nornir, NAPALM</td>
+    <td>Community frameworks</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="ansible-for-network-automation">2. Ansible for Network
+    Automation</h2>
+    <p>Ansible is the most widely adopted automation framework in
+    network operations. Its appeal lies in the low barrier to entry –
+    playbooks are written in YAML, not Python – and in its agentless
+    architecture, which requires no software installation on managed
+    devices. For network devices that cannot run agents (switches,
+    routers, firewalls), this is a critical requirement [3].</p>
+    <h3 id="connection-plugins">Connection Plugins</h3>
+    <p>Network devices do not run Ansible agents. Instead, Ansible uses
+    connection plugins that speak the device’s native management
+    protocol:</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Connection Plugin</th>
+    <th>Protocol</th>
+    <th>Devices</th>
+    <th>Use Case</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>network_cli</code></td>
+    <td>SSH</td>
+    <td>Cisco IOS/IOS-XE, Arista EOS, Juniper JunOS</td>
+    <td>CLI-based configuration and show commands</td>
+    </tr>
+    <tr>
+    <td><code>netconf</code></td>
+    <td>NETCONF over SSH</td>
+    <td>Juniper JunOS, Cisco IOS-XR, Nokia SR-OS</td>
+    <td>Structured config with YANG models</td>
+    </tr>
+    <tr>
+    <td><code>httpapi</code></td>
+    <td>REST/HTTP</td>
+    <td>Arista EOS (eAPI), Cisco NX-OS (NX-API)</td>
+    <td>API-based devices</td>
+    </tr>
+    <tr>
+    <td><code>local</code></td>
+    <td>SSH (from control node)</td>
+    <td>Legacy devices</td>
+    <td>Fallback for unsupported platforms</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="platform-specific-modules">Platform-Specific Modules</h3>
+    <p>Each vendor platform has a dedicated Ansible collection with
+    modules tailored to that platform’s capabilities:</p>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cisco IOS -- cisco.ios collection</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Configure interface on IOS device</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cisco.ios.ios_config</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">lines</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> description Uplink to Core</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ip address 10.0.1.1 255.255.255.0</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> no shutdown</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">parents</span><span class="kw">:</span><span class="at"> interface GigabitEthernet0/1</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Arista EOS -- arista.eos collection</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Configure BGP on EOS device</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arista.eos.eos_bgp_global</span><span class="kw">:</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">as_number</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;65001&quot;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">router_id</span><span class="kw">:</span><span class="at"> </span><span class="fl">10.0.0.1</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Juniper JunOS -- junipernetworks.junos collection</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Configure interface on JunOS device</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">junipernetworks.junos.junos_config</span><span class="kw">:</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">lines</span><span class="kw">:</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> set interfaces ge-0/0/0 unit 0 family inet address 10.0.1.1/24</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">comment</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Configured by Ansible&quot;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">confirm</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span></code></pre></div>
+    <h3 id="platform-agnostic-modules">Platform-Agnostic Modules</h3>
+    <p>The <code>ansible.netcommon</code> collection provides
+    platform-independent modules that work across any device supporting
+    <code>network_cli</code>:</p>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Works on IOS, EOS, JunOS, NX-OS -- any network_cli device</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run show command on any platform</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ansible.netcommon.cli_command</span><span class="kw">:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> show version</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Push config lines to any platform</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ansible.netcommon.cli_config</span><span class="kw">:</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">    config</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      interface Loopback0</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>       ip address 10.255.0.1 255.255.255.255</span></code></pre></div>
+    <h3 id="network-automation-patterns-in-ansible">Network Automation
+    Patterns in Ansible</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Pattern</th>
+    <th>Module</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Config push</td>
+    <td><code>ios_config</code>, <code>eos_config</code>,
+    <code>junos_config</code></td>
+    <td>Deploy configuration snippets</td>
+    </tr>
+    <tr>
+    <td>Config replace</td>
+    <td><code>junos_config</code> with <code>src</code> and
+    <code>replace: override</code></td>
+    <td>Full config replacement</td>
+    </tr>
+    <tr>
+    <td>Fact gathering</td>
+    <td><code>ios_facts</code>, <code>eos_facts</code>,
+    <code>junos_facts</code></td>
+    <td>Collect device state</td>
+    </tr>
+    <tr>
+    <td>Backup</td>
+    <td><code>ios_config</code> with <code>backup: yes</code></td>
+    <td>Save running config before changes</td>
+    </tr>
+    <tr>
+    <td>Compliance check</td>
+    <td><code>assert</code> module with facts</td>
+    <td>Verify expected state</td>
+    </tr>
+    <tr>
+    <td>Template rendering</td>
+    <td><code>template</code> + <code>ios_config</code></td>
+    <td>Generate config from Jinja2 templates</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="napalm-vendor-abstraction-layer">3. NAPALM: Vendor
+    Abstraction Layer</h2>
+    <p>NAPALM (Network Automation and Programmability Abstraction Layer
+    with Multivendor support) is a Python library that provides a
+    unified API across multiple vendor platforms. Where Ansible requires
+    platform-specific modules (ios_config vs eos_config vs
+    junos_config), NAPALM presents a single interface regardless of the
+    underlying device [4].</p>
+    <h3 id="supported-platforms">Supported Platforms</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Driver</th>
+    <th>Vendor</th>
+    <th>Transport</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>eos</code></td>
+    <td>Arista EOS</td>
+    <td>eAPI (HTTP)</td>
+    <td>Full support</td>
+    </tr>
+    <tr>
+    <td><code>junos</code></td>
+    <td>Juniper JunOS</td>
+    <td>NETCONF</td>
+    <td>Full support</td>
+    </tr>
+    <tr>
+    <td><code>ios</code></td>
+    <td>Cisco IOS/IOS-XE</td>
+    <td>SSH (Netmiko)</td>
+    <td>Full support</td>
+    </tr>
+    <tr>
+    <td><code>iosxr</code></td>
+    <td>Cisco IOS-XR</td>
+    <td>XML agent</td>
+    <td>Full support (legacy) / NETCONF (modern)</td>
+    </tr>
+    <tr>
+    <td><code>nxos</code></td>
+    <td>Cisco NX-OS</td>
+    <td>NX-API (HTTP)</td>
+    <td>Full support</td>
+    </tr>
+    <tr>
+    <td><code>nxos_ssh</code></td>
+    <td>Cisco NX-OS</td>
+    <td>SSH</td>
+    <td>SSH fallback</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="the-napalm-workflow">The NAPALM Workflow</h3>
+    <p>NAPALM’s power lies in its configuration management workflow:
+    load, compare, commit, rollback. This mirrors the transactional
+    model of Juniper JunOS but extends it to platforms (like Cisco IOS)
+    that do not natively support it [5].</p>
+    <pre><code>NAPALM CONFIGURATION WORKFLOW
+================================================================
+
+  1. CONNECT             2. LOAD CANDIDATE
+  +----------+           +------------------+
+  | driver   |           | load_merge_      |
+  | .open()  |----------&gt;| candidate()      |
+  |          |           |   or             |
+  +----------+           | load_replace_    |
+                         | candidate()      |
+                         +--------+---------+
+                                  |
+  3. COMPARE              4a. COMMIT          4b. DISCARD
+  +-----------+           +----------+        +----------+
+  | compare_  |----------&gt;| commit_  |   or   | discard_ |
+  | config()  |           | config() |        | config() |
+  | (diff)    |           |          |        |          |
+  +-----------+           +----------+        +----------+
+                                  |
+                          5. ROLLBACK (if needed)
+                          +----------+
+                          | rollback |
+                          +----------+</code></pre>
+    <h3 id="code-example">Code Example</h3>
+    <div class="sourceCode" id="cb5"><pre
+    class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> napalm <span class="im">import</span> get_network_driver</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to device</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>driver <span class="op">=</span> get_network_driver(<span class="st">&quot;eos&quot;</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> driver(<span class="st">&quot;10.0.1.1&quot;</span>, <span class="st">&quot;admin&quot;</span>, <span class="st">&quot;password&quot;</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>device.<span class="bu">open</span>()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load candidate configuration (merge mode)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>device.load_merge_candidate(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    config<span class="op">=</span><span class="st">&quot;interface Loopback100</span><span class="ch">\n</span><span class="st"> ip address 10.255.100.1/32&quot;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Review the diff before committing</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>diff <span class="op">=</span> device.compare_config()</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diff)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># +interface Loopback100</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># + ip address 10.255.100.1/32</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Commit if diff looks correct</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> diff:</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    device.commit_config()</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    device.discard_config()</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Getter methods -- same API regardless of vendor</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>facts <span class="op">=</span> device.get_facts()</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>interfaces <span class="op">=</span> device.get_interfaces()</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>bgp_neighbors <span class="op">=</span> device.get_bgp_neighbors()</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>arp_table <span class="op">=</span> device.get_arp_table()</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>device.close()</span></code></pre></div>
+    <h3 id="napalm-getter-methods">NAPALM Getter Methods</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Method</th>
+    <th>Returns</th>
+    <th>Cross-Vendor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>get_facts()</code></td>
+    <td>Hostname, vendor, model, OS version, serial, uptime</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td><code>get_interfaces()</code></td>
+    <td>Interface list with speed, status, MAC, description</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td><code>get_bgp_neighbors()</code></td>
+    <td>BGP peer state, AS number, received prefixes</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td><code>get_lldp_neighbors()</code></td>
+    <td>LLDP adjacency table</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td><code>get_arp_table()</code></td>
+    <td>ARP entries (MAC to IP mappings)</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td><code>get_route_to()</code></td>
+    <td>Routing table lookup for specific prefix</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td><code>get_config()</code></td>
+    <td>Running, startup, and candidate configurations</td>
+    <td>Yes</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="nornir-python-native-automation">4. Nornir: Python-Native
+    Automation</h2>
+    <p>Nornir is a pure Python automation framework built by the same
+    team that created NAPALM and Netmiko. Where Ansible uses YAML
+    playbooks and a domain-specific language, Nornir uses Python
+    directly. This makes it dramatically faster (benchmarks show 100x
+    speedup over Ansible for large inventories) and gives engineers full
+    access to Python’s ecosystem for complex logic, error handling, and
+    data manipulation [6].</p>
+    <h3 id="architecture">Architecture</h3>
+    <pre><code>NORNIR ARCHITECTURE
+================================================================
+
+  Inventory                     Task Execution
+  +-----------+                 +---------------------------+
+  | hosts.yaml|                 | ThreadedRunner            |
+  | groups.yaml|  --------&gt;     | (num_workers=20)          |
+  | defaults.yaml|              |                           |
+  +-----------+                 |  Host 1 --&gt; Task --&gt; Result|
+                                |  Host 2 --&gt; Task --&gt; Result|
+  Or: NetBox plugin             |  Host 3 --&gt; Task --&gt; Result|
+  Or: Ansible inventory         |  ...                      |
+  Or: Custom inventory          |  Host N --&gt; Task --&gt; Result|
+                                +---------------------------+
+                                          |
+                                  AggregatedResult
+                                  (per-host results)</code></pre>
+    <h3 id="code-example-1">Code Example</h3>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nornir <span class="im">import</span> InitNornir</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nornir_netmiko.tasks <span class="im">import</span> netmiko_send_command</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nornir_napalm.plugins.tasks <span class="im">import</span> napalm_get</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nornir_utils.plugins.functions <span class="im">import</span> print_result</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize Nornir with inventory</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>nr <span class="op">=</span> InitNornir(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    runner<span class="op">=</span>{<span class="st">&quot;plugin&quot;</span>: <span class="st">&quot;threaded&quot;</span>, <span class="st">&quot;options&quot;</span>: {<span class="st">&quot;num_workers&quot;</span>: <span class="dv">20</span>}},</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    inventory<span class="op">=</span>{</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;plugin&quot;</span>: <span class="st">&quot;SimpleInventory&quot;</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;options&quot;</span>: {</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;host_file&quot;</span>: <span class="st">&quot;inventory/hosts.yaml&quot;</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;group_file&quot;</span>: <span class="st">&quot;inventory/groups.yaml&quot;</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter inventory to specific devices</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>spine_switches <span class="op">=</span> nr.<span class="bu">filter</span>(role<span class="op">=</span><span class="st">&quot;spine&quot;</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Run a task across all filtered hosts (parallel)</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> spine_switches.run(</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    task<span class="op">=</span>netmiko_send_command,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    command_string<span class="op">=</span><span class="st">&quot;show ip bgp summary&quot;</span>,</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>print_result(result)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Use NAPALM through Nornir for vendor-abstracted getters</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>facts <span class="op">=</span> nr.run(task<span class="op">=</span>napalm_get, getters<span class="op">=</span>[<span class="st">&quot;get_facts&quot;</span>, <span class="st">&quot;get_interfaces&quot;</span>])</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>print_result(facts)</span></code></pre></div>
+    <h3 id="inventory-format">Inventory Format</h3>
+    <div class="sourceCode" id="cb8"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hosts.yaml</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spine-01</span><span class="kw">:</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hostname</span><span class="kw">:</span><span class="at"> </span><span class="fl">10.0.0.1</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">platform</span><span class="kw">:</span><span class="at"> eos</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">groups</span><span class="kw">:</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> spine</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">data</span><span class="kw">:</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">site</span><span class="kw">:</span><span class="at"> dc1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">role</span><span class="kw">:</span><span class="at"> spine</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">leaf-01</span><span class="kw">:</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hostname</span><span class="kw">:</span><span class="at"> </span><span class="fl">10.0.0.11</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">platform</span><span class="kw">:</span><span class="at"> ios</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">groups</span><span class="kw">:</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> leaf</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">data</span><span class="kw">:</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">site</span><span class="kw">:</span><span class="at"> dc1</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">role</span><span class="kw">:</span><span class="at"> leaf</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># groups.yaml</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">spine</span><span class="kw">:</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">data</span><span class="kw">:</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">asn</span><span class="kw">:</span><span class="at"> </span><span class="dv">65000</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="fu">leaf</span><span class="kw">:</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">data</span><span class="kw">:</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">asn</span><span class="kw">:</span><span class="at"> </span><span class="dv">65001</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># defaults.yaml</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="fu">username</span><span class="kw">:</span><span class="at"> admin</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> secret</span></span></code></pre></div>
+    <h3 id="key-nornir-plugins">Key Nornir Plugins</h3>
+    <table>
+    <colgroup>
+    <col style="width: 50%" />
+    <col style="width: 50%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Plugin</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>nornir_netmiko</code></td>
+    <td>SSH-based CLI interaction (send commands, send config)</td>
+    </tr>
+    <tr>
+    <td><code>nornir_napalm</code></td>
+    <td>NAPALM integration (getters, config management)</td>
+    </tr>
+    <tr>
+    <td><code>nornir_scrapli</code></td>
+    <td>Modern SSH/Telnet library with structured output</td>
+    </tr>
+    <tr>
+    <td><code>nornir_utils</code></td>
+    <td>Utility functions (print_result, load_yaml)</td>
+    </tr>
+    <tr>
+    <td><code>nornir_jinja2</code></td>
+    <td>Jinja2 template rendering for config generation</td>
+    </tr>
+    <tr>
+    <td><code>nornir_netbox</code></td>
+    <td>NetBox inventory plugin</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="tool-comparison-ansible-vs-napalm-vs-nornir">5. Tool
+    Comparison: Ansible vs NAPALM vs Nornir</h2>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Dimension</th>
+    <th>Ansible</th>
+    <th>NAPALM</th>
+    <th>Nornir</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Language</strong></td>
+    <td>YAML playbooks (DSL)</td>
+    <td>Python library</td>
+    <td>Python framework</td>
+    </tr>
+    <tr>
+    <td><strong>Learning curve</strong></td>
+    <td>Low (YAML only)</td>
+    <td>Medium (Python)</td>
+    <td>Medium-High (Python + framework)</td>
+    </tr>
+    <tr>
+    <td><strong>Performance</strong></td>
+    <td>Slow (serial by default, forks for parallel)</td>
+    <td>Single-device library</td>
+    <td>Fast (native multi-threading)</td>
+    </tr>
+    <tr>
+    <td><strong>Vendor support</strong></td>
+    <td>Broadest (hundreds of modules)</td>
+    <td>6 core drivers + community</td>
+    <td>Uses NAPALM/Netmiko drivers</td>
+    </tr>
+    <tr>
+    <td><strong>Complex logic</strong></td>
+    <td>Painful (Jinja2 filters, register/when)</td>
+    <td>Natural Python</td>
+    <td>Natural Python</td>
+    </tr>
+    <tr>
+    <td><strong>Error handling</strong></td>
+    <td><code>ignore_errors</code>, <code>rescue</code> blocks</td>
+    <td>try/except</td>
+    <td>try/except with Result objects</td>
+    </tr>
+    <tr>
+    <td><strong>State management</strong></td>
+    <td>Some modules are idempotent</td>
+    <td>Merge/replace/compare</td>
+    <td>Developer-managed</td>
+    </tr>
+    <tr>
+    <td><strong>Scalability</strong></td>
+    <td>Hundreds of devices</td>
+    <td>Single device per call</td>
+    <td>Thousands of devices (threaded)</td>
+    </tr>
+    <tr>
+    <td><strong>Best for</strong></td>
+    <td>Teams starting automation, mixed skill levels</td>
+    <td>Multi-vendor abstraction</td>
+    <td>Python shops, large-scale ops</td>
+    </tr>
+    <tr>
+    <td><strong>Commercial support</strong></td>
+    <td>Red Hat (AAP/Tower)</td>
+    <td>Community only</td>
+    <td>Community only</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="when-to-use-each">When to Use Each</h3>
+    <pre><code>TOOL SELECTION DECISION TREE
+================================================================
+
+  Starting network automation?
+    |
+    +-- Team knows Python? --------&gt; Nornir + NAPALM
+    |
+    +-- Team knows YAML only? -----&gt; Ansible
+    |
+    +-- Multi-vendor environment? --&gt; NAPALM (as library or via Ansible/Nornir)
+    |
+    +-- Need speed at scale? -------&gt; Nornir (100x faster than Ansible)
+    |
+    +-- Need commercial support? ---&gt; Ansible (Red Hat AAP)
+    |
+    +-- Complex conditional logic? -&gt; Nornir (native Python)
+    |
+    +-- Quick prototyping? ---------&gt; NAPALM directly in Python</code></pre>
+    <p>The most effective approach for mature organizations is a hybrid:
+    Nornir as the execution framework, NAPALM as the vendor abstraction
+    layer, and Jinja2 templates for config generation. Ansible remains
+    valuable for organizations where the network team does not write
+    Python, or where integration with Red Hat Ansible Automation
+    Platform provides organizational value [7].</p>
+    <hr />
+    <h2 id="yang-data-models">6. YANG Data Models</h2>
+    <p>YANG (Yet Another Next Generation, RFC 7950) is a data modeling
+    language used to model configuration and state data manipulated by
+    NETCONF, RESTCONF, and gNMI. YANG is to network configuration what a
+    database schema is to application data – it defines the structure,
+    constraints, types, and relationships of every configurable
+    parameter [8].</p>
+    <h3 id="yang-model-families">YANG Model Families</h3>
+    <p>Three families of YANG models coexist in production networks:</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Family</th>
+    <th>Source</th>
+    <th>Scope</th>
+    <th>Interoperability</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>OpenConfig</strong></td>
+    <td>Network operators (Google, AT&amp;T, Microsoft)</td>
+    <td>Vendor-neutral, operationally focused</td>
+    <td>High – same model works across vendors</td>
+    </tr>
+    <tr>
+    <td><strong>IETF</strong></td>
+    <td>IETF working groups</td>
+    <td>Standards-track, protocol-focused</td>
+    <td>High – standards compliant</td>
+    </tr>
+    <tr>
+    <td><strong>Vendor-native</strong></td>
+    <td>Cisco, Juniper, Arista, etc.</td>
+    <td>Full vendor feature coverage</td>
+    <td>None – vendor-specific</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="model-structure">Model Structure</h3>
+    <pre><code>YANG MODEL HIERARCHY (OpenConfig BGP Example)
+================================================================
+
+  openconfig-bgp
+  +-- bgp
+      +-- global
+      |   +-- config
+      |   |   +-- as           (uint32)
+      |   |   +-- router-id    (inet:ipv4-address)
+      |   +-- state
+      |       +-- as           (uint32)  [read-only]
+      |       +-- router-id    (inet:ipv4-address)  [read-only]
+      |       +-- total-paths  (uint32)  [read-only]
+      +-- neighbors
+          +-- neighbor [neighbor-address]
+              +-- config
+              |   +-- neighbor-address  (inet:ip-address)
+              |   +-- peer-as           (uint32)
+              |   +-- description       (string)
+              +-- state
+              |   +-- session-state  (enumeration)
+              |   +-- established-transitions  (counter64)
+              +-- timers
+                  +-- config
+                      +-- hold-time       (decimal64)
+                      +-- keepalive-interval (decimal64)</code></pre>
+    <p>The separation between <code>config</code> (read-write) and
+    <code>state</code> (read-only) containers is a fundamental YANG
+    design principle. Configuration is what the operator intends. State
+    is what the device reports. Comparing the two reveals drift [9].</p>
+    <h3 id="why-three-model-families">Why Three Model Families</h3>
+    <p>The choice of YANG model family is a pragmatic decision:</p>
+    <ul>
+    <li><strong>OpenConfig models</strong> provide interoperability
+    across vendors but may not cover every vendor-specific feature. Use
+    them when operating a multi-vendor environment and consistency
+    matters more than feature completeness.</li>
+    <li><strong>IETF models</strong> are standards-track and provide the
+    most rigorous definitions, but are often more abstract than
+    operational teams prefer.</li>
+    <li><strong>Vendor-native models</strong> cover 100% of a vendor’s
+    features but lock automation code to a single vendor. Use them when
+    a feature is not available in OpenConfig or IETF models.</li>
+    </ul>
+    <p>Modern Cisco IOS-XE, IOS-XR, and NX-OS devices ship with all
+    three model families. Juniper JunOS supports OpenConfig and
+    Juniper-native models. Arista EOS supports OpenConfig and
+    Arista-native models [10].</p>
+    <hr />
+    <h2 id="netconf-and-restconf">7. NETCONF and RESTCONF</h2>
+    <p>NETCONF and RESTCONF are the transport protocols that carry
+    YANG-modeled data between the automation system and the network
+    device. They are to YANG what HTTP is to HTML – the delivery
+    mechanism [11].</p>
+    <h3 id="netconf-rfc-6241">NETCONF (RFC 6241)</h3>
+    <p>NETCONF uses SSH as transport and XML as encoding. It provides
+    transactional configuration management with features that SNMP never
+    had: candidate datastores, commit/rollback, configuration locking,
+    and fine-grained filtering.</p>
+    <pre><code>NETCONF PROTOCOL STACK
+================================================================
+
+  +-------------------+
+  | Content           |  YANG-modeled configuration and state data
+  +-------------------+
+  | Operations        |  get, get-config, edit-config, copy-config,
+  |                   |  delete-config, lock, unlock, close-session,
+  |                   |  kill-session, commit, discard-changes
+  +-------------------+
+  | Messages          |  &lt;rpc&gt;, &lt;rpc-reply&gt;, &lt;notification&gt;
+  +-------------------+
+  | Transport         |  SSH (port 830)
+  +-------------------+</code></pre>
+    <h3 id="restconf-rfc-8040">RESTCONF (RFC 8040)</h3>
+    <p>RESTCONF maps NETCONF operations onto HTTP methods, making
+    network device data accessible through standard REST APIs. It uses
+    the same YANG models as NETCONF but trades transactional power for
+    HTTP simplicity.</p>
+    <table>
+    <thead>
+    <tr>
+    <th>HTTP Method</th>
+    <th>NETCONF Equivalent</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>GET</td>
+    <td><code>&lt;get&gt;</code>, <code>&lt;get-config&gt;</code></td>
+    <td>Retrieve configuration or state</td>
+    </tr>
+    <tr>
+    <td>POST</td>
+    <td><code>&lt;edit-config&gt;</code> (create)</td>
+    <td>Create a new resource</td>
+    </tr>
+    <tr>
+    <td>PUT</td>
+    <td><code>&lt;edit-config&gt;</code> (replace)</td>
+    <td>Create or replace a resource</td>
+    </tr>
+    <tr>
+    <td>PATCH</td>
+    <td><code>&lt;edit-config&gt;</code> (merge)</td>
+    <td>Merge configuration changes</td>
+    </tr>
+    <tr>
+    <td>DELETE</td>
+    <td><code>&lt;edit-config&gt;</code> (delete)</td>
+    <td>Delete a resource</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="netconf-vs-restconf-comparison">NETCONF vs RESTCONF
+    Comparison</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>NETCONF</th>
+    <th>RESTCONF</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Transport</td>
+    <td>SSH (port 830)</td>
+    <td>HTTPS (port 443)</td>
+    </tr>
+    <tr>
+    <td>Encoding</td>
+    <td>XML</td>
+    <td>XML or JSON</td>
+    </tr>
+    <tr>
+    <td>Candidate datastore</td>
+    <td>Yes</td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>Commit/rollback</td>
+    <td>Yes</td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>Config locking</td>
+    <td>Yes</td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>Subtree filtering</td>
+    <td>Yes (XPath)</td>
+    <td>Yes (query params)</td>
+    </tr>
+    <tr>
+    <td>Streaming notifications</td>
+    <td>Yes</td>
+    <td>No (use gNMI instead)</td>
+    </tr>
+    <tr>
+    <td>Firewall friendly</td>
+    <td>Requires SSH</td>
+    <td>Standard HTTPS</td>
+    </tr>
+    <tr>
+    <td>Tooling</td>
+    <td>ncclient (Python), NETCONF console</td>
+    <td>curl, Postman, any HTTP client</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Recommendation:</strong> Use NETCONF when transactional
+    safety matters – configuration changes that must be atomic,
+    committed as a unit, and rolled back on failure. Use RESTCONF for
+    lightweight queries, dashboard integrations, and environments where
+    HTTP is the preferred integration protocol. For streaming telemetry,
+    use gNMI [12].</p>
+    <hr />
+    <h2 id="gnmi-and-streaming-telemetry">8. gNMI and Streaming
+    Telemetry</h2>
+    <p>gNMI (gRPC Network Management Interface) is the newest addition
+    to the model-driven management stack. Developed by the OpenConfig
+    consortium, it uses gRPC (Google Remote Procedure Call) as transport
+    and Protocol Buffers for encoding, providing significantly higher
+    performance than NETCONF’s XML-over-SSH [13].</p>
+    <h3 id="why-gnmi-exists">Why gNMI Exists</h3>
+    <p>SNMP polling at 5-minute intervals cannot detect a 30-second
+    micro-loop. NETCONF can retrieve state data but requires explicit
+    requests. gNMI introduces streaming telemetry – the device pushes
+    state changes to the collector in real time, the moment they happen
+    [14].</p>
+    <pre><code>TELEMETRY EVOLUTION
+================================================================
+
+  SNMP Polling (legacy)           gNMI Streaming (modern)
+  +-----------------+             +-------------------+
+  | NMS polls every |             | Device streams    |
+  | 5 minutes       |             | on change or at   |
+  | &quot;What is your   |             | fixed intervals   |
+  |  interface       |             |                   |
+  |  utilization?&quot;  |             | &quot;My interface     |
+  |                 |             |  utilization just  |
+  | Miss events     |             |  changed to 87%&quot;  |
+  | between polls   |             |                   |
+  +-----------------+             +-------------------+
+
+  gNMI Subscription Modes:
+    SAMPLE   -- device sends data at fixed intervals (e.g., every 10s)
+    ON_CHANGE -- device sends data only when value changes
+    TARGET_DEFINED -- device chooses optimal mode per path</code></pre>
+    <h3 id="gnmi-operations">gNMI Operations</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>RPC</th>
+    <th>Purpose</th>
+    <th>Analogy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>Get</code></td>
+    <td>Retrieve current state</td>
+    <td>NETCONF <code>&lt;get&gt;</code></td>
+    </tr>
+    <tr>
+    <td><code>Set</code></td>
+    <td>Modify configuration (update, replace, delete)</td>
+    <td>NETCONF <code>&lt;edit-config&gt;</code></td>
+    </tr>
+    <tr>
+    <td><code>Subscribe</code></td>
+    <td>Stream telemetry data</td>
+    <td>No NETCONF equivalent</td>
+    </tr>
+    <tr>
+    <td><code>Capabilities</code></td>
+    <td>Query supported models and encodings</td>
+    <td>NETCONF <code>&lt;hello&gt;</code></td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="gnmi-tooling">gNMI Tooling</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Tool</th>
+    <th>Purpose</th>
+    <th>Source</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>gnmic</code></td>
+    <td>CLI client for gNMI (get, set, subscribe)</td>
+    <td>OpenConfig community</td>
+    </tr>
+    <tr>
+    <td><code>gnmi-gateway</code></td>
+    <td>Telemetry gateway (Netflix open source)</td>
+    <td>Netflix</td>
+    </tr>
+    <tr>
+    <td><code>Telegraf</code></td>
+    <td>Telemetry collector with gNMI input plugin</td>
+    <td>InfluxData</td>
+    </tr>
+    <tr>
+    <td><code>pipeline</code></td>
+    <td>Cisco’s telemetry collector</td>
+    <td>Cisco</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The typical telemetry pipeline: gNMI streams from devices to a
+    collector (gnmic, Telegraf, or pipeline), which writes to a
+    time-series database (InfluxDB, Prometheus, or TimescaleDB), which
+    feeds dashboards (Grafana) and alerting (Alertmanager) [15].</p>
+    <hr />
+    <h2 id="network-cicd-pipelines">9. Network CI/CD Pipelines</h2>
+    <p>Applying CI/CD to network configuration is the operational core
+    of NetDevOps. The principle is identical to software CI/CD: every
+    change is version-controlled, peer-reviewed, automatically tested,
+    and deployed through a pipeline – never applied directly to
+    production by a human [16].</p>
+    <h3 id="pipeline-architecture">Pipeline Architecture</h3>
+    <pre><code>NETWORK CI/CD PIPELINE
+================================================================
+
+  Developer workstation         Git repository         CI/CD platform
+  +------------------+         +-----------+          +------------------+
+  | Edit config      |         | main      |          | GitLab CI /      |
+  | template or      |--------&gt;| branch    |---------&gt;| GitHub Actions   |
+  | YANG data        |  push   | (protected)|  trigger|                  |
+  +------------------+         +-----------+          +--------+---------+
+                                                               |
+  STAGE 1: LINT                                                |
+  +------------------------------------------------------------+
+  | yamllint, ansible-lint, pylint                             |
+  | Syntax validation of templates and data files              |
+  +------------------------------------------------------------+
+           |
+  STAGE 2: VALIDATE (offline)
+  +------------------------------------------------------------+
+  | Batfish: build network model, check reachability           |
+  | YANG validation: pyang --lint on YANG modules              |
+  | Template rendering: generate configs, verify syntax        |
+  +------------------------------------------------------------+
+           |
+  STAGE 3: TEST (lab/staging)
+  +------------------------------------------------------------+
+  | Deploy to lab/staging network (Containerlab, GNS3, EVE-NG) |
+  | Run connectivity tests, BGP session verification           |
+  | Compare expected vs actual state                           |
+  +------------------------------------------------------------+
+           |
+  STAGE 4: APPROVE
+  +------------------------------------------------------------+
+  | Merge request review by senior engineer                    |
+  | Change advisory board approval (for production)            |
+  +------------------------------------------------------------+
+           |
+  STAGE 5: DEPLOY
+  +------------------------------------------------------------+
+  | Ansible/Nornir pushes config to production devices         |
+  | Canary deployment: one device first, verify, then fleet    |
+  | Automatic rollback on failure                              |
+  +------------------------------------------------------------+
+           |
+  STAGE 6: VERIFY
+  +------------------------------------------------------------+
+  | Post-deployment validation: BGP sessions up, interfaces up |
+  | Telemetry check: no anomalies in gNMI streams              |
+  | Smoke tests: end-to-end reachability confirmed             |
+  +------------------------------------------------------------+</code></pre>
+    <h3 id="github-actions-example">GitHub Actions Example</h3>
+    <div class="sourceCode" id="cb14"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/network-deploy.yml</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Network Configuration Pipeline</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&#39;network-configs/**&#39;</span><span class="kw">,</span><span class="at"> </span><span class="st">&#39;templates/**&#39;</span><span class="kw">]</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">lint</span><span class="kw">:</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Lint YAML configs</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> yamllint network-configs/</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Lint Ansible playbooks</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> ansible-lint playbooks/</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">validate</span><span class="kw">:</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">needs</span><span class="kw">:</span><span class="at"> lint</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Start Batfish</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> docker run -d -p 9997:9997 -p 9996:9996 batfish/batfish</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run Batfish analysis</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> python scripts/batfish_validate.py</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Validate YANG models</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> pyang --lint yang-models/*.yang</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">deploy-staging</span><span class="kw">:</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">needs</span><span class="kw">:</span><span class="at"> validate</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> self-hosted</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span><span class="at"> staging</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to staging</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> ansible-playbook -i inventory/staging playbooks/deploy.yml</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Verify staging</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> python scripts/verify_deployment.py --env staging</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">deploy-production</span><span class="kw">:</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">needs</span><span class="kw">:</span><span class="at"> deploy-staging</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> self-hosted</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span><span class="at"> production</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to production (canary)</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> ansible-playbook -i inventory/prod playbooks/deploy.yml --limit canary</span></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Verify canary</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> python scripts/verify_deployment.py --env prod --scope canary</span></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to production (fleet)</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> ansible-playbook -i inventory/prod playbooks/deploy.yml</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Post-deployment verification</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> python scripts/verify_deployment.py --env prod --scope full</span></span></code></pre></div>
+    <h3 id="network-lab-environments-for-cicd">Network Lab Environments
+    for CI/CD</h3>
+    <p>Testing network changes against real hardware is expensive and
+    slow. Virtual and containerized network labs provide the testing
+    environment:</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Platform</th>
+    <th>Type</th>
+    <th>Use Case</th>
+    <th>Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Containerlab</td>
+    <td>Container-based</td>
+    <td>Fast CI/CD testing, vendor container images</td>
+    <td>Free (open source)</td>
+    </tr>
+    <tr>
+    <td>GNS3</td>
+    <td>Emulation</td>
+    <td>Complex topologies, vendor image support</td>
+    <td>Free (open source)</td>
+    </tr>
+    <tr>
+    <td>EVE-NG</td>
+    <td>Emulation</td>
+    <td>Enterprise lab, multiple vendors</td>
+    <td>Free community / paid pro</td>
+    </tr>
+    <tr>
+    <td>CML (Cisco)</td>
+    <td>Emulation</td>
+    <td>Cisco-specific testing</td>
+    <td>Licensed</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Containerlab has become the standard for CI/CD integration
+    because containers start in seconds, can be defined as code
+    (topology YAML files), and integrate naturally with GitHub Actions
+    and GitLab CI runners [17].</p>
+    <hr />
+    <h2 id="config-drift-detection-and-remediation">10. Config Drift
+    Detection and Remediation</h2>
+    <p>Configuration drift occurs when the actual state of a network
+    device diverges from the intended state defined in the source of
+    truth. Drift happens through emergency CLI changes, failed partial
+    deployments, firmware upgrades that reset defaults, or simply the
+    passage of time as manual changes accumulate [18].</p>
+    <h3 id="detection-methods">Detection Methods</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Method</th>
+    <th>How It Works</th>
+    <th>Tools</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Periodic pull and diff</strong></td>
+    <td>Retrieve running configs, compare to golden configs in Git</td>
+    <td>NAPALM <code>compare_config()</code>, RANCID, Oxidized</td>
+    </tr>
+    <tr>
+    <td><strong>Event-driven</strong></td>
+    <td>React to syslog/SNMP traps indicating config change</td>
+    <td>Event-Driven Ansible, StackStorm</td>
+    </tr>
+    <tr>
+    <td><strong>Continuous telemetry</strong></td>
+    <td>gNMI subscriptions on configuration paths</td>
+    <td>gnmic, Telegraf</td>
+    </tr>
+    <tr>
+    <td><strong>Source-of-truth comparison</strong></td>
+    <td>Compare device state to NetBox/Nautobot intended state</td>
+    <td>NetBox Assurance, Nautobot Golden Config</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="remediation-strategies">Remediation Strategies</h3>
+    <pre><code>CONFIG DRIFT REMEDIATION
+================================================================
+
+  Intended State (Git + NetBox)      Actual State (Device)
+  +---------------------------+      +---------------------------+
+  | interface Loopback0       |      | interface Loopback0       |
+  |  ip address 10.0.0.1/32  |      |  ip address 10.0.0.1/32  |
+  |                           |      |                           |
+  | interface Loopback99      |      | (missing -- drift!)       |
+  |  ip address 10.99.0.1/32 |      |                           |
+  |                           |      |                           |
+  | ntp server 10.0.0.100    |      | ntp server 10.0.0.200    |
+  |                           |      |  (wrong server -- drift!)|
+  +---------------------------+      +---------------------------+
+
+  Remediation options:
+    1. AUTO-REMEDIATE: Push intended config to device (risky if
+       the drift was intentional emergency change)
+    2. ALERT + MANUAL: Notify engineer, create ticket, human decides
+    3. RECONCILE: Update source of truth to match device
+       (if drift was a valid emergency change)</code></pre>
+    <p>NetBox Labs launched NetBox Assurance in 2025, providing
+    purpose-built drift detection for network infrastructure. The
+    Nautobot ecosystem offers the Golden Config app, which stores
+    intended configurations, retrieves actual configurations, generates
+    compliance reports, and can push remediation [19].</p>
+    <hr />
+    <h2 id="batfish-pre-deployment-verification">11. Batfish:
+    Pre-Deployment Verification</h2>
+    <p>Batfish is a network configuration analysis tool that builds a
+    mathematical model of network behavior from device configuration
+    files. It can answer questions about reachability, routing, ACLs,
+    and failure scenarios without touching a live network. It is the
+    network equivalent of a compiler – it finds errors before deployment
+    [20].</p>
+    <h3 id="how-batfish-works">How Batfish Works</h3>
+    <pre><code>BATFISH ANALYSIS PIPELINE
+================================================================
+
+  1. SNAPSHOT                    2. MODEL
+  +------------------+          +------------------+
+  | Upload device    |          | Batfish builds   |
+  | configs to       |---------&gt;| vendor-agnostic  |
+  | Batfish server   |          | network model    |
+  +------------------+          +--------+---------+
+                                         |
+  3. QUERY                       4. RESULT
+  +------------------+          +------------------+
+  | Ask questions    |          | Answers with     |
+  | about network    |&lt;--------&gt;| traces, paths,   |
+  | behavior         |          | violations       |
+  +------------------+          +------------------+
+
+  Example queries:
+    - &quot;Can 10.0.1.0/24 reach 10.0.2.0/24?&quot;
+    - &quot;What happens if link between spine-01 and leaf-03 fails?&quot;
+    - &quot;Which ACLs permit traffic from the internet to the database subnet?&quot;
+    - &quot;Are there any undefined references in the configs?&quot;</code></pre>
+    <h3 id="batfish-query-categories">Batfish Query Categories</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Category</th>
+    <th>Example Queries</th>
+    <th>Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Reachability</strong></td>
+    <td>Can host A reach host B? Through which path?</td>
+    <td>Verify connectivity before deploy</td>
+    </tr>
+    <tr>
+    <td><strong>Failure analysis</strong></td>
+    <td>What breaks if this link goes down?</td>
+    <td>Validate redundancy</td>
+    </tr>
+    <tr>
+    <td><strong>ACL analysis</strong></td>
+    <td>What does this ACL permit/deny? Any shadowed rules?</td>
+    <td>Security audit</td>
+    </tr>
+    <tr>
+    <td><strong>Routing</strong></td>
+    <td>What routes exist to this prefix? Which is preferred?</td>
+    <td>Validate route policy</td>
+    </tr>
+    <tr>
+    <td><strong>Config compliance</strong></td>
+    <td>Are all NTP servers configured? Any undefined references?</td>
+    <td>Compliance checking</td>
+    </tr>
+    <tr>
+    <td><strong>Diff analysis</strong></td>
+    <td>How does the new config change reachability?</td>
+    <td>Safe change validation</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="integration-with-cicd">Integration with CI/CD</h3>
+    <p>Batfish runs as a Docker container and provides a Python client
+    (pybatfish). In a CI/CD pipeline, the validate stage uploads the
+    proposed configuration snapshot, runs reachability and compliance
+    queries, and fails the pipeline if any query returns violations.
+    This catches routing loops, ACL misconfigurations, and reachability
+    regressions before they reach production [21].</p>
+    <p>Batfish was acquired by AWS, signaling the industry’s recognition
+    that pre-deployment verification is a core requirement, not an
+    optional luxury.</p>
+    <hr />
+    <h2 id="intent-based-networking">12. Intent-Based Networking</h2>
+    <p>Intent-based networking (IBN) is the highest level of abstraction
+    in network automation. Instead of specifying individual device
+    configurations, the operator declares business intent (“these two
+    applications must be able to communicate with 10ms latency and
+    99.99% availability”) and the IBN system translates that intent into
+    device-level configuration, deploys it, and continuously verifies
+    that the network is meeting the stated intent [22].</p>
+    <h3 id="major-ibn-platforms">Major IBN Platforms</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Platform</th>
+    <th>Vendor</th>
+    <th>Domain</th>
+    <th>Approach</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Apstra</strong></td>
+    <td>Juniper (acquired 2021, now HPE/Juniper)</td>
+    <td>Data center fabric</td>
+    <td>Vendor-agnostic, graph-based model</td>
+    </tr>
+    <tr>
+    <td><strong>Cisco Catalyst Center</strong></td>
+    <td>Cisco (formerly DNA Center)</td>
+    <td>Campus/enterprise</td>
+    <td>Cisco-centric, policy-based</td>
+    </tr>
+    <tr>
+    <td><strong>Cisco Nexus Dashboard</strong></td>
+    <td>Cisco</td>
+    <td>Data center (ACI)</td>
+    <td>ACI fabric management</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="apstra-juniperhpe">Apstra (Juniper/HPE)</h3>
+    <p>Apstra represents the purest form of intent-based networking. Its
+    operating system (AOS) is vendor-agnostic – it can manage data
+    center fabrics built from Juniper, Cisco, Arista, or SONiC switches.
+    The operator defines the desired network topology (spine-leaf,
+    3-stage Clos), connectivity requirements, and policies. Apstra
+    generates the device configurations, deploys them, and continuously
+    validates that the network matches the intent through telemetry
+    analysis [23].</p>
+    <h3 id="cisco-catalyst-center">Cisco Catalyst Center</h3>
+    <p>Cisco Catalyst Center (renamed from DNA Center in 2023) provides
+    intent-based networking for campus and enterprise environments. It
+    translates high-level policies into device configurations across
+    Cisco’s campus portfolio (Catalyst switches, wireless controllers,
+    ISR/ASR routers). As of 2025, Cisco has added “AgenticOps” AI agents
+    capable of autonomous troubleshooting and a natural-language
+    interface for network policy definition [24].</p>
+    <h3 id="the-ibn-closed-loop">The IBN Closed Loop</h3>
+    <pre><code>INTENT-BASED NETWORKING CLOSED LOOP
+================================================================
+
+  1. INTENT                      2. TRANSLATION
+  +------------------+          +------------------+
+  | Business policy  |          | IBN platform     |
+  | &quot;App A must      |---------&gt;| generates device |
+  | reach App B      |          | configs for all  |
+  | with &lt; 10ms&quot;     |          | relevant devices |
+  +------------------+          +--------+---------+
+                                         |
+  4. VERIFICATION                3. ACTIVATION
+  +------------------+          +------------------+
+  | Continuous       |&lt;---------| Push configs to  |
+  | telemetry        |          | devices, validate|
+  | confirms intent  |          | activation       |
+  | is being met     |          +------------------+
+  +--------+---------+
+           |
+  5. REMEDIATION (if drift detected)
+  +------------------+
+  | Auto-correct or  |
+  | alert operator   |
+  +------------------+</code></pre>
+    <hr />
+    <h2 id="source-of-truth-netbox-and-nautobot">13. Source of Truth:
+    NetBox and Nautobot</h2>
+    <p>A source of truth (SoT) is the authoritative record of intended
+    network state. Without it, automation has no reference point – it
+    cannot know what the network should look like, only what it
+    currently looks like. NetBox and Nautobot are the two dominant
+    open-source platforms for network source of truth [25].</p>
+    <h3 id="netbox">NetBox</h3>
+    <p>NetBox, originally developed by DigitalOcean and now maintained
+    by NetBox Labs, is the most widely deployed network source of truth.
+    It provides IPAM (IP Address Management), DCIM (Data Center
+    Infrastructure Management), and a comprehensive REST API that
+    automation tools consume.</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>IPAM</td>
+    <td>IP prefixes, addresses, VLANs, VRFs, ASNs</td>
+    </tr>
+    <tr>
+    <td>DCIM</td>
+    <td>Sites, racks, devices, interfaces, cables, power</td>
+    </tr>
+    <tr>
+    <td>Circuits</td>
+    <td>Provider circuits, terminations</td>
+    </tr>
+    <tr>
+    <td>Virtualization</td>
+    <td>Clusters, virtual machines, VM interfaces</td>
+    </tr>
+    <tr>
+    <td>Tenancy</td>
+    <td>Tenant/customer assignment for multi-tenancy</td>
+    </tr>
+    <tr>
+    <td>Custom fields</td>
+    <td>Extensible data model for site-specific needs</td>
+    </tr>
+    <tr>
+    <td>REST API</td>
+    <td>Full CRUD API for automation integration</td>
+    </tr>
+    <tr>
+    <td>GraphQL</td>
+    <td>Flexible queries for complex data relationships</td>
+    </tr>
+    <tr>
+    <td>Webhooks</td>
+    <td>Event-driven integration with external systems</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="nautobot">Nautobot</h3>
+    <p>Nautobot, maintained by Network to Code, forked from NetBox in
+    2021 to focus on automation workflows and extensibility. While
+    NetBox excels as a documentation-focused DCIM/IPAM tool, Nautobot
+    positions itself as an automation platform with native Git
+    integration, a plugin ecosystem, and Apps (formerly plugins) that
+    extend its functionality [26].</p>
+    <h3 id="netbox-vs-nautobot">NetBox vs Nautobot</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Dimension</th>
+    <th>NetBox</th>
+    <th>Nautobot</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Focus</strong></td>
+    <td>DCIM/IPAM documentation</td>
+    <td>Automation platform</td>
+    </tr>
+    <tr>
+    <td><strong>Database</strong></td>
+    <td>PostgreSQL</td>
+    <td>PostgreSQL or MySQL</td>
+    </tr>
+    <tr>
+    <td><strong>API</strong></td>
+    <td>REST + GraphQL</td>
+    <td>REST + GraphQL</td>
+    </tr>
+    <tr>
+    <td><strong>Git integration</strong></td>
+    <td>External (via CI/CD)</td>
+    <td>Native (Git as data source)</td>
+    </tr>
+    <tr>
+    <td><strong>Plugin ecosystem</strong></td>
+    <td>Growing</td>
+    <td>Extensive (Golden Config, Firewall Models, SSoT)</td>
+    </tr>
+    <tr>
+    <td><strong>Commercial backing</strong></td>
+    <td>NetBox Labs</td>
+    <td>Network to Code</td>
+    </tr>
+    <tr>
+    <td><strong>Community</strong></td>
+    <td>Larger install base</td>
+    <td>Stronger automation focus</td>
+    </tr>
+    <tr>
+    <td><strong>Best for</strong></td>
+    <td>Teams needing IPAM/DCIM with API</td>
+    <td>Teams building full automation pipelines</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="the-source-of-truth-pattern">The Source of Truth
+    Pattern</h3>
+    <pre><code>SOURCE OF TRUTH IN THE AUTOMATION PIPELINE
+================================================================
+
+  NetBox / Nautobot (Source of Truth)
+  +---------------------------------------------+
+  | Intended state:                              |
+  | - Device inventory (hostnames, IPs, roles)   |
+  | - Interface assignments                      |
+  | - VLAN allocations                          |
+  | - IP address assignments                     |
+  | - BGP peer relationships                     |
+  | - Circuit provider information              |
+  +----------------------+----------------------+
+                         |
+            REST API / GraphQL query
+                         |
+  +----------------------v----------------------+
+  | Config Generator (Jinja2 templates)          |
+  | Consumes SoT data, produces device configs   |
+  +----------------------+----------------------+
+                         |
+  +----------------------v----------------------+
+  | Automation Engine (Ansible / Nornir)         |
+  | Deploys generated configs to devices         |
+  +----------------------+----------------------+
+                         |
+  +----------------------v----------------------+
+  | Validation (Batfish + telemetry)             |
+  | Confirms actual state matches intended state |
+  +---------------------------------------------+</code></pre>
+    <hr />
+    <h2 id="infrastructure-as-code-for-networks">14. Infrastructure as
+    Code for Networks</h2>
+    <p>Terraform, traditionally associated with cloud infrastructure,
+    has expanded into network automation through vendor-specific
+    providers. The approach treats network device configuration as
+    declarative infrastructure definitions managed through the same
+    Terraform workflow used for cloud resources [27].</p>
+    <h3 id="network-terraform-providers">Network Terraform
+    Providers</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Provider</th>
+    <th>Vendor</th>
+    <th>Manages</th>
+    <th>Registry</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>CiscoDevNet/aci</code></td>
+    <td>Cisco</td>
+    <td>ACI fabric (tenants, EPGs, contracts, BDs)</td>
+    <td>Verified</td>
+    </tr>
+    <tr>
+    <td><code>CiscoDevNet/iosxe</code></td>
+    <td>Cisco</td>
+    <td>IOS-XE devices (interfaces, routing, ACLs)</td>
+    <td>Verified</td>
+    </tr>
+    <tr>
+    <td><code>CiscoDevNet/nxos</code></td>
+    <td>Cisco</td>
+    <td>NX-OS devices</td>
+    <td>Verified</td>
+    </tr>
+    <tr>
+    <td><code>CiscoDevNet/meraki</code></td>
+    <td>Cisco</td>
+    <td>Meraki cloud-managed networks</td>
+    <td>Verified</td>
+    </tr>
+    <tr>
+    <td><code>PaloAltoNetworks/panos</code></td>
+    <td>Palo Alto</td>
+    <td>PAN-OS firewalls (security policies, NAT)</td>
+    <td>Verified</td>
+    </tr>
+    <tr>
+    <td><code>Juniper/junos</code></td>
+    <td>Juniper</td>
+    <td>JunOS devices (interfaces, routing, firewall)</td>
+    <td>Community</td>
+    </tr>
+    <tr>
+    <td><code>Fortinet/fortios</code></td>
+    <td>Fortinet</td>
+    <td>FortiGate firewalls</td>
+    <td>Community</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="terraform-vs-ansible-for-networks">Terraform vs Ansible for
+    Networks</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Dimension</th>
+    <th>Terraform</th>
+    <th>Ansible</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Paradigm</strong></td>
+    <td>Declarative (desired state)</td>
+    <td>Procedural (task sequence) with declarative modules</td>
+    </tr>
+    <tr>
+    <td><strong>State management</strong></td>
+    <td>Explicit state file (terraform.tfstate)</td>
+    <td>No state file – detects current state per run</td>
+    </tr>
+    <tr>
+    <td><strong>Plan before apply</strong></td>
+    <td><code>terraform plan</code> shows changes</td>
+    <td><code>--check</code> and <code>--diff</code> mode</td>
+    </tr>
+    <tr>
+    <td><strong>Rollback</strong></td>
+    <td>Apply previous state</td>
+    <td>Re-run previous playbook or NAPALM rollback</td>
+    </tr>
+    <tr>
+    <td><strong>Multi-vendor</strong></td>
+    <td>One provider per vendor</td>
+    <td>One collection per vendor</td>
+    </tr>
+    <tr>
+    <td><strong>Strength</strong></td>
+    <td>ACI/SDN controllers, cloud networking</td>
+    <td>Device-level CLI/NETCONF configuration</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Recommendation:</strong> Use Terraform for SDN
+    controllers (Cisco ACI, Meraki) and cloud networking (AWS VPC, Azure
+    VNet). Use Ansible or Nornir for device-level configuration
+    management. The two tools complement each other – Terraform manages
+    the fabric and cloud infrastructure, Ansible manages the individual
+    device configurations within that fabric [28].</p>
+    <hr />
+    <h2 id="the-complete-netdevops-pipeline">15. The Complete NetDevOps
+    Pipeline</h2>
+    <p>All the tools and protocols described in this module fit together
+    into a single, coherent pipeline. The source of truth defines
+    intent. Templates generate configurations. Batfish validates them
+    offline. CI/CD automates the review and deployment process.
+    Streaming telemetry verifies the result. Drift detection closes the
+    loop.</p>
+    <pre><code>THE COMPLETE NETDEVOPS PIPELINE
+================================================================
+
+  +-------------------+
+  | SOURCE OF TRUTH   |  NetBox / Nautobot
+  | (Intended State)  |  Device inventory, IP assignments,
+  |                   |  VLAN allocations, BGP peers
+  +---------+---------+
+            |
+            | REST API / GraphQL
+            v
+  +---------+---------+
+  | CONFIG GENERATION |  Jinja2 templates + SoT data
+  | (Desired Config)  |  Produces vendor-specific configs
+  +---------+---------+
+            |
+            | Git commit + push
+            v
+  +---------+---------+
+  | VERSION CONTROL   |  Git repository
+  | (Change Tracking) |  Branching, pull requests, reviews
+  +---------+---------+
+            |
+            | CI/CD trigger
+            v
+  +---------+---------+
+  | VALIDATION        |  Batfish (reachability, compliance)
+  | (Pre-Deploy Test) |  YANG lint (pyang)
+  |                   |  Template syntax check
+  +---------+---------+
+            |
+            | On merge to main
+            v
+  +---------+---------+
+  | DEPLOYMENT        |  Ansible / Nornir + NAPALM
+  | (Config Push)     |  Canary --&gt; fleet rollout
+  |                   |  Automatic rollback on failure
+  +---------+---------+
+            |
+            | Immediate
+            v
+  +---------+---------+
+  | VERIFICATION      |  Post-deploy checks (BGP up, routes)
+  | (Post-Deploy)     |  gNMI telemetry streams
+  |                   |  End-to-end smoke tests
+  +---------+---------+
+            |
+            | Continuous
+            v
+  +---------+---------+
+  | DRIFT DETECTION   |  Periodic config pull + diff
+  | (Closed Loop)     |  gNMI config subscriptions
+  |                   |  NetBox Assurance / Nautobot Golden Config
+  +---------+---------+
+            |
+            | If drift detected
+            v
+  +---------+---------+
+  | REMEDIATION       |  Auto-correct or alert
+  |                   |  Update SoT if drift was intentional
+  +-------------------+</code></pre>
+    <h3 id="maturity-model">Maturity Model</h3>
+    <p>Organizations do not adopt the full pipeline at once. The journey
+    is incremental:</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Level</th>
+    <th>Capability</th>
+    <th>Tools</th>
+    <th>Typical Timeline</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>0</td>
+    <td>Manual CLI</td>
+    <td>SSH, PuTTY, SecureCRT</td>
+    <td>Legacy</td>
+    </tr>
+    <tr>
+    <td>1</td>
+    <td>Script automation</td>
+    <td>Python + Netmiko, Expect</td>
+    <td>Months 1-3</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>Framework automation</td>
+    <td>Ansible playbooks, NAPALM</td>
+    <td>Months 3-6</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>Source of truth</td>
+    <td>NetBox + Jinja2 templates</td>
+    <td>Months 6-12</td>
+    </tr>
+    <tr>
+    <td>4</td>
+    <td>CI/CD pipeline</td>
+    <td>GitLab/GitHub + Batfish + Containerlab</td>
+    <td>Months 12-18</td>
+    </tr>
+    <tr>
+    <td>5</td>
+    <td>Closed-loop automation</td>
+    <td>gNMI telemetry + drift detection + auto-remediation</td>
+    <td>Months 18-24+</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="cross-references">16. Cross-References</h2>
+    <blockquote>
+    <p><strong>Related:</strong> <a
+    href="01-network-architecture-design.md">Network Architecture &amp;
+    Design</a> – the topologies that automation deploys. <a
+    href="02-routing-switching-operations.md">Routing &amp; Switching
+    Operations</a> – the protocols and configurations that automation
+    manages.</p>
+    </blockquote>
+    <p><strong>Series cross-references:</strong> - <strong>SYA (Systems
+    Administration):</strong> Configuration management fundamentals,
+    Ansible for server automation - <strong>SOO (Systems
+    Operations):</strong> Operational runbooks, incident response
+    automation - <strong>K8S (Kubernetes):</strong> GitOps patterns
+    (ArgoCD, Flux) share the same declarative philosophy - <strong>OPS
+    (OpenStack):</strong> Heat orchestration as IaC for cloud, Neutron
+    as SDN - <strong>DRP (Disaster Recovery):</strong> Network DR
+    automation, failover testing - <strong>TCP (TCP/IP
+    Protocol):</strong> The protocol layer that automation configures -
+    <strong>DNS (DNS Protocol):</strong> DNS automation as part of
+    network provisioning - <strong>CMH (Computational Mesh):</strong>
+    Distributed system networking requirements</p>
+    <hr />
+    <h2 id="sources">17. Sources</h2>
+    <ol type="1">
+    <li>Edelman, J., Lenz, S., and Oswalt, M. <em>Network
+    Programmability and Automation</em>. 2nd ed. O’Reilly Media,
+    2023.</li>
+    <li>Cisco Blogs. “Network Programmability with YANG: The Structure
+    of Network Automation with YANG, NETCONF, RESTCONF, and gNMI.”
+    blogs.cisco.com/networking/network-programmability-with-yang,
+    2023.</li>
+    <li>Ansible Documentation. “Network Automation.”
+    docs.ansible.com/ansible/latest/network/, 2025.</li>
+    <li>NAPALM Documentation. “NAPALM – Network Automation and
+    Programmability Abstraction Layer with Multivendor support.”
+    github.com/napalm-automation/napalm, 2024.</li>
+    <li>NAPALM GitHub. “Support Matrix.”
+    github.com/napalm-automation/napalm/blob/master/docs/support/index.rst,
+    2024.</li>
+    <li>Nornir Documentation. “Pluggable multi-threaded framework with
+    inventory management.” github.com/nornir-automation/nornir,
+    2025.</li>
+    <li>APNIC Blog. “Automation tools: Paramiko, Netmiko, NAPALM,
+    Ansible, Nornir or…?” blog.apnic.net, 2023.</li>
+    <li>RFC 7950. “The YANG 1.1 Data Modeling Language.” IETF,
+    2016.</li>
+    <li>OpenConfig. “OpenConfig YANG Models.”
+    github.com/openconfig/public, 2025.</li>
+    <li>Cisco Blogs. “Native, IETF, OpenConfig… Why so many YANG
+    models?” blogs.cisco.com/developer/which-yang-model-to-use,
+    2023.</li>
+    <li>RFC 6241. “Network Configuration Protocol (NETCONF).” IETF,
+    2011.</li>
+    <li>RFC 8040. “RESTCONF Protocol.” IETF, 2017.</li>
+    <li>OpenConfig. “gRPC Network Management Interface (gNMI)
+    Specification.” openconfig.net/docs/gnmi/gnmi-specification/,
+    2024.</li>
+    <li>Netflix Technology Blog. “Simple streaming telemetry:
+    Introducing gnmi-gateway.” netflixtechblog.com, 2020.</li>
+    <li>Cisco White Paper. “Data Center Telemetry and Network Automation
+    Using gNMI and OpenConfig.” cisco.com, 2024.</li>
+    <li>TechTarget. “How to build a network-aware CI/CD pipeline with
+    GitLab and Ansible.” searchnetworking.techtarget.com, 2023.</li>
+    <li>Containerlab Documentation. “Container-based networking lab.”
+    containerlab.dev, 2025.</li>
+    <li>NetBox Labs. “NetBox Assurance – drift detection tool to tame
+    configuration chaos.” networkworld.com, 2025.</li>
+    <li>Network to Code. “Nautobot Golden Config.”
+    github.com/nautobot/nautobot-app-golden-config, 2025.</li>
+    <li>Batfish. “Network configuration analysis tool.” batfish.org,
+    2025.</li>
+    <li>Fogel, A., et al. “Lessons from the evolution of the Batfish
+    configuration analysis tool.” ACM SIGCOMM, 2023.</li>
+    <li>Gartner. “Intent-Based Networking.”
+    gartner.com/en/information-technology/glossary/intent-based-networking,
+    2024.</li>
+    <li>Juniper/HPE. “Apstra Data Center Director.”
+    juniper.net/us/en/products/network-automation/apstra-data-center-director.html,
+    2025.</li>
+    <li>Cisco. “Cisco Catalyst Center: Early Results from Intent-based
+    Networking.” cisco.com, 2025.</li>
+    <li>NetBox Labs. “NetBox Documentation.” docs.netbox.dev, 2025.</li>
+    <li>Network to Code. “Nautobot Documentation.” docs.nautobot.com,
+    2025.</li>
+    <li>Terraform Registry. “CiscoDevNet/aci Provider.”
+    registry.terraform.io/providers/CiscoDevNet/aci/latest, 2026.</li>
+    <li>HashiCorp Blog. “New Terraform integrations with Cisco, Juniper,
+    Palo Alto Networks.” hashicorp.com/blog, 2024.</li>
+    </ol>
+    <hr />
+    <p><em>Systems Network Engineering – Module 3: Network Automation
+    &amp; NetDevOps. The network you can describe in code is the network
+    you can review, test, version, and trust. The network you configure
+    by hand is the network you hope is still correct.</em></p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNE Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNE/">tibsfox.com/Research/SNE</a>
+    </div>
+</body>
+</html>

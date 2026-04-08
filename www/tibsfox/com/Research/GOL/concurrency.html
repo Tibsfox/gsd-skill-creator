@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goroutines &amp; Channels &mdash; Go</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gol">
+  <header>
+    <h1>Goroutines &amp; Channels</h1>
+    <div class="subtitle">CSP, M:N Scheduling, Channels, Select, sync, Context, Patterns</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="concurrency.html" class="active">Concurrency</a>
+      <a href="gc.html">GC</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;Don&rsquo;t communicate by sharing memory; share memory by communicating.&rdquo; &mdash; <strong>Rob Pike</strong>, Go Proverbs. Go&rsquo;s concurrency model descends from Hoare&rsquo;s CSP (1978) through Pike&rsquo;s own Newsqueak, Limbo, and Alef at Bell Labs.
+    </blockquote>
+
+    <h2>Goroutines</h2>
+    <p>A goroutine is a lightweight thread managed by the Go runtime. Initial stack: ~4 KB (grows/shrinks dynamically). Cost: trivial &mdash; millions of goroutines in a single process. Start one with the <code>go</code> keyword:</p>
+
+<pre><code>go func() {
+    fmt.Println("hello from goroutine")
+}()
+
+// With sync.WaitGroup for coordination
+var wg sync.WaitGroup
+for i := 0; i &lt; 10; i++ {
+    wg.Add(1)
+    go func(n int) {
+        defer wg.Done()
+        fmt.Println(n)
+    }(i)
+}
+wg.Wait()</code></pre>
+
+    <h2>The GMP Scheduler</h2>
+    <div class="card">
+      <p>Go uses <strong>M:N scheduling</strong>: M goroutines multiplexed onto N OS threads.</p>
+      <ul>
+        <li><strong>G</strong> = goroutine (the work unit)</li>
+        <li><strong>M</strong> = machine (OS thread)</li>
+        <li><strong>P</strong> = processor (logical CPU, sized by <code>GOMAXPROCS</code>)</li>
+      </ul>
+      <p>Each P has a local run queue of Gs. Work-stealing: idle Ps steal Gs from busy Ps. Preemption is asynchronous since Go 1.14 (signal-based). Syscall handling: the G&rsquo;s M is handed off so another M can run Gs on that P.</p>
+    </div>
+
+    <h2>Channels</h2>
+<pre><code>// Unbuffered: sender blocks until receiver is ready (synchronous)
+ch := make(chan string)
+go func() { ch &lt;- "hello" }()
+msg := &lt;-ch
+
+// Buffered: sender blocks only when buffer is full
+ch := make(chan int, 10)
+ch &lt;- 42
+
+// Close: signals no more values
+close(ch)
+
+// Range over channel: receives until closed
+for v := range ch { fmt.Println(v) }
+
+// Directional channels in function signatures
+func producer(out chan&lt;- int) { out &lt;- 42 }
+func consumer(in &lt;-chan int) { fmt.Println(&lt;-in) }</code></pre>
+
+    <h2>Select</h2>
+<pre><code>select {
+case msg := &lt;-msgCh:
+    fmt.Println("received:", msg)
+case &lt;-time.After(5 * time.Second):
+    fmt.Println("timeout")
+case &lt;-ctx.Done():
+    fmt.Println("cancelled")
+default:
+    fmt.Println("nothing ready") // non-blocking
+}</code></pre>
+
+    <h2>Context</h2>
+<pre><code>ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+defer cancel()
+
+// Pass context through the call chain
+result, err := fetchData(ctx, url)
+if err != nil {
+    if errors.Is(err, context.DeadlineExceeded) {
+        log.Println("request timed out")
+    }
+    return err
+}</code></pre>
+
+    <h2>Concurrency Patterns</h2>
+
+    <h3>Pipeline</h3>
+<pre><code>func gen(nums ...int) &lt;-chan int {
+    out := make(chan int)
+    go func() {
+        for _, n := range nums { out &lt;- n }
+        close(out)
+    }()
+    return out
+}
+
+func sq(in &lt;-chan int) &lt;-chan int {
+    out := make(chan int)
+    go func() {
+        for n := range in { out &lt;- n * n }
+        close(out)
+    }()
+    return out
+}
+
+// Usage: gen |&gt; sq |&gt; print
+for v := range sq(gen(1, 2, 3)) {
+    fmt.Println(v) // 1, 4, 9
+}</code></pre>
+
+    <h3>Worker pool</h3>
+<pre><code>func worker(id int, jobs &lt;-chan int, results chan&lt;- int) {
+    for j := range jobs {
+        results &lt;- j * 2
+    }
+}
+
+jobs := make(chan int, 100)
+results := make(chan int, 100)
+for w := 0; w &lt; 5; w++ { go worker(w, jobs, results) }
+for j := 0; j &lt; 50; j++ { jobs &lt;- j }
+close(jobs)
+for r := 0; r &lt; 50; r++ { fmt.Println(&lt;-results) }</code></pre>
+
+    <h2>sync Package</h2>
+    <table>
+      <thead><tr><th>Type</th><th>Use for</th></tr></thead>
+      <tbody>
+        <tr><td><code>sync.Mutex</code></td><td>Mutual exclusion (lock/unlock)</td></tr>
+        <tr><td><code>sync.RWMutex</code></td><td>Multiple readers OR one writer</td></tr>
+        <tr><td><code>sync.WaitGroup</code></td><td>Wait for a group of goroutines to finish</td></tr>
+        <tr><td><code>sync.Once</code></td><td>Run initialization exactly once</td></tr>
+        <tr><td><code>sync.Map</code></td><td>Concurrent map (specialized; usually prefer <code>map</code> + <code>Mutex</code>)</td></tr>
+        <tr><td><code>sync.Pool</code></td><td>Object pool for reducing GC pressure</td></tr>
+        <tr><td><code>sync.Cond</code></td><td>Condition variable (rare in Go; prefer channels)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>errgroup</h2>
+<pre><code>import "golang.org/x/sync/errgroup"
+
+g, ctx := errgroup.WithContext(context.Background())
+g.Go(func() error { return fetchUsers(ctx) })
+g.Go(func() error { return fetchOrders(ctx) })
+if err := g.Wait(); err != nil {
+    log.Fatal(err) // first error cancels the group via ctx
+}</code></pre>
+
+    <h2>Race Detector</h2>
+    <div class="card red">
+      <p><code>go test -race</code> and <code>go run -race</code> enable the race detector (based on ThreadSanitizer). It catches data races at runtime with ~10&times; slowdown. <strong>Always run tests with <code>-race</code>.</strong> Go does not prevent data races at compile time (unlike Rust) &mdash; the race detector is the safety net.</p>
+    </div>
+
+    <h2>Common Pitfalls</h2>
+    <ul>
+      <li><strong>Goroutine leaks</strong> &mdash; forgotten goroutines blocking on channels that nobody reads from</li>
+      <li><strong>Loop variable capture</strong> &mdash; goroutines capturing a loop variable by reference (fixed in Go 1.22)</li>
+      <li><strong>Sending to a closed channel</strong> &mdash; panics</li>
+      <li><strong>Nil channel</strong> &mdash; send/receive blocks forever (useful in select for disabling a case)</li>
+      <li><strong>Deadlock</strong> &mdash; all goroutines asleep; Go runtime detects and crashes</li>
+    </ul>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>RST</td><td>Rust</td><td>Rust async/await + Send/Sync prevents data races at compile time; Go detects at runtime with -race</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>Java virtual threads (Loom) are similar to goroutines; j.u.c. is the Java equivalent of sync/channels</td></tr>
+        <tr><td>JTS</td><td>JavaScript</td><td>Node.js event loop is single-threaded; Go goroutines are truly parallel</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Language</a></li>
+        <li><a href="gc.html">GC &amp; Runtime</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="education.html">Learn</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Goroutines &amp; Channels &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -67,7 +67,7 @@ where `Li(x) = integral_2^x dt/ln(t)` is the logarithmic integral. RH says that 
 
 **2001-present:** The Clay Mathematics Institute lists RH as one of the seven Millennium Prize Problems, with a $1,000,000 prize.
 
-**2024-present:** The RH/Montgomery-Dyson research thread in our ecosystem connects eigenvalue spacing statistics to the distribution of zeros. Our pgvector database (maple@tibsfox, schema artemis) stores embeddings of 1,087 research pages, including the statistical mechanics connection.
+**2024-present:** The RH/Montgomery-Dyson research thread in our ecosystem connects eigenvalue spacing statistics to the distribution of zeros. Our pgvector database (foxy@localhost, schema artemis) stores embeddings of 1,087 research pages, including the statistical mechanics connection.
 
 ## 3. Current State of the Art
 
@@ -89,7 +89,7 @@ This is exactly the pair correlation of eigenvalues of a random Hermitian matrix
 
 ## 4. Connection to Our Work
 
-**RH/Montgomery-Dyson research thread.** The memory note "RH/Montgomery-Dyson research thread started -- eigenvalue spacing vs zeta zeros" points directly to our active investigation. The GUE statistics of Riemann zeros connect to random matrix theory, which connects to the spectral analysis used in our math co-processor (`.college/departments/mathematics/`, the algebrus eigen tool in the MCP server). The Hilbert-Pólya conjecture -- that the Riemann zeros are eigenvalues of some self-adjoint operator -- drives an entire research program that our pgvector database (maple@tibsfox, schema artemis, 1,087 pages loaded) could help organize.
+**RH/Montgomery-Dyson research thread.** The memory note "RH/Montgomery-Dyson research thread started -- eigenvalue spacing vs zeta zeros" points directly to our active investigation. The GUE statistics of Riemann zeros connect to random matrix theory, which connects to the spectral analysis used in our math co-processor (`.college/departments/mathematics/`, the algebrus eigen tool in the MCP server). The Hilbert-Pólya conjecture -- that the Riemann zeros are eigenvalues of some self-adjoint operator -- drives an entire research program that our pgvector database (foxy@localhost, schema artemis, 1,087 pages loaded) could help organize.
 
 **Agent identity and cryptographic security.** The GSD trust system uses agent identities. In any deployment involving cryptographic signing (which the trust-manager at `src/mcp/security/trust-manager.ts` handles), the security depends on the hardness of factoring large integers and the discrete logarithm problem. Both hardnesses are tightly bound to the distribution of primes. If RH is false and primes have large irregular gaps, algorithms like GNFS (General Number Field Sieve) for factoring could be faster than currently known, potentially weakening the security foundations. Conversely, if RH is proven, it implies the tightest possible regularity of primes and the strongest form of security assurances for schemes built on prime-based hardness.
 

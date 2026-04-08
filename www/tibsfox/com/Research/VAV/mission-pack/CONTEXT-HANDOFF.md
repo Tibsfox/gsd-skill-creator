@@ -39,9 +39,9 @@
 
 ## Source PDFs
 
-- v1: `/home/foxy/Downloads/files(39).zip` → `/tmp/missions/m1/mission_combined.pdf` (20 pages)
-- v2: `/home/foxy/Downloads/files(40).zip` → `/tmp/missions/m2/mission_v2.pdf` (29 pages)
-- v3: `/home/foxy/Downloads/files(41).zip` → `/tmp/missions/m3/mission_v3.pdf` (31 pages)
+- v1: `~/Downloads/files(39).zip` → `/tmp/missions/m1/mission_combined.pdf` (20 pages)
+- v2: `~/Downloads/files(40).zip` → `/tmp/missions/m2/mission_v2.pdf` (29 pages)
+- v3: `~/Downloads/files(41).zip` → `/tmp/missions/m3/mission_v3.pdf` (31 pages)
 - **PDFs in /tmp — re-extract from Downloads at session start**
 
 ## Remaining Work: Missions 3-5

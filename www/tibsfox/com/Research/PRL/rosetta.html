@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta Integration &mdash; Perl &amp; PHP &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-prl">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">Cross-Language Translation, CPAN as Cookbook, Aminet Parallel, Code Archaeology</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Perl Core</a>
+      <a href="text-processing.html">Text &amp; NLP</a>
+      <a href="cpan.html">CPAN</a>
+      <a href="sysadmin.html">Sysadmin</a>
+      <a href="php.html">PHP</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;How did they do it on Aminet?&rdquo; &ldquo;How did they do it with Perl?&rdquo; &mdash; These are not idle questions. They are research queries into the world&rsquo;s largest curated code libraries, and the answers are always instructive, often surprising, and sometimes the exact solution you need.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- THE AMINET / CPAN / PACKAGIST PARALLEL                       -->
+    <!-- ============================================================ -->
+
+    <h2>Three Archives, One Pattern</h2>
+    <table>
+      <thead><tr><th>Archive</th><th>Platform</th><th>Founded</th><th>Scale</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Aminet</strong></td><td>Amiga</td><td>1992</td><td>~100,000 files</td><td>Community FTP archive with categories, readmes, browsable</td></tr>
+        <tr><td><strong>CPAN</strong></td><td>Perl</td><td>1995</td><td>108,000+ modules</td><td>Author-uploaded, PAUSE-moderated, CPAN Testers validated</td></tr>
+        <tr><td><strong>Packagist</strong></td><td>PHP</td><td>2012</td><td>400,000+ packages</td><td>Composer-managed, GitHub-integrated, semver</td></tr>
+      </tbody>
+    </table>
+    <div class="card">
+      <p>All three share the <strong>code archaeology model</strong>: when you need to solve a problem, before you write code from scratch, you search the archive. You find implementations that solve similar problems. You read the source. You learn the idioms. You adapt the approach to your context.</p>
+      <p>This is fundamentally different from &ldquo;install a dependency.&rdquo; It&rsquo;s <strong>reading the source as education</strong>. Aminet taught a generation of Amiga programmers by example. CPAN teaches Perl programmers the same way. The implementations <em>are</em> the documentation.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ROSETTA TRANSLATION ENGINE                                    -->
+    <!-- ============================================================ -->
+
+    <h2>The Rosetta Translation Engine</h2>
+    <p>Our <a href="../ROSETTA.md">Rosetta Stone</a> maps concepts across domains. Perl and PHP add two critical translation axes:</p>
+
+    <h3>Axis 1: Language-to-Language Translation</h3>
+    <p>The same algorithm expressed in different languages reveals what each language values:</p>
+    <table>
+      <thead><tr><th>Task</th><th>Bash</th><th>Perl</th><th>PHP</th><th>Python</th></tr></thead>
+      <tbody>
+        <tr><td>Word frequency</td><td><code>tr ' ' '\n' | sort | uniq -c | sort -rn</code></td><td><code>$freq{$_}++ for split /\s+/; ...</code></td><td><code>array_count_values(str_word_count($text, 1))</code></td><td><code>Counter(text.split())</code></td></tr>
+        <tr><td>CSV parse</td><td><code>awk -F, '{print $2}'</code></td><td><code>Text::CSV</code> or <code>split /,/</code></td><td><code>fgetcsv($fh)</code></td><td><code>csv.reader(f)</code></td></tr>
+        <tr><td>HTTP fetch</td><td><code>curl -s $url</code></td><td><code>LWP::Simple::get($url)</code></td><td><code>file_get_contents($url)</code></td><td><code>requests.get(url)</code></td></tr>
+        <tr><td>Regex replace</td><td><code>sed 's/old/new/g'</code></td><td><code>s/old/new/g</code></td><td><code>preg_replace('/old/', 'new', $s)</code></td><td><code>re.sub('old', 'new', s)</code></td></tr>
+        <tr><td>JSON decode</td><td><code>jq '.key'</code></td><td><code>decode_json($json)-&gt;{key}</code></td><td><code>json_decode($json)-&gt;key</code></td><td><code>json.loads(s)['key']</code></td></tr>
+        <tr><td>Database query</td><td>N/A</td><td><code>$dbh-&gt;selectall_arrayref($sql)</code></td><td><code>$pdo-&gt;query($sql)-&gt;fetchAll()</code></td><td><code>cursor.execute(sql)</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Axis 2: Pattern Translation via Archives</h3>
+    <p>When we encounter a problem in any language, we can query CPAN and Packagist as <strong>pattern libraries</strong>:</p>
+    <div class="card">
+      <p><strong>Research query:</strong> &ldquo;How do I implement a content-addressed store?&rdquo;</p>
+      <ul>
+        <li><strong>CPAN answer:</strong> <code>Digest::SHA</code> + <code>File::Spec</code> + <code>DBM::Deep</code> &mdash; Perl&rsquo;s approach uses tied hashes and the filesystem directly</li>
+        <li><strong>Packagist answer:</strong> <code>league/flysystem</code> + content hashing &mdash; PHP&rsquo;s approach uses filesystem abstraction layers</li>
+        <li><strong>Translation to TypeScript:</strong> Our Grove format (<code>src/memory/grove-format.ts</code>) uses the same content-addressed pattern with different primitives</li>
+      </ul>
+      <p>The <em>pattern</em> is language-independent. The <em>implementation</em> teaches you the idioms of each language.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE COOKBOOK RESEARCH METHOD                                   -->
+    <!-- ============================================================ -->
+
+    <h2>The Cookbook Research Method</h2>
+    <p>How to use CPAN/Packagist/Aminet as research tools, not just package managers:</p>
+
+    <h3>Step 1: Problem Statement</h3>
+    <p>Define what you need in plain English: &ldquo;I need to parse Apache log files, extract IP addresses, geolocate them, and generate a report.&rdquo;</p>
+
+    <h3>Step 2: Archive Search</h3>
+    <table>
+      <thead><tr><th>Search</th><th>CPAN Result</th><th>What You Learn</th></tr></thead>
+      <tbody>
+        <tr><td>&ldquo;apache log parser&rdquo;</td><td><code>Apache::Log::Parser</code></td><td>Log format parsing with named fields</td></tr>
+        <tr><td>&ldquo;geoip&rdquo;</td><td><code>Geo::IP</code>, <code>MaxMind::DB::Reader</code></td><td>GeoIP database integration patterns</td></tr>
+        <tr><td>&ldquo;report generation&rdquo;</td><td><code>Text::Table</code>, <code>Template</code></td><td>Tabular output and template-driven reports</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Step 3: Read the Source</h3>
+    <p>Don&rsquo;t just install &mdash; <strong>read the module source code</strong>. On MetaCPAN, every module has a &ldquo;Source&rdquo; tab. Study:</p>
+    <ul>
+      <li>How they handle edge cases</li>
+      <li>What data structures they chose and why</li>
+      <li>How they test (every good CPAN module has a <code>t/</code> directory)</li>
+      <li>How they document (POD is Perl&rsquo;s inline documentation format)</li>
+    </ul>
+
+    <h3>Step 4: Translate the Pattern</h3>
+    <p>Take the approach (not the code) and implement it in your target language. The CPAN module showed you the <em>algorithm</em> and the <em>edge cases</em>. Now write it in TypeScript, Rust, Python, or whatever you need.</p>
+
+    <!-- ============================================================ -->
+    <!-- ROSETTA CLUSTER MAPPING                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Rosetta Cluster Mapping</h2>
+    <p>How Perl/PHP concepts translate across the Research Series clusters:</p>
+    <table>
+      <thead><tr><th>Perl/PHP Concept</th><th>Rosetta Translation</th><th>Cluster</th></tr></thead>
+      <tbody>
+        <tr><td>CPAN module ecosystem</td><td>Aminet archive (FFA), npm/crates (GSD2), Grove records (skill-creator)</td><td>Creative, Infrastructure</td></tr>
+        <tr><td>Regex engine (PCRE)</td><td>Finite automata (SST), pattern matching (UNI), signal processing (BPS)</td><td>Computation, Science</td></tr>
+        <tr><td>DBI database abstraction</td><td>Storage abstraction (VAV), ORM patterns (GSD2), pgvector (MPC)</td><td>Infrastructure</td></tr>
+        <tr><td>mod_perl / mod_php</td><td>Embedded interpreters (GSD2/Tauri), plugin architecture (skill-creator)</td><td>Infrastructure</td></tr>
+        <tr><td>Perl one-liners</td><td>Bash pipelines (SYS), Unix philosophy (small tools, composition)</td><td>Infrastructure</td></tr>
+        <tr><td>CPAN Testers</td><td>CI/CD (GSD2), Nyquist validation (skill-creator), test coverage</td><td>Infrastructure</td></tr>
+        <tr><td>WordPress / Drupal</td><td>CMS patterns (BRC), community platforms, content management</td><td>Creative, Business</td></tr>
+        <tr><td>Larry Wall&rsquo;s linguistics</td><td>Natural language (NLP cluster), Unison (UNI), parsing theory (SST)</td><td>Computation, AI</td></tr>
+        <tr><td>Perl&rsquo;s context sensitivity</td><td>Type coercion, duck typing, dynamic dispatch &mdash; linguistic relativity in code</td><td>Computation</td></tr>
+        <tr><td>The escalation ladder</td><td>Abstraction levels (SST), the computation stack, system layers (SYS)</td><td>Infrastructure, Science</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- AMINET DEEP PARALLEL                                          -->
+    <!-- ============================================================ -->
+
+    <h2>The Aminet Connection</h2>
+    <div class="card">
+      <p>Aminet (1992&ndash;present) and CPAN (1995&ndash;present) share more than a model. They share a <em>philosophy</em>:</p>
+      <ul>
+        <li><strong>Open by default:</strong> Everything is source-available. You can read, learn, modify, redistribute.</li>
+        <li><strong>Community-curated:</strong> Quality emerges from collective use and review, not top-down approval.</li>
+        <li><strong>Categories and readmes:</strong> Both organize by function (Aminet: <code>dev/c</code>, <code>util/text</code>; CPAN: namespaces like <code>Text::</code>, <code>DBI::</code>).</li>
+        <li><strong>The long tail matters:</strong> The obscure utility you find at 3am that solves your exact problem &mdash; that&rsquo;s the real value. Not the top 100 packages, but the 108,000th.</li>
+        <li><strong>Authors are people:</strong> Both archives name authors. You learn whose code you can trust. You develop favorites. You read their other work.</li>
+      </ul>
+      <p>When we ask &ldquo;how did they do it on Aminet?&rdquo; or &ldquo;how did they do it with Perl?&rdquo; &mdash; we&rsquo;re doing the same thing: querying a community memory. The answer isn&rsquo;t just code. It&rsquo;s <em>accumulated wisdom</em>.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <p>The Rosetta translation engine connects Perl/PHP to every cluster in the Research Series through shared patterns:</p>
+    <table>
+      <thead><tr><th>Cluster</th><th>Translation Vector</th></tr></thead>
+      <tbody>
+        <tr><td>Ecology (ECO)</td><td>Data pipeline for species CSV processing, observation log parsing</td></tr>
+        <tr><td>Electronics (LED)</td><td>Serial protocol parsing, firmware configuration generation</td></tr>
+        <tr><td>Infrastructure (SYS)</td><td>System automation, log analysis, monitoring, glue scripts</td></tr>
+        <tr><td>Energy (THE)</td><td>Sensor data aggregation, SCADA log processing</td></tr>
+        <tr><td>Creative (FFA)</td><td>Template engines, content management, static site generation</td></tr>
+        <tr><td>Business (TKN)</td><td>Financial report generation, data transformation, ETL</td></tr>
+        <tr><td>Science (BPS)</td><td>PDL (Perl Data Language) for numerical computation, bioinformatics (BioPerl)</td></tr>
+        <tr><td>Space (NASA)</td><td>Telemetry parsing, mission data processing, FITS file handling</td></tr>
+        <tr><td>AI &amp; Computation (AGT)</td><td>NLP preprocessing, training data pipeline, text classification</td></tr>
+        <tr><td>Music (MUS)</td><td>MIDI processing, metadata extraction, playlist generation</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="cpan.html">CPAN Ecosystem</a></li>
+        <li><a href="php.html">PHP &mdash; The Web Sibling</a></li>
+        <li><a href="text-processing.html">Text Processing &amp; NLP</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rosetta Integration &middot; Perl &amp; PHP &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

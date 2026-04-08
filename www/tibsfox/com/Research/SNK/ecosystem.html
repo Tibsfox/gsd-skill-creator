@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PyPI &amp; Packaging &mdash; Python &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-snk">
+  <header>
+    <h1>PyPI &amp; Packaging</h1>
+    <div class="subtitle">The Cheese Shop, pip, venv, Poetry, uv &mdash; From distutils Hell to pyproject.toml</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="ecosystem.html" class="active">PyPI</a>
+      <a href="scientific.html">Science</a>
+      <a href="ml-ai.html">ML/AI</a>
+      <a href="web.html">Web</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      PyPI launched in 2003, originally nicknamed <strong>&ldquo;the Cheese Shop&rdquo;</strong> after the Monty Python sketch (&ldquo;This is the most tested cheese shop in the district, sir.&rdquo;). Richard Jones proposed it in PEP 301. It was hosted at <code>cheeseshop.python.org</code>, then moved to <code>pypi.python.org</code>, and finally to <code>pypi.org</code> in 2018 when Warehouse went live. Today it is the second-largest language-specific package registry in the world.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- PYPI SCALE                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>PyPI by the Numbers</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">782K+</span><span class="stat-label">Projects</span></div>
+      <div class="stat"><span class="stat-value gold">8.4M+</span><span class="stat-label">Releases</span></div>
+      <div class="stat"><span class="stat-value scale">18.2M+</span><span class="stat-label">Files Hosted</span></div>
+      <div class="stat"><span class="stat-value emerald">1M+</span><span class="stat-label">Users</span></div>
+      <div class="stat"><span class="stat-value violet">~20B</span><span class="stat-label">Downloads/Month</span></div>
+      <div class="stat"><span class="stat-value">2003</span><span class="stat-label">Founded</span></div>
+    </div>
+
+    <h3>Scale Compared to Other Registries</h3>
+    <table>
+      <thead><tr><th>Registry</th><th>Language</th><th>Packages</th></tr></thead>
+      <tbody>
+        <tr><td><strong>npm</strong></td><td>JavaScript</td><td>3,000,000+</td></tr>
+        <tr><td><strong>PyPI</strong></td><td>Python</td><td><strong>782,000+</strong></td></tr>
+        <tr><td>Maven Central</td><td>Java</td><td>600,000+</td></tr>
+        <tr><td>Packagist</td><td>PHP</td><td>400,000+</td></tr>
+        <tr><td>CPAN</td><td>Perl</td><td>220,000 distributions</td></tr>
+        <tr><td>RubyGems</td><td>Ruby</td><td>185,000+</td></tr>
+        <tr><td>crates.io</td><td>Rust</td><td>165,000+</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- WAREHOUSE                                                     -->
+    <!-- ============================================================ -->
+
+    <h2>Warehouse &mdash; The Modern PyPI</h2>
+    <div class="card">
+      <p><strong>Warehouse</strong> is the codebase powering <code>pypi.org</code> today. The project began in 2011 by <strong>Donald Stufft</strong> as a from-scratch rewrite of the legacy PyPI codebase. It went live as the production PyPI on <strong>April 16, 2018</strong>.</p>
+      <ul>
+        <li><strong>Stack:</strong> Pyramid web framework, PostgreSQL, Elasticsearch, Redis</li>
+        <li><strong>CDN:</strong> Fastly (hundreds of TB/day bandwidth)</li>
+        <li><strong>License:</strong> MIT, open source at <code>github.com/pypi/warehouse</code></li>
+        <li><strong>Funding:</strong> Mozilla Open Source Support, Facebook, Sloan Foundation, individual sponsors</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PACKAGING TIMELINE                                            -->
+    <!-- ============================================================ -->
+
+    <h2>The Packaging Timeline &mdash; A Long, Painful Evolution</h2>
+    <table>
+      <thead><tr><th>Year</th><th>Event</th></tr></thead>
+      <tbody>
+        <tr><td>1998</td><td><code>distutils</code> first appears (Greg Ward), included in Python 1.6</td></tr>
+        <tr><td>2000</td><td><code>distutils</code> officially in stdlib (Python 2.0)</td></tr>
+        <tr><td><strong>2003</strong></td><td><strong>PyPI launches (&ldquo;Cheese Shop&rdquo;)</strong></td></tr>
+        <tr><td>2004</td><td><strong>setuptools 0.5</strong> by Phillip J. Eby &mdash; extends distutils, introduces eggs</td></tr>
+        <tr><td>2004</td><td><code>easy_install</code> ships with setuptools &mdash; first real installer</td></tr>
+        <tr><td>2007</td><td>setuptools stalls; community forks become <strong>Distribute</strong></td></tr>
+        <tr><td><strong>2008</strong></td><td><strong><code>pip</code> 0.1</strong> released by Ian Bicking (originally <code>pyinstall</code>)</td></tr>
+        <tr><td>2011</td><td><strong>virtualenv</strong> matures as the standard isolation tool</td></tr>
+        <tr><td>2012</td><td><strong>PEP 405</strong> &mdash; <code>venv</code> added to stdlib (Python 3.3)</td></tr>
+        <tr><td>2012</td><td><strong>PEP 427</strong> &mdash; <strong>wheel format</strong> (<code>.whl</code>) defined by Daniel Holth, replaces <code>.egg</code></td></tr>
+        <tr><td>2013</td><td>Distribute merged back into setuptools; pip bundled with Python via <code>ensurepip</code></td></tr>
+        <tr><td>2016</td><td><strong>PEP 518</strong> &mdash; <code>pyproject.toml</code> introduced</td></tr>
+        <tr><td>2017</td><td><strong>PEP 517</strong> &mdash; pluggable build backends (decouples build from setuptools)</td></tr>
+        <tr><td>2018</td><td><strong>PyPI Warehouse</strong> launches at pypi.org. Poetry 1.0.0a1 released (S&eacute;bastien Eustace)</td></tr>
+        <tr><td>Oct 2020</td><td><strong>pip 20.3</strong> &mdash; new backtracking SAT-style resolver becomes default</td></tr>
+        <tr><td>2021</td><td>PEP 621 &mdash; standardize project metadata in <code>pyproject.toml</code> <code>[project]</code> table</td></tr>
+        <tr><td>2022</td><td><code>distutils</code> officially deprecated (PEP 632), removed in Python 3.12</td></tr>
+        <tr><td><strong>Feb 2024</strong></td><td><strong>uv 0.1.0</strong> released by Astral (Charlie Marsh)</td></tr>
+        <tr><td>2025</td><td>uv adoption explodes; surpasses Poetry in download metrics for many projects</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- THE CRISIS                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>The Packaging Crisis (2010&ndash;2018)</h2>
+    <div class="card">
+      <p>For roughly 2010&ndash;2018, the Python packaging story was infamous. Common gripes:</p>
+      <ul>
+        <li><code>distutils</code> was minimal and quietly hostile to anything beyond the trivial case</li>
+        <li><code>setuptools</code> monkey-patched <code>distutils</code> and accreted features unpredictably</li>
+        <li><code>easy_install</code> could install but not uninstall, and pulled <code>.egg</code> files into a shared location with version conflicts</li>
+        <li><code>pip</code> solved install/uninstall but for a decade <strong>did not have a real dependency resolver</strong> &mdash; it would happily install incompatible dependency sets</li>
+        <li>Build configuration was a Python script (<code>setup.py</code>) that ran at install time &mdash; arbitrary code execution from any package&rsquo;s installer</li>
+        <li>Multiple competing tools (pipenv, poetry, hatch, pdm, pip-tools) split the community</li>
+        <li>C extensions on Windows were a nightmare, partially fixed by wheels and <code>manylinux</code> PEPs</li>
+      </ul>
+      <p><strong>xkcd #1987 (&ldquo;Python Environment&rdquo;) from 2018</strong> became the canonical illustration.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODERN TOOLS                                                  -->
+    <!-- ============================================================ -->
+
+    <h2>Modern Packaging Tools</h2>
+
+    <h3>pip &mdash; The Canonical Installer</h3>
+    <pre><code>pip install requests              # install from PyPI
+pip install requests==2.31.0      # specific version
+pip install -r requirements.txt   # from file
+pip install -e .                  # editable install from local dir
+pip install package --index-url https://custom.index/simple
+pip freeze > requirements.txt     # snapshot current env
+pip show requests                 # show package info
+pip uninstall requests</code></pre>
+
+    <h3>venv &mdash; Virtual Environments (Built-in)</h3>
+    <pre><code>python -m venv .venv              # create virtual environment
+source .venv/bin/activate         # activate (Unix)
+.venv\Scripts\activate            # activate (Windows)
+pip install -r requirements.txt   # install into isolated env
+deactivate                        # exit</code></pre>
+
+    <h3>Poetry &mdash; Modern Dependency Manager</h3>
+    <pre><code>poetry new my-project             # create project with pyproject.toml
+poetry add requests               # add dependency, update lock file
+poetry add --group dev pytest     # dev dependency
+poetry install                    # install from lock file
+poetry run python script.py       # run in project env
+poetry build                      # build wheels + sdists
+poetry publish                    # upload to PyPI</code></pre>
+
+    <h3>uv &mdash; The Rust-Based Rocket (2024+)</h3>
+    <pre><code>uv venv                           # create venv (100x faster than venv)
+uv pip install requests           # install (10-100x faster than pip)
+uv pip sync requirements.txt      # sync exactly
+uv tool install ruff              # install CLI tools
+uv run script.py                  # run with inline deps
+uv sync                           # install from pyproject.toml + lock</code></pre>
+    <div class="card">
+      <p><strong>uv</strong> is Astral&rsquo;s Rust-based replacement for pip, virtualenv, pip-tools, pipx, and poetry. Created by <strong>Charlie Marsh</strong> (also the creator of the <code>ruff</code> linter). It is 10-100x faster than pip, supports the full Python packaging standards, and has been adopted rapidly since its February 2024 release. By 2025, uv had surpassed Poetry in download metrics for many project types.</p>
+    </div>
+
+    <h3>conda &mdash; Scientific Computing Alternative</h3>
+    <pre><code>conda create -n myenv python=3.14 numpy scipy pandas
+conda activate myenv
+conda install -c conda-forge pytorch
+conda env export > environment.yml
+mamba install tensorflow          # mamba = fast conda (C++)</code></pre>
+    <p><strong>conda</strong> handles binary dependencies (BLAS, LAPACK, CUDA, MKL) that pip historically struggled with. Popular in data science and ML via the Anaconda distribution. <strong>mamba</strong> and <strong>miniforge</strong> are community-driven, faster alternatives.</p>
+
+    <!-- ============================================================ -->
+    <!-- ESSENTIAL PACKAGES                                            -->
+    <!-- ============================================================ -->
+
+    <h2>Essential PyPI Packages</h2>
+
+    <h3>HTTP and APIs</h3>
+    <table>
+      <thead><tr><th>Package</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><code>requests</code></td><td>Kenneth Reitz. The canonical HTTP client. &ldquo;HTTP for Humans&rdquo;</td></tr>
+        <tr><td><code>httpx</code></td><td>Sync + async HTTP, HTTP/2 support. The modern successor</td></tr>
+        <tr><td><code>aiohttp</code></td><td>Async HTTP client/server</td></tr>
+      </tbody>
+    </table>
+
+    <h3>CLI and Terminal</h3>
+    <table>
+      <thead><tr><th>Package</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><code>click</code></td><td>Armin Ronacher. Declarative command-line interfaces</td></tr>
+        <tr><td><code>typer</code></td><td>Sebastian Ramirez. Click + type hints. FastAPI for CLI</td></tr>
+        <tr><td><code>rich</code></td><td>Will McGugan. Beautiful terminal output: tables, progress bars, syntax highlighting</td></tr>
+        <tr><td><code>textual</code></td><td>Terminal user interfaces (TUI) built on rich</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Data &amp; Validation</h3>
+    <table>
+      <thead><tr><th>Package</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><code>pydantic</code></td><td>Samuel Colvin. Data validation using Python type hints. Powers FastAPI</td></tr>
+        <tr><td><code>marshmallow</code></td><td>Schema definition and (de)serialization</td></tr>
+        <tr><td><code>attrs</code></td><td>Hynek Schlawack. Classes without boilerplate (predecessor of dataclasses)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Testing</h3>
+    <table>
+      <thead><tr><th>Package</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><code>pytest</code></td><td>The de facto testing framework. Fixtures, parametrization, plugins</td></tr>
+        <tr><td><code>hypothesis</code></td><td>Property-based testing. Generates edge cases you&rsquo;d never think of</td></tr>
+        <tr><td><code>tox</code></td><td>Test matrix automation across Python versions</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Code Quality</h3>
+    <table>
+      <thead><tr><th>Package</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><code>black</code></td><td>&#321;ukasz Langa. Opinionated auto-formatter. &ldquo;The uncompromising code formatter&rdquo;</td></tr>
+        <tr><td><code>ruff</code></td><td>Astral. Rust-based linter. 10-100x faster than flake8. Replaces flake8, isort, and many others</td></tr>
+        <tr><td><code>mypy</code></td><td>Jukka Lehtosalo. Static type checker for PEP 484 type hints</td></tr>
+        <tr><td><code>pyright</code></td><td>Microsoft. Fast type checker, powers Pylance in VS Code</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- SECURITY                                                      -->
+    <!-- ============================================================ -->
+
+    <h2>Supply Chain Security</h2>
+    <div class="card">
+      <p>PyPI has had its share of supply chain incidents. The community has responded with layered defenses:</p>
+      <ul>
+        <li><strong>PEP 458</strong> &mdash; Surviving a compromise of PyPI (TUF: The Update Framework)</li>
+        <li><strong>Sigstore integration</strong> &mdash; Keyless signing via Fulcio, transparency via Rekor</li>
+        <li><strong>2FA mandatory</strong> &mdash; For all PyPI accounts with upload privileges (2023+)</li>
+        <li><strong>Trusted Publishers</strong> &mdash; OIDC-based publishing from GitHub Actions, no long-lived tokens</li>
+        <li><strong>Typosquatting detection</strong> &mdash; Names similar to popular packages get flagged</li>
+        <li><strong>PyPI Security Working Group</strong> &mdash; Dedicated response team</li>
+      </ul>
+      <p>Known incidents: <code>colorama</code> typosquatting (2017), <code>ctx</code> takeover (2022), various crypto-miner packages. Every incident drove improvements to the security model.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- HOW TO PUBLISH                                                -->
+    <!-- ============================================================ -->
+
+    <h2>How to Publish to PyPI</h2>
+    <pre><code># Modern workflow with pyproject.toml
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "my-package"
+version = "0.1.0"
+description = "My awesome package"
+authors = [{name = "Your Name", email = "you@example.com"}]
+dependencies = ["requests&gt;=2.31"]
+requires-python = "&gt;=3.10"
+
+# Build
+python -m build                   # creates dist/*.whl and dist/*.tar.gz
+
+# Upload
+twine upload dist/*               # legacy
+# OR
+uv publish                        # modern
+
+# OR use Trusted Publishers from GitHub Actions (recommended)
+# Configure PyPI to trust a specific GitHub repo + workflow
+# No tokens, no secrets, OIDC-based</code></pre>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>PyPI vs CPAN vs Packagist &mdash; three models of code archaeology</td></tr>
+        <tr><td>GSD2</td><td>GSD Skill Creator</td><td>Package publishing patterns, semver, lock files</td></tr>
+        <tr><td>SYS</td><td>Systems Administration</td><td>pip vs apt vs conda &mdash; package manager coexistence</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Core Language</a></li>
+        <li><a href="scientific.html">Scientific Computing</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="history.html">History &amp; Culture</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>PyPI &amp; Packaging &middot; The Snake &mdash; Python &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

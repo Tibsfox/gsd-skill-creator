@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prolog &amp; Logic Programming &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-plg">
+  <header>
+    <h1>Prolog &amp; Logic Programming</h1>
+    <div class="subtitle">Algorithm = Logic + Control &mdash; Horn Clauses, Unification, WAM, Datalog, Constraint LP, Answer Set Programming, the Quiet Renaissance</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="history.html">History</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="expert-systems.html">Expert Systems</a>
+      <a href="constraint-lp.html">CLP</a>
+      <a href="datalog-asp.html">Datalog &amp; ASP</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;Algorithm = Logic + Control.&rdquo; &mdash; Robert Kowalski (1979). The radical claim Prolog made was that you could <em>state what you want</em> and let the machine figure out <em>how</em>. When it works, it feels like magic. When it doesn&rsquo;t, you learn cut, mode declarations, and the dark art of taming a search tree.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- RESEARCH PROGRAM STATISTICS                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value ink">54+</span><span class="stat-label">Years of Prolog</span></div>
+      <div class="stat"><span class="stat-value gold">1972</span><span class="stat-label">Marseille Birth</span></div>
+      <div class="stat"><span class="stat-value olive">1983</span><span class="stat-label">WAM Published</span></div>
+      <div class="stat"><span class="stat-value">ISO</span><span class="stat-label">13211-1:1995</span></div>
+      <div class="stat"><span class="stat-value green">10+</span><span class="stat-label">Living Impls</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why logic programming now?</strong> Prolog has a reputation as yesterday&rsquo;s AI language &mdash; shelved when statistical ML took over in the 1990s. But the declarative idea refused to die. Today Datalog powers <strong>CodeQL</strong> (GitHub&rsquo;s security engine) and <strong>Souffle</strong> (Oracle Labs&rsquo; program analyzer). Answer Set Programming runs bioinformatics and combinatorial planning via <strong>clingo</strong>. The Rust borrow checker&rsquo;s <strong>Polonius</strong> is a Datalog engine. <strong>IBM Watson</strong> used Prolog in its Jeopardy-winning NLP pipeline. And the 2020s renaissance in <em>neuro-symbolic AI</em> &mdash; DeepProbLog, Scallop, Logic Tensor Networks &mdash; is bringing logic programming back as the symbolic counterpart to neural networks. The pendulum swings.</p>
+      <p><strong>Research method:</strong> Primary sources (Colmerauer&rsquo;s &ldquo;The Birth of Prolog,&rdquo; Kowalski&rsquo;s &ldquo;Early Years of Logic Programming,&rdquo; Warren&rsquo;s WAM papers), ISO/IEC 13211-1, SWI-Prolog documentation, Potassco docs, Sterling &amp; Shapiro, Bratko, O&rsquo;Keefe, Triska&rsquo;s &ldquo;The Power of Prolog,&rdquo; cross-reference against 294-project PNW Research Series corpus, Rosetta translation mapping.</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE REASONING LADDER                                          -->
+    <!-- ============================================================ -->
+
+    <h2>The Reasoning Ladder</h2>
+    <p>Prolog belongs on a different ladder than the sysadmin&rsquo;s escalation from bash to machine code. Logic programming is about <em>how you describe the problem</em>, not <em>how close you are to the metal</em>:</p>
+
+    <div class="logic-ladder">
+      <ol>
+        <li><strong>Imperative</strong> &mdash; Tell the computer what to do, step by step. Assign, branch, loop, mutate. The dominant model since FORTRAN (1957).</li>
+        <li><strong>Functional</strong> &mdash; Tell the computer how to compute a value from its inputs. Map, fold, compose. Pure, referentially transparent. Lisp (1958), ML, Haskell.</li>
+        <li><strong>Object-oriented</strong> &mdash; Tell the computer which entities exist and how they interact. Message-passing, encapsulation, inheritance. Simula (1967), Smalltalk, Java.</li>
+        <li><strong>Logic</strong> &mdash; Tell the computer what is <em>true</em>. Facts and rules. Ask it questions. Let unification and search do the rest. Prolog (1972), Datalog, ASP.</li>
+        <li><strong>Constraint</strong> &mdash; Tell the computer what must hold in a solution. Let a specialized solver find it. CLP(FD), CLP(R), SAT, SMT, Z3.</li>
+        <li><strong>Probabilistic</strong> &mdash; Tell the computer what is <em>likely</em>. Condition on evidence. Stan, Pyro, ProbLog. A logic programming relative.</li>
+        <li><strong>Neural</strong> &mdash; Show the computer examples. Let gradient descent find the function. PyTorch, JAX. The dominant model since ~2012.</li>
+        <li><strong>Neuro-symbolic</strong> &mdash; Combine them. Use neural networks for perception, logic programming for reasoning. DeepProbLog, Scallop. The frontier.</li>
+      </ol>
+    </div>
+
+    <p>Every rung is still useful. Every rung has its own languages, tools, and culture. Prolog occupies rung four &mdash; but as this research series shows, the surrounding rungs are increasingly its collaborators.</p>
+
+    <!-- ============================================================ -->
+    <!-- MODULE OVERVIEW                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="language.html" class="category-card">
+        <div><span class="cluster-badge cluster-core">Core</span></div>
+        <h3>The Language Itself</h3>
+        <p>Terms, unification, SLD resolution, cut, negation as failure, DCGs, meta-programming. Worked examples: quicksort in 4 lines, N-queens, the Zebra puzzle, a DCG for arithmetic. The mental-model shift from everything else.</p>
+        <p><strong>Key:</strong> Unification, backtracking, the cut, DCGs, meta-programming</p>
+      </a>
+
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-hist">History</span></div>
+        <h3>History &amp; Origins</h3>
+        <p>Colmerauer at Marseille (1972), Kowalski at Edinburgh, the WAM (Warren, 1983), ISO 13211-1 (1995), Japan&rsquo;s Fifth Generation Project (1982-1992), the expert-systems boom, the AI winter, and why Prolog refused to die.</p>
+        <p><strong>Key:</strong> Colmerauer, Kowalski, Warren, timeline, cultural impact</p>
+      </a>
+
+      <a href="implementations.html" class="category-card">
+        <div><span class="cluster-badge cluster-impl">Implementations</span></div>
+        <h3>Implementations &amp; Tooling</h3>
+        <p>SWI-Prolog (the workhorse), SICStus (the commercial gold standard), GNU Prolog, YAP, XSB, Ciao, ECLiPSe, Scryer, Trealla, Tau, Logtalk. The Warren Abstract Machine, tabling, constraint libraries, debuggers, foreign interfaces.</p>
+        <p><strong>Key:</strong> SWI, SICStus, WAM, tabling, debugging, libraries</p>
+      </a>
+
+      <a href="expert-systems.html" class="category-card">
+        <div><span class="cluster-badge cluster-expert">Expert Systems</span></div>
+        <h3>Expert Systems &amp; NLP</h3>
+        <p>The original killer app. MYCIN, PROSPECTOR, XCON. Prolog as NLP language: DCGs, CHAT-80, the Core Language Engine. Why symbolic NLP fell, and what it still does better. Watson and Jeopardy.</p>
+        <p><strong>Key:</strong> Expert systems, DCGs, symbolic NLP, Watson</p>
+      </a>
+
+      <a href="constraint-lp.html" class="category-card">
+        <div><span class="cluster-badge cluster-clp">CLP</span></div>
+        <h3>Constraint Logic Programming</h3>
+        <p>Jaffar &amp; Lassez&rsquo;s 1987 CLP scheme. CLP(FD) for finite domains, CLP(R) for reals, CLP(B) for booleans, CHR. Sudoku in 20 lines, N-queens as hello world, airline crew scheduling, vehicle routing. Where Prolog earns its keep in industry.</p>
+        <p><strong>Key:</strong> CLP(FD), CHR, scheduling, optimization</p>
+      </a>
+
+      <a href="datalog-asp.html" class="category-card">
+        <div><span class="cluster-badge cluster-datalog">Datalog &amp; ASP</span></div>
+        <h3>Datalog &amp; Answer Set Programming</h3>
+        <p>The modern comeback. Datalog in CodeQL, Souffle, DDlog, Polonius (Rust). Answer Set Programming via clingo/Potassco, DLV. Stable model semantics as the fix for negation-as-failure. Where logic programming is winning in the 2020s.</p>
+        <p><strong>Key:</strong> Datalog, Souffle, ASP, clingo, Polonius</p>
+      </a>
+
+      <a href="rosetta.html" class="category-card">
+        <div><span class="cluster-badge cluster-rosetta">Rosetta</span></div>
+        <h3>Rosetta Integration</h3>
+        <p>Cross-paradigm translation: Prolog &harr; Haskell &harr; miniKanren &harr; Datalog &harr; SQL &harr; Z3. How to port a Prolog program to Python. When logic programming beats everything else. When it absolutely doesn&rsquo;t.</p>
+        <p><strong>Key:</strong> Translation patterns, paradigm bridges, cousin languages</p>
+      </a>
+
+      <a href="education.html" class="category-card">
+        <div><span class="cluster-badge cluster-edu">Education</span></div>
+        <h3>Learning Resources</h3>
+        <p>The canonical books: Bratko, Sterling &amp; Shapiro, O&rsquo;Keefe, Clocksin &amp; Mellish. Online: Learn Prolog Now!, The Power of Prolog (Markus Triska), SWISH, Exercism. Courses, the logic programming community, ALP.</p>
+        <p><strong>Key:</strong> Books, tutorials, Triska, community</p>
+      </a>
+
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-hist">Culture</span></div>
+        <h3>Culture &amp; Folklore</h3>
+        <p>The Edinburgh-Marseille dialog. JAPH for Prolog. Obfuscated Prolog. The cut as original sin. &ldquo;It&rsquo;s not a bug, it&rsquo;s a feature of SLD resolution.&rdquo; Why every CS undergrad has a love-hate semester with it.</p>
+        <p><strong>Key:</strong> Community, folklore, why Prolog marks you</p>
+      </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROLOG AT A GLANCE                                            -->
+    <!-- ============================================================ -->
+
+    <h2>Prolog at a Glance</h2>
+    <table>
+      <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>First release</td><td><strong>1972</strong> (Alain Colmerauer, Philippe Roussel, Aix-Marseille University)</td></tr>
+        <tr><td>Age</td><td>54 years (as of April 2026)</td></tr>
+        <tr><td>Paradigm</td><td>Logic programming, declarative</td></tr>
+        <tr><td>Computational model</td><td>First-order Horn clauses + SLD resolution</td></tr>
+        <tr><td>Key abstract machine</td><td>Warren Abstract Machine (WAM, David H. D. Warren, 1983)</td></tr>
+        <tr><td>Standardization</td><td>ISO/IEC 13211-1:1995 (Core), 13211-2:2000 (Modules)</td></tr>
+        <tr><td>Type system</td><td>Dynamic; optional mode declarations (Mercury, Ciao)</td></tr>
+        <tr><td>Major implementations</td><td>SWI-Prolog, SICStus, GNU Prolog, YAP, XSB, Ciao, ECLiPSe, Scryer, Trealla, Tau</td></tr>
+        <tr><td>Key strength</td><td>Unification, symbolic reasoning, search, grammars, constraint solving</td></tr>
+        <tr><td>Historical niche</td><td>Expert systems, NLP, theorem proving, knowledge representation</td></tr>
+        <tr><td>Modern niche</td><td>Program analysis (Datalog), constraint optimization, neuro-symbolic AI</td></tr>
+        <tr><td>Motto</td><td>&ldquo;Algorithm = Logic + Control&rdquo; (Kowalski, 1979)</td></tr>
+        <tr><td>Famous alumni</td><td>IBM Watson (Jeopardy, 2011), CodeQL, Souffle, Polonius (Rust), clingo</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- THE FAMOUS QUICKSORT                                          -->
+    <!-- ============================================================ -->
+
+    <h2>The Famous Four-Line Quicksort</h2>
+    <p>No introduction to Prolog is complete without this. It is <em>declarative</em> &mdash; it says what a sorted list is, not how to sort.</p>
+
+    <pre><code>quicksort([], []).
+quicksort([Pivot|T], Sorted) :-
+    partition(Pivot, T, Less, Greater),
+    quicksort(Less, LSorted),
+    quicksort(Greater, GSorted),
+    append(LSorted, [Pivot|GSorted], Sorted).
+
+partition(_, [], [], []).
+partition(P, [H|T], [H|L], G) :- H =&lt; P, partition(P, T, L, G).
+partition(P, [H|T], L, [H|G]) :- H &gt;  P, partition(P, T, L, G).</code></pre>
+
+    <p>This is the <strong>naive</strong> version (not in-place, not using accumulators). A production version uses difference lists and is still shorter than the C equivalent. Ask Prolog <code>?- quicksort([3,1,4,1,5,9,2,6], S).</code> and it replies <code>S = [1,1,2,3,4,5,6,9].</code> But it can also run <em>backwards</em> in certain dialects &mdash; a glimpse of the bidirectional magic that makes the language feel unique.</p>
+
+    <!-- ============================================================ -->
+    <!-- THE FAMILY OF LOGIC LANGUAGES                                 -->
+    <!-- ============================================================ -->
+
+    <h2>The Family of Logic Languages</h2>
+    <p>Prolog is the trunk. Many branches grew from it, and several <em>non-Prolog</em> logic languages are now more widely deployed than Prolog itself:</p>
+
+    <table>
+      <thead><tr><th>Language</th><th>Origin</th><th>Distinguishing feature</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Prolog</strong></td><td>Colmerauer 1972</td><td>General-purpose logic programming</td><td>Living classic</td></tr>
+        <tr><td><strong>Datalog</strong></td><td>Database theory, ~1977</td><td>No function symbols; guaranteed termination</td><td>Industrial comeback</td></tr>
+        <tr><td><strong>ASP</strong></td><td>Gelfond &amp; Lifschitz 1988</td><td>Stable model semantics; combinatorial solving</td><td>Strong niche</td></tr>
+        <tr><td><strong>&lambda;Prolog</strong></td><td>Miller 1986</td><td>Higher-order logic, hypothetical reasoning</td><td>Research</td></tr>
+        <tr><td><strong>Mercury</strong></td><td>Melbourne 1993</td><td>Pure, typed, strict modes, fast</td><td>Active niche</td></tr>
+        <tr><td><strong>Curry</strong></td><td>~1995</td><td>Functional-logic hybrid (Haskell + Prolog)</td><td>Research</td></tr>
+        <tr><td><strong>miniKanren</strong></td><td>Friedman &amp; Byrd, 2005</td><td>Embedded in Scheme/Clojure/Racket</td><td>Growing</td></tr>
+        <tr><td><strong>Oz/Mozart</strong></td><td>Van Roy 1991</td><td>Multi-paradigm; CTM textbook</td><td>Educational</td></tr>
+        <tr><td><strong>clingo / Potassco</strong></td><td>Potsdam, 2000s</td><td>Leading ASP solver</td><td>Industrial</td></tr>
+        <tr><td><strong>Souffle</strong></td><td>Oracle Labs, 2016</td><td>Datalog for program analysis, C++ backend</td><td>Industrial</td></tr>
+        <tr><td><strong>DDlog</strong></td><td>VMware, 2019</td><td>Differential (incremental) Datalog</td><td>Industrial</td></tr>
+        <tr><td><strong>Polonius</strong></td><td>Rust team, 2018</td><td>Datalog-based Rust borrow checker</td><td>In Rust</td></tr>
+        <tr><td><strong>Flix</strong></td><td>Aarhus/Waterloo, 2016</td><td>Datalog + functional; JVM</td><td>Research</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- WHY LOGIC PROGRAMMING REFUSES TO DIE                          -->
+    <!-- ============================================================ -->
+
+    <h2>Why Logic Programming Refuses to Die</h2>
+    <div class="card gold">
+      <p><strong>The short version:</strong> There are problems for which the declarative specification is dramatically shorter than any operational implementation. When you have such a problem &mdash; scheduling, constraint satisfaction, program analysis, symbolic reasoning &mdash; a logic language beats every other approach by 10&times; or more in <em>code size</em>, and often in <em>time-to-working-solution</em>.</p>
+      <p><strong>The long version:</strong> Modern industry has rediscovered several of these problems:</p>
+      <ul>
+        <li><strong>Program analysis</strong> &mdash; GitHub CodeQL, Oracle Souffle, Rust&rsquo;s Polonius. Static analysis is recursive fact-base querying, which is exactly Datalog.</li>
+        <li><strong>Cloud network verification</strong> &mdash; Amazon, Microsoft, and Google use Datalog-style tools to verify firewall and routing configurations at scale.</li>
+        <li><strong>Combinatorial optimization</strong> &mdash; Airline crew scheduling (SICStus), factory planning, logistics. CLP(FD) and ASP remain competitive with CP-SAT and MiniZinc.</li>
+        <li><strong>Knowledge representation</strong> &mdash; Description logics, OWL, Wikidata. The semantic web winter ended, but the survivors run on logic-programming kin.</li>
+        <li><strong>Neuro-symbolic AI</strong> &mdash; 2020s research combining deep networks with symbolic reasoning. DeepProbLog, Scallop, Logic Tensor Networks. LLMs generating Prolog/ASP as a reasoning layer.</li>
+      </ul>
+      <p><strong>The punchline:</strong> Prolog the language is a specialist tool with a steep learning curve. But the <em>ideas</em> of logic programming &mdash; unification, declarative rules, fixed-point evaluation, constraint propagation &mdash; are foundational infrastructure across computing. Learning Prolog is learning the family of ideas that keep getting reinvented.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified connections across the 294-project PNW Research Series corpus:</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>Contemporary &mdash; both 1970s/80s tools that outlived their obituaries</td></tr>
+        <tr><td>CEE</td><td>C Programming</td><td>The WAM is a virtual machine in the C tradition</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>Polonius borrow checker is Datalog; trait resolution is logic programming</td></tr>
+        <tr><td>JGC</td><td>JVM GC &amp; Memory</td><td>Program analysis for GC / escape analysis uses Datalog-style methods</td></tr>
+        <tr><td>PCH</td><td>Python Computational History</td><td>Python PySwip and Janus bindings to SWI-Prolog</td></tr>
+        <tr><td>MLC</td><td>Machine Language</td><td>The WAM instruction set: abstract machine design lineage</td></tr>
+        <tr><td>SST</td><td>States, Symbols &amp; Tape</td><td>Resolution theorem proving as computational model</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>Rule-based diagnosis &mdash; the expert-system heritage</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="language.html">The Language Itself</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="implementations.html">Implementations &amp; Tooling</a></li>
+        <li><a href="expert-systems.html">Expert Systems &amp; NLP</a></li>
+        <li><a href="constraint-lp.html">Constraint Logic Programming</a></li>
+        <li><a href="datalog-asp.html">Datalog &amp; Answer Set Programming</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Prolog &amp; Logic Programming &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

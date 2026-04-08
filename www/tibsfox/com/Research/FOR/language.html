@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Reference &mdash; Fortran &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-for">
+  <header>
+    <h1>Language Reference</h1>
+    <div class="subtitle">! Modern Fortran 2003-2023 &mdash; free form, modules, OO, C interop</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html" class="active">Language</a>
+      <a href="arrays.html">Arrays</a>
+      <a href="hpc.html">HPC</a>
+      <a href="parallel.html">Parallel</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>! Modern Fortran</strong><br>
+      Fortran 90 onward shares almost nothing with the FORTRAN of the punched-card era. Free-form, modular, object-capable, strongly typed, with native array semantics, coarrays, and direct C interoperability.
+    </blockquote>
+
+    <h2>1. Source Form</h2>
+
+    <p>Fortran has two source forms. <strong>Fixed form</strong> (FORTRAN 77 and earlier, still legal) is column-sensitive. <strong>Free form</strong> (Fortran 90+) is what all modern code uses.</p>
+
+    <pre>
+! Free-form modern Fortran — no column rules
+program hello
+  implicit none
+  integer :: i
+  integer, parameter :: n = 10
+  do i = 1, n
+    write(*, '(A, I3, A, I5)') ' i=', i, '  i**2=', i*i
+  end do
+end program hello</pre>
+
+    <p>Compilers choose source form by extension: <code>.f</code>/<code>.for</code> = fixed, <code>.f90</code>/<code>.f03</code>/<code>.f08</code>/<code>.f18</code> = free. Fortran is <strong>case insensitive</strong> &mdash; <code>FOO</code>, <code>foo</code>, and <code>Foo</code> are identical. Modern convention: all lowercase.</p>
+
+    <p><strong>Line continuation:</strong> <code>&amp;</code> at end of line. <strong>Comments:</strong> <code>!</code> anywhere on the line.</p>
+
+    <h2>2. Program Structure</h2>
+
+    <table>
+      <thead><tr><th>Unit</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>program</code></td><td>Main entry point. Exactly one per executable.</td></tr>
+        <tr><td><code>module</code></td><td>Reusable collection of data, types, procedures. The modern unit of encapsulation.</td></tr>
+        <tr><td><code>subroutine</code></td><td>Procedure returning nothing (like <code>void</code>).</td></tr>
+        <tr><td><code>function</code></td><td>Procedure returning a value.</td></tr>
+        <tr><td><code>submodule</code></td><td>Split module implementation across files (Fortran 2008+).</td></tr>
+      </tbody>
+    </table>
+
+    <pre>
+module math_utils
+  implicit none
+  private                              ! default: everything private
+  public :: square, cube              ! explicit public API
+
+contains
+
+  pure function square(x) result(y)
+    real, intent(in) :: x
+    real :: y
+    y = x * x
+  end function square
+
+  pure function cube(x) result(y)
+    real, intent(in) :: x
+    real :: y
+    y = x * x * x
+  end function cube
+
+end module math_utils
+
+program use_math
+  use math_utils, only: square, cube   ! selective import
+  implicit none
+  print *, square(3.0), cube(3.0)      ! 9.0  27.0
+end program use_math</pre>
+
+    <div class="card std-card">
+      <p><strong>IMPLICIT NONE:</strong> Historically, Fortran had a rule that variables starting with I-N were implicit <code>INTEGER</code>, others <code>REAL</code>. Modern code ALWAYS starts with <code>implicit none</code> to disable this and require explicit declarations. Use <code>-fimplicit-none</code> to enforce globally.</p>
+    </div>
+
+    <h2>3. Data Types &amp; KIND Parameters</h2>
+
+    <p>The five intrinsic types: <code>integer</code>, <code>real</code>, <code>complex</code>, <code>logical</code>, <code>character</code>. Each has a <strong>KIND</strong> parameter controlling precision:</p>
+
+    <pre>
+use, intrinsic :: iso_fortran_env, only: int32, int64, real32, real64, real128
+implicit none
+
+integer(int32)  :: i32              ! 32-bit integer
+integer(int64)  :: i64              ! 64-bit integer
+real(real32)    :: r32              ! single precision
+real(real64)    :: r64              ! double precision
+real(real128)   :: r128             ! quad precision (if supported)
+
+complex(real64) :: z                ! double-precision complex
+logical         :: flag
+character(len=20) :: name
+
+! Selecting kind by required range:
+integer, parameter :: ik = selected_int_kind(18)   ! ~18 digits
+integer, parameter :: rk = selected_real_kind(15)  ! ~15 digits precision</pre>
+
+    <h2>4. Derived Types</h2>
+
+    <p>Fortran&rsquo;s equivalent of C structs &mdash; with type-bound procedures, inheritance, and polymorphism.</p>
+
+    <pre>
+module point_module
+  implicit none
+
+  type :: point
+    real :: x, y
+  contains
+    procedure :: distance_to     ! type-bound method
+    procedure :: magnitude
+  end type point
+
+contains
+
+  pure function distance_to(self, other) result(d)
+    class(point), intent(in) :: self, other
+    real :: d
+    d = sqrt((self%x - other%x)**2 + (self%y - other%y)**2)
+  end function distance_to
+
+  pure function magnitude(self) result(m)
+    class(point), intent(in) :: self
+    real :: m
+    m = sqrt(self%x**2 + self%y**2)
+  end function magnitude
+
+end module point_module
+
+program use_points
+  use point_module
+  implicit none
+  type(point) :: p1, p2
+  p1 = point(1.0, 2.0)
+  p2 = point(4.0, 6.0)
+  print *, 'Distance:', p1%distance_to(p2)       ! 5.0
+  print *, 'Magnitude:', p1%magnitude()           ! 2.236
+end program use_points</pre>
+
+    <h2>5. INTENT Declarations</h2>
+
+    <table>
+      <thead><tr><th>Intent</th><th>Meaning</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td><code>intent(in)</code></td><td>Input only. Read-only in callee.</td><td>Arguments that shouldn&rsquo;t be modified.</td></tr>
+        <tr><td><code>intent(out)</code></td><td>Output only. Undefined on entry.</td><td>Results, output buffers.</td></tr>
+        <tr><td><code>intent(inout)</code></td><td>Read and write.</td><td>Arguments modified in place.</td></tr>
+      </tbody>
+    </table>
+
+    <pre>
+subroutine swap(a, b)
+  real, intent(inout) :: a, b
+  real :: tmp
+  tmp = a
+  a = b
+  b = tmp
+end subroutine swap
+
+subroutine compute(input, output, workspace)
+  real, intent(in)    :: input(:)
+  real, intent(out)   :: output(:)
+  real, intent(inout) :: workspace(:)
+  ! ...
+end subroutine compute</pre>
+
+    <h2>6. Object-Oriented Fortran (2003+)</h2>
+
+    <pre>
+module shapes
+  implicit none
+
+  ! Abstract base type
+  type, abstract :: shape
+  contains
+    procedure(area_interface), deferred :: area
+  end type shape
+
+  abstract interface
+    pure function area_interface(self) result(a)
+      import :: shape
+      class(shape), intent(in) :: self
+      real :: a
+    end function area_interface
+  end interface
+
+  ! Concrete: circle extends shape
+  type, extends(shape) :: circle
+    real :: radius
+  contains
+    procedure :: area => circle_area
+  end type circle
+
+  ! Concrete: rectangle extends shape
+  type, extends(shape) :: rectangle
+    real :: width, height
+  contains
+    procedure :: area => rectangle_area
+  end type rectangle
+
+contains
+
+  pure function circle_area(self) result(a)
+    class(circle), intent(in) :: self
+    real :: a
+    a = 3.14159265 * self%radius**2
+  end function circle_area
+
+  pure function rectangle_area(self) result(a)
+    class(rectangle), intent(in) :: self
+    real :: a
+    a = self%width * self%height
+  end function rectangle_area
+
+end module shapes
+
+program polymorphism_demo
+  use shapes
+  implicit none
+  class(shape), allocatable :: s
+
+  s = circle(radius=5.0)
+  print *, 'Circle area:', s%area()        ! polymorphic dispatch
+
+  deallocate(s)
+  s = rectangle(width=4.0, height=3.0)
+  print *, 'Rectangle area:', s%area()
+end program polymorphism_demo</pre>
+
+    <h2>7. Control Structures</h2>
+
+    <pre>
+! IF / THEN / ELSE
+if (x > 0.0) then
+  print *, 'positive'
+else if (x < 0.0) then
+  print *, 'negative'
+else
+  print *, 'zero'
+end if
+
+! DO loops
+do i = 1, 10;      print *, i;  end do
+do i = 1, 100, 2;  print *, i;  end do      ! step 2
+do i = 100, 1, -1; print *, i;  end do      ! countdown
+
+! DO WHILE
+do while (residual > 1.0e-6)
+  call iterate(x, residual)
+end do
+
+! Named loops with exit / cycle
+outer: do i = 1, n
+  inner: do j = 1, m
+    if (bad(i, j)) exit outer
+    if (skip(i, j)) cycle inner
+    call process(i, j)
+  end do inner
+end do outer
+
+! SELECT CASE
+select case (status)
+case (1)
+  print *, 'one'
+case (2:5)
+  print *, 'two to five'
+case (10, 20, 30)
+  print *, 'ten twenty or thirty'
+case default
+  print *, 'other'
+end select</pre>
+
+    <h2>8. C Interoperability (ISO_C_BINDING)</h2>
+
+    <p>Fortran 2003 introduced the <code>iso_c_binding</code> intrinsic module, providing standard, portable C interoperability.</p>
+
+    <pre>
+module c_interop_example
+  use, intrinsic :: iso_c_binding
+  implicit none
+
+  ! Declare a C function callable from Fortran
+  interface
+    function c_sqrt(x) bind(C, name="sqrt")
+      import :: c_double
+      real(c_double), value :: x
+      real(c_double) :: c_sqrt
+    end function c_sqrt
+  end interface
+
+contains
+
+  ! A Fortran function callable from C
+  function fortran_square(x) bind(C, name="fortran_square") result(y)
+    real(c_double), value :: x
+    real(c_double) :: y
+    y = x * x
+  end function fortran_square
+
+end module c_interop_example</pre>
+
+    <h2>9. I/O</h2>
+
+    <pre>
+! Formatted output
+print *, 'Simple unformatted'
+print '(A, I5, F10.4)', 'Value:', 42, 3.14159
+write(*, '(A, I0)') 'i = ', i
+
+! File I/O
+integer :: unit, ios
+open(newunit=unit, file='data.txt', status='old', action='read', iostat=ios)
+if (ios /= 0) stop 'Cannot open file'
+
+read(unit, *, iostat=ios) x, y, z
+close(unit)
+
+! Namelist I/O — easy structured input
+integer :: n
+real    :: tolerance
+character(len=80) :: method
+namelist /config/ n, tolerance, method
+
+open(newunit=unit, file='config.nml', action='read')
+read(unit, nml=config)
+close(unit)</pre>
+
+    <h2>10. The 2023 Standard (Latest)</h2>
+
+    <ul>
+      <li><strong>Generics (templates)</strong> &mdash; the long-awaited addition of parameterized generic programming</li>
+      <li><strong>Conditional expressions</strong> &mdash; inline <code>if (cond) value else other</code></li>
+      <li><strong>Tokenization improvements</strong> &mdash; cleaner lexer specification</li>
+      <li><strong>Better C interop</strong> &mdash; more C types, cleaner binding</li>
+    </ul>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+        <li><a href="arrays.html">Arrays &mdash; The Killer Feature</a></li>
+        <li><a href="hpc.html">HPC &amp; Scientific Computing</a></li>
+        <li><a href="parallel.html">Parallel Fortran</a></li>
+        <li><a href="ecosystem.html">Modern Ecosystem</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Language Reference &middot; Fortran &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

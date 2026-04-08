@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context-Free Grammars &mdash; ALGOL, BNF &amp; Context-Free Grammars</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alg">
+  <header>
+    <h1>Context-Free Grammars</h1>
+    <div class="subtitle">The Chomsky hierarchy, derivations, ambiguity, LL(k) and LR(k), and why programming language syntax lives in Type 2</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="report60.html">The Report</a>
+      <a href="bnf.html">BNF</a>
+      <a href="cfg.html" class="active">Context-Free Grammars</a>
+      <a href="parsers.html">Parsers</a>
+      <a href="influence.html">Influence</a>
+      <a href="wirth.html">Wirth Family</a>
+      <a href="rosetta.html">Rosetta</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <p>&ldquo;Chomsky was working on natural language. He believed that the real grammatical machinery for English was beyond Type 2. What he could not have anticipated was that his hierarchy would become the taxonomic backbone of compiler construction.&rdquo;</p>
+    </blockquote>
+
+    <h2>Noam Chomsky, 1956</h2>
+
+    <p>Noam Chomsky, a linguist at MIT, published <em>Three Models for the Description of Language</em> in <em>IRE Transactions on Information Theory</em> in September 1956 and <em>On Certain Formal Properties of Grammars</em> in <em>Information and Control</em> in June 1959. These two papers, written for linguists interested in describing natural language, became instead the foundation of the theory of formal languages and of compilers.</p>
+
+    <p>Chomsky was trying to characterize what kind of grammatical machinery was necessary to describe English syntax. He concluded that finite-state grammars (regular languages) were insufficient because English contained constructions with nested dependencies (center embedding) that a finite-state grammar could not handle. He also concluded that context-free grammars were insufficient because English contained constructions (certain cross-serial dependencies, and some reduplication phenomena in other languages) that could not be expressed context-freely.</p>
+
+    <p>Chomsky proposed a hierarchy of four classes of grammars, increasing in expressive power. This is the <strong>Chomsky hierarchy</strong>, and it cuts grammars (and languages, and recognizing machines) into four levels.</p>
+
+    <h2>The Hierarchy</h2>
+
+    <table>
+      <thead><tr><th>Type</th><th>Grammar</th><th>Productions</th><th>Automaton</th><th>Language Class</th></tr></thead>
+      <tbody>
+        <tr><td><strong>0</strong></td><td>Unrestricted</td><td>&alpha; &rarr; &beta;</td><td>Turing machine</td><td>Recursively enumerable</td></tr>
+        <tr><td><strong>1</strong></td><td>Context-sensitive</td><td>&alpha;A&beta; &rarr; &alpha;&gamma;&beta;</td><td>Linear-bounded automaton</td><td>Context-sensitive</td></tr>
+        <tr><td><strong>2</strong></td><td>Context-free</td><td>A &rarr; &gamma;</td><td>Pushdown automaton</td><td>Context-free (<strong>BNF</strong>)</td></tr>
+        <tr><td><strong>3</strong></td><td>Regular</td><td>A &rarr; a | aB</td><td>Finite automaton</td><td>Regular (<strong>regex</strong>)</td></tr>
+      </tbody>
+    </table>
+
+    <p>Each class strictly contains the one below. Type 3 &sub; Type 2 &sub; Type 1 &sub; Type 0.</p>
+
+    <h3>Type 0: Recursively Enumerable</h3>
+
+    <p>Type 0 grammars place no restrictions on the form of productions. The languages generated are exactly the <strong>recursively enumerable (RE)</strong> languages &mdash; the class of languages whose members can be listed by some Turing machine. Type 0 grammars are equivalent in power to Turing machines and to Post production systems. Practical use is rare. They are too powerful &mdash; ambiguity, emptiness, equivalence, all are undecidable for Type 0 grammars.</p>
+
+    <h3>Type 1: Context-Sensitive</h3>
+
+    <p>Type 1 grammars require that every production &alpha;A&beta; &rarr; &alpha;&gamma;&beta; satisfies |&alpha;A&beta;| &le; |&alpha;&gamma;&beta;|. The non-terminal A is rewritten to &gamma;, but only in the context of &alpha; on the left and &beta; on the right. Context-sensitive languages are exactly the languages recognized by <strong>linear-bounded automata</strong> &mdash; Turing machines with a tape length bounded by a linear function of the input length.</p>
+
+    <p>Context-sensitivity shows up in programming languages in a small but important set of places. Type checking &mdash; &ldquo;the variable x must have been declared in an enclosing scope before this use&rdquo; &mdash; is a context-sensitive constraint, not a context-free one. The classic example in formal language theory is the language {a<sup>n</sup>b<sup>n</sup>c<sup>n</sup> | n &ge; 0}, which is not context-free but is context-sensitive.</p>
+
+    <p>Parsing CSGs is exponential in the general case. Nobody uses pure CSGs for programming language implementation. The context-sensitive parts of real languages are handled in separate phases (semantic analysis, name resolution, type checking) that run after context-free parsing.</p>
+
+    <h3>Type 2: Context-Free</h3>
+
+    <p>Type 2 grammars require that every production has the form A &rarr; &gamma;, where A is a single non-terminal and &gamma; is any string of terminals and non-terminals. No context on the left-hand side. <strong>This is exactly BNF.</strong> The class of languages generated is the context-free languages, recognized by nondeterministic pushdown automata (PDAs).</p>
+
+    <div class="card green">
+      <p>Context-free languages are <strong>the sweet spot for programming language syntax</strong>. They are expressive enough to handle nested structure (parentheses, block structure, recursive expression) and tractable enough that parsing is polynomial in the general case (O(n<sup>3</sup>) via the CYK or Earley algorithms) and linear for important subclasses (LL(k) and LR(k) parsers run in O(n)).</p>
+    </div>
+
+    <h3>Type 3: Regular</h3>
+
+    <p>Type 3 grammars restrict productions to one of two shapes: A &rarr; a (a terminal) or A &rarr; aB (a terminal followed by a single non-terminal). This is a right-linear grammar. The languages generated are exactly the <strong>regular languages</strong>, which are also recognized by deterministic finite automata (DFAs) and are exactly describable by regular expressions. The equivalence between regular grammars, finite automata, and regular expressions is a foundational theorem &mdash; <strong>Kleene&rsquo;s theorem, 1956</strong>.</p>
+
+    <p>Regular languages are used everywhere in programming: lexer tokens, identifier matching, URL patterns, email format checking. The <code>grep</code> family, <code>sed</code>, <code>awk</code>, Perl regexes (mostly &mdash; some regex engines add backreferences, which take you out of regular and into something stranger), Rust&rsquo;s <code>regex</code> crate, Python&rsquo;s <code>re</code> module &mdash; all are tools for working with regular languages.</p>
+
+    <h2>Strict Containment &mdash; The Classic Examples</h2>
+
+    <table>
+      <thead><tr><th>Language</th><th>Class</th><th>Not in</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>{a<sup>n</sup>b<sup>n</sup> | n &ge; 0}</td><td>Context-free</td><td>Regular</td><td>A DFA cannot count arbitrarily high.</td></tr>
+        <tr><td>{a<sup>n</sup>b<sup>n</sup>c<sup>n</sup> | n &ge; 0}</td><td>Context-sensitive</td><td>Context-free</td><td>A PDA with one stack cannot track three concurrent counts.</td></tr>
+        <tr><td>Halting language</td><td>RE</td><td>Context-sensitive</td><td>Not decidable, but RE.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Derivations and Parse Trees</h2>
+
+    <p>A <strong>derivation</strong> is a sequence of rewrite steps. Write &alpha; &rArr; &beta; if &beta; is obtained from &alpha; by replacing one occurrence of some non-terminal A in &alpha; with the right-hand side of a production A &rarr; &gamma;. Write &alpha; &rArr;* &beta; for the reflexive-transitive closure.</p>
+
+    <p>L(G) = { w &in; &Sigma;* | S &rArr;* w }</p>
+
+    <ul>
+      <li>A <strong>leftmost derivation</strong> always rewrites the leftmost non-terminal at each step. LL parsers build these.</li>
+      <li>A <strong>rightmost derivation</strong> always rewrites the rightmost. LR parsers build these in reverse.</li>
+    </ul>
+
+    <p>Both produce the same set of terminal strings; they differ only in the order of steps. A <strong>parse tree</strong> for a derivation is a tree where the root is labeled S, interior nodes are labeled with non-terminals, and leaves are labeled with terminals. The yield of a parse tree &mdash; the concatenation of its leaf labels, read left to right &mdash; is the derived string.</p>
+
+    <h2>Ambiguity</h2>
+
+    <p>A grammar is <strong>ambiguous</strong> if some string in its language has two distinct parse trees (equivalently, two distinct leftmost derivations). Ambiguity is a property of grammars, not of languages &mdash; a language is called &ldquo;inherently ambiguous&rdquo; if every grammar for it is ambiguous, which is a rare and subtle condition. Most programming language ambiguities are grammar artifacts and can be removed by rewriting the grammar.</p>
+
+    <p>A simple ambiguous grammar for arithmetic:</p>
+
+<pre class="bnf"><span class="nt">&lt;E&gt;</span> <span class="meta">::=</span> <span class="nt">&lt;E&gt;</span> <span class="t">"+"</span> <span class="nt">&lt;E&gt;</span> <span class="meta">|</span> <span class="nt">&lt;E&gt;</span> <span class="t">"*"</span> <span class="nt">&lt;E&gt;</span> <span class="meta">|</span> <span class="nt">&lt;number&gt;</span></pre>
+
+    <p>The string <code>1 + 2 * 3</code> has two parse trees under this grammar. One groups as <code>(1 + 2) * 3</code>, the other as <code>1 + (2 * 3)</code>. The stratified grammar on the <a href="bnf.html">BNF page</a> is a rewrite that eliminates this ambiguity by design.</p>
+
+    <h3>The Dangling Else</h3>
+
+    <p>The most famous ambiguity in programming language grammars:</p>
+
+<pre class="bnf"><span class="nt">&lt;stmt&gt;</span> <span class="meta">::=</span> <span class="t">"if"</span> <span class="nt">&lt;expr&gt;</span> <span class="t">"then"</span> <span class="nt">&lt;stmt&gt;</span>
+        <span class="meta">|</span> <span class="t">"if"</span> <span class="nt">&lt;expr&gt;</span> <span class="t">"then"</span> <span class="nt">&lt;stmt&gt;</span> <span class="t">"else"</span> <span class="nt">&lt;stmt&gt;</span>
+        <span class="meta">|</span> <span class="nt">&lt;other-stmt&gt;</span></pre>
+
+    <p>The string <code>if E1 then if E2 then S1 else S2</code> has two parse trees. In one, the <code>else</code> binds to the outer <code>if</code>. In the other, to the inner. Most languages resolve by convention (&ldquo;match each else with the nearest unmatched if&rdquo;) stated in prose. Ada eliminated the ambiguity syntactically by requiring <code>end if</code> to terminate every <code>if</code>.</p>
+
+    <p>You can rewrite the grammar to eliminate the ambiguity by introducing two non-terminals, one for matched statements (balanced else) and one for unmatched:</p>
+
+<pre class="bnf"><span class="nt">&lt;stmt&gt;</span>      <span class="meta">::=</span> <span class="nt">&lt;matched&gt;</span> <span class="meta">|</span> <span class="nt">&lt;unmatched&gt;</span>
+<span class="nt">&lt;matched&gt;</span>   <span class="meta">::=</span> <span class="t">"if"</span> <span class="nt">&lt;expr&gt;</span> <span class="t">"then"</span> <span class="nt">&lt;matched&gt;</span> <span class="t">"else"</span> <span class="nt">&lt;matched&gt;</span>
+             <span class="meta">|</span> <span class="nt">&lt;other-stmt&gt;</span>
+<span class="nt">&lt;unmatched&gt;</span> <span class="meta">::=</span> <span class="t">"if"</span> <span class="nt">&lt;expr&gt;</span> <span class="t">"then"</span> <span class="nt">&lt;stmt&gt;</span>
+             <span class="meta">|</span> <span class="t">"if"</span> <span class="nt">&lt;expr&gt;</span> <span class="t">"then"</span> <span class="nt">&lt;matched&gt;</span> <span class="t">"else"</span> <span class="nt">&lt;unmatched&gt;</span></pre>
+
+    <h2>Left Recursion and Left Factoring</h2>
+
+    <p>A non-terminal A is <strong>directly left-recursive</strong> if there is a production A &rarr; A&alpha;. Left recursion is fatal for naive top-down parsers. The standard transformation replaces:</p>
+
+<pre class="bnf">A  <span class="meta">::=</span> A&alpha;<sub>1</sub> | A&alpha;<sub>2</sub> | ... | &beta;<sub>1</sub> | &beta;<sub>2</sub></pre>
+
+    <p>with:</p>
+
+<pre class="bnf">A  <span class="meta">::=</span> &beta;<sub>1</sub> A' | &beta;<sub>2</sub> A'
+A' <span class="meta">::=</span> &alpha;<sub>1</sub> A' | &alpha;<sub>2</sub> A' | &epsilon;</pre>
+
+    <p><strong>Left factoring</strong>: two productions with a common prefix cause trouble for predictive parsers. <code>A &rarr; &alpha;&beta; | &alpha;&gamma;</code> becomes <code>A &rarr; &alpha;A'; A' &rarr; &beta; | &gamma;</code>.</p>
+
+    <h2>LL(k) and LR(k) Parser Classes</h2>
+
+    <h3>LL(1)</h3>
+
+    <p>An <strong>LL(1) parser</strong> is a top-down parser that reads input Left to right, produces a Leftmost derivation, and uses 1 token of lookahead. At each step, the parser looks at the current non-terminal and the next token, and picks a production uniquely. The choice is made from a parse table indexed by (non-terminal, next-token) and populated using FIRST and FOLLOW sets.</p>
+
+    <p>A grammar is LL(1) iff for every non-terminal A with productions A &rarr; &alpha;<sub>1</sub> | ... | &alpha;<sub>n</sub>: FIRST(&alpha;<sub>i</sub>) &cap; FIRST(&alpha;<sub>j</sub>) = &empty; for i &ne; j, and nullable-production constraints on FOLLOW(A). When these conditions hold, a table-driven LL(1) parser can be generated automatically and runs in linear time.</p>
+
+    <p><strong>Recursive descent</strong> is the hand-coded version of LL(k). Each non-terminal becomes a function; the function body reads the input, matches against expected tokens, and recurses. Clang&rsquo;s C++ parser, Roslyn&rsquo;s C# parser, and the Rust compiler&rsquo;s parser are all hand-written recursive descent.</p>
+
+    <h3>LR(k) &mdash; Knuth, 1965</h3>
+
+    <p>Donald Knuth&rsquo;s <em>On the Translation of Languages from Left to Right</em>, published in <em>Information and Control</em>, 1965, is the paper that founded modern parser theory. Knuth asked: what is the largest class of context-free languages that can be parsed in linear time by a deterministic algorithm using a bounded amount of lookahead?</p>
+
+    <p>His answer: LR(k), for any fixed k. He gave a constructive algorithm for building the parsing table from the grammar, proved correctness, and established that LR(k) for k &ge; 1 captures exactly the deterministic context-free languages. LR parsers are bottom-up: they shift tokens onto a stack and reduce stack suffixes to non-terminals according to the grammar.</p>
+
+    <p>LR is strictly more powerful than LL &mdash; every LL(k) grammar is LR(k), but some LR(k) grammars are not LL(j) for any j. LR parsers handle left recursion naturally, which is the main reason LR is the default technique for mechanically-generated parsers.</p>
+
+    <p>The paper is dense &mdash; one of the Knuth papers you need to read slowly and with a pencil. It was largely theoretical at the time of publication: LR(1) tables were too big to build by hand and too big to store on the computers of 1965. The theory had to wait for better computers and for LALR(1) compression before it became useful.</p>
+
+    <h3>LALR(1) &mdash; DeRemer, 1969</h3>
+
+    <p><strong>Frank DeRemer&rsquo;s MIT PhD thesis</strong>, <em>Practical Translators for LR(k) Languages</em> (1969), introduced LALR(1) &mdash; Lookahead LR(1). DeRemer&rsquo;s insight was that the bloated LR(1) table could be compressed without losing most of its expressive power. LALR(1) builds the same state machine as LR(0) &mdash; much smaller than LR(1) &mdash; and then computes one-token lookahead sets for each state&rsquo;s reduce actions. The resulting tables are an order of magnitude smaller than LR(1) tables and can handle almost every practical programming language grammar.</p>
+
+    <div class="card blue">
+      <p>LALR(1) is the parser class that Yacc (1975) and all its descendants (Bison, Berkeley Yacc, byacc, and a dozen others) implement. For a grammar writer, the difference between LR(1) and LALR(1) shows up occasionally: some grammars that are LR(1) are not LALR(1), and the parser generator reports a conflict where LR(1) would have built a valid table. These cases are rare in practice, and the workarounds (grammar rewriting, precedence annotations) are usually easy. <strong>The compression benefit was enormous and LALR(1) became the dominant parser generator technique for three decades.</strong></p>
+    </div>
+
+    <h2>Where Programming Languages Actually Live</h2>
+
+    <p>In theory: programming language syntax is context-free. In practice: mostly.</p>
+
+    <h3>C&rsquo;s Typedef Problem</h3>
+
+    <p>C has a famous wrinkle. In <code>A * B;</code>, is this a multiplication expression-statement (A times B, result discarded) or a declaration (pointer-to-A named B)? The answer depends on whether A is a type name. And whether A is a type name depends on whether there was a <code>typedef</code> earlier that defined A as a type. This is a context-sensitive constraint &mdash; the surrounding declarations change the meaning of the current phrase &mdash; and it cannot be handled by a pure CFG.</p>
+
+    <p>C parsers handle it with the <strong>lexer hack</strong>: the lexer asks the symbol table whether an identifier is a type, and returns different tokens (IDENTIFIER versus TYPE_NAME) based on the answer. The parser stays context-free, but the lexer has side-eye at the symbol table. The whole arrangement is ugly but it works, and it is why C parsers are harder to maintain than Pascal parsers.</p>
+
+    <h3>Python&rsquo;s Indentation</h3>
+
+    <p>Python has indentation-based block structure. Off-side rule languages cannot be described by a pure CFG, because a CFG has no notion of &ldquo;same indentation as previous line.&rdquo; The usual solution is a preprocessor that inserts virtual INDENT and DEDENT tokens into the token stream. After this preprocessing, the language is context-free. Python&rsquo;s parser, for decades a LL(1) parser generator called <strong>pgen</strong>, ran on the tokenized-with-indent-markers stream. In 2020 Python switched to a PEG-based parser for expressiveness reasons.</p>
+
+    <h3>Haskell, Ruby</h3>
+
+    <p>Haskell&rsquo;s layout rule (indentation-sensitive block structure) is similar and also handled by preprocessing. Ruby has operator methods, heredocs, and regex literals that all make parsing context-sensitive in subtle ways. Most Ruby parsers are hand-written and carry extensive special-casing for these features.</p>
+
+    <div class="card amber">
+      <p><strong>The summary:</strong> CFGs are the sweet spot, but real languages push on the edges of the class, and real parsers accept small compromises (lexer hacks, preprocessing, hand-coded special cases) to stay inside the context-free box where the tools work.</p>
+    </div>
+
+    <h2>Chomsky&rsquo;s Unintended Legacy</h2>
+
+    <p>Chomsky was working on natural language. He believed that the real grammatical machinery for English was beyond Type 2 &mdash; he proposed transformational generative grammar, which is much more powerful, as the minimum for English. He regarded CFGs as a descriptive tool for local constituent structure, not as the final theory.</p>
+
+    <p>What he could not have anticipated was that his hierarchy, published in two papers three years apart in journals read mostly by linguists and information theorists, would become the taxonomic backbone of compiler construction. Every parsing textbook since the early 1970s opens with the Chomsky hierarchy, and every compiler writer learns the CFG as their working tool without necessarily ever reading a paper of Chomsky&rsquo;s. The hierarchy gave computer science a vocabulary: &ldquo;regular&rdquo; and &ldquo;context-free&rdquo; became words you could use without explaining, and problems could be classified by where they lived in the hierarchy.</p>
+
+    <div class="divider">::=  |  §  |  ::=</div>
+
+    <div class="cross-links">
+      <h4>Related Pages</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Committees</a></li>
+        <li><a href="report60.html">The ALGOL 60 Report</a></li>
+        <li><a href="bnf.html">Backus-Naur Form</a></li>
+        <li><a href="parsers.html">Parser Technology</a></li>
+        <li><a href="influence.html">The Algol Family</a></li>
+        <li><a href="wirth.html">Wirth Family</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Context-Free Grammars &middot; ALGOL, BNF &amp; Context-Free Grammars &middot; PNW Research Series</p>
+    <p><a href="../index.html">PNW Research Series</a> &middot; <a href="index.html">Back to Overview</a></p>
+  </footer>
+</body>
+</html>

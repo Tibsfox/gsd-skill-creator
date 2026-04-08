@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doing More With Less &mdash; Punch Cards &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-pch">
+  <header>
+    <h1>Doing More With Less</h1>
+    <div class="subtitle">C     THE AMIGA PRINCIPLE.  256KB.  200K TOKENS.  SAME LESSON.</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="hardware.html">Hardware</a>
+      <a href="workflow.html">Workflow</a>
+      <a href="loop.html">The Loop</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="modern.html">Modern AI</a>
+      <a href="mvp.html">MVP</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>Constraints do not limit creativity. They enable it.</strong> Total freedom produces paralysis. A canvas of any size, any color, any medium is a worse starting point than a 16&times;16 pixel grid and 8 colors. The Commodore 64 programmer, the haiku poet, the sonnet writer, the early JPL engineer &mdash; all knew this. Punch card programmers lived it daily.
+    </blockquote>
+
+    <h2>The Amiga Principle</h2>
+
+    <p>The Commodore Amiga 1000 shipped in 1985. It had <strong>256 kilobytes of RAM</strong>. It had a 7.16 MHz Motorola 68000 CPU. It had a custom chipset with names out of Norse mythology &mdash; <strong>Agnus, Denise, Paula</strong> &mdash; that handled graphics, sound, and I/O in parallel with the main CPU. It cost $1,295 at launch. The Macintosh released a year earlier, with less graphics capability and monaural audio, sold for $2,495.</p>
+
+    <p>In 256 kilobytes &mdash; the size of a single modern JPEG &mdash; the Amiga ran:</p>
+
+    <ul>
+      <li>A preemptive multitasking operating system (<strong>Exec</strong>)</li>
+      <li>A 32-color graphics system with 4096-color HAM mode</li>
+      <li>Four-channel stereo sampled audio (<strong>Paula</strong>)</li>
+      <li>Floppy disk I/O</li>
+      <li>RS-232 serial networking</li>
+      <li>A full windowed GUI (<strong>Intuition</strong>) on top of a structured message-passing kernel</li>
+      <li>Hardware sprites, playfields, and blitter-accelerated graphics (<strong>Denise + Agnus</strong>)</li>
+    </ul>
+
+    <p>Modern software running on <strong>64 gigabyte machines with 32-core CPUs</strong> often does less than the Amiga did in a quarter of a megabyte.</p>
+
+    <div class="card philosophy-card">
+      <p><strong>This is not an accident or an indictment. It is a principle.</strong></p>
+      <p>The Amiga principle, stated plainly: constraints force careful design, and careful design produces extraordinary results. When every byte costs something, every byte is justified. When every byte is justified, the total is not only small but <em>coherent</em>. The Amiga was a coherent system in a way that its bloated modern descendants are not. Every piece fit every other piece because <strong>there was no room for pieces that did not fit</strong>.</p>
+    </div>
+
+    <h2>The Forcing Function Insight</h2>
+
+    <p>The deepest insight of the punch card era: <strong>real constraints produce real craft</strong>. If you want your programmers (or your AI agents) to be good, constrain them. Not arbitrarily &mdash; meaningfully. Budget their tokens. Limit their context. Force them to commit to designs before executing. Make the cost of carelessness visible.</p>
+
+    <p>A canvas of any size produces paralysis or kitsch. A 16&times;16 pixel grid produces pixel art. A haiku with no rules is a diary entry. A haiku with 5-7-5 rules is a poem. These are the same principle applied to different domains. The principle is: <em>constraints define the medium, and the medium is what makes craft possible</em>.</p>
+
+    <h2>Examples of the Amiga Principle</h2>
+
+    <table>
+      <thead><tr><th>Constraint</th><th>Product</th><th>What It Achieved</th></tr></thead>
+      <tbody>
+        <tr><td>256KB RAM</td><td>Amiga OS 1.0 (1985)</td><td>Full preemptive multitasking GUI with custom chipset coordination</td></tr>
+        <tr><td>4KB RAM</td><td>Apollo Guidance Computer (1969)</td><td>Landed humans on the Moon</td></tr>
+        <tr><td>48KB usable</td><td>Commodore 64 demoscene</td><td>Real-time 3D graphics, digitized music, 4096-color displays</td></tr>
+        <tr><td>80 columns</td><td>Unix and its derivatives</td><td>An entire operating system philosophy based on composable text tools</td></tr>
+        <tr><td>64KB address space</td><td>Zork (1980)</td><td>An interactive fiction game that felt like a novel</td></tr>
+        <tr><td>5 seconds of video RAM</td><td>.kkrieger (2004)</td><td>A 96KB first-person shooter with procedural graphics and audio</td></tr>
+        <tr><td>~17 syllables</td><td>Haiku poetry</td><td>A thousand years of condensed meaning</td></tr>
+        <tr><td>14 lines</td><td>The sonnet</td><td>The foundation of English lyric poetry</td></tr>
+        <tr><td>Chamber ensemble</td><td>Mozart&rsquo;s string quartets</td><td>Some of the most perfect music ever written</td></tr>
+        <tr><td>$200/hour compute</td><td>Early FORTRAN scientific software</td><td>Code so carefully crafted it still runs in 2026</td></tr>
+        <tr><td>200K token context</td><td>Well-orchestrated AI agents</td><td>Complex multi-step engineering tasks done reliably</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Amiga Principle in GSD-OS</h2>
+
+    <p>The gsd-skill-creator project applies the Amiga principle at multiple layers:</p>
+
+    <ul>
+      <li><strong>At the skill layer:</strong> Each skill is small, focused, and loads lazily. A skill that tries to do everything is a skill that will fail to load when the context is tight. The <code>skill-integration</code> system explicitly tracks per-skill token consumption and surfaces it in <code>sc:status</code> &mdash; the equivalent of a memory profiler showing which subsystem is eating the RAM.</li>
+      <li><strong>At the tool layer:</strong> MCP servers should advertise minimal tool surfaces, not maximal ones. A server with 80 tools bloats the tool definition section of every session that loads it, even if only two of the tools are ever called.</li>
+      <li><strong>At the agent layer:</strong> Subagents are invoked with narrow, well-defined contracts. A subagent asked to &ldquo;analyze the codebase&rdquo; is an Amiga asked to run Windows 11. A subagent asked to &ldquo;list all files under <code>src/mcp</code> that import <code>../../validation/skill-validation</code> and summarize the import shape&rdquo; is an Amiga being asked to play a MOD file &mdash; well within its means and brilliantly done.</li>
+      <li><strong>At the mission layer:</strong> A GSD mission is a deliberately constrained envelope of work with defined inputs, token budget, and deliverable. Missions that exceed their envelope are split. Missions that underfill their envelope are merged. The envelope is the discipline.</li>
+    </ul>
+
+    <h2>Tool Economy</h2>
+
+    <p><strong>An AI agent with 100 available tools is not 100x more powerful than one with 10 tools.</strong> Often it is <em>less</em> powerful, because choosing the right tool is itself cognitive load, and the description of all 100 tools occupies thousands of tokens of context that could otherwise hold actual work.</p>
+
+    <p>The Amiga principle applied to tools: pick the smallest set of tools that accomplish the goal. Every tool in the context costs tokens <em>and</em> attention. Every tool description is a small paragraph competing for space in the system prompt. Every tool is a potential wrong answer when the model picks which one to call.</p>
+
+    <div class="card">
+      <p>This is exactly the punch card philosophy of <strong>&ldquo;do one thing well.&rdquo;</strong> Every program in your library was curated. Every subroutine you loaded was selected deliberately. You did not pull in a 10,000-line framework to do a 50-line job because you literally could not fit the framework in core. The 2026 equivalent is refusing to load every MCP server in the ecosystem just because they are available. Load the three you need. Unload them when you are done.</p>
+    </div>
+
+    <h2>Chipsets as Curated Tool Bundles</h2>
+
+    <p>The GSD-OS chipset architecture embodies this directly. A chipset is a curated, coherent bundle of tools, skills, and agents:</p>
+
+    <table>
+      <thead><tr><th>Chipset</th><th>Purpose</th><th>Equivalent 1965 Role</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gastown</strong></td><td>Multi-agent orchestration, convoys, token budgets</td><td>Computer operator scheduling batch jobs</td></tr>
+        <tr><td><strong>Northbridge</strong></td><td>Mayor-coordinator pattern, sling-dispatch</td><td>Shift supervisor coordinating operators</td></tr>
+        <tr><td><strong>Audio engineering</strong></td><td>ffmpeg, audio analysis for podcast production</td><td>Audio lab with specialized equipment</td></tr>
+        <tr><td><strong>Research</strong></td><td>Fleet mission dispatch, research synthesis</td><td>Library research department</td></tr>
+      </tbody>
+    </table>
+
+    <p>A session loads the chipsets it needs, not the universe of possible tools. <strong>This is the Amiga principle applied to agent equipping.</strong></p>
+
+    <h2>Why Abundance Rarely Produces Masterpieces</h2>
+
+    <p>Look at what constraints have produced:</p>
+    <ul>
+      <li>The Apollo Guidance Computer got humans to the Moon with less memory than a modern JPEG</li>
+      <li>The Amiga ran a preemptive multitasking OS in 256KB</li>
+      <li>The Commodore 64 demoscene produces astonishing graphics on 40-year-old hardware</li>
+      <li>Roller Coaster Tycoon (1999) was written almost entirely in hand-tuned assembly by one person</li>
+      <li>Unix was written by a handful of people in a few years on a PDP-11 with 24KB of memory</li>
+    </ul>
+
+    <p>Now look at modern abundance:</p>
+    <ul>
+      <li>Electron apps ship 150 MB to display a chat window</li>
+      <li>Node.js projects pull 1,400 transitive dependencies to parse YAML</li>
+      <li>Modern text editors use more RAM than the entire Commodore Amiga OS</li>
+      <li>Microservice architectures designed for millions of users run for months with twelve customers</li>
+    </ul>
+
+    <div class="card constraint-card">
+      <p><strong>Abundance is not the enemy. Unforced abundance is.</strong> When there is no pressure to be careful, most code isn&rsquo;t. The modern software that does do more with less &mdash; the Rust core utilities, the sqlite embedded database, the Lua language, ripgrep, fd, the Linux kernel &mdash; is built by people who chose the constraints even though they didn&rsquo;t have to. They understood that constraint is what makes craft possible, and they built their own walls when the world had removed them.</p>
+    </div>
+
+    <h2>The Return of Real Constraint</h2>
+
+    <p>For 40 years, unforced abundance defined software. Moore&rsquo;s Law subsidized sloppiness. The programmer&rsquo;s time was the expensive resource; the machine&rsquo;s time was effectively free; therefore optimizing for programmer convenience at the expense of machine efficiency was always the right tradeoff. <strong>That tradeoff is no longer right.</strong></p>
+
+    <p>In the AI agent era, the machine&rsquo;s time is expensive again. Not raw compute &mdash; intelligence compute. Every tool call is metered. Every token in the context window has an opportunity cost. Every reasoning pass burns cash. <strong>The economic conditions that produced punch card craft are back.</strong> The engineers who recognize this, and apply the old disciplines deliberately, are producing better work with AI agents than the engineers who fight the constraints.</p>
+
+    <h2>The Deepest Lesson</h2>
+
+    <p>Every great piece of craft was made under real limits. This is not a coincidence. <strong>The limits are the forcing function</strong>, and without the forcing function, most people produce mediocre work, because there is no pressure to do otherwise. Give an artist an infinite canvas and they freeze. Give a programmer infinite compute and they write bloat. Give an AI agent an infinite context window and it loses focus.</p>
+
+    <p>Constrain the artist to a 16&times;16 pixel grid, and they produce pixel art. Constrain the programmer to 256KB of RAM, and they produce the Amiga. Constrain the AI agent to a 200K token context and a $5 budget per task, and they produce focused, effective engineering work.</p>
+
+    <div class="blown-stack">
+      <div class="label">&mdash;&mdash; DO MORE WITH LESS &mdash;&mdash;</div>
+      <div class="subtext">Honor the constraint. Respect the budget. Design before you act.<br>The wheel has turned. Scarcity is back. Craft is back.<br>The loop is eternal.</div>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="hardware.html">The Physical Reality</a></li>
+        <li><a href="workflow.html">The Programmer&rsquo;s Day</a></li>
+        <li><a href="loop.html">The Six-Step Loop</a></li>
+        <li><a href="philosophy.html">Constraints as Craft</a></li>
+        <li><a href="modern.html">AI Agents &amp; Tokens</a></li>
+        <li><a href="mvp.html">Minimum Viable Program</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Doing More With Less &middot; Punch Cards &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

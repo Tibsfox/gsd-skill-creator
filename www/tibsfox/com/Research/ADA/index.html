@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ada &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ada">
+  <header>
+    <h1>Ada</h1>
+    <div class="subtitle">A Language for People Who Want to Be Sure &mdash; Tasks, Protected Objects, Rendezvous, Ravenscar, SPARK, and Four Decades of Fly-by-Wire</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="concurrency.html">Concurrency</a>
+      <a href="history.html">History</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="safety-critical.html">Safety-Critical</a>
+      <a href="spark.html">SPARK</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      If you have ever flown on an Airbus, ridden the Paris Metro Line 14, sent a train through the Eurotunnel, watched a Mars rover photograph, or paid any attention to how a modern air traffic control system routes twenty thousand flights a day without colliding any of them &mdash; you have already trusted your life to Ada. It is the quietest important language in computing.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- STATS                                                         -->
+    <!-- ============================================================ -->
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value defense">43+</span><span class="stat-label">Years of Ada</span></div>
+      <div class="stat"><span class="stat-value bronze">1815</span><span class="stat-label">MIL-STD (Ada's Year)</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">ISO Revisions</span></div>
+      <div class="stat"><span class="stat-value defense">A380</span><span class="stat-label">2M Lines in Flight</span></div>
+      <div class="stat"><span class="stat-value bronze">DO-178C</span><span class="stat-label">DAL A Certified</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why Ada, and why concurrency as the focus?</strong> Ada is the only mainstream programming language that has had <em>concurrency built into the language itself</em> since its first standard in 1983. Four years before C++ had a standard and twelve years before Java existed, Ada already had tasks, rendezvous, and selective accept as first-class citizens. In 1995, Ada added protected objects &mdash; monitors with barrier synchronization that compile to efficient machine code while preserving semantic guarantees no library-based concurrency can match. Ada tasking is why fly-by-wire airliners are safe to fly. It is why driverless subway lines can run without collision. It is the quiet core of an enormous amount of the physical infrastructure you interact with every day.</p>
+      <p><strong>Research method:</strong> Primary sources (Ada 2012 Reference Manual, Steelman requirements 1978, Ichbiah&rsquo;s Rationale, Tucker Taft&rsquo;s HOPL-III paper), AdaCore documentation, John Barnes&rsquo; <em>Programming in Ada 2012</em>, Burns &amp; Wellings&rsquo; <em>Concurrent and Real-Time Programming in Ada</em>, DO-178C, EN 50128, the Lions Inquiry Report, cross-reference against 295-project PNW Research Series corpus.</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SAFETY LADDER                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>The Safety-Criticality Ladder</h2>
+    <p>Ada occupies a specific niche on the ladder of software assurance. Most languages sit on the first rung or two. Ada lives in the upper reaches:</p>
+
+    <div class="provenance-ladder">
+      <ol>
+        <li><strong>Scripting</strong> &mdash; Works most of the time. Good enough. Python, Bash, Perl. If it breaks, restart it.</li>
+        <li><strong>Application</strong> &mdash; Works reliably under normal conditions. Java, C#, Go. Exceptions are caught and logged.</li>
+        <li><strong>Systems</strong> &mdash; Works correctly on the metal. C, C++, Rust. Memory safety matters.</li>
+        <li><strong>Industrial real-time</strong> &mdash; Works within deadlines. Ada, real-time Java, C with RTOS. Timing is correctness.</li>
+        <li><strong>Safety-critical</strong> &mdash; Works or people die. Ada (DO-178C), MISRA C, SPARK. Mandatory certification.</li>
+        <li><strong>High-integrity</strong> &mdash; Proven correct. SPARK, Frama-C, seL4 (Isabelle/HOL). Zero undefined behavior.</li>
+        <li><strong>Formally verified</strong> &mdash; Proved, audited, certified to the highest assurance levels. CompCert, SPARK Platinum, seL4. Common Criteria EAL 6/7.</li>
+      </ol>
+    </div>
+
+    <p>Ada plus SPARK is one of the few practical toolkits that covers rungs 4 through 7. Each rung costs more effort than the one below. Most software doesn&rsquo;t need the higher rungs. When software <em>does</em> need them &mdash; airliners, trains, medical devices, nuclear control &mdash; Ada is where the professionals reach for.</p>
+
+    <!-- ============================================================ -->
+    <!-- MODULE OVERVIEW                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="language.html" class="category-card">
+        <div><span class="cluster-badge cluster-core">Language</span></div>
+        <h3>The Core Language</h3>
+        <p>Strong typing with user-defined integer/real ranges, packages as modules with private parts, generics, discriminated records, contracts (Ada 2012), exceptions, OOP via tagged types. The verbose-by-design syntax and why it pays off. Ichbiah&rsquo;s philosophy: readability over writability.</p>
+        <p><strong>Key:</strong> Types, subtypes, packages, generics, contracts</p>
+      </a>
+
+      <a href="concurrency.html" class="category-card">
+        <div><span class="cluster-badge cluster-conc">Flagship</span></div>
+        <h3>Concurrency &amp; Real-Time</h3>
+        <p>Tasks as first-class citizens since 1983. Rendezvous with selective accept and guards. Protected objects (Ada 95) as Hoare-style monitors with barriers. Asynchronous Transfer of Control. The Real-Time Annex, ceiling locking, EDF scheduling. Ravenscar profile for hard real-time. Ada 2022 parallel blocks.</p>
+        <p><strong>Key:</strong> Tasks, protected objects, Ravenscar, Real-Time Annex</p>
+      </a>
+
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-hist">History</span></div>
+        <h3>History &amp; Origins</h3>
+        <p>The 1974 DoD study that found 450+ languages in defense systems. Strawman &rarr; Tinman &rarr; Ironman &rarr; Steelman requirements. The 1977-79 competition: Red, Green, Blue, Yellow. Jean Ichbiah&rsquo;s Green team wins (1979). Named after Ada Lovelace, MIL-STD 1815. The mandate (1987), its repeal (1997), and why Ada survived.</p>
+        <p><strong>Key:</strong> Steelman, Ichbiah, DoD mandate, Ada 95/2005/2012/2022</p>
+      </a>
+
+      <a href="implementations.html" class="category-card">
+        <div><span class="cluster-badge cluster-impl">Implementations</span></div>
+        <h3>Implementations &amp; Tooling</h3>
+        <p>GNAT and AdaCore (1994&ndash;present) &mdash; the story of how Robert Dewar&rsquo;s NYU team saved Ada. Green Hills AdaMULTI, PTC ObjectAda, Janus/Ada, Rational Apex (historical). GNATstudio, GNATprove, CodePeer, GNATcoverage, Alire. The modern tooling revival.</p>
+        <p><strong>Key:</strong> GNAT, AdaCore, Alire, GNATstudio, validation</p>
+      </a>
+
+      <a href="safety-critical.html" class="category-card">
+        <div><span class="cluster-badge cluster-safe">Safety</span></div>
+        <h3>Safety-Critical Applications</h3>
+        <p>Where Ada actually lives. Airbus A320&ndash;A380 fly-by-wire, Boeing 777 flight management, Eurofighter, Rafale, F-22. Ariane 5 (and the Flight 501 inquiry report). Paris Metro Line 14, London DLR, TGV, ICE, Shinkansen signaling. NAV CANADA, iFACTS. Mars rovers. The Ariane 501 blame-game that wasn&rsquo;t actually Ada&rsquo;s fault.</p>
+        <p><strong>Key:</strong> Aerospace, rail, ATC, nuclear, medical, defense</p>
+      </a>
+
+      <a href="spark.html" class="category-card">
+        <div><span class="cluster-badge cluster-spark">SPARK</span></div>
+        <h3>SPARK &amp; Formal Verification</h3>
+        <p>Bernard Carr&eacute;&rsquo;s Ada subset for formal proof. SPARK 83 &rarr; SPARK 95 &rarr; SPARK 2014 (the major rework with Ada 2012 aspects). GNATprove calling CVC5, Z3, Alt-Ergo. Stone/Bronze/Silver/Gold/Platinum assurance levels. iFACTS at NATS, Tokeneer, IRONSIDES DNS, Lockheed C-130J mission computer.</p>
+        <p><strong>Key:</strong> SPARK 2014, GNATprove, SMT, DO-333, Platinum</p>
+      </a>
+
+      <a href="rosetta.html" class="category-card">
+        <div><span class="cluster-badge cluster-rosetta">Rosetta</span></div>
+        <h3>Rosetta Integration</h3>
+        <p>Concurrency across languages: Ada &harr; Erlang &harr; Go &harr; Rust async &harr; Java virtual threads &harr; pthreads. The different trade-offs. When Ada wins (hard real-time, safety-critical) and when it loses (web apps, scripting). Rust comparison in depth.</p>
+        <p><strong>Key:</strong> Concurrency patterns, language comparison, trade-offs</p>
+      </a>
+
+      <a href="education.html" class="category-card">
+        <div><span class="cluster-badge cluster-edu">Education</span></div>
+        <h3>Learning Resources</h3>
+        <p>John Barnes&rsquo; canonical textbooks. Burns &amp; Wellings on concurrency. AdaCore&rsquo;s <em>learn.adacore.com</em>. Ada Distilled. The Ada University in Europe. Free GNAT Community Edition. SPARK tutorials. The small but passionate community and where to ask questions.</p>
+        <p><strong>Key:</strong> Books, tutorials, Alire, community</p>
+      </a>
+
+      <a href="safety-critical.html" class="category-card">
+        <div><span class="cluster-badge cluster-aero">Fly-by-Wire</span></div>
+        <h3>Provenance &amp; Culture</h3>
+        <p>The quiet language that flies airliners. Why Ada programmers are different (they are older, they are paid well, they care about correctness in a way the rest of the industry finds alien). The revival in the 2020s. Rust&rsquo;s success legitimizing &ldquo;safe systems languages.&rdquo; Ada as a time capsule from a future that never happened but keeps coming back.</p>
+        <p><strong>Key:</strong> Culture, revival, Rust, the road ahead</p>
+      </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ADA AT A GLANCE                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Ada at a Glance</h2>
+    <table>
+      <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>First standard</td><td><strong>MIL-STD-1815 (December 1980)</strong> &mdash; named for Ada Lovelace&rsquo;s birth year</td></tr>
+        <tr><td>ANSI standard</td><td>ANSI/MIL-STD-1815A (January 1983)</td></tr>
+        <tr><td>ISO standards</td><td>ISO 8652:1987 (Ada 83), :1995, :2012, :2023</td></tr>
+        <tr><td>Designer</td><td>Jean Ichbiah&rsquo;s &ldquo;Green team&rdquo; at CII Honeywell Bull, Louveciennes, France</td></tr>
+        <tr><td>Named after</td><td>Augusta Ada, Countess of Lovelace (1815&ndash;1852)</td></tr>
+        <tr><td>Paradigms</td><td>Imperative, modular, OO (Ada 95+), concurrent, real-time, generic, contract-based</td></tr>
+        <tr><td>Type system</td><td>Static, strong, explicit, user-definable; no implicit conversions</td></tr>
+        <tr><td>Concurrency model</td><td>Tasks + rendezvous (1983); protected objects (1995); parallel blocks (2022)</td></tr>
+        <tr><td>Real-time</td><td>Annex D (optional); Ravenscar profile (ISO/IEC 15942:2000); Jorvik</td></tr>
+        <tr><td>Formal verification</td><td>SPARK 2014 (Ada 2012 subset) with GNATprove</td></tr>
+        <tr><td>Major implementations</td><td>GNAT Pro / GCC, Green Hills AdaMULTI, PTC ObjectAda, Janus/Ada</td></tr>
+        <tr><td>Historical mandate</td><td>DoD Directive 3405.1 (1987&ndash;1997)</td></tr>
+        <tr><td>Flagship certification</td><td>DO-178C up to DAL A (flight-critical avionics)</td></tr>
+        <tr><td>Key strength</td><td>Concurrency, safety, real-time, verification, 40-year code bases still running</td></tr>
+        <tr><td>Motto (informal)</td><td>&ldquo;Readability over writability&rdquo; (Ichbiah)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- A MINIMAL ADA PROGRAM                                         -->
+    <!-- ============================================================ -->
+
+    <h2>Hello World, Ada Style</h2>
+
+    <pre><code>with Ada.Text_IO;
+
+procedure Hello is
+begin
+   Ada.Text_IO.Put_Line ("Hello, world!");
+end Hello;</code></pre>
+
+    <p>Already more verbose than Python or C. The <code>with</code> clause names the package being used (like an import). The procedure name appears three times &mdash; once in the declaration, once after <code>end</code>, and (implicitly) as the file name. This is <em>the point</em>. Ada&rsquo;s verbosity is not incidental; it is how the language ensures that every identifier is explicit, every dependency is visible, and every construct is scoped.</p>
+
+    <h2>A Task Declaration</h2>
+
+    <pre><code>with Ada.Text_IO;
+
+procedure Two_Tasks is
+   task Printer;
+
+   task body Printer is
+   begin
+      for I in 1 .. 5 loop
+         Ada.Text_IO.Put_Line ("Hello from Printer" &amp; Integer'Image (I));
+         delay 0.1;
+      end loop;
+   end Printer;
+begin
+   for I in 1 .. 5 loop
+      Ada.Text_IO.Put_Line ("Hello from Main" &amp; Integer'Image (I));
+      delay 0.1;
+   end loop;
+end Two_Tasks;</code></pre>
+
+    <p>Declare a task, give it a body, and it starts running when the enclosing procedure begins. The procedure does not return until every task declared in its scope has finished &mdash; structured concurrency, decades before the term was coined. No thread pool, no library, no <code>pthread_create</code>. Just language primitives.</p>
+
+    <!-- ============================================================ -->
+    <!-- A PROTECTED OBJECT                                            -->
+    <!-- ============================================================ -->
+
+    <h2>A Protected Object</h2>
+
+    <pre><code>protected Bounded_Counter is
+   procedure Increment;
+   entry Wait_For (N : Natural);
+   function Current return Natural;
+private
+   Count : Natural := 0;
+end Bounded_Counter;
+
+protected body Bounded_Counter is
+   procedure Increment is
+   begin
+      Count := Count + 1;
+   end Increment;
+
+   entry Wait_For (N : Natural) when Count &gt;= N is
+   begin
+      null;  -- Caller unblocks when the barrier is true
+   end Wait_For;
+
+   function Current return Natural is
+   begin
+      return Count;
+   end Current;
+end Bounded_Counter;</code></pre>
+
+    <p>A protected object is Ada&rsquo;s answer to the question &ldquo;what is a monitor, done right?&rdquo; It has three kinds of operations: <strong>functions</strong> (read-only, multiple concurrent callers), <strong>procedures</strong> (exclusive writes), and <strong>entries</strong> (conditional, with a <code>when</code> barrier that callers queue behind). The language guarantees mutual exclusion, barrier semantics, and in the Real-Time Annex, ceiling-locked priority inheritance to prevent unbounded priority inversion. No library can give you this with comparable static guarantees.</p>
+
+    <!-- ============================================================ -->
+    <!-- WHERE ADA RUNS                                                -->
+    <!-- ============================================================ -->
+
+    <h2>Where Ada Actually Runs (2026)</h2>
+
+    <table>
+      <thead><tr><th>Industry</th><th>Example systems</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Commercial aviation</strong></td><td>Airbus A320, A330, A340, A380, A350 FBW; Boeing 777 FMS; Bombardier, Embraer regionals</td></tr>
+        <tr><td><strong>Military aviation</strong></td><td>Eurofighter Typhoon, Rafale, Gripen, F-22, F-35 (partial)</td></tr>
+        <tr><td><strong>Helicopters</strong></td><td>NH90, Tiger, AW139</td></tr>
+        <tr><td><strong>Space</strong></td><td>Ariane 5 &amp; 6, Vega, ISS Canadarm2, Mars rovers, Rosetta/Philae, ExoMars</td></tr>
+        <tr><td><strong>Rail &mdash; signaling</strong></td><td>TGV, ICE, Shinkansen (portions), ETCS implementations</td></tr>
+        <tr><td><strong>Rail &mdash; automation</strong></td><td>Paris Metro Ligne 14 (driverless), London DLR, Copenhagen Metro, Vancouver SkyTrain</td></tr>
+        <tr><td><strong>Air traffic control</strong></td><td>NAV CANADA CAATS, Eurocontrol iFACTS, Germany P1/VAFORIT</td></tr>
+        <tr><td><strong>Naval combat</strong></td><td>UK Type 23/45 destroyers, French Horizon, Italian Orizzonte</td></tr>
+        <tr><td><strong>Medical devices</strong></td><td>Radiation therapy machines, some infusion pumps, surgical robots</td></tr>
+        <tr><td><strong>Nuclear</strong></td><td>Reactor protection systems, CANDU I&amp;C, Westinghouse/Framatome control</td></tr>
+        <tr><td><strong>Financial</strong></td><td>Some settlement and trading systems (fixed-point arithmetic)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified connections across the 295-project PNW Research Series corpus:</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CEE</td><td>C Programming</td><td>Ada&rsquo;s safer alternative; mutual FFI in most GNAT targets</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>Modern memory-safe systems language; shares safety goals, different trade-offs</td></tr>
+        <tr><td>CPP</td><td>C++ &amp; OOP</td><td>Contemporary but different philosophical approach to types and templates</td></tr>
+        <tr><td>PLG</td><td>Prolog &amp; Logic Programming</td><td>Contemporary (both 1970s); SPARK proof via SMT is logic-programming kin</td></tr>
+        <tr><td>JAV</td><td>Java &amp; the JVM</td><td>Later concurrent language; contrast with Ada&rsquo;s built-in tasking</td></tr>
+        <tr><td>GOL</td><td>Go (Golang)</td><td>Goroutines + channels as a lightweight echo of Ada tasking</td></tr>
+        <tr><td>JGC</td><td>JVM GC &amp; Memory Management</td><td>Ada&rsquo;s hard-real-time story as contrast with GC-based approaches</td></tr>
+        <tr><td>ASM</td><td>Assembly Language</td><td>Ada&rsquo;s representation clauses as the bridge to hardware</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="language.html">The Core Language</a></li>
+        <li><a href="concurrency.html">Concurrency &amp; Real-Time</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="implementations.html">Implementations &amp; Tooling</a></li>
+        <li><a href="safety-critical.html">Safety-Critical Applications</a></li>
+        <li><a href="spark.html">SPARK &amp; Formal Verification</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Ada &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

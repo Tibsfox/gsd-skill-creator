@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The PARSE Engine &mdash; Rexx &amp; ARexx &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rxx">
+  <header>
+    <h1>The PARSE Engine</h1>
+    <div class="subtitle">PARSE VAR line protocol '://' host ':' port '/' path '?' query</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="parse.html" class="active">PARSE</a>
+      <a href="ports.html">Ports &amp; IPC</a>
+      <a href="porting.html">Porting</a>
+      <a href="amiga.html">Amiga</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>PARSE</strong> is REXX&rsquo;s killer feature. It describes what to <em>extract</em>, not what to <em>match</em>. Where regex says &ldquo;find this pattern,&rdquo; PARSE says &ldquo;the data looks like this &mdash; put the pieces in these variables.&rdquo;
+    </blockquote>
+
+    <h2>The PARSE Instruction Forms</h2>
+    <table>
+      <thead><tr><th>Form</th><th>Source</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><code>PARSE ARG</code></td><td>Function/subroutine arguments</td><td><code>PARSE ARG name, age, city</code></td></tr>
+        <tr><td><code>PARSE VAR name</code></td><td>Named variable</td><td><code>PARSE VAR line word1 word2 rest</code></td></tr>
+        <tr><td><code>PARSE PULL</code></td><td>Queue or stdin</td><td><code>PARSE PULL command args</code></td></tr>
+        <tr><td><code>PARSE VALUE expr WITH</code></td><td>Expression result</td><td><code>PARSE VALUE DATE() WITH day month year</code></td></tr>
+        <tr><td><code>PARSE SOURCE</code></td><td>Program invocation info</td><td><code>PARSE SOURCE system how name</code></td></tr>
+        <tr><td><code>PARSE VERSION</code></td><td>Interpreter version</td><td><code>PARSE VERSION lang ver date</code></td></tr>
+      </tbody>
+    </table>
+
+    <p>Note: <code>ARG</code> (without PARSE) and <code>PULL</code> (without PARSE) uppercase the input. <code>PARSE ARG</code> and <code>PARSE PULL</code> preserve case.</p>
+
+    <h2>Template Patterns</h2>
+
+    <h3>1. Word Patterns (Default)</h3>
+    <p>Variables separated by spaces consume one whitespace-delimited word each. The last variable gets everything remaining.</p>
+    <pre>
+line = "Alice 30 Seattle WA"
+PARSE VAR line name age city state
+/* name="Alice" age="30" city="Seattle" state="WA" */
+
+line = "one two three four five"
+PARSE VAR line first second rest
+/* first="one" second="two" rest="three four five" */</pre>
+
+    <h3>2. Literal Patterns</h3>
+    <p>A quoted string in the template marks a delimiter. Text before the delimiter goes into the preceding variable.</p>
+    <pre>
+line = "name=Alice;age=30;city=Seattle"
+PARSE VAR line 'name=' name ';age=' age ';city=' city
+/* name="Alice" age="30" city="Seattle" */
+
+url = "https://api.example.com:8080/v2/users?id=42"
+PARSE VAR url protocol '://' host ':' port '/' path '?' query
+/* protocol="https" host="api.example.com" port="8080"
+   path="v2/users" query="id=42" */
+
+csv = "Alice,30,Seattle,WA"
+PARSE VAR csv name ',' age ',' city ',' state
+/* name="Alice" age="30" city="Seattle" state="WA" */</pre>
+
+    <h3>3. Positional Patterns (Absolute)</h3>
+    <p>A number specifies a column position (1-based). Text from the current position to that column goes into the preceding variable.</p>
+    <pre>
+/* Fixed-width record: name(1-20) dept(21-30) salary(31-40) */
+record = "Alice Smith         Engineering 85000     "
+PARSE VAR record name 21 dept 31 salary
+/* name="Alice Smith         " dept="Engineering" salary="85000     " */</pre>
+
+    <h3>4. Positional Patterns (Relative)</h3>
+    <p>A signed number (<code>+n</code> or <code>-n</code>) moves the cursor relative to its current position.</p>
+    <pre>
+data = "ABCDEFGHIJ"
+PARSE VAR data first +3 second +4 third
+/* first="ABC" second="DEFG" third="HIJ" */
+
+/* Skip 5 characters, take 3 */
+PARSE VAR data . +5 middle +3 .
+/* middle="FGH" (dot is a placeholder variable) */</pre>
+
+    <h3>5. Variable Patterns</h3>
+    <p>A parenthesized variable name is evaluated and used as a positional pattern.</p>
+    <pre>
+start = 5
+len = 3
+PARSE VAR data . +(start) piece +(len) .
+/* piece = characters starting at position 5, length 3 */</pre>
+
+    <h2>Combining Patterns</h2>
+    <pre>
+/* Apache log line — complex real-world parsing */
+log = '192.168.1.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /index.html HTTP/1.0" 200 2326'
+
+PARSE VAR log ip ' - ' user ' [' timestamp '] "' method ' ' path ' ' proto '" ' status ' ' size
+
+/* ip="192.168.1.1" user="frank" timestamp="10/Oct/2000:13:55:36 -0700"
+   method="GET" path="/index.html" proto="HTTP/1.0" status="200" size="2326" */</pre>
+
+    <pre>
+/* Parse a key=value config file */
+line = "  database.host = db.example.com  "
+PARSE VAR line key '=' value
+key = STRIP(key)
+value = STRIP(value)
+/* key="database.host" value="db.example.com" */</pre>
+
+    <pre>
+/* Parse an email address */
+email = "foxy@tibsfox.com"
+PARSE VAR email user '@' domain
+/* user="foxy" domain="tibsfox.com" */</pre>
+
+    <h2>The PARSE Algorithm</h2>
+
+    <div class="card">
+      <p><strong>For implementers:</strong> The PARSE template is processed left-to-right. Each pattern element adjusts a cursor position and assigns text to a variable:</p>
+      <ol>
+        <li>Start with cursor at position 1 of the source string.</li>
+        <li>For each template element:
+          <ul>
+            <li><strong>Variable name:</strong> Will receive text from cursor to next delimiter.</li>
+            <li><strong>Literal string:</strong> Search forward from cursor. Assign preceding variable text up to (but not including) the match. Advance cursor past the match.</li>
+            <li><strong>Absolute position n:</strong> Assign preceding variable text from cursor to position n-1. Set cursor to n.</li>
+            <li><strong>Relative position +n:</strong> Assign text from cursor through cursor+n-1. Advance cursor by n.</li>
+            <li><strong>Dot (.):</strong> Placeholder — same as a variable but discards the result.</li>
+          </ul>
+        </li>
+        <li>The last variable gets everything from cursor to end of string.</li>
+        <li>If a literal is not found, the rest of the string goes to the preceding variable and remaining variables get empty strings.</li>
+      </ol>
+    </div>
+
+    <h2>PARSE vs Alternatives</h2>
+
+    <table>
+      <thead><tr><th>Task</th><th>REXX PARSE</th><th>Regex</th><th>split()</th></tr></thead>
+      <tbody>
+        <tr><td>CSV field extraction</td><td><code>PARSE VAR line f1 ',' f2 ',' f3</code></td><td>Overkill</td><td><code>line.split(',')</code></td></tr>
+        <tr><td>Fixed-width fields</td><td><code>PARSE VAR rec name 21 dept 31</code></td><td>Verbose counted groups</td><td>Substring slicing</td></tr>
+        <tr><td>Key=value pairs</td><td><code>PARSE VAR s key '=' val</code></td><td><code>/(\w+)=(\w+)/</code></td><td><code>s.split('=')</code></td></tr>
+        <tr><td>URL decomposition</td><td>One PARSE template</td><td>Complex regex</td><td>Multiple splits</td></tr>
+        <tr><td>Log line parsing</td><td>One PARSE line</td><td>Long regex</td><td>Multiple steps</td></tr>
+        <tr><td>Pattern matching</td><td>Not suited</td><td><strong>Core strength</strong></td><td>Not suited</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implementation Notes for Porting</h2>
+
+    <div class="card arch-card">
+      <p><strong>TypeScript (Stage 1):</strong> Implement as a function that takes a source string and a compiled template (array of pattern elements). Each element is a discriminated union: <code>{type: 'word', name}</code>, <code>{type: 'literal', value}</code>, <code>{type: 'absolute', position}</code>, <code>{type: 'relative', offset}</code>. The parser compiles templates once, the evaluator runs them per-call.</p>
+      <p><strong>x86-64 (Stage 2):</strong> String scanning via <code>REPSCASB</code> or SSE4.2 <code>PCMPESTRI</code> for literal pattern matching. Positional patterns are simple pointer arithmetic. The template is a bytecode array consumed by a tight loop.</p>
+      <p><strong>CUDA (Stage 3):</strong> Warp-cooperative PARSE: 32 threads in a warp each test one character position for literal matches simultaneously. Positional patterns are trivial (thread 0 handles). Word splitting via parallel scan for whitespace.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="ports.html">Ports &amp; IPC</a></li>
+        <li><a href="porting.html">Porting Architecture</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>The PARSE Engine &middot; Rexx &amp; ARexx &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

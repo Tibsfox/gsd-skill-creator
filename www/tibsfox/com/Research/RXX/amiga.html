@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Amiga Connection &mdash; Rexx &amp; ARexx &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rxx">
+  <header>
+    <h1>The Amiga Connection</h1>
+    <div class="subtitle">exec.library &rarr; message ports &rarr; ARexx &rarr; GSD-OS</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="parse.html">PARSE</a>
+      <a href="ports.html">Ports &amp; IPC</a>
+      <a href="porting.html">Porting</a>
+      <a href="amiga.html" class="active">Amiga</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>ADDRESS 'EXEC.LIBRARY'</strong><br>
+      The Amiga&rsquo;s preemptive multitasking and message-passing IPC created a unique opportunity. No other personal computer of the late 1980s could do what ARexx did: make every application scriptable and every application able to talk to every other application.
+    </blockquote>
+
+    <h2>Why the Amiga Was Different</h2>
+    <div class="card">
+      <p>In 1990, MS-DOS ran one program at a time. The Mac used cooperative multitasking (one stuck program froze everything). Windows 3.0 was barely multitasking. The Amiga had <strong>preemptive multitasking</strong> since 1985, with a message-passing IPC system built into the kernel. This wasn&rsquo;t an add-on &mdash; it was the foundation. Device drivers, GUI events, audio, graphics, and inter-process communication all used the same message port system.</p>
+      <p>When William Hawes built ARexx on top of this, he didn&rsquo;t need to invent IPC. He inherited exec.library&rsquo;s proven, fast, universal message system and added a REXX scripting layer on top. The result was unprecedented.</p>
+    </div>
+
+    <h2>The exec.library Architecture</h2>
+    <table>
+      <thead><tr><th>Concept</th><th>exec.library</th><th>Modern Equivalent</th></tr></thead>
+      <tbody>
+        <tr><td>Task</td><td>Preemptive thread with own stack</td><td>OS thread / goroutine</td></tr>
+        <tr><td>Message Port</td><td>Named queue with signal notification</td><td>Channel / message queue</td></tr>
+        <tr><td>Message</td><td>Struct with reply port pointer</td><td>Request object with callback</td></tr>
+        <tr><td>Signal</td><td>32 signal bits per task</td><td>Event / condition variable</td></tr>
+        <tr><td>Library</td><td>Shared code with jump table</td><td>Dynamic library / shared object</td></tr>
+        <tr><td>Memory pool</td><td>Typed allocation (MEMF_CHIP, MEMF_FAST)</td><td>NUMA / GPU memory types</td></tr>
+      </tbody>
+    </table>
+
+    <p>The Amiga&rsquo;s flat memory space (no memory protection) enabled <strong>zero-copy message passing</strong>: you literally passed pointers. A RexxMsg from an ARexx script to ImageFX contained direct pointers to strings in the script&rsquo;s memory space. This was fast and dangerous &mdash; exactly the Amiga ethos.</p>
+
+    <h2>ARexx-Enabled Applications</h2>
+    <table>
+      <thead><tr><th>Category</th><th>Applications</th><th>ARexx Use</th></tr></thead>
+      <tbody>
+        <tr><td>Graphics</td><td><strong>ImageFX</strong>, Art Department Professional, Personal Paint</td><td>Batch processing, filter chains, format conversion</td></tr>
+        <tr><td>3D</td><td><strong>Imagine</strong>, LightWave 3D, Real 3D</td><td>Scene generation, animation scripting</td></tr>
+        <tr><td>Text Editors</td><td><strong>GoldEd</strong>, CygnusEd, TurboText</td><td>Macros, search/replace, code generation</td></tr>
+        <tr><td>File Managers</td><td><strong>Directory Opus</strong></td><td>Custom buttons, batch operations, workflow automation</td></tr>
+        <tr><td>Music</td><td><strong>ProTracker</strong>, OctaMED, Bars&amp;Pipes</td><td>Pattern generation, MIDI control, automated composition</td></tr>
+        <tr><td>Programming</td><td><strong>SAS/C</strong>, StormC, GoldEd</td><td>Build automation, error navigation, code generation</td></tr>
+        <tr><td>Networking</td><td><strong>Miami</strong>, AWeb, IBrowse, YAM</td><td>Automated downloads, web scraping, email filtering</td></tr>
+        <tr><td>GUI</td><td><strong>MUI</strong> (Magic User Interface)</td><td>Dynamic GUI construction and modification</td></tr>
+        <tr><td>System</td><td><strong>Workbench</strong>, AmigaDOS</td><td>System automation, startup sequences</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <p><strong>The depth of integration:</strong> ImageFX alone had over 200 ARexx commands. Directory Opus had its own ARexx scripting guide. GoldEd&rsquo;s entire macro system was ARexx. MUI&rsquo;s GUI toolkit could be driven entirely from ARexx scripts. This wasn&rsquo;t token support &mdash; these applications were <em>designed</em> to be scripted.</p>
+    </div>
+
+    <h2>Amiga Principles for GSD-OS</h2>
+
+    <table>
+      <thead><tr><th>Amiga Principle</th><th>How It Manifests</th><th>GSD-OS Application</th></tr></thead>
+      <tbody>
+        <tr><td>Message-passing IPC</td><td>exec.library ports</td><td>MCP tools as ports. ADDRESS = tool call.</td></tr>
+        <tr><td>Everything is scriptable</td><td>ARexx ports on every app</td><td>Every agent, tool, and co-processor has an ARexx/MCP port.</td></tr>
+        <tr><td>Flat memory model</td><td>Zero-copy messaging</td><td>Shared memory tiers (our Amiga-inspired RAM storage).</td></tr>
+        <tr><td>Typed memory pools</td><td>MEMF_CHIP / MEMF_FAST</td><td>GPU memory / CPU memory / NVMe tiers.</td></tr>
+        <tr><td>Library jump tables</td><td>Versioned shared libraries</td><td>Skill and agent hot-loading with version management.</td></tr>
+        <tr><td>Preemptive multitasking</td><td>exec.library scheduler</td><td>Concurrent agent execution with priority.</td></tr>
+        <tr><td>Signal bits</td><td>32 per task, lightweight notification</td><td>Our nudge-sync / mail-async patterns.</td></tr>
+        <tr><td>Small, fast, elegant</td><td>AmigaOS in 256KB ROM</td><td>Minimal overhead. No bloat. The constraint is the design.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>exec.library &rarr; GSD-OS Mapping</h2>
+
+    <div class="port-diagram">
+      <span class="comment">/* exec.library concepts mapped to GSD-OS */</span><br><br>
+      <span class="port-name">CreatePort("IMAGEFX")</span> <span class="arrow">&rarr;</span> <span class="port-name">registerMcpTool("imagefx", handler)</span><br>
+      <span class="port-name">FindPort("IMAGEFX")</span> <span class="arrow">&rarr;</span> <span class="port-name">discoverTool("imagefx")</span><br>
+      <span class="port-name">PutMsg(port, msg)</span> <span class="arrow">&rarr;</span> <span class="msg">callTool("imagefx", {command: "LOAD"})</span><br>
+      <span class="port-name">WaitPort(replyPort)</span> <span class="arrow">&rarr;</span> <span class="result">await toolResult</span><br>
+      <span class="port-name">GetMsg(replyPort)</span> <span class="arrow">&rarr;</span> <span class="result">const result = await toolCall</span><br>
+      <span class="port-name">ReplyMsg(msg)</span> <span class="arrow">&rarr;</span> <span class="result">return {rc: 0, result: "loaded"}</span><br>
+    </div>
+
+    <h2>The Deeper Connection</h2>
+    <div class="card port-card">
+      <p>This project is not nostalgia. The Amiga&rsquo;s architecture was <em>right</em>. Message-passing IPC, scriptable applications, typed memory pools, lightweight tasks, and a universal scripting language that connected everything &mdash; these are exactly the primitives that modern AI agent systems need. The Amiga had them in 1990 on a 7 MHz 68000 with 512KB of RAM.</p>
+      <p>GSD-OS inherits these principles. ARexx is the scripting layer. exec.library&rsquo;s message ports are MCP tools. The Amiga&rsquo;s memory model maps to our tiered storage (RAM, NVMe, GPU). The library system maps to our skill/agent hot-loading. We&rsquo;re not recreating the Amiga. We&rsquo;re completing what it started.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Design</a></li>
+        <li><a href="ports.html">Ports &amp; IPC</a></li>
+        <li><a href="porting.html">Porting Architecture</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Amiga Connection &middot; Rexx &amp; ARexx &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

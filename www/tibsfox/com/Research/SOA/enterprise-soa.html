@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise SOA &mdash; SOA</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-soa">
+  <header>
+    <h1>Enterprise SOA (SOAP Era)</h1>
+    <div class="subtitle">SOAP envelopes, WSDL contracts, UDDI registries, WS-Security, BPEL, Enterprise Service Buses &mdash; the classic stack</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="principles.html">Principles</a>
+      <a href="history.html">History</a>
+      <a href="enterprise-soa.html" class="active">Enterprise SOA</a>
+      <a href="rest-apis.html">REST &amp; APIs</a>
+      <a href="microservices-mesh.html">Microservices</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The enterprise SOA era had the right ideas and the wrong implementations. Contract-first design, loose coupling, service boundaries, messaging patterns &mdash; the <em>principles</em> are still the foundation of modern distributed systems. The <em>machinery</em> &mdash; SOAP envelopes, WSDL documents, UDDI registries, WS-* specifications, Enterprise Service Buses &mdash; did not survive contact with the simpler JSON/REST alternatives that followed. But a lot of production code still runs on this stack in 2026, and understanding it is understanding how we got here.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- 1. XML-RPC                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>1. XML-RPC &mdash; The Simpler Ancestor</h2>
+
+    <p>In spring 1998, <strong>Dave Winer</strong> at UserLand Software corresponded with <strong>Bob Atkinson</strong> and <strong>Mohsen Al-Ghosein</strong> at Microsoft about designing a simple, text-based, HTTP-transported RPC. The result was <strong>XML-RPC</strong>, published publicly on <strong>June 15, 1998</strong>.</p>
+
+    <pre><code>&lt;?xml version="1.0"?&gt;
+&lt;methodCall&gt;
+  &lt;methodName&gt;examples.getStateName&lt;/methodName&gt;
+  &lt;params&gt;
+    &lt;param&gt;&lt;value&gt;&lt;i4&gt;41&lt;/i4&gt;&lt;/value&gt;&lt;/param&gt;
+  &lt;/params&gt;
+&lt;/methodCall&gt;</code></pre>
+
+    <p>Six data types (int, double, boolean, string, datetime, base64), two containers (array, struct). The whole specification fit on a single web page. Winer insisted on keeping it minimal and resisted Microsoft&rsquo;s desire to add type systems and namespaces. XML-RPC survives in niches &mdash; WordPress XML-RPC API, Trackbacks, some early APIs &mdash; but was eclipsed by SOAP within a few years. The philosophical principle lives on: <em>the simpler ancestor of every protocol family is usually the one that actually gets used</em>.</p>
+
+    <!-- ============================================================ -->
+    <!-- 2. SOAP                                                       -->
+    <!-- ============================================================ -->
+
+    <h2>2. SOAP &mdash; Simple Object Access Protocol</h2>
+
+    <p><strong>SOAP 1.1</strong> was published as a W3C Note on <strong>May 8, 2000</strong>, co-authored by Don Box (DevelopMentor), David Ehnebuske (IBM), Gopal Kakivaya (Microsoft), Andrew Layman (Microsoft), Noah Mendelsohn (Lotus), Henrik Frystyk Nielsen (Microsoft), Satish Thatte (Microsoft), and Dave Winer. The coalition was Microsoft + IBM + Lotus + UserLand + DevelopMentor.</p>
+
+    <h3>The SOAP envelope structure</h3>
+
+    <pre><code>&lt;?xml version="1.0"?&gt;
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Header&gt;
+    &lt;!-- optional headers for routing, security, reliability, transaction --&gt;
+    &lt;wsa:Action&gt;http://example.com/GetStockPrice&lt;/wsa:Action&gt;
+    &lt;wsse:Security&gt;
+      &lt;wsse:UsernameToken&gt;
+        &lt;wsse:Username&gt;alice&lt;/wsse:Username&gt;
+      &lt;/wsse:UsernameToken&gt;
+    &lt;/wsse:Security&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;m:GetStockPrice xmlns:m="http://example.com/stock"&gt;
+      &lt;m:Symbol&gt;IBM&lt;/m:Symbol&gt;
+    &lt;/m:GetStockPrice&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+
+    <p>The envelope/header/body pattern was deliberately borrowed from email (which has envelope metadata, headers, and a body). SOAP messages could be routed through intermediaries, each processing headers relevant to them and passing the body through unchanged.</p>
+
+    <h3>SOAP encoding styles</h3>
+
+    <p>Four styles, with the last being the default by 2005:</p>
+
+    <ul>
+      <li><strong>RPC/encoded</strong> &mdash; the original, used SOAP Section 5 encoding rules. Not interoperable.</li>
+      <li><strong>RPC/literal</strong> &mdash; RPC model with XML Schema types.</li>
+      <li><strong>Document/literal</strong> &mdash; a document carrying typed XML.</li>
+      <li><strong>Document/literal wrapped</strong> &mdash; the dominant style by 2005; wraps each operation in an element named for the operation.</li>
+    </ul>
+
+    <p>SOAP ran over HTTP, SMTP, JMS, and MQ. <strong>SOAP 1.2</strong> (W3C Rec, June 2003) officially dropped the acronym expansion &mdash; &ldquo;SOAP&rdquo; became just a name.</p>
+
+    <h3>Don Box and the Young Person&rsquo;s Guide</h3>
+
+    <p>In March 2000, Don Box wrote <em>A Young Person&rsquo;s Guide to the Simple Object Access Protocol</em> for MSDN Magazine. Box had the rare gift of writing about enterprise middleware without sounding like a committee press release. The essay introduced thousands of developers to SOAP. Box later joined Microsoft as an architect in May 2002. His book <em>Essential XML</em> (2000) and his columns cemented his reputation as SOAP&rsquo;s public face.</p>
+
+    <!-- ============================================================ -->
+    <!-- 3. WSDL                                                       -->
+    <!-- ============================================================ -->
+
+    <h2>3. WSDL &mdash; Web Services Description Language</h2>
+
+    <p>Submitted to W3C in September 2000 as a joint IBM/Microsoft/Ariba proposal. Lead authors: Erik Christensen (Microsoft), Francisco Curbera (IBM), Greg Meredith (Microsoft), Sanjiva Weerawarana (IBM, later WSO2). <strong>WSDL 1.1</strong> became a W3C Note in March 2001 &mdash; that&rsquo;s the version that actually shipped into production. <strong>WSDL 2.0</strong> (W3C Rec, 2007) is technically superior but almost nobody adopted it.</p>
+
+    <h3>The six elements</h3>
+
+    <ol>
+      <li><strong>types</strong> &mdash; XML Schema type definitions</li>
+      <li><strong>message</strong> &mdash; named groupings of typed parts</li>
+      <li><strong>portType</strong> &mdash; abstract interface (operations with input/output messages)</li>
+      <li><strong>binding</strong> &mdash; concrete protocol bindings (usually SOAP over HTTP)</li>
+      <li><strong>port</strong> &mdash; a specific endpoint for a binding</li>
+      <li><strong>service</strong> &mdash; a collection of ports</li>
+    </ol>
+
+    <pre><code>&lt;wsdl:definitions name="StockQuote"
+    targetNamespace="http://example.com/stock.wsdl"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+
+  &lt;wsdl:types&gt;
+    &lt;xsd:schema targetNamespace="http://example.com/stock.xsd"&gt;
+      &lt;xsd:element name="TradePriceRequest"&gt;
+        &lt;xsd:complexType&gt;
+          &lt;xsd:sequence&gt;
+            &lt;xsd:element name="tickerSymbol" type="xsd:string"/&gt;
+          &lt;/xsd:sequence&gt;
+        &lt;/xsd:complexType&gt;
+      &lt;/xsd:element&gt;
+    &lt;/xsd:schema&gt;
+  &lt;/wsdl:types&gt;
+
+  &lt;wsdl:message name="GetLastTradePriceInput"&gt;
+    &lt;wsdl:part name="body" element="TradePriceRequest"/&gt;
+  &lt;/wsdl:message&gt;
+
+  &lt;wsdl:portType name="StockQuotePortType"&gt;
+    &lt;wsdl:operation name="GetLastTradePrice"&gt;
+      &lt;wsdl:input message="GetLastTradePriceInput"/&gt;
+      &lt;wsdl:output message="GetLastTradePriceOutput"/&gt;
+    &lt;/wsdl:operation&gt;
+  &lt;/wsdl:portType&gt;
+
+  &lt;wsdl:binding name="StockQuoteSoapBinding" type="StockQuotePortType"&gt;
+    &lt;soap:binding style="document"
+      transport="http://schemas.xmlsoap.org/soap/http"/&gt;
+    &lt;!-- operation bindings omitted --&gt;
+  &lt;/wsdl:binding&gt;
+
+  &lt;wsdl:service name="StockQuoteService"&gt;
+    &lt;wsdl:port name="StockQuotePort" binding="StockQuoteSoapBinding"&gt;
+      &lt;soap:address location="http://example.com/stockquote"/&gt;
+    &lt;/wsdl:port&gt;
+  &lt;/wsdl:service&gt;
+
+&lt;/wsdl:definitions&gt;</code></pre>
+
+    <p>A nontrivial WSDL file was 500&ndash;2000 lines of dense XML. Reading one by hand was possible but unpleasant. Developers used tools: <code>wsdl2java</code> (Apache Axis), <code>wsimport</code> (JAX-WS), <code>svcutil.exe</code> (.NET). The workflow was WSDL-first &rarr; generate stubs &rarr; write client code that called the stubs. Conceptually identical to the CORBA IDL workflow.</p>
+
+    <!-- ============================================================ -->
+    <!-- 4. UDDI                                                       -->
+    <!-- ============================================================ -->
+
+    <h2>4. UDDI &mdash; The Yellow Pages That Nobody Used</h2>
+
+    <p><strong>UDDI</strong> (Universal Description, Discovery, and Integration) was announced September 2000 by IBM, Microsoft, and Ariba. The vision: every company in the world would publish its Web Services into a federated UDDI directory. A developer writing a new application could query UDDI to find, say, &ldquo;shipping cost calculator services from companies with headquarters in Ohio with an A+ rating,&rdquo; retrieve the WSDL, and generate a client in minutes.</p>
+
+    <p>UDDI 1.0 (2000), 2.0 (2002), 3.0 (OASIS ratified February 2005). IBM, Microsoft, and SAP ran the public UDDI Business Registry.</p>
+
+    <div class="card warn">
+      <p>It did not work. Not at a technical level (UDDI the protocol worked fine) but at a social level. Companies did not want to publish their service catalogs to a public directory. The trust model was wrong. The business model was wrong. Most enterprises found UDDI over-engineered compared to a wiki or a shared spreadsheet.</p>
+      <p>In <strong>January 2006</strong>, IBM, Microsoft, and SAP simultaneously announced they were shutting down their public UDDI Business Registry nodes. The Yellow Pages had no listings, and nobody had ever really used them. The lesson: <em>a registry that nobody writes to is not a discovery mechanism</em>.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 5. WS-* SWAMP                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>5. The WS-* Swamp</h2>
+
+    <p>Once SOAP, WSDL, and UDDI were in place, the industry embarked on the <strong>WS-* explosion</strong> &mdash; an ever-growing set of specifications, all with &ldquo;WS-&rdquo; prefixes, each adding some capability on top of base SOAP.</p>
+
+    <table>
+      <thead><tr><th>Spec</th><th>Year</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>WS-Security</strong></td><td>OASIS April 2004</td><td>Sign and encrypt SOAP messages (XML Signature, XML Encryption). UsernameToken, X.509, SAML assertions.</td></tr>
+        <tr><td><strong>WS-Addressing</strong></td><td>W3C May 2006</td><td>Addressing and routing headers</td></tr>
+        <tr><td><strong>WS-ReliableMessaging</strong></td><td>OASIS June 2007</td><td>At-most-once and at-least-once delivery guarantees</td></tr>
+        <tr><td><strong>WS-AtomicTransaction</strong></td><td>OASIS 2005</td><td>Distributed two-phase commit</td></tr>
+        <tr><td><strong>WS-BusinessActivity</strong></td><td>OASIS 2005</td><td>Long-running compensation-based transactions</td></tr>
+        <tr><td><strong>WS-Coordination</strong></td><td>OASIS 2005</td><td>Transaction coordination framework</td></tr>
+        <tr><td><strong>WS-Policy</strong></td><td>W3C September 2007</td><td>Framework for attaching policy assertions to WSDL</td></tr>
+        <tr><td><strong>WS-Trust</strong></td><td>OASIS March 2007</td><td>Security token issuance and validation</td></tr>
+        <tr><td><strong>WS-Federation</strong></td><td>OASIS May 2009</td><td>Cross-organization identity federation</td></tr>
+        <tr><td><strong>WS-SecureConversation</strong></td><td>OASIS March 2007</td><td>Session keys for WS-Security</td></tr>
+        <tr><td><strong>WS-Notification / WS-Eventing</strong></td><td>OASIS 2006+</td><td>Publish-subscribe</td></tr>
+        <tr><td><strong>WS-Discovery</strong></td><td>OASIS July 2009</td><td>Ad-hoc local-network discovery</td></tr>
+        <tr><td><strong>WS-MetadataExchange</strong></td><td>W3C 2011</td><td>Exchange of WSDL and policy metadata</td></tr>
+        <tr><td><strong>WS-Management</strong></td><td>DMTF 2006</td><td>SOAP-based device management (SNMP competitor)</td></tr>
+        <tr><td><strong>WS-BPEL 2.0</strong></td><td>OASIS April 2007</td><td>Business process execution language</td></tr>
+        <tr><td><strong>WS-I Basic Profile</strong></td><td>April 2004+</td><td>Subset of WS-* for interoperability &mdash; the confession that the full stack was too sprawling</td></tr>
+      </tbody>
+    </table>
+
+    <p>By 2007 there were over sixty WS-* specifications. The set became known informally as <strong>the WS-* swamp</strong>. The problem was not any single spec &mdash; most addressed real problems competently. The problem was <strong>aggregate complexity</strong>. A production deployment using WS-Security + WS-Addressing + WS-ReliableMessaging + WS-AtomicTransaction + WS-Policy required engineers to understand each spec, the specific vendor interpretations, and the interactions between them. The learning curve was measured in person-years.</p>
+
+    <!-- ============================================================ -->
+    <!-- 6. SOAP TOOLKITS                                              -->
+    <!-- ============================================================ -->
+
+    <h2>6. SOAP Toolkits and Vendors</h2>
+
+    <p>Every language ecosystem had its own SOAP toolkit:</p>
+
+    <ul>
+      <li><strong>Apache Axis</strong> (1.x, 2003; Axis2, 2006) &mdash; the Java reference implementation</li>
+      <li><strong>Apache CXF</strong> (2006, from XFire + Celtix) &mdash; the successor to Axis for Java</li>
+      <li><strong>Microsoft .NET ASMX</strong> (2002) &mdash; later replaced by WCF (Windows Communication Foundation, 2006)</li>
+      <li><strong>IBM WebSphere</strong> &mdash; the enterprise Java SOAP stack</li>
+      <li><strong>BEA WebLogic</strong> &mdash; ditto</li>
+      <li><strong>Sun/Oracle Metro</strong> (JAX-WS + WSIT)</li>
+      <li><strong>Spring-WS</strong> &mdash; the lighter Spring alternative</li>
+      <li><strong>gSOAP</strong> for C/C++ &mdash; still widely used in embedded/industrial</li>
+      <li><strong>Perl SOAP::Lite</strong> &mdash; the infamous Perl binding</li>
+      <li><strong>Python ZSI, suds, Zeep</strong> &mdash; successive attempts at Python SOAP</li>
+    </ul>
+
+    <p>Why every language ecosystem had its own SOAP toolkit and they were all painful: the WS-* specs left interpretation gaps, each vendor filled them differently, and cross-stack interop bugs were endemic.</p>
+
+    <!-- ============================================================ -->
+    <!-- 7. ESB                                                        -->
+    <!-- ============================================================ -->
+
+    <h2>7. Enterprise Service Buses</h2>
+
+    <p>The term &ldquo;ESB&rdquo; was coined (or popularized) by Gartner analyst Roy Schulte in a 2002 research note. The concept: a middleware backbone handling routing, protocol translation, transformation, orchestration, and security for all Web Services in an enterprise. Instead of each service talking directly to every other service (creating an N-squared problem), all services would talk through the ESB, which would mediate everything.</p>
+
+    <h3>The ESB vendor landscape</h3>
+
+    <table>
+      <thead><tr><th>Product</th><th>Vendor</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Sonic ESB</strong></td><td>Sonic Software (acquired by Progress 2006)</td><td>First commercial ESB, ~2002</td></tr>
+        <tr><td><strong>TIBCO BusinessWorks</strong></td><td>TIBCO</td><td>Acquired by Vista Equity 2014 for $4.3B</td></tr>
+        <tr><td><strong>webMethods</strong></td><td>acquired by Software AG 2007</td><td>$546M deal</td></tr>
+        <tr><td><strong>IBM WebSphere Message Broker / IBM Integration Bus</strong></td><td>IBM</td><td>Descended from MQSeries</td></tr>
+        <tr><td><strong>Microsoft BizTalk Server</strong></td><td>Microsoft (2000)</td><td>Originally XLANG, later BPEL</td></tr>
+        <tr><td><strong>Oracle Service Bus</strong></td><td>BEA AquaLogic (Oracle 2008)</td><td>Part of Fusion Middleware</td></tr>
+        <tr><td><strong>SAP NetWeaver PI</strong></td><td>SAP</td><td>SAP-centric integration</td></tr>
+        <tr><td><strong>MuleSoft</strong></td><td>Founded 2006 (Ross Mason)</td><td>IPO 2017, acquired by Salesforce 2018 for <strong>$6.5B</strong></td></tr>
+        <tr><td><strong>WSO2 ESB</strong></td><td>WSO2 (2005)</td><td>Sanjiva Weerawarana; still active</td></tr>
+        <tr><td><strong>Apache ServiceMix</strong></td><td>Apache (2005)</td><td>Open-source ESB</td></tr>
+        <tr><td><strong>Apache Camel</strong></td><td>Apache (2007)</td><td>The DSL-based integration framework that outlived most ESBs</td></tr>
+        <tr><td><strong>JBoss ESB</strong></td><td>Red Hat/JBoss</td><td>Part of JBoss SOA Platform</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The ESB promise vs the ESB reality</h3>
+
+    <div class="card">
+      <p><strong>Promise:</strong> location transparency, format transformation, protocol bridging, routing, orchestration, monitoring, governance &mdash; all in one product, graphically modeled, enterprise-wide.</p>
+      <p><strong>Reality:</strong> vendor lock-in, single point of failure, ops complexity, performance bottleneck, 18&ndash;36 month projects costing millions. The ESB team became a political choke point for every cross-team integration. Schema changes required coordination meetings. New services required approval. <em>The promised reuse rarely materialized</em> because the ESB team was optimizing for consistency at the cost of developer velocity.</p>
+    </div>
+
+    <p>This was the genesis of what would later become a major cultural force in microservices: the rejection of the central integration layer in favor of <strong>smart endpoints and dumb pipes</strong>. That phrase, coined in the Fowler/Lewis 2014 microservices article, was a direct repudiation of the ESB architecture.</p>
+
+    <!-- ============================================================ -->
+    <!-- 8. CAMEL / EIP                                                -->
+    <!-- ============================================================ -->
+
+    <h2>8. Apache Camel and Enterprise Integration Patterns</h2>
+
+    <p><strong>Gregor Hohpe</strong> and <strong>Bobby Woolf</strong>, <em>Enterprise Integration Patterns</em> (Addison-Wesley, 2003). 65 patterns that named and systematized the ways systems exchange messages. Still the canonical reference twenty-three years later.</p>
+
+    <p>The patterns: Message Channel, Point-to-Point Channel, Publish-Subscribe Channel, Message Router, Content-Based Router, Message Filter, Dynamic Router, Recipient List, Splitter, Aggregator, Resequencer, Composed Message Processor, Scatter-Gather, Routing Slip, Process Manager, Message Broker, Message Translator, Envelope Wrapper, Content Enricher, Content Filter, Claim Check, Normalizer, Canonical Data Model, and many more.</p>
+
+    <p><strong>Apache Camel</strong> (2007) was the library that implemented EIP as a Java fluent DSL:</p>
+
+    <pre><code>from("file:/data/inbox")
+    .choice()
+        .when(xpath("/order/total &gt; 1000"))
+            .to("jms:queue:high-value")
+        .otherwise()
+            .to("jms:queue:normal")
+    .end();</code></pre>
+
+    <p>Camel had 300+ components (JMS, HTTP, FTP, SFTP, Kafka, S3, database, mail, etc.) and used endpoint URIs as the routing unit. Why Camel outlived most ESBs: <em>it was a library, not a product</em>. You could embed it in your own application rather than deploying it as a central bottleneck. Camel K (2019) brought it to Kubernetes as a cloud-native integration platform. The EIP patterns themselves remain the canonical vocabulary &mdash; every Kafka topic, every Kubernetes service, every Istio VirtualService is an EIP pattern with a new name.</p>
+
+    <!-- ============================================================ -->
+    <!-- 9. BPEL                                                       -->
+    <!-- ============================================================ -->
+
+    <h2>9. BPEL &mdash; Business Process Execution Language</h2>
+
+    <p><strong>WS-BPEL 2.0</strong> (OASIS, April 2007, succeeding BPEL4WS 1.1 from 2003). Authors: IBM, Microsoft, BEA, SAP, Siebel. A BPEL document describes a long-running business process as a composition of Web Service calls.</p>
+
+    <h3>Construct catalog</h3>
+
+    <ul>
+      <li><strong>receive</strong> &mdash; wait for an incoming message</li>
+      <li><strong>reply</strong> &mdash; respond to a receive</li>
+      <li><strong>invoke</strong> &mdash; call another Web Service</li>
+      <li><strong>assign</strong> &mdash; copy/manipulate variables</li>
+      <li><strong>pick</strong> &mdash; wait for one of several messages (like a select)</li>
+      <li><strong>while</strong>, <strong>flow</strong>, <strong>sequence</strong>, <strong>scope</strong></li>
+      <li><strong>fault handlers</strong> and <strong>compensation handlers</strong> for error recovery</li>
+    </ul>
+
+    <h3>BPEL engines</h3>
+
+    <p>Every ESB vendor built one: IBM WebSphere Process Server, Oracle BPEL Process Manager, Microsoft BizTalk, SAP NetWeaver, Apache ODE (open source), ActiveBPEL, Sun Java CAPS.</p>
+
+    <p>BPEL was the most hyped language in enterprise computing around 2007&ndash;2008. Its problems: verbose XML, unreadable graphical tools, source-control merge hell, abstraction-level mismatch (business analysts could not actually write BPEL). By 2015 it was effectively dead as a new-deployment technology. Its spiritual successors are <strong>Camunda</strong> (BPMN 2.0 engine from Jakob Freund and Bernd R&uuml;cker, founded 2008), <strong>Temporal</strong>, <strong>Cadence</strong>, <strong>Airflow</strong>, and <strong>Argo Workflows</strong> &mdash; workflow engines that use code or YAML rather than XML and focus on specific problem domains.</p>
+
+    <!-- ============================================================ -->
+    <!-- 10. GOVERNANCE                                                -->
+    <!-- ============================================================ -->
+
+    <h2>10. SOA Governance &mdash; The Industrial Complex</h2>
+
+    <p>Somewhere around 2005, the SOA conversation shifted from &ldquo;how do we build services&rdquo; to &ldquo;how do we govern services.&rdquo; An entire product category emerged to sell governance tooling:</p>
+
+    <ul>
+      <li><strong>Systinet</strong> (acquired by Mercury 2006, then HP 2007) &mdash; UDDI-based service registry</li>
+      <li><strong>SOA Software / Akana</strong> (acquired by Rogue Wave 2016, Perforce 2019) &mdash; Policy Manager</li>
+      <li><strong>AmberPoint</strong> (acquired by Oracle 2010) &mdash; runtime monitoring</li>
+      <li><strong>Progress Actional</strong> &mdash; runtime SOA management</li>
+      <li><strong>Software AG CentraSite</strong> &mdash; OSGi-based registry</li>
+      <li><strong>IBM WSRR</strong> (WebSphere Service Registry and Repository)</li>
+      <li><strong>Oracle Enterprise Repository</strong></li>
+    </ul>
+
+    <p>Governance boards met weekly. New services required design reviews. Schema changes required backward-compatibility checks. The cultural effect: SOA became associated, for developers, with red tape. &ldquo;Governance&rdquo; became a trigger word for developer resistance. When microservices arrived in 2014 with a <em>you build it, you run it</em> ethos and no central governance function, part of the appeal was the explicit rejection of the SOA governance era.</p>
+
+    <!-- ============================================================ -->
+    <!-- 11. WHY IT FAILED                                             -->
+    <!-- ============================================================ -->
+
+    <h2>11. Why Enterprise SOA Failed</h2>
+
+    <p>The definitive obituary was <strong>Anne Thomas Manes</strong>&rsquo;s January 5, 2009 Burton Group blog post <em>SOA is Dead; Long Live Services</em>. See the <a href="history.html">history page</a> for the full quote and reaction. The failure modes, catalogued in many post-mortems:</p>
+
+    <div class="card warn">
+      <ol>
+        <li><strong>Complexity overwhelm</strong> &mdash; WS-* stack too large</li>
+        <li><strong>Vendor lock-in via the ESB</strong></li>
+        <li><strong>The reuse gap</strong> &mdash; most services were used by exactly one consumer</li>
+        <li><strong>WS-* specs that nobody implemented completely</strong></li>
+        <li><strong>Integration projects that took years</strong></li>
+        <li><strong>The political dimension</strong> &mdash; governance boards as power tools</li>
+        <li><strong>Canonical data models nobody agreed on</strong></li>
+        <li><strong>Tool/vendor lifecycle mismatches</strong> &mdash; Systinet acquired and deprecated, Sonic merged and renamed, ActiveBPEL abandoned, all mid-project</li>
+      </ol>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 12. WHAT IT GOT RIGHT                                         -->
+    <!-- ============================================================ -->
+
+    <h2>12. What Enterprise SOA Got Right</h2>
+
+    <div class="card teal">
+      <p>The <em>principles</em> were never wrong. The implementations were wrong.</p>
+      <ul>
+        <li><strong>Contract-first design</strong> is still the right way. Modern equivalents: OpenAPI, Protobuf, AsyncAPI, GraphQL SDL. Same idea, less ceremony.</li>
+        <li><strong>Loose coupling</strong> is still the fundamental virtue. Modern equivalents: tolerant readers, schema evolution rules, async messaging.</li>
+        <li><strong>Messaging patterns (EIP)</strong> are still relevant. Every Kafka topic is a Pub-Sub Channel. Every consumer group is a Competing Consumers pattern. Every dead-letter queue is a Dead Letter Channel.</li>
+        <li><strong>Service boundaries</strong> are still how you decompose systems. Modern equivalents: bounded contexts, domain services, team topology.</li>
+      </ul>
+      <p>Every microservices book of the 2010s is, in a sense, a rediscovery of what the SOA community had already figured out by 2005. What changed was not the ideas but the tooling: Docker and Kubernetes replaced the ESB as the deployment substrate; REST + JSON + OpenAPI replaced SOAP + XML + WSDL as the contract language; distributed tracing and metrics replaced the governance dashboard; DevOps culture replaced the governance board.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 13. LEGACY TODAY                                              -->
+    <!-- ============================================================ -->
+
+    <h2>13. Legacy Enterprise SOA Today (2026)</h2>
+
+    <ul>
+      <li><strong>SAP, Oracle, major banks, insurance, healthcare</strong> still run SOAP stacks in production.</li>
+      <li><strong>WS-Security</strong> still used in B2B integrations (EDI-style partner connections).</li>
+      <li><strong>ESBs still run</strong> at large enterprises &mdash; not new deployments, but the existing installations are stable and cheaper to maintain than replace.</li>
+      <li><strong>The &ldquo;SOA facade&rdquo; pattern</strong>: modern microservices in front of legacy SOAP backends, providing a REST/JSON interface while the internal service-to-service calls remain SOAP.</li>
+      <li><strong>Hiring for SOAP/WSDL/WS-Security expertise</strong> is still happening in 2026. The work pays well because nobody new wants to learn it.</li>
+      <li><strong>New SOAP projects essentially don&rsquo;t exist</strong> except where B2B integration with a legacy partner forces it.</li>
+    </ul>
+
+    <p>If you find yourself doing enterprise SOA work in 2026, it is because you are maintaining or extending something that was built during the 2005&ndash;2012 hype era. The principles live on; the specific machinery is legacy.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="principles.html">Principles &amp; Concepts</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="rest-apis.html">REST &amp; Modern APIs</a></li>
+        <li><a href="microservices-mesh.html">Microservices &amp; Service Mesh</a></li>
+        <li><a href="implementations.html">Implementations &amp; Stacks</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Service-Oriented Architecture &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

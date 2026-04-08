@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Evolution &mdash; Fortran &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-for">
+  <header>
+    <h1>History &amp; Evolution</h1>
+    <div class="subtitle">! Backus + IBM 704 + 18 person-years &rarr; April 1957</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html" class="active">History</a>
+      <a href="language.html">Language</a>
+      <a href="arrays.html">Arrays</a>
+      <a href="hpc.html">HPC</a>
+      <a href="parallel.html">Parallel</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>! Backus, December 8, 1953</strong><br>
+      &ldquo;A programming language for the 704 &mdash; in which mathematical formulas can be written almost as they appear on paper, translated automatically into machine code, and executed.&rdquo;<br>
+      &mdash; <em>John W. Backus, memorandum to Cuthbert Hurd, IBM</em>
+    </blockquote>
+
+    <h2>1. The Man &mdash; John Warner Backus</h2>
+
+    <div class="card">
+      <p><strong>John Warner Backus</strong> (December 3, 1924 &ndash; March 17, 2007). Born in Philadelphia. A mediocre student. Expelled from the University of Virginia for poor grades. Drafted into the Army in 1943. Trained as a medic, then a cryptographer. Discharged 1946. Enrolled at Columbia University intending to study medicine, switched to mathematics. BS 1949, MS 1950.</p>
+      <p>The decisive moment came on a 1950 visit to the IBM showroom at 590 Madison Avenue, where he saw the Selective Sequence Electronic Calculator (SSEC). He asked for a job on impulse, took an aptitude test, and was hired. His first assignment: programming the SSEC. His second: the IBM 701, IBM&rsquo;s first commercial scientific computer.</p>
+    </div>
+
+    <h2>2. The Problem &mdash; Why Programmers Cost More Than Computers</h2>
+
+    <p>By 1953, programming was a brutal undertaking. Assembly was the standard. <strong>Speedcoding</strong>, an interpretive floating-point system Backus himself wrote in 1953, was perhaps fifty times slower than hand-tuned machine code but ten times faster to write. That ratio captured the central economic problem of early computing.</p>
+
+    <table>
+      <thead><tr><th>Resource</th><th>Cost (1954)</th><th>Equivalent (2025)</th></tr></thead>
+      <tbody>
+        <tr><td>IBM 701 time</td><td>~$200 / hour</td><td>~$2,300 / hour</td></tr>
+        <tr><td>Skilled programmer</td><td>~$10,000 / year</td><td>~$115,000 / year</td></tr>
+      </tbody>
+    </table>
+
+    <p>The economic case was undeniable: programmers spent more time writing and debugging code than the computer spent running it. <strong>Any tool that reduced programmer time, even at the cost of machine time, would pay for itself.</strong></p>
+
+    <h2>3. The Proposal &mdash; December 8, 1953</h2>
+
+    <p>Backus sent a memo to his boss <strong>Cuthbert Hurd</strong>: a programming language for the IBM 704 in which mathematical formulas could be written &ldquo;almost as they appear on paper.&rdquo; Hurd approved in January 1954. The team began with Backus, <strong>Irving Ziller</strong>, and <strong>Harlan Herrick</strong>, eventually growing to include <strong>Sheldon Best</strong>, <strong>Lois Haibt</strong> (the only woman on the team), <strong>Roy Nutt</strong>, and others.</p>
+
+    <h2>4. The Compiler &mdash; 18 Person-Years</h2>
+
+    <div class="card">
+      <p>The first FORTRAN compiler took <strong>18 person-years</strong> to build. It was released in <strong>April 1957</strong> for the IBM 704. The team had to prove not just that compiled code could work, but that it could be <em>fast enough</em> to compete with hand-written assembly. They invented sophisticated optimizations: register allocation, instruction scheduling, common subexpression elimination, and loop transformations &mdash; many for the first time in any compiler.</p>
+      <p>The result: FORTRAN code typically ran within a few percent of hand-tuned assembly. The skepticism collapsed. The high-level language era began.</p>
+    </div>
+
+    <h2>5. The Standards Lineage</h2>
+
+    <table>
+      <thead><tr><th>Year</th><th>Standard</th><th>Key Additions</th></tr></thead>
+      <tbody>
+        <tr><td>1957</td><td>FORTRAN I</td><td>The original. IBM 704. Statements, DO loops, FORMAT, READ/WRITE.</td></tr>
+        <tr><td>1958</td><td>FORTRAN II</td><td>Subroutines, functions, COMMON blocks. Modular programs for the first time.</td></tr>
+        <tr><td>1962</td><td>FORTRAN IV</td><td>LOGICAL data type, logical IF. The cleanup that became the basis for the first standard.</td></tr>
+        <tr><td>1966</td><td>FORTRAN 66 (X3.9-1966)</td><td>First ANSI standard. Codified the language. The IBM 360 era.</td></tr>
+        <tr><td>1978</td><td>FORTRAN 77 (X3.9-1978)</td><td>Structured programming. CHARACTER data type. Block IF/ELSE. The version everyone older than 50 first learned.</td></tr>
+        <tr><td>1991</td><td>Fortran 90 (ISO/IEC 1539:1991)</td><td>Free-form source. Modules. Array operations. Recursion. Pointers. Dynamic allocation. Mixed case (Fortran instead of FORTRAN). The rebirth.</td></tr>
+        <tr><td>1997</td><td>Fortran 95 (ISO/IEC 1539-1:1997)</td><td>Minor revision. FORALL, PURE functions. Cleanup of F90.</td></tr>
+        <tr><td>2004</td><td>Fortran 2003 (ISO/IEC 1539-1:2004)</td><td>Object-oriented programming. ISO_C_BINDING for C interop. IEEE arithmetic. The biggest revision since F90.</td></tr>
+        <tr><td>2010</td><td>Fortran 2008 (ISO/IEC 1539-1:2010)</td><td>Coarrays. Submodules. DO CONCURRENT. The parallel revolution.</td></tr>
+        <tr><td>2018</td><td>Fortran 2018 (ISO/IEC 1539-1:2018)</td><td>Enhanced coarrays. Atomic operations. Teams. Better C interop.</td></tr>
+        <tr><td>2023</td><td>Fortran 2023 (ISO/IEC 1539-1:2023)</td><td>Generics. Conditional expressions. Token improvements. The latest.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>6. Key People Beyond Backus</h2>
+
+    <table>
+      <thead><tr><th>Person</th><th>Contribution</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Irving Ziller</strong></td><td>Original FORTRAN team member. Worked on optimization.</td></tr>
+        <tr><td><strong>Harlan Herrick</strong></td><td>Original team. Wrote much of the I/O system.</td></tr>
+        <tr><td><strong>Sheldon Best</strong></td><td>Pioneered register allocation algorithms.</td></tr>
+        <tr><td><strong>Lois Haibt</strong></td><td>The one woman on the original team. Wrote the FORTRAN flow analysis &mdash; possibly the first program data flow analysis ever.</td></tr>
+        <tr><td><strong>Roy Nutt</strong></td><td>Original team. Later co-founded Computer Sciences Corporation (CSC).</td></tr>
+        <tr><td><strong>Kenneth E. Iverson</strong></td><td>Influenced array notation that later appeared in APL and Fortran 90.</td></tr>
+        <tr><td><strong>Adin Falkoff</strong></td><td>Co-creator of APL. Influence on array operations.</td></tr>
+        <tr><td><strong>Jeanne Adams</strong></td><td>Chair of X3J3 (US Fortran committee) during F77 and F90. The driving force behind Fortran 90&rsquo;s modernization.</td></tr>
+        <tr><td><strong>Brian Smith</strong></td><td>F90 standardization leader. Later worked on numerical libraries.</td></tr>
+        <tr><td><strong>Michael Metcalf</strong></td><td>Co-author of <em>Modern Fortran Explained</em>. CERN physicist. The voice of standards-era Fortran.</td></tr>
+        <tr><td><strong>John Reid</strong></td><td>Co-author of <em>Modern Fortran Explained</em>. Long-serving committee member. Co-inventor of coarrays with Numrich.</td></tr>
+        <tr><td><strong>Robert W. Numrich</strong></td><td>Co-inventor of coarrays. The native parallel programming model in Fortran 2008+.</td></tr>
+        <tr><td><strong>Ond&#345;ej &#268;ert&iacute;k</strong></td><td>Creator of LFortran. The face of the modern Fortran renaissance.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>7. Backus&rsquo;s Later Work and Disillusionment</h2>
+
+    <p>Backus received the <strong>Turing Award in 1977</strong> for FORTRAN. His acceptance lecture, &ldquo;Can Programming Be Liberated from the von Neumann Style?,&rdquo; was a famous critique of imperative programming &mdash; including his own creation. He spent the rest of his career advocating for functional programming via FP and FL languages, neither of which achieved wide adoption.</p>
+
+    <p>Backus also invented <strong>Backus-Naur Form (BNF)</strong>, the metasyntax notation used to describe nearly every programming language grammar since ALGOL 60. His Turing Award citation reads: &ldquo;For profound, influential, and lasting contributions to the design of practical high-level programming systems, notably through his work on FORTRAN, and for publication of formal procedures for the specification of programming languages.&rdquo;</p>
+
+    <h2>8. The Languages That Tried to Replace Fortran</h2>
+
+    <table>
+      <thead><tr><th>Language</th><th>Year</th><th>Pitch</th><th>Why it didn&rsquo;t replace Fortran</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ALGOL 60</strong></td><td>1960</td><td>Cleaner syntax, structured programming</td><td>No I/O standard. Never gained industrial traction.</td></tr>
+        <tr><td><strong>PL/I</strong></td><td>1964</td><td>IBM&rsquo;s &ldquo;everything language&rdquo;</td><td>Too complex. Compilers slow. Never displaced FORTRAN inside IBM.</td></tr>
+        <tr><td><strong>Pascal</strong></td><td>1970</td><td>Wirth&rsquo;s structured programming pedagogy</td><td>Too restrictive for production numerical work.</td></tr>
+        <tr><td><strong>C</strong></td><td>1972</td><td>Systems language with portability</td><td>Captured systems but never displaced Fortran in HPC.</td></tr>
+        <tr><td><strong>C++</strong></td><td>1985</td><td>Object orientation + C performance</td><td>Some HPC adoption (PETSc, OpenFOAM) but didn&rsquo;t replace Fortran kernels.</td></tr>
+        <tr><td><strong>Python</strong></td><td>1991</td><td>Readability, scripting, glue</td><td>Became the front-end &mdash; but the back-end is still Fortran (NumPy/SciPy/LAPACK).</td></tr>
+        <tr><td><strong>Java</strong></td><td>1995</td><td>&ldquo;Write once, run anywhere&rdquo;</td><td>JVM overhead unacceptable for HPC.</td></tr>
+        <tr><td><strong>Chapel, X10, Fortress</strong></td><td>2000s</td><td>HPCS program: post-Fortran HPC languages</td><td>Two were cancelled. Chapel survives but small adoption.</td></tr>
+        <tr><td><strong>Julia</strong></td><td>2012</td><td>&ldquo;Walks like Python, runs like Fortran&rdquo;</td><td>Growing in scientific computing but not displacing Fortran kernels &mdash; it CALLS them.</td></tr>
+        <tr><td><strong>Rust</strong></td><td>2010</td><td>Memory safety + performance</td><td>Increasingly seen alongside Fortran. May eventually share the niche.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>9. Why Fortran Won &mdash; The Four Reasons</h2>
+
+    <ol>
+      <li><strong>Performance.</strong> Compiler maturity (60+ years), strict aliasing rules, array semantics, column-major storage. Fortran code routinely outperforms equivalent C/C++ code.</li>
+      <li><strong>Portability.</strong> ANSI standardized in 1966. Code from 1970 still compiles. The same source runs on every platform from a laptop to Frontier.</li>
+      <li><strong>Ecosystem.</strong> BLAS, LAPACK, ScaLAPACK, NetCDF, HDF5, MPI. The numerical libraries that everything else wraps.</li>
+      <li><strong>Continuity.</strong> Once an institution invests millions of lines of Fortran in their flagship code (CESM, WRF, ECMWF IFS, Gaussian, NWChem), the cost of rewriting is enormous. Fortran code <em>persists</em>.</li>
+    </ol>
+
+    <h2>10. The Modern Renaissance (2020s)</h2>
+
+    <div class="card std-card">
+      <p>For decades, the Fortran community was small and aging. The 2020s changed that. <strong>Ond&#345;ej &#268;ert&iacute;k</strong> founded LFortran and the fortran-lang community. <strong>fpm</strong> (Fortran Package Manager) shipped in 2020. <strong>stdlib</strong> began the same year. <strong>fortran-lang.org</strong> and the Fortran Discourse forum became active hubs. <strong>Flang</strong> matured inside LLVM. Intel made <code>ifx</code> free for personal use. NVIDIA made <code>nvfortran</code> free for non-commercial use.</p>
+      <p>The result: for the first time in 30 years, a young researcher can pick up Fortran with modern tooling, modern community, modern documentation. The renaissance is real and ongoing.</p>
+    </div>
+
+    <h2>11. Notable Implementations Through the Years</h2>
+
+    <table>
+      <thead><tr><th>Compiler</th><th>Era</th><th>Significance</th></tr></thead>
+      <tbody>
+        <tr><td>IBM FORTRAN H, G, VS</td><td>1960s-80s</td><td>The original. Set the standard for what &ldquo;Fortran&rdquo; meant on mainframes.</td></tr>
+        <tr><td>WATFOR / WATFIV</td><td>1965-80</td><td>University of Waterloo. Fast compile times. Education-focused. The student Fortran.</td></tr>
+        <tr><td>DEC VAX Fortran</td><td>1970s-90s</td><td>VMS. The dominant scientific platform of the 1980s.</td></tr>
+        <tr><td>Cray Fortran (CFT, CFT77)</td><td>1976-90s</td><td>Vectorizing compiler for Cray supercomputers.</td></tr>
+        <tr><td>NAG Fortran</td><td>1980s-present</td><td>Strict standards conformance. The compliance reference.</td></tr>
+        <tr><td>Lahey Fortran</td><td>1980s-2000s</td><td>Popular PC Fortran in the 1990s.</td></tr>
+        <tr><td>Salford / Silverfrost FTN77, FTN95</td><td>1980s-present</td><td>UK PC Fortran.</td></tr>
+        <tr><td>Microsoft FORTRAN PowerStation</td><td>1993-95</td><td>Microsoft&rsquo;s PC Fortran. Discontinued; rights eventually passed to Intel.</td></tr>
+        <tr><td>Absoft Fortran</td><td>1980s-present</td><td>Mac and PC Fortran.</td></tr>
+        <tr><td>Intel Fortran (ifort)</td><td>2000-2024</td><td>The performance leader on x86. Now end-of-life, replaced by ifx.</td></tr>
+        <tr><td>GFortran</td><td>2003-present</td><td>GNU&rsquo;s free Fortran. Part of GCC. The most-installed Fortran compiler.</td></tr>
+        <tr><td>NVIDIA HPC SDK (formerly PGI)</td><td>1989-present</td><td>The GPU Fortran. CUDA Fortran extensions.</td></tr>
+        <tr><td>LFortran</td><td>2017-present</td><td>LLVM-based. Interactive REPL. The renaissance face.</td></tr>
+        <tr><td>Flang</td><td>2017-present</td><td>LLVM&rsquo;s official Fortran frontend. The future of many backends.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="arrays.html">Arrays &mdash; The Killer Feature</a></li>
+        <li><a href="hpc.html">HPC &amp; Scientific Computing</a></li>
+        <li><a href="parallel.html">Parallel Fortran</a></li>
+        <li><a href="ecosystem.html">Modern Ecosystem</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="tools.html">Tools &amp; Compilers</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>History &amp; Evolution &middot; Fortran &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

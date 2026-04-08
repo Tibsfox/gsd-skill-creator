@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JVM &amp; Concurrency &mdash; Java and the JVM</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jav">
+  <header>
+    <h1>The JVM &amp; Concurrency</h1>
+    <div class="subtitle">HotSpot, Garbage Collection, JIT, the Java Memory Model, and Project Loom&rsquo;s Virtual Threads</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="oop.html">OOP</a>
+      <a href="jvm.html" class="active">JVM</a>
+      <a href="frameworks.html">Frameworks</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Java the language has always been conservative. Java the runtime has always been ambitious. The gap between those two halves is where most of the interesting engineering lives.
+    </blockquote>
+
+    <h2>What the JVM Actually Is</h2>
+    <p>The JVM is an <strong>abstract computing machine</strong> whose instruction set is not the native instruction set of any real CPU. It is defined by <em>The Java Virtual Machine Specification</em>, maintained separately from the Java Language Specification. Both are published by Oracle and can evolve independently.</p>
+
+    <div class="card">
+      <p>The JVM specification describes:</p>
+      <ul>
+        <li>A binary file format (the <code>.class</code> file) starting with the magic number <code>CAFEBABE</code></li>
+        <li>An <strong>instruction set</strong> of roughly 200 opcodes for a stack machine</li>
+        <li>A set of runtime data areas: heap, method area, stacks, PC register, native stacks</li>
+        <li>A <strong>verification algorithm</strong> that proves a <code>.class</code> file is structurally safe before any code runs</li>
+        <li>Rules for class loading, linking, initialization, and thread semantics</li>
+      </ul>
+      <p>It explicitly does <strong>not</strong> describe a garbage collector, a JIT compiler, thread scheduling behavior, or any mapping to real hardware. Those are implementation concerns &mdash; which is why OpenJDK HotSpot, Eclipse OpenJ9, GraalVM, and Azul Zing can all legitimately call themselves JVMs while making wildly different engineering choices under the hood.</p>
+    </div>
+
+    <h2>JVM Implementations</h2>
+    <table>
+      <thead><tr><th>JVM</th><th>Origin</th><th>Notable for</th></tr></thead>
+      <tbody>
+        <tr><td><strong>HotSpot</strong> (OpenJDK)</td><td>Sun 1999, now OpenJDK</td><td>The reference implementation; C1 + C2 tiered JIT; default in most distributions</td></tr>
+        <tr><td><strong>OpenJ9</strong></td><td>IBM J9, now Eclipse</td><td>Low memory footprint; long-running enterprise workloads</td></tr>
+        <tr><td><strong>GraalVM</strong></td><td>Oracle Labs</td><td>JIT written in Java (replacing C2); Native Image; polyglot via Truffle</td></tr>
+        <tr><td><strong>Azul Zing / Prime</strong></td><td>Azul Systems</td><td>C4 pauseless GC; HFT and low-latency workloads</td></tr>
+        <tr><td><strong>Amazon Corretto</strong></td><td>Amazon</td><td>No-cost distribution of OpenJDK with long-term support</td></tr>
+        <tr><td><strong>Adoptium Temurin</strong></td><td>Eclipse Foundation</td><td>Community-built OpenJDK, widely used in containers</td></tr>
+        <tr><td><strong>BellSoft Liberica</strong></td><td>BellSoft</td><td>OpenJDK builds with Alpine musl support</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Class Loading</h2>
+    <p>Classes are loaded on first use, not all at once. The <strong>delegation model</strong>: children ask parents first.</p>
+
+    <ol>
+      <li><strong>Bootstrap</strong> class loader (native code) &mdash; loads <code>java.base</code> and core JDK classes</li>
+      <li><strong>Platform</strong> class loader (was &ldquo;Extension&rdquo; before Java 9) &mdash; loads JDK extensions</li>
+      <li><strong>System / Application</strong> class loader &mdash; loads classes from the classpath / module path</li>
+      <li><strong>Custom</strong> class loaders for plugin systems, web containers, OSGi, etc.</li>
+    </ol>
+
+    <p>Every <code>.class</code> file passes through the <strong>bytecode verifier</strong> before any code in it runs. The verifier rejects malformed bytecode, type violations, and stack overflow / underflow. This verification is what makes Java &ldquo;safe&rdquo; to run untrusted code (historically, applets).</p>
+
+    <h2>JVM Memory Layout</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Heap</h4>
+        <p>Where all Java objects live. Divided into generations: <strong>Young</strong> (Eden + two survivor spaces) and <strong>Old</strong>. Controlled by <code>-Xms</code> (initial) and <code>-Xmx</code> (max).</p>
+      </div>
+      <div class="pillar">
+        <h4>Metaspace</h4>
+        <p>Class metadata: method bytecode, constant pool, class structures. Replaced the fixed-size PermGen in Java 8. Grows as classes load.</p>
+      </div>
+      <div class="pillar">
+        <h4>Thread Stacks</h4>
+        <p>One per platform thread. Local variables, operand stacks, frame pointers. Fixed size per thread (<code>-Xss</code>).</p>
+      </div>
+      <div class="pillar">
+        <h4>Direct Memory</h4>
+        <p>Outside the heap. Allocated via <code>ByteBuffer.allocateDirect()</code> for NIO and off-heap caching. Not managed by the GC.</p>
+      </div>
+    </div>
+
+    <h2>Garbage Collection</h2>
+    <p>HotSpot offers multiple garbage collectors, each tuned for different trade-offs between throughput, pause time, and memory overhead.</p>
+
+    <table>
+      <thead><tr><th>Collector</th><th>Introduced</th><th>Pause profile</th><th>Niche</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Serial GC</strong></td><td>Java 1.0</td><td>Single-threaded, stop-the-world</td><td>Small heaps, embedded</td></tr>
+        <tr><td><strong>Parallel GC</strong> (throughput)</td><td>Java 1.3/1.4</td><td>Multi-threaded STW</td><td>Throughput-optimized, older batch jobs</td></tr>
+        <tr><td><strong>CMS</strong> (Concurrent Mark Sweep)</td><td>Java 1.4</td><td>Mostly concurrent</td><td><em>Deprecated Java 9, removed Java 14</em></td></tr>
+        <tr><td><strong>G1</strong> (Garbage First)</td><td>Java 7 / default Java 9+</td><td>Region-based, predictable pauses</td><td>The default for most workloads</td></tr>
+        <tr><td><strong>ZGC</strong></td><td>Java 11 / production Java 15</td><td>&lt; 10 ms pauses at TB heaps</td><td>Ultra-low-latency; generational ZGC in Java 21</td></tr>
+        <tr><td><strong>Shenandoah</strong></td><td>Red Hat, OpenJDK</td><td>&lt; 10 ms pauses</td><td>Parallel to ZGC; Red Hat-backed</td></tr>
+        <tr><td><strong>Epsilon GC</strong></td><td>Java 11</td><td>No collection at all</td><td>Short-lived processes; benchmarking</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <p><strong>The generational hypothesis</strong> drives GC design: most objects die young. Young-gen collections are fast and frequent; old-gen collections are slower but rare. A minor GC collects the young generation; a major (or full) GC collects the old generation too. Modern collectors like G1 and ZGC blur this distinction.</p>
+    </div>
+
+    <h3>GC tuning flags</h3>
+<pre><code># Select collector
+-XX:+UseG1GC                        # G1 (default)
+-XX:+UseZGC                         # ZGC
+-XX:+UseShenandoahGC                # Shenandoah
+-XX:+UseParallelGC                  # Parallel
+-XX:+UseEpsilonGC                   # no-op
+
+# Heap sizing
+-Xms2g -Xmx8g                       # 2 GB initial, 8 GB max
+-XX:MaxGCPauseMillis=200            # G1 pause goal
+-XX:+UseTLAB                        # thread-local alloc buffers (default)
+
+# GC logging (Java 9+)
+-Xlog:gc*=info:file=gc.log:time,uptime</code></pre>
+
+    <h2>JIT Compilation</h2>
+    <p>HotSpot uses <strong>tiered compilation</strong>. Code starts interpreted, then compiles at progressively higher optimization levels as it runs more often.</p>
+
+    <ol>
+      <li><strong>Interpreter</strong> (tier 0) &mdash; directly executes bytecode. Slow but starts immediately.</li>
+      <li><strong>C1</strong> (client compiler, tiers 1&ndash;3) &mdash; fast compilation, simple optimizations. Good for startup.</li>
+      <li><strong>C2</strong> (server compiler, tier 4) &mdash; slow compilation, aggressive optimization. The &ldquo;hot path&rdquo; compiler.</li>
+    </ol>
+
+    <p>C2 applies: <strong>inlining</strong>, <strong>escape analysis</strong> (scalar replacement, stack allocation), <strong>loop unrolling</strong>, <strong>lock coarsening and elision</strong>, <strong>dead code elimination</strong>, <strong>branch prediction hints</strong>, and <strong>speculative optimizations</strong> with guarded deoptimization. When speculations fail, HotSpot <em>deoptimizes</em>: falls back to the interpreter and re-compiles.</p>
+
+    <div class="card green">
+      <p><strong>GraalVM</strong> replaces C2 with a new JIT compiler written in Java. It produces comparable or better code in many cases and, via <strong>Native Image</strong>, can compile a Java program to a native binary with near-instant startup &mdash; at the cost of a closed-world assumption (no arbitrary reflection at runtime).</p>
+    </div>
+
+    <h2>Bytecode</h2>
+    <p>Java bytecode is a stack-based instruction set with roughly 200 opcodes. Use <code>javap -c</code> to disassemble a class:</p>
+
+<pre><code>public int add(int a, int b) { return a + b; }
+
+// Disassembled:
+public int add(int, int);
+  Code:
+     0: iload_1      // push a
+     1: iload_2      // push b
+     2: iadd         // pop two, push sum
+     3: ireturn      // return top of stack</code></pre>
+
+    <p>Key opcode categories:</p>
+    <ul>
+      <li><strong>Load / store</strong> &mdash; <code>iload</code>, <code>istore</code>, <code>aload</code>, <code>astore</code></li>
+      <li><strong>Arithmetic</strong> &mdash; <code>iadd</code>, <code>imul</code>, <code>dadd</code>, &hellip;</li>
+      <li><strong>Control flow</strong> &mdash; <code>ifeq</code>, <code>goto</code>, <code>tableswitch</code></li>
+      <li><strong>Invocation</strong> &mdash; <code>invokevirtual</code>, <code>invokestatic</code>, <code>invokespecial</code>, <code>invokeinterface</code>, <code>invokedynamic</code></li>
+      <li><strong>Field access</strong> &mdash; <code>getfield</code>, <code>putfield</code>, <code>getstatic</code>, <code>putstatic</code></li>
+      <li><strong>Object</strong> &mdash; <code>new</code>, <code>newarray</code>, <code>checkcast</code>, <code>instanceof</code></li>
+    </ul>
+
+    <p><strong><code>invokedynamic</code></strong> (Java 7, JSR 292) was added specifically to make dynamic languages fast on the JVM. It&rsquo;s now also used by lambdas, string concatenation (Java 9+), and pattern matching &mdash; each lambda gets its own lazy-bound call site that the JIT can specialize.</p>
+
+    <h2>The Java Memory Model (JMM)</h2>
+    <p>JSR 133, shipped in Java 5, defined what concurrent access actually means in Java. It established:</p>
+
+    <ul>
+      <li><strong><code>volatile</code></strong> &mdash; guarantees visibility and ordering across threads (acquire/release semantics)</li>
+      <li><strong><code>synchronized</code></strong> &mdash; exclusive access plus memory barriers on entry and exit</li>
+      <li><strong>Happens-before</strong> relationship &mdash; the foundation for reasoning about concurrent code</li>
+      <li><strong>Final field semantics</strong> &mdash; immutability guarantees after construction, even without synchronization</li>
+      <li><strong>Safe publication</strong> &mdash; how to make a newly-constructed object visible to other threads</li>
+    </ul>
+
+    <div class="card amber">
+      <p>The JMM is what made Java 5 the first version where lock-free algorithms could be written portably. Before JSR 133, <code>volatile</code> was under-specified, and double-checked locking was broken on most JVMs.</p>
+    </div>
+
+    <h2>java.util.concurrent (Java 5, JSR 166)</h2>
+    <p>Designed by <strong>Doug Lea</strong> at SUNY Oswego. The <code>j.u.c.</code> package is one of Java&rsquo;s most-copied libraries &mdash; C#, Kotlin, and many others borrowed from it. Key components:</p>
+
+    <table>
+      <thead><tr><th>Category</th><th>Types</th></tr></thead>
+      <tbody>
+        <tr><td>Executors</td><td><code>ExecutorService</code>, <code>ThreadPoolExecutor</code>, <code>ScheduledExecutorService</code>, <code>ForkJoinPool</code></td></tr>
+        <tr><td>Futures</td><td><code>Future</code>, <code>CompletableFuture</code> (Java 8), <code>CompletionStage</code></td></tr>
+        <tr><td>Concurrent collections</td><td><code>ConcurrentHashMap</code>, <code>CopyOnWriteArrayList</code>, <code>ConcurrentLinkedQueue</code></td></tr>
+        <tr><td>Blocking queues</td><td><code>ArrayBlockingQueue</code>, <code>LinkedBlockingQueue</code>, <code>SynchronousQueue</code>, <code>LinkedTransferQueue</code></td></tr>
+        <tr><td>Atomics</td><td><code>AtomicInteger</code>, <code>AtomicLong</code>, <code>AtomicReference</code>, <code>LongAdder</code></td></tr>
+        <tr><td>Locks</td><td><code>ReentrantLock</code>, <code>ReentrantReadWriteLock</code>, <code>StampedLock</code></td></tr>
+        <tr><td>Coordination</td><td><code>Semaphore</code>, <code>CountDownLatch</code>, <code>CyclicBarrier</code>, <code>Phaser</code></td></tr>
+      </tbody>
+    </table>
+
+<pre><code>import java.util.concurrent.*;
+
+ExecutorService executor = Executors.newFixedThreadPool(8);
+
+CompletableFuture&lt;String&gt; greeting = CompletableFuture
+    .supplyAsync(() -&gt; fetchName(), executor)
+    .thenApply(name -&gt; "Hello, " + name)
+    .exceptionally(ex -&gt; "Hello, stranger");
+
+// ConcurrentHashMap
+var cache = new ConcurrentHashMap&lt;String, User&gt;();
+User u = cache.computeIfAbsent("foxy", key -&gt; loadUser(key));</code></pre>
+
+    <h2>Virtual Threads &mdash; Project Loom (Java 21)</h2>
+    <p><strong>Ron Pressler</strong> led Project Loom with a clear goal: make the simple &ldquo;thread per request&rdquo; programming model viable at cloud scale. Platform threads are expensive (each has a ~1 MB stack); virtual threads are cheap (~1 KB).</p>
+
+    <div class="card blue">
+      <p><strong>Virtual threads</strong> are scheduled by the JVM onto a small pool of <strong>carrier threads</strong> (platform threads backed by the OS). When a virtual thread blocks on I/O or a synchronizer, it unmounts from its carrier, freeing it for another virtual thread. When the block resolves, the virtual thread is scheduled back onto <em>any</em> carrier. Under the hood, the JVM uses <strong>continuations</strong>: a mechanism for suspending and resuming a thread&rsquo;s call stack.</p>
+    </div>
+
+<pre><code>// Classic platform thread
+Thread t = new Thread(() -&gt; doWork());
+t.start();
+t.join();
+
+// Virtual thread (Java 21)
+Thread vt = Thread.ofVirtual().start(() -&gt; doWork());
+vt.join();
+
+// A million virtual threads, no problem
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    IntStream.range(0, 1_000_000).forEach(i -&gt;
+        executor.submit(() -&gt; handleRequest(i))
+    );
+}</code></pre>
+
+    <h3>Pinning (and its resolution)</h3>
+    <p>In Java 21, a virtual thread could be <em>pinned</em> to its carrier inside <code>synchronized</code> blocks &mdash; it could not unmount. The JEP 491 work (targeting Java 24) removes this restriction, so <code>synchronized</code> no longer pins.</p>
+
+    <h3>Structured concurrency (incubator)</h3>
+<pre><code>// StructuredTaskScope &mdash; JEP 428 incubator
+try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+    Subtask&lt;User&gt;     user    = scope.fork(() -&gt; fetchUser(id));
+    Subtask&lt;Order[]&gt;  orders  = scope.fork(() -&gt; fetchOrders(id));
+
+    scope.join().throwIfFailed();
+
+    return new Dashboard(user.get(), orders.get());
+}</code></pre>
+
+    <h2>Project Panama &mdash; Foreign Function &amp; Memory API (Java 22)</h2>
+    <p>Panama replaces JNI with a safer, faster native interop API. No more hand-written C stubs.</p>
+
+    <ul>
+      <li><code>MemorySegment</code> &mdash; safe access to native memory</li>
+      <li><code>MemoryLayout</code> &mdash; describes the shape of native data</li>
+      <li><code>Linker</code> and <code>SymbolLookup</code> &mdash; bind to native functions by name</li>
+      <li><code>jextract</code> &mdash; generates bindings from C headers</li>
+    </ul>
+
+    <h2>Performance &mdash; Warmup, Profiling, Startup</h2>
+    <p>&ldquo;Java is slow&rdquo; was true in 1996 and has been wrong for a long time. Modern HotSpot is <strong>routinely within 10&ndash;20% of hand-tuned C++</strong> on long-running workloads, and sometimes faster after JIT specialization. The real performance issues are:</p>
+
+    <ul>
+      <li><strong>Startup time</strong> &mdash; JVM warmup can take seconds for complex apps. Addressed by CDS (Class Data Sharing), AppCDS, GraalVM Native Image, CRaC (checkpoint/restore), and Project Leyden (static/ahead-of-time images).</li>
+      <li><strong>Memory overhead</strong> &mdash; JVMs are hungry compared to native binaries. ZGC and Shenandoah trade throughput for low pause time but still need generous heaps.</li>
+      <li><strong>GC pauses</strong> &mdash; historically the #1 tuning problem. Modern G1 and ZGC keep pauses under 10 ms at hundreds of gigabytes.</li>
+    </ul>
+
+    <h3>Tooling</h3>
+    <table>
+      <thead><tr><th>Tool</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>JFR</strong> (Java Flight Recorder)</td><td>Low-overhead profiling and event capture; open source since Java 11</td></tr>
+        <tr><td><strong>JMH</strong> (Java Microbenchmark Harness)</td><td>Aleksey Shipilev&rsquo;s tool; the only sane way to benchmark JVM code</td></tr>
+        <tr><td><strong>async-profiler</strong></td><td>Low-overhead sampling profiler with flame graphs</td></tr>
+        <tr><td><strong>jcmd</strong>, <strong>jstack</strong>, <strong>jmap</strong>, <strong>jinfo</strong></td><td>Command-line diagnostics</td></tr>
+        <tr><td><strong>JMX</strong></td><td>Management and monitoring API</td></tr>
+        <tr><td><strong>VisualVM</strong>, <strong>Mission Control</strong></td><td>GUI profilers</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CPP</td><td>C++</td><td>HotSpot and GraalVM&rsquo;s old JIT (C2) are written in C++; the new GraalVM JIT is Java</td></tr>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td>JNI and Panama bridge Java to C libraries; the JVM runs atop a C runtime</td></tr>
+        <tr><td>SYS</td><td>Systems Administration</td><td>JVM tuning, GC logs, JMX monitoring, thread dumps &mdash; enterprise ops toolkit</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>OOM, GC storms, deadlock, thread pinning &mdash; the classic JVM failure modes</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Java Language</a></li>
+        <li><a href="oop.html">Object-Oriented Java</a></li>
+        <li><a href="frameworks.html">Frameworks &amp; Enterprise</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>JVM &amp; Concurrency &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

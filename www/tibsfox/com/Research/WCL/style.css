@@ -1,0 +1,347 @@
+/* WCL — Washington State Corporate Law
+   Marseille Manuscript palette, legal-history variant:
+   deep burgundy-purple, burnished gold, slate ink, parchment cream.
+   Evokes leather-bound statute books, a courthouse reading room,
+   a legal treatise printed letterpress circa 1960, a draftsman's
+   ink annotations in the margin of the Revised Model Act.
+   Base layout from ../../brand.css */
+
+/* 1. COLOR PALETTE & SEMANTIC OVERRIDES */
+
+:root {
+  --wcl-burgundy: #4A148C;
+  --wcl-burgundy-mid: #6A1B9A;
+  --wcl-burgundy-light: #F3E5F5;
+  --wcl-burgundy-dark: #26004F;
+  --wcl-gold: #C88B0A;
+  --wcl-gold-mid: #E0A11A;
+  --wcl-gold-light: #FFF3D1;
+  --wcl-gold-dark: #7A5300;
+  --wcl-slate: #37474F;
+  --wcl-slate-mid: #546E7A;
+  --wcl-slate-light: #ECEFF1;
+  --wcl-slate-dark: #1B2428;
+  --wcl-parchment: #FAF6ED;
+  --wcl-parchment-warm: #F5EFDC;
+  --wcl-ink: #1A1410;
+  --wcl-ink-light: #3E3830;
+  --wcl-gray-bg: #FAF6ED;
+  --wcl-gray-50: #FAF6ED;
+  --wcl-gray-100: #F2ECD8;
+  --wcl-gray-200: #E4DCC0;
+  --wcl-gray-300: #C9BF9A;
+  --wcl-gray-500: #6B6348;
+  --wcl-gray-700: #352F1E;
+  --wcl-gray-900: #141109;
+  --wcl-green: #2E6B3A;
+  --wcl-red: #9B1C1C;
+
+  --page-bg: var(--wcl-parchment);
+  --page-text: var(--wcl-ink);
+  --page-text-light: var(--wcl-gray-500);
+  --link: var(--wcl-burgundy);
+  --link-hover: var(--wcl-burgundy-dark);
+  --accent: var(--wcl-burgundy);
+  --accent-light: var(--wcl-burgundy-light);
+  --accent-dark: var(--wcl-burgundy-dark);
+  --card-bg: #FFFDF5;
+  --card-border: var(--wcl-gray-200);
+  --card-shadow: rgba(74, 20, 140, 0.08);
+  --border: var(--wcl-gray-200);
+  --content-width: 58rem;
+}
+
+/* 2. BODY */
+
+body {
+  background: var(--wcl-parchment) !important;
+  color: var(--wcl-ink) !important;
+}
+
+/* 3. HEADER */
+
+header {
+  background: linear-gradient(135deg, var(--wcl-burgundy-dark), var(--wcl-burgundy), var(--wcl-burgundy-mid)) !important;
+  border-bottom-color: var(--wcl-gold) !important;
+  border-bottom-width: 3px !important;
+}
+
+header h1 {
+  color: var(--wcl-parchment) !important;
+  letter-spacing: 0.02em;
+  font-family: 'Libre Baskerville', 'Georgia', 'Times New Roman', serif;
+}
+header .subtitle {
+  color: rgba(250, 246, 237, 0.85) !important;
+  font-style: italic;
+}
+
+header nav a {
+  color: rgba(250, 246, 237, 0.78) !important;
+  border-color: transparent !important;
+}
+header nav a:hover, header nav a.active {
+  color: var(--wcl-gold-light) !important;
+  border-color: var(--wcl-gold) !important;
+}
+
+/* 4. BLOCKQUOTE */
+
+blockquote {
+  border-left-color: var(--wcl-burgundy) !important;
+  background: var(--wcl-burgundy-light) !important;
+  font-style: italic;
+  color: var(--wcl-gray-700) !important;
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+}
+
+/* 5. TABLES */
+
+thead tr { background: var(--wcl-burgundy-dark) !important; color: var(--wcl-parchment) !important; }
+thead th { color: var(--wcl-parchment) !important; }
+tbody tr:nth-child(even) { background: var(--wcl-gray-100); }
+tbody tr:hover { background: var(--wcl-burgundy-light); }
+
+/* 6. CARDS */
+
+.card {
+  border-left: 4px solid var(--wcl-burgundy);
+  background: var(--wcl-burgundy-light);
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin: 1.25rem 0;
+}
+
+.card.gold {
+  border-left-color: var(--wcl-gold);
+  background: var(--wcl-gold-light);
+}
+
+.card.slate {
+  border-left-color: var(--wcl-slate);
+  background: var(--wcl-slate-light);
+}
+
+.card.warn {
+  border-left-color: var(--wcl-red);
+  background: #FCE4EC;
+}
+
+/* 7. CODE BLOCKS */
+
+pre, code {
+  background: var(--wcl-gray-100);
+  border: 1px solid var(--wcl-gray-200);
+  border-radius: 0.375rem;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  color: var(--wcl-burgundy-dark);
+}
+
+pre {
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+code { padding: 0.15rem 0.35rem; font-size: 0.875em; }
+pre code { padding: 0; border: none; background: transparent; }
+
+/* 8. STATS GRID */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.stat {
+  background: var(--card-bg);
+  border: 1px solid var(--wcl-gray-200);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 3px var(--card-shadow);
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--wcl-burgundy);
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--wcl-gray-500);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value.gold { color: var(--wcl-gold); }
+.stat-value.slate { color: var(--wcl-slate); }
+.stat-value.green { color: var(--wcl-green); }
+.stat-value.red { color: var(--wcl-red); }
+
+/* 9. KEY NUMBERS */
+
+.key-number { font-weight: 700; color: var(--wcl-burgundy); }
+
+/* 10. CALLOUT */
+
+.callout {
+  background: var(--wcl-gold-light);
+  border: 1px solid var(--wcl-gold);
+  border-left: 4px solid var(--wcl-gold);
+  border-radius: 0.375rem;
+  padding: 0.75rem 1.25rem;
+  font-family: 'Libre Baskerville', 'Georgia', 'Times New Roman', serif;
+  font-style: italic;
+  text-align: center;
+  margin: 1rem 0;
+  color: var(--wcl-gold-dark);
+}
+
+/* 11. CATEGORY GRID */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.category-card {
+  background: var(--card-bg);
+  border: 1px solid var(--wcl-gray-200);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  display: block;
+}
+.category-card:hover {
+  box-shadow: 0 4px 12px var(--card-shadow);
+  border-color: var(--wcl-burgundy);
+}
+.category-card h3 {
+  margin-top: 0.5rem;
+  color: var(--wcl-burgundy-dark);
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+}
+
+/* 12. CLUSTER BADGES */
+
+.cluster-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cluster-badge.cluster-statute { background: var(--wcl-burgundy-light); color: var(--wcl-burgundy-dark); }
+.cluster-badge.cluster-hist { background: var(--wcl-gold-light); color: var(--wcl-gold-dark); }
+.cluster-badge.cluster-spc { background: #E1F5E4; color: var(--wcl-green); }
+.cluster-badge.cluster-gov { background: var(--wcl-slate-light); color: var(--wcl-slate-dark); }
+.cluster-badge.cluster-compliance { background: #FFF3E0; color: #A06500; }
+.cluster-badge.cluster-rosetta { background: #FCE4EC; color: var(--wcl-red); }
+.cluster-badge.cluster-edu { background: #E8F5E9; color: var(--wcl-green); }
+.cluster-badge.cluster-transactions { background: #EDE7F6; color: var(--wcl-burgundy-mid); }
+
+/* 13. CROSS-LINKS */
+
+.cross-links {
+  background: var(--wcl-gray-100);
+  border: 1px solid var(--wcl-gray-200);
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin-top: 2rem;
+}
+.cross-links h4 {
+  margin-top: 0;
+  color: var(--wcl-gray-700);
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+}
+.cross-links ul { columns: 2; column-gap: 2rem; }
+
+/* 14. STATUTE LADDER (analog of maturity-ladder) */
+
+.maturity-ladder {
+  background: linear-gradient(180deg, var(--wcl-parchment), var(--wcl-burgundy-light));
+  border: 2px solid var(--wcl-burgundy);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.maturity-ladder ol { counter-reset: step; list-style: none; padding-left: 0; }
+.maturity-ladder li {
+  counter-increment: step;
+  padding: 0.5rem 0 0.5rem 2.5rem;
+  position: relative;
+  border-left: 2px solid var(--wcl-gold);
+  margin-left: 1rem;
+}
+.maturity-ladder li::before {
+  content: counter(step);
+  position: absolute;
+  left: -1rem;
+  background: var(--wcl-burgundy);
+  color: var(--wcl-parchment);
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 1.75rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border: 2px solid var(--wcl-gold);
+}
+.maturity-ladder li:last-child { border-left-color: transparent; }
+
+/* 15. STATUTE CITATION */
+
+.rcw {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.9em;
+  color: var(--wcl-burgundy-dark);
+  background: var(--wcl-burgundy-light);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+}
+
+/* 16. DISCLAIMER BANNER */
+
+.disclaimer {
+  background: var(--wcl-gray-100);
+  border: 1px solid var(--wcl-gray-300);
+  border-left: 4px solid var(--wcl-gold);
+  border-radius: 0.375rem;
+  padding: 0.75rem 1.25rem;
+  margin: 1rem 0 2rem;
+  font-size: 0.85rem;
+  color: var(--wcl-gray-700);
+  font-style: italic;
+}
+
+.disclaimer strong { color: var(--wcl-burgundy-dark); font-style: normal; }
+
+/* 17. FOOTER */
+
+footer {
+  border-top: 3px solid var(--wcl-gold);
+  background: var(--wcl-burgundy-dark);
+  color: var(--wcl-parchment) !important;
+}
+footer a { color: var(--wcl-gold-light) !important; }

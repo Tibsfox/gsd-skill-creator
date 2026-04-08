@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Observability &amp;
+Troubleshooting — SNE Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2236;
+            --accent: #00BFA5;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #40C4FF;
+            --border: #2a3a4a;
+            --primary: #0D47A1;
+            --net: #80DEEA;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(64,196,255,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNE — Systems Network Engineering<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNE Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="network-observability-troubleshooting">Network Observability
+    &amp; Troubleshooting</h1>
+    <blockquote>
+    <p><strong>Domain:</strong> Network Monitoring, Telemetry, Flow
+    Analysis, and Diagnostic Methodology <strong>Module:</strong> 7 –
+    SNMP, Streaming Telemetry, Flow Analysis, Packet Capture,
+    Performance Monitoring, Physical Layer, Systematic Troubleshooting
+    <strong>Through-line:</strong> <em>A network that cannot be observed
+    cannot be understood. A network that cannot be understood cannot be
+    fixed. Observability is not a feature you bolt on after deployment –
+    it is the foundation upon which every operational decision rests.
+    The difference between “the network is slow” and “there is 2.3%
+    packet loss at hop 7 due to a CRC error storm on port Gi0/1” is the
+    difference between guessing and engineering. SNMP gave us counters.
+    Streaming telemetry gave us resolution. Flow analysis gave us
+    context. Packet capture gave us truth. Together they form a layered
+    observability architecture where each tool answers questions the
+    others cannot.</em></p>
+    </blockquote>
+    <hr />
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ol type="1">
+    <li><a href="#1-snmp-the-foundation-of-network-monitoring">SNMP: The
+    Foundation of Network Monitoring</a></li>
+    <li><a href="#2-streaming-telemetry-the-next-generation">Streaming
+    Telemetry: The Next Generation</a></li>
+    <li><a href="#3-flow-analysis-who-is-talking-to-whom">Flow Analysis:
+    Who is Talking to Whom</a></li>
+    <li><a href="#4-packet-capture-methodology">Packet Capture
+    Methodology</a></li>
+    <li><a href="#5-network-performance-monitoring">Network Performance
+    Monitoring</a></li>
+    <li><a href="#6-physical-layer-troubleshooting">Physical Layer
+    Troubleshooting</a></li>
+    <li><a href="#7-systematic-troubleshooting-methodology">Systematic
+    Troubleshooting Methodology</a></li>
+    <li><a href="#8-mtr-and-traceroute-interpretation">MTR and
+    Traceroute Interpretation</a></li>
+    <li><a href="#9-dns-troubleshooting">DNS Troubleshooting</a></li>
+    <li><a href="#10-tool-comparison-tables">Tool Comparison
+    Tables</a></li>
+    <li><a href="#11-troubleshooting-flowcharts">Troubleshooting
+    Flowcharts</a></li>
+    <li><a href="#12-cross-references">Cross-References</a></li>
+    <li><a href="#13-sources">Sources</a></li>
+    </ol>
+    <hr />
+    <h2 id="snmp-the-foundation-of-network-monitoring">1. SNMP: The
+    Foundation of Network Monitoring</h2>
+    <p>Simple Network Management Protocol remains the most widely
+    deployed network monitoring protocol on Earth. Virtually every
+    managed network device – switch, router, firewall, UPS, printer,
+    wireless controller – supports SNMP. Three decades after its
+    introduction, SNMP is not dying. It is being supplemented by
+    streaming telemetry in high-performance environments, but for the
+    vast majority of infrastructure, SNMP is the monitoring protocol
+    [1].</p>
+    <h3 id="snmp-architecture">SNMP Architecture</h3>
+    <pre><code>SNMP MONITORING ARCHITECTURE
+================================================================
+
+  NMS (Network Management Station)              SNMP Agent
+  +-------------------------+                   +------------------+
+  | Polling engine          |  GET / GETNEXT    | MIB data store   |
+  |  - scheduled polls      |------------------&gt;| OID tree         |
+  |  - trap receiver        |  RESPONSE         | Counter values   |
+  |  - MIB browser          |&lt;------------------|                  |
+  |  - alerting rules       |                   | Trap generator   |
+  +-------------------------+   TRAP / INFORM   |  - link up/down  |
+          ^                  &lt;---------------------|  - threshold     |
+          |                                     |  - auth failure  |
+          v                                     +------------------+
+  +-------------------------+
+  | Time-series database    |
+  | - RRDtool / InfluxDB    |
+  | - Prometheus             |
+  | - retention policies    |
+  +-------------------------+
+          |
+          v
+  +-------------------------+
+  | Visualization           |
+  | - Grafana dashboards    |
+  | - LibreNMS/Zabbix UI   |
+  | - custom alerting       |
+  +-------------------------+</code></pre>
+    <h3 id="snmpv2c-vs-snmpv3-security-model-comparison">SNMPv2c vs
+    SNMPv3: Security Model Comparison</h3>
+    <p>The choice between SNMPv2c and SNMPv3 is fundamentally a security
+    decision. SNMPv2c transmits community strings in cleartext – anyone
+    with a packet capture on the management VLAN can read the community
+    string and then read or write any OID on every device that shares
+    it. SNMPv3 introduces the User-based Security Model (USM) with
+    per-user authentication and encryption [2].</p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>SNMPv2c</th>
+    <th>SNMPv3</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Authentication</td>
+    <td>Community string (cleartext)</td>
+    <td>Username + HMAC (MD5/SHA/SHA-256)</td>
+    </tr>
+    <tr>
+    <td>Encryption</td>
+    <td>None</td>
+    <td>DES, 3DES, AES-128/192/256</td>
+    </tr>
+    <tr>
+    <td>Access control</td>
+    <td>Community-based (coarse)</td>
+    <td>View-Based Access Control Model (VACM)</td>
+    </tr>
+    <tr>
+    <td>Message integrity</td>
+    <td>None</td>
+    <td>HMAC per PDU</td>
+    </tr>
+    <tr>
+    <td>Replay protection</td>
+    <td>None</td>
+    <td>Engineered time windows</td>
+    </tr>
+    <tr>
+    <td>User granularity</td>
+    <td>All users share community</td>
+    <td>Per-user credentials and permissions</td>
+    </tr>
+    <tr>
+    <td>Performance</td>
+    <td>Lower CPU overhead</td>
+    <td>Higher CPU (encryption/decryption)</td>
+    </tr>
+    <tr>
+    <td>Configuration</td>
+    <td>Simple (one string)</td>
+    <td>Complex (users, auth, priv, contexts)</td>
+    </tr>
+    <tr>
+    <td>Adoption</td>
+    <td>Universal</td>
+    <td>Growing but not universal</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>SNMPv3 security levels:</strong></p>
+    <ul>
+    <li><strong>noAuthNoPriv</strong> – Username only, no authentication
+    hash, no encryption. Rarely useful; equivalent to v2c with a longer
+    string.</li>
+    <li><strong>authNoPriv</strong> – Username + HMAC authentication.
+    Prevents spoofing and tampering but data is visible on the
+    wire.</li>
+    <li><strong>authPriv</strong> – Username + HMAC + AES encryption.
+    The only level suitable for production security requirements.
+    Government and financial networks mandate this level.</li>
+    </ul>
+    <h3 id="mibs-the-object-identifier-tree">MIBs: The Object Identifier
+    Tree</h3>
+    <p>Management Information Bases define what can be monitored. The
+    OID tree starts at <code>.1.3.6.1</code> (iso.org.dod.internet) and
+    branches into standard MIBs (maintained by IETF) and enterprise MIBs
+    (vendor-specific) [3].</p>
+    <p><strong>Essential standard MIBs:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>MIB</th>
+    <th>OID Prefix</th>
+    <th>What It Monitors</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>IF-MIB</td>
+    <td>1.3.6.1.2.1.2</td>
+    <td>Interface counters: octets, errors, discards, speed, oper
+    status</td>
+    </tr>
+    <tr>
+    <td>IP-MIB</td>
+    <td>1.3.6.1.2.1.4</td>
+    <td>IP forwarding, addresses, routing table</td>
+    </tr>
+    <tr>
+    <td>HOST-RESOURCES-MIB</td>
+    <td>1.3.6.1.2.1.25</td>
+    <td>CPU, memory, disk, running processes</td>
+    </tr>
+    <tr>
+    <td>ENTITY-MIB</td>
+    <td>1.3.6.1.2.1.47</td>
+    <td>Physical components, serial numbers, firmware</td>
+    </tr>
+    <tr>
+    <td>BGP4-MIB</td>
+    <td>1.3.6.1.2.1.15</td>
+    <td>BGP peer state, prefix counts, timers</td>
+    </tr>
+    <tr>
+    <td>LLDP-MIB</td>
+    <td>1.0.8802.1.1.2</td>
+    <td>Link Layer Discovery Protocol neighbor data</td>
+    </tr>
+    <tr>
+    <td>BRIDGE-MIB</td>
+    <td>1.3.6.1.2.1.17</td>
+    <td>MAC address table, STP state</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Critical interface counters (IF-MIB):</strong></p>
+    <pre><code>ifHCInOctets    (.1.3.6.1.2.1.31.1.1.1.6)   -- 64-bit input bytes
+ifHCOutOctets   (.1.3.6.1.2.1.31.1.1.1.10)  -- 64-bit output bytes
+ifInErrors      (.1.3.6.1.2.1.2.2.1.14)      -- input errors (CRC, runt, giant)
+ifOutErrors     (.1.3.6.1.2.1.2.2.1.20)      -- output errors (collisions, late)
+ifInDiscards    (.1.3.6.1.2.1.2.2.1.13)      -- input queue drops
+ifOutDiscards   (.1.3.6.1.2.1.2.2.1.19)      -- output queue drops
+ifOperStatus    (.1.3.6.1.2.1.2.2.1.8)       -- 1=up, 2=down, 3=testing
+ifSpeed         (.1.3.6.1.2.1.2.2.1.5)       -- interface speed in bps</code></pre>
+    <p>Always use the 64-bit HC (High Capacity) counters for interfaces
+    above 100 Mbps. The 32-bit counters wrap in approximately 34 seconds
+    on a saturated 10 Gbps link, producing meaningless delta
+    calculations.</p>
+    <h3 id="polling-vs-traps">Polling vs Traps</h3>
+    <p><strong>Polling</strong> is the NMS-initiated pull model. The NMS
+    walks through OIDs on a schedule (typically every 5 minutes for
+    standard metrics, 60 seconds for critical interfaces). Polling is
+    deterministic – you control the resolution and the data you collect.
+    The trade-off is that events between polls are invisible.</p>
+    <p><strong>Traps</strong> are device-initiated push notifications.
+    When an interface goes down, a BGP session flaps, or a temperature
+    threshold is exceeded, the device sends a trap immediately. Traps
+    have no delivery guarantee in v2c (UDP, fire-and-forget). SNMPv3
+    INFORM messages add acknowledgment.</p>
+    <p><strong>Practical polling architecture:</strong></p>
+    <ul>
+    <li>Critical infrastructure (core switches, border routers):
+    60-second polling, trap-enabled</li>
+    <li>Distribution layer: 300-second polling, trap-enabled</li>
+    <li>Access layer: 300-second polling, traps for link state only</li>
+    <li>Server infrastructure: 300-second polling via host agent
+    (net-snmp)</li>
+    </ul>
+    <h3 id="nms-platform-comparison">NMS Platform Comparison</h3>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Platform</th>
+    <th>License</th>
+    <th>Strengths</th>
+    <th>Weaknesses</th>
+    <th>Best For</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>LibreNMS</td>
+    <td>GPL</td>
+    <td>Auto-discovery, 10,000+ device templates, clean UI, active
+    community</td>
+    <td>No streaming telemetry, limited config mgmt</td>
+    <td>Network-centric shops wanting simplicity</td>
+    </tr>
+    <tr>
+    <td>Zabbix</td>
+    <td>GPL v2</td>
+    <td>Enterprise features, extreme customization, agent-based +
+    SNMP</td>
+    <td>Steep learning curve, complex templates</td>
+    <td>Large enterprises needing unified IT monitoring</td>
+    </tr>
+    <tr>
+    <td>PRTG</td>
+    <td>Commercial</td>
+    <td>Polished UI, sensor-based model, fast deployment</td>
+    <td>Cost scales with sensors ($1,750/500 sensors), Windows-only
+    server</td>
+    <td>SMBs wanting all-in-one with minimal setup</td>
+    </tr>
+    <tr>
+    <td>Nagios/Icinga</td>
+    <td>GPL/GPL v2</td>
+    <td>Mature ecosystem, extensive plugin library</td>
+    <td>Dated UI, configuration-heavy</td>
+    <td>Shops with Nagios expertise and existing investment</td>
+    </tr>
+    <tr>
+    <td>Observium</td>
+    <td>QPL/Commercial</td>
+    <td>Strong network focus, traffic accounting</td>
+    <td>Community edition limitations, slower development</td>
+    <td>ISP/carrier environments with billing needs</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="streaming-telemetry-the-next-generation">2. Streaming
+    Telemetry: The Next Generation</h2>
+    <p>Streaming telemetry represents a fundamental architectural shift
+    from pull to push. Instead of the NMS asking devices for data on a
+    schedule, devices continuously stream structured data to collectors.
+    The resolution jumps from minutes to seconds or sub-seconds. The
+    data model shifts from flat OID trees to hierarchical YANG models.
+    The encoding shifts from BER/ASN.1 to efficient Protobuf or JSON
+    over gRPC [4].</p>
+    <h3 id="gnmi-grpc-network-management-interface">gNMI: gRPC Network
+    Management Interface</h3>
+    <p>gNMI is an OpenConfig-defined protocol that provides a unified
+    interface for configuration management and streaming telemetry. It
+    runs over gRPC (HTTP/2 + Protobuf), inheriting TLS encryption,
+    bidirectional streaming, and modern authentication [5].</p>
+    <p><strong>gNMI operations:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Operation</th>
+    <th>Purpose</th>
+    <th>SNMP Equivalent</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Get</td>
+    <td>Retrieve current state</td>
+    <td>SNMP GET</td>
+    </tr>
+    <tr>
+    <td>Set</td>
+    <td>Modify configuration (update, replace, delete)</td>
+    <td>SNMP SET</td>
+    </tr>
+    <tr>
+    <td>Subscribe</td>
+    <td>Stream data changes continuously</td>
+    <td>No direct equivalent (traps are event-only)</td>
+    </tr>
+    <tr>
+    <td>Capabilities</td>
+    <td>Discover supported models and encodings</td>
+    <td>sysDescr / sysObjectID</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Subscribe modes – the core innovation:</strong></p>
+    <pre><code>gNMI SUBSCRIPTION MODES
+================================================================
+
+  STREAM (continuous telemetry)
+  +--------+                    +----------+
+  | Device | --- push every N ---&gt; | Collector |
+  +--------+    seconds            +----------+
+  
+  - sample: push at fixed interval (e.g., every 10 seconds)
+  - on_change: push only when value changes (ideal for state)
+  
+  ONCE (snapshot)
+  +--------+                    +----------+
+  | Device | --- single dump ----&gt; | Collector |
+  +--------+                    +----------+
+  
+  POLL (collector-initiated, like SNMP but over gRPC)
+  +--------+                    +----------+
+  | Device | &lt;-- request --------- | Collector |
+  +--------+ --- response -------&gt; +----------+</code></pre>
+    <h3 id="dial-in-vs-dial-out">Dial-In vs Dial-Out</h3>
+    <p><strong>Dial-in</strong> – the collector initiates the gRPC
+    connection to the device. The collector acts as the gRPC client.
+    This is the gNMI standard model. Advantages: collector controls what
+    data it receives, subscription management is centralized.
+    Disadvantage: requires the collector to reach every device (firewall
+    rules, NAT traversal).</p>
+    <p><strong>Dial-out</strong> – the device initiates the gRPC
+    connection to the collector. The device acts as the gRPC client.
+    This is a vendor extension (Cisco MDT, Juniper uses both).
+    Advantages: devices behind NAT can push data outward, simpler
+    firewall rules. Disadvantage: subscription configuration lives on
+    each device, harder to manage at scale.</p>
+    <h3 id="the-tig-stack-for-network-telemetry">The TIG Stack for
+    Network Telemetry</h3>
+    <p>The Telegraf-InfluxDB-Grafana (TIG) stack has emerged as the
+    standard open-source pipeline for consuming streaming telemetry
+    [6]:</p>
+    <pre><code>NETWORK TELEMETRY PIPELINE (TIG STACK)
+================================================================
+
+  Network Devices                Telegraf               InfluxDB            Grafana
+  +------------+                +----------+           +----------+       +----------+
+  | Router     |--gNMI--------&gt;|          |           |          |       |          |
+  | Switch     |--SNMP--------&gt;| Input    |           | Time-    |       | Dash-    |
+  | Firewall   |--syslog------&gt;| plugins  |----------&gt;| series   |------&gt;| boards   |
+  | Server     |--NetFlow-----&gt;|          |           | storage  |       | Alerts   |
+  | Wireless   |--streaming---&gt;| Transform|           | Queries  |       | Panels   |
+  +------------+                +----------+           +----------+       +----------+
+                                  300+ input              Retention         100+
+                                  plugins                 policies          data sources</code></pre>
+    <p><strong>Telegraf network-relevant input plugins:</strong></p>
+    <ul>
+    <li><code>inputs.snmp</code> – SNMP polling with MIB
+    translation</li>
+    <li><code>inputs.gnmi</code> – gNMI streaming telemetry
+    subscriber</li>
+    <li><code>inputs.cisco_telemetry_mdt</code> – Cisco Model-Driven
+    Telemetry</li>
+    <li><code>inputs.sflow</code> – sFlow packet sampling</li>
+    <li><code>inputs.netflow</code> – NetFlow/IPFIX flow collection</li>
+    <li><code>inputs.syslog</code> – Syslog message ingestion</li>
+    <li><code>inputs.ping</code> – ICMP probes for reachability</li>
+    <li><code>inputs.net_response</code> – TCP/UDP port checks</li>
+    </ul>
+    <h3 id="snmp-vs-streaming-telemetry-when-to-use-each">SNMP vs
+    Streaming Telemetry: When to Use Each</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Dimension</th>
+    <th>SNMP</th>
+    <th>Streaming Telemetry</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Data resolution</td>
+    <td>Minutes (typical 5-min polls)</td>
+    <td>Seconds to sub-seconds</td>
+    </tr>
+    <tr>
+    <td>Data model</td>
+    <td>OID tree (flat, vendor-specific MIBs)</td>
+    <td>YANG models (hierarchical, structured)</td>
+    </tr>
+    <tr>
+    <td>Transport</td>
+    <td>UDP (unreliable)</td>
+    <td>gRPC/HTTP2 (TLS, reliable)</td>
+    </tr>
+    <tr>
+    <td>Direction</td>
+    <td>Pull (NMS-initiated)</td>
+    <td>Push (device-initiated)</td>
+    </tr>
+    <tr>
+    <td>Encoding</td>
+    <td>BER/ASN.1</td>
+    <td>Protobuf, JSON, CBOR</td>
+    </tr>
+    <tr>
+    <td>CPU impact on device</td>
+    <td>Per-poll processing</td>
+    <td>Continuous but predictable</td>
+    </tr>
+    <tr>
+    <td>Device support</td>
+    <td>Universal</td>
+    <td>Growing (Cisco IOS-XR/XE, Junos, Arista EOS, Nokia SR OS)</td>
+    </tr>
+    <tr>
+    <td>Ecosystem maturity</td>
+    <td>30+ years</td>
+    <td>~8 years</td>
+    </tr>
+    <tr>
+    <td>Monitoring platforms</td>
+    <td>All NMS platforms</td>
+    <td>TIG stack, Prometheus, Kafka pipelines</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Practical recommendation:</strong> Run both. SNMP
+    provides the baseline monitoring that covers every device. Streaming
+    telemetry provides high-resolution data for critical infrastructure
+    where 5-minute polls miss transient events – spine switches, border
+    routers, WAN links, and anything where a 30-second microburst
+    matters.</p>
+    <hr />
+    <h2 id="flow-analysis-who-is-talking-to-whom">3. Flow Analysis: Who
+    is Talking to Whom</h2>
+    <p>SNMP and telemetry tell you how much traffic crosses an
+    interface. Flow analysis tells you who generated that traffic, where
+    it went, what protocol it used, and how long the conversation
+    lasted. Flow data is the bridge between interface counters (“port is
+    at 80% utilization”) and actionable intelligence (“a single host is
+    running a 7 Gbps backup across the WAN link during business hours”)
+    [7].</p>
+    <h3 id="protocol-comparison">Protocol Comparison</h3>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>NetFlow v5</th>
+    <th>NetFlow v9</th>
+    <th>IPFIX</th>
+    <th>sFlow</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Standard</td>
+    <td>Cisco proprietary</td>
+    <td>Cisco (basis for IPFIX)</td>
+    <td>IETF RFC 7011</td>
+    <td>RFC 3176</td>
+    </tr>
+    <tr>
+    <td>Architecture</td>
+    <td>Fixed format</td>
+    <td>Template-based</td>
+    <td>Template-based</td>
+    <td>Packet sampling</td>
+    </tr>
+    <tr>
+    <td>Fields</td>
+    <td>Fixed 7-tuple</td>
+    <td>Configurable templates</td>
+    <td>Configurable + enterprise IEs</td>
+    <td>Full packet header sample</td>
+    </tr>
+    <tr>
+    <td>IPv6</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td>MPLS labels</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes (in sample)</td>
+    </tr>
+    <tr>
+    <td>VLAN tags</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes (in sample)</td>
+    </tr>
+    <tr>
+    <td>Sampling</td>
+    <td>Router-dependent</td>
+    <td>Configurable</td>
+    <td>Configurable</td>
+    <td>Always sampled</td>
+    </tr>
+    <tr>
+    <td>Bidirectional</td>
+    <td>No</td>
+    <td>Optional</td>
+    <td>Yes (biflow)</td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>Transport</td>
+    <td>UDP</td>
+    <td>UDP</td>
+    <td>UDP or SCTP</td>
+    <td>UDP</td>
+    </tr>
+    <tr>
+    <td>State tracking</td>
+    <td>Stateful (flow cache)</td>
+    <td>Stateful</td>
+    <td>Stateful</td>
+    <td>Stateless</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="netflow-stateful-flow-tracking">NetFlow: Stateful Flow
+    Tracking</h3>
+    <p>NetFlow maintains a flow cache on the network device. A flow is
+    defined by a tuple of fields (source IP, destination IP, source
+    port, destination port, protocol, ToS, input interface). The device
+    tracks every active flow, accumulating byte and packet counts. When
+    a flow expires (idle timeout, active timeout, or cache full), the
+    device exports a flow record to the collector [7].</p>
+    <p><strong>NetFlow v5</strong> uses a fixed record format: 48 bytes
+    per flow, limited to IPv4, no MPLS, no VLAN. It remains widely
+    deployed because of its simplicity and universal hardware
+    support.</p>
+    <p><strong>NetFlow v9</strong> introduced template-based records.
+    The exporter first sends a template that defines the record format,
+    then sends data records that reference the template. This allows
+    arbitrary field combinations and future extensibility without
+    protocol changes.</p>
+    <p><strong>IPFIX</strong> (IP Flow Information Export) is the IETF
+    standardization of NetFlow v9. It adds variable-length fields,
+    enterprise-defined Information Elements (allowing vendor-specific
+    extensions), SCTP transport for reliable delivery, and bidirectional
+    flow support. IPFIX is the recommended standard for new
+    deployments.</p>
+    <h3 id="sflow-stateless-packet-sampling">sFlow: Stateless Packet
+    Sampling</h3>
+    <p>sFlow takes a fundamentally different approach. Instead of
+    tracking stateful flow records on the device, sFlow randomly samples
+    one packet out of every N packets (the sampling rate), copies the
+    packet header (up to 128 bytes by default), and exports the sample
+    immediately. The collector reconstructs traffic patterns from the
+    statistical sample [8].</p>
+    <p><strong>Sampling rate guidance:</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Link Speed</th>
+    <th>Recommended Rate</th>
+    <th>Rationale</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>100 Mbps</td>
+    <td>1:200</td>
+    <td>Low volume, higher accuracy needed</td>
+    </tr>
+    <tr>
+    <td>1 Gbps</td>
+    <td>1:1000</td>
+    <td>Standard enterprise</td>
+    </tr>
+    <tr>
+    <td>10 Gbps</td>
+    <td>1:2000-1:4000</td>
+    <td>Balance accuracy with export volume</td>
+    </tr>
+    <tr>
+    <td>40 Gbps</td>
+    <td>1:4000-1:8000</td>
+    <td>Reduce collector load</td>
+    </tr>
+    <tr>
+    <td>100 Gbps</td>
+    <td>1:8000-1:16000</td>
+    <td>High volume environments</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>sFlow advantages:</strong> Zero CPU impact on the data
+    plane (sampling happens in hardware ASIC), stateless operation (no
+    flow cache to overflow), immediate export (no timeout delays), full
+    packet header capture (not just the 7-tuple).</p>
+    <p><strong>sFlow limitations:</strong> Accuracy depends on sampling
+    rate (low-volume flows may be missed entirely), not suitable for
+    per-flow accounting or billing, statistical estimation introduces
+    variance for small traffic volumes.</p>
+    <h3 id="flow-collector-platforms">Flow Collector Platforms</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Collector</th>
+    <th>Architecture</th>
+    <th>Strengths</th>
+    <th>Best For</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Kentik</td>
+    <td>Cloud SaaS</td>
+    <td>Massive scale, ML-powered anomaly detection, BGP
+    correlation</td>
+    <td>Large enterprises, ISPs, multi-cloud</td>
+    </tr>
+    <tr>
+    <td>ElastiFlow</td>
+    <td>Elasticsearch-based</td>
+    <td>Integrates with existing ELK stack, flexible queries</td>
+    <td>Shops with Elasticsearch investment</td>
+    </tr>
+    <tr>
+    <td>ntopng</td>
+    <td>Standalone + ClickHouse</td>
+    <td>Open-source, DPI, packet + flow in one tool, max 64
+    exporters</td>
+    <td>Small-to-medium deployments</td>
+    </tr>
+    <tr>
+    <td>PRTG Flow</td>
+    <td>Integrated with PRTG</td>
+    <td>Unified with device monitoring</td>
+    <td>PRTG shops wanting flow data</td>
+    </tr>
+    <tr>
+    <td>Scrutinizer (Plixer)</td>
+    <td>Appliance/VM</td>
+    <td>Forensic flow analysis, compliance reporting</td>
+    <td>Regulated environments</td>
+    </tr>
+    <tr>
+    <td>nfdump/nfsen</td>
+    <td>File-based</td>
+    <td>Lightweight, scriptable, NFDUMP format</td>
+    <td>Research, historical archives</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="packet-capture-methodology">4. Packet Capture
+    Methodology</h2>
+    <p>Flow data tells you who talked to whom. Packet capture shows you
+    exactly what was said. When SNMP counters show errors and flow data
+    shows the affected traffic, packet capture provides the definitive
+    evidence – the actual bytes on the wire. Packet capture is the court
+    of last resort in network troubleshooting [9].</p>
+    <h3 id="tcpdump-the-command-line-standard">tcpdump: The Command-Line
+    Standard</h3>
+    <p>tcpdump uses Berkeley Packet Filter (BPF) syntax to express
+    capture filters. BPF filters are compiled into kernel bytecode,
+    meaning traffic that does not match the filter is never copied to
+    userspace – this is critical for performance on high-speed
+    links.</p>
+    <p><strong>Essential tcpdump filters:</strong></p>
+    <div class="sourceCode" id="cb5"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture all traffic to/from a specific host</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 host 10.1.1.100</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture only TCP SYN packets (connection initiation)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 <span class="st">&#39;tcp[tcpflags] &amp; (tcp-syn) != 0&#39;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture DNS queries (UDP port 53)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 <span class="at">-n</span> udp port 53</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture HTTP traffic (port 80 or 443)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 <span class="at">-n</span> <span class="st">&#39;port 80 or port 443&#39;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture ICMP (ping, unreachable, TTL exceeded)</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 icmp</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture packets with TCP RST flag (connection resets)</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 <span class="st">&#39;tcp[tcpflags] &amp; (tcp-rst) != 0&#39;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture traffic on a specific VLAN</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 vlan 100</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture only packets larger than 1400 bytes (MTU issues)</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 <span class="st">&#39;greater 1400&#39;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Capture BGP traffic (TCP port 179)</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 <span class="at">-n</span> tcp port 179</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Write to file for later analysis in Wireshark</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 <span class="at">-w</span> /tmp/capture.pcap <span class="at">-c</span> 10000 host 10.1.1.100</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate capture files (100MB each, keep 10)</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> eth0 <span class="at">-w</span> /tmp/capture.pcap <span class="at">-C</span> 100 <span class="at">-W</span> 10</span></code></pre></div>
+    <p><strong>Critical tcpdump flags:</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Flag</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>-i &lt;interface&gt;</code></td>
+    <td>Capture interface (use <code>any</code> for all)</td>
+    </tr>
+    <tr>
+    <td><code>-n</code></td>
+    <td>No DNS resolution (prevents capture delays)</td>
+    </tr>
+    <tr>
+    <td><code>-nn</code></td>
+    <td>No DNS or port name resolution</td>
+    </tr>
+    <tr>
+    <td><code>-w &lt;file&gt;</code></td>
+    <td>Write raw packets to pcap file</td>
+    </tr>
+    <tr>
+    <td><code>-r &lt;file&gt;</code></td>
+    <td>Read from pcap file</td>
+    </tr>
+    <tr>
+    <td><code>-c &lt;count&gt;</code></td>
+    <td>Stop after N packets</td>
+    </tr>
+    <tr>
+    <td><code>-s &lt;snaplen&gt;</code></td>
+    <td>Capture N bytes per packet (0 = full packet)</td>
+    </tr>
+    <tr>
+    <td><code>-v / -vv / -vvv</code></td>
+    <td>Increasing verbosity</td>
+    </tr>
+    <tr>
+    <td><code>-e</code></td>
+    <td>Show link-layer headers (MAC addresses, VLAN tags)</td>
+    </tr>
+    <tr>
+    <td><code>-X</code></td>
+    <td>Show packet contents in hex and ASCII</td>
+    </tr>
+    <tr>
+    <td><code>-A</code></td>
+    <td>Show packet contents in ASCII only</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="wireshark-display-filters">Wireshark Display Filters</h3>
+    <p>Wireshark display filters use a different syntax from tcpdump BPF
+    filters. Display filters operate on decoded protocol fields and
+    support comparison operators, logical operators, and
+    protocol-specific field names.</p>
+    <p><strong>Essential Wireshark display filters:</strong></p>
+    <pre><code># TCP retransmissions (the first sign of trouble)
+tcp.analysis.retransmission
+
+# TCP zero window (receiver buffer full)
+tcp.analysis.zero_window
+
+# TCP RST (connection reset)
+tcp.flags.reset == 1
+
+# DNS queries only
+dns.flags.response == 0
+
+# HTTP response codes &gt;= 400
+http.response.code &gt;= 400
+
+# TLS handshake failures
+tls.alert_message
+
+# Slow TCP handshakes (SYN to SYN-ACK &gt; 100ms)
+tcp.analysis.initial_rtt &gt; 0.1
+
+# Packets with IP fragmentation
+ip.flags.mf == 1 or ip.frag_offset &gt; 0
+
+# ICMP destination unreachable
+icmp.type == 3
+
+# Traffic from a specific subnet
+ip.src == 10.1.0.0/16
+
+# Exclude specific traffic (show everything except SSH)
+not tcp.port == 22
+
+# Combine filters
+http.request.method == &quot;POST&quot; and ip.dst == 10.1.1.50</code></pre>
+    <h3 id="traffic-access-span-ports-taps-and-packet-brokers">Traffic
+    Access: SPAN Ports, TAPs, and Packet Brokers</h3>
+    <p>Before you can capture packets, you need access to the traffic.
+    Three mechanisms exist, each with distinct characteristics [10]:</p>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Method</th>
+    <th>Mechanism</th>
+    <th>Fidelity</th>
+    <th>Performance Impact</th>
+    <th>Cost</th>
+    <th>Best For</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>SPAN port</td>
+    <td>Switch copies selected traffic to a designated port</td>
+    <td>Lossy under load (lowest forwarding priority)</td>
+    <td>Switch CPU overhead</td>
+    <td>Free (built into switch)</td>
+    <td>Ad hoc troubleshooting, low-volume monitoring</td>
+    </tr>
+    <tr>
+    <td>Network TAP</td>
+    <td>Passive hardware device inline on the cable</td>
+    <td>Full line rate, zero packet loss, exact copy</td>
+    <td>Zero (passive, no electronics in data path for passive
+    TAPs)</td>
+    <td>$200-$2,000+ per link</td>
+    <td>Production monitoring, security, compliance</td>
+    </tr>
+    <tr>
+    <td>Packet broker</td>
+    <td>Aggregation device between TAPs/SPANs and tools</td>
+    <td>Full fidelity + filtering, deduplication, load balancing</td>
+    <td>None on production network</td>
+    <td>$10,000-$100,000+</td>
+    <td>Large-scale monitoring architectures</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>SPAN port limitations that matter:</strong></p>
+    <ul>
+    <li>Oversubscription: a SPAN port mirroring a full-duplex 10G link
+    needs 20 Gbps of capacity on a single port – impossible. Packets get
+    dropped silently.</li>
+    <li>Priority: SPAN traffic has the lowest forwarding priority on the
+    switch ASIC. Under congestion, mirrored packets are the first to be
+    discarded.</li>
+    <li>Timing: SPAN ports can alter inter-packet timing, making jitter
+    and latency analysis unreliable.</li>
+    <li>Resource consumption: SPAN sessions consume TCAM entries and
+    switch CPU cycles.</li>
+    </ul>
+    <p><strong>When to use TAPs:</strong> Any link where packet loss in
+    the capture is unacceptable – security monitoring (IDS/IPS feed),
+    compliance recording, production troubleshooting of intermittent
+    issues, and any capture that will be used as evidence.</p>
+    <h3 id="remote-packet-capture">Remote Packet Capture</h3>
+    <p>When the problem device is in a remote data center, several
+    options exist:</p>
+    <ul>
+    <li><strong>tcpdump over SSH:</strong>
+    <code>ssh user@remote "tcpdump -i eth0 -w - host 10.1.1.100" | wireshark -k -i -</code>
+    – streams remote capture directly into local Wireshark.</li>
+    <li><strong>RSPAN/ERSPAN:</strong> Remote SPAN extends mirrored
+    traffic across VLANs (RSPAN) or GRE tunnels (ERSPAN) to a remote
+    collector. ERSPAN encapsulates in GRE, allowing capture across L3
+    boundaries.</li>
+    <li><strong>Packet broker remote tap:</strong> Enterprise packet
+    brokers (Gigamon, Keysight) support remote tap modules that tunnel
+    captured traffic back to a central analysis cluster.</li>
+    </ul>
+    <hr />
+    <h2 id="network-performance-monitoring">5. Network Performance
+    Monitoring</h2>
+    <p>Interface counters tell you utilization. Flow data tells you
+    traffic composition. Performance monitoring tells you user
+    experience. The three metrics that define network performance from
+    the user’s perspective are latency, jitter, and packet loss
+    [11].</p>
+    <h3 id="the-three-pillars-of-network-performance">The Three Pillars
+    of Network Performance</h3>
+    <p><strong>Latency</strong> – the time for a packet to travel from
+    source to destination and back (RTT). Measured in milliseconds. For
+    interactive applications (voice, video, trading), every millisecond
+    matters. For voice calls, ITU G.114 recommends one-way latency below
+    150ms.</p>
+    <p><strong>Jitter</strong> – the variation in latency between
+    consecutive packets. Measured as the standard deviation or
+    interquartile range of delay. Jitter kills real-time applications
+    because it causes buffer underruns (audio gaps, video freezes). VoIP
+    systems typically tolerate up to 30ms of jitter before quality
+    degrades.</p>
+    <p><strong>Packet loss</strong> – the percentage of packets that
+    never arrive. Even 0.1% packet loss causes visible degradation in
+    TCP throughput (every lost packet triggers retransmission and window
+    reduction). For UDP applications (voice, video), lost packets mean
+    lost data – there is no retransmission.</p>
+    <h3 id="synthetic-monitoring-platforms">Synthetic Monitoring
+    Platforms</h3>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Platform</th>
+    <th>Type</th>
+    <th>Agents</th>
+    <th>Strength</th>
+    <th>Use Case</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>ThousandEyes (Cisco)</td>
+    <td>Cloud + on-prem agents</td>
+    <td>Cloud + enterprise</td>
+    <td>Deep path visualization, Internet outage detection, BGP route
+    analysis</td>
+    <td>Multi-cloud, SaaS dependency monitoring</td>
+    </tr>
+    <tr>
+    <td>Catchpoint</td>
+    <td>Cloud + on-prem agents</td>
+    <td>3,000+ global nodes</td>
+    <td>End-user experience, real-time BGP monitoring, remediation
+    scoring</td>
+    <td>CDN/web performance, user-centric monitoring</td>
+    </tr>
+    <tr>
+    <td>Obkio</td>
+    <td>SaaS</td>
+    <td>Software agents</td>
+    <td>Network performance between sites, simple deployment</td>
+    <td>WAN/SD-WAN monitoring, site-to-site performance</td>
+    </tr>
+    <tr>
+    <td>Smokeping</td>
+    <td>Open-source</td>
+    <td>Self-hosted</td>
+    <td>Latency visualization over time, beautiful graphs, free</td>
+    <td>Budget-conscious shops, historical latency tracking</td>
+    </tr>
+    <tr>
+    <td>Perfsonar</td>
+    <td>Open-source</td>
+    <td>Federated mesh</td>
+    <td>Research/education networks, standardized testing</td>
+    <td>ISP peering, R&amp;E networks, capacity testing</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Synthetic monitoring architecture:</strong></p>
+    <pre><code>SYNTHETIC MONITORING -- TEST TYPES
+================================================================
+
+  HTTP Transaction Test
+  Agent --&gt; DNS lookup --&gt; TCP connect --&gt; TLS handshake --&gt; HTTP GET --&gt; Response
+  [measures each phase independently: DNS time, connect time, TLS time, TTFB, total]
+
+  Network Path Trace
+  Agent --&gt; hop 1 --&gt; hop 2 --&gt; ... --&gt; hop N --&gt; destination
+  [maps every router hop, measures per-hop latency, detects path changes]
+
+  BGP Route Monitor
+  Agent &lt;-- BGP feed from route collectors
+  [detects prefix hijacks, route leaks, AS path changes, origin flaps]
+
+  VoIP/RTP Test
+  Agent A &lt;========&gt; Agent B  (bidirectional UDP stream)
+  [measures MOS score, latency, jitter, packet loss in both directions]
+
+  DNS Test
+  Agent --&gt; recursive resolver --&gt; authoritative chain --&gt; response
+  [measures resolution time, validates DNSSEC, detects delegation issues]</code></pre>
+    <hr />
+    <h2 id="physical-layer-troubleshooting">6. Physical Layer
+    Troubleshooting</h2>
+    <p>When the application team says “the network is slow” and every
+    counter, flow record, and packet capture looks clean, the problem is
+    often below Layer 3. Physical layer issues produce symptoms that
+    masquerade as higher-layer problems – intermittent connectivity that
+    looks like routing flaps, packet loss that looks like congestion,
+    and errors that appear randomly across multiple protocols [12].</p>
+    <h3 id="cable-testing">Cable Testing</h3>
+    <p><strong>Copper (Cat5e/6/6a):</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Test</th>
+    <th>What It Detects</th>
+    <th>Tool</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Wire map</td>
+    <td>Miswires, opens, shorts, crossed pairs</td>
+    <td>Basic cable tester</td>
+    </tr>
+    <tr>
+    <td>Length</td>
+    <td>Cable too long (100m max for Cat6)</td>
+    <td>Time-Domain Reflectometer (TDR)</td>
+    </tr>
+    <tr>
+    <td>NEXT (Near-End Crosstalk)</td>
+    <td>Electromagnetic interference between pairs</td>
+    <td>Cable certifier (Fluke DSX)</td>
+    </tr>
+    <tr>
+    <td>Return loss</td>
+    <td>Signal reflection from impedance mismatches</td>
+    <td>Cable certifier</td>
+    </tr>
+    <tr>
+    <td>Alien crosstalk</td>
+    <td>Interference from adjacent cables in bundle</td>
+    <td>Cable certifier (Level V/VI)</td>
+    </tr>
+    <tr>
+    <td>PoE load test</td>
+    <td>Power delivery under load</td>
+    <td>PoE tester</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Fiber optic:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Test</th>
+    <th>What It Detects</th>
+    <th>Tool</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Optical power</td>
+    <td>Transmit/receive power in dBm</td>
+    <td>Optical power meter</td>
+    </tr>
+    <tr>
+    <td>Insertion loss</td>
+    <td>Total loss end-to-end</td>
+    <td>Light source + power meter (OLTS)</td>
+    </tr>
+    <tr>
+    <td>OTDR trace</td>
+    <td>Location and type of every event (splice, connector, break,
+    bend)</td>
+    <td>OTDR</td>
+    </tr>
+    <tr>
+    <td>Visual fault</td>
+    <td>Breaks, macrobends, bad connectors</td>
+    <td>Visual fault locator (VFL, red laser)</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="sfp-diagnostics-and-digital-optical-monitoring-dom">SFP
+    Diagnostics and Digital Optical Monitoring (DOM)</h3>
+    <p>Modern SFP/SFP+/QSFP transceivers include Digital Optical
+    Monitoring (DOM), also called Digital Diagnostic Monitoring (DDM).
+    DOM provides real-time telemetry from the transceiver itself – no
+    external test equipment needed [12].</p>
+    <p><strong>DOM parameters:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Parameter</th>
+    <th>Normal Range (typical 10G-LR)</th>
+    <th>Warning Threshold</th>
+    <th>Alarm Condition</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>TX Power</td>
+    <td>-1 to -8 dBm</td>
+    <td>Below -8.2 dBm</td>
+    <td>Below -11.3 dBm (link budget exceeded)</td>
+    </tr>
+    <tr>
+    <td>RX Power</td>
+    <td>-1 to -14.4 dBm</td>
+    <td>Below -14.4 dBm</td>
+    <td>Below -15.4 dBm (receiver sensitivity limit)</td>
+    </tr>
+    <tr>
+    <td>Temperature</td>
+    <td>0 to 70 C</td>
+    <td>Above 70 C</td>
+    <td>Above 75 C (thermal shutdown imminent)</td>
+    </tr>
+    <tr>
+    <td>Voltage</td>
+    <td>3.13 to 3.47 V</td>
+    <td>Outside +/- 5%</td>
+    <td>Outside +/- 10% (power supply issue)</td>
+    </tr>
+    <tr>
+    <td>Bias current</td>
+    <td>5 to 70 mA</td>
+    <td>Above 70 mA</td>
+    <td>Above 80 mA (laser degradation)</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Reading DOM on network devices:</strong></p>
+    <pre><code>! Cisco IOS/IOS-XE
+show interfaces transceiver detail
+
+! Arista EOS
+show interfaces transceiver
+
+! Junos
+show interfaces diagnostics optics ge-0/0/0
+
+! Linux (ethtool)
+ethtool -m eth0</code></pre>
+    <p><strong>DOM troubleshooting logic:</strong> If TX power is normal
+    but RX power is low, the problem is in the fiber path (dirty
+    connector, bad splice, excessive bend, fiber break). If TX power is
+    low, the SFP itself is failing (laser degradation). If both are
+    normal but errors persist, check for wavelength mismatch
+    (single-mode SFP in multi-mode fiber or vice versa) or distance
+    exceed (signal attenuation beyond receiver sensitivity).</p>
+    <h3 id="otdr-interpretation">OTDR Interpretation</h3>
+    <p>An Optical Time-Domain Reflectometer sends light pulses into the
+    fiber and measures backscattered reflections. The resulting trace
+    shows distance on the X axis and signal level on the Y axis. Every
+    event on the fiber appears as a feature on the trace [12]:</p>
+    <pre><code>OTDR TRACE -- EVENT IDENTIFICATION
+================================================================
+
+  Signal
+  Level
+  (dB)
+    |
+    |____          ___
+    |    \   /\   |   |         ___
+    |     \_/  \__|   |________|   |
+    |                              |___________
+    |                                          |
+    +-----|-----|------|------|-------|---------|---&gt; Distance
+          |     |      |      |       |         |
+       Connector  Splice  Bend   Connector   Fiber end
+       (reflection (loss   (loss   (reflection  (strong
+        + loss)    only)   only)   + loss)      reflection)
+
+  Reflective events: connectors, mechanical splices, fiber end, cracks
+  Non-reflective events: fusion splices, macrobends, stress points</code></pre>
+    <p><strong>Key OTDR specifications:</strong></p>
+    <ul>
+    <li><strong>Dynamic range:</strong> Determines maximum testable
+    fiber length (higher = longer reach)</li>
+    <li><strong>Dead zone:</strong> Minimum distance between resolvable
+    events (shorter = better for short links)</li>
+    <li><strong>Event dead zone:</strong> Typically 0.8-3m (cannot
+    resolve two connectors closer than this)</li>
+    <li><strong>Pulse width:</strong> Shorter pulses = better resolution
+    but less range. Longer pulses = more range but wider dead zones</li>
+    </ul>
+    <hr />
+    <h2 id="systematic-troubleshooting-methodology">7. Systematic
+    Troubleshooting Methodology</h2>
+    <p>Network troubleshooting is not intuition – it is methodology.
+    Experienced engineers are faster not because they guess better, but
+    because they follow systematic processes that eliminate
+    possibilities efficiently. Two dominant methodologies exist, and
+    skilled engineers use both depending on context [13].</p>
+    <h3 id="osi-layer-by-layer-bottom-up">OSI Layer-by-Layer
+    (Bottom-Up)</h3>
+    <p>Start at Layer 1, verify each layer works before moving up. This
+    is the safest methodology for unknown problems – it ensures you do
+    not waste time debugging application-layer issues when the cable is
+    unplugged.</p>
+    <pre><code>BOTTOM-UP TROUBLESHOOTING
+================================================================
+
+  Layer 1 (Physical)
+  - Link light? (up/down, speed/duplex)
+  - Cable test? (TDR/OTDR)
+  - SFP DOM? (TX/RX power within range)
+  - Interface errors? (CRC, runts, giants)
+        |
+        v (Layer 1 verified clean)
+  Layer 2 (Data Link)
+  - MAC address in CAM table?
+  - VLAN membership correct?
+  - STP state? (forwarding, not blocking/learning)
+  - ARP resolution working? (arp -a, show arp)
+  - 802.1X authenticated?
+        |
+        v (Layer 2 verified clean)
+  Layer 3 (Network)
+  - IP address/mask correct?
+  - Default gateway reachable? (ping gateway)
+  - Route to destination exists? (show ip route, ip route get)
+  - ACL/firewall permitting traffic?
+  - MTU correct? (ping with DF bit, various sizes)
+        |
+        v (Layer 3 verified clean)
+  Layer 4 (Transport)
+  - TCP handshake completing? (SYN -&gt; SYN-ACK -&gt; ACK)
+  - Port open? (telnet/nc to port)
+  - TCP window scaling working?
+  - Connection resets? (RST packets)
+        |
+        v (Layer 4 verified clean)
+  Layer 7 (Application)
+  - DNS resolving correctly? (dig/nslookup)
+  - TLS negotiating? (openssl s_client)
+  - Application-specific logs?
+  - Load balancer health checks passing?</code></pre>
+    <h3 id="divide-and-conquer-half-split">Divide-and-Conquer
+    (Half-Split)</h3>
+    <p>When the path between source and destination crosses many
+    devices, testing every hop sequentially is inefficient. The
+    half-split method tests the midpoint first, then recursively
+    narrows. With N hops, this resolves in O(log N) tests instead of
+    O(N) [13].</p>
+    <pre><code>HALF-SPLIT METHOD
+================================================================
+
+  Source ----[A]----[B]----[C]----[D]----[E]---- Destination
+                           ^
+                     Test here first
+                     
+  If midpoint (C) works:
+    Problem is between C and Destination
+    Source ----[A]----[B]----[C]----[D]----[E]---- Destination
+                                    ^
+                              Test here next
+                              
+  If midpoint (C) fails:
+    Problem is between Source and C
+    Source ----[A]----[B]----[C]----[D]----[E]---- Destination
+               ^
+         Test here next
+         
+  Continue halving until the fault point is isolated.</code></pre>
+    <h3 id="spot-the-difference-method">Spot-the-Difference Method</h3>
+    <p>When something was working and now is not, the most efficient
+    approach is to identify what changed. This is not guessing – it is a
+    systematic comparison of the working state versus the current
+    state.</p>
+    <p><strong>Diff sources:</strong> - Configuration management:
+    compare current config to last known good (RANCID, Oxidized, git) -
+    SNMP/telemetry: compare current counters to baseline (error rates,
+    utilization, BGP peer counts) - Route table: compare current routes
+    to expected (show ip route, BGP looking glass) - Syslogs: check for
+    recent events (interface flaps, BGP session changes, OSPF adjacency
+    drops) - Change management: what changes were deployed in the last
+    24 hours?</p>
+    <hr />
+    <h2 id="mtr-and-traceroute-interpretation">8. MTR and Traceroute
+    Interpretation</h2>
+    <p>MTR (My Traceroute) combines traceroute and ping into a single
+    tool that continuously probes every hop along the path, providing
+    real-time statistics on packet loss and latency at each point.
+    Interpreting MTR output correctly requires understanding its
+    subtleties – not all packet loss is real, not all latency spikes
+    indicate problems [14].</p>
+    <h3 id="reading-mtr-output">Reading MTR Output</h3>
+    <pre><code>HOST: source-server                Loss%   Snt   Last   Avg  Best  Wrst StDev
+  1.|-- gateway.local               0.0%   100    0.4   0.5   0.3   1.2   0.1
+  2.|-- isp-pe1.example.net         0.0%   100    3.2   3.1   2.8   4.5   0.3
+  3.|-- core1.isp.net              15.0%   100   12.1  11.8  10.2  45.3   5.2
+  4.|-- ix-peer.exchange.net        0.0%   100   15.3  15.1  14.8  18.2   0.5
+  5.|-- cdn-edge.target.com         0.0%   100   16.2  16.0  15.5  19.1   0.6</code></pre>
+    <p><strong>Key interpretation rules:</strong></p>
+    <ol type="1">
+    <li><p><strong>Packet loss at a single hop that does not continue
+    downstream is NOT real packet loss.</strong> In the example above,
+    hop 3 shows 15% loss, but hops 4 and 5 show 0%. This means hop 3 is
+    rate-limiting ICMP responses to MTR probes – the actual transit
+    traffic is flowing fine. ISP routers commonly deprioritize ICMP to
+    protect the control plane.</p></li>
+    <li><p><strong>Packet loss that starts at a hop and continues on ALL
+    subsequent hops IS real.</strong> If hops 3, 4, and 5 all showed 15%
+    loss, the problem is at or before hop 3.</p></li>
+    <li><p><strong>Latency increases that persist are meaningful.
+    Latency spikes at a single hop are not.</strong> If the average
+    jumps from 15ms at hop 4 to 85ms at hop 5 and stays at 85ms for all
+    remaining hops, there is congestion or distance at that link. If hop
+    3 shows 45ms but hop 4 returns to 15ms, the router at hop 3 is
+    simply slow at generating ICMP TTL exceeded messages (a CPU-bound
+    operation, not a forwarding-path issue).</p></li>
+    <li><p><strong>Always run MTR in both directions.</strong>
+    Asymmetric routing means the forward path and return path may
+    traverse different routers. Loss on the return path appears as loss
+    at the source, but the problem is actually on the reverse path. Ask
+    the remote end to run MTR back toward you.</p></li>
+    <li><p><strong>Asterisks (</strong>*) do not always mean the hop is
+    down.** Many routers are configured to not respond to ICMP at all.
+    The absence of a response from a transit hop does not indicate a
+    problem as long as subsequent hops respond normally.</p></li>
+    </ol>
+    <h3 id="traceroute-vs-mtr-vs-paris-traceroute">traceroute vs MTR vs
+    Paris traceroute</h3>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Tool</th>
+    <th>Method</th>
+    <th>Load Balancing Awareness</th>
+    <th>Statistics</th>
+    <th>Use Case</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>traceroute</td>
+    <td>Incrementing TTL, one probe set</td>
+    <td>No (may show false path changes)</td>
+    <td>Single snapshot</td>
+    <td>Quick path discovery</td>
+    </tr>
+    <tr>
+    <td>mtr</td>
+    <td>Continuous probes, real-time stats</td>
+    <td>No (same limitation)</td>
+    <td>Running average, loss%, jitter</td>
+    <td>Sustained monitoring</td>
+    </tr>
+    <tr>
+    <td>Paris traceroute</td>
+    <td>Constant flow ID per probe set</td>
+    <td>Yes (pins to single ECMP path)</td>
+    <td>Single snapshot per path</td>
+    <td>Accurate path in ECMP environments</td>
+    </tr>
+    <tr>
+    <td>dublin-traceroute</td>
+    <td>ECMP-aware, maps all paths</td>
+    <td>Yes (intentionally discovers all paths)</td>
+    <td>Multi-path view</td>
+    <td>Complete ECMP topology mapping</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="dns-troubleshooting">9. DNS Troubleshooting</h2>
+    <p>DNS is the most common single point of failure in application
+    connectivity. “The network is down” is, more often than not, “DNS is
+    broken.” Systematic DNS troubleshooting requires understanding the
+    resolution chain from stub resolver to recursive resolver to
+    authoritative server, and having the tools to test each link
+    independently [15].</p>
+    <h3 id="dig-the-dns-troubleshooting-standard">dig: The DNS
+    Troubleshooting Standard</h3>
+    <div class="sourceCode" id="cb13"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic query -- A record</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> example.com A</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Query a specific nameserver directly</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> @8.8.8.8 example.com A</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Trace the full delegation chain (recursive from root)</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> +trace example.com A</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Short output (just the answer)</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> +short example.com A</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Show all sections (question, answer, authority, additional)</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> +noall +answer +authority +additional example.com A</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Check SOA for zone serial (useful for verifying zone transfers)</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> @ns1.example.com example.com SOA</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Query for NS records (who is authoritative?)</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> example.com NS</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Check DNSSEC validation</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> +dnssec example.com A</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Check specific record types</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> example.com MX       <span class="co"># Mail servers</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> example.com TXT      <span class="co"># SPF, DKIM, verification records</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> example.com AAAA     <span class="co"># IPv6 addresses</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> example.com CNAME    <span class="co"># Alias chains</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> _sip._tcp.example.com SRV  <span class="co"># Service records</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse DNS lookup</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> <span class="at">-x</span> 192.0.2.1</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Check EDNS Client Subnet (for GeoDNS debugging)</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> +subnet=203.0.113.0/24 @8.8.8.8 cdn.example.com A</span></code></pre></div>
+    <h3 id="dns-delegation-tracing">DNS Delegation Tracing</h3>
+    <p>When a domain fails to resolve, the problem could be at any point
+    in the delegation chain. Tracing walks the chain from the root
+    servers down:</p>
+    <pre><code>DNS DELEGATION CHAIN -- example.com
+================================================================
+
+  Root servers (.):
+    &quot;Who handles .com?&quot;
+    --&gt; Referral to .com TLD servers
+    
+  .com TLD servers:
+    &quot;Who handles example.com?&quot;
+    --&gt; Referral to ns1.example.com, ns2.example.com
+    (This is the delegation -- the NS records in the .com zone)
+    
+  Authoritative servers (ns1.example.com):
+    &quot;What is the A record for example.com?&quot;
+    --&gt; 93.184.216.34 (NOERROR, authoritative answer)</code></pre>
+    <p><strong>Common DNS failure modes:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Symptom</th>
+    <th>dig Output</th>
+    <th>Likely Cause</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>SERVFAIL from recursive</td>
+    <td>Status: SERVFAIL</td>
+    <td>DNSSEC validation failure, or authoritative unreachable</td>
+    </tr>
+    <tr>
+    <td>NXDOMAIN</td>
+    <td>Status: NXDOMAIN</td>
+    <td>Domain does not exist, or delegation is broken</td>
+    </tr>
+    <tr>
+    <td>No answer section</td>
+    <td>NOERROR, empty answer</td>
+    <td>Record type does not exist, or CNAME chain broken</td>
+    </tr>
+    <tr>
+    <td>Timeout</td>
+    <td>Connection timed out</td>
+    <td>Firewall blocking UDP/53, nameserver down</td>
+    </tr>
+    <tr>
+    <td>Wrong IP returned</td>
+    <td>Answer with unexpected IP</td>
+    <td>DNS hijacking, stale cache, wrong zone file</td>
+    </tr>
+    <tr>
+    <td>Slow resolution</td>
+    <td>High query time in dig output</td>
+    <td>Recursive server overloaded, or authoritative slow</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="dns-resolution-performance">DNS Resolution Performance</h3>
+    <div class="sourceCode" id="cb15"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Measure resolution time</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> example.com <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;Query time&quot;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">;;</span> <span class="ex">Query</span> time: 23 msec</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare cached vs uncached (flush cache first on recursive)</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Linux systemd-resolved:</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="ex">resolvectl</span> flush-caches</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Test iterative resolution time (bypasses cache)</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> +trace +stats example.com A <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;Query time&quot;</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Test each authoritative server independently</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> @ns1.example.com example.com A +stats</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> @ns2.example.com example.com A +stats</span></code></pre></div>
+    <hr />
+    <h2 id="tool-comparison-tables">10. Tool Comparison Tables</h2>
+    <h3 id="network-monitoring-platform-matrix">Network Monitoring
+    Platform Matrix</h3>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Capability</th>
+    <th>LibreNMS</th>
+    <th>Zabbix</th>
+    <th>PRTG</th>
+    <th>Nagios</th>
+    <th>Datadog</th>
+    <th>ThousandEyes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>SNMP polling</td>
+    <td>Excellent</td>
+    <td>Excellent</td>
+    <td>Excellent</td>
+    <td>Good (plugins)</td>
+    <td>Good (agent)</td>
+    <td>N/A</td>
+    </tr>
+    <tr>
+    <td>Auto-discovery</td>
+    <td>Excellent</td>
+    <td>Good</td>
+    <td>Good</td>
+    <td>Poor</td>
+    <td>Good</td>
+    <td>N/A</td>
+    </tr>
+    <tr>
+    <td>Streaming telemetry</td>
+    <td>None</td>
+    <td>Limited</td>
+    <td>None</td>
+    <td>None</td>
+    <td>Yes</td>
+    <td>N/A</td>
+    </tr>
+    <tr>
+    <td>Flow analysis</td>
+    <td>Built-in</td>
+    <td>Via plugin</td>
+    <td>Built-in</td>
+    <td>Via plugin</td>
+    <td>Yes</td>
+    <td>N/A</td>
+    </tr>
+    <tr>
+    <td>Synthetic monitoring</td>
+    <td>None</td>
+    <td>Web checks</td>
+    <td>HTTP sensor</td>
+    <td>Via plugins</td>
+    <td>Yes</td>
+    <td>Excellent</td>
+    </tr>
+    <tr>
+    <td>Path visualization</td>
+    <td>None</td>
+    <td>None</td>
+    <td>None</td>
+    <td>None</td>
+    <td>Limited</td>
+    <td>Excellent</td>
+    </tr>
+    <tr>
+    <td>Alert quality</td>
+    <td>Good</td>
+    <td>Excellent</td>
+    <td>Good</td>
+    <td>Good</td>
+    <td>Excellent</td>
+    <td>Excellent</td>
+    </tr>
+    <tr>
+    <td>API/automation</td>
+    <td>REST API</td>
+    <td>REST + RPC</td>
+    <td>REST API</td>
+    <td>Limited</td>
+    <td>Extensive</td>
+    <td>REST API</td>
+    </tr>
+    <tr>
+    <td>Cost</td>
+    <td>Free</td>
+    <td>Free</td>
+    <td>From $1,750</td>
+    <td>Free</td>
+    <td>Per-host</td>
+    <td>Per-agent</td>
+    </tr>
+    <tr>
+    <td>Setup complexity</td>
+    <td>Low</td>
+    <td>High</td>
+    <td>Low</td>
+    <td>High</td>
+    <td>Medium</td>
+    <td>Low</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="capture-and-analysis-tool-matrix">Capture and Analysis Tool
+    Matrix</h3>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Tool</th>
+    <th>Packet Capture</th>
+    <th>Flow Analysis</th>
+    <th>Deep Inspection</th>
+    <th>Live Analysis</th>
+    <th>Offline Analysis</th>
+    <th>Platform</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>tcpdump</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes (pcap)</td>
+    <td>Linux/macOS/BSD</td>
+    </tr>
+    <tr>
+    <td>Wireshark</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes (protocol decoders)</td>
+    <td>Yes</td>
+    <td>Yes (pcap)</td>
+    <td>Cross-platform</td>
+    </tr>
+    <tr>
+    <td>tshark</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes (like Wireshark, CLI)</td>
+    <td>Yes</td>
+    <td>Yes (pcap)</td>
+    <td>Cross-platform</td>
+    </tr>
+    <tr>
+    <td>ngrep</td>
+    <td>Yes (pattern match)</td>
+    <td>No</td>
+    <td>Partial</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Linux/macOS</td>
+    </tr>
+    <tr>
+    <td>ntopng</td>
+    <td>Yes</td>
+    <td>Yes (NetFlow/sFlow/IPFIX)</td>
+    <td>Yes (nDPI)</td>
+    <td>Yes</td>
+    <td>Limited</td>
+    <td>Linux</td>
+    </tr>
+    <tr>
+    <td>Zeek (Bro)</td>
+    <td>Yes (metadata)</td>
+    <td>Yes (conn.log)</td>
+    <td>Yes (protocol analyzers)</td>
+    <td>Yes</td>
+    <td>Yes (logs)</td>
+    <td>Linux/macOS</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="troubleshooting-flowcharts">11. Troubleshooting
+    Flowcharts</h2>
+    <h3 id="the-network-is-slow-universal-starting-point">“The Network
+    is Slow” – Universal Starting Point</h3>
+    <pre><code>USER REPORTS: &quot;The network is slow&quot;
+================================================================
+
+  1. Is it slow for one user or many?
+     |
+     +-- One user --&gt; Check user&#39;s device, cable, switch port, VLAN
+     |               (Layer 1-2 problem)
+     |
+     +-- Many users, one site --&gt; Check uplink, WAN circuit
+     |                           (capacity or routing problem)
+     |
+     +-- Many users, many sites --&gt; Check core network, DNS, shared service
+                                    (infrastructure-wide problem)
+
+  2. Is it slow for one application or all applications?
+     |
+     +-- One application --&gt; DNS for that app? Server health? Load balancer?
+     |                      (application or service problem)
+     |
+     +-- All applications --&gt; Network capacity? Routing? MTU?
+                              (transport problem)
+
+  3. When did it start?
+     |
+     +-- After a change --&gt; Diff the change. Rollback and verify.
+     |
+     +-- Gradually --&gt; Capacity exhaustion. Check utilization trends.
+     |
+     +-- Suddenly --&gt; Hardware failure, routing event, DDoS.
+                      Check syslogs, BGP, interface errors.</code></pre>
+    <h3 id="packet-loss-isolation">Packet Loss Isolation</h3>
+    <pre><code>PACKET LOSS ISOLATION FLOWCHART
+================================================================
+
+  Start: ping destination, observe loss
+         |
+         v
+  MTR to destination -- where does loss start?
+         |
+         +-- Loss at first hop (gateway)
+         |   --&gt; Check local cable, switch port errors, ARP
+         |
+         +-- Loss starts mid-path, continues to destination
+         |   --&gt; ISP/transit issue. Provide MTR evidence to NOC.
+         |
+         +-- Loss only at destination (not mid-path)
+         |   --&gt; Destination host issue: NIC, CPU, firewall, rate limit
+         |
+         +-- Loss only at one mid-path hop, destination is clean
+             --&gt; ICMP rate limiting on transit router (not real loss)
+             
+  Verify with bidirectional MTR and long-duration test (100+ probes)</code></pre>
+    <hr />
+    <h2 id="cross-references">12. Cross-References</h2>
+    <ul>
+    <li><strong>Module 01 (Architecture &amp; Design):</strong>
+    Observability architecture must match network topology – monitoring
+    VLANs, out-of-band management, collector placement</li>
+    <li><strong>Module 02 (Routing &amp; Switching):</strong> BGP/OSPF
+    state monitoring via SNMP, syslog correlation with routing
+    events</li>
+    <li><strong>Module 03 (Automation):</strong> Automated remediation
+    triggered by monitoring alerts, Ansible + SNMP integration</li>
+    <li><strong>Module 05 (Security):</strong> IDS/IPS feeds from TAPs
+    and packet brokers, flow analysis for threat detection</li>
+    <li><strong>Module 08 (Wireless):</strong> Wireless controller
+    telemetry, RF monitoring, client health metrics</li>
+    <li><strong>Module 10 (Reliability &amp; DR):</strong> BFD for fast
+    failure detection, monitoring as the foundation of SLA
+    reporting</li>
+    <li><strong>SNE/DNS (Module 09):</strong> DNS-specific monitoring
+    (query rate, cache hit ratio, DNSSEC validation)</li>
+    <li><strong>SYA (Systems Administration):</strong> Host-side
+    monitoring (net-snmp, node_exporter, collectd)</li>
+    <li><strong>SOO (Systems Operations):</strong> Runbook integration,
+    incident response workflows triggered by monitoring</li>
+    <li><strong>TCP (Protocol Research):</strong> TCP window analysis,
+    retransmission patterns, congestion control interaction with
+    monitoring</li>
+    </ul>
+    <hr />
+    <h2 id="sources">13. Sources</h2>
+    <ol type="1">
+    <li>RFC 3416 – SNMP Version 2 Protocol Operations. IETF, 2002.
+    https://www.rfc-editor.org/rfc/rfc3416</li>
+    <li>RFC 3414 – User-based Security Model for SNMPv3. IETF, 2002.
+    https://www.rfc-editor.org/rfc/rfc3414</li>
+    <li>RFC 2863 – The Interfaces Group MIB. IETF, 2000.
+    https://www.rfc-editor.org/rfc/rfc2863</li>
+    <li>Cisco. “Data Center Telemetry and Network Automation Using gNMI
+    and OpenConfig.” White Paper C11-744191, 2024.
+    https://www.cisco.com/c/en/us/products/collateral/switches/nexus-9000-series-switches/white-paper-c11-744191.html</li>
+    <li>OpenConfig. “gRPC Network Management Interface (gNMI)
+    Specification.”
+    https://www.openconfig.net/docs/gnmi/gnmi-specification/</li>
+    <li>InfluxData. “Infrastructure Monitoring Basics with Telegraf,
+    InfluxDB, and Grafana.”
+    https://www.influxdata.com/blog/infrastructure-monitoring-basics-telegraf-influxdb-grafana/</li>
+    <li>RFC 7011 – Specification of the IP Flow Information Export
+    (IPFIX) Protocol. IETF, 2013.
+    https://www.rfc-editor.org/rfc/rfc7011</li>
+    <li>RFC 3176 – InMon Corporation’s sFlow: A Method for Monitoring
+    Traffic in Switched and Routed Networks. IETF, 2001.
+    https://www.rfc-editor.org/rfc/rfc3176</li>
+    <li>tcpdump Official Documentation.
+    https://www.tcpdump.org/manpages/tcpdump.1.html</li>
+    <li>Gigamon. “To TAP or to SPAN.” White Paper.
+    https://www.gigamon.com/resources/resource-library/white-paper/to-tap-or-to-span.html</li>
+    <li>Cisco ThousandEyes Documentation.
+    https://docs.thousandeyes.com/</li>
+    <li>Fluke Networks. “OTDR – Optical Time Domain Reflectometer.”
+    https://www.flukenetworks.com/expertise/learn-about/otdr</li>
+    <li>APNIC Blog. “How to properly interpret a traceroute or MTR.”
+    March 2022.
+    https://blog.apnic.net/2022/03/28/how-to-properly-interpret-a-traceroute-or-mtr/</li>
+    <li>DigitalOcean. “How To Use Traceroute and MTR to Diagnose Network
+    Issues.”
+    https://www.digitalocean.com/community/tutorials/how-to-use-traceroute-and-mtr-to-diagnose-network-issues</li>
+    <li>ISC BIND 9 Administrator Reference Manual.
+    https://bind9.readthedocs.io/</li>
+    </ol>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNE Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNE/">tibsfox.com/Research/SNE</a>
+    </div>
+</body>
+</html>

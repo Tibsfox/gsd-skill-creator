@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Resources &mdash; Fortran &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-for">
+  <header>
+    <h1>Learning Resources</h1>
+    <div class="subtitle">! From punch cards to coarrays in 69 years</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="arrays.html">Arrays</a>
+      <a href="hpc.html">HPC</a>
+      <a href="parallel.html">Parallel</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html" class="active">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>! Learning Modern Fortran</strong><br>
+      Fortran has more high-quality books per active developer than perhaps any other language. The reason is its longevity: every era left a canonical text behind.
+    </blockquote>
+
+    <h2>Essential Books for Modern Fortran (2003+)</h2>
+
+    <h3>The Canon</h3>
+    <table>
+      <thead><tr><th>Title</th><th>Authors</th><th>Year</th><th>Why It Matters</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Modern Fortran Explained</strong></td><td>Michael Metcalf, John Reid, Malcolm Cohen</td><td>5th ed. 2018 (F2018)</td><td>THE canonical reference. Updated every standard. Authors are senior members of the standards committees. OUP. ISBN 978-0-19-881189-3.</td></tr>
+        <tr><td><strong>Modern Fortran in Practice</strong></td><td>Arjen Markus</td><td>2012</td><td>Practical, project-oriented modern Fortran. Patterns and idioms. Cambridge University Press.</td></tr>
+        <tr><td><strong>Modern Fortran: Building Efficient Parallel Applications</strong></td><td>Milan Cur&#269;ic</td><td>2020</td><td>The modern parallel Fortran book. Coarrays, OpenMP, MPI. Manning.</td></tr>
+        <tr><td><strong>Fortran for Scientists and Engineers</strong></td><td>Stephen J. Chapman</td><td>5th ed. 2017</td><td>The most popular university textbook. Through F2008. McGraw-Hill.</td></tr>
+        <tr><td><strong>Numerical Recipes in Fortran 90</strong></td><td>Press, Teukolsky, Vetterling, Flannery</td><td>1996</td><td>Classic algorithms reference. The numerical recipes that built scientific computing. Cambridge UP.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Specialized</h3>
+    <table>
+      <thead><tr><th>Title</th><th>Author(s)</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Scientific Software Design: The Object-Oriented Way</strong></td><td>Rouson, Xia, Xu</td><td>OO Fortran 2003+ for scientific code</td></tr>
+        <tr><td><strong>Introduction to Programming with Fortran</strong></td><td>Chivers &amp; Sleightholme</td><td>Comprehensive textbook through F2018</td></tr>
+        <tr><td><strong>Parallel Programming with Co-Arrays</strong></td><td>Robert W. Numrich</td><td>By the inventor of coarrays</td></tr>
+        <tr><td><strong>Using OpenMP: Portable Shared Memory Parallel Programming</strong></td><td>Chapman, Jost, van der Pas</td><td>Comprehensive OpenMP, includes Fortran</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Online Resources</h2>
+
+    <table>
+      <thead><tr><th>Resource</th><th>What It Covers</th></tr></thead>
+      <tbody>
+        <tr><td><strong>fortran-lang.org</strong></td><td>The community hub. Tutorials, mini-book, news, package registry, docs.</td></tr>
+        <tr><td><strong>fortran-lang.org/learn</strong></td><td>Quickstart tutorial. The first place to send a beginner.</td></tr>
+        <tr><td><strong>fortran-lang.org/mini_book</strong></td><td>Mini-book covering modern Fortran from scratch.</td></tr>
+        <tr><td><strong>discourse.fortran-lang.org</strong></td><td>Active forum. The center of the community.</td></tr>
+        <tr><td><strong>fortranwiki.org</strong></td><td>Community wiki of tips, idioms, and references.</td></tr>
+        <tr><td><strong>j3-fortran.org</strong></td><td>The US Fortran standards committee. Working drafts and proposals.</td></tr>
+        <tr><td><strong>fortran-lang.discourse.group/c/Tutorials</strong></td><td>Tutorial subforum.</td></tr>
+        <tr><td><strong>r/fortran</strong></td><td>Reddit community. Helpful for beginners.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Standards Documents</h2>
+    <table>
+      <thead><tr><th>Standard</th><th>Year</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>ISO/IEC 1539-1:2023</td><td>2023</td><td>Latest. Generics, conditional expressions.</td></tr>
+        <tr><td>ISO/IEC 1539-1:2018</td><td>2018</td><td>Most-implemented modern standard.</td></tr>
+        <tr><td>ISO/IEC 1539-1:2010</td><td>2010</td><td>Coarrays, DO CONCURRENT, submodules.</td></tr>
+        <tr><td>ISO/IEC 1539-1:2004</td><td>2004</td><td>OO, ISO_C_BINDING, IEEE arithmetic.</td></tr>
+        <tr><td>ISO/IEC 1539:1997</td><td>1997</td><td>Fortran 95.</td></tr>
+        <tr><td>ISO/IEC 1539:1991</td><td>1991</td><td>Fortran 90 — the modernization.</td></tr>
+        <tr><td>ANSI X3.9-1978</td><td>1978</td><td>FORTRAN 77 — the classic.</td></tr>
+        <tr><td>ANSI X3.9-1966</td><td>1966</td><td>The first ANSI Fortran standard.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Communities</h2>
+
+    <table>
+      <thead><tr><th>Community</th><th>Platform</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Fortran Discourse</strong></td><td>discourse.fortran-lang.org</td><td>Active modern Fortran forum. Where the renaissance lives.</td></tr>
+        <tr><td><strong>r/fortran</strong></td><td>Reddit</td><td>~30K members. Beginner-friendly.</td></tr>
+        <tr><td><strong>comp.lang.fortran</strong></td><td>Usenet</td><td>The original. Low traffic but knowledgeable old hands.</td></tr>
+        <tr><td><strong>FortranCon</strong></td><td>Annual conference</td><td>The community gathering.</td></tr>
+        <tr><td><strong>github.com/fortran-lang</strong></td><td>GitHub</td><td>fpm, stdlib, fortls, all the modern tooling.</td></tr>
+        <tr><td><strong>HPC mailing lists</strong></td><td>SciVis, OpenMP, MPI</td><td>Performance and parallel computing communities.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Learning Path &mdash; From Zero to Modern Fortran Developer</h2>
+
+    <div class="fortran-timeline">
+      <ol>
+        <li><strong>Level 1: Basics</strong> &mdash; Install GFortran. Read fortran-lang.org/learn. Write PROGRAM main, IMPLICIT NONE, INTEGER, REAL, PRINT. Compile and run your first program. Try LFortran for an interactive REPL experience.</li>
+        <li><strong>Level 2: Structure</strong> &mdash; DO loops, IF/THEN/ELSE, SUBROUTINE, FUNCTION. Read the first chapters of Chapman or Modern Fortran Explained. Start using <code>-std=f2018 -fimplicit-none -Wall</code>.</li>
+        <li><strong>Level 3: Modules</strong> &mdash; MODULE, USE, PUBLIC/PRIVATE, INTENT(IN/OUT/INOUT). Organize code into reusable modules. The key transition from FORTRAN 77 thinking to modern Fortran.</li>
+        <li><strong>Level 4: Arrays</strong> &mdash; The killer feature. Whole-array operations, slicing, intrinsics (SUM, MATMUL, RESHAPE). Allocatable arrays. Stop writing explicit DO loops for elementwise math.</li>
+        <li><strong>Level 5: Numerical Libraries</strong> &mdash; BLAS and LAPACK. stdlib_linalg as the modern wrapper. Solve linear systems, find eigenvalues, do SVD. The reason Fortran exists.</li>
+        <li><strong>Level 6: Object-Oriented Fortran</strong> &mdash; Derived types with type-bound procedures. EXTENDS for inheritance. CLASS for polymorphism. Read Rouson&rsquo;s <em>Scientific Software Design</em>.</li>
+        <li><strong>Level 7: Parallel</strong> &mdash; OpenMP directives. DO CONCURRENT. Coarrays. Pick one model, learn it deeply. Read Curcic&rsquo;s parallel Fortran book.</li>
+        <li><strong>Level 8: HPC Production</strong> &mdash; MPI for distributed memory. GPU offloading via nvfortran. Real climate or CFD codebases. You&rsquo;re now writing the code that runs supercomputers.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <p><strong>The unique advantage of learning Fortran in 2026:</strong> The barrier is gone. Free compilers (GFortran, ifx, nvfortran). Modern build tools (fpm). A standard library (stdlib). Interactive REPL (LFortran). LSP support (fortls). VS Code extension. A welcoming community (Fortran Discourse). And the language itself is mature, stable, and faster than ever. There has never been a better time to learn it.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="arrays.html">Arrays &mdash; The Killer Feature</a></li>
+        <li><a href="hpc.html">HPC &amp; Scientific Computing</a></li>
+        <li><a href="parallel.html">Parallel Fortran</a></li>
+        <li><a href="ecosystem.html">Modern Ecosystem</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="tools.html">Tools &amp; Compilers</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Learning Resources &middot; Fortran &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

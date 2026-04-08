@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodologies &amp; Frameworks &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-prm">
+  <header>
+    <h1>Methodologies &amp; Frameworks</h1>
+    <div class="subtitle">Waterfall, Agile, Lean, Hybrid &mdash; A Critical Survey of Approaches and When Each One Works</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="methodologies.html" class="active">Methodologies</a>
+      <a href="metrics.html">Metrics</a>
+      <a href="ai-tools.html">AI &amp; Tools</a>
+      <a href="gsd.html">GSD</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The question is not &ldquo;which methodology&rdquo; but &ldquo;which elements of which methodologies, measured against which metrics, for this team on this project right now.&rdquo;
+    </blockquote>
+
+    <div class="card">
+      <p>The discipline of project management did not emerge fully formed from any single moment of inspiration. It accreted over more than a century, shaped by the pressures of industrialization, world wars, Cold War defense programs, and the explosive growth of the software industry. This page surveys the major methodologies in three broad categories &mdash; traditional/predictive, agile, and hybrid &mdash; and argues that the honest answer for most teams is to <em>hybridize deliberately</em> rather than adhere to any single approach.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PART 1: TRADITIONAL / PREDICTIVE                              -->
+    <!-- ============================================================ -->
+
+    <h2>Part 1: Traditional / Predictive Methods</h2>
+
+    <h3>Waterfall (Royce, 1970)</h3>
+    <p>The waterfall model is the most persistently misunderstood methodology in PM history. In 1970, <strong>Winston W. Royce</strong> &mdash; then a director at Lockheed Software Technology Center &mdash; published &ldquo;Managing the Development of Large Software Systems&rdquo; at the IEEE WESCON conference. He presented a seven-phase sequential model (System Requirements, Software Requirements, Analysis, Program Design, Coding, Testing, Operations) and then wrote, immediately after:</p>
+
+    <blockquote>
+      I believe in this concept, but the implementation described above is risky and invites failure.
+    </blockquote>
+
+    <p>Royce spent the remainder of the paper describing five modifications to make the process workable &mdash; including &ldquo;do it twice,&rdquo; which is essentially iterative development. He explicitly advocated building the system at least twice, with feedback loops between adjacent phases. The industry adopted the flawed model as a prescription and named it after him. The word &ldquo;waterfall&rdquo; itself &mdash; which Royce never used &mdash; was introduced by Bell and Thayer in 1976.</p>
+
+    <p><strong>When pure waterfall works:</strong> Projects with extremely well-understood requirements (manufacturing, construction, regulated domains), stable scope, minimal uncertainty, and significant documentation/audit requirements. It does not work well for software projects with evolving requirements.</p>
+
+    <h3>PRINCE2 (1996)</h3>
+    <p>PRINCE2 (PRojects IN Controlled Environments) emerged from the UK government&rsquo;s need for a structured project management method. Originally developed in 1989 as PRINCE by the Central Computer and Telecommunications Agency, the method was revised into PRINCE2 in 1996 and has been updated multiple times since. It is organized around seven principles, seven themes, and seven processes, and it emphasizes business justification, defined roles, management by stages, and tailoring to the project environment.</p>
+
+    <p>PRINCE2 is prescriptive in the UK and parts of Europe in ways that PMBOK is in North America. It became the de facto standard for UK government IT projects and spread to Commonwealth countries. Its strength is clear governance and defined accountability; its weakness is the documentation overhead it imposes on smaller projects.</p>
+
+    <h3>The V-Model</h3>
+    <p>The V-Model is a variant of waterfall that explicitly pairs each development phase with a corresponding testing phase. Requirements analysis pairs with acceptance testing; system design pairs with system testing; module design pairs with unit testing. The shape of the diagram &mdash; development phases descending on the left, testing phases ascending on the right &mdash; gives the model its name.</p>
+
+    <p>The V-Model&rsquo;s virtue is that it forces test planning to occur at the same time as the corresponding development phase. You cannot defer thinking about how you will test something until after you have built it. The V-Model is still used in safety-critical domains (automotive, aerospace, medical devices) where test traceability to requirements is legally required.</p>
+
+    <h3>Stage-Gate (Cooper)</h3>
+    <p><strong>Robert G. Cooper</strong> developed the Stage-Gate process in the 1980s to manage new product development. The process divides product development into stages (idea, scoping, business case, development, testing, launch) separated by gates where go/kill decisions are made by senior management. Each gate has defined deliverables, criteria, and a decision-maker.</p>
+
+    <p>Stage-Gate is popular in consumer products, pharmaceuticals, and other capital-intensive domains where many projects are started and only a few reach market. The gates serve as deliberate kill points &mdash; if a project cannot justify progression, it is killed early, before further resources are wasted. Cooper&rsquo;s model has evolved through &ldquo;Next-Generation Stage-Gate&rdquo; and &ldquo;Agile-Stage-Gate&rdquo; hybrids that incorporate iteration within stages.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART 2: AGILE                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>Part 2: Agile Methods</h2>
+
+    <h3>Scrum (Sutherland and Schwaber, 1995)</h3>
+    <p>The origins of Scrum trace to a 1986 paper by <strong>Hirotaka Takeuchi</strong> and <strong>Ikujiro Nonaka</strong> in the <em>Harvard Business Review</em>. They studied Japanese manufacturing (Honda, Canon, Fuji-Xerox) and used the rugby scrum metaphor to describe cross-functional teams moving forward together, in contrast to the sequential relay-race approach of traditional development.</p>
+
+    <p><strong>Jeff Sutherland</strong> read their paper and began developing a software approach based on their ideas; the first full implementation of Scrum occurred at Easel Corporation in 1993. <strong>Ken Schwaber</strong> independently developed similar ideas, and the two formalized Scrum at OOPSLA in 1995.</p>
+
+    <p><strong>Scrum essentials:</strong> Sprints (fixed-length iterations, typically 1&ndash;4 weeks, producing potentially shippable increments); a product backlog prioritized by a Product Owner; sprint planning; daily standups; sprint reviews; sprint retrospectives; three roles (Product Owner, Scrum Master, Development Team). The 2020 Scrum Guide simplified the framework and emphasized the team as a whole rather than separate &ldquo;roles.&rdquo;</p>
+
+    <p>Scrum became the most widely adopted agile framework primarily because it is easy to explain and adopt. Its practices are primarily organizational, not technical, so teams can adopt Scrum without changing how individual developers work. This lower barrier to entry accelerated adoption, for better and for worse.</p>
+
+    <h3>Kanban (David Anderson, 2004)</h3>
+    <p><strong>David J. Anderson</strong> adapted Kanban for software development starting in 2004, drawing directly from the Toyota Production System and its use of <em>kanban</em> cards to signal production needs. Anderson formalized Kanban for knowledge work in his 2010 book <em>Kanban: Successful Evolutionary Change for Your Technology Business</em>.</p>
+
+    <p><strong>Kanban&rsquo;s principles:</strong> Visualize the workflow (typically as a board with columns representing stages); limit work-in-progress (WIP) with explicit caps on each column; manage flow; make process policies explicit; implement feedback loops; improve collaboratively and evolve experimentally. Unlike Scrum, Kanban has no fixed iterations, no required roles, and no backlog commitments. Work is pulled from a queue as capacity allows.</p>
+
+    <p>Kanban works well for ongoing operational work (support, maintenance, infrastructure) where work arrives unpredictably and cannot be batched into sprints. It also works as a lightweight layer on top of existing processes &mdash; you can &ldquo;Kanban&rdquo; any workflow without first destroying what you have.</p>
+
+    <h3>Extreme Programming &mdash; XP (Kent Beck, 1999)</h3>
+    <p><strong>Kent Beck</strong> developed Extreme Programming during his work on the Chrysler Comprehensive Compensation System (C3), becoming project leader in March 1996. Beck formalized XP in his 1999 book <em>Extreme Programming Explained: Embrace Change</em>.</p>
+
+    <p>Where Scrum focused on project management practices, XP focused on engineering practices: pair programming, test-driven development, continuous integration, refactoring, simple design, collective code ownership, small releases, on-site customer. XP&rsquo;s four values &mdash; communication, simplicity, feedback, and courage (with respect added in the second edition) &mdash; provided a more specific ethical framework than the Agile Manifesto.</p>
+
+    <p>XP as a complete methodology declined in popularity, but its engineering practices &mdash; particularly TDD and continuous integration &mdash; survived and became foundational to the broader agile and DevOps movements.</p>
+
+    <h3>Lean Software Development (Mary and Tom Poppendieck, 2003)</h3>
+    <p><strong>Mary and Tom Poppendieck</strong> adapted the principles of Toyota&rsquo;s Lean manufacturing to software development in their 2003 book <em>Lean Software Development: An Agile Toolkit</em>. They distilled Lean into seven principles:</p>
+    <ol>
+      <li>Eliminate waste</li>
+      <li>Amplify learning</li>
+      <li>Decide as late as possible</li>
+      <li>Deliver as fast as possible</li>
+      <li>Empower the team</li>
+      <li>Build integrity in</li>
+      <li>See the whole</li>
+    </ol>
+
+    <p>Lean&rsquo;s contribution to PM thinking is its focus on <strong>waste</strong> as the enemy. Every activity that does not add value to the customer is waste: unnecessary features, waiting, handoffs, defects, partially done work. Lean asks PMs to see their processes through the eyes of someone looking for waste and to systematically eliminate it.</p>
+
+    <h3>SAFe &mdash; Scaled Agile Framework (Leffingwell, 2011)</h3>
+    <p><strong>Dean Leffingwell</strong> launched SAFe in 2011 to address a real problem: how do you apply agile principles at the scale of hundreds or thousands of developers? The framework layers multiple levels of planning (Team, Program, Large Solution, Portfolio) and introduces concepts like Program Increments (10-week planning cycles), Release Trains (groups of teams working together), PI Planning events, and Lean Portfolio Management.</p>
+
+    <p>SAFe is both the most widely adopted scaled-agile framework and the most widely criticized. Supporters argue it provides a pragmatic path for large enterprises to adopt agile practices. Critics argue that SAFe reintroduces the very bureaucracy agile was invented to eliminate &mdash; that it is &ldquo;the worst of both worlds,&rdquo; combining agile&rsquo;s ceremonies with waterfall&rsquo;s overhead. Both arguments contain truth. SAFe works best in organizations that would otherwise revert to pure waterfall; it works worst in organizations that could adopt lightweight agile instead.</p>
+
+    <h3>LeSS (Large-Scale Scrum)</h3>
+    <p>LeSS (Large-Scale Scrum), developed by <strong>Craig Larman</strong> and <strong>Bas Vodde</strong>, takes the opposite approach to SAFe. Where SAFe adds layers and roles, LeSS subtracts them. LeSS is, in its simplest form, just Scrum applied to multiple teams working on the same product: a single product backlog, a single Product Owner, one sprint, one sprint review, one retrospective. LeSS scales by preserving Scrum&rsquo;s lightweight nature rather than by adding structure on top.</p>
+
+    <h3>The Spotify Model</h3>
+    <p>The &ldquo;Spotify Model&rdquo; was described in a 2012 white paper by Henrik Kniberg and Anders Ivarsson titled &ldquo;Scaling Agile @ Spotify with Tribes, Squads, Chapters &amp; Guilds.&rdquo; The model features small, autonomous cross-functional teams (Squads) grouped by product area (Tribes), with cross-cutting communities of practice (Chapters and Guilds).</p>
+
+    <p>The irony is that Spotify itself acknowledged the model was never fully implemented as described and is not a methodology to be copied. Yet the terminology spread so widely that organizations around the world adopted &ldquo;squads and tribes&rdquo; naming without the underlying culture that made Spotify&rsquo;s actual practices work. The Spotify Model is a cautionary tale about copying organizational structure without understanding its context.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART 3: HYBRID AND MODERN                                     -->
+    <!-- ============================================================ -->
+
+    <h2>Part 3: Hybrid and Modern Approaches</h2>
+
+    <h3>Hybrid Methods</h3>
+    <p>The dirty secret of project management is that most teams do not use a pure methodology. They hybridize &mdash; combining elements of waterfall for phases with regulatory requirements, agile for phases that are experimental, kanban for ongoing operational work, and whatever else fits their situation. This is not a failure of methodological purity. It is, in many cases, the right answer.</p>
+
+    <p>The 2023 PMI Pulse of the Profession found that the majority of organizations reported using hybrid approaches rather than pure agile or pure waterfall. Common hybrid patterns include:</p>
+    <ul>
+      <li><strong>Water-Scrum-Fall:</strong> Waterfall for requirements and deployment, Scrum for development. Criticized by agile purists but widely practiced.</li>
+      <li><strong>Scrum + Kanban (Scrumban):</strong> Scrum&rsquo;s sprints with Kanban&rsquo;s WIP limits and continuous flow.</li>
+      <li><strong>Agile-Stage-Gate:</strong> Cooper&rsquo;s gates between major phases, agile iteration within them.</li>
+      <li><strong>Waterfall with sprint-style execution:</strong> Traditional upfront planning, but execution organized into timeboxed increments with daily standups.</li>
+    </ul>
+
+    <h3>Six Sigma and Lean Six Sigma</h3>
+    <p>Six Sigma originated at Motorola in 1986 as a quality improvement methodology focused on reducing defects to fewer than 3.4 per million opportunities (the statistical definition of six sigma). Championed by Jack Welch at GE in the 1990s, it became a corporate obsession and spawned a certification hierarchy (Green Belt, Black Belt, Master Black Belt) that rivaled PMP.</p>
+
+    <p>Lean Six Sigma combines Lean&rsquo;s waste elimination with Six Sigma&rsquo;s statistical process control. Its DMAIC cycle (Define, Measure, Analyze, Improve, Control) has been applied to everything from manufacturing to call centers to hospital operations. Its relevance to software PM is limited by the nature of knowledge work &mdash; you cannot measure software development the way you measure widgets per hour &mdash; but its emphasis on data-driven decision-making has influenced modern metrics frameworks.</p>
+
+    <h3>Critical Chain Project Management (Goldratt)</h3>
+    <p><strong>Eliyahu Goldratt</strong> introduced Critical Chain Project Management (CCPM) in his 1997 book <em>Critical Chain</em>. Goldratt applied his Theory of Constraints to project scheduling, arguing that the critical path as traditionally computed ignores resource constraints. When two parallel tasks require the same person, CCPM says, the schedule must be replanned around that constraint &mdash; producing a &ldquo;critical chain&rdquo; rather than a critical path.</p>
+
+    <p>CCPM&rsquo;s other major contribution is its treatment of schedule buffers. Instead of adding padding to individual task estimates (which, Goldratt argued, is always consumed by Parkinson&rsquo;s Law and student syndrome), CCPM aggregates safety into project buffers at the end of the critical chain and feeding buffers at junctions. The buffers are monitored explicitly, and their consumption signals project risk.</p>
+
+    <h3>Design Thinking</h3>
+    <p>Design Thinking, popularized by IDEO and the Stanford d.school, is not strictly a PM methodology but has significantly influenced how projects are scoped and initiated. Its five-stage cycle &mdash; Empathize, Define, Ideate, Prototype, Test &mdash; emphasizes user research, iterative prototyping, and the willingness to reframe the problem based on learning. Design Thinking pairs well with agile execution methods: Design Thinking shapes <em>what</em> to build, agile shapes <em>how</em> to build it.</p>
+
+    <!-- ============================================================ -->
+    <!-- PART 4: SELECTION GUIDANCE                                    -->
+    <!-- ============================================================ -->
+
+    <h2>Part 4: Selection Guidance</h2>
+
+    <p>The question &ldquo;which methodology should we use?&rdquo; is almost always the wrong question. The right questions are:</p>
+    <ul>
+      <li>How stable are the requirements?</li>
+      <li>How well understood is the technology?</li>
+      <li>How distributed is the team?</li>
+      <li>What are the regulatory or contractual constraints?</li>
+      <li>What is the team&rsquo;s current skill set and preference?</li>
+      <li>What is the cost of delay vs. the cost of being wrong?</li>
+      <li>How well does the organization tolerate uncertainty?</li>
+    </ul>
+
+    <h3>Decision Factors</h3>
+    <table>
+      <thead><tr><th>If you have&hellip;</th><th>Consider&hellip;</th></tr></thead>
+      <tbody>
+        <tr><td>Stable requirements, regulated domain, audit trail required</td><td>Waterfall, V-Model, PRINCE2</td></tr>
+        <tr><td>Unclear requirements, experimental product, small team</td><td>Scrum, XP, or Kanban</td></tr>
+        <tr><td>Continuous operational work, unpredictable arrival</td><td>Kanban</td></tr>
+        <tr><td>Product development with multiple concurrent bets</td><td>Stage-Gate or Agile-Stage-Gate</td></tr>
+        <tr><td>Large enterprise, many teams, shared dependencies</td><td>SAFe (cautiously) or LeSS</td></tr>
+        <tr><td>Resource-constrained scheduling with shared bottlenecks</td><td>Critical Chain</td></tr>
+        <tr><td>Mix of the above (most real projects)</td><td>Deliberate hybrid</td></tr>
+        <tr><td>AI as the executor, human as gate-keeper</td><td><a href="gsd.html">GSD</a> or equivalent AI-native substrate</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- PART 5: THE HYBRID IMPERATIVE                                 -->
+    <!-- ============================================================ -->
+
+    <h2>Part 5: The Hybrid Imperative</h2>
+
+    <div class="card">
+      <p>The key insight that runs through every honest survey of PM methodology is this: <strong>few teams actually use a pure methodology</strong>. Most hybridize. This is normal and should be celebrated, not hidden.</p>
+
+      <p>Methodology purists often treat hybridization as a failure of discipline &mdash; as if the team simply couldn&rsquo;t commit to Scrum, or couldn&rsquo;t bring themselves to follow PMBOK. But the opposite framing is closer to the truth: hybridization is what mature teams do when they stop performing methodology and start solving problems. A team that uses Scrum ceremonies when they help, drops them when they don&rsquo;t, uses Kanban for support work, and falls back to waterfall for the regulatory submission phase is not a confused team. It is a team that has learned to match method to context.</p>
+
+      <p>The question is not &ldquo;which methodology?&rdquo; It is &ldquo;which elements of which methodologies, measured against which metrics, for this team on this project right now?&rdquo;</p>
+
+      <p>This is the philosophy that the <a href="gsd.html">GSD</a> page takes further. GSD is designed from the start not as a prescription but as a <em>substrate</em> &mdash; a flexible framework on which teams can compose their own hybrid workflows, guided by metrics and refined by retrospective memory. The goal is not to &ldquo;do GSD right.&rdquo; It is to use GSD to experiment until you find what works.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History</a> &mdash; where these methodologies came from</li>
+        <li><a href="metrics.html">Metrics</a> &mdash; how you measure what works</li>
+        <li><a href="gsd.html">GSD Deep Dive</a> &mdash; hybridization as the operating principle</li>
+        <li><a href="rosetta.html">Rosetta</a> &mdash; side-by-side comparison across dimensions</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Methodologies &amp; Frameworks &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

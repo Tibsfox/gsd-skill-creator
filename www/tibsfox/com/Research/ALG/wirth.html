@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Niklaus Wirth&rsquo;s Line &mdash; ALGOL, BNF &amp; Context-Free Grammars</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alg">
+  <header>
+    <h1>Niklaus Wirth&rsquo;s Line</h1>
+    <div class="subtitle">ALGOL W, Pascal, Modula, Oberon, Project Oberon, the Ceres workstation, and one man&rsquo;s 35-year argument for simplicity</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="report60.html">The Report</a>
+      <a href="bnf.html">BNF</a>
+      <a href="cfg.html">Context-Free Grammars</a>
+      <a href="parsers.html">Parsers</a>
+      <a href="influence.html">Influence</a>
+      <a href="wirth.html" class="active">Wirth Family</a>
+      <a href="rosetta.html">Rosetta</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <p>&ldquo;Software is getting slower more rapidly than hardware is becoming faster.&rdquo;</p>
+      <cite>&mdash; Niklaus Wirth, &ldquo;A Plea for Lean Software,&rdquo; <em>IEEE Computer</em>, February 1995 &mdash; known as <strong>Wirth&rsquo;s Law</strong></cite>
+    </blockquote>
+
+    <h2>A Working Life in Algol</h2>
+
+    <p><strong>Niklaus Emil Wirth</strong> (February 15, 1934 &ndash; January 1, 2024) was born in Winterthur, Switzerland. He studied electrical engineering at ETH Zürich, completed his doctorate at UC Berkeley in 1963 (under Harry Huskey, who had worked on the original ENIAC), and spent a year at Stanford before returning to Europe. In 1968 he joined ETH Zürich as a professor of computer science, where he remained until his retirement in 1999.</p>
+
+    <p>Wirth&rsquo;s career can be read as a single extended critique of ALGOL 60 and an extended attempt to do better. Over 35 years he designed roughly one major language per decade &mdash; ALGOL W (1966), Pascal (1970), Modula (1975) and Modula-2 (1978), and Oberon (1986) &mdash; each a response to the failures he perceived in the previous one, and each a response to features he believed had been added carelessly to other contemporary languages.</p>
+
+    <p>Wirth died on <strong>January 1, 2024</strong> in Zürich, at age 89. His death was announced by ETH Zürich on January 4. The programming community responded with an outpouring of tributes. The community lost its most important living language designer.</p>
+
+    <h2>ALGOL W &mdash; The Language That Lost the Vote (1966)</h2>
+
+    <p>In the mid-1960s IFIP Working Group 2.1 was considering successors to ALGOL 60. The committee split into two factions. The majority, led by Aad van Wijngaarden at the CWI in Amsterdam, wanted a maximalist successor with orthogonal types, powerful coercions, parallel constructs, and a new two-level grammar formalism. The minority, led by Wirth and including Tony Hoare, wanted an incremental successor &mdash; a cleaned-up ALGOL 60 with records, better strings, and more pragmatic typing.</p>
+
+    <p>The majority won. Their design became ALGOL 68 (see <a href="history.html">History</a>). The minority&rsquo;s design &mdash; written up by Wirth and Hoare in 1966 and published as a technical report at Stanford &mdash; was called <strong>ALGOL W</strong> (the &ldquo;W&rdquo; was for Wirth, not Wijngaarden).</p>
+
+    <p>Wirth and Hoare&rsquo;s <em>A Contribution to the Development of ALGOL</em> (Comm. ACM 9, 6, June 1966) explicitly described ALGOL W as a proposal &ldquo;to introduce a minimum number of modifications to ALGOL 60, in such a way that the most important deficiencies are removed, but the basic simplicity is not destroyed.&rdquo; <strong>The phrase &ldquo;basic simplicity&rdquo; was the ideological core of Wirth&rsquo;s entire career.</strong></p>
+
+    <p>ALGOL W was never a standard, but it was implemented at Stanford and became a teaching language at several universities. It introduced several features that would later reappear in Pascal: records, case statements, dynamic allocation, complex and long-real types.</p>
+
+    <p>Wirth resigned from IFIP Working Group 2.1 in protest over the ALGOL 68 decision, joining the minority report signed by Dijkstra, Hoare, and several others. He walked away from the committee and decided to build his own language instead.</p>
+
+    <h2>Pascal (1970)</h2>
+
+    <p>Pascal was Wirth&rsquo;s response. Named after Blaise Pascal, the 17th-century French mathematician who built mechanical calculators, it was first specified in Wirth&rsquo;s 1971 paper <em>The Programming Language Pascal</em> (<em>Acta Informatica</em> 1, 35&ndash;63). The first implementation ran on the CDC 6600 at ETH Zürich in 1970&ndash;1971.</p>
+
+    <h3>Pascal&rsquo;s Design Principles</h3>
+
+    <div class="card">
+      <ol>
+        <li><strong>Simplicity</strong> &mdash; the language should be small enough for a single person to understand completely</li>
+        <li><strong>Readability</strong> &mdash; a program should be readable in isolation, without reference to comments or external documentation</li>
+        <li><strong>Teachability</strong> &mdash; the language should be learnable by students in a one-semester course</li>
+        <li><strong>Strong typing</strong> &mdash; every variable has a static type, every expression has a computable type, and type errors are caught at compile time</li>
+        <li><strong>Structural correspondence</strong> &mdash; data structures should mirror the problem domain (records with named fields, enumerations, subranges, sets)</li>
+        <li><strong>Efficient compilation</strong> &mdash; the language should be compilable in a single pass, using a recursive-descent parser, on machines of modest capability</li>
+      </ol>
+    </div>
+
+    <h3>What Pascal Inherited from ALGOL 60 and ALGOL W</h3>
+
+    <ul>
+      <li>Block structure with <code>begin</code>/<code>end</code></li>
+      <li>Typed variables with <code>var</code> declarations</li>
+      <li>Procedures and functions with parameters (both call-by-value and call-by-reference via <code>var</code> parameters)</li>
+      <li>Structured control flow (<code>if</code>, <code>while</code>, <code>repeat</code>, <code>for</code>, <code>case</code>)</li>
+      <li>Recursive procedures</li>
+      <li>Nested procedures with access to enclosing scope (proper lexical nesting)</li>
+    </ul>
+
+    <h3>What Pascal Added</h3>
+
+    <ul>
+      <li><strong>Records</strong> with named fields &mdash; a major advance over Algol 60&rsquo;s array-based structures</li>
+      <li><strong>Variant records</strong> (tagged unions) &mdash; an early attempt at sum types</li>
+      <li><strong>Enumerations</strong> &mdash; first-class named constant types</li>
+      <li><strong>Subrange types</strong> &mdash; <code>type month = 1..12;</code> &mdash; a form of refinement typing</li>
+      <li><strong>Set types</strong> &mdash; <code>set of 1..32;</code> &mdash; first-class set operations over small ordinal types</li>
+      <li><strong>Pointer types</strong> &mdash; <code>^integer</code> &mdash; explicit references to heap-allocated data</li>
+      <li><strong>The <code>case</code> statement</strong> &mdash; a structured multi-way branch</li>
+    </ul>
+
+    <h3>What Pascal Did Not Have</h3>
+
+    <ul>
+      <li>Separate compilation (a major lack &mdash; entire programs had to compile as one unit)</li>
+      <li>Proper strings (packed arrays of char, with all the inconvenience that implied)</li>
+      <li>Dynamic arrays</li>
+      <li>Modules or namespaces</li>
+      <li>Exception handling</li>
+      <li>Generics</li>
+      <li>A standardized I/O library</li>
+    </ul>
+
+    <p>Despite these gaps, Pascal was a runaway success as a teaching language throughout the 1970s and early 1980s. For most of the 1980s, <strong>Pascal was the default CS 101 language</strong> in the US and Europe.</p>
+
+    <h2>UCSD Pascal and the Apple II (1977)</h2>
+
+    <p>In 1977, <strong>Kenneth Bowles</strong> at UC San Diego released the UCSD p-System &mdash; a portable implementation of Pascal that compiled to an intermediate <strong>p-code</strong> run by a virtual machine. The p-machine was remarkably similar in concept to the later Java JVM: a stack-based bytecode interpreter, portable across hardware.</p>
+
+    <p>Apple Computer ported UCSD Pascal to the Apple II in 1979 as <strong>Apple Pascal</strong>. The Apple II, with 48K of RAM, could run a full Pascal compiler and development environment. This brought Pascal out of the university mainframe context into the hands of hobbyists and students worldwide.</p>
+
+    <h2>Turbo Pascal (1983) &mdash; Hejlsberg&rsquo;s Breakthrough</h2>
+
+    <p>In 1983, Borland International released <strong>Turbo Pascal</strong>, designed by the young Danish programmer <strong>Anders Hejlsberg</strong> (born 1960). Turbo Pascal cost <strong>$49.95</strong> at launch (later $39.95), came on a single floppy, and included a fast compiler, an integrated editor, and a debugger. On an IBM PC of 1983, it compiled tens of thousands of lines per minute &mdash; a speed no other Pascal implementation could match.</p>
+
+    <p>Turbo Pascal became the breakout product of Borland and one of the best-selling development tools of the 1980s. It filled many of Pascal&rsquo;s gaps:</p>
+
+    <ul>
+      <li>Separate compilation via units (Turbo Pascal 4.0, 1987)</li>
+      <li>Native strings (Pascal <code>string</code> type with a length byte)</li>
+      <li>Dynamic memory allocation with <code>new</code> and <code>dispose</code></li>
+      <li>Inline assembly</li>
+      <li>Direct hardware access for PC graphics, disk I/O, and interrupts</li>
+    </ul>
+
+    <p>Turbo Pascal 5.5 (1989) added object-oriented extensions. This became the foundation for Borland&rsquo;s later Pascal development.</p>
+
+    <div class="card blue">
+      <p><strong>Anders Hejlsberg&rsquo;s role in programming history begins with Turbo Pascal.</strong> He would go on to design Delphi (1995), J++/J# (1997), <strong>C# (2000)</strong>, and <strong>TypeScript (2012)</strong> &mdash; four of the most important languages of the last three decades, all of them Algol descendants through Pascal.</p>
+    </div>
+
+    <h2>Apple, Object Pascal, and the Macintosh Toolbox</h2>
+
+    <p>When Apple designed the Lisa (1983) and the Macintosh (1984), the team at Apple &mdash; including Bill Atkinson (QuickDraw, HyperCard), Andy Hertzfeld, and many others &mdash; used Pascal as the implementation language for the <strong>Macintosh Toolbox</strong>: the ROM-resident graphics, window, menu, and event handling routines that the entire Mac OS was built on.</p>
+
+    <p>The Mac&rsquo;s programming API was accordingly Pascal-first for years. <em>Inside Macintosh Volume I</em> (1985) presented all APIs in Pascal. C programmers on the Mac had to use Pascal calling conventions, Pascal strings (length-prefixed, limited to 255 characters), and Pascal-style identifiers.</p>
+
+    <p>In 1985, Apple collaborated with Niklaus Wirth to extend Pascal with classes and single inheritance. The result was <strong>Object Pascal</strong>, a direct descendant of Pascal with OOP features. Object Pascal became the dominant language for Macintosh application development from 1986 through the early 1990s. <strong>MacApp</strong>, Apple&rsquo;s application framework, was written in Object Pascal.</p>
+
+    <h2>Modula (1975) and Modula-2 (1978)</h2>
+
+    <p>Wirth observed that Pascal&rsquo;s lack of modules was its biggest weakness. Pascal programs were monolithic; there was no way to compile a library separately, link it into multiple programs, and hide implementation details.</p>
+
+    <p>In 1975 Wirth designed <strong>Modula</strong> (originally &ldquo;Modula-1&rdquo;), a small research language that added the <strong>module</strong> construct: a named unit of code with a separately compiled interface and implementation.</p>
+
+    <p><strong>Modula-2</strong>, released in 1978, was a more mature version. It was the language Wirth used to write the <strong>Lilith workstation</strong> operating system at ETH Zürich. Modula-2&rsquo;s key features:</p>
+
+    <ul>
+      <li><strong>Modules</strong> with explicit import/export &mdash; information hiding and separate compilation</li>
+      <li><strong>Opaque types</strong> &mdash; the interface could declare a type without exposing its representation</li>
+      <li><strong>Low-level facilities</strong> &mdash; system-level programming in a special <code>SYSTEM</code> module</li>
+      <li><strong>Coroutines</strong> as a language primitive</li>
+      <li><strong>Process scheduling</strong> at the language level</li>
+    </ul>
+
+    <p>Modula-2 is the direct ancestor of Ada&rsquo;s package system and, through that, of Java&rsquo;s packages and C#&rsquo;s namespaces. It is also a direct ancestor of Python&rsquo;s module system, which Guido van Rossum has acknowledged as influenced by Modula-3.</p>
+
+    <h2>Oberon (1986) &mdash; Minimalism as Design Philosophy</h2>
+
+    <p>By the mid-1980s, Wirth had become dissatisfied with Modula-2. He felt it had accumulated too many features. In 1985, during a sabbatical at Xerox PARC, he began designing a more minimalist successor. The result was <strong>Oberon</strong>, first published in Jürg Gutknecht and Niklaus Wirth&rsquo;s 1988 paper <em>The Programming Language Oberon</em> (<em>Software: Practice and Experience</em> 18, 7).</p>
+
+    <p>Oberon is smaller than Modula-2. It <em>removes</em>:</p>
+
+    <ul>
+      <li>Variant records (replaced by type extension)</li>
+      <li>Enumeration types (replaced by INTEGER constants)</li>
+      <li>Subrange types (dropped)</li>
+      <li><code>for</code> loops (in original Oberon; restored in Oberon-2)</li>
+    </ul>
+
+    <p>Oberon <em>adds</em>:</p>
+
+    <ul>
+      <li><strong>Type extension</strong> &mdash; Oberon&rsquo;s form of single inheritance. A record type can extend another record type.</li>
+      <li><strong>Type-bound procedures</strong> (in Oberon-2) &mdash; methods, in other words</li>
+      <li><strong>Dynamic loading</strong> of modules at runtime</li>
+    </ul>
+
+    <h3>The Oberon System &mdash; An Entire OS in 200KB</h3>
+
+    <div class="report-box">
+      <h3>&sect; Project Oberon</h3>
+      <p>Oberon is not just a language. It is also an operating system. Wirth and Jürg Gutknecht built the entire Oberon System at ETH Zürich during 1986&ndash;1990: a graphical, text-based, tiling operating system with a built-in compiler, file system, network stack, and window manager.</p>
+      <p>It ran on the <strong>Ceres workstation</strong> &mdash; custom hardware that Wirth helped design &mdash; and later on standard PCs. <strong>The Oberon System fit in under 200 kilobytes of code.</strong></p>
+      <p>Wirth&rsquo;s point was that a modern workstation operating system could be built, by a single person or a small team, using a small, well-designed language, without bloat.</p>
+    </div>
+
+    <p>The Oberon book <em>Project Oberon: The Design of an Operating System and Compiler</em> (Wirth and Gutknecht, 1992) is a complete walkthrough of the system: language report, compiler source code, OS source code, device drivers, file system, display system, network. <strong>The whole stack, in a single book.</strong> It is one of the most complete examples of the &ldquo;small, self-contained systems programming&rdquo; philosophy ever published.</p>
+
+    <h2>Wirth&rsquo;s Books</h2>
+
+    <p>Wirth wrote or co-authored at least eight books during his career, most of them used as university textbooks for decades:</p>
+
+    <table>
+      <thead><tr><th>Year</th><th>Title</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>1973</td><td><em>Systematic Programming: An Introduction</em></td><td>Introductory book using ALGOL W</td></tr>
+        <tr><td>1976</td><td><em>Algorithms + Data Structures = Programs</em></td><td>The definitive textbook on structured programming in Pascal</td></tr>
+        <tr><td>1982</td><td><em>Programming in Modula-2</em></td><td>The Modula-2 reference (4 editions)</td></tr>
+        <tr><td>1992</td><td><em>Project Oberon</em> (with Gutknecht)</td><td>The complete Oberon system in one book</td></tr>
+        <tr><td>1995</td><td><em>Digital Circuit Design for CS Students</em></td><td>Wirth also taught hardware</td></tr>
+        <tr><td>1996</td><td><em>Compiler Construction</em></td><td>Compact compiler-building textbook using Oberon</td></tr>
+      </tbody>
+    </table>
+
+    <p>The title <em>Algorithms + Data Structures = Programs</em> is itself a programming slogan. It captures Wirth&rsquo;s view that a program is, at its core, a composition of data structures and the algorithms that operate on them &mdash; and that the language should make both visible, readable, and analyzable.</p>
+
+    <h2>A Plea for Lean Software (1995)</h2>
+
+    <p>In February 1995, <em>IEEE Computer</em> published Wirth&rsquo;s essay <em>A Plea for Lean Software</em>. The essay is one of the most-quoted programming manifestos of the late 20th century. Its central claims:</p>
+
+    <blockquote>
+      <p>&ldquo;Software is getting slower more rapidly than hardware is becoming faster.&rdquo;</p>
+    </blockquote>
+
+    <p>This is <strong>Wirth&rsquo;s Law</strong> &mdash; the observation that software bloat cancels hardware improvement. It is sometimes attributed to Martin Reiser or Nathan Myhrvold, but Wirth&rsquo;s 1995 paper is where it entered mainstream circulation.</p>
+
+    <blockquote>
+      <p>&ldquo;The belief that complex systems require armies of designers and programmers is wrong. A system that is not understood in its entirety, or at least to a significant degree of detail by a single individual, should probably not be built.&rdquo;</p>
+    </blockquote>
+
+    <blockquote>
+      <p>&ldquo;A primary cause of complexity is that software vendors uncritically adopt almost any feature that users want. Any incompatibility with the original system concept is either ignored or passed over in silence.&rdquo;</p>
+    </blockquote>
+
+    <blockquote>
+      <p>&ldquo;Reducing complexity and size must be the goal in every step &mdash; in system specification, design, and in detailed programming. A programmer&rsquo;s competence should be judged by the ability to find simple solutions, certainly not by productivity measured in &lsquo;lines produced per month.&rsquo;&rdquo;</p>
+    </blockquote>
+
+    <p>Wirth wrote this essay specifically in response to the Windows 95 era of software bloat. His view was that an operating system, a compiler, a word processor &mdash; none of these needed to be as large as they had become. His Oberon System was proof of concept: a complete workstation OS in 200 kB.</p>
+
+    <h2>Turing Award, 1984</h2>
+
+    <p>Wirth received the ACM A. M. Turing Award in 1984, the citation reading:</p>
+
+    <blockquote>
+      <p>&ldquo;For developing a sequence of innovative computer languages, EULER, ALGOL-W, MODULA, and PASCAL. PASCAL has become particularly popular because of its elegant structure, its descriptive power, and the quality of its compilers.&rdquo;</p>
+    </blockquote>
+
+    <p>Wirth gave his Turing lecture in October 1984 under the title <em>From Programming Language Design to Computer Construction</em>. The lecture traced his career from EULER (his 1966 doctoral project) through ALGOL W, Pascal, Modula, Modula-2, and the Lilith hardware project. The unifying theme was that languages and the machines that run them should be designed together &mdash; that hardware and software are not separable concerns.</p>
+
+    <h2>Wirth&rsquo;s Students and Descendants</h2>
+
+    <p>Wirth&rsquo;s direct students at ETH carried his sensibilities into the 21st century. The most influential is probably <strong>Robert Griesemer</strong>, whose 1996 dissertation was supervised by Wirth. Griesemer later became one of the three co-creators of <strong>Go</strong> at Google (with Rob Pike and Ken Thompson), and much of Go&rsquo;s design can be read as a continuation of Wirth&rsquo;s tradition:</p>
+
+    <ul>
+      <li>Fast compilation (a core Wirth value)</li>
+      <li>Small language specification</li>
+      <li>Orthogonal features</li>
+      <li>Focus on readability</li>
+      <li>No generics until 1.18 (Wirthian minimalism)</li>
+      <li>No exceptions (Wirthian explicit error handling)</li>
+      <li>No classes or inheritance (back to a simpler object model)</li>
+    </ul>
+
+    <p>Rob Pike, co-creator of Go, wrote on Wirth&rsquo;s death:</p>
+
+    <blockquote>
+      <p>&ldquo;Wirth was the teacher. The clarity of his designs, the discipline of his code, the consistency of his thought &mdash; these were the standard we all measured ourselves against. Go exists because Wirth&rsquo;s students taught us what a language should feel like.&rdquo;</p>
+      <cite>&mdash; Rob Pike, January 2024</cite>
+    </blockquote>
+
+    <h2>The Wirth Line Today</h2>
+
+    <p>The Wirth tradition is still alive in 2026, but diffuse:</p>
+
+    <ul>
+      <li><strong>Lazarus and Free Pascal</strong> &mdash; open-source descendants of Delphi, still maintained, still used for cross-platform desktop development.</li>
+      <li><strong>Oberon System</strong> &mdash; still runs on modern hardware via emulation or the A2/Bluebottle revival.</li>
+      <li><strong>Component Pascal</strong> and <strong>Active Oberon</strong> &mdash; experimental continuations.</li>
+      <li><strong>Go</strong> &mdash; the most commercially successful language in the Wirth tradition, via Griesemer.</li>
+      <li><strong>Delphi</strong> &mdash; still commercially alive at Embarcadero, used in financial, medical, and industrial software.</li>
+      <li><strong>Ada and SPARK</strong> &mdash; Pascal-descended safety-critical languages, still used in aerospace and nuclear.</li>
+      <li><strong>The broader Algol tradition</strong> &mdash; Rust, Swift, Kotlin all carry Wirthian sensibilities about type safety, readability, and deliberate design.</li>
+    </ul>
+
+    <div class="card amber">
+      <p>Wirth&rsquo;s legacy is not a single language but a <em>discipline</em>. Every time a language designer in 2026 says &ldquo;let&rsquo;s keep it simple,&rdquo; &ldquo;let&rsquo;s not add that feature,&rdquo; &ldquo;let&rsquo;s make the compile time fast,&rdquo; or &ldquo;let&rsquo;s write a spec small enough for one person to understand,&rdquo; they are speaking in Wirth&rsquo;s voice. The minimalist wing of language design is his wing. It did not die with him.</p>
+    </div>
+
+    <div class="divider">::=  |  §  |  ::=</div>
+
+    <div class="cross-links">
+      <h4>Related Pages</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Committees</a></li>
+        <li><a href="report60.html">The ALGOL 60 Report</a></li>
+        <li><a href="bnf.html">Backus-Naur Form</a></li>
+        <li><a href="cfg.html">Context-Free Grammars</a></li>
+        <li><a href="parsers.html">Parser Technology</a></li>
+        <li><a href="influence.html">The Algol Family</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Niklaus Wirth&rsquo;s Line &middot; ALGOL, BNF &amp; Context-Free Grammars &middot; PNW Research Series</p>
+    <p><a href="../index.html">PNW Research Series</a> &middot; <a href="index.html">Back to Overview</a></p>
+  </footer>
+</body>
+</html>

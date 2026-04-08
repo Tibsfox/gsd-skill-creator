@@ -24,7 +24,7 @@
 - `/tmp/missions/m1/mission_combined.pdf` — v1 (20p)
 - `/tmp/missions/m2/mission_v2.pdf` — v2 (29p)
 - `/tmp/missions/m3/mission_v3.pdf` — v3 (31p)
-- Original zips: `/home/foxy/Downloads/files(39).zip`, `files(40).zip`, `files(41).zip`
+- Original zips: `~/Downloads/files(39).zip`, `files(40).zip`, `files(41).zip`
 
 ## Remaining Work: Missions 2-5
 

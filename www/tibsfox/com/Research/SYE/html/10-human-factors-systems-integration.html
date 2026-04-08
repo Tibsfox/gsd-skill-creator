@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10. Human Factors &amp; Systems
+Integration — SYE Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1e1e3e;
+            --accent: #D84315;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #7986CB;
+            --border: #2a2a4a;
+            --primary: #283593;
+            --eng: #FFAB91;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--eng); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--eng); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--eng); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--eng); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--eng); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(121,134,203,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SYE — Systems Engineering<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SYE Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="human-factors-systems-integration">10. Human Factors &amp;
+    Systems Integration</h1>
+    <p><strong>Module:</strong> SYE-10 <strong>Series:</strong> Systems
+    Engineering (SYE) <strong>Cluster:</strong> Infrastructure
+    <strong>Sources:</strong> NASA/SP-2015-3709, NASA-STD-3001 Vol. 1
+    &amp; 2 (Rev C), NASA SE Handbook SP-2016-6105, INCOSE SE Handbook
+    v5, DoD MANPRINT (MIL-HDBK-46855A, AR 602-2), ECSS-E-ST-10-03C,
+    Endsley (1995), Reason (1990), Bainbridge (1983), Wickens Multiple
+    Resource Theory, HFACS (Shappell &amp; Wiegmann 2000), NTSB
+    DCA13MA081 (Asiana 214), NASA OIG report on CST-100 Starliner crew
+    interface.</p>
+    <hr />
+    <h2 id="abstract">Abstract</h2>
+    <p>Systems engineering without human factors is a category error.
+    Every aerospace system built to operate autonomously is still
+    designed, built, maintained, flown, monitored, updated, and
+    eventually decommissioned by humans. The moment engineers treat “the
+    human” as an afterthought — a pilot to be trained, an operator to be
+    instructed, a maintainer to be blamed — the integrated system
+    exhibits emergent failures that no subsystem specification
+    predicted. Human-System Integration (HSI) is the discipline that
+    inserts the human into the requirements flow from day one, treating
+    cognitive workload, anthropometric envelopes, procedural
+    maintainability, training load, and habitability as first-class
+    system attributes governed by the same V&amp;V rigor as mass, power,
+    thermal, and data budgets. This module surveys HSI as practiced in
+    NASA (per NASA/SP-2015-3709 and the NASA-STD-3001 family), DoD (per
+    MANPRINT), and ESA (per ECSS-E-ST-10-03C for Assembly, Integration,
+    Test and Verification). It then turns to the complementary challenge
+    of integrating the non-human side: thousands of subsystems from
+    hundreds of contractors across multiple integration facilities,
+    proven against a requirements baseline that no single test
+    environment can fully exercise. The through-line is simple:
+    integration is where systems engineering is either rewarded or
+    punished, and the human integrator — cockpit crew, ground
+    controller, launch engineer, ISS EVA specialist — is the final
+    integration element.</p>
+    <hr />
+    <h2 id="why-human-system-integration-exists-as-a-discipline">1. Why
+    Human-System Integration Exists as a Discipline</h2>
+    <p>Early aerospace programs treated humans as point-source
+    components with a fixed transfer function: give the pilot an
+    instrument, the pilot reads it, the pilot pulls a lever. This model
+    collapsed in the transition from mechanical cockpits to
+    electromechanical ones, from electromechanical to fly-by-wire, from
+    fly-by-wire to glass cockpits, and from glass cockpits to highly
+    automated envelope-protected flight management systems. Each
+    transition introduced surprise failure modes that were not in any
+    single subsystem FMEA. The Three Mile Island control room, the
+    Airbus A320 automation surprises of the late 1980s and early 1990s,
+    the Comair 5191 wrong-runway departure, the Korean Air 801 CFIT,
+    Colgan 3407, Air France 447, Asiana 214, and the Boeing 737 MAX MCAS
+    accidents all share a common signature: the human operator was
+    inserted into a loop whose behavior the human had not been trained
+    to anticipate, under conditions of degraded SA, elevated workload,
+    or ambiguous mode indication. None of these were subsystem failures
+    in the classical sense. They were integration failures in which the
+    human was the integrator of last resort and had been given a context
+    insufficient for the task.</p>
+    <p>NASA codified its institutional response to this pattern in
+    <strong>NASA/SP-2015-3709, Human Systems Integration (HSI)
+    Practitioner’s Guide</strong>, which formalizes HSI as a systems
+    engineering discipline, not an afterthought ergonomics pass.
+    NASA-STD-3001 Volume 1 (Crew Health) and Volume 2 (Human Factors,
+    Habitability, and Environmental Health) define the binding technical
+    standard for every human-rated NASA system from ISS increments
+    through Orion/Artemis, Gateway, and commercial crew vehicles under
+    the Commercial Crew Program. The standard carries requirements-level
+    authority: “the vehicle shall accommodate crew from the 1st
+    percentile American female to the 99th percentile American male” is
+    not a guideline, it is a verification item that traces through PDR
+    and CDR gates with the same discipline as a thermal margin or a
+    structural load factor.</p>
+    <p>On the defense side, <strong>MANPRINT</strong> (Manpower and
+    Personnel Integration) was institutionalized by the U.S. Army in
+    1984 after analysis of Vietnam-era system fielding showed repeated
+    instances of systems being delivered that could not be manned,
+    operated, or maintained by the soldier population that actually
+    existed. MANPRINT requires programs to address seven — later
+    expanded to eight — integration domains from milestone A onward. The
+    underlying insight is the same as NASA’s: waiting until after CDR to
+    discover that the sustainment population cannot physically or
+    cognitively operate the delivered system is a program-killing risk,
+    and the only way to avoid it is to carry human characteristics as
+    requirements throughout the design lifecycle.</p>
+    <p>ESA’s position is articulated through
+    <strong>ECSS-E-ST-10-03C</strong> (Assembly, Integration and Test)
+    and the ECSS-Q-ST-40 safety series, which together cover the
+    integration process from subsystem to flight article and treat
+    crewed-system ergonomics through the Human-Machine Interface (HMI)
+    engineering provisions of the ECSS-E-ST-10 parent standard.</p>
+    <hr />
+    <h2 id="the-hsi-domains-nasa-and-dod">2. The HSI Domains — NASA and
+    DoD</h2>
+    <p>HSI is not a monolithic activity; it is a structured set of
+    <strong>domains</strong>, each with its own practitioners,
+    requirements, verification methods, and metrics. Treating them as
+    separate domains prevents the common failure mode of reducing HSI to
+    “human factors” (which in practice usually means cockpit layout and
+    nothing else).</p>
+    <h3 id="nasa-hsi-domains-per-nasasp-2015-3709">2.1 NASA HSI Domains
+    (per NASA/SP-2015-3709)</h3>
+    <p>NASA recognizes six HSI domains:</p>
+    <table>
+    <colgroup>
+    <col style="width: 18%" />
+    <col style="width: 10%" />
+    <col style="width: 37%" />
+    <col style="width: 34%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>NASA Domain</th>
+    <th>Focus</th>
+    <th>Representative Questions</th>
+    <th>Verification Artifacts</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Human Factors Engineering (HFE)</strong></td>
+    <td>Design of displays, controls, workstations, procedures to match
+    human capabilities and limitations</td>
+    <td>Can the crew see the display under solar glare? Can a gloved
+    hand reach every switch?</td>
+    <td>HFE analysis reports, usability tests, task analyses</td>
+    </tr>
+    <tr>
+    <td><strong>Operations Resources</strong></td>
+    <td>Ground and flight crew sizing, skill mix, shift patterns,
+    procedural support tools</td>
+    <td>How many flight controllers are needed per shift? What skill
+    certifications?</td>
+    <td>Ops concept, manning studies, FCOH revisions</td>
+    </tr>
+    <tr>
+    <td><strong>Maintainability</strong></td>
+    <td>Design for accessibility, diagnosability, and repair — by EVA
+    crew, on-orbit IVA crew, or ground technicians</td>
+    <td>Can an orbital replacement unit (ORU) be swapped in a suited
+    EVA? Is the torque within crew limits?</td>
+    <td>Maintainability demonstrations, ORU trade studies, EVA
+    timelines</td>
+    </tr>
+    <tr>
+    <td><strong>Habitability and Environment</strong></td>
+    <td>Living conditions: acoustic, lighting, atmosphere, food, waste,
+    privacy, sleep, exercise, radiation</td>
+    <td>Is the cabin noise below 60 dBA for sleep? Does lighting support
+    circadian entrainment?</td>
+    <td>Habitability assessments, noise surveys, lighting analyses</td>
+    </tr>
+    <tr>
+    <td><strong>Safety</strong></td>
+    <td>Crew survivability, hazard identification and mitigation,
+    emergency procedures</td>
+    <td>What happens on cabin depress? Fire? Ammonia leak? Can the crew
+    reach the safe haven?</td>
+    <td>Safety data packages, hazard reports, emergency procedure
+    validations</td>
+    </tr>
+    <tr>
+    <td><strong>Training</strong></td>
+    <td>What the crew must know, how they acquire and maintain
+    proficiency, how training generalizes</td>
+    <td>How many sim hours to reach proficiency? What is the currency
+    decay curve?</td>
+    <td>Training Task List, training system requirements, proficiency
+    data</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="dod-manprint-domains">2.2 DoD MANPRINT Domains</h3>
+    <p>MANPRINT, as defined in Army Regulation 602-2 and
+    MIL-HDBK-46855A, recognizes eight domains:</p>
+    <ol type="1">
+    <li><strong>Manpower</strong> — how many people are required to
+    operate, maintain, and support the system across its lifecycle,
+    including the institutional footprint (training command, depot
+    staff, spares logistics personnel).</li>
+    <li><strong>Personnel</strong> — the aptitudes, skills, and physical
+    characteristics of the people who will actually operate the system,
+    drawn from the recruitable population rather than an idealized
+    operator.</li>
+    <li><strong>Training</strong> — what initial, unit, and sustainment
+    training is required, and whether the necessary training delivery
+    infrastructure (simulators, ranges, instructors) will exist.</li>
+    <li><strong>Human Factors Engineering</strong> — classical HFE:
+    anthropometric accommodation, display and control design, workload
+    management, error-tolerant interfaces.</li>
+    <li><strong>System Safety</strong> — design-induced hazards to
+    operators, maintainers, and bystanders, including crashworthiness
+    and survivability.</li>
+    <li><strong>Health Hazards</strong> — long-duration exposure risks:
+    noise-induced hearing loss, chemical exposure, vibration, shock,
+    thermal stress, ionizing and non-ionizing radiation.</li>
+    <li><strong>Soldier Survivability</strong> — the soldier’s ability
+    to avoid detection, withstand hits, and recover. Analogous to NASA’s
+    safe-haven and abort provisions.</li>
+    <li><strong>Habitability</strong> — the living and working
+    environment on long-duration deployments — crew quarters, food
+    service, sanitation, climate control.</li>
+    </ol>
+    <h3 id="hsi-domain-matrix-cross-mapping">2.3 HSI Domain Matrix —
+    Cross-Mapping</h3>
+    <pre><code>              | HFE | OpsRes | Maint | Habit | Safety | Train | Manpower | Personnel | HealthHz | Surviv |
+NASA HFE      |  X  |        |       |       |        |       |          |           |          |        |
+NASA OpsRes   |     |   X    |       |       |        |       |    X     |     X     |          |        |
+NASA Maint    |  X  |        |   X   |       |        |       |    X     |           |          |        |
+NASA Habit    |     |        |       |   X   |        |       |          |           |    X     |        |
+NASA Safety   |     |        |       |       |   X    |       |          |           |    X     |   X    |
+NASA Training |     |        |       |       |        |   X   |          |     X     |          |        |
+DoD Manpower  |     |   X    |       |       |        |       |    X     |           |          |        |
+DoD Personnel |     |        |       |       |        |       |          |     X     |          |        |
+DoD HFE       |  X  |        |       |       |        |       |          |           |          |        |
+DoD Safety    |     |        |       |       |   X    |       |          |           |    X     |   X    |
+DoD HealthHz  |     |        |       |   X   |        |       |          |           |    X     |        |
+DoD Surviv    |     |        |       |       |   X    |       |          |           |          |   X    |
+DoD Habit     |     |        |       |   X   |        |       |          |           |    X     |        |
+DoD Training  |     |        |       |       |        |   X   |          |     X     |          |        |</code></pre>
+    <p>The matrix reveals the imperfect but deliberate mapping: NASA’s
+    six domains cover the same problem space as DoD’s eight but carve it
+    differently. NASA does not explicitly carry a “manpower” domain
+    because flight crew size is a fixed program parameter driven by
+    vehicle design, while Army manpower depends on variable force
+    structure. NASA rolls “health hazards” into “habitability and
+    environment” and “safety.” DoD splits “soldier survivability” from
+    “safety” because ground combat survivability is a different problem
+    from design-induced hazard control.</p>
+    <hr />
+    <h2 id="ergonomics-and-anthropometrics">3. Ergonomics and
+    Anthropometrics</h2>
+    <p>Anthropometric accommodation is the most concrete HSI domain
+    because it reduces to measurable geometry. The legacy aerospace
+    standard was to accommodate the 5th percentile American female
+    through the 95th percentile American male — a design range that
+    deliberately excluded roughly 10% of the adult population.
+    NASA-STD-3001 Volume 2 tightened this for the Artemis generation by
+    requiring accommodation from the <strong>1st percentile American
+    female to the 99th percentile American male</strong> for cabin
+    geometry, seat design, reach envelopes, and suit fit, explicitly to
+    expand the pool of eligible astronaut candidates and to address the
+    fact that the historical 5th-to-95th envelope was based on a
+    1960s-era male-dominated population that no longer reflects the NASA
+    corps.</p>
+    <p>Anthropometric data in the standard include:</p>
+    <ul>
+    <li><strong>Static dimensions:</strong> stature, sitting height, eye
+    height, shoulder breadth, hip breadth, popliteal height.</li>
+    <li><strong>Reach envelopes:</strong> functional reach with and
+    without restraint, with and without pressurized suit gloves. Suit
+    gloves reduce grip envelope by ~30% and add ~20 mm radial offset at
+    the fingertips.</li>
+    <li><strong>Strength limits:</strong> peak push, pull, grip, and
+    torque forces, scaled to the accommodated population and degraded
+    for suited operation.</li>
+    <li><strong>Visual fields:</strong> central and peripheral,
+    constrained by helmet geometry.</li>
+    <li><strong>Microgravity anthropometry:</strong> in 0g, spinal
+    decompression increases stature by 3–5 cm, the neutral body posture
+    shifts to a semi-crouched “astronaut posture,” and the center of
+    mass rises. Workstation design for ISS and Orion uses the 0g body
+    envelopes, not 1g, because a 1g-sized crewstation leaves the
+    crewmember floating above the controls.</li>
+    </ul>
+    <p>The <strong>Boeing Starliner CST-100 crew interface
+    issues</strong> identified during NASA OIG review illustrate what
+    happens when these envelopes are interpreted loosely.
+    Reach-to-switch timing for abort initiation, glove-compatible switch
+    spacing, and display readability under cabin lighting variation all
+    required rework after integrated sims because the initial design
+    used anthropometric assumptions drawn from earlier Boeing crew
+    programs rather than from NASA-STD-3001 Rev C directly. None of
+    these were showstoppers, but each was an integration defect — the
+    class of problem HSI is specifically chartered to catch before metal
+    is bent.</p>
+    <hr />
+    <h2 id="cognitive-workload-and-attention">4. Cognitive Workload and
+    Attention</h2>
+    <p>Physical accommodation is necessary but insufficient. The
+    operator must also have enough cognitive bandwidth to execute the
+    task. Modeling cognitive workload draws on three intellectual
+    traditions:</p>
+    <h3 id="nasa-task-load-index-nasa-tlx">4.1 NASA Task Load Index
+    (NASA-TLX)</h3>
+    <p>Developed at NASA Ames in the 1980s and published in its
+    canonical form by Hart and Staveland (1988),
+    <strong>NASA-TLX</strong> is the most widely used multidimensional
+    subjective workload rating scale in aerospace. The instrument asks
+    operators to rate six dimensions on a bipolar 0–100 scale:</p>
+    <ol type="1">
+    <li><strong>Mental Demand</strong> — how much thinking, deciding,
+    remembering, looking, searching?</li>
+    <li><strong>Physical Demand</strong> — how much pushing, pulling,
+    turning, controlling, activating?</li>
+    <li><strong>Temporal Demand</strong> — how much time pressure?</li>
+    <li><strong>Performance</strong> — how successful were you at
+    accomplishing the task?</li>
+    <li><strong>Effort</strong> — how hard did you have to work?</li>
+    <li><strong>Frustration</strong> — how insecure, discouraged,
+    irritated, stressed?</li>
+    </ol>
+    <p>A weighted composite produces a single workload score that
+    correlates strongly with external performance measures (error rate,
+    reaction time, heart rate variability) and has been validated across
+    cockpit, control room, UAV ground station, and surgical domains. Its
+    virtue is that it is cheap, repeatable, and comparable across
+    studies. Its limitation is that it is subjective and retrospective;
+    by the time the crew rates the task, the high-workload window has
+    closed.</p>
+    <h3 id="multiple-resource-theory-wickens">4.2 Multiple Resource
+    Theory (Wickens)</h3>
+    <p>Chris Wickens’s <strong>Multiple Resource Theory</strong> (1984,
+    updated 2008) argues that human attention is not a single reservoir
+    but a set of partially independent pools defined by modality (visual
+    vs auditory), processing stage (perception vs cognition vs
+    response), code (spatial vs verbal), and visual channel (focal vs
+    ambient). Two tasks that draw from different pools can be performed
+    concurrently at relatively low cost; two tasks that draw from the
+    same pool interfere. The implication for crewstation design is that
+    auditory warnings do not consume visual scan budget, that spatial
+    and verbal displays can coexist, and that pulling the pilot’s gaze
+    off the outside world to check a head-down display incurs a
+    measurable penalty under high-task conditions. Heads-Up Display
+    (HUD) design explicitly trades on this principle.</p>
+    <h3 id="cognitive-bottlenecks-and-attention-limits">4.3 Cognitive
+    Bottlenecks and Attention Limits</h3>
+    <p>The <strong>psychological refractory period</strong>,
+    <strong>attentional blink</strong>, and <strong>change
+    blindness</strong> are well-documented experimental findings with
+    direct aerospace implications. The cockpit that assumes the crew
+    will notice a quiet amber caution during a missed approach is
+    relying on a visual salience mechanism that has been experimentally
+    shown to fail under load. Design responses include redundant coding
+    (color + shape + position + auditory tone), temporal spacing of
+    high-workload events, automated alerting with priority hierarchies,
+    and “sterile cockpit” procedural rules below 10,000 ft that
+    constrain the task set.</p>
+    <hr />
+    <h2 id="situational-awareness-endsleys-three-levels">5. Situational
+    Awareness — Endsley’s Three Levels</h2>
+    <p>Mica Endsley’s 1995 model remains the canonical definition of
+    <strong>situational awareness (SA)</strong>:</p>
+    <blockquote>
+    <p>“The perception of the elements in the environment within a
+    volume of time and space, the comprehension of their meaning, and
+    the projection of their status in the near future.”</p>
+    </blockquote>
+    <p>This maps to three levels:</p>
+    <ul>
+    <li><strong>Level 1 — Perception.</strong> Are the relevant cues
+    being picked up at all? (Is the altitude tape visible? Is the
+    traffic target on the scope? Is the warning bell audible?)</li>
+    <li><strong>Level 2 — Comprehension.</strong> Does the operator
+    integrate the cues into an understanding of current state? (Is the
+    aircraft descending through the cleared altitude? Is the approaching
+    traffic a conflict?)</li>
+    <li><strong>Level 3 — Projection.</strong> Does the operator project
+    forward to anticipate future state? (Will we bust the floor in the
+    next 30 seconds? Will closure to the target require an evasive
+    maneuver?)</li>
+    </ul>
+    <p>SA failures typically manifest at Level 2 or Level 3 — the pilot
+    sees the data but does not understand its implication, or
+    understands it but does not project what it means for the next 60
+    seconds. The Asiana 214 approach to SFO in 2013 was a textbook Level
+    2/3 SA loss: the crew saw the airspeed decaying, saw the glidepath
+    diverging, saw the approach becoming unstable, but did not integrate
+    these cues into a correct understanding of the autothrottle mode
+    (FLCH speed armed but inactive), and did not project the consequence
+    (impact with the seawall). The NTSB final report (DCA13MA081)
+    explicitly cited automation complexity, mode confusion, and
+    inadequate monitoring skill as contributing factors — a catalogue of
+    HSI failures in an aircraft that was mechanically airworthy
+    throughout.</p>
+    <p>SA is measured in practice using:</p>
+    <ul>
+    <li><strong>SAGAT (Situation Awareness Global Assessment
+    Technique)</strong> — a simulator is frozen, displays blanked, and
+    the operator is queried on relevant state variables at all three
+    levels; scored against ground truth.</li>
+    <li><strong>SPAM (Situation Present Assessment Method)</strong> —
+    real-time probe queries during the task.</li>
+    <li><strong>SART (Situation Awareness Rating Technique)</strong> —
+    self-report on demand, supply, and understanding.</li>
+    </ul>
+    <hr />
+    <h2 id="human-error-taxonomy">6. Human Error Taxonomy</h2>
+    <h3 id="reasons-generic-error-modeling-system-gems">6.1 Reason’s
+    Generic Error Modeling System (GEMS)</h3>
+    <p>James Reason’s 1990 framework distinguishes:</p>
+    <ul>
+    <li><strong>Slips</strong> — actions performed correctly in intent
+    but incorrectly in execution (hit the wrong switch). Skill-based
+    behavior, automatic execution.</li>
+    <li><strong>Lapses</strong> — failures of memory (forgot to lower
+    the gear). Skill-based, interrupted sequence.</li>
+    <li><strong>Mistakes</strong> — correct execution of the wrong plan
+    (chose the wrong approach procedure). Rule-based (wrong rule
+    applied) or knowledge-based (novel situation, incorrect
+    reasoning).</li>
+    <li><strong>Violations</strong> — deliberate deviations from rules.
+    Routine (cut a corner because everyone does), situational (pressured
+    by weather or schedule), or exceptional (one-off emergency
+    decision).</li>
+    </ul>
+    <p>Reason’s layered framework maps these onto Rasmussen’s
+    <strong>Skill/Rule/Knowledge (SRK) hierarchy</strong>: skill-based
+    behavior is automatic and produces slips and lapses; rule-based
+    behavior is procedural and produces mistakes when the wrong rule is
+    selected; knowledge-based behavior is novel reasoning and produces
+    mistakes under ambiguity and stress.</p>
+    <h3 id="hfacs-human-factors-analysis-and-classification-system">6.2
+    HFACS — Human Factors Analysis and Classification System</h3>
+    <p>Scott Shappell and Doug Wiegmann’s <strong>HFACS</strong> (2000)
+    extends Reason’s “Swiss cheese” model into a four-tier investigation
+    taxonomy used by the U.S. Navy, USAF, FAA, and now adopted
+    internationally:</p>
+    <ul>
+    <li><strong>Tier 1 — Unsafe Acts:</strong> errors (decision,
+    skill-based, perceptual) and violations (routine, exceptional).</li>
+    <li><strong>Tier 2 — Preconditions for Unsafe Acts:</strong>
+    environmental factors (physical, technological), condition of
+    operators (adverse mental/physiological state, physical/mental
+    limitation), personnel factors (CRM, personal readiness).</li>
+    <li><strong>Tier 3 — Unsafe Supervision:</strong> inadequate
+    supervision, planned inappropriate operations, failure to correct
+    known problems, supervisory violations.</li>
+    <li><strong>Tier 4 — Organizational Influences:</strong> resource
+    management, organizational climate, organizational process.</li>
+    </ul>
+    <p>HFACS succeeds because it forces investigators past the
+    attractive answer of “pilot error” into the organizational
+    conditions that made the unsafe act possible. Almost every HFACS
+    Tier 1 finding is paired with at least one Tier 3 or Tier 4 finding,
+    which is what converts individual lessons into institutional
+    change.</p>
+    <hr />
+    <h2 id="human-in-the-loop-design-and-automation-surprises">7.
+    Human-in-the-Loop Design and Automation Surprises</h2>
+    <h3 id="bainbridges-ironies-of-automation">7.1 Bainbridge’s Ironies
+    of Automation</h3>
+    <p>Lisanne Bainbridge’s 1983 paper <strong>“Ironies of
+    Automation”</strong> remains the most cited short essay in the
+    field. Its core arguments:</p>
+    <ol type="1">
+    <li><strong>The irony of skill degradation.</strong> If you automate
+    the routine tasks, you leave the human with only the non-routine
+    tasks. But the non-routine tasks are precisely the ones that require
+    skill acquired through routine practice. Automation therefore
+    undermines the skill it depends on the human having when the
+    automation fails.</li>
+    <li><strong>The irony of monitoring.</strong> Humans are
+    demonstrably poor passive monitors over long periods. Yet automation
+    frequently reassigns the human to the passive monitoring role —
+    watching for the rare event when the automation misbehaves.</li>
+    <li><strong>The irony of the residual task.</strong> The human is
+    left with the tasks the designer could not figure out how to
+    automate, which are by definition the hardest ones. The human gets
+    the garbage while the computer gets the easy wins.</li>
+    <li><strong>The irony of abstraction.</strong> Automation hides the
+    underlying process behind layers of display. When the automation
+    misbehaves, the human must debug a process they cannot see
+    directly.</li>
+    </ol>
+    <p>Asiana 214 is a Bainbridge textbook case: the autothrottle was
+    assumed to wake up and protect airspeed; when it did not (because
+    the crew had armed FLCH SPD during a visual approach, a non-standard
+    configuration), the crew was the last line of defense but had been
+    passively monitoring an automation they trusted to handle the
+    low-altitude envelope.</p>
+    <h3 id="mode-errors">7.2 Mode Errors</h3>
+    <p>A <strong>mode error</strong> is the class of failure in which
+    the operator issues a command appropriate for one automation mode
+    while the system is actually in a different mode. The Airbus A320
+    family has historically been studied for mode confusion because its
+    Flight Mode Annunciator (FMA) encodes the active and armed modes of
+    the autopilot, autothrottle, and FMS in a compact form that, under
+    high workload, can be misread. The canonical mode-error accident is
+    Strasbourg 1992 (Air Inter 148), in which a vertical-speed command
+    of -3300 ft/min was entered when the intended mode was a -3.3°
+    flightpath-angle descent; the resulting high descent rate produced
+    CFIT in the Vosges mountains. Post-accident, the Flight Mode
+    Annunciator was redesigned to differentiate the two modes more
+    clearly — a retrofit HSI fix to an HSI design defect.</p>
+    <h3 id="human-in-the-loop-design-principles">7.3 Human-in-the-Loop
+    Design Principles</h3>
+    <p>Mature HSI design follows a handful of principles that have
+    emerged from 40 years of automation-surprise case studies:</p>
+    <ul>
+    <li><strong>Observable automation.</strong> The operator must be
+    able to see what the automation is currently doing, what it is about
+    to do, and why.</li>
+    <li><strong>Directable automation.</strong> The operator must be
+    able to tell the automation what to do, without fighting it or being
+    forced to disengage it entirely.</li>
+    <li><strong>Predictable mode transitions.</strong> The automation
+    must not change modes silently or in ways the operator cannot
+    anticipate.</li>
+    <li><strong>Graceful degradation.</strong> When the automation
+    reaches the edge of its competence, it must hand off to the operator
+    with enough context for the operator to take over, not dump them
+    into the soup.</li>
+    <li><strong>Workload inversion awareness.</strong> The automation
+    should not maximize its contribution during low-workload phases and
+    minimize it during high-workload phases — which, perversely, is what
+    many autopilots did historically.</li>
+    </ul>
+    <hr />
+    <h2 id="systems-integration-at-scale">8. Systems Integration at
+    Scale</h2>
+    <p>HSI is half the module. The other half is the integration problem
+    on the non-human side: how does a program prove that a system
+    composed of thousands of subsystems, delivered by hundreds of
+    contractors across a decade, meets its requirements as an integrated
+    whole?</p>
+    <h3 id="the-integration-problem">8.1 The Integration Problem</h3>
+    <p>A modern human-rated launch vehicle has on the order of 10^6
+    parts, 10^4 requirements, and 10^3 interfaces documented in
+    Interface Control Documents (see SYE-07). No single test environment
+    can exercise the full operating envelope of the integrated system.
+    You cannot launch a Shuttle stack in a wind tunnel. You cannot
+    ignite SLS core-stage engines except on a test stand (the Green Run
+    at Stennis) and then for flight. You cannot expose Orion to the full
+    lunar thermal environment except in flight. Integration proof
+    therefore decomposes into a stack of verification activities:</p>
+    <ol type="1">
+    <li><strong>Component qualification</strong> — parts verified
+    against their individual specs.</li>
+    <li><strong>Subsystem integration</strong> — components integrated
+    into subsystems, tested against subsystem specs.</li>
+    <li><strong>Element integration</strong> — subsystems integrated
+    into elements (core stage, upper stage, spacecraft, payload).</li>
+    <li><strong>Vehicle integration</strong> — elements integrated into
+    the full launch vehicle, typically at the Vehicle Assembly Building
+    (KSC) or equivalent.</li>
+    <li><strong>End-to-end mission rehearsal</strong> — integrated
+    simulations (“wet dress rehearsal,” fueling tests, countdown
+    demonstrations, flight readiness firings).</li>
+    </ol>
+    <p>Each rung has its own verification facility, procedures, and data
+    products. The integration flow is documented in ECSS-E-ST-10-03C on
+    the European side and in NASA’s program-specific Integration and
+    Test Plans (the SLS ITP, the Orion ITP, the Artemis Mission
+    ITP).</p>
+    <h3 id="nasa-integration-facilities">8.2 NASA Integration
+    Facilities</h3>
+    <p>NASA’s integration capability is distributed across its field
+    centers by historical capability domain:</p>
+    <ul>
+    <li><strong>Marshall Space Flight Center (MSFC), Huntsville
+    AL.</strong> Propulsion systems integration, core stage integration,
+    SLS programmatic integration, structural test stands, the Advanced
+    Propulsion Test Facility.</li>
+    <li><strong>Johnson Space Center (JSC), Houston TX.</strong> Crew
+    systems integration, Mission Control Center, astronaut training
+    facilities (NBL, Space Vehicle Mockup Facility), ISS and Orion crew
+    interface integration, mission simulators.</li>
+    <li><strong>Kennedy Space Center (KSC), Cape Canaveral FL.</strong>
+    Launch processing, Vehicle Assembly Building, Firing Room, Launch
+    Control Center, Crawler-Transporter operations, pad integration. KSC
+    is the point where every element from every contractor finally meets
+    in flight configuration.</li>
+    <li><strong>Stennis Space Center (SSC), MS.</strong> Propulsion test
+    — the only facility in the U.S. that can hot-fire a full SLS core
+    stage (the Green Run).</li>
+    <li><strong>Glenn Research Center (GRC), Cleveland OH.</strong>
+    Propulsion and power systems components; cryogenic fluid
+    management.</li>
+    <li><strong>Langley Research Center (LaRC), Hampton VA.</strong>
+    Aerodynamics, structural dynamics, entry/descent/landing.</li>
+    </ul>
+    <p>The integration facility is not just a building; it is a triad of
+    <strong>facility + tooling + trained workforce</strong>. Rebuilding
+    lost integration capability is notoriously hard — the Saturn V
+    production line was dismantled after Apollo, and the Shuttle tooling
+    was disposed of between 2011 and 2014, leaving SLS to re-establish
+    core-stage tooling at MSFC’s Michoud Assembly Facility at
+    substantial schedule cost.</p>
+    <h3 id="aitv-assembly-integration-test-and-verification">8.3
+    AIT&amp;V — Assembly, Integration, Test, and Verification</h3>
+    <p>ECSS-E-ST-10-03C formalizes the <strong>Assembly, Integration and
+    Test (AIT)</strong> process with its associated verification
+    (ECSS-E-ST-10-02C Verification). The process decomposes into:</p>
+    <ul>
+    <li><strong>Model philosophy.</strong> Which test models will be
+    built? Options include the Structural Model (SM), Thermal Model
+    (TM), Engineering Model (EM), Qualification Model (QM), Proto-Flight
+    Model (PFM), and Flight Model (FM). A “proto-flight” approach uses
+    the flight article as its own qualification article, trading test
+    margin for schedule and cost — appropriate for some classes of
+    mission, dangerous for others.</li>
+    <li><strong>Test plans.</strong> Environmental (thermal vacuum,
+    vibration, acoustic, EMC), functional, interface, and end-to-end.
+    Each test has an entry criteria list, a procedure, a success
+    criteria list, and a data package.</li>
+    <li><strong>Anomaly resolution.</strong> Every deviation from
+    expected behavior is logged and dispositioned. The integration team
+    cannot close a test with open anomalies; each must be explained,
+    corrected, or accepted with rationale.</li>
+    <li><strong>Verification control document.</strong> The compliance
+    matrix that tracks every requirement to its verification method,
+    facility, and evidence.</li>
+    </ul>
+    <h3 id="the-integration-process-diagram">8.4 The Integration Process
+    Diagram</h3>
+    <pre><code>  Requirements (SYE-01)                               Verified Integrated System
+        |                                                      ^
+        v                                                      |
+  [ Subsystem Specs ]                              [ Flight Readiness Review ]
+        |                                                      ^
+        v                                                      |
+  [ Component Design ]                             [ End-to-End Mission Rehearsal ]
+        |                                                      ^
+        v                                                      |
+  [ Component Manufacture ]                        [ Vehicle Integration at KSC/VAB ]
+        |                                                      ^
+        v                                                      |
+  [ Component Qualification ] ---&gt; [ Subsystem Integration ] ---&gt; [ Element Integration ]
+        |                                 |                              |
+        v                                 v                              v
+  [ Component Test Facilities ]   [ Subsystem Test Stands ]    [ Green Run, Thermal Vac ]
+        |                                 |                              |
+        +-- EVERY STAGE FEEDS ANOMALIES BACK TO REQUIREMENTS AND DESIGN --+
+                                          |
+                                          v
+                              [ Verification Control Document ]
+                              [ Compliance Matrix, Requirements Trace ]</code></pre>
+    <p>The critical insight is that integration is not a phase at the
+    end of the program; it is a continuous flow that begins when the
+    first two components are joined and does not end until the last
+    flight of the system. The verification control document is the
+    backbone that proves, at each review gate (see SYE-09), that the
+    integrated system meets the requirements baseline.</p>
+    <h3 id="the-integration-test-environment-problem">8.5 The
+    Integration Test Environment Problem</h3>
+    <p>No single test environment can reproduce the integrated system’s
+    full operating envelope. A Shuttle could not be flown in a wind
+    tunnel. SLS cannot be test-launched before its first mission. The
+    program therefore accepts that verification is incomplete until
+    flight test — and structures its readiness reviews to make this
+    explicit. The <strong>Flight Readiness Review (FRR)</strong> is
+    precisely the meeting at which the program decides whether the
+    residual integration risk, after all ground verification, is
+    acceptable for flight. Apollo lost Apollo 1 when ground integration
+    testing (a plugs-out test in a pure oxygen atmosphere) exposed a
+    cabin-fire hazard that had not been identified during design review.
+    Challenger and Columbia exposed integration failures at the
+    O-ring-cold-temperature and foam-strike-thermal-protection
+    interfaces respectively — both had been flagged in sub-program
+    analyses but were not elevated to integrated vehicle risk in a way
+    that the FRR would catch.</p>
+    <hr />
+    <h2 id="real-examples-hsi-in-flight-programs">9. Real Examples — HSI
+    in Flight Programs</h2>
+    <h3 id="apollo-cockpit">9.1 Apollo Cockpit</h3>
+    <p>The Apollo Command Module instrument panel is a landmark in
+    crew-station design. Designed under intense schedule pressure
+    between 1962 and 1968, it distributed more than 400 switches,
+    circuit breakers, and indicators across panels visible to all three
+    crew positions. Key HSI decisions: redundant critical controls so
+    that any of the three crewmembers could execute an abort; monochrome
+    displays chosen for reliability and to sidestep color-gamut problems
+    under cabin lighting variation; the Display and Keyboard (DSKY)
+    interface for the Apollo Guidance Computer, whose verb-noun command
+    protocol was famously terse but trainable and proved operationally
+    robust across all Apollo missions.</p>
+    <h3 id="shuttle-glass-cockpit-upgrade-meds">9.2 Shuttle Glass
+    Cockpit Upgrade (MEDS)</h3>
+    <p>The Space Shuttle was delivered in 1981 with an electromechanical
+    cockpit that required four CRTs and roughly 32 round gauges. Between
+    1998 and 2002, NASA replaced the legacy cockpit with the
+    <strong>Multifunction Electronic Display Subsystem (MEDS)</strong> —
+    11 full-color LCD displays with drastically reduced maintenance load
+    and greatly improved pilot SA. Atlantis was the first Orbiter
+    retrofit in 1998; the program was complete across all remaining
+    Orbiters by 2002. MEDS is a textbook example of mid-life HSI
+    modernization: the underlying aerodynamics, propulsion, and thermal
+    protection did not change, but the crew’s comprehension and
+    projection (Endsley Levels 2 and 3) improved enough to justify the
+    retrofit cost during the second half of the Shuttle program.</p>
+    <h3 id="iss-crew-procedures">9.3 ISS Crew Procedures</h3>
+    <p>The International Space Station runs on procedures. Every IVA
+    activity, EVA timeline, science experiment, maintenance task, and
+    contingency response is specified in a procedure document developed
+    by the Mission Control procedures team at JSC with direct crew
+    review and simulator validation. ISS procedures are the
+    institutional memory of a crewed spacecraft that has operated
+    continuously since November 2000, with crews rotating at roughly
+    6-month intervals. The procedure system is itself an HSI artifact:
+    it encodes the workload and training assumptions of the HSI analysis
+    into an operational document that is used in flight.</p>
+    <h3 id="orion-artemis-crew-interface">9.4 Orion / Artemis Crew
+    Interface</h3>
+    <p>Orion’s crew interface reflects lessons from both Apollo and
+    Shuttle. The switch count is deliberately kept low (roughly 60
+    physical switches versus Apollo’s 400+) and the primary interaction
+    path is through three Aitech glass-cockpit displays derived from
+    commercial avionics practice. The underlying philosophy is
+    <strong>“fly the glass”</strong> — normal operations are conducted
+    through the display, with physical switches reserved for abort,
+    safing, and display-failure backup. Crew training, workload budgets,
+    and procedure authoring are being developed in parallel with the
+    vehicle hardware in the Orion Crew Exploration Vehicle Avionics
+    Integration Laboratory (CAIL) at JSC.</p>
+    <h3 id="boeing-starliner-crew-interface-issues">9.5 Boeing Starliner
+    Crew Interface Issues</h3>
+    <p>CST-100 Starliner’s crew interface has been the subject of
+    multiple NASA independent reviews. The key HSI findings, per public
+    OIG and NASA Advisory Council materials, include timeline mismatches
+    between the Boeing design and NASA-STD-3001 Rev C anthropometric
+    requirements for gloved reach; abort initiation workflow that
+    required iteration after integrated sim exposure; and crew feedback
+    on control layout and display cueing that was addressed through
+    post-CDR change orders. None of these are unusual for a
+    first-of-type human-rated vehicle — the same class of finding
+    appeared on Dragon 2 before Demo-2 — but they reinforce the lesson
+    that human-rating requires integrated sims with the actual flight
+    crew, in the actual suits, at a fidelity that exposes human-system
+    interaction defects.</p>
+    <hr />
+    <h2 id="synthesis-hsi-as-the-integration-of-integrations">10.
+    Synthesis: HSI as the Integration of Integrations</h2>
+    <p>Returning to the opening thesis: HSI is not a separate discipline
+    from systems integration; it is the discipline that acknowledges
+    that the human is the final integration element. The crew in the
+    cockpit integrates the automation, the propulsion, the environmental
+    control, the communications, the procedures, and the training into a
+    mission outcome. The flight controller at the console integrates the
+    telemetry stream, the procedure flow, the ground support equipment,
+    and the team coordination into a real-time decision. The maintainer
+    in the VAB integrates the torque spec, the access panel, the
+    tooling, and the procedure into a flight-worthy subassembly. Each of
+    these humans is the last-meter integrator for their part of the
+    system, and each of them is operating under anthropometric,
+    cognitive, and organizational constraints that must have been
+    engineered into the system upstream.</p>
+    <p>A mature HSI program produces several tangible artifacts that
+    thread through the rest of the SE discipline (see SYE-01 through
+    SYE-09):</p>
+    <ul>
+    <li><strong>HSI Plan.</strong> A top-level plan that defines which
+    HSI domains will be addressed, by whom, with what resources, and
+    against what standards. Typically drafted by the SRR (Systems
+    Requirements Review) gate.</li>
+    <li><strong>Task Analyses.</strong> Structured decompositions of
+    crew and operator tasks that feed requirements for displays,
+    controls, procedures, and training.</li>
+    <li><strong>Workload Budgets.</strong> Per-phase cognitive and
+    physical workload estimates, with margins, treated analogously to
+    mass and power budgets.</li>
+    <li><strong>Anthropometric Accommodation Reports.</strong> Verified
+    reach envelopes, seating accommodation, and suit-fit data.</li>
+    <li><strong>Usability and Human-in-the-Loop Test Reports.</strong>
+    Simulator and mockup test data that feed the verification control
+    document.</li>
+    <li><strong>Training Task List and Training System
+    Requirements.</strong> The training-program analog of the SRS.</li>
+    </ul>
+    <p>When these artifacts exist, are maintained in configuration
+    control (SYE-06), trace to requirements (SYE-01), and are verified
+    through the V&amp;V process (SYE-03), HSI becomes a first-class
+    citizen of the SE lifecycle rather than an end-of-CDR clean-up
+    activity. When they do not exist, the program discovers HSI defects
+    during integrated testing at 10x to 100x the cost of catching them
+    in requirements — which is the same cost multiplier the SE
+    discipline sees for requirements defects generally, because HSI
+    <em>is</em> a class of requirements defect when ignored.</p>
+    <hr />
+    <h2 id="key-references">Key References</h2>
+    <ul>
+    <li>NASA. <em>NASA/SP-2015-3709 Human Systems Integration (HSI)
+    Practitioner’s Guide.</em></li>
+    <li>NASA. <em>NASA-STD-3001, Vol. 1 Crew Health</em> and <em>Vol. 2
+    Human Factors, Habitability, and Environmental Health.</em> Rev C,
+    2022/2023.</li>
+    <li>NASA. <em>NASA Systems Engineering Handbook, NASA/SP-2016-6105
+    Rev 2.</em></li>
+    <li>INCOSE. <em>Systems Engineering Handbook, v5.</em> 2023.</li>
+    <li>U.S. Army. <em>AR 602-2 Human Systems Integration in the System
+    Acquisition Process.</em></li>
+    <li>DoD. <em>MIL-HDBK-46855A, Human Engineering Program Process and
+    Procedures.</em></li>
+    <li>ECSS. <em>ECSS-E-ST-10-03C Assembly, Integration and
+    Test.</em></li>
+    <li>Endsley, M. R. (1995). “Toward a theory of situation awareness
+    in dynamic systems.” <em>Human Factors, 37</em>(1), 32–64.</li>
+    <li>Hart, S. G., &amp; Staveland, L. E. (1988). “Development of
+    NASA-TLX.” In P.A. Hancock &amp; N. Meshkati (Eds.), <em>Human
+    mental workload.</em></li>
+    <li>Wickens, C. D. (2008). “Multiple Resources and Mental Workload.”
+    <em>Human Factors, 50</em>(3), 449–455.</li>
+    <li>Reason, J. (1990). <em>Human Error.</em> Cambridge University
+    Press.</li>
+    <li>Shappell, S. A., &amp; Wiegmann, D. A. (2000). <em>The Human
+    Factors Analysis and Classification System–HFACS.</em> FAA
+    DOT/FAA/AM-00/7.</li>
+    <li>Bainbridge, L. (1983). “Ironies of Automation.” <em>Automatica,
+    19</em>(6), 775–779.</li>
+    <li>NTSB. <em>DCA13MA081 — Asiana Airlines Flight 214, Boeing
+    777-200ER, San Francisco, 6 July 2013.</em></li>
+    <li>NASA OIG. <em>NASA’s Management of the Commercial Crew
+    Program</em> (various reports 2019–2023).</li>
+    <li>Rasmussen, J. (1983). “Skills, rules, and knowledge; signals,
+    signs, and symbols.” <em>IEEE Transactions on Systems, Man, and
+    Cybernetics.</em></li>
+    </ul>
+    <hr />
+    <p><strong>Module 10 of 10 — Systems Engineering research series
+    (SYE). Rosetta Cluster: Infrastructure. Cross-references: SYE-01
+    Requirements, SYE-03 V&amp;V, SYE-06 CM, SYE-07 ICDs, SYE-09
+    Lifecycle; NASA mission series, AMS, SOO, RCA.</strong></p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SYE Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SYE/">tibsfox.com/Research/SYE</a>
+    </div>
+</body>
+</html>

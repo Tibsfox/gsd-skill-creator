@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta Integration &mdash; Go</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gol">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">Go in Context &mdash; vs Rust, vs Java, vs Python, vs C, vs Node.js</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="concurrency.html">Concurrency</a>
+      <a href="gc.html">GC</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Go occupies a unique position: fast enough for infrastructure, simple enough that any team can maintain the codebase, with concurrency built into the language rather than bolted on.
+    </blockquote>
+
+    <h2>Cross-Language Comparison</h2>
+    <table>
+      <thead><tr><th>Language</th><th>Memory</th><th>Concurrency</th><th>Compilation</th><th>Binary</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Go</strong></td><td>GC (concurrent, &lt;1 ms)</td><td>Goroutines + channels (CSP)</td><td>AOT, seconds</td><td>Static, single file</td></tr>
+        <tr><td><strong>Rust</strong></td><td>Ownership (no GC)</td><td>Threads + async/await</td><td>AOT, minutes</td><td>Static, single file</td></tr>
+        <tr><td><strong>Java</strong></td><td>GC (G1/ZGC)</td><td>Threads + virtual threads</td><td>JIT (JVM)</td><td>JAR + JVM</td></tr>
+        <tr><td><strong>C++</strong></td><td>Manual + RAII</td><td>Threads, atomics, coroutines</td><td>AOT, minutes</td><td>Depends on linking</td></tr>
+        <tr><td><strong>C</strong></td><td>Manual (malloc/free)</td><td>pthreads</td><td>AOT, seconds</td><td>Static or dynamic</td></tr>
+        <tr><td><strong>Python</strong></td><td>Refcount + GC</td><td>GIL + asyncio</td><td>Interpreted</td><td>Script + runtime</td></tr>
+        <tr><td><strong>Node.js</strong></td><td>V8 GC</td><td>Event loop + Workers</td><td>JIT (V8)</td><td>Script + runtime</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Go vs Rust &mdash; The Cloud-Native Rivalry</h2>
+    <div class="card">
+      <p>Go and Rust make <em>opposite</em> trade-offs and are more complementary than competitive:</p>
+      <table>
+        <thead><tr><th>Dimension</th><th>Go</th><th>Rust</th></tr></thead>
+        <tbody>
+          <tr><td>Memory safety</td><td>GC (safe but with pauses)</td><td>Ownership (safe, no pauses)</td></tr>
+          <tr><td>Learning curve</td><td>Days to productive</td><td>Weeks to months</td></tr>
+          <tr><td>Compilation speed</td><td>Seconds (design goal)</td><td>Minutes (monomorphization)</td></tr>
+          <tr><td>Runtime performance</td><td>~2&ndash;5&times; slower than C</td><td>Within ~10% of C</td></tr>
+          <tr><td>Concurrency model</td><td>Goroutines (simple, GC-compatible)</td><td>async/await (complex, zero-cost)</td></tr>
+          <tr><td>Ecosystem niche</td><td>Cloud infra, DevOps, APIs</td><td>Systems, embedded, browsers, performance-critical</td></tr>
+          <tr><td>Data races</td><td>Possible (caught by <code>-race</code>)</td><td>Impossible in safe code</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Discord&rsquo;s case study:</strong> Discord rewrote a latency-sensitive Go service in Rust because Go&rsquo;s GC pauses were unacceptable. For most services, Go&rsquo;s pauses are invisible.</p>
+    </div>
+
+    <h2>Go vs Java</h2>
+    <table>
+      <thead><tr><th>Dimension</th><th>Go</th><th>Java</th></tr></thead>
+      <tbody>
+        <tr><td>Binary</td><td>Single static binary, ~10 MB</td><td>JAR + JVM (~100 MB minimum)</td></tr>
+        <tr><td>Startup</td><td>Milliseconds</td><td>Seconds (improving with GraalVM)</td></tr>
+        <tr><td>GC</td><td>Simple (one collector, GOGC)</td><td>Complex (7+ collectors, hundreds of flags)</td></tr>
+        <tr><td>Concurrency</td><td>Goroutines (built-in, cheap)</td><td>Virtual threads (Java 21, similar concept)</td></tr>
+        <tr><td>Generics</td><td>Minimal (since 1.18)</td><td>Full (since Java 5, with erasure)</td></tr>
+        <tr><td>Ecosystem</td><td>Cloud-native focused</td><td>Enterprise + big data, vastly larger</td></tr>
+        <tr><td>Error handling</td><td><code>if err != nil</code></td><td>Exceptions (checked + unchecked)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Go vs Python</h2>
+    <div class="card green">
+      <p>Go is <strong>~100&times; faster</strong> than Python for compute-bound work, statically typed, and compiles to a single binary. Python has the data-science/ML ecosystem (NumPy, Pandas, PyTorch) that Go cannot match. For web services, Go and Python compete directly; Go wins on performance and operational simplicity (one binary, no virtualenv, no pip).</p>
+    </div>
+
+    <h2>Same Program, Different Languages</h2>
+
+    <h3>Go</h3>
+<pre><code>package main
+
+import (
+    "fmt"
+    "math"
+)
+
+type Shape interface { Area() float64 }
+
+type Circle struct{ R float64 }
+func (c Circle) Area() float64 { return math.Pi * c.R * c.R }
+
+type Square struct{ Side float64 }
+func (s Square) Area() float64 { return s.Side * s.Side }
+
+func main() {
+    shapes := []Shape{Circle{2.0}, Square{3.0}}
+    for _, s := range shapes {
+        fmt.Println(s.Area())
+    }
+}</code></pre>
+
+    <h3>Rust</h3>
+<pre><code>enum Shape { Circle { r: f64 }, Square { side: f64 } }
+
+fn area(s: &amp;Shape) -&gt; f64 {
+    match s {
+        Shape::Circle { r } =&gt; std::f64::consts::PI * r * r,
+        Shape::Square { side } =&gt; side * side,
+    }
+}
+
+fn main() {
+    let shapes = vec![Shape::Circle { r: 2.0 }, Shape::Square { side: 3.0 }];
+    for s in &amp;shapes { println!("{}", area(s)); }
+}</code></pre>
+
+    <p>Go uses <strong>interfaces</strong> (implicit structural typing, runtime dispatch). Rust uses <strong>enums</strong> (algebraic data types, compile-time exhaustive match). Both avoid inheritance; different mechanisms.</p>
+
+    <h2>When to Reach for Go</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Yes, use Go</h4>
+        <p>Cloud infrastructure. Microservices. CLI tools. DevOps tooling. Network services. When you need a team of 20 to maintain the code after you leave.</p>
+      </div>
+      <div class="pillar">
+        <h4>Consider Go</h4>
+        <p>Web backends. API servers. Data pipelines that don&rsquo;t need Spark. Anything where startup time and binary simplicity matter.</p>
+      </div>
+      <div class="pillar">
+        <h4>Use something else</h4>
+        <p>Data science/ML (Python). Browser frontends (JavaScript). Embedded/firmware (Rust/C). Latency-critical without GC (Rust). Enterprise with existing Java stack.</p>
+      </div>
+      <div class="pillar">
+        <h4>Do NOT use Go</h4>
+        <p>Kernel development. GPU computing. Heavy numerical work. Mobile apps. When you need guaranteed sub-microsecond latency (GC can spike).</p>
+      </div>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>RST</td><td>Rust</td><td>The central rivalry: GC vs ownership, simplicity vs safety</td></tr>
+        <tr><td>CEE</td><td>C</td><td>Go is &ldquo;C for the 21st century&rdquo; &mdash; Ken Thompson co-created both</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>Both GC&rsquo;d server languages; Go is simpler, Java has a bigger ecosystem</td></tr>
+        <tr><td>JTS</td><td>JavaScript</td><td>Go competes with Node.js for backend services</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>Go is 100&times; faster; Python has the data ecosystem</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Language</a></li>
+        <li><a href="concurrency.html">Concurrency</a></li>
+        <li><a href="gc.html">GC &amp; Runtime</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="education.html">Learn</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rosetta Integration &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Core &mdash; JavaScript &amp; TypeScript</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jts">
+  <header>
+    <h1>JavaScript Core</h1>
+    <div class="subtitle">Types, Closures, Prototypes, Classes, Promises, async/await, Modules &mdash; ES5 Through ES2024</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html" class="active">JavaScript</a>
+      <a href="typescript.html">TypeScript</a>
+      <a href="runtimes.html">Runtimes</a>
+      <a href="frameworks.html">Frameworks</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Brendan Eich was hired at Netscape in April 1995 to put &ldquo;Scheme in the browser.&rdquo; The business side wanted Java-like syntax instead. The result was a language with Scheme&rsquo;s semantic core and Java&rsquo;s surface, thrown together in ten days.
+    </blockquote>
+
+    <h2>Design Heritage</h2>
+    <div class="card yellow">
+      <ul>
+        <li><strong>Scheme</strong> &mdash; first-class functions, closures, lexical scope, garbage collection, dynamic typing</li>
+        <li><strong>Self</strong> (Smalltalk descendant) &mdash; prototype-based objects: no classes, just objects pointing at other objects</li>
+        <li><strong>Java</strong> &mdash; C-family syntax, curly braces, <code>if</code>/<code>while</code>/<code>for</code>, the <code>new</code> operator</li>
+        <li><strong>HyperTalk</strong> &mdash; the event-driven model: <code>onclick</code>, <code>onload</code>, <code>addEventListener</code></li>
+        <li><strong>AWK</strong> &mdash; automatic type coercion: <code>toString</code>/<code>valueOf</code> conversions</li>
+      </ul>
+      <p>The result: a multi-paradigm language that is simultaneously functional, prototype-OO, and imperative.</p>
+    </div>
+
+    <h2>Types</h2>
+    <table>
+      <thead><tr><th>Primitive</th><th>Example</th><th>Added</th></tr></thead>
+      <tbody>
+        <tr><td><code>number</code></td><td><code>42</code>, <code>3.14</code>, <code>NaN</code></td><td>Original</td></tr>
+        <tr><td><code>string</code></td><td><code>"hello"</code>, <code>`template`</code></td><td>Original</td></tr>
+        <tr><td><code>boolean</code></td><td><code>true</code>, <code>false</code></td><td>Original</td></tr>
+        <tr><td><code>null</code></td><td><code>null</code></td><td>Original</td></tr>
+        <tr><td><code>undefined</code></td><td><code>undefined</code></td><td>Original</td></tr>
+        <tr><td><code>symbol</code></td><td><code>Symbol("id")</code></td><td>ES2015</td></tr>
+        <tr><td><code>bigint</code></td><td><code>9007199254740993n</code></td><td>ES2020</td></tr>
+      </tbody>
+    </table>
+
+    <p><code>number</code> is IEEE 754 double-precision. There is no integer type. Exact integers go up to 2<sup>53</sup>. <code>bigint</code> handles arbitrary precision. Everything non-primitive is an <strong>object</strong>: plain objects, arrays, functions, dates, regex, Map, Set, WeakMap, WeakSet, typed arrays.</p>
+
+    <div class="card orange">
+      <p><strong>typeof quirks:</strong> <code>typeof null === "object"</code> is a famous day-one bug that has never been fixed because too much code depends on it. <code>typeof function(){} === "function"</code> is a special case &mdash; functions are objects but get their own typeof string.</p>
+    </div>
+
+    <h2>Type Coercion</h2>
+    <p>JavaScript has <strong>loose equality</strong> (<code>==</code>) and <strong>strict equality</strong> (<code>===</code>). Loose equality coerces types; strict equality does not. The universal advice: <strong>always use <code>===</code></strong>.</p>
+
+<pre><code>"" == false;     // true  (both coerce to 0)
+"" === false;    // false (different types)
+0 == null;       // false (special case)
+null == undefined; // true (special case)
+NaN === NaN;     // false (IEEE 754 rule)</code></pre>
+
+    <p>Gary Bernhardt&rsquo;s <strong>WAT talk</strong> (CodeMash 2012) remains the canonical comedy routine demonstrating JavaScript&rsquo;s coercion behavior.</p>
+
+    <h2>Variables and Scope</h2>
+    <table>
+      <thead><tr><th>Keyword</th><th>Scope</th><th>Hoisted?</th><th>Reassignable?</th></tr></thead>
+      <tbody>
+        <tr><td><code>var</code></td><td>Function</td><td>Yes (declaration only)</td><td>Yes</td></tr>
+        <tr><td><code>let</code> (ES2015)</td><td>Block</td><td>TDZ (Temporal Dead Zone)</td><td>Yes</td></tr>
+        <tr><td><code>const</code> (ES2015)</td><td>Block</td><td>TDZ</td><td>No (binding; object contents can change)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Functions &mdash; The Heart of JavaScript</h2>
+
+<pre><code>// Function declaration (hoisted)
+function greet(name) { return `Hello, ${name}!`; }
+
+// Function expression (not hoisted)
+const greet = function(name) { return `Hello, ${name}!`; };
+
+// Arrow function (ES2015) — inherits `this` from enclosing scope
+const greet = (name) =&gt; `Hello, ${name}!`;
+
+// Closure: inner function captures outer variable
+function makeCounter() {
+  let count = 0;
+  return () =&gt; ++count;
+}
+const next = makeCounter();
+next(); // 1
+next(); // 2</code></pre>
+
+    <h3><code>this</code> rules</h3>
+    <ul>
+      <li><strong>Default</strong> &mdash; <code>undefined</code> in strict mode; <code>globalThis</code> in sloppy mode</li>
+      <li><strong>Implicit</strong> &mdash; the object to the left of the dot: <code>obj.method()</code></li>
+      <li><strong>Explicit</strong> &mdash; <code>call</code>/<code>apply</code>/<code>bind</code> set <code>this</code> directly</li>
+      <li><strong><code>new</code></strong> &mdash; creates a new object and binds <code>this</code> to it</li>
+      <li><strong>Arrow</strong> &mdash; does not have its own <code>this</code>; uses the enclosing lexical <code>this</code></li>
+    </ul>
+
+    <h2>Prototypes and Classes</h2>
+    <p>JavaScript is <strong>prototype-based</strong>: every object has a <code>[[Prototype]]</code> slot pointing to another object. Property lookups walk the prototype chain until they find the property or reach <code>null</code>.</p>
+
+<pre><code>// ES2015 class (syntactic sugar over prototypes)
+class Animal {
+  #name;  // private field (ES2022)
+
+  constructor(name) { this.#name = name; }
+  speak() { return `${this.#name} makes a noise.`; }
+}
+
+class Dog extends Animal {
+  speak() { return `${super.speak()} Woof!`; }
+}
+
+const d = new Dog("Rex");
+d.speak(); // "Rex makes a noise. Woof!"</code></pre>
+
+    <p>Under the hood, <code>class</code> defines a constructor function, sets up <code>prototype</code> links, and uses <code>Object.setPrototypeOf</code> for <code>extends</code>. Private fields (<code>#name</code>, ES2022) are <em>truly</em> private &mdash; not accessible outside the class body, not even via reflection.</p>
+
+    <h2>Arrays</h2>
+    <table>
+      <thead><tr><th>Category</th><th>Methods</th></tr></thead>
+      <tbody>
+        <tr><td>Mutating</td><td><code>push</code>, <code>pop</code>, <code>shift</code>, <code>unshift</code>, <code>splice</code>, <code>sort</code>, <code>reverse</code></td></tr>
+        <tr><td>Non-mutating</td><td><code>map</code>, <code>filter</code>, <code>reduce</code>, <code>find</code>, <code>findIndex</code>, <code>some</code>, <code>every</code>, <code>forEach</code>, <code>includes</code>, <code>flat</code>, <code>flatMap</code>, <code>slice</code>, <code>concat</code></td></tr>
+        <tr><td>Copy (ES2023)</td><td><code>toSorted</code>, <code>toReversed</code>, <code>toSpliced</code>, <code>with</code> &mdash; non-mutating versions of mutating ops</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Promises and async/await</h2>
+
+<pre><code>// Promise (ES2015)
+fetch("/api/user")
+  .then(res =&gt; res.json())
+  .then(user =&gt; console.log(user.name))
+  .catch(err =&gt; console.error(err));
+
+// async/await (ES2017) — syntactic sugar over promises
+async function loadUser() {
+  try {
+    const res = await fetch("/api/user");
+    const user = await res.json();
+    console.log(user.name);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// Promise combinators
+const [users, posts] = await Promise.all([
+  fetch("/api/users").then(r =&gt; r.json()),
+  fetch("/api/posts").then(r =&gt; r.json()),
+]);</code></pre>
+
+    <p><code>Promise.all</code> (all or nothing), <code>Promise.allSettled</code> (all results regardless), <code>Promise.race</code> (first to settle), <code>Promise.any</code> (first to fulfill). <strong>Top-level <code>await</code></strong> (ES2022) works in ES Modules.</p>
+
+    <h2>Modules</h2>
+    <table>
+      <thead><tr><th>System</th><th>Syntax</th><th>Where</th></tr></thead>
+      <tbody>
+        <tr><td>CommonJS</td><td><code>require()</code> / <code>module.exports</code></td><td>Node.js (original)</td></tr>
+        <tr><td>ES Modules</td><td><code>import</code> / <code>export</code></td><td>Browsers (native), Node.js (14+)</td></tr>
+        <tr><td>AMD</td><td><code>define()</code> / <code>require()</code></td><td>RequireJS (historical)</td></tr>
+        <tr><td>Dynamic import</td><td><code>import()</code></td><td>Both (lazy loading)</td></tr>
+      </tbody>
+    </table>
+
+<pre><code>// ES Modules (ES2015)
+import { useState, useEffect } from "react";
+export function App() { /* ... */ }
+export default App;
+
+// Dynamic import (code splitting)
+const module = await import("./heavy-lib.js");</code></pre>
+
+    <h2>Modern Syntax Essentials</h2>
+
+<pre><code>// Destructuring
+const { name, age = 25, ...rest } = user;
+const [first, , third] = items;
+
+// Optional chaining (ES2020)
+user?.address?.city;
+user?.getName?.();
+arr?.[0];
+
+// Nullish coalescing (ES2020)
+const count = input ?? 0;  // 0 only for null/undefined
+
+// Logical assignment (ES2021)
+obj.x ??= "default";
+obj.y ||= "fallback";
+
+// Template literals
+const msg = `Hello, ${name}! You are ${age} years old.`;
+
+// Spread
+const merged = { ...defaults, ...overrides };
+const all = [...arr1, ...arr2];</code></pre>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>SNK</td><td>Python</td><td>Both dynamically typed; Python uses <code>typing</code> for hints, JS uses TypeScript for real checking</td></tr>
+        <tr><td>PRL</td><td>Perl</td><td>Perl&rsquo;s regex influenced JavaScript&rsquo;s <code>RegExp</code>; Perl&rsquo;s TMTOWTDI spirit is echoed in JS</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>C-like syntax shared; JavaScript&rsquo;s classes are sugar over prototypes, not real nominal classes</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="typescript.html">TypeScript Type System</a></li>
+        <li><a href="runtimes.html">Engines &amp; Runtimes</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>JavaScript Core &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

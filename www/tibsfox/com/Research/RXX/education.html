@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Resources &mdash; Rexx &amp; ARexx &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rxx">
+  <header>
+    <h1>Learning Resources</h1>
+    <div class="subtitle">SAY "A Practical Approach to Programming"</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="parse.html">PARSE</a>
+      <a href="ports.html">Ports &amp; IPC</a>
+      <a href="porting.html">Porting</a>
+      <a href="amiga.html">Amiga</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html" class="active">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>ADDRESS 'BOOKSHELF'</strong><br>
+      "REXX has been called the language that is easy to learn, easy to use, and easy to read. It was designed to be all three."<br>
+      &mdash; Mike Cowlishaw
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- ESSENTIAL BOOKS                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Essential Books</h2>
+
+    <h3>The Canon</h3>
+    <table>
+      <thead><tr><th>Title</th><th>Author</th><th>Year</th><th>Why It Matters</th></tr></thead>
+      <tbody>
+        <tr><td><strong>The REXX Language: A Practical Approach to Programming</strong></td><td>Mike Cowlishaw</td><td>1985 (2nd ed. 1990)</td><td>THE book. Written by the language creator. The title IS the philosophy. Prentice-Hall. ISBN 0-13-780735-X (2nd ed). Our porting reference starts here.</td></tr>
+        <tr><td><strong>Modern Programming Using REXX</strong></td><td>Robert O&rsquo;Hara &amp; David Gomberg</td><td>1988</td><td>Practical REXX programming with real-world examples. Prentice-Hall. Good complement to Cowlishaw&rsquo;s reference-oriented approach.</td></tr>
+        <tr><td><strong>The REXX Handbook</strong></td><td>Gabriel Goldberg &amp; Philip Smith (eds.)</td><td>1992</td><td>Collection of articles by REXX experts. Covers VM/CMS, OS/2, and TSO REXX. McGraw-Hill. Excellent for understanding the ecosystem.</td></tr>
+        <tr><td><strong>Programming in REXX</strong></td><td>Charles Daney</td><td>1992</td><td>McGraw-Hill. Tutorial-oriented. Good for learning from scratch.</td></tr>
+        <tr><td><strong>REXX Programmer&rsquo;s Reference</strong></td><td>Howard Fosdick</td><td>2005</td><td>Wiley. The most recent comprehensive reference. Covers classic REXX, ooRexx, and NetRexx. ISBN 0-7645-7996-8.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>ARexx Specific</h3>
+    <table>
+      <thead><tr><th>Title</th><th>Author</th><th>Year</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Using ARexx on the Amiga</strong></td><td>Chris Zamara &amp; Nick Sullivan</td><td>1991</td><td>Abacus Books. The primary ARexx tutorial. Covers the port system, function libraries, and real-world scripting. Essential for understanding ARexx&rsquo;s Amiga integration.</td></tr>
+        <tr><td><strong>ARexx: Your Amiga&rsquo;s Built-In Power Language</strong></td><td>Merrill Callaway</td><td>1992</td><td>Whitestone. Good practical introduction with application scripting examples.</td></tr>
+        <tr><td><strong>Amiga ROM Kernel Reference Manual: Libraries</strong></td><td>Commodore</td><td>1991</td><td>The official Amiga reference. Chapter on exec.library message ports is ESSENTIAL for understanding ARexx&rsquo;s IPC model. Addison-Wesley.</td></tr>
+        <tr><td><strong>ARexx Reference Manual</strong></td><td>William S. Hawes</td><td>1990</td><td>Shipped with ARexx and AmigaOS 2.0. The official implementation documentation. Available in Amiga archives.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Object REXX &amp; NetRexx</h3>
+    <table>
+      <thead><tr><th>Title</th><th>Author</th><th>Year</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Object REXX by Example</strong></td><td>Gwen L. Veneskey et al.</td><td>1996</td><td>Tutorial for IBM&rsquo;s Object REXX (precursor to ooRexx).</td></tr>
+        <tr><td><strong>The NetRexx Language</strong></td><td>Mike Cowlishaw</td><td>1997</td><td>REXX on the JVM. Cowlishaw&rsquo;s later work. Shows how REXX principles map to Java interop.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- IMPLEMENTATIONS TO PRACTICE WITH                              -->
+    <!-- ============================================================ -->
+
+    <h2>Implementations for Practice</h2>
+
+    <table>
+      <thead><tr><th>Implementation</th><th>Author</th><th>Language</th><th>Platform</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Regina REXX</strong></td><td>Mark Hessling</td><td>C</td><td>Linux, Windows, macOS, OS/2</td><td>Most portable. Standard REXX. Install with <code>apt install regina-rexx</code> on Debian/Ubuntu. Our primary test target.</td></tr>
+        <tr><td><strong>Open Object Rexx (ooRexx)</strong></td><td>RexxLA (IBM donation)</td><td>C++</td><td>Linux, Windows, macOS</td><td>Object-oriented REXX. Install via rexxla.org. Good for understanding the OO extensions.</td></tr>
+        <tr><td><strong>NetRexx</strong></td><td>Mike Cowlishaw / RexxLA</td><td>Java</td><td>JVM</td><td>REXX on Java. Shows REXX-to-Java translation patterns relevant for our TypeScript port.</td></tr>
+        <tr><td><strong>BRexx</strong></td><td>Vasilis Vlachoudis</td><td>C</td><td>Linux, Windows, embedded</td><td>Tiny footprint (~60KB binary). Very relevant for GPU port &mdash; minimal interpreter architecture.</td></tr>
+        <tr><td><strong>Rexx/imc</strong></td><td>Ian Collier</td><td>C</td><td>Unix</td><td>Academic implementation. Clean, well-documented source. Good for understanding interpreter internals.</td></tr>
+      </tbody>
+    </table>
+
+    <pre>
+/* Quick start with Regina REXX */
+/* Install: sudo apt install regina-rexx */
+/* Save as hello.rexx, run: regina hello.rexx */
+
+SAY "Hello from REXX!"
+SAY "REXX version:" PARSE("VERSION")
+
+NUMERIC DIGITS 50
+SAY "50-digit factorial of 30:"
+factorial = 1
+DO i = 1 TO 30
+  factorial = factorial * i
+END
+SAY factorial</pre>
+
+    <!-- ============================================================ -->
+    <!-- ONLINE RESOURCES                                              -->
+    <!-- ============================================================ -->
+
+    <h2>Online Resources</h2>
+
+    <h3>Standards &amp; References</h3>
+    <table>
+      <thead><tr><th>Resource</th><th>What It Covers</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ANSI X3.274-1996</strong></td><td>The formal REXX language standard. The ground truth for any porting project. Available from ANSI or through RexxLA.</td></tr>
+        <tr><td><strong>IBM REXX/VM Reference</strong></td><td>IBM&rsquo;s implementation manual. Covers VM/CMS-specific extensions. Available in IBM Knowledge Center.</td></tr>
+        <tr><td><strong>RexxLA (rexxla.org)</strong></td><td>The Rexx Language Association. Stewards of ooRexx and NetRexx. Conference proceedings, documentation, community.</td></tr>
+        <tr><td><strong>Regina REXX docs</strong></td><td>regina-rexx.sourceforge.io &mdash; built-in function reference, installation guides, platform notes.</td></tr>
+        <tr><td><strong>Cowlishaw&rsquo;s REXX pages</strong></td><td>speleotrove.com/rexx/ &mdash; Mike Cowlishaw&rsquo;s personal REXX archive. History, standards work, NetRexx.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Amiga-Specific</h3>
+    <table>
+      <thead><tr><th>Resource</th><th>What It Covers</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Aminet (aminet.net)</strong></td><td>The Amiga software archive. Search for &ldquo;arexx&rdquo; to find scripts, libraries, and documentation. Hundreds of ARexx scripts from the golden era.</td></tr>
+        <tr><td><strong>Amiga Developer Docs</strong></td><td>amigadev.elowar.com &mdash; complete Amiga ROM Kernel Reference Manuals online. The exec.library and ARexx chapters are essential.</td></tr>
+        <tr><td><strong>English Amiga Board</strong></td><td>eab.abime.net &mdash; active Amiga community. ARexx programming subforum. People who wrote ARexx scripts in the 1990s are still there.</td></tr>
+        <tr><td><strong>AmigaOS Documentation Wiki</strong></td><td>wiki.amigaos.net &mdash; AmigaOS 4.x documentation including updated ARexx reference.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- COMMUNITIES                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Communities</h2>
+    <table>
+      <thead><tr><th>Community</th><th>Platform</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td><strong>RexxLA</strong></td><td>rexxla.org</td><td>Official Rexx Language Association. Annual symposium. Stewards of ooRexx/NetRexx.</td></tr>
+        <tr><td><strong>comp.lang.rexx</strong></td><td>Usenet</td><td>The original REXX newsgroup. Low traffic but knowledgeable posters remain.</td></tr>
+        <tr><td><strong>English Amiga Board</strong></td><td>Forum</td><td>ARexx programming, Amiga development, historical knowledge.</td></tr>
+        <tr><td><strong>Amiga.org</strong></td><td>Forum</td><td>Active Amiga community with programming discussions.</td></tr>
+        <tr><td><strong>r/amiga</strong></td><td>Reddit</td><td>Amiga enthusiasts, occasional ARexx discussions.</td></tr>
+        <tr><td><strong>IRC: #amiga on Libera.Chat</strong></td><td>IRC</td><td>Real-time Amiga discussion.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- LEARNING PATH                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>Learning Path &mdash; From Zero to ARexx Port Developer</h2>
+
+    <div class="port-pipeline">
+      <ol>
+        <li><strong>Level 1: Basic REXX</strong> &mdash; Install Regina REXX. Write SAY, PULL, IF/THEN/ELSE, DO loops. Read Cowlishaw chapters 1-4. Understand that everything is a string.</li>
+        <li><strong>Level 2: String Mastery</strong> &mdash; Master the built-in functions: SUBSTR, WORD, WORDS, LEFT, RIGHT, POS, TRANSLATE, STRIP. Use NUMERIC DIGITS for arbitrary precision. Write programs that process text files.</li>
+        <li><strong>Level 3: PARSE</strong> &mdash; The killer feature. Learn template-based parsing: word patterns, positional patterns, literal patterns. Replace regex with PARSE for structured text. Read Cowlishaw chapter 6.</li>
+        <li><strong>Level 4: Stems &amp; Structures</strong> &mdash; Compound variables (stem.tail). Build arrays, hash tables, trees. Learn PROCEDURE EXPOSE for scope control. Implement a real data structure.</li>
+        <li><strong>Level 5: ARexx Concepts</strong> &mdash; Understand ADDRESS, host commands, the port system. Read the ARexx Reference Manual. Study how applications implement ARexx support. Read the exec.library message port docs.</li>
+        <li><strong>Level 6: Implementation Study</strong> &mdash; Read Regina REXX and BRexx source code. Understand the interpreter architecture: lexer, parser, evaluator. Study how PARSE and INTERPRET are implemented.</li>
+        <li><strong>Level 7: Port Architecture</strong> &mdash; Design the TypeScript interpreter. Map ARexx ports to MCP tools. Implement the PARSE engine. Build the string-based value model with NUMERIC DIGITS. Test against Regina for compatibility.</li>
+        <li><strong>Level 8: Native &amp; GPU</strong> &mdash; x86-64 assembly interpreter. CUDA thread model. The escalation ladder complete. ARexx reborn in GSD-OS.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <p><strong>The secret:</strong> REXX is one of the most readable languages ever designed. If you can read English, you can read REXX. The learning curve is gentle. The depth is in the PARSE instruction, the arbitrary precision arithmetic, and the port system &mdash; and those are exactly the features that matter for our porting project.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Design</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="parse.html">The PARSE Engine</a></li>
+        <li><a href="ports.html">Ports &amp; IPC</a></li>
+        <li><a href="porting.html">Porting Architecture</a></li>
+        <li><a href="amiga.html">The Amiga Connection</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="implementations.html">Implementations</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Learning Resources &middot; Rexx &amp; ARexx &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

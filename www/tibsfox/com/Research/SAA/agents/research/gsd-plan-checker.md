@@ -300,7 +300,7 @@ issue:
 Orchestrator provides CONTEXT.md content in the verification prompt. If provided, parse for locked decisions, discretion areas, deferred ideas.
 
 ```bash
-PHASE_DIR=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js find-phase "$PHASE_ARG" --raw)
+PHASE_DIR=$(node ~/.claude/get-shit-done/bin/gsd-tools.js find-phase "$PHASE_ARG" --raw)
 ls "$PHASE_DIR"/*-PLAN.md 2>/dev/null
 grep -A 10 "Phase $PHASE_NUM" .planning/ROADMAP.md | head -15
 ls "$PHASE_DIR"/*-BRIEF.md 2>/dev/null

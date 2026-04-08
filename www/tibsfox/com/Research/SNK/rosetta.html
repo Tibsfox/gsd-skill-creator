@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta Integration &mdash; Python &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-snk">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">Cross-Language Translation, PyPI as Cookbook, TSBOWTDI vs TMTOWTDI, Code Archaeology</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="ecosystem.html">PyPI</a>
+      <a href="scientific.html">Science</a>
+      <a href="ml-ai.html">ML/AI</a>
+      <a href="web.html">Web</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Python is the modern Rosetta Stone of scripting. It sits at the center of cross-language translation because its syntax is clean enough to read without context, its ecosystem is large enough that almost any algorithm has a reference implementation, and its scientific computing stack makes it the default language for any domain crossing into data or numerical work. &ldquo;How would you do this in Python?&rdquo; is now the canonical question for cross-language algorithm lookup.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- THREE ARCHIVES, ONE PATTERN                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Four Archives &mdash; The Code Library Lineage</h2>
+    <table>
+      <thead><tr><th>Archive</th><th>Language</th><th>Founded</th><th>Scale</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Aminet</strong></td><td>Amiga</td><td>1992</td><td>~100K files at peak</td></tr>
+        <tr><td><strong>CPAN</strong></td><td>Perl</td><td>1995</td><td>220K+ modules</td></tr>
+        <tr><td><strong>PyPI</strong> (&ldquo;Cheese Shop&rdquo;)</td><td>Python</td><td>2003</td><td><strong>782K+ projects, 8.4M+ releases</strong></td></tr>
+        <tr><td><strong>Packagist</strong></td><td>PHP</td><td>2012</td><td>400K+ packages</td></tr>
+      </tbody>
+    </table>
+    <div class="card">
+      <p><strong>PyPI is now the largest language-specific package index in the world.</strong> It was originally called the &ldquo;Cheese Shop&rdquo; &mdash; a Monty Python reference &mdash; and inherited CPAN&rsquo;s self-upload, community-curation model. The modern PyPI (&ldquo;Warehouse&rdquo;) codebase is itself open source. The scale reflects Python&rsquo;s dominance across teaching, scientific computing, web development, and ML.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- LANGUAGE-TO-LANGUAGE TRANSLATION                              -->
+    <!-- ============================================================ -->
+
+    <h2>Language-to-Language Translation</h2>
+    <p>The same algorithm expressed in different languages reveals what each language values. Python is often the most-readable version &mdash; which is why it&rsquo;s the reference implementation for so many algorithms:</p>
+
+    <h3>Axis 1: Text Processing</h3>
+    <table>
+      <thead><tr><th>Task</th><th>Bash</th><th>Perl</th><th>Python</th><th>PHP</th></tr></thead>
+      <tbody>
+        <tr><td>Word frequency</td><td><code>tr ' ' '\n' | sort | uniq -c</code></td><td><code>$f{$_}++ for split</code></td><td><code>Counter(text.split())</code></td><td><code>array_count_values(str_word_count(...))</code></td></tr>
+        <tr><td>CSV parse</td><td><code>awk -F, '{print $2}'</code></td><td><code>Text::CSV</code></td><td><code>csv.reader(f)</code></td><td><code>fgetcsv($fh)</code></td></tr>
+        <tr><td>HTTP fetch</td><td><code>curl -s $url</code></td><td><code>LWP::Simple::get</code></td><td><code>requests.get(url)</code></td><td><code>file_get_contents</code></td></tr>
+        <tr><td>Regex replace</td><td><code>sed 's/old/new/g'</code></td><td><code>s/old/new/g</code></td><td><code>re.sub('old', 'new', s)</code></td><td><code>preg_replace(...)</code></td></tr>
+        <tr><td>JSON decode</td><td><code>jq '.key'</code></td><td><code>decode_json($json)</code></td><td><code>json.loads(s)['key']</code></td><td><code>json_decode($json)-&gt;key</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Axis 2: Scientific / Numerical</h3>
+    <p>This is where Python reigns supreme &mdash; most other languages have no comparable idiom:</p>
+    <table>
+      <thead><tr><th>Task</th><th>Python (NumPy)</th><th>Perl (PDL)</th><th>PHP</th><th>Bash</th></tr></thead>
+      <tbody>
+        <tr><td>Matrix multiply</td><td><code>A @ B</code> or <code>np.dot(A, B)</code></td><td><code>$A x $B</code></td><td>&mdash; (no native)</td><td>&mdash;</td></tr>
+        <tr><td>Mean of array</td><td><code>np.mean(arr)</code></td><td><code>$arr-&gt;avg</code></td><td><code>array_sum($a)/count($a)</code></td><td>&mdash;</td></tr>
+        <tr><td>FFT</td><td><code>np.fft.fft(signal)</code></td><td><code>fft($signal)</code> (PDL)</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td>Read CSV to dataframe</td><td><code>pd.read_csv('data.csv')</code></td><td><code>Text::CSV</code> + manual</td><td>Manual</td><td>Not applicable</td></tr>
+        <tr><td>Plot histogram</td><td><code>plt.hist(data)</code></td><td><code>PDL::Graphics</code></td><td>Manual / SVG libs</td><td>gnuplot pipe</td></tr>
+        <tr><td>Linear regression</td><td><code>sklearn.LinearRegression().fit(X, y)</code></td><td><code>PDL::Stats::GLM</code></td><td>Manual</td><td>&mdash;</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Axis 3: Web Handling</h3>
+    <table>
+      <thead><tr><th>Task</th><th>Python (FastAPI)</th><th>Python (Flask)</th><th>PHP (Laravel)</th><th>Perl (Mojolicious)</th></tr></thead>
+      <tbody>
+        <tr><td>Define route</td><td><code>@app.get("/hello")</code></td><td><code>@app.route("/hello")</code></td><td><code>Route::get('/hello', ...)</code></td><td><code>$r-&gt;get('/hello')-&gt;to(...)</code></td></tr>
+        <tr><td>JSON response</td><td><code>return {"ok": True}</code></td><td><code>jsonify({"ok": True})</code></td><td><code>response()-&gt;json([...])</code></td><td><code>$c-&gt;render(json =&gt; ...)</code></td></tr>
+        <tr><td>Path param</td><td><code>async def item(id: int):</code></td><td><code>def item(id):</code></td><td><code>function($id) { ... }</code></td><td><code>my $id = $c-&gt;param('id')</code></td></tr>
+        <tr><td>Type validation</td><td>Native (Pydantic)</td><td>Manual</td><td>FormRequest class</td><td>Manual</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- PHILOSOPHY                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>The Philosophical Divide &mdash; TSBOWTDI vs TMTOWTDI</h2>
+    <div class="card blue">
+      <p>The single biggest cultural difference between Python and Perl is not syntactic &mdash; it&rsquo;s philosophical. Compare the two mottos:</p>
+      <ul>
+        <li><strong>Perl (TMTOWTDI):</strong> &ldquo;There&rsquo;s More Than One Way To Do It&rdquo; &mdash; language as a toolbox, pick whatever expression fits your mood. Natural language modeling.</li>
+        <li><strong>Python (TSBOWTDI):</strong> &ldquo;There Should Be One&mdash; and preferably only one &mdash;Obvious Way To Do It&rdquo; &mdash; language as a shared dialect, the community converges on idioms so everyone can read each other&rsquo;s code.</li>
+      </ul>
+      <p>Perl optimizes for the <em>writer</em>. Python optimizes for the <em>reader</em>. Both are valid. They produce different cultures, different codebases, and different communities. Perl grew the obfuscated programming contest tradition; Python grew the PEP 8 style guide religion. Perl gets you to a solution fast; Python makes that solution readable to the next person.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE COOKBOOK METHOD                                           -->
+    <!-- ============================================================ -->
+
+    <h2>The PyPI Cookbook Method</h2>
+    <p>How to use PyPI as a research tool, not just a package manager:</p>
+
+    <h3>Step 1: Problem Statement</h3>
+    <p>Define what you need in plain English: &ldquo;I need to cluster 1M high-dimensional vectors into approximate nearest-neighbor groups with sub-100ms query time.&rdquo;</p>
+
+    <h3>Step 2: PyPI Search</h3>
+    <table>
+      <thead><tr><th>Search</th><th>PyPI Result</th><th>What You Learn</th></tr></thead>
+      <tbody>
+        <tr><td>&ldquo;approximate nearest neighbor&rdquo;</td><td><code>faiss</code>, <code>annoy</code>, <code>hnswlib</code>, <code>scann</code></td><td>Different algorithms (IVF, HNSW, LSH), trade-offs, benchmarks</td></tr>
+        <tr><td>&ldquo;vector database&rdquo;</td><td><code>chromadb</code>, <code>qdrant-client</code>, <code>weaviate-client</code></td><td>Production vector DB patterns, HTTP APIs, persistence</td></tr>
+        <tr><td>&ldquo;clustering large datasets&rdquo;</td><td><code>scikit-learn</code>, <code>cuml</code>, <code>dask-ml</code></td><td>Out-of-core and GPU-accelerated options</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Step 3: Read the Source</h3>
+    <p>PyPI projects usually link to GitHub. <strong>Read the source code.</strong> Study:</p>
+    <ul>
+      <li>The public API in <code>__init__.py</code> &mdash; what the maintainers want you to use</li>
+      <li>The implementation modules &mdash; how they handle edge cases</li>
+      <li>The <code>tests/</code> directory &mdash; every well-maintained package has one</li>
+      <li>The <code>docs/</code> directory &mdash; usually Sphinx-generated API docs plus tutorials</li>
+      <li>The issue tracker &mdash; the problems people actually hit in production</li>
+    </ul>
+
+    <h3>Step 4: Translate the Pattern</h3>
+    <p>Take the approach (not the code) and implement it in your target language. The Python package showed you the <em>algorithm</em>, the <em>edge cases</em>, and the <em>API shape</em>. Now write it in TypeScript, Rust, or whatever you need.</p>
+
+    <!-- ============================================================ -->
+    <!-- PYTHON AS PIVOT LANGUAGE                                      -->
+    <!-- ============================================================ -->
+
+    <h2>Python as the Pivot Language</h2>
+    <div class="card">
+      <p>When translating between two <em>other</em> languages, Python is often the best intermediate representation &mdash; even if neither the source nor the target is Python:</p>
+      <ul>
+        <li><strong>Bash &rarr; Rust?</strong> Rewrite in Python first. The type annotations will surface shape mismatches that bash hides, and the Rust version becomes a near-mechanical translation of the Python.</li>
+        <li><strong>MATLAB &rarr; C?</strong> Go through NumPy. The ndarray model maps cleanly to MATLAB matrices, and NumPy&rsquo;s C API is your bridge to C.</li>
+        <li><strong>R &rarr; JavaScript?</strong> Go through Pandas. The DataFrame abstraction is nearly identical, and there are Pandas-to-JS converters.</li>
+        <li><strong>Legacy Perl &rarr; anything?</strong> Python first. The readability forces you to understand what the Perl was actually doing before you commit to a new syntax.</li>
+      </ul>
+      <p>Python&rsquo;s readability is what makes it the pivot. When you write code in Python, you end up with something a human can read &mdash; which means you end up with something that can be translated.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CLUSTER MAPPING                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Rosetta Cluster Mapping</h2>
+    <table>
+      <thead><tr><th>Python Concept</th><th>Rosetta Translation</th><th>Cluster</th></tr></thead>
+      <tbody>
+        <tr><td>NumPy ndarray</td><td>MATLAB matrix, R vector, Julia Array, APL, PDL (Perl)</td><td>Science, Math</td></tr>
+        <tr><td>Pandas DataFrame</td><td>R data.frame, SQL table, Polars DataFrame, Apache Arrow</td><td>Data</td></tr>
+        <tr><td>PyTorch Tensor</td><td>TensorFlow Tensor, JAX Array, CUDA kernel, Triton</td><td>ML/AI</td></tr>
+        <tr><td>Decorators</td><td>Annotations (Java), Attributes (C#/PHP 8), Macros (Rust)</td><td>Computation</td></tr>
+        <tr><td>Iterators / generators</td><td>Coroutines, streams, Rust iterators, lazy sequences</td><td>Computation</td></tr>
+        <tr><td>Duck typing</td><td>Structural typing (TypeScript), traits (Rust), protocols (Swift)</td><td>Computation</td></tr>
+        <tr><td>Jupyter Notebook</td><td>Literate programming, Mathematica notebooks, Observable</td><td>Education, Science</td></tr>
+        <tr><td>pip / venv</td><td>CPAN (Perl), Composer (PHP), Cargo (Rust), npm (Node)</td><td>Infrastructure</td></tr>
+        <tr><td>Type hints (PEP 484)</td><td>TypeScript, gradual typing, Flow, Hack</td><td>Computation</td></tr>
+        <tr><td>async / await</td><td>JS promises, Rust async, Tokio, Kotlin coroutines</td><td>Infrastructure</td></tr>
+        <tr><td>The Zen of Python</td><td>Ruby POLS, Unix philosophy, Go&rsquo;s simplicity doctrine</td><td>Philosophy</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Cluster</th><th>Translation Vector</th></tr></thead>
+      <tbody>
+        <tr><td>Ecology (ECO)</td><td>GeoPandas, rasterio, species distribution modeling in scikit-learn</td></tr>
+        <tr><td>Electronics (LED)</td><td>MicroPython, CircuitPython, pyserial, signal processing</td></tr>
+        <tr><td>Infrastructure (SYS)</td><td>Ansible, SaltStack, Fabric &mdash; all Python-based automation</td></tr>
+        <tr><td>Creative (FFA)</td><td>Pillow (imaging), moviepy, manim (3Blue1Brown&rsquo;s animation library)</td></tr>
+        <tr><td>Science (BPS)</td><td>Biopython, genomics pipelines, Astropy, QuTiP (quantum)</td></tr>
+        <tr><td>Space (NASA)</td><td>Astropy, Poliastro, Skyfield, mission data analysis</td></tr>
+        <tr><td>AI &amp; Computation (AGT)</td><td>The central language of the field &mdash; PyTorch, Transformers, LangChain</td></tr>
+        <tr><td>Music (MUS)</td><td>music21, librosa, computational musicology, audio ML</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="ecosystem.html">PyPI Ecosystem</a></li>
+        <li><a href="scientific.html">Scientific Computing</a></li>
+        <li><a href="ml-ai.html">Machine Learning &amp; AI</a></li>
+        <li><a href="history.html">History &amp; Culture</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rosetta Integration &middot; The Snake &mdash; Python &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

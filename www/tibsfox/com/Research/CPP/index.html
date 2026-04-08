@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C++ and Object-Oriented Programming &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cpp">
+  <header>
+    <h1>C++ and Object-Oriented Programming</h1>
+    <div class="subtitle">The Language of Objects, Templates, RAII, and Zero-Overhead Abstraction &mdash; From Stroustrup&rsquo;s Bell Labs to C++26</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="oop.html">OOP</a>
+      <a href="templates.html">Templates</a>
+      <a href="stdlib.html">STL</a>
+      <a href="modern.html">Modern C++</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;C++ feels like a new language. That is, I can express my ideas more clearly, more simply, and more directly in C++11 than I could in C++98. Furthermore, the resulting programs are better checked by the compiler and run faster.&rdquo; &mdash; <strong>Bjarne Stroustrup</strong>, on C++11
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- RESEARCH PROGRAM STATISTICS                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value steel">47</span><span class="stat-label">Years Since &ldquo;C with Classes&rdquo;</span></div>
+      <div class="stat"><span class="stat-value amber">C++26</span><span class="stat-label">Latest Standard</span></div>
+      <div class="stat"><span class="stat-value green">0</span><span class="stat-label">Overhead Principle</span></div>
+      <div class="stat"><span class="stat-value purple">4</span><span class="stat-label">OOP Pillars</span></div>
+      <div class="stat"><span class="stat-value teal">ISO</span><span class="stat-label">14882 Governance</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why C++?</strong> C++ is the language where <em>objects meet the metal</em>. It gave programmers the full toolkit of object-oriented design &mdash; classes, inheritance, polymorphism, encapsulation &mdash; without surrendering the performance of C. It introduced the world to <strong>RAII</strong> (Resource Acquisition Is Initialization), the template system that launched generic programming, and the STL, which decoupled algorithms from data structures and changed how libraries are written forever. For 40+ years it has been the backbone of browsers, game engines, databases, high-frequency trading, operating systems, scientific computing, embedded firmware, and every performance-critical system where C is too primitive and Python is too slow.</p>
+      <p><strong>Research method:</strong> Primary sources (isocpp.org, stroustrup.com, cppreference.com, ISO/IEC 14882 standards documents, WG21 papers), the canonical book corpus (Stroustrup, Meyers, Alexandrescu, Sutter, Vandevoorde), compiler documentation (GCC, Clang, MSVC), cross-reference against 280-project PNW Research Series corpus</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE FOUR PILLARS                                              -->
+    <!-- ============================================================ -->
+
+    <h2>The Four Pillars of Object-Oriented Programming</h2>
+    <p>C++ is the language that brought the full OOP paradigm &mdash; as defined in the literature of the 1970s and 1980s &mdash; into mainstream systems programming. The four pillars describe what &ldquo;object-oriented&rdquo; actually means:</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Encapsulation</h4>
+        <p><strong>Hide the inside.</strong> A class bundles data and the operations on it, and exposes only the contract. <code>private</code>, <code>protected</code>, <code>public</code>. The PIMPL idiom, information hiding, compile-time decoupling &mdash; all rest on encapsulation.</p>
+      </div>
+      <div class="pillar">
+        <h4>Inheritance</h4>
+        <p><strong>Reuse a base.</strong> A derived class gets everything the base class has and can add to it or change it. Single, multiple, and virtual inheritance. The diamond problem. Public vs private inheritance as &ldquo;is-a&rdquo; vs &ldquo;implemented-in-terms-of.&rdquo;</p>
+      </div>
+      <div class="pillar">
+        <h4>Polymorphism</h4>
+        <p><strong>One interface, many forms.</strong> Call <code>shape-&gt;draw()</code> and the right implementation runs. Virtual functions, vtables, dynamic dispatch. Static polymorphism via templates and CRTP. <code>dynamic_cast</code> for runtime type recovery.</p>
+      </div>
+      <div class="pillar">
+        <h4>Abstraction</h4>
+        <p><strong>Model the essential.</strong> An abstract base class or a concept (C++20) says what an object does without saying how. Pure-virtual interfaces, templates, concepts &mdash; every tool C++ offers for expressing &ldquo;anything that behaves like X.&rdquo;</p>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE ZERO-OVERHEAD PRINCIPLE                                   -->
+    <!-- ============================================================ -->
+
+    <h2>The Zero-Overhead Principle</h2>
+    <div class="card green">
+      <p><strong>Stroustrup&rsquo;s axiom:</strong> &ldquo;What you don&rsquo;t use, you don&rsquo;t pay for. And further: What you do use, you couldn&rsquo;t hand code any better.&rdquo;</p>
+      <p>This is the philosophical core that distinguishes C++ from every other high-level language. Classes, templates, exceptions, RAII, virtual functions, lambdas, smart pointers &mdash; every abstraction C++ provides is designed to compile down to code as efficient as what a skilled C programmer would write by hand, given the same requirements. Pay only for what you ask for, get no overhead for features you never touch.</p>
+      <p>In practice this means: a <code>std::vector&lt;int&gt;</code> is as fast as a raw malloc&rsquo;d array; <code>std::unique_ptr&lt;T&gt;</code> has the same footprint as a raw pointer; a lambda without captures is the same as a function pointer; templates generate exact code paths at compile time with no runtime dispatch cost. This is why browsers, trading systems, kernels, and game engines are written in C++ and not in languages that charge you for abstractions you never requested.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODULE OVERVIEW                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="language.html" class="category-card">
+        <div><span class="cluster-badge cluster-core">Core</span></div>
+        <h3>C++ Core Language</h3>
+        <p>Types, pointers, references, value categories (lvalue/rvalue/xvalue/prvalue), operator overloading, the Big Five, <code>constexpr</code>, const correctness, scope and linkage, namespaces, the preprocessor and its sins.</p>
+        <p><strong>Key:</strong> Syntax, semantics, value categories, const, constexpr</p>
+      </a>
+
+      <a href="oop.html" class="category-card">
+        <div><span class="cluster-badge cluster-oop">OOP</span></div>
+        <h3>Object-Oriented C++</h3>
+        <p>Classes, constructors, destructors, inheritance (single, multiple, virtual), polymorphism, virtual functions, vtables, abstract base classes, the four pillars, design patterns (GoF), CRTP, type erasure, <code>dynamic_cast</code>, RAII.</p>
+        <p><strong>Key:</strong> Classes, virtuals, patterns, the OO toolkit</p>
+      </a>
+
+      <a href="templates.html" class="category-card">
+        <div><span class="cluster-badge cluster-tmpl">Templates</span></div>
+        <h3>Templates &amp; Generic Programming</h3>
+        <p>Class and function templates, specialization, SFINAE, template metaprogramming, <code>std::enable_if</code>, type traits, C++20 concepts and <code>requires</code>, variadic templates, Alexander Stepanov&rsquo;s STL origins, Alexandrescu&rsquo;s Loki.</p>
+        <p><strong>Key:</strong> Generics, TMP, concepts, compile-time dispatch</p>
+      </a>
+
+      <a href="stdlib.html" class="category-card">
+        <div><span class="cluster-badge cluster-stl">STL</span></div>
+        <h3>Standard Template Library</h3>
+        <p>Containers (<code>vector</code>, <code>map</code>, <code>unordered_map</code>, <code>deque</code>, <code>array</code>, <code>span</code>, <code>mdspan</code>), iterators and their categories, algorithms (<code>sort</code>, <code>find</code>, <code>transform</code>, <code>accumulate</code>), ranges (C++20), views, pipelines, utilities (<code>optional</code>, <code>variant</code>, <code>expected</code>, <code>tuple</code>, <code>chrono</code>, <code>filesystem</code>, <code>format</code>).</p>
+        <p><strong>Key:</strong> Containers, algorithms, iterators, ranges</p>
+      </a>
+
+      <a href="modern.html" class="category-card">
+        <div><span class="cluster-badge cluster-modern">Modern</span></div>
+        <h3>Modern C++ (C++11 &rarr; C++26)</h3>
+        <p>The C++11 revolution: <code>auto</code>, lambdas, move semantics, smart pointers, range-for, <code>nullptr</code>, variadic templates. C++14 refinements. C++17: <code>optional</code>, <code>variant</code>, structured bindings, parallel STL. C++20: concepts, modules, coroutines, ranges, <code>&lt;=&gt;</code>. C++23 and C++26 ahead.</p>
+        <p><strong>Key:</strong> C++11 as &ldquo;new language&rdquo;, modules, coroutines</p>
+      </a>
+
+      <a href="ecosystem.html" class="category-card">
+        <div><span class="cluster-badge cluster-eco">Ecosystem</span></div>
+        <h3>Ecosystem &amp; Tooling</h3>
+        <p>Compilers: GCC, Clang, MSVC, Intel ICX, EDG. Build systems: CMake, Ninja, Meson, Bazel, Make. Package managers: Conan, vcpkg, Hunter. Sanitizers, static analysis, <code>clang-tidy</code>, <code>clang-format</code>. Boost, Qt, Abseil, Folly, EASTL. Compiler Explorer.</p>
+        <p><strong>Key:</strong> Toolchains, build systems, libraries, analysis</p>
+      </a>
+
+      <a href="rosetta.html" class="category-card">
+        <div><span class="cluster-badge cluster-rosetta">Rosetta</span></div>
+        <h3>Rosetta Integration</h3>
+        <p>Cross-language translation: C &harr; C++ &harr; Rust &harr; Java &harr; Python. &ldquo;C with Classes&rdquo; as a dialect. When to reach for which. The escalation ladder from bash to philosophy, with C++ occupying the layer where OOP first meets the metal.</p>
+        <p><strong>Key:</strong> Translation patterns, dialect spectrum, escalation</p>
+      </a>
+
+      <a href="education.html" class="category-card">
+        <div><span class="cluster-badge cluster-edu">Education</span></div>
+        <h3>Learning Resources</h3>
+        <p><em>A Tour of C++</em> (Stroustrup, 3rd ed. 2022), <em>The C++ Programming Language</em> (Stroustrup, 4th ed.), <em>Effective C++</em> series (Meyers), <em>Modern C++ Design</em> (Alexandrescu), learncpp.com, cppreference.com, CppCon, The Cherno, Jason Turner.</p>
+        <p><strong>Key:</strong> Canonical books, online, CppCon, Core Guidelines</p>
+      </a>
+
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-history">History</span></div>
+        <h3>History &amp; Evolution</h3>
+        <p>Bjarne Stroustrup (Bell Labs, 1979), &ldquo;C with Classes,&rdquo; Cfront, the 1985 book, C++98, the ARM, the STL&rsquo;s 1994 adoption, the lost decade, C++11 as &ldquo;almost a new language,&rdquo; the 3-year cadence, C++23, C++26. Key people across four decades.</p>
+        <p><strong>Key:</strong> Timeline, standards, committee, people</p>
+      </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- C++ AT A GLANCE                                               -->
+    <!-- ============================================================ -->
+
+    <h2>C++ at a Glance</h2>
+    <table>
+      <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Current standard</td><td><strong>C++23</strong> (ISO/IEC 14882:2024), C++26 in progress</td></tr>
+        <tr><td>First release</td><td>October 1985 (1.0, commercial)</td></tr>
+        <tr><td>First standard</td><td>C++98 (ISO/IEC 14882:1998)</td></tr>
+        <tr><td>Creator</td><td>Bjarne Stroustrup, Bell Labs, Murray Hill NJ (1979&ndash;present)</td></tr>
+        <tr><td>Paradigms</td><td>Multi: procedural, object-oriented, generic, functional, metaprogramming</td></tr>
+        <tr><td>Type system</td><td>Static, strong, nominal with inference (<code>auto</code>); supports generics via templates</td></tr>
+        <tr><td>Compilation</td><td>Ahead-of-time to native machine code; no runtime / no VM</td></tr>
+        <tr><td>Memory model</td><td>Manual; RAII + smart pointers as the modern idiom</td></tr>
+        <tr><td>Governance</td><td>ISO/IEC JTC1/SC22/WG21 &mdash; the C++ committee, meets three times per year</td></tr>
+        <tr><td>Release cadence</td><td>Three-year ISO cycle (C++11 &rarr; 14 &rarr; 17 &rarr; 20 &rarr; 23 &rarr; 26)</td></tr>
+        <tr><td>Major compilers</td><td>GCC, Clang/LLVM, MSVC, Intel ICX, EDG-based (NVIDIA HPC, Comeau)</td></tr>
+        <tr><td>License</td><td>Language itself is an ISO standard; implementations vary (GPL, Apache 2.0, proprietary)</td></tr>
+        <tr><td>Key strength</td><td>Zero-overhead abstractions, deterministic resources, systems + apps</td></tr>
+        <tr><td>Design principle</td><td>&ldquo;You don&rsquo;t pay for what you don&rsquo;t use&rdquo;</td></tr>
+        <tr><td>Signature idiom</td><td>RAII &mdash; Resource Acquisition Is Initialization</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- LINEAGE                                                       -->
+    <!-- ============================================================ -->
+
+    <h2>The Lineage: From Simula to C++26</h2>
+    <p>C++ sits at the intersection of two traditions: <strong>Simula&rsquo;s object-oriented classes</strong> (from Norway, 1967) and <strong>C&rsquo;s systems-level efficiency</strong> (from Bell Labs, 1972). Bjarne Stroustrup fused them:</p>
+
+    <div class="timeline">
+      <div class="event"><span class="year">1967</span> <strong>Simula 67</strong> &mdash; Nygaard &amp; Dahl invent classes and objects at the Norwegian Computing Center.</div>
+      <div class="event"><span class="year">1972</span> <strong>C</strong> &mdash; Dennis Ritchie at Bell Labs. Portable systems language. See <a href="../CEE/index.html">CEE research project</a>.</div>
+      <div class="event"><span class="year">1979</span> <strong>&ldquo;C with Classes&rdquo;</strong> &mdash; Stroustrup starts his project at Bell Labs, inspired by his Simula PhD work at Cambridge.</div>
+      <div class="event"><span class="year">1983</span> <strong>Renamed C++</strong> &mdash; Rick Mascitti suggests it. Cfront compiler (C++ &rarr; C translator) released.</div>
+      <div class="event"><span class="year">1985</span> <strong>First commercial release</strong> + <em>The C++ Programming Language</em>, 1st edition.</div>
+      <div class="event"><span class="year">1989</span> <strong>C++ 2.0</strong> &mdash; multiple inheritance, abstract classes, protected members.</div>
+      <div class="event"><span class="year">1990</span> <strong>Templates and exceptions</strong> added. <em>The Annotated C++ Reference Manual</em> (Ellis &amp; Stroustrup) becomes the de facto spec.</div>
+      <div class="event"><span class="year">1994</span> <strong>STL</strong> &mdash; Alexander Stepanov&rsquo;s library is accepted into the ISO draft.</div>
+      <div class="event"><span class="year">1998</span> <strong>C++98</strong> &mdash; ISO/IEC 14882:1998. The first standard. STL included.</div>
+      <div class="event"><span class="year">2003</span> <strong>C++03</strong> &mdash; bug-fix release.</div>
+      <div class="event"><span class="year">2011</span> <strong>C++11</strong> &mdash; Stroustrup: &ldquo;feels like a new language.&rdquo; Lambdas, auto, move semantics, smart pointers, range-for, constexpr.</div>
+      <div class="event"><span class="year">2014</span> <strong>C++14</strong> &mdash; generic lambdas, return type deduction, <code>std::make_unique</code>.</div>
+      <div class="event"><span class="year">2017</span> <strong>C++17</strong> &mdash; <code>optional</code>, <code>variant</code>, structured bindings, parallel STL, filesystem.</div>
+      <div class="event"><span class="year">2020</span> <strong>C++20</strong> &mdash; concepts, modules, coroutines, ranges, spaceship operator, calendar <code>chrono</code>.</div>
+      <div class="event"><span class="year">2023</span> <strong>C++23</strong> &mdash; <code>std::expected</code>, <code>std::mdspan</code>, <code>std::print</code>, deducing <code>this</code>, <code>std::generator</code>.</div>
+      <div class="event"><span class="year">2026</span> <strong>C++26</strong> (target) &mdash; reflection, <code>std::simd</code>, linear algebra, contracts, executors.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified connections across the 280-project PNW Research Series corpus:</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td>C++ is a superset of (most of) C; shares the ABI, the preprocessor, the memory model</td></tr>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>C++ sits two rungs above Perl on the escalation ladder &mdash; &ldquo;if Perl can&rsquo;t, try C, if C can&rsquo;t, try C++&rdquo;</td></tr>
+        <tr><td>SNK</td><td>Python &mdash; The Snake</td><td>CPython itself is written in C; PyTorch, TensorFlow, NumPy have C++ cores</td></tr>
+        <tr><td>SYS</td><td>Systems Administration</td><td>C++ daemons, system services, performance-critical tooling</td></tr>
+        <tr><td>MPC</td><td>Math Co-Processor</td><td>Eigen, Armadillo, BLAS wrappers, CUDA kernels &mdash; all C++</td></tr>
+        <tr><td>BLN</td><td>Blender (3D graphics)</td><td>Blender&rsquo;s core is C and C++; Cycles ray tracer is C++</td></tr>
+        <tr><td>AIH</td><td>AI History</td><td>TensorFlow, PyTorch, ONNX Runtime &mdash; ML frameworks live in C++</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>Undefined behavior, memory corruption, data races &mdash; the C++ failure modes</td></tr>
+        <tr><td>BCM</td><td>Browser Compatibility</td><td>Chromium, Firefox, WebKit: all C++ at the core</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="language.html">C++ Core Language</a></li>
+        <li><a href="oop.html">Object-Oriented C++</a></li>
+        <li><a href="templates.html">Templates &amp; Generic Programming</a></li>
+        <li><a href="stdlib.html">Standard Template Library</a></li>
+        <li><a href="modern.html">Modern C++ (C++11&ndash;26)</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>C++ and Object-Oriented Programming &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

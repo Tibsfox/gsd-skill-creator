@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trace Scheduling &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-trs">
+  <header>
+    <h1>Trace Scheduling</h1>
+    <div class="subtitle">Trace Selection, Trace Compaction, VLIW Architectures, and the Deep Crossovers with Context Management, Model Selection, Token Budgets, and High-Fidelity Research</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="history.html">History</a>
+      <a href="algorithms.html">Algorithms</a>
+      <a href="vliw.html">VLIW</a>
+      <a href="ai-crossover.html">AI Crossover</a>
+      <a href="compilers.html">Compilers</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;The key insight of trace scheduling is simple: if you want to find parallelism, you must look beyond the boundaries of a single basic block.&rdquo; &mdash; adapted from Fisher, 1981
+    </blockquote>
+
+    <h2>Research Program Statistics</h2>
+    <div class="stats">
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">1981</span><span class="stat-label">Fisher&rsquo;s Paper</span></div>
+      <div class="stat"><span class="stat-value amber">1024</span><span class="stat-label">Bits &mdash; Multiflow Word</span></div>
+      <div class="stat"><span class="stat-value steel">4&ndash;7</span><span class="stat-label">Avg Basic Block Insns</span></div>
+      <div class="stat"><span class="stat-value blue">2021</span><span class="stat-label">Itanium End</span></div>
+      <div class="stat"><span class="stat-value">Billions</span><span class="stat-label">Hexagon DSPs Deployed</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Dual focus.</strong> This research project covers trace scheduling from two angles. First, trace scheduling as a <em>compiler optimization technique</em> for VLIW architectures &mdash; the original 1981 insight by Joseph Fisher that if basic blocks average only 4&ndash;7 instructions, a compiler must look across branch boundaries to find enough instruction-level parallelism to fill a wide instruction word. Trace selection picks the most-likely execution path; trace compaction packs operations from that path into parallel slots; bookkeeping repairs all the other paths.</p>
+      <p>Second, the <em>deep structural analogy</em> between trace scheduling and AI agent orchestration. Context windows are VLIW slots &mdash; fixed-width resources that must be filled efficiently. Model tiers are functional units &mdash; each with different capabilities and latencies. Token budgets are instruction count limits &mdash; exceeding them is a hard fault. The formal mapping table in the <a href="ai-crossover.html">AI Crossover</a> module makes this correspondence precise.</p>
+    </div>
+
+    <h2>Module Overview</h2>
+    <div class="category-grid">
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-hist">History</span></div>
+        <h3>History &amp; Theory</h3>
+        <p>Fisher, Bulldog, Multiflow, the ILP problem, basic blocks to traces. How a Yale PhD student changed compiler design forever.</p>
+      </a>
+      <a href="algorithms.html" class="category-card">
+        <div><span class="cluster-badge cluster-algo">Algorithms</span></div>
+        <h3>Algorithms</h3>
+        <p>Trace selection, trace compaction, list scheduling, bookkeeping, superblocks, hyperblocks. The mechanics of finding and exploiting ILP.</p>
+      </a>
+      <a href="vliw.html" class="category-card">
+        <div><span class="cluster-badge cluster-arch">Architecture</span></div>
+        <h3>VLIW Architectures</h3>
+        <p>ELI-512, Multiflow, Cydra-5, IA-64/Itanium, TI C6x, Qualcomm Hexagon. The hardware that trace scheduling was built for.</p>
+      </a>
+      <a href="ai-crossover.html" class="category-card">
+        <div><span class="cluster-badge cluster-crossover">Flagship</span></div>
+        <h3>AI Crossover</h3>
+        <p>Context windows as VLIW slots, model selection as FU assignment, token budgets, the formal mapping table, high-fidelity research as VLIW utilization.</p>
+      </a>
+      <a href="compilers.html" class="category-card">
+        <div><span class="cluster-badge cluster-algo">Compilers</span></div>
+        <h3>Compilers</h3>
+        <p>GCC, LLVM, IMPACT, Trimaran, PGO/FDO. The compiler infrastructure that implements trace scheduling and its descendants.</p>
+      </a>
+      <a href="rosetta.html" class="category-card">
+        <div><span class="cluster-badge cluster-rosetta">Rosetta</span></div>
+        <h3>Rosetta &mdash; Scheduling Paradigms</h3>
+        <p>Superscalar vs VLIW vs EPIC vs GPU. The scheduling paradigm space &mdash; who finds ILP, and where.</p>
+      </a>
+      <a href="education.html" class="category-card">
+        <div><span class="cluster-badge cluster-edu">Learn</span></div>
+        <h3>Learning Resources</h3>
+        <p>Fisher&rsquo;s papers, Hennessy &amp; Patterson, LLVM scheduling docs. A staged path from ILP basics to compiler internals.</p>
+      </a>
+    </div>
+
+    <h2>Timeline</h2>
+    <table>
+      <thead><tr><th>Year</th><th>Event</th></tr></thead>
+      <tbody>
+        <tr><td>1976</td><td>FPS AP-120B &mdash; early attached array processor with long instruction word, precursor to VLIW thinking</td></tr>
+        <tr><td>1981</td><td>Joseph Fisher publishes &ldquo;Trace Scheduling: A Technique for Global Compaction&rdquo; &mdash; the founding paper</td></tr>
+        <tr><td>1983</td><td>ELI-512 &mdash; Fisher&rsquo;s experimental VLIW machine at Yale, 512-bit instruction word</td></tr>
+        <tr><td>1984</td><td>Multiflow Computer founded by Fisher, Rau (briefly), and others to commercialize VLIW</td></tr>
+        <tr><td>1985</td><td>John Ellis publishes the Bulldog compiler thesis &mdash; first complete trace scheduling compiler</td></tr>
+        <tr><td>1987</td><td>Multiflow TRACE series ships; Cydrome Cydra-5 ships (software-pipelined VLIW)</td></tr>
+        <tr><td>1990</td><td>Multiflow bankrupt &mdash; VLIW ahead of its time for general-purpose computing</td></tr>
+        <tr><td>1992</td><td>Hwu, Mahlke, Chen publish superblock and hyperblock techniques at UIUC (IMPACT compiler)</td></tr>
+        <tr><td>1994</td><td>HP and Intel announce IA-64 partnership &mdash; EPIC (Explicitly Parallel Instruction Computing)</td></tr>
+        <tr><td>2001</td><td>Itanium launched &mdash; IA-64 reaches production, 128-bit bundles, predication, speculation</td></tr>
+        <tr><td>2012</td><td>AMD transitions GPU architecture from VLIW4/5 to GCN (scalar + vector), ending GPU VLIW era</td></tr>
+        <tr><td>2021</td><td>Intel discontinues Itanium (Kittson) &mdash; end of IA-64, but the ideas live on</td></tr>
+        <tr><td>2024</td><td>VLIW thriving in DSP and mobile &mdash; Qualcomm Hexagon, TI C6x, billions of units shipped</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>ASM</td><td>Assembly Language</td><td>Trace scheduling operates at the assembly level &mdash; reordering, packing, and speculating on machine instructions.</td></tr>
+        <tr><td>ADA</td><td>Ada</td><td>Ada&rsquo;s design was influenced by compiler-architecture co-design thinking; the DoD wanted languages that compilers could optimize aggressively.</td></tr>
+        <tr><td>ALG</td><td>Algorithms</td><td>Trace scheduling is itself an algorithm &mdash; graph traversal, list scheduling, DAG-based compaction, NP-hard optimization heuristics.</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>C++ compiler scheduling backends (LLVM, GCC) implement descendants of trace scheduling for modern targets.</td></tr>
+        <tr><td>CEE</td><td>C</td><td>C was the primary programming language for VLIW systems; Multiflow and Itanium ran C workloads.</td></tr>
+        <tr><td>PAS</td><td>Pascal</td><td>Wirth&rsquo;s design philosophy &mdash; simplicity over complexity &mdash; echoes in the VLIW argument that hardware should be simple and compilers should be smart.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="history.html">History &amp; Theory</a></li>
+        <li><a href="algorithms.html">Algorithms</a></li>
+        <li><a href="vliw.html">VLIW Architectures</a></li>
+        <li><a href="ai-crossover.html">AI Crossover</a></li>
+        <li><a href="compilers.html">Compilers</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="education.html">Learn</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Trace Scheduling &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

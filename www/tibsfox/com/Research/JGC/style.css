@@ -1,0 +1,291 @@
+/* JGC — JVM GC, Memory Management, Tuning, Monitoring
+   Palette: Stop-the-world slate, heap live-green, GC orange, tenured purple, eden yellow
+   Base layout from ../../brand.css */
+
+/* 1. COLOR PALETTE & SEMANTIC OVERRIDES */
+
+:root {
+  --jgc-slate: #2B3445;
+  --jgc-slate-mid: #3E4A5F;
+  --jgc-slate-light: #E8ECF2;
+  --jgc-slate-dark: #1A2230;
+  --jgc-green: #1B7F3F;
+  --jgc-green-mid: #2E9B52;
+  --jgc-green-light: #E6F4EA;
+  --jgc-green-dark: #0D5227;
+  --jgc-orange: #E25822;
+  --jgc-orange-light: #FFEFE6;
+  --jgc-orange-dark: #A23C10;
+  --jgc-purple: #5E35B1;
+  --jgc-purple-light: #EDE7F6;
+  --jgc-purple-dark: #3F1C85;
+  --jgc-yellow: #F9A825;
+  --jgc-yellow-light: #FFF8E1;
+  --jgc-red: #C62828;
+  --jgc-red-light: #FFEBEE;
+  --jgc-teal: #00695C;
+  --jgc-teal-light: #E0F2F1;
+  --jgc-gray-bg: #F7F9FC;
+  --jgc-gray-50: #F7F9FC;
+  --jgc-gray-100: #EEF2F6;
+  --jgc-gray-200: #DDE3EC;
+  --jgc-gray-300: #C6CED9;
+  --jgc-gray-500: #6B7680;
+  --jgc-gray-700: #37414A;
+  --jgc-gray-900: #12181F;
+
+  --page-bg: var(--jgc-gray-bg);
+  --page-text: var(--jgc-gray-900);
+  --page-text-light: var(--jgc-gray-500);
+  --link: var(--jgc-slate);
+  --link-hover: var(--jgc-slate-dark);
+  --accent: var(--jgc-slate);
+  --accent-light: var(--jgc-slate-light);
+  --accent-dark: var(--jgc-slate-dark);
+  --card-bg: #FFFFFF;
+  --card-border: var(--jgc-gray-200);
+  --card-shadow: rgba(18, 24, 31, 0.08);
+  --border: var(--jgc-gray-200);
+  --content-width: 60rem;
+}
+
+/* 2. BODY */
+
+body {
+  background: var(--jgc-gray-bg) !important;
+  color: var(--jgc-gray-900) !important;
+}
+
+/* 3. HEADER */
+
+header {
+  background: linear-gradient(135deg, var(--jgc-slate-dark), var(--jgc-slate), var(--jgc-green-dark)) !important;
+  border-bottom-color: var(--jgc-slate-dark) !important;
+}
+
+header h1 { color: #FFFFFF !important; }
+header .subtitle { color: rgba(255, 255, 255, 0.85) !important; }
+
+header nav a {
+  color: rgba(255, 255, 255, 0.75) !important;
+  border-color: transparent !important;
+}
+header nav a:hover, header nav a.active {
+  color: #FFFFFF !important;
+  border-color: var(--jgc-yellow-light) !important;
+}
+
+/* 4. BLOCKQUOTE */
+
+blockquote {
+  border-left-color: var(--jgc-orange) !important;
+  background: var(--jgc-orange-light) !important;
+}
+
+/* 5. TABLES */
+
+thead tr { background: var(--jgc-slate-dark) !important; color: #FFFFFF !important; }
+thead th { color: #FFFFFF !important; }
+tbody tr:nth-child(even) { background: var(--jgc-gray-100); }
+tbody tr:hover { background: var(--jgc-yellow-light); }
+
+/* 6. CARDS */
+
+.card {
+  border-left: 4px solid var(--jgc-slate);
+  background: var(--jgc-slate-light);
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin: 1.25rem 0;
+}
+
+.card.green { border-left-color: var(--jgc-green); background: var(--jgc-green-light); }
+.card.orange { border-left-color: var(--jgc-orange); background: var(--jgc-orange-light); }
+.card.purple { border-left-color: var(--jgc-purple); background: var(--jgc-purple-light); }
+.card.yellow { border-left-color: var(--jgc-yellow); background: var(--jgc-yellow-light); }
+.card.red { border-left-color: var(--jgc-red); background: var(--jgc-red-light); }
+
+/* 7. CODE BLOCKS */
+
+pre, code {
+  background: var(--jgc-gray-100);
+  border: 1px solid var(--jgc-gray-200);
+  border-radius: 0.375rem;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+pre {
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+code { padding: 0.15rem 0.35rem; font-size: 0.875em; color: var(--jgc-slate-dark); }
+pre code { padding: 0; border: none; background: transparent; color: inherit; }
+
+/* 8. STATS GRID */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.stat {
+  background: var(--card-bg);
+  border: 1px solid var(--jgc-gray-200);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 3px var(--card-shadow);
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--jgc-slate);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--jgc-gray-500);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value.green { color: var(--jgc-green); }
+.stat-value.orange { color: var(--jgc-orange); }
+.stat-value.purple { color: var(--jgc-purple); }
+.stat-value.yellow { color: var(--jgc-yellow); }
+.stat-value.red { color: var(--jgc-red); }
+.stat-value.teal { color: var(--jgc-teal); }
+
+/* 9. CATEGORY GRID */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.category-card {
+  background: var(--card-bg);
+  border: 1px solid var(--jgc-gray-200);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  display: block;
+}
+.category-card:hover {
+  box-shadow: 0 4px 12px var(--card-shadow);
+  border-color: var(--jgc-slate);
+}
+.category-card h3 { margin-top: 0.5rem; color: var(--jgc-slate-dark); }
+
+/* 10. CLUSTER BADGES */
+
+.cluster-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cluster-badge.cluster-core { background: var(--jgc-slate-light); color: var(--jgc-slate-dark); }
+.cluster-badge.cluster-gc { background: var(--jgc-green-light); color: var(--jgc-green-dark); }
+.cluster-badge.cluster-mem { background: var(--jgc-purple-light); color: var(--jgc-purple-dark); }
+.cluster-badge.cluster-tune { background: var(--jgc-orange-light); color: var(--jgc-orange-dark); }
+.cluster-badge.cluster-mon { background: var(--jgc-teal-light); color: var(--jgc-teal); }
+.cluster-badge.cluster-diag { background: var(--jgc-yellow-light); color: #F57F17; }
+.cluster-badge.cluster-cont { background: #FCE4EC; color: #C62828; }
+.cluster-badge.cluster-edu { background: #E8F5E9; color: var(--jgc-green); }
+.cluster-badge.cluster-rosetta { background: #FCE4EC; color: #C62828; }
+
+/* 11. CROSS-LINKS */
+
+.cross-links {
+  background: var(--jgc-gray-100);
+  border: 1px solid var(--jgc-gray-200);
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin-top: 2rem;
+}
+.cross-links h4 { margin-top: 0; color: var(--jgc-gray-700); }
+.cross-links ul { columns: 2; column-gap: 2rem; }
+
+/* 12. PILLARS */
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.pillar {
+  background: var(--card-bg);
+  border-top: 4px solid var(--jgc-slate);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px var(--card-shadow);
+}
+.pillar h4 {
+  margin-top: 0;
+  color: var(--jgc-slate-dark);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+.pillar:nth-child(2) { border-top-color: var(--jgc-green); }
+.pillar:nth-child(2) h4 { color: var(--jgc-green-dark); }
+.pillar:nth-child(3) { border-top-color: var(--jgc-orange); }
+.pillar:nth-child(3) h4 { color: var(--jgc-orange-dark); }
+.pillar:nth-child(4) { border-top-color: var(--jgc-purple); }
+.pillar:nth-child(4) h4 { color: var(--jgc-purple-dark); }
+
+/* 13. MEMORY MAP VISUAL */
+
+.memory-map {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 1.5rem 0;
+  border: 2px solid var(--jgc-slate);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.mem-region {
+  padding: 0.75rem 1rem;
+  color: #FFFFFF;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+}
+.mem-region:last-child { border-bottom: none; }
+.mem-region small { display: block; font-weight: 400; font-size: 0.8rem; opacity: 0.9; }
+.mem-eden     { background: var(--jgc-yellow); color: var(--jgc-gray-900); }
+.mem-survivor { background: var(--jgc-orange); }
+.mem-old      { background: var(--jgc-purple); }
+.mem-meta     { background: var(--jgc-teal); }
+.mem-code     { background: var(--jgc-green); }
+.mem-stack    { background: var(--jgc-slate); }
+.mem-direct   { background: var(--jgc-slate-mid); }
+.mem-native   { background: var(--jgc-gray-500); }
+
+/* 14. FOOTER */
+
+footer {
+  border-top: 1px solid var(--jgc-gray-200);
+  background: var(--jgc-gray-100);
+}

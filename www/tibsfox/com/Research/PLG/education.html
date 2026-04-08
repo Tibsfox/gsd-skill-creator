@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education &mdash; Prolog &amp; Logic Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-plg">
+  <header>
+    <h1>Learning Resources</h1>
+    <div class="subtitle">Books, tutorials, courses, and the logic programming community &mdash; from first contact to CLP expert</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Language</a>
+      <a href="history.html">History</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="expert-systems.html">Expert Systems</a>
+      <a href="constraint-lp.html">CLP</a>
+      <a href="datalog-asp.html">Datalog &amp; ASP</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html" class="active">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The hardest thing about learning Prolog is <em>unlearning</em> imperative reflexes. Every textbook has a moment where the student asks &ldquo;but how do I assign to a variable?&rdquo; and the answer is <em>you don&rsquo;t</em>. The answer is that you state relationships and let unification do the work. Getting to that moment takes about two weeks. The <em>aha</em> is worth it.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- LEARNING PATH                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>A Recommended Learning Path</h2>
+
+    <div class="logic-ladder">
+      <ol>
+        <li><strong>Install SWI-Prolog.</strong> It&rsquo;s free, BSD-licensed, cross-platform, and has the friendliest online REPL (SWISH). Start there unless you have a strong reason otherwise.</li>
+        <li><strong>Read &ldquo;Learn Prolog Now!&rdquo; (LPN!).</strong> Free, online, interactive. Blackburn, Bos, Striegnitz. Covers core Prolog in twelve lessons with exercises. This is the undisputed fastest path from zero to &ldquo;I can write a program.&rdquo;</li>
+        <li><strong>Read Bratko&rsquo;s &ldquo;Prolog Programming for Artificial Intelligence.&rdquo;</strong> The 4th edition (2011) is still the best general-purpose Prolog textbook. Bratko is patient with the beginner and deep with the expert.</li>
+        <li><strong>Watch Markus Triska&rsquo;s &ldquo;The Power of Prolog&rdquo; videos.</strong> Free, on YouTube and the power-of-prolog.com site. Strict ISO Prolog, clpfd, and a deep emphasis on <em>declarative correctness</em>. Triska is the modern successor to Richard O&rsquo;Keefe&rsquo;s school.</li>
+        <li><strong>Read O&rsquo;Keefe&rsquo;s &ldquo;The Craft of Prolog&rdquo; (1990).</strong> Dated examples, timeless wisdom. This is the book that teaches you when (and why) to use cut, when to use accumulators, and what &ldquo;elegance&rdquo; means in this language.</li>
+        <li><strong>Read Sterling &amp; Shapiro&rsquo;s &ldquo;The Art of Prolog&rdquo; (2nd ed, 1994).</strong> The MIT Press classic. More formal than Bratko, with beautiful treatments of metainterpreters, program transformation, and the expert-system tradition.</li>
+        <li><strong>Do the classic exercises.</strong> Zebra puzzle, Einstein&rsquo;s riddle, N-queens (both naive and with clpfd), Tower of Hanoi, tic-tac-toe, a graph coloring problem, a small DCG for arithmetic, the Towers of Hanoi, simple map coloring. They are classics because each one teaches a different piece of the Prolog mental model.</li>
+        <li><strong>Branch out to CLP(FD) and ASP.</strong> Once Prolog feels comfortable, start using <code>library(clpfd)</code> for constraint problems. Then try <a href="https://potassco.org/">clingo</a> to see Answer Set Programming &mdash; a related but distinct paradigm that solves some problems Prolog can&rsquo;t.</li>
+        <li><strong>Learn Datalog via Souffle.</strong> If you&rsquo;re interested in program analysis, Souffle is where Datalog is the most industrial. The tutorial is short and the payoff is large.</li>
+        <li><strong>Read papers.</strong> Colmerauer&rsquo;s &ldquo;The Birth of Prolog,&rdquo; Kowalski&rsquo;s &ldquo;Algorithm = Logic + Control,&rdquo; Warren&rsquo;s WAM paper, Lally et al. on Watson&rsquo;s Prolog component. Primary sources are short and shocking &mdash; the foundational ideas are simpler than the textbooks make them look.</li>
+      </ol>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- BOOKS                                                         -->
+    <!-- ============================================================ -->
+
+    <h2>The Canonical Books</h2>
+
+    <table>
+      <thead><tr><th>Title</th><th>Author(s)</th><th>Year</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Learn Prolog Now!</strong></td>
+          <td>Blackburn, Bos, Striegnitz</td>
+          <td>2006 (ongoing)</td>
+          <td>First contact, interactive, free</td>
+        </tr>
+        <tr>
+          <td><strong>Prolog Programming for Artificial Intelligence</strong></td>
+          <td>Ivan Bratko</td>
+          <td>1st 1986, 4th 2011</td>
+          <td>General textbook, AI applications</td>
+        </tr>
+        <tr>
+          <td><strong>The Art of Prolog</strong></td>
+          <td>Leon Sterling &amp; Ehud Shapiro</td>
+          <td>1st 1986, 2nd 1994</td>
+          <td>Formal treatment, metaprogramming</td>
+        </tr>
+        <tr>
+          <td><strong>The Craft of Prolog</strong></td>
+          <td>Richard O&rsquo;Keefe</td>
+          <td>1990</td>
+          <td>Idioms, style, when to cut</td>
+        </tr>
+        <tr>
+          <td><strong>Programming in Prolog</strong></td>
+          <td>Clocksin &amp; Mellish</td>
+          <td>1st 1981, 5th 2003</td>
+          <td>The original tutorial, still useful</td>
+        </tr>
+        <tr>
+          <td><strong>Paradigms of AI Programming</strong></td>
+          <td>Peter Norvig</td>
+          <td>1992</td>
+          <td>Lisp-based, but the logic programming chapters are gold</td>
+        </tr>
+        <tr>
+          <td><strong>Logic, Programming and Prolog</strong></td>
+          <td>Nilsson &amp; Ma&lstrok;uszy&nacute;ski</td>
+          <td>2nd 1995</td>
+          <td>The logic/theory side (free PDF)</td>
+        </tr>
+        <tr>
+          <td><strong>The Reasoned Schemer</strong></td>
+          <td>Friedman, Byrd, Kiselyov, Hemann</td>
+          <td>2nd 2018</td>
+          <td>miniKanren, relational programming</td>
+        </tr>
+        <tr>
+          <td><strong>Concepts, Techniques, and Models of Computer Programming</strong></td>
+          <td>Van Roy &amp; Haridi</td>
+          <td>2004</td>
+          <td>Multi-paradigm via Oz; deep logic chapters</td>
+        </tr>
+        <tr>
+          <td><strong>Foundations of Logic Programming</strong></td>
+          <td>J.W. Lloyd</td>
+          <td>2nd 1987</td>
+          <td>The theoretical bible</td>
+        </tr>
+        <tr>
+          <td><strong>Principles of Constraint Programming</strong></td>
+          <td>Krzysztof Apt</td>
+          <td>2003</td>
+          <td>CLP theory and practice</td>
+        </tr>
+        <tr>
+          <td><strong>Answer Set Solving in Practice</strong></td>
+          <td>Gebser, Kaminski, Kaufmann, Schaub</td>
+          <td>2012</td>
+          <td>The ASP textbook, by the Potassco team</td>
+        </tr>
+        <tr>
+          <td><strong>Datalog and Logic Databases</strong></td>
+          <td>Sergio Greco &amp; Cristian Molinaro</td>
+          <td>2015</td>
+          <td>Datalog, modern applications</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- ONLINE RESOURCES                                              -->
+    <!-- ============================================================ -->
+
+    <h2>Online Resources</h2>
+
+    <table>
+      <thead><tr><th>Resource</th><th>Type</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Learn Prolog Now! (lpn.swi-prolog.org)</strong></td><td>Interactive book</td><td>The most cited free Prolog tutorial. Now hosted with SWI-Prolog integration so exercises run in the browser.</td></tr>
+        <tr><td><strong>The Power of Prolog (power-of-prolog.com)</strong></td><td>Tutorial + videos</td><td>Markus Triska&rsquo;s deep course. YouTube series and written lessons. Focuses on pure, declarative Prolog and clpfd.</td></tr>
+        <tr><td><strong>SWI-Prolog Manual (swi-prolog.org/pldoc)</strong></td><td>Reference</td><td>Exhaustive, searchable, with examples. The place to look up any built-in predicate.</td></tr>
+        <tr><td><strong>SWISH (swish.swi-prolog.org)</strong></td><td>Browser REPL</td><td>SWI-Prolog in the browser. Shareable programs, notebooks, and examples. Great for experimenting without installing.</td></tr>
+        <tr><td><strong>Exercism Prolog track</strong></td><td>Exercises</td><td>Mentored exercises with feedback. Friendly way to build muscle memory.</td></tr>
+        <tr><td><strong>Rosetta Code Prolog</strong></td><td>Reference</td><td>Hundreds of small programs translated into Prolog for comparison with other languages.</td></tr>
+        <tr><td><strong>99 Prolog Problems</strong></td><td>Exercises</td><td>Werner Hett&rsquo;s classic problem set. Still the best practice problems for intermediate learners.</td></tr>
+        <tr><td><strong>Potassco tutorials (potassco.org)</strong></td><td>ASP course</td><td>The Potsdam Answer Set Solving Collection. Official tutorials for clingo. ASP-specific.</td></tr>
+        <tr><td><strong>Souffle tutorials (souffle-lang.github.io)</strong></td><td>Datalog course</td><td>Industrial Datalog for program analysis.</td></tr>
+        <tr><td><strong>Metalevel Prolog Place</strong></td><td>Reference site</td><td>Triska&rsquo;s meta-predicate and meta-interpreter collection.</td></tr>
+        <tr><td><strong>Reddit r/prolog</strong></td><td>Community</td><td>Low-volume but friendly. Questions get answered.</td></tr>
+        <tr><td><strong>SWI-Prolog discourse (swi-prolog.discourse.group)</strong></td><td>Forum</td><td>Official SWI-Prolog community, active and searchable.</td></tr>
+        <tr><td><strong>##prolog on Libera.Chat</strong></td><td>IRC</td><td>The old-school community hangout. Still active.</td></tr>
+        <tr><td><strong>TPLP (Theory and Practice of Logic Programming)</strong></td><td>Journal</td><td>The field&rsquo;s flagship journal. Cambridge University Press.</td></tr>
+        <tr><td><strong>ALP Newsletter (association for logic programming)</strong></td><td>Community</td><td>Quarterly newsletter. Research highlights, interviews, conference reports.</td></tr>
+        <tr><td><strong>ICLP (International Conference on Logic Programming)</strong></td><td>Conference</td><td>Annual, since 1982. The research venue.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- A FIRST SESSION                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Your First Session</h2>
+
+    <p>Assuming SWI-Prolog is installed. On Debian/Ubuntu: <code>sudo apt install swi-prolog</code>. On macOS: <code>brew install swi-prolog</code>. On Windows: download from <code>swi-prolog.org</code>.</p>
+
+    <p>Start the REPL:</p>
+    <pre><code>$ swipl
+Welcome to SWI-Prolog (threaded, 64 bits, version 9.2.x)
+...
+?-</code></pre>
+
+    <p>Enter a few facts and rules directly:</p>
+    <pre><code>?- assert(likes(alice, prolog)).
+true.
+
+?- assert(likes(bob, datalog)).
+true.
+
+?- assert((programmer(X) :- likes(X, prolog) ; likes(X, datalog))).
+true.
+
+?- programmer(X).
+X = alice ;
+X = bob.</code></pre>
+
+    <p>Now write a file <code>family.pl</code>:</p>
+    <pre><code>parent(tom, bob).
+parent(tom, liz).
+parent(bob, ann).
+
+grandparent(X, Z) :- parent(X, Y), parent(Y, Z).</code></pre>
+
+    <p>And consult it:</p>
+    <pre><code>?- [family].
+true.
+
+?- grandparent(tom, Who).
+Who = ann.</code></pre>
+
+    <p>Congratulations &mdash; you have now written more Prolog than 95% of the world. The next step is to go read LPN! and Bratko and spend two weeks rewiring your brain.</p>
+
+    <!-- ============================================================ -->
+    <!-- COURSES AND PLACES TO LEARN                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Courses and Academic Programs</h2>
+
+    <p>Prolog is most commonly taught in:</p>
+    <ul>
+      <li><strong>Programming language courses</strong> &mdash; Prolog as a paradigm example alongside Lisp/Haskell/ML. Often one or two weeks.</li>
+      <li><strong>Artificial intelligence courses</strong> &mdash; The classical AI half (search, knowledge representation, expert systems) still uses Prolog. Bratko&rsquo;s textbook is the common choice.</li>
+      <li><strong>Logic courses</strong> &mdash; CS-department logic courses sometimes include Prolog as the &ldquo;logic you can run.&rdquo;</li>
+      <li><strong>Databases</strong> &mdash; Datalog appears in graduate database theory courses (Ullman, Abiteboul).</li>
+      <li><strong>Compilers and program analysis</strong> &mdash; Datalog (via Souffle or Doop) appears in modern static-analysis courses.</li>
+    </ul>
+
+    <p>Notable public course materials:</p>
+    <ul>
+      <li><strong>CS386: Logic Programming (Stanford, Gensler)</strong> &mdash; classic materials available online.</li>
+      <li><strong>CS 2800: Discrete Structures (Cornell)</strong> &mdash; uses miniKanren-style relational thinking.</li>
+      <li><strong>Peter Norvig&rsquo;s AI courses</strong> &mdash; available on GitHub, with Prolog-adjacent exercises in Python.</li>
+      <li><strong>Markus Triska&rsquo;s TU Wien materials</strong> &mdash; on power-of-prolog.com, complete with videos.</li>
+    </ul>
+
+    <!-- ============================================================ -->
+    <!-- THE LOGIC PROGRAMMING COMMUNITY                               -->
+    <!-- ============================================================ -->
+
+    <h2>The Community</h2>
+
+    <div class="card scholarly">
+      <p><strong>Small, old, friendly.</strong> The logic programming community is perhaps a few thousand active practitioners worldwide, centered on academic research but with a practical edge. It has the feel of a specialist guild: everyone knows everyone&rsquo;s papers, and questions from beginners are almost always welcomed.</p>
+      <p><strong>The flagship organizations:</strong></p>
+      <ul>
+        <li><strong>Association for Logic Programming (ALP)</strong> &mdash; since 1986. Runs the ICLP conference, publishes TPLP, maintains the newsletter.</li>
+        <li><strong>ICLP (International Conference on Logic Programming)</strong> &mdash; annual since 1982. The main research venue. Proceedings published by OASIcs / Cambridge.</li>
+        <li><strong>LP/NMR (Logic Programming and Nonmonotonic Reasoning)</strong> &mdash; biennial, ASP-focused.</li>
+        <li><strong>Prolog User Groups</strong> &mdash; informal, regional, low-volume.</li>
+      </ul>
+      <p><strong>Places to ask questions:</strong></p>
+      <ul>
+        <li><strong>SWI-Prolog discourse forum</strong> &mdash; fastest response for SWI-specific questions.</li>
+        <li><strong>Stack Overflow, tag &lsquo;prolog&rsquo;</strong> &mdash; well-curated, with regular experts.</li>
+        <li><strong>Reddit r/prolog</strong> &mdash; low-volume, patient.</li>
+        <li><strong>##prolog IRC on Libera.Chat</strong> &mdash; real-time, smaller.</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TIPS FOR SURVIVING THE LEARNING CURVE                         -->
+    <!-- ============================================================ -->
+
+    <h2>Tips for Surviving the Learning Curve</h2>
+
+    <ol>
+      <li><strong>Do not fight the paradigm.</strong> If you&rsquo;re reaching for loops, mutation, or explicit state, you are not writing Prolog yet. Rewrite the problem as &ldquo;what is true about the solution.&rdquo;</li>
+      <li><strong>Start with pure Prolog.</strong> No cut, no assert/retract. Get comfortable with unification and recursion first. Add impurities later, deliberately.</li>
+      <li><strong>Trace every confusing query.</strong> The Byrd-box tracer is Prolog&rsquo;s gift. Watch each step of the search tree. Understanding comes from seeing the choices.</li>
+      <li><strong>Name your variables clearly.</strong> <code>_</code> for &ldquo;don&rsquo;t care,&rdquo; descriptive names for everything else. <code>L</code>, <code>L1</code>, <code>L2</code> is a common anti-pattern.</li>
+      <li><strong>Read other people&rsquo;s Prolog.</strong> Triska, O&rsquo;Keefe, the SWI-Prolog library sources. Good Prolog style is a learned thing and it is <em>very</em> different from good Python style.</li>
+      <li><strong>Use clpfd for arithmetic problems.</strong> Don&rsquo;t use <code>is/2</code> unless you must. CLP(FD) will give you bidirectional, pure, declarative arithmetic.</li>
+      <li><strong>Avoid cut until you understand it.</strong> When you must use cut, read O&rsquo;Keefe&rsquo;s chapter on green vs red cuts first. Most cuts are avoidable.</li>
+      <li><strong>Do the Zebra puzzle.</strong> Really. It&rsquo;s the rite of passage.</li>
+    </ol>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">The Language Itself</a></li>
+        <li><a href="history.html">History &amp; Origins</a></li>
+        <li><a href="implementations.html">Implementations &amp; Tooling</a></li>
+        <li><a href="expert-systems.html">Expert Systems &amp; NLP</a></li>
+        <li><a href="constraint-lp.html">Constraint Logic Programming</a></li>
+        <li><a href="datalog-asp.html">Datalog &amp; ASP</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Prolog &amp; Logic Programming &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

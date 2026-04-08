@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecosystem &amp; Tooling &mdash; Rust</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rst">
+  <header>
+    <h1>Ecosystem &amp; Tooling</h1>
+    <div class="subtitle">Cargo, crates.io, Essential Crates, Web Frameworks, CLI Tools, Infrastructure, Embedded, WebAssembly</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="ownership.html">Ownership</a>
+      <a href="traits.html">Traits</a>
+      <a href="async.html">Async</a>
+      <a href="ecosystem.html" class="active">Ecosystem</a>
+      <a href="unsafe.html">Unsafe</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Cargo is the best package manager in systems programming. The ecosystem it enables &mdash; 150K+ crates on crates.io &mdash; is the largest argument for Rust after the language itself.
+    </blockquote>
+
+    <h2>Cargo</h2>
+    <p>Cargo is Rust&rsquo;s build system and package manager rolled into one. It compiles code, downloads dependencies, builds libraries, runs tests, generates documentation, publishes crates, and manages workspaces. Shipped with Rust 1.0 in May 2015.</p>
+
+<pre><code>[package]
+name = "my-service"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1", features = ["full"] }
+axum = "0.8"
+tracing = "0.1"
+anyhow = "1.0"
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true</code></pre>
+
+    <h3>Key Cargo commands</h3>
+    <table>
+      <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>cargo new</code></td><td>Create a new project</td></tr>
+        <tr><td><code>cargo build</code></td><td>Compile (debug by default)</td></tr>
+        <tr><td><code>cargo build --release</code></td><td>Compile optimized</td></tr>
+        <tr><td><code>cargo run</code></td><td>Build and run</td></tr>
+        <tr><td><code>cargo test</code></td><td>Run all tests (unit, integration, doc tests)</td></tr>
+        <tr><td><code>cargo bench</code></td><td>Run benchmarks</td></tr>
+        <tr><td><code>cargo doc --open</code></td><td>Generate and open documentation</td></tr>
+        <tr><td><code>cargo publish</code></td><td>Publish to crates.io</td></tr>
+        <tr><td><code>cargo clippy</code></td><td>Run the linter (700+ lints)</td></tr>
+        <tr><td><code>cargo fmt</code></td><td>Format all code</td></tr>
+        <tr><td><code>cargo audit</code></td><td>Check for known security vulnerabilities</td></tr>
+        <tr><td><code>cargo deny check</code></td><td>Check licenses and advisories</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Essential Crates</h2>
+    <table>
+      <thead><tr><th>Crate</th><th>Author</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>serde</strong></td><td>David Tolnay</td><td>Serialization framework (JSON, TOML, YAML, MessagePack, &hellip;). The most-downloaded crate.</td></tr>
+        <tr><td><strong>tokio</strong></td><td>Carl Lerche</td><td>Async runtime (multi-threaded, work-stealing). The center of async Rust.</td></tr>
+        <tr><td><strong>axum</strong></td><td>Tokio team</td><td>Web framework built on tower and hyper. Currently dominant.</td></tr>
+        <tr><td><strong>clap</strong></td><td>Community</td><td>CLI argument parsing with derive macros.</td></tr>
+        <tr><td><strong>reqwest</strong></td><td>Sean McArthur</td><td>HTTP client (async + blocking).</td></tr>
+        <tr><td><strong>tracing</strong></td><td>Tokio team</td><td>Structured logging and diagnostics (spans, events).</td></tr>
+        <tr><td><strong>anyhow</strong> / <strong>thiserror</strong></td><td>David Tolnay</td><td>Error handling: <code>anyhow</code> for apps, <code>thiserror</code> for libraries.</td></tr>
+        <tr><td><strong>rayon</strong></td><td>Niko Matsakis, Josh Stone</td><td>Data parallelism (par_iter, work-stealing).</td></tr>
+        <tr><td><strong>regex</strong></td><td>Andrew Gallant</td><td>Regular expressions (linear-time guarantee).</td></tr>
+        <tr><td><strong>sqlx</strong></td><td>Ryan Leckey</td><td>Async SQL with compile-time query checking.</td></tr>
+        <tr><td><strong>diesel</strong></td><td>Sean Griffin</td><td>ORM and query builder (sync).</td></tr>
+        <tr><td><strong>sea-orm</strong></td><td>SeaQL</td><td>Async ORM built on sqlx.</td></tr>
+        <tr><td><strong>hyper</strong></td><td>Sean McArthur</td><td>Low-level HTTP implementation.</td></tr>
+        <tr><td><strong>tower</strong></td><td>Tokio team</td><td>Middleware framework (Service trait).</td></tr>
+        <tr><td><strong>tonic</strong></td><td>Community</td><td>gRPC framework.</td></tr>
+        <tr><td><strong>syn</strong> / <strong>quote</strong> / <strong>proc-macro2</strong></td><td>David Tolnay</td><td>The procedural macro ecosystem. Powers <code>#[derive(...)]</code> everywhere.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Web frameworks</h3>
+    <table>
+      <thead><tr><th>Framework</th><th>Author</th><th>Character</th></tr></thead>
+      <tbody>
+        <tr><td><strong>axum</strong></td><td>Tokio team</td><td>Tower-based, extractors, dominant. The Express/Fastify of Rust.</td></tr>
+        <tr><td><strong>actix-web</strong></td><td>Nikolay Kim</td><td>Actor-based, very fast benchmarks. Mature.</td></tr>
+        <tr><td><strong>warp</strong></td><td>Sean McArthur</td><td>Filter-based composition. Elegant but less ecosystem support.</td></tr>
+        <tr><td><strong>rocket</strong></td><td>Sergio Benitez</td><td>Batteries-included, ergonomic. Was nightly-only for years; now stable.</td></tr>
+        <tr><td><strong>poem</strong></td><td>sunli</td><td>Lightweight, OpenAPI integration.</td></tr>
+      </tbody>
+    </table>
+
+<pre><code>// axum handler
+use axum::{routing::get, Router, Json, extract::Path};
+use serde::Serialize;
+
+#[derive(Serialize)]
+struct User { id: u64, name: String }
+
+async fn get_user(Path(id): Path&lt;u64&gt;) -&gt; Json&lt;User&gt; {
+    Json(User { id, name: format!("user_{}", id) })
+}
+
+#[tokio::main]
+async fn main() {
+    let app = Router::new().route("/users/:id", get(get_user));
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    axum::serve(listener, app).await.unwrap();
+}</code></pre>
+
+    <h2>CLI Tools Written in Rust</h2>
+    <p>The &ldquo;rewrite it in Rust&rdquo; movement has produced a generation of CLI tools that are faster, safer, and often more ergonomic than their C/Unix predecessors:</p>
+
+    <table>
+      <thead><tr><th>Tool</th><th>Replaces</th><th>Author</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ripgrep</strong></td><td>grep</td><td>Andrew Gallant</td></tr>
+        <tr><td><strong>fd</strong></td><td>find</td><td>David Peter</td></tr>
+        <tr><td><strong>bat</strong></td><td>cat</td><td>David Peter</td></tr>
+        <tr><td><strong>eza</strong> (was exa)</td><td>ls</td><td>Community</td></tr>
+        <tr><td><strong>delta</strong></td><td>diff viewer</td><td>Dan Davison</td></tr>
+        <tr><td><strong>dust</strong></td><td>du</td><td>Andy Boot</td></tr>
+        <tr><td><strong>bottom (btm)</strong></td><td>htop/top</td><td>Clement Tsang</td></tr>
+        <tr><td><strong>zoxide</strong></td><td>cd / autojump</td><td>Ajeet D&rsquo;Souza</td></tr>
+        <tr><td><strong>starship</strong></td><td>shell prompt</td><td>Community</td></tr>
+        <tr><td><strong>tokei</strong></td><td>cloc</td><td>Community</td></tr>
+        <tr><td><strong>hyperfine</strong></td><td>benchmarking</td><td>David Peter</td></tr>
+        <tr><td><strong>nushell</strong></td><td>bash/zsh</td><td>Community</td></tr>
+        <tr><td><strong>alacritty</strong></td><td>terminal emulator</td><td>Joe Wilm</td></tr>
+        <tr><td><strong>wezterm</strong></td><td>terminal emulator</td><td>Wez Furlong</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Infrastructure in Rust</h2>
+    <table>
+      <thead><tr><th>Project</th><th>Organization</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Firecracker</strong></td><td>AWS</td><td>MicroVMs for Lambda and Fargate</td></tr>
+        <tr><td><strong>Bottlerocket</strong></td><td>AWS</td><td>Container-optimized Linux OS</td></tr>
+        <tr><td><strong>Pingora</strong></td><td>Cloudflare</td><td>HTTP proxy replacing nginx</td></tr>
+        <tr><td><strong>Deno</strong></td><td>Deno Land</td><td>TypeScript/JavaScript runtime</td></tr>
+        <tr><td><strong>SWC</strong></td><td>Vercel/Community</td><td>TypeScript compiler (70&times; faster than Babel)</td></tr>
+        <tr><td><strong>Turbopack</strong></td><td>Vercel</td><td>Webpack successor</td></tr>
+        <tr><td><strong>Biome</strong></td><td>Community</td><td>JS/TS linter + formatter (from Rome)</td></tr>
+        <tr><td><strong>TiKV</strong></td><td>PingCAP</td><td>Distributed key-value store</td></tr>
+        <tr><td><strong>Tantivy</strong></td><td>Community</td><td>Full-text search engine (Lucene-like)</td></tr>
+        <tr><td><strong>Meilisearch</strong></td><td>Meili</td><td>Search engine for apps</td></tr>
+        <tr><td><strong>Vector</strong></td><td>Datadog</td><td>Observability data pipeline</td></tr>
+        <tr><td><strong>Tauri</strong></td><td>Community</td><td>Desktop app framework (Electron alternative)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Embedded Rust</h2>
+    <div class="card">
+      <p>Rust&rsquo;s <code>no_std</code> mode strips the standard library to a bare-metal-compatible subset. The <strong>Embedded Working Group</strong> maintains:</p>
+      <ul>
+        <li><strong><code>embedded-hal</code></strong> &mdash; hardware abstraction layer traits (SPI, I2C, GPIO, UART, timers)</li>
+        <li><strong><code>cortex-m</code></strong> &mdash; ARM Cortex-M support</li>
+        <li><strong><code>esp-hal</code></strong> &mdash; Espressif ESP32 support</li>
+        <li><strong><code>embassy</code></strong> &mdash; async embedded framework (async tasks on microcontrollers)</li>
+        <li><strong><code>probe-rs</code></strong> &mdash; flash and debug embedded devices</li>
+      </ul>
+    </div>
+
+    <h2>WebAssembly (Wasm)</h2>
+    <p>Rust is the premier language for compiling to WebAssembly:</p>
+
+    <ul>
+      <li><strong><code>wasm-pack</code></strong> &mdash; build pipeline: Rust &rarr; Wasm + JS bindings</li>
+      <li><strong><code>wasm-bindgen</code></strong> &mdash; bridge between Rust and JavaScript</li>
+      <li><strong><code>web-sys</code></strong> / <strong><code>js-sys</code></strong> &mdash; bindings to Web APIs and JS built-ins</li>
+      <li><strong>Yew</strong> &mdash; Elm-like frontend framework in Rust/Wasm</li>
+      <li><strong>Leptos</strong> &mdash; fine-grained reactive framework (signals)</li>
+      <li><strong>Dioxus</strong> &mdash; React-like framework in Rust</li>
+      <li><strong>Wasmtime</strong> (Bytecode Alliance) &mdash; Wasm runtime outside the browser</li>
+      <li><strong>WASI</strong> &mdash; WebAssembly System Interface for server-side Wasm</li>
+    </ul>
+
+    <h2>Tooling</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>rustup</strong></td><td>Toolchain manager (stable, beta, nightly, cross-targets)</td></tr>
+        <tr><td><strong>rustfmt</strong></td><td>Code formatter (<code>cargo fmt</code>)</td></tr>
+        <tr><td><strong>clippy</strong></td><td>Linter (700+ lints, <code>cargo clippy</code>)</td></tr>
+        <tr><td><strong>rust-analyzer</strong></td><td>LSP server for IDEs (VS Code, IntelliJ, Neovim)</td></tr>
+        <tr><td><strong>miri</strong></td><td>Interpreter for detecting UB in unsafe code</td></tr>
+        <tr><td><strong>cargo-expand</strong></td><td>Show macro expansion output</td></tr>
+        <tr><td><strong>cargo-flamegraph</strong></td><td>CPU flame graphs</td></tr>
+        <tr><td><strong>cargo-deny</strong></td><td>License and advisory checking</td></tr>
+        <tr><td><strong>cargo-audit</strong></td><td>Security vulnerability scanning</td></tr>
+        <tr><td><strong>cargo-nextest</strong></td><td>Faster parallel test runner</td></tr>
+        <tr><td><strong>cargo-watch</strong></td><td>Rebuild on file changes</td></tr>
+        <tr><td><strong>cross</strong></td><td>Docker-based cross-compilation</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Testing</h2>
+    <p>Testing is built into the language and Cargo:</p>
+
+<pre><code>#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_add() {
+        assert_eq!(add(2, 3), 5);
+    }
+
+    #[test]
+    #[should_panic(expected = "overflow")]
+    fn test_overflow() {
+        add(u32::MAX, 1);
+    }
+}
+
+/// Adds two numbers.
+///
+/// ```
+/// assert_eq!(my_crate::add(2, 3), 5);
+/// ```
+pub fn add(a: u32, b: u32) -&gt; u32 {
+    a.checked_add(b).expect("overflow")
+}</code></pre>
+
+    <p>Doc tests (examples in <code>///</code> doc comments) are compiled and run as tests. Integration tests live in <code>tests/</code>. Benchmarks use <code>criterion</code> (stable) or <code>#[bench]</code> (nightly). Property testing via <code>proptest</code> or <code>quickcheck</code>.</p>
+
+    <h2>Cross-Compilation</h2>
+<pre><code># Add a target
+rustup target add aarch64-unknown-linux-gnu
+
+# Build for that target
+cargo build --target aarch64-unknown-linux-gnu --release
+
+# Or use `cross` for Docker-based cross-compilation
+cargo install cross
+cross build --target aarch64-unknown-linux-musl --release</code></pre>
+
+    <p>Rust supports dozens of targets: Linux, Windows, macOS, iOS, Android, WebAssembly, bare-metal ARM (Cortex-M, Cortex-A), RISC-V, and more.</p>
+
+    <h2>Real-World Adoption</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Operating Systems</h4>
+        <p><strong>Linux kernel</strong> (since 6.1), <strong>Android AOSP</strong>, <strong>Windows</strong> (DWriteCore), <strong>Fuchsia</strong> (Google), <strong>Redox OS</strong> (pure Rust OS)</p>
+      </div>
+      <div class="pillar">
+        <h4>Cloud Infrastructure</h4>
+        <p><strong>Firecracker</strong> (AWS Lambda), <strong>Bottlerocket</strong> (AWS), <strong>Pingora</strong> (Cloudflare), <strong>Deno</strong>, <strong>Vector</strong> (Datadog)</p>
+      </div>
+      <div class="pillar">
+        <h4>Web &amp; DevTools</h4>
+        <p><strong>SWC</strong>, <strong>Turbopack</strong>, <strong>Biome</strong>, <strong>Rolldown</strong>, <strong>Rspack</strong> &mdash; the entire modern JS build-tool layer</p>
+      </div>
+      <div class="pillar">
+        <h4>Apps &amp; Services</h4>
+        <p><strong>Discord</strong>, <strong>Figma</strong>, <strong>1Password</strong>, <strong>Dropbox</strong>, <strong>npm</strong>, <strong>Chromium</strong> components, <strong>Meta</strong> internal services</p>
+      </div>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CPP</td><td>C++</td><td>Cargo vs CMake+Conan/vcpkg &mdash; Cargo is universally praised; C++ tooling is universally lamented</td></tr>
+        <tr><td>JTS</td><td>JavaScript</td><td>SWC, Turbopack, Biome, Rolldown &mdash; Rust rewrote the JS build layer</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>Cargo ~ Maven/Gradle; crates.io ~ Maven Central (but 150K vs 10M+)</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>PyO3 + maturin: write Python extensions in Rust. Polars (Rust) competes with Pandas.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="ownership.html">Ownership &amp; Borrowing</a></li>
+        <li><a href="traits.html">Traits &amp; Types</a></li>
+        <li><a href="async.html">Async &amp; Concurrency</a></li>
+        <li><a href="unsafe.html">Unsafe &amp; FFI</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="education.html">Learn</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Ecosystem &amp; Tooling &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

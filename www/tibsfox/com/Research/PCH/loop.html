@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Six-Step Loop &mdash; Punch Cards &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-pch">
+  <header>
+    <h1>The Six-Step Loop</h1>
+    <div class="subtitle">C     DESIGN &rarr; CODE &rarr; BUILD &rarr; RUN &rarr; EXAMINE &rarr; IMPROVE</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="hardware.html">Hardware</a>
+      <a href="workflow.html">Workflow</a>
+      <a href="loop.html" class="active">The Loop</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="modern.html">Modern AI</a>
+      <a href="mvp.html">MVP</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The rhythm is eternal. The hardware changes, the turnaround collapses from hours to seconds, the currency shifts from dollars to tokens &mdash; but the six steps are the same in 1965 as in 2026. This is the fundamental engineering rhythm of doing good work under real constraints.
+    </blockquote>
+
+    <h2>The Loop in Detail</h2>
+
+    <div class="the-loop">
+      <ol>
+        <li><strong>DESIGN</strong> &mdash; <em>Think before you act.</em> Understand the problem. Plan the approach. Identify edge cases. Write down test inputs and expected outputs. Check assumptions. This phase produces no code and no output &mdash; and it is the most valuable phase of the loop.</li>
+        <li><strong>CODE</strong> &mdash; <em>Transcribe the design.</em> The act of writing code should be short relative to design. If coding is hard, you didn&rsquo;t design enough. If coding reveals new questions, you did. Either way, the code is a transcription, not an exploration.</li>
+        <li><strong>BUILD</strong> &mdash; <em>Turn source into something runnable.</em> Compile, bundle, package. Fix syntax errors. This is a mechanical step, not a creative one. If build reveals fundamental problems, something went wrong in design or code.</li>
+        <li><strong>RUN</strong> &mdash; <em>Submit to the machine.</em> Execute. Wait for results. Do not try to predict the output &mdash; that was the design phase. Do not try to intervene &mdash; the machine is running now.</li>
+        <li><strong>EXAMINE</strong> &mdash; <em>Read the output carefully.</em> This is the second-most-valuable phase. Most people do it badly. They skim for the answer. They miss warnings. They ignore timing data. The careful programmer reads every line, notes every anomaly, and catalogs everything they didn&rsquo;t expect.</li>
+        <li><strong>IMPROVE</strong> &mdash; <em>Make the minimum necessary change.</em> One bug per iteration. Do not &ldquo;clean up while you&rsquo;re in there.&rdquo; Do not &ldquo;fix some other stuff you noticed.&rdquo; Minimum viable change. Return to step 1 if the change reveals new design questions.</li>
+      </ol>
+    </div>
+
+    <h2>The Loop Across Eras</h2>
+
+    <table>
+      <thead><tr><th>Step</th><th>1965 Punch Card</th><th>1985 Minicomputer</th><th>2015 Interactive</th><th>2026 AI Agent</th></tr></thead>
+      <tbody>
+        <tr><td>Design</td><td>Hours at a desk with pencil and paper</td><td>Flowchart, think a bit, just code</td><td>Whiteboard for 5 minutes, then code</td><td>Plan mode, explicit assumptions</td></tr>
+        <tr><td>Code</td><td>Coding sheet transcribed to cards</td><td>Terminal editor (ed, vi)</td><td>IDE with autocomplete</td><td>Generate or edit via tool call</td></tr>
+        <tr><td>Build</td><td>Keypunch room, rubber band, submit</td><td>make, cc</td><td>gcc, tsc, webpack, CI pipeline</td><td>Test runner, type check, lint</td></tr>
+        <tr><td>Run</td><td>Operator queues your deck, runs it</td><td>a.out, watch it scroll</td><td>CI job, unit tests, preview deploy</td><td>Tool call with output capture</td></tr>
+        <tr><td>Examine</td><td>Green-bar printout, pencil margin notes</td><td>Terminal output, scroll buffer</td><td>Test failures, browser devtools</td><td>Read tool output, parse structured result</td></tr>
+        <tr><td>Improve</td><td>Punch new cards, swap in deck</td><td>Edit file, save, rebuild</td><td>Edit, hot reload, repeat</td><td>Edit, test, commit, next task</td></tr>
+        <tr><td><strong>Turnaround</strong></td><td>4-24 hours</td><td>Seconds to minutes</td><td>Milliseconds to seconds</td><td>Seconds to minutes per tool call</td></tr>
+        <tr><td><strong>Cost per cycle</strong></td><td>$1-50 (1965 dollars)</td><td>Shared CPU time</td><td>Effectively free</td><td>$0.01-$1.00 in tokens</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Compound Interest of Deliberate Iteration</h2>
+
+    <div class="card">
+      <p>If each iteration teaches you 10% more about the problem, after 10 iterations you understand <strong>2.6x more</strong>. If each iteration teaches you 30% more, after 10 iterations you understand <strong>14x more</strong>. The quality of iteration matters more than the quantity.</p>
+      <p>The punch card programmer iterated slowly but each iteration was high-quality: designed carefully, examined thoroughly, improved minimally. The modern REPL programmer iterates quickly but often at low quality: change something, run it, see what happens, repeat. Ten high-quality iterations outperform one hundred low-quality ones.</p>
+      <p><strong>The lesson:</strong> iterate deliberately, not reactively. Make each cycle count. Extract maximum learning from each printout, each test run, each tool call.</p>
+    </div>
+
+    <h2>Anti-Patterns &mdash; How the Loop Fails</h2>
+
+    <table>
+      <thead><tr><th>Anti-Pattern</th><th>What It Looks Like</th><th>Why It Fails</th></tr></thead>
+      <tbody>
+        <tr><td>Skip Design</td><td>&ldquo;Let me just try something&rdquo;</td><td>Wastes iterations on problems you could have predicted</td></tr>
+        <tr><td>Over-Code</td><td>Write 500 lines before first run</td><td>Too many failure modes; debugging is impossible</td></tr>
+        <tr><td>Skip Examine</td><td>Skim output, check only the bottom line</td><td>Miss warnings and silent errors that bite later</td></tr>
+        <tr><td>Over-Improve</td><td>&ldquo;While I&rsquo;m in here, let me also refactor&hellip;&rdquo;</td><td>Breaks working code, extends iteration, confuses the diff</td></tr>
+        <tr><td>Loop Without Learning</td><td>Change at random, run, see, repeat</td><td>High token cost, low understanding, progress stalls</td></tr>
+        <tr><td>Debug-Driven Design</td><td>Figure out the design by running the broken program</td><td>Expensive way to do what paper could do for free</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Loop in AI Agent Work</h2>
+
+    <div class="card modern-card">
+      <p><strong>Modern AI agents running on token budgets rediscover the loop.</strong> An agent that iterates carelessly burns through its context budget quickly. An agent that designs first, verifies assumptions, and makes deliberate changes gets more done per token. Watching a well-designed AI agent work is like watching a 1965 programmer: you can see the discipline of thinking before acting, because the cost of not thinking is real.</p>
+      <p>The gsd-skill-creator project is built around this realization. Every phase has explicit design (discuss), plan (plan), execute, verify, and improve steps. The rhythm is enforced at the framework level. Skill activations, token budgets, checkpoint commits, and structured verification are all ways of forcing the loop to run deliberately.</p>
+    </div>
+
+    <h2>Why the Rhythm Survives</h2>
+
+    <p>The six-step loop has survived 70 years of hardware change because it matches the physical reality of <em>learning under constraints</em>. You cannot learn without observing (examine). You cannot act usefully without planning (design). You cannot improve without changing (improve). You cannot change safely without verifying (run). The steps are not arbitrary &mdash; they are the minimum set of operations needed to compound learning across iterations.</p>
+
+    <p>Hardware changes. The loop stays. Whether you&rsquo;re carrying a 400-card deck to a submission window in 1965, or dispatching a coding agent with a 200K token budget in 2026, the rhythm is the same. Design. Code. Build. Run. Examine. Improve.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="hardware.html">The Physical Reality</a></li>
+        <li><a href="workflow.html">The Programmer&rsquo;s Day</a></li>
+        <li><a href="philosophy.html">Constraints as Craft</a></li>
+        <li><a href="modern.html">AI Agents &amp; Tokens</a></li>
+        <li><a href="mvp.html">Minimum Viable Program</a></li>
+        <li><a href="constraints.html">Doing More With Less</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Six-Step Loop &middot; Punch Cards &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

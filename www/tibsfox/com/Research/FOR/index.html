@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fortran &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-for">
+  <header>
+    <h1>FORTRAN</h1>
+    <div class="subtitle">PROGRAM main &mdash; The First High-Level Language &mdash; Still Running After 69 Years</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="arrays.html">Arrays</a>
+      <a href="hpc.html">HPC</a>
+      <a href="parallel.html">Parallel</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>C     PROGRAM MAIN</strong><br>
+      "I really didn&rsquo;t know what the hell I wanted to do. ... I figured there had to be a better way."<br>
+      &mdash; <em>John Backus</em>, on starting FORTRAN at IBM in 1953
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- RESEARCH PROGRAM STATISTICS                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value cray">69</span><span class="stat-label">Years (1957)</span></div>
+      <div class="stat"><span class="stat-value ibm">1</span><span class="stat-label">First HLL</span></div>
+      <div class="stat"><span class="stat-value green">11</span><span class="stat-label">Standards</span></div>
+      <div class="stat"><span class="stat-value amber">80</span><span class="stat-label">Card columns</span></div>
+      <div class="stat"><span class="stat-value">~1.5M</span><span class="stat-label">Lines in CESM</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why Fortran?</strong> Because it is the only programming language that has been in continuous production use since the Eisenhower administration. Code written in 1970 still runs &mdash; not just runs, but runs in production at NASA, NCAR, ECMWF, ORNL, and every major scientific institution on Earth. It is the language of climate models, weather forecasts, computational chemistry, computational fluid dynamics, dense linear algebra, and the supercomputer benchmarks that determine the TOP500 rankings.</p>
+      <p>Fortran is also the language that proved a high-level language could be efficient. In 1953, when John Backus began the project at IBM, the prevailing wisdom was that compiled code would always be too slow &mdash; that real performance required hand-written assembly. The first FORTRAN compiler shipped in 1957 after 18 person-years of work, and it produced code competitive with hand-tuned assembly. That single demonstration changed everything.</p>
+      <p><strong>Research method:</strong> Primary sources (ANSI standards X3.9 through ISO/IEC 1539-1:2023, IBM historical archives, Backus&rsquo;s Turing Award lecture, Modern Fortran Explained, fortran-lang.org), cross-reference against 290-project PNW Research Series corpus</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE PUNCH CARD                                                -->
+    <!-- ============================================================ -->
+
+    <h2>FORTRAN, As It Looked in 1957</h2>
+
+    <div class="punch-card">
+      <div class="col-marker">[col 1] [col 6] [col 7&hellip;72]</div>
+      <pre style="background: transparent; border: none; padding: 0; color: var(--for-printer); margin: 0.5rem 0;">
+C     COMPUTE THE SUM OF SQUARES FROM 1 TO N
+      PROGRAM SUMSQ
+      INTEGER I, N, TOTAL
+      N = 100
+      TOTAL = 0
+      DO 10 I = 1, N
+         TOTAL = TOTAL + I*I
+   10 CONTINUE
+      WRITE (6,20) TOTAL
+   20 FORMAT (1H , 'SUM OF SQUARES =', I10)
+      STOP
+      END</pre>
+    </div>
+
+    <p>Fixed-form FORTRAN: column 1 was reserved for <code>C</code> comment markers, columns 1-5 for statement labels, column 6 for continuation (any non-blank character indicated continuation from the previous card), and columns 7-72 for the actual statement. Columns 73-80 were for sequence numbers &mdash; in case you dropped your deck of punch cards on the floor.</p>
+
+    <h2>Modern Fortran (2003+) Looks Like This</h2>
+    <pre>
+program sumsq
+  use, intrinsic :: iso_fortran_env, only: int64
+  implicit none
+
+  integer(int64) :: i, n, total
+  n = 100
+  total = sum([(i*i, i=1, n)])    ! array constructor + intrinsic sum
+  print '(a, i0)', 'Sum of squares = ', total
+end program sumsq</pre>
+
+    <p>Free form. Implicit none. Modules from <code>iso_fortran_env</code>. Array constructors. The <code>sum</code> intrinsic operating on a generated array. Modern Fortran is barely recognizable as the same language &mdash; and yet the 1957 program above will still compile and run with any modern Fortran compiler.</p>
+
+    <!-- ============================================================ -->
+    <!-- THE STANDARDS TIMELINE                                        -->
+    <!-- ============================================================ -->
+
+    <h2>The Fortran Timeline &mdash; 69 Years of Standards</h2>
+
+    <div class="fortran-timeline">
+      <ol>
+        <li><strong>1957 &mdash; <em>FORTRAN I</em></strong> &mdash; John Backus and team ship the first compiler at IBM after 18 person-years. Runs on IBM 704. Proves compiled code can rival hand-written assembly.</li>
+        <li><strong>1958 &mdash; <em>FORTRAN II</em></strong> &mdash; Subroutines, functions, COMMON blocks. Programs can be modular for the first time.</li>
+        <li><strong>1962 &mdash; <em>FORTRAN IV</em></strong> &mdash; LOGICAL data type, logical IF. Cleanup of FORTRAN II quirks. Becomes the basis for the first standard.</li>
+        <li><strong>1966 &mdash; <em>FORTRAN 66</em></strong> &mdash; First ANSI standard (X3.9-1966). Codifies the language. The version that ran on early IBM 360s.</li>
+        <li><strong>1978 &mdash; <em>FORTRAN 77</em></strong> &mdash; Structured programming. CHARACTER data type. Block IF/ELSE. The version most legacy code was written in. Reigns for 13 years.</li>
+        <li><strong>1991 &mdash; <em>Fortran 90</em></strong> &mdash; The major modernization. Free-form source. Modules. Array operations. Recursion. Pointers. Dynamic allocation. Mixed case (Fortran instead of FORTRAN). The language reborn.</li>
+        <li><strong>1997 &mdash; <em>Fortran 95</em></strong> &mdash; Minor revision. FORALL, PURE functions. Cleanup of F90.</li>
+        <li><strong>2004 &mdash; <em>Fortran 2003</em></strong> &mdash; Object-oriented programming. ISO_C_BINDING for C interoperability. IEEE arithmetic. Type-bound procedures. The biggest revision since F90.</li>
+        <li><strong>2010 &mdash; <em>Fortran 2008</em></strong> &mdash; Coarrays (native parallel programming). Submodules. DO CONCURRENT. The parallel revolution.</li>
+        <li><strong>2018 &mdash; <em>Fortran 2018</em></strong> &mdash; Enhanced coarrays. Atomic operations. Teams. Better C interop.</li>
+        <li><strong>2023 &mdash; <em>Fortran 2023</em></strong> &mdash; Generics. Conditional expressions. Tokenization improvements. The latest standard.</li>
+      </ol>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODULE OVERVIEW                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-history">History</span></div>
+        <h3>History &amp; Evolution</h3>
+        <p>John Backus and IBM (1953-1957). The 18 person-year compiler. The bet that compiled code could rival assembly. From FORTRAN I to Fortran 2023. The standards lineage. How Fortran outlived every language that tried to replace it.</p>
+        <p><strong>Key:</strong> Backus, IBM 704, ANSI standards, 69 years</p>
+      </a>
+
+      <a href="language.html" class="category-card">
+        <div><span class="cluster-badge cluster-core">Core</span></div>
+        <h3>Language Reference</h3>
+        <p>Modern Fortran (2003+). Source form (free vs fixed). Data types and KIND parameters. Derived types. Modules. INTENT declarations. Object-oriented features. The language as it&rsquo;s written today, not in 1977.</p>
+        <p><strong>Key:</strong> Modern syntax, modules, OO, ISO_C_BINDING</p>
+      </a>
+
+      <a href="arrays.html" class="category-card">
+        <div><span class="cluster-badge cluster-numerics">Arrays</span></div>
+        <h3>Arrays &mdash; The Killer Feature</h3>
+        <p>First-class array types. Whole-array operations. Slicing, striding, broadcasting. Allocatable arrays. Assumed-shape arguments. Intrinsics: SUM, MATMUL, DOT_PRODUCT, TRANSPOSE. Why Fortran arrays beat NumPy on raw performance.</p>
+        <p><strong>Key:</strong> Array semantics, intrinsics, broadcasting, performance</p>
+      </a>
+
+      <a href="hpc.html" class="category-card">
+        <div><span class="cluster-badge cluster-hpc">HPC</span></div>
+        <h3>HPC &amp; Scientific Computing</h3>
+        <p>Why Fortran dominates supercomputing. BLAS, LAPACK, ScaLAPACK. Climate models (CESM, WRF). Weather (ECMWF IFS). Computational chemistry (Gaussian, NWChem). The ecosystem that powers TOP500 benchmarks.</p>
+        <p><strong>Key:</strong> Numerical libraries, climate modeling, supercomputing</p>
+      </a>
+
+      <a href="parallel.html" class="category-card">
+        <div><span class="cluster-badge cluster-parallel">Parallel</span></div>
+        <h3>Parallel Fortran</h3>
+        <p>OpenMP directives. Coarrays (native parallel programming). DO CONCURRENT. MPI bindings. CUDA Fortran and OpenACC for GPU. NVIDIA HPC SDK. The parallel programming models built into the language.</p>
+        <p><strong>Key:</strong> OpenMP, coarrays, GPU, MPI</p>
+      </a>
+
+      <a href="ecosystem.html" class="category-card">
+        <div><span class="cluster-badge cluster-modern">Modern</span></div>
+        <h3>Modern Ecosystem</h3>
+        <p>Compilers: GFortran, Intel ifx, NAG, NVIDIA HPC SDK, LFortran, Flang. fpm (Fortran Package Manager). stdlib. fortls (LSP). FORD (documentation). The renaissance of Fortran tooling in the 2020s.</p>
+        <p><strong>Key:</strong> fpm, stdlib, LFortran, fortran-lang.org</p>
+      </a>
+
+      <a href="rosetta.html" class="category-card">
+        <div><span class="cluster-badge cluster-rosetta">Rosetta</span></div>
+        <h3>Rosetta Integration</h3>
+        <p>Fortran &harr; C &harr; Python &harr; Julia &harr; Rust translation patterns. f2py for NumPy. ISO_C_BINDING. Why every numerical Python package eventually calls Fortran. The escalation ladder for scientific computing.</p>
+        <p><strong>Key:</strong> f2py, C interop, Python wrappers, Julia ccall</p>
+      </a>
+
+      <a href="education.html" class="category-card">
+        <div><span class="cluster-badge cluster-edu">Education</span></div>
+        <h3>Learning Resources</h3>
+        <p>Modern Fortran Explained (Metcalf, Reid, Cohen). Modern Fortran in Practice. Numerical Recipes in Fortran 90. fortran-lang.org tutorials. Discourse community. Why physics and engineering students still learn it.</p>
+        <p><strong>Key:</strong> Books, tutorials, community, courses</p>
+      </a>
+
+      <a href="tools.html" class="category-card">
+        <div><span class="cluster-badge cluster-tools">Tools</span></div>
+        <h3>Tools &amp; Compilers</h3>
+        <p>GFortran (free), Intel ifx (best x86 perf), NAG (best diagnostics), nvfortran (GPU), LFortran (interactive REPL), Flang (LLVM). Build systems: fpm, CMake, Make. Editors and IDEs.</p>
+        <p><strong>Key:</strong> Compiler comparison, build tools, IDEs</p>
+      </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- WHY FORTRAN MATTERS                                           -->
+    <!-- ============================================================ -->
+
+    <h2>Why Fortran Still Matters in 2026</h2>
+
+    <table>
+      <thead><tr><th>Argument</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Performance</strong></td><td>Compilers can vectorize Fortran more aggressively than C/C++ because of stricter aliasing rules. Array semantics enable SIMD optimizations that hand-written loops cannot match.</td></tr>
+        <tr><td><strong>Longevity</strong></td><td>Code written in 1970 still compiles and runs. NASA mission planning software, NCAR climate models, ECMWF weather forecasts &mdash; legacy investments measured in millions of lines.</td></tr>
+        <tr><td><strong>Ecosystem</strong></td><td>BLAS, LAPACK, ScaLAPACK, NetCDF, HDF5, MPI &mdash; the foundations of computational science. Every numerical Python package eventually calls Fortran code.</td></tr>
+        <tr><td><strong>IEEE arithmetic</strong></td><td>Standard floating-point semantics, well-defined behavior, no surprises. Modern Fortran has IEEE_ARITHMETIC module for direct control.</td></tr>
+        <tr><td><strong>Array first</strong></td><td>Arrays are first-class. <code>c = a + b</code> works on entire arrays. No need for NumPy, no broadcasting confusion.</td></tr>
+        <tr><td><strong>Parallel native</strong></td><td>Coarrays in the language standard. DO CONCURRENT for GPU and SIMD. OpenMP directives. MPI bindings.</td></tr>
+        <tr><td><strong>Domain dominance</strong></td><td>Climate, weather, CFD, computational chemistry, dense linear algebra, oil &amp; gas, finance. The scientific computing default.</td></tr>
+        <tr><td><strong>Renaissance</strong></td><td>fpm, stdlib, LFortran, Flang &mdash; modern tooling for the first time in decades. New community, new energy.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- FORTRAN AT A GLANCE                                           -->
+    <!-- ============================================================ -->
+
+    <h2>Fortran at a Glance</h2>
+    <table>
+      <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Name</td><td><strong>FORTRAN</strong> &mdash; FORmula TRANslation</td></tr>
+        <tr><td>Creator</td><td>John W. Backus and team at IBM</td></tr>
+        <tr><td>First release</td><td>1957 (IBM 704)</td></tr>
+        <tr><td>Latest standard</td><td><strong>Fortran 2023</strong> (ISO/IEC 1539-1:2023)</td></tr>
+        <tr><td>Standard body</td><td>ISO/IEC JTC1/SC22/WG5 (international), J3 (US)</td></tr>
+        <tr><td>Paradigm</td><td>Imperative, procedural, modular, object-oriented (2003+), array-oriented</td></tr>
+        <tr><td>Type system</td><td>Static, strong, with KIND parameters for precision</td></tr>
+        <tr><td>Case sensitivity</td><td><strong>Insensitive</strong> &mdash; <code>FOO</code>, <code>foo</code>, <code>Foo</code> are identical</td></tr>
+        <tr><td>Storage order</td><td><strong>Column-major</strong> (vs C&rsquo;s row-major)</td></tr>
+        <tr><td>Killer feature</td><td>First-class arrays with whole-array operations</td></tr>
+        <tr><td>Domain</td><td>Scientific computing, HPC, numerical libraries, climate, weather</td></tr>
+        <tr><td>Notable code</td><td>BLAS, LAPACK, CESM, WRF, Gaussian, NWChem</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CEE</td><td>C Programming</td><td>The two languages of HPC. C interop via ISO_C_BINDING. Fortran is older (1957 vs 1972).</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>Often the &ldquo;rival&rdquo; in scientific computing debates. Different strengths.</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>NumPy/SciPy use Fortran underneath. f2py is the bridge. Python is the front-end, Fortran is the engine.</td></tr>
+        <tr><td>RST</td><td>Rust</td><td>The new contender for safe scientific computing. Increasingly seen alongside Fortran.</td></tr>
+        <tr><td>ASM</td><td>Assembly Language</td><td>What Fortran replaced in 1957. The original argument: compiled code can match hand-written assembly.</td></tr>
+        <tr><td>MPC</td><td>Math Co-Processor</td><td>The CUDA Fortran connection. nvfortran. GPU offloading.</td></tr>
+        <tr><td>RXX</td><td>Rexx &amp; ARexx</td><td>Both 1979 era. Both still in production. Different domains.</td></tr>
+        <tr><td>CLI</td><td>The Art of the CLI</td><td>Compile and run cycle. <code>gfortran prog.f90 -o prog &amp;&amp; ./prog</code></td></tr>
+        <tr><td>JAV</td><td>Java &amp; JVM</td><td>Java was sold as &ldquo;C++ for the masses.&rdquo; Fortran was already &ldquo;assembly for the masses,&rdquo; 40 years earlier.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="arrays.html">Arrays &mdash; The Killer Feature</a></li>
+        <li><a href="hpc.html">HPC &amp; Scientific Computing</a></li>
+        <li><a href="parallel.html">Parallel Fortran</a></li>
+        <li><a href="ecosystem.html">Modern Ecosystem</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="tools.html">Tools &amp; Compilers</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Fortran &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

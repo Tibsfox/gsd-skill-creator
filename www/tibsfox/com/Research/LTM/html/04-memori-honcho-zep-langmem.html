@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memori, Honcho, Zep, LangMem: A Comparative
+Survey — LTM Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #221f3a;
+            --accent: #FFB300;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #9575CD;
+            --border: #2f2a4a;
+            --primary: #4527A0;
+            --mem: #FFD54F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; padding: 2rem; max-width: 900px; margin: 0 auto; }
+        h1 { color: var(--mem); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--mem); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--mem); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--mem); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--mem); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(149,117,205,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        LTM — Long-Term Memory Systems for AI Agents<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to LTM Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="memori-honcho-zep-langmem-a-comparative-survey">Memori,
+    Honcho, Zep, LangMem: A Comparative Survey</h1>
+    <p><strong>Research module 04 — LTM (Long-Term Memory)
+    series</strong> <strong>Date:</strong> 2026-04-08
+    <strong>Author:</strong> gsd-skill-creator research team
+    <strong>Status:</strong> Primary-source survey; all numbers verified
+    against vendor documentation and benchmark pages.</p>
+    <h2 id="why-this-module-exists">0. Why this module exists</h2>
+    <p>gsd-skill-creator needs long-term memory. Not the toy kind — the
+    kind that survives session boundaries, supports cross-project
+    recall, distinguishes “this was true once” from “this is true now,”
+    and does not set fire to the token budget every time an agent asks a
+    question. The market has quietly converged on four serious
+    open-source or open-core contenders: <strong>Memori</strong> from
+    Gibson AI, <strong>Honcho</strong> from Plastic Labs,
+    <strong>Zep</strong> from Zep AI (backed by the open-source
+    <strong>Graphiti</strong> library), and <strong>LangMem</strong>
+    from the LangChain team.</p>
+    <p>In January 2026, Memori Labs published a LoCoMo benchmark showing
+    Memori at 81.95% accuracy against Zep at 79.09%, LangMem at 78.05%,
+    and Mem0 at 62.47%, while using 1,294 tokens per query versus 26,000
+    for a full-context baseline — a 95% token reduction at near-parity
+    accuracy (full context scored 87.52%). The gap between the top three
+    and Mem0 is enormous; the gap between Memori and Zep is narrow but
+    structurally interesting. This survey pulls apart the architectures
+    behind those numbers and extracts actionable patterns for our own
+    LTM work.</p>
+    <p>We are specifically looking for answers to three questions:</p>
+    <ol type="1">
+    <li><strong>What does “state of the art” actually look like in 2026
+    for agent long-term memory?</strong></li>
+    <li><strong>Why does Memori beat Mem0 by ~20 percentage points on
+    the same benchmark?</strong></li>
+    <li><strong>What can we steal for gsd-skill-creator without getting
+    tangled in someone else’s vendor lock-in?</strong></li>
+    </ol>
+    <h2 id="the-benchmark-that-anchors-the-conversation">1. The
+    benchmark that anchors the conversation</h2>
+    <p>Before dissecting the systems, a brief note on LoCoMo. LoCoMo
+    (Long Conversation Memory) is a benchmark of multi-session dialogues
+    — each conversation spans many sessions across simulated days or
+    weeks — with four question categories designed to stress different
+    retrieval primitives:</p>
+    <ul>
+    <li><strong>Single-hop:</strong> direct recall of one fact from one
+    earlier message</li>
+    <li><strong>Multi-hop:</strong> synthesis across multiple earlier
+    sessions</li>
+    <li><strong>Temporal:</strong> reasoning about how facts evolved
+    over time (“what was the user’s favorite coffee <em>last
+    month</em>”)</li>
+    <li><strong>Open-domain:</strong> distributed context synthesis
+    where the answer is implicit across many exchanges</li>
+    </ul>
+    <p>Memori Labs evaluated with <strong>LLM-as-a-Judge using
+    GPT-4.1-mini</strong>, scoring each answer along factual accuracy,
+    relevance, completeness, and contextual appropriateness. Critically,
+    all four dimensions are scored together into a single accuracy
+    number — which is why a system that recalls facts correctly but
+    loses narrative framing can still lose points.</p>
+    <p>The full-context baseline sits at <strong>87.52%</strong>. Any
+    memory system is, by definition, compressing conversation history;
+    the question is how much accuracy you pay for the compression.
+    Memori pays about 5.6 points. Zep pays about 8.4 points. LangMem
+    pays about 9.5 points. Mem0 pays 25 points — an entire quartile —
+    while still spending 1,764 tokens per query, more than Memori’s
+    1,294. Mem0 is strictly dominated on this benchmark.</p>
+    <p>That dominance is the first signal: <strong>architecture matters
+    more than storage choice.</strong> All four systems are backed by
+    real databases with real vector indices. The delta is in how they
+    <em>use</em> them.</p>
+    <h2 id="memori-semantic-triples-linked-to-conversation-summaries">2.
+    Memori: semantic triples linked to conversation summaries</h2>
+    <h3 id="architecture-in-one-sentence">2.1 Architecture in one
+    sentence</h3>
+    <p>Memori is a <strong>SQL-native, LLM-agnostic memory
+    layer</strong> that intercepts LLM client calls, extracts semantic
+    triples from conversations, and keeps those triples <strong>linked
+    by reference to the conversation summaries they were extracted
+    from</strong>.</p>
+    <h3 id="the-dual-layer-design">2.2 The dual-layer design</h3>
+    <p>This is the key architectural idea and the one worth copying.
+    Memori runs two parallel memory stores:</p>
+    <p><strong>Layer A — Semantic triples.</strong> Structured (subject,
+    predicate, object) facts with explicit attributes. The Advanced
+    Augmentation engine enriches each triple along eight dimensions:
+    <em>attributes, events, facts, people, preferences, relationships,
+    rules,</em> and <em>skills</em>. These are the precise-recall
+    substrate. When an agent asks “what is the user’s preferred deploy
+    target,” a triple like
+    <code>(user, prefers_deploy_target, Fly.io)</code> can be surfaced
+    directly without any narrative reconstruction.</p>
+    <p><strong>Layer B — Conversation summaries.</strong> Rolling
+    summaries of the conversation at session granularity, evolving
+    bidirectionally as new messages arrive. These are the narrative-flow
+    substrate. They capture the <em>why</em> and the <em>when</em>, not
+    just the <em>what</em>.</p>
+    <p><strong>The link.</strong> Every triple in Layer A carries a
+    backward reference to the summary in Layer B that it was extracted
+    from. This is the move that prevents “factual orphaning” — the
+    failure mode where a memory system recalls a fact but cannot
+    reconstruct the circumstances that made it true, which is
+    catastrophic on multi-hop and temporal questions. When the retriever
+    pulls a triple, it can optionally pull the linked summary as
+    context. When the retriever pulls a summary for a narrative
+    question, the linked triples become footnotes.</p>
+    <p>Mem0 does not do this. Mem0 extracts facts and stores them with
+    vector embeddings but treats facts as standalone atoms. When asked a
+    multi-hop question it retrieves the top-K atoms and hopes the LLM
+    can reconstruct the flow. On LoCoMo, the reconstruction fails about
+    38% of the time. <strong>This is the structural reason for the
+    20-point gap.</strong></p>
+    <h3 id="the-three-step-write-path">2.3 The three-step write
+    path</h3>
+    <ol type="1">
+    <li><strong>Session Input.</strong> Messages feed continuously into
+    the Advanced Augmentation engine through registered LLM client
+    instances. Memori hooks in at the SDK level (Python, TypeScript) —
+    developers do not rewrite their call sites, they wrap them.</li>
+    <li><strong>Summary Loop.</strong> The engine maintains an evolving
+    summary for the current session, updating bidirectionally as new
+    messages arrive. “Bidirectional” here means the summary can be
+    refined backwards — a late message can change how earlier messages
+    are summarized, which matters for correctly anchoring temporal
+    facts.</li>
+    <li><strong>Memory Extraction.</strong> Once a session chunk reaches
+    threshold, the engine extracts new triples and writes them with
+    backward references to the current summary. The extraction is
+    LLM-assisted but schema-constrained to the eight Advanced
+    Augmentation categories.</li>
+    </ol>
+    <h3 id="the-read-path">2.4 The read path</h3>
+    <p>Retrieval operates at three hierarchical levels:</p>
+    <ul>
+    <li><strong>Entity level</strong> — users, subjects,
+    organizations</li>
+    <li><strong>Process level</strong> — specific agents or roles</li>
+    <li><strong>Session level</strong> — conversation contexts</li>
+    </ul>
+    <p>Memori calls this “Intelligent Recall” and injects relevant
+    context automatically into subsequent prompts. The hierarchical
+    scoping is how Memori keeps retrieval precise in multi-tenant
+    deployments: queries bound to an entity only see that entity’s
+    triples, with session-level narrowing layered on top.</p>
+    <h3 id="storage-deployment-and-license">2.5 Storage, deployment, and
+    license</h3>
+    <ul>
+    <li><strong>Backend:</strong> SQL-native. Memori runs against a
+    relational database (the docs describe it as a “SQL-native,
+    LLM-agnostic layer that turns agent execution and conversation into
+    structured, persistent state”). Triples are rows. Summaries are
+    rows. The backward reference is a foreign key. No exotic graph
+    database required.</li>
+    <li><strong>BYODB:</strong> Organizations can self-host against
+    their own database infrastructure.</li>
+    <li><strong>SDKs:</strong> Python, TypeScript. Also MCP (Model
+    Context Protocol) for Claude Code and Cursor integration, and a REST
+    API.</li>
+    <li><strong>LLM support:</strong> OpenAI, Anthropic, Gemini,
+    DeepSeek, Bedrock, Grok. Framework integrations for LangChain,
+    Pydantic AI, Agno.</li>
+    <li><strong>Cost at benchmark scale:</strong> roughly <strong>$0.001
+    per call</strong> on GPT-4.1-mini — a 20x cost reduction versus
+    full-context, per Memori Labs’ own numbers.</li>
+    <li><strong>License:</strong> Apache 2.0.</li>
+    </ul>
+    <h3 id="what-memori-gets-right">2.6 What Memori gets right</h3>
+    <p>The dual-layer plus backward-reference design is the ball game.
+    It is simple enough to implement in a week on PostgreSQL and
+    powerful enough to beat four competing systems, including one (Zep)
+    with a sophisticated temporal graph. The token efficiency (1,294
+    tokens/query) comes directly from this design — the retriever can
+    return a triple <em>instead of</em> the full summary when the
+    question is narrow, or a summary <em>with</em> linked triples when
+    the question is broad. It never has to dump the whole
+    conversation.</p>
+    <h3 id="what-we-do-not-know-about-memori">2.7 What we do not know
+    about Memori</h3>
+    <p>The docs do not publish the actual prompt used for triple
+    extraction, the threshold logic for session chunking, or how the
+    backward references are weighted during hybrid retrieval. The
+    benchmark page is marketing-polished; the GitHub README is thin on
+    internals. Clean-room reimplementation would require inferring these
+    from observed behavior or reading the source code directly.</p>
+    <h2 id="honcho-continual-learning-and-the-dialectic-api">3. Honcho:
+    continual learning and the dialectic API</h2>
+    <h3 id="architecture-in-one-sentence-1">3.1 Architecture in one
+    sentence</h3>
+    <p>Honcho, from Plastic Labs, is a
+    <strong>theory-of-mind-first</strong> memory system that treats
+    memory formation as continual background reasoning about entities,
+    exposing the result through a “dialectic API” with tunable reasoning
+    intensity.</p>
+    <h3 id="the-entity-model-is-the-innovation">3.2 The entity model is
+    the innovation</h3>
+    <p>Memori, Zep, and LangMem all model memory around user-assistant
+    pairs. Honcho explodes the model. Its primary unit is the
+    <strong>Peer</strong> — any entity that participates in
+    conversations, whether human user, AI agent, NPC, or group. Sessions
+    are collections of peers. Observation scoping is per-peer: peer A
+    can participate in a session without peer B seeing A’s private
+    context. This makes Honcho the only system in this survey with
+    first-class support for multi-agent games, group chats with
+    asymmetric visibility, and adaptive NPCs.</p>
+    <p>Under the hood, data is organized hierarchically:
+    <strong>Workspaces → Peers → Sessions → Messages → Collections →
+    Documents.</strong></p>
+    <h3 id="the-dialectic-api-and-dreaming">3.3 The dialectic API and
+    “dreaming”</h3>
+    <p>Honcho separates two code paths:</p>
+    <ul>
+    <li><strong><code>context()</code></strong> — fast, curated, returns
+    reasoning-plus-history in roughly 200ms. This is the hot path,
+    analogous to what most memory systems expose.</li>
+    <li><strong><code>.chat()</code></strong> — on-demand reasoning with
+    configurable intensity (Minimal, Low, Medium, High, Max). Higher
+    intensities run multi-pass pattern analysis or research-grade
+    exhaustive analysis.</li>
+    </ul>
+    <p>The intensity tiers are priced separately: Minimal ~$0.001, Low
+    ~$0.01, Medium ~$0.05, High ~$0.10, Max ~$0.50 per call. This
+    exposes a capability the other systems hide: <strong>you can pay
+    more tokens at query time for better synthesis when the question
+    warrants it.</strong></p>
+    <p>“Dreaming” is the async background reasoning layer. Honcho runs
+    what the docs call Neuromancer (their term for custom reasoning
+    models) against peer data continuously, generating peer
+    representations and session summaries without blocking the runtime
+    path. This is functionally similar to LangMem’s background path but
+    scoped to theory-of-mind rather than generic fact extraction —
+    Honcho is trying to model <em>who this peer is</em>, not just
+    <em>what they said</em>.</p>
+    <h3 id="storage-and-stack">3.4 Storage and stack</h3>
+    <ul>
+    <li><strong>Backend:</strong> PostgreSQL with pgvector. Alternative
+    vector stores: Turbopuffer, LanceDB.</li>
+    <li><strong>Server:</strong> FastAPI, Python 3.10+, UV for
+    dependency management, TOML configuration.</li>
+    <li><strong>SDKs:</strong> Python, TypeScript.</li>
+    <li><strong>LLM providers:</strong> Google Gemini, Anthropic Claude,
+    OpenAI, Groq.</li>
+    <li><strong>Deployment:</strong> Docker Compose self-host, Fly.io,
+    or managed at app.honcho.dev ($100 free credits; ingestion priced at
+    $2/M tokens).</li>
+    <li><strong>Open source:</strong> yes (repo at
+    plastic-labs/honcho).</li>
+    </ul>
+    <h3 id="evals-and-the-honest-answer">3.5 Evals and the honest
+    answer</h3>
+    <p>Plastic Labs maintains a public leaderboard at evals.honcho.dev.
+    At the time of research, the page surface was sparse — title
+    present, detailed benchmark tables not rendered to the fetcher — so
+    we cannot quote Honcho’s LoCoMo score with confidence. Honcho does
+    not appear in the Memori Labs comparative chart. The most honest
+    framing: <strong>Honcho is optimizing for a different goal.</strong>
+    It is aimed at long-running agents with evolving personality models,
+    not at single-shot question answering. LoCoMo may not be its best
+    showcase.</p>
+    <h3 id="what-honcho-gets-right">3.6 What Honcho gets right</h3>
+    <p>The peer abstraction is genuinely forward-looking. Anyone
+    building multi-agent systems, group chats, or NPC-heavy environments
+    will eventually need something like it, and no other system in this
+    survey offers it natively. The tunable reasoning intensity is also
+    clever: it shifts a dial that most memory systems leave fixed at one
+    of two extremes.</p>
+    <h2 id="zep-graphiti-and-the-temporal-knowledge-graph">4. Zep:
+    Graphiti and the temporal knowledge graph</h2>
+    <h3 id="architecture-in-one-sentence-2">4.1 Architecture in one
+    sentence</h3>
+    <p>Zep is a managed service wrapping <strong>Graphiti</strong>, an
+    open-source <strong>bi-temporal knowledge graph framework</strong>
+    that uses LLMs to extract entities and relationships from
+    conversations and maintains temporal validity windows on every
+    fact.</p>
+    <h3 id="what-bi-temporal-actually-means">4.2 What “bi-temporal”
+    actually means</h3>
+    <p>Every fact in Graphiti carries two timestamps:
+    <strong><code>valid_at</code></strong> (when the fact became true)
+    and <strong><code>invalid_at</code></strong> (when it stopped being
+    true). When a fact changes, Graphiti does not overwrite or delete —
+    it invalidates the old fact (sets <code>invalid_at</code> to now)
+    and inserts a new one. This preserves the full history, which is
+    essential for temporal questions (“what was the user’s job <em>last
+    year</em>”) and also for audit and debugging.</p>
+    <p>The core data model:</p>
+    <ul>
+    <li><strong>Entities (nodes)</strong> — users, organizations,
+    concepts, whatever the LLM extracts. Each node carries an evolving
+    summary that changes as more is learned.</li>
+    <li><strong>Facts / relationships (edges)</strong> — typed edges
+    between nodes with temporal validity windows and textual
+    descriptions.</li>
+    <li><strong>Episodes</strong> — the raw ingested messages,
+    documents, or JSON blobs, retained as provenance ground truth so any
+    fact can be traced back to its source.</li>
+    <li><strong>Custom types</strong> — defined via Pydantic models for
+    projects that want prescribed ontology (e.g., “this is a medical
+    record, here are the allowed relationship types”).</li>
+    </ul>
+    <h3 id="the-hybrid-retrieval-pattern">4.3 The hybrid retrieval
+    pattern</h3>
+    <p>This is the second insight worth stealing (after Memori’s
+    backward reference). Graphiti retrieval combines three
+    mechanisms:</p>
+    <ol type="1">
+    <li><strong>Semantic search</strong> via embeddings (vector
+    similarity)</li>
+    <li><strong>Keyword search</strong> via BM25 (lexical match for rare
+    tokens, names, codes)</li>
+    <li><strong>Graph traversal</strong> across edges (follow
+    relationships K hops)</li>
+    </ol>
+    <p>The three results are merged and re-ranked. This “enables
+    low-latency, high-precision queries without reliance on LLM
+    summarization” — the retriever does not need to call an LLM at read
+    time, which is how Zep claims <strong>P95 retrieval latency under
+    200ms</strong>. The retrieval cost is the index lookup plus the
+    traversal, not a generation step.</p>
+    <p>Zep publishes benchmark configurations that trade accuracy for
+    latency:</p>
+    <ul>
+    <li><strong>Zep 5/2:</strong> ~119 ms, ~65% accuracy
+    (aggressive)</li>
+    <li><strong>Zep 30/30:</strong> ~277 ms, ~83% accuracy
+    (quality-focused)</li>
+    </ul>
+    <p>Memori Labs tested Zep at <strong>79.09%</strong> on LoCoMo with
+    3,911 tokens per query — roughly 3x Memori’s token usage at a
+    2.86-point lower accuracy. The token cost is the price Zep pays for
+    graph traversal: the retriever is pulling structured subgraphs, and
+    those subgraphs have to be serialized into the prompt.</p>
+    <h3 id="storage-backends">4.4 Storage backends</h3>
+    <p>This is where Graphiti quietly ships the most options in the
+    survey. Supported graph backends:</p>
+    <ul>
+    <li><strong>Neo4j</strong> 5.26+ (default)</li>
+    <li><strong>FalkorDB</strong> 1.1.2+</li>
+    <li><strong>Kuzu</strong> 0.11.2+</li>
+    <li><strong>Amazon Neptune</strong> (Database Cluster or Analytics
+    Graph)</li>
+    </ul>
+    <p>The portable design is a real asset — you can run Graphiti
+    against Kuzu in a desktop-embedded context, against Neo4j in a
+    managed cloud, or against Neptune on AWS, with the same driver
+    interface (<code>Neo4jDriver</code>, <code>FalkorDriver</code>,
+    <code>KuzuDriver</code>, <code>NeptuneDriver</code>).</p>
+    <h3 id="llm-requirements">4.5 LLM requirements</h3>
+    <p>Graphiti requires an LLM provider supporting <strong>Structured
+    Output</strong> (OpenAI and Gemini recommended). The LLM is used for
+    three things:</p>
+    <ol type="1">
+    <li>Extracting entities and relationships from unstructured
+    input</li>
+    <li>Generating entity summaries that evolve as new data arrives</li>
+    <li>Autonomous graph construction during ingestion</li>
+    </ol>
+    <p>At read time the LLM is <em>not</em> required — the hybrid
+    retrieval is deterministic. This matters for latency and for cost
+    predictability.</p>
+    <h3 id="deployment-open-source-and-compliance">4.6 Deployment, open
+    source, and compliance</h3>
+    <ul>
+    <li><strong>Graphiti:</strong> Apache 2.0, self-hosted. Repo at
+    getzep/graphiti.</li>
+    <li><strong>Zep Cloud:</strong> managed service over Graphiti. SOC2
+    Type II and HIPAA certified. Python, TypeScript, Go SDKs.</li>
+    <li><strong>Integration examples:</strong> LangChain, LlamaIndex,
+    AutoGen.</li>
+    </ul>
+    <h3 id="what-zep-gets-right">4.7 What Zep gets right</h3>
+    <p>The temporal model is genuinely necessary for any domain where
+    facts change — and that is most domains. A user changes jobs, a
+    project adopts a new library version, a team re-organizes, a
+    medication changes. Systems that just overwrite facts lose the
+    ability to answer “when did that change.” Graphiti’s bi-temporal
+    design solves this cleanly.</p>
+    <p>The hybrid retrieval (semantic + BM25 + graph traversal, no LLM
+    at read time) is also the right answer. Pure vector search misses
+    exact-name queries. Pure graph traversal misses paraphrased queries.
+    Pure BM25 misses synonyms. Merging all three is how you get both
+    precision and recall.</p>
+    <h3 id="where-zep-loses-ground">4.8 Where Zep loses ground</h3>
+    <p>Token cost. 3,911 tokens per query is three times Memori’s usage,
+    and the accuracy advantage from richer context does not materialize
+    on LoCoMo — Zep scores <em>lower</em>. The graph serialization
+    overhead is real. For a production deployment paying per token on a
+    frontier model, the Memori architecture is cheaper per answered
+    question even before considering infrastructure.</p>
+    <h2 id="langmem-the-taxonomy-and-the-two-paths">5. LangMem: the
+    taxonomy and the two paths</h2>
+    <h3 id="architecture-in-one-sentence-3">5.1 Architecture in one
+    sentence</h3>
+    <p>LangMem is a LangChain-native memory SDK that codifies the
+    <strong>semantic / episodic / procedural</strong> memory taxonomy
+    and exposes two integration patterns: agent-driven (hot path) or
+    background-consolidating (background path).</p>
+    <h3 id="the-taxonomy">5.2 The taxonomy</h3>
+    <p>LangMem’s contribution is conceptual clarity. It names three
+    memory types explicitly:</p>
+    <ul>
+    <li><strong>Semantic memory (facts):</strong> “Key facts and
+    relationships that ground agent responses.” This is what Memori
+    calls triples and what Zep calls the entity graph.</li>
+    <li><strong>Procedural memory (behavior):</strong> “Internalized
+    knowledge of how to perform tasks.” LangMem stores this as
+    <em>updated instructions in the agent’s prompt</em> — a feedback
+    loop where the agent’s core instructions evolve based on observed
+    performance. This is unique in the survey and deeply
+    interesting.</li>
+    <li><strong>Episodic memory (events):</strong> “Memories of past
+    interactions and specific experiences, often taking the form of
+    few-shot examples distilled from longer interactions.” LangMem
+    acknowledges it “doesn’t yet support opinionated utilities for
+    episodic memory” — this is the weakest leg of the stool.</li>
+    </ul>
+    <p>Procedural memory is the most distinctive piece. No other system
+    in this survey rewrites the <em>prompt itself</em> based on
+    accumulated experience. Memori, Honcho, and Zep all store data and
+    retrieve it into a static prompt. LangMem stores <em>how to
+    behave</em> and modifies the prompt scaffolding.</p>
+    <h3 id="hot-path-vs-background-path">5.3 Hot path vs background
+    path</h3>
+    <ul>
+    <li><strong>Hot path:</strong> agents actively manage memory during
+    conversations using tools (<code>create_manage_memory_tool()</code>
+    and <code>create_search_memory_tool()</code>). The agent decides,
+    turn by turn, what to store and what to query. This gives the LLM
+    explicit control and makes memory operations visible in traces.</li>
+    <li><strong>Background path:</strong> a memory manager process
+    extracts, consolidates, and updates memories outside the active
+    conversation thread. The conversation is not blocked on memory
+    writes.</li>
+    </ul>
+    <p>This is a pragmatic choice. Hot path is simpler to reason about
+    and debug — everything is in the trace. Background path is cheaper
+    and lower-latency at runtime. LangMem lets you pick per memory
+    type.</p>
+    <h3 id="storage">5.4 Storage</h3>
+    <ul>
+    <li><strong>InMemoryStore</strong> — process-level, dev only.</li>
+    <li><strong>AsyncPostgresStore</strong> — production-ready, persists
+    across restarts.</li>
+    <li><strong>Custom implementations</strong> via the
+    <code>BaseStore</code> interface.</li>
+    <li><strong>LangGraph Platform integration</strong> — memory store
+    is built into LangGraph’s Long-term Memory Store, available by
+    default in all LangGraph Platform deployments.</li>
+    <li><strong>Embeddings:</strong> OpenAI
+    <code>text-embedding-3-small</code> at 1536 dims in the defaults;
+    configurable.</li>
+    </ul>
+    <p>Retrieval is <strong>vector similarity only</strong> by default.
+    This is a meaningful gap versus Zep’s hybrid approach — LangMem is
+    going to miss exact-name queries that a BM25 + vector hybrid would
+    catch.</p>
+    <h3 id="benchmark-position">5.5 Benchmark position</h3>
+    <p>Memori Labs measured LangMem at <strong>78.05% on
+    LoCoMo</strong>. Close to Zep, notably ahead of Mem0, notably behind
+    Memori. LangMem does not publish its own LoCoMo numbers in the
+    launch blog, so we are relying on a competitor’s benchmark — caveat
+    applied.</p>
+    <h3 id="what-langmem-gets-right">5.6 What LangMem gets right</h3>
+    <p>The taxonomy is the cleanest in the industry. Any team starting
+    from scratch should begin with LangMem’s naming: semantic / episodic
+    / procedural. It maps cleanly to cognitive science literature, to
+    what users actually ask for, and to the shape of the data.</p>
+    <p>Procedural memory as “rewrite the prompt” is the most interesting
+    idea in the survey. It is the only mechanism that lets an agent get
+    structurally better at a task over time without fine-tuning.</p>
+    <h3 id="where-langmem-loses-ground">5.7 Where LangMem loses
+    ground</h3>
+    <p>Vector-only retrieval, explicit LangChain coupling, and the
+    admitted gap in episodic memory tooling. The LangChain coupling is
+    not a flaw per se but it is a decision you commit to — there is no
+    clean way to use LangMem outside the LangGraph ecosystem.</p>
+    <h2 id="side-by-side">6. Side-by-side</h2>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Dimension</th>
+    <th>Memori</th>
+    <th>Honcho</th>
+    <th>Zep / Graphiti</th>
+    <th>LangMem</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>LoCoMo accuracy</strong></td>
+    <td><strong>81.95%</strong></td>
+    <td>not measured</td>
+    <td>79.09%</td>
+    <td>78.05%</td>
+    </tr>
+    <tr>
+    <td><strong>Tokens per query</strong></td>
+    <td><strong>1,294</strong></td>
+    <td>varies by tier</td>
+    <td>3,911</td>
+    <td>not published</td>
+    </tr>
+    <tr>
+    <td><strong>Storage backend</strong></td>
+    <td>SQL (BYODB)</td>
+    <td>Postgres + pgvector</td>
+    <td>Neo4j / FalkorDB / Kuzu / Neptune</td>
+    <td>Postgres / LangGraph store</td>
+    </tr>
+    <tr>
+    <td><strong>Retrieval</strong></td>
+    <td>Triples + summary refs</td>
+    <td>Vector + reasoning</td>
+    <td><strong>Semantic + BM25 + graph traversal</strong></td>
+    <td>Vector similarity</td>
+    </tr>
+    <tr>
+    <td><strong>Temporal model</strong></td>
+    <td>Session-linked triples</td>
+    <td>Session summaries</td>
+    <td><strong>Bi-temporal (valid_at / invalid_at)</strong></td>
+    <td>Not first-class</td>
+    </tr>
+    <tr>
+    <td><strong>Entity model</strong></td>
+    <td>Entity / process / session</td>
+    <td><strong>Peers (users, agents, NPCs, groups)</strong></td>
+    <td>Nodes with evolving summaries</td>
+    <td>User-assistant</td>
+    </tr>
+    <tr>
+    <td><strong>Write path</strong></td>
+    <td>Sync extraction</td>
+    <td>Async “dreaming”</td>
+    <td>Sync entity + edge extraction</td>
+    <td>Hot path tools OR background consolidator</td>
+    </tr>
+    <tr>
+    <td><strong>LLM at read time</strong></td>
+    <td>No</td>
+    <td>Optional (tiered)</td>
+    <td><strong>No</strong></td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td><strong>Procedural memory</strong></td>
+    <td>Not first-class</td>
+    <td>Not first-class</td>
+    <td>Not first-class</td>
+    <td><strong>First-class (prompt rewrite)</strong></td>
+    </tr>
+    <tr>
+    <td><strong>License</strong></td>
+    <td>Apache 2.0</td>
+    <td>Open source (repo)</td>
+    <td>Apache 2.0 (Graphiti)</td>
+    <td>Open source</td>
+    </tr>
+    <tr>
+    <td><strong>MCP support</strong></td>
+    <td>Yes</td>
+    <td>Via Claude-Honcho plugin</td>
+    <td>Not documented</td>
+    <td>Not documented</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="why-memori-beats-mem0-by-20-points">7. Why Memori beats Mem0
+    by 20 points</h2>
+    <p>This is the question that pulled us into the research. Mem0 is
+    not in this survey by name but it is the loser in every comparison
+    and the industry has moved past it. The structural answer:</p>
+    <p><strong>Mem0 treats facts as atomic, embedded, and
+    disconnected.</strong> A retrieval call returns top-K vector-similar
+    fragments. The LLM has to reconstruct context at generation time
+    from whatever came back.</p>
+    <p><strong>Memori treats facts as referenced, meaning every triple
+    carries a pointer home to its source summary.</strong> A retrieval
+    call can return:</p>
+    <ol type="1">
+    <li>Just the triple (precise answer, cheap)</li>
+    <li>The triple plus its summary (precise answer with context, medium
+    cost)</li>
+    <li>Just the summary (narrative answer with triples as footnotes,
+    for open-domain questions)</li>
+    </ol>
+    <p>The retriever picks the right mode per query type. On single-hop
+    questions (1,294 tokens is plenty), both systems look roughly
+    similar. On multi-hop and temporal questions, Mem0 either misses the
+    connection or drowns the prompt in low-precision neighbors; Memori
+    pulls the linked summaries and retains narrative flow. On LoCoMo’s
+    multi-hop and temporal categories, Mem0 collapses.</p>
+    <p><strong>The lesson is not “use more tokens.” Memori uses
+    <em>fewer</em> tokens than Mem0 (1,294 vs 1,764) and beats it by 20
+    points. The lesson is “link your atoms to their context and give the
+    retriever permission to follow the link.”</strong></p>
+    <h2 id="what-the-winners-share">8. What the winners share</h2>
+    <p>Cross-cutting patterns that appear in the top three (Memori, Zep,
+    LangMem’s background path) but not in Mem0:</p>
+    <ol type="1">
+    <li><strong>Structured extraction, not raw chunking.</strong> All
+    three use LLM-assisted extraction to pull typed facts out of
+    conversation before storage. Mem0’s simpler “store and embed”
+    approach loses precision.</li>
+    <li><strong>Deterministic retrieval, no LLM in the read
+    loop.</strong> Memori’s triple lookup, Zep’s hybrid graph query, and
+    LangMem’s vector search all run without calling an LLM at read time.
+    This is how they hit sub-200ms latencies and predictable costs.</li>
+    <li><strong>Two-tier memory: immediate + consolidated.</strong>
+    Memori’s summary loop runs continuously. Zep’s graph updates
+    incrementally. LangMem’s background path consolidates. Honcho
+    dreams. Something is always running off the hot path to improve the
+    memory store.</li>
+    <li><strong>Explicit temporal handling.</strong> Memori via
+    session-linked summaries with evolution, Zep via bi-temporal edges,
+    LangMem via episodic memory (partially). Systems that overwrite
+    facts cannot answer temporal questions.</li>
+    <li><strong>Hierarchical scoping.</strong> Memori’s entity / process
+    / session, Honcho’s workspaces / peers / sessions, Zep’s
+    episodes-to-entities-to-facts. None of the winners rely on flat
+    memory pools.</li>
+    </ol>
+    <h2 id="what-we-can-steal-for-gsd-skill-creator">9. What we can
+    steal for gsd-skill-creator</h2>
+    <p>gsd-skill-creator is not a conversation agent. It is an adaptive
+    layer that creates, validates, and manages skills / agents / teams /
+    chipsets over time. The memory we need is <strong>skill experience
+    memory</strong> — which skills worked on which kinds of problems,
+    what the user’s preferences were for how they are called, what
+    patterns emerged from accumulated runs. This looks more like Memori
+    + LangMem’s procedural memory than like Zep’s temporal social
+    graph.</p>
+    <p>Concrete extractions:</p>
+    <h3 id="adopt-the-memori-dual-layer-pattern">9.1 Adopt the Memori
+    dual-layer pattern</h3>
+    <p>Store skill-execution events as <strong>triples with
+    back-references to session summaries</strong>. Triples:
+    <code>(skill, succeeded_on, problem_type)</code>,
+    <code>(user, prefers, invocation_pattern)</code>,
+    <code>(skill, fails_when, precondition_missing)</code>. Session
+    summaries: per-project rolling narrative of what was attempted and
+    what worked. Every triple carries a foreign key to the summary it
+    came from. This maps trivially onto PostgreSQL, which we already
+    have via the Artemis II pgvector stack.</p>
+    <h3 id="adopt-graphitis-hybrid-retrieval">9.2 Adopt Graphiti’s
+    hybrid retrieval</h3>
+    <p>Even for our simpler domain, the semantic + BM25 + traversal
+    merge is the right default. Skill names and file paths are
+    exact-match tokens that vector search mangles; user preferences are
+    paraphrase-heavy and need embeddings; skill-to-skill dependency
+    edges are graph-shaped. We do not need Neo4j — Kuzu (embedded) or
+    Postgres with a recursive CTE over a closure table will do the job
+    for our scale.</p>
+    <h3 id="adopt-langmems-procedural-memory">9.3 Adopt LangMem’s
+    procedural memory</h3>
+    <p>This is the most ambitious steal. Store “how to invoke skill X
+    effectively” as <strong>prompt fragments that get rewritten based on
+    observed outcomes</strong>. Every time a skill runs, the post-run
+    review can update the fragment. Over time, the skill’s calling
+    convention evolves. This is exactly the adaptive learning layer
+    gsd-skill-creator is supposed to be, and no one in the survey has
+    done it well yet — LangMem introduces the concept but does not
+    provide deep tooling. A clean implementation is a real
+    contribution.</p>
+    <h3 id="adopt-memoris-token-efficiency-discipline">9.4 Adopt
+    Memori’s token-efficiency discipline</h3>
+    <p><strong>1,294 tokens per query is the bar.</strong> Any context
+    we inject into an agent prompt should be budgeted against that
+    number. The discipline is not about being stingy — it is about
+    treating context injection as a ranked-relevance problem. We should
+    publish our own per-query token numbers in gsd-skill-creator’s docs
+    from day one.</p>
+    <h3 id="adopt-honchos-peer-model-later-conditionally">9.5 Adopt
+    Honcho’s peer model — later, conditionally</h3>
+    <p>The peer abstraction is the right shape <em>if</em>
+    gsd-skill-creator ever becomes a multi-agent orchestration platform.
+    For the current single-user adaptive-learning scope, peers are
+    overkill and we should stick with entity / process / session
+    scoping. Flag it for a v2 revisit when multi-agent teams become a
+    first-class concern.</p>
+    <h3 id="do-not-adopt-mem0s-pattern">9.6 Do NOT adopt Mem0’s
+    pattern</h3>
+    <p>Vector-only, flat, atom-store retrieval loses 20 points on
+    LoCoMo. This is now settled. Any component we write that stores
+    facts should link them to their source context and support scoped
+    retrieval.</p>
+    <h2 id="open-questions-for-follow-up-research">10. Open questions
+    for follow-up research</h2>
+    <ul>
+    <li><strong>The exact prompt Memori uses for triple
+    extraction.</strong> Clean-room reimplementation is blocked without
+    either reading the source or running extensive behavioral probes.
+    This is module 05 material.</li>
+    <li><strong>Whether Kuzu’s embedded graph performance holds under
+    the kind of query mix gsd-skill-creator would generate.</strong>
+    Graphiti ships a Kuzu driver but the benchmarks are
+    Neo4j-flavored.</li>
+    <li><strong>How procedural memory interacts with version
+    control.</strong> If gsd-skill-creator rewrites a skill’s prompt
+    fragment based on experience, and the skill is committed to git, who
+    owns the merge? This needs its own design doc.</li>
+    <li><strong>Honcho’s actual LoCoMo number.</strong> The evals page
+    was sparse at fetch time. Worth circling back in a month.</li>
+    <li><strong>Whether the 95% token reduction holds at 100x
+    conversation length.</strong> Memori’s benchmark is on LoCoMo, which
+    is long but finite. Production conversations can be unbounded. The
+    summary loop’s behavior under unbounded growth is not
+    documented.</li>
+    </ul>
+    <h2 id="bottom-line">11. Bottom line</h2>
+    <p>If we had to deploy a memory system for gsd-skill-creator this
+    week with no time to build our own, the answer is <strong>Memori for
+    the storage and retrieval substrate, LangMem’s procedural memory
+    pattern layered on top, and Graphiti’s hybrid retrieval approach
+    backing any graph-shaped queries we add later</strong>. Honcho is
+    the right answer for a different product (multi-agent theory-of-mind
+    environments), not ours. Zep is the right answer if we needed
+    enterprise compliance (SOC2, HIPAA) out of the box, but we do not,
+    and the token cost is real.</p>
+    <p>The broader lesson is that the LTM problem is <em>not</em> a
+    storage problem. Every system in this survey runs on boring
+    infrastructure — PostgreSQL, pgvector, Neo4j, Kuzu. The
+    architectural choices are upstream: how facts are extracted, whether
+    they are linked to context, whether temporal change is first-class,
+    whether retrieval merges multiple signals. Memori’s 20-point lead
+    over Mem0 is the loudest possible demonstration that <strong>the
+    retrieval architecture is where the accuracy lives, not the
+    database</strong>.</p>
+    <p>We should build accordingly.</p>
+    <hr />
+    <h2 id="sources">Sources</h2>
+    <p><strong>Primary (fetched 2026-04-08):</strong></p>
+    <ul>
+    <li>Memori Labs benchmark page —
+    https://memorilabs.ai/benchmark</li>
+    <li>Memori GitHub repository —
+    https://github.com/gibsonai/memori</li>
+    <li>Honcho landing page — https://honcho.dev</li>
+    <li>Honcho GitHub repository —
+    https://github.com/plastic-labs/honcho</li>
+    <li>Honcho evals leaderboard — https://evals.honcho.dev/ (sparse at
+    fetch time)</li>
+    <li>Zep landing page — https://www.getzep.com/</li>
+    <li>Zep GitHub repository — https://github.com/getzep/zep</li>
+    <li>Graphiti GitHub repository —
+    https://github.com/getzep/graphiti</li>
+    <li>LangMem GitHub repository —
+    https://github.com/langchain-ai/langmem</li>
+    <li>LangMem SDK launch blog —
+    https://blog.langchain.com/langmem-sdk-launch</li>
+    </ul>
+    <p><strong>Confidence notes:</strong></p>
+    <ul>
+    <li>Memori’s internal prompts and threshold logic: NOT in public
+    docs. Inferred from behavioral description only.</li>
+    <li>Honcho’s LoCoMo score: UNKNOWN. evals page did not render
+    benchmark data at fetch time. Flagged for follow-up.</li>
+    <li>Zep’s underlying storage: Graphiti supports Neo4j / FalkorDB /
+    Kuzu / Neptune; which one Zep Cloud uses by default is not stated in
+    their public docs.</li>
+    <li>LangMem’s LoCoMo number (78.05%): comes from Memori Labs’
+    comparative chart, not LangChain’s own publication. Worth
+    independently verifying.</li>
+    <li>All dollar costs are approximate and tied to GPT-4.1-mini
+    pricing at the time of the Memori Labs benchmark.</li>
+    </ul>
+    <p><strong>Research date:</strong> 2026-04-08 <strong>Valid
+    until:</strong> 2026-05-08 (memory systems are moving fast;
+    re-verify before citing in production decisions)</p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to LTM Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/LTM/">tibsfox.com/Research/LTM</a>
+    </div>
+</body>
+</html>

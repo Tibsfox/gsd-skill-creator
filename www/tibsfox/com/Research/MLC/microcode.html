@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Microcode &mdash; MLC</title><link rel="stylesheet" href="../../brand.css"><link rel="stylesheet" href="style.css"><script src="../series.js" defer></script></head>
+<body class="project-mlc">
+  <header><h1>Microcode &amp; Micro-Operations</h1><div class="subtitle">The Layer Below Machine Code in CISC CPUs &mdash; uops, Microcode ROM, Firmware Updates</div>
+    <nav><a href="index.html">Overview</a> <a href="encoding.html">Encoding</a> <a href="execution.html">Execution</a> <a href="formats.html">Formats</a> <a href="microcode.html" class="active">Microcode</a> <a href="security.html">Security</a> <a href="rosetta.html">Rosetta</a> <a href="education.html">Learn</a> <a href="history.html">History</a></nav></header>
+  <main>
+    <blockquote>In CISC processors like x86, complex machine instructions are decoded into simpler <strong>micro-operations (uops)</strong> that the execution engine actually runs. Microcode is the firmware that controls this translation. It is the layer between machine code and the hardware.</blockquote>
+
+    <h2>What Microcode Is</h2>
+    <div class="card">
+      <p>A simple x86 instruction like <code>add eax, ebx</code> maps to a single uop. A complex instruction like <code>rep movsb</code> (string copy) or <code>cpuid</code> maps to <strong>many</strong> uops, sequenced by a microcode ROM inside the CPU. The microcode ROM is a small read-only memory containing micro-programs for complex instructions.</p>
+    </div>
+
+    <h2>Simple vs Microcoded Instructions</h2>
+    <table>
+      <thead><tr><th>Instruction</th><th>uops</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><code>add eax, ebx</code></td><td>1</td><td>Hardwired decoder</td></tr>
+        <tr><td><code>mov rax, [rbx+rcx*8]</code></td><td>1 (fused load+move)</td><td>Hardwired</td></tr>
+        <tr><td><code>push rbp</code></td><td>2 (store + adjust rsp)</td><td>Hardwired</td></tr>
+        <tr><td><code>div rcx</code></td><td>~30&ndash;90</td><td>Microcode ROM</td></tr>
+        <tr><td><code>rep movsb</code></td><td>Variable (length-dependent)</td><td>Microcode ROM</td></tr>
+        <tr><td><code>cpuid</code></td><td>~100+</td><td>Microcode ROM</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The uop Cache (DSB)</h2>
+    <p>Modern Intel CPUs have a <strong>Decoded Stream Buffer (DSB)</strong> &mdash; a cache of already-decoded uops. On a DSB hit, the CPU skips the expensive decode stage entirely. This is why hot loops run faster after the first iteration: the decoded uops are cached.</p>
+
+    <h2>Microcode Updates</h2>
+    <div class="card amber">
+      <p>Intel and AMD can update microcode via <strong>firmware patches</strong> loaded at boot time (by the BIOS/UEFI or the OS). This is how Spectre/Meltdown mitigations were deployed: microcode patches changed the behavior of speculative execution without replacing the CPU. Linux loads microcode updates via <code>/lib/firmware/intel-ucode/</code> or <code>amd-ucode/</code>.</p>
+    </div>
+
+    <h2>RISC vs CISC at the Microcode Level</h2>
+    <table>
+      <thead><tr><th>Architecture</th><th>Microcode?</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><strong>x86/x86-64</strong></td><td>Yes (extensive)</td><td>Complex variable-length instructions need a micro-program to sequence</td></tr>
+        <tr><td><strong>ARM64</strong></td><td>Minimal or none</td><td>Fixed-width RISC instructions map directly to hardware operations</td></tr>
+        <tr><td><strong>RISC-V</strong></td><td>None</td><td>Simple instructions by design; hardware implements them directly</td></tr>
+      </tbody>
+    </table>
+
+    <p>The irony: modern x86 CPUs are <em>externally</em> CISC but <em>internally</em> RISC. The decoder translates complex x86 instructions into simple uops that execute on a RISC-like out-of-order core. The microcode is what makes this translation possible for the really complex instructions.</p>
+
+    <h2>Corpus Cross-References</h2>
+    <table><thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead><tbody>
+      <tr><td>ASM</td><td>Assembly</td><td>The microarchitecture module covers the same hardware from the programmer&rsquo;s perspective</td></tr>
+      <tr><td>RCA</td><td>Root Cause Analysis</td><td>Spectre/Meltdown mitigations were deployed as microcode updates</td></tr>
+    </tbody></table>
+    <div class="cross-links"><h4>Related Modules</h4><ul><li><a href="index.html">Overview</a></li><li><a href="encoding.html">Encoding</a></li><li><a href="execution.html">Execution</a></li><li><a href="formats.html">Formats</a></li><li><a href="security.html">Security</a></li><li><a href="rosetta.html">Rosetta</a></li><li><a href="education.html">Learn</a></li><li><a href="history.html">History</a></li></ul></div>
+  </main>
+  <footer><p>Microcode &middot; PNW Research Series &middot; April 2026</p><p><a href="../index.html">PNW Research Series</a></p></footer>
+</body></html>

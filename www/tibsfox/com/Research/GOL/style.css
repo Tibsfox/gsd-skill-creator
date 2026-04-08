@@ -1,0 +1,134 @@
+/* GOL — Go (Golang)
+   Palette: Gopher cyan, Go sky-blue, cloud white, terminal dark, simplicity green
+   Base layout from ../../brand.css */
+
+/* 1. COLOR PALETTE & SEMANTIC OVERRIDES */
+
+:root {
+  --gol-cyan: #00ADD8;
+  --gol-cyan-dark: #007D9C;
+  --gol-cyan-light: #E0F7FA;
+  --gol-blue: #00758D;
+  --gol-blue-dark: #003B4D;
+  --gol-blue-light: #E6F1F5;
+  --gol-dark: #1A1A2E;
+  --gol-dark-mid: #2D2D44;
+  --gol-dark-light: #F0F0F4;
+  --gol-green: #4CAF50;
+  --gol-green-light: #E8F5E9;
+  --gol-green-dark: #2E7D32;
+  --gol-orange: #E65100;
+  --gol-orange-light: #FFF3E0;
+  --gol-purple: #5E35B1;
+  --gol-purple-light: #EDE7F6;
+  --gol-red: #C62828;
+  --gol-red-light: #FFEBEE;
+  --gol-yellow: #F9A825;
+  --gol-yellow-light: #FFF8E1;
+  --gol-gray-bg: #FAFCFD;
+  --gol-gray-50: #FAFCFD;
+  --gol-gray-100: #F0F4F8;
+  --gol-gray-200: #E0E6EC;
+  --gol-gray-300: #CFD8E0;
+  --gol-gray-500: #6B7C8A;
+  --gol-gray-700: #374956;
+  --gol-gray-900: #12191F;
+
+  --page-bg: var(--gol-gray-bg);
+  --page-text: var(--gol-gray-900);
+  --page-text-light: var(--gol-gray-500);
+  --link: var(--gol-cyan-dark);
+  --link-hover: var(--gol-blue-dark);
+  --accent: var(--gol-cyan);
+  --accent-light: var(--gol-cyan-light);
+  --accent-dark: var(--gol-cyan-dark);
+  --card-bg: #FFFFFF;
+  --card-border: var(--gol-gray-200);
+  --card-shadow: rgba(18, 25, 31, 0.08);
+  --border: var(--gol-gray-200);
+  --content-width: 60rem;
+}
+
+/* 2. BODY */
+body { background: var(--gol-gray-bg) !important; color: var(--gol-gray-900) !important; }
+
+/* 3. HEADER */
+header {
+  background: linear-gradient(135deg, var(--gol-dark), var(--gol-blue-dark), var(--gol-cyan-dark)) !important;
+  border-bottom-color: var(--gol-dark) !important;
+}
+header h1 { color: #FFFFFF !important; }
+header .subtitle { color: rgba(255, 255, 255, 0.85) !important; }
+header nav a { color: rgba(255, 255, 255, 0.75) !important; border-color: transparent !important; }
+header nav a:hover, header nav a.active { color: #FFFFFF !important; border-color: var(--gol-cyan) !important; }
+
+/* 4. BLOCKQUOTE */
+blockquote { border-left-color: var(--gol-cyan) !important; background: var(--gol-cyan-light) !important; }
+
+/* 5. TABLES */
+thead tr { background: var(--gol-dark) !important; color: #FFFFFF !important; }
+thead th { color: #FFFFFF !important; }
+tbody tr:nth-child(even) { background: var(--gol-gray-100); }
+tbody tr:hover { background: var(--gol-cyan-light); }
+
+/* 6. CARDS */
+.card { border-left: 4px solid var(--gol-cyan); background: var(--gol-cyan-light); border-radius: 0.5rem; padding: 1rem 1.5rem; margin: 1.25rem 0; }
+.card.green { border-left-color: var(--gol-green); background: var(--gol-green-light); }
+.card.orange { border-left-color: var(--gol-orange); background: var(--gol-orange-light); }
+.card.purple { border-left-color: var(--gol-purple); background: var(--gol-purple-light); }
+.card.red { border-left-color: var(--gol-red); background: var(--gol-red-light); }
+.card.yellow { border-left-color: var(--gol-yellow); background: var(--gol-yellow-light); }
+
+/* 7. CODE */
+pre, code { background: var(--gol-dark-light); border: 1px solid var(--gol-gray-200); border-radius: 0.375rem; font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace; }
+pre { padding: 1rem 1.25rem; overflow-x: auto; margin: 1rem 0; font-size: 0.875rem; line-height: 1.6; }
+code { padding: 0.15rem 0.35rem; font-size: 0.875em; color: var(--gol-blue-dark); }
+pre code { padding: 0; border: none; background: transparent; color: inherit; }
+
+/* 8. STATS */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.stat { background: var(--card-bg); border: 1px solid var(--gol-gray-200); border-radius: 0.5rem; padding: 1rem; text-align: center; box-shadow: 0 1px 3px var(--card-shadow); }
+.stat-value { display: block; font-size: 1.75rem; font-weight: 700; line-height: 1.2; color: var(--gol-cyan-dark); }
+.stat-label { display: block; font-size: 0.75rem; color: var(--gol-gray-500); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-value.green { color: var(--gol-green); }
+.stat-value.orange { color: var(--gol-orange); }
+.stat-value.purple { color: var(--gol-purple); }
+.stat-value.dark { color: var(--gol-dark); }
+
+/* 9. CATEGORY GRID */
+.category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.category-card { background: var(--card-bg); border: 1px solid var(--gol-gray-200); border-radius: 0.5rem; padding: 1.25rem; text-decoration: none; color: inherit; transition: box-shadow 0.2s, border-color 0.2s; display: block; }
+.category-card:hover { box-shadow: 0 4px 12px var(--card-shadow); border-color: var(--gol-cyan); }
+.category-card h3 { margin-top: 0.5rem; color: var(--gol-cyan-dark); }
+
+/* 10. BADGES */
+.cluster-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.cluster-badge.cluster-core { background: var(--gol-cyan-light); color: var(--gol-cyan-dark); }
+.cluster-badge.cluster-conc { background: var(--gol-purple-light); color: var(--gol-purple); }
+.cluster-badge.cluster-eco { background: var(--gol-green-light); color: var(--gol-green-dark); }
+.cluster-badge.cluster-gc { background: var(--gol-orange-light); color: var(--gol-orange); }
+.cluster-badge.cluster-edu { background: var(--gol-yellow-light); color: #F57F17; }
+.cluster-badge.cluster-history { background: var(--gol-dark-light); color: var(--gol-dark); }
+.cluster-badge.cluster-rosetta { background: #FCE4EC; color: #C62828; }
+
+/* 11. CROSS-LINKS */
+.cross-links { background: var(--gol-gray-100); border: 1px solid var(--gol-gray-200); border-radius: 0.5rem; padding: 1rem 1.5rem; margin-top: 2rem; }
+.cross-links h4 { margin-top: 0; color: var(--gol-gray-700); }
+.cross-links ul { columns: 2; column-gap: 2rem; }
+
+/* 12. PILLARS */
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.pillar { background: var(--card-bg); border-top: 4px solid var(--gol-cyan); border-radius: 0.5rem; padding: 1.25rem; box-shadow: 0 1px 3px var(--card-shadow); }
+.pillar h4 { margin-top: 0; color: var(--gol-cyan-dark); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.08em; }
+.pillar:nth-child(2) { border-top-color: var(--gol-green); } .pillar:nth-child(2) h4 { color: var(--gol-green-dark); }
+.pillar:nth-child(3) { border-top-color: var(--gol-purple); } .pillar:nth-child(3) h4 { color: var(--gol-purple); }
+.pillar:nth-child(4) { border-top-color: var(--gol-orange); } .pillar:nth-child(4) h4 { color: var(--gol-orange); }
+
+/* 13. TIMELINE */
+.timeline { border-left: 3px solid var(--gol-cyan); padding-left: 1.5rem; margin: 1.5rem 0; }
+.timeline .event { position: relative; margin-bottom: 1.25rem; }
+.timeline .event::before { content: ""; position: absolute; left: -1.85rem; top: 0.4rem; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--gol-cyan); border: 2px solid var(--gol-gray-bg); }
+.timeline .year { display: inline-block; background: var(--gol-cyan-dark); color: white; padding: 0.1rem 0.5rem; border-radius: 0.25rem; font-weight: 700; font-size: 0.85rem; margin-right: 0.5rem; }
+
+/* 14. FOOTER */
+footer { border-top: 1px solid var(--gol-gray-200); background: var(--gol-gray-100); }

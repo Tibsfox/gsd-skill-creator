@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta &mdash; Pascal</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-pas">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">The Algol family tree, language comparisons, and the Hejlsberg lineage from Turbo Pascal to TypeScript</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="blaise-pascal.html">Blaise Pascal</a>
+      <a href="language.html">Language</a>
+      <a href="data-structures.html">Data Structures</a>
+      <a href="implementations.html">Implementations</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every programming language is a reaction against something. Algol 60 was a reaction against machine code. Algol 68 was a reaction against Algol 60&rsquo;s limitations. Pascal was a reaction against Algol 68&rsquo;s complexity. C was a reaction against Pascal&rsquo;s restrictions. The entire history of programming languages is a conversation, and Pascal&rsquo;s contribution to that conversation was the radical idea that simplicity is a feature.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- THE ALGOL FAMILY TREE                                         -->
+    <!-- ============================================================ -->
+
+    <h2>The Algol Family Tree</h2>
+
+    <div class="maturity-ladder">
+      <ol>
+        <li><strong>Algol 58</strong> (1958) &mdash; The ancestor. IAL (International Algorithmic Language). Backus, Bauer, Naur. Defined the idea of a formally specified programming language.</li>
+        <li><strong>Algol 60</strong> (1960) &mdash; The breakthrough. Block structure, lexical scoping, recursion, BNF grammar. Wirth called it &ldquo;the most influential programming language ever designed.&rdquo; Never widely used in industry but shaped everything that followed.</li>
+        <li><strong>Algol W</strong> (1966) &mdash; Wirth&rsquo;s first departure. Designed at Stanford as a simpler successor to Algol 60 with record types and <code>while</code> loops. Lost the Algol successor competition to Algol 68. The seed of Pascal.</li>
+        <li><strong>Pascal</strong> (1970) &mdash; Wirth&rsquo;s reaction against Algol 68&rsquo;s complexity. Designed at ETH Z&uuml;rich for teaching structured programming. Small, clean, strict typing, no separate compilation (initially). Became the world&rsquo;s most popular teaching language.</li>
+        <li><strong>Modula-2</strong> (1978) &mdash; Wirth&rsquo;s improvement on Pascal. Added modules (separate compilation), coroutines, low-level system access. Fixed most of Kernighan&rsquo;s complaints. Less successful commercially because Turbo Pascal had already captured the market.</li>
+        <li><strong>Oberon</strong> (1987) &mdash; Wirth&rsquo;s distillation. Removed features from Modula-2 to get something even simpler. Type extension (single inheritance), garbage collection, the Oberon operating system. Beautiful but too minimal for industry.</li>
+        <li><strong>Oberon-2</strong> (1991) &mdash; Hanspeter M&ouml;ssenb&ouml;ck&rsquo;s extension. Added type-bound procedures (methods). The final step in Wirth&rsquo;s language trajectory: each language simpler than the last.</li>
+      </ol>
+    </div>
+
+    <div class="card sepia">
+      <p><strong>The branch that Pascal rejected:</strong> Algol 68 (1968) was the &ldquo;official&rdquo; successor to Algol 60, designed by van Wijngaarden&rsquo;s committee. It was extraordinarily powerful and extraordinarily complex &mdash; orthogonal design, two-level grammars, coercions, modes, united modes. Wirth was on the committee and left in disagreement. Pascal was his explicit reaction: the same structured programming goals, achieved with a fraction of the mechanism. The Algol 68 branch led to its own tradition (Bourne shell, some influence on C), but it was Pascal that won the teaching language war.</p>
+    </div>
+
+    <div class="card">
+      <p><strong>The parallel branch:</strong> Simula 67 (Dahl and Nygaard, Norway, 1967) grew from Algol 60 in a different direction &mdash; classes, objects, inheritance, virtual procedures. Simula influenced Smalltalk (Kay, Xerox PARC, 1972), which influenced the entire OOP tradition. Pascal and Simula shared a common ancestor in Algol 60 but diverged completely: Pascal toward simplicity and teaching, Simula toward modeling and objects. They would not converge until Object Pascal and Delphi borrowed OOP concepts decades later.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- HELLO WORLD                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>One Problem, Seven Languages &mdash; Hello World</h2>
+
+    <h3>Pascal</h3>
+    <pre><code>program HelloWorld;
+begin
+  writeln('Hello, world!');
+end.</code></pre>
+
+    <h3>C</h3>
+    <pre><code>#include &lt;stdio.h&gt;
+
+int main(void) {
+    printf("Hello, world!\n");
+    return 0;
+}</code></pre>
+
+    <h3>Ada</h3>
+    <pre><code>with Ada.Text_IO;
+
+procedure Hello is
+begin
+   Ada.Text_IO.Put_Line ("Hello, world!");
+end Hello;</code></pre>
+
+    <h3>Modula-2</h3>
+    <pre><code>MODULE HelloWorld;
+FROM InOut IMPORT WriteString, WriteLn;
+BEGIN
+  WriteString("Hello, world!");
+  WriteLn;
+END HelloWorld.</code></pre>
+
+    <h3>Java</h3>
+    <pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+    }
+}</code></pre>
+
+    <h3>Python</h3>
+    <pre><code>print("Hello, world!")</code></pre>
+
+    <h3>Rust</h3>
+    <pre><code>fn main() {
+    println!("Hello, world!");
+}</code></pre>
+
+    <p>Pascal&rsquo;s <code>program</code> declaration and <code>end.</code> with a period are inherited from Algol convention. The <code>writeln</code> procedure is built-in, not imported &mdash; a design choice that Kernighan criticized (no user-defined I/O) but that made teaching simpler. Compare with Ada&rsquo;s explicit <code>with</code> import, C&rsquo;s <code>#include</code>, and Java&rsquo;s class ceremony. Python is the only language that is more concise.</p>
+
+    <!-- ============================================================ -->
+    <!-- LINKED LIST NODE                                              -->
+    <!-- ============================================================ -->
+
+    <h2>Linked List Node &mdash; Type Definitions Compared</h2>
+
+    <h3>Pascal</h3>
+    <pre><code>type
+  PNode = ^Node;
+  Node = record
+    data: integer;
+    next: PNode;
+  end;</code></pre>
+
+    <h3>C</h3>
+    <pre><code>typedef struct node {
+    int data;
+    struct node *next;
+} Node;</code></pre>
+
+    <h3>Java</h3>
+    <pre><code>class Node {
+    int data;
+    Node next;
+}</code></pre>
+
+    <h3>Rust</h3>
+    <pre><code>struct Node {
+    data: i32,
+    next: Option&lt;Box&lt;Node&gt;&gt;,
+}</code></pre>
+
+    <h3>ML (Standard ML)</h3>
+    <pre><code>datatype 'a list = Nil | Cons of 'a * 'a list</code></pre>
+
+    <p>Pascal introduced forward pointer declarations (<code>PNode = ^Node</code> before <code>Node</code> is defined) which was revolutionary &mdash; it allowed recursive data structures in a single-pass compiler. C solved the same problem with <code>struct node *next</code> using the struct tag. Rust requires <code>Box</code> for heap indirection and <code>Option</code> for nullable pointers, making the cost explicit. ML&rsquo;s algebraic data type is the most abstract &mdash; and Pascal&rsquo;s variant records are its direct ancestor.</p>
+
+    <!-- ============================================================ -->
+    <!-- VARIANT RECORDS                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Variant Records &mdash; The Ancestor of Algebraic Types</h2>
+
+    <h3>Pascal (variant record)</h3>
+    <pre><code>type
+  ShapeKind = (Circle, Rectangle, Triangle);
+  Shape = record
+    x, y: real;
+    case kind: ShapeKind of
+      Circle:    (radius: real);
+      Rectangle: (width, height: real);
+      Triangle:  (base, altitude: real);
+  end;</code></pre>
+
+    <h3>C (tagged union)</h3>
+    <pre><code>enum ShapeKind { CIRCLE, RECTANGLE, TRIANGLE };
+
+struct Shape {
+    double x, y;
+    enum ShapeKind kind;
+    union {
+        struct { double radius; } circle;
+        struct { double width, height; } rectangle;
+        struct { double base, altitude; } triangle;
+    };
+};</code></pre>
+
+    <h3>Rust (enum)</h3>
+    <pre><code>enum Shape {
+    Circle { x: f64, y: f64, radius: f64 },
+    Rectangle { x: f64, y: f64, width: f64, height: f64 },
+    Triangle { x: f64, y: f64, base: f64, altitude: f64 },
+}</code></pre>
+
+    <h3>Haskell (algebraic data type)</h3>
+    <pre><code>data Shape
+  = Circle    { x :: Double, y :: Double, radius :: Double }
+  | Rectangle { x :: Double, y :: Double, width :: Double, height :: Double }
+  | Triangle  { x :: Double, y :: Double, base :: Double, altitude :: Double }</code></pre>
+
+    <p>Pascal&rsquo;s variant record is the bridge between C&rsquo;s untyped <code>union</code> and ML/Haskell&rsquo;s algebraic data types. The <code>case kind: ShapeKind of</code> discriminant tags the variant, providing a degree of type safety that raw C unions lack. But Pascal did not enforce exhaustive matching &mdash; you could access the <code>radius</code> field of a <code>Rectangle</code> and the compiler would not stop you. Rust and Haskell close that hole with exhaustive pattern matching enforced at compile time. The lineage is clear: Pascal variants &rarr; ML datatypes (1973) &rarr; Haskell (1990) &rarr; Rust enums (2015).</p>
+
+    <!-- ============================================================ -->
+    <!-- DESIGN PHILOSOPHY                                             -->
+    <!-- ============================================================ -->
+
+    <h2>Design Philosophy Comparison</h2>
+
+    <table>
+      <thead><tr><th>Axis</th><th>Pascal</th><th>Counterpart</th><th>Trade-off</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Type safety</strong></td>
+          <td>Pascal &mdash; strict, no implicit conversions, subrange types, set types</td>
+          <td>C &mdash; permissive, implicit integer promotion, void pointers, casts</td>
+          <td>Pascal catches more bugs at compile time; C gives the programmer more power and more rope</td>
+        </tr>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>Pascal &mdash; small language, one-pass compiler, minimal features</td>
+          <td>Ada &mdash; large language, packages, generics, tasking, exceptions, annexes</td>
+          <td>Pascal is easier to learn and implement; Ada is more capable for large systems</td>
+        </tr>
+        <tr>
+          <td><strong>Teaching</strong></td>
+          <td>Pascal &mdash; designed for students, structured programming, clear syntax</td>
+          <td>Java &mdash; adopted for teaching (1998+), OOP-first, managed memory</td>
+          <td>Pascal teaches procedural thinking; Java teaches object-oriented thinking; neither teaches both well</td>
+        </tr>
+        <tr>
+          <td><strong>Typing</strong></td>
+          <td>Pascal &mdash; static, strong, explicit, verbose</td>
+          <td>Python &mdash; dynamic, strong, implicit, concise</td>
+          <td>Pascal catches type errors at compile time; Python catches them at runtime but writes faster</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- HEJLSBERG LINEAGE                                             -->
+    <!-- ============================================================ -->
+
+    <h2>The Hejlsberg Lineage</h2>
+
+    <div class="card gold">
+      <p>Anders Hejlsberg is the most consequential language implementor of the personal computer era. His trajectory is the story of how Pascal&rsquo;s DNA ended up inside the most popular programming language of the 2020s:</p>
+      <ol>
+        <li><strong>PolyPascal</strong> (1981) &mdash; Hejlsberg writes a Pascal compiler for the Nascom microcomputer in Denmark while still a student. Borland notices.</li>
+        <li><strong>Turbo Pascal</strong> (1983) &mdash; Borland releases Hejlsberg&rsquo;s integrated compiler+editor for CP/M and DOS at $49.95. Compiles 30&times; faster than alternatives. Sells 250,000 copies in two years. Destroys UCSD Pascal&rsquo;s market.</li>
+        <li><strong>Turbo Pascal 5.5</strong> (1989) &mdash; Adds object-oriented extensions. The beginning of Object Pascal.</li>
+        <li><strong>Delphi</strong> (1995) &mdash; Borland&rsquo;s visual RAD environment for Windows, built on Object Pascal. Hejlsberg is chief architect. Wildly popular for database applications, client-server tools, and Windows desktop software through the late 1990s.</li>
+        <li><strong>C#</strong> (2000) &mdash; Microsoft hires Hejlsberg away from Borland. He leads the design of C#, which is essentially &ldquo;what Delphi would look like if you started over on the CLR.&rdquo; Properties, delegates, value types, LINQ &mdash; all carry Delphi DNA.</li>
+        <li><strong>TypeScript</strong> (2012) &mdash; Hejlsberg designs TypeScript at Microsoft. A typed superset of JavaScript that compiles to plain JS. By 2026 it is the dominant language for web development. The chain is complete: Pascal &rarr; Turbo Pascal &rarr; Delphi &rarr; C# &rarr; TypeScript.</li>
+      </ol>
+      <p>One person. Four decades. A direct line from Blaise Pascal&rsquo;s name to the language most web developers write every day.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- WIRTH'S TRAJECTORY                                            -->
+    <!-- ============================================================ -->
+
+    <h2>Wirth&rsquo;s Language Trajectory</h2>
+
+    <div class="maturity-ladder">
+      <ol>
+        <li><strong>Euler</strong> (1965) &mdash; Wirth&rsquo;s doctoral project. An Algol-like language exploring expression-oriented design. Experimental, never widely used. Proved Wirth could design a language and build a compiler.</li>
+        <li><strong>Algol W</strong> (1966) &mdash; Stanford. A cleaned-up Algol 60 with record types, <code>while</code> loops, string handling. Wirth&rsquo;s proposal for the Algol successor. Rejected by the IFIP committee in favor of Algol 68.</li>
+        <li><strong>Pascal</strong> (1970) &mdash; ETH Z&uuml;rich. Wirth&rsquo;s reaction against Algol 68&rsquo;s complexity. Designed for teaching. Small, clean, one-pass compilable. Became the world&rsquo;s most popular teaching language.</li>
+        <li><strong>Modula</strong> (1975) &mdash; Experiment with modules and concurrency for real-time systems (the Lilith workstation). Never widely distributed.</li>
+        <li><strong>Modula-2</strong> (1978) &mdash; The production version. Modules with separate compilation, coroutines, system-level access. Fixed Pascal&rsquo;s major deficiencies. Used in European education and embedded systems.</li>
+        <li><strong>Oberon</strong> (1987) &mdash; Radical simplification. Removed enumeration types, variant records, <code>for</code> loops, subrange types. Added type extension (single inheritance) and garbage collection. The Oberon System was written entirely in Oberon.</li>
+        <li><strong>Oberon-2</strong> (1991) &mdash; M&ouml;ssenb&ouml;ck&rsquo;s extension adding type-bound procedures (methods) and <code>FOR</code> loops back. The final language in the sequence. Each step from Algol W to Oberon-2 was a simplification.</li>
+      </ol>
+    </div>
+
+    <div class="callout">
+      Wirth&rsquo;s trajectory is the opposite of most language designers&rsquo;. Where others add features over time, Wirth <em>removed</em> them. Each language was simpler than its predecessor. This is the architectural philosophy that made Pascal great as a teaching language &mdash; and that made Modula-2 and Oberon too austere for commercial success.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CROSS-LINKS                                                   -->
+    <!-- ============================================================ -->
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="blaise-pascal.html">Blaise Pascal</a></li>
+        <li><a href="language.html">Language Design</a></li>
+        <li><a href="data-structures.html">Data Structures</a></li>
+        <li><a href="implementations.html">Implementations</a></li>
+        <li><a href="teaching.html">Teaching &amp; University Adoption</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Pascal &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

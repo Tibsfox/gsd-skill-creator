@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta Integration &mdash; JVM GC &amp; Memory Management</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jgc">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">JVM GC in Context &mdash; How Other Runtimes Solve the Same Problem</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="collectors.html">Collectors</a>
+      <a href="memory.html">Memory</a>
+      <a href="tuning.html">Tuning</a>
+      <a href="monitoring.html">Monitoring</a>
+      <a href="diagnostics.html">Diagnostics</a>
+      <a href="containers.html">Containers</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every managed runtime has made a choice about how to reclaim memory. The JVM&rsquo;s answer (tracing, generational, concurrent, compacting) is one of many. Understanding the alternatives makes JVM tuning decisions easier &mdash; and explains why some problems disappear in other ecosystems.
+    </blockquote>
+
+    <h2>The Universe of Memory Management Strategies</h2>
+    <table>
+      <thead><tr><th>Runtime</th><th>Strategy</th><th>Key trade-off</th></tr></thead>
+      <tbody>
+        <tr><td><strong>JVM (HotSpot)</strong></td><td>Tracing, generational, concurrent (G1/ZGC/Shenandoah)</td><td>Mature, scales to TB; requires tuning</td></tr>
+        <tr><td><strong>.NET CLR</strong></td><td>Tracing, generational (Gen 0, 1, 2, LOH), concurrent</td><td>Similar to JVM; tighter Windows integration</td></tr>
+        <tr><td><strong>Go</strong></td><td>Tracing, non-generational, concurrent, tri-color mark</td><td>Sub-millisecond pauses; lower throughput per CPU</td></tr>
+        <tr><td><strong>V8 (JavaScript)</strong></td><td>Tracing, generational, concurrent (Orinoco)</td><td>Optimized for short-lived scripts and web apps</td></tr>
+        <tr><td><strong>CPython</strong></td><td>Reference counting + cycle collector</td><td>Deterministic for acyclic; cycles need a tracer</td></tr>
+        <tr><td><strong>Erlang / BEAM</strong></td><td>Per-process private heaps, generational</td><td>Crash-only processes; no shared heap pauses</td></tr>
+        <tr><td><strong>Swift / Objective-C</strong></td><td>ARC &mdash; automatic reference counting (compiler-inserted)</td><td>Deterministic; cycles require programmer care</td></tr>
+        <tr><td><strong>Rust</strong></td><td>No runtime GC; ownership + borrow checker at compile time</td><td>Zero runtime overhead; steeper learning curve</td></tr>
+        <tr><td><strong>C / C++</strong></td><td>Manual <code>malloc</code>/<code>free</code>; RAII in C++</td><td>Full control; full responsibility</td></tr>
+        <tr><td><strong>OCaml</strong></td><td>Generational incremental GC (minor is stop-the-world, major is incremental)</td><td>Jane Street tuned for low-latency finance</td></tr>
+        <tr><td><strong>Haskell / GHC</strong></td><td>Generational tracing, copying young</td><td>Lazy evaluation creates huge allocation rates</td></tr>
+        <tr><td><strong>Lua</strong></td><td>Incremental mark-and-sweep</td><td>Small, tunable, embedded-friendly</td></tr>
+      </tbody>
+    </table>
+
+    <h2>JVM vs .NET GC</h2>
+    <div class="card">
+      <p>The .NET CLR is the JVM&rsquo;s closest living relative in terms of GC design. Both are generational, tracing, compacting collectors with concurrent variants. Both have evolved through nearly 25 years of production use. The similarities are not accidental &mdash; many of the engineers know each other, and the literature (<em>The Garbage Collection Handbook</em>) treats both.</p>
+    </div>
+
+    <table>
+      <thead><tr><th>Feature</th><th>JVM</th><th>.NET CLR</th></tr></thead>
+      <tbody>
+        <tr><td>Generations</td><td>Young (Eden + S0 + S1), Old</td><td>Gen 0, Gen 1, Gen 2, LOH (Large Object Heap), POH (Pinned Object Heap)</td></tr>
+        <tr><td>Concurrent young GC</td><td>G1 (no), ZGC (yes)</td><td>Background GC (yes)</td></tr>
+        <tr><td>Compacting</td><td>Yes (all collectors except Epsilon)</td><td>Yes; LOH only compacted on explicit request</td></tr>
+        <tr><td>Largest heap in production</td><td>Multi-TB (ZGC, Azul C4)</td><td>Smaller range typically; server GC scales well</td></tr>
+        <tr><td>Flag tuning surface</td><td>Very large (hundreds of <code>-XX:</code> flags)</td><td>Smaller; mostly per-app domain</td></tr>
+        <tr><td>Reference types</td><td>Strong, Soft, Weak, Phantom, Finalizer, Cleaner</td><td>Strong, Weak, WeakReference&lt;T&gt; (short/long)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>JVM vs Go GC</h2>
+    <p>Go&rsquo;s garbage collector is a <strong>concurrent, non-generational, tri-color mark-and-sweep</strong> collector. Its design philosophy is explicit: sub-millisecond pauses at the cost of some throughput. The Go team famously optimizes for pause time above all else.</p>
+
+    <div class="card green">
+      <p><strong>Go&rsquo;s choices:</strong></p>
+      <ul>
+        <li>No generations &mdash; the whole heap is traced every cycle</li>
+        <li>No compaction &mdash; uses a concurrent mark-sweep with size classes (like tcmalloc)</li>
+        <li>Target pause: &lt;1 ms (often achieved)</li>
+        <li>Trade-off: higher CPU overhead, higher memory overhead vs a generational collector</li>
+        <li>No explicit tuning flags &mdash; <code>GOGC</code> (default 100) is almost the only knob</li>
+      </ul>
+      <p>For the JVM tuner, Go&rsquo;s appeal is its radical simplicity. For workloads with very high allocation rates, Go&rsquo;s lack of generational separation becomes a problem that the JVM&rsquo;s generational collectors solve elegantly.</p>
+    </div>
+
+    <h2>JVM vs V8 (JavaScript) GC</h2>
+    <p>V8&rsquo;s <strong>Orinoco</strong> GC is a generational, parallel, concurrent, incremental mark-and-compact collector, built on decades of research from Self and Java. It powers Chrome, Node.js, Edge, and every Electron app. V8 has <strong>Scavenger</strong> (for the young generation) and <strong>Mark-Compact</strong> (for the old generation).</p>
+
+    <ul>
+      <li>Young generation (&ldquo;New Space&rdquo;): semi-space Cheney copying collector</li>
+      <li>Old generation (&ldquo;Old Space&rdquo;): concurrent mark, incremental compact</li>
+      <li>Large Object Space (&ldquo;Lo-Space&rdquo;): never moves, for objects &gt; 512 KB</li>
+      <li>Incremental marking with write barriers</li>
+      <li>Much smaller typical heap sizes (browser tabs, not enterprise servers)</li>
+    </ul>
+
+    <h2>JVM vs CPython</h2>
+    <p>CPython uses <strong>reference counting</strong> as its primary mechanism, with a separate <strong>generational cycle collector</strong> (<code>gc</code> module) for cycles. Every Python object has a <code>refcount</code> field; decrement on every release; deallocate at zero.</p>
+
+    <table>
+      <thead><tr><th>Aspect</th><th>JVM tracing GC</th><th>CPython refcount + cycles</th></tr></thead>
+      <tbody>
+        <tr><td>Determinism</td><td>Non-deterministic; objects die at GC time</td><td>Deterministic for acyclic data; cycles are non-deterministic</td></tr>
+        <tr><td>Throughput</td><td>Higher (no per-op refcount work)</td><td>Lower (refcount ops on every reference change)</td></tr>
+        <tr><td>Pause times</td><td>From milliseconds (ZGC) to seconds (naive)</td><td>No global pauses; cycle collection is bounded and generational</td></tr>
+        <tr><td>Multi-threading</td><td>Scales to hundreds of cores</td><td>GIL prevents true parallelism</td></tr>
+      </tbody>
+    </table>
+
+    <p>The <a href="../SNK/index.html">SNK research project</a> covers Python&rsquo;s memory model in more depth.</p>
+
+    <h2>JVM vs Erlang BEAM</h2>
+    <div class="card purple">
+      <p><strong>Erlang&rsquo;s BEAM VM</strong> gave up a single shared heap entirely. Each Erlang process has its <em>own private heap</em>, typically a few KB. Garbage collection is per-process and stops only that process &mdash; never the whole system. This is why Erlang is the go-to for nine-nines telecom systems: no global GC pause means no global latency spike.</p>
+      <p>The trade-off: message passing between processes must <strong>copy</strong> data across heap boundaries, which has its own cost. For high-throughput shared-state workloads, the JVM&rsquo;s single heap wins on raw throughput.</p>
+    </div>
+
+    <h2>JVM vs Rust</h2>
+    <p>Rust has <strong>no runtime garbage collector at all</strong>. The language&rsquo;s ownership and borrow checker prove at compile time that every allocation has exactly one owner, and memory is reclaimed as soon as the owner goes out of scope. This is <strong>RAII from C++</strong>, but enforced by the compiler rather than convention.</p>
+
+    <ul>
+      <li>Zero runtime overhead for memory management</li>
+      <li>Deterministic drop order</li>
+      <li>No pauses, ever</li>
+      <li>Steep learning curve (the borrow checker is strict)</li>
+      <li>Cost: some code patterns (especially graphs, cycles) are genuinely harder to express</li>
+      <li>Escape hatches: <code>Rc</code>, <code>Arc</code>, <code>RefCell</code> add runtime checks when ownership isn&rsquo;t enough</li>
+    </ul>
+
+    <p>The JVM-to-Rust migration is the modern version of the Java-to-C++ migration from two decades ago: when the GC becomes the bottleneck, people go to the language that doesn&rsquo;t have one.</p>
+
+    <h2>When to Reach for a JVM vs an Alternative</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Use JVM</h4>
+        <p>Large heaps (multi-GB to TB), mature operations tooling, enterprise integration, polyglot runtime needs, decades of library corpus, your team already knows it. Big data infrastructure.</p>
+      </div>
+      <div class="pillar">
+        <h4>Use Go</h4>
+        <p>Small pauses are non-negotiable, CPU overhead is acceptable, you want a small language, cloud-native tools, simple concurrency via goroutines. k8s and most modern cloud tools.</p>
+      </div>
+      <div class="pillar">
+        <h4>Use Rust</h4>
+        <p>No pauses at all, memory safety must be compile-time proven, systems programming, embedded, browsers, WebAssembly targets, when the cost of a borrow checker is worth the absolute control.</p>
+      </div>
+      <div class="pillar">
+        <h4>Use Erlang / Elixir</h4>
+        <p>Nine-nines availability, massive concurrency, message-passing architecture, telecom / chat / IoT. When you want &ldquo;let it crash&rdquo; semantics and per-process GC.</p>
+      </div>
+    </div>
+
+    <h2>What the JVM Does Uniquely Well</h2>
+    <div class="card">
+      <p><strong>The JVM&rsquo;s GC is the most-studied, most-tuned, and most-scalable memory manager in software history.</strong> No other managed runtime has:</p>
+      <ul>
+        <li>The diversity of collectors (7+ distinct algorithms shipping in OpenJDK)</li>
+        <li>The scale range (from 64 MB embedded to multi-TB data planes)</li>
+        <li>The tooling ecosystem (JFR, JMC, MAT, async-profiler, JMH, VisualVM)</li>
+        <li>The active research program (Project Loom, Valhalla, Panama, Leyden, generational ZGC)</li>
+        <li>The depth of production experience (30 years of 24/7 enterprise workloads)</li>
+      </ul>
+      <p>The JVM&rsquo;s GC is not the best for every problem. It is genuinely the best for <em>most</em> enterprise problems, and it is the most sophisticated machine in any managed runtime on earth.</p>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>JAV</td><td>Java and the JVM</td><td>The language-level companion to this runtime-level project</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>RAII + manual memory is the philosophical opposite of GC</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>Reference counting + cycles: a different trade-off in the same trade space</td></tr>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td><code>malloc</code>/<code>free</code>: the floor that all runtimes stand on</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="collectors.html">Garbage Collectors Deep Dive</a></li>
+        <li><a href="memory.html">Memory Spaces &amp; Layout</a></li>
+        <li><a href="tuning.html">GC Tuning &amp; Flag Reference</a></li>
+        <li><a href="monitoring.html">Monitoring &amp; Metrics</a></li>
+        <li><a href="diagnostics.html">Heap Dumps &amp; Diagnostics</a></li>
+        <li><a href="containers.html">Containers &amp; Kubernetes</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rosetta Integration &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

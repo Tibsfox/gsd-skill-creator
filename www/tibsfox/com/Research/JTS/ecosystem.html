@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecosystem &amp; Tooling &mdash; JavaScript &amp; TypeScript</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jts">
+  <header>
+    <h1>Ecosystem &amp; Tooling</h1>
+    <div class="subtitle">npm, Yarn, pnpm &mdash; webpack, Vite, esbuild, SWC &mdash; ESLint, Prettier, Biome &mdash; Jest, Vitest, Playwright &mdash; Prisma, Drizzle, Zod</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">JavaScript</a>
+      <a href="typescript.html">TypeScript</a>
+      <a href="runtimes.html">Runtimes</a>
+      <a href="frameworks.html">Frameworks</a>
+      <a href="ecosystem.html" class="active">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      npm is the world&rsquo;s largest package registry with over 2 million packages. The JavaScript ecosystem is the largest developer ecosystem in the world, and it is defined as much by its tooling as by its language.
+    </blockquote>
+
+    <h2>Package Managers</h2>
+    <table>
+      <thead><tr><th>Manager</th><th>Year</th><th>Key innovation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>npm</strong></td><td>Isaac Schlueter, 2010; GitHub/Microsoft 2020</td><td>The original. <code>package.json</code>, <code>package-lock.json</code>, <code>node_modules</code>. 2M+ packages.</td></tr>
+        <tr><td><strong>Yarn</strong></td><td>Facebook, 2016</td><td>Lockfile, offline cache, workspaces. Yarn Berry (v2+): Plug&rsquo;n&rsquo;Play, zero-install.</td></tr>
+        <tr><td><strong>pnpm</strong></td><td>Zoltan Kochan</td><td>Content-addressed store, symlinks, saves GB of disk, strict <code>node_modules</code> isolation.</td></tr>
+        <tr><td><strong>bun</strong></td><td>2022</td><td>As package manager: extremely fast installs using Bun&rsquo;s Zig-based I/O.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card red">
+      <p><strong>left-pad (March 2016):</strong> A developer unpublished his 11-line package <code>left-pad</code> from npm. Thousands of builds broke worldwide, including Babel. The incident exposed npm&rsquo;s fragility around transitive dependencies and led to npm&rsquo;s policy change: unpublishing is now restricted after 72 hours.</p>
+    </div>
+
+    <h2>Build Tools &mdash; The Historical Lineage</h2>
+    <div class="timeline">
+      <div class="event"><span class="year">2009</span> <strong>CoffeeScript</strong> (Jeremy Ashkenas) &mdash; Ruby-like syntax compiled to JS; precursor to many ES6 features.</div>
+      <div class="event"><span class="year">2011</span> <strong>Browserify</strong> (James Halliday) &mdash; <code>require()</code> in the browser.</div>
+      <div class="event"><span class="year">2012</span> <strong>Grunt</strong> &mdash; task runner. <strong>webpack</strong> (Tobias Koppers) &mdash; the dominant bundler for a decade.</div>
+      <div class="event"><span class="year">2013</span> <strong>Gulp</strong> &mdash; stream-based task runner.</div>
+      <div class="event"><span class="year">2014</span> <strong>Babel</strong> (Sebastian McKenzie, originally &ldquo;6to5&rdquo;) &mdash; transpile ES6+ to ES5.</div>
+      <div class="event"><span class="year">2015</span> <strong>Rollup</strong> (Rich Harris) &mdash; tree-shaking pioneer, ES modules only.</div>
+      <div class="event"><span class="year">2017</span> <strong>Parcel</strong> &mdash; zero-config bundler.</div>
+      <div class="event"><span class="year">2020</span> <strong>esbuild</strong> (Evan Wallace) &mdash; Go-based, 100&times; faster than webpack. <strong>SWC</strong> (Donny Wang) &mdash; Rust-based, Next.js default. <strong>Vite</strong> (Evan You) &mdash; native ESM dev, Rollup build.</div>
+      <div class="event"><span class="year">2022</span> <strong>Turbopack</strong> (Vercel) &mdash; Rust, webpack successor.</div>
+      <div class="event"><span class="year">2023</span> <strong>Rspack</strong> (ByteDance) &mdash; Rust port of webpack. <strong>Biome</strong> &mdash; Rust lint+format (from Rome/Sebastian McKenzie).</div>
+      <div class="event"><span class="year">2024</span> <strong>Rolldown</strong> (Vite team) &mdash; Rust-based Rollup replacement for Vite.</div>
+    </div>
+
+    <div class="card">
+      <p><strong>The 2020 revolution:</strong> esbuild and SWC proved that rewriting JS tooling in compiled languages (Go, Rust) could deliver 100&times; speedups. Vite combined ESM in dev mode with Rollup for production, becoming the fastest-growing bundler. By 2024, webpack&rsquo;s dominance was ending; Vite, Turbopack, and Rspack are the successors.</p>
+    </div>
+
+    <h2>Testing</h2>
+    <table>
+      <thead><tr><th>Framework</th><th>Author / Year</th><th>Character</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Jest</strong></td><td>Facebook, Christoph Nakazawa, 2014</td><td>React&rsquo;s default; batteries included; snapshot testing; jsdom</td></tr>
+        <tr><td><strong>Vitest</strong></td><td>Anthony Fu, 2021</td><td>Vite-native, Jest-compatible API, very fast, watch mode with HMR</td></tr>
+        <tr><td><strong>Mocha</strong></td><td>TJ Holowaychuk, 2011</td><td>Classical TDD/BDD, bring-your-own assertions</td></tr>
+        <tr><td><strong>Cypress</strong></td><td>2015</td><td>E2E testing in a real browser</td></tr>
+        <tr><td><strong>Playwright</strong></td><td>Microsoft, 2020</td><td>E2E across Chrome, Firefox, Safari; fast, reliable</td></tr>
+        <tr><td><strong>Testing Library</strong></td><td>Kent C. Dodds</td><td>&ldquo;Test like a user&rdquo; &mdash; query by role, text, label</td></tr>
+        <tr><td><strong>Storybook</strong></td><td>&mdash;</td><td>Component development + visual testing environment</td></tr>
+      </tbody>
+    </table>
+
+<pre><code>// Vitest example
+import { describe, it, expect } from "vitest";
+import { add } from "./math";
+
+describe("add", () =&gt; {
+  it("adds two numbers", () =&gt; {
+    expect(add(1, 2)).toBe(3);
+  });
+
+  it("handles negatives", () =&gt; {
+    expect(add(-1, -2)).toBe(-3);
+  });
+});</code></pre>
+
+    <h2>Linting and Formatting</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Author / Year</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ESLint</strong></td><td>Nicholas Zakas, 2013</td><td>The standard linter. Pluggable, configurable. <code>typescript-eslint</code> adds TS rules.</td></tr>
+        <tr><td><strong>Prettier</strong></td><td>James Long, 2017</td><td>Opinionated formatter. &ldquo;Doesn&rsquo;t have options.&rdquo; (Has some.) End the bikeshedding.</td></tr>
+        <tr><td><strong>Biome</strong></td><td>2023 (from Rome / Sebastian McKenzie)</td><td>Rust-based, combined lint + format. 10&ndash;50&times; faster than ESLint + Prettier.</td></tr>
+        <tr><td><strong>dprint</strong></td><td>&mdash;</td><td>Rust-based formatter, pluggable</td></tr>
+      </tbody>
+    </table>
+
+    <h2>ORMs and Databases</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Character</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Prisma</strong></td><td>Modern ORM; schema-first; auto-generated TypeScript client</td></tr>
+        <tr><td><strong>Drizzle</strong></td><td>TypeScript SQL with zero runtime overhead; schema in TS</td></tr>
+        <tr><td><strong>TypeORM</strong></td><td>Decorator-based ORM; enterprise-ish</td></tr>
+        <tr><td><strong>Sequelize</strong></td><td>The classic Node.js ORM</td></tr>
+        <tr><td><strong>Mongoose</strong></td><td>MongoDB ODM</td></tr>
+        <tr><td><strong>Kysely</strong></td><td>Type-safe SQL query builder</td></tr>
+      </tbody>
+    </table>
+
+<pre><code>// Prisma schema
+model User {
+  id    String @id @default(cuid())
+  name  String
+  email String @unique
+  posts Post[]
+}
+
+model Post {
+  id       String @id @default(cuid())
+  title    String
+  content  String?
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+}</code></pre>
+
+    <h2>Validation &mdash; Zod</h2>
+
+<pre><code>import { z } from "zod";
+
+const CreateUserSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email(),
+  age: z.number().int().min(0).optional(),
+});
+
+type CreateUser = z.infer&lt;typeof CreateUserSchema&gt;;
+// { name: string; email: string; age?: number }</code></pre>
+
+    <h2>State Management</h2>
+    <ul>
+      <li><strong>Redux</strong> (Dan Abramov, 2015) &mdash; single store, reducers, actions; <strong>Redux Toolkit</strong> is the modern wrapper</li>
+      <li><strong>Zustand</strong> &mdash; minimal, hooks-first, no boilerplate</li>
+      <li><strong>Jotai</strong> &mdash; atomic state primitives</li>
+      <li><strong>MobX</strong> &mdash; observable state, decorators</li>
+      <li><strong>TanStack Query (React Query)</strong> &mdash; server-state management (not really state management, but often the answer)</li>
+      <li><strong>SWR</strong> (Vercel) &mdash; stale-while-revalidate fetcher</li>
+      <li><strong>Pinia</strong> &mdash; Vue&rsquo;s state manager (replaced Vuex)</li>
+    </ul>
+
+    <h2>Real-World Applications</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Desktop</h4>
+        <p><strong>VS Code</strong>, <strong>Slack</strong>, <strong>Discord</strong>, <strong>WhatsApp Desktop</strong>, <strong>Figma</strong>, <strong>Notion</strong> &mdash; all Electron + React/TypeScript (Figma uses WebAssembly for the canvas).</p>
+      </div>
+      <div class="pillar">
+        <h4>Web</h4>
+        <p><strong>Facebook</strong>, <strong>Instagram</strong>, <strong>Twitter/X</strong>, <strong>Netflix</strong>, <strong>Airbnb</strong>, <strong>Uber</strong> &mdash; React frontends. Netflix, PayPal, Uber, LinkedIn also run Node.js on the backend.</p>
+      </div>
+      <div class="pillar">
+        <h4>Mobile</h4>
+        <p><strong>React Native</strong> powers Facebook, Instagram, Discord, Shopify, Bloomberg. <strong>Expo</strong> as the dev toolkit.</p>
+      </div>
+      <div class="pillar">
+        <h4>Edge</h4>
+        <p><strong>Cloudflare Workers</strong>, <strong>Vercel Edge Functions</strong>, <strong>Deno Deploy</strong> &mdash; JavaScript at the CDN edge, globally distributed.</p>
+      </div>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>CPAN&rsquo;s 108K modules vs npm&rsquo;s 2M+ &mdash; same idea, 20&times; the scale</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>Maven Central (10M+ artifacts) is the Java equivalent; npm has more packages but smaller average size</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>C++ has no standard package manager; npm solved this problem for JS 15 years ago</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>left-pad, event-stream, colors.js &mdash; npm supply-chain incidents</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">JavaScript Core</a></li>
+        <li><a href="typescript.html">TypeScript</a></li>
+        <li><a href="runtimes.html">Engines &amp; Runtimes</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="education.html">Learn</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Ecosystem &amp; Tooling &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Systems Network Engineering &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sne">
+  <header>
+    <h1>Systems Network Engineering</h1>
+    <div class="subtitle">Designing, Building &amp; Operating Networks at Scale &mdash; Artemis II Mission Research</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="html/01-network-architecture-design.html">Architecture</a>
+      <a href="html/02-routing-switching-operations.html">Routing</a>
+      <a href="html/03-network-automation-netdevops.html">Automation</a>
+      <a href="html/04-load-balancing-traffic-engineering.html">Traffic</a>
+      <a href="html/05-network-security-engineering.html">Security</a>
+      <a href="html/06-cloud-networking.html">Cloud</a>
+      <a href="html/07-observability-troubleshooting.html">Observe</a>
+      <a href="html/08-wireless-edge-networking.html">Wireless</a>
+      <a href="html/09-dns-engineering-at-scale.html">DNS</a>
+      <a href="html/10-network-reliability-dr.html">Reliability</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      DNS and TCP exist as protocol research in this corpus. SYA covers networking fundamentals. SNE is the engineering discipline &mdash; how you design a spine-leaf fabric, automate config deployment with NAPALM, engineer traffic across anycast nodes, build zero-trust network architectures, and keep packets flowing when a submarine cable goes dark. Protocols are the vocabulary. Network engineering is the language.
+    </blockquote>
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">NetEng</span><span class="stat-label">Discipline</span></div>
+      <div class="stat"><span class="stat-value">13</span><span class="stat-label">Rosetta Clusters</span></div>
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Network Domains</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Scope:</strong> The engineering discipline of designing, building, and operating networks. Distinct from protocol research (DNS, TCP) and admin fundamentals (SYA networking module).</p>
+      <p><strong>Sources:</strong> Cisco, Juniper, Arista design guides, NANOG presentations, RFC standards, cloud provider networking docs, real-world network architectures</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="html/01-network-architecture-design.html" class="category-card">
+        <div><span class="cluster-badge cluster-arch">Architecture</span></div>
+        <h3>01. Network Architecture &amp; Design</h3>
+        <p>Campus, data center, WAN, and cloud topologies. Spine-leaf, CLOS, fat-tree fabrics. Network tiers and hierarchy. Capacity planning. Bill of materials. The architecture decision framework for greenfield and brownfield deployments.</p>
+      </a>
+
+      <a href="html/02-routing-switching-operations.html" class="category-card">
+        <div><span class="cluster-badge cluster-route">Routing</span></div>
+        <h3>02. Routing &amp; Switching Operations</h3>
+        <p>BGP operations (peering, route filtering, communities, looking glasses). OSPF/IS-IS area design. VLAN architecture. VRF segmentation. MPLS and EVPN-VXLAN. SD-WAN overlay engineering. The control plane vs data plane operational split.</p>
+      </a>
+
+      <a href="html/03-network-automation-netdevops.html" class="category-card">
+        <div><span class="cluster-badge cluster-auto">Automation</span></div>
+        <h3>03. Network Automation &amp; NetDevOps</h3>
+        <p>Ansible/NAPALM/Nornir for network config. YANG models, NETCONF, gNMI streaming. Network CI/CD pipelines. Config drift detection. Batfish verification. Intent-based networking. The CLI-to-API transformation.</p>
+      </a>
+
+      <a href="html/04-load-balancing-traffic-engineering.html" class="category-card">
+        <div><span class="cluster-badge cluster-traffic">Traffic</span></div>
+        <h3>04. Load Balancing &amp; Traffic Engineering</h3>
+        <p>L4/L7 load balancing. Global server load balancing (GSLB). DNS-based load balancing. Anycast engineering. Traffic shaping and QoS. ECMP. Segment routing traffic engineering. Content delivery network integration.</p>
+      </a>
+
+      <a href="html/05-network-security-engineering.html" class="category-card">
+        <div><span class="cluster-badge cluster-sec">Security</span></div>
+        <h3>05. Network Security Engineering</h3>
+        <p>Firewall architecture (zones, policies, microsegmentation). IDS/IPS deployment. DDoS mitigation (scrubbing, Cloudflare/Akamai). Zero-trust network architecture. mTLS everywhere. Network forensics and packet analysis.</p>
+      </a>
+
+      <a href="html/06-cloud-networking.html" class="category-card">
+        <div><span class="cluster-badge cluster-cloud">Cloud</span></div>
+        <h3>06. Cloud Networking</h3>
+        <p>VPC design patterns. Transit gateways and hub-spoke. PrivateLink/Private Service Connect. Hybrid connectivity (Direct Connect, ExpressRoute, Cloud Interconnect). Cloud firewalls and security groups. Service mesh networking (Istio, Cilium).</p>
+      </a>
+
+      <a href="html/07-observability-troubleshooting.html" class="category-card">
+        <div><span class="cluster-badge cluster-observe">Observe</span></div>
+        <h3>07. Observability &amp; Troubleshooting</h3>
+        <p>SNMP and streaming telemetry (gNMI/OpenConfig). Flow analysis (NetFlow, sFlow, IPFIX). Packet capture methodology. Network performance monitoring. Cable testing and physical layer. Systematic troubleshooting methodology.</p>
+      </a>
+
+      <a href="html/08-wireless-edge-networking.html" class="category-card">
+        <div><span class="cluster-badge cluster-wireless">Wireless</span></div>
+        <h3>08. Wireless &amp; Edge Networking</h3>
+        <p>Wi-Fi 6E/7 engineering. Site surveys and RF planning. Controller architectures (on-prem, cloud-managed). IoT networking protocols (Zigbee, LoRaWAN, Matter). 5G private networks. Edge compute networking patterns.</p>
+      </a>
+
+      <a href="html/09-dns-engineering-at-scale.html" class="category-card">
+        <div><span class="cluster-badge cluster-dns">DNS</span></div>
+        <h3>09. DNS Engineering at Scale</h3>
+        <p>Authoritative vs recursive architecture. DNSSEC operations (key rotation, algorithm migration). DNS-based service discovery (Consul, CoreDNS). GeoDNS and latency-based routing. DNS as control plane. DNS security (DoH, DoT, RPZ).</p>
+      </a>
+
+      <a href="html/10-network-reliability-dr.html" class="category-card">
+        <div><span class="cluster-badge cluster-reliable">Reliability</span></div>
+        <h3>10. Network Reliability &amp; DR</h3>
+        <p>Redundancy design (dual-homed, diverse path routing). Convergence time engineering. BFD for fast failure detection. Graceful restart and NSF. Network DR testing. Submarine cable resilience. The 5-nines network availability target.</p>
+      </a>
+    </div>
+
+    <h2>Cross-References</h2>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series Projects</h4>
+      <ul>
+        <li><a href="../DNS/index.html">DNS &mdash; DNS Protocol</a></li>
+        <li><a href="../TCP/index.html">TCP &mdash; TCP/IP Protocol</a></li>
+        <li><a href="../SYA/index.html">SYA &mdash; Systems Administration</a></li>
+        <li><a href="../SOO/index.html">SOO &mdash; Systems Operations</a></li>
+        <li><a href="../CMH/index.html">CMH &mdash; Computational Mesh</a></li>
+        <li><a href="../SRD/index.html">SRD &mdash; SSH &amp; Remote Desktop</a></li>
+        <li><a href="../FEC/index.html">FEC &mdash; Forward Error Correction</a></li>
+        <li><a href="../RFC/index.html">RFC &mdash; RFC Archive &amp; Authorship</a></li>
+        <li><a href="../K8S/index.html">K8S &mdash; Kubernetes Ecosystem</a></li>
+        <li><a href="../DRP/index.html">DRP &mdash; Disaster Recovery</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Rosetta Cluster:</strong> Infrastructure &middot; SNE provides the network fabric that every other infrastructure project depends on. DNS and TCP provide the protocol foundations. SYA provides the admin knowledge. SOO provides the operational playbook. Together they form the complete network lifecycle from design through operation.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Systems Network Engineering &middot; Infrastructure Cluster &middot; 10 research modules &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

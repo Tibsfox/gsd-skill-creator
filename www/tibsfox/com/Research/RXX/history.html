@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Design &mdash; Rexx &amp; ARexx &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rxx">
+  <header>
+    <h1>History &amp; Design</h1>
+    <div class="subtitle">IBM Hursley 1979 &rarr; Commodore 1990 &rarr; GSD-OS 2026</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html" class="active">History</a>
+      <a href="language.html">Language</a>
+      <a href="parse.html">PARSE</a>
+      <a href="ports.html">Ports &amp; IPC</a>
+      <a href="porting.html">Porting</a>
+      <a href="amiga.html">Amiga</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>ADDRESS 'HISTORY'</strong><br>
+      "The purpose of the Rexx language is to be a <em>personal programming language</em>."<br>
+      &mdash; Mike Cowlishaw, <em>The REXX Language</em>, 1985
+    </blockquote>
+
+    <h2>1. The Problem: IBM Mainframe Scripting Before REXX</h2>
+
+    <p>By the late 1970s, IBM&rsquo;s VM/CMS had <strong>EXEC</strong> and <strong>EXEC 2</strong> &mdash; both inadequate. EXEC was primitive: no proper subroutines, no structured control flow, <code>&amp;GOTO</code> for everything. EXEC 2 added variables and <code>&amp;LOOP</code>, but had no expression evaluator &mdash; adding two numbers required calling an external command. On the TSO side, <strong>CLIST</strong> was universally disliked: cryptic errors, fragile parsing.</p>
+
+    <p>Two major IBM environments. Both with scripting languages that couldn&rsquo;t keep up with growing demands for automation. This was the landscape when Mike Cowlishaw decided to fix it.</p>
+
+    <h2>2. Michael Frank Cowlishaw</h2>
+
+    <div class="card">
+      <p><strong>Mike Cowlishaw</strong> (born c. 1949-1950, UK) was a researcher at IBM&rsquo;s United Kingdom Laboratories in <strong>Hursley Park</strong>, near Winchester, Hampshire &mdash; a Baroque country house that IBM acquired in 1958. Home of CICS and a center for programming language research.</p>
+      <p>Cowlishaw studied mathematics at the <strong>University of Birmingham</strong>. His math background profoundly influenced REXX: arbitrary precision, decimal floating point, the insistence that <code>0.1 + 0.2</code> should equal <code>0.3</code>. He was deeply familiar with <strong>PL/I</strong> &mdash; powerful but enormously complex &mdash; and understood both its strengths and burdens.</p>
+      <p>His insight: a scripting language should have the <strong>readability</strong> of English, the <strong>power</strong> of a real programming language, but the <strong>simplicity</strong> that PL/I had sacrificed. A novice should write scripts immediately; an expert should never feel constrained.</p>
+    </div>
+
+    <p>Cowlishaw began designing REXX in <strong>March 1979</strong>. Initially called <strong>REX</strong> (Reformed Executor), renamed to <strong>REXX</strong> (REstructured eXtended eXecutor). The first interpreter was written in PL/I on VM/CMS. By 1982, REXX was the <strong>official scripting language for VM/CMS</strong>. By 1983, IBM shipped it as standard in VM/SP Release 3.</p>
+
+    <p>His book &mdash; <strong>&ldquo;The REXX Language: A Practical Approach to Programming&rdquo;</strong> (Prentice-Hall, 1985, 2nd ed. 1990) &mdash; became one of the most respected programming language books of the 1980s. Cowlishaw was elected <strong>Fellow of the Royal Academy of Engineering</strong> and received an <strong>OBE</strong>. He later created NetRexx and led IEEE 754-2008 decimal floating-point arithmetic.</p>
+
+    <h2>3. The Ten Design Principles</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Principle</th><th>How It Manifests</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Readability</td><td>Programs readable as English prose. No sigils, no braces.</td></tr>
+        <tr><td>2</td><td>Natural data typing</td><td>No declarations. Context determines interpretation.</td></tr>
+        <tr><td>3</td><td>Minimal notation</td><td>Few special characters. No operator overloading.</td></tr>
+        <tr><td>4</td><td>Unlimited precision</td><td>NUMERIC DIGITS — no artificial limits on numeric accuracy.</td></tr>
+        <tr><td>5</td><td>Content-addressable arrays</td><td>Stems: associative lookup by any string key.</td></tr>
+        <tr><td>6</td><td>Extensive built-in functions</td><td>70+ functions — no external library for common operations.</td></tr>
+        <tr><td>7</td><td>Powerful parsing</td><td>PARSE — first-class template-based string decomposition.</td></tr>
+        <tr><td>8</td><td>Debugging support</td><td>TRACE — built-in execution tracing. Unique among scripting languages.</td></tr>
+        <tr><td>9</td><td>Consistent and reliable</td><td>No surprises, no undefined behavior.</td></tr>
+        <tr><td>10</td><td>Small implementation</td><td>Practical on resource-constrained systems (512KB Amiga).</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The Principle of Least Astonishment</h3>
+    <ul>
+      <li><strong>No reserved words.</strong> <code>IF</code>, <code>THEN</code>, <code>DO</code>, <code>SAY</code> can all be variable names. The parser disambiguates by context.</li>
+      <li><strong>Decimal arithmetic.</strong> <code>0.1 + 0.2 = 0.3</code>, not <code>0.30000000000000004</code>.</li>
+      <li><strong>Strings are the universal type.</strong> No type system to learn, no casting. <code>x = 42</code> stores the string <code>"42"</code>.</li>
+    </ul>
+
+    <h2>4. The Language at a Glance</h2>
+
+    <pre>
+/* A REXX program readable by someone who has never seen REXX */
+SAY "Enter numbers, one per line. Enter 'done' when finished."
+total = 0
+count = 0
+DO FOREVER
+  PULL value
+  IF value = 'DONE' THEN LEAVE
+  total = total + value
+  count = count + 1
+END
+IF count > 0 THEN
+  SAY "The average is" total / count
+ELSE
+  SAY "No numbers were entered."</pre>
+
+    <p>23 instructions. 70+ built-in functions. One data type. No declarations. No compilation step. From these minimal building blocks: arbitrary-precision arithmetic, complex string parsing, dynamic code generation, structured error handling, and inter-process communication.</p>
+
+    <h2>5. ANSI X3.274-1996: Standardization</h2>
+
+    <p>REXX was formally standardized by ANSI in 1996 as <strong>X3.274-1996</strong> &mdash; &ldquo;Information Technology &mdash; Programming Language REXX.&rdquo; The standard codified the language as implemented by IBM, with minor adjustments. It covers: clause syntax, expressions, variables, control structures, PARSE, built-in functions, conditions, and the trace facility. It does NOT cover: the ARexx port system, object-oriented extensions, or platform-specific I/O &mdash; those are extensions.</p>
+
+    <h2>6. William S. Hawes and ARexx</h2>
+
+    <div class="card port-card">
+      <p><strong>William S. Hawes</strong>, based in Maynard, Massachusetts, operating as <strong>Wishful Thinking Development</strong>. Already known for <strong>WShell</strong> (advanced Amiga command shell). He recognized that the Amiga&rsquo;s preemptive multitasking and exec.library message passing created a unique opportunity: if applications could communicate through a standard language and protocol, the Amiga would become a scriptable environment unlike anything on personal computers.</p>
+      <p>He chose REXX because: (1) established standard, (2) designed for scripting, (3) accessible to non-programmers, (4) powerful enough for real work.</p>
+    </div>
+
+    <p>ARexx was released commercially in <strong>1987</strong> (~$49.95). The critical turning point: <strong>Commodore licensed ARexx</strong> and included it as standard in <strong>AmigaOS 2.0</strong> (1990, shipped with the Amiga 3000). Unprecedented — no other personal computer OS shipped a standard scripting language with inter-application IPC. Apple wouldn&rsquo;t ship AppleScript until 1993.</p>
+
+    <h3>ARexx System Components (AmigaOS 2.0+)</h3>
+    <table>
+      <thead><tr><th>Component</th><th>Path</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>RexxMast</td><td><code>SYS:System/RexxMast</code></td><td>ARexx master daemon (resident process)</td></tr>
+        <tr><td>REXX:</td><td>Logical device</td><td>Script search path</td></tr>
+        <tr><td>rexxsyslib.library</td><td><code>LIBS:</code></td><td>Core ARexx system library</td></tr>
+        <tr><td>rexxsupport.library</td><td><code>LIBS:</code></td><td>Additional support functions</td></tr>
+        <tr><td>rexxmathlib.library</td><td><code>LIBS:</code></td><td>Math functions (SIN, COS, LOG, etc.)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>7. Timeline</h2>
+
+    <div class="port-pipeline">
+      <ol>
+        <li><strong>1979</strong> &mdash; Cowlishaw begins REXX design at IBM Hursley. First interpreter in PL/I on VM/CMS.</li>
+        <li><strong>1982</strong> &mdash; REXX becomes official VM/CMS scripting language.</li>
+        <li><strong>1985</strong> &mdash; <em>The REXX Language</em> published. REXX spreads beyond IBM.</li>
+        <li><strong>1987</strong> &mdash; William S. Hawes releases ARexx commercially for the Amiga ($49.95).</li>
+        <li><strong>1988</strong> &mdash; IBM ships REXX with OS/2 1.1. Deep Workplace Shell integration follows.</li>
+        <li><strong>1990</strong> &mdash; Commodore includes ARexx in AmigaOS 2.0. Every Amiga application adds port support.</li>
+        <li><strong>1996</strong> &mdash; ANSI X3.274-1996 standardizes the REXX language.</li>
+        <li><strong>1997</strong> &mdash; Cowlishaw creates NetRexx (REXX on JVM).</li>
+        <li><strong>2004</strong> &mdash; IBM donates Object REXX to open source. RexxLA stewardship begins (ooRexx).</li>
+        <li><strong>2026</strong> &mdash; This project: ARexx reborn for GSD-OS. TypeScript &rarr; x86-64 &rarr; CUDA.</li>
+      </ol>
+    </div>
+
+    <h2>8. Key Influences on REXX</h2>
+    <table>
+      <thead><tr><th>Influence</th><th>What REXX Borrowed</th><th>What REXX Changed</th></tr></thead>
+      <tbody>
+        <tr><td>PL/I</td><td>Rich built-in functions, structured syntax</td><td>Eliminated declarations, types, and complexity</td></tr>
+        <tr><td>EXEC 2</td><td>Role as CMS command language</td><td>Real expression evaluator, control flow, functions</td></tr>
+        <tr><td>ALGOL</td><td>Structured programming concepts</td><td>Simpler syntax, English-like keywords</td></tr>
+        <tr><td>English</td><td>Readability as design goal</td><td>SAY, PULL, LEAVE, DO FOREVER — verbs as instructions</td></tr>
+      </tbody>
+    </table>
+
+    <h3>What REXX Invented</h3>
+    <ul>
+      <li><strong>PARSE</strong> — template-based string decomposition (no prior art)</li>
+      <li><strong>NUMERIC DIGITS</strong> — user-configurable arbitrary precision arithmetic</li>
+      <li><strong>INTERPRET</strong> — dynamic code execution as a first-class instruction</li>
+      <li><strong>TRACE</strong> — built-in execution tracing (unique among scripting languages)</li>
+      <li><strong>No reserved words</strong> — keywords disambiguated by context</li>
+    </ul>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="parse.html">The PARSE Engine</a></li>
+        <li><a href="ports.html">Ports &amp; IPC</a></li>
+        <li><a href="porting.html">Porting Architecture</a></li>
+        <li><a href="amiga.html">The Amiga Connection</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="implementations.html">Implementations</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>History &amp; Design &middot; Rexx &amp; ARexx &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

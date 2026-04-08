@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARM64 &amp; RISC-V &mdash; Assembly Language</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-asm">
+  <header>
+    <h1>ARM64 &amp; RISC-V</h1>
+    <div class="subtitle">AArch64 Registers &amp; Instructions, NEON/SVE, AAPCS64, RISC-V Open ISA</div>
+    <nav>
+      <a href="index.html">Overview</a> <a href="x86.html">x86-64</a> <a href="arm.html" class="active">ARM64</a> <a href="microarch.html">Microarch</a> <a href="tools.html">Tools</a> <a href="modern.html">Modern</a> <a href="rosetta.html">Rosetta</a> <a href="education.html">Learn</a> <a href="history.html">History</a>
+    </nav>
+  </header>
+  <main>
+    <blockquote>ARM64 (AArch64) runs every smartphone, every Apple Mac since 2020, and an increasing share of cloud servers. RISC-V is the open-source challenger. Both are RISC: load/store architecture, fixed-width instructions, large register files.</blockquote>
+
+    <h2>ARM64 Registers</h2>
+    <table>
+      <thead><tr><th>Register</th><th>Convention (AAPCS64)</th></tr></thead>
+      <tbody>
+        <tr><td><code>x0</code>&ndash;<code>x7</code></td><td>Arguments and return values (x0 = 1st arg / return)</td></tr>
+        <tr><td><code>x8</code></td><td>Indirect result location</td></tr>
+        <tr><td><code>x9</code>&ndash;<code>x15</code></td><td>Caller-saved temporaries</td></tr>
+        <tr><td><code>x16</code>, <code>x17</code></td><td>Intra-procedure scratch (IP0, IP1)</td></tr>
+        <tr><td><code>x18</code></td><td>Platform register (TLS on some OSes)</td></tr>
+        <tr><td><code>x19</code>&ndash;<code>x28</code></td><td>Callee-saved</td></tr>
+        <tr><td><code>x29</code> (fp)</td><td>Frame pointer (callee-saved)</td></tr>
+        <tr><td><code>x30</code> (lr)</td><td>Link register (return address)</td></tr>
+        <tr><td><code>sp</code></td><td>Stack pointer (not a GPR, special)</td></tr>
+        <tr><td><code>pc</code></td><td>Program counter (not directly writable)</td></tr>
+        <tr><td><code>v0</code>&ndash;<code>v31</code></td><td>SIMD/FP registers (128-bit NEON, scalable SVE)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>ARM64 Hello World</h2>
+<pre><code>// hello.s — AArch64, Linux
+.data
+msg:    .ascii "Hello, world!\n"
+len =   . - msg
+
+.text
+.global _start
+_start:
+    mov x8, #64         // syscall: write
+    mov x0, #1          // fd: stdout
+    ldr x1, =msg        // buffer
+    mov x2, #len        // length
+    svc #0              // syscall
+
+    mov x8, #93         // syscall: exit
+    mov x0, #0          // status: 0
+    svc #0</code></pre>
+
+    <h2>Key Differences from x86-64</h2>
+    <table>
+      <thead><tr><th>Feature</th><th>x86-64</th><th>ARM64</th></tr></thead>
+      <tbody>
+        <tr><td>Instruction width</td><td>Variable (1&ndash;15 bytes)</td><td>Fixed 32-bit</td></tr>
+        <tr><td>Architecture</td><td>CISC (register-memory)</td><td>RISC (load/store)</td></tr>
+        <tr><td>GPR count</td><td>16</td><td>31</td></tr>
+        <tr><td>Condition codes</td><td>Flags register (rflags)</td><td>PSTATE (NZCV)</td></tr>
+        <tr><td>Memory ordering</td><td>TSO (strong)</td><td>Weakly ordered (needs barriers)</td></tr>
+        <tr><td>Link register</td><td>Pushed on stack by <code>call</code></td><td>Stored in <code>x30</code> (lr) by <code>bl</code></td></tr>
+        <tr><td>System call</td><td><code>syscall</code></td><td><code>svc #0</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2>NEON and SVE</h2>
+    <p><strong>NEON:</strong> 32 &times; 128-bit vector registers (<code>v0</code>&ndash;<code>v31</code>). Packed integer and floating-point SIMD. Available on all AArch64.</p>
+    <p><strong>SVE (Scalable Vector Extension):</strong> Vector-length-agnostic (128&ndash;2048 bits). Predicate registers for per-lane masking. Gather/scatter. SVE2 adds cryptographic and fixed-point operations. ARM Neoverse V-series implements SVE.</p>
+
+    <h2>RISC-V</h2>
+    <div class="card blue">
+      <p><strong>The open-source ISA.</strong> Designed at UC Berkeley (2010) by Krste Asanovic, Andrew Waterman, and Yunsup Lee. Free: no licensing fees, no royalties. Governed by RISC-V International.</p>
+      <ul>
+        <li><strong>32 integer registers</strong> (<code>x0</code>&ndash;<code>x31</code>; <code>x0</code> hardwired to zero)</li>
+        <li><strong>Modular:</strong> base ISA (RV32I/RV64I) + standard extensions: M (multiply), A (atomic), F (float), D (double), C (compressed 16-bit), V (vector)</li>
+        <li><strong>Privileged modes:</strong> Machine (M), Supervisor (S), User (U)</li>
+        <li><strong>System call:</strong> <code>ecall</code></li>
+      </ul>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>RST</td><td>Rust</td><td>Rust compiles to ARM64 and RISC-V natively. Embedded Rust targets both.</td></tr>
+        <tr><td>GOL</td><td>Go</td><td><code>GOARCH=arm64</code> cross-compilation. AWS Graviton runs Go on ARM64.</td></tr>
+        <tr><td>CEE</td><td>C</td><td>ARM64 and RISC-V ABIs define how C code maps to registers.</td></tr>
+      </tbody>
+    </table>
+    <div class="cross-links"><h4>Related Modules</h4><ul><li><a href="index.html">Overview</a></li><li><a href="x86.html">x86-64</a></li><li><a href="microarch.html">Microarchitecture</a></li><li><a href="tools.html">Tools</a></li><li><a href="modern.html">Modern Uses</a></li><li><a href="rosetta.html">Rosetta</a></li><li><a href="education.html">Learn</a></li><li><a href="history.html">History</a></li></ul></div>
+  </main>
+  <footer><p>ARM64 &amp; RISC-V &middot; PNW Research Series &middot; April 2026</p><p><a href="../index.html">PNW Research Series</a></p></footer>
+</body>
+</html>

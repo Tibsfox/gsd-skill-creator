@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>--- — SNO Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2a2a;
+            --accent: #FF9100;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4DB6AC;
+            --border: #2a3a3a;
+            --primary: #004D40;
+            --net: #A5D6A7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(77,182,172,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNO — Systems Network Operations<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNO Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="module-9-network-documentation-cmdb">Module 9: Network
+    Documentation &amp; CMDB</h1>
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ol type="1">
+    <li><a href="#1-introduction">Introduction</a></li>
+    <li><a href="#2-network-diagram-standards">Network Diagram
+    Standards</a></li>
+    <li><a href="#3-diagramming-tools-and-selection">Diagramming Tools
+    and Selection</a></li>
+    <li><a href="#4-cable-management-and-structured-cabling">Cable
+    Management and Structured Cabling</a></li>
+    <li><a href="#5-port-mapping-and-discovery">Port Mapping and
+    Discovery</a></li>
+    <li><a href="#6-as-built-documentation">As-Built
+    Documentation</a></li>
+    <li><a href="#7-audit-readiness-and-compliance">Audit Readiness and
+    Compliance</a></li>
+    <li><a
+    href="#8-documentation-as-code">Documentation-as-Code</a></li>
+    <li><a href="#9-cmdb-for-network-infrastructure">CMDB for Network
+    Infrastructure</a></li>
+    <li><a href="#10-the-documentation-decay-problem">The Documentation
+    Decay Problem</a></li>
+    <li><a href="#11-templates-and-examples">Templates and
+    Examples</a></li>
+    <li><a href="#12-source-index-and-citations">Source Index and
+    Citations</a></li>
+    </ol>
+    <hr />
+    <h2 id="introduction">1. Introduction</h2>
+    <p>Network documentation is the single most neglected discipline in
+    network operations. Organizations invest millions in redundant
+    hardware, sophisticated monitoring, and skilled engineers — then
+    undermine all of it by running on diagrams that were last updated
+    during the previous administration, cable labels that have faded
+    past legibility, and a CMDB that everyone knows is wrong but nobody
+    has time to fix.</p>
+    <p>The cost of poor network documentation is not theoretical. When
+    an outage strikes at 2 AM, the on-call engineer’s first action is to
+    pull up a network diagram. If that diagram shows a topology from two
+    years ago, the engineer is debugging blind. When a compliance
+    auditor requests evidence of network segmentation for PCI-DSS, and
+    the only current diagram is a whiteboard photograph from a planning
+    meeting, the audit finding writes itself. When a cable is
+    accidentally unplugged in a rack and there are no labels, a
+    five-second fix becomes a thirty-minute trace.</p>
+    <p>This module addresses the full lifecycle of network
+    documentation: what to document, how to diagram it, what standards
+    govern physical cabling, how to maintain a Configuration Management
+    Database (CMDB) as a network source of truth, how to survive
+    compliance audits, and — most critically — how to prevent the
+    inevitable decay that renders documentation useless within months of
+    creation.</p>
+    <p>The operational philosophy is straightforward: documentation that
+    is not maintained is worse than no documentation at all, because
+    stale documentation creates false confidence. Every practice in this
+    module includes a maintenance strategy alongside the creation
+    process.</p>
+    <p><strong>Who should read this module:</strong></p>
+    <ul>
+    <li>Network engineers responsible for creating and maintaining
+    network diagrams</li>
+    <li>NOC analysts who rely on documentation during incident
+    response</li>
+    <li>IT managers establishing documentation standards and review
+    cadences</li>
+    <li>Compliance auditors evaluating network documentation against
+    regulatory requirements</li>
+    <li>Infrastructure architects designing documentation workflows for
+    new deployments</li>
+    </ul>
+    <p><strong>What this module does not cover:</strong></p>
+    <ul>
+    <li>Network design methodology (covered in SNE — Systems Network
+    Engineering)</li>
+    <li>Monitoring and alerting configuration (covered in Module
+    01)</li>
+    <li>Change management procedures (covered in Module 02)</li>
+    <li>Specific vendor CLI commands for configuration backup</li>
+    </ul>
+    <hr />
+    <h2 id="network-diagram-standards">2. Network Diagram Standards</h2>
+    <p>Network diagrams are not a single artifact. A complete
+    documentation set requires multiple diagram types, each serving a
+    different audience and answering different operational questions.
+    The common failure is producing one “network diagram” that attempts
+    to show everything — physical cabling, IP addressing, VLAN
+    assignments, firewall rules, and application flows — on a single
+    cluttered page that communicates nothing effectively.</p>
+    <h3 id="layer-1-physical-diagrams">2.1 Layer 1: Physical
+    Diagrams</h3>
+    <p>Physical diagrams answer: <em>what hardware exists, where is it
+    located, and what is physically connected to what?</em></p>
+    <p><strong>Required elements:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 29%" />
+    <col style="width: 41%" />
+    <col style="width: 29%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Element</th>
+    <th>Description</th>
+    <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Device placement</td>
+    <td>Rack unit position for every device</td>
+    <td>Switch-Core-01 in Rack A3, U22-U23</td>
+    </tr>
+    <tr>
+    <td>Cable runs</td>
+    <td>Physical cable paths between devices</td>
+    <td>Trunk 4 from Rack A3 to Rack B1 via Tray 7</td>
+    </tr>
+    <tr>
+    <td>Port assignments</td>
+    <td>Specific interface on each end of a connection</td>
+    <td>Gi1/0/24 to Gi2/0/1</td>
+    </tr>
+    <tr>
+    <td>Cable type and color</td>
+    <td>Media type and organizational color scheme</td>
+    <td>OM4 fiber, orange jacket = inter-rack trunk</td>
+    </tr>
+    <tr>
+    <td>Patch panels</td>
+    <td>Patch panel positions and port mappings</td>
+    <td>Panel A3-PP1, Port 12 to Switch-Core-01 Gi1/0/12</td>
+    </tr>
+    <tr>
+    <td>Power circuits</td>
+    <td>UPS and PDU connections per device</td>
+    <td>PDU-A3-Left, Outlet 8; PDU-A3-Right, Outlet 8</td>
+    </tr>
+    <tr>
+    <td>Rack elevations</td>
+    <td>Front and rear views of each rack</td>
+    <td>42U rack, devices shown in position with blank panels</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Best practice:</strong> Physical diagrams should resemble
+    the physical reality. Use rack elevation diagrams for individual
+    racks and floor plans for data center layouts. Color-code cable
+    types consistently. Include a legend on every diagram.</p>
+    <p><strong>Common failure:</strong> Drawing logical connections on a
+    physical diagram. A physical diagram that shows “VLAN 100” on a
+    cable is mixing abstraction layers. The cable does not know what
+    VLAN it carries — that information belongs on the Layer 2
+    diagram.</p>
+    <h3 id="layer-2-logical-diagrams">2.2 Layer 2: Logical Diagrams</h3>
+    <p>Logical diagrams at Layer 2 answer: <em>how are devices grouped,
+    how do VLANs span the topology, where are the trunk links, and what
+    does the spanning tree look like?</em></p>
+    <p><strong>Required elements:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 29%" />
+    <col style="width: 41%" />
+    <col style="width: 29%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Element</th>
+    <th>Description</th>
+    <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>VLAN topology</td>
+    <td>VLAN IDs, names, and which switches participate</td>
+    <td>VLAN 100 (Servers) on Core-01, Core-02, Access-01</td>
+    </tr>
+    <tr>
+    <td>Trunk links</td>
+    <td>802.1Q trunks between switches with allowed VLANs</td>
+    <td>Trunk: Core-01 Po1 to Core-02 Po1 (VLANs 100,200,300)</td>
+    </tr>
+    <tr>
+    <td>STP topology</td>
+    <td>Root bridge, designated ports, blocked ports</td>
+    <td>Core-01 is root for VLAN 100, Access-03 Gi0/2 blocking</td>
+    </tr>
+    <tr>
+    <td>Link aggregation</td>
+    <td>Port-channel/LAG membership and LACP status</td>
+    <td>Po1: Gi1/0/23 + Gi1/0/24, LACP active</td>
+    </tr>
+    <tr>
+    <td>Native VLAN</td>
+    <td>Untagged VLAN on each trunk</td>
+    <td>Native VLAN 999 (unused) on all trunks</td>
+    </tr>
+    <tr>
+    <td>MAC learning domains</td>
+    <td>Broadcast domain boundaries</td>
+    <td>VLAN 100 = one broadcast domain spanning 4 switches</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Best practice:</strong> Show STP topology explicitly. The
+    most dangerous network documentation gap is not knowing which links
+    are in blocking state. When a root bridge election changes
+    unexpectedly, the Layer 2 diagram is the reference for what the
+    topology should look like.</p>
+    <h3 id="layer-3-routing-diagrams">2.3 Layer 3: Routing Diagrams</h3>
+    <p>Layer 3 diagrams answer: <em>what subnets exist, how are they
+    connected, what routing protocols govern path selection, and where
+    do routing domains meet?</em></p>
+    <p><strong>Required elements:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 29%" />
+    <col style="width: 41%" />
+    <col style="width: 29%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Element</th>
+    <th>Description</th>
+    <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Subnets</td>
+    <td>CIDR notation for every subnet</td>
+    <td>10.1.100.0/24 (Server VLAN 100)</td>
+    </tr>
+    <tr>
+    <td>Router/L3 switch interfaces</td>
+    <td>IP address on every routed interface</td>
+    <td>Core-01 SVI 100: 10.1.100.1/24</td>
+    </tr>
+    <tr>
+    <td>Routing protocol domains</td>
+    <td>OSPF areas, BGP AS numbers, EIGRP domains</td>
+    <td>OSPF Area 0 backbone, Area 1 branch offices</td>
+    </tr>
+    <tr>
+    <td>VRF instances</td>
+    <td>VRF names and route distinguishers</td>
+    <td>VRF:PRODUCTION, RD 65000:100</td>
+    </tr>
+    <tr>
+    <td>Static routes</td>
+    <td>Non-protocol routes with next hop</td>
+    <td>0.0.0.0/0 via 203.0.113.1 (ISP gateway)</td>
+    </tr>
+    <tr>
+    <td>NAT boundaries</td>
+    <td>Where NAT translation occurs</td>
+    <td>Edge firewall: inside 10.0.0.0/8 to outside 203.0.113.0/28</td>
+    </tr>
+    <tr>
+    <td>Default gateways</td>
+    <td>First-hop redundancy (VRRP/HSRP)</td>
+    <td>HSRP VIP: 10.1.100.1, Active: Core-01, Standby: Core-02</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="application-flow-diagrams">2.4 Application Flow
+    Diagrams</h3>
+    <p>Application flow diagrams answer: <em>how does traffic move
+    between application tiers, what protocols and ports are used, and
+    where do security controls intersect the flow?</em></p>
+    <p><strong>Required elements:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 29%" />
+    <col style="width: 41%" />
+    <col style="width: 29%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Element</th>
+    <th>Description</th>
+    <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Application tiers</td>
+    <td>Client, web, app, database, external API</td>
+    <td>User browser to Load Balancer to App Server to Database</td>
+    </tr>
+    <tr>
+    <td>Protocols and ports</td>
+    <td>TCP/UDP, port numbers, encryption</td>
+    <td>HTTPS/443, gRPC/8443, PostgreSQL/5432</td>
+    </tr>
+    <tr>
+    <td>Firewall traversals</td>
+    <td>Which firewalls or ACLs traffic crosses</td>
+    <td>FW-Edge allows HTTPS inbound, FW-Internal allows App-to-DB</td>
+    </tr>
+    <tr>
+    <td>Load balancer placement</td>
+    <td>VIP, backend pools, health check paths</td>
+    <td>VIP 10.1.200.10:443, pool: app-01 through app-04</td>
+    </tr>
+    <tr>
+    <td>Data classification</td>
+    <td>Sensitivity of data in transit</td>
+    <td>PII in transit between App and DB (encrypted with TLS 1.3)</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Best practice:</strong> Application flow diagrams should
+    be created per application or service, not as a single
+    enterprise-wide diagram. They are the primary artifact for firewall
+    rule justification and compliance evidence.</p>
+    <hr />
+    <h2 id="diagramming-tools-and-selection">3. Diagramming Tools and
+    Selection</h2>
+    <h3 id="tool-comparison">3.1 Tool Comparison</h3>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 13%" />
+    <col style="width: 13%" />
+    <col style="width: 24%" />
+    <col style="width: 26%" />
+    <col style="width: 22%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Tool</th>
+    <th>Cost</th>
+    <th>Strengths</th>
+    <th>Weaknesses</th>
+    <th>Best For</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>draw.io / diagrams.net</td>
+    <td>Free (open source)</td>
+    <td>No cost, offline capable, git-friendly XML format, extensive
+    shape libraries, integrates with Confluence/GitHub</td>
+    <td>No real-time collaboration in desktop version, limited
+    auto-layout</td>
+    <td>Teams on a budget, diagrams stored alongside code</td>
+    </tr>
+    <tr>
+    <td>Microsoft Visio</td>
+    <td>$280-520/year (enterprise license)</td>
+    <td>Enterprise standard, extensive stencil ecosystem, integration
+    with SharePoint/Teams, familiar to non-technical stakeholders</td>
+    <td>Windows-only desktop app, expensive, XML format difficult to
+    diff in git</td>
+    <td>Large enterprises with existing Microsoft licensing</td>
+    </tr>
+    <tr>
+    <td>Lucidchart</td>
+    <td>$7.95-9/user/month</td>
+    <td>Real-time collaboration, cloud-native, import/export Visio,
+    automated diagramming with network data import</td>
+    <td>Subscription cost, data stored in vendor cloud, limited offline
+    capability</td>
+    <td>Distributed teams needing real-time collaboration</td>
+    </tr>
+    <tr>
+    <td>NetBox topology views</td>
+    <td>Free (plugin for NetBox)</td>
+    <td>Auto-generated from CMDB data, always reflects current state,
+    filterable by site/role/tag</td>
+    <td>Requires NetBox deployment, limited layout control, read-only
+    visualization</td>
+    <td>Teams already running NetBox as source of truth</td>
+    </tr>
+    <tr>
+    <td>Mermaid</td>
+    <td>Free (open source)</td>
+    <td>Renders in Markdown (GitHub, GitLab, Confluence),
+    version-controllable text, CI/CD integration</td>
+    <td>Limited layout control, no drag-and-drop, poor for complex
+    physical diagrams</td>
+    <td>Documentation-as-code workflows, README diagrams</td>
+    </tr>
+    <tr>
+    <td>D2</td>
+    <td>Free (open source)</td>
+    <td>Purpose-built DSL for diagrams, superior layout engine
+    (dagre/ELK), network topology support, exportable SVG</td>
+    <td>Smaller community than Mermaid, separate rendering step
+    needed</td>
+    <td>Engineers who want Mermaid-like text but better layout</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="selection-decision-framework">3.2 Selection Decision
+    Framework</h3>
+    <p><strong>Use draw.io when:</strong> The team needs a free,
+    general-purpose tool that can produce any diagram type. Draw.io’s
+    XML format can be stored in git, though diffs are not
+    human-readable. This is the default recommendation for most
+    organizations.</p>
+    <p><strong>Use Visio when:</strong> The organization has existing
+    Microsoft enterprise licensing, stakeholders expect Visio files, and
+    diagrams are managed in SharePoint. Do not purchase Visio solely for
+    network diagrams — draw.io covers the same use cases at no cost.</p>
+    <p><strong>Use NetBox topology views when:</strong> The organization
+    runs NetBox and wants diagrams that automatically reflect the
+    current device and cable inventory. This eliminates manual diagram
+    maintenance for the physical and logical layers but does not replace
+    hand-crafted application flow diagrams.</p>
+    <p><strong>Use D2 or Mermaid when:</strong> Diagrams must live in
+    git, render in documentation pipelines, and be reviewed in pull
+    requests alongside code changes. D2 is the better choice for network
+    topologies due to its hierarchical layout engine. Mermaid is the
+    better choice when the primary rendering target is GitHub or GitLab
+    Markdown.</p>
+    <h3 id="mermaid-network-diagram-example">3.3 Mermaid Network Diagram
+    Example</h3>
+    <pre class="mermaid"><code>graph TB
+    subgraph Internet
+        ISP1[ISP-Primary]
+        ISP2[ISP-Secondary]
+    end
+    subgraph DMZ[&quot;DMZ - VLAN 50&quot;]
+        FW[Edge Firewall]
+        LB[Load Balancer]
+    end
+    subgraph Production[&quot;Production - VLAN 100&quot;]
+        CORE1[Core-SW-01]
+        CORE2[Core-SW-02]
+        APP1[App-Server-01]
+        APP2[App-Server-02]
+    end
+    subgraph Data[&quot;Data - VLAN 200&quot;]
+        DB1[(Primary DB)]
+        DB2[(Replica DB)]
+    end
+    ISP1 --&gt; FW
+    ISP2 --&gt; FW
+    FW --&gt; LB
+    LB --&gt; CORE1
+    LB --&gt; CORE2
+    CORE1 &lt;--&gt; CORE2
+    CORE1 --&gt; APP1
+    CORE2 --&gt; APP2
+    APP1 --&gt; DB1
+    APP2 --&gt; DB1
+    DB1 --&gt; DB2</code></pre>
+    <h3 id="d2-network-diagram-example">3.4 D2 Network Diagram
+    Example</h3>
+    <pre class="d2"><code>direction: down
+
+internet: Internet {
+  isp-primary: ISP-Primary
+  isp-secondary: ISP-Secondary
+}
+
+dmz: DMZ (VLAN 50) {
+  firewall: Edge Firewall {
+    shape: hexagon
+  }
+  load-balancer: Load Balancer
+}
+
+production: Production (VLAN 100) {
+  core-01: Core-SW-01
+  core-02: Core-SW-02
+  core-01 &lt;-&gt; core-02: LACP Po1
+}
+
+internet.isp-primary -&gt; dmz.firewall: BGP
+internet.isp-secondary -&gt; dmz.firewall: BGP
+dmz.firewall -&gt; dmz.load-balancer: HTTPS/443
+dmz.load-balancer -&gt; production.core-01: VLAN 100
+dmz.load-balancer -&gt; production.core-02: VLAN 100</code></pre>
+    <hr />
+    <h2 id="cable-management-and-structured-cabling">4. Cable Management
+    and Structured Cabling</h2>
+    <h3 id="tia-568-and-tia-606-standards">4.1 TIA-568 and TIA-606
+    Standards</h3>
+    <p>Two TIA standards govern structured cabling and its
+    administration:</p>
+    <p><strong>TIA-568 (Telecommunications Cabling Standard)</strong>
+    defines the physical infrastructure — cable categories, connector
+    types, maximum distances, and testing requirements. The current
+    revision is TIA-568-E (published 2020), which covers Category 5e, 6,
+    6A, and 8 copper cabling as well as OM3, OM4, OM5, and OS2 fiber
+    specifications.</p>
+    <p><strong>TIA-606-C (Administration Standard for Telecommunications
+    Infrastructure)</strong> defines how cabling is labeled, documented,
+    and tracked. This is the standard that directly governs
+    documentation practices. TIA-606-C establishes four administration
+    classes based on infrastructure complexity:</p>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 60%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Class</th>
+    <th>Scope</th>
+    <th>Typical Environment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1</td>
+    <td>Single building, single telecommunications room</td>
+    <td>Small office, single server closet</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>Single building, multiple telecommunications rooms</td>
+    <td>Medium office building</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>Campus with multiple buildings</td>
+    <td>University, corporate campus</td>
+    </tr>
+    <tr>
+    <td>4</td>
+    <td>Multi-campus or multi-site</td>
+    <td>Enterprise with multiple geographic locations</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Higher classes require more granular labeling and documentation.
+    Class 1 requires link identifiers at each end. Class 4 requires
+    globally unique identifiers that encode site, building, floor, room,
+    rack, panel, and port.</p>
+    <h3 id="cable-labeling-schemes">4.2 Cable Labeling Schemes</h3>
+    <p>TIA-606-C requires every cable to be labeled at both ends, within
+    300 mm (12 inches) of the termination point. Labels must be
+    machine-generated (not handwritten) and meet legibility and adhesion
+    standards per UL 969.</p>
+    <p><strong>Recommended labeling format (Class 3):</strong></p>
+    <pre><code>{Building}-{Floor}-{Room}-{Rack}-{Panel}-{Port}</code></pre>
+    <p><strong>Example:</strong> <code>HQ-2-MDF-A3-PP1-12</code> means
+    Headquarters building, floor 2, Main Distribution Frame, rack A3,
+    patch panel 1, port 12.</p>
+    <p><strong>Labeling rules:</strong></p>
+    <ul>
+    <li>Use consistent abbreviations documented in a legend</li>
+    <li>Apply labels at both ends of every cable (the panel end and the
+    device end)</li>
+    <li>Include cable type on the label when mixed media exists in the
+    same pathway (e.g., “CAT6A” or “OM4”)</li>
+    <li>Use sequential numbering that allows for expansion (leave gaps
+    in the sequence rather than renumbering when adding cables)</li>
+    <li>Replace labels immediately when they become illegible</li>
+    </ul>
+    <h3 id="cable-color-coding">4.3 Cable Color Coding</h3>
+    <p>Color coding by function reduces errors during physical
+    maintenance. There is no universal mandatory standard, but the
+    following scheme is widely adopted in enterprise data centers:</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 35%" />
+    <col style="width: 39%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Color</th>
+    <th>Function</th>
+    <th>Rationale</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Blue</td>
+    <td>Horizontal copper (station cables)</td>
+    <td>TIA-606 traditional default for horizontal</td>
+    </tr>
+    <tr>
+    <td>Orange</td>
+    <td>Multimode fiber (OM1/OM2/OM3/OM4)</td>
+    <td>Industry convention, matches jacket color</td>
+    </tr>
+    <tr>
+    <td>Yellow</td>
+    <td>Single-mode fiber (OS2)</td>
+    <td>Industry convention, matches jacket color</td>
+    </tr>
+    <tr>
+    <td>Green</td>
+    <td>Network management / out-of-band</td>
+    <td>Visually distinct, signifies console/IPMI</td>
+    </tr>
+    <tr>
+    <td>Red</td>
+    <td>Critical infrastructure / power</td>
+    <td>Universal warning color, used for UPS/PDU circuits</td>
+    </tr>
+    <tr>
+    <td>White</td>
+    <td>Backbone copper (building risers)</td>
+    <td>Contrasts with blue horizontal runs</td>
+    </tr>
+    <tr>
+    <td>Purple/Violet</td>
+    <td>VoIP or converged infrastructure</td>
+    <td>Distinguishes voice traffic from data</td>
+    </tr>
+    <tr>
+    <td>Black</td>
+    <td>ISP/WAN handoff cables</td>
+    <td>Clearly identifies carrier demarcation</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Important:</strong> Document the color scheme and post
+    the legend in every telecommunications room. A color scheme that
+    exists only in one engineer’s memory provides no operational
+    value.</p>
+    <h3 id="patch-panel-documentation">4.4 Patch Panel
+    Documentation</h3>
+    <p>Every patch panel port requires a documented mapping to its
+    far-end termination. This mapping is maintained in a patch panel
+    schedule:</p>
+    <pre><code>Patch Panel: HQ-2-MDF-A3-PP1
+Panel Type: Cat6A, 48-port, Keystone
+Installed: 2025-03-15
+Rack: A3, U40
+
+Port | Cable ID         | Far End                    | Status   | Device Port
+-----|------------------|----------------------------|----------|------------------
+01   | HQ-2-MDF-A3-C001 | HQ-2-IDF-B1-PP1-01        | Active   | Access-SW-01 Gi0/1
+02   | HQ-2-MDF-A3-C002 | HQ-2-IDF-B1-PP1-02        | Active   | Access-SW-01 Gi0/2
+03   | HQ-2-MDF-A3-C003 | HQ-2-IDF-B1-PP1-03        | Active   | Access-SW-01 Gi0/3
+...
+47   | HQ-2-MDF-A3-C047 | (spare)                    | Reserved | —
+48   | HQ-2-MDF-A3-C048 | (spare)                    | Reserved | —</code></pre>
+    <h3 id="cable-run-tracking">4.5 Cable Run Tracking</h3>
+    <p>For Class 3 and Class 4 installations, track each cable run as a
+    discrete record:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Field</th>
+    <th>Purpose</th>
+    <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Cable ID</td>
+    <td>Unique identifier</td>
+    <td>HQ-2-MDF-A3-C001</td>
+    </tr>
+    <tr>
+    <td>Cable type</td>
+    <td>Media specification</td>
+    <td>Cat6A U/UTP</td>
+    </tr>
+    <tr>
+    <td>Length</td>
+    <td>Measured or estimated</td>
+    <td>42 meters</td>
+    </tr>
+    <tr>
+    <td>Pathway</td>
+    <td>Physical route taken</td>
+    <td>Tray 7, riser shaft 2, tray 12</td>
+    </tr>
+    <tr>
+    <td>Near end</td>
+    <td>Termination A</td>
+    <td>HQ-2-MDF-A3-PP1-01</td>
+    </tr>
+    <tr>
+    <td>Far end</td>
+    <td>Termination B</td>
+    <td>HQ-2-IDF-B1-PP1-01</td>
+    </tr>
+    <tr>
+    <td>Install date</td>
+    <td>When the cable was installed</td>
+    <td>2025-03-15</td>
+    </tr>
+    <tr>
+    <td>Tested</td>
+    <td>Pass/fail and date</td>
+    <td>Pass, 2025-03-15, Fluke DSX2-8000</td>
+    </tr>
+    <tr>
+    <td>Test report</td>
+    <td>Reference to saved test result</td>
+    <td>HQ-2-MDF-A3-C001.pdf</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="port-mapping-and-discovery">5. Port Mapping and
+    Discovery</h2>
+    <h3 id="switch-port-to-device-mapping">5.1 Switch Port to Device
+    Mapping</h3>
+    <p>Every access port on every switch should have a documented
+    assignment: what device is connected, what VLAN it belongs to, and
+    what its operational purpose is. This mapping is the first artifact
+    an engineer consults during incident response.</p>
+    <p><strong>Port map format:</strong></p>
+    <pre><code>Switch: Access-SW-01 (10.1.1.11)
+Location: HQ-2-IDF-B1, Rack B1, U22
+Model: Cisco C9300-48P
+
+Port     | VLAN | Mode   | Description          | Connected Device    | MAC Address
+---------|------|--------|----------------------|---------------------|------------------
+Gi1/0/1  | 100  | Access | Server-Web-01 eth0   | Server-Web-01       | aa:bb:cc:11:22:33
+Gi1/0/2  | 100  | Access | Server-Web-02 eth0   | Server-Web-02       | aa:bb:cc:11:22:34
+Gi1/0/3  | 200  | Access | Server-DB-01 eth0    | Server-DB-01        | aa:bb:cc:22:33:44
+...
+Gi1/0/47 | —    | Trunk  | Uplink to Core-01    | Core-SW-01 Gi1/0/1  | (trunk)
+Gi1/0/48 | —    | Trunk  | Uplink to Core-02    | Core-SW-02 Gi1/0/1  | (trunk)</code></pre>
+    <h3 id="automated-discovery-with-lldp-and-cdp">5.2 Automated
+    Discovery with LLDP and CDP</h3>
+    <p>Manual port mapping does not scale. Link Layer Discovery Protocol
+    (LLDP, IEEE 802.1AB) and Cisco Discovery Protocol (CDP) enable
+    switches and connected devices to advertise their identity to
+    directly connected neighbors, allowing automated topology
+    mapping.</p>
+    <p><strong>LLDP</strong> is the open standard, supported by all
+    major vendors (Cisco, Juniper, Arista, HP/Aruba, Dell). Every device
+    with LLDP enabled advertises its system name, port description,
+    management address, VLAN membership, and capabilities. LLDP operates
+    at Layer 2 — it discovers only directly connected neighbors.</p>
+    <p><strong>CDP</strong> is Cisco-proprietary, providing the same
+    neighbor discovery function within Cisco environments. CDP includes
+    additional Cisco-specific data like VTP domain, native VLAN, and
+    power negotiation for PoE.</p>
+    <p><strong>Operational recommendations:</strong></p>
+    <ul>
+    <li>Enable LLDP on all switches and routers. It is disabled by
+    default on many platforms.</li>
+    <li>Use CDP alongside LLDP in Cisco environments for the additional
+    data fields.</li>
+    <li>Disable both LLDP and CDP on ports facing untrusted networks
+    (user access ports in high-security zones). These protocols leak
+    topology information to connected devices.</li>
+    <li>Collect LLDP/CDP neighbor tables on a scheduled basis (daily)
+    and compare against documented port maps to detect undocumented
+    changes.</li>
+    </ul>
+    <p><strong>Discovery tools that consume LLDP/CDP data:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 30%" />
+    <col style="width: 30%" />
+    <col style="width: 40%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Tool</th>
+    <th>Type</th>
+    <th>Method</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>NetBox + device polling</td>
+    <td>Open source</td>
+    <td>NAPALM/Nornir scripts query LLDP tables, populate NetBox</td>
+    </tr>
+    <tr>
+    <td>Auvik</td>
+    <td>Commercial SaaS</td>
+    <td>SNMP + LLDP + CDP + ARP for automatic topology</td>
+    </tr>
+    <tr>
+    <td>JDisc Discovery</td>
+    <td>Commercial</td>
+    <td>LLDP + CDP + MAC tables for topology diagrams</td>
+    </tr>
+    <tr>
+    <td>Secure Cartography</td>
+    <td>Open source</td>
+    <td>SSH + SNMP for CDP/LLDP crawling, generates topology maps</td>
+    </tr>
+    <tr>
+    <td>LibreNMS</td>
+    <td>Open source</td>
+    <td>SNMP-based discovery, stores LLDP/CDP neighbors</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="port-utilization-tracking">5.3 Port Utilization
+    Tracking</h3>
+    <p>Beyond knowing what is connected to each port, track port
+    utilization rates to support capacity planning (see Module 06) and
+    to identify waste:</p>
+    <table>
+    <colgroup>
+    <col style="width: 23%" />
+    <col style="width: 23%" />
+    <col style="width: 52%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Metric</th>
+    <th>Source</th>
+    <th>Action Threshold</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Total ports vs. connected ports</td>
+    <td>SNMP ifOperStatus</td>
+    <td>Below 40% utilization: consider consolidation</td>
+    </tr>
+    <tr>
+    <td>PoE budget consumed vs. available</td>
+    <td>SNMP PoE MIB</td>
+    <td>Above 80%: plan for additional PoE capacity</td>
+    </tr>
+    <tr>
+    <td>Unused ports with active config</td>
+    <td>Config audit</td>
+    <td>Ports configured but disconnected &gt;90 days: reclaim</td>
+    </tr>
+    <tr>
+    <td>Trunk port utilization</td>
+    <td>Interface counters</td>
+    <td>Sustained &gt;70% throughput: plan upgrade</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="as-built-documentation">6. As-Built Documentation</h2>
+    <h3 id="design-vs.-as-built">6.1 Design vs. As-Built</h3>
+    <p>A network design document describes what should be built. An
+    as-built document describes what was actually built. These are never
+    identical. During deployment, engineers make field decisions —
+    different rack positions due to clearance issues, substitute cable
+    lengths, revised VLAN numbering to avoid conflicts with existing
+    infrastructure, adjusted routing metrics based on actual latency
+    measurements.</p>
+    <p>The as-built document is the authoritative record. After
+    deployment is complete, the design document is historical reference.
+    Any troubleshooting, maintenance, or audit activity uses the
+    as-built.</p>
+    <h3 id="red-line-drawings">6.2 Red-Line Drawings</h3>
+    <p>The traditional method for creating as-built documentation is the
+    red-line process:</p>
+    <ol type="1">
+    <li>Print (or digitally annotate) the original design diagrams</li>
+    <li>During deployment, mark every deviation in red — changed port
+    assignments, different cable routing, modified IP addresses, added
+    devices, removed devices</li>
+    <li>After deployment, a documentation engineer creates clean
+    as-built diagrams incorporating all red-line markings</li>
+    <li>The red-line originals are archived as evidence of the update
+    process</li>
+    </ol>
+    <p>In modern practice, the “red-line” process often uses digital
+    annotation tools in draw.io, Visio, or PDF markup tools rather than
+    physical printouts, but the discipline is the same: explicitly mark
+    deviations, then produce clean final documents.</p>
+    <h3 id="post-deployment-documentation-update-process">6.3
+    Post-Deployment Documentation Update Process</h3>
+    <table>
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 19%" />
+    <col style="width: 27%" />
+    <col style="width: 36%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Step</th>
+    <th>Owner</th>
+    <th>Deadline</th>
+    <th>Deliverable</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1. Collect field notes</td>
+    <td>Deployment engineer</td>
+    <td>Day of deployment</td>
+    <td>Red-line markups, photos, CLI outputs</td>
+    </tr>
+    <tr>
+    <td>2. Update diagrams</td>
+    <td>Documentation owner</td>
+    <td>Within 5 business days</td>
+    <td>Updated physical, L2, L3 diagrams</td>
+    </tr>
+    <tr>
+    <td>3. Update CMDB records</td>
+    <td>CMDB data steward</td>
+    <td>Within 5 business days</td>
+    <td>Device, interface, cable records</td>
+    </tr>
+    <tr>
+    <td>4. Update port maps</td>
+    <td>Network engineer</td>
+    <td>Within 5 business days</td>
+    <td>Switch port documentation</td>
+    </tr>
+    <tr>
+    <td>5. Peer review</td>
+    <td>Second engineer</td>
+    <td>Within 10 business days</td>
+    <td>Reviewed and approved as-built set</td>
+    </tr>
+    <tr>
+    <td>6. Publish</td>
+    <td>Documentation owner</td>
+    <td>Within 10 business days</td>
+    <td>Final as-built in document repository</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>The five-day rule:</strong> As-built documentation should
+    be completed within five business days of deployment completion.
+    Every day beyond that increases the probability that field decisions
+    will be forgotten. Organizations that allow thirty-day documentation
+    timelines effectively guarantee that as-built documents will be
+    incomplete.</p>
+    <hr />
+    <h2 id="audit-readiness-and-compliance">7. Audit Readiness and
+    Compliance</h2>
+    <h3 id="pci-dss-4.0-network-diagram-requirements">7.1 PCI-DSS 4.0
+    Network Diagram Requirements</h3>
+    <p>PCI-DSS v4.0.1 contains explicit network documentation
+    requirements under Requirement 1 (Install and Maintain Network
+    Security Controls):</p>
+    <p><strong>Requirement 1.2.3</strong> (formerly 1.1.2): Maintain a
+    current network diagram that shows all connections between the
+    cardholder data environment (CDE) and other networks, including
+    wireless networks.</p>
+    <p><strong>Requirement 1.2.4</strong> (formerly 1.1.3): Maintain a
+    current data-flow diagram that shows all cardholder data flows
+    across systems and networks.</p>
+    <p><strong>Specific compliance elements:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 28%" />
+    <col style="width: 40%" />
+    <col style="width: 31%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>PCI-DSS Element</th>
+    <th>What the Auditor Checks</th>
+    <th>Evidence Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Network diagram currency</td>
+    <td>Diagram reflects current topology</td>
+    <td>Version date, last-modified metadata, change log</td>
+    </tr>
+    <tr>
+    <td>CDE boundary</td>
+    <td>Clear demarcation of CDE scope</td>
+    <td>Highlighted CDE boundary on diagram, segmentation controls
+    labeled</td>
+    </tr>
+    <tr>
+    <td>All connections shown</td>
+    <td>Every path into/out of CDE documented</td>
+    <td>Firewall rules correlated with diagram connections</td>
+    </tr>
+    <tr>
+    <td>Wireless networks</td>
+    <td>Wireless infrastructure shown regardless of CDE membership</td>
+    <td>Wireless controllers, SSIDs, segmentation from CDE</td>
+    </tr>
+    <tr>
+    <td>Data flow diagram</td>
+    <td>Cardholder data flows across all systems</td>
+    <td>Diagram showing PAN/SAD paths with encryption indicators</td>
+    </tr>
+    <tr>
+    <td>Annual review</td>
+    <td>Evidence of regular review</td>
+    <td>Dated review signatures, change history</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Actionable guidance:</strong> Maintain separate network
+    diagrams for the CDE and the broader enterprise. The PCI auditor’s
+    primary concern is the CDE boundary — make it unambiguous. Use a
+    colored overlay or separate diagram showing only CDE-relevant
+    connections. Every connection crossing the CDE boundary must
+    correspond to a documented and justified firewall rule.</p>
+    <h3 id="soc-2-network-documentation-requirements">7.2 SOC 2 Network
+    Documentation Requirements</h3>
+    <p>SOC 2 (Trust Services Criteria) does not prescribe specific
+    diagram formats but requires documented evidence of security
+    controls. Under the Common Criteria (CC) relevant to network
+    documentation:</p>
+    <p><strong>CC6.1 (Logical and Physical Access Controls):</strong>
+    The entity implements logical access security measures to protect
+    against threats from unauthorized access. Network diagrams serve as
+    evidence that segmentation controls exist and are documented.</p>
+    <p><strong>CC6.6 (System Boundaries):</strong> The entity implements
+    controls to restrict data transmission, movement, and removal of
+    information to authorized internal and external users. Data flow
+    diagrams evidence these controls.</p>
+    <p><strong>CC7.1 (System Monitoring):</strong> The entity monitors
+    the system and takes action to maintain compliance. Documentation of
+    network monitoring topology and coverage serves as evidence.</p>
+    <p><strong>Audit evidence from network documentation:</strong></p>
+    <ul>
+    <li>Network diagrams with version control showing regular
+    updates</li>
+    <li>Change management tickets linked to diagram modifications</li>
+    <li>CMDB records with audit trails showing configuration item
+    history</li>
+    <li>Automated reports showing CMDB accuracy metrics</li>
+    <li>Signed review records from periodic documentation reviews</li>
+    </ul>
+    <h3 id="iso-27001-requirements">7.3 ISO 27001 Requirements</h3>
+    <p>ISO 27001:2022 Annex A Control 8.20 (Network Security) and
+    Control 5.37 (Documented Operating Procedures) together require that
+    network topology and security controls be documented, maintained,
+    and reviewed. The documentation must be sufficient for an auditor to
+    understand the network architecture, segmentation strategy, and
+    security control placement.</p>
+    <hr />
+    <h2 id="documentation-as-code">8. Documentation-as-Code</h2>
+    <h3 id="principles">8.1 Principles</h3>
+    <p>Documentation-as-code applies software engineering practices —
+    version control, code review, automated testing, continuous
+    integration — to documentation. For network documentation, this
+    means:</p>
+    <ul>
+    <li><strong>Network diagrams stored as text files</strong> (Mermaid,
+    D2, or draw.io XML) in a git repository</li>
+    <li><strong>Change review via pull requests</strong> — diagram
+    changes are reviewed alongside the configuration changes that caused
+    them</li>
+    <li><strong>Automated rendering</strong> — CI/CD pipelines convert
+    text-based diagram source into SVG or PNG output</li>
+    <li><strong>Single source of truth</strong> — the git repository,
+    not a file share or wiki, is the canonical location</li>
+    </ul>
+    <h3 id="repository-structure">8.2 Repository Structure</h3>
+    <pre><code>network-docs/
+  README.md
+  diagrams/
+    physical/
+      dc-west-rack-layout.d2
+      dc-west-floor-plan.d2
+      dc-east-rack-layout.d2
+    layer2/
+      vlan-topology.mermaid
+      stp-domains.d2
+    layer3/
+      routing-overview.d2
+      bgp-peering.d2
+      vrf-topology.d2
+    application/
+      web-platform-flow.mermaid
+      payment-processing-flow.d2
+  port-maps/
+    dc-west-core-01.csv
+    dc-west-access-01.csv
+  cable-runs/
+    dc-west-cable-schedule.csv
+  standards/
+    color-coding.md
+    labeling-scheme.md
+    diagram-conventions.md
+  rendered/               # git-ignored, CI-generated
+    physical/
+    layer2/
+    layer3/
+    application/
+  .github/
+    workflows/
+      render-diagrams.yml</code></pre>
+    <h3 id="cicd-pipeline-for-diagram-rendering">8.3 CI/CD Pipeline for
+    Diagram Rendering</h3>
+    <p>A GitHub Actions workflow that renders D2 and Mermaid diagrams on
+    every merge to main:</p>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Render Network Diagrams</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&#39;diagrams/**&#39;</span><span class="kw">]</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">render</span><span class="kw">:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install D2</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> curl -fsSL https://d2lang.com/install.sh | sh -s --</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Mermaid CLI</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm install -g @mermaid-js/mermaid-cli</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render D2 diagrams</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>          find diagrams/ -name &#39;*.d2&#39; -exec sh -c &#39;</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>            output=&quot;rendered/${1#diagrams/}&quot;</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>            output=&quot;${output%.d2}.svg&quot;</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>            mkdir -p &quot;$(dirname &quot;$output&quot;)&quot;</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>            d2 --theme 200 &quot;$1&quot; &quot;$output&quot;</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>          &#39; _ {} \;</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render Mermaid diagrams</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>          find diagrams/ -name &#39;*.mermaid&#39; -exec sh -c &#39;</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>            output=&quot;rendered/${1#diagrams/}&quot;</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>            output=&quot;${output%.mermaid}.svg&quot;</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>            mkdir -p &quot;$(dirname &quot;$output&quot;)&quot;</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>            mmdc -i &quot;$1&quot; -o &quot;$output&quot;</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>          &#39; _ {} \;</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Upload rendered diagrams</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/upload-artifact@v4</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">name</span><span class="kw">:</span><span class="at"> network-diagrams</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">path</span><span class="kw">:</span><span class="at"> rendered/</span></span></code></pre></div>
+    <h3 id="auto-generated-diagrams-from-netbox">8.4 Auto-Generated
+    Diagrams from NetBox</h3>
+    <p>NetBox’s REST API enables automated diagram generation. A script
+    can query the NetBox API for devices, interfaces, and cables, then
+    produce D2 or Mermaid source that renders the current topology:</p>
+    <div class="sourceCode" id="cb8"><pre
+    class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode: NetBox to D2 topology generator</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pynetbox</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>nb <span class="op">=</span> pynetbox.api(<span class="st">&#39;https://netbox.example.com&#39;</span>, token<span class="op">=</span><span class="st">&#39;...&#39;</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>devices <span class="op">=</span> nb.dcim.devices.<span class="bu">filter</span>(site<span class="op">=</span><span class="st">&#39;dc-west&#39;</span>, role<span class="op">=</span><span class="st">&#39;switch&#39;</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>cables <span class="op">=</span> nb.dcim.cables.<span class="bu">filter</span>(site<span class="op">=</span><span class="st">&#39;dc-west&#39;</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>d2_output <span class="op">=</span> []</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> device <span class="kw">in</span> devices:</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    d2_output.append(<span class="ss">f&#39;</span><span class="sc">{</span>device<span class="sc">.</span>name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>device<span class="sc">.</span>device_type<span class="sc">.</span>model<span class="sc">}</span><span class="ss"> </span><span class="ch">{{</span><span class="ss">&#39;</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    d2_output.append(<span class="ss">f&#39;  shape: rectangle&#39;</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    d2_output.append(<span class="ss">f&#39;</span><span class="ch">}}</span><span class="ss">&#39;</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cable <span class="kw">in</span> cables:</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    a_device <span class="op">=</span> cable.a_terminations[<span class="dv">0</span>].device.name</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    b_device <span class="op">=</span> cable.b_terminations[<span class="dv">0</span>].device.name</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    a_port <span class="op">=</span> cable.a_terminations[<span class="dv">0</span>].name</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    b_port <span class="op">=</span> cable.b_terminations[<span class="dv">0</span>].name</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    d2_output.append(<span class="ss">f&#39;</span><span class="sc">{</span>a_device<span class="sc">}</span><span class="ss"> -&gt; </span><span class="sc">{</span>b_device<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>a_port<span class="sc">}</span><span class="ss"> -- </span><span class="sc">{</span>b_port<span class="sc">}</span><span class="ss">&#39;</span>)</span></code></pre></div>
+    <p>This approach ensures diagrams reflect the current CMDB state
+    without manual intervention. Schedule the generator to run daily and
+    commit changes, creating an audit trail of topology evolution in git
+    history.</p>
+    <hr />
+    <h2 id="cmdb-for-network-infrastructure">9. CMDB for Network
+    Infrastructure</h2>
+    <h3 id="what-a-network-cmdb-must-track">9.1 What a Network CMDB Must
+    Track</h3>
+    <p>A Configuration Management Database for network infrastructure
+    stores configuration items (CIs) that represent every managed
+    element of the network. The minimum CI types for a network CMDB:</p>
+    <table>
+    <colgroup>
+    <col style="width: 24%" />
+    <col style="width: 32%" />
+    <col style="width: 43%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>CI Type</th>
+    <th>Key Fields</th>
+    <th>Example Record</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Device</td>
+    <td>Name, role, model, serial, site, rack, position, firmware,
+    management IP</td>
+    <td>Core-SW-01, Core Switch, C9500-24Y4C, SN:FCW2345…, DC-West, Rack
+    A3, U22, IOS-XE 17.12.3, 10.1.0.11</td>
+    </tr>
+    <tr>
+    <td>Interface</td>
+    <td>Device, name, type, speed, MAC, enabled, description</td>
+    <td>Core-SW-01, Gi1/0/1, 1000BASE-T, 1G, aa:bb:cc:…, enabled,
+    “Uplink to FW-01”</td>
+    </tr>
+    <tr>
+    <td>Cable</td>
+    <td>ID, type, a_termination, b_termination, color, length</td>
+    <td>C-A3-001, Cat6A, Core-SW-01:Gi1/0/1, FW-01:eth1, Blue, 3m</td>
+    </tr>
+    <tr>
+    <td>IP Address</td>
+    <td>Address, prefix, VRF, status, assigned_device,
+    assigned_interface</td>
+    <td>10.1.100.1/24, VLAN-100, VRF:PROD, Active, Core-SW-01,
+    SVI100</td>
+    </tr>
+    <tr>
+    <td>Prefix/Subnet</td>
+    <td>Network, VRF, VLAN, site, role, utilization</td>
+    <td>10.1.100.0/24, VRF:PROD, VLAN 100, DC-West, Server, 73%</td>
+    </tr>
+    <tr>
+    <td>VLAN</td>
+    <td>ID, name, site, group, status</td>
+    <td>100, Servers, DC-West, Production, Active</td>
+    </tr>
+    <tr>
+    <td>Circuit</td>
+    <td>Provider, CID, type, bandwidth, a_side, z_side, contract_id</td>
+    <td>Lumen, OGYX-123456, DIA, 10Gbps, DC-West, Lumen POP,
+    CTR-2025-001</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="tool-comparison-netbox-vs.-servicenow-cmdb">9.2 Tool
+    Comparison: NetBox vs. ServiceNow CMDB</h3>
+    <table>
+    <colgroup>
+    <col style="width: 30%" />
+    <col style="width: 22%" />
+    <col style="width: 47%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Dimension</th>
+    <th>NetBox</th>
+    <th>ServiceNow CMDB</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Purpose</td>
+    <td>Network source of truth (DCIM + IPAM)</td>
+    <td>Enterprise ITSM with CMDB module</td>
+    </tr>
+    <tr>
+    <td>Cost</td>
+    <td>Free (open source), commercial cloud offering from NetBox
+    Labs</td>
+    <td>$50-100+/user/month (enterprise license)</td>
+    </tr>
+    <tr>
+    <td>Network depth</td>
+    <td>Deep: rack positions, cable terminations, power connections,
+    circuit tracking</td>
+    <td>Shallow: treats network devices as generic CIs, limited physical
+    modeling</td>
+    </tr>
+    <tr>
+    <td>Discovery</td>
+    <td>No built-in discovery; integrates via API with Nornir, NAPALM,
+    Ansible</td>
+    <td>Built-in Discovery via MID Server (SNMP, SSH, WMI)</td>
+    </tr>
+    <tr>
+    <td>API</td>
+    <td>Full REST + GraphQL API, excellent automation support</td>
+    <td>REST API, ServiceNow scripting (JavaScript)</td>
+    </tr>
+    <tr>
+    <td>Ecosystem</td>
+    <td>200+ community plugins (topology views, lifecycle, BGP,
+    DNS)</td>
+    <td>ServiceNow Store apps, ITOM add-ons</td>
+    </tr>
+    <tr>
+    <td>ITSM integration</td>
+    <td>None built-in; API integration with external ITSM</td>
+    <td>Native incident, change, problem management</td>
+    </tr>
+    <tr>
+    <td>Best for</td>
+    <td>Network teams needing authoritative physical and logical
+    infrastructure data</td>
+    <td>IT organizations needing network CIs integrated with service
+    management workflows</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Recommendation:</strong> Use NetBox as the network source
+    of truth and integrate it with ServiceNow (or your ITSM platform)
+    via API synchronization. NetBox excels at the depth of network
+    modeling that ServiceNow’s CMDB cannot match. ServiceNow excels at
+    service management workflows that NetBox does not attempt. They are
+    complementary, not competing.</p>
+    <h3 id="device-lifecycle-tracking">9.3 Device Lifecycle
+    Tracking</h3>
+    <p>Every network device has a lifecycle defined by the
+    manufacturer’s support milestones:</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 27%" />
+    <col style="width: 46%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Milestone</th>
+    <th>Definition</th>
+    <th>Operational Impact</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>General Availability (GA)</td>
+    <td>Product available for purchase</td>
+    <td>Begin evaluation and procurement</td>
+    </tr>
+    <tr>
+    <td>End of Sale (EoS)</td>
+    <td>Last date to purchase the product</td>
+    <td>Final procurement opportunity; begin planning replacement</td>
+    </tr>
+    <tr>
+    <td>End of Software Maintenance (EoSW)</td>
+    <td>Last date for software bug fixes</td>
+    <td>No new patches; critical security risk accumulates</td>
+    </tr>
+    <tr>
+    <td>End of Vulnerability/Security Support (EoVS)</td>
+    <td>Last date for security patches</td>
+    <td>Devices become unpatched; compliance risk</td>
+    </tr>
+    <tr>
+    <td>Last Date of Support (LDoS) / End of Life (EoL)</td>
+    <td>All support ceases</td>
+    <td>Device must be decommissioned or accepted as risk</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Tracking with NetBox:</strong> The netbox-lifecycle
+    plugin (maintained by DanSheps) adds EoS/EoL date tracking to
+    DeviceTypes and ModuleTypes, license management assignable to
+    devices and VMs, and support contract tracking with status grouping.
+    For organizations not using the plugin, NetBox custom fields can
+    store lifecycle dates directly on device type records.</p>
+    <p><strong>Warranty tracking:</strong> Record purchase date,
+    warranty expiration, and support contract identifiers as
+    device-level data. Set automated alerts at 90 days before warranty
+    expiration to trigger renewal or replacement decisions.</p>
+    <h3 id="cmdb-data-quality">9.4 CMDB Data Quality</h3>
+    <p>A CMDB is only useful if its data is accurate. Industry
+    benchmarks suggest that CMDB accuracy below 80% makes it actively
+    harmful — engineers learn not to trust it and revert to tribal
+    knowledge, which is exactly the state the CMDB was intended to
+    eliminate.</p>
+    <p><strong>Data quality metrics:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 22%" />
+    <col style="width: 22%" />
+    <col style="width: 55%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Metric</th>
+    <th>Target</th>
+    <th>Measurement Method</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Completeness</td>
+    <td>&gt;95% of required fields populated</td>
+    <td>Automated CMDB report</td>
+    </tr>
+    <tr>
+    <td>Accuracy</td>
+    <td>&gt;90% of records match physical reality</td>
+    <td>Quarterly spot-check audit (sample 10% of devices)</td>
+    </tr>
+    <tr>
+    <td>Currency</td>
+    <td>Records updated within 5 days of change</td>
+    <td>Compare change tickets to CMDB modification dates</td>
+    </tr>
+    <tr>
+    <td>Consistency</td>
+    <td>&lt;2% duplicate or conflicting records</td>
+    <td>Automated deduplication report</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="the-documentation-decay-problem">10. The Documentation Decay
+    Problem</h2>
+    <h3 id="why-documentation-decays">10.1 Why Documentation Decays</h3>
+    <p>Documentation decays because creating it and updating it are
+    performed by different people at different times with different
+    incentives. The engineer who builds the network is motivated to
+    finish the project. The engineer who maintains the network six
+    months later has neither the context nor the allocated time to
+    verify that documentation matches reality.</p>
+    <p>The decay curve is predictable:</p>
+    <ul>
+    <li><strong>Day 1:</strong> Documentation matches reality (as-built
+    just completed)</li>
+    <li><strong>Day 30:</strong> Small deviations appear (emergency
+    changes made without documentation updates)</li>
+    <li><strong>Day 90:</strong> Documentation is approximately correct
+    but missing recent changes</li>
+    <li><strong>Day 180:</strong> Critical gaps exist (devices added or
+    moved without diagram updates)</li>
+    <li><strong>Day 365:</strong> Documentation is historical fiction —
+    engineers reference it but verify everything independently</li>
+    </ul>
+    <h3 id="automated-drift-detection">10.2 Automated Drift
+    Detection</h3>
+    <p>The solution to documentation decay is to detect it automatically
+    rather than relying on human discipline. Drift detection compares
+    the documented state (CMDB, diagrams, port maps) against the
+    discovered state (what SNMP, LLDP, CDP, and configuration backups
+    reveal).</p>
+    <p><strong>Drift detection architecture:</strong></p>
+    <pre><code>[Network Devices] --SNMP/SSH/API--&gt; [Discovery Engine]
+                                          |
+                                    [Compare]
+                                          |
+             [CMDB / NetBox] &lt;--API--&gt; [Drift Report]
+                                          |
+                                    [Alert if delta &gt; threshold]</code></pre>
+    <p><strong>Detectable drift categories:</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 27%" />
+    <col style="width: 47%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Category</th>
+    <th>Detection Method</th>
+    <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Unknown device on port</td>
+    <td>LLDP/CDP neighbor not in CMDB</td>
+    <td>Rogue switch connected to access port</td>
+    </tr>
+    <tr>
+    <td>Configuration drift</td>
+    <td>Config backup diff vs. golden template</td>
+    <td>ACL rule added outside change management</td>
+    </tr>
+    <tr>
+    <td>IP address mismatch</td>
+    <td>ARP/DHCP scan vs. IPAM records</td>
+    <td>Device using IP not assigned in NetBox</td>
+    </tr>
+    <tr>
+    <td>Missing cable record</td>
+    <td>LLDP neighbor exists but no cable record in CMDB</td>
+    <td>New cable installed without documentation</td>
+    </tr>
+    <tr>
+    <td>Firmware version drift</td>
+    <td>SNMP sysDescr vs. CMDB firmware field</td>
+    <td>Device upgraded without updating CMDB record</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="documentation-sla">10.3 Documentation SLA</h3>
+    <p>Treat documentation freshness as a service-level agreement with
+    defined metrics and escalation:</p>
+    <table>
+    <colgroup>
+    <col style="width: 13%" />
+    <col style="width: 20%" />
+    <col style="width: 26%" />
+    <col style="width: 22%" />
+    <col style="width: 16%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>SLA Tier</th>
+    <th>Document Type</th>
+    <th>Maximum Staleness</th>
+    <th>Review Cadence</th>
+    <th>Escalation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Tier 1</td>
+    <td>CDE/PCI network diagrams</td>
+    <td>0 days (updated with every change)</td>
+    <td>Quarterly formal review</td>
+    <td>Compliance officer</td>
+    </tr>
+    <tr>
+    <td>Tier 2</td>
+    <td>Core network diagrams (L2, L3)</td>
+    <td>5 business days after change</td>
+    <td>Semi-annual review</td>
+    <td>Network manager</td>
+    </tr>
+    <tr>
+    <td>Tier 3</td>
+    <td>Physical diagrams, rack elevations</td>
+    <td>10 business days after change</td>
+    <td>Annual review</td>
+    <td>Network manager</td>
+    </tr>
+    <tr>
+    <td>Tier 4</td>
+    <td>Application flow diagrams</td>
+    <td>30 days after application change</td>
+    <td>Annual review</td>
+    <td>Application owner</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Enforcement mechanism:</strong> Integrate documentation
+    updates into the change management workflow. No change ticket is
+    closed until the documentation update is verified. This is a process
+    control, not a technical control — it requires management
+    enforcement.</p>
+    <h3 id="preventing-decay-structural-approaches">10.4 Preventing
+    Decay: Structural Approaches</h3>
+    <ol type="1">
+    <li><p><strong>Automate what can be automated.</strong> Generate
+    diagrams from NetBox. Populate port maps from LLDP discovery. Pull
+    device inventories from SNMP. Every manual documentation step is a
+    step that will eventually be skipped.</p></li>
+    <li><p><strong>Embed documentation in change management.</strong>
+    Add a “Documentation Updated” checkbox to change tickets. Require
+    evidence (diff, screenshot, CMDB changelog link) before the change
+    is marked complete.</p></li>
+    <li><p><strong>Schedule regular audits.</strong> Walk the data
+    center floor quarterly with a printed rack diagram and verify every
+    device matches. This is tedious. It is also the only way to catch
+    documentation drift that automated tools miss — devices in the wrong
+    rack unit, labels that have fallen off, cables routed through the
+    wrong pathway.</p></li>
+    <li><p><strong>Assign ownership.</strong> Every diagram, every CMDB
+    data domain, and every documentation repository has a named owner.
+    Documentation without an owner decays fastest.</p></li>
+    <li><p><strong>Make documentation visible.</strong> Display network
+    diagrams on NOC dashboards. When engineers see the diagrams daily,
+    they notice when something is wrong. Documentation locked in a
+    SharePoint folder that nobody opens decays silently.</p></li>
+    </ol>
+    <hr />
+    <h2 id="templates-and-examples">11. Templates and Examples</h2>
+    <h3 id="network-documentation-checklist">11.1 Network Documentation
+    Checklist</h3>
+    <p>Use this checklist when validating documentation completeness for
+    a site or network segment:</p>
+    <pre><code>NETWORK DOCUMENTATION COMPLETENESS CHECKLIST
+Site: _______________  Date: _______________  Reviewer: _______________
+
+DIAGRAMS
+[ ] Layer 1 physical diagram (rack elevations, cable runs, floor plan)
+[ ] Layer 2 logical diagram (VLANs, trunks, STP topology)
+[ ] Layer 3 routing diagram (subnets, routing domains, VRFs, NAT)
+[ ] Application flow diagrams (per critical application)
+[ ] Wireless overlay diagram (APs, controllers, SSIDs, channels)
+[ ] WAN/ISP connectivity diagram (circuits, handoffs, BGP peering)
+[ ] All diagrams dated within the last 12 months
+[ ] All diagrams version-controlled
+
+CABLE MANAGEMENT
+[ ] Cable color coding scheme documented and posted
+[ ] All cables labeled at both ends (machine-printed, legible)
+[ ] Patch panel schedules current and accessible
+[ ] Cable run tracking records maintained
+[ ] Test reports archived for structured cabling
+
+PORT MAPPING
+[ ] Switch port maps current for all switches
+[ ] LLDP/CDP discovery enabled on managed switches
+[ ] Automated discovery running on schedule
+[ ] Port utilization reports generated monthly
+
+AS-BUILT
+[ ] As-built documentation exists for all deployments within past 24 months
+[ ] As-built reflects actual deployed state (verified by second engineer)
+[ ] Red-line markups archived
+
+CMDB
+[ ] All network devices registered in CMDB
+[ ] Device lifecycle dates (EoS, EoL) tracked
+[ ] Firmware versions current in CMDB
+[ ] IP addresses match IPAM records
+[ ] CMDB accuracy &gt;90% (last audit date: ___________)
+[ ] CMDB drift detection running
+
+COMPLIANCE
+[ ] PCI CDE diagrams current (if applicable)
+[ ] Data flow diagrams current (if PCI applicable)
+[ ] Review signatures on file for current period
+[ ] Documentation change log maintained</code></pre>
+    <h3 id="device-record-template">11.2 Device Record Template</h3>
+    <div class="sourceCode" id="cb11"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">device</span><span class="kw">:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Core-SW-01</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">role</span><span class="kw">:</span><span class="at"> Core Switch</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">site</span><span class="kw">:</span><span class="at"> DC-West</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">location</span><span class="kw">:</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">building</span><span class="kw">:</span><span class="at"> Main</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">floor</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">room</span><span class="kw">:</span><span class="at"> MDF</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">rack</span><span class="kw">:</span><span class="at"> A3</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">rack_unit</span><span class="kw">:</span><span class="at"> 22-23</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">rack_face</span><span class="kw">:</span><span class="at"> front</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hardware</span><span class="kw">:</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">manufacturer</span><span class="kw">:</span><span class="at"> Cisco</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">model</span><span class="kw">:</span><span class="at"> C9500-24Y4C</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">serial_number</span><span class="kw">:</span><span class="at"> FCW2345ABCD</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">asset_tag</span><span class="kw">:</span><span class="at"> NET-2025-0042</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">software</span><span class="kw">:</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">firmware</span><span class="kw">:</span><span class="at"> IOS-XE 17.12.3</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">firmware_date</span><span class="kw">:</span><span class="at"> 2025-01-15</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">network</span><span class="kw">:</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">management_ip</span><span class="kw">:</span><span class="at"> </span><span class="fl">10.1.0.11</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">management_vrf</span><span class="kw">:</span><span class="at"> MGMT</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">console</span><span class="kw">:</span><span class="at"> dc-west-console:2011</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">oob_ip</span><span class="kw">:</span><span class="at"> </span><span class="fl">172.16.0.11</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">lifecycle</span><span class="kw">:</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">purchase_date</span><span class="kw">:</span><span class="at"> 2024-11-01</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">warranty_expiry</span><span class="kw">:</span><span class="at"> 2027-11-01</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">end_of_sale</span><span class="kw">:</span><span class="at"> 2028-06-30</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">end_of_sw_maintenance</span><span class="kw">:</span><span class="at"> 2029-06-30</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">end_of_life</span><span class="kw">:</span><span class="at"> 2030-06-30</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">support_contract</span><span class="kw">:</span><span class="at"> CTR-CISCO-2024-042</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">contacts</span><span class="kw">:</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">primary_owner</span><span class="kw">:</span><span class="at"> Network Engineering</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">vendor_tac</span><span class="kw">:</span><span class="at"> Cisco TAC, Contract</span><span class="co"> #987654</span></span></code></pre></div>
+    <hr />
+    <h2 id="source-index-and-citations">12. Source Index and
+    Citations</h2>
+    <p>All claims in this module are traceable to the sources listed
+    below.</p>
+    <h3 id="standards-organizations">Standards Organizations</h3>
+    <ul>
+    <li><p><strong>tia-568:</strong> ANSI/TIA-568-E, <em>Commercial
+    Building Telecommunications Cabling Standard</em>,
+    Telecommunications Industry Association, 2020. Categories 5e, 6, 6A,
+    8 copper; OM3/OM4/OM5/OS2 fiber specifications.</p></li>
+    <li><p><strong>tia-606-c:</strong> ANSI/TIA-606-C,
+    <em>Administration Standard for Telecommunications
+    Infrastructure</em>, Telecommunications Industry Association, July
+    2017. Cable labeling, administration classes 1-4, identifier
+    formats.
+    https://www.bradyid.com/resources/tia-606-c-cable-labeling-standards</p></li>
+    <li><p><strong>ieee-802.1ab:</strong> IEEE 802.1AB, <em>Link Layer
+    Discovery Protocol (LLDP)</em>, Institute of Electrical and
+    Electronics Engineers. Neighbor discovery protocol
+    standard.</p></li>
+    </ul>
+    <h3 id="compliance-and-regulatory">Compliance and Regulatory</h3>
+    <ul>
+    <li><p><strong>pci-dss-4.0:</strong> PCI DSS v4.0.1, <em>Payment
+    Card Industry Data Security Standard</em>, PCI Security Standards
+    Council, 2024. Requirements 1.2.3 (network diagrams) and 1.2.4
+    (data-flow diagrams).
+    https://pcidssguide.com/pci-dss-network-and-data-flow-diagrams/</p></li>
+    <li><p><strong>soc2-tsc:</strong> AICPA, <em>Trust Services Criteria
+    for Security, Availability, Processing Integrity, Confidentiality,
+    and Privacy</em>, American Institute of Certified Public
+    Accountants, 2017 (with 2022 updates). Common Criteria CC6.1, CC6.6,
+    CC7.1.</p></li>
+    <li><p><strong>iso-27001:</strong> ISO/IEC 27001:2022,
+    <em>Information Security, Cybersecurity and Privacy Protection –
+    Information Security Management Systems – Requirements</em>,
+    International Organization for Standardization, October 2022. Annex
+    A Control 8.20 (Network Security), Control 5.37 (Documented
+    Operating Procedures).</p></li>
+    </ul>
+    <h3 id="tools-and-platforms">Tools and Platforms</h3>
+    <ul>
+    <li><p><strong>netbox:</strong> NetBox Documentation, NetBox Labs.
+    https://netboxlabs.com/docs/netbox/</p></li>
+    <li><p><strong>netbox-topology-views:</strong>
+    netbox-community/netbox-topology-views, GitHub. Plugin for
+    generating topology visualizations from NetBox cable and device
+    data. Version 4.5.1 (March 2026).
+    https://github.com/netbox-community/netbox-topology-views</p></li>
+    <li><p><strong>netbox-lifecycle:</strong> DanSheps/netbox-lifecycle,
+    GitHub. Hardware EOS/EOL, license, and support contract tracking
+    plugin for NetBox.
+    https://github.com/DanSheps/netbox-lifecycle</p></li>
+    <li><p><strong>d2lang:</strong> D2 Documentation, Terrastruct.
+    Modern diagram scripting language with network topology support.
+    https://d2lang.com/</p></li>
+    <li><p><strong>mermaid:</strong> mermaid-js/mermaid, GitHub. Diagram
+    generation from text, integrated with GitHub/GitLab Markdown
+    rendering. https://github.com/mermaid-js/mermaid</p></li>
+    <li><p><strong>drawio:</strong> diagrams.net (formerly draw.io).
+    Open-source diagramming tool with git-friendly XML format.
+    https://www.diagrams.net/</p></li>
+    </ul>
+    <h3 id="industry-sources">Industry Sources</h3>
+    <ul>
+    <li><p><strong>servicenow-cmdb:</strong> ServiceNow CMDB
+    Documentation, ServiceNow Inc. Discovery via MID Server, CI
+    management, service mapping. https://www.servicenow.com/</p></li>
+    <li><p><strong>packet-pushers:</strong> Packet Pushers, <em>Network
+    Documentation Series</em>, Packet Pushers Interactive LLC. Logical
+    and physical diagram best practices.
+    https://packetpushers.net/blog/network-documentation-series-logical-diagram/</p></li>
+    <li><p><strong>graphical-networks:</strong> Graphical Networks,
+    <em>Logical vs. Physical Network Diagrams</em>, 2024. Layer
+    distinction methodology.
+    https://graphicalnetworks.com/blog-logical-vs-physical-network-diagrams/</p></li>
+    </ul>
+    <hr />
+    <p><em>[PENDING REVIEW] – This module has been generated and
+    requires human review gate before transitioning from Published to
+    fully verified status.</em></p>
+    <p><em>Document ID: SNO-09-network-documentation-cmdb | Version: 1.0
+    | Owner: Systems Network Operations Mission | Last Reviewed:
+    2026-04-08 | Next Review: 2027-04-08</em></p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNO Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNO/">tibsfox.com/Research/SNO</a>
+    </div>
+</body>
+</html>

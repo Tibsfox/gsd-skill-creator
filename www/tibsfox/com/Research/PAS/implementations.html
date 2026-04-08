@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementations &amp; Ecosystem &mdash; Pascal &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-pas">
+  <header>
+    <h1>Implementations &amp; Ecosystem</h1>
+    <div class="subtitle">From CDC 6000 to P-Code to Turbo Pascal to Free Pascal &mdash; Fifty Years of Compilers</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="blaise-pascal.html">Blaise Pascal</a>
+      <a href="language.html">Language</a>
+      <a href="data-structures.html">Data Structures</a>
+      <a href="implementations.html" class="active">Implementations</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================================ -->
+    <!-- CDC 6000                                                      -->
+    <!-- ============================================================ -->
+
+    <h2>The CDC 6000 Original (1970)</h2>
+
+    <p>The story of Pascal as a running program begins at ETH Z&uuml;rich, where Niklaus Wirth held a professorship in informatics starting in 1968. The target machine was the Control Data Corporation CDC 6600, one of the most powerful scientific computing platforms of its era, designed by Seymour Cray: 60-bit word length, 10-peripheral-processor architecture, roughly one million floating-point operations per second.</p>
+
+    <p>The first Pascal compiler was developed during 1969&ndash;1971 by Urs Ammann, E. Marmier, and R. Schild under Wirth&rsquo;s direction. The bootstrap process was itself a demonstration of structured programming:</p>
+
+    <ol>
+      <li>The compiler was written in Pascal itself &mdash; on paper, as a design document.</li>
+      <li>R. Schild translated this Pascal source by hand into a low-level language available on the CDC 6000.</li>
+      <li>This hand-translated compiler compiled the Pascal source of the compiler.</li>
+      <li>The resulting compiler could compile its own source code &mdash; Pascal was self-hosting.</li>
+    </ol>
+
+    <p>The CDC 6000 Pascal compiler was a single-pass, top-down, recursive-descent parser generating native machine code. Single-pass compilation was not just an implementation convenience; it was a design constraint Wirth imposed on the language itself. The advantages on 1970 hardware were substantial: no intermediate representation written to disk, minimal memory required, and compilation speed competitive with FORTRAN. By 1972, Pascal was being used in introductory programming courses at ETH.</p>
+
+    <!-- ============================================================ -->
+    <!-- P-CODE AND THE P-MACHINE                                      -->
+    <!-- ============================================================ -->
+
+    <h2>P-Code and the P-Machine (1973&ndash;1975)</h2>
+
+    <p>By 1973, Pascal had proven itself at ETH but faced a portability challenge: the CDC 6000 compiler generated native code for a specific, expensive mainframe. If Pascal was to become a universal teaching language, it needed to run on the rapidly proliferating variety of computing platforms.</p>
+
+    <p>The solution emerged from Kesav V. Nori, Urs Ammann, Kathleen Jensen, and Hans-Heinrich N&auml;geli at ETH: the Pascal-P compiler, which introduced compilation to a portable bytecode for an abstract virtual machine &mdash; one of the most influential ideas in the history of programming language implementation.</p>
+
+    <p>Instead of generating native code, Pascal-P generated &ldquo;P-code&rdquo; &mdash; instructions for an imaginary stack-based machine called the P-machine. To run Pascal on any real hardware, you needed only a P-machine interpreter for your platform. Writing an interpreter took a few hundred lines of assembly language, compared to thousands for a full compiler.</p>
+
+    <h3>The P-Machine Architecture</h3>
+
+    <table>
+      <thead><tr><th>Register</th><th>Name</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SP</strong></td><td>Stack Pointer</td><td>Top of the operand stack</td></tr>
+        <tr><td><strong>MP</strong></td><td>Mark Pointer</td><td>Beginning of active stack frame</td></tr>
+        <tr><td><strong>EP</strong></td><td>Extreme Pointer</td><td>Highest stack location used by current procedure</td></tr>
+        <tr><td><strong>NP</strong></td><td>New Pointer</td><td>Top of the heap</td></tr>
+        <tr><td><strong>PC</strong></td><td>Program Counter</td><td>Current instruction</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Pascal-P Versions</h3>
+
+    <table>
+      <thead><tr><th>Version</th><th>Year</th><th>Significance</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pascal-P1</strong></td><td>1973</td><td>Initial release, proof of concept</td></tr>
+        <tr><td><strong>Pascal-P2</strong></td><td>1974</td><td>Widely distributed, basis for UCSD Pascal</td></tr>
+        <tr><td><strong>Pascal-P4</strong></td><td>1975</td><td>Definitive distribution version, broadly adopted</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Predecessor to the JVM</h3>
+
+    <p>The P-code strategy was one of the earliest practical demonstrations of the &ldquo;virtual machine&rdquo; approach. Its influence is direct and traceable:</p>
+
+    <ul>
+      <li><strong>Java (1995):</strong> James Gosling and the Java team at Sun explicitly cited UCSD Pascal&rsquo;s p-System as an influence on the JVM. &ldquo;Write once, run anywhere&rdquo; was a marketing restatement of what Pascal-P had demonstrated two decades earlier.</li>
+      <li><strong>.NET CLR (2002):</strong> Multiple source languages compiling to Common Intermediate Language. Anders Hejlsberg, architect of C# and the CLR&rsquo;s primary client, had spent his formative years building Pascal compilers.</li>
+      <li><strong>Python, Ruby, Lua:</strong> Modern interpreted languages use bytecode compilation internally, a concept tracing back through UCSD Pascal to the original P-code work at ETH.</li>
+    </ul>
+
+    <!-- ============================================================ -->
+    <!-- UCSD PASCAL                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>UCSD Pascal and the p-System (1978)</h2>
+
+    <p>Kenneth Bowles, a professor at the University of California, San Diego, recognized around 1974 that the proliferation of incompatible microprocessor architectures made it impractical to write software for each platform separately. His solution went far beyond what ETH had envisioned: where Pascal-P was a compiler targeting a virtual machine, UCSD Pascal was an <em>entire operating system</em> built around that virtual machine.</p>
+
+    <p>The p-System provided a screen editor, Pascal compiler, file manager, linker, assembler, and debugger &mdash; all running on the P-machine, all booting from floppy disk on the modest hardware of the era. The system was self-hosting: the compiler was written in Pascal and compiled to P-code.</p>
+
+    <h3>Platform Support</h3>
+
+    <table>
+      <thead><tr><th>Platform</th><th>Processor</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Apple II</td><td>MOS 6502</td><td>Later branded &ldquo;Apple Pascal&rdquo; ($495)</td></tr>
+        <tr><td>DEC PDP-11</td><td>PDP-11</td><td>Minicomputer support</td></tr>
+        <tr><td>Zilog Z80</td><td>Z80</td><td>CP/M-era machines</td></tr>
+        <tr><td>Intel 8080/8085</td><td>8080</td><td>Early microprocessor</td></tr>
+        <tr><td>Motorola 68000</td><td>68000</td><td>Next-generation micro</td></tr>
+        <tr><td>IBM PC</td><td>8086/8088</td><td>Offered as OS option alongside PC DOS and CP/M-86</td></tr>
+        <tr><td>BBC Micro</td><td>MOS 6502</td><td>British educational computing</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Key Innovations</h3>
+
+    <p><strong>Separately compilable units:</strong> UCSD Pascal introduced the concept of &ldquo;units&rdquo; &mdash; independently compiled modules. This directly influenced Ada&rsquo;s packages and was adopted by Turbo Pascal from version 4.0 onward.</p>
+
+    <p><strong>String type:</strong> A counted string (first byte = length, followed by character data), solving Standard Pascal&rsquo;s fixed-length string problem. Adopted unchanged by Turbo Pascal.</p>
+
+    <p>IBM offered the UCSD p-System as one of three OS options for the original IBM PC in 1981. The p-System ultimately lost to DOS, but its architectural innovations &mdash; virtual machine abstraction, integrated development environment, separately compilable modules &mdash; became standard features of the computing platforms that followed.</p>
+
+    <p>Wirth himself credited the p-System, and UCSD Pascal in particular, with popularizing Pascal beyond the academic community. Kenneth Bowles&rsquo;s vision of a portable computing environment was vindicated by Java, .NET, and every modern platform that uses bytecode compilation.</p>
+
+    <!-- ============================================================ -->
+    <!-- CP/M ERA                                                      -->
+    <!-- ============================================================ -->
+
+    <h2>The CP/M Era and the Competitive Landscape</h2>
+
+    <p>Before Turbo Pascal swept the field, the microcomputer Pascal market was surprisingly crowded:</p>
+
+    <table>
+      <thead><tr><th>Compiler</th><th>Approach</th><th>Notable Feature</th></tr></thead>
+      <tbody>
+        <tr><td><strong>UCSD Pascal</strong></td><td>P-code interpretation</td><td>Complete operating environment</td></tr>
+        <tr><td><strong>Pascal/MT+</strong></td><td>Native code (8080/Z80)</td><td>ISO 7185 compliance. Used to write first CP/M-68K (1982).</td></tr>
+        <tr><td><strong>Pascal/M</strong></td><td>M-code interpretation</td><td>Portability across CP/M hardware</td></tr>
+        <tr><td><strong>Microsoft Pascal</strong></td><td>Native code</td><td>Four versions (1980&ndash;1988). Superseded by QuickPascal (1989), which failed to challenge Borland.</td></tr>
+        <tr><td><strong>JRT Pascal</strong></td><td>Compiled</td><td>Large program support</td></tr>
+      </tbody>
+    </table>
+
+    <p>Pascal/MT+, created by Michael Lehman at MT MicroSYSTEMS of Solana Beach, California, was notable for compiling to native machine code rather than interpreting P-code, giving it a performance advantage over UCSD Pascal. MT MicroSYSTEMS was acquired by Digital Research in 1981.</p>
+
+    <p>Microsoft&rsquo;s inability to compete in the Pascal market is ironic: Anders Hejlsberg, the architect of Turbo Pascal, would later join Microsoft and become the lead architect of C#. Microsoft lost the Pascal compiler war to Borland but eventually acquired the human capital that made Borland&rsquo;s products great.</p>
+
+    <p>This entire competitive landscape was swept away by Turbo Pascal&rsquo;s arrival in late 1983, which rendered most CP/M Pascal compilers commercially irrelevant within a year.</p>
+
+    <!-- ============================================================ -->
+    <!-- TURBO PASCAL                                                  -->
+    <!-- ============================================================ -->
+
+    <h2>Turbo Pascal (1983&ndash;1992)</h2>
+
+    <h3>Anders Hejlsberg</h3>
+
+    <p>Anders Hejlsberg was born on December 2, 1960, in Copenhagen, Denmark. While studying electrical engineering at the Technical University of Denmark, he began writing a Pascal compiler for the Nascom microcomputer, a British Z80-based single-board machine. The compiler compiled to native Z80 code, was remarkably fast and compact, and Hejlsberg had studied Wirth&rsquo;s <em>Algorithms + Data Structures = Programs</em> to implement it. He marketed it as &ldquo;Compas Pascal&rdquo; and later &ldquo;PolyPascal&rdquo; through his company PolyData.</p>
+
+    <p>Philippe Kahn, founder of Borland International in Scotts Valley, California, discovered PolyPascal and licensed the compiler core. Borland added a screen editor and an integrated development environment. The result was Turbo Pascal.</p>
+
+    <h3>The Revolution</h3>
+
+    <p>Turbo Pascal was released on November 20, 1983, for CP/M and MS-DOS at <strong>$49.95</strong> &mdash; roughly one-tenth the cost of competing Pascal compilers. The compiler itself was approximately 33KB, shipped on a single floppy disk. On an IBM PC with a 4.77 MHz 8088 processor, it could compile roughly 10,000 lines per second. Competing compilers took minutes for the same task.</p>
+
+    <p>What made it special:</p>
+
+    <ul>
+      <li><strong>Speed:</strong> Single-pass compilation with all data in RAM. No disk access during compilation. Assembly-language implementation.</li>
+      <li><strong>Integration:</strong> One of the first true IDEs for personal computers &mdash; editor, compiler, and runtime in a single program. Error messages displayed in the editor with the cursor at the error location.</li>
+      <li><strong>Price:</strong> $49.95 made it accessible to students and hobbyists, not just universities and corporations.</li>
+      <li><strong>Extensions:</strong> Variable-length strings, break/continue/exit, short-circuit boolean evaluation, inline assembly, direct memory access &mdash; addressing virtually all of Kernighan&rsquo;s criticisms of Standard Pascal.</li>
+    </ul>
+
+    <p>Turbo Pascal sold over 15,000 copies in its first four months. The &ldquo;Turbo&rdquo; name was inspired by the Porsche Turbo &mdash; an association with speed and engineering excellence.</p>
+
+    <h3>Version History</h3>
+
+    <table>
+      <thead><tr><th>Version</th><th>Date</th><th>Price</th><th>Key Innovation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1.0</strong></td><td>Nov 20, 1983</td><td>$49.95</td><td>Integrated compile-edit-run. Native code. .COM executables.</td></tr>
+        <tr><td><strong>2.0</strong></td><td>Apr 17, 1984</td><td>$49.95</td><td>Overlays for programs &gt;64KB. 8087 coprocessor support.</td></tr>
+        <tr><td><strong>3.0</strong></td><td>Sep 17, 1986</td><td>$69.95</td><td>Turtle graphics. Toolboxes. Last CP/M version.</td></tr>
+        <tr><td><strong>4.0</strong></td><td>Nov 20, 1987</td><td>$99.95</td><td><strong>Units</strong> (separate compilation). Pull-down IDE. .EXE format.</td></tr>
+        <tr><td><strong>5.0</strong></td><td>Aug 24, 1988</td><td>$99.95</td><td>The <strong>blue IDE</strong>. Integrated debugger with breakpoints and watches.</td></tr>
+        <tr><td><strong>5.5</strong></td><td>May 2, 1989</td><td>$99.95</td><td><strong>Object-oriented programming</strong>: classes, inheritance, virtual methods.</td></tr>
+        <tr><td><strong>6.0</strong></td><td>Oct 23, 1990</td><td>$149.95</td><td><strong>Turbo Vision</strong> text-mode application framework. Inline assembly.</td></tr>
+        <tr><td><strong>7.0</strong></td><td>Oct 27, 1992</td><td>$149.95</td><td>Syntax highlighting. DPMI protected mode. Final version.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>What Made Turbo Pascal Special</h3>
+
+    <p><strong>Speed in depth.</strong> The compilation speed was achieved through several deliberate design choices: single-pass compilation (parsing and code generation fused into one pass), RAM-based operation (no intermediate file written to disk), assembly-language implementation of the compiler itself, and a minimal custom object format that required far less processing than standard OMF. From version 4.0, compiled units (.TPU files) stored all exported information in pre-parsed binary format &mdash; no character-by-character parsing of header files, in stark contrast to C&rsquo;s <code>#include</code> mechanism.</p>
+
+    <p><strong>Language extensions that addressed every Kernighan critique.</strong> Turbo Pascal added variable-length strings (up to 255 characters, length-prefixed), units for separate compilation with encapsulation, <code>break</code>/<code>continue</code>/<code>exit</code> for structured loop control, guaranteed short-circuit boolean evaluation, <code>else</code> clauses in <code>case</code> statements, inline assembly for low-level access, direct memory and port access (<code>Mem</code>, <code>Port</code> arrays), DOS/BIOS interrupt calls, typed constants (initialized variables), and procedural types for callbacks.</p>
+
+    <p><strong>Turbo Vision.</strong> Version 6.0 introduced Turbo Vision, a text-mode application framework providing windows, menus, dialog boxes, scrollbars, and event-driven programming &mdash; a miniature windowing system rendered entirely from text characters. Turbo Vision programs looked and felt like graphical applications despite running in a DOS text console:</p>
+
+    <pre><code>program MyApp;
+uses App, Objects, Menus, Drivers, Views;
+
+type
+  TMyApp = object(TApplication)
+    procedure InitMenuBar; virtual;
+    procedure InitStatusLine; virtual;
+  end;
+
+var
+  MyApp: TMyApp;
+begin
+  MyApp.Init;
+  MyApp.Run;
+  MyApp.Done;
+end.</code></pre>
+
+    <p><strong>OOP in 5.5.</strong> Object-oriented programming was introduced with a simpler model than C++&rsquo;s &mdash; single inheritance, virtual methods, constructors, and destructors using the <code>object</code> keyword. The simplicity was deliberate: learnable by Pascal programmers who had never encountered OOP concepts.</p>
+
+    <h3>The Blue IDE</h3>
+
+    <p>Turbo Pascal&rsquo;s text-mode IDE &mdash; white or yellow text on a blue background with pull-down menus &mdash; became iconic. For an entire generation, &ldquo;programming&rdquo; meant this color scheme. The integration of editor, compiler, and debugger into a single keystroke (F9 to compile, Ctrl-F9 to compile and run) defined what development environments would look like for the next decade. Before Turbo Pascal 4.0, most programmers used separate tools with separate command-line interfaces. After it, the expectation was that everything would be in one application. This integration seems obvious in retrospect &mdash; every modern IDE provides it &mdash; but in 1983, it was revolutionary. Turbo Pascal did not merely provide an IDE; it invented the modern concept of what an IDE should be.</p>
+
+    <h3>Community and Cultural Impact</h3>
+
+    <p>Turbo Pascal generated an enormous user community, particularly in the pre-Internet era of bulletin board systems. The SWAG (SourceWare Archive Group) collection grew to thousands of Pascal code snippets. Many BBS systems themselves were written in Turbo Pascal, as was a significant portion of the shareware industry &mdash; its ability to produce small, self-contained .EXE files with no runtime dependencies made it ideal for software distributed on floppy disks.</p>
+
+    <p>The demoscene &mdash; the subculture of programmers creating audiovisual demonstrations pushing hardware to its limits &mdash; included a significant Turbo Pascal contingent, particularly in Europe. Eastern European and Latin American educational systems adopted Turbo Pascal and maintained it longer than Western countries, producing programmers with strong algorithm design and systems programming skills.</p>
+
+    <h3>Freeware Releases</h3>
+
+    <p>Borland released Turbo Pascal versions 1.0 (2000), 3.02 (2002), and 5.5 (2002) as freeware, acknowledging their historical significance. These can still be downloaded and run in DOS emulators, allowing new generations to experience the tools that shaped their predecessors&rsquo; education.</p>
+
+    <!-- ============================================================ -->
+    <!-- OBJECT PASCAL AND DELPHI                                      -->
+    <!-- ============================================================ -->
+
+    <h2>Object Pascal and Delphi (1985&ndash;Present)</h2>
+
+    <h3>Apple Object Pascal (1985)</h3>
+
+    <p>The first Object Pascal was created at Apple Computer by Larry Tesler, in consultation with Niklaus Wirth himself. It grew out of Clascal, an object-oriented extension used for the Apple Lisa. Object Pascal added classes with single inheritance, virtual methods, and dynamic binding &mdash; deliberately conservative, with Wirth&rsquo;s involvement ensuring the extensions were minimal and clean. Its purpose was to support MacApp, Apple&rsquo;s Macintosh application framework.</p>
+
+    <h3>Delphi (1995)</h3>
+
+    <p>Delphi, released on February 14, 1995, was Borland&rsquo;s answer to Visual Basic &mdash; a rapid application development environment combining Visual Basic&rsquo;s ease of use with native code compilation. Created by Hejlsberg and his team, Delphi&rsquo;s Object Pascal was a major evolution:</p>
+
+    <ul>
+      <li><strong>Classes</strong> (using <code>class</code> instead of <code>object</code>)</li>
+      <li><strong>Properties</strong> (getters/setters wrapped in a single declaration)</li>
+      <li><strong>Exception handling</strong> (<code>try</code>/<code>except</code>/<code>finally</code>)</li>
+      <li><strong>Interfaces</strong> (COM-compatible multiple inheritance of specification)</li>
+      <li><strong>Visual Component Library (VCL)</strong> with a form designer</li>
+      <li><strong>Runtime type information (RTTI)</strong></li>
+    </ul>
+
+    <p>Delphi&rsquo;s VCL was superior to Microsoft&rsquo;s MFC (Microsoft Foundation Classes) in several ways: <strong>properties</strong> replaced getter/setter pairs with a single declaration settable at design time; <strong>events</strong> were type-safe method pointers eliminating MFC&rsquo;s message-map boilerplate; <strong>streaming</strong> serialized forms as human-readable text (DFM files) that could be diffed and version-controlled; and <strong>RTTI</strong> enabled the IDE to inspect component properties at design time.</p>
+
+    <p>Delphi produced single .EXE files with no runtime dependencies &mdash; no VBRUNxxx.DLL, no MSVCRT.DLL. Distribution was trivial compared to Visual Basic or C++. Many successful commercial applications were built in Delphi, including early versions of Skype.</p>
+
+    <h3>The Object Pascal Dialect Evolution</h3>
+
+    <table>
+      <thead><tr><th>Feature</th><th>Apple (1985)</th><th>Turbo 5.5 (1989)</th><th>Delphi 1 (1995)</th><th>Free Pascal</th></tr></thead>
+      <tbody>
+        <tr><td>Class keyword</td><td><code>object</code></td><td><code>object</code></td><td><code>class</code></td><td>Both</td></tr>
+        <tr><td>Properties</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Interfaces</td><td>No</td><td>No</td><td>Yes (COM)</td><td>Yes</td></tr>
+        <tr><td>Exception handling</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Generics</td><td>No</td><td>No</td><td>Delphi 2009</td><td>FPC 2.2+</td></tr>
+        <tr><td>Memory model</td><td>Manual</td><td>Manual</td><td>Reference-counted</td><td>Both</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Anders Hejlsberg&rsquo;s Departure</h3>
+
+    <p>In 1996, Microsoft recruited Hejlsberg from Borland with a $500,000 signing bonus (Borland counter-offered $1,000,000, which Hejlsberg declined). At Microsoft, he became the lead architect of C# (2000) and later announced TypeScript (2012). C# is a direct descendant of Delphi&rsquo;s Object Pascal: properties, events and delegates, component-oriented design, strongly typed references, and structured exception handling all trace directly to Delphi.</p>
+
+    <h3>Borland&rsquo;s Arc</h3>
+
+    <p>Borland&rsquo;s trajectory from a two-room office above a Jaguar repair garage to a billion-dollar company and back to irrelevance took barely two decades. The company rebranded as Inprise, then back to Borland, spun off its developer tools as CodeGear (2006), which was acquired by Embarcadero Technologies (2008). Embarcadero continues to develop and sell Delphi today. The Borland name was acquired by Micro Focus in 2009. But the products that Borland created during its ascent &mdash; particularly Turbo Pascal and Delphi &mdash; reshaped the software development industry in ways that outlasted the company itself.</p>
+
+    <!-- ============================================================ -->
+    <!-- FREE PASCAL AND LAZARUS                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Free Pascal and Lazarus</h2>
+
+    <p><strong>Free Pascal (FPC)</strong> is a mature, open-source Pascal compiler targeting an extraordinary range of architectures: x86 (16/32/64-bit), ARM, AArch64, PowerPC, SPARC, MIPS, Motorola 68000, AVR, and the JVM. It supports Windows, Linux, macOS, FreeBSD, DOS, Android, iOS, Haiku, Nintendo GBA/DS/Wii, AmigaOS, and various embedded platforms. Language compatibility spans Turbo Pascal 7.0, most Delphi versions, and parts of the ISO standards.</p>
+
+    <p><strong>Lazarus</strong> is a cross-platform IDE built on Free Pascal, designed as a free, open-source equivalent of Delphi. It provides a visual form designer, the Lazarus Component Library (LCL) mirroring Delphi&rsquo;s VCL, and the ability to build GUI applications for Windows, Linux, macOS, and FreeBSD from a single codebase.</p>
+
+    <p>Together, Free Pascal and Lazarus ensure that Pascal remains a living language &mdash; not a historical curiosity. Active development continues with regular releases, adding support for new platforms, new language features (generics, anonymous functions, advanced RTTI), and new libraries.</p>
+
+    <p>The Free Pascal community maintains an active ecosystem: the Online Package Manager (OPM) provides hundreds of third-party packages, and the compiler&rsquo;s multi-target architecture means that code written in Free Pascal can target everything from Arduino-class microcontrollers to 64-bit server applications. For educators who still value Pascal&rsquo;s pedagogical properties, Free Pascal and Lazarus provide a modern, free, cross-platform development environment that honors Pascal&rsquo;s heritage while embracing contemporary requirements.</p>
+
+    <!-- ============================================================ -->
+    <!-- THE HEJLSBERG LINEAGE                                         -->
+    <!-- ============================================================ -->
+
+    <h2>The Hejlsberg Lineage</h2>
+
+    <p>The trajectory from PolyPascal to TypeScript represents one of the most sustained individual contributions in programming language history:</p>
+
+    <table>
+      <thead><tr><th>Language</th><th>Year</th><th>Platform</th><th>Key Contribution</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PolyPascal</strong></td><td>1980</td><td>Nascom / CP/M</td><td>Fast, compact native-code Pascal compiler</td></tr>
+        <tr><td><strong>Turbo Pascal</strong></td><td>1983</td><td>CP/M / DOS</td><td>Integrated IDE, $49.95, democratized compilation</td></tr>
+        <tr><td><strong>Delphi</strong></td><td>1995</td><td>Windows</td><td>VCL, properties, RAD, native-code GUI development</td></tr>
+        <tr><td><strong>C#</strong></td><td>2000</td><td>.NET</td><td>Delphi&rsquo;s ideas on a managed runtime (CLR)</td></tr>
+        <tr><td><strong>TypeScript</strong></td><td>2012</td><td>Web</td><td>Strong typing for the JavaScript ecosystem</td></tr>
+      </tbody>
+    </table>
+
+    <p>Each project built on the insights of its predecessors while adapting to the platform requirements of its era. The common thread: strong typing, fast compilation, developer productivity, and accessible tooling.</p>
+
+    <!-- ============================================================ -->
+    <!-- WIRTH'S LANGUAGE TRAJECTORY                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Wirth&rsquo;s Language Trajectory</h2>
+
+    <p>Wirth&rsquo;s own languages form a complementary lineage, each smaller and more focused than the last:</p>
+
+    <table>
+      <thead><tr><th>Language</th><th>Year</th><th>Relationship to Pascal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Euler</strong></td><td>1965</td><td>Dissertation language. Dynamic typing, experimental.</td></tr>
+        <tr><td><strong>Algol W</strong></td><td>1966</td><td>The first draft. Records, <code>case</code>, <code>while</code>.</td></tr>
+        <tr><td><strong>Pascal</strong></td><td>1970</td><td>The masterwork. Teaching + practical tool.</td></tr>
+        <tr><td><strong>Modula-2</strong></td><td>1978</td><td>Added modules and coroutines. Systems programming after Xerox PARC sabbatical.</td></tr>
+        <tr><td><strong>Oberon</strong></td><td>1987</td><td>Radical simplification. Simpler than Pascal, more powerful via modules and type extension.</td></tr>
+        <tr><td><strong>Oberon-07</strong></td><td>2007</td><td>Further simplification, returning to minimalist principles.</td></tr>
+      </tbody>
+    </table>
+
+    <p>Where most language designers add features, Wirth removed them. Oberon-07 has fewer features than Pascal. This is deliberate: &ldquo;Make it as simple as possible, but no simpler.&rdquo;</p>
+
+    <!-- ============================================================ -->
+    <!-- CROSS-LINKS                                                   -->
+    <!-- ============================================================ -->
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="language.html">Language Design</a> &mdash; the design decisions that these implementations brought to life</li>
+        <li><a href="data-structures.html">Data Structures</a> &mdash; the code that runs on these compilers</li>
+        <li><a href="teaching.html">Teaching</a> &mdash; how Turbo Pascal and UCSD Pascal enabled the university adoption wave</li>
+        <li><a href="rosetta.html">Rosetta</a> &mdash; the Hejlsberg lineage from Turbo Pascal through C# to TypeScript</li>
+        <li><a href="education.html">Learning Resources</a> &mdash; Free Pascal and Lazarus setup guides</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Implementations &amp; Ecosystem &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

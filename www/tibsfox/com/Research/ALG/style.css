@@ -1,0 +1,595 @@
+/* ALG — ALGOL, Backus-Naur Form, Context-Free Grammars
+   Palette: report navy + vintage cream + mainframe green + IBM blue + bauhaus red
+   The paper language that nobody used but everybody copied
+   Base layout from ../../brand.css */
+
+/* 1. COLOR PALETTE & SEMANTIC OVERRIDES */
+
+:root {
+  --alg-navy: #1B2A4E;
+  --alg-navy-dark: #0F1A33;
+  --alg-navy-light: #D7DEF0;
+  --alg-cream: #F5EFDD;
+  --alg-cream-dark: #E6DEC4;
+  --alg-mainframe: #2D7D46;
+  --alg-mainframe-dark: #1B4E2B;
+  --alg-mainframe-light: #D4EDD8;
+  --alg-ibm-blue: #0F62FE;
+  --alg-ibm-blue-dark: #002D9C;
+  --alg-ibm-blue-light: #D0E2FF;
+  --alg-bauhaus-red: #C1272D;
+  --alg-bauhaus-red-light: #FFE8E9;
+  --alg-ink: #1A1A1A;
+  --alg-slate: #3C3C3C;
+  --alg-slate-light: #6B6B6B;
+  --alg-gray-50: #FAF8F2;
+  --alg-gray-100: #F2EEDE;
+  --alg-gray-200: #E4DDC6;
+  --alg-gray-300: #CEC5A7;
+  --alg-gray-500: #85785C;
+  --alg-gray-700: #3A3528;
+  --alg-gray-900: #1C1A14;
+  --alg-amber: #B8860B;
+
+  --page-bg: var(--alg-cream);
+  --page-text: var(--alg-ink);
+  --page-text-light: var(--alg-slate-light);
+  --link: var(--alg-navy);
+  --link-hover: var(--alg-ibm-blue-dark);
+  --accent: var(--alg-bauhaus-red);
+  --accent-light: var(--alg-bauhaus-red-light);
+  --accent-dark: var(--alg-navy-dark);
+  --card-bg: #FFFEF8;
+  --card-border: var(--alg-gray-200);
+  --card-shadow: rgba(27, 42, 78, 0.12);
+  --border: var(--alg-gray-200);
+  --content-width: 60rem;
+}
+
+/* 2. BODY */
+
+body {
+  background: var(--alg-cream) !important;
+  color: var(--alg-ink) !important;
+  font-family: 'Computer Modern Serif', 'Latin Modern Roman', 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  line-height: 1.65;
+}
+
+body.project-alg {
+  background-image:
+    linear-gradient(transparent 0%, transparent 97%, rgba(27, 42, 78, 0.05) 97%, rgba(27, 42, 78, 0.05) 100%),
+    radial-gradient(circle at 10% 20%, rgba(193, 39, 45, 0.025) 0%, transparent 35%);
+  background-size: 100% 1.6rem, 100% 100%;
+}
+
+main {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* 3. HEADER — a formal report cover */
+
+header {
+  background: var(--alg-navy);
+  color: var(--alg-cream);
+  padding: 3rem 1.5rem 1.5rem;
+  border-bottom: 6px double var(--alg-bauhaus-red);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: "::=";
+  position: absolute;
+  font-family: 'Courier New', 'IBM Plex Mono', monospace;
+  font-size: 24rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.025);
+  top: -2rem;
+  right: -2rem;
+  font-weight: 900;
+  pointer-events: none;
+  z-index: 0;
+}
+
+header::after {
+  content: "<expr> | <term>";
+  position: absolute;
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.03);
+  bottom: 0.5rem;
+  left: 1rem;
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: 0.1rem;
+}
+
+header h1 {
+  color: var(--alg-cream);
+  font-size: 2.75rem;
+  font-weight: 700;
+  margin: 0 auto;
+  max-width: var(--content-width);
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.02em;
+  font-variant-caps: small-caps;
+}
+
+header .subtitle {
+  color: var(--alg-cream-dark);
+  font-size: 1.05rem;
+  margin: 0.5rem auto 1.5rem;
+  max-width: var(--content-width);
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+  line-height: 1.5;
+}
+
+header nav {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  position: relative;
+  z-index: 1;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+header nav a {
+  color: var(--alg-cream);
+  text-decoration: none;
+  padding: 0.375rem 0.625rem;
+  border-radius: 2px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  font-family: 'Computer Modern Serif', Georgia, serif;
+  transition: background 120ms ease;
+}
+
+header nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+header nav a.active {
+  background: var(--alg-bauhaus-red);
+  color: var(--alg-cream);
+  font-weight: 600;
+}
+
+/* 4. HEADINGS — report-document style */
+
+h1, h2, h3, h4 {
+  font-family: 'Computer Modern Serif', 'Latin Modern Roman', 'EB Garamond', Georgia, serif;
+  color: var(--alg-navy);
+  letter-spacing: -0.01em;
+}
+
+main h2 {
+  font-size: 1.875rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--alg-navy);
+  color: var(--alg-navy);
+  font-weight: 700;
+}
+
+main h2::before {
+  content: "§ ";
+  color: var(--alg-bauhaus-red);
+  font-weight: 400;
+}
+
+main h3 {
+  font-size: 1.375rem;
+  margin: 1.75rem 0 0.75rem;
+  color: var(--alg-navy-dark);
+  font-weight: 600;
+}
+
+main h4 {
+  font-size: 1.125rem;
+  margin: 1.25rem 0 0.5rem;
+  color: var(--alg-ibm-blue-dark);
+  font-weight: 600;
+}
+
+/* 5. BLOCKQUOTE — indented report citation */
+
+blockquote {
+  border-left: 3px solid var(--alg-bauhaus-red);
+  background: var(--alg-gray-100);
+  color: var(--alg-slate);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0 1.5rem 1rem;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+blockquote p { margin: 0.5rem 0; }
+blockquote cite {
+  display: block;
+  text-align: right;
+  color: var(--alg-slate-light);
+  font-style: normal;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* 6. CODE */
+
+code, pre {
+  font-family: 'IBM Plex Mono', 'Computer Modern Typewriter', 'Courier New', 'Consolas', monospace;
+  font-size: 0.9em;
+}
+
+code {
+  background: var(--alg-cream-dark);
+  color: var(--alg-navy-dark);
+  padding: 0.125em 0.375em;
+  border-radius: 2px;
+  border: 1px solid rgba(27, 42, 78, 0.15);
+}
+
+pre {
+  background: var(--alg-navy-dark);
+  color: var(--alg-cream);
+  padding: 1.25rem 1.5rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  border-left: 4px solid var(--alg-bauhaus-red);
+  line-height: 1.55;
+  margin: 1.25rem 0;
+}
+
+pre code {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+}
+
+/* BNF code blocks have a distinctive style */
+pre.bnf {
+  background: var(--alg-gray-100);
+  color: var(--alg-ink);
+  border-left-color: var(--alg-ibm-blue);
+  border-top: 1px solid var(--alg-gray-300);
+  border-right: 1px solid var(--alg-gray-300);
+  border-bottom: 1px solid var(--alg-gray-300);
+}
+
+pre.bnf .nt { color: var(--alg-navy); font-weight: 600; }
+pre.bnf .t { color: var(--alg-bauhaus-red); }
+pre.bnf .meta { color: var(--alg-mainframe-dark); font-weight: 700; }
+
+/* 7. CARDS */
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--alg-navy);
+  border-radius: 3px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 1px 3px var(--card-shadow);
+}
+
+.card.red { border-left-color: var(--alg-bauhaus-red); }
+.card.green { border-left-color: var(--alg-mainframe); background: var(--alg-mainframe-light); }
+.card.blue { border-left-color: var(--alg-ibm-blue); background: var(--alg-ibm-blue-light); }
+
+/* 8. STATS */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.stat {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-top: 3px solid var(--alg-navy);
+  border-radius: 3px;
+  padding: 1rem 0.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-family: 'Computer Modern Serif', Georgia, serif;
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--alg-navy);
+  line-height: 1;
+}
+
+.stat-value.red { color: var(--alg-bauhaus-red); }
+.stat-value.green { color: var(--alg-mainframe-dark); }
+.stat-value.blue { color: var(--alg-ibm-blue-dark); }
+.stat-value.amber { color: var(--alg-amber); }
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--alg-slate-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.35rem;
+  font-family: 'Computer Modern Serif', Georgia, serif;
+}
+
+/* 9. CATEGORY GRID */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.category-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: var(--alg-ink);
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+  display: block;
+  position: relative;
+  border-top: 3px solid var(--alg-navy);
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--card-shadow);
+  border-top-color: var(--alg-bauhaus-red);
+}
+
+.category-card h3 {
+  margin: 0.5rem 0 0.5rem;
+  font-size: 1.1rem;
+  color: var(--alg-navy);
+}
+
+.category-card p {
+  font-size: 0.9rem;
+  color: var(--alg-slate);
+  margin: 0.5rem 0;
+  line-height: 1.55;
+}
+
+/* 10. CLUSTER BADGES */
+
+.cluster-badge {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cluster-history { background: var(--alg-cream-dark); color: var(--alg-navy-dark); border: 1px solid var(--alg-navy); }
+.cluster-report  { background: var(--alg-ibm-blue-light); color: var(--alg-ibm-blue-dark); border: 1px solid var(--alg-ibm-blue); }
+.cluster-bnf     { background: var(--alg-mainframe-light); color: var(--alg-mainframe-dark); border: 1px solid var(--alg-mainframe); }
+.cluster-cfg     { background: var(--alg-bauhaus-red-light); color: var(--alg-bauhaus-red); border: 1px solid var(--alg-bauhaus-red); }
+.cluster-lineage { background: var(--alg-cream-dark); color: var(--alg-amber); border: 1px solid var(--alg-amber); }
+.cluster-wirth   { background: var(--alg-cream-dark); color: var(--alg-mainframe-dark); border: 1px solid var(--alg-mainframe); }
+.cluster-rosetta { background: var(--alg-gray-100); color: var(--alg-slate); border: 1px solid var(--alg-gray-300); }
+
+/* 11. TABLES */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  background: var(--card-bg);
+  border: 1px solid var(--alg-navy);
+  border-radius: 2px;
+  overflow: hidden;
+  font-size: 0.92rem;
+  font-family: 'Computer Modern Serif', Georgia, serif;
+}
+
+thead {
+  background: var(--alg-navy);
+  color: var(--alg-cream);
+}
+
+th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+td {
+  padding: 0.625rem 1rem;
+  border-top: 1px solid var(--alg-gray-200);
+  vertical-align: top;
+  color: var(--alg-ink);
+}
+
+tbody tr:nth-child(even) { background: var(--alg-gray-50); }
+tbody tr:hover { background: var(--alg-ibm-blue-light); }
+
+/* 12. LINKS */
+
+main a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: rgba(27, 42, 78, 0.35);
+  text-underline-offset: 2px;
+}
+
+main a:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--alg-navy-dark);
+}
+
+/* 13. REPORT BOX — dramatic callout for Report citations */
+
+.report-box {
+  background: var(--alg-cream);
+  color: var(--alg-navy-dark);
+  border: 2px solid var(--alg-navy);
+  border-radius: 3px;
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  position: relative;
+  box-shadow: 4px 4px 0 var(--alg-navy), 4px 4px 0 1px var(--alg-bauhaus-red);
+}
+
+.report-box h3 {
+  color: var(--alg-bauhaus-red);
+  margin-top: 0;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--alg-navy);
+  padding-bottom: 0.5rem;
+}
+
+.report-box p { color: var(--alg-navy-dark); }
+
+/* 14. DIVIDER */
+
+.divider {
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-size: 1.25rem;
+  color: var(--alg-navy);
+  margin: 2rem 0;
+  letter-spacing: 0.5rem;
+  opacity: 0.6;
+}
+
+/* 15. TIMELINE */
+
+.timeline {
+  border-left: 3px solid var(--alg-navy);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0 1.5rem 0.75rem;
+}
+
+.timeline-entry {
+  position: relative;
+  padding-bottom: 1.25rem;
+}
+
+.timeline-entry::before {
+  content: "";
+  position: absolute;
+  left: -1.875rem;
+  top: 0.35rem;
+  width: 12px;
+  height: 12px;
+  background: var(--alg-bauhaus-red);
+  border: 3px solid var(--alg-cream);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--alg-navy);
+}
+
+.timeline-year {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-weight: 700;
+  color: var(--alg-bauhaus-red);
+  font-size: 0.9rem;
+}
+
+.timeline-title {
+  font-weight: 600;
+  color: var(--alg-navy);
+  margin-left: 0.5rem;
+}
+
+.timeline-entry p {
+  margin: 0.25rem 0;
+  font-size: 0.92rem;
+  color: var(--alg-slate);
+}
+
+/* 16. FAMILY TREE */
+
+.tree {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  background: var(--alg-navy-dark);
+  color: var(--alg-cream);
+  padding: 1.5rem;
+  border-radius: 3px;
+  white-space: pre;
+  overflow-x: auto;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  border-left: 4px solid var(--alg-bauhaus-red);
+}
+
+.tree .root { color: var(--alg-bauhaus-red); font-weight: 700; }
+.tree .branch { color: var(--alg-cream); }
+.tree .live { color: var(--alg-mainframe-light); font-weight: 600; }
+.tree .dead { color: #7A7A7A; font-style: italic; }
+
+/* 17. CROSS LINKS */
+
+.cross-links {
+  background: var(--alg-gray-100);
+  border: 1px solid var(--alg-gray-200);
+  border-top: 3px solid var(--alg-navy);
+  border-radius: 3px;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+}
+
+.cross-links h4 {
+  margin-top: 0;
+  color: var(--alg-navy);
+  font-variant-caps: small-caps;
+}
+
+.cross-links ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  columns: 2;
+  column-gap: 1.5rem;
+}
+
+.cross-links li { margin-bottom: 0.35rem; }
+
+/* 18. FOOTER */
+
+footer {
+  max-width: var(--content-width);
+  margin: 3rem auto 1.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--alg-slate-light);
+  border-top: 2px double var(--alg-navy);
+  font-size: 0.85rem;
+  font-family: 'Computer Modern Serif', Georgia, serif;
+}
+
+footer a { color: var(--alg-navy); }
+
+/* 19. RESPONSIVE */
+
+@media (max-width: 720px) {
+  header h1 { font-size: 2rem; }
+  header::before { font-size: 14rem; top: -1rem; right: -1rem; }
+  main h2 { font-size: 1.5rem; }
+  .cross-links ul { columns: 1; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .category-grid { grid-template-columns: 1fr; }
+}

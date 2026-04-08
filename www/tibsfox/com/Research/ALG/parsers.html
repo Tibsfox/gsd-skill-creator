@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parser Technology &mdash; ALGOL, BNF &amp; Context-Free Grammars</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alg">
+  <header>
+    <h1>Parser Technology</h1>
+    <div class="subtitle">From Knuth&rsquo;s 1965 LR paper to yacc (1975), bison (1985), ANTLR (1990s), Ford&rsquo;s PEG (2004), and Tree-sitter (2018)</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="report60.html">The Report</a>
+      <a href="bnf.html">BNF</a>
+      <a href="cfg.html">Context-Free Grammars</a>
+      <a href="parsers.html" class="active">Parsers</a>
+      <a href="influence.html">Influence</a>
+      <a href="wirth.html">Wirth Family</a>
+      <a href="rosetta.html">Rosetta</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <p>&ldquo;Yacc (1975) gave compiler writers a way to generate parsers from grammars. ANTLR (1990s) made top-down parsing mechanical. PEG (2004) removed ambiguity. Tree-sitter (2018) made parsers fast enough to run on every keystroke. Each step kept the BNF inheritance visible.&rdquo;</p>
+    </blockquote>
+
+    <h2>Hand-Written Recursive Descent</h2>
+
+    <p>The first parsers were hand-written. The FORTRAN 0 parser, ALGOL 58 compilers, the early Lisp readers &mdash; all were hand-coded. Recursive descent was the natural pattern: you wrote a function per syntactic category, each function read a bit of input and called other functions to parse sub-structures. The parser mirrored the grammar, with each non-terminal becoming a function.</p>
+
+    <p>Recursive descent works beautifully for LL(1) grammars and works well with hand-written backtracking for LL(k) and some non-LL grammars. It produces parsers that are straightforward to read, easy to debug, and easy to add error recovery to. It is still the technique used by <strong>Clang&rsquo;s C++ parser, Roslyn&rsquo;s C# parser, and the Rust compiler&rsquo;s parser</strong> &mdash; all production compilers for production languages, all hand-written recursive descent.</p>
+
+    <h2>Operator Precedence and Pratt Parsing</h2>
+
+    <p>Bauer and Samelson, at the Technische Hochschule München in the late 1950s, introduced <strong>operator precedence parsing</strong> as a specialized technique for expressions. The idea: assign each operator a precedence number, use a stack to track operators being deferred, and reduce whenever the stack top has higher precedence than the incoming operator. This insight came from their work on ALGOL 58&rsquo;s expression problem.</p>
+
+    <p>A related technique, <strong>Pratt parsing</strong> (Vaughan Pratt, 1973, &ldquo;Top Down Operator Precedence&rdquo;), generalizes operator precedence by associating &ldquo;binding powers&rdquo; with tokens and using a simple recursive procedure to parse expressions with arbitrary infix, prefix, and postfix operators. Pratt parsers are still the technique of choice for hand-written expression parsers. The Rust compiler&rsquo;s expression parser is Pratt-based. Pratt parsing is easy to extend &mdash; adding a new operator is just adding a binding power table entry.</p>
+
+    <h2>Knuth&rsquo;s LR Paper (1965)</h2>
+
+    <p>Donald Knuth&rsquo;s <em>On the Translation of Languages from Left to Right</em>, published in <em>Information and Control</em>, 1965, is the paper that founded modern parser theory. Knuth asked: what is the largest class of context-free languages that can be parsed in linear time by a deterministic algorithm using a bounded amount of lookahead?</p>
+
+    <p>His answer: LR(k), for any fixed k. He gave a constructive algorithm for building the parsing table from the grammar, proved correctness, and established that LR(k) for k &ge; 1 captures exactly the deterministic context-free languages. He also introduced the concepts of item, closure, goto, and LR state that every subsequent parsing treatment has used.</p>
+
+    <p>The paper was largely theoretical at the time of publication: LR(1) tables were too big to build by hand and too big to store on the computers of 1965. The theory had to wait for better computers and for LALR(1) compression before it became useful.</p>
+
+    <h2>DeRemer&rsquo;s LALR(1) &mdash; 1969</h2>
+
+    <p>Frank DeRemer&rsquo;s MIT PhD thesis, <em>Practical Translators for LR(k) Languages</em> (1969), and his subsequent CACM paper <em>Simple LR(k) Grammars</em> (1971) introduced two important compressions of Knuth&rsquo;s LR(1): <strong>SLR</strong> (Simple LR) and <strong>LALR</strong> (Lookahead LR). SLR uses FOLLOW sets as lookaheads directly; LALR uses item-set-specific lookaheads. LALR is strictly more powerful than SLR but strictly less than canonical LR(1). For real programming languages, LALR(1) is enough. DeRemer&rsquo;s thesis made LR parsing practical by cutting table sizes by an order of magnitude.</p>
+
+    <h2>Yacc &mdash; Yet Another Compiler-Compiler (1975)</h2>
+
+    <div class="report-box">
+      <h3>&sect; Yacc at Bell Labs</h3>
+      <p><strong>Stephen C. Johnson</strong> at Bell Labs released Yacc in 1975 as part of the Unix distribution. Yacc was a LALR(1) parser generator: you wrote a grammar file with semantic actions in C, and Yacc generated a C parser. Yacc was paired with <strong>Lex</strong> (Mike Lesk and Eric Schmidt, also 1975), the lexer generator.</p>
+      <p>Together, Yacc and Lex became the dominant parser-writing toolchain for two decades. Every early C compiler, every database query language, every configuration file format, every domain-specific language built in the 1970s and 1980s used Yacc and Lex.</p>
+    </div>
+
+    <p>A Yacc grammar file looks like BNF with semantic actions attached:</p>
+
+<pre><code>expr:   expr '+' term   { $$ = $1 + $3; }
+    |   expr '-' term   { $$ = $1 - $3; }
+    |   term            { $$ = $1; }
+    ;
+
+term:   term '*' factor { $$ = $1 * $3; }
+    |   term '/' factor { $$ = $1 / $3; }
+    |   factor          { $$ = $1; }
+    ;
+
+factor: NUMBER          { $$ = $1; }
+    |   '(' expr ')'    { $$ = $2; }
+    ;</code></pre>
+
+    <p>The <code>$$</code> is the value of the left-hand side; <code>$1</code>, <code>$3</code> are the values of symbols on the right. Yacc generates a C file that declares a <code>yyparse()</code> function driving an LALR(1) state machine. Lex generates a <code>yylex()</code> that the parser calls to get tokens. You link them together and you have a parser.</p>
+
+    <h2>Bison &mdash; GNU&rsquo;s Yacc (1985)</h2>
+
+    <p><strong>Bison</strong> was written by Robert Corbett originally as a Berkeley project and later brought under GNU by Richard Stallman. It is a yacc-compatible parser generator under the GPL. Bison has been the default parser generator for GNU projects and has slowly accumulated features beyond standard yacc: GLR parsing, push parsers, reentrant parsers, C++ output, better error messages, locations, named references. For decades of GNU history, &ldquo;writing a parser&rdquo; meant &ldquo;writing a Bison file.&rdquo;</p>
+
+    <h2>ANTLR &mdash; Another Tool for Language Recognition</h2>
+
+    <p><strong>Terence Parr</strong> built PCCTS (Purdue Compiler Construction Tool Set) at Purdue University in the early 1990s, then renamed it to ANTLR when he moved. ANTLR is a LL(*) parser generator &mdash; it uses top-down parsing with arbitrary-lookahead decisions, which is strictly more powerful than LL(k) for any fixed k and handles most real grammars that programmers write naturally.</p>
+
+    <p>ANTLR&rsquo;s advantages over yacc:</p>
+
+    <ul>
+      <li><strong>Readable error messages.</strong> ANTLR parsers produce errors like &ldquo;missing &lsquo;;&rsquo; at &lsquo;if&rsquo;&rdquo; rather than &ldquo;syntax error at line 37.&rdquo;</li>
+      <li><strong>Top-down parsing.</strong> The generated parser code is recursive descent, which is easier to debug and step through than an LR state machine.</li>
+      <li><strong>Multiple target languages.</strong> ANTLR can generate parsers in Java, C#, Python, JavaScript, Go, C++, Swift, PHP, and Dart.</li>
+      <li><strong>Tree grammars and visitor patterns.</strong> ANTLR generates AST node classes and visitor interfaces automatically.</li>
+      <li><strong>Semantic predicates.</strong> You can attach runtime conditions to productions, giving you context-sensitive parsing without leaving the grammar.</li>
+    </ul>
+
+    <p>ANTLR4, released in 2013, is the current version. It introduced Adaptive LL(*), an even more powerful top-down technique, and significantly improved error recovery. ANTLR is widely used in commercial compilers, DSLs, IDE tooling, and static analyzers. Twitter&rsquo;s search query language, Apache Hive&rsquo;s HQL, Groovy&rsquo;s parser, and many others are built on ANTLR.</p>
+
+    <h2>GLR Parsing &mdash; Tomita, 1986</h2>
+
+    <p><strong>Masaru Tomita&rsquo;s Generalized LR (GLR)</strong>, published in his 1986 book <em>Efficient Parsing for Natural Language</em>, extends LR parsing to handle arbitrary context-free grammars, including ambiguous ones. Instead of maintaining a single parser state stack, GLR maintains a graph of possible states, forking when shift/reduce conflicts occur and rejoining when forks produce the same state. The result is a parse forest rather than a single tree when the grammar is ambiguous.</p>
+
+    <p>GLR was invented for natural language processing (Japanese, in Tomita&rsquo;s case), where grammars are inherently ambiguous. It later found use in programming language tools where the grammar needs to handle legacy ambiguities: the Elkhound parser generator (UC Berkeley, 2003) was used in the CCured C analyzer and handled full C++. Bison has GLR mode since version 1.50 (2002).</p>
+
+    <h2>PEG &mdash; Parsing Expression Grammars (2004)</h2>
+
+    <p><strong>Bryan Ford&rsquo;s 2004 POPL paper</strong> <em>Parsing Expression Grammars: A Recognition-Based Syntactic Foundation</em> introduced PEGs as an alternative to BNF-style context-free grammars. The crucial difference: PEG&rsquo;s alternation operator is <strong>ordered</strong>. <code>A / B</code> means &ldquo;try A first, and only try B if A fails.&rdquo;</p>
+
+    <p>PEGs have features BNF lacks:</p>
+
+    <ul>
+      <li><strong>Ordered alternation</strong> <code>A / B</code> instead of <code>|</code></li>
+      <li><strong>And-predicate</strong> <code>&amp;A</code> &mdash; lookahead: succeed if A would match, but consume nothing</li>
+      <li><strong>Not-predicate</strong> <code>!A</code> &mdash; negative lookahead</li>
+      <li><strong>Greedy repetition</strong> <code>A*</code>, <code>A+</code> &mdash; always consumes maximally, no backtracking</li>
+      <li><strong>No ambiguity possible</strong> &mdash; the ordered-choice operator picks a single parse tree deterministically</li>
+    </ul>
+
+    <p><strong>Packrat parsing</strong>, Ford&rsquo;s companion paper (<em>Packrat Parsing</em>, ICFP 2002), showed that PEGs can be parsed in linear time by memoizing intermediate results. The memoization table can be large, but for practical grammars it is tractable.</p>
+
+    <div class="card blue">
+      <p><strong>Python switched to a PEG-based parser in 2020</strong> (Python 3.9, PEP 617). Guido van Rossum himself wrote the PEG implementation and blogged about the transition. The old <code>pgen</code> LL(1) generator was retired. The move gave Python access to features that were awkward in LL(1), like the walrus operator (<code>:=</code>) in arbitrary contexts.</p>
+    </div>
+
+    <h2>Parser Combinators</h2>
+
+    <p><strong>Parsec</strong> (Daan Leijen, 2001) is the famous Haskell parser combinator library. Its influence is immense &mdash; most modern combinator libraries descend from it or from a library inspired by it.</p>
+
+    <p>A parser combinator library provides small parser primitives and higher-order functions to combine them. A parser is a first-class value in the host language; you build complex parsers by composing simple ones.</p>
+
+    <p>Advantages: full integration with the host language (types, module system, tooling), flexible and easy to extend, and the parser can be modified at runtime. Disadvantages: slower than generated parsers (usually), no global grammar optimization, and no separate grammar specification to read.</p>
+
+    <p>Modern combinator libraries:</p>
+
+    <ul>
+      <li><strong>Parsec / attoparsec / megaparsec</strong> &mdash; Haskell. The canonical combinator libraries.</li>
+      <li><strong>nom</strong> (Rust) &mdash; binary and text parser combinators with streaming support. Used by Bevy, WebAssembly parsers, and others.</li>
+      <li><strong>chumsky</strong> (Rust) &mdash; modern combinators with excellent error recovery and error messages.</li>
+      <li><strong>combine</strong> (Rust) &mdash; older Rust combinator library.</li>
+      <li><strong>pyparsing</strong> (Python) &mdash; Python combinators, long-standing.</li>
+      <li><strong>Parboiled</strong> (Java/Scala) &mdash; PEG-based combinators on the JVM.</li>
+    </ul>
+
+    <h2>Earley Parsing &mdash; The General CFG Algorithm</h2>
+
+    <p><strong>Jay Earley&rsquo;s 1968 PhD thesis</strong> at Carnegie Mellon, and his 1970 <em>CACM</em> paper <em>An Efficient Context-Free Parsing Algorithm</em>, introduced an algorithm that parses any context-free grammar, including ambiguous and left-recursive ones, in O(n<sup>3</sup>) worst case, O(n<sup>2</sup>) for unambiguous grammars, and O(n) for LR grammars.</p>
+
+    <p>Earley parsing is less famous than LR and LL because for most programming languages, the more restrictive LL(1) or LALR(1) is fast enough. But Earley has staged a comeback in two places: natural language processing (where grammars are often ambiguous by necessity), and modern parsing libraries that want to support arbitrary user grammars. <strong>Marpa</strong> (Jeffrey Kegler), the Python library <strong>Lark</strong>, and <strong>Nearley</strong> (JavaScript) all use variants of Earley parsing.</p>
+
+    <h2>LALRPOP, Menhir, and Modern Generators</h2>
+
+    <ul>
+      <li><strong>LALRPOP</strong> (Rust) &mdash; LALR(1) parser generator that integrates with Rust&rsquo;s type system. Grammar lives in a <code>.lalrpop</code> file; the generator produces Rust code. Used by RustPython and several research compilers.</li>
+      <li><strong>Menhir</strong> (OCaml) &mdash; LR(1) parser generator, the successor to ocamlyacc. Can handle canonical LR(1), not just LALR(1). Its error message generator is particularly good.</li>
+      <li><strong>Happy</strong> (Haskell) &mdash; LALR(1) generator, used by GHC (the Haskell compiler) for parsing Haskell itself.</li>
+      <li><strong>JavaCC</strong> (Java) &mdash; LL(k) parser generator, older, still used in some Java-based projects.</li>
+      <li><strong>Jison</strong> (JavaScript) &mdash; Bison port for JavaScript. Used by CoffeeScript&rsquo;s compiler.</li>
+    </ul>
+
+    <h2>Tree-sitter &mdash; Incremental Parsing (2018)</h2>
+
+    <div class="report-box">
+      <h3>&sect; Parsing Every Keystroke</h3>
+      <p><strong>Max Brunsfeld</strong> at GitHub built Tree-sitter around 2018, initially for the Atom editor. Tree-sitter is a parser generator designed for one specific use case that the previous generation of generators did poorly: running inside a text editor on every keystroke, fast enough to not lag the user&rsquo;s typing.</p>
+    </div>
+
+    <p>The requirements Tree-sitter met:</p>
+
+    <ul>
+      <li><strong>Fast.</strong> Parses in milliseconds for typical source files, microseconds for incremental updates.</li>
+      <li><strong>Incremental.</strong> Given a small edit to a source file, Tree-sitter reparses only the affected subtree. The rest of the tree is reused.</li>
+      <li><strong>Robust.</strong> Broken input (the half-typed state of a file the user is editing) must still produce a useful tree. Tree-sitter uses error recovery to continue past syntactically invalid regions, emitting error nodes.</li>
+      <li><strong>Language-agnostic.</strong> One library, dozens of language grammars. Grammar files are in a JavaScript-based DSL that gets compiled to a C parser.</li>
+    </ul>
+
+    <p>The parsing algorithm is a GLR variant that handles ambiguity by maintaining multiple stacks. Because Tree-sitter parses on every keystroke, it cannot refuse to parse syntactically broken input &mdash; the user has just typed a character, and the tree has to be ready for highlighting before the next character arrives.</p>
+
+    <p>Tree-sitter is now used by:</p>
+
+    <ul>
+      <li><strong>Atom</strong> (the original home)</li>
+      <li><strong>Neovim</strong> (since 0.5, 2021) &mdash; built-in syntax highlighting uses Tree-sitter</li>
+      <li><strong>Helix</strong> &mdash; Rust-based modal editor, Tree-sitter for everything syntactic</li>
+      <li><strong>Emacs</strong> (since version 29, 2023) &mdash; treesit.el module</li>
+      <li><strong>VS Code</strong> &mdash; in recent versions for some languages</li>
+      <li><strong>Zed</strong> &mdash; the collaborative editor from the Atom team</li>
+      <li><strong>GitHub</strong> &mdash; for syntax highlighting on GitHub.com</li>
+    </ul>
+
+    <p>Over 200 Tree-sitter grammars exist, covering every mainstream programming language and most niche ones. A Tree-sitter grammar is written in JavaScript and looks like EBNF with JavaScript hooks. The generated parser is C code that is then compiled and loaded dynamically. See <a href="https://tree-sitter.github.io/">tree-sitter.github.io</a> for the ecosystem.</p>
+
+    <h2>The Long Arc</h2>
+
+    <p>The arc is visible in hindsight:</p>
+
+    <div class="timeline">
+      <div class="timeline-entry">
+        <span class="timeline-year">1959</span>
+        <span class="timeline-title">Backus&rsquo;s ICIP paper</span>
+        <p>BNF as notation.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1960</span>
+        <span class="timeline-title">ALGOL 60 Report</span>
+        <p>First language fully specified in BNF.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1965</span>
+        <span class="timeline-title">Knuth LR(k) paper</span>
+        <p>Theoretical foundation of bottom-up parsing.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1968</span>
+        <span class="timeline-title">Earley&rsquo;s thesis</span>
+        <p>General CFG parsing in O(n<sup>3</sup>).</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1969</span>
+        <span class="timeline-title">DeRemer LALR(1)</span>
+        <p>Practical LR parsing with compressed tables.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1975</span>
+        <span class="timeline-title">Yacc + Lex at Bell Labs</span>
+        <p>Johnson&rsquo;s LALR(1) generator + Lesk &amp; Schmidt&rsquo;s lexer generator. The Unix parser toolchain.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1977</span>
+        <span class="timeline-title">Wirth EBNF paper</span>
+        <p>&ldquo;What Can We Do About the Unnecessary Diversity of Notation for Syntactic Definitions&rdquo; &mdash; CACM.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1985</span>
+        <span class="timeline-title">Bison</span>
+        <p>GNU yacc replacement. GPL.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1986</span>
+        <span class="timeline-title">Tomita GLR</span>
+        <p>Generalized LR for ambiguous grammars.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1986</span>
+        <span class="timeline-title">Dragon Book</span>
+        <p>Aho, Sethi, Ullman <em>Compilers</em>. The canonical LR-centric compiler textbook.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1990s</span>
+        <span class="timeline-title">ANTLR (PCCTS)</span>
+        <p>Parr&rsquo;s LL(*) generator. Multiple target languages, readable errors.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2001</span>
+        <span class="timeline-title">Parsec (Haskell)</span>
+        <p>Leijen&rsquo;s monadic parser combinators. The canonical combinator library.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2002</span>
+        <span class="timeline-title">Ford packrat parsing</span>
+        <p>Linear-time parsing with memoization.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2004</span>
+        <span class="timeline-title">Ford PEG paper</span>
+        <p>Parsing Expression Grammars as BNF alternative.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2013</span>
+        <span class="timeline-title">ANTLR4</span>
+        <p>Adaptive LL(*). Much better error recovery.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2018</span>
+        <span class="timeline-title">Tree-sitter</span>
+        <p>Incremental GLR for editors. Brunsfeld at GitHub.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2020</span>
+        <span class="timeline-title">Python switches to PEG</span>
+        <p>PEP 617. Python 3.9. Retires pgen.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2026</span>
+        <span class="timeline-title">BNF still in use</span>
+        <p>67 years on, every modern language manual still has a BNF-descended grammar section.</p>
+      </div>
+    </div>
+
+    <p><strong>BNF is the connective tissue.</strong> The grammar file in Yacc, in ANTLR, in Tree-sitter, in every parser generator, is a close descendant of the notation in the ALGOL 60 Report. An ALGOL 60 programmer reading a Tree-sitter grammar in 2025 would recognize the shape of it immediately. Sixty-five years of parser technology have not displaced the notation.</p>
+
+    <div class="divider">::=  |  §  |  ::=</div>
+
+    <div class="cross-links">
+      <h4>Related Pages</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Committees</a></li>
+        <li><a href="report60.html">The ALGOL 60 Report</a></li>
+        <li><a href="bnf.html">Backus-Naur Form</a></li>
+        <li><a href="cfg.html">Context-Free Grammars</a></li>
+        <li><a href="influence.html">The Algol Family</a></li>
+        <li><a href="wirth.html">Wirth Family</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Parser Technology &middot; ALGOL, BNF &amp; Context-Free Grammars &middot; PNW Research Series</p>
+    <p><a href="../index.html">PNW Research Series</a> &middot; <a href="index.html">Back to Overview</a></p>
+  </footer>
+</body>
+</html>

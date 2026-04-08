@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSD &mdash; Get Shit Done &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-prm">
+  <header>
+    <h1>GSD &mdash; Get Shit Done</h1>
+    <div class="subtitle">An AI-Native Project Management Substrate for Hybridization, Measurement, and Evolution</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="methodologies.html">Methodologies</a>
+      <a href="metrics.html">Metrics</a>
+      <a href="ai-tools.html">AI &amp; Tools</a>
+      <a href="gsd.html" class="active">GSD</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================================ -->
+    <!-- THE PHILOSOPHY                                                -->
+    <!-- ============================================================ -->
+
+    <div class="card">
+      <blockquote style="font-size: 1.15em; margin: 0;">
+        There is no &ldquo;right way&rdquo; to manage projects. We explore, experiment, and learn to find what works best for us. Our metrics and memory functions give us the data to work with, so we can try innovative new hybrid approaches to these pathways.
+      </blockquote>
+      <p style="margin-top: 1.5em;">This is not a marketing slogan. It is the operating principle of GSD. Read the rest of this page through that lens.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 1. WHAT GSD IS                                                -->
+    <!-- ============================================================ -->
+
+    <h2>1. What GSD Is</h2>
+
+    <p>GSD (Get Shit Done) is an AI-native project management substrate built as a skill and agent layer for Claude Code. It is not a methodology in the traditional sense. It is a flexible framework that can absorb elements of waterfall, agile, kanban, lean, stage-gate, or any other approach &mdash; and it uses metrics and memory to learn which combinations work for the team and project at hand.</p>
+
+    <p>The word <em>substrate</em> is deliberate. A substrate is a base layer on which other things grow. GSD does not tell you how to manage your project. It gives you the ingredients &mdash; commands, artifacts, metrics, memory layers &mdash; from which you compose <em>your</em> way of managing <em>this</em> project. And then it gives you the feedback signals you need to evolve that approach over time.</p>
+
+    <p>The closest historical analogue is not Scrum or PMBOK but Unix: a small set of composable primitives, each doing one thing well, intended to be combined in ways the original authors never anticipated. GSD&rsquo;s commands are pipes; the artifacts are streams; the human is the shell.</p>
+
+    <!-- ============================================================ -->
+    <!-- 2. THE PHILOSOPHY (EXPANDED)                                  -->
+    <!-- ============================================================ -->
+
+    <h2>2. The GSD Philosophy &mdash; Stated Plainly</h2>
+
+    <blockquote>
+      There is no &ldquo;right way&rdquo; to manage projects. We explore, experiment, and learn to find what works best for us. Our metrics and memory functions give us the data to work with, so we can try innovative new hybrid approaches to these pathways.
+    </blockquote>
+
+    <p>GSD was designed to be <strong>hybridizable</strong>:</p>
+
+    <ul>
+      <li>You can run GSD in <strong>pure-waterfall mode</strong> &mdash; one phase, all at once, full specification upfront, single execution pass, single verification pass.</li>
+      <li>You can run GSD in <strong>agile-sprint mode</strong> &mdash; short phases, iterative, retrospective-driven, planning happens in the small, not in the large.</li>
+      <li>You can run GSD in <strong>kanban mode</strong> &mdash; continuous flow, no phase boundaries, work items pulled from a queue as capacity allows.</li>
+      <li>You can run GSD in <strong>stage-gate mode</strong> &mdash; explicit CAPCOM gates between phases, with formal go/no-go decisions and retrospective audits.</li>
+      <li>You can run GSD in <strong>exploratory mode</strong> &mdash; <code>/gsd:explore</code> for socratic ideation, <code>/gsd:note</code> for capture, <code>/gsd:plant-seed</code> for forward-looking ideas with trigger conditions, then promote to active work later.</li>
+      <li>Most teams end up running GSD in <strong>hybrid modes</strong> specific to their workflow, project type, and stage of development. This is normal. This is the goal. This is what the philosophy points at.</li>
+    </ul>
+
+    <p>The phrase <em>&ldquo;there is no right way&rdquo;</em> is not a permission slip for sloppiness. It is an acknowledgment that the right way <em>for you</em> on <em>this project</em> at <em>this moment</em> is something only you can discover, and only by experimenting. GSD gives you the experimental apparatus &mdash; the substrate, the signals, the memory &mdash; and steps out of the way.</p>
+
+    <!-- ============================================================ -->
+    <!-- 3. THE LIFECYCLE (SUBSTRATE)                                  -->
+    <!-- ============================================================ -->
+
+    <h2>3. The GSD Lifecycle &mdash; The Substrate</h2>
+
+    <p>What follows is a list of GSD commands. Read it as a menu, not a recipe. You use the items that fit your situation. Many teams only use a subset. Some teams use commands in orders the author did not anticipate. That is the point.</p>
+
+    <table>
+      <thead><tr><th>Command</th><th>What it does</th><th>When to use it</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><code>/gsd:new-project</code></td>
+          <td>Initialize with deep context gathering. Produces <code>PROJECT.md</code>, <code>ROADMAP.md</code>, <code>REQUIREMENTS.md</code>.</td>
+          <td>At project birth. Once per project.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:discuss-phase</code></td>
+          <td>Adaptive questioning. Surfaces assumptions before planning. Asks the questions you would have wished you had asked.</td>
+          <td>Before planning, when the phase is non-trivial.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:plan-phase</code></td>
+          <td>Generate a <code>PLAN.md</code> with tasks, dependencies, waves, verification criteria.</td>
+          <td>When you know what you want and need to break it down.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:execute-phase</code></td>
+          <td>Wave-based parallel execution. Atomic commits. <code>STATE.md</code> tracking throughout.</td>
+          <td>When the plan is approved and you want to build.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:verify-work</code></td>
+          <td>Conversational UAT with measurable criteria. Checks deliverables against the plan.</td>
+          <td>After execution, before declaring done.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:ship</code></td>
+          <td>PR creation, review, merge preparation.</td>
+          <td>When work is verified and ready to land.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:session-report</code></td>
+          <td>Retrospective with token metrics, outcomes, lessons learned.</td>
+          <td>End of session. Captures the data you will need next time.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:pause-work</code> / <code>/gsd:resume-work</code></td>
+          <td>Context persistence across sessions. Compresses state into a handoff document.</td>
+          <td>When stopping mid-work. When restarting after a break.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:note</code></td>
+          <td>Zero-friction idea capture. Append, list, promote.</td>
+          <td>When an idea hits and you don&rsquo;t want to lose it.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:plant-seed</code></td>
+          <td>Forward-looking idea capture with trigger conditions. Surfaces automatically at the right milestone.</td>
+          <td>When an idea is for later, not now.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:explore</code></td>
+          <td>Socratic ideation. Think through ideas before committing to plans.</td>
+          <td>Before you know what to plan. Pre-planning thinking.</td>
+        </tr>
+        <tr>
+          <td><code>/gsd:fast</code> / <code>/gsd:quick</code></td>
+          <td>Bypass overhead for trivial tasks. Atomic commits, state tracking, no agents.</td>
+          <td>When the task is small and the substrate would be overkill.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Read this list again. None of these are required. You can run an entire GSD project using only three of them. You can run an entire GSD project using ten of them. The only commitment GSD asks is that you use git for execution and that you let the artifacts speak for themselves.</strong></p>
+
+    <!-- ============================================================ -->
+    <!-- 4. METRICS AS SIGNALS                                         -->
+    <!-- ============================================================ -->
+
+    <h2>4. Metrics as Feedback Signals (Not Targets)</h2>
+
+    <p>GSD instruments every phase with metrics. They are <em>signals</em>, not targets. The point is not to optimize them. The point is to have enough data to make informed experiments with your process.</p>
+
+    <table>
+      <thead><tr><th>Metric</th><th>What it measures</th><th>What to do when it spikes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Token consumption per phase</strong></td>
+          <td>Planning-to-execution ratio. How much context-building vs. doing.</td>
+          <td>If high relative to outcomes, the plan may be too abstract or the context window too cluttered. Try smaller phases or chunked context.</td>
+        </tr>
+        <tr>
+          <td><strong>Commit frequency</strong></td>
+          <td>Actual work rate. Atomic commits per hour or per phase.</td>
+          <td>If low, the plan may be too vague or the team is blocked. Investigate before adding pressure.</td>
+        </tr>
+        <tr>
+          <td><strong>Research-to-code ratio</strong></td>
+          <td>Context-building vs. producing.</td>
+          <td>High ratio may mean over-researching. Low ratio may mean under-researching. Both are signals to recalibrate, not failures.</td>
+        </tr>
+        <tr>
+          <td><strong>Verification pass rates</strong></td>
+          <td>Quality of planning. Does what was built match what was planned?</td>
+          <td>Low pass rate means the plan step needs more rigor. High pass rate may mean criteria are too easy.</td>
+        </tr>
+        <tr>
+          <td><strong>Phase completion time variance</strong></td>
+          <td>Estimation accuracy. How much actual time differed from planned time.</td>
+          <td>Use to calibrate future estimates. Don&rsquo;t use to evaluate the team.</td>
+        </tr>
+        <tr>
+          <td><strong>Session-to-session handoff size</strong></td>
+          <td>Knowledge preservation efficiency. How much context survived the session boundary.</td>
+          <td>Large handoffs mean state is bleeding across sessions. Try smaller phases or better artifact discipline.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>None of these metrics are targets. None of them should appear on a dashboard with a green/red traffic light. They are signals that tell you whether your current workflow is working. Low verification pass rate? The plan step needs more rigor. High research-to-code ratio? You may be over-researching. The point is to have enough data to make informed experiments with your process.</p>
+
+    <p>Read the <a href="metrics.html">Metrics page</a> for the broader history of why this framing matters &mdash; the CHAOS reports, Campbell&rsquo;s Law, EVM, DORA, and the metrics trap. GSD&rsquo;s contribution is not new metrics. It is the discipline of treating metrics as feedback for hybridization, not as targets to hit.</p>
+
+    <!-- ============================================================ -->
+    <!-- 5. MEMORY AS PERSISTENCE LAYER                                -->
+    <!-- ============================================================ -->
+
+    <h2>5. Memory as a Persistence Layer for Learning</h2>
+
+    <p>GSD treats memory as a first-class concern. Every artifact is designed to outlive the session that produced it.</p>
+
+    <ul>
+      <li><strong><code>STATE.md</code></strong> &mdash; current state of the work. Updated continuously during execution. The single source of truth for &ldquo;where are we right now?&rdquo;</li>
+      <li><strong>Handoff documents</strong> &mdash; compressed context snapshots for session transitions. Generated by <code>/gsd:pause-work</code>. Read by <code>/gsd:resume-work</code>. The mechanism by which work survives context resets.</li>
+      <li><strong>Session reports</strong> &mdash; retrospective data with token estimates, work summary, lessons learned. Generated by <code>/gsd:session-report</code>. The retrospective that actually happens because it is built into the workflow.</li>
+      <li><strong>Git history</strong> &mdash; the immutable execution log. Every commit is a status update. The PR is the work item. The merge is the delivery. Git is the most reliable PM tool ever built; GSD just uses it.</li>
+      <li><strong><code>REQUIREMENTS.md</code> / <code>ROADMAP.md</code> / <code>PROJECT.md</code></strong> &mdash; the stable artifacts. Updated when intent changes, not when status changes.</li>
+      <li><strong>Memory files in <code>~/.claude/memory</code></strong> &mdash; cross-project patterns, user preferences, lessons learned that transcend any single project. The mechanism by which GSD accumulates wisdom across projects.</li>
+    </ul>
+
+    <p>Memory is how GSD accumulates wisdom across projects. Not just &ldquo;what did we build&rdquo; but &ldquo;what process worked when we built it, and what didn&rsquo;t.&rdquo; The lessons from project A inform project B, not because someone wrote a wiki page that no one reads, but because the artifacts themselves carry the learning forward.</p>
+
+    <!-- ============================================================ -->
+    <!-- 6. HYBRIDIZATION EXAMPLES                                     -->
+    <!-- ============================================================ -->
+
+    <h2>6. Hybridization Examples</h2>
+
+    <p>The following are real patterns observed in GSD projects. None of them are &ldquo;the right way.&rdquo; All of them are right for the team and project they emerged in.</p>
+
+    <h3>Agile-Waterfall Hybrid</h3>
+    <p>Waterfall for phases that have regulatory requirements (the team must produce a complete spec before any code is written and the spec must be reviewed by external parties). Agile for phases that are experimental (rapid iteration with small commits and frequent verification). The same project may use both modes in different phases. GSD does not care.</p>
+
+    <h3>Kanban-Wave Hybrid</h3>
+    <p>Use wave-based parallelism within a phase (like agile sprints &mdash; parallel work items completing roughly together) but pull work items from a backlog (like kanban) instead of committing to a sprint scope upfront. The waves provide concurrency. The kanban pull provides flow. The combination provides both.</p>
+
+    <h3>Stage-Gate + Iteration</h3>
+    <p>CAPCOM gates between phases (stage-gate semantics &mdash; an explicit go/no-go decision with documentation). Iterative execution within phases (agile semantics &mdash; rapid feedback loops, atomic commits, sub-phase retrospectives). The gates protect the macro structure; the iteration delivers the micro work.</p>
+
+    <h3>Exploratory + Production</h3>
+    <p>Use <code>/gsd:explore</code> and <code>/gsd:note</code> for the research/ideation phase, when you don&rsquo;t yet know what to build. Then switch to formal <code>/gsd:plan-phase</code> + <code>/gsd:execute-phase</code> for the production phase, when you do. The same project flows through both modes at different times.</p>
+
+    <h3>Single-Phase Mode (the &ldquo;Just Ship It&rdquo; Pattern)</h3>
+    <p>Some projects do not need a multi-phase structure at all. <code>/gsd:fast</code> and <code>/gsd:quick</code> exist for trivial tasks. A single phase can hold everything if that is what fits. The substrate scales down as well as up.</p>
+
+    <!-- ============================================================ -->
+    <!-- 7. UNIQUE SOLVES                                              -->
+    <!-- ============================================================ -->
+
+    <h2>7. GSD&rsquo;s Unique Solves</h2>
+
+    <h3>The Documentation Debt Problem</h3>
+    <p>Traditional PM produces documentation as a separate activity. The PM writes the plan, the team writes the code, someone else writes the docs &mdash; if anyone remembers. GSD eliminates this by making documentation <em>be</em> execution. <code>PLAN.md</code> is the plan. The commit history is the execution log. <code>STATE.md</code> is the live status. <code>session-report</code> is the retrospective. There is no separate documentation phase because the documentation is the execution. You cannot skip it.</p>
+
+    <h3>The Context Loss Problem</h3>
+    <p>Knowledge work is context-dependent, and context is fragile. When a developer leaves a team, when a session ends, when a context window fills up, the knowledge that was in someone&rsquo;s head evaporates. GSD&rsquo;s handoff documents encode state for future sessions. <code>/gsd:pause-work</code> compresses the live context into a document; <code>/gsd:resume-work</code> reconstitutes it. The result is that work survives context resets.</p>
+
+    <h3>The Estimation Problem</h3>
+    <p>Estimation is where most PM methodologies break. Estimates are wrong, often by 2x, sometimes by 10x. GSD&rsquo;s response is to <em>not estimate</em>. Plan, execute, measure, adjust. Use the metrics to calibrate. Treat each phase as a probe, not a commitment. If a phase took longer than expected, the lesson is in the variance, not in &ldquo;who do we blame.&rdquo;</p>
+
+    <h3>The Over-Planning Problem</h3>
+    <p>Some PM systems require so much upfront planning that the planning consumes the project. <code>/gsd:fast</code> and <code>/gsd:quick</code> exist for tasks where the substrate would be overkill. The full lifecycle is for complex work; the lightweight commands are for everything else.</p>
+
+    <h3>The Methodology Lock-in Problem</h3>
+    <p>Most PM tools embody a methodology and resist others. GSD is a substrate, not a prescription. Switch approaches when the data says so. The tools do not fight you when you change your mind.</p>
+
+    <!-- ============================================================ -->
+    <!-- 8. THE HUMAN ROLE                                             -->
+    <!-- ============================================================ -->
+
+    <h2>8. The Human Role in GSD</h2>
+
+    <p>In a GSD project, the human is not the scheduler, the estimator, the status tracker, or the documentation writer. The AI handles those. The human is:</p>
+
+    <ul>
+      <li><strong>Vision holder.</strong> Sets direction. Decides what success looks like. Articulates why this project exists.</li>
+      <li><strong>Quality gate.</strong> Approves plans before execution. Verifies results before shipping. Says &ldquo;yes&rdquo; or &ldquo;no, that&rsquo;s not what I meant.&rdquo;</li>
+      <li><strong>Decision maker.</strong> Resolves ambiguity when the AI cannot. Makes the calls that require values, judgment, or context the AI does not have.</li>
+      <li><strong>Experimenter.</strong> Tries new approaches to the workflow itself. Reads the metrics. Adjusts the process. Notices when something isn&rsquo;t working and changes it.</li>
+    </ul>
+
+    <p>Notice what is <em>not</em> on this list. Status updates. Estimation. Documentation. Schedule maintenance. Burndown chart updating. Standup-running. These are activities that AI handles in GSD &mdash; not because the AI is &ldquo;better&rdquo; at them but because the human time is more valuably spent on the four roles above.</p>
+
+    <!-- ============================================================ -->
+    <!-- 9. THE AI ROLE                                                -->
+    <!-- ============================================================ -->
+
+    <h2>9. The AI Role in GSD</h2>
+
+    <ul>
+      <li><strong>Planner.</strong> Generates plans from context. Decomposes vague intent into concrete tasks with dependencies, waves, and verification criteria.</li>
+      <li><strong>Executor.</strong> Produces deliverables. Writes the code, the tests, the documentation. Commits atomically. Pushes when ready.</li>
+      <li><strong>Verifier.</strong> Checks work against criteria. Runs the tests. Flags discrepancies. Asks the human when something is ambiguous.</li>
+      <li><strong>Documenter.</strong> Produces artifacts as a byproduct of execution. <code>STATE.md</code>, <code>PLAN.md</code>, session reports, handoffs &mdash; all generated automatically, all reflecting actual execution.</li>
+      <li><strong>Context manager.</strong> Maintains state across sessions. Knows where the work was last left. Picks up where it left off.</li>
+    </ul>
+
+    <p>Notice what is <em>not</em> on this list. Vision setting. Strategy. Final &ldquo;is this what we want&rdquo; calls. The AI does not decide what the project should accomplish. The AI does not decide whether a deliverable meets the human&rsquo;s actual intent. Those remain human responsibilities and likely will for a long time.</p>
+
+    <!-- ============================================================ -->
+    <!-- 10. COMPARED TO TRADITIONAL METHODOLOGIES                     -->
+    <!-- ============================================================ -->
+
+    <h2>10. GSD Compared to Traditional Methodologies</h2>
+
+    <p>The table below compares GSD to common methodologies. <strong>Important caveat:</strong> GSD can <em>emulate</em> any of these when the metrics say so. The comparison is not &ldquo;which is better&rdquo; but &ldquo;how does GSD relate to each.&rdquo;</p>
+
+    <table>
+      <thead><tr><th>Methodology</th><th>Relationship to GSD</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Scrum</strong></td>
+          <td>No fixed sprint length, but the wave model captures the iteration concept. GSD can run with sprint-like timeboxes if that fits. The retrospective is built in (<code>/gsd:session-report</code>).</td>
+        </tr>
+        <tr>
+          <td><strong>Kanban</strong></td>
+          <td>Supports continuous flow mode (pull from backlog), but defaults to phased work. The <code>/gsd:explore</code> and <code>/gsd:note</code> commands act as a low-friction backlog when you want kanban semantics.</td>
+        </tr>
+        <tr>
+          <td><strong>Waterfall</strong></td>
+          <td>Can run in single-phase mode with full upfront specification, but defaults to iterative. GSD does not <em>prevent</em> waterfall &mdash; it just makes iteration cheap enough that few teams choose pure waterfall.</td>
+        </tr>
+        <tr>
+          <td><strong>SAFe</strong></td>
+          <td>No organizational overhead. GSD scales via parallel workstreams (<code>/gsd:workstreams</code>) rather than via additional roles, ceremonies, and planning levels. The assumption is that AI agents can handle the coordination overhead that SAFe addresses with human roles.</td>
+        </tr>
+        <tr>
+          <td><strong>Stage-Gate</strong></td>
+          <td>The CAPCOM gate concept maps directly. <code>/gsd:audit-milestone</code> and <code>/gsd:complete-milestone</code> serve as gate decisions with documented criteria.</td>
+        </tr>
+        <tr>
+          <td><strong>PMBOK 7 (principles-based)</strong></td>
+          <td>Closest philosophical alignment. PMBOK 7&rsquo;s shift from processes to principles is the same shift GSD embodies. The 12 PMBOK principles map cleanly onto GSD&rsquo;s commands.</td>
+        </tr>
+        <tr>
+          <td><strong>&ldquo;GSD as a prescription&rdquo;</strong></td>
+          <td>This is a straw man. GSD is not prescriptive. If anyone tells you there is a &ldquo;right way&rdquo; to do GSD, they have misunderstood the substrate.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- 11. THE EXPERIMENTATION IMPERATIVE                            -->
+    <!-- ============================================================ -->
+
+    <h2>11. The Experimentation Imperative</h2>
+
+    <div class="card">
+      <p><strong>Don&rsquo;t use GSD &ldquo;correctly.&rdquo; Use it experimentally.</strong></p>
+
+      <p>If you are reading this page hoping to learn the right way to run a GSD project, you are reading the wrong page. There is no right way. There is only the way that works for you and your team and your project, this week, on this codebase, with this stakeholder, in this part of the lifecycle. That way will not be the way that works next week, on a different codebase, for a different stakeholder, in a different part of the lifecycle. The substrate is constant; the configuration is not.</p>
+
+      <p>What you should do instead:</p>
+
+      <ul>
+        <li><strong>Try different combinations of commands and see what fits.</strong> You can use <code>/gsd:plan-phase</code> without <code>/gsd:discuss-phase</code>. You can run <code>/gsd:execute-phase</code> on a hand-written plan. You can skip the verification step on a throwaway prototype. Try the unusual combinations.</li>
+
+        <li><strong>Measure what works.</strong> Run <code>/gsd:session-report</code> at the end of every session. Look at the token counts, the commit counts, the verification pass rates. Notice patterns. The metrics are signals; treat them that way.</li>
+
+        <li><strong>Remember it in memory files.</strong> When you find a hybrid that works, write it down in a memory file. When you find a hybrid that fails, write that down too. The point of memory is to make this the last time you have to learn that particular lesson.</li>
+
+        <li><strong>Share experimental findings.</strong> Session reports, handoff documents, retrospectives, blog posts. The PM profession has been short on data for decades because reporting failure was career-ending. In GSD, the failures are part of the substrate &mdash; they are how you learn what works.</li>
+
+        <li><strong>Evolve your personal GSD dialect over time.</strong> By the end of your tenth project, you will have a way of using GSD that no one else uses, that fits you and your work perfectly, that would be incomprehensible to a beginner. This is not a sign of fragmentation. It is a sign of mastery.</li>
+      </ul>
+
+      <p>The PM history covered on the <a href="history.html">History page</a> is, in large part, a story of people trying to find the &ldquo;one true way&rdquo; to manage projects &mdash; and a parallel story of those efforts repeatedly failing because no one true way exists. GSD takes the opposite bet. It assumes there is no one true way, designs the substrate accordingly, and gives you the apparatus to discover what works for you. The discovery is the work.</p>
+
+      <p>Start experimenting.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History</a> &mdash; the methodologies GSD absorbs</li>
+        <li><a href="methodologies.html">Methodologies</a> &mdash; the hybridization landscape</li>
+        <li><a href="metrics.html">Metrics</a> &mdash; signals as feedback for experimentation</li>
+        <li><a href="ai-tools.html">AI &amp; Tools</a> &mdash; the AI-native tools landscape</li>
+        <li><a href="rosetta.html">Rosetta</a> &mdash; GSD compared dimension-by-dimension</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>GSD &mdash; Get Shit Done &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

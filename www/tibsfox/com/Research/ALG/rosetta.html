@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta &mdash; ALGOL, BNF &amp; Context-Free Grammars</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alg">
+  <header>
+    <h1>Rosetta Integration</h1>
+    <div class="subtitle">Every modern language&rsquo;s grammar, side by side &mdash; and the through-line from Emil Post (1943) to Tree-sitter (2018)</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="report60.html">The Report</a>
+      <a href="bnf.html">BNF</a>
+      <a href="cfg.html">Context-Free Grammars</a>
+      <a href="parsers.html">Parsers</a>
+      <a href="influence.html">Influence</a>
+      <a href="wirth.html">Wirth Family</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <p>&ldquo;Pick any language reference manual from a serious language &mdash; Java, C#, Go, Rust, Swift, Kotlin, Haskell, OCaml, Scala, Erlang, Elixir, Clojure &mdash; and flip to the grammar section. You will find a grammar in BNF or some EBNF variant.&rdquo;</p>
+    </blockquote>
+
+    <h2>The Same Grammar, Seven Ways</h2>
+
+    <p>A minimal arithmetic expression grammar, expressed in the most commonly used notations. All seven describe exactly the same language.</p>
+
+    <h3>ALGOL 60 BNF (1960) &mdash; the original</h3>
+
+<pre class="bnf"><span class="nt">&lt;expr&gt;</span>   <span class="meta">::=</span> <span class="nt">&lt;term&gt;</span> <span class="meta">|</span> <span class="nt">&lt;expr&gt;</span> <span class="t">"+"</span> <span class="nt">&lt;term&gt;</span> <span class="meta">|</span> <span class="nt">&lt;expr&gt;</span> <span class="t">"-"</span> <span class="nt">&lt;term&gt;</span>
+<span class="nt">&lt;term&gt;</span>   <span class="meta">::=</span> <span class="nt">&lt;factor&gt;</span> <span class="meta">|</span> <span class="nt">&lt;term&gt;</span> <span class="t">"*"</span> <span class="nt">&lt;factor&gt;</span> <span class="meta">|</span> <span class="nt">&lt;term&gt;</span> <span class="t">"/"</span> <span class="nt">&lt;factor&gt;</span>
+<span class="nt">&lt;factor&gt;</span> <span class="meta">::=</span> <span class="nt">&lt;number&gt;</span> <span class="meta">|</span> <span class="t">"("</span> <span class="nt">&lt;expr&gt;</span> <span class="t">")"</span></pre>
+
+    <h3>Wirth EBNF (1977)</h3>
+
+<pre class="bnf"><span class="nt">expr</span>   <span class="meta">=</span> <span class="nt">term</span> { ( <span class="t">"+"</span> <span class="meta">|</span> <span class="t">"-"</span> ) <span class="nt">term</span> } .
+<span class="nt">term</span>   <span class="meta">=</span> <span class="nt">factor</span> { ( <span class="t">"*"</span> <span class="meta">|</span> <span class="t">"/"</span> ) <span class="nt">factor</span> } .
+<span class="nt">factor</span> <span class="meta">=</span> <span class="nt">number</span> <span class="meta">|</span> <span class="t">"("</span> <span class="nt">expr</span> <span class="t">")"</span> .</pre>
+
+    <h3>IETF ABNF (RFC 5234)</h3>
+
+<pre class="bnf">expr   <span class="meta">=</span> term *( (<span class="t">"+"</span> / <span class="t">"-"</span>) term )
+term   <span class="meta">=</span> factor *( (<span class="t">"*"</span> / <span class="t">"/"</span>) factor )
+factor <span class="meta">=</span> number / <span class="t">"("</span> expr <span class="t">")"</span></pre>
+
+    <h3>Yacc / Bison (1975)</h3>
+
+<pre><code>%token NUMBER
+%left '+' '-'
+%left '*' '/'
+
+expr:   expr '+' term
+    |   expr '-' term
+    |   term
+    ;
+
+term:   term '*' factor
+    |   term '/' factor
+    |   factor
+    ;
+
+factor: NUMBER
+    |   '(' expr ')'
+    ;</code></pre>
+
+    <h3>ANTLR4</h3>
+
+<pre><code>grammar Arith;
+
+expr   : expr ('*'|'/') expr
+       | expr ('+'|'-') expr
+       | NUMBER
+       | '(' expr ')'
+       ;
+
+NUMBER : [0-9]+ ;
+WS     : [ \t\r\n]+ -&gt; skip ;</code></pre>
+
+    <h3>PEG / Ford (2004)</h3>
+
+<pre class="bnf"><span class="nt">Expr</span>    <span class="meta">&lt;-</span> <span class="nt">Term</span> ((<span class="t">'+'</span> / <span class="t">'-'</span>) <span class="nt">Term</span>)*
+<span class="nt">Term</span>    <span class="meta">&lt;-</span> <span class="nt">Factor</span> ((<span class="t">'*'</span> / <span class="t">'/'</span>) <span class="nt">Factor</span>)*
+<span class="nt">Factor</span>  <span class="meta">&lt;-</span> <span class="nt">Number</span> / <span class="t">'('</span> <span class="nt">Expr</span> <span class="t">')'</span>
+<span class="nt">Number</span>  <span class="meta">&lt;-</span> [0-9]+</pre>
+
+    <h3>Tree-sitter (2018)</h3>
+
+<pre><code>module.exports = grammar({
+  name: 'arith',
+
+  rules: {
+    expr: $ =&gt; choice(
+      $.number,
+      prec.left(1, seq($.expr, choice('+', '-'), $.expr)),
+      prec.left(2, seq($.expr, choice('*', '/'), $.expr)),
+      seq('(', $.expr, ')')
+    ),
+    number: $ =&gt; /[0-9]+/
+  }
+});</code></pre>
+
+    <p>The shape of the grammar is the same in every notation. A terminal here is a literal; a non-terminal there is a rule. What changes is the metasyntax and the tooling. The concept &mdash; production rules that describe an infinite language &mdash; is identical to what Backus wrote on a blackboard in 1959.</p>
+
+    <h2>BNF Hiding in Modern Languages</h2>
+
+    <table>
+      <thead><tr><th>Language</th><th>Reference Spec Uses</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Python</strong></td><td>Modified EBNF (docs.python.org/3/reference/grammar.html). Switched from pgen LL(1) to PEG in 3.9 (2020).</td></tr>
+        <tr><td><strong>Java</strong></td><td>Java Language Specification uses a custom BNF variant. ~170 pages of grammar in 8th edition.</td></tr>
+        <tr><td><strong>C#</strong></td><td>ECMA-334 uses a BNF variant. Microsoft&rsquo;s C# spec uses a similar notation.</td></tr>
+        <tr><td><strong>Rust</strong></td><td>Rust reference uses custom EBNF-like syntax. Parser is hand-written recursive descent.</td></tr>
+        <tr><td><strong>Go</strong></td><td>Go language spec uses EBNF explicitly (golang.org/ref/spec). Parser is hand-written.</td></tr>
+        <tr><td><strong>Swift</strong></td><td>Swift reference grammar in BNF-like notation, at swift.org.</td></tr>
+        <tr><td><strong>Kotlin</strong></td><td>Kotlin spec uses BNF derived from ANTLR grammar.</td></tr>
+        <tr><td><strong>Haskell</strong></td><td>Haskell 2010 Report uses BNF throughout the syntax chapter.</td></tr>
+        <tr><td><strong>OCaml</strong></td><td>OCaml manual uses BNF in the language chapter.</td></tr>
+        <tr><td><strong>Scala</strong></td><td>Scala specification uses EBNF.</td></tr>
+        <tr><td><strong>Erlang</strong></td><td>Erlang reference uses BNF.</td></tr>
+        <tr><td><strong>Elixir</strong></td><td>Elixir borrows Erlang&rsquo;s parser; grammar is in BNF.</td></tr>
+        <tr><td><strong>Clojure</strong></td><td>Clojure has no formal grammar &mdash; the reader is code &mdash; but uses BNF-like documentation.</td></tr>
+        <tr><td><strong>Lua</strong></td><td>Lua reference manual includes full EBNF grammar (9 pages for the whole language).</td></tr>
+        <tr><td><strong>SQL (ISO/IEC 9075)</strong></td><td>Thousands of BNF productions. SQL is huge.</td></tr>
+        <tr><td><strong>HTTP (RFC 9110)</strong></td><td>ABNF throughout. Every HTTP parser descends from this grammar.</td></tr>
+        <tr><td><strong>JSON (RFC 8259)</strong></td><td>ABNF. About 15 productions for the whole format.</td></tr>
+        <tr><td><strong>XML (W3C Rec)</strong></td><td>W3C EBNF. About 80 productions.</td></tr>
+        <tr><td><strong>URI (RFC 3986)</strong></td><td>ABNF. ~30 productions.</td></tr>
+      </tbody>
+    </table>
+
+    <p>You can open any of these specifications and read the grammar without knowing anything specific about the language. That is the universal inheritance from 1960.</p>
+
+    <h2>The Through-Line from Post to Tree-sitter</h2>
+
+    <div class="timeline">
+      <div class="timeline-entry">
+        <span class="timeline-year">1943</span>
+        <span class="timeline-title">Emil Post &mdash; production systems</span>
+        <p>&ldquo;Formal Reductions of the General Combinatorial Decision Problem.&rdquo; Turing-complete string rewriting systems as a foundation for undecidability proofs.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1956</span>
+        <span class="timeline-title">Chomsky &mdash; hierarchy of formal languages</span>
+        <p>Context-free grammars are Type 2, restricted form of Post production systems.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1959</span>
+        <span class="timeline-title">Backus &mdash; BNF at ICIP Paris</span>
+        <p>A restricted form of Post productions, designed to describe programming language syntax precisely. Cites Post explicitly in a footnote.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1960</span>
+        <span class="timeline-title">Naur &mdash; ALGOL 60 Report</span>
+        <p>First programming language fully specified in BNF. 20 pages that changed the world.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1964</span>
+        <span class="timeline-title">Knuth &mdash; &ldquo;Backus-Naur Form&rdquo;</span>
+        <p>Two-paragraph letter to CACM renames the notation.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1965</span>
+        <span class="timeline-title">Knuth &mdash; LR(k) paper</span>
+        <p>&ldquo;On the Translation of Languages from Left to Right.&rdquo; Theoretical foundation of bottom-up parsing.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1969</span>
+        <span class="timeline-title">DeRemer &mdash; LALR(1) thesis</span>
+        <p>Practical LR parsing with compressed tables.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1975</span>
+        <span class="timeline-title">Johnson &mdash; Yacc at Bell Labs</span>
+        <p>LALR(1) parser generator for Unix. Paired with Lex.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1977</span>
+        <span class="timeline-title">Wirth &mdash; EBNF</span>
+        <p>&ldquo;What Can We Do About the Unnecessary Diversity of Notation for Syntactic Definitions.&rdquo; The modern EBNF we all use.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1985</span>
+        <span class="timeline-title">Bison &mdash; GNU yacc</span>
+        <p>Robert Corbett, Richard Stallman. GPL.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">1990s</span>
+        <span class="timeline-title">Parr &mdash; ANTLR (PCCTS)</span>
+        <p>LL(*) top-down generator with readable error messages.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2001</span>
+        <span class="timeline-title">Leijen &mdash; Parsec</span>
+        <p>Monadic parser combinators in Haskell. The canonical combinator library.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2004</span>
+        <span class="timeline-title">Ford &mdash; PEG</span>
+        <p>Parsing Expression Grammars with ordered choice. No ambiguity possible.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2013</span>
+        <span class="timeline-title">ANTLR4</span>
+        <p>Adaptive LL(*). Much better error recovery.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2018</span>
+        <span class="timeline-title">Brunsfeld &mdash; Tree-sitter</span>
+        <p>Incremental GLR parser for editors. Runs on every keystroke. Handles broken input gracefully.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2020</span>
+        <span class="timeline-title">Python &rarr; PEG</span>
+        <p>PEP 617. Python 3.9 retires pgen.</p>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2026</span>
+        <span class="timeline-title">BNF still dominant</span>
+        <p>67 years after Backus&rsquo;s ICIP paper, every serious language reference manual still has a grammar in BNF or some variant.</p>
+      </div>
+    </div>
+
+    <h2>The Corpus Connections</h2>
+
+    <table>
+      <thead><tr><th>PNW Series Project</th><th>ALGOL Connection</th></tr></thead>
+      <tbody>
+        <tr><td><a href="../LSP/index.html">LSP &mdash; Lisp &amp; Functional</a></td><td><strong>John McCarthy was on the ALGOL 60 committee.</strong> Lisp (1958) and ALGOL (1960) are the two roots of modern programming languages. McCarthy contributed the if-expression and mandatory recursion to ALGOL 60.</td></tr>
+        <tr><td><a href="../PCH/index.html">PCH &mdash; Punch Cards</a></td><td>ALGOL was designed to be read on paper, printed in journals, checked by hand &mdash; the purest expression of the publication-language ideal, and the constraint thinking that punch-card era programmers practiced.</td></tr>
+        <tr><td><a href="../FOR/index.html">FOR &mdash; Fortran</a></td><td>ALGOL&rsquo;s sibling rival. Fortran (1957) won scientific computing; ALGOL (1960) won the theory of programming languages. Backus led both efforts.</td></tr>
+        <tr><td><a href="../CEE/index.html">CEE &mdash; C Programming</a></td><td>C descends from ALGOL 60 via CPL (1963) &rarr; BCPL (1967) &rarr; B (1969) &rarr; C (1972). Every C block is an ALGOL block.</td></tr>
+        <tr><td><a href="../CPP/index.html">CPP &mdash; C++</a></td><td>C++ inherits C&rsquo;s ALGOL inheritance plus Simula 67&rsquo;s object-oriented extensions to ALGOL. Stroustrup explicitly credits Simula as the source of classes, inheritance, and virtual dispatch.</td></tr>
+        <tr><td><a href="../JAV/index.html">JAV &mdash; Java</a></td><td>Java is Pascal cleaned up for the Internet (Gosling read Wirth). The JVM inherits from Wirth&rsquo;s Pascal P-machine (1975).</td></tr>
+        <tr><td><a href="../RST/index.html">RST &mdash; Rust</a></td><td>Rust&rsquo;s block structure, lexical scope, and type system are ALGOL-family through and through. The ML-family type system is grafted on top.</td></tr>
+        <tr><td><a href="../GOL/index.html">GOL &mdash; Go</a></td><td>Go is deliberately Pascal-flavored. Robert Griesemer, Go co-creator, was Wirth&rsquo;s doctoral student at ETH Zürich. Go is the Wirth tradition continuing.</td></tr>
+        <tr><td><a href="../ASM/index.html">ASM &mdash; Assembly</a></td><td>The Burroughs B5000 had an ALGOL-oriented instruction set &mdash; the only mainstream machine designed around a specific high-level language.</td></tr>
+        <tr><td><a href="../CLI/index.html">CLI &mdash; Art of the CLI</a></td><td>yacc, bison, ANTLR, and Tree-sitter are all CLI tools descended directly from BNF.</td></tr>
+        <tr><td><a href="../RXX/index.html">RXX &mdash; Rexx/ARexx</a></td><td>Rexx was specified with BNF, as were most modern scripting languages.</td></tr>
+        <tr><td><a href="../MLC/index.html">MLC &mdash; ML/Compilers</a></td><td>Compiler theory is the theoretical descendant of BNF + Chomsky hierarchy + LR parsing. Every compilers textbook starts with ALGOL 60.</td></tr>
+        <tr><td><a href="../SST/index.html">SST &mdash; States, Symbols &amp; Tape</a></td><td>The automata theory underlying the Chomsky hierarchy: finite automata for regular; pushdown automata for context-free; linear-bounded automata for context-sensitive; Turing machines for recursively enumerable.</td></tr>
+        <tr><td><a href="../PRL/index.html">PRL &mdash; Perl/PHP</a></td><td>Perl&rsquo;s block structure, lexical scope (via <code>my</code>), and block-style control flow are Algol-family.</td></tr>
+        <tr><td><a href="../SNK/index.html">SNK &mdash; Python</a></td><td>Python inherits block structure (via indentation), lexical scope, and type system ideas from Algol. Its modules come from Modula-3 per van Rossum.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The One-Line Summary</h2>
+
+    <div class="report-box">
+      <h3>&sect; The Six-Decade Shelf Life</h3>
+      <p>John Backus introduced BNF at a UNESCO conference in Paris in June 1959, citing Emil Post&rsquo;s 1943 production systems as the formal substrate. Peter Naur edited it into the <em>Report on the Algorithmic Language ALGOL 60</em>, published in <em>Communications of the ACM</em> in May 1960. Donald Knuth renamed it in a two-paragraph 1964 letter. Niklaus Wirth extended it in 1977. Stephen Johnson built Yacc from it in 1975. Frank DeRemer made LR parsing practical with LALR(1) in 1969. Terence Parr built ANTLR in the 1990s. Bryan Ford reformulated it as PEG in 2004. Max Brunsfeld built Tree-sitter from it in 2018. Python switched to a PEG-based parser in 2020.</p>
+      <p>Every step along this 67-year arc kept the BNF inheritance visible. Every step added capability without replacing the formalism. Every programming language reference manual in the world in 2026 still has a grammar section written in a notation descended from what Backus wrote in Paris and Naur cleaned up in the Report.</p>
+      <p><strong>Sixty-seven years. No other notation in computing has had a longer shelf life. Not one.</strong></p>
+    </div>
+
+    <div class="divider">::=  |  §  |  ::=</div>
+
+    <div class="cross-links">
+      <h4>Navigate the Project</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Committees</a></li>
+        <li><a href="report60.html">The ALGOL 60 Report</a></li>
+        <li><a href="bnf.html">Backus-Naur Form</a></li>
+        <li><a href="cfg.html">Context-Free Grammars</a></li>
+        <li><a href="parsers.html">Parser Technology</a></li>
+        <li><a href="influence.html">The Algol Family</a></li>
+        <li><a href="wirth.html">Niklaus Wirth&rsquo;s Line</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rosetta Integration &middot; ALGOL, BNF &amp; Context-Free Grammars &middot; PNW Research Series</p>
+    <p><a href="../index.html">PNW Research Series</a> &middot; <a href="index.html">Back to Overview</a></p>
+  </footer>
+</body>
+</html>

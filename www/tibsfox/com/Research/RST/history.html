@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Evolution &mdash; Rust</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rst">
+  <header>
+    <h1>History &amp; Evolution</h1>
+    <div class="subtitle">Graydon Hoare, Mozilla, Servo, Rust 1.0, Editions, the Foundation, Linux Kernel, and the Safety Narrative</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="ownership.html">Ownership</a>
+      <a href="traits.html">Traits</a>
+      <a href="async.html">Async</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="unsafe.html">Unsafe</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html" class="active">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Rust is named after a family of fungi that are, in Graydon Hoare&rsquo;s words, &ldquo;over-engineered for survival.&rdquo; The name fits: the language is designed to produce software that outlasts its authors.
+    </blockquote>
+
+    <h2>Origins (~2006&ndash;2010)</h2>
+    <p><strong>Graydon Hoare</strong> started Rust as a personal project around 2006 while working at Mozilla. The motivation was frustration with C and C++ &mdash; specifically, memory safety bugs in Firefox. The language drew from: <strong>ML</strong> and <strong>Haskell</strong> (type system, pattern matching, algebraic data types), <strong>Erlang</strong> (concurrency, message passing), <strong>C++</strong> (systems-level control, zero-cost abstractions, RAII), <strong>Cyclone</strong> (safe C dialect, region-based memory), and <strong>Newsqueak/Limbo</strong> (channel-based concurrency).</p>
+
+    <p><strong>Mozilla sponsored</strong> Rust development beginning in 2009. The <strong>Servo browser engine</strong> was started as a proving ground for the language.</p>
+
+    <h2>Pre-1.0 &mdash; Dramatic Changes</h2>
+    <p>Between 2010 and 2015, Rust changed more than most languages change in their entire lifetime. Features that were removed before 1.0:</p>
+    <ul>
+      <li><strong>Garbage collector</strong> &mdash; Rust originally had optional GC (<code>@T</code> managed pointers). Removed to commit fully to ownership.</li>
+      <li><strong>Green threads</strong> &mdash; Rust had a green-thread runtime. Removed for the zero-cost principle (you can&rsquo;t have a runtime if you target bare metal).</li>
+      <li><strong>Typestate</strong> &mdash; an early experiment in encoding state machines in the type system. Too complex; removed.</li>
+    </ul>
+
+    <p>Key people in this era: <strong>Patrick Walton</strong>, <strong>Niko Matsakis</strong> (borrow checker), <strong>Alex Crichton</strong> (Cargo, infrastructure), <strong>Brian Anderson</strong> (core team lead).</p>
+
+    <h2>Rust 1.0 (May 15, 2015)</h2>
+    <div class="card">
+      <p><strong>The stability guarantee:</strong> &ldquo;stability without stagnation.&rdquo; Once something is stable in Rust, it will never break. The 6-week release train (stable, beta, nightly) ships new features continuously while maintaining backward compatibility. Unstable features are gated behind nightly-only flags.</p>
+    </div>
+
+    <h2>The Timeline</h2>
+    <div class="timeline">
+      <div class="event"><span class="year">~2006</span> <strong>Graydon Hoare starts Rust</strong> as a personal project at Mozilla.</div>
+      <div class="event"><span class="year">2009</span> <strong>Mozilla sponsors</strong> development. Servo browser engine work begins.</div>
+      <div class="event"><span class="year">2010</span> <strong>Rust 0.1</strong> &mdash; first public release.</div>
+      <div class="event"><span class="year">~2013</span> <strong>Graydon Hoare steps away</strong> from the project. Community governance takes over.</div>
+      <div class="event"><span class="year">May 15, 2015</span> <strong>Rust 1.0</strong> &mdash; stability guarantee. 6-week release train begins.</div>
+      <div class="event"><span class="year">Nov 2017</span> <strong>Firefox 57 Quantum</strong> ships with Servo&rsquo;s <strong>Stylo CSS engine</strong> (Rust in production in a major browser).</div>
+      <div class="event"><span class="year">Dec 2018</span> <strong>Rust 2018 Edition</strong> &mdash; Non-Lexical Lifetimes (NLL), module system reform, async foundations.</div>
+      <div class="event"><span class="year">Nov 2019</span> <strong>Async/await stabilized</strong> (Rust 1.39).</div>
+      <div class="event"><span class="year">Aug 2020</span> <strong>Mozilla layoffs</strong> &mdash; much of the Rust team is let go. Community concern about the language&rsquo;s future.</div>
+      <div class="event"><span class="year">Feb 2021</span> <strong>Rust Foundation formed</strong> (AWS, Google, Huawei, Microsoft, Mozilla). Ensures the language&rsquo;s independence from any single company.</div>
+      <div class="event"><span class="year">Oct 2021</span> <strong>Rust 2021 Edition</strong> &mdash; disjoint capture in closures, <code>IntoIterator</code> for arrays.</div>
+      <div class="event"><span class="year">Mar 2021</span> <strong>Rust 1.51</strong> &mdash; const generics (MVP) stabilized.</div>
+      <div class="event"><span class="year">Nov 2022</span> <strong>Rust 1.65</strong> &mdash; Generic Associated Types (GATs) stabilized. <strong>NSA guidance</strong> recommends Rust.</div>
+      <div class="event"><span class="year">Dec 2022</span> <strong>Linux kernel 6.1</strong> ships with Rust support &mdash; first kernel code in a language other than C and assembly in Linux&rsquo;s 31-year history.</div>
+      <div class="event"><span class="year">Feb 2024</span> <strong>White House ONCD report</strong> explicitly names Rust as a memory-safe language.</div>
+      <div class="event"><span class="year">Feb 2025</span> <strong>Rust 2024 Edition</strong> (Rust 1.85). Gen blocks (preview), RPIT changes, unsafe improvements.</div>
+    </div>
+
+    <h2>Editions</h2>
+    <p>Rust&rsquo;s edition system allows breaking syntax changes every 3 years while maintaining interoperability. Crates targeting different editions work together seamlessly.</p>
+
+    <table>
+      <thead><tr><th>Edition</th><th>Key changes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>2015</strong></td><td>The initial edition. Ownership, borrowing, traits, generics, cargo.</td></tr>
+        <tr><td><strong>2018</strong></td><td>Non-Lexical Lifetimes (NLL), new module paths (<code>use crate::</code>), async/await foundations, <code>dyn Trait</code> required.</td></tr>
+        <tr><td><strong>2021</strong></td><td>Disjoint capture in closures, <code>IntoIterator</code> for arrays, <code>panic!</code> always uses <code>format_args!</code>, Cargo resolver v2 default.</td></tr>
+        <tr><td><strong>2024</strong></td><td>Gen blocks (preview), RPIT lifetime capture changes, unsafe <code>extern</code> blocks, <code>unsafe_op_in_unsafe_fn</code> lint default.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Key People</h2>
+    <table>
+      <thead><tr><th>Person</th><th>Contribution</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Graydon Hoare</strong></td><td>Creator of Rust (~2006). Left the project ~2013. Now at other projects.</td></tr>
+        <tr><td><strong>Niko Matsakis</strong></td><td>Lang team lead, borrow checker architect, NLL, GATs, Polonius. Amazon.</td></tr>
+        <tr><td><strong>Patrick Walton</strong></td><td>Early core contributor, Servo.</td></tr>
+        <tr><td><strong>Alex Crichton</strong></td><td>Cargo, infrastructure, wasm tooling.</td></tr>
+        <tr><td><strong>Brian Anderson</strong></td><td>Core team lead during the pre-1.0 and early 1.x era.</td></tr>
+        <tr><td><strong>Steve Klabnik</strong></td><td>Co-author of <em>The Rust Programming Language</em> (&ldquo;The Book&rdquo;).</td></tr>
+        <tr><td><strong>Carol Nichols</strong></td><td>Co-author of The Book. Rust Foundation board.</td></tr>
+        <tr><td><strong>Mara Bos</strong></td><td>Libs team, <em>Rust Atomics and Locks</em>.</td></tr>
+        <tr><td><strong>David Tolnay</strong></td><td><code>serde</code>, <code>syn</code>, <code>quote</code>, <code>proc-macro2</code>, <code>anyhow</code>, <code>thiserror</code>. The proc-macro ecosystem.</td></tr>
+        <tr><td><strong>Andrew Gallant</strong></td><td><code>ripgrep</code>, <code>regex</code> crate. Gold-standard idiomatic Rust.</td></tr>
+        <tr><td><strong>Tyler Mandry</strong></td><td>Async working group.</td></tr>
+        <tr><td><strong>Manish Goregaokar</strong></td><td>Dev tools, Clippy, Unicode.</td></tr>
+        <tr><td><strong>Carl Lerche</strong></td><td>Tokio creator.</td></tr>
+        <tr><td><strong>Miguel Ojeda</strong></td><td>Rust for Linux project lead.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Safety Narrative</h2>
+    <div class="card">
+      <p>Since 2022, Rust has been named by <strong>three US government agencies</strong> as a recommended memory-safe alternative to C/C++:</p>
+      <ul>
+        <li><strong>NSA</strong> (November 2022): <em>Software Memory Safety</em> &mdash; names Rust, Go, Java, C#, Swift as memory-safe alternatives</li>
+        <li><strong>CISA</strong> (2023): <em>Shifting the Balance of Cybersecurity Risk</em> &mdash; recommends migration to memory-safe languages</li>
+        <li><strong>White House ONCD</strong> (February 2024): <em>Back to the Building Blocks</em> &mdash; explicitly names Rust as a memory-safe language for new development</li>
+      </ul>
+      <p>This has accelerated adoption in critical infrastructure: the Linux kernel, Chromium, Android AOSP, Windows components, and AWS core services now include Rust code.</p>
+    </div>
+
+    <h2>Governance</h2>
+    <p>The <strong>Rust Foundation</strong> was formed in February 2021 with founding members <strong>AWS, Google, Huawei, Microsoft, and Mozilla</strong>. Executive Director: <strong>Rebecca Rumbul</strong> (since 2022). The Foundation handles infrastructure, trademark, and grants; it does not control the language design.</p>
+
+    <p>Language design is governed by teams: <strong>lang team</strong> (language features), <strong>compiler team</strong>, <strong>libs team</strong>, <strong>cargo team</strong>, <strong>moderation team</strong>. The 2022&ndash;2023 governance restructuring reorganized the core team and established a new leadership council.</p>
+
+    <h2>Servo and Firefox</h2>
+    <p>The <strong>Servo browser engine</strong> was Rust&rsquo;s first major real-world test. Components that shipped in Firefox:</p>
+    <ul>
+      <li><strong>Stylo</strong> &mdash; the CSS engine (Firefox 57 Quantum, November 2017)</li>
+      <li><strong>WebRender</strong> &mdash; GPU-accelerated compositing</li>
+      <li><strong>URL parser</strong></li>
+    </ul>
+    <p>Servo was transferred to the Linux Foundation in 2020 after the Mozilla layoffs.</p>
+
+    <h2>Community and Culture</h2>
+    <ul>
+      <li><strong>Ferris</strong> &mdash; the unofficial crab mascot (designed by Karen Rustad T&ouml;lva)</li>
+      <li><strong>&ldquo;Rustacean&rdquo;</strong> &mdash; what Rust programmers call themselves</li>
+      <li><strong>&ldquo;Most loved language&rdquo;</strong> on the Stack Overflow Developer Survey for 8+ consecutive years (2016&ndash;2024)</li>
+      <li><strong>This Week in Rust</strong> &mdash; the weekly newsletter</li>
+      <li><strong>RustConf</strong>, <strong>EuroRust</strong>, <strong>Rust Nation UK</strong>, <strong>Oxidize</strong> (embedded)</li>
+    </ul>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CPP</td><td>C++</td><td>Rust was born from C++ frustration; the two languages are in direct competition for systems programming</td></tr>
+        <tr><td>CEE</td><td>C</td><td>Linux kernel Rust support is the most significant validation of Rust in C&rsquo;s territory</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>The Rust Foundation model parallels the Java Community Process; both survived corporate transitions</td></tr>
+        <tr><td>JTS</td><td>JavaScript</td><td>Deno, SWC, Turbopack, Biome &mdash; Rust rewrote the JS tooling layer</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="ownership.html">Ownership &amp; Borrowing</a></li>
+        <li><a href="traits.html">Traits &amp; Types</a></li>
+        <li><a href="async.html">Async &amp; Concurrency</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="unsafe.html">Unsafe &amp; FFI</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="education.html">Learn</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>History &amp; Evolution &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

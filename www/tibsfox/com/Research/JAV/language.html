@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java Language &mdash; Java and the JVM</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jav">
+  <header>
+    <h1>Java Language</h1>
+    <div class="subtitle">Types, Generics, Lambdas, Streams, Records, Pattern Matching &mdash; From JDK 1.0 to Java 25</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html" class="active">Language</a>
+      <a href="oop.html">OOP</a>
+      <a href="jvm.html">JVM</a>
+      <a href="frameworks.html">Frameworks</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;Simple, object-oriented, and familiar; robust and secure; architecture-neutral and portable; high-performance; interpreted, threaded, and dynamic.&rdquo; &mdash; <strong>James Gosling &amp; Henry McGilton</strong>, <em>The Java Language Environment</em>, May 1996
+    </blockquote>
+
+    <h2>Design Philosophy</h2>
+    <p>When Gosling and McGilton published <em>The Java Language Environment</em> in May 1996, they framed Java with a now-famous list of adjectives. That white paper reads like a point-by-point reaction to the pain of writing large C++ systems in the late 1980s and early 1990s.</p>
+
+    <div class="card">
+      <p><strong>Simple</strong> meant &ldquo;fewer lurking surprises,&rdquo; not &ldquo;fewer features.&rdquo; <strong>Familiar</strong> meant C-like syntax: curly braces, semicolons, <code>if</code>/<code>while</code>/<code>for</code>, the same operator precedence table. A C programmer should be able to read a Java source file on day one and guess correctly what most of it does. <strong>Object-oriented</strong> meant classes, single inheritance, interfaces, and dynamic dispatch as the default &mdash; not the bolt-on classes of early C++.</p>
+    </div>
+
+    <h2>The Primitive / Reference Divide</h2>
+    <p>Java&rsquo;s type system has two disjoint worlds: <strong>primitives</strong> and <strong>reference types</strong>. Primitives sit directly on the stack or inside objects. Reference types are pointers (internally) to heap-allocated objects.</p>
+
+    <table>
+      <thead><tr><th>Primitive</th><th>Size</th><th>Range</th></tr></thead>
+      <tbody>
+        <tr><td><code>byte</code></td><td>8 bits</td><td>&minus;128 to 127</td></tr>
+        <tr><td><code>short</code></td><td>16 bits</td><td>&minus;32,768 to 32,767</td></tr>
+        <tr><td><code>int</code></td><td>32 bits</td><td>&plusmn;2.1 &times; 10<sup>9</sup></td></tr>
+        <tr><td><code>long</code></td><td>64 bits</td><td>&plusmn;9.2 &times; 10<sup>18</sup></td></tr>
+        <tr><td><code>float</code></td><td>32 bits</td><td>IEEE 754 single</td></tr>
+        <tr><td><code>double</code></td><td>64 bits</td><td>IEEE 754 double</td></tr>
+        <tr><td><code>char</code></td><td>16 bits</td><td>UTF-16 code unit, 0 to 65,535</td></tr>
+        <tr><td><code>boolean</code></td><td>1 bit</td><td><code>true</code> or <code>false</code></td></tr>
+      </tbody>
+    </table>
+
+    <p>Every primitive has a <strong>guaranteed size and range across all JVMs</strong>. This was a sharp break from C, where <code>int</code> might be 16 or 32 bits depending on the platform. Each primitive has a corresponding wrapper class (<code>Integer</code>, <code>Long</code>, <code>Double</code>, &hellip;). Since Java 5, the compiler inserts boxing and unboxing automatically.</p>
+
+    <div class="card amber">
+      <p><strong>The billion-dollar mistake.</strong> Tony Hoare called null references his &ldquo;billion-dollar mistake&rdquo; &mdash; the unchecked null reference, which he invented for ALGOL W in 1965. Java inherited it whole. Any reference variable can be <code>null</code>, and dereferencing null throws <code>NullPointerException</code>. Modern Java has tools (<code>Optional</code>, nullability annotations, pattern matching, Project Valhalla&rsquo;s eventual value classes) that mitigate the problem without removing null.</p>
+    </div>
+
+    <h2>var &mdash; Local Variable Type Inference (Java 10)</h2>
+    <p>JEP 286 added <code>var</code> for local variable declarations:</p>
+
+<pre><code>var list = new ArrayList&lt;String&gt;();   // inferred as ArrayList&lt;String&gt;
+var length = list.size();              // inferred as int</code></pre>
+
+    <p><code>var</code> is <strong>not a dynamic type</strong>. The compiler infers the exact static type from the initializer and bakes it into the bytecode. <code>var</code> is not allowed for fields, method parameters, or return types &mdash; Brian Goetz and the JEP explicitly scoped it to locals to keep API signatures explicit.</p>
+
+    <h2>Classes and Objects</h2>
+
+<pre><code>package com.example.geometry;
+
+public final class Point {
+    private final double x;
+    private final double y;
+
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public double x() { return x; }
+    public double y() { return y; }
+
+    public double distanceTo(Point other) {
+        double dx = x - other.x;
+        double dy = y - other.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Point p)) return false;
+        return Double.compare(x, p.x) == 0
+            &amp;&amp; Double.compare(y, p.y) == 0;
+    }
+
+    @Override public int hashCode() { return Objects.hash(x, y); }
+    @Override public String toString() { return "Point[x=" + x + ", y=" + y + "]"; }
+}</code></pre>
+
+    <p>This example covers: package declaration, <code>public final class</code>, private final fields, constructor, accessor methods, <code>equals</code>/<code>hashCode</code>/<code>toString</code> contract, and pattern matching <code>instanceof</code> (Java 16+).</p>
+
+    <h2>Access Modifiers</h2>
+    <table>
+      <thead><tr><th>Modifier</th><th>Visibility</th></tr></thead>
+      <tbody>
+        <tr><td><code>public</code></td><td>Accessible everywhere</td></tr>
+        <tr><td><code>protected</code></td><td>Same package + subclasses</td></tr>
+        <tr><td><em>package-private (default)</em></td><td>Same package only</td></tr>
+        <tr><td><code>private</code></td><td>Enclosing class only</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Generics (Java 5, JSR 14)</h2>
+    <p>Generics were added in Java 5 to catch collection type errors at compile time. The design was led by <strong>Gilad Bracha</strong> and <strong>Martin Odersky</strong> (who would go on to create Scala). The key compromise: <strong>type erasure</strong>. Generic type information exists only at compile time. At runtime, <code>List&lt;String&gt;</code> and <code>List&lt;Integer&gt;</code> are both just <code>List</code>. This preserved binary compatibility with pre-generics code but added the surprises that Java programmers learn to work around.</p>
+
+<pre><code>public static &lt;T extends Comparable&lt;T&gt;&gt; T max(List&lt;T&gt; list) {
+    T result = list.get(0);
+    for (T item : list) {
+        if (item.compareTo(result) &gt; 0) result = item;
+    }
+    return result;
+}
+
+// Wildcards and the PECS rule: Producer Extends, Consumer Super
+public static void copy(List&lt;? extends Number&gt; src, List&lt;? super Number&gt; dst) {
+    for (Number n : src) dst.add(n);
+}</code></pre>
+
+    <p>Java 7 added the <strong>diamond operator</strong> <code>&lt;&gt;</code> for inferring generic type arguments: <code>Map&lt;String, List&lt;Integer&gt;&gt; map = new HashMap&lt;&gt;();</code>.</p>
+
+    <h2>Collections Framework (Java 1.2)</h2>
+    <p>The Collections Framework was added to Java 1.2 (&ldquo;Java 2,&rdquo; December 1998) and designed primarily by <strong>Joshua Bloch</strong>. It replaced the ad-hoc <code>Vector</code> and <code>Hashtable</code> of Java 1.0/1.1 with a systematic hierarchy:</p>
+
+    <table>
+      <thead><tr><th>Interface</th><th>Implementations</th></tr></thead>
+      <tbody>
+        <tr><td><code>List</code></td><td><code>ArrayList</code>, <code>LinkedList</code>, <code>Vector</code> (legacy), <code>Stack</code> (legacy)</td></tr>
+        <tr><td><code>Set</code></td><td><code>HashSet</code>, <code>TreeSet</code>, <code>LinkedHashSet</code></td></tr>
+        <tr><td><code>Queue</code> / <code>Deque</code></td><td><code>ArrayDeque</code>, <code>PriorityQueue</code>, <code>LinkedList</code></td></tr>
+        <tr><td><code>Map</code></td><td><code>HashMap</code>, <code>TreeMap</code>, <code>LinkedHashMap</code>, <code>Hashtable</code> (legacy)</td></tr>
+      </tbody>
+    </table>
+
+    <p>The <code>Iterator</code> and <code>Iterable</code> interfaces enable the enhanced <code>for</code> loop (Java 5):</p>
+
+<pre><code>for (String name : names) {
+    System.out.println(name);
+}</code></pre>
+
+    <h2>Exceptions</h2>
+    <p>Java famously distinguishes <strong>checked</strong> from <strong>unchecked</strong> exceptions:</p>
+
+    <ul>
+      <li><strong>Checked exceptions</strong> (subclasses of <code>Exception</code> but not <code>RuntimeException</code>) must be declared in the method&rsquo;s <code>throws</code> clause or caught.</li>
+      <li><strong>Unchecked exceptions</strong> (<code>RuntimeException</code> and subclasses) propagate freely without declaration.</li>
+      <li><strong>Errors</strong> (<code>Error</code> and subclasses) represent serious problems like <code>OutOfMemoryError</code>, conventionally not caught.</li>
+    </ul>
+
+    <p>The checked exceptions experiment is widely considered Java&rsquo;s most controversial design choice &mdash; the only mainstream language to enforce them. Modern wisdom (Bloch, Goetz) is to use unchecked exceptions for most cases.</p>
+
+<pre><code>// Try-with-resources (Java 7, JEP 238)
+try (BufferedReader br = Files.newBufferedReader(path)) {
+    String line;
+    while ((line = br.readLine()) != null) {
+        process(line);
+    }
+} catch (IOException e) {
+    throw new UncheckedIOException(e);
+}
+
+// Multi-catch (Java 7)
+try {
+    // ...
+} catch (IOException | SQLException e) {
+    log.error("data access failed", e);
+}</code></pre>
+
+    <h2>Lambdas and Functional Interfaces (Java 8, JSR 335)</h2>
+    <p>Java 8 (March 2014) was the single biggest language release since Java 5. Lambdas had been in design for eight years. A lambda is an anonymous function that can be passed around as a value:</p>
+
+<pre><code>// Lambda expression
+Comparator&lt;String&gt; byLength = (a, b) -&gt; a.length() - b.length();
+
+// Method reference
+Comparator&lt;String&gt; byLength2 = Comparator.comparingInt(String::length);
+
+// Used with collections
+List&lt;String&gt; names = new ArrayList&lt;&gt;(List.of("Charlie", "Al", "Bob"));
+names.sort(Comparator.comparing(String::length));
+
+// Functional interfaces from java.util.function
+Function&lt;String, Integer&gt; parseInt = Integer::parseInt;
+Predicate&lt;String&gt; nonEmpty = s -&gt; !s.isEmpty();
+Consumer&lt;String&gt; printer = System.out::println;
+Supplier&lt;List&lt;String&gt;&gt; factory = ArrayList::new;</code></pre>
+
+    <p>A <strong>functional interface</strong> is any interface with exactly one abstract method (a SAM: Single Abstract Method). The <code>@FunctionalInterface</code> annotation asserts the intent.</p>
+
+    <h2>Streams (Java 8)</h2>
+    <p>Streams decouple iteration from transformation. A pipeline describes <em>what</em> to compute, not <em>how</em> to loop:</p>
+
+<pre><code>import java.util.stream.*;
+
+// Count the total length of strings starting with "J"
+int total = names.stream()
+    .filter(s -&gt; s.startsWith("J"))
+    .mapToInt(String::length)
+    .sum();
+
+// Group people by department
+Map&lt;String, List&lt;Person&gt;&gt; byDept = people.stream()
+    .collect(Collectors.groupingBy(Person::department));
+
+// Parallel computation (uses ForkJoinPool.commonPool)
+double average = measurements.parallelStream()
+    .mapToDouble(Measurement::value)
+    .average()
+    .orElse(0.0);</code></pre>
+
+    <p>Stream operations are <strong>lazy</strong> (intermediate ops don&rsquo;t run until a terminal op is invoked) and <strong>single-use</strong> (you can&rsquo;t iterate a stream twice).</p>
+
+    <h2>Optional (Java 8)</h2>
+    <p><code>Optional&lt;T&gt;</code> is a container that may or may not hold a value. Brian Goetz&rsquo;s guidance is strict: use it for <strong>return types</strong> of methods where the absence of a result is meaningful, <em>not</em> for fields or parameters.</p>
+
+<pre><code>public Optional&lt;User&gt; findByEmail(String email) {
+    return users.stream()
+        .filter(u -&gt; u.email().equals(email))
+        .findFirst();
+}
+
+// Chain it
+String displayName = findByEmail("foxy@example.com")
+    .map(User::displayName)
+    .orElse("Unknown user");</code></pre>
+
+    <h2>Records (Java 14 preview, Java 16 standard, JEP 395)</h2>
+    <p>Records are a compact syntax for immutable data carriers. One line replaces constructor, accessors, <code>equals</code>, <code>hashCode</code>, and <code>toString</code>:</p>
+
+<pre><code>public record Point(double x, double y) {
+    // Compact constructor for validation
+    public Point {
+        if (Double.isNaN(x) || Double.isNaN(y))
+            throw new IllegalArgumentException("NaN");
+    }
+}
+
+var p = new Point(3.0, 4.0);
+System.out.println(p.x());     // accessor
+System.out.println(p);         // toString: "Point[x=3.0, y=4.0]"</code></pre>
+
+    <p>Records are implicitly <code>final</code>, their fields are <code>final</code>, and they automatically get pattern matching support (Java 21+).</p>
+
+    <h2>Sealed Classes (Java 17, JEP 409)</h2>
+    <p>Sealed classes let you declare a <em>closed</em> hierarchy. Only the named types may extend the sealed parent, enabling exhaustive pattern matching:</p>
+
+<pre><code>public sealed interface Shape
+    permits Circle, Square, Triangle {}
+
+public record Circle(double r) implements Shape {}
+public record Square(double side) implements Shape {}
+public record Triangle(double base, double height) implements Shape {}
+
+// Exhaustive switch — no default needed
+double area(Shape s) {
+    return switch (s) {
+        case Circle c -&gt; Math.PI * c.r() * c.r();
+        case Square sq -&gt; sq.side() * sq.side();
+        case Triangle t -&gt; 0.5 * t.base() * t.height();
+    };
+}</code></pre>
+
+    <h2>Pattern Matching (Java 16&ndash;21)</h2>
+    <p>Pattern matching has rolled out gradually across several Java releases:</p>
+
+    <ul>
+      <li><strong>Java 14</strong> &mdash; switch expressions with arrow syntax (preview in 12, standard in 14)</li>
+      <li><strong>Java 16</strong> &mdash; pattern <code>instanceof</code>: <code>if (obj instanceof String s) { ... }</code></li>
+      <li><strong>Java 21</strong> &mdash; pattern matching for <code>switch</code> with type patterns, guarded patterns, and record patterns</li>
+    </ul>
+
+<pre><code>// Java 21 record deconstruction + guarded patterns
+String describe(Shape s) {
+    return switch (s) {
+        case Circle(double r) when r &gt; 100 -&gt; "huge circle";
+        case Circle(double r) -&gt; "circle of radius " + r;
+        case Square(double side) -&gt; "square of side " + side;
+        case Triangle(double b, double h) -&gt; "triangle " + b + "x" + h;
+    };
+}</code></pre>
+
+    <h2>Text Blocks (Java 15, JEP 378)</h2>
+
+<pre><code>String json = """
+    {
+        "name": "Foxy",
+        "role": "sysadmin",
+        "languages": ["bash", "perl", "c", "cpp", "java"]
+    }
+    """;</code></pre>
+
+    <p>Text blocks eliminate the escaping dance for multi-line string literals. Leading whitespace is normalized by the compiler based on the position of the closing delimiter.</p>
+
+    <h2>Enums (Java 5)</h2>
+
+<pre><code>public enum Planet {
+    MERCURY(3.303e+23, 2.4397e6),
+    VENUS  (4.869e+24, 6.0518e6),
+    EARTH  (5.976e+24, 6.37814e6);
+
+    private final double mass;
+    private final double radius;
+
+    Planet(double mass, double radius) {
+        this.mass = mass;
+        this.radius = radius;
+    }
+
+    public double surfaceGravity() {
+        return 6.67300E-11 * mass / (radius * radius);
+    }
+}</code></pre>
+
+    <p>Java enums are <strong>full classes</strong>: they can have fields, methods, and even override methods per-constant. This is a big upgrade over the C/C++ <code>enum</code> integer idiom.</p>
+
+    <h2>Annotations</h2>
+    <p>Annotations are metadata that can be attached to declarations (classes, methods, fields, parameters). Common built-ins:</p>
+
+    <ul>
+      <li><code>@Override</code> &mdash; assert this method overrides a superclass method</li>
+      <li><code>@Deprecated</code> &mdash; mark as deprecated</li>
+      <li><code>@SuppressWarnings("unchecked")</code> &mdash; quiet specific compiler warnings</li>
+      <li><code>@FunctionalInterface</code> &mdash; assert SAM interface</li>
+      <li><code>@SafeVarargs</code> &mdash; assert no heap pollution with varargs + generics</li>
+    </ul>
+
+    <p>Frameworks like Spring, JPA, and JUnit use annotations extensively (<code>@Autowired</code>, <code>@Entity</code>, <code>@Test</code>) to replace XML config.</p>
+
+    <h2>Modules (Java 9, JEP 261)</h2>
+    <p>Project Jigsaw delivered a module system: a <code>module-info.java</code> declares what a module exports, what it requires, and what services it provides. The JDK itself is modular (<code>java.base</code>, <code>java.sql</code>, etc.). Modules were controversial &mdash; many argued they weren&rsquo;t worth the cost &mdash; but they enabled <code>jlink</code> to produce small runtime images and clarified the JDK&rsquo;s internal boundaries.</p>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CPP</td><td>C++</td><td>Direct lineage; Java is C++ with sharp simplifications (no multiple inheritance, no operator overloading, no pointers)</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>Python&rsquo;s <code>typing</code> module brings some of Java&rsquo;s discipline; Java 10&rsquo;s <code>var</code> borrows Python&rsquo;s flexibility</td></tr>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td>Java&rsquo;s primitives have guaranteed sizes; C&rsquo;s don&rsquo;t. One of Gosling&rsquo;s deliberate fixes.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="oop.html">Object-Oriented Java</a></li>
+        <li><a href="jvm.html">JVM &amp; Concurrency</a></li>
+        <li><a href="frameworks.html">Frameworks &amp; Enterprise</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Java Language &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

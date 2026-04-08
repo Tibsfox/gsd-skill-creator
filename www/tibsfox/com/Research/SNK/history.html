@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Culture &mdash; Python &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-snk">
+  <header>
+    <h1>History &amp; Culture</h1>
+    <div class="subtitle">Guido van Rossum, BDFL, the Zen, PEPs, the Python 2/3 Schism, and the Steering Council Era</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="ecosystem.html">PyPI</a>
+      <a href="scientific.html">Science</a>
+      <a href="ml-ai.html">ML/AI</a>
+      <a href="web.html">Web</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html" class="active">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Python was born over a Christmas break in December 1989 at Centrum Wiskunde &amp; Informatica (CWI) in Amsterdam &mdash; the same research institute where Edsger Dijkstra had famously refined structured programming. Guido van Rossum, bored and looking for &ldquo;a hobby programming project that would keep me occupied,&rdquo; started writing an interpreter for a new scripting language descended from ABC. He named it after <em>Monty Python&rsquo;s Flying Circus</em>.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- GUIDO VAN ROSSUM                                              -->
+    <!-- ============================================================ -->
+
+    <h2>Guido van Rossum &mdash; The Reluctant Dictator</h2>
+    <div class="card">
+      <p><strong>Born 1956, Netherlands.</strong> Master&rsquo;s in mathematics and computer science from University of Amsterdam, 1982. Joined CWI in Amsterdam, where he worked on the <strong>ABC language</strong> &mdash; a teaching language by Lambert Meertens and Leo Geurts. ABC left a deep imprint: Guido admired its clean syntax, indentation over braces, high-level data types, and respect for the reader. He also saw its weaknesses: monolithic, hard to extend, couldn&rsquo;t talk to Unix.</p>
+      <p>December 1989. CWI&rsquo;s offices closed for Christmas. Guido wanted a hobby project. He started writing Python &mdash; ABC&rsquo;s readability with C&rsquo;s pragmatism. He needed a name: short, unique, slightly mysterious. He was a fan of Monty Python&rsquo;s Flying Circus. <strong>The language is named after the comedy show, not the reptile.</strong></p>
+    </div>
+
+    <h3>BDFL Era</h3>
+    <p>As Python grew through the 1990s, Guido became the final arbiter of every contentious design question. The community gave him a half-joking, half-affectionate title: <strong>Benevolent Dictator For Life (BDFL)</strong>. The &ldquo;benevolent&rdquo; mattered. He listened exhaustively on mailing list threads, but when consensus failed, he made the call and the community moved on. The BDFL model produced an unusually coherent language because one taste was filtering every PEP.</p>
+
+    <h3>Career Through Industry</h3>
+    <table>
+      <thead><tr><th>Years</th><th>Employer</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>1982&ndash;1998</td><td>CWI, Amsterdam</td><td>Research programmer, created Python</td></tr>
+        <tr><td>Late 1990s</td><td>CNRI, Reston VA</td><td>Corporation for National Research Initiatives</td></tr>
+        <tr><td>2000&ndash;2003</td><td>BeOpen, Zope Corp</td><td>Python stewardship transitions</td></tr>
+        <tr><td>2005&ndash;2012</td><td><strong>Google</strong></td><td>Half-time on Python itself. Helped build Mondrian code review</td></tr>
+        <tr><td>2013&ndash;2019</td><td><strong>Dropbox</strong></td><td>Largest production Python deployment at the time</td></tr>
+        <tr><td>2019&ndash;2020</td><td>Retired</td><td>(Briefly)</td></tr>
+        <tr><td>2020&ndash;present</td><td><strong>Microsoft</strong></td><td>Distinguished Engineer, Faster CPython initiative</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The July 2018 Abdication</h3>
+    <div class="card">
+      <p>In July 2018, after a long and bruising mailing list battle over <strong>PEP 572</strong> (the &ldquo;walrus operator&rdquo; <code>:=</code>), Guido stunned the community by stepping down as BDFL. His announcement to python-committers said, in part, that he was &ldquo;tired&rdquo; and &ldquo;no longer want[ed] to fight.&rdquo; He was not leaving Python; he simply refused to be its dictator anymore. He told the core developers to figure out their own governance &mdash; and he meant it.</p>
+      <p>The python-dev community responded with PEP 8016 and adopted a <strong>Steering Council</strong>: five elected core developers, reelected each year, who would collectively make the final calls Guido used to make alone. The first council: Barry Warsaw, Brett Cannon, Carol Willing, Guido himself (yes, elected), and Nick Coghlan. <strong>Python survived the loss of its dictator. That is a rare thing in language communities.</strong></p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TIMELINE                                                      -->
+    <!-- ============================================================ -->
+
+    <h2>Timeline &mdash; From CWI Hobby to Planetary Infrastructure</h2>
+    <table>
+      <thead><tr><th>Date</th><th>Event</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Dec 1989</strong></td><td>Guido starts writing the Python interpreter at CWI over Christmas break</td></tr>
+        <tr><td>Feb 20, 1991</td><td>Python <strong>0.9.0</strong> posted to <code>alt.sources</code>. Already has classes, exceptions, lists, dicts, strings</td></tr>
+        <tr><td>Jan 1994</td><td>Python <strong>1.0</strong>. Lambda, map, filter, reduce. First international Python workshop at NIST, Gaithersburg MD</td></tr>
+        <tr><td>Oct 16, 2000</td><td>Python <strong>2.0</strong>. List comprehensions, cycle-detecting GC, Unicode as first-class, augmented assignment. PEP 1 establishes the PEP process</td></tr>
+        <tr><td><strong>Dec 3, 2008</strong></td><td>Python <strong>3.0</strong>. Intentionally backwards-incompatible. <code>print</code> is a function, <code>str</code> is Unicode, <code>/</code> is float division. The Great Migration begins</td></tr>
+        <tr><td>Apr 2010</td><td>Python <strong>2.7</strong>. Declared the final 2.x. Long support window to give the world time to migrate</td></tr>
+        <tr><td>2014</td><td>Python 3.4 &mdash; <code>enum</code>, <code>pathlib</code>, <code>asyncio</code> provisional</td></tr>
+        <tr><td>2015</td><td>Python 3.5 &mdash; <strong><code>async</code>/<code>await</code></strong>, type hints (PEP 484), matrix <code>@</code> operator</td></tr>
+        <tr><td>2016</td><td>Python 3.6 &mdash; f-strings (PEP 498), variable annotations, dict insertion order implementation detail</td></tr>
+        <tr><td>2017</td><td>Python 3.7 &mdash; Dataclasses (PEP 557), dict insertion order officially guaranteed</td></tr>
+        <tr><td><strong>Jul 2018</strong></td><td><strong>Guido resigns as BDFL</strong> after PEP 572 walrus operator battle</td></tr>
+        <tr><td>2019</td><td>Python 3.8 &mdash; Walrus operator <code>:=</code>, positional-only parameters, f-string <code>=</code> debugging</td></tr>
+        <tr><td><strong>Jan 1, 2020</strong></td><td><strong>Python 2 End of Life.</strong> The <code>python.org</code> countdown clock hits zero</td></tr>
+        <tr><td>2020</td><td>Python 3.9 &mdash; <code>dict | dict</code>, <code>removeprefix</code>, generic types in std collections</td></tr>
+        <tr><td>2021</td><td>Python 3.10 &mdash; <strong>Structural pattern matching</strong> (<code>match</code>/<code>case</code>), better error messages</td></tr>
+        <tr><td>2022</td><td>Python 3.11 &mdash; <strong>10&ndash;60% faster</strong> (Faster CPython project). Exception groups, <code>tomllib</code>, fine-grained tracebacks</td></tr>
+        <tr><td>2023</td><td>Python 3.12 &mdash; Per-interpreter GIL groundwork (PEP 684), type parameter syntax (PEP 695)</td></tr>
+        <tr><td>2024</td><td>Python 3.13 &mdash; <strong>Experimental free-threaded build</strong> (no-GIL, PEP 703), <strong>experimental JIT</strong> (copy-and-patch, PEP 744), improved REPL</td></tr>
+        <tr><td>2025</td><td>Python 3.14 &mdash; JIT matures, no-GIL build officially supported (opt-in), deferred annotation evaluation (PEP 649)</td></tr>
+        <tr><td>2026</td><td><strong>Python 3.14.4</strong> current. 3.15 in development.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- THE SCHISM                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>The Python 2/3 Schism &mdash; The Great Migration</h2>
+    <div class="card">
+      <p>Python 2 was a roaring success through the 2000s. It was also accumulating warts: a confused string-vs-bytes model, integer division that surprised every newcomer (<code>1/2 == 0</code>), <code>print</code> as a magical statement, classic vs. new-style classes, and a standard library full of inconsistent naming. Guido decided the warts could not be fixed in place. They needed a hard cut.</p>
+      <p>The 2-to-3 migration was announced as a multi-year project. What no one anticipated was that it would take <strong>over a decade</strong>. The Python ecosystem was effectively split. Libraries had to support both simultaneously via <code>six</code>, <code>future</code>, and other shims. Major projects (NumPy, Django, Twisted, Pillow) gradually committed to drop Python 2. The <code>python3statement.org</code> campaign organized projects to set firm 2.x sunset dates. The Python 2 EOL date was extended again and again as the ecosystem dragged its feet. January 1, 2020 finally closed the book.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE ZEN                                                       -->
+    <!-- ============================================================ -->
+
+    <h2>The Zen of Python &mdash; PEP 20</h2>
+    <p>In June 1999, <strong>Tim Peters</strong> posted 19 aphorisms summarizing Python&rsquo;s design philosophy to python-list. They were collected as PEP 20 and became a kind of constitution. Type <code>import this</code> in any Python interpreter to read them.</p>
+    <div class="card">
+      <p>The most famous line is the 13th: <strong>&ldquo;There should be one&mdash; and preferably only one &mdash;obvious way to do it.&rdquo;</strong> Pythonistas abbreviate it <strong>TSBOWTDI</strong>. It is a deliberate, public rebuke to Perl&rsquo;s beloved <strong>TMTOWTDI</strong>. Where Perl celebrated expressive freedom and the linguist&rsquo;s joy of synonyms, Python staked its identity on the opposite claim: that consistency between programmers is more valuable than personal style.</p>
+      <p>The &ldquo;unless you&rsquo;re Dutch&rdquo; line (14) is a wink at Guido. The Zen leaves a hidden 20th slot in PEP 20 itself, intentionally empty &mdash; reserved for Guido. It is a piece of deadpan community folklore.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PEP PROCESS                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>The PEP Process</h2>
+    <p>Python&rsquo;s governance is built on <strong>PEPs &mdash; Python Enhancement Proposals</strong>. PEP 1 (Barry Warsaw, Jeremy Hylton, David Goodger, August 2000) is modeled on the IETF&rsquo;s RFC process. If you want to change the language, write a PEP. Describe motivation, rationale, specification, backwards compatibility, reference implementation, and rejected alternatives. Post it. Argue about it. The Steering Council will pronounce.</p>
+
+    <h3>Canonical PEPs</h3>
+    <table>
+      <thead><tr><th>PEP</th><th>Topic</th><th>Author</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PEP 1</strong></td><td>The PEP process itself</td><td>Warsaw, Hylton, Goodger (2000)</td></tr>
+        <tr><td><strong>PEP 8</strong></td><td>Style Guide for Python Code &mdash; &ldquo;a complete sentence in code review&rdquo;</td><td>Guido + Warsaw (2001)</td></tr>
+        <tr><td><strong>PEP 20</strong></td><td>The Zen of Python</td><td>Tim Peters (1999/2004)</td></tr>
+        <tr><td><strong>PEP 257</strong></td><td>Docstring conventions</td><td>Goodger + Guido (2001)</td></tr>
+        <tr><td><strong>PEP 484</strong></td><td><strong>Type Hints</strong> &mdash; the most consequential PEP of the 2010s</td><td>Guido, Jukka Lehtosalo, &#321;ukasz Langa (2014)</td></tr>
+        <tr><td>PEP 498</td><td>f-strings</td><td>Eric V. Smith (2015)</td></tr>
+        <tr><td>PEP 557</td><td>Data Classes</td><td>Eric V. Smith (2017)</td></tr>
+        <tr><td><strong>PEP 572</strong></td><td>Walrus operator &mdash; the most contentious PEP in Python history</td><td>Angelico, Peters, Guido (2018)</td></tr>
+        <tr><td>PEP 634</td><td>Structural pattern matching</td><td>Guido, Brandt Bucher, Peters (2020)</td></tr>
+        <tr><td><strong>PEP 703</strong></td><td>Making the GIL optional</td><td>Sam Gross (2022)</td></tr>
+        <tr><td>PEP 744</td><td>JIT compilation</td><td>Brandt Bucher, Ken Jin (2024)</td></tr>
+        <tr><td>PEP 8016</td><td>Steering Council governance model</td><td>Nathaniel J. Smith, Donald Stufft (2018)</td></tr>
+      </tbody>
+    </table>
+    <p>The PEP process is deliberately slow. Most PEPs are rejected, deferred, or quietly forgotten. <strong>The slowness is the feature.</strong> Python rarely regrets a feature it has shipped, because the friction filters out most bad ideas before they reach <code>master</code>.</p>
+
+    <!-- ============================================================ -->
+    <!-- PSF                                                           -->
+    <!-- ============================================================ -->
+
+    <h2>The Python Software Foundation</h2>
+    <p>Incorporated <strong>2001</strong> as a 501(c)(3) non-profit in Delaware. Mission: &ldquo;to promote, protect, and advance the Python programming language, and to support and facilitate the growth of a diverse and international community of Python programmers.&rdquo;</p>
+    <div class="card">
+      <p><strong>What the PSF does:</strong></p>
+      <ul>
+        <li>Holds the copyright to CPython under the PSF License (permissive, GPL-compatible)</li>
+        <li>Runs <strong>PyCon US</strong>, the largest annual Python conference (2003&ndash;present, draws thousands)</li>
+        <li>Sponsors regional PyCons worldwide: EuroPython, PyCon AU, PyCon India, PyCon JP, PyCon Africa</li>
+        <li>Issues grants for events, education, and infrastructure, especially in underrepresented regions</li>
+        <li>Funds the Packaging Working Group and tools like pip, PyPI, and Warehouse</li>
+        <li>Funded the first <strong>Developer-in-Residence</strong> position (&#321;ukasz Langa, 2021, sponsored by Google)</li>
+        <li>Maintains the Code of Conduct governing PSF events and community spaces</li>
+      </ul>
+      <p><strong>Sponsors:</strong> Google, Microsoft, Meta, Bloomberg, JetBrains, AWS, NVIDIA, Intel, Capital One. Bloomberg in particular has been a long-time visible patron, contributing developer time as well as money.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- WHO USES PYTHON                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Who Uses Python</h2>
+    <table>
+      <thead><tr><th>Organization</th><th>Use Case</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Google</strong></td><td>Guido worked here. YouTube backend, internal tools, ML research</td></tr>
+        <tr><td><strong>Instagram</strong></td><td>One of the largest Django deployments ever. Billions of requests/day</td></tr>
+        <tr><td><strong>Dropbox</strong></td><td>Desktop client largely in Python. Guido worked here too</td></tr>
+        <tr><td><strong>Meta / Facebook</strong></td><td>PyTorch created here. Cinder runtime (Instagram&rsquo;s Python fork)</td></tr>
+        <tr><td><strong>Netflix</strong></td><td>Internal tooling, data pipelines, ML platform</td></tr>
+        <tr><td><strong>Spotify</strong></td><td>Backend services, data science, ML recommendations</td></tr>
+        <tr><td><strong>Reddit</strong></td><td>Originally Lisp, rewritten in Python. Still largely Python-based</td></tr>
+        <tr><td><strong>YouTube</strong></td><td>Major parts of the Google-era backend in Python</td></tr>
+        <tr><td><strong>NASA / JPL</strong></td><td>Mission operations, telemetry, data analysis &mdash; everywhere</td></tr>
+        <tr><td><strong>CERN</strong></td><td>Analysis pipelines for the LHC. SciPy stack is foundational</td></tr>
+        <tr><td><strong>OpenAI, Anthropic, DeepMind</strong></td><td>Every major AI lab. PyTorch and JAX are the primary tools</td></tr>
+        <tr><td><strong>Every data scientist in the world</strong></td><td>Jupyter + pandas + scikit-learn is the default toolkit</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>Sister languages: TSBOWTDI vs TMTOWTDI</td></tr>
+        <tr><td>BRC</td><td>Community Infrastructure</td><td>PyCon, PSF, Steering Council &mdash; community governance model</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies</td><td>Every major AI lab runs on Python</td></tr>
+        <tr><td>NASA</td><td>NASA Mission Series</td><td>JPL, mission ops, telemetry &mdash; Python everywhere</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Core Language</a></li>
+        <li><a href="ecosystem.html">PyPI Ecosystem</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>History &amp; Culture &middot; The Snake &mdash; Python &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Rosetta &mdash; MLC</title><link rel="stylesheet" href="../../brand.css"><link rel="stylesheet" href="style.css"><script src="../series.js" defer></script></head>
+<body class="project-mlc">
+  <header><h1>Rosetta Integration</h1><div class="subtitle">Machine Code as the Universal Output &mdash; Every Language, Every Compiler, Every JIT</div>
+    <nav><a href="index.html">Overview</a> <a href="encoding.html">Encoding</a> <a href="execution.html">Execution</a> <a href="formats.html">Formats</a> <a href="microcode.html">Microcode</a> <a href="security.html">Security</a> <a href="rosetta.html" class="active">Rosetta</a> <a href="education.html">Learn</a> <a href="history.html">History</a></nav></header>
+  <main>
+    <blockquote>Machine code is where all software converges. Every compiler, every JIT, every runtime eventually produces machine code. It is the universal output format.</blockquote>
+
+    <h2>How Each Language Reaches Machine Code</h2>
+    <table>
+      <thead><tr><th>Language</th><th>Path to machine code</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td><strong>C / C++ / Rust</strong></td><td>Source &rarr; compiler (GCC/Clang/rustc) &rarr; <strong>machine code in .text section</strong></td><td>Compile time (AOT)</td></tr>
+        <tr><td><strong>Go</strong></td><td>Source &rarr; Go compiler &rarr; <strong>machine code</strong> (static binary)</td><td>Compile time (AOT)</td></tr>
+        <tr><td><strong>Java</strong></td><td>Source &rarr; javac &rarr; bytecode &rarr; HotSpot JIT &rarr; <strong>machine code</strong></td><td>Runtime (JIT)</td></tr>
+        <tr><td><strong>JavaScript</strong></td><td>Source &rarr; V8 Ignition bytecode &rarr; TurboFan &rarr; <strong>machine code</strong></td><td>Runtime (JIT)</td></tr>
+        <tr><td><strong>Python</strong></td><td>Source &rarr; CPython bytecode &rarr; interpreted by C code &rarr; C compiled to <strong>machine code</strong></td><td>The interpreter itself is AOT machine code</td></tr>
+        <tr><td><strong>Assembly</strong></td><td>Mnemonics &rarr; assembler (NASM/GAS) &rarr; <strong>machine code</strong></td><td>Assemble time (1:1 mapping)</td></tr>
+        <tr><td><strong>WebAssembly</strong></td><td>.wasm binary &rarr; browser/runtime JIT &rarr; <strong>machine code</strong></td><td>Runtime (JIT/AOT)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Complete Stack</h2>
+    <ol>
+      <li><strong>Source code</strong> (Python, Java, C++, Rust, Go, JavaScript, &hellip;)</li>
+      <li><strong>Intermediate representations</strong> (LLVM IR, Java bytecode, V8 bytecode, Wasm)</li>
+      <li><strong>Assembly language</strong> (human-readable) &mdash; <a href="../ASM/index.html">ASM project</a></li>
+      <li><strong>Machine code</strong> (binary opcodes) &mdash; <em>this project</em></li>
+      <li><strong>Microcode / micro-ops</strong> (CISC internal decomposition)</li>
+      <li><strong>Logic gates</strong> (AND, OR, NOT, XOR)</li>
+      <li><strong>Transistors</strong> (CMOS, FinFET, GAA)</li>
+      <li><strong>Physics</strong> (electron flow, quantum tunneling at 3nm)</li>
+    </ol>
+
+    <h2>WebAssembly as Virtual Machine Code</h2>
+    <div class="card">
+      <p>WebAssembly (.wasm) serves the same <em>role</em> as machine code &mdash; it&rsquo;s the lowest-level target that developers compile to &mdash; but it is <strong>not real machine code</strong>. It is a portable, validated, sandboxed binary format that JIT compilers translate to real machine code (x86-64 or ARM64) at runtime. Wasm is &ldquo;virtual machine code&rdquo; in the same way that Java bytecode is &ldquo;virtual machine code&rdquo; for the JVM.</p>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table><thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead><tbody>
+      <tr><td>ASM</td><td>Assembly</td><td>Assembly is the human-readable form of machine code; one-to-one mapping</td></tr>
+      <tr><td>CEE</td><td>C</td><td>C was designed as &ldquo;portable assembly&rdquo; &mdash; its output IS machine code</td></tr>
+      <tr><td>JAV</td><td>Java</td><td>Java bytecode is &ldquo;virtual machine code&rdquo; for the JVM; JIT produces real machine code</td></tr>
+      <tr><td>JTS</td><td>JavaScript</td><td>V8 TurboFan produces machine code; Wasm is virtual machine code for the browser</td></tr>
+    </tbody></table>
+    <div class="cross-links"><h4>Related Modules</h4><ul><li><a href="index.html">Overview</a></li><li><a href="encoding.html">Encoding</a></li><li><a href="execution.html">Execution</a></li><li><a href="formats.html">Formats</a></li><li><a href="microcode.html">Microcode</a></li><li><a href="security.html">Security</a></li><li><a href="education.html">Learn</a></li><li><a href="history.html">History</a></li></ul></div>
+  </main>
+  <footer><p>Rosetta &middot; PNW Research Series &middot; April 2026</p><p><a href="../index.html">PNW Research Series</a></p></footer>
+</body></html>

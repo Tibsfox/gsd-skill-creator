@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Change Operations — SNO Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2a2a;
+            --accent: #FF9100;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4DB6AC;
+            --border: #2a3a3a;
+            --primary: #004D40;
+            --net: #A5D6A7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(77,182,172,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNO — Systems Network Operations<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNO Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="network-change-operations">Network Change Operations</h1>
+    <p><strong>Module:</strong> 02 – Systems Network Operations (SNO)
+    Research Series <strong>Date:</strong> 2026-04-08
+    <strong>Domain:</strong> Network Change Control, Configuration
+    Management, Rollback Procedures</p>
+    <hr />
+    <p>Network changes are the single largest source of network outages.
+    Industry surveys from Uptime Institute and Gartner consistently
+    attribute 60-80% of network downtime to human error during
+    configuration changes. The remaining fraction splits between
+    hardware failures and external events like fiber cuts or power loss.
+    This is not a surprise – a network device is a single point of
+    amplification. A misconfigured access list on a server affects one
+    service. A misconfigured access list on a core router affects every
+    service behind it. The blast radius of network changes is
+    categorically different from application changes, and the change
+    process must reflect that difference.</p>
+    <p>This module covers the full lifecycle of network change
+    operations: scheduling maintenance windows with carriers and
+    customers, executing pre-change and post-change verification,
+    managing configuration backups and version control, implementing
+    rollback procedures that actually work under pressure, handling
+    emergency changes when there is no time for the normal process,
+    executing bulk changes across hundreds of devices, and validating
+    changes in lab environments before they touch production. The SOO
+    module (03 – Change Management &amp; Control) covers the
+    organizational framework of change management – ITIL, CABs, risk
+    scoring. This module is about the hands-on network-specific
+    execution that lives inside that framework.</p>
+    <hr />
+    <h2 id="maintenance-window-scheduling">1. Maintenance Window
+    Scheduling</h2>
+    <h3 id="carrier-coordination">Carrier Coordination</h3>
+    <p>Network changes frequently involve circuits, cross-connects, or
+    services provided by carriers, ISPs, or colocation providers.
+    Carrier coordination adds lead time that application deployments
+    never face. A BGP peering change requires the upstream provider to
+    modify their route policy. A circuit migration requires the carrier
+    to provision the new circuit and schedule the cutover. A
+    cross-connect installation requires the colocation provider to
+    dispatch a technician.</p>
+    <p>Standard carrier lead times for common operations:</p>
+    <table>
+    <colgroup>
+    <col style="width: 29%" />
+    <col style="width: 51%" />
+    <col style="width: 18%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Operation</th>
+    <th>Typical Lead Time</th>
+    <th>Notes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>BGP policy change (existing peer)</td>
+    <td>1-5 business days</td>
+    <td>Depends on provider NOC responsiveness</td>
+    </tr>
+    <tr>
+    <td>New circuit provisioning</td>
+    <td>30-90 days</td>
+    <td>Metro fiber faster than long-haul</td>
+    </tr>
+    <tr>
+    <td>Cross-connect installation</td>
+    <td>3-10 business days</td>
+    <td>Colo-dependent</td>
+    </tr>
+    <tr>
+    <td>Circuit bandwidth upgrade</td>
+    <td>5-15 business days</td>
+    <td>Same fiber, different optic or rate</td>
+    </tr>
+    <tr>
+    <td>IP address block assignment</td>
+    <td>1-5 business days</td>
+    <td>ARIN/RIPE allocation if new space needed</td>
+    </tr>
+    <tr>
+    <td>DNS delegation change</td>
+    <td>24-72 hours</td>
+    <td>TTL propagation after registrar update</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>The coordination trap:</strong> scheduling a maintenance
+    window for Tuesday night when the carrier’s change is scheduled for
+    Wednesday morning. Always confirm the carrier’s maintenance window
+    aligns with yours before committing to a customer notification. Get
+    the carrier’s change ticket number and a named contact who will be
+    available during your window.</p>
+    <h3 id="customer-notification">Customer Notification</h3>
+    <p>Customer notification follows a lifecycle that scales with change
+    impact:</p>
+    <p><strong>Standard changes</strong> (pre-authorized, low risk):
+    notification 3-5 business days in advance, single email, no expected
+    impact or brief sub-second failover.</p>
+    <p><strong>Normal changes</strong> (requires approval, moderate
+    risk): notification 5-10 business days in advance, email plus status
+    page update, expected impact window and duration documented,
+    reminder 24 hours before, start/progress/completion notifications
+    during execution.</p>
+    <p><strong>Emergency changes</strong> (immediate, unplanned):
+    notification concurrent with or immediately after execution, root
+    cause and duration documented within 24 hours.</p>
+    <p>The notification should answer five questions from the customer’s
+    perspective: What is changing? When is the maintenance window? What
+    will the customer experience (outage, degraded performance, brief
+    failover)? How long will the impact last? Who do they contact if
+    something is wrong?</p>
+    <h3 id="time-zone-considerations">Time Zone Considerations</h3>
+    <p>Global networks have no good maintenance windows. When it is 2:00
+    AM in Seattle it is 10:00 AM in London and 7:00 PM in Tokyo. The
+    strategies:</p>
+    <p><strong>Regional maintenance windows.</strong> Schedule changes
+    to affect one region at a time during that region’s low-traffic
+    hours. This works when the network is segmented regionally and
+    changes can be isolated.</p>
+    <p><strong>Follow-the-sun rolling changes.</strong> For global
+    changes (firmware upgrades, security patches), start in the region
+    where it is currently off-peak, verify success, then roll to the
+    next region as their off-peak begins. A 24-hour rolling window can
+    touch every region during its low-traffic period.</p>
+    <p><strong>UTC-normalized scheduling.</strong> All maintenance
+    windows are published in UTC to eliminate conversion errors. Every
+    NOC engineer should think in UTC. Post a wall clock set to UTC in
+    the NOC. Use UTC in all change tickets, runbooks, and scripts.</p>
+    <p><strong>The Friday Rule:</strong> never schedule a change for
+    Friday night. If it fails, weekend staffing is thin, vendor support
+    is slower, and the engineers who made the change are exhausted or
+    unavailable by Saturday afternoon. Tuesday and Wednesday nights are
+    the industry standard for maintenance windows – early enough in the
+    week for full staffing, late enough to have Monday’s fires
+    resolved.</p>
+    <hr />
+    <h2 id="change-control-for-network-devices">2. Change Control for
+    Network Devices</h2>
+    <h3 id="network-specific-risk">Network-Specific Risk</h3>
+    <p>Network device changes carry unique risk characteristics that
+    generic IT change management does not adequately address:</p>
+    <p><strong>Single-command blast radius.</strong> Entering
+    <code>shutdown</code> on the wrong interface, applying a deny-all
+    ACL to a management interface, or committing a route-map that
+    filters the default route – any of these takes seconds to execute
+    and minutes to hours to diagnose and recover, especially if the
+    change disconnects you from the device you are configuring.</p>
+    <p><strong>Configuration atomicity varies by platform.</strong>
+    Junos applies configurations atomically – either the entire commit
+    succeeds or nothing changes. IOS applies commands line by line as
+    you type them – there is no transaction boundary, no implicit
+    rollback if line 47 of a paste fails. NX-OS has checkpoint/rollback
+    but the behavior differs from Junos. Arista EOS has a configure
+    session mode that provides candidate configuration semantics similar
+    to Junos. Understanding your platform’s configuration model is
+    prerequisite to safe change execution.</p>
+    <p><strong>Out-of-band access is your safety net.</strong> If a
+    change locks you out of a device over the network, you need an
+    alternative path: a console server (Opengear, ZPE Systems,
+    Lantronix), a cellular out-of-band link, or physical console access.
+    Every network device that carries production traffic should have
+    out-of-band console access configured and tested before you need
+    it.</p>
+    <h3 id="the-network-change-checklist">The Network Change
+    Checklist</h3>
+    <p>Before executing any network change, walk through this
+    checklist:</p>
+    <pre><code>NETWORK CHANGE PRE-FLIGHT CHECKLIST
+========================================================
+
+[ ] Change ticket created and approved
+[ ] Runbook written with exact commands (copy-pasteable)
+[ ] Rollback procedure written with exact commands
+[ ] Rollback tested in lab (or verified on similar device)
+[ ] Maintenance window confirmed with all stakeholders
+[ ] Carrier coordination confirmed (if applicable)
+[ ] Customer notification sent (if applicable)
+[ ] Out-of-band access verified to target device(s)
+[ ] Pre-change verification script executed and baseline saved
+[ ] Colleague available for peer review / second pair of eyes
+[ ] Monitoring dashboard open showing affected services
+[ ] Contact list ready (NOC, carrier, management escalation)</code></pre>
+    <h3 id="peer-review-of-network-changes">Peer Review of Network
+    Changes</h3>
+    <p>Network changes benefit enormously from peer review, but the
+    review happens differently than code review. The reviewer
+    should:</p>
+    <ol type="1">
+    <li>Read the runbook and mentally execute each command, predicting
+    the effect</li>
+    <li>Verify the rollback procedure reverses each change</li>
+    <li>Check for missing steps (did you save the running config after
+    changes on IOS?)</li>
+    <li>Identify the point of no return – after which step can you no
+    longer roll back cleanly?</li>
+    <li>Confirm the commands match the correct device hostnames,
+    interface names, and IP addresses</li>
+    </ol>
+    <p>The most common network change errors are not conceptual – they
+    are transcription errors. The wrong interface number. A /24 typed as
+    /32. A permit that should be a deny. Peer review catches these
+    before they reach production.</p>
+    <hr />
+    <h2 id="pre-change-verification">3. Pre-Change Verification</h2>
+    <p>Pre-change verification captures the current state of the network
+    so that post-change verification has a baseline to compare against.
+    This is not optional. Without a baseline, you cannot distinguish
+    between a problem caused by your change and a pre-existing
+    condition.</p>
+    <h3 id="what-to-capture">What to Capture</h3>
+    <p>The verification scope depends on the change type, but a
+    general-purpose pre-change capture includes:</p>
+    <p><strong>Layer 1 – Physical.</strong> Interface status (up/down),
+    error counters, optical light levels (if applicable), CRC errors,
+    input/output drops.</p>
+    <p><strong>Layer 2 – Switching.</strong> MAC address table entries,
+    STP topology state, VLAN membership, LACP/port-channel status, ARP
+    table.</p>
+    <p><strong>Layer 3 – Routing.</strong> Routing table (full or
+    relevant subnets), BGP neighbor state and prefix counts, OSPF/IS-IS
+    neighbor adjacencies, VRRP/HSRP state, static route entries.</p>
+    <p><strong>Layer 4+ – Services.</strong> NAT translations (if
+    applicable), firewall session counts, load balancer pool status, QoS
+    queue counters.</p>
+    <p><strong>Reachability.</strong> Ping tests to critical endpoints,
+    traceroute to verify path, DNS resolution tests.</p>
+    <h3 id="pre-change-verification-script-example">Pre-Change
+    Verification Script Example</h3>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pre-change-verify.sh -- Capture baseline state from network device</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage: ./pre-change-verify.sh &lt;device&gt; &lt;change-ticket&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">DEVICE</span><span class="op">=</span><span class="va">$1</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="va">TICKET</span><span class="op">=</span><span class="va">$2</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="va">TIMESTAMP</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> <span class="at">-u</span> +%Y%m%d-%H%M%SZ<span class="va">)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="va">OUTDIR</span><span class="op">=</span><span class="st">&quot;./baselines/</span><span class="va">${TICKET}</span><span class="st">/</span><span class="va">${DEVICE}</span><span class="st">&quot;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">&quot;</span><span class="va">$OUTDIR</span><span class="st">&quot;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;=== Pre-change capture for </span><span class="va">${DEVICE}</span><span class="st"> -- </span><span class="va">${TICKET}</span><span class="st"> ===&quot;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;=== Timestamp: </span><span class="va">${TIMESTAMP}</span><span class="st"> ===&quot;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust commands per platform (this example: Cisco IOS-XE via SSH)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="st">&quot;</span><span class="va">$DEVICE</span><span class="st">&quot;</span> <span class="op">&lt;&lt; &#39;COMMANDS&#39;</span> <span class="op">&gt;</span> <span class="st">&quot;</span><span class="va">${OUTDIR}</span><span class="st">/pre-change-</span><span class="va">${TIMESTAMP}</span><span class="st">.txt&quot;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">terminal length 0</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">show version</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">show running-config</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="st">show ip route</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">show ip bgp summary</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="st">show ip ospf neighbor</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">show interfaces status</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="st">show interfaces counters errors</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="st">show ip arp</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="st">show mac address-table count</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="st">show standby brief</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="st">show clock</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="op">COMMANDS</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Reachability tests from management station</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;--- Reachability tests ---&quot;</span> <span class="op">&gt;&gt;</span> <span class="st">&quot;</span><span class="va">${OUTDIR}</span><span class="st">/pre-change-</span><span class="va">${TIMESTAMP}</span><span class="st">.txt&quot;</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> TARGET <span class="kw">in</span> 10.0.0.1 10.1.0.1 8.8.8.8 192.168.1.1<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ping</span> <span class="at">-c</span> 5 <span class="at">-W</span> 2 <span class="st">&quot;</span><span class="va">$TARGET</span><span class="st">&quot;</span> <span class="op">&gt;&gt;</span> <span class="st">&quot;</span><span class="va">${OUTDIR}</span><span class="st">/pre-change-</span><span class="va">${TIMESTAMP}</span><span class="st">.txt&quot;</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;=== Baseline saved to </span><span class="va">${OUTDIR}</span><span class="st">/pre-change-</span><span class="va">${TIMESTAMP}</span><span class="st">.txt ===&quot;</span></span></code></pre></div>
+    <p>For environments using network automation, the same capture can
+    be done with Ansible, Nornir, or NAPALM:</p>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ansible playbook: pre-change-capture.yml</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Pre-change baseline capture</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hosts</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;{{ target_device }}&quot;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">gather_facts</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Capture routing table</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ios_command</span><span class="kw">:</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">commands</span><span class="kw">:</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> show ip route</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> show ip bgp summary</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> show ip ospf neighbor</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">register</span><span class="kw">:</span><span class="at"> routing_state</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Capture interface state</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ios_command</span><span class="kw">:</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">commands</span><span class="kw">:</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> show interfaces status</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> show interfaces counters errors</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">register</span><span class="kw">:</span><span class="at"> interface_state</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Save baseline to file</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">copy</span><span class="kw">:</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">        content</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>          === ROUTING STATE ===</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>          {{ routing_state.stdout | join(&#39;\n\n&#39;) }}</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>          === INTERFACE STATE ===</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>          {{ interface_state.stdout | join(&#39;\n\n&#39;) }}</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">dest</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;./baselines/{{ ticket }}/{{ inventory_hostname }}-pre.txt&quot;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">delegate_to</span><span class="kw">:</span><span class="at"> localhost</span></span></code></pre></div>
+    <hr />
+    <h2 id="post-change-verification">4. Post-Change Verification</h2>
+    <p>Post-change verification answers two questions: did the change
+    achieve its intended effect, and did the change break anything
+    else?</p>
+    <h3 id="traffic-baseline-comparison">Traffic Baseline
+    Comparison</h3>
+    <p>Compare post-change traffic patterns against the pre-change
+    baseline. SNMP polling tools (LibreNMS, Zabbix, PRTG) and streaming
+    telemetry platforms (Telegraf + InfluxDB + Grafana, Kentik,
+    ThousandEyes) provide the data. What to compare:</p>
+    <ul>
+    <li><strong>Interface utilization:</strong> traffic volume should
+    remain consistent (unless the change was designed to shift
+    traffic)</li>
+    <li><strong>Error counters:</strong> CRC errors, input errors,
+    output drops, and giants should not increase</li>
+    <li><strong>Packet loss:</strong> end-to-end loss measured by
+    synthetic probes (SLA responders, SmokePing, ThousandEyes) should
+    remain within SLA</li>
+    <li><strong>Latency:</strong> round-trip time to key endpoints
+    should remain stable</li>
+    <li><strong>BGP prefix counts:</strong> the number of prefixes
+    received from each peer should match pre-change state (or change by
+    the expected amount)</li>
+    </ul>
+    <h3 id="sla-validation">SLA Validation</h3>
+    <p>If the network has defined SLAs – 99.99% uptime, less than 5ms
+    latency within the metro, less than 50ms to cloud provider – verify
+    that the change did not push any metric outside SLA boundaries.
+    Automated SLA monitoring should already be running; post-change
+    verification means checking that the SLA dashboard is green, not
+    building new measurements.</p>
+    <h3 id="post-change-verification-checklist">Post-Change Verification
+    Checklist</h3>
+    <pre><code>POST-CHANGE VERIFICATION CHECKLIST
+========================================================
+
+[ ] Intended change confirmed (new route present, ACL applied, etc.)
+[ ] No unexpected interface state changes (nothing went down)
+[ ] BGP neighbor states match pre-change (all peers Established)
+[ ] OSPF/IS-IS adjacencies match pre-change
+[ ] VRRP/HSRP state matches expected (no unexpected failover)
+[ ] Error counters not incrementing abnormally
+[ ] Traffic levels consistent with baseline
+[ ] Ping tests to critical endpoints passing
+[ ] Customer-facing services confirmed operational
+[ ] Monitoring system shows no new alerts
+[ ] Change ticket updated with post-change results
+[ ] Running config saved to startup (IOS) / committed (Junos)</code></pre>
+    <hr />
+    <h2 id="configuration-backup-strategies">5. Configuration Backup
+    Strategies</h2>
+    <h3 id="rancid-the-legacy-standard">RANCID – The Legacy
+    Standard</h3>
+    <p>RANCID (Really Awesome New Cisco confIg Differ) has been the
+    industry-standard open-source configuration backup tool since the
+    late 1990s. Written in Perl and Expect, RANCID connects to devices
+    on a schedule, downloads the running configuration, and stores it in
+    a version control system (originally CVS, later Subversion or Git).
+    When the configuration changes, RANCID generates a diff and emails
+    it to a distribution list.</p>
+    <p>RANCID’s strengths are its longevity and battle-tested
+    reliability. Its weaknesses are its Perl/Expect architecture
+    (difficult to extend), its limited API, and its lack of a web
+    interface. New device support requires writing Expect scripts, which
+    is tedious and fragile.</p>
+    <h3 id="oxidized-the-modern-replacement">Oxidized – The Modern
+    Replacement</h3>
+    <p>Oxidized is the contemporary successor to RANCID. Written in
+    Ruby, Oxidized supports over 130 network operating systems out of
+    the box, integrates natively with Git for version-controlled
+    configuration storage, provides a REST API for integration with
+    other tools, and offers a web interface for browsing configurations
+    and diffs. Oxidized runs well in Docker, making deployment and
+    maintenance straightforward.</p>
+    <p>Key Oxidized capabilities:</p>
+    <ul>
+    <li><strong>Scheduled polling:</strong> configurable per-device or
+    global interval (default: every 3600 seconds)</li>
+    <li><strong>Git integration:</strong> each config change creates a
+    Git commit with timestamp, device name, and diff</li>
+    <li><strong>Source flexibility:</strong> device inventory can come
+    from a flat file, a SQL database, an HTTP API, or a custom
+    source</li>
+    <li><strong>Output flexibility:</strong> store configs in Git, flat
+    files, or a custom backend</li>
+    <li><strong>Hooks:</strong> trigger actions on config change (email,
+    Slack, webhook, custom script)</li>
+    <li><strong>REST API:</strong> query device configs, trigger manual
+    collection, check status</li>
+    </ul>
+    <h3 id="git-based-configuration-versioning">Git-Based Configuration
+    Versioning</h3>
+    <p>Whether using RANCID, Oxidized, or a custom solution, the
+    configuration backup should land in a Git repository. Git
+    provides:</p>
+    <ul>
+    <li><strong>Full history:</strong> every configuration change is a
+    commit with a timestamp, diff, and (optionally) the change ticket
+    number in the commit message</li>
+    <li><strong>Blame:</strong> identify when a specific line was added
+    or changed and by which commit</li>
+    <li><strong>Branching:</strong> maintain separate branches for
+    production configs vs. proposed changes</li>
+    <li><strong>Search:</strong> grep across all device configurations
+    to find every device with a specific ACL, community string, or NTP
+    server</li>
+    <li><strong>Diff:</strong> compare any two points in time for any
+    device</li>
+    </ul>
+    <p>The repository structure should mirror the network hierarchy:</p>
+    <pre><code>network-configs/
+  dc1/
+    core/
+      dc1-core-sw01.cfg
+      dc1-core-sw02.cfg
+    distribution/
+      dc1-dist-sw01.cfg
+    access/
+      dc1-acc-sw01.cfg
+      dc1-acc-sw02.cfg
+  dc2/
+    core/
+      dc2-core-sw01.cfg
+  wan/
+    dc1-wan-rtr01.cfg
+    dc1-wan-rtr02.cfg
+  firewalls/
+    dc1-fw01.cfg</code></pre>
+    <h3 id="comparison-matrix">Comparison Matrix</h3>
+    <table>
+    <colgroup>
+    <col style="width: 17%" />
+    <col style="width: 15%" />
+    <col style="width: 19%" />
+    <col style="width: 47%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>RANCID</th>
+    <th>Oxidized</th>
+    <th>Custom (Ansible + Git)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Language</td>
+    <td>Perl/Expect</td>
+    <td>Ruby</td>
+    <td>Python/YAML</td>
+    </tr>
+    <tr>
+    <td>Device support</td>
+    <td>~90 types</td>
+    <td>130+ types</td>
+    <td>Any (write your own module)</td>
+    </tr>
+    <tr>
+    <td>Version control</td>
+    <td>CVS/SVN/Git</td>
+    <td>Git (native)</td>
+    <td>Git</td>
+    </tr>
+    <tr>
+    <td>Web interface</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>No (unless built)</td>
+    </tr>
+    <tr>
+    <td>REST API</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>No (unless built)</td>
+    </tr>
+    <tr>
+    <td>Docker support</td>
+    <td>Community</td>
+    <td>Official</td>
+    <td>N/A</td>
+    </tr>
+    <tr>
+    <td>Diff notification</td>
+    <td>Email</td>
+    <td>Email/Slack/webhook</td>
+    <td>Custom</td>
+    </tr>
+    <tr>
+    <td>Active development</td>
+    <td>Minimal</td>
+    <td>Active</td>
+    <td>N/A</td>
+    </tr>
+    <tr>
+    <td>Recommendation</td>
+    <td>Legacy environments</td>
+    <td>New deployments</td>
+    <td>Automation-heavy shops</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="rollback-procedures">6. Rollback Procedures</h2>
+    <h3 id="junos-commit-confirmed">Junos: commit confirmed</h3>
+    <p>Junos has the most mature rollback model in the industry. The
+    <code>commit confirmed</code> command activates the candidate
+    configuration temporarily. If the operator does not issue a second
+    <code>commit</code> within the confirmation window (default 10
+    minutes, configurable from 1 to 65,535 minutes), the device
+    automatically rolls back to the previous configuration and sends a
+    broadcast message to all logged-in users.</p>
+    <pre><code>[edit]
+user@router# commit confirmed 5
+commit confirmed will be automatically rolled back in 5 minutes unless confirmed
+Commit complete
+
+# ... verify the change works ...
+
+[edit]
+user@router# commit
+commit complete
+
+# If you do NOT confirm within 5 minutes:
+# &quot;Broadcast Message from root@router&quot;
+# &quot;Commit was not confirmed; automatic rollback complete.&quot;</code></pre>
+    <p>Junos also stores the last 50 committed configurations,
+    accessible via <code>rollback N</code> where N is 0-49 (0 being the
+    most recent). This provides instant access to any recent known-good
+    state.</p>
+    <p><strong>Best practice:</strong> always use
+    <code>commit confirmed</code> for changes that could disconnect you
+    from the device. Set the timer to match your verification time – 3-5
+    minutes for simple changes, 10-15 for complex ones. If you lose
+    connectivity, the device heals itself.</p>
+    <h3 id="iosios-xe-configuration-archive-and-revert">IOS/IOS-XE:
+    Configuration Archive and Revert</h3>
+    <p>Cisco IOS-XE provides the <code>configure replace</code> and
+    <code>configure revert</code> commands for rollback capability. The
+    configuration archive must be enabled first:</p>
+    <pre><code>archive
+ path flash:archive-config
+ maximum 14
+ write-memory
+
+configure terminal
+ ! Enable the revert timer
+ configure revert timer 5</code></pre>
+    <p>The <code>configure revert timer &lt;minutes&gt;</code> command
+    starts a countdown. If the operator does not issue
+    <code>configure confirm</code> within the specified time (1-120
+    minutes), IOS-XE reverts to the archived configuration. This is
+    functionally equivalent to Junos <code>commit confirmed</code> but
+    requires explicit archive configuration and is not the default
+    behavior.</p>
+    <p><strong>The IOS trap:</strong> on classic IOS (not IOS-XE), there
+    is no native rollback timer. The traditional safety net is
+    <code>reload in 5</code> – schedule a reload in 5 minutes, make your
+    change, and if you lose access, the device reboots and loads the
+    startup config. This is crude but effective. Cancel the pending
+    reload with <code>reload cancel</code> after confirming the change
+    works.</p>
+    <h3 id="nx-os-checkpoints">NX-OS: Checkpoints</h3>
+    <p>NX-OS supports configuration checkpoints:</p>
+    <pre><code>checkpoint my-checkpoint
+! ... make changes ...
+! If something goes wrong:
+rollback running-config checkpoint my-checkpoint</code></pre>
+    <p>Checkpoints capture the full running configuration at a point in
+    time. Rollback computes the diff between the current running config
+    and the checkpoint and applies the reverse commands.</p>
+    <h3 id="arista-eos-configure-sessions">Arista EOS: Configure
+    Sessions</h3>
+    <p>Arista EOS provides a candidate configuration model via
+    <code>configure session</code>:</p>
+    <pre><code>configure session my-change
+! ... make changes in the session ...
+show session-config diffs
+commit
+! Or, to abort:
+abort</code></pre>
+    <p>Changes made in a session are not applied until
+    <code>commit</code>. The <code>show session-config diffs</code>
+    command shows exactly what will change, providing a review step
+    before activation. If anything looks wrong, <code>abort</code>
+    discards the session with no impact.</p>
+    <hr />
+    <h2 id="emergency-change-process">7. Emergency Change Process</h2>
+    <h3 id="when-to-invoke-emergency-change">When to Invoke Emergency
+    Change</h3>
+    <p>Emergency changes bypass the normal approval process when delay
+    would cause greater harm than the risk of an unreviewed change.
+    Legitimate triggers include:</p>
+    <ul>
+    <li><strong>Active outage</strong> affecting production services
+    where a configuration change is the fix</li>
+    <li><strong>Fiber cut or circuit failure</strong> requiring
+    immediate traffic rerouting</li>
+    <li><strong>Security incident</strong> such as active DDoS requiring
+    null-route or ACL deployment</li>
+    <li><strong>BGP hijack</strong> requiring origin validation changes
+    or upstream filter requests</li>
+    <li><strong>Carrier emergency maintenance</strong> requiring traffic
+    failover before the carrier’s window</li>
+    </ul>
+    <h3 id="emergency-change-guardrails">Emergency Change
+    Guardrails</h3>
+    <p>Bypassing approval does not mean bypassing discipline. Emergency
+    changes should still follow minimum guardrails:</p>
+    <ol type="1">
+    <li><strong>Verbal approval</strong> from the on-call network lead
+    or manager (document who approved and when)</li>
+    <li><strong>Pre-change capture</strong> even if abbreviated – at
+    minimum, copy the running config to a file before touching
+    anything</li>
+    <li><strong>Use commit confirmed / revert timer</strong> – this is
+    doubly important during emergencies when adrenaline increases error
+    rate</li>
+    <li><strong>Real-time communication</strong> – keep a bridge line or
+    chat channel open with the NOC, affected teams, and management</li>
+    <li><strong>Post-incident documentation</strong> within 24 hours –
+    full change record, root cause, timeline, what was done, retroactive
+    approval from the change authority</li>
+    </ol>
+    <h3 id="ddos-mitigation-emergency-procedures">DDoS Mitigation
+    Emergency Procedures</h3>
+    <p>DDoS response is the most common network emergency that requires
+    immediate configuration changes:</p>
+    <pre><code>! Remotely Triggered Black Hole (RTBH) -- null-route attack target
+! Announce via iBGP with community triggering upstream null-route
+
+ip prefix-list BLACKHOLE permit 203.0.113.50/32
+
+route-map BLACKHOLE permit 10
+ match ip address prefix-list BLACKHOLE
+ set community 65000:666
+ set ip next-hop 192.0.2.1
+
+ip route 203.0.113.50 255.255.255.255 Null0 tag 666
+
+router bgp 65001
+ address-family ipv4
+  redistribute static route-map BLACKHOLE</code></pre>
+    <p>The RTBH approach sacrifices the target IP (it becomes
+    unreachable) but protects the rest of the network from collateral
+    damage. More surgical mitigation requires scrubbing services
+    (Cloudflare Magic Transit, Akamai Prolexic, in-house Arbor/Corero)
+    or FlowSpec rules distributed via BGP.</p>
+    <hr />
+    <h2 id="bulk-change-operations">8. Bulk Change Operations</h2>
+    <h3 id="firmware-upgrades-across-hundreds-of-switches">Firmware
+    Upgrades Across Hundreds of Switches</h3>
+    <p>Bulk firmware upgrades are among the highest-risk, highest-effort
+    network operations. The staged rollout model is essential:</p>
+    <p><strong>Stage 1 – Lab validation.</strong> Upgrade a lab device
+    (or virtual instance) to the target firmware. Run the full test
+    suite: boot time, feature verification, known bug regression,
+    configuration compatibility.</p>
+    <p><strong>Stage 2 – Canary deployment.</strong> Upgrade one
+    production device in a non-critical role (a redundant access switch
+    with low user count). Monitor for 24-72 hours. Check for memory
+    leaks, CPU anomalies, unexpected reboots, and feature
+    regressions.</p>
+    <p><strong>Stage 3 – Staged rollout.</strong> Divide the fleet into
+    batches. Upgrade one batch per maintenance window. Never upgrade
+    both members of a redundant pair in the same batch. Verify each
+    batch before proceeding to the next.</p>
+    <p><strong>Stage 4 – Cleanup.</strong> After all devices are
+    upgraded, remove the old firmware images from flash to reclaim
+    storage. Update the CMDB, documentation, and monitoring templates to
+    reflect the new version.</p>
+    <h3 id="automation-for-bulk-operations">Automation for Bulk
+    Operations</h3>
+    <p>Manual firmware upgrades at scale are impractical. Ansible,
+    Nornir, or vendor-specific tools (Cisco DNA Center, Arista
+    CloudVision, Juniper Apstra) handle the mechanics:</p>
+    <div class="sourceCode" id="cb11"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ansible playbook: staged-firmware-upgrade.yml</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Stage 1 -- Pre-upgrade checks</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hosts</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;{{ batch }}&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">serial</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check current firmware version</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ios_command</span><span class="kw">:</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">commands</span><span class="kw">:</span><span class="at"> show version</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">register</span><span class="kw">:</span><span class="at"> version_check</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Verify free flash space</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ios_command</span><span class="kw">:</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">commands</span><span class="kw">:</span><span class="at"> dir flash:</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">register</span><span class="kw">:</span><span class="at"> flash_check</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Upload firmware image</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">net_put</span><span class="kw">:</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">src</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;files/cat9k_iosxe.17.09.04a.SPA.bin&quot;</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">dest</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;flash:cat9k_iosxe.17.09.04a.SPA.bin&quot;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">when</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;&#39;17.09.04a&#39; not in version_check.stdout[0]&quot;</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Verify image integrity</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ios_command</span><span class="kw">:</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">commands</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;verify /md5 flash:cat9k_iosxe.17.09.04a.SPA.bin&quot;</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">register</span><span class="kw">:</span><span class="at"> md5_check</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set boot variable</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ios_config</span><span class="kw">:</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">lines</span><span class="kw">:</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;boot system flash:cat9k_iosxe.17.09.04a.SPA.bin&quot;</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">save_when</span><span class="kw">:</span><span class="at"> always</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Reload device</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ios_command</span><span class="kw">:</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">commands</span><span class="kw">:</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> </span><span class="fu">command</span><span class="kw">:</span><span class="at"> reload</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">prompt</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;confirm&#39;</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">answer</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;y&#39;</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">when</span><span class="kw">:</span><span class="at"> upgrade_approved | bool</span></span></code></pre></div>
+    <h3 id="the-serial-constraint">The Serial Constraint</h3>
+    <p>Bulk changes must respect redundancy boundaries. Never upgrade
+    both:</p>
+    <ul>
+    <li>Both members of a VSS / StackWise Virtual pair
+    simultaneously</li>
+    <li>Both spine switches in a leaf-spine fabric simultaneously</li>
+    <li>Both routers in an HSRP/VRRP pair simultaneously</li>
+    <li>Both paths in a dual-homed WAN circuit simultaneously</li>
+    </ul>
+    <p>The <code>serial: 1</code> directive in Ansible enforces
+    sequential execution, but the inventory grouping must ensure
+    redundant partners are in different batches. This is an
+    organizational discipline, not a technical one.</p>
+    <hr />
+    <h2 id="testing-in-lab-environments">9. Testing in Lab
+    Environments</h2>
+    <h3 id="gns3">GNS3</h3>
+    <p>GNS3 (Graphical Network Simulator 3) is an open-source network
+    emulator that runs real network operating system images (Cisco IOSv,
+    IOU, Junos vMX, etc.) in QEMU/KVM virtual machines. GNS3 provides a
+    graphical topology editor and has been the standard network lab tool
+    for over a decade. It runs 20-30 nodes comfortably on a workstation.
+    Its weakness is resource consumption – each device runs a full VM –
+    and the manual effort required to build and manage topologies.</p>
+    <h3 id="eve-ng">EVE-NG</h3>
+    <p>EVE-NG (Emulated Virtual Environment - Next Generation) is a
+    server-based network emulation platform accessed via a web browser.
+    The Professional edition (starting at $110/year as of 2026) adds
+    multi-user access with RBAC, lab templates, and clustering across
+    multiple hosts. EVE-NG is strongest for team environments where
+    multiple engineers need shared access to lab topologies. The
+    Community Edition is free but lacks multi-user features.</p>
+    <h3 id="containerlab">Containerlab</h3>
+    <p>Containerlab is the modern approach to network lab environments.
+    It defines topologies in YAML and runs network operating systems as
+    Docker containers. Topologies launch in seconds rather than minutes.
+    Containerlab supports Nokia SR Linux, Arista cEOS, Juniper cRPD,
+    Cisco XRd, and others natively as container images.</p>
+    <p>Containerlab’s killer feature for change validation is CI/CD
+    integration. A network change can be tested automatically as part of
+    a pipeline:</p>
+    <div class="sourceCode" id="cb12"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># topology.clab.yml -- Containerlab topology for change testing</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> change-validation-lab</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">topology</span><span class="kw">:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">nodes</span><span class="kw">:</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spine1</span><span class="kw">:</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> ceos</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> ceos:4.32.0F</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spine2</span><span class="kw">:</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> ceos</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> ceos:4.32.0F</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">leaf1</span><span class="kw">:</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> ceos</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> ceos:4.32.0F</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">leaf2</span><span class="kw">:</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> ceos</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> ceos:4.32.0F</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">links</span><span class="kw">:</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">endpoints</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;spine1:eth1&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;leaf1:eth1&quot;</span><span class="kw">]</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">endpoints</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;spine1:eth2&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;leaf2:eth1&quot;</span><span class="kw">]</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">endpoints</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;spine2:eth1&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;leaf1:eth2&quot;</span><span class="kw">]</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">endpoints</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;spine2:eth2&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;leaf2:eth2&quot;</span><span class="kw">]</span></span></code></pre></div>
+    <div class="sourceCode" id="cb13"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deploy, configure, test, destroy</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">containerlab</span> deploy <span class="at">--topo</span> topology.clab.yml</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ansible-playbook</span> apply-proposed-change.yml <span class="at">-i</span> clab-inventory.yml</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pytest</span> tests/test_change_validation.py</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">containerlab</span> destroy <span class="at">--topo</span> topology.clab.yml</span></code></pre></div>
+    <h3 id="lab-environment-comparison">Lab Environment Comparison</h3>
+    <table>
+    <colgroup>
+    <col style="width: 21%" />
+    <col style="width: 16%" />
+    <col style="width: 28%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>GNS3</th>
+    <th>EVE-NG Pro</th>
+    <th>Containerlab</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Architecture</td>
+    <td>Desktop + VM</td>
+    <td>Server + browser</td>
+    <td>CLI + Docker</td>
+    </tr>
+    <tr>
+    <td>Topology definition</td>
+    <td>GUI (drag-and-drop)</td>
+    <td>GUI (drag-and-drop)</td>
+    <td>YAML files</td>
+    </tr>
+    <tr>
+    <td>Boot time</td>
+    <td>Minutes</td>
+    <td>Minutes</td>
+    <td>Seconds</td>
+    </tr>
+    <tr>
+    <td>Node scale</td>
+    <td>20-30</td>
+    <td>50-100+ (clustered)</td>
+    <td>200+ on single host</td>
+    </tr>
+    <tr>
+    <td>CI/CD integration</td>
+    <td>Difficult</td>
+    <td>Possible (API)</td>
+    <td>Native</td>
+    </tr>
+    <tr>
+    <td>Multi-user</td>
+    <td>No (single user)</td>
+    <td>Yes (RBAC)</td>
+    <td>No (single user)</td>
+    </tr>
+    <tr>
+    <td>Cost</td>
+    <td>Free (open source)</td>
+    <td>$110+/year (Pro)</td>
+    <td>Free (open source)</td>
+    </tr>
+    <tr>
+    <td>Best for</td>
+    <td>Individual study/test</td>
+    <td>Team lab environments</td>
+    <td>Automation/CI/CD</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="what-to-test-in-lab-before-production">What to Test in Lab
+    Before Production</h3>
+    <ol type="1">
+    <li><strong>Exact command sequence</strong> from the runbook – paste
+    the commands into the lab device, verify the expected output</li>
+    <li><strong>Rollback procedure</strong> – execute the rollback,
+    verify the device returns to the pre-change state</li>
+    <li><strong>Failure scenarios</strong> – what happens if the change
+    is partially applied? What if connectivity is lost mid-change?</li>
+    <li><strong>Interaction with existing configuration</strong> – does
+    the new config conflict with existing ACLs, route-maps, or QoS
+    policies?</li>
+    <li><strong>Scale behavior</strong> – if the change affects routing,
+    does the routing table converge correctly? Any route
+    oscillation?</li>
+    </ol>
+    <hr />
+    <h2 id="integrated-change-execution-runbook">10. Integrated Change
+    Execution Runbook</h2>
+    <p>Bringing all the pieces together, here is the structure of a
+    complete network change execution:</p>
+    <h3 id="phase-1-preparation-days-before">Phase 1: Preparation (Days
+    Before)</h3>
+    <pre><code>[ ] Change ticket created with:
+    - Description of change and business justification
+    - Affected devices, interfaces, and services
+    - Exact commands (runbook)
+    - Rollback commands
+    - Risk assessment score
+    - Carrier coordination details (if applicable)
+[ ] Change approved by change authority
+[ ] Customer notification sent
+[ ] Lab testing completed
+[ ] Out-of-band access verified
+[ ] Monitoring dashboards bookmarked</code></pre>
+    <h3 id="phase-2-pre-change-minutes-before">Phase 2: Pre-Change
+    (Minutes Before)</h3>
+    <pre><code>[ ] Join bridge call / open chat channel with NOC
+[ ] Execute pre-change verification script
+[ ] Save baseline output to change ticket
+[ ] Verify out-of-band access works right now
+[ ] Confirm all team members are available
+[ ] Open runbook side-by-side with terminal
+[ ] Set rollback timer (commit confirmed / configure revert)</code></pre>
+    <h3 id="phase-3-execution">Phase 3: Execution</h3>
+    <pre><code>[ ] Announce &quot;starting change&quot; on bridge
+[ ] Execute runbook commands exactly as written
+[ ] After each major step, verify expected result
+[ ] If unexpected result: STOP, assess, decide continue or rollback
+[ ] Confirm rollback timer is running (do not confirm prematurely)
+[ ] Verify change achieved intended effect
+[ ] Confirm the change with commit / configure confirm
+[ ] Save configuration to startup</code></pre>
+    <h3 id="phase-4-post-change-minutes-after">Phase 4: Post-Change
+    (Minutes After)</h3>
+    <pre><code>[ ] Execute post-change verification script
+[ ] Compare against pre-change baseline
+[ ] Check monitoring for new alerts
+[ ] Verify customer-facing services operational
+[ ] Announce &quot;change complete, monitoring&quot; on bridge
+[ ] Monitor for 15-30 minutes minimum</code></pre>
+    <h3 id="phase-5-closure">Phase 5: Closure</h3>
+    <pre><code>[ ] Update change ticket with results
+[ ] Update network documentation / diagrams if topology changed
+[ ] Verify config backup system has captured new config
+[ ] Close change ticket
+[ ] If anything went wrong: schedule post-change review</code></pre>
+    <hr />
+    <h2 id="configuration-drift-detection">11. Configuration Drift
+    Detection</h2>
+    <p>Configuration drift occurs when the running configuration
+    diverges from the intended (golden) configuration over time. Sources
+    include: emergency changes that were never formally documented,
+    undocumented troubleshooting commands left in place, changes made by
+    multiple engineers without coordination, and vendor TAC
+    recommendations applied during support cases that were never
+    reviewed.</p>
+    <h3 id="detecting-drift">Detecting Drift</h3>
+    <p>Oxidized’s diff notification catches individual changes as they
+    happen. But drift detection requires comparing the current running
+    config against a defined standard:</p>
+    <ul>
+    <li><strong>Golden config comparison:</strong> maintain a template
+    (Jinja2, TextFSM) for each device role. Periodically render the
+    template with device-specific variables and diff against the actual
+    running config. Any delta is drift.</li>
+    <li><strong>Compliance scanning:</strong> tools like Batfish, NetBox
+    config compliance plugin, or custom scripts parse configurations and
+    check for required elements (NTP servers configured, SNMP community
+    strings correct, logging destinations set, AAA configuration
+    present).</li>
+    <li><strong>NAPALM compliance:</strong> NAPALM’s
+    <code>compliance_report()</code> method compares running
+    configuration against a YAML-defined desired state and reports
+    violations.</li>
+    </ul>
+    <h3 id="remediating-drift">Remediating Drift</h3>
+    <p>When drift is detected, the response depends on the nature of the
+    deviation:</p>
+    <ul>
+    <li><strong>Known emergency change:</strong> retroactively document
+    and formally approve, or schedule removal if temporary</li>
+    <li><strong>Unauthorized change:</strong> investigate who made it
+    and why, remediate to standard, address the process gap</li>
+    <li><strong>Legitimate evolution:</strong> update the golden config
+    template to reflect the new standard</li>
+    </ul>
+    <hr />
+    <h2 id="cross-references">Cross-References</h2>
+    <ul>
+    <li><strong>SNO-01 (Network Monitoring &amp; Alerting)</strong> –
+    the monitoring that feeds pre/post-change verification
+    baselines</li>
+    <li><strong>SNO-03 (Network Incident Response)</strong> – emergency
+    changes are a subset of incident response</li>
+    <li><strong>SNO-07 (Firewall &amp; ACL Operations)</strong> – ACL
+    changes are among the highest-risk network changes</li>
+    <li><strong>SNO-09 (Network Documentation &amp; CMDB)</strong> –
+    change execution must update documentation</li>
+    <li><strong>SOO-03 (Change Management &amp; Control)</strong> – the
+    organizational change management framework that network changes
+    operate within</li>
+    <li><strong>SNE-03 (Network Automation &amp; NetDevOps)</strong> –
+    automation tools (Ansible, Nornir, NAPALM) used for change
+    execution</li>
+    <li><strong>DRP (Disaster Recovery)</strong> – rollback procedures
+    overlap with DR planning</li>
+    <li><strong>RCA (Root Cause Analysis)</strong> – post-change review
+    when changes cause incidents</li>
+    </ul>
+    <hr />
+    <h2 id="sources">Sources</h2>
+    <ol type="1">
+    <li>ITIL 4 Practice Guide: Change Enablement. AXELOS / PeopleCert,
+    2020.</li>
+    <li>Juniper Networks. “Commit the Configuration.” Junos OS
+    Documentation.
+    https://www.juniper.net/documentation/us/en/software/junos/cli/topics/topic-map/junos-configuration-commit.html</li>
+    <li>Cisco Systems. “Configuration Rollback Confirmed Change.” IOS-XE
+    17.x System Management Configuration Guide.
+    https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/syst-mgmt/b-system-management/m_cm-config-rollback-confirmed-change.html</li>
+    <li>Oxidized GitHub Repository. https://github.com/ytti/oxidized –
+    130+ device types, Git-native config backup.</li>
+    <li>Containerlab Documentation. https://containerlab.dev –
+    container-based network emulation, YAML topology definitions.</li>
+    <li>Packet Pushers. “Cisco Configuration Archive &amp; Rollback:
+    Using ‘Revert’ Instead of ‘Reload’.”
+    https://packetpushers.net/blog/cisco-configuration-archive-rollback-using-revert-instead-of-reload/</li>
+    <li>Uptime Institute Annual Outage Analysis. 2023-2025 reports
+    consistently attribute 60-80% of outages to human configuration
+    error.</li>
+    <li>Open Source Network Simulators. “Containerlab Network Emulator
+    v0.73 Review.” March 2026.
+    https://opensourcenetworksimulators.com/2026/03/containerlab-network-emulator-v0-73-review/</li>
+    <li>Forsgren, N., Humble, J., Kim, G. <em>Accelerate: The Science of
+    Lean Software and DevOps.</em> IT Revolution Press, 2018. – DORA
+    research on change management effectiveness.</li>
+    <li>rConfig. “Oxidized vs RANCID: A Feature Comparison.”
+    https://www.rconfig.com/blog/oxidized-vs-rancid-a-feature-comparison</li>
+    </ol>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNO Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNO/">tibsfox.com/Research/SNO</a>
+    </div>
+</body>
+</html>

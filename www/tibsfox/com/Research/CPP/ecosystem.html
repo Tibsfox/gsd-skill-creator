@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecosystem &amp; Tooling &mdash; C++ and Object-Oriented Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cpp">
+  <header>
+    <h1>Ecosystem &amp; Tooling</h1>
+    <div class="subtitle">Compilers, Build Systems, Package Managers, Sanitizers, Libraries, Applications</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="oop.html">OOP</a>
+      <a href="templates.html">Templates</a>
+      <a href="stdlib.html">STL</a>
+      <a href="modern.html">Modern C++</a>
+      <a href="ecosystem.html" class="active">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The C++ toolchain story has historically been a nightmare. Other languages have one canonical build tool (Cargo, npm, pip). C++ does not. The reasons are partly historical, partly technical (binary ABI compatibility is genuinely hard), and partly cultural. <strong>The situation has improved dramatically in the past few years.</strong>
+    </blockquote>
+
+    <h2>Compilers</h2>
+    <p>C++ has multiple production-quality compilers, each with its own personality. Standards conformance has improved enormously over the past decade.</p>
+
+    <table>
+      <thead><tr><th>Compiler</th><th>Origin</th><th>Default on</th><th>Notable for</th></tr></thead>
+      <tbody>
+        <tr><td><strong>GCC / G++</strong></td><td>GNU Project, 1987</td><td>Linux, BSD, most Unix</td><td>Standards conformance, excellent codegen, huge target list</td></tr>
+        <tr><td><strong>Clang / Clang++</strong></td><td>Apple/LLVM, 2007</td><td>macOS</td><td>Best-in-class diagnostics; powers <code>clang-tidy</code>, <code>clang-format</code>, sanitizers, <code>libclang</code></td></tr>
+        <tr><td><strong>MSVC (cl.exe)</strong></td><td>Microsoft, 1993</td><td>Windows</td><td>Ships with Visual Studio; increasingly open source STL</td></tr>
+        <tr><td><strong>Intel ICX</strong></td><td>Intel, LLVM-based (ICC retired ~2023)</td><td>HPC workloads</td><td>Vectorization, Intel-specific tuning</td></tr>
+        <tr><td><strong>EDG front end</strong></td><td>Edison Design Group</td><td>Many vendor compilers</td><td>Licensed by NVIDIA, IBM, ARM; famously conformant front end</td></tr>
+        <tr><td><strong>Embarcadero C++Builder</strong></td><td>Borland descendant</td><td>Legacy Windows</td><td>Delphi sibling, VCL/FireMonkey UIs</td></tr>
+        <tr><td>Cross toolchains</td><td>Vendor-specific</td><td>Embedded</td><td><code>arm-none-eabi-gcc</code>, <code>aarch64-linux-gnu-gcc</code>, Espressif ESP-IDF, ARM Compiler 6</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <p><strong>Compiler Explorer</strong> &mdash; <code>godbolt.org</code> &mdash; is Matt Godbolt&rsquo;s online sandbox that lets you paste C++ code and see what dozens of compilers produce, side by side, with optimization flags of your choice. It is one of the best teaching tools the language has ever had, and one of the best debugging tools when you are chasing &ldquo;did the optimizer actually inline this?&rdquo; Most C++ talks at conferences now use it as a live demo platform.</p>
+    </div>
+
+    <h2>Build Systems</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Origin</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Make</strong></td><td>Bell Labs, 1976</td><td>Ancient; still everywhere. Fine for small projects.</td></tr>
+        <tr><td><strong>CMake</strong></td><td>Kitware, 2000</td><td>Generates native build files (Make, Ninja, VS, Xcode). <strong>The de facto standard.</strong> Modern target-based style (post-3.0).</td></tr>
+        <tr><td><strong>Ninja</strong></td><td>Google (Chromium), 2011</td><td>Minimal, fast build executor. Generated, not hand-written. Common CMake backend.</td></tr>
+        <tr><td><strong>Meson</strong></td><td>2013</td><td>Python-based DSL, Ninja backend. Used by GNOME, systemd. Competes with CMake.</td></tr>
+        <tr><td><strong>Bazel</strong></td><td>Google (open-sourced Blaze)</td><td>Hermetic, monorepo-oriented, strict dependency declaration.</td></tr>
+        <tr><td><strong>Buck2</strong></td><td>Meta, in Rust</td><td>Rewrite of Buck. Similar philosophy to Bazel.</td></tr>
+        <tr><td><strong>xmake</strong></td><td>Newer, Lua-based</td><td>Built-in package manager. Small but enthusiastic following.</td></tr>
+        <tr><td><strong>SCons</strong></td><td>Python-based, older</td><td>Still maintained, largely overtaken.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>A modern CMake target</h3>
+
+<pre><code>cmake_minimum_required(VERSION 3.20)
+project(starfield CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_library(starfield_core
+    src/orbit.cpp
+    src/star.cpp
+)
+target_include_directories(starfield_core PUBLIC include)
+target_compile_features(starfield_core PUBLIC cxx_std_20)
+
+find_package(fmt REQUIRED)
+target_link_libraries(starfield_core PUBLIC fmt::fmt)
+
+add_executable(starfield app/main.cpp)
+target_link_libraries(starfield PRIVATE starfield_core)</code></pre>
+
+    <p>The key idea: every artifact is a <em>target</em>, and properties like include directories and linked libraries are attached to targets, not set globally. Downstream consumers see exactly what your target advertises.</p>
+
+    <h2>Package Managers</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Organization</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Conan</strong> (conan.io)</td><td>JFrog</td><td>Python-based, decentralized recipes, source and binary packages. Conan 2.x is current.</td></tr>
+        <tr><td><strong>vcpkg</strong></td><td>Microsoft</td><td>Source-based with binary caching. <code>vcpkg.json</code> manifest mode. Thousands of ports. Tight CMake/MSBuild integration.</td></tr>
+        <tr><td><strong>Hunter</strong></td><td>Community</td><td>CMake-based, lives entirely in CMake scripts.</td></tr>
+        <tr><td><strong>spack</strong></td><td>HPC community</td><td>Scientific clusters; handles many variants of the same library.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Why dependency management has been hard</h3>
+    <div class="card amber">
+      <p>C++ deals with three structural problems that other languages mostly avoid:</p>
+      <ol>
+        <li><strong>No standard binary interface.</strong> The ABI of a C++ library depends on the compiler, the standard library implementation, its version, the language standard, optimization flags, and sometimes header definitions.</li>
+        <li><strong>Header-heavy templates.</strong> Most modern C++ code lives in headers because templates need to be visible at instantiation. Modules (C++20) are intended to fix this but rollout is gradual.</li>
+        <li><strong>One Definition Rule (ODR) violations.</strong> It is shockingly easy to link two object files that disagree on the layout of a class, and the linker will silently pick one.</li>
+      </ol>
+      <p>For now, the answer is: pick <strong>CMake plus Conan or vcpkg</strong>, and be consistent.</p>
+    </div>
+
+    <h2>Sanitizers and Static Analysis</h2>
+    <p>Modern C++ is much easier to write safely than the language used to be, and tooling is a big part of why:</p>
+
+    <table>
+      <thead><tr><th>Tool</th><th>What it catches</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td><strong>AddressSanitizer (ASan)</strong> <code>-fsanitize=address</code></td><td>Heap/stack overflow, use-after-free, double-free</td><td>~2&times; slowdown</td></tr>
+        <tr><td><strong>UndefinedBehaviorSanitizer (UBSan)</strong></td><td>Signed overflow, null deref, misaligned access, invalid casts</td><td>Low</td></tr>
+        <tr><td><strong>ThreadSanitizer (TSan)</strong></td><td>Data races</td><td>5&ndash;15&times; slowdown</td></tr>
+        <tr><td><strong>MemorySanitizer (MSan)</strong></td><td>Reads of uninitialized memory</td><td>Higher; needs full instrumentation</td></tr>
+        <tr><td><strong>LeakSanitizer (LSan)</strong></td><td>Memory leaks at process exit</td><td>Included with ASan</td></tr>
+        <tr><td><strong>clang-tidy</strong></td><td>Hundreds of checks: Core Guidelines, modernization, bug-prone patterns</td><td>Build-time</td></tr>
+        <tr><td><strong>clang-format</strong></td><td>Consistent formatting (Google, LLVM, Mozilla, Chromium, WebKit styles)</td><td>Free</td></tr>
+        <tr><td><strong>cppcheck</strong></td><td>Common mistakes, editor-friendly</td><td>Standalone</td></tr>
+        <tr><td><strong>Valgrind</strong></td><td>Memory debugging, very thorough</td><td>10&ndash;30&times; slowdown</td></tr>
+        <tr><td><strong>PVS-Studio</strong> / <strong>Coverity</strong></td><td>Commercial static analyzers</td><td>Licensed</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card green">
+      <p><strong>The recommendation for any new C++ project:</strong> turn on <code>-Wall -Wextra -Wpedantic</code>, run clang-tidy in CI, format with clang-format, and run your test suite under ASan + UBSan. That single configuration eliminates a substantial fraction of the bugs the language has historically been infamous for.</p>
+    </div>
+
+    <h2>Testing Frameworks</h2>
+    <ul>
+      <li><strong>Google Test (gtest)</strong> &amp; <strong>Google Mock (gmock)</strong> &mdash; Most widely used. Mature, integrates with CMake via <code>gtest_discover_tests</code>.</li>
+      <li><strong>Catch2</strong> &mdash; Header-only with BDD-style syntax (<code>SECTION</code>, <code>REQUIRE</code>). v3 split into a static library to fix compile-time bloat.</li>
+      <li><strong>doctest</strong> &mdash; Lighter-weight Catch2 alternative. Designed for fast compilation.</li>
+      <li><strong>Boost.Test</strong> &mdash; Older, full-featured, integrated with Boost.</li>
+      <li><strong>CppUTest</strong> &mdash; Embedded-friendly, small footprint, explicit leak detection.</li>
+    </ul>
+
+    <h2>GUI Frameworks</h2>
+    <table>
+      <thead><tr><th>Framework</th><th>Origin</th><th>Used by</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Qt</strong></td><td>Trolltech 1991 &rarr; Nokia &rarr; Digia &rarr; The Qt Company</td><td>KDE, many desktop tools, automotive UIs, medical devices. Qt 6.x with QML/QtQuick declarative UIs. Signals and slots via <code>moc</code>.</td></tr>
+        <tr><td><strong>wxWidgets</strong></td><td>Wraps native widgets per platform</td><td>Audacity (pre-Qt), engineering tools</td></tr>
+        <tr><td><strong>GTK / gtkmm</strong></td><td>GIMP Toolkit &mdash; C library, C++ bindings via gtkmm</td><td>GNOME</td></tr>
+        <tr><td><strong>Dear ImGui</strong></td><td>Omar Cornut, immediate-mode</td><td>Game tools, level editors, profilers, debug overlays</td></tr>
+        <tr><td><strong>FLTK</strong></td><td>Fast Light Toolkit</td><td>Small GUIs in a few hundred KB</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Game Engines &mdash; C++&rsquo;s Heartland</h2>
+    <p>Almost every commercial 3D engine and almost every AAA title is written in C++ at the core, with scripting languages on top for gameplay:</p>
+
+    <ul>
+      <li><strong>Unreal Engine</strong> (Epic) &mdash; Core in C++, gameplay in C++ and Blueprints. Powers Fortnite, Gears of War, the new Tomb Raiders, FF VII remake.</li>
+      <li><strong>Unity</strong> &mdash; Core in C++, scripting in C# via Mono/IL2CPP (which transpiles C# to C++).</li>
+      <li><strong>id Tech 1&ndash;7</strong> (id Software) &mdash; Doom &rarr; Quake &rarr; RAGE &rarr; Doom Eternal. id Tech 4 was Carmack&rsquo;s first C++ engine.</li>
+      <li><strong>CryEngine</strong> (Crytek) &mdash; Far Cry, Crysis lineage.</li>
+      <li><strong>Godot</strong> &mdash; Open-source, C++ core, GDScript for scripting, optional C#.</li>
+      <li><strong>O3DE</strong> (Amazon open-source Lumberyard) &mdash; CryEngine descendant.</li>
+      <li><strong>Source Engine</strong> (Valve) &mdash; Half-Life 2, Portal, Counter-Strike, Dota 2.</li>
+      <li><strong>Frostbite</strong> (EA/DICE) &mdash; Battlefield, FIFA, Need for Speed.</li>
+    </ul>
+
+    <p>Middleware: Bullet, NVIDIA PhysX, Havok (physics); OpenAL, FMOD, Wwise (audio); Vulkan, DirectX 12, Metal, OpenGL (graphics APIs) &mdash; all bound from C++.</p>
+
+    <h2>Other Domains</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>HFT</h4>
+        <p>Single-digit-microsecond latency floors. <strong>Hudson River Trading</strong>, <strong>Citadel Securities</strong>, <strong>Jump</strong>, <strong>Tower</strong>, <strong>Optiver</strong>, <strong>DRW</strong>. Lock-free queues, false sharing, busy-wait spinlocks, kernel bypass networking. Jane Street is the OCaml outlier.</p>
+      </div>
+      <div class="pillar">
+        <h4>Databases</h4>
+        <p>MySQL, MariaDB, MongoDB, <strong>ClickHouse</strong>, <strong>DuckDB</strong>, <strong>RocksDB</strong> (Meta&rsquo;s LevelDB fork). The fast-analytics wave is overwhelmingly C++.</p>
+      </div>
+      <div class="pillar">
+        <h4>Browsers</h4>
+        <p>Chromium/Chrome/Edge/Brave, Firefox/Gecko (with growing Rust: Servo, WebRender, URL parser), WebKit/Safari. There is no major browser engine that is not primarily C++.</p>
+      </div>
+      <div class="pillar">
+        <h4>ML / Scientific</h4>
+        <p>TensorFlow, PyTorch (LibTorch), ONNX Runtime, TensorRT, OpenCV &mdash; all C++ cores with Python wrappers. Eigen, Armadillo, CERN ROOT for numerical and scientific computing.</p>
+      </div>
+    </div>
+
+    <ul>
+      <li><strong>Embedded</strong> &mdash; C still dominates bare-metal, but modern C++ is increasingly used. AUTOSAR C++14 and MISRA C++ for safety-critical. Arduino is a C++ dialect.</li>
+      <li><strong>Financial engineering</strong> &mdash; <strong>QuantLib</strong>, the prominent open-source quantitative finance library.</li>
+      <li><strong>CAD / 3D</strong> &mdash; Autodesk Maya, 3ds Max, AutoCAD, FreeCAD, OpenCASCADE. Blender mostly C with substantial C++.</li>
+      <li><strong>Telecom</strong> &mdash; Base stations, switches, routers, packet processors. Carrier-grade software is overwhelmingly C++.</li>
+      <li><strong>Desktop applications</strong> &mdash; Adobe Photoshop, Illustrator, InDesign, Microsoft Office, Visual Studio. Electron itself is Chromium + Node.js &mdash; both C++ underneath.</li>
+    </ul>
+
+    <h2>Libraries Beyond std</h2>
+    <table>
+      <thead><tr><th>Library</th><th>Niche</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Boost</strong></td><td>The pre-standard incubator since 1998. <code>shared_ptr</code>, <code>regex</code>, <code>filesystem</code>, <code>chrono</code>, <code>variant</code>, <code>optional</code>, <code>any</code>, <code>thread</code>, and many more graduated to std.</td></tr>
+        <tr><td><strong>fmt / spdlog</strong></td><td>Victor Zverovich&rsquo;s formatting library (became <code>std::format</code> in C++20) and the logging library built on it.</td></tr>
+        <tr><td><strong>Abseil</strong></td><td>Google&rsquo;s common library. <code>absl::flat_hash_map</code>, string utilities, time utilities.</td></tr>
+        <tr><td><strong>Folly</strong></td><td>Meta&rsquo;s high-performance library. Futures, concurrency, containers.</td></tr>
+        <tr><td><strong>EASTL</strong></td><td>Electronic Arts&rsquo; game-friendly STL alternative.</td></tr>
+        <tr><td><strong>Eigen</strong></td><td>Expression-template linear algebra. Used in ROS, TensorFlow, Ceres, many CV libraries.</td></tr>
+        <tr><td><strong>Boost.Asio</strong></td><td>Asynchronous I/O and networking. Ancestor of the <code>std::execution</code> model.</td></tr>
+        <tr><td><strong>OpenCV</strong></td><td>Computer vision, in C++ with Python bindings.</td></tr>
+        <tr><td><strong>Catch2</strong>, <strong>gtest</strong>, <strong>doctest</strong></td><td>Test frameworks.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>BLN</td><td>Blender</td><td>Blender&rsquo;s core is C and C++; the Cycles ray tracer is pure C++</td></tr>
+        <tr><td>MPC</td><td>Math Co-Processor</td><td>Eigen and cuBLAS both expose C++ interfaces for GPU-accelerated linear algebra</td></tr>
+        <tr><td>AIH</td><td>AI History</td><td>TensorFlow, PyTorch, ONNX &mdash; the ML infrastructure boom runs on C++</td></tr>
+        <tr><td>BCM</td><td>Browser Compatibility</td><td>Chromium&rsquo;s Blink, Firefox&rsquo;s Gecko, and Safari&rsquo;s WebKit all live in the C++ ecosystem</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">C++ Core Language</a></li>
+        <li><a href="oop.html">Object-Oriented C++</a></li>
+        <li><a href="templates.html">Templates &amp; Generic Programming</a></li>
+        <li><a href="stdlib.html">Standard Template Library</a></li>
+        <li><a href="modern.html">Modern C++ (C++11&ndash;26)</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Ecosystem &amp; Tooling &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,206 +1,314 @@
-# Political Science & Complex Plane: Current Global State — Quantitative Baseline
+# Political Science & Complex Plane: Current Global State -- Expanded Analysis
 
 > **Domain:** Political Science, History & the Complex Plane
-> **Module:** 3 -- Current Global State
-> **Through-line:** *The numbers do not lie, but they require a framework to speak. The 2024–2025 measurement cycle, the most comprehensive in the history of democratic monitoring, reveals a political world in which the imaginary axis has been captured before the real axis has collapsed — the textbook signature, as the Kettering Foundation identifies it, of top-down authoritarian consolidation rather than citizen-driven regime change. Ninety-one autocracies now outnumber eighty-eight democracies for the first time in the era of systematic measurement. This module maps that terrain quantitatively, regionally, and mechanistically.*
+> **Module:** 3 (Expanded) -- Current Global State
+> **Through-line:** *The 2024-2026 measurement cycle confirms and deepens the structural diagnosis of Module 3's original baseline: the imaginary axis is being captured before the real axis collapses, autocracies now outnumber democracies, and new fault lines -- AI governance, climate policy, economic multipolarity, and mass migration -- are reshaping the attractor landscape of global politics. This expanded module adds the geopolitical detail, regional specificity, and emerging-domain analysis that the original quantitative baseline necessarily compressed. The numbers remain the foundation; this module adds the forces behind them.*
 
 ---
 
 ## Table of Contents
 
-1. [Global Indicators: The 2024–2025 Measurement Cycle](#1-global-indicators-the-202425-measurement-cycle)
-2. [Regional Signals](#2-regional-signals)
-   - 2.1 [United States: The Competitive Authoritarianism Debate](#21-united-states-the-competitive-authoritarianism-debate)
-   - 2.2 [Europe: The Only Improving Region — With Caveats](#22-europe-the-only-improving-region--with-caveats)
-   - 2.3 [Global South: Recovery Trajectories and Pressure Points](#23-global-south-recovery-trajectories-and-pressure-points)
-   - 2.4 [Asia-Pacific and the Middle East](#24-asia-pacific-and-the-middle-east)
-3. [The Mechanism: Imaginary-Axis Capture](#3-the-mechanism-imaginary-axis-capture)
-4. [Democratic Resilience Signals](#4-democratic-resilience-signals)
-5. [Recovery Patterns: What the Data Shows](#5-recovery-patterns-what-the-data-shows)
-6. [Complex Plane Interpretation of Current Conditions](#6-complex-plane-interpretation-of-current-conditions)
-7. [Sources](#7-sources)
+1. [Geopolitical Fault Lines: 2024-2026](#1-geopolitical-fault-lines-20242026)
+   - 1.1 [Ukraine: The Frozen Conflict Pattern](#11-ukraine-the-frozen-conflict-pattern)
+   - 1.2 [Taiwan Strait: Escalation Ladder Without an Exit](#12-taiwan-strait-escalation-ladder-without-an-exit)
+   - 1.3 [Middle East: Fragmentation and Recomposition](#13-middle-east-fragmentation-and-recomposition)
+2. [Economic Multipolarity and the De-Dollarization Debate](#2-economic-multipolarity-and-the-de-dollarization-debate)
+   - 2.1 [BRICS Expansion: Institutional Weight Without Institutional Depth](#21-brics-expansion-institutional-weight-without-institutional-depth)
+   - 2.2 [Digital Currencies and the Future of Monetary Sovereignty](#22-digital-currencies-and-the-future-of-monetary-sovereignty)
+3. [AI Governance: The Regulatory Trilemma](#3-ai-governance-the-regulatory-trilemma)
+   - 3.1 [EU AI Act: The World's First Comprehensive Framework](#31-eu-ai-act-the-worlds-first-comprehensive-framework)
+   - 3.2 [United States: Innovation-First with Executive Oscillation](#32-united-states-innovation-first-with-executive-oscillation)
+   - 3.3 [China: State Capacity Applied to AI Control](#33-china-state-capacity-applied-to-ai-control)
+   - 3.4 [The International Coordination Gap](#34-the-international-coordination-gap)
+4. [Climate Policy: COP28 Through COP30 and the Implementation Gap](#4-climate-policy-cop28-through-cop30-and-the-implementation-gap)
+5. [Democratic Backsliding: Updated Case Analysis](#5-democratic-backsliding-updated-case-analysis)
+   - 5.1 [Hungary: The Template Matures](#51-hungary-the-template-matures)
+   - 5.2 [Turkey: Institutionalized Competitive Authoritarianism](#52-turkey-institutionalized-competitive-authoritarianism)
+   - 5.3 [India: Sociocultural Capture at Scale](#53-india-sociocultural-capture-at-scale)
+   - 5.4 [United States: Unprecedented Velocity](#54-united-states-unprecedented-velocity)
+6. [The Rise of Populism: Complex Plane Dynamics](#6-the-rise-of-populism-complex-plane-dynamics)
+7. [Migration as Political Force](#7-migration-as-political-force)
+8. [Complex Plane Synthesis: The 2026 Attractor Landscape](#8-complex-plane-synthesis-the-2026-attractor-landscape)
+9. [Sources](#9-sources)
 
 ---
 
-## 1. Global Indicators: The 2024–2025 Measurement Cycle
+## 1. Geopolitical Fault Lines: 2024-2026
 
-The 2024–2025 measurement cycle represents the convergence of four independent tracking systems — V-Dem, the EIU Democracy Index, International IDEA's Global State of Democracy indices, and the Carnegie Endowment's country-level case analysis — each methodologically distinct, each arriving at consistent conclusions about the direction of democratic health worldwide. Their agreement across different measurement philosophies is itself significant: the signal is not an artifact of any single methodology.
+The original Module 3 established the quantitative baseline: 91 autocracies versus 88 democracies, the world at 1985 population-weighted levels of liberal democracy, 45 countries in active autocratization. This section adds the geopolitical forces shaping those numbers -- the specific conflicts, competitions, and confrontations that are driving trajectory changes on both axes of the complex plane.
 
-### 1.1 Core Indicators Summary
+### 1.1 Ukraine: The Frozen Conflict Pattern
 
-| Indicator | Value (2024–25) | Source |
-|-----------|-----------------|--------|
-| Global average democracy score | 5.17 / 10 (lowest in decades) | EIU Democracy Index 2024 |
-| Population in full democracies | 6.6% (down from 12.5% a decade ago) | EIU 2024 |
-| Countries in autocratization | 45 | V-Dem 2025 |
-| Countries in democratization | 19 | V-Dem 2025 |
-| Global autocracies vs. democracies | 91 vs. 88 | V-Dem 2025 |
-| IDEA erosion alerts (Jan–Apr 2025) | 20 (twice the rate of previous two full years) | International IDEA |
-| Population in autocratizing countries | ~20% of world population | V-Dem 2025 |
-| Population in democratizing countries | ~6% of world population | V-Dem 2025 |
-| Average liberal democracy level | Back to 1985 population-weighted values | V-Dem 2025 |
-| Governments actively spreading disinformation | ~45% of autocratizing governments | V-Dem 2025 |
-| Countries experiencing increasing polarization | ~25% of all countries | V-Dem 2025 |
+The Russo-Ukrainian War, which began with Russia's full-scale invasion in February 2022, entered its fourth year in 2026 with no resolution despite multiple rounds of diplomacy. The conflict has evolved from a kinetic war into a geopolitical structuring force that is reshaping alliance systems, energy markets, defense spending, and the normative framework of sovereignty itself.
 
-### 1.2 What These Numbers Mean Structurally
+**The negotiation stalemate.** Three completed rounds of U.S.-mediated negotiations through early 2026 demonstrated a consistent pattern of process without progress. The central fault line remained unchanged: Russia's insistence on territorial concessions (formal recognition of its control over occupied Ukrainian territories) versus Ukraine's demand for security guarantees prior to any territorial discussion. In January 2026, the U.K. and France offered to install "military hubs" in Ukraine as part of a peace plan, with France pledging "several thousand" troops for deployment under a ceasefire. The United States backed a ceasefire monitoring mechanism involving drones, sensors, and satellites. Russia categorically rejected any deployment of NATO-country troops on Ukrainian soil (NPR, January 2026; Al Jazeera, January 2026).
 
-The ratio reversal — 91 autocracies to 88 democracies — requires careful interpretation. Raw counts of regime types do not weight for population, institutional depth, or trajectory. A country of 50 million that has been a consolidated democracy for forty years carries more structural weight in the global democratic ecosystem than three countries of 5 million each that achieved electoral democracy within the past decade and are now backsliding. V-Dem's population-weighted analysis, which shows the world at 1985 levels of liberal democracy, is therefore more informative than the raw country count.
+By March 2026, Ukraine's President Zelenskyy urged allies to increase pressure on Russia ahead of further U.S.-brokered talks, while analysis from the Moscow Times characterized the negotiations as "not ending the war but extending it" -- a process that legitimized Russia's territorial gains while offering Ukraine security assurances short of NATO membership (Moscow Times, March 2026; CSIS, 2026).
 
-The EIU's decline in full democracy population from 12.5% to 6.6% over a decade is perhaps the single most alarming number in the dataset. It means that the share of humanity living under conditions of full democratic governance — with robust civil liberties, functioning opposition, independent judiciary, free press — has been cut approximately in half in ten years. This is not slow drift. It is rapid compression of the space within which democratic politics operates.
+**Complex plane reading.** The Ukraine conflict operates on both axes simultaneously. On the real axis, it has restructured European defense architecture: EU defense spending has increased across member states, NATO has added Finland and Sweden, and the European Council's March 2026 statement reaffirmed long-term security commitments to Ukraine. On the imaginary axis, the war has generated a felt sense of existential threat in Europe not experienced since the Cold War, reviving solidaristic narratives of collective defense that had atrophied during the "end of history" saddle point (Module 2, P5). The imaginary-axis effect is asymmetric: in Western Europe, it has strengthened democratic solidarity (positive X(t) shift); in countries adjacent to Russia, it has produced both democratic mobilization and authoritarian security responses (contested X(t) trajectory).
 
-International IDEA's 20 erosion alerts in the first four months of 2025 is significant for its rate: prior years averaged fewer than 10 alerts in equivalent periods. IDEA's alert system is designed to flag confirmed episodes of institutional backsliding — not risk assessments, but observed changes in democratic indices that cross defined thresholds. Twenty alerts in four months means the system is detecting accelerating actual erosion, not merely elevated risk.
+The frozen-conflict pattern -- formal negotiations without resolution, continued low-intensity combat, gradual normalization of territorial occupation -- is itself a complex plane phenomenon: the real axis (international law, sovereignty norms, territorial integrity) and the imaginary axis (lived experience of occupation, felt legitimacy of the post-war order) are diverging. International law formally does not recognize Russia's annexations; the lived experience of populations under Russian control is increasingly one of integration into Russian administrative structures. The phase angle between formal and experienced reality is widening.
 
-### 1.3 The Third Wave of Autocratization in Historical Context
+### 1.2 Taiwan Strait: Escalation Ladder Without an Exit
 
-V-Dem's 2025 Democracy Report frames the current moment as the third wave of autocratization — a structural phenomenon in the history of democratic diffusion. The first wave (1920s–1940s) reversed the first wave of democratization; the second wave (1960s–1970s) reversed much of the second wave of democratization following decolonization. The current third wave began around 2016 and is now, by V-Dem's analysis, clearly underway.
+The Taiwan Strait became the most dangerous bilateral military fault line in the world during 2024-2025, with China conducting an escalating series of military exercises that progressively tested the operational requirements for a naval blockade of Taiwan.
 
-What distinguishes the third wave from its predecessors is its mechanism. The first and second waves were driven largely by direct institutional takeover — military coups, constitutional suspension, external invasion. The third wave operates through democratic institutions themselves: elections are held, parliaments function, constitutions remain formally in force, while the underlying conditions for meaningful democratic contestation — independent media, judicial independence, civil society space, electoral integrity — are systematically degraded. This is what Steven Levitsky and Lucan Way identified as "competitive authoritarianism" and what Licia Cianetti and others have characterized as "backsliding" to distinguish it from conventional democratic breakdown (Levitsky & Way, *Competitive Authoritarianism*, 2010; Cianetti et al., *Varieties of Democracy*, 2018).
+**The escalation sequence.** In October 2024, the PLA Eastern Theater Command conducted "Joint Sword-2024B" maneuvers focused on sea-air combat-readiness patrols, blockade operations targeting key ports, and assault exercises on maritime and ground targets. In February 2025, a joint combat readiness drill involved 22 PLA aircraft crossing the Taiwan Strait median line -- a boundary that China had historically respected as an informal buffer. In April 2025, "Strait Thunder-2025A" expanded the exercise zone to encompass the Matsu Islands and the main island of Taiwan. The capstone exercise -- "Justice Mission 2025" in December 2025 -- deployed over 90 ships, the PLA's single largest maritime deployment in the Taiwan Strait to date, exceeding the scale of all previous exercises including the 1996 Third Taiwan Strait Crisis. The exercise zones covered nearly the entire length of the Taiwan Strait, cutting off direct flight and sailing routes between Taiwan and its outlying islands (Defense News, January 2026; CNN, December 2025; AEI, December 2025).
 
----
+**The structural dynamic.** The escalation pattern follows a ratchet logic familiar from the competitive authoritarianism literature: each exercise establishes a new baseline of "normal" PLA activity, against which subsequent escalations are measured. What would have been a crisis in 2020 -- 22 aircraft crossing the median line -- became routine by 2025 standards. This is imaginary-axis normalization applied to international security: the felt threshold of threat is being systematically raised so that the eventual deployment of actual coercive force will be experienced as an incremental step rather than a discontinuous shock.
 
-## 2. Regional Signals
+**Complex plane reading.** The Taiwan Strait dynamic is a contest between two attractor basins. The United States and its allies are attempting to maintain a status quo attractor in which Taiwan exists as a de facto sovereign democratic entity without formal independence. China is attempting to shift the trajectory toward a reunification attractor through graduated coercive pressure. The imaginary axis is the contested terrain: China's military exercises are designed less to achieve immediate military objectives than to reshape what populations in the region experience as the normal range of Chinese military activity -- an imaginary-axis operation targeting the threshold of resistance.
 
-### 2.1 United States: The Competitive Authoritarianism Debate
+Taiwan itself occupies a distinctive position on the complex plane: high R(t) (robust democratic institutions, independent judiciary, free press, competitive elections) with high X(t) (strong civic identity, high democratic value endorsement) but under existential external pressure that threatens both axes simultaneously. Taiwan's z(t) is in Quadrant I but within the gravitational field of a powerful external force pulling toward Quadrant III.
 
-The United States presents the most consequential and most contested measurement case in the current cycle.
+### 1.3 Middle East: Fragmentation and Recomposition
 
-**EIU classification:** The EIU Democracy Index 2024 classifies the United States as a "flawed democracy" — not full democracy. This classification predates the current administration, reflecting longstanding concerns about campaign finance, electoral system design, and legislative dysfunction. The flawed democracy classification places the U.S. in a category that includes most of Southern and Eastern Europe, several Latin American nations, and India — systems with genuinely competitive elections but with meaningful structural deficits in democratic functioning.
+The Middle Eastern crisis that began with the October 7, 2023 Hamas attack on Israel and Israel's subsequent invasion of Gaza metastasized through 2024-2025 into a regional restructuring event affecting Lebanon, Syria, Yemen, and the broader Iran-aligned "Axis of Resistance."
 
-**V-Dem Liberal Democracy Index trajectory:** V-Dem measures the Liberal Democracy Index (LDI) as a composite of electoral, liberal, and participatory democracy components. The U.S. LDI fell from approximately 0.85 to 0.73 during Donald Trump's first presidential term (2017–2021) — a decline to 1976-era levels. This was the sharpest single-administration decline recorded for a high-income OECD democracy in V-Dem's dataset. Whether the index has recovered, stabilized, or continued declining under subsequent administrations is a matter of ongoing measurement and scholarly debate.
+**The Gaza trajectory.** Extended negotiations throughout 2024 yielded a three-stage ceasefire proposal mediated by the United States, Egypt, and Qatar. Hamas accepted in May 2024; Israeli Prime Minister Netanyahu ultimately rejected a permanent ceasefire. A ceasefire was agreed on January 15, 2025, calling for the release of 33 Israeli hostages in exchange for Palestinian prisoners, but collapsed by March when Israel launched surprise airstrikes. A more substantial ceasefire was formally signed on October 9, 2025 in Egypt, establishing Phase 1 of a peace plan, though it remained fragile -- at least 356 Palestinians were killed after the ceasefire took effect, and Israeli forces conducted approximately 190 operations across Gaza (International Crisis Group, 2025; UN Security Council, 2025).
 
-**The competitive authoritarianism question:** The Carnegie Endowment for International Peace (2025) notes active debate among comparative politics scholars about whether the U.S. has already entered what Levitsky and Ziblatt term "backsliding" territory or whether its institutional resilience — federal structure, judicial review, civil society robustness — places it in a distinct category from the cases where competitive authoritarianism has consolidated (Carnegie Endowment, "Ten Pivotal Cases," 2025). The debate is not over whether erosion has occurred — V-Dem data confirms it has — but over which attractor basin the U.S. trajectory is approaching.
+**Regional cascades.** The crisis extended well beyond Gaza. A year-long exchange of strikes between Israel and Hezbollah escalated into an Israeli invasion of southern Lebanon in late 2024, paused by a ceasefire. In February 2025, Israel largely withdrew but maintained five military outposts on Lebanese highlands. The United States launched aerial and naval strikes against Houthi targets in Yemen beginning March 2025, escalating into a sustained campaign before an Oman-mediated ceasefire in May 2025. Perhaps most consequentially, the Assad regime in Syria fell in late 2024, fundamentally altering the regional power balance, as Israel subsequently began military operations within Syria (ACLED, November 2025; Security Council Report, December 2025).
 
-**International IDEA's tracking:** As of April 2025, IDEA notes that actions of the second Trump administration have produced the highest rate of democratic erosion alerts in the organization's tracking history for a high-income established democracy. These alerts cover specific institutional categories: judicial independence, civil service independence, electoral integrity, and freedom of association.
+**Complex plane reading.** The Middle Eastern crisis is a multi-dimensional phase transition in the regional complex plane. The real axis -- formal state structures, sovereignty claims, treaty obligations -- is in flux across multiple states simultaneously. The imaginary axis -- experienced legitimacy of regional order, felt security, collective identity -- has collapsed for populations in Gaza, southern Lebanon, and Yemen. The region is in a revolutionary state (Module 4, Attractor 5) for several of its components: no stable attractor has been established, and the eventual basin of attraction for the post-crisis regional order is genuinely uncertain.
 
-**What is not in dispute:** The directional finding is consistent across all four tracking systems. The United States is experiencing measurable democratic erosion by the principal institutional indicators. The unresolved question is one of trajectory and endpoint — whether observed erosion is self-limiting (resilience) or self-reinforcing (consolidation).
+The humanitarian dimension carries its own imaginary-axis weight globally. The scale of civilian casualties in Gaza -- estimated by the Gaza Health Ministry at over 40,000 by late 2025, with the UN estimating that over 60% of Gaza's housing stock has been destroyed -- has generated a worldwide imaginary-axis shift in perceptions of Israeli democracy and of U.S. complicity in the conflict. Protest movements on university campuses across the United States and Europe, divestment campaigns, and shifts in polling data among younger voters all represent imaginary-axis phenomena: the felt legitimacy of the existing Middle Eastern order, and of the Western states that underwrite it, has declined substantially for specific demographic cohorts. This imaginary-axis erosion among younger populations may not produce immediate real-axis consequences, but it shapes the trajectory of future democratic politics in the states where those voters will eventually constitute electoral majorities.
 
-### 2.2 Europe: The Only Improving Region — With Caveats
-
-Western Europe is the only world region showing slight net democratic improvement in the EIU Democracy Index 2024. This is a finding of structural importance: it suggests that the post-1945 institutional architecture — EU membership requirements, strong civil society traditions, functional welfare states — continues to provide resilience against the autocratization pressures affecting other regions. The 1945 reconstruction analyzed in Module 2 (Historical Arc) appears to have successfully established stable attractors in at least this regional system.
-
-The caveats are significant:
-
-**Greece as confirmed autocratizer:** V-Dem's 2025 data statistically confirms Greece as an autocratizing country. This is notable because Greece is an EU member state — nominally subject to Article 7 mechanisms designed to prevent democratic backsliding within the union. The Greek case raises structural questions about whether EU membership requirements are sufficient institutional constraints on member-state autocratization, or whether they function primarily as entry barriers rather than ongoing governance constraints.
-
-**Austria:** Austria has entered a far-right government coalition following the 2024 elections — the Freedom Party (FPO) led by Herbert Kickl formed a government after receiving the largest vote share. This is the first time the FPO has led an Austrian government. V-Dem does not yet classify Austria as autocratizing but flags it as a country to watch in the next measurement cycle.
-
-**France, Germany, Netherlands:** All three face mounting pressure from populist right parties. The Alternative for Germany (AfD), Rassemblement National, and PVV have achieved electoral results that, while not placing them in government, have structurally shifted the political discourse in their respective national contexts. V-Dem measures political polarization as a separate indicator from regime type, and all three countries show elevated polarization scores.
-
-**Hungary and Serbia as ongoing cases:** Hungary under Viktor Orbán and Serbia under Aleksandar Vucic remain the most advanced autocratization cases in Europe. Both are V-Dem-confirmed autocratizers of long standing. Hungary's case is particularly studied because it demonstrates that EU membership does not prevent autocratization once a party achieves sufficient legislative supermajority to amend constitutional structures (Bánkuti et al., *Dismantling Democracy in Hungary*, 2012).
-
-**The European paradox:** Europe improves slightly as a region in aggregate while experiencing autocratization in specific cases and polarization pressure across many others. This is consistent with the complex-plane interpretation that a regional system can maintain a democratic attractor even while individual member-state trajectories diverge. The regional resilience and the individual-state vulnerabilities are not contradictory — they are simultaneous features of a heterogeneous system.
-
-### 2.3 Global South: Recovery Trajectories and Pressure Points
-
-The Global South presents the highest variance in the current measurement cycle — the most dramatic cases of democratic recovery and some of the most sustained cases of authoritarian pressure are concentrated here.
-
-**Bangladesh: The clearest bottom-up recovery case:** Bangladesh's 2024 student revolution is among the strongest empirical examples in the current cycle of bottom-up democratic pressure succeeding. The movement — organized initially around protests against a government quota system that reserved government jobs for relatives of 1971 independence war veterans — rapidly escalated into a generalized rejection of Sheikh Hasina's Awami League government, which V-Dem had documented as a sustained autocratizer over fifteen years. Hasina fled the country in August 2024. An interim government led by Nobel Peace Prize laureate Muhammad Yunus subsequently took power. The Bangladesh case is analytically important because it demonstrates that bottom-up citizen demand can succeed against even an entrenched autocratizing government — but the consolidation into stable democratic institutions remains, as of the current measurement cycle, incomplete. The imaginary axis (citizen demand for democracy) has moved decisively; the real axis (institutional reconstruction) is in progress.
-
-**Kenya: Mounting pressure with uncertain trajectory:** Kenya under President William Ruto faces mounting pro-democracy resistance, including large-scale youth-led protests in mid-2024 that led to the withdrawal of controversial finance legislation. V-Dem's Kenya trajectory shows pressure on civil society space and judicial independence, but the protests demonstrated that organized citizen resistance can achieve policy reversals in a context of partial institutional degradation. Kenya occupies a complex-plane position analogous to flawed democracy — moderate positive real axis with contested imaginary axis.
-
-**Latin America's heterogeneous landscape:** Latin America contains the full range of regime types in the current cycle. Venezuela and Nicaragua are V-Dem-confirmed closed autocracies. Mexico is in ongoing measurement debate following democratic transitions and institutional changes under successive administrations. Brazil shows democratic recovery following the 2022 election of Luiz Inácio Lula da Silva and the January 8, 2023 attempted institutional disruption — which, unlike analogous events in some other contexts, resulted in substantial criminal accountability. Argentina is undergoing contested institutional change under Javier Milei's administration, with V-Dem monitoring indicators across civil service independence, institutional check-and-balance mechanisms, and media freedom.
-
-**Sub-Saharan Africa:** The most acute autocratization cases in the current cycle are concentrated in the Sahel — Mali, Niger, Burkina Faso, and Guinea have all experienced military coups since 2020, representing a regional coup cluster without precedent since the immediate post-independence period. These coups challenge the V-Dem framework's distinction between autocratization-by-backsliding and autocratization-by-conventional-breakdown: the Sahel cases are largely conventional institutional collapse, driven by security failure and withdrawal of government legitimacy rather than the slow institutional erosion characteristic of the third wave's dominant mechanism.
-
-### 2.4 Asia-Pacific and the Middle East
-
-India — the world's most populous democracy — shows contested measurement results. V-Dem's Electoral Democracy Index has declined under the BJP-led government, driven primarily by press freedom and civil society indicators. EIU classifies India as a "flawed democracy." The Indian case is significant because of scale: with 1.4 billion people, India's trajectory meaningfully affects the global population-weighted calculation of democratic health.
-
-The Middle East and North Africa region continues to show the lowest aggregate democracy scores of any world region, consistent with patterns across multiple measurement cycles. Tunisia, which had been the most successful outcome of the Arab Spring movements, has experienced confirmed autocratization under President Kais Saied's constitutional restructuring. This closes what was, for a decade, the only democratic consolidation trajectory among the Arab Spring countries.
+**The Iran dimension.** Iran's role as the primary backer of the "Axis of Resistance" -- Hamas, Hezbollah, the Houthis, and various Iraqi militias -- was simultaneously degraded and revealed by the 2024-2025 crisis. The fall of Assad removed Iran's primary land corridor to Hezbollah. Israel's strikes on Hezbollah leadership, including the assassination of Secretary-General Hassan Nasrallah in September 2024, degraded Iran's most capable proxy. Yet the Houthis' maritime campaign in the Red Sea demonstrated the capacity of Iran-aligned non-state actors to disrupt global commerce. Iran itself remains in a complex plane position that is analytically distinctive: formally theocratic on the real axis (institutions designed around clerical authority) with a deeply contested imaginary axis (a young, educated, urbanized population that repeatedly demonstrates through protest -- most recently the 2022 Mahsa Amini movement -- that it experiences the regime as illegitimate). Iran's z(t) is in Quadrant III with unusually high imaginary-axis volatility.
 
 ---
 
-## 3. The Mechanism: Imaginary-Axis Capture
+## 2. Economic Multipolarity and the De-Dollarization Debate
 
-The most theoretically important finding of the 2024–2025 measurement cycle is not any single country's trajectory but the consistent mechanism across diverse cases. The Kettering Foundation's 2025 research on democratic backsliding reaches a conclusion that the complex-plane framework makes structurally precise: democratic erosion in the current wave is driven not by citizen demand for authoritarianism but by top-down capture of the experiential/legitimacy layer — what this framework terms the imaginary axis.
+### 2.1 BRICS Expansion: Institutional Weight Without Institutional Depth
 
-The Kettering Foundation documents a consistent pattern: backsliding governments engage in a sequence of imaginary-axis capture that precedes real-axis institutional change. The sequence has identifiable stages:
+The BRICS bloc underwent its most significant expansion in 2024-2025, growing from five members to a broader coalition that now represents a substantial share of global population and GDP.
 
-**Stage 1: Normalization.** Anti-democratic actions are normalized through repetition and framing. What would previously have been understood as norm violations are reframed as corrective measures, common-sense policy, or necessary responses to emergency. The goal at this stage is not to change citizens' underlying preferences but to change their sense of what is normal and therefore permissible. V-Dem's finding that nearly half of autocratizing governments are actively spreading disinformation is the quantitative signature of Stage 1 normalization operations.
+**Expansion timeline.** In August 2023, BRICS extended invitations to six nations: Argentina, Egypt, Ethiopia, Iran, Saudi Arabia, and the United Arab Emirates. By January 2024, Egypt, Ethiopia, Iran, and the UAE had officially joined. Argentina declined under President Milei. Saudi Arabia deferred formal accession while maintaining engagement. Indonesia officially joined in early 2025, becoming the first Southeast Asian member. At the October 2024 Kazan summit, thirteen countries were invited to become "partner nations," with nine accepting by year-end: Belarus, Bolivia, Cuba, Kazakhstan, Malaysia, Thailand, Uganda, Uzbekistan, and Vietnam (Council on Foreign Relations, 2025; Stimson Center, 2025).
 
-**Stage 2: Polarization as weapon.** Polarization is deployed not as an incidental feature of democratic competition but as a deliberate strategy. The distinction between legitimate democratic opposition and existential threat is collapsed. Political opponents are described as criminals, foreign agents, enemies of the people, or existential dangers requiring exceptional measures. V-Dem's finding that approximately a quarter of all countries are experiencing increasing political polarization reflects Stage 2 dynamics operating at scale.
+**De-dollarization: ambition versus execution.** The most consequential BRICS initiative -- reducing dependence on the U.S. dollar in international trade -- showed significant rhetorical commitment but limited structural progress. China and Russia now conduct most bilateral trade in yuan and rubles, bypassing the dollar. The Kazan summit discussed BRICS Pay, a decentralized payment messaging system designed to facilitate local-currency transactions. However, at the July 2025 Rio de Janeiro summit under Brazil's presidency, no concrete progress toward a unified BRICS currency was achieved. The final declaration made no mention of a common currency or coordinated de-dollarization strategy. Even Russia's Putin, who had displayed a prototype BRICS banknote at Kazan, publicly stated that Russia was "not seeking to abandon the dollar." Brazil's President Lula quietly dropped the common currency concept from the 2025 agenda (CADTM, 2025; Chicago Policy Review, 2025).
 
-**Stage 3: Experience-institution divergence.** Citizens' felt experience of the political environment — what this framework maps on the imaginary axis — diverges from their institutional preferences. The Kettering Foundation's survey research consistently finds that citizens in backsliding democracies retain democratic preferences at the real-axis institutional level (they want elections, civil liberties, judicial independence) while reporting that their felt political environment is increasingly authoritarian. This is the gap that the complex-plane framework identifies as an increasing phase angle: the real and imaginary components of the political complex number are rotating out of alignment.
+**Complex plane reading.** BRICS expansion represents a real-axis institutional development -- new formal structures for economic and diplomatic coordination among non-Western powers. But the imaginary axis lags dramatically: there is no shared legitimacy narrative binding BRICS members comparable to the EU's democratic conditionality or NATO's collective security identity. The bloc includes democracies (Brazil, India, South Africa), competitive authoritarian regimes (Russia, Turkey as partner), and closed autocracies (Iran), with fundamentally divergent imaginary-axis configurations. The result is an institution with growing real-axis weight but shallow imaginary-axis coherence -- a configuration the complex plane model identifies as structurally unstable.
 
-**Stage 4: Real-axis collapse.** Only after imaginary-axis capture is substantially complete do backsliding governments move against formal institutions. Judicial appointments, media regulation, electoral administration, civil service independence — the formal institutional architecture — are restructured after the experiential/legitimacy environment has been sufficiently softened to reduce resistance. The Kettering Foundation frames this as a crucial finding for democratic resilience: interventions that address the imaginary axis — maintaining citizen experience of democratic normalcy, preserving civil society's felt legitimacy — may be more effective at earlier stages than interventions that focus exclusively on formal institutional defense.
+### 2.2 Digital Currencies and the Future of Monetary Sovereignty
 
-The mechanism is not uniform. Different cases show different sequencing and different rates of progression through these stages. Hungary's trajectory took roughly a decade from the 2010 Orbán supermajority to V-Dem's confirmed closed autocracy classification. Venezuela's trajectory was faster. Bangladesh's autocratization under Hasina was gradual enough to appear stable until the imaginary-axis tension released through mass protest. The mechanism's parameters vary; its structure is consistent.
+Central Bank Digital Currencies (CBDCs) emerged as a significant but contested domain of state capacity during 2024-2025.
 
----
+**Global landscape.** As of July 2025, 108 jurisdictions were researching, piloting, or launching CBDCs. The Bahamas, Jamaica, and Nigeria have formally launched retail CBDCs. No major economy has done so. India's e-rupee pilot expanded substantially, with digital rupee circulation rising 334% to 10.16 billion rupees by March 2025 (Atlantic Council CBDC Tracker, 2025; CoinLedger, 2025).
 
-## 4. Democratic Resilience Signals
+**China's digital yuan plateau.** China's e-CNY pilot, introduced in 2019 and now spanning 17 provinces with over 225 million personal digital wallets, has achieved cumulative transactions of 16.7 trillion yuan across 3.5 billion transactions as of November 2025. However, this represents just 0.2% of total Chinese digital payments in 2024. Chinese scholars have found that consumers "mostly stick to existing electronic payment apps and are reluctant to switch to e-CNY." The digital yuan, initially seen as a potential tool for internationalizing the renminbi and challenging dollar hegemony, has instead plateaued as a domestic payments experiment with limited transformative impact (PIIE, 2026).
 
-The data does not support a narrative of uniform, irreversible democratic decline. Several categories of resilience signal are present in the current measurement cycle.
+**The U.S. anti-CBDC turn.** In a significant policy reversal, President Trump issued an executive order in 2025 halting all work on a U.S. retail CBDC -- making the United States the only country to formally prohibit its central bank from pursuing digital currency development. The order reflected a political coalition linking libertarian privacy concerns with conservative skepticism of federal financial surveillance (Congress.gov, 2025).
 
-**Judicial independence as last-resort mechanism:** In multiple cases, court systems have functioned as the final institutional check on executive overreach when other institutions have been captured. The Brazilian Supreme Court's prosecution of January 8 coup plotters, Poland's Constitutional Tribunal dynamics following the 2023 elections, and several African court decisions overturning executive actions represent judicial systems exercising formal democratic functions under pressure. V-Dem's Civil Liberties Component shows more resilience than its electoral and liberal democracy components in several country cases — suggesting that the experience of civil liberties, as a dimension of the imaginary axis, is sometimes defended longer than formal electoral institutions.
-
-**Civil society mobilization:** The Bangladesh student revolution, Kenya's Gen-Z protests, and repeated waves of civil society mobilization in Serbia, Hungary, and several Latin American countries demonstrate that organized citizen resistance remains possible in significant contexts of backsliding. V-Dem's Civil Society Participation Index shows that even in countries experiencing institutional erosion, civil society organizations — particularly new, digitally organized, youth-led formations — are demonstrating capacity for sustained resistance.
-
-**The European institutional architecture:** The EU's Article 7 mechanism has been activated against both Poland and Hungary, and while it has not achieved the enforcement outcomes its architects envisioned, the monitoring and reputational pressure it creates has some measurable effect. The conditionality of EU structural funds to rule-of-law compliance — applied to Hungary since 2022 — represents an experiment in using economic levers to defend democratic institutions. The results as of the current measurement cycle are mixed but not zero.
-
-**International democratic solidarity:** Democratic governments' collective responses to backsliding — coordinated sanctions, G7 statements, OECD election monitoring, and bilateral diplomatic pressure — represent a category of international architecture for democratic defense that did not exist in the first or second waves of autocratization. Its effectiveness is contested, but its existence as a tool is new.
-
-**The counterexample of democratic deepening:** 19 countries are in democratization trajectories per V-Dem 2025. While this number is smaller than the 45 in autocratization, the democratizing countries are not trivial: they include countries emerging from authoritarian periods with genuine institutional reconstruction underway. Their existence demonstrates that autocratization is not destiny — political systems can move in both directions.
+**Complex plane reading.** CBDCs sit at the intersection of real and imaginary axes of monetary sovereignty. On the real axis, they represent a genuine technological capability for state control over payment systems. On the imaginary axis, they trigger deep anxieties about surveillance, financial privacy, and state overreach. The U.S. prohibition is an imaginary-axis phenomenon: the felt threat of government financial surveillance outweighed the real-axis benefits of monetary modernization. China's adoption plateau is also partly imaginary-axis: citizens who already trust Alipay and WeChat Pay feel no experiential benefit from switching to a state-controlled alternative.
 
 ---
 
-## 5. Recovery Patterns: What the Data Shows
+## 3. AI Governance: The Regulatory Trilemma
 
-V-Dem's longitudinal dataset — extending from 1789 to the present — contains 76 completed episodes of autocratization as of 2025. Of these, 28 ended in democratic recovery; 48 resulted in consolidated autocracy. The recovery rate of approximately 37% is not negligible: more than a third of documented autocratization episodes have ended in democratic recovery rather than consolidation.
+Artificial intelligence governance emerged between 2024 and 2026 as the most consequential new regulatory domain since climate policy. Three distinct regulatory philosophies -- European rights-based, American innovation-first, and Chinese state-capacity -- are competing to define the global framework, with profound implications for the distribution of power on both axes.
 
-Several structural patterns characterize the recovery cases:
+### 3.1 EU AI Act: The World's First Comprehensive Framework
 
-**Short duration of autocratization:** Episodes that lasted fewer than five years were more likely to recover than those lasting longer than a decade. Once autocratization has had sufficient time to restructure key institutional systems — particularly judicial independence and civil service professionalism — recovery becomes structurally more difficult.
+The EU AI Act, which entered into force on August 1, 2024, is the world's first comprehensive legal framework for artificial intelligence regulation. Its phased implementation began on February 2, 2025, when prohibitions on unacceptable-risk AI practices (social scoring systems, real-time biometric surveillance in public spaces for law enforcement without authorization, and manipulation of vulnerable groups) became enforceable. Governance rules and obligations for General Purpose AI (GPAI) models became applicable on August 2, 2025, with the European AI Office becoming operational on that date. The comprehensive compliance framework for high-risk AI systems is scheduled for August 2, 2026 (European Commission, 2024; Kennedys Law, 2026; DLA Piper, 2025).
 
-**Economic crisis as transition trigger:** A significant proportion of recovery episodes were preceded by major economic downturns in the autocratizing country. Economic crisis reduces the resources available for patronage networks and creates elite defection from the governing coalition — a finding consistent with game-theoretic models of authoritarian durability (Bueno de Mesquita et al., *The Logic of Political Survival*, 2003).
+The Act uses a risk-based classification system: prohibited practices, high-risk applications (requiring conformity assessments, human oversight, and transparency), limited-risk applications (requiring transparency obligations), and minimal-risk applications (largely unregulated). Non-compliance carries penalties of up to EUR 35 million or 7% of worldwide annual turnover -- among the highest regulatory penalties in any domain.
 
-**Civil society continuity:** Recovery cases disproportionately preserved organized civil society throughout the autocratization episode. Countries where civil society organizations maintained organizational capacity — even if operating under restrictions — showed greater recovery rates than cases where civil society was comprehensively dismantled. This is consistent with the Kettering Foundation's finding that imaginary-axis maintenance matters: civil society's continued existence preserves the experiential infrastructure for democratic recovery.
+### 3.2 United States: Innovation-First with Executive Oscillation
 
-**External anchors:** Countries with strong international institutional anchors — treaty obligations, trade agreements, membership in intergovernmental bodies with conditionality mechanisms — showed higher recovery rates. The EU case is the most studied, but similar dynamics appear in regional contexts including the African Union's anti-coup norms and ASEAN governance engagement frameworks.
+U.S. AI governance has been characterized by sharp executive-branch oscillation. President Biden's October 2023 Executive Order 14110 established safety-testing requirements, watermarking standards, and reporting obligations for frontier AI models. President Trump revoked this order on January 23, 2025, signing Executive Order 14179, "Removing Barriers to American Leadership in Artificial Intelligence," which directed federal agencies to develop an innovation-focused action plan. The resulting "Winning the Race: America's AI Action Plan" (July 2025) identified over 90 federal policy actions across three pillars: accelerating innovation, building American AI infrastructure, and leading in international AI diplomacy -- with China competition as the central motivation (White House, July 2025; Pillsbury Law, 2025).
 
----
+A December 2025 executive order went further, nationalizing AI policy by preempting state-level AI regulations -- a significant federalism move that consolidated AI governance at the federal level under an explicitly pro-innovation framework. No federal AI legislation has been enacted; governance remains entirely executive-branch-driven and therefore subject to reversal with each administration change.
 
-## 6. Complex Plane Interpretation of Current Conditions
+The executive oscillation itself is a complex plane phenomenon. The Biden order addressed imaginary-axis concerns (safety, bias, democratic information integrity) through real-axis regulatory mechanisms (reporting requirements, testing obligations). The Trump revocation prioritized real-axis competitive positioning (U.S. dominance in AI development) while dismissing imaginary-axis concerns as obstacles to innovation. The result is a U.S. AI governance framework that oscillates between addressing the experiential layer (how citizens feel about AI's effects on their lives) and ignoring it in favor of competitive advantage -- a policy-level expression of the phase-angle instability that characterizes flawed democracies on the broader political complex plane.
 
-The quantitative data of this module, read through the complex-plane framework developed in Module 4, produces a consistent picture of the current global state as a system undergoing third-wave autocratization primarily through imaginary-axis dynamics.
+### 3.3 China: State Capacity Applied to AI Control
 
-The global political system, mapped onto the complex plane z(t) = R(t) + i·X(t), shows the following structural features as of 2025:
+China's AI governance framework, developed through a series of regulations beginning in 2021, takes a different approach: sector-specific rules targeting algorithmic recommendations, deepfakes, and generative AI, combined with strong state capacity for enforcement. China's Interim Measures for the Management of Generative AI Services (2023) require that AI-generated content reflect "core socialist values" and prohibit content that undermines state power or national unity. The regulatory framework is comprehensive but instrumentally focused on maintaining party-state control over the information environment rather than on individual rights or innovation (CACM, 2025).
 
-**The global centroid has shifted.** The population-weighted average of R(t) — institutional democracy — has declined to 1985 levels (V-Dem 2025). This is a real-axis shift of historical magnitude.
+### 3.4 The International Coordination Gap
 
-**The variance of X(t) has increased.** The gap between citizens' institutional preferences and their experienced political environment is widening in the autocratizing countries. The phase angle — arg(z(t)) = arctan(X(t)/R(t)) — is increasing in the majority of cases under active monitoring. This is the mathematical signature of the Kettering Foundation mechanism: the imaginary axis is moving before the real axis catches up.
+Despite the establishment of the Global Partnership on AI (GPAI), which deepened its OECD collaboration in 2024 to include 44 member countries across six continents, meaningful international coordination on AI governance remains limited. The three major regulatory frameworks are not only different in content but in philosophy: the EU framework is rights-based, the U.S. framework is innovation-based, and the Chinese framework is control-based. These frameworks are, in the vocabulary of Module 4, organized around different attractor basins in the AI governance complex plane -- and the separatrices between them are hardening rather than softening.
 
-**The attractor landscape is bifurcating.** Countries that were in the "flawed democracy" basin — moderate positive real and imaginary components — are showing trajectory divergence. Some are moving toward the consolidated democracy basin; others are entering the competitive authoritarianism basin. The "flawed democracy" basin appears to be a saddle point rather than a stable attractor: systems can occupy it temporarily, but its equilibrium is unstable in the presence of sustained perturbation.
-
-**The modulus |z(t)| = √(R(t)² + X(t)²) is the overall stability measure.** Countries with high |z| — strong alignment between strong institutions and high citizen legitimacy — show the greatest resilience to perturbation. Countries with low |z| — weak institutions, low legitimacy, or strong misalignment between the two — are most vulnerable to autocratization consolidation.
-
-The recovery signals identified in Section 4 are, in complex-plane terms, evidence that |z| > 0 in many apparently backsliding systems: institutional resilience and civil society vitality represent imaginary-axis resources that have not yet been fully captured. The race between imaginary-axis capture (the autocratizing mechanism) and imaginary-axis maintenance (civil society resilience) is the central dynamic of the current historical moment.
+**Complex plane reading.** AI governance is a new domain in which the real axis (formal regulatory structures) and the imaginary axis (felt experience of AI's impact on society) are diverging rapidly. The formal regulatory landscape is taking shape -- the EU has a law, the U.S. has executive orders, China has sector regulations. But the experiential layer -- how citizens feel about AI's effects on their employment, their privacy, their political information environment, their children's education -- is evolving faster than any regulatory framework can track. The imaginary-axis phenomena of AI governance -- algorithmic amplification of disinformation, AI-generated deepfakes undermining epistemic trust, automated hiring systems generating felt injustice -- are operating at a scale and speed that the real-axis regulatory mechanisms are not yet equipped to address. This is a Quadrant IV configuration for AI governance: real-axis institutions are forming, but the imaginary axis is already negative for significant populations who experience AI primarily as a source of anxiety, job displacement, and epistemic degradation.
 
 ---
 
-## 7. Sources
+## 4. Climate Policy: COP28 Through COP30 and the Implementation Gap
 
-### Government and Agency Sources
+Climate policy advanced through three consecutive Conference of the Parties sessions between 2023 and 2025, each marking incremental real-axis progress while the imaginary axis of climate politics -- the felt urgency of climate action, the experienced fairness of the transition -- remained deeply contested.
 
-- V-Dem Institute. *Democracy Report 2025: 25 Years of Autocratization — Democracy Trumped?* University of Gothenburg, 2025.
-- International IDEA. *The Global State of Democracy 2025: Democracy on the Move*. Stockholm, 2025.
-- International IDEA. *Global State of Democracy Indices*, 1975–2024 (Version 9).
-- Carnegie Endowment for International Peace. "Ten Pivotal Cases for Global Democracy." December 2025.
-- Economist Intelligence Unit. *Democracy Index 2024: Living in a Flawed Democracy*. London, 2024.
-- Kettering Foundation. *Democratic Backsliding and the Citizen Experience: Top-Down Capture of the Legitimacy Layer*. Dayton, OH, 2025.
+**COP28 (Dubai, December 2023)** produced the first-ever negotiated agreement referencing fossil fuel transition, calling for "transitioning away from fossil fuels in energy systems, in a just, orderly and equitable manner." The first Global Stocktake under the Paris Agreement confirmed that the world was not on track for 1.5 degrees C, identifying the need for global emissions to peak by 2025 and decline 43% by 2030 compared to 2019 levels (UNFCCC, 2023; IISD, 2023).
 
-### Peer-Reviewed Research
+**COP29 (Baku, Azerbaijan, November 2024)** focused on climate finance, establishing the New Collective Quantified Goal (NCQG) at $300 billion per year by 2035 -- well below the $1.3 trillion annually demanded by developing nations. The gap between the formal commitment and the experienced need generated significant imaginary-axis backlash from Global South nations, who characterized the outcome as inadequate to the scale of adaptation requirements already being imposed by climate impacts (Real Instituto Elcano, 2025).
 
-- Levitsky, S. and Way, L. *Competitive Authoritarianism: Hybrid Regimes After the Cold War*. Cambridge University Press, 2010.
-- Levitsky, S. and Ziblatt, D. *How Democracies Die*. Crown, 2018.
-- Cianetti, L., Dawson, J., and Hanley, S. "Rethinking 'Democratic Backsliding' in Central and Eastern Europe." *East European Politics* 34(3), 2018.
-- Bánkuti, M., Halmai, G., and Scheppele, K. "Disabling the Constitution." *Journal of Democracy* 23(3), 2012.
-- Bueno de Mesquita, B., Smith, A., Siverson, R., and Morrow, J. *The Logic of Political Survival*. MIT Press, 2003.
-- Przeworski, A. "Acquiring the Habit of Changing Governments Through Elections." *Comparative Political Studies* 48(1), 2015.
-- Cairney, P. "Complexity Theory in Political Science and Public Policy." *Political Studies Review* 10(3), 2012.
+**COP30 (Belem, Brazil, November 2025)** received updated Nationally Determined Contributions from 113 parties covering nearly 80% of global emissions, with combined commitments reducing emissions to approximately 12% below 2019 levels by 2035. COP30 launched a "Global Implementation Accelerator" and the "Belem Mission to 1.5" to enhance NDC implementation. The Baku-to-Belem Roadmap laid out pathways to scale finance toward the $1.3 trillion target (European Commission, December 2025; World Resources Institute, 2025).
+
+**The implementation gap.** The Paris Agreement's architects designed a ratchet mechanism: NDCs would become progressively more ambitious over time, with each submission cycle tightening commitments. The mechanism is working in the sense that ambition on paper has increased. But the gap between committed reductions and required reductions remains substantial, and the gap between committed reductions and implemented reductions is wider still. Without the Paris Agreement, global emissions were projected to rise 20-48% above 2019 levels by 2035; with current NDCs, they decline approximately 12%. The 1.5 degree C target requires a 43% decline. The real axis (treaty commitments) and the imaginary axis (felt urgency and experienced fairness) are moving, but not fast enough and not in alignment.
+
+**The Green New Deal and its variants.** The concept of a "Green New Deal" -- combining climate action with economic transformation and social equity -- has evolved from a single U.S. legislative proposal (introduced by Representative Alexandria Ocasio-Cortez and Senator Ed Markey in 2019) into a family of policy frameworks adopted, in various forms, across multiple jurisdictions. The EU Green Deal (2019) is the most institutionally developed version, committing the bloc to climate neutrality by 2050 with binding intermediate targets. China's "dual carbon" goals (peak emissions by 2030, carbon neutrality by 2060) represent a state-directed version. South Korea and Japan have adopted Green New Deal-adjacent frameworks. The proliferation of these frameworks represents real-axis institutional development -- formal policy commitments backed by legislative and regulatory mechanisms. Their imaginary-axis effect depends on whether populations experience the transition as beneficial (green jobs, cleaner air, energy independence) or threatening (job losses in fossil fuel sectors, higher energy costs, industrial disruption).
+
+**The climate-democracy nexus.** Climate change has a direct and under-theorized relationship to democratic backsliding. Climate impacts -- extreme weather events, agricultural disruption, water scarcity, climate-driven migration -- generate the economic stress and social instability that the Kettering Foundation mechanism identifies as preconditions for imaginary-axis capture. The 2024-2025 period saw intensifying climate-linked political instability in the Sahel (where drought contributed to the conditions for military coups), in South and Southeast Asia (where extreme heat and flooding strained government capacity), and in Central America (where agricultural disruption fueled northward migration that, in turn, fueled anti-immigrant populism in receiving countries). Climate change is not merely an environmental policy domain; it is a forcing function on the political complex plane, generating perturbations that accelerate the autocratization dynamics documented throughout this module.
+
+**Complex plane reading.** Climate policy occupies a distinctive position on the political complex plane because the imaginary axis is bifurcated: climate-concerned populations experience escalating urgency (positive X(t) for climate action), while populations dependent on fossil fuel economies experience climate policy as an existential economic threat (negative X(t) for climate action). The polarization of climate politics is not merely a disagreement about policy but an imaginary-axis fracture in which the same policy generates opposite experiential responses in different populations. This is the condition the complex plane model identifies as high phase variance -- the global X(t) for climate is not a single value but a distribution with increasing spread. The just transition framework -- the explicit attempt to address the imaginary-axis concerns of fossil-fuel-dependent communities through compensatory investment -- is, in complex plane terms, an attempt to reduce this variance by coupling the real-axis climate policy to imaginary-axis economic security for affected populations. Where just transition mechanisms are implemented (as in parts of the EU Green Deal), the phase variance is reduced. Where they are absent (as in many developing-country contexts), the phase variance widens and becomes a vector for populist mobilization against climate action.
+
+---
+
+## 5. Democratic Backsliding: Updated Case Analysis
+
+The original Module 3 established the quantitative contours of the third wave of autocratization. This section deepens the case analysis for four countries that collectively illustrate the full range of backsliding mechanisms identified in the Kettering Foundation framework.
+
+### 5.1 Hungary: The Template Matures
+
+Hungary under Viktor Orban remains the most studied case of competitive authoritarianism within an EU member state. By 2025, V-Dem has confirmed Hungary as a closed autocracy by several indicators, despite the persistence of formally competitive elections. Fidesz has won four successive parliamentary elections (2010, 2014, 2018, 2022), each with constitutional supermajorities enabled by an electoral system that Fidesz itself redesigned after its initial victory.
+
+The Hungarian case demonstrates the full four-stage Kettering mechanism in completed form: normalization of anti-democratic rhetoric (2010-2014), weaponized polarization casting opposition as foreign agents (2014-2018), experience-institution divergence as citizens who retain democratic preferences experience an increasingly authoritarian environment (2018-2022), and real-axis institutional collapse as courts, media, universities, and civil society are systematically captured (ongoing). Orban's "illiberal democracy" framing is itself an imaginary-axis operation: it redefines democracy to exclude the liberal components (independent judiciary, press freedom, minority rights) that constrain executive power, while preserving the electoral component that provides democratic legitimacy (Bankkuti et al., 2012; Democratic Erosion, 2025).
+
+The 2024 protests in Hungary -- triggered by corruption scandals and a government child abuse pardon controversy involving Peter Magyar's Tisza Party -- demonstrated that imaginary-axis resistance persists even in mature competitive authoritarianism. Magyar's party emerged as the first serious electoral challenger to Fidesz in over a decade, suggesting that the competitive authoritarian attractor, while deep, is not impervious to imaginary-axis perturbation.
+
+### 5.2 Turkey: Institutionalized Competitive Authoritarianism
+
+Turkey under Recep Tayyip Erdogan represents the longest-running case of gradual democratic erosion among mid-income democracies. The trajectory from Erdogan's initial election in 2003 through the failed coup of 2016 and the subsequent emergency-power period to the present illustrates how competitive authoritarianism can institutionalize over two decades without producing formal regime change.
+
+V-Dem's Turkey trajectory shows a steady decline in the Liberal Democracy Index from approximately 0.45 in 2010 to below 0.20 by 2024. The 2017 constitutional referendum, which replaced Turkey's parliamentary system with an executive presidency, was the real-axis inflection point -- but it was preceded by years of imaginary-axis capture through media consolidation (over 90% of Turkish media is now government-aligned), polarization along the secular-religious axis, and the post-2016 emergency measures that detained over 150,000 people and dismissed over 125,000 public servants.
+
+On the complex plane, Turkey occupies the competitive authoritarianism attractor at approximately z = +0.10 - 0.45i: a slightly positive real axis (elections occur, opposition parties exist, courts formally function) with a deeply negative imaginary axis (citizens across the political spectrum report experiencing the system as unfair, surveilled, and dangerous for political expression).
+
+### 5.3 India: Sociocultural Capture at Scale
+
+India presents the most consequential case of democratic backsliding by population: with 1.4 billion people, India's trajectory meaningfully affects the global population-weighted calculation of democratic health. V-Dem reclassified India as an "electoral autocracy" in 2024, a designation that reflects significant declines in press freedom, civil liberties, and civil society space under the BJP government.
+
+Research published in 2025 identifies a distinctive sociocultural dimension to India's backsliding that supplements the standard institutional erosion mechanisms. Modi and the BJP have leveraged cultural symbols, historical narratives, and communal ideologies -- particularly Hindu nationalism (Hindutva) -- to consolidate power in ways that operate primarily on the imaginary axis. The construction of the Ram Mandir temple in Ayodhya, the implementation of the Citizenship Amendment Act (which grants expedited citizenship to non-Muslim refugees from neighboring countries), and the abrogation of Article 370 (revoking Kashmir's special autonomous status) are all imaginary-axis interventions: they reshape what Indian citizenship means, who belongs to the national community, and what narrative of Indian identity is dominant (Asian Studies Review, 2025).
+
+Despite the BJP's reduced parliamentary majority in the 2024 elections -- which required coalition partners for the first time since 2014 -- Modi's personal approval remained high at 48%, illustrating a complex plane phenomenon: the imaginary axis of leadership legitimacy can remain positive even as the real axis of institutional democracy declines. This decoupling -- high personal legitimacy for the leader, declining institutional democratic quality -- is the signature of populist competitive authoritarianism.
+
+### 5.4 United States: Unprecedented Velocity
+
+The V-Dem Democracy Report 2025 designated U.S. democratic decline as "unprecedented" -- recording the fastest year-on-year decline for any country in the V-Dem dataset, with the United States dropping below the median democracy score for the first time. International IDEA issued 20 democratic erosion alerts in the first four months of 2025 alone -- twice the number issued in any prior full year for any established democracy -- covering judicial independence, civil service independence, electoral integrity, and freedom of association.
+
+The velocity matters. Hungary's trajectory from flawed democracy to competitive authoritarianism took roughly fifteen years (2010-2025). The U.S. erosion alerts suggest a compression of this timeline that is structurally unprecedented in a country with the depth of institutional infrastructure -- federal courts, state governments, a Bill of Rights, centuries of democratic practice -- that the United States possesses.
+
+The mechanism follows the Kettering template but with distinctive features enabled by the U.S. context: the decentralized federal structure provides both resilience (state governments, state courts, and state civil societies can resist federal-level erosion) and vulnerability (federal executive orders can bypass legislative process, and the appointment power over federal agencies enables rapid bureaucratic capture). The January 2025 executive actions restricting academic freedom, criminalizing protest activity, questioning certified election results, and circumventing due process norms represent Phase 2-3 of the Kettering mechanism: normalization has been achieved; institutional erosion is underway (International IDEA, 2025; V-Dem, 2025).
+
+On the complex plane, the United States has moved from the flawed democracy attractor (z approximately +0.55 - 0.20i) toward the basin boundary with competitive authoritarianism. The critical question -- whether the trajectory will cross the separatrix or be arrested by institutional resilience -- is the most consequential open question in comparative politics today.
+
+---
+
+## 6. The Rise of Populism: Complex Plane Dynamics
+
+Populism's electoral advance across established democracies during 2022-2025 is not a single phenomenon but a family of imaginary-axis movements with shared structural features and divergent real-axis consequences.
+
+**The electoral record.** Italy elected Giorgia Meloni's Brothers of Italy (2022). Argentina elected Javier Milei (2023). The Netherlands saw Geert Wilders' PVV win the largest vote share (2024). The United States re-elected Donald Trump (2024). Austria's Freedom Party (FPO) under Herbert Kickl formed a government after winning the largest vote share in the 2024 elections -- the first time the FPO has led an Austrian government. France's Rassemblement National under Marine Le Pen achieved its strongest-ever parliamentary representation. Germany's Alternative for Germany (AfD) reached unprecedented polling heights. The pattern is cross-national, cross-partisan (left-populism in Latin America, right-populism in Europe and the U.S.), and accelerating (Springer Nature, 2025; Democratic Erosion, 2025).
+
+**The shared imaginary-axis structure.** Populist movements across these diverse contexts share a common imaginary-axis operation: they articulate and amplify the divergence between the formal institutional record (the real axis) and citizens' lived experience (the imaginary axis). The populist claim is, at its core, a phase-angle claim: "the system is formally democratic but experientially unresponsive." Whether framed as "the elites versus the people" (right-populism), "the corporations versus the workers" (left-populism), or "the establishment versus the outsider" (anti-system populism), the structural claim is that R(t) and X(t) have diverged -- that formal institutions no longer represent or serve the populations they govern.
+
+This claim is empirically grounded. The EIU's finding that only 6.6% of the global population lives in full democracies -- down from 12.5% a decade ago -- and the V-Dem finding that population-weighted liberal democracy has returned to 1985 levels both confirm that the formal democratic record and the experienced democratic reality have diverged substantially. Populism is the political expression of a negative phase angle: citizens feel less democratic than their institutions formally are.
+
+**The divergence between real-axis consequences.** Where populist movements diverge is in their real-axis effects. Some populist governments have pursued genuine institutional reform (anti-corruption measures, expanded social programs, direct democratic mechanisms) that moves the real axis in a more democratic direction. Others have pursued the competitive authoritarian ratchet: using populist legitimacy to capture institutions, suppress opposition, and entrench executive power. The complex plane model predicts this divergence: populism is an imaginary-axis phenomenon (the felt gap between institutions and experience) that can produce movement in either direction on the real axis, depending on whether the governing response is institutional reform (moving R(t) toward X(t)) or institutional capture (moving R(t) away from X(t) while claiming to serve the people's will).
+
+---
+
+## 7. Migration as Political Force
+
+Migration has become the single most potent political issue for imaginary-axis manipulation across established democracies in the 2024-2026 period.
+
+**The EU Migration Pact.** The New Pact on Migration and Asylum, adopted in April 2024 as a package of ten legislative acts, represents the EU's attempt to create a shared framework for asylum and border management. Full implementation is scheduled for June 12, 2026. Early indicators are mixed: irregular border crossings declined 22% in 2025, asylum applications fell 23% in the first half of 2025 (driven largely by a two-thirds decline in Syrian applications following the fall of the Assad regime), and the Central Mediterranean route remained the most active with 59,000 arrivals. However, enforcement has raised serious human rights concerns: over 80,000 pushbacks were recorded in 2025, primarily in Italy, Poland, Bulgaria, and Latvia -- an average of 221 pushbacks per day. Six member states (Bulgaria, Czechia, Estonia, Croatia, Austria, Poland) have requested partial or full exemptions from pact requirements, claiming continued migratory pressure (European Parliament, 2025; Carnegie Endowment, 2025; PBS News, 2025).
+
+**The transatlantic convergence.** European political leaders, including far-right parties, have increasingly praised the deportation policies of the Trump administration and called for the EU to adopt similar approaches. This represents a significant imaginary-axis contagion effect: the normalization of enforcement-heavy immigration policy in the United States is lowering the experienced threshold of acceptability for similar policies in Europe. The migration issue functions as a vector for imaginary-axis capture across democratic systems: the felt threat of uncontrolled migration generates demand for executive action that bypasses normal institutional constraints, which in turn normalizes the concentration of power that characterizes competitive authoritarianism.
+
+**Complex plane reading.** Migration politics reveals the imaginary axis at its most potent. The formal policy questions -- asylum processing timelines, quota distributions, return agreements -- are real-axis institutional matters. But the political force of migration is almost entirely imaginary-axis: the *felt* threat to cultural identity, the *experienced* competition for scarce resources, the *perceived* unfairness of irregular entry. These felt experiences are real in their consequences regardless of whether they correspond proportionally to measurable impacts. The complex plane model's central insight -- that X(t) has its own dynamics independent of R(t) -- is nowhere more visible than in migration politics, where the imaginary-axis response (fear, cultural anxiety, populist mobilization) routinely exceeds what the real-axis data (crime statistics, labor market effects, fiscal impacts) would predict.
+
+**The role of economic inequality.** The relationship between economic inequality and populist mobilization is not incidental but structural. The period of the "false stability" saddle point (Module 2, P5: 1989-2016) coincided with a dramatic increase in wealth concentration across OECD countries. In the United States, the top 1% share of national wealth increased from approximately 24% in 1989 to over 34% by 2024. The Gini coefficient for disposable income increased in most Western democracies during the same period. This economic divergence is an imaginary-axis phenomenon first: citizens who experience stagnant wages, rising housing costs, and declining economic security while observing extreme wealth accumulation are experiencing a gap between the formal economic narrative ("GDP is growing, unemployment is low") and their lived economic reality ("I cannot afford housing, healthcare, or education for my children"). The populist claim that "the system is rigged" resonates not because it is a conspiracy theory but because it corresponds to a measurable economic experience.
+
+The complex plane model predicts that economic inequality generates negative imaginary-axis pressure that weakens the democratic attractor basin. When citizens experience the economic system as fundamentally unfair -- when the infrastructure dividend flows upward rather than back to its builders -- the felt legitimacy of democratic institutions erodes regardless of whether those institutions are formally functioning. The Kettering Foundation's finding that "democratic backsliding is not driven by citizen demand for authoritarianism" is precisely consistent with this mechanism: citizens do not want autocracy; they want responsive governance, and when democratic institutions fail to deliver felt economic fairness, the imaginary axis declines, weakening the institutional defenses against authoritarian capture.
+
+**Populism as a phase-angle phenomenon across regions.** The regional distribution of populist success is itself informative. In Western Europe, populism has advanced most rapidly in countries where the gap between formal economic performance and experienced economic reality is largest -- the Netherlands, with high GDP but severe housing affordability crisis; Italy, with persistent north-south economic divergence; France, with high aggregate wealth but declining middle-class purchasing power. In Latin America, the pattern is older and more familiar: the economic populism of Milei (right) and historical left-populist movements shares the structural claim that institutional economic management has failed to deliver experienced economic security.
+
+In the United States, the geographic distribution of populist support maps closely to economic precarity indicators: counties with declining life expectancy, rising "deaths of despair" (Case and Deaton), and deindustrialized employment structures show the strongest populist voting patterns. This is not coincidental; it is the complex plane in action. The real axis (formal democratic institutions) has not changed -- the same Constitution, the same electoral system, the same courts -- but the imaginary axis (experienced economic and political agency) has declined dramatically for specific populations, generating the phase-angle divergence that populism articulates and exploits.
+
+---
+
+## 8. Complex Plane Synthesis: The 2026 Attractor Landscape
+
+The expanded analysis of this module, combined with the original quantitative baseline, produces a picture of the global political complex plane in 2026 that is both more detailed and more alarming than the 2024-2025 snapshot alone would suggest.
+
+**The attractor landscape is fragmenting.** The original Module 3 identified a bifurcating attractor landscape -- countries in the flawed democracy basin diverging toward either consolidated democracy or competitive authoritarianism. The expanded analysis reveals additional attractor forces: geopolitical polarization (the Ukraine-driven bifurcation of the European security environment from the Russia-China alignment), economic multipolarity (BRICS as an alternative institutional gravitational center, even if shallow), and domain-specific governance fragmentation (three incompatible AI regulatory frameworks, three incompatible approaches to digital sovereignty, competing climate finance architectures).
+
+**The imaginary axis is under systematic assault across multiple domains simultaneously.** The original Module 3 identified disinformation and polarization as the primary mechanisms of imaginary-axis capture. The expanded analysis shows that AI-generated content, migration-driven cultural anxiety, climate policy backlash, and economic precarity are all generating negative imaginary-axis pressure simultaneously. The compounding effect matters: a citizen experiencing democratic erosion, economic insecurity, AI-driven job displacement, climate anxiety, and migration-driven cultural threat simultaneously faces an imaginary-axis assault that no single policy intervention can address.
+
+**The phase angle is widening globally.** Across multiple domains -- formal treaty commitments versus experienced climate impacts; formal democratic institutions versus experienced political powerlessness; formal economic growth figures versus experienced precarity; formal AI governance frameworks versus experienced algorithmic manipulation -- the gap between the real axis and the imaginary axis is increasing. The global political system is rotating toward Quadrant IV: formally functional, experientially hollow.
+
+**The interaction effects compound.** What makes the 2026 attractor landscape qualitatively different from earlier periods of democratic stress is the simultaneity and interaction of pressures. The Ukraine conflict disrupts energy markets, which exacerbates the cost-of-living pressures that fuel populism, which strengthens anti-immigration sentiment, which empowers the competitive authoritarian actors who weaponize immigration politics, which weakens the democratic solidarity needed to sustain support for Ukraine. The Middle Eastern crisis generates refugee flows that feed European migration politics, which strengthens far-right parties, which weakens EU institutional cohesion, which reduces the EU's capacity to maintain democratic conditionality for member states experiencing backsliding. AI-generated disinformation amplifies the polarization that weakens democratic accountability, which enables the executive overreach that undermines the institutional checks that would constrain AI misuse. Climate-driven agricultural disruption generates migration that generates populist backlash that elects governments that withdraw from climate commitments that accelerate the disruption. These are not independent stressors; they are coupled oscillators in a complex system, and their interaction produces emergent dynamics -- specifically, a reinforcing cycle of imaginary-axis degradation -- that no single-domain analysis can capture.
+
+**Recovery signals remain present.** The V-Dem data on 19 ongoing democratization episodes, the judicial resilience documented in Brazil and elsewhere, the civil society mobilization in Bangladesh, Kenya, and Hungary, and the European institutional architecture's continued slight positive trajectory all demonstrate that the competitive authoritarianism attractor has not yet captured the entire political landscape. The race between imaginary-axis capture and imaginary-axis maintenance remains the defining dynamic of the current historical moment -- now complicated by new domain pressures (AI, climate, migration, economic multipolarity) that the original analysis could only gesture toward.
+
+**The predictive framework applied.** Module 4's early warning signatures (Section 5) can now be evaluated against the expanded data of this module. Signature 1 (imaginary-axis capture: declining X(t) while R(t) stable) is confirmed across the United States, India, and multiple European cases. Signature 2 (phase angle rotation without magnitude change) is visible in the U.S. and Turkish trajectories. Signature 3 (coupling breakdown between R and X) is documented in the BRICS context (expanding real-axis institutions with no imaginary-axis coherence) and in the climate domain (advancing treaty commitments with widening experiential divergence). Signature 4 (weakening restoring force) is visible in the U.S. response to successive institutional shocks: each shock produces larger deviations and slower recovery than its predecessor. The predictive inequality of Module 4, Section 5.2 -- that a democratic system approaches the competitive authoritarianism basin boundary when phase angle rotation, coupling breakdown, and restoring force weakness are simultaneously present -- is met for a disturbingly large number of cases in the 2026 data.
+
+---
+
+## 9. Sources
+
+### Geopolitical Sources
+
+- NPR. "The U.K. and France Would Install 'Military Hubs' in Ukraine as Part of a Peace Plan." January 6, 2026.
+- Al Jazeera. "US Backs Security Guarantees for Ukraine, as France and UK Pledge Troops." January 6, 2026.
+- The Moscow Times. "Negotiations Are Not Ending the Ukraine War -- They Are Extending It." March 27, 2026.
+- CSIS. "Assessing the Current Peace Deal for Ukraine: Opportunity or Strategic Trap?" 2026.
+- European Council. "European Council, 19 March 2026, Ukraine." March 19, 2026.
+- Euronews. "US and Russia Agree to Re-Establish Military Dialogue After Ukraine Peace Talks in Abu Dhabi." February 6, 2026.
+- Defense News. "Chinese Drill Near Taiwan Seen as Test Run for Blockade, Message to US." January 8, 2026.
+- CNN. "China Stages War Games Around Taiwan After Hitting Out at Major US Arms Deal." December 28, 2025.
+- AEI. "China & Taiwan Update, Special Edition." December 31, 2025.
+- Council on Foreign Relations. "China in the Taiwan Strait: February 2025." February 2025.
+- South China Morning Post. "Why Has Beijing Turned Down the Heat in the Taiwan Strait in the Second Half of 2025?" 2025.
+- International Crisis Group. "Gaza's Ceasefire Is Vital, but Only a Start." 2025.
+- UN Security Council. "Gaza Ceasefire Still Precarious, Deputy Special Coordinator Tells Security Council." SC/16250, 2025.
+- ACLED. "Middle East Overview: November 2025." November 2025.
+
+### Economic and Financial Sources
+
+- Council on Foreign Relations. "What Is the BRICS Group and Why Is It Expanding?" 2025.
+- Stimson Center. "2025 BRICS Summit: Takeaways and Projections." 2025.
+- Chicago Policy Review. "BRICS and the Shift Away from Dollar Dependence." October 8, 2025.
+- CADTM. "The BRICS and De-Dollarisation." 2025.
+- The Daily Economy. "BRICS 2025: Expansion, De-Dollarization, and the Shift Toward a Multipolar World." 2025.
+- Atlantic Council. "Central Bank Digital Currency Tracker." 2025.
+- PIIE. "China Gives Up on State-Backed Digital Cash." 2026.
+- CoinLedger. "CBDC Developments 2025." 2025.
+
+### AI Governance Sources
+
+- European Commission. "AI Act: Shaping Europe's Digital Future." 2024.
+- Kennedys Law. "The EU AI Act Implementation Timeline." 2026.
+- DLA Piper. "Latest Wave of Obligations Under the EU AI Act Take Effect." August 2025.
+- White House. "Winning the Race: America's AI Action Plan." July 23, 2025.
+- Pillsbury Law. "New Executive Order Seeks to Ensure a National Policy Framework for Artificial Intelligence." 2025.
+- CACM. "Three Rulebooks, One Race: AI Regulation in the U.S., EU, and China." 2025.
+- United Nations University. "US Executive Order on AI: Takeaways for Global AI Governance." 2025.
+
+### Climate Policy Sources
+
+- UNFCCC. "COP28 Agreement Signals 'Beginning of the End' of the Fossil Fuel Era." 2023.
+- European Commission. "What Did COP30 Achieve?" December 1, 2025.
+- World Resources Institute. "COP30: Outcomes, Disappointments and What's Next." 2025.
+- Real Instituto Elcano. "From COP29 to COP30: Insufficient Funding, Markets and Commitments." 2025.
+- IISD. "The Most Significant Decisions Since the Paris Agreement." 2023.
+
+### Democratic Backsliding Sources
+
+- V-Dem Institute. *Democracy Report 2025: 25 Years of Autocratization -- Democracy Trumped?* University of Gothenburg, 2025.
+- International IDEA. *Global State of Democracy 2025: Democracy on the Move.* Stockholm, 2025.
+- Tandfonline / Democratization. "State of the World 2024: 25 Years of Autocratization." 2025.
+- Asian Studies Review. "The Sociocultural Component of India's Democratic Backsliding." Vol. 50, No. 1, 2025.
+- Democratic Erosion. "Democracy on the Brink: How the 2024 Election Tested America's Democratic Foundations." February 2025.
+- Democratic Erosion. "Hungary's 2024 Protests and Elections: Populism VS Oligarchy." December 2025.
+- Springer Nature. "Democratic Backsliding and the Populist Challenge for Public Administration." 2025.
+- Carnegie Endowment. "Taking the Pulse: Are Europe's New Asylum Policies a Betrayal of Its Values?" November 2025.
+- PBS News. "Europe Seeks to Increase Deportations, Quietly Adopting Trump Administration Tactics." 2025.
+- Migration Policy Institute. "Top 10 Migration Issues of 2025." 2025.
 
 ### Cross-Module References
 
-- **Module 2** (Historical Arc): Westphalian system phases, third-wave context, 1945 reconstruction as stable-attractor project.
-- **Module 4** (Mathematical Framework): Complex-plane formalization z(t) = R(t) + i·X(t); phase angle, modulus, attractor basin definitions.
+- **Module 1** (Foundations): Easton's input/output model; Cairney's CAS framework; Kok et al.'s force-field power mechanisms.
+- **Module 2** (Historical Arc): P5 (saddle point) and P6 (imaginary-axis capture) as direct context for current dynamics.
+- **Module 4** (Mathematical Framework): Attractor basins, phase angle, separatrix, and the predictive inequality.
 - **Module 5** (College Integration): V-Dem data analysis in R; phase-space modeling in Julia; political event database queries in SQL.

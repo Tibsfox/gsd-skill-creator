@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C++ Core Language &mdash; C++ and Object-Oriented Programming</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cpp">
+  <header>
+    <h1>C++ Core Language</h1>
+    <div class="subtitle">Types, References, Value Categories, const, constexpr &mdash; The Syntax and Semantics of Stroustrup&rsquo;s Language</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html" class="active">Core</a>
+      <a href="oop.html">OOP</a>
+      <a href="templates.html">Templates</a>
+      <a href="stdlib.html">STL</a>
+      <a href="modern.html">Modern C++</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;C++ is a general-purpose programming language with a bias towards systems programming that is a better C, supports data abstraction, supports object-oriented programming, and supports generic programming.&rdquo; &mdash; <strong>Bjarne Stroustrup</strong>, <em>The C++ Programming Language</em>, 4th ed.
+    </blockquote>
+
+    <h2>The Founding Decisions</h2>
+    <p>Every feature of C++ since 1979 is a refinement of a small set of founding choices Stroustrup made at Bell Labs. Understand them and you understand why the language looks the way it does:</p>
+
+    <div class="card">
+      <ul>
+        <li><strong>Static type system</strong> &mdash; Types are checked at compile time. The compiler knows everything it can know before runtime.</li>
+        <li><strong>Class-based, not prototype-based</strong> &mdash; A class is a compile-time entity; an object is a runtime instance laid out in a known way.</li>
+        <li><strong>Direct memory layout</strong> &mdash; A <code>class</code> is fundamentally a <code>struct</code>. Fields are laid out in declaration order; <code>sizeof</code> is meaningful; you can reinterpret memory if you accept the consequences.</li>
+        <li><strong>Optional virtual dispatch</strong> &mdash; Virtual functions cost a vtable lookup; non-virtual functions cost a direct call. You pay only when you ask for polymorphism.</li>
+        <li><strong>Value semantics by default</strong> &mdash; Objects live on the stack or inside other objects. Heap allocation is opt-in. Copies make new objects, not aliases.</li>
+        <li><strong>Deterministic destruction</strong> &mdash; When an object goes out of scope, its destructor runs <em>now</em>, not whenever a garbage collector feels like it. This single decision is the seed of RAII, exception safety, and modern C++.</li>
+      </ul>
+    </div>
+
+    <h2>Types and the Type System</h2>
+    <p>C++ is <strong>statically typed</strong>: every expression has a type known at compile time. It is <strong>strongly typed</strong>: implicit conversions exist but are limited, and the compiler will reject nonsensical operations. It is <strong>nominally typed</strong>: two types with the same layout are still different types unless one is an alias of the other.</p>
+
+    <h3>Fundamental types</h3>
+    <table>
+      <thead><tr><th>Category</th><th>Types</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Integer</td><td><code>char</code>, <code>short</code>, <code>int</code>, <code>long</code>, <code>long long</code></td><td>Signed by default; widths are platform-dependent but have minimum sizes from the standard.</td></tr>
+        <tr><td>Fixed-width integer</td><td><code>std::int8_t</code> &hellip; <code>std::int64_t</code>, unsigned variants (C++11)</td><td>In <code>&lt;cstdint&gt;</code>. Use these for portable binary formats.</td></tr>
+        <tr><td>Floating-point</td><td><code>float</code>, <code>double</code>, <code>long double</code></td><td>IEEE 754 on nearly all platforms.</td></tr>
+        <tr><td>Boolean</td><td><code>bool</code></td><td>Distinct type; <code>true</code> and <code>false</code> are keywords since C++98.</td></tr>
+        <tr><td>Character</td><td><code>char</code>, <code>wchar_t</code>, <code>char8_t</code> (C++20), <code>char16_t</code>, <code>char32_t</code> (C++11)</td><td>Separate types for Unicode code unit widths.</td></tr>
+        <tr><td>Void</td><td><code>void</code></td><td>No value; used for functions with no return and as a generic pointer target (<code>void*</code>).</td></tr>
+        <tr><td>Null pointer</td><td><code>std::nullptr_t</code> (C++11)</td><td>The type of the <code>nullptr</code> literal. Replaces the <code>NULL</code> macro.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Compound types</h3>
+    <ul>
+      <li><strong>Arrays</strong> &mdash; <code>int a[10];</code>. Fixed size, decay to pointers in most contexts, no bounds checking.</li>
+      <li><strong>Pointers</strong> &mdash; <code>T*</code>. A memory address of a <code>T</code>. Can be null, dangling, or valid.</li>
+      <li><strong>References</strong> &mdash; <code>T&amp;</code> (lvalue) and <code>T&amp;&amp;</code> (rvalue, C++11). Aliases that must be bound at declaration and cannot be rebound.</li>
+      <li><strong>Functions</strong> &mdash; <code>R(Args...)</code>. Function pointers are <code>R(*)(Args...)</code>.</li>
+      <li><strong>Classes</strong> &mdash; <code>class</code> and <code>struct</code>. User-defined types with fields and methods.</li>
+      <li><strong>Unions</strong> &mdash; Shared storage across members. Unsafe by default; <code>std::variant</code> (C++17) is the type-safe alternative.</li>
+      <li><strong>Enumerations</strong> &mdash; <code>enum</code> (C) and <code>enum class</code> (C++11, strongly-typed, scoped).</li>
+    </ul>
+
+    <h2>Value Categories</h2>
+    <p>C++11 introduced a formal taxonomy of expression value categories. Every expression in C++ is exactly one of these:</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <h4>lvalue</h4>
+        <p>Has identity (you can take its address), cannot be moved from. Named variables. The expression <code>x</code> where <code>x</code> is a variable. The result of <code>*p</code>.</p>
+      </div>
+      <div class="pillar">
+        <h4>xvalue</h4>
+        <p>&ldquo;eXpiring value.&rdquo; Has identity, can be moved from. Result of <code>std::move(x)</code>. Result of a function returning <code>T&amp;&amp;</code>.</p>
+      </div>
+      <div class="pillar">
+        <h4>prvalue</h4>
+        <p>&ldquo;Pure rvalue.&rdquo; No identity, can be moved from. Literals (<code>42</code>), temporaries. The result of <code>a + b</code> where <code>a</code>, <code>b</code> are ints.</p>
+      </div>
+      <div class="pillar">
+        <h4>glvalue / rvalue</h4>
+        <p>Composite categories. A <strong>glvalue</strong> is any lvalue or xvalue. An <strong>rvalue</strong> is any xvalue or prvalue. The two axes are &ldquo;has identity&rdquo; and &ldquo;can be moved from.&rdquo;</p>
+      </div>
+    </div>
+
+    <p>These categories matter because overload resolution uses them: a function can overload on <code>T&amp;</code> (takes lvalue), <code>const T&amp;</code> (takes anything), and <code>T&amp;&amp;</code> (takes rvalue), and the compiler picks based on the expression&rsquo;s value category. This is what makes move semantics work.</p>
+
+    <h2>References and Pointers</h2>
+    <p>Stroustrup added references to C++ in 1983 as a specific solution to a specific problem: operator overloading needed a way to pass objects by reference without the syntactic noise of pointers. They grew into the idiomatic way to pass objects in and out of functions.</p>
+
+    <table>
+      <thead><tr><th>Form</th><th>Syntax</th><th>Use for</th></tr></thead>
+      <tbody>
+        <tr><td>Raw pointer</td><td><code>T*</code></td><td>Non-owning observation; nullable; C-interop.</td></tr>
+        <tr><td>Lvalue reference</td><td><code>T&amp;</code></td><td>In/out parameters; aliases; operator overloads.</td></tr>
+        <tr><td>const lvalue reference</td><td><code>const T&amp;</code></td><td>Read-only pass of large objects; accepts both lvalues and rvalues.</td></tr>
+        <tr><td>Rvalue reference</td><td><code>T&amp;&amp;</code></td><td>Move-from sources; overload resolution for temporaries.</td></tr>
+        <tr><td>Forwarding reference</td><td><code>T&amp;&amp;</code> in template deduction</td><td>Perfect forwarding; preserves value category of the argument.</td></tr>
+      </tbody>
+    </table>
+
+    <p>The rule for passing parameters in modern C++ is simple:</p>
+
+    <ul>
+      <li>Small, trivially copyable types: pass by <strong>value</strong>.</li>
+      <li>Objects you only read: pass by <strong><code>const T&amp;</code></strong>.</li>
+      <li>Objects you modify: pass by <strong><code>T&amp;</code></strong> or <strong><code>T*</code></strong> (the latter signals &ldquo;may be null&rdquo;).</li>
+      <li>Objects you want to take ownership of: pass by <strong>value</strong> (so the caller can either copy or move in).</li>
+    </ul>
+
+    <h2>const and const-correctness</h2>
+    <p><code>const</code> is C++&rsquo;s contract-in-the-type-system. A <code>const</code> variable cannot be modified after initialization. A <code>const</code> member function promises not to modify the object. A <code>const T&amp;</code> parameter promises the function will not change what it&rsquo;s handed. Const-correctness is the discipline of applying <code>const</code> everywhere it could possibly apply:</p>
+
+<pre><code>class Matrix {
+    std::vector&lt;double&gt; data_;
+    std::size_t rows_, cols_;
+public:
+    // const member function: does not modify *this
+    double at(std::size_t r, std::size_t c) const {
+        return data_[r * cols_ + c];
+    }
+
+    // non-const overload: returns a mutable reference
+    double&amp; at(std::size_t r, std::size_t c) {
+        return data_[r * cols_ + c];
+    }
+
+    // const parameter: caller guaranteed we won't touch it
+    void copy_from(const Matrix&amp; other);
+};</code></pre>
+
+    <p>Const-correctness propagates: if <code>copy_from</code> takes <code>const Matrix&amp;</code>, it can only call <code>const</code> member functions on that object. This lets the compiler catch a large class of errors at build time and gives readers a reliable guide to what each function can and cannot do.</p>
+
+    <h2>constexpr &mdash; Compile-Time Computation</h2>
+    <p>C++11 introduced <code>constexpr</code>: the declaration that a function or variable can be evaluated at compile time. C++14, C++17, C++20, and C++23 have steadily loosened the restrictions until today almost anything can be <code>constexpr</code>, including containers and algorithms.</p>
+
+    <table>
+      <thead><tr><th>Keyword</th><th>Standard</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>const</code></td><td>C++98</td><td>Value cannot change after initialization; may or may not be a compile-time constant.</td></tr>
+        <tr><td><code>constexpr</code></td><td>C++11</td><td>Can be evaluated at compile time if all inputs are; required when used as a compile-time constant.</td></tr>
+        <tr><td><code>consteval</code></td><td>C++20</td><td>Immediate function &mdash; <em>must</em> be evaluated at compile time. Error if called with runtime arguments.</td></tr>
+        <tr><td><code>constinit</code></td><td>C++20</td><td>Forces static initialization; guarantees no dynamic init order fiasco.</td></tr>
+      </tbody>
+    </table>
+
+<pre><code>constexpr int factorial(int n) {
+    return n &lt;= 1 ? 1 : n * factorial(n - 1);
+}
+
+constexpr int fact5 = factorial(5);  // computed at compile time, becomes literal 120
+static_assert(fact5 == 120);          // checked at compile time</code></pre>
+
+    <h2>Scope, Linkage, and Namespaces</h2>
+    <p>A name in C++ lives somewhere: block scope, function scope, class scope, namespace scope, or the special case of global scope. It has a linkage: internal (private to the translation unit), external (visible across translation units), or none. And it lives inside a namespace, an addressable region of the name space.</p>
+
+<pre><code>namespace physics {
+    namespace detail {
+        constexpr double speed_of_light_m_per_s = 299'792'458.0;
+    }
+    double relativistic_energy(double rest_mass);
+}
+
+using namespace physics;           // don't do this in headers
+using physics::relativistic_energy; // better
+namespace ph = physics;            // namespace alias</code></pre>
+
+    <p>The <code>std</code> namespace contains the entire standard library. <code>using namespace std;</code> is convenient in small programs and considered poor style in large ones &mdash; it pulls everything into the current scope and creates ambiguity with user code.</p>
+
+    <h2>Operator Overloading</h2>
+    <p>C++ allows you to redefine the meaning of most operators when one or both operands are user-defined types. You cannot invent new operators, you cannot change precedence or arity, and you cannot overload a handful (<code>::</code>, <code>.</code>, <code>.*</code>, <code>?:</code>, <code>sizeof</code>, <code>typeid</code>). Everything else is fair game.</p>
+
+<pre><code>struct Vec2 {
+    double x, y;
+
+    Vec2&amp; operator+=(const Vec2&amp; rhs) {
+        x += rhs.x; y += rhs.y; return *this;
+    }
+    double operator[](std::size_t i) const { return i == 0 ? x : y; }
+    bool operator==(const Vec2&amp;) const = default;    // C++20: compiler-generated
+    auto operator&lt;=&gt;(const Vec2&amp;) const = default;    // C++20: spaceship, all 6 relations
+};
+
+// Non-member binary operator — avoids asymmetry
+Vec2 operator+(Vec2 lhs, const Vec2&amp; rhs) { return lhs += rhs; }</code></pre>
+
+    <p>The <strong>spaceship operator</strong> <code>&lt;=&gt;</code> (C++20) is the most recent addition. A single <code>= default</code> declaration gives you all six comparison operators (<code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>) with the semantics you almost always want.</p>
+
+    <h2>The Preprocessor</h2>
+    <p>C++ inherited the C preprocessor, which runs before the compiler sees your code. It is a textual substitution engine that predates the language&rsquo;s type system and knows nothing about scope or namespaces. Its sins are famous:</p>
+
+    <ul>
+      <li><code>#define MAX 100</code> leaks across headers and ignores scope.</li>
+      <li><code>#define SQUARE(x) x*x</code> breaks with <code>SQUARE(1+2)</code>.</li>
+      <li><code>#include &lt;windows.h&gt;</code> defines <code>min</code> and <code>max</code> as macros, breaking <code>std::min</code>.</li>
+      <li>Conditional compilation (<code>#ifdef</code>) lets you write code that different compilers see differently.</li>
+    </ul>
+
+    <p>Modern C++ replaces most preprocessor uses with real language features: <code>constexpr</code> for constants, inline functions and templates for function-like macros, <code>if constexpr</code> for conditional code generation, and C++20 modules to replace <code>#include</code> entirely.</p>
+
+    <h2>The Big Five (or Six)</h2>
+    <p>Every class in C++ has six special member functions the compiler can generate: default constructor, destructor, copy constructor, copy assignment, move constructor, move assignment. The rules about <em>when</em> the compiler generates each, and how one user declaration affects the others, are intricate. The modern guidance is the <strong>Rule of Zero</strong> and the <strong>Rule of Five</strong>:</p>
+
+    <div class="card green">
+      <p><strong>Rule of Zero:</strong> If your class uses only RAII-managed members (vectors, unique_ptrs, strings, your own RAII types), you need to declare <em>none</em> of the special members. The compiler will do the right thing.</p>
+      <p><strong>Rule of Five:</strong> If you must write <em>any</em> of the destructor, copy constructor, copy assignment, move constructor, or move assignment (usually because you own a resource through a raw handle), you should write or explicitly default all five.</p>
+    </div>
+
+    <h2>Lambda Expressions</h2>
+    <p>C++11 introduced lambdas: anonymous function objects with capture. They are the most immediately visible marker of modern C++, and they enabled ergonomic use of the STL algorithms that C++98 buried under clunky functor boilerplate.</p>
+
+<pre><code>auto counter = 0;
+std::vector&lt;int&gt; numbers{1, 2, 3, 4, 5};
+
+// [&amp;] captures everything by reference
+std::for_each(numbers.begin(), numbers.end(), [&amp;](int n) {
+    if (n % 2 == 0) ++counter;
+});
+
+// [=] captures by value
+auto make_adder = [=](int base) {
+    return [base](int x) { return x + base; };
+};
+
+auto add_10 = make_adder(10);
+auto result = add_10(5);  // 15
+
+// Generic lambda (C++14)
+auto print = [](const auto&amp; x) { std::cout &lt;&lt; x &lt;&lt; '\n'; };
+
+// Template lambda (C++20)
+auto size_of = []&lt;typename T&gt;(const T&amp;) { return sizeof(T); };</code></pre>
+
+    <p>Lambdas compile to anonymous function objects. A lambda with no captures decays to a plain function pointer and is as efficient as the equivalent free function. Captures become data members. This is the zero-overhead principle at work: the abstraction is free.</p>
+
+    <h2>Range-for, Structured Bindings, if constexpr</h2>
+    <p>Three C++11/17 features that eliminate huge amounts of boilerplate:</p>
+
+<pre><code>// Range-for (C++11) — works with any type that has begin()/end()
+for (const auto&amp; x : container) { /* ... */ }
+
+// Structured bindings (C++17) — destructure tuples, pairs, arrays, structs
+for (const auto&amp; [key, value] : map) { /* ... */ }
+auto [x, y, z] = some_point;
+
+// if constexpr (C++17) — compile-time branch; only the taken branch is compiled
+template &lt;typename T&gt;
+std::string stringify(const T&amp; value) {
+    if constexpr (std::is_integral_v&lt;T&gt;) {
+        return std::to_string(value);
+    } else if constexpr (std::is_convertible_v&lt;T, std::string&gt;) {
+        return std::string(value);
+    } else {
+        return "<unprintable>";
+    }
+}</code></pre>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td>C++ is (mostly) a superset of C; same preprocessor, same ABI, same memory model</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>Python&rsquo;s <code>typing</code> module brings some of C++&rsquo;s static type discipline to dynamic code</td></tr>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>Dynamic typing at the opposite end of the spectrum from C++&rsquo;s static system</td></tr>
+        <tr><td>MPC</td><td>Math Co-Processor</td><td>Eigen and Armadillo use template metaprogramming for zero-cost matrix expressions</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="oop.html">Object-Oriented C++</a></li>
+        <li><a href="templates.html">Templates &amp; Generic Programming</a></li>
+        <li><a href="stdlib.html">Standard Template Library</a></li>
+        <li><a href="modern.html">Modern C++ (C++11&ndash;26)</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>C++ Core Language &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

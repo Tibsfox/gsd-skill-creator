@@ -1,0 +1,4 @@
+/* SYE — Systems Engineering */
+.project-sye { --project-color: #283593; --project-accent: #D84315; }
+.project-sye header { background: linear-gradient(135deg, #283593 0%, #3949AB 50%, #D84315 100%); }
+.project-sye .card:hover { border-color: #283593; }

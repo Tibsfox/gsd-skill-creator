@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Learning &amp; AI &mdash; Python &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-snk">
+  <header>
+    <h1>Machine Learning &amp; AI</h1>
+    <div class="subtitle">scikit-learn, TensorFlow, PyTorch, JAX, HuggingFace &mdash; How Python Won the AI Revolution</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="ecosystem.html">PyPI</a>
+      <a href="scientific.html">Science</a>
+      <a href="ml-ai.html" class="active">ML/AI</a>
+      <a href="web.html">Web</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      TensorFlow (Google, 2015) and PyTorch (Facebook AI Research, 2016) both chose Python as their primary interface. Not Java, not C++, not R &mdash; Python. The Python scientific stack was too entrenched to ignore. By 2022, every major LLM (GPT, Llama, Claude, Gemini) was trained using Python. HuggingFace Transformers made pre-trained models accessible in three lines of code. Python won the AI revolution because NumPy was already there.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- SCIKIT-LEARN                                                  -->
+    <!-- ============================================================ -->
+
+    <h2>scikit-learn &mdash; Classical Machine Learning</h2>
+    <div class="card">
+      <p><strong>David Cournapeau, 2007 (GSoC).</strong> Started as <code>scikits.learn</code>, one of several SciPy toolkits. Dormant for two years until <strong>Fabian Pedregosa, Ga&euml;l Varoquaux, and Alexandre Gramfort</strong> at <strong>Inria&rsquo;s Parietal team</strong> (Saclay, France) &mdash; neuroimaging researchers &mdash; rebooted it in 2010. First public release February 2010. Now the gold standard for classical ML.</p>
+    </div>
+
+    <h3>The Consistent API That Won</h3>
+    <p>The single biggest reason scikit-learn dominated classical ML is its <strong>uniform estimator API</strong>. Every algorithm implements the same interface:</p>
+    <pre><code>estimator.fit(X, y)
+estimator.predict(X_new)
+estimator.transform(X)         # for preprocessors
+estimator.fit_predict(X, y)
+estimator.score(X, y)</code></pre>
+    <p>Every algorithm &mdash; from <code>LogisticRegression</code> to <code>RandomForestClassifier</code> to <code>KMeans</code> to <code>PCA</code> &mdash; implements the same four-or-five method interface. Combined with <code>Pipeline</code>, <code>ColumnTransformer</code>, <code>GridSearchCV</code>, and <code>cross_val_score</code>, this turns ML workflows into Lego.</p>
+
+    <h3>Algorithm Catalog</h3>
+    <table>
+      <thead><tr><th>Category</th><th>Algorithms</th></tr></thead>
+      <tbody>
+        <tr><td>Linear models</td><td><code>LinearRegression</code>, <code>Ridge</code>, <code>Lasso</code>, <code>ElasticNet</code>, <code>LogisticRegression</code>, <code>SGDClassifier</code></td></tr>
+        <tr><td>SVMs</td><td><code>SVC</code>, <code>SVR</code>, <code>LinearSVC</code> (wrapping libsvm/liblinear from NTU)</td></tr>
+        <tr><td>Trees &amp; ensembles</td><td><code>DecisionTree</code>, <code>RandomForest</code>, <code>GradientBoosting</code>, <code>HistGradientBoosting</code></td></tr>
+        <tr><td>Clustering</td><td><code>KMeans</code>, <code>DBSCAN</code>, <code>HDBSCAN</code> (1.3+), <code>AgglomerativeClustering</code>, <code>SpectralClustering</code></td></tr>
+        <tr><td>Dimensionality reduction</td><td><code>PCA</code>, <code>KernelPCA</code>, <code>TruncatedSVD</code>, <code>NMF</code>, <code>t-SNE</code>, <code>Isomap</code></td></tr>
+        <tr><td>Model selection</td><td><code>GridSearchCV</code>, <code>RandomizedSearchCV</code>, <code>HalvingGridSearchCV</code>, time-series CV</td></tr>
+        <tr><td>Feature engineering</td><td><code>StandardScaler</code>, <code>OneHotEncoder</code>, <code>TargetEncoder</code>, <code>PolynomialFeatures</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3>What scikit-learn Deliberately Doesn&rsquo;t Do</h3>
+    <div class="card">
+      <ul>
+        <li><strong>No GPUs</strong> &mdash; pure CPU on NumPy/SciPy/Cython. (cuML from NVIDIA RAPIDS is the GPU port.)</li>
+        <li><strong>No deep learning</strong> &mdash; that&rsquo;s PyTorch/TensorFlow/JAX territory</li>
+        <li><strong>No distributed training</strong> &mdash; joblib parallelism only; use Dask-ML or Spark MLlib for distributed</li>
+      </ul>
+      <p>This restraint is why scikit-learn remains a stable, trustworthy foundation rather than chasing every trend.</p>
+    </div>
+
+    <h3>Adjacent Ecosystem</h3>
+    <table>
+      <thead><tr><th>Library</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>XGBoost</strong></td><td>Tianqi Chen, 2014. The library that won most Kaggle comps 2015&ndash;2018</td></tr>
+        <tr><td><strong>LightGBM</strong></td><td>Microsoft Research Asia, 2016. Histogram-based, faster than XGBoost on large data</td></tr>
+        <tr><td><strong>CatBoost</strong></td><td>Yandex, 2017. Native categorical handling, ordered boosting</td></tr>
+        <tr><td><strong>statsmodels</strong></td><td>Skipper Seabold, Josef Perktold, 2009. Classical stats &amp; econometrics, closer to R&rsquo;s <code>lm()</code></td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- TENSORFLOW                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>TensorFlow &mdash; Google&rsquo;s Deep Learning Platform</h2>
+    <div class="card">
+      <p><strong>Google Brain (Jeff Dean, Rajat Monga, Sanjay Ghemawat, et al.), November 9, 2015.</strong> Predecessor: DistBelief (2011), used to train the famous &ldquo;cat neuron&rdquo; paper and Inception. TensorFlow was open-sourced under Apache 2.0 &mdash; a watershed moment that legitimized open-source deep learning at industrial scale.</p>
+    </div>
+
+    <h3>TensorFlow 1.x &rarr; 2.x: The Big Pivot</h3>
+    <p><strong>TF 1.x (2015&ndash;2019):</strong> static graphs. Define-then-run model with <code>tf.Graph</code> and <code>tf.Session</code>. Fast and parallelizable but painful to debug. PyTorch&rsquo;s eager execution started winning hearts.</p>
+    <p><strong>TF 2.0 (September 2019):</strong> Eager execution by default, <code>tf.function</code> for JIT tracing, Keras as the official high-level API. The 1.x cruft was removed.</p>
+
+    <h3>Keras &mdash; The High-Level API</h3>
+    <div class="card">
+      <p><strong>Fran&ccedil;ois Chollet (Google), March 2015.</strong> Originally a Theano frontend, added TensorFlow backend mid-2015. Folded into TF as <code>tf.keras</code> in TF 1.4 (2017); TF 2.0 made it official. <strong>Keras 3.0 (November 2023)</strong> is multi-backend again &mdash; the same <code>keras.Model</code> can train on <strong>JAX, TensorFlow, or PyTorch</strong>. Chollet&rsquo;s API now runs on top of competing backends.</p>
+    </div>
+
+    <h3>Status in 2026</h3>
+    <p>PyTorch has decisively won the research market. TensorFlow remains strong in production deployment, mobile/edge (LiteRT), and inside Google. Keras 3 hedged Google&rsquo;s bet across all three backends.</p>
+
+    <!-- ============================================================ -->
+    <!-- PYTORCH                                                       -->
+    <!-- ============================================================ -->
+
+    <h2>PyTorch &mdash; The LLM Era&rsquo;s Workhorse</h2>
+    <div class="card">
+      <p><strong>Adam Paszke, Sam Gross, Soumith Chintala (Facebook AI Research), January 2017.</strong> Predecessor: Lua Torch (Ronan Collobert, Koray Kavukcuoglu, Cl&eacute;ment Farabet, ~2002, NYU/IDIAP). Paszke was a Warsaw undergraduate intern at FAIR when he rewrote Torch with a Python frontend using <strong>define-by-run</strong> dynamic computation graphs.</p>
+    </div>
+
+    <h3>Why Define-by-Run Won</h3>
+    <p>The dynamic graph model felt natively Pythonic:</p>
+    <ul>
+      <li>You could <code>print(tensor)</code> mid-forward-pass</li>
+      <li>You could use <code>for</code> loops, <code>if</code> statements, recursion</li>
+      <li>Debugging worked with standard Python tools</li>
+      <li>Especially NLP researchers (where sequence lengths vary and trees/graphs are common) switched immediately</li>
+    </ul>
+    <p>By 2019, PyTorch had <strong>overtaken TensorFlow in academic publications</strong>.</p>
+
+    <h3>Core Concepts</h3>
+    <table>
+      <thead><tr><th>Concept</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><code>torch.Tensor</code></td><td>n-dim array with autograd. Like NumPy with <code>.cuda()</code>, <code>.backward()</code></td></tr>
+        <tr><td>Autograd</td><td>Tape-based automatic differentiation. Every op records itself</td></tr>
+        <tr><td><code>nn.Module</code></td><td>Base class for layers and models; recursive parameter registration</td></tr>
+        <tr><td><code>torch.optim</code></td><td>SGD, Adam, AdamW, RMSprop, LBFGS, etc.</td></tr>
+        <tr><td>DataLoader</td><td>Efficient batching, shuffling, multi-worker loading</td></tr>
+        <tr><td>Devices</td><td><code>cuda</code>, <code>mps</code> (Apple Silicon), <code>xpu</code> (Intel), <code>hpu</code> (Habana)</td></tr>
+        <tr><td>Distributed</td><td>DDP, FSDP (Fully Sharded Data Parallel), pipeline parallelism</td></tr>
+      </tbody>
+    </table>
+
+    <h3>PyTorch 2.0 &mdash; <code>torch.compile</code> (March 2023)</h3>
+    <div class="card">
+      <p><code>torch.compile(model)</code> &mdash; a JIT compiler that traces the model with <strong>TorchDynamo</strong> (Python bytecode-level graph capture), lowers via <strong>AOTAutograd</strong> and <strong>PrimTorch</strong>, then codegens with <strong>TorchInductor</strong> (Triton-based) to fast CUDA kernels. The promise: <strong>30&ndash;200% speedups with one line of code</strong>, no model rewrite. By 2024&ndash;2025 it became the default mode for most production training.</p>
+    </div>
+
+    <h3>PyTorch Foundation (September 2022)</h3>
+    <p>Meta transferred PyTorch governance to the <strong>PyTorch Foundation</strong> under the Linux Foundation. Founding members: Meta, Microsoft, Google, NVIDIA, AWS, AMD. PyTorch was no longer &ldquo;Meta&rsquo;s framework&rdquo; but cross-industry infrastructure, like Linux or Kubernetes.</p>
+
+    <h3>Why PyTorch Won the LLM Era</h3>
+    <div class="card">
+      <p>Every major open LLM family &mdash; <strong>Llama, Mistral, Falcon, Qwen, DeepSeek, Phi, Gemma</strong> &mdash; ships PyTorch checkpoints first. The HuggingFace ecosystem is PyTorch-native. NVIDIA optimizes PyTorch as a first-class target. The compounding effect is overwhelming: <em>researchers use PyTorch &rarr; papers ship PyTorch code &rarr; models ship PyTorch checkpoints &rarr; production ships PyTorch inference.</em></p>
+    </div>
+
+    <h3>Sub-Projects</h3>
+    <table>
+      <thead><tr><th>Project</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TorchVision</strong></td><td>Image datasets, transforms, pretrained models</td></tr>
+        <tr><td><strong>TorchAudio</strong></td><td>Audio datasets, transforms, codecs (FFmpeg integration)</td></tr>
+        <tr><td><strong>TorchRL</strong></td><td>Reinforcement learning</td></tr>
+        <tr><td><strong>PyTorch Lightning</strong></td><td>Will Falcon, 2019. High-level training loop abstraction</td></tr>
+        <tr><td><strong>vLLM</strong></td><td>UC Berkeley Sky Lab. High-throughput LLM inference</td></tr>
+        <tr><td><strong>ExecuTorch</strong></td><td>On-device deployment (mobile, edge)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- JAX                                                           -->
+    <!-- ============================================================ -->
+
+    <h2>JAX &mdash; Functional NumPy with Autodiff</h2>
+    <div class="card">
+      <p><strong>Roy Frostig, Matthew James Johnson, Chris Leary, Dougal Maclaurin, Adam Paszke, et al. (Google Research), December 2018.</strong> Spiritual successor to <strong>Autograd</strong> (Maclaurin, Duvenaud, Adams, Harvard 2014). Adds <strong>XLA compilation</strong> for GPU/TPU and a richer set of functional transformations. No 1.0 yet &mdash; deliberately cautious.</p>
+    </div>
+
+    <h3>Composable Function Transformations</h3>
+    <p>JAX is <strong>functional</strong>: arrays are immutable, functions are pure, and the library exposes composable transformations:</p>
+    <table>
+      <thead><tr><th>Transformation</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>jit</code></td><td>XLA compilation of a Python function into a fused kernel</td></tr>
+        <tr><td><code>grad</code></td><td>Reverse-mode automatic differentiation of any pure function</td></tr>
+        <tr><td><code>vmap</code></td><td>Auto-vectorization &mdash; write for one example, vectorize over a batch</td></tr>
+        <tr><td><code>pmap</code> / <code>pjit</code> / <code>shard_map</code></td><td>Multi-device SPMD sharding</td></tr>
+        <tr><td><code>vjp</code> / <code>jvp</code></td><td>Vector-Jacobian and Jacobian-vector products</td></tr>
+        <tr><td><code>hessian</code></td><td>Second derivatives: <code>jacfwd(jacrev(f))</code></td></tr>
+      </tbody>
+    </table>
+    <p>These compose. <code>jit(grad(vmap(f)))</code> is a perfectly normal expression: vectorize <code>f</code> over a batch, take its gradient, JIT-compile the result. JAX is what you get when Haskell people do deep learning.</p>
+
+    <h3>JAX Ecosystem</h3>
+    <table>
+      <thead><tr><th>Library</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Flax</strong></td><td>Google Brain. Neural network library. Flax NNX is the new API (2024+)</td></tr>
+        <tr><td><strong>Equinox</strong></td><td>Patrick Kidger. Minimalist NN library treating modules as PyTrees</td></tr>
+        <tr><td><strong>Optax</strong></td><td>Gradient processing and optimizers (Adam, Lion, Lamb)</td></tr>
+        <tr><td><strong>Numpyro</strong></td><td>Probabilistic programming on JAX (Pyro port)</td></tr>
+        <tr><td><strong>Orbax</strong></td><td>Checkpointing</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- HUGGINGFACE                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>HuggingFace &mdash; The LLM Democratization Engine</h2>
+    <div class="card">
+      <p><strong>HuggingFace, 2018.</strong> Started as a chatbot company, pivoted to become the GitHub of machine learning. <code>transformers</code> library made pre-trained models accessible in three lines of code.</p>
+    </div>
+
+    <h3>Core Libraries</h3>
+    <table>
+      <thead><tr><th>Library</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><code>transformers</code></td><td>BERT, GPT, Llama, Mistral, Qwen &mdash; unified API across 100,000+ models</td></tr>
+        <tr><td><code>datasets</code></td><td>Hub of ML datasets with memory-mapped Apache Arrow backing</td></tr>
+        <tr><td><code>tokenizers</code></td><td>Fast (Rust) BPE, WordPiece, SentencePiece implementations</td></tr>
+        <tr><td><code>accelerate</code></td><td>Hardware-agnostic training (single GPU, multi-GPU, TPU, Apple MPS)</td></tr>
+        <tr><td><code>peft</code></td><td>Parameter-Efficient Fine-Tuning: LoRA, QLoRA, prefix tuning</td></tr>
+        <tr><td><code>diffusers</code></td><td>Stable Diffusion and other generative image models</td></tr>
+        <tr><td><code>evaluate</code></td><td>Model evaluation metrics</td></tr>
+        <tr><td><code>trl</code></td><td>Transformer Reinforcement Learning (RLHF, DPO, PPO)</td></tr>
+      </tbody>
+    </table>
+
+    <pre><code># Three lines to use a pre-trained model
+from transformers import pipeline
+classifier = pipeline("sentiment-analysis")
+result = classifier("I love this research project!")
+# [{'label': 'POSITIVE', 'score': 0.9998}]</code></pre>
+
+    <!-- ============================================================ -->
+    <!-- WHY PYTHON WON AI                                             -->
+    <!-- ============================================================ -->
+
+    <h2>Why Python Won the AI Revolution</h2>
+    <div class="card">
+      <p>Three factors compounded:</p>
+      <ol>
+        <li><strong>NumPy was already there.</strong> GPU frameworks needed a tensor abstraction, and NumPy&rsquo;s ndarray had been the scientific Python lingua franca for a decade. PyTorch and TensorFlow both mirror the NumPy API.</li>
+        <li><strong>C extension API.</strong> Python can call C and CUDA efficiently via cffi, Cython, and the CPython C API. This let ML frameworks offload heavy lifting to GPU kernels while keeping the user-facing code in Python.</li>
+        <li><strong>Readable researchers&rsquo; code.</strong> When papers publish code, it needs to be readable. Python&rsquo;s TSBOWTDI philosophy and clean syntax make research code comprehensible across institutions. Perl research code would be obfuscated by default; Python research code is a de facto standard.</li>
+      </ol>
+      <p>The result: every major AI lab &mdash; OpenAI, Anthropic, DeepMind, Meta AI, Google Brain, Mistral, Stability &mdash; runs on Python. Every LLM checkpoint ships as PyTorch weights. Every fine-tuning tutorial uses HuggingFace. Python is the universal compiler-target of AI research.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>AGT</td><td>Agentic Technologies</td><td>LangChain, AutoGPT, CrewAI &mdash; all Python-first</td></tr>
+        <tr><td>GSD2</td><td>GSD Skill Creator</td><td>Most AI agent frameworks are PyTorch + HuggingFace</td></tr>
+        <tr><td>MPC</td><td>Math Co-Processor</td><td>NumPy/PyTorch as the computational foundation</td></tr>
+        <tr><td>NASA</td><td>NASA Mission Series</td><td>ML for mission planning, anomaly detection, image analysis</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="scientific.html">Scientific Computing</a></li>
+        <li><a href="language.html">Core Language</a></li>
+        <li><a href="ecosystem.html">PyPI Ecosystem</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Machine Learning &amp; AI &middot; The Snake &mdash; Python &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

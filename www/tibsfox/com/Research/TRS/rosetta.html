@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta &mdash; Scheduling Paradigms</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-trs">
+  <header>
+    <h1>Rosetta &mdash; Scheduling Paradigms</h1>
+    <div class="subtitle">Superscalar vs VLIW vs EPIC vs GPU &mdash; Who Finds Parallelism, and Where</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="algorithms.html">Algorithms</a>
+      <a href="vliw.html">VLIW</a>
+      <a href="ai-crossover.html">AI Crossover</a>
+      <a href="compilers.html">Compilers</a>
+      <a href="rosetta.html" class="active">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every computer executes instructions. The question is: who decides which instructions run in parallel? Hardware (superscalar), software (VLIW), both (EPIC), or the data itself (dataflow)?
+    </blockquote>
+
+    <h2>The Scheduling Paradigm Space</h2>
+    <div class="maturity-ladder">
+      <ol>
+        <li>
+          <strong>Sequential</strong> &mdash; One instruction at a time, in order. The original von Neumann model. No parallelism. Every instruction completes before the next begins. Simple, correct, slow.
+        </li>
+        <li>
+          <strong>Pipelined</strong> &mdash; Overlap stages of different instructions. While one instruction executes, the next is decoded, and the one after that is fetched. Throughput increases without changing the ISA. Hazards (data, control, structural) require stalls or forwarding.
+        </li>
+        <li>
+          <strong>Superscalar In-Order</strong> &mdash; Multiple instructions issued per cycle, in program order. Hardware detects independent instructions and dispatches them to parallel functional units. Limited by in-order constraint &mdash; a stall blocks everything behind it.
+        </li>
+        <li>
+          <strong>Superscalar Out-of-Order</strong> &mdash; Reorder buffer, register renaming, dynamic scheduling. Hardware looks ahead in the instruction stream, finds independent operations, executes them out of order, and retires them in order. The dominant paradigm for general-purpose CPUs since the Pentium Pro (1995). Powerful but power-hungry &mdash; the scheduling hardware itself consumes significant die area and energy.
+        </li>
+        <li>
+          <strong>VLIW (Very Long Instruction Word)</strong> &mdash; The compiler finds ILP at compile time and packs multiple operations into a single wide instruction word. Hardware is simple &mdash; no reorder buffer, no register renaming, no dependency checking. The compiler does all the work. Binary compatibility is sacrificed: a VLIW binary is tied to the exact number and type of functional units.
+        </li>
+        <li>
+          <strong>EPIC (Explicitly Parallel Instruction Computing)</strong> &mdash; VLIW extended with predication (conditional execution without branches), speculative loads (loads that may fault without trapping), and register rotation (for software pipelining). IA-64/Itanium is the canonical example. More flexible than pure VLIW, but the compiler burden is enormous.
+        </li>
+        <li>
+          <strong>Dataflow</strong> &mdash; Execution driven by data availability, not program counter. An instruction fires when all its operands are ready. No sequential control flow. Explored in the 1970s&ndash;80s (MIT Tagged-Token, Manchester Dataflow Machine). Never reached commercial success as a general-purpose model, but the ideas survive in out-of-order execution (which is dataflow inside a sequential wrapper) and in modern accelerators.
+        </li>
+        <li>
+          <strong>Spatial (CGRA, Systolic Arrays)</strong> &mdash; Operations mapped to physical locations on a chip. Data flows through a grid of processing elements. Google&rsquo;s TPU uses systolic arrays for matrix multiplication. CGRAs (Coarse-Grained Reconfigurable Arrays) map computation graphs to hardware. The scheduling problem becomes a placement-and-routing problem.
+        </li>
+      </ol>
+    </div>
+
+    <h2>Superscalar vs VLIW vs EPIC</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Superscalar (OOO)</th>
+          <th>VLIW</th>
+          <th>EPIC (IA-64)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ILP discovery</strong></td>
+          <td>Hardware (dynamic)</td>
+          <td>Software (static, compiler)</td>
+          <td>Software (static) + hardware assists</td>
+        </tr>
+        <tr>
+          <td><strong>Binary compatibility</strong></td>
+          <td>Strong &mdash; ISA is stable across generations</td>
+          <td>Weak &mdash; binary tied to FU count and types</td>
+          <td>Moderate &mdash; bundles + templates, but still architecture-specific</td>
+        </tr>
+        <tr>
+          <td><strong>Power efficiency</strong></td>
+          <td>Lower &mdash; OOO hardware is expensive</td>
+          <td>Higher &mdash; simple hardware, compiler does the work</td>
+          <td>Mixed &mdash; simpler than OOO but predication adds overhead</td>
+        </tr>
+        <tr>
+          <td><strong>Design complexity</strong></td>
+          <td>Hardware-complex, software-simple</td>
+          <td>Hardware-simple, software-complex</td>
+          <td>Both complex</td>
+        </tr>
+        <tr>
+          <td><strong>Irregular code</strong></td>
+          <td>Good &mdash; hardware adapts dynamically</td>
+          <td>Poor &mdash; compiler cannot predict runtime behavior</td>
+          <td>Better than VLIW &mdash; predication eliminates some branches</td>
+        </tr>
+        <tr>
+          <td><strong>Regular code (DSP, loops)</strong></td>
+          <td>Good</td>
+          <td>Excellent &mdash; compiler can fully schedule known loops</td>
+          <td>Excellent &mdash; software pipelining + register rotation</td>
+        </tr>
+        <tr>
+          <td><strong>Commercial success</strong></td>
+          <td>Dominant (x86, ARM, Apple M-series)</td>
+          <td>DSP/embedded (TI C6x, Hexagon, billions deployed)</td>
+          <td>Failed in general-purpose (Itanium), ideas absorbed</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Trace Scheduling vs Software Pipelining vs Loop Unrolling</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Trace Scheduling</th>
+          <th>Software Pipelining</th>
+          <th>Loop Unrolling</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Target code structure</strong></td>
+          <td>Irregular control flow (if/else chains, function bodies)</td>
+          <td>Loops with known trip counts</td>
+          <td>Loops (any trip count)</td>
+        </tr>
+        <tr>
+          <td><strong>ILP extraction method</strong></td>
+          <td>Select most-likely path, compact across branches</td>
+          <td>Overlap iterations; steady-state kernel</td>
+          <td>Replicate loop body, schedule across copies</td>
+        </tr>
+        <tr>
+          <td><strong>Code growth</strong></td>
+          <td>Moderate to high (bookkeeping creates compensation code)</td>
+          <td>Low (single kernel + prologue/epilogue)</td>
+          <td>High (N copies of loop body)</td>
+        </tr>
+        <tr>
+          <td><strong>Bookkeeping cost</strong></td>
+          <td>High &mdash; compensation code for all off-trace paths</td>
+          <td>Low &mdash; register rotation handles overlap</td>
+          <td>Low &mdash; no compensation needed</td>
+        </tr>
+        <tr>
+          <td><strong>Hardware requirements</strong></td>
+          <td>Multiple FUs, wide instruction word</td>
+          <td>Multiple FUs, rotating register file (for IA-64)</td>
+          <td>Multiple FUs (benefits from wide issue)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>The Compiler Scheduling Spectrum</h2>
+    <div class="card">
+      <p>From no scheduling to whole-program scheduling, each level trades compile time and code size for more ILP:</p>
+      <ol>
+        <li><strong>No scheduling</strong> &mdash; instructions emitted in source order. The baseline.</li>
+        <li><strong>Basic block scheduling</strong> &mdash; reorder instructions within a basic block (straight-line code between branches). Safe, simple, limited &mdash; basic blocks average 4&ndash;7 instructions.</li>
+        <li><strong>Superblock scheduling</strong> &mdash; extended basic block with a single entry but multiple exits (side exits). No join points. Easier bookkeeping than full trace scheduling. Hwu/Mahlke/Chen, 1992.</li>
+        <li><strong>Hyperblock scheduling</strong> &mdash; superblock + if-conversion (predication). Branches become predicated instructions, eliminating control flow within the block. Requires hardware predication support.</li>
+        <li><strong>Trace scheduling</strong> &mdash; select the most-likely path through the CFG (a trace), schedule it as a single unit, then insert compensation code for all off-trace paths. Fisher, 1981. The breakthrough.</li>
+        <li><strong>Region-based scheduling</strong> &mdash; partition the CFG into larger regions (e.g., loops, function subgraphs) and schedule within each region. Trimaran, IMPACT.</li>
+        <li><strong>Whole-program scheduling</strong> &mdash; interprocedural scheduling. Inline functions, then schedule across the combined CFG. Maximum ILP, maximum compile time, maximum code bloat.</li>
+      </ol>
+    </div>
+
+    <h2>The Same Loop: Three Paradigms</h2>
+    <div class="card amber">
+      <p><strong>Consider a simple loop:</strong> <code>for (i = 0; i &lt; N; i++) A[i] = B[i] + C[i];</code></p>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Paradigm</th>
+          <th>How it schedules</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Superscalar (OOO)</strong></td>
+          <td>Hardware sees loads of B[i] and C[i] are independent, issues them in parallel. The add waits for both loads. Store of A[i] waits for the add. Next iteration&rsquo;s loads can overlap with this iteration&rsquo;s add/store via the reorder buffer. The hardware discovers this dynamically, every cycle.</td>
+        </tr>
+        <tr>
+          <td><strong>VLIW + Trace Scheduling</strong></td>
+          <td>Compiler unrolls the loop (say 4x), then packs 4 loads of B, 4 loads of C, 4 adds, and 4 stores into wide instruction words, interleaving them to hide load latency. Each instruction word might contain: load B[i], load C[i+1], add for i-1, store for i-2 &mdash; all in one cycle. The schedule is fixed at compile time.</td>
+        </tr>
+        <tr>
+          <td><strong>GPU (SIMT/Warp)</strong></td>
+          <td>Launch N threads. Each thread computes one element: load B[i], load C[i], add, store A[i]. All threads execute the same instructions. The hardware manages thousands of threads, hiding memory latency by switching warps. Parallelism is in the data, not the instructions.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>ASM</td><td>Assembly Language</td><td>All scheduling paradigms operate on assembly-level instructions. The ASM project covers instruction encoding, registers, and pipelines.</td></tr>
+        <tr><td>ALG</td><td>Algorithms</td><td>Scheduling algorithms (list scheduling, modulo scheduling) are graph algorithms operating on dependence DAGs.</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>LLVM&rsquo;s MachineScheduler implements superblock and list scheduling for C++ compilation targets.</td></tr>
+        <tr><td>CEE</td><td>C</td><td>C remains the primary language for DSP/VLIW targets where trace scheduling matters most.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Theory</a></li>
+        <li><a href="algorithms.html">Algorithms</a></li>
+        <li><a href="vliw.html">VLIW Architectures</a></li>
+        <li><a href="ai-crossover.html">AI Crossover</a></li>
+        <li><a href="compilers.html">Compilers</a></li>
+        <li><a href="education.html">Learn</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Rosetta &mdash; Scheduling Paradigms &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

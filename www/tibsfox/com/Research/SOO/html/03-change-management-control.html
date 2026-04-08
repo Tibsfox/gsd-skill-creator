@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Management &amp; Control — SOO Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1e2e1e;
+            --accent: #FF6F00;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #66BB6A;
+            --border: #2a3a2a;
+            --primary: #1B5E20;
+            --ops: #FFD54F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--ops); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--ops); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--ops); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--ops); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--ops); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(102,187,106,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SOO — Systems Operations<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SOO Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="change-management-control">Change Management &amp;
+    Control</h1>
+    <p><strong>Module:</strong> 03 – Systems Operations (SysOps)
+    Research Series <strong>Date:</strong> 2026-04-08
+    <strong>Domain:</strong> IT Service Management, DevOps, Change
+    Governance</p>
+    <hr />
+    <p>Every outage has a change behind it. The vast majority of
+    production incidents – studies consistently place the figure at
+    70-80% – trace back to a change: a deployment, a configuration
+    update, a database migration, a network rule modification. Change
+    management exists because the alternative is chaos. But badly
+    implemented change management creates a different kind of chaos –
+    the bureaucratic kind – where velocity grinds to a halt, engineers
+    route around process, and the controls that exist on paper bear no
+    resemblance to what happens in practice.</p>
+    <p>This module examines the full spectrum of change management: from
+    ITIL’s formal frameworks to modern continuous delivery practices,
+    from the Change Advisory Board meeting room to the GitOps
+    reconciliation loop. The central tension throughout is control
+    versus velocity. DORA’s research, spanning a decade and tens of
+    thousands of organizations, demonstrates conclusively that these are
+    not opposing forces. The highest-performing organizations deploy
+    more frequently, with shorter lead times, lower failure rates, and
+    faster recovery. They achieve this not by abandoning control but by
+    embedding it differently – shifting from external gatekeeping to
+    automated guardrails, from batch approval to continuous validation,
+    from heavyweight process to lightweight discipline.</p>
+    <p>The practical implications are significant. An organization that
+    treats change management as a compliance checkbox will get
+    compliance-shaped results: paperwork completed, rubber stamps
+    applied, incidents continuing at the same rate. An organization that
+    treats change management as an engineering discipline will get
+    engineering-shaped results: smaller changes, faster feedback,
+    automated verification, rapid recovery when things go wrong.</p>
+    <hr />
+    <h2 id="itil-change-enablement">1. ITIL Change Enablement</h2>
+    <h3 id="from-management-to-enablement">From “Management” to
+    “Enablement”</h3>
+    <p>The naming evolution is instructive. ITIL v3 called it “Change
+    Management.” The initial 2019 ITIL 4 Foundation publication renamed
+    it “Change Control.” The ITSM community rejected that term –
+    “control” carried connotations of restriction and gatekeeping that
+    ran counter to the spirit of the update – and by the time the full
+    practice guide shipped in 2020, it had been renamed “Change
+    Enablement.” This was not cosmetic. The word “enablement” signals a
+    philosophical inversion: the purpose of the practice is not to
+    prevent change but to facilitate it safely.</p>
+    <p>ITIL 4 embeds change enablement across the entire Service Value
+    System (SVS) rather than isolating it as a standalone process. This
+    reflects the reality that change touches every stage of service
+    delivery – from strategy through design, build, transition, and
+    operation. The practice’s goal is ensuring that changes are
+    assessed, authorized, and managed to maximize value while minimizing
+    risk and disruption.</p>
+    <h3 id="change-types">Change Types</h3>
+    <p>ITIL 4 defines three change types, each with distinct
+    authorization paths:</p>
+    <p><strong>Standard Changes.</strong> Pre-authorized, low-risk,
+    well-understood changes that follow a documented procedure. Examples
+    include password resets, standard software installations, or routine
+    patching to an established schedule. Standard changes have been
+    risk-assessed in advance and need no per-instance approval. The key
+    requirement is that the procedure is documented, tested, and
+    consistently followed. When organizations invest in expanding their
+    catalog of standard changes, they reduce the approval burden on
+    everything else.</p>
+    <p><strong>Normal Changes.</strong> Changes that require assessment
+    and authorization before implementation. This is the broadest
+    category, ranging from minor application updates to significant
+    infrastructure modifications. Normal changes follow the full change
+    enablement workflow: request, assessment, authorization,
+    implementation, review. The critical evolution in ITIL 4 is that
+    “authorization” no longer necessarily means a committee meeting. It
+    means the appropriate change authority has approved the change, and
+    that authority can be a peer reviewer, an automated pipeline, or a
+    team lead – whatever matches the assessed risk level.</p>
+    <p><strong>Emergency Changes.</strong> Changes that must be
+    implemented urgently to resolve an incident or prevent imminent
+    impact. Emergency changes follow an expedited process – assessment
+    and authorization still happen, but concurrently with or immediately
+    after implementation rather than before it. The danger with
+    emergency changes is scope creep: using the emergency pathway to
+    bypass normal assessment for changes that are merely urgent rather
+    than genuinely emergent. Healthy organizations track their emergency
+    change rate as a metric; if it exceeds 5-10% of total changes, the
+    normal process is likely too slow or too burdensome.</p>
+    <h3 id="change-models">Change Models</h3>
+    <p>A change model is a repeatable, predefined approach for handling
+    a particular category of change. Models codify the steps, roles,
+    timescales, and escalation paths for recurring change types. The
+    value is consistency: rather than reinventing the approval workflow
+    for each database schema migration, the organization defines a
+    “database migration change model” that specifies required
+    pre-checks, testing gates, rollback procedures, communication steps,
+    and post-implementation verification.</p>
+    <p>Well-designed change models absorb complexity at definition time
+    so that execution time is streamlined. The investment is
+    front-loaded – defining the model requires careful analysis of risk,
+    dependencies, and failure modes – but the payoff compounds with
+    every subsequent use.</p>
+    <h3 id="the-shift-from-gatekeeping-to-enabling">The Shift from
+    Gatekeeping to Enabling</h3>
+    <p>The philosophical core of ITIL 4’s change enablement is
+    delegation of authority. Rather than funneling all changes through a
+    single approval body, authority is delegated to the appropriate
+    level:</p>
+    <ul>
+    <li><strong>Automated authority</strong> for standard changes that
+    pass pipeline gates</li>
+    <li><strong>Peer authority</strong> for normal changes reviewed by
+    knowledgeable team members</li>
+    <li><strong>Team lead authority</strong> for changes affecting a
+    single team’s domain</li>
+    <li><strong>Change authority (CAB or equivalent)</strong> for
+    cross-team, high-risk, or politically sensitive changes</li>
+    <li><strong>Executive authority</strong> for changes with
+    significant business impact</li>
+    </ul>
+    <p>The key insight from DORA’s research, published in
+    <em>Accelerate</em> and reinforced annually: when team members have
+    a clear understanding of the process to get changes approved for
+    implementation, this drives high performance. Clarity of process
+    matters more than the weight of the process.</p>
+    <hr />
+    <h2 id="the-change-advisory-board">2. The Change Advisory Board</h2>
+    <h3 id="the-traditional-model">The Traditional Model</h3>
+    <p>The Change Advisory Board is a group of people who advise the
+    change authority on assessment, prioritization, and scheduling of
+    changes. In the traditional ITIL v3 model, the CAB meets weekly
+    (sometimes more frequently) to review upcoming changes, assess risk,
+    identify scheduling conflicts, and provide go/no-go recommendations.
+    Membership typically includes representatives from operations,
+    development, security, networking, database administration, and
+    business stakeholders.</p>
+    <p>The CAB’s intended value is collective wisdom: no single person
+    understands all the dependencies and implications of a change, so
+    bringing diverse expertise to the table should improve decision
+    quality.</p>
+    <h3 id="why-cabs-fail">Why CABs Fail</h3>
+    <p>DORA’s multi-year research, detailed in <em>Accelerate</em>
+    (Forsgren, Humble, Kim, 2018) and subsequent State of DevOps
+    Reports, found that external change approval processes were
+    negatively correlated with lead time, deployment frequency, and
+    restore time, and had no correlation with change failure rate. This
+    is the damning finding: CABs slow everything down without making
+    anything more stable.</p>
+    <p>The failure modes are predictable:</p>
+    <p><strong>Bottleneck accumulation.</strong> If the CAB meets
+    weekly, a change that took one hour to develop waits up to 40
+    business hours (168 real hours) for approval. This delay is not
+    neutral – it increases work-in-progress, creates context-switching
+    overhead when engineers return to changes they submitted days ago,
+    and encourages batching of changes to amortize the wait time. Larger
+    batches mean larger deployments, which mean higher blast radius when
+    something fails.</p>
+    <p><strong>Rubber-stamping.</strong> Faced with a queue of 30-50
+    changes in a one-hour meeting, the CAB cannot provide meaningful
+    technical review of each one. The meeting degenerates into a
+    sequence of “Does anyone have concerns? No? Approved.” The approval
+    provides the illusion of oversight without the substance. Engineers
+    recognize this and stop investing effort in change descriptions,
+    creating a downward spiral of information quality.</p>
+    <p><strong>Wrong expertise at the table.</strong> A networking
+    engineer reviewing an application deployment or a database
+    administrator assessing a frontend change cannot provide meaningful
+    risk assessment. The people best positioned to evaluate a change –
+    the peers who understand the codebase and its dependencies – are
+    rarely on the CAB.</p>
+    <p><strong>Process substitution for capability.</strong>
+    Organizations that experience a major incident often respond by
+    adding process: more fields on the change ticket, more approval
+    gates, more documentation requirements. This treats a capability
+    problem (poor testing, inadequate monitoring, insufficient
+    understanding of dependencies) with a process solution. The result
+    is more paperwork and the same failure rate.</p>
+    <h3 id="modern-alternatives">Modern Alternatives</h3>
+    <p><strong>Peer review at commit time.</strong> Pull request reviews
+    by team members who understand the code provide higher-quality
+    assessment than a CAB ever can. The reviewer has context, can
+    examine the actual code changes, and provides feedback in minutes
+    rather than days. When combined with branch protection rules
+    requiring approval before merge, this creates a lightweight audit
+    trail.</p>
+    <p><strong>Automated validation.</strong> Deployment pipelines that
+    run tests, security scans, performance benchmarks, and compliance
+    checks provide consistent, tireless assessment that no committee can
+    match. A pipeline does not get fatigued after reviewing 30 changes.
+    It does not rubber-stamp. It does not go on vacation.</p>
+    <p><strong>Risk-based routing.</strong> Rather than sending all
+    changes through the same process, route them based on assessed risk.
+    Low-risk changes (standard, well-tested, small blast radius) proceed
+    through automated approval. Medium-risk changes require peer review.
+    High-risk changes – cross-team, large blast radius, novel technology
+    – receive the full treatment: formal review, stakeholder alignment,
+    detailed rollback planning.</p>
+    <h3 id="when-cab-still-makes-sense">When CAB Still Makes Sense</h3>
+    <p>The CAB is not categorically wrong – it is wrong as the default
+    approval mechanism for routine changes. CABs retain value for:</p>
+    <ul>
+    <li><strong>Cross-organizational coordination</strong> – changes
+    that affect multiple teams and require scheduling alignment</li>
+    <li><strong>Strategic change review</strong> – major platform
+    migrations, vendor changes, architecture shifts</li>
+    <li><strong>Compliance requirements</strong> – regulated industries
+    where policy mandates a formal review body</li>
+    <li><strong>Post-incident process improvement</strong> – analyzing
+    patterns across changes to identify systemic issues</li>
+    </ul>
+    <p>The key reframing: the CAB should be an advisory and coordination
+    body, not an approval gate. It coordinates, it identifies conflicts,
+    it spots patterns – but it does not hold deployment hostage.</p>
+    <hr />
+    <h2 id="change-risk-assessment">3. Change Risk Assessment</h2>
+    <h3 id="risk-scoring-frameworks">Risk Scoring Frameworks</h3>
+    <p>Effective change risk assessment combines multiple dimensions
+    into a composite risk score. Common factors include:</p>
+    <ul>
+    <li><strong>Change complexity</strong> – number of systems affected,
+    lines of code changed, configuration items modified</li>
+    <li><strong>Change frequency</strong> – first-time vs. routine
+    (standard changes score lower)</li>
+    <li><strong>Testing coverage</strong> – automated test results,
+    manual test completion, performance test results</li>
+    <li><strong>Blast radius</strong> – number of users, services, or
+    business processes affected by failure</li>
+    <li><strong>Reversibility</strong> – can the change be rolled back,
+    and how quickly</li>
+    <li><strong>Historical failure rate</strong> – what is the failure
+    rate for similar changes in this environment</li>
+    </ul>
+    <p>A simple but effective model assigns each factor a 1-3 score
+    (low/medium/high) and multiplies or sums them. Changes scoring below
+    a threshold proceed through automated approval; above the threshold,
+    they require human review proportional to the score.</p>
+    <h3 id="blast-radius-analysis">Blast Radius Analysis</h3>
+    <p>Blast radius measures the potential impact when a change goes
+    wrong. It quantifies: how many users are affected, how many
+    downstream services break, how much revenue is at risk, and how long
+    recovery takes.</p>
+    <p>Blast radius is not solely a technical measure. A change to a
+    logging library has a small technical footprint but potentially
+    affects every service that imports it. A change to a payment
+    processing module has an enormous business blast radius even if only
+    a few lines of code change. Effective analysis considers both the
+    technical dependency graph and the business impact map.</p>
+    <p>Techniques for minimizing blast radius include: canary
+    deployments (expose changes to a small percentage of traffic first),
+    feature flags (decouple deployment from activation), blue-green
+    deployments (maintain a rollback environment), and service isolation
+    (limit the scope of any single deployment).</p>
+    <h3 id="change-collision-detection">Change Collision Detection</h3>
+    <p>Change collision detection identifies when multiple changes
+    affect the same systems during overlapping time windows. Collisions
+    create compounding risk: if change A and change B both modify the
+    same service and both go live within the same maintenance window,
+    diagnosing a failure becomes significantly harder because either
+    change could be the cause.</p>
+    <p>ITSM tools like ServiceNow and BMC Remedy provide automated
+    collision detection by comparing configuration items listed on
+    change requests against scheduled implementation windows. When
+    implementation periods overlap and share CIs, the system flags a
+    collision for human review.</p>
+    <p>The more sophisticated version of collision detection uses
+    dependency mapping rather than simple CI matching. Two changes might
+    not share any CIs directly but might affect services that depend on
+    a common downstream resource. Dependency-aware collision detection
+    catches these second-order conflicts.</p>
+    <h3 id="automated-vs.-human-risk-assessment">Automated vs. Human
+    Risk Assessment</h3>
+    <p>What can be automated: test coverage analysis, dependency graph
+    traversal, historical failure rate lookup, deployment size
+    measurement, known-bad-pattern detection (e.g., schema changes
+    without migration scripts), scheduling conflict detection.</p>
+    <p>What requires human judgment: novel architecture changes (no
+    historical data to compare), business context assessment (is this
+    change timed around a critical business event?), cross-team
+    coordination assessment (who else needs to know?), political and
+    organizational risk (will this change affect a relationship with a
+    vendor or partner?).</p>
+    <p>The most effective approach uses automation for the quantitative
+    dimensions and escalates to human review when the automated score
+    exceeds a threshold or when qualitative factors are flagged.</p>
+    <hr />
+    <h2 id="maintenance-windows">4. Maintenance Windows</h2>
+    <h3 id="scheduling-strategies">Scheduling Strategies</h3>
+    <p>The traditional maintenance window is a scheduled period –
+    typically during low-traffic hours – when changes are deployed to
+    production. Common patterns include:</p>
+    <ul>
+    <li><strong>Weekly windows</strong> – a recurring slot (e.g., Sunday
+    2:00-6:00 AM) for routine changes</li>
+    <li><strong>Monthly windows</strong> – a longer slot for more
+    complex changes (e.g., first Saturday, midnight to 8:00 AM)</li>
+    <li><strong>Ad hoc windows</strong> – negotiated per-change for
+    high-impact deployments</li>
+    <li><strong>Continuous deployment</strong> – no windows at all;
+    changes deploy when they pass pipeline gates</li>
+    </ul>
+    <p>The choice depends on the organization’s deployment maturity and
+    risk tolerance. Organizations early in their DevOps journey often
+    start with weekly windows and gradually reduce their reliance on
+    scheduled downtime as they build confidence in automated testing and
+    deployment.</p>
+    <h3 id="communication-protocols">Communication Protocols</h3>
+    <p>Maintenance window communication follows a predictable
+    lifecycle:</p>
+    <ol type="1">
+    <li><strong>Announcement</strong> (5-10 business days before) – what
+    is changing, when, expected impact, contact information</li>
+    <li><strong>Reminder</strong> (1-2 business days before) –
+    confirmation that the change is proceeding, any updates</li>
+    <li><strong>Start notification</strong> – maintenance window has
+    opened, work is beginning</li>
+    <li><strong>Progress updates</strong> – periodic status during the
+    window, especially for long-running changes</li>
+    <li><strong>Completion notification</strong> – work is done,
+    services are restored, any post-change issues</li>
+    <li><strong>Post-maintenance summary</strong> – what was
+    accomplished, any deviations from plan</li>
+    </ol>
+    <p>For customer-facing services, this communication extends
+    externally through status pages (Statuspage, Instatus, custom
+    solutions) and direct notification channels.</p>
+    <h3 id="follow-the-sun-maintenance">Follow-the-Sun Maintenance</h3>
+    <p>Global organizations face a timing challenge: there is no
+    universal “off-peak” for a service that serves users around the
+    clock. Follow-the-sun maintenance distributes change implementation
+    across regional teams, with each team deploying during their local
+    low-traffic window.</p>
+    <p>This approach requires: consistent deployment tooling across
+    regions, clear handoff protocols between regional teams,
+    region-aware canary deployment (roll out to one region first,
+    observe, then proceed to others), and the ability to isolate
+    regional failures.</p>
+    <h3 id="zero-downtime-deployment-vs.-planned-downtime">Zero-Downtime
+    Deployment vs. Planned Downtime</h3>
+    <p>The evolution toward zero-downtime deployment is driven by
+    economics. With 94% of enterprise applications now requiring 99.9%+
+    uptime SLAs, scheduled downtime is increasingly untenable.
+    Zero-downtime techniques include:</p>
+    <p><strong>Blue-green deployment.</strong> Two identical production
+    environments. Deploy to the idle environment, verify, then switch
+    traffic. Rollback is instant: switch traffic back to the previous
+    environment.</p>
+    <p><strong>Canary deployment.</strong> Route a small percentage of
+    traffic (1-5%) to the new version. Monitor error rates, latency, and
+    business metrics. Gradually increase traffic if metrics hold. Roll
+    back by routing all traffic to the previous version.</p>
+    <p><strong>Rolling updates.</strong> Update instances one at a time
+    (or in small batches) while the remaining instances continue serving
+    traffic. Each updated instance is health-checked before the next
+    update proceeds.</p>
+    <p><strong>Expand-and-contract (for databases).</strong> Add new
+    columns/tables alongside old ones. Deploy the application to write
+    to both old and new. Migrate existing data. Deploy the application
+    to read from new only. Remove old columns in a later deployment.</p>
+    <p>The trade-off is complexity. Zero-downtime deployments require
+    backward-compatible changes, more sophisticated deployment tooling,
+    and careful handling of database migrations. Sometimes a 15-minute
+    planned downtime window at 3:00 AM is genuinely simpler and safer
+    than engineering a zero-downtime deployment for a complex schema
+    change. The maturity path is to invest in zero-downtime capability
+    for routine changes while reserving planned downtime for genuinely
+    complex operations.</p>
+    <h3 id="maintenance-window-creep">Maintenance Window Creep</h3>
+    <p>A common failure mode: maintenance windows that were originally 2
+    hours gradually extend to 4, then 6, then “however long it takes.”
+    Window creep indicates one of several underlying problems:</p>
+    <ul>
+    <li>Changes are too large (should be broken into smaller,
+    independently deployable units)</li>
+    <li>Testing is insufficient (issues discovered during deployment
+    that should have been caught earlier)</li>
+    <li>Deployment automation is inadequate (manual steps create
+    variability and delay)</li>
+    <li>Scope creep (additional changes added to “take advantage of” the
+    window)</li>
+    </ul>
+    <p>The discipline is simple: maintenance windows have hard stop
+    times. If work is not complete by the stop time, roll back and try
+    again in the next window. This creates pressure to right-size
+    changes and invest in automation.</p>
+    <hr />
+    <h2 id="change-freeze">5. Change Freeze</h2>
+    <h3 id="the-rationale">The Rationale</h3>
+    <p>A change freeze – also called a code freeze or deployment freeze
+    – is a period during which no changes (or only emergency changes)
+    are deployed to production. Freezes serve several purposes:</p>
+    <ul>
+    <li><strong>Risk reduction during peak periods</strong> – e-commerce
+    companies freeze before Black Friday/Cyber Monday because the cost
+    of an outage during peak revenue hours vastly exceeds the cost of
+    delayed features</li>
+    <li><strong>Staffing alignment</strong> – during holidays, fewer
+    engineers are available to respond to incidents, so the organization
+    reduces the probability of incidents</li>
+    <li><strong>Stabilization before release</strong> – software
+    products freeze to allow final testing and bug-fixing before a major
+    release</li>
+    <li><strong>Compliance requirements</strong> – some regulated
+    environments mandate freeze periods around certain events</li>
+    </ul>
+    <h3 id="industry-practice">Industry Practice</h3>
+    <p>Major technology companies implement freezes with varying
+    approaches:</p>
+    <ul>
+    <li><strong>Meta</strong> uses alternating “yellow” and “red”
+    periods from November through December, with progressively stricter
+    restrictions</li>
+    <li><strong>Amazon</strong> distinguishes between “Restricted” days
+    (director approval required) and “Blocked” days (VP approval
+    required)</li>
+    <li><strong>Google</strong> typically freezes from mid-December
+    through early January</li>
+    <li><strong>Uber</strong> historically froze before Thanksgiving and
+    from mid-December through early January, driven by 5x traffic surges
+    during holidays</li>
+    <li><strong>Microsoft</strong> leaves freeze decisions to individual
+    teams rather than mandating company-wide policies</li>
+    </ul>
+    <p>Most large technology companies implement two major freeze
+    windows annually: Thanksgiving week and the Christmas-to-New-Year
+    period.</p>
+    <h3 id="the-cost-of-freezes">The Cost of Freezes</h3>
+    <p>Freezes are not free. The costs are real and often
+    underestimated:</p>
+    <p><strong>Pre-freeze rush.</strong> Engineers accelerate risky
+    changes to land them before the freeze deadline. This is precisely
+    the opposite of the freeze’s intent: the period immediately before a
+    freeze becomes the riskiest deployment window of the year. As one
+    CTO observed, “The riskiest refactors made it into production at
+    year-end,” directly undermining the safety rationale.</p>
+    <p><strong>Post-freeze merge chaos.</strong> During the freeze,
+    development continues on branches. When the freeze lifts, a flood of
+    accumulated changes all attempt to merge simultaneously, creating
+    conflicts, integration failures, and a period of elevated
+    instability.</p>
+    <p><strong>Technical debt accumulation.</strong> Bugs discovered
+    during the freeze that do not meet the emergency threshold
+    accumulate. Each one is a small compromise that compounds. The
+    post-freeze period becomes dominated by debt cleanup rather than
+    forward progress.</p>
+    <p><strong>Opportunity cost.</strong> Features, improvements, and
+    non-critical fixes that could have shipped during the freeze period
+    are delayed. For a two-week freeze twice a year, that is a month of
+    delayed delivery.</p>
+    <h3 id="emergency-changes-during-freeze">Emergency Changes During
+    Freeze</h3>
+    <p>Every freeze policy needs a clearly defined exception process.
+    The key elements:</p>
+    <ul>
+    <li><strong>Severity threshold</strong> – what qualifies as a
+    genuine emergency (typically: service-impacting incidents affecting
+    users, critical security vulnerabilities, data integrity risks)</li>
+    <li><strong>Approval chain</strong> – who can authorize a freeze
+    exception (typically elevated: director or VP level, not the normal
+    change authority)</li>
+    <li><strong>Reduced scope</strong> – emergency changes during freeze
+    must be the minimum viable fix, not an opportunity to bundle
+    additional changes</li>
+    <li><strong>Post-freeze review</strong> – every freeze exception is
+    reviewed to determine whether the emergency was genuine and whether
+    the fix was appropriately scoped</li>
+    </ul>
+    <p>The cultural discipline is critical. If freeze exceptions are
+    easy to obtain, the freeze becomes performative. If they are too
+    difficult to obtain, genuine emergencies go unaddressed. The balance
+    is: exceptions should be uncomfortable but not impossible.</p>
+    <hr />
+    <h2 id="rollback-plans">6. Rollback Plans</h2>
+    <h3 id="mandatory-rollback-planning">Mandatory Rollback
+    Planning</h3>
+    <p>Every change should ship with a documented rollback plan before
+    it is approved for implementation. The rollback plan answers three
+    questions:</p>
+    <ol type="1">
+    <li><strong>How do we detect failure?</strong> – What metrics,
+    alerts, or symptoms indicate the change has caused a problem?</li>
+    <li><strong>How do we revert?</strong> – What specific steps restore
+    the previous state?</li>
+    <li><strong>How long does it take?</strong> – What is the expected
+    recovery time, and what is the maximum acceptable recovery
+    time?</li>
+    </ol>
+    <p>The quality of a rollback plan correlates directly with change
+    safety. A plan that says “redeploy the previous version” is better
+    than no plan but inadequate for production-critical systems. A
+    complete plan specifies: the exact commands or automation to
+    execute, who has authority to trigger rollback, what data
+    considerations exist (transactions in flight, data written since
+    deployment), and how to verify that rollback completed
+    successfully.</p>
+    <h3 id="rollback-strategies-by-recovery-time">Rollback Strategies by
+    Recovery Time</h3>
+    <p><strong>10-minute recovery.</strong> Redeploy the previous
+    application version, skipping database steps. This works when the
+    database schema is backward-compatible with the previous version.
+    Recovery time is dominated by assessment (deciding to roll back)
+    rather than execution.</p>
+    <p><strong>3-minute recovery.</strong> Decouple database and code
+    deployments by hours or days. Database changes deploy first using
+    the expand-and-contract pattern, ensuring the previous application
+    version remains compatible with the current schema. Rolling back the
+    application is a simple redeployment.</p>
+    <p><strong>Immediate recovery.</strong> Blue-green deployment with
+    load balancer switching. The new version deploys to the idle
+    environment, traffic is routed there, and rollback is a load
+    balancer configuration change that takes seconds.</p>
+    <h3 id="testing-rollback-plans">Testing Rollback Plans</h3>
+    <p>An untested rollback plan is a hypothesis, not a safety net.
+    Testing approaches include:</p>
+    <ul>
+    <li><strong>Dry runs</strong> – execute the rollback procedure in a
+    staging environment before the production change</li>
+    <li><strong>Chaos engineering</strong> – deliberately trigger
+    rollback in production (during low-traffic periods) to verify the
+    procedure works</li>
+    <li><strong>Automated rollback testing</strong> – include rollback
+    verification as a step in the deployment pipeline</li>
+    <li><strong>Table-top exercises</strong> – walk through the rollback
+    procedure with the team, identifying gaps and ambiguities</li>
+    </ul>
+    <h3 id="when-rollback-is-not-possible">When Rollback Is Not
+    Possible</h3>
+    <p>Some changes cannot be rolled back:</p>
+    <ul>
+    <li><strong>Destructive database migrations</strong> – dropping
+    columns, renaming tables, deleting data</li>
+    <li><strong>External API changes</strong> – once consumers have
+    adapted to a new API version, reverting creates its own breaking
+    changes</li>
+    <li><strong>Data format changes</strong> – data written in a new
+    format cannot be read by the old version</li>
+    <li><strong>Third-party integrations</strong> – changes coordinated
+    with external partners who have made their own corresponding
+    changes</li>
+    </ul>
+    <p>For irreversible changes, the strategy shifts from rollback to
+    roll-forward:</p>
+    <ul>
+    <li><strong>Extra testing investment</strong> – more extensive
+    pre-deployment testing compensates for the lack of a safety net</li>
+    <li><strong>Staged deployment</strong> – deploy the irreversible
+    change in the smallest possible increment</li>
+    <li><strong>Feature flags</strong> – separate the deployment of the
+    change from its activation, allowing the new code to exist in
+    production without being active</li>
+    <li><strong>Parallel running</strong> – run old and new systems
+    simultaneously during a transition period</li>
+    <li><strong>Forward-fix preparation</strong> – have the next fix
+    ready before deploying, so that if something goes wrong, the path
+    forward is already planned</li>
+    </ul>
+    <h3 id="rollback-decision-criteria">Rollback Decision Criteria</h3>
+    <p>The hardest part of rollback is not the mechanics – it is the
+    decision. Teams often delay rollback hoping to find and fix the
+    problem, extending the outage. Clear decision criteria remove
+    ambiguity:</p>
+    <ul>
+    <li><strong>Time-boxed diagnosis</strong> – if the root cause is not
+    identified within N minutes (typically 15-30), roll back</li>
+    <li><strong>Impact threshold</strong> – if error rates exceed X% or
+    latency exceeds Y ms, roll back immediately regardless of diagnosis
+    progress</li>
+    <li><strong>Customer impact</strong> – if users are reporting impact
+    through support channels, roll back</li>
+    <li><strong>Cascading failure</strong> – if downstream services
+    begin failing, roll back</li>
+    </ul>
+    <p>The cultural element is equally important: rollback must never be
+    treated as failure. It is a successful use of a safety mechanism.
+    Teams that are punished for rolling back will delay the decision,
+    extending outages.</p>
+    <hr />
+    <h2 id="configuration-management-database-cmdb">7. Configuration
+    Management Database (CMDB)</h2>
+    <h3 id="purpose-and-platforms">Purpose and Platforms</h3>
+    <p>The CMDB is a repository that stores information about
+    configuration items (CIs) – the components that make up an
+    organization’s IT environment. CIs include servers, network devices,
+    applications, databases, cloud instances, containers, and the
+    relationships between them. The CMDB’s purpose is to provide a
+    single source of truth for what exists, how it is configured, and
+    how components relate to each other.</p>
+    <p>Major platforms include:</p>
+    <ul>
+    <li><strong>ServiceNow CMDB</strong> – the dominant enterprise
+    platform, deeply integrated with ITSM workflows, incident
+    management, and change management. Offers automated discovery
+    through ServiceNow Discovery and third-party integrations.</li>
+    <li><strong>Device42</strong> – focused on data center
+    infrastructure management (DCIM) and IT asset management, with
+    strong autodiscovery capabilities and integration with
+    ServiceNow.</li>
+    <li><strong>NetBox</strong> – open-source network source of truth,
+    originally developed by DigitalOcean. Increasingly used as the
+    authoritative record for network and infrastructure configuration,
+    with NetBox Assurance providing continuous validation against
+    operational state.</li>
+    </ul>
+    <h3 id="the-accuracy-problem">The Accuracy Problem</h3>
+    <p>The CMDB’s fundamental challenge is accuracy. The canonical
+    complaint – “the CMDB is always wrong” – reflects a structural
+    reality: if the system of record is a separate artifact that humans
+    maintain alongside their actual workflows, it will always drift.</p>
+    <p>Sources of inaccuracy include:</p>
+    <ul>
+    <li><strong>Manual entry decay</strong> – engineers update the CMDB
+    when they remember to, which is to say not reliably</li>
+    <li><strong>Discovery lag</strong> – automated discovery runs on a
+    schedule (daily, weekly), so the CMDB is always at least one
+    discovery cycle behind reality</li>
+    <li><strong>Shadow IT</strong> – resources provisioned outside
+    official channels never appear in the CMDB</li>
+    <li><strong>Ephemeral infrastructure</strong> – containers,
+    serverless functions, and auto-scaled instances may exist for hours
+    or minutes, making traditional CI tracking meaningless</li>
+    <li><strong>Decommissioning gaps</strong> – CIs that have been
+    decommissioned remain in the CMDB as phantom records</li>
+    </ul>
+    <p>ServiceNow addresses drift with its Drift Detection Engine, which
+    compares baseline values against real-time discovery data and flags
+    discrepancies. Staleness rules mark CIs as stale if they have not
+    been updated within a configured window (default 60 days). These are
+    mitigations, not solutions – they reduce the magnitude of drift
+    without eliminating it.</p>
+    <h3 id="automated-discovery-vs.-manual-maintenance">Automated
+    Discovery vs. Manual Maintenance</h3>
+    <p>The industry has conclusively established that manual CMDB
+    maintenance does not work at scale. Automated discovery is
+    necessary, but it comes in flavors:</p>
+    <ul>
+    <li><strong>Agent-based discovery</strong> – software agents
+    installed on each CI report configuration data to the CMDB. High
+    accuracy, high coverage, but requires agent deployment and
+    maintenance.</li>
+    <li><strong>Agentless discovery</strong> – network scanning, SNMP,
+    WMI, SSH, and API queries gather data without installed agents.
+    Lower maintenance overhead, but may miss details that require local
+    access.</li>
+    <li><strong>Cloud API integration</strong> – cloud providers expose
+    APIs (AWS Config, Azure Resource Graph, GCP Asset Inventory) that
+    report resource state. High accuracy for cloud resources, no agent
+    required.</li>
+    <li><strong>Network-based discovery</strong> – packet analysis and
+    flow data infer the existence and relationships of network-connected
+    devices.</li>
+    </ul>
+    <p>The most effective CMDB strategies combine multiple discovery
+    methods and, critically, integrate the CMDB into operational
+    workflows so that engineers interact with it as part of their work
+    rather than as a separate maintenance task. NetBox’s integration
+    with ServiceNow, for example, enables bidirectional synchronization
+    so that network engineers manage infrastructure data in NetBox
+    (their preferred tool) while ServiceNow consumes that data for ITSM
+    workflows.</p>
+    <h3 id="practical-cmdb-strategy">Practical CMDB Strategy</h3>
+    <p>Accept that perfect accuracy is unachievable. Instead, focus
+    on:</p>
+    <ol type="1">
+    <li><strong>Prioritize by impact</strong> – ensure accuracy for CIs
+    that matter most (production databases, core network infrastructure,
+    customer-facing services)</li>
+    <li><strong>Automate aggressively</strong> – every manual step is a
+    drift opportunity</li>
+    <li><strong>Integrate into workflows</strong> – make the CMDB the
+    place where engineers do their work, not a separate system they
+    update after the fact</li>
+    <li><strong>Validate continuously</strong> – compare CMDB state
+    against observed state and flag discrepancies</li>
+    <li><strong>Measure and report accuracy</strong> – what gets
+    measured improves; track CMDB accuracy metrics and make them
+    visible</li>
+    </ol>
+    <hr />
+    <h2 id="compliance-evidence">8. Compliance Evidence</h2>
+    <h3 id="change-tickets-as-audit-evidence">Change Tickets as Audit
+    Evidence</h3>
+    <p>In regulated environments, change tickets are not merely
+    operational tools – they are audit evidence. Auditors use change
+    records to verify that the organization follows its own policies:
+    that changes are assessed, approved by appropriate authority,
+    tested, implemented as planned, and reviewed after
+    implementation.</p>
+    <p>The elements auditors examine:</p>
+    <ul>
+    <li><strong>Request and justification</strong> – why was the change
+    made?</li>
+    <li><strong>Risk assessment</strong> – was the risk evaluated, and
+    was the assessment reasonable?</li>
+    <li><strong>Authorization</strong> – who approved the change, and
+    did they have authority to do so?</li>
+    <li><strong>Implementation record</strong> – what was actually done,
+    and does it match the plan?</li>
+    <li><strong>Testing evidence</strong> – was the change tested, and
+    what were the results?</li>
+    <li><strong>Review</strong> – was the change reviewed after
+    implementation?</li>
+    </ul>
+    <h3 id="soc-2-change-control-requirements">SOC 2 Change Control
+    Requirements</h3>
+    <p>SOC 2 audits evaluate against AICPA Trust Services Criteria. For
+    change management, the relevant criteria are:</p>
+    <ul>
+    <li><strong>CC8.1</strong> – the entity authorizes, designs,
+    develops or acquires, configures, documents, tests, approves, and
+    implements changes to infrastructure, data, software, and procedures
+    to meet its objectives</li>
+    <li><strong>CC6.1</strong> – logical and physical access
+    controls</li>
+    <li><strong>CC3.2</strong> – risk assessment processes</li>
+    </ul>
+    <p>In practice, SOC 2 compliance for change management requires:
+    branch protection with pull request approvals, organization-wide
+    multi-factor authentication, code ownership for sensitive paths
+    (CODEOWNERS), vulnerability scanning (Dependabot or equivalent),
+    secret scanning with push protection, and audit log streaming to
+    external storage with one-year retention (GitHub retains audit logs
+    for only 90 days).</p>
+    <h3 id="automated-compliance-evidence-collection">Automated
+    Compliance Evidence Collection</h3>
+    <p>Manual evidence collection – screenshots, spreadsheets, email
+    threads – is expensive, error-prone, and frustrating. Modern
+    compliance platforms (Vanta, Drata, Secureframe, Comp AI) integrate
+    directly with engineering tools to collect evidence
+    automatically:</p>
+    <ul>
+    <li><strong>Git platforms</strong> – pull request approvals, branch
+    protection status, commit history</li>
+    <li><strong>CI/CD platforms</strong> – build results, test results,
+    deployment records</li>
+    <li><strong>Cloud providers</strong> – configuration state, access
+    logs, resource changes</li>
+    <li><strong>Identity providers</strong> – authentication events,
+    access reviews</li>
+    </ul>
+    <p>The compliance pipeline runs continuously: collect evidence, hash
+    it for integrity, organize it by control, and make it available for
+    auditor review. This transforms compliance from a periodic scramble
+    into a steady-state process.</p>
+    <h3 id="git-as-the-change-record">Git as the Change Record</h3>
+    <p>Version control systems provide an inherently auditable change
+    record. Every commit captures: who made the change (author), when it
+    was made (timestamp), what changed (diff), why it changed (commit
+    message), and who approved it (merge/PR approval). When combined
+    with branch protection rules that require review before merge, git
+    becomes a comprehensive change control system.</p>
+    <p>For organizations pursuing compliance, this means the development
+    workflow itself generates the required evidence. The pull request is
+    the change request. The code review is the risk assessment. The CI
+    pipeline is the test evidence. The merge is the authorization. The
+    deployment log is the implementation record. No separate change
+    ticket system is needed – though many organizations maintain one for
+    changes that extend beyond code (network changes, physical
+    infrastructure, vendor configurations).</p>
+    <hr />
+    <h2 id="modern-change-practices">9. Modern Change Practices</h2>
+    <h3 id="continuous-delivery-as-change-management">Continuous
+    Delivery as Change Management</h3>
+    <p>The highest-performing organizations in DORA’s research do not
+    think of change management and continuous delivery as separate
+    concerns. Continuous delivery <em>is</em> their change management
+    practice.</p>
+    <p>The pipeline enforces controls: automated tests verify
+    functionality, security scans check for vulnerabilities, compliance
+    checks verify policy adherence, performance tests validate
+    non-functional requirements. If any gate fails, the change does not
+    proceed. This is more rigorous than any committee review because it
+    is tireless, consistent, and comprehensive.</p>
+    <p>DORA’s key finding bears repeating: speed and stability are
+    positively correlated, not competing priorities. Organizations that
+    deploy more frequently have lower change failure rates and faster
+    recovery times. This is counterintuitive only if you think of “more
+    changes” as “more risk.” In practice, more frequent deployment means
+    smaller changes, which means smaller blast radius, easier diagnosis,
+    and simpler rollback.</p>
+    <p>The 2024 DORA report introduced a fifth metric – deployment
+    rework rate – measuring unplanned deployments caused by production
+    issues. This replaced change failure rate, which had consistently
+    behaved as a statistical outlier that did not load cleanly with the
+    other four metrics. The rework rate more precisely captures the cost
+    of change-related failures.</p>
+    <h3 id="feature-flags-as-change-control">Feature Flags as Change
+    Control</h3>
+    <p>Feature flags decouple deployment from release. Code is deployed
+    to production but not activated for users until the flag is enabled.
+    This separation provides several change management benefits:</p>
+    <ul>
+    <li><strong>Instant rollback</strong> – disable the flag instead of
+    redeploying</li>
+    <li><strong>Gradual rollout</strong> – enable for 1% of users, then
+    5%, then 25%, observing impact at each stage</li>
+    <li><strong>User-segment targeting</strong> – enable for internal
+    users, then beta users, then all users</li>
+    <li><strong>Kill switch</strong> – disable a feature immediately in
+    response to an incident without any deployment</li>
+    </ul>
+    <p>When feature flag configuration is managed through GitOps – flags
+    defined in configuration files, changes made through pull requests,
+    deployment through the standard pipeline – every flag change carries
+    the same audit trail as a code change: author, reviewer, timestamp,
+    rationale.</p>
+    <p>The risk with feature flags is accumulation. Flags that are never
+    cleaned up create combinatorial complexity in the codebase.
+    Discipline requires: every flag has an owner and an expiration date,
+    flags are removed once the feature is fully rolled out, and the
+    total number of active flags is tracked and managed.</p>
+    <h3
+    id="infrastructure-as-code-as-change-documentation">Infrastructure
+    as Code as Change Documentation</h3>
+    <p>Infrastructure as Code (IaC) – Terraform, Pulumi, CloudFormation,
+    Ansible – transforms infrastructure changes from manual operations
+    into code changes that flow through the same review and deployment
+    pipeline as application code.</p>
+    <p>The change management implications are profound:</p>
+    <ul>
+    <li><strong>Every infrastructure change is a code commit</strong>
+    with an author, reviewer, timestamp, and rationale</li>
+    <li><strong>Changes are reviewed before application</strong> –
+    <code>terraform plan</code> shows exactly what will change before
+    <code>terraform apply</code> executes it</li>
+    <li><strong>Changes are version-controlled</strong> – the complete
+    history of infrastructure configuration is available in git</li>
+    <li><strong>Changes are reproducible</strong> – the same
+    configuration applied to a different environment produces the same
+    result</li>
+    <li><strong>Drift is detectable</strong> – compare the declared
+    state in code against the actual state in the environment</li>
+    </ul>
+    <h3 id="gitops-reconciliation-as-change-verification">GitOps
+    Reconciliation as Change Verification</h3>
+    <p>GitOps extends IaC with a continuous reconciliation loop. A
+    GitOps operator (ArgoCD, Flux) watches the git repository for
+    changes and continuously ensures that the running environment
+    matches the declared state in git.</p>
+    <p>The change verification benefit: if someone makes a manual change
+    to the environment that was not committed to git, the GitOps
+    operator detects the drift and either alerts or automatically
+    reverts the change. This provides a guarantee that the environment
+    matches the documented state – a guarantee that no human-driven
+    change process can match.</p>
+    <p>The reconciliation loop also catches a class of failure that
+    traditional change management misses entirely: configuration drift
+    caused by automated systems, cloud provider changes, or operator
+    error. In a traditional model, these silent changes accumulate until
+    something breaks. In a GitOps model, they are detected and corrected
+    continuously.</p>
+    <hr />
+    <h2 id="the-tension-control-vs.-velocity">The Tension: Control
+    vs. Velocity</h2>
+    <p>The thread running through every section of this module is the
+    tension between control and velocity. Organizations that over-index
+    on control get heavyweight processes, slow delivery, frustrated
+    engineers, and – counterintuitively – more incidents (because large,
+    infrequent deployments are riskier than small, frequent ones).
+    Organizations that over-index on velocity get rapid deployment of
+    untested changes, configuration sprawl, and incidents caused by
+    changes that should have been caught.</p>
+    <p>DORA’s decade of research provides the resolution: the answer is
+    not balance between control and velocity but rather the right kind
+    of control. Automated controls (tests, scans, pipeline gates)
+    provide consistent, scalable verification. Peer review provides
+    context-aware human judgment. Risk-based routing ensures that
+    heavyweight process is applied only where it is warranted.
+    Continuous reconciliation catches drift that no approval process can
+    prevent.</p>
+    <p>The organizations that navigate this tension best share common
+    characteristics: they invest in automation rather than process, they
+    treat deployment as a solved engineering problem rather than a risky
+    event, they measure outcomes (failure rate, recovery time) rather
+    than inputs (number of approvals, documentation completeness), and
+    they continuously improve their change practices based on evidence
+    rather than instinct.</p>
+    <p>The destination is not the elimination of change management but
+    its evolution: from a gatekeeping function that restricts change to
+    an engineering discipline that enables it safely. The name change
+    from “change management” to “change enablement” is not just
+    semantics. It describes the trajectory that every maturing
+    organization follows.</p>
+    <hr />
+    <p><em>Module 03 of the Systems Operations Research Series. The
+    control-velocity tension resolves not through compromise but through
+    engineering discipline: automate the verifiable, delegate the
+    judgment calls, measure the outcomes, improve continuously.</em></p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SOO Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SOO/">tibsfox.com/Research/SOO</a>
+    </div>
+</body>
+</html>

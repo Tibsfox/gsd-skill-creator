@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M4: IP Address Management — SNO Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #1a2a2a;
+            --accent: #FF9100;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4DB6AC;
+            --border: #2a3a3a;
+            --primary: #004D40;
+            --net: #A5D6A7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--net); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--net); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--net); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--net); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--net); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(77,182,172,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        SNO — Systems Network Operations<br>
+        PNW Research Series &middot;
+        <a href="../index.html">Back to SNO Index</a> &middot;
+        <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="m4-ip-address-management">M4: IP Address Management</h1>
+    <p><strong>Module:</strong> M4 <strong>Title:</strong> IP Address
+    Management <strong>Type:</strong> Operations / Engineering Reference
+    <strong>Owner:</strong> Network Operations Lead <strong>Lifecycle
+    State:</strong> Published <strong>Review Cadence:</strong> Annual
+    (or upon major tooling change) <strong>Audience:</strong> Network
+    Engineers, NOC Operators, IT Infrastructure Architects, Compliance
+    Auditors <strong>Standards Refs:</strong> RFC 1918, RFC 4291, RFC
+    5227, RFC 6598, RFC 6724, RFC 7084, RFC 8415, RFC 8683
+    <strong>Version:</strong> 1.0 <strong>Last Reviewed:</strong>
+    2026-04-08 <strong>Next Review:</strong> 2027-04-08</p>
+    <hr />
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ol type="1">
+    <li><a href="#1-purpose">Purpose</a></li>
+    <li><a href="#2-scope">Scope</a></li>
+    <li><a href="#3-ipam-tools-landscape">IPAM Tools Landscape</a></li>
+    <li><a href="#4-dhcp-operations-at-scale">DHCP Operations at
+    Scale</a></li>
+    <li><a href="#5-ipv4-exhaustion-strategies">IPv4 Exhaustion
+    Strategies</a></li>
+    <li><a href="#6-ipv6-transition-operations">IPv6 Transition
+    Operations</a></li>
+    <li><a href="#7-subnet-planning">Subnet Planning</a></li>
+    <li><a href="#8-dns-integration-with-ipam-ddi">DNS Integration with
+    IPAM (DDI)</a></li>
+    <li><a href="#9-ip-conflict-detection-and-resolution">IP Conflict
+    Detection and Resolution</a></li>
+    <li><a href="#10-compliance-requirements-for-ip-tracking">Compliance
+    Requirements for IP Tracking</a></li>
+    <li><a href="#11-operational-procedures">Operational
+    Procedures</a></li>
+    <li><a href="#12-related-documents">Related Documents</a></li>
+    <li><a href="#13-revision-history">Revision History</a></li>
+    </ol>
+    <hr />
+    <h2 id="purpose">1. Purpose</h2>
+    <p>This module provides a comprehensive operational reference for IP
+    Address Management across enterprise and service provider networks.
+    It addresses the full lifecycle of IP address resources: allocation
+    planning, assignment automation via DHCP, tracking through IPAM
+    tools, integration with DNS services, IPv4 conservation and IPv6
+    transition strategies, conflict resolution, and compliance
+    posture.</p>
+    <p>IP address management sits at the intersection of network
+    engineering, operations, and governance. Poor IPAM practice leads to
+    outages from address conflicts, compliance failures from missing
+    audit trails, wasted address space from fragmented allocation, and
+    operational friction from manual tracking in spreadsheets. This
+    module codifies the tools, patterns, and operational discipline
+    required to manage IP resources as first-class infrastructure
+    assets.</p>
+    <hr />
+    <h2 id="scope">2. Scope</h2>
+    <p>This module covers:</p>
+    <ul>
+    <li>IPAM tool selection, deployment models, and feature comparison
+    (NetBox, Nautobot, Infoblox, BlueCat, phpIPAM)</li>
+    <li>DHCP server operations at scale including failover, relay
+    agents, and reservation management</li>
+    <li>IPv4 exhaustion mitigation: NAT strategies, CGNAT, address
+    reclamation, market acquisition</li>
+    <li>IPv6 transition mechanisms: dual-stack, NAT64/DNS64, 464XLAT,
+    SLAAC vs DHCPv6</li>
+    <li>Hierarchical subnet planning with VLSM and summarization</li>
+    <li>DDI (DNS/DHCP/IPAM) unified operations and forward/reverse zone
+    automation</li>
+    <li>IP conflict detection, root cause analysis, and remediation</li>
+    <li>Regulatory compliance requirements for IP address tracking and
+    audit trails</li>
+    </ul>
+    <p>This module does not cover:</p>
+    <ul>
+    <li>Layer 2 switching or VLAN trunking design (see M2: Network
+    Change Operations)</li>
+    <li>Firewall rule management tied to IP objects (see M7: Firewall
+    &amp; ACL Operations)</li>
+    <li>VPN tunnel addressing and overlay networks (see M8: VPN &amp;
+    Remote Access)</li>
+    <li>Physical network topology or cabling (see M9: Network
+    Documentation &amp; CMDB)</li>
+    </ul>
+    <hr />
+    <h2 id="ipam-tools-landscape">3. IPAM Tools Landscape</h2>
+    <h3 id="tool-comparison-matrix">3.1 Tool Comparison Matrix</h3>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>NetBox</th>
+    <th>Nautobot</th>
+    <th>Infoblox NIOS</th>
+    <th>BlueCat Integrity</th>
+    <th>phpIPAM</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Type</strong></td>
+    <td>Open source DCIM/IPAM</td>
+    <td>Open source (NetBox fork)</td>
+    <td>Commercial DDI</td>
+    <td>Commercial DDI</td>
+    <td>Open source IPAM</td>
+    </tr>
+    <tr>
+    <td><strong>Current Version</strong></td>
+    <td>v4.5 (Jan 2026)</td>
+    <td>v2.x</td>
+    <td>NIOS 9.x / Universal DDI</td>
+    <td>9.6 / Integrity X 25.1</td>
+    <td>v1.7.4</td>
+    </tr>
+    <tr>
+    <td><strong>License</strong></td>
+    <td>Apache 2.0</td>
+    <td>Apache 2.0</td>
+    <td>Proprietary (subscription)</td>
+    <td>Proprietary (subscription)</td>
+    <td>GPL v3</td>
+    </tr>
+    <tr>
+    <td><strong>Backend</strong></td>
+    <td>Python/Django, PostgreSQL</td>
+    <td>Python/Django, PostgreSQL</td>
+    <td>Proprietary appliance</td>
+    <td>Proprietary appliance</td>
+    <td>PHP/MySQL</td>
+    </tr>
+    <tr>
+    <td><strong>API</strong></td>
+    <td>REST + GraphQL</td>
+    <td>REST + GraphQL</td>
+    <td>RESTful + WAPI</td>
+    <td>RESTful</td>
+    <td>REST</td>
+    </tr>
+    <tr>
+    <td><strong>IPv4/IPv6</strong></td>
+    <td>Full parity</td>
+    <td>Full parity</td>
+    <td>Full parity</td>
+    <td>Full parity</td>
+    <td>Full parity</td>
+    </tr>
+    <tr>
+    <td><strong>VRF Support</strong></td>
+    <td>Yes (with duplicate enforcement)</td>
+    <td>Yes</td>
+    <td>Yes (with views)</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td><strong>DHCP Management</strong></td>
+    <td>No (IPAM only)</td>
+    <td>No (IPAM only)</td>
+    <td>Yes (integrated)</td>
+    <td>Yes (integrated)</td>
+    <td>No (IPAM only)</td>
+    </tr>
+    <tr>
+    <td><strong>DNS Management</strong></td>
+    <td>No (IPAM only)</td>
+    <td>No (IPAM only)</td>
+    <td>Yes (integrated)</td>
+    <td>Yes (integrated)</td>
+    <td>PowerDNS integration</td>
+    </tr>
+    <tr>
+    <td><strong>High Availability</strong></td>
+    <td>Application-level (DB replication)</td>
+    <td>Application-level</td>
+    <td>Grid architecture (native)</td>
+    <td>Hub-and-spoke (native)</td>
+    <td>Manual (DB replication)</td>
+    </tr>
+    <tr>
+    <td><strong>Scale</strong></td>
+    <td>Thousands of prefixes</td>
+    <td>Thousands of prefixes</td>
+    <td>Millions of objects, grid</td>
+    <td>1000+ managed servers</td>
+    <td>Small-medium networks</td>
+    </tr>
+    <tr>
+    <td><strong>Automation</strong></td>
+    <td>Webhooks, custom scripts</td>
+    <td>Jobs, plugins, workflows</td>
+    <td>Ansible/Terraform modules</td>
+    <td>API-first, orchestration</td>
+    <td>Limited scripting</td>
+    </tr>
+    <tr>
+    <td><strong>Cost</strong></td>
+    <td>Free (self-hosted)</td>
+    <td>Free (self-hosted)</td>
+    <td>$$$$ (enterprise licensing)</td>
+    <td>$$$$ (enterprise licensing)</td>
+    <td>Free (self-hosted)</td>
+    </tr>
+    <tr>
+    <td><strong>Best For</strong></td>
+    <td>Infrastructure source of truth</td>
+    <td>Automation-heavy NetOps</td>
+    <td>Large enterprise DDI</td>
+    <td>Enterprise DDI with observability</td>
+    <td>Small teams, quick deployment</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="netbox-open-source-standard">3.2 NetBox (Open Source
+    Standard)</h3>
+    <p>NetBox is the de facto open source IPAM and data center
+    infrastructure management platform. Originally developed at
+    DigitalOcean by Jeremy Stretch, it is now maintained by NetBox Labs
+    with an active community of contributors.</p>
+    <p><strong>Architecture:</strong> Python/Django application backed
+    by PostgreSQL. Deployable via Docker, bare-metal, or as NetBox Cloud
+    (managed service from NetBox Labs). The REST API provides full CRUD
+    operations on all object types with OpenAPI documentation. A
+    complementary GraphQL API enables complex queries with field-level
+    precision.</p>
+    <p><strong>IPAM Object Hierarchy:</strong></p>
+    <pre><code>RIR (Regional Internet Registry)
+  +-- Aggregate (allocated block, e.g., 10.0.0.0/8)
+       +-- Prefix (subnet, e.g., 10.1.0.0/24)
+            +-- IP Range (e.g., 10.1.0.100-10.1.0.200)
+            +-- IP Address (e.g., 10.1.0.1/24)</code></pre>
+    <p>Each prefix carries a status (Active, Reserved, Deprecated,
+    Container) and can be assigned to a VRF. VRFs enforce uniqueness
+    constraints independently – a VRF configured for unique enforcement
+    will reject duplicate prefixes, while a permissive VRF allows
+    overlapping space for multi-tenant environments.</p>
+    <p><strong>Version 4.5 Key Features (January 2026):</strong> - Cable
+    Profiles with many-to-many port mappings for structured cabling
+    documentation - Native user and group ownership model for objects -
+    Rebuilt API token system with scoped permissions - MAC addresses as
+    independent first-class objects - VLAN translation policy
+    modeling</p>
+    <p><strong>Integration Pattern:</strong> NetBox serves as the source
+    of truth; operational systems (DHCP servers, DNS servers, firewalls)
+    consume NetBox data through API synchronization. NetBox does not
+    directly manage DHCP or DNS services – it records the intended
+    state, and external tools reconcile actual state. This separation is
+    a deliberate architectural choice: NetBox is a planning and
+    documentation system, not a control plane.</p>
+    <h3 id="nautobot-automation-focused-fork">3.3 Nautobot
+    (Automation-Focused Fork)</h3>
+    <p>Nautobot was forked from NetBox in early 2021 by Network to Code
+    to address perceived gaps in extensibility and automation
+    capability. While it shares NetBox’s core data model, it diverges in
+    philosophy and architecture.</p>
+    <p><strong>Key Differentiators from NetBox:</strong> - <strong>Job
+    system:</strong> First-class support for scheduled and on-demand
+    automation jobs within the platform, replacing NetBox’s simpler
+    custom scripts - <strong>Plugin ecosystem (Apps):</strong> Deeper
+    plugin architecture allowing plugins to extend the data model, add
+    views, register API endpoints, and hook into event processing -
+    <strong>GraphQL:</strong> Native GraphQL API (also now present in
+    NetBox 4.x) - <strong>Git-backed data sources:</strong>
+    Configuration contexts and jobs can be stored in Git repositories,
+    enabling GitOps workflows - <strong>Distributed job
+    execution:</strong> Support for Celery-based distributed task queues
+    for large-scale automation</p>
+    <p><strong>When to Choose Nautobot Over NetBox:</strong> Select
+    Nautobot when the primary use case is network automation
+    orchestration rather than infrastructure documentation.
+    Organizations that need to embed complex workflows (provisioning,
+    compliance checks, remediation scripts) directly into their source
+    of truth benefit from Nautobot’s job system. However, this power
+    comes with higher operational complexity: Nautobot requires Redis,
+    Celery workers, and more careful capacity planning than a basic
+    NetBox deployment.</p>
+    <h3 id="infoblox-enterprise-ddi">3.4 Infoblox (Enterprise DDI)</h3>
+    <p>Infoblox NIOS DDI is the market-leading commercial DDI platform
+    for large enterprises. Its defining architectural feature is the
+    Grid: a patented clustering technology that links diverse appliances
+    (physical, virtual, cloud-hosted) into a unified management
+    fabric.</p>
+    <p><strong>Grid Architecture:</strong> A Grid Master (or Grid Master
+    Candidate for HA) serves as the central control point. Grid Members
+    handle DNS/DHCP/IPAM workloads distributed across sites.
+    Configuration changes propagate automatically through the Grid,
+    ensuring consistency. Grid Members can operate independently during
+    connectivity loss to the Grid Master, providing resilience for
+    branch offices.</p>
+    <p><strong>IPAM Features:</strong> - Network discovery and automated
+    device fingerprinting - Real-time DHCP lease visibility with
+    MAC-to-IP correlation - Extensible attributes (custom metadata on
+    any object) - Smart folders for dynamic grouping of IP objects -
+    Role-based access control at the object level - Terraform and
+    Ansible integration modules for infrastructure-as-code workflows</p>
+    <p><strong>Universal DDI (2025 Evolution):</strong> Infoblox has
+    introduced Universal DDI as a cloud-native complement to NIOS,
+    offering SaaS-delivered DNS/DHCP/IPAM with Network Perspective views
+    for utilization analysis across on-premises and cloud environments.
+    This represents the vendor’s strategy for hybrid infrastructure
+    management without requiring on-premises appliance deployment.</p>
+    <h3 id="bluecat-integrity-ddi-with-observability">3.5 BlueCat
+    Integrity (DDI with Observability)</h3>
+    <p>BlueCat Integrity positions itself as an enterprise DDI platform
+    with strong observability and API-first design.</p>
+    <p><strong>Architecture:</strong> Hub-and-spoke model where BlueCat
+    Address Manager (BAM) serves as the central management hub and
+    BlueCat DNS/DHCP Servers (BDDS) operate at distributed sites. A
+    single BAM instance can manage over 1,000 BDDS appliances.</p>
+    <p><strong>Distinguishing Features:</strong> - <strong>Integrity X
+    (2025):</strong> Real-time, always-on DDI metrics using native
+    Prometheus-based telemetry. No polling delays or third-party plugins
+    required. This addresses a long-standing gap where DDI health
+    monitoring required separate tooling. - <strong>Phased
+    upgrades:</strong> N-2 release support allows staggered firmware
+    updates across distributed infrastructure without service
+    disruption. - <strong>API-first design:</strong> RESTful APIs with
+    OpenAPI specifications for full automation of DDI lifecycle
+    operations.</p>
+    <h3 id="phpipam-lightweight">3.6 phpIPAM (Lightweight)</h3>
+    <p>phpIPAM is a PHP/MySQL application designed for organizations
+    that need basic IP address management without the overhead of a full
+    DDI platform or enterprise licensing costs.</p>
+    <p><strong>Strengths:</strong> Rapid deployment (single LAMP/LEMP
+    stack), intuitive web interface, subnet visualization with
+    utilization heat maps, VLAN and VRF tracking, PowerDNS integration
+    for basic DDI, REST API for automation, and active development
+    (v1.7.4 as of November 2025).</p>
+    <p><strong>Limitations:</strong> No native DHCP management, no
+    built-in high availability, limited scalability for very large
+    networks (tens of thousands of subnets), and a smaller plugin
+    ecosystem compared to NetBox or Nautobot.</p>
+    <p><strong>Best Use Case:</strong> Small to mid-size organizations
+    migrating from spreadsheet-based IP tracking to a proper IPAM tool.
+    phpIPAM provides immediate value with minimal operational
+    overhead.</p>
+    <hr />
+    <h2 id="dhcp-operations-at-scale">4. DHCP Operations at Scale</h2>
+    <h3 id="server-platform-comparison">4.1 Server Platform
+    Comparison</h3>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>ISC Kea</th>
+    <th>ISC DHCP (EOL)</th>
+    <th>Windows DHCP</th>
+    <th>Infoblox/BlueCat</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Status</strong></td>
+    <td>Active (v3.0.0 LTS, June 2025)</td>
+    <td>End of Life (2022)</td>
+    <td>Active (Server 2022+)</td>
+    <td>Active (commercial)</td>
+    </tr>
+    <tr>
+    <td><strong>Protocol</strong></td>
+    <td>DHCPv4 + DHCPv6</td>
+    <td>DHCPv4 + DHCPv6</td>
+    <td>DHCPv4 + DHCPv6</td>
+    <td>DHCPv4 + DHCPv6</td>
+    </tr>
+    <tr>
+    <td><strong>Config Backend</strong></td>
+    <td>JSON file, MySQL, PostgreSQL</td>
+    <td>Text file (dhcpd.conf)</td>
+    <td>Active Directory / MMC</td>
+    <td>Proprietary (appliance)</td>
+    </tr>
+    <tr>
+    <td><strong>Hot Reconfiguration</strong></td>
+    <td>Yes (API-driven, no restart)</td>
+    <td>No (requires restart)</td>
+    <td>Partial (some changes live)</td>
+    <td>Yes (Grid propagation)</td>
+    </tr>
+    <tr>
+    <td><strong>High Availability</strong></td>
+    <td>Hook-based HA (hot-standby, load-balancing)</td>
+    <td>Failover protocol (RFC draft)</td>
+    <td>Failover (split-scope, hot-standby)</td>
+    <td>Native Grid HA</td>
+    </tr>
+    <tr>
+    <td><strong>Performance</strong></td>
+    <td>Multi-threaded, high throughput</td>
+    <td>Single-threaded</td>
+    <td>Moderate</td>
+    <td>Appliance-optimized</td>
+    </tr>
+    <tr>
+    <td><strong>Hooks/Extensions</strong></td>
+    <td>C++ hook libraries (12+ open source in v3.0)</td>
+    <td>Limited scripting</td>
+    <td>PowerShell</td>
+    <td>Vendor extensions</td>
+    </tr>
+    <tr>
+    <td><strong>Management UI</strong></td>
+    <td>Stork (separate tool)</td>
+    <td>None</td>
+    <td>DHCP MMC / PowerShell</td>
+    <td>Integrated web UI</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="isc-kea-the-modern-standard">4.2 ISC Kea: The Modern
+    Standard</h3>
+    <p>ISC DHCP reached end of life in 2022 and must not be used for new
+    deployments. ISC Kea is its designated successor. Kea 3.0.0,
+    released in June 2025, is the first Long-Term Support (LTS) release
+    with a three-year support window.</p>
+    <p><strong>Critical Migration Note:</strong> As of Kea 3.0.0, all
+    hook libraries except RBAC and Configuration Backend are now open
+    source, eliminating the previous distinction between free and
+    premium features. This is a significant change from earlier versions
+    where high-availability and RADIUS hooks required commercial support
+    subscriptions.</p>
+    <p><strong>Key Operational Concepts:</strong></p>
+    <p><strong>Scopes and Shared Networks:</strong> Kea organizes
+    address pools within subnets. Multiple subnets serving the same
+    physical link are grouped as shared networks – essential for
+    environments where a single broadcast domain requires multiple
+    address ranges (common during network migrations or when expanding
+    capacity without re-subnetting).</p>
+    <p><strong>Reservations:</strong> Host reservations in Kea support
+    identification by hardware address (MAC), DUID (DHCPv6), client-id,
+    circuit-id, or flex-id. Reservations can be stored in the JSON
+    configuration file or in a database backend (MySQL/PostgreSQL) for
+    dynamic management via the Kea API.</p>
+    <p><strong>Failover (High Availability Hook):</strong> Kea’s HA hook
+    supports three modes: 1. <strong>Hot-standby:</strong> One active
+    server, one standby. Standby takes over on failure detection. Simple
+    and predictable. 2. <strong>Load-balancing:</strong> Both servers
+    actively serve leases, splitting the pool. Provides capacity scaling
+    and redundancy simultaneously. 3. <strong>Passive-backup:</strong>
+    Primary serves all leases, backup receives lease updates for cold
+    failover. Suitable for disaster recovery topologies.</p>
+    <p>Lease synchronization between HA peers uses the Kea API over
+    HTTPS, not a custom protocol. This means standard network monitoring
+    and troubleshooting tools apply to the replication channel.</p>
+    <p><strong>Stork Management:</strong> ISC Stork is a companion
+    application that provides a web-based management interface for
+    monitoring and configuring Kea servers. It aggregates lease data,
+    subnet utilization metrics, and HA status across a fleet of Kea
+    instances.</p>
+    <h3 id="dhcp-relay-agents">4.3 DHCP Relay Agents</h3>
+    <p>In routed networks where DHCP clients and servers reside on
+    different subnets, relay agents (IP helpers) forward DHCP broadcasts
+    across layer 3 boundaries.</p>
+    <p><strong>Configuration Pattern (Cisco IOS):</strong></p>
+    <pre><code>interface Vlan100
+  ip address 10.1.100.1 255.255.255.0
+  ip helper-address 10.255.0.10    ! Primary DHCP server
+  ip helper-address 10.255.0.11    ! Secondary DHCP server</code></pre>
+    <p><strong>Operational Concerns:</strong> - Each
+    <code>ip helper-address</code> directive forwards broadcasts to the
+    specified server. With HA pairs, configure both servers as helpers
+    on every client-facing interface. - Relay agents insert the Gateway
+    IP Address (giaddr) field, which the DHCP server uses to select the
+    correct scope. A missing or incorrect giaddr results in no available
+    pool, producing silent DHCP failures that are difficult to diagnose
+    without server-side logging. - In multi-VRF environments, the relay
+    agent must be VRF-aware, forwarding within the correct routing
+    context. Misconfigured VRF relay is a common source of “DHCP not
+    working on new VLAN” incidents.</p>
+    <h3 id="windows-dhcp-server">4.4 Windows DHCP Server</h3>
+    <p>Windows DHCP Server remains prevalent in Microsoft-centric
+    enterprise environments, integrated with Active Directory for
+    authorization and managed through the DHCP MMC snap-in or
+    PowerShell.</p>
+    <p><strong>Failover Modes:</strong> - <strong>Hot Standby:</strong>
+    One server handles all requests; partner takes over after Maximum
+    Client Lead Time (MCLT) expires. Appropriate for hub-and-spoke
+    topologies. - <strong>Load Sharing:</strong> Both servers respond to
+    requests with configurable percentage split (default 50/50). Better
+    utilization of both servers but requires careful monitoring.</p>
+    <p><strong>Scale Consideration:</strong> Windows DHCP supports
+    split-scope and failover relationships but lacks the granular hook
+    extensibility of Kea. For environments exceeding 500 scopes or
+    requiring custom lease logic (MAC-based policy, RADIUS integration),
+    Kea or commercial DDI solutions are more appropriate.</p>
+    <hr />
+    <h2 id="ipv4-exhaustion-strategies">5. IPv4 Exhaustion
+    Strategies</h2>
+    <h3 id="current-state-of-ipv4-exhaustion">5.1 Current State of IPv4
+    Exhaustion</h3>
+    <p>All five Regional Internet Registries (RIRs) have exhausted their
+    general allocation pools. ARIN’s free pool was depleted in September
+    2015. RIPE NCC made its final /22 allocation from the last /8 block
+    in November 2019. Organizations requiring new IPv4 space must
+    acquire it through the transfer market or implement conservation
+    strategies.</p>
+    <h3 id="nat-overload-pat">5.2 NAT Overload (PAT)</h3>
+    <p>Network Address Translation with Port Address Translation (NAT
+    overload, also called NAPT) maps multiple internal RFC 1918
+    addresses to a single or small pool of public addresses using unique
+    source port numbers.</p>
+    <p><strong>RFC 1918 Private Address Ranges:</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Block</th>
+    <th>Range</th>
+    <th>CIDR</th>
+    <th>Addresses</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>10.0.0.0/8</td>
+    <td>10.0.0.0 - 10.255.255.255</td>
+    <td>/8</td>
+    <td>16,777,216</td>
+    </tr>
+    <tr>
+    <td>172.16.0.0/12</td>
+    <td>172.16.0.0 - 172.31.255.255</td>
+    <td>/12</td>
+    <td>1,048,576</td>
+    </tr>
+    <tr>
+    <td>192.168.0.0/16</td>
+    <td>192.168.0.0 - 192.168.255.255</td>
+    <td>/16</td>
+    <td>65,536</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Overlap Problems:</strong> Mergers, acquisitions, and VPN
+    interconnections frequently expose RFC 1918 overlap: two
+    organizations both using 10.0.0.0/8 internally cannot route to each
+    other without NAT translation at the boundary. Overlap resolution
+    typically requires re-addressing one side (expensive, disruptive) or
+    deploying twice-NAT (complex, application-breaking for protocols
+    that embed IP addresses in payloads like SIP, FTP active mode, or
+    IPsec without NAT-T).</p>
+    <h3 id="carrier-grade-nat-cgnat">5.3 Carrier-Grade NAT (CGNAT)</h3>
+    <p>CGNAT (RFC 6598) introduces a NAT layer within the service
+    provider network, translating subscriber addresses from the shared
+    address space (100.64.0.0/10) to a pool of public IPv4
+    addresses.</p>
+    <p><strong>RFC 6598 Shared Address Space (100.64.0.0/10):</strong> -
+    4,194,304 addresses reserved for ISP-to-CPE links behind CGNAT -
+    Must not be used on the public Internet or leaked into BGP -
+    Explicitly not for end-user assignment – exists solely for the
+    SP-to-subscriber link segment</p>
+    <p><strong>Operational Problems with CGNAT:</strong> - <strong>Port
+    forwarding impossible:</strong> Subscribers behind CGNAT cannot host
+    inbound services. No amount of CPE configuration resolves this
+    because the public IP is shared. - <strong>IP attribution
+    failure:</strong> Multiple subscribers share a single public IP. Law
+    enforcement and abuse handling require port-level timestamp logs to
+    identify individual subscribers. Without these logs, attribution is
+    impossible. - <strong>Application breakage:</strong> Protocols that
+    assume a unique public IP (gaming, peer-to-peer, some VPN
+    topologies, WebRTC STUN) fail or degrade behind CGNAT. -
+    <strong>Geolocation inaccuracy:</strong> IP-based geolocation maps
+    to the CGNAT pool location, not the subscriber’s actual location. -
+    <strong>Session table exhaustion:</strong> CGNAT devices must
+    maintain state for every translated flow. High-bandwidth,
+    many-connection users (BitTorrent, IoT fleets) can exhaust CGNAT
+    session tables, affecting other subscribers sharing the same
+    device.</p>
+    <h3 id="address-reclamation-audits">5.4 Address Reclamation
+    Audits</h3>
+    <p>Before purchasing IPv4 space on the open market, organizations
+    should audit their existing allocations for reclaimable
+    addresses.</p>
+    <p><strong>Audit Methodology:</strong> 1. <strong>Export all
+    allocated prefixes</strong> from the IPAM system with utilization
+    percentages 2. <strong>Identify under-utilized subnets</strong>
+    (below 50% utilization for /24 and larger) 3. <strong>Scan for dark
+    space</strong> – allocated but with zero active hosts (ping sweep,
+    ARP table analysis, DHCP lease review) 4. <strong>Review legacy
+    allocations</strong> – subnets assigned to decommissioned projects,
+    test labs, or former acquisitions 5. <strong>Analyze reservation
+    waste</strong> – DHCP reservations for devices no longer on the
+    network 6. <strong>Check for over-provisioned subnets</strong> – a
+    /22 (1,024 addresses) serving 50 hosts should be re-subnetted to a
+    /26 (64 addresses)</p>
+    <p><strong>Expected Recovery:</strong> In mature enterprises,
+    address reclamation audits typically recover 15-30% of allocated
+    IPv4 space through consolidation and cleanup.</p>
+    <h3 id="ipv4-market-pricing-2025-2026">5.5 IPv4 Market Pricing
+    (2025-2026)</h3>
+    <p>The IPv4 transfer market has experienced significant price
+    volatility:</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Period</th>
+    <th>/24 Price (per IP)</th>
+    <th>/16 Price (per IP)</th>
+    <th>Trend</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>2021 Peak</td>
+    <td>$50-60</td>
+    <td>$45-55</td>
+    <td>Rising sharply</td>
+    </tr>
+    <tr>
+    <td>2023</td>
+    <td>$35-45</td>
+    <td>$25-35</td>
+    <td>Plateau</td>
+    </tr>
+    <tr>
+    <td>Mid-2025</td>
+    <td>$35-45</td>
+    <td>Below $20</td>
+    <td>Declining</td>
+    </tr>
+    <tr>
+    <td>Q1 2026</td>
+    <td>$35-45 (small blocks)</td>
+    <td>$9-15 (large blocks)</td>
+    <td>Accelerating decline</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The price decline reflects growing IPv6 adoption reducing demand,
+    cloud providers offering IPv6-only services at lower cost, and
+    increased supply as organizations release unused legacy allocations.
+    However, small blocks (/24) retain a premium because they are the
+    minimum BGP-routable prefix size. Lease rates remain in the
+    $0.30-0.50/IP/month range for ARIN and RIPE regions, with APNIC
+    commanding higher rates ($0.60+/IP/month) due to regional supply
+    constraints.</p>
+    <p><strong>Recommendation:</strong> For organizations needing new
+    IPv4 capacity, lease before purchasing. The declining market makes
+    large purchases a depreciating asset. Invest capital in IPv6
+    deployment instead.</p>
+    <hr />
+    <h2 id="ipv6-transition-operations">6. IPv6 Transition
+    Operations</h2>
+    <h3 id="transition-strategy-comparison">6.1 Transition Strategy
+    Comparison</h3>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Strategy</th>
+    <th>Mechanism</th>
+    <th>IPv4 Required</th>
+    <th>Complexity</th>
+    <th>Best For</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Dual-Stack</strong></td>
+    <td>Run IPv4 and IPv6 simultaneously</td>
+    <td>Yes (full)</td>
+    <td>Low</td>
+    <td>Gradual transition, broad compatibility</td>
+    </tr>
+    <tr>
+    <td><strong>NAT64 + DNS64</strong></td>
+    <td>Translate IPv6 to IPv4 at network edge</td>
+    <td>Yes (NAT pool only)</td>
+    <td>Medium</td>
+    <td>IPv6-primary networks accessing IPv4 resources</td>
+    </tr>
+    <tr>
+    <td><strong>464XLAT</strong></td>
+    <td>Client-side CLAT + network NAT64</td>
+    <td>Yes (NAT pool only)</td>
+    <td>Medium-High</td>
+    <td>Mobile networks, IPv6-only with legacy app support</td>
+    </tr>
+    <tr>
+    <td><strong>DS-Lite</strong></td>
+    <td>IPv4-in-IPv6 tunnel to CGNAT</td>
+    <td>Yes (CGNAT pool)</td>
+    <td>High</td>
+    <td>ISP networks conserving IPv4</td>
+    </tr>
+    <tr>
+    <td><strong>MAP-E / MAP-T</strong></td>
+    <td>Stateless IPv4-over-IPv6</td>
+    <td>Yes (shared)</td>
+    <td>High</td>
+    <td>ISP scale without per-flow state</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="dual-stack">6.2 Dual-Stack</h3>
+    <p>Dual-stack is the simplest transition strategy: every device and
+    interface runs both IPv4 and IPv6 concurrently. Routing protocols
+    (OSPF/OSPFv3, EIGRP, BGP) advertise both address families. DNS
+    returns both A and AAAA records, and clients prefer IPv6 per RFC
+    6724 source address selection rules.</p>
+    <p><strong>Operational Cost:</strong> Dual-stack doubles the address
+    management workload. Every subnet needs both an IPv4 allocation and
+    an IPv6 allocation. DHCP infrastructure must serve both protocols.
+    Firewall rules must be maintained in parallel. Monitoring must cover
+    both stacks. This is the cost of backward compatibility.</p>
+    <p><strong>When Dual-Stack Ends:</strong> The goal of dual-stack is
+    to eventually disable IPv4. This is viable only when all critical
+    services are reachable over IPv6 and all client devices support
+    IPv6-only operation with NAT64 fallback.</p>
+    <h3 id="nat64-and-dns64">6.3 NAT64 and DNS64</h3>
+    <p>NAT64 translates IPv6 packets to IPv4 packets at a stateful
+    translation device, enabling IPv6-only clients to reach IPv4-only
+    servers. DNS64 synthesizes AAAA records for IPv4-only destinations
+    by embedding the IPv4 address within a well-known IPv6 prefix
+    (typically 64:ff9b::/96).</p>
+    <p><strong>How It Works:</strong> 1. IPv6-only client queries DNS
+    for <code>legacy-server.example.com</code> 2. DNS64 server queries
+    upstream DNS and finds only an A record: <code>198.51.100.42</code>
+    3. DNS64 synthesizes an AAAA record: <code>64:ff9b::c633:642a</code>
+    (198.51.100.42 embedded) 4. Client sends IPv6 packet to
+    <code>64:ff9b::c633:642a</code> 5. NAT64 device translates to IPv4
+    packet destined to <code>198.51.100.42</code></p>
+    <p><strong>Critical Limitation:</strong> DNS64 requires
+    hostname-based access. If an application connects to a literal IPv4
+    address (e.g., <code>https://172.16.21.12</code>), DNS64 is never
+    invoked and the connection fails. This is where 464XLAT becomes
+    necessary.</p>
+    <h3 id="xlat-rfc-6877">6.4 464XLAT (RFC 6877)</h3>
+    <p>464XLAT addresses the literal IPv4 address problem by adding a
+    Customer-side Translator (CLAT) on the client device. The CLAT
+    performs stateless NAT46 translation: it takes IPv4 packets from
+    legacy applications, wraps them in IPv6 using the NAT64 prefix, and
+    sends them to the network-side NAT64 (PLAT) for final
+    translation.</p>
+    <p><strong>Deployment Model:</strong></p>
+    <pre><code>[Legacy IPv4 App] --&gt; [CLAT on client] --&gt; [IPv6-only network] --&gt; [PLAT/NAT64] --&gt; [IPv4 Internet]</code></pre>
+    <p>Android, iOS, Windows 10+, and macOS all support CLAT natively,
+    making 464XLAT the preferred mechanism for mobile and enterprise
+    IPv6-only deployments where legacy application compatibility is
+    required.</p>
+    <h3 id="slaac-vs-dhcpv6">6.5 SLAAC vs DHCPv6</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>SLAAC</th>
+    <th>Stateless DHCPv6</th>
+    <th>Stateful DHCPv6</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Address Assignment</strong></td>
+    <td>Auto (EUI-64 or privacy extensions)</td>
+    <td>Router provides prefix; options from DHCPv6</td>
+    <td>DHCPv6 server assigns address</td>
+    </tr>
+    <tr>
+    <td><strong>DNS Configuration</strong></td>
+    <td>RDNSS option in RA (RFC 8106)</td>
+    <td>DHCPv6 provides DNS</td>
+    <td>DHCPv6 provides DNS</td>
+    </tr>
+    <tr>
+    <td><strong>Address Tracking</strong></td>
+    <td>None (no server-side log)</td>
+    <td>None (addresses self-generated)</td>
+    <td>Full lease log on server</td>
+    </tr>
+    <tr>
+    <td><strong>Prefix Delegation</strong></td>
+    <td>No</td>
+    <td>No</td>
+    <td>Yes (RFC 8415)</td>
+    </tr>
+    <tr>
+    <td><strong>Client Support</strong></td>
+    <td>Universal</td>
+    <td>Nearly universal</td>
+    <td>Android: not supported for address assignment</td>
+    </tr>
+    <tr>
+    <td><strong>Router Flags</strong></td>
+    <td>M=0, O=0</td>
+    <td>M=0, O=1</td>
+    <td>M=1</td>
+    </tr>
+    <tr>
+    <td><strong>Enterprise Use</strong></td>
+    <td>IoT, simple networks</td>
+    <td>Moderate (SLAAC + DNS/NTP from DHCPv6)</td>
+    <td>Recommended for auditable environments</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>The Android Problem:</strong> Android does not support
+    DHCPv6 for address assignment. It relies exclusively on SLAAC. This
+    forces enterprise networks to deploy SLAAC (or SLAAC + stateless
+    DHCPv6 for DNS) on any network segment where Android devices are
+    present. For environments requiring full address tracking, this
+    creates a compliance gap that must be addressed through alternative
+    monitoring (NDP snooping, flow analysis, or neighbor table
+    polling).</p>
+    <p><strong>Enterprise Recommendation:</strong> Deploy SLAAC with
+    stateless DHCPv6 (M=0, O=1) as the baseline. Use RDNSS in Router
+    Advertisements as a fallback for devices that do not support DHCPv6
+    options. For server networks and infrastructure segments (no Android
+    devices), use stateful DHCPv6 for full address control and audit
+    logging.</p>
+    <h3 id="prefix-delegation-pd">6.6 Prefix Delegation (PD)</h3>
+    <p>IPv6 Prefix Delegation (RFC 8415, formerly RFC 3633) enables an
+    upstream router or DHCPv6 server to delegate an entire prefix
+    (commonly /48 or /56) to a downstream router, which then
+    sub-allocates /64 subnets to its local interfaces.</p>
+    <p><strong>Common Delegation Hierarchy:</strong></p>
+    <pre><code>ISP assigns:        2001:db8:abcd::/48    (to customer)
+Customer delegates: 2001:db8:abcd:0100::/56  (to branch office)
+Branch subnets:     2001:db8:abcd:0100::/64  (VLAN 100)
+                    2001:db8:abcd:0101::/64  (VLAN 101)
+                    ...
+                    2001:db8:abcd:01ff::/64  (VLAN 255)</code></pre>
+    <p>Prefix delegation automates downstream subnet provisioning,
+    eliminating manual allocation for branch offices and reducing the
+    IPAM operational burden.</p>
+    <hr />
+    <h2 id="subnet-planning">7. Subnet Planning</h2>
+    <h3 id="hierarchical-allocation-design">7.1 Hierarchical Allocation
+    Design</h3>
+    <p>Effective subnet planning begins at the top of the address
+    hierarchy and works downward, preserving summarization at every
+    tier.</p>
+    <p><strong>Design Principles:</strong> 1. <strong>Allocate from the
+    top down:</strong> Assign large blocks to regions/sites first, then
+    subdivide within each site 2. <strong>Preserve contiguity:</strong>
+    Keep allocations within a site contiguous so they can be summarized
+    in routing 3. <strong>Leave growth room:</strong> Do not allocate
+    100% of a parent block. Reserve at least 50% for future growth at
+    each tier 4. <strong>Align to bit boundaries:</strong> Subnets
+    should fall on natural binary boundaries for clean summarization</p>
+    <p><strong>Example: Enterprise IPv4 Allocation
+    (10.0.0.0/8)</strong></p>
+    <pre><code>10.0.0.0/8          Enterprise supernet
+  10.0.0.0/11       Region: North America (2M addresses)
+    10.0.0.0/14     Site: Seattle HQ (256K addresses)
+      10.0.0.0/16   Campus: Main (65K addresses)
+        10.0.0.0/22     Server VLAN block (1,024 addresses)
+        10.0.4.0/22     User VLAN block (1,024 addresses)
+        10.0.8.0/22     Voice VLAN block (1,024 addresses)
+        10.0.12.0/22    Management VLAN block (1,024 addresses)
+        10.0.16.0/20    Reserved for growth (4,096 addresses)
+      10.1.0.0/16   Campus: Eastside (65K addresses)
+    10.4.0.0/14     Site: Portland (256K addresses)
+    10.8.0.0/13     Reserved for NA growth
+  10.32.0.0/11      Region: Europe (2M addresses)
+  10.64.0.0/10      Reserved for future regions</code></pre>
+    <h3 id="vlsm-variable-length-subnet-masking">7.2 VLSM
+    (Variable-Length Subnet Masking)</h3>
+    <p>VLSM allows different subnets within the same address block to
+    use different prefix lengths, matching subnet size to actual host
+    requirements.</p>
+    <p><strong>Common Subnet Sizing:</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Prefix</th>
+    <th>Hosts (usable)</th>
+    <th>Typical Use</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>/31</td>
+    <td>2 (point-to-point, RFC 3021)</td>
+    <td>Router-to-router links</td>
+    </tr>
+    <tr>
+    <td>/30</td>
+    <td>2 (traditional point-to-point)</td>
+    <td>Legacy router links</td>
+    </tr>
+    <tr>
+    <td>/28</td>
+    <td>14</td>
+    <td>Small management VLANs</td>
+    </tr>
+    <tr>
+    <td>/27</td>
+    <td>30</td>
+    <td>Department VLANs (small)</td>
+    </tr>
+    <tr>
+    <td>/26</td>
+    <td>62</td>
+    <td>Department VLANs (medium)</td>
+    </tr>
+    <tr>
+    <td>/25</td>
+    <td>126</td>
+    <td>Floor VLANs</td>
+    </tr>
+    <tr>
+    <td>/24</td>
+    <td>254</td>
+    <td>Standard user VLAN</td>
+    </tr>
+    <tr>
+    <td>/23</td>
+    <td>510</td>
+    <td>Large user VLAN</td>
+    </tr>
+    <tr>
+    <td>/22</td>
+    <td>1,022</td>
+    <td>Wireless VLANs, large floors</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="for-point-to-point-links-rfc-3021">7.3 /31 for
+    Point-to-Point Links (RFC 3021)</h3>
+    <p>RFC 3021 permits /31 subnets on point-to-point links, eliminating
+    the two-address waste (network and broadcast) of traditional /30
+    subnets. Both addresses in the /31 are usable as host addresses.</p>
+    <p><strong>Savings Example:</strong> A network with 500
+    point-to-point router links: - /30 subnets: 500 x 4 = 2,000
+    addresses consumed (1,000 wasted) - /31 subnets: 500 x 2 = 1,000
+    addresses consumed (0 wasted) - Recovery: 1,000 addresses (four /22
+    subnets)</p>
+    <p>All modern routing platforms (Cisco IOS/IOS-XE/NX-OS, Juniper
+    Junos, Arista EOS) support /31 subnets. Use /31 for all new
+    point-to-point links. Reserve /30 only for legacy devices that do
+    not support RFC 3021.</p>
+    <h3 id="summarization-friendly-design">7.4 Summarization-Friendly
+    Design</h3>
+    <p>The ultimate test of subnet planning quality is summarization:
+    can the entire address space of a site be represented as a single
+    route at the aggregation boundary?</p>
+    <p><strong>Good Design (summarizable):</strong></p>
+    <pre><code>Site A: 10.0.0.0/16 (single summary to core)
+  10.0.0.0/24 - VLAN 10
+  10.0.1.0/24 - VLAN 20
+  10.0.2.0/24 - VLAN 30
+  10.0.3.0/24 - VLAN 40</code></pre>
+    <p><strong>Bad Design (unsummarizable):</strong></p>
+    <pre><code>Site A (scattered allocations):
+  10.0.0.0/24   - VLAN 10
+  10.5.7.0/24   - VLAN 20 (different /8 region)
+  172.16.3.0/24 - VLAN 30 (different RFC 1918 block entirely)
+  10.99.0.0/24  - VLAN 40 (distant from other allocations)</code></pre>
+    <p>The bad design requires four separate routes at the aggregation
+    boundary instead of one, bloating routing tables and making access
+    control lists unwieldy.</p>
+    <hr />
+    <h2 id="dns-integration-with-ipam-ddi">8. DNS Integration with IPAM
+    (DDI)</h2>
+    <h3 id="the-ddi-model">8.1 The DDI Model</h3>
+    <p>DDI (DNS/DHCP/IPAM) unifies the three core network service
+    databases into a single management plane. When a DHCP lease is
+    granted, the IPAM record is updated and forward/reverse DNS records
+    are created automatically. When a lease expires, the DNS records are
+    cleaned up. This automation eliminates the manual record maintenance
+    that causes stale DNS entries and PTR/A record mismatches.</p>
+    <h3 id="forward-and-reverse-zone-automation">8.2 Forward and Reverse
+    Zone Automation</h3>
+    <p><strong>Forward Zone (A/AAAA Records):</strong> When a DHCP
+    client obtains a lease, the DDI system creates (or updates) an A
+    record mapping the client’s hostname to its assigned IP address. In
+    DHCPv6 or SLAAC environments, AAAA records are created
+    similarly.</p>
+    <p><strong>Reverse Zone (PTR Records):</strong> Simultaneously, a
+    PTR record is created in the appropriate in-addr.arpa (IPv4) or
+    ip6.arpa (IPv6) zone. PTR records are critical for mail server
+    reputation (SPF/DKIM verification often includes reverse DNS
+    checks), security forensics (mapping IPs to hostnames in logs), and
+    operational troubleshooting.</p>
+    <p><strong>DDNS (Dynamic DNS) Without DDI:</strong> Organizations
+    without commercial DDI can achieve similar automation using ISC
+    Kea’s DDNS update capability (kea-dhcp-ddns daemon) or Windows
+    DHCP’s built-in dynamic DNS update feature. These systems send RFC
+    2136 dynamic update messages to authoritative DNS servers (BIND,
+    Windows DNS, Knot DNS) to create and delete records corresponding to
+    lease events.</p>
+    <p><strong>Stale Record Cleanup:</strong> The most common failure
+    mode in DDNS is stale records: a host is decommissioned or moves to
+    a new IP, but its old DNS records persist. DDI platforms address
+    this through lease-linked record lifecycle (records automatically
+    deleted when leases expire) and scavenging intervals (periodic
+    sweeps that remove records older than a configured threshold).
+    Without DDI, configure DNS scavenging (Windows) or set TTLs low
+    enough that stale records expire within an acceptable window.</p>
+    <h3 id="ddi-product-comparison">8.3 DDI Product Comparison</h3>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Capability</th>
+    <th>Infoblox NIOS</th>
+    <th>BlueCat Integrity</th>
+    <th>NetBox + Kea + BIND</th>
+    <th>phpIPAM + PowerDNS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Unified UI</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No (separate tools)</td>
+    <td>Partial</td>
+    </tr>
+    <tr>
+    <td>Auto forward DNS</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Via kea-dhcp-ddns</td>
+    <td>Manual/scripted</td>
+    </tr>
+    <tr>
+    <td>Auto reverse DNS</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Via kea-dhcp-ddns</td>
+    <td>Manual/scripted</td>
+    </tr>
+    <tr>
+    <td>Lease-linked cleanup</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Configurable</td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>Conflict detection</td>
+    <td>Built-in</td>
+    <td>Built-in</td>
+    <td>External tooling</td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>Multi-site sync</td>
+    <td>Grid architecture</td>
+    <td>Hub-and-spoke</td>
+    <td>Custom (API sync)</td>
+    <td>No</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="ip-conflict-detection-and-resolution">9. IP Conflict
+    Detection and Resolution</h2>
+    <h3 id="how-ip-conflicts-occur">9.1 How IP Conflicts Occur</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Cause</th>
+    <th>Mechanism</th>
+    <th>Frequency</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Static assignment overlap</td>
+    <td>Two devices manually assigned the same IP</td>
+    <td>Common</td>
+    </tr>
+    <tr>
+    <td>DHCP scope overlap</td>
+    <td>Two DHCP servers serving the same range</td>
+    <td>Occasional</td>
+    </tr>
+    <tr>
+    <td>Rogue DHCP server</td>
+    <td>Unauthorized device offering leases</td>
+    <td>Occasional</td>
+    </tr>
+    <tr>
+    <td>Stale DHCP reservation</td>
+    <td>Reservation points to an IP now used by another device</td>
+    <td>Common</td>
+    </tr>
+    <tr>
+    <td>VM cloning</td>
+    <td>Cloned VM retains donor’s static IP</td>
+    <td>Common in virtualized environments</td>
+    </tr>
+    <tr>
+    <td>Network merger</td>
+    <td>Two networks with overlapping RFC 1918 space connected</td>
+    <td>During M&amp;A</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="detection-methods">9.2 Detection Methods</h3>
+    <p><strong>IPv4 – ARP-Based Detection:</strong> - <strong>Gratuitous
+    ARP:</strong> A device broadcasts an ARP reply for its own IP at
+    interface initialization. If another device has the same IP, it
+    responds, indicating a conflict. However, gratuitous ARP is not a
+    reliable detection mechanism – it depends on the conflicting device
+    being active and responsive at the exact moment of the broadcast. -
+    <strong>ARP Probe (RFC 5227):</strong> Before claiming an address, a
+    device sends ARP probes (sender IP 0.0.0.0, target IP = desired
+    address). If a response is received, the address is in use. More
+    reliable than gratuitous ARP but only effective at address
+    acquisition time. - <strong>ARP Table Monitoring:</strong>
+    Continuous monitoring of switch and router ARP tables for multiple
+    MAC addresses claiming the same IP. This is the most reliable
+    ongoing detection method.</p>
+    <p><strong>IPv6 – Duplicate Address Detection (DAD):</strong> DAD is
+    a mandatory part of IPv6 address configuration (RFC 4862). Before
+    using any address, a node sends a Neighbor Solicitation for that
+    address. If a Neighbor Advertisement is received, the address is a
+    duplicate and must not be used. DAD runs automatically – it is not
+    optional in compliant IPv6 stacks.</p>
+    <p><strong>DHCP Lease Cross-Reference:</strong> DHCP servers can
+    detect conflicts by checking whether an IP is already in their lease
+    database before offering it. Kea’s Ping Check hook library (open
+    source since v3.0.0) actively pings an address before assignment,
+    replicating a feature that was present in ISC DHCP.</p>
+    <p><strong>Dedicated Tools:</strong> - <strong>ManageEngine
+    OpUtils:</strong> Automated network scanning with SNMP-based
+    conflict detection across VLANs - <strong>IPwatchD:</strong> Linux
+    daemon that monitors ARP traffic and alerts on duplicate address
+    events - <strong>IPAM platform alerts:</strong> NetBox, Infoblox,
+    and BlueCat all provide address conflict dashboards and automated
+    alerting</p>
+    <h3 id="resolution-procedure">9.3 Resolution Procedure</h3>
+    <ol type="1">
+    <li><strong>Identify both devices:</strong> Cross-reference the
+    conflicting IP in ARP tables to find both MAC addresses. Look up MAC
+    addresses in the IPAM system and/or switch port tables (MAC address
+    table) to identify physical or virtual devices.</li>
+    <li><strong>Determine which assignment is authoritative:</strong>
+    Check the IPAM system for the intended assignment. The device
+    matching the IPAM record keeps the address.</li>
+    <li><strong>Release the conflicting assignment:</strong> If
+    DHCP-assigned, release and renew the conflicting device’s lease. If
+    static, reconfigure the unauthorized device to DHCP or a different
+    static address.</li>
+    <li><strong>Update IPAM records:</strong> Ensure the resolved state
+    matches the IPAM source of truth.</li>
+    <li><strong>Root-cause prevention:</strong> Add the IP as a DHCP
+    reservation (if it should be static) or add the subnet to a DHCP
+    exclusion range (if it is statically assigned infrastructure).</li>
+    </ol>
+    <hr />
+    <h2 id="compliance-requirements-for-ip-tracking">10. Compliance
+    Requirements for IP Tracking</h2>
+    <h3 id="regulatory-framework-requirements">10.1 Regulatory Framework
+    Requirements</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Framework</th>
+    <th>Requirement</th>
+    <th>IP Tracking Implication</th>
+    <th>Log Retention</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>PCI DSS 4.0</strong></td>
+    <td>Req 10: Log and monitor all access to network resources and
+    cardholder data</td>
+    <td>Track IP-to-user associations for all systems in CDE scope</td>
+    <td>12 months minimum</td>
+    </tr>
+    <tr>
+    <td><strong>HIPAA</strong></td>
+    <td>164.312(b): Audit controls</td>
+    <td>Record IP assignments for systems accessing ePHI</td>
+    <td>6 years</td>
+    </tr>
+    <tr>
+    <td><strong>SOX</strong></td>
+    <td>Section 302/404: Internal controls over financial reporting</td>
+    <td>IP-to-device mapping for systems processing financial data</td>
+    <td>7 years</td>
+    </tr>
+    <tr>
+    <td><strong>GDPR</strong></td>
+    <td>Art. 30: Records of processing activities</td>
+    <td>IP addresses are personal data; track processing purpose</td>
+    <td>Duration of processing + retention period</td>
+    </tr>
+    <tr>
+    <td><strong>NIST 800-53</strong></td>
+    <td>AU-3: Content of Audit Records</td>
+    <td>Source/destination IP in all audit events</td>
+    <td>Per system categorization</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="what-an-ip-audit-trail-must-contain">10.2 What an IP Audit
+    Trail Must Contain</h3>
+    <p>A compliant IP assignment log must record:</p>
+    <ol type="1">
+    <li><strong>IP address</strong> assigned</li>
+    <li><strong>MAC address</strong> of the receiving device</li>
+    <li><strong>Hostname</strong> (if available via DHCP option 12 or
+    DNS)</li>
+    <li><strong>Timestamp</strong> of assignment (lease start) and
+    release (lease end)</li>
+    <li><strong>DHCP server</strong> that issued the lease (for
+    multi-server environments)</li>
+    <li><strong>User identity</strong> (if 802.1X or NAC provides
+    user-to-device mapping)</li>
+    <li><strong>Subnet/VLAN</strong> context</li>
+    </ol>
+    <p><strong>Storage Requirements:</strong> DHCP lease logs must be
+    forwarded to a centralized log management system (SIEM) and retained
+    for the longest applicable regulatory period. For environments
+    subject to multiple frameworks, this is typically 7 years (SOX).
+    Logs must be immutable – stored in append-only or write-once storage
+    to satisfy audit evidence requirements.</p>
+    <h3 id="ipam-as-compliance-evidence">10.3 IPAM as Compliance
+    Evidence</h3>
+    <p>A well-maintained IPAM system serves as direct compliance
+    evidence:</p>
+    <ul>
+    <li><strong>Asset inventory:</strong> Maps IP addresses to devices,
+    satisfying asset management controls (NIST CM-8, PCI Req
+    12.5.1)</li>
+    <li><strong>Network segmentation verification:</strong> Demonstrates
+    that cardholder data environment (CDE) subnets are isolated from
+    general-purpose networks (PCI Req 1.2)</li>
+    <li><strong>Change documentation:</strong> IPAM changelog provides
+    evidence that IP allocation changes follow change management
+    processes (NIST CM-3)</li>
+    <li><strong>Scope reduction:</strong> Accurate IP tracking helps
+    auditors understand which systems are in-scope, reducing audit
+    burden</li>
+    </ul>
+    <hr />
+    <h2 id="operational-procedures">11. Operational Procedures</h2>
+    <h3 id="new-subnet-request-workflow">11.1 New Subnet Request
+    Workflow</h3>
+    <ol type="1">
+    <li>Requestor submits ticket specifying: purpose, estimated host
+    count, site/building, VLAN requirement, VRF context, IPv6
+    requirement</li>
+    <li>IPAM administrator allocates from the next available contiguous
+    block within the site’s assigned supernet</li>
+    <li>Prefix is created in IPAM with status “Reserved,” associated
+    VLAN, and description</li>
+    <li>Network engineer configures the subnet on router/switch
+    interfaces, DHCP scope, and DNS zones</li>
+    <li>IPAM status updated to “Active”</li>
+    <li>Requestor validates connectivity</li>
+    <li>Ticket closed with IPAM record link</li>
+    </ol>
+    <h3 id="periodic-ipam-hygiene-tasks">11.2 Periodic IPAM Hygiene
+    Tasks</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Task</th>
+    <th>Frequency</th>
+    <th>Method</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Utilization review</td>
+    <td>Monthly</td>
+    <td>Export subnet utilization report; flag subnets &gt; 80% (growth
+    risk) and &lt; 20% (reclamation candidate)</td>
+    </tr>
+    <tr>
+    <td>Stale record cleanup</td>
+    <td>Monthly</td>
+    <td>Compare IPAM records against active ARP/ND tables; remove
+    entries with no activity for 90+ days</td>
+    </tr>
+    <tr>
+    <td>DHCP lease database audit</td>
+    <td>Quarterly</td>
+    <td>Compare DHCP active leases against IPAM records; reconcile
+    discrepancies</td>
+    </tr>
+    <tr>
+    <td>Reserved IP review</td>
+    <td>Quarterly</td>
+    <td>Verify all DHCP reservations are still needed; remove
+    reservations for decommissioned devices</td>
+    </tr>
+    <tr>
+    <td>Subnet reclamation</td>
+    <td>Semi-annually</td>
+    <td>Identify unused or under-utilized subnets; consolidate and
+    return space to free pool</td>
+    </tr>
+    <tr>
+    <td>Compliance log verification</td>
+    <td>Annually</td>
+    <td>Confirm DHCP lease logs are being forwarded to SIEM and retained
+    per policy</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="ip-address-request-sla">11.3 IP Address Request SLA</h3>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Request Type</th>
+    <th>Target SLA</th>
+    <th>Notes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Single IP reservation</td>
+    <td>4 hours</td>
+    <td>From DHCP pool or static assignment</td>
+    </tr>
+    <tr>
+    <td>New DHCP scope</td>
+    <td>1 business day</td>
+    <td>Requires VLAN provisioning coordination</td>
+    </tr>
+    <tr>
+    <td>New subnet allocation</td>
+    <td>2 business days</td>
+    <td>Requires routing and firewall changes</td>
+    </tr>
+    <tr>
+    <td>IPv6 prefix delegation</td>
+    <td>2 business days</td>
+    <td>Requires router configuration</td>
+    </tr>
+    <tr>
+    <td>Address reclamation project</td>
+    <td>2-4 weeks</td>
+    <td>Audit, notification, decommission cycle</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <h2 id="related-documents">12. Related Documents</h2>
+    <ul>
+    <li><strong>M1:</strong> Network Monitoring &amp; Alerting (IPAM
+    system monitoring integration)</li>
+    <li><strong>M2:</strong> Network Change Operations (subnet
+    provisioning change management)</li>
+    <li><strong>M5:</strong> Certificate &amp; PKI Operations (IP-based
+    certificate SANs)</li>
+    <li><strong>M7:</strong> Firewall &amp; ACL Operations (IP object
+    groups in firewall rules)</li>
+    <li><strong>M9:</strong> Network Documentation &amp; CMDB (IPAM as
+    CMDB data source)</li>
+    <li><strong>M10:</strong> Network Team &amp; Vendor Management (IPAM
+    tool vendor relationships)</li>
+    </ul>
+    <hr />
+    <h2 id="revision-history">13. Revision History</h2>
+    <table>
+    <thead>
+    <tr>
+    <th>Version</th>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Changes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1.0</td>
+    <td>2026-04-08</td>
+    <td>SNO Research Series</td>
+    <td>Initial publication</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    <p><em>Systems Network Operations – PNW Research Series – Artemis II
+    Mission Research</em></p>
+    <div class="nav">
+        <a href="../index.html">&larr; Back to SNO Index</a> &middot;
+        Published April 2026 &middot; PNW Research Series &middot;
+        <a href="https://tibsfox.com/Research/SNO/">tibsfox.com/Research/SNO</a>
+    </div>
+</body>
+</html>

@@ -503,7 +503,7 @@ Session log data falls into four sensitivity categories. Each requires different
 
 | Data Type | Example | Risk | Mitigation |
 |-----------|---------|------|------------|
-| File paths | `/path/to/projectsrc/auth.ts` | Reveals directory structure | Never transmit; local only |
+| File paths | `~/projects/app/src/auth.ts` | Reveals directory structure | Never transmit; local only |
 | Commit messages | `feat(auth): add JWT rotation` | Reveals feature names | Never transmit; local only |
 | Bash commands | `npm test -- --filter=auth` | Reveals tooling | Never transmit; local only |
 | Agent briefs | "Research distributed systems" | Reveals project topics | Never transmit; local only |

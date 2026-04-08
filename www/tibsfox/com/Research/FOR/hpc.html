@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HPC &amp; Scientific Computing &mdash; Fortran &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-for">
+  <header>
+    <h1>HPC &amp; Scientific Computing</h1>
+    <div class="subtitle">! CESM = ~1.5M lines of Fortran &mdash; running on Frontier exascale GPUs</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history.html">History</a>
+      <a href="language.html">Language</a>
+      <a href="arrays.html">Arrays</a>
+      <a href="hpc.html" class="active">HPC</a>
+      <a href="parallel.html">Parallel</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      <strong>! Fortran on Frontier (1.194 exaflops, 2022)</strong><br>
+      Climate, materials, fusion &mdash; all Fortran. The first exascale supercomputer runs the same language that ran on the IBM 704 in 1957.
+    </blockquote>
+
+    <h2>BLAS &mdash; The Most Durable API in Computing</h2>
+
+    <p>The story begins in <strong>1979</strong> with <strong>Level 1 BLAS</strong>: vector operations &mdash; dot products, vector norms, scalar-vector multiplies. <strong>Charles Lawson</strong>, <strong>Richard Hanson</strong>, <strong>David Kincaid</strong>, and <strong>Fred Krogh</strong> published the original spec as Fortran 66 subroutines: <code>SAXPY</code> (single-precision <code>a*x + y</code>), <code>SDOT</code>, <code>SSWAP</code>, <code>SNRM2</code>. Those names survive today, 47 years later, in every BLAS implementation shipped on Earth.</p>
+
+    <table>
+      <thead><tr><th>Level</th><th>Year</th><th>Operations</th><th>Performance Limit</th></tr></thead>
+      <tbody>
+        <tr><td>Level 1</td><td>1979</td><td>Vector-vector: SAXPY, SDOT, SNRM2</td><td>Memory bandwidth-bound</td></tr>
+        <tr><td>Level 2</td><td>1988</td><td>Matrix-vector: SGEMV, STRSV, rank-1 updates</td><td>Cache-bound</td></tr>
+        <tr><td>Level 3</td><td>1990</td><td>Matrix-matrix: SGEMM, STRSM, SSYRK</td><td>Compute-bound (peak FLOPS)</td></tr>
+      </tbody>
+    </table>
+
+    <p>Level 3 BLAS was the revolution. The <code>O(n&sup3;)</code> arithmetic over <code>O(n&sup2;)</code> data meant a well-tuned <code>SGEMM</code> could reach a substantial fraction of peak floating-point throughput. <strong>Every dense linear algebra algorithm anyone cared about was rewritten in terms of Level 3 BLAS calls.</strong> LAPACK is, in a deep sense, a book of recipes for expressing numerical linear algebra as sequences of GEMMs.</p>
+
+    <h2>BLAS Implementations</h2>
+
+    <table>
+      <thead><tr><th>Implementation</th><th>Origin</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Reference BLAS</strong></td><td>Netlib</td><td>Portability, correctness reference. Nobody runs it in production.</td></tr>
+        <tr><td><strong>OpenBLAS</strong></td><td>Fork of GotoBLAS</td><td>Default on most Linux distros. Within a few percent of vendor peak on x86-64.</td></tr>
+        <tr><td><strong>Intel MKL</strong></td><td>Intel oneAPI</td><td>Performance gold standard on Intel silicon. AVX-512 kernels.</td></tr>
+        <tr><td><strong>ATLAS</strong></td><td>Clint Whaley</td><td>Auto-tuning. Generates kernels at install time. Used on exotic architectures.</td></tr>
+        <tr><td><strong>BLIS</strong></td><td>UT Austin</td><td>Micro-kernel architecture. The reference for AMD AOCL and ARM server BLAS.</td></tr>
+        <tr><td><strong>Apple Accelerate</strong></td><td>Apple</td><td>Apple silicon (M-series). Vendor-tuned for Neoverse cores.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>LAPACK &mdash; The Successor to LINPACK and EISPACK</h2>
+
+    <div class="card">
+      <p><strong>LAPACK</strong> (Linear Algebra PACKage) was released in 1992. It superseded <strong>LINPACK</strong> (1979, the linear systems library) and <strong>EISPACK</strong> (eigenvalues/eigenvectors). LAPACK is written primarily in Fortran 77, with some Fortran 90 features in LAPACK 3.x. It is the standard for dense linear algebra worldwide.</p>
+      <p>LAPACK&rsquo;s key insight: build everything on top of BLAS. The Level 3 BLAS GEMM is the workhorse. LAPACK provides high-level routines (LU, QR, Cholesky, SVD, eigenvalue solvers) that decompose into sequences of BLAS calls. Vendors optimize BLAS; LAPACK gets the speedup for free.</p>
+    </div>
+
+    <h2>The Numerical Library Ecosystem</h2>
+
+    <table>
+      <thead><tr><th>Library</th><th>Purpose</th><th>Language</th></tr></thead>
+      <tbody>
+        <tr><td><strong>BLAS</strong></td><td>Basic linear algebra primitives</td><td>Fortran 77 (reference)</td></tr>
+        <tr><td><strong>LAPACK</strong></td><td>Dense linear algebra (LU, QR, SVD, eigenvalues)</td><td>Fortran 77/90</td></tr>
+        <tr><td><strong>ScaLAPACK</strong></td><td>Distributed-memory LAPACK using MPI + BLACS</td><td>Fortran 77/C</td></tr>
+        <tr><td><strong>LINPACK</strong></td><td>Original linear systems library (now the benchmark)</td><td>Fortran 77</td></tr>
+        <tr><td><strong>EISPACK</strong></td><td>Eigenvalue/eigenvector library (predecessor to LAPACK)</td><td>Fortran 66</td></tr>
+        <tr><td><strong>ARPACK</strong></td><td>Large sparse eigenvalue problems</td><td>Fortran 77</td></tr>
+        <tr><td><strong>FFTPACK / FFTW</strong></td><td>Fast Fourier transforms</td><td>Fortran / C</td></tr>
+        <tr><td><strong>NAG Library</strong></td><td>Commercial numerical library since 1971</td><td>Fortran</td></tr>
+        <tr><td><strong>IMSL</strong></td><td>Commercial numerical library, originally Fortran</td><td>Fortran</td></tr>
+        <tr><td><strong>NetCDF / HDF5</strong></td><td>Scientific data formats</td><td>C/C++ with Fortran bindings</td></tr>
+        <tr><td><strong>MPI</strong></td><td>Message Passing Interface for distributed parallelism</td><td>C/Fortran (both reference)</td></tr>
+        <tr><td><strong>PETSc, SLEPc</strong></td><td>Toolkit for sparse linear systems and eigenvalue problems</td><td>C with Fortran interfaces</td></tr>
+        <tr><td><strong>Trilinos</strong></td><td>Sandia&rsquo;s solver and discretization framework</td><td>C++ with Fortran kernels</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Why Fortran is Fast &mdash; The Seven Reasons</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Reason</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Aliasing rules</strong></td><td>Fortran assumes function arguments don&rsquo;t alias unless explicitly declared. C/C++ require <code>restrict</code> for similar guarantees. Compilers vectorize Fortran more aggressively.</td></tr>
+        <tr><td>2</td><td><strong>Array semantics</strong></td><td>First-class arrays enable bounds analysis, SIMD vectorization, and fusion of operations.</td></tr>
+        <tr><td>3</td><td><strong>Mathematical formula expression</strong></td><td><code>c = a + b</code> on whole arrays compiles to optimized SIMD loops, not slow elementwise operations.</td></tr>
+        <tr><td>4</td><td><strong>Column-major storage</strong></td><td>Better cache behavior for traditional numerical algorithms (matrices traversed column-by-column).</td></tr>
+        <tr><td>5</td><td><strong>No undefined behavior in arithmetic</strong></td><td>Integer overflow wraps. Floating-point follows IEEE 754. No signed/unsigned mixing issues.</td></tr>
+        <tr><td>6</td><td><strong>Strong typing</strong></td><td>No implicit conversions between INTEGER and REAL. Type errors caught at compile time.</td></tr>
+        <tr><td>7</td><td><strong>Compiler maturity</strong></td><td>60+ years of optimization research applied to Fortran compilers. Every loop transformation in the literature has a Fortran implementation somewhere.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>TOP500 and the LINPACK Benchmark</h2>
+
+    <p>The <strong>TOP500</strong> ranking has been published twice yearly since 1993. The ranking metric is the <strong>HPL (High Performance LINPACK)</strong> benchmark: solve a dense linear system of equations, measure FLOPS. The benchmark code is C/Fortran with MPI; the inner kernels are BLAS GEMM calls; the BLAS is ultimately Fortran (or hand-tuned assembly that mimics Fortran semantics).</p>
+
+    <p><strong>HPCG</strong> (High Performance Conjugate Gradients), introduced 2014, is a complementary benchmark using sparse iterative solvers. It produces results roughly <strong>30x lower</strong> than HPL and better represents real workloads. Both benchmarks are Fortran-derived.</p>
+
+    <h2>Notable Supercomputers and Their Fortran Codebases</h2>
+
+    <table>
+      <thead><tr><th>System</th><th>Year</th><th>Site</th><th>Workload</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Frontier</strong></td><td>2022</td><td>Oak Ridge (DOE)</td><td>First exascale (1.194 EF). Climate, materials, fusion &mdash; Fortran.</td></tr>
+        <tr><td><strong>Fugaku</strong></td><td>2020</td><td>RIKEN (Japan)</td><td>Weather, drug design, COVID simulation. Fortran-dominant.</td></tr>
+        <tr><td><strong>Summit</strong></td><td>2018</td><td>Oak Ridge (DOE)</td><td>National lab simulation codes. CESM, climate models.</td></tr>
+        <tr><td><strong>Sierra</strong></td><td>2018</td><td>Lawrence Livermore</td><td>NNSA stockpile stewardship. Fortran legacy codes.</td></tr>
+        <tr><td><strong>Earth Simulator</strong></td><td>2002</td><td>Yokohama (Japan)</td><td>Famously Fortran-dominated. Climate modeling. Held #1 for years.</td></tr>
+        <tr><td><strong>ASCI Red</strong></td><td>1997</td><td>Sandia (DOE)</td><td>First teraflop machine. Fortran nuclear codes.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Applications</h2>
+
+    <h3>Climate and Weather</h3>
+    <table>
+      <thead><tr><th>Code</th><th>Site</th><th>Purpose</th><th>Size</th></tr></thead>
+      <tbody>
+        <tr><td><strong>CESM</strong> (Community Earth System Model)</td><td>NCAR</td><td>Coupled climate model: atmosphere, ocean, land, sea ice</td><td>~1.5 million lines of Fortran</td></tr>
+        <tr><td><strong>WRF</strong> (Weather Research and Forecasting)</td><td>NOAA, NCAR</td><td>Mesoscale weather prediction</td><td>Large Fortran 90 codebase</td></tr>
+        <tr><td><strong>ECMWF IFS</strong> (Integrated Forecasting System)</td><td>European Centre for Medium-Range Weather Forecasts</td><td>Operational weather forecasts for Europe</td><td>Fortran 90/2003</td></tr>
+        <tr><td><strong>NEMO</strong></td><td>European partnership</td><td>Ocean modeling</td><td>Fortran</td></tr>
+        <tr><td><strong>GFDL FV3</strong></td><td>NOAA</td><td>NOAA&rsquo;s next-generation atmospheric dynamical core</td><td>Fortran</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Computational Chemistry</h3>
+    <table>
+      <thead><tr><th>Code</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gaussian</strong></td><td>Quantum chemistry. Originally Fortran 77. Pople&rsquo;s Nobel Prize in Chemistry (1998) was based on this work.</td></tr>
+        <tr><td><strong>NWChem</strong></td><td>Massively parallel quantum chemistry. PNNL. Fortran.</td></tr>
+        <tr><td><strong>CP2K</strong></td><td>Atomistic and molecular simulation. Fortran.</td></tr>
+        <tr><td><strong>VASP</strong></td><td>Materials simulation, density functional theory. Fortran.</td></tr>
+        <tr><td><strong>Quantum ESPRESSO</strong></td><td>Electronic structure calculations. Fortran.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Computational Fluid Dynamics</h3>
+    <table>
+      <thead><tr><th>Code</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>NASA OVERFLOW</strong></td><td>Compressible CFD for aerospace applications</td></tr>
+        <tr><td><strong>NASA FUN3D</strong></td><td>Unstructured grid CFD</td></tr>
+        <tr><td><strong>OpenFOAM</strong></td><td>C++ but built on numerical algorithms developed in Fortran</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Astrophysics and Cosmology</h3>
+    <ul>
+      <li><strong>GADGET</strong> &mdash; cosmological N-body simulations</li>
+      <li><strong>FLASH</strong> &mdash; multi-physics adaptive mesh refinement code</li>
+      <li><strong>ENZO</strong> &mdash; cosmological hydrodynamics</li>
+    </ul>
+
+    <h3>Industries</h3>
+    <ul>
+      <li><strong>Oil and gas:</strong> Seismic processing, reservoir simulation. Fortran-dominated.</li>
+      <li><strong>Finance:</strong> Quant libraries, Monte Carlo simulations. Many investment banks have Fortran codebases.</li>
+      <li><strong>NASA legacy:</strong> Trajectory calculations, mission planning, atmospheric modeling. Code from the 1960s still in production. NASA&rsquo;s GMAT (General Mission Analysis Tool) wraps decades of Fortran.</li>
+    </ul>
+
+    <div class="card hpc-card">
+      <p><strong>The takeaway:</strong> Fortran is not a museum piece. It is the production language for the most computationally demanding work humans do &mdash; weather forecasts that affect billions of people, climate models that inform policy, drug simulations, materials discovery, fusion research, supercomputer benchmarks. The next ten million lines of Fortran will be written by people in their twenties, on machines that didn&rsquo;t exist when CESM was started in 2010, running code whose oldest comments are from 1987.</p>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+        <li><a href="language.html">Language Reference</a></li>
+        <li><a href="arrays.html">Arrays &mdash; The Killer Feature</a></li>
+        <li><a href="parallel.html">Parallel Fortran</a></li>
+        <li><a href="ecosystem.html">Modern Ecosystem</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="tools.html">Tools &amp; Compilers</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>HPC &amp; Scientific Computing &middot; Fortran &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

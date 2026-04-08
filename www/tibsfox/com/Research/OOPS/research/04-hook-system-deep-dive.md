@@ -1,7 +1,7 @@
 # Hook System Deep Dive: Claude Code v2.1.88
 
 **Date:** 2026-03-31
-**Binary analyzed:** `/home/foxy/.local/share/claude/versions/2.1.88` (228MB)
+**Binary analyzed:** `~/.local/share/claude/versions/2.1.88` (228MB)
 **Method:** Binary string extraction, settings.json analysis, running hook source review
 
 ## The Complete Hook Taxonomy

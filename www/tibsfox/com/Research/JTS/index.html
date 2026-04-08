@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript &amp; TypeScript &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-jts">
+  <header>
+    <h1>JavaScript &amp; TypeScript</h1>
+    <div class="subtitle">From Brendan Eich&rsquo;s 10 Days to 2 Million npm Packages &mdash; The Language of the Web, the Server, and Everywhere Else</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="language.html">JavaScript</a>
+      <a href="typescript.html">TypeScript</a>
+      <a href="runtimes.html">Runtimes</a>
+      <a href="frameworks.html">Frameworks</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;Any application that can be written in JavaScript, will eventually be written in JavaScript.&rdquo; &mdash; <strong>Jeff Atwood</strong>, 2007 (Atwood&rsquo;s Law). What began as a ten-day hack to add interactivity to web pages became the most widely deployed programming language in human history.
+    </blockquote>
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value yellow">30</span><span class="stat-label">Years Since 1995</span></div>
+      <div class="stat"><span class="stat-value">ES2024</span><span class="stat-label">Latest ECMAScript</span></div>
+      <div class="stat"><span class="stat-value green">2M+</span><span class="stat-label">npm Packages</span></div>
+      <div class="stat"><span class="stat-value red">TS 5.x</span><span class="stat-label">TypeScript Current</span></div>
+      <div class="stat"><span class="stat-value slate">4</span><span class="stat-label">Runtimes (Node, Deno, Bun, Workers)</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Why JavaScript &amp; TypeScript together?</strong> TypeScript is not a separate language &mdash; it is JavaScript with a <strong>structural type system</strong> that erases at compile time. Every valid JavaScript program is a valid TypeScript program. TypeScript&rsquo;s rise since 2016 has been so thorough that most new projects, frameworks, and libraries are TypeScript-first. You cannot understand the modern JS ecosystem without understanding TS, and you cannot understand TS without understanding JS.</p>
+      <p><strong>Research method:</strong> Primary sources (tc39.es, ecma-international.org, developer.mozilla.org, typescriptlang.org, nodejs.org, deno.land, bun.sh), canonical books (Crockford, Flanagan, Simpson, Hejlsberg), npm registry data, framework docs. Cross-reference against the 282-project PNW Research Series corpus.</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <h2>The Two Halves</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>JavaScript (JS)</h4>
+        <p>The runtime language. Brendan Eich, Netscape, 1995. Dynamic, prototype-based, event-driven, single-threaded with async I/O. Runs in browsers, servers (Node.js/Deno/Bun), edge workers, mobile (React Native), and desktop (Electron). Standardized as ECMAScript by TC39.</p>
+      </div>
+      <div class="pillar">
+        <h4>TypeScript (TS)</h4>
+        <p>The type layer. Anders Hejlsberg, Microsoft, 2012. Structural typing, generics, utility types, conditional types. Compiles to JavaScript &mdash; types are erased at runtime. The de facto standard for large codebases, frameworks, and libraries.</p>
+      </div>
+      <div class="pillar">
+        <h4>The Runtimes</h4>
+        <p>V8 (Chrome, Node.js, Deno, Workers), SpiderMonkey (Firefox), JavaScriptCore (Safari, Bun), Hermes (React Native). Four competing engines, each with their own JIT pipeline, GC, and optimization strategy.</p>
+      </div>
+      <div class="pillar">
+        <h4>The Ecosystem</h4>
+        <p>npm (2M+ packages), build tools (webpack &rarr; Vite &rarr; esbuild/SWC), frameworks (React, Vue, Svelte, Angular, Solid), meta-frameworks (Next.js, Remix, Nuxt, SvelteKit, Astro). The largest developer ecosystem in the world.</p>
+      </div>
+    </div>
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="language.html" class="category-card">
+        <div><span class="cluster-badge cluster-core">JavaScript</span></div>
+        <h3>JavaScript Core</h3>
+        <p>Types, closures, prototypes, classes, promises, async/await, iterators/generators, modules (CommonJS &amp; ESM), error handling, modern syntax (optional chaining, nullish coalescing, destructuring).</p>
+        <p><strong>Key:</strong> The language itself, ES5 through ES2024</p>
+      </a>
+
+      <a href="typescript.html" class="category-card">
+        <div><span class="cluster-badge cluster-ts">TypeScript</span></div>
+        <h3>TypeScript Type System</h3>
+        <p>Structural typing, generics, utility types (<code>Partial</code>, <code>Pick</code>, <code>Omit</code>, <code>Record</code>), conditional types, mapped types, template literal types, discriminated unions, type guards, <code>satisfies</code>, <code>tsconfig.json</code>.</p>
+        <p><strong>Key:</strong> The type layer, TS 1.0 through 5.x</p>
+      </a>
+
+      <a href="runtimes.html" class="category-card">
+        <div><span class="cluster-badge cluster-runtime">Runtimes</span></div>
+        <h3>Engines &amp; Runtimes</h3>
+        <p>V8 (Ignition&rarr;Sparkplug&rarr;Maglev&rarr;TurboFan), SpiderMonkey (Warp), JavaScriptCore (LLInt&rarr;DFG&rarr;FTL), Hermes, QuickJS. Node.js, Deno, Bun, Cloudflare Workers. The event loop. libuv.</p>
+        <p><strong>Key:</strong> Engine internals, event loop, async I/O</p>
+      </a>
+
+      <a href="frameworks.html" class="category-card">
+        <div><span class="cluster-badge cluster-fw">Frameworks</span></div>
+        <h3>Frameworks &amp; Meta-Frameworks</h3>
+        <p>React (hooks, Server Components), Vue (Composition API), Svelte (runes), Angular (signals), Solid. Next.js, Remix, Nuxt, SvelteKit, Astro. Express, Fastify, NestJS, Hono.</p>
+        <p><strong>Key:</strong> UI frameworks, SSR, React Server Components</p>
+      </a>
+
+      <a href="ecosystem.html" class="category-card">
+        <div><span class="cluster-badge cluster-eco">Ecosystem</span></div>
+        <h3>Ecosystem &amp; Tooling</h3>
+        <p>npm, Yarn, pnpm; webpack, Vite, esbuild, SWC; ESLint, Prettier, Biome; Jest, Vitest, Playwright; Prisma, Drizzle; Zod; Storybook. The build tool lineage from Grunt to Rspack.</p>
+        <p><strong>Key:</strong> Package managers, bundlers, testing, linting</p>
+      </a>
+
+      <a href="rosetta.html" class="category-card">
+        <div><span class="cluster-badge cluster-rosetta">Rosetta</span></div>
+        <h3>Rosetta Integration</h3>
+        <p>JavaScript vs Java (the name confusion), JS vs Python, JS vs Go, TypeScript vs C#, TypeScript vs Java generics (erasure both ways). The escalation ladder with JS at the dynamic-scripting rung.</p>
+        <p><strong>Key:</strong> Cross-language comparison, the naming trap</p>
+      </a>
+
+      <a href="education.html" class="category-card">
+        <div><span class="cluster-badge cluster-edu">Education</span></div>
+        <h3>Learning Resources</h3>
+        <p>MDN Web Docs, <em>JavaScript: The Good Parts</em> (Crockford), <em>Eloquent JavaScript</em> (Haverbeke), <em>You Don&rsquo;t Know JS</em> (Simpson), <em>Programming TypeScript</em> (Cherny). Conferences: JSConf, React Conf, VueConf, Svelte Summit.</p>
+        <p><strong>Key:</strong> Canon, online resources, communities</p>
+      </a>
+
+      <a href="history.html" class="category-card">
+        <div><span class="cluster-badge cluster-history">History</span></div>
+        <h3>History &amp; Evolution</h3>
+        <p>Eich&rsquo;s 10 days (1995), browser wars, ECMA standardization, ES4&rsquo;s death, AJAX rebirth, jQuery era, Node.js (2009), TypeScript (2012), ES2015 &ldquo;the big one,&rdquo; the 6-month cadence, Deno (2018), Bun (2022).</p>
+        <p><strong>Key:</strong> Timeline, people, standards, corporate saga</p>
+      </a>
+    </div>
+
+    <h2>JavaScript at a Glance</h2>
+    <table>
+      <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Current standard</td><td><strong>ECMAScript 2024</strong> (14th edition, ECMA-262)</td></tr>
+        <tr><td>First release</td><td>December 1995 in Netscape Navigator 2.0 beta</td></tr>
+        <tr><td>Creator</td><td>Brendan Eich at Netscape Communications (May 1995, 10-day prototype)</td></tr>
+        <tr><td>Standardization</td><td>ECMA International TC39, annual cadence since ES2016</td></tr>
+        <tr><td>Paradigms</td><td>Multi: prototype-based OO, functional, imperative, event-driven</td></tr>
+        <tr><td>Type system</td><td>Dynamic, weakly typed; TypeScript adds optional structural static typing</td></tr>
+        <tr><td>Compilation</td><td>JIT by engines (V8, SpiderMonkey, JSC); TypeScript transpiles to JS</td></tr>
+        <tr><td>Memory model</td><td>Garbage collected (V8: generational mark-compact)</td></tr>
+        <tr><td>Concurrency</td><td>Single-threaded event loop + async I/O; Web Workers / worker_threads for parallelism</td></tr>
+        <tr><td>Runtimes</td><td>V8 (Chrome/Node/Deno), SpiderMonkey (Firefox), JSC (Safari/Bun), Hermes (React Native)</td></tr>
+        <tr><td>Package registry</td><td>npm (2M+ packages), Yarn, pnpm</td></tr>
+        <tr><td>Key strength</td><td>Ubiquity: browser, server, mobile, desktop, edge, embedded</td></tr>
+      </tbody>
+    </table>
+
+    <h2>TypeScript at a Glance</h2>
+    <table>
+      <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Current version</td><td><strong>TypeScript 5.x</strong></td></tr>
+        <tr><td>First release</td><td>October 1, 2012</td></tr>
+        <tr><td>Creator</td><td>Anders Hejlsberg at Microsoft (previously Turbo Pascal, Delphi, C#)</td></tr>
+        <tr><td>Type system</td><td>Structural, optional, erasable; compiles to JavaScript</td></tr>
+        <tr><td>Key innovation</td><td>Gradual typing with structural compatibility and powerful type inference</td></tr>
+        <tr><td>License</td><td>Apache License 2.0</td></tr>
+        <tr><td>Adoption</td><td>Most new projects and frameworks are TypeScript-first; ~50% of npm downloads include TS types</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Timeline</h2>
+    <div class="timeline">
+      <div class="event"><span class="year">May 1995</span> <strong>Brendan Eich writes Mocha</strong> in 10 days at Netscape.</div>
+      <div class="event"><span class="year">Dec 1995</span> Renamed <strong>JavaScript</strong> (Sun trademark deal). Ships in Netscape Navigator 2.0 beta.</div>
+      <div class="event"><span class="year">Jun 1997</span> <strong>ECMA-262 1st edition</strong>. Guy Steele as editor.</div>
+      <div class="event"><span class="year">Dec 1999</span> <strong>ECMAScript 3</strong>. The stable base for a decade.</div>
+      <div class="event"><span class="year">2005</span> <strong>AJAX coined</strong> (Jesse James Garrett). Google Maps/Gmail demonstrate the pattern.</div>
+      <div class="event"><span class="year">Aug 2006</span> <strong>jQuery 1.0</strong> (John Resig). DOM normalization across browsers.</div>
+      <div class="event"><span class="year">2008</span> <strong>V8 engine</strong> ships in Chrome. Douglas Crockford&rsquo;s <em>JavaScript: The Good Parts</em>.</div>
+      <div class="event"><span class="year">Nov 2009</span> <strong>Node.js</strong> (Ryan Dahl, JSConf EU). JavaScript breaks out of the browser.</div>
+      <div class="event"><span class="year">Dec 2009</span> <strong>ECMAScript 5</strong>. Strict mode, JSON, Array methods.</div>
+      <div class="event"><span class="year">Oct 2012</span> <strong>TypeScript 0.8</strong> (Anders Hejlsberg, Microsoft).</div>
+      <div class="event"><span class="year">Jun 2015</span> <strong>ES2015 (ES6)</strong>. The biggest upgrade: let/const, arrows, classes, promises, modules.</div>
+      <div class="event"><span class="year">2016</span> <strong>Angular 2 rewritten in TypeScript.</strong> Pivotal moment for TS adoption.</div>
+      <div class="event"><span class="year">2017</span> <strong>ES2017</strong>: async/await. <strong>Next.js 1.0</strong> (Vercel).</div>
+      <div class="event"><span class="year">2018</span> <strong>Deno announced</strong> (Ryan Dahl). Rust + V8, TypeScript-first.</div>
+      <div class="event"><span class="year">Feb 2019</span> <strong>React 16.8</strong>: Hooks release. The React world shifts.</div>
+      <div class="event"><span class="year">2020</span> <strong>Vite 1.0</strong> (Evan You), <strong>esbuild</strong> (Evan Wallace), <strong>SWC</strong> (Donny Wang). The Rust/Go build tool revolution.</div>
+      <div class="event"><span class="year">2022</span> <strong>Bun 0.1</strong> (Jarred Sumner). Zig + JavaScriptCore, extremely fast.</div>
+      <div class="event"><span class="year">2024</span> <strong>React 19</strong>: Server Components standard. <strong>Svelte 5</strong>: runes and signals.</div>
+    </div>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>JAV</td><td>Java</td><td>JavaScript is NOT Java &mdash; the name was a marketing deal with Sun. TypeScript&rsquo;s erasure model mirrors Java&rsquo;s.</td></tr>
+        <tr><td>CPP</td><td>C++</td><td>V8 and SpiderMonkey are C++. Node.js addons are C++. The engines ARE C++ projects.</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>Python and JS compete for &ldquo;first language&rdquo; in education; both are dynamically typed; vastly different runtimes.</td></tr>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>PHP powered the server-side web before Node.js. jQuery replaced Perl&rsquo;s role in browser-side glue.</td></tr>
+        <tr><td>CEE</td><td>C &mdash; The Substrate</td><td>libuv (Node.js) and Zig (Bun) operate at the C level. Hermes compiles to native bytecode.</td></tr>
+        <tr><td>JGC</td><td>JVM GC</td><td>V8&rsquo;s Orinoco GC is comparable to HotSpot&rsquo;s young-gen Scavenger + concurrent Mark-Compact.</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>Memory leaks (closures, event emitters), unhandled rejections, npm supply-chain attacks</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="language.html">JavaScript Core</a></li>
+        <li><a href="typescript.html">TypeScript Type System</a></li>
+        <li><a href="runtimes.html">Engines &amp; Runtimes</a></li>
+        <li><a href="frameworks.html">Frameworks &amp; Meta-Frameworks</a></li>
+        <li><a href="ecosystem.html">Ecosystem &amp; Tooling</a></li>
+        <li><a href="rosetta.html">Rosetta Integration</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+        <li><a href="history.html">History &amp; Evolution</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>JavaScript &amp; TypeScript &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ownership &amp; Borrowing &mdash; Rust</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rst">
+  <header>
+    <h1>Ownership &amp; Borrowing</h1>
+    <div class="subtitle">THE Defining Feature &mdash; Move Semantics, Borrowing Rules, Lifetimes, and the Borrow Checker</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="ownership.html" class="active">Ownership</a>
+      <a href="traits.html">Traits</a>
+      <a href="async.html">Async</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="unsafe.html">Unsafe</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every value in Rust has exactly one owner. When the owner goes out of scope, the value is dropped. There is no garbage collector, no reference counting by default, no manual <code>free()</code>. Ownership is the mechanism.
+    </blockquote>
+
+    <h2>The Three Rules of Ownership</h2>
+    <div class="card">
+      <ol>
+        <li>Each value in Rust has <strong>exactly one owner</strong>.</li>
+        <li>There can only be <strong>one owner at a time</strong>.</li>
+        <li>When the owner goes out of scope, the value is <strong>dropped</strong>.</li>
+      </ol>
+    </div>
+
+    <h2>Move Semantics</h2>
+    <p>By default, assigning a value to another variable <strong>moves</strong> it. The original binding becomes invalid. This is not a shallow copy followed by a potential double-free; it is a transfer of ownership that the compiler enforces statically.</p>
+
+<pre><code>let s1 = String::from("hello");
+let s2 = s1; // s1 is MOVED into s2
+
+// println!("{}", s1); // ERROR: value used after move
+println!("{}", s2);     // OK: s2 owns the string</code></pre>
+
+    <p>This applies to function calls too. Passing a value to a function moves it unless the type implements <code>Copy</code>:</p>
+
+<pre><code>fn take_ownership(s: String) {
+    println!("I own: {}", s);
+} // s is dropped here
+
+fn main() {
+    let greeting = String::from("hello");
+    take_ownership(greeting);
+    // greeting is no longer valid here
+}</code></pre>
+
+    <h2>Copy and Clone</h2>
+    <table>
+      <thead><tr><th>Trait</th><th>When</th><th>How</th></tr></thead>
+      <tbody>
+        <tr><td><code>Copy</code></td><td>Small, stack-only types (all numbers, <code>bool</code>, <code>char</code>, tuples of Copy types)</td><td>Implicit bitwise copy on assignment; both bindings remain valid</td></tr>
+        <tr><td><code>Clone</code></td><td>Types that can be deep-copied explicitly</td><td>Explicit <code>.clone()</code> call; can be arbitrarily expensive (heap allocation)</td></tr>
+      </tbody>
+    </table>
+
+<pre><code>let x: i32 = 42;
+let y = x;           // Copy: x is still valid
+println!("{} {}", x, y);
+
+let s1 = String::from("deep");
+let s2 = s1.clone(); // Clone: explicit heap copy
+println!("{} {}", s1, s2);</code></pre>
+
+    <p>A type can implement <code>Copy</code> only if all its fields are <code>Copy</code> <em>and</em> it does not implement <code>Drop</code>.</p>
+
+    <h2>Borrowing</h2>
+    <p>Instead of transferring ownership, you can <strong>borrow</strong> a value by taking a reference. References are non-owning pointers that the compiler tracks.</p>
+
+    <div class="card green">
+      <p><strong>The Two Borrowing Rules:</strong></p>
+      <ul>
+        <li>You can have <strong>any number of immutable references</strong> (<code>&amp;T</code>) &mdash; OR &mdash;</li>
+        <li><strong>Exactly one mutable reference</strong> (<code>&amp;mut T</code>)</li>
+        <li><strong>Never both at the same time.</strong></li>
+      </ul>
+      <p>This is the &ldquo;aliasing XOR mutation&rdquo; rule. It prevents data races at compile time.</p>
+    </div>
+
+<pre><code>fn print_length(s: &amp;String) {       // immutable borrow
+    println!("length: {}", s.len());
+} // s goes out of scope, but doesn't drop the String (not the owner)
+
+fn add_exclamation(s: &amp;mut String) { // mutable borrow
+    s.push('!');
+}
+
+fn main() {
+    let mut greeting = String::from("hello");
+
+    // Multiple immutable borrows: OK
+    let r1 = &amp;greeting;
+    let r2 = &amp;greeting;
+    println!("{} {}", r1, r2);
+
+    // Mutable borrow after immutable borrows are done: OK
+    add_exclamation(&amp;mut greeting);
+    println!("{}", greeting); // "hello!"
+
+    // This would NOT compile:
+    // let r3 = &amp;greeting;
+    // add_exclamation(&amp;mut greeting);
+    // println!("{}", r3); // ERROR: cannot borrow as mutable while immutable borrow exists
+}</code></pre>
+
+    <h2>Lifetimes</h2>
+    <p>Lifetimes are Rust&rsquo;s way of proving that references don&rsquo;t outlive the data they point to. Most of the time, lifetimes are <strong>inferred</strong> by the compiler (lifetime elision). When the compiler can&rsquo;t figure it out, you annotate explicitly with <code>'a</code>:</p>
+
+<pre><code>// The returned reference lives as long as the shortest of the two inputs
+fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+    if x.len() &gt; y.len() { x } else { y }
+}
+
+fn main() {
+    let s1 = String::from("long string");
+    let result;
+    {
+        let s2 = String::from("short");
+        result = longest(s1.as_str(), s2.as_str());
+        println!("{}", result); // OK: both s1 and s2 are alive
+    }
+    // println!("{}", result); // ERROR if result could be s2 (s2 is dropped)
+}</code></pre>
+
+    <h3>Lifetime elision rules</h3>
+    <p>The compiler applies three rules automatically so you don&rsquo;t annotate most functions:</p>
+    <ol>
+      <li>Each reference parameter gets its own lifetime parameter</li>
+      <li>If there is exactly one input lifetime, it is assigned to all output lifetimes</li>
+      <li>If there is a <code>&amp;self</code> or <code>&amp;mut self</code> parameter, its lifetime is assigned to all output lifetimes</li>
+    </ol>
+
+    <h3><code>'static</code></h3>
+    <p>The <code>'static</code> lifetime means &ldquo;lives for the entire program.&rdquo; String literals (<code>&amp;'static str</code>) have this lifetime. <code>T: 'static</code> as a trait bound means the type contains no non-static references (it can be an owned type like <code>String</code>).</p>
+
+    <h2>The Borrow Checker</h2>
+    <p><strong>Niko Matsakis&rsquo;s</strong> key contribution to the language. The borrow checker is a compiler pass that verifies ownership, borrowing, and lifetime rules at compile time. It prevents:</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Use-After-Free</h4>
+        <p>A reference cannot outlive the data it borrows. The compiler rejects code where a reference escapes its owner&rsquo;s scope.</p>
+      </div>
+      <div class="pillar">
+        <h4>Double-Free</h4>
+        <p>Each value has exactly one owner. When the owner is dropped, the value is freed exactly once. No second free is possible.</p>
+      </div>
+      <div class="pillar">
+        <h4>Dangling References</h4>
+        <p>You cannot return a reference to a local variable. The compiler sees that the reference would outlive the value and rejects it.</p>
+      </div>
+      <div class="pillar">
+        <h4>Data Races</h4>
+        <p>Aliasing XOR mutation: you cannot have a mutable reference and any other reference at the same time. This eliminates data races at compile time.</p>
+      </div>
+    </div>
+
+    <h3>Non-Lexical Lifetimes (NLL)</h3>
+    <p>Rust 2018 introduced <strong>NLL</strong>: the borrow checker now tracks when a reference is <em>last used</em>, not when it goes out of scope. This makes many previously-rejected programs compile correctly:</p>
+
+<pre><code>let mut v = vec![1, 2, 3];
+let first = &amp;v[0]; // immutable borrow
+println!("{}", first); // last use of `first`
+v.push(4);             // OK with NLL: first is no longer in use</code></pre>
+
+    <h3>Polonius</h3>
+    <p>The next-generation borrow checker, still in development. Polonius uses a Datalog-based analysis to accept even more valid programs while maintaining the same safety guarantees.</p>
+
+    <h2>Structs with Lifetimes</h2>
+
+<pre><code>struct Excerpt&lt;'a&gt; {
+    text: &amp;'a str,  // the struct borrows from some String
+}
+
+fn main() {
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().unwrap();
+    let excerpt = Excerpt { text: first_sentence };
+    println!("Excerpt: {}", excerpt.text);
+}</code></pre>
+
+    <p>The lifetime annotation <code>'a</code> on the struct says: &ldquo;an <code>Excerpt</code> cannot outlive the string it borrows from.&rdquo; The compiler enforces this everywhere the struct is used.</p>
+
+    <h2>Ownership and Collections</h2>
+    <p>Collections own their elements. A <code>Vec&lt;String&gt;</code> owns the strings. When the vector is dropped, all the strings are dropped. You can iterate by reference (<code>&amp;v</code>), by mutable reference (<code>&amp;mut v</code>), or by value (<code>v.into_iter()</code> which consumes the vector):</p>
+
+<pre><code>let names = vec!["Alice".to_string(), "Bob".to_string()];
+
+// Borrow: names is still valid after the loop
+for name in &amp;names {
+    println!("{}", name);
+}
+
+// Consume: names is moved into the loop, no longer valid after
+for name in names {
+    println!("owns: {}", name);
+}
+// names is no longer valid here</code></pre>
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>CPP</td><td>C++</td><td>C++ RAII + smart pointers is the convention-based ancestor of Rust&rsquo;s ownership model</td></tr>
+        <tr><td>CEE</td><td>C</td><td>C&rsquo;s <code>malloc</code>/<code>free</code> is what Rust replaces with ownership</td></tr>
+        <tr><td>JGC</td><td>JVM GC</td><td>Ownership eliminates the need for GC entirely &mdash; the philosophical opposite</td></tr>
+        <tr><td>JAV</td><td>Java</td><td>Java achieves safety through GC; Rust achieves it through ownership. Different costs.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="traits.html">Traits &amp; Types</a></li>
+        <li><a href="async.html">Async &amp; Concurrency</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="unsafe.html">Unsafe &amp; FFI</a></li>
+        <li><a href="rosetta.html">Rosetta</a></li>
+        <li><a href="education.html">Learn</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Ownership &amp; Borrowing &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

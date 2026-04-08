@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Culture &mdash; C &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cee">
+  <header>
+    <h1>History &amp; Culture</h1>
+    <div class="subtitle">Dennis Ritchie, Ken Thompson, Bell Labs, K&amp;R, ANSI, and the Language That Rewrote Unix</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="language.html">Core</a>
+      <a href="stdlib.html">libc</a>
+      <a href="compilers.html">Compilers</a>
+      <a href="systems.html">Systems</a>
+      <a href="abi.html">ABI</a>
+      <a href="rosetta.html">Rosetta</a>
+      <a href="education.html">Learn</a>
+      <a href="history.html" class="active">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      More than half a century after its creation in a back room at Bell Labs, C remains the bedrock on which nearly all modern computing rests. Every operating system kernel in widespread use is written in C or a close descendant. Every mainstream language runtime &mdash; CPython, Ruby&rsquo;s MRI, PHP, Perl, Lua, V8&rsquo;s base, the JVM&rsquo;s HotSpot core &mdash; is itself a C program. When a Python program calls NumPy, which calls BLAS, which calls a vendor kernel, which calls the Linux system call interface, it is C calling conventions all the way down. <strong>C is not merely old. C is structural.</strong>
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- DENNIS RITCHIE                                                -->
+    <!-- ============================================================ -->
+
+    <h2>Dennis Ritchie &mdash; The Quiet Architect</h2>
+    <div class="card">
+      <p><strong>Born September 9, 1941,</strong> Bronxville, New York. Grew up in New Jersey after his father Alistair E. Ritchie joined Bell Labs as a switching systems engineer. Alistair co-authored <em>The Design of Switching Circuits</em> (1951). Dennis grew up steeped in the Bell Labs tradition before he ever walked through its doors.</p>
+      <p><strong>Harvard:</strong> Physics undergraduate 1963, PhD in applied mathematics 1968. Thesis: <em>Program Structure and Computational Complexity</em> &mdash; subrecursive hierarchies, pure theoretical CS in the Turing/Kleene lineage. <strong>Famously never formally received his PhD</strong> because he declined to pay the fee to have the thesis bound and deposited in the Harvard library.</p>
+      <p><strong>Bell Labs, 1967:</strong> Computing Sciences Research Center in Murray Hill, NJ. Joined the Multics group. When Bell pulled out of Multics in 1969, he and Ken Thompson turned to a smaller system on a cast-off PDP-7 &mdash; Unix. Ritchie was the systems thinker: Thompson was the virtuoso hacker. Ritchie saw that Unix needed a language neither assembly nor academic, but something in between.</p>
+    </div>
+
+    <h3>Awards and Death</h3>
+    <table>
+      <thead><tr><th>Year</th><th>Recognition</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1983</strong></td><td><strong>ACM Turing Award</strong> (with Ken Thompson) &mdash; &ldquo;for their development of generic operating systems theory and specifically for the implementation of the UNIX operating system&rdquo;</td></tr>
+        <tr><td>1990</td><td>IEEE Richard W. Hamming Medal (with Thompson)</td></tr>
+        <tr><td>1999</td><td>National Medal of Technology, presented by President Clinton</td></tr>
+        <tr><td><strong>Oct 12, 2011</strong></td><td>Died at his home in Berkeley Heights, NJ, age 70. One week after Steve Jobs. His death went almost unnoticed in mainstream media &mdash; a fact that drew sharp, rueful comment from programmers everywhere</td></tr>
+      </tbody>
+    </table>
+    <div class="card amber">
+      <p>Rob Pike: <em>&ldquo;Dennis was a quiet and mostly private man, but he was also my friend, colleague, and collaborator, and the world has lost a truly great mind.&rdquo;</em></p>
+      <p>The comparison was made, and keeps being made: Jobs sold devices that ran software; Ritchie wrote the software that runs the devices. <strong>Every iPhone Steve Jobs ever sold was running a kernel descended from Unix and written in C.</strong></p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- KEN THOMPSON                                                  -->
+    <!-- ============================================================ -->
+
+    <h2>Ken Thompson &mdash; The Hacker Who Built the Universe</h2>
+    <div class="card">
+      <p><strong>Born February 4, 1943,</strong> New Orleans. BS and MS in electrical engineering and CS from UC Berkeley. Joined Bell Labs in 1966.</p>
+      <p>Thompson&rsquo;s great insight was that Multics was too big but the <em>idea</em> was too good to abandon. In 1969, with his wife and infant son temporarily visiting family in California &mdash; the famous &ldquo;<strong>three weeks of uninterrupted hacking</strong>&rdquo; story &mdash; Thompson wrote the first version of Unix on a cast-off DEC PDP-7: kernel, shell, editor, assembler. All in PDP-7 assembly.</p>
+      <p>To bootstrap himself into a higher-level language, Thompson created <strong>B</strong> in 1969 &mdash; a stripped-down BCPL, typeless, tiny footprint. When Bell acquired a PDP-11 in 1970, B&rsquo;s word-oriented assumptions were a poor fit for the new byte-addressable machine. Ritchie attacked the problem; that attack became C. Thompson&rsquo;s attention moved on.</p>
+    </div>
+
+    <h3>Thompson&rsquo;s Other Legacies</h3>
+    <table>
+      <thead><tr><th>Work</th><th>Year</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Belle chess computer</strong></td><td>1970s&ndash;80s</td><td>With Joe Condon. First machine to achieve Master rating</td></tr>
+        <tr><td>Endgame tablebases</td><td>1980s</td><td>Settled long-open chess theory questions</td></tr>
+        <tr><td>Regular expression engine</td><td>1968+</td><td>Direct descendants run in every modern grep, editor, scanning tool</td></tr>
+        <tr><td><strong>&ldquo;Reflections on Trusting Trust&rdquo;</strong></td><td>1984</td><td>Turing Award lecture describing an undetectable backdoor in the C compiler itself. Permanently changed how security thinks about supply chains</td></tr>
+        <tr><td><strong>Go language</strong></td><td>2009</td><td>At Google with Rob Pike and Robert Griesemer. &ldquo;A better C for multicore systems&rdquo;</td></tr>
+      </tbody>
+    </table>
+    <p>Thompson and Ritchie were complementary. Ritchie was the thinker who loved a precise specification; Thompson was the builder who loved a working system. Elegance pulled taut against pragmatism &mdash; <strong>that tension is the tension you can still feel in C itself.</strong></p>
+
+    <!-- ============================================================ -->
+    <!-- THE LINEAGE                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>The Lineage &mdash; CPL &rarr; BCPL &rarr; B &rarr; NB &rarr; C</h2>
+    <div class="card">
+      <p>C is the last link in a chain of languages each of which was an attempt to make the previous one smaller, simpler, and more implementable.</p>
+    </div>
+    <table>
+      <thead><tr><th>Language</th><th>Year</th><th>Creator</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><strong>CPL</strong></td><td>~1963</td><td>Christopher Strachey et al. (Cambridge + University of London)</td><td>Combined Programming Language. ALGOL 60 block structure + systems programming. Too large, never fully implemented</td></tr>
+        <tr><td><strong>BCPL</strong></td><td>1967</td><td>Martin Richards (Cambridge Mathematical Laboratory)</td><td>Basic CPL. Typeless, curly braces (actually <code>$(</code>/<code>$)</code>), portable via O-code intermediate</td></tr>
+        <tr><td><strong>B</strong></td><td>1969</td><td>Ken Thompson</td><td>BCPL stripped for the PDP-7. Typeless. <code>main()</code>, <code>printf</code>, <code>i++</code>, <code>while</code>, <code>if/else</code> all already looked like C</td></tr>
+        <tr><td><strong>NB (New B)</strong></td><td>~1971</td><td>Dennis Ritchie</td><td>Added types (<code>int</code>, <code>char</code>, pointers) and struct-like composites</td></tr>
+        <tr><td><strong>C</strong></td><td>1972</td><td>Dennis Ritchie</td><td>NB crystallized: proper pointers with type info, preprocessor, richer structs, self-bootstrapping compiler</td></tr>
+      </tbody>
+    </table>
+    <p>The name &ldquo;C&rdquo; is, in the direct and unpretentious Bell Labs style, simply the letter after B. There was never a &ldquo;language A&rdquo; at Bell Labs.</p>
+
+    <!-- ============================================================ -->
+    <!-- THE UNIX SYMBIOSIS                                            -->
+    <!-- ============================================================ -->
+
+    <h2>The Unix Symbiosis</h2>
+    <div class="card">
+      <p>You cannot tell C&rsquo;s story without Unix&rsquo;s, because they grew up together and each made the other possible.</p>
+      <ul>
+        <li><strong>Mid-1972:</strong> First attempt to rewrite Unix in C. Failed &mdash; C didn&rsquo;t yet have structs</li>
+        <li><strong>1972:</strong> Ritchie adds structs. Rewrite succeeds</li>
+        <li><strong>Late 1973:</strong> Unix V4 is the first kernel written mostly in C (with some assembly)</li>
+        <li><strong>June 1974:</strong> Unix V5 shipped outside Bell Labs, with C kernel. Ritchie &amp; Thompson&rsquo;s <em>CACM</em> paper &ldquo;The UNIX Time-Sharing System&rdquo; describes it to the world</li>
+        <li><strong>1977:</strong> <strong>Steve Johnson and Ritchie port Unix to the Interdata 8/32.</strong> The first major port. This established the pattern: write the OS in C, port the C compiler, everything else follows</li>
+      </ul>
+      <p>The decision to write Unix in C was, at the time, considered mildly eccentric. The conventional wisdom was that OS kernels had to be in assembly. Ritchie&rsquo;s bet was that a language close enough to the metal &mdash; with pointers, bitwise operators, no hidden runtime &mdash; could be almost as fast as assembly while being dramatically easier to port. <strong>He was right, and the consequences were enormous.</strong></p>
+    </div>
+
+    <h3>The Bidirectional Symbiosis</h3>
+    <table>
+      <thead><tr><th>Direction</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td>Unix &rarr; C</td><td>Every interesting machine wanted Unix. Running Unix meant having a C compiler. C became available on every interesting machine</td></tr>
+        <tr><td>C &rarr; Unix</td><td>A Unix port reduced to a C-compiler port &mdash; a tractable problem for a small team. Dozens of ports followed through the 1980s</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- KR BOOK                                                       -->
+    <!-- ============================================================ -->
+
+    <h2>K&amp;R &mdash; The White Book</h2>
+    <div class="card">
+      <p><strong>1978, Prentice-Hall: <em>The C Programming Language</em> by Brian W. Kernighan and Dennis M. Ritchie.</strong> White cover, blue Helvetica. 228 pages. One of the most influential computer books ever written.</p>
+      <p>Brian Kernighan was not a co-designer of C. He was a Bell Labs colleague &mdash; Princeton-trained CS, unusually gifted writer, co-creator of AWK (the &ldquo;k&rdquo;), author of <em>Software Tools</em> (with P.J. Plauger). Kernighan wrote most of the prose. Ritchie wrote the reference manual appendix. The partnership produced a book that is simultaneously a tutorial, a reference, and an essay on programming taste.</p>
+    </div>
+
+    <h3>The Two Editions</h3>
+    <table>
+      <thead><tr><th>Edition</th><th>Year</th><th>Language Version</th><th>Significance</th></tr></thead>
+      <tbody>
+        <tr><td>1st</td><td>1978</td><td>K&amp;R C</td><td>The original. K&amp;R C was the de facto standard for a decade</td></tr>
+        <tr><td><strong>2nd</strong></td><td>1988</td><td>ANSI C draft</td><td>Updated for the upcoming ANSI standard. Function prototypes, <code>void</code>, formalized library. <strong>The edition most programmers learned from</strong></td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- STANDARDIZATION                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Standardization Timeline</h2>
+    <table>
+      <thead><tr><th>Year</th><th>Standard</th><th>Changes</th></tr></thead>
+      <tbody>
+        <tr><td>1978</td><td>K&amp;R C</td><td>De facto standard via the Kernighan &amp; Ritchie book</td></tr>
+        <tr><td><strong>Dec 1989</strong></td><td><strong>ANSI C / C89</strong></td><td>ANSI X3.159-1989. ANSI committee X3J11 chaired by Jim Brodie. Function prototypes, <code>void</code>, standard library formalized, trigraphs</td></tr>
+        <tr><td>1990</td><td>C90</td><td>ISO/IEC 9899:1990. Same content as C89, now an international standard</td></tr>
+        <tr><td>1995</td><td>C95 (C94)</td><td>Amendment 1 to C90: <code>&lt;wchar.h&gt;</code>, <code>&lt;wctype.h&gt;</code>, <code>&lt;iso646.h&gt;</code></td></tr>
+        <tr><td><strong>Dec 1999</strong></td><td><strong>C99</strong></td><td>// comments, VLAs, <code>stdint.h</code>, <code>stdbool.h</code>, <code>inline</code>, <code>restrict</code>, <code>long long</code>, compound literals, designated initializers, variadic macros, <code>_Bool</code>, <code>_Complex</code></td></tr>
+        <tr><td><strong>Dec 2011</strong></td><td><strong>C11</strong></td><td><code>_Generic</code>, atomics (<code>stdatomic.h</code>), threads (<code>threads.h</code>), <code>alignof</code>/<code>alignas</code>, <code>_Noreturn</code>, anonymous structs/unions, <code>static_assert</code>, Unicode char types (<code>char16_t</code>, <code>char32_t</code>)</td></tr>
+        <tr><td>2018</td><td>C17</td><td>Bug-fix release. No new features &mdash; a deliberate pause to clean up C11 defects</td></tr>
+        <tr><td><strong>2024</strong></td><td><strong>C23</strong></td><td>ISO/IEC 9899:2024. <code>nullptr</code> (finally!), <code>typeof</code>, <code>_BitInt(N)</code>, improved enum with explicit type, <code>constexpr</code> for objects, <code>auto</code>, <code>[[attribute]]</code> syntax, <code>#embed</code>, binary literals (<code>0b1010</code>), digit separators (<code>1'000'000</code>)</td></tr>
+        <tr><td>(upcoming)</td><td>C2y</td><td>WG14 continues work. Continued incremental refinement</td></tr>
+      </tbody>
+    </table>
+
+    <h3>WG14 &mdash; The C Committee</h3>
+    <p><strong>ISO/IEC JTC1/SC22/WG14</strong> is the international working group that maintains C. It works alongside ANSI&rsquo;s INCITS J11 (the U.S. technical advisory group). The committee meets twice a year, hosts mailing list discussions year-round, and publishes papers via its public document repository (WG14 N-documents). Recent chairs include David Keaton. The process is slower than almost any other language committee &mdash; and deliberately so. <strong>C changes don&rsquo;t get rolled back.</strong> A feature added in C99 must still compile in C23 and beyond.</p>
+
+    <!-- ============================================================ -->
+    <!-- MEMORY SAFETY                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>The Memory Safety Debate</h2>
+    <div class="card amber">
+      <p><strong>February 2024: The White House ONCD report.</strong> The Office of the National Cyber Director published &ldquo;Back to the Building Blocks: A Path Toward Secure and Measurable Software,&rdquo; explicitly calling for adoption of memory-safe languages (Rust, Go, C#, Swift, Java, Python) in new code. The report cited Microsoft and Google research showing that ~70% of security vulnerabilities in their C/C++ codebases were memory-safety bugs.</p>
+      <p>The report did <em>not</em> say &ldquo;stop writing C.&rdquo; It said &ldquo;prefer memory-safe where possible.&rdquo; But it was the loudest official voice ever raised against C&rsquo;s memory model.</p>
+    </div>
+
+    <h3>The C/C++ Community&rsquo;s Responses</h3>
+    <table>
+      <thead><tr><th>Response</th><th>Approach</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Rust in the Linux kernel</strong></td><td>Kernel 6.1 (Dec 2022) accepted the first Rust code. &ldquo;Rust for Linux&rdquo; led by Miguel Ojeda. Several production drivers in Rust by 2026</td></tr>
+        <tr><td><strong>Safe C++ profiles</strong></td><td>Bjarne Stroustrup and others pushing opt-in safety subsets of C++</td></tr>
+        <tr><td><strong>C23 safety hints</strong></td><td>WG14 added features that aid safety: <code>nullptr</code> (clearer than <code>(void*)0</code>), <code>_BitInt(N)</code> (avoids silent truncation), improved enum</td></tr>
+        <tr><td><strong>CHERI</strong></td><td>Cambridge project: capability-based hardware enforcement. Pointers become capabilities with bounds and permissions checked by the CPU. Arm Morello board demonstrates the approach</td></tr>
+        <tr><td><strong>Fil-C</strong></td><td>Filip Pizlo. Fully memory-safe C compiler (2024+). Runtime checks everything</td></tr>
+        <tr><td><strong>Sanitizers</strong></td><td>AddressSanitizer (2011), ThreadSanitizer, MemorySanitizer, UBSanitizer. Catch bugs at runtime during development</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The Bet</h3>
+    <div class="card">
+      <p><strong>C and Rust coexist for decades.</strong> The Linux kernel will be mostly C for the foreseeable future. Embedded systems will stay C. The C ABI will remain the universal FFI target. But new code for networked services, browsers, and security-critical components is increasingly Rust. This is not a replacement &mdash; it&rsquo;s a layering.</p>
+      <p>Dennis Ritchie would have understood. He added <code>restrict</code> in C99 because aliasing was costing optimization. He would have watched Rust&rsquo;s borrow checker with curiosity and probably some small fondness, noting that the problem Rust solves is precisely the problem he left unsolved in 1972 because solving it would have meant not shipping.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- WHO USES C                                                    -->
+    <!-- ============================================================ -->
+
+    <h2>Who Uses C (In 2026)</h2>
+    <table>
+      <thead><tr><th>Domain</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Operating system kernels</strong></td><td>Linux (30M+ LOC), FreeBSD, OpenBSD, NetBSD, XNU (macOS/iOS), Windows NT (portions), Fuchsia/Zircon, seL4, QNX, VxWorks, FreeRTOS, Zephyr</td></tr>
+        <tr><td><strong>Language runtimes</strong></td><td>CPython, Ruby MRI, PHP Zend Engine, Perl, Lua, Tcl, R, OCaml runtime, Erlang BEAM, V8 (mostly C++, C bridges)</td></tr>
+        <tr><td><strong>Databases</strong></td><td>SQLite (most-deployed DB in the world), Redis, PostgreSQL core, MySQL/MariaDB, BerkeleyDB</td></tr>
+        <tr><td><strong>Web servers</strong></td><td>nginx, Apache httpd, lighttpd, OpenResty</td></tr>
+        <tr><td><strong>Crypto</strong></td><td>OpenSSL, LibreSSL, BoringSSL, libsodium, mbedTLS, wolfSSL</td></tr>
+        <tr><td><strong>Codecs</strong></td><td>FFmpeg, libx264, libavcodec, libwebp, libpng, libjpeg-turbo, zlib</td></tr>
+        <tr><td><strong>Embedded/firmware</strong></td><td>Arduino, ESP32, STM32, AVR, every microcontroller ever made</td></tr>
+        <tr><td><strong>Space &amp; aerospace</strong></td><td>JPL Mars rovers, ISS, flight computers &mdash; almost always C, sometimes MISRA-C</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>PRL</td><td>Perl &amp; PHP</td><td>Perl and PHP interpreters are written in C. XS and Zend Engine</td></tr>
+        <tr><td>SNK</td><td>Python</td><td>CPython is C. The symbiotic C extension story</td></tr>
+        <tr><td>SYS</td><td>Systems Administration</td><td>Every Unix tool, every daemon, every system library</td></tr>
+        <tr><td>STA</td><td>Entertainment &amp; Media</td><td>Bell Labs as a cultural institution, the AT&amp;T era, the Hacker Ethic</td></tr>
+        <tr><td>NASA</td><td>NASA Mission Series</td><td>Flight software on spacecraft is almost always C</td></tr>
+        <tr><td>TIBS</td><td>Knowledge Traditions</td><td>K&amp;R as canonical text, the Bell Labs culture of unhurried brilliance</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="language.html">Language Core</a></li>
+        <li><a href="systems.html">Systems Programming</a></li>
+        <li><a href="abi.html">The C ABI</a></li>
+        <li><a href="education.html">Learning Resources</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>History &amp; Culture &middot; C &mdash; The Substrate &middot; PNW Research Series &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>
