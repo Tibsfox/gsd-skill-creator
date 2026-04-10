@@ -8077,3 +8077,142 @@ mod m11_async_cold_source_tests {
         assert_eq!(result.unwrap(), None);
     }
 }
+
+// =============================================================================
+// M12 — Policy sweep VRAM integration + pinned host memory (cuda feature)
+// =============================================================================
+
+#[cfg(feature = "cuda")]
+mod m12_vram_sweep_tests {
+    use super::*;
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, PoolSpec};
+    use crate::memory_arena::vram::VramContext;
+    use std::sync::Arc;
+
+    fn vram_aware_set(dir: &std::path::Path) -> ArenaSet {
+        let config = ArenaConfig::test();
+        let vram_ctx = Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let set_config = ArenaSetConfig::new(dir)
+            .with_pool(PoolSpec {
+                tier: TierKind::Hot,
+                chunk_size: config.chunk_size,
+                num_slots: 8,
+                policy: crate::memory_arena::pool::TierPolicy {
+                    max_chunks: 8,
+                    eviction: crate::memory_arena::pool::EvictionKind::Lru,
+                    promote_after_hits: 2,
+                    demote_after_idle_ns: 1_000_000_000,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                },
+                allocator: Default::default(),
+            })
+            .with_pool(PoolSpec {
+                tier: TierKind::Vector,
+                chunk_size: config.chunk_size,
+                num_slots: 8,
+                policy: crate::memory_arena::pool::TierPolicy {
+                    max_chunks: 8,
+                    eviction: crate::memory_arena::pool::EvictionKind::Lru,
+                    promote_after_hits: 0,
+                    demote_after_idle_ns: 2_000_000_000,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                },
+                allocator: Default::default(),
+            })
+            .with_vram_context(vram_ctx);
+        ArenaSet::create(set_config).expect("create with VRAM")
+    }
+
+    #[test]
+    fn policy_sweep_demotes_idle_hot_to_vector_vram() {
+        let dir = tempdir().expect("tempdir");
+        let mut set = vram_aware_set(dir.path());
+
+        // Alloc a chunk in Hot.
+        let pool = set.pool_mut(TierKind::Hot).expect("hot");
+        let _id = pool.alloc(vec![42; 64]).expect("alloc");
+
+        // Set clock far into the future so the chunk appears idle
+        // (real SystemTime::now() timestamp << fake future clock).
+        set.set_now_ns_for_test(|| u64::MAX / 2);
+
+        let report = set.run_policy_sweep();
+        // Hot→Vector demote (Vector is colder tier). The crossfade
+        // routes through VramPool because Vector has a VRAM context.
+        assert!(
+            report.demotes_completed > 0,
+            "sweep should demote idle Hot chunk to Vector/VRAM: {:?}",
+            report,
+        );
+    }
+
+    #[test]
+    fn manual_crossfade_hot_to_vram_vector_and_back() {
+        let dir = tempdir().expect("tempdir");
+        let mut set = vram_aware_set(dir.path());
+
+        // Alloc in Hot, crossfade to Vector (VRAM).
+        let pool = set.pool_mut(TierKind::Hot).expect("hot");
+        let id = pool.alloc(vec![99; 64]).expect("alloc");
+
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Vector)
+            .expect("begin demote to VRAM");
+        let vram_id = set.complete_demote(handle).expect("complete demote");
+
+        // Verify VRAM pool has it.
+        assert!(set.vram_pool().unwrap().contains(vram_id));
+
+        // Crossfade back: Vector (VRAM) → Hot (RAM).
+        let handle2 = set.begin_promote(TierKind::Vector, vram_id, TierKind::Hot)
+            .expect("begin promote from VRAM");
+        let ram_id = set.complete_promote(handle2).expect("complete promote");
+
+        // Verify Hot pool has it, VRAM doesn't.
+        let hot = set.pool(TierKind::Hot).expect("hot");
+        assert!(hot.arena().contains(ram_id));
+    }
+}
+
+#[cfg(feature = "cuda")]
+mod m12_pinned_memory_tests {
+    use crate::memory_arena::vram::{PinnedBuffer, VramContext};
+    use std::sync::Arc;
+
+    #[test]
+    fn pinned_buffer_alloc_and_access() {
+        let ctx = Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let mut buf = PinnedBuffer::new(&ctx, 4096).expect("pinned alloc");
+        assert_eq!(buf.len(), 4096);
+
+        // Write and read back.
+        buf.as_mut_slice()[0..4].copy_from_slice(&[1, 2, 3, 4]);
+        assert_eq!(&buf.as_slice()[0..4], &[1, 2, 3, 4]);
+    }
+
+    #[test]
+    fn pinned_buffer_upload_download_round_trip() {
+        let ctx = Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let payload = vec![0xAB; 1024];
+
+        // Alloc pinned staging buffer, fill it, upload to VRAM, download back.
+        let mut staging = PinnedBuffer::new(&ctx, 1024).expect("pinned alloc");
+        staging.as_mut_slice().copy_from_slice(&payload);
+
+        let mut vram_alloc = ctx.alloc(1024).expect("vram alloc");
+        ctx.upload(staging.as_slice(), &mut vram_alloc).expect("upload");
+
+        let mut download_buf = PinnedBuffer::new(&ctx, 1024).expect("pinned alloc");
+        ctx.download(&vram_alloc, download_buf.as_mut_slice()).expect("download");
+        assert_eq!(download_buf.as_slice(), payload.as_slice());
+    }
+
+    #[test]
+    fn pinned_buffer_zero_size() {
+        let ctx = Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let buf = PinnedBuffer::new(&ctx, 0).expect("zero-size pinned");
+        assert_eq!(buf.len(), 0);
+        assert!(buf.as_slice().is_empty());
+    }
+}
