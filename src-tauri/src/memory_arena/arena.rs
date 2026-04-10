@@ -505,6 +505,54 @@ impl Arena {
         Ok(id)
     }
 
+    /// Validate a chunk's header + payload checksum **without** copying
+    /// the payload out of the arena. Used by callers that opened the arena
+    /// via `Arena::open_lazy` and want an on-demand guarantee on a
+    /// specific chunk.
+    ///
+    /// This is the explicit counterpart to `Arena::open_lazy` — the lazy
+    /// open deliberately skips payload validation; `validate_chunk` is the
+    /// "I want a guarantee before I trust this chunk" escape hatch.
+    ///
+    /// Unlike `touch_chunk`, this method does **not** update access_count,
+    /// last_access_ns, or LRU ordering. Validation is read-only.
+    ///
+    /// Unlike `get_chunk`, this method does **not** allocate a new `Chunk`
+    /// or copy the payload — it runs `Chunk::deserialize` purely for the
+    /// checksum validation side effect and drops the result.
+    ///
+    /// # Errors
+    ///
+    /// - `UnknownChunkId(id)` if the chunk isn't registered in the directory.
+    /// - `ChecksumMismatch { .. }` if the payload checksum no longer matches.
+    /// - `PayloadSizeMismatch { .. }` if a corrupt header claims an
+    ///   oversized payload.
+    pub fn validate_chunk(&self, id: ChunkId) -> ArenaResult<()> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+
+        let start = slot * self.slot_size;
+        let header_bytes = &self.storage[start..start + HEADER_SIZE];
+        let header = crate::memory_arena::chunk::read_header_from(header_bytes)?;
+        let total = HEADER_SIZE + header.payload_size as usize;
+
+        if total > self.slot_size {
+            return Err(ArenaError::PayloadSizeMismatch {
+                header: header.payload_size,
+                actual: self.slot_size - HEADER_SIZE,
+            });
+        }
+
+        let chunk_bytes = &self.storage[start..start + total];
+        // Deserialize validates magic + version + tier + streaming xxh3
+        // over `header[0..CHECKSUM_OFFSET] || payload`. We drop the
+        // returned Chunk — all we want is the side-effect of the check.
+        let _ = Chunk::deserialize(chunk_bytes)?;
+        Ok(())
+    }
+
     /// Read a chunk by id. Returns an owned copy (deserialized + validated).
     pub fn get_chunk(&self, id: ChunkId) -> ArenaResult<Chunk> {
         let slot = *self
