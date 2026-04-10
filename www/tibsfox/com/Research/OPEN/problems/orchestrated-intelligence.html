@@ -134,6 +134,12 @@ footer a { color:rgba(255,255,255,0.3); }
       <div class="arxiv"><a href="https://arxiv.org/abs/2604.06696">arXiv:2604.06696</a> &middot; Cheng et al., April 2026</div>
       <p>Frames agent routing as a constrained optimization problem with two stages: determining action type (single-agent, multi-agent, direct response, or escalation) and grounding that action into executable outputs. Uses fine-tuned compact models (3B&ndash;7B) with candidate-aware supervision and hard negative examples. Key finding: lightweight models match larger systems in routing performance under resource constraints. Performance differences are driven by action prediction, candidate selection, and grounding quality. Contrasts with our GUPP/DACP approach &mdash; AgentGate uses a learned router while we use deterministic dispatch rules. The two-stage decomposition (decide action type, then ground it) maps to our sling-dispatch pattern of fetch&rarr;allocate&rarr;prepare&rarr;execute.</p>
     </div>
+
+    <div class="paper">
+      <h3>Qualixar OS: Universal OS for AI Agent Orchestration</h3>
+      <div class="arxiv"><a href="https://arxiv.org/abs/2604.06392">arXiv:2604.06392</a> &middot; Bhardwaj, April 2026</div>
+      <p>An application-layer operating system supporting 10 LLM providers, 8+ agent frameworks, and 7 transport protocols. Implements 12 multi-agent topologies (grid, forest, mesh, maker) through a Forge engine with historical strategy memory. Model routing uses three layers: Q-learning, five routing strategies, and Bayesian POMDP with dynamic provider discovery. Includes a consensus pipeline with Goodhart detection and JSD drift monitoring, plus content attribution via HMAC signing and steganographic watermarks. Validated against 2,821 test cases across 217 event types. Contrast with our approach: Qualixar is a universal abstraction layer over heterogeneous frameworks, while GSD + skill-creator is a vertically-integrated system optimized for one runtime (Claude Code). Their breadth vs our depth reflects a fundamental architectural tradeoff in the orchestration space.</p>
+    </div>
   </section>
 
   <div class="callout">

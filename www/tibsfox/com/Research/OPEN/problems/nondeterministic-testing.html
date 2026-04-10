@@ -116,6 +116,12 @@ footer a { color:rgba(255,255,255,0.3); }
       <div class="arxiv">Industry Reports, 2026</div>
       <p>Synthesis of production deployment challenges reported by companies running agentic AI in 2026. The five most common testing failures: (1) trajectory-dependent bugs that only manifest on specific execution paths, (2) cascading failures where one agent's stochastic error propagates through the system, (3) "lucky tests" that pass by chance and mask real regressions, (4) performance drift over time as underlying models update, (5) environment sensitivity where tests pass in staging but fail in production due to different API latencies or data distributions.</p>
     </div>
+
+    <div class="paper">
+      <h3>Test-Oriented Programming: Rethinking Coding for GenAI</h3>
+      <div class="arxiv"><a href="https://arxiv.org/abs/2604.08102">arXiv:2604.08102</a> &middot; Melegati, ICSE 2026 (poster)</div>
+      <p>Proposes Test-Oriented Programming (TOP), a paradigm where developers write only test specifications and delegate implementation to LLMs. The developer's role shifts from code author to test validator &mdash; verifying that generated code satisfies the test suite. Proof-of-concept evaluation with multiple LLMs on a CLI program yields promising results but surfaces key challenges for production adoption. Directly relevant to our non-deterministic testing problem: if the implementation is AI-generated and non-deterministic, the tests become the only stable specification. TOP formalizes what we already experience &mdash; our 21,298 tests are the ground truth, and the agent-generated code must satisfy them regardless of which trajectory the agent takes.</p>
+    </div>
   </section>
 
   <section>
