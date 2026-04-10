@@ -6443,3 +6443,151 @@ mod m6_vram_pool {
         assert!(!pool.contains(id));
     }
 }
+
+// =========================================================================
+// M6 Plan 04 — ArenaSet VRAM crossfade integration
+// =========================================================================
+
+#[cfg(feature = "cuda")]
+mod m6_vram_crossfade {
+    use std::sync::Arc;
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, PoolSpec, TierPolicy};
+    use crate::memory_arena::types::{ArenaConfig, ChunkState, TierKind};
+    use crate::memory_arena::vram::VramContext;
+    use tempfile::tempdir;
+
+    fn vram_arena_set(dir: &std::path::Path) -> ArenaSet {
+        let ctx = Arc::new(VramContext::new(0).unwrap());
+        let config = ArenaSetConfig::new(dir)
+            .with_pool(PoolSpec {
+                tier: TierKind::Hot,
+                chunk_size: ArenaConfig::test().chunk_size,
+                num_slots: 8,
+                policy: TierPolicy::default_for(TierKind::Hot),
+            })
+            .with_pool(PoolSpec {
+                tier: TierKind::Vector,
+                chunk_size: ArenaConfig::test().chunk_size,
+                num_slots: 8,
+                policy: TierPolicy::default_for(TierKind::Vector),
+            })
+            .with_vram_context(ctx);
+        ArenaSet::create(config).unwrap()
+    }
+
+    #[test]
+    fn arena_set_with_vram_pool() {
+        let dir = tempdir().unwrap();
+        let set = vram_arena_set(dir.path());
+        assert!(set.pool(TierKind::Hot).is_some());
+        assert!(set.pool(TierKind::Vector).is_some());
+        assert!(set.vram_pool().is_some());
+    }
+
+    #[test]
+    fn demote_hot_to_vram() {
+        let dir = tempdir().unwrap();
+        let mut set = vram_arena_set(dir.path());
+        let data = vec![0xABu8; 64];
+        let id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Vector).unwrap();
+        // Source should be FadingOut
+        let state = set.pool(TierKind::Hot).unwrap().arena().chunk_state(id).unwrap();
+        assert_eq!(state, ChunkState::FadingOut);
+        // Target should be in VRAM pool
+        let vram_data = set.vram_pool().unwrap().get(handle.target).unwrap();
+        assert_eq!(vram_data, data);
+    }
+
+    #[test]
+    fn complete_demote_hot_to_vram() {
+        let dir = tempdir().unwrap();
+        let mut set = vram_arena_set(dir.path());
+        let data = vec![0xCDu8; 128];
+        let id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Vector).unwrap();
+        let target_id = set.complete_demote(handle).unwrap();
+        // Source freed
+        assert!(!set.pool(TierKind::Hot).unwrap().arena().contains(id));
+        // Target canonical in VRAM
+        let got = set.vram_pool().unwrap().get(target_id).unwrap();
+        assert_eq!(got, data);
+    }
+
+    #[test]
+    fn abort_demote_hot_to_vram() {
+        let dir = tempdir().unwrap();
+        let mut set = vram_arena_set(dir.path());
+        let data = vec![0xEFu8; 96];
+        let id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Vector).unwrap();
+        let vram_target_id = handle.target;
+        set.abort_demote(handle).unwrap();
+        // Source restored
+        let state = set.pool(TierKind::Hot).unwrap().arena().chunk_state(id).unwrap();
+        assert_eq!(state, ChunkState::Resident);
+        // VRAM target freed
+        assert!(!set.vram_pool().unwrap().contains(vram_target_id));
+    }
+
+    #[test]
+    fn promote_vram_to_hot() {
+        let dir = tempdir().unwrap();
+        let mut set = vram_arena_set(dir.path());
+        let data = vec![0x42u8; 200];
+        // First demote to get data into VRAM
+        let hot_id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
+        let handle = set.begin_demote(TierKind::Hot, hot_id, TierKind::Vector).unwrap();
+        let vram_id = set.complete_demote(handle).unwrap();
+        // Now promote back
+        let handle = set.begin_promote(TierKind::Vector, vram_id, TierKind::Hot).unwrap();
+        let new_hot_id = set.complete_promote(handle).unwrap();
+        // Data should be back in Hot RAM
+        let got = set.pool(TierKind::Hot).unwrap().arena().get_chunk(new_hot_id).unwrap();
+        assert_eq!(got.payload(), data.as_slice());
+        // VRAM source should be freed
+        assert!(!set.vram_pool().unwrap().contains(vram_id));
+    }
+
+    #[test]
+    fn complete_promote_vram_to_hot() {
+        let dir = tempdir().unwrap();
+        let mut set = vram_arena_set(dir.path());
+        let data = vec![0x77u8; 300];
+        let hot_id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
+        let h = set.begin_demote(TierKind::Hot, hot_id, TierKind::Vector).unwrap();
+        let vram_id = set.complete_demote(h).unwrap();
+        let h2 = set.begin_promote(TierKind::Vector, vram_id, TierKind::Hot).unwrap();
+        let new_id = set.complete_promote(h2).unwrap();
+        let got = set.pool(TierKind::Hot).unwrap().arena().get_chunk(new_id).unwrap();
+        assert_eq!(got.payload(), data.as_slice());
+    }
+
+    #[test]
+    fn ram_only_crossfade_still_works() {
+        // Hot↔Warm with a VramContext present should still work (backward compat)
+        let dir = tempdir().unwrap();
+        let ctx = Arc::new(VramContext::new(0).unwrap());
+        let config = ArenaSetConfig::new(dir.path())
+            .with_pool(PoolSpec {
+                tier: TierKind::Hot,
+                chunk_size: ArenaConfig::test().chunk_size,
+                num_slots: 8,
+                policy: TierPolicy::default_for(TierKind::Hot),
+            })
+            .with_pool(PoolSpec {
+                tier: TierKind::Warm,
+                chunk_size: ArenaConfig::test().chunk_size,
+                num_slots: 8,
+                policy: TierPolicy::default_for(TierKind::Warm),
+            })
+            .with_vram_context(ctx);
+        let mut set = ArenaSet::create(config).unwrap();
+        let data = vec![0x99u8; 64];
+        let id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).unwrap();
+        let warm_id = set.complete_demote(handle).unwrap();
+        let got = set.pool(TierKind::Warm).unwrap().arena().get_chunk(warm_id).unwrap();
+        assert_eq!(got.payload(), data.as_slice());
+    }
+}
