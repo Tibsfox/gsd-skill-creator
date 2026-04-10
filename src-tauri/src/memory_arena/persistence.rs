@@ -70,7 +70,8 @@ use xxhash_rust::xxh3::{xxh3_64, Xxh3Default};
 
 use crate::memory_arena::arena::Arena;
 use crate::memory_arena::error::{ArenaError, ArenaResult};
-use crate::memory_arena::types::{ArenaConfig, ChunkId, HEADER_SIZE};
+use crate::memory_arena::pool::ArenaSet;
+use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind, HEADER_SIZE};
 
 const CHECKPOINT_MAGIC: &[u8; 8] = b"GSDCKPT\0";
 /// Current checkpoint format version. Writer emits v2 (sparse).
@@ -86,6 +87,13 @@ const JOURNAL_HEADER_SIZE: usize = 12;
 
 const OP_ALLOC: u8 = 1;
 const OP_FREE: u8 = 2;
+/// Pool-scoped alloc (M2). Record layout:
+/// `[payload_len u32][op_type u8 = 3][pool_id u8][chunk_id u64 LE][chunk_bytes ...][checksum u64]`.
+/// Legacy v1 records (op_type = 1) continue to decode as `pool_id = TierKind::Hot`.
+const OP_ALLOC_V2: u8 = 3;
+/// Pool-scoped free (M2). Record layout:
+/// `[payload_len u32][op_type u8 = 4][pool_id u8][chunk_id u64 LE][checksum u64]`.
+const OP_FREE_V2: u8 = 4;
 
 // ============================================================================
 // Checkpoint
@@ -471,6 +479,10 @@ impl JournalWriter {
     /// slice directly — no scratch record Vec. For large chunks this avoids
     /// the full payload copy that the old implementation paid on every
     /// alloc.
+    ///
+    /// This is the legacy (v1) entry point — records are written with
+    /// op_type `OP_ALLOC` and no pool_id on the wire. Callers that want
+    /// multi-pool dispatch should use `append_alloc_for_pool` instead.
     pub fn append_alloc(&mut self, id: ChunkId, chunk_bytes: &[u8]) -> ArenaResult<()> {
         // Header: [payload_len u32 LE][OP_ALLOC u8][chunk_id u64 LE]
         let payload_len = 1 + 8 + chunk_bytes.len();
@@ -498,6 +510,9 @@ impl JournalWriter {
     }
 
     /// Append a FREE record: just the chunk_id.
+    ///
+    /// Legacy (v1) entry point; see `append_free_for_pool` for the
+    /// multi-pool variant.
     pub fn append_free(&mut self, id: ChunkId) -> ArenaResult<()> {
         let payload_len = 1 + 8;
         let len_bytes = (payload_len as u32).to_le_bytes();
@@ -512,6 +527,76 @@ impl JournalWriter {
 
         self.file.write_all(&len_bytes)?;
         self.file.write_all(&op)?;
+        self.file.write_all(&id_bytes)?;
+        self.file.write_all(&checksum)?;
+        Ok(())
+    }
+
+    /// Append a pool-scoped ALLOC record (M2).
+    ///
+    /// Record layout: `[payload_len u32][OP_ALLOC_V2 u8][pool_id u8]
+    /// [chunk_id u64 LE][chunk_bytes ...][checksum u64]`. The pool_id is
+    /// the `TierKind::as_u8()` encoding (1..=5). This record type is
+    /// decoded by the same `JournalReader::next_op` path and surfaces on
+    /// the reader side as `JournalOp::Alloc { pool_id, .. }`.
+    ///
+    /// Writers and readers share one journal file; v1 and v2 records can
+    /// coexist in the same file (the reader dispatches on op_type).
+    pub fn append_alloc_for_pool(
+        &mut self,
+        pool_id: TierKind,
+        id: ChunkId,
+        chunk_bytes: &[u8],
+    ) -> ArenaResult<()> {
+        // Header: [payload_len u32 LE][OP_ALLOC_V2 u8][pool_id u8][chunk_id u64 LE]
+        let payload_len = 1 + 1 + 8 + chunk_bytes.len();
+        let len_bytes = (payload_len as u32).to_le_bytes();
+        let id_bytes = id.as_u64().to_le_bytes();
+        let op = [OP_ALLOC_V2];
+        let pool = [pool_id.as_u8()];
+
+        let mut hasher = Xxh3Default::new();
+        hasher.update(&len_bytes);
+        hasher.update(&op);
+        hasher.update(&pool);
+        hasher.update(&id_bytes);
+        hasher.update(chunk_bytes);
+        let checksum = hasher.digest().to_le_bytes();
+
+        self.file.write_all(&len_bytes)?;
+        self.file.write_all(&op)?;
+        self.file.write_all(&pool)?;
+        self.file.write_all(&id_bytes)?;
+        self.file.write_all(chunk_bytes)?;
+        self.file.write_all(&checksum)?;
+        Ok(())
+    }
+
+    /// Append a pool-scoped FREE record (M2).
+    ///
+    /// Record layout: `[payload_len u32][OP_FREE_V2 u8][pool_id u8]
+    /// [chunk_id u64 LE][checksum u64]`.
+    pub fn append_free_for_pool(
+        &mut self,
+        pool_id: TierKind,
+        id: ChunkId,
+    ) -> ArenaResult<()> {
+        let payload_len = 1 + 1 + 8;
+        let len_bytes = (payload_len as u32).to_le_bytes();
+        let id_bytes = id.as_u64().to_le_bytes();
+        let op = [OP_FREE_V2];
+        let pool = [pool_id.as_u8()];
+
+        let mut hasher = Xxh3Default::new();
+        hasher.update(&len_bytes);
+        hasher.update(&op);
+        hasher.update(&pool);
+        hasher.update(&id_bytes);
+        let checksum = hasher.digest().to_le_bytes();
+
+        self.file.write_all(&len_bytes)?;
+        self.file.write_all(&op)?;
+        self.file.write_all(&pool)?;
         self.file.write_all(&id_bytes)?;
         self.file.write_all(&checksum)?;
         Ok(())
@@ -542,10 +627,24 @@ impl JournalWriter {
 }
 
 /// A single operation decoded from the journal.
+///
+/// Each op carries a `pool_id: TierKind` so multi-pool `ArenaSet` replay
+/// via `replay_into_set` can dispatch each op to the right pool. Legacy
+/// v1 records (written before M2 with the non-pool-scoped
+/// `append_alloc` / `append_free` API) decode as `pool_id = TierKind::Hot`.
+/// M1's single-arena callers all implicitly used the Hot tier; anything
+/// else surfaced in a future fix-forward would be a slice 3 concern.
 #[derive(Debug, Clone)]
 pub enum JournalOp {
-    Alloc { chunk_id: ChunkId, chunk_bytes: Vec<u8> },
-    Free { chunk_id: ChunkId },
+    Alloc {
+        pool_id: TierKind,
+        chunk_id: ChunkId,
+        chunk_bytes: Vec<u8>,
+    },
+    Free {
+        pool_id: TierKind,
+        chunk_id: ChunkId,
+    },
 }
 
 /// Journal reader — iterates records in order.
@@ -644,7 +743,11 @@ impl JournalReader {
                 }
                 let chunk_id = u64::from_le_bytes(payload[1..9].try_into().unwrap());
                 let chunk_bytes = payload[9..].to_vec();
+                // Legacy v1 records default to the Hot tier — M1 callers
+                // all used the Hot tier conventionally and there are no
+                // known persisted M1 journals on non-Hot tiers.
                 Ok(Some(JournalOp::Alloc {
+                    pool_id: TierKind::Hot,
                     chunk_id: ChunkId::new(chunk_id),
                     chunk_bytes,
                 }))
@@ -657,6 +760,41 @@ impl JournalReader {
                 }
                 let chunk_id = u64::from_le_bytes(payload[1..9].try_into().unwrap());
                 Ok(Some(JournalOp::Free {
+                    pool_id: TierKind::Hot,
+                    chunk_id: ChunkId::new(chunk_id),
+                }))
+            }
+            OP_ALLOC_V2 => {
+                // Layout: [op u8][pool_id u8][chunk_id u64 LE][chunk_bytes ...]
+                if payload.len() < 1 + 1 + 8 {
+                    return Err(ArenaError::CorruptJournal {
+                        reason: "ALLOC_V2 payload too short".into(),
+                    });
+                }
+                let pool_id = TierKind::from_u8(payload[1])?;
+                let chunk_id =
+                    u64::from_le_bytes(payload[2..10].try_into().unwrap());
+                let chunk_bytes = payload[10..].to_vec();
+                Ok(Some(JournalOp::Alloc {
+                    pool_id,
+                    chunk_id: ChunkId::new(chunk_id),
+                    chunk_bytes,
+                }))
+            }
+            OP_FREE_V2 => {
+                if payload.len() != 1 + 1 + 8 {
+                    return Err(ArenaError::CorruptJournal {
+                        reason: format!(
+                            "FREE_V2 payload wrong size: {}",
+                            payload.len()
+                        ),
+                    });
+                }
+                let pool_id = TierKind::from_u8(payload[1])?;
+                let chunk_id =
+                    u64::from_le_bytes(payload[2..10].try_into().unwrap());
+                Ok(Some(JournalOp::Free {
+                    pool_id,
                     chunk_id: ChunkId::new(chunk_id),
                 }))
             }
@@ -672,18 +810,70 @@ impl JournalReader {
 ///
 /// Replay is idempotent: applying the same journal twice produces the
 /// same arena state.
+///
+/// This is the single-arena entry point — it ignores each op's `pool_id`
+/// and routes every op to the caller-supplied arena. For multi-pool
+/// dispatch use `replay_into_set`.
 pub fn replay_into(arena: &mut Arena, mut reader: JournalReader) -> ArenaResult<usize> {
     let mut applied = 0usize;
     while let Some(op) = reader.next_op()? {
         match op {
-            JournalOp::Alloc { chunk_id, chunk_bytes } => {
+            JournalOp::Alloc { chunk_id, chunk_bytes, .. } => {
                 arena.apply_alloc(chunk_id, &chunk_bytes)?;
             }
-            JournalOp::Free { chunk_id } => {
+            JournalOp::Free { chunk_id, .. } => {
                 arena.apply_free(chunk_id)?;
             }
         }
         applied += 1;
+    }
+    Ok(applied)
+}
+
+/// Replay every record from a journal into a multi-pool `ArenaSet`,
+/// dispatching each op to the pool identified by its `pool_id`. Stops at
+/// the first clean EOF or corrupt record.
+///
+/// If the journal contains an op for a pool that isn't part of this
+/// `ArenaSet`, the op is skipped silently — this permits partial
+/// replays when the set's tier shape has changed between runs. Callers
+/// that want strict behavior should pre-validate their manifests.
+///
+/// # Counter drift caveat
+///
+/// `replay_into_set` dispatches via `pool.arena_mut().apply_alloc` /
+/// `apply_free`, which bypasses `TierPool::alloc` / `free`. As a
+/// consequence, `TierPool::len()` / `TierPool::is_empty()` do NOT
+/// reflect chunks that were inserted via replay — they still show the
+/// pre-replay `allocated_chunks` counter. Callers inspecting
+/// post-replay state should use
+/// `pool.arena().iter_chunk_ids().count()` or `pool.arena().stats()`
+/// instead. The proper `TierPool::replay_alloc` wiring lands in slice 3.
+pub fn replay_into_set(
+    set: &mut ArenaSet,
+    mut reader: JournalReader,
+) -> ArenaResult<usize> {
+    let mut applied = 0usize;
+    while let Some(op) = reader.next_op()? {
+        match op {
+            JournalOp::Alloc {
+                pool_id,
+                chunk_id,
+                chunk_bytes,
+            } => {
+                if let Some(pool) = set.pool_mut(pool_id) {
+                    pool.arena_mut().apply_alloc(chunk_id, &chunk_bytes)?;
+                    applied += 1;
+                }
+                // Missing pool → skip silently.
+            }
+            JournalOp::Free { pool_id, chunk_id } => {
+                if let Some(pool) = set.pool_mut(pool_id) {
+                    pool.arena_mut().apply_free(chunk_id)?;
+                    applied += 1;
+                }
+            }
+        }
     }
     Ok(applied)
 }
