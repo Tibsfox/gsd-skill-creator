@@ -31,7 +31,10 @@ pub use list::{List, LruIndex, NodeIdx};
 pub use persistence::{
     read_checkpoint, replay_into, write_checkpoint, JournalOp, JournalReader, JournalWriter,
 };
-pub use pool::{EvictionKind, TierPolicy, TierPool};
+pub use pool::{
+    ArenaSet, ArenaSetConfig, EvictionKind, Manifest, PoolSpec, TierPolicy, TierPool,
+    ARENA_SET_FORMAT_VERSION,
+};
 pub use types::{ArenaConfig, ChunkHeader, ChunkId, TierKind, CHUNK_MAGIC, HEADER_SIZE};
 
 #[cfg(test)]
