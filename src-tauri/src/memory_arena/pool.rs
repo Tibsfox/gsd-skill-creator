@@ -46,12 +46,12 @@ pub struct CrossfadeHandle {
     pub target_tier: TierKind,
 }
 
-/// In-memory registry of in-flight demote crossfades. Keyed by
-/// `(source_tier, source_chunk_id)` so a chunk is allowed to fade at most
-/// once at a time. The registry is NOT persisted to disk this slice — a
-/// process restart during a fade leaves the source's on-disk state byte
-/// as `FadingOut` with no reachable target; warm-start orphan recovery is
-/// deferred to slice 4 per MISSION.md risk register.
+/// In-memory registry of in-flight crossfades (both demote and promote).
+/// Keyed by `(source_tier, source_chunk_id)` so a chunk is allowed to
+/// fade at most once at a time. The registry is NOT persisted to disk —
+/// a process restart during a fade leaves the source's on-disk state byte
+/// as `FadingOut` with no reachable target. Warm-start orphan recovery
+/// (M4) reverts these orphaned `FadingOut` chunks to `Resident` on reopen.
 #[derive(Debug, Default)]
 pub(crate) struct CrossfadeRegistry {
     by_source: HashMap<(TierKind, ChunkId), CrossfadeHandle>,
@@ -480,6 +480,26 @@ impl ArenaSet {
                 pool.set_allocated_chunks(count);
             }
             pools.insert(spec.tier, pool);
+        }
+
+        // Orphaned-fade recovery sweep (M4). The CrossfadeRegistry is
+        // always empty on fresh open (not persisted), so ALL FadingOut
+        // chunks on disk are crash orphans. Revert them to Resident.
+        for pool in pools.values_mut() {
+            let ids_to_recover: Vec<ChunkId> = pool
+                .arena()
+                .directory_entries()
+                .filter_map(|(id, _slot)| {
+                    match pool.arena().chunk_state(id) {
+                        Ok(ChunkState::FadingOut) => Some(id),
+                        _ => None,
+                    }
+                })
+                .collect();
+            for id in ids_to_recover {
+                pool.arena_mut()
+                    .mark_state(id, ChunkState::Resident)?;
+            }
         }
 
         Ok(Self {
