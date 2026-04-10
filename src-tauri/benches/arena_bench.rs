@@ -33,7 +33,7 @@ use tempfile::tempdir;
 
 use gsd_os_lib::memory_arena::{
     persistence::{replay_into, write_checkpoint, JournalReader, JournalWriter},
-    pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy},
+    pool::{ArenaSet, ArenaSetConfig, CrossfadeHandle, EvictionKind, PoolSpec, TierPolicy},
     types::{ArenaConfig, ChunkId, TierKind},
     warm_start::{InMemoryColdSource, WarmStart, WarmStartConfig},
     Arena,
@@ -459,6 +459,268 @@ fn bench_journal(c: &mut Criterion) {
     group.finish();
 }
 
+// ===== bench: demote_crossfade (M3 Plan 06) ========================
+
+/// Build a 2-pool ArenaSet with Hot (source) + Warm (target) tiers. Each
+/// pool is sized for `num_slots` chunks of up to `slot_size` bytes. Used
+/// by the M3 demote crossfade benches.
+fn two_pool_set(
+    root: &std::path::Path,
+    num_slots: usize,
+    slot_size: u64,
+) -> ArenaSet {
+    let config = ArenaConfig {
+        chunk_size: slot_size,
+        min_chunk_size: 64,
+        max_chunk_size: slot_size * 4,
+        default_policies: ArenaConfig::default().default_policies,
+    };
+    let _ = config; // keep `config` around for future reuse if needed
+    let hot = PoolSpec {
+        tier: TierKind::Hot,
+        chunk_size: slot_size,
+        num_slots,
+        policy: unlimited_policy(),
+    };
+    let warm = PoolSpec {
+        tier: TierKind::Warm,
+        chunk_size: slot_size,
+        num_slots,
+        policy: unlimited_policy(),
+    };
+    ArenaSet::create(
+        ArenaSetConfig::new(root)
+            .with_pool(hot)
+            .with_pool(warm),
+    )
+    .expect("two-pool ArenaSet create")
+}
+
+fn bench_demote_crossfade(c: &mut Criterion) {
+    let mut group = c.benchmark_group("demote_crossfade");
+    group.measurement_time(Duration::from_secs(5));
+
+    // ----- begin_demote: 1 KiB payload (small slots) ------------------
+    //
+    // Per-iter setup: build a fresh ArenaSet with one Hot chunk holding
+    // a 1 KiB payload. The iter body times just `begin_demote` on that
+    // pre-allocated source. Fresh setup per iteration because begin_demote
+    // is one-shot (a second call on the same source hits AlreadyFading).
+    group.throughput(Throughput::Bytes(1024));
+    group.bench_function("begin_1kib", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let mut set = two_pool_set(tmp.path(), 4, 4 * 1024);
+                let source = set
+                    .pool_mut(TierKind::Hot)
+                    .expect("hot")
+                    .alloc(vec![0xAB; 1024])
+                    .expect("alloc source");
+                (set, source, tmp)
+            },
+            |(mut set, source, _tmp)| {
+                let handle = set
+                    .begin_demote(TierKind::Hot, black_box(source), TierKind::Warm)
+                    .expect("begin");
+                black_box(handle);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- begin_demote: 1 MiB payload (large slots) ------------------
+    group.throughput(Throughput::Bytes(1024 * 1024));
+    group.bench_function("begin_1mib", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let mut set = two_pool_set(tmp.path(), 4, 2 * 1024 * 1024);
+                let source = set
+                    .pool_mut(TierKind::Hot)
+                    .expect("hot")
+                    .alloc(vec![0xCD; 1024 * 1024])
+                    .expect("alloc source");
+                (set, source, tmp)
+            },
+            |(mut set, source, _tmp)| {
+                let handle = set
+                    .begin_demote(TierKind::Hot, black_box(source), TierKind::Warm)
+                    .expect("begin");
+                black_box(handle);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- complete_demote: 1 KiB ------------------------------------
+    //
+    // Per-iter setup: alloc source and begin_demote so the handle is
+    // ready. The iter body times just `complete_demote(handle)`.
+    group.throughput(Throughput::Bytes(1024));
+    group.bench_function("complete_1kib", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let mut set = two_pool_set(tmp.path(), 4, 4 * 1024);
+                let source = set
+                    .pool_mut(TierKind::Hot)
+                    .expect("hot")
+                    .alloc(vec![0xEF; 1024])
+                    .expect("alloc source");
+                let handle: CrossfadeHandle = set
+                    .begin_demote(TierKind::Hot, source, TierKind::Warm)
+                    .expect("begin");
+                (set, handle, tmp)
+            },
+            |(mut set, handle, _tmp)| {
+                let canonical = set
+                    .complete_demote(black_box(handle))
+                    .expect("complete");
+                black_box(canonical);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- complete_demote: 1 MiB ------------------------------------
+    group.throughput(Throughput::Bytes(1024 * 1024));
+    group.bench_function("complete_1mib", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let mut set = two_pool_set(tmp.path(), 4, 2 * 1024 * 1024);
+                let source = set
+                    .pool_mut(TierKind::Hot)
+                    .expect("hot")
+                    .alloc(vec![0x12; 1024 * 1024])
+                    .expect("alloc source");
+                let handle: CrossfadeHandle = set
+                    .begin_demote(TierKind::Hot, source, TierKind::Warm)
+                    .expect("begin");
+                (set, handle, tmp)
+            },
+            |(mut set, handle, _tmp)| {
+                let canonical = set
+                    .complete_demote(black_box(handle))
+                    .expect("complete");
+                black_box(canonical);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- end-to-end: begin + complete, 1 KiB -----------------------
+    //
+    // Times the full `begin_demote` → `complete_demote` pipeline. This
+    // is the realistic per-crossfade latency for the caller.
+    group.throughput(Throughput::Bytes(1024));
+    group.bench_function("begin_complete_1kib", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let mut set = two_pool_set(tmp.path(), 4, 4 * 1024);
+                let source = set
+                    .pool_mut(TierKind::Hot)
+                    .expect("hot")
+                    .alloc(vec![0x34; 1024])
+                    .expect("alloc source");
+                (set, source, tmp)
+            },
+            |(mut set, source, _tmp)| {
+                let handle = set
+                    .begin_demote(TierKind::Hot, black_box(source), TierKind::Warm)
+                    .expect("begin");
+                let canonical = set.complete_demote(handle).expect("complete");
+                black_box(canonical);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    group.finish();
+}
+
+// ===== bench: hysteresis (M3 Plan 06) ==============================
+
+fn bench_hysteresis(c: &mut Criterion) {
+    let mut group = c.benchmark_group("hysteresis");
+    group.measurement_time(Duration::from_secs(5));
+
+    // Per-iter setup: build a 2-pool set with a 1-second Warm cooldown,
+    // run a full demote cycle so the target has last_demote_ns stamped,
+    // then ask `begin_demote` to re-demote the target back to Hot — it
+    // should hit the cooldown and return HysteresisCooldown. The iter
+    // body measures how cheap the rejection path is.
+    //
+    // We use the real clock here (not the test-only thread-local). The
+    // whole iter-body is a single begin_demote call that short-circuits
+    // on the cooldown check, so wall-clock elapsed between the setup's
+    // complete_demote and the iter's begin_demote is always << 1 second.
+    group.bench_function("rejects_cooldown_1k", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let hot_spec = PoolSpec {
+                    tier: TierKind::Hot,
+                    chunk_size: ArenaConfig::test().chunk_size,
+                    num_slots: 4,
+                    policy: TierPolicy {
+                        max_chunks: 0,
+                        eviction: EvictionKind::Lru,
+                        promote_after_hits: 0,
+                        demote_after_idle_ns: 0,
+                        // Hot has no cooldown — lets us do the initial
+                        // demote without tripping hysteresis.
+                        demote_cooldown_ns: 0,
+                    },
+                };
+                let warm_spec = PoolSpec {
+                    tier: TierKind::Warm,
+                    chunk_size: ArenaConfig::test().chunk_size,
+                    num_slots: 4,
+                    policy: TierPolicy {
+                        max_chunks: 0,
+                        eviction: EvictionKind::Lru,
+                        promote_after_hits: 0,
+                        demote_after_idle_ns: 0,
+                        // 1-second cooldown — guaranteed to trigger
+                        // since the iter body runs in microseconds.
+                        demote_cooldown_ns: 1_000_000_000,
+                    },
+                };
+                let mut set = ArenaSet::create(
+                    ArenaSetConfig::new(tmp.path())
+                        .with_pool(hot_spec)
+                        .with_pool(warm_spec),
+                )
+                .expect("create");
+                let source = set
+                    .pool_mut(TierKind::Hot)
+                    .expect("hot")
+                    .alloc(vec![0x56; 1024])
+                    .expect("alloc");
+                let handle = set
+                    .begin_demote(TierKind::Hot, source, TierKind::Warm)
+                    .expect("begin");
+                let target = set.complete_demote(handle).expect("complete");
+                (set, target, tmp)
+            },
+            |(mut set, target, _tmp)| {
+                // This call MUST be rejected with HysteresisCooldown.
+                // The iter body measures the cost of that rejection.
+                let err = set
+                    .begin_demote(TierKind::Warm, black_box(target), TierKind::Hot)
+                    .expect_err("cooldown must reject");
+                black_box(err);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    group.finish();
+}
+
 // ===== entry =======================================================
 
 criterion_group!(
@@ -471,5 +733,7 @@ criterion_group!(
     bench_validate_chunk,
     bench_checkpoint,
     bench_journal,
+    bench_demote_crossfade,
+    bench_hysteresis,
 );
 criterion_main!(benches);
