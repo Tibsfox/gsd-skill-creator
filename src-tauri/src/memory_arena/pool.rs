@@ -128,6 +128,21 @@ impl TierPool {
         self.allocated_chunks = self.allocated_chunks.saturating_sub(1);
         Ok(())
     }
+
+    /// Re-register an existing on-disk slot during warm-start. Bumps the
+    /// `allocated_chunks` counter and delegates the arena bookkeeping to
+    /// `Arena::reinsert_slot`. Used exclusively by `WarmStart::open` —
+    /// callers MUST have already validated the slot's header + checksum
+    /// before calling this.
+    pub(crate) fn warm_start_reinsert(
+        &mut self,
+        slot: usize,
+        id: ChunkId,
+    ) -> ArenaResult<()> {
+        self.arena.reinsert_slot(slot, id)?;
+        self.allocated_chunks += 1;
+        Ok(())
+    }
 }
 
 // =============================================================================
