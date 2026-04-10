@@ -6282,3 +6282,75 @@ mod m6_vram_context {
         drop(alloc); // should not panic
     }
 }
+
+// =========================================================================
+// M6 Plan 02 — Host-device transfer primitives
+// =========================================================================
+
+#[cfg(feature = "cuda")]
+mod m6_vram_transfer {
+    use crate::memory_arena::vram::VramContext;
+
+    #[test]
+    fn upload_download_1kib() {
+        let ctx = VramContext::new(0).unwrap();
+        let data: Vec<u8> = (0..1024u32).map(|i| (i % 256) as u8).collect();
+        let mut alloc = ctx.alloc(1024).unwrap();
+        ctx.upload(&data, &mut alloc).unwrap();
+        let mut buf = vec![0u8; 1024];
+        ctx.download(&alloc, &mut buf).unwrap();
+        assert_eq!(data, buf);
+    }
+
+    #[test]
+    fn upload_download_1mib() {
+        let ctx = VramContext::new(0).unwrap();
+        let data: Vec<u8> = (0..1_048_576u32).map(|i| (i % 251) as u8).collect();
+        let mut alloc = ctx.alloc(1_048_576).unwrap();
+        ctx.upload(&data, &mut alloc).unwrap();
+        let mut buf = vec![0u8; 1_048_576];
+        ctx.download(&alloc, &mut buf).unwrap();
+        assert_eq!(data, buf);
+    }
+
+    #[test]
+    fn upload_zero_bytes() {
+        let ctx = VramContext::new(0).unwrap();
+        let mut alloc = ctx.alloc(0).unwrap();
+        ctx.upload(&[], &mut alloc).unwrap();
+    }
+
+    #[test]
+    fn download_wrong_size_buffer() {
+        let ctx = VramContext::new(0).unwrap();
+        let data = vec![0xABu8; 1024];
+        let mut alloc = ctx.alloc(1024).unwrap();
+        ctx.upload(&data, &mut alloc).unwrap();
+        let mut buf = vec![0u8; 512]; // wrong size
+        let err = ctx.download(&alloc, &mut buf);
+        assert!(err.is_err(), "wrong-size buffer should fail");
+    }
+
+    #[test]
+    fn upload_async_download_async_roundtrip() {
+        let ctx = VramContext::new(0).unwrap();
+        let data: Vec<u8> = (0..4096u32).map(|i| (i % 199) as u8).collect();
+        let mut alloc = ctx.alloc(4096).unwrap();
+        let handle = ctx.upload_async(&data, &mut alloc).unwrap();
+        handle.wait().unwrap();
+        let dl_handle = ctx.download_async(&alloc, 4096).unwrap();
+        let result = dl_handle.wait_into().unwrap();
+        assert_eq!(data, result);
+    }
+
+    #[test]
+    fn async_download_returns_correct_data() {
+        let ctx = VramContext::new(0).unwrap();
+        let data = vec![0xCDu8; 2048];
+        let mut alloc = ctx.alloc(2048).unwrap();
+        ctx.upload(&data, &mut alloc).unwrap();
+        let handle = ctx.download_async(&alloc, 2048).unwrap();
+        let result = handle.wait_into().unwrap();
+        assert_eq!(data, result);
+    }
+}
