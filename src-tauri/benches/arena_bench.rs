@@ -164,6 +164,11 @@ fn bench_get(c: &mut Criterion) {
 //
 // Compare the zero-copy hot path (get_chunk_hot) vs the full path (get_chunk).
 // This isolates the performance improvement from returning a slice vs a full Chunk.
+//
+// Baseline (2026-04-10, 1000 chunks, RTX 4060 Ti host):
+//   get_chunk (full):           111.29 ns  — baseline
+//   get_chunk_hot (zero-copy):   48.76 ns  — 2.28x faster
+//   get_chunk_hot_with_header:   52.24 ns  — 2.13x faster
 
 fn bench_get_zero_copy_comparison(c: &mut Criterion) {
     let mut group = c.benchmark_group("get_zero_copy_comparison");
