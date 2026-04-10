@@ -593,6 +593,117 @@ impl ArenaSet {
         Ok(handle)
     }
 
+    /// Finalize a demote crossfade: free the source chunk (which is still
+    /// in `FadingOut` state) and return the target chunk id as the canonical
+    /// reference going forward. The target chunk's data is unchanged.
+    ///
+    /// # Errors
+    /// - `UnknownCrossfade` if the handle is not registered (e.g. already
+    ///   completed, already aborted, or never begun).
+    /// - `UnknownTier` if either tier is not configured.
+    /// - `CrossfadeStateMismatch` if the source's state byte has been
+    ///   tampered with and no longer reads as `FadingOut`.
+    pub fn complete_demote(&mut self, handle: CrossfadeHandle) -> ArenaResult<ChunkId> {
+        // 1. Verify the handle is still registered.
+        let registered = self
+            .crossfade_registry
+            .get(handle.source_tier, handle.source)
+            .ok_or(ArenaError::UnknownCrossfade {
+                chunk_id: handle.source.as_u64(),
+            })?;
+        if registered != handle {
+            return Err(ArenaError::UnknownCrossfade {
+                chunk_id: handle.source.as_u64(),
+            });
+        }
+
+        // 2. Verify the source is still in FadingOut — guard against
+        // direct byte-level tampering by callers.
+        let source_state = self
+            .pools
+            .get(&handle.source_tier)
+            .ok_or(ArenaError::UnknownTier(handle.source_tier))?
+            .arena()
+            .chunk_state(handle.source)?;
+        if source_state != ChunkState::FadingOut {
+            return Err(ArenaError::CrossfadeStateMismatch {
+                chunk_id: handle.source.as_u64(),
+                expected: ChunkState::FadingOut,
+                found: source_state,
+            });
+        }
+
+        // 3. Free the source chunk via the TierPool free path (which
+        // decrements `allocated_chunks` and zeros the valid region).
+        {
+            let source_pool = self
+                .pools
+                .get_mut(&handle.source_tier)
+                .ok_or(ArenaError::UnknownTier(handle.source_tier))?;
+            source_pool.free(handle.source)?;
+        }
+
+        // 4. Deregister. The target is now the canonical chunk.
+        self.crossfade_registry
+            .remove(handle.source_tier, handle.source);
+
+        Ok(handle.target)
+    }
+
+    /// Reverse a demote crossfade: free the target chunk and restore the
+    /// source's state byte to `Resident`. The source chunk is left in
+    /// place and is the canonical reference going forward.
+    ///
+    /// **Ordering rationale.** The source state byte is restored to
+    /// `Resident` BEFORE the target is freed. If the process crashes
+    /// mid-abort, the worst-case residue is an orphaned target (leak of
+    /// slot space, recoverable by warm-start or a subsequent free)
+    /// rather than a `FadingOut` source with no reachable target.
+    ///
+    /// # Errors
+    /// - `UnknownCrossfade` if the handle is not registered.
+    /// - `UnknownTier` if either tier is not configured.
+    pub fn abort_demote(&mut self, handle: CrossfadeHandle) -> ArenaResult<()> {
+        // 1. Verify the handle is still registered.
+        let registered = self
+            .crossfade_registry
+            .get(handle.source_tier, handle.source)
+            .ok_or(ArenaError::UnknownCrossfade {
+                chunk_id: handle.source.as_u64(),
+            })?;
+        if registered != handle {
+            return Err(ArenaError::UnknownCrossfade {
+                chunk_id: handle.source.as_u64(),
+            });
+        }
+
+        // 2. Restore source state to Resident FIRST (crash-safety ordering).
+        {
+            let source_pool = self
+                .pools
+                .get_mut(&handle.source_tier)
+                .ok_or(ArenaError::UnknownTier(handle.source_tier))?;
+            source_pool
+                .arena_mut()
+                .mark_state(handle.source, ChunkState::Resident)?;
+        }
+
+        // 3. Free the target chunk.
+        {
+            let target_pool = self
+                .pools
+                .get_mut(&handle.target_tier)
+                .ok_or(ArenaError::UnknownTier(handle.target_tier))?;
+            target_pool.free(handle.target)?;
+        }
+
+        // 4. Deregister.
+        self.crossfade_registry
+            .remove(handle.source_tier, handle.source);
+
+        Ok(())
+    }
+
     /// Flush all pool mmaps and rewrite the manifest atomically. Call before
     /// dropping if you want on-disk state to reflect recent allocations.
     pub fn flush(&self) -> ArenaResult<()> {
