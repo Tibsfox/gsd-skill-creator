@@ -5466,3 +5466,311 @@ mod m4_orphan_recovery {
         }
     }
 }
+
+// =========================================================================
+// M5 Plan 01 — Tier heat_index ordering and ArenaSet adjacency helpers
+// =========================================================================
+
+#[test]
+fn tier_heat_index_values() {
+    assert_eq!(TierKind::Hot.heat_index(), 4);
+    assert_eq!(TierKind::Warm.heat_index(), 3);
+    assert_eq!(TierKind::Vector.heat_index(), 2);
+    assert_eq!(TierKind::Blob.heat_index(), 1);
+    assert_eq!(TierKind::Resident.heat_index(), 0);
+}
+
+#[test]
+fn tier_hotter_than_colder_than() {
+    assert!(TierKind::Hot.hotter_than(TierKind::Warm));
+    assert!(TierKind::Warm.hotter_than(TierKind::Vector));
+    assert!(TierKind::Vector.hotter_than(TierKind::Blob));
+    assert!(TierKind::Blob.hotter_than(TierKind::Resident));
+
+    assert!(!TierKind::Hot.hotter_than(TierKind::Hot));
+    assert!(!TierKind::Warm.hotter_than(TierKind::Hot));
+
+    assert!(TierKind::Warm.colder_than(TierKind::Hot));
+    assert!(TierKind::Resident.colder_than(TierKind::Blob));
+    assert!(!TierKind::Hot.colder_than(TierKind::Warm));
+    assert!(!TierKind::Warm.colder_than(TierKind::Warm));
+}
+
+#[test]
+fn arena_set_hotter_tier_two_pools() {
+    let dir = tempdir().unwrap();
+    let config = ArenaSetConfig::new(dir.path())
+        .with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy::default_for(TierKind::Hot),
+        })
+        .with_pool(PoolSpec {
+            tier: TierKind::Warm,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy::default_for(TierKind::Warm),
+        });
+    let set = ArenaSet::create(config).unwrap();
+
+    assert_eq!(set.hotter_tier(TierKind::Warm), Some(TierKind::Hot));
+    assert_eq!(set.colder_tier(TierKind::Hot), Some(TierKind::Warm));
+    assert_eq!(set.hotter_tier(TierKind::Hot), None);
+    assert_eq!(set.colder_tier(TierKind::Warm), None);
+}
+
+#[test]
+fn arena_set_adjacency_skips_unconfigured_vector() {
+    let dir = tempdir().unwrap();
+    let config = ArenaSetConfig::new(dir.path())
+        .with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy::default_for(TierKind::Hot),
+        })
+        .with_pool(PoolSpec {
+            tier: TierKind::Warm,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy::default_for(TierKind::Warm),
+        })
+        .with_pool(PoolSpec {
+            tier: TierKind::Blob,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy::default_for(TierKind::Blob),
+        });
+    let set = ArenaSet::create(config).unwrap();
+
+    // Warm → colder should skip Vector (unconfigured) and go to Blob.
+    assert_eq!(set.colder_tier(TierKind::Warm), Some(TierKind::Blob));
+    // Blob → hotter should skip Vector and go to Warm.
+    assert_eq!(set.hotter_tier(TierKind::Blob), Some(TierKind::Warm));
+}
+
+#[test]
+fn arena_set_adjacency_single_pool() {
+    let dir = tempdir().unwrap();
+    let config = ArenaSetConfig::new(dir.path())
+        .with_pool(PoolSpec {
+            tier: TierKind::Warm,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy::default_for(TierKind::Warm),
+        });
+    let set = ArenaSet::create(config).unwrap();
+
+    assert_eq!(set.hotter_tier(TierKind::Warm), None);
+    assert_eq!(set.colder_tier(TierKind::Warm), None);
+}
+
+#[test]
+fn arena_set_adjacency_unconfigured_tier_returns_none() {
+    let dir = tempdir().unwrap();
+    let config = ArenaSetConfig::new(dir.path())
+        .with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy::default_for(TierKind::Hot),
+        });
+    let set = ArenaSet::create(config).unwrap();
+
+    // Vector is not configured, should return None for both directions.
+    assert_eq!(set.hotter_tier(TierKind::Vector), None);
+    assert_eq!(set.colder_tier(TierKind::Vector), None);
+}
+
+// =========================================================================
+// M5 Plan 02 — TierPool::evict_lru with LRU and FIFO paths
+// =========================================================================
+
+#[test]
+fn evict_lru_removes_least_recently_used() {
+    let dir = tempdir().unwrap();
+    let config = ArenaSetConfig::new(dir.path())
+        .with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 8,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
+            },
+        });
+    let mut set = ArenaSet::create(config).unwrap();
+
+    let pool = set.pool_mut(TierKind::Hot).unwrap();
+    let id0 = pool.alloc(vec![0u8; 64]).unwrap();
+    let id1 = pool.alloc(vec![1u8; 64]).unwrap();
+    let id2 = pool.alloc(vec![2u8; 64]).unwrap();
+    let _id3 = pool.alloc(vec![3u8; 64]).unwrap();
+    let _id4 = pool.alloc(vec![4u8; 64]).unwrap();
+
+    // Touch id0 — moves it to front of LRU.
+    pool.arena_mut().touch_chunk(id0).unwrap();
+
+    // Evict — should remove id1 (oldest untouched), NOT id0.
+    let victim = pool.evict_lru().unwrap();
+    assert_eq!(victim, Some(id1));
+    assert_eq!(pool.len(), 4);
+    assert!(!pool.arena().contains(id1));
+    assert!(pool.arena().contains(id0));
+
+    // Evict again — should remove id2 (next oldest).
+    let victim2 = pool.evict_lru().unwrap();
+    assert_eq!(victim2, Some(id2));
+}
+
+#[test]
+fn evict_fifo_removes_oldest_by_creation() {
+    let dir = tempdir().unwrap();
+    let config = ArenaSetConfig::new(dir.path())
+        .with_pool(PoolSpec {
+            tier: TierKind::Blob,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 8,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Fifo,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
+            },
+        });
+    let mut set = ArenaSet::create(config).unwrap();
+
+    let pool = set.pool_mut(TierKind::Blob).unwrap();
+    let id0 = pool.alloc(vec![0u8; 64]).unwrap();
+    let _id1 = pool.alloc(vec![1u8; 64]).unwrap();
+    let _id2 = pool.alloc(vec![2u8; 64]).unwrap();
+
+    // Touch id0 so it's LRU-front, but FIFO should still evict it
+    // because it has the oldest created_at_ns.
+    pool.arena_mut().touch_chunk(id0).unwrap();
+
+    let victim = pool.evict_lru().unwrap();
+    assert_eq!(victim, Some(id0));
+    assert!(!pool.arena().contains(id0));
+}
+
+#[test]
+fn evict_empty_pool_returns_none() {
+    let dir = tempdir().unwrap();
+    let config = ArenaSetConfig::new(dir.path())
+        .with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
+            },
+        });
+    let mut set = ArenaSet::create(config).unwrap();
+
+    let pool = set.pool_mut(TierKind::Hot).unwrap();
+    let result = pool.evict_lru().unwrap();
+    assert_eq!(result, None);
+}
+
+#[test]
+fn evict_lru_decrements_allocated_chunks() {
+    let dir = tempdir().unwrap();
+    let config = ArenaSetConfig::new(dir.path())
+        .with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
+            },
+        });
+    let mut set = ArenaSet::create(config).unwrap();
+
+    let pool = set.pool_mut(TierKind::Hot).unwrap();
+    pool.alloc(vec![0u8; 64]).unwrap();
+    pool.alloc(vec![1u8; 64]).unwrap();
+    assert_eq!(pool.len(), 2);
+
+    pool.evict_lru().unwrap();
+    assert_eq!(pool.len(), 1);
+}
+
+// =========================================================================
+// M5 Plan 03 — access_count reset and header accessor tests
+// =========================================================================
+
+#[test]
+fn read_access_count_fresh_chunk_is_zero() {
+    let config = ArenaConfig::test();
+    let mut arena = Arena::new(config, 4).unwrap();
+    let id = arena.alloc_chunk(TierKind::Hot, vec![0u8; 64]).unwrap();
+    assert_eq!(arena.read_access_count(id).unwrap(), 0);
+}
+
+#[test]
+fn read_access_count_after_touches() {
+    let config = ArenaConfig::test();
+    let mut arena = Arena::new(config, 4).unwrap();
+    let id = arena.alloc_chunk(TierKind::Hot, vec![0u8; 64]).unwrap();
+
+    arena.touch_chunk(id).unwrap();
+    arena.touch_chunk(id).unwrap();
+    arena.touch_chunk(id).unwrap();
+
+    assert_eq!(arena.read_access_count(id).unwrap(), 3);
+}
+
+#[test]
+fn read_last_access_ns_after_touch() {
+    let config = ArenaConfig::test();
+    let mut arena = Arena::new(config, 4).unwrap();
+    let id = arena.alloc_chunk(TierKind::Hot, vec![0u8; 64]).unwrap();
+
+    arena.touch_chunk(id).unwrap();
+    let ts = arena.read_last_access_ns(id).unwrap();
+    assert!(ts > 0, "last_access_ns should be non-zero after touch");
+}
+
+#[test]
+fn reset_access_count_zeroes_and_preserves_checksum() {
+    let config = ArenaConfig::test();
+    let mut arena = Arena::new(config, 4).unwrap();
+    let id = arena.alloc_chunk(TierKind::Hot, vec![42u8; 64]).unwrap();
+
+    arena.touch_chunk(id).unwrap();
+    arena.touch_chunk(id).unwrap();
+    assert_eq!(arena.read_access_count(id).unwrap(), 2);
+
+    arena.reset_access_count(id).unwrap();
+    assert_eq!(arena.read_access_count(id).unwrap(), 0);
+
+    // Chunk should still be valid (checksum re-computed).
+    let chunk = arena.get_chunk(id).unwrap();
+    assert_eq!(chunk.payload(), &[42u8; 64]);
+}
+
+#[test]
+fn reset_access_count_unknown_id_errors() {
+    let config = ArenaConfig::test();
+    let arena = Arena::new(config, 4).unwrap();
+    let result = arena.reset_access_count(ChunkId::new(999));
+    assert!(matches!(result, Err(ArenaError::UnknownChunkId(999))));
+}
