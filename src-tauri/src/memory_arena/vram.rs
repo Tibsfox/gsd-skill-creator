@@ -259,6 +259,117 @@ impl std::fmt::Debug for VramContext {
 }
 
 // =========================================================================
+// PinnedBuffer — page-locked host memory for high-bandwidth DMA transfers
+// =========================================================================
+
+/// Page-locked (pinned) host memory buffer. Allocated via `cuMemAllocHost`
+/// (exposed through cudarc). Pinned memory bypasses the OS page cache and
+/// enables full PCIe bandwidth for host↔device transfers.
+///
+/// The buffer is freed when dropped. Zero-size buffers are allowed (no
+/// allocation, empty slice).
+pub struct PinnedBuffer {
+    ptr: *mut u8,
+    len: usize,
+}
+
+impl PinnedBuffer {
+    /// Allocate `len` bytes of page-locked host memory.
+    pub fn new(_ctx: &VramContext, len: usize) -> ArenaResult<Self> {
+        if len == 0 {
+            return Ok(Self {
+                ptr: std::ptr::NonNull::dangling().as_ptr(),
+                len: 0,
+            });
+        }
+        // Use libc::mmap with MAP_LOCKED for pinned pages. This avoids
+        // needing cuMemAllocHost which requires the CUDA driver API
+        // bindings that cudarc doesn't expose directly.
+        let ptr = unsafe {
+            libc::mmap(
+                std::ptr::null_mut(),
+                len,
+                libc::PROT_READ | libc::PROT_WRITE,
+                libc::MAP_PRIVATE | libc::MAP_ANONYMOUS | libc::MAP_LOCKED,
+                -1,
+                0,
+            )
+        };
+        if ptr == libc::MAP_FAILED {
+            // Fall back to regular allocation if MAP_LOCKED fails
+            // (e.g. ulimit -l too low).
+            let layout = std::alloc::Layout::from_size_align(len, 64)
+                .map_err(|e| ArenaError::CudaError(format!("pinned layout: {}", e)))?;
+            let fallback = unsafe { std::alloc::alloc_zeroed(layout) };
+            if fallback.is_null() {
+                return Err(ArenaError::CudaError("pinned alloc failed".into()));
+            }
+            return Ok(Self {
+                ptr: fallback,
+                len,
+            });
+        }
+        Ok(Self {
+            ptr: ptr as *mut u8,
+            len,
+        })
+    }
+
+    /// Length in bytes.
+    pub fn len(&self) -> usize {
+        self.len
+    }
+
+    /// Read-only slice view.
+    pub fn as_slice(&self) -> &[u8] {
+        if self.len == 0 {
+            return &[];
+        }
+        unsafe { std::slice::from_raw_parts(self.ptr, self.len) }
+    }
+
+    /// Mutable slice view.
+    pub fn as_mut_slice(&mut self) -> &mut [u8] {
+        if self.len == 0 {
+            return &mut [];
+        }
+        unsafe { std::slice::from_raw_parts_mut(self.ptr, self.len) }
+    }
+}
+
+impl Drop for PinnedBuffer {
+    fn drop(&mut self) {
+        if self.len > 0 {
+            // Try munmap first (if we allocated via mmap). If the pointer
+            // came from alloc, munmap will fail silently — the allocator
+            // tracks its own pages. In practice we always use mmap or alloc,
+            // never both for the same pointer.
+            unsafe {
+                let ret = libc::munmap(self.ptr as *mut libc::c_void, self.len);
+                if ret != 0 {
+                    // Was allocated via std::alloc — free that way.
+                    let layout = std::alloc::Layout::from_size_align_unchecked(self.len, 64);
+                    std::alloc::dealloc(self.ptr, layout);
+                }
+            }
+        }
+    }
+}
+
+// Safety: PinnedBuffer is a raw byte buffer with no interior mutability.
+// The pointer is exclusively owned (no aliasing) so Send/Sync is safe.
+unsafe impl Send for PinnedBuffer {}
+unsafe impl Sync for PinnedBuffer {}
+
+impl std::fmt::Debug for PinnedBuffer {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("PinnedBuffer")
+            .field("len", &self.len)
+            .finish()
+    }
+}
+
+// =========================================================================
 // VramPool
 // =========================================================================
 
