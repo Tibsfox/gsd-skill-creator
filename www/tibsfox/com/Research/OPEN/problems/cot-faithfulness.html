@@ -122,6 +122,12 @@ footer a { color:rgba(255,255,255,0.3); }
       <div class="arxiv">arXiv:2508.01191</div>
       <p>Argues that apparent faithfulness improvements from inference scaling may be a "mirage" -- the model learns to produce more convincing-looking reasoning without actually increasing causal dependence on the reasoning steps. Proposes new metrics that distinguish between superficially faithful and genuinely faithful chain-of-thought.</p>
     </div>
+
+    <div class="paper">
+      <h3>Reasoning Fails Where Step Flow Breaks</h3>
+      <div class="arxiv"><a href="https://arxiv.org/abs/2604.06695">arXiv:2604.06695</a> &middot; Xu et al., ACL 2026</div>
+      <p>Introduces Step-Saliency, a diagnostic that pools attention&ndash;gradient scores into step-to-step maps to identify information-flow failures in long reasoning chains. Uncovers two recurring failure patterns: Shallow Lock-in (early layers over-attending to the current step) and Deep Decay (later layers losing reasoning focus). Proposes StepFlow, a parameter-free test-time intervention that corrects these patterns without retraining, improving accuracy across math, science, and coding tasks. Directly connects to our thinking-divergence observations &mdash; the step-flow failures they identify mechanistically are the same class of reasoning breakdown we observe when Claude&rsquo;s chain-of-thought diverges from its final answer.</p>
+    </div>
   </section>
 
   <section>

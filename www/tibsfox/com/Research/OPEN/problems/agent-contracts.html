@@ -122,6 +122,18 @@ footer a { color:rgba(255,255,255,0.3); }
       <div class="arxiv">arXiv:2602.22302</div>
       <p>Extends agent contracts with the Drift Bounds Theorem: given a contract and a model's behavioral distribution, the theorem bounds the probability that the agent will violate its contract over a given number of steps. Validated on 1,980 sessions across multiple models and task types. The drift bound provides a principled way to set contract resource limits -- choose the limit where the probability of contract violation drops below a target threshold. Key finding: behavioral drift is predictable from early execution, enabling proactive contract renegotiation before violation.</p>
     </div>
+
+    <div class="paper">
+      <h3>MCP-DPT: Defense-Placement Taxonomy for MCP Security</h3>
+      <div class="arxiv"><a href="https://arxiv.org/abs/2604.07551">arXiv:2604.07551</a> &middot; Rostamzadeh et al., April 2026</div>
+      <p>Proposes a layer-aligned taxonomy organizing MCP threats by responsible architectural component rather than attack type. Maps defenses across six MCP layers, identifying primary and secondary defense points for defense-in-depth. Key finding: protection is unevenly distributed, with persistent gaps at the host orchestration, transport, and supply-chain layers. MCP security weaknesses often stem from architectural misalignment rather than implementation flaws. Directly maps to our security-hygiene skill coverage &mdash; the taxonomy provides a systematic framework for auditing which layers our current defenses cover and where gaps remain.</p>
+    </div>
+
+    <div class="paper">
+      <h3>TRUSTDESC: Preventing Tool Poisoning in LLM Apps</h3>
+      <div class="arxiv"><a href="https://arxiv.org/abs/2604.07536">arXiv:2604.07536</a> &middot; Ye et al., April 2026</div>
+      <p>Addresses tool poisoning attacks where malicious instructions are embedded in tool descriptions. TRUSTDESC automatically generates trusted descriptions from implementations through three stages: static code analysis to extract actual behavior, LLM-guided synthesis of descriptions, and dynamic verification testing. Evaluated across 52 real-world tools, improving task completion while mitigating implicit poisoning with minimal overhead. Relevant to our MCP gateway &mdash; every tool registered in our arena-tools.ts and memory-tools.ts could be verified through this pipeline to ensure descriptions match implementation.</p>
+    </div>
   </section>
 
   <div class="callout">
