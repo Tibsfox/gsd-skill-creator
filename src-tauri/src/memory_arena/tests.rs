@@ -2627,3 +2627,330 @@ mod validate_chunk_tests {
         assert_eq!(failed, 1);
     }
 }
+
+// =============================================================================
+// memory-arena-m2 Plan 04 — Per-pool journal dispatch + multi-pool replay
+// =============================================================================
+
+#[cfg(test)]
+mod journal_dispatch_tests {
+    use crate::memory_arena::persistence::{
+        replay_into_set, JournalOp, JournalReader, JournalWriter,
+    };
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind};
+    use crate::memory_arena::Chunk;
+    use tempfile::tempdir;
+
+    fn unlimited_spec(tier: TierKind, num_slots: usize) -> PoolSpec {
+        PoolSpec {
+            tier,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+            },
+        }
+    }
+
+    /// Build a ready-to-journal serialized chunk with the given id, tier,
+    /// and payload bytes.
+    fn mk_chunk_bytes(id: u64, tier: TierKind, payload: Vec<u8>) -> Vec<u8> {
+        let mut chunk = Chunk::new(ChunkId::new(id), tier, payload);
+        chunk.finalize();
+        chunk.serialize()
+    }
+
+    #[test]
+    fn append_alloc_for_pool_round_trip_single_pool() {
+        let dir = tempdir().unwrap();
+        let journal_path = dir.path().join("pool.journal");
+
+        let mut writer = JournalWriter::open(&journal_path).unwrap();
+        // Write 3 pool-scoped alloc records for Hot.
+        for i in 1u64..=3 {
+            let bytes = mk_chunk_bytes(i, TierKind::Hot, vec![i as u8; 32]);
+            writer
+                .append_alloc_for_pool(TierKind::Hot, ChunkId::new(i), &bytes)
+                .unwrap();
+        }
+        // And one free record for Hot.
+        writer
+            .append_free_for_pool(TierKind::Hot, ChunkId::new(2))
+            .unwrap();
+        writer.flush().unwrap();
+        drop(writer);
+
+        // Read back via the standard reader.
+        let mut reader = JournalReader::open(&journal_path).unwrap();
+        let mut seen_allocs = 0;
+        let mut seen_frees = 0;
+        while let Some(op) = reader.next_op().unwrap() {
+            match op {
+                JournalOp::Alloc { pool_id, chunk_id, .. } => {
+                    assert_eq!(pool_id, TierKind::Hot);
+                    assert!(matches!(chunk_id.as_u64(), 1 | 2 | 3));
+                    seen_allocs += 1;
+                }
+                JournalOp::Free { pool_id, chunk_id } => {
+                    assert_eq!(pool_id, TierKind::Hot);
+                    assert_eq!(chunk_id.as_u64(), 2);
+                    seen_frees += 1;
+                }
+            }
+        }
+        assert_eq!(seen_allocs, 3);
+        assert_eq!(seen_frees, 1);
+    }
+
+    #[test]
+    fn append_alloc_for_pool_round_trip_multi_pool() {
+        let dir = tempdir().unwrap();
+        let journal_path = dir.path().join("multi.journal");
+
+        let mut writer = JournalWriter::open(&journal_path).unwrap();
+        // 2 Hot + 2 Warm + 1 Vector.
+        writer
+            .append_alloc_for_pool(
+                TierKind::Hot,
+                ChunkId::new(1),
+                &mk_chunk_bytes(1, TierKind::Hot, vec![1u8; 16]),
+            )
+            .unwrap();
+        writer
+            .append_alloc_for_pool(
+                TierKind::Warm,
+                ChunkId::new(1),
+                &mk_chunk_bytes(1, TierKind::Warm, vec![2u8; 16]),
+            )
+            .unwrap();
+        writer
+            .append_alloc_for_pool(
+                TierKind::Hot,
+                ChunkId::new(2),
+                &mk_chunk_bytes(2, TierKind::Hot, vec![3u8; 16]),
+            )
+            .unwrap();
+        writer
+            .append_alloc_for_pool(
+                TierKind::Warm,
+                ChunkId::new(2),
+                &mk_chunk_bytes(2, TierKind::Warm, vec![4u8; 16]),
+            )
+            .unwrap();
+        writer
+            .append_alloc_for_pool(
+                TierKind::Vector,
+                ChunkId::new(1),
+                &mk_chunk_bytes(1, TierKind::Vector, vec![5u8; 16]),
+            )
+            .unwrap();
+        writer.flush().unwrap();
+        drop(writer);
+
+        // Decode every op and verify the pool_id is what we wrote.
+        let mut reader = JournalReader::open(&journal_path).unwrap();
+        let mut hot_allocs = 0;
+        let mut warm_allocs = 0;
+        let mut vec_allocs = 0;
+        while let Some(op) = reader.next_op().unwrap() {
+            match op {
+                JournalOp::Alloc { pool_id: TierKind::Hot, .. } => hot_allocs += 1,
+                JournalOp::Alloc { pool_id: TierKind::Warm, .. } => warm_allocs += 1,
+                JournalOp::Alloc { pool_id: TierKind::Vector, .. } => vec_allocs += 1,
+                other => panic!("unexpected op: {:?}", other),
+            }
+        }
+        assert_eq!(hot_allocs, 2);
+        assert_eq!(warm_allocs, 2);
+        assert_eq!(vec_allocs, 1);
+    }
+
+    #[test]
+    fn replay_into_set_dispatches_by_pool() {
+        let dir = tempdir().unwrap();
+        let journal_path = dir.path().join("dispatch.journal");
+
+        // Write a mixed stream of ops targeting Hot + Warm.
+        let mut writer = JournalWriter::open(&journal_path).unwrap();
+        writer
+            .append_alloc_for_pool(
+                TierKind::Hot,
+                ChunkId::new(1),
+                &mk_chunk_bytes(1, TierKind::Hot, b"hot-one".to_vec()),
+            )
+            .unwrap();
+        writer
+            .append_alloc_for_pool(
+                TierKind::Warm,
+                ChunkId::new(1),
+                &mk_chunk_bytes(1, TierKind::Warm, b"warm-one".to_vec()),
+            )
+            .unwrap();
+        writer
+            .append_alloc_for_pool(
+                TierKind::Hot,
+                ChunkId::new(2),
+                &mk_chunk_bytes(2, TierKind::Hot, b"hot-two".to_vec()),
+            )
+            .unwrap();
+        writer.flush().unwrap();
+        drop(writer);
+
+        // Fresh ArenaSet with Hot + Warm pools.
+        let set_root = dir.path().join("arena_set");
+        let mut set = ArenaSet::create(
+            ArenaSetConfig::new(&set_root)
+                .with_pool(unlimited_spec(TierKind::Hot, 8))
+                .with_pool(unlimited_spec(TierKind::Warm, 8)),
+        )
+        .expect("create");
+
+        let reader = JournalReader::open(&journal_path).unwrap();
+        let applied = replay_into_set(&mut set, reader).unwrap();
+        assert_eq!(applied, 3);
+
+        // Both pools should reflect the dispatched ops. We intentionally
+        // read the arena-level count (iter_chunk_ids) per the plan's
+        // documented counter-drift trade-off.
+        let hot_count = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .iter_chunk_ids()
+            .count();
+        let warm_count = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .iter_chunk_ids()
+            .count();
+        assert_eq!(hot_count, 2);
+        assert_eq!(warm_count, 1);
+        assert!(set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .contains(ChunkId::new(1)));
+        assert!(set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .contains(ChunkId::new(2)));
+        assert!(set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .contains(ChunkId::new(1)));
+    }
+
+    #[test]
+    fn legacy_v1_op_decodes_as_hot_tier() {
+        // Write a record via the legacy (non-pool-scoped) API.
+        let dir = tempdir().unwrap();
+        let journal_path = dir.path().join("legacy.journal");
+
+        let bytes = mk_chunk_bytes(7, TierKind::Hot, vec![9u8; 24]);
+        let mut writer = JournalWriter::open(&journal_path).unwrap();
+        writer.append_alloc(ChunkId::new(7), &bytes).unwrap();
+        writer.append_free(ChunkId::new(7)).unwrap();
+        writer.flush().unwrap();
+        drop(writer);
+
+        // Decode: the legacy op should surface as pool_id = Hot.
+        let mut reader = JournalReader::open(&journal_path).unwrap();
+        let op1 = reader.next_op().unwrap().expect("alloc op");
+        match op1 {
+            JournalOp::Alloc { pool_id, chunk_id, .. } => {
+                assert_eq!(pool_id, TierKind::Hot);
+                assert_eq!(chunk_id.as_u64(), 7);
+            }
+            _ => panic!("expected Alloc"),
+        }
+        let op2 = reader.next_op().unwrap().expect("free op");
+        match op2 {
+            JournalOp::Free { pool_id, chunk_id } => {
+                assert_eq!(pool_id, TierKind::Hot);
+                assert_eq!(chunk_id.as_u64(), 7);
+            }
+            _ => panic!("expected Free"),
+        }
+        assert!(reader.next_op().unwrap().is_none());
+    }
+
+    #[test]
+    fn replay_into_set_corrupt_op_stops_cleanly_no_poisoning() {
+        let dir = tempdir().unwrap();
+        let journal_path = dir.path().join("corrupt.journal");
+
+        // Write 3 clean Hot ops + 3 clean Warm ops, then truncate the
+        // file mid-record to simulate a crash partway into the Warm ops.
+        let mut writer = JournalWriter::open(&journal_path).unwrap();
+        for i in 1u64..=3 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Hot,
+                    ChunkId::new(i),
+                    &mk_chunk_bytes(i, TierKind::Hot, vec![(i as u8); 24]),
+                )
+                .unwrap();
+        }
+        for i in 1u64..=3 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Warm,
+                    ChunkId::new(i),
+                    &mk_chunk_bytes(i, TierKind::Warm, vec![(i as u8 + 10); 24]),
+                )
+                .unwrap();
+        }
+        writer.flush().unwrap();
+        drop(writer);
+
+        // Cut off the tail 24 bytes — should land mid-record and truncate
+        // the last Warm op (and maybe part of the one before).
+        let mut bytes = std::fs::read(&journal_path).unwrap();
+        assert!(bytes.len() > 30);
+        bytes.truncate(bytes.len() - 24);
+        std::fs::write(&journal_path, &bytes).unwrap();
+
+        let set_root = dir.path().join("arena_set");
+        let mut set = ArenaSet::create(
+            ArenaSetConfig::new(&set_root)
+                .with_pool(unlimited_spec(TierKind::Hot, 8))
+                .with_pool(unlimited_spec(TierKind::Warm, 8)),
+        )
+        .expect("create");
+
+        let reader = JournalReader::open(&journal_path).unwrap();
+        // Replay stops cleanly at the last intact record — no error.
+        let applied = replay_into_set(&mut set, reader).unwrap();
+        // All 3 Hot ops landed (they come first).
+        assert!(applied >= 3, "expected at least 3 ops to land, got {}", applied);
+        let hot_count = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .iter_chunk_ids()
+            .count();
+        assert_eq!(hot_count, 3, "all 3 Hot ops should have landed");
+        // The truncated region breaks at least the final Warm op, so
+        // Warm should have fewer than 3 ops.
+        let warm_count = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .iter_chunk_ids()
+            .count();
+        assert!(
+            warm_count < 3,
+            "expected truncation to drop at least one Warm op, got {}",
+            warm_count
+        );
+    }
+}
