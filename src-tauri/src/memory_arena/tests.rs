@@ -6937,3 +6937,157 @@ mod buddy_allocator_tests {
         assert!(result.is_ok(), "should be able to alloc after full free (coalescence)");
     }
 }
+
+// ===== TlsfAllocator tests ============================================
+
+mod tlsf_allocator_tests {
+    use crate::memory_arena::allocator::{ChunkAllocator, TlsfAllocator, TlsfConfig};
+    use crate::memory_arena::error::ArenaError;
+
+    const MIN_BLOCK: usize = 64;
+    // 64 KiB total, power-of-two
+    const TOTAL: usize = 64 * 1024;
+
+    fn make_tlsf() -> TlsfAllocator {
+        TlsfAllocator::new(TOTAL, MIN_BLOCK, TlsfConfig::default())
+    }
+
+    #[test]
+    fn test_tlsf_alloc_returns_correct_size() {
+        let mut tlsf = make_tlsf();
+        let (_off, actual_size) = tlsf.alloc(100).unwrap();
+        assert!(actual_size >= 100, "actual_size should be >= requested");
+    }
+
+    #[test]
+    fn test_tlsf_alloc_small_and_large_mixed() {
+        let mut tlsf = make_tlsf();
+        let (_, sz1) = tlsf.alloc(64).unwrap();
+        let (_, sz2) = tlsf.alloc(1024).unwrap();
+        let (_, sz3) = tlsf.alloc(16384).unwrap();
+        assert!(sz1 >= 64);
+        assert!(sz2 >= 1024);
+        assert!(sz3 >= 16384);
+    }
+
+    #[test]
+    fn test_tlsf_free_coalesces_adjacent() {
+        let mut tlsf = make_tlsf();
+        // Alloc two blocks
+        let (off1, sz1) = tlsf.alloc(MIN_BLOCK).unwrap();
+        let (off2, _sz2) = tlsf.alloc(MIN_BLOCK).unwrap();
+        // They should be adjacent
+        assert_eq!(off2, off1 + sz1);
+        // Free both — they should coalesce
+        tlsf.free(off1).unwrap();
+        tlsf.free(off2).unwrap();
+        // Now a 2*MIN_BLOCK alloc should succeed
+        let result = tlsf.alloc(MIN_BLOCK * 2);
+        assert!(result.is_ok(), "coalesced block should be available");
+    }
+
+    #[test]
+    fn test_tlsf_o1_alloc_scaling() {
+        // Verify alloc time doesn't grow quadratically with count.
+        // This is a sanity check, not a precise benchmark.
+        let mut tlsf = TlsfAllocator::new(
+            1024 * 1024, // 1 MiB
+            MIN_BLOCK,
+            TlsfConfig::default(),
+        );
+        let start = std::time::Instant::now();
+        let n = 10_000;
+        let mut offsets = Vec::with_capacity(n);
+        for _ in 0..n {
+            match tlsf.alloc(MIN_BLOCK) {
+                Ok((off, _)) => offsets.push(off),
+                Err(_) => break,
+            }
+        }
+        let elapsed = start.elapsed();
+        // With O(1) alloc, 10K allocs should be well under 1 second
+        assert!(
+            elapsed.as_millis() < 1000,
+            "10K allocs took {:?} — expected O(1) per alloc",
+            elapsed,
+        );
+        assert!(offsets.len() > 1000, "should have allocated many blocks");
+    }
+
+    #[test]
+    fn test_tlsf_mixed_free_realloc() {
+        let mut tlsf = make_tlsf();
+        let (off1, _) = tlsf.alloc(64).unwrap();
+        let (off2, _) = tlsf.alloc(1024).unwrap();
+        let (off3, _) = tlsf.alloc(4096).unwrap();
+        // Free all
+        tlsf.free(off1).unwrap();
+        tlsf.free(off2).unwrap();
+        tlsf.free(off3).unwrap();
+        // Re-alloc in different order — all should succeed
+        tlsf.alloc(4096).unwrap();
+        tlsf.alloc(64).unwrap();
+        tlsf.alloc(1024).unwrap();
+    }
+
+    #[test]
+    fn test_tlsf_capacity_tracking() {
+        let mut tlsf = make_tlsf();
+        assert_eq!(tlsf.capacity(), TOTAL);
+        assert_eq!(tlsf.free_bytes(), TOTAL);
+        assert_eq!(tlsf.allocated_bytes(), 0);
+
+        let (_off, sz) = tlsf.alloc(100).unwrap();
+        assert_eq!(tlsf.allocated_bytes(), sz);
+        assert_eq!(tlsf.free_bytes(), TOTAL - sz);
+    }
+
+    #[test]
+    fn test_tlsf_num_allocations() {
+        let mut tlsf = make_tlsf();
+        assert_eq!(tlsf.num_allocations(), 0);
+        let (off, _) = tlsf.alloc(64).unwrap();
+        tlsf.alloc(128).unwrap();
+        assert_eq!(tlsf.num_allocations(), 2);
+        tlsf.free(off).unwrap();
+        assert_eq!(tlsf.num_allocations(), 1);
+    }
+
+    #[test]
+    fn test_tlsf_exhaustion() {
+        let mut tlsf = make_tlsf();
+        tlsf.alloc(TOTAL).unwrap();
+        let err = tlsf.alloc(1).unwrap_err();
+        assert!(matches!(err, ArenaError::OutOfSlots { .. }));
+    }
+
+    #[test]
+    fn test_tlsf_fragmentation_reasonable() {
+        let mut tlsf = make_tlsf();
+        // Mixed workload
+        tlsf.alloc(100).unwrap();
+        tlsf.alloc(500).unwrap();
+        tlsf.alloc(2000).unwrap();
+        let frag = tlsf.fragmentation();
+        assert!(frag >= 0.0);
+        assert!(frag < 1.0);
+    }
+
+    #[test]
+    fn test_tlsf_coalescence_chain() {
+        let mut tlsf = make_tlsf();
+        // Alloc 4 adjacent blocks
+        let (off1, _) = tlsf.alloc(MIN_BLOCK).unwrap();
+        let (off2, _) = tlsf.alloc(MIN_BLOCK).unwrap();
+        let (off3, _) = tlsf.alloc(MIN_BLOCK).unwrap();
+        let (off4, _) = tlsf.alloc(MIN_BLOCK).unwrap();
+        // Free all in order — should chain-coalesce
+        tlsf.free(off1).unwrap();
+        tlsf.free(off2).unwrap();
+        tlsf.free(off3).unwrap();
+        tlsf.free(off4).unwrap();
+        // Full recovery: 4*MIN_BLOCK contiguous should be available
+        let result = tlsf.alloc(4 * MIN_BLOCK);
+        assert!(result.is_ok(), "chain coalescence should recover contiguous block");
+    }
+}
