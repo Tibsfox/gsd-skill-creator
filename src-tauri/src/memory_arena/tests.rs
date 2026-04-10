@@ -6354,3 +6354,92 @@ mod m6_vram_transfer {
         assert_eq!(data, result);
     }
 }
+
+// =========================================================================
+// M6 Plan 03 — VramPool
+// =========================================================================
+
+#[cfg(feature = "cuda")]
+mod m6_vram_pool {
+    use std::sync::Arc;
+    use crate::memory_arena::vram::{VramContext, VramPool};
+    use crate::memory_arena::types::{TierKind, TierPolicy};
+
+    fn test_pool() -> VramPool {
+        let ctx = Arc::new(VramContext::new(0).unwrap());
+        VramPool::new(ctx, TierKind::Vector, 4096, 8, TierPolicy::default_for(TierKind::Vector)).unwrap()
+    }
+
+    #[test]
+    fn vram_pool_new() {
+        let pool = test_pool();
+        assert!(pool.is_empty());
+        assert_eq!(pool.len(), 0);
+        assert_eq!(pool.tier(), TierKind::Vector);
+    }
+
+    #[test]
+    fn vram_pool_alloc_and_get() {
+        let mut pool = test_pool();
+        let data = vec![0xABu8; 1024];
+        let id = pool.alloc(&data).unwrap();
+        let got = pool.get(id).unwrap();
+        assert_eq!(data, got);
+        assert_eq!(pool.len(), 1);
+    }
+
+    #[test]
+    fn vram_pool_alloc_multiple() {
+        let mut pool = test_pool();
+        let d1 = vec![1u8; 512];
+        let d2 = vec![2u8; 1024];
+        let d3 = vec![3u8; 256];
+        let id1 = pool.alloc(&d1).unwrap();
+        let id2 = pool.alloc(&d2).unwrap();
+        let id3 = pool.alloc(&d3).unwrap();
+        assert_eq!(pool.get(id1).unwrap(), d1);
+        assert_eq!(pool.get(id2).unwrap(), d2);
+        assert_eq!(pool.get(id3).unwrap(), d3);
+        assert_eq!(pool.len(), 3);
+    }
+
+    #[test]
+    fn vram_pool_free() {
+        let mut pool = test_pool();
+        let id = pool.alloc(&vec![0xFFu8; 64]).unwrap();
+        assert_eq!(pool.len(), 1);
+        pool.free(id).unwrap();
+        assert!(pool.is_empty());
+        assert!(pool.get(id).is_err());
+    }
+
+    #[test]
+    fn vram_pool_alloc_after_free() {
+        let mut pool = test_pool();
+        let id1 = pool.alloc(&vec![1u8; 128]).unwrap();
+        pool.free(id1).unwrap();
+        let data2 = vec![2u8; 256];
+        let id2 = pool.alloc(&data2).unwrap();
+        assert_eq!(pool.get(id2).unwrap(), data2);
+        assert_eq!(pool.len(), 1);
+    }
+
+    #[test]
+    fn vram_pool_full() {
+        let ctx = Arc::new(VramContext::new(0).unwrap());
+        let mut pool = VramPool::new(ctx, TierKind::Vector, 1024, 2, TierPolicy::default_for(TierKind::Vector)).unwrap();
+        pool.alloc(&vec![0u8; 64]).unwrap();
+        pool.alloc(&vec![0u8; 64]).unwrap();
+        let err = pool.alloc(&vec![0u8; 64]);
+        assert!(err.is_err(), "should fail when pool is full");
+    }
+
+    #[test]
+    fn vram_pool_contains() {
+        let mut pool = test_pool();
+        let id = pool.alloc(&vec![0u8; 32]).unwrap();
+        assert!(pool.contains(id));
+        pool.free(id).unwrap();
+        assert!(!pool.contains(id));
+    }
+}
