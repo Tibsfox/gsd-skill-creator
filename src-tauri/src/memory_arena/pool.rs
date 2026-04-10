@@ -30,8 +30,68 @@ use serde::{Deserialize, Serialize};
 use crate::memory_arena::arena::Arena;
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::types::{
-    ArenaConfig, ChunkId, TierKind, MAX_CHUNK_SIZE, MIN_CHUNK_SIZE,
+    ArenaConfig, ChunkId, ChunkState, TierKind, MAX_CHUNK_SIZE, MIN_CHUNK_SIZE,
 };
+
+/// Handle returned by `ArenaSet::begin_demote`. Callers pass it to
+/// `complete_demote` or `abort_demote` to finalize or reverse the crossfade.
+///
+/// `Copy` so callers can stash it alongside other per-chunk metadata
+/// without dealing with ownership moves.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub struct CrossfadeHandle {
+    pub source: ChunkId,
+    pub source_tier: TierKind,
+    pub target: ChunkId,
+    pub target_tier: TierKind,
+}
+
+/// In-memory registry of in-flight demote crossfades. Keyed by
+/// `(source_tier, source_chunk_id)` so a chunk is allowed to fade at most
+/// once at a time. The registry is NOT persisted to disk this slice — a
+/// process restart during a fade leaves the source's on-disk state byte
+/// as `FadingOut` with no reachable target; warm-start orphan recovery is
+/// deferred to slice 4 per MISSION.md risk register.
+#[derive(Debug, Default)]
+pub(crate) struct CrossfadeRegistry {
+    by_source: HashMap<(TierKind, ChunkId), CrossfadeHandle>,
+}
+
+impl CrossfadeRegistry {
+    pub(crate) fn new() -> Self {
+        Self {
+            by_source: HashMap::new(),
+        }
+    }
+
+    /// Insert a new in-flight fade. Rejects with `AlreadyFading` if a fade
+    /// for the same source is already in progress.
+    pub(crate) fn insert(&mut self, h: CrossfadeHandle) -> ArenaResult<()> {
+        let key = (h.source_tier, h.source);
+        if self.by_source.contains_key(&key) {
+            return Err(ArenaError::AlreadyFading {
+                chunk_id: h.source.as_u64(),
+            });
+        }
+        self.by_source.insert(key, h);
+        Ok(())
+    }
+
+    /// Get the handle for an in-flight fade, if any.
+    pub(crate) fn get(&self, tier: TierKind, id: ChunkId) -> Option<CrossfadeHandle> {
+        self.by_source.get(&(tier, id)).copied()
+    }
+
+    /// Remove an in-flight fade. Returns the previously-registered handle
+    /// if present.
+    pub(crate) fn remove(
+        &mut self,
+        tier: TierKind,
+        id: ChunkId,
+    ) -> Option<CrossfadeHandle> {
+        self.by_source.remove(&(tier, id))
+    }
+}
 
 /// A tier pool wraps an `Arena` with a `TierKind` label and a `TierPolicy`.
 /// Allocation enforces `max_chunks` BEFORE delegating to the inner arena so
@@ -283,6 +343,8 @@ pub struct ArenaSet {
     root: PathBuf,
     pools: HashMap<TierKind, TierPool>,
     manifest: Manifest,
+    /// In-memory registry of in-flight demote crossfades. Not persisted.
+    crossfade_registry: CrossfadeRegistry,
 }
 
 impl std::fmt::Debug for ArenaSet {
@@ -327,6 +389,7 @@ impl ArenaSet {
             root: config.root,
             pools,
             manifest,
+            crossfade_registry: CrossfadeRegistry::new(),
         })
     }
 
@@ -398,6 +461,7 @@ impl ArenaSet {
             root,
             pools,
             manifest,
+            crossfade_registry: CrossfadeRegistry::new(),
         })
     }
 
@@ -419,6 +483,114 @@ impl ArenaSet {
 
     pub fn tiers(&self) -> impl Iterator<Item = TierKind> + '_ {
         self.pools.keys().copied()
+    }
+
+    // =========================================================================
+    // M3 — Demote crossfade primitives
+    // =========================================================================
+
+    /// Begin a demote crossfade: copy the source chunk's payload into a
+    /// fresh chunk in `target_tier`, then mark the source's state byte as
+    /// `FadingOut`. Returns a `CrossfadeHandle` that the caller passes to
+    /// `complete_demote` (to finalize) or `abort_demote` (to reverse).
+    ///
+    /// **Crossfade invariant.** During a fade, both the source and the
+    /// target chunks are independently readable via
+    /// `pool.arena().get_chunk(id)`. Neither read path auto-copies the
+    /// other's bytes. The state byte on the source is advisory metadata
+    /// for callers that want to know a fade is in progress.
+    ///
+    /// **No copy-on-read.** This is a deliberate non-goal — the only copy
+    /// this slice performs is the single payload clone inside this
+    /// method, which happens synchronously before the target alloc.
+    ///
+    /// # Errors
+    /// - `InvalidCrossfadeTarget` if `source_tier == target_tier`.
+    /// - `UnknownTier(t)` if either tier is not configured in this set.
+    /// - `UnknownChunkId(id)` if `source_id` is not allocated in `source_tier`.
+    /// - `AlreadyFading { chunk_id }` if the source is already in an
+    ///   in-flight fade.
+    /// - `PoolFull` if the target pool is out of slots.
+    pub fn begin_demote(
+        &mut self,
+        source_tier: TierKind,
+        source_id: ChunkId,
+        target_tier: TierKind,
+    ) -> ArenaResult<CrossfadeHandle> {
+        if source_tier == target_tier {
+            return Err(ArenaError::InvalidCrossfadeTarget {
+                source_tier,
+                target_tier,
+            });
+        }
+
+        // Quick pre-check: reject a second fade on the same source before
+        // we do any work. `insert` below catches it too, but surfacing the
+        // error early avoids any mutation of target pool state.
+        if self
+            .crossfade_registry
+            .get(source_tier, source_id)
+            .is_some()
+        {
+            return Err(ArenaError::AlreadyFading {
+                chunk_id: source_id.as_u64(),
+            });
+        }
+
+        // Ensure both pools exist up front so we fail fast.
+        if !self.pools.contains_key(&source_tier) {
+            return Err(ArenaError::UnknownTier(source_tier));
+        }
+        if !self.pools.contains_key(&target_tier) {
+            return Err(ArenaError::UnknownTier(target_tier));
+        }
+
+        // 1. Snapshot the source chunk's payload. `get_chunk` validates
+        // the checksum, which is the right behavior here — if the source
+        // is corrupt we should refuse to crossfade it.
+        let payload = {
+            let source_pool = self
+                .pools
+                .get(&source_tier)
+                .ok_or(ArenaError::UnknownTier(source_tier))?;
+            let chunk = source_pool.arena().get_chunk(source_id)?;
+            chunk.payload().to_vec()
+        };
+
+        // 2. Allocate the target chunk in the target pool. Fresh chunk
+        // starts in `ChunkState::Resident` by default.
+        let target_id = {
+            let target_pool = self
+                .pools
+                .get_mut(&target_tier)
+                .ok_or(ArenaError::UnknownTier(target_tier))?;
+            target_pool.alloc(payload)?
+        };
+
+        // 3. Flip the source chunk's state byte to `FadingOut`. Single
+        // byte write, no checksum recomputation needed (state byte is
+        // outside the checksum window by design).
+        {
+            let source_pool = self
+                .pools
+                .get_mut(&source_tier)
+                .ok_or(ArenaError::UnknownTier(source_tier))?;
+            source_pool
+                .arena_mut()
+                .mark_state(source_id, ChunkState::FadingOut)?;
+        }
+
+        // 4. Register the handle. Insert is infallible here because we
+        // pre-checked above, but keep the error path for defense in depth.
+        let handle = CrossfadeHandle {
+            source: source_id,
+            source_tier,
+            target: target_id,
+            target_tier,
+        };
+        self.crossfade_registry.insert(handle)?;
+
+        Ok(handle)
     }
 
     /// Flush all pool mmaps and rewrite the manifest atomically. Call before
