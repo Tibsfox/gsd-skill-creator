@@ -23,6 +23,9 @@ import { registerWorkflowTools } from './workflow-tools.js';
 import { WorkflowEngine } from './workflow-engine.js';
 import { registerSessionTools } from './session-tools.js';
 import { SessionStore } from './session-store.js';
+import { registerMemoryTools } from './memory-tools.js';
+import type { MemoryService } from '../../../memory/service.js';
+import type { ConversationStore } from '../../../memory/conversation-store.js';
 
 // ── Configuration ───────────────────────────────────────────────────────
 
@@ -37,6 +40,10 @@ export interface GatewayToolsConfig {
   workflowEngine?: WorkflowEngine;
   /** Shared session store (optional -- created internally if not provided). */
   sessionStore?: SessionStore;
+  /** Memory service for LOD-tiered memory tools (optional). */
+  memoryService?: MemoryService;
+  /** Conversation store for private session history search (optional). */
+  conversationStore?: ConversationStore;
 }
 
 // ── Registration ────────────────────────────────────────────────────────
@@ -69,6 +76,12 @@ export function registerAllTools(server: McpServer, config: GatewayToolsConfig):
   // Session tools (session.query, session.patterns)
   const store = config.sessionStore ?? new SessionStore();
   registerSessionTools(server, store);
+
+  // Memory tools (memory.query, memory.store, memory.recall, memory.relate,
+  //               memory.deprecate, memory.wakeup, memory.stats, memory.search_conversations)
+  if (config.memoryService) {
+    registerMemoryTools(server, config.memoryService, config.conversationStore);
+  }
 }
 
 /**
@@ -185,3 +198,6 @@ export {
 export { SessionStore } from './session-store.js';
 
 export { registerSessionTools } from './session-tools.js';
+
+// Memory tools
+export { registerMemoryTools } from './memory-tools.js';
