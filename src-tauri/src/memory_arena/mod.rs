@@ -22,6 +22,7 @@ pub mod list;
 pub mod persistence;
 pub mod pool;
 pub mod types;
+pub mod warm_start;
 
 pub use arena::{Arena, ArenaStats};
 pub use chunk::Chunk;
@@ -35,6 +36,7 @@ pub use pool::{
     ArenaSet, ArenaSetConfig, EvictionKind, Manifest, PoolSpec, TierPolicy, TierPool,
     ARENA_SET_FORMAT_VERSION,
 };
+pub use warm_start::{ColdSource, InMemoryColdSource, WarmStart, WarmStartReport};
 pub use types::{ArenaConfig, ChunkHeader, ChunkId, TierKind, CHUNK_MAGIC, HEADER_SIZE};
 
 #[cfg(test)]

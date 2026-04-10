@@ -1986,3 +1986,114 @@ mod arena_set_tests {
         assert!(set.pool(TierKind::Vector).is_none());
     }
 }
+
+// =============================================================================
+// memory-arena-m1 Plan 05 — WarmStart happy-path tests
+// =============================================================================
+
+#[cfg(test)]
+mod warm_start_tests {
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, TierKind};
+    use crate::memory_arena::warm_start::{
+        ColdSource, InMemoryColdSource, WarmStart,
+    };
+    use tempfile::tempdir;
+
+    fn unlimited_spec(tier: TierKind, num_slots: usize) -> PoolSpec {
+        PoolSpec {
+            tier,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+            },
+        }
+    }
+
+    #[test]
+    fn cold_source_trait_is_object_safe() {
+        let _: Box<dyn ColdSource> = Box::new(InMemoryColdSource::new());
+    }
+
+    #[test]
+    fn warm_start_empty_arena_set_reports_zero_everywhere() {
+        let tmp = tempdir().unwrap();
+        {
+            let config = ArenaSetConfig::new(tmp.path())
+                .with_pool(unlimited_spec(TierKind::Hot, 8));
+            let set = ArenaSet::create(config).expect("create");
+            set.flush().expect("flush");
+            drop(set);
+        }
+        let cold = InMemoryColdSource::new();
+        let (reopened, report) =
+            WarmStart::open(tmp.path(), &cold).expect("warm start open");
+        assert_eq!(report.slots_walked, 0);
+        assert_eq!(report.slots_validated, 0);
+        assert_eq!(report.slots_corrupt, 0);
+        assert_eq!(report.slots_rebuilt_from_cold, 0);
+        assert_eq!(report.slots_missing, 0);
+        assert!(reopened.pool(TierKind::Hot).is_some());
+    }
+
+    #[test]
+    fn warm_start_roundtrip_happy_path_small() {
+        // Small variant: 30 chunks across 3 tiers to keep the test fast.
+        // (The plan mentions 1000 chunks; this is the Rust-test-tier version.)
+        let tmp = tempdir().unwrap();
+        let payload_of = |i: usize| vec![(i as u8).wrapping_mul(7); 64];
+
+        {
+            let config = ArenaSetConfig::new(tmp.path())
+                .with_pool(unlimited_spec(TierKind::Hot, 16))
+                .with_pool(unlimited_spec(TierKind::Warm, 16))
+                .with_pool(unlimited_spec(TierKind::Blob, 16));
+            let mut set = ArenaSet::create(config).expect("create");
+            for i in 0..30usize {
+                let tier = match i % 3 {
+                    0 => TierKind::Hot,
+                    1 => TierKind::Warm,
+                    _ => TierKind::Blob,
+                };
+                set.pool_mut(tier)
+                    .unwrap()
+                    .alloc(payload_of(i))
+                    .expect("alloc");
+            }
+            set.flush().expect("flush");
+            drop(set);
+        }
+
+        let cold = InMemoryColdSource::new();
+        let (reopened, report) =
+            WarmStart::open(tmp.path(), &cold).expect("warm start open");
+        assert_eq!(report.slots_corrupt, 0);
+        assert_eq!(report.slots_rebuilt_from_cold, 0);
+        assert_eq!(report.slots_missing, 0);
+        assert_eq!(report.slots_walked, 30);
+        assert_eq!(report.slots_validated, 30);
+
+        // Verify every chunk is readable via the reopened ArenaSet.
+        // Per-pool chunk-id counters assigned 1..=10 for each of Hot/Warm/Blob.
+        for tier in [TierKind::Hot, TierKind::Warm, TierKind::Blob] {
+            let pool = reopened.pool(tier).unwrap();
+            for id_raw in 1u64..=10 {
+                let id = crate::memory_arena::types::ChunkId::new(id_raw);
+                assert!(
+                    pool.arena().contains(id),
+                    "reopened pool {:?} missing {}",
+                    tier,
+                    id
+                );
+                let chunk = pool.arena().get_chunk(id).expect("get_chunk after reopen");
+                assert_eq!(chunk.header().chunk_id, id);
+            }
+        }
+    }
+}
