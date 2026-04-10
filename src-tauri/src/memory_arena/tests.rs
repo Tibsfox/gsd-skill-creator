@@ -5776,3 +5776,235 @@ fn reset_access_count_unknown_id_errors() {
     let result = arena.reset_access_count(ChunkId::new(999));
     assert!(matches!(result, Err(ArenaError::UnknownChunkId(999))));
 }
+
+// =========================================================================
+// M5 Plan 04 — SweepReport and run_policy_sweep promote path
+// =========================================================================
+
+/// Helper: create a Hot+Warm ArenaSet with specified policies and slots.
+fn make_hot_warm_set(
+    dir: &std::path::Path,
+    hot_slots: usize,
+    warm_slots: usize,
+    hot_policy: TierPolicy,
+    warm_policy: TierPolicy,
+) -> ArenaSet {
+    let config = ArenaSetConfig::new(dir)
+        .with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: hot_slots,
+            policy: hot_policy,
+        })
+        .with_pool(PoolSpec {
+            tier: TierKind::Warm,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: warm_slots,
+            policy: warm_policy,
+        });
+    ArenaSet::create(config).unwrap()
+}
+
+#[test]
+fn sweep_promotes_warm_chunk_above_threshold() {
+    let dir = tempdir().unwrap();
+    let warm_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 3,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let hot_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
+
+    // Alloc a chunk in Warm and touch it 3 times to meet threshold.
+    let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![42u8; 64]).unwrap();
+    for _ in 0..3 {
+        set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+    }
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.promotes_initiated, 1);
+    assert_eq!(report.promotes_completed, 1);
+    assert_eq!(report.demotes_initiated, 0);
+    // Warm pool should be empty (source freed), Hot should have 1 chunk.
+    assert_eq!(set.pool(TierKind::Warm).unwrap().len(), 0);
+    assert_eq!(set.pool(TierKind::Hot).unwrap().len(), 1);
+}
+
+#[test]
+fn sweep_noop_when_below_threshold() {
+    let dir = tempdir().unwrap();
+    let warm_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 10,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let hot_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
+
+    // Alloc a chunk but don't touch it enough to meet threshold.
+    set.pool_mut(TierKind::Warm).unwrap().alloc(vec![0u8; 64]).unwrap();
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.promotes_initiated, 0);
+    assert_eq!(report.promotes_completed, 0);
+    assert_eq!(set.pool(TierKind::Warm).unwrap().len(), 1);
+}
+
+#[test]
+fn sweep_resets_access_count_after_promote() {
+    let dir = tempdir().unwrap();
+    let warm_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 2,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let hot_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
+
+    let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![99u8; 64]).unwrap();
+    for _ in 0..2 {
+        set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+    }
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.promotes_completed, 1);
+
+    // The promoted chunk in Hot should have access_count == 0.
+    let hot_pool = set.pool(TierKind::Hot).unwrap();
+    let hot_ids: Vec<ChunkId> = hot_pool.arena().iter_chunk_ids().collect();
+    assert_eq!(hot_ids.len(), 1);
+    let count = hot_pool.arena().read_access_count(hot_ids[0]).unwrap();
+    assert_eq!(count, 0, "access_count should be reset after promote");
+}
+
+#[test]
+fn sweep_promote_with_eviction_on_full_target() {
+    let dir = tempdir().unwrap();
+    let warm_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 1,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    // Hot pool limited to 1 chunk — will need eviction.
+    let hot_policy = TierPolicy {
+        max_chunks: 1,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
+
+    // Fill Hot with 1 chunk.
+    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![0u8; 64]).unwrap();
+    assert_eq!(set.pool(TierKind::Hot).unwrap().len(), 1);
+
+    // Alloc in Warm and touch to meet threshold.
+    let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![1u8; 64]).unwrap();
+    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.promotes_completed, 1);
+    assert_eq!(report.evictions, 1);
+    // Hot still has 1 chunk (evicted old, promoted new).
+    assert_eq!(set.pool(TierKind::Hot).unwrap().len(), 1);
+}
+
+#[test]
+fn sweep_skips_chunk_in_promote_cooldown() {
+    let dir = tempdir().unwrap();
+    let warm_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 1,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 1_000_000_000_000, // 1000s cooldown
+    };
+    let hot_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
+
+    // Inject a deterministic clock.
+    let base_time: u64 = 1_000_000_000_000; // 1000s
+    set.set_now_ns_for_test(|| base_time);
+
+    // Alloc in Warm, touch to meet threshold.
+    let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![7u8; 64]).unwrap();
+    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+
+    // Write a recent promote timestamp on the chunk to trigger cooldown.
+    set.pool_mut(TierKind::Warm).unwrap().arena_mut()
+        .write_last_promote_ns(warm_id, base_time - 1).unwrap();
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.promotes_initiated, 0);
+    assert_eq!(report.skipped_cooldown, 1);
+    // Chunk should still be in Warm.
+    assert_eq!(set.pool(TierKind::Warm).unwrap().len(), 1);
+}
+
+#[test]
+fn sweep_empty_arena_returns_zero_report() {
+    let dir = tempdir().unwrap();
+    let policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let mut set = make_hot_warm_set(dir.path(), 4, 4, policy, policy);
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.promotes_initiated, 0);
+    assert_eq!(report.promotes_completed, 0);
+    assert_eq!(report.demotes_initiated, 0);
+    assert_eq!(report.demotes_completed, 0);
+    assert_eq!(report.evictions, 0);
+    assert_eq!(report.skipped_cooldown, 0);
+    assert_eq!(report.skipped_already_fading, 0);
+    assert!(report.errors.is_empty());
+}
