@@ -4920,3 +4920,325 @@ mod m4_begin_promote {
             .expect("begin_promote should succeed after cooldown expiry");
     }
 }
+
+// ============================================================================
+// M4 — Plan 03: complete_promote + abort_promote + shared helpers
+// ============================================================================
+
+#[cfg(test)]
+mod m4_complete_abort_promote {
+    use crate::memory_arena::error::ArenaError;
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, CrossfadeHandle, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, ChunkState, TierKind};
+    use std::cell::Cell;
+    use tempfile::tempdir;
+
+    thread_local! {
+        static FAKE_NOW: Cell<u64> = Cell::new(1_000_000_000_000);
+    }
+
+    fn set_fake_now(ns: u64) {
+        FAKE_NOW.with(|c| c.set(ns));
+    }
+
+    fn fake_now() -> u64 {
+        FAKE_NOW.with(|c| c.get())
+    }
+
+    fn unlimited_spec(tier: TierKind, num_slots: usize) -> PoolSpec {
+        PoolSpec {
+            tier,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
+            },
+        }
+    }
+
+    fn two_pool_set(root: &std::path::Path) -> ArenaSet {
+        ArenaSet::create(
+            ArenaSetConfig::new(root)
+                .with_pool(unlimited_spec(TierKind::Hot, 8))
+                .with_pool(unlimited_spec(TierKind::Warm, 8)),
+        )
+        .expect("two-pool ArenaSet should build")
+    }
+
+    fn alloc_warm(set: &mut ArenaSet, payload: &[u8]) -> ChunkId {
+        set.pool_mut(TierKind::Warm)
+            .expect("Warm pool")
+            .alloc(payload.to_vec())
+            .expect("alloc")
+    }
+
+    fn alloc_hot(set: &mut ArenaSet, payload: &[u8]) -> ChunkId {
+        set.pool_mut(TierKind::Hot)
+            .expect("Hot pool")
+            .alloc(payload.to_vec())
+            .expect("alloc")
+    }
+
+    #[test]
+    fn complete_promote_happy_path() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_warm(&mut set, b"complete me");
+
+        let warm_before = set.pool(TierKind::Warm).unwrap().len();
+        let handle = set
+            .begin_promote(TierKind::Warm, source_id, TierKind::Hot)
+            .unwrap();
+
+        let canonical = set.complete_promote(handle).unwrap();
+
+        // Source freed — Warm pool shrunk by 1.
+        assert_eq!(
+            set.pool(TierKind::Warm).unwrap().len(),
+            warm_before - 1
+        );
+
+        // Target is the canonical chunk in Hot.
+        assert_eq!(canonical, handle.target);
+        let chunk = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(canonical)
+            .unwrap();
+        assert_eq!(chunk.payload(), b"complete me");
+
+        // Target has last_promote_completed_at_ns stamped (non-zero).
+        let ts = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .read_last_promote_ns(canonical)
+            .unwrap();
+        assert!(ts > 0, "promote timestamp should be non-zero");
+    }
+
+    #[test]
+    fn complete_promote_rejects_unregistered_handle() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+
+        let fake_handle = CrossfadeHandle {
+            source: ChunkId::new(999),
+            source_tier: TierKind::Warm,
+            target: ChunkId::new(888),
+            target_tier: TierKind::Hot,
+        };
+        let err = set.complete_promote(fake_handle).unwrap_err();
+        assert!(
+            matches!(err, ArenaError::UnknownCrossfade { .. }),
+            "expected UnknownCrossfade, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn complete_promote_rejects_state_mismatch() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_warm(&mut set, b"state mismatch");
+
+        let handle = set
+            .begin_promote(TierKind::Warm, source_id, TierKind::Hot)
+            .unwrap();
+
+        // Manually restore source to Resident (simulating external tampering).
+        set.pool_mut(TierKind::Warm)
+            .unwrap()
+            .arena_mut()
+            .mark_state(source_id, ChunkState::Resident)
+            .unwrap();
+
+        let err = set.complete_promote(handle).unwrap_err();
+        assert!(
+            matches!(err, ArenaError::CrossfadeStateMismatch { .. }),
+            "expected CrossfadeStateMismatch, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn abort_promote_happy_path() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_warm(&mut set, b"abort me");
+
+        let warm_before = set.pool(TierKind::Warm).unwrap().len();
+        let hot_before = set.pool(TierKind::Hot).unwrap().len();
+        let handle = set
+            .begin_promote(TierKind::Warm, source_id, TierKind::Hot)
+            .unwrap();
+
+        set.abort_promote(handle).unwrap();
+
+        // Source restored to Resident.
+        let state = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .chunk_state(source_id)
+            .unwrap();
+        assert_eq!(state, ChunkState::Resident);
+
+        // Warm pool count unchanged (source not freed).
+        assert_eq!(set.pool(TierKind::Warm).unwrap().len(), warm_before);
+
+        // Hot pool back to original (target freed).
+        assert_eq!(set.pool(TierKind::Hot).unwrap().len(), hot_before);
+    }
+
+    #[test]
+    fn abort_promote_rejects_unregistered_handle() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+
+        let fake_handle = CrossfadeHandle {
+            source: ChunkId::new(999),
+            source_tier: TierKind::Warm,
+            target: ChunkId::new(888),
+            target_tier: TierKind::Hot,
+        };
+        let err = set.abort_promote(fake_handle).unwrap_err();
+        assert!(
+            matches!(err, ArenaError::UnknownCrossfade { .. }),
+            "expected UnknownCrossfade, got {:?}",
+            err
+        );
+    }
+
+    /// Demote from Hot to Warm (complete), then promote the target back
+    /// to Hot (complete). Verify both cooldowns are independent.
+    #[test]
+    fn cross_direction_demote_then_promote() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        set_fake_now(10_000_000_000);
+        set.set_now_ns_for_test(fake_now);
+
+        let source_id = alloc_hot(&mut set, b"demote then promote");
+
+        // Demote Hot -> Warm.
+        let demote_handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+        let warm_id = set.complete_demote(demote_handle).unwrap();
+
+        // Verify last_demote_completed_at_ns is set on the warm target.
+        let demote_ts = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .read_last_demote_ns(warm_id)
+            .unwrap();
+        assert!(demote_ts > 0);
+
+        // Now promote Warm -> Hot.
+        set_fake_now(11_000_000_000);
+        let promote_handle = set
+            .begin_promote(TierKind::Warm, warm_id, TierKind::Hot)
+            .unwrap();
+        let hot_id = set.complete_promote(promote_handle).unwrap();
+
+        // Verify last_promote_completed_at_ns is set on the hot target.
+        let promote_ts = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .read_last_promote_ns(hot_id)
+            .unwrap();
+        assert!(promote_ts > 0);
+
+        // The two timestamps are independent.
+        assert_ne!(demote_ts, promote_ts);
+    }
+
+    /// Promote from Warm to Hot (complete), then demote the target back
+    /// to Warm (complete). Verify both cooldowns are independent.
+    #[test]
+    fn cross_direction_promote_then_demote() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        set_fake_now(20_000_000_000);
+        set.set_now_ns_for_test(fake_now);
+
+        let source_id = alloc_warm(&mut set, b"promote then demote");
+
+        // Promote Warm -> Hot.
+        let promote_handle = set
+            .begin_promote(TierKind::Warm, source_id, TierKind::Hot)
+            .unwrap();
+        let hot_id = set.complete_promote(promote_handle).unwrap();
+
+        let promote_ts = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .read_last_promote_ns(hot_id)
+            .unwrap();
+        assert!(promote_ts > 0);
+
+        // Now demote Hot -> Warm.
+        set_fake_now(21_000_000_000);
+        let demote_handle = set
+            .begin_demote(TierKind::Hot, hot_id, TierKind::Warm)
+            .unwrap();
+        let warm_id = set.complete_demote(demote_handle).unwrap();
+
+        let demote_ts = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .read_last_demote_ns(warm_id)
+            .unwrap();
+        assert!(demote_ts > 0);
+        assert_ne!(promote_ts, demote_ts);
+    }
+
+    /// Verify complete_demote + abort_demote still work after the
+    /// shared-helper refactor.
+    #[test]
+    fn complete_demote_still_works_after_refactor() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"refactor guard");
+
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+        let canonical = set.complete_demote(handle).unwrap();
+
+        let chunk = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .get_chunk(canonical)
+            .unwrap();
+        assert_eq!(chunk.payload(), b"refactor guard");
+
+        // Round-trip: allocate another, begin, abort.
+        let source2 = alloc_hot(&mut set, b"abort guard");
+        let handle2 = set
+            .begin_demote(TierKind::Hot, source2, TierKind::Warm)
+            .unwrap();
+        set.abort_demote(handle2).unwrap();
+        let state = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .chunk_state(source2)
+            .unwrap();
+        assert_eq!(state, ChunkState::Resident);
+    }
+}
