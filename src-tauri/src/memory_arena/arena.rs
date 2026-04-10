@@ -32,10 +32,12 @@ use std::path::{Path, PathBuf};
 use memmap2::{MmapMut, MmapOptions};
 use xxhash_rust::xxh3::Xxh3Default;
 
-use crate::memory_arena::chunk::{write_header_into, Chunk, CHECKSUM_OFFSET};
+use crate::memory_arena::chunk::{read_header_from, write_header_into, Chunk, CHECKSUM_OFFSET};
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::list::LruIndex;
-use crate::memory_arena::types::{ArenaConfig, ChunkHeader, ChunkId, TierKind, HEADER_SIZE};
+use crate::memory_arena::types::{
+    ArenaConfig, ChunkHeader, ChunkId, TierKind, CHUNK_MAGIC, HEADER_SIZE,
+};
 
 /// Backing storage for the arena. Two variants:
 /// - `Heap`: boxed byte slice owned by the process.
@@ -179,11 +181,69 @@ impl Arena {
     /// Note: metadata (directory, free list, next_chunk_id) still lives
     /// in RAM and is persisted via the checkpoint/journal files, not via
     /// the mmap. The mmap holds only the raw slot bytes.
+    ///
+    /// This is the **eager** open path — it does not walk the storage
+    /// bytes; the caller (typically `WarmStart::open` or `ArenaSet::open`)
+    /// is responsible for re-registering any existing slots via
+    /// `reinsert_slot`. For the **lazy** open path that walks headers and
+    /// pre-populates the directory directly, see `Arena::open_lazy`.
     pub fn new_mmap_file(
         config: ArenaConfig,
         num_slots: usize,
         path: impl AsRef<Path>,
     ) -> ArenaResult<Self> {
+        let (storage, slot_size) = Self::mmap_file_storage(&config, num_slots, path.as_ref())?;
+        Self::with_storage(config, num_slots, slot_size, storage)
+    }
+
+    /// Open an mmap-backed arena and pre-populate the directory by walking
+    /// only the slot **headers** — never the payloads.
+    ///
+    /// # Contract
+    ///
+    /// Unlike `new_mmap_file`, which returns an empty arena that callers
+    /// re-register via `reinsert_slot`, `open_lazy` does the walk inline:
+    ///
+    /// - For every slot whose first 8 bytes are all zero → free slot.
+    /// - For every slot whose header parses (magic + version + tier +
+    ///   in-bounds payload_size) → register the chunk id in the directory
+    ///   **without** touching the payload or running the checksum.
+    /// - For every slot whose header fails to parse, or whose payload_size
+    ///   is out of bounds for the slot → the slot is marked free (the bytes
+    ///   on disk stay untouched until they're overwritten by a future alloc).
+    ///
+    /// Payload-checksum corruption is **invisible** to `open_lazy` by
+    /// design. Callers that want a guarantee on a specific chunk call
+    /// `Arena::validate_chunk(id)`; `Arena::get_chunk(id)` already
+    /// re-validates on every read, so reader-side safety is preserved.
+    ///
+    /// This is the hot path for slice-2 warm-start: skipping payload
+    /// validation at open time turns the M1 `warm_start_100k = 1.43 s`
+    /// headline cost into a header-only walk.
+    ///
+    /// # Errors
+    ///
+    /// Returns `ChunkSizeOutOfRange` if `config.chunk_size` is outside the
+    /// configured min/max bounds, or an I/O error if the file cannot be
+    /// opened / mapped. Structural corruption at the slot level does not
+    /// error — it is absorbed into the free stack.
+    pub fn open_lazy(
+        config: ArenaConfig,
+        num_slots: usize,
+        path: impl AsRef<Path>,
+    ) -> ArenaResult<Self> {
+        let (storage, slot_size) = Self::mmap_file_storage(&config, num_slots, path.as_ref())?;
+        Self::with_storage_from_walk(config, num_slots, slot_size, storage)
+    }
+
+    /// Shared mmap-file setup. Returns the `Storage::Mmap { ... }` variant
+    /// plus the slot size. Used by both `new_mmap_file` (eager) and
+    /// `open_lazy` (lazy header walk).
+    fn mmap_file_storage(
+        config: &ArenaConfig,
+        num_slots: usize,
+        path: &Path,
+    ) -> ArenaResult<(Storage, usize)> {
         config.validate_size(config.chunk_size)?;
 
         let slot_size = config.chunk_size as usize;
@@ -191,7 +251,7 @@ impl Arena {
             .checked_mul(num_slots)
             .expect("arena size overflow");
 
-        let path = path.as_ref().to_path_buf();
+        let path = path.to_path_buf();
         if let Some(parent) = path.parent() {
             std::fs::create_dir_all(parent)?;
         }
@@ -218,8 +278,7 @@ impl Arena {
             _file: file,
             path,
         };
-
-        Self::with_storage(config, num_slots, slot_size, storage)
+        Ok((storage, slot_size))
     }
 
     fn with_storage(
@@ -241,6 +300,93 @@ impl Arena {
             directory: HashMap::with_capacity(num_slots),
             next_chunk_id: 1, // 0 reserved for ChunkId::ZERO sentinel
             lru: LruIndex::new(),
+        })
+    }
+
+    /// Build an `Arena` from an mmap storage by walking slot headers once
+    /// and pre-populating the directory, free stack, LRU, and next_chunk_id
+    /// counter. Shared by `open_lazy`.
+    ///
+    /// The walk touches only `HEADER_SIZE` bytes per slot (no payload reads,
+    /// no checksum computation). Structural corruption (bad magic, bad
+    /// header parse, or payload_size out of bounds) silently marks the
+    /// slot free — the bytes on disk are not rewritten, they just stop
+    /// being reachable through the directory.
+    fn with_storage_from_walk(
+        config: ArenaConfig,
+        num_slots: usize,
+        slot_size: usize,
+        storage: Storage,
+    ) -> ArenaResult<Self> {
+        let mut slots: Vec<SlotState> = vec![SlotState::Free; num_slots];
+        let mut directory: HashMap<ChunkId, usize> =
+            HashMap::with_capacity(num_slots);
+        let mut lru = LruIndex::new();
+        let mut next_chunk_id: u64 = 1;
+
+        // Walk every slot's header. Bytes only touch [start..start+HEADER_SIZE].
+        for slot_idx in 0..num_slots {
+            let start = slot_idx * slot_size;
+            let header_bytes = &storage[start..start + HEADER_SIZE];
+
+            // Fast-path: slot whose first 8 bytes are all zero is free.
+            if header_bytes[..CHUNK_MAGIC.len()].iter().all(|&b| b == 0) {
+                continue;
+            }
+
+            // Try to parse the header. Bad magic / bad version / unknown
+            // tier all surface here as errors — treat them as structural
+            // corruption and leave the slot free.
+            let header = match read_header_from(header_bytes) {
+                Ok(h) => h,
+                Err(_) => continue,
+            };
+
+            // Bounds-check payload size against slot size. A corrupt
+            // payload_size that would extend past the slot is structural
+            // corruption.
+            let total = HEADER_SIZE + header.payload_size as usize;
+            if total > slot_size {
+                continue;
+            }
+
+            // Idempotent: if two slots somehow share the same chunk_id
+            // (shouldn't happen in a clean mmap, but be defensive), the
+            // first-seen wins and later slots stay free.
+            if directory.contains_key(&header.chunk_id) {
+                continue;
+            }
+
+            // Structural OK — register without touching payload.
+            slots[slot_idx] = SlotState::Allocated(header.chunk_id);
+            directory.insert(header.chunk_id, slot_idx);
+            lru.insert(header.chunk_id);
+            if header.chunk_id.as_u64() >= next_chunk_id {
+                next_chunk_id = header.chunk_id.as_u64() + 1;
+            }
+        }
+
+        // Build the free stack from slots that remain Free after the walk.
+        // Reverse order so slot 0 pops first (matches `with_storage`).
+        let mut free_stack: Vec<usize> = slots
+            .iter()
+            .enumerate()
+            .filter_map(|(idx, state)| match state {
+                SlotState::Free => Some(idx),
+                SlotState::Allocated(_) => None,
+            })
+            .collect();
+        free_stack.reverse();
+
+        Ok(Self {
+            config,
+            storage,
+            slot_size,
+            slots,
+            free_stack,
+            directory,
+            next_chunk_id,
+            lru,
         })
     }
 
