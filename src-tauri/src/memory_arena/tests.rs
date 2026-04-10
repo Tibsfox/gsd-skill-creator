@@ -1746,3 +1746,75 @@ mod list_tests {
         }
     }
 }
+
+// =============================================================================
+// memory-arena-m1 Plan 03 — Arena LRU integration tests
+// =============================================================================
+
+#[cfg(test)]
+mod arena_lru_tests {
+    use crate::memory_arena::arena::Arena;
+    use crate::memory_arena::types::{ArenaConfig, TierKind};
+
+    #[test]
+    fn lru_oldest_empty_arena_is_none() {
+        let arena = Arena::new(ArenaConfig::test(), 4).unwrap();
+        assert!(arena.lru_oldest().is_none());
+    }
+
+    #[test]
+    fn lru_insertion_order_tracks_alloc_and_free() {
+        let mut arena = Arena::new(ArenaConfig::test(), 8).unwrap();
+        let a = arena.alloc_chunk(TierKind::Hot, vec![1u8; 64]).unwrap();
+        let b = arena.alloc_chunk(TierKind::Hot, vec![2u8; 64]).unwrap();
+        let _c = arena.alloc_chunk(TierKind::Hot, vec![3u8; 64]).unwrap();
+        assert_eq!(arena.lru_oldest(), Some(a));
+        arena.free_chunk(a).unwrap();
+        assert_eq!(arena.lru_oldest(), Some(b));
+    }
+
+    #[test]
+    fn lru_touch_reorders_oldest() {
+        let mut arena = Arena::new(ArenaConfig::test(), 8).unwrap();
+        let a = arena.alloc_chunk(TierKind::Warm, vec![1u8; 64]).unwrap();
+        let b = arena.alloc_chunk(TierKind::Warm, vec![2u8; 64]).unwrap();
+        let _c = arena.alloc_chunk(TierKind::Warm, vec![3u8; 64]).unwrap();
+        assert_eq!(arena.lru_oldest(), Some(a));
+        arena.touch_chunk(a).unwrap();
+        // After touching a, b is now the oldest.
+        assert_eq!(arena.lru_oldest(), Some(b));
+    }
+
+    #[test]
+    fn apply_alloc_and_apply_free_update_lru() {
+        // Build a source arena with a chunk, serialize its bytes, then use
+        // apply_alloc to replay into a target arena. The replay path must
+        // update the LRU so downstream eviction sees the replayed chunk.
+        let mut source = Arena::new(ArenaConfig::test(), 4).unwrap();
+        let id = source
+            .alloc_chunk(TierKind::Blob, vec![42u8; 100])
+            .unwrap();
+        let chunk = source.get_chunk(id).unwrap();
+        let chunk_bytes = chunk.serialize();
+
+        let mut target = Arena::new(ArenaConfig::test(), 4).unwrap();
+        target.apply_alloc(id, &chunk_bytes).unwrap();
+        assert_eq!(target.lru_oldest(), Some(id));
+
+        // Now apply_free: the LRU must forget the id.
+        target.apply_free(id).unwrap();
+        assert!(target.lru_oldest().is_none());
+    }
+
+    #[test]
+    fn lru_touch_stays_fast_sanity_check() {
+        // Informational: this just confirms 10k touch_chunk calls don't
+        // explode or deadlock. Real latency numbers come from Plan 07 benches.
+        let mut arena = Arena::new(ArenaConfig::test(), 4).unwrap();
+        let id = arena.alloc_chunk(TierKind::Hot, vec![1u8; 64]).unwrap();
+        for _ in 0..10_000 {
+            arena.touch_chunk(id).unwrap();
+        }
+        assert_eq!(arena.lru_oldest(), Some(id));
+    }
+}
