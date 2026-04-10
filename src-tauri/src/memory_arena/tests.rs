@@ -4105,3 +4105,319 @@ mod m3_complete_abort_demote {
         );
     }
 }
+
+// ============================================================================
+// M3 — Plan 04: TierPolicy::demote_cooldown_ns + hysteresis + last_demote_ns
+// ============================================================================
+
+#[cfg(test)]
+mod m3_hysteresis {
+    use crate::memory_arena::error::ArenaError;
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{
+        ArenaConfig, ChunkHeader, ChunkId, ChunkState, TierKind, HEADER_SIZE,
+    };
+    use crate::memory_arena::Chunk;
+    use std::sync::atomic::{AtomicU64, Ordering};
+    use tempfile::tempdir;
+
+    /// Deterministic clock for hysteresis tests. Each test that needs the
+    /// clock advances `FAKE_NOW` explicitly via `FAKE_NOW.store(...)`. The
+    /// value is ns-since-an-arbitrary-epoch — the absolute value doesn't
+    /// matter, only deltas.
+    static FAKE_NOW: AtomicU64 = AtomicU64::new(1_000_000_000_000);
+
+    fn fake_now() -> u64 {
+        FAKE_NOW.load(Ordering::Relaxed)
+    }
+
+    fn unlimited_spec(tier: TierKind, num_slots: usize, cooldown_ns: u64) -> PoolSpec {
+        PoolSpec {
+            tier,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: cooldown_ns,
+            },
+        }
+    }
+
+    fn two_pool_set_with_cooldown(
+        root: &std::path::Path,
+        hot_cooldown_ns: u64,
+        warm_cooldown_ns: u64,
+    ) -> ArenaSet {
+        ArenaSet::create(
+            ArenaSetConfig::new(root)
+                .with_pool(unlimited_spec(TierKind::Hot, 8, hot_cooldown_ns))
+                .with_pool(unlimited_spec(TierKind::Warm, 8, warm_cooldown_ns)),
+        )
+        .expect("two-pool ArenaSet should build")
+    }
+
+    fn alloc_hot(set: &mut ArenaSet, payload: &[u8]) -> ChunkId {
+        set.pool_mut(TierKind::Hot)
+            .expect("Hot pool")
+            .alloc(payload.to_vec())
+            .expect("alloc")
+    }
+
+    #[test]
+    fn never_demoted_chunk_has_zero_last_demote_ns() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set_with_cooldown(dir.path(), 0, 0);
+        let id = alloc_hot(&mut set, b"fresh");
+        let last = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .read_last_demote_ns(id)
+            .unwrap();
+        assert_eq!(last, 0, "fresh chunk must have last_demote_ns == 0");
+    }
+
+    #[test]
+    fn complete_demote_stamps_target_last_demote_ns() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set_with_cooldown(dir.path(), 0, 0);
+        FAKE_NOW.store(5_000_000_000, Ordering::Relaxed);
+        set.set_now_ns_for_test(fake_now);
+
+        let source_id = alloc_hot(&mut set, b"stamp me");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+        set.complete_demote(handle).unwrap();
+
+        let last = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .read_last_demote_ns(handle.target)
+            .unwrap();
+        assert_eq!(last, 5_000_000_000);
+    }
+
+    #[test]
+    fn hysteresis_cooldown_zero_means_no_check() {
+        let dir = tempdir().unwrap();
+        // Both tiers have zero cooldown — default behavior.
+        let mut set = two_pool_set_with_cooldown(dir.path(), 0, 0);
+        FAKE_NOW.store(2_000_000_000, Ordering::Relaxed);
+        set.set_now_ns_for_test(fake_now);
+
+        let id = alloc_hot(&mut set, b"cool none");
+        // Begin a fade, complete it; now alloc a NEW chunk in the Warm
+        // pool (the target of the first fade's landing spot) and try to
+        // demote that to... wait — Warm cooldown is 0 as well, so any
+        // re-demote pattern would succeed. This test asserts the
+        // zero-cooldown default shortcut.
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).unwrap();
+        set.complete_demote(handle).unwrap();
+        // Add a Hot pool chunk and demote again — no cooldown, should
+        // succeed immediately without tripping any hysteresis.
+        let id2 = alloc_hot(&mut set, b"cool none 2");
+        let _ = set
+            .begin_demote(TierKind::Hot, id2, TierKind::Warm)
+            .expect("zero cooldown means no rejection");
+    }
+
+    #[test]
+    fn hysteresis_rejects_re_demote_within_cooldown() {
+        let dir = tempdir().unwrap();
+        // Warm has a 100 ms cooldown; Hot has none.
+        let mut set = two_pool_set_with_cooldown(dir.path(), 0, 100_000_000);
+        FAKE_NOW.store(1_000_000_000, Ordering::Relaxed);
+        set.set_now_ns_for_test(fake_now);
+
+        // Alloc in Hot, demote to Warm at t=1s — target gets stamped with
+        // last_demote_ns = 1_000_000_000.
+        let id = alloc_hot(&mut set, b"hot to warm");
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).unwrap();
+        set.complete_demote(handle).unwrap();
+
+        // Advance clock by 50 ms. Try to demote the target (which now
+        // lives in Warm) back out to Hot. Warm's cooldown is 100 ms, so
+        // this should reject.
+        FAKE_NOW.store(1_050_000_000, Ordering::Relaxed);
+        let err = set
+            .begin_demote(TierKind::Warm, handle.target, TierKind::Hot)
+            .unwrap_err();
+        assert!(
+            matches!(err, ArenaError::HysteresisCooldown { .. }),
+            "expected HysteresisCooldown, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn hysteresis_allows_re_demote_after_cooldown() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set_with_cooldown(dir.path(), 0, 100_000_000);
+        FAKE_NOW.store(2_000_000_000, Ordering::Relaxed);
+        set.set_now_ns_for_test(fake_now);
+
+        let id = alloc_hot(&mut set, b"allow after");
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).unwrap();
+        set.complete_demote(handle).unwrap();
+
+        // Advance by 150 ms — past the 100 ms cooldown.
+        FAKE_NOW.store(2_150_000_000, Ordering::Relaxed);
+        let _handle2 = set
+            .begin_demote(TierKind::Warm, handle.target, TierKind::Hot)
+            .expect("re-demote after cooldown should succeed");
+    }
+
+    #[test]
+    fn hysteresis_pristine_chunk_never_blocked() {
+        let dir = tempdir().unwrap();
+        // Hot has a 1 s cooldown, but pristine chunks (last_demote_ns == 0)
+        // short-circuit the check entirely.
+        let mut set = two_pool_set_with_cooldown(dir.path(), 1_000_000_000, 0);
+        FAKE_NOW.store(3_000_000_000, Ordering::Relaxed);
+        set.set_now_ns_for_test(fake_now);
+
+        let id = alloc_hot(&mut set, b"pristine");
+        // This chunk has never been demoted — `last_demote_ns == 0` must
+        // bypass the cooldown check regardless of how large the cooldown is.
+        let _handle = set
+            .begin_demote(TierKind::Hot, id, TierKind::Warm)
+            .expect("pristine chunk must not be blocked by cooldown");
+    }
+
+    #[test]
+    fn last_demote_ns_written_outside_checksum_window() {
+        // Alloc a chunk, manually write last_demote_ns via the arena
+        // helper, then re-read via get_chunk (which runs the checksum).
+        // Must still succeed.
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set_with_cooldown(dir.path(), 0, 0);
+        let id = alloc_hot(&mut set, b"outside checksum");
+
+        set.pool_mut(TierKind::Hot)
+            .unwrap()
+            .arena_mut()
+            .write_last_demote_ns(id, 9_999_999_999)
+            .unwrap();
+
+        let chunk = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(id)
+            .expect("last_demote_ns write must not invalidate checksum");
+        assert_eq!(chunk.payload(), b"outside checksum");
+
+        // And the readback sees the new value.
+        let last = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .read_last_demote_ns(id)
+            .unwrap();
+        assert_eq!(last, 9_999_999_999);
+    }
+
+    /// Manually build an M1-shaped chunk bytestream with bytes 72..80
+    /// all zero (as M1/M2 code produced on disk). Parse via
+    /// `read_header_from` — the last_demote_ns field must decode as 0,
+    /// preserving backward compat.
+    #[test]
+    fn m1_chunk_reads_last_demote_ns_as_zero() {
+        use crate::memory_arena::chunk::read_header_from;
+        use crate::memory_arena::types::{CHUNK_HEADER_VERSION, CHUNK_MAGIC};
+
+        let mut buf = [0u8; HEADER_SIZE];
+        let payload = b"legacy last_demote".to_vec();
+
+        buf[0..8].copy_from_slice(&CHUNK_MAGIC);
+        buf[8..10].copy_from_slice(&CHUNK_HEADER_VERSION.to_le_bytes());
+        buf[10] = TierKind::Blob.as_u8();
+        buf[16..24].copy_from_slice(&7u64.to_le_bytes());
+        buf[24..32].copy_from_slice(&(payload.len() as u64).to_le_bytes());
+
+        use xxhash_rust::xxh3::Xxh3Default;
+        let mut hasher = Xxh3Default::new();
+        hasher.update(&buf[..56]);
+        hasher.update(&payload);
+        let checksum = hasher.digest();
+        buf[56..64].copy_from_slice(&checksum.to_le_bytes());
+        // bytes 64..128 left as all zeros (M1 format).
+
+        let mut full = Vec::with_capacity(HEADER_SIZE + payload.len());
+        full.extend_from_slice(&buf);
+        full.extend_from_slice(&payload);
+
+        let parsed = Chunk::deserialize(&full).expect("M1 chunk must parse");
+        assert_eq!(parsed.header().state, ChunkState::Resident);
+        assert_eq!(
+            parsed.header().last_demote_completed_at_ns, 0,
+            "M1 chunks must decode last_demote_ns as 0"
+        );
+
+        // And the header-only parse path does the same.
+        let header = read_header_from(&full[..HEADER_SIZE]).unwrap();
+        assert_eq!(header.last_demote_completed_at_ns, 0);
+    }
+
+    /// Serde backward compat: a `TierPolicy` JSON blob WITHOUT the new
+    /// `demote_cooldown_ns` field must deserialize with the field set to 0.
+    /// This mirrors what an old `manifest.json` from M1/M2 looks like.
+    #[test]
+    fn manifest_without_demote_cooldown_deserializes_as_zero() {
+        let legacy = r#"{
+            "max_chunks": 64,
+            "eviction": "Lru",
+            "promote_after_hits": 0,
+            "demote_after_idle_ns": 0
+        }"#;
+        let parsed: TierPolicy = serde_json::from_str(legacy)
+            .expect("legacy TierPolicy JSON must deserialize");
+        assert_eq!(parsed.demote_cooldown_ns, 0);
+    }
+
+    #[test]
+    fn hysteresis_cooldown_error_carries_remaining_ns() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set_with_cooldown(dir.path(), 0, 200_000_000);
+        FAKE_NOW.store(4_000_000_000, Ordering::Relaxed);
+        set.set_now_ns_for_test(fake_now);
+
+        let id = alloc_hot(&mut set, b"carry ns");
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).unwrap();
+        set.complete_demote(handle).unwrap();
+
+        // 80 ms elapsed → 120 ms remaining.
+        FAKE_NOW.store(4_080_000_000, Ordering::Relaxed);
+        let err = set
+            .begin_demote(TierKind::Warm, handle.target, TierKind::Hot)
+            .unwrap_err();
+        match err {
+            ArenaError::HysteresisCooldown {
+                cooldown_remaining_ns,
+                ..
+            } => {
+                assert_eq!(
+                    cooldown_remaining_ns, 120_000_000,
+                    "expected 120 ms remaining"
+                );
+            }
+            other => panic!("expected HysteresisCooldown, got {:?}", other),
+        }
+    }
+
+    /// Sanity: `ChunkHeader::new` defaults `last_demote_completed_at_ns`
+    /// to 0. Pairs with the backward-compat story — fresh chunks look
+    /// the same as M1/M2 ones for this field.
+    #[test]
+    fn chunk_header_new_defaults_last_demote_ns_to_zero() {
+        let hdr = ChunkHeader::new(ChunkId::new(1), TierKind::Hot, 0);
+        assert_eq!(hdr.last_demote_completed_at_ns, 0);
+    }
+}
