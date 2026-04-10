@@ -137,25 +137,27 @@ impl std::fmt::Display for ChunkId {
 /// Chunk header — 128 bytes on disk. Written at offset 0 of every chunk.
 ///
 /// Layout (little-endian):
-///   0..8    magic        = CHUNK_MAGIC
-///   8..10   version      = CHUNK_HEADER_VERSION
-///   10..11  tier         = TierKind as u8
-///   11..16  _reserved0   = zeros (alignment)
-///   16..24  chunk_id     = u64
-///   24..32  payload_size = u64 (bytes following the header)
-///   32..40  created_at   = u64 unix nanoseconds
-///   40..48  last_access  = u64 unix nanoseconds
-///   48..56  access_count = u64
-///   56..64  checksum     = u64 xxh3 of (header[0..56] || payload)
-///   64..65  chunk_state  = ChunkState as u8 (M3, outside checksum window)
-///   65..72  _pad0        = zeros (7 bytes reserved for M4+ state metadata)
-///   72..128 _reserved1   = zeros (reserved for future fields; M3 plan 04
-///                         reserves bytes 72..80 for last_demote_ns)
+///   0..8    magic                          = CHUNK_MAGIC
+///   8..10   version                        = CHUNK_HEADER_VERSION
+///   10..11  tier                           = TierKind as u8
+///   11..16  _reserved0                     = zeros (alignment)
+///   16..24  chunk_id                       = u64
+///   24..32  payload_size                   = u64 (bytes following the header)
+///   32..40  created_at                     = u64 unix nanoseconds
+///   40..48  last_access                    = u64 unix nanoseconds
+///   48..56  access_count                   = u64
+///   56..64  checksum                       = u64 xxh3 of (header[0..56] || payload)
+///   64..65  chunk_state                    = ChunkState as u8 (M3)
+///   65..72  _pad0                          = zeros (7 bytes reserved)
+///   72..80  last_demote_completed_at_ns    = u64 (M3)
+///   80..88  last_promote_completed_at_ns   = u64 (M4)
+///   88..128 _reserved1_tail               = zeros (future fields)
 ///
-/// **M3 checksum invariant.** The checksum at offset 56..64 still covers
+/// **Checksum invariant.** The checksum at offset 56..64 covers
 /// `header[0..56] || payload`. Bytes 64..128 (`chunk_state` + `_pad0` +
-/// `_reserved1`) are OUTSIDE the checksum window so state-machine fields
-/// can be mutated post-finalize without invalidating the chunk.
+/// timestamps + `_reserved1_tail`) are OUTSIDE the checksum window so
+/// state-machine fields can be mutated post-finalize without invalidating
+/// the chunk.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ChunkHeader {
     pub magic: [u8; 8],
@@ -180,6 +182,16 @@ pub struct ChunkHeader {
     /// to prevent thrashing: a chunk that just completed a demote cannot
     /// be demoted again within `TierPolicy::demote_cooldown_ns`.
     pub last_demote_completed_at_ns: u64,
+    /// Timestamp (ns since unix epoch) of the most recent
+    /// `complete_promote` that produced this chunk. 0 = never promoted.
+    /// Lives at header bytes 80..88. Outside the checksum window — like
+    /// the demote timestamp, this is mutable via
+    /// `Arena::write_last_promote_ns` without re-checksumming.
+    ///
+    /// Used by the hysteresis cooldown check in `ArenaSet::begin_promote`
+    /// to prevent thrashing: a chunk that just completed a promote cannot
+    /// be promoted again within `TierPolicy::promote_cooldown_ns`.
+    pub last_promote_completed_at_ns: u64,
 }
 
 impl ChunkHeader {
@@ -187,7 +199,7 @@ impl ChunkHeader {
     /// The checksum field is left at 0 — it must be computed and filled in
     /// by `Chunk::finalize` once the payload is written. The state field
     /// defaults to `ChunkState::Resident`; `last_demote_completed_at_ns`
-    /// defaults to 0 (never demoted).
+    /// and `last_promote_completed_at_ns` default to 0 (never moved).
     pub fn new(chunk_id: ChunkId, tier: TierKind, payload_size: u64) -> Self {
         let now_ns = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
@@ -205,6 +217,7 @@ impl ChunkHeader {
             checksum: 0,
             state: ChunkState::Resident,
             last_demote_completed_at_ns: 0,
+            last_promote_completed_at_ns: 0,
         }
     }
 }
@@ -243,6 +256,12 @@ pub struct TierPolicy {
     /// files that don't include this field — they deserialize with 0.
     #[serde(default)]
     pub demote_cooldown_ns: u64,
+    /// Minimum time between consecutive promotes of the same chunk (M4).
+    /// 0 = no cooldown (default, preserves pre-slice-4 behavior).
+    /// `serde(default)` preserves backward compat with legacy manifest.json
+    /// files that don't include this field — they deserialize with 0.
+    #[serde(default)]
+    pub promote_cooldown_ns: u64,
 }
 
 impl TierPolicy {
@@ -256,6 +275,7 @@ impl TierPolicy {
                 promote_after_hits: 0,
                 demote_after_idle_ns: 5_000_000_000,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
             TierKind::Warm => Self {
                 max_chunks: 64,
@@ -263,6 +283,7 @@ impl TierPolicy {
                 promote_after_hits: 4,
                 demote_after_idle_ns: 10_000_000_000,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
             TierKind::Vector => Self {
                 max_chunks: 64,
@@ -270,6 +291,7 @@ impl TierPolicy {
                 promote_after_hits: 2,
                 demote_after_idle_ns: 5_000_000_000,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
             TierKind::Blob => Self {
                 max_chunks: 64,
@@ -277,6 +299,7 @@ impl TierPolicy {
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
             TierKind::Resident => Self {
                 max_chunks: 64,
@@ -284,6 +307,7 @@ impl TierPolicy {
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
         }
     }

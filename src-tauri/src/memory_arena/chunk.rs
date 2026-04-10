@@ -148,11 +148,10 @@ impl Chunk {
 /// Serialize a `ChunkHeader` into a 128-byte buffer. Little-endian for
 /// portability with x86_64 and aarch64. Caller guarantees buf.len() >= HEADER_SIZE.
 ///
-/// **M3 layout note.** After writing the core fields and the checksum slot,
-/// byte 64 is written with `header.state.as_u8()`. Bytes 65..128 stay zero
-/// — reserved for M4+ state metadata (pad0 at 65..72, last_demote_ns at
-/// 72..80 reserved for M3 Plan 04, tail at 80..128 for future fields).
-/// The state byte is OUTSIDE the checksum window by design.
+/// Bytes 64..88 hold state-machine metadata outside the checksum window:
+/// byte 64 = chunk_state, bytes 72..80 = last_demote_completed_at_ns (M3),
+/// bytes 80..88 = last_promote_completed_at_ns (M4). Bytes 88..128 stay
+/// zero — reserved for future fields.
 pub(crate) fn write_header_into(header: &ChunkHeader, buf: &mut [u8]) {
     debug_assert!(buf.len() >= HEADER_SIZE);
     buf[..HEADER_SIZE].fill(0);
@@ -167,10 +166,12 @@ pub(crate) fn write_header_into(header: &ChunkHeader, buf: &mut [u8]) {
     buf[48..56].copy_from_slice(&header.access_count.to_le_bytes());
     buf[56..64].copy_from_slice(&header.checksum.to_le_bytes());
     // 64: chunk state byte (M3). 65..72: pad0 (zero).
-    // 72..80: last_demote_completed_at_ns u64 LE (M3 Plan 04).
-    // 80..128: reserved1 tail (zero, reserved for future fields).
+    // 72..80: last_demote_completed_at_ns u64 LE (M3).
+    // 80..88: last_promote_completed_at_ns u64 LE (M4).
+    // 88..128: reserved1 tail (zero, reserved for future fields).
     buf[64] = header.state.as_u8();
     buf[72..80].copy_from_slice(&header.last_demote_completed_at_ns.to_le_bytes());
+    buf[80..88].copy_from_slice(&header.last_promote_completed_at_ns.to_le_bytes());
 }
 
 /// Deserialize a `ChunkHeader` from a 128-byte buffer. Validates magic,
@@ -208,11 +209,14 @@ pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
     // M3 state byte at offset 64 (outside checksum window). M1/M2 chunks
     // have this byte == 0 which decodes as ChunkState::Resident.
     let state = ChunkState::from_u8(buf[64])?;
-    // M3 Plan 04: last_demote_completed_at_ns at bytes 72..80 (outside
-    // checksum window). M1/M2 chunks have these bytes == 0 which
-    // decodes as "never demoted".
+    // M3: last_demote_completed_at_ns at bytes 72..80 (outside checksum
+    // window). M1/M2 chunks have these bytes == 0 → "never demoted".
     let last_demote_completed_at_ns =
         u64::from_le_bytes(buf[72..80].try_into().unwrap());
+    // M4: last_promote_completed_at_ns at bytes 80..88 (outside checksum
+    // window). M1/M2/M3 chunks have these bytes == 0 → "never promoted".
+    let last_promote_completed_at_ns =
+        u64::from_le_bytes(buf[80..88].try_into().unwrap());
 
     Ok(ChunkHeader {
         magic,
@@ -226,5 +230,6 @@ pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
         checksum,
         state,
         last_demote_completed_at_ns,
+        last_promote_completed_at_ns,
     })
 }
