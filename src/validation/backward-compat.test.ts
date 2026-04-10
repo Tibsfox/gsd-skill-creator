@@ -38,9 +38,16 @@ async function discoverExamples(subdir: string, filename: string): Promise<{ nam
 // ============================================================================
 
 describe('Backward Compatibility: Example Skills', () => {
-  it('should discover all 31 example skills', async () => {
+  // The examples library grows over time as new skills are imported (see
+  // tools/import-filesystem-skills.ts). This test guards that the baseline
+  // set (31 skills as of v1.49.192) is never removed, without failing
+  // every time a new skill is added. Every skill still has to validate
+  // against the schema in the next test.
+  const BASELINE_SKILL_COUNT = 31;
+
+  it('should discover at least the baseline example skills', async () => {
     const skills = await discoverExamples('skills', 'SKILL.md');
-    expect(skills.length).toBe(31);
+    expect(skills.length).toBeGreaterThanOrEqual(BASELINE_SKILL_COUNT);
   });
 
   it('should validate every example skill against SkillMetadataSchema', async () => {
@@ -85,9 +92,14 @@ describe('Backward Compatibility: Example Skills', () => {
 // ============================================================================
 
 describe('Backward Compatibility: Example Agents', () => {
-  it('should discover all 22 example agents', async () => {
+  // Same growth-friendly pattern as skills above. Baseline was 22 agents
+  // as of v1.49.192; new agents can be added without breaking this test
+  // as long as the schema validation below still passes for every one.
+  const BASELINE_AGENT_COUNT = 22;
+
+  it('should discover at least the baseline example agents', async () => {
     const agents = await discoverExamples('agents', 'AGENT.md');
-    expect(agents.length).toBe(22);
+    expect(agents.length).toBeGreaterThanOrEqual(BASELINE_AGENT_COUNT);
   });
 
   it('should validate every example agent has name and description', async () => {
