@@ -122,6 +122,12 @@ footer a { color:rgba(255,255,255,0.3); }
       <div class="arxiv">ICLR 2025</div>
       <p>Demonstrates that adaptive compute allocation based on input features can reduce total inference compute by 50% with no measurable quality loss on standard benchmarks. Uses a lightweight classifier trained on prompt features to predict the optimal number of reasoning steps. The classifier adds negligible overhead (~0.1% of total compute) and generalizes across task types after training on a diverse mixture.</p>
     </div>
+
+    <div class="paper">
+      <h3>Act Wisely: Meta-Cognitive Tool Use in Agentic Models</h3>
+      <div class="arxiv"><a href="https://arxiv.org/abs/2604.08545">arXiv:2604.08545</a> &middot; Yan et al., April 2026</div>
+      <p>Addresses indiscriminate tool invocation in agentic models, which causes latency and reasoning errors. Introduces HDPO, a framework that decouples tool efficiency from accuracy optimization by maintaining separate channels for correctness and resource economy. The key insight: tool efficiency is reframed from a competing scalar objective to a strictly conditional one &mdash; the model masters task resolution first, then develops self-reliance. Produces Metis, a model that dramatically reduces tool calls while improving reasoning accuracy. Directly relevant to our skill-creator activation patterns: skills should activate only when genuinely needed, not reflexively on every matching trigger.</p>
+    </div>
   </section>
 
   <section>
