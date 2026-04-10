@@ -14,7 +14,7 @@ use xxhash_rust::xxh3::Xxh3Default;
 
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::types::{
-    ChunkHeader, ChunkId, TierKind, CHUNK_HEADER_VERSION, CHUNK_MAGIC, HEADER_SIZE,
+    ChunkHeader, ChunkId, ChunkState, TierKind, CHUNK_HEADER_VERSION, CHUNK_MAGIC, HEADER_SIZE,
 };
 
 /// Offset within the header where the checksum field lives. The checksum
@@ -147,6 +147,12 @@ impl Chunk {
 
 /// Serialize a `ChunkHeader` into a 128-byte buffer. Little-endian for
 /// portability with x86_64 and aarch64. Caller guarantees buf.len() >= HEADER_SIZE.
+///
+/// **M3 layout note.** After writing the core fields and the checksum slot,
+/// byte 64 is written with `header.state.as_u8()`. Bytes 65..128 stay zero
+/// — reserved for M4+ state metadata (pad0 at 65..72, last_demote_ns at
+/// 72..80 reserved for M3 Plan 04, tail at 80..128 for future fields).
+/// The state byte is OUTSIDE the checksum window by design.
 pub(crate) fn write_header_into(header: &ChunkHeader, buf: &mut [u8]) {
     debug_assert!(buf.len() >= HEADER_SIZE);
     buf[..HEADER_SIZE].fill(0);
@@ -160,11 +166,12 @@ pub(crate) fn write_header_into(header: &ChunkHeader, buf: &mut [u8]) {
     buf[40..48].copy_from_slice(&header.last_access_ns.to_le_bytes());
     buf[48..56].copy_from_slice(&header.access_count.to_le_bytes());
     buf[56..64].copy_from_slice(&header.checksum.to_le_bytes());
-    // 64..128 reserved1 (already zeroed)
+    // 64: chunk state byte (M3). 65..72: pad0 (zero). 72..128: reserved1.
+    buf[64] = header.state.as_u8();
 }
 
 /// Deserialize a `ChunkHeader` from a 128-byte buffer. Validates magic,
-/// version, and tier kind.
+/// version, tier kind, and chunk state.
 pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
     if buf.len() < HEADER_SIZE {
         return Err(ArenaError::BufferTooSmall {
@@ -195,6 +202,9 @@ pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
     let last_access_ns = u64::from_le_bytes(buf[40..48].try_into().unwrap());
     let access_count = u64::from_le_bytes(buf[48..56].try_into().unwrap());
     let checksum = u64::from_le_bytes(buf[56..64].try_into().unwrap());
+    // M3 state byte at offset 64 (outside checksum window). M1/M2 chunks
+    // have this byte == 0 which decodes as ChunkState::Resident.
+    let state = ChunkState::from_u8(buf[64])?;
 
     Ok(ChunkHeader {
         magic,
@@ -206,5 +216,6 @@ pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
         last_access_ns,
         access_count,
         checksum,
+        state,
     })
 }
