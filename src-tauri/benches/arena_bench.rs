@@ -1842,6 +1842,175 @@ fn bench_bakeoff_fragmentation(c: &mut Criterion) {
     group.finish();
 }
 
+// ===== bench: hugetlb =================================================
+
+#[cfg(target_os = "linux")]
+fn bench_hugetlb(c: &mut Criterion) {
+    let mut group = c.benchmark_group("hugetlb");
+    group.sample_size(50);
+
+    // Alloc: hugetlb vs standard (both fall back on systems without huge pages,
+    // so this measures the fallback-path baseline).
+    group.bench_function("alloc_small_1kib_hugetlb", |b| {
+        b.iter_batched(
+            || {
+                let dir = tempdir().expect("tempdir");
+                let path = dir.path().join("hugetlb.arena");
+                let arena = Arena::new_mmap_file_hugetlb(config_small(), 16, &path)
+                    .expect("hugetlb arena");
+                (arena, dir)
+            },
+            |(mut arena, _dir)| {
+                let payload = vec![0xAA; 1024];
+                let id = arena
+                    .alloc_chunk(TierKind::Hot, black_box(payload))
+                    .expect("alloc");
+                black_box(id);
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("alloc_small_1kib_standard", |b| {
+        b.iter_batched(
+            || {
+                let dir = tempdir().expect("tempdir");
+                let path = dir.path().join("standard.arena");
+                let arena = Arena::new_mmap_file(config_small(), 16, &path)
+                    .expect("standard arena");
+                (arena, dir)
+            },
+            |(mut arena, _dir)| {
+                let payload = vec![0xAA; 1024];
+                let id = arena
+                    .alloc_chunk(TierKind::Hot, black_box(payload))
+                    .expect("alloc");
+                black_box(id);
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    // Get: hugetlb vs standard on a prefilled mmap arena.
+    group.bench_function("get_chunk_hot_hugetlb", |b| {
+        let dir = tempdir().expect("tempdir");
+        let path = dir.path().join("hugetlb.arena");
+        let mut arena = Arena::new_mmap_file_hugetlb(config_small(), 1000, &path)
+            .expect("hugetlb arena");
+        for i in 0..1000 {
+            arena
+                .alloc_chunk(TierKind::Hot, vec![i as u8; 64])
+                .expect("prefill");
+        }
+        let mut idx: u64 = 1;
+        b.iter(|| {
+            let id = ChunkId::new(idx);
+            let chunk = arena.get_chunk(black_box(id)).expect("get");
+            black_box(chunk);
+            idx += 1;
+            if idx > 1000 {
+                idx = 1;
+            }
+        });
+    });
+
+    group.bench_function("get_chunk_hot_standard", |b| {
+        let dir = tempdir().expect("tempdir");
+        let path = dir.path().join("standard.arena");
+        let mut arena = Arena::new_mmap_file(config_small(), 1000, &path)
+            .expect("standard arena");
+        for i in 0..1000 {
+            arena
+                .alloc_chunk(TierKind::Hot, vec![i as u8; 64])
+                .expect("prefill");
+        }
+        let mut idx: u64 = 1;
+        b.iter(|| {
+            let id = ChunkId::new(idx);
+            let chunk = arena.get_chunk(black_box(id)).expect("get");
+            black_box(chunk);
+            idx += 1;
+            if idx > 1000 {
+                idx = 1;
+            }
+        });
+    });
+
+    group.finish();
+}
+
+#[cfg(not(target_os = "linux"))]
+fn bench_hugetlb(_c: &mut Criterion) {}
+
+// ===== bench: pg_cold =================================================
+
+#[cfg(feature = "postgres")]
+fn bench_pg_cold(c: &mut Criterion) {
+    use gsd_os_lib::memory_arena::pg_cold::PgColdSource;
+    use gsd_os_lib::memory_arena::warm_start::ColdSource;
+
+    let url = match std::env::var("DATABASE_URL") {
+        Ok(u) => u,
+        Err(_) => {
+            eprintln!("DATABASE_URL not set — skipping PG benchmarks");
+            return;
+        }
+    };
+
+    let rt = tokio::runtime::Runtime::new().expect("tokio runtime");
+    let pool = match rt.block_on(async { sqlx::PgPool::connect(&url).await }) {
+        Ok(p) => p,
+        Err(e) => {
+            eprintln!("Cannot connect to PG: {} — skipping PG benchmarks", e);
+            return;
+        }
+    };
+
+    let cs = PgColdSource::new(pool, "public", "arena_cold_bench");
+    cs.ensure_table().expect("ensure_table");
+
+    let mut group = c.benchmark_group("pg_cold");
+    group.sample_size(50);
+
+    group.bench_function("store_fetch_roundtrip", |b| {
+        let mut counter = 0u64;
+        b.iter(|| {
+            counter += 1;
+            let id = ChunkId::new(counter);
+            let payload = vec![0xAB; 1024];
+            cs.store(TierKind::Hot, id, payload.clone()).expect("store");
+            let fetched = cs.fetch(TierKind::Hot, id).expect("fetch");
+            black_box(fetched);
+            cs.delete(TierKind::Hot, id).expect("cleanup");
+        });
+    });
+
+    group.bench_function("store_batch_100", |b| {
+        let mut batch_counter = 0u64;
+        b.iter(|| {
+            let base = batch_counter * 100 + 100_000;
+            for i in 0..100 {
+                let id = ChunkId::new(base + i);
+                cs.store(TierKind::Warm, id, vec![0xCD; 256]).expect("store");
+            }
+            // Cleanup.
+            for i in 0..100 {
+                cs.delete(TierKind::Warm, ChunkId::new(base + i)).expect("cleanup");
+            }
+            batch_counter += 1;
+        });
+    });
+
+    group.bench_function("fetch_missing", |b| {
+        b.iter(|| {
+            let result = cs.fetch(TierKind::Blob, ChunkId::new(999_999_999)).expect("fetch");
+            black_box(result);
+        });
+    });
+
+    group.finish();
+}
+
 criterion_group!(
     benches,
     bench_alloc,
@@ -1858,6 +2027,7 @@ criterion_group!(
     bench_promote_hysteresis,
     bench_orphan_recovery,
     bench_policy_sweep,
+    bench_hugetlb,
 );
 
 criterion_group!(
@@ -1876,8 +2046,20 @@ criterion_group!(
     bench_vram_crossfade,
 );
 
-#[cfg(feature = "cuda")]
+#[cfg(feature = "postgres")]
+criterion_group!(
+    pg_benches,
+    bench_pg_cold,
+);
+
+#[cfg(all(feature = "cuda", feature = "postgres"))]
+criterion_main!(benches, allocator_bakeoff, vram_benches, pg_benches);
+
+#[cfg(all(feature = "cuda", not(feature = "postgres")))]
 criterion_main!(benches, allocator_bakeoff, vram_benches);
 
-#[cfg(not(feature = "cuda"))]
+#[cfg(all(not(feature = "cuda"), feature = "postgres"))]
+criterion_main!(benches, allocator_bakeoff, pg_benches);
+
+#[cfg(all(not(feature = "cuda"), not(feature = "postgres")))]
 criterion_main!(benches, allocator_bakeoff);
