@@ -63,6 +63,10 @@ __pycache__/
 *.pyc
 .venv/
 
+# Local data stores (regenerable)
+.grove/
+.chroma/
+
 # Runtime state (regenerable)
 .cadence-state.json
 
