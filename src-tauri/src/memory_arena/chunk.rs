@@ -174,12 +174,21 @@ pub(crate) fn write_header_into(header: &ChunkHeader, buf: &mut [u8]) {
     buf[80..88].copy_from_slice(&header.last_promote_completed_at_ns.to_le_bytes());
 }
 
-/// Deserialize a `ChunkHeader` from a 128-byte buffer. Validates magic,
-/// version, tier kind, and chunk state.
-pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
-    if buf.len() < HEADER_SIZE {
+/// Deserialize only the **core** fields of a `ChunkHeader` from bytes
+/// 0..64 — the first cache line on x86_64. Validates magic, version, and
+/// tier kind. Extended fields (state, demote/promote timestamps at bytes
+/// 64..88) are set to defaults (`Resident`, 0, 0).
+///
+/// Use this when only the core fields are needed (directory building in
+/// `open_lazy`, payload-size extraction in `get_chunk` / `validate_chunk` /
+/// `free_chunk`). Avoids fetching the second cache line.
+///
+/// Call `read_header_extended` afterward to fill in the remaining fields
+/// if needed.
+pub(crate) fn read_header_core(buf: &[u8]) -> ArenaResult<ChunkHeader> {
+    if buf.len() < 64 {
         return Err(ArenaError::BufferTooSmall {
-            need: HEADER_SIZE,
+            need: 64,
             got: buf.len(),
         });
     }
@@ -206,17 +215,6 @@ pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
     let last_access_ns = u64::from_le_bytes(buf[40..48].try_into().unwrap());
     let access_count = u64::from_le_bytes(buf[48..56].try_into().unwrap());
     let checksum = u64::from_le_bytes(buf[56..64].try_into().unwrap());
-    // M3 state byte at offset 64 (outside checksum window). M1/M2 chunks
-    // have this byte == 0 which decodes as ChunkState::Resident.
-    let state = ChunkState::from_u8(buf[64])?;
-    // M3: last_demote_completed_at_ns at bytes 72..80 (outside checksum
-    // window). M1/M2 chunks have these bytes == 0 → "never demoted".
-    let last_demote_completed_at_ns =
-        u64::from_le_bytes(buf[72..80].try_into().unwrap());
-    // M4: last_promote_completed_at_ns at bytes 80..88 (outside checksum
-    // window). M1/M2/M3 chunks have these bytes == 0 → "never promoted".
-    let last_promote_completed_at_ns =
-        u64::from_le_bytes(buf[80..88].try_into().unwrap());
 
     Ok(ChunkHeader {
         magic,
@@ -228,8 +226,36 @@ pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
         last_access_ns,
         access_count,
         checksum,
-        state,
-        last_demote_completed_at_ns,
-        last_promote_completed_at_ns,
+        state: ChunkState::Resident,
+        last_demote_completed_at_ns: 0,
+        last_promote_completed_at_ns: 0,
     })
+}
+
+/// Fill in the **extended** header fields from bytes 64..88: chunk state,
+/// last_demote_completed_at_ns, last_promote_completed_at_ns. Requires a
+/// full HEADER_SIZE buffer. Call after `read_header_core` when the extended
+/// fields are actually needed.
+pub(crate) fn read_header_extended(buf: &[u8], header: &mut ChunkHeader) -> ArenaResult<()> {
+    if buf.len() < HEADER_SIZE {
+        return Err(ArenaError::BufferTooSmall {
+            need: HEADER_SIZE,
+            got: buf.len(),
+        });
+    }
+    header.state = ChunkState::from_u8(buf[64])?;
+    header.last_demote_completed_at_ns =
+        u64::from_le_bytes(buf[72..80].try_into().unwrap());
+    header.last_promote_completed_at_ns =
+        u64::from_le_bytes(buf[80..88].try_into().unwrap());
+    Ok(())
+}
+
+/// Deserialize a `ChunkHeader` from a 128-byte buffer. Validates magic,
+/// version, tier kind, and chunk state. Convenience wrapper that calls
+/// `read_header_core` + `read_header_extended`.
+pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
+    let mut header = read_header_core(buf)?;
+    read_header_extended(buf, &mut header)?;
+    Ok(header)
 }
