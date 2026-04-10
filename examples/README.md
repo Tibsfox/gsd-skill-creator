@@ -1,15 +1,61 @@
-# Example Skills, Agents, and Teams
+# Example Skills, Agents, Teams, and Chipsets
 
-This directory contains examples demonstrating proper skill, agent, and team authoring patterns. Each example solves a real problem in a distinct domain and can be copied and adapted for your own use.
+This directory contains examples demonstrating proper authoring patterns for every kind of resource gsd-skill-creator manages. Each example solves a real problem in a distinct domain and can be copied and adapted for your own use.
 
 ## Directory Structure
 
 ```
 examples/
-├── skills/          # 31 skill examples (SKILL.md each)
-├── agents/          # 22 agent examples (AGENT.md each)
-└── teams/           # 10 team examples (config.json + README.md each)
+├── skills/          # 56 skill examples (SKILL.md each)
+├── agents/          # 54 agent examples (AGENT.md each)
+├── teams/           # 10 team examples (config.json + README.md each)
+└── chipsets/        # 7 chipset YAML definitions
 ```
+
+## Recently added (session 009 import)
+
+The project-local `.claude/` library was imported via `tools/import-filesystem-skills.ts`, adding 25 skills, 32 agents, and 7 chipsets to the examples directory. Wasteland branch content (the muse team under `data/chipset/muses/`) is deliberately excluded.
+
+### New skill categories
+
+| Category | Skills |
+|---|---|
+| Agent orchestration | `mayor-coordinator`, `sling-dispatch`, `polecat-worker`, `fleet-mission`, `witness-observer`, `gupp-propulsion`, `runtime-hal`, `mail-async`, `nudge-sync`, `hook-persistence` |
+| State & lifecycle | `beads-state`, `token-budget`, `done-retirement` |
+| Research & mission | `research-engine`, `research-mission-generator`, `vision-to-mission`, `data-fidelity` |
+| Media & publishing | `audio-engineering`, `av-studio`, `ffmpeg-media`, `publish-pipeline` |
+| Development workflow | `latex-authoring`, `refinery-merge`, `issue-triage-pr-review`, `ecosystem-alignment` |
+
+### New agent categories
+
+| Category | Agents |
+|---|---|
+| Media | `audio-engineer`, `ffmpeg-processor` |
+| Document & research | `document-builder`, `fact-checker`, `market-researcher`, `research-fleet-commander` |
+| GSD workflow | 20+ `gsd-*` agents (advisor-researcher, assumptions-analyzer, codebase-mapper, debugger, doc-verifier, doc-writer, executor, integration-checker, nyquist-auditor, phase-researcher, plan-checker, planner, project-researcher, research-synthesizer, roadmapper, security-auditor, ui-auditor, ui-checker, ui-researcher, user-profiler, verifier) |
+| Unit Circle Laboratory | `uc-brainstorm-engine`, `uc-perf-analyst`, `uc-proof-engineer`, `uc-retro-analyst`, `uc-skill-forger` |
+| v1.50a classroom | `v1.50a-student`, `v1.50a-support`, `v1.50a-teacher` |
+| Issue triage | `issue-fixer` |
+
+### Chipsets (7)
+
+| Chipset | Domain |
+|---|---|
+| `agc-educational` | Apollo Guidance Computer educational chipset |
+| `aminet-archive` | Amiga software archive reconstruction |
+| `chipset` | Baseline chipset definition |
+| `gastown-orchestration` | Gastown convoy-level orchestration |
+| `math-coprocessor` | Mathematical computation chipset (CUDA/GPU) |
+| `minecraft-knowledge-world` | Minecraft as knowledge-world substrate |
+| `unison-translation` | Unison content-addressed translation |
+
+> **Wasteland exclusion.** The muse team chipset (`data/chipset/muses/`) and any content on the `wasteland` branch are intentionally excluded from examples. They remain in their respective branches and are not suitable for general consumption.
+
+## Grove codebase snapshot
+
+A pre-built Grove-format snapshot of the full library lives at `.grove/arena.json` (7.3 MB). It contains 299 content-addressed records spanning all four resource kinds and can be loaded by any tool that speaks the Grove format. See `docs/GROVE-FORMAT.md` for the spec and `tools/import-filesystem-skills.ts` for the import pipeline that produced it.
+
+---
 
 ## Available Examples
 
