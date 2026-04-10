@@ -550,6 +550,54 @@ impl Arena {
         self.next_chunk_id = next;
     }
 
+    /// Number of slots currently free (not allocated). O(1).
+    pub fn free_slot_count(&self) -> usize {
+        self.free_stack.len()
+    }
+
+    /// Re-register a slot whose backing bytes already contain a valid chunk
+    /// (used by `WarmStart::open` after walking the mmap on reopen). Marks
+    /// the slot allocated, inserts into directory + LRU, removes from the
+    /// free stack, and bumps `next_chunk_id` past `id`.
+    ///
+    /// This is the "trust the bytes already on disk" path — the warm-start
+    /// loop has already validated header magic + checksum, so we don't
+    /// re-deserialize here.
+    ///
+    /// # Errors
+    /// - `CorruptCheckpoint` if `slot` is out of bounds, the slot is already
+    ///   allocated, or the slot is not in the free stack.
+    pub fn reinsert_slot(&mut self, slot: usize, id: ChunkId) -> ArenaResult<()> {
+        if slot >= self.slots.len() {
+            return Err(ArenaError::CorruptCheckpoint {
+                reason: format!(
+                    "reinsert_slot: slot {} out of bounds ({})",
+                    slot,
+                    self.slots.len()
+                ),
+            });
+        }
+        if !matches!(self.slots[slot], SlotState::Free) {
+            return Err(ArenaError::CorruptCheckpoint {
+                reason: format!("reinsert_slot: slot {} already allocated", slot),
+            });
+        }
+        if let Some(pos) = self.free_stack.iter().position(|&s| s == slot) {
+            self.free_stack.swap_remove(pos);
+        } else {
+            return Err(ArenaError::CorruptCheckpoint {
+                reason: format!("reinsert_slot: slot {} not in free stack", slot),
+            });
+        }
+        self.slots[slot] = SlotState::Allocated(id);
+        self.directory.insert(id, slot);
+        self.lru.insert(id);
+        if id.as_u64() >= self.next_chunk_id {
+            self.next_chunk_id = id.as_u64() + 1;
+        }
+        Ok(())
+    }
+
     /// Mutable access to the raw storage, used by checkpoint loader.
     pub(crate) fn storage_mut(&mut self) -> &mut [u8] {
         &mut self.storage
