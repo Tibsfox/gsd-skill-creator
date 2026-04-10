@@ -30,7 +30,7 @@ use serde::{Deserialize, Serialize};
 use crate::memory_arena::arena::Arena;
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::types::{
-    ArenaConfig, ChunkId, ChunkState, TierKind, MAX_CHUNK_SIZE, MIN_CHUNK_SIZE,
+    ArenaConfig, ChunkId, ChunkState, SweepReport, TierKind, MAX_CHUNK_SIZE, MIN_CHUNK_SIZE,
 };
 
 /// Handle returned by `ArenaSet::begin_demote`. Callers pass it to
@@ -908,6 +908,214 @@ impl ArenaSet {
     /// `abort_demote`.
     pub fn abort_promote(&mut self, handle: CrossfadeHandle) -> ArenaResult<()> {
         self.abort_crossfade_inner(handle)
+    }
+
+    // =========================================================================
+    // Policy sweep driver (M5)
+    // =========================================================================
+
+    /// Run a single synchronous policy sweep across all pools. Inspects
+    /// every allocated chunk, compares access_count / last_access_ns
+    /// against the pool's `TierPolicy` thresholds, and initiates +
+    /// completes crossfades for any chunk that qualifies.
+    ///
+    /// Every crossfade initiated in this sweep is completed in the same
+    /// sweep — no deferred completion, no in-flight fades persist.
+    ///
+    /// Pools are processed hottest-first (by `TierKind::heat_index`)
+    /// to avoid promote-then-demote oscillation within a single sweep.
+    pub fn run_policy_sweep(&mut self) -> SweepReport {
+        let mut report = SweepReport::new();
+        let now = (self.now_ns)();
+
+        // Collect configured tiers sorted by heat_index descending (hottest first).
+        let mut tiers: Vec<TierKind> = self.pools.keys().copied().collect();
+        tiers.sort_by(|a, b| b.heat_index().cmp(&a.heat_index()));
+
+        for tier in tiers {
+            // Snapshot chunk ids to avoid borrow conflicts on &mut self.
+            let chunk_ids: Vec<ChunkId> = match self.pools.get(&tier) {
+                Some(pool) => pool.arena().iter_chunk_ids().collect(),
+                None => continue,
+            };
+
+            let policy = match self.pools.get(&tier) {
+                Some(pool) => *pool.policy(),
+                None => continue,
+            };
+
+            for id in chunk_ids {
+                // Skip if chunk was freed by an earlier step in this sweep
+                // (e.g. eviction).
+                if !self.pools.get(&tier).map_or(false, |p| p.arena().contains(id)) {
+                    continue;
+                }
+
+                // --- Promote check ---
+                if policy.promote_after_hits > 0 {
+                    if let Some(target_tier) = self.hotter_tier(tier) {
+                        let access_count = match self.pools.get(&tier)
+                            .and_then(|p| p.arena().read_access_count(id).ok())
+                        {
+                            Some(c) => c,
+                            None => continue,
+                        };
+
+                        if access_count >= policy.promote_after_hits as u64 {
+                            match self.begin_promote(tier, id, target_tier) {
+                                Ok(handle) => {
+                                    report.promotes_initiated += 1;
+                                    match self.complete_promote(handle) {
+                                        Ok(target_id) => {
+                                            report.promotes_completed += 1;
+                                            // Reset access count on the promoted target.
+                                            if let Some(tp) = self.pools.get_mut(&target_tier) {
+                                                let _ = tp.arena_mut().reset_access_count(target_id);
+                                            }
+                                        }
+                                        Err(e) => {
+                                            report.errors.push((id, tier, e));
+                                        }
+                                    }
+                                    continue; // Source freed, skip demote check.
+                                }
+                                Err(ArenaError::PoolFull { .. }) => {
+                                    // Evict from target pool and retry once.
+                                    if let Some(tp) = self.pools.get_mut(&target_tier) {
+                                        match tp.evict_lru() {
+                                            Ok(Some(_)) => {
+                                                report.evictions += 1;
+                                            }
+                                            Ok(None) => {
+                                                // Target empty but full? Shouldn't happen.
+                                                continue;
+                                            }
+                                            Err(e) => {
+                                                report.errors.push((id, tier, e));
+                                                continue;
+                                            }
+                                        }
+                                    }
+                                    // Retry promote after eviction.
+                                    match self.begin_promote(tier, id, target_tier) {
+                                        Ok(handle) => {
+                                            report.promotes_initiated += 1;
+                                            match self.complete_promote(handle) {
+                                                Ok(target_id) => {
+                                                    report.promotes_completed += 1;
+                                                    if let Some(tp) = self.pools.get_mut(&target_tier) {
+                                                        let _ = tp.arena_mut().reset_access_count(target_id);
+                                                    }
+                                                }
+                                                Err(e) => {
+                                                    report.errors.push((id, tier, e));
+                                                }
+                                            }
+                                            continue;
+                                        }
+                                        Err(e) => {
+                                            report.errors.push((id, tier, e));
+                                            continue;
+                                        }
+                                    }
+                                }
+                                Err(ArenaError::HysteresisCooldown { .. }) => {
+                                    report.skipped_cooldown += 1;
+                                }
+                                Err(ArenaError::AlreadyFading { .. }) => {
+                                    report.skipped_already_fading += 1;
+                                }
+                                Err(e) => {
+                                    report.errors.push((id, tier, e));
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // --- Demote check ---
+                if policy.demote_after_idle_ns > 0 {
+                    if let Some(target_tier) = self.colder_tier(tier) {
+                        // Re-check chunk still exists (might have been evicted).
+                        if !self.pools.get(&tier).map_or(false, |p| p.arena().contains(id)) {
+                            continue;
+                        }
+
+                        let last_access = match self.pools.get(&tier)
+                            .and_then(|p| p.arena().read_last_access_ns(id).ok())
+                        {
+                            Some(ts) => ts,
+                            None => continue,
+                        };
+
+                        let idle_ns = now.saturating_sub(last_access);
+                        if idle_ns >= policy.demote_after_idle_ns {
+                            match self.begin_demote(tier, id, target_tier) {
+                                Ok(handle) => {
+                                    report.demotes_initiated += 1;
+                                    match self.complete_demote(handle) {
+                                        Ok(_) => {
+                                            report.demotes_completed += 1;
+                                        }
+                                        Err(e) => {
+                                            report.errors.push((id, tier, e));
+                                        }
+                                    }
+                                }
+                                Err(ArenaError::PoolFull { .. }) => {
+                                    // Evict from target pool and retry once.
+                                    if let Some(tp) = self.pools.get_mut(&target_tier) {
+                                        match tp.evict_lru() {
+                                            Ok(Some(_)) => {
+                                                report.evictions += 1;
+                                            }
+                                            Ok(None) => continue,
+                                            Err(e) => {
+                                                report.errors.push((id, tier, e));
+                                                continue;
+                                            }
+                                        }
+                                    }
+                                    match self.begin_demote(tier, id, target_tier) {
+                                        Ok(handle) => {
+                                            report.demotes_initiated += 1;
+                                            match self.complete_demote(handle) {
+                                                Ok(_) => {
+                                                    report.demotes_completed += 1;
+                                                }
+                                                Err(e) => {
+                                                    report.errors.push((id, tier, e));
+                                                }
+                                            }
+                                        }
+                                        Err(ArenaError::HysteresisCooldown { .. }) => {
+                                            report.skipped_cooldown += 1;
+                                        }
+                                        Err(ArenaError::AlreadyFading { .. }) => {
+                                            report.skipped_already_fading += 1;
+                                        }
+                                        Err(e) => {
+                                            report.errors.push((id, tier, e));
+                                        }
+                                    }
+                                }
+                                Err(ArenaError::HysteresisCooldown { .. }) => {
+                                    report.skipped_cooldown += 1;
+                                }
+                                Err(ArenaError::AlreadyFading { .. }) => {
+                                    report.skipped_already_fading += 1;
+                                }
+                                Err(e) => {
+                                    report.errors.push((id, tier, e));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        report
     }
 
     /// Flush all pool mmaps and rewrite the manifest atomically. Call before

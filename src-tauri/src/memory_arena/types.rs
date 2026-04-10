@@ -407,3 +407,32 @@ impl ArenaConfig {
         }
     }
 }
+
+/// Report returned by `ArenaSet::run_policy_sweep()`. Contains counters
+/// for every action the sweep took, plus a vec of non-fatal errors.
+#[derive(Debug)]
+pub struct SweepReport {
+    pub promotes_initiated: u32,
+    pub promotes_completed: u32,
+    pub demotes_initiated: u32,
+    pub demotes_completed: u32,
+    pub evictions: u32,
+    pub skipped_cooldown: u32,
+    pub skipped_already_fading: u32,
+    pub errors: Vec<(ChunkId, TierKind, crate::memory_arena::error::ArenaError)>,
+}
+
+impl SweepReport {
+    pub fn new() -> Self {
+        Self {
+            promotes_initiated: 0,
+            promotes_completed: 0,
+            demotes_initiated: 0,
+            demotes_completed: 0,
+            evictions: 0,
+            skipped_cooldown: 0,
+            skipped_already_fading: 0,
+            errors: Vec::new(),
+        }
+    }
+}

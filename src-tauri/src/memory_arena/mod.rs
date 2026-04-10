@@ -40,7 +40,7 @@ pub use pool::{
 pub use warm_start::{
     ColdSource, InMemoryColdSource, WarmStart, WarmStartConfig, WarmStartReport, WarmStartStats,
 };
-pub use types::{ArenaConfig, ChunkHeader, ChunkId, TierKind, CHUNK_MAGIC, HEADER_SIZE};
+pub use types::{ArenaConfig, ChunkHeader, ChunkId, SweepReport, TierKind, CHUNK_MAGIC, HEADER_SIZE};
 
 #[cfg(test)]
 mod tests;
