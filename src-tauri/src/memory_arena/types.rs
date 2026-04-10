@@ -70,6 +70,48 @@ impl TierKind {
     }
 }
 
+/// Crossfade state for a chunk — lives at header byte 64 (`_reserved1[0]`).
+///
+/// This is the state-machine home for slice-3 demote crossfades. `Resident`
+/// is the normal occupied state; `FadingOut` marks the source chunk of an
+/// in-flight demote whose target exists in a different tier pool.
+///
+/// Deliberately 2-variant this slice. `FadingIn`, `InFlight`, `GpuStaging`
+/// etc. are NON-GOALS until later slices — see `MISSION.md` §Non-Goals.
+///
+/// **Backward compat.** `Resident = 0` so any chunk whose `_reserved1`
+/// region is all zero (i.e. every M1/M2 chunk) decodes as `Resident`
+/// without migration.
+///
+/// **Checksum interaction.** The state byte lives at offset 64, which is
+/// OUTSIDE the checksum window (`header[0..56] || payload`). This is by
+/// design — it lets `mark_state` be a single-byte write and keeps
+/// `abort_demote` cheap. See `memory/crossfade-lod-tuning.md`.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[repr(u8)]
+pub enum ChunkState {
+    /// Normal occupied state. Default for M1/M2 chunks on upgrade.
+    Resident = 0,
+    /// Source chunk of an in-flight demote; target exists in another pool.
+    FadingOut = 1,
+}
+
+impl ChunkState {
+    /// Convert a raw state byte into a `ChunkState`, or error.
+    pub fn from_u8(byte: u8) -> crate::memory_arena::error::ArenaResult<Self> {
+        match byte {
+            0 => Ok(ChunkState::Resident),
+            1 => Ok(ChunkState::FadingOut),
+            other => Err(crate::memory_arena::error::ArenaError::UnknownChunkState(other)),
+        }
+    }
+
+    /// Raw byte representation for on-disk encoding.
+    pub fn as_u8(self) -> u8 {
+        self as u8
+    }
+}
+
 /// Unique identifier for a chunk within an arena. Wraps a u64 for type safety.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
 pub struct ChunkId(pub u64);
@@ -105,7 +147,15 @@ impl std::fmt::Display for ChunkId {
 ///   40..48  last_access  = u64 unix nanoseconds
 ///   48..56  access_count = u64
 ///   56..64  checksum     = u64 xxh3 of (header[0..56] || payload)
-///   64..128 _reserved1   = zeros (64 bytes for future fields)
+///   64..65  chunk_state  = ChunkState as u8 (M3, outside checksum window)
+///   65..72  _pad0        = zeros (7 bytes reserved for M4+ state metadata)
+///   72..128 _reserved1   = zeros (reserved for future fields; M3 plan 04
+///                         reserves bytes 72..80 for last_demote_ns)
+///
+/// **M3 checksum invariant.** The checksum at offset 56..64 still covers
+/// `header[0..56] || payload`. Bytes 64..128 (`chunk_state` + `_pad0` +
+/// `_reserved1`) are OUTSIDE the checksum window so state-machine fields
+/// can be mutated post-finalize without invalidating the chunk.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ChunkHeader {
     pub magic: [u8; 8],
@@ -117,12 +167,16 @@ pub struct ChunkHeader {
     pub last_access_ns: u64,
     pub access_count: u64,
     pub checksum: u64,
+    /// Crossfade state. Lives at header byte 64. Outside the checksum
+    /// window — mutable via `Arena::mark_state` without re-checksumming.
+    pub state: ChunkState,
 }
 
 impl ChunkHeader {
     /// Build a new header with current timestamp and zero access count.
     /// The checksum field is left at 0 — it must be computed and filled in
-    /// by `Chunk::finalize` once the payload is written.
+    /// by `Chunk::finalize` once the payload is written. The state field
+    /// defaults to `ChunkState::Resident`.
     pub fn new(chunk_id: ChunkId, tier: TierKind, payload_size: u64) -> Self {
         let now_ns = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
@@ -138,6 +192,7 @@ impl ChunkHeader {
             last_access_ns: now_ns,
             access_count: 0,
             checksum: 0,
+            state: ChunkState::Resident,
         }
     }
 }
