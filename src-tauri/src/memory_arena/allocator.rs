@@ -910,3 +910,68 @@ impl AllocatorKind {
         }
     }
 }
+
+// ===== SyncAllocator ================================================
+
+use std::sync::Mutex;
+
+/// Thread-safe wrapper around any `ChunkAllocator`. Guards all operations
+/// with a `Mutex` so the allocator can be shared across threads via
+/// `Arc<SyncAllocator<A>>`.
+///
+/// The `Mutex` is uncontended in single-threaded use (just an atomic
+/// compare-exchange). Under contention the OS scheduler arbitrates —
+/// acceptable for the allocation hot path which is O(1) for all four
+/// allocator strategies.
+pub struct SyncAllocator<A: ChunkAllocator> {
+    inner: Mutex<A>,
+}
+
+impl<A: ChunkAllocator> SyncAllocator<A> {
+    pub fn new(allocator: A) -> Self {
+        Self {
+            inner: Mutex::new(allocator),
+        }
+    }
+
+    pub fn alloc(&self, size: usize) -> ArenaResult<(usize, usize)> {
+        self.inner.lock().unwrap().alloc(size)
+    }
+
+    pub fn free(&self, offset: usize) -> ArenaResult<()> {
+        self.inner.lock().unwrap().free(offset)
+    }
+
+    pub fn capacity(&self) -> usize {
+        self.inner.lock().unwrap().capacity()
+    }
+
+    pub fn free_bytes(&self) -> usize {
+        self.inner.lock().unwrap().free_bytes()
+    }
+
+    pub fn allocated_bytes(&self) -> usize {
+        self.inner.lock().unwrap().allocated_bytes()
+    }
+
+    pub fn num_allocations(&self) -> usize {
+        self.inner.lock().unwrap().num_allocations()
+    }
+
+    pub fn fragmentation(&self) -> f64 {
+        self.inner.lock().unwrap().fragmentation()
+    }
+}
+
+// Safety: SyncAllocator is Send+Sync because the Mutex serializes all access.
+unsafe impl<A: ChunkAllocator + Send> Send for SyncAllocator<A> {}
+unsafe impl<A: ChunkAllocator + Send> Sync for SyncAllocator<A> {}
+
+impl<A: ChunkAllocator + std::fmt::Debug> std::fmt::Debug for SyncAllocator<A> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self.inner.lock() {
+            Ok(guard) => f.debug_struct("SyncAllocator").field("inner", &*guard).finish(),
+            Err(_) => f.debug_struct("SyncAllocator").field("inner", &"<poisoned>").finish(),
+        }
+    }
+}
