@@ -172,6 +172,12 @@ export class RustArenaSet {
     await this.callCommand('arena_set_free', { tier, chunkId });
   }
 
+  /** List all chunk IDs in a specific tier pool. */
+  async listIds(tier: TierKind): Promise<number[]> {
+    const res = (await this.callCommand('arena_set_list_ids', { tier })) as { chunkIds: number[] };
+    return res.chunkIds;
+  }
+
   /**
    * Run a policy sweep across all pools. Promotes hot chunks, demotes
    * idle chunks, evicts when pools are full. Returns action counts.

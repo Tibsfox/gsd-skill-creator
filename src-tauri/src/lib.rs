@@ -156,6 +156,7 @@ pub fn run() {
             commands::memory_arena::arena_set_gc,
             commands::memory_arena::arena_set_flush,
             commands::memory_arena::arena_set_free,
+            commands::memory_arena::arena_set_list_ids,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
