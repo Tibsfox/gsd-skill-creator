@@ -90,6 +90,9 @@ pub enum ArenaError {
     #[error("PostgreSQL error: {0}")]
     PgError(String),
 
+    #[error("cgroup error: {0}")]
+    CgroupError(String),
+
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
 

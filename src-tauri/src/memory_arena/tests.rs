@@ -8263,12 +8263,10 @@ mod m13_multi_gpu_tests {
 
 #[cfg(feature = "cuda")]
 mod m13_kernel_launch_tests {
-    use crate::memory_arena::vram::{KernelHandle, VramContext};
-    use std::sync::Arc;
+    use crate::memory_arena::vram::{KernelHandle, VramContext, BATCH_XOR_CHECKSUM_PTX};
 
     #[test]
     fn kernel_handle_creation() {
-        let ctx = Arc::new(VramContext::new(0).expect("CUDA device 0"));
         // KernelHandle wraps a name + launch config. No actual PTX needed
         // for the handle creation test — just verify the struct is constructible.
         let handle = KernelHandle::new("test_kernel", 256, 1);
@@ -8290,5 +8288,295 @@ mod m13_kernel_launch_tests {
         let handle = KernelHandle::from_data_len("process", 1000, 256);
         // ceil(1000 / 256) = 4 blocks
         assert_eq!(handle.grid_size(), 4);
+    }
+
+    #[test]
+    fn kernel_handle_launch_config() {
+        let handle = KernelHandle::new("test", 128, 4);
+        let cfg = handle.launch_config();
+        assert_eq!(cfg.grid_dim, (4, 1, 1));
+        assert_eq!(cfg.block_dim, (128, 1, 1));
+        assert_eq!(cfg.shared_mem_bytes, 0);
+    }
+
+    #[test]
+    fn load_ptx_module() {
+        let ctx = VramContext::new(0).expect("CUDA device 0");
+        let kernel = ctx.load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum");
+        assert!(kernel.is_ok(), "PTX load failed: {:?}", kernel.err());
+    }
+
+    #[test]
+    fn launch_checksum_kernel() {
+        let ctx = VramContext::new(0).expect("CUDA device 0");
+        let kernel = ctx.load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")
+            .expect("load PTX");
+
+        // 4 chunks of 8 bytes each
+        let num_chunks: u32 = 4;
+        let chunk_size: u32 = 8;
+        let total_bytes = (num_chunks * chunk_size) as usize;
+
+        // Prepare input: each chunk is [i, i, i, i, i, i, i, i]
+        let mut host_input = vec![0u8; total_bytes];
+        for c in 0..num_chunks as usize {
+            for b in 0..chunk_size as usize {
+                host_input[c * chunk_size as usize + b] = (c + 1) as u8;
+            }
+        }
+
+        // Upload input
+        let mut input_alloc = ctx.alloc(total_bytes).expect("alloc input");
+        ctx.upload(&host_input, &mut input_alloc).expect("upload");
+
+        // Allocate output (4 u32s = 16 bytes)
+        let mut output_slice = ctx.stream().alloc_zeros::<u32>(num_chunks as usize)
+            .expect("alloc output");
+
+        let handle = KernelHandle::from_data_len("batch_xor_checksum", num_chunks, 256);
+
+        unsafe {
+            ctx.launch_checksum(
+                &kernel,
+                &handle,
+                &input_alloc.slice,
+                &mut output_slice,
+                chunk_size,
+                num_chunks,
+            ).expect("launch");
+        }
+
+        // Download results
+        let mut host_output = vec![0u32; num_chunks as usize];
+        ctx.stream().memcpy_dtoh(&output_slice, &mut host_output)
+            .expect("download");
+
+        // XOR of 8 identical bytes: byte ^ byte ^ ... = 0 (even count)
+        // Each chunk is [c+1; 8], XOR of 8 identical values = 0
+        for (i, &checksum) in host_output.iter().enumerate() {
+            assert_eq!(checksum, 0, "chunk {i} XOR should be 0 for 8 identical bytes");
+        }
+    }
+
+    #[test]
+    fn launch_checksum_odd_count() {
+        let ctx = VramContext::new(0).expect("CUDA device 0");
+        let kernel = ctx.load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")
+            .expect("load PTX");
+
+        // 1 chunk of 3 bytes: [0xAA, 0xBB, 0xCC]
+        let host_input: Vec<u8> = vec![0xAA, 0xBB, 0xCC];
+        let expected = 0xAAu32 ^ 0xBBu32 ^ 0xCCu32; // = 0xDD
+
+        let mut input_alloc = ctx.alloc(3).expect("alloc input");
+        ctx.upload(&host_input, &mut input_alloc).expect("upload");
+
+        let mut output_slice = ctx.stream().alloc_zeros::<u32>(1).expect("alloc output");
+        let handle = KernelHandle::new("batch_xor_checksum", 1, 1);
+
+        unsafe {
+            ctx.launch_checksum(
+                &kernel,
+                &handle,
+                &input_alloc.slice,
+                &mut output_slice,
+                3,
+                1,
+            ).expect("launch");
+        }
+
+        let mut host_output = vec![0u32; 1];
+        ctx.stream().memcpy_dtoh(&output_slice, &mut host_output)
+            .expect("download");
+
+        assert_eq!(host_output[0], expected, "XOR of 0xAA^0xBB^0xCC should be 0x{expected:02X}");
+    }
+}
+
+// =========================================================================
+// cgroup MemoryMax enforcement
+// =========================================================================
+
+mod cgroup_tests {
+    use crate::memory_arena::cgroup::*;
+    use std::fs;
+    use tempfile::tempdir;
+
+    #[test]
+    fn constants_are_sane() {
+        assert_eq!(INITIAL_LIMIT_BYTES, 8 * 1024 * 1024 * 1024);
+        assert_eq!(GROWTH_STEP_BYTES, 4 * 1024 * 1024 * 1024);
+        assert_eq!(HARD_CAP_BYTES, 48 * 1024 * 1024 * 1024);
+        assert_eq!(SWAP_LIMIT_BYTES, 0);
+        // 10 growth steps from 8 GiB to 48 GiB
+        assert_eq!((HARD_CAP_BYTES - INITIAL_LIMIT_BYTES) / GROWTH_STEP_BYTES, 10);
+    }
+
+    #[test]
+    fn enforcer_from_mock_cgroup_dir() {
+        let tmp = tempdir().expect("tempdir");
+        fs::write(tmp.path().join("memory.max"), "8589934592").unwrap(); // 8 GiB
+        fs::write(tmp.path().join("memory.current"), "1073741824").unwrap(); // 1 GiB
+        fs::write(tmp.path().join("memory.swap.max"), "0").unwrap();
+
+        let enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf())
+            .expect("from_path");
+
+        assert_eq!(enforcer.current_limit(), 8 * 1024 * 1024 * 1024);
+    }
+
+    #[test]
+    fn state_reads_all_files() {
+        let tmp = tempdir().expect("tempdir");
+        fs::write(tmp.path().join("memory.max"), "8589934592").unwrap();
+        fs::write(tmp.path().join("memory.current"), "2147483648").unwrap(); // 2 GiB
+        fs::write(tmp.path().join("memory.swap.max"), "0").unwrap();
+
+        let enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).unwrap();
+        let state = enforcer.state().unwrap();
+
+        assert_eq!(state.limit_bytes, 8 * 1024 * 1024 * 1024);
+        assert_eq!(state.current_bytes, 2 * 1024 * 1024 * 1024);
+        assert_eq!(state.swap_limit_bytes, 0);
+        assert_eq!(state.headroom_bytes, 6 * 1024 * 1024 * 1024);
+        assert!((state.utilization - 0.25).abs() < 0.001);
+    }
+
+    #[test]
+    fn state_handles_max_string() {
+        let tmp = tempdir().expect("tempdir");
+        fs::write(tmp.path().join("memory.max"), "max").unwrap();
+        fs::write(tmp.path().join("memory.current"), "0").unwrap();
+
+        let enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).unwrap();
+        let state = enforcer.state().unwrap();
+        assert_eq!(state.limit_bytes, u64::MAX);
+    }
+
+    #[test]
+    fn grow_increments_by_step() {
+        let tmp = tempdir().expect("tempdir");
+        fs::write(tmp.path().join("memory.max"), "8589934592").unwrap();
+        fs::write(tmp.path().join("memory.current"), "0").unwrap();
+
+        let mut enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).unwrap();
+        assert!(enforcer.can_grow());
+
+        let new_limit = enforcer.grow().unwrap();
+        assert_eq!(new_limit, 12 * 1024 * 1024 * 1024); // 8 + 4 = 12 GiB
+        assert_eq!(enforcer.current_limit(), new_limit);
+
+        // Verify file was written
+        let written = fs::read_to_string(tmp.path().join("memory.max")).unwrap();
+        assert_eq!(written, new_limit.to_string());
+    }
+
+    #[test]
+    fn grow_clamps_at_hard_cap() {
+        let tmp = tempdir().expect("tempdir");
+        // Start at 44 GiB — one step below 48
+        let start = 44 * 1024 * 1024 * 1024u64;
+        fs::write(tmp.path().join("memory.max"), start.to_string()).unwrap();
+        fs::write(tmp.path().join("memory.current"), "0").unwrap();
+
+        let mut enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).unwrap();
+        assert!(enforcer.can_grow());
+
+        let new_limit = enforcer.grow().unwrap();
+        assert_eq!(new_limit, HARD_CAP_BYTES); // Capped at 48 GiB
+
+        // Trying to grow again returns same value
+        assert!(!enforcer.can_grow());
+        let same = enforcer.grow().unwrap();
+        assert_eq!(same, HARD_CAP_BYTES);
+    }
+
+    #[test]
+    fn set_limit_clamps_above_cap() {
+        let tmp = tempdir().expect("tempdir");
+        fs::write(tmp.path().join("memory.max"), "8589934592").unwrap();
+        fs::write(tmp.path().join("memory.current"), "0").unwrap();
+
+        let mut enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).unwrap();
+        enforcer.set_limit(100 * 1024 * 1024 * 1024).unwrap(); // 100 GiB > cap
+
+        assert_eq!(enforcer.current_limit(), HARD_CAP_BYTES);
+    }
+
+    #[test]
+    fn has_headroom_check() {
+        let tmp = tempdir().expect("tempdir");
+        fs::write(tmp.path().join("memory.max"), "8589934592").unwrap(); // 8 GiB
+        fs::write(tmp.path().join("memory.current"), "7516192768").unwrap(); // 7 GiB
+
+        let enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).unwrap();
+
+        // 1 GiB headroom — 512 MiB should fit
+        assert!(enforcer.has_headroom(512 * 1024 * 1024).unwrap());
+        // 2 GiB should not
+        assert!(!enforcer.has_headroom(2 * 1024 * 1024 * 1024).unwrap());
+    }
+
+    #[test]
+    fn ensure_headroom_grows_as_needed() {
+        let tmp = tempdir().expect("tempdir");
+        fs::write(tmp.path().join("memory.max"), "8589934592").unwrap(); // 8 GiB
+        fs::write(tmp.path().join("memory.current"), "7516192768").unwrap(); // 7 GiB
+
+        let mut enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).unwrap();
+
+        // Need 4 GiB, only 1 GiB headroom — should trigger a grow
+        let ok = enforcer.ensure_headroom(4 * 1024 * 1024 * 1024).unwrap();
+        assert!(ok);
+        // Should have grown to 12 GiB (headroom now ~5 GiB)
+        assert_eq!(enforcer.current_limit(), 12 * 1024 * 1024 * 1024);
+    }
+
+    #[test]
+    fn disable_swap_writes_zero() {
+        let tmp = tempdir().expect("tempdir");
+        fs::write(tmp.path().join("memory.max"), "8589934592").unwrap();
+        fs::write(tmp.path().join("memory.swap.max"), "1073741824").unwrap(); // 1 GiB
+
+        let enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).unwrap();
+        enforcer.disable_swap().unwrap();
+
+        let written = fs::read_to_string(tmp.path().join("memory.swap.max")).unwrap();
+        assert_eq!(written, "0");
+    }
+
+    #[test]
+    fn initialize_sets_initial_limit_and_disables_swap() {
+        let tmp = tempdir().expect("tempdir");
+        fs::write(tmp.path().join("memory.max"), "max").unwrap();
+        fs::write(tmp.path().join("memory.current"), "0").unwrap();
+        fs::write(tmp.path().join("memory.swap.max"), "max").unwrap();
+
+        let mut enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).unwrap();
+        enforcer.initialize().unwrap();
+
+        assert_eq!(enforcer.current_limit(), INITIAL_LIMIT_BYTES);
+        let swap = fs::read_to_string(tmp.path().join("memory.swap.max")).unwrap();
+        assert_eq!(swap, "0");
+    }
+
+    #[test]
+    fn full_growth_sequence_8_to_48() {
+        let tmp = tempdir().expect("tempdir");
+        fs::write(tmp.path().join("memory.max"), "max").unwrap();
+        fs::write(tmp.path().join("memory.current"), "0").unwrap();
+
+        let mut enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).unwrap();
+        enforcer.initialize().unwrap();
+        assert_eq!(enforcer.current_limit(), 8 * 1024 * 1024 * 1024);
+
+        let mut steps = 0;
+        while enforcer.can_grow() {
+            enforcer.grow().unwrap();
+            steps += 1;
+        }
+
+        assert_eq!(steps, 10); // 8→12→16→20→24→28→32→36→40→44→48
+        assert_eq!(enforcer.current_limit(), HARD_CAP_BYTES);
     }
 }

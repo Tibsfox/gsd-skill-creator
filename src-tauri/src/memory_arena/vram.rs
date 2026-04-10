@@ -9,7 +9,10 @@
 
 use std::sync::Arc;
 
-use cudarc::driver::{CudaContext, CudaSlice, CudaStream};
+use cudarc::driver::{
+    CudaContext, CudaFunction, CudaModule, CudaSlice, CudaStream, LaunchConfig, PushKernelArg,
+};
+use cudarc::nvrtc::Ptx;
 
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 
@@ -619,4 +622,165 @@ impl KernelHandle {
     pub fn total_threads(&self) -> u64 {
         self.grid_size as u64 * self.block_size as u64
     }
+
+    /// Convert to a cudarc `LaunchConfig`.
+    pub fn launch_config(&self) -> LaunchConfig {
+        LaunchConfig {
+            grid_dim: (self.grid_size, 1, 1),
+            block_dim: (self.block_size, 1, 1),
+            shared_mem_bytes: 0,
+        }
+    }
 }
+
+// =========================================================================
+// CudaKernel — loaded PTX module + function handle
+// =========================================================================
+
+/// A loaded CUDA kernel ready to launch. Wraps a compiled PTX module and
+/// the specific function entry point extracted from it.
+///
+/// Create via [`VramContext::load_ptx`], then launch with [`CudaKernel::launch_checksum`]
+/// or build custom launches with the raw function handle.
+pub struct CudaKernel {
+    _module: Arc<CudaModule>,
+    func: CudaFunction,
+}
+
+impl CudaKernel {
+    /// Access the underlying `CudaFunction` for custom launch builders.
+    pub fn function(&self) -> &CudaFunction {
+        &self.func
+    }
+}
+
+impl std::fmt::Debug for CudaKernel {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("CudaKernel").finish()
+    }
+}
+
+impl VramContext {
+    /// Load a PTX module from source text and extract a named function.
+    ///
+    /// The `ptx_src` must be valid PTX assembly. The `fn_name` must match
+    /// an `.entry` or `.func` exported in the PTX.
+    pub fn load_ptx(&self, ptx_src: &str, fn_name: &str) -> ArenaResult<CudaKernel> {
+        let ptx = Ptx::from_src(ptx_src);
+        let module = self.ctx.load_module(ptx)
+            .map_err(|e| ArenaError::CudaError(format!("load_module: {e}")))?;
+        let func = module.load_function(fn_name)
+            .map_err(|e| ArenaError::CudaError(format!("load_function({fn_name}): {e}")))?;
+        Ok(CudaKernel { _module: module, func })
+    }
+
+    /// Load a PTX module from a file path and extract a named function.
+    pub fn load_ptx_file(&self, path: &std::path::Path, fn_name: &str) -> ArenaResult<CudaKernel> {
+        let ptx = Ptx::from_file(path);
+        let module = self.ctx.load_module(ptx)
+            .map_err(|e| ArenaError::CudaError(format!("load_module: {e}")))?;
+        let func = module.load_function(fn_name)
+            .map_err(|e| ArenaError::CudaError(format!("load_function({fn_name}): {e}")))?;
+        Ok(CudaKernel { _module: module, func })
+    }
+
+    /// Launch a checksum kernel: computes per-chunk XOR checksums on the GPU.
+    ///
+    /// - `kernel`: loaded CudaKernel with the `batch_xor_checksum` entry point
+    /// - `handle`: launch config (grid/block dims)
+    /// - `input`: device buffer of concatenated chunk payloads
+    /// - `output`: device buffer for per-chunk u32 checksums
+    /// - `chunk_size`: byte size of each chunk (uniform)
+    /// - `num_chunks`: number of chunks
+    ///
+    /// # Safety
+    /// The caller must ensure `input` has at least `chunk_size * num_chunks` bytes
+    /// and `output` has at least `num_chunks` u32 slots.
+    pub unsafe fn launch_checksum(
+        &self,
+        kernel: &CudaKernel,
+        handle: &KernelHandle,
+        input: &CudaSlice<u8>,
+        output: &mut CudaSlice<u32>,
+        chunk_size: u32,
+        num_chunks: u32,
+    ) -> ArenaResult<()> {
+        let cfg = handle.launch_config();
+        self.stream
+            .launch_builder(&kernel.func)
+            .arg(input)
+            .arg(output)
+            .arg(&chunk_size)
+            .arg(&num_chunks)
+            .launch(cfg)
+            .map_err(|e| ArenaError::CudaError(format!("launch: {e}")))?;
+        self.stream.synchronize()
+            .map_err(|e| ArenaError::CudaError(format!("synchronize: {e}")))?;
+        Ok(())
+    }
+}
+
+/// Built-in PTX source for the batch XOR checksum kernel.
+///
+/// Each thread processes one chunk: reads `chunk_size` bytes starting at
+/// `input_ptr + thread_id * chunk_size`, XORs all bytes, and writes the
+/// result to `output_ptr[thread_id]`.
+pub const BATCH_XOR_CHECKSUM_PTX: &str = r#"
+.version 7.5
+.target sm_75
+.address_size 64
+
+.visible .entry batch_xor_checksum(
+    .param .u64 input_ptr,
+    .param .u64 output_ptr,
+    .param .u32 chunk_size,
+    .param .u32 num_chunks
+) {
+    .reg .u32 %r_gid, %r_bix, %r_tix, %r_bdim;
+    .reg .u32 %r_i, %r_acc, %r_val, %r_cs, %r_nc;
+    .reg .u64 %r_base, %r_chunk_base, %r_addr, %r_out_base, %r_off;
+    .reg .pred %p_bound, %p_loop;
+
+    // global_id = blockIdx.x * blockDim.x + threadIdx.x
+    mov.u32 %r_bix, %ctaid.x;
+    mov.u32 %r_tix, %tid.x;
+    mov.u32 %r_bdim, %ntid.x;
+    mad.lo.u32 %r_gid, %r_bix, %r_bdim, %r_tix;
+
+    ld.param.u32 %r_nc, [num_chunks];
+    setp.ge.u32 %p_bound, %r_gid, %r_nc;
+    @%p_bound bra DONE;
+
+    ld.param.u64 %r_base, [input_ptr];
+    ld.param.u64 %r_out_base, [output_ptr];
+    ld.param.u32 %r_cs, [chunk_size];
+
+    // chunk_base = base + gid * chunk_size
+    mul.wide.u32 %r_off, %r_gid, %r_cs;
+    add.u64 %r_chunk_base, %r_base, %r_off;
+
+    mov.u32 %r_acc, 0;
+    mov.u32 %r_i, 0;
+
+LOOP:
+    setp.ge.u32 %p_loop, %r_i, %r_cs;
+    @%p_loop bra STORE;
+
+    cvt.u64.u32 %r_addr, %r_i;
+    add.u64 %r_addr, %r_addr, %r_chunk_base;
+    ld.global.u8 %r_val, [%r_addr];
+    xor.b32 %r_acc, %r_acc, %r_val;
+
+    add.u32 %r_i, %r_i, 1;
+    bra LOOP;
+
+STORE:
+    // output[gid] = acc
+    mul.wide.u32 %r_off, %r_gid, 4;
+    add.u64 %r_addr, %r_out_base, %r_off;
+    st.global.u32 [%r_addr], %r_acc;
+
+DONE:
+    ret;
+}
+"#;
