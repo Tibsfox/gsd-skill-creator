@@ -19,7 +19,7 @@ use crate::memory_arena::error::{ArenaError, ArenaResult};
 
 /// Common interface for arena allocators. Manages raw byte regions —
 /// knows nothing about chunks, headers, checksums, or tiers.
-pub(crate) trait ChunkAllocator: std::fmt::Debug {
+pub trait ChunkAllocator: std::fmt::Debug {
     /// Allocate a region of at least `size` bytes. Returns (offset, actual_size).
     fn alloc(&mut self, size: usize) -> ArenaResult<(usize, usize)>;
     /// Free a previously-allocated region at `offset`.
@@ -42,7 +42,7 @@ pub(crate) trait ChunkAllocator: std::fmt::Debug {
 /// O(1) alloc (stack pop), O(1) free (stack push). Every allocation
 /// returns exactly `slot_size` bytes regardless of request size.
 #[derive(Debug)]
-pub(crate) struct FixedSlotAllocator {
+pub struct FixedSlotAllocator {
     slot_size: usize,
     num_slots: usize,
     free_stack: Vec<usize>,
@@ -51,7 +51,7 @@ pub(crate) struct FixedSlotAllocator {
 }
 
 impl FixedSlotAllocator {
-    pub(crate) fn new(slot_size: usize, num_slots: usize) -> Self {
+    pub fn new(slot_size: usize, num_slots: usize) -> Self {
         // Free stack in reverse order so slot 0 pops first (matches
         // original Arena::with_storage behavior).
         let mut free_stack: Vec<usize> = (0..num_slots).collect();
@@ -182,7 +182,7 @@ impl ChunkAllocator for FixedSlotAllocator {
 
 /// Configuration for the slab allocator.
 #[derive(Debug, Clone)]
-pub(crate) struct SlabConfig {
+pub struct SlabConfig {
     /// Size classes in ascending order. Must be non-empty.
     pub classes: Vec<usize>,
     /// Total capacity in bytes. Divided across classes.
@@ -217,13 +217,13 @@ struct SizeClass {
 /// Slab allocator — multiple size classes, each a mini fixed-slot arena.
 /// Alloc picks the smallest class that fits. O(1) within a class.
 #[derive(Debug)]
-pub(crate) struct SlabAllocator {
+pub struct SlabAllocator {
     classes: Vec<SizeClass>,
     total_capacity: usize,
 }
 
 impl SlabAllocator {
-    pub(crate) fn new(config: SlabConfig) -> Self {
+    pub fn new(config: SlabConfig) -> Self {
         let mut classes = Vec::with_capacity(config.classes.len());
         let mut remaining = config.total_capacity;
         let per_class = config.total_capacity / config.classes.len();
@@ -357,7 +357,7 @@ impl ChunkAllocator for SlabAllocator {
 /// be a power of two. Levels = log2(max/min) + 1. Level 0 = min_block,
 /// level N = total_capacity.
 #[derive(Debug)]
-pub(crate) struct BuddyAllocator {
+pub struct BuddyAllocator {
     /// Per-level free lists. Level 0 = min_block, last level = total_capacity.
     free_lists: Vec<Vec<usize>>,
     /// Allocated blocks: offset → (level, requested_size).
@@ -370,7 +370,7 @@ pub(crate) struct BuddyAllocator {
 }
 
 impl BuddyAllocator {
-    pub(crate) fn new(total_capacity: usize, min_block: usize) -> Self {
+    pub fn new(total_capacity: usize, min_block: usize) -> Self {
         assert!(total_capacity.is_power_of_two(), "total_capacity must be power of two");
         assert!(min_block.is_power_of_two(), "min_block must be power of two");
         assert!(total_capacity >= min_block);
@@ -517,7 +517,7 @@ impl ChunkAllocator for BuddyAllocator {
 
 /// Configuration for the TLSF allocator.
 #[derive(Debug, Clone)]
-pub(crate) struct TlsfConfig {
+pub struct TlsfConfig {
     /// Number of second-level subdivisions per first-level class.
     /// Must be a power of two. Default: 4.
     pub sl_count: usize,
@@ -538,7 +538,7 @@ impl Default for TlsfConfig {
 /// Uses `BTreeMap` keyed by offset for O(log n) predecessor lookup
 /// during coalescence (lab-director advisory).
 #[derive(Debug)]
-pub(crate) struct TlsfAllocator {
+pub struct TlsfAllocator {
     /// First-level bitmap: bit i set means free_lists[i] has at least one
     /// non-empty second-level list.
     fl_bitmap: u64,
@@ -559,7 +559,7 @@ pub(crate) struct TlsfAllocator {
 }
 
 impl TlsfAllocator {
-    pub(crate) fn new(total_capacity: usize, min_block: usize, config: TlsfConfig) -> Self {
+    pub fn new(total_capacity: usize, min_block: usize, config: TlsfConfig) -> Self {
         assert!(total_capacity.is_power_of_two(), "total_capacity must be power of two");
         assert!(min_block.is_power_of_two(), "min_block must be power of two");
         assert!(config.sl_count.is_power_of_two(), "sl_count must be power of two");
@@ -637,7 +637,7 @@ impl TlsfAllocator {
     }
 
     /// Insert a free block into the appropriate free list and update bitmaps.
-    fn insert_free_block(&mut self, offset: usize, size: usize, fl: usize, sl: usize) {
+    fn insert_free_block(&mut self, offset: usize, _size: usize, fl: usize, sl: usize) {
         self.free_lists[fl][sl].push(offset);
         self.sl_bitmaps[fl] |= 1u64 << sl;
         self.fl_bitmap |= 1u64 << fl;
@@ -821,7 +821,7 @@ impl ChunkAllocator for TlsfAllocator {
 /// Enum dispatch for zero-cost allocator selection on the hot path.
 /// No vtable, no dyn — just a match.
 #[derive(Debug)]
-pub(crate) enum AllocatorKind {
+pub enum AllocatorKind {
     FixedSlot(FixedSlotAllocator),
     Slab(SlabAllocator),
     Buddy(BuddyAllocator),
