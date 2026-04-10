@@ -34,6 +34,7 @@ use xxhash_rust::xxh3::Xxh3Default;
 
 use crate::memory_arena::chunk::{write_header_into, Chunk, CHECKSUM_OFFSET};
 use crate::memory_arena::error::{ArenaError, ArenaResult};
+use crate::memory_arena::list::LruIndex;
 use crate::memory_arena::types::{ArenaConfig, ChunkHeader, ChunkId, TierKind, HEADER_SIZE};
 
 /// Backing storage for the arena. Two variants:
@@ -139,6 +140,10 @@ pub struct Arena {
     directory: HashMap<ChunkId, usize>,
     /// Monotonic chunk id counter. Never reused.
     next_chunk_id: u64,
+    /// LRU ordering over currently-allocated chunk ids. Updated on every
+    /// alloc/free/touch/replay path so `lru_oldest()` always reflects the
+    /// true state. O(1) insert/touch/remove via `LruIndex`.
+    lru: LruIndex,
 }
 
 impl Arena {
@@ -235,6 +240,7 @@ impl Arena {
             free_stack,
             directory: HashMap::with_capacity(num_slots),
             next_chunk_id: 1, // 0 reserved for ChunkId::ZERO sentinel
+            lru: LruIndex::new(),
         })
     }
 
@@ -347,6 +353,8 @@ impl Arena {
 
         self.slots[slot] = SlotState::Allocated(id);
         self.directory.insert(id, slot);
+        // Wire the new chunk into the LRU so eviction sees it.
+        self.lru.insert(id);
 
         Ok(id)
     }
@@ -420,6 +428,8 @@ impl Arena {
 
         self.slots[slot] = SlotState::Free;
         self.free_stack.push(slot);
+        // Drop from LRU — eviction pickers should no longer see this id.
+        self.lru.remove(id);
         Ok(())
     }
 
@@ -464,6 +474,8 @@ impl Arena {
 
         self.slots[slot] = SlotState::Allocated(id);
         self.directory.insert(id, slot);
+        // Replay path: keep LRU in sync with directory.
+        self.lru.insert(id);
 
         if id.as_u64() >= self.next_chunk_id {
             self.next_chunk_id = id.as_u64() + 1;
@@ -520,6 +532,11 @@ impl Arena {
 
         self.slots[slot] = SlotState::Allocated(id);
         self.directory.insert(id, slot);
+        // Checkpoint-restore path: keep LRU in sync with directory. New chunks
+        // go to the front by default; the full LRU order is not preserved
+        // across checkpoints (accepted M1 trade-off — checkpoints capture
+        // a point-in-time snapshot, not hot/cold ordering).
+        self.lru.insert(id);
 
         if id.as_u64() >= self.next_chunk_id {
             self.next_chunk_id = id.as_u64() + 1;
@@ -539,9 +556,17 @@ impl Arena {
     }
 
     /// Touch a chunk: read, bump access count and last_access_ns, re-finalize
-    /// (checksum), rewrite. Currently expensive — access tracking is lossy
-    /// across crashes because touches are not journaled; they're captured
-    /// in the next checkpoint. Acceptable for best-effort observability.
+    /// (checksum), rewrite. Also moves the chunk to the front of the LRU
+    /// index so eviction pickers see the fresh-access ordering.
+    ///
+    /// The expensive checksum rewrite path remains because chunk headers
+    /// carry per-access state (access_count, last_access_ns) that must be
+    /// persisted. The LruIndex update is the cheap ordering half; they are
+    /// complementary, not redundant.
+    ///
+    /// Access tracking via the header is lossy across crashes (not journaled)
+    /// — captured in the next checkpoint. LRU order is rebuilt on warm-start
+    /// from the directory scan (insertion order, not hot/cold).
     pub fn touch_chunk(&mut self, id: ChunkId) -> ArenaResult<()> {
         let slot = *self
             .directory
@@ -559,7 +584,17 @@ impl Arena {
         let end = start + self.slot_size;
         self.storage[start + serialized.len()..end].fill(0);
 
+        // Move the chunk to the front of the LRU. touch() on an absent id
+        // would be a bug — the directory lookup above guarantees presence.
+        let _ = self.lru.touch(id);
+
         Ok(())
+    }
+
+    /// Oldest chunk id according to the LRU order, or `None` if the arena
+    /// holds no chunks. O(1). Use this to pick eviction victims.
+    pub fn lru_oldest(&self) -> Option<ChunkId> {
+        self.lru.oldest()
     }
 
     /// Iterator over all allocated chunk ids. Not ordered.
