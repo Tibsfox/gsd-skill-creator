@@ -64,6 +64,7 @@ fn unlimited_policy() -> TierPolicy {
         promote_after_hits: 0,
         demote_after_idle_ns: 0,
         demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
     }
 }
 
@@ -673,6 +674,7 @@ fn bench_hysteresis(c: &mut Criterion) {
                         // Hot has no cooldown — lets us do the initial
                         // demote without tripping hysteresis.
                         demote_cooldown_ns: 0,
+                        promote_cooldown_ns: 0,
                     },
                 };
                 let warm_spec = PoolSpec {
@@ -687,6 +689,7 @@ fn bench_hysteresis(c: &mut Criterion) {
                         // 1-second cooldown — guaranteed to trigger
                         // since the iter body runs in microseconds.
                         demote_cooldown_ns: 1_000_000_000,
+                        promote_cooldown_ns: 0,
                     },
                 };
                 let mut set = ArenaSet::create(
