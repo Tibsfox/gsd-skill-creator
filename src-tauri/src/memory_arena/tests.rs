@@ -6744,15 +6744,17 @@ mod slab_allocator_tests {
 
     #[test]
     fn test_slab_exhaustion_falls_to_next_class() {
-        // Small slab with limited slots per class
+        // Equal division: 256 bytes per class → 64B class gets 4 slots,
+        // 256B class gets 1 slot.
         let config = SlabConfig {
             classes: vec![64, 256],
-            total_capacity: 64 * 2 + 256 * 2, // 2 slots of 64B, 2 slots of 256B
+            total_capacity: 512, // 256 per class → 4 x 64B + 1 x 256B
         };
         let mut slab = SlabAllocator::new(config);
-        // Fill the 64B class
-        slab.alloc(64).unwrap();
-        slab.alloc(64).unwrap();
+        // Fill all 4 slots in the 64B class
+        for _ in 0..4 {
+            slab.alloc(64).unwrap();
+        }
         // Next 64B alloc should fall to 256B class
         let (_off, actual_size) = slab.alloc(64).unwrap();
         assert_eq!(actual_size, 256);
