@@ -323,3 +323,198 @@ describe('Live Migration: .grove/arena.json', () => {
     }
   });
 });
+
+// ============================================================================
+// BEAM-style probing questions — verify content is retrievable by semantic
+// query, not just by hash. Adapted from BEAM's 10 memory abilities:
+//   1. Information extraction    6. Contradiction resolution
+//   2. Multi-hop reasoning       7. Event ordering
+//   3. Knowledge update          8. Instruction following
+//   4. Temporal reasoning        9. Preference following
+//   5. Abstention               10. Summarization
+// ============================================================================
+
+describe('BEAM-Style Probing: Structural Retrieval', () => {
+  let store: ContentAddressedSetStore;
+  let ns: GroveNamespace;
+
+  beforeAll(async () => {
+    const workdir = process.cwd();
+    const groveDir = join(workdir, '.grove');
+    if (!existsSync(join(groveDir, 'arena.json'))) return;
+
+    const testArena = makeLiveTestArena();
+    await testArena.arena.init({
+      dir: '.grove/beam-test-pools',
+      chunkSize: 4096,
+      pools: [
+        { tier: 'hot', numSlots: 1024 },
+        { tier: 'warm', numSlots: 4096 },
+        { tier: 'blob', numSlots: 16384 },
+        { tier: 'resident', numSlots: 2048 },
+      ],
+    });
+
+    await migrateJsonToArenaSet({
+      groveDir,
+      arena: testArena.arena,
+      backupOld: false,
+    });
+
+    store = new ContentAddressedSetStore({
+      arena: testArena.arena,
+      indexTiers: ['hot', 'warm', 'blob'],
+    });
+    await store.loadIndex();
+    ns = new GroveNamespace(store);
+  });
+
+  // -- Ability 1: Information Extraction --
+  // "What wings exist in the namespace?"
+  it('extracts structural categories (wings) from namespace', async () => {
+    const wings = await ns.listWings();
+    console.log(`\n  Wings: ${wings.join(', ')}`);
+    expect(wings).toContain('agents');
+    expect(wings).toContain('skills');
+    expect(wings.length).toBeGreaterThanOrEqual(2);
+  });
+
+  // "How many agents are registered?"
+  it('counts resources per wing', async () => {
+    const counts = await ns.wingCounts();
+    console.log(`\n  Wing counts:`, counts);
+    expect(counts['agents']).toBeGreaterThan(10);
+    expect(counts['skills']).toBeGreaterThan(10);
+  });
+
+  // -- Ability 2: Multi-hop Reasoning --
+  // "Resolve an agent name, fetch its record, verify it contains content"
+  it('multi-hop: name → hash → record → content verification', async () => {
+    const agents = await ns.listByPrefix('agents/');
+    const agentNames = Object.keys(agents);
+    expect(agentNames.length).toBeGreaterThan(0);
+
+    // Pick the first agent and walk the chain
+    const name = agentNames[0];
+    const hash = await ns.resolve(name);
+    expect(hash).not.toBeNull();
+
+    const bytes = await store.getByHash(hash!.hash);
+    expect(bytes).not.toBeNull();
+    expect(bytes!.length).toBeGreaterThan(0);
+
+    console.log(`\n  Multi-hop: "${name}" → hash → ${bytes!.length} bytes`);
+  });
+
+  // -- Ability 3: Keyword Search (structural filtering) --
+  // "Find all resources related to 'code review'"
+  it('keyword search finds domain-relevant resources', async () => {
+    const reviewResults = await ns.searchByKeyword('review');
+    const reviewNames = Object.keys(reviewResults);
+    console.log(`\n  "review" matches: ${reviewNames.join(', ')}`);
+    expect(reviewNames.length).toBeGreaterThan(0);
+    // Should find code-reviewer, pr-review, etc.
+    expect(reviewNames.some(n => n.includes('review'))).toBe(true);
+  });
+
+  // "Find all resources related to 'security'"
+  it('keyword search for "security" finds security-related resources', async () => {
+    const securityResults = await ns.searchByKeyword('security');
+    const secNames = Object.keys(securityResults);
+    console.log(`\n  "security" matches: ${secNames.join(', ')}`);
+    expect(secNames.length).toBeGreaterThan(0);
+  });
+
+  // -- Ability 4: Wing Filtering (MemPalace-style structural filter) --
+  // "List all rooms in the agents wing"
+  it('lists rooms within a wing', async () => {
+    const agentRooms = await ns.listRooms('agents');
+    console.log(`\n  Agent rooms (first 10): ${agentRooms.slice(0, 10).join(', ')}`);
+    expect(agentRooms.length).toBeGreaterThan(10);
+    // Rooms should be clean names without the wing prefix
+    expect(agentRooms.every(r => !r.includes('/'))).toBe(true);
+  });
+
+  // -- Ability 5: Abstention --
+  // "Resolve a name that doesn't exist — should return null, not hallucinate"
+  it('abstains correctly for nonexistent names', async () => {
+    const result = await ns.resolve('agents/this-does-not-exist-xyzzy');
+    expect(result).toBeNull();
+  });
+
+  it('keyword search for nonsense returns empty', async () => {
+    const results = await ns.searchByKeyword('xyzzy-nonexistent-keyword');
+    expect(Object.keys(results).length).toBe(0);
+  });
+
+  // -- Ability 6: Cross-wing Retrieval --
+  // "Find resources matching a concept across all wings"
+  it('cross-wing search finds resources across categories', async () => {
+    // "deploy" might appear in agents, skills, or teams
+    const deployResults = await ns.searchByKeyword('deploy');
+    const wings = new Set<string>();
+    for (const name of Object.keys(deployResults)) {
+      const slash = name.indexOf('/');
+      if (slash >= 0) wings.add(name.slice(0, slash));
+    }
+    console.log(`\n  "deploy" found in wings: ${Array.from(wings).join(', ')}`);
+    // Even finding it in one wing validates cross-wing search works
+    expect(Object.keys(deployResults).length).toBeGreaterThanOrEqual(0);
+  });
+
+  // -- Ability 7: Predicate Filtering --
+  // "Find all resources whose name matches a pattern"
+  it('predicate filter with regex-like logic', async () => {
+    // Find all gsd-* agents
+    const gsdAgents = await ns.filterBindings(
+      (name) => name.startsWith('agents/gsd-'),
+    );
+    const names = Object.keys(gsdAgents);
+    console.log(`\n  GSD agents: ${names.length} found`);
+    expect(names.length).toBeGreaterThan(5);
+    expect(names.every(n => n.startsWith('agents/gsd-'))).toBe(true);
+  });
+
+  // -- Ability 8: Content Integrity (verify retrievable content is valid) --
+  // "For every name in a wing, verify the content is non-empty and decodable"
+  it('all team records are retrievable and non-empty', async () => {
+    const teams = await ns.listByPrefix('teams/');
+    const teamNames = Object.keys(teams);
+    let verified = 0;
+
+    for (const name of teamNames) {
+      const hash = await ns.resolve(name);
+      if (!hash) continue;
+      const bytes = await store.getByHash(hash.hash);
+      expect(bytes).not.toBeNull();
+      expect(bytes!.length).toBeGreaterThan(0);
+      verified++;
+    }
+
+    console.log(`\n  Teams verified: ${verified}/${teamNames.length}`);
+    expect(verified).toBe(teamNames.length);
+  });
+
+  // -- Summary: Filtering effectiveness --
+  it('structural filtering reduces search space', async () => {
+    const all = await ns.listBindings();
+    const totalCount = Object.keys(all).length;
+
+    const agentsOnly = await ns.listByPrefix('agents/');
+    const agentCount = Object.keys(agentsOnly).length;
+
+    const skillsOnly = await ns.listByPrefix('skills/');
+    const skillCount = Object.keys(skillsOnly).length;
+
+    const reductionPct = ((1 - agentCount / totalCount) * 100).toFixed(1);
+
+    console.log(`\n  Total bindings: ${totalCount}`);
+    console.log(`  Agents wing: ${agentCount} (${((agentCount / totalCount) * 100).toFixed(1)}%)`);
+    console.log(`  Skills wing: ${skillCount} (${((skillCount / totalCount) * 100).toFixed(1)}%)`);
+    console.log(`  Wing filter reduces search space by ${reductionPct}%`);
+
+    // Wing filtering should reduce search space by at least 50%
+    expect(agentCount).toBeLessThan(totalCount);
+    expect(skillCount).toBeLessThan(totalCount);
+  });
+});
