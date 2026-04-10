@@ -47,7 +47,7 @@ pub use warm_start::{
 };
 #[cfg(feature = "postgres")]
 pub use pg_cold::PgColdSource;
-pub use types::{ArenaConfig, ChunkHeader, ChunkId, SweepReport, TierKind, CHUNK_MAGIC, HEADER_SIZE};
+pub use types::{AllocatorSelector, ArenaConfig, ChunkHeader, ChunkId, SweepReport, TierKind, CHUNK_MAGIC, HEADER_SIZE};
 
 #[cfg(test)]
 mod tests;
