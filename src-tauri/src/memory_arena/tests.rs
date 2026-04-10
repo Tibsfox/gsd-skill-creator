@@ -8580,3 +8580,74 @@ mod cgroup_tests {
         assert_eq!(enforcer.current_limit(), HARD_CAP_BYTES);
     }
 }
+
+// =========================================================================
+// VRAM: VramPool.verify_checksums integration test
+// =========================================================================
+
+#[cfg(feature = "cuda")]
+mod vram_verify_checksums_tests {
+    use crate::memory_arena::vram::{VramContext, VramPool};
+    use crate::memory_arena::types::TierKind;
+    use crate::memory_arena::pool::{TierPolicy, EvictionKind};
+
+    fn unlimited_policy() -> TierPolicy {
+        TierPolicy {
+            max_chunks: 0,
+            eviction: EvictionKind::Lru,
+            promote_after_hits: 0,
+            demote_after_idle_ns: 0,
+            demote_cooldown_ns: 0,
+            promote_cooldown_ns: 0,
+        }
+    }
+
+    #[test]
+    fn verify_checksums_empty_pool() {
+        let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let pool = VramPool::new(ctx, TierKind::Vector, 64, 16, unlimited_policy())
+            .expect("VramPool");
+        let (ids, checksums) = pool.verify_checksums().expect("verify");
+        assert!(ids.is_empty());
+        assert!(checksums.is_empty());
+    }
+
+    #[test]
+    fn verify_checksums_single_chunk() {
+        let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let mut pool = VramPool::new(ctx, TierKind::Vector, 8, 16, unlimited_policy())
+            .expect("VramPool");
+
+        // Payload: [0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55]
+        // XOR = 0xAA ^ 0x55 ^ 0xAA ^ 0x55 ^ 0xAA ^ 0x55 ^ 0xAA ^ 0x55 = 0
+        let payload = [0xAAu8, 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55];
+        let _id = pool.alloc(&payload).expect("alloc");
+
+        let (ids, checksums) = pool.verify_checksums().expect("verify");
+        assert_eq!(ids.len(), 1);
+        assert_eq!(checksums.len(), 1);
+        assert_eq!(checksums[0], 0); // XOR of alternating bytes cancels out
+    }
+
+    #[test]
+    fn verify_checksums_multiple_chunks() {
+        let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let mut pool = VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy())
+            .expect("VramPool");
+
+        // Chunk 0: [1, 1, 1, 1] -> XOR = 1^1^1^1 = 0
+        pool.alloc(&[1u8, 1, 1, 1]).expect("alloc 0");
+        // Chunk 1: [0xFF, 0, 0, 0] -> XOR = 0xFF
+        pool.alloc(&[0xFFu8, 0, 0, 0]).expect("alloc 1");
+        // Chunk 2: [3, 5, 3, 5] -> XOR = 3^5^3^5 = 0
+        pool.alloc(&[3u8, 5, 3, 5]).expect("alloc 2");
+
+        let (ids, checksums) = pool.verify_checksums().expect("verify");
+        assert_eq!(ids.len(), 3);
+        assert_eq!(checksums.len(), 3);
+
+        // At least one should be 0 (chunks 0 and 2) and one should be 0xFF
+        assert!(checksums.contains(&0), "expected at least one zero checksum");
+        assert!(checksums.contains(&0xFF), "expected 0xFF checksum");
+    }
+}
