@@ -3576,3 +3576,223 @@ mod m3_chunk_state {
         );
     }
 }
+
+// ============================================================================
+// M3 — Plan 02: begin_demote + CrossfadeHandle + CrossfadeRegistry
+// ============================================================================
+
+#[cfg(test)]
+mod m3_begin_demote {
+    use crate::memory_arena::error::ArenaError;
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, CrossfadeHandle, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, ChunkState, TierKind};
+    use tempfile::tempdir;
+
+    fn unlimited_spec(tier: TierKind, num_slots: usize) -> PoolSpec {
+        PoolSpec {
+            tier,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+            },
+        }
+    }
+
+    fn two_pool_set(root: &std::path::Path) -> ArenaSet {
+        ArenaSet::create(
+            ArenaSetConfig::new(root)
+                .with_pool(unlimited_spec(TierKind::Hot, 8))
+                .with_pool(unlimited_spec(TierKind::Warm, 8)),
+        )
+        .expect("two-pool ArenaSet should build")
+    }
+
+    /// Allocate a small Hot chunk in the given set. Returns the chunk id.
+    fn alloc_hot(set: &mut ArenaSet, payload: &[u8]) -> ChunkId {
+        set.pool_mut(TierKind::Hot)
+            .expect("Hot pool")
+            .alloc(payload.to_vec())
+            .expect("alloc")
+    }
+
+    #[test]
+    fn begin_demote_marks_source_fading_out() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"demote me");
+
+        set.begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .expect("begin_demote should succeed");
+
+        let state = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .chunk_state(source_id)
+            .unwrap();
+        assert_eq!(state, ChunkState::FadingOut);
+    }
+
+    #[test]
+    fn begin_demote_allocates_target_in_target_pool() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"payload bytes");
+
+        let warm_before = set.pool(TierKind::Warm).unwrap().len();
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+        let warm_after = set.pool(TierKind::Warm).unwrap().len();
+
+        assert_eq!(warm_after, warm_before + 1);
+        assert_eq!(handle.source, source_id);
+        assert_eq!(handle.source_tier, TierKind::Hot);
+        assert_eq!(handle.target_tier, TierKind::Warm);
+
+        // Target payload matches source payload.
+        let target_chunk = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .get_chunk(handle.target)
+            .expect("target readable");
+        assert_eq!(target_chunk.payload(), b"payload bytes");
+    }
+
+    #[test]
+    fn begin_demote_source_still_readable_as_source_payload() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"original source");
+
+        set.begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        let source_chunk = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(source_id)
+            .expect("source still readable during fade");
+        assert_eq!(source_chunk.payload(), b"original source");
+        assert_eq!(source_chunk.header().state, ChunkState::FadingOut);
+    }
+
+    #[test]
+    fn begin_demote_target_readable_independently() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"independent target");
+
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        let target_chunk = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .get_chunk(handle.target)
+            .unwrap();
+        assert_eq!(target_chunk.payload(), b"independent target");
+        assert_eq!(
+            target_chunk.header().state,
+            ChunkState::Resident,
+            "target chunk is a fresh Resident chunk"
+        );
+    }
+
+    #[test]
+    fn begin_demote_rejects_same_tier() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"same tier");
+
+        let err = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Hot)
+            .unwrap_err();
+        assert!(
+            matches!(err, ArenaError::InvalidCrossfadeTarget { .. }),
+            "expected InvalidCrossfadeTarget, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn begin_demote_rejects_already_fading_chunk() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"already fading");
+
+        set.begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        let err = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap_err();
+        assert!(
+            matches!(err, ArenaError::AlreadyFading { .. }),
+            "expected AlreadyFading, got {:?}",
+            err
+        );
+    }
+
+    /// The source's state byte lives OUTSIDE the checksum window — flipping
+    /// it to FadingOut must NOT invalidate the chunk's checksum. This test
+    /// demonstrates that: after begin_demote, deserialize-via-get_chunk
+    /// still succeeds.
+    #[test]
+    fn begin_demote_state_byte_does_not_change_checksum() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"checksum guard");
+
+        set.begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        // get_chunk runs the xxh3 checksum check internally. If the state
+        // byte were part of the checksum window, this would fail here.
+        let _source = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(source_id)
+            .expect("state byte mutation must not invalidate checksum");
+    }
+
+    #[test]
+    fn begin_demote_rejects_unknown_source_id() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        // No allocations — id 9999 does not exist.
+        let err = set
+            .begin_demote(TierKind::Hot, ChunkId::new(9999), TierKind::Warm)
+            .unwrap_err();
+        assert!(
+            matches!(err, ArenaError::UnknownChunkId(_)),
+            "expected UnknownChunkId, got {:?}",
+            err
+        );
+    }
+
+    /// `CrossfadeHandle` must be `Copy` so callers can stash it and pass it
+    /// to `complete_demote` / `abort_demote` later without ownership moves.
+    #[test]
+    fn crossfade_handle_is_copy() {
+        let h = CrossfadeHandle {
+            source: ChunkId::new(1),
+            source_tier: TierKind::Hot,
+            target: ChunkId::new(2),
+            target_tier: TierKind::Warm,
+        };
+        let h2 = h; // Copy move
+        assert_eq!(h, h2);
+    }
+}
