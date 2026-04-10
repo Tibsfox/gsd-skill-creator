@@ -5327,8 +5327,9 @@ mod m4_orphan_recovery {
             // Drop without completing — simulates crash.
         }
 
-        // Reopen with open_lazy — orphan recovery should fire.
-        let set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+        // Reopen with open_lazy — registry is restored. GC cleans up.
+        let mut set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+        set2.gc_orphaned_targets();
         // The source chunk should be recovered to Resident.
         // We need to find it — it was chunk id 1 (first alloc).
         let state = set2
@@ -5359,7 +5360,8 @@ mod m4_orphan_recovery {
             set.flush().unwrap();
         }
 
-        let set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+        let mut set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+        set2.gc_orphaned_targets();
         let state = set2
             .pool(TierKind::Warm)
             .unwrap()
@@ -5413,9 +5415,10 @@ mod m4_orphan_recovery {
             set.flush().unwrap();
         }
 
-        // First reopen — recovery fires, FadingOut -> Resident.
+        // First reopen — GC cleans up, FadingOut -> Resident.
         {
-            let set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+            let mut set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+            set2.gc_orphaned_targets();
             let state = set2
                 .pool(TierKind::Hot)
                 .unwrap()
@@ -5461,7 +5464,8 @@ mod m4_orphan_recovery {
             set.flush().unwrap();
         }
 
-        let set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+        let mut set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+        set2.gc_orphaned_targets();
 
         // All 5 chunks should exist. The first 3 should be Resident
         // (recovered), the last 2 should be Resident (never faded).
@@ -7738,5 +7742,200 @@ mod m9_get_chunk_hot_tests {
         let id = arena.alloc_chunk(TierKind::Blob, vec![]).expect("alloc");
         let hot = arena.get_chunk_hot(id).expect("get_chunk_hot");
         assert!(hot.is_empty());
+    }
+}
+
+// =============================================================================
+// M10 — CrossfadeRegistry persistence + orphan-target GC
+// =============================================================================
+
+mod m10_registry_persistence_tests {
+    use super::*;
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, CrossfadeHandle, PoolSpec};
+    use crate::memory_arena::warm_start::{InMemoryColdSource, WarmStart};
+
+    fn two_tier_set(dir: &std::path::Path) -> ArenaSet {
+        let config = ArenaConfig::test();
+        let set_config = ArenaSetConfig::new(dir)
+            .with_pool(PoolSpec {
+                tier: TierKind::Hot,
+                chunk_size: config.chunk_size,
+                num_slots: 8,
+                policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
+                allocator: Default::default(),
+            })
+            .with_pool(PoolSpec {
+                tier: TierKind::Warm,
+                chunk_size: config.chunk_size,
+                num_slots: 8,
+                policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Warm),
+                allocator: Default::default(),
+            });
+        ArenaSet::create(set_config).expect("create")
+    }
+
+    #[test]
+    fn flush_persists_crossfade_registry_to_disk() {
+        let dir = tempdir().expect("tempdir");
+        let mut set = two_tier_set(dir.path());
+
+        // Alloc a chunk in Hot and begin demote to Warm (don't complete).
+        let pool = set.pool_mut(TierKind::Hot).expect("hot");
+        let id = pool.alloc(vec![42; 64]).expect("alloc");
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).expect("begin_demote");
+
+        // Flush — should persist the in-flight crossfade.
+        set.flush().expect("flush");
+
+        // Verify crossfades.json exists on disk.
+        let crossfades_path = dir.path().join("crossfades.json");
+        assert!(crossfades_path.exists(), "crossfades.json should exist after flush");
+
+        // Read back and verify the handle is in the file.
+        let data = std::fs::read_to_string(&crossfades_path).expect("read");
+        assert!(data.contains(&format!("{}", id.as_u64())), "should contain source chunk id");
+    }
+
+    #[test]
+    fn open_restores_crossfade_registry_and_resumes_fade() {
+        let dir = tempdir().expect("tempdir");
+        let mut set = two_tier_set(dir.path());
+
+        let pool = set.pool_mut(TierKind::Hot).expect("hot");
+        let id = pool.alloc(vec![77; 64]).expect("alloc");
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).expect("begin_demote");
+
+        // Flush with in-flight crossfade, then drop.
+        set.flush().expect("flush");
+        drop(set);
+
+        // Reopen — registry should be restored.
+        let cold = InMemoryColdSource::new();
+        let (mut set2, _) = WarmStart::open(dir.path(), &cold).expect("reopen");
+
+        // The crossfade handle should be resumable: complete_demote should work.
+        let result = set2.complete_demote(handle);
+        assert!(result.is_ok(), "should complete the resumed crossfade: {:?}", result.err());
+    }
+
+    #[test]
+    fn clean_shutdown_no_crossfades_file_when_registry_empty() {
+        let dir = tempdir().expect("tempdir");
+        let mut set = two_tier_set(dir.path());
+
+        // Alloc, begin demote, complete it — registry is empty.
+        let pool = set.pool_mut(TierKind::Hot).expect("hot");
+        let id = pool.alloc(vec![10; 32]).expect("alloc");
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).expect("begin_demote");
+        set.complete_demote(handle).expect("complete");
+
+        set.flush().expect("flush");
+
+        // crossfades.json should not exist (or be empty) when registry is empty.
+        let crossfades_path = dir.path().join("crossfades.json");
+        if crossfades_path.exists() {
+            let data = std::fs::read_to_string(&crossfades_path).expect("read");
+            let entries: Vec<serde_json::Value> = serde_json::from_str(&data).expect("parse");
+            assert!(entries.is_empty(), "registry should be empty after all crossfades complete");
+        }
+    }
+}
+
+mod m10_orphan_gc_tests {
+    use super::*;
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, PoolSpec};
+    use crate::memory_arena::warm_start::{InMemoryColdSource, WarmStart};
+
+    fn two_tier_set(dir: &std::path::Path) -> ArenaSet {
+        let config = ArenaConfig::test();
+        let set_config = ArenaSetConfig::new(dir)
+            .with_pool(PoolSpec {
+                tier: TierKind::Hot,
+                chunk_size: config.chunk_size,
+                num_slots: 8,
+                policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
+                allocator: Default::default(),
+            })
+            .with_pool(PoolSpec {
+                tier: TierKind::Warm,
+                chunk_size: config.chunk_size,
+                num_slots: 8,
+                policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Warm),
+                allocator: Default::default(),
+            });
+        ArenaSet::create(set_config).expect("create")
+    }
+
+    #[test]
+    fn gc_collects_orphaned_targets_after_crash() {
+        let dir = tempdir().expect("tempdir");
+        let mut set = two_tier_set(dir.path());
+
+        // Alloc a chunk in Hot, begin demote to Warm (creates target).
+        let pool = set.pool_mut(TierKind::Hot).expect("hot");
+        let id = pool.alloc(vec![55; 64]).expect("alloc");
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).expect("begin_demote");
+        let target_id = handle.target;
+
+        // Simulate crash between flush and complete: registry is persisted
+        // with the in-flight crossfade, but complete_demote never runs.
+        set.flush().expect("flush");
+        drop(set);
+
+        // Reopen.
+        let cold = InMemoryColdSource::new();
+        let (mut set2, _) = WarmStart::open(dir.path(), &cold).expect("reopen");
+
+        // Run GC — should collect the orphaned target.
+        let gc_report = set2.gc_orphaned_targets();
+        assert!(gc_report.targets_freed > 0, "should free at least one orphaned target");
+
+        // The Warm pool should no longer contain the target chunk.
+        let warm = set2.pool(TierKind::Warm).expect("warm");
+        assert!(!warm.arena().contains(target_id), "orphaned target should be freed");
+    }
+
+    #[test]
+    fn gc_does_nothing_when_no_orphans() {
+        let dir = tempdir().expect("tempdir");
+        let mut set = two_tier_set(dir.path());
+
+        // Alloc, demote, complete — no orphans.
+        let pool = set.pool_mut(TierKind::Hot).expect("hot");
+        let id = pool.alloc(vec![33; 64]).expect("alloc");
+        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).expect("begin_demote");
+        set.complete_demote(handle).expect("complete");
+
+        set.flush().expect("flush");
+        drop(set);
+
+        let cold = InMemoryColdSource::new();
+        let (mut set2, _) = WarmStart::open(dir.path(), &cold).expect("reopen");
+        let gc_report = set2.gc_orphaned_targets();
+        assert_eq!(gc_report.targets_freed, 0);
+    }
+
+    #[test]
+    fn gc_report_counts_sources_reverted() {
+        let dir = tempdir().expect("tempdir");
+        let mut set = two_tier_set(dir.path());
+
+        // Alloc two chunks, begin demote for both, crash.
+        let pool = set.pool_mut(TierKind::Hot).expect("hot");
+        let id1 = pool.alloc(vec![1; 64]).expect("alloc1");
+        let id2 = pool.alloc(vec![2; 64]).expect("alloc2");
+        let _h1 = set.begin_demote(TierKind::Hot, id1, TierKind::Warm).expect("demote1");
+        let _h2 = set.begin_demote(TierKind::Hot, id2, TierKind::Warm).expect("demote2");
+
+        // Flush persists registry, then crash before complete.
+        set.flush().expect("flush");
+        drop(set);
+
+        let cold = InMemoryColdSource::new();
+        let (mut set2, _) = WarmStart::open(dir.path(), &cold).expect("reopen");
+        let gc_report = set2.gc_orphaned_targets();
+        // Sources were reverted to Resident by existing orphan recovery in open.
+        // GC should have freed the 2 orphaned targets.
+        assert_eq!(gc_report.targets_freed, 2, "should free both orphaned targets");
     }
 }

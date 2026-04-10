@@ -39,8 +39,8 @@ pub use persistence::{
     JournalWriter,
 };
 pub use pool::{
-    ArenaSet, ArenaSetConfig, EvictionKind, Manifest, PoolSpec, TierPolicy, TierPool,
-    ARENA_SET_FORMAT_VERSION,
+    ArenaSet, ArenaSetConfig, CrossfadeHandle, EvictionKind, GcReport, Manifest, PoolSpec,
+    TierPolicy, TierPool, ARENA_SET_FORMAT_VERSION,
 };
 pub use warm_start::{
     ColdSource, InMemoryColdSource, WarmStart, WarmStartConfig, WarmStartReport, WarmStartStats,
