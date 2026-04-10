@@ -77,6 +77,11 @@ Criterion benchmarks live at `src-tauri/benches/arena_bench.rs` and cover:
   validation cost after a lazy open (M2)
 - `checkpoint_write_1k`
 - `journal_append_1k` / `journal_replay_1k`
+- `demote_crossfade/begin_1kib`, `begin_1mib`, `complete_1kib`,
+  `complete_1mib`, `begin_complete_1kib` — demote crossfade pipeline
+  latency for small and large payloads (M3)
+- `hysteresis/rejects_cooldown_1k` — hysteresis cooldown rejection
+  latency (M3)
 
 **Baseline numbers:**
 - [`docs/memory-arena/M1-baseline.md`](../../../docs/memory-arena/M1-baseline.md)
@@ -85,6 +90,10 @@ Criterion benchmarks live at `src-tauri/benches/arena_bench.rs` and cover:
   — M2 lazy-default + per-pool journal dispatch (slice 2), with M1-vs-M2
   delta. Headline: lazy `warm_start_100k` = 86.24 ms vs M1 eager = 1.43 s
   (**16.58x speedup**).
+- [`docs/memory-arena/M3-baseline.md`](../../../docs/memory-arena/M3-baseline.md)
+  — M3 demote crossfade + ChunkState + hysteresis (slice 3), with M2-vs-M3
+  cross-check. Headline: demote `begin_1kib` = 41 us, `complete_1kib` = 41 us,
+  lazy `warm_start_100k` = 86.87 ms (+0.73% vs M2, noise).
 
 **Slice history**
 
@@ -98,6 +107,16 @@ Criterion benchmarks live at `src-tauri/benches/arena_bench.rs` and cover:
   Journal records gained an `OP_ALLOC_V2` / `OP_FREE_V2` variant that
   carries a `pool_id: TierKind` byte for multi-pool `replay_into_set`
   dispatch; legacy v1 records decode as `pool_id = TierKind::Hot`.
+- **M3** = demote crossfade + ChunkState enum + hysteresis cooldown.
+  `ChunkState { Resident, FadingOut }` at header byte 64,
+  `last_demote_completed_at_ns` at bytes 72..80 (both outside the
+  checksum window). `ArenaSet::begin_demote` / `complete_demote` /
+  `abort_demote` implement the first crossfade primitive (demote
+  direction only, explicit completion, no background workers).
+  `TierPolicy::demote_cooldown_ns` prevents thrashing via a
+  per-chunk hysteresis cooldown. `TierPool::replay_alloc` /
+  `replay_free` close the slice-2 `replay_into_set` counter-drift
+  caveat. Slice-3 does NOT touch `Cargo.toml` or add new deps.
 
 **Re-run command:**
 ```bash
