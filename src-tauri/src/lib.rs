@@ -35,6 +35,7 @@ pub fn run() {
             app.manage(tokio::sync::Mutex::new(services::launcher::ServiceLauncher::new_without_emitter()));
             app.manage(commands::memory_arena::ArenaState::default());
             app.manage(commands::memory_arena::ArenaSetState::default());
+            app.manage(commands::memory_arena::CgroupState::default());
 
             // v1.49.7 (PR #24 @PatrickRobotham): gate tmux session auto-detection
             // and monitor on tmux availability. Without tmux, these would poll a
@@ -157,6 +158,9 @@ pub fn run() {
             commands::memory_arena::arena_set_flush,
             commands::memory_arena::arena_set_free,
             commands::memory_arena::arena_set_list_ids,
+            commands::memory_arena::cgroup_init,
+            commands::memory_arena::cgroup_state,
+            commands::memory_arena::cgroup_grow,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
