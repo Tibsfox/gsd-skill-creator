@@ -7091,3 +7091,131 @@ mod tlsf_allocator_tests {
         assert!(result.is_ok(), "chain coalescence should recover contiguous block");
     }
 }
+
+// ===== M8: Cache-line optimization tests ==============================
+
+#[test]
+fn read_header_core_parses_first_64_bytes() {
+    use crate::memory_arena::chunk::{read_header_core, write_header_into};
+    use crate::memory_arena::types::ChunkState;
+    let mut chunk = Chunk::new(ChunkId::new(99), TierKind::Hot, vec![0xAB; 64]);
+    chunk.finalize();
+    let mut buf = [0u8; HEADER_SIZE];
+    write_header_into(chunk.header(), &mut buf);
+    // Manually set state byte to FadingOut and timestamps to non-zero
+    // to prove read_header_core ignores them.
+    buf[64] = ChunkState::FadingOut.as_u8();
+    buf[72..80].copy_from_slice(&42u64.to_le_bytes());
+    buf[80..88].copy_from_slice(&99u64.to_le_bytes());
+
+    let header = read_header_core(&buf).expect("core parse should succeed");
+    assert_eq!(header.chunk_id, ChunkId::new(99));
+    assert_eq!(header.tier, TierKind::Hot);
+    assert_eq!(header.checksum, chunk.header().checksum);
+    // Extended fields should be defaults — core doesn't read them.
+    assert_eq!(header.state, ChunkState::Resident);
+    assert_eq!(header.last_demote_completed_at_ns, 0);
+    assert_eq!(header.last_promote_completed_at_ns, 0);
+}
+
+#[test]
+fn read_header_core_plus_extended_equals_full() {
+    use crate::memory_arena::chunk::{
+        read_header_core, read_header_extended, read_header_from, write_header_into,
+    };
+    use crate::memory_arena::types::ChunkState;
+    let mut chunk = Chunk::new(ChunkId::new(77), TierKind::Warm, vec![0xCD; 128]);
+    chunk.finalize();
+    let mut buf = [0u8; HEADER_SIZE];
+    write_header_into(chunk.header(), &mut buf);
+    // Set extended fields to non-defaults.
+    buf[64] = ChunkState::FadingOut.as_u8();
+    buf[72..80].copy_from_slice(&1_000_000u64.to_le_bytes());
+    buf[80..88].copy_from_slice(&2_000_000u64.to_le_bytes());
+
+    let full = read_header_from(&buf).expect("full parse");
+    let mut core = read_header_core(&buf).expect("core parse");
+    read_header_extended(&buf, &mut core).expect("extended parse");
+
+    assert_eq!(core, full);
+}
+
+#[test]
+fn read_header_core_rejects_bad_magic() {
+    use crate::memory_arena::chunk::read_header_core;
+    let mut buf = [0u8; HEADER_SIZE];
+    buf[0..8].copy_from_slice(b"BADMAGIC");
+    let result = read_header_core(&buf);
+    assert!(result.is_err(), "bad magic should be rejected by core parse");
+}
+
+#[test]
+fn read_header_core_short_buffer_rejected() {
+    use crate::memory_arena::chunk::read_header_core;
+    // 63 bytes — one short of the core requirement.
+    let buf = [0u8; 63];
+    let result = read_header_core(&buf);
+    assert!(result.is_err(), "buffer shorter than 64 bytes should be rejected");
+}
+
+#[test]
+fn read_header_core_accepts_exactly_64_bytes() {
+    use crate::memory_arena::chunk::{read_header_core, write_header_into};
+    let chunk = Chunk::new(ChunkId::new(1), TierKind::Hot, vec![0; 16]);
+    let mut buf = [0u8; HEADER_SIZE];
+    write_header_into(chunk.header(), &mut buf);
+    // Slice to exactly 64 bytes — should succeed.
+    let header = read_header_core(&buf[..64]).expect("64 bytes should suffice for core");
+    assert_eq!(header.chunk_id, ChunkId::new(1));
+}
+
+#[test]
+fn open_lazy_tolerates_fading_out_state_via_core_parse() {
+    use crate::memory_arena::types::ChunkState;
+    // open_lazy uses read_header_core which defaults state to Resident.
+    // A FadingOut byte on disk should NOT cause the walk to fail.
+    let dir = tempdir().expect("tempdir");
+    let config = ArenaConfig::test();
+    let path = dir.path().join("test.arena");
+    let mut arena = Arena::new_mmap_file(config.clone(), 8, &path).expect("create arena");
+    let id = arena.alloc_chunk(TierKind::Hot, vec![0xAA; 64]).expect("alloc");
+    // Mark the chunk as FadingOut directly in storage.
+    arena.mark_state(id, ChunkState::FadingOut).expect("mark state");
+
+    // Reopen with open_lazy — should succeed and register the chunk.
+    let arena2 = Arena::open_lazy(config, 8, &path).expect("open_lazy should succeed");
+    assert!(
+        arena2.get_chunk(id).is_ok(),
+        "chunk should be in directory after open_lazy despite FadingOut state byte"
+    );
+}
+
+#[test]
+fn backward_compat_m1_m2_m3_m7_core_parse() {
+    use crate::memory_arena::chunk::{read_header_core, write_header_into};
+    use crate::memory_arena::types::ChunkState;
+    // Simulate chunks from different milestone eras:
+    // M1/M2: state=0, demote_ts=0, promote_ts=0
+    // M3: state=FadingOut(1), demote_ts=non-zero, promote_ts=0
+    // M4+: state=Resident(0), demote_ts=non-zero, promote_ts=non-zero
+    for (state_byte, demote_ts, promote_ts) in [
+        (0u8, 0u64, 0u64),         // M1/M2
+        (1u8, 12345u64, 0u64),     // M3 fading
+        (0u8, 12345u64, 67890u64), // M4+ resident with history
+    ] {
+        let chunk = Chunk::new(ChunkId::new(42), TierKind::Blob, vec![0; 32]);
+        let mut buf = [0u8; HEADER_SIZE];
+        write_header_into(chunk.header(), &mut buf);
+        buf[64] = state_byte;
+        buf[72..80].copy_from_slice(&demote_ts.to_le_bytes());
+        buf[80..88].copy_from_slice(&promote_ts.to_le_bytes());
+
+        // read_header_core should succeed regardless of extended bytes.
+        let header = read_header_core(&buf).expect("core parse should handle all eras");
+        assert_eq!(header.chunk_id, ChunkId::new(42));
+        // Core parse always defaults extended fields.
+        assert_eq!(header.state, ChunkState::Resident);
+        assert_eq!(header.last_demote_completed_at_ns, 0);
+        assert_eq!(header.last_promote_completed_at_ns, 0);
+    }
+}
