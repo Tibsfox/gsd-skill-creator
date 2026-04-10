@@ -2192,7 +2192,11 @@ mod warm_start_fault_tests {
         corrupt_byte_in_arena_file(&arena_path, 2, slot_size, 56);
 
         // 4. WarmStart::open: corrupt slot detected, rebuilt from cold.
-        let (set, report) = WarmStart::open(tmp.path(), &cold).unwrap();
+        // Fault tests use the eager path explicitly — the lazy default
+        // (M2) deliberately does not see payload/checksum corruption, and
+        // the rebuild-from-cold contract is an eager-mode feature. See
+        // Plan 03 SUMMARY + MISSION.md D2 for the trade-off rationale.
+        let (set, report) = WarmStart::open_eager(tmp.path(), &cold).unwrap();
         assert_eq!(report.slots_corrupt, 1, "expected 1 corrupt");
         assert_eq!(report.slots_rebuilt_from_cold, 1, "expected 1 rebuild");
         assert_eq!(report.slots_missing, 0);
@@ -2252,7 +2256,11 @@ mod warm_start_fault_tests {
         // Corrupt a byte deep in the payload region (well past the header).
         corrupt_byte_in_arena_file(&arena_path, 1, slot_size, HEADER_SIZE + 50);
 
-        let (set, report) = WarmStart::open(tmp.path(), &cold).unwrap();
+        // Fault tests use the eager path explicitly — the lazy default
+        // (M2) deliberately does not see payload/checksum corruption, and
+        // the rebuild-from-cold contract is an eager-mode feature. See
+        // Plan 03 SUMMARY + MISSION.md D2 for the trade-off rationale.
+        let (set, report) = WarmStart::open_eager(tmp.path(), &cold).unwrap();
         assert_eq!(report.slots_corrupt, 1, "expected 1 corrupt");
         assert_eq!(report.slots_rebuilt_from_cold, 1, "expected 1 rebuild");
         assert_eq!(report.slots_missing, 0);
@@ -2302,7 +2310,11 @@ mod warm_start_fault_tests {
         // Cold source has nothing.
         let cold = InMemoryColdSource::new();
 
-        let (set, report) = WarmStart::open(tmp.path(), &cold).unwrap();
+        // Fault tests use the eager path explicitly — the lazy default
+        // (M2) deliberately does not see payload/checksum corruption, and
+        // the rebuild-from-cold contract is an eager-mode feature. See
+        // Plan 03 SUMMARY + MISSION.md D2 for the trade-off rationale.
+        let (set, report) = WarmStart::open_eager(tmp.path(), &cold).unwrap();
         assert_eq!(report.slots_corrupt, 1, "expected 1 corrupt");
         assert_eq!(report.slots_rebuilt_from_cold, 0);
         assert_eq!(report.slots_missing, 1, "expected 1 missing");
@@ -2952,5 +2964,201 @@ mod journal_dispatch_tests {
             "expected truncation to drop at least one Warm op, got {}",
             warm_count
         );
+    }
+}
+
+// =============================================================================
+// memory-arena-m2 Plan 03 — WarmStartConfig lazy default + eager opt-in
+// =============================================================================
+
+#[cfg(test)]
+mod warm_start_config_tests {
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind, HEADER_SIZE};
+    use crate::memory_arena::warm_start::{
+        InMemoryColdSource, WarmStart, WarmStartConfig, WarmStartStats,
+    };
+    use std::fs::OpenOptions;
+    use std::io::{Read, Seek, SeekFrom, Write};
+    use tempfile::tempdir;
+
+    fn unlimited_spec(tier: TierKind, num_slots: usize) -> PoolSpec {
+        PoolSpec {
+            tier,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+            },
+        }
+    }
+
+    #[test]
+    fn warm_start_config_default_is_lazy() {
+        let cfg = WarmStartConfig::default();
+        assert!(
+            !cfg.eager_validation,
+            "default WarmStartConfig must be lazy (eager_validation = false)"
+        );
+    }
+
+    #[test]
+    fn warm_start_default_lazy_does_not_populate_validation_stats() {
+        let tmp = tempdir().unwrap();
+        {
+            let mut set = ArenaSet::create(
+                ArenaSetConfig::new(tmp.path())
+                    .with_pool(unlimited_spec(TierKind::Hot, 16)),
+            )
+            .unwrap();
+            for i in 0..8usize {
+                set.pool_mut(TierKind::Hot)
+                    .unwrap()
+                    .alloc(vec![i as u8; 32])
+                    .unwrap();
+            }
+            set.flush().unwrap();
+        }
+
+        // Default (lazy) open.
+        let cold = InMemoryColdSource::new();
+        let (set, _report, stats): (ArenaSet, _, WarmStartStats) =
+            WarmStart::open_with_config(
+                tmp.path(),
+                &cold,
+                WarmStartConfig::default(),
+            )
+            .unwrap();
+        // Lazy mode: no checksums validated.
+        assert_eq!(stats.checksums_validated, 0);
+        // 8 allocated slots should appear in the lazy directory.
+        let hot_count = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .iter_chunk_ids()
+            .count();
+        assert_eq!(hot_count, 8);
+    }
+
+    #[test]
+    fn warm_start_eager_config_runs_full_validation() {
+        let tmp = tempdir().unwrap();
+        {
+            let mut set = ArenaSet::create(
+                ArenaSetConfig::new(tmp.path())
+                    .with_pool(unlimited_spec(TierKind::Hot, 16)),
+            )
+            .unwrap();
+            for i in 0..10usize {
+                set.pool_mut(TierKind::Hot)
+                    .unwrap()
+                    .alloc(vec![(i as u8).wrapping_mul(13); 48])
+                    .unwrap();
+            }
+            set.flush().unwrap();
+        }
+
+        let cold = InMemoryColdSource::new();
+        let (_set, report, stats) = WarmStart::open_with_config(
+            tmp.path(),
+            &cold,
+            WarmStartConfig {
+                eager_validation: true,
+            },
+        )
+        .unwrap();
+        assert_eq!(report.slots_validated, 10);
+        assert_eq!(stats.checksums_validated, 10);
+    }
+
+    #[test]
+    fn warm_start_lazy_payload_corruption_invisible_until_get() {
+        let tmp = tempdir().unwrap();
+        let arena_path = tmp.path().join("hot.arena");
+        let slot_size = ArenaConfig::test().chunk_size as usize;
+
+        let target_id;
+        {
+            let mut set = ArenaSet::create(
+                ArenaSetConfig::new(tmp.path())
+                    .with_pool(unlimited_spec(TierKind::Hot, 8)),
+            )
+            .unwrap();
+            for i in 0..5usize {
+                set.pool_mut(TierKind::Hot)
+                    .unwrap()
+                    .alloc(vec![i as u8; 64])
+                    .unwrap();
+            }
+            target_id = ChunkId::new(3);
+            set.flush().unwrap();
+        }
+
+        // Corrupt one payload byte in slot 2 (the 3rd chunk).
+        {
+            let mut f = OpenOptions::new()
+                .read(true)
+                .write(true)
+                .open(&arena_path)
+                .unwrap();
+            let offset = 2 * slot_size + HEADER_SIZE + 20;
+            f.seek(SeekFrom::Start(offset as u64)).unwrap();
+            let mut b = [0u8; 1];
+            f.read_exact(&mut b).unwrap();
+            b[0] ^= 0xFF;
+            f.seek(SeekFrom::Start(offset as u64)).unwrap();
+            f.write_all(&b).unwrap();
+            f.sync_all().unwrap();
+        }
+
+        // Lazy default: the corruption is invisible at open time.
+        let cold = InMemoryColdSource::new();
+        let (set, report) = WarmStart::open(tmp.path(), &cold).unwrap();
+        // Lazy mode reports no corruption.
+        assert_eq!(report.slots_corrupt, 0, "lazy mode should not see payload corruption");
+        assert_eq!(report.slots_rebuilt_from_cold, 0);
+        assert_eq!(report.slots_missing, 0);
+
+        let pool = set.pool(TierKind::Hot).unwrap();
+        // get_chunk still re-validates, so it catches the corruption
+        // on the corrupted id specifically.
+        let result = pool.arena().get_chunk(target_id);
+        assert!(
+            result.is_err(),
+            "get_chunk on corrupted id should return checksum error"
+        );
+        // The other 4 chunks read cleanly.
+        for raw in 1u64..=5 {
+            if raw == target_id.as_u64() {
+                continue;
+            }
+            pool.arena()
+                .get_chunk(ChunkId::new(raw))
+                .expect("other chunks should read cleanly");
+        }
+    }
+
+    #[test]
+    fn warm_start_existing_callers_continue_to_compile() {
+        // Belt-and-suspenders: prove `WarmStart::open(root, cold)` still
+        // returns (ArenaSet, WarmStartReport) so M1 callers compile without
+        // touching a single call site.
+        let tmp = tempdir().unwrap();
+        {
+            let set = ArenaSet::create(
+                ArenaSetConfig::new(tmp.path())
+                    .with_pool(unlimited_spec(TierKind::Hot, 4)),
+            )
+            .unwrap();
+            set.flush().unwrap();
+        }
+        let cold = InMemoryColdSource::new();
+        let (_set, _report) = WarmStart::open(tmp.path(), &cold).unwrap();
     }
 }
