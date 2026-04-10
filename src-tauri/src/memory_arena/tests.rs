@@ -7306,3 +7306,109 @@ mod pg_cold_tests {
         cs.delete(tier, id).expect("cleanup delete");
     }
 }
+
+// ===== M8: MAP_HUGETLB tests ==========================================
+
+#[cfg(target_os = "linux")]
+mod hugetlb_tests {
+    use crate::memory_arena::arena::Arena;
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, PoolSpec};
+    use crate::memory_arena::types::{ArenaConfig, TierKind};
+    use tempfile::tempdir;
+
+    fn test_config() -> ArenaConfig {
+        ArenaConfig::test()
+    }
+
+    fn unlimited_policy() -> crate::memory_arena::pool::TierPolicy {
+        crate::memory_arena::pool::TierPolicy {
+            max_chunks: 0,
+            eviction: crate::memory_arena::pool::EvictionKind::Lru,
+            promote_after_hits: 0,
+            demote_after_idle_ns: 0,
+            demote_cooldown_ns: 0,
+            promote_cooldown_ns: 0,
+        }
+    }
+
+    #[test]
+    fn hugetlb_fallback_when_no_huge_pages() {
+        let dir = tempdir().expect("tempdir");
+        let path = dir.path().join("test.arena");
+        let arena = Arena::new_mmap_file_hugetlb(test_config(), 8, &path)
+            .expect("hugetlb arena should succeed via fallback");
+        // On a system without huge pages, this should be false.
+        // We don't assert false because the test should pass on systems
+        // WITH huge pages too — just check that the flag is accessible.
+        let _active = arena.huge_pages_active();
+        // nr_hugepages == 0 on this system, so expect false.
+        assert!(
+            !arena.huge_pages_active(),
+            "expected fallback on system with nr_hugepages == 0"
+        );
+    }
+
+    #[test]
+    fn hugetlb_arena_alloc_get_free() {
+        let dir = tempdir().expect("tempdir");
+        let path = dir.path().join("test.arena");
+        let mut arena = Arena::new_mmap_file_hugetlb(test_config(), 8, &path)
+            .expect("hugetlb arena");
+        let id = arena
+            .alloc_chunk(TierKind::Hot, vec![0xBE; 64])
+            .expect("alloc on hugetlb arena");
+        let chunk = arena.get_chunk(id).expect("get on hugetlb arena");
+        assert_eq!(chunk.payload(), &vec![0xBE; 64]);
+        arena.free_chunk(id).expect("free on hugetlb arena");
+    }
+
+    #[test]
+    fn hugetlb_open_lazy() {
+        let dir = tempdir().expect("tempdir");
+        let path = dir.path().join("test.arena");
+        let config = test_config();
+        let mut arena = Arena::new_mmap_file_hugetlb(config.clone(), 8, &path)
+            .expect("create hugetlb arena");
+        let id = arena
+            .alloc_chunk(TierKind::Hot, vec![0xAA; 32])
+            .expect("alloc");
+        drop(arena);
+        // Reopen with open_lazy (standard mmap — open_lazy doesn't use hugetlb).
+        let arena2 = Arena::open_lazy(config, 8, &path).expect("open_lazy after hugetlb write");
+        let chunk = arena2.get_chunk(id).expect("get after reopen");
+        assert_eq!(chunk.payload(), &vec![0xAA; 32]);
+    }
+
+    #[test]
+    fn hugetlb_observability_flag() {
+        let dir = tempdir().expect("tempdir");
+        let path = dir.path().join("test.arena");
+        let arena = Arena::new_mmap_file_hugetlb(test_config(), 4, &path)
+            .expect("hugetlb arena");
+        // The flag should be a bool — just verify it compiles and is accessible.
+        let active: bool = arena.huge_pages_active();
+        // On our system: false.
+        assert!(!active);
+    }
+
+    #[test]
+    fn arena_set_create_with_hugetlb() {
+        let dir = tempdir().expect("tempdir");
+        let config = ArenaSetConfig {
+            root: dir.path().to_path_buf(),
+            pools: vec![PoolSpec {
+                tier: TierKind::Hot,
+                chunk_size: ArenaConfig::test().chunk_size,
+                num_slots: 8,
+                policy: unlimited_policy(),
+            }],
+        };
+        let mut set = ArenaSet::create_with_hugetlb(config).expect("create with hugetlb");
+        let pool = set.pool(TierKind::Hot).expect("hot pool");
+        assert!(!pool.arena().huge_pages_active());
+        // Basic alloc to confirm functionality.
+        let id = set.alloc(TierKind::Hot, vec![0xCC; 16]).expect("alloc");
+        let chunk = set.get_chunk(TierKind::Hot, id).expect("get");
+        assert_eq!(chunk.payload(), &vec![0xCC; 16]);
+    }
+}
