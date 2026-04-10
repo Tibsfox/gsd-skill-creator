@@ -6009,3 +6009,232 @@ fn sweep_empty_arena_returns_zero_report() {
     assert_eq!(report.skipped_already_fading, 0);
     assert!(report.errors.is_empty());
 }
+
+// =========================================================================
+// M5 Plan 05 — Demote path, mixed sweep, eviction retry
+// =========================================================================
+
+#[test]
+fn sweep_demotes_idle_hot_chunk() {
+    let dir = tempdir().unwrap();
+    let hot_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 1_000_000, // 1ms idle threshold
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let warm_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
+
+    // Alloc a chunk in Hot.
+    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![55u8; 64]).unwrap();
+
+    // Set clock far in the future (beyond any real last_access_ns).
+    fn future_clock() -> u64 { u64::MAX / 2 }
+    set.set_now_ns_for_test(future_clock);
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.demotes_initiated, 1);
+    assert_eq!(report.demotes_completed, 1);
+    assert_eq!(set.pool(TierKind::Hot).unwrap().len(), 0);
+    assert_eq!(set.pool(TierKind::Warm).unwrap().len(), 1);
+}
+
+#[test]
+fn sweep_mixed_promotes_and_demotes() {
+    let dir = tempdir().unwrap();
+    let hot_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 1_000_000, // 1ms
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let warm_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 2,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let mut set = make_hot_warm_set(dir.path(), 16, 16, hot_policy, warm_policy);
+
+    // 3 Hot chunks that will be idle → demote.
+    for i in 0..3 {
+        set.pool_mut(TierKind::Hot).unwrap().alloc(vec![i; 64]).unwrap();
+    }
+
+    // 3 Warm chunks touched enough to promote.
+    for i in 0..3u8 {
+        let id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![i + 10; 64]).unwrap();
+        set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(id).unwrap();
+        set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(id).unwrap();
+    }
+
+    // Far-future clock for demote idle check.
+    fn far_future() -> u64 { u64::MAX / 2 }
+    set.set_now_ns_for_test(far_future);
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.promotes_completed, 3);
+    assert_eq!(report.demotes_completed, 3);
+    // Hot: had 3 (demoted) + got 3 (promoted) = 3.
+    assert_eq!(set.pool(TierKind::Hot).unwrap().len(), 3);
+    // Warm: had 3 (promoted away) + got 3 (demoted into) = 3.
+    assert_eq!(set.pool(TierKind::Warm).unwrap().len(), 3);
+}
+
+#[test]
+fn sweep_demote_with_eviction_on_full_target() {
+    let dir = tempdir().unwrap();
+    let hot_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 1_000_000,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    // Warm limited to 1 chunk.
+    let warm_policy = TierPolicy {
+        max_chunks: 1,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
+
+    // Fill Warm to capacity.
+    set.pool_mut(TierKind::Warm).unwrap().alloc(vec![0u8; 64]).unwrap();
+
+    // Alloc in Hot — will need demote.
+    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![1u8; 64]).unwrap();
+
+    fn far_future() -> u64 { u64::MAX / 2 }
+    set.set_now_ns_for_test(far_future);
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.demotes_completed, 1);
+    assert_eq!(report.evictions, 1);
+}
+
+#[test]
+fn sweep_skips_chunk_in_demote_cooldown() {
+    let dir = tempdir().unwrap();
+    let hot_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 1_000_000,
+        demote_cooldown_ns: 1_000_000_000_000, // huge cooldown
+        promote_cooldown_ns: 0,
+    };
+    let warm_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
+
+    // Clock must be far beyond real system time to satisfy idle threshold.
+    fn fixed_time() -> u64 { u64::MAX / 2 }
+    set.set_now_ns_for_test(fixed_time);
+
+    let hot_id = set.pool_mut(TierKind::Hot).unwrap().alloc(vec![5u8; 64]).unwrap();
+    // Stamp a recent demote timestamp (close to our fake now) to trigger cooldown.
+    set.pool_mut(TierKind::Hot).unwrap().arena_mut()
+        .write_last_demote_ns(hot_id, u64::MAX / 2 - 1).unwrap();
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.demotes_initiated, 0);
+    assert_eq!(report.skipped_cooldown, 1);
+    assert_eq!(set.pool(TierKind::Hot).unwrap().len(), 1);
+}
+
+#[test]
+fn sweep_three_tier_cascade() {
+    let dir = tempdir().unwrap();
+    let hot_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 1_000_000,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    // Warm: promote enabled, demote disabled (so Hot→Warm demotion
+    // doesn't cascade further to Blob in the same sweep).
+    let warm_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Lru,
+        promote_after_hits: 2,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let blob_policy = TierPolicy {
+        max_chunks: 0,
+        eviction: EvictionKind::Fifo,
+        promote_after_hits: 0,
+        demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
+        promote_cooldown_ns: 0,
+    };
+    let config = ArenaSetConfig::new(dir.path())
+        .with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 8,
+            policy: hot_policy,
+        })
+        .with_pool(PoolSpec {
+            tier: TierKind::Warm,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 8,
+            policy: warm_policy,
+        })
+        .with_pool(PoolSpec {
+            tier: TierKind::Blob,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 8,
+            policy: blob_policy,
+        });
+    let mut set = ArenaSet::create(config).unwrap();
+
+    // Hot chunk idle → should demote to Warm (one tier per sweep).
+    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![1u8; 64]).unwrap();
+
+    // Warm chunk touched → should promote to Hot.
+    let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![2u8; 64]).unwrap();
+    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+
+    fn far_future() -> u64 { u64::MAX / 2 }
+    set.set_now_ns_for_test(far_future);
+
+    let report = set.run_policy_sweep();
+    assert_eq!(report.promotes_completed, 1);
+    assert_eq!(report.demotes_completed, 1);
+    // Hot: was 1, demoted 1, got promoted 1 = 1.
+    assert_eq!(set.pool(TierKind::Hot).unwrap().len(), 1);
+    // Warm: was 1, promoted away, got 1 demoted from Hot = 1.
+    assert_eq!(set.pool(TierKind::Warm).unwrap().len(), 1);
+    // Blob unchanged.
+    assert_eq!(set.pool(TierKind::Blob).unwrap().len(), 0);
+}
