@@ -16,6 +16,7 @@
 
 pub mod allocator;
 pub mod arena;
+pub mod cgroup;
 pub mod chunk;
 pub mod error;
 pub mod handle;
@@ -48,6 +49,7 @@ pub use warm_start::{
 };
 #[cfg(feature = "postgres")]
 pub use pg_cold::PgColdSource;
+pub use cgroup::{CgroupEnforcer, CgroupMemoryState, GROWTH_STEP_BYTES, HARD_CAP_BYTES, INITIAL_LIMIT_BYTES};
 pub use types::{AllocatorSelector, ArenaConfig, ChunkHeader, ChunkId, SweepReport, TierKind, CHUNK_MAGIC, HEADER_SIZE};
 
 #[cfg(test)]
