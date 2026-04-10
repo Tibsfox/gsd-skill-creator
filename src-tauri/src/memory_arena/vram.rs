@@ -499,6 +499,71 @@ impl VramPool {
         self.slots[slot_idx] = None;
         Ok(())
     }
+
+    /// Batch-verify integrity of all VRAM chunks using the GPU checksum kernel.
+    ///
+    /// Concatenates all allocated chunks into a contiguous device buffer,
+    /// launches the batch XOR checksum kernel, and returns per-chunk checksums.
+    /// Callers can compare against stored checksums to detect corruption.
+    ///
+    /// Returns `(chunk_ids, checksums)` — parallel vectors.
+    pub fn verify_checksums(&self) -> ArenaResult<(Vec<ChunkId>, Vec<u32>)> {
+        let occupied: Vec<(ChunkId, usize)> = self.directory.iter()
+            .map(|(&id, &slot_idx)| (id, slot_idx))
+            .collect();
+        if occupied.is_empty() {
+            return Ok((Vec::new(), Vec::new()));
+        }
+
+        let num_chunks = occupied.len() as u32;
+        let chunk_size = self.chunk_size as u32;
+
+        // Concatenate all chunks into a host buffer, then upload once.
+        let total_bytes = num_chunks as usize * chunk_size as usize;
+        let mut host_buf = vec![0u8; total_bytes];
+        let mut chunk_ids = Vec::with_capacity(occupied.len());
+
+        for (i, (id, slot_idx)) in occupied.iter().enumerate() {
+            chunk_ids.push(*id);
+            let slot = self.slots[*slot_idx].as_ref()
+                .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+            let size = slot.alloc.size_bytes().min(chunk_size as usize);
+            if size > 0 {
+                let mut tmp = vec![0u8; size];
+                self.context.download(&slot.alloc, &mut tmp)?;
+                let offset = i * chunk_size as usize;
+                host_buf[offset..offset + size].copy_from_slice(&tmp);
+            }
+        }
+
+        // Upload concatenated buffer to VRAM
+        let mut input_alloc = self.context.alloc(total_bytes)?;
+        self.context.upload(&host_buf, &mut input_alloc)?;
+
+        // Allocate output buffer for checksums
+        let mut output_slice = self.context.stream()
+            .alloc_zeros::<u32>(num_chunks as usize)
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+
+        // Load and launch kernel
+        let kernel = self.context.load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")?;
+        let handle = KernelHandle::from_data_len("batch_xor_checksum", num_chunks, 256);
+
+        unsafe {
+            self.context.launch_checksum(
+                &kernel, &handle, &input_alloc.slice, &mut output_slice,
+                chunk_size, num_chunks,
+            )?;
+        }
+
+        // Download checksums
+        let mut checksums = vec![0u32; num_chunks as usize];
+        self.context.stream()
+            .memcpy_dtoh(&output_slice, &mut checksums)
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+
+        Ok((chunk_ids, checksums))
+    }
 }
 
 // =========================================================================
