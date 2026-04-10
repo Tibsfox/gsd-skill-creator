@@ -5242,3 +5242,208 @@ mod m4_complete_abort_promote {
         assert_eq!(state, ChunkState::Resident);
     }
 }
+
+// ============================================================================
+// M4 — Plan 04: Warm-start orphaned-fade recovery
+// ============================================================================
+
+#[cfg(test)]
+mod m4_orphan_recovery {
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, ChunkState, TierKind};
+    use tempfile::tempdir;
+
+    fn unlimited_spec(tier: TierKind, num_slots: usize) -> PoolSpec {
+        PoolSpec {
+            tier,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
+            },
+        }
+    }
+
+    fn two_pool_set(root: &std::path::Path) -> ArenaSet {
+        ArenaSet::create(
+            ArenaSetConfig::new(root)
+                .with_pool(unlimited_spec(TierKind::Hot, 8))
+                .with_pool(unlimited_spec(TierKind::Warm, 8)),
+        )
+        .expect("two-pool ArenaSet should build")
+    }
+
+    fn alloc_hot(set: &mut ArenaSet, payload: &[u8]) -> ChunkId {
+        set.pool_mut(TierKind::Hot)
+            .expect("Hot pool")
+            .alloc(payload.to_vec())
+            .expect("alloc")
+    }
+
+    fn alloc_warm(set: &mut ArenaSet, payload: &[u8]) -> ChunkId {
+        set.pool_mut(TierKind::Warm)
+            .expect("Warm pool")
+            .alloc(payload.to_vec())
+            .expect("alloc")
+    }
+
+    /// A chunk left in FadingOut by a demote crash is recovered to
+    /// Resident on lazy reopen.
+    #[test]
+    fn orphan_recovery_demote_fading_reverted_on_lazy_reopen() {
+        let dir = tempdir().unwrap();
+        {
+            let mut set = two_pool_set(dir.path());
+            let source_id = alloc_hot(&mut set, b"demote orphan");
+
+            // Begin demote — source goes FadingOut.
+            set.begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+                .unwrap();
+
+            // Flush to persist the FadingOut state byte.
+            set.flush().unwrap();
+            // Drop without completing — simulates crash.
+        }
+
+        // Reopen with open_lazy — orphan recovery should fire.
+        let set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+        // The source chunk should be recovered to Resident.
+        // We need to find it — it was chunk id 1 (first alloc).
+        let state = set2
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .chunk_state(ChunkId::new(1))
+            .unwrap();
+        assert_eq!(
+            state,
+            ChunkState::Resident,
+            "orphaned FadingOut chunk should be recovered to Resident"
+        );
+    }
+
+    /// A chunk left in FadingOut by a promote crash is recovered to
+    /// Resident on lazy reopen.
+    #[test]
+    fn orphan_recovery_promote_fading_reverted_on_lazy_reopen() {
+        let dir = tempdir().unwrap();
+        {
+            let mut set = two_pool_set(dir.path());
+            let source_id = alloc_warm(&mut set, b"promote orphan");
+
+            set.begin_promote(TierKind::Warm, source_id, TierKind::Hot)
+                .unwrap();
+
+            set.flush().unwrap();
+        }
+
+        let set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+        let state = set2
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .chunk_state(ChunkId::new(1))
+            .unwrap();
+        assert_eq!(
+            state,
+            ChunkState::Resident,
+            "orphaned FadingOut chunk should be recovered to Resident"
+        );
+    }
+
+    /// A Resident chunk stays Resident after reopen (no false revert).
+    #[test]
+    fn orphan_recovery_resident_stays_resident() {
+        let dir = tempdir().unwrap();
+        {
+            let mut set = two_pool_set(dir.path());
+            alloc_hot(&mut set, b"resident chunk");
+            set.flush().unwrap();
+        }
+
+        let set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+        let state = set2
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .chunk_state(ChunkId::new(1))
+            .unwrap();
+        assert_eq!(state, ChunkState::Resident);
+    }
+
+    /// Orphan recovery works with the eager open path too.
+    #[test]
+    fn orphan_recovery_works_with_eager_open() {
+        let dir = tempdir().unwrap();
+        {
+            let mut set = two_pool_set(dir.path());
+            let source_id = alloc_hot(&mut set, b"eager orphan");
+
+            set.begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+                .unwrap();
+
+            set.flush().unwrap();
+        }
+
+        // Use open (eager) instead of open_lazy.
+        let set2 = ArenaSet::open(dir.path()).unwrap();
+        let state = set2
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .chunk_state(ChunkId::new(1))
+            .unwrap();
+        assert_eq!(
+            state,
+            ChunkState::Resident,
+            "eager open should also recover orphaned FadingOut chunks"
+        );
+    }
+
+    /// Multiple FadingOut chunks are all recovered.
+    #[test]
+    fn orphan_recovery_multiple_fading_chunks() {
+        let dir = tempdir().unwrap();
+        {
+            let mut set = two_pool_set(dir.path());
+            // 5 hot chunks.
+            let ids: Vec<ChunkId> = (0..5)
+                .map(|i| alloc_hot(&mut set, &[i as u8; 32]))
+                .collect();
+
+            // Put the first 3 into FadingOut.
+            for &id in &ids[..3] {
+                set.begin_demote(TierKind::Hot, id, TierKind::Warm)
+                    .unwrap();
+            }
+
+            set.flush().unwrap();
+        }
+
+        let set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+
+        // All 5 chunks should exist. The first 3 should be Resident
+        // (recovered), the last 2 should be Resident (never faded).
+        for i in 1u64..=5 {
+            let state = set2
+                .pool(TierKind::Hot)
+                .unwrap()
+                .arena()
+                .chunk_state(ChunkId::new(i))
+                .unwrap();
+            assert_eq!(
+                state,
+                ChunkState::Resident,
+                "chunk {} should be Resident after recovery",
+                i
+            );
+        }
+    }
+}
