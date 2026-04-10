@@ -510,6 +510,67 @@ impl ArenaSet {
         })
     }
 
+    /// Same as `create` but uses `Arena::new_mmap_file_hugetlb` for all
+    /// pools, requesting 2 MiB huge pages via MAP_HUGETLB. Falls back to
+    /// standard mmap per-pool if huge pages are unavailable.
+    pub fn create_with_hugetlb(config: ArenaSetConfig) -> ArenaResult<Self> {
+        fs::create_dir_all(&config.root)?;
+
+        let manifest_path = config.root.join("manifest.json");
+        if manifest_path.exists() {
+            return Err(ArenaError::AlreadyExists { path: manifest_path });
+        }
+
+        let mut pools = HashMap::with_capacity(config.pools.len());
+        for spec in &config.pools {
+            let arena_path = config.root.join(format!("{}.arena", tier_filename_stem(spec.tier)));
+            let arena_config = arena_config_for_spec(spec);
+            let arena = Arena::new_mmap_file_hugetlb(arena_config, spec.num_slots, &arena_path)?;
+            let pool = TierPool::from_arena(spec.tier, arena, spec.policy);
+            pools.insert(spec.tier, pool);
+        }
+
+        let manifest = Manifest {
+            version: ARENA_SET_FORMAT_VERSION,
+            pools: config.pools.clone(),
+        };
+        write_manifest_atomic(&manifest_path, &manifest)?;
+
+        #[cfg(feature = "cuda")]
+        let vram_pool = {
+            if let Some(ctx) = &config.vram_context {
+                config
+                    .pools
+                    .iter()
+                    .find(|s| s.tier == TierKind::Vector)
+                    .map(|spec| {
+                        VramPool::new(
+                            ctx.clone(),
+                            spec.tier,
+                            spec.chunk_size,
+                            spec.num_slots,
+                            spec.policy,
+                        )
+                    })
+                    .transpose()?
+            } else {
+                None
+            }
+        };
+
+        Ok(Self {
+            root: config.root,
+            pools,
+            manifest,
+            crossfade_registry: CrossfadeRegistry::new(),
+            now_ns: real_now_ns,
+            #[cfg(feature = "cuda")]
+            vram_pool,
+            #[cfg(feature = "cuda")]
+            vram_crossfades: std::collections::HashSet::new(),
+        })
+    }
+
     /// Reopen an existing arena set by reading `<root>/manifest.json`.
     /// The per-tier .arena files are reopened via `Arena::new_mmap_file`,
     /// which preserves their byte content across process restarts.
