@@ -72,10 +72,28 @@ ARXIV_QUERIES = [
     ("struvite phosphorus recovery", "physics.chem-ph", ["phosphorus", "struvite", "nutrient recovery", "wastewater"]),
     ("vertical farming energy", "physics.app-ph", ["vertical farm", "indoor agriculture", "LED grow", "hydroponic", "controlled environment"]),
     ("LLM hallucination detection", "cs.CL", ["hallucination", "LLM", "language model", "factual"]),
+    # Astrophysics — Artemis II mission context, always track
+    ("lunar mission radiation", "astro-ph.EP", ["lunar", "moon", "radiation", "artemis", "cislunar", "Van Allen"]),
+    ("space weather solar", "astro-ph.SR", ["solar wind", "coronal mass", "geomagnetic", "space weather", "solar flare"]),
+    ("crewed spaceflight", "astro-ph.IM", ["crewed", "human spaceflight", "life support", "reentry", "splashdown", "crew"]),
+    ("exoplanet habitability", "astro-ph.EP", ["habitability", "exoplanet", "biosignature", "atmosphere", "JWST"]),
+    ("galaxy formation evolution", "astro-ph.GA", ["galaxy", "formation", "evolution", "dark matter", "cosmolog"]),
 ]
 
 ARXIV_MAX_RESULTS = 5  # per query
 ARXIV_DAYS_BACK = 7    # only papers from last N days
+
+# arXiv RSS feeds — new submissions across key categories
+# These track the "recent" listings (https://arxiv.org/list/*/recent)
+# Broader net than keyword queries — catches papers we wouldn't have searched for
+ARXIV_RSS_FEEDS = [
+    ("astro-ph", "Astrophysics (all)", ["lunar", "moon", "solar", "galaxy", "exoplanet", "radiation", "spaceflight", "orbit", "reentry", "JWST", "Webb", "Artemis"]),
+    ("astro-ph.EP", "Earth & Planetary Astrophysics", ["lunar", "moon", "habitab", "atmosphere", "biosignature", "asteroid", "comet"]),
+    ("astro-ph.SR", "Solar & Stellar Astrophysics", ["solar wind", "coronal", "flare", "magnetosphere", "heliosphere", "space weather"]),
+    ("cs.AI", "Artificial Intelligence", ["agent", "orchestrat", "MCP", "tool use", "reasoning", "planning", "memory"]),
+    ("cs.CR", "Cryptography & Security", ["MCP", "agent", "supply chain", "LLM", "poison", "injection"]),
+    ("cs.SE", "Software Engineering", ["code generat", "agent", "testing", "review", "LLM"]),
+]
 
 # ── Hacker News ──
 
@@ -343,6 +361,74 @@ def check_arxiv(state, dry_run=False):
     return discoveries
 
 
+def check_arxiv_rss(state, dry_run=False):
+    """Check arXiv RSS feeds for new submissions across tracked categories.
+    Uses the Atom RSS feeds at rss.arxiv.org which cover ALL new submissions
+    in each category — broader net than keyword search queries.
+    Applies relevance filtering to keep only papers matching our interests."""
+    print("\n=== arXiv RSS Feed Check ===")
+    seen = set(state.get('seen_arxiv_ids', []))
+    discoveries = []
+    filtered_count = 0
+
+    for category, label, relevance_keywords in ARXIV_RSS_FEEDS:
+        try:
+            url = f"http://rss.arxiv.org/rss/{category}"
+            req = Request(url, headers={'User-Agent': 'GSD-ResearchEngine/1.0'})
+            with urlopen(req, timeout=15) as resp:
+                xml = resp.read().decode('utf-8')
+
+            # Parse RSS items
+            items = re.findall(r'<item>(.*?)</item>', xml, re.DOTALL)
+
+            for item in items[:20]:  # Check first 20 items per feed
+                title_match = re.search(r'<title>(.*?)</title>', item, re.DOTALL)
+                link_match = re.search(r'<link>(.*?)</link>', item)
+                desc_match = re.search(r'<description>(.*?)</description>', item, re.DOTALL)
+
+                if not title_match or not link_match:
+                    continue
+
+                title = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', title_match.group(1))).strip()
+                link = link_match.group(1).strip()
+                abstract = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', desc_match.group(1))).strip() if desc_match else ''
+
+                # Extract arXiv ID from link
+                arxiv_id_match = re.search(r'(\d{4}\.\d{4,5})', link)
+                if not arxiv_id_match:
+                    continue
+                arxiv_id = arxiv_id_match.group(1)
+
+                if arxiv_id in seen:
+                    continue
+
+                # Relevance filter
+                matched_kw = _relevance_check(title, abstract, relevance_keywords)
+                if not matched_kw:
+                    filtered_count += 1
+                    continue
+
+                discoveries.append({
+                    'title': title,
+                    'duration': 'paper',
+                    'id': f'arXiv:{arxiv_id}',
+                    'domain': f'{category} / {label}',
+                    'summary': f'arXiv RSS new submission, category {category} (keyword: {matched_kw})',
+                    'source': 'arxiv-rss',
+                })
+                seen.add(arxiv_id)
+                print(f"  NEW [{category}]: {arxiv_id} — {title[:70]}...")
+
+        except (URLError, Exception) as e:
+            print(f"  ERROR [{category}]: {e}")
+
+    if not dry_run:
+        state['seen_arxiv_ids'] = list(seen)[-500:]  # larger buffer for RSS
+    state['last_arxiv_rss_check'] = datetime.now(timezone.utc).isoformat()
+    print(f"  Checked {len(ARXIV_RSS_FEEDS)} RSS feeds, found {len(discoveries)} new papers ({filtered_count} filtered)")
+    return discoveries
+
+
 # ── Source: Hacker News ──
 
 def check_hn(state, dry_run=False):
@@ -496,6 +582,7 @@ def run_discovery(sources=None, dry_run=False):
 
     if 'arxiv' in all_sources:
         all_discoveries.extend(check_arxiv(state, dry_run))
+        all_discoveries.extend(check_arxiv_rss(state, dry_run))
 
     if 'hn' in all_sources:
         all_discoveries.extend(check_hn(state, dry_run))
