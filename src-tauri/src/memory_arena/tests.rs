@@ -6591,3 +6591,98 @@ mod m6_vram_crossfade {
         assert_eq!(got.payload(), data.as_slice());
     }
 }
+
+// ===== allocator trait + FixedSlotAllocator tests =====================
+
+mod allocator_tests {
+    use crate::memory_arena::allocator::{
+        AllocatorKind, ChunkAllocator, FixedSlotAllocator,
+    };
+    use crate::memory_arena::error::ArenaError;
+
+    const SLOT_SIZE: usize = 4096;
+    const NUM_SLOTS: usize = 4;
+
+    fn make_fixed() -> FixedSlotAllocator {
+        FixedSlotAllocator::new(SLOT_SIZE, NUM_SLOTS)
+    }
+
+    #[test]
+    fn test_fixed_slot_alloc_returns_sequential_offsets() {
+        let mut alloc = make_fixed();
+        let (off0, sz0) = alloc.alloc(100).unwrap();
+        let (off1, sz1) = alloc.alloc(100).unwrap();
+        let (off2, sz2) = alloc.alloc(100).unwrap();
+        assert_eq!(off0, 0);
+        assert_eq!(off1, SLOT_SIZE);
+        assert_eq!(off2, 2 * SLOT_SIZE);
+        assert_eq!(sz0, SLOT_SIZE);
+        assert_eq!(sz1, SLOT_SIZE);
+        assert_eq!(sz2, SLOT_SIZE);
+    }
+
+    #[test]
+    fn test_fixed_slot_alloc_exhaustion() {
+        let mut alloc = make_fixed();
+        for _ in 0..NUM_SLOTS {
+            alloc.alloc(64).unwrap();
+        }
+        let err = alloc.alloc(64).unwrap_err();
+        assert!(matches!(err, ArenaError::OutOfSlots { .. }));
+    }
+
+    #[test]
+    fn test_fixed_slot_free_and_realloc() {
+        let mut alloc = make_fixed();
+        let (off0, _) = alloc.alloc(100).unwrap();
+        alloc.free(off0).unwrap();
+        let (off1, _) = alloc.alloc(100).unwrap();
+        // After free, the same offset should be reused (LIFO stack).
+        assert_eq!(off0, off1);
+    }
+
+    #[test]
+    fn test_fixed_slot_capacity_and_free_bytes() {
+        let mut alloc = make_fixed();
+        assert_eq!(alloc.capacity(), SLOT_SIZE * NUM_SLOTS);
+        assert_eq!(alloc.free_bytes(), SLOT_SIZE * NUM_SLOTS);
+        assert_eq!(alloc.allocated_bytes(), 0);
+
+        alloc.alloc(100).unwrap();
+        assert_eq!(alloc.free_bytes(), SLOT_SIZE * (NUM_SLOTS - 1));
+        assert_eq!(alloc.allocated_bytes(), SLOT_SIZE);
+    }
+
+    #[test]
+    fn test_fixed_slot_num_allocations() {
+        let mut alloc = make_fixed();
+        assert_eq!(alloc.num_allocations(), 0);
+        alloc.alloc(64).unwrap();
+        alloc.alloc(64).unwrap();
+        assert_eq!(alloc.num_allocations(), 2);
+        let (off, _) = alloc.alloc(64).unwrap();
+        assert_eq!(alloc.num_allocations(), 3);
+        alloc.free(off).unwrap();
+        assert_eq!(alloc.num_allocations(), 2);
+    }
+
+    #[test]
+    fn test_fixed_slot_fragmentation_is_zero() {
+        let mut alloc = make_fixed();
+        alloc.alloc(64).unwrap();
+        assert_eq!(alloc.fragmentation(), 0.0);
+    }
+
+    #[test]
+    fn test_allocator_kind_dispatches_to_fixed_slot() {
+        let inner = FixedSlotAllocator::new(SLOT_SIZE, NUM_SLOTS);
+        let mut kind = AllocatorKind::FixedSlot(inner);
+        let (off, sz) = kind.alloc(100).unwrap();
+        assert_eq!(off, 0);
+        assert_eq!(sz, SLOT_SIZE);
+        assert_eq!(kind.capacity(), SLOT_SIZE * NUM_SLOTS);
+        assert_eq!(kind.num_allocations(), 1);
+        kind.free(off).unwrap();
+        assert_eq!(kind.num_allocations(), 0);
+    }
+}
