@@ -669,6 +669,95 @@ impl Arena {
         Ok(())
     }
 
+    /// Read the `created_at_ns` field from a chunk's header (bytes 32..40).
+    /// Inside the checksum window — a plain u64 read, no recomputation.
+    ///
+    /// Used by `TierPool::evict_lru` for FIFO victim selection (oldest
+    /// `created_at_ns` wins).
+    pub fn read_created_at_ns(&self, id: ChunkId) -> ArenaResult<u64> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let start = slot * self.slot_size;
+        let bytes: [u8; 8] = self.storage[start + 32..start + 40]
+            .try_into()
+            .expect("slice length guaranteed by range");
+        Ok(u64::from_le_bytes(bytes))
+    }
+
+    /// Read the `access_count` field from a chunk's header (bytes 48..56).
+    /// Inside the checksum window — a plain u64 read, no recomputation.
+    ///
+    /// Used by the policy sweep driver to check promote thresholds without
+    /// full chunk deserialization.
+    pub fn read_access_count(&self, id: ChunkId) -> ArenaResult<u64> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let start = slot * self.slot_size;
+        let bytes: [u8; 8] = self.storage[start + 48..start + 56]
+            .try_into()
+            .expect("slice length guaranteed by range");
+        Ok(u64::from_le_bytes(bytes))
+    }
+
+    /// Read the `last_access_ns` field from a chunk's header (bytes 40..48).
+    /// Inside the checksum window — a plain u64 read, no recomputation.
+    ///
+    /// Used by the policy sweep driver to check demote idle thresholds
+    /// without full chunk deserialization.
+    pub fn read_last_access_ns(&self, id: ChunkId) -> ArenaResult<u64> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let start = slot * self.slot_size;
+        let bytes: [u8; 8] = self.storage[start + 40..start + 48]
+            .try_into()
+            .expect("slice length guaranteed by range");
+        Ok(u64::from_le_bytes(bytes))
+    }
+
+    /// Reset the `access_count` field to 0 for a chunk. Because
+    /// `access_count` lives inside the checksum window (bytes 48..56),
+    /// this requires a full read-modify-write cycle with checksum
+    /// recomputation — same pattern as `touch_chunk`.
+    ///
+    /// Called by the policy sweep driver after a successful promote to
+    /// prevent the promoted chunk from immediately re-triggering the
+    /// promote threshold.
+    pub fn reset_access_count(&mut self, id: ChunkId) -> ArenaResult<()> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+
+        let start = slot * self.slot_size;
+
+        // Read payload_size from the header to know the checksum span.
+        let header = read_header_from(&self.storage[start..start + HEADER_SIZE])?;
+        let payload_end = start + HEADER_SIZE + header.payload_size as usize;
+
+        // Zero access_count in place (bytes 48..56).
+        self.storage[start + 48..start + 56].fill(0);
+
+        // Recompute checksum over header[0..CHECKSUM_OFFSET] || payload.
+        // The checksum slot itself (56..64) is excluded from the hash input
+        // by design — we hash 0..56 only.
+        let mut hasher = Xxh3Default::new();
+        hasher.update(&self.storage[start..start + CHECKSUM_OFFSET]);
+        hasher.update(&self.storage[start + HEADER_SIZE..payload_end]);
+        let checksum = hasher.digest();
+
+        // Back-patch the checksum.
+        self.storage[start + CHECKSUM_OFFSET..start + CHECKSUM_OFFSET + 8]
+            .copy_from_slice(&checksum.to_le_bytes());
+
+        Ok(())
+    }
+
     /// Read a chunk by id. Returns an owned copy (deserialized + validated).
     pub fn get_chunk(&self, id: ChunkId) -> ArenaResult<Chunk> {
         let slot = *self
