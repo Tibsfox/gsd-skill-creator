@@ -64,10 +64,68 @@ impl FixedSlotAllocator {
         }
     }
 
+    /// Construct from a pre-built free slot list. Used by
+    /// `Arena::with_storage_from_walk` which builds the free set from
+    /// a header scan.
+    pub(crate) fn from_free_slots(
+        slot_size: usize,
+        num_slots: usize,
+        free_stack: Vec<usize>,
+        allocated_slots: &[(usize, usize)], // (slot_index, offset) pairs
+    ) -> Self {
+        let mut allocated = HashMap::with_capacity(num_slots);
+        for &(slot, _) in allocated_slots {
+            let offset = slot * slot_size;
+            allocated.insert(offset, slot);
+        }
+        Self {
+            slot_size,
+            num_slots,
+            free_stack,
+            allocated,
+        }
+    }
+
     /// Direct access to the free stack length — used by Arena for
     /// backward-compatible `free_slot_count()`.
     pub(crate) fn free_slot_count(&self) -> usize {
         self.free_stack.len()
+    }
+
+    /// Remove a specific slot from the free stack and mark it allocated.
+    /// Used by recovery paths (`place_chunk_at_slot`, `reinsert_slot`)
+    /// that need to claim a specific slot by index. Linear search — fine
+    /// for recovery paths, not hot-path.
+    ///
+    /// Returns `true` if the slot was found and removed, `false` if it
+    /// was not in the free stack.
+    pub(crate) fn claim_slot(&mut self, slot: usize) -> bool {
+        if let Some(pos) = self.free_stack.iter().position(|&s| s == slot) {
+            self.free_stack.swap_remove(pos);
+            let offset = slot * self.slot_size;
+            self.allocated.insert(offset, slot);
+            true
+        } else {
+            false
+        }
+    }
+
+    /// Release a slot back to the free stack by slot index (not offset).
+    /// Used when Arena's `free_chunk` needs to return a specific slot.
+    pub(crate) fn release_slot(&mut self, slot: usize) {
+        let offset = slot * self.slot_size;
+        self.allocated.remove(&offset);
+        self.free_stack.push(slot);
+    }
+
+    /// Pop the next free slot index. Returns the slot index directly
+    /// (not the byte offset). Used by Arena's alloc_chunk which manages
+    /// its own slot→offset mapping.
+    pub(crate) fn pop_free_slot(&mut self) -> Option<usize> {
+        let slot = self.free_stack.pop()?;
+        let offset = slot * self.slot_size;
+        self.allocated.insert(offset, slot);
+        Some(slot)
     }
 }
 
