@@ -35,9 +35,14 @@ macos-keychain = []
 [dev-dependencies]
 tempfile = "3"
 zip = { version = "2", default-features = false, features = ["deflate"] }
+criterion = { version = "0.5", default-features = false, features = ["html_reports"] }
 
 [build-dependencies]
 tauri-build = { version = "2.5", features = [] }
+
+[[bench]]
+name = "arena_bench"
+harness = false
 
 [profile.release]
 panic = "abort"
