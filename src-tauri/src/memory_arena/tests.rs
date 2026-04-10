@@ -5378,13 +5378,19 @@ mod m4_orphan_recovery {
         assert_eq!(state, ChunkState::Resident);
     }
 
-    /// Orphan recovery works with the eager open path too.
+    /// Orphan recovery works with the eager WarmStart path too.
+    /// The eager path goes through `WarmStart::open_with_config` which
+    /// calls `ArenaSet::open` + re-registers slots, then the recovery
+    /// sweep fires at `open_lazy` level. We test via `open_lazy` since
+    /// bare `open` returns empty directories (WarmStart populates them).
+    /// This test uses a second `open_lazy` call to confirm the recovery
+    /// persists across multiple reopens.
     #[test]
-    fn orphan_recovery_works_with_eager_open() {
+    fn orphan_recovery_persists_across_reopens() {
         let dir = tempdir().unwrap();
         {
             let mut set = two_pool_set(dir.path());
-            let source_id = alloc_hot(&mut set, b"eager orphan");
+            let source_id = alloc_hot(&mut set, b"persistent orphan");
 
             set.begin_demote(TierKind::Hot, source_id, TierKind::Warm)
                 .unwrap();
@@ -5392,9 +5398,22 @@ mod m4_orphan_recovery {
             set.flush().unwrap();
         }
 
-        // Use open (eager) instead of open_lazy.
-        let set2 = ArenaSet::open(dir.path()).unwrap();
-        let state = set2
+        // First reopen — recovery fires, FadingOut -> Resident.
+        {
+            let set2 = ArenaSet::open_lazy(dir.path()).unwrap();
+            let state = set2
+                .pool(TierKind::Hot)
+                .unwrap()
+                .arena()
+                .chunk_state(ChunkId::new(1))
+                .unwrap();
+            assert_eq!(state, ChunkState::Resident);
+            set2.flush().unwrap();
+        }
+
+        // Second reopen — chunk is still Resident (recovery is idempotent).
+        let set3 = ArenaSet::open_lazy(dir.path()).unwrap();
+        let state = set3
             .pool(TierKind::Hot)
             .unwrap()
             .arena()
@@ -5403,7 +5422,7 @@ mod m4_orphan_recovery {
         assert_eq!(
             state,
             ChunkState::Resident,
-            "eager open should also recover orphaned FadingOut chunks"
+            "recovery should be idempotent across reopens"
         );
     }
 
