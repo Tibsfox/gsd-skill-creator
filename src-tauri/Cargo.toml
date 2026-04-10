@@ -26,6 +26,7 @@ reqwest = { version = "0.12", features = ["json", "stream", "rustls-tls"], defau
 futures-util = "0.3"
 zip = { version = "2", default-features = false, features = ["deflate"] }
 xxhash-rust = { version = "0.8", features = ["xxh3"] }
+libc = "0.2"
 memmap2 = "0.9"
 cudarc = { version = "0.19", default-features = false, features = ["driver", "std", "fallback-dynamic-loading", "cuda-version-from-build-system"], optional = true }
 sqlx = { version = "0.8", features = ["runtime-tokio", "postgres"], optional = true }

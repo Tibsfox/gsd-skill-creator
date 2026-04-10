@@ -7394,21 +7394,20 @@ mod hugetlb_tests {
     #[test]
     fn arena_set_create_with_hugetlb() {
         let dir = tempdir().expect("tempdir");
-        let config = ArenaSetConfig {
-            root: dir.path().to_path_buf(),
-            pools: vec![PoolSpec {
+        let config = ArenaSetConfig::new(dir.path())
+            .with_pool(PoolSpec {
                 tier: TierKind::Hot,
                 chunk_size: ArenaConfig::test().chunk_size,
                 num_slots: 8,
                 policy: unlimited_policy(),
-            }],
-        };
+            });
         let mut set = ArenaSet::create_with_hugetlb(config).expect("create with hugetlb");
         let pool = set.pool(TierKind::Hot).expect("hot pool");
         assert!(!pool.arena().huge_pages_active());
         // Basic alloc to confirm functionality.
-        let id = set.alloc(TierKind::Hot, vec![0xCC; 16]).expect("alloc");
-        let chunk = set.get_chunk(TierKind::Hot, id).expect("get");
+        let pool_mut = set.pool_mut(TierKind::Hot).expect("hot pool mut");
+        let id = pool_mut.alloc(vec![0xCC; 16]).expect("alloc");
+        let chunk = pool_mut.arena().get_chunk(id).expect("get");
         assert_eq!(chunk.payload(), &vec![0xCC; 16]);
     }
 }
