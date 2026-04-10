@@ -2492,3 +2492,138 @@ mod open_lazy_tests {
         let _ = std::marker::PhantomData::<ArenaError>;
     }
 }
+
+// =============================================================================
+// memory-arena-m2 Plan 02 — Arena::validate_chunk explicit payload checksum
+// =============================================================================
+
+#[cfg(test)]
+mod validate_chunk_tests {
+    use crate::memory_arena::arena::Arena;
+    use crate::memory_arena::error::ArenaError;
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind, HEADER_SIZE};
+    use std::fs::OpenOptions;
+    use std::io::{Seek, SeekFrom, Write};
+    use tempfile::tempdir;
+
+    #[test]
+    fn validate_chunk_happy_path() {
+        let mut arena = Arena::new(ArenaConfig::test(), 8).unwrap();
+        let ids: Vec<ChunkId> = (0..3)
+            .map(|i| {
+                let payload = vec![(i as u8).wrapping_mul(17); 96];
+                arena.alloc_chunk(TierKind::Hot, payload).unwrap()
+            })
+            .collect();
+        for id in &ids {
+            arena
+                .validate_chunk(*id)
+                .expect("validate_chunk happy path");
+        }
+    }
+
+    #[test]
+    fn validate_chunk_catches_single_bit_payload_corruption() {
+        let mut arena = Arena::new(ArenaConfig::test(), 4).unwrap();
+        let id = arena
+            .alloc_chunk(TierKind::Hot, vec![0xAA; 256])
+            .unwrap();
+        // Flip one bit deep in the payload via raw storage mutation.
+        let slot_size = arena.config().chunk_size as usize;
+        // Chunk lives in slot 0 because it's the first alloc.
+        let target_offset = 0 * slot_size + HEADER_SIZE + 50;
+        arena.storage_mut()[target_offset] ^= 0x01;
+
+        let result = arena.validate_chunk(id);
+        assert!(
+            matches!(result, Err(ArenaError::ChecksumMismatch { .. })),
+            "expected ChecksumMismatch, got {:?}",
+            result
+        );
+    }
+
+    #[test]
+    fn validate_chunk_unknown_id() {
+        let mut arena = Arena::new(ArenaConfig::test(), 4).unwrap();
+        for _ in 0..3 {
+            arena
+                .alloc_chunk(TierKind::Hot, vec![0u8; 32])
+                .unwrap();
+        }
+        let result = arena.validate_chunk(ChunkId::new(999));
+        assert!(
+            matches!(result, Err(ArenaError::UnknownChunkId(999))),
+            "expected UnknownChunkId(999), got {:?}",
+            result
+        );
+    }
+
+    /// Integration test: closes the loop with Plan 01. Lazy-open an arena
+    /// whose payload has been corrupted after open. `open_lazy` succeeds;
+    /// `validate_chunk` on the corrupted id flags the corruption; every
+    /// other chunk's `validate_chunk` still succeeds.
+    #[test]
+    fn validate_chunk_after_open_lazy_catches_corruption() {
+        let config = ArenaConfig::test();
+        let num_slots = 16;
+        let n_chunks = 10;
+
+        // Build a heap arena with 10 chunks, dump to tempfile, corrupt one
+        // payload byte (slot 4, offset +40 into payload), lazy-open, then
+        // validate every id.
+        let mut seed = Arena::new(config.clone(), num_slots).unwrap();
+        let mut ids = Vec::with_capacity(n_chunks);
+        for i in 0..n_chunks {
+            let payload = vec![(i as u8).wrapping_mul(11); 96];
+            ids.push(seed.alloc_chunk(TierKind::Hot, payload).unwrap());
+        }
+        let tmp = tempdir().unwrap();
+        let path = tmp.path().join("hot.arena");
+        {
+            let mut f = OpenOptions::new()
+                .create(true)
+                .write(true)
+                .truncate(true)
+                .open(&path)
+                .unwrap();
+            f.write_all(seed.storage()).unwrap();
+            f.sync_all().unwrap();
+        }
+        drop(seed);
+
+        // Corrupt slot 4's payload byte.
+        let slot_size = config.chunk_size as usize;
+        let corrupt_offset = 4 * slot_size + HEADER_SIZE + 40;
+        {
+            let mut f = OpenOptions::new().write(true).open(&path).unwrap();
+            f.seek(SeekFrom::Start(corrupt_offset as u64)).unwrap();
+            // Read-modify-write not needed; XOR in-place via separate read.
+            // Simpler: write a known-bad byte and hope it flips the checksum.
+            // Streaming xxh3 is sensitive enough that any single-byte change
+            // in the payload region guarantees a mismatch.
+            f.write_all(&[0xFF]).unwrap();
+            f.sync_all().unwrap();
+        }
+
+        // Lazy open must succeed; the directory must contain all 10 ids.
+        let arena =
+            Arena::open_lazy(config, num_slots, &path).expect("open_lazy");
+        assert_eq!(arena.free_slot_count(), num_slots - n_chunks);
+
+        // 9 chunks validate, 1 (slot 4) fails with ChecksumMismatch.
+        let corrupted_id = ids[4];
+        let mut validated = 0usize;
+        let mut failed = 0usize;
+        for id in &ids {
+            match arena.validate_chunk(*id) {
+                Ok(()) => validated += 1,
+                Err(ArenaError::ChecksumMismatch { .. }) if *id == corrupted_id => {
+                    failed += 1;
+                }
+                Err(e) => panic!("unexpected error for id {}: {:?}", id, e),
+            }
+        }
+        assert_eq!(validated, n_chunks - 1);
+        assert_eq!(failed, 1);
+    }
+}
