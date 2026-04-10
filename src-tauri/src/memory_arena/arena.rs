@@ -36,7 +36,7 @@ use crate::memory_arena::chunk::{read_header_from, write_header_into, Chunk, CHE
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::list::LruIndex;
 use crate::memory_arena::types::{
-    ArenaConfig, ChunkHeader, ChunkId, TierKind, CHUNK_MAGIC, HEADER_SIZE,
+    ArenaConfig, ChunkHeader, ChunkId, ChunkState, TierKind, CHUNK_MAGIC, HEADER_SIZE,
 };
 
 /// Backing storage for the arena. Two variants:
@@ -550,6 +550,42 @@ impl Arena {
         // over `header[0..CHECKSUM_OFFSET] || payload`. We drop the
         // returned Chunk — all we want is the side-effect of the check.
         let _ = Chunk::deserialize(chunk_bytes)?;
+        Ok(())
+    }
+
+    /// Read the `ChunkState` byte from a chunk's header without deserializing
+    /// the full chunk or running the checksum. The state byte lives at
+    /// `slot_start + 64` — outside the checksum window — so this is a
+    /// single-byte read with no allocator activity.
+    ///
+    /// Used by the demote crossfade machinery (`ArenaSet::complete_demote`,
+    /// `abort_demote`, hysteresis check) to inspect fade progress without
+    /// paying the `get_chunk` deserialize cost.
+    pub fn chunk_state(&self, id: ChunkId) -> ArenaResult<ChunkState> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let start = slot * self.slot_size;
+        ChunkState::from_u8(self.storage[start + 64])
+    }
+
+    /// Set the `ChunkState` byte for a chunk in place, without touching the
+    /// payload or the checksum. The state byte lives at `slot_start + 64`
+    /// — outside the checksum window — so this is a single-byte write that
+    /// preserves the chunk's xxh3 checksum.
+    ///
+    /// This is the core primitive for the M3 demote crossfade: `begin_demote`
+    /// calls `mark_state(source, FadingOut)` and `abort_demote` calls
+    /// `mark_state(source, Resident)` to reverse it, both in O(1) with
+    /// a single byte write.
+    pub(crate) fn mark_state(&mut self, id: ChunkId, state: ChunkState) -> ArenaResult<()> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let start = slot * self.slot_size;
+        self.storage[start + 64] = state.as_u8();
         Ok(())
     }
 

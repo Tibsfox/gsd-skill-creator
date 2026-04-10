@@ -58,6 +58,18 @@ pub enum ArenaError {
     #[error("manifest parse error: {0}")]
     ManifestParse(String),
 
+    #[error("unknown tier: {0:?}")]
+    UnknownTier(crate::memory_arena::types::TierKind),
+
+    #[error("invalid crossfade target: source tier {source_tier:?} == target tier {target_tier:?}")]
+    InvalidCrossfadeTarget {
+        source_tier: crate::memory_arena::types::TierKind,
+        target_tier: crate::memory_arena::types::TierKind,
+    },
+
+    #[error("chunk {chunk_id} is already fading")]
+    AlreadyFading { chunk_id: u64 },
+
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
 }
