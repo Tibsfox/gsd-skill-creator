@@ -86,6 +86,10 @@ pub enum ArenaError {
         cooldown_remaining_ns: u64,
     },
 
+    #[cfg(feature = "postgres")]
+    #[error("PostgreSQL error: {0}")]
+    PgError(String),
+
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
 
