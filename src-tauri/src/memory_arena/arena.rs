@@ -629,6 +629,46 @@ impl Arena {
         Ok(())
     }
 
+    /// Read the `last_promote_completed_at_ns` field from a chunk's header
+    /// (bytes 80..88). Outside the checksum window — a plain u64 read.
+    ///
+    /// Used by the M4 hysteresis cooldown check in
+    /// `ArenaSet::begin_promote`. Returns 0 for chunks that have never
+    /// been promoted (the default from `ChunkHeader::new` and the M1/M2/M3
+    /// backward-compat value).
+    pub fn read_last_promote_ns(&self, id: ChunkId) -> ArenaResult<u64> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let start = slot * self.slot_size;
+        let bytes: [u8; 8] = self.storage[start + 80..start + 88]
+            .try_into()
+            .expect("slice length guaranteed by range");
+        Ok(u64::from_le_bytes(bytes))
+    }
+
+    /// Write the `last_promote_completed_at_ns` field for a chunk in place,
+    /// without touching the payload or the checksum. Bytes 80..88 are
+    /// OUTSIDE the checksum window — this is a small direct byte write.
+    ///
+    /// Called by `ArenaSet::complete_promote` to stamp the target chunk
+    /// with the current time so subsequent hysteresis checks on it see
+    /// the fade.
+    pub(crate) fn write_last_promote_ns(
+        &mut self,
+        id: ChunkId,
+        now_ns: u64,
+    ) -> ArenaResult<()> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let start = slot * self.slot_size;
+        self.storage[start + 80..start + 88].copy_from_slice(&now_ns.to_le_bytes());
+        Ok(())
+    }
+
     /// Read a chunk by id. Returns an owned copy (deserialized + validated).
     pub fn get_chunk(&self, id: ChunkId) -> ArenaResult<Chunk> {
         let slot = *self
