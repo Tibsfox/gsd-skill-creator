@@ -18,6 +18,7 @@ pub mod arena;
 pub mod chunk;
 pub mod error;
 pub mod handle;
+pub mod list;
 pub mod persistence;
 pub mod pool;
 pub mod types;
@@ -26,6 +27,7 @@ pub use arena::{Arena, ArenaStats};
 pub use chunk::Chunk;
 pub use error::{ArenaError, ArenaResult};
 pub use handle::{tier_kind_from_str, tier_kind_to_str, ArenaHandle};
+pub use list::{List, LruIndex, NodeIdx};
 pub use persistence::{
     read_checkpoint, replay_into, write_checkpoint, JournalOp, JournalReader, JournalWriter,
 };

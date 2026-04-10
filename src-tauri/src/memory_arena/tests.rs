@@ -1520,3 +1520,229 @@ mod pool_tests {
         }
     }
 }
+
+// =============================================================================
+// memory-arena-m1 Plan 02 — List<T> + LruIndex tests
+// =============================================================================
+
+#[cfg(test)]
+mod list_tests {
+    use crate::memory_arena::list::{List, LruIndex};
+    use crate::memory_arena::types::ChunkId;
+    use std::collections::VecDeque;
+
+    #[test]
+    fn empty_list_has_no_head_tail_or_len() {
+        let list: List<u32> = List::new();
+        assert_eq!(list.len(), 0);
+        assert!(list.is_empty());
+        assert!(list.head().is_none());
+        assert!(list.tail().is_none());
+    }
+
+    #[test]
+    fn push_front_empty_sets_head_equals_tail() {
+        let mut list: List<u32> = List::new();
+        let idx = list.push_front(42);
+        assert_eq!(list.len(), 1);
+        assert_eq!(list.head(), Some(idx));
+        assert_eq!(list.tail(), Some(idx));
+        assert_eq!(list.get(idx), Some(&42));
+    }
+
+    #[test]
+    fn push_front_then_push_back_iterates_head_to_tail() {
+        let mut list: List<u32> = List::new();
+        let front = list.push_front(10);
+        let back = list.push_back(20);
+        let values: Vec<u32> = list.iter_front_to_back().map(|(_, v)| *v).collect();
+        assert_eq!(values, vec![10, 20]);
+        assert_eq!(list.head(), Some(front));
+        assert_eq!(list.tail(), Some(back));
+    }
+
+    #[test]
+    fn pop_front_on_empty_returns_none() {
+        let mut list: List<u32> = List::new();
+        assert!(list.pop_front().is_none());
+        assert!(list.pop_back().is_none());
+    }
+
+    #[test]
+    fn push_front_triple_pop_back_order() {
+        let mut list: List<u32> = List::new();
+        list.push_front(1); // front = 1, tail = 1
+        list.push_front(2); // front = 2, tail = 1
+        list.push_front(3); // front = 3, tail = 1
+        assert_eq!(list.pop_back(), Some(1));
+        assert_eq!(list.pop_back(), Some(2));
+        assert_eq!(list.pop_back(), Some(3));
+        assert!(list.is_empty());
+    }
+
+    #[test]
+    fn unlink_removes_node_and_frees_slot() {
+        let mut list: List<u32> = List::new();
+        let a = list.push_front(1);
+        let b = list.push_front(2);
+        let c = list.push_front(3);
+        // order: c, b, a
+        assert_eq!(list.unlink(b), Some(2));
+        assert_eq!(list.len(), 2);
+        let values: Vec<u32> = list.iter_front_to_back().map(|(_, v)| *v).collect();
+        assert_eq!(values, vec![3, 1]);
+        // The freed slot should be reused by the next push — peek at nodes len via
+        // a push and check that len tracks correctly without the capacity leaking.
+        let _d = list.push_front(4);
+        assert_eq!(list.len(), 3);
+        // Silence unused warnings.
+        let _ = (a, c);
+    }
+
+    #[test]
+    fn move_to_front_preserves_len_and_reorders() {
+        let mut list: List<u32> = List::new();
+        let a = list.push_back(1);
+        let b = list.push_back(2);
+        let c = list.push_back(3);
+        // order: 1, 2, 3
+        list.move_to_front(c);
+        // order: 3, 1, 2
+        assert_eq!(list.len(), 3);
+        assert_eq!(list.head(), Some(c));
+        let values: Vec<u32> = list.iter_front_to_back().map(|(_, v)| *v).collect();
+        assert_eq!(values, vec![3, 1, 2]);
+        // Moving the head to front is a no-op.
+        list.move_to_front(c);
+        let values: Vec<u32> = list.iter_front_to_back().map(|(_, v)| *v).collect();
+        assert_eq!(values, vec![3, 1, 2]);
+        // Moving the tail to front.
+        list.move_to_front(b);
+        let values: Vec<u32> = list.iter_front_to_back().map(|(_, v)| *v).collect();
+        assert_eq!(values, vec![2, 3, 1]);
+        let _ = a;
+    }
+
+    #[test]
+    fn lru_index_insert_then_touch_leaves_id_at_front() {
+        let mut lru = LruIndex::new();
+        assert!(lru.oldest().is_none());
+        lru.insert(ChunkId::new(1));
+        lru.insert(ChunkId::new(2));
+        lru.insert(ChunkId::new(3));
+        // insert pushes to front, so order front-to-back: 3, 2, 1. Oldest = 1.
+        assert_eq!(lru.oldest(), Some(ChunkId::new(1)));
+        assert!(lru.touch(ChunkId::new(1)));
+        // Now order: 1, 3, 2. Oldest = 2.
+        assert_eq!(lru.oldest(), Some(ChunkId::new(2)));
+    }
+
+    #[test]
+    fn lru_index_remove_reports_and_absent_touch_returns_false() {
+        let mut lru = LruIndex::new();
+        lru.insert(ChunkId::new(1));
+        assert!(!lru.remove(ChunkId::new(99)));
+        assert!(lru.remove(ChunkId::new(1)));
+        assert!(lru.oldest().is_none());
+        assert!(!lru.touch(ChunkId::new(1))); // absent → false
+    }
+
+    #[test]
+    fn lru_index_double_insert_is_touch() {
+        let mut lru = LruIndex::new();
+        lru.insert(ChunkId::new(1));
+        lru.insert(ChunkId::new(2));
+        lru.insert(ChunkId::new(3));
+        // Re-insert 1: should become the new front without duplicating.
+        lru.insert(ChunkId::new(1));
+        assert_eq!(lru.len(), 3);
+        // Oldest is now 2 (1 was re-sent to front).
+        assert_eq!(lru.oldest(), Some(ChunkId::new(2)));
+    }
+
+    // Deterministic linear-congruential generator — avoids pulling in `rand`.
+    struct Lcg(u64);
+    impl Lcg {
+        fn new(seed: u64) -> Self {
+            Self(seed)
+        }
+        fn next(&mut self) -> u64 {
+            // Numerical Recipes LCG constants.
+            self.0 = self
+                .0
+                .wrapping_mul(6364136223846793005)
+                .wrapping_add(1442695040888963407);
+            self.0
+        }
+    }
+
+    /// Naive reference implementation of the LRU: VecDeque where touch/remove
+    /// do a linear scan. Property test drives both this and `LruIndex` through
+    /// the same 10k randomized op stream and asserts `oldest()` matches after
+    /// every op.
+    #[test]
+    fn lru_index_property_matches_naive_reference_10k_ops() {
+        let mut lru = LruIndex::new();
+        let mut reference: VecDeque<ChunkId> = VecDeque::new();
+        let mut rng = Lcg::new(0xDEADBEEF_CAFE_1234);
+
+        // Keep a small ID pool so inserts/removes actually hit each other.
+        const ID_POOL: u64 = 32;
+        const OPS: usize = 10_000;
+
+        for _ in 0..OPS {
+            let op = rng.next() % 4;
+            let id = ChunkId::new(rng.next() % ID_POOL);
+
+            match op {
+                0 => {
+                    // insert
+                    lru.insert(id);
+                    // reference: remove any existing, push to front
+                    reference.retain(|x| *x != id);
+                    reference.push_front(id);
+                }
+                1 => {
+                    // touch
+                    let lru_found = lru.touch(id);
+                    let pos = reference.iter().position(|x| *x == id);
+                    let ref_found = pos.is_some();
+                    assert_eq!(lru_found, ref_found, "touch presence divergence");
+                    if let Some(p) = pos {
+                        reference.remove(p);
+                        reference.push_front(id);
+                    }
+                }
+                2 => {
+                    // remove
+                    let lru_removed = lru.remove(id);
+                    let pos = reference.iter().position(|x| *x == id);
+                    let ref_removed = pos.is_some();
+                    assert_eq!(lru_removed, ref_removed, "remove presence divergence");
+                    if let Some(p) = pos {
+                        reference.remove(p);
+                    }
+                }
+                _ => {
+                    // noop query
+                    let _ = lru.contains(id);
+                }
+            }
+
+            // Invariant check: oldest and len must match the reference.
+            assert_eq!(
+                lru.len(),
+                reference.len(),
+                "len divergence after op {}",
+                op
+            );
+            let expected_oldest = reference.back().copied();
+            assert_eq!(
+                lru.oldest(),
+                expected_oldest,
+                "oldest() divergence after op {}",
+                op
+            );
+        }
+    }
+}
