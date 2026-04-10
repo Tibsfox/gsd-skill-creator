@@ -170,13 +170,24 @@ pub struct ChunkHeader {
     /// Crossfade state. Lives at header byte 64. Outside the checksum
     /// window — mutable via `Arena::mark_state` without re-checksumming.
     pub state: ChunkState,
+    /// Timestamp (ns since unix epoch) of the most recent
+    /// `complete_demote` that produced this chunk. 0 = never demoted.
+    /// Lives at header bytes 72..80. Outside the checksum window — like
+    /// the state byte, this is mutable via `Arena::write_last_demote_ns`
+    /// without re-checksumming.
+    ///
+    /// Used by the hysteresis cooldown check in `ArenaSet::begin_demote`
+    /// to prevent thrashing: a chunk that just completed a demote cannot
+    /// be demoted again within `TierPolicy::demote_cooldown_ns`.
+    pub last_demote_completed_at_ns: u64,
 }
 
 impl ChunkHeader {
     /// Build a new header with current timestamp and zero access count.
     /// The checksum field is left at 0 — it must be computed and filled in
     /// by `Chunk::finalize` once the payload is written. The state field
-    /// defaults to `ChunkState::Resident`.
+    /// defaults to `ChunkState::Resident`; `last_demote_completed_at_ns`
+    /// defaults to 0 (never demoted).
     pub fn new(chunk_id: ChunkId, tier: TierKind, payload_size: u64) -> Self {
         let now_ns = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
@@ -193,6 +204,7 @@ impl ChunkHeader {
             access_count: 0,
             checksum: 0,
             state: ChunkState::Resident,
+            last_demote_completed_at_ns: 0,
         }
     }
 }
@@ -225,6 +237,12 @@ pub struct TierPolicy {
     pub promote_after_hits: u32,
     /// Demote a chunk to a colder tier after this long idle (slice 2).
     pub demote_after_idle_ns: u64,
+    /// Minimum time between consecutive demotes of the same chunk (M3).
+    /// 0 = no cooldown (default, preserves pre-slice-3 behavior).
+    /// `serde(default)` preserves backward compat with legacy manifest.json
+    /// files that don't include this field — they deserialize with 0.
+    #[serde(default)]
+    pub demote_cooldown_ns: u64,
 }
 
 impl TierPolicy {
@@ -237,30 +255,35 @@ impl TierPolicy {
                 eviction: EvictionKind::Lru,
                 promote_after_hits: 0,
                 demote_after_idle_ns: 5_000_000_000,
+                demote_cooldown_ns: 0,
             },
             TierKind::Warm => Self {
                 max_chunks: 64,
                 eviction: EvictionKind::Lru,
                 promote_after_hits: 4,
                 demote_after_idle_ns: 10_000_000_000,
+                demote_cooldown_ns: 0,
             },
             TierKind::Vector => Self {
                 max_chunks: 64,
                 eviction: EvictionKind::Lru,
                 promote_after_hits: 2,
                 demote_after_idle_ns: 5_000_000_000,
+                demote_cooldown_ns: 0,
             },
             TierKind::Blob => Self {
                 max_chunks: 64,
                 eviction: EvictionKind::Fifo,
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
             },
             TierKind::Resident => Self {
                 max_chunks: 64,
                 eviction: EvictionKind::Fifo,
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
             },
         }
     }

@@ -1479,6 +1479,7 @@ mod pool_tests {
             eviction: EvictionKind::Lru,
             promote_after_hits: 0,
             demote_after_idle_ns: 0,
+            demote_cooldown_ns: 0,
         };
         let mut pool = TierPool::new(TierKind::Hot, ArenaConfig::test(), 8, policy)
             .expect("pool should construct");
@@ -1505,6 +1506,7 @@ mod pool_tests {
             eviction: EvictionKind::Fifo,
             promote_after_hits: 7,
             demote_after_idle_ns: 999_000,
+            demote_cooldown_ns: 42_000_000,
         };
         let json = serde_json::to_string(&policy).expect("serialize");
         let back: TierPolicy = serde_json::from_str(&json).expect("deserialize");
@@ -1838,6 +1840,7 @@ mod arena_set_tests {
             eviction: EvictionKind::Lru,
             promote_after_hits: 0,
             demote_after_idle_ns: 0,
+            demote_cooldown_ns: 0,
         }
     }
 
@@ -2012,6 +2015,7 @@ mod warm_start_tests {
                 eviction: EvictionKind::Lru,
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
             },
         }
     }
@@ -2123,6 +2127,7 @@ mod warm_start_fault_tests {
                 eviction: EvictionKind::Lru,
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
             },
         }
     }
@@ -2744,6 +2749,7 @@ mod journal_dispatch_tests {
                 eviction: EvictionKind::Lru,
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
             },
         }
     }
@@ -3244,6 +3250,7 @@ mod warm_start_config_tests {
                 eviction: EvictionKind::Lru,
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
             },
         }
     }
@@ -3600,6 +3607,7 @@ mod m3_begin_demote {
                 eviction: EvictionKind::Lru,
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
             },
         }
     }
@@ -3820,6 +3828,7 @@ mod m3_complete_abort_demote {
                 eviction: EvictionKind::Lru,
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
             },
         }
     }
@@ -4120,17 +4129,29 @@ mod m3_hysteresis {
         ArenaConfig, ChunkHeader, ChunkId, ChunkState, TierKind, HEADER_SIZE,
     };
     use crate::memory_arena::Chunk;
-    use std::sync::atomic::{AtomicU64, Ordering};
+    use std::cell::Cell;
     use tempfile::tempdir;
 
-    /// Deterministic clock for hysteresis tests. Each test that needs the
-    /// clock advances `FAKE_NOW` explicitly via `FAKE_NOW.store(...)`. The
-    /// value is ns-since-an-arbitrary-epoch — the absolute value doesn't
-    /// matter, only deltas.
-    static FAKE_NOW: AtomicU64 = AtomicU64::new(1_000_000_000_000);
+    // Deterministic clock for hysteresis tests. Each test that needs the
+    // clock advances FAKE_NOW explicitly via `set_fake_now(...)`. The
+    // value is ns-since-an-arbitrary-epoch — the absolute value doesn't
+    // matter, only deltas.
+    //
+    // Uses a thread-local so parallel tests don't race on the clock
+    // (Rust's test harness runs tests in multiple threads by default).
+    // The `fn() -> u64` that we install into ArenaSet reads this
+    // thread-local, which means the clock stays scoped to the thread
+    // the test is running on.
+    thread_local! {
+        static FAKE_NOW: Cell<u64> = Cell::new(1_000_000_000_000);
+    }
+
+    fn set_fake_now(ns: u64) {
+        FAKE_NOW.with(|c| c.set(ns));
+    }
 
     fn fake_now() -> u64 {
-        FAKE_NOW.load(Ordering::Relaxed)
+        FAKE_NOW.with(|c| c.get())
     }
 
     fn unlimited_spec(tier: TierKind, num_slots: usize, cooldown_ns: u64) -> PoolSpec {
@@ -4186,7 +4207,7 @@ mod m3_hysteresis {
     fn complete_demote_stamps_target_last_demote_ns() {
         let dir = tempdir().unwrap();
         let mut set = two_pool_set_with_cooldown(dir.path(), 0, 0);
-        FAKE_NOW.store(5_000_000_000, Ordering::Relaxed);
+        set_fake_now(5_000_000_000);
         set.set_now_ns_for_test(fake_now);
 
         let source_id = alloc_hot(&mut set, b"stamp me");
@@ -4209,7 +4230,7 @@ mod m3_hysteresis {
         let dir = tempdir().unwrap();
         // Both tiers have zero cooldown — default behavior.
         let mut set = two_pool_set_with_cooldown(dir.path(), 0, 0);
-        FAKE_NOW.store(2_000_000_000, Ordering::Relaxed);
+        set_fake_now(2_000_000_000);
         set.set_now_ns_for_test(fake_now);
 
         let id = alloc_hot(&mut set, b"cool none");
@@ -4233,7 +4254,7 @@ mod m3_hysteresis {
         let dir = tempdir().unwrap();
         // Warm has a 100 ms cooldown; Hot has none.
         let mut set = two_pool_set_with_cooldown(dir.path(), 0, 100_000_000);
-        FAKE_NOW.store(1_000_000_000, Ordering::Relaxed);
+        set_fake_now(1_000_000_000);
         set.set_now_ns_for_test(fake_now);
 
         // Alloc in Hot, demote to Warm at t=1s — target gets stamped with
@@ -4245,7 +4266,7 @@ mod m3_hysteresis {
         // Advance clock by 50 ms. Try to demote the target (which now
         // lives in Warm) back out to Hot. Warm's cooldown is 100 ms, so
         // this should reject.
-        FAKE_NOW.store(1_050_000_000, Ordering::Relaxed);
+        set_fake_now(1_050_000_000);
         let err = set
             .begin_demote(TierKind::Warm, handle.target, TierKind::Hot)
             .unwrap_err();
@@ -4260,7 +4281,7 @@ mod m3_hysteresis {
     fn hysteresis_allows_re_demote_after_cooldown() {
         let dir = tempdir().unwrap();
         let mut set = two_pool_set_with_cooldown(dir.path(), 0, 100_000_000);
-        FAKE_NOW.store(2_000_000_000, Ordering::Relaxed);
+        set_fake_now(2_000_000_000);
         set.set_now_ns_for_test(fake_now);
 
         let id = alloc_hot(&mut set, b"allow after");
@@ -4268,7 +4289,7 @@ mod m3_hysteresis {
         set.complete_demote(handle).unwrap();
 
         // Advance by 150 ms — past the 100 ms cooldown.
-        FAKE_NOW.store(2_150_000_000, Ordering::Relaxed);
+        set_fake_now(2_150_000_000);
         let _handle2 = set
             .begin_demote(TierKind::Warm, handle.target, TierKind::Hot)
             .expect("re-demote after cooldown should succeed");
@@ -4280,7 +4301,7 @@ mod m3_hysteresis {
         // Hot has a 1 s cooldown, but pristine chunks (last_demote_ns == 0)
         // short-circuit the check entirely.
         let mut set = two_pool_set_with_cooldown(dir.path(), 1_000_000_000, 0);
-        FAKE_NOW.store(3_000_000_000, Ordering::Relaxed);
+        set_fake_now(3_000_000_000);
         set.set_now_ns_for_test(fake_now);
 
         let id = alloc_hot(&mut set, b"pristine");
@@ -4386,7 +4407,7 @@ mod m3_hysteresis {
     fn hysteresis_cooldown_error_carries_remaining_ns() {
         let dir = tempdir().unwrap();
         let mut set = two_pool_set_with_cooldown(dir.path(), 0, 200_000_000);
-        FAKE_NOW.store(4_000_000_000, Ordering::Relaxed);
+        set_fake_now(4_000_000_000);
         set.set_now_ns_for_test(fake_now);
 
         let id = alloc_hot(&mut set, b"carry ns");
@@ -4394,7 +4415,7 @@ mod m3_hysteresis {
         set.complete_demote(handle).unwrap();
 
         // 80 ms elapsed → 120 ms remaining.
-        FAKE_NOW.store(4_080_000_000, Ordering::Relaxed);
+        set_fake_now(4_080_000_000);
         let err = set
             .begin_demote(TierKind::Warm, handle.target, TierKind::Hot)
             .unwrap_err();
