@@ -69,10 +69,35 @@ Criterion benchmarks live at `src-tauri/benches/arena_bench.rs` and cover:
 - `get_chunk_hot`
 - `touch_chunk_roundrobin_1k` (exercises the LRU move-to-front hot path)
 - `warm_start/1000`, `warm_start/10000`, `warm_start_big/warm_start_100k`
+  — lazy default path as of M2
+- `warm_start_eager/1000`, `warm_start_eager/10000`,
+  `warm_start_eager_big/warm_start_eager_100k` — the M1-equivalent
+  eager path, kept for side-by-side comparison
+- `validate_chunk_lazy/validate_chunk_after_lazy_open_1k` — on-demand
+  validation cost after a lazy open (M2)
 - `checkpoint_write_1k`
 - `journal_append_1k` / `journal_replay_1k`
 
-**Baseline numbers:** [`docs/memory-arena/M1-baseline.md`](../../../docs/memory-arena/M1-baseline.md)
+**Baseline numbers:**
+- [`docs/memory-arena/M1-baseline.md`](../../../docs/memory-arena/M1-baseline.md)
+  — M1 eager baseline (slice 1)
+- [`docs/memory-arena/M2-baseline.md`](../../../docs/memory-arena/M2-baseline.md)
+  — M2 lazy-default + per-pool journal dispatch (slice 2), with M1-vs-M2
+  delta. Headline: lazy `warm_start_100k` = 86.24 ms vs M1 eager = 1.43 s
+  (**16.58x speedup**).
+
+**Slice history**
+
+- **M1** = eager baseline. `WarmStart::open` walked every slot's header +
+  payload checksum at open time.
+- **M2** = lazy default + per-pool journal dispatch. `WarmStart::open`
+  now walks only slot headers; payload validation is deferred to
+  `Arena::validate_chunk` or the per-read re-validation in `get_chunk`.
+  Callers that need the eager M1 contract opt in explicitly via
+  `WarmStart::open_eager` or `WarmStartConfig { eager_validation: true }`.
+  Journal records gained an `OP_ALLOC_V2` / `OP_FREE_V2` variant that
+  carries a `pool_id: TierKind` byte for multi-pool `replay_into_set`
+  dispatch; legacy v1 records decode as `pool_id = TierKind::Hot`.
 
 **Re-run command:**
 ```bash
@@ -83,9 +108,9 @@ The harness uses `criterion = "0.5"` with `default-features = false` and
 only `html_reports` enabled. HTML reports are written to
 `target/criterion/report/index.html` after each run.
 
-Every future slice (2, 3, ...) measures its changes against the M1 baseline
-committed at `docs/memory-arena/M1-baseline.md`. Regressions are a gate;
-improvements are the justification for each subsequent slice.
+Every future slice (3, 4, ...) measures its changes against both the M1
+and M2 baselines. Regressions are a gate; improvements are the
+justification for each subsequent slice.
 
 ## Design memories
 
