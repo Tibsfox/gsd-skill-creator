@@ -1,60 +1,122 @@
 //! Tier pools — typed memory regions with per-tier allocation policy.
 //!
-//! RED stub for memory-arena-m1 Plan 01. The GREEN commit in Task 2 replaces
-//! every `todo!()` body with a real implementation.
+//! This module lands the structural primitives for Deliverable D1 of the
+//! memory-arena-m1 phase. It ships:
 //!
-//! `TierPolicy` and `EvictionKind` live in `types.rs` (they're pure data that
-//! `ArenaConfig` needs to reference directly) and are re-exported here for
-//! API stability. `TierPool` lives here because it owns an `Arena`.
+//! - `EvictionKind` / `TierPolicy` (re-exported from `types.rs` so
+//!   `ArenaConfig::default_policies` can reference them without a cycle)
+//! - `TierPool` — an `Arena` wrapped with a `TierKind` and a `TierPolicy`;
+//!   enforces `max_chunks` on allocation
+//!
+//! Plan 04 extends this module with `ArenaSet`, `Manifest`, and `ArenaSetConfig`
+//! — the multi-pool container that owns N `TierPool`s and a manifest.json.
+//!
+//! Hard rules from MISSION.md:
+//! - All tunables flow through `ArenaConfig` / `TierPolicy` — no hardcoded
+//!   constants in pool logic
+//! - No `unsafe` in this file
+//! - `max_chunks == 0` is treated as "unlimited" to keep the default policy
+//!   a hint rather than a hard wall
 
 pub use crate::memory_arena::types::{EvictionKind, TierPolicy};
 
 use crate::memory_arena::arena::Arena;
-use crate::memory_arena::error::ArenaResult;
+use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind};
 
+/// A tier pool wraps an `Arena` with a `TierKind` label and a `TierPolicy`.
+/// Allocation enforces `max_chunks` BEFORE delegating to the inner arena so
+/// the policy is a first-class gate rather than an afterthought.
 #[derive(Debug)]
 pub struct TierPool {
-    _tier: TierKind,
-    _arena: Arena,
-    _policy: TierPolicy,
+    tier: TierKind,
+    arena: Arena,
+    policy: TierPolicy,
+    allocated_chunks: u32,
 }
 
 impl TierPool {
+    /// Build a new tier pool. Delegates storage to `Arena::new`, so this is
+    /// a heap-backed pool. File-backed pools come through `ArenaSet::create`
+    /// in Plan 04.
     pub fn new(
-        _tier: TierKind,
-        _config: ArenaConfig,
-        _num_slots: usize,
-        _policy: TierPolicy,
+        tier: TierKind,
+        config: ArenaConfig,
+        num_slots: usize,
+        policy: TierPolicy,
     ) -> ArenaResult<Self> {
-        todo!("RED: TierPool::new — implemented in Plan 01 Task 2")
+        let arena = Arena::new(config, num_slots)?;
+        Ok(Self {
+            tier,
+            arena,
+            policy,
+            allocated_chunks: 0,
+        })
     }
 
+    /// Construct a pool wrapping a pre-built `Arena` (used by `ArenaSet` in
+    /// Plan 04 where the arena is mmap-backed).
+    pub(crate) fn from_arena(tier: TierKind, arena: Arena, policy: TierPolicy) -> Self {
+        Self {
+            tier,
+            arena,
+            policy,
+            allocated_chunks: 0,
+        }
+    }
+
+    /// Tier kind accessor.
     pub fn tier(&self) -> TierKind {
-        todo!("RED: TierPool::tier — implemented in Plan 01 Task 2")
+        self.tier
     }
 
+    /// Policy accessor.
     pub fn policy(&self) -> &TierPolicy {
-        todo!("RED: TierPool::policy — implemented in Plan 01 Task 2")
+        &self.policy
     }
 
+    /// Read-only access to the underlying arena.
     pub fn arena(&self) -> &Arena {
-        todo!("RED: TierPool::arena — implemented in Plan 01 Task 2")
+        &self.arena
     }
 
+    /// Mutable access to the underlying arena. Callers MUST NOT alloc/free
+    /// directly through this handle if they want `allocated_chunks` to stay
+    /// accurate — use `alloc` / `free` on the `TierPool` instead.
     pub fn arena_mut(&mut self) -> &mut Arena {
-        todo!("RED: TierPool::arena_mut — implemented in Plan 01 Task 2")
+        &mut self.arena
     }
 
+    /// Current number of chunks this pool has allocated.
     pub fn len(&self) -> u32 {
-        todo!("RED: TierPool::len — implemented in Plan 01 Task 2")
+        self.allocated_chunks
     }
 
-    pub fn alloc(&mut self, _payload: Vec<u8>) -> ArenaResult<ChunkId> {
-        todo!("RED: TierPool::alloc — implemented in Plan 01 Task 2")
+    /// True if this pool currently holds zero chunks.
+    pub fn is_empty(&self) -> bool {
+        self.allocated_chunks == 0
     }
 
-    pub fn free(&mut self, _id: ChunkId) -> ArenaResult<()> {
-        todo!("RED: TierPool::free — implemented in Plan 01 Task 2")
+    /// Allocate a chunk into this pool. Enforces `policy.max_chunks` (if
+    /// non-zero) before delegating to `Arena::alloc_chunk`.
+    pub fn alloc(&mut self, payload: Vec<u8>) -> ArenaResult<ChunkId> {
+        if self.policy.max_chunks != 0 && self.allocated_chunks >= self.policy.max_chunks {
+            return Err(ArenaError::PoolFull {
+                tier: self.tier,
+                max_chunks: self.policy.max_chunks,
+            });
+        }
+        let id = self.arena.alloc_chunk(self.tier, payload)?;
+        self.allocated_chunks += 1;
+        Ok(id)
+    }
+
+    /// Free a chunk from this pool.
+    pub fn free(&mut self, id: ChunkId) -> ArenaResult<()> {
+        self.arena.free_chunk(id)?;
+        // Saturating to be defensive against callers who call free twice or
+        // who manipulated the inner arena directly.
+        self.allocated_chunks = self.allocated_chunks.saturating_sub(1);
+        Ok(())
     }
 }
