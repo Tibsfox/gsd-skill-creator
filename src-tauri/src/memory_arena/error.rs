@@ -22,6 +22,9 @@ pub enum ArenaError {
     #[error("unknown tier kind: {0}")]
     UnknownTierKind(u8),
 
+    #[error("unknown chunk state: {0}")]
+    UnknownChunkState(u8),
+
     #[error("chunk size out of range: {size} (min {min}, max {max})")]
     ChunkSizeOutOfRange { size: u64, min: u64, max: u64 },
 
