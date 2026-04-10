@@ -1480,6 +1480,7 @@ mod pool_tests {
             promote_after_hits: 0,
             demote_after_idle_ns: 0,
             demote_cooldown_ns: 0,
+            promote_cooldown_ns: 0,
         };
         let mut pool = TierPool::new(TierKind::Hot, ArenaConfig::test(), 8, policy)
             .expect("pool should construct");
@@ -1507,6 +1508,7 @@ mod pool_tests {
             promote_after_hits: 7,
             demote_after_idle_ns: 999_000,
             demote_cooldown_ns: 42_000_000,
+            promote_cooldown_ns: 0,
         };
         let json = serde_json::to_string(&policy).expect("serialize");
         let back: TierPolicy = serde_json::from_str(&json).expect("deserialize");
@@ -1841,6 +1843,7 @@ mod arena_set_tests {
             promote_after_hits: 0,
             demote_after_idle_ns: 0,
             demote_cooldown_ns: 0,
+            promote_cooldown_ns: 0,
         }
     }
 
@@ -2016,6 +2019,7 @@ mod warm_start_tests {
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
         }
     }
@@ -2128,6 +2132,7 @@ mod warm_start_fault_tests {
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
         }
     }
@@ -2750,6 +2755,7 @@ mod journal_dispatch_tests {
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
         }
     }
@@ -3251,6 +3257,7 @@ mod warm_start_config_tests {
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
         }
     }
@@ -3608,6 +3615,7 @@ mod m3_begin_demote {
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
         }
     }
@@ -3829,6 +3837,7 @@ mod m3_complete_abort_demote {
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
                 demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
             },
         }
     }
@@ -4165,6 +4174,7 @@ mod m3_hysteresis {
                 promote_after_hits: 0,
                 demote_after_idle_ns: 0,
                 demote_cooldown_ns: cooldown_ns,
+                promote_cooldown_ns: 0,
             },
         }
     }
