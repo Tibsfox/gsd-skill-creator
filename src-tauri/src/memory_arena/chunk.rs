@@ -166,8 +166,11 @@ pub(crate) fn write_header_into(header: &ChunkHeader, buf: &mut [u8]) {
     buf[40..48].copy_from_slice(&header.last_access_ns.to_le_bytes());
     buf[48..56].copy_from_slice(&header.access_count.to_le_bytes());
     buf[56..64].copy_from_slice(&header.checksum.to_le_bytes());
-    // 64: chunk state byte (M3). 65..72: pad0 (zero). 72..128: reserved1.
+    // 64: chunk state byte (M3). 65..72: pad0 (zero).
+    // 72..80: last_demote_completed_at_ns u64 LE (M3 Plan 04).
+    // 80..128: reserved1 tail (zero, reserved for future fields).
     buf[64] = header.state.as_u8();
+    buf[72..80].copy_from_slice(&header.last_demote_completed_at_ns.to_le_bytes());
 }
 
 /// Deserialize a `ChunkHeader` from a 128-byte buffer. Validates magic,
@@ -205,6 +208,11 @@ pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
     // M3 state byte at offset 64 (outside checksum window). M1/M2 chunks
     // have this byte == 0 which decodes as ChunkState::Resident.
     let state = ChunkState::from_u8(buf[64])?;
+    // M3 Plan 04: last_demote_completed_at_ns at bytes 72..80 (outside
+    // checksum window). M1/M2 chunks have these bytes == 0 which
+    // decodes as "never demoted".
+    let last_demote_completed_at_ns =
+        u64::from_le_bytes(buf[72..80].try_into().unwrap());
 
     Ok(ChunkHeader {
         magic,
@@ -217,5 +225,6 @@ pub(crate) fn read_header_from(buf: &[u8]) -> ArenaResult<ChunkHeader> {
         access_count,
         checksum,
         state,
+        last_demote_completed_at_ns,
     })
 }

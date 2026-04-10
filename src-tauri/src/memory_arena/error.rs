@@ -80,6 +80,12 @@ pub enum ArenaError {
         found: crate::memory_arena::types::ChunkState,
     },
 
+    #[error("hysteresis cooldown for chunk {chunk_id}: {cooldown_remaining_ns} ns remaining")]
+    HysteresisCooldown {
+        chunk_id: u64,
+        cooldown_remaining_ns: u64,
+    },
+
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
 }

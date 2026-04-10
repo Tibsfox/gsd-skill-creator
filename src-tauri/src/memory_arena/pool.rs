@@ -345,6 +345,20 @@ pub struct ArenaSet {
     manifest: Manifest,
     /// In-memory registry of in-flight demote crossfades. Not persisted.
     crossfade_registry: CrossfadeRegistry,
+    /// Now-ns function pointer — defaults to the real monotonic system
+    /// clock (unix nanoseconds). Tests override via `set_now_ns_for_test`
+    /// so hysteresis timing can be asserted deterministically without
+    /// wall-clock sleeps.
+    now_ns: fn() -> u64,
+}
+
+/// Default clock: unix nanoseconds from `SystemTime`. Defined as a free
+/// function so it can be stored as a `fn()` pointer on `ArenaSet`.
+fn real_now_ns() -> u64 {
+    std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_nanos() as u64)
+        .unwrap_or(0)
 }
 
 impl std::fmt::Debug for ArenaSet {
@@ -390,6 +404,7 @@ impl ArenaSet {
             pools,
             manifest,
             crossfade_registry: CrossfadeRegistry::new(),
+            now_ns: real_now_ns,
         })
     }
 
@@ -462,7 +477,16 @@ impl ArenaSet {
             pools,
             manifest,
             crossfade_registry: CrossfadeRegistry::new(),
+            now_ns: real_now_ns,
         })
+    }
+
+    /// Override the clock function. Test-only — tests call this to inject
+    /// a deterministic clock so hysteresis timing can be asserted without
+    /// wall-clock sleeps.
+    #[doc(hidden)]
+    pub fn set_now_ns_for_test(&mut self, f: fn() -> u64) {
+        self.now_ns = f;
     }
 
     pub fn root(&self) -> &Path {
@@ -543,6 +567,32 @@ impl ArenaSet {
         }
         if !self.pools.contains_key(&target_tier) {
             return Err(ArenaError::UnknownTier(target_tier));
+        }
+
+        // Hysteresis cooldown check (M3 Plan 04). The source pool's
+        // `demote_cooldown_ns` policy defines the minimum gap between
+        // consecutive demotes of the same chunk. A pristine chunk
+        // (`last_demote_ns == 0`) bypasses the check, and a zero cooldown
+        // disables it entirely (preserves pre-slice-3 behavior).
+        {
+            let source_pool = self
+                .pools
+                .get(&source_tier)
+                .ok_or(ArenaError::UnknownTier(source_tier))?;
+            let cooldown = source_pool.policy().demote_cooldown_ns;
+            if cooldown > 0 {
+                let last = source_pool.arena().read_last_demote_ns(source_id)?;
+                if last > 0 {
+                    let now = (self.now_ns)();
+                    let elapsed = now.saturating_sub(last);
+                    if elapsed < cooldown {
+                        return Err(ArenaError::HysteresisCooldown {
+                            chunk_id: source_id.as_u64(),
+                            cooldown_remaining_ns: cooldown - elapsed,
+                        });
+                    }
+                }
+            }
         }
 
         // 1. Snapshot the source chunk's payload. `get_chunk` validates
@@ -633,7 +683,22 @@ impl ArenaSet {
             });
         }
 
-        // 3. Free the source chunk via the TierPool free path (which
+        // 3. Stamp the target chunk's last_demote_completed_at_ns BEFORE
+        // freeing the source, so a crash between stamp and free still
+        // leaves a valid canonical chunk with the current time recorded.
+        // The stamp is used by future hysteresis checks on the target.
+        {
+            let now = (self.now_ns)();
+            let target_pool = self
+                .pools
+                .get_mut(&handle.target_tier)
+                .ok_or(ArenaError::UnknownTier(handle.target_tier))?;
+            target_pool
+                .arena_mut()
+                .write_last_demote_ns(handle.target, now)?;
+        }
+
+        // 4. Free the source chunk via the TierPool free path (which
         // decrements `allocated_chunks` and zeros the valid region).
         {
             let source_pool = self
@@ -643,7 +708,7 @@ impl ArenaSet {
             source_pool.free(handle.source)?;
         }
 
-        // 4. Deregister. The target is now the canonical chunk.
+        // 5. Deregister. The target is now the canonical chunk.
         self.crossfade_registry
             .remove(handle.source_tier, handle.source);
 
