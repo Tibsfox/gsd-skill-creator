@@ -1818,3 +1818,171 @@ mod arena_lru_tests {
         assert_eq!(arena.lru_oldest(), Some(id));
     }
 }
+
+// =============================================================================
+// memory-arena-m1 Plan 04 — ArenaSet + manifest tests
+// =============================================================================
+
+#[cfg(test)]
+mod arena_set_tests {
+    use crate::memory_arena::error::ArenaError;
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind};
+    use tempfile::tempdir;
+
+    fn small_policy(max: u32) -> TierPolicy {
+        TierPolicy {
+            max_chunks: max,
+            eviction: EvictionKind::Lru,
+            promote_after_hits: 0,
+            demote_after_idle_ns: 0,
+        }
+    }
+
+    fn pool_spec(tier: TierKind, max: u32) -> PoolSpec {
+        // Use the ArenaConfig::test() sizes so every pool is tiny and
+        // fits comfortably in RAM during unit tests.
+        let cfg = ArenaConfig::test();
+        PoolSpec {
+            tier,
+            chunk_size: cfg.chunk_size,
+            num_slots: 8,
+            policy: small_policy(max),
+        }
+    }
+
+    #[test]
+    fn arena_set_creates_backing_files_and_manifest() {
+        let tmp = tempdir().unwrap();
+        let config = ArenaSetConfig::new(tmp.path())
+            .with_pool(pool_spec(TierKind::Hot, 0))
+            .with_pool(pool_spec(TierKind::Warm, 0))
+            .with_pool(pool_spec(TierKind::Blob, 0));
+        let set = ArenaSet::create(config).expect("create arena set");
+        // Manifest file exists.
+        assert!(tmp.path().join("manifest.json").exists());
+        // Per-tier arena files exist.
+        assert!(tmp.path().join("hot.arena").exists());
+        assert!(tmp.path().join("warm.arena").exists());
+        assert!(tmp.path().join("blob.arena").exists());
+        // Unconfigured tiers do NOT have arena files.
+        assert!(!tmp.path().join("vector.arena").exists());
+        assert!(!tmp.path().join("resident.arena").exists());
+        drop(set);
+    }
+
+    #[test]
+    fn arena_set_isolates_chunk_id_namespaces() {
+        let tmp = tempdir().unwrap();
+        let config = ArenaSetConfig::new(tmp.path())
+            .with_pool(pool_spec(TierKind::Hot, 0))
+            .with_pool(pool_spec(TierKind::Warm, 0));
+        let mut set = ArenaSet::create(config).expect("create");
+
+        let hot_id = set
+            .pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(vec![1u8; 32])
+            .expect("hot alloc");
+        let warm_id = set
+            .pool_mut(TierKind::Warm)
+            .unwrap()
+            .alloc(vec![2u8; 32])
+            .expect("warm alloc");
+
+        // Per-pool monotonic counters — both return ChunkId(1).
+        assert_eq!(hot_id, ChunkId::new(1));
+        assert_eq!(warm_id, ChunkId::new(1));
+
+        // But they live in separate arenas.
+        assert!(set.pool(TierKind::Hot).unwrap().arena().contains(hot_id));
+        assert!(set.pool(TierKind::Warm).unwrap().arena().contains(warm_id));
+    }
+
+    #[test]
+    fn arena_set_manifest_roundtrips() {
+        let tmp = tempdir().unwrap();
+        let path = tmp.path().to_path_buf();
+        let config = ArenaSetConfig::new(&path)
+            .with_pool(pool_spec(TierKind::Hot, 8))
+            .with_pool(pool_spec(TierKind::Warm, 16));
+        {
+            let set = ArenaSet::create(config).expect("create");
+            drop(set);
+        }
+        let reopened = ArenaSet::open(&path).expect("open");
+        let manifest = reopened.manifest();
+        assert_eq!(manifest.pools.len(), 2);
+        let hot_spec = manifest
+            .pools
+            .iter()
+            .find(|p| p.tier == TierKind::Hot)
+            .unwrap();
+        assert_eq!(hot_spec.policy.max_chunks, 8);
+        let warm_spec = manifest
+            .pools
+            .iter()
+            .find(|p| p.tier == TierKind::Warm)
+            .unwrap();
+        assert_eq!(warm_spec.policy.max_chunks, 16);
+    }
+
+    #[test]
+    fn arena_set_create_rejects_existing_manifest() {
+        let tmp = tempdir().unwrap();
+        let path = tmp.path().to_path_buf();
+        let config1 = ArenaSetConfig::new(&path).with_pool(pool_spec(TierKind::Hot, 0));
+        ArenaSet::create(config1).expect("first create");
+
+        let config2 = ArenaSetConfig::new(&path).with_pool(pool_spec(TierKind::Hot, 0));
+        let err = ArenaSet::create(config2).expect_err("second create must fail");
+        assert!(
+            matches!(err, ArenaError::AlreadyExists { .. }),
+            "expected AlreadyExists, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn arena_set_policy_enforcement_per_tier() {
+        let tmp = tempdir().unwrap();
+        let config = ArenaSetConfig::new(tmp.path())
+            .with_pool(pool_spec(TierKind::Hot, 2))
+            .with_pool(pool_spec(TierKind::Warm, 0));
+        let mut set = ArenaSet::create(config).expect("create");
+
+        // Hot: alloc 2, then third fails with PoolFull.
+        set.pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(vec![1u8; 32])
+            .unwrap();
+        set.pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(vec![2u8; 32])
+            .unwrap();
+        let err = set
+            .pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(vec![3u8; 32])
+            .expect_err("should be PoolFull");
+        assert!(matches!(err, ArenaError::PoolFull { tier: TierKind::Hot, max_chunks: 2 }));
+
+        // Warm still has room (max_chunks = 0 → unlimited).
+        set.pool_mut(TierKind::Warm)
+            .unwrap()
+            .alloc(vec![4u8; 32])
+            .expect("warm alloc should succeed");
+    }
+
+    #[test]
+    fn arena_set_pool_accessor_none_for_unconfigured_tier() {
+        let tmp = tempdir().unwrap();
+        let config = ArenaSetConfig::new(tmp.path()).with_pool(pool_spec(TierKind::Hot, 0));
+        let set = ArenaSet::create(config).expect("create");
+        assert!(set.pool(TierKind::Hot).is_some());
+        assert!(set.pool(TierKind::Warm).is_none());
+        assert!(set.pool(TierKind::Vector).is_none());
+    }
+}
