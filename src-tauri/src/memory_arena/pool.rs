@@ -44,7 +44,7 @@ use crate::memory_arena::vram::{VramContext, VramPool};
 ///
 /// `Copy` so callers can stash it alongside other per-chunk metadata
 /// without dealing with ownership moves.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct CrossfadeHandle {
     pub source: ChunkId,
     pub source_tier: TierKind,
@@ -54,10 +54,13 @@ pub struct CrossfadeHandle {
 
 /// In-memory registry of in-flight crossfades (both demote and promote).
 /// Keyed by `(source_tier, source_chunk_id)` so a chunk is allowed to
-/// fade at most once at a time. The registry is NOT persisted to disk —
-/// a process restart during a fade leaves the source's on-disk state byte
-/// as `FadingOut` with no reachable target. Warm-start orphan recovery
-/// (M4) reverts these orphaned `FadingOut` chunks to `Resident` on reopen.
+/// fade at most once at a time.
+///
+/// **Persistence (M10).** The registry is flushed to `<root>/crossfades.json`
+/// by `ArenaSet::flush()` and restored on `ArenaSet::open`. On clean
+/// shutdown the file is empty (or absent). On crash, the persisted entries
+/// enable `gc_orphaned_targets()` to free unreachable target chunks instead
+/// of leaking them.
 #[derive(Debug, Default)]
 pub(crate) struct CrossfadeRegistry {
     by_source: HashMap<(TierKind, ChunkId), CrossfadeHandle>,
@@ -96,6 +99,25 @@ impl CrossfadeRegistry {
         id: ChunkId,
     ) -> Option<CrossfadeHandle> {
         self.by_source.remove(&(tier, id))
+    }
+
+    /// True if the registry has no in-flight fades.
+    pub(crate) fn is_empty(&self) -> bool {
+        self.by_source.is_empty()
+    }
+
+    /// Serialize all in-flight handles to a Vec for persistence.
+    pub(crate) fn to_vec(&self) -> Vec<CrossfadeHandle> {
+        self.by_source.values().copied().collect()
+    }
+
+    /// Restore registry from a persisted list of handles.
+    pub(crate) fn from_vec(handles: Vec<CrossfadeHandle>) -> Self {
+        let mut by_source = HashMap::with_capacity(handles.len());
+        for h in handles {
+            by_source.insert((h.source_tier, h.source), h);
+        }
+        Self { by_source }
     }
 }
 
@@ -641,16 +663,30 @@ impl ArenaSet {
             pools.insert(spec.tier, pool);
         }
 
-        // Orphaned-fade recovery sweep (M4). The CrossfadeRegistry is
-        // always empty on fresh open (not persisted), so ALL FadingOut
-        // chunks on disk are crash orphans. Revert them to Resident.
+        // Restore persisted crossfade registry (M10). This must happen
+        // BEFORE the orphan recovery sweep so GC can use the handles.
+        let persisted_handles = read_crossfade_registry(&root)?;
+        let crossfade_registry = CrossfadeRegistry::from_vec(persisted_handles);
+
+        // Orphaned-fade recovery sweep (M4). FadingOut chunks whose source
+        // is NOT in the restored registry are crash orphans — revert them
+        // to Resident. FadingOut chunks WITH a registry entry are resumable
+        // crossfades — leave them as FadingOut so complete_* can finish.
         for pool in pools.values_mut() {
             let ids_to_recover: Vec<ChunkId> = pool
                 .arena()
                 .directory_entries()
                 .filter_map(|(id, _slot)| {
                     match pool.arena().chunk_state(id) {
-                        Ok(ChunkState::FadingOut) => Some(id),
+                        Ok(ChunkState::FadingOut) => {
+                            // If this chunk is a known source in the restored
+                            // registry, the crossfade is resumable — skip.
+                            if crossfade_registry.get(pool.tier(), id).is_some() {
+                                None
+                            } else {
+                                Some(id)
+                            }
+                        }
                         _ => None,
                     }
                 })
@@ -665,7 +701,7 @@ impl ArenaSet {
             root,
             pools,
             manifest,
-            crossfade_registry: CrossfadeRegistry::new(),
+            crossfade_registry,
             now_ns: real_now_ns,
             // VRAM pools are not persisted — they must be re-created
             // with a fresh VramContext after process restart. VRAM is
@@ -1422,16 +1458,121 @@ impl ArenaSet {
         report
     }
 
-    /// Flush all pool mmaps and rewrite the manifest atomically. Call before
-    /// dropping if you want on-disk state to reflect recent allocations.
+    /// Flush all pool mmaps and rewrite the manifest atomically. Also
+    /// persists the crossfade registry to `crossfades.json` if any fades
+    /// are in-flight, or removes the file if the registry is empty.
     pub fn flush(&self) -> ArenaResult<()> {
         for pool in self.pools.values() {
             pool.arena().flush_mmap()?;
         }
         let manifest_path = self.root.join("manifest.json");
         write_manifest_atomic(&manifest_path, &self.manifest)?;
+
+        // Persist the crossfade registry (M10).
+        let crossfades_path = self.root.join("crossfades.json");
+        if self.crossfade_registry.is_empty() {
+            // Clean shutdown — no in-flight fades. Remove the file if it
+            // exists so a future open doesn't try to resume stale entries.
+            let _ = fs::remove_file(&crossfades_path);
+        } else {
+            let handles = self.crossfade_registry.to_vec();
+            write_json_atomic(&crossfades_path, &handles)?;
+        }
         Ok(())
     }
+
+    // =========================================================================
+    // Orphan-target GC (M10)
+    // =========================================================================
+
+    /// Garbage-collect all in-flight crossfade entries from the restored
+    /// registry. For each persisted handle:
+    ///
+    /// 1. If the source is still `FadingOut`, revert it to `Resident`.
+    /// 2. Free the target chunk from its pool.
+    /// 3. Remove the handle from the registry.
+    ///
+    /// After a crash, both the source data and target data are intact on
+    /// disk. GC chooses the safe path: keep the source (it's the original),
+    /// discard the target (it's the copy). Callers that want to RESUME a
+    /// crossfade instead of cleaning it up should call `complete_demote` /
+    /// `complete_promote` with the restored handle before calling GC.
+    ///
+    /// Call after `WarmStart::open` to reclaim leaked slots.
+    pub fn gc_orphaned_targets(&mut self) -> GcReport {
+        let mut report = GcReport::default();
+
+        // Snapshot the registry handles — consume them so we can mutate pools.
+        let handles: Vec<CrossfadeHandle> = self.crossfade_registry.to_vec();
+
+        for handle in handles {
+            // Revert source to Resident if it's still FadingOut.
+            let source_exists = self
+                .pools
+                .get(&handle.source_tier)
+                .map_or(false, |p| p.arena().contains(handle.source));
+
+            if source_exists {
+                let is_fading = self
+                    .pools
+                    .get(&handle.source_tier)
+                    .and_then(|p| p.arena().chunk_state(handle.source).ok())
+                    .map_or(false, |s| s == ChunkState::FadingOut);
+
+                if is_fading {
+                    if let Some(pool) = self.pools.get_mut(&handle.source_tier) {
+                        let _ = pool.arena_mut().mark_state(handle.source, ChunkState::Resident);
+                    }
+                    report.sources_reverted += 1;
+                }
+            }
+
+            // Free the target chunk (the orphaned copy).
+            // Free the target chunk from its pool.
+            let freed = {
+                #[cfg(feature = "cuda")]
+                {
+                    if self.is_vram_tier(handle.target_tier) {
+                        self.vram_pool
+                            .as_mut()
+                            .map(|vp| vp.free(handle.target).is_ok())
+                            .unwrap_or(false)
+                    } else {
+                        self.pools
+                            .get_mut(&handle.target_tier)
+                            .map(|p| p.free(handle.target).is_ok())
+                            .unwrap_or(false)
+                    }
+                }
+                #[cfg(not(feature = "cuda"))]
+                {
+                    self.pools
+                        .get_mut(&handle.target_tier)
+                        .map(|p| p.free(handle.target).is_ok())
+                        .unwrap_or(false)
+                }
+            };
+
+            if freed {
+                report.targets_freed += 1;
+            }
+
+            // Remove the stale handle from the registry.
+            self.crossfade_registry
+                .remove(handle.source_tier, handle.source);
+        }
+
+        report
+    }
+}
+
+/// Report returned by `ArenaSet::gc_orphaned_targets`.
+#[derive(Debug, Default, Clone, Copy)]
+pub struct GcReport {
+    /// Number of orphaned target chunks freed.
+    pub targets_freed: u32,
+    /// Number of FadingOut sources reverted to Resident.
+    pub sources_reverted: u32,
 }
 
 /// Atomic manifest write: serialize to a temp file in the same directory,
@@ -1452,4 +1593,37 @@ fn write_manifest_atomic(path: &Path, manifest: &Manifest) -> ArenaResult<()> {
     }
     fs::rename(&tmp_path, path)?;
     Ok(())
+}
+
+/// Atomic JSON write for any serializable value. Same temp-file + rename
+/// pattern as `write_manifest_atomic`.
+fn write_json_atomic<T: serde::Serialize>(path: &Path, value: &T) -> ArenaResult<()> {
+    let tmp_path = path.with_extension("json.tmp");
+    {
+        let mut tmp_file = OpenOptions::new()
+            .create(true)
+            .write(true)
+            .truncate(true)
+            .open(&tmp_path)?;
+        let bytes = serde_json::to_vec_pretty(value)
+            .map_err(|e| ArenaError::ManifestParse(e.to_string()))?;
+        tmp_file.write_all(&bytes)?;
+        tmp_file.sync_all()?;
+    }
+    fs::rename(&tmp_path, path)?;
+    Ok(())
+}
+
+/// Read the persisted crossfade registry from `<root>/crossfades.json`.
+/// Returns an empty Vec if the file doesn't exist (clean shutdown or
+/// fresh arena). Returns an error only on actual I/O or parse failures.
+fn read_crossfade_registry(root: &Path) -> ArenaResult<Vec<CrossfadeHandle>> {
+    let path = root.join("crossfades.json");
+    if !path.exists() {
+        return Ok(Vec::new());
+    }
+    let bytes = fs::read(&path)?;
+    let handles: Vec<CrossfadeHandle> = serde_json::from_slice(&bytes)
+        .map_err(|e| ArenaError::ManifestParse(format!("crossfades.json: {}", e)))?;
+    Ok(handles)
 }
