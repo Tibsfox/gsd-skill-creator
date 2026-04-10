@@ -44,6 +44,37 @@ pub trait ColdSource: Send + Sync {
     fn fetch(&self, tier: TierKind, id: ChunkId) -> ArenaResult<Option<Vec<u8>>>;
 }
 
+/// Async version of `ColdSource`. Uses `Pin<Box<dyn Future>>` return type
+/// for object safety (no `async fn` in traits without `async-trait`).
+///
+/// Implementations should be `Send + Sync` so they can live behind a
+/// `Box<dyn AsyncColdSource>`.
+pub trait AsyncColdSource: Send + Sync {
+    /// Fetch the original payload for a given `(tier, id)` asynchronously.
+    fn fetch(
+        &self,
+        tier: TierKind,
+        id: ChunkId,
+    ) -> std::pin::Pin<
+        Box<dyn std::future::Future<Output = ArenaResult<Option<Vec<u8>>>> + Send + '_>,
+    >;
+}
+
+/// Blanket: every sync `ColdSource` is also an `AsyncColdSource` (wraps
+/// the sync call in an immediately-ready future).
+impl<T: ColdSource> AsyncColdSource for T {
+    fn fetch(
+        &self,
+        tier: TierKind,
+        id: ChunkId,
+    ) -> std::pin::Pin<
+        Box<dyn std::future::Future<Output = ArenaResult<Option<Vec<u8>>>> + Send + '_>,
+    > {
+        let result = ColdSource::fetch(self, tier, id);
+        Box::pin(async move { result })
+    }
+}
+
 /// In-memory cold source stub. Production replacement (PG-backed) is a
 /// slice 2 concern — this stub exists so Plan 05's integration tests can
 /// pre-seed known payloads and Plan 06's fault-injection tests can assert

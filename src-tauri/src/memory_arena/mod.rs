@@ -43,7 +43,8 @@ pub use pool::{
     TierPolicy, TierPool, ARENA_SET_FORMAT_VERSION,
 };
 pub use warm_start::{
-    ColdSource, InMemoryColdSource, WarmStart, WarmStartConfig, WarmStartReport, WarmStartStats,
+    AsyncColdSource, ColdSource, InMemoryColdSource, WarmStart, WarmStartConfig, WarmStartReport,
+    WarmStartStats,
 };
 #[cfg(feature = "postgres")]
 pub use pg_cold::PgColdSource;
