@@ -32,6 +32,10 @@ use criterion::{
 use tempfile::tempdir;
 
 use gsd_os_lib::memory_arena::{
+    allocator::{
+        BuddyAllocator, ChunkAllocator, FixedSlotAllocator, SlabAllocator, SlabConfig,
+        TlsfAllocator, TlsfConfig,
+    },
     persistence::{replay_into, write_checkpoint, JournalReader, JournalWriter},
     pool::{ArenaSet, ArenaSetConfig, CrossfadeHandle, EvictionKind, PoolSpec, TierPolicy},
     types::{ArenaConfig, ChunkId, TierKind},
@@ -1423,6 +1427,421 @@ fn bench_vram_crossfade(c: &mut Criterion) {
 
 // ===== entry =======================================================
 
+// ===== bench: allocator bake-off ======================================
+
+/// Deterministic size sequence for the mixed workload.
+fn mixed_sizes() -> Vec<usize> {
+    let pattern = [64, 128, 512, 4096, 65536];
+    (0..10_000).map(|i| pattern[i % pattern.len()]).collect()
+}
+
+/// Create a FixedSlotAllocator sized for the bake-off. Uses 4 KiB slots
+/// with 20K capacity (enough for 10K uniform-small + headroom).
+fn bakeoff_fixed() -> FixedSlotAllocator {
+    FixedSlotAllocator::new(4096, 20_000)
+}
+
+/// Create a SlabAllocator for the bake-off small/churn workloads.
+/// 5 classes, 10 MiB total — enough for 10K+ uniform 100B allocs.
+fn bakeoff_slab() -> SlabAllocator {
+    SlabAllocator::new(SlabConfig {
+        classes: vec![128, 256, 1024, 4096, 65536],
+        total_capacity: 10 * 1024 * 1024,
+    })
+}
+
+/// Create a SlabAllocator for the bake-off mixed workload.
+/// Mixed sizes: [64, 128, 512, 4096, 65536]. 10K allocs total,
+/// 2K per size class → need 2K x 65536 = 128 MiB for largest class.
+/// 700 MiB total / 5 classes = 140 MiB each. Plenty.
+fn bakeoff_slab_mixed() -> SlabAllocator {
+    SlabAllocator::new(SlabConfig {
+        classes: vec![64, 128, 512, 4096, 65536],
+        total_capacity: 700 * 1024 * 1024,
+    })
+}
+
+/// Create a BuddyAllocator for the bake-off (256 MiB, 64B min block).
+/// 256 MiB gives enough headroom for both small (10K x 100B) and large
+/// (1K x 128 KiB rounded) workloads.
+fn bakeoff_buddy() -> BuddyAllocator {
+    BuddyAllocator::new(256 * 1024 * 1024, 64)
+}
+
+/// Create a TlsfAllocator for the bake-off (256 MiB, 64B min block).
+fn bakeoff_tlsf() -> TlsfAllocator {
+    TlsfAllocator::new(256 * 1024 * 1024, 64, TlsfConfig { sl_count: 4 })
+}
+
+fn bench_bakeoff_alloc_uniform_small(c: &mut Criterion) {
+    let mut group = c.benchmark_group("bakeoff/alloc_uniform_small");
+    group.throughput(Throughput::Elements(10_000));
+
+    group.bench_function("fixed", |b| {
+        b.iter_batched(
+            bakeoff_fixed,
+            |mut alloc| {
+                for _ in 0..10_000 {
+                    black_box(alloc.alloc(100).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("slab", |b| {
+        b.iter_batched(
+            bakeoff_slab,
+            |mut alloc| {
+                for _ in 0..10_000 {
+                    black_box(alloc.alloc(100).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("buddy", |b| {
+        b.iter_batched(
+            bakeoff_buddy,
+            |mut alloc| {
+                for _ in 0..10_000 {
+                    black_box(alloc.alloc(100).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("tlsf", |b| {
+        b.iter_batched(
+            bakeoff_tlsf,
+            |mut alloc| {
+                for _ in 0..10_000 {
+                    black_box(alloc.alloc(100).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.finish();
+}
+
+fn bench_bakeoff_alloc_uniform_large(c: &mut Criterion) {
+    let mut group = c.benchmark_group("bakeoff/alloc_uniform_large");
+    group.throughput(Throughput::Elements(1_000));
+
+    group.bench_function("fixed", |b| {
+        b.iter_batched(
+            || FixedSlotAllocator::new(128 * 1024, 2_000),
+            |mut alloc| {
+                for _ in 0..1_000 {
+                    black_box(alloc.alloc(100 * 1024).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("slab", |b| {
+        b.iter_batched(
+            || {
+                // Large-alloc workload: 100 KiB lands in 262144 class.
+                // Need 1K+ slots in that class → dedicated config.
+                SlabAllocator::new(SlabConfig {
+                    classes: vec![262144, 1048576],
+                    total_capacity: 512 * 1024 * 1024,
+                })
+            },
+            |mut alloc| {
+                for _ in 0..1_000 {
+                    black_box(alloc.alloc(100 * 1024).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("buddy", |b| {
+        b.iter_batched(
+            bakeoff_buddy,
+            |mut alloc| {
+                for _ in 0..1_000 {
+                    black_box(alloc.alloc(100 * 1024).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("tlsf", |b| {
+        b.iter_batched(
+            bakeoff_tlsf,
+            |mut alloc| {
+                for _ in 0..1_000 {
+                    black_box(alloc.alloc(100 * 1024).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.finish();
+}
+
+fn bench_bakeoff_alloc_mixed(c: &mut Criterion) {
+    let mut group = c.benchmark_group("bakeoff/alloc_mixed");
+    let sizes = mixed_sizes();
+    group.throughput(Throughput::Elements(sizes.len() as u64));
+
+    group.bench_function("fixed", |b| {
+        b.iter_batched(
+            || FixedSlotAllocator::new(65536, 20_000),
+            |mut alloc| {
+                for &sz in &sizes {
+                    black_box(alloc.alloc(sz).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("slab", |b| {
+        b.iter_batched(
+            bakeoff_slab_mixed,
+            |mut alloc| {
+                for &sz in &sizes {
+                    black_box(alloc.alloc(sz).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("buddy", |b| {
+        b.iter_batched(
+            bakeoff_buddy,
+            |mut alloc| {
+                for &sz in &sizes {
+                    black_box(alloc.alloc(sz).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("tlsf", |b| {
+        b.iter_batched(
+            bakeoff_tlsf,
+            |mut alloc| {
+                for &sz in &sizes {
+                    black_box(alloc.alloc(sz).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.finish();
+}
+
+fn bench_bakeoff_alloc_free_churn(c: &mut Criterion) {
+    let mut group = c.benchmark_group("bakeoff/alloc_free_churn");
+    group.throughput(Throughput::Elements(15_000)); // 10K alloc + 5K free + 5K re-alloc
+
+    group.bench_function("fixed", |b| {
+        b.iter_batched(
+            bakeoff_fixed,
+            |mut alloc| {
+                let mut offsets = Vec::with_capacity(10_000);
+                for _ in 0..10_000 {
+                    let (off, _) = alloc.alloc(100).unwrap();
+                    offsets.push(off);
+                }
+                // Free every other one
+                for i in (0..offsets.len()).step_by(2) {
+                    alloc.free(offsets[i]).unwrap();
+                }
+                // Alloc 5K more
+                for _ in 0..5_000 {
+                    black_box(alloc.alloc(100).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("slab", |b| {
+        b.iter_batched(
+            bakeoff_slab,
+            |mut alloc| {
+                let mut offsets = Vec::with_capacity(10_000);
+                for _ in 0..10_000 {
+                    let (off, _) = alloc.alloc(100).unwrap();
+                    offsets.push(off);
+                }
+                for i in (0..offsets.len()).step_by(2) {
+                    alloc.free(offsets[i]).unwrap();
+                }
+                for _ in 0..5_000 {
+                    black_box(alloc.alloc(100).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("buddy", |b| {
+        b.iter_batched(
+            bakeoff_buddy,
+            |mut alloc| {
+                let mut offsets = Vec::with_capacity(10_000);
+                for _ in 0..10_000 {
+                    let (off, _) = alloc.alloc(100).unwrap();
+                    offsets.push(off);
+                }
+                for i in (0..offsets.len()).step_by(2) {
+                    alloc.free(offsets[i]).unwrap();
+                }
+                for _ in 0..5_000 {
+                    black_box(alloc.alloc(100).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("tlsf", |b| {
+        b.iter_batched(
+            bakeoff_tlsf,
+            |mut alloc| {
+                let mut offsets = Vec::with_capacity(10_000);
+                for _ in 0..10_000 {
+                    let (off, _) = alloc.alloc(100).unwrap();
+                    offsets.push(off);
+                }
+                for i in (0..offsets.len()).step_by(2) {
+                    alloc.free(offsets[i]).unwrap();
+                }
+                for _ in 0..5_000 {
+                    black_box(alloc.alloc(100).unwrap());
+                }
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.finish();
+}
+
+fn bench_bakeoff_fragmentation(c: &mut Criterion) {
+    let mut group = c.benchmark_group("bakeoff/fragmentation");
+    group.throughput(Throughput::Elements(1));
+
+    // Measure fragmentation ratio after the churn workload.
+    // Uses iter_batched so the setup (alloc + free churn) is excluded
+    // from timing; we're measuring only the fragmentation() call.
+
+    group.bench_function("fixed", |b| {
+        b.iter_batched(
+            || {
+                let mut alloc = bakeoff_fixed();
+                let mut offsets = Vec::with_capacity(10_000);
+                for _ in 0..10_000 {
+                    let (off, _) = alloc.alloc(100).unwrap();
+                    offsets.push(off);
+                }
+                for i in (0..offsets.len()).step_by(2) {
+                    alloc.free(offsets[i]).unwrap();
+                }
+                for _ in 0..5_000 {
+                    alloc.alloc(100).unwrap();
+                }
+                alloc
+            },
+            |alloc| {
+                black_box(alloc.fragmentation());
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("slab", |b| {
+        b.iter_batched(
+            || {
+                let mut alloc = bakeoff_slab();
+                let mut offsets = Vec::with_capacity(10_000);
+                for _ in 0..10_000 {
+                    let (off, _) = alloc.alloc(100).unwrap();
+                    offsets.push(off);
+                }
+                for i in (0..offsets.len()).step_by(2) {
+                    alloc.free(offsets[i]).unwrap();
+                }
+                for _ in 0..5_000 {
+                    alloc.alloc(100).unwrap();
+                }
+                alloc
+            },
+            |alloc| {
+                black_box(alloc.fragmentation());
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("buddy", |b| {
+        b.iter_batched(
+            || {
+                let mut alloc = bakeoff_buddy();
+                let mut offsets = Vec::with_capacity(10_000);
+                for _ in 0..10_000 {
+                    let (off, _) = alloc.alloc(100).unwrap();
+                    offsets.push(off);
+                }
+                for i in (0..offsets.len()).step_by(2) {
+                    alloc.free(offsets[i]).unwrap();
+                }
+                for _ in 0..5_000 {
+                    alloc.alloc(100).unwrap();
+                }
+                alloc
+            },
+            |alloc| {
+                black_box(alloc.fragmentation());
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("tlsf", |b| {
+        b.iter_batched(
+            || {
+                let mut alloc = bakeoff_tlsf();
+                let mut offsets = Vec::with_capacity(10_000);
+                for _ in 0..10_000 {
+                    let (off, _) = alloc.alloc(100).unwrap();
+                    offsets.push(off);
+                }
+                for i in (0..offsets.len()).step_by(2) {
+                    alloc.free(offsets[i]).unwrap();
+                }
+                for _ in 0..5_000 {
+                    alloc.alloc(100).unwrap();
+                }
+                alloc
+            },
+            |alloc| {
+                black_box(alloc.fragmentation());
+            },
+            criterion::BatchSize::SmallInput,
+        );
+    });
+
+    group.finish();
+}
+
 criterion_group!(
     benches,
     bench_alloc,
@@ -1441,6 +1860,15 @@ criterion_group!(
     bench_policy_sweep,
 );
 
+criterion_group!(
+    allocator_bakeoff,
+    bench_bakeoff_alloc_uniform_small,
+    bench_bakeoff_alloc_uniform_large,
+    bench_bakeoff_alloc_mixed,
+    bench_bakeoff_alloc_free_churn,
+    bench_bakeoff_fragmentation,
+);
+
 #[cfg(feature = "cuda")]
 criterion_group!(
     vram_benches,
@@ -1449,7 +1877,7 @@ criterion_group!(
 );
 
 #[cfg(feature = "cuda")]
-criterion_main!(benches, vram_benches);
+criterion_main!(benches, allocator_bakeoff, vram_benches);
 
 #[cfg(not(feature = "cuda"))]
-criterion_main!(benches);
+criterion_main!(benches, allocator_bakeoff);
