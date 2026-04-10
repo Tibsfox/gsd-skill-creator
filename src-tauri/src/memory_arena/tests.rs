@@ -6238,3 +6238,48 @@ fn sweep_three_tier_cascade() {
     // Blob unchanged.
     assert_eq!(set.pool(TierKind::Blob).unwrap().len(), 0);
 }
+
+// =========================================================================
+// M6 Plan 01 — VramContext + device_info
+// =========================================================================
+
+#[cfg(feature = "cuda")]
+mod m6_vram_context {
+    use crate::memory_arena::vram::VramContext;
+    use std::sync::Arc;
+
+    #[test]
+    fn vram_context_new_device_0() {
+        let ctx = VramContext::new(0).expect("should init CUDA device 0");
+        let _ = ctx.device();
+    }
+
+    #[test]
+    fn vram_context_device_info_has_name() {
+        let ctx = VramContext::new(0).unwrap();
+        let info = ctx.device_info().unwrap();
+        assert!(!info.name.is_empty(), "device name should be non-empty");
+    }
+
+    #[test]
+    fn vram_context_device_info_has_vram() {
+        let ctx = VramContext::new(0).unwrap();
+        let info = ctx.device_info().unwrap();
+        assert!(info.total_bytes > 0, "total VRAM should be > 0");
+        assert!(info.free_bytes > 0, "free VRAM should be > 0");
+    }
+
+    #[test]
+    fn vram_context_alloc_and_size() {
+        let ctx = VramContext::new(0).unwrap();
+        let alloc = ctx.alloc(1024).expect("should alloc 1024 bytes on device");
+        assert_eq!(alloc.size_bytes(), 1024);
+    }
+
+    #[test]
+    fn vram_context_alloc_and_drop() {
+        let ctx = VramContext::new(0).unwrap();
+        let alloc = ctx.alloc(1024).unwrap();
+        drop(alloc); // should not panic
+    }
+}
