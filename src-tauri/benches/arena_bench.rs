@@ -724,6 +724,264 @@ fn bench_hysteresis(c: &mut Criterion) {
     group.finish();
 }
 
+// ===== bench: promote_crossfade (M4 Plan 05) =========================
+
+fn bench_promote_crossfade(c: &mut Criterion) {
+    let mut group = c.benchmark_group("promote_crossfade");
+    group.measurement_time(Duration::from_secs(5));
+
+    // ----- begin_promote: 1 KiB payload (small slots) ------------------
+    group.throughput(Throughput::Bytes(1024));
+    group.bench_function("begin_1kib", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let mut set = two_pool_set(tmp.path(), 4, 4 * 1024);
+                let source = set
+                    .pool_mut(TierKind::Warm)
+                    .expect("warm")
+                    .alloc(vec![0xAB; 1024])
+                    .expect("alloc source");
+                (set, source, tmp)
+            },
+            |(mut set, source, _tmp)| {
+                let handle = set
+                    .begin_promote(TierKind::Warm, black_box(source), TierKind::Hot)
+                    .expect("begin");
+                black_box(handle);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- begin_promote: 1 MiB payload (large slots) ------------------
+    group.throughput(Throughput::Bytes(1024 * 1024));
+    group.bench_function("begin_1mib", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let mut set = two_pool_set(tmp.path(), 4, 2 * 1024 * 1024);
+                let source = set
+                    .pool_mut(TierKind::Warm)
+                    .expect("warm")
+                    .alloc(vec![0xCD; 1024 * 1024])
+                    .expect("alloc source");
+                (set, source, tmp)
+            },
+            |(mut set, source, _tmp)| {
+                let handle = set
+                    .begin_promote(TierKind::Warm, black_box(source), TierKind::Hot)
+                    .expect("begin");
+                black_box(handle);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- complete_promote: 1 KiB ------------------------------------
+    group.throughput(Throughput::Bytes(1024));
+    group.bench_function("complete_1kib", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let mut set = two_pool_set(tmp.path(), 4, 4 * 1024);
+                let source = set
+                    .pool_mut(TierKind::Warm)
+                    .expect("warm")
+                    .alloc(vec![0xEF; 1024])
+                    .expect("alloc source");
+                let handle = set
+                    .begin_promote(TierKind::Warm, source, TierKind::Hot)
+                    .expect("begin");
+                (set, handle, tmp)
+            },
+            |(mut set, handle, _tmp)| {
+                let canonical = set
+                    .complete_promote(black_box(handle))
+                    .expect("complete");
+                black_box(canonical);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- complete_promote: 1 MiB ------------------------------------
+    group.throughput(Throughput::Bytes(1024 * 1024));
+    group.bench_function("complete_1mib", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let mut set = two_pool_set(tmp.path(), 4, 2 * 1024 * 1024);
+                let source = set
+                    .pool_mut(TierKind::Warm)
+                    .expect("warm")
+                    .alloc(vec![0x12; 1024 * 1024])
+                    .expect("alloc source");
+                let handle = set
+                    .begin_promote(TierKind::Warm, source, TierKind::Hot)
+                    .expect("begin");
+                (set, handle, tmp)
+            },
+            |(mut set, handle, _tmp)| {
+                let canonical = set
+                    .complete_promote(black_box(handle))
+                    .expect("complete");
+                black_box(canonical);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- end-to-end: begin + complete, 1 KiB -------------------------
+    group.throughput(Throughput::Bytes(1024));
+    group.bench_function("begin_complete_1kib", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let mut set = two_pool_set(tmp.path(), 4, 4 * 1024);
+                let source = set
+                    .pool_mut(TierKind::Warm)
+                    .expect("warm")
+                    .alloc(vec![0x34; 1024])
+                    .expect("alloc source");
+                (set, source, tmp)
+            },
+            |(mut set, source, _tmp)| {
+                let handle = set
+                    .begin_promote(TierKind::Warm, black_box(source), TierKind::Hot)
+                    .expect("begin");
+                let canonical = set.complete_promote(handle).expect("complete");
+                black_box(canonical);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    group.finish();
+}
+
+// ===== bench: promote_hysteresis (M4 Plan 05) ========================
+
+fn bench_promote_hysteresis(c: &mut Criterion) {
+    let mut group = c.benchmark_group("promote_hysteresis");
+    group.measurement_time(Duration::from_secs(5));
+
+    // Bench the promote cooldown check path. Alloc a Warm chunk with
+    // promote_cooldown_ns set, then begin_promote. The chunk has
+    // last_promote_ns=0 so the check passes — we measure the overhead
+    // of the cooldown code path itself (read + compare).
+    group.bench_function("cooldown_check_1k", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let hot_spec = PoolSpec {
+                    tier: TierKind::Hot,
+                    chunk_size: ArenaConfig::test().chunk_size,
+                    num_slots: 4,
+                    policy: unlimited_policy(),
+                };
+                let warm_spec = PoolSpec {
+                    tier: TierKind::Warm,
+                    chunk_size: ArenaConfig::test().chunk_size,
+                    num_slots: 4,
+                    policy: TierPolicy {
+                        max_chunks: 0,
+                        eviction: EvictionKind::Lru,
+                        promote_after_hits: 0,
+                        demote_after_idle_ns: 0,
+                        demote_cooldown_ns: 0,
+                        promote_cooldown_ns: 1_000_000_000,
+                    },
+                };
+                let mut set = ArenaSet::create(
+                    ArenaSetConfig::new(tmp.path())
+                        .with_pool(hot_spec)
+                        .with_pool(warm_spec),
+                )
+                .expect("create");
+                let source = set
+                    .pool_mut(TierKind::Warm)
+                    .expect("warm")
+                    .alloc(vec![0x56; 1024])
+                    .expect("alloc");
+                (set, source, tmp)
+            },
+            |(mut set, source, _tmp)| {
+                let handle = set
+                    .begin_promote(TierKind::Warm, black_box(source), TierKind::Hot)
+                    .expect("begin");
+                black_box(handle);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    group.finish();
+}
+
+// ===== bench: orphan_recovery (M4 Plan 05) ===========================
+
+fn bench_orphan_recovery(c: &mut Criterion) {
+    let mut group = c.benchmark_group("orphan_recovery");
+    group.measurement_time(Duration::from_secs(10));
+    group.sample_size(20);
+
+    // sweep_100_fading: open_lazy with 100 FadingOut chunks.
+    group.bench_function("sweep_100_fading", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                {
+                    let mut set = two_pool_set(tmp.path(), 200, 4 * 1024);
+                    for i in 0..100u32 {
+                        let source = set
+                            .pool_mut(TierKind::Hot)
+                            .expect("hot")
+                            .alloc(vec![i as u8; 1024])
+                            .expect("alloc");
+                        set.begin_demote(TierKind::Hot, source, TierKind::Warm)
+                            .expect("begin_demote");
+                    }
+                    set.flush().expect("flush");
+                }
+                tmp
+            },
+            |tmp| {
+                let set = ArenaSet::open_lazy(tmp.path()).expect("open_lazy");
+                black_box(set);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // sweep_100_clean: open_lazy with 100 Resident chunks (baseline).
+    group.bench_function("sweep_100_clean", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                {
+                    let mut set = two_pool_set(tmp.path(), 200, 4 * 1024);
+                    for i in 0..100u32 {
+                        set.pool_mut(TierKind::Hot)
+                            .expect("hot")
+                            .alloc(vec![i as u8; 1024])
+                            .expect("alloc");
+                    }
+                    set.flush().expect("flush");
+                }
+                tmp
+            },
+            |tmp| {
+                let set = ArenaSet::open_lazy(tmp.path()).expect("open_lazy");
+                black_box(set);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    group.finish();
+}
+
 // ===== entry =======================================================
 
 criterion_group!(
@@ -738,5 +996,8 @@ criterion_group!(
     bench_journal,
     bench_demote_crossfade,
     bench_hysteresis,
+    bench_promote_crossfade,
+    bench_promote_hysteresis,
+    bench_orphan_recovery,
 );
 criterion_main!(benches);
