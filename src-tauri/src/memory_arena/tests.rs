@@ -4442,3 +4442,170 @@ mod m3_hysteresis {
         assert_eq!(hdr.last_demote_completed_at_ns, 0);
     }
 }
+
+// ============================================================================
+// M4 — Plan 01: last_promote_completed_at_ns header + promote_cooldown_ns
+// ============================================================================
+
+#[cfg(test)]
+mod m4_promote_header_and_policy {
+    use crate::memory_arena::chunk::{read_header_from, write_header_into};
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, ChunkHeader, ChunkId, TierKind, HEADER_SIZE};
+    use tempfile::tempdir;
+
+    /// Round-trip: a ChunkHeader with a non-zero last_promote_completed_at_ns
+    /// survives write_header_into -> read_header_from.
+    #[test]
+    fn promote_header_roundtrip() {
+        let mut hdr = ChunkHeader::new(ChunkId::new(42), TierKind::Warm, 128);
+        hdr.last_promote_completed_at_ns = 1_234_567_890;
+
+        let mut buf = [0u8; HEADER_SIZE];
+        write_header_into(&hdr, &mut buf);
+        let parsed = read_header_from(&buf).expect("parse should succeed");
+        assert_eq!(parsed.last_promote_completed_at_ns, 1_234_567_890);
+    }
+
+    /// Backward compat: M1/M2/M3 chunks (bytes 80..88 all zero) parse with
+    /// last_promote_completed_at_ns == 0.
+    #[test]
+    fn promote_header_backward_compat() {
+        let hdr = ChunkHeader::new(ChunkId::new(7), TierKind::Hot, 64);
+        let mut buf = [0u8; HEADER_SIZE];
+        write_header_into(&hdr, &mut buf);
+        // Verify bytes 80..88 are zero (simulating an M3 chunk).
+        assert!(buf[80..88].iter().all(|&b| b == 0));
+        let parsed = read_header_from(&buf).expect("parse should succeed");
+        assert_eq!(parsed.last_promote_completed_at_ns, 0);
+    }
+
+    /// TierPolicy with promote_cooldown_ns round-trips through JSON.
+    #[test]
+    fn promote_cooldown_policy_serde() {
+        let policy = TierPolicy {
+            max_chunks: 10,
+            eviction: EvictionKind::Lru,
+            promote_after_hits: 5,
+            demote_after_idle_ns: 1000,
+            demote_cooldown_ns: 500,
+            promote_cooldown_ns: 42,
+        };
+        let json = serde_json::to_string(&policy).expect("serialize");
+        let parsed: TierPolicy = serde_json::from_str(&json).expect("deserialize");
+        assert_eq!(parsed.promote_cooldown_ns, 42);
+    }
+
+    /// A manifest.json that omits promote_cooldown_ns entirely deserializes
+    /// with default 0 (backward compat with M3 manifests).
+    #[test]
+    fn promote_cooldown_policy_default_compat() {
+        let legacy = r#"{
+            "max_chunks": 64,
+            "eviction": "Lru",
+            "promote_after_hits": 4,
+            "demote_after_idle_ns": 10000000000,
+            "demote_cooldown_ns": 0
+        }"#;
+        let parsed: TierPolicy = serde_json::from_str(legacy)
+            .expect("legacy TierPolicy JSON must deserialize");
+        assert_eq!(parsed.promote_cooldown_ns, 0);
+    }
+
+    /// Arena::read_last_promote_ns returns 0 for a fresh chunk, and returns
+    /// the written value after Arena::write_last_promote_ns.
+    #[test]
+    fn arena_read_write_last_promote_ns() {
+        let dir = tempdir().unwrap();
+        let spec = PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
+            },
+        };
+        let mut set = ArenaSet::create(
+            ArenaSetConfig::new(dir.path()).with_pool(spec),
+        )
+        .expect("create");
+        let id = set
+            .pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(vec![0xAA; 64])
+            .unwrap();
+
+        // Fresh chunk: last_promote_ns == 0.
+        let ts = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .read_last_promote_ns(id)
+            .unwrap();
+        assert_eq!(ts, 0);
+
+        // Write a timestamp and read it back.
+        set.pool_mut(TierKind::Hot)
+            .unwrap()
+            .arena_mut()
+            .write_last_promote_ns(id, 9_876_543_210)
+            .unwrap();
+        let ts2 = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .read_last_promote_ns(id)
+            .unwrap();
+        assert_eq!(ts2, 9_876_543_210);
+    }
+
+    /// The promote timestamp survives a get_chunk round-trip (the header
+    /// field is present in the deserialized ChunkHeader).
+    #[test]
+    fn arena_promote_ns_survives_get_chunk() {
+        let dir = tempdir().unwrap();
+        let spec = PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 4,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
+            },
+        };
+        let mut set = ArenaSet::create(
+            ArenaSetConfig::new(dir.path()).with_pool(spec),
+        )
+        .expect("create");
+        let id = set
+            .pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(vec![0xBB; 64])
+            .unwrap();
+
+        set.pool_mut(TierKind::Hot)
+            .unwrap()
+            .arena_mut()
+            .write_last_promote_ns(id, 5_555_555_555)
+            .unwrap();
+
+        let chunk = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(id)
+            .unwrap();
+        assert_eq!(chunk.header().last_promote_completed_at_ns, 5_555_555_555);
+    }
+}
