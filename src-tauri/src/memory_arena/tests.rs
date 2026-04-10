@@ -3796,3 +3796,312 @@ mod m3_begin_demote {
         assert_eq!(h, h2);
     }
 }
+
+// ============================================================================
+// M3 — Plan 03: complete_demote + abort_demote + state-aware read path
+// ============================================================================
+
+#[cfg(test)]
+mod m3_complete_abort_demote {
+    use crate::memory_arena::error::ArenaError;
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, ChunkState, TierKind};
+    use tempfile::tempdir;
+
+    fn unlimited_spec(tier: TierKind, num_slots: usize) -> PoolSpec {
+        PoolSpec {
+            tier,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+            },
+        }
+    }
+
+    fn two_pool_set(root: &std::path::Path) -> ArenaSet {
+        ArenaSet::create(
+            ArenaSetConfig::new(root)
+                .with_pool(unlimited_spec(TierKind::Hot, 8))
+                .with_pool(unlimited_spec(TierKind::Warm, 8)),
+        )
+        .expect("two-pool ArenaSet should build")
+    }
+
+    fn alloc_hot(set: &mut ArenaSet, payload: &[u8]) -> ChunkId {
+        set.pool_mut(TierKind::Hot)
+            .expect("Hot pool")
+            .alloc(payload.to_vec())
+            .expect("alloc")
+    }
+
+    #[test]
+    fn complete_demote_frees_source_and_returns_target() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"complete me");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        let canonical = set.complete_demote(handle).expect("complete ok");
+        assert_eq!(canonical, handle.target);
+
+        // Source is freed — no longer readable from the Hot pool.
+        assert!(set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(source_id)
+            .is_err());
+
+        // Target still readable with the right payload.
+        let target_chunk = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .get_chunk(handle.target)
+            .unwrap();
+        assert_eq!(target_chunk.payload(), b"complete me");
+    }
+
+    #[test]
+    fn complete_demote_twice_errors() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"double complete");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+        set.complete_demote(handle).unwrap();
+
+        let err = set.complete_demote(handle).unwrap_err();
+        assert!(
+            matches!(err, ArenaError::UnknownCrossfade { .. }),
+            "expected UnknownCrossfade, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn abort_demote_frees_target_and_restores_source_state() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"abort me");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        set.abort_demote(handle).expect("abort ok");
+
+        // Source still in Hot pool, state restored to Resident.
+        let source_state = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .chunk_state(source_id)
+            .unwrap();
+        assert_eq!(source_state, ChunkState::Resident);
+        let source_chunk = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(source_id)
+            .unwrap();
+        assert_eq!(source_chunk.payload(), b"abort me");
+
+        // Target freed.
+        assert!(set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .get_chunk(handle.target)
+            .is_err());
+    }
+
+    #[test]
+    fn abort_demote_twice_errors() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"double abort");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+        set.abort_demote(handle).unwrap();
+
+        let err = set.abort_demote(handle).unwrap_err();
+        assert!(
+            matches!(err, ArenaError::UnknownCrossfade { .. }),
+            "expected UnknownCrossfade, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn abort_then_complete_errors() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"abort then complete");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+        set.abort_demote(handle).unwrap();
+
+        let err = set.complete_demote(handle).unwrap_err();
+        assert!(
+            matches!(err, ArenaError::UnknownCrossfade { .. }),
+            "expected UnknownCrossfade, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn complete_then_abort_errors() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"complete then abort");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+        set.complete_demote(handle).unwrap();
+
+        let err = set.abort_demote(handle).unwrap_err();
+        assert!(
+            matches!(err, ArenaError::UnknownCrossfade { .. }),
+            "expected UnknownCrossfade, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn reading_fading_source_returns_source_payload_unchanged() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"source payload");
+        set.begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        let source_chunk = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(source_id)
+            .unwrap();
+        assert_eq!(source_chunk.payload(), b"source payload");
+        assert_eq!(source_chunk.header().state, ChunkState::FadingOut);
+    }
+
+    #[test]
+    fn reading_fading_target_returns_target_payload_unchanged() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"target read");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        let target_chunk = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .get_chunk(handle.target)
+            .unwrap();
+        assert_eq!(target_chunk.payload(), b"target read");
+        assert_eq!(target_chunk.header().state, ChunkState::Resident);
+    }
+
+    #[test]
+    fn validate_chunk_works_on_fading_source() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"validate source");
+        set.begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        set.pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .validate_chunk(source_id)
+            .expect("validate_chunk should succeed on fading source");
+    }
+
+    #[test]
+    fn validate_chunk_works_on_fading_target() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"validate target");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        set.pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .validate_chunk(handle.target)
+            .expect("validate_chunk should succeed on fading target");
+    }
+
+    #[test]
+    fn complete_demote_source_pool_len_drops_by_one() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"len drop");
+        let hot_before = set.pool(TierKind::Hot).unwrap().len();
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+        // Pre-complete: Hot still has the source, Warm has the target.
+        assert_eq!(set.pool(TierKind::Hot).unwrap().len(), hot_before);
+        set.complete_demote(handle).unwrap();
+        // Post-complete: Hot is down by 1, Warm still has the target.
+        assert_eq!(set.pool(TierKind::Hot).unwrap().len(), hot_before - 1);
+        assert_eq!(set.pool(TierKind::Warm).unwrap().len(), 1);
+    }
+
+    #[test]
+    fn abort_demote_target_pool_len_drops_by_one() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"abort len");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+        assert_eq!(set.pool(TierKind::Warm).unwrap().len(), 1);
+        set.abort_demote(handle).unwrap();
+        assert_eq!(set.pool(TierKind::Warm).unwrap().len(), 0);
+        // Source still registered in Hot.
+        assert_eq!(set.pool(TierKind::Hot).unwrap().len(), 1);
+    }
+
+    #[test]
+    fn complete_demote_rejects_tampered_state() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"tampered");
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        // Simulate tampering: flip the state byte back to Resident via a
+        // public-test-only hook. If `mark_state` isn't reachable, a caller
+        // could also use raw storage access, but our Arena::mark_state is
+        // pub(crate) so it IS reachable from within this crate's tests.
+        set.pool_mut(TierKind::Hot)
+            .unwrap()
+            .arena_mut()
+            .mark_state(source_id, ChunkState::Resident)
+            .unwrap();
+
+        let err = set.complete_demote(handle).unwrap_err();
+        assert!(
+            matches!(err, ArenaError::CrossfadeStateMismatch { .. }),
+            "expected CrossfadeStateMismatch, got {:?}",
+            err
+        );
+    }
+}
