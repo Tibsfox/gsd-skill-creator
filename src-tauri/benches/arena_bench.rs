@@ -982,6 +982,237 @@ fn bench_orphan_recovery(c: &mut Criterion) {
     group.finish();
 }
 
+// ===== bench: policy_sweep =========================================
+
+/// Build a Hot+Warm ArenaSet with configurable policies for sweep benches.
+fn sweep_set(
+    root: &std::path::Path,
+    num_slots: usize,
+    hot_policy: TierPolicy,
+    warm_policy: TierPolicy,
+) -> ArenaSet {
+    let slot_size = ArenaConfig::test().chunk_size;
+    ArenaSet::create(
+        ArenaSetConfig::new(root)
+            .with_pool(PoolSpec {
+                tier: TierKind::Hot,
+                chunk_size: slot_size,
+                num_slots,
+                policy: hot_policy,
+            })
+            .with_pool(PoolSpec {
+                tier: TierKind::Warm,
+                chunk_size: slot_size,
+                num_slots,
+                policy: warm_policy,
+            }),
+    )
+    .expect("sweep ArenaSet create")
+}
+
+fn bench_policy_sweep(c: &mut Criterion) {
+    let mut group = c.benchmark_group("policy_sweep");
+    group.measurement_time(Duration::from_secs(10));
+
+    // ----- sweep_100_idle: 100 Hot chunks all idle → 100 demotes -----
+    group.throughput(Throughput::Elements(100));
+    group.bench_function("sweep_100_idle", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let hot_policy = TierPolicy {
+                    max_chunks: 0,
+                    eviction: EvictionKind::Lru,
+                    promote_after_hits: 0,
+                    demote_after_idle_ns: 1,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                };
+                let warm_policy = TierPolicy {
+                    max_chunks: 0,
+                    eviction: EvictionKind::Lru,
+                    promote_after_hits: 0,
+                    demote_after_idle_ns: 0,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                };
+                let mut set = sweep_set(tmp.path(), 200, hot_policy, warm_policy);
+                for i in 0..100u8 {
+                    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![i; 64]).unwrap();
+                }
+                fn future() -> u64 { u64::MAX / 2 }
+                set.set_now_ns_for_test(future);
+                (set, tmp)
+            },
+            |(mut set, _tmp)| {
+                let report = set.run_policy_sweep();
+                black_box(report);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- sweep_100_hot: 100 Warm chunks all above threshold → 100 promotes
+    group.throughput(Throughput::Elements(100));
+    group.bench_function("sweep_100_hot", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let hot_policy = TierPolicy {
+                    max_chunks: 0,
+                    eviction: EvictionKind::Lru,
+                    promote_after_hits: 0,
+                    demote_after_idle_ns: 0,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                };
+                let warm_policy = TierPolicy {
+                    max_chunks: 0,
+                    eviction: EvictionKind::Lru,
+                    promote_after_hits: 1,
+                    demote_after_idle_ns: 0,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                };
+                let mut set = sweep_set(tmp.path(), 200, hot_policy, warm_policy);
+                for i in 0..100u8 {
+                    let id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![i; 64]).unwrap();
+                    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(id).unwrap();
+                }
+                (set, tmp)
+            },
+            |(mut set, _tmp)| {
+                let report = set.run_policy_sweep();
+                black_box(report);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- sweep_100_mixed: 50 idle Hot + 50 hot Warm ----------------
+    group.throughput(Throughput::Elements(100));
+    group.bench_function("sweep_100_mixed", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let hot_policy = TierPolicy {
+                    max_chunks: 0,
+                    eviction: EvictionKind::Lru,
+                    promote_after_hits: 0,
+                    demote_after_idle_ns: 1,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                };
+                let warm_policy = TierPolicy {
+                    max_chunks: 0,
+                    eviction: EvictionKind::Lru,
+                    promote_after_hits: 1,
+                    demote_after_idle_ns: 0,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                };
+                let mut set = sweep_set(tmp.path(), 200, hot_policy, warm_policy);
+                for i in 0..50u8 {
+                    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![i; 64]).unwrap();
+                }
+                for i in 0..50u8 {
+                    let id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![i + 50; 64]).unwrap();
+                    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(id).unwrap();
+                }
+                fn future() -> u64 { u64::MAX / 2 }
+                set.set_now_ns_for_test(future);
+                (set, tmp)
+            },
+            |(mut set, _tmp)| {
+                let report = set.run_policy_sweep();
+                black_box(report);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- sweep_100_noop: 100 chunks, none meeting thresholds -------
+    group.throughput(Throughput::Elements(100));
+    group.bench_function("sweep_100_noop", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                // High thresholds that won't be met.
+                let hot_policy = TierPolicy {
+                    max_chunks: 0,
+                    eviction: EvictionKind::Lru,
+                    promote_after_hits: 0,
+                    demote_after_idle_ns: u64::MAX,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                };
+                let warm_policy = TierPolicy {
+                    max_chunks: 0,
+                    eviction: EvictionKind::Lru,
+                    promote_after_hits: u32::MAX,
+                    demote_after_idle_ns: u64::MAX,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                };
+                let mut set = sweep_set(tmp.path(), 200, hot_policy, warm_policy);
+                for i in 0..50u8 {
+                    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![i; 64]).unwrap();
+                }
+                for i in 0..50u8 {
+                    set.pool_mut(TierKind::Warm).unwrap().alloc(vec![i + 50; 64]).unwrap();
+                }
+                (set, tmp)
+            },
+            |(mut set, _tmp)| {
+                let report = set.run_policy_sweep();
+                black_box(report);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // ----- sweep_with_eviction: target pool full, evict + promote ----
+    group.throughput(Throughput::Elements(1));
+    group.bench_function("sweep_with_eviction", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                // Hot limited to 1 slot — forces eviction on promote.
+                let hot_policy = TierPolicy {
+                    max_chunks: 1,
+                    eviction: EvictionKind::Lru,
+                    promote_after_hits: 0,
+                    demote_after_idle_ns: 0,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                };
+                let warm_policy = TierPolicy {
+                    max_chunks: 0,
+                    eviction: EvictionKind::Lru,
+                    promote_after_hits: 1,
+                    demote_after_idle_ns: 0,
+                    demote_cooldown_ns: 0,
+                    promote_cooldown_ns: 0,
+                };
+                let mut set = sweep_set(tmp.path(), 8, hot_policy, warm_policy);
+                // Fill Hot to capacity.
+                set.pool_mut(TierKind::Hot).unwrap().alloc(vec![0u8; 64]).unwrap();
+                // Warm chunk above promote threshold.
+                let id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![1u8; 64]).unwrap();
+                set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(id).unwrap();
+                (set, tmp)
+            },
+            |(mut set, _tmp)| {
+                let report = set.run_policy_sweep();
+                black_box(report);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    group.finish();
+}
+
 // ===== entry =======================================================
 
 criterion_group!(
@@ -999,5 +1230,6 @@ criterion_group!(
     bench_promote_crossfade,
     bench_promote_hysteresis,
     bench_orphan_recovery,
+    bench_policy_sweep,
 );
 criterion_main!(benches);
