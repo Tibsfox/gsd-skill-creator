@@ -33,6 +33,11 @@ use crate::memory_arena::types::{
     ArenaConfig, ChunkId, ChunkState, SweepReport, TierKind, MAX_CHUNK_SIZE, MIN_CHUNK_SIZE,
 };
 
+#[cfg(feature = "cuda")]
+use std::sync::Arc;
+#[cfg(feature = "cuda")]
+use crate::memory_arena::vram::{VramContext, VramPool};
+
 /// Handle returned by `ArenaSet::begin_demote`. Callers pass it to
 /// `complete_demote` or `abort_demote` to finalize or reverse the crossfade.
 ///
@@ -306,6 +311,8 @@ pub struct PoolSpec {
 pub struct ArenaSetConfig {
     root: PathBuf,
     pools: Vec<PoolSpec>,
+    #[cfg(feature = "cuda")]
+    vram_context: Option<Arc<VramContext>>,
 }
 
 impl ArenaSetConfig {
@@ -313,11 +320,20 @@ impl ArenaSetConfig {
         Self {
             root: root.into(),
             pools: Vec::new(),
+            #[cfg(feature = "cuda")]
+            vram_context: None,
         }
     }
 
     pub fn with_pool(mut self, spec: PoolSpec) -> Self {
         self.pools.push(spec);
+        self
+    }
+
+    /// Attach a CUDA context for VRAM-backed Vector tier pools.
+    #[cfg(feature = "cuda")]
+    pub fn with_vram_context(mut self, ctx: Arc<VramContext>) -> Self {
+        self.vram_context = Some(ctx);
         self
     }
 
@@ -385,6 +401,18 @@ pub struct ArenaSet {
     /// so hysteresis timing can be asserted deterministically without
     /// wall-clock sleeps.
     now_ns: fn() -> u64,
+    /// VRAM pool for Vector tier (device memory). Only present when a
+    /// VramContext was provided at creation time AND a Vector pool spec
+    /// exists. VRAM crossfades route through this pool instead of the
+    /// mmap-backed TierPool for the Vector tier.
+    #[cfg(feature = "cuda")]
+    vram_pool: Option<VramPool>,
+    /// Tracks which in-flight crossfades involve VRAM (source or target
+    /// is the VramPool). Keyed by (source_tier, source_id) — same key
+    /// space as crossfade_registry. Used by complete/abort to know
+    /// whether to free from VramPool vs TierPool.
+    #[cfg(feature = "cuda")]
+    vram_crossfades: std::collections::HashSet<(TierKind, ChunkId)>,
 }
 
 /// Default clock: unix nanoseconds from `SystemTime`. Defined as a free
@@ -444,12 +472,41 @@ impl ArenaSet {
         };
         write_manifest_atomic(&manifest_path, &manifest)?;
 
+        // Build VRAM pool if a VramContext was provided and a Vector pool
+        // spec exists. The Vector TierPool is still created above (for
+        // manifest compat) but the VramPool is the actual backing store.
+        #[cfg(feature = "cuda")]
+        let vram_pool = {
+            if let Some(ctx) = &config.vram_context {
+                config
+                    .pools
+                    .iter()
+                    .find(|s| s.tier == TierKind::Vector)
+                    .map(|spec| {
+                        VramPool::new(
+                            ctx.clone(),
+                            spec.tier,
+                            spec.chunk_size,
+                            spec.num_slots,
+                            spec.policy,
+                        )
+                    })
+                    .transpose()?
+            } else {
+                None
+            }
+        };
+
         Ok(Self {
             root: config.root,
             pools,
             manifest,
             crossfade_registry: CrossfadeRegistry::new(),
             now_ns: real_now_ns,
+            #[cfg(feature = "cuda")]
+            vram_pool,
+            #[cfg(feature = "cuda")]
+            vram_crossfades: std::collections::HashSet::new(),
         })
     }
 
@@ -543,6 +600,13 @@ impl ArenaSet {
             manifest,
             crossfade_registry: CrossfadeRegistry::new(),
             now_ns: real_now_ns,
+            // VRAM pools are not persisted — they must be re-created
+            // with a fresh VramContext after process restart. VRAM is
+            // volatile by definition (see MISSION.md non-goals).
+            #[cfg(feature = "cuda")]
+            vram_pool: None,
+            #[cfg(feature = "cuda")]
+            vram_crossfades: std::collections::HashSet::new(),
         })
     }
 
@@ -572,6 +636,25 @@ impl ArenaSet {
 
     pub fn tiers(&self) -> impl Iterator<Item = TierKind> + '_ {
         self.pools.keys().copied()
+    }
+
+    /// Access the VRAM pool, if one was configured.
+    #[cfg(feature = "cuda")]
+    pub fn vram_pool(&self) -> Option<&VramPool> {
+        self.vram_pool.as_ref()
+    }
+
+    /// Mutable access to the VRAM pool, if one was configured.
+    #[cfg(feature = "cuda")]
+    pub fn vram_pool_mut(&mut self) -> Option<&mut VramPool> {
+        self.vram_pool.as_mut()
+    }
+
+    /// Returns true if a VRAM pool is configured and the given tier is
+    /// the Vector tier (meaning it should route through VRAM).
+    #[cfg(feature = "cuda")]
+    fn is_vram_tier(&self, tier: TierKind) -> bool {
+        tier == TierKind::Vector && self.vram_pool.is_some()
     }
 
     /// Return the next hotter configured tier (by heat_index), or `None`
@@ -644,70 +727,127 @@ impl ArenaSet {
         // Hysteresis cooldown check. The direction selects which policy
         // field (demote_cooldown_ns vs promote_cooldown_ns) and which
         // timestamp (read_last_demote_ns vs read_last_promote_ns) to use.
+        // Skipped for VRAM sources — VramPool has no chunk header timestamps.
         {
-            let source_pool = self
-                .pools
-                .get(&source_tier)
-                .ok_or(ArenaError::UnknownTier(source_tier))?;
-            let (cooldown, last) = match direction {
-                CrossfadeDirection::Demote => (
-                    source_pool.policy().demote_cooldown_ns,
-                    source_pool.arena().read_last_demote_ns(source_id)?,
-                ),
-                CrossfadeDirection::Promote => (
-                    source_pool.policy().promote_cooldown_ns,
-                    source_pool.arena().read_last_promote_ns(source_id)?,
-                ),
-            };
-            if cooldown > 0 && last > 0 {
-                let now = (self.now_ns)();
-                let elapsed = now.saturating_sub(last);
-                if elapsed < cooldown {
-                    return Err(ArenaError::HysteresisCooldown {
-                        chunk_id: source_id.as_u64(),
-                        cooldown_remaining_ns: cooldown - elapsed,
-                    });
+            #[cfg(feature = "cuda")]
+            let skip_hysteresis = self.is_vram_tier(source_tier);
+            #[cfg(not(feature = "cuda"))]
+            let skip_hysteresis = false;
+
+            if !skip_hysteresis {
+                let source_pool = self
+                    .pools
+                    .get(&source_tier)
+                    .ok_or(ArenaError::UnknownTier(source_tier))?;
+                let (cooldown, last) = match direction {
+                    CrossfadeDirection::Demote => (
+                        source_pool.policy().demote_cooldown_ns,
+                        source_pool.arena().read_last_demote_ns(source_id)?,
+                    ),
+                    CrossfadeDirection::Promote => (
+                        source_pool.policy().promote_cooldown_ns,
+                        source_pool.arena().read_last_promote_ns(source_id)?,
+                    ),
+                };
+                if cooldown > 0 && last > 0 {
+                    let now = (self.now_ns)();
+                    let elapsed = now.saturating_sub(last);
+                    if elapsed < cooldown {
+                        return Err(ArenaError::HysteresisCooldown {
+                            chunk_id: source_id.as_u64(),
+                            cooldown_remaining_ns: cooldown - elapsed,
+                        });
+                    }
                 }
             }
         }
 
-        // 1. Snapshot the source chunk's payload. `get_chunk` validates
-        // the checksum, which is the right behavior here — if the source
-        // is corrupt we should refuse to crossfade it.
+        // Determine if either side is VRAM-backed.
+        #[cfg(feature = "cuda")]
+        let source_is_vram = self.is_vram_tier(source_tier);
+        #[cfg(feature = "cuda")]
+        let target_is_vram = self.is_vram_tier(target_tier);
+
+        // 1. Snapshot the source chunk's payload.
+        // RAM source: `get_chunk` validates the checksum.
+        // VRAM source: download from VramPool.
         let payload = {
-            let source_pool = self
-                .pools
-                .get(&source_tier)
-                .ok_or(ArenaError::UnknownTier(source_tier))?;
-            let chunk = source_pool.arena().get_chunk(source_id)?;
-            chunk.payload().to_vec()
+            #[cfg(feature = "cuda")]
+            {
+                if source_is_vram {
+                    self.vram_pool
+                        .as_ref()
+                        .ok_or(ArenaError::UnknownTier(source_tier))?
+                        .get(source_id)?
+                } else {
+                    let source_pool = self
+                        .pools
+                        .get(&source_tier)
+                        .ok_or(ArenaError::UnknownTier(source_tier))?;
+                    let chunk = source_pool.arena().get_chunk(source_id)?;
+                    chunk.payload().to_vec()
+                }
+            }
+            #[cfg(not(feature = "cuda"))]
+            {
+                let source_pool = self
+                    .pools
+                    .get(&source_tier)
+                    .ok_or(ArenaError::UnknownTier(source_tier))?;
+                let chunk = source_pool.arena().get_chunk(source_id)?;
+                chunk.payload().to_vec()
+            }
         };
 
-        // 2. Allocate the target chunk in the target pool. Fresh chunk
-        // starts in `ChunkState::Resident` by default.
+        // 2. Allocate the target chunk.
+        // RAM target: alloc in TierPool.
+        // VRAM target: alloc in VramPool (upload to device).
         let target_id = {
-            let target_pool = self
-                .pools
-                .get_mut(&target_tier)
-                .ok_or(ArenaError::UnknownTier(target_tier))?;
-            target_pool.alloc(payload)?
+            #[cfg(feature = "cuda")]
+            {
+                if target_is_vram {
+                    self.vram_pool
+                        .as_mut()
+                        .ok_or(ArenaError::UnknownTier(target_tier))?
+                        .alloc(&payload)?
+                } else {
+                    let target_pool = self
+                        .pools
+                        .get_mut(&target_tier)
+                        .ok_or(ArenaError::UnknownTier(target_tier))?;
+                    target_pool.alloc(payload)?
+                }
+            }
+            #[cfg(not(feature = "cuda"))]
+            {
+                let target_pool = self
+                    .pools
+                    .get_mut(&target_tier)
+                    .ok_or(ArenaError::UnknownTier(target_tier))?;
+                target_pool.alloc(payload)?
+            }
         };
 
-        // 3. Flip the source chunk's state byte to `FadingOut`. Single
-        // byte write, no checksum recomputation needed (state byte is
-        // outside the checksum window by design).
+        // 3. Flip the source chunk's state byte to `FadingOut`.
+        // VRAM source: no state byte — VramPool doesn't have chunk headers.
         {
-            let source_pool = self
-                .pools
-                .get_mut(&source_tier)
-                .ok_or(ArenaError::UnknownTier(source_tier))?;
-            source_pool
-                .arena_mut()
-                .mark_state(source_id, ChunkState::FadingOut)?;
+            #[cfg(feature = "cuda")]
+            let skip_mark = source_is_vram;
+            #[cfg(not(feature = "cuda"))]
+            let skip_mark = false;
+
+            if !skip_mark {
+                let source_pool = self
+                    .pools
+                    .get_mut(&source_tier)
+                    .ok_or(ArenaError::UnknownTier(source_tier))?;
+                source_pool
+                    .arena_mut()
+                    .mark_state(source_id, ChunkState::FadingOut)?;
+            }
         }
 
-        // 4. Register the handle. Insert is infallible here because we
-        // pre-checked above, but keep the error path for defense in depth.
+        // 4. Register the handle.
         let handle = CrossfadeHandle {
             source: source_id,
             source_tier,
@@ -715,6 +855,12 @@ impl ArenaSet {
             target_tier,
         };
         self.crossfade_registry.insert(handle)?;
+
+        // Track VRAM involvement so complete/abort knows which pool to free.
+        #[cfg(feature = "cuda")]
+        if source_is_vram || target_is_vram {
+            self.vram_crossfades.insert((source_tier, source_id));
+        }
 
         Ok(handle)
     }
@@ -780,57 +926,106 @@ impl ArenaSet {
             });
         }
 
-        // 2. Verify the source is still in FadingOut — guard against
-        // direct byte-level tampering by callers.
-        let source_state = self
-            .pools
-            .get(&handle.source_tier)
-            .ok_or(ArenaError::UnknownTier(handle.source_tier))?
-            .arena()
-            .chunk_state(handle.source)?;
-        if source_state != ChunkState::FadingOut {
-            return Err(ArenaError::CrossfadeStateMismatch {
-                chunk_id: handle.source.as_u64(),
-                expected: ChunkState::FadingOut,
-                found: source_state,
-            });
-        }
+        #[cfg(feature = "cuda")]
+        let is_vram_fade = self
+            .vram_crossfades
+            .contains(&(handle.source_tier, handle.source));
+        #[cfg(feature = "cuda")]
+        let source_is_vram = self.is_vram_tier(handle.source_tier);
+        #[cfg(feature = "cuda")]
+        let target_is_vram = self.is_vram_tier(handle.target_tier);
 
-        // 3. Stamp the target chunk's completion timestamp BEFORE freeing
-        // the source. The direction selects which field to write.
+        // 2. Verify the source is still in FadingOut.
+        // Skipped for VRAM sources — no state byte.
         {
-            let now = (self.now_ns)();
-            let target_pool = self
-                .pools
-                .get_mut(&handle.target_tier)
-                .ok_or(ArenaError::UnknownTier(handle.target_tier))?;
-            match direction {
-                CrossfadeDirection::Demote => {
-                    target_pool
-                        .arena_mut()
-                        .write_last_demote_ns(handle.target, now)?;
-                }
-                CrossfadeDirection::Promote => {
-                    target_pool
-                        .arena_mut()
-                        .write_last_promote_ns(handle.target, now)?;
+            #[cfg(feature = "cuda")]
+            let skip_check = source_is_vram;
+            #[cfg(not(feature = "cuda"))]
+            let skip_check = false;
+
+            if !skip_check {
+                let source_state = self
+                    .pools
+                    .get(&handle.source_tier)
+                    .ok_or(ArenaError::UnknownTier(handle.source_tier))?
+                    .arena()
+                    .chunk_state(handle.source)?;
+                if source_state != ChunkState::FadingOut {
+                    return Err(ArenaError::CrossfadeStateMismatch {
+                        chunk_id: handle.source.as_u64(),
+                        expected: ChunkState::FadingOut,
+                        found: source_state,
+                    });
                 }
             }
         }
 
-        // 4. Free the source chunk via the TierPool free path (which
-        // decrements `allocated_chunks` and zeros the valid region).
+        // 3. Stamp the target chunk's completion timestamp.
+        // Skipped for VRAM targets — no chunk headers.
         {
-            let source_pool = self
-                .pools
-                .get_mut(&handle.source_tier)
-                .ok_or(ArenaError::UnknownTier(handle.source_tier))?;
-            source_pool.free(handle.source)?;
+            #[cfg(feature = "cuda")]
+            let skip_stamp = target_is_vram;
+            #[cfg(not(feature = "cuda"))]
+            let skip_stamp = false;
+
+            if !skip_stamp {
+                let now = (self.now_ns)();
+                let target_pool = self
+                    .pools
+                    .get_mut(&handle.target_tier)
+                    .ok_or(ArenaError::UnknownTier(handle.target_tier))?;
+                match direction {
+                    CrossfadeDirection::Demote => {
+                        target_pool
+                            .arena_mut()
+                            .write_last_demote_ns(handle.target, now)?;
+                    }
+                    CrossfadeDirection::Promote => {
+                        target_pool
+                            .arena_mut()
+                            .write_last_promote_ns(handle.target, now)?;
+                    }
+                }
+            }
         }
 
-        // 5. Deregister. The target is now the canonical chunk.
+        // 4. Free the source chunk.
+        // VRAM source: free from VramPool.
+        // RAM source: free from TierPool.
+        {
+            #[cfg(feature = "cuda")]
+            {
+                if source_is_vram {
+                    self.vram_pool
+                        .as_mut()
+                        .ok_or(ArenaError::UnknownTier(handle.source_tier))?
+                        .free(handle.source)?;
+                } else {
+                    let source_pool = self
+                        .pools
+                        .get_mut(&handle.source_tier)
+                        .ok_or(ArenaError::UnknownTier(handle.source_tier))?;
+                    source_pool.free(handle.source)?;
+                }
+            }
+            #[cfg(not(feature = "cuda"))]
+            {
+                let source_pool = self
+                    .pools
+                    .get_mut(&handle.source_tier)
+                    .ok_or(ArenaError::UnknownTier(handle.source_tier))?;
+                source_pool.free(handle.source)?;
+            }
+        }
+
+        // 5. Deregister.
         self.crossfade_registry
             .remove(handle.source_tier, handle.source);
+        #[cfg(feature = "cuda")]
+        if is_vram_fade {
+            self.vram_crossfades
+                .remove(&(handle.source_tier, handle.source));
+        }
 
         Ok(handle.target)
     }
@@ -852,29 +1047,71 @@ impl ArenaSet {
             });
         }
 
-        // 2. Restore source state to Resident FIRST (crash-safety ordering).
+        #[cfg(feature = "cuda")]
+        let is_vram_fade = self
+            .vram_crossfades
+            .contains(&(handle.source_tier, handle.source));
+        #[cfg(feature = "cuda")]
+        let source_is_vram = self.is_vram_tier(handle.source_tier);
+        #[cfg(feature = "cuda")]
+        let target_is_vram = self.is_vram_tier(handle.target_tier);
+
+        // 2. Restore source state to Resident FIRST.
+        // Skipped for VRAM sources — no state byte.
         {
-            let source_pool = self
-                .pools
-                .get_mut(&handle.source_tier)
-                .ok_or(ArenaError::UnknownTier(handle.source_tier))?;
-            source_pool
-                .arena_mut()
-                .mark_state(handle.source, ChunkState::Resident)?;
+            #[cfg(feature = "cuda")]
+            let skip_restore = source_is_vram;
+            #[cfg(not(feature = "cuda"))]
+            let skip_restore = false;
+
+            if !skip_restore {
+                let source_pool = self
+                    .pools
+                    .get_mut(&handle.source_tier)
+                    .ok_or(ArenaError::UnknownTier(handle.source_tier))?;
+                source_pool
+                    .arena_mut()
+                    .mark_state(handle.source, ChunkState::Resident)?;
+            }
         }
 
         // 3. Free the target chunk.
+        // VRAM target: free from VramPool.
+        // RAM target: free from TierPool.
         {
-            let target_pool = self
-                .pools
-                .get_mut(&handle.target_tier)
-                .ok_or(ArenaError::UnknownTier(handle.target_tier))?;
-            target_pool.free(handle.target)?;
+            #[cfg(feature = "cuda")]
+            {
+                if target_is_vram {
+                    self.vram_pool
+                        .as_mut()
+                        .ok_or(ArenaError::UnknownTier(handle.target_tier))?
+                        .free(handle.target)?;
+                } else {
+                    let target_pool = self
+                        .pools
+                        .get_mut(&handle.target_tier)
+                        .ok_or(ArenaError::UnknownTier(handle.target_tier))?;
+                    target_pool.free(handle.target)?;
+                }
+            }
+            #[cfg(not(feature = "cuda"))]
+            {
+                let target_pool = self
+                    .pools
+                    .get_mut(&handle.target_tier)
+                    .ok_or(ArenaError::UnknownTier(handle.target_tier))?;
+                target_pool.free(handle.target)?;
+            }
         }
 
         // 4. Deregister.
         self.crossfade_registry
             .remove(handle.source_tier, handle.source);
+        #[cfg(feature = "cuda")]
+        if is_vram_fade {
+            self.vram_crossfades
+                .remove(&(handle.source_tier, handle.source));
+        }
 
         Ok(())
     }
