@@ -497,3 +497,126 @@ impl VramPool {
         Ok(())
     }
 }
+
+// =========================================================================
+// GpuTopology — multi-GPU discovery and context creation
+// =========================================================================
+
+/// Multi-GPU topology discovery. Enumerates all CUDA devices and provides
+/// per-device metadata + context creation. Supports heterogeneous multi-GPU
+/// setups (e.g. RTX 4060 Ti + older card).
+pub struct GpuTopology {
+    device_count: usize,
+}
+
+impl GpuTopology {
+    /// Discover available CUDA devices. Returns the topology with device count.
+    pub fn discover() -> ArenaResult<Self> {
+        let count = cudarc::driver::CudaContext::device_count()
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        if count == 0 {
+            return Err(ArenaError::NoGpuAvailable);
+        }
+        Ok(Self {
+            device_count: count as usize,
+        })
+    }
+
+    /// Number of CUDA devices discovered.
+    pub fn device_count(&self) -> usize {
+        self.device_count
+    }
+
+    /// Query metadata for a specific device ordinal.
+    pub fn device_info(&self, ordinal: usize) -> ArenaResult<VramDeviceInfo> {
+        if ordinal >= self.device_count {
+            return Err(ArenaError::CudaError(format!(
+                "device ordinal {} out of range ({})",
+                ordinal, self.device_count
+            )));
+        }
+        let ctx = VramContext::new(ordinal)?;
+        ctx.device_info()
+    }
+
+    /// Create a `VramContext` for a specific device ordinal.
+    pub fn create_context(&self, ordinal: usize) -> ArenaResult<VramContext> {
+        if ordinal >= self.device_count {
+            return Err(ArenaError::CudaError(format!(
+                "device ordinal {} out of range ({})",
+                ordinal, self.device_count
+            )));
+        }
+        VramContext::new(ordinal)
+    }
+}
+
+impl std::fmt::Debug for GpuTopology {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("GpuTopology")
+            .field("device_count", &self.device_count)
+            .finish()
+    }
+}
+
+// =========================================================================
+// KernelHandle — CUDA kernel launch configuration
+// =========================================================================
+
+/// Configuration for a CUDA kernel launch. Wraps the kernel name and
+/// grid/block dimensions. Actual kernel loading and launch execution
+/// require a compiled PTX module — this handle captures the launch
+/// parameters independent of the module.
+///
+/// Usage pattern:
+/// 1. Create a `KernelHandle` with the kernel name and dimensions
+/// 2. Load the PTX module via cudarc
+/// 3. Launch with `CudaFunction::launch` using handle parameters
+#[derive(Debug, Clone)]
+pub struct KernelHandle {
+    name: String,
+    block_size: u32,
+    grid_size: u32,
+}
+
+impl KernelHandle {
+    /// Create a kernel handle with explicit grid and block sizes.
+    pub fn new(name: impl Into<String>, block_size: u32, grid_size: u32) -> Self {
+        Self {
+            name: name.into(),
+            block_size,
+            grid_size,
+        }
+    }
+
+    /// Create a kernel handle that computes grid_size from data length
+    /// and block_size: `grid_size = ceil(data_len / block_size)`.
+    pub fn from_data_len(name: impl Into<String>, data_len: u32, block_size: u32) -> Self {
+        let grid_size = (data_len + block_size - 1) / block_size;
+        Self {
+            name: name.into(),
+            block_size,
+            grid_size,
+        }
+    }
+
+    /// Kernel function name (must match the exported symbol in the PTX).
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    /// Threads per block.
+    pub fn block_size(&self) -> u32 {
+        self.block_size
+    }
+
+    /// Number of blocks in the grid.
+    pub fn grid_size(&self) -> u32 {
+        self.grid_size
+    }
+
+    /// Total thread count: grid_size * block_size.
+    pub fn total_threads(&self) -> u64 {
+        self.grid_size as u64 * self.block_size as u64
+    }
+}

@@ -8216,3 +8216,79 @@ mod m12_pinned_memory_tests {
         assert!(buf.as_slice().is_empty());
     }
 }
+
+// =============================================================================
+// M13 — Multi-GPU support + CUDA kernel launches (cuda feature)
+// =============================================================================
+
+#[cfg(feature = "cuda")]
+mod m13_multi_gpu_tests {
+    use crate::memory_arena::vram::{GpuTopology, VramContext};
+    use std::sync::Arc;
+
+    #[test]
+    fn gpu_topology_discovers_at_least_one_device() {
+        let topo = GpuTopology::discover().expect("discover GPUs");
+        assert!(topo.device_count() >= 1, "should find at least one CUDA device");
+    }
+
+    #[test]
+    fn gpu_topology_device_info_readable() {
+        let topo = GpuTopology::discover().expect("discover");
+        let info = topo.device_info(0).expect("device 0 info");
+        assert!(!info.name.is_empty());
+        assert!(info.total_bytes > 0);
+    }
+
+    #[test]
+    fn gpu_topology_create_context_per_device() {
+        let topo = GpuTopology::discover().expect("discover");
+        for ordinal in 0..topo.device_count() {
+            let ctx = topo.create_context(ordinal);
+            assert!(ctx.is_ok(), "should create context for device {}", ordinal);
+        }
+    }
+
+    #[test]
+    fn multi_gpu_alloc_on_device_0() {
+        let topo = GpuTopology::discover().expect("discover");
+        let ctx = Arc::new(topo.create_context(0).expect("ctx"));
+        let mut alloc = ctx.alloc(256).expect("alloc");
+        ctx.upload(&[42u8; 256], &mut alloc).expect("upload");
+        let mut buf = vec![0u8; 256];
+        ctx.download(&alloc, &mut buf).expect("download");
+        assert_eq!(buf, vec![42u8; 256]);
+    }
+}
+
+#[cfg(feature = "cuda")]
+mod m13_kernel_launch_tests {
+    use crate::memory_arena::vram::{KernelHandle, VramContext};
+    use std::sync::Arc;
+
+    #[test]
+    fn kernel_handle_creation() {
+        let ctx = Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        // KernelHandle wraps a name + launch config. No actual PTX needed
+        // for the handle creation test — just verify the struct is constructible.
+        let handle = KernelHandle::new("test_kernel", 256, 1);
+        assert_eq!(handle.name(), "test_kernel");
+        assert_eq!(handle.block_size(), 256);
+        assert_eq!(handle.grid_size(), 1);
+    }
+
+    #[test]
+    fn kernel_handle_grid_size_from_data_length() {
+        let handle = KernelHandle::from_data_len("process", 1024, 256);
+        // ceil(1024 / 256) = 4 blocks
+        assert_eq!(handle.grid_size(), 4);
+        assert_eq!(handle.block_size(), 256);
+    }
+
+    #[test]
+    fn kernel_handle_grid_size_rounds_up() {
+        let handle = KernelHandle::from_data_len("process", 1000, 256);
+        // ceil(1000 / 256) = 4 blocks
+        assert_eq!(handle.grid_size(), 4);
+    }
+}
