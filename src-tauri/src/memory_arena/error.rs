@@ -88,6 +88,18 @@ pub enum ArenaError {
 
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
+
+    #[cfg(feature = "cuda")]
+    #[error("CUDA error: {0}")]
+    CudaError(String),
+
+    #[cfg(feature = "cuda")]
+    #[error("no GPU available")]
+    NoGpuAvailable,
+
+    #[cfg(feature = "cuda")]
+    #[error("VRAM out of memory: requested {requested} bytes, {available} available")]
+    VramOutOfMemory { requested: usize, available: usize },
 }
 
 pub type ArenaResult<T> = Result<T, ArenaError>;

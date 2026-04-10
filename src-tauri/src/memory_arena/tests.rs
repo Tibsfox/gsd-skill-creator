@@ -6246,12 +6246,11 @@ fn sweep_three_tier_cascade() {
 #[cfg(feature = "cuda")]
 mod m6_vram_context {
     use crate::memory_arena::vram::VramContext;
-    use std::sync::Arc;
 
     #[test]
     fn vram_context_new_device_0() {
         let ctx = VramContext::new(0).expect("should init CUDA device 0");
-        let _ = ctx.device();
+        let _ = ctx.context();
     }
 
     #[test]
