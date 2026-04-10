@@ -37,7 +37,9 @@ pub use pool::{
     ArenaSet, ArenaSetConfig, EvictionKind, Manifest, PoolSpec, TierPolicy, TierPool,
     ARENA_SET_FORMAT_VERSION,
 };
-pub use warm_start::{ColdSource, InMemoryColdSource, WarmStart, WarmStartReport};
+pub use warm_start::{
+    ColdSource, InMemoryColdSource, WarmStart, WarmStartConfig, WarmStartReport, WarmStartStats,
+};
 pub use types::{ArenaConfig, ChunkHeader, ChunkId, TierKind, CHUNK_MAGIC, HEADER_SIZE};
 
 #[cfg(test)]

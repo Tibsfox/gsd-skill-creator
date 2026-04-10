@@ -143,6 +143,15 @@ impl TierPool {
         self.allocated_chunks += 1;
         Ok(())
     }
+
+    /// Override the `allocated_chunks` counter. Used by `ArenaSet::open_lazy`
+    /// to sync the pool's counter with an arena that was pre-populated by
+    /// `Arena::open_lazy` — the lazy walk happens inside `Arena`, below the
+    /// `TierPool` layer, so the pool's counter would otherwise stay at 0
+    /// even though the directory is full.
+    pub(crate) fn set_allocated_chunks(&mut self, count: u32) {
+        self.allocated_chunks = count;
+    }
 }
 
 // =============================================================================
@@ -290,7 +299,34 @@ impl ArenaSet {
     /// Reopen an existing arena set by reading `<root>/manifest.json`.
     /// The per-tier .arena files are reopened via `Arena::new_mmap_file`,
     /// which preserves their byte content across process restarts.
+    ///
+    /// This is the **eager** reopen path — pools come back with empty
+    /// directories; the caller (typically `WarmStart::open_with_config`
+    /// in eager mode) walks each slot and re-registers chunks via
+    /// `reinsert_slot`. For the **lazy** reopen path that pre-populates
+    /// directories via `Arena::open_lazy`, see `ArenaSet::open_lazy`.
     pub fn open(root: impl AsRef<Path>) -> ArenaResult<Self> {
+        Self::open_inner(root, /*lazy=*/ false)
+    }
+
+    /// Reopen an existing arena set using the **lazy** header walk.
+    ///
+    /// Each pool's arena is opened via `Arena::open_lazy`, which walks
+    /// slot headers and pre-populates the directory without touching
+    /// payload bytes. This is the hot path for slice-2 warm-start: it
+    /// turns M1's `warm_start_100k = 1.43 s` eager walk into a header-
+    /// only walk with deferred payload validation.
+    ///
+    /// Structural corruption (bad magic / bad header / oversized
+    /// payload_size) is absorbed into the free stack at the `Arena`
+    /// level and never surfaces as an error. Payload-checksum corruption
+    /// is invisible until a caller invokes `get_chunk` (which
+    /// re-validates) or `validate_chunk` (explicit).
+    pub fn open_lazy(root: impl AsRef<Path>) -> ArenaResult<Self> {
+        Self::open_inner(root, /*lazy=*/ true)
+    }
+
+    fn open_inner(root: impl AsRef<Path>, lazy: bool) -> ArenaResult<Self> {
         let root = root.as_ref().to_path_buf();
         let manifest_path = root.join("manifest.json");
         let manifest_bytes = fs::read(&manifest_path)?;
@@ -307,8 +343,20 @@ impl ArenaSet {
         for spec in &manifest.pools {
             let arena_path = root.join(format!("{}.arena", tier_filename_stem(spec.tier)));
             let arena_config = arena_config_for_spec(spec);
-            let arena = Arena::new_mmap_file(arena_config, spec.num_slots, &arena_path)?;
-            let pool = TierPool::from_arena(spec.tier, arena, spec.policy);
+            let arena = if lazy {
+                Arena::open_lazy(arena_config, spec.num_slots, &arena_path)?
+            } else {
+                Arena::new_mmap_file(arena_config, spec.num_slots, &arena_path)?
+            };
+            let mut pool = TierPool::from_arena(spec.tier, arena, spec.policy);
+            if lazy {
+                // Lazy open pre-populated the arena's directory. Sync the
+                // pool's allocated_chunks counter so `pool.len()` reflects
+                // the reopened state without requiring the caller to walk
+                // again.
+                let count = pool.arena().stats().allocated_slots as u32;
+                pool.set_allocated_chunks(count);
+            }
             pools.insert(spec.tier, pool);
         }
 
