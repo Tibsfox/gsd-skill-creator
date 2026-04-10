@@ -22,6 +22,8 @@ pub mod list;
 pub mod persistence;
 pub mod pool;
 pub mod types;
+#[cfg(feature = "cuda")]
+pub mod vram;
 pub mod warm_start;
 
 pub use arena::{Arena, ArenaStats};
