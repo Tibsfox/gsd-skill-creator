@@ -152,6 +152,40 @@ impl TierPool {
     pub(crate) fn set_allocated_chunks(&mut self, count: u32) {
         self.allocated_chunks = count;
     }
+
+    /// Journal-replay alloc hook. Wraps `Arena::apply_alloc` and updates
+    /// `allocated_chunks` atomically with the arena-level insert, closing
+    /// the slice-2 counter-drift caveat. Idempotent: double-replay of the
+    /// same `chunk_id` is a no-op for both the arena and the counter.
+    ///
+    /// Used by `persistence::replay_into_set`.
+    pub(crate) fn replay_alloc(
+        &mut self,
+        id: ChunkId,
+        chunk_bytes: &[u8],
+    ) -> ArenaResult<()> {
+        let was_present = self.arena.contains(id);
+        self.arena.apply_alloc(id, chunk_bytes)?;
+        if !was_present && self.arena.contains(id) {
+            self.allocated_chunks += 1;
+        }
+        Ok(())
+    }
+
+    /// Journal-replay free hook. Wraps `Arena::apply_free` and updates
+    /// `allocated_chunks` atomically with the arena-level removal.
+    /// Idempotent: freeing a chunk that isn't present is a no-op for both
+    /// the arena and the counter.
+    ///
+    /// Used by `persistence::replay_into_set`.
+    pub(crate) fn replay_free(&mut self, id: ChunkId) -> ArenaResult<()> {
+        let was_present = self.arena.contains(id);
+        self.arena.apply_free(id)?;
+        if was_present && !self.arena.contains(id) {
+            self.allocated_chunks = self.allocated_chunks.saturating_sub(1);
+        }
+        Ok(())
+    }
 }
 
 // =============================================================================
