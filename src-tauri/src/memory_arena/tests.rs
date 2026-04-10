@@ -2335,14 +2335,101 @@ mod warm_start_fault_tests {
             .expect("post-recovery alloc should succeed");
     }
 
-    /// Per Plan 06 deviation note + Plan 05 SUMMARY: per-pool journal wiring
-    /// is deferred to slice 2. This test is intentionally `#[ignore]` and
-    /// will fail to compile its body when journal_path_for is added.
+    /// Re-enabled in memory-arena-m2 Plan 05. Exercises cross-pool journal
+    /// truncation: a partial record in a multi-pool journal stops replay
+    /// at the last intact record without poisoning pools downstream. The
+    /// `replay_into_set` + `append_alloc_for_pool` infrastructure from
+    /// Plan 04 is what makes this test reachable without being a
+    /// placeholder.
     #[test]
-    #[ignore = "journal-truncation behavior deferred to slice 2 — see SUMMARY 05/06"]
     fn warm_start_truncated_journal_stops_cleanly() {
-        // Placeholder: no per-pool journal wiring exists in M1 slice 1.
-        // Re-enable in slice 2 once TierPool gets per-pool JournalWriter.
+        use crate::memory_arena::persistence::{
+            replay_into_set, JournalReader, JournalWriter,
+        };
+        use crate::memory_arena::Chunk;
+
+        let dir = tempdir().unwrap();
+        let journal_path = dir.path().join("cross-pool.journal");
+
+        fn mk(id: u64, tier: TierKind, payload: Vec<u8>) -> Vec<u8> {
+            let mut c = Chunk::new(ChunkId::new(id), tier, payload);
+            c.finalize();
+            c.serialize()
+        }
+
+        // Write 3 Hot allocs + 3 Warm allocs — 6 clean records.
+        let mut writer = JournalWriter::open(&journal_path).unwrap();
+        for i in 1u64..=3 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Hot,
+                    ChunkId::new(i),
+                    &mk(i, TierKind::Hot, vec![(i as u8); 48]),
+                )
+                .unwrap();
+        }
+        for i in 1u64..=3 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Warm,
+                    ChunkId::new(i),
+                    &mk(i, TierKind::Warm, vec![(i as u8 + 20); 48]),
+                )
+                .unwrap();
+        }
+        writer.flush().unwrap();
+        drop(writer);
+
+        // Cut off a chunk of tail bytes — lands mid-record in a Warm op.
+        let mut bytes = std::fs::read(&journal_path).unwrap();
+        assert!(bytes.len() > 60);
+        bytes.truncate(bytes.len() - 32);
+        std::fs::write(&journal_path, &bytes).unwrap();
+
+        // Fresh ArenaSet with Hot + Warm pools. The arena files are new
+        // and empty — replay is the only source of content.
+        let set_root = dir.path().join("arena_set");
+        let mut set = ArenaSet::create(
+            ArenaSetConfig::new(&set_root)
+                .with_pool(unlimited_spec(TierKind::Hot, 8))
+                .with_pool(unlimited_spec(TierKind::Warm, 8)),
+        )
+        .expect("create");
+
+        let reader = JournalReader::open(&journal_path).unwrap();
+        let applied = replay_into_set(&mut set, reader)
+            .expect("truncation should stop cleanly, not error");
+
+        // All 3 Hot ops should have applied cleanly (they come first).
+        let hot_count = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .iter_chunk_ids()
+            .count();
+        assert_eq!(hot_count, 3, "all 3 Hot ops should have landed");
+
+        // Warm should be missing at least one op due to truncation.
+        let warm_count = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .iter_chunk_ids()
+            .count();
+        assert!(
+            warm_count < 3,
+            "expected truncation to drop at least one Warm op, got {}",
+            warm_count
+        );
+        // Total applied = 3 Hot + whatever Warm ops fit before the cut.
+        assert!(applied >= 3);
+
+        // Confirm the arena set is still usable post-replay (not poisoned):
+        // an explicit alloc on the Warm pool still succeeds.
+        set.pool_mut(TierKind::Warm)
+            .unwrap()
+            .alloc(vec![0xEE; 16])
+            .expect("post-replay alloc should succeed");
     }
 }
 
