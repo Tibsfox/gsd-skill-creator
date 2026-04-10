@@ -524,6 +524,80 @@ pub async fn arena_set_list_ids(
 }
 
 // ----------------------------------------------------------------------------
+// CgroupEnforcer state + IPC commands
+// ----------------------------------------------------------------------------
+
+/// Tauri-managed state for the cgroup memory enforcer.
+#[derive(Default)]
+pub struct CgroupState {
+    pub enforcer: Arc<Mutex<Option<crate::memory_arena::CgroupEnforcer>>>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CgroupStateResponse {
+    pub limit_bytes: u64,
+    pub current_bytes: u64,
+    pub swap_limit_bytes: u64,
+    pub headroom_bytes: u64,
+    pub utilization: f64,
+    pub can_grow: bool,
+}
+
+/// Initialize the cgroup enforcer: set memory.max to 8 GiB, disable swap.
+#[tauri::command]
+pub async fn cgroup_init(state: State<'_, CgroupState>) -> Result<CgroupStateResponse, String> {
+    let mut guard = state.enforcer.lock().await;
+    let mut enforcer = crate::memory_arena::CgroupEnforcer::discover()
+        .map_err(|e| e.to_string())?;
+    enforcer.initialize().map_err(|e| e.to_string())?;
+    let mem_state = enforcer.state().map_err(|e| e.to_string())?;
+    let can_grow = enforcer.can_grow();
+    *guard = Some(enforcer);
+    Ok(CgroupStateResponse {
+        limit_bytes: mem_state.limit_bytes,
+        current_bytes: mem_state.current_bytes,
+        swap_limit_bytes: mem_state.swap_limit_bytes,
+        headroom_bytes: mem_state.headroom_bytes,
+        utilization: mem_state.utilization,
+        can_grow,
+    })
+}
+
+/// Query current cgroup memory state.
+#[tauri::command]
+pub async fn cgroup_state(state: State<'_, CgroupState>) -> Result<CgroupStateResponse, String> {
+    let guard = state.enforcer.lock().await;
+    let enforcer = guard.as_ref().ok_or_else(|| "cgroup not initialized".to_string())?;
+    let mem_state = enforcer.state().map_err(|e| e.to_string())?;
+    Ok(CgroupStateResponse {
+        limit_bytes: mem_state.limit_bytes,
+        current_bytes: mem_state.current_bytes,
+        swap_limit_bytes: mem_state.swap_limit_bytes,
+        headroom_bytes: mem_state.headroom_bytes,
+        utilization: mem_state.utilization,
+        can_grow: enforcer.can_grow(),
+    })
+}
+
+/// Grow the cgroup memory limit by one step (4 GiB).
+#[tauri::command]
+pub async fn cgroup_grow(state: State<'_, CgroupState>) -> Result<CgroupStateResponse, String> {
+    let mut guard = state.enforcer.lock().await;
+    let enforcer = guard.as_mut().ok_or_else(|| "cgroup not initialized".to_string())?;
+    enforcer.grow().map_err(|e| e.to_string())?;
+    let mem_state = enforcer.state().map_err(|e| e.to_string())?;
+    Ok(CgroupStateResponse {
+        limit_bytes: mem_state.limit_bytes,
+        current_bytes: mem_state.current_bytes,
+        swap_limit_bytes: mem_state.swap_limit_bytes,
+        headroom_bytes: mem_state.headroom_bytes,
+        utilization: mem_state.utilization,
+        can_grow: enforcer.can_grow(),
+    })
+}
+
+// ----------------------------------------------------------------------------
 // Tests (async, using tempdir)
 // ----------------------------------------------------------------------------
 
