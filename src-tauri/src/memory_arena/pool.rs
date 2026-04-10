@@ -371,6 +371,16 @@ impl std::fmt::Debug for ArenaSet {
     }
 }
 
+/// Internal crossfade direction. Used by the shared
+/// `begin_crossfade_inner` helper to select which cooldown/timestamp
+/// fields to consult for hysteresis. Not a public type — callers use
+/// `begin_demote` / `begin_promote` directly.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum CrossfadeDirection {
+    Demote,
+    Promote,
+}
+
 impl ArenaSet {
     /// Create a fresh arena set at the config's root directory. Writes a
     /// fresh `manifest.json` and creates one `<tier>.arena` file per pool.
@@ -510,33 +520,16 @@ impl ArenaSet {
     }
 
     // =========================================================================
-    // M3 — Demote crossfade primitives
+    // Crossfade primitives (M3 demote + M4 promote via shared helpers)
     // =========================================================================
 
-    /// Begin a demote crossfade: copy the source chunk's payload into a
-    /// fresh chunk in `target_tier`, then mark the source's state byte as
-    /// `FadingOut`. Returns a `CrossfadeHandle` that the caller passes to
-    /// `complete_demote` (to finalize) or `abort_demote` (to reverse).
-    ///
-    /// **Crossfade invariant.** During a fade, both the source and the
-    /// target chunks are independently readable via
-    /// `pool.arena().get_chunk(id)`. Neither read path auto-copies the
-    /// other's bytes. The state byte on the source is advisory metadata
-    /// for callers that want to know a fade is in progress.
-    ///
-    /// **No copy-on-read.** This is a deliberate non-goal — the only copy
-    /// this slice performs is the single payload clone inside this
-    /// method, which happens synchronously before the target alloc.
-    ///
-    /// # Errors
-    /// - `InvalidCrossfadeTarget` if `source_tier == target_tier`.
-    /// - `UnknownTier(t)` if either tier is not configured in this set.
-    /// - `UnknownChunkId(id)` if `source_id` is not allocated in `source_tier`.
-    /// - `AlreadyFading { chunk_id }` if the source is already in an
-    ///   in-flight fade.
-    /// - `PoolFull` if the target pool is out of slots.
-    pub fn begin_demote(
+    /// Shared implementation for both `begin_demote` and `begin_promote`.
+    /// The logic is identical in both directions — the only difference is
+    /// which cooldown policy field and which timestamp accessor to use for
+    /// the hysteresis check.
+    fn begin_crossfade_inner(
         &mut self,
+        direction: CrossfadeDirection,
         source_tier: TierKind,
         source_id: ChunkId,
         target_tier: TierKind,
@@ -569,28 +562,32 @@ impl ArenaSet {
             return Err(ArenaError::UnknownTier(target_tier));
         }
 
-        // Hysteresis cooldown check (M3 Plan 04). The source pool's
-        // `demote_cooldown_ns` policy defines the minimum gap between
-        // consecutive demotes of the same chunk. A pristine chunk
-        // (`last_demote_ns == 0`) bypasses the check, and a zero cooldown
-        // disables it entirely (preserves pre-slice-3 behavior).
+        // Hysteresis cooldown check. The direction selects which policy
+        // field (demote_cooldown_ns vs promote_cooldown_ns) and which
+        // timestamp (read_last_demote_ns vs read_last_promote_ns) to use.
         {
             let source_pool = self
                 .pools
                 .get(&source_tier)
                 .ok_or(ArenaError::UnknownTier(source_tier))?;
-            let cooldown = source_pool.policy().demote_cooldown_ns;
-            if cooldown > 0 {
-                let last = source_pool.arena().read_last_demote_ns(source_id)?;
-                if last > 0 {
-                    let now = (self.now_ns)();
-                    let elapsed = now.saturating_sub(last);
-                    if elapsed < cooldown {
-                        return Err(ArenaError::HysteresisCooldown {
-                            chunk_id: source_id.as_u64(),
-                            cooldown_remaining_ns: cooldown - elapsed,
-                        });
-                    }
+            let (cooldown, last) = match direction {
+                CrossfadeDirection::Demote => (
+                    source_pool.policy().demote_cooldown_ns,
+                    source_pool.arena().read_last_demote_ns(source_id)?,
+                ),
+                CrossfadeDirection::Promote => (
+                    source_pool.policy().promote_cooldown_ns,
+                    source_pool.arena().read_last_promote_ns(source_id)?,
+                ),
+            };
+            if cooldown > 0 && last > 0 {
+                let now = (self.now_ns)();
+                let elapsed = now.saturating_sub(last);
+                if elapsed < cooldown {
+                    return Err(ArenaError::HysteresisCooldown {
+                        chunk_id: source_id.as_u64(),
+                        cooldown_remaining_ns: cooldown - elapsed,
+                    });
                 }
             }
         }
@@ -641,6 +638,45 @@ impl ArenaSet {
         self.crossfade_registry.insert(handle)?;
 
         Ok(handle)
+    }
+
+    /// Begin a demote crossfade: copy the source chunk's payload into a
+    /// fresh chunk in `target_tier`, then mark the source's state byte as
+    /// `FadingOut`. Returns a `CrossfadeHandle` that the caller passes to
+    /// `complete_demote` (to finalize) or `abort_demote` (to reverse).
+    ///
+    /// # Errors
+    /// - `InvalidCrossfadeTarget` if `source_tier == target_tier`.
+    /// - `UnknownTier(t)` if either tier is not configured in this set.
+    /// - `UnknownChunkId(id)` if `source_id` is not allocated in `source_tier`.
+    /// - `AlreadyFading { chunk_id }` if the source is already in an
+    ///   in-flight fade.
+    /// - `PoolFull` if the target pool is out of slots.
+    pub fn begin_demote(
+        &mut self,
+        source_tier: TierKind,
+        source_id: ChunkId,
+        target_tier: TierKind,
+    ) -> ArenaResult<CrossfadeHandle> {
+        self.begin_crossfade_inner(CrossfadeDirection::Demote, source_tier, source_id, target_tier)
+    }
+
+    /// Begin a promote crossfade: copy the source chunk's payload into a
+    /// fresh chunk in `target_tier`, then mark the source's state byte as
+    /// `FadingOut`. Returns a `CrossfadeHandle` that the caller passes to
+    /// `complete_promote` (to finalize) or `abort_promote` (to reverse).
+    ///
+    /// The mechanics are identical to `begin_demote` — the direction is
+    /// caller semantics (warm->hot vs hot->warm), not mechanism. The only
+    /// difference is which hysteresis fields are consulted
+    /// (`promote_cooldown_ns` / `last_promote_completed_at_ns`).
+    pub fn begin_promote(
+        &mut self,
+        source_tier: TierKind,
+        source_id: ChunkId,
+        target_tier: TierKind,
+    ) -> ArenaResult<CrossfadeHandle> {
+        self.begin_crossfade_inner(CrossfadeDirection::Promote, source_tier, source_id, target_tier)
     }
 
     /// Finalize a demote crossfade: free the source chunk (which is still
