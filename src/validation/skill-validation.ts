@@ -355,7 +355,8 @@ export const GsdExtensionSchema = z.object({
   triggers: TriggerPatternsSchema.optional(),
   learning: SkillLearningSchema.optional(),
   enabled: z.boolean().optional(),
-  version: z.number().optional(),
+  // Accept both legacy integer versions (v1, v2) and modern semver strings ("1.0.0")
+  version: z.union([z.number(), z.string()]).optional(),
   extends: SkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
@@ -408,7 +409,8 @@ export const SkillInputSchema = z.object({
   enabled: z.boolean().default(true),
   triggers: TriggerPatternsSchema.optional(),
   learning: SkillLearningSchema.optional(),
-  version: z.number().optional(),
+  // Accept both legacy integer versions (v1, v2) and modern semver strings ("1.0.0")
+  version: z.union([z.number(), z.string()]).optional(),
   extends: SkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
@@ -479,7 +481,8 @@ export const SkillMetadataSchema = z.object({
   triggers: TriggerPatternsSchema.optional(),
   enabled: z.boolean().optional(),
   learning: SkillLearningSchema.optional(),
-  version: z.number().optional(),
+  // Accept both legacy integer versions (v1, v2) and modern semver strings ("1.0.0")
+  version: z.union([z.number(), z.string()]).optional(),
   extends: SkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
