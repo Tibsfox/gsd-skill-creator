@@ -38,7 +38,7 @@ use gsd_os_lib::memory_arena::{
     },
     persistence::{replay_into, write_checkpoint, JournalReader, JournalWriter},
     pool::{ArenaSet, ArenaSetConfig, CrossfadeHandle, EvictionKind, PoolSpec, TierPolicy},
-    types::{ArenaConfig, ChunkId, TierKind},
+    types::{AllocatorSelector, ArenaConfig, ChunkId, TierKind},
     warm_start::{InMemoryColdSource, WarmStart, WarmStartConfig},
     Arena,
 };
@@ -79,6 +79,7 @@ fn hot_spec(num_slots: usize) -> PoolSpec {
         chunk_size: ArenaConfig::test().chunk_size,
         num_slots,
         policy: unlimited_policy(),
+        allocator: AllocatorSelector::FixedSlot,
     }
 }
 
@@ -149,6 +150,62 @@ fn bench_get(c: &mut Criterion) {
             let id = ChunkId::new(idx);
             let chunk = arena.get_chunk(black_box(id)).expect("get");
             black_box(chunk);
+            idx += 1;
+            if idx > 1000 {
+                idx = 1;
+            }
+        });
+    });
+
+    group.finish();
+}
+
+// ===== bench: get_zero_copy_comparison ==============================
+//
+// Compare the zero-copy hot path (get_chunk_hot) vs the full path (get_chunk).
+// This isolates the performance improvement from returning a slice vs a full Chunk.
+
+fn bench_get_zero_copy_comparison(c: &mut Criterion) {
+    let mut group = c.benchmark_group("get_zero_copy_comparison");
+    group.throughput(Throughput::Elements(1));
+
+    let arena = prefilled_arena(1000);
+
+    // Full path: get_chunk() returns the entire Chunk struct with header + metadata.
+    group.bench_function("get_chunk_full", |b| {
+        let mut idx: u64 = 1;
+        b.iter(|| {
+            let id = ChunkId::new(idx);
+            let chunk = arena.get_chunk(black_box(id)).expect("get_chunk");
+            black_box(chunk);
+            idx += 1;
+            if idx > 1000 {
+                idx = 1;
+            }
+        });
+    });
+
+    // Zero-copy hot path: get_chunk_hot() returns only the payload slice.
+    group.bench_function("get_chunk_hot_zerocopy", |b| {
+        let mut idx: u64 = 1;
+        b.iter(|| {
+            let id = ChunkId::new(idx);
+            let payload = arena.get_chunk_hot(black_box(id)).expect("get_hot");
+            black_box(payload);
+            idx += 1;
+            if idx > 1000 {
+                idx = 1;
+            }
+        });
+    });
+
+    // Header + payload variant: get_chunk_hot_with_header() for callers that need metadata.
+    group.bench_function("get_chunk_hot_with_header", |b| {
+        let mut idx: u64 = 1;
+        b.iter(|| {
+            let id = ChunkId::new(idx);
+            let (header, payload) = arena.get_chunk_hot_with_header(black_box(id)).expect("get_with_header");
+            black_box((header, payload));
             idx += 1;
             if idx > 1000 {
                 idx = 1;
@@ -486,12 +543,14 @@ fn two_pool_set(
         chunk_size: slot_size,
         num_slots,
         policy: unlimited_policy(),
+        allocator: AllocatorSelector::FixedSlot,
     };
     let warm = PoolSpec {
         tier: TierKind::Warm,
         chunk_size: slot_size,
         num_slots,
         policy: unlimited_policy(),
+        allocator: AllocatorSelector::FixedSlot,
     };
     ArenaSet::create(
         ArenaSetConfig::new(root)
@@ -680,6 +739,7 @@ fn bench_hysteresis(c: &mut Criterion) {
                         demote_cooldown_ns: 0,
                         promote_cooldown_ns: 0,
                     },
+                    allocator: AllocatorSelector::FixedSlot,
                 };
                 let warm_spec = PoolSpec {
                     tier: TierKind::Warm,
@@ -695,6 +755,7 @@ fn bench_hysteresis(c: &mut Criterion) {
                         demote_cooldown_ns: 1_000_000_000,
                         promote_cooldown_ns: 0,
                     },
+                    allocator: AllocatorSelector::FixedSlot,
                 };
                 let mut set = ArenaSet::create(
                     ArenaSetConfig::new(tmp.path())
@@ -883,6 +944,7 @@ fn bench_promote_hysteresis(c: &mut Criterion) {
                     chunk_size: ArenaConfig::test().chunk_size,
                     num_slots: 4,
                     policy: unlimited_policy(),
+                    allocator: AllocatorSelector::FixedSlot,
                 };
                 let warm_spec = PoolSpec {
                     tier: TierKind::Warm,
@@ -896,6 +958,7 @@ fn bench_promote_hysteresis(c: &mut Criterion) {
                         demote_cooldown_ns: 0,
                         promote_cooldown_ns: 1_000_000_000,
                     },
+                    allocator: AllocatorSelector::FixedSlot,
                 };
                 let mut set = ArenaSet::create(
                     ArenaSetConfig::new(tmp.path())
@@ -1003,12 +1066,14 @@ fn sweep_set(
                 chunk_size: slot_size,
                 num_slots,
                 policy: hot_policy,
+                allocator: AllocatorSelector::FixedSlot,
             })
             .with_pool(PoolSpec {
                 tier: TierKind::Warm,
                 chunk_size: slot_size,
                 num_slots,
                 policy: warm_policy,
+                allocator: AllocatorSelector::FixedSlot,
             }),
     )
     .expect("sweep ArenaSet create")
@@ -1311,12 +1376,14 @@ fn bench_vram_crossfade(c: &mut Criterion) {
                         chunk_size: 4 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
+        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_pool(PoolSpec {
                         tier: TierKind::Vector,
                         chunk_size: 4 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
+        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_vram_context(ctx);
                 let mut set = ArenaSet::create(config).expect("create");
@@ -1351,12 +1418,14 @@ fn bench_vram_crossfade(c: &mut Criterion) {
                         chunk_size: 4 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
+        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_pool(PoolSpec {
                         tier: TierKind::Vector,
                         chunk_size: 4 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
+        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_vram_context(ctx);
                 let mut set = ArenaSet::create(config).expect("create");
@@ -1395,12 +1464,14 @@ fn bench_vram_crossfade(c: &mut Criterion) {
                         chunk_size: 2 * 1024 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
+        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_pool(PoolSpec {
                         tier: TierKind::Vector,
                         chunk_size: 2 * 1024 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
+        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_vram_context(ctx);
                 let mut set = ArenaSet::create(config).expect("create");
@@ -2015,6 +2086,7 @@ criterion_group!(
     benches,
     bench_alloc,
     bench_get,
+    bench_get_zero_copy_comparison,
     bench_touch,
     bench_warm_start,
     bench_warm_start_eager,

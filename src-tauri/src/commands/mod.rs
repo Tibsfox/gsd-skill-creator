@@ -5,6 +5,7 @@ pub mod echo;
 pub mod greet;
 pub mod ipc;
 pub mod magic;
+pub mod memory_arena;
 pub mod proxy;
 pub mod pty;
 pub mod sandbox;
