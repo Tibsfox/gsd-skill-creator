@@ -1,0 +1,590 @@
+//! Arena — a fixed-slot chunk allocator backed by a contiguous byte region.
+//!
+//! Two backing modes (chosen at construction time):
+//! - **Heap** (`Box<[u8]>`): simple, fast, lives and dies with the process.
+//!   Use for tests and ephemeral arenas.
+//! - **Mmap** (`memmap2::MmapMut`): file-backed. The OS page cache *is* our
+//!   cache. Writes go through to the backing file (with normal page-cache
+//!   flush semantics). The file can be reopened across process restarts to
+//!   recover content. Use for real persistent arenas.
+//!
+//! Both modes share the same `Storage` enum behind a `Deref<[u8]>` impl so
+//! all existing slot arithmetic works unchanged.
+//!
+//! Design notes:
+//! - Fixed slot size per arena (= config.chunk_size). For multi-size pools,
+//!   use multiple arenas.
+//! - Slots hold the full serialized chunk (header + payload). The unused
+//!   tail of a slot is zero.
+//! - Allocation is O(1) via a free stack of slot indices.
+//! - Chunk IDs are auto-assigned from a monotonic counter. Deallocated IDs
+//!   are NOT reused — ever. This keeps callers safe from use-after-free at
+//!   the ID level.
+//! - Access tracking lives in the chunk header and is updated via `touch`.
+//!   Access counts are lossy across crashes (not journaled); they are
+//!   captured in the next checkpoint.
+
+use std::collections::HashMap;
+use std::fs::OpenOptions;
+use std::ops::{Deref, DerefMut};
+use std::path::{Path, PathBuf};
+
+use memmap2::{MmapMut, MmapOptions};
+use xxhash_rust::xxh3::Xxh3Default;
+
+use crate::memory_arena::chunk::{write_header_into, Chunk, CHECKSUM_OFFSET};
+use crate::memory_arena::error::{ArenaError, ArenaResult};
+use crate::memory_arena::types::{ArenaConfig, ChunkHeader, ChunkId, TierKind, HEADER_SIZE};
+
+/// Backing storage for the arena. Two variants:
+/// - `Heap`: boxed byte slice owned by the process.
+/// - `Mmap`: file-backed memory map. The file is kept alive alongside the
+///   mmap via the `file` field so it doesn't get closed early.
+pub(crate) enum Storage {
+    Heap(Box<[u8]>),
+    Mmap {
+        mmap: MmapMut,
+        _file: std::fs::File,
+        path: PathBuf,
+    },
+}
+
+impl std::fmt::Debug for Storage {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Storage::Heap(b) => f
+                .debug_struct("Storage::Heap")
+                .field("len", &b.len())
+                .finish(),
+            Storage::Mmap { mmap, path, .. } => f
+                .debug_struct("Storage::Mmap")
+                .field("len", &mmap.len())
+                .field("path", path)
+                .finish(),
+        }
+    }
+}
+
+impl Deref for Storage {
+    type Target = [u8];
+    fn deref(&self) -> &[u8] {
+        match self {
+            Storage::Heap(b) => b,
+            Storage::Mmap { mmap, .. } => mmap,
+        }
+    }
+}
+
+impl DerefMut for Storage {
+    fn deref_mut(&mut self) -> &mut [u8] {
+        match self {
+            Storage::Heap(b) => b,
+            Storage::Mmap { mmap, .. } => mmap,
+        }
+    }
+}
+
+impl Storage {
+    /// Flush any pending mmap writes to disk. No-op for heap storage.
+    pub(crate) fn flush(&self) -> ArenaResult<()> {
+        match self {
+            Storage::Heap(_) => Ok(()),
+            Storage::Mmap { mmap, .. } => {
+                mmap.flush()?;
+                Ok(())
+            }
+        }
+    }
+}
+
+/// Per-slot state in the arena.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum SlotState {
+    Free,
+    Allocated(ChunkId),
+}
+
+/// Arena statistics snapshot.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ArenaStats {
+    /// Total number of slots in the arena.
+    pub total_slots: usize,
+    /// Slots currently free.
+    pub free_slots: usize,
+    /// Slots currently holding a chunk.
+    pub allocated_slots: usize,
+    /// Total arena capacity in bytes (total_slots * chunk_size).
+    pub total_bytes: u64,
+    /// Free capacity in bytes.
+    pub free_bytes: u64,
+    /// Allocated capacity in bytes (slot-level, not payload-level).
+    pub allocated_bytes: u64,
+}
+
+/// A fixed-slot chunk arena. Owns its backing storage.
+#[derive(Debug)]
+pub struct Arena {
+    config: ArenaConfig,
+    /// Contiguous backing store. total_slots * chunk_size bytes.
+    /// Heap-backed or file-backed (mmap) — callers use `.storage[...]`
+    /// transparently via Deref.
+    storage: Storage,
+    /// Chunk-size per slot, cached from config for hot paths.
+    slot_size: usize,
+    /// Per-slot state vector. Index = slot index.
+    slots: Vec<SlotState>,
+    /// Stack of free slot indices. pop() = O(1) alloc.
+    free_stack: Vec<usize>,
+    /// chunk_id → slot index.
+    directory: HashMap<ChunkId, usize>,
+    /// Monotonic chunk id counter. Never reused.
+    next_chunk_id: u64,
+}
+
+impl Arena {
+    /// Construct a new arena with `num_slots` slots of `config.chunk_size`
+    /// bytes each. Total backing memory is `num_slots * chunk_size`.
+    ///
+    /// # Errors
+    /// Returns `ChunkSizeOutOfRange` if `config.chunk_size` is outside the
+    /// configured min/max bounds.
+    pub fn new(config: ArenaConfig, num_slots: usize) -> ArenaResult<Self> {
+        config.validate_size(config.chunk_size)?;
+
+        let slot_size = config.chunk_size as usize;
+        let total_bytes = slot_size
+            .checked_mul(num_slots)
+            .expect("arena size overflow");
+        let storage = Storage::Heap(vec![0u8; total_bytes].into_boxed_slice());
+
+        Self::with_storage(config, num_slots, slot_size, storage)
+    }
+
+    /// Construct an mmap-backed arena at the given file path. If the file
+    /// exists and has the correct size, it is reused (preserving any
+    /// previously-written bytes — this is the warm-start recovery path).
+    /// If the file doesn't exist or is the wrong size, it is created or
+    /// resized and zeroed.
+    ///
+    /// This is the "real" persistent RAM storage mode. The OS page cache
+    /// becomes our cache; writes go through to the backing file with
+    /// standard page-cache flush semantics. Call `flush_storage()` or
+    /// `Arena::flush_mmap()` to force a sync to disk.
+    ///
+    /// Note: metadata (directory, free list, next_chunk_id) still lives
+    /// in RAM and is persisted via the checkpoint/journal files, not via
+    /// the mmap. The mmap holds only the raw slot bytes.
+    pub fn new_mmap_file(
+        config: ArenaConfig,
+        num_slots: usize,
+        path: impl AsRef<Path>,
+    ) -> ArenaResult<Self> {
+        config.validate_size(config.chunk_size)?;
+
+        let slot_size = config.chunk_size as usize;
+        let total_bytes = slot_size
+            .checked_mul(num_slots)
+            .expect("arena size overflow");
+
+        let path = path.as_ref().to_path_buf();
+        if let Some(parent) = path.parent() {
+            std::fs::create_dir_all(parent)?;
+        }
+
+        let file = OpenOptions::new()
+            .create(true)
+            .read(true)
+            .write(true)
+            .open(&path)?;
+
+        // Resize to exact total_bytes. If the file was smaller, new bytes
+        // are zero. If larger, we truncate (stale bytes beyond this arena
+        // are dropped — caller's responsibility to use a fresh file if
+        // that's not what they want).
+        file.set_len(total_bytes as u64)?;
+        file.sync_all()?;
+
+        // SAFETY: we just set the file length; the mmap covers the full
+        // file. memmap2 handles the unsafe ops internally.
+        let mmap = unsafe { MmapOptions::new().len(total_bytes).map_mut(&file)? };
+
+        let storage = Storage::Mmap {
+            mmap,
+            _file: file,
+            path,
+        };
+
+        Self::with_storage(config, num_slots, slot_size, storage)
+    }
+
+    fn with_storage(
+        config: ArenaConfig,
+        num_slots: usize,
+        slot_size: usize,
+        storage: Storage,
+    ) -> ArenaResult<Self> {
+        // Free stack holds slots in reverse order so slot 0 is popped first.
+        let mut free_stack: Vec<usize> = (0..num_slots).collect();
+        free_stack.reverse();
+
+        Ok(Self {
+            config,
+            storage,
+            slot_size,
+            slots: vec![SlotState::Free; num_slots],
+            free_stack,
+            directory: HashMap::with_capacity(num_slots),
+            next_chunk_id: 1, // 0 reserved for ChunkId::ZERO sentinel
+        })
+    }
+
+    /// Flush any pending mmap writes to the backing file. No-op for heap.
+    pub fn flush_mmap(&self) -> ArenaResult<()> {
+        self.storage.flush()
+    }
+
+    /// Number of slots in the arena.
+    pub fn num_slots(&self) -> usize {
+        self.slots.len()
+    }
+
+    /// Arena configuration.
+    pub fn config(&self) -> &ArenaConfig {
+        &self.config
+    }
+
+    /// Maximum payload size that fits in a slot.
+    pub fn max_payload_size(&self) -> usize {
+        self.slot_size - HEADER_SIZE
+    }
+
+    /// Next chunk id that would be assigned. Exposed for persistence.
+    pub fn next_chunk_id(&self) -> u64 {
+        self.next_chunk_id
+    }
+
+    /// Storage backing bytes — read-only view. Used by checkpoint writer.
+    pub(crate) fn storage(&self) -> &[u8] {
+        &self.storage
+    }
+
+    /// Directory entries (chunk_id → slot). Used by checkpoint writer.
+    pub(crate) fn directory_entries(&self) -> impl Iterator<Item = (ChunkId, usize)> + '_ {
+        self.directory.iter().map(|(id, slot)| (*id, *slot))
+    }
+
+    /// Allocate a new chunk with the given payload.
+    ///
+    /// # Implementation notes
+    ///
+    /// This is the hot path. It writes the header and payload **directly**
+    /// into the slot's byte region — no `Chunk::new + finalize + serialize`
+    /// dance — and streams xxh3 over the in-place bytes for the checksum.
+    /// The tail of the slot is *not* zeroed here: readers always honor
+    /// `header.payload_size`, so old bytes beyond the new payload are
+    /// invisible, and `free_chunk` still zeros on free as defense-in-depth
+    /// for raw-storage inspection paths.
+    ///
+    /// Steps:
+    /// 1. Pop a free slot, mint a chunk id, build the header struct.
+    /// 2. `write_header_into` directly into `storage[start..start+HEADER_SIZE]`
+    ///    (checksum slot starts at 0).
+    /// 3. Copy the payload bytes directly into
+    ///    `storage[start+HEADER_SIZE..start+HEADER_SIZE+len]`.
+    /// 4. Stream xxh3 over `header[0..CHECKSUM_OFFSET]` and the freshly-
+    ///    written payload (no scratch buffer).
+    /// 5. Back-patch the 8-byte checksum into the header's checksum slot.
+    ///
+    /// # Errors
+    /// - `PayloadSizeMismatch` if the payload exceeds `max_payload_size`.
+    /// - `OutOfSlots` if no free slots are available.
+    pub fn alloc_chunk(&mut self, tier: TierKind, payload: Vec<u8>) -> ArenaResult<ChunkId> {
+        if payload.len() > self.max_payload_size() {
+            return Err(ArenaError::PayloadSizeMismatch {
+                header: self.max_payload_size() as u64,
+                actual: payload.len(),
+            });
+        }
+
+        let slot = self.free_stack.pop().ok_or(ArenaError::OutOfSlots {
+            requested: 1,
+            available: 0,
+        })?;
+
+        let id = ChunkId::new(self.next_chunk_id);
+        self.next_chunk_id += 1;
+
+        let start = slot * self.slot_size;
+        let payload_start = start + HEADER_SIZE;
+        let payload_end = payload_start + payload.len();
+
+        // Step 1+2: build and write the header in place. `ChunkHeader::new`
+        // stamps magic/version/timestamps/counts with checksum=0.
+        let header = ChunkHeader::new(id, tier, payload.len() as u64);
+        write_header_into(&header, &mut self.storage[start..start + HEADER_SIZE]);
+
+        // Step 3: copy payload directly into slot.
+        self.storage[payload_start..payload_end].copy_from_slice(&payload);
+
+        // Step 4: streaming xxh3 over header[0..CHECKSUM_OFFSET] || payload.
+        // Both slices are borrowed read-only from the same Vec — legal because
+        // the borrows are sequential and the hasher consumes each before the
+        // next `update` call.
+        let mut hasher = Xxh3Default::new();
+        hasher.update(&self.storage[start..start + CHECKSUM_OFFSET]);
+        hasher.update(&self.storage[payload_start..payload_end]);
+        let checksum = hasher.digest();
+
+        // Step 5: back-patch checksum into the header slot.
+        self.storage[start + CHECKSUM_OFFSET..start + CHECKSUM_OFFSET + 8]
+            .copy_from_slice(&checksum.to_le_bytes());
+
+        // NOTE: no tail zero-fill here. The invariant is "freed slots are
+        // zeroed" and `Arena::new` starts from all-zero storage. The tail
+        // was already zero before this alloc. Dropping the fill saves a
+        // ~1 MiB memset on every alloc for small-payload workloads — the
+        // biggest remaining cost in the M5 benchmark.
+
+        self.slots[slot] = SlotState::Allocated(id);
+        self.directory.insert(id, slot);
+
+        Ok(id)
+    }
+
+    /// Read a chunk by id. Returns an owned copy (deserialized + validated).
+    pub fn get_chunk(&self, id: ChunkId) -> ArenaResult<Chunk> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+
+        // Read the header first to learn the payload size, then slice
+        // exactly header + payload. Deserialize will validate checksum.
+        let start = slot * self.slot_size;
+        let header_bytes = &self.storage[start..start + HEADER_SIZE];
+        let header = crate::memory_arena::chunk::read_header_from(header_bytes)?;
+        let total = HEADER_SIZE + header.payload_size as usize;
+
+        // Defensive: ensure we don't read past slot boundary. If someone
+        // corrupted the stored payload_size, this will catch it.
+        if total > self.slot_size {
+            return Err(ArenaError::PayloadSizeMismatch {
+                header: header.payload_size,
+                actual: self.slot_size - HEADER_SIZE,
+            });
+        }
+
+        let chunk_bytes = &self.storage[start..start + total];
+        Chunk::deserialize(chunk_bytes)
+    }
+
+    /// Free a chunk by id. Only the bytes that were actually written during
+    /// alloc (header + payload) are zeroed — the tail of the slot is left
+    /// untouched because it was never written by this chunk's alloc. The id
+    /// is added back to the free stack but is NOT reused.
+    ///
+    /// # Why only zero the valid region
+    ///
+    /// The slot tail has been zero since either `Arena::new` (fresh arena)
+    /// or the previous free of this slot (which also only wrote zeros to
+    /// the valid region of *its* occupant). Readers always honor
+    /// `header.payload_size`, so bytes beyond the cleared region are both
+    /// zero and invisible. Zeroing the full slot is wasted memset work;
+    /// for 1 MiB slots with small payloads this was the dominant free cost
+    /// (~500 µs per free, dwarfing the 2.6 µs alloc).
+    pub fn free_chunk(&mut self, id: ChunkId) -> ArenaResult<()> {
+        let slot = self
+            .directory
+            .remove(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+
+        // Read the current payload_size from the header so we know how much
+        // of the slot actually contains live data. If the header is
+        // corrupt (should never happen for a slot we allocated), fall back
+        // to zeroing the entire slot as a safe default.
+        let start = slot * self.slot_size;
+        let header_bytes = &self.storage[start..start + HEADER_SIZE];
+        let valid_end = match crate::memory_arena::chunk::read_header_from(header_bytes) {
+            Ok(hdr) => {
+                let payload_size = hdr.payload_size as usize;
+                // Defensive bound: a corrupt header could claim more than
+                // fits in the slot. Clamp to slot_size in that case.
+                let requested = HEADER_SIZE.saturating_add(payload_size);
+                start + requested.min(self.slot_size)
+            }
+            Err(_) => start + self.slot_size,
+        };
+
+        // Zero only the valid region. Tail stays as it was (zero).
+        self.storage[start..valid_end].fill(0);
+
+        self.slots[slot] = SlotState::Free;
+        self.free_stack.push(slot);
+        Ok(())
+    }
+
+    /// Idempotent allocation used during journal replay and checkpoint restore.
+    ///
+    /// Takes a fully-serialized chunk (as produced by `Chunk::serialize`) and
+    /// places it in the next available slot. If a chunk with the same id
+    /// already exists, this is a no-op (idempotent replay — see
+    /// memory/amiga-ram-storage-design.md for the crash-safety rationale).
+    ///
+    /// The `next_chunk_id` counter is advanced past this id so future
+    /// `alloc_chunk` calls don't collide.
+    pub fn apply_alloc(&mut self, id: ChunkId, chunk_bytes: &[u8]) -> ArenaResult<()> {
+        if self.directory.contains_key(&id) {
+            return Ok(()); // idempotent
+        }
+
+        // Validate the chunk before committing.
+        let chunk = Chunk::deserialize(chunk_bytes)?;
+        if chunk.header().chunk_id != id {
+            return Err(ArenaError::CorruptJournal {
+                reason: format!(
+                    "chunk id mismatch: record says {}, header says {}",
+                    id,
+                    chunk.header().chunk_id
+                ),
+            });
+        }
+
+        let slot = self.free_stack.pop().ok_or(ArenaError::OutOfSlots {
+            requested: 1,
+            available: 0,
+        })?;
+
+        // Write the chunk directly into the slot. No tail zero-fill needed:
+        // the invariant "freed slots are zero in the tail region" is
+        // maintained by `Arena::new` (zero init) and `free_chunk` (which
+        // only zeros the previously-valid region, leaving the already-zero
+        // tail alone).
+        let start = slot * self.slot_size;
+        self.storage[start..start + chunk_bytes.len()].copy_from_slice(chunk_bytes);
+
+        self.slots[slot] = SlotState::Allocated(id);
+        self.directory.insert(id, slot);
+
+        if id.as_u64() >= self.next_chunk_id {
+            self.next_chunk_id = id.as_u64() + 1;
+        }
+
+        Ok(())
+    }
+
+    /// Idempotent free used during journal replay. If the chunk doesn't
+    /// exist, this is a no-op.
+    pub fn apply_free(&mut self, id: ChunkId) -> ArenaResult<()> {
+        if !self.directory.contains_key(&id) {
+            return Ok(()); // idempotent
+        }
+        self.free_chunk(id)
+    }
+
+    /// Place a chunk at a specific slot, used only by checkpoint restore.
+    /// Assumes the slot is currently free.
+    pub(crate) fn place_chunk_at_slot(
+        &mut self,
+        id: ChunkId,
+        slot: usize,
+        chunk_bytes: &[u8],
+    ) -> ArenaResult<()> {
+        if slot >= self.slots.len() {
+            return Err(ArenaError::CorruptCheckpoint {
+                reason: format!("slot {} out of bounds ({})", slot, self.slots.len()),
+            });
+        }
+        if !matches!(self.slots[slot], SlotState::Free) {
+            return Err(ArenaError::CorruptCheckpoint {
+                reason: format!("slot {} already occupied", slot),
+            });
+        }
+
+        // Validate the chunk matches the id.
+        let chunk = Chunk::deserialize(chunk_bytes)?;
+        if chunk.header().chunk_id != id {
+            return Err(ArenaError::CorruptCheckpoint {
+                reason: format!(
+                    "chunk id mismatch at slot {}: expected {}, got {}",
+                    slot,
+                    id,
+                    chunk.header().chunk_id
+                ),
+            });
+        }
+
+        // Remove from free stack. Linear search — fine for recovery path.
+        if let Some(pos) = self.free_stack.iter().position(|&s| s == slot) {
+            self.free_stack.swap_remove(pos);
+        }
+
+        self.slots[slot] = SlotState::Allocated(id);
+        self.directory.insert(id, slot);
+
+        if id.as_u64() >= self.next_chunk_id {
+            self.next_chunk_id = id.as_u64() + 1;
+        }
+
+        Ok(())
+    }
+
+    /// Set the next chunk id counter. Used during checkpoint restore.
+    pub(crate) fn set_next_chunk_id(&mut self, next: u64) {
+        self.next_chunk_id = next;
+    }
+
+    /// Mutable access to the raw storage, used by checkpoint loader.
+    pub(crate) fn storage_mut(&mut self) -> &mut [u8] {
+        &mut self.storage
+    }
+
+    /// Touch a chunk: read, bump access count and last_access_ns, re-finalize
+    /// (checksum), rewrite. Currently expensive — access tracking is lossy
+    /// across crashes because touches are not journaled; they're captured
+    /// in the next checkpoint. Acceptable for best-effort observability.
+    pub fn touch_chunk(&mut self, id: ChunkId) -> ArenaResult<()> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+
+        let mut chunk = self.get_chunk(id)?;
+        chunk.touch();
+        chunk.finalize();
+        let serialized = chunk.serialize();
+
+        let start = slot * self.slot_size;
+        self.storage[start..start + serialized.len()].copy_from_slice(&serialized);
+        // Zero the tail again in case payload shrunk (shouldn't — but be defensive).
+        let end = start + self.slot_size;
+        self.storage[start + serialized.len()..end].fill(0);
+
+        Ok(())
+    }
+
+    /// Iterator over all allocated chunk ids. Not ordered.
+    pub fn iter_chunk_ids(&self) -> impl Iterator<Item = ChunkId> + '_ {
+        self.directory.keys().copied()
+    }
+
+    /// Check whether a chunk id is currently allocated.
+    pub fn contains(&self, id: ChunkId) -> bool {
+        self.directory.contains_key(&id)
+    }
+
+    /// Snapshot current arena statistics.
+    pub fn stats(&self) -> ArenaStats {
+        let total_slots = self.slots.len();
+        let free_slots = self.free_stack.len();
+        let allocated_slots = total_slots - free_slots;
+        let slot_size = self.slot_size as u64;
+        ArenaStats {
+            total_slots,
+            free_slots,
+            allocated_slots,
+            total_bytes: slot_size * total_slots as u64,
+            free_bytes: slot_size * free_slots as u64,
+            allocated_bytes: slot_size * allocated_slots as u64,
+        }
+    }
+}
