@@ -2401,21 +2401,12 @@ mod warm_start_fault_tests {
             .expect("truncation should stop cleanly, not error");
 
         // All 3 Hot ops should have applied cleanly (they come first).
-        let hot_count = set
-            .pool(TierKind::Hot)
-            .unwrap()
-            .arena()
-            .iter_chunk_ids()
-            .count();
+        // M3 Plan 05: `pool.len()` is now accurate post-replay.
+        let hot_count = set.pool(TierKind::Hot).unwrap().len() as usize;
         assert_eq!(hot_count, 3, "all 3 Hot ops should have landed");
 
         // Warm should be missing at least one op due to truncation.
-        let warm_count = set
-            .pool(TierKind::Warm)
-            .unwrap()
-            .arena()
-            .iter_chunk_ids()
-            .count();
+        let warm_count = set.pool(TierKind::Warm).unwrap().len() as usize;
         assert!(
             warm_count < 3,
             "expected truncation to drop at least one Warm op, got {}",
@@ -2914,21 +2905,12 @@ mod journal_dispatch_tests {
         let applied = replay_into_set(&mut set, reader).unwrap();
         assert_eq!(applied, 3);
 
-        // Both pools should reflect the dispatched ops. We intentionally
-        // read the arena-level count (iter_chunk_ids) per the plan's
-        // documented counter-drift trade-off.
-        let hot_count = set
-            .pool(TierKind::Hot)
-            .unwrap()
-            .arena()
-            .iter_chunk_ids()
-            .count();
-        let warm_count = set
-            .pool(TierKind::Warm)
-            .unwrap()
-            .arena()
-            .iter_chunk_ids()
-            .count();
+        // Both pools should reflect the dispatched ops.
+        // M3 Plan 05: `pool.len()` is now accurate post-replay (the
+        // slice-2 counter-drift caveat has been closed by routing replay
+        // through `TierPool::replay_alloc` / `TierPool::replay_free`).
+        let hot_count = set.pool(TierKind::Hot).unwrap().len() as usize;
+        let warm_count = set.pool(TierKind::Warm).unwrap().len() as usize;
         assert_eq!(hot_count, 2);
         assert_eq!(warm_count, 1);
         assert!(set
@@ -3031,25 +3013,206 @@ mod journal_dispatch_tests {
         let applied = replay_into_set(&mut set, reader).unwrap();
         // All 3 Hot ops landed (they come first).
         assert!(applied >= 3, "expected at least 3 ops to land, got {}", applied);
-        let hot_count = set
-            .pool(TierKind::Hot)
-            .unwrap()
-            .arena()
-            .iter_chunk_ids()
-            .count();
+        // M3 Plan 05: pool.len() is accurate post-replay.
+        let hot_count = set.pool(TierKind::Hot).unwrap().len() as usize;
         assert_eq!(hot_count, 3, "all 3 Hot ops should have landed");
         // The truncated region breaks at least the final Warm op, so
         // Warm should have fewer than 3 ops.
-        let warm_count = set
-            .pool(TierKind::Warm)
-            .unwrap()
-            .arena()
-            .iter_chunk_ids()
-            .count();
+        let warm_count = set.pool(TierKind::Warm).unwrap().len() as usize;
         assert!(
             warm_count < 3,
             "expected truncation to drop at least one Warm op, got {}",
             warm_count
+        );
+    }
+
+    // ========================================================================
+    // M3 — Plan 05: TierPool::replay_alloc / replay_free wiring
+    // ========================================================================
+
+    /// Alloc chunks across 3 pools, journal every op, then replay into a
+    /// fresh set and assert each pool's `.len()` matches the expected count
+    /// exactly. This is the headline assertion for closing the slice-2
+    /// counter-drift caveat.
+    #[test]
+    fn replay_alloc_updates_pool_len_across_three_pools() {
+        let dir = tempdir().unwrap();
+        let journal_path = dir.path().join("three-pools-alloc.journal");
+
+        // Write 40 Hot + 30 Warm + 30 Blob alloc records.
+        let mut writer = JournalWriter::open(&journal_path).unwrap();
+        for i in 1u64..=40 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Hot,
+                    ChunkId::new(i),
+                    &mk_chunk_bytes(i, TierKind::Hot, vec![0xAA; 32]),
+                )
+                .unwrap();
+        }
+        for i in 1u64..=30 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Warm,
+                    ChunkId::new(i),
+                    &mk_chunk_bytes(i, TierKind::Warm, vec![0xBB; 32]),
+                )
+                .unwrap();
+        }
+        for i in 1u64..=30 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Blob,
+                    ChunkId::new(i),
+                    &mk_chunk_bytes(i, TierKind::Blob, vec![0xCC; 32]),
+                )
+                .unwrap();
+        }
+        writer.flush().unwrap();
+        drop(writer);
+
+        // Fresh 3-pool ArenaSet.
+        let set_root = dir.path().join("arena_set");
+        let mut set = ArenaSet::create(
+            ArenaSetConfig::new(&set_root)
+                .with_pool(unlimited_spec(TierKind::Hot, 64))
+                .with_pool(unlimited_spec(TierKind::Warm, 64))
+                .with_pool(unlimited_spec(TierKind::Blob, 64)),
+        )
+        .expect("create");
+
+        let reader = JournalReader::open(&journal_path).unwrap();
+        let applied = replay_into_set(&mut set, reader).unwrap();
+        assert_eq!(applied, 100);
+
+        // M3 Plan 05 assertion: pool.len() is accurate post-replay.
+        assert_eq!(set.pool(TierKind::Hot).unwrap().len(), 40);
+        assert_eq!(set.pool(TierKind::Warm).unwrap().len(), 30);
+        assert_eq!(set.pool(TierKind::Blob).unwrap().len(), 30);
+    }
+
+    /// Alloc + free across 3 pools, journal every op, replay, assert
+    /// `pool.len()` reflects the net count (alloc - free) per pool.
+    #[test]
+    fn replay_free_decrements_pool_len_across_three_pools() {
+        let dir = tempdir().unwrap();
+        let journal_path = dir.path().join("three-pools-alloc-free.journal");
+
+        // 40 Hot alloc, 20 Hot free; 30 Warm alloc, 15 Warm free;
+        // 30 Blob alloc, 15 Blob free. Nets: 20, 15, 15.
+        let mut writer = JournalWriter::open(&journal_path).unwrap();
+        for i in 1u64..=40 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Hot,
+                    ChunkId::new(i),
+                    &mk_chunk_bytes(i, TierKind::Hot, vec![0xAA; 24]),
+                )
+                .unwrap();
+        }
+        for i in 1u64..=20 {
+            writer
+                .append_free_for_pool(TierKind::Hot, ChunkId::new(i))
+                .unwrap();
+        }
+        for i in 1u64..=30 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Warm,
+                    ChunkId::new(i),
+                    &mk_chunk_bytes(i, TierKind::Warm, vec![0xBB; 24]),
+                )
+                .unwrap();
+        }
+        for i in 1u64..=15 {
+            writer
+                .append_free_for_pool(TierKind::Warm, ChunkId::new(i))
+                .unwrap();
+        }
+        for i in 1u64..=30 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Blob,
+                    ChunkId::new(i),
+                    &mk_chunk_bytes(i, TierKind::Blob, vec![0xCC; 24]),
+                )
+                .unwrap();
+        }
+        for i in 1u64..=15 {
+            writer
+                .append_free_for_pool(TierKind::Blob, ChunkId::new(i))
+                .unwrap();
+        }
+        writer.flush().unwrap();
+        drop(writer);
+
+        let set_root = dir.path().join("arena_set");
+        let mut set = ArenaSet::create(
+            ArenaSetConfig::new(&set_root)
+                .with_pool(unlimited_spec(TierKind::Hot, 64))
+                .with_pool(unlimited_spec(TierKind::Warm, 64))
+                .with_pool(unlimited_spec(TierKind::Blob, 64)),
+        )
+        .expect("create");
+
+        let reader = JournalReader::open(&journal_path).unwrap();
+        replay_into_set(&mut set, reader).unwrap();
+
+        assert_eq!(
+            set.pool(TierKind::Hot).unwrap().len(),
+            20,
+            "Hot: 40 alloc - 20 free = 20 net"
+        );
+        assert_eq!(
+            set.pool(TierKind::Warm).unwrap().len(),
+            15,
+            "Warm: 30 alloc - 15 free = 15 net"
+        );
+        assert_eq!(
+            set.pool(TierKind::Blob).unwrap().len(),
+            15,
+            "Blob: 30 alloc - 15 free = 15 net"
+        );
+    }
+
+    /// Single-pool alloc + free flow. Regression guard for the classic
+    /// single-pool path (e.g. M1-shaped callers that only use the Hot tier).
+    #[test]
+    fn replay_into_set_preserves_pool_len_on_single_pool_flow() {
+        let dir = tempdir().unwrap();
+        let journal_path = dir.path().join("one-pool.journal");
+
+        let mut writer = JournalWriter::open(&journal_path).unwrap();
+        for i in 1u64..=10 {
+            writer
+                .append_alloc_for_pool(
+                    TierKind::Hot,
+                    ChunkId::new(i),
+                    &mk_chunk_bytes(i, TierKind::Hot, vec![(i as u8); 16]),
+                )
+                .unwrap();
+        }
+        for i in 1u64..=3 {
+            writer
+                .append_free_for_pool(TierKind::Hot, ChunkId::new(i))
+                .unwrap();
+        }
+        writer.flush().unwrap();
+        drop(writer);
+
+        let set_root = dir.path().join("arena_set");
+        let mut set = ArenaSet::create(
+            ArenaSetConfig::new(&set_root).with_pool(unlimited_spec(TierKind::Hot, 32)),
+        )
+        .expect("create");
+
+        let reader = JournalReader::open(&journal_path).unwrap();
+        replay_into_set(&mut set, reader).unwrap();
+
+        assert_eq!(
+            set.pool(TierKind::Hot).unwrap().len(),
+            7,
+            "10 alloc - 3 free = 7 net"
         );
     }
 }
