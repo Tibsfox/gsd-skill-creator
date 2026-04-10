@@ -3249,3 +3249,167 @@ mod warm_start_config_tests {
         let (_set, _report) = WarmStart::open(tmp.path(), &cold).unwrap();
     }
 }
+
+// ============================================================================
+// M3 — Plan 01: ChunkState enum + header byte + backward compat
+// ============================================================================
+
+#[cfg(test)]
+mod m3_chunk_state {
+    use super::*;
+    use crate::memory_arena::chunk::{read_header_from, write_header_into};
+    use crate::memory_arena::types::{ChunkState, CHUNK_HEADER_VERSION, CHUNK_MAGIC};
+
+    /// `ChunkState::Resident` must map to 0 so M1/M2 chunks with zero
+    /// `_reserved1` bytes decode as Resident without any migration.
+    #[test]
+    fn chunk_state_resident_is_zero_for_backward_compat() {
+        assert_eq!(ChunkState::Resident.as_u8(), 0);
+        assert_eq!(ChunkState::FadingOut.as_u8(), 1);
+    }
+
+    /// `from_u8` round-trips the two defined variants and rejects unknown bytes.
+    #[test]
+    fn chunk_state_from_u8_roundtrip() {
+        assert_eq!(ChunkState::from_u8(0).unwrap(), ChunkState::Resident);
+        assert_eq!(ChunkState::from_u8(1).unwrap(), ChunkState::FadingOut);
+        assert!(ChunkState::from_u8(2).is_err());
+        assert!(ChunkState::from_u8(255).is_err());
+    }
+
+    /// Freshly-allocated chunks default to `Resident`.
+    #[test]
+    fn new_chunks_default_to_resident() {
+        let mut arena = test_arena();
+        let id = arena
+            .alloc_chunk(TierKind::Blob, b"fresh chunk".to_vec())
+            .unwrap();
+        let chunk = arena.get_chunk(id).unwrap();
+        assert_eq!(chunk.header().state, ChunkState::Resident);
+    }
+
+    /// The state byte lives at header offset 64 (the start of `_reserved1`).
+    /// Verified by: serialize a `Resident` chunk, assert byte 64 == 0. Then
+    /// manually flip byte 64 to 1, parse via `read_header_from`, confirm
+    /// state comes back as `FadingOut`.
+    #[test]
+    fn header_state_byte_lives_at_offset_64() {
+        let mut chunk = Chunk::new(ChunkId::new(7), TierKind::Hot, b"state".to_vec());
+        chunk.finalize();
+        let mut bytes = chunk.serialize();
+        assert_eq!(
+            bytes[64], 0,
+            "fresh chunk must serialize with state byte == 0 (Resident)"
+        );
+
+        bytes[64] = 1;
+        let header = read_header_from(&bytes[..HEADER_SIZE]).unwrap();
+        assert_eq!(header.state, ChunkState::FadingOut);
+    }
+
+    /// Flipping the state byte AFTER finalize must NOT invalidate the
+    /// chunk's checksum. This is the design invariant that lets us
+    /// `mark_state` with a single byte write and makes `abort_demote` cheap.
+    /// The checksum window is still `header[0..56] || payload`; `_reserved1`
+    /// (bytes 64..128) is outside the window by construction.
+    #[test]
+    fn state_byte_mutation_does_not_invalidate_checksum() {
+        let mut chunk = Chunk::new(ChunkId::new(11), TierKind::Hot, b"mutable state".to_vec());
+        chunk.finalize();
+        let mut bytes = chunk.serialize();
+
+        // Flip state byte from Resident(0) to FadingOut(1).
+        bytes[64] = 1;
+
+        // Deserialize must succeed — checksum still matches.
+        let back = Chunk::deserialize(&bytes)
+            .expect("state byte mutation must not invalidate checksum");
+        assert_eq!(back.header().state, ChunkState::FadingOut);
+        assert_eq!(back.payload(), b"mutable state");
+    }
+
+    /// M1/M2 chunks on disk have `_reserved1` all zero. Manufacture a fake
+    /// on-disk chunk bytestream by hand with zero reserved bytes and confirm
+    /// it parses as `state == Resident` — the foundation of backward compat
+    /// for this slice.
+    #[test]
+    fn m1_chunk_on_disk_reads_as_resident() {
+        // Hand-build a v1 header with all-zero _reserved1 region, matching
+        // exactly what M1 and M2 code wrote to disk.
+        let mut buf = [0u8; HEADER_SIZE];
+        let payload = b"legacy payload".to_vec();
+
+        // Magic
+        buf[0..8].copy_from_slice(&CHUNK_MAGIC);
+        // Version
+        buf[8..10].copy_from_slice(&CHUNK_HEADER_VERSION.to_le_bytes());
+        // Tier (Blob)
+        buf[10] = TierKind::Blob.as_u8();
+        // chunk_id = 42
+        buf[16..24].copy_from_slice(&42u64.to_le_bytes());
+        // payload_size
+        buf[24..32].copy_from_slice(&(payload.len() as u64).to_le_bytes());
+        // created_at_ns / last_access_ns / access_count left zero — fine
+        // for this structural test
+        // checksum slot at 56..64 — will patch after computing
+        // bytes 64..128 _reserved1: ALL ZERO (already from [0u8; _])
+
+        // Compute the checksum over header[0..56] || payload exactly the
+        // way Chunk::compute_checksum does.
+        use xxhash_rust::xxh3::Xxh3Default;
+        let mut hasher = Xxh3Default::new();
+        hasher.update(&buf[..56]);
+        hasher.update(&payload);
+        let checksum = hasher.digest();
+        buf[56..64].copy_from_slice(&checksum.to_le_bytes());
+
+        // Assemble full chunk bytes and deserialize.
+        let mut full = Vec::with_capacity(HEADER_SIZE + payload.len());
+        full.extend_from_slice(&buf);
+        full.extend_from_slice(&payload);
+
+        let parsed = Chunk::deserialize(&full).expect("M1-shaped chunk must deserialize");
+        assert_eq!(
+            parsed.header().state,
+            ChunkState::Resident,
+            "M1/M2 chunks with zero _reserved1 must decode as Resident"
+        );
+    }
+
+    /// The pad0 region (bytes 65..72) between the state byte and the future
+    /// `last_demote_completed_at_ns` field MUST stay zero when a chunk is
+    /// written by `write_header_into`. This reserves the space for M4+
+    /// state-machine metadata without risking mix-up with noisy bytes.
+    #[test]
+    fn pad0_bytes_65_to_72_are_zero_after_write() {
+        let mut chunk = Chunk::new(ChunkId::new(99), TierKind::Vector, vec![0xAB; 32]);
+        chunk.finalize();
+        let bytes = chunk.serialize();
+
+        for (offset, b) in bytes[65..72].iter().enumerate() {
+            assert_eq!(
+                *b,
+                0,
+                "pad0 byte at header offset {} must be zero, got {:#x}",
+                65 + offset,
+                b
+            );
+        }
+    }
+
+    /// `write_header_into` must emit byte 64 = state.as_u8() so that a
+    /// `FadingOut` header round-trips through the write path.
+    #[test]
+    fn write_header_into_emits_state_byte() {
+        use crate::memory_arena::types::ChunkHeader;
+
+        let mut header = ChunkHeader::new(ChunkId::new(3), TierKind::Hot, 0);
+        header.state = ChunkState::FadingOut;
+        let mut buf = [0u8; HEADER_SIZE];
+        write_header_into(&header, &mut buf);
+        assert_eq!(
+            buf[64], 1,
+            "FadingOut header must serialize byte 64 as 1"
+        );
+    }
+}
