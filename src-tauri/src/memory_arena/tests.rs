@@ -4619,3 +4619,304 @@ mod m4_promote_header_and_policy {
         assert_eq!(chunk.header().last_promote_completed_at_ns, 5_555_555_555);
     }
 }
+
+// ============================================================================
+// M4 — Plan 02: begin_promote + shared begin_crossfade_inner
+// ============================================================================
+
+#[cfg(test)]
+mod m4_begin_promote {
+    use crate::memory_arena::error::ArenaError;
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, ChunkState, TierKind};
+    use std::cell::Cell;
+    use tempfile::tempdir;
+
+    thread_local! {
+        static FAKE_NOW: Cell<u64> = Cell::new(1_000_000_000_000);
+    }
+
+    fn set_fake_now(ns: u64) {
+        FAKE_NOW.with(|c| c.set(ns));
+    }
+
+    fn fake_now() -> u64 {
+        FAKE_NOW.with(|c| c.get())
+    }
+
+    fn unlimited_spec(tier: TierKind, num_slots: usize) -> PoolSpec {
+        PoolSpec {
+            tier,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 0,
+            },
+        }
+    }
+
+    fn two_pool_set(root: &std::path::Path) -> ArenaSet {
+        ArenaSet::create(
+            ArenaSetConfig::new(root)
+                .with_pool(unlimited_spec(TierKind::Hot, 8))
+                .with_pool(unlimited_spec(TierKind::Warm, 8)),
+        )
+        .expect("two-pool ArenaSet should build")
+    }
+
+    fn alloc_warm(set: &mut ArenaSet, payload: &[u8]) -> ChunkId {
+        set.pool_mut(TierKind::Warm)
+            .expect("Warm pool")
+            .alloc(payload.to_vec())
+            .expect("alloc")
+    }
+
+    fn alloc_hot(set: &mut ArenaSet, payload: &[u8]) -> ChunkId {
+        set.pool_mut(TierKind::Hot)
+            .expect("Hot pool")
+            .alloc(payload.to_vec())
+            .expect("alloc")
+    }
+
+    #[test]
+    fn begin_promote_happy_path() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_warm(&mut set, b"promote me");
+
+        let handle = set
+            .begin_promote(TierKind::Warm, source_id, TierKind::Hot)
+            .expect("begin_promote should succeed");
+
+        // Source is now FadingOut.
+        let source_state = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .chunk_state(source_id)
+            .unwrap();
+        assert_eq!(source_state, ChunkState::FadingOut);
+
+        // Target exists in Hot and is readable.
+        let target_chunk = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(handle.target)
+            .expect("target should be readable");
+        assert_eq!(target_chunk.payload(), b"promote me");
+
+        // Handle carries correct tiers.
+        assert_eq!(handle.source_tier, TierKind::Warm);
+        assert_eq!(handle.target_tier, TierKind::Hot);
+    }
+
+    #[test]
+    fn begin_promote_rejects_same_tier() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"same tier");
+
+        let err = set
+            .begin_promote(TierKind::Hot, source_id, TierKind::Hot)
+            .unwrap_err();
+        assert!(
+            matches!(err, ArenaError::InvalidCrossfadeTarget { .. }),
+            "expected InvalidCrossfadeTarget, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn begin_promote_rejects_unknown_tier() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_warm(&mut set, b"unknown tier");
+
+        let err = set
+            .begin_promote(TierKind::Warm, source_id, TierKind::Vector)
+            .unwrap_err();
+        assert!(
+            matches!(err, ArenaError::UnknownTier(_)),
+            "expected UnknownTier, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn begin_promote_rejects_unknown_chunk() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+
+        let err = set
+            .begin_promote(TierKind::Warm, ChunkId::new(999), TierKind::Hot)
+            .unwrap_err();
+        assert!(
+            matches!(err, ArenaError::UnknownChunkId(999)),
+            "expected UnknownChunkId(999), got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn begin_promote_rejects_already_fading() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_warm(&mut set, b"already fading");
+
+        set.begin_promote(TierKind::Warm, source_id, TierKind::Hot)
+            .unwrap();
+
+        let err = set
+            .begin_promote(TierKind::Warm, source_id, TierKind::Hot)
+            .unwrap_err();
+        assert!(
+            matches!(err, ArenaError::AlreadyFading { .. }),
+            "expected AlreadyFading, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn begin_promote_rejects_chunk_mid_demote() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"cross direction");
+
+        // Start a demote.
+        set.begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap();
+
+        // Attempt a promote on the same source — should be rejected.
+        let err = set
+            .begin_promote(TierKind::Hot, source_id, TierKind::Warm)
+            .unwrap_err();
+        assert!(
+            matches!(err, ArenaError::AlreadyFading { .. }),
+            "expected AlreadyFading, got {:?}",
+            err
+        );
+    }
+
+    /// Re-run begin_demote happy path to verify the refactored code path
+    /// still works identically.
+    #[test]
+    fn begin_demote_still_works_after_refactor() {
+        let dir = tempdir().unwrap();
+        let mut set = two_pool_set(dir.path());
+        let source_id = alloc_hot(&mut set, b"demote still works");
+
+        let handle = set
+            .begin_demote(TierKind::Hot, source_id, TierKind::Warm)
+            .expect("begin_demote should still succeed");
+
+        let source_state = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .chunk_state(source_id)
+            .unwrap();
+        assert_eq!(source_state, ChunkState::FadingOut);
+
+        let target_chunk = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .get_chunk(handle.target)
+            .expect("target readable");
+        assert_eq!(target_chunk.payload(), b"demote still works");
+    }
+
+    #[test]
+    fn begin_promote_hysteresis_rejects_within_cooldown() {
+        let dir = tempdir().unwrap();
+        let warm_spec = PoolSpec {
+            tier: TierKind::Warm,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 8,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 500_000_000, // 500 ms
+            },
+        };
+        let mut set = ArenaSet::create(
+            ArenaSetConfig::new(dir.path())
+                .with_pool(unlimited_spec(TierKind::Hot, 8))
+                .with_pool(warm_spec),
+        )
+        .unwrap();
+        set_fake_now(5_000_000_000);
+        set.set_now_ns_for_test(fake_now);
+
+        let source_id = alloc_warm(&mut set, b"hysteresis test");
+
+        // Stamp the source as if it was just promoted.
+        set.pool_mut(TierKind::Warm)
+            .unwrap()
+            .arena_mut()
+            .write_last_promote_ns(source_id, 5_000_000_000)
+            .unwrap();
+
+        // 100 ms later — within the 500 ms cooldown.
+        set_fake_now(5_100_000_000);
+        let err = set
+            .begin_promote(TierKind::Warm, source_id, TierKind::Hot)
+            .unwrap_err();
+        assert!(
+            matches!(err, ArenaError::HysteresisCooldown { .. }),
+            "expected HysteresisCooldown, got {:?}",
+            err
+        );
+    }
+
+    #[test]
+    fn begin_promote_hysteresis_allows_after_expiry() {
+        let dir = tempdir().unwrap();
+        let warm_spec = PoolSpec {
+            tier: TierKind::Warm,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 8,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+                demote_cooldown_ns: 0,
+                promote_cooldown_ns: 500_000_000, // 500 ms
+            },
+        };
+        let mut set = ArenaSet::create(
+            ArenaSetConfig::new(dir.path())
+                .with_pool(unlimited_spec(TierKind::Hot, 8))
+                .with_pool(warm_spec),
+        )
+        .unwrap();
+        set_fake_now(5_000_000_000);
+        set.set_now_ns_for_test(fake_now);
+
+        let source_id = alloc_warm(&mut set, b"cooldown expiry");
+
+        // Stamp the source as if it was promoted at t=5s.
+        set.pool_mut(TierKind::Warm)
+            .unwrap()
+            .arena_mut()
+            .write_last_promote_ns(source_id, 5_000_000_000)
+            .unwrap();
+
+        // 600 ms later — past the 500 ms cooldown.
+        set_fake_now(5_600_000_000);
+        set.begin_promote(TierKind::Warm, source_id, TierKind::Hot)
+            .expect("begin_promote should succeed after cooldown expiry");
+    }
+}
