@@ -1213,6 +1213,214 @@ fn bench_policy_sweep(c: &mut Criterion) {
     group.finish();
 }
 
+// ===== bench: vram_transfer (M6) ======================================
+
+#[cfg(feature = "cuda")]
+fn bench_vram_transfer(c: &mut Criterion) {
+    use std::sync::Arc;
+    use gsd_os_lib::memory_arena::vram::VramContext;
+
+    let ctx = Arc::new(VramContext::new(0).expect("CUDA device 0"));
+
+    let mut group = c.benchmark_group("vram_transfer");
+    group.measurement_time(Duration::from_secs(5));
+
+    // upload 1 KiB
+    group.throughput(Throughput::Bytes(1024));
+    group.bench_function("upload_1kib", |b| {
+        let data = vec![0xABu8; 1024];
+        let mut alloc = ctx.alloc(1024).expect("alloc");
+        b.iter(|| {
+            ctx.upload(black_box(&data), &mut alloc).expect("upload");
+        });
+    });
+
+    // upload 1 MiB
+    group.throughput(Throughput::Bytes(1024 * 1024));
+    group.bench_function("upload_1mib", |b| {
+        let data = vec![0xCDu8; 1024 * 1024];
+        let mut alloc = ctx.alloc(1024 * 1024).expect("alloc");
+        b.iter(|| {
+            ctx.upload(black_box(&data), &mut alloc).expect("upload");
+        });
+    });
+
+    // download 1 KiB
+    group.throughput(Throughput::Bytes(1024));
+    group.bench_function("download_1kib", |b| {
+        let data = vec![0xEFu8; 1024];
+        let mut alloc = ctx.alloc(1024).expect("alloc");
+        ctx.upload(&data, &mut alloc).expect("upload");
+        let mut buf = vec![0u8; 1024];
+        b.iter(|| {
+            ctx.download(&alloc, black_box(&mut buf)).expect("download");
+        });
+    });
+
+    // download 1 MiB
+    group.throughput(Throughput::Bytes(1024 * 1024));
+    group.bench_function("download_1mib", |b| {
+        let data = vec![0x42u8; 1024 * 1024];
+        let mut alloc = ctx.alloc(1024 * 1024).expect("alloc");
+        ctx.upload(&data, &mut alloc).expect("upload");
+        let mut buf = vec![0u8; 1024 * 1024];
+        b.iter(|| {
+            ctx.download(&alloc, black_box(&mut buf)).expect("download");
+        });
+    });
+
+    // roundtrip 1 MiB
+    group.throughput(Throughput::Bytes(2 * 1024 * 1024));
+    group.bench_function("roundtrip_1mib", |b| {
+        let data = vec![0x77u8; 1024 * 1024];
+        let mut alloc = ctx.alloc(1024 * 1024).expect("alloc");
+        let mut buf = vec![0u8; 1024 * 1024];
+        b.iter(|| {
+            ctx.upload(black_box(&data), &mut alloc).expect("upload");
+            ctx.download(&alloc, black_box(&mut buf)).expect("download");
+        });
+    });
+
+    group.finish();
+}
+
+// ===== bench: vram_crossfade (M6) =====================================
+
+#[cfg(feature = "cuda")]
+fn bench_vram_crossfade(c: &mut Criterion) {
+    use std::sync::Arc;
+    use gsd_os_lib::memory_arena::vram::VramContext;
+
+    let mut group = c.benchmark_group("vram_crossfade");
+    group.measurement_time(Duration::from_secs(5));
+
+    // demote Hot→Vector 1 KiB (begin + complete)
+    group.throughput(Throughput::Bytes(1024));
+    group.bench_function("demote_hot_to_vram_1kib", |b| {
+        b.iter_batched(
+            || {
+                let ctx = Arc::new(VramContext::new(0).expect("cuda"));
+                let tmp = tempdir().expect("tempdir");
+                let config = ArenaSetConfig::new(tmp.path())
+                    .with_pool(PoolSpec {
+                        tier: TierKind::Hot,
+                        chunk_size: 4 * 1024,
+                        num_slots: 4,
+                        policy: unlimited_policy(),
+                    })
+                    .with_pool(PoolSpec {
+                        tier: TierKind::Vector,
+                        chunk_size: 4 * 1024,
+                        num_slots: 4,
+                        policy: unlimited_policy(),
+                    })
+                    .with_vram_context(ctx);
+                let mut set = ArenaSet::create(config).expect("create");
+                let id = set
+                    .pool_mut(TierKind::Hot)
+                    .unwrap()
+                    .alloc(vec![0xAB; 1024])
+                    .expect("alloc");
+                (set, id, tmp)
+            },
+            |(mut set, id, _tmp)| {
+                let h = set
+                    .begin_demote(TierKind::Hot, black_box(id), TierKind::Vector)
+                    .expect("begin");
+                let t = set.complete_demote(h).expect("complete");
+                black_box(t);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // promote Vector→Hot 1 KiB (begin + complete)
+    group.throughput(Throughput::Bytes(1024));
+    group.bench_function("promote_vram_to_hot_1kib", |b| {
+        b.iter_batched(
+            || {
+                let ctx = Arc::new(VramContext::new(0).expect("cuda"));
+                let tmp = tempdir().expect("tempdir");
+                let config = ArenaSetConfig::new(tmp.path())
+                    .with_pool(PoolSpec {
+                        tier: TierKind::Hot,
+                        chunk_size: 4 * 1024,
+                        num_slots: 4,
+                        policy: unlimited_policy(),
+                    })
+                    .with_pool(PoolSpec {
+                        tier: TierKind::Vector,
+                        chunk_size: 4 * 1024,
+                        num_slots: 4,
+                        policy: unlimited_policy(),
+                    })
+                    .with_vram_context(ctx);
+                let mut set = ArenaSet::create(config).expect("create");
+                let hot_id = set
+                    .pool_mut(TierKind::Hot)
+                    .unwrap()
+                    .alloc(vec![0xCD; 1024])
+                    .expect("alloc");
+                let h = set
+                    .begin_demote(TierKind::Hot, hot_id, TierKind::Vector)
+                    .expect("begin demote");
+                let vram_id = set.complete_demote(h).expect("complete demote");
+                (set, vram_id, tmp)
+            },
+            |(mut set, vram_id, _tmp)| {
+                let h = set
+                    .begin_promote(TierKind::Vector, black_box(vram_id), TierKind::Hot)
+                    .expect("begin");
+                let t = set.complete_promote(h).expect("complete");
+                black_box(t);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    // demote Hot→Vector 1 MiB (begin + complete)
+    group.throughput(Throughput::Bytes(1024 * 1024));
+    group.bench_function("demote_hot_to_vram_1mib", |b| {
+        b.iter_batched(
+            || {
+                let ctx = Arc::new(VramContext::new(0).expect("cuda"));
+                let tmp = tempdir().expect("tempdir");
+                let config = ArenaSetConfig::new(tmp.path())
+                    .with_pool(PoolSpec {
+                        tier: TierKind::Hot,
+                        chunk_size: 2 * 1024 * 1024,
+                        num_slots: 4,
+                        policy: unlimited_policy(),
+                    })
+                    .with_pool(PoolSpec {
+                        tier: TierKind::Vector,
+                        chunk_size: 2 * 1024 * 1024,
+                        num_slots: 4,
+                        policy: unlimited_policy(),
+                    })
+                    .with_vram_context(ctx);
+                let mut set = ArenaSet::create(config).expect("create");
+                let id = set
+                    .pool_mut(TierKind::Hot)
+                    .unwrap()
+                    .alloc(vec![0xEF; 1024 * 1024])
+                    .expect("alloc");
+                (set, id, tmp)
+            },
+            |(mut set, id, _tmp)| {
+                let h = set
+                    .begin_demote(TierKind::Hot, black_box(id), TierKind::Vector)
+                    .expect("begin");
+                let t = set.complete_demote(h).expect("complete");
+                black_box(t);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+
+    group.finish();
+}
+
 // ===== entry =======================================================
 
 criterion_group!(
@@ -1232,4 +1440,16 @@ criterion_group!(
     bench_orphan_recovery,
     bench_policy_sweep,
 );
+
+#[cfg(feature = "cuda")]
+criterion_group!(
+    vram_benches,
+    bench_vram_transfer,
+    bench_vram_crossfade,
+);
+
+#[cfg(feature = "cuda")]
+criterion_main!(benches, vram_benches);
+
+#[cfg(not(feature = "cuda"))]
 criterion_main!(benches);
