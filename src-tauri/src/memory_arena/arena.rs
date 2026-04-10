@@ -32,6 +32,7 @@ use std::path::{Path, PathBuf};
 use memmap2::{MmapMut, MmapOptions};
 use xxhash_rust::xxh3::Xxh3Default;
 
+use crate::memory_arena::allocator::FixedSlotAllocator;
 use crate::memory_arena::chunk::{read_header_from, write_header_into, Chunk, CHECKSUM_OFFSET};
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::list::LruIndex;
@@ -136,8 +137,10 @@ pub struct Arena {
     slot_size: usize,
     /// Per-slot state vector. Index = slot index.
     slots: Vec<SlotState>,
-    /// Stack of free slot indices. pop() = O(1) alloc.
-    free_stack: Vec<usize>,
+    /// Extracted fixed-slot allocator. Manages the free stack and
+    /// slot-level byte-region assignment. Replaces the former inline
+    /// `free_stack: Vec<usize>` field.
+    allocator: FixedSlotAllocator,
     /// chunk_id → slot index.
     directory: HashMap<ChunkId, usize>,
     /// Monotonic chunk id counter. Never reused.
@@ -287,16 +290,12 @@ impl Arena {
         slot_size: usize,
         storage: Storage,
     ) -> ArenaResult<Self> {
-        // Free stack holds slots in reverse order so slot 0 is popped first.
-        let mut free_stack: Vec<usize> = (0..num_slots).collect();
-        free_stack.reverse();
-
         Ok(Self {
             config,
             storage,
             slot_size,
             slots: vec![SlotState::Free; num_slots],
-            free_stack,
+            allocator: FixedSlotAllocator::new(slot_size, num_slots),
             directory: HashMap::with_capacity(num_slots),
             next_chunk_id: 1, // 0 reserved for ChunkId::ZERO sentinel
             lru: LruIndex::new(),
@@ -378,12 +377,27 @@ impl Arena {
             .collect();
         free_stack.reverse();
 
+        // Build the allocated-slots list for the allocator.
+        let allocated_slots: Vec<(usize, usize)> = slots
+            .iter()
+            .enumerate()
+            .filter_map(|(idx, state)| match state {
+                SlotState::Allocated(_) => Some((idx, idx * slot_size)),
+                SlotState::Free => None,
+            })
+            .collect();
+
         Ok(Self {
             config,
             storage,
             slot_size,
             slots,
-            free_stack,
+            allocator: FixedSlotAllocator::from_free_slots(
+                slot_size,
+                num_slots,
+                free_stack,
+                &allocated_slots,
+            ),
             directory,
             next_chunk_id,
             lru,
@@ -458,7 +472,7 @@ impl Arena {
             });
         }
 
-        let slot = self.free_stack.pop().ok_or(ArenaError::OutOfSlots {
+        let slot = self.allocator.pop_free_slot().ok_or(ArenaError::OutOfSlots {
             requested: 1,
             available: 0,
         })?;
@@ -826,7 +840,7 @@ impl Arena {
         self.storage[start..valid_end].fill(0);
 
         self.slots[slot] = SlotState::Free;
-        self.free_stack.push(slot);
+        self.allocator.release_slot(slot);
         // Drop from LRU — eviction pickers should no longer see this id.
         self.lru.remove(id);
         Ok(())
@@ -858,7 +872,7 @@ impl Arena {
             });
         }
 
-        let slot = self.free_stack.pop().ok_or(ArenaError::OutOfSlots {
+        let slot = self.allocator.pop_free_slot().ok_or(ArenaError::OutOfSlots {
             requested: 1,
             available: 0,
         })?;
@@ -924,10 +938,8 @@ impl Arena {
             });
         }
 
-        // Remove from free stack. Linear search — fine for recovery path.
-        if let Some(pos) = self.free_stack.iter().position(|&s| s == slot) {
-            self.free_stack.swap_remove(pos);
-        }
+        // Remove from free stack via allocator. Linear search — fine for recovery path.
+        self.allocator.claim_slot(slot);
 
         self.slots[slot] = SlotState::Allocated(id);
         self.directory.insert(id, slot);
@@ -951,7 +963,7 @@ impl Arena {
 
     /// Number of slots currently free (not allocated). O(1).
     pub fn free_slot_count(&self) -> usize {
-        self.free_stack.len()
+        self.allocator.free_slot_count()
     }
 
     /// Re-register a slot whose backing bytes already contain a valid chunk
@@ -981,9 +993,7 @@ impl Arena {
                 reason: format!("reinsert_slot: slot {} already allocated", slot),
             });
         }
-        if let Some(pos) = self.free_stack.iter().position(|&s| s == slot) {
-            self.free_stack.swap_remove(pos);
-        } else {
+        if !self.allocator.claim_slot(slot) {
             return Err(ArenaError::CorruptCheckpoint {
                 reason: format!("reinsert_slot: slot {} not in free stack", slot),
             });
@@ -1057,7 +1067,7 @@ impl Arena {
     /// Snapshot current arena statistics.
     pub fn stats(&self) -> ArenaStats {
         let total_slots = self.slots.len();
-        let free_slots = self.free_stack.len();
+        let free_slots = self.allocator.free_slot_count();
         let allocated_slots = total_slots - free_slots;
         let slot_size = self.slot_size as u64;
         ArenaStats {
