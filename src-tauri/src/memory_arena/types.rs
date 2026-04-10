@@ -245,6 +245,34 @@ impl ChunkHeader {
     }
 }
 
+/// Allocator strategy selector — serializable config choice.
+///
+/// This enum is a lightweight selector that lives in `PoolSpec` and the
+/// manifest. The actual allocator instances are created at Arena construction
+/// time by `AllocatorSelector::build()`.
+///
+/// `FixedSlot` is the default — optimal for same-size-slot arenas. The
+/// others (Slab, Buddy, TLSF) are available for workloads that benefit
+/// from different allocation patterns (e.g. TLSF for O(1) bitmap lookup
+/// under high churn).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum AllocatorSelector {
+    /// Fixed-slot stack allocator. O(1) alloc/free. Default.
+    FixedSlot,
+    /// Slab allocator with size classes.
+    Slab,
+    /// Buddy allocator with power-of-two splitting.
+    Buddy,
+    /// Two-level segregated fit. O(1) bitmap search.
+    Tlsf,
+}
+
+impl Default for AllocatorSelector {
+    fn default() -> Self {
+        AllocatorSelector::FixedSlot
+    }
+}
+
 /// Eviction policy selector for a tier pool. The actual eviction driver
 /// (picks a victim and frees it) lives in slice 2 — this slice just stores
 /// the choice so the manifest can round-trip it.

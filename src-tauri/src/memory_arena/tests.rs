@@ -1856,6 +1856,7 @@ mod arena_set_tests {
             chunk_size: cfg.chunk_size,
             num_slots: 8,
             policy: small_policy(max),
+        allocator: Default::default(),
         }
     }
 
@@ -2021,6 +2022,7 @@ mod warm_start_tests {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         }
     }
 
@@ -2134,6 +2136,7 @@ mod warm_start_fault_tests {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         }
     }
 
@@ -2757,6 +2760,7 @@ mod journal_dispatch_tests {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         }
     }
 
@@ -3259,6 +3263,7 @@ mod warm_start_config_tests {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         }
     }
 
@@ -3617,6 +3622,7 @@ mod m3_begin_demote {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         }
     }
 
@@ -3839,6 +3845,7 @@ mod m3_complete_abort_demote {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         }
     }
 
@@ -4176,6 +4183,7 @@ mod m3_hysteresis {
                 demote_cooldown_ns: cooldown_ns,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         }
     }
 
@@ -4541,6 +4549,7 @@ mod m4_promote_header_and_policy {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         };
         let mut set = ArenaSet::create(
             ArenaSetConfig::new(dir.path()).with_pool(spec),
@@ -4593,6 +4602,7 @@ mod m4_promote_header_and_policy {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         };
         let mut set = ArenaSet::create(
             ArenaSetConfig::new(dir.path()).with_pool(spec),
@@ -4659,6 +4669,7 @@ mod m4_begin_promote {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         }
     }
 
@@ -4849,6 +4860,7 @@ mod m4_begin_promote {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 500_000_000, // 500 ms
             },
+            allocator: Default::default(),
         };
         let mut set = ArenaSet::create(
             ArenaSetConfig::new(dir.path())
@@ -4895,6 +4907,7 @@ mod m4_begin_promote {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 500_000_000, // 500 ms
             },
+            allocator: Default::default(),
         };
         let mut set = ArenaSet::create(
             ArenaSetConfig::new(dir.path())
@@ -4960,6 +4973,7 @@ mod m4_complete_abort_promote {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         }
     }
 
@@ -5268,6 +5282,7 @@ mod m4_orphan_recovery {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         }
     }
 
@@ -5505,12 +5520,14 @@ fn arena_set_hotter_tier_two_pools() {
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Hot),
+        allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Warm,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Warm),
+        allocator: Default::default(),
         });
     let set = ArenaSet::create(config).unwrap();
 
@@ -5529,18 +5546,21 @@ fn arena_set_adjacency_skips_unconfigured_vector() {
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Hot),
+        allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Warm,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Warm),
+        allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Blob,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Blob),
+        allocator: Default::default(),
         });
     let set = ArenaSet::create(config).unwrap();
 
@@ -5559,6 +5579,7 @@ fn arena_set_adjacency_single_pool() {
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Warm),
+        allocator: Default::default(),
         });
     let set = ArenaSet::create(config).unwrap();
 
@@ -5575,6 +5596,7 @@ fn arena_set_adjacency_unconfigured_tier_returns_none() {
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Hot),
+        allocator: Default::default(),
         });
     let set = ArenaSet::create(config).unwrap();
 
@@ -5605,6 +5627,7 @@ fn evict_lru_removes_least_recently_used() {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         });
     let mut set = ArenaSet::create(config).unwrap();
 
@@ -5646,6 +5669,7 @@ fn evict_fifo_removes_oldest_by_creation() {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         });
     let mut set = ArenaSet::create(config).unwrap();
 
@@ -5679,6 +5703,7 @@ fn evict_empty_pool_returns_none() {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         });
     let mut set = ArenaSet::create(config).unwrap();
 
@@ -5703,6 +5728,7 @@ fn evict_lru_decrements_allocated_chunks() {
                 demote_cooldown_ns: 0,
                 promote_cooldown_ns: 0,
             },
+            allocator: Default::default(),
         });
     let mut set = ArenaSet::create(config).unwrap();
 
@@ -5795,12 +5821,14 @@ fn make_hot_warm_set(
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: hot_slots,
             policy: hot_policy,
+        allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Warm,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: warm_slots,
             policy: warm_policy,
+        allocator: Default::default(),
         });
     ArenaSet::create(config).unwrap()
 }
@@ -6202,18 +6230,21 @@ fn sweep_three_tier_cascade() {
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 8,
             policy: hot_policy,
+        allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Warm,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 8,
             policy: warm_policy,
+        allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Blob,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 8,
             policy: blob_policy,
+        allocator: Default::default(),
         });
     let mut set = ArenaSet::create(config).unwrap();
 
@@ -6464,12 +6495,14 @@ mod m6_vram_crossfade {
                 chunk_size: ArenaConfig::test().chunk_size,
                 num_slots: 8,
                 policy: TierPolicy::default_for(TierKind::Hot),
+            allocator: Default::default(),
             })
             .with_pool(PoolSpec {
                 tier: TierKind::Vector,
                 chunk_size: ArenaConfig::test().chunk_size,
                 num_slots: 8,
                 policy: TierPolicy::default_for(TierKind::Vector),
+            allocator: Default::default(),
             })
             .with_vram_context(ctx);
         ArenaSet::create(config).unwrap()
@@ -6574,12 +6607,14 @@ mod m6_vram_crossfade {
                 chunk_size: ArenaConfig::test().chunk_size,
                 num_slots: 8,
                 policy: TierPolicy::default_for(TierKind::Hot),
+            allocator: Default::default(),
             })
             .with_pool(PoolSpec {
                 tier: TierKind::Warm,
                 chunk_size: ArenaConfig::test().chunk_size,
                 num_slots: 8,
                 policy: TierPolicy::default_for(TierKind::Warm),
+            allocator: Default::default(),
             })
             .with_vram_context(ctx);
         let mut set = ArenaSet::create(config).unwrap();
@@ -7400,6 +7435,7 @@ mod hugetlb_tests {
                 chunk_size: ArenaConfig::test().chunk_size,
                 num_slots: 8,
                 policy: unlimited_policy(),
+            allocator: Default::default(),
             });
         let mut set = ArenaSet::create_with_hugetlb(config).expect("create with hugetlb");
         let pool = set.pool(TierKind::Hot).expect("hot pool");
@@ -7517,6 +7553,7 @@ fn warm_start_lazy_after_cache_line_split() {
             chunk_size: config.chunk_size,
             num_slots: 16,
             policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
+        allocator: Default::default(),
         });
     let mut set = crate::memory_arena::pool::ArenaSet::create(set_config).expect("create");
     let pool = set.pool_mut(TierKind::Hot).expect("hot");
@@ -7531,4 +7568,175 @@ fn warm_start_lazy_after_cache_line_split() {
     let pool2 = set2.pool(TierKind::Hot).expect("hot after reopen");
     assert!(pool2.arena().get_chunk(id1).is_ok());
     assert!(pool2.arena().get_chunk(id2).is_ok());
+}
+
+// =============================================================================
+// M9 — AllocatorSelector on PoolSpec + get_chunk_hot
+// =============================================================================
+
+mod m9_allocator_selector_tests {
+    use super::*;
+    use crate::memory_arena::pool::{ArenaSetConfig, PoolSpec};
+    use crate::memory_arena::types::AllocatorSelector;
+
+    #[test]
+    fn pool_spec_default_allocator_is_fixed_slot() {
+        let spec = PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: 4096,
+            num_slots: 8,
+            policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
+        allocator: Default::default(),
+        };
+        assert_eq!(spec.allocator, AllocatorSelector::FixedSlot);
+    }
+
+    #[test]
+    fn pool_spec_allocator_round_trips_through_json() {
+        let spec = PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: 4096,
+            num_slots: 8,
+            policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
+            allocator: AllocatorSelector::Tlsf,
+        };
+        let json = serde_json::to_string(&spec).expect("serialize");
+        let back: PoolSpec = serde_json::from_str(&json).expect("deserialize");
+        assert_eq!(back.allocator, AllocatorSelector::Tlsf);
+    }
+
+    #[test]
+    fn pool_spec_without_allocator_field_deserializes_as_fixed_slot() {
+        // Backward compat: legacy manifests omit the allocator field.
+        let json = r#"{"tier":"Hot","chunk_size":4096,"num_slots":8,"policy":{"max_chunks":64,"eviction":"Lru","promote_after_hits":0,"demote_after_idle_ns":5000000000}}"#;
+        let spec: PoolSpec = serde_json::from_str(json).expect("deserialize legacy");
+        assert_eq!(spec.allocator, AllocatorSelector::FixedSlot);
+    }
+
+    #[test]
+    fn arena_set_create_with_tlsf_selector() {
+        let dir = tempdir().expect("tempdir");
+        let config = ArenaConfig::test();
+        let set_config = ArenaSetConfig::new(dir.path())
+            .with_pool(PoolSpec {
+                tier: TierKind::Hot,
+                chunk_size: config.chunk_size,
+                num_slots: 8,
+                policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
+                allocator: AllocatorSelector::Tlsf,
+            });
+        let mut set = crate::memory_arena::pool::ArenaSet::create(set_config).expect("create");
+        // Should work exactly like FixedSlot for same-size allocations.
+        let pool = set.pool_mut(TierKind::Hot).expect("hot");
+        let id = pool.alloc(vec![42; 64]).expect("alloc");
+        let chunk = pool.arena().get_chunk(id).expect("get");
+        assert_eq!(chunk.payload(), &[42; 64]);
+    }
+
+    #[test]
+    fn arena_set_tlsf_persists_in_manifest_and_reopens() {
+        use crate::memory_arena::warm_start::{InMemoryColdSource, WarmStart};
+        let dir = tempdir().expect("tempdir");
+        let config = ArenaConfig::test();
+        let set_config = ArenaSetConfig::new(dir.path())
+            .with_pool(PoolSpec {
+                tier: TierKind::Hot,
+                chunk_size: config.chunk_size,
+                num_slots: 8,
+                policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
+                allocator: AllocatorSelector::Tlsf,
+            });
+        let mut set = crate::memory_arena::pool::ArenaSet::create(set_config).expect("create");
+        let pool = set.pool_mut(TierKind::Hot).expect("hot");
+        let id = pool.alloc(vec![99; 128]).expect("alloc");
+        drop(set);
+
+        // Reopen — manifest should preserve the allocator selector.
+        let cold = InMemoryColdSource::new();
+        let (set2, _) = WarmStart::open(dir.path(), &cold).expect("reopen");
+        assert_eq!(
+            set2.manifest().pools[0].allocator,
+            AllocatorSelector::Tlsf,
+        );
+        let pool2 = set2.pool(TierKind::Hot).expect("hot");
+        assert!(pool2.arena().get_chunk(id).is_ok());
+    }
+
+    #[test]
+    fn all_allocator_selectors_round_trip() {
+        for selector in [
+            AllocatorSelector::FixedSlot,
+            AllocatorSelector::Slab,
+            AllocatorSelector::Buddy,
+            AllocatorSelector::Tlsf,
+        ] {
+            let json = serde_json::to_string(&selector).expect("serialize");
+            let back: AllocatorSelector = serde_json::from_str(&json).expect("deserialize");
+            assert_eq!(back, selector, "round-trip failed for {:?}", selector);
+        }
+    }
+}
+
+mod m9_get_chunk_hot_tests {
+    use super::*;
+
+    #[test]
+    fn get_chunk_hot_returns_same_payload_as_get_chunk() {
+        let config = ArenaConfig::test();
+        let mut arena = Arena::new(config, 8).expect("arena");
+        let payload = vec![0xAB; 256];
+        let id = arena.alloc_chunk(TierKind::Hot, payload.clone()).expect("alloc");
+
+        let cold = arena.get_chunk(id).expect("get_chunk");
+        let hot = arena.get_chunk_hot(id).expect("get_chunk_hot");
+        assert_eq!(hot, cold.payload());
+    }
+
+    #[test]
+    fn get_chunk_hot_returns_same_header_as_get_chunk() {
+        let config = ArenaConfig::test();
+        let mut arena = Arena::new(config, 8).expect("arena");
+        let id = arena.alloc_chunk(TierKind::Warm, vec![1; 100]).expect("alloc");
+
+        let cold = arena.get_chunk(id).expect("get_chunk");
+        let (header, payload) = arena.get_chunk_hot_with_header(id).expect("hot_with_header");
+        assert_eq!(header.chunk_id, cold.header().chunk_id);
+        assert_eq!(header.tier, cold.header().tier);
+        assert_eq!(header.payload_size, cold.header().payload_size);
+        assert_eq!(header.checksum, cold.header().checksum);
+        assert_eq!(payload, cold.payload());
+    }
+
+    #[test]
+    fn get_chunk_hot_detects_corruption() {
+        let config = ArenaConfig::test();
+        let chunk_size = config.chunk_size as usize;
+        let mut arena = Arena::new(config, 8).expect("arena");
+        let id = arena.alloc_chunk(TierKind::Hot, vec![0; 128]).expect("alloc");
+
+        // Corrupt a payload byte.
+        let slot = 0;
+        let start = slot * chunk_size;
+        arena.storage_mut()[start + HEADER_SIZE + 10] ^= 0xFF;
+
+        let result = arena.get_chunk_hot(id);
+        assert!(result.is_err(), "should detect corruption");
+    }
+
+    #[test]
+    fn get_chunk_hot_unknown_id_errors() {
+        let config = ArenaConfig::test();
+        let arena = Arena::new(config, 8).expect("arena");
+        let result = arena.get_chunk_hot(ChunkId::new(999));
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn get_chunk_hot_empty_payload() {
+        let config = ArenaConfig::test();
+        let mut arena = Arena::new(config, 8).expect("arena");
+        let id = arena.alloc_chunk(TierKind::Blob, vec![]).expect("alloc");
+        let hot = arena.get_chunk_hot(id).expect("get_chunk_hot");
+        assert!(hot.is_empty());
+    }
 }

@@ -30,7 +30,8 @@ use serde::{Deserialize, Serialize};
 use crate::memory_arena::arena::Arena;
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::types::{
-    ArenaConfig, ChunkId, ChunkState, SweepReport, TierKind, MAX_CHUNK_SIZE, MIN_CHUNK_SIZE,
+    AllocatorSelector, ArenaConfig, ChunkId, ChunkState, SweepReport, TierKind, MAX_CHUNK_SIZE,
+    MIN_CHUNK_SIZE,
 };
 
 #[cfg(feature = "cuda")]
@@ -303,6 +304,11 @@ pub struct PoolSpec {
     pub chunk_size: u64,
     pub num_slots: usize,
     pub policy: TierPolicy,
+    /// Which allocator strategy to use for this pool's arena. Defaults to
+    /// `FixedSlot` for backward compat with legacy manifests that omit
+    /// this field.
+    #[serde(default)]
+    pub allocator: AllocatorSelector,
 }
 
 /// Build-time config for an `ArenaSet`. Holds the root directory and the

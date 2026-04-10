@@ -901,6 +901,95 @@ impl Arena {
         Chunk::deserialize(chunk_bytes)
     }
 
+    /// Read a chunk's payload by id — hot path. Returns a reference to the
+    /// payload bytes in the backing storage without allocating a `Chunk` or
+    /// copying the payload.
+    ///
+    /// Unlike `get_chunk`, this method:
+    /// - Parses the header **once** (via `read_header_core`), not twice
+    /// - Validates the checksum inline over the storage bytes (no copy)
+    /// - Returns `&[u8]` (a slice into the backing storage), not an owned Vec
+    ///
+    /// The checksum is still validated on every call — this is NOT an
+    /// unchecked fast path. The speedup comes from eliminating the redundant
+    /// header parse and the payload `to_vec()` allocation.
+    pub fn get_chunk_hot(&self, id: ChunkId) -> ArenaResult<&[u8]> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+
+        let start = slot * self.slot_size;
+        let header_bytes = &self.storage[start..start + HEADER_SIZE];
+        let header = read_header_core(header_bytes)?;
+        let payload_size = header.payload_size as usize;
+        let total = HEADER_SIZE + payload_size;
+
+        if total > self.slot_size {
+            return Err(ArenaError::PayloadSizeMismatch {
+                header: header.payload_size,
+                actual: self.slot_size - HEADER_SIZE,
+            });
+        }
+
+        // Validate checksum inline: hash header[0..CHECKSUM_OFFSET] || payload.
+        // The checksum field at bytes 56..64 is excluded from the hash input
+        // by zeroing the window — but we can't mutate the backing storage.
+        // Instead, hash header[0..56] directly (checksum field is at 56..64,
+        // which is past our window anyway — we only hash 0..CHECKSUM_OFFSET).
+        let mut hasher = Xxh3Default::new();
+        hasher.update(&self.storage[start..start + CHECKSUM_OFFSET]);
+        hasher.update(&self.storage[start + HEADER_SIZE..start + total]);
+        let computed = hasher.digest();
+
+        if computed != header.checksum {
+            return Err(ArenaError::ChecksumMismatch {
+                header: header.checksum,
+                computed,
+            });
+        }
+
+        Ok(&self.storage[start + HEADER_SIZE..start + total])
+    }
+
+    /// Read a chunk's header and payload by id — hot path with header access.
+    ///
+    /// Like `get_chunk_hot` but also returns the parsed `ChunkHeader`.
+    /// Single header parse, inline checksum validation, zero payload copy.
+    pub fn get_chunk_hot_with_header(&self, id: ChunkId) -> ArenaResult<(ChunkHeader, &[u8])> {
+        let slot = *self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+
+        let start = slot * self.slot_size;
+        let header_bytes = &self.storage[start..start + HEADER_SIZE];
+        let header = read_header_core(header_bytes)?;
+        let payload_size = header.payload_size as usize;
+        let total = HEADER_SIZE + payload_size;
+
+        if total > self.slot_size {
+            return Err(ArenaError::PayloadSizeMismatch {
+                header: header.payload_size,
+                actual: self.slot_size - HEADER_SIZE,
+            });
+        }
+
+        let mut hasher = Xxh3Default::new();
+        hasher.update(&self.storage[start..start + CHECKSUM_OFFSET]);
+        hasher.update(&self.storage[start + HEADER_SIZE..start + total]);
+        let computed = hasher.digest();
+
+        if computed != header.checksum {
+            return Err(ArenaError::ChecksumMismatch {
+                header: header.checksum,
+                computed,
+            });
+        }
+
+        Ok((header, &self.storage[start + HEADER_SIZE..start + total]))
+    }
+
     /// Free a chunk by id. Only the bytes that were actually written during
     /// alloc (header + payload) are zeroed — the tail of the slot is left
     /// untouched because it was never written by this chunk's alloc. The id
