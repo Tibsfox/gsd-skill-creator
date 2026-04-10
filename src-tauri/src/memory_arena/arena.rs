@@ -33,7 +33,7 @@ use memmap2::{MmapMut, MmapOptions};
 use xxhash_rust::xxh3::Xxh3Default;
 
 use crate::memory_arena::allocator::FixedSlotAllocator;
-use crate::memory_arena::chunk::{read_header_from, write_header_into, Chunk, CHECKSUM_OFFSET};
+use crate::memory_arena::chunk::{read_header_core, read_header_from, write_header_into, Chunk, CHECKSUM_OFFSET};
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::list::LruIndex;
 use crate::memory_arena::types::{
@@ -333,10 +333,12 @@ impl Arena {
                 continue;
             }
 
-            // Try to parse the header. Bad magic / bad version / unknown
-            // tier all surface here as errors — treat them as structural
-            // corruption and leave the slot free.
-            let header = match read_header_from(header_bytes) {
+            // Try to parse the core header (bytes 0..64 only — one cache
+            // line). Bad magic / bad version / unknown tier all surface
+            // here as errors — treat them as structural corruption and
+            // leave the slot free. Extended fields (state, timestamps)
+            // are irrelevant for directory building.
+            let header = match read_header_core(header_bytes) {
                 Ok(h) => h,
                 Err(_) => continue,
             };
@@ -549,7 +551,7 @@ impl Arena {
 
         let start = slot * self.slot_size;
         let header_bytes = &self.storage[start..start + HEADER_SIZE];
-        let header = crate::memory_arena::chunk::read_header_from(header_bytes)?;
+        let header = crate::memory_arena::chunk::read_header_core(header_bytes)?;
         let total = HEADER_SIZE + header.payload_size as usize;
 
         if total > self.slot_size {
@@ -779,11 +781,12 @@ impl Arena {
             .get(&id)
             .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
 
-        // Read the header first to learn the payload size, then slice
-        // exactly header + payload. Deserialize will validate checksum.
+        // Read only the core header (bytes 0..64) to learn the payload
+        // size. The full header parse happens inside Chunk::deserialize
+        // below, which validates the checksum and extended fields.
         let start = slot * self.slot_size;
         let header_bytes = &self.storage[start..start + HEADER_SIZE];
-        let header = crate::memory_arena::chunk::read_header_from(header_bytes)?;
+        let header = crate::memory_arena::chunk::read_header_core(header_bytes)?;
         let total = HEADER_SIZE + header.payload_size as usize;
 
         // Defensive: ensure we don't read past slot boundary. If someone
@@ -825,7 +828,7 @@ impl Arena {
         // to zeroing the entire slot as a safe default.
         let start = slot * self.slot_size;
         let header_bytes = &self.storage[start..start + HEADER_SIZE];
-        let valid_end = match crate::memory_arena::chunk::read_header_from(header_bytes) {
+        let valid_end = match crate::memory_arena::chunk::read_header_core(header_bytes) {
             Ok(hdr) => {
                 let payload_size = hdr.payload_size as usize;
                 // Defensive bound: a corrupt header could claim more than

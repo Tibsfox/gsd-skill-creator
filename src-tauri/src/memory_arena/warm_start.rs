@@ -24,7 +24,7 @@
 use std::collections::HashMap;
 use std::path::Path;
 
-use crate::memory_arena::chunk::{read_header_from, Chunk};
+use crate::memory_arena::chunk::{read_header_core, Chunk};
 use crate::memory_arena::error::ArenaResult;
 use crate::memory_arena::pool::ArenaSet;
 use crate::memory_arena::types::{ChunkId, TierKind, CHUNK_MAGIC, HEADER_SIZE};
@@ -312,9 +312,11 @@ fn recover_pool(
         }
         report.slots_walked += 1;
 
-        // Try to parse the header. On failure, count as corrupt-unknown-id
-        // because we can't extract a chunk id from a broken header.
-        let header = match read_header_from(header_bytes) {
+        // Try to parse the core header (bytes 0..64). On failure, count
+        // as corrupt-unknown-id because we can't extract a chunk id from
+        // a broken header. Extended fields are irrelevant for the eager
+        // recovery walk — full validation happens via Chunk::deserialize.
+        let header = match read_header_core(header_bytes) {
             Ok(h) => h,
             Err(_) => {
                 report.slots_corrupt += 1;
