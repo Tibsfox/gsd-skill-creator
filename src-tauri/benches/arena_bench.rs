@@ -63,6 +63,7 @@ fn unlimited_policy() -> TierPolicy {
         eviction: EvictionKind::Lru,
         promote_after_hits: 0,
         demote_after_idle_ns: 0,
+        demote_cooldown_ns: 0,
     }
 }
 
