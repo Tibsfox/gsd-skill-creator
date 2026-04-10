@@ -68,6 +68,29 @@ impl TierKind {
     pub fn as_u8(self) -> u8 {
         self as u8
     }
+
+    /// Heat index for tier ordering. Higher = hotter. Used by the policy
+    /// sweep driver to determine promote/demote direction without
+    /// hardcoding tier names.
+    pub fn heat_index(self) -> u8 {
+        match self {
+            TierKind::Hot => 4,
+            TierKind::Warm => 3,
+            TierKind::Vector => 2,
+            TierKind::Blob => 1,
+            TierKind::Resident => 0,
+        }
+    }
+
+    /// True if `self` is a hotter tier than `other`.
+    pub fn hotter_than(self, other: TierKind) -> bool {
+        self.heat_index() > other.heat_index()
+    }
+
+    /// True if `self` is a colder tier than `other`.
+    pub fn colder_than(self, other: TierKind) -> bool {
+        self.heat_index() < other.heat_index()
+    }
 }
 
 /// Crossfade state for a chunk — lives at header byte 64 (`_reserved1[0]`).
