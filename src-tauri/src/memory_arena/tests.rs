@@ -2097,3 +2097,239 @@ mod warm_start_tests {
         }
     }
 }
+
+// =============================================================================
+// memory-arena-m1 Plan 06 — WarmStart fault-injection tests
+// =============================================================================
+
+#[cfg(test)]
+mod warm_start_fault_tests {
+    use crate::memory_arena::pool::{
+        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
+    };
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind, HEADER_SIZE};
+    use crate::memory_arena::warm_start::{InMemoryColdSource, WarmStart};
+    use std::fs::OpenOptions;
+    use std::io::{Read, Seek, SeekFrom, Write};
+    use tempfile::tempdir;
+
+    fn unlimited_spec(tier: TierKind, num_slots: usize) -> PoolSpec {
+        PoolSpec {
+            tier,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots,
+            policy: TierPolicy {
+                max_chunks: 0,
+                eviction: EvictionKind::Lru,
+                promote_after_hits: 0,
+                demote_after_idle_ns: 0,
+            },
+        }
+    }
+
+    /// Flip one byte in the header region of slot `slot_idx` of the named
+    /// `<tier>.arena` file. The mmap must be dropped (set fully released)
+    /// before this is called or the page cache can race the write.
+    fn corrupt_byte_in_arena_file(
+        path: &std::path::Path,
+        slot_idx: usize,
+        slot_size: usize,
+        offset_in_slot: usize,
+    ) {
+        let mut file = OpenOptions::new()
+            .read(true)
+            .write(true)
+            .open(path)
+            .expect("open arena file for corruption");
+        let target_offset = slot_idx * slot_size + offset_in_slot;
+        file.seek(SeekFrom::Start(target_offset as u64)).unwrap();
+        let mut byte = [0u8; 1];
+        file.read_exact(&mut byte).unwrap();
+        // XOR with 0xFF to ensure the byte changes regardless of original value.
+        byte[0] ^= 0xFF;
+        file.seek(SeekFrom::Start(target_offset as u64)).unwrap();
+        file.write_all(&byte).unwrap();
+        file.sync_all().unwrap();
+    }
+
+    #[test]
+    fn warm_start_corrupt_header_rebuilds_from_cold() {
+        let tmp = tempdir().unwrap();
+        let arena_path = tmp.path().join("hot.arena");
+        let slot_size = ArenaConfig::test().chunk_size as usize;
+        let target_payload = vec![0xAAu8; 64];
+
+        // 1. Build set, alloc 5 chunks, capture chunk C's id and original payload.
+        let target_id;
+        {
+            let config = ArenaSetConfig::new(tmp.path())
+                .with_pool(unlimited_spec(TierKind::Hot, 8));
+            let mut set = ArenaSet::create(config).unwrap();
+            for i in 0..5usize {
+                let payload = if i == 2 {
+                    target_payload.clone()
+                } else {
+                    vec![i as u8; 64]
+                };
+                let _id = set.pool_mut(TierKind::Hot).unwrap().alloc(payload).unwrap();
+            }
+            target_id = ChunkId::new(3); // 3rd alloc, ids start at 1
+            set.flush().unwrap();
+            drop(set);
+        }
+
+        // 2. Pre-seed cold source with target chunk's payload.
+        let mut cold = InMemoryColdSource::new();
+        cold.insert(TierKind::Hot, target_id, target_payload.clone());
+
+        // 3. Corrupt one byte in target slot's CHECKSUM field (offset 56 in
+        // the header). This is detectable corruption — read_header_from will
+        // succeed (so the chunk_id is extractable for cold rebuild), but
+        // Chunk::deserialize will fail the checksum check and route the
+        // slot to the rebuild path. Corrupting bytes that break header
+        // parsing (e.g. magic or tier byte) hits CorruptUnknownId instead,
+        // which is exercised by warm_start_corrupt_slot_missing_from_cold.
+        corrupt_byte_in_arena_file(&arena_path, 2, slot_size, 56);
+
+        // 4. WarmStart::open: corrupt slot detected, rebuilt from cold.
+        let (set, report) = WarmStart::open(tmp.path(), &cold).unwrap();
+        assert_eq!(report.slots_corrupt, 1, "expected 1 corrupt");
+        assert_eq!(report.slots_rebuilt_from_cold, 1, "expected 1 rebuild");
+        assert_eq!(report.slots_missing, 0);
+
+        // 5. The rebuilt chunk is allocated via pool.alloc, which assigns a
+        // chunk id from `next_chunk_id`. After re-registering the 4 valid
+        // chunks (ids 1, 2, 4, 5), `next_chunk_id` advances past 5, so the
+        // rebuild gets id 6. We just verify that some chunk in the pool
+        // carries the target payload (don't filter by id — the rebuild may
+        // legitimately reuse the original id in other test variants).
+        let pool = set.pool(TierKind::Hot).unwrap();
+        let mut found_rebuild = false;
+        for raw_id in 1u64..=10u64 {
+            let id = ChunkId::new(raw_id);
+            if let Ok(chunk) = pool.arena().get_chunk(id) {
+                if chunk.payload() == target_payload.as_slice() {
+                    found_rebuild = true;
+                    break;
+                }
+            }
+        }
+        assert!(found_rebuild, "expected to find rebuilt chunk with target payload");
+    }
+
+    #[test]
+    fn warm_start_corrupt_payload_detected_by_checksum() {
+        let tmp = tempdir().unwrap();
+        let arena_path = tmp.path().join("blob.arena");
+        let slot_size = ArenaConfig::test().chunk_size as usize;
+        let target_payload = vec![0xBBu8; 100];
+
+        let target_id;
+        {
+            let config = ArenaSetConfig::new(tmp.path())
+                .with_pool(unlimited_spec(TierKind::Blob, 8));
+            let mut set = ArenaSet::create(config).unwrap();
+            for i in 0..3usize {
+                let payload = if i == 1 {
+                    target_payload.clone()
+                } else {
+                    vec![(i + 100) as u8; 100]
+                };
+                let _id = set
+                    .pool_mut(TierKind::Blob)
+                    .unwrap()
+                    .alloc(payload)
+                    .unwrap();
+            }
+            target_id = ChunkId::new(2);
+            set.flush().unwrap();
+            drop(set);
+        }
+
+        let mut cold = InMemoryColdSource::new();
+        cold.insert(TierKind::Blob, target_id, target_payload.clone());
+
+        // Corrupt a byte deep in the payload region (well past the header).
+        corrupt_byte_in_arena_file(&arena_path, 1, slot_size, HEADER_SIZE + 50);
+
+        let (set, report) = WarmStart::open(tmp.path(), &cold).unwrap();
+        assert_eq!(report.slots_corrupt, 1, "expected 1 corrupt");
+        assert_eq!(report.slots_rebuilt_from_cold, 1, "expected 1 rebuild");
+        assert_eq!(report.slots_missing, 0);
+
+        // Find rebuilt chunk by payload match. Don't filter by id — the
+        // rebuild may legitimately get the same id back if next_chunk_id
+        // hadn't advanced past it before the rebuild.
+        let pool = set.pool(TierKind::Blob).unwrap();
+        let mut found = false;
+        for raw_id in 1u64..=10u64 {
+            let id = ChunkId::new(raw_id);
+            if let Ok(chunk) = pool.arena().get_chunk(id) {
+                if chunk.payload() == target_payload.as_slice() {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        assert!(found, "expected rebuilt chunk with target payload");
+        // Suppress unused-binding lint for the captured target id (used in
+        // the cold-source seed; not needed for the find-by-payload check).
+        let _ = target_id;
+    }
+
+    #[test]
+    fn warm_start_corrupt_slot_missing_from_cold() {
+        let tmp = tempdir().unwrap();
+        let arena_path = tmp.path().join("hot.arena");
+        let slot_size = ArenaConfig::test().chunk_size as usize;
+
+        {
+            let config = ArenaSetConfig::new(tmp.path())
+                .with_pool(unlimited_spec(TierKind::Hot, 4));
+            let mut set = ArenaSet::create(config).unwrap();
+            // Alloc one chunk (slot 0).
+            set.pool_mut(TierKind::Hot)
+                .unwrap()
+                .alloc(vec![0xCCu8; 64])
+                .unwrap();
+            set.flush().unwrap();
+            drop(set);
+        }
+
+        // Corrupt the header so it can't even be parsed (flip the magic bytes).
+        corrupt_byte_in_arena_file(&arena_path, 0, slot_size, 0);
+
+        // Cold source has nothing.
+        let cold = InMemoryColdSource::new();
+
+        let (set, report) = WarmStart::open(tmp.path(), &cold).unwrap();
+        assert_eq!(report.slots_corrupt, 1, "expected 1 corrupt");
+        assert_eq!(report.slots_rebuilt_from_cold, 0);
+        assert_eq!(report.slots_missing, 1, "expected 1 missing");
+
+        // Pool exists, but the corrupt chunk is gone.
+        let pool = set.pool(TierKind::Hot).unwrap();
+        // The arena should be empty after warm-start (the corrupt slot was
+        // never re-registered, and no rebuild happened).
+        // Length check: 0 chunks registered.
+        assert_eq!(pool.len(), 0, "pool should be empty after missing rebuild");
+
+        // We can still alloc a fresh chunk into the pool (it has free slots).
+        // Reopen mut access via fresh open since the existing `set` is shadowed.
+        let mut set = set; // satisfy borrow checker
+        set.pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(vec![0xDD; 32])
+            .expect("post-recovery alloc should succeed");
+    }
+
+    /// Per Plan 06 deviation note + Plan 05 SUMMARY: per-pool journal wiring
+    /// is deferred to slice 2. This test is intentionally `#[ignore]` and
+    /// will fail to compile its body when journal_path_for is added.
+    #[test]
+    #[ignore = "journal-truncation behavior deferred to slice 2 — see SUMMARY 05/06"]
+    fn warm_start_truncated_journal_stops_cleanly() {
+        // Placeholder: no per-pool journal wiring exists in M1 slice 1.
+        // Re-enable in slice 2 once TierPool gets per-pool JournalWriter.
+    }
+}
