@@ -2333,3 +2333,162 @@ mod warm_start_fault_tests {
         // Re-enable in slice 2 once TierPool gets per-pool JournalWriter.
     }
 }
+
+// =============================================================================
+// memory-arena-m2 Plan 01 — Arena::open_lazy header-only open path
+// =============================================================================
+
+#[cfg(test)]
+mod open_lazy_tests {
+    use crate::memory_arena::arena::Arena;
+    use crate::memory_arena::error::ArenaError;
+    use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind, HEADER_SIZE};
+    use std::fs::OpenOptions;
+    use std::io::Write;
+    use tempfile::tempdir;
+
+    /// Materialize `num_slots` slots' worth of storage using a heap-backed
+    /// arena that allocates `n_chunks` chunks, then write that storage out
+    /// to an mmap-style backing file so `Arena::open_lazy` can walk it.
+    ///
+    /// Returns (tempdir keeping the file alive, arena file path, config,
+    /// num_slots, chunk_ids allocated in order).
+    fn seed_arena_file(
+        n_chunks: usize,
+        num_slots: usize,
+    ) -> (tempfile::TempDir, std::path::PathBuf, ArenaConfig, usize, Vec<ChunkId>) {
+        let config = ArenaConfig::test();
+        let mut arena = Arena::new(config.clone(), num_slots).expect("heap arena");
+        let mut ids = Vec::with_capacity(n_chunks);
+        for i in 0..n_chunks {
+            let payload = vec![(i as u8).wrapping_mul(13); 64];
+            let id = arena
+                .alloc_chunk(TierKind::Hot, payload)
+                .expect("alloc");
+            ids.push(id);
+        }
+        // Dump the arena's raw storage to a tempfile — this mimics an
+        // mmap-backed arena's on-disk bytes after a flush+drop.
+        let tmp = tempdir().unwrap();
+        let path = tmp.path().join("hot.arena");
+        {
+            let mut f = OpenOptions::new()
+                .create(true)
+                .write(true)
+                .truncate(true)
+                .open(&path)
+                .expect("open file");
+            f.write_all(arena.storage()).expect("write storage");
+            f.sync_all().expect("sync");
+        }
+        (tmp, path, config, num_slots, ids)
+    }
+
+    #[test]
+    fn open_lazy_walks_headers_on_populated_arena() {
+        let (_tmp, path, config, num_slots, ids) = seed_arena_file(10, 16);
+        let arena = Arena::open_lazy(config, num_slots, &path)
+            .expect("open_lazy should succeed on a clean arena file");
+        assert_eq!(arena.num_slots(), num_slots);
+        // Every allocated id should be present.
+        for id in &ids {
+            assert!(
+                arena.contains(*id),
+                "lazy-opened arena missing chunk id {}",
+                id
+            );
+        }
+        // 10 allocated, num_slots - 10 free.
+        assert_eq!(arena.free_slot_count(), num_slots - 10);
+        // next_chunk_id should be past the max id we allocated.
+        let max_id = ids.iter().map(|i| i.as_u64()).max().unwrap();
+        assert_eq!(arena.next_chunk_id(), max_id + 1);
+    }
+
+    #[test]
+    fn open_lazy_leaves_payload_untouched() {
+        // Seed, then corrupt one payload byte (offset > HEADER_SIZE).
+        let (_tmp, path, config, num_slots, ids) = seed_arena_file(5, 8);
+        let slot_size = config.chunk_size as usize;
+        // Corrupt the payload of slot 2 (the 3rd chunk). Payload starts at
+        // HEADER_SIZE offset within the slot.
+        {
+            use std::io::{Seek, SeekFrom, Write};
+            let mut f = OpenOptions::new().write(true).open(&path).unwrap();
+            let slot_start = 2 * slot_size;
+            let payload_byte = slot_start + HEADER_SIZE + 10;
+            f.seek(SeekFrom::Start(payload_byte as u64)).unwrap();
+            f.write_all(&[0xFF]).unwrap();
+            f.sync_all().unwrap();
+        }
+        // Lazy open must not notice payload damage.
+        let arena = Arena::open_lazy(config, num_slots, &path)
+            .expect("open_lazy ignores payload corruption");
+        for id in &ids {
+            assert!(
+                arena.contains(*id),
+                "lazy-opened arena missing chunk id {}",
+                id
+            );
+        }
+        assert_eq!(arena.free_slot_count(), num_slots - 5);
+    }
+
+    #[test]
+    fn open_lazy_skips_slot_with_bad_magic() {
+        // Seed 5 chunks, then zero slot 2's magic bytes (first 8 bytes of
+        // the slot's header). That slot should become free on lazy open.
+        let (_tmp, path, config, num_slots, ids) = seed_arena_file(5, 8);
+        let slot_size = config.chunk_size as usize;
+        {
+            use std::io::{Seek, SeekFrom, Write};
+            let mut f = OpenOptions::new().write(true).open(&path).unwrap();
+            let slot_start = 2 * slot_size;
+            f.seek(SeekFrom::Start(slot_start as u64)).unwrap();
+            f.write_all(&[0u8; 8]).unwrap();
+            f.sync_all().unwrap();
+        }
+        let arena = Arena::open_lazy(config, num_slots, &path)
+            .expect("open_lazy should still succeed with one bad-magic slot");
+        // 4 surviving chunks. Slot 2's id is the one that got dropped.
+        let dropped_id = ids[2];
+        assert!(
+            !arena.contains(dropped_id),
+            "expected dropped id {} to be gone after bad-magic wipe",
+            dropped_id
+        );
+        let survived: usize = ids
+            .iter()
+            .filter(|id| arena.contains(**id))
+            .count();
+        assert_eq!(survived, 4);
+        // The bad-magic slot is back in the free stack, so free_slot_count
+        // should reflect num_slots - 4 (not num_slots - 5).
+        assert_eq!(arena.free_slot_count(), num_slots - 4);
+    }
+
+    #[test]
+    fn open_lazy_empty_file_yields_empty_arena() {
+        // A file that's all zeros should open lazily to an empty arena.
+        let tmp = tempdir().unwrap();
+        let path = tmp.path().join("hot.arena");
+        let config = ArenaConfig::test();
+        let num_slots = 8;
+        let total_bytes = (config.chunk_size as usize) * num_slots;
+        {
+            let mut f = OpenOptions::new()
+                .create(true)
+                .write(true)
+                .open(&path)
+                .unwrap();
+            f.write_all(&vec![0u8; total_bytes]).unwrap();
+            f.sync_all().unwrap();
+        }
+        let arena = Arena::open_lazy(config, num_slots, &path)
+            .expect("open_lazy on empty file");
+        assert_eq!(arena.free_slot_count(), num_slots);
+        assert_eq!(arena.next_chunk_id(), 1);
+        // Suppress unused-import warning when Arena/ArenaError aren't used.
+        let _ = std::marker::PhantomData::<ArenaError>;
+    }
+}
