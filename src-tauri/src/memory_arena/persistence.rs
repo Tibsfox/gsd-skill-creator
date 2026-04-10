@@ -839,16 +839,10 @@ pub fn replay_into(arena: &mut Arena, mut reader: JournalReader) -> ArenaResult<
 /// replays when the set's tier shape has changed between runs. Callers
 /// that want strict behavior should pre-validate their manifests.
 ///
-/// # Counter drift caveat
-///
-/// `replay_into_set` dispatches via `pool.arena_mut().apply_alloc` /
-/// `apply_free`, which bypasses `TierPool::alloc` / `free`. As a
-/// consequence, `TierPool::len()` / `TierPool::is_empty()` do NOT
-/// reflect chunks that were inserted via replay — they still show the
-/// pre-replay `allocated_chunks` counter. Callers inspecting
-/// post-replay state should use
-/// `pool.arena().iter_chunk_ids().count()` or `pool.arena().stats()`
-/// instead. The proper `TierPool::replay_alloc` wiring lands in slice 3.
+/// **M3 Plan 05 — counter-drift caveat closed.** Replay now routes
+/// through `TierPool::replay_alloc` / `TierPool::replay_free`, which
+/// update the `allocated_chunks` counter atomically with the arena-level
+/// insert/remove. Callers can read `pool.len()` directly post-replay.
 pub fn replay_into_set(
     set: &mut ArenaSet,
     mut reader: JournalReader,
@@ -862,14 +856,14 @@ pub fn replay_into_set(
                 chunk_bytes,
             } => {
                 if let Some(pool) = set.pool_mut(pool_id) {
-                    pool.arena_mut().apply_alloc(chunk_id, &chunk_bytes)?;
+                    pool.replay_alloc(chunk_id, &chunk_bytes)?;
                     applied += 1;
                 }
                 // Missing pool → skip silently.
             }
             JournalOp::Free { pool_id, chunk_id } => {
                 if let Some(pool) = set.pool_mut(pool_id) {
-                    pool.arena_mut().apply_free(chunk_id)?;
+                    pool.replay_free(chunk_id)?;
                     applied += 1;
                 }
             }
