@@ -46,6 +46,15 @@ pub enum ArenaError {
         max_chunks: u32,
     },
 
+    #[error("arena set already exists at {path:?}")]
+    AlreadyExists { path: std::path::PathBuf },
+
+    #[error("manifest version mismatch: have {have}, want {want}")]
+    ManifestVersionMismatch { have: u16, want: u16 },
+
+    #[error("manifest parse error: {0}")]
+    ManifestParse(String),
+
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
 }
