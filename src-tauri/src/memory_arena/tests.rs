@@ -7219,3 +7219,90 @@ fn backward_compat_m1_m2_m3_m7_core_parse() {
         assert_eq!(header.last_promote_completed_at_ns, 0);
     }
 }
+
+// ===== M8: PG-backed ColdSource tests =================================
+
+#[cfg(feature = "postgres")]
+mod pg_cold_tests {
+    use crate::memory_arena::pg_cold::PgColdSource;
+    use crate::memory_arena::warm_start::ColdSource;
+    use crate::memory_arena::types::{ChunkId, TierKind};
+
+    fn pg_pool() -> Option<sqlx::PgPool> {
+        let url = std::env::var("DATABASE_URL").ok()?;
+        let rt = tokio::runtime::Runtime::new().ok()?;
+        rt.block_on(async { sqlx::PgPool::connect(&url).await.ok() })
+    }
+
+    #[test]
+    fn test_pg_cold_source_roundtrip() {
+        let Some(pool) = pg_pool() else {
+            eprintln!("DATABASE_URL not set — skipping PG test");
+            return;
+        };
+        let cs = PgColdSource::new(pool, "public", "arena_cold_test");
+        cs.ensure_table().expect("ensure_table");
+        let tier = TierKind::Hot;
+        let id = ChunkId::new(9001);
+        let payload = vec![0xAB; 256];
+        cs.store(tier, id, payload.clone()).expect("store");
+        let fetched = cs.fetch(tier, id).expect("fetch");
+        assert_eq!(fetched, Some(payload));
+        // Cleanup.
+        cs.delete(tier, id).expect("cleanup delete");
+    }
+
+    #[test]
+    fn test_pg_cold_source_fetch_missing() {
+        let Some(pool) = pg_pool() else {
+            eprintln!("DATABASE_URL not set — skipping PG test");
+            return;
+        };
+        let cs = PgColdSource::new(pool, "public", "arena_cold_test");
+        cs.ensure_table().expect("ensure_table");
+        let result = cs.fetch(TierKind::Blob, ChunkId::new(999_999)).expect("fetch missing");
+        assert_eq!(result, None);
+    }
+
+    #[test]
+    fn test_pg_cold_source_delete_idempotent() {
+        let Some(pool) = pg_pool() else {
+            eprintln!("DATABASE_URL not set — skipping PG test");
+            return;
+        };
+        let cs = PgColdSource::new(pool, "public", "arena_cold_test");
+        cs.ensure_table().expect("ensure_table");
+        // Delete something that doesn't exist — should be Ok(()).
+        let result = cs.delete(TierKind::Warm, ChunkId::new(888_888));
+        assert!(result.is_ok(), "delete of non-existent should succeed");
+    }
+
+    #[test]
+    fn test_pg_cold_source_ensure_table_idempotent() {
+        let Some(pool) = pg_pool() else {
+            eprintln!("DATABASE_URL not set — skipping PG test");
+            return;
+        };
+        let cs = PgColdSource::new(pool, "public", "arena_cold_test");
+        cs.ensure_table().expect("first ensure_table");
+        cs.ensure_table().expect("second ensure_table should also succeed");
+    }
+
+    #[test]
+    fn test_pg_cold_source_store_upsert() {
+        let Some(pool) = pg_pool() else {
+            eprintln!("DATABASE_URL not set — skipping PG test");
+            return;
+        };
+        let cs = PgColdSource::new(pool, "public", "arena_cold_test");
+        cs.ensure_table().expect("ensure_table");
+        let tier = TierKind::Vector;
+        let id = ChunkId::new(7777);
+        cs.store(tier, id, vec![1, 2, 3]).expect("first store");
+        cs.store(tier, id, vec![4, 5, 6]).expect("second store (upsert)");
+        let fetched = cs.fetch(tier, id).expect("fetch after upsert");
+        assert_eq!(fetched, Some(vec![4, 5, 6]));
+        // Cleanup.
+        cs.delete(tier, id).expect("cleanup delete");
+    }
+}
