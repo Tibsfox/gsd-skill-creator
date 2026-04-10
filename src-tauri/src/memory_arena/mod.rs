@@ -14,6 +14,7 @@
 //! Milestone 1 scope: chunk primitives (types, headers, checksums, tests).
 //! Milestones 2+: arena allocator, journal, checkpoint, Tauri IPC.
 
+pub(crate) mod allocator;
 pub mod arena;
 pub mod chunk;
 pub mod error;
