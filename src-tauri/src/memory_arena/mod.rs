@@ -30,7 +30,8 @@ pub use error::{ArenaError, ArenaResult};
 pub use handle::{tier_kind_from_str, tier_kind_to_str, ArenaHandle};
 pub use list::{List, LruIndex, NodeIdx};
 pub use persistence::{
-    read_checkpoint, replay_into, write_checkpoint, JournalOp, JournalReader, JournalWriter,
+    read_checkpoint, replay_into, replay_into_set, write_checkpoint, JournalOp, JournalReader,
+    JournalWriter,
 };
 pub use pool::{
     ArenaSet, ArenaSetConfig, EvictionKind, Manifest, PoolSpec, TierPolicy, TierPool,
