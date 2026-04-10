@@ -246,6 +246,41 @@ impl TierPool {
         }
         Ok(())
     }
+
+    /// Evict a single chunk from this pool using its configured eviction
+    /// policy. Returns the freed `ChunkId`, or `None` if the pool is empty.
+    ///
+    /// - `EvictionKind::Lru`: pops `lru_oldest()` from the arena.
+    /// - `EvictionKind::Fifo`: scans the directory for the oldest
+    ///   `created_at_ns` and frees that chunk.
+    pub fn evict_lru(&mut self) -> ArenaResult<Option<ChunkId>> {
+        if self.is_empty() {
+            return Ok(None);
+        }
+        let victim = match self.policy.eviction {
+            EvictionKind::Lru => self.arena.lru_oldest(),
+            EvictionKind::Fifo => {
+                // Scan all allocated chunks for the oldest created_at_ns.
+                let mut oldest_id: Option<ChunkId> = None;
+                let mut oldest_ts: u64 = u64::MAX;
+                for (id, _slot) in self.arena.directory_entries() {
+                    let ts = self.arena.read_created_at_ns(id)?;
+                    if ts < oldest_ts {
+                        oldest_ts = ts;
+                        oldest_id = Some(id);
+                    }
+                }
+                oldest_id
+            }
+        };
+        match victim {
+            Some(id) => {
+                self.free(id)?;
+                Ok(Some(id))
+            }
+            None => Ok(None),
+        }
+    }
 }
 
 // =============================================================================
@@ -537,6 +572,30 @@ impl ArenaSet {
 
     pub fn tiers(&self) -> impl Iterator<Item = TierKind> + '_ {
         self.pools.keys().copied()
+    }
+
+    /// Return the next hotter configured tier (by heat_index), or `None`
+    /// if `tier` is already the hottest configured tier. Only considers
+    /// tiers that have pools in this ArenaSet.
+    pub fn hotter_tier(&self, tier: TierKind) -> Option<TierKind> {
+        let base = tier.heat_index();
+        self.pools
+            .keys()
+            .filter(|t| t.heat_index() > base)
+            .min_by_key(|t| t.heat_index())
+            .copied()
+    }
+
+    /// Return the next colder configured tier (by heat_index), or `None`
+    /// if `tier` is already the coldest configured tier. Only considers
+    /// tiers that have pools in this ArenaSet.
+    pub fn colder_tier(&self, tier: TierKind) -> Option<TierKind> {
+        let base = tier.heat_index();
+        self.pools
+            .keys()
+            .filter(|t| t.heat_index() < base)
+            .max_by_key(|t| t.heat_index())
+            .copied()
     }
 
     // =========================================================================

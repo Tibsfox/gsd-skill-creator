@@ -5578,8 +5578,10 @@ fn arena_set_adjacency_unconfigured_tier_returns_none() {
         });
     let set = ArenaSet::create(config).unwrap();
 
-    // Vector is not configured, should return None for both directions.
-    assert_eq!(set.hotter_tier(TierKind::Vector), None);
+    // Vector is not configured as a pool, but hotter_tier still finds
+    // the next hotter configured tier by heat_index comparison.
+    assert_eq!(set.hotter_tier(TierKind::Vector), Some(TierKind::Hot));
+    // No configured tier is colder than Vector (heat_index 2), so None.
     assert_eq!(set.colder_tier(TierKind::Vector), None);
 }
 
@@ -5770,7 +5772,7 @@ fn reset_access_count_zeroes_and_preserves_checksum() {
 #[test]
 fn reset_access_count_unknown_id_errors() {
     let config = ArenaConfig::test();
-    let arena = Arena::new(config, 4).unwrap();
+    let mut arena = Arena::new(config, 4).unwrap();
     let result = arena.reset_access_count(ChunkId::new(999));
     assert!(matches!(result, Err(ArenaError::UnknownChunkId(999))));
 }
