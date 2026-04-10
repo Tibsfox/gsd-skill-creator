@@ -5966,9 +5966,10 @@ fn sweep_skips_chunk_in_promote_cooldown() {
     };
     let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
 
-    // Inject a deterministic clock.
-    let base_time: u64 = 1_000_000_000_000; // 1000s
-    set.set_now_ns_for_test(|| base_time);
+    // Inject a deterministic clock — fn pointer, no captures.
+    fn fixed_clock() -> u64 { 1_000_000_000_000 }
+    set.set_now_ns_for_test(fixed_clock);
+    let base_time: u64 = 1_000_000_000_000;
 
     // Alloc in Warm, touch to meet threshold.
     let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![7u8; 64]).unwrap();
