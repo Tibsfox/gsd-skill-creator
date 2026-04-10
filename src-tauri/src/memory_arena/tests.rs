@@ -7411,3 +7411,124 @@ mod hugetlb_tests {
         assert_eq!(chunk.payload(), &vec![0xCC; 16]);
     }
 }
+
+// ===== M8: Additional edge-case tests (closing gap to 280 target) =====
+
+#[test]
+fn read_header_core_preserves_checksum_field() {
+    use crate::memory_arena::chunk::{read_header_core, write_header_into};
+    let mut chunk = Chunk::new(ChunkId::new(55), TierKind::Warm, vec![0xFF; 100]);
+    chunk.finalize();
+    let mut buf = [0u8; HEADER_SIZE];
+    write_header_into(chunk.header(), &mut buf);
+    let header = read_header_core(&buf).expect("core parse");
+    assert_eq!(header.checksum, chunk.header().checksum);
+    assert_ne!(header.checksum, 0, "finalized chunk should have non-zero checksum");
+}
+
+#[test]
+fn read_header_extended_rejects_short_buffer() {
+    use crate::memory_arena::chunk::{read_header_core, read_header_extended};
+    // 64 bytes is enough for core but not for extended (needs HEADER_SIZE).
+    let buf = [0u8; 64];
+    // We can't call extended on a 64-byte buf — but we need a valid core
+    // first. Use a full-size buf for core, then try extended on a short buf.
+    let mut full_buf = [0u8; HEADER_SIZE];
+    let chunk = Chunk::new(ChunkId::new(1), TierKind::Hot, vec![0; 16]);
+    crate::memory_arena::chunk::write_header_into(chunk.header(), &mut full_buf);
+    let mut header = read_header_core(&full_buf).expect("core");
+    let result = read_header_extended(&buf, &mut header);
+    assert!(result.is_err(), "extended should reject buffer < HEADER_SIZE");
+}
+
+#[test]
+fn get_chunk_returns_full_header_after_cache_line_split() {
+    use crate::memory_arena::types::ChunkState;
+    // Verify that get_chunk still returns the full header (including
+    // extended fields) despite the cache-line optimization.
+    let dir = tempdir().expect("tempdir");
+    let config = ArenaConfig::test();
+    let path = dir.path().join("test.arena");
+    let mut arena = Arena::new_mmap_file(config.clone(), 8, &path).expect("create");
+    let id = arena.alloc_chunk(TierKind::Hot, vec![0xBB; 32]).expect("alloc");
+    // Mark state to FadingOut.
+    arena.mark_state(id, ChunkState::FadingOut).expect("mark");
+    // Write demote timestamp.
+    arena.write_last_demote_ns(id, 12345).expect("write demote ts");
+    // get_chunk should return a chunk whose header has the full state.
+    let chunk = arena.get_chunk(id).expect("get");
+    assert_eq!(chunk.header().state, ChunkState::FadingOut);
+    assert_eq!(chunk.header().last_demote_completed_at_ns, 12345);
+}
+
+#[test]
+fn validate_chunk_works_after_cache_line_split() {
+    let dir = tempdir().expect("tempdir");
+    let config = ArenaConfig::test();
+    let path = dir.path().join("test.arena");
+    let mut arena = Arena::new_mmap_file(config, 8, &path).expect("create");
+    let id = arena.alloc_chunk(TierKind::Hot, vec![0xAA; 64]).expect("alloc");
+    // validate_chunk should still work — it uses read_header_core for the
+    // initial size read, then Chunk::deserialize for full validation.
+    arena.validate_chunk(id).expect("validate should pass");
+}
+
+#[test]
+fn free_chunk_works_after_cache_line_split() {
+    let dir = tempdir().expect("tempdir");
+    let config = ArenaConfig::test();
+    let path = dir.path().join("test.arena");
+    let mut arena = Arena::new_mmap_file(config, 8, &path).expect("create");
+    let id = arena.alloc_chunk(TierKind::Hot, vec![0xDD; 48]).expect("alloc");
+    // free_chunk uses read_header_core to determine valid_end.
+    arena.free_chunk(id).expect("free should succeed");
+    assert!(arena.get_chunk(id).is_err(), "chunk should be gone after free");
+}
+
+#[cfg(target_os = "linux")]
+#[test]
+fn hugetlb_heap_arena_huge_pages_false() {
+    // Heap-backed arenas should always report huge_pages_active == false.
+    let arena = Arena::new(ArenaConfig::test(), 4).expect("heap arena");
+    assert!(!arena.huge_pages_active());
+}
+
+#[cfg(target_os = "linux")]
+#[test]
+fn hugetlb_standard_mmap_huge_pages_false() {
+    // Standard mmap arenas should always report huge_pages_active == false.
+    let dir = tempdir().expect("tempdir");
+    let path = dir.path().join("test.arena");
+    let arena = Arena::new_mmap_file(ArenaConfig::test(), 4, &path).expect("mmap arena");
+    assert!(!arena.huge_pages_active());
+}
+
+#[test]
+fn warm_start_lazy_after_cache_line_split() {
+    use crate::memory_arena::warm_start::{InMemoryColdSource, WarmStart};
+    // Verify that the lazy warm-start path works correctly after the
+    // cache-line optimization (uses read_header_core in the walk).
+    let dir = tempdir().expect("tempdir");
+    let config = ArenaConfig::test();
+    let root = dir.path();
+    let set_config = crate::memory_arena::pool::ArenaSetConfig::new(root)
+        .with_pool(crate::memory_arena::pool::PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: config.chunk_size,
+            num_slots: 16,
+            policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
+        });
+    let mut set = crate::memory_arena::pool::ArenaSet::create(set_config).expect("create");
+    let pool = set.pool_mut(TierKind::Hot).expect("hot");
+    let id1 = pool.alloc(vec![1; 32]).expect("alloc 1");
+    let id2 = pool.alloc(vec![2; 32]).expect("alloc 2");
+    drop(set);
+    // Reopen via lazy warm-start.
+    let cold = InMemoryColdSource::new();
+    let (set2, report) = WarmStart::open(root, &cold).expect("warm start");
+    assert_eq!(report.slots_walked, 2);
+    assert_eq!(report.slots_validated, 2);
+    let pool2 = set2.pool(TierKind::Hot).expect("hot after reopen");
+    assert!(pool2.arena().get_chunk(id1).is_ok());
+    assert!(pool2.arena().get_chunk(id2).is_ok());
+}
