@@ -191,7 +191,7 @@ WX_DAY6 = {
     23: (6.2,  3.0,  "Calm",       78, 1003.0, "CLR",            "00000KT", "CLR",      20.0),
 }
 
-# Day 7: April 6, 2026 (Flight Day 6) — LUNAR SPHERE OF INFLUENCE ENTRY
+# Day 7: April 6, 2026 (Flight Day 6) — LUNAR FLYBY DAY — CLOSEST APPROACH ~2:30 PM EDT
 # High pressure dominant, clear skies, light northerly flow
 WX_DAY7 = {
     0:  (6.0,  2.5,  "Calm",       76, 1003.2, "CLR",            "00000KT", "CLR",      20.0),
@@ -220,7 +220,7 @@ WX_DAY7 = {
     23: (6.0,  2.0,  "Calm",       75, 1005.5, "CLR",            "00000KT", "CLR",      20.5),
 }
 
-# Day 8: April 7, 2026 (Flight Day 7) — LUNAR FLYBY — CLOSEST APPROACH ~12:30 EDT
+# Day 8: April 7, 2026 (Flight Day 7) — POST-FLYBY, RETURN COAST BEGINS
 # Clear skies for observation, high pressure ridge, excellent visibility
 WX_DAY8 = {
     0:  (5.5,  2.0,  "Calm",       78, 1005.5, "CLR",            "00000KT", "CLR",      20.0),
@@ -307,12 +307,56 @@ WX_DAY10 = {
     23: (6.0,  3.0,  "Calm",       76, 1004.8, "CLR",            "00000KT", "CLR",      20.0),
 }
 
+# Day 11: April 10, 2026 (Flight Day 10) — SPLASHDOWN + RECOVERY
+# Pacific splashdown ~12:40 PM EDT. Clear PNW spring day, calm recovery seas.
+WX_DAY11 = {
+    0:  (5.5,  2.5,  "Calm",       74, 1005.0, "CLR",            "00000KT", "CLR",      19.5),
+    1:  (5.0,  2.0,  "Calm",       76, 1005.2, "CLR",            "00000KT", "CLR",      19.0),
+    2:  (4.5,  2.0,  "Calm",       78, 1005.5, "CLR",            "00000KT", "CLR",      18.5),
+    3:  (4.0,  1.5,  "Calm",       80, 1005.8, "FEW200",         "00000KT", "FEW200",   18.0),
+    4:  (3.8,  1.5,  "Calm",       82, 1006.0, "FEW200",         "00000KT", "FEW200",   18.0),
+    5:  (4.0,  1.5,  "Calm",       80, 1006.2, "CLR",            "00000KT", "CLR",      18.5),
+    6:  (4.5,  1.5,  "Calm",       78, 1006.5, "CLR",            "00000KT", "CLR",      19.5),
+    7:  (6.0,  1.0,  "Calm",       65, 1006.8, "CLR",            "00000KT", "CLR",      21.0),
+    8:  (8.5,  0.5,  "Calm",       50, 1007.0, "CLR",            "00000KT", "CLR",      23.0),
+    9:  (10.5, 0.0,  "NW 5 km/h",  42, 1007.2, "CLR",            "32003KT", "CLR",      25.0),
+    10: (12.0,-0.5,  "NW 6 km/h",  35, 1007.5, "CLR",            "32003KT", "CLR",      27.0),
+    11: (13.5,-1.0,  "NW 8 km/h",  30, 1007.8, "FEW250",         "32004KT", "FEW250",   28.5),
+    12: (14.5,-1.0,  "NW 8 km/h",  28, 1008.0, "FEW250",         "32004KT", "FEW250",   29.5),
+    13: (15.0,-1.0,  "NW 6 km/h",  26, 1008.2, "SKC",            "32003KT", "SKC",      30.0),
+    14: (15.0,-0.5,  "NW 5 km/h",  27, 1008.5, "SKC",            "32003KT", "SKC",      30.0),
+    15: (14.5, 0.0,  "NW 5 km/h",  29, 1008.8, "SKC",            "32003KT", "SKC",      29.5),
+    16: (13.5, 0.5,  "Calm",       33, 1009.0, "CLR",            "00000KT", "CLR",      28.5),
+    17: (12.0, 1.0,  "Calm",       38, 1009.2, "CLR",            "00000KT", "CLR",      27.0),
+    18: (10.5, 1.5,  "Calm",       45, 1009.5, "CLR",            "00000KT", "CLR",      25.0),
+    19: (9.0,  2.0,  "Calm",       52, 1009.8, "CLR",            "00000KT", "CLR",      23.0),
+    20: (7.5,  2.0,  "Calm",       60, 1010.0, "CLR",            "00000KT", "CLR",      21.5),
+    21: (6.5,  2.0,  "Calm",       66, 1010.2, "CLR",            "00000KT", "CLR",      20.5),
+    22: (6.0,  2.0,  "Calm",       70, 1010.5, "CLR",            "00000KT", "CLR",      20.0),
+    23: (5.5,  2.0,  "Calm",       74, 1010.8, "CLR",            "00000KT", "CLR",      19.5),
+}
+
 # Day selector
-WX_DAYS = {1: WX_DAY1, 2: WX_DAY2, 3: WX_DAY3, 4: WX_DAY4, 5: WX_DAY5, 6: WX_DAY6, 7: WX_DAY7, 8: WX_DAY8, 9: WX_DAY9, 10: WX_DAY10}
-WX_DATES = {1: (2026, 3, 31), 2: (2026, 4, 1), 3: (2026, 4, 2), 4: (2026, 4, 3), 5: (2026, 4, 4), 6: (2026, 4, 5), 7: (2026, 4, 6), 8: (2026, 4, 7), 9: (2026, 4, 8), 10: (2026, 4, 9)}
-WX_COUNTDOWNS = {1: 39, 2: 15, 3: -9, 4: -33, 5: -57, 6: -81, 7: -105, 8: -129, 9: -153, 10: -177}
-WX_VERSIONS = {1: "v1.0", 2: "v1.1", 3: "v1.2", 4: "v1.3", 5: "v1.4", 6: "v1.5", 7: "v1.6", 8: "v1.7", 9: "v1.8", 10: "v1.9"}
-WX_KP = {1: (1.33, 3.3, 392), 2: (2.0, 3.7, 405), 3: (1.67, 2.0, 380), 4: (1.33, 1.7, 370), 5: (3.0, 5.0, 450), 6: (2.33, 3.0, 420), 7: (1.67, 2.0, 390), 8: (1.33, 1.7, 375), 9: (2.0, 3.3, 410), 10: (1.67, 2.3, 395)}
+WX_DAYS = {1: WX_DAY1, 2: WX_DAY2, 3: WX_DAY3, 4: WX_DAY4, 5: WX_DAY5, 6: WX_DAY6, 7: WX_DAY7, 8: WX_DAY8, 9: WX_DAY9, 10: WX_DAY10, 11: WX_DAY11}
+WX_DATES = {1: (2026, 3, 31), 2: (2026, 4, 1), 3: (2026, 4, 2), 4: (2026, 4, 3), 5: (2026, 4, 4), 6: (2026, 4, 5), 7: (2026, 4, 6), 8: (2026, 4, 7), 9: (2026, 4, 8), 10: (2026, 4, 9), 11: (2026, 4, 10)}
+WX_COUNTDOWNS = {1: 39, 2: 15, 3: -9, 4: -33, 5: -57, 6: -81, 7: -105, 8: -129, 9: -153, 10: -177, 11: -201}
+WX_VERSIONS = {1: "v1.0", 2: "v1.1", 3: "v1.2", 4: "v1.3", 5: "v1.4", 6: "v1.5", 7: "v1.6", 8: "v1.7", 9: "v1.8", 10: "v1.9", 11: "v1.10"}
+WX_KP = {1: (1.33, 3.3, 392), 2: (2.0, 3.7, 405), 3: (1.67, 2.0, 380), 4: (1.33, 1.7, 370), 5: (3.0, 5.0, 450), 6: (2.33, 3.0, 420), 7: (1.67, 2.0, 390), 8: (1.33, 1.7, 375), 9: (2.0, 3.3, 410), 10: (1.67, 2.3, 395), 11: (1.0, 1.7, 365)}
+
+# Mission status per day: (flight_day, met_days, phase, badge, status_blurb)
+WX_MISSION_STATUS = {
+    1:  (0,  "T-1d",  "pre-launch",        "PRELAUNCH",   "Final countdown. Weather monitoring at KSC and KPAE."),
+    2:  (1,  "+0d",   "launch day",         "LAUNCH",      "Launch day. Orion lifts off atop SLS from LC-39B, Kennedy Space Center."),
+    3:  (2,  "+1d",   "post-launch orbit",  "IN ORBIT",    "Post-launch checkout. Orion in Earth orbit, systems nominal."),
+    4:  (3,  "+2d",   "translunar coast",   "TRANSLUNAR",  "Translunar injection complete. Coasting toward the Moon."),
+    5:  (4,  "+3d",   "translunar coast",   "TRANSLUNAR",  "Coasting toward the Moon. Crew beyond magnetosphere."),
+    6:  (5,  "+4d",   "translunar coast",   "TRANSLUNAR",  "Deep translunar coast. Approaching lunar sphere of influence."),
+    7:  (6,  "+5d",   "lunar flyby day",    "FLYBY",       "DISTANCE RECORD: 252,756 miles from Earth, surpassing Apollo 13. Lunar flyby ~2:30 PM EDT &mdash; closest approach ~4,067 miles."),
+    8:  (7,  "+6d",   "post-flyby return",  "RETURN",      "Lunar flyby complete. Crew witnessed far side, solar eclipse. Return coast begins."),
+    9:  (8,  "+7d",   "return coast",       "RETURN",      "Return coast. Radiation shelter demonstration. Homeward bound."),
+    10: (9,  "+8d",   "return coast",       "RETURN",      "Return coast. Pre-reentry systems checks. Approaching Earth."),
+    11: (10, "+9d",   "splashdown",         "SPLASHDOWN",  "Splashdown in the Pacific ~12:40 PM EDT. Recovery ops underway. Crew safe. Mission complete."),
+}
 
 # Default for backward compat
 WX = WX_DAY1
@@ -438,8 +482,21 @@ def run_sweep(hour, args):
         total_changes += len(changes)
         print(f"  Research/index.html: {', '.join(changes)}")
 
-    # ── 4. LIVE/index.html — sweep version, space weather, papers, problems ──
+    # ── 4. LIVE/index.html — mission status, sweep version, space weather, papers, problems ──
+    flight_day, met, phase, badge, blurb = WX_MISSION_STATUS[day]
     live_patterns = [
+        # Mission status badge
+        (r'<span class="badge badge-live">\w+</span>',
+         f'<span class="badge badge-live">{badge}</span>',
+         "mission badge"),
+        # MET + Flight Day + phase in status line
+        (r'<strong>MET \+\d+d &mdash; Flight Day \d+, [^.]+\.</strong>[^<]*(?=<a href=)',
+         f'<strong>MET {met} &mdash; Flight Day {flight_day}, {phase}.</strong> {blurb} ',
+         "mission status line"),
+        # FD in meta line
+        (r'FD\d+ of 10',
+         f'FD{flight_day} of 10',
+         "meta flight day"),
         # Sweep version in JS
         (r"'Z \(sweep v1\.\d\.\d+\)'",
          f"'Z (sweep {version})'",
@@ -552,7 +609,7 @@ def run_sweep(hour, args):
 def main():
     parser = argparse.ArgumentParser(description="Artemis II hourly sweep updater")
     parser.add_argument("hour", type=int, help="Hour of day (0-23)")
-    parser.add_argument("--day", type=int, default=1, choices=range(1, 11),
+    parser.add_argument("--day", type=int, default=1, choices=range(1, 12),
                         help="Mission day: 1=Mar 31, ..., 8=Apr 7 (flyby), 10=Apr 9 (default: 1)")
     parser.add_argument("--dry-run", action="store_true", help="Show changes without writing")
     parser.add_argument("--kp", type=float, help="Current Kp index")

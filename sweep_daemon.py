@@ -192,13 +192,9 @@ for subdir in ['OPEN/problems', 'LIVE', 'MUK/sims', 'MUK', 'NASA/artemis-ii']:
     for item in os.listdir(local_dir):
         if not item.endswith('.html'): continue
         local_path = os.path.join(local_dir, item)
-        try:
-            need = ftp.size(item) != os.path.getsize(local_path)
-        except: need = True
-        if need:
-            with open(local_path, 'rb') as fh:
-                ftp.storbinary(f'STOR {item}', fh)
-            count += 1
+        with open(local_path, 'rb') as fh:
+            ftp.storbinary(f'STOR {item}', fh)
+        count += 1
 ftp.quit()
 print(f'Synced {count} files')
 " """
