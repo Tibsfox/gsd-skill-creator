@@ -133,16 +133,36 @@ export class ContentAddressedSetStore {
 
   /**
    * Rebuild the hash index by scanning all configured tier pools.
-   * Uses `getHot` (zero-copy M9 path) for fast chunk reads.
+   * For each tier, lists chunk IDs via `arena.listIds(tier)`, then
+   * reads each chunk via `getHot` (zero-copy M9 path), parses the
+   * hash prefix, and registers the entry.
+   *
+   * Chunks that can't be decoded as content-addressed entries are
+   * silently skipped — other consumers may share the arena.
    */
   async loadIndex(): Promise<void> {
     this.hashIndex.clear();
-    // Note: the ArenaSet IPC doesn't have a per-tier listIds yet.
-    // For now, we use a single pass that the caller triggers after
-    // arena init. Future: add arena_set_list_ids(tier) command.
-    //
-    // Placeholder: callers pre-populate the index via repeated getHot
-    // or use the legacy ContentAddressedStore's loadIndex path.
+    for (const tier of this.indexTiers) {
+      let ids: number[];
+      try {
+        ids = await this.arena.listIds(tier);
+      } catch {
+        // Tier not configured in this ArenaSet — skip.
+        continue;
+      }
+      for (const chunkId of ids) {
+        try {
+          const chunk = await this.arena.getHot(tier, chunkId);
+          const decoded = decodePayload(chunk.payload);
+          const hex = canonicalizeHash(decoded.hash);
+          if (!this.hashIndex.has(hex)) {
+            this.hashIndex.set(hex, { tier, chunkId });
+          }
+        } catch {
+          // Skip chunks we can't decode.
+        }
+      }
+    }
     this.indexLoaded = true;
   }
 

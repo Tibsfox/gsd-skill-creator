@@ -508,6 +508,21 @@ pub async fn arena_set_free(
     pool.free(ChunkId::new(chunk_id)).map_err(err_string)
 }
 
+/// List all chunk IDs in a specific tier pool.
+#[tauri::command]
+pub async fn arena_set_list_ids(
+    tier: String,
+    state: State<'_, ArenaSetState>,
+) -> Result<ListIdsResponse, String> {
+    let guard = state.set.lock().await;
+    let set = guard.as_ref().ok_or_else(|| "arena set not initialized".to_string())?;
+    let tier_kind = tier_kind_from_str(&tier).map_err(|_| format!("unknown tier: {}", tier))?;
+
+    let pool = set.pool(tier_kind).ok_or_else(|| format!("no pool for tier: {}", tier))?;
+    let chunk_ids: Vec<u64> = pool.arena().iter_chunk_ids().map(|id| id.as_u64()).collect();
+    Ok(ListIdsResponse { chunk_ids })
+}
+
 // ----------------------------------------------------------------------------
 // Tests (async, using tempdir)
 // ----------------------------------------------------------------------------
