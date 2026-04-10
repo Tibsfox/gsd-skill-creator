@@ -7939,3 +7939,141 @@ mod m10_orphan_gc_tests {
         assert_eq!(gc_report.targets_freed, 2, "should free both orphaned targets");
     }
 }
+
+// =============================================================================
+// M11 — Thread-safe allocators + async ColdSource
+// =============================================================================
+
+mod m11_sync_allocator_tests {
+    use crate::memory_arena::allocator::{
+        BuddyAllocator, ChunkAllocator, FixedSlotAllocator, SlabAllocator, SlabConfig,
+        SyncAllocator, TlsfAllocator,
+    };
+
+    #[test]
+    fn sync_allocator_wraps_fixed_slot() {
+        let inner = FixedSlotAllocator::new(256, 16);
+        let sync = SyncAllocator::new(inner);
+
+        let (offset, size) = sync.alloc(128).expect("alloc");
+        assert_eq!(size, 256); // FixedSlot always returns slot_size
+        assert_eq!(sync.num_allocations(), 1);
+
+        sync.free(offset).expect("free");
+        assert_eq!(sync.num_allocations(), 0);
+    }
+
+    #[test]
+    fn sync_allocator_wraps_tlsf() {
+        use crate::memory_arena::allocator::TlsfConfig;
+        let inner = TlsfAllocator::new(64 * 1024, 64, TlsfConfig::default());
+        let sync = SyncAllocator::new(inner);
+
+        let (off1, _) = sync.alloc(100).expect("alloc1");
+        let (off2, _) = sync.alloc(200).expect("alloc2");
+        assert_eq!(sync.num_allocations(), 2);
+
+        sync.free(off1).expect("free1");
+        assert_eq!(sync.num_allocations(), 1);
+        sync.free(off2).expect("free2");
+        assert_eq!(sync.num_allocations(), 0);
+    }
+
+    #[test]
+    fn sync_allocator_is_send_and_sync() {
+        fn assert_send_sync<T: Send + Sync>() {}
+        assert_send_sync::<SyncAllocator<FixedSlotAllocator>>();
+        assert_send_sync::<SyncAllocator<TlsfAllocator>>();
+        assert_send_sync::<SyncAllocator<BuddyAllocator>>();
+    }
+
+    #[test]
+    fn sync_allocator_concurrent_alloc_free() {
+        use std::sync::Arc;
+        use std::thread;
+
+        let inner = FixedSlotAllocator::new(64, 256);
+        let sync = Arc::new(SyncAllocator::new(inner));
+
+        let handles: Vec<_> = (0..8)
+            .map(|_| {
+                let s = sync.clone();
+                thread::spawn(move || {
+                    let mut offsets = Vec::new();
+                    for _ in 0..16 {
+                        if let Ok((off, _)) = s.alloc(32) {
+                            offsets.push(off);
+                        }
+                    }
+                    for off in offsets {
+                        let _ = s.free(off);
+                    }
+                })
+            })
+            .collect();
+
+        for h in handles {
+            h.join().expect("thread panicked");
+        }
+
+        // After all threads complete, all allocations should be freed.
+        assert_eq!(sync.num_allocations(), 0);
+    }
+}
+
+mod m11_async_cold_source_tests {
+    use crate::memory_arena::error::ArenaResult;
+    use crate::memory_arena::types::{ChunkId, TierKind};
+    use crate::memory_arena::warm_start::AsyncColdSource;
+
+    /// In-memory async cold source for testing.
+    struct InMemoryAsyncCold {
+        map: std::collections::HashMap<(TierKind, ChunkId), Vec<u8>>,
+    }
+
+    impl InMemoryAsyncCold {
+        fn new() -> Self {
+            Self {
+                map: std::collections::HashMap::new(),
+            }
+        }
+
+        fn insert(&mut self, tier: TierKind, id: ChunkId, payload: Vec<u8>) {
+            self.map.insert((tier, id), payload);
+        }
+    }
+
+    impl AsyncColdSource for InMemoryAsyncCold {
+        fn fetch(
+            &self,
+            tier: TierKind,
+            id: ChunkId,
+        ) -> std::pin::Pin<
+            Box<dyn std::future::Future<Output = ArenaResult<Option<Vec<u8>>>> + Send + '_>,
+        > {
+            let result = self.map.get(&(tier, id)).cloned();
+            Box::pin(async move { Ok(result) })
+        }
+    }
+
+    #[test]
+    fn async_cold_source_trait_is_object_safe() {
+        let _: Box<dyn AsyncColdSource> = Box::new(InMemoryAsyncCold::new());
+    }
+
+    #[tokio::test]
+    async fn async_cold_source_fetch_returns_payload() {
+        let mut cold = InMemoryAsyncCold::new();
+        cold.insert(TierKind::Hot, ChunkId::new(1), vec![42; 64]);
+
+        let result = cold.fetch(TierKind::Hot, ChunkId::new(1)).await;
+        assert_eq!(result.unwrap(), Some(vec![42; 64]));
+    }
+
+    #[tokio::test]
+    async fn async_cold_source_fetch_returns_none_for_missing() {
+        let cold = InMemoryAsyncCold::new();
+        let result = cold.fetch(TierKind::Hot, ChunkId::new(999)).await;
+        assert_eq!(result.unwrap(), None);
+    }
+}
