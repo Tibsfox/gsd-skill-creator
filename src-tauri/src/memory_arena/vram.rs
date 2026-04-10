@@ -257,3 +257,132 @@ impl std::fmt::Debug for VramContext {
         f.debug_struct("VramContext").finish()
     }
 }
+
+// =========================================================================
+// VramPool
+// =========================================================================
+
+use std::collections::HashMap;
+use crate::memory_arena::types::{ChunkId, TierKind, TierPolicy};
+
+/// A VRAM slot holding an active device allocation and its chunk id.
+struct VramSlot {
+    alloc: VramAllocation,
+    id: ChunkId,
+}
+
+/// Device-side pool managing a fixed number of VRAM allocations. Each slot
+/// holds one chunk uploaded to the GPU. NOT a `TierPool` — VramPool has its
+/// own simpler contract (no mmap, no checksum headers, no LRU index).
+pub struct VramPool {
+    context: Arc<VramContext>,
+    tier: TierKind,
+    chunk_size: u64,
+    policy: TierPolicy,
+    slots: Vec<Option<VramSlot>>,
+    directory: HashMap<ChunkId, usize>,
+    next_id: u64,
+}
+
+impl VramPool {
+    /// Create a new VramPool with `num_slots` capacity.
+    pub fn new(
+        context: Arc<VramContext>,
+        tier: TierKind,
+        chunk_size: u64,
+        num_slots: usize,
+        policy: TierPolicy,
+    ) -> ArenaResult<Self> {
+        let mut slots = Vec::with_capacity(num_slots);
+        for _ in 0..num_slots {
+            slots.push(None);
+        }
+        Ok(Self {
+            context,
+            tier,
+            chunk_size,
+            policy,
+            slots,
+            directory: HashMap::new(),
+            next_id: 1,
+        })
+    }
+
+    /// Tier kind accessor.
+    pub fn tier(&self) -> TierKind {
+        self.tier
+    }
+
+    /// Policy accessor.
+    pub fn policy(&self) -> &TierPolicy {
+        &self.policy
+    }
+
+    /// Number of currently allocated chunks.
+    pub fn len(&self) -> usize {
+        self.directory.len()
+    }
+
+    /// True if no chunks are allocated.
+    pub fn is_empty(&self) -> bool {
+        self.directory.is_empty()
+    }
+
+    /// Check if a chunk id is present.
+    pub fn contains(&self, id: ChunkId) -> bool {
+        self.directory.contains_key(&id)
+    }
+
+    /// Find a free slot index, or None if all slots are occupied.
+    fn find_free_slot(&self) -> Option<usize> {
+        self.slots.iter().position(|s| s.is_none())
+    }
+
+    /// Allocate a chunk: find a free slot, allocate VRAM, upload payload.
+    pub fn alloc(&mut self, payload: &[u8]) -> ArenaResult<ChunkId> {
+        let slot_idx = self.find_free_slot().ok_or(ArenaError::PoolFull {
+            tier: self.tier,
+            max_chunks: self.slots.len() as u32,
+        })?;
+
+        let size = payload.len();
+        let mut vram_alloc = self.context.alloc(size)?;
+        if !payload.is_empty() {
+            self.context.upload(payload, &mut vram_alloc)?;
+        }
+
+        let id = ChunkId::new(self.next_id);
+        self.next_id += 1;
+
+        self.slots[slot_idx] = Some(VramSlot {
+            alloc: vram_alloc,
+            id,
+        });
+        self.directory.insert(id, slot_idx);
+
+        Ok(id)
+    }
+
+    /// Download chunk data from VRAM.
+    pub fn get(&self, id: ChunkId) -> ArenaResult<Vec<u8>> {
+        let &slot_idx = self.directory.get(&id).ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let slot = self.slots[slot_idx]
+            .as_ref()
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let size = slot.alloc.size_bytes();
+        if size == 0 {
+            return Ok(Vec::new());
+        }
+        let mut buf = vec![0u8; size];
+        self.context.download(&slot.alloc, &mut buf)?;
+        Ok(buf)
+    }
+
+    /// Free a VRAM slot. The device allocation is dropped immediately.
+    pub fn free(&mut self, id: ChunkId) -> ArenaResult<()> {
+        let slot_idx = self.directory.remove(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        self.slots[slot_idx] = None;
+        Ok(())
+    }
+}
