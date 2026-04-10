@@ -679,17 +679,15 @@ impl ArenaSet {
         self.begin_crossfade_inner(CrossfadeDirection::Promote, source_tier, source_id, target_tier)
     }
 
-    /// Finalize a demote crossfade: free the source chunk (which is still
-    /// in `FadingOut` state) and return the target chunk id as the canonical
-    /// reference going forward. The target chunk's data is unchanged.
-    ///
-    /// # Errors
-    /// - `UnknownCrossfade` if the handle is not registered (e.g. already
-    ///   completed, already aborted, or never begun).
-    /// - `UnknownTier` if either tier is not configured.
-    /// - `CrossfadeStateMismatch` if the source's state byte has been
-    ///   tampered with and no longer reads as `FadingOut`.
-    pub fn complete_demote(&mut self, handle: CrossfadeHandle) -> ArenaResult<ChunkId> {
+    /// Shared implementation for `complete_demote` and `complete_promote`.
+    /// The only parameterization is which timestamp to write on the target:
+    /// demote writes `last_demote_completed_at_ns`, promote writes
+    /// `last_promote_completed_at_ns`.
+    fn complete_crossfade_inner(
+        &mut self,
+        direction: CrossfadeDirection,
+        handle: CrossfadeHandle,
+    ) -> ArenaResult<ChunkId> {
         // 1. Verify the handle is still registered.
         let registered = self
             .crossfade_registry
@@ -719,19 +717,26 @@ impl ArenaSet {
             });
         }
 
-        // 3. Stamp the target chunk's last_demote_completed_at_ns BEFORE
-        // freeing the source, so a crash between stamp and free still
-        // leaves a valid canonical chunk with the current time recorded.
-        // The stamp is used by future hysteresis checks on the target.
+        // 3. Stamp the target chunk's completion timestamp BEFORE freeing
+        // the source. The direction selects which field to write.
         {
             let now = (self.now_ns)();
             let target_pool = self
                 .pools
                 .get_mut(&handle.target_tier)
                 .ok_or(ArenaError::UnknownTier(handle.target_tier))?;
-            target_pool
-                .arena_mut()
-                .write_last_demote_ns(handle.target, now)?;
+            match direction {
+                CrossfadeDirection::Demote => {
+                    target_pool
+                        .arena_mut()
+                        .write_last_demote_ns(handle.target, now)?;
+                }
+                CrossfadeDirection::Promote => {
+                    target_pool
+                        .arena_mut()
+                        .write_last_promote_ns(handle.target, now)?;
+                }
+            }
         }
 
         // 4. Free the source chunk via the TierPool free path (which
@@ -751,20 +756,10 @@ impl ArenaSet {
         Ok(handle.target)
     }
 
-    /// Reverse a demote crossfade: free the target chunk and restore the
-    /// source's state byte to `Resident`. The source chunk is left in
-    /// place and is the canonical reference going forward.
-    ///
-    /// **Ordering rationale.** The source state byte is restored to
-    /// `Resident` BEFORE the target is freed. If the process crashes
-    /// mid-abort, the worst-case residue is an orphaned target (leak of
-    /// slot space, recoverable by warm-start or a subsequent free)
-    /// rather than a `FadingOut` source with no reachable target.
-    ///
-    /// # Errors
-    /// - `UnknownCrossfade` if the handle is not registered.
-    /// - `UnknownTier` if either tier is not configured.
-    pub fn abort_demote(&mut self, handle: CrossfadeHandle) -> ArenaResult<()> {
+    /// Shared implementation for `abort_demote` and `abort_promote`.
+    /// Abort is fully direction-agnostic: restore source to Resident,
+    /// free target, deregister. No timestamp is written on abort.
+    fn abort_crossfade_inner(&mut self, handle: CrossfadeHandle) -> ArenaResult<()> {
         // 1. Verify the handle is still registered.
         let registered = self
             .crossfade_registry
@@ -803,6 +798,37 @@ impl ArenaSet {
             .remove(handle.source_tier, handle.source);
 
         Ok(())
+    }
+
+    /// Finalize a demote crossfade: free the source chunk and return the
+    /// target chunk id as the canonical reference going forward.
+    pub fn complete_demote(&mut self, handle: CrossfadeHandle) -> ArenaResult<ChunkId> {
+        self.complete_crossfade_inner(CrossfadeDirection::Demote, handle)
+    }
+
+    /// Finalize a promote crossfade: free the source chunk and return the
+    /// target chunk id as the canonical reference going forward.
+    pub fn complete_promote(&mut self, handle: CrossfadeHandle) -> ArenaResult<ChunkId> {
+        self.complete_crossfade_inner(CrossfadeDirection::Promote, handle)
+    }
+
+    /// Reverse a demote crossfade: free the target chunk and restore the
+    /// source's state byte to `Resident`.
+    ///
+    /// **Ordering rationale.** The source state byte is restored to
+    /// `Resident` BEFORE the target is freed. If the process crashes
+    /// mid-abort, the worst-case residue is an orphaned target (leak of
+    /// slot space, recoverable by warm-start) rather than a `FadingOut`
+    /// source with no reachable target.
+    pub fn abort_demote(&mut self, handle: CrossfadeHandle) -> ArenaResult<()> {
+        self.abort_crossfade_inner(handle)
+    }
+
+    /// Reverse a promote crossfade: free the target chunk and restore the
+    /// source's state byte to `Resident`. Same crash-safety ordering as
+    /// `abort_demote`.
+    pub fn abort_promote(&mut self, handle: CrossfadeHandle) -> ArenaResult<()> {
+        self.abort_crossfade_inner(handle)
     }
 
     /// Flush all pool mmaps and rewrite the manifest atomically. Call before
