@@ -232,6 +232,51 @@ export class ContentAddressedSetStore {
     return this.hashIndex.has(canonicalizeHash(hash));
   }
 
+  /**
+   * Overwrite an existing entry by hash. Frees the old chunk, allocates
+   * a new one in the same tier. If the hash isn't present, behaves like put.
+   */
+  async replaceByHash(
+    hash: Uint8Array | string,
+    bytes: Uint8Array,
+    tier?: TierKind,
+  ): Promise<SetPutResult> {
+    const hex = canonicalizeHash(hash);
+    const existing = this.hashIndex.get(hex);
+    const targetTier = tier ?? existing?.tier ?? this.defaultTier;
+
+    if (existing) {
+      await this.arena.free(existing.tier, existing.chunkId);
+      this.hashIndex.delete(hex);
+    }
+
+    const hashBytes = typeof hash === 'string' ? hexToBytes(hex) : hash;
+    const payload = encodePayload(hashBytes, bytes);
+    const chunkId = await this.arena.alloc(targetTier, payload);
+    this.hashIndex.set(hex, { tier: targetTier, chunkId });
+
+    return { hash: hex, chunkId, tier: targetTier, created: existing === undefined };
+  }
+
+  /**
+   * Look up the arena chunk id for a hash without fetching the payload.
+   */
+  async chunkIdForHash(hash: Uint8Array | string): Promise<number | null> {
+    return this.hashIndex.get(canonicalizeHash(hash))?.chunkId ?? null;
+  }
+
+  /**
+   * Advisory prefetch — touch chunks to warm the arena cache.
+   */
+  async preload(hashes: Array<Uint8Array | string>): Promise<number> {
+    let hits = 0;
+    for (const h of hashes) {
+      const entry = this.hashIndex.get(canonicalizeHash(h));
+      if (entry) hits++;
+    }
+    return hits;
+  }
+
   // ─── Delete ─────────────────────────────────────────────────────────────
 
   async removeByHash(hash: Uint8Array | string): Promise<boolean> {
