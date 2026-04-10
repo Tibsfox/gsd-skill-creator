@@ -70,6 +70,16 @@ pub enum ArenaError {
     #[error("chunk {chunk_id} is already fading")]
     AlreadyFading { chunk_id: u64 },
 
+    #[error("unknown crossfade handle for chunk {chunk_id}")]
+    UnknownCrossfade { chunk_id: u64 },
+
+    #[error("crossfade state mismatch for chunk {chunk_id}: expected {expected:?}, found {found:?}")]
+    CrossfadeStateMismatch {
+        chunk_id: u64,
+        expected: crate::memory_arena::types::ChunkState,
+        found: crate::memory_arena::types::ChunkState,
+    },
+
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
 }
