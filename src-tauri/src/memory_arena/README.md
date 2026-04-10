@@ -24,20 +24,25 @@ See `memory/amiga-ram-storage-design.md` for the full philosophy:
 
 Not `tmpfs`. Not `/dev/shm`. Not OS-managed. We own every byte.
 
-## M1 module layout
+## Module layout (M13)
 
-| File | Purpose |
-|---|---|
-| `types.rs` | `TierKind`, `ChunkId`, `ChunkHeader`, `ArenaConfig`, `TierPolicy`, `EvictionKind` |
-| `chunk.rs` | `Chunk` primitive — header + payload + streaming xxh3 checksum |
-| `arena.rs` | `Arena` — fixed-slot allocator, heap- or mmap-backed, LRU-aware |
-| `list.rs` | `List<T>` index-based intrusive doubly-linked list + `LruIndex` |
-| `pool.rs` | `TierPool` (arena + policy) and `ArenaSet` (multi-pool container + `manifest.json`) |
-| `warm_start.rs` | `WarmStart::open`, `ColdSource` trait, `InMemoryColdSource` stub |
-| `persistence.rs` | Checkpoint (v1 dense + v2 sparse) + append-only journal |
-| `handle.rs` | Opaque `ArenaHandle` + `TierKind` string conversion helpers |
-| `error.rs` | `ArenaError` enum + `ArenaResult<T>` |
-| `tests.rs` | 106 unit + integration tests (+1 `#[ignore]` for journal truncation, deferred to slice 2) |
+| File | Lines | Purpose |
+|---|---|---|
+| `types.rs` | 466 | `TierKind`, `ChunkId`, `ChunkHeader`, `ArenaConfig`, `TierPolicy`, `EvictionKind`, `AllocatorSelector`, `SweepReport` |
+| `chunk.rs` | 261 | `Chunk` primitive — header + payload + streaming xxh3 checksum, `read_header_core`/`read_header_extended` |
+| `arena.rs` | 1,273 | `Arena` — fixed-slot allocator, heap/mmap, LRU-aware, `get_chunk_hot` zero-copy path |
+| `allocator.rs` | 977 | `ChunkAllocator` trait + 4 impls (FixedSlot, Slab, Buddy, TLSF) + `AllocatorKind` enum dispatch + `SyncAllocator<A>` |
+| `list.rs` | 309 | `List<T>` index-based intrusive doubly-linked list + `LruIndex` |
+| `pool.rs` | 1,629 | `TierPool`, `ArenaSet` (multi-pool + manifest + crossfade registry persistence + orphan GC), `GcReport` |
+| `warm_start.rs` | 420 | `WarmStart::open`, `ColdSource` + `AsyncColdSource` traits, `InMemoryColdSource` |
+| `persistence.rs` | 873 | Checkpoint (v1 dense + v2 sparse) + append-only journal |
+| `pg_cold.rs` | 127 | `PgColdSource` — PostgreSQL-backed ColdSource (feature = postgres) |
+| `vram.rs` | 622 | `VramContext`, `VramPool`, `PinnedBuffer`, `GpuTopology`, `KernelHandle` (feature = cuda) |
+| `handle.rs` | 161 | Opaque `ArenaHandle` + `TierKind` string conversion helpers |
+| `error.rs` | 109 | `ArenaError` enum + `ArenaResult<T>` |
+| `mod.rs` | 54 | Module re-exports |
+| `tests.rs` | 8,294 | 341 tests (cuda) / 309 (no features) |
+| **Total** | **15,575** | |
 
 ## Deliverables (M1 slice 1)
 
@@ -49,17 +54,25 @@ Not `tmpfs`. Not `/dev/shm`. Not OS-managed. We own every byte.
   validation + `ColdSource` fallback rebuild
 - **D4 Criterion Bench Harness** — see [Benchmarks](#benchmarks)
 
-## Non-goals (slice 2+)
+## Former non-goals — now delivered
 
-Explicitly out of scope in slice 1, per `MISSION.md`:
+All items from the original M1 non-goals list have been delivered:
 
-- Crossfade state machine
-- Custom allocators beyond fixed-slot (slab/buddy/TLSF bake-off)
-- `MAP_HUGETLB`
-- VRAM tier and `cudaMemcpyAsync` paths
-- cgroup `MemoryMax` enforcement
-- PostgreSQL-backed `ColdSource` implementation (stub only this slice)
-- Datatypes plugin pattern (Grove handles serialization needs)
+| Non-goal (M1) | Delivered in |
+|---|---|
+| Crossfade state machine | M3 (demote) + M4 (promote) |
+| Custom allocators (slab/buddy/TLSF) | M7 (bake-off) + M9 (AllocatorSelector) |
+| `MAP_HUGETLB` | M8 |
+| VRAM tier and `cudaMemcpyAsync` | M6 |
+| PostgreSQL-backed ColdSource | M8 |
+| Thread-safe allocators | M11 (SyncAllocator) |
+| Async ColdSource | M11 (AsyncColdSource) |
+| Multi-GPU support | M13 (GpuTopology) |
+| CUDA kernel launches | M13 (KernelHandle) |
+
+**Remaining non-goals:**
+- cgroup `MemoryMax` enforcement (deferred — not yet needed)
+- Datatypes plugin pattern (Grove handles serialization)
 
 ## Benchmarks
 
@@ -108,15 +121,25 @@ Criterion benchmarks live at `src-tauri/benches/arena_bench.rs` and cover:
   carries a `pool_id: TierKind` byte for multi-pool `replay_into_set`
   dispatch; legacy v1 records decode as `pool_id = TierKind::Hot`.
 - **M3** = demote crossfade + ChunkState enum + hysteresis cooldown.
-  `ChunkState { Resident, FadingOut }` at header byte 64,
-  `last_demote_completed_at_ns` at bytes 72..80 (both outside the
-  checksum window). `ArenaSet::begin_demote` / `complete_demote` /
-  `abort_demote` implement the first crossfade primitive (demote
-  direction only, explicit completion, no background workers).
-  `TierPolicy::demote_cooldown_ns` prevents thrashing via a
-  per-chunk hysteresis cooldown. `TierPool::replay_alloc` /
-  `replay_free` close the slice-2 `replay_into_set` counter-drift
-  caveat. Slice-3 does NOT touch `Cargo.toml` or add new deps.
+- **M4** = promote crossfade (symmetric ±10% with demote) + orphan recovery
+  on warm-start (FadingOut→Resident). `last_promote_completed_at_ns` at
+  header bytes 80..88.
+- **M5** = policy-driven sweep driver. `TierKind::heat_index()`, `hotter_tier`
+  / `colder_tier` adjacency, `TierPool::evict_lru()`, `ArenaSet::run_policy_sweep()`
+  → `SweepReport`. Synchronous single-pass, hottest-first.
+- **M6** = VRAM tier via cudarc (cuda feature). `VramContext`, `VramPool`,
+  `ArenaSet` crossfade dispatch RAM↔VRAM. RTX 4060 Ti baseline.
+- **M7** = allocator bake-off. `ChunkAllocator` trait, 4 implementations
+  (FixedSlot, Slab, Buddy, TLSF) behind `AllocatorKind` enum dispatch.
+- **M8** = PG ColdSource (postgres feature), MAP_HUGETLB with fallback,
+  `read_header_core`/`read_header_extended` cache-line split. Closes all
+  8 original handoff items.
+- **M9** = `AllocatorSelector` on `PoolSpec` (serde default, backward compat).
+  `get_chunk_hot()` / `get_chunk_hot_with_header()` zero-copy read path.
+- **M10** = CrossfadeRegistry persistence to `crossfades.json` + `gc_orphaned_targets()`.
+- **M11** = `SyncAllocator<A>` Mutex wrapper + `AsyncColdSource` trait with blanket impl.
+- **M12** = `PinnedBuffer` (MAP_LOCKED) + VRAM sweep integration tests (cuda).
+- **M13** = `GpuTopology` multi-GPU discovery + `KernelHandle` launch config (cuda).
 
 **Re-run command:**
 ```bash
