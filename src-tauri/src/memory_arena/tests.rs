@@ -6686,3 +6686,252 @@ mod allocator_tests {
         assert_eq!(kind.num_allocations(), 0);
     }
 }
+
+// ===== SlabAllocator tests ============================================
+
+mod slab_allocator_tests {
+    use crate::memory_arena::allocator::{ChunkAllocator, SlabAllocator, SlabConfig};
+    use crate::memory_arena::error::ArenaError;
+
+    fn default_slab() -> SlabAllocator {
+        SlabAllocator::new(SlabConfig::default())
+    }
+
+    #[test]
+    fn test_slab_alloc_64_bytes_lands_in_64b_class() {
+        let mut slab = default_slab();
+        let (_off, actual_size) = slab.alloc(64).unwrap();
+        assert_eq!(actual_size, 64);
+    }
+
+    #[test]
+    fn test_slab_alloc_65_bytes_lands_in_256b_class() {
+        let mut slab = default_slab();
+        let (_off, actual_size) = slab.alloc(65).unwrap();
+        assert_eq!(actual_size, 256);
+    }
+
+    #[test]
+    fn test_slab_alloc_1mib_lands_in_1m_class() {
+        let mut slab = default_slab();
+        let (_off, actual_size) = slab.alloc(1024 * 1024).unwrap();
+        assert_eq!(actual_size, 1024 * 1024);
+    }
+
+    #[test]
+    fn test_slab_free_and_realloc_same_class() {
+        let mut slab = default_slab();
+        let (off1, sz1) = slab.alloc(64).unwrap();
+        slab.free(off1).unwrap();
+        let (off2, sz2) = slab.alloc(64).unwrap();
+        assert_eq!(sz1, sz2);
+        // LIFO within class: should get same offset back
+        assert_eq!(off1, off2);
+    }
+
+    #[test]
+    fn test_slab_capacity_tracking() {
+        let mut slab = default_slab();
+        let cap = slab.capacity();
+        assert!(cap > 0);
+        assert_eq!(slab.free_bytes(), cap);
+        assert_eq!(slab.allocated_bytes(), 0);
+
+        let (_off, sz) = slab.alloc(64).unwrap();
+        assert_eq!(slab.allocated_bytes(), sz);
+        assert_eq!(slab.free_bytes(), cap - sz);
+    }
+
+    #[test]
+    fn test_slab_exhaustion_falls_to_next_class() {
+        // Small slab with limited slots per class
+        let config = SlabConfig {
+            classes: vec![64, 256],
+            total_capacity: 64 * 2 + 256 * 2, // 2 slots of 64B, 2 slots of 256B
+        };
+        let mut slab = SlabAllocator::new(config);
+        // Fill the 64B class
+        slab.alloc(64).unwrap();
+        slab.alloc(64).unwrap();
+        // Next 64B alloc should fall to 256B class
+        let (_off, actual_size) = slab.alloc(64).unwrap();
+        assert_eq!(actual_size, 256);
+    }
+
+    #[test]
+    fn test_slab_full_returns_out_of_slots() {
+        let config = SlabConfig {
+            classes: vec![64],
+            total_capacity: 64 * 2, // Only 2 slots
+        };
+        let mut slab = SlabAllocator::new(config);
+        slab.alloc(64).unwrap();
+        slab.alloc(64).unwrap();
+        let err = slab.alloc(64).unwrap_err();
+        assert!(matches!(err, ArenaError::OutOfSlots { .. }));
+    }
+
+    #[test]
+    fn test_slab_num_allocations() {
+        let mut slab = default_slab();
+        assert_eq!(slab.num_allocations(), 0);
+        let (off1, _) = slab.alloc(64).unwrap();
+        slab.alloc(256).unwrap();
+        assert_eq!(slab.num_allocations(), 2);
+        slab.free(off1).unwrap();
+        assert_eq!(slab.num_allocations(), 1);
+    }
+
+    #[test]
+    fn test_slab_fragmentation_nonzero_for_small_in_large() {
+        let mut slab = default_slab();
+        // Alloc 100 bytes — lands in 256B class. Internal frag = 1 - 100/256 ≈ 0.61
+        slab.alloc(100).unwrap();
+        let frag = slab.fragmentation();
+        assert!(frag > 0.0, "fragmentation should be > 0 for 100B in 256B class");
+        assert!(frag < 1.0, "fragmentation should be < 1.0");
+    }
+}
+
+// ===== BuddyAllocator tests ==========================================
+
+mod buddy_allocator_tests {
+    use crate::memory_arena::allocator::{BuddyAllocator, ChunkAllocator};
+    use crate::memory_arena::error::ArenaError;
+
+    const MIN_BLOCK: usize = 64;
+    // 64 KiB total, power-of-two
+    const TOTAL: usize = 64 * 1024;
+
+    fn make_buddy() -> BuddyAllocator {
+        BuddyAllocator::new(TOTAL, MIN_BLOCK)
+    }
+
+    #[test]
+    fn test_buddy_alloc_returns_power_of_two_size() {
+        let mut buddy = make_buddy();
+        let (_off, actual_size) = buddy.alloc(100).unwrap();
+        assert_eq!(actual_size, 128); // next power of two >= 100
+    }
+
+    #[test]
+    fn test_buddy_alloc_min_block() {
+        let mut buddy = make_buddy();
+        let (_off, actual_size) = buddy.alloc(1).unwrap();
+        assert_eq!(actual_size, MIN_BLOCK);
+    }
+
+    #[test]
+    fn test_buddy_alloc_max_block() {
+        let mut buddy = make_buddy();
+        let (_off, actual_size) = buddy.alloc(TOTAL).unwrap();
+        assert_eq!(actual_size, TOTAL);
+    }
+
+    #[test]
+    fn test_buddy_free_coalesces_with_buddy() {
+        let mut buddy = make_buddy();
+        // Alloc two min-blocks — they should be buddies
+        let (off1, _) = buddy.alloc(MIN_BLOCK).unwrap();
+        let (off2, _) = buddy.alloc(MIN_BLOCK).unwrap();
+        // Free both — should coalesce into a 128-byte block
+        buddy.free(off1).unwrap();
+        buddy.free(off2).unwrap();
+        // Now a 128-byte alloc should succeed without splitting
+        let (_off, actual_size) = buddy.alloc(MIN_BLOCK * 2).unwrap();
+        assert_eq!(actual_size, MIN_BLOCK * 2);
+    }
+
+    #[test]
+    fn test_buddy_full_coalescence() {
+        let mut buddy = make_buddy();
+        // Alloc all min-blocks
+        let mut offsets = Vec::new();
+        loop {
+            match buddy.alloc(MIN_BLOCK) {
+                Ok((off, _)) => offsets.push(off),
+                Err(_) => break,
+            }
+        }
+        assert_eq!(offsets.len(), TOTAL / MIN_BLOCK);
+        // Free all
+        for off in offsets {
+            buddy.free(off).unwrap();
+        }
+        // Full capacity should be available again
+        let (_off, actual_size) = buddy.alloc(TOTAL).unwrap();
+        assert_eq!(actual_size, TOTAL);
+    }
+
+    #[test]
+    fn test_buddy_no_coalescence_when_buddy_allocated() {
+        let mut buddy = make_buddy();
+        let (off1, _) = buddy.alloc(MIN_BLOCK).unwrap();
+        let (_off2, _) = buddy.alloc(MIN_BLOCK).unwrap();
+        // Free only the first — buddy is still allocated, no coalesce
+        buddy.free(off1).unwrap();
+        // A 2*MIN_BLOCK alloc should still work (from higher levels)
+        // but the freed block should not have merged
+        assert_eq!(buddy.free_bytes(), TOTAL - MIN_BLOCK);
+    }
+
+    #[test]
+    fn test_buddy_capacity_tracking() {
+        let mut buddy = make_buddy();
+        assert_eq!(buddy.capacity(), TOTAL);
+        assert_eq!(buddy.free_bytes(), TOTAL);
+        assert_eq!(buddy.allocated_bytes(), 0);
+
+        let (_off, sz) = buddy.alloc(100).unwrap();
+        assert_eq!(buddy.allocated_bytes(), sz);
+        assert_eq!(buddy.free_bytes(), TOTAL - sz);
+    }
+
+    #[test]
+    fn test_buddy_num_allocations() {
+        let mut buddy = make_buddy();
+        assert_eq!(buddy.num_allocations(), 0);
+        let (off, _) = buddy.alloc(64).unwrap();
+        buddy.alloc(128).unwrap();
+        assert_eq!(buddy.num_allocations(), 2);
+        buddy.free(off).unwrap();
+        assert_eq!(buddy.num_allocations(), 1);
+    }
+
+    #[test]
+    fn test_buddy_exhaustion() {
+        let mut buddy = make_buddy();
+        // Alloc the entire capacity
+        buddy.alloc(TOTAL).unwrap();
+        let err = buddy.alloc(1).unwrap_err();
+        assert!(matches!(err, ArenaError::OutOfSlots { .. }));
+    }
+
+    #[test]
+    fn test_buddy_fragmentation_for_small_alloc() {
+        let mut buddy = make_buddy();
+        // Alloc 65 bytes — rounds to 128. Internal frag > 0.
+        buddy.alloc(65).unwrap();
+        let frag = buddy.fragmentation();
+        assert!(frag > 0.0);
+        assert!(frag < 1.0);
+    }
+
+    #[test]
+    fn test_buddy_after_churn_large_alloc_still_works() {
+        let mut buddy = make_buddy();
+        // Alloc many small blocks
+        let mut offsets = Vec::new();
+        for _ in 0..16 {
+            let (off, _) = buddy.alloc(MIN_BLOCK).unwrap();
+            offsets.push(off);
+        }
+        // Free all
+        for off in offsets {
+            buddy.free(off).unwrap();
+        }
+        // Large alloc should work — coalescence has recovered capacity
+        let result = buddy.alloc(16 * MIN_BLOCK);
+        assert!(result.is_ok(), "should be able to alloc after full free (coalescence)");
+    }
+}
