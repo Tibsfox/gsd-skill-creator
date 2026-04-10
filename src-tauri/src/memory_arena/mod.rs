@@ -23,6 +23,8 @@ pub mod list;
 pub mod persistence;
 pub mod pool;
 pub mod types;
+#[cfg(feature = "postgres")]
+pub mod pg_cold;
 #[cfg(feature = "cuda")]
 pub mod vram;
 pub mod warm_start;
@@ -43,6 +45,8 @@ pub use pool::{
 pub use warm_start::{
     ColdSource, InMemoryColdSource, WarmStart, WarmStartConfig, WarmStartReport, WarmStartStats,
 };
+#[cfg(feature = "postgres")]
+pub use pg_cold::PgColdSource;
 pub use types::{ArenaConfig, ChunkHeader, ChunkId, SweepReport, TierKind, CHUNK_MAGIC, HEADER_SIZE};
 
 #[cfg(test)]
