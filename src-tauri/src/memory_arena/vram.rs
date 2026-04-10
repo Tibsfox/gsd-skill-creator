@@ -116,6 +116,140 @@ impl VramContext {
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
         Ok(VramAllocation { slice, size: size_bytes })
     }
+
+    // =====================================================================
+    // Synchronous transfers
+    // =====================================================================
+
+    /// Copy host bytes to device memory (host→device). Synchronizes on the
+    /// default stream after the copy completes.
+    pub fn upload(&self, host_data: &[u8], alloc: &mut VramAllocation) -> ArenaResult<()> {
+        if alloc.size == 0 && host_data.is_empty() {
+            return Ok(());
+        }
+        if host_data.len() != alloc.size {
+            return Err(ArenaError::BufferTooSmall {
+                need: alloc.size,
+                got: host_data.len(),
+            });
+        }
+        self.stream.memcpy_htod(host_data, &mut alloc.slice)
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        self.stream.synchronize()
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        Ok(())
+    }
+
+    /// Copy device bytes to host buffer (device→host). Synchronizes on the
+    /// default stream after the copy completes.
+    pub fn download(&self, alloc: &VramAllocation, host_buf: &mut [u8]) -> ArenaResult<()> {
+        if alloc.size == 0 && host_buf.is_empty() {
+            return Ok(());
+        }
+        if host_buf.len() != alloc.size {
+            return Err(ArenaError::BufferTooSmall {
+                need: alloc.size,
+                got: host_buf.len(),
+            });
+        }
+        self.stream.memcpy_dtoh(&alloc.slice, host_buf)
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        self.stream.synchronize()
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        Ok(())
+    }
+
+    // =====================================================================
+    // Async transfers
+    // =====================================================================
+
+    /// Async host→device copy on a dedicated stream. Returns a handle
+    /// that the caller can `wait()` on.
+    pub fn upload_async(
+        &self,
+        host_data: &[u8],
+        alloc: &mut VramAllocation,
+    ) -> ArenaResult<VramTransferHandle> {
+        if alloc.size == 0 && host_data.is_empty() {
+            return Ok(VramTransferHandle {
+                stream: self.stream.clone(),
+                download_buf: None,
+            });
+        }
+        if host_data.len() != alloc.size {
+            return Err(ArenaError::BufferTooSmall {
+                need: alloc.size,
+                got: host_data.len(),
+            });
+        }
+        let async_stream = self.ctx.new_stream()
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        async_stream.memcpy_htod(host_data, &mut alloc.slice)
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        Ok(VramTransferHandle {
+            stream: async_stream,
+            download_buf: None,
+        })
+    }
+
+    /// Async device→host copy on a dedicated stream. Returns a handle
+    /// whose `wait_into()` returns the downloaded bytes.
+    pub fn download_async(
+        &self,
+        alloc: &VramAllocation,
+        size: usize,
+    ) -> ArenaResult<VramTransferHandle> {
+        if size == 0 {
+            return Ok(VramTransferHandle {
+                stream: self.stream.clone(),
+                download_buf: Some(Vec::new()),
+            });
+        }
+        if size != alloc.size {
+            return Err(ArenaError::BufferTooSmall {
+                need: alloc.size,
+                got: size,
+            });
+        }
+        let async_stream = self.ctx.new_stream()
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        let mut buf = vec![0u8; size];
+        async_stream.memcpy_dtoh(&alloc.slice, &mut buf)
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        Ok(VramTransferHandle {
+            stream: async_stream,
+            download_buf: Some(buf),
+        })
+    }
+}
+
+// =========================================================================
+// VramTransferHandle
+// =========================================================================
+
+/// Handle for an in-flight async VRAM transfer. Owns the CUDA stream
+/// so it stays alive until the caller synchronizes.
+pub struct VramTransferHandle {
+    stream: Arc<CudaStream>,
+    /// For download_async: the host buffer that will contain the data
+    /// after synchronization. None for upload-only handles.
+    download_buf: Option<Vec<u8>>,
+}
+
+impl VramTransferHandle {
+    /// Wait for an upload transfer to complete.
+    pub fn wait(self) -> ArenaResult<()> {
+        self.stream.synchronize()
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        Ok(())
+    }
+
+    /// Wait for a download transfer to complete and return the bytes.
+    pub fn wait_into(self) -> ArenaResult<Vec<u8>> {
+        self.stream.synchronize()
+            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        Ok(self.download_buf.unwrap_or_default())
+    }
 }
 
 impl std::fmt::Debug for VramContext {
