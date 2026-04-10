@@ -35,7 +35,7 @@ use gsd_os_lib::memory_arena::{
     persistence::{replay_into, write_checkpoint, JournalReader, JournalWriter},
     pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy},
     types::{ArenaConfig, ChunkId, TierKind},
-    warm_start::{InMemoryColdSource, WarmStart},
+    warm_start::{InMemoryColdSource, WarmStart, WarmStartConfig},
     Arena,
 };
 
@@ -176,6 +176,36 @@ fn bench_touch(c: &mut Criterion) {
 }
 
 // ===== bench: warm_start ===========================================
+//
+// M2 note: `WarmStart::open` is now lazy by default (see
+// memory_arena/warm_start.rs). The `warm_start` / `warm_start_big`
+// groups below now measure the **lazy** path — the new M2 default.
+// The companion `warm_start_eager` / `warm_start_eager_big` groups
+// measure the M1-equivalent eager path explicitly for side-by-side
+// comparison against `docs/memory-arena/M1-baseline.md`.
+//
+// The `validate_chunk_lazy` group measures the cost of explicit
+// payload validation after a lazy open — this is the "what does the
+// lazy default defer?" cost.
+
+/// Helper: build + fill an ArenaSet tempdir with `n` Hot chunks, then
+/// flush and drop it, returning the `TempDir` handle so the warm-start
+/// bench iteration can reopen it.
+fn make_warm_start_tempdir(n: usize) -> tempfile::TempDir {
+    let tmp = tempdir().expect("tempdir");
+    let cfg = ArenaSetConfig::new(tmp.path()).with_pool(hot_spec(n));
+    {
+        let mut set = ArenaSet::create(cfg).expect("create");
+        for i in 0..n {
+            set.pool_mut(TierKind::Hot)
+                .unwrap()
+                .alloc(vec![(i as u8).wrapping_mul(7); 64])
+                .expect("alloc");
+        }
+        set.flush().expect("flush");
+    }
+    tmp
+}
 
 fn bench_warm_start(c: &mut Criterion) {
     let mut group = c.benchmark_group("warm_start");
@@ -186,25 +216,11 @@ fn bench_warm_start(c: &mut Criterion) {
         group.throughput(Throughput::Elements(n as u64));
         group.bench_with_input(BenchmarkId::from_parameter(n), &n, |b, &n| {
             b.iter_batched(
-                || {
-                    // Setup: build a fresh ArenaSet with N chunks and drop it.
-                    let tmp = tempdir().expect("tempdir");
-                    let cfg = ArenaSetConfig::new(tmp.path())
-                        .with_pool(hot_spec(n));
-                    {
-                        let mut set = ArenaSet::create(cfg).expect("create");
-                        for i in 0..n {
-                            set.pool_mut(TierKind::Hot)
-                                .unwrap()
-                                .alloc(vec![(i as u8).wrapping_mul(7); 64])
-                                .expect("alloc");
-                        }
-                        set.flush().expect("flush");
-                    }
-                    tmp
-                },
+                || make_warm_start_tempdir(n),
                 |tmp| {
                     let cold = InMemoryColdSource::new();
+                    // Lazy default (M2). See bench_warm_start_eager for
+                    // the M1-equivalent path.
                     let (set, report) =
                         WarmStart::open(tmp.path(), &cold).expect("warm start");
                     black_box(set);
@@ -224,24 +240,10 @@ fn bench_warm_start(c: &mut Criterion) {
     big.throughput(Throughput::Elements(100_000));
     big.bench_function("warm_start_100k", |b| {
         b.iter_batched(
-            || {
-                let tmp = tempdir().expect("tempdir");
-                let cfg = ArenaSetConfig::new(tmp.path())
-                    .with_pool(hot_spec(100_000));
-                {
-                    let mut set = ArenaSet::create(cfg).expect("create");
-                    for i in 0..100_000usize {
-                        set.pool_mut(TierKind::Hot)
-                            .unwrap()
-                            .alloc(vec![(i as u8).wrapping_mul(7); 64])
-                            .expect("alloc");
-                    }
-                    set.flush().expect("flush");
-                }
-                tmp
-            },
+            || make_warm_start_tempdir(100_000),
             |tmp| {
                 let cold = InMemoryColdSource::new();
+                // Lazy default — this is the M2 headline bench.
                 let (set, report) =
                     WarmStart::open(tmp.path(), &cold).expect("warm start");
                 black_box(set);
@@ -251,6 +253,109 @@ fn bench_warm_start(c: &mut Criterion) {
         );
     });
     big.finish();
+}
+
+// ===== bench: warm_start_eager (M1-equivalent path for side-by-side) =====
+
+fn bench_warm_start_eager(c: &mut Criterion) {
+    let mut group = c.benchmark_group("warm_start_eager");
+    group.measurement_time(Duration::from_secs(10));
+
+    for &n in &[1000usize, 10_000usize] {
+        group.throughput(Throughput::Elements(n as u64));
+        group.bench_with_input(BenchmarkId::from_parameter(n), &n, |b, &n| {
+            b.iter_batched(
+                || make_warm_start_tempdir(n),
+                |tmp| {
+                    let cold = InMemoryColdSource::new();
+                    // Explicit eager path — matches M1's baseline behavior.
+                    let (set, report) =
+                        WarmStart::open_eager(tmp.path(), &cold)
+                            .expect("warm start eager");
+                    black_box(set);
+                    black_box(report);
+                },
+                criterion::BatchSize::PerIteration,
+            );
+        });
+    }
+
+    group.finish();
+
+    let mut big = c.benchmark_group("warm_start_eager_big");
+    big.sample_size(10);
+    big.measurement_time(Duration::from_secs(30));
+    big.throughput(Throughput::Elements(100_000));
+    big.bench_function("warm_start_eager_100k", |b| {
+        b.iter_batched(
+            || make_warm_start_tempdir(100_000),
+            |tmp| {
+                let cold = InMemoryColdSource::new();
+                let (set, report) =
+                    WarmStart::open_eager(tmp.path(), &cold)
+                        .expect("warm start eager");
+                black_box(set);
+                black_box(report);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+    big.finish();
+}
+
+// ===== bench: validate_chunk (M2 on-demand validation cost) ===============
+
+fn bench_validate_chunk(c: &mut Criterion) {
+    let mut group = c.benchmark_group("validate_chunk_lazy");
+    // Bench: alloc 1000 chunks, drop, lazy-open the arena, then measure
+    // the cost of validating every chunk via `Arena::validate_chunk`.
+    // This is the "what does lazy defer?" number — what callers pay if
+    // they want the same guarantee the eager path gives by default.
+    group.measurement_time(Duration::from_secs(10));
+    group.throughput(Throughput::Elements(1000));
+    group.bench_function("validate_chunk_after_lazy_open_1k", |b| {
+        b.iter_batched(
+            || {
+                let tmp = tempdir().expect("tempdir");
+                let cfg = ArenaSetConfig::new(tmp.path())
+                    .with_pool(hot_spec(1000));
+                let ids: Vec<ChunkId> = {
+                    let mut set = ArenaSet::create(cfg).expect("create");
+                    let pool = set.pool_mut(TierKind::Hot).unwrap();
+                    let mut ids = Vec::with_capacity(1000);
+                    for i in 0..1000 {
+                        ids.push(
+                            pool.alloc(vec![(i as u8).wrapping_mul(7); 64])
+                                .expect("alloc"),
+                        );
+                    }
+                    set.flush().expect("flush");
+                    ids
+                };
+
+                // Lazy reopen.
+                let cold = InMemoryColdSource::new();
+                let (set, _report, _stats) = WarmStart::open_with_config(
+                    tmp.path(),
+                    &cold,
+                    WarmStartConfig::default(),
+                )
+                .expect("lazy open");
+                (set, ids, tmp)
+            },
+            |(set, ids, _tmp)| {
+                let pool = set.pool(TierKind::Hot).expect("hot pool");
+                for id in &ids {
+                    pool.arena()
+                        .validate_chunk(*id)
+                        .expect("validate_chunk ok");
+                }
+                black_box(ids);
+            },
+            criterion::BatchSize::PerIteration,
+        );
+    });
+    group.finish();
 }
 
 // ===== bench: checkpoint ===========================================
@@ -361,6 +466,8 @@ criterion_group!(
     bench_get,
     bench_touch,
     bench_warm_start,
+    bench_warm_start_eager,
+    bench_validate_chunk,
     bench_checkpoint,
     bench_journal,
 );
