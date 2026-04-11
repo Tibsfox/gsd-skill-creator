@@ -6,6 +6,24 @@ This changelog is not strictly Keep-a-Changelog format. It is deliberately narra
 
 ---
 
+## 2026-04-10 — Per-category README population
+
+**What changed:** Generated `README.md` files for all 23 category subfolders (10 skill categories + 8 agent categories + 5 team categories, including the empty `deprecated/` stubs). Each category README has a hand-curated one-line description (from `CATEGORY_DESCRIPTIONS` in the generator script) and an auto-generated table of the artifacts in that category with their description, origin, and status.
+
+Introduced `tools/generate-category-readmes.mjs` — an idempotent generator that reads frontmatter from every artifact and regenerates the category READMEs. Safe to run after any classification change.
+
+Added a first-paragraph fallback to the generator: when an artifact's frontmatter `description` is null (which happens on team and chipset sidecars because their backfill couldn't read descriptions from non-YAML sources), the generator extracts the first paragraph from the body after the H1 and uses that instead. This got teams meaningful descriptions without any hand-editing.
+
+**Why:** The per-category READMEs were deferred from Stage 1 because we needed the classification to exist before we could list anything. Now that Stage 2 has classified all 127 artifacts, the category READMEs are a one-shot generation away. The alternative was hand-writing 23 README files, each with a table of between 0 and 21 artifacts — clearly worth automating.
+
+The first-paragraph fallback was a late addition. The team README sidecars created in Stage 2 inherited the substantive team description from their original README body, but the frontmatter `description` field was left null (because parsing the body for a description wasn't part of the backfill's job). The category README generator then showed "—" for teams, which looked broken. The fallback makes the generator smarter without requiring a second backfill pass on the team frontmatter itself.
+
+**Design note — generated vs hand-edited:** The category READMEs are deliberately marked "auto-generated" with instructions to update the frontmatter or the generator's description map rather than hand-editing. The top-level per-type READMEs (`examples/skills/README.md`, `examples/agents/README.md`, etc.) remain hand-written. This two-tier structure keeps the hand-curated orientation at the top and delegates the growing-list problem to the generator.
+
+**Open for future:** When chipsets grow beyond 7, consider generating a chipset README index too. When categories get subcategorized (say, `patterns/backend/` and `patterns/frontend/`), the generator needs to recurse. Neither is a problem yet.
+
+---
+
 ## 2026-04-10 — Stage 2: classification, frontmatter back-fill, sidecar READMEs
 
 **What changed:** Moved all 127 existing artifacts from the flat top-level of each type into their category subfolders. Back-filled the 9-field frontmatter on every skill and agent (appending missing fields in place — existing frontmatter preserved verbatim, including multi-line YAML like `tools:` arrays). Wrapped the 7 flat chipset `.yaml` files into `<name>/chipset.yaml + README.md` directories. Created or updated README.md sidecars on teams and chipsets to hold their frontmatter (since `config.json` and `chipset.yaml` aren't the right place for YAML frontmatter).
