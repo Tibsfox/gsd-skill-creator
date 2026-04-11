@@ -22,7 +22,7 @@ export default defineConfig({
           exclude: [
             'dist/**',
             'desktop/**',
-            'the-space-between-engine/**',
+            'apps/the-space-between-engine/**',
             'tests/ipc-commands.test.ts',
             '.claude/**',
             'project-claude/**',
@@ -36,12 +36,12 @@ export default defineConfig({
       {
         resolve: {
           alias: {
-            '@': resolve(import.meta.dirname!, './the-space-between-engine/src'),
+            '@': resolve(import.meta.dirname!, './apps/the-space-between-engine/src'),
           },
         },
         test: {
           name: 'space-between',
-          root: './the-space-between-engine',
+          root: './apps/the-space-between-engine',
           globals: true,
           environment: 'jsdom',
           include: ['tests/**/*.test.ts', 'tests/**/*.test.tsx'],
