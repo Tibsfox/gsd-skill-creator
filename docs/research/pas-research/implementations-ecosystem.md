@@ -3428,4 +3428,151 @@ The influence of Pascal on the computing profession extends beyond language feat
 
 ---
 
+## Addendum: Niklaus Wirth (1934–2024) and the 2025 Pascal ecosystem
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The body above narrates the Pascal family from 1970 through 2026
+but was written while Niklaus Wirth was a living figure. Wirth died at
+the start of 2024, and any history of Pascal written after that date has
+to acknowledge the loss and the tributes that followed.
+
+### Niklaus Wirth — January 1, 2024
+
+**Niklaus Wirth** — Swiss computer scientist, creator of Pascal, Modula,
+Modula-2, Oberon, Oberon-2, Active Oberon, and the Lilith and Ceres
+workstations — died at his home in Zurich on **January 1, 2024**, of
+heart failure. He was 89, roughly six weeks before what would have
+been his 90th birthday.
+
+Wirth's published languages span forty years of systematic
+simplification:
+
+- **Pascal** (1968–1972) — the teaching language that became a
+  generation's introduction to programming.
+- **Modula** (1975) and **Modula-2** (1978) — the module system
+  Pascal never had.
+- **Oberon** (1987) — a minimal object-oriented language designed so
+  that Wirth and his student Jürg Gutknecht could build a complete
+  operating system (the Oberon System) on top of it in a single
+  semester.
+- **Oberon-2** (1991) — extended with type-bound procedures, used
+  as the implementation language for a successor operating system.
+- **Active Oberon** (1990s–2000s) — with a concurrency model built
+  on active objects.
+
+The Turing Award came in **1984**, "for developing a sequence of
+innovative computer languages." The obituaries are consistent on
+three themes: Wirth's insistence on simplicity as a design discipline
+(his formulation of Wirth's Law — "software is getting slower more
+rapidly than hardware is getting faster" — is quoted in most of
+them); his continued productive work well into his eighties (the
+Oberon system was still being actively maintained and ported to new
+hardware in the 2010s, largely at Wirth's own direction); and the
+reach of his teaching, which produced generations of Swiss computer
+scientists at ETH Zurich and shaped programming-language teaching
+worldwide.
+
+**Sources:** [RIP: Software design pioneer Niklaus Wirth — The Register, January 4, 2024](https://www.theregister.com/2024/01/04/niklaus_wirth_obituary/) · [In Memoriam: Niklaus Wirth — Communications of the ACM, March 2024](https://cacmb4.acm.org/magazines/2024/3/280075-in-memoriam-niklaus-wirth/fulltext) · [Obituary for Univ. Prof. Niklaus Wirth — JKU Linz](https://www.jku.at/en/2024/obituary-for-univ-prof-niklaus-wirth/) · [Computer pioneer Niklaus Wirth has died — ETH Zurich](https://ethz-ch.translate.goog/en/news-and-events/eth-news/news/2024/01/computer-pioneer-niklaus-wirth-has-died.html) · [In Memoriam: Niklaus Wirth (1934–2024) — Computer History Museum](https://computerhistory.org/blog/in-memoriam-niklaus-wirth-1934-2024/) · [Niklaus Wirth (1934–2024)—An Appreciation — IEEE Xplore](https://ieeexplore.ieee.org/document/10507011/)
+
+### The Oberon open-source revival
+
+One thread in the obituaries and 2024–2025 retrospectives is worth
+picking out: Oberon has had a quiet open-source revival in the late
+2010s and early 2020s, particularly around **FPGA implementations**
+tailored for educational use and the Internet-of-Things. Wirth himself
+worked on the RISC5 FPGA Oberon system — a complete computer (CPU,
+memory, display, keyboard) implemented in a few thousand lines of
+Verilog, running a complete Oberon system compiled from Oberon source
+code, with an editor, compiler, debugger, and full IDE that fit in
+kilobytes of memory. This is not a museum piece; it is a working
+demonstration that modern computing does not have to be as large as
+it usually is.
+
+The 2025 Oberon community has small but active communities around
+the A2 Active Oberon system, the Project Oberon RISC5 FPGA platform,
+the Oberon Technology Group, and several educational deployments
+that teach systems programming using Oberon as the vehicle. It is
+not a mainstream language. It is the best living demonstration of
+Wirth's design philosophy.
+
+### Free Pascal, Lazarus, Delphi — the steady state
+
+The mainstream Pascal ecosystem in 2025–2026 is characterised by
+steady incremental development rather than headline news:
+
+- **Free Pascal Compiler (FPC)** continues its ~1–2 year release
+  cadence. The 3.2.x line remains the current stable through 2025.
+  Platform support continues to expand — Free Pascal now targets
+  WebAssembly (via the `pas2js` / `pas2wasm` toolchain), Android,
+  iOS, macOS on Apple Silicon, Linux on aarch64 and RISC-V, and
+  classic platforms back through DOS.
+- **Lazarus IDE**, the Delphi-compatible RAD environment on top of
+  Free Pascal, is in similar steady state. Its 2025 releases focus
+  on platform compatibility, LCL (Lazarus Component Library) polish,
+  and incremental improvements to the code-editor and debugger.
+- **Embarcadero Delphi** continues its twelve-month release cadence
+  on the commercial side. The 2025 releases ship ongoing improvements
+  to the FireMonkey cross-platform UI framework, the LLVM-based
+  backend for ARM targets, and the tooling for iOS and Android
+  deployment.
+
+None of this is news. What it is, collectively, is a demonstration
+that Pascal as a language family remains fully supported,
+production-deployable, and growing in platform coverage more than
+fifty years after Wirth first described it in the 1971 Report.
+Delphi's tagline — "43 Years of Continuous Innovation" — is not
+marketing puffery; it is a plain statement of fact.
+
+### What Wirth's death means for the history
+
+The body above treats Wirth as a living reference, and the
+implementations chapter discusses his direct involvement in recent
+Oberon work. That framing is now historical. Any future revision of
+this document will need to edit Wirth into the past tense in the
+biographical sections. For now, the enrichment pass is recording
+the loss rather than rewriting the body.
+
+The larger point is that Wirth's design philosophy — simplicity as a
+discipline, teachability as a design constraint, the relentless
+pursuit of less — will outlive him. Pascal, Modula-2, and Oberon
+were the vehicles, but the ideas were the cargo. The ideas are
+still running. Go borrowed from Oberon's module system. Rust
+borrowed from Pascal's emphasis on safety by type rather than by
+runtime check. Swift borrowed from Pascal's teaching-oriented
+syntax. Every language that values legibility over cleverness is,
+in some sense, a descendant.
+
+"Software is getting slower more rapidly than hardware is getting
+faster." The observation is forty years old and truer now than it
+was then.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Pascal is the canonical teaching language of the structured-programming
+  era. Its role in the Programming Fundamentals wing is as the
+  reference implementation of the concepts the wing is describing.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — The Delphi VCL and Lazarus LCL are foundational examples of
+  component-based GUI engineering. For anyone studying how GUI
+  frameworks are built, the VCL's twenty-five-year evolution is
+  instructive.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — Wirth's own work and the broader Pascal family history are
+  among the cleanest case studies in how a teaching language can
+  outgrow its origin and become a professional tool.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — Pascal was designed to support rigorous reasoning about
+  programs, and the Pascal-Hoare-logic connection (programs as
+  mathematical objects, preconditions and postconditions as formal
+  specifications) is one of the foundational threads of
+  programming-language theory.
+
+---
+
 *This document is part of the PNW Research Series, a public educational research corpus. It surveys the implementations, ecosystem, and ongoing development of the Pascal programming language family from 1970 to 2026, covering 56 years of continuous evolution from Niklaus Wirth's original CDC 6000 compiler through modern multi-platform implementations targeting WebAssembly, RISC-V, and mobile platforms.*
+
+*Addendum (Niklaus Wirth 1934–2024, Oberon revival, Free Pascal/Lazarus/Delphi steady state) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
