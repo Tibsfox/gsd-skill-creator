@@ -283,3 +283,42 @@ The SANS requirement that instructors be working professionals -- not academics 
 24. [BRC: Trust Systems](../BRC/index.html)
 25. [SMF: SMOFcon Knowledge Transfer](../SMF/research/04-knowledge-transfer.md)
 26. [WAL: Rosetta Stone Framework](../WAL/research/06-rosetta-stone-framework.md)
+
+---
+
+## Addendum: SANS in 2025–2026
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. SANS Institute is a stable incumbent in the
+cybersecurity training market and the 2025 status is consistent
+with the body. Two enriched points:
+
+- **ISC2 2025 Cybersecurity Workforce Study** (published December
+  2025 — already cited in source #17) is the current reference
+  for the cybersecurity workforce gap framing. The headline finding
+  that remains steady: the industry is short by several million
+  qualified professionals globally, and the skills gap is wider
+  than the headcount gap. This is the framing that continues to
+  drive demand for SANS-scale training programs.
+- **Agentic AI security** has become a significant track in SANS
+  Summit programming through 2025, mirroring the OWASP LLM01:2025
+  framing (see the companion `agentic-security-synthesis.md`
+  standalone). The body above treats SANS as the general
+  cybersecurity training incumbent; the 2025 refinement is that
+  its course catalog now has a specific and growing set of
+  AI-security, LLM-security, and prompt-injection-defense courses
+  that did not exist three years ago.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**technology**](../../../.college/departments/technology/DEPARTMENT.md) — Cybersecurity training is squarely a technology-department topic.
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — Offensive and defensive security, reverse engineering, malware analysis, and secure coding are all applied-programming topics.
+- [**business**](../../../.college/departments/business/DEPARTMENT.md) — The SANS business model (high-priced boot camps funding a research institute) is a case study in training-as-business.
+- [**learning**](../../../.college/departments/learning/DEPARTMENT.md) — The SANS pedagogical approach (intensive, immersive, hands-on labs, certification-gated progression) is a learning-department topic in its own right.
+
+---
+
+*Addendum (ISC2 2025 workforce study, agentic-AI security tracks) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
