@@ -2,7 +2,7 @@
 
 Workflow meta-skills — context handoff, ecosystem alignment, issue triage, merge refinery.
 
-## Artifacts (4)
+## Artifacts (7)
 
 | Artifact | Description | Origin | Status |
 |---|---|---|---|
@@ -10,6 +10,9 @@ Workflow meta-skills — context handoff, ecosystem alignment, issue triage, mer
 | [ecosystem-alignment](ecosystem-alignment/) | Upstream version checking, agentskills.io spec compliance audit, Claude Code feature gap analysis.… | tibsfox | stable |
 | [issue-triage-pr-review](issue-triage-pr-review/) | Issue triage and PR review — scans issues, triages, fixes, submits PRs, then adversarially reviews… | tibsfox | stable |
 | [refinery-merge](refinery-merge/) | DMA merge queue pattern for sequential, deterministic merge request processing. Checks out branches… | tibsfox | stable |
+| [security-hygiene](security-hygiene/) | > | tibsfox | stable |
+| [session-awareness](session-awareness/) | > | tibsfox | stable |
+| [skill-integration](skill-integration/) | > | tibsfox | stable |
 
 ---
 

@@ -2,11 +2,12 @@
 
 Migration and documentation generation teams — coordinated multi-agent migrations and doc authoring.
 
-## Artifacts (2)
+## Artifacts (3)
 
 | Artifact | Description | Origin | Status |
 |---|---|---|---|
 | [doc-generation-team](doc-generation-team/) | Documentation generation pipeline with specialized writers that produce API references, architectur… | tibsfox | stable |
+| [gsd-research-team](gsd-research-team/) | See `config.json` for the definition. | tibsfox | stable |
 | [migration-team](migration-team/) | Framework and library migration with a phased analysis-then-transformation workflow. A read-only an… | tibsfox | stable |
 
 ---
