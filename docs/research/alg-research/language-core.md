@@ -1645,3 +1645,136 @@ computing.
 Hoare, who designed quicksort in it and later criticized many of its features, got it
 right: ALGOL 60 was a great improvement on most of its successors. Sixty-six years
 later, that is still more true than most people realize.
+
+---
+
+## Study Guide — ALGOL 60 Language Core
+
+### Prerequisites
+
+- Comfort with one block-structured language (Pascal, C, Ada, Java).
+- Access to an ALGOL 60 or ALGOL 68 implementation (`algol68g` runs
+  ALGOL 68; for ALGOL 60 proper the SAIL ALGOL W or the MARST
+  translator both work).
+
+### Reading order
+
+1. Block structure and scoping — the most influential idea.
+2. Types and declarations.
+3. Expressions and statements.
+4. Procedures and the call-by-name vs call-by-value split.
+5. Arrays, including the dynamic-array-at-block-entry trick.
+6. The standard library (`outinteger`, `sysact`, and so on —
+   minimal by design).
+7. The features ALGOL 60 *doesn't* have: records (added in ALGOL 68),
+   pointers (added in ALGOL 68), modules (added by descendants),
+   generics (added by descendants).
+
+### Key concepts to internalize
+
+1. **Block structure.** `begin ... end` isn't just syntactic; it
+   defines a scope, a lifetime, and a stack frame. Every modern
+   block-scoped language inherits this.
+2. **Call-by-name.** A call-by-name parameter is re-evaluated every
+   time it is referenced in the callee. This is more expressive
+   than call-by-reference and strictly more expensive. Jensen's
+   device — summing `A[i]` for `i` from 1 to n by passing `A[i]`
+   itself as a by-name parameter — is the canonical example, and
+   it is a trick almost nobody in 2026 understands on first
+   reading.
+3. **Own variables.** An `own` declaration inside a procedure
+   behaves like a C `static` local — the storage persists across
+   calls. ALGOL 60 had this decades before C.
+4. **Nested procedures.** Procedures can be declared inside other
+   procedures and close over enclosing scopes. Pascal kept this;
+   C did not; Python and Rust reintroduced it.
+
+---
+
+## Programming Examples
+
+### Example 1 — Quicksort (the way Hoare wrote it)
+
+```algol
+procedure quicksort(A, m, n);
+  value m, n; integer m, n; integer array A;
+begin
+  integer i, j, x, t;
+  if m < n then begin
+    i := m; j := n; x := A[(m+n) div 2];
+    while i <= j do begin
+      while A[i] < x do i := i + 1;
+      while x < A[j] do j := j - 1;
+      if i <= j then begin
+        t := A[i]; A[i] := A[j]; A[j] := t;
+        i := i + 1; j := j - 1
+      end
+    end;
+    quicksort(A, m, j);
+    quicksort(A, i, n)
+  end
+end;
+```
+
+This is essentially the algorithm from the 1961 *Communications of
+the ACM* paper. Compile it with MARST or run it under ALGOL W. You
+have just recreated the original quicksort paper in under 20 lines.
+
+### Example 2 — Jensen's device
+
+```algol
+real procedure sum(k, l, u, ak);
+  value l, u; integer k, l, u; real ak;
+begin
+  real s; s := 0;
+  for k := l step 1 until u do s := s + ak;
+  sum := s
+end;
+```
+
+Call as `sum(i, 1, 10, A[i] * B[i])`. The parameter `ak` is
+`A[i] * B[i]` — by name. Every time `ak` is referenced in the loop,
+the current value of `i` is substituted, so the sum is actually
+`A[1]*B[1] + A[2]*B[2] + ... + A[10]*B[10]`. This is how you got
+higher-order operations out of a language without closures.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Run a real ALGOL 60 program
+
+Install MARST (`marst-2.7` is still the last release). Compile
+`quicksort.alg` from Example 1 and run it on an array of 100
+integers. Observe that you have just run a 1961 algorithm on a 2026
+Linux box.
+
+### DIY 2 — Reconstruct Jensen's device in a modern language
+
+Try to replicate Jensen's device in Python using a lambda that
+captures a mutable index. Compare to the ALGOL 60 original. This is
+the exercise that reveals how much expressiveness call-by-name had,
+and why it was dropped in later languages.
+
+### DIY 3 — Compare ALGOL 60, ALGOL 68, and ALGOL W
+
+Write the same small program in all three dialects. Notice the
+different declaration styles, the different procedure-header syntax,
+and the different standard libraries.
+
+### TRY — Teach someone ALGOL in an hour
+
+Pick a patient listener and explain ALGOL 60's block structure,
+call-by-name, and nested procedures in exactly one hour. If you can
+make it stick, you have internalized the language.
+
+---
+
+## Related College Departments (ALGOL language core)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  block structure, scoping, and parameter-passing mechanisms are
+  Programming Fundamentals.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — Jensen's device and call-by-name parameter passing are
+  interesting formal-semantics case studies.

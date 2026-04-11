@@ -1106,6 +1106,133 @@ This research cross-links to the following college departments in
 
 ---
 
+## Study Guide
+
+### Why read this
+
+ALGOL is the language that created programming-language theory. It
+is a paper language — very few production systems ever ran on it —
+but its specification, its committee, and its descendants shaped
+everything that came after. Reading this history gives you a
+vocabulary for talking about language design that you cannot get
+from any other single source.
+
+### Prerequisites
+
+Familiarity with one modern programming language and a willingness
+to read names that sound old. You do not need to know Algol itself
+before starting.
+
+### Reading order and questions
+
+Read the file in order. As you read, track answers to these:
+
+1. What problem did ALGOL set out to solve that Fortran did not?
+2. Why did the ALGOL 60 Report become famous? (The format is part
+   of the answer; so is the team.)
+3. Why did ALGOL 68 fail to gain traction, even though it was
+   technically sophisticated?
+4. What did Wirth take from ALGOL into Pascal, and what did he
+   leave behind?
+5. What did C keep from ALGOL, what did it reject, and what did it
+   invent?
+6. Why is Backus-Naur Form still the first thing taught in every
+   compiler course?
+
+### 1-week plan
+
+- Day 1: Read the first third (origins, committee, ALGOL 58).
+- Day 2: Read the ALGOL 60 section twice. Read the full Revised
+  Report alongside (it is free, 40 pages, and readable).
+- Day 3: Read the split into ALGOL 68 vs Pascal.
+- Day 4: Read the descendants section.
+- Day 5: Read the contemporary Fortran comparison and the 2025
+  epilogue.
+- Day 6: Write your own 2-page summary of why ALGOL matters.
+- Day 7: Pick one ALGOL descendant you already use (Pascal, C,
+  Ada, Python, Rust) and make a list of ten features that trace
+  back to ALGOL.
+
+---
+
+## Worked Examples
+
+### Example 1 — Reading the ALGOL 60 Report
+
+Download the revised ALGOL 60 Report (free, `dtic.mil` or
+`masswerk.at` both host it). Open to Section 4.2, "Expressions." Read
+three paragraphs. That is what 1960 programming-language
+specification looks like — compact, precise, mathematical. Then open
+a modern language specification (Rust, C++, JavaScript) and read
+three paragraphs from the equivalent section. The differences in
+*length* alone will tell you everything about how the field has
+changed.
+
+### Example 2 — A small ALGOL 60 program, compiled today
+
+```algol
+begin
+  integer i, s;
+  s := 0;
+  for i := 1 step 1 until 100 do
+    s := s + i;
+  outinteger(1, s)
+end
+```
+
+Marcel van der Veer's *Algol 68 Genie* does not compile this (it is
+ALGOL 60, not 68), but the GNU ALGOL 68 front-end project and
+Fridtjof Karlsson's *SAIL ALGOL W* compiler can. Try it. The
+experience of compiling and running a 1960s program on a 2026
+machine is what turns history into practice.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Build a Backus-Naur Form glossary
+
+Extract the BNF rules from Section 4 of the ALGOL 60 Report and
+transcribe them into a modern EBNF. Use a parser generator (lalrpop,
+ANTLR, tree-sitter) to build a grammar that recognizes simple ALGOL
+60 programs. You do not need to generate code — just parse.
+
+### DIY 2 — Reproduce one ALGOL descendant
+
+Pick one direct ALGOL descendant: Simula, Pascal, Modula-2, Oberon,
+or early Ada. Install a modern compiler for it. Write a 50-line
+program. Note which ALGOL features are preserved and which were
+modernized.
+
+### DIY 3 — Read one biography chapter
+
+Pick one person from the ALGOL committee — Backus, Naur, Dijkstra,
+or Hoare are the best-documented — and read one biographical
+chapter. The *HOPL* (History of Programming Languages) proceedings
+have short biographies of most of them.
+
+### TRY — Explain ALGOL in one page
+
+Write a one-page explanation of ALGOL's significance suitable for a
+programmer who has only used Python. If you cannot do it in one
+page, you have not yet internalized the story.
+
+---
+
+## Related College Departments (ALGOL history)
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  this is a history document, and the Computing History wing is its
+  natural home.
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  ALGOL's language-design decisions are foundational for the
+  Programming Fundamentals wing.
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md) —
+  the ALGOL 60 Report is a model of clear technical writing that
+  the Composition wing studies directly.
+
+---
+
 *End of history.md — Track 1 of 4, ALG Research Project, PNW Research Series.*
 
 *Word count: approximately 16,000 words (original) + ~1,200 words enrichment (Session 018). Line count: approximately 1,080 lines. Sources: primary Reports, HOPL proceedings, ALGOL Bulletin, the general memory of the programming language research community, and — for the 2025–2026 epilogue — The Register, the GCC mailing list, Marcel van der Veer's homepage, and Both.org.*
