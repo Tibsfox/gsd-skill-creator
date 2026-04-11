@@ -988,10 +988,128 @@ The Paris meeting ended on January 16, 1960. Sixty-six years later, on the day t
 
 That is the story of ALGOL. That is why it matters even though it does not.
 
+## Epilogue: ALGOL in 2025–2026
+
+This section was added in April 2026 as part of a catalog-wide enrichment
+pass. A paper language from 1960 is, by construction, not a thing that has
+"news." What it has instead is occasional acts of remembrance — anniversaries,
+reprints, rediscoveries — and in the last year there has been one such act
+that is substantial enough to record.
+
+### The GCC ALGOL-68 front-end (January 2025)
+
+On January 1, 2025, Jose E Marchesi — an Oracle engineer who works on the
+GNU toolchain — posted an eight-part work-in-progress patch series to the
+`gcc-patches` mailing list titled "[WIP 0/8] Algol 68 GCC Front-End." The
+submission is exactly what it sounds like: a new front-end for the GNU
+Compiler Collection that accepts ALGOL-68 source code and compiles it
+through GCC's middle-end and back-ends, producing native executables on
+every GCC-supported target.
+
+The parser is not written from scratch. It is adapted from Marcel van der
+Veer's Algol 68 Genie interpreter (a68g), an interpreter-based ALGOL-68
+implementation that has been under continuous development since the early
+2000s and that is widely regarded as the most complete existing
+implementation of the language. Van der Veer's parser implements the
+notoriously difficult W-grammar that ALGOL-68 uses in its formal
+specification — a parser that handles a two-level grammar correctly is a
+rare enough thing that reusing the one that already works is the only
+practical choice.
+
+As of April 2026 the front-end is still marked work-in-progress. It has
+not been merged into the GCC mainline, and no release of GCC ships with
+an `algol68` front-end. What it has done is revive the conversation about
+ALGOL-68 in the GNU toolchain community, which had not had a serious
+front-end for the language in the thirty-seven years of GCC's existence.
+The Register's coverage in early 2025 captured the oddness of the moment
+with characteristic restraint: "It won't lead to a great deal of new
+development in ALGOL, but even if it remains a little-used optional
+extra," it holds value for historical and educational reasons.
+
+Two things are worth noting about this story that are not obvious from
+the patch series itself.
+
+**First**, that van der Veer's Algol 68 Genie is still being actively
+maintained at all. The current release as of 2026 is Algol 68 Genie 3.x.
+It has runtime checks for uninitialised objects, out-of-range subscripts,
+dangling references, a GDB-style debugger, and — on Linux and FreeBSD —
+the ability to partially pre-compile fully-debugged ALGOL-68 code into
+object code that is dynamically linked at runtime. This is a surprisingly
+modern piece of software for a language that most programmers have only
+encountered as a footnote in the history of the 1960s.
+
+**Second**, that the GCC front-end effort treats ALGOL-68 as a living
+reference rather than as a museum piece. The patch series is not an
+emulation layer; it is a production-grade front-end that goes through
+GCC's normal optimization and code-generation paths. If it is ever merged,
+ALGOL-68 programs compiled through it will run on x86-64, aarch64, RISC-V,
+and every other GCC target, at the same level of code quality as C. The
+gap between "can ALGOL-68 run on modern hardware" and "can ALGOL-68 run
+fast on modern hardware" would close.
+
+None of this is the same as ALGOL becoming popular. The mainstream
+programming world has not discovered ALGOL-68, and will not. But for the
+small community that still cares about the language — for the authors of
+van der Veer's documentation, for the historians of the HOPL tradition,
+for the curators of Rosetta Code, and for the handful of people who use
+ALGOL-68 for its own sake — 2025 was the best year ALGOL-68 had seen since
+the mid-1970s.
+
+**Sources:** [The latest language in the GNU Compiler Collection: Algol-68 — The Register, 2025-01-07](https://www.theregister.com/2025/01/07/algol_68_comes_to_gcc/) · [[WIP 0/8] Algol 68 GCC Front-End — gcc-patches mailing list, January 2025](https://gcc.gnu.org/pipermail/gcc-patches/2025-January/672384.html) · [Algol 68 Genie — Marcel van der Veer, homepage](https://jmvdveer.home.xs4all.nl/en.algol-68-genie.html) · [Learning Algol 68 Genie (PDF) — van der Veer, v3.10](https://jmvdveer.home.xs4all.nl/learning-algol-68-genie.pdf) · [Exploring GNU Algol 68 — Both.org](https://www.both.org/?p=11710) · [ALGOL 68 — Wikipedia](https://en.wikipedia.org/wiki/ALGOL_68) · [ALGOL 60 at 60: The greatest computer language you've never used — The Register, 2020](https://www.theregister.com/2020/05/15/algol_60_at_60/)
+
+### The retrospective mood
+
+Outside the GCC front-end story, the 2024–2025 discussion of ALGOL has
+been mostly retrospective. The Register's 2020 piece — "ALGOL 60 at 60:
+The greatest computer language you've never used and grandaddy of the
+programming family tree" — was widely re-shared during the 65th
+anniversary window in 2025, and the retro-computing forums picked it up
+for discussion. The characteristic framing remains unchanged from decade
+to decade: ALGOL as the language whose ideas won even though the language
+itself did not.
+
+That framing is not wrong, and this document has tried to defend it at
+length. What the 2025 activity adds is a reminder that "the ideas won"
+is not just a retrospective judgment. It is also a load-bearing fact
+about the present. Structured programming, block scope, recursion,
+lexical scoping, BNF-defined syntax, formal language semantics, compiler
+front-ends as first-class citizens of a language specification — all of
+these are in the toolkit that every working programmer uses today, and
+all of them came out of the ALGOL work. The language-as-artifact is a
+museum piece. The language-as-method is still running in every compiler
+and every language spec on the planet.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — ALGOL
+  is the language whose influence the Programming Fundamentals wing is
+  (unknowingly) describing. Block structure, lexical scope, structured
+  control flow, and formal grammars are all direct descendants of ALGOL.
+  The language-core file is the best entry point for this thread.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  The ALGOL story is the canonical case study for how an idea can win by
+  being published even when the thing that carried it fails to achieve
+  commercial uptake. The history file is the entry point.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — BNF and the Chomsky hierarchy sit at the boundary between linguistics,
+  formal language theory, and mathematical logic. The bnf-cfg file is the
+  entry point for the mathematical side of the topic.
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md) —
+  Peter Naur's defense of the ALGOL 60 Report was that it was clear prose,
+  not clever prose. The Report is one of the shortest classic texts in
+  computer science and one of the most re-read. For anyone who cares
+  about how technical writing actually survives fifty years, the Report
+  is the worked example.
+
 ---
 
 *End of history.md — Track 1 of 4, ALG Research Project, PNW Research Series.*
 
-*Word count: approximately 16,000 words. Line count: approximately 1,000 lines. Sources: primary Reports, HOPL proceedings, ALGOL Bulletin, and the general memory of the programming language research community.*
+*Word count: approximately 16,000 words (original) + ~1,200 words enrichment (Session 018). Line count: approximately 1,080 lines. Sources: primary Reports, HOPL proceedings, ALGOL Bulletin, the general memory of the programming language research community, and — for the 2025–2026 epilogue — The Register, the GCC mailing list, Marcel van der Veer's homepage, and Both.org.*
 
 *Companion tracks: biographies.md (Backus, Bauer, Naur, Dijkstra, Hoare, van Wijngaarden, Wirth, Perlis, McCarthy, Rutishauser, Samelson), technical.md (deep dive on BNF, call-by-name, block structure, Jensen's device, Hoare logic), legacy.md (detailed descendant analysis from Simula through Rust).*
+
+*The Epilogue (2025–2026) and the College Departments cross-link were added during the Session 018 catalog enrichment pass.*
