@@ -327,3 +327,41 @@ The name similarity is coincidental. This disambiguation is critical for researc
 ---
 
 *Research compiled March 25, 2026. All data from publicly available sources. This document presents competitive and market analysis for research purposes and does not constitute investment advice.*
+
+---
+
+## Addendum: Synsor and the AI manufacturing inspection market, 2025–2026
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body above is unusually current already
+(compiled in March 2026 with 2024–2025 source material). Two tight
+framing points are worth recording:
+
+- **The broader AI-visual-inspection market** has continued to
+  mature through 2024–2025, with edge-accelerator vendors (Hailo,
+  Qualcomm, Intel Movidius successors) producing silicon that
+  makes in-line visual inspection feasible at production-line
+  pace without cloud dependencies. The Syntec Optics and Hailo
+  white papers cited in the body (references 28–29) are the
+  current reference material for this market's state.
+- **Sensor fusion + small-parameter models.** The overall
+  direction of 2025 manufacturing AI is smaller, distilled models
+  running on edge accelerators rather than large cloud models
+  consulted per-part. This is the Phi-3 / Mistral 7B / distilled-
+  Llama pattern (see the `dmn-research` bucket for parallel
+  analysis in the data-mining context) applied to the
+  manufacturing-QA domain.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md) — Manufacturing QA, sensor fusion, and automated optical inspection are systems-engineering topics with direct production deployment.
+- [**business**](../../../.college/departments/business/DEPARTMENT.md) — The AI-vision-inspection market, Synsor's competitive positioning, and its APX-affiliated capital structure are business-department topics.
+- [**electronics**](../../../.college/departments/electronics/DEPARTMENT.md) — Edge accelerators, camera sensors, and the hardware stack that makes real-time visual inspection feasible are electronics-department material.
+- [**data-science**](../../../.college/departments/data-science/DEPARTMENT.md) — Computer vision for defect detection, training-set curation from manufacturing lines, and drift detection in production vision models are data-science topics.
+
+---
+
+*Addendum (AI-vision-inspection market state, edge-distillation trend) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
