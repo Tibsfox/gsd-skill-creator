@@ -1828,4 +1828,146 @@ This architecture preserves REXX's dynamic nature while allowing optimization of
 
 ---
 
+## Addendum: REXX implementations in 2025–2026
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. REXX is a niche language in 2026 — its heyday ran from Mike Cowlishaw's
+original 1979 IBM implementation through the late-1990s peak when REXX
+was shipping as a first-class scripting language on every IBM mainframe
+platform, OS/2, and the Commodore Amiga. What the body above does not
+cover is the current state of the REXX implementation ecosystem, which
+is smaller than its peak but genuinely still alive.
+
+### Open Object Rexx (ooRexx)
+
+**Open Object Rexx (ooRexx)** is the RexxLA-managed open-source
+successor to IBM's Object REXX. The project is hosted at `oorexx.org`,
+with source on GitHub at `github.com/ooRexx` and releases on
+SourceForge.
+
+As of the 2025–2026 enrichment window the released state is:
+
+- **ooRexx 5.0.0** — the current general-availability (GA) release.
+- **ooRexx 5.1.0 beta** — available for testing, with incremental
+  work on the compiler, the class library, and platform support.
+
+ooRexx is written in C++ and targets Linux, Windows, macOS (Intel
+and Apple Silicon), AIX, and several historical IBM platforms. It
+provides the full Object REXX class library (the object-oriented
+extensions that IBM added to classical REXX), can execute classical
+REXX programs unmodified, and integrates with the native desktop
+environments on each supported platform.
+
+**Sources:** [Open Object Rexx — oorexx.org](https://www.oorexx.org/) · [Open Object Rexx — GitHub](https://github.com/ooRexx) · [ooRexx (Open Object Rexx) — SourceForge](https://sourceforge.net/projects/oorexx/) · [RexxLA Products — rexxla.org](https://rexxla.org/products.srsp) · [Object REXX — Wikipedia](https://en.wikipedia.org/wiki/Object_REXX)
+
+### Regina Rexx — the classical-REXX workhorse
+
+**Regina Rexx** is the ANSI-compliant classical REXX interpreter that
+has the broadest platform-support story in the whole REXX ecosystem.
+The platform list as of 2025 is striking for a language most people
+consider dormant: Linux, most Unix variants, OS/2, eCS, DOS, Win9x
+through Win11, macOS, OpenVMS, QNX 4/6, BeOS/Haiku, EPOC32 (Symbian),
+AtheOS/SkyOS, **Amiga** (native), and **AROS** (the Amiga-compatible
+open-source OS).
+
+The Amiga and AROS ports matter for the ARexx-porting project that
+this research document supports: Regina gives that project a
+working, maintained classical REXX interpreter that already runs on
+AROS, which means the porting-architecture work can begin from a
+known-good foundation rather than from scratch.
+
+**Sources:** [Rexx implementations — speleotrove.com](https://speleotrove.com/rexxhist/rexxplat.html) · [Rexx — Wikipedia](https://en.wikipedia.org/wiki/Rexx)
+
+### NetRexx — REXX on the JVM
+
+**NetRexx**, Mike Cowlishaw's own post-IBM project, continues as a
+JVM-hosted REXX variant. NetRexx compiles to Java bytecode and can
+be used either as a scripting language (interpreter mode) or as a
+compiled language that produces .class files. The practical effect
+is that NetRexx programs can use the entire Java standard library
+and any third-party Java library, which makes NetRexx — unusually —
+a language that has access to a much larger ecosystem than the
+REXX community alone could ever have produced.
+
+NetRexx has not had a major release in the 2025 window that the
+search results surfaced, but the project remains in maintenance and
+the downloads are current. For teams that want REXX syntax with JVM
+target quality, NetRexx is still the answer.
+
+### Who still uses REXX?
+
+Howard Fosdick's long-running "Who Uses Rexx? And Where?" article at
+rexxinfo.org remains the single best answer to the question, and its
+continued maintenance through 2025 is itself an interesting data
+point. The short version: IBM mainframes (where REXX is the
+interactive scripting language for ISPF and TSO), OS/2 and eCS
+systems still in production use, Commodore Amiga preservation
+projects (where ARexx is the inter-application scripting glue), and
+a long tail of IBM i and z/VSE installations where REXX is the
+default high-level batch language.
+
+None of these are growth markets. All of them are real markets with
+production deployments that are still being maintained. REXX is not
+a language looking for new users. It is a language serving the users
+it already has, and those users have not gone anywhere.
+
+**Sources:** [Who Uses Rexx? And Where? — Howard Fosdick, rexxinfo.org](https://rexxinfo.org/howard_fosdick_articles/who_uses_rexx_and_where/who_uses_rexx_and_where.html) · [Why you should consider Rexx for scripting — Opensource.com](https://opensource.com/article/22/10/rexx-scripting-language)
+
+### What this means for the ARexx porting project
+
+The body above is the foundational reference for an ARexx-porting
+project — the work of taking the Amiga's ARexx subsystem and porting
+it to modern platforms. The 2025 ecosystem data changes the porting
+landscape in a specific way: because **Regina already runs on AROS**,
+the porting project has a working REXX interpreter as a starting
+point. The project does not need to re-implement REXX; it only needs
+to re-implement the ARexx-specific parts — the port system, the
+message passing, the Amiga-specific IPC — on top of Regina or a
+similar host.
+
+This simplifies the architecture described above: the "bytecode
+compiler + bytecode interpreter" decision becomes optional rather
+than mandatory, because an interpreter-first architecture can build
+on Regina, and the REXX language work becomes a question of
+maintaining compatibility with Regina rather than re-implementing
+the full REXX language from scratch.
+
+The ooRexx ecosystem provides an alternative starting point for a
+port that wants the object-oriented extensions. NetRexx is viable
+for a JVM-hosted port. All three are actively maintained in 2025,
+and a port that chooses one of them as its foundation has the
+benefit of a living upstream rather than a dormant one.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  REXX is a programming-language topic, and its design philosophy
+  (readability first, human-typed lines as the primary unit of code)
+  is a direct precursor to many of the Programming Fundamentals
+  values the coding department teaches.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — REXX is one of the cleanest case studies of a language that was
+  designed for one environment (the IBM mainframe) and then
+  accidentally became the glue language of a completely different
+  platform (the Commodore Amiga). That cross-platform survival is
+  unusual enough to merit its own historical treatment.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — The ARexx port system (inter-application messaging via named
+  ports, without a central bus) is a working example of a
+  decentralized IPC architecture that predates D-Bus and COM by
+  years. For anyone studying IPC design, ARexx is a primary source.
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)
+  — Cowlishaw's "The REXX Language" (Prentice-Hall, 1985) is one
+  of the cleanest specifications of a programming language in the
+  technical-writing tradition. It is short, precise, and readable,
+  and it remains a model for how a reference manual should be
+  structured.
+
+---
+
 *This document is part of the PNW Research Series and serves as the foundational reference for the ARexx porting project. For questions or corrections, refer to the primary sources listed in Appendix E.*
+
+*Addendum (ooRexx 5.0/5.1, Regina AROS, NetRexx, Fosdick's who-uses-rexx) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
