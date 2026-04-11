@@ -1140,6 +1140,146 @@ differently too, and they're doing fine."
 
 ---
 
+## Addendum: 2025–2026 — TypeScript 6, Temporal lands, the runtime triangle stabilizes
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. Between the time this document was first written and the time of
+the enrichment, four things happened in the JS/TS ecosystem that are
+substantial enough to record.
+
+### TypeScript 6.0
+
+**TypeScript 6.0** shipped in late 2025 / early 2026. Unlike the 5.x
+cadence — where each release was a six-week compiler maintenance
+window with small type-system improvements — TypeScript 6.0 is the
+first major-version bump with headline features:
+
+- **`es2025` target and lib.** For the first time, `tsc --target es2025`
+  is a valid build target. This reflects the reality that most teams
+  are now shipping to evergreen runtimes and can emit modern output
+  without a down-transpiler.
+- **Built-in Temporal types.** The long-delayed **Temporal API**
+  reached TC39 stage 4 in 2025. TypeScript 6.0 ships built-in type
+  definitions for the Temporal API under `lib: esnext.temporal`,
+  which means any project targeting a Temporal-supporting runtime can
+  use the API with full type checking immediately.
+- **`#/` subpath imports.** A new syntax for internal subpath imports
+  that interacts cleanly with Node.js's `imports` field and with
+  package-level subpath resolution.
+- **Improved method-level type inference** — specifically, inference
+  refinements that were held back from 5.x because they required a
+  major-version number for correctness reasons.
+- Several new standard-library additions on top of the 5.x baseline.
+
+TypeScript **7** is in early progress as of December 2025, with the
+Microsoft team's public post describing the direction but not
+committing to a ship date.
+
+**Sources:** [Announcing TypeScript 6.0 — Microsoft DevBlogs](https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/) · [TypeScript: Documentation — TypeScript 6.0 — typescriptlang.org](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-6-0.html) · [TypeScript 5.x to 6.0 Migration Guide — GitHub Gist](https://gist.github.com/privatenumber/3d2e80da28f84ee30b77d53e1693378f) · [Progress on TypeScript 7 — December 2025 — Microsoft DevBlogs](https://devblogs.microsoft.com/typescript/progress-on-typescript-7-december-2025/)
+
+### Temporal reaches stage 4
+
+The **Temporal API** — the replacement for `Date` that has been in
+TC39 proposal for the better part of a decade — reached **stage 4** in
+2025. Stage 4 means the proposal has been formally accepted into the
+ECMAScript standard and the relevant features will appear in a future
+numbered ECMAScript edition. Deno had shipped an implementation behind
+a flag as early as Deno 1.40 (January 2024) and stabilized it in the
+Deno 2.x line; the V8 and JavaScriptCore teams have been working on
+implementations throughout 2025; and, as noted above, TypeScript 6.0
+ships the types.
+
+The practical consequence is that `Date` — JavaScript's single worst
+built-in API, adopted directly from Java's 1996 `java.util.Date`
+which Java itself deprecated years later — is on its way out. Temporal
+is not a polyfill. It is a clean replacement with proper timezone
+handling, immutable values, duration arithmetic, and a type hierarchy
+that was designed after the world had figured out what a good
+date-time API looks like.
+
+**Sources:** [ES2025 Features: Temporal API, Pattern Matching & More — FrontendTools](https://www.frontendtools.tech/blog/javascript-es2025-features) · [Deno 1.40: Temporal API — Deno Blog](https://deno.com/blog/v1.40)
+
+### Node.js 24 LTS, Deno 2.x, Bun 1.3 — the runtime triangle
+
+The three-way runtime story that was in flux during 2023–2024
+stabilized in 2025–2026 into a genuine production-grade triangle.
+
+- **Node.js 24** went LTS in late 2025 / early 2026, shipping a V8
+  upgrade, native `fetch` improvements, and — crucially —
+  production-grade `require(ESM)` stability. The long-standing
+  "Node.js can't `require` an ESM package" limitation has been
+  resolved, which closes one of the biggest practical gaps in
+  Node's ESM story.
+- **Deno 2.7** (released February 25, 2026) is the current stable
+  release. Deno 2's headline pitches — backward compatibility with
+  npm packages, a built-in task runner, stabilized Temporal —
+  are production-mature. Windows ARM builds exist now, which
+  removes one of the last "runs everywhere except this one thing"
+  footnotes.
+- **Bun 1.3.x** (latest 1.3.11 as of April 2026) ships with TC39
+  **standard ES decorators**, Windows ARM64 support, and a
+  front-to-back JavaScript-native toolchain (bundler, test runner,
+  package manager, runtime). Bun's pitch remains what it was at 1.0:
+  "we don't replace Node.js, we replace the whole Node.js toolchain
+  with something that's faster because it doesn't have to be
+  compatible with anyone but itself."
+
+Practitioner writing from 2025 consistently frames these three as
+complementary rather than competitive. Node.js is the default for
+anything that has to interoperate with the existing Node.js
+ecosystem, Deno is the default for new projects that want first-class
+TypeScript and don't care about twenty years of Node history, Bun
+is the default for teams whose primary concern is local-development
+speed and tooling uniformity. The "which runtime wins" framing that
+shaped the 2021–2023 conversation is gone.
+
+**Sources:** [TypeScript vs Deno vs Bun (2026): Performance, Features, and When to Use Each — Nandann](https://www.nandann.com/blog/typescript-vs-deno-vs-bun-2026-performance-comparison) · [Node.js 22 vs 24 (2026): What Changed & Should You Upgrade? — PkgPulse Blog](https://www.pkgpulse.com/blog/nodejs-22-vs-nodejs-24-2026) · [How to Run TypeScript in 2025: A Comparison of Node.js, Bun, and Deno — Akos Komuves](https://akoskm.com/how-to-run-typescript-2025/)
+
+### ES2025 and the end of the "transpile everything" era
+
+Zooming out: **ES2025** is the first ECMAScript edition where the
+default assumption for new web projects is "ship modern output, let
+the runtime handle it." Up through ES2022, web developers were still
+transpiling down to ES5 for Internet Explorer compatibility. Up through
+ES2023, the default build target was still something like ES2020.
+With TypeScript 6.0 and the current state of evergreen browsers, the
+default target is rising to ES2025 and in practice nobody is
+transpiling anything more than decorators and a few edge-case
+syntaxes.
+
+The transpile-everything era ran from roughly 2013 (Babel's rise) to
+roughly 2025. That is a twelve-year arc, and its end is worth
+recording in a language-history document because the shape of the
+ecosystem during those twelve years was distorted by the assumption
+that the output was going to be ES5. Now it is not. React, Vue, Svelte,
+Solid, and the TC39 proposal queue are all designed for environments
+where the author's source code and the runtime's input are much closer
+together than they used to be.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  JavaScript and TypeScript are the most widely-taught programming
+  languages in the Programming Fundamentals wing and the most widely
+  used in practice outside systems programming.
+- [**digital-literacy**](../../../.college/departments/digital-literacy/DEPARTMENT.md)
+  — The web is the default computing environment for most people, and
+  the web is a JavaScript delivery surface. Digital literacy's
+  treatment of "how the web works" is inseparable from JS/TS.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — Node.js, Deno, and Bun are serious server-side engineering tools.
+  The front-end framework ecosystem (React, Vue, Svelte, Solid, Qwik)
+  is one of the largest software-engineering subdomains in existence.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  The ten-days-at-Netscape origin story, the browser wars, the Ajax
+  revolution, and the ES6 comeback are all canonical case studies in
+  how a language can be saved by its constraints.
+
+---
+
 *Sources primary:*
 - *Eich, Brendan and Wirfs-Brock, Allen. "JavaScript: The First 20 Years." HOPL-IV (History of 
 Programming Languages), ACM, 2020. 190 pages. The authoritative historical reference for 
