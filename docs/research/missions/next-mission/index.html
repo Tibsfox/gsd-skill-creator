@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Picnic Point Park — GSD Research Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #1B5E20;
+    --secondary: #1565C0;
+    --tertiary: #4E342E;
+    --accent: #2E7D32;
+    --light-primary: #E8F5E9;
+    --light-secondary: #E3F2FD;
+    --row-gray: #F5F5F5;
+    --border: #BDBDBD;
+    --subtle: #757575;
+    --dark: #212121;
+    --white: #FFFFFF;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0F4F0;
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #2E7D32 50%, #1565C0 100%);
+    color: var(--white);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 0.35em 0.9em;
+    border-radius: 4px;
+    margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    opacity: 0.88;
+    margin-bottom: 0.4rem;
+  }
+
+  .meta {
+    font-size: 0.82rem;
+    opacity: 0.68;
+    margin-top: 0.8rem;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+
+  .card {
+    background: #E0ECDF;
+    border: 1px solid #BFDAB9;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(27,94,32,0.15);
+  }
+
+  .card .file-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .card .file-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+  }
+
+  .card .file-desc {
+    font-size: 0.83rem;
+    color: var(--subtle);
+    line-height: 1.45;
+  }
+
+  .contents {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .contents h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
+
+  .stage {
+    margin-bottom: 1.2rem;
+  }
+
+  .stage-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .stage-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25em 0.7em;
+    border-radius: 3px;
+    color: var(--white);
+  }
+
+  .s1 { background: var(--primary); }
+  .s2 { background: var(--secondary); }
+  .s3 { background: var(--tertiary); }
+
+  .stage-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+
+  .stage ul {
+    list-style: none;
+    padding-left: 1.2rem;
+  }
+
+  .stage ul li {
+    font-size: 0.84rem;
+    color: var(--subtle);
+    padding: 0.18rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .stage ul li::before { content: "·"; color: var(--accent); font-weight: 700; }
+
+  .usage {
+    background: var(--light-secondary);
+    border: 1px solid #90CAF9;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .usage h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--secondary);
+    margin-bottom: 0.8rem;
+  }
+
+  .usage ol {
+    padding-left: 1.4rem;
+    font-size: 0.87rem;
+    line-height: 1.7;
+    color: var(--dark);
+  }
+
+  .recompile {
+    background: var(--row-gray);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .recompile h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--tertiary);
+    margin-bottom: 0.8rem;
+  }
+
+  pre {
+    background: var(--dark);
+    color: #A5D6A7;
+    padding: 1rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+
+  .quote {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 1.2rem 1.5rem;
+    margin-top: 2rem;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: #2E5E28;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--subtle);
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">GSD Research Mission Package</div>
+  <h1>Picnic Point Park</h1>
+  <div class="subtitle">Shore, Creek &amp; Community — Puget Sound, Snohomish County, WA</div>
+  <div class="meta">April 7, 2026 &nbsp;·&nbsp; Squadron Profile (12 roles) &nbsp;·&nbsp; 5 Research Modules &nbsp;·&nbsp; 29 Pages</div>
+</header>
+
+<main>
+
+  <div class="section-label">Download Files</div>
+  <div class="cards">
+    <a class="card" href="mission.pdf" download>
+      <div class="file-icon">📄</div>
+      <div class="file-name">mission.pdf</div>
+      <div class="file-desc">Complete 29-page mission package (Vision → Research → Mission). Ready for GSD orchestrator.</div>
+    </a>
+    <a class="card" href="mission.tex" download>
+      <div class="file-icon">📝</div>
+      <div class="file-name">mission.tex</div>
+      <div class="file-desc">XeLaTeX source. Modify and recompile to customize the package or add new findings.</div>
+    </a>
+  </div>
+
+  <div class="contents">
+    <h3>Contents Breakdown</h3>
+
+    <div class="stage">
+      <div class="stage-header">
+        <span class="stage-badge s1">Stage 1</span>
+        <span class="stage-title">Vision Document</span>
+      </div>
+      <ul>
+        <li>Vision narrative — the park as a Puget Sound restoration transect</li>
+        <li>Five-problem problem statement (forage fish, shellfish closure, railroad barrier, invasives, history)</li>
+        <li>ASCII study region and module architecture diagrams</li>
+        <li>Five research modules defined with scope and rationale</li>
+        <li>Chipset configuration (Squadron profile, 30/60/10 model split)</li>
+        <li>12 testable success criteria</li>
+        <li>Through-line: the pedestrian overpass as metaphor for Puget Sound recovery</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-header">
+        <span class="stage-badge s2">Stage 2</span>
+        <span class="stage-title">Research Reference</span>
+      </div>
+      <ul>
+        <li>Module A: Ecology &amp; Nearshore Habitat — forage fish (surf smelt, sand lance, herring), creek, bird community, marine food web</li>
+        <li>Module B: Restoration &amp; Conservation — HFP chronicle 2019–2026, Olympic Fly Fishers events, Meadowdale comparative table</li>
+        <li>Module C: Geology &amp; Coastal Processes — glacially derived bluffs, drift cells, BNSF seawall effects, USGS landslide mapping</li>
+        <li>Module D: History &amp; Cultural Context — MV Pacific Queen chronology (WWII → Bristol Bay → 1957 sinking → Franzen Beach), Tulalip Tribes context</li>
+        <li>Module E: Recreation — tide windows, parking, overpass, iNaturalist/bioblitz protocol</li>
+        <li>Safety &amp; sensitivity considerations table</li>
+        <li>Full bibliography (government agencies, peer-reviewed, professional organizations)</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-header">
+        <span class="stage-badge s3">Stage 3</span>
+        <span class="stage-title">Mission Package</span>
+      </div>
+      <ul>
+        <li>Milestone specification with deliverables table</li>
+        <li>Component breakdown with model assignments and token estimates (284,000 tokens budgeted)</li>
+        <li>4-wave execution plan with ASCII dependency graph</li>
+        <li>32-test test plan: 5 safety-critical (SC), 18 core functionality (CF), 5 integration (IN), 4 edge cases (EC)</li>
+        <li>Verification matrix mapping all 12 success criteria to test IDs</li>
+        <li>12-role Squadron crew manifest</li>
+        <li>Execution summary table</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="usage">
+    <h3>How to Use This Package</h3>
+    <ol>
+      <li>Download <strong>mission.pdf</strong> and read Stage 1 (Vision) to orient yourself to the research scope and module structure.</li>
+      <li>Open <strong>mission.pdf</strong> Stage 2 (Research Reference) as the primary factual foundation for all agent work.</li>
+      <li>Hand Stage 3 (Mission Package) to your GSD orchestrator or Claude Code with the instruction: <em>"Execute this mission package."</em></li>
+      <li>Approve HITL checkpoints at post-Wave 0, post-Wave 1, and post-Wave 2 boundaries via CAPCOM.</li>
+      <li>After Wave 3 completion, the verification report maps every success criterion to its test results.</li>
+    </ol>
+  </div>
+
+  <div class="recompile">
+    <h3>LaTeX Recompilation</h3>
+    <p style="font-size:0.86rem; margin-bottom:0.8rem; color:var(--subtle);">To modify the <code>.tex</code> source and rebuild the PDF, run three XeLaTeX passes:</p>
+    <pre>xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex</pre>
+    <p style="font-size:0.82rem; margin-top:0.7rem; color:var(--subtle);">Three passes resolve the table of contents, cross-references, LastPage counter, and hyperlink destinations. Requires XeLaTeX with DejaVu fonts (pre-installed on Ubuntu 24).</p>
+  </div>
+
+  <div class="quote">
+    "Three years of restoration have made this shoreline look healthier. During this bioblitz, we have the chance to provide living records of life on Earth and use our observations to evaluate the park's health."
+    <br><br>
+    — Helena Puche, Conservation Chair, Olympic Fly Fishers of Edmonds, April 2026
+  </div>
+
+</main>
+
+<footer>
+  GSD Research Mission Package &nbsp;·&nbsp; Picnic Point Park, Snohomish County, WA &nbsp;·&nbsp; April 7, 2026
+</footer>
+
+</body>
+</html>
