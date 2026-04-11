@@ -339,4 +339,163 @@ There is more than one way to do it. And the best way is the one that works.
 
 ---
 
+## Addendum: Perl 5.42 and PHP 8.5 — the specifics (2025)
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body above notes "Perl 5.42.x is the current stable release"
+in passing. The release itself is worth recording in more detail because
+it is not the sleepy maintenance drop that casual outside observers would
+expect from a "dead" language.
+
+### Perl 5.42 (July 3, 2025)
+
+**Perl 5.42** shipped on **July 3, 2025**. The release notes are
+characteristically undersold. The scale is not: **280,000 lines of code
+changed across 1,500+ files, contributions from 64 developers**. This
+is not the shape of a language on maintenance; it is the shape of a
+language that still has an active development community.
+
+The substantive changes:
+
+- **New `any` and `all` operators.** Two new experimental keywords for
+  list processing, compiled directly into the core. Unlike the
+  `List::Util` functions of the same name, these short-circuit — they
+  stop processing the list as soon as the answer is known. Faster than
+  the library equivalents because they are part of the compiler.
+- **Lexical methods with `my method` and the `->&` call operator.**
+  You can now declare a method that is visible only within its
+  declaring scope. The `->&` operator calls these private methods.
+  This is the first major addition to Perl's method-call machinery in
+  years, and it closes a long-standing gap between Perl's
+  object-oriented story and the lexical-scoping story the rest of the
+  language has.
+- **Unicode 16.0 support.** Perl tracks the Unicode standard closely
+  and 16.0 is the July 2025 version. New scripts, new code points,
+  updated property tables.
+- **Field variable `:writer` attribute.** Part of the ongoing work to
+  make Perl's new-style OO (from the `feature 'class'` work that
+  landed in earlier 5.4x releases) ergonomically match what modern
+  OO languages provide out of the box.
+- **More `CORE::` subroutines** including `chdir`, a new
+  `source::encoding` pragma, and a handful of small language
+  improvements.
+- **Copy-on-write constant folding.** Constant-folded strings are now
+  automatically shared using Perl's internal COW mechanism,
+  dramatically reducing memory usage for large repeated strings. The
+  practical impact is on long-running Perl processes that construct a
+  lot of the same small strings — parsing, templating, serialization —
+  where memory footprint drops without code changes.
+- **`tr///` speedup.** Character translation performance has been
+  improved, and crucially the speed is now consistent regardless of
+  whether the string is internally encoded as UTF-8 or Latin-1. The
+  "your code is slower if you have accented characters" gotcha is
+  gone.
+- **CVE-2025-40909 fix.** A race condition in Perl's threading system
+  that affected file operations after thread cloning, resolved by
+  eliminating a `chdir` behavior on the child thread clone path.
+
+**Deprecations / behavior changes.** The references-from-nested-
+functions-to-their-containing-functions mechanism — originally added
+to support debugger visibility into lexical scopes — has been removed
+due to circular-reference memory leaks. Debugger visibility into
+lexical scopes may be reduced as a result, which is a real trade-off
+the perl5-porters chose to accept in the interest of eliminating the
+leak.
+
+**Sources:** [Perl 5.42 Released With New Operators, Unicode 16 Support, Security Fixes — Phoronix](https://www.phoronix.com/news/Perl-5.42-Released) · [Perl 5.42.0 Released: Performance Gains, Feature Refinements, and Key Security Fixes — Re: News, Medium](https://medium.com/@Re-News/perl-5-42-0-released-performance-gains-feature-refinements-and-key-security-fixes-1976628bc763) · [Perl 5.42: A Classic Language Reinvented — HostZealot Blog](https://www.hostzealot.com/blog/news/perl-542-a-classic-language-reinvented) · [perldelta — perl v5.42.1 — Perldoc Browser](https://perldoc.perl.org/perldelta) · [Perl 5 version history — Wikipedia](https://en.wikipedia.org/wiki/Perl_5_version_history)
+
+### PHP 8.5 (November 20, 2025)
+
+The companion story to Perl 5.42 is **PHP 8.5**, released on
+**November 20, 2025**. PHP 8.5 is a substantial release and is worth
+recording because the `php-ecosystem.md` file in this bucket treats
+PHP as "still the language that won the web."
+
+The headline items:
+
+- **Pipe operator `|>`.** A new syntax for chaining function calls by
+  passing the result of one expression directly into the following
+  function. PHP becomes the latest mainstream language to adopt the
+  F#/Elixir/Clojure-style pipe as a first-class operator.
+- **`IntlListFormatter`** — ICU's list formatting becomes available
+  as a PHP class, allowing locale-aware formatting of lists like
+  "Alice, Bob, and Carol."
+- **`array_first()` and `array_last()`** — the two functions every
+  PHP developer has been polyfilling for twenty years are finally
+  core built-ins.
+- **Stack trace support for fatal errors.** Fatal errors now include
+  the full stack trace, closing one of the most-complained-about
+  gaps in PHP's error-reporting story.
+- **`max_memory_limit` INI directive.** An absolute upper bound on
+  per-process memory that cannot be raised by `ini_set()`, for
+  shared-hosting security.
+
+PHP 8.5's deprecations include all `MHASH_` constants, non-canonical
+scalar type casts (`(integer)` and `(double)` rather than `(int)`
+and `(float)`), and non-string / echo output from custom output
+buffer handlers.
+
+This comes on top of **PHP 8.4** (November 2024), which shipped
+property hooks, asymmetric visibility, lazy objects, and HTML5
+support in the DOM extension. The PHP release train is still on its
+annual cadence and the language is still accumulating features at
+a pace that would have been unthinkable in the PHP 5 era.
+
+**Sources:** [PHP 8.5: New Features and Deprecations — Zend](https://www.zend.com/blog/php-8-5-features) · [PHP 8.5 is released with the pipe operator, URI extension, new array functions, and more — Laravel News](https://laravel-news.com/php-8-5-0) · [PHP RFC: Deprecations for PHP 8.5 — wiki.php.net](https://wiki.php.net/rfc/deprecations_php_8_5) · [PHP 8.4 releases — php.watch](https://php.watch/versions/8.4/releases) · [New in PHP 8.4 — Zend Guide](https://www.zend.com/blog/php-8-4)
+
+### What this means for the "quiet persistence" framing
+
+The main body's argument is that Perl is infrastructure — that the
+servers keep running, the cron jobs keep firing, the log parsers keep
+parsing. Perl 5.42's 280,000-line diff is a concrete confirmation
+that the people running that infrastructure have not lost interest in
+improving the tool they run it with, and that the Perl 5 porters
+community is still active enough to get a substantive release out
+every year.
+
+PHP 8.5's pipe operator is a different kind of confirmation. PHP has
+had a bigger public profile than Perl for twenty years, and its
+problem is not obscurity — its problem is that the language spent the
+2010s under constant criticism for its accumulated design debt. That
+the community has been able to land a feature as modernizing as
+pipe-forward without breaking the existing codebase is the kind of
+thing that should make the "PHP is a mess you should migrate off"
+crowd reconsider at least the second half of their argument.
+
+Both languages do the same thing for a living: they run glue code on
+machines nobody thinks about. Both languages got substantive releases
+in the second half of 2025. Neither release made it into mainstream
+programming-language news. The bookshelf camel still watches.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Perl and PHP are programming-language topics, squarely in
+  Programming Fundamentals. Perl's text-processing orientation and
+  PHP's templating origins are worked examples of how domain
+  requirements shape language design.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — Both languages are systems-engineering tools for sysadmins and
+  web-ops. The "quiet persistence" framing is a case study in
+  operational software that does not care about programming-language
+  fashion.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — Perl's 1987 origin as a "practical extraction and report
+  language" for sysadmin work, and PHP's 1995 origin as a personal
+  home page tool, are both good case studies in how specialized
+  languages become general-purpose languages by accident.
+- [**communication**](../../../.college/departments/communication/DEPARTMENT.md)
+  — Both languages shaped the early web and the way programmers
+  communicate with each other through code. Larry Wall's
+  linguistics background and his "there's more than one way to do
+  it" philosophy are communication-theory topics as much as they
+  are programming topics.
+
+---
+
 *Research compiled April 2026. Perl 5.42.x is the current stable release. Raku continues development independently. CPAN has 213,000+ distributions. The camel still watches from the bookshelf.*
+
+*Addendum (Perl 5.42 and PHP 8.5 specifics) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
