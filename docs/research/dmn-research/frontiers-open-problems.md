@@ -66,4 +66,117 @@ Return to the opening question. A fair 2026 answer is that "data mining" now nam
 
 ---
 
+## Addendum: 2025 confirmations — CRISP-DM revisited, vector search, and the tool rewrite
+
+This section was added in April 2026 as part of a catalog-wide enrichment
+pass. The body above is unusually current already (it was written with
+2022–2025 work in mind) and does not need large additions. Two small
+2025-specific points are worth adding because they confirm the body's
+direction and tighten its framing.
+
+### CRISP-DM, still the dominant methodology (and increasingly critiqued)
+
+The body's discussion of the "dissolution vs. reconstitution" of data
+mining as a discipline is in tension with the continued industrial
+dominance of **CRISP-DM** — the 1996-vintage "Cross-Industry Standard
+Process for Data Mining" process model — as the most widely-used
+methodology in enterprise data-mining and data-science practice. The
+2025 survey work (notably the December 2024 "CRISP-DM for Data Science
+2025" report from Data Science PM) confirms three things the body
+already implies:
+
+1. CRISP-DM is **still the #1 methodology** in enterprise data
+   mining, by the same margin it held in 2014 when KDnuggets last
+   did a systematic survey.
+2. The methodology is **unmaintained** — there has been no formal
+   revision of the 1999 spec that CRISP-DM 1.0 published. IBM's
+   ASUM-DM (2015) was supposed to be the revision but never reached
+   the CRISP-DM community's critical mass.
+3. The 2025 consensus is that **a replacement is long overdue**.
+   The reasons are exactly the ones the body above names: the
+   modeling step of CRISP-DM's six-phase loop (business
+   understanding → data understanding → data preparation → modeling
+   → evaluation → deployment) is no longer a single activity, and
+   the "deployment" phase was never designed for the
+   continuously-retrained, continuously-evaluated reality of
+   production ML systems.
+
+The body's framing that "data mining now names a stance more than a
+set of algorithms" is consistent with the observation that the most
+widely-used methodology is older than most of its practitioners.
+CRISP-DM persists because it works well enough for the discipline's
+core commitment — honest pattern discovery with a stakeholder in the
+loop — even as the tools it was written against have changed
+completely. Its eventual replacement will have to preserve that
+commitment while updating everything else.
+
+**Sources:** [CRISP-DM Explained: A Proven Data Mining Methodology — Udacity, March 2025](https://www.udacity.com/blog/2025/03/crisp-dm-explained-a-proven-data-mining-methodology.html) · [What is CRISP DM? — Data Science PM](https://www.datascience-pm.com/crisp-dm-2/) · [CRISP-DM for Data Science 2025 — Data Science PM (PDF)](https://www.datascience-pm.com/wp-content/uploads/2024/12/CRISP-DM-for-Data-Science-2025.pdf) · [Cross-industry standard process for data mining — Wikipedia](https://en.wikipedia.org/wiki/Cross-industry_standard_process_for_data_mining)
+
+### Vector databases and the tooling rewrite wave
+
+The body's section on LLMs as universal text miners implies — but
+does not name — the production-infrastructure layer that makes
+LLM-based mining actually work: the **vector database**. 2025 was
+the year vector databases stopped being a research curiosity and
+became a standard piece of the enterprise data stack. The reference
+lists from the 2026 SecondTalent survey ("Top 10 Vector Databases
+for LLM Applications") includes Pinecone, Weaviate, Milvus, Qdrant,
+Chroma, pgvector-on-Postgres, Redis's vector module, Vespa, and
+several newer entrants, each with production deployments at
+hyperscale.
+
+A 2025 development worth noting for this document specifically:
+several of the major vector databases have undergone **Rust rewrites**
+from earlier Python implementations, and the reported performance
+deltas are in the range of **4× on writes and queries** relative to
+the pre-rewrite Python versions. This mirrors the broader industry
+pattern (Pydantic, Polars, uv, Ruff) of Python-ecosystem tools being
+rewritten in Rust to achieve production throughput. For practitioners
+building mining pipelines on top of these tools, the rewrite wave
+means that the vector-store layer is now fast enough not to be the
+bottleneck, which moves the bottleneck upward to the embedding model
+and downward to the storage I/O — both of which are active research
+fronts in their own right.
+
+**Source:** [Top 10 Vector Databases for LLM Applications in 2026 — SecondTalent](https://www.secondtalent.com/resources/top-vector-databases-for-llm-applications/)
+
+### What this means for the body
+
+The body's open-problem list is accurate. This addendum does not
+displace any of it. What the 2025 data adds is confirmation that
+(a) the discipline's methodology inheritance is still CRISP-DM and
+is likely to remain so until a replacement is explicitly shipped,
+and (b) the production-infrastructure layer for LLM-era mining has
+matured to the point where tooling is no longer the limiting
+factor for most practitioners.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**data-science**](../../../.college/departments/data-science/DEPARTMENT.md)
+  — Data mining sits directly in the data-science department's
+  scope. The CRISP-DM framework, the LLM-era extraction pipelines,
+  and the vector-database infrastructure are all data-science
+  working topics.
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Foundational data-mining algorithms (Apriori, k-means, decision
+  trees) are canonical examples for the Algorithms & Efficiency
+  wing, and the streaming/online variants are in active research
+  development.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — Causal inference, statistical testing, and the mathematical
+  basis of interpretability are mathematics-department topics that
+  data mining specifically needs.
+- [**critical-thinking**](../../../.college/departments/critical-thinking/DEPARTMENT.md)
+  — The discipline's core commitment ("find something the expert
+  did not already know, and be prepared to defend it") is a
+  critical-thinking stance first and an algorithmic practice
+  second.
+
+---
+
 *References are given inline by author and year; a full bibliography appears in the companion document `references.md` in this series.*
+
+*Addendum (CRISP-DM 2025, vector database tooling rewrite) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
