@@ -1,0 +1,36 @@
+{
+  "projectCode": "AIP",
+  "packTitle": "AI Papers Batch — Agent Orchestration, MCP Security, Multimodal Evaluation, Code Agents, LLM Hallucination from April 2026 arXiv Discovery",
+  "modules": [
+    {
+      "moduleId": "agent-orchestration",
+      "title": "Agent Orchestration Papers April 2026: SCRAT Coupled Control Structured Memory Verifiable Action arXiv 2604.03201, Code Review Agents Industry Claims Empirical Reality arXiv 2604.03196, Reflective Context Learning Optimization Primitives arXiv 2604.03189, Schema-Aware Planning Knowledge Graphs arXiv 2604.04190, Readable Minds Theory-of-Mind LLM Poker Agents arXiv 2604.04157, Profile-Then-Reason Bounded Semantic Complexity arXiv 2604.04131, Comparative Reversal Learning LLM Adaptation arXiv 2604.04182, Model of Understanding Deep Learning arXiv 2604.04171"
+    },
+    {
+      "moduleId": "mcp-cybersecurity",
+      "title": "MCP and Cybersecurity Papers April 2026: Federated Learning Server Robustness arXiv 2604.03226, Tsetlin Machine Intrusion Detection IoMT arXiv 2604.03205, Memorization Signatures Autoregressive Models arXiv 2604.03199, OpenClaw Security Evaluation arXiv 2604.03131, Beamforming Feedback WiFi Attack Surface arXiv 2604.04179, NetSecBed Container-Native Cybersecurity Testbed arXiv 2604.04121, Library Vulnerability Client Triggering arXiv 2604.04102, VPN Session Manipulation arXiv 2604.04099, Styx TEE Sticky Policy arXiv 2604.04082"
+    },
+    {
+      "moduleId": "multimodal-evaluation",
+      "title": "Multimodal AI Evaluation Papers April 2026: CoME-VL Multi-Encoder Vision-Language arXiv 2604.03231, VOSR Vision-Only Super-Resolution arXiv 2604.03225, BAS Decision-Theoretic LLM Confidence arXiv 2604.03216, ProtoFlow Class-Incremental Remote Sensing arXiv 2604.03212, AURA Always-On Video Understanding arXiv 2604.04184, Scale-Aware Far-Distance Person Re-ID arXiv 2604.04183, Uncertainty-Aware Clinical Foundation Models arXiv 2604.04175, CoALFake Cross-Domain Fake Detection arXiv 2604.04174"
+    },
+    {
+      "moduleId": "code-hallucination",
+      "title": "Code Agents and LLM Hallucination Papers April 2026: Prosocial Persuasion Scale LLMs Outperform Humans arXiv 2604.03202, Logical Soundness Not Reliable Neurosymbolic Fact-Checking arXiv 2604.04177, Reference Hallucination Detection Commercial LLMs arXiv 2604.03173, BibTeX Citation Hallucinations Publishing Agents arXiv 2604.03159, GENFIG1 Visual Summaries Scholarly Work arXiv 2604.04172, Vero Open RL Recipe Visual Reasoning arXiv 2604.04926, AICA-Bench VLM Affective Image Captioning arXiv 2604.05647"
+    },
+    {
+      "moduleId": "hacker-news",
+      "title": "Hacker News Intelligence April 2026: Claude Mythos Preview System Card 531pts Anthropic, Claude Code Complex Engineering Tasks 418pts GitHub Issue, Running Gemma 4 Locally LM Studio Headless CLI 380pts, Assessing Mythos Cybersecurity Capabilities 250pts Red Team, Nanocode Claude Code JAX TPUs 202pts, Google Scion Agent Orchestration Testbed 157pts, Gemma 4 Multimodal Fine-Tuner Apple Silicon 122pts, Anthropic Google Broadcom Partnership 116pts"
+    }
+  ],
+  "bibliography": [
+    "arXiv preprint server, April 2026 captures from discovery engine",
+    "Hacker News front page, April 2026 (50+ points threshold)",
+    "Cross-references to AGT, APD, MAS, GSI existing projects"
+  ],
+  "safety_rules": [
+    "Distinguish genuine relevance from keyword-match false positives",
+    "Note preprint status — none of these are peer-reviewed",
+    "HN articles represent community sentiment, not research conclusions"
+  ]
+}

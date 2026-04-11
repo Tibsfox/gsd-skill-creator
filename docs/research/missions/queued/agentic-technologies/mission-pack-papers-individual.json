@@ -1,0 +1,101 @@
+{
+  "projectCode": "APD",
+  "packTitle": "Artemis Papers Deep Dive — Individual Paper Analysis with Full Methodology and Results",
+  "modules": [
+    {
+      "moduleId": "2504-08623",
+      "title": "Enterprise-Grade Security for MCP: IAM Integration Azure AD Okta, Zero-Trust Framework Never Trust Always Verify, Tool Poisoning Mitigation, Structured Approval Workflows Security Data Governance Privacy Legal, Periodic Recertification Deployed Tools"
+    },
+    {
+      "moduleId": "2511-20920",
+      "title": "Securing MCP Risks Controls Governance: Dynamic User-Driven Agent Systems vs Static API Integrations, Risk Taxonomy, Control Framework, Governance Model, Policy-Based Access Control"
+    },
+    {
+      "moduleId": "2602-11327",
+      "title": "Security Threat Modeling MCP A2A Agora ANP: Four Protocol Comparison, 12 Protocol-Level Risks, Creation Operation Update Lifecycle Phases, Wrong-Provider Tool Execution Measurement, First Protocol-Centric Risk Assessment Framework"
+    },
+    {
+      "moduleId": "2503-23278",
+      "title": "MCP Landscape Security Threats Future Research: Four Lifecycle Phases 16 Activities, 16 Threat Scenarios, Four Attacker Categories Malicious Developers External Attackers Users Security Flaws, Safeguards Per Phase"
+    },
+    {
+      "moduleId": "2601-07395",
+      "title": "MCP-ITP Automated Implicit Tool Poisoning: Automated Attack Generation Framework, Tool Description Manipulation, Implicit Payload Injection, Success Rate Analysis, Detection Gap Identification"
+    },
+    {
+      "moduleId": "2602-14798",
+      "title": "Overthinking Loops Agents Structural Risk MCP Tools: Cyclic Tool-Call Trajectories, 142.4x Token Amplification, 14 Malicious Tools 3 Servers, Decoding-Time Controls Ineffective, Tool-Call Structure Analysis Required"
+    },
+    {
+      "moduleId": "2604-04426",
+      "title": "ShieldNet Network-Level Guardrails Supply-Chain Injections: SC-Inject-Bench 10000+ Malicious Tools 25+ Attack Types, Man-in-the-Middle Proxy Event Extractor, F1 0.995, 0.8% False Positive Rate"
+    },
+    {
+      "moduleId": "2604-04323",
+      "title": "Agentic Skills Wild Benchmarking Realistic Settings: 34K Real-World Skills, Progressive Challenge Levels, Performance Degradation Approaching No-Skill Baseline, Query-Specific Refinement 57.7% to 65.5% Recovery"
+    },
+    {
+      "moduleId": "2604-03201",
+      "title": "SCRAT Coupled Control Structured Memory Verifiable Action: Squirrel Locomotion Biological Model, Hierarchical Control Framework, Episodic Memory Observer-State Tracking, Role-Differentiated Architecture Fast Feedback Loops"
+    },
+    {
+      "moduleId": "2604-04157",
+      "title": "Readable Minds Theory-of-Mind LLM Poker Agents: Factorial Study Memory Necessary Sufficient p=0.008, Strategic Deception p<0.001, Persistent Memory Enables Theory of Mind, Cross-Model Validation Kappa 0.81"
+    },
+    {
+      "moduleId": "2604-03196",
+      "title": "Code Review Agents Industry Claims Empirical Reality: 19450 PRs AIDev Platform, CRA-Only 45.20% Merge vs Human-Only 68.37%, Signal-to-Noise 0-30% Range 60.2% Closed PRs, 12 of 13 Agents Below 60% Signal"
+    },
+    {
+      "moduleId": "2604-00594",
+      "title": "Agent Psychometrics Task-Level Performance Prediction ICLR 2026: Item Response Theory Augmented Rich Features, LLM Scaffold Ability Decomposition, Unseen Benchmark Prediction, Reduced Expensive Evaluations"
+    },
+    {
+      "moduleId": "2604-00824",
+      "title": "STITCH Sliding-Memory Trajectory Inference Task Chunking: Coarse-to-Fine Noise Filter Decision-Critical Token Retention, 63.16% SWE-bench Verified Improvement, 30B to 355B Scale, Multilingual Settings"
+    },
+    {
+      "moduleId": "2604-04131",
+      "title": "Profile-Then-Reason Bounded Semantic Complexity: Explicit Workflow Synthesis Then Deterministic Execution, Verifier Evaluates Trace, Bounded Repair 2-3 LLM Calls, 16 of 24 Configurations Win, Retrieval-Centered Tasks"
+    },
+    {
+      "moduleId": "2603-21687",
+      "title": "MIRAGE Epistemic Mimicry Visual Understanding: 60%+ Fabrication Rate Absent Images, 70-80% Benchmark Accuracy Without Images, 3B Text-Only Beats Radiologists Chest X-Ray, B-Clean Evaluation Framework, 99% Medical Benchmarks Vulnerable"
+    },
+    {
+      "moduleId": "2604-03173",
+      "title": "Detecting Correcting Reference Hallucinations Commercial LLMs Deep Research: Detection Methodology Precision Recall, Commercial LLM Comparison, Correction Strategies, Deep Research Mode Analysis"
+    },
+    {
+      "moduleId": "2604-03159",
+      "title": "BibTeX Citation Hallucinations Scientific Publishing Agents: Fabrication Taxonomy, Agent-by-Agent Comparison, Citation Verification Pipeline, Mitigation Strategies for Research Automation"
+    },
+    {
+      "moduleId": "2604-04177",
+      "title": "Logical Soundness Not Reliable Neurosymbolic Fact-Checking: Why Soundness Criterion Fails, Alternative Evaluation Criteria, Experimental Evidence Against Current Approaches, Implications for Automated Verification"
+    },
+    {
+      "moduleId": "2604-03189",
+      "title": "Reflective Context Learning Optimization Primitives Context Space: Reflection Converts Trajectories Update Signals, Mutation Applies Signals Improve Behavior, Classical Optimization Batching Auxiliary Losses Variance Reduction, AppWorld BrowseComp+ RewardBench2"
+    },
+    {
+      "moduleId": "2604-00901",
+      "title": "Experience Compass HERA Multi-Agent RAG Evolving Orchestration: Hierarchical Framework Joint Evolution Topology Agent Prompts, Reward-Guided Sampling Query-Specific Topologies, 38.69% Improvement Six Benchmarks, Emergent Self-Organization Sparse Networks"
+    },
+    {
+      "moduleId": "2604-01647",
+      "title": "Robust Multi-Agent Workflows Environmental Data EnviSmart: Three-Track Knowledge Architecture, Role-Separated Multi-Agent Deterministic Validators, SF2Bench 2452 Stations 8557 Files 39 Years, Coordinate Error Detection Before Publication PEARC 2026"
+    }
+  ],
+  "bibliography": [
+    "All papers from arXiv preprint server, 2025-2026",
+    "ICLR 2026 Workshop on Agents in the Wild (Agent Psychometrics)",
+    "PEARC 2026 (EnviSmart environmental data)",
+    "Zenodo: C.A.T. Engine DAG Scheduling"
+  ],
+  "safety_rules": [
+    "Full attribution to all authors",
+    "Distinguish preprint from peer-reviewed",
+    "Report limitations as stated by authors"
+  ]
+}

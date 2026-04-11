@@ -1,0 +1,65 @@
+{
+  "projectCode": "RCA",
+  "packTitle": "Root Cause Analysis — Methods, Frameworks, AI-Driven Approaches, and Application Across Safety-Critical Domains",
+  "modules": [
+    {
+      "moduleId": "classical-methods",
+      "title": "Classical RCA Methods: Five Whys Toyota Production System Sakichi Toyoda 1930s, Ishikawa Fishbone Diagram Cause-and-Effect 6M Categories Man Machine Material Method Measurement Mother Nature, Fault Tree Analysis FTA Boolean Logic AND OR Gates Top-Down Deductive, Failure Mode Effects Analysis FMEA Risk Priority Number Severity Occurrence Detection, Barrier Analysis Energy Transfer Model James Reason Swiss Cheese"
+    },
+    {
+      "moduleId": "systems-thinking",
+      "title": "Systems-Theoretic Approaches: STAMP Systems-Theoretic Accident Model Processes Nancy Leveson MIT, STPA Systems-Theoretic Process Analysis Proactive Hazard Analysis, CAST Causal Analysis Systems Theory Retrospective, HFACS Human Factors Analysis Classification System Wiegmann Shappell Aviation, Swiss Cheese Model James Reason Latent Conditions Active Failures, Safety-III Systems Approach Beyond Linear Causality"
+    },
+    {
+      "moduleId": "software-sre",
+      "title": "Software Engineering and SRE: Google Blameless Postmortem Culture Learning from Failure, Incident Management Timeline Reconstruction, Error Budget Exhaustion Analysis, Change Failure Rate DORA Metrics, Deployment Rollback Decision Trees, Cascading Failure Analysis Circuit Breakers, Chaos Engineering Fault Injection Game Days, Observability Three Pillars Logs Metrics Traces"
+    },
+    {
+      "moduleId": "ai-agent-debugging",
+      "title": "AI Agent RCA: AgentRx Microsoft Research 4-Stage Pipeline Trajectory Normalization Constraint Synthesis Guarded Evaluation LLM Judge, OpenRCA Benchmark 335 Failures 68GB Telemetry, 12 Pitfall Types Hallucinated Interpretation Incomplete Exploration, AgentDebug Corrective Feedback 24% Higher Accuracy, Critical Failure Step Identification Non-Deterministic Reasoning Chains"
+    },
+    {
+      "moduleId": "cloud-microservices",
+      "title": "Cloud and Microservices RCA: DynaCausal Dynamic Causality-Aware Cascading Fault Propagation, CHASE Causal Hypergraph Multimodal Microservice Systems, MetaRCA Generalizable Production Fault Incidents, Root Cause Analysis Causal Inference Distributed Systems, Service Dependency Graphs Trace Analysis Anomaly Correlation"
+    },
+    {
+      "moduleId": "llm-rca-failures",
+      "title": "LLM Reasoning Failures in RCA: Why AI Agents Systematically Fail Cloud RCA 1675 Agent Runs 5 Models 12 Pitfall Types, Stalled Biased Confused Reasoning Failures LLMs, Hallucinated Data Interpretation Incomplete Exploration Persist All Models, Architecture-Level Failures Not Model-Level, FVDebug Formal Verification Debugging Assistant"
+    },
+    {
+      "moduleId": "healthcare-aviation",
+      "title": "Healthcare and Aviation RCA: Joint Commission Sentinel Event RCA Requirements, NASA Aviation Safety Reporting System ASRS, NTSB Investigation Methodology Probable Cause, Patient Safety Incident Investigation STAMP vs Traditional RCA, Human Factors Engineering Cognitive Bias in RCA, High-Reliability Organizations HRO Preoccupation with Failure"
+    },
+    {
+      "moduleId": "manufacturing-quality",
+      "title": "Manufacturing and Quality RCA: Toyota Production System Continuous Improvement Kaizen, Six Sigma DMAIC Define Measure Analyze Improve Control, 8D Problem Solving Eight Disciplines Ford Motor, Statistical Process Control SPC Control Charts, AI-Driven RCA Machine Learning Anomaly Detection, Zero-Defect Manufacturing Digital Twin Predictive Analytics, Pareto Analysis 80-20 Rule Vital Few Trivial Many"
+    },
+    {
+      "moduleId": "our-architecture",
+      "title": "RCA in Our Architecture: GSD Forensics Skill Post-Mortem Investigation, Incident-Analyzer Agent Log Metric Trace Correlation, Security-Hygiene Skill Threat Detection, Verification Pipeline Externalized Correctness, Meta-Agentic Bootstrapping Error-as-Feedback Loop, Context Rot as Root Cause of Agent Drift, Compaction Loss as Root Cause of Knowledge Degradation, Trust System Failure Modes"
+    },
+    {
+      "moduleId": "mathematical-foundations",
+      "title": "Mathematical Foundations of RCA: Causal Inference Directed Acyclic Graphs Judea Pearl Do-Calculus, Bayesian Networks Probabilistic Root Cause Identification, Information Theory Mutual Information for Fault Localization, Graph Theory Fault Propagation Paths Shortest Path Analysis, Markov Chains State Transition Analysis Failure Probability, Granger Causality Time Series Root Cause Detection"
+    }
+  ],
+  "bibliography": [
+    "Leveson, N. — Engineering a Safer World: Systems Thinking Applied to Safety (MIT Press, 2011)",
+    "Reason, J. — Human Error (Cambridge University Press, 1990)",
+    "Ishikawa, K. — Guide to Quality Control (Asian Productivity Organization, 1976)",
+    "Pearl, J. — Causality: Models, Reasoning, and Inference (Cambridge, 2000)",
+    "Ohno, T. — Toyota Production System: Beyond Large-Scale Production (1988)",
+    "Google SRE Book — Site Reliability Engineering (O'Reilly, 2016)",
+    "arXiv:2602.09937 — Why Do AI Agents Systematically Fail at Cloud RCA (Kim et al., 2026)",
+    "arXiv:2602.02475 — AgentRx: Diagnosing AI Agent Failures (Microsoft Research, 2026)",
+    "arXiv:2408.00803 — Comprehensive Survey on RCA in Microservices (2024)",
+    "arXiv:2510.22613 — DynaCausal: Dynamic Causality-Aware RCA (2025)",
+    "arXiv:2601.22208 — Stalled, Biased, and Confused: LLM Reasoning Failures (2026)"
+  ],
+  "safety_rules": [
+    "Safety-critical domain examples must cite actual incident reports or published case studies",
+    "Healthcare examples must respect patient privacy — use published de-identified cases only",
+    "Aviation examples from NTSB/ASRS public databases only",
+    "Do not present RCA methods as sufficient for legal or regulatory compliance without noting limitations"
+  ]
+}
