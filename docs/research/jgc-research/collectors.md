@@ -846,3 +846,155 @@ The HotSpot JVM and its cousins give you an unusually rich menu of garbage colle
 The right choice depends on your workload's pause budget, heap size, CPU budget, and whether "usually fast" or "always fast" matters more. Always measure — collector choice tuning without empirical data is cargo-culting.
 
 The trend is clear: over the past decade, the Pareto frontier of the pause/throughput/footprint triangle has moved steadily outward. Workloads that required commercial JVMs and custom hardware a decade ago now run on stock OpenJDK with sub-millisecond pauses on terabyte heaps. The next frontier is closing the throughput gap between concurrent collectors and classical throughput collectors — and generational ZGC is the most aggressive step in that direction yet.
+
+---
+
+## 17. Addendum: The JDK 25 LTS generational transition (2025–2026)
+
+This section was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body above identifies generational ZGC as the most
+aggressive step toward closing the throughput gap. The 2025 release
+train took that from aspiration to default, and is worth recording.
+
+### ZGC — generational becomes the only flavor
+
+**JDK 25 (September 16, 2025, LTS)** is the first Java release in which
+Generational ZGC is the **only** flavor of the ZGC collector. The
+non-generational version, which had been the original ZGC from JDK 11
+through JDK 20, was deprecated in JDK 21 and removed in JDK 25. A user
+who selects `-XX:+UseZGC` on JDK 25 or later gets the generational
+variant unconditionally. The option to select the old non-generational
+ZGC is gone.
+
+This matters for the main-body framing because the narrative above
+treated "ZGC is now generational" as a feature toggle. On JDK 25 LTS
+it is not a toggle — it is the *only* thing the flag name means. The
+next decade of ZGC-based OpenJDK deployments will all run the
+generational variant.
+
+Observed performance characteristics from the 2025 field literature,
+for a deployment with GC pressure on the order of a normal server
+application:
+
+- **Pause times** — consistently **0.1–0.5 ms regardless of heap size**,
+  with occasional spikes to ~1 ms under extreme allocation pressure.
+  Heaps in the hundreds of GB and heaps in the single-GB range have
+  the same pause distribution.
+- **Memory overhead** — **15–30% more** than G1 for the same heap,
+  because the concurrent machinery needs working space that G1 does
+  not.
+- **CPU overhead** — **5–10% more** than G1 for the same throughput,
+  for the same reason.
+- **Throughput** — generational ZGC closes most of the throughput gap
+  to G1 for typical young-allocation-dominated workloads, which was
+  the primary motivation for adding the generational split to the
+  collector in the first place.
+
+ZGC on JDK 25 is now the answer for latency-sensitive services that
+previously had to choose between C4 (commercial) and the old
+non-generational ZGC (high throughput penalty). Stock OpenJDK ships
+the working answer.
+
+**Source:** [Pauseless Garbage Collection in Java 25: ZGC Guide — Andrew Baker's Technology Blog, December 2025](https://andrewbaker.ninja/2025/12/03/deep-dive-pauseless-garbage-collection-in-java-25/)
+
+### Shenandoah — generational is no longer experimental
+
+The Shenandoah collector followed a parallel arc. Through JDK 21–24
+the generational version of Shenandoah was tagged `experimental` and
+required an unlock flag. **JDK 25 (September 2025)** promoted
+generational Shenandoah to production status and made it the
+**default** when `-XX:+UseShenandoahGC` is selected. The
+non-generational Shenandoah is still available behind a mode flag but
+is no longer the default.
+
+Observed 2025-era Shenandoah characteristics:
+
+- **Pause times** — typically **1–10 ms**, with most pauses under 5 ms.
+  This is higher than ZGC's sub-millisecond numbers but well inside
+  the range most latency-sensitive applications can tolerate.
+- **Memory overhead** — lower than ZGC, thanks to compressed oops
+  support.
+- **Throughput** — the generational transition closed a significant
+  gap to G1 on young-allocation-heavy workloads, similar in shape to
+  what ZGC saw.
+
+Shenandoah's niche is teams that want concurrent GC without paying
+ZGC's memory footprint. The JDK 25 generational landing is the event
+that makes that niche real at production scale.
+
+**Source:** [New in Java 25: Generational Shenandoah GC is no longer experimental — The Perf Parlor, September 14, 2025](https://theperfparlor.com/2025/09/14/new-in-java25-generational-shenandoah-gc-is-no-longer-experimental/)
+
+### G1 is still the sensible default
+
+The practitioner writing that settled in the second half of 2025 and
+early 2026 is consistent on one point that the main body above gets
+right: **G1 remains the sensible default for the overwhelming
+majority of workloads.** The reasons have not changed — G1's balance
+of pause, throughput, memory footprint, and operational familiarity
+still fits most web services, most REST/RPC backends, most message-bus
+consumers, and most multi-tens-of-GB application tier deployments.
+
+What *has* changed is the shape of the G1-vs-X decision. Through 2024
+the question was "G1 or ZGC?" with "or Shenandoah?" as a minority
+position. In 2025 the question became a three-way:
+
+1. **G1** — default for "normal" workloads where the pause budget is
+   generous (tens of ms are tolerable) and the CPU budget is tight.
+2. **ZGC (generational)** — for latency-sensitive workloads where the
+   pause budget is under ~1 ms and the CPU and memory budgets have
+   headroom.
+3. **Shenandoah (generational)** — for latency-sensitive workloads
+   where the pause budget is in the 1–10 ms range and the memory
+   budget is tight.
+
+The binary throughput-vs-latency tradeoff that shaped the JDK 8–11
+conversation is now a three-way Pareto, and all three points on the
+frontier have been production-quality since JDK 25.
+
+**Sources:** [The JVM Garbage Collector Decision in 2026: G1 vs ZGC vs Shenandoah for Real Workloads — Java Code Geeks](https://www.javacodegeeks.com/2026/04/the-jvm-garbage-collector-decision-in-2026-g1-vs-zgc-vs-shenandoah-for-real-workloads.html) · [G1, ZGC, and Shenandoah: OpenJDK's Garbage Collectors for Very Large Heaps — IBM Community, September 2025](https://community.ibm.com/community/user/blogs/theo-ezell/2025/09/03/g1-shenandoah-and-zgc-garbage-collectors) · [G1 vs ZGC vs Shenandoah: The Best Java Garbage Collector for Large Heaps (2025 Guide) — DEV Community](https://dev.to/webmethodman/g1-vs-zgc-vs-shenandoah-the-best-java-garbage-collector-for-large-heaps-2025-guide-n1i)
+
+### What this means for the summary
+
+The Section 16 summary above lists the collectors as a menu, with G1
+as the sensible default and ZGC-now-generational as the modern answer
+for latency-sensitive work. That framing is still correct; what has
+moved in 2025 is that **both** the concurrent collectors in OpenJDK
+(ZGC and Shenandoah) are now production-grade generational collectors
+by default, and the throughput gap that had historically made them
+niche choices has narrowed substantially.
+
+"Closing the throughput gap between concurrent collectors and classical
+throughput collectors" was described above as the next frontier. As of
+JDK 25 LTS, the gap is closed enough that production teams running
+latency-sensitive services on ZGC or Shenandoah are no longer paying
+a 20–30% throughput penalty relative to G1 — they are paying more like
+a 5–10% CPU and 15–30% memory penalty, and for many workloads the
+tradeoff now makes sense.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — Garbage collection is a systems-engineering topic. Collector
+  choice is a worked example of Pareto-optimal design trade-offs
+  under multi-dimensional constraints (pause, throughput, memory,
+  CPU, predictability).
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  For the algorithms-and-data-structures side: generational
+  collectors, tri-color marking, remembered sets, write barriers,
+  concurrent compaction — all of these are concrete algorithm
+  instances for abstract concepts in the Algorithms & Efficiency wing.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — Pause-time distributions, allocation-rate curves, and the
+  throughput-latency-footprint frontier are all graph-theoretic and
+  statistical objects that can be studied with formal tools.
+- [**cloud-systems**](../../../.college/departments/cloud-systems/DEPARTMENT.md)
+  — In 2026 the JVM runs most enterprise cloud workloads. GC tuning
+  is one of the cloud-systems operational-concerns topics that every
+  SRE team eventually encounters.
+
+---
+
+*Addendum (JDK 25 LTS generational transition) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
