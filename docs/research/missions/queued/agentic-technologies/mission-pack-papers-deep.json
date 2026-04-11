@@ -1,0 +1,45 @@
+{
+  "projectCode": "APD",
+  "packTitle": "Artemis Papers Deep Dive — 24 Papers Across Agent Architecture, MCP Security, Evaluation & Benchmarking, Context Engineering",
+  "modules": [
+    {
+      "moduleId": "mcp-security-papers",
+      "title": "MCP Security Papers: arXiv 2504.08623 Enterprise MCP Frameworks IAM Azure AD Okta, arXiv 2511.20920 Securing MCP Risks Controls Governance, arXiv 2602.11327 Security Threat Modeling MCP A2A Agora ANP Protocol Comparison, arXiv 2503.23278 MCP Landscape Security Threats Future Research, arXiv 2601.07395 MCP-ITP Automated Implicit Tool Poisoning Framework, arXiv 2602.14798 Overthinking Loops Agents Structural Risk MCP Tools 658x Cost"
+    },
+    {
+      "moduleId": "supply-chain-defense",
+      "title": "Supply-Chain Defense Papers: arXiv 2604.04426 ShieldNet Network-Level Guardrails Supply-Chain Injections Agentic Systems, arXiv 2604.04323 How Well Agentic Skills Work Wild Benchmarking Realistic Settings Performance Degradation, arXiv 2604.03081 Supply-Chain Poisoning DDIPE 1070 Skills 15 MITRE ATTACK"
+    },
+    {
+      "moduleId": "agent-reasoning",
+      "title": "Agent Reasoning Papers: arXiv 2604.02460 Data Processing Inequality Single-Agent Multi-Agent Token Budgets Stanford, arXiv 2604.01020 OrgAgent Company Hierarchy Governance Execution Compliance 102% Improvement, arXiv 2604.03201 SCRAT Coupled Control Structured Memory Verifiable Action, arXiv 2604.04157 Readable Minds Theory-of-Mind LLM Poker Agents Emergent Behavior"
+    },
+    {
+      "moduleId": "code-agents",
+      "title": "Code Agent Papers: arXiv 2604.03196 Code Review Agents Industry Claims Empirical Reality Gap, arXiv 2604.00594 Agent Psychometrics Task-Level Performance Prediction ICLR 2026, arXiv 2604.00824 STITCH Training 63% SWE-bench Improvement, arXiv 2604.04131 Profile-Then-Reason Bounded Semantic Complexity Tool-Augmented Agents"
+    },
+    {
+      "moduleId": "hallucination-evaluation",
+      "title": "Hallucination & Evaluation Papers: arXiv 2603.21687 MIRAGE Epistemic Mimicry Visual Understanding 60% Fabrication Stanford Fei-Fei Li, arXiv 2604.03173 Detecting Correcting Reference Hallucinations Commercial LLMs, arXiv 2604.03159 BibTeX Citation Hallucinations Scientific Publishing Agents, arXiv 2604.04177 Logical Soundness Not Reliable Neurosymbolic Fact-Checking, arXiv 2604.03216 BAS Decision-Theoretic LLM Confidence Evaluation"
+    },
+    {
+      "moduleId": "context-knowledge",
+      "title": "Context & Knowledge Papers: arXiv 2604.03189 Reflective Context Learning Optimization Primitives Context Space, arXiv 2604.04190 Schema-Aware Planning Hybrid Knowledge Toolset Reliable Knowledge Graphs, arXiv 2604.00901 Experience as Compass Multi-Agent RAG Evolving Orchestration, arXiv 2604.01647 Robust Multi-Agent Workflows Environmental Data Management EnviSmart"
+    },
+    {
+      "moduleId": "social-persuasion",
+      "title": "Social & Persuasion Papers: arXiv 2604.03202 Prosocial Persuasion at Scale LLMs Outperform Humans Donation Appeals Behavioral Change, zenodo 19427346 C.A.T. Engine Deterministic Frame Stability DAG Scheduling Rawson Chrzanowski"
+    }
+  ],
+  "bibliography": [
+    "All papers from arXiv preprint server (arxiv.org), April 2026 or earlier",
+    "Zenodo open-access repository for C.A.T. engine paper",
+    "Cross-references to MAS project (deep-dived Tier 1 papers)",
+    "Cross-references to AGT project (synthesis across all domains)"
+  ],
+  "safety_rules": [
+    "Paper claims must be attributed to specific authors and institutions",
+    "Distinguish between peer-reviewed and preprint status",
+    "Note when experimental results are preliminary or on limited benchmarks"
+  ]
+}
