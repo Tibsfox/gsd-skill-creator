@@ -2146,4 +2146,160 @@ This research cross-links to the following college departments in
 
 *End of History & Origins document.*
 
+---
+
+## Study Guide
+
+This is the thread to read first in the Ada bucket. The history is
+the answer to almost every question people ask about Ada ("why is it
+so verbose", "why does the DoD care", "why does Airbus use it", "why
+is it still alive"). If you read this file with even half-attention,
+the other three threads make immediate sense.
+
+### Prerequisites
+
+- Two hours. It is a long file; it rewards a single sitting.
+- A rough idea of late-1970s computing context: mainframes, the early
+  microcomputer era, Algol descendants (Pascal, Modula-2), the C
+  revolution just starting, and a Department of Defense spending
+  several hundred million dollars a year maintaining more than 450
+  different programming languages across its software portfolio. If
+  you don't know that last number, read Section 1 of this file first
+  and then come back.
+
+### Recommended reading order
+
+The sections of this file are already in chronological order. Read
+them in order. The story is a story; don't skim.
+
+### Three threads to follow while reading
+
+1. **The political thread.** Who wanted Ada, who built it, who
+   resisted it, and why. The DoD's HOLWG, the Ironman/Steelman
+   requirements, the Green/Red/Yellow/Blue language competition,
+   Ichbiah's team at CII Honeywell Bull, the Ada trademark, the ISO
+   standardization.
+2. **The technical thread.** What the language actually has: packages,
+   tasks, generics, exceptions, strong typing, representation clauses.
+   Trace each feature back to the requirement that drove it.
+3. **The cultural thread.** The Ada community: DARPA, AdaCore,
+   SIGAda, the Ada User Journal, *Ada Letters*, the conference
+   circuit. The survivorship story is as interesting as the design.
+
+### Questions to hold in your head
+
+- Why did the DoD want one language? (Hint: the 450-language number
+  above is the short answer.)
+- Why a committee? Why wasn't Ada designed by one person the way C
+  was?
+- Why was the language trademarked? Why was the trademark released?
+- What did Ichbiah's team get right that the other competitors didn't?
+- Why did Ada 83 fail to catch on commercially even though it became
+  the DoD standard?
+- Why did Ada 95 get traction in places Ada 83 didn't (aerospace,
+  rail, automotive)?
+- How did the community survive the loss of the DoD mandate in 1997?
+- Why is Ada still alive in 2026?
+
+By the end of the file you should be able to give a two-minute answer
+to each of these questions. If you can't, re-read the sections where
+they came up.
+
+---
+
+## Worked Examples
+
+This is a history document, not a programming manual, so the "worked
+examples" are small reenactments of historical programs. Each one is
+a real thing someone wrote in the period it comes from.
+
+### Example 1: The first "Hello world" that ran on Ada/Ed (1983)
+
+```ada
+with Text_Io;
+procedure Hello is
+begin
+   Text_Io.Put_Line ("Hello from Ada, 1983.");
+end Hello;
+```
+
+This is, as closely as I can reconstruct it, the kind of program
+students wrote in the first Ada courses taught on the Ada/Ed
+interpreter at NYU. The package is `Text_Io` (underscore, not dot);
+modern Ada renames it to `Ada.Text_IO` but the older spelling still
+works through a compatibility package in most compilers. Try compiling
+this with a modern `gnatmake` and watch it build. That bit of code
+has not changed in 43 years.
+
+### Example 2: The Ariane 5 Flight 501 code fragment (conceptual)
+
+The actual code from the Ariane 5 Inertial Reference System is not
+public, but the bug is well-documented. It was a conversion of a
+64-bit floating point horizontal velocity into a 16-bit signed
+integer without a range check, in a reused SRI module originally
+written for Ariane 4. On Ariane 5, the horizontal velocity at the
+point the conversion ran was larger than 32,767, and the conversion
+raised an `Operand_Error`. The handler logged the exception and shut
+down the SRI, and with both SRIs down the rocket went off course and
+self-destructed.
+
+```ada
+-- Conceptual reconstruction. Do not ship this code.
+declare
+   Horizontal_Velocity : Long_Float := 65000.0;  -- Ariane 5 envelope
+   H_Velocity_I16      : Short_Integer;
+begin
+   H_Velocity_I16 := Short_Integer (Horizontal_Velocity);
+   -- Raises CONSTRAINT_ERROR at runtime in 1996.
+   -- In Ada 2012 + SPARK, gnatprove would flag the conversion VC
+   -- at build time, before any rocket left the pad.
+end;
+```
+
+The point of this example is not "see, Ada has bugs" — the point is
+that the *very same code*, run through `gnatprove` with contracts,
+would have been rejected at build time in the form now used routinely
+in aerospace shops. The gap between 1996 and 2026 is the gap between
+"catching it at runtime" and "catching it at proof time." Ada
+travelled that gap deliberately.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Build a timeline
+
+Take the history file. For every decade (1970s, 1980s, 1990s, 2000s,
+2010s, 2020s), extract three events: one political, one technical,
+one cultural. Arrange them in a single timeline table. You will
+produce, by the end of the exercise, the kind of historical cheat
+sheet that would otherwise cost you a whole book.
+
+### DIY 2 — Find three Ada projects shipping in 2026
+
+Use public sources (GitHub, AdaCore case studies, the AdaIC directory)
+to identify three active Ada projects shipping in 2026. For each,
+note: the application domain, the Ada version used, the runtime
+(full, Ravenscar, Jorvik, bare-metal), and whether SPARK is in the
+build. Write a one-paragraph summary of each. This is the exercise
+that kills the "Ada is dead" myth faster than any argument could.
+
+### DIY 3 — Read one Ichbiah paper
+
+Ichbiah's team published the original Ada Rationale in 1979 (revised
+later). It is public. Download it. Read the first chapter. You will
+be reading the direct source for about a quarter of the design
+decisions discussed in this history file, in the words of the person
+who made them.
+
+### TRY — Explain Ada to a skeptic
+
+Find someone whose opinion of Ada is "it is old and verbose and dead"
+and give them a thirty-minute explanation of why that picture is
+incomplete. Use the history file as your source. If they push back,
+push back with dates and project names. This is where the history
+you just learned becomes durable.
+
+---
+
 *Document compiled for the PNW Research Series, tibsfox.com, April 2026. Cross-references to the companion Ada research threads covering core language, concurrency semantics, and safety-critical/SPARK/implementations can be found at the series index. Section XVI (Updates 2025–2026) and the College Departments cross-link were added during the Session 018 catalog enrichment pass.*

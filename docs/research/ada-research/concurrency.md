@@ -3983,3 +3983,510 @@ The rendezvous, in the end, is where we meet our deadlines.
 ---
 
 *End of concurrency thread. See `history.md` for the 1975-2022 timeline, `language-semantics.md` for sequential types and packages, and `safety-critical.md` for SPARK, DO-178C, and certification.*
+
+---
+
+## Study Guide
+
+This document is long. If you try to read it linearly from top to bottom, cover to cover, you will drown. It was designed for that — a deep, single-pass reference. But if you are here to *learn* Ada concurrency rather than to look something up, read it in layered passes. Each pass adds depth; each pass assumes the previous one.
+
+### Prerequisites before you start
+
+You need three things going in:
+
+1. **A basic concurrency mental model.** If the words "race condition," "critical section," "deadlock," and "memory barrier" are new to you, spend a weekend with any general concurrency primer first — *The Little Book of Semaphores* by Allen Downey (free PDF) is the canonical short option. Come back when you can name two ways two threads can interfere with each other's use of a shared counter.
+2. **Enough sequential Ada to read it.** You do not need to be fluent, but you need to recognize `package`/`procedure`/`type` declarations, understand `with` clauses, and know what `package body` means. The `language-core.md` companion file in this bucket is the right primer — read Sections 1, 2, 8, and 9 of that file and you are ready.
+3. **A working compiler.** Install GNAT (GCC's Ada front-end). On Ubuntu: `sudo apt install gnat`. On Fedora: `sudo dnf install gcc-gnat`. On macOS via Homebrew: `brew install gcc` (includes Ada). On Windows: download GNAT Community Edition from adacore.com or use the MSYS2 `mingw-w64-x86_64-gcc-ada` package. Verify with `gnatmake --version`. For the Real-Time Annex exercises below you additionally want a runtime that supports it — the default `zfp` and `ravenscar-sfp` runtimes shipped with GNAT Pro do; the stock Debian `gnat` package does not always. Check with `gnat list --RTS=full` to see what runtimes are available, and use `--RTS=ravenscar-sfp` to cross-compile to the Ravenscar profile.
+
+### Recommended reading order
+
+The parts of this document are numbered, but the numbering is topical, not pedagogical. Read them in this order instead:
+
+**Layer 1 — the mental model (Parts I, II, XVII).** Why Ada has tasks in the language at all, what a task *is* in the programmer's head, and the philosophical position the language takes on concurrency. You cannot write correct Ada concurrent code without internalizing this layer. If you skip it, everything afterwards looks like unnecessary ceremony.
+
+**Layer 2 — the two synchronization primitives (Parts III, V).** The rendezvous (Ada 83) and the protected object (Ada 95). Read them back-to-back, because protected objects were explicitly designed to fix what the rendezvous got wrong, and you cannot understand the second without the first. At the end of Layer 2, you should be able to write a bounded buffer three ways: as a task with an accept body, as a protected object with entries, and as a protected object with guarded procedures only. Do all three before moving on.
+
+**Layer 3 — the scheduling and timing story (Parts VI, VIII).** This is where Ada earns its real-time stripes. Monotonic clocks, delays, priority ceilings, dispatching policies. Read these parts with a pencil — you will want to draw timelines. The priority-inversion diagram in Part VIII is the single most important picture in the document; stare at it until it clicks.
+
+**Layer 4 — the certification subset (Part IX).** Ravenscar. This is the layer where "Ada concurrency" becomes "Ada concurrency you can fly." Ravenscar is also the easiest profile to *write* correct code in, paradoxically, because the rules are strict enough that whole classes of bugs become impossible to express. If you are new, consider doing all your exercises in Ravenscar first, then relaxing restrictions as you need them.
+
+**Layer 5 — the modern parts (Parts X, XI, XXIII).** Synchronized interfaces (Ada 2005) and the parallel constructs (Ada 2022). These are the pieces of the language most likely to be unfamiliar even to experienced Ada programmers who stopped learning at Ada 95. Read them last because they make the most sense against the backdrop of everything earlier.
+
+**Layer 6 — the pattern language (Parts XIV, XV, XXI).** The canonical patterns and anti-patterns are where experience lives. Read them last, and come back to them periodically as you write more code. A pattern you skim today will become obviously relevant six months from now when you hit the problem it solves.
+
+Parts IV, VII, XII, XIII, XVIII, XIX, XX, XXII, and XXIV are reference material. Read them when you have a specific question; do not try to read them cover-to-cover on a first pass.
+
+### Key concepts to internalize
+
+If at the end of your reading you can explain these seven ideas to another programmer, you have absorbed the essential content:
+
+1. **A task is an active object.** It has its own thread of control. A protected object is a passive object — it has no thread of its own and only runs when a task calls into it. This distinction is the foundation of the whole Ada concurrency model. Everything else is scaffolding around it.
+2. **Rendezvous is synchronous message-passing.** The caller blocks until the callee executes an `accept`, and vice-versa. Both sides see the parameters and both sides agree on the exchange before either proceeds. This is the same idea Hoare called CSP and that Go later popularized as "don't communicate by sharing memory; share memory by communicating" — except Ada got there first, in 1983.
+3. **Protected objects replace locks with guarded actions.** You never write `lock(mutex); ... unlock(mutex)` in Ada. You write a protected procedure or entry, and the language guarantees mutual exclusion on the enclosing object. The guard on an entry is a boolean condition — tasks wait at the gate, and when the condition becomes true, one waiting task proceeds. This replaces both mutexes and condition variables with one primitive.
+4. **Priority ceiling locking prevents priority inversion by construction.** Every protected object has a ceiling priority (its highest possible caller). When a task enters the object, its priority is raised to the ceiling for the duration. No lower-priority task can preempt it until it leaves. The Mars Pathfinder bug of 1997 — the unbounded priority inversion that almost killed the mission — cannot happen in Ada code written this way. Read Part VIII with that story in mind; it's the reason the mechanism exists.
+5. **`Ada.Real_Time.Clock` is monotonic; `Ada.Calendar.Clock` is not.** If your code does `delay until Clock + Period` with `Ada.Calendar`, an NTP correction or a daylight-saving jump can make your periodic task fire an hour early or never. Every real-time Ada program uses `Ada.Real_Time` for timing and `Ada.Calendar` only for user-facing timestamps. This rule is invariant and non-negotiable.
+6. **Ravenscar is a restriction profile, not a library.** It enforces rules at compile time that make the whole program analyzable: no dynamic task creation, no task entries (only protected entries), no `select` with `else`, no `abort`, no `requeue`. Programs that compile under Ravenscar are amenable to static schedulability analysis, which is what certification authorities want. You give up flexibility; you get provability.
+7. **Parallel constructs (Ada 2022) are orthogonal to tasks.** `parallel for` and `parallel do` are about data parallelism — splitting work across cores, not about long-lived concurrent agents. Tasks and protected objects are still the model for coordination between independent actors. Do not confuse "Ada has parallel loops now" with "Ada deprecated tasks"; both tools exist, and they solve different problems.
+
+### Common pitfalls to watch for
+
+- **Busy-waiting on a boolean flag.** Do not write `loop if Flag then exit; end if; end loop;` — this is spin-wait, and in Ada it breaks the schedulability model. Use an entry with a barrier instead.
+- **Mixing `Ada.Calendar` and `Ada.Real_Time`.** Pick one per timing context and stick with it.
+- **Calling blocking operations from inside a protected action.** A protected procedure or entry body is expected to complete in bounded time. Calling an entry on another task from inside one can deadlock and is typically forbidden outright by Ravenscar and the Real-Time Annex.
+- **Forgetting to set the ceiling priority explicitly.** Default ceiling is the maximum ceiling priority, which works but is pessimistic. Set `pragma Priority` explicitly so the analysis tool knows what you meant.
+- **Assuming `abort` is a safe way to stop a task.** `abort` is the atomic bomb of task termination. It's legal, but in real-time code it is either forbidden (Ravenscar) or used only in carefully scoped `select ... then abort` constructs (asynchronous transfer of control). Treat it as a last resort.
+
+### 1-week plan (introductory)
+
+- Day 1: Read Layer 1. Install GNAT. Write, compile, and run a "Hello from a task" program. Verify that you see the output.
+- Day 2: Read Layer 2, Part III (rendezvous). Write a bounded-buffer producer/consumer pair using a task with an `accept Put` / `accept Get` loop.
+- Day 3: Read Layer 2, Part V (protected objects). Rewrite yesterday's bounded buffer as a protected object with guarded entries. Run both; measure the throughput difference.
+- Day 4: Read Layer 3 (Parts VI, VIII). Write a periodic task that fires every 100 ms using `delay until` with `Ada.Real_Time.Clock`. Use `Ada.Text_IO.Put_Line` to log the firing time. Let it run for 30 seconds and look for drift.
+- Day 5: Read Layer 4 (Part IX). Compile yesterday's periodic task program under `--RTS=ravenscar-sfp`. Fix whatever doesn't compile. Observe which of your patterns were non-Ravenscar.
+- Day 6: Read Layer 5 (Parts X, XI, XXIII). Rewrite a simple matrix-multiply using the Ada 2022 `parallel for` construct. Compare timing against a sequential version.
+- Day 7: Read Layer 6 (Parts XIV, XV, XXI). Pick one canonical pattern from Part XIV and write your own example of it.
+
+### 1-month plan (serious)
+
+Everything in the 1-week plan, plus:
+
+- Week 2: Burns & Wellings, *Concurrent and Real-Time Programming in Ada* (Cambridge, 2009), Chapters 1-7. This is the canonical textbook. Work every exercise.
+- Week 3: Build a small but realistic system — a thermostat, a traffic light controller, a producer-consumer queue with multiple consumers — in three forms: idiomatic Ada 2012 tasks, Ravenscar-profile, and SPARK-provable. Prove the SPARK version with `gnatprove`.
+- Week 4: Read Ada Reference Manual sections 9 (Tasks and Synchronization) and Annex D (Real-Time Systems) in their entirety. The RM is free at `ada-auth.org/standards/rm12_w_tc1/html/RM-TOC.html`. It is dense, but the language is the document; every pattern you see in textbooks ultimately derives from these sections.
+
+### 6-month plan (professional)
+
+- Months 1-2: the 1-month plan above.
+- Month 3: Burns & Wellings chapters 8-13, including the Real-Time Annex, Ravenscar, distributed Ada, and high-integrity Ada. Pair this with Michael Kamrad's *Programming in Ada 2012 with a Preview of Ada 2022* for the modern parts.
+- Month 4: DO-178C supplement *DO-332: Object-Oriented Technology and Related Techniques Supplement*, and DO-178C *DO-333: Formal Methods Supplement*. These are not free, but every safety-critical Ada shop owns copies. The Airbus Ada certification trail runs through these documents.
+- Month 5: Pick an open-source Ada project that uses tasking heavily and read it. Good candidates include the GNAT runtime itself (it's written in Ada), the Ironsides DNS server, the Muen separation kernel, and the Ada Driven Robotics (ROS-Ada) projects.
+- Month 6: Ship something. Pick a real project — an embedded controller, a network daemon, a signal processor — and write it in Ada using at least three tasks and two protected objects. Verify at least one component in SPARK. This is the transition from "I have read about Ada concurrency" to "I have used it in anger."
+
+### Glossary of often-misused terms
+
+- **Task** — an active concurrent object with its own thread of control. Roughly equivalent to what other languages call a thread, but with language-level semantics that mainstream threads lack.
+- **Protected object** — a passive object protected by an implicit mutex; the Ada alternative to "lock + shared state + condition variable."
+- **Entry** — an operation on a task or protected object that a caller synchronizes with. The caller waits until the callee accepts; the callee may have a barrier that delays the accept.
+- **Barrier** — a boolean expression on a protected entry; the entry is only open when the barrier evaluates to true. Tasks waiting on a closed entry are released, one at a time, when it opens.
+- **Rendezvous** — the moment when a caller's entry call meets a callee's accept. Both are synchronous; both sides see the parameters; neither proceeds until the accept body completes.
+- **Ceiling priority** — the priority to which a task is raised while holding a protected object, equal to the maximum priority of any task that can call that object. A core element of the Immediate Ceiling Priority Protocol.
+- **Ravenscar** — a profile (set of restrictions) on Ada tasking that makes programs analyzable for worst-case schedulability. Enforced at compile time via `pragma Profile (Ravenscar)`.
+- **SPARK** — a subset of Ada with formal annotations that can be proved with an SMT solver. Not covered in detail here; see `safety-spark-impl.md`.
+- **Jorvik** — the Ada 2022 successor profile to Ravenscar, slightly more permissive.
+- **Run-time system (RTS)** — the low-level library GNAT uses to implement tasks. `full` is the full-feature RTS; `ravenscar-sfp` is the certified subset; `zfp` is "zero footprint" — no tasking at all, for bare-metal systems that roll their own.
+
+---
+
+## Programming Examples
+
+All of these examples compile under `gnatmake` from a recent GNAT. Where the Real-Time Annex or Ravenscar is required, a comment indicates which runtime to use. Save each file with the indicated name, place them in an empty directory, and run `gnatmake <file>.adb` to build.
+
+### Example 1: "Hello from a task" — the smallest possible program
+
+```ada
+-- File: hello_task.adb
+-- Build: gnatmake hello_task.adb
+-- Run:   ./hello_task
+
+with Ada.Text_IO;
+
+procedure Hello_Task is
+   task Greeter;
+
+   task body Greeter is
+   begin
+      Ada.Text_IO.Put_Line ("Hello from the greeter task.");
+   end Greeter;
+begin
+   Ada.Text_IO.Put_Line ("Hello from the environment task.");
+end Hello_Task;
+```
+
+What to notice:
+- The environment task (the one running `main`) waits for `Greeter` to finish before the program terminates. This is automatic — Ada programs do not exit while any task is still live unless you explicitly abort or use `Ada.Task_Termination`.
+- The order of the two "Hello" lines is undefined. If you run this 100 times, you will see both orderings. That is the point of concurrency.
+
+### Example 2: Bounded buffer as a task with rendezvous
+
+```ada
+-- File: buffer_task.adb
+-- Build: gnatmake buffer_task.adb
+-- A classical Ada 83-style producer/consumer with an intermediate task.
+
+with Ada.Text_IO;
+
+procedure Buffer_Task is
+   type Item is new Integer;
+   type Item_Array is array (Positive range <>) of Item;
+
+   task Buffer is
+      entry Put (I : in  Item);
+      entry Get (I : out Item);
+   end Buffer;
+
+   task body Buffer is
+      Capacity : constant := 8;
+      Store    : Item_Array (1 .. Capacity);
+      Head, Tail, Count : Natural := 0;
+   begin
+      loop
+         select
+            when Count < Capacity =>
+               accept Put (I : in Item) do
+                  Tail := (Tail mod Capacity) + 1;
+                  Store (Tail) := I;
+                  Count := Count + 1;
+               end Put;
+         or
+            when Count > 0 =>
+               accept Get (I : out Item) do
+                  Head := (Head mod Capacity) + 1;
+                  I := Store (Head);
+                  Count := Count - 1;
+               end Get;
+         or
+            terminate;
+         end select;
+      end loop;
+   end Buffer;
+
+   task Producer;
+   task body Producer is
+   begin
+      for K in 1 .. 20 loop
+         Buffer.Put (Item (K));
+      end loop;
+   end Producer;
+
+   task Consumer;
+   task body Consumer is
+      Value : Item;
+   begin
+      for K in 1 .. 20 loop
+         Buffer.Get (Value);
+         Ada.Text_IO.Put_Line ("Consumed " & Item'Image (Value));
+      end loop;
+   end Consumer;
+
+begin
+   null;
+end Buffer_Task;
+```
+
+What to notice:
+- `select ... or ... or terminate` lets the buffer task accept whichever operation the producer or consumer is ready for. The `terminate` alternative means the task can go away when no one else is around to call it.
+- Guards (`when Count < Capacity =>`) are part of the selective accept. A closed guard takes that alternative out of the selection; the buffer blocks when it is empty on `Get` and when it is full on `Put`.
+- The rendezvous itself — `accept Put (I : in Item) do ... end Put` — is synchronous. Both producer and buffer are synchronized at the `do ... end` boundary.
+
+### Example 3: The same buffer as a protected object
+
+```ada
+-- File: buffer_po.adb
+-- Build: gnatmake buffer_po.adb
+-- The same semantics, rewritten in Ada 95 style with a protected object.
+
+with Ada.Text_IO;
+
+procedure Buffer_PO is
+   type Item is new Integer;
+   type Item_Array is array (Positive range <>) of Item;
+
+   Capacity : constant := 8;
+
+   protected Buffer is
+      entry Put (I : in  Item);
+      entry Get (I : out Item);
+   private
+      Store : Item_Array (1 .. Capacity);
+      Head, Tail, Count : Natural := 0;
+   end Buffer;
+
+   protected body Buffer is
+      entry Put (I : in Item) when Count < Capacity is
+      begin
+         Tail := (Tail mod Capacity) + 1;
+         Store (Tail) := I;
+         Count := Count + 1;
+      end Put;
+
+      entry Get (I : out Item) when Count > 0 is
+      begin
+         Head := (Head mod Capacity) + 1;
+         I := Store (Head);
+         Count := Count - 1;
+      end Get;
+   end Buffer;
+
+   task Producer;
+   task body Producer is
+   begin
+      for K in 1 .. 20 loop
+         Buffer.Put (Item (K));
+      end loop;
+   end Producer;
+
+   task Consumer;
+   task body Consumer is
+      Value : Item;
+   begin
+      for K in 1 .. 20 loop
+         Buffer.Get (Value);
+         Ada.Text_IO.Put_Line ("Consumed " & Item'Image (Value));
+      end loop;
+   end Consumer;
+
+begin
+   null;
+end Buffer_PO;
+```
+
+What to notice:
+- No buffer task. The buffer is a *passive* protected object. The mutex is implicit; the language guarantees that only one operation runs at a time.
+- `when Count < Capacity is` is a barrier on the entry. The entry is closed when the barrier is false and tasks wait. When the barrier becomes true (because another operation raised `Count`), the runtime re-evaluates and releases one waiting task.
+- This version is shorter, uses less runtime, and is what modern Ada code looks like. Prefer this over the rendezvous version for shared-state coordination; use tasks+rendezvous when the coordinator is genuinely *active* (it runs its own logic between communications).
+
+### Example 4: A periodic task with monotonic timing
+
+```ada
+-- File: periodic.adb
+-- Build: gnatmake periodic.adb
+-- Runs a task every 100 ms using Ada.Real_Time.
+
+with Ada.Text_IO;
+with Ada.Real_Time; use Ada.Real_Time;
+
+procedure Periodic is
+
+   task Ticker;
+
+   task body Ticker is
+      Period : constant Time_Span := Milliseconds (100);
+      Next   : Time := Clock;
+   begin
+      for K in 1 .. 30 loop
+         delay until Next;
+         Ada.Text_IO.Put_Line ("Tick " & Integer'Image (K));
+         Next := Next + Period;
+      end loop;
+   end Ticker;
+
+begin
+   null;
+end Periodic;
+```
+
+What to notice:
+- `delay until Next` waits until an absolute time, not for a relative duration. This is the correct pattern for periodic tasks — if the task runs a little late one cycle, it still fires at the right absolute time the next cycle, and drift does not accumulate. Do not write `delay 0.1;` inside the loop; that accumulates drift.
+- `Clock` is `Ada.Real_Time.Clock`, a monotonic clock. It cannot jump backwards. Replacing it with `Ada.Calendar.Clock` would silently break the program on a system with NTP corrections.
+- On a Ravenscar runtime, this same code compiles unchanged — the pattern is already Ravenscar-compatible.
+
+### Example 5: Priority ceiling protocol — a two-task demonstration
+
+```ada
+-- File: ceiling.adb
+-- Build: gnatmake ceiling.adb
+-- Demonstrates priority inheritance via a protected object ceiling.
+
+with Ada.Text_IO;
+with System; use System;
+
+procedure Ceiling is
+
+   protected type Shared_Counter (Ceiling : Any_Priority) is
+      pragma Priority (Ceiling);
+      procedure Increment;
+      function  Value return Natural;
+   private
+      N : Natural := 0;
+   end Shared_Counter;
+
+   protected body Shared_Counter is
+      procedure Increment is
+      begin
+         N := N + 1;
+      end Increment;
+
+      function Value return Natural is
+      begin
+         return N;
+      end Value;
+   end Shared_Counter;
+
+   Counter : Shared_Counter (Ceiling => 15);
+
+   task Low;
+   pragma Priority (Low, 5);
+
+   task High;
+   pragma Priority (High, 15);
+
+   task body Low is
+   begin
+      for K in 1 .. 10 loop
+         Counter.Increment;
+      end loop;
+      Ada.Text_IO.Put_Line ("Low done, counter =" & Natural'Image (Counter.Value));
+   end Low;
+
+   task body High is
+   begin
+      for K in 1 .. 10 loop
+         Counter.Increment;
+      end loop;
+      Ada.Text_IO.Put_Line ("High done, counter =" & Natural'Image (Counter.Value));
+   end High;
+
+begin
+   null;
+end Ceiling;
+```
+
+What to notice:
+- Both tasks share a protected object with ceiling priority 15. While `Low` holds the object, its effective priority is temporarily raised to 15, so no medium-priority task can preempt it until it releases. This is the Immediate Ceiling Priority Protocol in action.
+- If you lowered the ceiling to 5 and kept `High` at priority 15, you would get `Program_Error` at elaboration time (`High` cannot call an object whose ceiling is below its own priority). That is the compile/elaboration-time check; it is exactly what prevents the Mars Pathfinder class of bug.
+- This example requires the Real-Time Annex to be supported by your runtime. The `zfp` runtime does not support it; `ravenscar-sfp` and `full` do.
+
+### Example 6: Ada 2022 parallel loop
+
+```ada
+-- File: parallel_sum.adb
+-- Build: gnatmake -gnat2022 parallel_sum.adb
+-- Requires GNAT with Ada 2022 support.
+
+with Ada.Text_IO;
+
+procedure Parallel_Sum is
+   N : constant := 10_000_000;
+   A : array (1 .. N) of Long_Integer;
+   Total : Long_Integer := 0;
+begin
+   for I in A'Range loop
+      A (I) := Long_Integer (I);
+   end loop;
+
+   parallel (Chunks => 8)
+   for I in A'Range loop
+      Total := Total + A (I);  -- naive, has a race
+   end loop;
+
+   Ada.Text_IO.Put_Line ("Total =" & Long_Integer'Image (Total));
+end Parallel_Sum;
+```
+
+What to notice:
+- `parallel (Chunks => 8)` splits the loop into eight chunks and runs them concurrently. This is data parallelism, not agent concurrency.
+- As written, the accumulation into `Total` has a race. Ada 2022 gives you `reduce` expressions for correct parallel reductions; the full idiomatic version uses `Total := [parallel for I in A'Range => A (I)]'Reduce ("+", 0);` or the equivalent reduction expression. Try both and convince yourself the naive version gives wrong answers for large N.
+- Compile with `-gnat2022`. Older GNATs reject the construct.
+
+---
+
+## DIY & TRY
+
+These exercises assume you have completed Examples 1-6 above and have a working GNAT install. Each exercise is self-contained and takes between 30 minutes and an afternoon.
+
+### DIY 1 — Drift measurement
+
+**Setup:** Start from Example 4 (`periodic.adb`). Replace the body of `Ticker` so that it does two things per tick: (a) records the current `Clock` value, and (b) computes the delta from the ideal firing time (the task's internal `Next` variable).
+
+**Steps:**
+1. Add a counter `I` and an array `Deltas : array (1 .. 300) of Time_Span` outside the loop.
+2. At the top of the loop body, compute `Deltas (I) := Clock - Next;`.
+3. Run the task for 30 seconds (300 iterations at 100 ms).
+4. At the end, print the minimum, maximum, and mean delta.
+
+**Expected outcome:** On a modern unloaded Linux box with the default Full runtime, you should see max drift under 1 ms. Under load (try running `stress -c 4` in another terminal while the program runs), drift goes up, sometimes to tens of milliseconds. Under the `ravenscar-sfp` runtime on a system with a real-time kernel, drift should remain under 100 µs even under load.
+
+**What to observe:** The interesting number is not the average — it is the worst case. Real-time systems are judged by worst-case delay, not average delay. This is the essential difference between "fast on average" and "fast enough on the worst day."
+
+### DIY 2 — Priority inversion under Ravenscar
+
+**Setup:** Three tasks at priorities 5, 10, and 15. The low- and high-priority tasks share a protected object. The medium-priority task does busy work.
+
+**Steps:**
+1. Write the three tasks. The low-priority one enters the protected object, increments a counter, then calls `delay 0.2` *from inside* the protected action (DO NOT actually do this in real code — but for this experiment, simulate a slow operation by wasting CPU inside the entry).
+2. The medium-priority task spins in a CPU-busy loop for 2 seconds.
+3. The high-priority task tries to call the same protected object after 500 ms of sleep.
+4. Run it first with the default compiler settings, then with `pragma Locking_Policy (Ceiling_Locking);` and `pragma Task_Dispatching_Policy (FIFO_Within_Priorities);` at the top of the file.
+
+**Expected outcome:** With the dispatching policy set, the low-priority task is raised to the ceiling of the protected object the instant the high-priority task queues on it. The medium-priority task never gets to run until the high task is unblocked. Without the pragmas, you may or may not see correct behavior, depending on the implementation defaults.
+
+**What to observe:** This exercise is a miniature re-enactment of the Mars Pathfinder bug. Change the ceiling explicitly so it's below the high-priority task's own priority, and watch `Program_Error` fire at elaboration — the compile/elaboration-time safety net that JPL did not have in 1997 on VxWorks.
+
+### DIY 3 — Three buffers, one interface
+
+**Setup:** Define an Ada interface for a bounded buffer. Implement it three ways: as a task with rendezvous, as a protected object with entries, and as a task that wraps a protected object internally.
+
+**Steps:**
+1. Declare the interface:
+   ```ada
+   type Bounded_Buffer is synchronized interface;
+   procedure Put (B : in out Bounded_Buffer; I : Item) is abstract;
+   procedure Get (B : in out Bounded_Buffer; I : out Item) is abstract;
+   ```
+2. Provide three concrete types implementing it.
+3. Write a benchmark that hammers each implementation with one producer and one consumer task, each doing a million operations.
+4. Measure elapsed time using `Ada.Real_Time`.
+
+**Expected outcome:** The protected object version wins easily (typically 2-4x faster than the task+rendezvous version) because it has no context switch on the path. The wrapped task is slower still because it adds an extra indirection.
+
+**What to observe:** You will have just performed, in an afternoon, the empirical comparison that motivated Ada 95's addition of protected objects. The numbers you see here are the same numbers the Ada 9X Design Team saw in 1994 when they decided rendezvous alone was not enough.
+
+### DIY 4 — Ravenscar port
+
+**Setup:** Take the bounded buffer protected object from Example 3 and compile it with `gnatmake --RTS=ravenscar-sfp buffer_po.adb -bargs -T0`.
+
+**Steps:**
+1. Observe whatever errors appear. Common ones: `terminate` alternatives are forbidden, `select else` is forbidden, two tasks on the same entry are forbidden (Ravenscar requires at most one task queued on any entry), dynamic allocation is forbidden.
+2. Fix each error in turn. For the "one task per entry" restriction you will have to restructure to use two entries, one per consumer.
+3. Add `pragma Profile (Ravenscar);` at the top and rebuild.
+4. Run the resulting binary and confirm it works.
+
+**Expected outcome:** The buffer works identically under Ravenscar, just with stricter rules. You will have produced a certification-ready artifact without writing new logic, only by removing forbidden constructs.
+
+**What to observe:** The restrictions that looked arbitrary when you read Part IX will suddenly make sense when the compiler explains each one to you directly. Ravenscar is not a feature; it is a *negative space* — it is the set of things Ada 83 let you do that the community, in hindsight, wishes it had not.
+
+### DIY 5 — Build a task monitor
+
+**Setup:** Write a Monitor task that every 500 ms prints out the count of all live tasks in the system, their priorities, and their states.
+
+**Steps:**
+1. Use `Ada.Task_Identification` and `Ada.Task_Attributes` to walk the task pool.
+2. For each task, query its priority (`Get_Priority`) and its state (via `Ada.Task_Termination`).
+3. Print a snapshot line every 500 ms using the periodic pattern from Example 4.
+4. Run it alongside your bounded-buffer benchmark from DIY 3 and watch the snapshots.
+
+**Expected outcome:** You will see the producer, consumer, and buffer tasks cycle through Callable → Waiting → Callable as they run. The monitor itself should show up in its own snapshot, which is a small and amusing consistency check.
+
+**What to observe:** The Ada standard library gives you introspection into the task pool that most other languages hide behind a profiler. This is useful for debugging, logging, and building supervision hierarchies.
+
+### DIY 6 — Port a Go CSP program
+
+**Setup:** Pick any small Go program that uses goroutines and channels — the `pipeline.go` example from *Effective Go* works well. Rewrite it in Ada using tasks and protected objects.
+
+**Steps:**
+1. Each goroutine becomes a task.
+2. Each channel becomes either a protected object (for buffered channels) or a task with a rendezvous entry (for unbuffered channels).
+3. Translate `select` in Go to `select` in Ada, being aware that Ada's `select` is more restricted (you can't mix sends and receives on the same select).
+
+**Expected outcome:** The Ada version is verbose compared to the Go version — typically 2-3x the line count. But it is also more explicit about which side blocks, what happens on timeout, and what happens on termination. Use this comparison to build your own intuition about which language is the right tool for which job.
+
+**What to observe:** Ada's model predates Go's by thirty years, and the philosophical choices are almost identical (CSP, no shared mutable state by default). The differences are almost entirely in ergonomics, not in semantics. If you believe "goroutines are modern and Ada tasks are old," this exercise is the cure.
+
+### TRY — Pick one real problem and solve it three ways
+
+This is the final exercise, and the one that moves you from reader to practitioner. Pick a small but real problem — the thermostat controller from the 1-week plan is a good one, or a periodic sensor reader, or a simple network protocol handler. Implement it three times:
+
+1. Once in idiomatic Ada 2012, using all the language's features.
+2. Once under the Ravenscar profile, with the stricter rules.
+3. Once in SPARK, with functional correctness proven by `gnatprove`.
+
+Compare line counts, build times, and — most importantly — how confident you feel in each version. The three versions will look increasingly alien as you go, but the SPARK version is the one you can hand to a certification authority. That progression, from "works in practice" to "provably correct," is the journey the Ada community took over forty years. You just compressed it into a weekend.
+
+---
+
+## Related College Departments (concurrency)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — Programming Fundamentals and Algorithms & Efficiency wings. The examples above are runnable instances of textbook concurrency patterns.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md) — Ada tasking is the concurrency layer underneath most modern aerospace, railway, and automotive systems. The DIY 1 drift exercise is a miniature version of the kind of measurement every embedded team performs on every new target.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md) — Priority-ceiling protocols, rate-monotonic scheduling, and response-time analysis are mathematical subjects; Liu & Layland's 1973 paper is the foundational citation.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) — The story of rendezvous-vs-protected-objects is a case study in how a language evolves under pressure from real users.
