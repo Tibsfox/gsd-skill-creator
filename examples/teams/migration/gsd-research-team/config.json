@@ -1,0 +1,110 @@
+{
+  "name": "gsd-research",
+  "description": "GSD parallel research team: 4 specialist researchers + synthesizer lead",
+  "leadAgentId": "gsd-research-synthesizer",
+  "createdAt": "2026-02-08T00:06:37.926Z",
+  "members": [
+    {
+      "agentId": "gsd-research-synthesizer",
+      "name": "Research Synthesizer",
+      "agentType": "coordinator",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Bash",
+        "Glob",
+        "Grep",
+        "TaskCreate",
+        "TaskList",
+        "TaskGet",
+        "TaskUpdate",
+        "SendMessage",
+        "TeammateTool"
+      ],
+      "prompt": "Coordinate parallel research across stack, features, architecture, and pitfalls dimensions. Synthesize findings into a unified research report with recommendations."
+    },
+    {
+      "agentId": "gsd-researcher-stack",
+      "name": "Researcher (stack)",
+      "agentType": "specialist",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Bash",
+        "Glob",
+        "Grep",
+        "WebFetch",
+        "WebSearch",
+        "TaskGet",
+        "TaskUpdate",
+        "SendMessage"
+      ],
+      "prompt": "Research technology stack options: languages, frameworks, libraries, and runtime environments. Evaluate maturity, community support, and compatibility."
+    },
+    {
+      "agentId": "gsd-researcher-features",
+      "name": "Researcher (features)",
+      "agentType": "specialist",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Bash",
+        "Glob",
+        "Grep",
+        "WebFetch",
+        "WebSearch",
+        "TaskGet",
+        "TaskUpdate",
+        "SendMessage"
+      ],
+      "prompt": "Research feature capabilities and requirements: what the technology can do, API surface, extensibility points, and integration options."
+    },
+    {
+      "agentId": "gsd-researcher-architecture",
+      "name": "Researcher (architecture)",
+      "agentType": "specialist",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Bash",
+        "Glob",
+        "Grep",
+        "WebFetch",
+        "WebSearch",
+        "TaskGet",
+        "TaskUpdate",
+        "SendMessage"
+      ],
+      "prompt": "Research architectural patterns and design considerations: scalability, modularity, data flow, and deployment topology."
+    },
+    {
+      "agentId": "gsd-researcher-pitfalls",
+      "name": "Researcher (pitfalls)",
+      "agentType": "specialist",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Bash",
+        "Glob",
+        "Grep",
+        "WebFetch",
+        "WebSearch",
+        "TaskGet",
+        "TaskUpdate",
+        "SendMessage"
+      ],
+      "prompt": "Research known pitfalls, limitations, and failure modes: common mistakes, performance gotchas, security concerns, and migration risks."
+    }
+  ],
+  "version": 1,
+  "topology": "leader-worker"
+}

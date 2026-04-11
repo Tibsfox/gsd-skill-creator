@@ -2,11 +2,12 @@
 
 Operations teams — DevOps pipeline, SRE operations, incident response.
 
-## Artifacts (3)
+## Artifacts (4)
 
 | Artifact | Description | Origin | Status |
 |---|---|---|---|
 | [devops-pipeline-team](devops-pipeline-team/) | Full CI/CD pipeline audit with specialized analyzers that examine pipelines from four distinct angl… | tibsfox | stable |
+| [gsd-debug-team](gsd-debug-team/) | See `config.json` for the definition. | tibsfox | stable |
 | [incident-response-team](incident-response-team/) | Coordinated incident response with specialized workers that analyze incidents from four distinct an… | tibsfox | stable |
 | [sre-operations-team](sre-operations-team/) | Comprehensive SRE operations review with specialized analysts that evaluate service reliability fro… | tibsfox | stable |
 

@@ -2,7 +2,7 @@
 
 Audit and analysis agents — compliance, infrastructure, pipeline, performance, dependency health, documentation linting, vulnerability triage, codebase navigation, cost optimization.
 
-## Artifacts (9)
+## Artifacts (10)
 
 | Artifact | Description | Origin | Status |
 |---|---|---|---|
@@ -12,6 +12,7 @@ Audit and analysis agents — compliance, infrastructure, pipeline, performance,
 | [dependency-health-checker](dependency-health-checker/) | Assesses dependency freshness, detects end-of-life packages, verifies license compliance, and ident… | tibsfox | stable |
 | [doc-linter](doc-linter/) | Audits markdown documentation for completeness, accuracy, broken links, stale content, terminology… | taches-cc-resources (modified) | stable |
 | [infrastructure-auditor](infrastructure-auditor/) | Audits Infrastructure as Code (IaC) files for best practices, security misconfigurations, cost opti… | tibsfox | stable |
+| [observer](observer/) | Passive session observer that captures tool sequences, file patterns, and corrections for skill-cre… | tibsfox | stable |
 | [performance-profiler](performance-profiler/) | Identifies performance issues by examining code patterns, query efficiency, algorithmic complexity,… | tibsfox | stable |
 | [pipeline-analyzer](pipeline-analyzer/) | Analyzes CI/CD pipelines for bottlenecks, parallelization opportunities, cache optimization, and se… | tibsfox | stable |
 | [vulnerability-triager](vulnerability-triager/) | Triages security vulnerability findings by exploitability, reachability, and business impact. Prior… | tibsfox | stable |

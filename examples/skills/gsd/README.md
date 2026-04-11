@@ -2,7 +2,7 @@
 
 Get-Shit-Done workflow skills — migration, onboarding, preflight, and decision tracing.
 
-## Artifacts (4)
+## Artifacts (5)
 
 | Artifact | Description | Origin | Status |
 |---|---|---|---|
@@ -10,6 +10,7 @@ Get-Shit-Done workflow skills — migration, onboarding, preflight, and decision
 | [gsd-onboard](gsd-onboard/) | GSD tutorial and command reference. Use when user is new to GSD or asks about commands. | tibsfox | stable |
 | [gsd-preflight](gsd-preflight/) | Validates GSD artifacts before running workflows. Use when user mentions 'preflight', 'validate', o… | tibsfox | stable |
 | [gsd-trace](gsd-trace/) | Traces decisions and requirements through GSD artifacts. Use when user asks "why did we...", "what… | tibsfox | stable |
+| [gsd-workflow](gsd-workflow/) | > | tibsfox | stable |
 
 ---
 

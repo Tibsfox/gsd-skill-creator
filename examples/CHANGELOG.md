@@ -6,6 +6,37 @@ This changelog is not strictly Keep-a-Changelog format. It is deliberately narra
 
 ---
 
+## 2026-04-10 — Imported 8 artifacts missing from examples/
+
+**What changed:** Added 8 artifacts that existed in `project-claude/` (the source tree that gets installed to `.claude/` via `project-claude/install.cjs`) but had never been imported to `examples/`. The library went from 127 to 135 artifacts.
+
+Imported:
+
+| Artifact | Type | Category | What it is |
+|---|---|---|---|
+| `gsd-orchestrator` | agent | `gsd/` | Routes user intent to GSD commands via filesystem discovery and lifecycle awareness |
+| `observer` | agent | `audit/` | Passive session observer — captures tool sequences, file patterns, corrections for skill-creator's pattern detection pipeline |
+| `gsd-workflow` | skill | `gsd/` | Core GSD project management workflow routing and lifecycle management skill |
+| `security-hygiene` | skill | `workflow/` | Safety discipline for GSD's self-modifying skill and agent system |
+| `session-awareness` | skill | `workflow/` | Project state awareness and session recovery for GSD-managed projects |
+| `skill-integration` | skill | `workflow/` | Manages skill-creator integration with GSD workflows (loading, observation, guardrails, patterns) |
+| `gsd-debug-team` | team | `ops/` | Team for coordinated GSD debugging |
+| `gsd-research-team` | team | `migration/` | Team for coordinated research pipelines |
+
+**Why:** These artifacts were discovered by a diff between `project-claude/` (the install source) and `examples/` (the library), kicked off by a question about `gsd-orchestrator` specifically. The diff revealed that `gsd-orchestrator` had five companions that were also in `project-claude/` but never imported: two agents, four skills, and two teams.
+
+The absence was probably accidental rather than deliberate. The session 009 bulk import (see 2026-04-08 entry) pulled everything from `.claude/` into `examples/`, but `project-claude/` is a parallel source — it is the *source* of `.claude/` — and some artifacts that live only in `project-claude/` (perhaps because they were added after the install script ran, or because the install script doesn't copy them all) slipped through.
+
+Worth noting: `gsd-orchestrator` specifically is installed to `.claude/agents/` on the `v1.50` and `wasteland` branches but NOT on mainline `gsd-skill-creator` or `artemis-ii`. So on mainline it lives as source-only. This is consistent with the theory that it's an earlier routing attempt that got superseded by the `gsd-do` skill, but it's still preserved in `project-claude/` (and now in `examples/`) as reference. The CHANGELOG keeps it for the archaeological record.
+
+A similar diff against the sibling repos (`gsd-skill-creator`, `gsd-skill-creator-nasa`) was done earlier in the session and caught 19 artifacts that exist in upstream `.claude/` but not in artemis-ii's `.claude/` — those are all still available globally in `~/.claude/`, so they remain discoverable at session load time, but they are deliberately not project-installed on this branch. They are not imported into `examples/` by this entry because (a) they are not authored here and (b) importing them without their upstream context would be misleading.
+
+**Validation after import:** 135 checked, 135 clean, 0 errors, 0 warnings. License report: 135 BSL-1.1, 0 BSL-EXEMPT (same as before — all new artifacts default to `origin: tibsfox, modified: false`, same as Stage 2).
+
+The category READMEs were regenerated automatically: skills/gsd grew from 4 to 5, skills/workflow from 4 to 7, agents/gsd from 21 to 22, agents/audit from 9 to 10, teams/ops from 3 to 4, teams/migration from 2 to 3.
+
+---
+
 ## 2026-04-10 — Per-category README population
 
 **What changed:** Generated `README.md` files for all 23 category subfolders (10 skill categories + 8 agent categories + 5 team categories, including the empty `deprecated/` stubs). Each category README has a hand-curated one-line description (from `CATEGORY_DESCRIPTIONS` in the generator script) and an auto-generated table of the artifacts in that category with their description, origin, and status.

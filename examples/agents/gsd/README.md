@@ -2,7 +2,7 @@
 
 GSD workflow agents — planner, executor, verifier, debugger, researcher, reviewer, roadmapper, and the full GSD suite.
 
-## Artifacts (21)
+## Artifacts (22)
 
 | Artifact | Description | Origin | Status |
 |---|---|---|---|
@@ -17,6 +17,7 @@ GSD workflow agents — planner, executor, verifier, debugger, researcher, revie
 | [gsd-integration-checker](gsd-integration-checker/) | Verifies cross-phase integration and E2E flows. Checks that phases connect properly and user workfl… | tibsfox | stable |
 | [gsd-milestone-advisor](gsd-milestone-advisor/) | Advises on milestone scope boundaries, phase breakdown, and realistic timelines. Helps avoid over-s… | tibsfox | stable |
 | [gsd-nyquist-auditor](gsd-nyquist-auditor/) | Fills Nyquist validation gaps by generating tests and verifying coverage for phase requirements | tibsfox | stable |
+| [gsd-orchestrator](gsd-orchestrator/) | Routes user intent to GSD commands via filesystem discovery and lifecycle awareness. Invoke when un… | tibsfox | stable |
 | [gsd-phase-researcher](gsd-phase-researcher/) | Researches how to implement a phase before planning. Produces RESEARCH.md consumed by gsd-planner.… | tibsfox | stable |
 | [gsd-plan-checker](gsd-plan-checker/) | Verifies plans will achieve phase goal before execution. Goal-backward analysis of plan quality. Sp… | tibsfox | stable |
 | [gsd-plan-optimizer](gsd-plan-optimizer/) | Reviews and optimizes GSD plans before execution to maximize atomicity, clarity, and success probab… | tibsfox | stable |
