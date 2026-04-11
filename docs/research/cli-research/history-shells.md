@@ -1018,5 +1018,126 @@ What has changed is not the architecture but the surface: the terminal now rende
 
 ---
 
+## Addendum: The 2025–2026 Terminal Renaissance
+
+This section was added in April 2026 as part of a catalog-wide enrichment
+pass. The main history above closes with a theoretical note on survival.
+The survival story continues, and 2025 was an unusually interesting year
+for terminal emulators specifically — the first year in a long time when
+the terminal layer was newsworthy on its own merits rather than as
+context for the shell or the application running in it.
+
+### Ghostty 1.0 (late 2024 → 2025)
+
+Ghostty, a new terminal emulator written in Zig by Mitchell Hashimoto
+(co-founder of HashiCorp), reached 1.0 in late 2024 and spent 2025 as
+one of the most discussed developer tools of the year. Its defining
+design choices set the tone for the whole conversation:
+
+- **Platform-native UI.** Ghostty uses AppKit directly on macOS and
+  GTK on Linux, rather than a cross-platform rendering layer. The
+  practical effect is that its input latency is — in several
+  independent benchmarks — the lowest of any terminal emulator ever
+  measured, which is an odd thing to be able to say about a sixty-year-old
+  abstraction.
+- **GPU acceleration** for cell rendering.
+- **No account system, no telemetry, no cloud.** The comparison point
+  here is Warp (see below), and Ghostty's position is that a terminal
+  is a local-first tool whose job is to stay out of the way.
+- **Standards-compliant with existing shells and multiplexers.** Ghostty
+  does not try to replace `tmux`, `zellij`, `fish`, or `zsh`. It tries
+  to be the fastest possible host for them.
+- **macOS and Linux only.** Windows support is explicitly not on the
+  roadmap.
+
+In 2025 the Ghostty project moved under Hack Club's 501(c)(3) umbrella,
+which gives it a long-term governance story that a single-author project
+would not have. The combination of "fastest terminal in existence",
+"HashiCorp-founder pedigree", and "local-first privacy posture" made
+Ghostty the de facto 2025 replacement for iTerm2 on macOS among
+developers who had grown tired of the sprawl of older emulators.
+
+**Sources:** [Ghostty — ghostty.org](https://ghostty.org/) · [Warp vs. Ghostty: Which Terminal App Meets Your Dev Needs? — The New Stack](https://thenewstack.io/warp-vs-ghostty-which-terminal-app-meets-your-dev-needs/) · [Ghostty: A Fast, Modern, and Private Terminal Emulator — henrywithu.com](https://henrywithu.com/ghostty-a-fast-modern-and-private-terminal-emulator/) · [Best Terminal Emulators 2026: Warp vs Ghostty vs Kitty vs Alacritty vs iTerm2 Compared — DevToolReviews](https://www.devtoolreviews.com/reviews/best-terminal-emulators-2026)
+
+### Warp — the AI-terminal alternative
+
+Warp, which predates Ghostty by several years, took the opposite bet:
+instead of treating the terminal as a thin, fast host for existing
+shells, treat it as a product with a GPU renderer, a structured block
+model for command output, and an integrated AI assistant that can
+generate, explain, and debug commands. Warp requires a login. Warp
+sends usage data. Warp is positioned as a collaborative, AI-native
+development environment that happens to speak shell protocol.
+
+The 2025 conversation between Ghostty and Warp is the most interesting
+thing the terminal emulator space has hosted in a decade. It is not a
+fight about speed or features — it is a fight about what a terminal
+*is*. Ghostty's position is that a terminal is a transport protocol
+and a rendering surface, full stop. Warp's position is that a terminal
+is a conversational IDE that runs commands. Both positions have real
+constituencies; both have been stable throughout 2025.
+
+### The multiplexer-as-terminal trend
+
+A quieter thread in 2025 was the continued rise of **Zellij** and
+**Wezterm** as "terminal multiplexer and emulator in one binary"
+products. Zellij, in particular, reached a level of maturity in 2025
+where it was a plausible default for developers who had previously
+used `tmux` inside iTerm2 or Alacritty, and Wezterm remained the
+cross-platform choice for users who wanted a single tool on
+macOS, Linux, and Windows.
+
+### Nushell keeps cooking
+
+The structured-data shell trend that produced Nushell in 2019 continued
+through 2025. Nushell's typed-pipeline model has not replaced bash or
+zsh, and nobody expects it to, but it has found a stable constituency
+among users who do data-wrangling work at the shell — and the community
+ports of Nushell's structured display approach are starting to show up
+in fish and PowerShell in subtler forms. The shell-as-language direction
+(Elvish, Oils, Nushell) remains a real, if minority, path forward.
+
+### What this means for the history
+
+The terminal and shell have always been moving targets. What is
+characteristic about the 2025 moment is that the two questions — "how
+fast can the transport be" and "how smart can the interface be" — have
+finally split into two separate products that both take themselves
+seriously. For forty years the shell was the interesting part and the
+terminal was a dumb pipe. For the next few years, the terminal is going
+to be a product category again. That has not been true since the
+CRT-era DEC VT series, and it is the sort of thing a history document
+that closes on "the shell as survivor" has to acknowledge at least in
+passing.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Shell scripting sits in the Programming Fundamentals wing. The Unix
+  command-line toolkit is the canonical example of a composable
+  programming environment built from small pieces with simple
+  interfaces.
+- [**digital-literacy**](../../../.college/departments/digital-literacy/DEPARTMENT.md)
+  — The command line is the baseline interface for serious computing,
+  and digital-literacy's relationship to it is complicated: most
+  students will never need to use a shell, and the ones who do will
+  need it fluently.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  The path from the teletype to the GPU-accelerated terminal emulator
+  is sixty years of accumulated layering, each layer preserving the
+  one below it. This is one of the cleanest examples of
+  backwards-compatibility-as-fossil-record in all of computing.
+- [**art**](../../../.college/departments/art/DEPARTMENT.md) — The
+  terminal is also an aesthetic object. `culture-art.md` is the entry
+  point for this thread, and the art department is the natural home
+  for the ASCII, ANSI, and Unicode typography traditions that the CLI
+  carries forward.
+
+---
+
 *PNW Research Series -- tibsfox.com*
 *Written April 2026*
+*Addendum (2025–2026 Terminal Renaissance) and College Departments cross-link added during the Session 018 catalog enrichment pass.*
