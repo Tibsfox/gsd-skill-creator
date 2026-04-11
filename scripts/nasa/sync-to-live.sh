@@ -75,7 +75,7 @@ fi
 # Sync using ncftpput (handles the tricky password correctly)
 echo "Starting sync..."
 python3 -c "
-import subprocess, os, sys
+import subprocess, os, sys, time
 
 env = {}
 with open('$PROJECT_ROOT/.env') as f:
@@ -93,6 +93,29 @@ local_base = '$LOCAL_DIR'
 ok = 0
 fail = 0
 
+# Retry hardening — mirror of sync-research-to-live.sh lftp settings
+# (net:max-retries 10, reconnect-interval-multiplier 1.5, net:timeout 30)
+MAX_RETRIES = 10
+TIMEOUT = 30
+
+def upload_with_retry(cmd):
+    delay = 2.0
+    last_err = None
+    for attempt in range(MAX_RETRIES):
+        try:
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=TIMEOUT)
+            if r.returncode == 0:
+                return r, attempt + 1
+            last_err = (r.stderr or r.stdout or '').strip()[:120]
+        except subprocess.TimeoutExpired:
+            last_err = f'timeout after {TIMEOUT}s'
+        except Exception as e:
+            last_err = str(e)[:120]
+        if attempt < MAX_RETRIES - 1:
+            time.sleep(delay)
+            delay = min(delay * 1.5, 30)
+    return None, MAX_RETRIES, last_err
+
 for root, dirs, files in os.walk(local_base):
     for fname in files:
         local_path = os.path.join(root, fname)
@@ -103,13 +126,14 @@ for root, dirs, files in os.walk(local_base):
             remote_dir = f'/NASA/{rel}'
 
         cmd = ['ncftpput', '-u', user, '-p', password, '-m', host, remote_dir, local_path]
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
-        if result.returncode == 0:
+        res = upload_with_retry(cmd)
+        if res[0] is not None:
             ok += 1
-            print(f'  OK: NASA/{rel}/{fname}')
+            tag = f' (after {res[1]} tries)' if res[1] > 1 else ''
+            print(f'  OK: NASA/{rel}/{fname}{tag}')
         else:
             fail += 1
-            print(f'  FAIL: NASA/{rel}/{fname}', file=sys.stderr)
+            print(f'  FAIL: NASA/{rel}/{fname} ({MAX_RETRIES} tries): {res[2]}', file=sys.stderr)
 
 print(f'\nUploaded: {ok}, Failed: {fail}')
 if fail > 0:

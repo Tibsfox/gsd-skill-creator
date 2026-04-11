@@ -66,7 +66,7 @@ build_edge_json() {
 case "$action" in
   init)
     echo "Initializing schema..."
-    curl -s -X POST "$API?action=init" \
+    curl -s --retry 5 --retry-delay 5 --retry-max-time 300 --max-time 120 -X POST "$API?action=init" \
       -H "Authorization: Bearer $TOKEN" \
       -H "Content-Type: application/json" \
       -d '{}' | python3 -m json.tool
@@ -75,7 +75,7 @@ case "$action" in
   projects)
     echo "Syncing projects..."
     DATA=$(build_project_json)
-    echo "$DATA" | curl -s -X POST "$API?action=projects" \
+    echo "$DATA" | curl -s --retry 5 --retry-delay 5 --retry-max-time 300 --max-time 120 -X POST "$API?action=projects" \
       -H "Authorization: Bearer $TOKEN" \
       -H "Content-Type: application/json" \
       -d @- | python3 -m json.tool
@@ -84,7 +84,7 @@ case "$action" in
   edges)
     echo "Syncing edges..."
     DATA=$(build_edge_json)
-    echo "$DATA" | curl -s -X POST "$API?action=edges" \
+    echo "$DATA" | curl -s --retry 5 --retry-delay 5 --retry-max-time 300 --max-time 120 -X POST "$API?action=edges" \
       -H "Authorization: Bearer $TOKEN" \
       -H "Content-Type: application/json" \
       -d @- | python3 -m json.tool
@@ -106,7 +106,7 @@ case "$action" in
       }));
     ")
 
-    echo "$MERGED" | curl -s -X POST "$API?action=full" \
+    echo "$MERGED" | curl -s --retry 5 --retry-delay 5 --retry-max-time 300 --max-time 120 -X POST "$API?action=full" \
       -H "Authorization: Bearer $TOKEN" \
       -H "Content-Type: application/json" \
       -d @- | python3 -m json.tool
