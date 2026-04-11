@@ -581,4 +581,125 @@ These three papers, together with *The Design and Evolution of C++* (1994), are 
 
 ---
 
-*End of history.md. ~700 lines of dense factual prose. Citations are primary where possible: ISO standards, Stroustrup HOPL papers, isocpp.org, the original ARM, and dated mailing-list / committee papers. Items marked [CHECK] are uncertain and should be verified by a fact-checking pass before publication.*
+## Addendum: C++26 shipped (March 2026)
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main history above treated C++23 as the current standard and
+C++26 as a work in progress. On **2026-03-29**, Herb Sutter published the
+trip report for the March 2026 ISO C++ standards meeting (London Croydon,
+UK) with a one-word summary in the title: *C++26 is done.*
+
+### The path to completion
+
+The committee's release cadence going into 2025 was:
+
+- **Kona, Hawaii — November 2024** — feature freeze for C++26.
+- **Hagenberg, Austria — February 2025** — national body comment handling.
+- **Sofia, Bulgaria — June 2025** — draft feature-complete; the Sofia
+  minutes are the public record of which features made the cut.
+- **Wrocław, Poland — November 2025** (reported on isocpp.org as Kona at
+  one point in some write-ups) — ballot comment resolution.
+- **London Croydon, UK — March 2026** — final technical work complete.
+  ~210 experts attended (130 in-person, 80 remote). The final approval
+  ballot was sent out from this meeting, making C++26 effectively
+  published.
+
+The next two meetings — Brno, Czechia in June 2026 and Búzios, Rio de
+Janeiro, Brazil in November 2026 — will begin work on C++29.
+
+### The headline features of C++26
+
+Herb Sutter's trip report calls C++26's reflection *"by far the biggest
+upgrade for C++ development that we've shipped since the invention of
+templates."* The full headline feature list:
+
+- **Static reflection** (P2996). Compile-time introspection of types,
+  members, functions, and attributes, plus a mechanism for synthesizing
+  code at compile time from reflected information. Introduces the
+  `^^` operator (the "cat-ears operator") as the reflection operator.
+  This is the end-state of a decades-long sequence of partial
+  metaprogramming mechanisms (templates, `constexpr`, `consteval`,
+  `std::is_*` traits) being subsumed into a single first-class facility.
+- **`std::execution` / sender-receiver** (P2300). The long-delayed
+  standardization of an asynchronous-execution framework for C++. The
+  model is the "sender-receiver" design originally developed for
+  `libunifex` and refined across several standardization cycles. A
+  sender represents a unit of async work; a receiver consumes its
+  result; schedulers manage where the work runs. The C++26 `<execution>`
+  header is the first C++ standard asynchronous programming model that
+  handles executors, coroutines, and algorithms in a unified way.
+- **Contracts**. Language-level preconditions, postconditions, and
+  assertion statements, with a runtime-checking mode that integrates
+  with the standard library's hardened bounds-checking facilities. After
+  contracts were pulled from C++20 at the last minute, this is the
+  committee's first successful landing of the feature.
+- **Memory-safety hardening**. Reading an uninitialized local variable
+  is no longer undefined behavior. `vector`, `span`, `string`,
+  `string_view`, and other common types have bounds-safety enabled in
+  hardened mode. This is the C++ committee's first structural response
+  to the memory-safety conversation that has dominated the systems
+  languages discourse since 2022.
+- **Pattern matching** (P2688). Still in the feature set as of the
+  Sofia / London trail, though it was the feature most at risk during
+  2025 ballot comment handling. Introduces an `inspect` expression for
+  structured pattern matching against variants, tuples, and user-defined
+  types, in the style of Rust's `match` and Haskell's case expressions.
+
+Compiler support going into 2026 was substantial: both GCC and Clang had
+implemented roughly two-thirds of the C++26 feature set during
+development. GCC specifically had reflection and contracts merged in
+trunk awaiting release as of the March 2026 trip report.
+
+### What changes for the story
+
+The C++ history above runs through C++23 with a "committee in flight"
+note about C++26. That note should now be read as historical: C++26 is
+the current standard as of mid-2026. The two things that matter for the
+larger arc are:
+
+1. **C++ is no longer waiting for reflection.** The template system was
+   the 1990s compile-time programming answer, `constexpr` was the 2010s
+   answer, and static reflection is the 2020s answer. Library authors
+   can now do structurally what they previously had to do by hand or via
+   preprocessor tricks, and several widely-used libraries (Boost,
+   standard-library implementations, serialization frameworks) are
+   already in the process of rewriting their core metaprogramming
+   layers on top of P2996.
+2. **C++ is finally answering the memory-safety conversation on its own
+   terms.** The combination of hardened standard library, no-UB for
+   uninitialized reads, and language contracts is not the same as Rust's
+   borrow checker — it is incremental rather than structural — but it is
+   the first C++ committee release in which memory safety is treated as
+   a feature the language has to ship, rather than a property
+   programmers have to hand-build.
+
+**Sources:** [C++26 is done! — Trip report: March 2026 ISO C++ standards meeting (London Croydon, UK) — Herb Sutter](https://herbsutter.com/2026/03/29/c26-is-done-trip-report-march-2026-iso-c-standards-meeting-london-croydon-uk/) · [C++26 Draft Finalized with Static Reflection, Contracts, and Sender/Receiver Types — InfoQ, June 2025](https://www.infoq.com/news/2025/06/cpp-26-feature-complete/) · [Reflection for C++26 (P2996r9) — WG21 working paper](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p2996r9.html) · [C++26 — cppreference.com](https://en.cppreference.com/w/cpp/26.html) · [C++26 — Wikipedia](https://en.wikipedia.org/wiki/C++26) · [Reflection in C++26 — Modernes C++ Blog](https://www.modernescpp.com/index.php/reflection-in-c26/) · [C++ Static Reflection: An Overview of the Metaprogramming Paradigm Shift — Massimiliano Bastia, Medium](https://medium.com/@massimiliano.bastia92/c-static-reflection-an-overview-of-the-metaprogramming-paradigm-shift-4cc2ca49a2c6)
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — C++
+  is the canonical multi-paradigm systems language. Programming
+  Fundamentals, Algorithms & Efficiency, and Building Projects wings
+  all have C++ as a natural worked example.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — The C++ standardization process is itself a study in how
+  engineering committees manage backwards-compatibility, feature
+  velocity, and institutional legitimacy. The history of contracts
+  (pulled from C++20, relanded in C++26) is a textbook case.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  The C++ story is the longest continuous language-evolution story in
+  mainstream computing, and Stroustrup's HOPL papers are one of the
+  best primary-source documentations of a language's evolution ever
+  written.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — C++'s template and `constexpr` systems, and now static reflection,
+  are the most elaborate compile-time computation facilities in any
+  mainstream language. Understanding template metaprogramming is a
+  working exercise in constructive type theory.
+
+---
+
+*End of history.md. ~700 lines of dense factual prose (original) + ~120 lines of C++26 addendum (Session 018). Citations are primary where possible: ISO standards, Stroustrup HOPL papers, isocpp.org, the original ARM, and dated mailing-list / committee papers. Items marked [CHECK] in the body remain uncertain and should be verified by a fact-checking pass before publication.*
