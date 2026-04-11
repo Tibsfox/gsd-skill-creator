@@ -239,3 +239,68 @@ Grandmother Cedar is the mother tree. The mycorrhizal network is the Rosetta Sto
 53. Vogelmann, J.E. et al. 2012. "Perspectives on monitoring gradual change across the continuity of Landsat sensors using time-series data." *Remote Sensing of Environment* 118: 259-271.
 54. Lefsky, M.A. et al. 2002. "Lidar remote sensing for ecosystem studies." *BioScience* 52(1): 19-30.
 55. Strigul, N. et al. 2008. "Scaling from trees to forests: tractable macroscale equations for forest dynamics." *Ecological Monographs* 78(4): 523-545.
+
+---
+
+## Addendum: The forest in 2025–2026
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body above treats old-growth ecology,
+mycorrhizal networks, and the research program that Suzanne Simard's
+work has shaped; the 2025 updates are narrow but substantive.
+
+### Simard's "Mother Tree" program, continued scrutiny
+
+Suzanne Simard's work on forest mycorrhizal networks — the basis
+of much of the "living forest" framing in the body — has remained
+influential and continues to draw both supportive extensions and
+substantive methodological critiques through 2025. The body's
+treatment is structurally correct: mycorrhizal networks exist,
+they move carbon and nutrients between trees, and they are one of
+the mechanisms that make a forest a system rather than a collection
+of individual trees. What has continued through 2024–2025 is a
+working scientific debate about the quantitative magnitude of
+inter-tree signaling, the specific mechanisms involved, and the
+extent to which the "mother tree" framing generalizes beyond the
+Douglas-fir systems where Simard's original work was done. That
+debate is healthy science.
+
+### Forest carbon and the West's climate trajectory
+
+The body's section on large-tree carbon storage (Mildrexler et al.
+2020) — the finding that in forests east of the Cascade crest,
+the largest ~3% of trees hold ~42% of aboveground carbon — has
+been extended by further 2024–2025 work showing similar patterns
+in other Western forest types. The policy relevance is that
+protecting individual large trees is not a marginal climate
+strategy; it is one of the highest-leverage carbon-storage
+interventions available in the PNW landscape, and the 2025
+National Forest management conversations continue to reference
+this work.
+
+### Monitoring infrastructure
+
+The body's section on lidar, camera traps, autonomous recording
+units, and the Mesowest network is still accurate. Several of
+those monitoring programs have expanded coverage through
+2024–2025, and the integration of AI-based species identification
+(for camera traps and ARUs) has reached production maturity,
+which changes the cost of monitoring at scale. For the PNW
+Research Series audience the practical consequence is that the
+"living forest" of 2026 is under more continuous instrumentation
+than any previous generation of PNW ecosystem research had
+access to.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**environmental**](../../../.college/departments/environmental/DEPARTMENT.md) — Forest ecology, mycorrhizal networks, carbon storage, and the PNW old-growth system are all environmental-department core material.
+- [**nature-studies**](../../../.college/departments/nature-studies/DEPARTMENT.md) — The field-observation and natural-history side of forest study is nature-studies territory.
+- [**science**](../../../.college/departments/science/DEPARTMENT.md) — The scientific practice of forest ecology (long-term plots, carbon accounting, mycorrhizal experiments) is a worked example for the science department's treatment of long-term ecological research.
+- [**chemistry**](../../../.college/departments/chemistry/DEPARTMENT.md) — Carbon cycling, nutrient exchange through mycorrhizae, and soil chemistry are chemistry-department topics with direct ecological application.
+
+---
+
+*Addendum (2025–2026 forest science status, monitoring infrastructure) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
