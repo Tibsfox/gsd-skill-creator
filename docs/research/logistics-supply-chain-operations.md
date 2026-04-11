@@ -470,3 +470,55 @@ Logistics and supply chain operations are non-negotiable for any hardware compan
 ---
 
 *Sources: YouTube video transcripts. All figures, quotes, and claims are extracted from the original presented material.*
+
+---
+
+## Addendum: 2025–2026 supply-chain environment and college cross-link
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body above is a transcript-analysis synthesis
+treating logistics, supply chain, operations research, and
+cooperative economics as a Rosetta bundle. Its value is in the
+structural analysis rather than in time-sensitive data, so the
+enrichment here is brief: a note on the 2025–2026 supply chain
+environment and the standardized college cross-link section.
+
+### The 2025–2026 supply-chain environment
+
+The body's framing that supply chain strategy has a 10–20 year
+horizon has been stress-tested through the 2020–2024 pandemic-plus-
+tariff-plus-chip-shortage cycle. Practitioner writing through 2025
+has converged on three durable takeaways that are consistent with
+the body's analysis:
+
+- **Diversified sourcing wins.** Every 2024–2025 retrospective on
+  the 2020–2023 crisis identified concentration risk as the main
+  preventable failure mode. Firms that had second and third
+  suppliers across geographies recovered faster than firms that
+  had optimized for single-supplier cost.
+- **Inventory is no longer a dirty word.** JIT absolutism gave way
+  through 2022–2024 to a more nuanced position in which strategic
+  buffer stock for critical components is treated as insurance
+  rather than waste. This matches the body's Fox Companies
+  "design with resilience, not just efficiency" recommendation.
+- **Reshoring is partial, not wholesale.** The 2020–2024
+  geopolitical shocks produced selective reshoring of strategic
+  components (semiconductors via CHIPS Act, medical supplies,
+  some pharmaceuticals) but did not produce a wholesale
+  repatriation of manufacturing. The 10–20 year horizon the
+  body references is playing out as continued globalization with
+  hedges, not as reversal.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**business**](../../../.college/departments/business/DEPARTMENT.md) — Logistics, supply chain management, and operations research are core business-department topics.
+- [**economics**](../../../.college/departments/economics/DEPARTMENT.md) — The economic theory of supply chains, inventory management, and cooperative ownership models is economics-department material.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md) — Operations research as a mathematical-engineering discipline (linear programming, queueing theory, network flow) is engineering territory.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md) — The mathematical foundations of operations research (optimization, stochastic processes, game theory) are mathematics-department topics.
+
+---
+
+*Addendum (2025–2026 supply-chain framing notes, college cross-link) added during the Session 018 catalog enrichment pass.*
