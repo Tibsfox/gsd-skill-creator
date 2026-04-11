@@ -689,3 +689,27 @@ llvm-dis /tmp/optimized.bc | less
 
 *This analysis is part of the Artemis II mission research corpus.*
 *Files analyzed: artifacts/yt-{raft,paxos,bft,ecc,zkp,llvm}-*.en.vtt*
+
+---
+
+## Addendum: College cross-link (April 2026)
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body above is a deep transcript-analysis
+synthesis of systems-primitives material (Raft, Paxos, BFT, ECC,
+ZKP, LLVM) and its value is the synthesis itself. The enrichment
+here is limited to the standardized college cross-link section.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — Consensus protocols, error-correcting codes, zero-knowledge proof systems, and LLVM IR are all squarely applied programming topics in the Algorithms & Efficiency and Computing & Society wings.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md) — The mathematical foundations (finite fields for ECC, polynomial commitments and Reed-Solomon for STARK/FRI, group theory for SNARK pairings) are mathematics-department territory.
+- [**logic**](../../../.college/departments/logic/DEPARTMENT.md) — Byzantine fault tolerance, consensus safety/liveness proofs, and the formal semantics of proof systems are logic-department topics.
+- [**technology**](../../../.college/departments/technology/DEPARTMENT.md) — Compiler infrastructure (LLVM IR, optimization pipelines) and distributed systems engineering are technology-department material.
+
+---
+
+*Addendum (college cross-link) added during the Session 018 catalog enrichment pass.*
