@@ -1683,6 +1683,114 @@ Yes, for anything beyond the simplest corporate formation and governance. Washin
 
 ---
 
+## Addendum: The 2025 Revised Code as of April 2026
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body is written as an educational history and framework
+treatment; the statute-level detail is stable enough that annual revisions
+usually do not require substantive edits to the history chapters. The
+current state of the statute as of this enrichment pass is worth noting
+briefly so that readers using the paper as a starting point can orient
+themselves against the live code.
+
+### The 2025 Revised Code of Washington
+
+The **2025 Revised Code of Washington** incorporates all changes made
+by session laws through the 2025 legislative session (which ended in
+late April 2025). The relevant titles for this paper are:
+
+- **Title 23B RCW — Washington Business Corporation Act** — the
+  primary statute governing for-profit business corporations in
+  Washington. The body of this paper treats 23B in depth.
+- **Title 23 RCW — Corporations and Associations (Profit)** — the
+  residual home for provisions that predate or sit alongside 23B,
+  including the **Uniform Business Organizations Code (Chapter
+  23.95)** which handles cross-entity registration, administrative
+  dissolution, and reinstatement.
+- **Chapter 23B.25 RCW — Social Purpose Corporations** — the SPC
+  chapter, which this paper's `spc-framework.md` companion file
+  covers in detail.
+
+As of the 2025 RCW publication, the official statute text is
+available through both the Washington State Legislature's own
+code-lookup tool (`app.leg.wa.gov/rcw`) and through the Justia
+mirror (`law.justia.com/codes/washington`). For practitioners the
+Lexis *Washington Business Corporation Act (RCW 23B) Sourcebook* is
+the current annotated reference.
+
+**Sources:** [Title 23B RCW — Washington Business Corporation Act, Washington State Legislature](https://app.leg.wa.gov/rcw/default.aspx?Cite=23B) · [2025 Revised Code of Washington, Title 23 — Justia](https://law.justia.com/codes/washington/title-23/) · [Title 23B RCW — full combined PDF, Washington State Legislature](https://app.leg.wa.gov/documents/Laws/RCWPDF/RCW%20%2023B%20TITLE/RCW%20%2023B%20%20TITLE/RCW%20%2023B%20%20COMBINEDTITLE.pdf) · [Chapter 23B.25 RCW: Social Purpose Corporations](https://app.leg.wa.gov/rcw/default.aspx?cite=23B.25&full=true) · [Washington Business Corporation Act (RCW 23B) Sourcebook — LexisNexis](https://store.lexisnexis.com/en-us/products/washington-business-corporation-act-rcw-23b-sourcebook-grpussku5630759.html)
+
+### Social Purpose Corporation — current state
+
+The SPC framework in Chapter 23B.25, which the companion
+`spc-framework.md` file covers in detail, remains structurally
+unchanged in the 2025 code. The core provisions that this paper's
+treatment rests on are still active law:
+
+- **RCW 23B.25.020** — the authorizing statute for SPCs, including
+  the definition of permissible social purposes (employees,
+  suppliers, customers; local/state/national/world community;
+  environment) and the requirement that the articles of
+  incorporation identify the corporation's specific social purposes.
+- **RCW 23B.25.130** — the conversion mechanism, under which an
+  existing corporation can become an SPC by board adoption and
+  shareholder approval of a **plan of election**.
+- **RCW 23B.25 amendment provisions** — material changes to the
+  social purposes stated in an SPC's articles require approval by
+  **two-thirds of the voting group** (in addition to standard
+  amendment procedures) and **two-thirds of the holders of the
+  outstanding shares of each class or series**. The heightened
+  supermajority reflects the legislature's design decision that
+  social-purpose changes should be harder to reverse than ordinary
+  corporate amendments.
+
+**Sources:** [Chapter 23B.25 RCW: Social Purpose Corporations — Washington State Legislature](https://app.leg.wa.gov/rcw/default.aspx?cite=23B.25&full=true) · [RCW 23B.25.130 — Corporation converting to a social purpose corporation—Plan of election—Effect — Justia 2025](https://law.justia.com/codes/washington/title-23b/chapter-23b-25/section-23b-25-130/) · [Washington's Social Purpose Corporation — Seattle University Journal of Environmental Law](https://digitalcommons.law.seattleu.edu/cgi/viewcontent.cgi?article=1051&context=sjel)
+
+### What the addendum does not claim
+
+Two things this addendum deliberately does **not** claim:
+
+1. **This is not a cite-check of the full paper.** The body of this
+   document is long and treats hundreds of statute sections. A
+   rigorous practitioner update would require running every cited
+   section against the 2025 RCW and recording any session-law
+   changes. That work is outside the scope of this enrichment pass.
+2. **This is not legal advice.** The colophon below already says so
+   in plain terms, and the addendum does not change that.
+
+What the addendum does do is confirm that the main-body framework
+is consistent with the 2025 RCW as published, that the SPC chapter
+the paper treats at length remains structurally active law, and
+that practitioners using this paper as an educational introduction
+can do so with the assurance that the statutory skeleton has not
+shifted under their feet during the 2024–2025 legislative session.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**business**](../../../.college/departments/business/DEPARTMENT.md)
+  — Corporate law is the legal side of business infrastructure,
+  and the WA Business Corporation Act is the primary statute that
+  shapes how Washington businesses are formed, governed, and wound up.
+- [**economics**](../../../.college/departments/economics/DEPARTMENT.md)
+  — The SPC framework is a case study in how economic actors with
+  non-financial goals can be given formal legal standing in a
+  corporate-law system that historically assumed single-purpose
+  profit maximization.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The history-origins file in this bucket traces Washington's
+  corporate law from territorial-period beginnings through the
+  modern RCW, and it is a case study in how state-level codes
+  evolve under federal securities-law pressure.
+- [**critical-thinking**](../../../.college/departments/critical-thinking/DEPARTMENT.md)
+  — Legal reasoning is one of the most heavily worked examples of
+  applied critical thinking, and Washington corporate law provides
+  an unusually well-documented body of cases to reason about.
+
+---
+
 ## Colophon
 
 This paper was prepared as part of the Pacific Northwest Research Series, a public educational research corpus examining the institutions, infrastructure, and intellectual traditions of the Pacific Northwest region of North America. The paper is educational rather than advisory; it does not constitute legal advice, and nothing in it should be treated as a substitute for a practitioner's analysis of a specific legal question. Readers considering the formation, governance, amendment, or dissolution of a Washington corporation should consult a qualified Washington corporate lawyer.
@@ -1690,3 +1798,5 @@ This paper was prepared as part of the Pacific Northwest Research Series, a publ
 The author gratefully acknowledges the Washington State Bar Association Business Law Section, the ABA Corporate Laws Committee, and the generations of Washington practitioners whose collective work is the subject of this paper. Any errors are the author's alone.
 
 *End of paper.*
+
+*Addendum (2025 RCW orientation, SPC framework current state) and Related College Departments cross-link added during the Session 018 catalog enrichment pass. Per the Fox Companies IP rule, this file is committed to GitHub but not surfaced on the public tibsfox.com research site.*
