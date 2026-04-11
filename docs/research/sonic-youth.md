@@ -317,3 +317,71 @@ Sonic Youth's identity was inseparable from the Moore-Gordon marriage. The band 
 18. Sonic Youth Bandcamp archive (sonicyouth.bandcamp.com)
 19. Sotheby's -- Gerhard Richter *Kerze* auction documentation
 20. Thurston Moore and Byron Coley, *No Wave: Post-Punk. Underground. New York. 1976-1980* (Harry N. Abrams, 2008)
+
+---
+
+## Addendum: The members in 2025–2026
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. Sonic Youth as a functioning band ended in 2011;
+any 2025 update has to be about the members' ongoing solo and
+collaborative work rather than the band itself.
+
+**Thurston Moore.** Continues to record and tour as a solo artist
+and as part of several improvised-music collaborations; his 2023
+memoir *Sonic Life* (Doubleday) remained the authoritative insider
+history through 2025 and the companion lecture-and-reading circuit
+continued.
+
+**Kim Gordon.** Her solo record *The Collective* (Matador, 2024)
+got widespread critical praise; she continued visual-art work
+across 2024–2025, with gallery shows in New York and Los Angeles.
+Her 2015 memoir *Girl in a Band* remained in print and continues
+to be a standard reference for how Sonic Youth is remembered from
+the inside.
+
+**Lee Ranaldo.** Continues to record and tour as a solo artist;
+his experimental-music practice through 2024–2025 has stayed
+consistent with the approach he brought to Sonic Youth.
+
+**Steve Shelley.** Continues as an active session drummer,
+playing on records by other artists across 2024–2025.
+
+**Sonic Youth archival releases.** The band's Bandcamp archive
+continues to publish live recordings from the 1980s–2000s, and
+the SYR experimental series from the band's peak period remains
+in print.
+
+No reunion has been announced, and the band's public position
+has been that there will not be one. The 2025 data is that Sonic
+Youth is a closed chapter musically but an open chapter in
+cultural memory: every "greatest albums of" list, every
+influential-bands retrospective, every No Wave / post-punk
+historical treatment places them centrally.
+
+**Sources:** [Sonic Youth — Bandcamp archive](https://sonicyouth.bandcamp.com/) · [Kim Gordon — *The Collective* album coverage, 2024](https://en.wikipedia.org/wiki/The_Collective_(Kim_Gordon_album)) · [Thurston Moore — *Sonic Life*, Doubleday 2023](https://en.wikipedia.org/wiki/Sonic_Life)
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**music**](../../../.college/departments/music/DEPARTMENT.md) —
+  Sonic Youth's alternate tunings, noise-as-composition approach,
+  and improvisational practice are some of the clearest examples
+  of extended musical technique in American rock.
+- [**art**](../../../.college/departments/art/DEPARTMENT.md) —
+  Kim Gordon's visual-art practice, the band's collaborations with
+  Gerhard Richter, and the No Wave visual culture they emerged
+  from are all art-department topics.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The New York downtown scene of 1976–1985 is a historical
+  subject that Sonic Youth sits at the center of.
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)
+  — Both Moore's and Gordon's memoirs are meaningful musician-
+  memoir texts, and Kim Gordon's *Artforum* contributions are
+  independently significant as critical writing.
+
+---
+
+*Addendum (2025–2026 member activity) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
