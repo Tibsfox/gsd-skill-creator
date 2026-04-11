@@ -602,4 +602,177 @@ Java at 30 is not the language of the Web that Sun promised in 1995. It is somet
 
 ---
 
+## Addendum: JDK 24 → 26 and the Amber / Valhalla / Leyden convergence (2025–2026)
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body above closes with a 2024 snapshot and a Gosling quote.
+The release train has kept running and in 2025–2026 three of the
+long-running OpenJDK umbrella projects reached meaningful milestones
+simultaneously, which is worth recording.
+
+### Release timeline
+
+- **JDK 24** — **March 2025**, non-LTS. Resolved the long-standing
+  virtual-thread-pinning-on-synchronized-blocks bug (one of the most
+  quoted blockers for full virtual-thread adoption), demonstrated
+  **40% faster startup** via Project Leyden's AOT caching mechanism,
+  and advanced several Valhalla and Amber previews.
+- **JDK 25** — **September 16, 2025**, **LTS**. The successor to JDK 21
+  as the Oracle / OpenJDK long-term-support release. Combines the
+  accumulated Leyden work (AOT caching), the accumulated Amber work
+  (pattern matching, records, sealed types, primitive patterns), and
+  the first production-grade virtual-thread story including the
+  synchronized-block fix.
+- **JDK 26** — **March 17, 2026**, non-LTS. Extends AOT caching to
+  work with **all garbage collectors** (JEP 483), previews
+  **value classes** (JEP 401) as the first concrete Valhalla landing,
+  and takes pattern matching into its **fourth preview cycle**.
+
+The LTS / non-LTS rhythm — LTS every two years, feature releases every
+six months — is unchanged. What has changed is the pace at which
+long-running Oracle-funded projects are converging on shippable
+features. 2025 was the year "when does Valhalla ship" stopped being a
+polite question and started having concrete, if preview-quality,
+answers.
+
+### Project Leyden — AOT caching
+
+Project Leyden's premise is that the JVM's startup-time penalty, which
+has been the single loudest complaint about Java in the cloud-native
+and serverless eras, can be addressed without adopting GraalVM's
+AOT-native-image model. Leyden introduces an **AOT cache** that
+pre-computes and stores the results of parts of the class-loading and
+JIT-warmup pipeline, and replays them from the cache at program start.
+The numbers from JDK 24 demonstrations: **40% faster startup** on
+representative server applications.
+
+JDK 25 ships the first Leyden AOT-caching work as a supported feature,
+and JDK 26 (JEP 483) removes the GC-specific restrictions that limited
+the JDK 25 version to a subset of garbage collectors. After JDK 26,
+every combination of AOT cache and GC is a supported configuration.
+
+**Sources:** [Java 25: what's new in the successor to Java 21? — SQLI](https://www.sqli.com/int-en/insights-news/blog/java-25) · [Java 26 Is Here, And With It a Solid Foundation for the Future — hanno.codes](https://hanno.codes/2026/03/17/java-26-is-here/) · [JDK 26: The new features in Java 26 — InfoWorld](https://www.infoworld.com/article/4050993/jdk-26-the-new-features-in-java-26.html)
+
+### Project Valhalla — value classes enter preview
+
+Valhalla has been Java's longest-running language-level project, dating
+back to 2014. The goal is to unify the primitive / object world — to
+make it possible to write a class whose instances have no identity,
+can be flattened into arrays and other containers without heap
+allocation, and can participate in generics without boxing. The
+promise has been "`List<int>` without wrapper overhead, eventually,
+someday."
+
+In JDK 26 (March 17, 2026) the first concrete piece of that promise
+landed as a preview: **value classes** under **JEP 401**. A value
+class is a class whose instances are distinguished by their contents
+rather than by their heap identity, and whose fields are implicitly
+final. The runtime is free to flatten them into arrays and other
+value classes, and the `==` operator compares by contents.
+
+The full Valhalla delivery is still multiple releases away. The
+project page lists five features on the active roadmap:
+
+1. **Value Classes and Objects** — previewing in JDK 26.
+2. **Null-restricted and Nullable types** — in development.
+3. **Enhanced Primitive Boxing** — this is what unlocks `List<int>`
+   with the same performance as `List<Integer>` without the boxing
+   penalty.
+4. **Reified Generics** — keeping type parameters available at runtime,
+   ending the type-erasure limitation that has shaped twenty years of
+   Java library design.
+5. **Array Enhancements** — so that `Value[]` arrays can be flattened
+   the way primitive arrays are.
+
+The project's public messaging in 2025 and 2026 is explicit that
+these will flow through multiple JDK releases. What JDK 26 delivers
+is the first one, not all of them. Nevertheless, it is the first time
+Valhalla has produced a feature that normal Java developers can touch
+in a preview-flag build, and the shape of the feature matches the
+twelve-year vision without compromise.
+
+**Sources:** [Project Valhalla — Horstmann presentations, 2025](https://horstmann.com/presentations/2025/jug-darmstadt/) · [Project Valhalla Early-Access Builds — jdk.java.net/valhalla](https://jdk.java.net/valhalla/) · [Java's Multi-Project Evolution: Valhalla, Panama & Amber Reach Maturity — Java Code Geeks](https://www.javacodegeeks.com/2026/03/javas-multi-project-evolution-valhalla-panama-amberreach-maturity.html)
+
+### Project Amber — pattern matching enters its fourth preview
+
+Project Amber's pattern matching has been in three consecutive preview
+statuses (JDK 23, 24, 25) and is previewing for a **fourth time in
+JDK 26**. The reason for the extended preview is not that the feature
+is unstable — it has been stable enough to use in production for two
+years — but that the committee is taking the time to get the
+interaction between patterns, switch expressions, and Valhalla's
+value classes right before committing the feature to final form. A
+pattern-matched `switch` that also has to handle value-class instances
+is a design problem that the committee did not want to solve by
+shipping the switch version first and fixing it later.
+
+The practical consequence is that Java's pattern matching in 2025–2026
+is stable, usable, and still technically "preview." Teams that enable
+`--enable-preview` have been using it in production for multiple LTS
+cycles with no incident.
+
+### Virtual threads reach production-grade
+
+Virtual threads shipped in JDK 21 (LTS, September 2023) as a preview
+and went final with the release of JDK 21. The 2025 story is that the
+last significant blocker — virtual threads would "pin" to their
+carrier thread inside a `synchronized` block, preventing the carrier
+from scheduling other virtual threads — was **resolved in JDK 24**
+(March 2025). After JDK 24, virtual threads and classical
+`synchronized` locks interoperate cleanly, and the production-grade
+virtual-thread story no longer carries an asterisk.
+
+This is the change that matters for the character of the language.
+Pre-2025, "use virtual threads but avoid `synchronized`" was a real
+piece of advice that had to be delivered to every team adopting the
+feature. Post-2025, the advice becomes "just use virtual threads."
+That is the kind of small change that ends up defining the
+experience of a feature for an entire generation of programmers.
+
+**Sources:** [State of Java 2026 — The Dev Newsletter](https://devnewsletter.com/p/state-of-java-2026/) · [5 Latest Java Trends to Keep Your Eye On in 2026 — Java Code Geeks](https://www.javacodegeeks.com/2026/03/5-latest-java-trends-to-keep-your-eye-on-in-2026.html) · [JVM Weekly vol. 116: Java plans for 2025](https://www.jvm-weekly.com/p/glancing-into-the-future-java-plans)
+
+### What this means for the story
+
+The body above closes with the claim that Java is "still evolving at a
+pace that puts most of its competitors to shame." The 2025–2026 data is
+the strongest single confirmation of that claim since the Java 9
+release cadence change. Three long-running umbrella projects (Leyden,
+Valhalla, Amber) all shipped concrete user-visible features; the
+virtual-thread story closed its last production footgun; and the
+language got a new LTS (Java 25) that consolidates the lot.
+
+Java 30 in 2025 (the language's thirtieth-anniversary year) turned
+out to be exactly what the committee said it would be: a language that
+moves forward without leaving anyone behind, that ships useful features
+every six months to a user base that has not stopped growing, and that
+continues to answer the "is Java still relevant" question by shipping.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Java is one of the canonical teaching languages for OO programming
+  and is squarely in Programming Fundamentals. Its pattern matching
+  and records features are worked examples for the algebraic-data-type
+  side of programming-language theory.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — Java is the operating system of enterprise software engineering.
+  Spring, Hibernate, Kafka, Cassandra, Elasticsearch, Hadoop, and most
+  of the modern data infrastructure stack are Java first.
+- [**business**](../../../.college/departments/business/DEPARTMENT.md)
+  — Java's position in the financial sector, insurance, healthcare
+  back-end, and government IT is a direct subject for business and
+  economics studies of software as infrastructure.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  The Sun → Oracle → OpenJDK story is one of the cleanest case studies
+  in how open-source governance can absorb a corporate acquisition.
+  The pre-2010 and post-2010 halves of the Java story are different
+  stories, and the transition between them is instructive.
+
+---
+
+*Addendum (JDK 24–26, Valhalla / Leyden / Amber / virtual threads) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
 *End of document.*
