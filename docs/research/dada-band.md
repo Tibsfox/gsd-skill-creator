@@ -532,3 +532,53 @@ This mirrors a broader question the project engages with: what determines cultur
 - [CelebrityAccess: dada 30th Anniversary Tour](https://celebrityaccess.com/2024/06/24/dada-announced-30th-anniversary-tour/)
 - [Dada Art Movement - Tate](https://www.tate.org.uk/art/art-terms/d/dada)
 - [Dada Art Movement - TheArtStory](https://www.theartstory.org/movement/dada/)
+
+---
+
+## Addendum: Dada in 2025–2026 — the touring band
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body above is a deep dive on dada's
+1990s–2020s arc; the 2025 state is a straightforward touring update.
+
+**2025 touring status.** Dada (Michael Gurley, Joie Calio, Phil
+Leavitt) is still active as a touring three-piece. The 30th
+Anniversary Tour announced in 2024 continued through 2025, and the
+band has a small number of scheduled shows into 2026. As of April
+2026 no new studio album has been announced since the 2024 tour
+began; the tour material is built around the classic catalog
+(*Puzzle*, *American Highway Flower*, *El Subliminoso*, *Dada*).
+
+**Community / fandom.** The `dadaforever.com` fan site remains the
+community hub, the Piotr Orlov "New Dada Music" Substack continues
+to cover releases, and the band's Spotify / Bandsintown / Songkick
+presence is current enough that fans in the Pacific Northwest (the
+bucket's framing for the PNW Research Series) can follow tour
+announcements directly.
+
+**Sources:** [Dada (band) — Wikipedia](https://en.wikipedia.org/wiki/Dada_(band)) · [Dada Tickets, Tour Dates & Concerts 2026 & 2025 — Songkick](https://www.songkick.com/artists/61815-dada) · [Dada Tickets, 2025 Tour Dates, and More — JamBase](https://www.jambase.com/band/dada) · [New Dada Music — Piotr Orlov Substack](https://dadastrain.substack.com/p/new-dada-music_october-and-november) · [dada FOREVER](http://dadaforever.com/)
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**music**](../../../.college/departments/music/DEPARTMENT.md) —
+  Dada's 1990s power-pop-adjacent sound and its place in the
+  Pacific Northwest's broader musical landscape are
+  music-department topics.
+- [**art**](../../../.college/departments/art/DEPARTMENT.md) —
+  The band's name, its songwriting aesthetic, and its connection
+  (cultural if not direct) to the Dada art movement of 1916–1924
+  bridge music and art department topics.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The band's trajectory is a case study in how 1990s
+  major-label acts survive into the streaming era by touring
+  rather than recording.
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)
+  — Songwriting craft, particularly dada's reputation for
+  literate lyrics, is a writing-department topic.
+
+---
+
+*Addendum (2025–2026 touring status) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
