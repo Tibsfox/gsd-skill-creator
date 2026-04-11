@@ -1207,4 +1207,207 @@ This is what Backus and Naur gave the world. Not a language — ALGOL 60 never b
 
 ---
 
+## Study Guide — BNF, CFGs, and the Chomsky Hierarchy
+
+This file covers the formal-language-theory end of the ALGOL story.
+It sits at the boundary between mathematics (automata, formal
+grammars, decidability) and engineering (real parsers that ship in
+real compilers). Reading it is the fastest way to develop the habit
+of seeing a programming language as a formal object, not a set of
+memorized patterns.
+
+### Prerequisites
+
+- One year of programming in any language.
+- Comfort with a little mathematical notation (sets, functions,
+  inductively-defined structures). You do not need a discrete math
+  course; you need to not flinch at `⟨expr⟩ ::= ⟨expr⟩ + ⟨term⟩`.
+
+### Recommended reading order
+
+The file is organized pedagogically already — read it top to bottom.
+Take notes. The exercise that makes it stick is: after every major
+grammar example (arithmetic expressions, statements, blocks), write
+your own similar grammar for a domain you care about (configuration
+files, CSV, S-expressions, URLs).
+
+### Key concepts
+
+1. **Terminal vs nonterminal.** Terminals are the characters the
+   parser actually sees; nonterminals are intermediate structures
+   that stand for sets of strings. BNF's convention is `⟨angle⟩` for
+   nonterminals.
+2. **Production rules.** `A ::= α | β | γ` means "an A is any of α,
+   β, or γ." Recursive productions (`list ::= item | item list`)
+   are how you get unbounded structures.
+3. **The Chomsky hierarchy.** Regular → Context-Free →
+   Context-Sensitive → Unrestricted. Each level adds expressive
+   power and loses decidability properties. Regular languages can
+   be matched with finite automata and lose closure under one of
+   the operations the next level supports.
+4. **Ambiguity.** A grammar is ambiguous if some string has more
+   than one parse tree. The classic example is the dangling `else`.
+   Ambiguity is a property of the *grammar*, not the language —
+   some languages are inherently ambiguous, but most useful ones
+   have unambiguous grammars if you are careful.
+5. **LL vs LR.** These are parser-generator classes. LL parses
+   top-down with lookahead k (LL(k)); LR parses bottom-up with
+   lookahead k (LR(k)). Most real compilers use LALR(1) or GLR or,
+   more recently, hand-written recursive descent with Pratt parsing
+   for expressions.
+
+### 1-week plan
+
+- Day 1: Read the file up through "The Chomsky Hierarchy". Write a
+  BNF grammar for decimal numbers (with optional sign, optional
+  fraction, optional exponent). Hand-trace a parse.
+- Day 2: Finish the file. Install ANTLR4 or nearcore's `lalrpop`.
+  Translate your decimal-number grammar to the tool's input syntax.
+- Day 3: Write a grammar for a small calculator: `expr` with `+`,
+  `-`, `*`, `/`, parentheses, and numbers. Make sure `*` binds
+  tighter than `+`. Generate a parser, test it on a dozen
+  expressions.
+- Day 4: Write a grammar for a subset of JSON — objects, arrays,
+  strings, numbers, booleans, null. Test on real JSON samples.
+- Day 5: Read the first two chapters of the Dragon Book (Aho, Sethi,
+  Ullman, *Compilers: Principles, Techniques, and Tools*) for the
+  formal treatment.
+- Day 6: Hand-write a recursive-descent parser for your calculator,
+  without a generator tool. Compare the hand-written version to the
+  generated one: line count, error messages, debugging experience.
+- Day 7: Write a grammar for something in your life: a config file
+  format you use, a domain-specific syntax, a custom command-line
+  language for a side project. Parse it with a tool.
+
+---
+
+## Programming Examples
+
+### Example 1 — Arithmetic expression grammar (LL(1))
+
+```bnf
+⟨expr⟩   ::= ⟨term⟩ ⟨expr'⟩
+⟨expr'⟩  ::= '+' ⟨term⟩ ⟨expr'⟩ | '-' ⟨term⟩ ⟨expr'⟩ | ε
+⟨term⟩   ::= ⟨factor⟩ ⟨term'⟩
+⟨term'⟩  ::= '*' ⟨factor⟩ ⟨term'⟩ | '/' ⟨factor⟩ ⟨term'⟩ | ε
+⟨factor⟩ ::= '(' ⟨expr⟩ ')' | ⟨number⟩
+⟨number⟩ ::= ⟨digit⟩+
+⟨digit⟩  ::= '0'|'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9'
+```
+
+This is the canonical left-factored LL(1) grammar for a calculator.
+The `ε` (epsilon) productions terminate the recursive expansion. The
+`⟨expr'⟩` and `⟨term'⟩` nonterminals exist to eliminate left
+recursion, which LL parsers cannot handle.
+
+### Example 2 — A hand-written recursive-descent parser (Python)
+
+```python
+class Parser:
+    def __init__(self, tokens):
+        self.tokens = list(tokens)
+        self.pos = 0
+
+    def peek(self):
+        return self.tokens[self.pos] if self.pos < len(self.tokens) else None
+
+    def consume(self, expected=None):
+        tok = self.peek()
+        if expected is not None and tok != expected:
+            raise SyntaxError(f"expected {expected}, got {tok}")
+        self.pos += 1
+        return tok
+
+    def parse_expr(self):
+        left = self.parse_term()
+        while self.peek() in ('+', '-'):
+            op = self.consume()
+            right = self.parse_term()
+            left = (op, left, right)
+        return left
+
+    def parse_term(self):
+        left = self.parse_factor()
+        while self.peek() in ('*', '/'):
+            op = self.consume()
+            right = self.parse_factor()
+            left = (op, left, right)
+        return left
+
+    def parse_factor(self):
+        tok = self.peek()
+        if tok == '(':
+            self.consume('(')
+            e = self.parse_expr()
+            self.consume(')')
+            return e
+        return int(self.consume())
+
+# Usage:
+#   tokens = ['(', '3', '+', '4', ')', '*', '5']
+#   Parser(tokens).parse_expr()
+#   -> ('*', ('+', 3, 4), 5)
+```
+
+### Example 3 — The dangling-else ambiguity
+
+```bnf
+⟨stmt⟩ ::= 'if' ⟨cond⟩ 'then' ⟨stmt⟩
+         | 'if' ⟨cond⟩ 'then' ⟨stmt⟩ 'else' ⟨stmt⟩
+         | ⟨simple⟩
+```
+
+The string `if a then if b then x else y` has two parse trees. The
+fix — adopted by ALGOL 60 and every descendant — is the "rightmost
+`else` binds to the nearest unmatched `then`." That is a
+disambiguation rule; the grammar itself remains ambiguous. Real
+parsers use the rule at parse time.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Write a grammar for a real config format
+
+Pick a format you use every day: TOML, INI, YAML subset, or a custom
+format from your own project. Write a BNF grammar for it. Test with
+ANTLR or `lark-parser`. Count how many rules you need. This is the
+exercise that shows you *why* formats that seem simple (YAML) have
+grammars that are nightmarish in practice.
+
+### DIY 2 — Implement a mini Chomsky-hierarchy zoo
+
+Write small example languages at each level of the hierarchy: a
+regular language (`a*b*`), a context-free language (`aⁿbⁿ`), a
+context-sensitive language (`aⁿbⁿcⁿ`). Try to parse each with a
+regex, a CFG parser, and a hand-written matcher. Observe which
+levels each tool can handle.
+
+### DIY 3 — Port a grammar between tools
+
+Take a public grammar (SQL, JSON, a programming language from the
+`antlr/grammars-v4` GitHub repo) and port it between two parser
+generators — ANTLR to yacc, or lalrpop to tree-sitter. What breaks
+tells you about the expressiveness differences.
+
+### TRY — Parse your own history
+
+Write a grammar for the git log format your repo uses, and write a
+parser that extracts structured commit data. Use it to generate a
+changelog. This is the exercise that turns a theoretical skill
+(parsing) into a practical tool (report generation).
+
+---
+
+## Related College Departments (BNF / CFGs)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  parsing and compiler front-ends sit under the Programming
+  Fundamentals wing.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — the Chomsky hierarchy is formal-language theory, a branch of
+  discrete mathematics.
+
+---
+
 *End of document.*

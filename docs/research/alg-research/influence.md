@@ -1124,3 +1124,154 @@ And he would point out, again, that software is still getting slower more rapidl
 The Algol tradition is not a historical artifact. It is a living argument about what programming should be. Every time a programmer chooses a language, writes a module, refactors a function, reviews a pull request, or decides to delete rather than add, they are participating in that argument. Wirth made the case for clarity. Ritchie made the case for pragmatism. Dahl and Nygaard made the case for abstraction. The argument is not over, and it is not going to be over, because the underlying tension — between expressive power and safe readability, between machine proximity and human comprehension, between feature richness and conceptual economy — is permanent.
 
 ALGOL 60 started the conversation. The conversation is still going on.
+
+---
+
+## Study Guide — ALGOL's Influence
+
+### Why read this
+
+This file traces ALGOL's design decisions into every language that
+came after. If you want to understand why Pascal has declarations
+before statements, why C uses curly braces instead of `begin/end`,
+why Ada has named parameter modes, or why Rust has scoped lifetimes,
+the answers all start in the ALGOL committee meetings of 1958-1960.
+
+### Recommended reading order
+
+Read it as a family tree. The file is organized by descendant
+language (Simula, Pascal, C, Ada, Modula-2, Oberon, Python, Rust,
+and so on). Read each subsection twice: once for the features, once
+for the reasoning behind them.
+
+### Key questions
+
+- Which ALGOL features survived into C, and which were rejected?
+- What did Simula 67 add that made class-based OO possible, and why
+  was that *not* in ALGOL 60?
+- Why did Pascal fork from ALGOL — what did Wirth disagree with?
+- What did Ada preserve from ALGOL that C discarded?
+- Why is Rust's ownership model compatible with ALGOL's block
+  structure?
+
+### 1-week plan
+
+- Days 1-2: Read the file in two sittings.
+- Day 3: Build a feature-comparison spreadsheet. Rows: ALGOL 60,
+  Simula, Pascal, C, Ada, Modula-2, Oberon. Columns: block
+  structure, call-by-name, nested procedures, records, pointers,
+  tasking, generics, OO, type inference, garbage collection.
+- Day 4: Pick three cells from your spreadsheet where the answer
+  surprised you. Research why.
+- Day 5: Write a 1-page essay titled "The three things C inherited
+  from ALGOL and the two things it deliberately broke."
+- Day 6: Do the same for Rust and ALGOL.
+- Day 7: Share one of those essays somewhere.
+
+---
+
+## Worked Examples
+
+### Example 1 — ALGOL block structure in five languages
+
+The same snippet (a block with nested declarations and a local loop)
+in five languages:
+
+```algol
+begin
+  integer i;
+  i := 0;
+  for i := 1 step 1 until 10 do
+    outinteger(1, i)
+end
+```
+
+```pascal
+begin
+  var i: integer := 0;
+  for i := 1 to 10 do
+    writeln(i);
+end.
+```
+
+```c
+{
+  int i = 0;
+  for (i = 1; i <= 10; i++) printf("%d\n", i);
+}
+```
+
+```ada
+declare
+   I : Integer := 0;
+begin
+   for I in 1 .. 10 loop
+      Ada.Text_IO.Put_Line (Integer'Image (I));
+   end loop;
+end;
+```
+
+```rust
+{
+  let mut i = 0;
+  for i in 1..=10 { println!("{}", i); }
+}
+```
+
+The block structure, scope rules, and local declarations all trace
+back to ALGOL. The brace syntax in C and Rust is a cosmetic change;
+the semantics are the same ALGOL 60 block.
+
+### Example 2 — Trace one feature
+
+Call-by-name, the infamous "Jensen's device" of ALGOL, was
+simplified to call-by-reference in C (via `&`), call-by-value in
+Java, and call-by-move-semantics in Rust. Write the same small
+function (compute the sum of `a[i]` for `i` from `l` to `h` where
+`i` is passed as a parameter) in three languages and observe how
+each handles the aliasing question differently.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Feature archaeology
+
+Pick a modern language feature you use every day (lambdas, closures,
+generics, iterators, exceptions, pattern matching). Trace it back
+as far as you can. If the trail ends in ALGOL, note which dialect.
+If it ends earlier, you will have learned something new.
+
+### DIY 2 — Wirth's weight diet
+
+Re-read Wirth's 1995 essay *A Plea for Lean Software*. Then run
+`wc -l` on a codebase you work on. Compute lines per feature. Then
+pick three files and try to cut each by 20% without removing any
+behavior. This is the Wirthian exercise that separates lean software
+from accumulated accretions.
+
+### DIY 3 — Simula revisited
+
+Install the `cim` Simula 67 compiler (it still runs on Linux). Write
+a 100-line Simula program using the `CLASS` construct. Observe that
+you have just used the same mechanism Bjarne Stroustrup took into
+C++ and Alan Kay was independently inspired by for Smalltalk.
+
+### TRY — Rewrite an ALGOL descendant in a different descendant
+
+Take a 200-line Pascal program and rewrite it in Ada, then in
+Modula-2, then in Oberon. Count the lines each time. Which version
+is shortest, which is clearest, and which would you maintain in
+2026?
+
+---
+
+## Related College Departments (ALGOL influence)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  programming-language lineage is core to Programming Fundamentals.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  tracing features through time is a historical discipline.
+- [**philosophy**](../../../.college/departments/philosophy/DEPARTMENT.md)
+  — Wirth's "simplicity as a design principle" is a philosophical
+  claim, not a technical one.
