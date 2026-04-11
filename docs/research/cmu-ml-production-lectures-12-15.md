@@ -447,3 +447,59 @@ List all MCP servers currently installed in the Claude Code configuration for th
 - Has the server code been reviewed, or was it installed from an external source without review?
 - What would a malicious version of this server be able to do?
 Produce a risk ranking. Flag any that provide internet access, file system write access, or shell execution. Recommend either removal, scoping reduction, or sandboxing for the highest-risk entries.
+
+---
+
+## Addendum: The 2025 validation of these lectures
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The CMU ML in Production lectures 12–15 the body
+analyzes are an unusually durable reference — the concepts
+(symbolic guards, MCP audit, prompt-injection defense, production
+evaluation discipline) have all been independently validated by
+2025 industry and academic signals that this research catalog has
+captured in other buckets.
+
+Short cross-reference list:
+
+- **OWASP LLM01:2025** frames prompt injection as a fundamental
+  architectural vulnerability, validating the lectures' argument
+  for symbolic tool validation at the implementation layer rather
+  than at the prompt layer. See the `agentic-security-synthesis`
+  standalone.
+- **EchoLeak CVE-2025-32711** (June 2025, CVSS 9.3) is the
+  production proof-by-incident that the lectures' MCP audit
+  recommendation is load-bearing for any enterprise agentic
+  deployment. See `agentic-security-synthesis`.
+- **Model Context Protocol** has matured into a real ecosystem
+  (OpenAI, Microsoft, 5,500+ MCP servers by Oct 2025), and the
+  lectures' MCP audit session is now a practical workflow rather
+  than a thought experiment. See the `soa-research` bucket for
+  the MCP treatment.
+- **LLMRCA paper (ACM TOSEM 2025)** formalizes multilevel root
+  cause analysis for LLM applications with multimodal
+  observability data, consistent with the lectures' production
+  evaluation framing. See `rca-deep`.
+- **Flow-of-Action (ACM Web Conference 2025)** validates
+  SOP-constrained multi-agent reasoning over freeform agent
+  exploration — consistent with the lectures' argument that
+  structure beats improvisation in production systems. See
+  `rca-deep`.
+
+The 2025 industry convergence on these framings is the strongest
+possible external validation for the lecture series as a teaching
+reference.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — Production ML, symbolic tool validation, and MCP audit are all applied programming topics in the Computing & Society wing.
+- [**data-science**](../../../.college/departments/data-science/DEPARTMENT.md) — ML in Production is squarely data-science-department territory.
+- [**learning**](../../../.college/departments/learning/DEPARTMENT.md) — CMU's pedagogy for ML-in-production is a learning-department case study in how applied graduate-level material is taught.
+- [**critical-thinking**](../../../.college/departments/critical-thinking/DEPARTMENT.md) — Threat modelling, production-evaluation discipline, and the reasoning about what can go wrong are critical-thinking topics.
+
+---
+
+*Addendum (2025 industry / academic validation of lecture concepts, college cross-link) added during the Session 018 catalog enrichment pass.*
