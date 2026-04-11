@@ -1994,4 +1994,157 @@ Nothing in this document requires access to non-public information. All of this 
 
 ---
 
+## Appendix G: 2025–2026 enrichment — SWI-Prolog 9.3, sCASP, and the neurosymbolic boom
+
+This appendix was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body above identifies 2026 as the year of a "quiet
+renaissance." The 2025 data is consistent with that framing and adds
+concrete detail worth recording.
+
+### SWI-Prolog 9.3.x
+
+**SWI-Prolog** — the most widely-used open-source Prolog implementation
+and the de facto reference for anyone entering the field — is in the
+**9.3.x development series**, which began in March 2024 and continued
+through 2025 with releases up through at least **9.3.30 in September
+2025**. By 2025, SWI-Prolog had surpassed **one million downloads**.
+For a programming language that most of the industry considers
+obscure, one million downloads is a signal that the user base is
+both real and growing.
+
+The 9.3 series' technical content is characteristically modest:
+improvements to the pack manager (Prolog's module distribution system)
+to handle dependency resolution more cleanly, refinements to JSON
+processing for web-API integration, and incremental performance work
+on the compiler. None of these are headline features, but together
+they continue the steady modernization of SWI-Prolog's interface to
+the rest of the software ecosystem.
+
+**Sources:** [SWI-Prolog downloads — swi-prolog.org](https://www.swi-prolog.org/Download.html) · [SWI-Prolog — Wikipedia](https://en.wikipedia.org/wiki/SWI-Prolog) · [SWISH — SWI-Prolog for SHaring](https://swish.swi-prolog.org/) · [SWI-Prolog on GitHub](https://github.com/SWI-Prolog)
+
+### sCASP — constraint-based ASP in the Prolog ecosystem
+
+A particularly interesting 2024–2025 development is **sCASP**, a
+top-down interpreter for **Answer Set Programming (ASP) with
+Constraints**, now hosted in the SWI-Prolog organization on GitHub.
+sCASP is a goal-directed ASP solver that reads ASP programs and
+executes them with the same lazy evaluation semantics that make
+Prolog responsive for interactive use. The combination of ASP's
+stable-model semantics with Prolog's top-down execution model is
+the kind of synthesis that was theoretical in the 2000s and has
+become a working tool in the 2020s.
+
+The practical consequence is that a developer who already knows
+Prolog can now use sCASP to get the more expressive semantics of
+ASP without switching to a different system (DLV, clingo, Potassco)
+and without adopting a batch-oriented development style. ASP can
+now be used inside a Prolog REPL, with the usual Prolog edit-load-query
+cycle, for the kinds of non-monotonic-reasoning problems ASP was
+designed for.
+
+**Source:** [SWI-Prolog/sCASP — Top-down interpreter for ASP programs with Constraints — GitHub](https://github.com/SWI-Prolog/sCASP)
+
+### Neurosymbolic AI — logic programming's 2025 moment
+
+The main body already covers the neurosymbolic thread at length. What
+2025 adds is a new generation of formal surveys (notably the "Survey
+of Neurosymbolic Answer Set Programming" in the Neurosymbolic AI
+Journal, late 2024 / early 2025) that consolidate the scattered
+2018–2024 work into a coherent research program. The takeaways from
+the 2025 survey literature:
+
+1. **ASP is the dominant symbolic half.** Answer Set Programming has
+   emerged as the preferred symbolic language for neurosymbolic
+   systems because (a) it is declarative enough to encode the
+   symbolic constraints without the developer writing procedural
+   code, (b) modern ASP solvers (clingo, DLV) are efficient enough
+   to handle realistic problem sizes, and (c) its stable-model
+   semantics provide a clean way to specify the "this is what
+   counts as a valid interpretation" side of a hybrid system.
+2. **The integration patterns have converged.** The 2018–2023
+   period saw a wide variety of neurosymbolic integration
+   architectures. By 2025 the published work has converged on a
+   small number of patterns: neural probabilistic logic programming
+   (DeepProbLog-style), neural theorem proving, and neural-guided
+   ASP search. The architectural space has been narrowed; the
+   research is now about quality rather than novelty.
+3. **Prolog and Datalog remain the development languages.** Even
+   when the production system uses ASP as the runtime, the symbolic
+   content is often prototyped in Prolog or Datalog because of the
+   faster edit-test cycle. This is the kind of tooling detail that
+   rarely shows up in papers but that determines which ecosystems
+   researchers actually adopt.
+4. **The SWI-Prolog discourse.** The SWI-Prolog community has
+   hosted substantive neurosymbolic discussions since 2023, and
+   the 2024–2025 threads on swi-prolog.discourse.group show a
+   steady increase in both the depth of technical content and the
+   number of participants joining from AI/ML rather than from
+   classical logic-programming backgrounds.
+
+**Sources:** [Neurosymbolic AI — SWI-Prolog Discourse](https://swi-prolog.discourse.group/t/neurosymbolic-ai/3600) · [A Survey of Neurosymbolic Answer Set Programming — Neurosymbolic AI Journal](https://neurosymbolic-ai-journal.com/system/files/nai-paper-877.pdf)
+
+### Datalog — still distinct, still useful
+
+The long-running "is Datalog just a restricted Prolog" question got
+its usual answer in the 2024 SWI-Prolog discourse: Datalog is Prolog
+without function symbols, with guaranteed termination for the subset
+it supports, and that restriction is a feature rather than a
+limitation for the applications Datalog is used in (program
+analysis, ontology reasoning, graph databases, policy engines). The
+SWI-Prolog tabling work continues to target a "well-founded
+semantics for negation" that is a superset of Datalog in expressive
+power, giving Prolog users access to Datalog's guarantees without
+switching systems.
+
+**Sources:** [Prolog and Datalog — SWI-Prolog Discourse](https://swi-prolog.discourse.group/t/prolog-and-datalog/1147) · [What's the difference between Prolog and Datalog? — SWI-Prolog Help](https://swi-prolog.discourse.group/t/whats-the-difference-between-prolog-and-datalog/3604)
+
+### What this means for Appendix E's timeline
+
+The timeline in Appendix E above lists 2025 as "RelationalAI,
+Materialize, and other modern Datalog platforms mature" and 2026 as
+"Quiet renaissance in full swing." The enrichment evidence supports
+both entries and adds specifics:
+
+- **2024–2025** — SWI-Prolog surpasses one million downloads. The
+  9.3.x series ships. sCASP lands in the SWI-Prolog org as a
+  top-down ASP interpreter.
+- **Late 2024 / early 2025** — The Neurosymbolic AI Journal's
+  survey of Neurosymbolic ASP consolidates the research program.
+- **2025–2026** — The integration patterns converge on a small
+  set of architectures; Prolog/Datalog stay as the development
+  languages even when ASP is the runtime; the SWI-Prolog
+  community absorbs a new generation of participants from the
+  AI/ML side.
+
+The "quiet" adjective remains accurate. None of this makes
+mainstream programming-language news. It does not need to.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Prolog and logic programming are programming-language topics with
+  an unusual relationship to Computational Thinking: they invert
+  the usual "how do I compute this" question into "what are the
+  facts and rules" question.
+- [**logic**](../../../.college/departments/logic/DEPARTMENT.md) —
+  Logic programming is the most direct programming-language
+  expression of formal logic. First-order predicate logic, Horn
+  clauses, resolution, unification — these are logic-department
+  topics with working programming-language implementations.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — The mathematical foundations of logic programming (model theory,
+  fixed-point semantics, stable models, well-founded semantics) are
+  one of the cleanest applications of pure mathematics to programming.
+- [**philosophy**](../../../.college/departments/philosophy/DEPARTMENT.md)
+  — The programs-as-proofs correspondence and the declarative-vs-procedural
+  distinction are philosophical topics that have working programming-language
+  counterparts in Prolog.
+
+---
+
 *End of document. Thread focus: applications and modern forms of logic programming. Sibling threads cover history, language semantics, and implementations.*
+
+*Appendix G (2025–2026 enrichment) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
