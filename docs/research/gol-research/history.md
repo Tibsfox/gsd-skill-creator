@@ -877,6 +877,131 @@ and therefore conservative.
 
 ---
 
+## Addendum: Go 1.24 and 1.25 (2025)
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body above treated the post-generics release train as
+in-progress. Two substantial releases shipped in 2025 and are worth
+recording.
+
+### Go 1.24 (February 2025)
+
+Go 1.24 was the February 2025 release. Three items from the release
+notes are worth calling out because they matter for performance-sensitive
+Go code:
+
+- **Swiss Tables for `map`.** Go 1.24 replaces the built-in `map`
+  implementation with a new one based on Google's Swiss Tables design
+  — the same hash-table layout that has been used inside Abseil
+  (Google's C++ standard-library replacement) and that Rust's
+  `hashbrown` crate popularized in the Rust ecosystem. The practical
+  numbers published in the release notes: roughly **30% faster access
+  and assignment on large maps, 35% faster assignment on pre-sized
+  maps, and 10–60% faster iteration** depending on map size and content
+  shape. Existing code that uses `map` gets these speedups with no
+  changes.
+- **Fully generic type aliases.** Go 1.24 lifts a restriction from Go
+  1.22–1.23: type aliases can now be parameterized by type parameters,
+  the way defined types are. `type Set[T comparable] = map[T]struct{}`
+  compiles and works. Before 1.24 you had to define a new type rather
+  than an alias, which interacted awkwardly with generic API design.
+- **Weak pointers** (`weak.Pointer[T]`) and **improved finalizers**.
+  The new weak-pointer API provides a non-owning reference that the
+  garbage collector can observe but that does not keep its target
+  alive. This is the first time Go has had a standard-library-level
+  primitive for weak references, and it unlocks cache and
+  canonicalization patterns that were previously either impossible or
+  hacky.
+- **Range-over-func stabilized, range-over-int in templates.** The
+  range-over-function iterator protocol, introduced experimentally in
+  Go 1.23, was extended and templates (`text/template` and
+  `html/template`) gained support for ranging over integer counts.
+- **Improved WebAssembly support.** Go 1.24 tightens the WASM
+  toolchain, including better interop with wasm-compatible runtime
+  hosts and build-size improvements.
+
+**Sources:** [Go 1.24 Release Notes — tip.golang.org](https://tip.golang.org/doc/go1.24) · [Go 1.24 is released! — The Go Blog, February 2025](https://go.dev/blog/go1.24) · [Go 1.24 arrives with generic type aliases, boosted WebAssembly support — InfoWorld](https://www.infoworld.com/article/3627904/go-1-24-brings-full-support-for-generic-type-aliases.html) · [Go 1.24 Brings Generic Type Aliases, Weak Pointers, Improved Finalizers, and More — InfoQ](https://www.infoq.com/news/2025/02/go-1-24-generic-aliases/)
+
+### Go 1.25 (August 2025)
+
+Go 1.25 shipped on **August 12, 2025** — the regular six-month cadence
+was held for the tenth consecutive release. The headline item is a
+structural one that will matter for anyone who teaches or tools against
+the generic type system:
+
+- **Core Types concept removed.** Go 1.25 eliminates the "core types"
+  concept that was introduced in Go 1.18 as part of the generics
+  design. Core types were a simplification device in the spec — a way
+  to define what a generic operator does on an interface-constrained
+  type — that turned out in practice to be the source of enough
+  surprising behavior that the language designers decided to remove
+  it and restate the rules in terms of type sets directly. This is the
+  largest specification change to the generic system since generics
+  shipped in Go 1.18.
+- **Further performance work.** Go 1.25 continues the
+  per-release-throughput-improvement pattern, with specific
+  improvements to the garbage collector's scan rate and to several
+  commonly-hot paths in the runtime.
+- **Standard library refinements.** The `log/slog`, `net/http`, and
+  `context` packages all saw incremental improvements focused on
+  usability gaps that had accumulated since generics landed.
+
+Go 1.26 is the next scheduled release (early 2026 window, with
+bootstrapping requiring Go 1.24 or later). At the time of this
+enrichment pass (April 2026) Go 1.26 is in flight and has not yet
+shipped a final.
+
+**Sources:** [Go 1.25 Highlights: How Generics and Performance Define the Future of Go — DEV Community / Leapcell](https://dev.to/leapcell/go-125-highlights-how-generics-and-performance-define-the-future-of-go-4pdh) · [The Go 1.25 Upgrade: Generics, Speed, and What You Need to Know — Leapcell](https://leapcell.io/blog/go-1-25-upgrade-guide)
+
+### What this means for the story
+
+The main narrative of this document is that Go chose simplicity, added
+generics reluctantly after twelve years, and shipped generics in a
+form that was deliberately limited so it would not become what C++
+templates had become. The 2024–2025 release train is the third act of
+that story: generics have been out for three years, the ecosystem has
+internalized them, and the language design team has started to refine
+the pieces that turned out to be rough in practice. Generic type
+aliases (1.24) and the core-types removal (1.25) are both
+generics-polish items. The Swiss Tables and weak-pointer work are
+generic-agnostic performance items.
+
+None of the 2025 changes alter the character of Go. It is still the
+language that chose simplicity, still the language whose standard
+library is its biggest selling point, still the language that
+software engineers choose when they want boring and reliable. What has
+changed is that it is now a decisively post-generics language — a
+language whose generic features have been lived-with, had their rough
+edges sanded, and can be taught to a newcomer without footnotes about
+"don't worry about core types, the spec is weirder than it needs to
+be." In 2025 the footnote went away.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — Go
+  is a programming-language topic, squarely in Programming Fundamentals.
+  Its concurrency model (goroutines + channels) is one of the cleanest
+  worked examples for teaching CSP.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — Go is the working language of infrastructure engineering (Docker,
+  Kubernetes, Terraform, Prometheus, etcd, CockroachDB are all Go). For
+  anyone building or operating modern cloud software, Go's presence is
+  inescapable.
+- [**cloud-systems**](../../../.college/departments/cloud-systems/DEPARTMENT.md)
+  — Closely related to engineering: Go is the lingua franca of the
+  cloud-native software stack.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  Go is the twenty-first century's first widely-adopted systems
+  language, and the design-process history (Pike, Thompson, Griesemer,
+  the deliberate-slowness of its feature evolution) is one of the
+  clearest case studies in language-design restraint.
+
+---
+
 *Research compiled for the PNW Research Series, Programming Languages cluster.*
 *Part of the 285-project corpus at tibsfox.com.*
 *Project code: GOL*
+*Addendum (Go 1.24 and 1.25) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
