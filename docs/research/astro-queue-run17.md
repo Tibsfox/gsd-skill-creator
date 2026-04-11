@@ -62,3 +62,84 @@
 3. Update NASA catalog CSV with new entries
 4. Cross-reference with existing pages in `www/tibsfox/com/Research/NASA/`
 5. Commit as batch: `docs(nasa): 22 astrophysics papers from discovery run #17`
+
+---
+
+## Addendum: Notes on flagship items (added April 2026)
+
+This addendum was added as part of the Session 018 catalog enrichment
+pass. The queue document above is a processing intake list rather than
+a deep research document, so this enrichment is intentionally brief —
+it flags the 2025 status of the two most-cited entries and notes the
+cross-links to the college department structure.
+
+### Item #3 — K2-18b DMS reassessment (priority note)
+
+The April 2025 Madhusudhan et al. paper (the one this queue entry was
+recording) claimed a ~3σ detection of **dimethyl sulfide (DMS) and
+dimethyl disulfide (DMDS)** in K2-18 b's JWST MIRI 5–12 µm spectrum.
+By the time this queue would be processed into a catalog entry, the
+**community reanalysis** has shifted the picture substantially:
+
+- **Welbanks et al. (2025)** and **Taylor (2025)** reanalyzed the
+  same data and found the DMS/DMDS signal is **not robust across
+  different data reductions or molecule-inclusion choices in the
+  baseline model**.
+- A **comprehensive reanalysis** of K2-18 b's full JWST
+  NIRISS+NIRSpec+MIRI spectrum (Schmidt et al. 2025) reports a
+  tentative DMS signal at **~2.7σ**, which is **below** the 3σ
+  threshold that would ordinarily be taken as a credible detection
+  and nowhere near the 5σ threshold the astrobiology community has
+  set for biosignature claims.
+- The updated consensus portrait is that K2-18 b has a
+  water-rich atmosphere (possibly up to ~50% H₂O by mass) with
+  methane and carbon dioxide, but **DMS/DMDS are not detected
+  robustly** and the earlier claims **do not meet the community's
+  standards of evidence for life**.
+
+For the NASA catalog, this means item #3 should be written up as a
+**biosignature debate** rather than a **biosignature detection**.
+The catalog framing matters: "JWST reveals K2-18 b water-rich
+atmosphere; DMS biosignature claims under active community
+reanalysis" is the honest 2025 state.
+
+**Sources:** [Insufficient evidence for DMS and DMDS in the atmosphere of K2-18 b — A&A, August 2025 (arXiv 2505.13407)](https://arxiv.org/html/2505.13407) · [New Constraints on DMS and DMDS in the Atmosphere of K2-18 b from JWST MIRI — arXiv 2504.12267](https://arxiv.org/abs/2504.12267) · [A Comprehensive Reanalysis of K2-18 b's JWST NIRISS+NIRSpec Transmission Spectrum — arXiv 2501.18477](https://arxiv.org/html/2501.18477v2) · [Biosignatures or noise? New analysis of K2-18b data casts doubt — NPR, April 25, 2025](https://www.npr.org/2025/04/25/g-s1-62610/biosignatures-k2-18b-james-webb-exoplanet-doubt) · [K2-18b Does Not Meet The Standards Of Evidence For Life — Astrobiology.com, August 2025](https://astrobiology.com/2025/08/k2-18b-does-not-meet-the-standards-of-evidence-for-life.html) · [K2-18b — Wikipedia](https://en.wikipedia.org/wiki/K2-18b)
+
+### Items #6, #12, #14, #17 — still-active priority threads
+
+The processing notes above flag biosignature papers (#6), JWST
+programs (#12 Abell 2744, #14 water in terrestrial-zone disks, #17
+high-z galaxy morphology) as aligning with active research threads.
+As of April 2026 all four threads remain active with ongoing
+publication streams, and the priority framing is still correct.
+The K2-18 b reassessment (item #3 above) is a case study for how
+the **biosignature false positive catalog (item #6)** should be
+framed in the NASA mission pages — it is the most recent concrete
+example of why false-positive work matters.
+
+## Related College Departments
+
+This research queue cross-links to the following college departments
+in `.college/departments/`:
+
+- [**astronomy**](../../../.college/departments/astronomy/DEPARTMENT.md)
+  — The queue is a direct astronomy-department intake list:
+  exoplanets, stellar astrophysics, high-energy astrophysics,
+  cosmology, gravitational waves.
+- [**physics**](../../../.college/departments/physics/DEPARTMENT.md)
+  — Gravitational lensing (Abell 2744), MHD (ISM turbulence),
+  general relativity (pulsar timing arrays), and high-energy
+  particle physics (GRB 221009A BOAT afterglow) are all
+  physics-department-relevant threads.
+- [**chemistry**](../../../.college/departments/chemistry/DEPARTMENT.md)
+  — Atmospheric chemistry (K2-18b, hot Jupiter escape, biosignature
+  false positives) sits between astronomy and chemistry and is a
+  good cross-department teaching target.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — N-body stability maps (#8), power spectra (#19, #22), and
+  gravitational-wave statistical detection (#18) are all
+  mathematics-department methods applied to astrophysical data.
+
+---
+
+*Addendum (K2-18b 2025 reassessment, priority notes, college cross-link) added during the Session 018 catalog enrichment pass.*
