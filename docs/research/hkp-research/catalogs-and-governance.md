@@ -64,3 +64,122 @@ Rigid governance kills experimentation: if every new dataset needs six weeks of 
 ## 14. The Accountable Layer
 
 The common thread across every tool in this document is accountability. A data catalog makes the existence of a dataset accountable — there is an entry, with an owner, a description, and a steward. A lineage graph makes its derivation accountable — there is a chain of transformations from source to consumer, inspectable and re-executable. A provenance record makes its history accountable — there is a PROV-style story of who did what, when, and with which tools. A quality test makes its correctness accountable — there is a passing or failing assertion, logged on every run. A contract makes its interface accountable — there is a versioned agreement between producer and consumer, enforced in CI. A governance framework makes the whole system accountable to law, policy, and reason. None of these pieces is new. The data dictionaries of the 1970s attempted the same job with punched-card tools and human discipline, and failed at the human-discipline step. What changed is that the metadata is now extracted automatically, the tests run automatically, the lineage updates automatically, and the people involved get to focus on the interesting parts of the negotiation. The bits still need to be stored somewhere, still need to be retrieved quickly, still need to be compressed and backed up and encrypted. But above all the bits sits this thin, stubborn, absolutely load-bearing layer whose only job is to ensure that when someone asks *where is the data, where did it come from, and can we trust it?* — the answer exists.
+
+## 15. Addendum: The 2025 Iceberg-REST catalog convergence
+
+This section was added in April 2026 as part of a catalog-wide enrichment
+pass. The body above closes with section 14's framing that the
+"accountable layer" is the common thread, and the 2024–2025 data is that
+the catalog layer specifically has converged on a shared open protocol
+in a way it had not at the time of the body's writing.
+
+### The Iceberg REST dialect as the new lingua franca
+
+The quiet but consequential 2024–2025 development is that the
+**Apache Iceberg REST catalog API** has emerged as the **shared
+protocol** that every modern catalog implementation speaks. A decade
+ago, each catalog was a closed system (AWS Glue, Databricks Hive
+metastore, Snowflake's internal metadata, Atlas, etc.); in 2025, the
+newer generation of catalogs — **Project Nessie**, **Apache Polaris**
+(originally Snowflake's internal catalog, open-sourced in 2024),
+**Gravitino**, **Lakekeeper**, and **Unity Catalog** (Databricks,
+open-sourced in 2024) — all speak the Iceberg REST dialect, which
+means they can be targeted by any engine that speaks Iceberg
+(Spark, Trino, Presto, DuckDB, Polars, Daft, Athena, BigQuery,
+Snowflake).
+
+The practical effect is that the catalog layer is interchangeable in
+a way it was not a few years ago. A data platform can start on Unity
+Catalog, migrate to Polaris, and not have to rewrite every query
+against the metadata — because at the query engine's level, the
+catalog is an Iceberg REST endpoint regardless of what sits behind
+it. This is a genuine open-standards win and it matches the pattern
+that object storage went through when S3-compatible APIs became
+standard in the 2010s.
+
+**Sources:** [Iceberg Catalogs 2025: Exploring Emerging Metadata Solutions — e6data blog](https://www.e6data.com/blog/iceberg-catalogs-2025-emerging-catalogs-modern-metadata-management) · [Completing the Lakehouse Vision: Open Storage, Open Access, Unified Governance — Databricks Blog](https://www.databricks.com/blog/completing-lakehouse-vision-open-storage-open-access-unified-governance) · [The Open Lakehouse Stack: DuckDB and the Rise of Table Formats — MotherDuck Blog](https://motherduck.com/blog/open-lakehouse-stack-duckdb-table-formats/) · [Unity Catalog & Open Table Formats: A Guide — Celerdata](https://celerdata.com/glossary/unity-catalog)
+
+### Unity Catalog and the Iceberg-Delta convergence
+
+A second 2025 development that the body does not cover: **Unity
+Catalog** is now explicitly dual-format, managing both **Delta Lake**
+and **Apache Iceberg** tables as first-class citizens, and **Apache
+Parquet** in both table formats is the common physical storage
+layer. The long-running "Delta vs. Iceberg" battle that shaped
+data-platform arguments from 2019 through 2023 is no longer a battle
+that matters at the catalog layer — Unity Catalog treats both as
+equivalent, and the choice of table format is a technical-debt
+decision rather than a vendor-lock-in decision.
+
+The practitioner framing that emerged at **Data + AI Summit 2025**
+(Databricks, June 2025) is that **the catalog is the governance
+surface, not the storage format**. A team can own Iceberg tables
+one day and Delta tables the next without breaking its lineage
+graph, its access-control policies, or its quality tests, because
+those are properties of the catalog rather than of the storage
+format.
+
+**Sources:** [What's new with Databricks Unity Catalog at Data + AI Summit 2025 — Databricks Blog](https://www.databricks.com/blog/whats-new-databricks-unity-catalog-data-ai-summit-2025) · [Unity Catalog managed tables in Databricks for Delta Lake and Apache Iceberg — Databricks AWS docs](https://docs.databricks.com/aws/en/tables/managed) · [Confluent Tableflow + Databricks Unity Catalog — Confluent Blog](https://www.confluent.io/blog/tableflow-delta-lake-databricks-unity-catalog-ga/)
+
+### DuckLake and the DuckDB lakehouse story
+
+The other 2025 development worth naming is **DuckLake** — DuckDB's
+own lakehouse-style metadata system — and the broader DuckDB
+integration story with Unity Catalog and Iceberg. DuckDB has spent
+2024–2025 positioning itself as the "local-first analytical engine"
+that plugs into the same catalog-and-table-format layer that the
+cloud warehouses use, which means that a developer can run a
+DuckDB query on their laptop against an Iceberg table that lives
+on S3, catalogued by Unity Catalog, with the same SQL they would
+write against the same table on a Databricks cluster.
+
+This is the "small-data / big-data" story of the housekeeping
+chapter playing out in practice: there is no longer a hard line
+between "I'm on my laptop" and "I'm on a cluster." The catalog and
+storage format are shared; only the compute varies.
+
+**Sources:** [The Open Lakehouse Stack: DuckDB and the Rise of Table Formats — MotherDuck Blog](https://motherduck.com/blog/open-lakehouse-stack-duckdb-table-formats/) · [Polars and DuckDB release Unity Catalog (Delta Lake) integrations — Data Engineering Central, Substack](https://dataengineeringcentral.substack.com/p/polars-and-duckdb-release-unity-catalog) · [Explaining Data Lakes, Lakehouses, Table Formats — Estuary](https://estuary.dev/blog/explaining-data-lakes-lakehouses-catalogs/)
+
+### What this means for the accountable layer
+
+The body's framing of the catalog as the accountable layer is
+confirmed and sharpened by the 2024–2025 data. The specific
+sharpening: the accountable layer is now **portable**. A team can
+change query engines, change cloud providers, change table formats,
+or change catalog implementations without losing the accountability
+graph. That was not true a few years ago, and it is one of the
+clearest examples in the data-platform space of how open standards
+and commercial competition can produce a result that benefits
+practitioners more than a vendor monoculture would have.
+
+The 2025 catalog convergence does not solve the "governance vs.
+velocity" tension (section 13) or the "match-and-merge" problem
+(section 10) or the "fine-grained policy" question. Those remain
+open problems. What it does is make the substrate on which those
+problems are worked a shared substrate, which is the precondition
+for any community answer to develop.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**data-science**](../../../.college/departments/data-science/DEPARTMENT.md)
+  — Data catalogs, lineage, and governance are squarely in the
+  data-science department's scope, and the 2025 open-standards
+  convergence is material for anyone teaching data-platform
+  architecture.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — The catalog-as-accountable-layer framing is a systems-engineering
+  topic; open-standards convergence is a case study in how protocol
+  design shapes ecosystem evolution.
+- [**business**](../../../.college/departments/business/DEPARTMENT.md)
+  — Data governance is a business-infrastructure topic (CDOs,
+  GDPR, CCPA) with legal and financial consequences.
+- [**critical-thinking**](../../../.college/departments/critical-thinking/DEPARTMENT.md)
+  — The "governance vs. velocity" tension is a critical-thinking
+  topic about how to reason under competing constraints.
+
+---
+
+*Addendum (Iceberg REST catalog convergence, Unity Catalog dual-format, DuckLake) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
