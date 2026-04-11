@@ -1986,3 +1986,103 @@ clang -fuse-ld=lld -o program *.o
 
 *This chapter is part of the PNW Research Series -- Assembly Language project.*
 *Tools and versions reflect the state of practice as of 2025.*
+
+---
+
+## Study Guide — Modern Assembly Tools
+
+### Prerequisites
+
+- A working C toolchain.
+- Any one of `nasm`, `yasm`, GNU `as`, or `clang` installed.
+- `gdb` for debugging, `objdump` for inspection, `perf` for
+  profiling (Linux).
+
+### Toolchain roles to know
+
+- **Assembler** (`as`, `nasm`, `yasm`, `clang`): translates `.s`
+  files to `.o` object files.
+- **Linker** (`ld`, `lld`, `gold`): combines `.o` files into
+  executables.
+- **Disassembler** (`objdump`, `ndisasm`, `radare2`, `ghidra`):
+  goes the other way.
+- **Debugger** (`gdb`, `lldb`): single-step, inspect registers,
+  set breakpoints.
+- **Profiler** (`perf`, `vtune`): measure cycle counts, cache
+  misses, branch mispredicts.
+- **JIT / runtime codegen** (`dynasm`, `libllvmir`, `cranelift`):
+  assemble at runtime.
+
+---
+
+## Programming Examples
+
+### Example 1 — Inline assembly in a C function
+
+```c
+// Compile: gcc -O2 -o rdtsc rdtsc.c
+#include <stdio.h>
+#include <stdint.h>
+
+static inline uint64_t rdtsc(void) {
+    uint32_t lo, hi;
+    __asm__ volatile ("rdtsc" : "=a"(lo), "=d"(hi));
+    return ((uint64_t)hi << 32) | lo;
+}
+
+int main(void) {
+    uint64_t a = rdtsc();
+    for (volatile int i = 0; i < 1000000; i++);
+    uint64_t b = rdtsc();
+    printf("cycles: %lu\n", b - a);
+}
+```
+
+`rdtsc` is x86's time-stamp counter. Inline assembly gives you
+access to instructions the compiler cannot emit on its own.
+
+### Example 2 — Read compiler output
+
+`gcc -S -O2 -fverbose-asm hot.c` produces `hot.s` annotated with
+the C line each instruction came from. Read this regularly when
+you want to understand what the compiler is actually doing to
+your code.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Benchmark SIMD vs scalar
+
+Write a dot-product in pure C, in SSE intrinsics, in AVX2
+intrinsics, and in AVX-512 intrinsics. Measure. The speedups
+roughly track vector width until memory bandwidth saturates.
+
+### DIY 2 — Use `perf` on a hot loop
+
+Pick any CPU-bound program you have. Run `perf record ./prog;
+perf report`. The top 5 functions will usually contain 80% of
+the runtime. Now open one in `objdump` or `perf annotate` and
+look at the hot instructions.
+
+### DIY 3 — Try radare2 or Ghidra on a small binary
+
+Reverse-engineer a 100-line C program you compiled. Walk through
+its disassembly in radare2. Annotate the functions. You have
+just done the same task a binary reverse engineer does daily.
+
+### TRY — Write a runtime code generator
+
+Use dynasm or Cranelift to assemble a small arithmetic
+expression at runtime (a toy JIT). This is how V8, JVM HotSpot,
+and LuaJIT work under the hood.
+
+---
+
+## Related College Departments (assembly tools)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+  — tooling is a core programming-discipline topic.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — toolchains are infrastructure, and infrastructure is
+  engineering.

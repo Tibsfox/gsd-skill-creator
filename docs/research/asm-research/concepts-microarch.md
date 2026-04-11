@@ -1355,3 +1355,100 @@ assembly in the first place.
 
 *PNW Research Series -- Assembly Language*
 *Tibsfox Research, 2026*
+
+---
+
+## Study Guide — Concepts and Microarchitecture
+
+### Prerequisites
+
+- Finish the architectures.md file first — you need the ISA
+  vocabulary.
+- A chip whose microarchitecture is documented. Intel and AMD both
+  publish microarchitecture reference manuals; Apple Silicon is
+  partially reverse-engineered; Raspberry Pi (Cortex-A72/A76) has
+  full Arm documentation.
+
+### Key concepts
+
+1. **Pipelining.** Instructions flow through fetch → decode →
+   execute → writeback stages, overlapped. A 5-stage pipeline
+   works on 5 instructions simultaneously at different stages.
+2. **Out-of-order execution.** Modern CPUs re-order instructions
+   to hide memory latency. They maintain the *illusion* of
+   sequential execution through a reorder buffer and commit
+   in-order.
+3. **Branch prediction.** The CPU guesses which way a conditional
+   branch will go and starts executing speculatively. A mispredict
+   costs 10-20 cycles of wasted work.
+4. **Caches.** L1 (per-core), L2, L3 (shared). Each level is
+   larger and slower than the one above. A miss to main memory
+   costs 200+ cycles.
+5. **Speculative execution and Spectre.** The 2018 Spectre and
+   Meltdown attacks exploited speculative execution to leak data
+   across protection boundaries. This is a microarchitecture-level
+   security story, and it reshaped CPU design in ways that are
+   still working their way through the industry.
+
+---
+
+## Programming Examples
+
+### Example 1 — Measure branch mispredict cost
+
+```c
+// Compile with: gcc -O2 branch.c -o branch
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(void) {
+    int n = 1 << 24, *a = malloc(n * sizeof(int));
+    for (int i = 0; i < n; i++) a[i] = rand() % 256;
+    // Uncomment to sort:
+    // qsort(a, n, sizeof(int), /*...*/);
+    long sum = 0;
+    clock_t t = clock();
+    for (int i = 0; i < n; i++)
+        if (a[i] >= 128) sum += a[i];
+    printf("sum=%ld  time=%.3fs\n",
+           sum, (double)(clock() - t) / CLOCKS_PER_SEC);
+}
+```
+
+Run with unsorted and sorted input. Sorted is 3-5x faster because
+the branch predictor gets it right every time once it passes the
+threshold. Unsorted is a worst case for the predictor.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Use `perf` to inspect your code
+
+`perf stat -e cache-misses,branch-misses ./your-program`. Run on
+any binary. The numbers you see are the microarchitecture
+talking.
+
+### DIY 2 — Read Agner Fog's tables
+
+Agner Fog publishes instruction-latency and throughput tables for
+every major x86 microarchitecture at `agner.org/optimize`. Pick
+one CPU and one hot loop from your code; look up the latencies and
+compute expected throughput. Compare to actual.
+
+### TRY — Write a Spectre proof-of-concept
+
+Spectre v1 POC code is public. Read one. Understand it line by
+line. You will develop the clearest possible picture of what
+speculative execution actually means.
+
+---
+
+## Related College Departments (microarchitecture)
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — microarchitecture is hardware engineering meets software.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — cache behavior, branch prediction, and queueing models are
+  applied probability and combinatorics.
