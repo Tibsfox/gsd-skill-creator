@@ -783,3 +783,95 @@ Understanding the ABI is essential for anyone mixing C and assembly, debugging c
 
 *Research compiled for the PNW Research Series, April 2025.*
 *Part of the Computer Languages cluster: C, C++, Java, JavaScript/TypeScript, Rust, Go, Python, Perl, Assembly.*
+
+---
+
+## Study Guide — Assembly History
+
+### Why read this
+
+Assembly's history is the history of computing hardware. Each new
+ISA was a response to a specific hardware generation's
+constraints: tubes, transistors, minicomputers, microprocessors,
+RISC, vector units, out-of-order execution, multi-core, SIMD,
+accelerators. Reading the history gives you the "why" for every
+strange feature you encounter in modern ISAs.
+
+### Reading order
+
+Read this file in three passes:
+
+1. First pass — the timeline. Skim fast.
+2. Second pass — the architectural milestones. Slow, with a
+   pencil.
+3. Third pass — the personalities and companies. Read for the
+   business-strategy story behind the technology.
+
+### Key events to understand
+
+- **IBM 704 (1954).** First assembler in widespread use. Sets the
+  pattern of symbolic labels, mnemonics, and macros.
+- **IBM System/360 (1964).** First ISA designed for family
+  compatibility — the idea that a range of machines at different
+  price points would all run the same assembly.
+- **PDP-11 (1970).** Clean ISA, inspired C. Much of what we think
+  of as "how assembly is supposed to look" traces here.
+- **RISC revolution (1980s).** Patterson and Hennessy's argument
+  that simpler is faster won out — eventually. MIPS, SPARC,
+  POWER, and ARM all come from this moment.
+- **Itanium (2001).** EPIC / VLIW attempt to push scheduling into
+  the compiler. Failed commercially; trace scheduling lives on.
+  See `trs-research` in this bucket.
+- **x86-64 (2003).** AMD's 64-bit extension won over Intel's
+  Itanium bet. Still the dominant server ISA.
+- **ARM in mobile (2007).** iPhone brings ARM out of embedded and
+  into a billion pockets.
+- **RISC-V (2010).** Open ISA, academic origin, commercial
+  uptake. The first credible open-ISA story in decades.
+
+---
+
+## Worked Examples
+
+### Example 1 — A one-line historical tour
+
+On Linux, type: `file /bin/ls`. It reports the ELF architecture.
+Replace with `aarch64` or `riscv64` binaries to watch the
+history compress into one line: the same tool, across forty years
+of ISA evolution, still running.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Build a timeline visualization
+
+Transcribe the timeline from this file into a spreadsheet. For
+each decade, count the number of distinct ISAs that were
+commercially significant. Plot the count over time. You will
+see a spike in the 1980s (RISC explosion), a consolidation in
+the 1990s, and a re-expansion in the 2020s (RISC-V + specialized
+accelerators).
+
+### DIY 2 — Emulate a classic ISA
+
+Install SIMH, the Computer History Simulation Project. It
+emulates PDP-8, PDP-11, VAX, and a dozen other classic machines.
+Boot up a PDP-11 running Unix v6. You are now using the exact
+environment Kernighan, Ritchie, and Thompson used in the 1970s.
+
+### TRY — Pick a 2026 ISA and learn it
+
+Pick RISC-V (the cleanest), Arm (the most common), or x86-64
+(the most documented). Spend one week writing assembly in it.
+At the end of the week you will understand the difference
+between knowing about assembly and using it.
+
+---
+
+## Related College Departments (assembly history)
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — this is a history document.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — ISA design is a core computer-engineering discipline.
