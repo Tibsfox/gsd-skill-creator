@@ -381,3 +381,59 @@ The accordion is the bridge instrument. The documentation is the bridge medium. 
 - [Band Biographies | "Weird Al" Yankovic Official Site](https://www.weirdal.com/archives/miscellaneous/band-biographies/)
 - [Players | "Weird Al" Yankovic Official Site](https://www.weirdal.com/archives/miscellaneous/players/)
 - [FAQ | "Weird Al" Yankovic Official Site](https://www.weirdal.com/archives/faq/)
+
+---
+
+## Addendum: The Bigger & Weirder 2026 Tour
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body above already references the 90-date
+**Bigger & Weirder 2026 Tour** in its source list; the addendum
+captures the tour's place in the current touring calendar for the
+benefit of readers using the paper as a starting point.
+
+The **Bigger & Weirder Tour** is the largest tour of Yankovic's
+career by date count. Announced in 2025 and running across 2026
+to ~90 dates in North America, it pairs the full classic catalog
+with a visual production that leans into the "bigger and weirder"
+framing. The tour marks the transition from the understated
+acoustic-oriented *Unfortunate Return of the Ridiculously
+Self-Indulgent, Ill-Advised Vanity Tour* (2022–2023) back to the
+full-band rock-show format that defined Yankovic's previous major
+tours.
+
+For the PNW Research Series' purposes (this being the "PNW"
+corpus, though Yankovic is Californian by residence and origin),
+the 2026 tour includes multiple Pacific Northwest dates and is a
+live-document case of how a nearly-fifty-year-career artist
+continues to sell out venues in 2026 without releasing a new
+album since *Mandatory Fun* in 2014.
+
+**Source:** ['Weird Al' Yankovic Announces 90-Date 'Bigger & Weirder' 2026 Tour — Rolling Stone](https://www.rollingstone.com/music/music-news/weird-al-yankovic-bigger-weirder-2026-tour-1235466085/)
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**music**](../../../.college/departments/music/DEPARTMENT.md) —
+  Parody songwriting as a musical craft, Yankovic's accordion
+  musicianship, and the band's instrumental fidelity to the
+  originals are music-department topics.
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)
+  — Yankovic's lyric writing is a legitimate craft study in
+  wordplay, scansion, and the substitution of meaning while
+  preserving rhythm. "Word Crimes" is a particularly well-cited
+  example in grammar/writing pedagogy.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — A forty-year parody career is a running commentary on popular
+  music itself, and Yankovic's catalog is a compact reference for
+  "what was popular when."
+- [**art**](../../../.college/departments/art/DEPARTMENT.md) —
+  Parody as an art form has its own theoretical literature
+  (Hutcheon, Genette, Rose) and Yankovic's practice is the
+  popular-music exemplar for it.
+
+---
+
+*Addendum (Bigger & Weirder 2026 Tour framing) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
