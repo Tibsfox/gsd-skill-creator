@@ -1,0 +1,1055 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Ecology/Nature color scheme
+\definecolor{primary}{HTML}{1B5E20}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{2E7D32}
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Picnic Point Park}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Picnic Point Park -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ─── TITLE PAGE ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Picnic Point Park\\[0.3em]Shore, Creek \& Community}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Snohomish County, Washington --- Puget Sound Shoreline}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: April 7, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 5--8 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ─── TABLE OF CONTENTS ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Picnic Point Park --- Vision Guide}
+
+\metafield{Date:}{April 7, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends on:}{Snohomish County DCNR, WDFW Nearshore Data, Snohomish MRC Forage Fish Surveys}
+\metafield{Context:}{Cold-start mission generated from web research; no prior conversation}
+
+\subsection{Vision}
+
+Picnic Point Park occupies one of the last accessible, ecologically intact shoreline windows along the densely railed corridor between Edmonds and Mukilteo on the eastern shore of Puget Sound. Separated from its parking lot by the BNSF mainline --- the same rail barrier that long blocked salmon passage at nearby Meadowdale Beach --- the park is reached by a pedestrian overpass that has become both a practical crossing and an emblem of the negotiated relationship between industry, recreation, and nature that defines this stretch of coast.
+
+The park is small in footprint but enormous in ecological leverage. Picnic Point Creek winds through native shoreline vegetation before meeting the Sound, threading a riparian corridor that connects upland forest habitat to intertidal spawning beaches. That beach --- a mixed sand-and-gravel intertidal surface --- is precisely the substrate that surf smelt (\textit{Hypomesus pretiosus}) and Pacific sand lance (\textit{Ammodytes hexapterus}) require for spawning. These forage fish are not incidental; they are the middle link of the Puget Sound marine food web, converting phytoplankton into calories for Chinook salmon, seabirds, harbor seals, and endangered Southern Resident Orcas.
+
+Since 2023, Picnic Point has become a focal restoration site: nine community events organized by the Olympic Fly Fishers of Edmonds in partnership with the Snohomish County Healthy Forest Project have brought hundreds of volunteers to plant native species, remove Himalayan blackberry and English ivy, and stabilize the creek-mouth shoreline. A 2026 City Nature Challenge bioblitz is scheduled to document the wildlife now returning to restored areas --- a living record of whether the investment is working.
+
+A mile north along the beach at low tide lies Shipwreck Point, where the hull of the \textit{MV Pacific Queen} --- a WWII-era salvage vessel rebuilt as a fish packer, sunk in Tacoma in 1957, stripped of its metal superstructure, and beached at the Franzen family burning grounds in 1958--1959 --- rests on private land. The wreck is visible from the park and has become a local landmark, layering industrial maritime history directly onto the ecology.
+
+This mission asks: what does Picnic Point Park actually contain --- ecologically, historically, geologically, and socially --- and what does its restoration trajectory reveal about the larger challenge of recovering Puget Sound's nearshore?
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Forage fish spawning habitat is undercharacterized.} The Snohomish MRC has conducted monthly beach surveys since 2011 (700+ samples), but Picnic Point's specific role as surf smelt and sand lance spawning habitat has not been fully documented or published in a synthesized form accessible to land managers and the public.
+
+  \item \textbf{Shellfish are permanently closed.} The Washington Department of Health has issued a year-round closure on clam, mussel, and oyster harvest at Picnic Point County Park, indicating ongoing water quality impairment. The drivers --- likely stormwater runoff from the surrounding urbanized watershed --- have not been systematically characterized for this specific site.
+
+  \item \textbf{The railroad creates a persistent ecological barrier.} The BNSF mainline severs the park's upland and intertidal habitats, limits ADA accessibility, and constrains creek-mouth processes. The Meadowdale Beach estuary restoration ($\sim$\$15 million, completed 2023) demonstrated what is possible when this barrier is addressed, but Picnic Point Creek lacks a comparable restoration plan.
+
+  \item \textbf{Invasive species pressure is ongoing.} The Healthy Forest Project's 20-year plan identifies Himalayan blackberry and English ivy as the dominant threats at Picnic Point. Nine restoration events have made visible progress, but without continued volunteer mobilization and monitoring, gains are reversible.
+
+  \item \textbf{The park's historical and cultural dimensions are poorly documented.} The Franzen family's ship-breaking operation, the Pacific Queen's wartime origins and Bristol Bay fishing career, and the Indigenous history of the Puget Sound shoreline in this corridor have not been assembled into an accessible, cited narrative.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The park as a restoration transect:} Picnic Point Park is best understood not as a destination but as a transect --- a cross-section through the full stack of Puget Sound shoreline ecology, from upland forest through riparian corridor, railroad barrier, intertidal beach, and subtidal nearshore. Each layer has a distinct ecological function and a distinct restoration challenge.
+
+\subsubsection{Study Region Map}
+
+\begin{asciibox}
+Geographic Context: Picnic Point Park, Snohomish County, WA
+Coordinates: 47 deg 51' 37" N, 122 deg 17' 40" W
+
+PUGET SOUND (west)
+     |
+     |  <-- subtidal nearshore: Chinook, chum salmon; harbor seals
+     |
+[INTERTIDAL BEACH] -- surf smelt + sand lance spawning habitat
+     |                 clam/mussel/oyster closure zone
+     |
+[BNSF MAINLINE RAILROAD] -- barrier / pedestrian overpass crossing
+     |
+[PICNIC POINT CREEK MOUTH] -- riparian/estuary transition zone
+     |                        <-- 9 restoration events 2023-2026
+[PICNIC AREA / LAWN]
+     |
+[UPLAND FORESTED BLUFF] -- Himalayan blackberry / ivy pressure
+     |
+     +-- 1.5 mi south -> Meadowdale Beach Park (completed estuary restoration 2023)
+     +-- 1 mi north  -> Shipwreck Point / Pacific Queen hull (private, Franzen Beach)
+     +-- 5 mi north  -> Point Elliott, Mukilteo
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+PICNIC POINT PARK -- RESEARCH MODULE ARCHITECTURE
+
+Module A: Ecology & Nearshore Habitat
+  - Intertidal beach: forage fish spawning substrate
+  - Picnic Point Creek: riparian corridor, salmon connectivity
+  - Marine food web: forage fish -> salmon -> orca linkage
+  - Bird community: bald eagle, great blue heron, shorebirds
+
+Module B: Restoration & Conservation
+  - Healthy Forest Project: invasive removal, native planting (2019-)
+  - Olympic Fly Fishers of Edmonds partnership (2023-2026)
+  - Shellfish closure drivers: stormwater/water quality
+  - Comparison: Meadowdale Beach estuary model
+
+Module C: Geology & Coastal Processes
+  - Glacially derived bluff sediments and beach sand supply
+  - Puget Sound drift cell dynamics
+  - BNSF rail corridor: seawall effects on sediment transport
+  - Landslide hazard: USGS mapping on Seattle-Everett corridor
+
+Module D: History & Cultural Context
+  - Franzen family and Shipwreck Point / ship-breaking operations
+  - MV Pacific Queen: WWII origins, Bristol Bay career, 1957 sinking
+  - BNSF railroad history on Puget Sound shoreline
+  - Indigenous history of the Salish Sea shoreline corridor
+
+Module E: Recreation, Access & Community Science
+  - Park facilities: overpass, picnic tables, charcoal cookers, restrooms
+  - Tide-dependent beach walks: Meadowdale (-1.5 mi) to Mukilteo (+5 mi)
+  - City Nature Challenge bioblitz (April 25, 2026)
+  - iNaturalist community science integration
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A: Ecology \& Nearshore Habitat}
+
+Survey the full ecological inventory of the park's habitats: intertidal beach substrate and forage fish spawning data, Picnic Point Creek fish passage and riparian condition, observed and documented bird species, and the marine food web connections (forage fish to threatened Chinook salmon to endangered Southern Resident Orcas). Draw on WDFW, Snohomish MRC, NOAA Fisheries, and USGS nearshore research programs.
+
+\subsubsection{Module B: Restoration \& Conservation}
+
+Document the Snohomish County Healthy Forest Project's activities at Picnic Point (2019 to present), the Olympic Fly Fishers of Edmonds partnership, the nine community restoration events (2023--2026), native species planted and invasive species removed. Analyze the shellfish closure --- its regulatory basis, the likely water quality drivers, and the absence of a site-specific remediation plan. Compare with the Meadowdale Beach estuary restoration as a model.
+
+\subsubsection{Module C: Geology \& Coastal Processes}
+
+Characterize the glacial and post-glacial geology of the Picnic Point bluff and beach. Document the role of bluff erosion in supplying beach sediment (drift cells), the modifications introduced by the BNSF seawall and railroad grade, the USGS landslide hazard mapping for the Seattle--Everett corridor, and the implications of sediment budget changes for forage fish spawning habitat.
+
+\subsubsection{Module D: History \& Cultural Context}
+
+Compile the industrial maritime history of Shipwreck Point / Franzen Beach, the authenticated identity and history of the \textit{MV Pacific Queen} (ARS-class salvage vessel, WWII era, beached 1958--1959), the Franzen family's ship-breaking operation, and the broader history of the BNSF rail corridor along the Sound. Integrate available sources on the pre-railroad Indigenous history of this shoreline (Tulalip Tribes territory).
+
+\subsubsection{Module E: Recreation, Access \& Community Science}
+
+Describe the park's visitor experience, access constraints (small parking lot, railroad overpass), ADA limitations, and tide-dependent beach hiking opportunities. Document the City Nature Challenge bioblitz program and iNaturalist integration. Summarize community science data collection protocols used by the Snohomish MRC (forage fish surveys) and how volunteer observations feed into government decision-making.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: picnic_point_park_deep_research
+  profile: Squadron
+  models:
+    opus:    30%   # Synthesis (Module A-E cross-integration), cultural sensitivity
+    sonnet:  60%   # Survey compilation, document assembly, restoration chronicle
+    haiku:   10%   # Shared schemas, source index, bibliography templates
+  waves: 4
+  parallel_tracks: 2
+  crew_size: 12
+  estimated_tokens: 280000
+  sessions: 3-4
+  cache_strategy: prime_on_wave0_schemas
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}
+  \item Picnic Point Park (Snohomish County) facilities, ecology, and immediate shoreline
+  \item Picnic Point Creek from park boundary to Puget Sound
+  \item Snohomish County Healthy Forest Project activities at this specific site
+  \item Shipwreck Point / Pacific Queen history as visible from park and accessible via low-tide beach walk
+  \item WDFW and Snohomish MRC nearshore data applicable to the Edmonds--Mukilteo shoreline segment
+  \item Comparison with Meadowdale Beach Park as the nearest analogous restoration site
+  \item Community science programs operating at or near the park (City Nature Challenge, iNaturalist)
+  \item Forage fish ecology and Puget Sound food web context
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}
+  \item Detailed GPS coordinates or nesting locations for any protected species (ABSOLUTE safety boundary)
+  \item Acquisition or management of Franzen Beach (private property)
+  \item Comprehensive survey of all Snohomish County parks
+  \item Amtrak / Sound Transit operations on the BNSF corridor (separate mission scope)
+  \item Full Puget Sound salmon recovery plan analysis (summarized by reference only)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Intertidal beach described with substrate characteristics, tidal range, and documented or probable forage fish spawning data from WDFW/MRC sources.
+  \item Picnic Point Creek documented for fish passage status, riparian vegetation condition, and creek-mouth habitat.
+  \item Marine food web chain from forage fish through threatened Chinook to endangered Southern Resident Orcas explicitly traced with cited agency sources.
+  \item Bird community characterized with at least 8 documented or expected species and their habitat use.
+  \item Healthy Forest Project restoration activities at Picnic Point inventoried by year, event count, volunteer count, and native species planted (2019--2026).
+  \item Shellfish closure documented with regulatory citation (WDFW/DOH), closure rationale, and discussion of known or probable drivers.
+  \item Meadowdale Beach estuary restoration used as a comparative model with cost, scope, and applicability to Picnic Point discussed.
+  \item MV Pacific Queen history authenticated using Puget Sound Maritime Historical Society sources with vessel dimensions, chronology, and current hull status.
+  \item Bluff geology and drift cell dynamics described with reference to the WDFW/USGS Puget Sound nearshore technical literature.
+  \item Tulalip Tribes' historic and cultural relationship to this shoreline corridor acknowledged with appropriate specificity.
+  \item Recreation and access features documented including tide window for beach walking, ADA constraints, and parking limitations.
+  \item Community science integration (iNaturalist, MRC forage fish protocol) described with enough detail for a visitor to participate.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Meadowdale Beach Park Mission & Sister site & Nearest comparable restoration; completed estuary model \\
+Snohomish MRC Forage Fish Survey 2025 & Source data & Monthly monitoring; apply to Picnic Point shoreline \\
+WDFW Puget Sound Nearshore Technical Papers & Framework & Ecological baseline for all nearshore habitat modules \\
+Puget Sound Salmon Recovery Plan (2007) & Policy context & Federal framework within which HFP operates \\
+HFP 20-Year Plan (2022) & Operational plan & Governs restoration priorities at Picnic Point \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The park's pedestrian overpass is more than an engineering solution to a railroad barrier. It is a diagram of the tension at the heart of Puget Sound recovery: the rail corridor that separates people from the beach is the same infrastructure that fragments riparian corridors, alters sediment budgets, and constrains creek-mouth estuary processes. The overpass lets people through. The creek, the sediment, the salmon --- they still have to find their own way.
+
+Meadowdale Beach, 1.5 miles south, showed what happens when the barrier is removed at the water's level: 1.3 acres of estuary habitat returned, Chinook salmon began using the restored channel, and a $15 million investment earned six national awards. Picnic Point Creek flows under the same tracks through a structure no one has yet measured or remediated. The bioblitz on April 25, 2026 --- with volunteers using their phones to photograph beetles and herons and record them in a global database --- is both a scientific act and a statement of intent: this place is worth watching, and watching carefully enough to act.
+
+The GSD ecosystem philosophy calls this the ``spaces between'' --- the places that connect things that would otherwise remain separate. Picnic Point Park is, in the fullest sense, a space between: between the upland and the sea, between the industrial and the restored, between a WWII salvage vessel rusting on a private beach and the surf smelt eggs incubating in the gravel a mile away, between what Puget Sound was and what, with sustained community effort, it might yet become.
+
+\newpage
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Picnic Point Park --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings, data, and sources for the five research modules. Use it as the factual foundation for document assembly in Stage 3. All claims requiring numerical data carry a source attribution. Agents should draw on the source organizations below and expand coverage where gaps are noted.
+
+\textbf{Key source organizations:}
+\begin{itemize}
+  \item \textbf{Snohomish County DCNR} (Department of Conservation and Natural Resources) --- Parks, Healthy Forest Project, Surface Water Management
+  \item \textbf{Washington Department of Fish \& Wildlife (WDFW)} --- Nearshore technical papers, shellfish closures, forage fish protocol
+  \item \textbf{NOAA Fisheries (West Coast)} --- Chinook ESA listing, nearshore restoration research, Meadowdale estuary funding
+  \item \textbf{Snohomish County Marine Resources Committee (MRC)} --- Forage fish spawning surveys since 2011 (700+ samples)
+  \item \textbf{Washington Trails Association (WTA)} --- Trip reports, tide-dependent hiking conditions
+  \item \textbf{Puget Sound Maritime Historical Society (PSMHS)} --- MV Pacific Queen vessel identification and history
+  \item \textbf{U.S. Geological Survey (USGS)} --- Landslide mapping, Seattle--Everett corridor; juvenile forage fish surveys
+  \item \textbf{Olympic Fly Fishers of Edmonds (OFF)} --- Restoration event documentation (2023--2026)
+  \item \textbf{iNaturalist / California Academy of Sciences} --- City Nature Challenge bioblitz platform
+\end{itemize}
+
+\subsection{Module A Reference: Ecology \& Nearshore Habitat}
+
+\subsubsection{Park Overview and Setting}
+
+Picnic Point Park is administered by Snohomish County Parks and Recreation, located at 7231 Picnic Point Road, Edmonds, WA 98036 (mailing address; physically in the Picnic Point CDP). The park sits at approximately 47°51'37"N, 122°17'40"W, at an elevation of 79 feet at the bluff top. The census-designated place of Picnic Point had a population of 8,809 at the 2010 census.
+
+The park provides access to the Puget Sound shoreline, views of Whidbey Island and the Olympic Mountain range, picnic tables, charcoal cookers, and restrooms. The signature feature is a large pedestrian overpass spanning the BNSF mainline railroad tracks, which run between the upland parking area and the beach. The overpass is the only non-tidal route to the shore.
+
+\subsubsection{Intertidal Beach and Forage Fish Spawning Habitat}
+
+The beach at Picnic Point is a mixed sand-and-gravel intertidal surface --- the substrate type required for surf smelt and Pacific sand lance spawning. Per WDFW's forage fish technical reports:
+
+\begin{itemize}
+  \item \textbf{Surf smelt} (\textit{Hypomesus pretiosus}) grow to 9 inches, with an olive-green dorsal surface and silver/yellow lateral band. They spawn in the upper intertidal zone (uppermost one-third of the tidal range) on mixed sand-and-gravel beaches. Spawning beaches documented by WDFW since the 1930s are still in use. Spawning occurs seasonally (summer: May--August; fall-winter: September--March) or year-round at some sites.
+  \item \textbf{Pacific sand lance} (\textit{Ammodytes hexapterus}) grow to 8 inches, with a gray-to-green dorsal surface and elongated pointed body. They spawn November through February in upper intertidal sand-and-gravel beaches, often at distal ends of drift cells where accretionary shoreforms occur. Eggs develop over approximately 4 weeks.
+  \item \textbf{Pacific herring} (\textit{Clupea harengus pallasi}) grow to 9 inches; the largest Puget Sound stock is at Cherry Point (northern Sound). Herring spawn on eelgrass and algae in shallow subtidal areas rather than on the beach surface.
+\end{itemize}
+
+Forage fish are ecological keystone species: they feed on phytoplankton and zooplankton and are in turn consumed by salmon, seabirds, harbor seals, and endangered Southern Resident Orcas. WDFW maintains a ``no net loss'' policy for forage fish spawning habitat. The Snohomish MRC has conducted monthly beach surveys since 2011, accumulating over 700 samples along the Snohomish County shoreline, providing WDFW with data used to evaluate restoration project effectiveness.
+
+\subsubsection{Shellfish Closure}
+
+The Washington Department of Fish \& Wildlife and Washington Department of Health maintain a year-round closure on clam, mussel, and oyster harvest at Picnic Point County Park. Per WDFW beach classification records, the DOH ``cautions that clams, oysters, and mussels from this beach are not fit for human consumption at any time.'' The closure reflects water quality impairment likely driven by stormwater runoff from the urbanized upland watershed; the specific contaminant profile for this site is a gap requiring additional research.
+
+\subsubsection{Picnic Point Creek and Riparian Corridor}
+
+Picnic Point Creek winds through native shoreline vegetation before meeting Puget Sound at the park. The creek-mouth area is the primary focus of restoration work by the Olympic Fly Fishers of Edmonds and the Healthy Forest Project since 2023. The creek is described in WTA trip reports as a small stream that can be waded during most of the year. Its fish passage status and specific contribution to Puget Sound salmon ecology have not been fully documented in published literature and represent a research gap.
+
+\subsubsection{Bird Community}
+
+Documented or expected species based on field observations and WTA trip reports:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Species} & \tableheader{Status} & \tableheader{Habitat Use at Park} \\
+\midrule
+Bald Eagle (\textit{Haliaeetus leucocephalus}) & Resident, documented & Shoreline perching, fish predation \\
+Great Blue Heron (\textit{Ardea herodias}) & Expected & Intertidal foraging \\
+Surf Scoter (\textit{Melanitta perspicillata}) & Seasonal & Open water, offshore \\
+Black Oystercatcher (\textit{Haematopus bachmani}) & Possible & Rocky/cobble intertidal \\
+Dunlin (\textit{Calidris alpina}) & Seasonal migratory & Mudflat / upper beach \\
+Common Loon & Seasonal & Open water \\
+Belted Kingfisher & Expected & Creek mouth, shoreline \\
+Various shorebirds & Seasonal & Intertidal \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module B Reference: Restoration \& Conservation}
+
+\subsubsection{Snohomish County Healthy Forest Project}
+
+The Healthy Forest Project (HFP) launched in 2019 as a partnership between Snohomish County and Forterra, modeled on Forterra's Green City Partnership active in 14 Puget Sound communities. In 2023, the HFP transitioned to primarily county staff direction while retaining Forterra as partner. The project focuses on 10 pilot sites (1,000-acre Phase 1 pilot) adjacent to salmon-bearing streams or key water bodies. Picnic Point Park is one of the 10 pilot sites.
+
+Primary restoration activities: invasive plant removal (Himalayan blackberry, English ivy), native plant installation, mulching, and watering. In 2023, the HFP hosted 65 events county-wide. The program recruits community ``Forest Stewards'' who lead local volunteer groups. Snohomish County dedicated \$130,000 to the HFP in its launch year. The program's 20-Year Plan was released in 2022.
+
+\subsubsection{Olympic Fly Fishers of Edmonds Partnership (2023--2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Date} & \tableheader{Event} & \tableheader{Participants} \\
+\midrule
+March 1, 2025 & Shoreline planting --- 89 native species installed, creek-mouth habitat improved & 40 \\
+September 20, 2025 & Fall cleanup --- winter preparation for 2025 plantings & TBD \\
+April 25, 2026 & City Nature Challenge bioblitz --- iNaturalist documentation & Open public \\
+2023--2026 & 9 community restoration events total & Hundreds \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Volunteer age range documented: 3 to 83 years. Quote from Helena Puche, conservation chair, Olympic Fly Fishers of Edmonds: ``Three years of restoration have made this shoreline look healthier.''
+
+The April 25, 2026 bioblitz is part of the City Nature Challenge, a worldwide event co-led by the California Academy of Sciences and the Natural History Museums of Los Angeles County. Now in its 10th year, last year's global event produced more than 3 million observations and identified over 73,000 species. Observations are uploaded to iNaturalist and verified by the global naturalist community. Snohomish County DCNR uses bioblitz data to advocate for restoration funding.
+
+\subsubsection{Meadowdale Beach Park Estuary Restoration: Comparative Model}
+
+The Meadowdale Beach Park \& Estuary Restoration Project (completed October 2023) is the most directly relevant precedent for Picnic Point:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Attribute} & \tableheader{Meadowdale Outcome} \\
+\midrule
+Cost & Approximately \$15 million (below initial estimates) \\
+Creek crossing replaced & 6-foot concrete culvert $\rightarrow$ 100-foot bridge opening \\
+Estuary habitat restored & 1.3 acres \\
+Fish species benefited & ESA-listed Chinook (threatened), Chum, Coho salmon; Cutthroat trout \\
+ADA access & New accessible walkway, footbridge, salmon-viewing platform \\
+Awards (2023--2024) & 6 awards including NRPA Innovation in Conservation, PSRC Vision 2050 \\
+Funding partners & Federal Rail Administration, NOAA Fisheries, Aquatic Lands Enhancement Account, ESRP, PSAR, State Salmon Recovery Grants, WA Wildlife and Recreation Program, Snohomish County \\
+Monitoring & 10-year post-completion estuary monitoring; Tulalip Tribes cameras installed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Key innovation: first Puget Sound project to widen a stream crossing under operating railroad tracks. BNSF Railway was a collaborative partner. Senator Cantwell: ``This project is a blueprint for how federal, local, and private partners can work together to restore shore habitat along rail lines while keeping trains running.''
+
+\subsection{Module C Reference: Geology \& Coastal Processes}
+
+\subsubsection{Bluff and Beach Geology}
+
+The Puget Sound shoreline between Seattle and Everett is characterized by glacially derived bluffs --- unconsolidated till, outwash, and lacustrine deposits left by the Vashon Stade of the Fraser Glaciation (approx. 15,000--13,000 years before present). Natural bluff erosion is the primary source of beach sediment for the intertidal zone. Per WDFW's Puget Sound Nearshore Technical Resources: ``Coastal bluffs are the primary source of beach sediment along the Puget Sound shore, and their natural erosion is essential for maintaining beaches and associated nearshore habitats.''
+
+Drift cells --- semi-closed sediment transport units in which eroding bluffs supply beaches at the updrift end, and accretion occurs at the downdrift end (spits, cuspate forelands) --- govern beach morphology. Sand lance spawning preferentially occurs at the accretionary ends of drift cells. Modifications to the bluff (armoring, vegetation removal) or beach (groins, fill) interrupt sediment transport and degrade spawning habitat.
+
+\subsubsection{BNSF Railroad and Seawall Effects}
+
+The BNSF mainline (originally Great Northern Railway) was reconstructed in 1907--1908 with a seawall protecting the tracks from Puget Sound high tides. This seawall interrupts natural sediment delivery from the bluff to the beach on the seaward side and constrains creek-mouth processes at every stream crossing along the corridor. The USGS has mapped landslide locations along the BNSF corridor between Seattle and Everett, documenting numerous events (especially in the winters of 1996 and 1997) where slides covered or approached the tracks.
+
+The King and Snohomish County governments have constructed pedestrian overpasses --- including the one at Picnic Point --- to provide beach access across the tracks. The corridor carries approximately 30 trains per day (BNSF Northern Transcon).
+
+\subsection{Module D Reference: History \& Cultural Context}
+
+\subsubsection{MV Pacific Queen and Shipwreck Point}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Attribute} & \tableheader{Documented Fact} \\
+\midrule
+Official number & 257731 \\
+Vessel class & Auxiliary Rescue and Salvage (ARS), WWII era \\
+Original builder & Colberg Boat Works, Stockton, CA \\
+Length & 173 feet (measured by Karl Elder, grandson of Arvid Franzen) \\
+Navy service & Originally laid down under Lend-Lease for Great Britain (cancelled); continued for U.S. Navy Pacific Theatre use \\
+Civilian conversion & Rebuilt 1947--1949 by Puget Sound Boat Building of Tacoma as refrigerated cargo vessel \\
+Civilian owner & Pacific Queen Fisheries of Tacoma (post-1950) \\
+Commercial use & Fish packer and processor, Bristol Bay (Alaska) fishery \\
+Sinking & September 17, 1957 --- gasoline explosion and fire, Tacoma Old Town Dock; one crew member killed \\
+Salvage and beaching & Raised 1958, towed to Lake Union (metal superstructure stripped), then towed to Franzen Beach / burning grounds north of Picnic Point (1958--1959) \\
+Current status & Wooden hull on private property (Franzen Beach), posted no-trespassing; visible from Picnic Point Park and during low-tide beach walk \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Franzen family operated a ship-breaking business at Shipwreck Point from the 1920s. Approximately 26 ships were burned at the location. Arvid Franzen was the final owner of the Pacific Queen. The Mukilteo Historical Society holds additional records on the property and its history.
+
+\subsubsection{Tulalip Tribes and Indigenous Context}
+
+The shoreline at Picnic Point falls within the ancestral territory of the Tulalip Tribes, whose reservation is located to the north near Marysville, WA. The Tulalip Tribes are a successor organization to the tribes and bands who signed the 1855 Point Elliott Treaty, which ceded the surrounding territory while retaining fishing, hunting, and gathering rights in usual and accustomed places. The Tulalip Tribes are active partners in Puget Sound salmon recovery and nearshore restoration --- as evidenced by their installation of monitoring cameras at the Meadowdale Beach estuary restoration site and their role as partners in the broader NOAA/county restoration program.
+
+\textit{Note: This module requires additional primary source research on the specific Tulalip cultural and historical relationship to the Picnic Point shoreline. No specific Indigenous knowledge claims are made here without proper tribal consultation and attribution.}
+
+\subsection{Module E Reference: Recreation, Access \& Community Science}
+
+\subsubsection{Park Facilities and Access}
+
+\begin{itemize}
+  \item \textbf{Address:} 7231 Picnic Point Road, Edmonds, WA 98036
+  \item \textbf{Parking:} Small lot, fills quickly on weekends and warm weekday afternoons. Arrival before noon recommended. Meadowdale Beach Park directs inaccessible visitors to Picnic Point as an alternative parking option.
+  \item \textbf{Overpass:} Large pedestrian overpass over BNSF mainline provides access to beach, picnic areas, and restrooms. Not fully ADA-accessible without assistance.
+  \item \textbf{Beach character:} Rocky/mixed gravel; large driftwood logs north of creek mouth. Dog-friendly (leash required). Cold water.
+  \item \textbf{Views:} Whidbey Island; Olympic Mountains; Cascade Mountain glimpses from bluff.
+  \item \textbf{Sunset viewing:} Popular. Park closes at dusk (enforced), not a posted 5pm closure per visitor reports.
+\end{itemize}
+
+\subsubsection{Tide-Dependent Beach Hiking}
+
+Per Washington Trails Association: no established trails within the park, but intertidal beach walking is possible at low tide:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Destination} & \tableheader{Distance} & \tableheader{Notes} \\
+\midrule
+Meadowdale Beach Park & 1.5 mi south & Low tide required; can be difficult at high tide \\
+Shipwreck Point / Pacific Queen & 1 mi north & Posted no-trespassing on private property; observe from beach \\
+Point Elliott at Mukilteo & 5 mi north & Significant low-tide commitment; plan for tide reversal \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Warning from WTA: do not get stuck on the beach by an incoming tide, particularly on the longer northward route.
+
+\subsubsection{Community Science: iNaturalist and MRC Forage Fish Protocol}
+
+\textbf{iNaturalist / City Nature Challenge:} Visitors with a smartphone can download the iNaturalist app and submit photo observations of plants, animals, fungi, and other organisms. Observations are geotagged, time-stamped, and submitted to a global database where the naturalist community assists with identifications. For the April 25, 2026 bioblitz, tracks, shells, and other indirect evidence of wildlife are valid submissions. Data feeds into government land management decisions per Snohomish County DCNR.
+
+\textbf{MRC Forage Fish Surveys:} The Snohomish MRC uses WDFW protocols for monthly intertidal beach sediment sampling. Volunteers collect 1.5--2 liters of sand from the top 1--2 inches of a defined 100-foot transect, sieved through 4mm, 2mm, and 0.5mm mesh to detect forage fish eggs. Since 2011, more than 700 samples have been collected county-wide.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Type} & \tableheader{Boundary} \\
+\midrule
+Shellfish closure & GATE & Confirm current closure status with WDFW/DOH before any foraging guidance \\
+Endangered species locations & ABSOLUTE & No GPS coords for nesting bald eagles or other listed species \\
+Private property (Franzen Beach) & ANNOTATE & Note no-trespassing prominently; do not provide access routes \\
+Indigenous knowledge & GATE & All Tulalip-attributed content requires tribal consultation or published sources \\
+Forage fish data & ABSOLUTE & All counts and survey results attributed to WDFW or Snohomish MRC \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+
+\begin{itemize}
+  \item Snohomish County DCNR, Parks \& Recreation Division. \textit{Picnic Point Park}. \url{https://snohomishcountywa.gov/Facilities/Facility/Details/Picnic-Point-Park-72}
+  \item Washington Department of Fish \& Wildlife. \textit{Picnic Point County Park shellfish beach record.} \url{https://wdfw.wa.gov/places-to-go/shellfish-beaches/260010}
+  \item WDFW. \textit{Marine Forage Fishes of Puget Sound.} Technical Report 2007-03. Penttila, D. (2007).
+  \item WDFW. \textit{Field Manual for Sampling Forage Fish Spawn in Intertidal Shore Regions.} Publication 01209.
+  \item WDFW. \textit{Puget Sound Recovery.} \url{https://wdfw.wa.gov/species-habitats/habitat-recovery/puget-sound}
+  \item WDFW. \textit{Puget Sound Nearshore Technical Resources.} \url{https://wdfw.wa.gov/species-habitats/habitat-recovery/nearshore/conservation/technical}
+  \item NOAA Fisheries. \textit{Coastal Restoration to Benefit Salmon and Other Fishes in Puget Sound.} \url{https://www.fisheries.noaa.gov/west-coast/science-data/coastal-restoration-benefit-salmon-and-other-fishes-puget-sound}
+  \item NOAA Fisheries. \textit{Restoration Project Improves Access to Meadowdale Beach Park for Salmon --- and People.} July 2023. \url{https://www.fisheries.noaa.gov/feature-story/}
+  \item Snohomish County. \textit{Meadowdale Beach Park \& Estuary Restoration Project.} October 2023. \url{https://www.snohomishcountywa.gov/m/newsflash/Home/Detail/2736}
+  \item Snohomish County. \textit{Healthy Forest Project.} \url{https://snohomishcountywa.gov/5479/Healthy-Forest-Project}
+  \item Snohomish County. \textit{Healthy Forest Project 20-Year Plan.} 2022.
+  \item USGS. \textit{Map Showing Recent and Historic Landslide Activity on Coastal Bluffs of Puget Sound Between Shilshole Bay and Everett, Washington.} Publication MF-2346.
+  \item USGS. \textit{Juvenile Surf Smelt and Sand Lance in Central Puget Sound, Washington.} USGS Western Fisheries Research Center.
+  \item U.S. Army Corps of Engineers, Seattle District. \textit{Puget Sound Nearshore Partnership Technical Reports} (multiple, 2006--2007).
+\end{itemize}
+
+\subsubsection{Professional Organizations}
+
+\begin{itemize}
+  \item Snohomish County Marine Resources Committee (MRC). \textit{Forage Fish Spawning Surveys.} \url{https://www.snocomrc.org/projects/forage-fish-spawning-surveys/}
+  \item Snohomish County MRC. \textit{Understanding Nearshore.} \url{https://www.snocomrc.org/projects/understanding-nearshore/}
+  \item Northwest Straits Commission. \textit{Forage Fish Regional Projects.} \url{https://www.nwstraits.org/our-work/forage-fish/}
+  \item Olympic Fly Fishers of Edmonds. \textit{Restoring Picnic Point: A Community Effort to Protect Puget Sound's Shoreline.} March 2025. \url{https://www.olympicflyfishers.com/post/restoring-picnic-point-a-community-effort}
+  \item Washington Trails Association. \textit{Picnic Point.} \url{https://www.wta.org/go-hiking/hikes/picnic-point}
+  \item Puget Sound Maritime Historical Society (Inside Passage blog). \textit{Picnic Point Mystery Revisited.} August 2015. \url{http://psmhsinsidepassage.blogspot.com/2015/08/picnic-point-mystery-revisited.html}
+  \item Encyclopedia of Puget Sound. \textit{Forage Fish in Puget Sound.} \url{https://www.eopugetsound.org/articles/forage-fish-puget-sound}
+  \item California Academy of Sciences / Natural History Museums of LA County. \textit{City Nature Challenge.} iNaturalist platform documentation.
+\end{itemize}
+
+\subsubsection{News and Institutional Sources}
+
+\begin{itemize}
+  \item My Edmonds News / MLT News. \textit{Olympic Fly Fishers of Edmonds to host bioblitz at Picnic Point April 25.} April 2026.
+  \item MLT News. \textit{Public invited to fall cleanup at Picnic Point Beach Sept. 20.} September 2025.
+  \item Everett Herald. \textit{County to tackle a development side effect: invasive plants.} March 2020. (HFP launch coverage)
+\end{itemize}
+
+\newpage
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Picnic Point Park (Snohomish County, WA) covering five integrated modules: ecology and nearshore habitat, restoration and conservation, geology and coastal processes, history and cultural context, and recreation and community science. All claims must be sourced to government agencies, peer-reviewed literature, or professional organizations. The final deliverable is suitable for use by Snohomish County DCNR, the Olympic Fly Fishers of Edmonds, and the public as a reference and advocacy document.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: FOUNDATION (Sequential)
+  [Haiku] Schema generator -> source_index.json, module_templates/
+
+WAVE 1A (Parallel Track A):              WAVE 1B (Parallel Track B):
+  [Sonnet] Module A: Ecology             [Sonnet] Module C: Geology
+  [Opus]   Module B: Restoration         [Sonnet] Module D: History
+
+WAVE 2: SYNTHESIS (Sequential)
+  [Opus] Cross-module integration
+       -> food web chains, railroad barrier analysis,
+          restoration trajectory synthesis
+
+WAVE 3: PUBLICATION + VERIFICATION (Sequential)
+  [Sonnet] Module E: Recreation assembled
+  [Sonnet] Document compiler + bibliography
+  [Sonnet] Verification agent -> source check, attribution audit
+  [Opus]   Final review: cultural sensitivity, safety boundaries
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, module templates (Wave 0)
+  \item \textbf{Research Layer} --- Five parallel/sequential module documents (Wave 1)
+  \item \textbf{Synthesis Layer} --- Cross-module integration and ecological narrative (Wave 2)
+  \item \textbf{Publication Layer} --- Final document assembly, bibliography, and verification (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & source\_index.json & All Stage 2 sources indexed with URL, org type, reliability tier & W0-SCHEMA \\
+2 & Module A: Ecology & All 12 success criteria addressed; forage fish data cited to WDFW/MRC & W1A-ECO \\
+3 & Module B: Restoration & HFP timeline complete; Meadowdale comparison table present & W1B-REST \\
+4 & Module C: Geology & Drift cell dynamics explained; BNSF seawall effects documented & W1A-GEO \\
+5 & Module D: History & Pacific Queen chronology complete and authenticated & W1B-HIST \\
+6 & Module E: Recreation & Tide windows, iNaturalist protocol, facility details present & W3-REC \\
+7 & Synthesis report & Food web chain cited; railroad barrier analysis cross-references B+C & W2-SYN \\
+8 & Final document (PDF) & All modules integrated; bibliography complete; passes verification & W3-PUB \\
+9 & Verification report & SC, CF, IN, EC tests run; no BLOCK failures & W3-VER \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.5cm}C{1.5cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 8,000 \\
+W1A-ECO & W0-SCHEMA & Sonnet & 40,000 \\
+W1B-REST & W0-SCHEMA & Opus & 35,000 \\
+W1A-GEO & W0-SCHEMA & Sonnet & 28,000 \\
+W1B-HIST & W0-SCHEMA & Sonnet & 25,000 \\
+W2-SYN & W1A-ECO, W1B-REST, W1A-GEO, W1B-HIST & Opus & 45,000 \\
+W3-REC & W0-SCHEMA & Sonnet & 18,000 \\
+W3-PUB & All Wave 1--2, W3-REC & Sonnet & 40,000 \\
+W3-VER & W3-PUB & Sonnet & 20,000 \\
+W3-REVIEW & W3-VER & Opus & 25,000 \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total estimated}} & \textbf{284,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned Tasks \& Rationale} \\
+\midrule
+Opus & 30\% & W1B-REST (restoration analysis requires judgment on effectiveness and advocacy sensitivity); W2-SYN (cross-module integration, food web synthesis, railroad barrier analysis); W3-REVIEW (cultural sensitivity check, Tulalip attribution, final gate) \\
+Sonnet & 60\% & W1A-ECO, W1A-GEO, W1B-HIST, W3-REC, W3-PUB, W3-VER (structured content, survey compilation, document assembly, verification) \\
+Haiku & 10\% & W0-SCHEMA (shared schemas, source index template, module headers --- high reuse, low judgment requirement) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & source\_index.json, templates \\
+1A & Ecology + Geology & Parallel & Sonnet & Modules A, C \\
+1B & Restoration + History & Parallel & Opus, Sonnet & Modules B, D \\
+2 & Synthesis & Sequential & Opus & Integration report \\
+3 & Publication + Verify & Sequential & Sonnet, Opus & Final PDF + verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Spec} & \tableheader{Model} \\
+\midrule
+source\_index.json & Index all Stage 2 bibliography entries with: URL, organization name, org type (gov/peer/professional), reliability tier (1=gov agency, 2=peer-reviewed, 3=professional org), and module relevance flags (A--E) & Haiku \\
+module\_templates/ & Five empty module document shells with section headers, metadata fields, and success criteria checklist & Haiku \\
+safety\_boundaries.md & Copy Stage 2 safety table; flag SC-END, SC-IND as mandatory review in W3-REVIEW & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Parallel Track A (Ecology + Geology)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Task} & \tableheader{Model} \\
+\midrule
+CRAFT-ECO & Module A: Compile intertidal beach survey data (WDFW/MRC); describe surf smelt + sand lance spawning habitat; trace food web from forage fish to Chinook to orca; document bird community; describe Picnic Point Creek riparian corridor & Sonnet \\
+CRAFT-GEO & Module C: Describe glacially derived bluff geology; explain drift cell sediment dynamics; document BNSF seawall effects on sediment supply; reference USGS Seattle-Everett landslide mapping & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Parallel Track B (Restoration + History)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Task} & \tableheader{Model} \\
+\midrule
+CRAFT-REST & Module B: Chronicle HFP activity at Picnic Point 2019-2026; compile Olympic Fly Fishers event record; document shellfish closure and drivers; build Meadowdale comparative analysis table & Opus \\
+CRAFT-HIST & Module D: Compile authenticated Pacific Queen chronology; document Franzen family ship-breaking history; note Mukilteo Historical Society as primary source; acknowledge Tulalip Tribes territorial context with appropriate boundaries & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Task} & \tableheader{Model} \\
+\midrule
+INTEG & Cross-module synthesis: (1) Railroad barrier analysis --- ecological consequences in A+C vs. restoration implications in B; (2) Food web chain --- forage fish (A) $\rightarrow$ Chinook (B) $\rightarrow$ orca (A) with conservation status; (3) Restoration trajectory --- what's been done (B), what the geology enables/constrains (C), what the history contextualizes (D); (4) Park-as-transect narrative for through-line & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Task} & \tableheader{Model} \\
+\midrule
+EXEC-REC & Module E: Assemble recreation, access, tide windows, iNaturalist/bioblitz documentation & Sonnet \\
+EXEC-PUB & Compile all modules into final document; assemble complete bibliography from source\_index.json; format for publication & Sonnet \\
+VERIFY & Run full test plan (SC, CF, IN, EC); flag BLOCK failures; produce verification report & Sonnet \\
+OPUS-GATE & Final cultural sensitivity review (Tulalip content, SC-IND); shellfish closure warning check; approve release or return for revision & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Prime cache on Wave 0 outputs: source\_index.json and module\_templates/ are read by every subsequent agent
+  \item Stage 2 Research Reference (this document) is the primary cache payload --- all agents should load it at session start
+  \item Wave 1 module documents are cached at wave boundary for use by Wave 2 INTEG agent
+  \item Safety\_boundaries.md is cached in every agent context to prevent accidental violations
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XCC}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Components} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+0 & Foundation (schema, templates, safety) & Haiku & 8,000 \\
+1A & Module A (Ecology) + Module C (Geology) & Sonnet & 68,000 \\
+1B & Module B (Restoration) + Module D (History) & Opus + Sonnet & 60,000 \\
+2 & Synthesis integration & Opus & 45,000 \\
+3 & Module E + Publication + Verification + Gate & Sonnet + Opus & 103,000 \\
+\midrule
+ & \textbf{Total} & & \textbf{284,000} \\
+ & \textbf{Buffer (15\%)} & & \textbf{43,000} \\
+ & \textbf{Budget ceiling} & & \textbf{327,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0-SCHEMA
+    |
+    +---> W1A-ECO (Sonnet)  --+
+    |                         |
+    +---> W1B-REST (Opus)  ---+
+    |                         +---> W2-SYN (Opus)
+    +---> W1A-GEO (Sonnet) ---+         |
+    |                         |         |
+    +---> W1B-HIST (Sonnet) --+         |
+    |                                   |
+    +---> W3-REC (Sonnet) ------+       |
+                                |       |
+                                v       v
+                           W3-PUB (Sonnet) <--- all modules
+                                |
+                           W3-VER (Sonnet)
+                                |
+                           W3-REVIEW (Opus)
+                                |
+                           [RELEASE]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical (SC) & Non-negotiable ethical/legal boundaries & 5 & BLOCK \\
+Core Functionality (CF) & Deliverable acceptance against success criteria & 18 & BLOCK \\
+Integration (IN) & Cross-module relationship validation & 5 & BLOCK \\
+Edge Cases (EC) & Robustness and epistemic honesty & 4 & LOG \\
+\midrule
+\multicolumn{2}{r}{\textbf{Total}} & \textbf{32} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies (WDFW, NOAA, USGS, Snohomish County), peer-reviewed journals, or professional organizations. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every survey count, percentage, measurement, or token budget figure attributed to a specific named source. \\
+SC-END & Endangered species locations & No GPS coordinates or specific nest/den locations for bald eagles or any listed species; all species observations described at park/beach scale only. \\
+SC-IND & Tulalip attribution & Tulalip Tribes named specifically (never ``Indigenous peoples'' generically); no Indigenous knowledge claims without proper attribution; research gap noted where needed. \\
+SC-ADV & No policy advocacy & Document presents restoration evidence and findings without advocating for specific legislative positions, acquisition decisions, or regulatory changes. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Forage fish spawning habitat & Beach substrate characterized with reference to WDFW/MRC sources; surf smelt and sand lance spawning documented or flagged as probable \\
+CF-02 & Shellfish closure documented & WDFW/DOH closure citation present; year-round status confirmed; foraging warning included \\
+CF-03 & Picnic Point Creek status & Riparian condition described; fish passage status addressed (even if gap noted) \\
+CF-04 & Marine food web chain & Forage fish $\rightarrow$ Chinook $\rightarrow$ Southern Resident Orca chain explicitly traced with at least one citation per link \\
+CF-05 & Bird community & At least 8 species listed with habitat use; bald eagle documented observation included \\
+CF-06 & HFP event inventory & All 9 restoration events (2023--2026) listed with date, type, and participant count where available \\
+CF-07 & 2025 planting event & March 1, 2025 event documented: 40 volunteers, 89 native species, OFE partnership \\
+CF-08 & Bioblitz documented & April 25, 2026 City Nature Challenge event documented with iNaturalist protocol \\
+CF-09 & Meadowdale comparison & Comparison table present with cost (\$15M), estuary area (1.3 acres), species benefited, and awards \\
+CF-10 & Shellfish closure drivers & Water quality/stormwater as probable driver discussed; gap noted where site-specific data absent \\
+CF-11 & Pacific Queen chronology & Vessel chronology from WWII construction through 1958--1959 beaching documented; PSMHS as source \\
+CF-12 & Vessel authentication & Official number 257731 and 173-foot length cited; Arvid Franzen named as final owner \\
+CF-13 & Bluff geology & Glacially derived unconsolidated deposits described; Vashon Stade referenced \\
+CF-14 & Drift cell dynamics & Drift cell explanation includes: bluff erosion $\rightarrow$ beach supply $\rightarrow$ accretion at distal end $\rightarrow$ sand lance spawning preference \\
+CF-15 & Tide hiking windows & Three routes documented: Meadowdale (1.5 mi south), Shipwreck Point (1 mi north), Mukilteo (5 mi north) with tide-dependency warnings \\
+CF-16 & Park access & Parking limitation, overpass described, ADA constraint noted \\
+CF-17 & MRC forage fish protocol & Bulk sampling method described (100-ft transect, 1.5--2L sand, three mesh sieves) \\
+CF-18 & iNaturalist protocol & App download, photo submission, and species ID process described for general visitor \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Railroad barrier A+C$\rightarrow$B cascade & Document explicitly traces: BNSF seawall (C) constrains sediment budget and creek-mouth processes (A) which motivates restoration (B); Meadowdale as solved case \\
+IN-02 & Food web link to restoration rationale & Orca $\leftarrow$ Chinook $\leftarrow$ forage fish (A) $\leftarrow$ intertidal beach habitat (C) $\leftarrow$ native vegetation buffer (B) chain present in synthesis \\
+IN-03 & History contextualizes restoration & Industrial ship-breaking legacy (D) and current restoration effort (B) connected in synthesis narrative \\
+IN-04 & Cross-module consistency & Species names and counts consistent across modules; no contradictions in Pacific Queen dimensions or dates \\
+IN-05 & Document self-containment & A reader with no prior knowledge can understand the full park ecosystem; no undefined jargon; complete bibliography \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Intertidal beach and forage fish spawning habitat & CF-01, CF-02 & Pending \\
+2. Picnic Point Creek fish passage and riparian & CF-03 & Pending \\
+3. Marine food web chain & CF-04, IN-02 & Pending \\
+4. Bird community (8+ species) & CF-05 & Pending \\
+5. HFP restoration event inventory & CF-06, CF-07 & Pending \\
+6. Shellfish closure documented & CF-02, CF-10 & Pending \\
+7. Meadowdale comparative model & CF-09, IN-01 & Pending \\
+8. Pacific Queen history authenticated & CF-11, CF-12 & Pending \\
+9. Bluff geology and drift cell dynamics & CF-13, CF-14 & Pending \\
+10. Tulalip Tribes context & SC-IND & Pending \\
+11. Recreation and access features & CF-15, CF-16 & Pending \\
+12. Community science integration & CF-17, CF-18, CF-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; CAPCOM escalation \\
+PLAN & Planner & Wave decomposition; parallel track coordination; dependency management \\
+SCOUT & Research Agent & Additional web research to fill Stage 2 gaps; source validation \\
+EXEC-1 & Executor Alpha & Module A (Ecology) + Module E (Recreation) document production \\
+EXEC-2 & Executor Beta & Module D (History) + final document compilation (W3-PUB) \\
+CRAFT-ECO & Ecology Specialist & Module A: forage fish, food web, bird community, creek ecology \\
+CRAFT-REST & Restoration Specialist & Module B: HFP chronicle, restoration analysis, shellfish closure \\
+VERIFY & Verification Agent & Full test plan execution (SC, CF, IN, EC); verification report \\
+INTEG & Integration Agent & Wave 2 cross-module synthesis; railroad barrier and food web analyses \\
+CAPCOM & HITL Interface & Human approval at wave boundaries (post-W0, post-W1, post-W2) \\
+BUDGET & Resource Manager & Token budget tracking; session boundary planning \\
+LOG & Chronicle Agent & Commit messages; wave completion summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission & Picnic Point Park Deep Research \\
+Activation Profile & Squadron (12 roles) \\
+Total Modules & 5 (A: Ecology, B: Restoration, C: Geology, D: History, E: Recreation) \\
+Waves & 4 (0: Foundation, 1: Parallel Research, 2: Synthesis, 3: Publication) \\
+Parallel Tracks & 2 (Wave 1A: Ecology+Geology; Wave 1B: Restoration+History) \\
+Token Budget & 284,000 estimated / 327,000 ceiling \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Safety Tests & 5 mandatory-pass (BLOCK on failure) \\
+Total Tests & 32 \\
+Success Criteria & 12 \\
+HITL Checkpoints & 3 (post-W0, post-W1, post-W2) \\
+Estimated Sessions & 3--4 \\
+Status & Ready for GSD Orchestrator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Three years of restoration have made this shoreline look healthier. During this bioblitz, we have the chance to provide living records of life on Earth and use our observations to evaluate the park's health.''} \\[0.5em]
+\hspace*{\fill}--- Helena Puche, Conservation Chair, Olympic Fly Fishers of Edmonds, April 2026
+
+\vspace{0.8em}
+The park's pedestrian overpass spans more than railroad tracks. It spans the distance between knowing a place and caring for it --- between watching a bald eagle from a picnic table and submitting its observation to a global database that will help a county agency argue for the next estuary restoration. Picnic Point Park is where the Puget Sound's recovery gets personal: five miles of beach, one creek, nine cleanup events, hundreds of volunteers, and the slowly returning health of an intertidal world most people never see beneath their feet.
+\end{quotebox}
+
+\end{document}

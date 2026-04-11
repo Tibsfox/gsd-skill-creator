@@ -1,0 +1,1024 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ── Color Scheme: History / Political Science / Mathematics ──────────────
+\definecolor{primary}{HTML}{4A148C}      % Deep Burgundy — gravitas of history
+\definecolor{secondary}{HTML}{1565C0}    % Statecraft Blue — political clarity
+\definecolor{tertiary}{HTML}{263238}     % Dark Slate — mathematical precision
+\definecolor{accent}{HTML}{6A1B9A}       % Violet accent — complex plane
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{gold}{HTML}{F57F17}
+\definecolor{goldlight}{HTML}{FFF8E1}
+
+% ── Section Formatting ────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ───────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{goldbox}{
+  colback=goldlight, colframe=gold,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Helpers ─────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / Footers ─────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Political Science, History \& the Complex Plane}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox, Inc.},
+  pdftitle={Political Science, History \& the Complex Plane -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── TITLE PAGE ────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Political Science, History\\[0.3em]\& Current State}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{College of Knowledge $\cdot$ Complex Plane of Experience Mapping}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study — Five-Module Squadron}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{0.5cm}
+\begin{asciibox}
+Real Axis: Observable political/historical state
+Imaginary Axis: Subjective experience, meaning, narrative
+z = (institutional reality) + i(lived experience)
+
+The complex plane is not a metaphor. It is the correct topology.
+\end{asciibox}
+
+\vspace{2cm}
+{\small\sffamily\textcolor{subtlegray}{Date: April 6, 2026 $|$ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) $|$ Est.\ 5--7 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ─────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ═════════════════════════════════════════════════════════════════════════
+
+\section{Political Science, History \& the Complex Plane --- Vision Guide}
+
+\metafield{Date:}{April 6, 2026}
+\metafield{Status:}{Vision Complete / Research Conducted / Ready for Mission Execution}
+\metafield{Depends On:}{\textit{The Space Between} (mathematical spine), College of Knowledge architecture, GSD v1.49.x}
+\metafield{Context:}{College of Knowledge Department Seed --- Political Science / History / Current Events}
+
+\subsection{Vision}
+
+History is not a timeline. It is a trajectory through a complex plane.
+
+Every political event, every regime transition, every Enlightenment pamphlet passed hand to hand in a Paris salon has two components: the \textit{real} part --- what happened, who held power, what laws were enacted --- and the \textit{imaginary} part --- what it felt like to be alive in that moment, how people narrated their own experience, what meaning they made of the forces bearing down on them. A government can be democratic on paper and experienced as oppressive in the gut. A revolution can overthrow everything and leave the feeling-architecture of the old order untouched. The two axes are not redundant. They are orthogonal. Together they define where a society actually is.
+
+The "Amiga Principle" finds its political corollary here: just as specialized co-processors outperform a generalist CPU by sampling the right signal at the right time, a political analyst who tracks both the real and imaginary axes simultaneously sees inflection points that a pure institutionalist misses. The signal lives in the space between the observable and the experienced --- in the phase trajectories of collective meaning, not just in election returns.
+
+This mission seeds the Political Science and History department of the College of Knowledge. It is not a survey of everything that has ever happened. It is a \textit{framework} --- a unit-circle topology for understanding how political systems move, degrade, recover, and transform --- grounded in five decades of inflection points from Westphalia (1648) to the democratic backsliding crisis of 2025, and equipped with the mathematical language of the complex plane to make that topology legible. The through-line is simple: power is always dual. It acts and it is experienced. Any curriculum that teaches only one axis produces graduates who are blind in one eye.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The real-only fallacy.} Political science curricula and journalism overwhelmingly track institutional indicators (GDP, election outcomes, legislation, V-Dem scores) while treating subjective political experience as epiphenomenal. This produces graduates who can explain why a country is classified as a democracy but cannot explain why its citizens feel like subjects.
+
+  \item \textbf{History as inert data.} History is frequently taught as a sequence of dates and named events rather than as a dynamical system with attractors, phase transitions, and sensitive dependence on initial conditions. Students memorize Westphalia without understanding it as a bifurcation point in the sovereignty attractor landscape.
+
+  \item \textbf{The current-events disconnection.} The global democratic backsliding crisis of 2020--2026 (V-Dem reports global democracy back to 1985 levels by population-weighted average; 91 autocracies now outnumber 88 democracies for the first time) is presented as a shocking surprise rather than as a predictable trajectory visible in the complex plane for at least a decade.
+
+  \item \textbf{No framework for College of Knowledge integration.} Without a formal mathematical framework connecting political science and history to the rest of the curriculum, the College of Knowledge risks producing siloed departments that do not speak the common language of \textit{The Space Between}'s unit circle architecture.
+
+  \item \textbf{The imagination deficit.} Authoritarianism is not won by tanks alone --- it is won by capturing the imaginary axis. Polarization, disinformation, and democratic erosion succeed precisely because they reshape the experienced meaning of democratic norms before institutions fall. Curricula that ignore this mechanism produce citizens who cannot recognize authoritarian drift in their own societies.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{goldbox}
+\textbf{The Complex Plane of Political Experience}
+
+\[
+  z(t) = R(t) + i \cdot X(t)
+\]
+
+where $R(t)$ = real component (institutional state: democracy indices, power distribution, policy outcomes) and $X(t)$ = imaginary component (experiential layer: collective meaning, narrative, felt legitimacy, polarization topology). History is the trace of $z(t)$ through this plane. Political science studies the dynamics governing $\dot{z}(t)$.
+\end{goldbox}
+
+\subsubsection{Domain Map --- Historical Epochs as Phase Regions}
+
+\begin{asciibox}
+IMAGINARY AXIS: Experienced Legitimacy / Meaning
+     ^
+High |  [Theocracy / Divine Right]    [Liberal High-Water]
+Leg. |  1648 Westphalia               1989-2005 Post-Cold War
+     |
+     |  [Revolutionary Chaos]          [Populist Capture]
+     |  1789-1815 France               2016-2026 Global
+Low  |
+Leg. +--------------------------------------------> REAL AXIS
+          Autocracy <----> Democracy (Institutional State)
+          
+Inflection Points:
+  P1: Peace of Westphalia (1648)  — sovereignty attractor established
+  P2: Enlightenment Peak (1776-1789) — real axis pivot, imaginary lag
+  P3: World Wars (1914-1945)  — complex plane collapse / reconstruction
+  P4: Decolonization (1945-1975) — imaginary axis redraw globally
+  P5: Cold War End (1989-1991)  — false stability attractor
+  P6: Third Wave Autocratization (2016-2026) — current trajectory
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
++---[ M1: Political Science Foundations ]---+
+|  Systems theory, power, governance models  |
++--------------------------------------------+
+         |                    |
+         v                    v
++--[ M2: Historical Arc ]--+  +--[ M3: Current State ]--+
+|  Westphalia to Present   |  |  2020-2026 Landscape    |
+|  Inflection Points       |  |  Democracy/Autocracy    |
++--------------------------+  +-------------------------+
+         |                              |
+         +----------+-------------------+
+                    v
+         +--[ M4: Complex Plane ]--+
+         |  Mathematical Framework  |
+         |  Phase Space Mapping     |
+         |  Attractor Analysis      |
+         +-------------------------+
+                    |
+                    v
+         +--[ M5: College of Knowledge ]--+
+         |  Curriculum Architecture       |
+         |  Cross-Departmental Links      |
+         |  Unit Circle Integration       |
+         +--------------------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Political Science Foundations}
+Theory of political systems, complexity in governance, power as relational and emergent phenomenon, game-theoretic models of democratic accountability, systems theory from Easton (1965) to Cairney (2012), the Complex Adaptive Systems (CAS) paradigm applied to policy, and the inputs/outputs/feedback loop architecture that maps cleanly onto signal processing.
+
+\subsubsection{Module 2: Historical Arc}
+Epochal inflection points from the Peace of Westphalia (1648) through the Enlightenment, American and French Revolutions, World Wars, decolonization, Cold War, and post-1989 democratic expansion. Each epoch analyzed as a phase region in the complex plane: what changed on the real axis, what changed on the imaginary axis, and why the two frequently diverged.
+
+\subsubsection{Module 3: Current Global State}
+The third wave of autocratization (2016--2026): V-Dem data, International IDEA's Global State of Democracy 2025, EIU Democracy Index 2024, Carnegie Endowment case studies. Democratic backsliding mechanics: polarization as weapon, disinformation infrastructure, institutional erosion from within. Also: democratic resilience signals, out-of-country voting trends, and regions of recovery.
+
+\subsubsection{Module 4: Complex Plane of Experience Mapping}
+The mathematical framework: complex plane as topology for political states, phase space and attractor theory applied to regime dynamics, bifurcation points in historical transitions, the force-field model of power as emergent property of complex adaptive systems (Kok et al., 2020), and the relationship to \textit{The Space Between}'s unit circle architecture. The imaginary axis is precisely analogous to the imaginary component in Euler's formula --- it encodes rotation, cyclical dynamics, and the periodicity of historical patterns.
+
+\subsubsection{Module 5: College of Knowledge Integration}
+Architecture of the Political Science / History department within the \texttt{.college/} directory. Cross-departmental links: mathematics (complex analysis, phase space), literature (historiography, narrative), economics (political economy), philosophy (ethics of governance, social contract theory). Multi-language panel design following the Rosetta Core architecture. Seeding from \textit{The Space Between} Chapters relevant to dynamical systems and from \textit{The Hundred Voices} historical narrative spans.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus: claude-opus-4-6     # Synthesis / cross-module integration
+  denise: claude-sonnet-4-6  # Research compilation / document assembly
+  paula: claude-haiku-4-5    # Scaffolding / schema / templates
+  gary: claude-haiku-4-5     # Cache hydration / source indexing
+
+allocation:
+  opus:   30%   # M4 mathematical framework, M5 integration design
+  sonnet: 60%   # M1 theory survey, M2 historical arc, M3 current state
+  haiku:  10%   # Wave 0 foundation, shared schemas, bibliography
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Political science theory: systems theory, complexity, CAS, game theory applied to governance
+  \item Historical arc: Westphalia (1648) through April 2026, 6 major inflection points
+  \item Current democratic backsliding crisis: V-Dem, IDEA, EIU data 2020--2026
+  \item Complex plane mathematical framework: $z(t) = R(t) + iX(t)$, phase space, attractors
+  \item College of Knowledge department seed: Political Science / History curriculum architecture
+  \item Cross-links to \textit{The Space Between} and \textit{The Hundred Voices}
+  \item Multi-language Rosetta Core panel design for the department
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Country-by-country comprehensive political histories
+  \item Economic policy detail (handled by Economics department)
+  \item Military history beyond its political inflection significance
+  \item Electoral system design (adjacent but separate mission)
+  \item Pre-Westphalian political history (future v2.0)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item The complex plane framework $z(t) = R(t) + iX(t)$ is formally defined, with real and imaginary axes precisely specified and distinguished from metaphor.
+  \item All 6 historical inflection points (Westphalia through 2026) are mapped as phase transitions in the $z$-plane with documented directional shift on both axes.
+  \item Module 3 current-state analysis cites V-Dem 2025, IDEA GSoD 2025, and EIU Democracy Index 2024 with specific quantitative findings.
+  \item The attractor model for democratic and autocratic regimes is formally defined with at least 3 distinguishing dynamical features per attractor basin.
+  \item College of Knowledge department architecture produces a \texttt{.college/polsci-history/} directory specification with at minimum: \texttt{CURRICULUM.md}, \texttt{ROSETTA.md}, and 3 cross-departmental link specifications.
+  \item \textit{The Hundred Voices} historical spans (1926--2025) are formally cross-indexed to the phase regions identified in Module 2.
+  \item The imaginary axis is connected to \textit{The Space Between}'s unit circle via at least one formal mathematical bridge (Euler's formula, rotation group, or equivalent).
+  \item All quantitative claims are attributed to named sources with publication year.
+  \item The mission package is self-contained: a GSD orchestrator with no prior context can execute from the spec alone.
+  \item Safety warden review passes: no Indigenous content handled generically, no policy advocacy, all sensitivity areas documented.
+  \item Module 4 mathematical framework is reviewed by the Agnus (Opus) agent for formal correctness before publication.
+  \item Verification matrix is complete: all 10 success criteria map to at least 2 tests each.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Integration Point} \\
+\midrule
+\textit{The Space Between} & Parent mathematical spine & Unit circle $\leftrightarrow$ complex plane bridge; Ch.\ on dynamical systems \\
+\textit{The Hundred Voices} & Historical narrative source & 100 voices $\times$ 1926--2025 cross-indexed to phase regions \\
+\textit{The Longer Road} & Philosophical companion & Experiential / imaginary axis grounding \\
+College of Knowledge Vision & Destination architecture & Polsci-History as a founding department \\
+GSD v1.49.x dev branch & Execution platform & Mission handed to skill-creator for build \\
+Fox Infrastructure Group & Long-horizon application & Political science of Pacific Rim governance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Every analog system has a real component and an imaginary component. The Amiga knew this. The chipset did not compute one without the other --- Agnus managed the real bus traffic, Paula sang the imaginary frequencies, and Denise rendered what neither could produce alone. Political science has spent two centuries trying to be Agnus alone. It has the bus traffic down cold: vote counts, policy outputs, regime classifications. But the imaginary axis --- the felt experience of power, the narrative topology of legitimacy, the emotional frequency of collective identity --- has been left to literature, to philosophy, to the gut feelings of people who have lived through things.
+
+This mission gives the imaginary axis back to political science. Not as a soft concession to the humanities, but as a formal mathematical necessity. A complex number without its imaginary component is not a "simpler" number --- it is a different object entirely, one that has lost its capacity to encode rotation, periodicity, and phase. A political analysis without its experiential component is the same kind of reduction. It loses the ability to predict when a formally democratic system will \textit{feel} authoritarian to its citizens long before the institutions fall. It loses the signal that lives in the space between.
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ═════════════════════════════════════════════════════════════════════════
+
+\section{Political Science, History \& the Complex Plane --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference is organized by module. Each section provides sourced findings for one research module. Agents should use this as the primary factual substrate --- do not re-research what is documented here; conduct targeted searches only for gaps identified in the spec.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item V-Dem Institute (Varieties of Democracy), University of Gothenburg --- primary regime classification data
+  \item International IDEA (Institute for Democracy and Electoral Assistance)
+  \item Carnegie Endowment for International Peace
+  \item Economist Intelligence Unit (EIU) --- Democracy Index
+  \item Frontiers in Social Psychology --- peer-reviewed democratic resilience research
+  \item Kettering Foundation --- civic culture and democratic values surveys
+  \item ResearchGate / Tandfonline --- complexity theory in political science (Cairney 2012; Kok et al.\ 2020)
+  \item Vision of Humanity / Institute for Economics and Peace
+\end{itemize}
+
+\subsection{Module 1: Political Science Foundations}
+
+\subsubsection{Systems Theory in Political Science}
+
+David Easton (1965) first formalized the systems view of politics: a political system receives \textit{inputs} (demands and support from citizens and interest groups), processes them, produces \textit{outputs} (policies, laws, decisions), and receives \textit{feedback} from society that shapes future inputs. This input/output/feedback architecture maps directly onto signal processing --- a fact not lost on electrical engineers who enter political analysis.
+
+Paul Cairney's foundational 2012 paper in \textit{Political Studies Review} defines complexity theory in political science as a paradigm that ``identifies instability and disorder in politics and policy making, and links them to the behaviour of complex systems.'' The key shift: from analyzing individual parts to analyzing emergent systemic behavior that cannot be reduced to its components. This is the Amiga Principle stated as a social science epistemology.
+
+\subsubsection{Complexity as a Paradigm}
+
+Cairney and Toomey (2025) advocate for ``systems leadership'' as the appropriate response to what they call VUCA-like problems (Volatile, Uncertain, Complex, Ambiguous) in public policy. The complexity literature identifies four key themes with practical implications: enabling leadership, leveraging experimentation, holistic perspective, and the humble approach.
+
+Kok, Loeber, and Grin (2020) in \textit{Research Policy} define power in complex adaptive systems as ``a productive and relational phenomenon that emerges from interactions between components.'' They describe six mechanisms through which power relations produce systemic dynamics --- a force-field understanding that supports the imaginary axis in the complex plane model, since power-as-force-field acts on the experienced meaning layer, not just on institutional structure.
+
+\subsubsection{Game Theory and Democratic Accountability}
+
+Yale ISPS conference findings (2025): research demonstrates that ``polarization tends to end not through compromise, but when one party becomes dominant --- often due to big changes in who votes and what issues matter.'' Co-production (citizen-government cooperation in providing services) was found to ``blur the lines of responsibility, sometimes making it harder for voters to know whether to reward or punish politicians.'' Both findings confirm that the imaginary axis (experienced accountability, felt legitimacy) diverges systematically from the real axis (formal institutional accountability).
+
+\subsection{Module 2: Historical Arc --- Six Inflection Points}
+
+\subsubsection{P1: Peace of Westphalia (1648)}
+
+The 1648 Peace of Westphalia is the founding bifurcation point of the modern nation-state system. It established that political authority derives from territorial sovereignty rather than religious legitimacy --- the principle \textit{cuius regio, eius religio} effectively privatized religion out of the inter-state power structure.
+
+Real axis shift: from imperial/ecclesiastical power to state sovereignty. Imaginary axis shift: slower --- the \textit{felt} legitimacy of divine right persisted for over a century in many regions, creating the first major documented divergence between real and imaginary political axes. The Enlightenment was, in part, the imaginary axis catching up with the real axis revolution that Westphalia had already enacted.
+
+\subsubsection{P2: Enlightenment and Revolutions (1689--1815)}
+
+The Enlightenment (broadly 1650--1789) centered reason as the source of authority and legitimacy --- a reorientation of the imaginary axis so fundamental it reconstructed the real axis downstream. Locke's social contract, Montesquieu's separation of powers, Rousseau's general will, and Kant's ``dare to know'' (Sapere Aude) collectively moved the imaginary axis from divine/traditional legitimacy toward rational/popular legitimacy.
+
+The American Revolution (1776) and French Revolution (1789) converted imaginary-axis changes into real-axis restructuring. The French case is the canonical example of phase trajectory overshoot: the imaginary axis swung further than institutions could stabilize, producing the Terror (1793--94), Thermidorian reaction, and eventually the Napoleonic retrenchment. The trajectory on the complex plane looks like a spiral into a chaotic attractor followed by a forced return to a lower-energy democratic attractor.
+
+\subsubsection{P3: World Wars and Reconstruction (1914--1945)}
+
+The World Wars represent the most violent collapse of the complex plane in modern history. The Westphalian state system, which had stabilized for approximately two and a half centuries, entered a global phase transition. Both axes were simultaneously destabilized: institutional democracy collapsed across most of Europe on the real axis, while the imaginary axis fractured into incompatible meaning-structures (nationalism, fascism, communism, liberal democracy) competing for the same territorial populations.
+
+The 1945 reconstruction --- UN charter, Bretton Woods, Marshall Plan, Universal Declaration of Human Rights --- was an attempt to re-establish stable attractors on both axes simultaneously. It largely succeeded for Western Europe, which became the only region to show slight democratic improvement even in the 2024 EIU Democracy Index.
+
+\subsubsection{P4: Decolonization (1945--1975)}
+
+Decolonization redrew the imaginary axis globally for the first time in the history of the Westphalian system. Approximately 80 new nation-states were created between 1945 and 1975. The real axis was reorganized (new institutions, new sovereignty claims), but the imaginary axis --- experienced legitimacy, collective identity, felt membership in a political community --- was shaped by colonial histories that the new institutional architectures could not simply overwrite.
+
+This period is the single most important demonstration that the imaginary axis has its own dynamics, its own momentum, and its own lag relative to the real axis. Postcolonial political theory (Fanon, Said, Spivak) is, at its core, a theory of the imaginary axis --- of how colonized peoples experienced power structures that the formal real axis no longer officially sanctioned.
+
+\subsubsection{P5: Cold War End and False Stability (1989--2016)}
+
+Francis Fukuyama's ``end of history'' thesis (1992) was the most consequential misreading of the complex plane in modern intellectual history. It identified a stable attractor on the real axis (liberal democratic capitalism) and inferred that the imaginary axis had also reached equilibrium. The V-Dem data (2025) indicates this was wrong: democratic consolidation correlates with \textit{reduced vigilance} against authoritarianism and \textit{weaker societal resistance} to democratic erosion (Przeworski 2025).
+
+The false stability attractor from 1991--2016 was not a destination. It was a saddle point --- stable in some directions, unstable in others. The third wave of autocratization, now clearly underway, was the trajectory through the unstable manifold of that saddle.
+
+\subsubsection{P6: Third Wave of Autocratization (2016--2026)}
+
+The current phase region. V-Dem Democracy Report 2025 documents:
+\begin{itemize}[noitemsep]
+  \item Average liberal democracy levels back to 1985 population-weighted values
+  \item 45 countries in ongoing autocratization episodes; 19 in democratization
+  \item 91 autocracies now outnumber 88 democracies globally --- first reversal in the era
+  \item Nearly half of autocratizing governments are actively spreading disinformation
+  \item A quarter of all countries experiencing increasing political polarization
+\end{itemize}
+
+International IDEA issued 20 democratic erosion alerts in the first four months of 2025 --- twice as many as in any of the previous two full years.
+
+\textit{Mechanism:} Kettering Foundation (2025) research confirms democratic backsliding is \textit{not} driven by citizen demand for authoritarianism. Rather, it is a top-down process driven by incumbent leaders who capture the imaginary axis first --- normalizing anti-democratic actions, using polarization as a weapon, and collapsing the experienced distinction between legitimate democratic competition and existential threat. Citizens' real institutional preferences remain democratic even as the felt environment becomes authoritarian. This is the textbook signature of an imaginary-axis capture preceding real-axis collapse.
+
+\subsection{Module 3: Current Global State --- Quantitative Baseline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Indicator} & \tableheader{Value (2024--25)} & \tableheader{Source} \\
+\midrule
+Global avg.\ democracy score & 5.17 / 10 (lowest in decades) & EIU Democracy Index 2024 \\
+Population in full democracies & 6.6\% (down from 12.5\% decade ago) & EIU 2024 \\
+Countries in autocratization & 45 & V-Dem 2025 \\
+Countries in democratization & 19 & V-Dem 2025 \\
+Global autocracies vs.\ democracies & 91 vs.\ 88 & V-Dem 2025 \\
+IDEA erosion alerts (Jan--Apr 2025) & 20 & International IDEA \\
+Population in autocratizing countries & $\sim$20\% of world & V-Dem 2025 \\
+Population in democratizing countries & $\sim$6\% of world & V-Dem 2025 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Regional Signals}
+
+\textbf{United States:} EIU classifies as ``flawed democracy.'' V-Dem notes Liberal Democracy Index fell from 0.85 to 0.73 during Trump's first term (to 1976-level). Trump's second administration actions as of April 2026 have produced the highest rate of democratic erosion alerts in IDEA's tracking history. Carnegie Endowment (2025) notes debate among analysts whether the US has already entered ``competitive authoritarianism.''
+
+\textbf{Europe:} Western Europe remains the only region with slight democratic improvement (EIU 2024). However, Greece is a statistically confirmed autocratizer; Austria has entered far-right government formation; Germany, France, and the Netherlands face mounting populist pressure. Serbia, Hungary remain in ongoing autocratization.
+
+\textbf{Global South:} Bangladesh's 2024 student revolution (against quota system and authoritarian Sheikh Hasina government) is among the clearest cases of bottom-up democratic recovery pressure. Kenya's Ruto government faces mounting pro-democracy resistance. These represent democratization trajectories on the imaginary axis that may or may not convert to real-axis institutional change.
+
+\subsection{Module 4: Complex Plane of Experience --- Mathematical Framework}
+
+\subsubsection{Formal Definition}
+
+Let the political state of a system at time $t$ be represented as:
+\[
+  z(t) = R(t) + i \cdot X(t)
+\]
+
+where:
+\begin{itemize}[noitemsep]
+  \item $R(t) \in \mathbb{R}$ is the \textbf{real component}: institutional democracy level, measured by V-Dem Liberal Democracy Index or equivalent metric, normalized to $[-1, +1]$
+  \item $X(t) \in \mathbb{R}$ is the \textbf{imaginary component}: the experiential/legitimacy layer --- the degree to which citizens \textit{feel} their political system to be legitimate, participatory, and consonant with their values. This is operationalized via survey instruments (Kettering Foundation, Pew Global Attitudes, World Values Survey)
+  \item The complex modulus $|z(t)| = \sqrt{R(t)^2 + X(t)^2}$ represents the overall stability of the political system
+  \item The argument $\arg(z(t)) = \arctan(X(t)/R(t))$ represents the phase angle between experienced and institutional reality --- the gap between how things are and how they feel
+\end{itemize}
+
+\subsubsection{Phase Space and Attractors}
+
+Phase space in complex systems represents ``all the states the system can possibly occupy over time'' (ODI Working Paper on Complexity). For political systems, the phase space is the complex plane itself. Attractor basins correspond to stable regime types:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Attractor} & \tableheader{Real Axis} & \tableheader{Imaginary Axis} & \tableheader{Distinguishing Dynamics} \\
+\midrule
+Consolidated Democracy & High positive & High positive & Tight coupling; high $|z|$ \\
+Flawed Democracy & Moderate positive & Mixed & Increasing $\arg(z)$; diverging axes \\
+Competitive Authoritarianism & Low positive / zero & Often negative & Imaginary axis captured before real \\
+Closed Autocracy & Strongly negative & Strongly negative & Low $|z|$; axes coupled negatively \\
+Revolutionary State & Oscillating & Oscillating & Chaotic trajectory; no stable attractor \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Connection to The Space Between and Euler's Formula}
+
+The unit circle of \textit{The Space Between} maps to the complex plane directly via Euler's formula:
+\[
+  e^{i\theta} = \cos\theta + i\sin\theta
+\]
+
+A political system on the unit circle ($|z| = 1$) is in perfect energetic balance between its real and imaginary components. Rotation around the unit circle encodes the \textit{periodicity} of political cycles --- the historical observation that democratic and autocratic phases recur with quasi-regular frequency across centuries (the first, second, and now third waves of democratization / autocratization are rotational structure in the complex plane, not random noise).
+
+The imaginary axis in this framework is not ``fictional'' --- it is precisely analogous to the imaginary axis in electrical engineering (impedance, phase shift, reactive power). The ``imaginary'' component of a political system is what determines its \textit{phase response} to external shocks. A system with high imaginary legitimacy will absorb institutional shocks elastically and return toward its attractor. A system with depleted imaginary legitimacy will exhibit catastrophic phase collapse under the same shock magnitude.
+
+\subsection{Module 5: College of Knowledge Integration}
+
+\subsubsection{Department Architecture}
+
+The Political Science / History department lives at \texttt{.college/polsci-history/} within the College of Knowledge \texttt{.college/} root directory. The Rosetta Core architecture requires that every concept be expressed in at least 3 languages across 3 computational paradigms.
+
+\begin{asciibox}
+.college/polsci-history/
+├── CURRICULUM.md          # Department overview, learning arcs
+├── ROSETTA.md             # Multi-language / multi-paradigm core
+├── CROSS_LINKS.md         # Connections to other departments
+├── modules/
+│   ├── 01-foundations/    # Systems theory, complexity, power
+│   ├── 02-historical-arc/ # Westphalia to present
+│   ├── 03-current/        # 2020-2026 backsliding crisis
+│   ├── 04-complex-plane/  # Mathematical framework
+│   └── 05-integration/    # Cross-departmental synthesis
+├── rosetta/
+│   ├── python/            # Political data analysis (pandas, networkx)
+│   ├── r-lang/            # Statistical political science (V-Dem tools)
+│   ├── julia/             # Phase space / dynamical systems modeling
+│   ├── sql/               # Historical event databases
+│   └── prolog/            # Logic-based political theory proofs
+└── texts/
+    ├── primary-sources/   # Locke, Rousseau, Kant excerpts
+    ├── data-sources/      # V-Dem codebook, IDEA indices
+    └── gsd-links/         # Cross-refs to Space Between, Hundred Voices
+\end{asciibox}
+
+\subsubsection{Cross-Departmental Links}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Department} & \tableheader{Link Type} & \tableheader{Shared Concept} \\
+\midrule
+Mathematics & Formal bridge & Complex plane, phase space, attractor theory \\
+Literature & Narrative bridge & \textit{The Hundred Voices} historical spans; historiography as genre \\
+Philosophy & Conceptual bridge & Social contract, ethics of governance, epistemology of power \\
+Economics & Structural bridge & Political economy; Bretton Woods; neoliberalism and democracy \\
+Computer Science & Systems bridge & Complex adaptive systems; information environments and democracy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Protocol} \\
+\midrule
+Indigenous political systems & ABSOLUTE & Nation-specific attribution required; UNDRIP compliance \\
+Current political figures & GATE & Factual/analytical only; no advocacy; peer-reviewed or agency source only \\
+Authoritarian regime descriptions & ANNOTATE & Empirical description without policy prescription \\
+US political situation 2025--26 & ANNOTATE & Present V-Dem/IDEA/EIU data; note ongoing debate among analysts \\
+Historical atrocities & GATE & Named sources; contextualized; never sensationalized \\
+Imaginary axis survey data & GATE & Methodology disclosed; sampling limitations noted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}[noitemsep]
+  \item V-Dem Institute. \textit{Democracy Report 2025: 25 Years of Autocratization --- Democracy Trumped?} University of Gothenburg, 2025.
+  \item International IDEA. \textit{The Global State of Democracy 2025: Democracy on the Move}. Stockholm, 2025.
+  \item International IDEA. \textit{Global State of Democracy Indices}, 1975--2024 (Version 9).
+  \item Carnegie Endowment for International Peace. ``Ten Pivotal Cases for Global Democracy.'' December 2025.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[noitemsep]
+  \item Cairney, P. ``Complexity Theory in Political Science and Public Policy.'' \textit{Political Studies Review} 10(3), 2012.
+  \item Autioniemi \& Jalonen. ``A Complexity Theory Perspective on Politico-Administrative Systems.'' \textit{International Public Management Journal}, 2024.
+  \item Kok, K., Loeber, A., Grin, J. ``Politics of Complexity.'' \textit{Research Policy} 49(8), 2020.
+  \item Moller, K. ``The Quest for Transformative Politics and the Circumstances of Social Complexity.'' \textit{European Journal of Social Theory}, 2025.
+  \item Ullah, A.K.A. ``Trends in Political Science Research: Democratic Dissatisfaction.'' \textit{International Political Science Review}, 2025.
+  \item Houck, S.C., Everton, S., Newman, L.S. (eds.). ``Social and Political Psychological Perspectives on Global Threats to Democracy.'' \textit{Frontiers in Social Psychology} 3, 2025.
+  \item Jones, M. ``Phase Space: Geography, Relational Thinking, and Beyond.'' \textit{Progress in Human Geography} 33(4), 2009.
+\end{itemize}
+
+\subsubsection{Professional Organizations and Surveys}
+\begin{itemize}[noitemsep]
+  \item Economist Intelligence Unit. \textit{Democracy Index 2024}. London: EIU, 2025.
+  \item Frantz, E. and Kettering Foundation. ``What Unites Us: Insights from the 2025 Democracy for All Project Survey.'' December 2025.
+  \item Vision of Humanity / Institute for Economics and Peace. ``Trend of Political Disruption Kickstarts Again in 2025.'' January 2025.
+  \item Yale ISPS. ``How Game Theory and Political Science Are Rewriting What We Know About Democracy.'' May 2025.
+  \item ODI Working Paper. ``Exploring the Science of Complexity: Phase Space and Attractors.'' Overseas Development Institute.
+\end{itemize}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ═════════════════════════════════════════════════════════════════════════
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete, publication-ready College of Knowledge department seed for Political Science and History, grounded in the Complex Plane of Experience mathematical framework ($z(t) = R(t) + iX(t)$), with sourced research across five modules: theoretical foundations, historical arc (Westphalia--2026), current global state, mathematical framework, and curriculum architecture. The deliverables form the inaugural installment of the \texttt{.college/polsci-history/} directory and establish the mathematical bridge between political science and \textit{The Space Between}'s unit circle architecture.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0 (Foundation)
+  [Haiku] Shared schemas, bibliography index, directory scaffold
+  Output: schemas/, CURRICULUM.md skeleton, source index JSON
+       |
+       v
+WAVE 1A (Parallel)                 WAVE 1B (Parallel)
+  [Sonnet] M1 + M2                   [Sonnet] M3 + M5
+  Theory + Historical Arc             Current State + CoK Architecture
+  Outputs: modules/01-02/             Outputs: modules/03-05/
+       |                                    |
+       +----------+-----------+-------------+
+                  v
+WAVE 2 (Synthesis)
+  [Opus] M4 Complex Plane Framework + Cross-Module Integration
+  Mathematical formal definition + unit circle bridge
+  Outputs: modules/04/, CROSS_LINKS.md, ROSETTA.md
+                  |
+                  v
+WAVE 3 (Publication + Verification)
+  [Sonnet] Assembly, formatting, safety review, test execution
+  Outputs: Final PDF + .tex + index.html + directory package
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, directory scaffold
+  \item \textbf{Research Layer} --- Five module documents (M1--M5), sourced and verified
+  \item \textbf{Mathematical Layer} --- Complex plane formal framework with Euler bridge
+  \item \textbf{Curriculum Layer} --- \texttt{.college/polsci-history/} directory with Rosetta panels
+  \item \textbf{Publication Layer} --- Mission PDF + landing page
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module 1: Foundations Doc & All claims sourced; CAS framework defined & M1-SPEC \\
+2 & Module 2: Historical Arc & 6 inflection points mapped in $z$-plane & M2-SPEC \\
+3 & Module 3: Current State & V-Dem/IDEA/EIU quantitative baseline & M3-SPEC \\
+4 & Module 4: Math Framework & $z(t)$ formally defined; Euler bridge present & M4-SPEC \\
+5 & Module 5: CoK Architecture & Directory scaffold + 3 cross-links & M5-SPEC \\
+6 & CURRICULUM.md & Dept overview + learning arcs & M5-SPEC \\
+7 & ROSETTA.md & 5-language panels for core concepts & M5-SPEC \\
+8 & CROSS\_LINKS.md & 5 dept links with shared concept defined & M5-SPEC \\
+9 & Mission PDF & This document, final compiled & LaTeX \\
+10 & index.html & Landing page with download links & HTML \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Wave 0 foundation schemas & None & Haiku & 8k \\
+M1: Theory survey & Wave 0 & Sonnet & 20k \\
+M2: Historical arc & Wave 0 & Sonnet & 25k \\
+M3: Current state & Wave 0 + M2 & Sonnet & 20k \\
+M5: CoK architecture & Wave 0 & Sonnet & 18k \\
+M4: Complex plane & M1, M2, M3 & Opus & 30k \\
+Cross-module integration & M1--M5 & Opus & 15k \\
+ROSETTA.md panels & M4 + M5 & Sonnet & 20k \\
+Safety review + test run & All & Sonnet & 10k \\
+Publication assembly & All & Sonnet & 12k \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total estimated}} & \textbf{178k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Mathematical framework (M4) requires formal correctness judgment; cross-module integration requires synthesis that cannot be decomposed; unit circle bridge to \textit{The Space Between} requires deep architectural knowledge \\
+Sonnet & 60\% & Five module documents are structured research tasks well within Sonnet's survey capability; ROSETTA panels are template-driven; safety review is systematic \\
+Haiku & 10\% & Wave 0 schema generation and source indexing are pure scaffolding; no judgment required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{CAPCOM Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Auto-proceed \\
+1A & Theory + History & Parallel & Sonnet & Human review \\
+1B & Current + CoK & Parallel & Sonnet & Human review \\
+2 & Math + Synthesis & Sequential & Opus & Human review \\
+3 & Publication & Sequential & Sonnet & Final approval \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Create directory scaffold & Haiku & \texttt{.college/polsci-history/} tree \\
+Generate shared schemas & Haiku & \texttt{schemas/} JSON files \\
+Index all sources & Haiku & \texttt{source\_index.json} (21 sources) \\
+Seed CURRICULUM.md skeleton & Haiku & Section headers, module list \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (runs simultaneously with Track B):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M1: Political science theory & Sonnet & \texttt{modules/01-foundations/MODULE.md} \\
+M2: Historical arc & Sonnet & \texttt{modules/02-historical-arc/MODULE.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M3: Current global state & Sonnet & \texttt{modules/03-current/MODULE.md} \\
+M5: CoK architecture & Sonnet & \texttt{modules/05-integration/MODULE.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM Gate 1:} Human reviews M1--M3, M5 for factual accuracy, sensitivity compliance, and completeness before Wave 2 begins.
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M4: Complex plane framework & Opus & \texttt{modules/04-complex-plane/MODULE.md} \\
+Euler bridge to \textit{Space Between} & Opus & Formal proof section in M4 \\
+Cross-module integration & Opus & \texttt{CROSS\_LINKS.md} \\
+ROSETTA.md panels & Sonnet (Opus direction) & 5-language panels \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM Gate 2:} Human reviews M4 mathematical framework for correctness. Euler bridge to \textit{The Space Between} reviewed for conceptual fidelity.
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Safety warden review & Sonnet & Safety review log \\
+Execute all tests & Sonnet & Test results report \\
+Assemble final PDF & Sonnet & \texttt{polsci\_complex\_plane\_mission.pdf} \\
+Generate index.html & Sonnet & \texttt{index.html} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Prefix all module agents with the Stage 2 Research Reference document (2k tokens) as shared context --- avoids re-fetching sources across agents
+  \item The source index JSON (Wave 0 output) is injected into every Wave 1 agent context
+  \item M4 Opus agent receives all four other module documents as input --- requires a single large context window; schedule as sole Opus invocation to maximize cache hit rate
+  \item Wave 3 Sonnet agent receives M1--M5 as a single assembled document to minimize round-trips
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Model} & \tableheader{Est.\ Cost} \\
+\midrule
+Wave 0 & 5k & 8k & Haiku & Low \\
+Wave 1A & 15k & 45k & Sonnet & Medium \\
+Wave 1B & 15k & 38k & Sonnet & Medium \\
+Wave 2 & 120k & 45k & Opus & High \\
+Wave 3 & 140k & 22k & Sonnet & Medium \\
+\midrule
+\textbf{Total} & $\sim$295k & $\sim$158k & Mixed & \textbf{Medium-High} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+Wave 0: [W0-schemas] [W0-source-index] [W0-scaffold]
+             |              |                |
+    +--------+              |           +----+
+    |                       |           |
+    v                       v           v
+Wave 1A: [M1] [M2]    Wave 1B: [M3] [M5]
+              |   \          /    |
+              |    \        /     |
+              v     v      v      v
+Wave 2:  [M4: Complex Plane + Euler Bridge] [CROSS_LINKS] [ROSETTA]
+                        |
+                        v
+Wave 3:  [Safety] --> [Tests] --> [Assembly] --> [PDF] [index.html]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Fail Action} \\
+\midrule
+Safety-critical & 4 & MANDATORY & BLOCK release \\
+Mathematical correctness & 4 & HIGH & BLOCK Wave 3 \\
+Source verification & 6 & HIGH & Flag + fix \\
+Integration tests & 4 & MEDIUM & Warn \\
+Edge cases & 4 & LOW & Log \\
+\midrule
+\textbf{Total} & \textbf{22} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & Indigenous content handling & Zero instances of generic ``Indigenous'' references; all nation-specific \\
+SC-02 & No policy advocacy & All political assessments are descriptive/analytical; no prescriptive political recommendations \\
+SC-03 & Source quality gate & All quantitative claims cite named peer-reviewed or agency source with year \\
+SC-04 & Current political figures & All statements about current leaders are empirically sourced; no speculation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mathematical Correctness Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+MC-01 & $z(t)$ formal definition & Real and imaginary components precisely defined with operationalization specified \\
+MC-02 & Euler bridge validity & $e^{i\theta} = \cos\theta + i\sin\theta$ connection to unit circle is formally correct \\
+MC-03 & Attractor definitions & At least 3 distinct regime attractors defined with distinguishing dynamical features \\
+MC-04 & Phase angle interpretation & $\arg(z(t))$ interpretation as real/imaginary divergence is mathematically consistent \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}X L{3cm} C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & $z(t) = R(t) + iX(t)$ formally defined & MC-01, MC-04 & Pending \\
+2 & 6 inflection points mapped in $z$-plane & INT-01, INT-02 & Pending \\
+3 & V-Dem/IDEA/EIU quantitative baseline & SC-03, SV-01--03 & Pending \\
+4 & Attractor model with 3 features each & MC-03 & Pending \\
+5 & \texttt{.college/polsci-history/} spec with 3 files & INT-03 & Pending \\
+6 & \textit{Hundred Voices} cross-indexed to phase regions & INT-04 & Pending \\
+7 & Euler bridge to \textit{Space Between} & MC-02 & Pending \\
+8 & All quantitative claims attributed & SC-03, SV-04--06 & Pending \\
+9 & Package self-contained & EC-01 & Pending \\
+10 & Safety warden passes & SC-01, SC-02, SC-04 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+Mission Director & CAPCOM (Human) & Wave gate approvals; final sign-off \\
+Chief Synthesizer & AGNUS (Opus) & M4 math framework; cross-module integration; Euler bridge \\
+Lead Researcher & DENISE-1 (Sonnet) & M1 Political Science Foundations \\
+Historian & DENISE-2 (Sonnet) & M2 Historical Arc \\
+Current Affairs Analyst & DENISE-3 (Sonnet) & M3 Current Global State \\
+CoK Architect & DENISE-4 (Sonnet) & M5 College of Knowledge Integration \\
+Rosetta Engineer & DENISE-5 (Sonnet) & ROSETTA.md multi-language panels \\
+Safety Warden & DENISE-6 (Sonnet) & Safety review; SC tests; BLOCK authority \\
+Publication Engineer & DENISE-7 (Sonnet) & Assembly; LaTeX; index.html \\
+Foundation Builder & PAULA-1 (Haiku) & Wave 0 schemas and scaffold \\
+Source Indexer & PAULA-2 (Haiku) & \texttt{source\_index.json} \\
+Cache Hydrator & GARY (Haiku) & Shared context prefix management \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Modules & 5 \\
+Waves & 4 (0 through 3) \\
+Parallel Tracks & 2 (Wave 1A and 1B) \\
+CAPCOM Gates & 3 \\
+Total Deliverables & 10 \\
+Total Tests & 22 (4 safety-critical BLOCK) \\
+Estimated Token Budget & $\sim$453k total (input + output) \\
+Estimated Sessions & 3 \\
+Estimated Context Windows & 5--7 \\
+Model Mix & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+Target Directory & \texttt{.college/polsci-history/} \\
+Publication Path & \texttt{tibsfox.com/Missions/polsci-complex-plane/} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textit{``Every system has a real part and an imaginary part. The engineers who forget the imaginary part build bridges that collapse in the wind --- not because they calculated the load wrong, but because they forgot that wind is a rotating vector, not a linear force. Political systems are no different. The institutions are the bridge. The experienced legitimacy is the wind. A curriculum that teaches only institutions produces engineers who will be perpetually surprised by what the wind does.''}
+
+\vspace{0.8em}
+{\small\sffamily\textcolor{subtlegray}{--- GSD College of Knowledge, Political Science / History Department, Inaugural Mission}}
+
+\vspace{0.5em}
+{\small\sffamily The complex plane is not a metaphor. It is the correct topology for any system that has both observable state and experienced meaning. History is the trace. Political science studies the dynamics. The College of Knowledge is where we learn to read both axes at once.}
+\end{quotebox}
+
+\end{document}

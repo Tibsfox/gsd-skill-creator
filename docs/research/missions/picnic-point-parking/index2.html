@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Picnic Point Parking Structure — GSD Research Mission Package 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --tertiary: #37474F;
+    --accent: #1976D2;
+    --light-primary: #ECEFF1;
+    --light-secondary: #E3F2FD;
+    --row-gray: #F5F5F5;
+    --border: #BDBDBD;
+    --subtle: #757575;
+    --dark: #212121;
+    --white: #FFFFFF;
+    --warn: #E65100;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ECEFF1;
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #37474F 50%, #1565C0 100%);
+    color: var(--white);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+
+  .mission-number {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.3em 0.9em;
+    border-radius: 4px;
+    margin-bottom: 0.6rem;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba(25,118,210,0.4);
+    border: 1px solid rgba(100,181,246,0.5);
+    padding: 0.35em 0.9em;
+    border-radius: 4px;
+    margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.0rem;
+    font-weight: 500;
+    opacity: 0.88;
+    margin-bottom: 0.4rem;
+  }
+
+  .extends-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 0.4em 1em;
+    font-size: 0.8rem;
+    margin-top: 0.8rem;
+  }
+
+  .meta { font-size: 0.82rem; opacity: 0.68; margin-top: 0.5rem; }
+
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+
+  .card {
+    background: #CFD8DC;
+    border: 1px solid #B0BEC5;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(38,50,56,0.15); }
+  .card .file-icon { font-size: 1.8rem; margin-bottom: 0.7rem; }
+  .card .file-name { font-weight: 700; font-size: 1rem; color: var(--secondary); margin-bottom: 0.3rem; }
+  .card .file-desc { font-size: 0.83rem; color: var(--subtle); line-height: 1.45; }
+
+  .prereq {
+    background: var(--light-secondary);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .prereq-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .prereq strong { font-size: 0.9rem; color: var(--secondary); display: block; margin-bottom: 0.3rem; }
+  .prereq p { font-size: 0.83rem; line-height: 1.5; color: var(--dark); }
+
+  .contents {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .contents h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
+
+  .stage { margin-bottom: 1.2rem; }
+  .stage-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+
+  .stage-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25em 0.7em;
+    border-radius: 3px;
+    color: var(--white);
+  }
+
+  .s1 { background: var(--primary); }
+  .s2 { background: var(--secondary); }
+  .s3 { background: var(--tertiary); }
+
+  .stage-title { font-weight: 600; font-size: 0.92rem; }
+  .stage ul { list-style: none; padding-left: 1.2rem; }
+  .stage ul li { font-size: 0.84rem; color: var(--subtle); padding: 0.18rem 0; display: flex; align-items: flex-start; gap: 0.4rem; }
+  .stage ul li::before { content: "·"; color: var(--accent); font-weight: 700; }
+
+  .metrics {
+    background: var(--light-primary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .metrics h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--primary); margin-bottom: 1rem; }
+
+  .metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.8rem; }
+
+  .metric {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.8rem;
+  }
+
+  .metric-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); margin-bottom: 0.3rem; }
+  .metric-value { font-size: 1rem; font-weight: 700; color: var(--primary); }
+
+  .usage {
+    background: var(--light-secondary);
+    border: 1px solid #90CAF9;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .usage h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--secondary); margin-bottom: 0.8rem; }
+  .usage ol { padding-left: 1.4rem; font-size: 0.87rem; line-height: 1.7; color: var(--dark); }
+
+  .recompile { background: var(--row-gray); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; }
+  .recompile h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--tertiary); margin-bottom: 0.8rem; }
+
+  pre {
+    background: var(--dark);
+    color: #90CAF9;
+    padding: 1rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+
+  .quote {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 1.2rem 1.5rem;
+    margin-top: 2rem;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: #2E3B42;
+  }
+
+  footer { text-align: center; font-size: 0.78rem; color: var(--subtle); padding: 2rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="mission-number">Mission 2 of 2</div><br>
+  <div class="badge">GSD Engineering Feasibility Mission Package</div>
+  <h1>Picnic Point Parking Structure</h1>
+  <div class="subtitle">Ground Level + 2-Floor Structure with BNSF Overpass Integration</div>
+  <div class="subtitle" style="opacity:0.75;font-size:0.9rem;">Full Engineering Feasibility — Idea to Completion</div>
+  <div class="extends-badge">⬆ Extends Mission 1: Picnic Point Park Deep Research</div>
+  <div class="meta">April 7, 2026 &nbsp;·&nbsp; Fleet Profile (17 roles) &nbsp;·&nbsp; 5 Engineering Modules &nbsp;·&nbsp; 34 Pages</div>
+</header>
+
+<main>
+
+  <div class="prereq">
+    <div class="prereq-icon">⚠️</div>
+    <div>
+      <strong>Mission 1 Dataset Required</strong>
+      <p>This mission extends Mission 1 (Picnic Point Park Deep Research). The GSD orchestrator must load Mission 1's Stage 2 Research Reference — specifically the geology module (bluff substrate, USGS landslide mapping, drift cell data) and site overview (coordinates, overpass geometry, stormwater nexus) — before executing Wave 0 of this mission. Combined, both missions constitute the complete Picnic Point Park dataset.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Download Files</div>
+  <div class="cards">
+    <a class="card" href="mission2.pdf" download>
+      <div class="file-icon">📐</div>
+      <div class="file-name">mission2.pdf</div>
+      <div class="file-desc">Complete 34-page engineering feasibility mission package. Structural, geotechnical, permitting, stormwater, and cost modules.</div>
+    </a>
+    <a class="card" href="mission2.tex" download>
+      <div class="file-icon">📝</div>
+      <div class="file-name">mission2.tex</div>
+      <div class="file-desc">XeLaTeX source. Modify and recompile as engineering findings are updated through geotechnical investigation and permitting.</div>
+    </a>
+  </div>
+
+  <div class="metrics">
+    <h3>Mission at a Glance</h3>
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-label">Estimated Cost</div><div class="metric-value">$4.2M–$8.0M</div></div>
+      <div class="metric"><div class="metric-label">Per Stall (target)</div><div class="metric-value">$28K–$35K</div></div>
+      <div class="metric"><div class="metric-label">Permit Timeline</div><div class="metric-value">18–36 months</div></div>
+      <div class="metric"><div class="metric-label">Seismic Design Cat.</div><div class="metric-value">SDC D (IBC)</div></div>
+      <div class="metric"><div class="metric-label">Structural System</div><div class="metric-value">Open-air precast</div></div>
+      <div class="metric"><div class="metric-label">Tie-in Bridge Span</div><div class="metric-value">15–25 ft (est.)</div></div>
+      <div class="metric"><div class="metric-label">Total Tests</div><div class="metric-value">40 (7 SC-BLOCK)</div></div>
+      <div class="metric"><div class="metric-label">Token Budget</div><div class="metric-value">500,000 ceiling</div></div>
+    </div>
+  </div>
+
+  <div class="contents">
+    <h3>Contents Breakdown</h3>
+
+    <div class="stage">
+      <div class="stage-header">
+        <span class="stage-badge s1">Stage 1</span>
+        <span class="stage-title">Vision Document</span>
+      </div>
+      <ul>
+        <li>Vision narrative — the parking structure as the front door to ecosystem restoration</li>
+        <li>Five-problem statement (capacity failure, ADA gap, stormwater/shellfish, geotech uncertainty, regulatory complexity)</li>
+        <li>ASCII site layout concept (3-level stack + Level 3 deck-to-overpass bridge)</li>
+        <li>Five engineering modules defined (Geotech, Structural, Permitting, Stormwater, Cost/Funding)</li>
+        <li>Chipset configuration (Fleet profile, 17 roles, 3-track parallel Wave 1)</li>
+        <li>15 testable success criteria from idea to 30% design completion</li>
+        <li>Relationship to Mission 1 and Snohomish County project precedents</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-header">
+        <span class="stage-badge s2">Stage 2</span>
+        <span class="stage-title">Research Reference</span>
+      </div>
+      <ul>
+        <li>Module A: Site Survey & Geotechnical — boring scope, SPT protocol, slope stability, SDC D, foundation system recommendation criteria</li>
+        <li>Module B: Structural — precast vs. CIP comparison, IBC 2021 design parameters, Level 3 tie-in bridge ADA grade constraints, vehicle barrier, ADA stall ratios</li>
+        <li>Module C: Permitting — full 6-permit matrix with agencies, timelines, SEPA MDNS strategy, SMA shoreline jurisdiction, Tulalip SEPA notification</li>
+        <li>Module D: Stormwater — MR 1–9 compliance matrix, LID BMP feasibility (bioretention, permeable pavement, green roof, oil/water separator), shellfish closure nexus quantification</li>
+        <li>Module E: Cost & Funding — Class 4 cost table, per-stall benchmarks, 3-phase option, 7 funding sources with RCO PRVP eligibility confirmation</li>
+        <li>Safety and sensitivity considerations (7 gates including SC-GEO, SC-BNSF, SC-IND)</li>
+        <li>Full source bibliography (IBC, WSDOT GDM, Ecology, county code, PCI, RSMeans, Access Board)</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-header">
+        <span class="stage-badge s3">Stage 3</span>
+        <span class="stage-title">Mission Package</span>
+      </div>
+      <ul>
+        <li>5-wave execution plan (0: Foundation, 1: 3-track parallel, 2: Structural, 3: Cost+Synthesis, 4: Publication)</li>
+        <li>Critical path analysis: geotechnical investigation is the real-world gate between Wave 1 and Wave 2</li>
+        <li>Component breakdown with token estimates (455,000 budgeted / 500,000 ceiling)</li>
+        <li>40-test test plan: 7 safety-critical BLOCK gates, 22 core functionality, 6 integration, 5 edge cases</li>
+        <li>Verification matrix mapping all 15 success criteria to test IDs</li>
+        <li>17-role Fleet crew manifest (includes TOPO, ARCH, 3 EXEC agents, 4 CRAFT specialists)</li>
+        <li>4 HITL checkpoints (post-W0, post-W1, post-W2, post-W3)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="usage">
+    <h3>How to Use This Package</h3>
+    <ol>
+      <li>Ensure Mission 1 (Picnic Point Park Deep Research) has been executed and its dataset is available to the GSD orchestrator.</li>
+      <li>Hand both mission packages to your GSD orchestrator: <em>"Execute Mission 2. Load Mission 1 Stage 2 as the site baseline at Wave 0."</em></li>
+      <li>At the Wave 1 HITL checkpoint, review the geotechnical investigation scope (Module A). In the real project, commission a licensed WA geotechnical engineer to execute the actual field investigation before proceeding to Wave 2.</li>
+      <li>At the Wave 2 HITL checkpoint, review 30% structural drawings and tie-in bridge design with a licensed structural engineer.</li>
+      <li>At Wave 3, the Class 4 cost estimate and funding strategy are ready for a capital funding application to RCO/FHWA.</li>
+      <li>The final verification report maps all 15 success criteria to test results — any SC BLOCK failures must be resolved before release.</li>
+    </ol>
+  </div>
+
+  <div class="recompile">
+    <h3>LaTeX Recompilation</h3>
+    <p style="font-size:0.86rem;margin-bottom:0.8rem;color:var(--subtle);">Three XeLaTeX passes required:</p>
+    <pre>xelatex -interaction=nonstopmode mission2.tex
+xelatex -interaction=nonstopmode mission2.tex
+xelatex -interaction=nonstopmode mission2.tex</pre>
+    <p style="font-size:0.82rem;margin-top:0.7rem;color:var(--subtle);">Requires XeLaTeX with DejaVu fonts (pre-installed on Ubuntu 24). Update cost estimates and design parameters as geotechnical and permitting data become available.</p>
+  </div>
+
+  <div class="quote">
+    "The goal of the project is to design and engineer improvements to the parking lot, vehicular circulation, trail entry points from the lot, as well as associated improvements and/or amenities in the estate area. Work will include public outreach, design and permitting, grant-seeking, and construction of the improvements."
+    <br><br>
+    — Snohomish County Parks, Lord Hill Park Parking Lot Improvements, 2024 — the process template for this mission
+  </div>
+
+</main>
+
+<footer>
+  GSD Engineering Feasibility Mission Package — Mission 2 of 2 &nbsp;·&nbsp; Picnic Point Park Parking Structure &nbsp;·&nbsp; April 7, 2026
+</footer>
+
+</body>
+</html>
