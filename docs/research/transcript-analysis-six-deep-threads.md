@@ -527,3 +527,29 @@ The deeper principle: **local rules + large N → universal global statistics**.
 ---
 
 *This analysis was generated from transcript content only. All technical details, numbers, and quotes are sourced directly from the six VTT files.*
+
+---
+
+## Addendum: College cross-link (April 2026)
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body above is a deep synthesis of six
+transcripts covering mathematics, computation, and living
+networks — an unusually wide-ranging analysis whose value is in
+the synthesis itself. The enrichment here is limited to the
+standardized college cross-link section.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md) — The mathematical threads (Kabanets-Impagliazzo circuit lower bounds, Bootle et al. ZKP sublinear-verifier constructions, Aaronson-Arkhipov BosonSampling) are squarely mathematics-department topics.
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — The computation-side material (zero-knowledge proofs, circuit complexity) is applied programming at the research frontier.
+- [**environmental**](../../../.college/departments/environmental/DEPARTMENT.md) — The mycorrhizal thread (Simard 1997, Lutzoni 2018, Smith & Read) is environmental-ecology material, complementing the `living-forest.md` standalone.
+- [**physics**](../../../.college/departments/physics/DEPARTMENT.md) — Quantum advantage (BosonSampling, quantum computation complexity) is physics-department territory.
+- [**logic**](../../../.college/departments/logic/DEPARTMENT.md) — Complexity theory and proof systems are logic-department topics at the boundary between mathematics and computer science.
+
+---
+
+*Addendum (college cross-link) added during the Session 018 catalog enrichment pass.*
