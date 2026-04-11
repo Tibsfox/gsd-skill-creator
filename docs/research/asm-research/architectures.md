@@ -1923,3 +1923,169 @@ This research cross-links to the following college departments in
 ---
 
 *Appendix: Updates 2025–2026 and the Related College Departments section added during the Session 018 catalog enrichment pass. The body above this appendix is unchanged from the original document.*
+
+---
+
+## Study Guide — Architectures, Instructions, and Machine Interface
+
+### Why read this
+
+This file is the "what are you actually programming" half of the
+assembly story. Understanding it means understanding that when you
+write `mov eax, 1`, you are not talking to a chip directly — you
+are talking to an *architectural contract* that chips from Intel,
+AMD, and dozens of embedded vendors all implement independently.
+That contract is the instruction set architecture (ISA), and ISAs
+are the longest-lived, most backwards-compatibility-constrained
+artifacts in computing.
+
+### Prerequisites
+
+- A C-level understanding of memory, pointers, and the stack.
+- Any one instruction set in your hands. If you have no preference,
+  start with RISC-V (the cleanest ISA to learn) or ARM64 (the one
+  you already own, in your phone).
+- An assembler and a way to run programs. GCC or clang will
+  assemble `.s` files directly with `gcc -c file.s`. For RISC-V, a
+  QEMU user-mode emulator lets you run cross-compiled binaries on
+  an x86 Linux box (`qemu-riscv64 ./hello`).
+
+### Reading order
+
+1. The register model. Skip forward if you already understand
+   "registers are the CPU's named scratchpad."
+2. Addressing modes. Spend time here; this is where ISAs
+   differentiate themselves.
+3. The instruction categories (data transfer, arithmetic, control
+   flow, system).
+4. Calling conventions (the ABI). This is what lets your assembly
+   call C functions and vice versa.
+5. The comparative section on x86-64, ARM64, and RISC-V. Read it
+   last, when the earlier sections give you the vocabulary to
+   appreciate the differences.
+
+### Key concepts
+
+1. **ISA vs microarchitecture.** The ISA is the contract
+   programmers see. The microarchitecture is how a particular chip
+   implements it. An Intel Skylake and an AMD Zen 4 both implement
+   x86-64, but their internals are completely different.
+2. **RISC vs CISC is mostly historical.** Modern x86-64 chips
+   decode CISC instructions into RISC-like micro-operations and
+   execute them out-of-order. The ISA difference survives; the
+   execution difference mostly does not.
+3. **Calling conventions matter more than the ISA.** If you know
+   the ABI — which registers are caller-saved, which are
+   callee-saved, where arguments go — you can read any assembly
+   output the compiler produces.
+
+---
+
+## Programming Examples
+
+### Example 1 — Hello world in three architectures
+
+**x86-64 (System V ABI, Linux)**
+```asm
+    .section .data
+msg: .ascii "Hello, asm\n"
+    .set msglen, . - msg
+
+    .section .text
+    .globl _start
+_start:
+    mov $1, %rax        # syscall: write
+    mov $1, %rdi        # fd: stdout
+    lea msg(%rip), %rsi # buf
+    mov $msglen, %rdx   # count
+    syscall
+    mov $60, %rax       # syscall: exit
+    xor %rdi, %rdi      # status 0
+    syscall
+```
+Assemble and link: `as hello.s -o hello.o && ld hello.o -o hello`.
+
+**ARM64 (Linux)**
+```asm
+    .data
+msg: .ascii "Hello, asm\n"
+    .set msglen, . - msg
+
+    .text
+    .globl _start
+_start:
+    mov x8, #64          // syscall: write
+    mov x0, #1           // fd: stdout
+    adr x1, msg          // buf
+    mov x2, #msglen      // count
+    svc #0
+    mov x8, #93          // syscall: exit
+    mov x0, #0
+    svc #0
+```
+
+**RISC-V (RV64)**
+```asm
+    .data
+msg: .ascii "Hello, asm\n"
+    .set msglen, . - msg
+
+    .text
+    .globl _start
+_start:
+    li a7, 64            # syscall: write
+    li a0, 1             # fd: stdout
+    la a1, msg           # buf
+    li a2, msglen        # count
+    ecall
+    li a7, 93            # syscall: exit
+    li a0, 0
+    ecall
+```
+
+What to notice: the three programs are structurally identical.
+Register names differ, syscall numbers differ, and the syscall
+trap instruction has three different names, but the logic is the
+same. That is the power of an abstract machine model.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Disassemble a C function
+
+Write a one-line C function: `int add(int a, int b) { return a +
+b; }`. Compile with `gcc -O0 -c add.c`, then `objdump -d add.o`.
+Read the output. Repeat with `-O2` and observe how the compiler
+rewrites even a trivial function.
+
+### DIY 2 — Port a function between architectures
+
+Take a simple routine — string length, or Fibonacci — and write
+it in x86-64 assembly, then ARM64 assembly, then RISC-V. Compare
+line counts, register usage, and addressing modes.
+
+### DIY 3 — Use qemu-user to run cross-architecture binaries
+
+Install `qemu-user-static`. Cross-compile a small C program to
+RISC-V with `riscv64-linux-gnu-gcc`. Run it with `qemu-riscv64
+./prog`. You have just run a RISC-V binary on an x86 Linux box
+with no hardware emulator.
+
+### TRY — Write your own three-instruction ISA
+
+Define a 3-instruction ISA (`LOAD`, `ADD`, `STORE`) and write a
+simulator in Python. Assemble a small program by hand. Run it.
+You will have just reinvented the core of every computer ever
+built.
+
+---
+
+## Related College Departments (architectures)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+  — assembly is the layer where Programming Fundamentals meets
+  Systems.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — computer architecture and hardware-software interface are
+  engineering subjects.
