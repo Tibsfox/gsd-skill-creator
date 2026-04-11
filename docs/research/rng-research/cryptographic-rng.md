@@ -238,3 +238,162 @@ The history of cryptographic random number generation is a story of layered defe
 The field has converged on a rough consensus: ChaCha20-based generators with multiple independent entropy sources, automatic reseeding, and key erasure. This is what the Linux kernel does, what WireGuard does, and what most modern systems are moving toward. The exotic constructions — elliptic curve generators, number-theoretic PRNGs — have been largely abandoned for production use, their theoretical elegance unable to compensate for their practical fragility and, in one infamous case, their susceptibility to mathematical subversion.
 
 The arms race continues. Post-quantum cryptography may eventually require revisiting CSPRNG assumptions. Hardware RNGs may face new side-channel attacks. But the fundamental architecture — true randomness in, computational security out, reseed often, erase keys — has proven remarkably durable. It works because it doesn't ask you to trust any single component. It works because it assumes something will fail, and builds the system so that no single failure is fatal.
+
+---
+
+## Addendum: 2025 — the year quantum RNGs crossed the line
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The body above treats quantum RNGs as a promising but niche entropy
+source whose practical use is seeding software CSPRNGs. The 2024–2025
+developments have moved quantum RNGs meaningfully closer to the
+mainstream — specifically through three events worth recording.
+
+### Quantinuum Quantum Origin — first NIST-validated software QRNG (April 2025)
+
+In **April 2025**, **Quantinuum**'s **Quantum Origin** became the
+**first software-based Quantum Random Number Generator** to receive
+formal validation from the U.S. National Institute of Standards and
+Technology (NIST).
+
+The significance of "software-based" is the notable thing: historically,
+every QRNG has been a hardware device (a photon counter, a vacuum-noise
+homodyne detector, an entanglement-verification apparatus) that shipped
+as PCIe cards, USB dongles, or rack-mount appliances. Quantum Origin
+delivers the quantum-randomness layer as a software artifact —
+specifically, randomness pre-extracted from a trusted quantum source and
+delivered via an audited cryptographic pipeline. This is adaptable in
+ways hardware QRNGs are not:
+
+- **Cloud deployment.** Quantum Origin can run in cloud environments
+  where a hardware QRNG cannot easily be installed.
+- **Air-gapped networks.** Quantum Origin can be deployed with zero
+  network connectivity, which covers the high-security deployments
+  that need randomness the most and that historically struggled to
+  get it from hardware QRNGs without introducing network exposure.
+- **Confidential computing.** Quantum Origin fits into TEE and
+  confidential-VM environments where external hardware would be
+  structurally difficult to integrate.
+
+The NIST validation is not a blanket endorsement of software QRNGs as
+a category — it is specifically a validation of Quantinuum's
+implementation against NIST SP 800-90B and related standards.
+But it sets a precedent: the "QRNG must be hardware" assumption that
+shaped the ID Quantique / ANU generation of products is no longer
+structural, and the next wave of QRNG products will include
+software-only offerings.
+
+**Sources:** [Quantinuum's 'Quantum Origin' Becomes First Software Quantum Random Number Generator to Achieve NIST Validation — Quantinuum press release](https://www.quantinuum.com/press-releases/quantinuums-quantum-origin-becomes-first-software-quantum-random-number-generator-to-achieve-nist-validation) · [Quantinuum's 'Quantum Origin' Becomes First Software Quantum Random Number Generator to Achieve NIST Validation — The Quantum Insider, April 2, 2025](https://thequantuminsider.com/2025/04/02/quantinuums-quantum-origin-becomes-first-software-quantum-random-number-generator-to-achieve-nist-validation/)
+
+### NIST's CURBy — entanglement-verified public randomness beacon (June 2025)
+
+In **June 2025**, NIST and the University of Colorado Boulder announced
+the **Colorado University Randomness Beacon (CURBy)** — the first
+random number generator that uses **quantum entanglement** to produce
+**publicly verifiable** random numbers at production rates.
+
+The key property that distinguishes CURBy from existing QRNGs is
+**loophole-free Bell inequality verification**. CURBy does not merely
+produce random numbers from a quantum source; it proves (by the
+violation of Bell's inequality) that the numbers are fundamentally
+random in a way that cannot be explained by any local hidden-variable
+theory. The randomness is not just "we believe this is random"; it is
+"physics says this is random, and we have the statistical evidence
+to prove it."
+
+The practical performance: CURBy generates a full random string in
+**roughly 1 minute** (down from 10 minutes in the 2018 NIST
+demonstration). This is hundreds of strings per day rather than
+tens. For use cases where the randomness needs to be **publicly
+auditable** — jury selection, lottery assignment, fair-division
+protocols, zero-knowledge-proof seeds, public-goods randomized
+controlled trials — CURBy is the first generator that combines
+"fast enough to be useful" with "verifiable to a skeptic."
+
+**Sources:** [NIST and Partners Use Quantum Mechanics to Make a Factory for Random Numbers — NIST News, June 2025](https://www.nist.gov/news-events/news/2025/06/nist-and-partners-use-quantum-mechanics-make-factory-random-numbers) · [NIST's Quantum Random Number Generator Is Free to Use — IEEE Spectrum](https://spectrum.ieee.org/nist-quantum-random-number-generator)
+
+### Post-quantum cryptography and QRNG integration
+
+The post-quantum cryptography (PQC) transition that NIST formalized
+in **August 2024** — with the publication of the FIPS standards for
+**ML-KEM** (Module-Lattice Key-Encapsulation Mechanism, FIPS 203),
+**ML-DSA** (Module-Lattice Digital Signature Algorithm, FIPS 204), and
+**SLH-DSA** (Stateless Hash-Based Digital Signature Algorithm, FIPS
+205) — is the other major 2024–2025 development that interacts with
+the RNG story.
+
+A July 2025 arXiv paper ([2507.21151](https://arxiv.org/abs/2507.21151))
+examines the specific question of using QRNGs as the randomness
+source for NIST's PQC standard algorithms. The technical point is
+that PQC schemes, like classical public-key schemes, depend on
+high-quality randomness for key generation and for the nonce
+selection inside signature operations. A weak RNG breaks ML-DSA
+the same way a weak RNG broke ECDSA in the Sony PlayStation 3 case.
+The paper argues that the combination of NIST-validated QRNGs (like
+Quantinuum's) with FIPS-standardized PQC primitives gives PQC
+deployments an end-to-end "quantum-safe" story that classical
+RNG+classical crypto never had.
+
+The practical consequence is that PQC migrations that are happening
+in 2025–2026 (TLS 1.3 hybrid key exchanges, SSH and VPN rollouts,
+enterprise PKI migrations) are being designed against a RNG standard
+that is being upgraded in parallel. The ChaCha20-based CSPRNG
+architecture the body above describes is still the working answer
+for most use cases, but for the high-assurance case the upgrade
+path to QRNG-seeded PQC-protected key material is now a defined
+thing rather than a research direction.
+
+**Sources:** [NIST Post-Quantum Cryptography Standard Algorithms Based on Quantum Random Number Generators — arXiv:2507.21151](https://arxiv.org/abs/2507.21151) · [Raw QPP-RNG randomness via system jitter across platforms: a NIST SP 800-90B evaluation — Scientific Reports, 2025](https://www.nature.com/articles/s41598-025-13135-8)
+
+### What this means for the synthesis
+
+The body's synthesis argues that the field has converged on
+ChaCha20-based generators with multiple independent entropy sources,
+automatic reseeding, and key erasure. The 2025 data adds nuance:
+
+- **ChaCha20 + entropy pool is still the default** for most use
+  cases, especially on commodity systems where the entropy sources
+  available are system-jitter-based and the threat model is a
+  local attacker with limited capabilities.
+- **QRNG as entropy source for seeding** is now a viable, validated,
+  and software-deployable option for the high-assurance case, where
+  previously it required hardware procurement and integration work.
+- **Public verifiability of randomness** — a requirement that
+  existed in 2018 but could not be met at production speeds — is
+  now met by CURBy.
+- **PQC migrations** are proceeding in parallel with the QRNG
+  validation work, and the end-to-end "quantum-safe" story is now
+  a defined deployment pattern rather than a research target.
+
+The body's conclusion that "it works because it doesn't ask you to
+trust any single component" remains the right framing. The 2025
+update is that the set of components you can choose from has
+grown, and the top of that set includes entropy sources whose
+correctness is physics-backed and publicly verifiable.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — Random number generation sits at the intersection of probability
+  theory, number theory, and statistical testing. The Bell-inequality
+  basis for CURBy is specifically a mathematical-physics topic.
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  CSPRNG construction, seed management, and cryptographic primitives
+  are squarely in the Algorithms & Efficiency wing of coding.
+- [**physics**](../../../.college/departments/physics/DEPARTMENT.md)
+  — Quantum RNGs depend on genuine quantum-mechanical effects
+  (vacuum fluctuations, photon detection, entanglement). For
+  anyone studying the application of physics to practical
+  engineering, QRNG is a working example.
+- [**statistics**](../../../.college/departments/statistics/DEPARTMENT.md)
+  — The testing-quality side of RNG (NIST SP 800-22, Dieharder,
+  TestU01) is a statistics-department topic, and the Bell-inequality
+  verification in CURBy is a particularly clean application of
+  statistical hypothesis testing.
+
+---
+
+*Addendum (2025 quantum RNG milestones) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
