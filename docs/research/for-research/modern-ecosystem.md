@@ -972,3 +972,125 @@ point is:
 
 That is, in a sentence, what "modern Fortran" means as a lived
 developer experience in 2026.
+
+---
+
+## Addendum: Flang, LFortran, and the parallel runtime story (2025–2026)
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body above treats Flang and LFortran as in-progress compiler
+efforts. That framing was correct when written; it is no longer the whole
+story. Three things happened in 2025 that are worth recording.
+
+### Flang's name-change and LLVM 20.1 (March 2025)
+
+The LLVM Fortran compiler that had been called `flang-new` during its
+multi-year rewrite officially became just `flang` in March 2025, with the
+old upstream Flang (sometimes retroactively called "classic flang")
+retired. LLVM 20.1.0 (March 2025) was the first LLVM release that
+included `flang` as a shipped binary rather than as an optional build
+target. By LLVM 22 (late 2025 / early 2026) the Fortran compiler had
+added experimental support for a meaningful subset of Fortran's
+multi-image parallel features (coarrays, `CO_BROADCAST`, `CO_SUM`, and
+the related intrinsics).
+
+The renaming matters for a reason that is not immediately obvious from
+the diff: it marks the end of a multi-year transition in which the LLVM
+ecosystem had two competing Fortran front-ends. Before March 2025, a
+"which flang" question was genuine; after, it is a compatibility
+footnote. Downstream package managers, CI systems, and vendor toolchains
+have spent the last year consolidating on the single front-end.
+
+**Source:** [LLVM Fortran Levels Up: Goodbye flang-new, Hello flang! — LLVM Project Blog, 2025-03-11](https://blog.llvm.org/posts/2025-03-11-flang-new/)
+
+### LFortran — the interactive Fortran
+
+LFortran, the independently-developed BSD-licensed Fortran compiler
+built directly on LLVM, continued its growth through 2025. The defining
+feature that separates it from both GFortran and Flang is that LFortran
+is designed to work **interactively** — Jupyter-kernel mode, REPL mode,
+and runtime evaluation — in addition to producing native binaries. This
+makes it the first serious attempt since the 1970s to treat Fortran as
+the kind of language a scientist can sit at a prompt and talk to, the
+way Python, MATLAB, or Julia are used.
+
+LFortran's front-end can parse all of Fortran 2018 to its AST, with a
+growing subset transformable into its ASR (abstract semantic
+representation) intermediate and an even smaller subset compilable via
+LLVM to machine code. The project's 2025 work was primarily extending
+the "fully compilable" subset — the gap between "LFortran can read your
+Fortran" and "LFortran can compile and run your Fortran" is the
+interesting delta, and it continues to close.
+
+**Source:** [LFortran — lfortran.org](https://lfortran.org/)
+
+### Caffeine, PRIF, and the parallel runtime answer
+
+The long-running question "how should Fortran's multi-image parallel
+features actually run on modern HPC systems" got a concrete answer in
+2025. The answer is a two-layer split:
+
+- **PRIF** — the Parallel Runtime Interface for Fortran — a compiler-facing
+  API that Fortran compilers target when they lower coarray and
+  `do concurrent` features.
+- **Caffeine** — a portable parallel runtime library developed at
+  Lawrence Berkeley National Laboratory (LBNL) that implements the PRIF
+  interface and runs on top of MPI, GASNet, or other underlying
+  communication substrates.
+
+Flang 22's experimental multi-image support uses this Flang → PRIF →
+Caffeine stack, and the architecture was described in a paper at the
+SC '25 workshops (the International Conference for High Performance
+Computing, Networking, Storage and Analysis). The significance is that
+Fortran's parallel features — coarrays, `do concurrent`, collective
+subroutines — are no longer something each compiler implements from
+scratch against MPI. They are a standard runtime interface that one
+shared library implements, and any compiler can target it.
+
+This is the first time in Fortran's history that parallelism has had
+a cross-compiler portable runtime story. The body above describes how
+the Cray, Intel, LFortran, LLVM/Flang, and NVIDIA compilers already
+auto-parallelize `do concurrent` in shared memory; the Flang + PRIF +
+Caffeine work extends that story to distributed memory.
+
+**Sources:** [Flang — Exascale Computing Project](https://www.exascaleproject.org/research-project/flang/) · [Caffeine — BerkeleyLab on GitHub](https://github.com/berkeleylab/caffeine) · [Lowering and Runtime Support for Fortran's Multi-Image Parallel Features using LLVM Flang, PRIF, and Caffeine — SC '25 Workshops, ACM DL](https://dl.acm.org/doi/10.1145/3731599.3767480) · [Compilers — Fortran Programming Language, fortran-lang.org](https://fortran-lang.org/compilers/) · [Intel Fortran Compiler for oneAPI Release Notes 2025](https://www.intel.com/content/www/us/en/developer/articles/release-notes/fortran-compiler/2025.html)
+
+### What this means for "modern Fortran"
+
+The 1–10 checklist above — fpm, stdlib, fortls, VS Code, FORD, GFortran
+or ifx, push to Git — captures the modern single-node Fortran
+development experience. The 2025 news does not change that experience.
+What it changes is the story one layer below it: the set of available
+Fortran compilers is now genuinely three broad options (GFortran, Flang,
+LFortran) plus two commercial ones (ifx, NVIDIA HPC SDK / NVFortran),
+all of them on active roadmaps, all of them competing on code quality
+and feature coverage. That is the healthiest Fortran compiler ecosystem
+in roughly forty years.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — Fortran is the language that numerical analysis and scientific
+  computing were shaped by. The numerical-hpc file in this bucket is
+  the entry point for that thread.
+- [**science**](../../../.college/departments/science/DEPARTMENT.md) —
+  Fortran is the working language of climate modelling, computational
+  chemistry, computational biology, and astrophysics simulation. For
+  anyone studying the history or practice of computational science,
+  Fortran is the substrate.
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  As a programming language topic, Fortran sits in Programming
+  Fundamentals with the rest of the procedural / imperative family.
+  Its distinctive concern is numerical correctness rather than
+  systems programming.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  Fortran is the first high-level programming language, and its
+  seventy-year arc is one of the cleanest case studies in how a
+  language can survive by specializing.
+
+---
+
+*Addendum (Flang, LFortran, parallel runtime 2025–2026) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
