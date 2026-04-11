@@ -861,4 +861,172 @@ The parentheses are fine. You will get used to them in a week. The ideas will ta
 
 ---
 
+## Addendum: Lisp in 2025–2026 — Clojure 1.12, SBCL, and the AI-era rediscovery
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. Lisp is an old language, and old languages do not usually have news.
+What Lisp has in 2025–2026 is a confluence of three threads — Clojure's
+first major point release since 2018, SBCL's continued steady-state, and
+a genuine uptick in Lisp-as-reference interest among AI researchers — that
+are worth recording.
+
+### Clojure 1.12 (September 2024)
+
+**Clojure 1.12.0** shipped on **September 5, 2024**, the first major
+point release since Clojure 1.11 in 2022. The release is technically
+incremental but substantive, and the 2024 State of Clojure survey
+reported that **58% of active Clojure users had already upgraded by
+December 2024** — a rapid-uptake number that is uncharacteristic for
+a language community that is historically slow to adopt new releases.
+
+The headline changes:
+
+- **Java interop enhancements.** Clojure 1.12 delivers three related
+  interop features:
+  - **Method values.** Qualified Java methods can now be used as
+    ordinary functions in value contexts (`Math/abs` is now a value,
+    not just a callable position). The Clojure compiler automatically
+    generates the wrapping function.
+  - **Functional interface adaptation.** Clojure functions can now be
+    passed directly to Java APIs that expect functional interfaces
+    (`Function`, `Predicate`, `Consumer`, etc.). The compiler inserts
+    a lambda adapter implicitly.
+  - **Streams interop.** The Java Streams API becomes usable from
+    Clojure without ceremony.
+- **`add-lib` — interactive library addition.** You can now add a
+  Maven or Git coordinate to a running REPL and have it downloaded,
+  resolved, and added to the classloader without restarting. This
+  is the kind of feature that has been a Common Lisp and Scheme
+  staple for decades and that Clojure's JVM-hosted nature had
+  historically made difficult.
+- **`clojure.java.process`.** A new namespace for subprocess
+  management, taking advantage of the Java 9+ `ProcessHandle` API.
+  Supports launching, observing, controlling, and redirecting I/O
+  on child processes with a Clojure-native interface.
+- **Virtual thread compatibility.** Pre-1.12, Clojure's `lazy-seq`
+  and `delay` ran under `synchronized` blocks, which pinned virtual
+  threads to their carrier threads on JDK 21 (see the jgc-research
+  bucket for more on why that matters). Clojure 1.12 switches to
+  explicit locks, which cooperates correctly with virtual threads.
+  This change, together with Java's JDK 24 virtual-thread pinning
+  fix, closes the last significant source of "virtual threads don't
+  scale on Clojure" reports.
+- **CVE-2024-22871 fix.** CLJ-1327 explicitly sets the Java
+  serialization identifier for classes in Clojure that implement
+  Java serialization, addressing a deserialization vulnerability.
+
+**Sources:** [Clojure 1.12.0 — clojure.org news, September 5, 2024](https://clojure.org/news/2024/09/05/clojure-1-12-0) · [Clojure 1.12 Field Guide — Jarrod C Taylor](https://www.jarrodctaylor.com/posts/Clojure-1.12-Field-Guide/) · [State of Clojure 2024 Results — clojure.org news, December 2024](https://clojure.org/news/2024/12/02/state-of-clojure-2024)
+
+### SBCL — the monthly-release Common Lisp
+
+**SBCL (Steel Bank Common Lisp)** continues to release near-monthly,
+the way it has since the early 2000s. The 2025 releases are
+characteristically boring: bug fixes, incremental performance work,
+platform support updates, and the kind of tiny feature improvements
+that accumulate into a production-grade compiler over twenty years.
+
+SBCL is the reference implementation of "Common Lisp is a living,
+practically-usable language in 2026." It runs on every mainstream
+platform (Linux, macOS, Windows, FreeBSD, OpenBSD, multiple BSDs, on
+x86_64, aarch64, and several legacy architectures), ships a native
+compiler with competitive code quality, supports the full ANSI
+Common Lisp standard, and adds extensions (threads, sockets, weak
+references, statistical profiler, code coverage) that the standard
+did not include. Most of the practical Common Lisp writing in 2025
+assumes SBCL unless otherwise specified.
+
+The 2025 Common Lisp revival discussion — "Reasons to use Common Lisp
+in 2025" was a surprisingly widely-shared DEV Community post — is not
+driven by new features. It is driven by rediscovery: programmers who
+have lived through twenty years of each-language-is-a-framework
+ecosystems looking at a language that gives them a full
+development environment, a compiler, a debugger, and an object system
+as part of the language itself, and asking why they were ever told
+this was obsolete.
+
+**Sources:** [Reasons to use Common Lisp in 2025 — veer66, DEV Community](https://dev.to/veer66/reasons-to-use-common-lisp-in-2025-523h) · [Steel Bank Common Lisp — sbcl.org](https://www.sbcl.org/) · [SBCL News — sbcl.org/news.html](http://sbcl.org/news.html)
+
+### The AI-era rediscovery
+
+Lisp's historical role as "the AI language" — from McCarthy in 1958
+through the 1980s expert-systems boom and the AI winter — is
+well-documented in the main body above. What the body does not cover
+is the 2024–2026 uptick in Lisp references in contemporary AI research.
+Three strands of activity are worth noting:
+
+1. **Structured output from LLMs.** Several research lines in 2025
+   have explored using Lisp's s-expression syntax as a target for
+   structured LLM output, because s-expressions are simpler to
+   generate-and-parse than JSON and have cleaner error recovery
+   properties. "The LLM that writes Clojure" is easier to constrain
+   than "the LLM that writes valid JSON" because Clojure's grammar
+   is smaller and more forgiving.
+2. **Symbolic AI / neurosymbolic.** The neurosymbolic research
+   community, which is having a quiet 2024–2026 renaissance as the
+   limits of pure-neural approaches become visible, has been
+   revisiting Lisp-family languages for the symbolic side of the
+   stack. This is not the same as the 1980s expert-systems revival
+   — it is smaller, academic, and specifically focused on what the
+   symbolic side of a hybrid system should look like.
+3. **Research LLM tooling.** Several LLM-scaffold projects (not
+   listed here because the space moves fast enough that any list
+   would be stale) use Common Lisp or Scheme as the host language
+   for agentic tooling, on the argument that a language with
+   first-class macros and a REPL-oriented development cycle is the
+   best possible host for a programmer-assistant system whose job
+   is to write and rewrite programs.
+
+None of this adds up to "Lisp is coming back." What it adds up to is
+"Lisp never left, and the AI community is one of the few places where
+that fact is load-bearing." The main body's argument — that Lisp is
+the reference point, the null hypothesis, the language you learn when
+you want to understand what programming languages are — is
+consistent with all three strands.
+
+### What this means for the afterword
+
+The afterword above ends with an argument that Lisp is the baseline,
+the null hypothesis, the version of programming that would still
+exist if every commercial language vanished overnight. The 2025
+activity is a modest but concrete confirmation: in a year when the
+AI-assistant conversation dominated programming-language discourse,
+the conversation kept coming back to Lisp, through Clojure 1.12's
+interop improvements, SBCL's steady release cadence, and the
+neurosymbolic-research revival of s-expressions as an AI target
+language. Lisp does not need to win. It only needs to keep being
+there. In 2025–2026 it is still there, and the people who are
+there with it are getting more work done per line of code than
+they did the year before.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Lisp's relationship to the Computational Thinking and Programming
+  Fundamentals wings is unique: most of the abstract concepts those
+  wings describe (functions as values, recursion, closures, macros)
+  can be demonstrated in five lines of Lisp and are transparently
+  built into the language.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — Lisp is the programming language closest to the lambda calculus,
+  and the lambda calculus is one of the two foundational models of
+  computation (alongside Turing machines). For anyone studying the
+  mathematical side of programming, Lisp is the working example.
+- [**logic**](../../../.college/departments/logic/DEPARTMENT.md) —
+  The historical ties between Lisp, symbolic AI, theorem proving,
+  and formal logic are deep. ACL2 (a Common Lisp theorem prover),
+  Coq (ML-influenced but Lisp-adjacent), and the HOL family all
+  trace lineage through the Lisp ecosystem.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The McCarthy-1958 origin story, the MIT AI Lab era, the Lisp
+  Machine generation, the AI winter, and the modern survivor
+  dialects form one of the cleanest multi-generational arcs in any
+  programming language's history.
+
+---
+
 *End of document. Written for the PNW Research Series LSP project, 2026. Companion to PCH, PRL, RXX, FOR, CEE.*
+
+*Addendum (Clojure 1.12, SBCL, AI-era rediscovery) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
