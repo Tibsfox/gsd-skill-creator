@@ -1774,3 +1774,152 @@ resq    16                      ; reserve 16 quadwords
    and micro-operation breakdowns. https://agner.org/optimize/
 
 10. MIPS Architecture documentation. MIPS Technologies (historical).
+
+---
+
+## Appendix: Updates 2025–2026
+
+This appendix was added in April 2026 as part of a catalog-wide enrichment
+pass. Between the time this document was first written and the time of the
+enrichment, the instruction-set landscape shifted meaningfully in three
+places. The shift has not yet reached most assembly textbooks, so it is
+worth capturing here.
+
+### 1. Intel AVX10 and APX — the x86 vector and register reboot
+
+Intel's Instruction Set Extensions Programming Reference Revision 060
+(November 2025) confirms three related ISAs that, taken together, are the
+largest structural change to x86 assembly in more than a decade.
+
+- **AVX10.1 and AVX10.2** are the converged replacement for AVX-512 on
+  hybrid CPUs. The 512-bit vector path that Intel spent a decade building
+  out never reached the entire client lineup — Alder Lake's E-cores did
+  not support AVX-512, and Intel ended up disabling it in hybrid parts in
+  early 2022 to avoid a fragmented target. AVX10 fixes this by versioning
+  the ISA rather than versioning the vector width: an AVX10.2-capable CPU
+  supports the full AVX-512 instruction semantics (embedded rounding, 32
+  vector registers, 8 mask registers) but at a guaranteed minimum vector
+  register length of 256 bits, with 512-bit optional. E-cores can implement
+  the 256-bit baseline, P-cores can implement 512, and the same binary runs
+  on both. This is structurally similar to Arm's SVE2, which has always
+  been vector-length-agnostic.
+- **APX** (Advanced Performance Extensions) doubles x86's general-purpose
+  register count from 16 to 32, eliminating one of the oldest and most
+  painful constraints in x86-64 code generation. Compilers will be able
+  to keep roughly twice as many values in registers, reducing spill
+  traffic and — in register-pressured inner loops — measurably improving
+  throughput. The encoding uses a new REX2 prefix so existing binaries
+  continue to decode correctly.
+- **FRED** (Flexible Return and Event Delivery) — a reworking of x86's
+  exception and interrupt delivery model, developed jointly by Intel and
+  AMD, that replaces the 1970s-era IDT mechanism with a per-privilege
+  stack model. This does not change assembly-programmer concerns directly
+  but cleans up the kernel side of the interrupt path.
+
+Intel has confirmed that Nova Lake (the generation after Arrow Lake) will
+be the first consumer CPU family to ship with AVX10.2 and APX support.
+As of April 2026 no Nova Lake silicon has shipped; the CPU family is
+expected in late 2026 or early 2027.
+
+For an assembly programmer, the practical consequence is that x86-64
+assembly is about to get a new register file layout for the first time
+since 2003. Code that hand-tunes register allocation for x86-64 will need
+to be revisited. Code that is written against an intrinsics or SIMD
+abstraction layer will not.
+
+**Sources:** [Intel Unveils AVX10 and APX Instruction Sets — AnandTech](https://www.anandtech.com/show/18975/intel-unveils-avx10-and-apx-isas-unifying-avx512-for-hybrid-architectures-) · [Intel Confirms Nova Lake Will Support AVX10.2 & APX — Phoronix](https://www.phoronix.com/news/Nova-Lake-Does-AVX10.2-APX) · [Intel's new x86 instruction sets: APX and AVX10 — AnandTech Forums](https://forums.anandtech.com/threads/intels-new-x86-instruction-sets-apx-and-avx10.2613950/) · [Intel AVX10 & APX announcement — Agner Fog's CPU blog](https://www.agner.org/forum/viewtopic.php?t=115)
+
+### 2. RISC-V hits the server market — RVA23 and CUDA-on-RISC-V
+
+2025 was the year RISC-V stopped being an embedded story and became a
+server story. The key events, in order:
+
+- **January 2025** — SpacemiT announced the VitalStone V100, a server
+  processor with up to 64 RISC-V cores. This is the first RISC-V part
+  credibly positioned for server workloads rather than networking,
+  microcontrollers, or low-power accelerators.
+- **March 2025** — Alibaba's DAMO Academy launched the Xuantie C930, a
+  server-grade core supporting the RVA23 application profile.
+- **2025** — The **RVA23 profile** was ratified. RVA23 makes the Vector
+  Extension (RVV 1.0), hypervisor extension, and bit-manipulation
+  extensions mandatory for application processors. This is the RISC-V
+  equivalent of "armv8-a is now a baseline" — it gives toolchains and
+  kernels a single binary target they can optimize against.
+- **Late 2025** — NVIDIA announced that the CUDA software stack will
+  fully support RISC-V. This is perhaps the most significant single
+  event for RISC-V in a server context, because it opens the
+  accelerator-attached software ecosystem that is currently x86/Arm-only.
+- **Late 2025** — Qualcomm acquired Ventana Micro Systems, the RISC-V
+  server-core startup, indicating that Qualcomm intends to build
+  server-class RISC-V silicon at scale rather than license a core.
+
+For assembly programmers, the RVA23 baseline matters because it collapses
+the profile-matrix that made RISC-V painful to target. Before RVA23 you
+had to choose which extensions to assume; after RVA23 you can assume all
+of the ones you actually care about and rely on the toolchain to accept
+them. The RVV 1.0 vector path in particular is now a stable target that
+compilers can optimize aggressively, which takes RISC-V from "scalar-ok,
+vector-speculative" to "vector-standard" as a target for hand-written
+SIMD-equivalent assembly.
+
+**Sources:** [RISC-V International — riscv.org](https://riscv.org/) · [RISC-V — Wikipedia](https://en.wikipedia.org/wiki/RISC-V) · [RISC-V vs ARM vs x86: The 2025 Silicon Architecture Showdown](https://ts2.tech/en/risc-v-vs-arm-vs-x86-the-2025-silicon-architecture-showdown/) · [The RISC-V Revolution: How an Open-Source Architecture is Upending the Silicon Status Quo](https://markets.financialcontent.com/wral/article/tokenring-2026-1-28-the-risc-v-revolution-how-an-open-source-architecture-is-upending-the-silicon-status-quo)
+
+### 3. SIMD everywhere — AVX10.2, RVV, and smarter compilers
+
+A common thread through the AVX10 and RVA23 stories is that both
+architectures are converging on **vector-length-agnostic SIMD** — code
+that expresses "do this operation on each element of this vector" without
+committing to a specific vector width. AVX10 has AVX10.2 with 256-bit and
+512-bit variants. RISC-V has RVV 1.0 with runtime-determined vector
+length. Arm has SVE2 with the same property.
+
+Practitioner writing from 2025 (Ivo Balbaert, in Deep Engineering #17)
+frames this as the end of the era where compilers pretended SIMD did not
+exist and hand-written intrinsics were the only realistic path to vector
+speed. The new compilers — Clang, GCC, and Intel's proprietary stack —
+can increasingly auto-vectorize loops against the length-agnostic
+variants of all three architectures, emitting the same high-level IR
+regardless of the target. Hand-written assembly for SIMD inner loops is
+not dead, but for the first time in decades it is no longer the default
+choice for experienced numerical programmers.
+
+The practical consequence for this document is that the chapter on
+"Architectures, Instructions, and Machine Interface" has to include a
+layer above the concrete instruction sets — a layer at which "a vector"
+is a thing you operate on without committing to a specific hardware
+register width. That layer did not exist in the main body above; it
+does now.
+
+**Source:** [Deep Engineering #17: SIMD in 2025 — AVX10.2, RVV, & smarter compilers with Ivo Balbaert — Medium](https://medium.com/deep-engineering/deep-engineering-17-simd-in-2025-avx10-2-rvv-smarter-compilers-with-ivo-balbaert-22053cd22250)
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Assembly is the coding topic that sits at the boundary of the
+  Programming Fundamentals and Computing & Society wings. Understanding
+  how a loop compiles to machine code is the concrete backing for the
+  abstract concepts of control flow, data types, and memory.
+- [**electronics**](../../../.college/departments/electronics/DEPARTMENT.md)
+  — Instructions are digital circuits. The boundary between "what the
+  hardware does" and "what the assembler lets you write" is where
+  electronics and computer science meet. For anyone building or
+  understanding physical computing hardware, assembly is the level at
+  which the hardware becomes legible.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — Instruction-set architecture is a systems-engineering topic. AVX10,
+  APX, RVA23, and SVE2 are all the result of design trade-offs between
+  hardware cost, software compatibility, and workload characteristics.
+  They are worked examples for engineering-design thinking.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  The path from the IBM 704 instruction format to APX's 32 general-purpose
+  registers is a sixty-year thread worth tracing. It is also a case study
+  in how backwards compatibility constraints shape design decisions
+  decades after the constraints themselves have stopped being
+  load-bearing.
+
+---
+
+*Appendix: Updates 2025–2026 and the Related College Departments section added during the Session 018 catalog enrichment pass. The body above this appendix is unchanged from the original document.*
