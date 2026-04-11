@@ -149,27 +149,31 @@ def cosine_similarity(a, b):
     return dot / norm if norm > 0 else 0.0
 
 
-def embedding_rerank(question, candidate_indices, sessions, session_ids, embed_fn):
+def embedding_rerank(question, candidate_indices, sessions, session_ids, embed_fn, max_chars=None, turn_level=False):
     """
     Phase 2: embed question + candidates, rerank by cosine similarity.
     Returns full ranked list: reranked candidates first, then remaining sessions.
+
+    If turn_level=True, embeds each turn in a session separately and scores
+    by max similarity across turns (proper chunking for short-context models).
     """
-    # Build texts for embedding — truncate to 512 chars per session
-    # (MiniLM max sequence = 256 tokens ≈ 1024 chars; shorter = faster)
-    MAX_EMBED_CHARS = 512
+    if turn_level:
+        return _rerank_turn_level(question, candidate_indices, sessions, session_ids, embed_fn)
+
+    # Session-level: embed whole session text (with optional truncation)
     candidate_texts = []
     for idx in candidate_indices:
         text = session_to_text(sessions[idx])
-        candidate_texts.append(text[:MAX_EMBED_CHARS] if len(text) > MAX_EMBED_CHARS else text)
+        if max_chars and len(text) > max_chars:
+            text = text[:max_chars]
+        candidate_texts.append(text)
 
-    # Batch embed: question + all candidates in one call
     all_texts = [question] + candidate_texts
     embeddings = embed_fn(all_texts)
 
     query_emb = embeddings[0]
     candidate_embs = embeddings[1:]
 
-    # Score each candidate by cosine similarity
     scored = []
     for i, idx in enumerate(candidate_indices):
         sim = cosine_similarity(query_emb, candidate_embs[i])
@@ -184,28 +188,58 @@ def embedding_rerank(question, candidate_indices, sessions, session_ids, embed_f
     return reranked_ids + remaining
 
 
-# =============================================================================
-# HYBRID RETRIEVAL
-# =============================================================================
-
-def hybrid_retrieve(question, sessions, session_ids, embed_fn, prefilter_k=15):
+def _rerank_turn_level(question, candidate_indices, sessions, session_ids, embed_fn):
     """
-    Two-phase retrieval:
-      1. Keyword TF-IDF → top prefilter_k candidates
-      2. Embedding cosine similarity → rerank candidates
-    """
-    # Phase 1: fast keyword pre-filter
-    candidate_indices = prefilter_sessions(question, sessions, session_ids, top_k=prefilter_k)
+    Turn-level embedding rerank: embed each turn in a session separately,
+    score session by max cosine similarity across its turns.
 
-    # Phase 2: embedding rerank on candidates only
-    return embedding_rerank(question, candidate_indices, sessions, session_ids, embed_fn)
+    This matches MemPalace's ChromaDB approach where individual messages
+    are embedded and retrieved, not whole sessions.
+    """
+    # Collect all turns across all candidate sessions
+    turn_texts = []
+    turn_session_map = []  # (session_idx_in_candidates, turn_idx)
+    for ci, idx in enumerate(candidate_indices):
+        session = sessions[idx]
+        for ti, turn in enumerate(session):
+            content = turn.get('content', '') if isinstance(turn, dict) else str(turn)
+            if content.strip():
+                turn_texts.append(content[:1024])  # Cap individual turns at 1024 chars
+                turn_session_map.append(ci)
+
+    if not turn_texts:
+        return [session_ids[i] for i in candidate_indices]
+
+    # Batch embed: question + all turns
+    all_texts = [question] + turn_texts
+    embeddings = embed_fn(all_texts)
+    query_emb = embeddings[0]
+    turn_embs = embeddings[1:]
+
+    # Score each session by its best-matching turn
+    session_scores = [0.0] * len(candidate_indices)
+    for ti, ci in enumerate(turn_session_map):
+        sim = cosine_similarity(query_emb, turn_embs[ti])
+        if sim > session_scores[ci]:
+            session_scores[ci] = sim
+
+    # Rank by score
+    scored = [(session_scores[ci], session_ids[candidate_indices[ci]])
+              for ci in range(len(candidate_indices))]
+    scored.sort(key=lambda x: -x[0])
+    reranked_ids = [sid for _, sid in scored]
+
+    # Append remaining
+    candidate_set = set(candidate_indices)
+    remaining = [session_ids[i] for i in range(len(sessions)) if i not in candidate_set]
+    return reranked_ids + remaining
 
 
 # =============================================================================
 # BENCHMARK RUNNER
 # =============================================================================
 
-def run_benchmark(data_path, limit=None, prefilter_k=15):
+def run_benchmark(data_path, limit=None, prefilter_k=15, max_chars=None, turn_level=False):
     with open(data_path) as f:
         data = json.load(f)
 
@@ -248,7 +282,7 @@ def run_benchmark(data_path, limit=None, prefilter_k=15):
 
         # Phase 2 timing
         t2 = time.time()
-        ranked = embedding_rerank(question, candidate_indices, sessions, session_ids, embed_fn)
+        ranked = embedding_rerank(question, candidate_indices, sessions, session_ids, embed_fn, max_chars=max_chars, turn_level=turn_level)
         phase2_time += time.time() - t2
 
         # Score
@@ -325,5 +359,9 @@ if __name__ == '__main__':
     parser.add_argument('data_path', help='Path to longmemeval_s_cleaned.json')
     parser.add_argument('--limit', type=int, default=None)
     parser.add_argument('--prefilter-k', type=int, default=15, help='Pre-filter width (default: 15)')
+    parser.add_argument('--no-truncate', action='store_true', help='Disable text truncation (full-text embedding)')
+    parser.add_argument('--max-chars', type=int, default=512, help='Max chars per session text (default: 512)')
+    parser.add_argument('--turn-level', action='store_true', help='Embed each turn separately, score by max similarity')
     args = parser.parse_args()
-    run_benchmark(args.data_path, args.limit, args.prefilter_k)
+    mc = None if args.no_truncate else args.max_chars
+    run_benchmark(args.data_path, args.limit, args.prefilter_k, max_chars=mc, turn_level=args.turn_level)
