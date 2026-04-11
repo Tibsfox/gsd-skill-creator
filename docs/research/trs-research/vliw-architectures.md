@@ -4853,8 +4853,170 @@ WCET        Worst-Case Execution Time
 
 ---
 
+## Addendum: VLIW in the AI-accelerator era (2025–2026)
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body treats VLIW as a mature architecture category with
+historical significance and continued niche use. The 2025 data is that
+VLIW's niche is growing meaningfully — specifically driven by AI
+inference accelerators, where the static-schedule assumption that killed
+Itanium turns out to be exactly the right assumption for a workload
+whose control flow is mostly known at compile time.
+
+### Qualcomm Hexagon NPU 6 (2025)
+
+The **Qualcomm Hexagon** DSP / NPU lineage, which has been VLIW since
+its origin in the early 2000s, continues to be the single largest
+VLIW-in-consumer-silicon success story. The **Hexagon NPU 6** shipped
+in the **Snapdragon X2 Elite Extreme** as of September 2025, advancing
+the architecture further for AI-centric workloads:
+
+- **12 scalar threads** with **4-wide VLIW processing** per thread.
+- The NPU is positioned as the primary on-device neural-network
+  inference engine in Snapdragon's flagship class — running language
+  model inference, image generation, real-time translation, and the
+  standard smartphone-AI workload mix directly on the SoC without
+  hitting the cloud.
+- LLVM-based toolchain (the Hexagon LLVM back-end has been an
+  upstream contribution for years), with modulo scheduling and
+  software pipelining producing near-peak throughput on inference
+  kernels.
+
+The Hexagon story is a real answer to the "did VLIW win anything?"
+question the main body grapples with: yes, VLIW won the neural
+network inference market on every flagship Android phone sold
+through 2025, and it did so quietly enough that most programmers
+never noticed.
+
+**Sources:** [Qualcomm Hexagon — Wikipedia](https://en.wikipedia.org/wiki/Qualcomm_Hexagon) · [Hexagon — Qualcomm Microarchitectures — WikiChip](https://en.wikichip.org/wiki/qualcomm/microarchitectures/hexagon) · [Qualcomm's Hexagon AI Accelerators — thechipletter.substack.com](https://thechipletter.substack.com/p/qualcomms-hexagon-ai-accelerators) · [Snapdragon 8 Elite Hexagon Tensor Processor — EmergentMind](https://www.emergentmind.com/topics/qualcomm-sm8750-ab-snapdragon-8-elite-hexagon-tensor-processor-htp) · [Qualcomm's Hexagon DSP, and now, NPU — Chester Lam, chipsandcheese.com](https://chipsandcheese.com/p/qualcomms-hexagon-dsp-and-now-npu)
+
+### Qualcomm AI200 / AI250 datacenter inference accelerators
+
+In late 2025 Qualcomm announced the **AI200** and **AI250** datacenter
+inference accelerators, extending the Hexagon architecture from the
+mobile SoC into rack-mount server silicon. This is the first time
+a VLIW-based accelerator has been positioned as a credible challenger
+to Nvidia and AMD in the datacenter inference market. Whether Qualcomm
+can win share is an open question at the time of this enrichment;
+that Qualcomm is willing to try, and that the attempt is based on
+a VLIW architecture that traces its lineage back through the
+Hexagon DSP to Fisher's 1980s trace-scheduling work, is the
+noteworthy fact.
+
+**Source:** [Qualcomm unveils AI200 and AI250 AI inference accelerators — Tom's Hardware](https://www.tomshardware.com/tech-industry/artificial-intelligence/qualcomm-unveils-ai200-and-ai250-ai-inference-accelerators-hexagon-takes-on-amd-and-nvidia-in-the-booming-data-center-realm)
+
+### Groq — 144-wide VLIW with cycle-accurate compilation
+
+Groq, founded by ex-Google TPU engineers, has been shipping a
+**144-wide VLIW** inference accelerator since the late 2010s, but its
+prominence in 2025 grew substantially as the large-language-model
+inference market scaled out. Groq's defining architectural claim is
+that inference is deterministic enough that the compiler can produce
+cycle-accurate static schedules — no dynamic scheduling, no runtime
+branch prediction, no speculation. The compiler decides where every
+operation goes at every cycle, and the hardware executes the schedule
+exactly.
+
+This is Fisher's trace-scheduling insight taken to its limit. Where
+Itanium tried to use VLIW for general-purpose code (and failed because
+general-purpose code has too much runtime uncertainty for static
+scheduling to work), Groq uses VLIW for inference (which does not
+have that uncertainty) and gets the theoretical benefits in full. The
+2025 market position of Groq is that it is the fastest pure-inference
+accelerator per-dollar on the market for a range of model sizes, and
+the hardware is shipping into production LLM deployments.
+
+**Source:** [Tenstorrent and the State of AI Hardware Startups — irrationalanalysis.substack.com](https://irrationalanalysis.substack.com/p/tenstorrent-and-the-state-of-ai-hardware)
+
+### Tenstorrent and the post-Itanium VLIW lineage
+
+**Tenstorrent**, founded in 2016 by Ljubisa Bajic and with Jim Keller
+as CTO from 2020, is not a pure VLIW company in the way Groq is, but
+its design philosophy incorporates several VLIW-adjacent ideas around
+explicit compiler-directed dataflow, statically scheduled compute
+fabrics, and cycle-predictable execution on tile arrays. The 2025
+Tenstorrent position is that it is the most credible open-source-
+friendly alternative to Nvidia in the AI-training market, and the
+extent to which its approach will succeed is one of the more closely
+watched questions in the 2025–2026 hardware industry.
+
+For this document's purposes, Tenstorrent matters because it is the
+latest major example of "the compiler controls the hardware
+schedule" architectures getting a serious, well-funded attempt in
+the AI era. The Fisher thesis that the compiler knows enough to
+schedule the CPU is being tested again, in a market where the
+workload shape is much more amenable to it than the 2000s
+general-purpose workloads that killed Itanium.
+
+### The market framing
+
+The 2025–2026 industry consensus — articulated most cleanly in the
+Articsledge VLIW survey and the Chipletter Hexagon analysis — is
+that **edge AI inference is driving renewed interest in VLIW for the
+2025–2030 window** because inference workloads are structurally
+ideal for static scheduling. The control flow in a neural network
+forward pass is almost entirely known at compile time. The memory
+access pattern is predictable. The operator boundaries are well-
+defined. Every one of Fisher's original trace-scheduling assumptions
+holds for inference, and very few of them held for the
+general-purpose desktop workloads Itanium was aimed at.
+
+The result is that VLIW is quietly becoming one of the dominant
+architectures for the fastest-growing category of silicon —
+inference accelerators — at exactly the time when most programmers
+have stopped thinking about VLIW at all. This is the kind of story
+the main body is designed to surface, and the 2025 data makes the
+story concrete.
+
+**Sources:** [What Is VLIW? How It Boosts CPU Performance (2026) — Articsledge](https://www.articsledge.com/post/very-long-instruction-word-vliw) · [Hexagon-MLIR: An AI Compilation Stack For Qualcomm's Neural Processing Units (NPUs) — arXiv](https://arxiv.org/html/2602.19762v1)
+
+### What this means for the trace-scheduling thread
+
+The research bucket's main body argues that trace scheduling was
+Fisher's genuinely-novel contribution to compiler-hardware
+co-design, and that it has survived long past the demise of the
+machines that first implemented it. The 2025 data extends that
+argument: trace scheduling is now one of the load-bearing
+techniques in the compilers that produce code for the accelerators
+that run the language models that are driving the 2020s AI economy.
+This is the most consequential place trace scheduling has been since
+the Multiflow TRACE and Cydrome Cydra machines of the late 1980s,
+and in 2026 the technique is running on silicon in every flagship
+Android phone and in a growing fraction of the datacenter inference
+fleet.
+
+Fisher died in 2023 and the body already notes that; the 2025–2026
+data is a continuation of his technical legacy beyond his lifetime,
+running on silicon he never saw.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — VLIW, trace scheduling, and the compiler/hardware boundary are
+  squarely systems-engineering topics. The history of why Itanium
+  failed and why Hexagon succeeded is a case study in how architecture
+  meets workload.
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  For the compiler side: trace selection, compaction, instruction
+  scheduling, and software pipelining are concrete algorithm
+  instances for the Algorithms & Efficiency wing.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — The theoretical side of instruction scheduling (dependency
+  graphs, loop transformations, modulo scheduling) is graph-theoretic
+  and has connections to integer linear programming.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The Multiflow / Cydrome / Itanium / Hexagon / Groq lineage is
+  one of the cleanest multi-generational arcs in hardware history.
+
+---
+
 *This document is part of the PNW Research Series.*
 
 *Research conducted April 2026. All technical specifications verified against primary sources
 where available. Market figures are estimates compiled from multiple industry analyst reports
 and manufacturer disclosures.*
+
+*Addendum (VLIW in the AI-accelerator era, 2025–2026) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
