@@ -3645,6 +3645,405 @@ on: Ada rewards the programmer who is willing to say what they mean.
 
 ---
 
+## Study Guide
+
+This document is a reference for the *sequential* language core. Ada's
+concurrency is covered in `concurrency.md`; the history in `history-origins.md`;
+safety-critical and SPARK in `safety-spark-impl.md`. Read this file when you
+want to understand how the language builds up from scalars to packages to
+generics.
+
+### Prerequisites
+
+- A rough familiarity with one strongly-typed language (C++, Rust, OCaml, or
+  even Pascal works fine). Coming from Python or JavaScript you will spend
+  the first week re-learning what a type actually is.
+- GNAT installed (`gnatmake --version`). If you followed the concurrency
+  study guide you already have this.
+- A text editor with some Ada mode. `M-x ada-mode` in Emacs, the Ada plugin
+  for VS Code (`AdaCore.ada`), or the GNAT Studio IDE.
+
+### Recommended reading order
+
+Do not read Sections 1-20 in order. Read them in this order:
+
+1. Section 1 — design philosophy. One pass, slowly. You need the mental
+   model before the syntax.
+2. Section 2 — lexical and program layout. Just enough to recognize a
+   well-formed Ada file.
+3. Section 8 — packages. This is the organizing principle of the whole
+   language; without it, the rest of the file reads like a bag of features.
+4. Sections 3, 4, 5, 6, 9 — scalars, subtypes, arrays, records, subprograms.
+   The type system and the callable units. These are the bread-and-butter.
+5. Section 7 — access types. Read last among the data sections, because
+   Ada's access types are deliberately awkward and you should understand
+   what they are replacing (raw pointers).
+6. Section 10 — generics. This is where the type system pays off.
+7. Section 12 — object-oriented programming. Ada's OO model is small and
+   well-contained; read it after generics, not before.
+8. Section 13 — contracts. Ada 2012 preconditions, postconditions, type
+   invariants. Read this before you read the SPARK material in
+   `safety-spark-impl.md`.
+9. Sections 11, 14, 15, 16, 17, 18 — exceptions, expressions, strings, I/O,
+   numerics, representation clauses. Reference. Read when you need them.
+10. Sections 19, 20 — mental model and idiomatic programs. Re-read at the
+    end, now that the features they use have context.
+
+### Key concepts to internalize
+
+1. **Types are distinct even when they look alike.** `type Meters is new
+   Integer;` and `type Seconds is new Integer;` are not interchangeable.
+   The compiler will stop you from adding meters to seconds. This is
+   Ada's single most powerful error-prevention feature, and it costs you
+   exactly one character (`is new Integer` versus `is Integer`).
+2. **Subtypes refine; types distinguish.** `subtype Natural is Integer
+   range 0 .. Integer'Last;` adds a constraint. `type Age is new Integer
+   range 0 .. 150;` creates a whole new type. Use subtypes for
+   constraints; use derived types for semantic distinctions.
+3. **Packages, not classes, are the unit of encapsulation.** A package
+   has a specification (`.ads`) and a body (`.adb`). The spec is the
+   contract; the body is the implementation. Hidden private types live
+   in the private part of the spec. This predates classes by decades
+   and is cleaner for many designs.
+4. **Generics are templates checked at instantiation.** Generic
+   parameters are declared explicitly (`with function "<" (L, R :
+   Element) return Boolean;`). The compiler checks that actuals match.
+   You pay for expressiveness at the declaration site and get precise
+   error messages at the instantiation site.
+5. **Contracts are first-class.** `pragma Pre => X > 0;` and `pragma Post
+   => Result = X * X;` are parts of the subprogram's interface, not
+   afterthoughts. `gnatprove` reads them statically; at runtime, they
+   compile to assertions you can turn on or off per build.
+6. **Exceptions are for exceptional situations.** Ada's exception model
+   is closer to Lisp's condition system or Java's checked exceptions
+   than to C++ or Python unchecked exceptions. Use exceptions for
+   *errors*, not for control flow.
+7. **The `'` attribute syntax gives you introspection on types.**
+   `Integer'First`, `Integer'Last`, `My_Array'Length`, `T'Size`.
+   Attributes are read-only queries; they replace the ad-hoc functions
+   other languages bolt on.
+
+### 1-week plan (introductory)
+
+- Day 1: Sections 1, 2. Install GNAT. Write a Hello World. Add a package.
+- Day 2: Section 3 (scalars). Write a program that defines three
+  incompatible derived types and convinces the compiler to reject mixing
+  them.
+- Day 3: Sections 5, 6 (arrays, records). Build a stack as an array, a
+  record for a point in 3D, and a variant record for a shape that can
+  be a circle or a rectangle.
+- Day 4: Section 8 (packages). Re-organize yesterday's code into a
+  package with a public spec and a private implementation.
+- Day 5: Section 9 (subprograms). Add procedures and functions with `in`,
+  `out`, and `in out` modes. Notice how `out` parameters give you
+  multi-return without tuples.
+- Day 6: Section 10 (generics). Make your stack generic over element
+  type. Instantiate it for Integer and Float.
+- Day 7: Section 13 (contracts). Add `Pre` and `Post` contracts to your
+  stack's `Push`, `Pop`, and `Top` operations. Run `gnatprove` on it.
+
+### 1-month plan
+
+- Week 1: the 1-week plan.
+- Week 2: John Barnes, *Programming in Ada 2012*, Chapters 1-12. Work
+  every exercise.
+- Week 3: Rewrite a medium project you know in another language into
+  Ada. A markdown-to-HTML converter is a good size: it exercises
+  strings, I/O, records, procedures, and a bit of state.
+- Week 4: Read `concurrency.md` and bolt a tasking layer onto last
+  week's project (e.g. parallel file processing).
+
+### Glossary
+
+- **Subtype** — a refinement of an existing type with a constraint.
+  Assignable both ways with the parent type.
+- **Derived type** — a new type built from an existing one. Not
+  assignable with the parent without an explicit conversion.
+- **Tagged type** — a type that can have children in a type hierarchy.
+  Ada's equivalent of a non-final class.
+- **Package** — the unit of namespace and encapsulation. Has a spec and
+  a body.
+- **Private part** — the section of a package spec that holds
+  implementation details visible only to child packages.
+- **Generic** — a parameterized module instantiated to produce a concrete
+  package or subprogram.
+- **Contract** — a `Pre`, `Post`, `Type_Invariant`, or
+  `Subtype_Predicate` attached to a subprogram or type.
+- **Pragma** — a directive to the compiler. `pragma Assert`, `pragma
+  Inline`, `pragma Priority`, etc.
+- **Aspect** — the Ada 2012 alternative to pragmas, attached with
+  `with` after a declaration.
+
+---
+
+## Programming Examples
+
+### Example 1: Distinct types that prevent a Mars Climate Orbiter bug
+
+```ada
+-- File: units.adb
+-- Build: gnatmake units.adb
+-- Demonstrates strong type distinction.
+
+with Ada.Text_IO;
+
+procedure Units is
+   type Meters  is new Float;
+   type Feet    is new Float;
+
+   function To_Meters (F : Feet) return Meters is
+     (Meters (Float (F) * 0.3048));
+
+   Distance_Ft : Feet   := 100.0;
+   Distance_M  : Meters := To_Meters (Distance_Ft);
+begin
+   Ada.Text_IO.Put_Line ("100 ft =" & Meters'Image (Distance_M) & " m");
+   -- The next line is a compile error; uncomment and try it:
+   -- Distance_M := Distance_M + Distance_Ft;
+end Units;
+```
+
+Notice the commented-out line. Uncomment it and `gnatmake` refuses to
+build. This is the Mars Climate Orbiter failure prevented by two
+characters: `is new` instead of `is`. That 1999 accident lost a $125M
+probe because pound-force-seconds and newton-seconds were silently
+mixed. Ada code cannot silently mix them.
+
+### Example 2: A generic bounded stack
+
+```ada
+-- File: stacks.ads  (the package spec)
+generic
+   type Element is private;
+   Max : Positive;
+package Stacks is
+   type Stack is private;
+
+   procedure Push (S : in out Stack; E : Element)
+     with Pre => not Is_Full (S);
+
+   procedure Pop (S : in out Stack; E : out Element)
+     with Pre => not Is_Empty (S);
+
+   function  Top (S : Stack) return Element
+     with Pre => not Is_Empty (S);
+
+   function  Is_Empty (S : Stack) return Boolean;
+   function  Is_Full  (S : Stack) return Boolean;
+
+private
+   type Store is array (1 .. Max) of Element;
+   type Stack is record
+      Items : Store;
+      Count : Natural := 0;
+   end record;
+end Stacks;
+```
+
+```ada
+-- File: stacks.adb  (the body)
+package body Stacks is
+   procedure Push (S : in out Stack; E : Element) is
+   begin
+      S.Count := S.Count + 1;
+      S.Items (S.Count) := E;
+   end Push;
+
+   procedure Pop (S : in out Stack; E : out Element) is
+   begin
+      E := S.Items (S.Count);
+      S.Count := S.Count - 1;
+   end Pop;
+
+   function Top (S : Stack) return Element is (S.Items (S.Count));
+   function Is_Empty (S : Stack) return Boolean is (S.Count = 0);
+   function Is_Full  (S : Stack) return Boolean is (S.Count = Max);
+end Stacks;
+```
+
+```ada
+-- File: use_stacks.adb  (a client that instantiates the generic)
+with Stacks;
+with Ada.Text_IO;
+
+procedure Use_Stacks is
+   package Int_Stack is new Stacks (Element => Integer, Max => 10);
+   use Int_Stack;
+
+   S : Stack;
+   X : Integer;
+begin
+   Push (S, 42);
+   Push (S, 7);
+   Pop  (S, X);
+   Ada.Text_IO.Put_Line ("Popped" & Integer'Image (X));
+end Use_Stacks;
+```
+
+What to notice: the spec is the contract; the body is the
+implementation; the client sees only the spec plus whatever is not in
+the `private` part. `Push` and `Pop` carry preconditions that
+`gnatprove` can discharge statically.
+
+### Example 3: A variant record
+
+```ada
+-- File: shapes.adb
+with Ada.Text_IO;
+with Ada.Numerics;
+
+procedure Shapes is
+   type Kind is (Circle, Rectangle);
+
+   type Shape (K : Kind) is record
+      case K is
+         when Circle =>
+            Radius : Float;
+         when Rectangle =>
+            Width, Height : Float;
+      end case;
+   end record;
+
+   function Area (S : Shape) return Float is
+   begin
+      case S.K is
+         when Circle    => return Ada.Numerics.Pi * S.Radius ** 2;
+         when Rectangle => return S.Width * S.Height;
+      end case;
+   end Area;
+
+   C : constant Shape := (K => Circle,    Radius => 3.0);
+   R : constant Shape := (K => Rectangle, Width  => 4.0, Height => 5.0);
+begin
+   Ada.Text_IO.Put_Line ("Circle area    =" & Float'Image (Area (C)));
+   Ada.Text_IO.Put_Line ("Rectangle area =" & Float'Image (Area (R)));
+end Shapes;
+```
+
+This is Ada's sum type. It is older and more verbose than Rust's `enum`
+or OCaml's variants, but the semantics are the same: a tagged union
+with exhaustive case matching and compile-time checks that you covered
+every alternative.
+
+### Example 4: A package with a private type
+
+```ada
+-- File: counter.ads
+package Counter is
+   type T is private;
+
+   procedure Reset (C : out T);
+   procedure Tick  (C : in out T);
+   function  Value (C : T) return Natural;
+
+private
+   type T is record
+      N : Natural := 0;
+   end record;
+end Counter;
+```
+
+```ada
+-- File: counter.adb
+package body Counter is
+   procedure Reset (C : out T) is
+   begin
+      C := (N => 0);
+   end Reset;
+
+   procedure Tick (C : in out T) is
+   begin
+      C.N := C.N + 1;
+   end Tick;
+
+   function Value (C : T) return Natural is (C.N);
+end Counter;
+```
+
+A client sees only `T`, `Reset`, `Tick`, `Value`. The fact that `T` is
+a record with an `N : Natural` field is invisible. Replace the record
+with anything more sophisticated (a bignum, a thread-local counter, an
+mmap'd file) without touching any client.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Prove a stack invariant
+
+Take the generic stack from Example 2. Add this invariant to the spec:
+
+```ada
+type Stack is private
+  with Type_Invariant => Is_Valid (Stack);
+
+function Is_Valid (S : Stack) return Boolean;
+```
+
+Define `Is_Valid` in the private part as `S.Count in 0 .. Max`. Run
+`gnatprove --level=2 stacks.ads` and observe that it discharges every
+verification condition automatically. You have just proved, with zero
+manual proof work, that `Push` cannot overflow and `Pop` cannot
+underflow. This is what Ada 2012 contracts buy you.
+
+### DIY 2 — Build a contract-protected calculator
+
+Write a package `Calc` with the signatures:
+
+```ada
+function Divide (A, B : Float) return Float
+  with Pre => B /= 0.0;
+
+function Sqrt (X : Float) return Float
+  with Pre  => X >= 0.0,
+       Post => Sqrt'Result * Sqrt'Result in
+               X - 0.0001 .. X + 0.0001;
+```
+
+Implement both, run `gnatprove`, and observe what it can and cannot
+discharge without help. The postcondition on `Sqrt` will probably
+require you to give the prover a hint or a loop invariant.
+
+### DIY 3 — Translate a C++ template
+
+Pick any small C++ template you know (a `Pair<K, V>` type, say) and
+rewrite it as an Ada generic. Note the explicit declaration of generic
+formals and the instantiation syntax. Compare the error messages when
+you instantiate with an incompatible type in each language. Ada's
+messages are almost always shorter.
+
+### DIY 4 — Convert Python code
+
+Take a 200-line Python script you wrote recently and rewrite it in
+Ada. You will feel the type system as friction at first, then as a
+safety rail, and eventually as documentation. The exercise is not
+about speed (though the Ada version is usually 10-100x faster) but
+about which language makes you say the things you mean.
+
+### TRY — Package your own library
+
+Create a package hierarchy: `My_Lib`, `My_Lib.Stacks`, `My_Lib.Queues`,
+`My_Lib.Sets`. Each child package is a generic container. Write a
+small test program that instantiates each with `Integer` and exercises
+them. Publish the resulting sources somewhere as a learning artifact.
+You will have built, in an afternoon, your own miniature STL.
+
+---
+
+## Related College Departments (language core)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — the
+  type system, generics, and package abstractions are textbook
+  programming-language-design topics.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — contracts compile to verification conditions that SMT solvers
+  discharge; this is applied mathematical logic.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — packaging, spec/body separation, and contracts are engineering
+  discipline applied to software construction.
+
+---
+
 *This document is part of the PNW Research Series on tibsfox.com.
 Ada deep dive, thread 2 of 4: language core. Siblings cover history,
 concurrency, and safety-critical/SPARK. See the Research index for links.*

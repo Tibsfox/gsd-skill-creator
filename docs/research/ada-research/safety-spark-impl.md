@@ -1505,3 +1505,192 @@ The Ada community's slogan for the 2020s revival ought to be: *we were right all
 ---
 
 *End of Thread B: Safety-Critical Applications, SPARK Formal Verification, and the GNAT Ecosystem.*
+
+---
+
+## Study Guide
+
+This is the thread to read when you want to understand *why* Ada
+exists in the form it does, and how SPARK takes the Ada subset and
+elevates it to provable correctness.
+
+### Prerequisites
+
+- Finish `language-core.md` first. You need contracts (Section 13) and
+  packages (Section 8) in your head before SPARK makes sense.
+- Install GNAT + SPARK. On Debian/Ubuntu: `sudo apt install gnat
+  gnatprove`. On other platforms, the GNAT FSF or GNAT Pro installer
+  bundles both. Verify with `gnatprove --version`.
+- Read one case study of a failure — the Ariane 5 Flight 501 report,
+  the Therac-25 paper, or the Mars Climate Orbiter MIB report. Pick
+  one. Read the whole thing. These are the accidents that created the
+  demand for the tools in this document.
+
+### Recommended reading order
+
+1. **The problem.** Read the history portion first: the D&D process,
+   the catastrophic failures that motivated DO-178, IEC 61508, and
+   EN 50128. Understand that the tools you are about to learn were
+   built in response to specific disasters.
+2. **The Ada subset.** Ada's features that are safe and those that are
+   not — the "Ravenscar profile" for concurrency, the No_Allocators
+   and No_Recursion restrictions, bounded strings, elaboration
+   control.
+3. **SPARK's model.** SPARK is Ada minus side effects minus aliasing
+   minus dynamic dispatch, plus information-flow analysis. It is a
+   *subset* enforced by tooling, not a separate language.
+4. **The verification condition pipeline.** How `gnatprove` translates
+   contracts into VCs, hands them to SMT solvers (Alt-Ergo, CVC5,
+   Z3), and reports back.
+5. **The certification story.** DO-178C Levels A-E, the objectives
+   each level demands, how formal methods discharge some of those
+   objectives, and how an audit actually works.
+6. **The GNAT ecosystem.** The implementation, runtime library,
+   cross-compilers, and tooling. This is the "how do I build my
+   project" layer.
+
+### Key concepts
+
+1. **Safety is a property of the whole system, not the code.** SPARK
+   can prove the code matches its contracts, but *the contracts* are
+   the requirements, and if the requirements are wrong, proof buys
+   you nothing. Ariane 5 Flight 501 had correct Ada code for the
+   Ariane 4 envelope; the envelope changed. Read the MIB report.
+2. **DO-178C Level A is the highest civil aviation rating.** It
+   requires 71 objectives, including MC/DC structural coverage,
+   requirement-based testing, and traceability through every level of
+   the development lifecycle. SPARK discharges many objectives
+   automatically via proof.
+3. **SPARK has four analysis levels.** `--level=0` flow only;
+   `--level=1` basic; `--level=2` default (proves absence of runtime
+   errors); `--level=3` full (proves all contracts). Each level
+   takes more time and more annotations. Plan from level 0 upward,
+   not the other way around.
+4. **Information flow is orthogonal to correctness.** `Global` and
+   `Depends` contracts tell the prover which variables each
+   subprogram reads and writes. This is its own analysis, and it
+   catches bugs that functional correctness proofs miss (e.g.
+   accidentally mutating a variable you claimed to only read).
+5. **Bounded stacks, no heap, no recursion.** High-integrity Ada
+   doesn't use dynamic allocation. Everything has a compile-time
+   known bound. This sounds restrictive; in practice, it forces you
+   to size the problem, which is also a requirement for certification
+   anyway.
+
+### 1-week plan
+
+- Day 1: Read the Ariane 5 MIB report. Understand the *exact* failure
+  mode. Come back when you can explain it in three sentences.
+- Day 2: Install `gnatprove`. Write a tiny SPARK program (a factorial
+  with a contract). Prove it at level 2.
+- Day 3: Add a `Global => null` annotation. Prove that your function
+  is pure. Then accidentally introduce a global read and watch the
+  proof fail.
+- Day 4: Read Ada RM Annex D (Real-Time Systems) Section H
+  (Safety-Critical Systems). Short, dense, essential.
+- Day 5: Port the generic stack from `language-core.md` Example 2 into
+  SPARK. Add the `Type_Invariant`. Run `gnatprove` at level 2 and
+  then level 3. Fix what breaks.
+- Day 6: Read the DO-178C overview at AdaCore's learn site. Just the
+  overview, not the full supplements.
+- Day 7: Write up, in your own words, why SPARK makes flight code
+  cheaper to certify than equivalent C code. Share the write-up with
+  someone who will push back.
+
+---
+
+## Programming Examples
+
+### Example 1: A SPARK factorial
+
+```ada
+-- File: fact.ads
+package Fact with SPARK_Mode is
+   function Factorial (N : Natural) return Natural
+     with Pre  => N <= 12,
+          Post => Factorial'Result >= 1;
+end Fact;
+```
+
+```ada
+-- File: fact.adb
+package body Fact with SPARK_Mode is
+   function Factorial (N : Natural) return Natural is
+      Result : Natural := 1;
+   begin
+      for K in 1 .. N loop
+         pragma Loop_Invariant (Result >= 1);
+         Result := Result * K;
+      end loop;
+      return Result;
+   end Factorial;
+end Fact;
+```
+
+Build with `gnatprove --level=2 fact.ads`. The precondition bound of
+12 is there because 13! overflows `Natural` on a 32-bit system; the
+prover will flag the overflow risk without the bound.
+
+### Example 2: A flow contract
+
+```ada
+package Counter with SPARK_Mode is
+   Total : Natural := 0;
+
+   procedure Increment
+     with Global  => (In_Out => Total),
+          Depends => (Total => Total);
+end Counter;
+```
+
+The `Global` says `Increment` reads and writes `Total`. The `Depends`
+says the new `Total` depends only on the old `Total`. If you
+accidentally read some other variable inside the body, the prover
+rejects it. This is information-flow analysis; it is catches bugs
+tests cannot.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Prove the absence of runtime errors in a real subroutine
+
+Take the `Ceiling` example from `concurrency.md` Example 5. Add
+`SPARK_Mode` and run `gnatprove --level=2`. Watch every VC get
+discharged or flagged. Fix the flagged ones.
+
+### DIY 2 — Write a buffer with a proven invariant
+
+Define a ring buffer in SPARK with a `Type_Invariant` that the head,
+tail, and count are consistent. Prove `Put` and `Get` preserve it.
+This is a canonical SPARK exercise and there are public write-ups of
+it you can compare against.
+
+### DIY 3 — Read the Tokeneer case study
+
+AdaCore published the full Tokeneer project as open source — a
+biometric access-control system proved in SPARK. Clone it, read it,
+prove it. It is the single best end-to-end example of an industrial
+SPARK codebase.
+
+### TRY — Port one component of a personal project to SPARK
+
+Pick a single module — a parser, a scheduler, a state machine — from
+something you already wrote. Extract it into a SPARK package. Add
+contracts. Prove what you can; leave assume statements where you
+cannot. Document what you learned about your own code in the process.
+
+---
+
+## Related College Departments (safety & SPARK)
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — safety-critical engineering, requirements traceability,
+  certification standards (DO-178C, IEC 61508, EN 50128).
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — Hoare logic, SMT solving, formal verification. The
+  `mathematical-foundations-enrichment.md` file in `rca-deep` is a
+  cross-reference.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  the Ariane 5, Therac-25, and Mars Climate Orbiter cases are the
+  historical record that defines this discipline.
