@@ -173,3 +173,33 @@ WCN and NWC together -- the traveling convention and the fixed-venue convention 
 12. [Flayrah - Fred Patten Furry Chronology](https://www.flayrah.com/)
 13. [Atlas Obscura - LASFS](https://www.atlasobscura.com/)
 14. [Fanlore - Los Angeles Science Fantasy Society](https://fanlore.org/wiki/Los_Angeles_Science_Fantasy_Society)
+
+---
+
+## Addendum: Notes as of April 2026
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. Westercon is a long-running West Coast regional
+convention rather than a commercial event, and the 2025–2026
+status is consistent with the body: the convention continued its
+rotating-host-city model, the regional fandom community that
+sustains it is unchanged, and the literary-SF character the body
+describes has not shifted. As of this enrichment pass, Westercon
+remains one of the three most-referenced regional SF conventions
+on the West Coast (alongside Norwescon and Orycon), and the body's
+treatment of its history and place in the West Coast fandom
+ecosystem is still accurate.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md) — Literary SF conventions are a writing-department topic; Westercon's panels, workshops, and author-centric programming sit squarely there.
+- [**reading**](../../../.college/departments/reading/DEPARTMENT.md) — Reader-community formation and genre-fiction discussion are reading-department material.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) — Westercon's 70+ year history is one of the longest continuous regional fan traditions in the United States.
+- [**communication**](../../../.college/departments/communication/DEPARTMENT.md) — The rotating-host-city volunteer-infrastructure model is a communication-department topic about how knowledge transfers between successive ConComs.
+
+---
+
+*Addendum (2026 status, college cross-link) added during the Session 018 catalog enrichment pass.*

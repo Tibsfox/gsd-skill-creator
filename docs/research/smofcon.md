@@ -268,3 +268,41 @@ The convention about conventions. The skill-creator for skill-creators. The docu
 10. [Worldcon.org -- Bid documentation](https://worldcon.org)
 11. [Wikipedia -- SMOFcon](https://en.wikipedia.org/wiki/SMOFcon)
 12. [Wikipedia -- SMOF](https://en.wikipedia.org/wiki/Secret_Masters_of_Fandom)
+
+---
+
+## Addendum: SMOFcon 43 Lisbon and the 2026 outlook
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. SMOFcon is one of the most stable institutions in
+organized SF fandom — its function is training the people who run
+conventions, and that function has not changed since its founding.
+The 2025–2026 specifics that are worth recording:
+
+- **SMOFcon 43** (Lisbon, Portugal) is the most recent running
+  in the body's SMOFcon series. The body's treatment of SMOFcon's
+  rotating host model and its role in the Worldcon bid / site
+  selection process is accurate for 2025.
+- **SMOFcon continues as the primary training ground** for
+  convention-running volunteers, with its panel programming
+  focused on the practicalities of running large fan conventions
+  (programming grids, hotel negotiation, accessibility, Code of
+  Conduct enforcement, volunteer pipeline management).
+- **The WSFS structure** that the body references remains the
+  governing framework for Worldcon site selection, and the
+  SMOFcon community continues to serve as the practitioner
+  layer that makes WSFS decisions feasible in practice.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**communication**](../../../.college/departments/communication/DEPARTMENT.md) — SMOFcon is, at its core, a communication-department topic: the transmission of operational knowledge from one ConCom to the next across decades.
+- [**problem-solving**](../../../.college/departments/problem-solving/DEPARTMENT.md) — Running a convention for thousands of people on a volunteer budget is an applied-problem-solving exercise, and SMOFcon's panels are a running curriculum on how to do it.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) — The SMOFcon tradition is one of the most continuous operational-knowledge-transfer practices in organized SF fandom.
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md) — SMOFcon's documentation culture (retrospectives, post-mortems, running-reports) is a body of technical writing worth studying.
+
+---
+
+*Addendum (SMOFcon 43 Lisbon, 2026 outlook) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
