@@ -364,3 +364,48 @@ The project's PNW research modules are themselves a kind of working forest: stru
 ---
 
 *Research compiled March 2026. Primary sources: Weyerhaeuser Company, Forest History Society, HistoryLink.org, USDA Forest Service, SFI, FBI archives, OPB, The Seattle Times, University of Chicago, Nature Conservancy, NOAA Fisheries.*
+
+---
+
+## Addendum: Weyerhaeuser in 2025–2026
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. Weyerhaeuser is one of the largest private
+landowners in the United States and its 2025 activity is steady-
+state rather than newsworthy. Three framing points are worth
+recording:
+
+1. **REIT status.** Weyerhaeuser has been a real-estate investment
+   trust (REIT) since 2010, which shapes the company's financial
+   reporting and its dividend-distribution obligations. Through
+   2024–2025 the REIT structure remained in place and the
+   quarterly dividend continued.
+2. **Carbon credits as emerging revenue.** The body's mention of
+   improved-forest-management carbon credits as "an emerging
+   revenue stream" is more concrete as of 2025: Weyerhaeuser has
+   formalized carbon-credit programs that monetize the difference
+   between business-as-usual harvest and reduced-harvest
+   management on specific parcels. The voluntary carbon market's
+   ongoing quality-standards debate (around additionality,
+   permanence, and leakage) affects how these credits are
+   valued, but the business line is no longer hypothetical.
+3. **Working-forest framing and public policy.** The working-forest
+   concept the body describes is increasingly formalized in state
+   and federal forest-policy conversations through 2024–2025,
+   with Washington and Oregon legislative work treating
+   commercial timberlands as a land-use category distinct from
+   both wilderness preservation and agricultural land.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**environmental**](../../../.college/departments/environmental/DEPARTMENT.md) — The working-forest concept, carbon accounting, and the interaction of commercial timberlands with salmon habitat and water quality are environmental-department topics.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) — The Weyerhaeuser family's 125+ year involvement in the PNW timber industry is one of the region's most important business-history case studies.
+- [**business**](../../../.college/departments/business/DEPARTMENT.md) — The REIT conversion, the carbon-credit monetization, and the long-cycle capital management of timberlands are all business-department topics.
+- [**economics**](../../../.college/departments/economics/DEPARTMENT.md) — Rural-community dependence on timber revenue, the tax base funded by harvest, and the transportation infrastructure that timber economics requires are economics-department material.
+
+---
+
+*Addendum (REIT status confirmation, carbon credits, working-forest policy framing) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
