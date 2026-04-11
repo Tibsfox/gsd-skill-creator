@@ -488,3 +488,38 @@ Structural stability Rosetta connections to document when the transcript is avai
 - Euler's critical load formula `P_cr = π²EI / (KL)²` maps directly to system stability: E = component stiffness (test coverage), I = moment of inertia (architectural coupling resistance), L = unsupported span (distance between checkpoints), K = boundary condition (how pinned vs. free are the integration points)
 - Slenderness ratio λ = KL/r as a stability metric → codebase "slenderness" = ratio of lines of code to test coverage
 - Post-buckling behavior: some systems fail catastrophically at P_cr (brittle), others have post-buckling reserve strength (ductile) → brittle vs. graceful degradation in distributed systems
+
+---
+
+## Addendum: Framing notes and college cross-link (April 2026)
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body above is a transcript-analysis document
+synthesizing cooperative economics, conservation law, manufacturing
+systems, and (prospectively) structural stability into Rosetta
+cross-mappings. The analysis is already
+mission-specific and does not need content updates — its value is
+the synthesis itself rather than the temporal currency of the
+transcripts. What the enrichment pass adds is the college
+cross-link section that this research catalog is standardizing
+across all documents.
+
+The "outstanding structural stability transcript" note in the
+File Notes section remains a genuine open item: if / when the
+Euler buckling transcript becomes available, the Rosetta mapping
+in that section can be expanded into a proper analysis block
+alongside the other three threads.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**business**](../../../.college/departments/business/DEPARTMENT.md) — Cooperative economics, conservation law, and manufacturing systems are all business-infrastructure topics.
+- [**economics**](../../../.college/departments/economics/DEPARTMENT.md) — Cooperative ownership models, conservation finance, and the economics of lean manufacturing / TPS are economics-department material.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md) — The manufacturing-systems and structural-stability analyses are engineering-department topics.
+- [**environmental**](../../../.college/departments/environmental/DEPARTMENT.md) — Conservation law and conservation-oriented land-use policy bridge business and environmental department scopes.
+
+---
+
+*Addendum (college cross-link) added during the Session 018 catalog enrichment pass. The body of this transcript-analysis document remains unchanged.*
