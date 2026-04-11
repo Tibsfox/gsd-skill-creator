@@ -111,3 +111,26 @@ The Python kuramoto package provides a rigorous backend for validating the JS si
 3. **Implement trust counter CRDT** as a proof-of-concept for multi-writer trust scores
 4. **Connect kuramoto Python package to math co-processor** via MCP for GPU-accelerated large-N simulations
 5. **Map circadian drift (Math Section 10)** to Kuramoto with time-varying natural frequencies
+
+---
+
+## Addendum: College cross-link (April 2026)
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body above is an active study-notes document
+whose next-steps list is itself the forward thread; the enrichment
+here is limited to the standardized college cross-link section.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md) — Kuramoto synchronization is a mathematical-physics topic (coupled oscillators, dynamical systems, potential functions) and the random-matrix-theory connection is pure mathematics territory.
+- [**physics**](../../../.college/departments/physics/DEPARTMENT.md) — The original Kuramoto model comes from statistical physics and the synchronization phenomena in the body apply directly to physical systems from fireflies to power grids.
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — Distributed systems consensus (Raft, Paxos, BFT), the Maelstrom testing framework, and CRDT implementation are all applied programming topics squarely in the Algorithms & Efficiency wing.
+- [**logic**](../../../.college/departments/logic/DEPARTMENT.md) — Byzantine fault tolerance, consensus protocols, and the reasoning about distributed systems correctness are logic-department topics.
+
+---
+
+*Addendum (college cross-link) added during the Session 018 catalog enrichment pass.*
