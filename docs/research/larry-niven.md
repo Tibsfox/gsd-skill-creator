@@ -412,3 +412,76 @@ The Niven-Pournelle collaboration maps to agent orchestration. Different strengt
 - [The Master of Hard Sci-Fi: A Larry Niven Primer - LitReactor](https://litreactor.com/columns/the-master-of-hard-sci-fi-a-larry-niven-primer)
 - [Niven Named SFWA Grand Master - Locus Online](https://locusmag.com/2015/03/niven-named-sfwa-grand-master/)
 - [Larry Niven - Goodreads](https://www.goodreads.com/author/show/12534.Larry_Niven)
+
+---
+
+## Addendum: Niven in 2025–2026
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. Niven is 87 years old as of 2026 (born April 30,
+1938) and his 2024–2025 activity is, characteristically, steady
+rather than newsworthy. The body above is already a deep
+treatment of his Known Space universe, his collaborations with
+Jerry Pournelle, his SFWA Grand Master recognition (2015), and
+his influence on hard SF. What the body understates is how much
+continued influence his back catalog still has in 2025:
+
+- **Halo franchise continuity.** The Halo game and transmedia
+  franchise continued its ringworld-descended visual-design
+  language through 2024–2025, and the Paramount+ Halo TV series
+  renewals keep the Ringworld visual lineage in popular-media
+  circulation without crediting Niven directly. The body already
+  discusses the Halo-Ringworld lineage; it remains the single
+  largest place the Ringworld design concept appears in 2025–2026
+  popular culture.
+- **Known Space publishing.** Baen Books and Tor continue to keep
+  the Known Space backlist in print through 2024–2025, with
+  ebook editions available on every major platform. Niven's older
+  work — *Ringworld* (1970), *Protector* (1973), *World of
+  Ptavvs* (1966), the Man-Kzin Wars shared-universe series — is
+  accessible in a way that would not have been true for a 1960s
+  SF writer in 1990.
+- **The Niven-Pournelle collaborative catalog** (including
+  *The Mote in God's Eye*, *Lucifer's Hammer*, and *Footfall*)
+  remains in print and is still regularly cited in discussions of
+  the hard-SF tradition.
+- **Marilyn "Fuzzy Pink" Niven**, Niven's wife and a prominent
+  figure in West Coast fandom, died in 2023; the body references
+  this. The West Coast fandom community (LASFS, Westercon, and
+  the larger SoCal fan scene) continues to remember her
+  contributions through 2025.
+
+For this research catalog's purposes, Niven is a living connection
+between 1960s hard SF and 2020s popular media: the reader who
+encounters Halo's ringworld in 2026 and traces it back reaches
+Niven in one hop. That is the kind of influence that does not
+fade even when the original author's new output slows.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)
+  — Niven's career is a case study in hard-SF writing craft, from
+  novellas to collaborative world-building novels to shared-universe
+  series (Man-Kzin Wars).
+- [**reading**](../../../.college/departments/reading/DEPARTMENT.md)
+  — The Known Space series is one of the most-read hard-SF
+  backlists in print, and the reading department's treatment of
+  genre fiction cannot skip it.
+- [**physics**](../../../.college/departments/physics/DEPARTMENT.md)
+  — Hard SF's defining commitment to physical plausibility is
+  particularly visible in *Ringworld*'s structural stability
+  problem (famously addressed in *The Ringworld Engineers*) and
+  in Niven's treatment of relativistic starflight, which is a
+  legitimate physics-adjacent teaching topic.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The long career (1964 → present) spans the Golden Age, the
+  New Wave, the Cyberpunk era, and the post-2000 hard SF
+  resurgence, and is a history of the genre itself seen through
+  one writer.
+
+---
+
+*Addendum (2025–2026 status, Halo-Ringworld continuing influence, Marilyn Niven memorial note) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
