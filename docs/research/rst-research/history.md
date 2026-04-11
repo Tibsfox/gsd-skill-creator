@@ -809,8 +809,152 @@ The edition mechanism has proven remarkably successful. The Rust community has a
 | June 2023 | Leadership Council replaces core team [CHECK] |
 | February 2024 | White House ONCD memory safety report |
 | 2024 | DARPA TRACTOR program announced |
-| February 2025 | Rust 2024 edition (1.85) |
+| February 2025 | Rust 2024 edition (1.85), async closures stable |
+| April 2023 (re-confirmed 2025) | Microsoft rewriting parts of Windows kernel in Rust |
+| December 2025 | Linux Kernel Developers Summit promotes Rust from experimental to core |
+
+---
+
+## Addendum: Rust 2024 edition, async closures, and the kernels (2025)
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body above ends with Rust 2024 as a timeline entry. The
+story behind that timeline entry — and the 2025 kernel-level news that
+followed — is substantial enough to merit its own section.
+
+### Rust 1.85 and the 2024 edition (February 20, 2025)
+
+**Rust 1.85** shipped on **February 20, 2025**, and with it came the
+**Rust 2024 edition** — the fourth edition milestone in the language's
+history, following the 2015, 2018, and 2021 editions. Editions are
+Rust's mechanism for shipping breaking language changes without
+breaking existing code: each crate declares the edition it is written
+to, and the compiler applies the appropriate syntax and semantics.
+
+The headline features of Rust 1.85 / 2024:
+
+- **Async closures** (`async || { ... }`). The long-awaited feature
+  that closes one of async Rust's most-visible gaps. An async closure
+  is a closure that returns a future, in the same way that a
+  synchronous closure returns a value. Unlike the workaround pattern
+  of a closure that returns `async { ... }`, an async closure can
+  capture references from its environment and use them across
+  suspension points, which is what the old workaround could not do.
+  This was one of the explicit goals of the Rust 2024 project and
+  its stabilization was the release's most-quoted item.
+- **`let` chains in `if` and `while`.** Multiple `let`-binding
+  pattern matches connected with `&&` in a condition, a syntax that
+  has been an RFC for years.
+- **Temporary scope rule changes** that make certain classes of
+  "temporary lifetime" bugs easier to diagnose and write around.
+- **`gen` blocks** as an unstable preview — the generator syntax
+  that will eventually give Rust iterator-like generators as a
+  first-class construct.
+- **Several standard library additions**, including stabilized
+  parts of the `unbounded_shl`/`unbounded_shr` family, more
+  `const fn` conversions, and refined `Result::into_ok` / `Err`
+  interfaces.
+
+The 2024 edition itself includes a handful of breaking changes that
+are ergonomic wins: `match` patterns are stricter, a few previously-
+warned behaviors are now errors, and the new `no_std` / `core`
+defaults catch up to what the ecosystem has been using for years.
+
+**Sources:** [Announcing Rust 1.85.0 and Rust 2024 — Rust Blog, 2025-02-20](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0/) · [Rust 1.85 arrives with long-awaited async closures — InfoWorld](https://www.infoworld.com/article/3835168/rust-1-85-arrives-with-long-awaited-async-closures.html) · [Async closure support is stable for Rust 1.85 — InfoWorld](https://www.infoworld.com/article/3812600/async-closure-support-is-stable-for-rust-1-85.html) · [Rust 1.85 Release Stabilizes Rust 2024 Edition — Phoronix](https://www.phoronix.com/news/Rust-1.85-Released)
+
+### The Linux kernel promotes Rust from experimental to core (December 2025)
+
+At the **Linux Kernel Developers Summit in December 2025**, the kernel
+maintainers voted to **promote Rust from an experimental add-on to a
+core language of the Linux kernel**, alongside C and assembly. This is
+a meaningful institutional change: before the summit, every Rust
+kernel commit was treated as "opt-in, experimental, subject to
+removal if the Rust side cannot keep up"; after the summit, Rust is a
+first-class kernel language, with the same commitments around
+compatibility and maintenance that C has.
+
+The summit's public statements also formalize the **Rust kernel
+policy**, which is published at rust-for-linux.com/rust-kernel-policy
+and documented in the kernel's own tree at docs.kernel.org/rust. The
+policy codifies what the experimental phase had figured out
+informally: Rust code in the kernel is held to the same correctness
+standards as C code, is expected to compile cleanly on every
+supported kernel target, is subject to the same maintainer review
+process, and is expected to interoperate cleanly with the C side of
+the kernel through bindgen-generated headers.
+
+This is the biggest single event in Rust's institutional history
+since the Rust Foundation was formed in 2021. It is also the clearest
+possible signal that the "memory safety in the kernel" conversation
+has moved from theoretical to operational: Linus Torvalds, the Linux
+kernel maintainers as a group, and the upstream Rust-for-Linux team
+have agreed that the experiment worked and the language can stay.
+
+**Sources:** [Rust boosted by permanent adoption for Linux kernel code — devclass.com, December 15, 2025](https://devclass.com/2025/12/15/rust-boosted-by-permanent-adoption-for-linux-kernel-code/) · [Rust kernel policy — Rust for Linux](https://rust-for-linux.com/rust-kernel-policy) · [Rust — The Linux Kernel documentation](https://docs.kernel.org/rust/index.html) · [Linux Kernel Adopts Rust as Permanent Core Language in 2025 — WebProNews](https://www.webpronews.com/linux-kernel-adopts-rust-as-permanent-core-language-in-2025/) · [Linux Kernel Highlights For 2025: Schedulers, Rust & Torvalds' Commentary — Phoronix](https://www.phoronix.com/news/Linux-Kernel-Highlights-2025)
+
+### The Windows kernel side
+
+The Windows kernel's use of Rust, which Microsoft announced in April
+2023, has continued throughout 2024–2025. Microsoft is **rewriting
+parts of the Windows kernel in Rust** rather than replacing the whole
+thing, with new kernel work (device drivers, networking components,
+and certain privileged-mode subsystems) increasingly starting in Rust
+and with existing C++ components being rewritten to Rust where the
+cost/benefit justifies it. This is essentially the same strategy that
+the Linux kernel is following: Rust as the default for new code, C
+as the incumbent for existing code, with gradual migration driven by
+ordinary maintenance rather than by a top-down rewrite project.
+
+**Sources:** [Does Windows kernel use Rust and what does it mean for IT? — TechTarget](https://www.techtarget.com/searchenterprisedesktop/answer/Does-Windows-kernel-use-Rust-and-what-does-it-mean-for-IT) · [Microsoft is Rewriting Parts of the Windows Kernel in Rust — Thurrott.com](https://www.thurrott.com/windows/282471/microsoft-is-rewriting-parts-of-the-windows-kernel-in-rust)
+
+### What this means for the story
+
+The body above narrates Rust's path from Mozilla research project to
+the language every systems-programming conversation mentions. The
+2025 events are the institutional completion of that path. Both of
+the world's two most important operating system kernels now run Rust
+as a first-class language, one of them by formal vote of the
+maintainers and the other by gradual adoption driven by Microsoft's
+internal engineering direction. The "is Rust really a systems
+language" question that was a reasonable thing to ask in 2015 and a
+less reasonable thing to ask in 2020 is now answered in the only way
+that counts: by the production code running on every Linux and
+Windows machine on Earth.
+
+The 2024 edition is the procedural confirmation of the same point —
+Rust's language design process is mature enough to ship an edition
+on schedule, with the promised features (async closures, let chains,
+temporary scope fixes), without the kind of drama or delay that
+younger languages tend to accumulate around major releases.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Rust is a programming-language topic squarely in Programming
+  Fundamentals. Its ownership system is the most concrete working
+  example of resource-management-through-types in any mainstream
+  language.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — Rust is the engineering language of systems software: kernels,
+  device drivers, embedded firmware, databases, browsers, network
+  stacks. For anyone building or operating the bottom of the
+  software stack in 2026, Rust is inescapable.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The Mozilla origin story, the Servo history, the Foundation
+  transition, and the Leadership Council are all case studies in
+  how an open-source language project survives the loss of its
+  sponsoring corporation.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — Rust's type system (affine types, lifetimes, trait coherence)
+  draws directly on linear-logic research that originated in the
+  mathematical logic community. For anyone studying the connection
+  between logic and programming, Rust is a working demonstration.
 
 ---
 
 *Research compiled for the PNW Research Series, tibsfox.com. Part of the Rust (RST) project within a 284-project research corpus. Items marked [CHECK] require verification against primary sources.*
+
+*Addendum (Rust 1.85 / 2024 edition, Linux kernel core-language promotion, Windows kernel rewrite) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
