@@ -3066,3 +3066,160 @@ The core insight hasn't changed since Bezos's 2002 memo and Fowler/Lewis's 2014 
 - Werner Vogels, *All Things Distributed* blog (allthingsdistributed.com).
 - DHH, *The Majestic Monolith*, 2016 (signalvnoise.com/svn3/the-majestic-monolith).
 - Prime Video engineering blog, *Scaling up the Prime Video audio/video monitoring service and reducing costs by 90%*, March 2023.
+
+---
+
+## Addendum: Model Context Protocol — SOA for the agentic era (2024–2026)
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body above treats microservices, event-driven architecture,
+and service meshes as the current state of SOA practice. The 2024–2025
+development that the body does not cover is **Model Context Protocol (MCP)**,
+which is the first widely-adopted SOA-style protocol designed specifically
+for AI agent access to services, and which has grown into one of the
+fastest-moving service-interoperability standards in memory.
+
+### What MCP is
+
+**Model Context Protocol** is an open protocol **introduced by Anthropic
+in late 2024** for connecting AI agents (most prominently LLM-backed
+agents) to external data sources and tools through a uniform client/server
+interface. The protocol is the agentic-era answer to the same question
+SOA has been answering since the early 2000s: how do you let one piece of
+software use another piece of software's capabilities without coupling
+them tightly?
+
+The architecture is deliberately conventional:
+
+- **MCP clients** are the AI agents (or any program that needs access
+  to external capabilities).
+- **MCP servers** are lightweight connectors that expose a specific
+  resource — a database, a repository, an API, a filesystem, a
+  message bus — through the MCP standard.
+- A single agent can talk to many MCP servers simultaneously, and
+  each server can be reused by many agents.
+- The wire protocol is JSON-RPC-based, with a well-defined capability
+  discovery mechanism and a structured tool/resource/prompt model.
+
+MCP has three explicit design goals: (1) protocol, not framework — the
+server side is deliberately thin; (2) open, not vendor-specific —
+Anthropic published MCP under an open license and does not control
+implementations; (3) agent-aware — the protocol assumes the client is
+something like an LLM that needs structured metadata to decide which
+tools to call.
+
+**Sources:** [Model Context Protocol (MCP) in Agentic AI: Architecture and Industrial Applications — azhar, Medium](https://medium.com/ai-insights-cobet/model-context-protocol-mcp-in-agentic-ai-architecture-and-industrial-applications-7e18c67e2aa7) · [The Model Context Protocol (MCP): A New Standard for Agentic AI Systems — Tejaswi Kashyap, Medium](https://medium.com/@tejaswi_kashyap/the-model-context-protocol-mcp-a-new-standard-for-agentic-ai-systems-9f0600f4276c) · [AI Spotlight: MCP and Agentic AI systems — Gravitee](https://www.gravitee.io/blog/mcp-model-context-protocol-agentic-ai) · [Build Agents using Model Context Protocol on Azure — Microsoft Learn](https://learn.microsoft.com/en-us/azure/developer/ai/intro-agents-mcp)
+
+### The 2025 adoption curve
+
+MCP's adoption in 2025 was rapid on any normal standards-protocol
+timeline:
+
+- **Late 2024** — Anthropic publishes the MCP specification.
+- **March 2025** — **OpenAI officially adopts MCP** on its platform.
+  This is the moment MCP stopped being "Anthropic's protocol" and
+  became an industry standard, because it is the most widely-used LLM
+  provider formally signing on to a competitor's protocol.
+- **2025** — **Microsoft invests in MCP** across its AI ecosystem
+  (Azure AI Foundry, VS Code, Copilot). Microsoft publishes its own
+  MCP server libraries and positions MCP as the default
+  agent-to-service protocol on Azure.
+- **October 2025** — More than **5,500 MCP servers** are listed on
+  public registries. The twenty most popular generate over 180,000
+  monthly searches; **80% of deployed servers are in remote mode**,
+  which is a strong signal of production rather than toy use.
+
+For comparison, the equivalent 2004–2006 SOAP / WS-* adoption curve
+was considerably slower and ended with SOAP becoming a cautionary
+tale about over-standardization. The current MCP adoption curve is
+steeper, the protocol is smaller, and the early production-use
+percentage is higher. Whether this means MCP will avoid the SOAP
+fate or simply fall into it faster is an open question, but the
+curve is empirically striking.
+
+**Sources:** [How MCP Simplifies Enterprise AI Agent Development in 2025 — OneReach.ai](https://onereach.ai/blog/how-mcp-simplifies-ai-agent-development/) · [Revolutionize AI Integration with MCP: The Future of Open Standard Protocols 2025 — Baytech Consulting](https://www.baytechconsulting.com/blog/revolutionize-ai-integration-mcp-2025) · [MCP Architecture: From Monolithic SaaS to Agentic Mesh — Digitalkin](https://digitalkin.com/en/learn/mcp-architecture-mesh-agentique) · [LLM based AI Agent access to Micro-services using Model Context Protocol (MCP) — windshetty.wordpress.com, July 2025](https://windshetty.wordpress.com/2025/07/24/llm-based-ai-agent-access-to-micro-serivces-using-model-context-protocol-mcp/)
+
+### The architectural pattern — MCP as adapter over microservices
+
+The important practitioner framing that emerged in 2025 is that **MCP
+servers should not be monolithic applications containing business
+logic**. They should be thin adapters that translate between the MCP
+protocol spoken by AI agents and the REST, gRPC, or event-bus APIs
+spoken by existing microservices. The pattern looks like this:
+
+```
+AI Agent (MCP client)
+     │  (JSON-RPC over MCP)
+     ▼
+MCP Server (thin adapter)
+     │  (REST / gRPC / event bus)
+     ▼
+Existing microservices
+     │
+     ▼
+Databases, queues, third-party APIs, etc.
+```
+
+This is the **strangler fig** pattern from Fowler-era enterprise
+integration, applied at the agent-to-service boundary rather than at
+the monolith-to-microservice boundary. Existing microservices do not
+need to be rewritten to be agent-accessible; they need a thin MCP
+adapter in front of them. Most 2025 production MCP deployments follow
+this pattern.
+
+### What this means for the SOA story
+
+The main body of this document narrates SOA from its early-2000s
+enterprise-service-bus origins through microservices, service meshes,
+and the Kubernetes-era convergence on HTTP/gRPC/event-bus as the three
+standard interop patterns. MCP is the **fourth** interop pattern in
+that sequence: **agent-accessible services** as a first-class protocol
+target, with its own discovery mechanism, its own capability model,
+and its own tooling.
+
+The deeper continuity is that the SOA principles the early practitioners
+articulated — loose coupling, published interfaces, service
+discoverability, autonomy — are all load-bearing for MCP. Anthropic
+and the MCP community did not re-derive them; they borrowed them from
+the SOA tradition, renamed some of them, and applied them to the new
+agent-centric context. The continuities are clean enough that any
+practitioner who read Thomas Erl's SOA books in 2005 can read the 2025
+MCP specification without feeling unfamiliar territory.
+
+The discontinuity is that the "service consumer" in MCP is not a human
+programmer writing integration code. It is an LLM agent deciding at
+runtime which services to call based on a natural-language goal. That
+shift changes the metadata requirements (MCP's tool/resource/prompt
+model is richer than OpenAPI's endpoint schemas), changes the security
+model (agent access needs fine-grained scoping in a way that
+human-operator access often does not), and changes the economic model
+(an agent can make thousands of service calls per user query, which
+has billing implications that traditional SOA did not have to think
+about).
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — SOA, microservices, MCP, and the whole service-interop space are
+  systems-engineering topics. The history of how each generation's
+  interop protocol is shaped by the dominant client type is a case
+  study in co-evolution.
+- [**business**](../../../.college/departments/business/DEPARTMENT.md)
+  — SOA is a business-infrastructure topic as much as it is a
+  technical one. Enterprise adoption of MCP in 2025, the Amazon
+  "Bezos mandate" history, and the role of service architecture in
+  M&A integration are all business-oriented themes.
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  For the implementation side: writing an MCP server, wrapping a
+  microservice as an MCP tool, and designing service APIs that
+  agents can discover and use are all programming topics.
+- [**cloud-systems**](../../../.college/departments/cloud-systems/DEPARTMENT.md)
+  — Cloud-native service architecture is cloud-systems department
+  territory, and MCP is the newest addition to that stack.
+
+---
+
+*Addendum (Model Context Protocol and the agentic-era SOA) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
