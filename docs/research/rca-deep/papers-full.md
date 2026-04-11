@@ -565,3 +565,143 @@ Google's "Postmortems at Google" working group coordinates:
 | Trace data distracts models | Paper 6 | Filter and summarize rather than dump raw traces to agents |
 | Auditable validation logs | Paper 2 | Every agent decision should produce reviewable evidence |
 | Blameless postmortem template | Paper 8 | Standardize gsd-forensics output format on Google's 7-section template |
+
+---
+
+## Addendum: 2025 industry signals — AI-native incident management
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The papers-full document above synthesizes academic RCA research
+through mid-2025. The 2025 industry signal — distinct from the academic
+signal — is that AI-native incident management platforms have reached
+production maturity and are shipping into SRE workflows at scale. Three
+data points worth recording.
+
+### The LLMRCA paper — multimodal observability for LLM applications
+
+The **LLMRCA** paper published in ACM Transactions on Software
+Engineering and Methodology (2025) formalizes the multilevel RCA
+problem specifically for LLM-based applications, using multimodal
+observability data (logs, metrics, traces, prompts, generations) as
+inputs. The core insight is that an LLM application's failure modes
+are structurally different from classical software failure modes:
+
+- A classical software failure is usually a deterministic error on a
+  specific input, reproducible by running the same input through the
+  same code.
+- An LLM application failure is often **probabilistic**: the same
+  input produced a correct answer 99 times and a hallucination once,
+  and "reproduction" means characterizing a failure *distribution*
+  rather than fixing a specific path.
+
+LLMRCA's contribution is a framework for attributing failures across
+multiple levels (prompt template, model version, retrieval source,
+downstream tool, context window management) and for using multimodal
+signal to narrow the attribution. This is the academic-side
+confirmation that RCA techniques for LLM applications require a
+different toolkit than classical software RCA.
+
+**Source:** [LLMRCA: Multilevel Root Cause Analysis for LLM Applications Using Multimodal Observability Data — ACM TOSEM, 2025](https://dl.acm.org/doi/10.1145/3806200)
+
+### Flow-of-Action — SOP-enhanced multi-agent RCA
+
+Published in the Companion Proceedings of the **ACM Web Conference
+2025**, "Flow-of-Action: SOP Enhanced LLM-Based Multi-Agent System
+for Root Cause Analysis" presents a multi-agent system that follows
+a **standard operating procedure** (SOP) template rather than
+freeform agent reasoning. The key insight is that RCA is a
+procedural task with well-known steps (gather evidence → form
+hypotheses → test hypotheses → narrow to root cause → recommend
+remediation), and that constraining an LLM agent system to follow
+this procedure produces better results than letting the agents
+freely explore the investigation space.
+
+This validates a pattern that the GSD forensics workflow has been
+using for months: structured investigation, explicit stages,
+checkpoints between stages, and output formats that are
+reviewable. The academic result is that the structured approach
+outperforms the freeform approach, and the reasoning is what this
+addendum's takeaway line is also: **LLMs are better at following
+a procedure than at inventing one.**
+
+**Source:** [Flow-of-Action: SOP Enhanced LLM-Based Multi-Agent System for Root Cause Analysis — ACM Web Conference 2025](https://dl.acm.org/doi/10.1145/3701716.3715225)
+
+### The industry tooling wave — Rootly, Xurrent, Algomox, Datadog, Blameless
+
+The 2025 industry-tooling side is that several incident-management
+platforms have shipped AI-native RCA and postmortem features in
+production:
+
+- **Rootly** has an AI-generated postmortem pipeline that aggregates
+  signals from logs, alerts, and chat transcripts and produces a
+  structured postmortem draft. The positioning is explicitly
+  "human-in-the-loop" — the AI produces the first draft, humans
+  review, edit, and approve.
+- **Xurrent IMR**, **Datadog**, and **Blameless** all offer AI
+  modules that reduce noise, improve alert routing, and generate
+  incident timelines.
+- **Algomox** publishes blog work on LLM-driven RCA that aligns
+  with the LLMRCA and Flow-of-Action academic frameworks.
+
+The industry consensus — distilled from Xurrent's 2026 trends post
+and the broader 2025 practitioner writing — is that AI-driven
+observability has moved from reactive to **predictive** workflows in
+2025, with **78% of organizations using AI for at least one business
+function** (up from 72% in early 2024) and incident management being
+one of the most common first-use cases.
+
+**Sources:** [How AI Is Transforming Observability and Incident Management in 2026 — Xurrent Blog](https://www.xurrent.com/blog/ai-incident-management-observability-trends) · [Rootly: AI-Generated Postmortems — Transform Outage Data Fast](https://rootly.com/sre/ai-generated-postmortems-transform-outage-data-fast) · [LLMs to Automate Root Cause Analysis in Incident Response — DZone](https://dzone.com/articles/llms-automated-root-cause-analysis-incident-response) · [Enhancing Incident Management with LLM-driven Root Cause Analysis — Algomox Blog](https://www.algomox.com/resources/blog/incident_management_llm_root_cause_analysis/) · [AI Root Cause Analysis Platforms: Rootly vs Competitors — Rootly](https://rootly.com/sre/ai-root-cause-analysis-platforms-rootly-vs-competitors)
+
+### What this means for the action-items table above
+
+The action-items table at the top of this addendum is the output
+of synthesizing the academic RCA literature. The 2025 industry
+signals are consistent with every row of that table:
+
+- Inter-agent communication enrichment → aligns with LLMRCA's
+  multimodal-signal framework.
+- Constraint synthesis from tool schemas → aligns with
+  Flow-of-Action's SOP-constrained multi-agent architecture.
+- Dynamic causal graphs → aligns with the "predictive workflow"
+  turn in the industry observability story.
+- Auditable validation logs → aligns with the human-in-the-loop
+  approval pattern every production AI-postmortem tool has
+  adopted.
+- Blameless postmortem template → aligns with Rootly's, Xurrent's,
+  and Blameless's own output formats, which all follow Google's
+  7-section template structure.
+
+The 2025 data is that the GSD forensics design decisions embodied
+in the action-items table have been independently arrived at by
+the academic and industry communities. That is a strong signal
+that the decisions are pointing in the right direction, not that
+they are merely one reasonable option among many.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**problem-solving**](../../../.college/departments/problem-solving/DEPARTMENT.md)
+  — RCA is the canonical applied-problem-solving discipline, and
+  the 5-Whys / Fishbone / Fault Tree / Event-Causal-Factor tradition
+  the `classical-methods-enrichment.md` file covers is the
+  problem-solving department's core material.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — RCA is systems engineering in the reactive mode. Incident
+  management, observability, and postmortem discipline are SRE /
+  systems-engineering topics.
+- [**critical-thinking**](../../../.college/departments/critical-thinking/DEPARTMENT.md)
+  — "Why" questions, hypothesis formation, hypothesis testing, and
+  the discipline of not stopping at the first plausible cause are
+  all critical-thinking practice.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The history of RCA (from Toyota Production System through
+  aviation / healthcare / nuclear safety) is a case study in how
+  disciplines learn from failure. The `healthcare-aviation-
+  enrichment.md` and `manufacturing-quality-enrichment.md` files
+  are entry points for that history.
+
+---
+
+*Addendum (2025 industry AI-native RCA signals) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
