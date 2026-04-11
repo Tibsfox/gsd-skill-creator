@@ -1937,8 +1937,213 @@ The story of Ada is, ultimately, a hopeful one. It is the story of a community t
 
 That is the kind of success story that the programming world could use more of.
 
+## Part XVI: Updates (2025–2026)
+
+This section was added in April 2026 as part of a catalog-wide enrichment pass.
+The main history above closes with Ada 2022's publication in 2023. The years
+since have been quiet by mainstream-language standards and eventful by Ada
+standards, and the pattern of the story — a specialized language doing its
+niche jobs competently while the wider world looks elsewhere — continues
+essentially unchanged.
+
+### GNAT Pro 25 (early 2025)
+
+AdaCore shipped GNAT Pro 25 in early 2025 with the largest platform expansion
+the suite had seen in several years. The headline items:
+
+- **GCC 13 base.** GNAT Pro's GCC-based compilers moved to GCC 13, bringing
+  improved warnings and optimizations from the upstream GCC tree and — for the
+  mixed-language workflows the Ada community lives in — C23 and C++23 support
+  in the bundled C/C++ compilers.
+- **Linux Arm 64-bit native.** A first-class native compiler for aarch64 Linux
+  joined the suite, reflecting the direction of the server and embedded
+  markets that had spent the previous decade drifting from x86 to Arm.
+- **Windows LLVM backend.** The LLVM-based GNAT Pro compiler, which had been
+  incubating on Linux, became available for Windows native development,
+  widening the set of build environments that can target LLVM-only platforms
+  from Ada source.
+- **FreeRTOS as a supported target.** GNAT Pro 25 added official support for
+  FreeRTOS, the dominant free RTOS on 32-bit microcontrollers. The practical
+  effect is that teams building small-footprint embedded systems — in
+  industries where RTOS choice is often prescribed by customer or certifier —
+  can now adopt Ada without giving up their RTOS.
+- **CHERI on bare-metal Morello.** The GCC and LLVM bare-metal runtimes
+  picked up automated CHERI pure-capability memory allocators on the Morello
+  prototype hardware, an incremental step in AdaCore's long-running work to
+  make Ada a first-class citizen on capability-based architectures.
+- **h2ads.** A new binding-generation tool that parses C headers and emits
+  Ada package specifications binary-compatible with the original C
+  declarations. In practice this shortens the distance between "I have a C
+  API I need to call" and "I have a typed Ada binding I can link against"
+  from hours to minutes, and removes a class of hand-rolled-binding errors
+  that have been a perennial drag on mixed C/Ada projects.
+
+SPARK 25, shipped alongside GNAT Pro 25, improved its analysis of low-level
+code — specifically more precise handling of `Ada.Unchecked_Conversion`,
+which sits at the boundary between the SPARK-provable world and the
+unrestricted Ada world and had historically been a source of imprecise
+results in low-level drivers and protocol code.
+
+**Source:** [GNAT Pro 25: New Features, Platforms, and Tools — AdaCore Blog](https://blog.adacore.com/gnat-pro-25-new-features-platforms-and-tools)
+
+### Ada and SPARK in the automotive market (June 2025)
+
+In June 2025 AdaCore announced, jointly with NVIDIA, an off-the-shelf
+reference process for using Ada and SPARK on automotive projects under
+ISO 26262 — the functional-safety standard that governs software in cars.
+This is the first sustained effort to position Ada as a choice for the
+automotive functional-safety market, which has historically been dominated
+by MISRA C, AUTOSAR C++, and, more recently, by a wave of interest in Rust.
+
+The reference process is notable less for its technical content (which is
+essentially the existing Ada/SPARK DO-178C workflow adapted to ISO 26262
+vocabulary) than for the signal it sends: AdaCore is treating automotive as
+a growth market, not a peripheral one, and NVIDIA is willing to put its name
+on an Ada-and-SPARK-for-safety reference. The question of whether Ada can
+win meaningful automotive share against Rust and C++ is still open, but as
+of mid-2025 it is at least being contested on specific terms, with a named
+toolchain and a named process, rather than in the abstract.
+
+**Source:** [Ada and SPARK enter the automotive ISO-26262 market with NVIDIA — AdaCore press release](https://www.adacore.com/press/ada-and-spark-enter-the-automotive-iso-26262-market-with-nvidia)
+
+### IDE 25 and the Ada Language Server
+
+The Ada Language Server (ALS), which is the shared LSP backend behind the VS
+Code Ada extension and the GNAT Studio IDE, went through a meaningful
+generational change in the 2025 release train:
+
+- **GNATformat replaces GNATpp.** The formatter used by ALS was replaced
+  with GNATformat, a new tool that ports the Prettier formatter engine to
+  Ada. The practical effect is more uniform formatting across team
+  checkouts and editors, and a formatter that is finally fast enough for
+  format-on-save on medium-sized files without stalls.
+- **SPARK task integration in VS Code.** The VS Code extension gained
+  predefined tasks for GNATprove and "prove subprogram" code lenses directly
+  above subprogram declarations. This is the most ergonomic SPARK proof
+  experience Ada has ever had — you right-click a subprogram in VS Code and
+  ask for a proof, where previously you had to drop to the terminal or use
+  GNAT Studio's older UI.
+- **Code Visualizer (2026.0).** The 2026.0 Ada Language Server release adds
+  a Code Visualizer that renders code information as interactive graphs in
+  VS Code. Because the visualizer is built on LSP, it works for any LSP
+  language in the same editor, not only Ada — a modest but characteristic
+  example of Ada tooling landing in a place that helps the broader language
+  ecosystem and not only the Ada community.
+- **GNAT Studio 2026.2** shipped in early 2026, the current stable release
+  of the traditional Ada IDE.
+
+**Sources:** [IDE 25 Release Notes — AdaCore documentation](https://docs.adacore.com/live/wave/IDE-release-notes/html/IDE_release_notes/relnotes_25.html) · [GNAT Studio 2026.2 release announcement — Ada Forum](https://forum.ada-lang.io/t/gnat-studio-2026-2-just-released/4333)
+
+### GNAT Pro 26 roadmap
+
+The public GNAT Pro 26 roadmap (expected ship: late 2026) is essentially a
+consolidation release focused on migrating the underlying compiler
+infrastructure forward rather than adding headline features. The main
+items:
+
+- **GCC 14 migration** for the GCC-based compilers.
+- **LLVM 19 migration** for the LLVM-based compilers.
+- **Better debug information from GNAT LLVM**, closing a long-standing gap
+  between the GCC and LLVM backends.
+- **Light runtimes for native GNAT LLVM**, which matters because the
+  "light" profile is what Ravenscar-style small embedded work runs on top
+  of.
+- **Xilinx ZynqMP ARM Cortex-R5** support, with light / light-tasking /
+  embedded runtimes. This is the safety-oriented companion core in the
+  ZynqMP family, and its getting a production-grade Ada runtime is the
+  kind of platform addition that tends to quietly unlock industrial
+  customers.
+- **VxWorks 7** support in GNATcoll and Ada bindings (marked beta).
+- **Mixed Ada/C++** bare-metal runtimes that can execute C++ global
+  object initialization and destruction — a small item that removes a
+  surprising source of friction on mixed-language bare-metal targets.
+- **IDE refactorings** (subprogram body creation, expression extraction,
+  entity removal) in both GNAT Studio and the VS Code extension.
+
+Notably absent from the public GNAT Pro 26 roadmap: any next Ada language
+revision. As of April 2026 there is no published schedule for an
+"Ada 202X" successor to Ada 2022, and the community's public discussion on
+the Ada forum suggests the WG9 committee is in a consolidation phase,
+focused on errata, corrigenda, and adoption rather than a new revision.
+
+**Source:** [AdaCore GNAT Pro 26 Roadmap — AdaCore documentation](https://docs.adacore.com/live/wave/roadmap/html/roadmap/roadmap_26_GNAT%20Pro.html)
+
+### The Rust comparison, 2025 edition
+
+The Ada vs. Rust conversation that began in earnest around 2020 has stopped
+being a debate about which language is "safer" and has become a debate about
+which language has the certification evidence to match its claims, in which
+markets, on which timelines. Three observations from the 2025 literature:
+
+1. **Certification evidence matters more than language properties in safety
+   markets.** Ada and SPARK have qualification and certification evidence
+   across DO-178 (avionics, up to DAL-A), ISO 26262 (automotive), EN 50128
+   (railway), ECSS (space), and IEC 62304 (medical). The AdaCore toolchain's
+   run-time libraries are certified up to DAL-A and its coverage and coding
+   standard checkers are qualified at TQL-5. Rust is younger, and its
+   ISO 26262 evidence as of 2025 is "limited to some environments and
+   subsets of the toolchain." The gap is narrowing, but it is real, and in
+   practice it is what decides which language a given safety project can
+   actually use.
+2. **The frameworks have converged on the same answer.** Practitioner
+   writing from 2025 (EENews Europe, LavX, Elektor) consistently frames
+   SPARK, Rust, and MISRA C/C++ as a gradient: Rust when memory safety
+   dominates and ecosystem velocity matters, SPARK when you need the highest
+   assurance and can afford to rethink workflows, MISRA C/C++ when
+   institutional inertia or certification history demands it. Nobody
+   serious is arguing any more that one of these replaces the others.
+3. **Even the boundary is being blurred.** Small experimental projects
+   have appeared (notably `IntuitionAmiga/rust2ada`, which describes itself
+   as a "Rust to Ada/SPARK converter") that aim to extract Rust code into
+   formally verifiable Ada. These are niche and unlikely to go mainstream,
+   but they are a sign that the Ada and Rust communities are no longer
+   strictly disjoint.
+
+**Sources:** [The Trinity of Trust: Exploring Ada, SPARK, and Rust in Embedded Programming — EENews Europe](https://www.eenewseurope.com/en/exploring-ada-spark-rust-in-embedded-programming/) · [Should I choose Ada, SPARK, or Rust over C/C++? — AdaCore Blog](https://www.adacore.com/blog/should-i-choose-ada-spark-or-rust-over-c-c) · [Ada, Rust, and the Future of Safe Code — Elektor Magazine](https://www.elektormagazine.com/news/ada-rust-future-safe-code) · [rust2ada — IntuitionAmiga on GitHub](https://github.com/IntuitionAmiga/rust2ada)
+
+### Updated timeline entries
+
+**2025** (GNAT Pro 25): Rust's ecosystem hit another growth year, with
+automotive pilots expanding and the `async` story stabilizing. Go 1.23 and
+1.24 shipped. Python's packaging ecosystem settled further around `uv` and
+`pyproject.toml`. Ada shipped GNAT Pro 25 with FreeRTOS and Linux Arm 64
+as first-class targets, SPARK 25 tightened its handling of low-level code,
+and AdaCore announced a joint Ada/SPARK reference process for automotive
+ISO 26262 with NVIDIA. Ada's institutional presence in aerospace, defense,
+space, and rail remained steady, and a meaningful automotive push began for
+the first time.
+
+**2026** (GNAT Studio 2026.2, GNAT Pro 26 in flight): The Ada Language
+Server's Code Visualizer landed in VS Code, giving Ada users the first
+modern code-graph tooling that matches what Rust and TypeScript users had
+been taking for granted. GNAT Pro 26 is in flight with GCC 14, LLVM 19,
+and Cortex-R5 support. No new Ada language revision is publicly scheduled;
+the community is in a consolidation phase around Ada 2022 adoption.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — Ada is a
+  programming-language topic. The Programming Fundamentals and Algorithms &
+  Efficiency wings are the closest fit; Ada's type system, generics, and
+  contracts are concrete instances of the concepts those wings describe.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md) —
+  Ada lives in the engineering world, not the scripting world. Its
+  aerospace, railway, and automotive deployments are case studies for
+  systems-engineering concepts.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) — The
+  Ada history is also a history of how governments specify software, how
+  standards bodies work, and how communities survive institutional
+  abandonment. The history-origins file is the entry point for that thread.
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+  — SPARK's formal verification rests on mathematical logic (Hoare logic,
+  separation logic, SMT solving). The safety-spark-impl file is the entry
+  point for that thread.
+
 ---
 
 *End of History & Origins document.*
 
-*Document compiled for the PNW Research Series, tibsfox.com, April 2026. Cross-references to the companion Ada research threads covering core language, concurrency semantics, and safety-critical/SPARK/implementations can be found at the series index.*
+*Document compiled for the PNW Research Series, tibsfox.com, April 2026. Cross-references to the companion Ada research threads covering core language, concurrency semantics, and safety-critical/SPARK/implementations can be found at the series index. Section XVI (Updates 2025–2026) and the College Departments cross-link were added during the Session 018 catalog enrichment pass.*
