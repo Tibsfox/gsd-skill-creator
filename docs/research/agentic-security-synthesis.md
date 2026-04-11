@@ -678,3 +678,165 @@ Multi-turn jailbreak escalation (V8 Cisco, 92–93% success) mirrors how trust e
 ### For Artemis II research queue:
 9. Given V8's vector embedding poisoning finding: should the pgvector database have a separate "trusted corpus" vs. "untrusted ingest" distinction, with retrieval results from untrusted sources sanitized before use?
 10. SAFE-MCP's compliance crosswalk (NIST SP 800-53 + ISO 27001): which specific controls map to the current harness invariant suite? This is the gap analysis needed to eventually publish the system.
+
+---
+
+## Addendum: 2025–2026 industry signals confirming the synthesis
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The synthesis above was compiled from a six-video series and the
+Gastown multi-agent chipset mapping; the 2025 industry and standards-body
+data confirms every thread of it and adds three specific events worth
+recording for the study-guide audience.
+
+### OWASP LLM01:2025 — prompt injection as the top category
+
+The **OWASP Top 10 for Large Language Model Applications** was revised
+to the **2025 edition** and places **prompt injection as LLM01:2025** —
+the top vulnerability category. The significance of this is not that
+it is news (prompt injection has been the top concern since GPT-3.5)
+but that the framing has shifted: OWASP now describes prompt injection
+as a **fundamental architectural vulnerability**, not an implementation
+flaw. OpenAI's December 2025 statements corroborate this framing and
+acknowledge that prompt injection "is unlikely to ever be fully solved"
+because it is the core consequence of blending trusted and untrusted
+input in the same context window.
+
+The study-guide-relevant consequence is that any architecture the
+harness enforces **must** assume prompt injection is possible and
+defend at the boundary between untrusted input and privileged action.
+The harness's PostToolUse invariants already do this; the 2025 OWASP
+reframing confirms that this is the correct design stance rather than
+a defensive over-engineer.
+
+**Sources:** [LLM01:2025 Prompt Injection — OWASP Gen AI Security Project](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) · [AI Agent Security in 2026: Prompt Injection, Memory Poisoning, and the OWASP Top 10 — SwarmSignal](https://swarmsignal.net/ai-agent-security-2026/)
+
+### EchoLeak (CVE-2025-32711) — the first zero-click agentic exfiltration
+
+In **June 2025**, researchers disclosed **EchoLeak** — a zero-click
+prompt injection vulnerability in Microsoft 365 Copilot rated
+**CVSS 9.3 (Critical)**. The attack chain is the canonical example of
+what the "confused deputy" problem looks like when it goes wrong in
+production:
+
+1. Attacker sends a benign-looking email to a Copilot-equipped user.
+2. The email contains a crafted prompt injection payload hidden in
+   its body.
+3. The user never opens the email or interacts with it in any way.
+4. Copilot, retrieving the email as part of ordinary summarization
+   or search work, ingests the injection payload.
+5. The payload instructs Copilot to access internal files (OneDrive,
+   SharePoint, Teams messages, chat logs) and transmit their contents
+   to an attacker-controlled server.
+6. Copilot, using its legitimate credentials and the user's
+   permissions, executes the instructions.
+
+**No user action was required.** The user's credentials were not
+compromised. Copilot's tools were not compromised. The attacker
+simply convinced the trusted agent to misuse its own tools. This is
+the V7 / V8 "confused deputy" concern from the synthesis above,
+validated as an actual production CVE rather than a theoretical
+attack class.
+
+The study-guide consequence is that the harness's tool-description-
+hashing and PostToolUse DLP invariants are not optional
+defence-in-depth — they are the minimum required to defend against
+an attack pattern that has now shipped to production users at
+enterprise scale.
+
+**Sources:** [AI Agent Security in 2026: Prompt Injection, Memory Poisoning, and the OWASP Top 10 — SwarmSignal](https://swarmsignal.net/ai-agent-security-2026/) · [From prompt injections to protocol exploits: Threats in LLM-powered AI agents workflows — ScienceDirect, 2025](https://www.sciencedirect.com/science/article/pii/S2405959525001997)
+
+### The MCP attack-surface literature
+
+The rise of **Model Context Protocol** as the de-facto agentic
+interop layer (see the companion `soa-research` bucket) has been
+accompanied by a rapidly growing MCP-specific security literature.
+The 2025 surveys — Checkmarx's "11 Emerging AI Security Risks with
+MCP," Secure Code Warrior's "Prompt Injection and the Security Risks
+of Agentic Coding Tools," and the arXiv 2601.17548 systematic
+analysis of prompt injection in coding assistants — converge on a
+set of concerns:
+
+- **Tool description poisoning.** The MCP metadata that tells an LLM
+  "what this tool does" is LLM-visible but not user-visible.
+  Attackers who can influence a tool's description can instruct the
+  LLM to misuse the tool without the user ever seeing the
+  instructions.
+- **Credential theft via tool chain.** An MCP tool that has
+  legitimate access to a credential store can be tricked into
+  exfiltrating credentials to another MCP tool the attacker
+  controls, without the user observing either half of the
+  transaction.
+- **Confused-deputy amplification.** The multi-tool architecture
+  means that a single prompt injection can chain through multiple
+  tools, each one taking actions the previous one authorized, and
+  the end-state damage can be large even if no individual tool did
+  anything its description forbade.
+- **Protocol-level attacks.** Beyond prompt injection specifically,
+  the MCP wire protocol has its own attack surface: crafted JSON-RPC
+  payloads, capability discovery manipulation, and the rest of the
+  standard protocol-attack catalog.
+
+The paper at arXiv 2601.17548, "Prompt Injection Attacks on Agentic
+Coding Assistants," is the most directly relevant to the harness
+work: it is a systematic analysis of prompt injection in skills,
+tools, and protocol ecosystems — exactly the architecture the
+harness is designed to protect.
+
+**Sources:** [11 Emerging AI Security Risks with MCP (Model Context Protocol) — Checkmarx Zero](https://checkmarx.com/zero-post/11-emerging-ai-security-risks-with-mcp-model-context-protocol/) · [Prompt Injection and the Security Risks of Agentic Coding Tools — Secure Code Warrior](https://www.securecodewarrior.com/article/prompt-injection-and-the-security-risks-of-agentic-coding-tools) · [Prompt Injection Attacks on Agentic Coding Assistants: A Systematic Analysis of Vulnerabilities in Skills, Tools, and Protocol Ecosystems — arXiv 2601.17548](https://arxiv.org/html/2601.17548v1) · [From LLM to agentic AI: prompt injection got worse — Christian Schneider](https://christian-schneider.net/blog/prompt-injection-agentic-amplification/) · [Prompt Injection Attacks in Large Language Models and AI Agent Systems — MDPI Information](https://www.mdpi.com/2078-2489/17/1/54)
+
+### What this means for the synthesis
+
+The six-video series the synthesis is built on was ahead of most of
+the 2024 security-research literature. The 2025 industry and
+standards data is catching up to, and in several cases confirming,
+the specific concerns the synthesis identifies:
+
+- **V7 tool constraint declaration** → confirmed by OWASP LLM01:2025
+  framing and by EchoLeak's production-CVE demonstration of the
+  confused deputy problem.
+- **V8 vector embedding poisoning and multi-turn jailbreak** →
+  confirmed by the 2025 MCP-specific literature on tool description
+  poisoning and protocol exploits.
+- **V9 subagent isolation** → confirmed by the agentic coding
+  assistant analysis in arXiv 2601.17548, which finds that
+  subagent isolation is one of the most effective defenses against
+  prompt injection cascades.
+- **Harness invariant enforcement** → confirmed by the practitioner
+  consensus that architectural defenses (tool hashing, DLP,
+  boundary enforcement) are the only effective mitigation against
+  a class of attack that is "unlikely to ever be fully solved"
+  at the model level.
+
+The study-guide topics at the end of the body become, in 2025,
+exactly the right questions to be working on. The external validation
+is that the harness work is not speculative; it is on the critical
+path for any production agentic system that cannot accept the
+EchoLeak failure mode.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  The harness implementation (TypeScript, hook architecture, tool
+  constraint enforcement) is squarely a coding-department topic,
+  particularly the Cybersecurity Basics and AI/ML Fundamentals
+  concepts in the Computing & Society wing.
+- [**technology**](../../../.college/departments/technology/DEPARTMENT.md)
+  — Systems-level concerns about agentic architecture, MCP
+  interoperability, and sandboxing are technology-department
+  topics that sit alongside the coding implementation.
+- [**critical-thinking**](../../../.college/departments/critical-thinking/DEPARTMENT.md)
+  — Threat modelling is a critical-thinking discipline: hypothesize
+  an adversary, reason about what they could do, test the hypothesis
+  against the system. The synthesis above is a worked example.
+- [**digital-literacy**](../../../.college/departments/digital-literacy/DEPARTMENT.md)
+  — The user-visible consequences of confused-deputy attacks
+  (EchoLeak-class incidents) are squarely digital-literacy topics
+  for anyone who will use an agentic tool without implementing one.
+
+---
+
+*Addendum (2025–2026 OWASP LLM01 framing, EchoLeak CVE, MCP security literature) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
