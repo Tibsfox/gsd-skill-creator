@@ -2367,6 +2367,134 @@ AI-native PM does not prevent political decisions from overriding technical feas
 
 ---
 
+## Addendum: PMBOK 8th Edition (November 2025) — AI enters the standard
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body above treats AI in project management as a trend that
+is in active growth. The November 2025 publication of the **PMBOK® Guide
+8th Edition** formalizes that trend at the standards level, and the
+specific choices PMI made in the 8th edition are worth recording because
+they shape what "AI in PM" will mean for the practitioner community over
+the next decade.
+
+### The 8th edition's AI posture
+
+The **PMBOK® Guide 8th Edition** was published in **November 2025** by
+the Project Management Institute. It is the first PMBOK revision to
+formally address AI in the body of the standard, and it does so through
+two interlocking choices:
+
+1. **A dedicated AI Appendix.** The 8th edition ships with an appendix
+   specifically on AI in project management. The appendix treats AI as
+   an **augmentation tool**, not a replacement for project managers,
+   and it explicitly enumerates new and evolving project management
+   roles that the AI wave is producing: **Data Stewardship, Prompt
+   Engineering, and Ethical Oversight**. These are presented as roles
+   that sit alongside the traditional PM function, not as new titles
+   that replace it.
+2. **Integration across the Performance Domains.** Where PMBOK 7th
+   edition restructured project management around Performance Domains
+   (instead of the classical Process Groups), PMBOK 8th edition links
+   the AI content to those domains rather than isolating it in the
+   appendix. The practical effect is that a practitioner studying any
+   Performance Domain in the 8th edition will encounter AI-specific
+   considerations as part of normal domain content, not as a bolted-on
+   section.
+
+The 8th edition also expands agile and hybrid content substantially,
+formalizes the Project Management Office (PMO) treatment, and adds
+procurement coverage that had been underweight in earlier editions.
+The AI content is the headline, but the overall release is broader
+than the AI story alone.
+
+**Sources:** [PMBOK Guide 8th Edition — First View and Analysis on the Process Groups, Performance Domains and Addition of AI — ManagementYogi, January 2025](https://www.managementyogi.com/2025/01/pmbok-8th-ed-managementyogi-first-view-process-groups-performance-domains-addition-of-artificial-intelligence.html) · [AI in Project Management - PMBOK 8's New Appendix — Project Edge Global](https://projectedgeglobal.com/ai-project-management-pmbok-8th-edition-new-appendix-artificial-intelligen/) · [PMBOK & PMI explained — Projektron BCS blog](https://www.projektron.de/en/blog/details/pmi-pmbok-4017/) · [Stay informed with our Standards & Publications — PMI](https://www.pmi.org/standards)
+
+### Hybrid as the new default
+
+The 7th edition (2021) moved PMBOK away from treating classical
+predictive project management as the default and toward treating
+tailoring as the default. The 8th edition continues that direction
+and adds a specific endorsement of **hybrid approaches** — mixing
+predictive and adaptive elements in the same project — as the
+fit-for-purpose approach for most modern organizations. PMI's own
+research through 2024–2025 consistently reports that organizations
+rarely work in purely classic or purely agile modes, and the 8th
+edition is the standards response to that empirical finding.
+
+The practical consequence for the main body of this document is
+that the "choose your methodology" section needs a hybrid-first
+framing rather than a waterfall-vs-agile framing. The 2025 data
+is clear: the real choice is not between waterfall and agile, but
+between various *combinations* of the two, tailored to the
+project's risk profile, team composition, and organizational
+context.
+
+**Sources:** [Hybrid Life Cycles — PMI / Disciplined Agile](https://www.pmi.org/disciplined-agile/serial/hybridlifecycles) · [Customising Hybrid project management methodologies — Taylor & Francis](https://www.tandfonline.com/doi/full/10.1080/09537287.2024.2349231) · [A new hybrid approach for selecting a project management methodology — PMI Learning Library](https://www.pmi.org/learning/library/consistent-approach-provides-high-performance-9889) · [PMI acclaiming the benefits of an agile project management approach — World Finance](https://www.worldfinance.com/strategy/pmi-lauding-the-benefits-of-an-agile-project-management-approach)
+
+### AI + hybrid — why the combination works
+
+The 8th edition's AI appendix and its hybrid endorsement are not
+independent; they reinforce each other. The argument the PMBOK 8
+material makes is that AI is **unusually well-suited to hybrid
+project management** because AI excels at analyzing data from both
+predictive (waterfall) and adaptive (agile) components of a project,
+finding correlations and early-warning signals that would be invisible
+to a human working within a single methodology. Risk identification
+is the canonical example: an AI that watches both the earned-value
+metrics from the predictive side and the sprint velocity metrics
+from the adaptive side can notice divergences that would escape a
+human PM responsible for only one half of the project.
+
+This is a modest claim. It is not "AI will replace project managers."
+It is "AI is specifically useful in the hybrid context, because
+hybrid projects generate more data in more formats than either pure
+mode does, and data is what AI tools need to produce value." The
+2025 literature supports the claim with specific case studies —
+notably the ScienceDirect paper on AI-driven risk identification
+using past-project data, which demonstrates the pattern working in
+a real infrastructure project context.
+
+### What this means for the ai-tools-future thread
+
+The body of this document runs through the AI-in-PM landscape and
+projects forward. The November 2025 standards-level confirmation
+validates the main-body argument but also refines it: the near-term
+future is not "AI takes over PM" but "PM tools become AI-integrated
+by default, AI is the augmentation layer not the replacement layer,
+and the new roles that emerge (Data Stewardship, Prompt Engineering,
+Ethical Oversight) complement the traditional PM function."
+
+The references list above can be extended with the 8th edition's
+own AI appendix as a primary source once the full text is available
+through the PMI member portal. The 2025 practitioner writing is
+consistent enough with the appendix's published excerpts to make
+this enrichment confident in its characterization.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**business**](../../../.college/departments/business/DEPARTMENT.md)
+  — Project management is one of the core business-education topics
+  and PMBOK is its standard reference.
+- [**communication**](../../../.college/departments/communication/DEPARTMENT.md)
+  — PMBOK 8 emphasizes stakeholder communication, and the AI-era
+  Prompt Engineering role sits at the boundary of communication
+  and technology.
+- [**problem-solving**](../../../.college/departments/problem-solving/DEPARTMENT.md)
+  — Project management is the canonical applied-problem-solving
+  discipline, and the hybrid-methodology framing is a case study
+  in how problem-solving approaches adapt to context.
+- [**critical-thinking**](../../../.college/departments/critical-thinking/DEPARTMENT.md)
+  — The ethical oversight role in PMBOK 8 explicitly ties project
+  management to critical-thinking practice about AI's limits and
+  appropriate applications.
+
+---
+
 *This document is part of the PNW Research Series. Research conducted April 2026.*
 
-*Total references: 66*
+*Total references: 66 (main body) + 8 (PMBOK 8 addendum sources).*
+
+*Addendum (PMBOK 8th Edition, November 2025) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
