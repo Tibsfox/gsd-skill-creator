@@ -231,4 +231,160 @@ Type `import this` into any Python interpreter on Earth — `python`, `python3`,
 
 ---
 
+## Addendum: Python 3.14 — the year free-threaded Python became real (2025)
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main body above treats the post-Guido release train as a
+continuation of the Python story without committing to what the specific
+releases mean. The 2025 release — Python 3.14 — is substantial enough
+that any living history of the language has to acknowledge it.
+
+### Python 3.14 free-threaded mode exits experimental (PEP 779)
+
+**Python 3.14** is the release in which **free-threaded Python**
+(PEP 703's "no-GIL build") **officially exits experimental status** and
+becomes a **phase-two supported build**. PEP 779, accepted for 3.14,
+formalizes the transition: free-threaded Python is now a first-class
+build of the CPython interpreter, with full official support from the
+core team, though it is still optional — the default build is still the
+classical GIL-enabled CPython.
+
+The Global Interpreter Lock has been Python's defining performance
+constraint for more than thirty years. Every "why is Python slow"
+conversation since the 1990s has ended with the GIL. Free-threaded
+Python ends the conversation. A Python 3.14t (the `t` is the
+free-threaded suffix) program can use all the cores in a machine from
+pure Python code without multiprocessing, without `async`, without
+ffi-to-C workarounds, without any of the patterns that Python
+programmers spent three decades hand-assembling around the GIL.
+
+**Performance numbers from 3.14 release-candidate benchmarks**:
+
+- **Single-threaded performance** in free-threaded mode is now about
+  **5–10% slower** than the classical GIL build, depending on platform
+  and C compiler. This is down from roughly 20–30% in the 3.13
+  experimental free-threaded build. The gap is closing at a
+  release-over-release pace that the core team expects to bring to
+  near parity within a few releases.
+- **New tail-call interpreter.** A new CPython interpreter
+  implementation using tail-call-based dispatch improves general
+  single-threaded performance by a further **3–5%** on the pyperformance
+  benchmark suite. This is separate from the free-threaded work and
+  applies to both the GIL and no-GIL builds.
+- **Multi-threaded speedup** in free-threaded mode is essentially
+  linear on CPU-bound workloads up to the number of physical cores,
+  which is what everyone expected and what the GIL prevented for
+  thirty years.
+
+**Sources:** [Python 3.14 — Astral blog](https://astral.sh/blog/python-3.14) · [What's new in Python 3.14 — docs.python.org](https://docs.python.org/3/whatsnew/3.14.html) · [Python 3.14 Free-Threading True Parallelism Without the GIL — DEV Community](https://dev.to/edgar_montano/python-314-free-threading-true-parallelism-without-the-gil-a12) · [Python's Liberation: The GIL is Finally Optional — Medium](https://medium.com/@aftab001x/pythons-liberation-the-gil-is-finally-optional-and-why-this-changes-everything-5579b43e969c) · [Experimenting with free-threaded Python — julian.ac](https://www.julian.ac/blog/2025/05/04/experimenting-with-free-threaded-python/) · [Free-Threaded Python Unleashed and Other Python News for July 2025 — Real Python](https://realpython.com/python-news-july-2025/)
+
+### Other Python 3.14 highlights
+
+- **Template string literals (t-strings).** A new string-literal form
+  (`t"..."`) that is structurally similar to f-strings but returns a
+  `Template` object instead of a string, giving the surrounding code a
+  chance to process interpolated values before they become text. This
+  is PEP 750 and it is the direction Python is taking for
+  context-sensitive string templating in places like SQL query
+  builders, HTML fragment generation, and shell-command construction.
+- **Deferred evaluation of annotations.** The `from __future__ import
+  annotations` behavior — where all annotations are treated as strings
+  at class-definition time and evaluated lazily — is the default in
+  3.14. This is PEP 649 and it solves the "your type annotation
+  evaluates at import time and that's surprising" class of bugs.
+- **Subinterpreters in the standard library.** PEP 734 brings Python's
+  long-standing subinterpreter support out of the C API and into the
+  standard library as `interpreters`. Combined with free-threaded mode,
+  this gives Python three different parallelism models in the same
+  process: `threading` for lightweight concurrent work, `multiprocessing`
+  for isolated CPU-heavy work, and `interpreters` for
+  middle-ground-isolation CPU-heavy work with less overhead than
+  `multiprocessing`.
+
+### uv and Ruff — the Astral-powered toolchain
+
+The Python tooling story that was in active flux during 2023–2024
+consolidated in 2025 around the **Astral**-developed tools **uv** and
+**Ruff**:
+
+- **uv** — the Rust-written pip/venv/poetry replacement — is now the
+  default packaging tool in most new Python project templates. As of
+  3.14, uv will allow using free-threaded interpreters in virtual
+  environments or on the PATH without the explicit opt-in it required
+  under 3.13. The 3.14t suffix is how you tell uv to use the
+  free-threaded build.
+- **Ruff** — the Rust-written linter and formatter — has become the
+  default choice for new projects and has been slowly replacing the
+  black/flake8/isort/pyupgrade stack that dominated 2019–2023. Ruff's
+  3.14 work includes a new syntax error when a t-string is implicitly
+  concatenated with another string type, maintaining Ruff's close
+  tracking of the language standard.
+
+The Astral tools are not officially endorsed by the Python core team
+(the PSF's official packaging tool is still pip), but the practical
+adoption pattern in 2025 is that new projects reach for uv first and
+default to Ruff for linting and formatting. The toolchain fragmentation
+problem that the body above does not call out — Python had a half-dozen
+competing packaging approaches through the 2010s — has, for the first
+time in years, a consensus answer that most developers are using by
+default.
+
+### What this means for the story
+
+The body above ends on the spirit of Python — readability counts, one
+obvious way, consenting adults, `import this` produces the same output
+everywhere. The 2025 release is, characteristically, an addition to
+that story rather than a disruption of it. Free-threaded Python is not
+a replacement for the GIL-enabled build; it is an additional build
+that users can choose when they need it. Subinterpreters are a third
+parallelism model added alongside the existing two; threading and
+multiprocessing are not going away. uv does not replace pip; it
+complements pip with a faster implementation that most users will
+reach for without being told to.
+
+What has changed in 2025 is that **every one of Python's historical
+"you should not do this in Python" warnings has an answer** that did
+not exist a few years ago. Parallelism: free-threaded or
+subinterpreters. Performance: free-threaded + tail-call interpreter +
+3–5% per-release improvements. Packaging: uv. Linting: Ruff.
+Type-level correctness: the type-checker ecosystem (mypy, pyright,
+ty) has matured into a reliable development practice. Startup time:
+the Leyden-adjacent "PGO + LTO + AOT caching" story for CPython is
+under active development.
+
+Python at 34 years old is not the language its critics have been
+describing. It is a language that has systematically worked through
+the list of things it was famously bad at and produced credible
+answers for each of them. Whether those answers win the long term is
+someone else's problem to argue; the 2025 data is that they exist.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Python is the default teaching language of Programming Fundamentals
+  and Algorithms & Efficiency in 2026. Its readability-first design
+  choices are the direct embodiment of Computational Thinking wing
+  values.
+- [**data-science**](../../../.college/departments/data-science/DEPARTMENT.md)
+  — Python is the lingua franca of data science, statistics, and
+  machine learning. NumPy, pandas, scikit-learn, PyTorch, JAX, and
+  Jupyter are the working tools of the discipline.
+- [**science**](../../../.college/departments/science/DEPARTMENT.md)
+  — Scientific computing — astronomy (AstroPy), biology (Biopython),
+  physics (ROOT bindings), earth sciences, and the whole NumFOCUS
+  ecosystem — runs on Python. For anyone studying computational
+  science, Python is the substrate.
+- [**education**](../../../.college/departments/learning/DEPARTMENT.md)
+  — Python has replaced Java and C++ as the most-taught
+  introductory programming language at universities worldwide, and
+  the education department is the natural home for the
+  "how do we teach programming in 2026" conversation.
+
+---
+
 *Sources are drawn from python.org official PEP texts, the python-dev and python-list mailing list archives, Guido van Rossum's published interviews and blog posts, the Python Software Foundation public records, PyCon archives, and the long oral history of the Python community as documented across two decades of conference talks and engineering blogs.*
+
+*Addendum (Python 3.14 free-threaded exits experimental, t-strings, uv/Ruff consolidation) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
