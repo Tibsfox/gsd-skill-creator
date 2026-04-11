@@ -1,0 +1,53 @@
+{
+  "projectCode": "GSI",
+  "packTitle": "GSD-Skill-Creator Improvements — Applied Research from OOPS Ecosystem Alignment and Agentic Technologies Findings",
+  "modules": [
+    {
+      "moduleId": "skill-security",
+      "title": "Skill Security Hardening: DDIPE Attack Mitigation for Skill Loading Pipeline, Document-as-Code Treatment for Skill Metadata, Per-Skill Permission Scoping, Multi-Model Verification Ensemble for Skill Validation, Trust-Boundary Annotations in System Prompts, Static Analysis Integration for Skill Content, SlowMist Checklist Adaptation"
+    },
+    {
+      "moduleId": "context-optimization",
+      "title": "Context Window Optimization: Tool Definition Token Reduction from 100K Baseline, Progressive 3-Tier Skill Loading 94% Savings, Ghost Token Detection and Elimination, Read Deduplication 8-30% Savings, Context Rot Prevention at 25% Fill Threshold, Compaction Strategy Improvement 60-70% Loss Reduction, Sub-Agent Context Isolation 90.2% Improvement"
+    },
+    {
+      "moduleId": "orchestration-patterns",
+      "title": "Orchestration Pattern Refinement: OrgAgent 3-Layer Governance-Execution-Compliance Mapping, Single-Agent for Deep Reasoning Data Processing Inequality, Multi-Agent for Parallelizable Tasks Fleet Pattern, Hierarchical Token Reduction 74.52% from Flat MAS, Execution Mode Selection DIRECT vs LIGHT vs FULL MAS, Dynamic Skill Profile Assignment from Worker Pool"
+    },
+    {
+      "moduleId": "verification-pipeline",
+      "title": "Verification Pipeline Enhancement: Safety Not Reliability CMU Framework Application, FMEA FTA STPA Hazard Analysis for Skill Execution, Guardrails as System Primitives Input Output Guards, SQL Injection Analogy for Unsanitized Agent Output, Externalized Correctness Agent Does Not Grade Own Homework, Abstention Rate Improvement 39.78% Under Hierarchy"
+    },
+    {
+      "moduleId": "agent-identity",
+      "title": "Agent Identity and Trust: AIP Agent Attestation Token Integration, Root Registry Trust Chain for Skill Provenance, Implicit Deny Least Privilege for Tool Access, HITL Escalation Framework, DLP Scanning for Response Content, Immutable Audit Log for Agent Actions, Cross-Model Disagreement as Security Signal"
+    },
+    {
+      "moduleId": "mcp-hardening",
+      "title": "MCP Protocol Hardening: Overthinking Loop Detection and Prevention 658x Cost Inflation, Binary MCP for Edge Performance, OAuth Governance Control Planes, Stateful Transactional MCP Server Patterns, Tool Enumeration Security Audit, Semantic Intent Analysis Beyond Lexical Patterns, Supply-Chain Integrity for MCP Tool Registry"
+    },
+    {
+      "moduleId": "ecosystem-alignment",
+      "title": "Ecosystem Alignment Updates: GSD Upstream v1.30.0 SDK Additions, Claude Code v2.1.88 New Hooks PostCompact FileChanged PermissionDenied, New Subagent Fields effort maxTurns isolation worktree memory skills mcpServers, Skill Description 250-char Cap, S-PATH RAG Graph-Aware Retrieval Verifier Pattern Path Budget, Context-Packet DAG Context Resolver Token Budget"
+    },
+    {
+      "moduleId": "learning-system",
+      "title": "Adaptive Learning System Refinement: Meta-Agentic Bootstrapping Pattern for Skill Generation, Recursive Composition Scaffold-Agent-Validation Nesting, Skills in the Wild Performance Degradation Calibration, Agent Psychometrics Task-Level Performance Prediction, Error-as-Feedback Loop for Skill Improvement, Pluripotent Differentiation Model for Muse Agents"
+    }
+  ],
+  "bibliography": [
+    "www/tibsfox/com/Research/OOPS/ — Ecosystem Alignment research project",
+    "arXiv:2604.03081 — Supply-Chain Poisoning of Skill Ecosystems",
+    "arXiv:2604.01020 — OrgAgent Company-Style Hierarchy",
+    "arXiv:2604.02460 — Single-Agent vs Multi-Agent Reasoning",
+    "arXiv:2604.04323 — Agentic Skills in the Wild",
+    "arXiv:2604.00594 — Agent Psychometrics",
+    "session7-research-synthesis.md — MCP Security Gap Analysis",
+    "OOPS ecosystem alignment — GSD upstream + Claude Code feature analysis"
+  ],
+  "safety_rules": [
+    "All proposed changes must maintain backward compatibility with existing skills",
+    "Security hardening must not break the skill-creator's core learning loop",
+    "Changes to trust boundaries require muse council review before implementation"
+  ]
+}
