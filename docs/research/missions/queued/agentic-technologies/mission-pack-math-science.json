@@ -1,0 +1,51 @@
+{
+  "projectCode": "AMS",
+  "packTitle": "Artemis Math & Science — Mathematical Foundations Extracted from Agentic Technologies Research",
+  "modules": [
+    {
+      "moduleId": "information-theory",
+      "title": "Information Theory: Data Processing Inequality I(Y;C)>=I(Y;M) Single-Agent vs Multi-Agent, Shannon Channel Capacity, Mutual Information in Agent Communication, Token Budget as Information Bandwidth, Context Compression Information Loss Quantification"
+    },
+    {
+      "moduleId": "complex-analysis",
+      "title": "Complex Analysis: Unit Circle Convergence in Research Co-Processor, Complex Plane Mapping z=magnitude+phase, Corpus Cross-Reference as Complex State, Holomorphic Dynamics in Iteration Convergence, Argument Principle for Pass Counting"
+    },
+    {
+      "moduleId": "graph-theory",
+      "title": "Graph Theory: DAG Scheduling in Wave-Based Execution, Topological Sort for Task Dependencies, Knowledge Graphs in LightRAG Entity Voting, Hierarchical Agent Organization as Directed Acyclic Graphs, Network Guardrails ShieldNet Graph Filtering"
+    },
+    {
+      "moduleId": "optimization",
+      "title": "Optimization: Pareto Hypervolume in Multi-Objective Agent Orchestration, Token Budget Optimization Under Constraints, Cost-Accuracy Tradeoffs in Financial Document Processing, Iron Triangle Constraint-Based Engineering, Greedy Scheduling vs Optimal Assignment"
+    },
+    {
+      "moduleId": "probability-statistics",
+      "title": "Probability & Statistics: 10-15% Non-Determinism in Agentic Systems, Monte Carlo Evaluation for Agent Benchmarks, Bayesian Hallucination Detection HaloProbe, Cohen's Kappa Inter-Rater Agreement 0.88, Confidence Intervals for Bypass Rates"
+    },
+    {
+      "moduleId": "dynamical-systems",
+      "title": "Dynamical Systems: Self-Organizing Intelligence Particle Physics Inspired, Kuramoto Oscillator Synchronization, Gradient Stability in Deep Networks Dynamical Isometry, Context Rot as Entropy Increase Over Time, Convergence Behavior in Multi-Pass Pipeline"
+    },
+    {
+      "moduleId": "control-theory",
+      "title": "Control Theory: Feedback Loops in Meta-Agentic Bootstrapping, PID-Analogous Error Correction in Agent Validation, STPA Systems-Theoretic Process Analysis for ML Safety, Guardrails as Control System Boundaries, Drift Detection and Correction in Enterprise AI"
+    },
+    {
+      "moduleId": "signal-processing",
+      "title": "Signal Processing: Fourier Analysis in VLIW Instruction Scheduling, Noise vs Signal Paradox in LLM Threat Modeling, Sound Propagation Over Water 6-10dB Attenuation, Photonic WDM Micro-Resonator Frequency Combs, Schumann Resonance 7.83Hz Brain-as-Transmitter"
+    }
+  ],
+  "bibliography": [
+    "Shannon, C.E. — A Mathematical Theory of Communication (1948)",
+    "Data Processing Inequality — Cover & Thomas, Elements of Information Theory",
+    "arXiv:2604.02460 — Tran & Kiela, Single-Agent vs Multi-Agent (2026)",
+    "arXiv:2604.01020 — OrgAgent Pareto optimization (2026)",
+    "Kuramoto, Y. — Chemical Oscillations, Waves, and Turbulence (1984)",
+    "Leveson, N. — Engineering a Safer World: Systems Thinking Applied to Safety (2011)"
+  ],
+  "safety_rules": [
+    "Mathematical claims must be traceable to published theorems or empirical measurements",
+    "Distinguish between proven results and conjectured connections",
+    "Note where analogies are heuristic vs formally grounded"
+  ]
+}
