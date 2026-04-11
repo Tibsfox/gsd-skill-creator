@@ -34,7 +34,7 @@ const AGENT_CATEGORIES = new Set([
 const TEAM_CATEGORIES = new Set([
   'code', 'ops', 'infra', 'migration', 'deprecated',
 ]);
-const CHIPSET_CATEGORIES = new Set(['deprecated']); // chipsets are not subcategorized; live at top
+const CHIPSET_CATEGORIES = new Set(['chipset', 'deprecated']); // chipsets use 'chipset' as the flat category
 
 function parseArgs(args) {
   const parsed = { strict: false, name: null, help: false };
@@ -66,15 +66,30 @@ async function parseFrontmatter(content) {
   return fm;
 }
 
+// Pick the metadata file for a given type — where the 9-field frontmatter lives.
+// Skills:   SKILL.md
+// Agents:   AGENT.md
+// Teams:    README.md sidecar (alongside config.json)
+// Chipsets: README.md sidecar (alongside chipset.yaml)
+function metadataFileFor(type, artifactDir) {
+  switch (type) {
+    case 'skills':   return join(artifactDir, 'SKILL.md');
+    case 'agents':   return join(artifactDir, 'AGENT.md');
+    case 'teams':    return join(artifactDir, 'README.md');
+    case 'chipsets': return join(artifactDir, 'README.md');
+    default:         return null;
+  }
+}
+
 async function walkArtifacts(root) {
   const results = [];
   const types = [
     ['skills', SKILL_CATEGORIES],
     ['agents', AGENT_CATEGORIES],
     ['teams', TEAM_CATEGORIES],
-    ['chipsets', CHIPSET_CATEGORIES],
   ];
 
+  // Skills, agents, teams: category subfolders
   for (const [type, catSet] of types) {
     const typeDir = join(root, type);
     if (!existsSync(typeDir)) continue;
@@ -82,65 +97,63 @@ async function walkArtifacts(root) {
     const topEntries = await readdir(typeDir, { withFileTypes: true });
     for (const ent of topEntries) {
       if (ent.name.startsWith('.') || ent.name === 'README.md') continue;
+      if (!ent.isDirectory()) continue;
 
-      if (ent.isDirectory()) {
-        const subPath = join(typeDir, ent.name);
-        if (catSet.has(ent.name)) {
-          // Category dir: walk its contents
-          const inner = await readdir(subPath, { withFileTypes: true });
-          for (const e of inner) {
-            if (e.name.startsWith('.') || e.name === 'README.md') continue;
-            await collect(type, ent.name, e, subPath, results);
-          }
-        } else {
-          // Top-level artifact still living flat (pre-Stage-2) — allow with warning
-          await collect(type, '(unclassified)', ent, typeDir, results);
+      const subPath = join(typeDir, ent.name);
+      if (catSet.has(ent.name)) {
+        const inner = await readdir(subPath, { withFileTypes: true });
+        for (const e of inner) {
+          if (e.name.startsWith('.') || e.name === 'README.md') continue;
+          if (!e.isDirectory()) continue;
+          await collect(type, ent.name, e.name, join(subPath, e.name), results);
         }
-      } else if (ent.isFile() && type === 'chipsets' && ent.name.endsWith('.yaml')) {
-        // Flat chipset yaml (pre-Stage-2)
-        results.push({
-          type, category: '(unclassified)',
-          name: ent.name.replace(/\.yaml$/, ''),
-          path: join(typeDir, ent.name),
-          isDir: false,
-          metaPath: join(typeDir, ent.name),
-          frontmatter: null,
-          preStage2: true,
-        });
+      } else {
+        // Pre-Stage-2 unclassified
+        await collect(type, '(unclassified)', ent.name, subPath, results);
+      }
+    }
+  }
+
+  // Chipsets: flat — chipsets/<name>/chipset.yaml + README.md
+  // Exception: chipsets/deprecated/<name>/ for deprecated ones
+  const chipsetsDir = join(root, 'chipsets');
+  if (existsSync(chipsetsDir)) {
+    const entries = await readdir(chipsetsDir, { withFileTypes: true });
+    for (const ent of entries) {
+      if (ent.name.startsWith('.') || ent.name === 'README.md') continue;
+      if (!ent.isDirectory()) continue;
+      if (ent.name === 'deprecated') {
+        // Recurse into deprecated/
+        const depEntries = await readdir(join(chipsetsDir, ent.name), { withFileTypes: true });
+        for (const e of depEntries) {
+          if (e.name.startsWith('.') || e.name === 'README.md') continue;
+          if (!e.isDirectory()) continue;
+          await collect('chipsets', 'deprecated', e.name, join(chipsetsDir, ent.name, e.name), results);
+        }
+      } else {
+        // Top-level chipset: use 'chipset' as category (not subcategorized)
+        await collect('chipsets', 'chipset', ent.name, join(chipsetsDir, ent.name), results);
       }
     }
   }
   return results;
 }
 
-async function collect(type, category, ent, parentDir, results) {
-  const fullPath = join(parentDir, ent.name);
-  if (ent.isDirectory()) {
-    const skillMd = join(fullPath, 'SKILL.md');
-    const agentMd = join(fullPath, 'AGENT.md');
-    const chipsetYaml = join(fullPath, 'chipset.yaml');
-    const teamCfg = join(fullPath, 'config.json');
-    let metaPath = null;
-    if (existsSync(skillMd)) metaPath = skillMd;
-    else if (existsSync(agentMd)) metaPath = agentMd;
-    else if (existsSync(chipsetYaml)) metaPath = chipsetYaml;
-    else if (existsSync(teamCfg)) metaPath = teamCfg;
-    if (!metaPath) return;
-    const content = metaPath.endsWith('.md') ? await readFile(metaPath, 'utf8') : '';
-    const fm = metaPath.endsWith('.md') ? await parseFrontmatter(content) : null;
+async function collect(type, category, name, artifactDir, results) {
+  const metaPath = metadataFileFor(type, artifactDir);
+  if (!metaPath || !existsSync(metaPath)) {
     results.push({
-      type, category, name: ent.name, path: fullPath, isDir: true,
-      metaPath, frontmatter: fm, preStage2: category === '(unclassified)',
+      type, category, name, path: artifactDir, metaPath: null,
+      frontmatter: null, preStage2: category === '(unclassified)',
     });
-  } else if (ent.isFile() && ent.name.endsWith('.md')) {
-    const content = await readFile(fullPath, 'utf8');
-    const fm = await parseFrontmatter(content);
-    results.push({
-      type, category, name: ent.name.replace(/\.md$/, ''),
-      path: fullPath, isDir: false, metaPath: fullPath,
-      frontmatter: fm, preStage2: category === '(unclassified)',
-    });
+    return;
   }
+  const content = await readFile(metaPath, 'utf8');
+  const fm = await parseFrontmatter(content);
+  results.push({
+    type, category, name, path: artifactDir, metaPath,
+    frontmatter: fm, preStage2: category === '(unclassified)',
+  });
 }
 
 function validate(art) {
@@ -194,7 +207,9 @@ function validate(art) {
   }
 
   // Name sanity: no scaffolding leftovers
-  if (['new-skill', 'test-skill', 'nonexistent-skill', 'chipset'].includes(art.name)) {
+  // Note: "chipset" is NOT in this list — it's a legitimate baseline chipset,
+  // not a template. Only flag names that are clearly scaffolding.
+  if (['new-skill', 'test-skill', 'nonexistent-skill'].includes(art.name)) {
     issues.push({ severity: 'error', msg: `Scaffolding leftover: ${art.name}` });
   }
 
