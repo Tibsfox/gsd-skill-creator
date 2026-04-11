@@ -2092,5 +2092,145 @@ The *Antio* codification will continue to have ripple effects across Washington'
 
 ---
 
+## Addendum: HB 2081 and SB 5814 — the 2025 tax package, signed and effective
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The body above treats HB 2081's tier structure as part of its glossary
+and discusses the Antio decision. This addendum consolidates the 2025 tax
+package's signing, effective dates, and concrete numbers so that readers
+using the paper as a starting point can orient themselves quickly.
+
+### Signing and effective dates
+
+Governor Bob Ferguson signed both bills on **May 20, 2025**. The
+Washington state 2025 legislative session produced the most substantial
+tax package the state has passed in roughly a decade, and the two bills
+that carry most of the revenue impact are:
+
+- **HB 2081** — B&O tax restructuring and rate increases
+- **SB 5814** — Retail sales tax expansion to services
+
+The 2025-2027 biennium budget depends on the revenue from both bills.
+
+**Source:** [The 2025 Washington Legislative Session: Small Business, Taxation, and Business Regulation — Washington Policy Center](https://www.washingtonpolicy.org/publications/detail/the-2025-washington-legislative-session-small-business-taxation-and-business-regulation)
+
+### HB 2081 — B&O specifics
+
+The concrete changes that the main body's tier framework describes at
+a conceptual level:
+
+- **Large-taxpayer surcharge (effective January 1, 2026).** A
+  **0.5% surcharge** applies to all B&O tax classifications for
+  businesses exceeding **$250 million of Washington-taxable revenue**.
+  This is structurally similar to the advanced-computing surcharge
+  but applies to a much broader taxpayer population.
+- **Service and Other Activities rate increase.** Service providers
+  with more than **$5 million in annual gross receipts** move from
+  the old 1.75% Service & Other Activities rate to a new **2.1%**
+  rate. The main body's Tier 3 definition in the glossary describes
+  this threshold.
+- **Advanced computing surcharge increase (effective January 1,
+  2026).** The advanced computing surcharge rate rises from
+  **1.22% to 7.5%**, and the surcharge cap rises from **$9 million
+  to $75 million annually**. This is one of the largest single
+  rate increases in Washington's B&O history and is directly
+  targeted at the state's largest tech-sector taxpayers (principally
+  Microsoft, Amazon, and a handful of other hyperscalers).
+- **Antio codification.** HB 2081 addresses the Washington Supreme
+  Court's 2024 decision in **Antio LLC v. Department of Revenue** by
+  reinforcing that the B&O deduction for certain investment income
+  is only applicable to investment income that is **incidental to
+  the trade or business of the taxpayer**. HB 2081 defines
+  "incidental" as **comprising less than 5 percent of the total
+  income of the taxpayer**. The body's treatment of the investment
+  income deduction should be read against this 5% threshold as the
+  controlling interpretation going forward.
+
+**Sources:** [Washington State: Significant Sales Tax and B&O Tax Bills — KPMG SALT alert, May 28, 2025](https://kpmg.com/kpmg-us/content/dam/kpmg/taxnewsflash/pdf/2025/05/washington-salt-alert-may28-2025.pdf) · [What you need to know about HB 2081 — a major B&O tax overhaul — Association of Washington Business](https://www.awb.org/what-you-need-to-know-about-hb-2081-a-major-bo-tax-overhaul/) · [How 2025 Washington state tax reform impacts businesses and taxpayers — Wipfli](https://www.wipfli.com/insights/articles/tax-how-2025-washington-state-tax-reform-impacts-businesses-and-taxpayers) · [Washington Enacts Significant B&O and Sales Tax Changes — Forvis Mazars US](https://www.forvismazars.us/forsights/2025/09/washington-enacts-significant-b-o-and-sales-tax-changes) · [Legal Update: Washington Enacts New Tax Laws — Equinox Law Group](https://equinoxbusinesslaw.com/blog/legal-update-washington-enacts-new-tax-laws-affecting-capital-gains-sales-and-bo-rates/)
+
+### SB 5814 — the services sales tax expansion
+
+The companion sales tax bill (covered in more detail in
+`sales-tax.md`) is the revenue-heaviest piece of the 2025 package.
+Starting **October 2025**, Washington's retail sales tax applies to
+a substantially expanded set of digital and professional services
+that had previously been exempt. The services newly subject to
+sales tax include:
+
+- **Digital and nondigital advertising services** — including
+  online referrals, search engine marketing, and lead generation
+  optimization. The statutory definition is broad and includes
+  all services related to creating, preparing, producing, or
+  disseminating advertisements.
+- **IT training and support services.**
+- **Custom website and custom software development services.**
+- **Temporary staffing services.**
+- **Live presentation services, investigation, security,
+  security monitoring, and armored car services.**
+
+SB 5814 **eliminates the "human effort" exclusion** that had
+previously exempted certain digital services involving manual
+input or oversight. This is a structural change that significantly
+narrows the boundary between exempt and taxable services.
+
+The projected revenue impact is **$1.1 billion over the 2025–2027
+biennium**, which makes SB 5814 one of the largest revenue-raising
+measures of the session. The practitioner concern — echoed in
+multiple 2025 tax advisories — is that Washington-based service
+providers are now subject to a tax that their out-of-state
+competitors are not, creating a structural disadvantage for
+Washington service businesses.
+
+**Sources:** [Washington State Expands Sales Tax, Increases B&O and Capital Gains Taxes — Greenberg Traurig LLP](https://www.gtlaw.com/en/insights/2025/5/washington-state-expands-sales-tax-increases-b-and-o-capital-gains-taxes) · [Interim Guidance on Washington State Services Newly Subject to Sales Tax — Moss Adams, October 2025](https://www.mossadams.com/articles/2025/10/washington-sales-tax-interim-guidance) · [Major Tax Changes Coming to Washington State — Washington Society of CPAs](https://www.wscpa.org/blog/134d3d06-5d71-447b-a224-021bc4be2560:major-tax-changes-coming-to-washington-state) · [2025-2027 Washington State Budget: How New Taxes May Affect You — Clark Nuber](https://clarknuber.com/articles/washington-2025-session-legislature-tax-hike-increase-governor-antio-bo/)
+
+### What this means for the paper
+
+The body of this document was written at a point where HB 2081 was
+the current reference and the tier structure could be described
+definitionally. With the May 20, 2025 signing and the January 1,
+2026 effective date for the surcharge, the paper's B&O treatment
+is now describing **operative law** rather than pending legislation.
+The numbers above (the 0.5% surcharge, the $250M threshold, the
+2.1% Service & Other rate for the largest tier, the 7.5% advanced
+computing surcharge, the 5% Antio-codification threshold) are the
+specific operating values that any practitioner using this paper
+as a starting point will need to look up, and this addendum puts
+them all in one place.
+
+Similarly, the `sales-tax.md` companion file's treatment of SB
+5814's service expansion should be read alongside the Moss Adams
+October 2025 interim guidance, which is the single most useful
+practical reference for practitioners trying to determine whether
+a specific service falls under the new sales tax.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**business**](../../../.college/departments/business/DEPARTMENT.md)
+  — State tax law is the financial infrastructure of business, and
+  HB 2081 / SB 5814 are worked examples of how tax policy shapes
+  operating decisions, location decisions, and pricing decisions
+  for service businesses.
+- [**economics**](../../../.college/departments/economics/DEPARTMENT.md)
+  — Gross-receipts taxation, pyramiding, and the competitive
+  implications of taxing services that cross state lines are all
+  economics-department topics that HB 2081 / SB 5814 concretely
+  illustrate.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — Washington's tax history is one of the most heavily shaped by
+  state constitutional constraints (notably the uniformity clause)
+  of any state in the country, and the compliance-incentives-history
+  file in this bucket traces that thread.
+- [**critical-thinking**](../../../.college/departments/critical-thinking/DEPARTMENT.md)
+  — Tax policy analysis is a concrete domain for critical-thinking
+  practice: reading statutes, tracing incidence, and reasoning
+  about unintended consequences.
+
+---
+
 **End of Document**
+
+*Addendum (HB 2081 / SB 5814 — the 2025 tax package, signed and effective) and Related College Departments cross-link added during the Session 018 catalog enrichment pass. Per the Fox Companies IP rule, this file is committed to GitHub but not surfaced on the public tibsfox.com research site.*
 
