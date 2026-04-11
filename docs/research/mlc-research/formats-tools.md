@@ -1499,3 +1499,158 @@ addresses so the code runs correctly at any base address. Understanding these
 formats turns a binary from an opaque blob into a readable structure -- and
 provides the foundation for debugging, reverse engineering, security analysis,
 and systems programming.
+
+---
+
+## Addendum: WebAssembly 3.0 and the machine-code-in-the-browser story (2025–2026)
+
+This section was added in April 2026 as part of a catalog-wide enrichment
+pass. The body above focuses on the traditional binary-format trio (ELF,
+PE, Mach-O) plus the classical machine-code execution model. The 2025
+news in this space is not about any of those formats — they are stable,
+and 2025 did not bring meaningful structural changes to any of them.
+The news is about a fourth binary format that is now as widely deployed
+as any of the traditional three: **WebAssembly**.
+
+### Wasm 3.0 (September 17, 2025)
+
+**WebAssembly 3.0** was formally released on **September 17, 2025**,
+the first major-version bump since Wasm 2.0. Unlike most standards-body
+version increments, Wasm 3.0 ships a real set of features that had
+been in development for six to eight years and that collectively
+change what Wasm is capable of expressing at the machine-code level.
+
+The headline features:
+
+- **64-bit address space.** Wasm memories and tables can now be
+  declared with `i64` address types instead of `i32`. The practical
+  effect is that the Wasm address space grows from 4 GiB (the i32
+  ceiling) to a theoretical 16 exabytes. For anyone porting C, C++,
+  Rust, or Go code that routinely works with >4 GiB of memory — which
+  includes most scientific computing, most databases, and most large
+  ML workloads — this is the change that removes the last major
+  structural limitation of Wasm as a compilation target for serious
+  native code.
+- **Garbage-collected references (GC proposal).** Wasm 3.0 adds a
+  reference-type system that is rich enough to express managed-memory
+  languages without bolting on a separate heap. Host languages that
+  have a GC (JavaScript, Java, Kotlin, Dart, OCaml, Scheme) can now
+  compile to Wasm in a way that cooperates with the host's GC rather
+  than shipping their own.
+- **Exception handling.** The tag-and-throw model that had been in
+  proposal for years is now part of the core spec.
+- **Tail-call optimization.** Proper tail calls, which functional
+  languages have needed since Wasm 1.0.
+- **Multi-memory.** A Wasm module can now declare multiple
+  independent memories, which unlocks patterns like shared memory
+  between modules and isolation of sensitive state from the rest of
+  the module.
+- **Relaxed SIMD.** The SIMD feature gains a set of operations whose
+  semantics are "fast" rather than "bit-exact," trading a small
+  amount of cross-platform determinism for a meaningful speedup on
+  common SIMD patterns.
+- **Custom annotation syntax.** The Wasm text format now has a
+  generic annotation syntax for attaching metadata to constructs,
+  without those annotations affecting semantics. This is the
+  structural move that makes tooling (profilers, debuggers, source
+  mappers) much easier to build.
+
+Together, these changes move Wasm from "a compilation target that can
+run portable C/C++/Rust" to "a compilation target that can run
+anything, including languages with their own GC, inside any
+Wasm-capable host." The Wasm-3.0-or-later baseline is what Chromium,
+Firefox, Safari, and the server runtimes (Wasmtime, Wasmer, WAMR) are
+all converging on.
+
+**Sources:** [Wasm 3.0 Completed — webassembly.org news, September 17, 2025](https://webassembly.org/news/2025-09-17-wasm-3.0/) · [Binary Format — WebAssembly 3.0 (2026-03-24) — webassembly.github.io/spec](https://webassembly.github.io/spec/core/binary/index.html) · [Conventions — WebAssembly 3.0 (2025-12-08)](https://webassembly.github.io/spec/core/binary/conventions.html) · [Introduction — WebAssembly 3.0 (Draft 2025-10-17)](https://wasm-dsl.github.io/spectec/core/intro/introduction.html)
+
+### DWARF for Wasm
+
+One of the quieter but load-bearing pieces of the Wasm 3.0 tooling
+story is that **DWARF debug information for WebAssembly** is now a
+stable pattern. DWARF sections for a Wasm binary are either embedded
+directly in the `.wasm` file as custom sections (matching how DWARF
+is embedded in ELF) or shipped as an external sidecar file. Either
+way, the `lldb`, `gdb`, and Chrome DevTools toolchains can now
+source-level-debug Wasm binaries the same way they debug native ELF
+or Mach-O binaries. This is a small change in wording and a large
+change in developer experience — a Rust program compiled to Wasm can
+now be breakpoint-debugged in the browser with full variable
+inspection.
+
+**Source:** [DWARF for WebAssembly — yurydelendik.github.io/webassembly-dwarf](https://yurydelendik.github.io/webassembly-dwarf/)
+
+### Wasm + eBPF — machine code in the kernel
+
+A second 2025 thread worth noting is the growing crossover between
+Wasm and **eBPF** — the Linux kernel's sandboxed bytecode format for
+in-kernel programs. eBPF is machine code in a verifier-approved
+virtual ISA that runs inside the kernel, and Wasm is machine code in
+a verifier-approved virtual ISA that runs inside the browser (or a
+server-side Wasm runtime). The two formats have independent lineages
+but obvious structural similarities, and several 2025 projects
+(notably `wasm-bpf` and `wasm-bpf-rs`) explore ways to use Wasm as
+a distribution and tooling format for eBPF programs. The practical
+result is that developers can write an eBPF program, compile it to
+Wasm for distribution, and then load it into the kernel from any
+Wasm-capable host language.
+
+This matters for the machine-code story because it is the first
+serious example of *verifier-compatible* machine code being used as
+a portable distribution format. ELF, PE, and Mach-O all assume the
+CPU will run the code as-is; Wasm and eBPF both assume a verification
+pass before execution. The verifier-first model has been a fringe
+position in systems programming for decades (JVM bytecode, CLR IL);
+in 2025 it has become a mainstream design for new tool-chains.
+
+**Sources:** [wasm-bpf — eunomia-bpf on GitHub](https://github.com/eunomia-bpf/wasm-bpf) · [When Wasm Meets eBPF — eunomia.dev](https://eunomia.dev/en/blogs/ebpf-wasm/) · [Wasm-bpf: Bridging WebAssembly and eBPF for Kernel Programmability — eunomia.dev](https://eunomia.dev/en/blogs/introduce-to-wasm-bpf-bpf-community/)
+
+### What this means for the binary-format chapter
+
+The ELF/PE/Mach-O matrix above is still the correct starting point
+for understanding machine-code binary formats in 2026. What it is
+missing, as of this enrichment pass, is a fourth column for Wasm —
+a binary format that is as widely deployed as the traditional three
+(in every major browser and in a growing server ecosystem), that
+solves the same problems (describe code, describe data, describe
+symbols, describe relocations), and that does so with verification
+as a first-class primitive rather than as an afterthought.
+
+A fully-updated version of the table would have a Wasm row covering
+module format (`.wasm`), linker (the Wasm component model), dynamic
+linker (host-provided), debug format (embedded DWARF custom section),
+code signing (host-provided), multi-arch (single binary runs
+everywhere), ASLR (moot — linear memory is always offset), and
+position-independent code (mandatory — Wasm bytecode has no concept
+of absolute addresses). That table extension is left as an open
+follow-up in the research catalog.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) —
+  Machine code is the substrate of every Programming Fundamentals
+  lesson about variables, control flow, and I/O. Without
+  understanding what the hardware does, the higher-level abstractions
+  are harder to teach.
+- [**electronics**](../../../.college/departments/electronics/DEPARTMENT.md)
+  — Instruction encoding is the point at which electronics and
+  computer science meet. The ELF / PE / Mach-O / Wasm formats are
+  all, at bottom, descriptions of what bits will go into the program
+  counter.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — Binary formats, dynamic linkers, and loader behavior are all
+  systems-engineering concerns. Wasm's verifier-first design is a
+  case study in how a security constraint can reshape a format's
+  architecture.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The ELF format is four decades old, Mach-O is nearly as old,
+  PE descends directly from COFF which descends from the 1970s,
+  and Wasm is less than a decade old. Machine-code binary formats
+  are an unusually long-lived artifact class.
+
+---
+
+*Addendum (WebAssembly 3.0 and eBPF crossover) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
