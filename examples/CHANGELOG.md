@@ -6,11 +6,41 @@ This changelog is not strictly Keep-a-Changelog format. It is deliberately narra
 
 ---
 
-## 2026-04-10 — Reorganization into categories + tooling + frontmatter convention
+## 2026-04-10 — Stage 2: classification, frontmatter back-fill, sidecar READMEs
+
+**What changed:** Moved all 127 existing artifacts from the flat top-level of each type into their category subfolders. Back-filled the 9-field frontmatter on every skill and agent (appending missing fields in place — existing frontmatter preserved verbatim, including multi-line YAML like `tools:` arrays). Wrapped the 7 flat chipset `.yaml` files into `<name>/chipset.yaml + README.md` directories. Created or updated README.md sidecars on teams and chipsets to hold their frontmatter (since `config.json` and `chipset.yaml` aren't the right place for YAML frontmatter).
+
+Introduced `tools/backfill-frontmatter.mjs` — an idempotent script that appends missing frontmatter fields without re-serializing existing YAML (avoiding any risk of corrupting multi-line structures). The script stays committed because it's safe to run again and provides a reproducible way to add the fields to future artifacts.
+
+Fixed the walker logic across all 4 tools (`install.mjs`, `validate.mjs`, `catalog-gen.mjs`, `license-report.mjs`) to treat `README.md` as the metadata source for teams and chipsets (rather than `config.json` / `chipset.yaml`). This is the consequence of the frontmatter-in-sidecar choice: the walker has to look at the sidecar, not the canonical config/yaml.
+
+Also removed `chipset` from the scaffolding-leftover blacklist in the validator — it's a legitimate baseline chipset, not a template leftover.
+
+**Why:** Stage 1 laid the category structure; Stage 2 filled it. The classification map was built in session by matching each artifact name to the category whose definition in `CATEGORIES.md` best fit. Edge cases (where an artifact could plausibly land in two categories) were resolved by picking the category whose daily use would surface it most naturally — e.g., `decision-framework` went to `dev/` rather than `workflow/` because developers reach for it while writing code, not while thinking about workflow orchestration.
+
+The Taches overrides were hardcoded in the backfill script because we had documentation confirming the five adapted skills (`decision-framework`, `context-handoff`, `hook-recipes`, `security-reviewer`, `doc-linter`). Everything else defaulted to `origin: tibsfox, modified: false`, which means it falls under BSL 1.1 by default. The intent is that you will later audit the gsd-* artifacts (skills and agents) and flip the ones that are truly unchanged from the GSD upstream to `origin: gsd, modified: false` — at which point they become BSL-EXEMPT per the LICENSE-POLICY.md rule. The `license-report.mjs` tool makes this audit easy: run it against a fresh state and it'll produce a per-artifact classification CSV at `.planning/license-audit.csv`.
+
+The sidecar README.md approach for teams and chipsets was chosen over augmenting `config.json` (JSON has no place for YAML frontmatter) and over modifying `chipset.yaml` (which is the chipset's own content, not metadata about the library). The sidecar is a clean separation and lets the team/chipset keep its native format untouched.
+
+**Validation results after Stage 2:**
+- 127 artifacts checked
+- 127 clean (0 errors, 0 warnings)
+- Counts: 56 skills, 54 agents, 10 teams, 7 chipsets
+- License classification: 127 BSL-1.1, 0 BSL-EXEMPT, 0 errors
+  - The 0 BSL-EXEMPT is intentional at this stage — nothing has been marked as upstream-unchanged yet. Expected to change as you audit the gsd-* artifacts.
+
+**Open for future:**
+- License audit pass: review gsd-* artifacts and mark upstream-unchanged ones as `origin: gsd, modified: false`
+- Per-category README population (these are stubs at the top level only)
+- Potential CI wiring to run `validate.mjs` on PRs
+
+---
+
+## 2026-04-10 — Stage 1: category skeleton + tooling + frontmatter convention
 
 **What changed:** Reorganized the previously-flat `examples/` tree into category subfolders across all four types. Introduced a 9-field frontmatter convention. Added `deprecated/` as a first-class subfolder under each type. Introduced `tools/` with an installer (`install.mjs`), validator (`validate.mjs`), catalog generator (`catalog-gen.mjs`), and license reporter (`license-report.mjs`). Added `LICENSE-POLICY.md` documenting the BSL-1.1 exemption rule for unchanged-from-upstream artifacts. Wrote this CHANGELOG.
 
-This is Stage 1 of the reorganization. Stage 2 (classification and `git mv` of existing artifacts into categories, with frontmatter back-fill) follows in the next commit series.
+This was Stage 1 of the reorganization. Stage 2 (classification and frontmatter back-fill) followed in the same session.
 
 **Why:** The library had crossed 125 artifacts and flat browsing was becoming painful. The cross-repo artifact catalog at `.planning/artifact-catalog.csv` (726 rows, spanning this repo, two sibling repos, and the global `~/.claude/`) exposed heavy duplication and surfaced the need for a canonical source of truth. `examples/` was the natural choice: it already holds reference copies, it's already committed, and it's already wired into the project.
 
