@@ -198,4 +198,124 @@ Science built peer review not because it is perfect, but because every alternati
 
 ---
 
+## 10. Addendum: The 2025 AI peer-review crisis
+
+This section was added in April 2026 as part of a catalog-wide enrichment
+pass. The body above treats peer review as a mature institution with
+predictable failure modes. The 2024–2025 AI-research literature has put
+that framing under concrete stress: the volume of AI conference
+submissions has grown faster than the reviewer pool can absorb, and
+LLMs have created a new failure mode the body does not cover —
+LLM-generated reviews. Both are worth recording.
+
+### The submission volume crisis
+
+**ICML submissions rose 48% year-on-year** from 6,538 in 2023 to
+9,653 in 2024, and continued climbing through the 2025 cycle. NeurIPS
+and ICLR showed similar growth. The exponential curve has outpaced
+the reviewer pool, which grows roughly linearly with the tenure-track
+PhD pipeline. The result is reviewer fatigue, reviewer underqualification
+(reviewers assigned to papers far from their area because the queue
+must be cleared), and reviews of declining depth.
+
+ICML 2025's own position papers — notably "The AI Conference Peer
+Review Crisis Demands Author Feedback and Reviewer Rewards" and
+"The Current AI Conference Model is Unsustainable!" — argue that
+the model of centralized mega-conferences with one-way review
+feedback is not structurally sustainable at the current submission
+growth rate. The proposed reforms include **bidirectional feedback
+loops** (authors evaluate review quality), **formal reviewer
+accreditation**, **reviewer rewards** tied to visible quality
+metrics, and in some proposals **distributed or federated venue
+models** to redistribute load away from the top-three-conference
+bottleneck.
+
+**Sources:** [Position: The AI Conference Peer Review Crisis Demands Author Feedback and Reviewer Rewards — ICML 2025 poster / arXiv 2505.04966](https://arxiv.org/html/2505.04966v1) · [Position: The Current AI Conference Model is Unsustainable! — arXiv 2508.04586](https://arxiv.org/html/2508.04586v1) · [ICML 2025 Call for Papers — icml.cc](https://icml.cc/Conferences/2025/CallForPapers) · [ICML 2025 Position Paper: Why AI Peer Review Is Crumbling — CSPaper Forum](https://forum.cspaper.org/topic/75/icml-2025-position-paper-why-ai-peer-review-is-crumbling-and-what-we-can-do-about-it)
+
+### LLM-generated reviews as a new failure mode
+
+The more insidious development is **LLM-generated reviews**: reviewers
+using LLMs to draft or produce complete reviews of papers they have
+not fully read. The APA philosophy blog's November 2025 piece "LLM
+Usage and Manipulation in Peer Review" and related 2025 writing
+converge on a set of observations:
+
+1. **LLMs can't understand novel computer science papers.** As of
+   2025, frontier LLMs produce output that looks like a review — has
+   the right structure, mentions things from the paper, ends with a
+   plausible accept/reject verdict — but cannot actually assess
+   novelty, correctness, or significance for work that is by
+   definition outside the pretraining corpus.
+2. **The outputs are detectable in aggregate but not per-review.**
+   Reviewer identity is confidential; individual LLM-drafted reviews
+   are hard to call out; but the aggregate pattern (reviews that
+   hallucinate citations, reviews that miss obvious issues, reviews
+   that use characteristic LLM phrasing) is visible.
+3. **Conferences are responding with explicit policies.** **CVPR
+   2025** introduced strict rules prohibiting any use of LLMs in
+   review writing or translation; violators risk desk rejections of
+   their own submissions. **ICLR 2025** requires authors to disclose
+   LLM usage in the writing process, as a transparency measure that
+   parallels the CoI disclosures peer review already had.
+4. **Positive applications exist.** A randomized study of 20,000
+   reviews at **ICLR 2025** found that 27% of reviewers who received
+   AI *feedback on their own reviews* updated them, and that the
+   updated reviews were on average **80 words longer** and more
+   informative. The pattern that seems to work is "LLM helps the
+   reviewer write a better review," not "LLM generates the review."
+
+**Sources:** [The AI Imperative: Scaling High-Quality Peer Review in Machine Learning — arXiv 2506.08134](https://arxiv.org/html/2506.08134v1) · [LLM Usage and Manipulation in Peer Review — APA Blog, November 13, 2025](https://blog.apaonline.org/2025/11/13/llm-usage-and-manipulation-in-peer-review/) · [What Happens When Reviewers Receive AI Feedback in Their Reviews? — arXiv 2602.13817](https://arxiv.org/html/2602.13817v1) · [Can LLM feedback enhance review quality? A randomized study of 20K reviews at ICLR 2025 — ResearchGate](https://www.researchgate.net/publication/390773344_Can_LLM_feedback_enhance_review_quality_A_randomized_study_of_20K_reviews_at_ICLR_2025)
+
+### What this means for section 9's code-review framing
+
+The body's Section 9 maps peer review onto code review, and argues
+that the same bias patterns (confirmation, authority, unfamiliarity)
+operate in both contexts. The 2025 AI-peer-review data confirms the
+mapping and adds two new ones:
+
+- **Volume pressure + AI assistance** is a pattern that code review
+  is already experiencing. Open-source projects are seeing
+  LLM-generated pull requests in volumes that their maintainer pools
+  cannot absorb, and AI-assisted code reviews are being piloted in
+  most major platforms. The dynamics look identical to the AI
+  conference peer-review crisis one architectural layer down.
+- **LLM-generated reviews** are a code-review failure mode too. An
+  LLM-generated code review can produce plausible-looking commentary
+  that missed the actual subtle bug, for exactly the reason an
+  LLM-generated paper review can produce plausible-looking feedback
+  that missed the actual contribution.
+
+The practical response — "LLM helps the reviewer write a better
+review, not LLM generates the review" — should be adopted as
+standing guidance for code review as well. Adversarial review
+remains more effective than collegial review; AI-assisted review
+is more effective than AI-generated review; and the reviewer's
+understanding of the work is non-delegable.
+
+---
+
 *Further reading: Biagioli, M. "From Book Censorship to Academic Peer Review" (2002). Baldwin, M. "Making Nature: The History of a Scientific Journal" (2015). Csiszar, A. "The Scientific Journal: Authorship and the Politics of Knowledge in the Nineteenth Century" (2018). Lee, C.J. et al. "Bias in Peer Review" in JASIST (2013). Chambers, C. "The Seven Deadly Sins of Psychology" (2017).*
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**critical-thinking**](../../../.college/departments/critical-thinking/DEPARTMENT.md)
+  — Research methodology is applied critical thinking, and the
+  peer-review bias analysis is a canonical critical-thinking
+  exercise.
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)
+  — The companion `writing-papers.md` file in this bucket is
+  squarely in the writing department's scope.
+- [**digital-literacy**](../../../.college/departments/digital-literacy/DEPARTMENT.md)
+  — Source evaluation, citation practice, and bias recognition are
+  foundational digital-literacy topics.
+- [**philosophy**](../../../.college/departments/philosophy/DEPARTMENT.md)
+  — Epistemology of research, the scientific method, and the
+  AI-era questions about what counts as knowledge are
+  philosophy-department topics.
+
+---
+
+*Section 10 (The 2025 AI peer-review crisis) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
