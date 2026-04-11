@@ -12,6 +12,7 @@ pub mod memory_arena;
 pub mod staging;
 pub mod ipc;
 pub mod magic;
+pub mod pcg;
 pub mod services;
 mod watcher;
 
