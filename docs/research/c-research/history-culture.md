@@ -379,4 +379,122 @@ He died in October 2011. His language is everywhere.
 
 ---
 
+## Addendum: C23 shipped, C2y in flight (2025–2026)
+
+This addendum was added in April 2026 as part of a catalog-wide enrichment
+pass. The main narrative above closes with the spirit-of-C epilogue. The
+standard process has continued quietly in the background, and 2025 was
+the year in which C23's compiler adoption crossed the threshold from
+"optional flag" to "default."
+
+### C23 — published and defaulted
+
+C23 was formally published as **ISO/IEC 9899:2024** on October 31, 2024.
+The naming is the usual standards-committee footnote: the document has
+been called C23 through its entire development cycle because the freeze
+happened in 2023, but the formal ISO publication slipped into 2024, and
+WG14 papers from 2025 and 2026 variously refer to it as C23 or C24
+depending on author preference.
+
+What changed in 2025 was compiler adoption:
+
+- **GCC 15** (released in 2025) makes C23 the default dialect for the C
+  front-end. Prior GCC releases required `-std=c23` (or `-std=gnu23` for
+  the GNU-extensions variant) to opt in; GCC 15 ships with C23 as the
+  implicit target, which means that most new C code built on Linux is
+  now built against C23 semantics by default.
+- **Clang 18** added `-std=c23` support, and Clang 19 added partial
+  support for the informally-labelled **C2y** successor dialect behind
+  `-std=c2y`. Clang had historically lagged GCC by one release cycle on
+  C standard support, and the 2025 tree continues that pattern.
+- **slimcc** and other small C compilers now ship with C23 support and
+  some C2y extensions in 2025, showing that C23 is no longer purely a
+  "big three toolchain" target.
+
+The practical effect of "C23 is default" is that the features the main
+body above describes as recent — `nullptr`, `constexpr` for objects,
+`bool` as a keyword, `_BitInt(N)`, attributes with `[[...]]` syntax,
+`typeof` standardized, binary literals, digit separators, UTF-8 string
+literals, generic `<stdckdint.h>` checked arithmetic, `auto` for type
+inference in limited contexts, and improved `enum` — are now the default
+semantics of the language for most new C development. C has quietly
+become a language with optional type inference and compile-time constant
+objects, which is not how most C programmers think of it.
+
+**Sources:** [C23 (C standard revision) — Wikipedia](https://en.wikipedia.org/wiki/C23_(C_standard_revision)) · [C Standards Support in GCC — GNU Project](https://gcc.gnu.org/projects/c-status.html) · [Clang C Programming Language Status — LLVM](https://clang.llvm.org/c_status.html) · [LLVM Clang Now Supports -std=c23 — Phoronix](https://www.phoronix.com/news/LLVM-Clang-18-std-c23) · [C23 is Finished: Here is What is on the Menu — The Pasture](https://thephd.dev/c23-is-coming-here-is-what-is-on-the-menu) · [slimcc — fuhsnn on GitHub](https://github.com/fuhsnn/slimcc)
+
+### C2y — memory safety on the table for the first time
+
+The ISO WG14 committee began organizing the **C2y** workload in early
+2026. The **Graz, Austria meeting (February 24–28, 2026)** set the
+post-C23 technical direction. The two threads worth noting are:
+
+1. **Effective-type issues.** WG14 has been reviewing papers on how the
+   C effective-type rules interact with `_BitInt`, compound literals,
+   and type-punning. This is a compiler-writer concern rather than a
+   user-visible concern, but it is the sort of deep-spec cleanup that
+   determines what optimizing compilers are allowed to do with
+   apparently-innocent code.
+2. **TrapC.** An informal proposal circulating in technical circles for
+   a **memory-safe fork of C** designed to eliminate undefined behavior.
+   TrapC is not (yet) a WG14 work item, but its circulation is a
+   meaningful signal: the memory-safety conversation that the systems
+   languages community has been having since 2022 has reached the C
+   standards process. WG14 has historically been cautious about adding
+   features that require runtime support or that would split the
+   ecosystem, and TrapC is in the early stages of being evaluated
+   against that caution. As of April 2026 it is too early to say
+   whether any TrapC-style ideas will make C2y or whether the committee
+   will continue to treat memory safety as a property programmers build
+   rather than a property the language enforces.
+
+### What this means for the story
+
+The main body above ends with "C is the language in which the world
+runs" and the Ritchie quote about being quirky, flawed, and successful.
+That framing is still correct. What has shifted is the conversation
+*about* C: for the first time since the C standard began, the headline
+topic is not a feature (generics, fixed-width integers, threads) but a
+property (memory safety). The C committee has not yet decided how to
+answer that question, and the set of things it is willing to do — TrapC
+on the outer edge, effective-type cleanup in the middle, nothing on the
+cautious edge — bounds the space of possible answers.
+
+Whatever happens, C is not being replaced. The Linux kernel is still C
+(with small Rust components). The C runtime is still C. The bulk of
+embedded firmware is still C. C's 60%+ share of the embedded market and
+its position as the bottom of the software stack are unchanged. What is
+changing is what "writing C" means in 2026 compared to what it meant in
+2006: the default dialect has new features, the compilers enforce
+stricter rules, and the memory-safety conversation is shaping the edges
+of the language from the outside in.
+
+**Sources:** [State of C 2026 — The Dev Newsletter](https://devnewsletter.com/p/state-of-c-2026) · [What is C23 and why should I care? — Software Development / Codidact](https://software.codidact.com/posts/289414)
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md) — C
+  is the substrate language the Programming Fundamentals and Algorithms
+  & Efficiency wings are (indirectly) describing. Every high-level
+  language's runtime is implemented in C or one of its descendants.
+- [**electronics**](../../../.college/departments/electronics/DEPARTMENT.md)
+  — Embedded systems and firmware are the C-dominant domains. For
+  anyone building physical computing hardware, C is the default
+  language of the microcontroller toolchain.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — C is the engineering language of systems software. Kernel
+  development, network stacks, filesystem drivers, and device drivers
+  are all C first.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) —
+  The Bell Labs story and the Unix story are inseparable from the C
+  story, and all three are foundational for the history of computing
+  in the second half of the twentieth century.
+
+---
+
 *Compiled from Bell Labs historical records, ISO/IEC WG14 archives, ACM Turing Award citations, and the public writing of Dennis Ritchie, Brian Kernighan, Ken Thompson, Rob Pike, Bjarne Stroustrup, and the C standardization community. Draws on Ritchie's own "The Development of the C Language" (HOPL-II, 1993) and "The Evolution of the Unix Time-sharing System" (1984) for the primary narrative of C's origins at Bell Labs.*
+
+*The C23/C2y addendum and the Related College Departments cross-link were added during the Session 018 catalog enrichment pass.*
