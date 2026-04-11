@@ -132,8 +132,8 @@ Install the pack and navigate to Room 05 (Food Preservation) using the Skill Hal
 
 ```typescript
 import { SkillHallFramework, SafetyWarden, CulturalSovereigntyWarden } from
-  './heritage-skills-pack/skill-hall/framework.js';
-import { RoomNumber, SafetyDomain, Tradition } from './heritage-skills-pack/shared/types.js';
+  './packs/heritage-skills/skill-hall/framework.js';
+import { RoomNumber, SafetyDomain, Tradition } from './packs/heritage-skills/shared/types.js';
 
 // Construct the framework with both wardens
 const framework = new SkillHallFramework(
@@ -172,8 +172,8 @@ while (result !== null) {
 Direct safety warden usage (without the full framework):
 
 ```typescript
-import { SafetyWarden } from './heritage-skills-pack/safety/warden.js';
-import { SafetyDomain } from './heritage-skills-pack/shared/types.js';
+import { SafetyWarden } from './packs/heritage-skills/safety/warden.js';
+import { SafetyDomain } from './packs/heritage-skills/shared/types.js';
 
 const warden = new SafetyWarden();
 
@@ -193,8 +193,8 @@ console.log(result.annotations[0].message);          // "BOTULISM RISK: ..."
 Cultural sovereignty classification:
 
 ```typescript
-import { CulturalSovereigntyWarden } from './heritage-skills-pack/safety/cultural-warden.js';
-import { Tradition } from './heritage-skills-pack/shared/types.js';
+import { CulturalSovereigntyWarden } from './packs/heritage-skills/safety/cultural-warden.js';
+import { Tradition } from './packs/heritage-skills/shared/types.js';
 
 const warden = new CulturalSovereigntyWarden();
 
@@ -496,7 +496,7 @@ exports containing syllabics trigger a documentation note about font requirement
 ### File Structure
 
 ```
-heritage-skills-pack/
+packs/heritage-skills/
   chipset.yaml                    # Chipset configuration — skills, agents, routing, gates
   README.md                       # This file
   CULTURAL-SOVEREIGNTY-POLICY.md  # Public cultural sovereignty policy
@@ -589,28 +589,28 @@ heritage-skills-pack/
 Run Phase 1 integration tests:
 
 ```bash
-npx vitest run heritage-skills-pack/tests/integration/integration.test.ts \
-  heritage-skills-pack/tests/integration/safety-critical.test.ts \
-  heritage-skills-pack/tests/integration/cultural-sovereignty.test.ts \
-  heritage-skills-pack/tests/integration/core-functionality.test.ts \
-  heritage-skills-pack/tests/integration/fair-use.test.ts
+npx vitest run packs/heritage-skills/tests/integration/integration.test.ts \
+  packs/heritage-skills/tests/integration/safety-critical.test.ts \
+  packs/heritage-skills/tests/integration/cultural-sovereignty.test.ts \
+  packs/heritage-skills/tests/integration/core-functionality.test.ts \
+  packs/heritage-skills/tests/integration/fair-use.test.ts
 ```
 
 Run Phase 2 integration tests:
 
 ```bash
-npx vitest run heritage-skills-pack/tests/integration/phase2-integration.test.ts \
-  heritage-skills-pack/tests/integration/marine-safety.test.ts \
-  heritage-skills-pack/tests/integration/pnw-sovereignty.test.ts \
-  heritage-skills-pack/tests/integration/badge-engine.test.ts \
-  heritage-skills-pack/tests/integration/monotonicity.test.ts \
-  heritage-skills-pack/tests/integration/pan-indigenous-scan.test.ts
+npx vitest run packs/heritage-skills/tests/integration/phase2-integration.test.ts \
+  packs/heritage-skills/tests/integration/marine-safety.test.ts \
+  packs/heritage-skills/tests/integration/pnw-sovereignty.test.ts \
+  packs/heritage-skills/tests/integration/badge-engine.test.ts \
+  packs/heritage-skills/tests/integration/monotonicity.test.ts \
+  packs/heritage-skills/tests/integration/pan-indigenous-scan.test.ts
 ```
 
 Run all adversarial red-team audits:
 
 ```bash
-npx vitest run heritage-skills-pack/tests/cultural-audit/
+npx vitest run packs/heritage-skills/tests/cultural-audit/
 ```
 
 Run full test suite:
