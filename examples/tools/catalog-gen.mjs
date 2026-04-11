@@ -22,7 +22,17 @@ const AGENT_CATEGORIES = new Set([
   'gsd', 'research', 'media', 'dev', 'ops', 'ui', 'audit', 'deprecated',
 ]);
 const TEAM_CATEGORIES = new Set(['code', 'ops', 'infra', 'migration', 'deprecated']);
-const CHIPSET_CATEGORIES = new Set(['deprecated']);
+const CHIPSET_CATEGORIES = new Set(['chipset', 'deprecated']);
+
+function metadataFileFor(type, artifactDir) {
+  switch (type) {
+    case 'skills':   return join(artifactDir, 'SKILL.md');
+    case 'agents':   return join(artifactDir, 'AGENT.md');
+    case 'teams':    return join(artifactDir, 'README.md');
+    case 'chipsets': return join(artifactDir, 'README.md');
+    default:         return null;
+  }
+}
 
 async function parseFrontmatter(content) {
   if (!content.startsWith('---\n')) return null;
@@ -44,68 +54,60 @@ async function parseFrontmatter(content) {
 
 async function walkArtifacts(root) {
   const results = [];
-  const types = [
+  const typesWithCategories = [
     ['skills', SKILL_CATEGORIES],
     ['agents', AGENT_CATEGORIES],
     ['teams', TEAM_CATEGORIES],
-    ['chipsets', CHIPSET_CATEGORIES],
   ];
 
-  for (const [type, catSet] of types) {
+  for (const [type, catSet] of typesWithCategories) {
     const typeDir = join(root, type);
     if (!existsSync(typeDir)) continue;
-
     const topEntries = await readdir(typeDir, { withFileTypes: true });
     for (const ent of topEntries) {
       if (ent.name.startsWith('.') || ent.name === 'README.md') continue;
-
-      if (ent.isDirectory() && catSet.has(ent.name)) {
-        // Category dir
-        const inner = await readdir(join(typeDir, ent.name), { withFileTypes: true });
+      if (!ent.isDirectory()) continue;
+      const subPath = join(typeDir, ent.name);
+      if (catSet.has(ent.name)) {
+        const inner = await readdir(subPath, { withFileTypes: true });
         for (const e of inner) {
           if (e.name.startsWith('.') || e.name === 'README.md') continue;
-          await collect(type, ent.name, e, join(typeDir, ent.name), results);
+          if (!e.isDirectory()) continue;
+          await collect(type, ent.name, e.name, join(subPath, e.name), results);
         }
-      } else if (ent.isDirectory()) {
-        // Top-level (pre-Stage-2 unclassified)
-        await collect(type, '(unclassified)', ent, typeDir, results);
-      } else if (ent.isFile() && type === 'chipsets' && ent.name.endsWith('.yaml')) {
-        results.push({
-          type, category: '(unclassified)',
-          name: ent.name.replace(/\.yaml$/, ''),
-          path: join(typeDir, ent.name),
-          frontmatter: null,
-        });
+      } else {
+        await collect(type, '(unclassified)', ent.name, subPath, results);
+      }
+    }
+  }
+
+  // Chipsets: flat chipsets/<name>/, with chipsets/deprecated/<name>/ for deprecated
+  const chipsetsDir = join(root, 'chipsets');
+  if (existsSync(chipsetsDir)) {
+    const entries = await readdir(chipsetsDir, { withFileTypes: true });
+    for (const ent of entries) {
+      if (ent.name.startsWith('.') || ent.name === 'README.md') continue;
+      if (!ent.isDirectory()) continue;
+      if (ent.name === 'deprecated') {
+        const depEntries = await readdir(join(chipsetsDir, ent.name), { withFileTypes: true });
+        for (const e of depEntries) {
+          if (e.name.startsWith('.') || e.name === 'README.md') continue;
+          if (!e.isDirectory()) continue;
+          await collect('chipsets', 'deprecated', e.name, join(chipsetsDir, ent.name, e.name), results);
+        }
+      } else {
+        await collect('chipsets', 'chipset', ent.name, join(chipsetsDir, ent.name), results);
       }
     }
   }
   return results;
 }
 
-async function collect(type, category, ent, parentDir, results) {
-  const fullPath = join(parentDir, ent.name);
-  if (ent.isDirectory()) {
-    const skillMd = join(fullPath, 'SKILL.md');
-    const agentMd = join(fullPath, 'AGENT.md');
-    const chipsetYaml = join(fullPath, 'chipset.yaml');
-    const teamCfg = join(fullPath, 'config.json');
-    let metaPath = null;
-    if (existsSync(skillMd)) metaPath = skillMd;
-    else if (existsSync(agentMd)) metaPath = agentMd;
-    else if (existsSync(chipsetYaml)) metaPath = chipsetYaml;
-    else if (existsSync(teamCfg)) metaPath = teamCfg;
-    if (!metaPath) return;
-    const fm = metaPath.endsWith('.md')
-      ? await parseFrontmatter(await readFile(metaPath, 'utf8'))
-      : null;
-    results.push({ type, category, name: ent.name, path: fullPath, frontmatter: fm });
-  } else if (ent.isFile() && ent.name.endsWith('.md')) {
-    const fm = await parseFrontmatter(await readFile(fullPath, 'utf8'));
-    results.push({
-      type, category, name: ent.name.replace(/\.md$/, ''),
-      path: fullPath, frontmatter: fm,
-    });
-  }
+async function collect(type, category, name, artifactDir, results) {
+  const metaPath = metadataFileFor(type, artifactDir);
+  if (!metaPath || !existsSync(metaPath)) return;
+  const fm = await parseFrontmatter(await readFile(metaPath, 'utf8'));
+  results.push({ type, category, name, path: artifactDir, frontmatter: fm });
 }
 
 function escapeCsv(v) {
