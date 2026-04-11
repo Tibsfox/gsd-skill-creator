@@ -1,0 +1,47 @@
+{
+  "projectCode": "PPP",
+  "packTitle": "Picnic Point Park — Engineering Site Review",
+  "modules": [
+    {
+      "moduleId": "ecology-nearshore",
+      "title": "Ecology & Nearshore Habitat: Intertidal Beach, Forage Fish Spawning, Riparian Corridor, Marine Food Web"
+    },
+    {
+      "moduleId": "restoration-conservation",
+      "title": "Restoration & Conservation: Healthy Forest Project, Olympic Fly Fishers Partnership, Shellfish Closure, Meadowdale Comparison"
+    },
+    {
+      "moduleId": "geology-coastal",
+      "title": "Geology & Coastal Processes: Glacial Bluff Sediments, Drift Cell Dynamics, BNSF Seawall Effects, USGS Landslide Mapping"
+    },
+    {
+      "moduleId": "history-cultural",
+      "title": "History & Cultural Context: MV Pacific Queen, Shipwreck Point, BNSF Railroad, Tulalip Tribes Indigenous Shoreline"
+    },
+    {
+      "moduleId": "recreation-community",
+      "title": "Recreation, Access & Community Science: Park Facilities, Tide-Dependent Beach Walks, City Nature Challenge Bioblitz, iNaturalist, MRC Forage Fish Protocol"
+    }
+  ],
+  "bibliography": [
+    "Snohomish County DCNR — Parks, Healthy Forest Project, Surface Water Management",
+    "Washington Department of Fish & Wildlife (WDFW) — Nearshore technical papers, shellfish closures, forage fish protocol",
+    "NOAA Fisheries (West Coast) — Chinook ESA listing, nearshore restoration research",
+    "Snohomish County Marine Resources Committee (MRC) — Forage fish spawning surveys since 2011 (700+ samples)",
+    "Puget Sound Maritime Historical Society (PSMHS) — MV Pacific Queen vessel identification and history",
+    "U.S. Geological Survey (USGS) — Landslide mapping, Seattle-Everett corridor",
+    "Olympic Fly Fishers of Edmonds (OFF) — Restoration event documentation (2023-2026)",
+    "iNaturalist / California Academy of Sciences — City Nature Challenge bioblitz platform",
+    "Washington Trails Association (WTA) — Trip reports, tide-dependent hiking conditions",
+    "WDFW Puget Sound Nearshore Technical Papers",
+    "Puget Sound Salmon Recovery Plan (2007)",
+    "HFP 20-Year Plan (2022)"
+  ],
+  "safetyRules": [
+    "SC-SRC: All numerical data attributed to named agency source with publication year",
+    "SC-NUM: No fabricated statistics — use documented or estimated with methodology disclosed",
+    "SC-END: No GPS coordinates for nesting bald eagles or other listed species (ABSOLUTE)",
+    "SC-IND: Tulalip Tribes content requires tribal consultation or published sources (GATE)",
+    "SC-ADV: Note permanent shellfish closure — no foraging guidance without WDFW/DOH confirmation"
+  ]
+}
