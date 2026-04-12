@@ -14,8 +14,8 @@ category: gsd
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/gsd-security-auditor
+first_seen: 2026-04-11
+first_path: examples/agents/gsd/gsd-security-auditor/AGENT.md
 superseded_by: null
 ---
 <role>

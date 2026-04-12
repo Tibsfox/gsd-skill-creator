@@ -8,8 +8,8 @@ category: audit
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/performance-profiler
+first_seen: 2026-02-07
+first_path: examples/performance-profiler/AGENT.md
 superseded_by: null
 ---
 # Performance Profiler Agent

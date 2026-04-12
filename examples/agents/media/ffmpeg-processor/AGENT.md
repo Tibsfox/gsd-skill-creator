@@ -16,8 +16,8 @@ category: media
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/ffmpeg-processor
+first_seen: 2026-04-11
+first_path: examples/agents/media/ffmpeg-processor/AGENT.md
 superseded_by: null
 ---
 # FFmpeg Processor Agent
