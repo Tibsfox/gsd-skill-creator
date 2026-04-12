@@ -1267,4 +1267,41 @@ engineering care in a medium that did not tolerate carelessness.
 
 The medium tolerates carelessness now. But the care is still worth it.
 
+## Study Guide — Punch Card Era Workflow
+
+### Canonical workflow
+
+1. Design on paper.
+2. Code on coding sheets.
+3. Keypunch.
+4. Verify.
+5. Submit deck.
+6. Wait (hours to days).
+7. Read printout.
+8. Fix errors.
+9. Resubmit.
+
+### Key insight
+
+The 6-step loop was painful but effective. Every step
+forced you to think. Modern "instant feedback" culture
+trades thought for iteration speed. Both have costs.
+
+## DIY — Do one task in the 1960s style
+
+Pick a small task. Write the design on paper, the code on
+paper, then type it all in and run it once. No edits mid-
+run. If it fails, go back to the paper.
+
+## TRY — Pair-program with a 1965 rule set
+
+Team up with another developer. Agree: no editing between
+runs. Design everything before typing. Work for 2 hours.
+Observe the difference.
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+- [**philosophy**](../../../.college/departments/philosophy/DEPARTMENT.md)
+
 *— End of research document.*

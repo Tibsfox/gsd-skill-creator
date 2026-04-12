@@ -851,4 +851,32 @@ The loop is eternal. Honor it.
 
 ---
 
+## Study Guide — Philosophy of Constrained Computing
+
+### Why read this
+
+Constraints create discipline, and discipline creates
+craft. The punch-card era is one of the clearest case
+studies in "less was more." This file is a meditation on
+what we gain when the medium forces us to think before
+we act.
+
+## DIY — Impose a batch constraint for a day
+
+Commit your code only at end-of-day. Plan your changes in
+the morning on paper. Work without interactive debugging.
+Observe what changes in your thinking.
+
+## TRY — Write a program on paper first
+
+Pick a 100-line program. Write it on paper. Then type it
+in. Then run it. Count syntax errors. Then do it again in
+your usual interactive style. Compare cognitive load.
+
+## Related College Departments
+
+- [**philosophy**](../../../.college/departments/philosophy/DEPARTMENT.md)
+
+---
+
 *End of meditation.*

@@ -1036,4 +1036,37 @@ And then it vanished from daily life in less than a decade, leaving behind only 
 
 ---
 
+## Study Guide — Punch Card Hardware & History
+
+### Questions
+
+- Why did Hollerith invent the punch card in 1890?
+- Why did it become a business machine before a computer input?
+- Why did it last a hundred years?
+- What replaced it, and when?
+
+## DIY — Visit CHM punch card demo
+
+The Computer History Museum in Mountain View runs IBM 1401
+demos twice weekly (Wednesday 3 PM, Saturday 11 AM). Go.
+Take the full 90-minute tour. The sound of the card reader
+is the sound of a 1960s data center.
+
+## DIY — Make your own punched card
+
+Cut a card from an index card. Hand-punch it using the
+Hollerith 80-column layout. The physical act of encoding
+ten characters teaches you what typing takes for granted.
+
+## TRY — Punch card layout in a text editor
+
+Write a Python script that prints an ASCII art version of
+a punch card for any string. 30 lines. Fun to share.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+
+---
+
 *End of document.*
