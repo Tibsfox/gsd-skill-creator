@@ -5,8 +5,8 @@ category: ops
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/teams/gsd-debug-team
+first_seen: 2026-02-07
+first_path: .claude/teams/gsd-debug-team/config.json
 description: null
 superseded_by: null
 ---

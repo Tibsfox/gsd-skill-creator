@@ -5,8 +5,8 @@ category: infra
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/teams/platform-onboarding-team
+first_seen: 2026-02-07
+first_path: examples/platform-onboarding-team/README.md
 description: null
 superseded_by: null
 ---
