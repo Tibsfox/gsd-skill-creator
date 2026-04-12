@@ -1207,3 +1207,112 @@ Compiles on gfortran, ifx, nvfortran, and NAG without modification. The compiler
 - **LAPACK, SciFortran, stdlib** — the major open-source libraries to read for real-world idiomatic Fortran.
 
 Fortran's reputation as a legacy language is misleading. Modern Fortran is a living, evolving standard — Fortran 2023 is less than two years old at time of writing — and remains the language of choice where numerical performance, array semantics, and compiler optimisation matter most. Weather forecasts, climate models, nuclear reactor simulations, aircraft designs, and much physics research run on Fortran written in the last ten years. If your problem is numerical and large, Fortran deserves a serious look.
+
+---
+
+## Study Guide — Modern Fortran Language
+
+### Prerequisites
+
+- Any one numerical language (MATLAB, NumPy, Julia).
+- GFortran 14+ or Intel oneAPI Fortran installed.
+
+### Key concepts
+
+1. **Arrays are first-class.** `A + B`, `matmul(A, B)`,
+   `sum(A, dim=1)` all work on whole arrays without loops.
+2. **`do concurrent`** is the modern parallel loop. Compilers
+   can target CPU threads, SIMD, or GPUs from the same code.
+3. **Modules replace COMMON blocks.** Every modern Fortran
+   program starts with modules, not include files.
+4. **Derived types give Fortran user-defined types.** Plus
+   type-bound procedures for OO-style encapsulation.
+
+### 1-week plan
+
+- Day 1: Install GFortran. Compile hello world.
+- Day 2: Write a dot-product using whole-array syntax.
+- Day 3: Build a module with a derived type for a 3-vector.
+- Day 4: Use `do concurrent` for a parallel loop.
+- Day 5: Read chapter 1-4 of *Modern Fortran Explained*.
+- Day 6: Call a LAPACK routine (`dgemm`) from Fortran.
+- Day 7: Port a NumPy routine to Fortran and benchmark.
+
+---
+
+## Programming Examples
+
+### Example 1 — Matrix multiply, three ways
+
+```fortran
+! Elementwise (slow)
+real :: A(N,N), B(N,N), C(N,N)
+integer :: i, j, k
+do i = 1, N
+   do j = 1, N
+      do k = 1, N
+         C(i,j) = C(i,j) + A(i,k) * B(k,j)
+      end do
+   end do
+end do
+
+! Intrinsic (uses BLAS if linked)
+C = matmul(A, B)
+
+! do concurrent (parallel)
+do concurrent (i = 1:N, j = 1:N)
+   C(i,j) = sum(A(i,:) * B(:,j))
+end do
+```
+
+### Example 2 — A module with a derived type
+
+```fortran
+module vec3_mod
+  implicit none
+  type :: vec3
+     real :: x, y, z
+   contains
+     procedure :: norm => vec3_norm
+  end type vec3
+contains
+  real function vec3_norm(v) result(n)
+    class(vec3), intent(in) :: v
+    n = sqrt(v%x**2 + v%y**2 + v%z**2)
+  end function vec3_norm
+end module vec3_mod
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Port a Python loop
+
+Take a hot numerical loop from Python. Write it in Fortran.
+Measure. A pure Fortran loop is typically 10-100x faster
+than pure Python and 2-5x faster than NumPy (because the
+compiler can fuse operations NumPy can't).
+
+### DIY 2 — Use fpm
+
+`fpm` is the modern Fortran package manager (analogous to
+cargo). Create a project with `fpm new`, add a dependency,
+build.
+
+### DIY 3 — Write OpenMP in Fortran
+
+Fortran has first-class OpenMP directives. Parallelize a
+loop with `!$omp parallel do`. Compare speedup.
+
+### TRY — Contribute to stdlib
+
+`fortran-lang/stdlib` is the community standard library.
+Browse the open issues, pick a small one, submit a PR.
+
+---
+
+## Related College Departments (Fortran language)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)

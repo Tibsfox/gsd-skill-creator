@@ -1094,3 +1094,45 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (Flang, LFortran, parallel runtime 2025–2026) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Fortran Modern Ecosystem
+
+### Tools
+
+- **Compilers:** GFortran (GCC), Flang (LLVM), LFortran
+  (interactive), Intel oneAPI Fortran, NVIDIA HPC SDK.
+- **Package manager:** `fpm` (Fortran Package Manager).
+- **Standard library:** `stdlib` at fortran-lang.org.
+- **Forums:** fortran-lang Discourse, Intel oneAPI Fortran
+  forum.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Compare compilers
+
+Take the same Fortran program and compile with GFortran,
+Flang, and Intel Fortran. Compare executable size, runtime,
+and compiler messages. Intel is usually fastest for
+numerics.
+
+### DIY 2 — Use LFortran interactively
+
+LFortran has a Jupyter kernel. Try Fortran in a notebook.
+This is an unusual experience for a 70-year-old language.
+
+### TRY — Replace one shell script with Fortran
+
+If you have a shell or Python script that does numerical
+post-processing of some data, rewrite it in Fortran with
+fpm. Measure the speedup.
+
+---
+
+## Related College Departments (Fortran ecosystem)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
