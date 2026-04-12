@@ -15,7 +15,7 @@
  * All JSON output uses sorted keys for deterministic, git-diff-friendly output.
  */
 
-import { mkdir, readFile, readdir, rename, open, unlink } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rename, open } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { randomBytes } from 'node:crypto';
 import type {
@@ -239,13 +239,32 @@ export class StateManager {
 
   // --------------------------------------------------------------------------
   // Hook operations
+  //
+  // Implements the GUPP hook lifecycle from hook-persistence/SKILL.md:
+  //
+  //     empty --> pending --> active --> completed --> empty
+  //
+  // `setHook` assigns work (landing in `pending`). The owning agent then
+  // polls its hook, detects the pending assignment, and calls `activateHook`
+  // to transition to `active`. When the work finishes the agent calls
+  // `completeHook`, and the mayor finally calls `clearHook` (which writes an
+  // empty hook — it does not delete the file, so witness monitoring still
+  // sees the agent's hook slot).
   // --------------------------------------------------------------------------
 
-  /** Assign a work item to an agent. Enforces single assignment. */
+  /**
+   * Assign a work item to an agent. The hook lands in `pending`; the agent
+   * must subsequently call `activateHook` to begin work.
+   *
+   * Rejects if the agent already holds a non-empty hook (pending, active,
+   * or completed) — the mayor must `clearHook` before reassigning.
+   */
   async setHook(agentId: string, beadId: string): Promise<void> {
     const existing = await this.getHook(agentId);
-    if (existing && existing.status === 'active') {
-      throw new Error(`Agent ${agentId} already has an active hook`);
+    if (existing && existing.status !== 'empty') {
+      throw new Error(
+        `Agent ${agentId} already has a ${existing.status} hook`,
+      );
     }
 
     const workItem = await this.getWorkItem(beadId);
@@ -255,25 +274,63 @@ export class StateManager {
 
     const hook: HookState = {
       agentId,
-      status: 'active',
+      status: 'pending',
       workItem,
       lastActivity: new Date().toISOString(),
     };
     await atomicWrite(this.hookPath(agentId), serializeSorted(hook));
   }
 
-  /** Retrieve hook state for an agent, or null if no hook set. */
+  /**
+   * Transition a pending hook to active. Called by the owning agent when it
+   * picks up the assignment (GUPP activation).
+   */
+  async activateHook(agentId: string): Promise<void> {
+    const hook = await this.getHook(agentId);
+    if (!hook || hook.status !== 'pending') {
+      throw new Error(
+        `Cannot activate hook for ${agentId}: hook is ${hook?.status ?? 'missing'}`,
+      );
+    }
+    hook.status = 'active';
+    hook.lastActivity = new Date().toISOString();
+    await atomicWrite(this.hookPath(agentId), serializeSorted(hook));
+  }
+
+  /**
+   * Transition an active hook to completed. Called by the owning agent when
+   * it finishes the work; the mayor clears the hook after verification.
+   */
+  async completeHook(agentId: string): Promise<void> {
+    const hook = await this.getHook(agentId);
+    if (!hook || hook.status !== 'active') {
+      throw new Error(
+        `Cannot complete hook for ${agentId}: hook is ${hook?.status ?? 'missing'}`,
+      );
+    }
+    hook.status = 'completed';
+    hook.lastActivity = new Date().toISOString();
+    await atomicWrite(this.hookPath(agentId), serializeSorted(hook));
+  }
+
+  /** Retrieve hook state for an agent, or null if no hook file exists. */
   async getHook(agentId: string): Promise<HookState | null> {
     return readJson<HookState>(this.hookPath(agentId));
   }
 
-  /** Clear a hook assignment by deleting the hook file. */
+  /**
+   * Clear an agent's hook by writing an empty hook file. The file persists
+   * (it is not unlinked) so the agent's hook slot remains observable to the
+   * witness. May be called from any state — used both for normal retirement
+   * (after `completeHook`) and for reassignment of an active hook.
+   */
   async clearHook(agentId: string): Promise<void> {
-    try {
-      await unlink(this.hookPath(agentId));
-    } catch {
-      // Already cleared or never set — no-op
-    }
+    const hook: HookState = {
+      agentId,
+      status: 'empty',
+      lastActivity: new Date().toISOString(),
+    };
+    await atomicWrite(this.hookPath(agentId), serializeSorted(hook));
   }
 
   // --------------------------------------------------------------------------
