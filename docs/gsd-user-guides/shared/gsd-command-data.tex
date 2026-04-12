@@ -1,0 +1,82 @@
+% ============================================================================
+%  gsd-command-data.tex
+%  Rendering macros for GSD command names, flags, files
+%  Command inventory verified against github.com/gsd-build/get-shit-done
+%  v1.35.0 (commit 66a5f93, released 2026-04-10)
+% ============================================================================
+
+% \gsdcmd{command-name}  — renders a GSD command name in accent color monospace
+\newcommand{\gsdcmd}[1]{{\ttfamily\color{gsdaccent}/gsd-#1}}
+
+% \gsdcolon{command-name} — renders with colon syntax (skill form)
+\newcommand{\gsdcolon}[1]{{\ttfamily\color{gsdaccent}/gsd:#1}}
+
+% \gsdflag{flag}  — renders a CLI flag in muted monospace
+\newcommand{\gsdflag}[1]{{\ttfamily\footnotesize\color{gsdnotebar}-{}-#1}}
+
+% \gsdfile{filename}  — renders a filename / path in italic monospace
+\newcommand{\gsdfile}[1]{{\ttfamily\itshape #1}}
+
+% \gsdkbd{key}  — renders a keyboard key
+\newcommand{\gsdkbd}[1]{{\ttfamily\footnotesize\color{gsdnavy}[#1]}}
+
+% ---------------------------------------------------------------------------
+%  GSD v1.35.0 Command Inventory (73 commands, 16 categories)
+%  Source: /tmp/gsd-upstream/docs/COMMANDS.md
+%
+%  Core Workflow:
+%    /gsd-new-project        /gsd-new-workspace       /gsd-list-workspaces
+%    /gsd-remove-workspace   /gsd-discuss-phase       /gsd-ui-phase
+%    /gsd-plan-phase         /gsd-execute-phase       /gsd-verify-work
+%    /gsd-next               /gsd-session-report      /gsd-ship
+%    /gsd-ui-review          /gsd-audit-uat           /gsd-audit-milestone
+%    /gsd-complete-milestone /gsd-milestone-summary   /gsd-new-milestone
+%
+%  Phase Management:
+%    /gsd-add-phase          /gsd-insert-phase        /gsd-remove-phase
+%    /gsd-list-phase-assumptions   /gsd-analyze-dependencies
+%    /gsd-plan-milestone-gaps      /gsd-research-phase
+%    /gsd-validate-phase
+%
+%  Navigation:
+%    /gsd-progress  /gsd-resume-work  /gsd-pause-work  /gsd-manager  /gsd-help
+%
+%  Utility:
+%    /gsd-explore    /gsd-undo       /gsd-import      /gsd-from-gsd2
+%    /gsd-quick      /gsd-autonomous /gsd-do          /gsd-note
+%    /gsd-debug      /gsd-add-todo   /gsd-check-todos /gsd-add-tests
+%    /gsd-stats      /gsd-profile-user  /gsd-health   /gsd-cleanup
+%
+%  Diagnostics:
+%    /gsd-forensics  /gsd-extract-learnings
+%
+%  Workstream Management:
+%    /gsd-workstreams
+%
+%  Configuration:
+%    /gsd-settings   /gsd-set-profile
+%
+%  Brownfield:
+%    /gsd-map-codebase  /gsd-onboard  /gsd-migrate
+%
+%  AI Integration:
+%    /gsd-ai-integration-phase  /gsd-eval-review
+%
+%  Update:
+%    /gsd-update  /gsd-scan
+%
+%  Code Quality:
+%    /gsd-code-review  /gsd-code-review-fix  /gsd-secure-phase
+%
+%  Fast & Inline:
+%    /gsd-fast  /gsd-quick  /gsd-inline
+%
+%  Backlog & Thread:
+%    /gsd-add-backlog  /gsd-review-backlog  /gsd-thread
+%
+%  State Management:
+%    /gsd-pr-branch  /gsd-reapply-patches  /gsd-plant-seed  /gsd-trace
+%
+%  Community:
+%    /gsd-join-discord
+% ---------------------------------------------------------------------------
