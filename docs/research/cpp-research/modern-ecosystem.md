@@ -521,3 +521,122 @@ Stroustrup's quote from the top of this document was right. C++11 *did* feel lik
 ---
 
 *Sources: ISO C++ standards (C++11 through C++23), the C++ Core Guidelines (Stroustrup & Sutter), cppreference.com, the CppCon conference archive, the Compiler Explorer project, the CMake documentation, the Conan and vcpkg documentation, "A Tour of C++" (Stroustrup, 3rd ed.), "Effective Modern C++" (Meyers), and the open-source codebases of Chromium, Qt, Unreal Engine, and PyTorch. Version numbers and dates marked [CHECK] should be confirmed against current upstream releases at publication time.*
+
+---
+
+## Study Guide — Modern C++ Ecosystem
+
+### Prerequisites
+
+- C++ basics: classes, templates, pointers.
+- A recent compiler: `g++ 14+`, `clang++ 18+`, or MSVC 2022+.
+- CMake 3.28 or later.
+- Either Conan 2 or vcpkg installed.
+
+### Reading order
+
+1. RAII and smart pointers.
+2. Move semantics and value categories.
+3. Templates and concepts.
+4. The Standard Library in modern C++ (ranges, `std::expected`,
+   `std::format`).
+5. Coroutines.
+6. Build systems: CMake, Conan, vcpkg.
+7. Toolchain: compilers, sanitizers, clang-tidy, Compiler
+   Explorer.
+
+### Key idioms
+
+- **RAII everywhere.** Every resource goes into a type with a
+  destructor.
+- **Rule of zero.** If your class doesn't need a custom
+  destructor, it doesn't need a copy/move constructor either.
+- **`std::unique_ptr` by default; `shared_ptr` only when needed.**
+- **Ranges over indexed loops.** `std::ranges::transform(v, out,
+  f)` instead of `for (size_t i = 0; i < v.size(); ++i)`.
+
+---
+
+## Programming Examples
+
+### Example 1 — A modern, safe resource wrapper
+
+```cpp
+#include <memory>
+#include <fstream>
+#include <string>
+
+class TextFile {
+    std::ifstream f;
+public:
+    explicit TextFile(const std::string& path) : f(path) {
+        if (!f) throw std::runtime_error("cannot open " + path);
+    }
+    std::string line() {
+        std::string s;
+        std::getline(f, s);
+        return s;
+    }
+};
+```
+
+No explicit destructor, no `delete`, no memory management. RAII
+handles everything.
+
+### Example 2 — A CMakeLists for a modern project
+
+```cmake
+cmake_minimum_required(VERSION 3.28)
+project(hello CXX)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(fmt REQUIRED)
+
+add_executable(hello src/main.cpp)
+target_link_libraries(hello PRIVATE fmt::fmt)
+target_compile_options(hello PRIVATE -Wall -Wextra -Wpedantic)
+```
+
+With `vcpkg install fmt` or a `conanfile.txt` listing `fmt/11.0.2`,
+this is a complete, reproducible, portable build setup.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Migrate one C++98 file to C++23
+
+Pick any C++98-era file. Replace raw pointers with smart
+pointers, replace indexed loops with range-based or ranges
+loops, replace `typedef` with `using`, replace `NULL` with
+`nullptr`, and add `[[nodiscard]]` where appropriate. Observe
+how much clearer it becomes.
+
+### DIY 2 — Build a project with sanitizers
+
+Compile any C++ project with `-fsanitize=address,undefined`
+and run its test suite. Fix whatever the sanitizers catch.
+This is the modern equivalent of Valgrind and should be part
+of every CI pipeline.
+
+### DIY 3 — Use Compiler Explorer
+
+Go to `godbolt.org`. Write 20 lines of C++. Watch the assembly
+update as you change the source. Compare `-O0` vs `-O3`
+output. This is the best tool for understanding what the
+compiler actually does with your code.
+
+### TRY — Write a project with Conan 2
+
+Pick a small project idea. Set it up with CMake + Conan 2.
+Add three external dependencies (fmt, spdlog, nlohmann_json
+are all common). Build, run, ship. You will have experienced
+modern C++ dependency management at its friendliest.
+
+---
+
+## Related College Departments (modern C++)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
