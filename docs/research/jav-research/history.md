@@ -775,4 +775,33 @@ This research cross-links to the following college departments in
 
 *Addendum (JDK 24–26, Valhalla / Leyden / Amber / virtual threads) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
 
+## Study Guide — Java History
+
+### Questions
+
+- Why did Java win the enterprise server battle over C++
+  and Smalltalk in the mid-1990s?
+- Why did Sun open-source Java before it died?
+- What did Oracle's acquisition change?
+- Why did the LTS cadence (every 2 years, then 3) matter?
+- What are the four big JEPs shaping JDK 25-26 (Valhalla,
+  Leyden, Amber, Loom)?
+
+## DIY — Read one JEP
+
+Pick any big JEP (328 Flight Recorder, 425 virtual threads,
+441 pattern matching). Read the proposal. You'll learn
+how the Java committee reasons about change.
+
+## TRY — Run a 1996 applet
+
+Pick a classic applet from the Sun Java tutorials archive.
+Try to compile it with modern tools. Note what broke.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+
+---
+
 *End of document.*
