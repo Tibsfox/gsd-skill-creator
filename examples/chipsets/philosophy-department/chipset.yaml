@@ -1,0 +1,262 @@
+# Philosophy Department Chipset Configuration
+# Fourth department, first humanities — validates the department template
+# pattern beyond STEM disciplines.
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This department covers formal logic, ethics,
+# epistemology, metaphysics, political philosophy, and critical thinking.
+
+name: philosophy-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated philosophy department providing domain-routed expertise
+  through seven named agents (Socrates, Aristotle, Kant, Beauvoir,
+  Confucius, Nagarjuna, Dewey), six knowledge skills, and three
+  pre-composed teams. Persists work via Grove records and integrates
+  with the college philosophy department concept graph. First humanities
+  department — validates the department template pattern beyond STEM.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  formal-logic:
+    domain: philosophy
+    description: "Propositional and predicate logic — validity, soundness, formal proofs, truth tables, syllogisms"
+    triggers:
+      - "valid argument"
+      - "syllogism"
+      - "truth table"
+      - "logical form"
+      - "fallacy"
+      - "modus ponens"
+      - "predicate logic"
+    agent_affinity: aristotle
+
+  ethics:
+    domain: philosophy
+    description: "Moral reasoning — normative frameworks, applied ethics, meta-ethics, moral dilemmas"
+    triggers:
+      - "right or wrong"
+      - "moral"
+      - "ethical"
+      - "ought"
+      - "duty"
+      - "virtue"
+      - "consequentialism"
+      - "deontological"
+      - "categorical imperative"
+    agent_affinity: [kant, beauvoir]
+
+  epistemology:
+    domain: philosophy
+    description: "Theory of knowledge — justification, belief, skepticism, perception, rationalism, empiricism"
+    triggers:
+      - "knowledge"
+      - "justified belief"
+      - "skepticism"
+      - "epistemology"
+      - "certainty"
+      - "a priori"
+      - "empiricism"
+      - "rationalism"
+    agent_affinity: [aristotle, kant]
+
+  metaphysics:
+    domain: philosophy
+    description: "Nature of reality — existence, identity, causation, time, mind-body, free will, emptiness"
+    triggers:
+      - "existence"
+      - "reality"
+      - "identity"
+      - "free will"
+      - "causation"
+      - "substance"
+      - "mind-body"
+      - "emptiness"
+      - "dependent origination"
+    agent_affinity: nagarjuna
+
+  political-philosophy:
+    domain: philosophy
+    description: "Justice, governance, rights — social contract, liberty, authority, legitimacy, common good"
+    triggers:
+      - "justice"
+      - "rights"
+      - "social contract"
+      - "governance"
+      - "liberty"
+      - "authority"
+      - "legitimacy"
+      - "common good"
+    agent_affinity: confucius
+
+  critical-thinking:
+    domain: philosophy
+    description: "Argument analysis — identifying assumptions, evaluating evidence, recognizing bias, Socratic method"
+    triggers:
+      - "argument"
+      - "assumption"
+      - "bias"
+      - "evidence"
+      - "critical thinking"
+      - "Socratic method"
+      - "counterexample"
+      - "thought experiment"
+    agent_affinity: [socrates, dewey]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Socrates as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: socrates
+
+  agents:
+    - name: socrates
+      role: "department chair — classification, routing, Socratic dialogue, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: aristotle
+      role: "logician and epistemologist — formal logic, categories, systematic analysis"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: kant
+      role: "ethicist — deontological reasoning, categorical imperative, transcendental analysis"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: beauvoir
+      role: "existentialist — freedom, situated ethics, phenomenology, feminist philosophy"
+      model: opus
+      tools: [Read, Grep]
+
+    - name: confucius
+      role: "political philosopher — virtue governance, ritual propriety, relational ethics"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: nagarjuna
+      role: "metaphysician — emptiness, dependent origination, two truths, deconstructive analysis"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: dewey
+      role: "pedagogy guide — pragmatism, inquiry-based learning, democratic education"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  philosophy-seminar-team:
+    description: "Full department for complex multi-domain philosophical problems"
+    agents: [socrates, aristotle, kant, beauvoir, confucius, nagarjuna, dewey]
+    use_when: "multi-domain, deep analysis, or full-department seminar requests"
+
+  ethics-committee-team:
+    description: "Focused moral reasoning and applied ethics analysis"
+    agents: [kant, beauvoir, confucius, dewey]
+    use_when: "ethical dilemmas, moral reasoning, applied ethics, or value conflicts"
+
+  dialectic-team:
+    description: "Thesis-antithesis-synthesis pipeline — argue, counter, resolve"
+    agents: [socrates, aristotle, nagarjuna, dewey]
+    use_when: "argument construction, debate analysis, or dialectical investigation"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 philosophy Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college philosophy department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (socrates) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - logic
+      - ethics
+      - epistemology
+      - metaphysics
+      - political-philosophy
+      - critical-thinking
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "philosophy-department"
+  record_types:
+    - name: PhilosophyArgument
+      description: "Structured argument with premises, inference steps, and conclusion"
+
+    - name: PhilosophyAnalysis
+      description: "Deep analysis of a concept, text, or position with multiple perspectives"
+
+    - name: PhilosophyDilemma
+      description: "Ethical or conceptual dilemma with competing frameworks and resolution paths"
+
+    - name: PhilosophyExplanation
+      description: "Teaching artifact presenting a philosophical concept at a specified level"
+
+    - name: PhilosophySession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "philosophy"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Wonder & Questioning"
+    - "Logic & Reasoning"
+    - "Ethics"
+    - "Epistemology"
+    - "Aesthetics"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
