@@ -1,11 +1,14 @@
 ---
 name: taxonomic-classification
 description: Naming and classifying organisms through binomial nomenclature, the Linnaean hierarchy, type specimens, and the rules governing taxonomic authority and revision. Covers the structure of a scientific name, the ranks from domain to subspecies, the codes (ICZN, ICN, ICNP), and the modern phylogenetic refinements that reshape the classical system. Use when the task is to place a known organism in its formal hierarchy or to reason about how names change over time.
-category: nature-studies
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: nature-studies
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/nature-studies/taxonomic-classification/SKILL.md
+superseded_by: null
 ---
 # Taxonomic Classification
 

@@ -4,8 +4,11 @@ type: team
 category: nature-studies
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/teams/nature-studies/nature-studies-workshop-team/README.md
 description: Four-agent identification-and-teaching workshop team for naturalist problems centered on "what is this and how do I know?" Linnaeus classifies and synthesizes, Peterson applies the field-guide methodology, Audubon handles bird-specific identification and voice, and Louv adapts the output for the learner's level. Use for identification-heavy workshops, field-guide-style artifact building, and beginner-to-intermediate teaching sessions where diagnosis and pedagogy are the focus. Not for behavioral interpretation, longitudinal studies, or research-level biogeography.
+superseded_by: null
 ---
 # Nature Studies Workshop Team
 

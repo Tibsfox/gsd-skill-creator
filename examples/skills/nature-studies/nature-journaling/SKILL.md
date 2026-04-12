@@ -1,11 +1,14 @@
 ---
 name: nature-journaling
 description: The discipline of keeping a field notebook — words, pictures, numbers, metadata, and questions captured during sustained outdoor observation. Covers the Laws notebook method, the sit-spot practice, phenology recording, sketch-first-name-later discipline, and the long-term research value of accumulated journals. Use when the task is to teach or structure ongoing field observation rather than answer a one-shot identification.
-category: nature-studies
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: nature-studies
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/nature-studies/nature-journaling/SKILL.md
+superseded_by: null
 ---
 # Nature Journaling
 

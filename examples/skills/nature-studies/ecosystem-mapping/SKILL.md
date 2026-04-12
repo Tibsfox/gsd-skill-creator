@@ -1,11 +1,14 @@
 ---
 name: ecosystem-mapping
 description: Reading a habitat — identifying biome, plant community, food web structure, successional stage, and the keystone species that hold the system together. Covers the elevational and latitudinal gradients that Humboldt first mapped, the structural vocabulary for describing a habitat, the core concepts of food-web and trophic analysis, and the practice of diagnosing habitat health from indicator species. Use when the task is to understand a place rather than a species.
-category: nature-studies
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: nature-studies
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/nature-studies/ecosystem-mapping/SKILL.md
+superseded_by: null
 ---
 # Ecosystem Mapping
 

@@ -1,11 +1,14 @@
 ---
 name: bird-observation
 description: Birding by sight and sound — gestalt, song and call vocabulary, behavioral and habitat clues, and the discipline of producing eBird-grade records. Covers the vocabulary of bird field marks, the primary categories of vocalization, the habits of habitat-filtering, and the protocol for submitting records to a citizen-science database without degrading data quality. Use when the task is bird-specific observation or record-keeping.
-category: nature-studies
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: nature-studies
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/nature-studies/bird-observation/SKILL.md
+superseded_by: null
 ---
 # Bird Observation
 

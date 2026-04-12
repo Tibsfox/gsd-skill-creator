@@ -4,8 +4,11 @@ type: team
 category: nature-studies
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/teams/nature-studies/nature-studies-analysis-team/README.md
 description: Full Nature Studies Department analysis team for multi-wing naturalist investigations spanning identification, behavior, biogeography, and teaching. Linnaeus classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Louv. Use for research-level questions, advanced multi-wing work, or any naturalist problem where the wing is not obvious and different perspectives may yield different insights. Not for routine one-shot identification, pure habitat questions, or pure pedagogy.
+superseded_by: null
 ---
 # Nature Studies Analysis Team
 

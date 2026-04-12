@@ -7,7 +7,10 @@ type: agent
 category: nature-studies
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/agents/nature-studies/von-humboldt-nat/AGENT.md
+superseded_by: null
 ---
 # von Humboldt (nat) -- Biogeography & Habitat Specialist
 
