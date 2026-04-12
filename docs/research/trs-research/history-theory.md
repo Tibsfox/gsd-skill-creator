@@ -3221,3 +3221,37 @@ The field owes an enormous debt to Josh Fisher, Bob Rau, John Ellis, Wen-mei Hwu
 
 *Document prepared for the PNW Research Series, April 2026.*
 *Trace Scheduling Research Project (TRS).*
+
+---
+
+## Study Guide — Trace Scheduling History & Theory
+
+### Key figures
+
+- **Joseph Fisher** — trace scheduling 1981, Multiflow
+  (founder), HP Labs.
+- **Bob Rau** — Cydrome, software pipelining, IMPACT.
+- **Wen-mei Hwu** — IMPACT compiler, EPIC.
+- **Michael Schlansker / Bob Rau** — EPIC (Itanium
+  precursor).
+
+### Questions
+
+- Why did Multiflow (1984-1990) fail commercially?
+- Why did Itanium (2001-2020) fail in the market?
+- Why did VLIW ideas survive in DSPs and AI
+  accelerators?
+
+## DIY — Read Fisher HOPL essay
+
+Joseph Fisher's *Very Long Instruction Word Architectures
+and the ELI-512* is on the ACM. Read it.
+
+## TRY — Analyze one Itanium post-mortem
+
+Several post-mortems exist. Read one. Note the
+compiler's share of the blame versus the hardware's.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)

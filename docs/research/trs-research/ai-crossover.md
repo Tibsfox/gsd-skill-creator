@@ -4763,3 +4763,34 @@ clusters.*
 knowledge, novel. It is offered as a framework for cross-disciplinary
 thinking, not as a finished theory. The mapping is rich enough to be
 productive and honest enough about its limits to be trustworthy.*
+
+---
+
+## Study Guide — Trace Scheduling for AI Orchestration
+
+### Core mapping
+
+| Compiler concept | AI orchestration analog |
+|---|---|
+| Basic block | Single agent message round |
+| Trace | Hot-path agent conversation |
+| Compensation code | Error-handler message for branch miss |
+| Speculative execution | Predictive agent prefetch |
+| Scheduling | Agent task ordering and batching |
+
+## DIY — Map one agent flow to a trace
+
+Pick any multi-step agent pipeline you have. Identify
+the hot path. Identify the rarely-taken branches.
+Design compensation actions for the miss cases.
+
+## TRY — Build a speculative agent
+
+Write an agent that starts the likely next step before
+the previous step completes. Handle the miss case
+gracefully.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
