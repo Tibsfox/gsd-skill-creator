@@ -107,4 +107,21 @@ Search and query is the interface where human intent meets indexed data, and eve
 - [Cypher (query language) — Wikipedia](https://en.wikipedia.org/wiki/Cypher_(query_language))
 - [Graph Query Language (GQL) — Wikipedia](https://en.wikipedia.org/wiki/Graph_Query_Language)
 - [GQL: The ISO Standard for Graphs Has Arrived — Neo4j](https://neo4j.com/blog/cypher-and-gql/cypher-path-gql/)
+
+## Study Guide — Search & Query
+
+### Query languages
+
+- SQL, Cypher, GQL, SPARQL, PromQL.
+- BM25, TF-IDF (classic scoring).
+- Dense retrieval, ColBERT, hybrid search.
+
+## DIY — Implement BM25
+
+50 lines of Python. Index 100 documents, run queries.
+
+## TRY — Build a hybrid search
+
+Combine BM25 (keyword) with pgvector (semantic). Score
+blend with Reciprocal Rank Fusion.
 - [Burges, From RankNet to LambdaRank to LambdaMART: An Overview (Microsoft Research)](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/MSR-TR-2010-82.pdf)
