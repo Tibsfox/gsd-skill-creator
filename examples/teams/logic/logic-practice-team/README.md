@@ -1,12 +1,13 @@
 ---
 name: logic-practice-team
-description: Sequential pedagogy pipeline that turns a logic concept into a repeatable practice routine. Frege classifies the concept, a domain specialist prepares the technical content, langer adapts it to the learner's level, and the loop produces an explanation, worked examples, and scaffolded practice problems. The cheapest team, purpose-built for learning.
 type: team
 category: logic
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/teams/logic/logic-practice-team/README.md
+description: Sequential pedagogy pipeline that turns a logic concept into a repeatable practice routine. Frege classifies the concept, a domain specialist prepares the technical content, langer adapts it to the learner's level, and the loop produces an explanation, worked examples, and scaffolded practice problems. The cheapest team, purpose-built for learning.
 superseded_by: null
 ---
 # Logic Practice Team
