@@ -1,0 +1,268 @@
+# Data Science Department Chipset Configuration
+# 13th department instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template, remapped
+# to data science domain with emphasis on ethics integration.
+
+name: data-science-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated data science department providing domain-routed
+  expertise through seven named agents (Nightingale, Tukey, Breiman,
+  Tufte, Fisher, Benjamin, Cairo), six knowledge skills, and three
+  pre-composed teams. Persists work via Grove records and integrates
+  with the college data science department concept graph. Ethics
+  review is a standing requirement for all work involving human data.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  data-wrangling:
+    domain: data-science
+    description: "Data cleaning, transformation, joins, missing data, tidy data"
+    triggers:
+      - "clean this data"
+      - "missing values"
+      - "missing data"
+      - "join tables"
+      - "merge datasets"
+      - "tidy data"
+      - "data quality"
+      - "dedup"
+      - "normalize"
+    agent_affinity: tukey
+
+  statistical-modeling:
+    domain: data-science
+    description: "Regression, ANOVA, GLMs, Bayesian methods, model selection"
+    triggers:
+      - "regression"
+      - "ANOVA"
+      - "generalized linear"
+      - "Bayesian"
+      - "confidence interval"
+      - "p-value"
+      - "model selection"
+      - "AIC"
+      - "BIC"
+    agent_affinity: [tukey, fisher, breiman]
+
+  machine-learning-foundations:
+    domain: data-science
+    description: "Supervised/unsupervised learning, bias-variance, cross-validation, ensembles"
+    triggers:
+      - "random forest"
+      - "gradient boosting"
+      - "cross-validation"
+      - "train test split"
+      - "classification"
+      - "clustering"
+      - "neural network"
+      - "overfitting"
+      - "feature importance"
+    agent_affinity: breiman
+
+  data-visualization:
+    domain: data-science
+    description: "Grammar of graphics, chart selection, color theory, dashboards"
+    triggers:
+      - "chart"
+      - "plot"
+      - "graph"
+      - "dashboard"
+      - "visualization"
+      - "data-ink"
+      - "color palette"
+      - "small multiples"
+    agent_affinity: [tufte, nightingale]
+
+  experimental-design-ds:
+    domain: data-science
+    description: "A/B testing, randomization, sample size, confounding, causal inference"
+    triggers:
+      - "A/B test"
+      - "experiment"
+      - "sample size"
+      - "power analysis"
+      - "randomize"
+      - "causal"
+      - "confounding"
+      - "control group"
+    agent_affinity: fisher
+
+  ethics-governance:
+    domain: data-science
+    description: "Bias detection, fairness metrics, privacy, consent, transparency"
+    triggers:
+      - "bias"
+      - "fairness"
+      - "privacy"
+      - "consent"
+      - "GDPR"
+      - "algorithmic bias"
+      - "disparate impact"
+      - "model card"
+      - "accountability"
+    agent_affinity: benjamin
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Nightingale as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: nightingale
+
+  agents:
+    - name: nightingale
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: tukey
+      role: "EDA specialist — profiling, distributions, outliers, feature engineering"
+      model: opus
+      tools: [Read, Bash, Write]
+
+    - name: breiman
+      role: "ML specialist — algorithm selection, ensemble methods, model evaluation"
+      model: opus
+      tools: [Read, Bash, Write]
+
+    - name: tufte
+      role: "visualization specialist — chart design, critique, data-ink ratio"
+      model: sonnet
+      tools: [Read, Bash, Write]
+
+    - name: fisher
+      role: "experiment specialist — A/B testing, ANOVA, causal inference"
+      model: sonnet
+      tools: [Read, Bash, Write]
+
+    - name: benjamin
+      role: "ethics specialist — bias audit, fairness metrics, privacy review"
+      model: sonnet
+      tools: [Read, Grep, Bash, Write]
+
+    - name: cairo
+      role: "pedagogy specialist — data literacy, explanation, learning paths"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  data-analysis-team:
+    description: "Full department for complex multi-domain problems"
+    agents: [nightingale, tukey, breiman, tufte, fisher, benjamin, cairo]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  modeling-team:
+    description: "Focused model construction, comparison, and validation"
+    agents: [breiman, tukey, fisher, cairo]
+    use_when: "model building, feature engineering, or statistical inference"
+
+  visualization-team:
+    description: "Data display, dashboard design, and visual communication"
+    agents: [tufte, nightingale, benjamin, cairo]
+    use_when: "visualization design, dashboard projects, or visual audits"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 data science Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college data science department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (nightingale) must be CAPCOM"
+        action: "block"
+
+      - check: "ethics_agent_present"
+        description: "Benjamin must be present in every team that handles human data"
+        action: "warn"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - wrangling
+      - modeling
+      - ml
+      - visualization
+      - experiment
+      - ethics
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "data-science-department"
+  record_types:
+    - name: DataAnalysis
+      description: "EDA profile, data quality findings, feature engineering recommendations"
+
+    - name: DataModel
+      description: "Model specification, hyperparameters, cross-validated performance, feature importance"
+
+    - name: DataVisualization
+      description: "Chart design specification with honesty and accessibility checks"
+
+    - name: DataExplanation
+      description: "Teaching artifact, ethics audit, or level-adapted narrative"
+
+    - name: DataSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "data-science"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Data Collection"
+    - "Exploratory Analysis"
+    - "Visualization & Communication"
+    - "Statistical Inference"
+    - "Data Ethics"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
