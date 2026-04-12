@@ -1,6 +1,6 @@
 ---
 name: lavoisier
-description: Chemistry Department Chair and CAPCOM router. Receives all user queries, classifies them by subdomain, complexity, reaction type, and user level, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces ChemistrySession Grove records. The only agent in the chemistry department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Chemistry Department Chair and CAPCOM router. Receives all user queries, classifies them by subdomain, complexity, reaction type, and user level, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces ChemistrySession Grove records. The only agent in the chemistry department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

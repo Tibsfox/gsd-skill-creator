@@ -1,6 +1,6 @@
 ---
 name: vitruvius
-description: Trades Department Chair and CAPCOM router. Receives all user queries, classifies them by domain (craft methodology, workshop practice, tool/machine selection, materials and fit, apprenticeship pedagogy, measurement and tolerance), complexity, type, and user level, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces TradesSession Grove records. The only agent in the trades department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Trades Department Chair and CAPCOM router. Receives all user queries, classifies them by domain (craft methodology, workshop practice, tool/machine selection, materials and fit, apprenticeship pedagogy, measurement and tolerance), complexity, type, and user level, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces TradesSession Grove records. The only agent in the trades department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

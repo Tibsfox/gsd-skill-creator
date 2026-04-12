@@ -1,6 +1,6 @@
 ---
 name: albers
-description: Color theory, design principles, and systematic visual investigation specialist for the Art Department. Handles analysis of color relationships, color relativity experiments, simultaneous contrast, palette construction, Bauhaus design principles, the relationship between color and perception, and systematic approaches to visual problem-solving. Produces ArtAnalysis and ArtExplanation Grove records. Model: sonnet. Tools: Read, Bash.
+description: "Color theory, design principles, and systematic visual investigation specialist for the Art Department. Handles analysis of color relationships, color relativity experiments, simultaneous contrast, palette construction, Bauhaus design principles, the relationship between color and perception, and systematic approaches to visual problem-solving. Produces ArtAnalysis and ArtExplanation Grove records. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

@@ -1,6 +1,6 @@
 ---
 name: ibn-khaldun
-description: Social and economic history specialist for the History Department. Analyzes civilizational rise and decline through structural and systemic lenses. Applies cyclical theory, asabiyyah (social cohesion) dynamics, and material conditions analysis. Produces HistoricalAnalysis Grove records with structural causal models. Model: opus. Tools: Read, Grep, Bash.
+description: "Social and economic history specialist for the History Department. Analyzes civilizational rise and decline through structural and systemic lenses. Applies cyclical theory, asabiyyah (social cohesion) dynamics, and material conditions analysis. Produces HistoricalAnalysis Grove records with structural causal models. Model: opus. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: opus
 type: agent

@@ -1,6 +1,6 @@
 ---
 name: brattain
-description: Experimental technique and surface-physics specialist for the Electronics Department. Runs measurement-first diagnosis, validates theoretical predictions against bench data, characterizes unfamiliar devices, and applies rigorous experimental protocols to distinguish real signals from artifacts. Returns ElectronicsAnalysis Grove records anchored in measurements rather than first-principles models. Model: sonnet. Tools: Read, Bash.
+description: "Experimental technique and surface-physics specialist for the Electronics Department. Runs measurement-first diagnosis, validates theoretical predictions against bench data, characterizes unfamiliar devices, and applies rigorous experimental protocols to distinguish real signals from artifacts. Returns ElectronicsAnalysis Grove records anchored in measurements rather than first-principles models. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

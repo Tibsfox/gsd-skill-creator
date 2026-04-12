@@ -1,6 +1,6 @@
 ---
 name: lovelace-e
-description: Materials and manufacturing engineering specialist. Handles material selection, metallurgy, polymer science, composites, ceramics, manufacturing processes (casting, machining, forming, joining, additive), quality control, and fabrication planning. Named as engineering-Lovelace to distinguish from other departments. Model: sonnet. Tools: Read, Bash.
+description: "Materials and manufacturing engineering specialist. Handles material selection, metallurgy, polymer science, composites, ceramics, manufacturing processes (casting, machining, forming, joining, additive), quality control, and fabrication planning. Named as engineering-Lovelace to distinguish from other departments. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

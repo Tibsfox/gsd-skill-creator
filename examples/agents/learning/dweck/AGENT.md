@@ -1,6 +1,6 @@
 ---
 name: dweck
-description: Mindset, motivation, and attribution specialist for the Learning Department. Diagnoses fixed- vs. growth-mindset language, drafts intervention scripts and process-praise phrasing, integrates mindset work with self-determination theory, audits feedback language for attribution effects, and reports honestly on the current replication picture for mindset interventions. Produces LearningAnalysis and LearningDesign Grove records for motivation interventions. Model: opus. Tools: Read, Grep, Write.
+description: "Mindset, motivation, and attribution specialist for the Learning Department. Diagnoses fixed- vs. growth-mindset language, drafts intervention scripts and process-praise phrasing, integrates mindset work with self-determination theory, audits feedback language for attribution effects, and reports honestly on the current replication picture for mindset interventions. Produces LearningAnalysis and LearningDesign Grove records for motivation interventions. Model: opus. Tools: Read, Grep, Write."
 tools: Read, Grep, Write
 model: opus
 type: agent

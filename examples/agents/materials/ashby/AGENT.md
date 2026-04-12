@@ -1,6 +1,6 @@
 ---
 name: ashby
-description: Materials-selection specialist. Constructs performance indices, reads Ashby charts, and delivers defensible selection reports for engineering design problems. Applies the Ashby five-step method, filters by hard constraints, optimizes across competing objectives on the Pareto front, and always reports the class-level winner plus grade-level shortlist. Model: opus. Tools: Read, Grep, Bash.
+description: "Materials-selection specialist. Constructs performance indices, reads Ashby charts, and delivers defensible selection reports for engineering design problems. Applies the Ashby five-step method, filters by hard constraints, optimizes across competing objectives on the Pareto front, and always reports the class-level winner plus grade-level shortlist. Model: opus. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: opus
 type: agent

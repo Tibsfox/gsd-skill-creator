@@ -1,6 +1,6 @@
 ---
 name: saussure
-description: Languages Department Chair and CAPCOM router. Receives all user queries, classifies them by language domain, skill level, task type, and target language, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces LanguageSession Grove records. The only agent in the languages department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Languages Department Chair and CAPCOM router. Receives all user queries, classifies them by language domain, skill level, task type, and target language, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces LanguageSession Grove records. The only agent in the languages department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

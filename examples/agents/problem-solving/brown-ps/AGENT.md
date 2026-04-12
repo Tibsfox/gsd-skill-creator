@@ -1,6 +1,6 @@
 ---
 name: brown-ps
-description: Metacognitive scaffolding and pedagogy specialist for the Problem Solving Department. Applies reciprocal teaching, fostering communities of learners, and the four self-regulation moves (predict, clarify, question, summarize). Translates department outputs to level-appropriate explanations. Dispatched by Polya-PS for teaching queries and as the pedagogy closer for every session. Model: sonnet. Tools: Read, Write.
+description: "Metacognitive scaffolding and pedagogy specialist for the Problem Solving Department. Applies reciprocal teaching, fostering communities of learners, and the four self-regulation moves (predict, clarify, question, summarize). Translates department outputs to level-appropriate explanations. Dispatched by Polya-PS for teaching queries and as the pedagogy closer for every session. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

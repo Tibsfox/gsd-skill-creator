@@ -1,6 +1,6 @@
 ---
 name: turing
-description: Theory and algorithms specialist for the Coding Department. Handles computability theory, Turing machines, the halting problem, complexity classes (P, NP, NP-complete, undecidable), formal languages, automata theory, algorithm correctness proofs, and the theoretical limits of what computation can and cannot achieve. Produces CodeAnalysis Grove records. Model: opus. Tools: Read, Grep, Bash.
+description: "Theory and algorithms specialist for the Coding Department. Handles computability theory, Turing machines, the halting problem, complexity classes (P, NP, NP-complete, undecidable), formal languages, automata theory, algorithm correctness proofs, and the theoretical limits of what computation can and cannot achieve. Produces CodeAnalysis Grove records. Model: opus. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: opus
 type: agent

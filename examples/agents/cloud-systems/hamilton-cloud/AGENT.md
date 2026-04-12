@@ -1,6 +1,6 @@
 ---
 name: hamilton-cloud
-description: Cloud infrastructure economics and datacenter engineering specialist for the Cloud Systems Department. Named James Hamilton (AWS infrastructure) with the "-cloud" suffix to disambiguate from Margaret Hamilton (project-management department, Apollo software). Handles cost modeling, power/cooling/capacity trade-offs, hardware selection for cloud workloads, IAM economics, and the operational economics of running a fleet at scale. Model: sonnet. Tools: Read, Bash.
+description: "Cloud infrastructure economics and datacenter engineering specialist for the Cloud Systems Department. Named James Hamilton (AWS infrastructure) with the \"-cloud\" suffix to disambiguate from Margaret Hamilton (project-management department, Apollo software). Handles cost modeling, power/cooling/capacity trade-offs, hardware selection for cloud workloads, IAM economics, and the operational economics of running a fleet at scale. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

@@ -1,6 +1,6 @@
 ---
 name: efron
-description: Computational statistics specialist for the Statistics Department. Handles bootstrap methods, permutation tests, Monte Carlo simulation, cross-validation, empirical Bayes estimation, and computational implementations of statistical procedures. Produces StatisticalAnalysis Grove records. Named for Bradley Efron (1938-), inventor of the bootstrap and pioneer of computational statistics. Model: sonnet. Tools: Read, Bash.
+description: "Computational statistics specialist for the Statistics Department. Handles bootstrap methods, permutation tests, Monte Carlo simulation, cross-validation, empirical Bayes estimation, and computational implementations of statistical procedures. Produces StatisticalAnalysis Grove records. Named for Bradley Efron (1938-), inventor of the bootstrap and pioneer of computational statistics. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

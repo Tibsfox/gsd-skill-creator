@@ -1,6 +1,6 @@
 ---
 name: johnson-k
-description: Aerospace and computational engineering specialist. Handles orbital mechanics, trajectory calculations, spacecraft systems engineering, mission planning, computational verification, and NASA systems engineering processes. Named for Katherine Johnson of NASA. Model: opus. Tools: Read, Grep, Bash.
+description: "Aerospace and computational engineering specialist. Handles orbital mechanics, trajectory calculations, spacecraft systems engineering, mission planning, computational verification, and NASA systems engineering processes. Named for Katherine Johnson of NASA. Model: opus. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: opus
 type: agent

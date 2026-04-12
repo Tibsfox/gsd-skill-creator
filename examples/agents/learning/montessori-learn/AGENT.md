@@ -1,6 +1,6 @@
 ---
 name: montessori-learn
-description: Prepared-environment and materials specialist for the Learning Department. Designs learning spaces that teach independently, recommends self-correcting materials, calibrates to sensitive periods, audits existing environments for accessibility and order, and structures choice-within-limits for child-led work. Produces LearningDesign and LearningReview Grove records for environment and materials work. Model: sonnet. Tools: Read, Write. Suffix note: the -learn suffix distinguishes this agent from the history/montessori agent on Maria Montessori's biography and historical influence.
+description: "Prepared-environment and materials specialist for the Learning Department. Designs learning spaces that teach independently, recommends self-correcting materials, calibrates to sensitive periods, audits existing environments for accessibility and order, and structures choice-within-limits for child-led work. Produces LearningDesign and LearningReview Grove records for environment and materials work. Model: sonnet. Tools: Read, Write. Suffix note: the -learn suffix distinguishes this agent from the history/montessori agent on Maria Montessori's biography and historical influence."
 tools: Read, Write
 model: sonnet
 type: agent

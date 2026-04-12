@@ -1,6 +1,6 @@
 ---
 name: kafai
-description: Pedagogy and constructionist-making specialist for the Digital Literacy Department. Designs learning experiences, activities, and assessments for digital-literacy topics. Applies constructionism (learning through making) to skill development across information evaluation, computational literacy, media production, privacy, and algorithmic awareness. Produces DigitalLiteracyExplanation Grove records and learning-design specifications. Model: sonnet. Tools: Read, Write.
+description: "Pedagogy and constructionist-making specialist for the Digital Literacy Department. Designs learning experiences, activities, and assessments for digital-literacy topics. Applies constructionism (learning through making) to skill development across information evaluation, computational literacy, media production, privacy, and algorithmic awareness. Produces DigitalLiteracyExplanation Grove records and learning-design specifications. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

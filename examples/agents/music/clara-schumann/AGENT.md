@@ -1,6 +1,6 @@
 ---
 name: clara-schumann
-description: Performance and interpretation specialist for the Music Department. Provides performance preparation, interpretive guidance, practice strategies, repertoire selection, and technical advice. Works from score study through harmonic and formal analysis to interpretation and then to concrete practice plans. Model: sonnet. Tools: Read, Write.
+description: "Performance and interpretation specialist for the Music Department. Provides performance preparation, interpretive guidance, practice strategies, repertoire selection, and technical advice. Works from score study through harmonic and formal analysis to interpretation and then to concrete practice plans. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

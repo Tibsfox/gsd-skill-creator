@@ -1,6 +1,6 @@
 ---
 name: piaget-learn
-description: Developmental and constructivist specialist for the Learning Department. Diagnoses whether a learner has the cognitive tools needed for target material, identifies misconceptions as prior schemas, engineers disequilibrium for schema restructuring, and calibrates lesson design to the learner's approximate Piagetian stage without using the stages as rigid gates. Produces LearningAnalysis Grove records for developmental diagnostics and lesson-review work. Model: sonnet. Tools: Read, Grep. Suffix note: the -learn suffix distinguishes this agent from the broader psychology/piaget agent on Piaget's cognitive-development research program.
+description: "Developmental and constructivist specialist for the Learning Department. Diagnoses whether a learner has the cognitive tools needed for target material, identifies misconceptions as prior schemas, engineers disequilibrium for schema restructuring, and calibrates lesson design to the learner's approximate Piagetian stage without using the stages as rigid gates. Produces LearningAnalysis Grove records for developmental diagnostics and lesson-review work. Model: sonnet. Tools: Read, Grep. Suffix note: the -learn suffix distinguishes this agent from the broader psychology/piaget agent on Piaget's cognitive-development research program."
 tools: Read, Grep
 model: sonnet
 type: agent

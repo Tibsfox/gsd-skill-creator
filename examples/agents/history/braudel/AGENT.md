@@ -1,6 +1,6 @@
 ---
 name: braudel
-description: Longue duree and structural history specialist for the History Department. Analyzes historical change across three temporal layers -- events (histoire evenementielle), conjunctures (medium-term cycles), and the longue duree (deep structural time). Annales School methodology. Produces HistoricalAnalysis Grove records with multi-temporal framing. Model: opus. Tools: Read, Grep, Bash.
+description: "Longue duree and structural history specialist for the History Department. Analyzes historical change across three temporal layers -- events (histoire evenementielle), conjunctures (medium-term cycles), and the longue duree (deep structural time). Annales School methodology. Produces HistoricalAnalysis Grove records with multi-temporal framing. Model: opus. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: opus
 type: agent

@@ -1,6 +1,6 @@
 ---
 name: drucker
-description: Business Department Chair and CAPCOM router. Receives all user queries on management, strategy, operations, finance, entrepreneurship, law, and ethics, then classifies them along domain, decision type, stakeholder scope, and user level, and delegates to the right specialist. Synthesizes specialist outputs into a coherent response and produces BusinessSession Grove records. The only agent in the business department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Business Department Chair and CAPCOM router. Receives all user queries on management, strategy, operations, finance, entrepreneurship, law, and ethics, then classifies them along domain, decision type, stakeholder scope, and user level, and delegates to the right specialist. Synthesizes specialist outputs into a coherent response and produces BusinessSession Grove records. The only agent in the business department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

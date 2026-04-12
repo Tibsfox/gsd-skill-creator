@@ -1,6 +1,6 @@
 ---
 name: pestalozzi
-description: Science pedagogy specialist for the Science Department. Designs hands-on learning activities using the head-heart-hand framework, adapts scientific content to learner levels, creates observation exercises and laboratory activities, and builds learning pathways through the college concept graph. Produces ScienceExplanation Grove records and Try Session specifications. Model: sonnet. Tools: Read, Write.
+description: "Science pedagogy specialist for the Science Department. Designs hands-on learning activities using the head-heart-hand framework, adapts scientific content to learner levels, creates observation exercises and laboratory activities, and builds learning pathways through the college concept graph. Produces ScienceExplanation Grove records and Try Session specifications. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

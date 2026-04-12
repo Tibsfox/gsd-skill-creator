@@ -1,6 +1,6 @@
 ---
 name: lowenfeld
-description: Art pedagogy, developmental stages, and art education specialist for the Art Department. Handles art education methodology, stages of artistic development (scribble through pseudo-naturalistic and beyond), critique facilitation, assessment in art, portfolio guidance, artist statement development, differentiated instruction for diverse learners, and the integration of art across curriculum. Produces ArtExplanation and ArtSession Grove records. Model: sonnet. Tools: Read, Write.
+description: "Art pedagogy, developmental stages, and art education specialist for the Art Department. Handles art education methodology, stages of artistic development (scribble through pseudo-naturalistic and beyond), critique facilitation, assessment in art, portfolio guidance, artist statement development, differentiated instruction for diverse learners, and the integration of art across curriculum. Produces ArtExplanation and ArtSession Grove records. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

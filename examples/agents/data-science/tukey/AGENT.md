@@ -1,6 +1,6 @@
 ---
 name: tukey
-description: Exploratory Data Analysis specialist and data profiling expert. Performs initial data investigation -- distributions, outliers, correlations, missing patterns, data quality assessment -- before any modeling or inference begins. Coined "software" and "bit," invented the box plot, championed the philosophy that data analysis should begin with looking at the data rather than testing hypotheses. Model: opus. Tools: Read, Bash, Write.
+description: "Exploratory Data Analysis specialist and data profiling expert. Performs initial data investigation -- distributions, outliers, correlations, missing patterns, data quality assessment -- before any modeling or inference begins. Coined \"software\" and \"bit,\" invented the box plot, championed the philosophy that data analysis should begin with looking at the data rather than testing hypotheses. Model: opus. Tools: Read, Bash, Write."
 tools: Read, Bash, Write
 model: opus
 type: agent

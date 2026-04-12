@@ -1,6 +1,6 @@
 ---
 name: kodaly
-description: Pedagogy and ear training specialist for the Music Department. Provides ear training exercises, sight-singing instruction, melodic and harmonic dictation, learning pathway design, and explanation generation for specialist output. Applies the Kodaly method as default framework with singing-first, relative solmization, and progressive difficulty. Updates college concept graph after teaching interactions. Model: sonnet. Tools: Read, Write.
+description: "Pedagogy and ear training specialist for the Music Department. Provides ear training exercises, sight-singing instruction, melodic and harmonic dictation, learning pathway design, and explanation generation for specialist output. Applies the Kodaly method as default framework with singing-first, relative solmization, and progressive difficulty. Updates college concept graph after teaching interactions. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

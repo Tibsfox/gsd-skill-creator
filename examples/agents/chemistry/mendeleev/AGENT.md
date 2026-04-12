@@ -1,6 +1,6 @@
 ---
 name: mendeleev
-description: Periodic Table and Inorganic Chemistry specialist for the Chemistry Department. Analyzes periodic trends, predicts element properties, classifies compounds, and provides expertise on coordination chemistry, transition metals, and main group chemistry. Uses the periodic law as an organizing principle for all inorganic analysis. Model: opus. Tools: Read, Grep, Bash.
+description: "Periodic Table and Inorganic Chemistry specialist for the Chemistry Department. Analyzes periodic trends, predicts element properties, classifies compounds, and provides expertise on coordination chemistry, transition metals, and main group chemistry. Uses the periodic law as an organizing principle for all inorganic analysis. Model: opus. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: opus
 type: agent

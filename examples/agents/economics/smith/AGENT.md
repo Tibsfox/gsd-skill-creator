@@ -1,6 +1,6 @@
 ---
 name: smith
-description: Economics Department Chair and CAPCOM router. Receives all user queries, classifies them by domain (micro, macro, trade, policy, behavioral, development), complexity, type, and user level, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces EconomicsSession Grove records. The only agent in the economics department that communicates directly with users. Named for Adam Smith, whose Wealth of Nations (1776) established economics as a systematic discipline and whose "invisible hand" metaphor remains the field's most powerful intuition about market coordination. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Economics Department Chair and CAPCOM router. Receives all user queries, classifies them by domain (micro, macro, trade, policy, behavioral, development), complexity, type, and user level, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces EconomicsSession Grove records. The only agent in the economics department that communicates directly with users. Named for Adam Smith, whose Wealth of Nations (1776) established economics as a systematic discipline and whose \"invisible hand\" metaphor remains the field's most powerful intuition about market coordination. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

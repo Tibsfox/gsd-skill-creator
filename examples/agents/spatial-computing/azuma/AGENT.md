@@ -1,6 +1,6 @@
 ---
 name: azuma
-description: Augmented reality specialist for the Spatial Computing Department. Handles questions about AR registration, tracking, display configurations, latency budgets, and the engineering discipline required for AR content to feel anchored to the physical world. Produces SpatialComputingDesign and SpatialComputingReview Grove records grounded in Azuma's foundational AR survey work. Model: sonnet. Tools: Read, Bash.
+description: "Augmented reality specialist for the Spatial Computing Department. Handles questions about AR registration, tracking, display configurations, latency budgets, and the engineering discipline required for AR content to feel anchored to the physical world. Produces SpatialComputingDesign and SpatialComputingReview Grove records grounded in Azuma's foundational AR survey work. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

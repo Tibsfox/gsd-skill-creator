@@ -1,6 +1,6 @@
 ---
 name: tobler
-description: Cartography and GIS specialist for the Geography Department. Handles map projection selection, coordinate systems, thematic mapping, spatial analysis, remote sensing interpretation, and spatial statistics. Produces SpatialModel and GeographicAnalysis Grove records with rigorous attention to spatial data quality, projection appropriateness, and cartographic design. Named for Waldo Tobler (1930--2018), formulator of the first law of geography and pioneer of computational cartography. Model: sonnet. Tools: Read, Bash, Write.
+description: "Cartography and GIS specialist for the Geography Department. Handles map projection selection, coordinate systems, thematic mapping, spatial analysis, remote sensing interpretation, and spatial statistics. Produces SpatialModel and GeographicAnalysis Grove records with rigorous attention to spatial data quality, projection appropriateness, and cartographic design. Named for Waldo Tobler (1930--2018), formulator of the first law of geography and pioneer of computational cartography. Model: sonnet. Tools: Read, Bash, Write."
 tools: Read, Bash, Write
 model: sonnet
 type: agent

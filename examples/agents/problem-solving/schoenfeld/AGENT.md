@@ -1,6 +1,6 @@
 ---
 name: schoenfeld
-description: Mathematical problem solving specialist with explicit control layer. Applies Polya's four phases plus Schoenfeld's monitoring discipline to math and puzzle problems. Detects grinding, dead ends, and lost control. Dispatched by Polya-PS for phase 3 (execute) on math problems and by Newell when means-ends analysis stalls. Model: sonnet. Tools: Read, Bash.
+description: "Mathematical problem solving specialist with explicit control layer. Applies Polya's four phases plus Schoenfeld's monitoring discipline to math and puzzle problems. Detects grinding, dead ends, and lost control. Dispatched by Polya-PS for phase 3 (execute) on math problems and by Newell when means-ends analysis stalls. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

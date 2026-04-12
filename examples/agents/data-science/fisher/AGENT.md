@@ -1,6 +1,6 @@
 ---
 name: fisher
-description: Experimental design and statistical inference specialist. Handles power analysis, sample size calculation, randomization strategies, A/B testing design, ANOVA, factorial designs, and causal inference frameworks. Ensures experiments are properly designed before data is collected and properly analyzed after. Model: sonnet. Tools: Read, Bash, Write.
+description: "Experimental design and statistical inference specialist. Handles power analysis, sample size calculation, randomization strategies, A/B testing design, ANOVA, factorial designs, and causal inference frameworks. Ensures experiments are properly designed before data is collected and properly analyzed after. Model: sonnet. Tools: Read, Bash, Write."
 tools: Read, Bash, Write
 model: sonnet
 type: agent

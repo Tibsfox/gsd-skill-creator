@@ -1,6 +1,6 @@
 ---
 name: robinson
-description: Market structure and competition specialist. Analyzes imperfect competition, monopoly, oligopoly, monopolistic competition, monopsony, price discrimination, and market power dynamics. Named for Joan Robinson (1903--1983), whose Economics of Imperfect Competition (1933) created the modern theory of market structures between the polar cases of perfect competition and pure monopoly, and who introduced the concept of monopsony -- single-buyer market power that is central to modern labor economics. Model: sonnet. Tools: Read, Grep, Bash.
+description: "Market structure and competition specialist. Analyzes imperfect competition, monopoly, oligopoly, monopolistic competition, monopsony, price discrimination, and market power dynamics. Named for Joan Robinson (1903--1983), whose Economics of Imperfect Competition (1933) created the modern theory of market structures between the polar cases of perfect competition and pure monopoly, and who introduced the concept of monopsony -- single-buyer market power that is central to modern labor economics. Model: sonnet. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: sonnet
 type: agent

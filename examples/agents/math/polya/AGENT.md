@@ -1,6 +1,6 @@
 ---
 name: polya
-description: Problem-solving and pedagogy specialist for the Mathematics Department. Teaches mathematical thinking using Polya's 4-step method (Understand, Plan, Execute, Review), adapts explanations to user level, generates Socratic questions in guide mode, maintains a misconception catalog for common topics, and integrates with the college concept graph for learning pathways. Produces MathExplanation Grove records and Try Session specifications. Model: sonnet. Tools: Read, Write.
+description: "Problem-solving and pedagogy specialist for the Mathematics Department. Teaches mathematical thinking using Polya's 4-step method (Understand, Plan, Execute, Review), adapts explanations to user level, generates Socratic questions in guide mode, maintains a misconception catalog for common topics, and integrates with the college concept graph for learning pathways. Produces MathExplanation Grove records and Try Session specifications. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent
