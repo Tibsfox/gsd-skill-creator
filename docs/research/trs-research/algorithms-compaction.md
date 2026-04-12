@@ -5839,3 +5839,34 @@ the enduring legacy of trace scheduling.
 *Trace Selection Algorithms, Trace Compaction, and Scheduling Techniques.*
 *A comprehensive technical reference covering the theory and practice of*
 *global instruction scheduling for VLIW and superscalar architectures.*
+
+---
+
+## Study Guide — Trace Selection & Compaction
+
+### Key concepts
+
+1. **Trace selection.** Picking the hot path through a
+   program.
+2. **Profile-guided optimization.** Use runtime data to
+   pick the hot path.
+3. **List scheduling.** Assign instructions to slots
+   greedily by priority.
+4. **Software pipelining.** Overlap loop iterations for
+   throughput.
+
+## DIY — Profile-guided a C program
+
+Compile with `-fprofile-generate`, run, recompile with
+`-fprofile-use`. Compare performance.
+
+## TRY — Read Fisher's 1981 paper
+
+*Trace Scheduling: A Technique for Global Microcode
+Compaction*, Joseph Fisher, IEEE TC, 1981. The
+foundational paper.
+
+## Related College Departments
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
