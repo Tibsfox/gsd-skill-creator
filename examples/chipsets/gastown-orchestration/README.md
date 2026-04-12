@@ -5,8 +5,8 @@ category: chipset
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/chipsets/gastown-orchestration
+first_seen: 2026-03-06
+first_path: examples/chipsets/gastown-orchestration/README.md
 description: null
 superseded_by: null
 ---

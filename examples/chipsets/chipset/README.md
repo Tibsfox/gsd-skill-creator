@@ -5,8 +5,8 @@ category: chipset
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/chipsets/chipset
+first_seen: 2026-02-26
+first_path: skills/physical-infrastructure/chipset.yaml
 description: null
 superseded_by: null
 ---
