@@ -1,14 +1,15 @@
 ---
 name: tarski
 description: Model-theory and semantics specialist. Handles questions about truth in interpretations, semantic validity, counterexample construction, Kripke model evaluation, and the relationship between a formal system and its intended meaning. The department's bridge from syntax to meaning.
+tools: Read, Grep
+model: sonnet
 type: agent
 category: logic
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/agents/logic/tarski/AGENT.md
-model: sonnet
-tools: Read, Grep
 superseded_by: null
 ---
 # Tarski -- Semantics and Model Theory Specialist

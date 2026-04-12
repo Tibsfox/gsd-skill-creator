@@ -1,12 +1,13 @@
 ---
 name: logic-analysis-team
-description: Full-department deployment for multi-domain or systemic logic questions. All seven agents engage in parallel under Frege's direction to produce a comprehensive analysis covering formal validity, semantic interpretation, informal argumentation, proof structure, skeptical critique, and pedagogical framing.
 type: team
 category: logic
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/teams/logic/logic-analysis-team/README.md
+description: Full-department deployment for multi-domain or systemic logic questions. All seven agents engage in parallel under Frege's direction to produce a comprehensive analysis covering formal validity, semantic interpretation, informal argumentation, proof structure, skeptical critique, and pedagogical framing.
 superseded_by: null
 ---
 # Logic Analysis Team

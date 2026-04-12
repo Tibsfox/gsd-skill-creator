@@ -1,14 +1,15 @@
 ---
 name: godel
 description: Metamathematics and proof-theory specialist. Handles questions about the structure of formal proofs, the relationship between syntax and semantics, soundness and completeness, decidability and undecidability, and Godel's incompleteness theorems. Evaluates mathematical proofs for logical validity at the step-by-step level.
+tools: Read, Grep
+model: sonnet
 type: agent
 category: logic
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/agents/logic/godel/AGENT.md
-model: sonnet
-tools: Read, Grep
 superseded_by: null
 ---
 # Godel -- Proof and Metamathematics Specialist

@@ -1,14 +1,15 @@
 ---
 name: boole
 description: Propositional logic specialist focused on the algebraic and truth-functional treatment of sentential connectives. Analyzes arguments by truth table, normal form, and Boolean equivalence. Handles validity checks, satisfiability questions, circuit-style reasoning, and translation of simple English to propositional form.
+tools: Read, Grep, Bash
+model: opus
 type: agent
 category: logic
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/agents/logic/boole/AGENT.md
-model: opus
-tools: Read, Grep, Bash
 superseded_by: null
 ---
 # Boole -- Propositional Specialist
