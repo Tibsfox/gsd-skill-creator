@@ -15,6 +15,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `patterns/` | Pattern catalogs — SQL, API design, Docker, accessibility, CI/CD, infrastructure-as-code |
 | `orchestration/` | Agent orchestration — fleet mission, mayor coordinator, sling dispatch, GUPP propulsion, runtime HAL |
 | `state/` | State and persistence — beads-state, hook-persistence, nudge-sync, mail-async, token-budget |
+| `math/` | Mathematics domain knowledge — proof techniques, algebraic reasoning, geometric intuition, numerical analysis, pattern recognition, mathematical modeling |
 | `deprecated/` | Artifacts superseded by newer work. Preserved for reference. Not installed by default. |
 
 ## Agent categories
@@ -28,6 +29,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `ops/` | Operations agents — incident analyzer, deployment validator, SLO monitor, capacity planner, drift detector |
 | `ui/` | UI-facing agents — UI researcher, UI checker, UI auditor |
 | `audit/` | Audit and analysis agents — compliance auditor, infrastructure auditor, pipeline analyzer, performance profiler |
+| `math/` | Mathematics department agents — department chair (Hypatia), proof engineer (Euclid), number theorist (Gauss), analyst (Euler), algebraist (Noether), conjecture engine (Ramanujan), pedagogy guide (Polya) |
 | `deprecated/` | Superseded agents. Preserved for reference. |
 
 ## Team categories
@@ -38,6 +40,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `ops/` | DevOps pipeline, SRE operations, incident response teams |
 | `infra/` | Infrastructure review, release management, platform onboarding teams |
 | `migration/` | Migration and documentation generation teams |
+| `math/` | Mathematics teams — full investigation, proof workshop, discovery pipeline |
 | `deprecated/` | Superseded teams. Preserved for reference. |
 
 ## Chipset organization
