@@ -368,3 +368,170 @@ A working mathematician's craft discipline is built up over a decade or more. Sc
 - **Document 3** gives the technique catalog that a well-crafted proof deploys.
 - **Document 4** applies the techniques to specific structures — this document's principles are how to write those proofs well.
 - **Document 6** shows the alternative craft discipline of formalized mathematics, where the reader is a machine and many of this document's conventions are inverted.
+
+---
+
+## Study Guide — Craft and Pedagogy of Proof Writing
+
+### Prerequisites
+
+- At least 5 proofs written (any quality) — you need raw material to apply craft principles to.
+- Document 3 (techniques catalog) — the craft is about *presenting* a technique, not choosing one.
+- Willingness to read your own writing critically.
+
+### Key vocabulary
+
+| Term | Definition | Section |
+|---|---|---|
+| **Mugga mugga test** | Replace all math notation with nonsense syllables; the result should be grammatical English. | 2.2 |
+| **Knuth rules** | The 27 conventions from Knuth/Larrabee/Roberts (Stanford CS 209, 1987). | 2.1 |
+| **Polya's heuristics** | Four-phase problem-solving method: understand, plan, carry out, look back. | 3 |
+| **Lakatos's dialectic** | Conjecture → proof attempt → counterexample → refinement → repeat. | 4 |
+| **Proof scheme** | Harel & Sowder's taxonomy: external (ritual/authority/symbolic), empirical (inductive/perceptual), analytic (transformational/axiomatic). | 5 |
+| **Zoomed-in / zoomed-out** | Weber & Alcock's two reading levels: line-level correctness vs. strategy-level coherence. | 6.1 |
+
+### Reading order
+
+1. Section 1 (why craft matters) — motivation.
+2. Section 2 (Knuth rules) — the core discipline. Read once, then return whenever you're editing a proof.
+3. Section 3 (Polya) — read before your next problem set.
+4. Section 7 (the editorial pass) — use as a checklist on every proof you write for the next month.
+5. Sections 4–6 (Lakatos, Harel-Sowder, empirical research) — read when you want to understand *why* students struggle with proofs, not just how to write them.
+6. Sections 8–10 (pitfalls, first year, research level) — read for awareness and future reference.
+
+### Study plans
+
+**1-week sprint.** Read section 2 (Knuth rules) and section 7 (editorial pass). Take three proofs you've already written and apply the 27 Knuth rules + the editorial checklist. Rewrite each proof. Compare before and after.
+
+**1-month deep dive.** Read Polya's *How to Solve It* Part I (20 pages). For every proof you write this month, explicitly identify which Polya phase you're in as you work. Read Halmos's "How to write mathematics" essay (15 pages). Apply Halmos's advice to one proof you're proud of — does it survive his standards?
+
+**6-month mastery.** Read Lakatos's *Proofs and Refutations* in full. It's a novel-length philosophical dialogue and one of the most enjoyable mathematics books ever written. After reading it, go back to a proof you struggled with and trace the Lakatosian cycle: what was your original conjecture? Where did it fail? How did you refine it? Keep a "Lakatos journal" of your proof-writing evolution.
+
+---
+
+## TRY Session — The Mugga Mugga Test
+
+**Duration:** 15 minutes.
+**Materials:** A proof you've recently written (any topic).
+
+**Steps:**
+
+1. Read your proof aloud, but replace every mathematical symbol with "mugga mugga" (or "blah").
+2. Listen to the result. Is it a grammatical English paragraph? Does it have:
+   - A clear opening sentence? ("Let mugga mugga be mugga mugga.")
+   - Connective tissue? ("Since mugga mugga, we know mugga mugga.")
+   - A conclusion? ("Therefore, mugga mugga is mugga mugga.")
+3. If the result is choppy ("Mugga mugga. Mugga mugga. Mugga mugga."), your proof needs more prose connecting the formulas.
+4. If the result is unintelligible ("Mugga mugga mugga mugga mugga"), your proof has too many symbols in sequence without English words.
+5. Rewrite until the mugga-mugga version reads like a paragraph.
+
+**What to observe:** Most first-draft proofs fail the test. The rewrite is usually only 3–5 words per sentence longer than the original, but the difference in readability is dramatic.
+
+---
+
+## TRY Session — Apply Polya's Four Phases to a New Theorem
+
+**Duration:** 30 minutes.
+**Materials:** Pen and paper.
+
+**Theorem to prove:** For any positive integer $n$, the number $n^3 - n$ is divisible by 6.
+
+**Steps, by Polya phase:**
+
+*Phase 1 — Understand:*
+1. What does the theorem claim? ($6 \mid n^3 - n$ for all $n \geq 1$.)
+2. Try examples: $n = 1 \Rightarrow 0$ (divisible by 6). $n = 2 \Rightarrow 6$. $n = 3 \Rightarrow 24 = 4 \times 6$. $n = 4 \Rightarrow 60 = 10 \times 6$. Pattern holds.
+3. Factor: $n^3 - n = n(n-1)(n+1) = (n-1) \cdot n \cdot (n+1)$. This is a product of three consecutive integers.
+
+*Phase 2 — Plan:*
+4. Among three consecutive integers, one is divisible by 3 (pigeonhole on remainders mod 3). At least one is even (pigeonhole on remainders mod 2). So the product is divisible by $2 \times 3 = 6$.
+5. Alternative plan: induction on $n$. Verify base case, then show $(k+1)^3 - (k+1) - (k^3 - k) = 3k^2 + 3k = 3k(k+1)$, which is divisible by 6 since $k(k+1)$ is even.
+
+*Phase 3 — Carry out:*
+6. Write the proof using whichever plan you prefer. Apply the mugga mugga test.
+
+*Phase 4 — Look back:*
+7. Can you generalize? What about $n^5 - n$? (Divisible by 30 = 2 × 3 × 5. Why?)
+
+**What to observe:** Phase 2 (devising a plan) is where the creativity happens. Two valid plans exist for this theorem — the factoring approach and the induction approach. Neither is "better"; the factoring approach is more insightful, the induction approach is more mechanical. Knowing both is the skill.
+
+---
+
+## TRY Session — Peer Review a Proof
+
+**Duration:** 20 minutes.
+**Materials:** Exchange proofs with a partner (or use your own proof from a previous assignment as if someone else wrote it).
+
+**Steps:**
+
+1. Read the proof with the **zoomed-out** lens first (Weber & Alcock, section 6.1): does the overall strategy make sense for this type of theorem? Is the technique appropriate?
+2. Read with the **zoomed-in** lens: check each line. Does it follow from the previous lines? Is every definition invoked? Is every quantifier handled correctly?
+3. Apply the editorial checklist from section 7.
+4. Write feedback: (a) one thing the proof does well, (b) one specific line where the reasoning could be clearer, (c) one thing you would change.
+
+**What to observe:** You will likely notice that reading someone else's proof is harder than writing your own. The difficulty is diagnostic — it reveals which parts of the proof are under-explained. If you can't follow a step, the step needs more prose, not because you're slow but because the writer omitted a link.
+
+---
+
+## DIY — Rewrite a Textbook Proof in Three Styles
+
+**Scope:** 2–3 hours.
+**Deliverable:** One proof written three ways.
+
+**Task:** Choose a moderately complex theorem from your current course (something 10–20 lines in the textbook). Rewrite the proof in three styles:
+
+1. **Maximum formality.** Every step cites its justification by name (theorem number, axiom, definition). Numbered equations throughout. No gaps.
+2. **Schwarz style.** The Definitions/Intuitions/Conventions triangle: explain each definition used, give a visual or numerical intuition before the formal proof, and write in complete sentences with the mugga-mugga test passing.
+3. **Research paper style.** Compress to roughly half the length of the textbook version. Cite prior results aggressively ("By [Theorem 3.2],..."). Assume the reader is a peer who can fill in routine steps.
+
+**What you learn:** Each style serves a different audience. Formality for machine-checking, Schwarz style for students, research style for experts. The same mathematical content looks different in each, and the *craft choices* — what to include, what to omit, what to explain — are different.
+
+---
+
+## DIY — The Proof-Scheme Self-Assessment
+
+**Scope:** 1 hour.
+**Deliverable:** A 1-page self-assessment.
+
+**Task:** Read the Harel-Sowder taxonomy (section 5). For each proof scheme, honestly assess whether you have used it in the past month:
+
+1. **Ritual scheme.** Did you ever write "Proof:" at the top and "QED" at the bottom without understanding the middle?
+2. **Authoritarian scheme.** Did you ever accept a proof because the textbook said so, without checking the steps?
+3. **Symbolic scheme.** Did you ever manipulate symbols to reach a conclusion without understanding what the symbols meant?
+4. **Inductive scheme.** Did you ever check examples and conclude a universal statement was true?
+5. **Perceptual scheme.** Did you ever draw a picture and call it a proof?
+6. **Transformational scheme.** Did you write a proof where each step followed logically from the previous, and you understood why?
+7. **Axiomatic scheme.** Did you write a proof where you could name the axioms being used and imagine changing them?
+
+Most students find they use 1–5 more often than they'd like. The goal is to increase 6 and 7 over time, not to feel guilty about 1–5.
+
+---
+
+## College & Rosetta Deep Links
+
+### Department connections
+
+| College Department | Concept ID | Connection |
+|---|---|---|
+| **Writing** | writing-process | The entire document — proof writing IS writing. Section 2 (Knuth rules) is a style guide; section 7 (editorial pass) is the revision process |
+| **Communication** | (clarity, audience) | Section 4 (formal vs. informal proof) — adapting rigor level to audience is a communication skill |
+| **Logic** | `log-argument-structure` | Section 6 (fallacies, section 8 pitfalls) — the negative cases of argument structure |
+| **Logic** | `log-formal-proof-systems` | Section 4 (the gap between formal and informal proof) |
+| **Critical Thinking** | (evaluation, metacognition) | Section 5 (Harel-Sowder proof schemes) is a metacognitive framework — knowing how you think about proofs |
+| **Problem-Solving** | (heuristics, strategies) | Section 3 (Polya's four phases) — the canonical problem-solving method |
+| **Philosophy** | (epistemology) | Section 4 (Lakatos) — the nature of mathematical knowledge as a social construction refined by dialogue |
+| **Psychology** | (cognitive science) | Section 6 (Weber, Inglis, Selden) — empirical research on mathematical cognition |
+| **Learning** | (metacognition, study skills) | The study plans in every document — learning how to learn proofs |
+| **Reading** | reading-discovery | Section 6 (eye-tracking research) — how experts read proofs differently from novices |
+
+### Rosetta panel routes
+
+- **Python panel:** Section 7's editorial checklist can be partially automated. A Python script that checks whether displayed formulas end with punctuation, whether sentences start with a word (not a symbol), and whether variables are introduced before use. This connects Writing → Coding.
+- **Natural language panel:** Section 5 (English-to-logic translation) is a Rosetta cross-reference between natural language and formal language. The same concept expressed in English, in symbols, and in code.
+- **All 9 panels:** Section 2.1 rule 3 (don't use logical symbols in prose) has an analogue in every programming language: don't use operator overloading to the point of illegibility. The craft principle transcends the notation system.
+
+### Cross-department threads
+
+- **Writing → Logic → Math:** Proof writing sits at the intersection of all three. The Writing department teaches prose structure, Logic teaches logical structure, and Mathematics teaches the content. A proof course is implicitly a course in all three departments.
+- **Philosophy → Logic → Psychology:** Lakatos (section 4, Philosophy) describes how proofs develop dialectically; Harel-Sowder (section 5, Logic/Psychology) describes how students think about proofs; Weber/Inglis (section 6, Psychology) measures how experts evaluate proofs. Together they form a complete picture of proof as a human activity.
+- **Learning → Problem-Solving → Critical Thinking:** Polya (section 3) teaches how to solve problems; the proof-scheme taxonomy (section 5) teaches how to recognize your own reasoning patterns; the editorial pass (section 7) teaches how to evaluate and improve your own work. All three are metacognitive skills.

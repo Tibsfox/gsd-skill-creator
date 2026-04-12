@@ -366,3 +366,154 @@ The progression is one of **abstraction**, not of proof technique. The same dire
 - **Document 3** provides the technique catalog applied throughout this document.
 - **Document 5** discusses how to write proofs about these structures in readable prose.
 - **Document 6** treats how each algebraic and analytic structure is formalized in proof assistants (e.g., the Mathlib algebra and analysis libraries).
+
+---
+
+## Study Guide — Proofs on Mathematical Structures
+
+### Prerequisites
+
+- Document 2 (logic and language) — quantifiers and their negation are used constantly.
+- Document 3 (techniques catalog) — every proof in this document uses one or more cataloged techniques.
+- High-school algebra for section 1 (integers). First-year calculus for section 2 (reals). Set notation for section 3. No prerequisites beyond curiosity for sections 4–7 — the definitions are self-contained.
+
+### Reading order by structure
+
+This document is a reference, not a linear text. Jump to the structure you're working on.
+
+| Your current course | Start here |
+|---|---|
+| Transition to proof / discrete math | Section 1 (integers) → section 3 (sets) → section 4 (functions/relations) |
+| Real analysis | Section 2 (reals and analysis) — pair with Abbott or Rudin |
+| Abstract algebra | Section 6 (algebraic structures) — pair with Dummit & Foote or Herstein |
+| Linear algebra | Section 6.3 (vector spaces) — pair with Axler |
+| Combinatorics | Section 7 (combinatorics and number theory) |
+
+### Key vocabulary per structure
+
+**Integers:** divides ($a \mid b$), even, odd, prime, composite, gcd, congruence modulo $m$, Bézout's identity.
+
+**Reals:** rational, irrational, supremum, infimum, completeness, $\varepsilon$-$\delta$, continuous, convergent, Cauchy sequence, Archimedean property.
+
+**Sets:** subset ($\subseteq$), union ($\cup$), intersection ($\cap$), complement, power set ($\mathcal{P}$), cardinality, countable, uncountable, bijection.
+
+**Algebraic:** group, abelian, identity, inverse, ring, field, vector space, linear independence, subgroup, ideal, homomorphism, isomorphism.
+
+### Study plans
+
+**1-week sprint (integers + sets).** Prove: (a) transitivity of divides, (b) $\gcd(a, b) = \gcd(b, a \bmod b)$ (Euclidean algorithm correctness), (c) De Morgan's law for sets, (d) the power set of a 3-element set has 8 elements. Four proofs, four structures.
+
+**1-month deep dive (add reals + algebra).** Add: (e) $\sqrt{2}$ is irrational, (f) the Archimedean property, (g) uniqueness of group identity, (h) every field has no zero divisors. Read Abbott's *Understanding Analysis* chapters 1–2 alongside section 2. Read Herstein's *Abstract Algebra* chapter 2 alongside section 6.
+
+**6-month mastery.** Work through one complete textbook per structure: Niven/Zuckerman/Montgomery for number theory, Rudin for analysis, Dummit & Foote for algebra, Axler for linear algebra. For each chapter, identify the proof techniques used (cross-reference document 3). Maintain a "proof journal" — one page per proof, recording the theorem, the technique, and the key insight.
+
+---
+
+## TRY Session — Implement the Euclidean Algorithm and Prove It Correct
+
+**Duration:** 30 minutes.
+**Materials:** Python (or pen and paper).
+
+**Steps:**
+
+1. Implement the Euclidean algorithm:
+   ```python
+   def gcd(a, b):
+       while b != 0:
+           a, b = b, a % b
+       return a
+   ```
+2. Run it on `gcd(48, 18)` by hand. Write out each step: `(48, 18) → (18, 12) → (12, 6) → (6, 0)`. Answer: 6.
+3. Now prove correctness. The key lemma is: $\gcd(a, b) = \gcd(b, a \bmod b)$. Prove this by showing that any common divisor of $a$ and $b$ is also a common divisor of $b$ and $a \bmod b$, and vice versa.
+4. Prove termination: the second argument strictly decreases at each step ($a \bmod b < b$), so by well-ordering, the algorithm terminates.
+
+**What to observe:** You just proved a program correct using mathematical techniques. The termination proof uses the well-ordering principle (document 3, B.7). The correctness proof is a direct proof on the divisibility structure (section 1). Algorithm and proof are partners.
+
+---
+
+## TRY Session — Build a Group From Scratch
+
+**Duration:** 20 minutes.
+**Materials:** Pen and paper.
+
+**Steps:**
+
+1. Consider the set $\{0, 1, 2, 3\}$ with the operation $a \oplus b = (a + b) \bmod 4$. Verify the group axioms:
+   - Closure: for any $a, b \in \{0,1,2,3\}$, $a \oplus b \in \{0,1,2,3\}$. (Why?)
+   - Associativity: $(a \oplus b) \oplus c = a \oplus (b \oplus c)$. (Follows from associativity of integer addition.)
+   - Identity: $0 \oplus a = a \oplus 0 = a$. (Check.)
+   - Inverse: the inverse of $a$ is $4 - a \bmod 4$. Verify for each element.
+2. Write out the complete $4 \times 4$ Cayley table (group multiplication table).
+3. Now prove: in this group, every element is its own inverse iff the group has exponent 2. Is $\mathbb{Z}/4\mathbb{Z}$ of exponent 2? (No — $1 \oplus 1 = 2 \neq 0$.)
+4. Find a group of order 4 where every element IS its own inverse. (Answer: $\mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}$, the Klein four-group.)
+
+**What to observe:** Axiom-checking is *verification*, not *proof*. But the verification builds the muscle memory of invoking axioms one at a time — the same muscle used in abstract proofs like section 6.1's uniqueness-of-identity theorem.
+
+---
+
+## DIY — The Number Theory Proof Portfolio
+
+**Scope:** 1–2 weeks.
+**Deliverable:** A portfolio of 8 proofs on integers, each 1/2 to 1 page.
+
+| # | Theorem | Technique hint |
+|---|---|---|
+| 1 | $a \mid b$ and $a \mid c$ implies $a \mid (bx + cy)$ for any integers $x, y$. | Direct |
+| 2 | If $n^2$ is divisible by 3, then $n$ is divisible by 3. | Contrapositive or cases ($n \bmod 3$) |
+| 3 | There are infinitely many primes of the form $4k + 3$. | Contradiction (variant of Euclid) |
+| 4 | For every $n \geq 1$, $\sum_{k=1}^n k^3 = \left(\sum_{k=1}^n k\right)^2$. | Induction |
+| 5 | Every integer can be written in base 2. | Strong induction |
+| 6 | $a \equiv b \pmod{m}$ implies $a^n \equiv b^n \pmod{m}$ for all $n \geq 1$. | Induction + congruence arithmetic |
+| 7 | Fermat's little theorem: $a^p \equiv a \pmod{p}$ for prime $p$. | Multiple approaches possible |
+| 8 | There is no integer solution to $x^2 + y^2 = 4k + 3$. | Cases on parity of $x, y$ |
+
+---
+
+## DIY — Set-Theoretic Distributive Laws
+
+**Scope:** 2–3 hours.
+**Deliverable:** Complete proofs of all four distributive laws.
+
+Prove each using element-chasing (both $\subseteq$ directions):
+
+1. $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
+2. $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$ (this is Schwarz's slide 119)
+3. $A \cap (B \triangle C) = (A \cap B) \triangle (A \cap C)$
+4. $A \times (B \cup C) = (A \times B) \cup (A \times C)$
+
+For each, also write the proof as a chain of iff's (the compact style from section 3.2) and compare readability with the two-direction style.
+
+---
+
+## College & Rosetta Deep Links
+
+### Department connections
+
+| College Department | Concept ID | Connection |
+|---|---|---|
+| **Math** | `math-number-cardinality` | Section 3 (cardinality, Cantor's theorem, countable vs. uncountable) |
+| **Math** | `math-operations-meaning` | Section 1 (divisibility as an operation, modular arithmetic) |
+| **Math** | `math-functions` | Section 4 (injections, surjections, bijections, composition, inverse) |
+| **Math** | `math-variables-unknowns` | All sections — variables in proofs ARE unknowns being reasoned about |
+| **Math** | `math-equations-expressions` | Section 1.3 (congruence equations), section 6 (algebraic identities) |
+| **Math** | `math-complex-numbers` | Section 2 connects via completeness; section 6 extends to fields including $\mathbb{C}$ |
+| **Math** | `math-euler-formula` | Section 6.2 (fields) — Euler's formula lives in $\mathbb{C}$, which is a field |
+| **Mathematics** | `math-trig-functions` | Section 2 (real analysis) — trig functions are continuous on $\mathbb{R}$; their properties are proved by $\varepsilon$-$\delta$ |
+| **Logic** | `log-formal-proof-systems` | Every proof in this document is formally a derivation in ZFC |
+| **Logic** | `log-predicate-logic` | Every definition in section 1–6 is a predicate-logic formula |
+| **Statistics** | (distributions, counting) | Section 7 (combinatorics) — binomial coefficients underlie the binomial distribution |
+
+### Rosetta panel routes
+
+- **Python panel:** Section 1 maps to Python `sympy` number-theory functions (`gcd`, `isprime`, `factorint`). Section 3 maps to Python `set` operations. Section 6 maps to `numpy` linear algebra. Each structure in this document has a Python computational counterpart.
+- **C++ panel:** Section 6 (algebraic structures) maps to C++ templates — a C++ `Group<T>` template is a computational realization of the group axioms.
+- **Fortran panel:** Section 2 (real analysis) — Fortran's numerical computing origins connect directly to real-number computation. IEEE 754 floating-point is a computational approximation of $\mathbb{R}$.
+- **Lisp panel:** Section 3 (sets) — Lisp's native list operations (`union`, `intersection`, `set-difference`) implement the set operations exactly. Section 6.3 (vector spaces) maps to Lisp vector arithmetic.
+- **Pascal panel:** Section 7 (Pascal's identity for binomial coefficients) — named after Blaise Pascal, who also influenced the programming language. The triangle connecting math and programming is literal.
+
+### Cross-department threads
+
+- **Math → Logic → Coding:** Every algebraic structure (group, ring, field) has a formal definition (Logic), a set of theorems (Math), and a computational implementation (Coding). The thread runs through all three departments simultaneously.
+- **Math → Physics → Engineering:** The structures in section 6 are the language of physics. Groups describe symmetries, vector spaces describe states, fields describe scalars. A student who masters algebraic proof is ready for theoretical physics.
+- **Math → Statistics → Data Science:** Section 7's combinatorics underlies probability theory, which underlies statistics, which underlies data science. The chain from binomial coefficients to machine learning passes through every link.
+- **Math → Economics → Business:** Section 1.3 (modular arithmetic) underlies cryptography, which underlies digital commerce. Fermat's little theorem is used in RSA encryption.
