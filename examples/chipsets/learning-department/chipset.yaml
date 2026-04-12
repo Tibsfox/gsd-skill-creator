@@ -1,0 +1,248 @@
+# Learning Department Chipset Configuration
+# Instantiation of the department template pattern for the learning-design domain.
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This chipset forks the math-department template and
+# remaps it for instructional design, developmental readiness, scaffolding,
+# deliberate practice, motivation, experiential learning, and prepared
+# environments.
+
+name: learning-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated learning department providing domain-routed expertise
+  through seven named agents (Bloom, Ericsson, Dweck, Piaget-learn,
+  Vygotsky-learn, Dewey-learn, Montessori-learn), six knowledge skills,
+  and three pre-composed teams. Persists work via Grove records and
+  integrates with the college learning department concept graph. Four
+  agents carry a "-learn" suffix to disambiguate from sibling agents in
+  other departments (psychology, philosophy, critical-thinking, history).
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  bloom-taxonomy-and-mastery:
+    domain: learning
+    description: "Bloom's Taxonomy and mastery learning as practical instructional-design tools — cognitive levels, objective writing, mastery loops"
+    triggers:
+      - "objective"
+      - "bloom"
+      - "mastery"
+      - "cognitive level"
+      - "formative assessment"
+      - "learning target"
+    agent_affinity: [bloom, ericsson]
+
+  deliberate-practice-design:
+    domain: learning
+    description: "Deliberate practice as a rigorous training method — four conditions, mental representations, plateau escape, drill design"
+    triggers:
+      - "deliberate practice"
+      - "drill"
+      - "practice"
+      - "plateau"
+      - "fluency"
+      - "feedback loop"
+    agent_affinity: [ericsson, bloom]
+
+  mindset-and-motivation:
+    domain: learning
+    description: "Mindset theory and motivation — fixed vs growth, process praise, attribution patterns, self-determination theory"
+    triggers:
+      - "mindset"
+      - "motivation"
+      - "not a math person"
+      - "gave up"
+      - "praise"
+      - "growth mindset"
+    agent_affinity: [dweck, bloom]
+
+  constructivism-and-schema:
+    domain: learning
+    description: "Piagetian constructivism and schema theory — assimilation, accommodation, developmental stages, misconceptions"
+    triggers:
+      - "schema"
+      - "constructivism"
+      - "misconception"
+      - "developmentally appropriate"
+      - "assimilation"
+      - "accommodation"
+    agent_affinity: [piaget-learn, bloom]
+
+  zpd-and-scaffolding:
+    domain: learning
+    description: "Vygotsky's Zone of Proximal Development and scaffolding — dynamic assessment, scaffold functions, fading, peer tutoring"
+    triggers:
+      - "zone of proximal development"
+      - "ZPD"
+      - "scaffold"
+      - "how much help"
+      - "fade"
+      - "peer tutor"
+    agent_affinity: [vygotsky-learn, bloom]
+
+  prepared-environment-and-experience:
+    domain: learning
+    description: "Dewey and Montessori — experiential learning, reflective cycle, prepared environment, self-correcting materials, PBL"
+    triggers:
+      - "prepared environment"
+      - "experiential"
+      - "project-based"
+      - "PBL"
+      - "reflective"
+      - "self-correcting"
+      - "hands-on"
+    agent_affinity: [dewey-learn, montessori-learn]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Bloom as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: bloom
+
+  agents:
+    - name: bloom
+      role: "department chair — classification, routing, objective design, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: ericsson
+      role: "deliberate practice specialist — drill design, edge calibration, plateau escape"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: dweck
+      role: "mindset and motivation specialist — attribution diagnosis, feedback-language audit, intervention scripts"
+      model: opus
+      tools: [Read, Grep, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  learning-analysis-team:
+    description: "Full department for multi-lens curriculum review and multi-dimensional learner diagnosis"
+    agents: [bloom, piaget-learn, vygotsky-learn, ericsson, dweck, dewey-learn, montessori-learn]
+    use_when: "curriculum review, multi-lens diagnosis, new-to-learning-design questions"
+
+  learning-workshop-team:
+    description: "Focused design workshop for a single learning-design question needing developmental, scaffolding, and motivation lenses"
+    agents: [bloom, piaget-learn, vygotsky-learn, dweck]
+    use_when: "unit design, one-learner intervention plan, focused section rework"
+
+  learning-practice-team:
+    description: "Pipeline-oriented practice team for procedural-fluency work — drill design with scaffolds and environment support"
+    agents: [bloom, ericsson, vygotsky-learn, montessori-learn]
+    use_when: "mastery-loop inner work, plateau escape, skill-drill pipeline, maintenance practice"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 learning Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college learning department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (bloom) must be CAPCOM"
+        action: "block"
+
+      - check: "suffix_consistency"
+        description: "The four -learn-suffixed agents (piaget-learn, vygotsky-learn, dewey-learn, montessori-learn) must carry the suffix consistently in name, first_path, and all cross-references within this department"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - objective-design
+      - practice
+      - motivation
+      - developmental-diagnosis
+      - scaffolding
+      - experiential
+      - environment
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "learning-department"
+  record_types:
+    - name: LearningAnalysis
+      description: "Diagnostic analysis — developmental readiness, schema diagnosis, practice diagnosis, attribution analysis, ZPD assessment"
+
+    - name: LearningDesign
+      description: "Designed artifact — lesson plan, drill pipeline, scaffold plan, intervention script, environment design, experiential unit"
+
+    - name: LearningReview
+      description: "Review of an existing lesson, unit, curriculum, environment, or feedback rubric"
+
+    - name: LearningExplanation
+      description: "Teaching artifact at a specified audience level — for teachers, parents, curriculum designers, or self-learners"
+
+    - name: LearningSession
+      description: "Session log linking work products to interaction context, with classification metadata and user role"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "learning"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Cognitive Levels & Objective Design"
+    - "Developmental Readiness & Schema"
+    - "Scaffolding & Zone of Proximal Development"
+    - "Deliberate Practice & Mastery"
+    - "Motivation, Mindset & Attribution"
+    - "Experiential Learning & Prepared Environment"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
+  notes: >
+    Four of this department's agents carry a -learn suffix to disambiguate
+    from sibling agents at examples/agents/psychology/piaget,
+    examples/agents/psychology/vygotsky, examples/agents/philosophy/dewey,
+    examples/agents/critical-thinking/dewey-ct, and
+    examples/agents/history/montessori. When forking this
+    chipset for another domain that does not share those collisions, drop the
+    suffixes. When forking for a domain that has its own collisions, apply
+    the suffix discipline consistently across agent names, first_paths, and
+    all cross-references.
