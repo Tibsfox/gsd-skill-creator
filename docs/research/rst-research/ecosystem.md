@@ -1064,3 +1064,46 @@ Rust's learning curve is steeper initially — the borrow checker rejects code a
 | Industry adoption | Universal | Growing rapidly, strategic for safety-critical |
 
 C++ is not going away. Its forty-year codebase, its dominance in game engines, its presence in every operating system kernel, and its massive developer population ensure decades of continued use. But for new systems programming projects — especially those where memory safety, concurrency safety, and long-term maintenance cost matter — Rust has become the default recommendation from organizations ranging from the NSA to the White House Office of the National Cyber Director. The question is no longer whether Rust is ready for production. It is whether new C++ projects can justify the ongoing cost of memory unsafety when a proven alternative exists.
+
+---
+
+## Study Guide — Rust Ecosystem
+
+### Tool map
+
+- **rustup** — toolchain manager.
+- **cargo** — build, test, doc, publish.
+- **crates.io** — package registry.
+- **clippy** — linter.
+- **rustfmt** — formatter.
+- **miri** — interpreter with UB detection.
+- **rust-analyzer** — LSP.
+- **cross** — cross-compilation.
+
+### 1-week plan
+
+- Day 1: Install rustup. `cargo new hello`.
+- Day 2: Read *The Rust Book* chapters 1-4.
+- Day 3: `cargo add` some dependencies. Build a tiny CLI.
+- Day 4: `cargo test`. Write a module with tests.
+- Day 5: `cargo doc --open`. Read your own docs.
+- Day 6: `cargo bench` with criterion.
+- Day 7: Publish to crates.io (your own, or a PR to
+  someone else's).
+
+## DIY — Port one C program
+
+Pick a small C program. Rewrite in Rust. Observe the
+type system catch bugs the original C didn't.
+
+## TRY — Contribute to an open Rust project
+
+Pick something on ripgrep, rg, rg-like, or exa. Read the
+code, fix one small issue, submit PR.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
