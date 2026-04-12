@@ -5,6 +5,7 @@ type: skill
 category: digital-literacy
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/skills/digital-literacy/data-privacy/SKILL.md
 superseded_by: null

@@ -4,6 +4,7 @@ type: team
 category: digital-literacy
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/teams/digital-literacy/digital-literacy-workshop-team/README.md
 description: Focused workshop team for in-depth information evaluation and source analysis. Combines Palfrey (institutional credibility), Noble (algorithmic amplification), boyd (contextual framing), and Kafai (pedagogy) to take a specific source, claim, or artifact and analyze it in depth with a teaching wrap-up. Use when a learner brings a concrete case and wants to understand it thoroughly rather than get a general-purpose literacy overview.
