@@ -1121,3 +1121,29 @@ The story of SOA is the story of the industry learning, over three decades, to t
 
 *Word count: approximately 20,500 words across roughly 2,400 lines of markdown.*
 *Research thread: HISTORY — PNW Research Series, SOA project, tibsfox.com archive.*
+
+---
+
+## Study Guide — SOA History
+
+### Questions
+
+- Why CORBA failed and what REST learned from it.
+- How did SOAP give way to REST to GraphQL to gRPC to
+  MCP?
+- Why is the acronym "SOA" dead while the ideas live?
+
+## DIY — Install an old CORBA ORB
+
+omniORB still runs. Write a hello world. The experience
+is pedagogically useful.
+
+## TRY — Read one Bezos API mandate reference
+
+Bezos's 2002 memo mandating service interfaces at Amazon
+is legendary and documented in many retrospectives. Read
+one.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
