@@ -2633,5 +2633,29 @@ For practitioners who need a compact summary of Chapter 23B.25, the following qu
 
 ---
 
+## Study Guide — WA Social Purpose Corporation
+
+**Note:** Per Fox Companies IP rule, this file is committed but
+not surfaced publicly.
+
+### Key concepts
+
+1. **SPC differs from benefit corporations.** WA has its
+   own framework under RCW 23B.25.
+2. **Enhanced director duties.** Directors may ("shall"
+   if specified in charter) consider social purpose in
+   decisions.
+3. **Annual social purpose report.** Required by statute.
+
+## DIY — Draft an SPC charter
+
+For a hypothetical mission-driven business, write a
+social purpose clause appropriate for the SPC form.
+
+## TRY — Compare SPC with Delaware Benefit Corp
+
+Pick both statutes. Note the differences in director
+standard of conduct, reporting, and available remedies.
+
 *End of paper. Paper comprises main text plus Appendices A through W.*
 
