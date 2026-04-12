@@ -1,0 +1,248 @@
+# Communication Department Chipset Configuration
+# 12th department in the college structure
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template pattern.
+
+name: communication-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated communication department providing domain-routed
+  expertise through seven named agents (Aristotle-C, Douglass,
+  Wollstonecraft, King, Tannen, McLuhan, Freire), six knowledge skills,
+  and three pre-composed teams. Persists work via Grove records and
+  integrates with the college communication department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  public-speaking:
+    domain: communication
+    description: "Speech structure, delivery techniques, audience analysis, managing anxiety"
+    triggers:
+      - "speech"
+      - "presentation"
+      - "deliver"
+      - "public speaking"
+      - "stage fright"
+      - "audience"
+    agent_affinity: [douglass, king]
+
+  active-listening:
+    domain: communication
+    description: "Attending behaviors, paraphrasing, reflective listening, clarifying questions"
+    triggers:
+      - "listening"
+      - "paraphrase"
+      - "understand what they said"
+      - "miscommunication"
+      - "not hearing"
+    agent_affinity: [tannen, freire]
+
+  interpersonal-communication:
+    domain: communication
+    description: "Communication models, self-disclosure, relational dialectics, feedback"
+    triggers:
+      - "interpersonal"
+      - "relationship"
+      - "feedback"
+      - "conversation"
+      - "self-disclosure"
+      - "Johari"
+    agent_affinity: [tannen, wollstonecraft]
+
+  persuasion-rhetoric:
+    domain: communication
+    description: "Aristotle's three appeals, Toulmin argument model, fallacies, persuasive writing"
+    triggers:
+      - "persuade"
+      - "argument"
+      - "rhetoric"
+      - "ethos"
+      - "pathos"
+      - "logos"
+      - "fallacy"
+      - "convince"
+    agent_affinity: [aristotle-c, wollstonecraft, king]
+
+  conflict-resolution:
+    domain: communication
+    description: "Conflict styles, interest-based negotiation, de-escalation, mediation"
+    triggers:
+      - "conflict"
+      - "disagreement"
+      - "mediation"
+      - "negotiate"
+      - "de-escalate"
+      - "difficult conversation"
+    agent_affinity: [freire, tannen]
+
+  media-literacy:
+    domain: communication
+    description: "Media ecology, news literacy, propaganda analysis, algorithmic curation"
+    triggers:
+      - "media"
+      - "news"
+      - "propaganda"
+      - "misinformation"
+      - "platform"
+      - "algorithm"
+      - "medium is the message"
+    agent_affinity: [mcluhan, tannen, aristotle-c]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Aristotle-C as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: aristotle-c
+
+  agents:
+    - name: aristotle-c
+      role: "department chair — classification, routing, synthesis, rhetorical analysis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: douglass
+      role: "public speaking specialist — delivery, advocacy, oral persuasion"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: wollstonecraft
+      role: "argument specialist — persuasive writing, argument mapping, fallacy detection"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: king
+      role: "rhetoric specialist — audience connection, rhetorical structure, leadership communication"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: tannen
+      role: "interpersonal specialist — conversational dynamics, cross-cultural communication, style analysis"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: mcluhan
+      role: "media specialist — media ecology, platform analysis, medium/message relationship"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: freire
+      role: "pedagogy specialist — dialogical education, power analysis, facilitation design"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  communication-workshop-team:
+    description: "Full department for complex multi-domain communication problems"
+    agents: [aristotle-c, douglass, wollstonecraft, king, tannen, mcluhan, freire]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  debate-team:
+    description: "Focused argumentation and persuasive communication"
+    agents: [douglass, wollstonecraft, king, freire]
+    use_when: "debate preparation, argument construction, persuasive speech"
+
+  media-analysis-team:
+    description: "Media ecology and critical media analysis"
+    agents: [mcluhan, tannen, aristotle-c, freire]
+    use_when: "platform analysis, media comparison, propaganda detection"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 communication Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college communication department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (aristotle-c) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - speaking
+      - listening
+      - interpersonal
+      - persuasion
+      - conflict
+      - media
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "communication-department"
+  record_types:
+    - name: CommunicationAnalysis
+      description: "Rhetorical, media, conversational, or power-dynamic analysis of a communication artifact"
+
+    - name: SpeechDraft
+      description: "Speech outline or full draft with structure, key passages, and delivery notes"
+
+    - name: ArgumentMap
+      description: "Toulmin-structured argument with claims, grounds, warrants, and rebuttals"
+
+    - name: CommunicationExplanation
+      description: "Teaching artifact at a specified level for a communication concept"
+
+    - name: CommunicationSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "communication"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Foundations of Speaking & Listening"
+    - "Nonverbal Communication & Presence"
+    - "Structured Presentation"
+    - "Discussion, Debate & Collaboration"
+    - "Communication Across Contexts"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
