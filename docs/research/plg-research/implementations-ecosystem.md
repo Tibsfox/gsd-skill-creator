@@ -2723,6 +2723,31 @@ who would never consider Prolog as a "general-purpose" language.
 
 *End of Prolog implementations and ecosystem thread.*
 
+## Study Guide — Prolog Implementations & Ecosystem
+
+### Implementations
+
+- **SWI-Prolog** — most complete, great web story.
+- **SICStus** — commercial, widely used in industry.
+- **YAP, GNU Prolog, B-Prolog, XSB** — alternatives.
+- **Scryer Prolog** — modern, Rust-based.
+- **clingo** — ASP solver.
+- **Soufflé** — Datalog for static analysis.
+
+## DIY — Write a Prolog web service
+
+SWI-Prolog has a built-in HTTP server. Write a 20-line web
+API that answers queries.
+
+## TRY — Use Scryer Prolog
+
+Scryer is written in Rust and aims for full ISO
+compliance. Try it and compare to SWI.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+
 *This document is one of four parallel research threads for the PNW
 Research Series project at tibsfox.com/Research/PLG/. It covers
 runtimes, virtual machines, development tools, foreign interfaces,

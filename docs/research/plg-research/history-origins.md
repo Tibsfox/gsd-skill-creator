@@ -1977,6 +1977,30 @@ It is a good language to understand.
 
 And it is, in its particular way, one of the great stories of twentieth-century computing.
 
+## Study Guide — Prolog History & Origins
+
+### Questions
+
+- Why did Prolog emerge at Marseille and Edinburgh in 1972?
+- What was the Fifth Generation Computing Systems project,
+  and why did it fail?
+- Why did Prolog survive the AI winter?
+
+## DIY — Read Kowalski
+
+Robert Kowalski's *Logic for Problem Solving* (1979) is
+the founding text. 300 pages.
+
+## TRY — Visit the Fifth Generation retrospective
+
+The ICOT project's final report is public. Read it for
+the story of how an ambitious national project
+collapsed.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+
 ---
 
 *End of history and origins research.*
