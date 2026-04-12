@@ -1,0 +1,257 @@
+# Critical Thinking Department Chipset Configuration
+# 22nd instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit.
+
+name: critical-thinking-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated critical thinking department providing structured reasoning
+  support through seven named agents (Paul, Elder, Tversky, Kahneman-CT,
+  De-Bono, Dewey-CT, Lipman), six knowledge skills, and three pre-composed
+  teams. Persists work via Grove records and integrates with the college
+  critical-thinking department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  argument-evaluation:
+    domain: critical-thinking
+    description: "Argument reconstruction, validity, soundness, steel-manning"
+    triggers:
+      - "is this argument valid"
+      - "evaluate this argument"
+      - "steel-man"
+      - "argument structure"
+      - "premise"
+      - "conclusion"
+      - "hidden assumption"
+    agent_affinity: [paul, elder]
+
+  logical-reasoning:
+    domain: critical-thinking
+    description: "Deductive and inductive reasoning, rules of inference"
+    triggers:
+      - "modus ponens"
+      - "modus tollens"
+      - "affirming the consequent"
+      - "denying the antecedent"
+      - "valid"
+      - "inductive"
+      - "deductive"
+      - "syllogism"
+    agent_affinity: [elder, tversky]
+
+  cognitive-biases:
+    domain: critical-thinking
+    description: "Heuristics and biases detection and mitigation"
+    triggers:
+      - "bias"
+      - "confirmation bias"
+      - "anchoring"
+      - "availability"
+      - "base rate"
+      - "overconfidence"
+      - "motivated reasoning"
+    agent_affinity: [tversky, kahneman-ct]
+
+  evidence-assessment:
+    domain: critical-thinking
+    description: "Source evaluation, study quality, levels of evidence"
+    triggers:
+      - "is this source reliable"
+      - "evidence quality"
+      - "primary source"
+      - "peer review"
+      - "study design"
+      - "replication"
+      - "base rate"
+    agent_affinity: [elder, tversky]
+
+  creative-thinking:
+    domain: critical-thinking
+    description: "Lateral thinking, Six Hats, PO operators, reframing"
+    triggers:
+      - "brainstorm"
+      - "lateral thinking"
+      - "six hats"
+      - "reframe"
+      - "generate options"
+      - "creative"
+      - "PO"
+    agent_affinity: de-bono
+
+  decision-making:
+    domain: critical-thinking
+    description: "Structured decisions under uncertainty, EV, MCDA, pre-mortems"
+    triggers:
+      - "should I decide"
+      - "decision"
+      - "pros and cons"
+      - "expected value"
+      - "pre-mortem"
+      - "reversible"
+      - "risk"
+    agent_affinity: [kahneman-ct, tversky]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Paul as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: paul
+
+  agents:
+    - name: paul
+      role: "department chair — classification, routing, synthesis, universal standards"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: elder
+      role: "structural analyst — argument reconstruction, elements of reasoning"
+      model: opus
+      tools: [Read, Grep]
+
+    - name: tversky
+      role: "bias diagnostician — heuristics and biases, probability correction"
+      model: opus
+      tools: [Read, Bash]
+
+    - name: kahneman-ct
+      role: "dual-process specialist — System 1 / System 2 diagnosis, mode shifts"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: de-bono
+      role: "creative generator — lateral thinking, Six Hats, provocations"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: dewey-ct
+      role: "reflective inquirer — ill-structured problems, five-phase inquiry"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: lipman
+      role: "pedagogy guide — level-appropriate explanation, Socratic dialogue"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  critical-thinking-analysis-team:
+    description: "Full department for multi-lens audits and ill-structured problems"
+    agents: [paul, elder, tversky, kahneman-ct, de-bono, dewey-ct, lipman]
+    use_when: "multi-lens, ill-structured, or full-analysis requests"
+
+  critical-thinking-workshop-team:
+    description: "Focused argument reconstruction and evaluation"
+    agents: [elder, tversky, kahneman-ct, lipman]
+    use_when: "deep analysis of a single argument or claim"
+
+  critical-thinking-practice-team:
+    description: "Sequential practice pipeline for skill development"
+    agents: [dewey-ct, de-bono, elder, lipman]
+    use_when: "drill-and-practice sessions and skill building"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 critical thinking Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college critical-thinking department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (paul) must be CAPCOM"
+        action: "block"
+
+      - check: "universal_standards_applied"
+        description: "Paul must apply Paul-Elder universal intellectual standards in synthesis"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - argument
+      - evidence
+      - bias
+      - creative
+      - decision
+      - multi-domain
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "critical-thinking-department"
+  record_types:
+    - name: CriticalThinkingAnalysis
+      description: "Structural analysis, elements of reasoning, inquiry records"
+
+    - name: CriticalThinkingConstruct
+      description: "Generated options, reframings, Six Hats outputs, provocations"
+
+    - name: CriticalThinkingReview
+      description: "Bias diagnoses, dual-process mode reviews, probability corrections"
+
+    - name: CriticalThinkingExplanation
+      description: "Level-appropriate teaching artifacts and learning pathways"
+
+    - name: CriticalThinkingSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "critical-thinking"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Claims & Evidence"
+    - "Arguments & Logical Reasoning"
+    - "Fallacies & Biases"
+    - "Applied Critical Thinking"
+    - "Metacognition & Intellectual Humility"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
