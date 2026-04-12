@@ -5,8 +5,8 @@ category: chipset
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/chipsets/math-coprocessor
+first_seen: 2026-03-07
+first_path: examples/chipsets/math-coprocessor/README.md
 description: null
 superseded_by: null
 ---

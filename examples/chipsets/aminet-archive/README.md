@@ -5,8 +5,8 @@ category: chipset
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/chipsets/aminet-archive
+first_seen: 2026-02-19
+first_path: examples/chipsets/aminet-archive/README.md
 description: null
 superseded_by: null
 ---
