@@ -1298,3 +1298,34 @@ June 2025.]*
 - *Microsoft TypeScript announcement, Somasegar, blogs.msdn.com, October 1, 2012.*
 - *Garrett, Jesse James. "Ajax: A New Approach to Web Applications." Adaptive Path, February 18, 
 2005.*
+
+---
+
+## Study Guide — JS/TS History
+
+### Questions
+
+- Why did Brendan Eich ship JavaScript in 10 days, and what did
+  that cost?
+- Why did Ajax (2005) change everything about web apps?
+- What did jQuery get right that Prototype.js didn't?
+- Why did TypeScript win over Flow and CoffeeScript?
+- What did Node.js unlock by putting JS on the server?
+
+## DIY — Watch Dahl's two talks
+
+Ryan Dahl's 2009 "Introduction to Node.js" and 2018 "10 Things
+I Regret About Node.js" are both on YouTube. Watch them in
+order. The arc from "this will change everything" to "here's
+what I got wrong" is one of the best case studies in tool
+evolution you can find.
+
+## TRY — Clone and run Brendan Eich's Mocha
+
+Mocha was the pre-release JavaScript codename. A Netscape 2.0
+build still boots on SheepShaver. Try it. You'll see Ajax
+before Ajax.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
