@@ -2632,3 +2632,32 @@ If you understand the principles in this document, you will understand the new t
 - Adrian Cockcroft, blog posts and talks on Netflix architecture, "Chaos Monkey," and microservices.
 - Fred George, "Micro-Service Architecture" talk (2012).
 - James Lewis and Martin Fowler, "Microservices" (Martin Fowler bliki, 2014).
+
+---
+
+## Study Guide — SOA Principles
+
+### Key principles
+
+1. **Loose coupling.** Services know nothing about each
+   other's internals.
+2. **Autonomy.** Each service owns its data.
+3. **Contract-first.** APIs come before implementation.
+4. **Idempotency.** Safe to retry.
+5. **Observability.** Logs, metrics, traces from day one.
+
+## DIY — Apply 12-factor to a service
+
+Check your own service against the 12-factor app. Note
+where you're non-compliant.
+
+## TRY — Design a saga
+
+Distributed transaction across 3 services with
+compensating actions. Write the saga out on paper. Run
+it in code with failures injected.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
