@@ -2708,4 +2708,78 @@ It is a language from 1972 that still feels, in 2026, like a glimpse of how prog
 
 ---
 
+## Study Guide — Prolog Language & Semantics
+
+### Key concepts
+
+1. **Unification.** The one operation that makes Prolog
+   work.
+2. **Resolution.** SLD resolution as a proof procedure.
+3. **Backtracking.** When a goal fails, try the next
+   alternative.
+4. **Cut (`!`).** Controls backtracking; the only
+   non-declarative bit.
+5. **Negation as failure.** `not(X)` = "I cannot prove X."
+
+---
+
+## Programming Examples
+
+### Example 1 — Append
+
+```prolog
+append([], L, L).
+append([H|T], L, [H|R]) :- append(T, L, R).
+```
+
+Three lines. Runs forward, backward, and every which way.
+Query `append(X, Y, [1,2,3]).` and Prolog generates all
+splits.
+
+### Example 2 — Factorial
+
+```prolog
+fact(0, 1).
+fact(N, F) :- N > 0, N1 is N - 1, fact(N1, F1), F is N * F1.
+```
+
+### Example 3 — Family tree
+
+```prolog
+parent(tom, bob).
+parent(bob, ann).
+ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+```
+
+Query: `ancestor(tom, ann).` → `true`.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Write append backwards
+
+Use `append` to split a list all ways. Observe the power
+of a relational definition.
+
+### DIY 2 — Solve Zebra
+
+The Zebra puzzle (Einstein's Riddle) is a canonical
+Prolog exercise. 100 lines.
+
+### TRY — Write a Sudoku solver
+
+With CLP(FD), a Sudoku solver is 30 lines. Read Markus
+Triska's version.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+
+---
+
 *End of document.*
