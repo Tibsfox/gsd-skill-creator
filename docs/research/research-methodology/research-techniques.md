@@ -175,3 +175,19 @@ The method is the message.
 ---
 
 *Further reading: Booth, Papaioannou, and Sutton, "Systematic Approaches to a Successful Literature Review" (2016). Higgins and Thomas, "Cochrane Handbook for Systematic Reviews of Interventions" (2019). Ahrens, "How to Take Smart Notes" (2017). Keshav, "How to Read a Paper" (ACM SIGCOMM, 2007). Boice, "Professors as Writers" (1990). Committee on Publication Ethics (COPE), guidelines at publicationethics.org.*
+
+## Study Guide — Research Techniques
+
+Key techniques: lit review, systematic review, Zettelkasten,
+three-pass reading (Keshav).
+
+## DIY — Read one paper the Keshav way
+
+First pass 5 min (title/abstract/intro/conclusions).
+Second pass 1 hr (details minus proofs). Third pass
+2-5 hrs (reconstruct everything).
+
+## TRY — Run a mini systematic review
+
+PICO question, search strategy, 20 papers, PRISMA
+diagram. 1 week of work.
