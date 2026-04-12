@@ -1,0 +1,260 @@
+# Economics Department Chipset Configuration
+# Tenth instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template and remapped
+# to economics -- seven agents named for economists, six domain skills,
+# three pre-composed teams, and five Grove record types.
+
+name: economics-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated economics department providing domain-routed
+  expertise through seven named agents (Smith, Keynes, Ostrom,
+  Sen, Robinson, Hayek, Varian), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college economics department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  microeconomics:
+    domain: economics
+    description: "Supply/demand, elasticity, market structures, game theory, welfare economics"
+    triggers:
+      - "supply and demand"
+      - "elasticity"
+      - "market structure"
+      - "game theory"
+      - "Nash equilibrium"
+      - "consumer surplus"
+      - "monopoly"
+      - "oligopoly"
+    agent_affinity: [robinson, smith, varian]
+
+  macroeconomics:
+    domain: economics
+    description: "GDP, inflation, unemployment, monetary policy, fiscal policy, business cycle"
+    triggers:
+      - "GDP"
+      - "inflation"
+      - "unemployment"
+      - "monetary policy"
+      - "fiscal policy"
+      - "recession"
+      - "business cycle"
+      - "aggregate demand"
+    agent_affinity: [keynes, hayek]
+
+  international-trade:
+    domain: economics
+    description: "Comparative advantage, trade policy, exchange rates, globalization"
+    triggers:
+      - "comparative advantage"
+      - "tariff"
+      - "trade"
+      - "exchange rate"
+      - "globalization"
+      - "balance of payments"
+      - "import"
+      - "export"
+    agent_affinity: [smith, sen, hayek]
+
+  public-policy:
+    domain: economics
+    description: "Taxation, regulation, externalities, public goods, government failure"
+    triggers:
+      - "tax"
+      - "regulation"
+      - "externality"
+      - "public good"
+      - "market failure"
+      - "government intervention"
+      - "carbon tax"
+      - "subsidy"
+    agent_affinity: [ostrom, hayek, keynes, varian]
+
+  behavioral-economics:
+    domain: economics
+    description: "Heuristics, biases, prospect theory, nudges, choice architecture"
+    triggers:
+      - "bias"
+      - "heuristic"
+      - "nudge"
+      - "prospect theory"
+      - "loss aversion"
+      - "behavioral"
+      - "bounded rationality"
+      - "framing effect"
+    agent_affinity: [varian, sen]
+
+  development-economics:
+    domain: economics
+    description: "Growth models, inequality, institutions, poverty, capability approach"
+    triggers:
+      - "poverty"
+      - "development"
+      - "inequality"
+      - "institutions"
+      - "capability"
+      - "foreign aid"
+      - "growth model"
+      - "HDI"
+    agent_affinity: [sen, ostrom, keynes]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Smith as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: smith
+
+  agents:
+    - name: smith
+      role: "department chair — classification, routing, synthesis, market coordination"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: keynes
+      role: "macroeconomist — aggregate demand, fiscal policy, business cycle"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: ostrom
+      role: "institutionalist — commons governance, polycentric systems, collective action"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: sen
+      role: "development economist — capability approach, poverty, inequality, welfare"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: robinson
+      role: "competition analyst — imperfect competition, monopsony, market power"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: hayek
+      role: "policy critic — knowledge problem, spontaneous order, limits of intervention"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: varian
+      role: "pedagogy guide — applied micro, technology markets, mechanism design, exposition"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  economics-analysis-team:
+    description: "Full department for complex multi-domain economic problems"
+    agents: [smith, keynes, ostrom, sen, robinson, hayek, varian]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  policy-team:
+    description: "Focused policy evaluation with balanced debate and institutional alternatives"
+    agents: [keynes, hayek, ostrom, varian]
+    use_when: "policy evaluation, regulatory design, tax analysis, commons governance"
+
+  markets-team:
+    description: "Market structure analysis with distributional and applied micro perspectives"
+    agents: [robinson, smith, sen, varian]
+    use_when: "industry analysis, competition assessment, market design, trade analysis"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 economics Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college economics department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (smith) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - microeconomics
+      - macroeconomics
+      - international-trade
+      - public-policy
+      - behavioral-economics
+      - development-economics
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "economics-department"
+  record_types:
+    - name: EconomicAnalysis
+      description: "Multi-perspective economic analysis with school-of-thought attribution"
+
+    - name: EconomicModel
+      description: "Formal or semi-formal economic model with assumptions, mechanism, and predictions"
+
+    - name: PolicyBrief
+      description: "Policy evaluation with for/against/alternative perspectives and distributional effects"
+
+    - name: EconomicExplanation
+      description: "Teaching artifact at a specified level with real-world examples"
+
+    - name: EconomicsSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "economics"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Scarcity & Choice"
+    - "Markets & Exchange"
+    - "Money & Banking"
+    - "Personal Finance"
+    - "Economic Systems"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
