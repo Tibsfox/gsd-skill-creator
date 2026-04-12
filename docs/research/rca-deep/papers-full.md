@@ -705,3 +705,18 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2025 industry AI-native RCA signals) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — RCA Deep Source Extraction
+
+This file is a reading list. Treat it as a curated
+bibliography for RCA research.
+
+## DIY — Read 3 papers from the list
+
+Pick 3 from different domains (healthcare, aviation,
+software). Find common patterns.
+
+## TRY — Write a mini-review
+
+Synthesize what you learned in a 500-word note. Compare
+to the enrichment files in this bucket.
