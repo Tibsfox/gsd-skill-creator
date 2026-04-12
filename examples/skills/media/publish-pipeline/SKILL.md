@@ -1,6 +1,6 @@
 ---
 name: publish-pipeline
-description: Markdown to HTML/PDF build + FTP sync to tibsfox.com. Pandoc + xelatex templates, branded output, automated deployment. Proven on 29-document HEL series.
+description: Markdown to HTML/PDF build + FTP sync to configured remote host. Pandoc + xelatex templates, branded output, automated deployment. Proven on 29-document HEL series.
 version: 1.0.0
 type: skill
 category: media
@@ -33,7 +33,7 @@ Markdown (.md) → pandoc → Standalone HTML (branded template)
 ## Build Command
 
 ```bash
-bash www/tibsfox/com/Research/PROJECT/build.sh
+bash www/$SITE_DOMAIN/Research/PROJECT/build.sh
 ```
 
 ## Template Setup
@@ -54,7 +54,7 @@ lftp -f /tmp/lftp-PROJECT.sh
 # Where remote path is /PROJECT (NOT /Research/PROJECT)
 ```
 
-**Critical:** The web server maps `tibsfox.com/Research/X/` to FTP root `/X/`, not to `/Research/X/`. Always upload to root-level project directories.
+**Critical:** The web server maps `$DEPLOY_HOST/Research/X/` to FTP root `/X/`, not to `/Research/X/`. Always upload to root-level project directories.
 
 ## Series Integration
 

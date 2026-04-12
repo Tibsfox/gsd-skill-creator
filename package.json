@@ -42,10 +42,9 @@
     "desktop:build": "cd src-tauri && PKG_CONFIG_PATH=\"$(pwd)/.pkgconfig:${PKG_CONFIG_PATH:-}\" npx tauri build",
     "desktop:test": "cd desktop && npx vitest run",
     "docs:api": "npx typedoc",
-    "sync": "node www/tibsfox/com/api/sync-local.mjs",
-    "sync:remote": "node www/tibsfox/com/api/sync-local.mjs --remote",
-    "sync:files": "lftp -u claudefox@tibsfox.com ftp.tibsfox.com -e 'set ssl:verify-certificate no; mirror -R --only-newer --parallel=4 www/tibsfox/com/Research/ .; quit'",
-    "deploy": "npm run sync:remote && npm run sync:files"
+    "sync": "bash scripts/sync-research-to-live.sh --dry-run",
+    "sync:live": "bash scripts/sync-research-to-live.sh",
+    "deploy": "bash scripts/sync-research-to-live.sh"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",

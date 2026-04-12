@@ -35,7 +35,7 @@ import type { LodLevel } from '../lod/types.js';
  *
  *   public    — Safe to publish. Research content, repo docs, www content,
  *               published artifacts, open-source code.
- *               Stored: anywhere, including external SQL (tibsfox.com).
+ *               Stored: anywhere, including external SQL (configured via EXTERNAL_DB_HOST).
  */
 export type MemoryVisibility = 'private' | 'internal' | 'public';
 
@@ -85,7 +85,7 @@ export const STORAGE_POLICIES: Record<MemoryVisibility, StoragePolicy> = {
   public: {
     description: 'Safe to publish. Research, docs, www content, open-source.',
     allowedLocalTiers: [100, 200, 300, 350, 400, 500] as LodLevel[],
-    allowExternalSync: true,   // Can sync to tibsfox.com SQL
+    allowExternalSync: true,   // Can sync to configured external SQL
     allowPublicSite: true,     // Can appear on published sites
     allowGitCommit: true,      // Can be committed
   },
@@ -157,7 +157,7 @@ export function inferVisibility(
  *
  * Returns which PostgreSQL database/schema a memory should be stored in.
  * Private + internal → local PostgreSQL (localhost:5432, artemis schema)
- * Public → can ALSO sync to external PostgreSQL (tibsfox.com)
+ * Public → can ALSO sync to external PostgreSQL (configured via EXTERNAL_DB_HOST)
  */
 export interface DatabaseRoute {
   /** Local database connection (always present). */
@@ -173,7 +173,10 @@ export function routeToDatabase(visibility: MemoryVisibility): DatabaseRoute {
   if (visibility === 'public') {
     return {
       local,
-      external: { host: 'tibsfox.com', schema: 'public_research' },
+      external: {
+        host: process.env.EXTERNAL_DB_HOST ?? 'localhost',
+        schema: process.env.EXTERNAL_DB_SCHEMA ?? 'public_research',
+      },
     };
   }
 
