@@ -2148,3 +2148,34 @@ This research cross-links to the following college departments in
 *End of document. Thread focus: applications and modern forms of logic programming. Sibling threads cover history, language semantics, and implementations.*
 
 *Appendix G (2025–2026 enrichment) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Logic Programming Applications
+
+### Key concepts
+
+1. **Datalog** — Prolog minus recursion depth issues;
+   used in databases and static analysis.
+2. **Answer Set Programming (ASP)** — declarative problem
+   solving via stable models.
+3. **Constraint Logic Programming (CLP)** — logic plus
+   constraints over domains like integers, reals,
+   booleans.
+4. **Expert systems** — the 1970s-80s application domain;
+   still in use for certifications.
+
+## DIY — Install SWI-Prolog + solve a puzzle
+
+`apt install swi-prolog`. Write a Zebra puzzle or Sudoku
+solver. 30 lines.
+
+## TRY — Datalog for data analysis
+
+Use Soufflé or clingo. Express a join query as Datalog.
+Compare to SQL.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
