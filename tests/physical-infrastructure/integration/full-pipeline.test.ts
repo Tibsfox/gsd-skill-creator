@@ -203,13 +203,13 @@ describe('Full Pipeline Integration Tests (IT-01 through IT-18)', () => {
   // -----------------------------------------------------------------------
   // IT-14: Safety warden uses Opus model
   // -----------------------------------------------------------------------
-  it('IT-14: safety-warden uses claude-opus model per chipset', () => {
+  it('IT-14: safety-warden uses opus model per chipset', () => {
     const chipsetContent = readFileSync('skills/physical-infrastructure/chipset.yaml', 'utf8');
     // Find the safety-warden agent block
     const wardenIndex = chipsetContent.indexOf('safety-warden:');
     expect(wardenIndex).toBeGreaterThan(-1);
     const wardenSection = chipsetContent.substring(wardenIndex, wardenIndex + 200);
-    expect(wardenSection).toContain('claude-opus');
+    expect(wardenSection).toMatch(/model:\s*opus/);
   });
 
   // -----------------------------------------------------------------------
