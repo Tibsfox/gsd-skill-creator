@@ -498,3 +498,72 @@ This research cross-links to the following college departments in
 *Compiled from Bell Labs historical records, ISO/IEC WG14 archives, ACM Turing Award citations, and the public writing of Dennis Ritchie, Brian Kernighan, Ken Thompson, Rob Pike, Bjarne Stroustrup, and the C standardization community. Draws on Ritchie's own "The Development of the C Language" (HOPL-II, 1993) and "The Evolution of the Unix Time-sharing System" (1984) for the primary narrative of C's origins at Bell Labs.*
 
 *The C23/C2y addendum and the Related College Departments cross-link were added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — C History & Culture
+
+### Why read this
+
+C is not a language; it is an environment. Reading its history
+teaches you why Unix, Linux, Windows, macOS, iOS, Android,
+PostgreSQL, Redis, SQLite, Python, Ruby, Lua, PHP, JavaScript
+runtimes, Java runtimes, and nearly every other significant
+piece of software written after 1980 is built on a C
+foundation. The language is load-bearing for the whole field.
+
+### Reading order
+
+Chronological. The history is also the culture.
+
+### Questions to hold
+
+1. Why did C succeed where BCPL and B did not?
+2. What made K&R so effective as both a spec and a textbook?
+3. Why did ANSI C (C89) take 11 years to standardize?
+4. Why do C99's features (VLAs, designated initializers,
+   complex numbers) still feel "new" 25 years later?
+5. What does C23 actually add that matters in practice?
+6. Why is C still unreplaceable in 2026?
+
+---
+
+## Worked Examples
+
+### Example 1 — Read K&R
+
+The second edition of *The C Programming Language* (Kernighan
+and Ritchie, 1988) is 272 pages. Read it in a weekend. You
+will understand not just C, but also what a perfect
+programming book looks like.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Compile the original K&R examples
+
+The K&R source code is online. Pick five examples and compile
+them with modern `gcc -std=c89 -Wall`. Most work unchanged.
+The few that don't will show you exactly what ANSI C changed.
+
+### DIY 2 — Read one chapter of the Linux kernel
+
+Pick any `.c` file from `drivers/` or `fs/` in the Linux
+kernel source. Read it. Notice the conventions: no dynamic
+allocation in hot paths, extensive use of macros, preference
+for simple loops over clever abstractions. This is production
+C culture.
+
+### TRY — Interview Dennis Ritchie
+
+Read his HOPL-II paper *The Development of the C Language*
+(1993). It is short, direct, and written in the same clear
+prose as K&R. The man's voice is in the language he created.
+
+---
+
+## Related College Departments (C history)
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
