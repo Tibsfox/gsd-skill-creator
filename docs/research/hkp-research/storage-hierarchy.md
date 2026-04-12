@@ -93,4 +93,22 @@ Every piece of software ever written is, at some level, an argument about which 
 
 ---
 
+## Study Guide — Storage Hierarchy
+
+### Tiers
+
+L1 → L2 → L3 → DRAM → persistent memory → NVMe →
+SATA SSD → HDD → object → tape. Each step is 10-1000x
+slower and 10-1000x cheaper.
+
+## DIY — Measure latency from each tier
+
+Write a micro-benchmark that reads 1 byte from each
+available tier on your machine. Confirm the pyramid.
+
+## TRY — Use Intel Optane PMem (if available)
+
+Optane is being EOL'd but still exists. Map a file with
+`mmap` on a pmem device. Observe the performance.
+
 *Next in the HKP series: filesystems and the software abstraction layer that pretends all of these tiers are one big flat address space.*

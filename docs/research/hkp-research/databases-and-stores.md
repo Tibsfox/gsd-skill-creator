@@ -66,3 +66,26 @@ A recurring pitch claims that one engine can serve documents, graphs, key-values
 ## 13. What Stays
 
 The paradigms accumulate. None of them retire. Relational databases remain the default for transactional systems and will do so indefinitely because SQL, normalization, and ACID remain the cleanest answers to their problem. NoSQL stores occupy the niches where relational assumptions break — massive scale, schemaless ingestion, specialized access patterns. Columnar engines dominate analytics. Graph and time-series engines carve out workloads that general-purpose databases underserve. Vector databases are the newest stratum, reshaping retrieval for the embedding era. NewSQL tries to give back what NoSQL gave up. Each paradigm is an answer to a specific question about the shape of data and the tradeoff a workload is willing to pay. The oldest insight still holds: the hardest part of database design is knowing which questions your data is going to be asked.
+
+## Study Guide — Databases & Stores
+
+### Paradigm map
+
+- **Relational:** PostgreSQL, MySQL, SQL Server, Oracle.
+- **Document:** MongoDB, Couchbase.
+- **Key-value:** Redis, DynamoDB.
+- **Columnar:** ClickHouse, Snowflake, BigQuery.
+- **Graph:** Neo4j, Neptune.
+- **Time-series:** InfluxDB, TimescaleDB.
+- **Vector:** pgvector, Pinecone, Qdrant.
+- **NewSQL:** Spanner, CockroachDB, YugabyteDB.
+
+## DIY — Same query, 3 paradigms
+
+Model one small domain in relational, document, and
+graph. Observe which is easier.
+
+## TRY — CockroachDB single-node
+
+`cockroach start-single-node`. Create a table, insert.
+You've just run a distributed SQL engine.

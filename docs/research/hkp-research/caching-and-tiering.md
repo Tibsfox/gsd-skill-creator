@@ -69,3 +69,21 @@ Caching exploits the past; prefetching exploits the predictable future. **Hardwa
 ## 11. Measuring the Working Set
 
 Right-sizing a cache is an optimization problem that needs a cost function, and the canonical cost function is the **miss ratio curve (MRC)**: the miss ratio as a function of cache size. Mattson's 1970 stack algorithm gave us MRCs in a single pass over the reference trace, but only for stack policies and only at the cost of storing the entire reference history. **SHARDS** — Spatially Hashed Approximate Reuse Distance Sampling — from Carl Waldspurger, Nohhyun Park, Alex Garthwaite, and Irfan Ahmad ("Efficient MRC Construction with SHARDS," FAST 2015) produces accurate MRCs from a small uniform hash sample, bringing online MRC estimation within the budget of production systems. **Counter Stacks** (Jake Wires, Stephen Ingram, Zachary Drudi, Nicholas Harvey, and Andrew Warfield, "Characterizing Storage Workloads with Counter Stacks," OSDI 2014) use probabilistic counters to estimate reuse distances over arbitrarily long windows with bounded memory. Together these techniques give operators the thing Denning promised in 1968: a real-time, actionable measurement of the working set, which turns "how much cache do I need?" from a religious argument into a line on a chart. In a world where DRAM is the most expensive line item in a datacentre bill and the fastest tier is also the one you cannot over-provision, that graph is the difference between paying for the cache your workload actually needs and paying for the cache you were afraid not to buy.
+
+## Study Guide — Caching & Tiering
+
+### Key concepts
+
+1. **LRU, LFU, ARC, W-TinyLFU** — eviction policies.
+2. **Miss ratio curves** — cost function for sizing.
+3. **Hardware vs software prefetch** — ready vs hinted.
+4. **Tiered storage** — hot/warm/cold migration.
+
+## DIY — Implement LRU + MRC
+
+200 lines of Python. Feed a reference trace, plot MRC.
+
+## TRY — Tune Redis eviction
+
+On a running Redis, switch eviction policy (`maxmemory-
+policy allkeys-lru` → `allkeys-lfu`). Measure hit ratio.

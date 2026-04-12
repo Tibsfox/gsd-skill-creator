@@ -64,4 +64,19 @@ This quarrel is not idle for a housekeeping discipline. A data-management system
 
 ---
 
+## Study Guide — Data Foundations
+
+Key distinctions: raw vs cooked, data vs information vs
+knowledge, facts vs observations. Kitchin's *Data
+Revolution* (2014) for the constructivist view.
+
+## DIY — Map provenance for one dataset
+
+Pick any dataset you use. Trace every transformation
+back to source. Document where each value came from.
+
+## TRY — Read Kitchin 2014
+
+Chapter 1 is the distilled argument.
+
 *Next in the HKP series: storage hierarchies from tape to NVMe to object stores, and why the physical substrate still decides what the logical layer can promise.*

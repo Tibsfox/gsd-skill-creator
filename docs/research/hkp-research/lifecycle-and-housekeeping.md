@@ -67,3 +67,16 @@ The moral is that a lifecycle policy is only honest if it accounts for the *work
 ---
 
 **See also** in the HKP series: the retrieval and indexing document (fast-read side of the trade-off); the storage hierarchy document (why tiers exist at all); the governance document (how legal and technical controls meet). Housekeeping is the connective tissue between them.
+
+## Study Guide — Lifecycle & Housekeeping
+
+Key ops: vacuum, compact, prune, archive, expire, delete.
+
+## DIY — Run VACUUM ANALYZE on a real DB
+
+Observe the difference in planner behavior before/after.
+
+## TRY — Implement soft delete
+
+Add `deleted_at` column. Filter queries. Note the
+compound index requirements.

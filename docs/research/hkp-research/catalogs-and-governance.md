@@ -183,3 +183,21 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (Iceberg REST catalog convergence, Unity Catalog dual-format, DuckLake) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Catalogs & Governance
+
+### Catalogs
+
+- **Iceberg REST** — open catalog protocol.
+- **Unity Catalog** — Databricks.
+- **Polaris, Nessie, Gravitino** — alternatives.
+- **DuckLake** — catalog-on-DuckDB.
+
+## DIY — Set up Apache Polaris
+
+Local instance, register one table, query.
+
+## TRY — Implement row-level policies
+
+Use Unity Catalog or Apache Ranger to apply a row-level
+policy. Observe the query engine enforcing it.

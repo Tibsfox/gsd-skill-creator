@@ -82,3 +82,23 @@ And so we arrive at the **capture-retrieval asymmetry**, the hoarder's dilemma. 
 Bush imagined, in 1945, that the Memex would let a scholar retrace the associative trails of a predecessor and thereby inherit not just facts but patterns of thought. Eighty years later, with our local disks indexed, our notes bidirectionally linked, our screens captured, and our highlights semantically embedded, we are closer than ever to that vision — and further, because the volume of personal information we produce has grown faster than the tools for navigating it. The individual's lifelong struggle to find what they already have is not a problem any single product will solve. It is a condition of being a literate, recording creature in a high-bandwidth world, and the best we can do is choose tools that take capture seriously without pretending retrieval is free, and that keep our data in formats we will still be able to open when the vendor is gone.
 
 The good news, discoverable in every strand of this history from Locke's vowel-index to Obsidian's Markdown vault, is that the problem is at least stable. Each generation rediscovers the same insights, often without knowing their ancestors, and each generation ships a slightly better Memex. The trails are not lost; they are only waiting to be walked again.
+
+## Study Guide — Personal Information Management
+
+### Tools
+
+- **Obsidian** — local markdown vault, bidirectional links.
+- **Logseq** — outliner/PKM.
+- **Notion** — cloud structured.
+- **Zettelkasten** — Luhmann's method.
+- **Rewind / Screenpipe** — continuous capture.
+
+## DIY — Build a Zettelkasten
+
+100 notes, bidirectional links, atomic ideas. Use
+Obsidian.
+
+## TRY — Replicate Locke's commonplace book
+
+Use a paper notebook with vowel-index method (Locke 1706).
+30 entries. Note which tool design choices become obvious.
