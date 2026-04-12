@@ -1,11 +1,14 @@
 ---
 name: stellar-spectroscopy
 description: Stellar spectral analysis from first light to chemical abundance. Covers continuum emission and absorption, the OBAFGKM classification sequence, luminosity classes, line identification, Doppler shifts, curve-of-growth abundance analysis, and the astrophysical conclusions that follow from a spectrum. Use when classifying a star, measuring radial velocity, inferring composition or temperature, or teaching why the Sun is mostly hydrogen.
-category: astronomy
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: astronomy
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/astronomy/stellar-spectroscopy/SKILL.md
+superseded_by: null
 ---
 # Stellar Spectroscopy
 

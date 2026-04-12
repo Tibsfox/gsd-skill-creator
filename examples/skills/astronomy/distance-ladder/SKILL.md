@@ -1,11 +1,14 @@
 ---
 name: distance-ladder
 description: The cosmic distance ladder from radar ranging to Hubble flow. Covers parallax, spectroscopic parallax, cluster main-sequence fitting, Cepheid and RR Lyrae period-luminosity relations, Type Ia supernovae, Tully-Fisher, surface brightness fluctuation, and redshift-distance relations. Use when estimating, cross-checking, or critiquing any astronomical distance from a parsec to a gigaparsec.
-category: astronomy
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: astronomy
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/astronomy/distance-ladder/SKILL.md
+superseded_by: null
 ---
 # The Cosmic Distance Ladder
 
