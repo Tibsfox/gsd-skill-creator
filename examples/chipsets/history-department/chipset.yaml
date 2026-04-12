@@ -1,0 +1,329 @@
+# History Department Chipset Configuration
+# Second instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template and remapped
+# to the history domain.
+
+name: history-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated history department providing domain-routed
+  expertise through seven named agents (Herodotus, Ibn-Khaldun,
+  Arendt, Braudel, Tuchman, Zinn, Montessori), six knowledge skills,
+  and three pre-composed teams. Persists work via Grove records and
+  integrates with the college history department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  source-analysis:
+    domain: history
+    description: "Primary source critique — provenance, bias, reliability, corroboration"
+    triggers:
+      - "analyze this source"
+      - "primary source"
+      - "document analysis"
+      - "source critique"
+      - "who wrote this"
+      - "reliability"
+      - "provenance"
+      - "bias in"
+    agent_affinity: [herodotus, arendt]
+
+  causation-consequence:
+    domain: history
+    description: "Causal reasoning — why events happened, chains of consequence, counterfactuals"
+    triggers:
+      - "why did"
+      - "what caused"
+      - "consequence of"
+      - "led to"
+      - "result of"
+      - "because of"
+      - "counterfactual"
+      - "what if"
+    agent_affinity: [ibn-khaldun, braudel]
+
+  continuity-change:
+    domain: history
+    description: "Patterns of continuity and change over time — periodization, turning points, longue duree"
+    triggers:
+      - "change over time"
+      - "continuity"
+      - "turning point"
+      - "periodization"
+      - "longue duree"
+      - "transformation"
+      - "evolution of"
+      - "remained the same"
+    agent_affinity: [braudel, ibn-khaldun]
+
+  historical-perspectives:
+    domain: history
+    description: "Multiple perspectives on historical events — elite vs. popular, colonizer vs. colonized, gendered readings"
+    triggers:
+      - "perspective"
+      - "point of view"
+      - "how did X experience"
+      - "from the perspective of"
+      - "marginalized"
+      - "subaltern"
+      - "bottom-up"
+      - "people's history"
+    agent_affinity: [zinn, arendt]
+
+  historiography:
+    domain: history
+    description: "History of historical writing — schools of thought, methodological debates, shifting interpretations"
+    triggers:
+      - "historiography"
+      - "Annales school"
+      - "historical method"
+      - "how have historians"
+      - "interpretation of"
+      - "revisionist"
+      - "school of thought"
+      - "methodology"
+    agent_affinity: [herodotus, braudel]
+
+  oral-history:
+    domain: history
+    description: "Oral traditions, testimony, memory studies, and non-textual sources"
+    triggers:
+      - "oral history"
+      - "oral tradition"
+      - "testimony"
+      - "memory"
+      - "remembrance"
+      - "interview"
+      - "living memory"
+      - "eyewitness"
+    agent_affinity: [zinn, montessori]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Herodotus as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: herodotus
+
+  agents:
+    - name: herodotus
+      role: "department chair — classification, routing, synthesis, historiographical framing"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: ibn-khaldun
+      role: "social-economic analyst — asabiyyah cycles, trade networks, material conditions"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: arendt
+      role: "political-modern analyst — political theory, totalitarianism, power structures, modernity"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: braudel
+      role: "longue duree analyst — multi-temporal analysis, geographic determinism, structural history"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: tuchman
+      role: "narrative-military specialist — narrative construction, military history, human decision-making"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: zinn
+      role: "people's-social historian — bottom-up history, labor, marginalized voices, resistance"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: montessori
+      role: "pedagogy guide — concept scaffolding, learning pathways, level-appropriate explanation"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  history-seminar-team:
+    description: "Full department for comprehensive historical analysis and comparative studies"
+    agents: [herodotus, ibn-khaldun, arendt, braudel, tuchman, zinn, montessori]
+    use_when: "multi-period, multi-perspective, research-level, or full-analysis requests"
+
+  source-workshop-team:
+    description: "Focused source analysis, document interpretation, and evidence evaluation"
+    agents: [herodotus, arendt, zinn, montessori]
+    use_when: "primary source analysis, document critique, or evidence evaluation"
+
+  narrative-team:
+    description: "Historical narrative construction and longue duree analysis"
+    agents: [tuchman, braudel, ibn-khaldun, montessori]
+    use_when: "narrative history writing, longue duree analysis, or campaign narratives"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 history Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college history department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (herodotus) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - source-analysis
+      - causation
+      - continuity-change
+      - perspectives
+      - historiography
+      - oral-history
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "history-department"
+  record_types:
+    - name: HistoricalAnalysis
+      description: "Multi-perspective analytical work product with evidence and framework attribution"
+
+    - name: HistoricalNarrative
+      description: "Structured narrative with temporal layers and source citations"
+
+    - name: SourceCritique
+      description: "Primary source evaluation with provenance, bias, reliability, and silence analysis"
+
+    - name: HistoricalExplanation
+      description: "Teaching artifact at a specified level with concept scaffolding"
+
+    - name: HistorySession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "history"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Ancient & Classical Worlds"
+    - "Medieval & Early Modern"
+    - "Revolution & Nation-Building"
+    - "Empire, Colonialism & Resistance"
+    - "Modern & Contemporary"
+  concepts:
+    # Ancient & Classical Worlds (4 concepts)
+    - id: hist-acw-01
+      name: "River Valley Civilizations"
+      wing: "Ancient & Classical Worlds"
+    - id: hist-acw-02
+      name: "Classical Empires & Governance"
+      wing: "Ancient & Classical Worlds"
+    - id: hist-acw-03
+      name: "Trade Routes & Cultural Exchange"
+      wing: "Ancient & Classical Worlds"
+    - id: hist-acw-04
+      name: "Religion & Philosophical Traditions"
+      wing: "Ancient & Classical Worlds"
+
+    # Medieval & Early Modern (4 concepts)
+    - id: hist-mem-01
+      name: "Feudalism & Manorialism"
+      wing: "Medieval & Early Modern"
+    - id: hist-mem-02
+      name: "Crusades, Contact & Conflict"
+      wing: "Medieval & Early Modern"
+    - id: hist-mem-03
+      name: "Renaissance & Reformation"
+      wing: "Medieval & Early Modern"
+    - id: hist-mem-04
+      name: "Exploration & Early Globalization"
+      wing: "Medieval & Early Modern"
+
+    # Revolution & Nation-Building (4 concepts)
+    - id: hist-rnb-01
+      name: "Enlightenment & Political Revolution"
+      wing: "Revolution & Nation-Building"
+    - id: hist-rnb-02
+      name: "Industrial Revolution & Urbanization"
+      wing: "Revolution & Nation-Building"
+    - id: hist-rnb-03
+      name: "Nationalism & State Formation"
+      wing: "Revolution & Nation-Building"
+    - id: hist-rnb-04
+      name: "Abolition & Emancipation Movements"
+      wing: "Revolution & Nation-Building"
+
+    # Empire, Colonialism & Resistance (4 concepts)
+    - id: hist-ecr-01
+      name: "Imperialism & Colonial Systems"
+      wing: "Empire, Colonialism & Resistance"
+    - id: hist-ecr-02
+      name: "Anti-Colonial Movements & Decolonization"
+      wing: "Empire, Colonialism & Resistance"
+    - id: hist-ecr-03
+      name: "Slavery, Forced Labor & Resistance"
+      wing: "Empire, Colonialism & Resistance"
+    - id: hist-ecr-04
+      name: "Indigenous Histories & Survivance"
+      wing: "Empire, Colonialism & Resistance"
+
+    # Modern & Contemporary (4 concepts)
+    - id: hist-mc-01
+      name: "World Wars & Totalitarianism"
+      wing: "Modern & Contemporary"
+    - id: hist-mc-02
+      name: "Cold War & Decolonization"
+      wing: "Modern & Contemporary"
+    - id: hist-mc-03
+      name: "Civil Rights & Social Movements"
+      wing: "Modern & Contemporary"
+    - id: hist-mc-04
+      name: "Globalization & the Digital Age"
+      wing: "Modern & Contemporary"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
