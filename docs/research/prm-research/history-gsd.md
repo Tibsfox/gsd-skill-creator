@@ -1693,3 +1693,34 @@ That someone will be human. And that will still be called project management.
 
 *Research completed: April 2026*
 *PNW Research Series — Project Management & AI Systems*
+
+---
+
+## Study Guide — PM History & GSD
+
+### Questions
+
+- Why did the pyramids and Manhattan Project not need
+  "project management" as a discipline?
+- Why did waterfall become the 1960s default?
+- What did agile explicitly reject, and what did it
+  implicitly accept?
+- Where does AI-native PM (GSD and peers) fit in this
+  history?
+
+## DIY — Read one classic
+
+Pick one: Brooks' *Mythical Man-Month*, DeMarco's
+*Controlling Software Projects*, Highsmith's *Adaptive
+Software Development*.
+
+## TRY — Map your own workflow
+
+Describe how you actually work in 10 bullet points.
+Compare to waterfall, agile, and GSD. Notice which
+elements you borrow from each.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)

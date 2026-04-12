@@ -2498,3 +2498,28 @@ This research cross-links to the following college departments in
 *Total references: 66 (main body) + 8 (PMBOK 8 addendum sources).*
 
 *Addendum (PMBOK 8th Edition, November 2025) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — AI in Project Management
+
+### Categories of tools
+
+- **Scheduling / estimation:** ChatPRD, ClickUp AI.
+- **Risk analysis:** Riskonnect, Deltek Acumen.
+- **Reporting:** Jira + AI summaries.
+- **Agentic PMs:** Devin-class, Lindy, Cognition.
+
+## DIY — Use one AI PM tool on a real project
+
+Pick ChatPRD or ClickUp AI. Load your real project.
+Compare the AI's plan to your plan.
+
+## TRY — Build a GSD-style workflow
+
+Take GSD's discuss→plan→execute loop. Run it on a real
+task in your own work. Observe the discipline it forces.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
