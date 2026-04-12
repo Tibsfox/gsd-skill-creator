@@ -109,3 +109,20 @@ Every index has a cost, and that cost is paid on write. Inserting one row into a
 ## 12. Conclusion: The Library Behind the Query
 
 From Luhn's 1953 hashing memo to Malkov's 2016 HNSW graph, indexing is the accumulation of tricks that let computers ignore most of their data most of the time. A modern database engine contains, in a single binary, B+ trees for primary keys, hash indexes for joins, LSM trees for write-heavy columnstores, inverted indexes for full-text, R-trees for geometry, HNSW graphs for embeddings, and Bloom filters bolted onto all of them. Each structure embodies a different answer to the same question — *what can I precompute about my data so that tomorrow's query runs in microseconds instead of minutes?* — and each answer is a negotiation between read time, write time, space, and accuracy. The art of retrieval is the art of picking the right negotiation for the workload you actually have, not the one you wish you had.
+
+## Study Guide — Indexing & Retrieval
+
+### Structures
+
+- B+ tree, hash, LSM, inverted, R-tree, HNSW, Bloom.
+
+## DIY — Implement a B+ tree
+
+200 lines of Python. Understand the leaf/internal split
+and rebalance.
+
+## TRY — Use pgvector HNSW
+
+In PostgreSQL, `CREATE INDEX ON items USING hnsw
+(embedding vector_cosine_ops)`. Query by vector
+similarity.
