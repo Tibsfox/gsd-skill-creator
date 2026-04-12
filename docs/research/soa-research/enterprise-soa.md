@@ -2683,3 +2683,32 @@ The highest value of the EIP book is not the individual patterns but the shared 
 ---
 
 *Part 3 of 6 complete. Sections 10-13 (BPEL, governance, tooling, certification) next.*
+
+---
+
+## Study Guide — Enterprise SOA Classical Stack
+
+### Key tools
+
+- **ESB** — Enterprise Service Bus (TIBCO, IBM Integration
+  Bus, Mule).
+- **BPEL** — Business Process Execution Language.
+- **WS-\*** — SOAP, WSDL, WS-Security, WS-AtomicTransaction.
+- **EIP** — Enterprise Integration Patterns (Hohpe & Woolf).
+- **Camel, Mule** — EIP engines in Java.
+
+## DIY — Build an EIP pipeline in Apache Camel
+
+Write a Camel route: file-in → transform → filter → JMS
+queue → HTTP post. 10 lines.
+
+## TRY — Read the EIP book
+
+*Enterprise Integration Patterns* (2003) by Hohpe and
+Woolf. 65 patterns, each with a diagram. Still the single
+best reference for integration work.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
