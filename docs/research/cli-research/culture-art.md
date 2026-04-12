@@ -1340,3 +1340,70 @@ fifty years, it does it very, very well.
 ---
 
 *Part of the PNW Research Series. Written at the terminal, about the terminal, for the terminal.*
+
+---
+
+## Study Guide — Terminal Culture & Art
+
+### Why read this
+
+Terminal culture is the only programmer subculture that has been
+continuously alive since 1970. It has its own aesthetic (ASCII
+art, figlet banners, cowsay, fortune files), its own rituals
+(dotfiles repos, terminal themes, Nerd Fonts), and its own heroes
+(Stallman, Torvalds, Moolenaar, Dickey). Reading the culture
+file gives you the anthropological backdrop for everything
+technical in the other three cli files.
+
+### Reading order
+
+Read linearly. The file is an essay, not a reference.
+
+### Questions to hold
+
+- Why has the terminal survived despite six decades of people
+  trying to replace it?
+- What does a "power user" actually mean, and why is it a
+  cultural category and not a technical one?
+- What is the aesthetic appeal of ASCII art, and why does it
+  persist in an era of 4K displays?
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Build your own dotfiles repo
+
+Pick 5 config files you customize (`.bashrc`, `.vimrc`,
+`.tmux.conf`, `.gitconfig`, editor config) and put them in a
+version-controlled dotfiles repo. Write a bootstrap script.
+This is the terminal user's rite of passage.
+
+### DIY 2 — Generate ASCII art
+
+`figlet Hello` produces a banner. `toilet -f big --gay Welcome`
+adds colour. `jp2a photo.jpg` converts an image to ASCII. Try
+all three.
+
+### DIY 3 — Pick one terminal hero
+
+Read a biographical article about Stallman, Torvalds,
+Moolenaar, or Dickey. Understand the shape of the life that
+produced the tool you use every day.
+
+### TRY — Write a fortune file
+
+Write a file of 20 aphorisms, each separated by `%` on its own
+line. Compile with `strfile`. Run `fortune` on it. You have
+joined a tradition that started on Unix V6 in 1975.
+
+---
+
+## Related College Departments (terminal culture)
+
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)
+  — terminal culture has a prose tradition (*The Jargon File*,
+  *The Hacker's Dictionary*, *Unix Power Tools*).
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — the unbroken cultural line from 1970 to 2026 is a history
+  subject.

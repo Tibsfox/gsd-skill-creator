@@ -794,3 +794,168 @@ main "$@"
 ---
 
 *Shell scripting is not glamorous work. It does not get conference talks or venture capital. But it is the substrate on which everything else runs. Every Docker container starts with a shell script. Every CI pipeline is a shell script wearing a YAML costume. Every system administrator's muscle memory is shell. The craft deserves respect, and respect means understanding the machinery -- not just copying Stack Overflow answers until the tests pass.*
+
+---
+
+## Study Guide — Shell Scripting
+
+### Prerequisites
+
+- A Linux, macOS, or WSL environment.
+- Bash 5 or later. Check with `bash --version`. On macOS the
+  stock `bash` is old (3.2, for licensing reasons); install a
+  newer version with `brew install bash` and put it ahead of
+  `/bin/bash` in your PATH.
+- `shellcheck` installed. This is not optional; it is the lint
+  tool that prevents most shell bugs before they reach runtime.
+  On Debian: `sudo apt install shellcheck`.
+
+### Key concepts
+
+1. **Quoting is everything.** Unquoted variables split on
+   whitespace and glob. Quoted variables do not. The difference
+   is "this script works on files with spaces in their names"
+   vs "this script silently corrupts your data."
+2. **`set -euo pipefail` is the seatbelt.** `-e` exits on error,
+   `-u` errors on undefined variables, `-o pipefail` makes
+   pipeline failures propagate. Every new script starts with
+   this line unless you have a specific reason not to.
+3. **Trap handlers clean up.** `trap 'rm -f "$tmp"' EXIT`
+   guarantees a temporary file is removed whether the script
+   exits normally, on error, or on `^C`.
+4. **`[[ ]]` is not `[ ]`.** The double-bracket construct is a
+   Bash/Zsh extension that is safer, clearer, and supports
+   regex. Use it unless you need POSIX portability.
+5. **Subshells vs functions.** A subshell `(cmd)` is a fork with
+   its own environment; a function is not. Variable assignments
+   in a subshell do not leak to the parent.
+
+### 1-week plan
+
+- Day 1: Rewrite three of your Python scripts that are <50
+  lines as shell scripts. Run `shellcheck` over each.
+- Day 2: Read the bash(1) man page SHELL GRAMMAR and PARAMETER
+  EXPANSION sections. Slow.
+- Day 3: Write a `trap`-based cleanup script that creates a
+  temporary file, does work, and guarantees cleanup.
+- Day 4: Write a script that processes `find -print0 | xargs
+  -0` over files with spaces in their names. Test with a
+  directory containing intentionally weird filenames.
+- Day 5: Write a script that uses `getopts` to parse command
+  line options with default values, required arguments, and a
+  help message.
+- Day 6: Read *Classic Shell Scripting* chapters 1-4.
+- Day 7: Rewrite one of your CI workflows' long `run:` blocks
+  as a real script with proper quoting, error handling, and
+  logging.
+
+---
+
+## Programming Examples
+
+### Example 1 — The defensive script template
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly TMP="$(mktemp -d)"
+trap 'rm -rf "$TMP"' EXIT
+
+log() { printf '[%s] %s\n' "$(date +%H:%M:%S)" "$*" >&2; }
+die() { log "ERROR: $*"; exit 1; }
+
+main() {
+    [[ $# -ge 1 ]] || die "usage: $0 FILE..."
+    for f in "$@"; do
+        [[ -f "$f" ]] || die "not a file: $f"
+        log "processing $f"
+        # ... work ...
+    done
+}
+
+main "$@"
+```
+
+This is the skeleton every serious Bash script in 2026 starts
+with. Shellcheck validates it clean. The `IFS=$'\n\t'` keeps
+word splitting safer in corner cases (no splitting on spaces
+unless you ask).
+
+### Example 2 — Processing files with whitespace
+
+```bash
+find . -name '*.log' -print0 | while IFS= read -r -d '' f; do
+    printf 'file: %s\n' "$f"
+    wc -l < "$f"
+done
+```
+
+`-print0` and `-d ''` use NUL separators, which are the only
+byte illegal in a filename. This works on files with spaces,
+newlines, quotes, or any other nastiness.
+
+### Example 3 — A shell function with a named argument
+
+```bash
+retry() {
+    local max="${1:?usage: retry MAX CMD...}"
+    shift
+    local n=0
+    until "$@"; do
+        (( ++n >= max )) && return 1
+        sleep "$(( n * 2 ))"
+    done
+}
+
+retry 5 curl -fsSL https://example.com/api
+```
+
+Retries a command up to N times with exponential backoff. The
+`${1:?...}` expansion fails fast with a usage message if the
+argument is missing.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Lint everything you own
+
+`find ~ -name '*.sh' -exec shellcheck {} \;`. Read every
+finding. Fix the serious ones. Ignore the stylistic ones if
+you disagree with the project's style rules.
+
+### DIY 2 — Replace a 500-line bash script with Python
+
+Pick any bash script you maintain that is over 500 lines.
+Rewrite it in Python. Compare line counts, runtime, and
+maintainability. This is the exercise that shows you the
+point at which bash stops being the right tool.
+
+### DIY 3 — Write a testable shell library
+
+Create a `lib.sh` file with a few utility functions. Use
+`bats` (Bash Automated Testing System) to write unit tests.
+Run `bats test/*.bats`. You will have shell code with real
+test coverage — rare in practice and a strong signal of
+craft.
+
+### TRY — Replace one Docker ENTRYPOINT with a proper shell script
+
+Most Docker `ENTRYPOINT` instructions are brittle one-liners.
+Pick one from a project you work on. Extract it into a proper
+script with error handling, signal handling, and logging.
+Replace the `ENTRYPOINT` with your new script.
+
+---
+
+## Related College Departments (shell scripting)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+  — shell is a programming language; its idioms and patterns
+  live in the Programming Fundamentals wing.
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — shell scripting is the glue of systems engineering and
+  the layer where CI/CD lives.

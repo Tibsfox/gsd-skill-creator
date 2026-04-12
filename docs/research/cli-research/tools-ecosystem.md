@@ -2208,3 +2208,103 @@ terminal.
 
 *PNW Research Series -- tibsfox.com*
 *Written 2026-04-09*
+
+---
+
+## Study Guide — Unix Toolkit
+
+### Why read this
+
+The Unix command line is a massive toolkit that rewards
+memorization of idioms more than memorization of flags. Reading
+this file once gives you the map; using the tools every day
+gives you the territory.
+
+### Prerequisites
+
+- Linux or macOS terminal. WSL2 also works.
+- Curiosity and willingness to read man pages.
+
+### Reading order
+
+1. Text filters: `grep`, `sed`, `awk`, `sort`, `uniq`, `cut`,
+   `tr`, `paste`, `join`, `comm`.
+2. File tools: `find`, `xargs`, `tar`, `rsync`.
+3. Process tools: `ps`, `top`, `kill`, `nice`, `nohup`,
+   `timeout`, `time`.
+4. Network tools: `curl`, `wget`, `ssh`, `nc`, `dig`, `host`.
+5. Modern replacements: `rg` (ripgrep), `fd`, `bat`, `exa`,
+   `delta`, `fzf`, `jq`.
+
+### Key idioms
+
+- `find ... -print0 | xargs -0 ...` — safe batch processing.
+- `grep -rIn 'pattern' .` — recursive search with line numbers.
+- `awk '{sum += $1} END {print sum}'` — sum a column.
+- `sort | uniq -c | sort -rn` — frequency count.
+- `jq '.items[] | select(.active) | .id'` — filter JSON.
+
+---
+
+## Programming Examples
+
+### Example 1 — Find the 10 most-modified files in a git repo
+
+```bash
+git log --pretty=format: --name-only \
+  | sort | uniq -c | sort -rn | head
+```
+
+### Example 2 — HTTP response codes from an access log
+
+```bash
+awk '{print $9}' access.log | sort | uniq -c | sort -rn
+```
+
+### Example 3 — Extract JSON field with jq
+
+```bash
+curl -s https://api.github.com/repos/torvalds/linux \
+  | jq -r '.stargazers_count'
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Build a log analyzer
+
+Given a webserver access log, extract: total requests, top 10
+URLs, top 10 IPs, and response code distribution. Do it all
+in a single pipeline of standard Unix tools, no scripting
+language.
+
+### DIY 2 — Replace `find`, `grep`, and `cat` with modern tools
+
+Install `fd`, `rg`, and `bat`. Use each for a week. Keep notes
+on what you miss from the originals and what you prefer.
+
+### DIY 3 — Master fzf
+
+`fzf` is a fuzzy finder that integrates with shells. Install
+it, enable the shell integration, learn `^R` for history
+search and `^T` for file completion. These two keys, alone,
+justify the install.
+
+### TRY — Build your own pipeline dashboard
+
+Write a shell pipeline that produces a live-updating terminal
+dashboard (`watch`, `tput`, or `gum`) of some metric you care
+about (git branch, disk usage, network stats). Ten lines of
+shell, zero dependencies beyond the standard toolkit.
+
+---
+
+## Related College Departments (Unix toolkit)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+  — the toolkit is the canonical case study in "small tools,
+  composed freely."
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+  — Unix tool composition is the shape of a lot of
+  infrastructure engineering.
