@@ -283,3 +283,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2024 family feature, L2 Brands 2025 partnership, VF portfolio status) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — JanSport
+
+## DIY — Visit a JanSport outlet
+
+PNW stores still carry legacy models. See the original
+build quality.
+
+## TRY — Repair a classic JanSport
+
+Lifetime warranty. Send in an old pack, get it
+repaired. See the program working.

@@ -713,3 +713,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (college cross-link) added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Systems Primitives
+
+## DIY — List 8 primitives
+
+Think about what you'd call the irreducible operations
+in your domain. Write them down.
+
+## TRY — Compose primitives into a task
+
+Pick any task you do daily. Express it purely in
+terms of those 8 primitives. Note what's missing.

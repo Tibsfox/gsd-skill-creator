@@ -134,3 +134,17 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (college cross-link) added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Kuramoto Model
+
+## DIY — Simulate Kuramoto
+
+50 coupled oscillators, plot phase coherence order
+parameter over time. 40 lines of numpy. Watch
+synchronization emerge.
+
+## TRY — Apply to distributed clocks
+
+Model NTP synchronization as a Kuramoto-like system.
+Compare theoretical order parameter to observed clock
+skew.

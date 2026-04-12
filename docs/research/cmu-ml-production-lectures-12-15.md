@@ -503,3 +503,14 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2025 industry / academic validation of lecture concepts, college cross-link) added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — CMU ML in Production
+
+## DIY — Watch CMU lectures 12-15
+
+CMU 15-445/645 is on YouTube. Four lectures total.
+
+## TRY — Deploy one model to production
+
+Pick the smallest model you have. Dockerize. Serve via
+FastAPI. Monitor.

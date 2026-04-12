@@ -523,3 +523,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (college cross-link) added during the Session 018 catalog enrichment pass. The body of this transcript-analysis document remains unchanged.*
+
+## Study Guide — Coop/Conservation/Manufacturing
+
+## DIY — Study one worker cooperative
+
+Mondragón, King Arthur Flour, Cooperative Home Care
+Associates. Pick one. Read the governance documents.
+
+## TRY — Visit a co-op
+
+Even a food co-op. Ask to see the bylaws and
+member-governance structure.

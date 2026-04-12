@@ -143,3 +143,15 @@ in `.college/departments/`:
 ---
 
 *Addendum (K2-18b 2025 reassessment, priority notes, college cross-link) added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Astrophysics Paper Queue
+
+## DIY — Read one paper from the queue
+
+Pick the top-ranked astro paper on arXiv today. Read
+the abstract, intro, and conclusions.
+
+## TRY — Watch an astro seminar
+
+Stanford, MIT, and Caltech post weekly seminars on
+YouTube. One hour of current research.

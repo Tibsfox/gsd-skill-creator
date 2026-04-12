@@ -365,3 +365,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (AI-vision-inspection market state, edge-distillation trend) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Synsor Corp
+
+## DIY — Build a sensor fusion prototype
+
+Raspberry Pi + camera + accelerometer + mic. Fuse
+three streams into one event classification. 50 lines.
+
+## TRY — Run YOLO v11 on edge hardware
+
+Jetson Nano or similar. Measure FPS and power draw.
+Compare to cloud inference.

@@ -306,3 +306,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (SMOFcon 43 Lisbon, 2026 outlook) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — SMOFcon
+
+## DIY — Read a SMOFcon program book
+
+Available online from past years. Ops details that
+don't leak out to public-facing con coverage.
+
+## TRY — Run a track at a local con
+
+The best prep for learning con-running. Pick a track,
+volunteer to lead it.

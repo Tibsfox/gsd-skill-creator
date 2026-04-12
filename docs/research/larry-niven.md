@@ -485,3 +485,16 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2025–2026 status, Halo-Ringworld continuing influence, Marilyn Niven memorial note) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Larry Niven
+
+## DIY — Read *Ringworld* (1970)
+
+Hugo + Nebula winner. The most influential Big Dumb
+Object novel ever written.
+
+## TRY — Compute Niven's ring
+
+Earth's orbit radius, 1 million miles wide. What's the
+surface area, the rotation speed, the gravity? Rusty
+pencil, half an hour.

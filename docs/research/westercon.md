@@ -203,3 +203,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2026 status, college cross-link) added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Westercon
+
+## DIY — Attend a Westercon
+
+Annual West-Coast-rotating SF con. Good entry point to
+regional fandom.
+
+## TRY — Compare Westercon with Norwescon
+
+Same region, different shape. Westercon rotates,
+Norwescon is fixed. Note what each optimizes for.
