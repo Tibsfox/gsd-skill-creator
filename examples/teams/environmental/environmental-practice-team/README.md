@@ -4,8 +4,11 @@ type: team
 category: environmental
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/teams/environmental/environmental-practice-team/README.md
 description: Community-scale restoration and sustainability practice pipeline. Wangari leads with community implementation design, Shiva provides agroecology and biodiversity context, Commoner cross-checks the biogeochemical and systems feasibility, and Orr produces community training and education materials. Use for restoration program design, sustainability implementation, community-scale intervention planning, and the translation of scientific findings into community-ready action. Not for pure ecosystem diagnosis or multi-wing research questions.
+superseded_by: null
 ---
 # Environmental Practice Team
 
