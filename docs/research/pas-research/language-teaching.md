@@ -4094,3 +4094,87 @@ This document is part of the PNW Research Series, a public educational research 
 *This document was researched and composed as part of the PNW Research Series. It draws on primary sources (Wirth's papers and textbooks), standards documents (ISO 7185, ISO 10206), critical analyses (Kernighan's 1981 paper), implementation documentation (Turbo Pascal, UCSD Pascal, Free Pascal), and biographical materials (Computer History Museum, ETH Zurich, ACM memorials).*
 
 *Pascal the programming language was named after Blaise Pascal (1623-1662), who built the Pascaline mechanical calculator in 1642. Niklaus Wirth (1934-2024), who designed the language, received the Turing Award in 1984 and continued contributing to computer science until his death on January 1, 2024.*
+
+---
+
+## Study Guide — Pascal Language & Teaching
+
+### Why read this
+
+Pascal was the dominant CS teaching language from roughly
+1975 to 1998. The language was explicitly designed by
+Wirth to be *teachable*. Its declarative syntax, strong
+typing, readable structure, and small feature surface make
+it unique among production languages in having pedagogy
+as a first-class design goal.
+
+### Key concepts
+
+1. **Declarations before statements.** Forces planning.
+2. **Strong typing.** Type errors caught early.
+3. **Structured programming.** No goto (mostly). `for`,
+   `while`, `repeat`, `if/then/else`, `case`, procedures
+   and functions.
+4. **Procedures and functions.** Nested, with lexical scoping.
+
+---
+
+## Programming Examples
+
+### Example 1 — The canonical Pascal hello
+
+```pascal
+program Hello;
+begin
+  writeln('Hello, world')
+end.
+```
+
+### Example 2 — Nested procedures
+
+```pascal
+program Nested;
+  procedure Outer;
+    var x: Integer;
+
+    procedure Inner;
+    begin
+      x := x + 1;
+    end;
+
+  begin
+    x := 0;
+    Inner;
+    writeln(x);  { 1 }
+  end;
+
+begin
+  Outer
+end.
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Port a 1980s Pascal textbook example
+
+Pick any example from Cooper/Clancy's *Oh! Pascal!* or
+Dale/Weems *Pascal Plus Data Structures*. Type it in.
+Compile with Free Pascal. Observe that 40-year-old
+textbook code runs unchanged.
+
+### DIY 2 — Rewrite a Python class as a Pascal record
+
+Watch the difference between Python's object model and
+Pascal's record model.
+
+### TRY — Read Wirth's *Algorithms + Data Structures = Programs*
+
+The single cleanest textbook ever written. 300 pages.
+Pascal as the notation and teaching vehicle.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
