@@ -24,7 +24,6 @@ export default defineConfig({
             'desktop/**',
             'apps/the-space-between-engine/**',
             'tests/ipc-commands.test.ts',
-            'tests/legacy/**',
             '.claude/**',
             'project-claude/**',
             'node_modules/**',
