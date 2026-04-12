@@ -6,8 +6,8 @@ category: patterns
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/infrastructure-as-code
+first_seen: 2026-02-07
+first_path: examples/infrastructure-as-code/SKILL.md
 superseded_by: null
 ---
 # Infrastructure as Code

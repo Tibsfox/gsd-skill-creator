@@ -6,8 +6,8 @@ category: research
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/research-mission-generator
+first_seen: 2026-04-11
+first_path: examples/skills/research/research-mission-generator/SKILL.md
 superseded_by: null
 ---
 # Research Mission Generator

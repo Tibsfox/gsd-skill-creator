@@ -6,8 +6,8 @@ category: workflow
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/refinery-merge
+first_seen: 2026-03-06
+first_path: .claude/skills/refinery-merge/SKILL.md
 superseded_by: null
 ---
 # Refinery Merge

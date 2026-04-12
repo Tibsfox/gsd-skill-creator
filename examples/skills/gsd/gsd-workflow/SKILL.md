@@ -16,8 +16,8 @@ category: gsd
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/gsd-workflow
+first_seen: 2026-02-26
+first_path: project-claude/skills/gsd-workflow/SKILL.md
 superseded_by: null
 ---
 # GSD Workflow Routing

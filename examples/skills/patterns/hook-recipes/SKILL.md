@@ -6,8 +6,8 @@ category: patterns
 status: stable
 origin: taches-cc-resources
 modified: true
-first_seen: 2026-04-10
-first_path: examples/skills/hook-recipes
+first_seen: 2026-02-07
+first_path: examples/hook-recipes/SKILL.md
 superseded_by: null
 ---
 # Hook Recipes

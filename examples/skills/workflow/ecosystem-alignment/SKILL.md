@@ -7,8 +7,8 @@ category: workflow
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/ecosystem-alignment
+first_seen: 2026-03-31
+first_path: examples/skills/workflow/ecosystem-alignment/SKILL.md
 superseded_by: null
 ---
 # Ecosystem Alignment

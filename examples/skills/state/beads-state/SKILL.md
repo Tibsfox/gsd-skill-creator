@@ -6,8 +6,8 @@ category: state
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/beads-state
+first_seen: 2026-03-06
+first_path: .claude/skills/beads-state/SKILL.md
 superseded_by: null
 ---
 # Beads State Persistence

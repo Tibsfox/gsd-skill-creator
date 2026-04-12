@@ -6,8 +6,8 @@ category: patterns
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/ci-cd-patterns
+first_seen: 2026-02-07
+first_path: examples/ci-cd-patterns/SKILL.md
 superseded_by: null
 ---
 # CI/CD Patterns

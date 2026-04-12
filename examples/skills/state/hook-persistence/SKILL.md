@@ -6,8 +6,8 @@ category: state
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/hook-persistence
+first_seen: 2026-03-06
+first_path: .claude/skills/hook-persistence/SKILL.md
 superseded_by: null
 ---
 # Hook Persistence

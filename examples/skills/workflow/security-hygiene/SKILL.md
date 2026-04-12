@@ -16,8 +16,8 @@ category: workflow
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/security-hygiene
+first_seen: 2026-02-26
+first_path: project-claude/skills/security-hygiene/SKILL.md
 superseded_by: null
 ---
 # Security Hygiene

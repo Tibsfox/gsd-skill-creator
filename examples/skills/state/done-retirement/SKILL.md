@@ -6,8 +6,8 @@ category: state
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/done-retirement
+first_seen: 2026-03-06
+first_path: .claude/skills/done-retirement/SKILL.md
 superseded_by: null
 ---
 # Done Retirement

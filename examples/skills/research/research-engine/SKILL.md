@@ -7,8 +7,8 @@ category: research
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/research-engine
+first_seen: 2026-03-31
+first_path: .claude/skills/research-engine/SKILL.md
 superseded_by: null
 ---
 # Research Engine

@@ -16,8 +16,8 @@ category: workflow
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/skill-integration
+first_seen: 2026-02-26
+first_path: project-claude/skills/skill-integration/SKILL.md
 superseded_by: null
 ---
 # Skill-Creator Integration

@@ -6,8 +6,8 @@ category: dev
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/code-review
+first_seen: 2026-01-31
+first_path: examples/code-review/SKILL.md
 superseded_by: null
 ---
 # Code Review

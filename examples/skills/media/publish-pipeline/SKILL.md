@@ -7,8 +7,8 @@ category: media
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/publish-pipeline
+first_seen: 2026-03-31
+first_path: .claude/skills/publish-pipeline/SKILL.md
 superseded_by: null
 ---
 # Publish Pipeline

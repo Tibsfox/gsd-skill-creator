@@ -6,8 +6,8 @@ category: gsd
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/gsd-migrate
+first_seen: 2026-02-07
+first_path: examples/gsd-migrate/SKILL.md
 superseded_by: null
 ---
 # GSD Project Migration Assistant

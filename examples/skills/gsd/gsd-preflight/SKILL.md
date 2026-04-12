@@ -6,8 +6,8 @@ category: gsd
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/gsd-preflight
+first_seen: 2026-02-07
+first_path: examples/gsd-preflight/SKILL.md
 superseded_by: null
 ---
 # GSD Preflight Validator

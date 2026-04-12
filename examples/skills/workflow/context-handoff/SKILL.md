@@ -6,8 +6,8 @@ category: workflow
 status: stable
 origin: taches-cc-resources
 modified: true
-first_seen: 2026-04-10
-first_path: examples/skills/context-handoff
+first_seen: 2026-02-07
+first_path: examples/context-handoff/SKILL.md
 superseded_by: null
 ---
 # Context Handoff

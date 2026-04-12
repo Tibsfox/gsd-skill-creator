@@ -6,8 +6,8 @@ category: ops
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/monitoring-observability
+first_seen: 2026-02-07
+first_path: examples/monitoring-observability/SKILL.md
 superseded_by: null
 ---
 # Monitoring and Observability
