@@ -1,0 +1,261 @@
+# Electronics Department Chipset Configuration
+# Dogfooding instance of the department template pattern for electronics.
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This file mirrors the math-department chipset structure
+# with wings and agents remapped for the electronics domain.
+
+name: electronics-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated electronics department providing wing-routed expertise
+  through seven named agents (Shockley, Bardeen, Kilby, Brattain, Noyce,
+  Shima, Horowitz), six knowledge skills, and three pre-composed teams.
+  Persists work via Grove records and integrates with the college
+  electronics department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  circuit-analysis-dc-ac:
+    domain: electronics
+    description: "DC and AC circuit analysis — Ohm, Kirchhoff, Thevenin, phasors, Bode"
+    triggers:
+      - "ohm's law"
+      - "node voltage"
+      - "mesh current"
+      - "thevenin"
+      - "norton"
+      - "phasor"
+      - "bode plot"
+      - "transfer function"
+    agent_affinity: [shockley, horowitz]
+
+  semiconductor-device-physics:
+    domain: electronics
+    description: "Device physics underlying diodes, BJTs, and MOSFETs"
+    triggers:
+      - "shockley equation"
+      - "pn junction"
+      - "transistor"
+      - "bias point"
+      - "small signal"
+      - "early voltage"
+      - "threshold voltage"
+    agent_affinity: [shockley, bardeen, brattain]
+
+  digital-logic-design:
+    domain: electronics
+    description: "Combinational and sequential digital logic, CMOS, FSMs, timing"
+    triggers:
+      - "boolean algebra"
+      - "truth table"
+      - "k-map"
+      - "flip-flop"
+      - "finite state machine"
+      - "setup time"
+      - "hold time"
+      - "logic family"
+    agent_affinity: [kilby, noyce]
+
+  microcontroller-firmware:
+    domain: electronics
+    description: "Embedded firmware — GPIO, interrupts, timers, UART/SPI/I2C, RTOS"
+    triggers:
+      - "microcontroller"
+      - "arduino"
+      - "stm32"
+      - "esp32"
+      - "uart"
+      - "spi"
+      - "i2c"
+      - "interrupt"
+      - "firmware"
+    agent_affinity: [shima, horowitz]
+
+  signal-processing-dsp-basics:
+    domain: electronics
+    description: "DSP fundamentals — sampling, Nyquist, FFT, FIR/IIR filters"
+    triggers:
+      - "sampling"
+      - "nyquist"
+      - "aliasing"
+      - "fft"
+      - "fir filter"
+      - "iir filter"
+      - "quantization"
+      - "spectral leakage"
+    agent_affinity: [shima, horowitz]
+
+  test-and-measurement:
+    domain: electronics
+    description: "Bench instruments, probing, grounding, and debug workflows"
+    triggers:
+      - "oscilloscope"
+      - "multimeter"
+      - "logic analyzer"
+      - "probe"
+      - "ground loop"
+      - "bench debug"
+      - "measurement"
+    agent_affinity: [brattain, horowitz]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Shockley as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: shockley
+
+  agents:
+    - name: shockley
+      role: "department chair — classification, routing, synthesis, safety filter"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: bardeen
+      role: "device physicist — solid-state, carrier physics, small-signal"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: kilby
+      role: "IC engineer — integrated logic, gate-level topology, logic family"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: brattain
+      role: "experimentalist — measurement protocols, characterization, artifacts"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: noyce
+      role: "layout + process — PCB, manufacturability, EMI, thermal, regulatory"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: shima
+      role: "firmware architect — microprocessor architecture, real-time, embedded"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: horowitz
+      role: "pedagogy + bench practice — explanation, debug workflow, intuition"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  electronics-analysis-team:
+    description: "Full department for multi-wing investigation and research-level problems"
+    agents: [shockley, bardeen, kilby, brattain, noyce, shima, horowitz]
+    use_when: "multi-wing, research-level, or full-analysis requests"
+
+  electronics-workshop-team:
+    description: "Focused bench-level design review, circuit debugging, device diagnosis"
+    agents: [shockley, bardeen, brattain, horowitz]
+    use_when: "schematic review, circuit debug, device-level question at the bench"
+
+  electronics-practice-team:
+    description: "Sequential prototype-to-production pipeline: logic -> layout -> firmware -> docs"
+    agents: [shockley, kilby, noyce, shima, horowitz]
+    use_when: "production readiness, design-for-manufacturing, firmware bring-up"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 electronics Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college electronics department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (shockley) must be CAPCOM"
+        action: "block"
+
+      - check: "safety_filtering_active"
+        description: "Chair must surface high-voltage, thermal, battery, and mains safety notes"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    wings_covered:
+      - circuits
+      - devices
+      - analog
+      - digital
+      - applied
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "electronics-department"
+  record_types:
+    - name: ElectronicsAnalysis
+      description: "Analysis of a circuit, device, or firmware behavior with findings and confidence"
+
+    - name: ElectronicsDesign
+      description: "Proposed design artifact: schematic, layout strategy, firmware architecture"
+
+    - name: ElectronicsReview
+      description: "Review of an existing design for correctness, manufacturability, safety"
+
+    - name: ElectronicsExplanation
+      description: "Teaching artifact at a specified level, with prerequisites and next steps"
+
+    - name: ElectronicsSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "electronics"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Circuit Foundations"
+    - "Active Devices"
+    - "Analog Systems"
+    - "Digital & Mixed-Signal"
+    - "Applied Systems"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
