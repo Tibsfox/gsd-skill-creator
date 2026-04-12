@@ -517,3 +517,86 @@ For each, also write the proof as a chain of iff's (the compact style from secti
 - **Math → Physics → Engineering:** The structures in section 6 are the language of physics. Groups describe symmetries, vector spaces describe states, fields describe scalars. A student who masters algebraic proof is ready for theoretical physics.
 - **Math → Statistics → Data Science:** Section 7's combinatorics underlies probability theory, which underlies statistics, which underlies data science. The chain from binomial coefficients to machine learning passes through every link.
 - **Math → Economics → Business:** Section 1.3 (modular arithmetic) underlies cryptography, which underlies digital commerce. Fermat's little theorem is used in RSA encryption.
+
+---
+
+## Knowledge Gap Fills — Third Pass
+
+### Topology — the missing structure
+
+Sections 1–7 cover numbers, sets, functions, relations, orders, and algebra. The one major undergraduate structure absent is **topology**: the study of continuity, convergence, and connectedness abstracted away from specific metrics.
+
+**Definition (topological space).** A topological space is a pair $(X, \tau)$ where $X$ is a set and $\tau \subseteq \mathcal{P}(X)$ (a collection of subsets called *open sets*) satisfying: (i) $\emptyset \in \tau$ and $X \in \tau$; (ii) arbitrary unions of open sets are open; (iii) finite intersections of open sets are open.
+
+**Why topology matters for proof.** Topology strips away the numerical content of analysis (no $\varepsilon$, no $\delta$, no metric) and exposes the pure logical structure of continuity: a function is continuous iff the pre-image of every open set is open. Proofs in topology are almost entirely set-theoretic (document 3, section 3), using element-chasing and the definitions of open/closed/compact/connected. A student who can prove Schwarz's set-distributive theorem (slide 119) can prove basic topology theorems — the technique is identical, only the definitions change.
+
+**Canonical topology proof.** *The continuous image of a compact set is compact.*
+
+*Proof.* Let $f : X \to Y$ be continuous, $K \subseteq X$ compact, and let $\{U_\alpha\}$ be an open cover of $f(K)$. Then $\{f^{-1}(U_\alpha)\}$ is an open cover of $K$ (by continuity, each $f^{-1}(U_\alpha)$ is open). Since $K$ is compact, finitely many $f^{-1}(U_{\alpha_1}), \ldots, f^{-1}(U_{\alpha_n})$ cover $K$. Then $U_{\alpha_1}, \ldots, U_{\alpha_n}$ cover $f(K)$. So $f(K)$ is compact. $\blacksquare$
+
+The proof uses only: the definition of continuity (preimage of open is open), the definition of compactness (every open cover has a finite subcover), and set containment ($K \subseteq \bigcup f^{-1}(U_{\alpha_i}) \implies f(K) \subseteq \bigcup U_{\alpha_i}$). No numbers appear.
+
+### Category theory — the algebraic bird's-eye
+
+Category theory is increasingly standard in graduate mathematics and in programming language theory (functors, monads, natural transformations). A **category** $\mathcal{C}$ consists of objects and morphisms (arrows between objects) satisfying: composition is associative, and every object has an identity morphism. Groups, rings, topological spaces, and vector spaces each form a category (objects = structures, morphisms = homomorphisms/continuous maps/linear maps).
+
+The relevance to proof: category theory unifies the proof patterns across structures. "The composition of injections is an injection" (section 4.2) is a special case of "the composition of monomorphisms is a monomorphism" — a theorem in any category. Students who recognize this pattern across domains learn to generalize their proofs.
+
+### Affine and linear types — Rust's type system as proof
+
+Rust's ownership system (one mutable reference XOR any number of shared references) is a **substructural type system** — specifically, an affine type system where values can be used at most once (moved), and linear types where values must be used exactly once. The borrow checker IS a proof engine: it proves at compile time that no data race, use-after-free, or double-free can occur.
+
+This connects section 6 (algebraic structures) to our codebase: the memory arena's `ChunkState` enum (section "Lessons Learned" in document 3's third pass) is verified correct by Rust's type-level proof, not by a separate mathematical proof. The type IS the theorem; the compiling program IS the proof.
+
+See `docs/research/rst-research/language-ownership.md` for the full treatment.
+
+## Lessons Learned & Retrospectives — Third Pass
+
+### The memory arena as a proof laboratory
+
+Milestones M1–M13 of the memory arena weren't formally a "proof" project, but they produced 710 Rust tests that collectively constitute a proof-by-exhaustive-testing of the system's correctness. Retrospective observations:
+
+1. **Algebraic structure was latent in the design.** The arena's chunk allocator forms a monoid under composition (allocate then deallocate = identity). The crossfade transitions (promote/demote) form a group action on the chunk-state space. We never formalized this, but the algebraic language of section 6 describes what we built.
+
+2. **The bake-off was proof by comparison.** M7's allocator bake-off (4 allocators tested on the same workloads) is structurally identical to the experimental-proof pattern in section 2 (testing multiple witnesses against the same predicate). The "best" allocator is the one that satisfies the performance predicate on every workload — an implicit universal quantifier.
+
+3. **Warm-start correctness = invariant preservation.** The M2 warm-start (lazy validation, 16.58x speedup) was proved correct by showing that the eager-validation invariant (every chunk's checksum matches its content) is maintained by the lazy path — deferred but never violated. This is technique B.12 from document 3.
+
+### The Grove format as content-addressed proof
+
+The Grove format (`docs/GROVE-FORMAT.md`) stores artifacts as content-addressed records: the hash of a record's content IS its identity. This is structurally identical to how Lean 4 stores proof terms — a proof is identified by its content, not its name. Renaming a proof doesn't change it; modifying its content gives it a new identity. The Unison programming language (our `unison-translation` chipset) makes the same commitment.
+
+This is not a coincidence. Content-addressing is the computational implementation of **extensionality** — the set-theoretic axiom that says two sets with the same elements are equal (ZFC Axiom 1). Our architecture independently discovered the same principle.
+
+## Deep Corpus Links — Third Pass
+
+### Research corpus cross-references
+
+| Section | Target | Connection |
+|---|---|---|
+| 1 (integers/divisibility) | `docs/research/rng-research/modern-prngs.md` | PCG generators use modular arithmetic (section 1.3) as their core operation — period proofs depend on group theory of $\mathbb{Z}/2^n\mathbb{Z}$ |
+| 2 (reals/analysis) | `docs/research/for-research/` (Fortran) | Fortran was built for numerical computation on $\mathbb{R}$. IEEE 754 is the engineering approximation of the completeness axiom |
+| 3 (sets/cardinality) | `docs/research/plg-research/language-semantics.md` §2–3 | Prolog terms and unification operate on Herbrand universes — countable term algebras. Set-theoretic cardinality arguments prove that some functions over Herbrand universes are not computable |
+| 4 (functions) | `docs/research/jts-research/language-types.md` | TypeScript's type assignability checking is a decision procedure for a fragment of set containment: `A extends B` iff the set of values typed `A` is a subset of the set of values typed `B` |
+| 6 (groups/rings/fields) | `docs/research/rst-research/language-ownership.md` | Rust's move semantics form an affine monoid (use-at-most-once). The algebraic vocabulary of section 6 applies directly to Rust's type system |
+| 6.3 (vector spaces) | `docs/research/dmn-research/` | Linear algebra (section 6.3) underlies every ML model — gradient descent operates in vector spaces, convergence proofs use analysis on $\mathbb{R}^n$ |
+| 7 (combinatorics) | `docs/research/c-research/` | C's pointer arithmetic is modular arithmetic on addresses — the number theory of section 1.3 in hardware form |
+
+### Live site pages
+
+| Section | Page | Connection |
+|---|---|---|
+| 1 (integers) | `Research/RNG/learn.html` | PCG modular arithmetic proofs |
+| 2 (analysis) | `Research/FOR/learn.html` | Fortran numerical computation on $\mathbb{R}$ |
+| 3 (sets) | `Research/JTS/learn.html` | TypeScript types as sets |
+| 4 (functions) | `Research/RST/learn.html` | Rust ownership = function linearity |
+| 6 (algebra) | `Research/ALG/learn.html` | ALGOL algebraic expression evaluation |
+| 6 (algebra) | `Research/ADA/learn.html` | Ada's strong typing enforces algebraic constraints |
+
+### College concept deepening
+
+| Concept ID | Third-pass extension |
+|---|---|
+| `math-functions` | Now connects to TypeScript type assignability (functions between type sets), Rust move semantics (affine functions), and Prolog unification (pattern-matching functions on terms) |
+| `math-complex-numbers` | The complex plane positions in `.college/rosetta-core/` concept definitions (the `complexPlanePosition` field) are literally complex numbers used to position concepts in a 2D space — the mathematical structure IS the organizational structure |
+| `math-number-cardinality` | Cantor's cardinality hierarchy (section 3) connects to the distinction between countable (Prolog's Herbrand universe) and uncountable ($\mathbb{R}$, the set of all reals IEEE 754 approximates) |

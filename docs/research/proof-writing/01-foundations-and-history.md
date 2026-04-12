@@ -401,3 +401,90 @@ The historical concepts in this document connect to Rosetta panels through concr
 
 - **Logic → Mathematics → Philosophy:** The question "what is a proof?" spans all three departments. The Logic department provides the formal tools, Mathematics provides the content, and Philosophy asks the meta-question (what does provability *mean*?).
 - **Logic → Coding → Technology:** Formal proof systems → programming languages → proof assistants. The thread runs from Frege (1879) through Church (1936, lambda calculus) through Milner (1972, ML/LCF) through de Moura (2013, Lean). This is the subject of document 6 but its roots are here.
+
+---
+
+## Knowledge Gap Fills — Third Pass
+
+### Non-Western proof traditions
+
+The history in sections 1–4 traces a purely Greek → European → American lineage. This is the dominant narrative but not the only one. Three traditions contributed significant proof-adjacent ideas independently.
+
+**Indian mathematics (c. 500–1600 CE).** Aryabhata (499 CE) gave algorithmic procedures for computing square roots and solving linear Diophantine equations. Brahmagupta (628 CE) stated and proved results about cyclic quadrilaterals and gave the first systematic treatment of zero and negative numbers, including rules of arithmetic with negatives that required implicit justification (a form of proof). Bhaskara II (12th century) offered proofs by dissection (geometric rearrangement) for the Pythagorean theorem. The Kerala school (14th–16th century, Madhava, Nilakantha) developed infinite series expansions for trigonometric functions — essentially Taylor series — two centuries before Newton and Leibniz, with reasoning that constitutes informal proof by induction, though not in the axiomatic Euclidean style. The Kerala results circulated within India but did not directly influence European mathematics.
+
+**Chinese mathematics (c. 200 BCE–1300 CE).** The *Jiuzhang Suanshu* (Nine Chapters on the Mathematical Art, c. 200 BCE–200 CE) is a compendium of 246 problems with algorithms and, in Liu Hui's commentary (263 CE), justifications that approach formal proof. Liu Hui's proof of the volume formula for a pyramid uses a method of exhaustion comparable to Archimedes. Zhu Shijie (1303 CE) developed methods for solving polynomial equations of arbitrary degree. Chinese mathematical culture emphasized algorithmic correctness verification over axiomatic derivation — a tradition that resonates with the computational verification approach of section 5.2.
+
+**Islamic golden age (c. 800–1400 CE).** Al-Khwarizmi's *Al-Jabr* (c. 820 CE) gave the first systematic solution of quadratic equations, with geometric proofs by completing the square — literally drawing a square and showing it can be completed. Omar Khayyam (1048–1131) classified cubic equations and attempted to prove Euclid's parallel postulate — his failure, along with those of Saccheri and Legendre, was an early signal that the postulate might be independent. Ibn al-Haytham (Alhazen, c. 965–1040) used a form of mathematical induction in his work on optics, predating the European formalization of induction by several centuries. Nasir al-Din al-Tusi (1201–1274) made the first serious attempt at a proof of the parallel postulate using an explicit alternative axiom.
+
+**Why this matters for section 1.** The axiomatic method is a Greek innovation, but the *impulse to justify* — to explain why a procedure works, not just that it does — arose independently in multiple civilizations. The modern synthesis in ZFC is a European construction, but the ingredients are multicultural.
+
+### The Church-Turing thesis and the three independent answers
+
+Section 3.3 discusses Gödel's incompleteness but does not adequately connect it to the parallel work on computability. In 1936, three independent formalizations of "computable function" appeared within months of each other:
+
+- **Church's lambda calculus** (1936) — functions defined by substitution rules. A function is computable iff it can be expressed as a lambda term. See `docs/research/lsp-research/history-philosophy.md` section 1 for the full account of Church at Princeton.
+- **Turing's machines** (1936) — abstract tape-and-head automata. A function is computable iff a Turing machine computes it. See `docs/research/mlc-research/` for the machine-level connection.
+- **Gödel's general recursive functions** (1934) — equational definitions with unbounded search (the mu-operator).
+
+The Church-Turing thesis states that these three formalizations define the same class of functions. This is not a theorem (it involves an informal concept — "computable by a definite procedure" — that cannot be formalized) but a thesis supported by all evidence. Its consequence for proof: the question "can this be decided by an algorithm?" has a precise meaning, and the answer is sometimes "no" (the halting problem, the Entscheidungsproblem).
+
+The connection to this document: Gödel's incompleteness (section 3.3) says *some truths are unprovable*. The Church-Turing thesis says *some questions are undecidable*. These are different but related limitations on what formal systems can do. Both emerged in the same 1930s intellectual ferment at Princeton and Cambridge, from people who knew each other's work.
+
+### Hilbert's sixth problem — physics and proof
+
+Hilbert's famous 1900 list of 23 problems includes Problem 6: "Mathematical treatment of the axioms of physics." Hilbert wanted physics axiomatized in the same way Euclid axiomatized geometry. This has never been fully achieved — quantum field theory, for instance, lacks a rigorous mathematical foundation despite producing the most precise predictions in all of science. The gap between physical theory (which works) and mathematical proof (which demands rigor) remains open. The Millennium Prize Problem on Yang-Mills existence and mass gap is a modern descendant of Hilbert's sixth.
+
+This matters for section 3: Hilbert's program was not only about pure mathematics. He wanted proof to extend to physics, and that extension has proved much harder than the pure-mathematics case.
+
+## Lessons Learned & Retrospectives — Third Pass
+
+### What 190+ research missions taught about writing history
+
+Across our research catalog — 190+ projects, 28 series, 1.88M words — the historical documents that aged best share three properties:
+
+1. **They cite primary sources, not secondary summaries.** The Euclid excerpt in section 1.3 works because it reproduces the proof itself, not a paraphrase. Our strongest historical research (the `lsp-research/history-philosophy.md` Church/Princeton section, the `pch-research/` punch-card era) does the same.
+
+2. **They name the people.** Mathematics is done by humans with biographies. The names Euclid, Frege, Russell, Hilbert, Gödel anchor the narrative because they are people the reader can look up. Our weakest historical writing was the early research that described movements without naming individuals.
+
+3. **They connect forward, not just backward.** Every historical section should answer "why does this matter now?" The best section here is 7 (consequences for Schwarz's framework), which ties every historical development to a specific slide in the foundation text. Our best precedent: `docs/research/alg-research/history.md` ties every ALGOL milestone to a feature in modern programming languages.
+
+### What our own proof work taught
+
+The memory arena milestones (M1–M13) constitute the largest proof-adjacent engineering work in this codebase: 710 Rust tests + 393 TS tests proving correctness of the allocator, warm-start, crossfade, sweep, VRAM, and IPC subsystems. Key retrospective insights:
+
+- **Type systems as lightweight proof.** Rust's ownership and borrowing rules proved race-freedom and memory-safety properties at compile time, without a single formal proof. This is section 5.1's "constructive mathematics" applied to systems programming. Connection: `docs/research/rst-research/language-ownership.md`.
+- **Benchmark proofs require statistical rigor.** The M2 warm-start benchmark (16.58x speedup, p=0.00, CI floor 15.7x) was proved not by logical deduction but by statistical hypothesis testing. This is a different kind of proof — empirical, not deductive — and it connects to `docs/research/rng-research/testing-quality.md` (TestU01 BigCrush as statistical proof of randomness quality).
+- **Invariant reasoning was our most-used technique.** The arena's chunk-state machine (Free → Allocated → Demoting → Cold → Promoting → Allocated) was proved correct by invariant arguments: no state transition violated the enum's constraints, and the Rust type system enforced this. Technique B.12 from document 3.
+
+## Deep Corpus Links — Third Pass
+
+### Research corpus cross-references
+
+| This document section | Cross-reference target | Connection |
+|---|---|---|
+| 1.2 (Greek axiomatic method) | `docs/research/alg-research/history.md` — section on formal language history | ALGOL 60's BNF grammar (Backus-Naur Form) is the computing-world's counterpart to Euclid's axiomatic definitions: a formal specification of a language |
+| 2.2 (Cantor and set theory) | `docs/research/rca-deep/mathematical-foundations-enrichment.md` — Bayesian networks | Cantor's set theory is the foundation; the RCA math-foundations doc builds causal models ON that foundation |
+| 2.3 (Frege and formal logic) | `docs/research/plg-research/language-semantics.md` — section 4 on SLD resolution | Prolog's proof search IS automated theorem proving in first-order Horn clause logic. Frege's dream of mechanical proof, realized (in a restricted domain) |
+| 3.3 (Gödel's incompleteness) | `docs/research/lsp-research/history-philosophy.md` — section 1 (Church and Princeton) | The Princeton 1930s milieu — Church, Gödel, Turing, Kleene, Rosser — is covered in the Lisp history as Church's backstory. The two documents tell the same story from different angles |
+| 5.1 (constructive mathematics) | `docs/research/rst-research/language-ownership.md` | Rust's type-level proofs (ownership = affine logic, borrowing = linear types) are constructive by construction — every safety property is witnessed by a type-correct program, not assumed by excluded middle |
+| 5.2 (computer-assisted proof) | `docs/research/rng-research/testing-quality.md` — TestU01 BigCrush | Our PCG native work used BigCrush (a battery of 160 statistical tests) as a computational proof of generator quality — same epistemic category as Appel-Haken's four-color computation |
+| 4.1 (Bourbaki structuralism) | `docs/research/research-methodology/epistemology-of-research.md` | Bourbaki's structuralist philosophy connects to the epistemology document's treatment of knowledge frameworks — mathematical proof is the most rigorous form of the empirical hierarchy |
+| 3.2 (ZFC axioms) | `docs/research/research-methodology/sources-of-truth.md` | ZFC axioms are the mathematical analogue of "sources of truth" in research methodology — the foundational claims everything else derives from |
+
+### Live site pages
+
+| Section | tibsfox.com page | Connection |
+|---|---|---|
+| 2.2 (Cantor) | `Research/RCA/mathematical-foundations.html` | Pearl's causal models build on the same set-theoretic and probabilistic foundations Cantor and Kolmogorov established |
+| 2.3 (Frege → formal logic) | `Research/PLG/language.html` | Prolog = logic programming = resolution-based automated theorem proving |
+| 3.3 (Gödel, Church) | `Research/LSP/history.html` | The lambda calculus story, told from the Lisp side |
+| 1.2 (Greek axiomatics) | `Research/ALG/history.html` | BNF as the computing-world's axiomatics |
+| 5.2 (computer proofs) | `Research/Learn/` | The Learn hub itself is an artifact of proof-like reasoning: each enrichment is verified against the source material before publication |
+
+### College concept deepening
+
+| Concept ID | New connection from this third pass |
+|---|---|
+| `log-formal-proof-systems` | Extended: now connects to Indian (Brahmagupta's implicit proofs), Islamic (al-Haytham's proto-induction), and Chinese (Liu Hui's exhaustion) traditions — not just the European lineage |
+| `math-number-cardinality` | Extended: Cantor's work (section 2.2) connects forward to the RCA mathematical foundations and backward to the Kerala school's work on infinite series |
+| `log-propositional-logic` | Extended: Church-Turing section connects propositional decidability to the three independent formalizations of computability (lambda calculus, Turing machines, recursive functions) |
