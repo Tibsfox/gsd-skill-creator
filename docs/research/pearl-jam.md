@@ -503,3 +503,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (Dark Matter tour close, Matt Cameron departure) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Pearl Jam
+
+## DIY — Listen to *Ten* (1991) end-to-end
+
+The debut that broke the band. Sit with it on good
+speakers.
+
+## TRY — Read *Not For You: Pearl Jam and the Present Tense*
+
+Ronen Givony's book-length treatment. Best critical
+appraisal of PJ in print.

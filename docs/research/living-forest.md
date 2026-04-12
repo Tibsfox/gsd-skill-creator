@@ -304,3 +304,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2025–2026 forest science status, monitoring infrastructure) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — The Living Forest
+
+## DIY — Walk an old-growth stand
+
+Olympic National Park, Mt. Rainier National Park, or
+Hoh Rainforest. Spend a full day. Look up, look down.
+
+## TRY — Identify 5 PNW tree species
+
+Douglas fir, western red cedar, western hemlock,
+Sitka spruce, bigleaf maple. Bark, needles, cones.

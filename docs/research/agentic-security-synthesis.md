@@ -840,3 +840,18 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2025–2026 OWASP LLM01 framing, EchoLeak CVE, MCP security literature) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Agentic Security
+
+Key threats: prompt injection (OWASP LLM01), tool
+abuse, memory poisoning, MCP server RCE.
+
+## DIY — Red-team one agent
+
+Pick any agent you use. Try 10 prompt-injection
+variants. Note what gets through.
+
+## TRY — Read EchoLeak CVE-2025-32711
+
+Microsoft's Copilot sidechannel. Understand the exact
+attack chain.

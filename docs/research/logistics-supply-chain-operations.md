@@ -522,3 +522,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2025–2026 supply-chain framing notes, college cross-link) added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Logistics & Supply Chain
+
+## DIY — Model a small supply chain
+
+Supplier → factory → warehouse → retail. Use `simpy`
+in Python. Inject delays, measure throughput.
+
+## TRY — Read Goldratt's *The Goal*
+
+Novel about theory of constraints. 300 pages, 1984,
+still the best intro to operations research thinking.
