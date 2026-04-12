@@ -2097,3 +2097,104 @@ func main() {
 12. Go Team. "Proposal: Non-cooperative Goroutine Preemption." https://github.com/golang/go/issues/24543, 2018. Implemented in Go 1.14.
 13. Knyszek, Michael. "Soft Memory Limit." https://github.com/golang/go/issues/48409, 2021. Implemented in Go 1.19.
 14. Cox, Russ. "Fixing For Loops in Go 1.22." https://go.dev/blog/loopvar-preview, September 2023.
+
+---
+
+## Study Guide — Go Concurrency
+
+### Prerequisites
+
+- Go 1.22+. `go version`.
+- Basic Go fluency (funcs, structs, interfaces).
+
+### Key concepts
+
+1. **Goroutines are cheap.** A goroutine starts at ~2 KB of
+   stack; the runtime grows it as needed. Spawning 100,000
+   goroutines is routine.
+2. **Channels are typed pipes.** Send with `ch <- v`, receive
+   with `v := <-ch`. Unbuffered channels synchronize both
+   sides; buffered channels decouple up to capacity.
+3. **`select` multiplexes channel operations.** The classic
+   pattern for "wait for any of several things."
+4. **`sync.Mutex` is still a mutex.** Use it when channels are
+   the wrong tool (shared state with many readers, hot
+   counters, cached maps).
+5. **Context carries cancellation.** `ctx.Done()` is the
+   canonical cancellation signal through a call stack.
+
+---
+
+## Programming Examples
+
+### Example 1 — Worker pool
+
+```go
+func worker(id int, jobs <-chan int, results chan<- int) {
+    for j := range jobs {
+        results <- j * j
+    }
+}
+
+func main() {
+    jobs := make(chan int, 100)
+    results := make(chan int, 100)
+    for w := 1; w <= 3; w++ {
+        go worker(w, jobs, results)
+    }
+    for j := 1; j <= 10; j++ {
+        jobs <- j
+    }
+    close(jobs)
+    for a := 1; a <= 10; a++ {
+        <-results
+    }
+}
+```
+
+### Example 2 — Context cancellation
+
+```go
+ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+defer cancel()
+select {
+case <-time.After(5 * time.Second):
+    fmt.Println("did it")
+case <-ctx.Done():
+    fmt.Println("cancelled:", ctx.Err())
+}
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Race detector
+
+Write a program with a deliberate data race on a shared
+counter. Run with `go run -race main.go`. The detector
+reports the race with the two goroutines involved.
+
+### DIY 2 — Pipeline pattern
+
+Build a three-stage pipeline (generator → squarer → printer)
+using channels. Use `close` to propagate EOF.
+
+### DIY 3 — Port something from Python threads
+
+Pick a Python program that uses `threading` or
+`concurrent.futures`. Rewrite in Go. Observe the channel
+idioms replacing queue.Queue.
+
+### TRY — Build a chat server
+
+Use net.Listen, a goroutine per client, and a hub channel
+for broadcast. The "write the IRC server in 200 lines of
+Go" exercise is the classic one.
+
+---
+
+## Related College Departments (Go concurrency)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
