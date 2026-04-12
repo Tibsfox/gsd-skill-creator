@@ -545,3 +545,73 @@ Instagram is the canonical Python-at-scale story. Founded 2010 by Kevin Systrom 
 ## The Story in One Paragraph
 
 Python's web story began with CGI scripts and `mod_python`, formalized with WSGI in 2003, and exploded in 2005-2010 with Django (full-stack) and Flask (microframework). For nearly fifteen years, the entire ecosystem was synchronous WSGI, with Twisted, Tornado, and gevent as the niche async outsiders. Python 3.5's native `async`/`await` syntax (2015) was the inflection point, but it took the **ASGI specification (Andrew Godwin, 2018)** and **FastAPI (Sebastián Ramírez, December 2018)** to give the async world a clear, ergonomic, type-hint-driven path forward. Today, the typical 2024+ Python web stack is **FastAPI + Pydantic v2 + SQLAlchemy 2.0 (async) + Uvicorn + PostgreSQL via asyncpg**, while Django remains the unstoppable workhorse for full-stack apps and Instagram (running custom Cinder/Static Python on Django) proves Python can scale to two billion users without abandoning its roots.
+
+---
+
+## Study Guide — Python Web & Async
+
+### Frameworks
+
+- **Django** — full-stack, batteries-included.
+- **Flask** — microframework, Werkzeug-based.
+- **FastAPI** — async, type-hints, OpenAPI.
+- **Starlette** — FastAPI's underpinnings.
+- **Litestar** — alternative to FastAPI.
+- **Quart** — async Flask.
+
+### Async primitives
+
+- `async def`, `await`.
+- `asyncio.gather`, `asyncio.create_task`.
+- `async with`, `async for`.
+- `asyncio.Queue`, `asyncio.Semaphore`.
+
+---
+
+## Programming Examples
+
+### Example 1 — FastAPI hello world
+
+```python
+from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"hello": "world"}
+```
+
+Run with `uvicorn main:app --reload`.
+
+### Example 2 — Async fan-out
+
+```python
+import asyncio, httpx
+
+async def fetch(url, client):
+    r = await client.get(url)
+    return r.status_code
+
+async def main():
+    urls = ["https://example.com"] * 10
+    async with httpx.AsyncClient() as client:
+        results = await asyncio.gather(*(fetch(u, client) for u in urls))
+    print(results)
+
+asyncio.run(main())
+```
+
+## DIY — Port a Flask app to FastAPI
+
+Pick any Flask app. Port route by route. Add Pydantic
+models. Observe the free OpenAPI docs.
+
+## TRY — Build a websocket chat
+
+FastAPI + Starlette's WebSocket + a dict of connections.
+30 lines.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)

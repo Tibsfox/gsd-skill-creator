@@ -388,3 +388,29 @@ This research cross-links to the following college departments in
 *Sources are drawn from python.org official PEP texts, the python-dev and python-list mailing list archives, Guido van Rossum's published interviews and blog posts, the Python Software Foundation public records, PyCon archives, and the long oral history of the Python community as documented across two decades of conference talks and engineering blogs.*
 
 *Addendum (Python 3.14 free-threaded exits experimental, t-strings, uv/Ruff consolidation) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Python History & Culture
+
+### Questions
+
+- Why Guido designed Python in 1989 (fresh from ABC and
+  Modula-3).
+- Why Python 2→3 took 12 years.
+- Why PEPs are the governance model.
+- Why free-threading finally shipped in 3.13/3.14.
+
+## DIY — Read one classic PEP
+
+PEP 8 (style), PEP 20 (Zen), PEP 484 (type hints), PEP 703
+(free-threading). Pick one. Read it.
+
+## TRY — Install Python 3.14 free-threaded
+
+`uv python install 3.14t`. Run the test suite with
+threads. Watch a 40-year GIL die.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
