@@ -4,6 +4,7 @@ type: team
 category: digital-literacy
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/teams/digital-literacy/digital-literacy-analysis-team/README.md
 description: Full Digital Literacy Department investigation team for complex, multi-perspective questions that span information evaluation, youth practice, institutional framing, algorithmic systems, participatory culture, and connected learning. Rheingold classifies the query and activates the relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Kafai. Use for educator questions, systemic analysis, research-driven inquiries, or any situation where different literacy perspectives may yield different insights.

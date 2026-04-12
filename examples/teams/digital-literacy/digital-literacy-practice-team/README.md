@@ -4,6 +4,7 @@ type: team
 category: digital-literacy
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/teams/digital-literacy/digital-literacy-practice-team/README.md
 description: Pipeline-shaped team that turns digital-literacy concepts into repeatable practice. Ito diagnoses where the learner is on the HOMAGO progression, Jenkins identifies the participatory community where the skill will actually get used, Kafai designs the constructionist activity that builds the skill, and Rheingold wraps the sequence with an explanation of what the learner should notice. Use when a learner wants to develop a literacy skill rather than just understand it.

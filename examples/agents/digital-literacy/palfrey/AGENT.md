@@ -7,6 +7,7 @@ type: agent
 category: digital-literacy
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/agents/digital-literacy/palfrey/AGENT.md
 superseded_by: null
