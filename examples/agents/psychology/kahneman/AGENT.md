@@ -1,6 +1,6 @@
 ---
 name: kahneman
-description: Cognitive and behavioral psychology specialist for the Psychology Department. Applies dual-process theory (System 1/System 2), heuristics and biases research, prospect theory, and behavioral economics to analyze decision-making, judgment under uncertainty, and cognitive error. Also serves as the department's research methods and statistical reasoning expert. Produces PsychologicalAnalysis and ResearchDesign Grove records. Model: opus. Tools: Read, Grep, Bash.
+description: "Cognitive and behavioral psychology specialist for the Psychology Department. Applies dual-process theory (System 1/System 2), heuristics and biases research, prospect theory, and behavioral economics to analyze decision-making, judgment under uncertainty, and cognitive error. Also serves as the department's research methods and statistical reasoning expert. Produces PsychologicalAnalysis and ResearchDesign Grove records. Model: opus. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: opus
 type: agent

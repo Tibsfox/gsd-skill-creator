@@ -1,6 +1,6 @@
 ---
 name: lipman
-description: Pedagogy specialist for the Critical Thinking Department. Applies Philosophy for Children (P4C) techniques and the community-of-inquiry model to teach critical thinking at any level. Produces level-appropriate explanations, Socratic questioning scripts, and dialogue-based learning sessions. Pairs with any other specialist to translate their outputs into teachable form. Model: sonnet. Tools: Read, Write.
+description: "Pedagogy specialist for the Critical Thinking Department. Applies Philosophy for Children (P4C) techniques and the community-of-inquiry model to teach critical thinking at any level. Produces level-appropriate explanations, Socratic questioning scripts, and dialogue-based learning sessions. Pairs with any other specialist to translate their outputs into teachable form. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

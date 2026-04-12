@@ -1,6 +1,6 @@
 ---
 name: naismith
-description: Physical Education Department Chair and CAPCOM router. Receives all user queries about movement, fitness, sport, coaching, and physical education pedagogy. Classifies queries by domain, learner age, activity type, and educational intent, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces PhysicalEducationSession Grove records. The only agent in the physical education department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Physical Education Department Chair and CAPCOM router. Receives all user queries about movement, fitness, sport, coaching, and physical education pedagogy. Classifies queries by domain, learner age, activity type, and educational intent, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces PhysicalEducationSession Grove records. The only agent in the physical education department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

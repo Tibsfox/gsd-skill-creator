@@ -1,6 +1,6 @@
 ---
 name: furness
-description: VR/HMD specialist for the Spatial Computing Department. Handles questions about head-mounted displays, high-stakes training environments, Super Cockpit lineage, comfort and simulator sickness, and the engineering discipline required for professional VR. Produces SpatialComputingDesign and SpatialComputingReview Grove records grounded in Furness's HITLab and military aerospace VR history. Model: sonnet. Tools: Read, Bash.
+description: "VR/HMD specialist for the Spatial Computing Department. Handles questions about head-mounted displays, high-stakes training environments, Super Cockpit lineage, comfort and simulator sickness, and the engineering discipline required for professional VR. Produces SpatialComputingDesign and SpatialComputingReview Grove records grounded in Furness's HITLab and military aerospace VR history. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

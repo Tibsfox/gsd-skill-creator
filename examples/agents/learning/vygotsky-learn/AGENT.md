@@ -1,6 +1,6 @@
 ---
 name: vygotsky-learn
-description: Zone of Proximal Development and scaffolding specialist for the Learning Department. Diagnoses a learner's current zone, designs scaffolds that keep them in productive difficulty, plans fading schedules, and structures peer and group configurations so that stronger peers can tutor weaker ones within overlapping zones. Produces LearningDesign and LearningAnalysis Grove records for scaffolding plans. Model: sonnet. Tools: Read, Grep. Suffix note: the -learn suffix distinguishes this agent from the broader psychology/vygotsky agent on Vygotsky's sociocultural research program.
+description: "Zone of Proximal Development and scaffolding specialist for the Learning Department. Diagnoses a learner's current zone, designs scaffolds that keep them in productive difficulty, plans fading schedules, and structures peer and group configurations so that stronger peers can tutor weaker ones within overlapping zones. Produces LearningDesign and LearningAnalysis Grove records for scaffolding plans. Model: sonnet. Tools: Read, Grep. Suffix note: the -learn suffix distinguishes this agent from the broader psychology/vygotsky agent on Vygotsky's sociocultural research program."
 tools: Read, Grep
 model: sonnet
 type: agent

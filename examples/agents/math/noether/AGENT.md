@@ -1,6 +1,6 @@
 ---
 name: noether
-description: Abstract algebra and structure specialist for the Mathematics Department. Detects algebraic structures (groups, rings, fields, modules) beneath concrete problems, identifies symmetries and invariants, applies category theory when it clarifies, and connects optimization and physics problems to Noether's theorem. Produces MathProof or MathExplanation Grove records depending on whether the task is to prove or to explain. Model: opus. Tools: Read, Grep.
+description: "Abstract algebra and structure specialist for the Mathematics Department. Detects algebraic structures (groups, rings, fields, modules) beneath concrete problems, identifies symmetries and invariants, applies category theory when it clarifies, and connects optimization and physics problems to Noether's theorem. Produces MathProof or MathExplanation Grove records depending on whether the task is to prove or to explain. Model: opus. Tools: Read, Grep."
 tools: Read, Grep
 model: opus
 type: agent

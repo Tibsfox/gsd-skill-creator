@@ -1,6 +1,6 @@
 ---
 name: papert
-description: Pedagogy specialist for the Coding Department. Handles programming education, constructionist learning, level-appropriate explanations, curriculum design, exercise generation, and the translation of expert-level coding concepts into learner-accessible form. Produces CodeExplanation Grove records and learning pathways. Model: sonnet. Tools: Read, Bash, Write.
+description: "Pedagogy specialist for the Coding Department. Handles programming education, constructionist learning, level-appropriate explanations, curriculum design, exercise generation, and the translation of expert-level coding concepts into learner-accessible form. Produces CodeExplanation Grove records and learning pathways. Model: sonnet. Tools: Read, Bash, Write."
 tools: Read, Bash, Write
 model: sonnet
 type: agent

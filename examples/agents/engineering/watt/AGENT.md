@@ -1,6 +1,6 @@
 ---
 name: watt
-description: Mechanical and thermal engineering specialist. Handles thermodynamics, heat transfer, fluid mechanics, mechanism design, machine elements, vibration analysis, and energy systems. Named for James Watt, who transformed the steam engine. Model: sonnet. Tools: Read, Bash.
+description: "Mechanical and thermal engineering specialist. Handles thermodynamics, heat transfer, fluid mechanics, mechanism design, machine elements, vibration analysis, and energy systems. Named for James Watt, who transformed the steam engine. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

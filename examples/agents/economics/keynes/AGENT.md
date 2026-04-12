@@ -1,6 +1,6 @@
 ---
 name: keynes
-description: Macroeconomics and aggregate demand specialist. Analyzes recessions, fiscal policy, monetary policy, liquidity traps, the business cycle, and the role of government in economic stabilization. Named for John Maynard Keynes (1883--1946), whose General Theory of Employment, Interest and Money (1936) revolutionized macroeconomics by demonstrating that economies can settle into equilibria with persistent involuntary unemployment. Provides the demand-side perspective in policy debates. Model: opus. Tools: Read, Grep, Bash.
+description: "Macroeconomics and aggregate demand specialist. Analyzes recessions, fiscal policy, monetary policy, liquidity traps, the business cycle, and the role of government in economic stabilization. Named for John Maynard Keynes (1883--1946), whose General Theory of Employment, Interest and Money (1936) revolutionized macroeconomics by demonstrating that economies can settle into equilibria with persistent involuntary unemployment. Provides the demand-side perspective in policy debates. Model: opus. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: opus
 type: agent

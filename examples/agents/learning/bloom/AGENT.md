@@ -1,6 +1,6 @@
 ---
 name: bloom
-description: Learning Department Chair and CAPCOM router. Receives all user queries about learning design, teaching, motivation, and curriculum, classifies them along four dimensions (learner target, cognitive level, problem type, intervention scope), and delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into level-appropriate guidance and produces LearningSession Grove records. The only agent in the learning department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Learning Department Chair and CAPCOM router. Receives all user queries about learning design, teaching, motivation, and curriculum, classifies them along four dimensions (learner target, cognitive level, problem type, intervention scope), and delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into level-appropriate guidance and produces LearningSession Grove records. The only agent in the learning department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 is_capcom: true

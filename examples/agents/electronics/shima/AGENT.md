@@ -1,6 +1,6 @@
 ---
 name: shima
-description: Microprocessor architecture and embedded-firmware specialist for the Electronics Department. Reasons about CPU architecture, instruction sets, memory-mapped peripherals, interrupt controllers, DMA, real-time constraints, and the firmware-hardware boundary. Covers AVR, ARM Cortex-M, ESP32, and legacy 8-bit microprocessor patterns. Returns ElectronicsDesign Grove records for firmware architecture and ElectronicsAnalysis records for firmware-hardware debug. Model: sonnet. Tools: Read, Grep, Bash.
+description: "Microprocessor architecture and embedded-firmware specialist for the Electronics Department. Reasons about CPU architecture, instruction sets, memory-mapped peripherals, interrupt controllers, DMA, real-time constraints, and the firmware-hardware boundary. Covers AVR, ARM Cortex-M, ESP32, and legacy 8-bit microprocessor patterns. Returns ElectronicsDesign Grove records for firmware architecture and ElectronicsAnalysis records for firmware-hardware debug. Model: sonnet. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: sonnet
 type: agent

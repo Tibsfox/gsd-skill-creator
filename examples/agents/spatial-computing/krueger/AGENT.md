@@ -1,6 +1,6 @@
 ---
 name: krueger
-description: Responsive environments and artificial reality specialist for the Spatial Computing Department. Handles questions about body-as-input, gestural interaction, room-scale installations, multi-user responsive spaces, and the aesthetic of computer-mediated environments. Produces SpatialComputingDesign Grove records grounded in Krueger's VIDEOPLACE lineage. Model: sonnet. Tools: Read, Bash.
+description: "Responsive environments and artificial reality specialist for the Spatial Computing Department. Handles questions about body-as-input, gestural interaction, room-scale installations, multi-user responsive spaces, and the aesthetic of computer-mediated environments. Produces SpatialComputingDesign Grove records grounded in Krueger's VIDEOPLACE lineage. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

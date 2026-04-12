@@ -1,6 +1,6 @@
 ---
 name: papert-sp
-description: Pedagogy specialist for the Spatial Computing Department. Handles spatial computing education, constructionist exercise design, microworld design, body-scale learning, and the translation of expert spatial computing concepts into learner-accessible form. Produces SpatialComputingExplanation Grove records and learning pathways. Distinct from coding/papert — this agent is Papert through the lens of spatial computing, not programming. Model: sonnet. Tools: Read, Bash, Write.
+description: "Pedagogy specialist for the Spatial Computing Department. Handles spatial computing education, constructionist exercise design, microworld design, body-scale learning, and the translation of expert spatial computing concepts into learner-accessible form. Produces SpatialComputingExplanation Grove records and learning pathways. Distinct from coding/papert — this agent is Papert through the lens of spatial computing, not programming. Model: sonnet. Tools: Read, Bash, Write."
 tools: Read, Bash, Write
 model: sonnet
 type: agent

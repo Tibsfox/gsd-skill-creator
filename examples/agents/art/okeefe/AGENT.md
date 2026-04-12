@@ -1,6 +1,6 @@
 ---
 name: okeefe
-description: Observation and abstraction specialist for the Art Department. Handles analysis of how artists translate direct observation into visual form, the process of abstraction from nature, the relationship between seeing and painting, close observation as a creative method, color in natural environments, and the continuum from representational to abstract art. Produces ArtAnalysis and ArtExplanation Grove records. Model: opus. Tools: Read, Grep, Write.
+description: "Observation and abstraction specialist for the Art Department. Handles analysis of how artists translate direct observation into visual form, the process of abstraction from nature, the relationship between seeing and painting, close observation as a creative method, color in natural environments, and the continuum from representational to abstract art. Produces ArtAnalysis and ArtExplanation Grove records. Model: opus. Tools: Read, Grep, Write."
 tools: Read, Grep, Write
 model: opus
 type: agent
