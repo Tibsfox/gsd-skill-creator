@@ -972,4 +972,24 @@ Researchers and practitioners working in this area should monitor:
 
 The tax is now an established feature of the Washington fiscal landscape. It is controversial and contested, but it is also collecting hundreds of millions of dollars per year and funding significant portions of the state's education budget. Its doctrinal foundations rest on a fragile-seeming distinction — between excise taxes and property taxes, between transactions and states of affairs — that the Washington Supreme Court has nonetheless validated in a 7-2 decision. Whether that validation will survive the coming years of additional litigation and legislative amendment remains to be seen.
 
+## Study Guide — WA Capital Gains Tax (PRIVATE)
+
+### Key concepts
+
+1. **Classified as an excise tax, not income tax.**
+   Surviving 7-2 at Quinn.
+2. **7% rate on long-term gains over $250K.**
+3. **Exceptions.** Real estate, retirement accounts,
+   family business transfers.
+
+## DIY — Compute a sample
+
+Walk through a hypothetical investor's tax under the
+WA framework. Compare to federal LTCG.
+
+## TRY — Read Quinn
+
+Quinn v. State is a 47-page decision. Read it. Note
+the excise vs property distinction.
+
 — End of analysis —

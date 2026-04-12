@@ -2035,6 +2035,29 @@ For readers wishing to explore specific topics in more depth, the following addi
 
 ---
 
+## Study Guide — WA Sales & Use Tax (PRIVATE)
+
+### Key concepts
+
+1. **Retail sales tax.** 6.5% state + local (8-10%
+   total typical).
+2. **Use tax.** Mirror for untaxed out-of-state purchases.
+3. **SB 5814 (2025).** Expanded sales tax to services.
+4. **Destination sourcing.** Location of delivery, not
+   seller.
+
+## DIY — Compute one transaction
+
+For a sample transaction, work out the combined state +
+local sales tax rate. Use the DOR rate lookup.
+
+## TRY — Read SB 5814
+
+The text of the 2025 services expansion. Note which
+services are newly taxable.
+
+---
+
 *End of document.*
 
 *This document is an educational research reference. It is not legal or tax advice. Readers with specific compliance questions should consult the Washington Department of Revenue or a qualified state tax practitioner. Rates, statutes, and interpretations are subject to change; practitioners should verify current law before relying on any specific statement in this document.*

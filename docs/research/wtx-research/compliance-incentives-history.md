@@ -1533,4 +1533,24 @@ What is certain is that Washington's tax system will continue to evolve. The Rev
 
 ---
 
+## Study Guide — WA Tax Compliance, Incentives, History (PRIVATE)
+
+### Key concepts
+
+1. **DOR filing.** WA Department of Revenue handles all
+   state tax filing.
+2. **Incentives.** High-tech R&D, film, aerospace, green
+   building.
+3. **Penalties.** Late, underpayment, estimated payment.
+
+## DIY — Find one incentive you qualify for
+
+If you have any WA business activity, check the DOR
+incentive page. Note what you could apply for.
+
+## TRY — Read DOR's annual report
+
+The DOR publishes its Tax Statistics report each year.
+Read the table of contents.
+
 *This document is a general educational reference. It does not constitute legal or tax advice and should not be relied upon for specific tax planning or compliance decisions. Taxpayers should consult qualified tax professionals regarding their particular situations. All statements of law are current as of the date of compilation and may not reflect subsequent developments.*
