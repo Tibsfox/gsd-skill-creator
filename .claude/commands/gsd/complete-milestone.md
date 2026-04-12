@@ -19,8 +19,8 @@ Output: Milestone archived (roadmap + requirements), PROJECT.md evolved, git tag
 <execution_context>
 **Load these files NOW (before proceeding):**
 
-- @/path/to/projectGSD/dev-tools/artemis-ii/.claude/get-shit-done/workflows/complete-milestone.md (main workflow)
-- @/path/to/projectGSD/dev-tools/artemis-ii/.claude/get-shit-done/templates/milestone-archive.md (archive template)
+- @.claude/get-shit-done/workflows/complete-milestone.md (main workflow)
+- @.claude/get-shit-done/templates/milestone-archive.md (archive template)
   </execution_context>
 
 <context>
