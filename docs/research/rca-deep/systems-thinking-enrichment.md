@@ -404,3 +404,19 @@ No single method covers the full spectrum. STPA catches 27% of hazards FMEA miss
 - **9 out of 10** — Hospital admissions that go right (Safety-II's focus area)
 - **19** — HFACS causal categories across 4 levels of Reason's Swiss Cheese
 - **108** — FRAM research papers (2006-2019), aviation as most common domain
+
+## Study Guide — Systems-Theoretic RCA
+
+Tools: STPA (Leveson), FRAM (Hollnagel), Safety-II,
+HFACS, SUBSAFE.
+
+## DIY — Apply STPA to one system
+
+Define system boundary. Identify losses and hazards.
+Build safety control structure. Identify unsafe control
+actions.
+
+## TRY — Read Leveson's *Engineering a Safer World*
+
+Chapter 1 is the conceptual pivot away from Reason's
+Swiss Cheese.

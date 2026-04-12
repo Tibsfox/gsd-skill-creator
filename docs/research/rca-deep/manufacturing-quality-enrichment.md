@@ -443,3 +443,17 @@ Each generation preserved the core insight (distinguish common from special caus
 8. Kareska, K. (2024). "Implementing KAIZEN for Continuous Improvement in Manufacturing Processes: A Quantitative Analysis." SSRN 4844986.
 9. Swink, M. & Jacobs, B.W. (2012). "Costs and Savings of Six Sigma Programs: An Empirical Study." *Quality Management Journal*, 19(4).
 10. Pande, P.S., Neuman, R.P. & Cavanagh, R.R. (2000). *The Six Sigma Way: How GE, Motorola, and Other Top Companies Are Honing Their Performance*. McGraw-Hill.
+
+## Study Guide — Manufacturing & Quality RCA
+
+Tools: Six Sigma DMAIC, 8D, Kaizen, TPS, FMEA.
+
+## DIY — Walk through a DMAIC cycle
+
+Define → Measure → Analyze → Improve → Control on any
+process you have. 1 week.
+
+## TRY — Use Minitab or Python for SPC
+
+Pick a measurable process. Build a control chart.
+Identify out-of-control points.

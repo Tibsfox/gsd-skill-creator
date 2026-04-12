@@ -462,3 +462,19 @@ Based on this evidence synthesis:
 13. AHRQ PSNet. High Reliability (Primer). Updated 2023.
 14. Leveson NG. *Engineering a Safer World: Systems Thinking Applied to Safety*. MIT Press, 2011.
 15. Making Healthcare Safer IV. Examining the Impact of Implementing High-Reliability Organization Principles on Patient Safety Outcomes. AHRQ, 2023.
+
+## Study Guide — Healthcare & Aviation RCA
+
+Tools: HFACS (Human Factors Analysis and Classification
+System), High Reliability Organizations (HRO), Just
+Culture.
+
+## DIY — Read an NTSB accident report
+
+Pick any public NTSB report. Note the structure:
+factual → analysis → probable cause → recommendations.
+
+## TRY — Apply Just Culture to one incident
+
+Separate human error from at-risk behavior from reckless
+behavior. Different responses for each.
