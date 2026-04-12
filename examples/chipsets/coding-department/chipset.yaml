@@ -1,0 +1,268 @@
+# Coding Department Chipset Configuration
+# Eighth instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This department covers programming fundamentals through
+# systems programming, software design, algorithms, debugging, testing,
+# and computational thinking.
+
+name: coding-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated coding department providing domain-routed
+  expertise through seven named agents (Lovelace, Turing, Hopper,
+  Knuth, Dijkstra, Kay, Papert), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college coding department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  algorithms-data-structures:
+    domain: coding
+    description: "Sorting, searching, trees, graphs, hash tables, complexity analysis (Big-O)"
+    triggers:
+      - "sort"
+      - "search"
+      - "Big-O"
+      - "complexity"
+      - "data structure"
+      - "algorithm"
+      - "binary tree"
+      - "hash table"
+      - "graph traversal"
+      - "dynamic programming"
+    agent_affinity: [knuth, turing]
+
+  programming-fundamentals:
+    domain: coding
+    description: "Variables, control flow, functions, recursion, types, error handling"
+    triggers:
+      - "variable"
+      - "loop"
+      - "function"
+      - "recursion"
+      - "type"
+      - "error handling"
+      - "if else"
+      - "closure"
+      - "scope"
+    agent_affinity: [hopper, papert]
+
+  software-design:
+    domain: coding
+    description: "Design patterns, SOLID, DRY, separation of concerns, architecture"
+    triggers:
+      - "design pattern"
+      - "SOLID"
+      - "refactor"
+      - "architecture"
+      - "coupling"
+      - "cohesion"
+      - "microservices"
+      - "MVC"
+      - "dependency injection"
+    agent_affinity: [dijkstra, kay]
+
+  debugging-testing:
+    domain: coding
+    description: "Unit tests, integration tests, TDD, debugging strategies, profiling"
+    triggers:
+      - "debug"
+      - "test"
+      - "TDD"
+      - "unit test"
+      - "profiling"
+      - "bug"
+      - "breakpoint"
+      - "coverage"
+      - "mutation testing"
+    agent_affinity: [hopper, dijkstra]
+
+  systems-programming:
+    domain: coding
+    description: "Memory management, concurrency, OS concepts, networking, compilation"
+    triggers:
+      - "memory"
+      - "thread"
+      - "mutex"
+      - "async"
+      - "socket"
+      - "process"
+      - "compiler"
+      - "linker"
+      - "cache"
+      - "concurrency"
+    agent_affinity: [hopper, turing]
+
+  computational-thinking:
+    domain: coding
+    description: "Abstraction, decomposition, pattern recognition, algorithm design, computational problem-solving"
+    triggers:
+      - "decompose"
+      - "abstraction"
+      - "computational thinking"
+      - "problem solving"
+      - "Turing machine"
+      - "automata"
+      - "NP-complete"
+      - "undecidable"
+      - "constructionism"
+    agent_affinity: [papert, lovelace]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Lovelace as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: lovelace
+
+  agents:
+    - name: lovelace
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: turing
+      role: "theorist — computability, complexity, automata, correctness proofs"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: hopper
+      role: "systems engineer — languages, compilers, debugging, implementation"
+      model: sonnet
+      tools: [Read, Bash, Write]
+
+    - name: knuth
+      role: "algorithm analyst — complexity analysis, data structures, literate programming"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: dijkstra
+      role: "design specialist — SOLID, structured programming, code review"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: kay
+      role: "architect — OOP, message passing, component design, API design"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: papert
+      role: "pedagogy guide — constructionism, explanations, exercises, learning paths"
+      model: sonnet
+      tools: [Read, Bash, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  code-review-team:
+    description: "Full department for comprehensive code review"
+    agents: [lovelace, turing, hopper, knuth, dijkstra, kay, papert]
+    use_when: "multi-perspective code review, architecture assessment, production quality gates"
+
+  architecture-team:
+    description: "Focused architecture and design decisions"
+    agents: [dijkstra, kay, knuth, papert]
+    use_when: "architecture decisions, design pattern selection, refactoring strategy"
+
+  learning-lab-team:
+    description: "Programming pedagogy, curriculum design, and exercises"
+    agents: [papert, hopper, lovelace, kay]
+    use_when: "teaching, onboarding, exercise generation, workshop design"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 coding Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college coding department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (lovelace) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - algorithms
+      - fundamentals
+      - design
+      - debugging
+      - systems
+      - thinking
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "coding-department"
+  record_types:
+    - name: CodeAnalysis
+      description: "Algorithm analysis, complexity proof, or architectural assessment"
+
+    - name: CodeSolution
+      description: "Working implementation with test cases and complexity analysis"
+
+    - name: CodeReview
+      description: "Multi-dimensional code review with prioritized findings"
+
+    - name: CodeExplanation
+      description: "Level-appropriate teaching artifact with exercises"
+
+    - name: CodeSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "coding"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Computational Thinking"
+    - "Programming Fundamentals"
+    - "Building Projects"
+    - "Algorithms & Efficiency"
+    - "Computing & Society"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
