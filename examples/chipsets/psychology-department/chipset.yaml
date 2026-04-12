@@ -1,0 +1,271 @@
+# Psychology Department Chipset Configuration
+# 11th department in the college structure
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template pattern.
+
+name: psychology-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated psychology department providing multi-perspective
+  expertise through seven named agents (James, Piaget, Vygotsky,
+  Kahneman, Rogers, Hooks, Skinner-P), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college psychology department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  cognitive-psychology:
+    domain: psychology
+    description: "Attention, memory, perception, decision-making, language, problem-solving"
+    triggers:
+      - "attention"
+      - "memory"
+      - "perception"
+      - "decision-making"
+      - "cognitive bias"
+      - "heuristic"
+      - "System 1"
+      - "System 2"
+      - "problem solving"
+    agent_affinity: [kahneman, james]
+
+  developmental-psychology:
+    domain: psychology
+    description: "Piaget stages, attachment, moral development, lifespan development"
+    triggers:
+      - "developmental"
+      - "child development"
+      - "Piaget"
+      - "attachment"
+      - "moral development"
+      - "adolescent"
+      - "aging"
+      - "lifespan"
+      - "Erikson"
+    agent_affinity: [piaget, vygotsky]
+
+  social-psychology:
+    domain: psychology
+    description: "Conformity, obedience, attitudes, group dynamics, prejudice"
+    triggers:
+      - "conformity"
+      - "obedience"
+      - "attitude"
+      - "group dynamics"
+      - "prejudice"
+      - "stereotype"
+      - "social influence"
+      - "groupthink"
+      - "implicit bias"
+    agent_affinity: [hooks, vygotsky, kahneman]
+
+  clinical-foundations:
+    domain: psychology
+    description: "Anxiety, depression, personality theories, therapeutic approaches"
+    triggers:
+      - "anxiety"
+      - "depression"
+      - "therapy"
+      - "CBT"
+      - "person-centered"
+      - "disorder"
+      - "personality"
+      - "treatment"
+      - "mental health"
+    agent_affinity: [rogers, hooks, skinner-p]
+
+  research-methods-psych:
+    domain: psychology
+    description: "Experimental design, ethics, statistics, replication crisis"
+    triggers:
+      - "experiment"
+      - "research design"
+      - "p-value"
+      - "replication"
+      - "effect size"
+      - "IRB"
+      - "informed consent"
+      - "statistical"
+      - "sample size"
+    agent_affinity: [kahneman, james]
+
+  behavioral-neuroscience:
+    domain: psychology
+    description: "Brain structure, neurotransmitters, neural plasticity, psychopharmacology"
+    triggers:
+      - "brain"
+      - "neurotransmitter"
+      - "dopamine"
+      - "serotonin"
+      - "cortex"
+      - "amygdala"
+      - "plasticity"
+      - "pharmacology"
+      - "neural"
+    agent_affinity: [james, kahneman]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (James as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: james
+
+  agents:
+    - name: james
+      role: "department chair — classification, routing, synthesis"
+      historical: "William James (1842-1910)"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: piaget
+      role: "developmental specialist — cognitive stages, lifespan development"
+      historical: "Jean Piaget (1896-1980)"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: vygotsky
+      role: "social-cultural specialist — ZPD, scaffolding, cultural mediation"
+      historical: "Lev Vygotsky (1896-1934)"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: kahneman
+      role: "cognitive-behavioral specialist — heuristics, biases, System 1/2, research methods"
+      historical: "Daniel Kahneman (1934-2024)"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: rogers
+      role: "clinical-humanistic specialist — person-centered therapy, unconditional positive regard"
+      historical: "Carl Rogers (1902-1987)"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: hooks
+      role: "social justice specialist — intersectionality, feminist psychology, power analysis"
+      historical: "bell hooks (1952-2021)"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: skinner-p
+      role: "pedagogy specialist — operant conditioning applied to learning design"
+      historical: "B.F. Skinner (1904-1990), reimagined as pedagogy agent"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  psychology-seminar-team:
+    description: "Full department for complex multi-perspective problems"
+    agents: [james, piaget, vygotsky, kahneman, rogers, hooks, skinner-p]
+    use_when: "multi-domain, graduate-level, or full-analysis requests"
+
+  research-design-team:
+    description: "Focused research design and methodology"
+    agents: [kahneman, piaget, james, skinner-p]
+    use_when: "study design, methodology evaluation, replication planning"
+
+  case-study-team:
+    description: "Clinical case formulation and intervention design"
+    agents: [rogers, hooks, vygotsky, skinner-p]
+    use_when: "case formulation, treatment planning, intervention design"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 psychology Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college psychology department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (james) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - cognitive
+      - developmental
+      - social
+      - clinical
+      - methods
+      - neuroscience
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "psychology-department"
+  record_types:
+    - name: PsychologicalAnalysis
+      description: "Bias identification, structural analysis, or multi-framework analysis of a psychological phenomenon"
+
+    - name: CaseFormulation
+      description: "Clinical case conceptualization with person-centered, structural, social, and behavioral perspectives"
+
+    - name: ResearchDesign
+      description: "Research study design with methodology, power analysis, and ethical considerations"
+
+    - name: PsychologicalExplanation
+      description: "Teaching artifact or theoretical explanation at a specified level"
+
+    - name: PsychologySession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "psychology"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Brain & Cognition"
+    - "Emotion & Motivation"
+    - "Development"
+    - "Social Psychology"
+    - "Behavior & Mental Health"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
