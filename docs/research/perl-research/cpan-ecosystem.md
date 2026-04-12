@@ -433,4 +433,27 @@ As the Perl community says: **"CPAN is Perl's killer app."** It was true in 1995
 
 ---
 
+## Study Guide — CPAN Ecosystem
+
+### Key tools
+
+- **cpanm** (`App::cpanminus`) — modern installer.
+- **Carton** — lock files for Perl projects.
+- **metacpan.org** — search, source browsing.
+
+## DIY — Install cpanm and a library
+
+`curl -L https://cpanmin.us | perl - App::cpanminus`
+then `cpanm JSON DateTime LWP::UserAgent`. Write a
+10-line script that uses them.
+
+## TRY — Publish a module
+
+Use `Module::Starter` to scaffold a trivial module.
+Submit to CPAN. Rite of passage.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+
 *Research compiled April 2026.*

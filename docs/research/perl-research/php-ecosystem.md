@@ -484,4 +484,31 @@ The language that started as one programmer's Perl scripts for tracking resume v
 
 ---
 
+## Study Guide — PHP Ecosystem
+
+### Key tools
+
+- **PHP 8.5** — modern PHP with types, attributes, JIT.
+- **Composer** — dependency manager.
+- **Laravel** — the dominant framework.
+- **Symfony** — the enterprise framework.
+- **PHPUnit** — testing.
+- **PHPStan, Psalm** — static analysis.
+
+## DIY — Install PHP 8.5 + Composer
+
+`apt install php8.5 composer`. Create a Laravel project:
+`composer create-project laravel/laravel demo`. Observe
+the modern PHP experience.
+
+## TRY — Write a WordPress plugin
+
+WordPress still powers 40%+ of the web. Writing a
+20-line plugin is the fastest path to understanding PHP
+in practice.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+
 *Part of the Perl Research Series --- exploring the constellation of languages, tools, and ecosystems that orbit Perl's gravitational influence on modern computing.*

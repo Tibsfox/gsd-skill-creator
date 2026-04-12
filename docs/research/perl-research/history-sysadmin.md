@@ -499,3 +499,37 @@ This research cross-links to the following college departments in
 *Research compiled April 2026. Perl 5.42.x is the current stable release. Raku continues development independently. CPAN has 213,000+ distributions. The camel still watches from the bookshelf.*
 
 *Addendum (Perl 5.42 and PHP 8.5 specifics) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Perl History & Sysadmin
+
+### Questions
+
+- Why did Perl become the sysadmin language in the 1990s?
+- What did Perl get right that awk and sed didn't?
+- Why did Python overtake Perl in the 2000s?
+- Why is Perl still around in 2026?
+
+## DIY — One-liner practice
+
+Learn these 5 canonical one-liners. You will use them
+forever.
+
+```bash
+perl -ne 'print if /pattern/' file        # grep
+perl -pe 's/old/new/g' file                # sed
+perl -lane 'print $F[0]' file              # awk {print $1}
+perl -i.bak -pe 's/A/B/' file              # in-place edit
+perl -MJSON -nE 'say decode_json($_)->{k}' # JSON-extract
+```
+
+## TRY — Write a 50-line sysadmin tool
+
+Log rotator, user-audit, disk-usage reporter. The kind of
+thing every sysadmin still writes. In Perl.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
