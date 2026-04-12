@@ -3223,3 +3223,34 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (Model Context Protocol and the agentic-era SOA) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Modern SOA
+
+### Stack
+
+- **REST** — resource-oriented HTTP.
+- **GraphQL** — query language for APIs.
+- **gRPC** — HTTP/2 + protobufs, strong typing.
+- **Kafka / NATS / Pulsar** — event streaming.
+- **Service mesh (Istio, Linkerd)** — sidecar proxy
+  pattern.
+- **OpenAPI** — REST spec.
+- **AsyncAPI** — event/message spec.
+- **MCP** — Model Context Protocol for agents.
+
+## DIY — Build a gRPC service
+
+Write a .proto file, generate code, implement server,
+write client. 30 lines per side.
+
+## TRY — Write an MCP server
+
+Use the reference SDK. Expose one tool. Connect Claude
+Desktop to it.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
