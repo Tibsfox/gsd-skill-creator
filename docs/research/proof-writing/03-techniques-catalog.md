@@ -442,3 +442,154 @@ Each reformulation unlocks a different set of techniques. Part of learning proof
 - **Document 4** applies these techniques to specific mathematical structures.
 - **Document 5** covers the craft of turning technique into well-written prose.
 - **Document 6** discusses how each technique is expressed in proof assistants, where the technique catalog becomes a library of tactics.
+
+---
+
+## Study Guide — Proof Techniques Catalog
+
+### Prerequisites
+
+- Document 2 (logic and language) — you need to know what $\forall$, $\exists$, $\implies$, $\neg$ mean before learning the techniques that operate on them.
+- Basic comfort with even/odd integers, set membership, and simple algebraic manipulation.
+
+### Key vocabulary
+
+| Term | Definition | Technique |
+|---|---|---|
+| **Direct proof** | Assume hypothesis, derive conclusion by forward reasoning. | A.1 |
+| **Contrapositive** | Prove $\neg Q \implies \neg P$ instead of $P \implies Q$. | A.2 |
+| **Contradiction (reductio)** | Assume $\neg P$, derive $\bot$, conclude $P$. | A.3 |
+| **Case analysis** | Partition the hypothesis space, prove each case separately. | A.4 |
+| **WLOG** | Reduce symmetric cases to one representative case. | A.5 |
+| **Induction (weak)** | Base case + inductive step ($P(k) \implies P(k+1)$). | B.4 |
+| **Strong induction** | Base case + inductive step assuming $P(0), \ldots, P(k)$. | B.5 |
+| **Structural induction** | Induction on recursively defined structures (trees, formulas). | B.6 |
+| **Witness / construction** | Explicitly produce an object satisfying an existential claim. | B.1 |
+| **Pigeonhole** | $n+1$ objects in $n$ boxes → some box has $\geq 2$. | B.8 |
+| **Diagonal argument** | Construct an object differing from every element of a list at a designated position. | B.11 |
+| **Invariant** | A quantity preserved by every allowed operation; use it to show a state is unreachable. | B.12 |
+
+### Mastery checklist
+
+For each technique in the catalog, you have mastered it when you can:
+
+- [ ] State the technique's logical pattern from memory.
+- [ ] Write one worked proof using the technique without referring to notes.
+- [ ] Identify which technique a given proof uses, given only the proof text.
+- [ ] Explain when the technique is the right choice and when it isn't.
+- [ ] Solve a problem where the technique is not immediately obvious but becomes so after reformulation (section 6).
+
+### Study plans
+
+**1-week sprint.** Focus on Group A (implications). Master direct proof, contrapositive, and contradiction. Prove: (a) $\sqrt{3}$ is irrational (A.3), (b) if $n^2$ is odd then $n$ is odd (A.2), (c) for any integer $n$, $n^2 + n$ is even (A.4). Three proofs, three techniques.
+
+**1-month deep dive.** Add Group B. Prove the sum formula $1 + 2 + \cdots + n = n(n+1)/2$ by induction (B.4). Prove every integer $\geq 2$ has a prime factorization by strong induction (B.5). Prove the 13-people birthday-month pigeonhole (B.8). Prove $\mathbb{R}$ is uncountable by Cantor's diagonal (B.11). Prove the mutilated chessboard by invariant (B.12). One proof per technique, 8 total.
+
+**6-month mastery.** Work through Hammack's *Book of Proof* or Velleman's *How to Prove It* cover to cover, identifying the technique used in every proof. Add Aigner & Ziegler's *Proofs from THE BOOK* for beauty. For every technique, collect 5 favorite proofs — your personal "proof gallery."
+
+---
+
+## TRY Session — Your First Proof by Contradiction
+
+**Duration:** 20 minutes.
+**Materials:** Pen and paper.
+
+**Theorem to prove:** $\sqrt{3}$ is irrational.
+
+**Steps:**
+
+1. Assume for contradiction that $\sqrt{3} = p/q$ with $\gcd(p, q) = 1$.
+2. Square both sides: $3 = p^2/q^2$, so $p^2 = 3q^2$.
+3. Conclude $3 \mid p^2$. Now you need the fact: if $3 \mid p^2$ then $3 \mid p$. (Prove this as a mini-lemma using Euclid's lemma or by considering $p \bmod 3$.)
+4. Write $p = 3r$, substitute: $9r^2 = 3q^2$, so $q^2 = 3r^2$, hence $3 \mid q$.
+5. Both $p$ and $q$ are divisible by 3, contradicting $\gcd(p, q) = 1$.
+6. Therefore $\sqrt{3}$ is irrational. $\blacksquare$
+
+**What to observe:** The structure is identical to the $\sqrt{2}$ proof (A.3). The only difference is replacing "2" with "3" everywhere. Ask yourself: for which integers $n$ does this proof template work? (Answer: all primes, and more generally all squarefree integers.)
+
+---
+
+## TRY Session — Invariant Reasoning on the 15-Puzzle
+
+**Duration:** 20 minutes.
+**Materials:** A physical 15-puzzle or an online simulator.
+
+**Theorem:** Exactly half of the $16!/2$ permutations of the 15-puzzle are reachable from the solved state.
+
+**Steps:**
+
+1. Number the tiles 1–15 in a 4×4 grid. The blank is tile 16.
+2. Every legal move is a transposition of the blank with an adjacent tile.
+3. Define the **parity of a permutation** as even or odd based on the number of transpositions needed to reach it from the identity.
+4. Observe: each slide move changes the parity of the permutation *and* moves the blank one step in the grid. The parity of the blank's position (in taxicab distance from its home) changes by 1.
+5. The **invariant** is: (parity of permutation) + (parity of blank's taxicab distance from home) is constant modulo 2.
+6. In the solved position, both are 0. So only positions where permutation parity + blank distance parity is even are reachable.
+7. Verify: swap tiles 14 and 15 (with blank in its home position). The permutation has odd parity, the blank distance is 0 (even), so the sum is odd — unreachable. This is why the "14-15 puzzle" is impossible.
+
+**What to observe:** You proved something impossible by finding a quantity that never changes. No amount of sliding will alter the invariant's value. This is technique B.12 in action.
+
+---
+
+## DIY — Prove Five Theorems, Five Techniques
+
+**Scope:** 3–5 hours across a week.
+**Deliverable:** Five written proofs, each using a different technique.
+
+| # | Theorem | Required technique |
+|---|---|---|
+| 1 | The product of any two odd numbers is odd. | Direct (A.1) |
+| 2 | If $3n + 2$ is odd, then $n$ is odd. | Contrapositive (A.2) |
+| 3 | There is no smallest positive rational number. | Contradiction (A.3) |
+| 4 | For any $n \geq 1$, $1 + 3 + 5 + \cdots + (2n - 1) = n^2$. | Induction (B.4) |
+| 5 | Among any 5 integers, some pair has the same remainder modulo 4. | Pigeonhole (B.8) |
+
+**Verification:** After writing each proof, apply the "mugga mugga test" (document 5): read it aloud, replacing all math with "blah." Does the English still work?
+
+---
+
+## DIY — The Proof Technique Spotter
+
+**Scope:** 2–3 hours.
+**Materials:** A proof-based textbook (Hammack, Velleman, or Rudin chapter 1).
+
+**Task:** Read 10 proofs in the textbook. For each proof, write one line identifying:
+
+1. The technique used (from the catalog).
+2. The key step where the technique is deployed.
+3. Whether a different technique could have worked.
+
+**Stretch:** Find a proof that uses *two* techniques in combination (e.g., induction with case analysis inside the inductive step). Explain how the techniques compose.
+
+---
+
+## College & Rosetta Deep Links
+
+### Department connections
+
+| College Department | Concept ID | Connection |
+|---|---|---|
+| **Logic** | `log-formal-proof-systems` | Every technique is a rule or pattern within a formal proof system |
+| **Logic** | `log-propositional-logic` | Contradiction (A.3), cases (A.4), and contrapositive (A.2) are propositional-logic transformations |
+| **Logic** | `log-predicate-logic` | Universal introduction (B.4 base of induction), existential introduction (B.1 witness construction) |
+| **Math** | `math-pattern-recognition` | Section 5 (choosing a technique) — pattern recognition is the meta-skill that determines which proof technique fits a problem |
+| **Math** | `math-number-cardinality` | B.11 (diagonal argument) proves cardinality results; B.8 (pigeonhole) is a cardinality-based technique |
+| **Math** | `math-equations-expressions` | Group A techniques all manipulate algebraic expressions within proofs |
+| **Math** | `math-functions` | B.1–B.3 (existence, uniqueness) concern function properties (injectivity, surjectivity) |
+| **Problem-Solving** | (heuristics) | Section 5 (choosing a technique) is a structured problem-solving heuristic — Polya's method applied to proof selection |
+| **Critical Thinking** | (evaluation) | Technique A.8 (counterexample / disproof) is critical thinking applied to mathematical claims |
+
+### Rosetta panel routes
+
+Each proof technique can be demonstrated in code:
+
+- **Python panel:** Induction proofs correspond to recursive functions. Strong induction corresponds to dynamic programming. A Python exercise: implement $n!$ recursively (weak induction) and Fibonacci (strong induction / memoization).
+- **C++ panel:** The invariant technique (B.12) maps to loop invariants in imperative programming. A C++ exercise: prove a loop's correctness by identifying its invariant.
+- **Lisp panel:** Structural induction (B.6) is the proof technique for recursive data structures, which Lisp makes first-class. A Lisp exercise: prove that `(length (append xs ys)) = (+ (length xs) (length ys))` by structural induction on `xs`.
+- **Fortran panel:** The pigeonhole principle (B.8) appears in numerical algorithms as collision detection. A Fortran exercise: given an array of $n + 1$ integers in $\{1, \ldots, n\}$, find a duplicate.
+- **Pascal panel:** Case analysis (A.4) maps directly to Pascal's `case` statement. The connection between logical case analysis and programming case statements is the through-line.
+
+### Cross-department threads
+
+- **Logic → Math → Problem-Solving:** The technique catalog is the intersection of logic (the rules), math (the content), and problem-solving (the strategy). A student who masters all three departments simultaneously builds proof fluency faster than one who studies them separately.
+- **Math → Coding:** Every induction proof has a recursive program counterpart. Every recursive program has an induction proof of its correctness. This is the Curry-Howard thread from document 2/6.
+- **Logic → Philosophy:** Proof by contradiction (A.3) depends on the law of excluded middle. The constructivist rejection of LEM (document 1, section 5.1) means some contradiction proofs are *not* accepted in all philosophical frameworks. This is a living debate.
