@@ -170,7 +170,7 @@ describe('routeToDatabase()', () => {
     const route = routeToDatabase('public');
     expect(route.local.host).toBe('localhost');
     expect(route.external).not.toBeNull();
-    expect(route.external!.host).toBe('tibsfox.com');
+    expect(route.external!.host).toBe(process.env.EXTERNAL_DB_HOST ?? 'localhost');
   });
 
   it('all routes include local database', () => {

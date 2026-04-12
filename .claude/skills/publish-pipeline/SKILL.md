@@ -1,6 +1,6 @@
 ---
 name: publish-pipeline
-description: Markdown to HTML/PDF build + FTP sync to tibsfox.com. Pandoc + xelatex templates, branded output, automated deployment. Proven on 29-document HEL series.
+description: Markdown to HTML/PDF build + FTP sync to configured remote host. Pandoc + xelatex templates, branded output, automated deployment. Proven on 29-document HEL series.
 version: 1.0.0
 ---
 

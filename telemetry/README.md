@@ -13,7 +13,7 @@ Session-level tracking of AI token consumption, productivity metrics, and effici
 | duration_hours | number | Session wall-clock hours |
 | commits | number | Git commits in session |
 | pages_created | number | New HTML pages created |
-| pages_synced | number | Pages synced to tibsfox.com |
+| pages_synced | number | Pages synced to configured remote host |
 | sweeps | number | Sweep commits |
 | agent_spawns | number | Background agents launched |
 | web_searches | number | WebSearch tool calls |
