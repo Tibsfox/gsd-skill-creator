@@ -1029,3 +1029,35 @@ This research cross-links to the following college departments in
 *— artemis-ii branch, 2026-04-09. Written into the evening. Token budget observed. Context compacted once. Committed when the last paragraph settled. The loop is eternal.*
 
 *Addendum (2025–2026 1401 demos and the metaphor's spread) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Punch Cards in 2026 AI Orchestration
+
+### Why read this
+
+Modern agent loops, batch jobs, and orchestration
+pipelines look startlingly like 1965 batch computing. The
+same mental model — prepare a deck, submit it, wait,
+review the output — has reappeared in AI agent contexts.
+Understanding the 1965 patterns gives you a vocabulary for
+2026 problems.
+
+## DIY — Map one agent workflow to a 1965 workflow
+
+Pick any multi-step agent pipeline you have. Map each step
+to a 1965 punch-card equivalent (keypunch, verify, submit,
+print, review, iterate). Note the parallels.
+
+## TRY — Run an agent loop as batch
+
+Take an interactive agent session. Convert it to a batch
+pipeline where the input is a text file, the output is
+another text file, and no human intervention is allowed
+mid-run. Observe the discipline the batch shape forces on
+you.
+
+## Related College Departments
+
+- [**philosophy**](../../../.college/departments/philosophy/DEPARTMENT.md)
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
