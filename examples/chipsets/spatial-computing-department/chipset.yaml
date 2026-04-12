@@ -1,0 +1,263 @@
+# Spatial Computing Department Chipset Configuration
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This chipset delivers the Spatial Computing Department
+# as a forkable, dogfoodable instance of the department template pattern.
+
+name: spatial-computing-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated spatial computing department providing domain-routed
+  expertise through seven named agents (Sutherland, Engelbart, Bret Victor,
+  Krueger, Furness, Azuma, Papert-sp), six knowledge skills, and three
+  pre-composed teams. Persists work via Grove records and integrates with
+  the college spatial-computing department concept graph. First instance
+  of the department pattern for spatial reasoning, VR/AR, voxel building,
+  responsive environments, and constructionist learning.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  spatial-reasoning-fundamentals:
+    domain: spatial-computing
+    description: "3D thinking — coordinate frames, mental rotation, cross-section, viewpoint translation"
+    triggers:
+      - "coordinate"
+      - "navigate"
+      - "spatial reasoning"
+      - "3d thinking"
+      - "mental rotation"
+      - "viewpoint"
+      - "cross-section"
+    agent_affinity: [sutherland, engelbart, papert-sp]
+
+  3d-interaction-design:
+    domain: spatial-computing
+    description: "Selection, manipulation, navigation, and feedback in 3D"
+    triggers:
+      - "interaction"
+      - "manipulation"
+      - "selection"
+      - "gesture"
+      - "controller"
+      - "fitts"
+      - "6dof"
+    agent_affinity: [bret-victor, sutherland, krueger]
+
+  augmented-reality-tracking:
+    domain: spatial-computing
+    description: "AR registration, tracking, calibration, display configurations"
+    triggers:
+      - "augmented reality"
+      - " ar "
+      - "tracking"
+      - "registration"
+      - "slam"
+      - "fiducial"
+      - "hololens"
+    agent_affinity: [azuma, sutherland, furness]
+
+  immersive-environment-design:
+    domain: spatial-computing
+    description: "VR environments, CAVE installations, responsive rooms, presence and comfort"
+    triggers:
+      - "vr environment"
+      - "immersive"
+      - "responsive environment"
+      - "cave"
+      - "presence"
+      - "level design"
+    agent_affinity: [krueger, furness, sutherland]
+
+  world-building-block-paradigms:
+    domain: spatial-computing
+    description: "Voxel worlds, prefab modules, load-bearing patterns, blueprint translation"
+    triggers:
+      - "voxel"
+      - "minecraft"
+      - "build"
+      - "block"
+      - "prefab"
+      - "blueprint"
+      - "castle"
+    agent_affinity: [papert-sp, engelbart, sutherland]
+
+  embodied-computing-and-constructionism:
+    domain: spatial-computing
+    description: "Constructionist pedagogy, microworlds, body-scale learning, error-as-discovery"
+    triggers:
+      - "learn spatial"
+      - "teach"
+      - "exercise"
+      - "microworld"
+      - "constructionism"
+      - "curriculum"
+      - "tutorial"
+    agent_affinity: [papert-sp, krueger, engelbart]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Sutherland as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: sutherland
+
+  agents:
+    - name: sutherland
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: engelbart
+      role: "augmentation and navigation specialist"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: bret-victor
+      role: "direct manipulation and dynamic representation specialist"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: krueger
+      role: "responsive environments and artificial reality specialist"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: furness
+      role: "VR/HMD and high-stakes environment specialist"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: azuma
+      role: "AR registration and tracking specialist"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: papert-sp
+      role: "pedagogy guide — constructionism, microworlds, body-scale learning"
+      model: sonnet
+      tools: [Read, Bash, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  spatial-computing-analysis-team:
+    description: "Full department for multi-wing and novel problems"
+    agents: [sutherland, engelbart, bret-victor, krueger, furness, azuma, papert-sp]
+    use_when: "multi-wing, novel, or full-analysis requests"
+
+  spatial-computing-workshop-team:
+    description: "Focused interaction design review team"
+    agents: [bret-victor, engelbart, krueger, papert-sp]
+    use_when: "interaction review and iterative refinement"
+
+  spatial-computing-practice-team:
+    description: "Pipeline for prototyping AR/VR experiences end-to-end"
+    agents: [azuma, furness, bret-victor, papert-sp]
+    use_when: "translating concepts into executable prototype specs"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 spatial-computing Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college spatial-computing department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (sutherland) must be CAPCOM"
+        action: "block"
+
+      - check: "papert_sp_name_collision_avoided"
+        description: "Papert-sp must use suffix to avoid collision with coding/papert"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    wings_covered:
+      - spatial-foundations
+      - building-architecture
+      - redstone-engineering
+      - systems-automation
+      - collaborative-design
+      - vr-ar-immersive
+      - embodied-learning
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "spatial-computing-department"
+  record_types:
+    - name: SpatialComputingAnalysis
+      description: "Analysis of an existing spatial system — augmentation, affordances, recommendations"
+
+    - name: SpatialComputingDesign
+      description: "Proposed spatial system design with interaction flows and implementation hints"
+
+    - name: SpatialComputingReview
+      description: "Critique of an existing design with severity-rated violations and fixes"
+
+    - name: SpatialComputingExplanation
+      description: "Teaching artifact — level-appropriate explanation plus follow-up exercises"
+
+    - name: SpatialComputingSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "spatial-computing"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Spatial Foundations"
+    - "Building & Architecture"
+    - "Redstone Engineering"
+    - "Systems & Automation"
+    - "Collaborative Design"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
+  notes: >
+    The papert-sp agent uses a suffix to avoid collision with the coding-
+    department papert agent. When forking this chipset, retain the suffix
+    convention if your new department would otherwise collide with an
+    existing agent name in the shared examples tree.
