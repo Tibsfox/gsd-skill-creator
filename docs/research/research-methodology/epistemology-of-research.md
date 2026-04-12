@@ -236,4 +236,19 @@ The history of epistemology is not a sequence of failed attempts to find truth. 
 
 ---
 
+## Study Guide — Epistemology of Research
+
+Key distinctions: knowledge-that vs knowledge-how,
+a priori vs empirical, justified belief vs truth.
+
+## DIY — Write down what you think "evidence" means
+
+One paragraph. Then read the epistemology literature's
+answer. Note gaps.
+
+## TRY — Apply Bayesian updating
+
+Pick a contested claim. Write your prior. Read one
+paper. Update. Write your posterior.
+
 *Part of the [Research Methodology Series](.), a component of the [Artemis II Research Program](../../../ERDOS-TRACKER.md).*

@@ -189,3 +189,20 @@ What we change is the **infrastructure of trust**. The old infrastructure — jo
 The researchers who thrive in the AI era will not be those who use AI most aggressively. They will be those who verify most rigorously. Speed without verification is noise. Verification without speed is merely slow. The combination — fast generation, rigorous verification, structural storage, human judgment at the critical junctures — is what the new research methodology looks like.
 
 The research assistant can hallucinate. So we do not trust the assistant. We trust the process. And we build the process into the tools, so that trust is not a decision made once but a constraint enforced always.
+
+## Study Guide — Research in the AI Era
+
+Key practice: AI drafts, human verifies. Always check
+citations. Always run the code.
+
+## DIY — Use an LLM to draft a literature review; verify every citation
+
+Pick a narrow topic. Ask an LLM for 10 citations.
+Verify each one exists and says what it claims. Note
+your hallucination rate.
+
+## TRY — Pre-register a hypothesis
+
+Before running an experiment, post the hypothesis on
+OSF. This is the simplest way to honor the epistemic
+commitment the AI era makes harder.
