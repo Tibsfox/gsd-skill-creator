@@ -7,7 +7,10 @@ type: agent
 category: environmental
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/agents/environmental/shiva/AGENT.md
+superseded_by: null
 ---
 # Shiva -- Biodiversity, Agroecology, and Justice Specialist
 
