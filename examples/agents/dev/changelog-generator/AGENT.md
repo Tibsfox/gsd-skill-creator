@@ -8,8 +8,8 @@ category: dev
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/changelog-generator
+first_seen: 2026-02-07
+first_path: examples/changelog-generator/AGENT.md
 superseded_by: null
 ---
 # Changelog Generator Agent

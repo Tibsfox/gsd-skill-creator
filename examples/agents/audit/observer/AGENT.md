@@ -7,8 +7,8 @@ category: audit
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/observer
+first_seen: 2026-02-12
+first_path: project-claude/agents/observer.md
 superseded_by: null
 ---
 > Stub: Implementation coming in Phase 87 (Passive Monitoring)

@@ -8,8 +8,8 @@ category: ops
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/deployment-validator
+first_seen: 2026-02-07
+first_path: .claude/agents/deployment-validator.md
 superseded_by: null
 ---
 # Deployment Validator Agent

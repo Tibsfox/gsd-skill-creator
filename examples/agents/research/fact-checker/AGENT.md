@@ -10,8 +10,8 @@ category: research
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/fact-checker
+first_seen: 2026-03-31
+first_path: .claude/agents/fact-checker.md
 superseded_by: null
 ---
 <role>

@@ -8,8 +8,8 @@ category: gsd
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/gsd-health-checker
+first_seen: 2026-02-07
+first_path: examples/gsd-health-checker/AGENT.md
 superseded_by: null
 ---
 # GSD Health Checker Agent
