@@ -593,3 +593,106 @@ Each proof technique can be demonstrated in code:
 - **Logic → Math → Problem-Solving:** The technique catalog is the intersection of logic (the rules), math (the content), and problem-solving (the strategy). A student who masters all three departments simultaneously builds proof fluency faster than one who studies them separately.
 - **Math → Coding:** Every induction proof has a recursive program counterpart. Every recursive program has an induction proof of its correctness. This is the Curry-Howard thread from document 2/6.
 - **Logic → Philosophy:** Proof by contradiction (A.3) depends on the law of excluded middle. The constructivist rejection of LEM (document 1, section 5.1) means some contradiction proofs are *not* accepted in all philosophical frameworks. This is a living debate.
+
+---
+
+## Knowledge Gap Fills — Third Pass
+
+### The well-ordering principle deserves more than a single example
+
+Section B.7 gives only one example (every $n \geq 2$ has a prime factor). Well-ordering is actually a *meta-technique* that underlies all induction: weak induction, strong induction, and transfinite induction are all logically equivalent to well-ordering applied to different ordered sets. The equivalence chain:
+
+$$\text{Well-ordering of } \mathbb{N} \iff \text{Weak induction} \iff \text{Strong induction}$$
+
+**Proof sketch (well-ordering → strong induction).** Suppose $P(0)$ is true and $[\forall j \leq k, P(j)] \implies P(k+1)$. Let $S = \{n \in \mathbb{N} : \neg P(n)\}$. If $S \neq \emptyset$, by well-ordering $S$ has a least element $m$. Then $m > 0$ (since $P(0)$ holds) and $P(j)$ holds for all $j < m$ (by minimality of $m$). By the inductive hypothesis, $P(m)$ holds — contradiction. So $S = \emptyset$. $\blacksquare$
+
+**Proof sketch (strong induction → well-ordering).** Given a non-empty $S \subseteq \mathbb{N}$, prove by strong induction that every $n$ either is in $S$ or has a predecessor in $S$ that is smaller. The base case ($n = 0$) either gives $0 \in S$ or $S$ has no element $\leq 0$. The inductive step resolves the minimal element. $\blacksquare$
+
+This equivalence is important because it means you can always reformulate an induction proof as a "least counterexample" proof and vice versa. The technique that *looks* right for a problem might not be the one that *works* — reformulation (section 6) is the meta-skill.
+
+### Proof by exhaustion vs. proof by cases
+
+Section A.4 covers proof by cases. A related but distinct technique — **proof by exhaustion** — verifies every case individually when the domain is finite. The four-color theorem's 1976 proof is proof by exhaustion (1,900 cases checked by computer). More modestly: "Every prime greater than 3 is of the form $6k \pm 1$" can be proved by exhaustion over the 6 residue classes modulo 6 (classes 0, 2, 3, 4 are eliminated as divisible by 2 or 3, leaving classes 1 and 5).
+
+The distinction matters pedagogically: cases is a *structural* technique (the cases come from the problem's logical form), while exhaustion is a *computational* technique (the cases come from enumerating a finite set). Automation can handle exhaustion but not arbitrary case analysis.
+
+### Proof by construction — the constructive emphasis
+
+Section B.1 treats construction as "produce a witness." In constructive mathematics, this is not just one technique among many — it is the *only* acceptable way to prove existence. The Brouwer-Heyting-Kolmogorov (BHK) interpretation makes this precise:
+
+- A proof of $\exists x \, P(x)$ is a pair $(a, p)$ where $a$ is a value and $p$ is a proof of $P(a)$.
+- A proof of $P \lor Q$ is either a proof of $P$ or a proof of $Q$, together with a tag saying which.
+- There is no proof of $P \lor \neg P$ in general (the law of excluded middle is not an axiom).
+
+This means the non-constructive existence proof (B.2 — the $a^b$ example) is *not valid* in constructive mathematics. The technique catalog should be understood as having two tiers: constructive techniques (valid everywhere) and classical techniques (valid only with LEM). Every technique in Group A (direct, contrapositive, cases, biconditional) is constructive. Contradiction (A.3 in its full generality) and non-constructive existence (B.2) are classical-only.
+
+### The Erdős probabilistic method — a fuller example
+
+Section B.10 gives a terse sketch. Here is a more accessible example:
+
+**Theorem (Erdős, 1963).** There exists a tournament on $n$ vertices with no dominating set of size $\lceil \log_2 n \rceil - 1$. (A tournament is a complete directed graph; a dominating set $S$ is a set such that every vertex outside $S$ is beaten by some vertex in $S$.)
+
+**Proof.** Orient each edge of $K_n$ independently with probability $1/2$. For any set $S$ of size $k = \lceil \log_2 n \rceil - 1$, the probability that a fixed vertex $v \notin S$ beats every vertex in $S$ is $(1/2)^k$. The probability that $v$ is NOT dominated by $S$ is also $(1/2)^k$. The probability that SOME vertex is not dominated is at most $(n - k) \cdot (1/2)^k$. By union bound over all $\binom{n}{k}$ choices of $S$:
+
+$$\Pr[\text{some } S \text{ of size } k \text{ dominates}] \leq \binom{n}{k} (n-k) (1/2)^k < n^k \cdot n \cdot 2^{-k} = n^{k+1} / 2^k.$$
+
+When $k = \lceil \log_2 n \rceil - 1$, we have $2^k < n$, so $n^{k+1}/2^k > 1$ only barely; with a more careful computation the bound is $< 1$. So with positive probability, no dominating set of that size exists. Therefore some tournament achieves this. $\blacksquare$
+
+The probabilistic method is non-constructive (you don't know *which* tournament works) but establishes existence. It is the prototypical application of probability to combinatorics and was essentially invented by Erdős.
+
+## Lessons Learned & Retrospectives — Third Pass
+
+### What our own proofs taught about technique selection
+
+The memory arena milestones used a specific mix of techniques:
+
+| Milestone | Key proof technique | Why that technique |
+|---|---|---|
+| M1 (alloc/get) | Direct proof + exhaustive testing | 99 Rust tests verified each operation by direct construction of witnesses |
+| M2 (warm-start 16.58x) | Statistical hypothesis testing | Performance claims require p-values, not logical deduction — this is the empirical parallel to proof |
+| M3–M4 (crossfade) | Invariant (chunk-state machine) | The state enum is a type-level invariant; Rust's exhaustive match enforces it |
+| M5 (sweep policy) | Case analysis on access patterns | The sweep driver branches on hot/warm/cold thresholds — each case has a different action |
+| M6 (VRAM) | Construction (explicit witness) | The VramPool produces a concrete GPU allocation or returns an error — existence by construction |
+| M7 (allocator bake-off) | Comparison by exhaustion | 4 allocators tested across the same benchmarks — proof by complete enumeration |
+| M13 (Grove integration) | Structural induction on the arena tree | Content-addressed records form a tree; properties verified by structural induction over the tree shape |
+
+The pattern: **simple techniques dominate real engineering proofs.** Direct proof + case analysis + invariants covered >80% of our proof needs. Contradiction, induction, and the diagonal argument appeared only in edge cases. This matches the section 5 selection heuristic: default to direct, escalate only when needed.
+
+### The PCG statistical proof retrospective
+
+Our `rng-research` work included proving PCG generator quality via TestU01 BigCrush (160 statistical tests). This is an example of **computational proof** — you don't prove that the generator is random (it isn't), you prove that no statistical test from a large battery can distinguish its output from true randomness at a given significance level. See `docs/research/rng-research/testing-quality.md`.
+
+The lesson: proof by exhaustive testing is proof by exhaustion (the gap fill above), applied to test suites rather than mathematical cases. The technique is the same; the domain is different.
+
+## Deep Corpus Links — Third Pass
+
+### Research corpus cross-references
+
+| Technique | Target | Connection |
+|---|---|---|
+| B.11 (diagonal) | `docs/research/mlc-research/` (machine-level computing) | Turing's halting-problem undecidability proof uses the same diagonal technique as Cantor. The MLC research covers Turing machines at the hardware level |
+| B.10 (probabilistic) | `docs/research/rng-research/testing-quality.md` | BigCrush as statistical proof of randomness quality — the testing battery is a probabilistic proof tool |
+| B.10 (probabilistic) | `docs/research/dmn-research/` (data mining) | ML convergence proofs (PAC learning, VC dimension) use probabilistic arguments structurally identical to Erdős's method |
+| B.4–B.6 (induction) | `docs/research/lsp-research/history-philosophy.md` §1 | Church's lambda calculus defines computation by recursive reduction — structural induction on lambda terms is how you prove properties of programs |
+| B.12 (invariant) | `docs/research/rst-research/language-ownership.md` | Rust's borrow checker maintains the aliasing invariant: at most one mutable reference OR any number of shared references. This is a type-level invariant enforced at compile time |
+| A.2 (contrapositive) | `docs/research/rca-deep/classical-methods-enrichment.md` | The contrapositive of "5 Whys finds root causes" is "if 5 Whys didn't find the root cause, the method failed" — Card's 2017 critique is essentially a contrapositive argument |
+| A.4 (case analysis) | `docs/research/plg-research/language-semantics.md` §5 (the cut) | Prolog's cut (!) prunes case analysis at runtime — it is the computational equivalent of "this case is impossible, skip it" |
+| B.1 (construction) | `docs/research/python-research/` | Python's REPL culture — "try it and see if it works" — is computational witness construction |
+
+### Live site pages
+
+| Technique | Page | Connection |
+|---|---|---|
+| B.4 (induction) | `Research/LSP/history.html` | Lambda calculus = recursive computation = induction |
+| B.11 (diagonal) | `Research/RCA/mathematical-foundations.html` | Diagonal argument underlies impossibility results in causal inference |
+| B.8 (pigeonhole) | `Research/FOR/learn.html` | Fortran numerical algorithms encounter pigeonhole in hash collisions |
+| A.4 (cases) | `Research/PLG/language.html` | Prolog clauses = case analysis branches |
+| B.12 (invariant) | `Research/RST/learn.html` | Rust ownership invariant = compile-time proof of memory safety |
+
+### College concept deepening
+
+| Concept ID | Third-pass extension |
+|---|---|
+| `math-pattern-recognition` | Technique selection (section 5) IS pattern recognition applied to logical structure — recognizing that a problem "looks like" a pigeonhole problem or an invariant problem |
+| `log-formal-proof-systems` | Resolution (new gap fill in doc 2) + natural deduction + sequent calculus are three equivalent proof systems. The technique catalog operates within natural deduction; resolution underlies SAT solvers; sequent calculus underlies proof assistants |
+| `math-functions` | Existence/uniqueness proofs (B.1–B.3) are the core technique for reasoning about functions. Proving a function is well-defined = proving existence + uniqueness of its output for each input |

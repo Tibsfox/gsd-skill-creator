@@ -614,3 +614,131 @@ The VS Code extension provides real-time feedback: as you type tactics, it shows
 - **Philosophy → Logic → Math:** The foundational debates (constructive vs. classical, ZFC vs. type theory, intuitionism vs. formalism) are philosophical questions (Philosophy) with logical formulations (Logic) and mathematical consequences (Math). Section 3.4 (HoTT) is the current frontier of this thread.
 - **Writing → Coding:** Section 6 (craft of formalized proof) is the intersection of writing craft and code craft. Naming conventions, comments, module structure, documentation — these are shared concerns of proof writing and software engineering. The Mathlib style guide is simultaneously a writing guide and a coding style guide.
 - **Learning → Math → Coding:** The "1-week sprint" study plan (install Lean, type four proofs) is a Learning department exercise that bridges Math and Coding. A student who completes it has both written mathematical proofs AND written functional programs, and has seen that they're the same thing.
+
+---
+
+## Knowledge Gap Fills — Third Pass
+
+### AI-assisted theorem proving (2022–2026)
+
+Section 8 mentions "AI/LLM tactic assistants" but doesn't give specifics. The field has moved rapidly:
+
+**AlphaProof (DeepMind, 2024).** A reinforcement-learning system that solved 4 of 6 problems from the 2024 International Mathematical Olympiad, achieving a score equivalent to a silver medal. AlphaProof works by fine-tuning a language model on Lean 4 proof data, then using tree search (Monte Carlo tree search variant) to find proof terms. The system proved results in algebra, number theory, and combinatorics that took human IMO contestants hours — in some cases producing proofs shorter than the human solutions.
+
+**DeepSeek-Prover (2024).** An open-weights LLM trained specifically on Lean 4 code. On the miniF2F benchmark (a standard set of olympiad-level formalization problems), DeepSeek-Prover achieved 60%+ pass rates — up from <30% for general-purpose LLMs. The key insight: training on formalized mathematics produces models that can generate tactic sequences, not just natural-language arguments.
+
+**LeanDojo (2023).** A framework from Caltech and Stanford that treats Lean 4 as an interactive environment for reinforcement learning. LeanDojo extracted 98,000+ theorems and proofs from Mathlib, providing training data and a benchmark for AI theorem proving. The best LeanDojo models can prove ~50% of held-out Mathlib theorems automatically.
+
+**Implications:** AI is not replacing human mathematicians, but it is becoming a *collaborator* in proof writing. The workflow increasingly looks like: human states the theorem, AI suggests tactic sequences, human reviews and edits. This is analogous to how code completion (Copilot, Cursor) works for programming — the human provides direction, the AI provides labor.
+
+**Connection to our work:** This codebase uses Claude Code as an AI pair-programming tool. The Lean + AI workflow is the mathematical version of the same pattern. Our skill-creator system generates skills and agents from observed patterns — LeanDojo does the same for proof tactics.
+
+### Formal verification of software vs. formal verification of mathematics
+
+Section 2.3 (Isabelle/HOL) mentions hardware verification but doesn't develop the distinction. In practice, formal verification splits into two communities:
+
+| | Math formalization | Software verification |
+|---|---|---|
+| **Goal** | Prove mathematical theorems | Prove programs correct |
+| **Tool** | Lean, Coq (Mathlib) | Isabelle/HOL, Coq (CompCert, seL4) |
+| **What's verified** | The theorem is a consequence of axioms | The program meets its specification |
+| **Kernel** | Type-checks proof terms | Type-checks proof terms (same technology) |
+| **Scale** | Mathlib: 1.5M lines | seL4 kernel: 10K lines C + 200K lines proof |
+| **Example** | Feit-Thompson odd-order theorem | seL4 microkernel (functional correctness) |
+
+The technology is the same — dependent type theory, tactics, kernels — but the culture is different. Math formalization cares about beauty and generality; software verification cares about completeness and coverage. Both communities read each other's papers but rarely collaborate directly.
+
+**Notable software verification projects:**
+
+- **CompCert** (Leroy, 2006) — a C compiler verified in Coq. Every compilation step is proved to preserve the semantics of the source program. The compiled code is guaranteed to do what the C source says.
+- **seL4** (Klein et al., 2009) — a microkernel operating system verified in Isabelle/HOL. Functional correctness, integrity, and confidentiality are all machine-checked properties. seL4 is used in military and aerospace applications where formal correctness is not optional.
+- **CertiKOS** (Gu et al., 2016) — a certified concurrent OS kernel verified in Coq, proving absence of data races and correct isolation between processes.
+
+### TypeScript and Rust type systems as partial proof systems
+
+Section 3 covers the foundational logics (simple type theory, dependent type theory, ZFC). A gap: modern programming language type systems are *partial* proof systems that verify *some* properties at compile time without requiring the programmer to write explicit proofs.
+
+**TypeScript's structural type system** (see `docs/research/jts-research/language-types.md`) checks that values conform to interface contracts. `interface Printable { print(): void }` is a proposition ("this value has a `print` method that returns void"), and every value that satisfies the interface is a witness. TypeScript's type checker is a limited proof engine — it proves propositions about object shapes but cannot prove propositions about runtime behavior.
+
+**Rust's ownership system** (see `docs/research/rst-research/language-ownership.md`) checks that programs are memory-safe and data-race-free. The borrow checker is a proof engine for affine/linear logic: it proves that every reference is valid, every value is used at most once (unless explicitly shared), and no data race can occur. Our memory arena (M1–M13) passed 710 Rust tests, but the borrow checker provided an additional layer of correctness that no amount of testing could replace.
+
+**The spectrum from weak to strong:**
+
+```
+JavaScript (no types)  →  TypeScript (structural types)  →  Rust (affine types)
+    →  Lean 4 (full dependent types)  →  hand-written mathematical proof
+
+←── less machine-checked                    more machine-checked ──→
+←── more human trust required               less human trust required ──→
+```
+
+Every step to the right trades programmer convenience for proof strength. The choice of where to sit on this spectrum is a craft decision.
+
+### The Unison connection — content-addressed computation
+
+Our Unison research (`unison-translation` chipset, `.college/` integration) makes the deepest connection to formalization. Unison's core principle: **a definition is identified by the hash of its content, not by its name.** Renaming a function doesn't change its identity; modifying its body gives it a new identity. This is the **extensionality axiom** (ZFC Axiom 1) applied to code.
+
+Lean 4 shares this principle at the proof level: a proof term is identified by its content (its type and its construction), not by the lemma name the user assigns. Two proofs with different names but identical terms are the same proof. Mathlib's naming convention (section 4.3) is an *ergonomic* layer over this identity — the names help humans navigate, but the kernel doesn't care about them.
+
+The Unison connection means our architecture and the formalization movement share a philosophical commitment. Content-addressing in the Grove format (see `docs/GROVE-FORMAT.md`) is the same idea applied to skill/agent/team artifacts. The through-line: **identity is content, not label** — in mathematics, in code, and in our knowledge system.
+
+## Lessons Learned & Retrospectives — Third Pass
+
+### What the memory arena taught about verification
+
+The memory arena milestones (M1–M13) are the closest thing in our codebase to a formal verification project. Retrospective:
+
+1. **Testing and types compose.** The 710 Rust tests caught behavioral bugs; the type system caught structural bugs. Neither alone was sufficient. This mirrors the formalization world: the Lean kernel (type-checking) catches logical errors, but tests (examples, `#eval`) catch misunderstandings about what the theorem actually says.
+
+2. **The hardest bugs were at the interface, not inside components.** The IPC bridge between Rust arena and TS client (M9–M13) was where most integration bugs appeared. In formalization, the same pattern holds: the hardest parts of a Mathlib formalization are the *lemma boundaries* — where one theorem's output meets another's input. Getting the types to line up is the formal equivalent of getting the API contract right.
+
+3. **Benchmark proofs need different rigor than correctness proofs.** M2's 16.58x speedup claim was proved by statistical hypothesis testing (p=0.00, CI floor 15.7x), not by logical deduction. Performance is an empirical property; correctness is a logical property. Trying to prove performance by the same methods as correctness is a category error. See `docs/research/rng-research/testing-quality.md` for the TestU01/BigCrush parallel.
+
+### What the PCG native work taught about number-theoretic proof
+
+PCG generators (M16 of the Session 016 work) use number theory directly: the generator's period is $2^{128}$, proved by the structure theorem for $\mathbb{Z}/2^n\mathbb{Z}$ (section 1.3 of document 4). The permutation function is a bijection on $\{0, \ldots, 2^{64} - 1\}$, proved by showing it is a composition of invertible operations. These are undergraduate-level number theory proofs applied to real engineering.
+
+The lesson: **the gap between "toy examples in a proof course" and "real engineering proofs" is smaller than students think.** The same even/odd and divisibility reasoning Schwarz teaches on slides 10–33 is what you need to prove a PRNG has the correct period.
+
+### What the trust system taught about formal properties
+
+The trust system (95 tests, `trust-relationship.ts` + `trust-relationship-provider.ts`) formalizes trust as a mathematical relation with properties: reflexivity (you trust yourself), transitivity (trust propagates through chains), and non-symmetry (A trusting B doesn't imply B trusts A). These are the same properties section 4.4 defines for equivalence relations and partial orders. The trust relation is a *preorder* (reflexive + transitive), not an equivalence relation (not symmetric).
+
+This is a case where mathematical structure (document 4) directly shaped software design. The trust system's API was designed to enforce the preorder axioms; violations are prevented by construction, not by testing.
+
+## Deep Corpus Links — Third Pass
+
+### Research corpus cross-references
+
+| Section | Target | Connection |
+|---|---|---|
+| 2.4 (Coq) | `docs/research/lsp-research/history-philosophy.md` §1 | Coq's Calculus of Constructions descends from Church's lambda calculus. The Lisp history doc tells Church's story |
+| 2.7 (Lean 4) | `docs/research/plg-research/language-semantics.md` §4 | Lean's tactic mode uses a goal-directed proof search structurally similar to Prolog's SLD resolution — both are backward-chaining from the goal |
+| 3.2 (dependent types) | `docs/research/rst-research/language-ownership.md` | Rust's ownership = affine types, a substructural fragment of dependent type theory. Lean's full dependent types are the unrestricted version |
+| 3.2 (dependent types) | `docs/research/jts-research/language-types.md` | TypeScript's conditional types (`T extends U ? A : B`) are a restricted form of dependent pattern matching |
+| 4 (Mathlib) | `docs/research/research-methodology/peer-review.md` | Mathlib's PR review process IS peer review — every contribution is checked by at least one human reviewer AND the Lean kernel |
+| 5 (landmarks) | `docs/research/rca-deep/mathematical-foundations-enrichment.md` | Pearl's causal models (Bayesian networks, do-calculus) could in principle be formalized in Lean — the RCA math-foundations doc's content is at the frontier of what Mathlib can express |
+| 6 (craft of formalization) | `docs/research/research-methodology/writing-papers.md` | The craft of writing a Lean proof (naming, modularity, documentation) parallels the craft of writing a research paper — both have style guides, conventions, and peer review |
+| 8 (AI-assisted proving) | `docs/research/dmn-research/` | ML convergence proofs are themselves formalizable in Lean — and AI-assisted provers use ML to generate formal proofs, creating a recursive loop |
+| Unison (gap fill) | `docs/GROVE-FORMAT.md` | Grove's content-addressed records share the same identity principle as Unison's content-addressed definitions and Lean's content-addressed proof terms |
+| Software verification (gap fill) | `docs/research/c-research/` | CompCert verifies a C compiler; our c-research covers C's low-level semantics that CompCert formally specifies |
+
+### Live site pages
+
+| Section | Page | Connection |
+|---|---|---|
+| 2 (proof assistants) | `Research/PLG/rosetta.html` | Prolog as the first practical automated theorem prover |
+| 3 (dependent types) | `Research/RST/learn.html` | Rust's type system as a weak proof system |
+| 3 (dependent types) | `Research/JTS/learn.html` | TypeScript structural types as propositions |
+| 4 (Mathlib) | `Research/Learn/` | The Learn hub — formalized education, not formalized mathematics, but the same commitment to verified knowledge |
+| 5 (Kepler) | `Research/RCA/mathematical-foundations.html` | Formal proof methods applied outside pure mathematics |
+| Unison (gap fill) | `Research/UNI/` (if exists) | Unison research pages — content-addressed code |
+
+### College concept deepening
+
+| Concept ID | Third-pass extension |
+|---|---|
+| `log-formal-proof-systems` | Now encompasses three layers: proof assistants (Lean/Coq/Isabelle), AI-assisted provers (AlphaProof/DeepSeek-Prover/LeanDojo), and programming-language type checkers (Rust borrow checker, TypeScript type checker) — a spectrum from full to partial proof |
+| `math-functions` | Lean's function type `A → B` IS the Curry-Howard encoding of implication. CompCert's verified compiler proves that the *function* from C source to machine code preserves semantics. Functions are both the objects of proof and the medium of proof |
+| `math-euler-formula` | Euler's formula is formalized in Mathlib as `Complex.exp_eq_cos_add_sin_mul_I` — the connection between the Mathematics department's flagship formula and its machine-verified counterpart |
+| `math-complex-numbers` | The `.college/rosetta-core/` `complexPlanePosition` field in every concept definition is a complex number used for organizational positioning — the mathematical structure (doc 4) serving as the organizational structure (college), now connected to the formal structure (Lean's `Complex.lean`) |

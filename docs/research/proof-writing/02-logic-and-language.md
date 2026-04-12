@@ -576,3 +576,93 @@ Start with the simplest (n even → n² even) and work up to the set-distributiv
 - **Logic → Mathematics:** Predicate logic is the language of all mathematical definitions. Every definition in the Mathematics department (`math-euler-formula`, `math-trig-functions`, etc.) is formally a predicate in first-order logic.
 - **Logic → Coding → Technology:** Boolean algebra (propositional logic with $\{0, 1\}$) underlies digital circuits, programming conditionals, and database queries. This is the Logic → Coding → Electronics → Technology chain.
 - **Logic → Philosophy → Theology:** The question "what can be proved?" connects to epistemology (what can be known?) and to theological arguments by logical structure (e.g., the ontological argument's formal structure). Section 3.3 (Gödel) connects to the philosophical limits of formal systems.
+
+---
+
+## Knowledge Gap Fills — Third Pass
+
+### Resolution and the Prolog connection
+
+Section 3 presents natural deduction as the proof system behind informal proofs. A major alternative — **resolution** — is absent. Resolution (Robinson, 1965) is a single inference rule: from clauses $C_1 \lor p$ and $C_2 \lor \neg p$, derive $C_1 \lor C_2$. A proof by resolution works by negating the goal, converting everything to clausal form (CNF), and deriving the empty clause (contradiction).
+
+Resolution is important because:
+
+1. **It is the foundation of logic programming.** Prolog programs ARE sets of Horn clauses, and Prolog execution IS SLD resolution — a restricted form of resolution that searches for refutations of the negated goal. See `docs/research/plg-research/language-semantics.md` section 4 for the complete account. Kowalski's "Algorithm = Logic + Control" (1979) is the philosophical manifesto: a Prolog program is simultaneously a logical specification and an executable algorithm.
+
+2. **It is the basis of most automated theorem provers.** SAT solvers (DPLL, CDCL) are propositional resolution engines. SMT solvers extend them with theory-specific reasoning. These are the workhorses of hardware verification, software model checking, and the `omega` / `decide` tactics in Lean's automation layer.
+
+3. **It completes the picture of proof methods.** Natural deduction is for humans. Resolution is for machines. Sequent calculus (Gentzen, 1934) is for proof theorists. All three prove the same theorems (completeness), but their internal structure differs, and the choice of system shapes what proofs look like.
+
+### Boolean algebra and digital circuits
+
+Section 1 treats propositional logic purely as a logical system. It is also the mathematical foundation of digital circuits: every combinational circuit is a Boolean function, every Boolean function has a truth table, and circuit optimization is equivalent to Boolean minimization (Karnaugh maps, Quine-McCluskey algorithm).
+
+This connection matters because it makes propositional logic *tangible*. An AND gate IS conjunction. An OR gate IS disjunction. A NOT gate IS negation. De Morgan's laws (section 1.3) are circuit equivalences: $\neg(A \land B) \equiv \neg A \lor \neg B$ says a NAND gate equals an OR gate with inverted inputs.
+
+The connection runs deeper: Claude Shannon's 1937 master's thesis — "A Symbolic Analysis of Relay and Switching Circuits," widely considered the most important master's thesis of the 20th century — showed that Boolean algebra could design and analyze switching circuits. This is the moment where Boole's abstract logic (1847) became engineering reality.
+
+### Tarski's undefinability theorem
+
+Section 3 of document 1 mentions Gödel's incompleteness but not Tarski's complementary result. Alfred Tarski (1933) proved that **truth in a formal language cannot be defined within that language**. More precisely: for any sufficiently powerful formal language $L$, there is no predicate $\text{True}(x)$ definable in $L$ such that for every sentence $\varphi$ of $L$, $\text{True}(\ulcorner \varphi \urcorner) \iff \varphi$.
+
+The proof uses the same diagonal technique as Gödel and produces the Liar sentence: "This sentence is not true." If truth were definable, the Liar sentence would be both true and false — contradiction. Therefore truth is not definable.
+
+Consequence for section 4 (formal vs. informal proof): the notion of "truth" that a working mathematician uses is *not the same* as "provability." Tarski's theorem says truth can't even be defined internally. This is why mathematicians work with provability (which is definable) and treat truth as a meta-level concept.
+
+### Sequent calculus — the missing proof system
+
+Natural deduction (section 3) is one proof system. Sequent calculus, invented by Gentzen simultaneously with natural deduction in 1934, is the other major system used in proof theory. A sequent $\Gamma \vdash \Delta$ reads "from the assumptions $\Gamma$, at least one of $\Delta$ holds." Each connective has a left rule (used when the connective appears in an assumption) and a right rule (used when it appears in the conclusion).
+
+Sequent calculus matters because:
+
+- **Cut elimination** (Gentzen's Hauptsatz): every proof in sequent calculus can be transformed into one that doesn't use the cut rule ($\Gamma \vdash A$ and $A, \Sigma \vdash \Delta$ implies $\Gamma, \Sigma \vdash \Delta$). Cut-free proofs have the *subformula property*: every formula in the proof is a subformula of the goal. This makes proof search tractable.
+- **Proof search** in cut-free sequent calculus is the computational model behind type-checking in proof assistants. Lean's kernel is essentially a cut-free sequent calculus checker.
+
+## Lessons Learned & Retrospectives — Third Pass
+
+### The Prolog retrospective
+
+Our `plg-research` project (4 files, Prolog history/language/applications/implementations) is the deepest existing treatment of logic-as-computation in our corpus. Key lesson: **Prolog makes the connection between logic and computation concrete in a way that no amount of abstract Curry-Howard exposition does.** A student who writes `append([], Ys, Ys). append([X|Xs], Ys, [X|Zs]) :- append(Xs, Ys, Zs).` and sees Prolog *compute* the result by *proving* the query has experienced the propositions-as-types correspondence without needing to know the theory.
+
+Recommendation: pair document 2 with a Prolog exercise before teaching Curry-Howard (section 7). The concrete experience of "programming = proving" makes the abstract theory land faster.
+
+### The ALGOL retrospective
+
+Our `alg-research` project (4 files) covers BNF — the formal grammar notation invented for the ALGOL 60 report. The connection to this document: BNF is the computing world's answer to the question "how do we formally specify the syntax of a language?" — exactly the question Frege answered for logic in 1879. The ALGOL committee (Backus, Naur, et al.) were doing for programming languages what Frege did for logical languages: making the rules explicit, complete, and unambiguous. See `docs/research/alg-research/bnf-cfg.md` (38 proof/logic/formal mentions) for the full treatment.
+
+### Session enrichment retrospective
+
+Across Sessions 017–019 (research enrichment missions), the most effective Study Guide sections shared three features: (a) tiered study plans with named resources, (b) a glossary table anchored to section numbers, (c) actionable verbs ("prove X," "read Y," "implement Z") rather than passive reading instructions. This document's study guide (from the second pass) follows that pattern. The third pass adds the missing corpus links that make the study plans *navigable* within our own knowledge base.
+
+## Deep Corpus Links — Third Pass
+
+### Research corpus cross-references
+
+| Section | Target | Connection |
+|---|---|---|
+| 1.1 (truth tables) | `docs/research/plg-research/language-semantics.md` §4 | SLD resolution is the automated proof-search counterpart to truth-table evaluation |
+| 1.3 (De Morgan, equivalences) | `docs/research/alg-research/bnf-cfg.md` | BNF grammar transformations (left-factoring, elimination of left recursion) are syntactic analogues of logical equivalence transformations |
+| 2 (predicate logic) | `docs/research/plg-research/language-semantics.md` §1–3 | Prolog terms, unification, and resolution are predicate logic made executable |
+| 3 (natural deduction rules) | `docs/research/lsp-research/history-philosophy.md` §1 | Church's lambda calculus is the computational side of natural deduction (Curry-Howard). The Lisp history doc covers Church's Princeton work |
+| 5 (English-to-logic) | `docs/research/research-methodology/writing-papers.md` | Translating between natural language and formal claims is a core research writing skill |
+| 6 (fallacies) | `docs/research/research-methodology/bias-and-pitfalls.md` | Logical fallacies in proofs parallel cognitive biases in research — both are systematic reasoning errors |
+| 7 (Curry-Howard) | `docs/research/rst-research/language-ownership.md` | Rust's ownership = affine logic types. Every borrow-checker pass is a proof of memory safety via the Curry-Howard correspondence applied to linear/affine type theory |
+| 7 (Curry-Howard) | `docs/research/jts-research/language-types.md` | TypeScript's structural type system is a weak proof system — assignability checking IS propositional proof checking |
+
+### Live site pages
+
+| Section | Page | Connection |
+|---|---|---|
+| 2 (predicate logic) | `Research/PLG/language.html` | Prolog's syntax IS predicate logic syntax |
+| 1 (propositional logic) | `Research/ALG/history.html` | BNF = formal grammar = formal language specification |
+| 7 (Curry-Howard) | `Research/LSP/history.html` | Lambda calculus = the computational realization of natural deduction |
+| 7 (Curry-Howard) | `Research/RST/learn.html` | Rust type system = affine logic |
+| 6 (fallacies) | `Research/RCA/classical-methods.html` | Card's 2017 critique of 5 Whys identifies the same logical fallacy (single-pathway forcing) that section 6 calls "proof by example" |
+
+### College concept deepening
+
+| Concept ID | Third-pass extension |
+|---|---|
+| `log-propositional-logic` | Now connects to Boolean algebra → Shannon 1937 → digital circuits. The propositional concept encompasses both pure logic AND applied engineering |
+| `log-predicate-logic` | Now connects to Prolog (SLD resolution) as the computational realization, and to Tarski's undefinability as the theoretical limit |
+| `log-formal-proof-systems` | Now includes resolution, sequent calculus, and natural deduction as three equivalent but structurally different proof systems — a Rosetta Stone within logic itself |

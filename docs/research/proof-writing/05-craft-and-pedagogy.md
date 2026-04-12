@@ -535,3 +535,96 @@ Most students find they use 1–5 more often than they'd like. The goal is to in
 - **Writing → Logic → Math:** Proof writing sits at the intersection of all three. The Writing department teaches prose structure, Logic teaches logical structure, and Mathematics teaches the content. A proof course is implicitly a course in all three departments.
 - **Philosophy → Logic → Psychology:** Lakatos (section 4, Philosophy) describes how proofs develop dialectically; Harel-Sowder (section 5, Logic/Psychology) describes how students think about proofs; Weber/Inglis (section 6, Psychology) measures how experts evaluate proofs. Together they form a complete picture of proof as a human activity.
 - **Learning → Problem-Solving → Critical Thinking:** Polya (section 3) teaches how to solve problems; the proof-scheme taxonomy (section 5) teaches how to recognize your own reasoning patterns; the editorial pass (section 7) teaches how to evaluate and improve your own work. All three are metacognitive skills.
+
+---
+
+## Knowledge Gap Fills — Third Pass
+
+### LaTeX — the typesetting standard for mathematical proof
+
+Section 2 covers the Knuth rules for writing proofs but never mentions the tool Knuth built to typeset them. **LaTeX** (Lamport, 1985; based on Knuth's TeX, 1978) is the universal typesetting system for mathematical writing. Every journal, conference proceedings, and textbook in mathematics is typeset in LaTeX. A student who writes proofs without learning LaTeX will hit a wall at the first paper submission.
+
+Key LaTeX packages for proof writing:
+
+- `amsthm` — theorem/proof/lemma environments with automatic numbering and QED symbols.
+- `amsmath` — displayed equations, aligned multi-line derivations, equation numbering.
+- `amssymb` — $\blacksquare$, $\forall$, $\exists$, $\implies$, $\iff$, and hundreds of other symbols.
+- `mathtools` — extends `amsmath` with refinements.
+- `hyperref` — clickable cross-references (linking equation (3) to its display).
+- `cleveref` — automatic "Theorem 2.1" references with correct labels.
+
+Our `latex-authoring` skill (see `examples/skills/media/latex-authoring/SKILL.md`) covers LaTeX authoring with arXiv submission best practices. The connection to this document: proof craft (section 2) and proof typesetting (LaTeX) are two sides of the same coin. Knuth invented both because he needed beautiful mathematical writing tools for his own books.
+
+### Digital collaboration on proofs
+
+Section 10 mentions that research proofs go through multiple rounds of revision and peer review. The modern workflow for this is:
+
+- **Overleaf** — browser-based LaTeX editor with real-time collaboration, used by the majority of mathematicians and CS researchers. Track-changes, comment threads, and version history.
+- **GitHub** — version control for LaTeX source files. Increasingly used for large collaborative projects (e.g., the Stacks Project — an open-source algebraic geometry textbook with 7,000+ pages on GitHub).
+- **arXiv** — preprint server where proofs are posted before peer review, enabling community feedback.
+- **MathOverflow / Math Stack Exchange** — Q&A sites where mathematicians publicly discuss proof ideas, spot errors, and suggest approaches.
+
+The shift to digital collaboration has changed the craft: proofs are now written, read, and revised in a browser, not on paper. The peer-review process is faster (sometimes a proof posted to arXiv is checked by the community within hours). The downside: the temptation to post before the editorial pass is complete.
+
+### The Loomis collection — how many proofs of one theorem?
+
+Elisha Scott Loomis's *The Pythagorean Proposition* (1940) collects **367 distinct proofs** of the Pythagorean theorem. This is the most extreme example of the principle that a theorem can have many proofs, each revealing a different aspect of *why* it's true. Schwarz's deck implicitly teaches this with the Definitions/Intuitions/Conventions triangle — the same theorem can be approached through different definitions (algebraic vs. geometric), different intuitions (area vs. similarity), and different conventions (direct vs. trigonometric).
+
+The pedagogical lesson: when you've proved a theorem one way, try another way. The second proof almost always teaches you something the first didn't. See document 3, section 6 (reformulation) for the meta-technique.
+
+### Proof anxiety and the affective dimension
+
+Section 5 (Harel-Sowder) treats proof schemes as cognitive phenomena but doesn't address the *affective* dimension: many students experience genuine anxiety when asked to write proofs. Research by DeBellis and Goldin (2006, "Affect and meta-affect in mathematical problem solving") found that negative affect (frustration, confusion, self-doubt) at the beginning of proof writing is normal and productive — it's the signal that you're engaging with something genuinely difficult, not a signal that you can't do it.
+
+The craft response: normalize struggle. A blank page before a proof is supposed to be uncomfortable. The discomfort resolves through Polya's Phase 1 (understanding) — once you understand the statement, the anxiety drops. This is why Schwarz's deck spends so many slides on *understanding* the theorem before writing the proof.
+
+## Lessons Learned & Retrospectives — Third Pass
+
+### What 190+ missions taught about writing craft
+
+Our research corpus spans 190+ completed missions and 1.88M+ words. The craft principles that worked best across all that output:
+
+1. **The best research documents start with "why should you care?"** — not with definitions. Compare the opening of `docs/research/lsp-research/history-philosophy.md` ("Lisp is not a programming language. Or rather...") with a typical textbook opening ("Definition 1.1: A Lisp program is..."). The former pulls the reader in; the latter pushes them away.
+
+2. **Every section should be self-contained enough to read alone.** Our highest-performing Learn pages (measured by content size and completeness) are the ones where a reader can land on any section without having read the previous ones. This mirrors Knuth rule 21 ("refer to formulas by number, not 'above'") — forward and backward references make sections navigable.
+
+3. **Worked examples carry more weight than rules.** In every research document where we included both a rule statement and a worked example, the example was what readers (including our own retrospective re-reads) retained. This is why the Schwarz deck spends 80 of its 121 slides on four worked proofs rather than on rules about proof writing.
+
+4. **The enrichment pattern that Session 019 established (Study Guide + TRY + DIY) is the most durable format.** It transforms passive reading into active learning. The second pass on this mission followed that pattern, and the TRY sessions are the most practically useful sections in the entire research set.
+
+### The peer-review connection
+
+Our `docs/research/research-methodology/peer-review.md` (18 proof/logic/formal mentions) treats peer review as the quality-control mechanism for research. Mathematical proof has the oldest and most rigorous peer-review tradition in all of science — a claimed proof is scrutinized line by line, and a single error invalidates the entire claim. The peer-review document should cross-reference this one: mathematical proof is the standard against which all other forms of peer review are measured.
+
+## Deep Corpus Links — Third Pass
+
+### Research corpus cross-references
+
+| Section | Target | Connection |
+|---|---|---|
+| 2 (Knuth rules) | `docs/research/research-methodology/writing-papers.md` | The Knuth rules for mathematical writing are a specialization of the general research-paper-writing guidelines in the methodology doc |
+| 3 (Polya) | `docs/research/research-methodology/research-techniques.md` | Polya's four phases (understand → plan → execute → look back) are structurally identical to the research methodology's four-phase cycle (question → design → collect → analyze) |
+| 4 (Lakatos) | `docs/research/research-methodology/epistemology-of-research.md` | Lakatos's proofs-and-refutations dialectic is a specific case of the epistemology doc's treatment of knowledge as socially constructed and revisable |
+| 5 (Harel-Sowder) | `docs/research/research-methodology/bias-and-pitfalls.md` | Proof schemes (ritual, authoritarian, symbolic) parallel cognitive biases (authority bias, confirmation bias, anchoring) — both are systematic reasoning errors that produce confidently wrong results |
+| 6 (Weber/Inglis) | `docs/research/research-methodology/peer-review.md` | Mathematical proof-reading (zoomed-in / zoomed-out) IS peer review — the deepest and oldest form |
+| 7 (editorial pass) | `docs/research/cli-research/` | The CLI research covers defensive shell scripting with `shellcheck` — an automated editorial pass for code, just as section 7 is an editorial pass for proofs |
+| 9 (first year in proofs) | `docs/research/pch-research/` | Punch-card era computing required the same disciplined sequential thinking that proof writing requires — plan before you submit, because you can't edit on the fly |
+| LaTeX (gap fill) | `examples/skills/media/latex-authoring/SKILL.md` | Our LaTeX authoring skill covers the tooling side of what this section covers pedagogically |
+| Digital collaboration (gap fill) | `docs/research/soa-research/` | The SOA research covers distributed collaboration patterns — Overleaf + arXiv + MathOverflow is a service-oriented architecture for mathematical knowledge |
+
+### Live site pages
+
+| Section | Page | Connection |
+|---|---|---|
+| 2 (Knuth rules) | `Research/RES/learn.html` | Research methodology Learn page covers writing discipline |
+| 3 (Polya) | `Research/RES/learn.html` | Research techniques map to Polya's problem-solving phases |
+| 9 (first year) | `Research/Learn/` | The Learn hub itself is organized by the same principle: accessible entry points that deepen with engagement |
+| LaTeX (gap fill) | `Research/JTS/learn.html` | TypeScript ecosystem research covers tooling workflow — LaTeX ecosystem is the mathematical parallel |
+
+### College concept deepening
+
+| Concept ID | Third-pass extension |
+|---|---|
+| `writing-process` (Writing dept) | Now explicitly includes LaTeX as the standard tool, Overleaf as the collaboration platform, and the Knuth rules as the style discipline |
+| `log-argument-structure` (Logic dept) | Now connects to Lakatos's dialectic (arguments are refined through counterexample, not just stated and accepted) and to Loomis's 367 Pythagorean proofs (the same argument can take hundreds of valid forms) |
+| `reading-discovery` (Reading dept) | Now connects to Weber/Inglis eye-tracking: expert proof-reading is qualitatively different from novice proof-reading in empirically measurable ways |
