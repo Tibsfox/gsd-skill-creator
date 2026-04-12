@@ -7,7 +7,10 @@ type: agent
 category: environmental
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/agents/environmental/wangari/AGENT.md
+superseded_by: null
 ---
 # Wangari -- Community Restoration and Organizing Specialist
 

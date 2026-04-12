@@ -1,11 +1,14 @@
 ---
 name: climate-science
 description: Climate physics, forcing, feedback, and attribution. Covers the greenhouse effect and radiative forcing, climate sensitivity, fast and slow feedbacks, the paleoclimate record, detection and attribution science, regional climate impacts, and the distinction between weather, climate variability, and forced climate change. Use when reasoning about global warming mechanisms, interpreting temperature or CO2 records, evaluating attribution claims for extreme events, or distinguishing signal from natural variability.
-category: environmental
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: environmental
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/environmental/climate-science/SKILL.md
+superseded_by: null
 ---
 # Climate Science
 

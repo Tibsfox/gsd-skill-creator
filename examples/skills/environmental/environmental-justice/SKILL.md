@@ -1,11 +1,14 @@
 ---
 name: environmental-justice
 description: Distributional analysis of environmental benefits and burdens across communities. Covers the historical origins of environmental justice in the U.S. civil rights tradition, siting and exposure disparities, indigenous rights and land stewardship, climate justice at global and intergenerational scales, procedural vs. distributional vs. recognition justice, and the environmental justice screening tools used by regulators. Use when analyzing who bears environmental harm and who receives environmental benefit, or when designing interventions whose distributional consequences matter.
-category: environmental
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: environmental
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/environmental/environmental-justice/SKILL.md
+superseded_by: null
 ---
 # Environmental Justice
 

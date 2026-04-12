@@ -4,8 +4,11 @@ type: team
 category: environmental
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/teams/environmental/environmental-workshop-team/README.md
 description: Focused ecosystem analysis and impact assessment team. Leopold leads with ecological community diagnosis, Muir provides reference-state grounding, Commoner cross-checks biogeochemical mass balance, and Orr translates findings into level-appropriate explanations. Use for ecosystem diagnosis, impact assessment against reference conditions, ecological community analysis, and the scientific basis for conservation decisions. Not for pure community implementation, pure pedagogy, or multi-wing problems that need the full analysis team.
+superseded_by: null
 ---
 # Environmental Workshop Team
 
