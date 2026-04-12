@@ -265,3 +265,18 @@ Sources of truth are not binary. They exist on a spectrum from "almost certainly
 The working researcher's job is not to find perfect sources. Perfect sources do not exist. The job is to understand the strengths, limitations, and biases of every source, to triangulate claims across multiple independent sources, and to maintain a clear chain of provenance so that when -- not if -- a source turns out to be wrong, the error can be traced, isolated, and corrected.
 
 The most dangerous source of all is the one that is never questioned.
+
+## Study Guide — Sources of Truth
+
+Hierarchy: primary > secondary > tertiary. Peer-reviewed >
+preprint > blog. Original > translation.
+
+## DIY — Triangulate one claim
+
+Pick a non-trivial claim. Find 3 independent sources.
+Note where they agree and disagree.
+
+## TRY — Build a provenance chain for one fact
+
+Write down the fact, the source, the source's source,
+and so on until you hit something primary.
