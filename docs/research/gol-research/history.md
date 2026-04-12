@@ -1005,3 +1005,31 @@ This research cross-links to the following college departments in
 *Part of the 285-project corpus at tibsfox.com.*
 *Project code: GOL*
 *Addendum (Go 1.24 and 1.25) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Go History
+
+### Questions to hold
+
+- Why Google built Go in 2007 when Java and Python existed.
+- Why "boring" was the design goal.
+- Why it took 14 years to get generics (Go 1.18, 2022).
+- How the Go team handles backwards compatibility.
+
+## DIY — Read one Pike talk
+
+Rob Pike's "Go at Google" (2012) and "Simplicity is
+Complicated" (2015) are 30 minutes each on YouTube. Both
+explain the philosophy better than any paper.
+
+## TRY — Contribute a gofmt fix
+
+`gofmt` source is in the Go repo. Pick a small issue from
+the Go bug tracker, fix it, submit a CL. This is how you
+understand the community's engineering culture directly.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
