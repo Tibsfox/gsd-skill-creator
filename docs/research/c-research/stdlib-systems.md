@@ -1146,3 +1146,107 @@ Understanding it — really understanding it, down to how `printf` walks a va_li
 understanding the shape of modern computing.
 
 — Research compiled April 8, 2026.
+
+---
+
+## Study Guide — C Standard Library & Systems Programming
+
+### Key concepts
+
+1. **libc has layers.** `<string.h>`, `<stdio.h>`,
+   `<stdlib.h>`, `<math.h>` are ISO C. POSIX adds `<unistd.h>`,
+   `<sys/*>`, `<pthread.h>`. Linux adds more.
+2. **System calls are not function calls.** They trap into
+   kernel mode via `syscall` / `svc` / `ecall`. libc wraps
+   them.
+3. **`errno` is thread-local** on modern systems. Older
+   libraries assumed it wasn't; that was a portability and
+   threading disaster.
+4. **`fork` and threads don't mix well.** After `fork`, only
+   async-signal-safe functions may be called in the child
+   until `exec`.
+
+---
+
+## Programming Examples
+
+### Example 1 — A file-copy with read/write
+
+```c
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
+
+int main(int argc, char **argv) {
+    if (argc != 3) return fprintf(stderr, "usage: cp SRC DST\n"), 1;
+    int in = open(argv[1], O_RDONLY);
+    int out = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (in < 0 || out < 0) return perror("open"), 1;
+    char buf[8192];
+    ssize_t n;
+    while ((n = read(in, buf, sizeof buf)) > 0)
+        write(out, buf, n);
+    close(in); close(out);
+    return 0;
+}
+```
+
+This is what every `cp` implementation in the world looks
+like, minus error recovery and sendfile optimizations.
+
+### Example 2 — A minimal thread
+
+```c
+#include <pthread.h>
+#include <stdio.h>
+
+void *worker(void *arg) {
+    printf("hello from thread %d\n", *(int*)arg);
+    return NULL;
+}
+
+int main(void) {
+    pthread_t t;
+    int n = 42;
+    pthread_create(&t, NULL, worker, &n);
+    pthread_join(t, NULL);
+}
+```
+
+Link with `-pthread`.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Write your own malloc
+
+Implement a simple first-fit allocator with `mmap` for large
+blocks and a free list for small blocks. It will be slow and
+wasteful compared to glibc malloc, but you will understand
+why glibc malloc is so complicated.
+
+### DIY 2 — Trace a syscall
+
+`strace ls /` shows every syscall `ls` makes. Read the
+output. Count the `openat`, `read`, `stat` calls. Now run
+`ls -la /` and compare.
+
+### DIY 3 — Read musl libc
+
+Musl is a cleaner alternative libc than glibc. Its `printf`
+implementation is readable in one sitting. Read it. You will
+understand how `%d` and friends work at the byte level.
+
+### TRY — Implement one system command
+
+Pick `cat`, `echo`, or `true`. Implement it in C using only
+syscalls (no `printf`, no `fopen`). 30 lines. You will
+produce the same program the Unix team wrote in 1971.
+
+---
+
+## Related College Departments (C stdlib)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)

@@ -586,3 +586,117 @@ Other strong modern setups:
 ## Closing Notes
 
 The C (and C++) ecosystem is the oldest continuously-evolving production toolchain in computing. Every layer described here stands on a 40–50 year foundation: GCC and GDB date to 1986–1987, make to 1976, lint to 1978, autotools to the early 1990s. The modern layer — Clang 2007, CMake 2000, Ninja 2010, Conan/vcpkg 2016, LSP/clangd 2016+, sanitizers 2011 — is what finally made C/C++ feel first-class alongside languages that were born with built-in tooling. Today a clean setup is Clang + CMake (or Meson) + Ninja + vcpkg/Conan + clangd + lldb/gdb + AddressSanitizer in CI + perf/VTune for tuning, and it is genuinely a pleasant stack to work in — a sentence that would have been unimaginable in 2005.
+
+---
+
+## Study Guide — C Compilers & Build
+
+### Reading order
+
+1. The preprocessor, compiler, assembler, linker pipeline.
+2. GCC and Clang: history, differences, when to pick which.
+3. `make` and `Makefile` fundamentals.
+4. CMake and Meson.
+5. vcpkg and Conan.
+6. clangd / clang-tidy / clang-format.
+7. Sanitizers.
+
+### Key concepts
+
+1. **The four stages of `cc`**: preprocess, compile, assemble,
+   link. `gcc -E`, `-S`, `-c`, and default give you each stage.
+2. **Translation units are compiled independently.** The linker
+   resolves symbols across units. This is why C programs split
+   into `.c` / `.h` pairs and why you need headers.
+3. **Sanitizers are not debuggers.** They instrument code to
+   detect UB at runtime. `-fsanitize=address,undefined` should
+   be on in every debug build.
+
+---
+
+## Programming Examples
+
+### Example 1 — The four stages, by hand
+
+```bash
+gcc -E hello.c -o hello.i   # preprocessed
+gcc -S hello.i -o hello.s   # assembly
+gcc -c hello.s -o hello.o   # object
+gcc hello.o -o hello        # executable
+```
+
+Look at each file. `hello.i` is huge because `#include <stdio.h>`
+dragged in thousands of lines. `hello.s` is readable assembly.
+`hello.o` is binary. `hello` is the final ELF.
+
+### Example 2 — A minimal Makefile
+
+```make
+CC := clang
+CFLAGS := -Wall -Wextra -Wpedantic -O2 -g \
+          -fsanitize=address,undefined
+
+SRC := $(wildcard src/*.c)
+OBJ := $(SRC:.c=.o)
+
+all: program
+
+program: $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f program $(OBJ)
+
+.PHONY: all clean
+```
+
+### Example 3 — A minimal CMakeLists
+
+```cmake
+cmake_minimum_required(VERSION 3.28)
+project(hello C)
+set(CMAKE_C_STANDARD 17)
+add_executable(hello src/main.c)
+target_compile_options(hello PRIVATE
+    -Wall -Wextra -Wpedantic -g -O2
+    -fsanitize=address,undefined)
+target_link_options(hello PRIVATE
+    -fsanitize=address,undefined)
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Run sanitizers on an old project
+
+Find any C project. Compile with
+`-fsanitize=address,undefined`. Fix every report. If there
+are no reports, you have unusually solid code.
+
+### DIY 2 — Switch build systems
+
+Pick one project that uses autotools. Migrate it to CMake or
+Meson. Measure build time before and after.
+
+### DIY 3 — Use clangd
+
+Install `clangd` and your editor's LSP plugin. Watch
+completions, rename-refactor, and find-references work in C
+the way they work in Rust or TypeScript. This is modern C.
+
+### TRY — Add CI sanitizers
+
+Add a GitHub Actions job that builds your project with
+`-fsanitize=address,undefined` and runs the test suite. Let
+CI catch memory bugs before merge.
+
+---
+
+## Related College Departments (C toolchain)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
