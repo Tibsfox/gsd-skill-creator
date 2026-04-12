@@ -5,7 +5,8 @@ import os
 import sys
 
 # Load credentials
-ENV_FILE = "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator-nasa/.env"
+ENV_FILE = os.environ.get("GSD_ENV_FILE",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".env"))
 env = {}
 for line in open(ENV_FILE):
     line = line.strip()

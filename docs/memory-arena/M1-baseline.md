@@ -139,7 +139,7 @@ to re-parse the header of each record, rebuild the chunk, and call
 ## How to re-run
 
 ```bash
-cd /media/foxy/ai/GSD/dev-tools/artemis-ii/src-tauri
+cd src-tauri
 cargo bench --bench arena_bench
 ```
 
