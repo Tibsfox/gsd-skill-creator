@@ -1,0 +1,255 @@
+# Art Department Chipset Configuration
+# 14th department instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template and remapped
+# to visual arts education.
+
+name: art-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated art department providing domain-routed expertise through
+  seven named agents (Leonardo, Kahlo, Hokusai, O'Keeffe, Ai Weiwei,
+  Albers, Lowenfeld), six knowledge skills, and three pre-composed teams.
+  Persists work via Grove records and integrates with the college art
+  department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  drawing-observation:
+    domain: art
+    description: "Observational drawing and visual perception — 7 techniques from blind contour to spatial depth"
+    triggers:
+      - "draw"
+      - "sketch"
+      - "contour"
+      - "gesture drawing"
+      - "proportion"
+      - "observation"
+      - "negative space"
+    agent_affinity: [okeefe, lowenfeld]
+
+  color-theory:
+    domain: art
+    description: "Color properties, mixing systems, color relationships, simultaneous contrast, palette construction"
+    triggers:
+      - "color"
+      - "palette"
+      - "hue"
+      - "warm cool"
+      - "saturation"
+      - "complementary"
+      - "value"
+    agent_affinity: [albers, okeefe]
+
+  sculpture-3d:
+    domain: art
+    description: "Three-dimensional art — modeling, carving, casting, assemblage, installation"
+    triggers:
+      - "sculpture"
+      - "clay"
+      - "carve"
+      - "cast"
+      - "3D"
+      - "installation"
+      - "assemblage"
+    agent_affinity: [leonardo, ai-weiwei]
+
+  digital-art:
+    domain: art
+    description: "Digital painting, vector illustration, 3D modeling, pixel art, generative art"
+    triggers:
+      - "digital"
+      - "Photoshop"
+      - "Procreate"
+      - "vector"
+      - "3D modeling"
+      - "pixel art"
+      - "generative"
+      - "shader"
+    agent_affinity: [hokusai, albers]
+
+  art-history-movements:
+    domain: art
+    description: "Major art movements from Renaissance to contemporary — 12 movements with context"
+    triggers:
+      - "art history"
+      - "movement"
+      - "Renaissance"
+      - "Impressionism"
+      - "Expressionism"
+      - "contemporary art"
+      - "influenced by"
+      - "art period"
+    agent_affinity: [kahlo, ai-weiwei]
+
+  creative-process:
+    domain: art
+    description: "Creative process, sketchbook practice, critique methodology, artist statements, portfolio"
+    triggers:
+      - "creative process"
+      - "critique"
+      - "portfolio"
+      - "artist statement"
+      - "sketchbook"
+      - "brainstorm"
+      - "studio practice"
+    agent_affinity: [lowenfeld, kahlo]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Leonardo as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: leonardo
+
+  agents:
+    - name: leonardo
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: kahlo
+      role: "expression specialist — identity, symbolism, cultural context"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: hokusai
+      role: "composition specialist — spatial organization, design principles, printmaking"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: okeefe
+      role: "observation specialist — sustained looking, abstraction from nature"
+      model: opus
+      tools: [Read, Grep, Write]
+
+    - name: ai-weiwei
+      role: "contemporary specialist — conceptual art, installation, social practice"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: albers
+      role: "color specialist — color relationships, design, systematic investigation"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: lowenfeld
+      role: "pedagogy guide — developmental stages, critique facilitation, learning paths"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  art-critique-team:
+    description: "Full department for comprehensive multi-domain critique"
+    agents: [leonardo, kahlo, hokusai, okeefe, ai-weiwei, albers, lowenfeld]
+    use_when: "multi-domain analysis, research-level questions, or comprehensive critique"
+
+  studio-team:
+    description: "Focused studio practice and hands-on art-making guidance"
+    agents: [okeefe, hokusai, kahlo, lowenfeld]
+    use_when: "guided studio projects, observational drawing, painting exercises"
+
+  exhibition-team:
+    description: "Exhibition planning, curatorial practice, and presentation design"
+    agents: [ai-weiwei, leonardo, albers, lowenfeld]
+    use_when: "exhibition design, installation planning, curatorial statements"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 art Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college art department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (leonardo) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - observation
+      - color
+      - sculpture
+      - digital
+      - history
+      - process
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "art-department"
+  record_types:
+    - name: ArtAnalysis
+      description: "Formal, expressive, or contextual analysis of an artwork"
+
+    - name: ArtComposition
+      description: "Compositional analysis with design principles and spatial structure"
+
+    - name: ArtCritique
+      description: "Evaluative critique using the four-step protocol"
+
+    - name: ArtExplanation
+      description: "Teaching artifact at a specified level"
+
+    - name: ArtSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "art"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Seeing & Drawing"
+    - "Color, Value & Composition"
+    - "Materials & Making"
+    - "Art in Context"
+    - "Creative Process & Portfolio"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
