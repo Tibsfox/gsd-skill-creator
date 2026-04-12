@@ -1165,3 +1165,113 @@ static_assert(CHAR_BIT == 8, "This code assumes 8-bit bytes");
 ```
 
 C rewards deep understanding of the machine and punishes surface-level fluency. The language is small; the implications are vast. Learn the rules, learn the optimizations, learn the dragons, and always build with `-Wall -Wextra -Wpedantic -fsanitize=address,undefined` during development.
+
+---
+
+## Study Guide — C Core Language
+
+### Prerequisites
+
+- K&R Chapter 1 (or equivalent).
+- Willingness to think about memory layout.
+
+### Key concepts
+
+1. **Undefined behavior is not "anything goes" — it is "the
+   compiler is allowed to assume it cannot happen."** Signed
+   overflow, null dereference, out-of-bounds access, dangling
+   pointers, strict aliasing violations. Every one of these
+   lets the optimizer do things you did not expect.
+2. **Arrays decay to pointers, but they are not pointers.**
+   `sizeof arr` on a local array gives the array size;
+   `sizeof arr` on a pointer gives the pointer size. This is
+   the single most misunderstood C rule.
+3. **`const` is a type qualifier, not a promise.** A
+   `const char*` is a pointer to const char; `char* const`
+   is a const pointer to char. Read right-to-left.
+4. **`restrict` (C99) is a promise to the compiler.** You are
+   telling it no other pointer aliases this one. Used
+   correctly, it enables optimizations. Used incorrectly, it
+   is UB.
+5. **Integer promotion rules bite.** `char + char` becomes
+   `int`. Comparisons between `signed` and `unsigned` promote
+   to `unsigned`. Know the rules or be bitten.
+
+---
+
+## Programming Examples
+
+### Example 1 — A safe wrapper pattern
+
+```c
+#include <stdlib.h>
+#include <string.h>
+typedef struct { char *data; size_t len, cap; } Buf;
+
+int buf_push(Buf *b, char c) {
+    if (b->len == b->cap) {
+        size_t nc = b->cap ? b->cap * 2 : 16;
+        char *nd = realloc(b->data, nc);
+        if (!nd) return -1;
+        b->data = nd;
+        b->cap = nc;
+    }
+    b->data[b->len++] = c;
+    return 0;
+}
+```
+
+Simple, safe, growable buffer. The pattern generalizes to any
+dynamic array in C.
+
+### Example 2 — A state machine with enums and switch
+
+```c
+typedef enum { S_INIT, S_RUN, S_DONE, S_ERROR } State;
+
+State step(State s, int event) {
+    switch (s) {
+    case S_INIT:  return event == 1 ? S_RUN : S_ERROR;
+    case S_RUN:   return event == 2 ? S_DONE : S_RUN;
+    case S_DONE:  return S_DONE;
+    case S_ERROR: return S_ERROR;
+    }
+    return S_ERROR;
+}
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Find a buffer overflow
+
+Write a program that reads input into a fixed-size buffer with
+`strcpy`. Feed it input longer than the buffer. Observe the
+crash under ASan.
+
+### DIY 2 — Explore UB with different compilers
+
+Write a program that has signed integer overflow. Compile it
+with `gcc -O0`, `gcc -O2`, `clang -O0`, `clang -O2`. Observe
+that the behavior changes with optimization.
+
+### DIY 3 — Read the C standard
+
+The C17 draft is free. Read the section on "Conversions"
+(6.3). Twenty pages of careful language that explains every
+integer promotion and conversion. You will never guess about
+type conversions again.
+
+### TRY — Write a hash map
+
+Implement a hash table from scratch in C. Linear probing,
+open addressing, grow-on-load-factor. This is the exercise
+that makes you fluent in C's memory model.
+
+---
+
+## Related College Departments (C core)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
