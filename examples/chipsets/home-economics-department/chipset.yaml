@@ -1,0 +1,245 @@
+# Home Economics Department Chipset Configuration
+# Instantiation of the department template pattern for the home-economics domain.
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This chipset forks the math-department template and
+# remaps it for household systems, nutrition, cooking technique,
+# household economics, time and motion, and sustainable pedagogy.
+
+name: home-economics-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated home-economics department providing habitability-first,
+  systems-grounded household support through seven named agents (Richards,
+  Gilbreth, Fisher-he, Beecher, Child, Waters, Liebhardt), six knowledge
+  skills, and three pre-composed teams. Persists work via Grove records
+  and integrates with the college home-economics department concept graph.
+  Richards chairs and routes; habitability is always audited before
+  efficiency and aesthetics.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  household-systems-design:
+    domain: home-economics
+    description: "Household as an operating system — subsystems, room-function mapping, work triangle, storage topology, utility flow, habitability criteria"
+    triggers:
+      - "kitchen design"
+      - "work triangle"
+      - "storage"
+      - "room layout"
+      - "habitability"
+      - "ventilation"
+      - "mold"
+      - "sanitary"
+    agent_affinity: [richards, beecher, gilbreth]
+
+  nutrition-and-meal-planning:
+    domain: home-economics
+    description: "Weekly meal planning — plate method, macronutrients, rotation, leftover architecture, pantry-to-plate, food-safety floor"
+    triggers:
+      - "meal plan"
+      - "weekly menu"
+      - "nutrition"
+      - "food budget"
+      - "leftovers"
+      - "food safety"
+      - "pantry"
+    agent_affinity: [waters, child, fisher-he]
+
+  food-technique-fundamentals:
+    domain: home-economics
+    description: "Fifteen fundamental cooking techniques — knife work, sauté, sear, braise, roast, poach, boil, steam, grill, bake, stew, reduce, deglaze, emulsify, ferment"
+    triggers:
+      - "cooking technique"
+      - "sauté"
+      - "braise"
+      - "roast"
+      - "emulsion"
+      - "knife work"
+      - "recipe failure"
+    agent_affinity: [child, waters, fisher-he]
+
+  household-economics-and-budgeting:
+    domain: home-economics
+    description: "Household as economic unit — envelope method, fixed vs variable, 50-30-20, emergency reserves, true cost of ownership, spending plan vs budget"
+    triggers:
+      - "budget"
+      - "household spending"
+      - "emergency fund"
+      - "true cost"
+      - "debt payoff"
+      - "opportunity cost"
+      - "50-30-20"
+    agent_affinity: [richards, beecher, liebhardt]
+
+  time-and-motion-in-the-home:
+    domain: home-economics
+    description: "Motion study applied to household work — therblig catalog, task decomposition, batch and parallel opportunities, routine chart design, ergonomics"
+    triggers:
+      - "routine"
+      - "motion study"
+      - "therblig"
+      - "task sharing"
+      - "family chores"
+      - "workflow"
+      - "ergonomics"
+    agent_affinity: [gilbreth, liebhardt, richards]
+
+  sustainable-household-pedagogy:
+    domain: home-economics
+    description: "Teaching home-economics skills durably — scaffolded sequencing, apprenticeship model, failure tolerance, family retros, edible schoolyard, one-in-one-out rule"
+    triggers:
+      - "teaching kids"
+      - "family retro"
+      - "habit formation"
+      - "home-ec curriculum"
+      - "edible schoolyard"
+      - "household documentation"
+    agent_affinity: [liebhardt, beecher, waters]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Richards as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: richards
+
+  agents:
+    - name: richards
+      role: "department chair — classification, habitability audit, routing, synthesis, economic framing"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: gilbreth
+      role: "motion study and ergonomics specialist — task decomposition, routine chart, waste therbligs"
+      model: opus
+      tools: [Read, Grep, Bash, Write]
+
+    - name: fisher-he
+      role: "food writing and sensory specialist — sensory description, narrative recipes, experiential framing; `-he` suffix disambiguates from R.A. Fisher (data-science)"
+      model: opus
+      tools: [Read, Grep, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  home-economics-analysis-team:
+    description: "Full department for complex multi-subsystem household problems"
+    agents: [richards, gilbreth, fisher-he, beecher, child, waters, liebhardt]
+    use_when: "multi-subsystem overhaul, new-household setup, post-crisis rebuild, life-stage transition"
+
+  home-economics-workshop-team:
+    description: "Focused strategic workshop for a single deep question"
+    agents: [richards, waters, child, liebhardt]
+    use_when: "meal plan overhaul, kitchen setup, budget rollout, one-skill teaching program, routine reset"
+
+  home-economics-practice-team:
+    description: "Pipeline-oriented operational practice — diagnose, design, embed"
+    agents: [richards, gilbreth, waters, liebhardt]
+    use_when: "ongoing monthly or quarterly improvement cycles, iterative routine refinement, seasonal rotation"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 home-economics Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college home-economics department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (richards) must be CAPCOM"
+        action: "block"
+
+      - check: "fisher_he_suffix_applied"
+        description: "Fisher agent must carry the `-he` suffix to disambiguate from R.A. Fisher (data-science)"
+        action: "block"
+
+      - check: "habitability_first_discipline"
+        description: "Router agent must audit habitability before efficiency or aesthetics"
+        action: "warn"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - household-systems
+      - nutrition-and-meal-planning
+      - cooking-technique
+      - household-economics
+      - time-and-motion
+      - pedagogy
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "home-economics-department"
+  record_types:
+    - name: HomeEconomicsAnalysis
+      description: "Diagnostic analysis — motion study, waste therbligs, technique failure diagnosis, household systems audit, habitability audit"
+
+    - name: HomeEconomicsPractice
+      description: "Designed practice — weekly meal plan, routine chart, kitchen design, budget rollout, teaching program"
+
+    - name: HomeEconomicsReview
+      description: "Review or critique of an existing plan, routine, kitchen, or teaching program"
+
+    - name: HomeEconomicsExplanation
+      description: "Teaching artifact at a specified audience level — technique guide, historical grounding, teaching sequence, retro facilitation, documentation"
+
+    - name: HomeEconomicsSession
+      description: "Session log linking work products to interaction context, with classification metadata and habitability audit result"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "home-economics"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Household Systems & Habitability"
+    - "Nutrition & Meal Planning"
+    - "Cooking Technique & Craft"
+    - "Household Economics & Budgeting"
+    - "Time, Motion & Routine"
+    - "Pedagogy & Sustainable Practice"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
