@@ -1376,3 +1376,46 @@ Once you have internalized these boundaries, "my Java process uses
 8 GB" becomes a question you can actually answer precisely — and
 every GC and memory tuning conversation stops being a fight about
 which number is right.
+
+---
+
+## Study Guide — JVM Memory Spaces
+
+### Key concepts
+
+1. **Heap vs native memory.** Heap is GC-managed; native
+   includes code cache, metaspace, direct buffers, thread
+   stacks.
+2. **Compressed oops** save space by using 32-bit references
+   for heaps under 32 GB.
+3. **`-Xmx`, `-Xms`, `-Xss`.** Max heap, initial heap, per-thread
+   stack.
+4. **`-XX:MaxDirectMemorySize`.** Caps `java.nio` direct buffers.
+5. **Metaspace** replaced PermGen in JDK 8.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Account for every byte
+
+Run a real Java service. Use `jcmd VM.native_memory summary`
+to see the exact breakdown. Reconcile with `RSS` from `ps`.
+They should line up.
+
+### DIY 2 — Observe metaspace growth
+
+Run a Spring Boot app repeatedly hot-reloading classes. Watch
+metaspace grow if you have a classloader leak.
+
+### TRY — Set cgroup limits
+
+Run a JVM in Docker with `--memory=512m`. Watch the JVM
+auto-size the heap. Compare to `-XX:+UseContainerSupport`
+(default on JDK 10+).
+
+---
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
