@@ -243,4 +243,31 @@ This pattern --- convenient defaults, invisible failures, delayed discovery --- 
 
 ---
 
+## Study Guide — RNG History & Origins
+
+### Questions
+
+- Why did von Neumann famously say "anyone who
+  considers arithmetical methods of producing random
+  digits is, of course, in a state of sin"?
+- How did Ulam's Monte Carlo idea change numerical
+  methods?
+- Why did RAND publish a book of a million random
+  digits in 1955?
+
+## DIY — Read Metropolis-Ulam 1949
+
+*The Monte Carlo Method*, Metropolis and Ulam, JASA
+1949. 7 pages.
+
+## TRY — Recreate the RAND 1955 book
+
+Use `/dev/urandom` to produce 1,000 random digits.
+Format as the 1955 book did. You have just replaced
+eight years of RAND's effort with 5 seconds.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+
 *Part 1 of the Random Number Generation research series. See also: [Classical PRNGs](classical-prngs.md), [Modern PRNGs](modern-prngs.md), [Cryptographic RNG](cryptographic-rng.md), [Testing and Quality](testing-quality.md), [Applications](applications.md).*
