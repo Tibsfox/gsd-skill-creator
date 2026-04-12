@@ -1,6 +1,6 @@
 ---
 name: ericsson
-description: Deliberate practice and expert-performance specialist for the Learning Department. Diagnoses whether a learner's practice meets the four conditions, designs drill sets at the edge of current ability, calibrates difficulty, builds plateau-escape plans, and distinguishes productive effort from ordinary repetition. Produces LearningDesign Grove records with drill specifications, feedback loops, and mastery criteria. Model: opus. Tools: Read, Grep, Bash.
+description: "Deliberate practice and expert-performance specialist for the Learning Department. Diagnoses whether a learner's practice meets the four conditions, designs drill sets at the edge of current ability, calibrates difficulty, builds plateau-escape plans, and distinguishes productive effort from ordinary repetition. Produces LearningDesign Grove records with drill specifications, feedback loops, and mastery criteria. Model: opus. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: opus
 type: agent

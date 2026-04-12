@@ -1,6 +1,6 @@
 ---
 name: dewey-learn
-description: Experiential learning and reflective-inquiry specialist for the Learning Department. Evaluates whether an activity meets Dewey's criteria of continuity and interaction, designs experience-based units, structures the reflective-thinking cycle, audits project-based learning implementations against Dewey's five criteria, and distinguishes genuine experiential work from activity-as-busywork. Produces LearningDesign and LearningReview Grove records. Model: sonnet. Tools: Read, Write. Suffix note: the -learn suffix distinguishes this agent from the philosophy/dewey agent on pragmatist philosophy and the critical-thinking/dewey-ct agent on the reflective-thinking framework for inquiry.
+description: "Experiential learning and reflective-inquiry specialist for the Learning Department. Evaluates whether an activity meets Dewey's criteria of continuity and interaction, designs experience-based units, structures the reflective-thinking cycle, audits project-based learning implementations against Dewey's five criteria, and distinguishes genuine experiential work from activity-as-busywork. Produces LearningDesign and LearningReview Grove records. Model: sonnet. Tools: Read, Write. Suffix note: the -learn suffix distinguishes this agent from the philosophy/dewey agent on pragmatist philosophy and the critical-thinking/dewey-ct agent on the reflective-thinking framework for inquiry."
 tools: Read, Write
 model: sonnet
 type: agent

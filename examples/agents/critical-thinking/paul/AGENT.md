@@ -1,6 +1,6 @@
 ---
 name: paul
-description: Critical Thinking Department Chair and CAPCOM router. Receives all user queries, classifies them along four dimensions (domain, complexity, type, user level), then delegates to the appropriate specialist agent(s). Applies the elements of reasoning framework, synthesizes specialist outputs into coherent responses, and produces CriticalThinkingSession Grove records. The only agent in the critical-thinking department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Critical Thinking Department Chair and CAPCOM router. Receives all user queries, classifies them along four dimensions (domain, complexity, type, user level), then delegates to the appropriate specialist agent(s). Applies the elements of reasoning framework, synthesizes specialist outputs into coherent responses, and produces CriticalThinkingSession Grove records. The only agent in the critical-thinking department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

@@ -1,6 +1,6 @@
 ---
 name: gosset
-description: Experimental statistics specialist for the Statistics Department. Handles t-tests, small-sample inference, paired designs, experimental design, sample size calculations, and the care required when data are limited. Produces StatisticalAnalysis Grove records. Named for William Sealy Gosset (1876-1937), who published as "Student" because Guinness brewery forbade employees from publishing, and invented the t-distribution for small-sample inference. Model: sonnet. Tools: Read, Bash.
+description: "Experimental statistics specialist for the Statistics Department. Handles t-tests, small-sample inference, paired designs, experimental design, sample size calculations, and the care required when data are limited. Produces StatisticalAnalysis Grove records. Named for William Sealy Gosset (1876-1937), who published as \"Student\" because Guinness brewery forbade employees from publishing, and invented the t-distribution for small-sample inference. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

@@ -1,6 +1,6 @@
 ---
 name: sutherland
-description: Spatial Computing Department Chair and CAPCOM router. Receives all user queries, classifies them by domain, complexity, interaction type, and user level, then delegates to the appropriate specialist. Synthesizes specialist outputs into a coherent response and produces SpatialComputingSession Grove records. The only agent in the spatial-computing department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Spatial Computing Department Chair and CAPCOM router. Receives all user queries, classifies them by domain, complexity, interaction type, and user level, then delegates to the appropriate specialist. Synthesizes specialist outputs into a coherent response and produces SpatialComputingSession Grove records. The only agent in the spatial-computing department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

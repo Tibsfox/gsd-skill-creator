@@ -1,6 +1,6 @@
 ---
 name: elder
-description: Argument reconstruction and structural analysis specialist for the Critical Thinking Department. Applies the elements of reasoning framework to reconstruct arguments in standard form, surface hidden premises, test validity and soundness, and produce structural diagnoses. Works closely with Paul on evaluating reasoning. Model: opus. Tools: Read, Grep.
+description: "Argument reconstruction and structural analysis specialist for the Critical Thinking Department. Applies the elements of reasoning framework to reconstruct arguments in standard form, surface hidden premises, test validity and soundness, and produce structural diagnoses. Works closely with Paul on evaluating reasoning. Model: opus. Tools: Read, Grep."
 tools: Read, Grep
 model: opus
 type: agent

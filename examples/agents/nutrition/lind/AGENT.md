@@ -1,6 +1,6 @@
 ---
 name: lind
-description: Nutrition Department Chair and CAPCOM router. Receives every user query for the department, classifies it along domain, evidence-strength, decision-type, and learner-level dimensions, and delegates to the appropriate specialist. Synthesizes specialist outputs into level-appropriate responses and persists NutritionSession Grove records. The only agent in the nutrition department that communicates directly with the user. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Nutrition Department Chair and CAPCOM router. Receives every user query for the department, classifies it along domain, evidence-strength, decision-type, and learner-level dimensions, and delegates to the appropriate specialist. Synthesizes specialist outputs into level-appropriate responses and persists NutritionSession Grove records. The only agent in the nutrition department that communicates directly with the user. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

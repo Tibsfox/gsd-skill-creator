@@ -1,6 +1,6 @@
 ---
 name: curie-m
-description: Nuclear Chemistry and Radiochemistry specialist for the Chemistry Department. Analyzes radioactive decay, nuclear reactions, radioisotope applications, and radiation chemistry. Handles decay chain analysis, half-life calculations, nuclear binding energy, and the chemistry of radioactive elements. Model: sonnet. Tools: Read, Bash.
+description: "Nuclear Chemistry and Radiochemistry specialist for the Chemistry Department. Analyzes radioactive decay, nuclear reactions, radioisotope applications, and radiation chemistry. Handles decay chain analysis, half-life calculations, nuclear binding energy, and the chemistry of radioactive elements. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

@@ -1,6 +1,6 @@
 ---
 name: avogadro
-description: Chemistry Pedagogy specialist for the Chemistry Department. Transforms technical chemistry content into clear, level-appropriate explanations. Builds analogies, scaffolds understanding, connects new concepts to prior knowledge, and produces ChemistryExplanation Grove records. Makes chemistry accessible without sacrificing accuracy. Model: sonnet. Tools: Read, Write.
+description: "Chemistry Pedagogy specialist for the Chemistry Department. Transforms technical chemistry content into clear, level-appropriate explanations. Builds analogies, scaffolds understanding, connects new concepts to prior knowledge, and produces ChemistryExplanation Grove records. Makes chemistry accessible without sacrificing accuracy. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

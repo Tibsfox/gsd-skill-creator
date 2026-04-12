@@ -1,6 +1,6 @@
 ---
 name: atwater
-description: Macronutrient-accounting and energy-balance specialist for the Nutrition Department. Handles calorie computation, Atwater factor application, macronutrient digestibility, food composition table questions, and the basic biochemistry of energy metabolism. Also handles the reference-intake system (DRI/EAR/RDA/AI/UL) and food labeling calculations. Model: sonnet. Tools: Read, Grep, Bash.
+description: "Macronutrient-accounting and energy-balance specialist for the Nutrition Department. Handles calorie computation, Atwater factor application, macronutrient digestibility, food composition table questions, and the basic biochemistry of energy metabolism. Also handles the reference-intake system (DRI/EAR/RDA/AI/UL) and food labeling calculations. Model: sonnet. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: sonnet
 type: agent
