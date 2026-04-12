@@ -3576,3 +3576,40 @@ This research cross-links to the following college departments in
 *This document is part of the PNW Research Series, a public educational research corpus. It surveys the implementations, ecosystem, and ongoing development of the Pascal programming language family from 1970 to 2026, covering 56 years of continuous evolution from Niklaus Wirth's original CDC 6000 compiler through modern multi-platform implementations targeting WebAssembly, RISC-V, and mobile platforms.*
 
 *Addendum (Niklaus Wirth 1934–2024, Oberon revival, Free Pascal/Lazarus/Delphi steady state) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Pascal Implementations & Ecosystem
+
+### Compilers
+
+- **Free Pascal (FPC)** — modern, open source, cross-platform.
+- **Lazarus** — IDE on FPC, like Delphi.
+- **Delphi** — commercial, Embarcadero.
+- **Turbo Pascal 7** — historical, runs in DOSBox.
+- **GNU Pascal** — abandoned.
+- **Oberon, Oberon-07, Component Pascal** — Wirth's
+  successors.
+
+## DIY — Install Free Pascal + Lazarus
+
+`sudo apt install fpc lazarus`. Build a form-based GUI
+app. The experience is jarring and pleasant — a last
+surviving member of the RAD (Rapid Application
+Development) tradition.
+
+## DIY — Run Turbo Pascal 7 in DOSBox
+
+Installing Turbo Pascal 7 in DOSBox gives you the most
+responsive IDE you have ever used. F9 compiles and runs
+in milliseconds.
+
+## TRY — Compile an Oberon-07 program
+
+Install Vishap Oberon or Astrobe. Write a 50-line program.
+Observe how close it is to Pascal and yet is post-Pascal.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)

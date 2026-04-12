@@ -7537,3 +7537,93 @@ Pascal's influence on data structure pedagogy and language design:
 ---
 
 *PNW Research Series -- Pascal Data Structures. Written as a comprehensive technical reference for the programming language deep dive collection.*
+
+---
+
+## Study Guide — Pascal Data Structures
+
+### Key concepts
+
+1. **Records.** Pascal records have strong typing and no
+   padding ambiguity — the canonical data structure.
+2. **Pointers.** Typed pointers to known types. Much safer
+   than C.
+3. **Variant records.** Tagged unions with the discriminator
+   in the record itself.
+4. **Dynamic allocation.** `new` and `dispose` for pointer
+   targets. No garbage collection.
+5. **Linked data.** Linked lists and trees are first-class
+   examples in Pascal teaching tradition.
+
+---
+
+## Programming Examples
+
+### Example 1 — Linked list
+
+```pascal
+type
+  NodePtr = ^Node;
+  Node = record
+    value: Integer;
+    next:  NodePtr;
+  end;
+
+procedure PushFront(var head: NodePtr; v: Integer);
+var n: NodePtr;
+begin
+  new(n);
+  n^.value := v;
+  n^.next := head;
+  head := n;
+end;
+```
+
+### Example 2 — Binary tree
+
+```pascal
+type
+  TreePtr = ^TreeNode;
+  TreeNode = record
+    key: Integer;
+    left, right: TreePtr;
+  end;
+
+procedure Insert(var t: TreePtr; k: Integer);
+begin
+  if t = nil then begin
+    new(t);
+    t^.key := k;
+    t^.left := nil;
+    t^.right := nil;
+  end
+  else if k < t^.key then Insert(t^.left, k)
+  else Insert(t^.right, k);
+end;
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Implement a hash table
+
+Use Free Pascal or Turbo Pascal. Build a hash table with
+separate chaining. 100 lines.
+
+### DIY 2 — Port a C linked list to Pascal
+
+Observe the difference between `NodePtr^` (Pascal) and
+`node->` (C). Pascal's pointer syntax is cleaner.
+
+### TRY — Draw a tree with ASCII art
+
+Write a procedure that prints a binary tree rotated 90°.
+Classic first-semester Pascal exercise.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
