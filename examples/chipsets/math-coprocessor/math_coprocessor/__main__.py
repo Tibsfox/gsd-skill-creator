@@ -1,4 +1,4 @@
-"""Entry point for `python -m math-coprocessor`."""
+"""Entry point for `python -m math_coprocessor`."""
 
 from .server import run
 
