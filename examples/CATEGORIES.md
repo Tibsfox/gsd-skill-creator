@@ -16,6 +16,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `orchestration/` | Agent orchestration — fleet mission, mayor coordinator, sling dispatch, GUPP propulsion, runtime HAL |
 | `state/` | State and persistence — beads-state, hook-persistence, nudge-sync, mail-async, token-budget |
 | `math/` | Mathematics domain knowledge — proof techniques, algebraic reasoning, geometric intuition, numerical analysis, pattern recognition, mathematical modeling |
+| `music/` | Music domain knowledge — harmony analysis, counterpoint, rhythm and meter, form analysis, orchestration, ear training |
 | `deprecated/` | Artifacts superseded by newer work. Preserved for reference. Not installed by default. |
 
 ## Agent categories
@@ -30,6 +31,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `ui/` | UI-facing agents — UI researcher, UI checker, UI auditor |
 | `audit/` | Audit and analysis agents — compliance auditor, infrastructure auditor, pipeline analyzer, performance profiler |
 | `math/` | Mathematics department agents — department chair (Hypatia), proof engineer (Euclid), number theorist (Gauss), analyst (Euler), algebraist (Noether), conjecture engine (Ramanujan), pedagogy guide (Polya) |
+| `music/` | Music department agents — department chair (Bach), harmony theorist (Rameau), performer (Clara Schumann), composer (Messiaen), improviser (Coltrane), ethnomusicologist (Bartok), pedagogy guide (Kodaly) |
 | `deprecated/` | Superseded agents. Preserved for reference. |
 
 ## Team categories
@@ -41,6 +43,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `infra/` | Infrastructure review, release management, platform onboarding teams |
 | `migration/` | Migration and documentation generation teams |
 | `math/` | Mathematics teams — full investigation, proof workshop, discovery pipeline |
+| `music/` | Music teams — full analysis, composition workshop, performance preparation |
 | `deprecated/` | Superseded teams. Preserved for reference. |
 
 ## Chipset organization
