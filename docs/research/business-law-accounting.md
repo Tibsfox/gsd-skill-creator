@@ -454,3 +454,14 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2025 CTA/BOI status, Washington HB 2081 + SB 5814) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Business Law & Accounting
+
+## DIY — Read one CTA/BOI regulation
+
+FinCEN posts them publicly. Understand the exemptions.
+
+## TRY — Double-entry bookkeeping by hand
+
+Track income/expense for one week with paper ledgers.
+You'll understand GAAP faster than any textbook.

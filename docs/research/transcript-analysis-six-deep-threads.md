@@ -553,3 +553,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (college cross-link) added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Six-Transcript Deep Analysis
+
+## DIY — Read one thread in depth
+
+Pick the thread that interests you most. Go deep —
+primary sources, cross-references, your own notes.
+
+## TRY — Write your own synthesis
+
+Take three of the six threads. Find the common
+pattern. Write 500 words.

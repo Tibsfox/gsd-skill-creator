@@ -322,3 +322,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (ISC2 2025 workforce study, agentic-AI security tracks) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — SANS Institute
+
+## DIY — Read SANS Internet Storm Center
+
+Daily incident handler diary at isc.sans.edu. Five
+minutes a day keeps the threat pulse.
+
+## TRY — Take one free course
+
+SANS Cyber Aces / Cybrary offer free cybersecurity
+intros. Finish one.

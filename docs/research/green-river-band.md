@@ -508,3 +508,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (former-members activity 2025, historical placement) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Green River
+
+## DIY — Listen to *Rehab Doll* (1988)
+
+Green River's final album — the missing link between
+punk and grunge.
+
+## TRY — Trace the alumni
+
+Mudhoney, Pearl Jam, Mother Love Bone all descend
+from Green River. Build a family tree.

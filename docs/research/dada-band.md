@@ -582,3 +582,14 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2025–2026 touring status) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — dada
+
+## DIY — Listen to *Puzzle* (1992) end-to-end
+
+dada's debut. 44 minutes. One sitting.
+
+## TRY — See them live on the 30th Anniversary Tour
+
+A three-piece guitar-rock show from a band that never
+stopped playing. Rare thing.
