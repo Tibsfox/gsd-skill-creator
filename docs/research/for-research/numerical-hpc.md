@@ -824,3 +824,86 @@ and its accumulated wisdom intact.
 programming tradition; C in systems programming; Unison and content-addressed code;
 APL and array languages. For the computational chemistry companion piece, see the
 Gaussian and VASP historical notes in the Chemistry cluster.*
+
+---
+
+## Study Guide — Fortran in HPC
+
+### Why read this
+
+HPC is the natural habitat of Fortran. Understanding why
+this is still true in 2026 means understanding vector
+machines, BLAS, memory-bandwidth bottlenecks, compiler
+optimization of array code, and the structure of the
+scientific-computing community.
+
+### Key concepts
+
+1. **BLAS/LAPACK.** Basic Linear Algebra Subprograms and its
+   higher-level companion. Written in Fortran. Every other
+   language wraps it.
+2. **MPI.** Message Passing Interface for distributed-memory
+   parallelism. Fortran bindings are first-class.
+3. **Coarrays.** Fortran 2008+ has distributed-memory
+   parallelism in the language itself.
+
+---
+
+## Programming Examples
+
+### Example 1 — BLAS dgemm via Fortran
+
+```fortran
+external :: dgemm
+real(8) :: A(N,N), B(N,N), C(N,N)
+C = 0.0d0
+call dgemm('N','N', N,N,N, 1.0d0, A,N, B,N, 0.0d0, C,N)
+```
+
+Link with `-lopenblas` or `-llapack`. This is faster than
+Python+NumPy on the same hardware.
+
+### Example 2 — A coarray hello world
+
+```fortran
+program hello
+  implicit none
+  integer :: this, total
+  this = this_image()
+  total = num_images()
+  print *, 'image', this, 'of', total
+end program
+```
+
+Compile and run with 4 images:
+```
+gfortran -fcoarray=single hello.f90 -o hello
+./hello  # or opencoarrays / caf -n 4 ./hello
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Benchmark Fortran vs NumPy
+
+Write the same 1000x1000 matrix multiply in Fortran (with
+BLAS) and Python+NumPy. Measure. Both wrap the same BLAS,
+but the Fortran version avoids Python overhead.
+
+### DIY 2 — Run an MPI job
+
+Install `openmpi`, write a 4-process Fortran MPI program
+that computes partial sums. Run with `mpirun -np 4`.
+
+### TRY — Contribute to a weather model
+
+ECMWF's IFS and NCAR's WRF are written in Fortran and
+open source. Read one routine. Propose a small improvement.
+
+---
+
+## Related College Departments (Fortran HPC)
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)

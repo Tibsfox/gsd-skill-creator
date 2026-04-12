@@ -1130,4 +1130,64 @@ efficient, portable, numerical code — better than its alternatives.
 
 ---
 
+## Study Guide — Fortran History
+
+### Why read this
+
+Fortran was the *first* high-level language, and it is still
+in active use in 2026. That 68-year continuous deployment is
+unique in computing, and the story of *why* it survived —
+inertia? numerical libraries? standards discipline? all
+three? — is one of the most instructive case studies in
+language evolution.
+
+### Reading order
+
+Chronological. The file walks Fortran I → II → IV → 66 → 77 →
+90 → 95 → 2003 → 2008 → 2018 → 2023. Read it in order.
+
+### Questions to hold
+
+- Why did Fortran I win over Speedcoding and the
+  hand-assembler alternatives?
+- What was the political and technical cost of Fortran 77's
+  late arrival?
+- Why did Fortran 90 break 90% of existing programs and still
+  get adopted?
+- Why hasn't Fortran been replaced by Julia, C++, or Rust
+  in scientific computing?
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Compile a Fortran I program
+
+Download one of the original 1957 Fortran programs (the
+Bettis Reactor code is public). Run it through a modern
+compiler like GFortran. It will complain. Understand why.
+
+### DIY 2 — Write a modern Fortran 2023 program
+
+Install GFortran 14 or Intel oneAPI Fortran. Write a
+20-line program using `do concurrent`, modern array
+notation, and `contains`. The code will look nothing like
+legacy Fortran and everything like a modern array language.
+
+### TRY — Read LAPACK
+
+LAPACK is the numerical-linear-algebra library that every
+other language wraps. Its source is readable Fortran. Pick
+one routine (DGEMM is the canonical example) and trace its
+logic.
+
+---
+
+## Related College Departments (Fortran history)
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+
+---
+
 *End of document. Written for the PNW Research Series, tibsfox.com.*
