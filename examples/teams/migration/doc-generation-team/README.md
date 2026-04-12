@@ -5,8 +5,8 @@ category: migration
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/teams/doc-generation-team
+first_seen: 2026-02-07
+first_path: examples/doc-generation-team/README.md
 description: null
 superseded_by: null
 ---
