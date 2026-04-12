@@ -1118,3 +1118,113 @@ C++'s object model is the synthesis of Simula's classes, ALGOL's static typing, 
 The language is large and notoriously sharp-edged, but the modern dialect (C++11 and later) is remarkably coherent once the core ideas click: types own resources, lifetimes are scopes, abstractions cost nothing you don't ask for, and everything the compiler can know, the compiler should know.
 
 C++ is now in its fifth decade, used in operating systems, browsers, game engines, financial trading, scientific simulation, embedded systems, and the toolchains of nearly every other language. Stroustrup's bet — that you don't have to choose between abstraction and performance — won.
+
+---
+
+## Study Guide — C++ OOP and Core Language
+
+### Key concepts
+
+1. **Value semantics.** C++ objects are values by default, not
+   references. `MyClass x = y;` copies. This is unlike Java,
+   Python, or JavaScript.
+2. **RAII.** Constructors acquire; destructors release.
+   Deterministic cleanup at scope exit. This is what lets
+   C++ manage resources without a garbage collector.
+3. **The Rule of Five.** If you write one of copy constructor,
+   copy assignment, move constructor, move assignment, or
+   destructor, you probably need to write all five. Or: follow
+   the Rule of Zero and write none of them.
+4. **Virtual vs non-virtual.** Non-virtual member functions are
+   the default and dispatch statically. Only `virtual`
+   functions dispatch dynamically, and only when called through
+   a pointer or reference to the base type.
+5. **Constructors are not methods.** They do not override
+   virtual functions from derived types. They run
+   base-to-derived and call only the *current* class's virtual
+   functions.
+
+---
+
+## Programming Examples
+
+### Example 1 — The Rule of Zero
+
+```cpp
+class Point {
+    double x_, y_;
+public:
+    Point(double x, double y) : x_(x), y_(y) {}
+    double x() const { return x_; }
+    double y() const { return y_; }
+};
+```
+
+No destructor, no copy/move operations, no assignment. The
+compiler generates correct defaults. This is what modern C++
+looks like when you have no resources to manage explicitly.
+
+### Example 2 — Polymorphism with value semantics
+
+```cpp
+#include <memory>
+#include <vector>
+
+struct Shape { virtual ~Shape() = default; virtual double area() const = 0; };
+struct Circle : Shape {
+    double r;
+    explicit Circle(double r) : r(r) {}
+    double area() const override { return 3.14159 * r * r; }
+};
+struct Square : Shape {
+    double s;
+    explicit Square(double s) : s(s) {}
+    double area() const override { return s * s; }
+};
+
+int main() {
+    std::vector<std::unique_ptr<Shape>> shapes;
+    shapes.push_back(std::make_unique<Circle>(3.0));
+    shapes.push_back(std::make_unique<Square>(4.0));
+    double total = 0;
+    for (const auto& s : shapes) total += s->area();
+}
+```
+
+Owner semantics are explicit (`unique_ptr`), polymorphism works
+through virtual dispatch, and the whole thing is leak-safe.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Write a resource wrapper
+
+Wrap a C API resource (file handle, socket, SDL texture) in a
+C++ class with RAII. Constructor acquires, destructor
+releases. No leaks, no manual cleanup at use sites.
+
+### DIY 2 — Explore virtual dispatch cost
+
+Write two versions of a tight loop that calls a function on
+objects: once as non-virtual (static dispatch), once as
+virtual. Measure. The difference on modern hardware is small
+but non-zero.
+
+### DIY 3 — Read Item 1 through Item 10 of Effective C++
+
+Scott Meyers' *Effective C++* items 1-10 are the distilled
+wisdom of a decade of teaching C++. Each is 2-3 pages. Read
+them over a weekend.
+
+### TRY — Refactor a C program into a C++ class hierarchy
+
+Pick a small C program you wrote. Convert it to C++ classes.
+Do not just add `class` keywords — actually re-express the
+structure in terms of types, RAII, and value semantics.
+
+---
+
+## Related College Departments (C++ OOP)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)

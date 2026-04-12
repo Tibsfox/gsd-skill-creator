@@ -822,3 +822,93 @@ The C++ template system exists because Alexander Stepanov needed a vehicle for a
 What remains constant is the original insight: **algorithms should be written against abstract requirements, and types should satisfy those requirements without paying for anything they don't need**. Iterators, ranges, concepts, and the upcoming reflection facilities are all expressions of that principle. The next decade of C++ — modules, senders/receivers, contracts, pattern matching, static reflection — will continue to extend it.
 
 The story of C++ templates is, in the end, the story of one man's stubborn conviction that generic programming was worth pursuing for forty years until the right language showed up to host it.
+
+---
+
+## Study Guide — Templates & STL
+
+### Key concepts
+
+1. **Templates are compile-time code generators.** Each
+   instantiation creates a fresh type or function. This is the
+   mechanism behind zero-overhead generic programming.
+2. **Concepts (C++20) document requirements.** A concept is a
+   named boolean predicate on a type. `template <std::integral
+   T>` replaces SFINAE hacks.
+3. **Iterators are pointers generalized.** Every STL algorithm
+   works through iterator pairs. Understanding iterator
+   categories (input, forward, bidirectional, random-access,
+   contiguous) is understanding 80% of STL.
+4. **Ranges (C++20) are lazy views.** `v | filter(f) |
+   transform(g)` builds a pipeline without materializing
+   intermediate collections.
+
+---
+
+## Programming Examples
+
+### Example 1 — A generic minimum
+
+```cpp
+#include <concepts>
+template<std::totally_ordered T>
+const T& min(const T& a, const T& b) {
+    return (a < b) ? a : b;
+}
+```
+
+The concept makes the requirement explicit: `T` must support
+`<`. Before C++20, this was a SFINAE mess.
+
+### Example 2 — A ranges pipeline
+
+```cpp
+#include <ranges>
+#include <vector>
+#include <iostream>
+
+int main() {
+    std::vector<int> v{1,2,3,4,5,6,7,8,9,10};
+    auto evens_squared = v
+        | std::views::filter([](int x){ return x % 2 == 0; })
+        | std::views::transform([](int x){ return x * x; });
+    for (int x : evens_squared) std::cout << x << ' ';
+}
+```
+
+Outputs `4 16 36 64 100`. Lazy, efficient, and composable.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Write a generic stack
+
+Implement a `Stack<T>` with `push`, `pop`, `top`, `empty`.
+Add a concept requiring `T` be move-constructible.
+
+### DIY 2 — Read one STL algorithm's source
+
+Pick `std::sort` or `std::stable_sort` in libc++ or libstdc++.
+Read the implementation. It is 100-200 lines of dense
+template code. Understand every line.
+
+### DIY 3 — Build a compile-time type list
+
+Use variadic templates and `constexpr` to build a type list
+and query it (`Length<List>::value`, `Get<N, List>::type`).
+This is a small template metaprogramming exercise that
+teaches the whole mental model.
+
+### TRY — Replace a custom container with STL
+
+Find a project that has hand-rolled containers. Replace them
+with `std::vector`, `std::unordered_map`, `std::deque`. Count
+the lines deleted. Measure the performance delta.
+
+---
+
+## Related College Departments (templates & STL)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)

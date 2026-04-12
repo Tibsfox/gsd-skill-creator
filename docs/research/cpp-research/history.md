@@ -703,3 +703,115 @@ This research cross-links to the following college departments in
 ---
 
 *End of history.md. ~700 lines of dense factual prose (original) + ~120 lines of C++26 addendum (Session 018). Citations are primary where possible: ISO standards, Stroustrup HOPL papers, isocpp.org, the original ARM, and dated mailing-list / committee papers. Items marked [CHECK] in the body remain uncertain and should be verified by a fact-checking pass before publication.*
+
+---
+
+## Study Guide — C++ History
+
+### Reading order
+
+Chronological. The file is the history; read it in order. The
+one thing you should stop to verify as you read: the dates and
+the ISO standard versions. Stroustrup's HOPL paper is the
+authoritative source for the pre-2000 period; the C++ committee
+papers (`open-std.org/JTC1/SC22/WG21`) are authoritative for
+everything after.
+
+### Questions to hold
+
+1. Why did Stroustrup start from C specifically, not Pascal or
+   Modula-2?
+2. What did Stroustrup mean by "zero-overhead abstraction," and
+   how has the committee stayed faithful to it across six
+   standards?
+3. Why did C++98 templates win over the alternative (generic
+   pointers and casts) that Java adopted?
+4. What problem did C++11 move semantics solve that could not
+   be solved with references?
+5. Why did concepts take 20 years to land (C++03 → C++20)?
+6. What is C++26 going to look like in 2028 when it actually
+   ships?
+
+### 1-week plan
+
+- Days 1-2: read the file in order, slowly.
+- Day 3: read Stroustrup's HOPL paper *A History of C++: 1979
+  to 1991*.
+- Day 4: read the C++11 Wikipedia article *and* the `cppreference`
+  overview of C++11 features.
+- Day 5: read one committee paper from any year you find
+  interesting — the P-numbered papers are at `open-std.org`.
+- Day 6: read Sutter's Trip Report from the most recent
+  committee meeting (published on his blog after every
+  meeting). This is the living history of C++.
+- Day 7: write a one-page "what I learned about C++ history"
+  note in your own words.
+
+---
+
+## Worked Examples
+
+### Example 1 — Same function, three eras of C++
+
+```cpp
+// C++98 style
+template<typename T>
+void swap(T& a, T& b) {
+    T tmp(a);
+    a = b;
+    b = tmp;
+}
+
+// C++11 style with move semantics
+template<typename T>
+void swap(T& a, T& b) noexcept {
+    T tmp(std::move(a));
+    a = std::move(b);
+    b = std::move(tmp);
+}
+
+// C++20 style with concepts
+template<std::movable T>
+void swap(T& a, T& b) noexcept {
+    auto tmp = std::move(a);
+    a = std::move(b);
+    b = std::move(tmp);
+}
+```
+
+The three versions look similar but express increasingly precise
+semantics: the C++98 version copies, the C++11 version moves,
+and the C++20 version documents the requirement in the type
+system itself.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Read three Stroustrup papers
+
+Stroustrup's *The Design and Evolution of C++* (1994) is a book,
+but chapters 0, 1, and 2 are freely available as papers. Read
+them. They are the closest thing to "why C++ is the way it is"
+you will ever find.
+
+### DIY 2 — Follow the committee for one meeting cycle
+
+The C++ committee meets three times a year. For each meeting,
+the committee publishes agenda, papers, and a trip report.
+Follow one full cycle. You will understand how a language
+evolves when it is governed by a committee rather than a single
+author.
+
+### TRY — Compile a 1990s C++ program in C++26
+
+Find a C++98 program on GitHub from 2000 or earlier. Compile it
+with `g++ -std=c++26`. Fix whatever warnings appear. You will
+have performed a 26-year language upgrade in an afternoon.
+
+---
+
+## Related College Departments (C++ history)
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
