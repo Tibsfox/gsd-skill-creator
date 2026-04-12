@@ -132,9 +132,44 @@ describe('Hook operations', () => {
     const hook = await manager.getHook(agent.id);
     expect(hook).not.toBeNull();
     expect(hook!.agentId).toBe(agent.id);
-    expect(hook!.status).toBe('active');
+    expect(hook!.status).toBe('pending');
     expect(hook!.workItem).toBeDefined();
     expect(hook!.workItem!.beadId).toBe(item.beadId);
+  });
+
+  it('transitions pending -> active via activateHook', async () => {
+    const agent = await manager.createAgent('polecat', 'test-rig');
+    const item = await manager.createWorkItem('Task', 'Do work', 'P1');
+
+    await manager.setHook(agent.id, item.beadId);
+    await manager.activateHook(agent.id);
+    const hook = await manager.getHook(agent.id);
+    expect(hook!.status).toBe('active');
+    expect(hook!.workItem!.beadId).toBe(item.beadId);
+  });
+
+  it('transitions active -> completed via completeHook', async () => {
+    const agent = await manager.createAgent('polecat', 'test-rig');
+    const item = await manager.createWorkItem('Task', 'Do work', 'P1');
+
+    await manager.setHook(agent.id, item.beadId);
+    await manager.activateHook(agent.id);
+    await manager.completeHook(agent.id);
+    const hook = await manager.getHook(agent.id);
+    expect(hook!.status).toBe('completed');
+  });
+
+  it('activateHook rejects when hook is not pending', async () => {
+    const agent = await manager.createAgent('polecat', 'test-rig');
+    await expect(manager.activateHook(agent.id)).rejects.toThrow(/missing/);
+  });
+
+  it('completeHook rejects when hook is not active', async () => {
+    const agent = await manager.createAgent('polecat', 'test-rig');
+    const item = await manager.createWorkItem('Task', 'Do work', 'P1');
+
+    await manager.setHook(agent.id, item.beadId);
+    await expect(manager.completeHook(agent.id)).rejects.toThrow(/pending/);
   });
 
   it('enforces single hook assignment', async () => {
@@ -144,19 +179,23 @@ describe('Hook operations', () => {
 
     await manager.setHook(agent.id, item1.beadId);
     await expect(manager.setHook(agent.id, item2.beadId)).rejects.toThrow(
-      /already has an active hook/
+      /already has a pending hook/
     );
   });
 
-  it('clears a hook', async () => {
+  it('clears a hook by writing empty state', async () => {
     const agent = await manager.createAgent('polecat', 'test-rig');
     const item = await manager.createWorkItem('Task', 'Work', 'P1');
 
     await manager.setHook(agent.id, item.beadId);
     await manager.clearHook(agent.id);
 
+    // Per SKILL.md "Cleared, not deleted" constraint: an empty hook file
+    // remains so the witness still observes the agent's hook slot.
     const hook = await manager.getHook(agent.id);
-    expect(hook).toBeNull();
+    expect(hook).not.toBeNull();
+    expect(hook!.status).toBe('empty');
+    expect(hook!.workItem).toBeUndefined();
   });
 
   it('allows new hook after clearing', async () => {
