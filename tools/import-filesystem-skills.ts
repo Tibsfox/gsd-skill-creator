@@ -62,6 +62,97 @@ import { join, resolve, extname, basename } from 'node:path';
 import { homedir } from 'node:os';
 import matter from 'gray-matter';
 
+// ─── Robust frontmatter parsing ─────────────────────────────────────────────
+//
+// Background: a data-repair commit (`11306b268`) fixed 259 AGENT.md files
+// whose frontmatter looked like
+//
+//     ---
+//     name: some-agent
+//     description: Does X. Model: sonnet. Tools: Read, Grep.
+//     ---
+//
+// YAML parses the unquoted scalar `Does X. Model: sonnet. Tools: ...` as a
+// key-value separator on the `": "` sequences and blows up. gray-matter
+// surfaces this as "incomplete explicit mapping pair; a key node is missed."
+//
+// Rather than rely on an out-of-band repair script that isn't checked in,
+// bake the repair into the importer: if the first parse fails, quote-escape
+// the description value in-memory and retry. The source file on disk is left
+// alone — we just log the path so operators know which files need permanent
+// repair.
+//
+// This is intentionally narrow: it only fixes the unquoted-description case.
+// Other frontmatter failure modes (structural errors, bad indentation, mixed
+// tabs/spaces) still fail loudly.
+
+interface RobustParseResult {
+  parsed: matter.GrayMatterFile<string>;
+  repaired: boolean;
+}
+
+function safeParseFrontmatter(raw: string): RobustParseResult | null {
+  try {
+    return { parsed: matter(raw), repaired: false };
+  } catch {
+    // fall through to repair
+  }
+  const repaired = repairUnquotedDescription(raw);
+  if (repaired === null) return null;
+  try {
+    return { parsed: matter(repaired), repaired: true };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Quote-escape the `description:` line in the first YAML frontmatter block
+ * when its value is an unquoted scalar containing `": "`. Returns the
+ * repaired raw string, or null if no repair was attempted (no frontmatter,
+ * no description line, or value already quoted / a block scalar).
+ */
+function repairUnquotedDescription(raw: string): string | null {
+  // Must begin with a frontmatter block
+  if (!(raw.startsWith('---\n') || raw.startsWith('---\r\n'))) return null;
+  const bodyStart = raw.indexOf('\n') + 1;
+  // Find the closing --- marker (on its own line)
+  const closeRe = /\n---(?:\r?\n|$)/;
+  closeRe.lastIndex = bodyStart;
+  const closeMatch = closeRe.exec(raw.substring(bodyStart));
+  if (!closeMatch) return null;
+  const fmBlockEnd = bodyStart + closeMatch.index; // offset of '\n' before closing ---
+  const fmBlock = raw.substring(bodyStart, fmBlockEnd + 1); // includes trailing \n
+
+  // Find the first `description:` line in the frontmatter block
+  const descRe = /^([ \t]*description:[ \t]*)(.*?)([ \t]*)$/m;
+  const dm = descRe.exec(fmBlock);
+  if (!dm) return null;
+  const prefix = dm[1];
+  const value = dm[2];
+  const trailingWs = dm[3];
+
+  // Skip if empty, already quoted, or a YAML block scalar (| or >)
+  if (value === '' || /^["'|>]/.test(value)) return null;
+
+  const escaped = value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  const newLine = `${prefix}"${escaped}"${trailingWs}`;
+
+  const before = fmBlock.substring(0, dm.index);
+  const after = fmBlock.substring(dm.index + dm[0].length);
+  const newFmBlock = before + newLine + after;
+
+  return raw.substring(0, bodyStart) + newFmBlock + raw.substring(fmBlockEnd + 1);
+}
+
+// Exported for direct testing.
+export { safeParseFrontmatter, repairUnquotedDescription };
+
+// Module-level tracker for paths where in-memory repair was applied.
+// Populated by parseSkill / parseAgent; printed by main() at the end so
+// operators can decide whether to write the fix back to disk.
+const repairedSourcePaths: string[] = [];
+
 import { createNodeArenaInvoke } from '../src/memory/node-arena-shim.js';
 import { RustArena } from '../src/memory/rust-arena.js';
 import { ContentAddressedStore } from '../src/memory/content-addressed-store.js';
@@ -220,13 +311,12 @@ async function parseSkill(sourceDir: string, dirName: string): Promise<ParsedRes
     return null;
   }
   const raw = await readFile(skillPath, 'utf-8');
-  let parsed: matter.GrayMatterFile<string>;
-  try {
-    parsed = matter(raw);
-  } catch {
-    return null;
+  const result = safeParseFrontmatter(raw);
+  if (result === null) return null;
+  if (result.repaired) {
+    repairedSourcePaths.push(skillPath);
   }
-  const data = (parsed.data ?? {}) as Record<string, unknown>;
+  const data = (result.parsed.data ?? {}) as Record<string, unknown>;
   const name = typeof data.name === 'string' ? data.name : dirName;
   const description = typeof data.description === 'string' ? data.description : '';
   return {
@@ -273,13 +363,12 @@ async function parseAgent(sourceDir: string, entry: string): Promise<ParsedResou
   }
 
   const raw = await readFile(agentPath, 'utf-8');
-  let parsed: matter.GrayMatterFile<string>;
-  try {
-    parsed = matter(raw);
-  } catch {
-    return null;
+  const result = safeParseFrontmatter(raw);
+  if (result === null) return null;
+  if (result.repaired) {
+    repairedSourcePaths.push(agentPath);
   }
-  const data = (parsed.data ?? {}) as Record<string, unknown>;
+  const data = (result.parsed.data ?? {}) as Record<string, unknown>;
   const name = typeof data.name === 'string' ? data.name : rawName;
   const description = typeof data.description === 'string' ? data.description : '';
   return {
@@ -621,10 +710,32 @@ async function main(): Promise<void> {
     console.log(`${names.length} resources bound in Grove namespace.`);
   }
 
+  // Surface in-memory frontmatter repairs so operators know which source
+  // files need permanent fixes. The importer only repairs in-memory — the
+  // files on disk still have unquoted descriptions and will continue to
+  // trip any other tool that runs gray-matter on them directly.
+  if (repairedSourcePaths.length > 0) {
+    console.log();
+    console.log(
+      `⚠ ${repairedSourcePaths.length} source file(s) had unquoted description ` +
+        `lines containing ": " — repaired in-memory only:`,
+    );
+    for (const p of repairedSourcePaths) console.log(`    ${p}`);
+    console.log(
+      `  To permanently fix, edit each file and wrap the description value in "".`,
+    );
+  }
+
   if (totalErrors > 0) process.exit(1);
 }
 
-main().catch((err) => {
-  console.error('import-filesystem-skills failed:', err);
-  process.exit(1);
-});
+// Only run as a script when invoked directly (not when imported from a
+// test for access to safeParseFrontmatter / repairUnquotedDescription).
+import { fileURLToPath } from 'node:url';
+const isMain = process.argv[1] && process.argv[1] === fileURLToPath(import.meta.url);
+if (isMain) {
+  main().catch((err) => {
+    console.error('import-filesystem-skills failed:', err);
+    process.exit(1);
+  });
+}
