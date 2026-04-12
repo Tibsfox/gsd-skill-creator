@@ -1,11 +1,14 @@
 ---
 name: cosmological-observation
 description: Observational cosmology from Hubble's law to the CMB. Covers redshift, Hubble expansion, the cosmological parameters, the cosmic microwave background, large-scale structure, galaxy rotation curves and dark matter, Type Ia SNe and dark energy, and the current state of Lambda-CDM. Use when reasoning about the large-scale universe, interpreting cosmological surveys, or teaching the Big Bang evidence chain.
-category: astronomy
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: astronomy
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/astronomy/cosmological-observation/SKILL.md
+superseded_by: null
 ---
 # Cosmological Observation
 

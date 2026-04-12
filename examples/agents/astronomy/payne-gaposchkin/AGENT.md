@@ -7,7 +7,10 @@ type: agent
 category: astronomy
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/agents/astronomy/payne-gaposchkin/AGENT.md
+superseded_by: null
 ---
 # Payne-Gaposchkin — Stellar Spectroscopy & Composition Specialist
 

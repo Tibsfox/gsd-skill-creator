@@ -4,8 +4,11 @@ type: team
 category: astronomy
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/teams/astronomy/astronomy-practice-team/README.md
 description: Four-agent practice pipeline for the observation-to-analysis workflow. Caroline Herschel plans the observation and identifies the field, Chandrasekhar-astro handles any orbital or dynamical computation, Payne-Gaposchkin reduces any spectroscopic data to physical parameters, and Tyson turns the whole thing into a learning session for the user. Use for teaching observational astronomy, running guided sky sessions, first-light reductions, and practice-based learning that starts with looking up and ends with understanding. Not for pure theory, dark-matter dynamics, or cosmological scale problems.
+superseded_by: null
 ---
 # Astronomy Practice Team
 

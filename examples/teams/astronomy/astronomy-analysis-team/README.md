@@ -4,8 +4,11 @@ type: team
 category: astronomy
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/teams/astronomy/astronomy-analysis-team/README.md
 description: Full Astronomy Department investigation team for multi-wing problems spanning observing, stellar physics, solar-system dynamics, and cosmology. Hubble classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with pedagogical framing from Tyson. Use for research-level questions, graduate-level work requiring coordinated specialist input, or any problem where the wing is not obvious and different astronomical perspectives may yield different insights. Not for routine observing, pure classification, or pure orbital calculation.
+superseded_by: null
 ---
 # Astronomy Analysis Team
 

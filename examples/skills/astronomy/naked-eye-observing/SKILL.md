@@ -1,11 +1,14 @@
 ---
 name: naked-eye-observing
 description: Practical naked-eye and binocular sky observing. Covers dark adaptation, limiting magnitude, constellation recognition, star hopping, the messier and Caldwell catalogs accessible without a telescope, the Moon, planets, meteor showers, aurorae, and the ethics and habits of observing under light-polluted and dark skies. Use when teaching someone to find their way around the sky, planning a naked-eye session, or choosing a first binocular tour.
-category: astronomy
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: astronomy
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/astronomy/naked-eye-observing/SKILL.md
+superseded_by: null
 ---
 # Naked-Eye Observing
 

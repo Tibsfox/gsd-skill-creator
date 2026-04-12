@@ -1,11 +1,14 @@
 ---
 name: celestial-coordinates
 description: Celestial coordinate systems and sky positioning. Covers horizon (altitude-azimuth), equatorial (right ascension-declination), ecliptic, and galactic systems; epoch and precession; coordinate transformations; planisphere use; and practical sky-locating from any latitude and date. Use when locating objects, planning observations, converting catalog coordinates, or teaching the geometry of the sky.
-category: astronomy
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: astronomy
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/astronomy/celestial-coordinates/SKILL.md
+superseded_by: null
 ---
 # Celestial Coordinates
 
