@@ -1,12 +1,13 @@
 ---
 name: logic-workshop-team
-description: Focused five-agent team for evaluating a single argument, proof, or claim in depth. Frege dispatches boole, russell, godel, and quine (or a subset appropriate to the argument type), each working on the same artifact from a different angle. Produces a LogicReview record with a clear verdict and decision guidance.
 type: team
 category: logic
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/teams/logic/logic-workshop-team/README.md
+description: Focused five-agent team for evaluating a single argument, proof, or claim in depth. Frege dispatches boole, russell, godel, and quine (or a subset appropriate to the argument type), each working on the same artifact from a different angle. Produces a LogicReview record with a clear verdict and decision guidance.
 superseded_by: null
 ---
 # Logic Workshop Team

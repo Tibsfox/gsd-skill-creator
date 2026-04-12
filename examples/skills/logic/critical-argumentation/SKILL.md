@@ -5,6 +5,7 @@ type: skill
 category: logic
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/skills/logic/critical-argumentation/SKILL.md
 superseded_by: null

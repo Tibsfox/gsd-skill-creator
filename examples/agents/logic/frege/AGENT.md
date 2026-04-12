@@ -1,14 +1,15 @@
 ---
 name: frege
 description: Department chair and router for the Logic Department. Classifies incoming queries by logical domain (propositional, predicate, modal, informal, proof, argumentation), dispatches to specialists, synthesizes results, and is the sole agent that speaks to the user. Use frege as the entry point for any query about logic, argument evaluation, or formal reasoning.
+tools: Read, Glob, Grep, Bash, Write
+model: opus
 type: agent
 category: logic
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
 first_path: examples/agents/logic/frege/AGENT.md
-model: opus
-tools: Read, Glob, Grep, Bash, Write
 superseded_by: null
 ---
 # Frege -- Logic Department Chair
