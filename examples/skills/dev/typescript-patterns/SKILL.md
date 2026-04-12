@@ -6,8 +6,8 @@ category: dev
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/typescript-patterns
+first_seen: 2026-01-30
+first_path: examples/typescript-patterns/SKILL.md
 superseded_by: null
 ---
 # TypeScript Patterns

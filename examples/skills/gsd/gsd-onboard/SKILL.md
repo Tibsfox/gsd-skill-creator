@@ -6,8 +6,8 @@ category: gsd
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/gsd-onboard
+first_seen: 2026-02-07
+first_path: examples/gsd-onboard/SKILL.md
 superseded_by: null
 ---
 # GSD Quick Start

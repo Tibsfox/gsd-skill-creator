@@ -6,8 +6,8 @@ category: patterns
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/compliance-governance
+first_seen: 2026-02-07
+first_path: examples/compliance-governance/SKILL.md
 superseded_by: null
 ---
 # Compliance and Governance
