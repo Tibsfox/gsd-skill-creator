@@ -69,3 +69,27 @@ Transportation is where data mining meets dispatch. Uber's surge pricing, docume
 ## Coda
 
 The through-line across these domains is not a single algorithm or architecture. It is the stubborn craft of framing a business or scientific question so that existing data can answer it, validating that answer against reality, and — the part that distinguishes the durable successes from the cautionary tales — refusing to let a compelling story (beer and diapers, predictive policing, the 10-percent prize) outrun what the data actually supports.
+
+---
+
+## Study Guide — Applications Across Domains
+
+### Domains
+
+- Retail, finance, healthcare, marketing, education,
+  transportation, IoT.
+
+## DIY — Pick one domain and one dataset
+
+Kaggle has public datasets for each. Pick one, frame
+one business question, build a baseline.
+
+## TRY — Replicate a famous result
+
+"Beer and diapers" (apocryphal) or Target's pregnancy
+prediction (real). Find a paper, replicate.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
