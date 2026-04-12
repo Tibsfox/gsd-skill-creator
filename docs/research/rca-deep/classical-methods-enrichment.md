@@ -507,3 +507,18 @@ These specific, citable numbers should be woven into the module text:
 10. Reason, J.T. (1990). *Human Error*. Cambridge University Press.
 11. Ohno, T. (1988). *Toyota Production System: Beyond Large-Scale Production*. Productivity Press.
 12. Key, B.A. (2019). "Five Whys Root Cause System Effectiveness: A Two Factor Quantitative Review." M.S. Thesis, Western Kentucky University.
+
+## Study Guide — Classical RCA Methods
+
+Methods: 5 Whys, Fishbone (Ishikawa), FTA, FMEA, Swiss
+Cheese (Reason).
+
+## DIY — Run 5 Whys on a real incident
+
+Pick a recent bug or outage. Ask "why?" five times.
+Note where it stops being useful.
+
+## TRY — Draw a fishbone
+
+Categories: People, Process, Technology, Environment,
+Materials, Measurement. Brainstorm one incident.

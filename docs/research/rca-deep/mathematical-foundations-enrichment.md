@@ -773,3 +773,18 @@ where weights w_1...w_5 are tuned by domain and system characteristics. This ens
 13. Granger, C. W. J. (1969). "Investigating Causal Relations by Econometric Models and Cross-spectral Methods." *Econometrica*, 37(3):424-438.
 14. Shojaie, A. & Fox, E. B. (2022). "Granger Causality: A Review and Recent Advances." *Annual Review of Statistics and Its Application*, 9:289-319.
 15. Huang, Y. & Valtorta, M. (2006). "Pearl's Calculus of Intervention Is Complete." *UAI*.
+
+## Study Guide — Mathematical Foundations of RCA
+
+Concepts: Bayesian networks, Pearl's do-calculus,
+Granger causality, transfer entropy, information theory.
+
+## DIY — Read Pearl chapter 1
+
+*The Book of Why* (Pearl 2018), chapter 1. The
+ladder of causation. Accessible.
+
+## TRY — Build a Bayesian network
+
+Use `pgmpy` in Python. Model a small causal system
+(sprinkler/rain/grass). Query interventions.
