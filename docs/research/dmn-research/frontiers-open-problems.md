@@ -180,3 +180,22 @@ This research cross-links to the following college departments in
 *References are given inline by author and year; a full bibliography appears in the companion document `references.md` in this series.*
 
 *Addendum (CRISP-DM 2025, vector database tooling rewrite) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Frontiers & Open Problems
+
+### Open problems
+
+- Causal inference at scale.
+- Interpretable ML.
+- Fair and private ML.
+- Multimodal foundation-model fine-tuning.
+
+## DIY — Pick one open problem and survey it
+
+30-minute literature survey using Google Scholar. Note
+three recent papers.
+
+## TRY — Reproduce a SHAP or LIME explanation
+
+Fit a model, explain predictions with SHAP. Compare to
+LIME. Note the differences.

@@ -90,3 +90,23 @@ Finally, the question that animated the late 2010s and early 2020s: can deep lea
 ## 12. Closing Note
 
 The modern data mining toolbox is not a single framework but a layered ecosystem. Boosted trees handle structured tables; GNNs handle networks; Transformers handle sequences; causal forests handle treatment effects; AutoML wraps the whole thing for non-specialists. The unifying theme is that every decade-old hand-crafted step — feature engineering, model selection, distance computation, feature bundling — has an automated descendant. What has *not* been automated is the act of framing: deciding what to predict, why it matters, and what counts as a good answer. That remains the data miner's job, and probably will for some time yet.
+
+## Study Guide — Modern Techniques
+
+### Tools
+
+- **XGBoost / LightGBM / CatBoost** — gradient boosting
+  for tables.
+- **GNNs** — graph neural nets.
+- **Transformers** — sequences, images, text.
+- **TabPFN** — transformer-on-tables.
+
+## DIY — Compare XGBoost vs TabPFN
+
+On a small tabular dataset (under 1,000 rows), run both.
+Observe TabPFN's zero-shot performance.
+
+## TRY — Build a GNN for your social graph
+
+If you have any graph data (Twitter, email, contacts),
+build a PyTorch Geometric model. Predict connections.

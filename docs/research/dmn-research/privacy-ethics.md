@@ -55,3 +55,24 @@ Professional ethics has tried to close the gap between what is possible and what
 ## 10. The Unfinished Argument
 
 Privacy, ethics, and regulation in data mining is not a solved domain and will not become one. Each technical advance — differential privacy, federated learning, homomorphic encryption — moves the frontier but does not close it. Each legal regime — GDPR, CCPA, the AI Act — makes some practices unlawful and leaves others untouched, and each creates jurisdictional arbitrage opportunities. Each public failure — Sweeney's envelope to Governor Weld, Thelma Arnold in the *Times*, the Strava heatmap glowing over Kandahar, ProPublica's Broward County dataset — forces a re-think that is incomplete by the time the next failure arrives. The honest stance for a practitioner is neither paralysis nor cynicism but a standing commitment to three things: know what is in your data and how it got there, measure what your system does to the people it is used on, and be willing to not ship when the first two answers are ugly. The discipline will continue to extract patterns from personal data. Whether it does so in a way the next generation considers legitimate is still being written.
+
+## Study Guide — Privacy, Ethics, Regulation
+
+### Frameworks
+
+- **GDPR** (EU, 2018).
+- **CCPA/CPRA** (California).
+- **HIPAA** (US health).
+- **AI Act** (EU 2024).
+- **Differential privacy** (Dwork 2006).
+- **Federated learning** (McMahan 2017).
+
+## DIY — Apply DP to a query
+
+Use `diffprivlib` in Python. Compute a differentially
+private mean of a small dataset.
+
+## TRY — Read ProPublica's COMPAS analysis
+
+"Machine Bias" (Angwin et al., 2016). The foundational
+case study in fairness.
