@@ -1141,3 +1141,104 @@ This research cross-links to the following college departments in
 *PNW Research Series -- tibsfox.com*
 *Written April 2026*
 *Addendum (2025–2026 Terminal Renaissance) and College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Shell History
+
+### Reading order
+
+1. The PDP-11 era (Thompson, Bourne, early shells).
+2. The Bourne shell (`sh`) and its semantics — this is the
+   lineage everything modern descends from.
+3. The C shell (`csh`) and its arguments (history, job control).
+4. The Korn shell (`ksh`) as the bridge between `sh` features
+   and `csh` conveniences.
+5. Bash, the GNU shell.
+6. Modern shells: Zsh, fish, PowerShell, Nushell, Elvish.
+7. The 2025-26 terminal renaissance: Ghostty, Warp, Zellij.
+
+### Key concepts
+
+1. **Pipes** are the defining Unix abstraction. They turn
+   independent programs into composable filters. Every shell
+   inherits the pipe metaphor.
+2. **Job control** lets a shell background, foreground, and
+   signal processes. `^Z`, `bg`, `fg`, `jobs` are the canonical
+   interface.
+3. **Process substitution** (`<(cmd)`) is Bash's answer to "I
+   want to treat command output as a file." It is not in POSIX
+   but is universally supported on modern systems.
+4. **Shell functions vs aliases.** Aliases are text
+   substitution; functions are named code with parameters. Use
+   functions unless you have a reason not to.
+
+---
+
+## Worked Examples
+
+### Example 1 — The pipeline that started it all
+
+```sh
+who | sort | uniq -c | sort -rn | head
+```
+
+Who is logged in, sorted, counted, sorted by count descending,
+top 10. Doug McIlroy's canonical example of pipe composition,
+written in 1973 and still correct in 2026.
+
+### Example 2 — One task, three shell dialects
+
+Bash:
+```bash
+for f in *.log; do grep -c ERROR "$f"; done
+```
+
+Fish:
+```fish
+for f in *.log; grep -c ERROR $f; end
+```
+
+Zsh (with extended globbing):
+```zsh
+for f in **/*.log(N); print -- $f $(grep -c ERROR $f); done
+```
+
+The semantics are the same. The syntactic sugar is where
+shell debates happen.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Read Bourne's paper
+
+Stephen Bourne's "An Introduction to the Unix Shell" (1978)
+is five pages and still readable. Download it. Read it. The
+shell you use every day is 97% this design.
+
+### DIY 2 — Learn one non-Bash shell
+
+Install fish or nushell. Spend a week in it. Keep a list of
+what surprised you.
+
+### DIY 3 — Write a shell script that runs on `sh` and `bash`
+
+The script must not use any Bashisms. Test with `dash` (the
+POSIX-only shell Debian uses for `/bin/sh`). You will learn
+where the POSIX boundary actually is.
+
+### TRY — Reimplement `who | sort | uniq -c | ...`
+
+Write the same pipeline in Python, then in Rust, then in Go.
+Compare line counts. The one-line shell version wins every
+time — which is why, fifty years later, we still reach for it.
+
+---
+
+## Related College Departments (shell history)
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — shell evolution is a historical subject.
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+  — shell scripting is a Programming Fundamentals topic.
