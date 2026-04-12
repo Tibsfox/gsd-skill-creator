@@ -82,17 +82,7 @@ lost-and-found/
 apps/the-space-between-engine/package-lock.json
 .env
 # API directory (local only — credentials, sync scripts, schemas)
-www/tibsfox/com/api/
-
-# Runtime state
-.bg-shell/
-
-# LaTeX build artifacts (sources are .tex)
-www/**/*.aux
-www/**/*.idx
-www/**/*.log
-www/**/*.out
-www/**/*.toc
-
-# Compiled binaries (sources are .c)
-scripts/nasa/shader-viewer
+# Published site content (228 MB, regenerable, lives on disk for sync scripts)
+www/
+# Prometheus sweep metrics artifact — moved to .planning/prometheus/
+prometheus/
