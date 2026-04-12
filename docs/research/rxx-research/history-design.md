@@ -1971,3 +1971,33 @@ This research cross-links to the following college departments in
 *This document is part of the PNW Research Series and serves as the foundational reference for the ARexx porting project. For questions or corrections, refer to the primary sources listed in Appendix E.*
 
 *Addendum (ooRexx 5.0/5.1, Regina AROS, NetRexx, Fosdick's who-uses-rexx) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — REXX & ARexx History and Design
+
+### Questions
+
+- Why Mike Cowlishaw designed REXX at IBM Hursley
+  (1979-1982).
+- Why VM/CMS users adopted it over CLIST and EXEC2.
+- Why ARexx (1987, Commodore Amiga) gave REXX its
+  second life.
+- Why modern scripting languages (Lua, Python) never
+  quite matched ARexx's IPC model.
+
+## DIY — Install Regina
+
+`apt install regina-rexx`. `rexx hello.rex`. Write 10
+lines.
+
+## TRY — Read Cowlishaw
+
+*The REXX Language: A Practical Approach to
+Programming* (1985). The author manual. Short, clear,
+canonical.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
