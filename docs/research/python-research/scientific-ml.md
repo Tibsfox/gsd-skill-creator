@@ -758,3 +758,58 @@ NumPy (2006)
 NumPy was the universal type. SciPy was the universal algorithm library. Matplotlib was the universal visualization. Jupyter was the universal IDE. scikit-learn was the universal API style. PyTorch was the universal differentiable runtime. HuggingFace was the universal model hub. Each built on what came before; each made the next layer cheaper to build.
 
 The Python scientific stack is the most successful long-running open-source collaboration in the history of computing — outlasting languages, companies, hardware generations, and entire paradigms of computing. It is the substrate on which the AI revolution of 2020-2026 was built.
+
+---
+
+## Study Guide — Python Scientific/ML Stack
+
+### Layers
+
+1. **NumPy** — ndarray, vectorized ops.
+2. **SciPy** — numerical algorithms.
+3. **pandas** — tabular data.
+4. **Matplotlib / seaborn / plotly** — plotting.
+5. **scikit-learn** — classical ML.
+6. **PyTorch / JAX / TensorFlow** — differentiable
+   programming.
+7. **HuggingFace** — model hub and Transformers.
+8. **Jupyter / marimo** — notebooks.
+
+---
+
+## Programming Examples
+
+### Example 1 — NumPy + pandas pipeline
+
+```python
+import numpy as np, pandas as pd
+df = pd.read_csv('sales.csv')
+by_region = df.groupby('region')['revenue'].agg(['mean','std','count'])
+print(by_region)
+```
+
+### Example 2 — PyTorch tensor
+
+```python
+import torch
+x = torch.randn(3, 4, requires_grad=True)
+y = x.pow(2).sum()
+y.backward()
+print(x.grad)
+```
+
+## DIY — Train a model in 20 lines
+
+scikit-learn has `load_iris` + `LogisticRegression`. 20
+lines produces a working classifier.
+
+## TRY — Fine-tune a HuggingFace model
+
+Pick a small model (distilbert), a labeled dataset,
+`Trainer.train()`. An afternoon gets you a finetuned
+model.
+
+## Related College Departments
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
