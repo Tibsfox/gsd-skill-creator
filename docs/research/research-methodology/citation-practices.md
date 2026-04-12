@@ -253,3 +253,19 @@ This is not accidental. It is what happens when you build a knowledge system fro
 - Ioannidis, J. P. A., Baas, J., Klavans, R., & Boyack, K. W. (2019). A standardized citation metrics author database. *PLOS Biology*, 17(8), e3000384.
 - Ginsparg, P. (2011). ArXiv at 20. *Nature*, 476, 145-147.
 - Egghe, L. (2006). Theory and practise of the g-index. *Scientometrics*, 69(1), 131-152.
+
+## Study Guide — Citation Practices
+
+Styles: APA, MLA, Chicago, IEEE, numerical vs author-date.
+Tools: Zotero, BibTeX, CSL styles.
+
+## DIY — Set up Zotero
+
+Import 50 papers. Use Better BibTeX to export `.bib` for
+LaTeX. Best in class for free.
+
+## TRY — Trace one paper's citation tree
+
+Pick a classic paper. Follow forward and backward
+citations one hop. Count how many citations check
+out. Surprising results await.

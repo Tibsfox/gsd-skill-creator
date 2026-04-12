@@ -237,4 +237,18 @@ The gsd-skill-creator system has produced over **190 research projects**, each f
 
 ---
 
+## Study Guide — Writing Papers
+
+IMRaD structure: Introduction, Methods, Results, Discussion.
+
+## DIY — Outline one paper
+
+Pick a research question. Write a 1-page IMRaD outline
+before any content.
+
+## TRY — Write a paper in Pandoc markdown
+
+Replace Word. Use Pandoc + CSL for citations, LaTeX
+backend for PDF. Source-controllable, diffable, durable.
+
 *Part of the Research Methodology series. See also other documents in `docs/research/research-methodology/`.*

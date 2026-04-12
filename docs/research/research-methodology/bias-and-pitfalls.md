@@ -264,3 +264,21 @@ The biases described here are not aberrations. They are the default operating mo
 None of these are moral failures. All of them are epistemic failures. The difference is crucial. You do not solve epistemic failures with willpower or good intentions. You solve them with **structure** -- with pre-registration, blinding, replication, open data, adversarial review, and the institutional courage to publish null results, admit error, and reward accuracy over impact.
 
 Feynman was right. You are the easiest person to fool. The discipline required not to fool yourself is not a personality trait. It is a set of practices, a culture of verification, a commitment to methods that constrain your own freedom in the service of getting closer to truth. It is uncomfortable. It is slow. It is the only thing that works.
+
+## Study Guide — Bias & Pitfalls
+
+Classic biases: confirmation, survivorship, publication,
+p-hacking, HARKing, Texas sharpshooter.
+
+## DIY — Find one survivorship bias in your own work
+
+Pick a claim you make about why X works. List the cases
+you used. List the cases that would have disconfirmed
+(the ones that didn't survive). Often the missing cases
+outnumber the visible ones.
+
+## TRY — Pre-register your next experiment
+
+OSF pre-registration. Locks in the hypothesis, analysis
+plan, and data collection strategy *before* you see
+results.

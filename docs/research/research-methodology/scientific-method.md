@@ -165,3 +165,18 @@ GSD's phase-based workflow is, at its core, a scientific method applied to softw
 Software engineering has its own idols. The idol of the demo (it works on my machine, therefore it works). The idol of coverage (the tests pass, therefore the code is correct). The idol of velocity (we shipped quickly, therefore we shipped well). GSD's methodology applies the same centuries-old Baconian insight to a new domain: reliable knowledge about whether your software works requires a method that is systematically skeptical of the developer's confidence, demands empirical evidence at every phase boundary, and treats failed verification not as an embarrassment but as the most informative possible outcome.
 
 Bacon would recognize the pattern. Galileo would approve of the measurements. Fisher would check the sample sizes. And the work continues.
+
+## Study Guide — The Scientific Method
+
+Hypothesis → experiment → observation → theory. Popper's
+falsifiability. Lakatos's research programmes.
+
+## DIY — Map your next project to GSD phases
+
+Plan = hypothesis. Execute = experiment. Verify =
+observation. Write down what each phase is testing.
+
+## TRY — Falsify one of your own beliefs
+
+Pick a claim you're sure is true. Design a test that
+could prove it wrong. Run it.

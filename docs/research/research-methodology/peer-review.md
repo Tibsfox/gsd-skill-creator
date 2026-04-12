@@ -319,3 +319,18 @@ This research cross-links to the following college departments in
 ---
 
 *Section 10 (The 2025 AI peer-review crisis) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Peer Review
+
+Forms: single-blind, double-blind, open, post-publication.
+
+## DIY — Review one paper as if you were a reviewer
+
+Pick a recent paper in your field. Write a 1-page
+review. Share with a colleague.
+
+## TRY — Join an OSS peer review
+
+Many open-source projects treat PR review as peer
+review. Do a thorough one. Same skills, different
+artifact.
