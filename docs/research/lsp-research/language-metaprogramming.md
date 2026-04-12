@@ -1981,3 +1981,84 @@ Every generation of programmers rediscovers Lisp and gets excited. Graham in the
 If you want to understand where programming languages came from, read the 1960 paper. If you want to understand where they are going, read the Racket papers. In between, write your own Lisp. It's the single most educational exercise in the field.
 
 Lisp is the meta-language. Everything else is an approximation.
+
+---
+
+## Study Guide — Lisp Language & Metaprogramming
+
+### Key concepts
+
+1. **S-expressions.** `(f x y)` is both syntax and data.
+2. **`eval` and `apply`.** The core of the Lisp interpreter
+   fits on one page.
+3. **Macros.** Compile-time code transformations written in
+   the same language.
+4. **Hygienic macros.** Scheme's `syntax-rules` and
+   `syntax-case` avoid variable capture.
+5. **Continuations.** `call/cc` in Scheme gives you
+   first-class control flow.
+
+---
+
+## Programming Examples
+
+### Example 1 — Scheme factorial
+
+```scheme
+(define (factorial n)
+  (if (<= n 1)
+      1
+      (* n (factorial (- n 1)))))
+```
+
+### Example 2 — A Common Lisp macro
+
+```lisp
+(defmacro unless (test &body body)
+  `(if (not ,test)
+       (progn ,@body)))
+
+(unless (> 5 10)
+  (print "five is not greater than ten"))
+```
+
+Macros are code transformations, evaluated at compile time.
+
+### Example 3 — Clojure threading
+
+```clojure
+(->> (range 100)
+     (filter even?)
+     (map #(* % %))
+     (reduce +))
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Write meval
+
+Implement a Lisp interpreter in Lisp. 100 lines of Common
+Lisp or Scheme. This is the most educational exercise in
+all of programming.
+
+### DIY 2 — Build a hygienic macro
+
+Write `swap!` in Scheme that swaps two variables without
+introducing accidental captures. Observe the difference
+between `define-syntax` and `defmacro`.
+
+### TRY — Rewrite a Python decorator as a Lisp macro
+
+Pick any Python decorator you've used. Rewrite it as a
+Common Lisp macro. Compare: the Lisp macro runs at compile
+time and generates code; the Python decorator is a runtime
+wrapper.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
