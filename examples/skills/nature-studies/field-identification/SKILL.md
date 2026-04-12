@@ -1,11 +1,14 @@
 ---
 name: field-identification
 description: Identifying species in the field using dichotomous keys, gestalt recognition, diagnostic features, and habitat context. Covers the working identification protocol from first encounter through confidence-rated record, the vocabulary of field marks, the discipline of negative evidence, and the honest reporting of uncertain IDs. Use when the task is to name a living organism encountered in the field.
-category: nature-studies
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: nature-studies
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/nature-studies/field-identification/SKILL.md
+superseded_by: null
 ---
 # Field Identification
 

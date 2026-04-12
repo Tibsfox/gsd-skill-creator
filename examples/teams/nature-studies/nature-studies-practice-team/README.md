@@ -4,8 +4,11 @@ type: team
 category: nature-studies
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/teams/nature-studies/nature-studies-practice-team/README.md
 description: Four-agent field-practice pipeline team for sustained naturalist work. Merian models the sketch-first journal loop, Goodall models longitudinal ethology, von Humboldt supplies habitat and biogeographic context, and Louv scaffolds the session as a learning experience rather than a one-shot answer. Use for ongoing sit-spot, nature-journaling, phenology monitoring, and multi-week behavioral tracking. Not for single-shot identification, pure taxonomy, or research-level analysis that does not require sustained observation.
+superseded_by: null
 ---
 # Nature Studies Practice Team
 

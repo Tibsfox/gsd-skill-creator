@@ -7,7 +7,10 @@ type: agent
 category: nature-studies
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/agents/nature-studies/merian/AGENT.md
+superseded_by: null
 ---
 # Merian -- Entomology & Metamorphosis Specialist
 
