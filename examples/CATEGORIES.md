@@ -17,6 +17,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `state/` | State and persistence — beads-state, hook-persistence, nudge-sync, mail-async, token-budget |
 | `math/` | Mathematics domain knowledge — proof techniques, algebraic reasoning, geometric intuition, numerical analysis, pattern recognition, mathematical modeling |
 | `music/` | Music domain knowledge — harmony analysis, counterpoint, rhythm and meter, form analysis, orchestration, ear training |
+| `physics/` | Physics domain knowledge — classical mechanics, electromagnetism, thermodynamics, quantum mechanics, relativity and astrophysics, experimental methods |
 | `deprecated/` | Artifacts superseded by newer work. Preserved for reference. Not installed by default. |
 
 ## Agent categories
@@ -32,6 +33,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `audit/` | Audit and analysis agents — compliance auditor, infrastructure auditor, pipeline analyzer, performance profiler |
 | `math/` | Mathematics department agents — department chair (Hypatia), proof engineer (Euclid), number theorist (Gauss), analyst (Euler), algebraist (Noether), conjecture engine (Ramanujan), pedagogy guide (Polya) |
 | `music/` | Music department agents — department chair (Bach), harmony theorist (Rameau), performer (Clara Schumann), composer (Messiaen), improviser (Coltrane), ethnomusicologist (Bartok), pedagogy guide (Kodaly) |
+| `physics/` | Physics department agents — department chair (Curie), classical mechanics (Newton), electromagnetism (Maxwell), thermodynamics (Boltzmann), quantum mechanics (Feynman), astrophysics (Chandrasekhar), pedagogy (Faraday) |
 | `deprecated/` | Superseded agents. Preserved for reference. |
 
 ## Team categories
@@ -44,6 +46,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `migration/` | Migration and documentation generation teams |
 | `math/` | Mathematics teams — full investigation, proof workshop, discovery pipeline |
 | `music/` | Music teams — full analysis, composition workshop, performance preparation |
+| `physics/` | Physics teams — full analysis, problem solving, experimental design |
 | `deprecated/` | Superseded teams. Preserved for reference. |
 
 ## Chipset organization

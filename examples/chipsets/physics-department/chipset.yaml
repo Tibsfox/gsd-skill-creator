@@ -1,0 +1,272 @@
+# Physics Department Chipset Configuration
+# Third instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. The physics department validates the department template
+# by applying it to a domain where mathematical formalism and empirical
+# observation must work in tandem — a different balance than either
+# mathematics (pure reasoning) or music (aesthetic + structural reasoning).
+
+name: physics-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated physics department providing domain-routed expertise
+  through seven named agents (Curie, Newton, Maxwell, Boltzmann,
+  Feynman, Chandrasekhar, Faraday), six knowledge skills, and three
+  pre-composed teams. Persists work via Grove records and integrates
+  with the college physics department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  classical-mechanics:
+    domain: physics
+    description: "Newtonian mechanics — kinematics, dynamics, conservation laws, rotational motion, oscillations, gravitation"
+    triggers:
+      - "force"
+      - "Newton's law"
+      - "momentum"
+      - "projectile"
+      - "friction"
+      - "torque"
+      - "angular momentum"
+      - "simple harmonic"
+      - "orbital mechanics"
+    agent_affinity: newton
+
+  electromagnetism:
+    domain: physics
+    description: "Electric and magnetic fields — Coulomb's law, Gauss's law, Faraday's law, Maxwell's equations, circuits, optics"
+    triggers:
+      - "electric field"
+      - "magnetic field"
+      - "Maxwell's equations"
+      - "electromagnetic"
+      - "circuit"
+      - "capacitor"
+      - "inductor"
+      - "Gauss's law"
+      - "Faraday's law"
+      - "optics"
+      - "wave equation"
+    agent_affinity: maxwell
+
+  thermodynamics:
+    domain: physics
+    description: "Thermal physics — laws of thermodynamics, entropy, statistical mechanics, heat engines, kinetic theory"
+    triggers:
+      - "entropy"
+      - "thermodynamics"
+      - "heat engine"
+      - "Carnot"
+      - "partition function"
+      - "Boltzmann distribution"
+      - "kinetic theory"
+      - "specific heat"
+      - "phase transition"
+    agent_affinity: boltzmann
+
+  quantum-mechanics:
+    domain: physics
+    description: "Quantum theory — wave functions, Schrodinger equation, operators, spin, entanglement, perturbation theory"
+    triggers:
+      - "quantum"
+      - "wave function"
+      - "Schrodinger"
+      - "Hamiltonian"
+      - "spin"
+      - "entanglement"
+      - "superposition"
+      - "Heisenberg"
+      - "Dirac"
+      - "perturbation theory"
+    agent_affinity: feynman
+
+  relativity-astrophysics:
+    domain: physics
+    description: "Special and general relativity, cosmology, stellar physics, black holes, gravitational waves"
+    triggers:
+      - "relativity"
+      - "spacetime"
+      - "Lorentz"
+      - "black hole"
+      - "cosmology"
+      - "gravitational wave"
+      - "stellar"
+      - "neutron star"
+      - "Chandrasekhar limit"
+      - "metric tensor"
+      - "geodesic"
+    agent_affinity: chandrasekhar
+
+  experimental-methods:
+    domain: physics
+    description: "Laboratory technique — error analysis, measurement, data fitting, instrumentation, experimental design"
+    triggers:
+      - "error analysis"
+      - "uncertainty"
+      - "measurement"
+      - "data fitting"
+      - "chi-squared"
+      - "calibration"
+      - "systematic error"
+      - "laboratory"
+      - "experimental design"
+    agent_affinity: [faraday, curie]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Curie as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: curie
+
+  agents:
+    - name: curie
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: newton
+      role: "mechanics specialist — classical dynamics, gravitation, conservation laws"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: maxwell
+      role: "electromagnetism specialist — fields, waves, optics, circuits"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: boltzmann
+      role: "thermodynamics specialist — statistical mechanics, entropy, kinetic theory"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: feynman
+      role: "quantum specialist — quantum mechanics, QED, path integrals"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: chandrasekhar
+      role: "astrophysics and relativity specialist — stellar physics, GR, cosmology"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: faraday
+      role: "pedagogy guide — experimental intuition, explanation, learning paths"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  physics-analysis-team:
+    description: "Full department for complex multi-domain problems"
+    agents: [curie, newton, maxwell, boltzmann, feynman, chandrasekhar, faraday]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  problem-solving-team:
+    description: "Focused derivation, calculation, and verification"
+    agents: [newton, maxwell, feynman, boltzmann]
+    use_when: "calculation-heavy or multi-step derivation requests"
+
+  experimental-design-team:
+    description: "Experiment planning, error analysis, and pedagogical explanation"
+    agents: [faraday, curie, boltzmann, chandrasekhar]
+    use_when: "laboratory work, experimental design, or measurement analysis"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 physics Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college physics department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (curie) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - mechanics
+      - electromagnetism
+      - thermodynamics
+      - quantum
+      - relativity
+      - experimental
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "physics-department"
+  record_types:
+    - name: PhysicsDerivation
+      description: "Step-by-step derivation with equations, approximations, and dimensional analysis"
+
+    - name: PhysicsExperiment
+      description: "Experimental design or lab report with procedure, data, error analysis, and conclusions"
+
+    - name: PhysicsSolution
+      description: "Worked solution to a physics problem with diagram references and unit checks"
+
+    - name: PhysicsExplanation
+      description: "Teaching artifact at a specified level with physical intuition and analogies"
+
+    - name: PhysicsSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "physics"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Motion & Forces"
+    - "Energy & Work"
+    - "Waves, Sound & Light"
+    - "Electricity & Magnetism"
+    - "Modern Physics & Cosmology"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
