@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { readFile, readdir, stat } from 'fs/promises';
-import { join } from 'path';
+import { basename, join } from 'path';
 import matter from 'gray-matter';
 import { SkillMetadataSchema } from './skill-validation.js';
 
@@ -11,25 +11,45 @@ const EXAMPLES_DIR = join(__dirname, '..', '..', 'examples');
 // Helper: Discover example directories
 // ============================================================================
 
+// Walks the examples subtree and returns every directory containing the target
+// file. This is layout-agnostic: it handles both the original flat layout
+// (examples/skills/<name>/SKILL.md) and the category-first layout introduced
+// during the departments reorg (examples/skills/<category>/<name>/SKILL.md).
+// As soon as a directory contains the target file, we record it and stop
+// descending — a skill's own subfolders (scripts/, references/, etc.) are
+// never mistaken for nested skills.
 async function discoverExamples(subdir: string, filename: string): Promise<{ name: string; path: string }[]> {
-  const dir = join(EXAMPLES_DIR, subdir);
-  const entries = await readdir(dir);
+  const root = join(EXAMPLES_DIR, subdir);
   const examples: { name: string; path: string }[] = [];
 
-  for (const entry of entries) {
-    const entryPath = join(dir, entry);
-    const entryStat = await stat(entryPath);
-    if (entryStat.isDirectory()) {
-      const filePath = join(entryPath, filename);
+  async function walk(currentDir: string): Promise<void> {
+    let entries: string[];
+    try {
+      entries = await readdir(currentDir);
+    } catch {
+      return;
+    }
+
+    if (entries.includes(filename)) {
+      examples.push({ name: basename(currentDir), path: join(currentDir, filename) });
+      return;
+    }
+
+    for (const entry of entries) {
+      const entryPath = join(currentDir, entry);
+      let entryStat;
       try {
-        await stat(filePath);
-        examples.push({ name: entry, path: filePath });
+        entryStat = await stat(entryPath);
       } catch {
-        // Directory exists but no matching file — skip
+        continue;
+      }
+      if (entryStat.isDirectory()) {
+        await walk(entryPath);
       }
     }
   }
 
+  await walk(root);
   return examples;
 }
 
