@@ -539,3 +539,37 @@ The remaining hard problems:
 - **GPU / native dep ecosystem** — pip + wheels mostly handles this for x86_64 Linux, less well for ARM, Apple Silicon (improved 2023+), Windows, and exotic CUDA combinations. conda still wins here for the moment.
 
 Python's packaging story is now boring in the best sense: the tools work, the standards exist, and a 2026 newcomer can publish a well-formed package without a history lesson.
+
+---
+
+## Study Guide — Python Packaging
+
+### Tool map
+
+- **uv** — the new fast package manager (Astral, Rust).
+- **pip** — the oldest, still universal.
+- **poetry, pdm, hatch, rye** — pyproject.toml-based.
+- **pipx** — for CLI tools.
+- **conda / mamba** — scientific / GPU-heavy stacks.
+- **Build backends:** setuptools, hatchling, flit-core,
+  poetry-core, pdm-backend.
+- **Publish:** twine, hatch publish.
+
+## DIY — Migrate from pip+venv to uv
+
+Take any Python project with `requirements.txt`. Run
+`uv init`, `uv add` the dependencies. Observe 10-100x
+speedup.
+
+## DIY — Publish a package
+
+`uv build && uv publish`. You've just shipped to PyPI.
+
+## TRY — Use Ruff as linter + formatter
+
+Replace flake8 + black with Ruff. Single binary.
+100x faster.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
