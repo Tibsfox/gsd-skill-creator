@@ -2234,3 +2234,26 @@ This research cross-links to the following college departments in
 
 *Addendum (HB 2081 / SB 5814 — the 2025 tax package, signed and effective) and Related College Departments cross-link added during the Session 018 catalog enrichment pass. Per the Fox Companies IP rule, this file is committed to GitHub but not surfaced on the public tibsfox.com research site.*
 
+---
+
+## Study Guide — WA B&O Tax (PRIVATE)
+
+### Key concepts
+
+1. **B&O is a gross receipts tax.** Tax on revenue, not
+   income.
+2. **Classifications.** Wholesaling, retailing, services,
+   manufacturing — each with its own rate.
+3. **HB 2081 (2025).** Rate changes and classification
+   updates.
+
+## DIY — Compute sample B&O
+
+Pick three hypothetical business scenarios. Look up the
+current B&O rate. Compute the tax.
+
+## TRY — Read HB 2081
+
+Full text is on the WA legislature site. Read the rate
+changes.
+
