@@ -18,6 +18,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `math/` | Mathematics domain knowledge — proof techniques, algebraic reasoning, geometric intuition, numerical analysis, pattern recognition, mathematical modeling |
 | `music/` | Music domain knowledge — harmony analysis, counterpoint, rhythm and meter, form analysis, orchestration, ear training |
 | `physics/` | Physics domain knowledge — classical mechanics, electromagnetism, thermodynamics, quantum mechanics, relativity and astrophysics, experimental methods |
+| `philosophy/` | Philosophy domain knowledge — formal logic, ethics, epistemology, metaphysics, political philosophy, critical thinking |
 | `deprecated/` | Artifacts superseded by newer work. Preserved for reference. Not installed by default. |
 
 ## Agent categories
@@ -34,6 +35,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `math/` | Mathematics department agents — department chair (Hypatia), proof engineer (Euclid), number theorist (Gauss), analyst (Euler), algebraist (Noether), conjecture engine (Ramanujan), pedagogy guide (Polya) |
 | `music/` | Music department agents — department chair (Bach), harmony theorist (Rameau), performer (Clara Schumann), composer (Messiaen), improviser (Coltrane), ethnomusicologist (Bartok), pedagogy guide (Kodaly) |
 | `physics/` | Physics department agents — department chair (Curie), classical mechanics (Newton), electromagnetism (Maxwell), thermodynamics (Boltzmann), quantum mechanics (Feynman), astrophysics (Chandrasekhar), pedagogy (Faraday) |
+| `philosophy/` | Philosophy department agents — department chair (Socrates), logician (Aristotle), ethicist (Kant), existentialist (Beauvoir), political philosopher (Confucius), metaphysician (Nagarjuna), pedagogy (Dewey) |
 | `deprecated/` | Superseded agents. Preserved for reference. |
 
 ## Team categories
@@ -47,6 +49,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `math/` | Mathematics teams — full investigation, proof workshop, discovery pipeline |
 | `music/` | Music teams — full analysis, composition workshop, performance preparation |
 | `physics/` | Physics teams — full analysis, problem solving, experimental design |
+| `philosophy/` | Philosophy teams — full seminar, ethics committee, dialectic |
 | `deprecated/` | Superseded teams. Preserved for reference. |
 
 ## Chipset organization
