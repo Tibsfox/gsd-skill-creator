@@ -1,4 +1,4 @@
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["math_coprocessor/tests"]
 pythonpath = ["."]
 import_mode = "importlib"
