@@ -20,6 +20,15 @@
             "command": "node .claude/hooks/validate-commit.cjs"
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/gsd-config-guard.js"
+          }
+        ]
       }
     ],
     "PostToolUse": [
