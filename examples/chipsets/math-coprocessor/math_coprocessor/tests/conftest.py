@@ -1,8 +1,6 @@
 """Shared fixtures for Math Co-Processor test suite.
 
 Provides sample matrices, signals, and datasets used across all test modules.
-Handles the hyphenated package directory via importlib so that relative imports
-within the package (e.g., ``from ..fallback import cpu``) resolve correctly.
 """
 
 import importlib.util
@@ -13,17 +11,21 @@ import numpy as np
 import pytest
 
 # ---------------------------------------------------------------------------
-# Package bootstrap: make 'math_coprocessor' importable despite the hyphen
-# in the directory name.  Every submodule that uses relative imports will
-# resolve through this top-level module entry.
+# Package bootstrap (vestigial — kept as a no-op defensive guard).
+#
+# Originally this block worked around the parent directory being named
+# math-coprocessor (hyphen), which Python cannot import as a module. After
+# the Session 023 chipset relocation, the inner package directory was
+# renamed math_coprocessor (underscore) and this workaround became
+# unnecessary. The code below is now a no-op in practice — every branch
+# is guarded by `if ... not in sys.modules` and normal pytest collection
+# via pyproject.toml `pythonpath = ["."]` resolves `math_coprocessor`
+# directly before this file runs. Left in place for belt-and-suspenders
+# safety; can be removed after the test suite is verified to pass under
+# the new layout.
 # ---------------------------------------------------------------------------
 
 _pkg_dir = Path(__file__).resolve().parent.parent
-
-# The package directory has a hyphen (math-coprocessor) which Python can't
-# import directly. We use importlib to register it as 'math_coprocessor'.
-# The pyproject.toml sets pythonpath=["."] and import_mode="importlib",
-# so pytest runs from math-coprocessor/ as the root.
 
 # Register the package as math_coprocessor so relative imports resolve
 if "math_coprocessor" not in sys.modules:

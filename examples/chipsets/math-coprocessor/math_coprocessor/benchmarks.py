@@ -2,11 +2,11 @@
 
 Measures GPU vs CPU performance across all chips at multiple input sizes.
 
-Run from project root:
-    python math-coprocessor/benchmarks.py
+Run from the chipset directory (examples/chipsets/math-coprocessor/):
+    python -m math_coprocessor.benchmarks
 
 Or with the venv:
-    math-coprocessor/.venv/bin/python math-coprocessor/benchmarks.py
+    .venv/bin/python -m math_coprocessor.benchmarks
 
 Outputs a markdown table comparing wall time and speedup ratios.
 """

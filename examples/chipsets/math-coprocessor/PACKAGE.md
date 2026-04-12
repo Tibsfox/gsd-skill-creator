@@ -35,7 +35,7 @@ The GPU is not one coprocessor — it is a **chipset** of mathematical engines:
 ### Install dependencies
 
 ```bash
-cd math-coprocessor
+cd examples/chipsets/math-coprocessor
 python -m venv .venv
 source .venv/bin/activate
 pip install numpy scipy pyyaml mcp
@@ -44,7 +44,7 @@ pip install numpy scipy pyyaml mcp
 ### Run the MCP server
 
 ```bash
-python -m math-coprocessor
+python -m math_coprocessor
 ```
 
 ### Configure Claude Code
@@ -56,8 +56,8 @@ Add to your Claude MCP settings (`.claude/settings.json` or project settings):
   "mcpServers": {
     "gsd-math-coprocessor": {
       "command": "python",
-      "args": ["-m", "math-coprocessor"],
-      "cwd": "/path/to/gsd-skill-creator"
+      "args": ["-m", "math_coprocessor"],
+      "cwd": "/path/to/gsd-skill-creator/examples/chipsets/math-coprocessor"
     }
   }
 }
@@ -148,7 +148,7 @@ Key settings:
 
 Override config path via environment variable:
 ```bash
-MATH_COPROCESSOR_CONFIG=/path/to/config.yaml python -m math-coprocessor
+MATH_COPROCESSOR_CONFIG=/path/to/config.yaml python -m math_coprocessor
 ```
 
 ## Inference Coexistence
@@ -169,8 +169,8 @@ inference_coexistence:
 ## Testing
 
 ```bash
-cd math-coprocessor
-python -m pytest tests/ -v
+cd examples/chipsets/math-coprocessor
+python -m pytest math_coprocessor/tests/ -v
 ```
 
 Test categories:
@@ -183,7 +183,8 @@ Test categories:
 ## Benchmarks
 
 ```bash
-python math-coprocessor/benchmarks.py
+cd examples/chipsets/math-coprocessor
+python -m math_coprocessor.benchmarks
 ```
 
 Outputs a markdown table comparing GPU vs CPU timing across operation sizes.
@@ -191,31 +192,38 @@ Outputs a markdown table comparing GPU vs CPU timing across operation sizes.
 ## File Structure
 
 ```
-math-coprocessor/
-  __init__.py          # Package entry, version
-  __main__.py          # python -m math-coprocessor
-  server.py            # MCP server (JSON-RPC over stdio)
-  config.py            # silicon.yaml parser
-  gpu.py               # CUDA runtime ctypes bindings
-  vram.py              # VRAM workspace allocator
-  streams.py           # CUDA stream isolation
-  benchmarks.py        # Performance benchmark runner
-  mcp-config.json      # MCP config snippet for Claude
-  chips/
-    __init__.py
-    algebrus.py        # Linear algebra (cuBLAS GPU path)
-    fourier.py         # Signal processing
-    vectora.py         # Vector calculus & geometry
-    statos.py          # Statistics
-    symbex.py          # Symbolic expressions
-  fallback/
-    __init__.py
-    cpu.py             # NumPy/SciPy CPU implementations
-  tests/
-    conftest.py        # Shared fixtures
-    test_safety.py     # S-01 through S-06
-    test_correctness.py # 20 correctness tests
-    test_integration.py # 6 integration tests
-    test_edge_cases.py  # 10 edge case tests
-    test_performance.py # 8 performance tests
+examples/chipsets/math-coprocessor/
+  chipset.yaml           # Chipset manifest (sibling of the python package)
+  README.md              # Chipset catalog stub
+  PACKAGE.md             # This file — full package API docs
+  pyproject.toml         # pytest config (testpaths = math_coprocessor/tests)
+  mcp-config.json        # MCP server config snippet for Claude
+  math_coprocessor/      # Python package (underscore, so it imports)
+    __init__.py          # Package entry, version
+    __main__.py          # python -m math_coprocessor
+    server.py            # MCP server (JSON-RPC over stdio)
+    config.py            # chipset.yaml parser
+    gpu.py               # CUDA runtime ctypes bindings
+    vram.py              # VRAM workspace allocator
+    streams.py           # CUDA stream isolation
+    jit.py               # NVRTC JIT kernel cache
+    benchmarks.py        # Performance benchmark runner
+    chips/
+      __init__.py
+      algebrus.py        # Linear algebra (cuBLAS GPU path)
+      fourier.py         # Signal processing
+      vectora.py         # Vector calculus & geometry
+      statos.py          # Statistics
+      symbex.py          # Symbolic expressions
+    fallback/
+      __init__.py
+      cpu.py             # NumPy/SciPy CPU implementations
+    tests/
+      conftest.py         # Shared fixtures
+      test_safety.py      # S-01 through S-06
+      test_correctness.py # 20 correctness tests
+      test_integration.py # 6 integration tests
+      test_edge_cases.py  # 10 edge case tests
+      test_performance.py # 8 performance tests
+      test_jit.py         # JIT kernel cache tests
 ```
