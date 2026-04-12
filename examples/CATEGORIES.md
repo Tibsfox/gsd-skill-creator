@@ -19,6 +19,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `music/` | Music domain knowledge — harmony analysis, counterpoint, rhythm and meter, form analysis, orchestration, ear training |
 | `physics/` | Physics domain knowledge — classical mechanics, electromagnetism, thermodynamics, quantum mechanics, relativity and astrophysics, experimental methods |
 | `philosophy/` | Philosophy domain knowledge — formal logic, ethics, epistemology, metaphysics, political philosophy, critical thinking |
+| `project-management/` | Project management — agile methods, risk management, stakeholder communication, estimation and planning, quality assurance, retrospective learning |
 | `deprecated/` | Artifacts superseded by newer work. Preserved for reference. Not installed by default. |
 
 ## Agent categories
@@ -36,6 +37,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `music/` | Music department agents — department chair (Bach), harmony theorist (Rameau), performer (Clara Schumann), composer (Messiaen), improviser (Coltrane), ethnomusicologist (Bartok), pedagogy guide (Kodaly) |
 | `physics/` | Physics department agents — department chair (Curie), classical mechanics (Newton), electromagnetism (Maxwell), thermodynamics (Boltzmann), quantum mechanics (Feynman), astrophysics (Chandrasekhar), pedagogy (Faraday) |
 | `philosophy/` | Philosophy department agents — department chair (Socrates), logician (Aristotle), ethicist (Kant), existentialist (Beauvoir), political philosopher (Confucius), metaphysician (Nagarjuna), pedagogy (Dewey) |
+| `project-management/` | Project management agents — department chair (Brooks), systems engineer (Hamilton), constraint theorist (Goldratt), quality (Deming), agile coach (Lei), planner (Gantt), leadership (Sinek) |
 | `deprecated/` | Superseded agents. Preserved for reference. |
 
 ## Team categories
@@ -50,6 +52,7 @@ The `examples/` library organizes skills, agents, and teams into a small set of 
 | `music/` | Music teams — full analysis, composition workshop, performance preparation |
 | `physics/` | Physics teams — full analysis, problem solving, experimental design |
 | `philosophy/` | Philosophy teams — full seminar, ethics committee, dialectic |
+| `project-management/` | Project management teams — project assessment, sprint execution, program review |
 | `deprecated/` | Superseded teams. Preserved for reference. |
 
 ## Chipset organization
