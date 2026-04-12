@@ -5020,3 +5020,33 @@ where available. Market figures are estimates compiled from multiple industry an
 and manufacturer disclosures.*
 
 *Addendum (VLIW in the AI-accelerator era, 2025–2026) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — VLIW Architectures
+
+### Machines
+
+- **Multiflow TRACE** — Fisher, 1984. First commercial
+  VLIW.
+- **Cydra 5** — Rau, 1989.
+- **TI TMS320C6x** — DSP VLIW, still shipping.
+- **Itanium** — Intel/HP, 2001-2020.
+- **Hexagon NPU** — Qualcomm AI accelerator, 2024+.
+- **Groq TSP** — inference accelerator.
+
+## DIY — Read a VLIW ISA manual
+
+Pick TI C62x or Groq. Read the instruction format. Note
+how many operations pack into one instruction word.
+
+## TRY — Hand-schedule a VLIW bundle
+
+Write C code for a small loop. Compile, look at the
+assembly, figure out which operations could bundle into
+one wide instruction. Do it by hand.
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
