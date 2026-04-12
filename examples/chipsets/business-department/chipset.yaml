@@ -1,0 +1,234 @@
+# Business Department Chipset Configuration
+# Instantiation of the department template pattern for the business domain.
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This chipset forks the math-department template and
+# remaps it for strategy, operations, entrepreneurship, finance, law,
+# and ethics.
+
+name: business-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated business department providing domain-routed
+  expertise through seven named agents (Drucker, Follett, Ohno,
+  Ford, Ma, Christensen, Mintzberg), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college business department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  organizational-strategy:
+    domain: business
+    description: "Strategy, management, purpose, and organizational design — Drucker, Mintzberg, Follett traditions"
+    triggers:
+      - "strategy"
+      - "management by objectives"
+      - "purpose"
+      - "organization"
+      - "decentralization"
+      - "knowledge worker"
+    agent_affinity: [drucker, mintzberg]
+
+  operations-and-lean:
+    domain: business
+    description: "Operations management and lean production — TPS, seven wastes, JIT, kanban, jidoka, SMED, 5 Whys"
+    triggers:
+      - "operations"
+      - "waste"
+      - "lean"
+      - "just-in-time"
+      - "kanban"
+      - "root cause"
+      - "5 whys"
+    agent_affinity: [ohno, ford]
+
+  entrepreneurship-and-innovation:
+    domain: business
+    description: "Entrepreneurship, innovation, disruption theory, jobs-to-be-done, MVPs, platforms, and network effects"
+    triggers:
+      - "entrepreneurship"
+      - "innovation"
+      - "disruption"
+      - "jobs-to-be-done"
+      - "MVP"
+      - "platform"
+      - "network effects"
+    agent_affinity: [christensen, ma]
+
+  corporate-finance-basics:
+    domain: business
+    description: "Corporate finance basics — NPV, IRR, payback, break-even, debt vs equity, working capital, financial statements"
+    triggers:
+      - "NPV"
+      - "IRR"
+      - "payback"
+      - "break-even"
+      - "debt vs equity"
+      - "working capital"
+      - "balance sheet"
+    agent_affinity: [drucker, mintzberg]
+
+  contracts-and-business-law:
+    domain: business
+    description: "Contracts, commercial law, property rights, consumer protection, employment basics, and the four IP regimes"
+    triggers:
+      - "contract"
+      - "intellectual property"
+      - "patent"
+      - "trademark"
+      - "copyright"
+      - "trade secret"
+      - "indemnification"
+    agent_affinity: [mintzberg, drucker]
+
+  business-ethics-and-governance:
+    domain: business
+    description: "Business ethics, corporate governance, stakeholder theory, CSR, ESG, and compliance vs culture"
+    triggers:
+      - "ethics"
+      - "governance"
+      - "stakeholders"
+      - "board"
+      - "fiduciary"
+      - "CSR"
+      - "ESG"
+      - "whistleblowing"
+    agent_affinity: [drucker, follett, mintzberg]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Drucker as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: drucker
+
+  agents:
+    - name: drucker
+      role: "department chair — purpose framing, classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: follett
+      role: "integration specialist — stakeholder conflict integration, power-with, law of the situation"
+      model: opus
+      tools: [Read, Grep, Write]
+
+    - name: ohno
+      role: "operations specialist — waste diagnosis, pull flow, root-cause investigation"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  business-analysis-team:
+    description: "Full department for complex multi-domain business problems"
+    agents: [drucker, follett, ohno, ford, ma, christensen, mintzberg]
+    use_when: "multi-domain, executive-level, or full-analysis requests"
+
+  business-workshop-team:
+    description: "Focused strategic workshop for a single strategic question"
+    agents: [drucker, christensen, follett, mintzberg]
+    use_when: "pivot, market entry, disruption response, strategy review"
+
+  business-practice-team:
+    description: "Pipeline-oriented operational practice — diagnose, design, embed"
+    agents: [ohno, ford, ma, mintzberg]
+    use_when: "ongoing operational improvement, process redesign, platform operations"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 business Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college business department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (drucker) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - strategy
+      - operations
+      - entrepreneurship
+      - finance
+      - law
+      - ethics
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "business-department"
+  record_types:
+    - name: BusinessAnalysis
+      description: "Diagnostic analysis — waste diagnosis, stakeholder analysis, disruption diagnosis, JTBD, role diagnosis"
+
+    - name: BusinessConstruct
+      description: "Designed artifact — flow design, integrative proposal, disruption strategy, development plan, mediation plan"
+
+    - name: BusinessReview
+      description: "Review or critique of an existing plan, artifact, or strategy document"
+
+    - name: BusinessExplanation
+      description: "Teaching artifact at a specified audience level"
+
+    - name: BusinessSession
+      description: "Session log linking work products to interaction context, with classification metadata"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "business"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Economic Organization & Markets"
+    - "Business Structures & Entrepreneurship"
+    - "Finance & Accounting Fundamentals"
+    - "Contracts, Rights & Legal Systems"
+    - "Ethics, Governance & Social Responsibility"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
