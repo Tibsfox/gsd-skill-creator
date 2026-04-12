@@ -1941,3 +1941,56 @@ mod:
 ---
 
 *Research compiled for the PNW Research Series, Rosetta Cluster: AI & Computation. Go's ecosystem represents a deliberate philosophical choice: fewer features, less abstraction, more clarity. The language that powers the cloud was designed to be boring -- and that turned out to be its greatest strength.*
+
+---
+
+## Study Guide — Go Ecosystem
+
+### Tool map
+
+- **go** (the command): build, test, run, mod, generate, vet.
+- **gopls** (LSP): editor integration.
+- **delve** (dlv): debugger.
+- **golangci-lint**: linting.
+- **testify**: assertions + mocks.
+- **cobra, viper**: CLIs and config.
+- **gin, echo, chi, fiber**: HTTP routers.
+- **sqlc, ent, gorm**: database layers.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Build a CLI with cobra
+
+`go install github.com/spf13/cobra-cli@latest`. Generate a
+skeleton, add one subcommand. Fifteen minutes.
+
+### DIY 2 — Write table-driven tests
+
+```go
+tests := []struct{ in, want string }{
+    {"a", "A"}, {"abc", "ABC"},
+}
+for _, tc := range tests {
+    if got := strings.ToUpper(tc.in); got != tc.want {
+        t.Errorf("ToUpper(%q) = %q, want %q", tc.in, got, tc.want)
+    }
+}
+```
+
+This is the canonical Go testing style.
+
+### TRY — Ship a real tool
+
+Pick something small that you currently do in a shell
+pipeline (log parser, file renamer, report generator).
+Rewrite in Go. Cross-compile for three platforms with
+`GOOS=linux GOARCH=amd64 go build`. Distribute the binary.
+
+---
+
+## Related College Departments (Go ecosystem)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
