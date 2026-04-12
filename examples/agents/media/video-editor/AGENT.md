@@ -17,8 +17,8 @@ category: media
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/video-editor
+first_seen: 2026-04-11
+first_path: examples/agents/media/video-editor/AGENT.md
 superseded_by: null
 ---
 # Video Editor Agent

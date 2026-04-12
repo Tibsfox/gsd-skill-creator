@@ -8,8 +8,8 @@ category: gsd
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/gsd-assumptions-analyzer
+first_seen: 2026-04-11
+first_path: examples/agents/gsd/gsd-assumptions-analyzer/AGENT.md
 superseded_by: null
 ---
 <role>

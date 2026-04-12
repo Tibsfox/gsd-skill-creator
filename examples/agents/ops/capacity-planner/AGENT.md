@@ -8,8 +8,8 @@ category: ops
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/capacity-planner
+first_seen: 2026-02-07
+first_path: .claude/agents/capacity-planner.md
 superseded_by: null
 ---
 # Capacity Planner Agent
