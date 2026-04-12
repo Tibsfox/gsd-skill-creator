@@ -1,0 +1,1589 @@
+% ============================================================================
+%  gsd-intermediate-guide.tex
+%  GSD: The Intermediate Guide
+%  Wave 1 / Track B — Authored by Tibsfox
+%  Licensed CC BY-SA 4.0. GSD itself is MIT-licensed.
+%  Compile: 3-pass xelatex with TEXINPUTS=../shared:
+% ============================================================================
+\documentclass[11pt,letterpaper,openany]{book}
+\title{GSD: The Intermediate Guide}
+\author{Tibsfox}
+\date{}
+
+\makeatletter
+\def\input@path{{../shared/}}
+\makeatother
+
+\input{gsd-guides-preamble.tex}
+\input{gsd-command-data.tex}
+
+% Tighten listings a touch for ASCII diagrams
+\lstdefinestyle{gsddiagram}{
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{gsdcodebg},
+  frame=leftline,
+  framerule=2pt,
+  rulecolor=\color{gsdnavy},
+  xleftmargin=1em,
+  xrightmargin=0.5em,
+  aboveskip=0.8em,
+  belowskip=0.8em,
+  breaklines=false,
+  columns=fixed,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+\begin{document}
+
+% =========================================================================
+% Title page
+% =========================================================================
+\begin{titlepage}
+\centering
+\vspace*{2.5cm}
+{\headingfont\Huge\bfseries\color{gsdnavy} GSD\par}
+\vspace{0.3cm}
+{\headingfont\LARGE\bfseries\color{gsdnavy} The Intermediate Guide\par}
+\vspace{1.2cm}
+{\headingfont\Large\itshape Master the full workflow. Build with confidence.\par}
+\vspace{2.0cm}
+{\large Authored by Tibsfox\par}
+\vspace{0.4cm}
+{\small For GSD v1.35.0 \par}
+\vfill
+{\footnotesize \cclicense\par}
+\vspace{0.4cm}
+{\footnotesize Upstream: \texttt{github.com/gsd-build/get-shit-done}\par}
+\end{titlepage}
+
+\frontmatter
+\tableofcontents
+\clearpage
+
+\mainmatter
+
+% =========================================================================
+\chapter{Beyond the Basics}
+% =========================================================================
+
+You have run \gsdcmd{new-project}. You have watched Claude spawn researchers, seen a \gsdfile{.planning/} directory appear, answered discussion questions, executed a plan, and shipped something. GSD worked. You liked it. You came back.
+
+This guide is what comes next.
+
+\section{What this guide assumes}
+
+You are comfortable in a terminal. You know what a git commit is and why conventional commits matter. You have used Claude Code (or another GSD-supported runtime like OpenCode, Gemini CLI, Kilo, or Codex) for more than a toy project. You have completed at least one full GSD phase --- ideally a full milestone --- and now you want to know \emph{how the thing actually works} so you can stop wrestling it and start steering it.
+
+If any of that sounds too advanced, the Beginner's Guide will serve you better. Come back here after your first shipped milestone.
+
+\section{The gap between using GSD and understanding GSD}
+
+The first time you run \gsdcmd{plan-phase}, four researchers fire off in parallel, a planner runs, a plan-checker reviews the plan up to three times, and a PLAN.md file appears in your phase directory. If you stopped and asked yourself at each step ``what is this agent reading? what is it writing? why does it spawn \emph{here} and not later?'' you would have a working mental model of GSD.
+
+Most people do not stop. Most people just run the command and look at the output. That works until the day it doesn't --- until a plan comes back wrong, or a wave of parallel executors collides on a file, or STATE.md drifts from reality and suddenly \gsdcmd{progress} is lying to you. When that day arrives you have two options: dig in and learn, or blame the tool.
+
+This guide is the dig-in option. By the end of it, you will understand:
+
+\begin{itemize}[itemsep=2pt]
+  \item Why GSD maintains the file ecosystem it does, and which file feeds which agent.
+  \item What each of the six main workflow stages actually does --- not just its name.
+  \item When to trust the defaults and when to override them.
+  \item How to recover when something goes sideways, without nuking \gsdfile{.planning/} and starting over.
+  \item How to configure GSD for your team, your budget, and your tolerance for friction.
+\end{itemize}
+
+\section{What you will \emph{not} find here}
+
+This is not the architecture deep dive. If you want the orchestrator-subagent internals, the XML prompt structure, the security model at the code level, team adoption playbooks, or SDK automation, that lives in the Advanced Guide. If you want a quick flag lookup, the Command Reference is a better tool than flipping through chapters.
+
+This guide sits in the middle on purpose. It explains \emph{enough} mechanism to let you troubleshoot and configure with confidence, without drowning you in implementation detail you will never touch.
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item Your target: understand \emph{why} GSD creates the files it does, not just that it does.
+  \item Every chapter that follows works standalone --- skip around.
+  \item When something goes wrong, the failure mode almost always traces back to one of the files we are about to explain.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{How GSD Thinks --- Context Engineering}
+% =========================================================================
+
+GSD calls itself a meta-prompting framework. What that actually means is: GSD is an opinionated pipeline for turning a vague idea into a series of focused prompts, each handed to a fresh AI agent with exactly the context it needs and nothing more. Understanding that sentence is understanding GSD.
+
+\section{The context rot problem}
+
+Every AI coding agent has a context window --- roughly 200{,}000 tokens for current frontier models, up to 1M for Opus 4.6 and Sonnet 4.6 under the right conditions. As you work, that window fills with conversation history, tool outputs, file reads, and system prompts. Past a certain point, quality degrades: the model starts forgetting earlier decisions, contradicting itself, hallucinating file paths, and confusing one feature for another. The community calls this \emph{context rot}.
+
+Long chat sessions rot. Long-running agent tasks rot. The cure that every power user eventually discovers is ``just start a new session.'' GSD bakes that insight into the workflow at the structural level.
+
+\begin{lstlisting}[style=gsddiagram]
+ WITHOUT GSD                             WITH GSD
+ (accumulated context)                   (fresh context per agent)
+
+  [ 200K window ]                         [ 200K ]   [ 200K ]   [ 200K ]
+  conversation 1                          researcher planner   executor
+    + conversation 2                         |          |          |
+      + conversation 3                       v          v          v
+        + tool output                     RESEARCH   PLAN.md    SUMMARY
+          + tool output                      .md
+            + ...
+              + QUALITY DROPS
+\end{lstlisting}
+
+The first time you see GSD's wave execution, this is the design choice you're watching: the orchestrator spawns one agent per plan with a fresh 200K window, and when the agent finishes its atomic task it terminates. No accumulated history. No rot. The next wave spawns fresh agents with fresh windows, reading only the compact artifacts they need.
+
+\section{Files are the memory}
+
+If agents are ephemeral, where does project memory live? On disk, as Markdown. GSD's core bet is that human-readable files are the right state store for an AI workflow --- inspectable by you, inspectable by every agent, survivable across context resets (\texttt{/clear}), and version-controllable with git.
+
+The file ecosystem has a deliberate shape:
+
+\begin{lstlisting}[style=gsddiagram]
+  .planning/
+   |
+   +-- PROJECT.md         <-- vision, constraints, evolution rules
+   +-- REQUIREMENTS.md    <-- v1 / v2 / out-of-scope scope IDs
+   +-- ROADMAP.md         <-- phases and their status
+   +-- STATE.md           <-- "where am I right now?" living memory
+   +-- config.json        <-- workflow toggles, model profile, gates
+   +-- MILESTONES.md      <-- completed milestone archive
+   +-- research/          <-- from /gsd-new-project
+   +-- codebase/          <-- from /gsd-map-codebase (brownfield)
+   +-- phases/
+        +-- 01-auth-setup/
+             +-- 01-CONTEXT.md       <-- discuss-phase output
+             +-- 01-RESEARCH.md      <-- plan-phase researcher output
+             +-- 01-VALIDATION.md    <-- Nyquist test-coverage contract
+             +-- 01-UI-SPEC.md       <-- ui-phase design contract
+             +-- 01-01-PLAN.md       <-- planner output
+             +-- 01-02-PLAN.md
+             +-- 01-01-SUMMARY.md    <-- executor output
+             +-- 01-VERIFICATION.md  <-- verifier output
+             +-- 01-UAT.md           <-- verify-work output
+             +-- 01-REVIEW.md        <-- code-review output
+\end{lstlisting}
+
+Each file is both an input and an output. CONTEXT.md is \emph{written by} discuss-phase and \emph{read by} the researcher, planner, and executor. PLAN.md is written by the planner and read by the executor and plan-checker. Nothing is coincidental --- every artifact has a producer and a set of consumers.
+
+\section{Which file feeds which agent}
+
+This is the mapping worth memorizing. When a plan goes wrong, trace backwards: which file shaped the decision? When a researcher returns weak findings, ask: did CONTEXT.md give it enough to work with?
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{File} & \textbf{Consumed by (roughly)} \\
+\midrule
+PROJECT.md & Every agent. The always-loaded north star. \\
+REQUIREMENTS.md & Planner, verifier, auditor. \\
+ROADMAP.md & Every orchestrator that needs to know the phase sequence. \\
+STATE.md & Every agent. Decisions, blockers, position, session memory. \\
+CONTEXT.md (per phase) & Researcher, planner, executor. \\
+RESEARCH.md (per phase) & Planner, plan-checker. \\
+VALIDATION.md (per phase) & Planner, executor (test coverage contract). \\
+UI-SPEC.md (per phase) & Executor, UI auditor. \\
+PLAN.md (per plan) & Executor, plan-checker. \\
+SUMMARY.md (per plan) & Verifier, state tracking, next-wave executors. \\
+\bottomrule
+\end{tabularx}
+
+\section{Size limits and why they exist}
+
+PROJECT.md and STATE.md are loaded into every agent's context. If they balloon, every agent pays the tax --- and you lose the context budget you wanted reserved for the actual work. GSD's templates intentionally keep these files concise. A PROJECT.md that reaches 300 lines is usually hiding decisions that belong in a CONTEXT.md for a specific phase; a STATE.md over 200 lines usually has old session notes that should have been archived into MILESTONES.md.
+
+If a file gets big and your plans start looking vague, that is the failure mode to suspect.
+
+\begin{gsdimportant}
+These files \emph{are} the context. Edit them carefully. A sloppy edit to PROJECT.md propagates to every future agent spawn on the project. If you are going to hand-edit, prefer CONTEXT.md for a specific phase --- its blast radius is scoped.
+\end{gsdimportant}
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item Fresh contexts beat accumulated contexts. GSD's wave model is how it operationalizes that.
+  \item File-based state is what makes context resets safe.
+  \item Every artifact has a known producer and known consumers --- troubleshooting starts by naming the file.
+  \item Keep PROJECT.md and STATE.md lean. They tax every agent.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{The Planning Directory}
+% =========================================================================
+
+This chapter is a guided tour of \gsdfile{.planning/}. Beginners treat it as a black box. Intermediate users open it up.
+
+\section{Top-level layout}
+
+\gsdfile{.planning/} is created by \gsdcmd{new-project} and grows as you work. The top-level files are stable --- you will see them on every project --- and the subdirectories appear on demand.
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{File / directory} & \textbf{Role} \\
+\midrule
+\gsdfile{PROJECT.md} & Project vision, constraints, decisions that outlive phases. \\
+\gsdfile{REQUIREMENTS.md} & Scoped requirements with IDs (v1 / v2 / out-of-scope). \\
+\gsdfile{ROADMAP.md} & Phase breakdown with per-phase \texttt{Depends on} and status. \\
+\gsdfile{STATE.md} & Living memory: current position, decisions, blockers, metrics. \\
+\gsdfile{config.json} & Workflow toggles, model profile, gates, git strategy. \\
+\gsdfile{MILESTONES.md} & Archive of completed milestones. \\
+\gsdfile{HANDOFF.json} & Written by \gsdcmd{pause-work}, restored by \gsdcmd{resume-work}. \\
+\gsdfile{research/} & Project-level research from \gsdcmd{new-project}. \\
+\gsdfile{codebase/} & Brownfield maps from \gsdcmd{map-codebase} or \gsdcmd{scan}. \\
+\gsdfile{phases/} & Per-phase directories --- the bulk of active work. \\
+\gsdfile{seeds/} & Forward-looking ideas with trigger conditions (\gsdcmd{plant-seed}). \\
+\gsdfile{threads/} & Lightweight persistent context threads (\gsdcmd{thread}). \\
+\gsdfile{todos/} & Captured ideas (\texttt{pending/} and \texttt{done/}). \\
+\gsdfile{debug/} & Active and resolved debug sessions. \\
+\gsdfile{reports/} & Session reports from \gsdcmd{session-report}. \\
+\gsdfile{forensics/} & Diagnostic reports from \gsdcmd{forensics}. \\
+\gsdfile{intel/} & Optional queryable codebase intelligence index. \\
+\gsdfile{ui-reviews/} & Screenshots from \gsdcmd{ui-review} (auto-gitignored). \\
+\gsdfile{learnings/} & Extracted patterns from \gsdcmd{extract-learnings}. \\
+\bottomrule
+\end{tabularx}
+
+\section{Inside a phase directory}
+
+Phase directories are where most of the action happens. They follow a naming convention --- zero-padded phase number, a hyphen, a slug. For an \texttt{auth-setup} phase at position 1 you get \gsdfile{01-auth-setup/}. If you configured \texttt{project\_code} in \gsdfile{config.json}, phase dirs get a prefix like \gsdfile{ABC-01-auth-setup/}.
+
+A typical phase directory mid-work:
+
+\begin{lstlisting}[style=gsddiagram]
+  phases/01-auth-setup/
+  |
+  +-- 01-CONTEXT.md         <-- /gsd-discuss-phase 1
+  +-- 01-UI-SPEC.md         <-- /gsd-ui-phase 1       (frontend phases)
+  +-- 01-RESEARCH.md        <-- /gsd-plan-phase 1 (researchers)
+  +-- 01-VALIDATION.md      <-- /gsd-plan-phase 1 (Nyquist auditor)
+  +-- 01-01-PLAN.md         <-- /gsd-plan-phase 1 (planner)
+  +-- 01-02-PLAN.md         <-- /gsd-plan-phase 1 (planner)
+  +-- 01-01-SUMMARY.md      <-- /gsd-execute-phase 1 (executor A)
+  +-- 01-02-SUMMARY.md      <-- /gsd-execute-phase 1 (executor B)
+  +-- 01-VERIFICATION.md    <-- /gsd-execute-phase 1 (verifier)
+  +-- 01-UAT.md             <-- /gsd-verify-work 1
+  +-- 01-REVIEW.md          <-- /gsd-code-review 1
+  +-- 01-UI-REVIEW.md       <-- /gsd-ui-review 1
+  +-- 01-SECURITY.md        <-- /gsd-secure-phase 1   (optional)
+  +-- 01-DISCUSSION-LOG.md  <-- audit trail of discuss-phase
+\end{lstlisting}
+
+Two number conventions live here. The outer two-digit number is the \emph{phase} number (\texttt{01}). Plans inside a phase get a second two-digit number (\texttt{01-01-PLAN.md}, \texttt{01-02-PLAN.md}). Plans are the unit of parallel execution --- each plan in a wave gets its own executor.
+
+\section{What to commit, what not to}
+
+By default, \gsdfile{.planning/} commits to git. GSD treats planning artifacts as part of the project's history --- phase intent is as valuable to the team as the code it produced. Two knobs change this:
+
+\begin{itemize}[itemsep=2pt]
+  \item \texttt{planning.commit\_docs} --- set to \texttt{false} to stop committing. The installer auto-detects this: if \gsdfile{.planning/} is already in \gsdfile{.gitignore}, it treats \texttt{commit\_docs} as \texttt{false} regardless of the config value.
+  \item \texttt{planning.search\_gitignored} --- set to \texttt{true} so broad searches (for example, \texttt{grep} through the repo) still find planning files even when they are gitignored.
+\end{itemize}
+
+Keep planning commits on for team projects where shared visibility matters. Turn them off for sensitive/private work or if your team actively dislikes planning noise in diffs. Either way, \gsdcmd{pr-branch} gives you a planning-free branch for PR review.
+
+\section{config.json in one page}
+
+\gsdfile{.planning/config.json} is the single source of truth for how GSD behaves on this project. It lives inside \gsdfile{.planning/}, so per-project settings are self-documenting; global defaults live at \gsdfile{\textasciitilde/.gsd/defaults.json} and are merged in at project creation time with per-project values winning.
+
+The skeleton you will see most often:
+
+\begin{lstlisting}
+{
+  "mode": "interactive",
+  "granularity": "standard",
+  "model_profile": "balanced",
+  "planning": {
+    "commit_docs": true,
+    "search_gitignored": false
+  },
+  "workflow": {
+    "research": true,
+    "plan_check": true,
+    "verifier": true,
+    "nyquist_validation": true,
+    "ui_phase": true,
+    "ui_safety_gate": true,
+    "discuss_mode": "discuss",
+    "skip_discuss": false,
+    "code_review": true
+  },
+  "git": {
+    "branching_strategy": "none"
+  },
+  "parallelization": {
+    "enabled": true,
+    "max_concurrent_agents": 3
+  },
+  "hooks": {
+    "context_warnings": true,
+    "workflow_guard": false
+  }
+}
+\end{lstlisting}
+
+Every key is optional. Missing keys default to \texttt{true} for workflow toggles (the ``absent equals enabled'' rule) and to sensible defaults for everything else. Chapter 12 covers each group in depth.
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item \gsdfile{.planning/} is not a black box. Open it and read the files.
+  \item Phase directories follow a strict naming convention. The numbers matter.
+  \item \texttt{planning.commit\_docs} controls whether planning joins git history. Pick intentionally.
+  \item \gsdfile{config.json} is the project's control panel.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{The Full Lifecycle}
+% =========================================================================
+
+The headline GSD workflow is a loop. One pass through the loop handles one phase:
+
+\begin{lstlisting}[style=gsddiagram]
+   /gsd-discuss-phase   <-- capture your preferences
+         |
+   /gsd-ui-phase        <-- (optional, frontend only) design contract
+         |
+   /gsd-plan-phase      <-- research + plan + verify loop
+         |
+   /gsd-execute-phase   <-- parallel wave execution
+         |
+   /gsd-code-review     <-- (optional) structured review
+         |
+   /gsd-verify-work     <-- UAT with auto-diagnosis
+         |
+   /gsd-ship            <-- create PR (optional)
+         |
+   next phase? yes --> (loop back to discuss-phase)
+             |  no
+             v
+   /gsd-audit-milestone
+   /gsd-complete-milestone
+         |
+   /gsd-new-milestone   <-- start the next version
+\end{lstlisting}
+
+This loop is the spine of every chapter that follows. Each stage is a separate command that reads specific files, writes specific files, and can be run or re-run in isolation. That separation is not bureaucracy --- it is what lets you recover surgically when something breaks.
+
+\section{When to use each step}
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Stage} & \textbf{Use when} \\
+\midrule
+\gsdcmd{discuss-phase} & You haven't locked in implementation decisions for the phase. This is the single biggest lever on plan quality. Skipping it guarantees Claude fills the gaps with its own guesses. \\
+\gsdcmd{ui-phase} & The phase builds frontend UI. The design contract prevents ``five components, five visual languages'' drift. \\
+\gsdcmd{plan-phase} & After discussion is locked. Runs research (4 parallel agents) then planner then plan-checker loop. \\
+\gsdcmd{execute-phase} & After planning is verified. Runs parallel executor waves. \\
+\gsdcmd{code-review} & After execution, before verification, when you want a structured bug/security pass. Configurable via \texttt{workflow.code\_review\_depth}. \\
+\gsdcmd{verify-work} & After execution (and optional code review). Manual UAT with auto-diagnosis --- the human quality gate. \\
+\gsdcmd{ship} & After UAT passes. Creates a GitHub PR with an auto-generated body. \\
+\gsdcmd{audit-milestone} & When all phases in a milestone are done. Catches gaps before you tag a release. \\
+\gsdcmd{complete-milestone} & When the audit is clean. Archives and tags. \\
+\gsdcmd{new-milestone} & When you are ready to start the next version cycle. Scans seeds, updates PROJECT.md, generates new REQUIREMENTS.md / ROADMAP.md. \\
+\bottomrule
+\end{tabularx}
+
+\section{Skipping steps: when it is and isn't OK}
+
+Not every stage runs on every phase. Some combinations are fine, others get you into trouble.
+
+\textbf{Safe to skip:}
+\begin{itemize}[itemsep=2pt]
+  \item \gsdcmd{ui-phase} on backend-only phases. GSD detects this and won't nag.
+  \item \gsdcmd{code-review} when the phase touched trivial code and verification caught the issues you care about. Or when you plan to rely on \gsdcmd{audit-fix} later.
+  \item \gsdcmd{ship} when you don't use GitHub PRs for this repo.
+\end{itemize}
+
+\textbf{Skip at your own risk:}
+\begin{itemize}[itemsep=2pt]
+  \item \gsdcmd{discuss-phase} --- unless the phase is genuinely well-scoped from \gsdfile{ROADMAP.md} alone, this is where plan quality is made or broken. If you must skip, set \texttt{workflow.skip\_discuss: true} and rely on a comprehensive PROJECT.md.
+  \item \gsdcmd{plan-phase} --- there is no safe skip. You can disable research (\gsdflag{skip-research}) or plan-checker (\gsdflag{skip-verify}) inside it, but the planner itself is not optional.
+  \item \gsdcmd{verify-work} --- skipping the UAT is skipping the human-in-the-loop. On anything user-facing, do not.
+\end{itemize}
+
+\textbf{Do not skip:}
+\begin{itemize}[itemsep=2pt]
+  \item \gsdcmd{execute-phase}. That is where code gets written.
+  \item \gsdcmd{audit-milestone} before \gsdcmd{complete-milestone} when shipping to production.
+\end{itemize}
+
+\section{Shortcut commands}
+
+Two commands exist to bypass the full loop for trivial work:
+
+\begin{itemize}[itemsep=2pt]
+  \item \gsdcmd{quick} --- ad-hoc task with GSD guarantees. Flags \gsdflag{discuss}, \gsdflag{research}, and \gsdflag{full} let you re-opt-in to discussion, research, and the full plan-check-verify pipeline. Good for bug fixes, small features, config changes.
+  \item \gsdcmd{fast} --- inline trivial tasks. No subagents, no planning, nothing. Good for typos, config tweaks, forgotten commits. Not a replacement for \gsdcmd{quick}.
+\end{itemize}
+
+And one command for when you do not want to think about which stage is next:
+
+\begin{itemize}[itemsep=2pt]
+  \item \gsdcmd{next} --- auto-detects your current state and runs the appropriate command. Great for ``I came back from lunch, where was I?''
+\end{itemize}
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item The workflow is a loop of six core commands per phase, plus milestone wrap-up commands.
+  \item Each stage is independently re-runnable --- that separation is what makes recovery possible.
+  \item Discussion and UAT are where most users are tempted to skip. Don't, unless you know exactly why.
+  \item \gsdcmd{next} is your friend when you are not sure what to run.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{Discussion Phase Mastery}
+% =========================================================================
+
+\gsdcmd{discuss-phase} is the stage most people underestimate. It looks like a formality --- ``just answer some questions so Claude knows what I want.'' It is actually the single highest-leverage stage in the whole workflow. Every file downstream is shaped by CONTEXT.md. A thoughtful discussion produces a plan that you don't have to fight. A rushed discussion produces a plan you spend \gsdcmd{verify-work} rejecting.
+
+\section{What discuss-phase actually does}
+
+Under the hood, discuss-phase spawns an advisor agent that reads PROJECT.md, ROADMAP.md, the current phase's goal, and any existing CONTEXT.md (if you are re-running). It surfaces the phase's ``gray areas'' --- decisions the planner will need to make, which you haven't made yet --- and asks you to resolve them.
+
+The output is \gsdfile{\{phase\}-CONTEXT.md}, a structured file with six sections:
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Section} & \textbf{Holds} \\
+\midrule
+\texttt{<domain>} & The phase boundary --- what's in scope and what isn't. \\
+\texttt{<decisions>} & Locked implementation decisions (libraries, patterns, tradeoffs). \\
+\texttt{<canonical\_refs>} & Specs, docs, or upstream references agents must read. \\
+\texttt{<code\_context>} & Reusable assets, patterns, integration points from existing code. \\
+\texttt{<specifics>} & Your preferences and specific guidance. \\
+\texttt{<deferred>} & Ideas noted for future phases. \\
+\bottomrule
+\end{tabularx}
+
+A full audit trail lands in \gsdfile{\{phase\}-DISCUSSION-LOG.md}, so you can see what was asked and what you answered.
+
+\section{Two modes: discuss vs. assumptions}
+
+GSD has two ways to run discuss-phase. The default is \texttt{discuss} --- open-ended interview-style questions, grouped by gray area. The alternative is \texttt{assumptions}, introduced in v1.28. You switch via \gsdcmd{settings} or directly in \gsdfile{config.json}:
+
+\begin{lstlisting}
+"workflow": {
+  "discuss_mode": "assumptions"
+}
+\end{lstlisting}
+
+\textbf{Discuss mode} (the default):
+\begin{itemize}[itemsep=2pt]
+  \item Claude identifies gray areas, presents them for selection, then asks ${\sim}4$ questions per area.
+  \item Best for early phases, new codebases, or when you have strong opinions to express proactively.
+  \item Typical interaction count: 15--20.
+\end{itemize}
+
+\textbf{Assumptions mode}:
+\begin{itemize}[itemsep=2pt]
+  \item Claude deeply analyzes the codebase via a subagent (reads 5--15 relevant files).
+  \item Forms assumptions with evidence and a confidence level (Confident / Likely / Unclear).
+  \item Presents them for confirmation or correction --- you only touch the ones that are wrong.
+  \item Best for established codebases with clear patterns.
+  \item Typical interaction count: 2--4.
+\end{itemize}
+
+The output CONTEXT.md is identical in both modes. Downstream agents do not care which path you took.
+
+\section{Flags that change the flow}
+
+\gsdcmd{discuss-phase} accepts several flags that reshape how questions are asked:
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Flag} & \textbf{Effect} \\
+\midrule
+\gsdflag{auto} & Auto-select the recommended default for every question. In assumptions mode, skips the confirm gate and auto-resolves anything marked Unclear. \\
+\gsdflag{batch} & Group questions into batches instead of one-by-one. Faster for power users. \\
+\gsdflag{analyze} & Add a trade-off analysis panel for each question. Slower, better-reasoned. \\
+\gsdflag{power} & File-based bulk answering from a prepared answers file. Use when you have a PRD or spec you can translate into answers programmatically. \\
+\gsdflag{text} & Plain-text numbered lists instead of TUI menus. Required for remote Claude Code sessions (\texttt{/rc} mode). \\
+\bottomrule
+\end{tabularx}
+
+And the top-level \gsdflag{chain} on \gsdcmd{quick} (not discuss-phase) auto-advances through discuss $\rightarrow$ plan $\rightarrow$ execute. Composable with \gsdflag{discuss} and \gsdflag{research} on \gsdcmd{quick}.
+
+\section{When to invest in discussion}
+
+Not every phase deserves 20 minutes of interview. A rough calibration:
+
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{First phase of a new milestone.} Invest heavily. This is where architecture decisions compound. Use standard discuss mode, no \gsdflag{auto}, with \gsdflag{analyze} if the phase touches anything you are unsure about.
+  \item \textbf{Mid-milestone phases in familiar territory.} Assumptions mode shines. Most of your conventions are already locked in from earlier phases.
+  \item \textbf{Brownfield phases.} Run \gsdcmd{map-codebase} first, then use assumptions mode --- Claude now has a full map to form assumptions from.
+  \item \textbf{Bug-fix phases.} \gsdcmd{quick \gsdflag{discuss}} is usually enough. Or \gsdcmd{discuss-phase \gsdflag{auto}} if defaults are probably right.
+  \item \textbf{Speculative / R\&D phases.} Use \gsdcmd{explore} first for Socratic ideation, then \gsdcmd{discuss-phase \gsdflag{analyze}} to pin down tradeoffs.
+\end{itemize}
+
+\section{Skipping discuss-phase entirely}
+
+There is a switch to opt out of discussion altogether:
+
+\begin{lstlisting}
+"workflow": {
+  "skip_discuss": true
+}
+\end{lstlisting}
+
+When \texttt{skip\_discuss} is \texttt{true}, running \gsdcmd{autonomous} bypasses discuss-phase entirely. A minimal CONTEXT.md is generated from the ROADMAP phase goal alone. This is intended for projects where PROJECT.md and REQUIREMENTS.md are comprehensive enough that discussion adds no new information --- usually autonomous multi-phase runs on well-understood work.
+
+\begin{gsdwarning}
+If your plans come back vague or misaligned, \gsdcmd{discuss-phase} is almost always the fix. Most ``GSD planned the wrong thing'' complaints trace back to a shallow or skipped discussion.
+\end{gsdwarning}
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item CONTEXT.md shapes everything downstream. Treat discuss-phase as a primary product, not a ceremony.
+  \item Assumptions mode trades an interview for a confirmation pass. Use it on established codebases.
+  \item \gsdflag{auto}, \gsdflag{batch}, \gsdflag{analyze}, \gsdflag{power} reshape pacing without changing the output format.
+  \item Skip discussion only with \texttt{workflow.skip\_discuss: true} and a \emph{very} complete PROJECT.md.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{Planning Deep Dive}
+% =========================================================================
+
+\gsdcmd{plan-phase} is the second-highest leverage stage after discussion. It runs three things back to back: research, planning, and verification. Each has moving parts worth understanding.
+
+\section{Four researchers in parallel}
+
+When research is enabled (\texttt{workflow.research: true}, which is the default), \gsdcmd{plan-phase} spawns four researcher agents in parallel, each with a fresh context window and a narrow mandate:
+
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Stack researcher} --- investigates the tech stack, libraries, language features, and constraints specific to the phase.
+  \item \textbf{Features researcher} --- investigates what this kind of feature usually entails, what's table stakes, what's differentiating.
+  \item \textbf{Architecture researcher} --- investigates patterns, data flow, component boundaries, and integration points.
+  \item \textbf{Pitfalls researcher} --- investigates known failure modes, edge cases, security considerations, and things people routinely get wrong.
+\end{itemize}
+
+Outputs land in \gsdfile{\{phase\}-RESEARCH.md}. This file is then consumed by the planner and the plan-checker.
+
+If you want to skip this step (you know the domain cold, or the phase is mechanical), use \gsdflag{skip-research}. If you want to force re-research on an existing phase, use \gsdflag{research}.
+
+\section{The Nyquist validation layer}
+
+Since v1.27, GSD runs an 8th plan-check dimension that looks specifically at test coverage. The Nyquist auditor maps each requirement in the phase to a specific test command before any code is written. If a task lacks an automated verify command, the plan-checker rejects it.
+
+The output is \gsdfile{\{phase\}-VALIDATION.md}, the ``feedback contract'' for the phase. It tells the executor, when you commit a task, which command proves it's done. You can disable this with \texttt{workflow.nyquist\_validation: false} for rapid-prototyping phases where test infrastructure isn't the focus.
+
+For phases executed before Nyquist existed, \gsdcmd{validate-phase N} retroactively audits coverage and generates the missing tests.
+
+\section{The planner and the plan-checker loop}
+
+Research feeds the planner. The planner reads PROJECT.md, REQUIREMENTS.md, CONTEXT.md, RESEARCH.md, and VALIDATION.md, then writes one or more \gsdfile{\{phase\}-\{N\}-PLAN.md} files --- atomic, XML-structured execution plans.
+
+Each plan contains tasks. Each task has a type, a description, acceptance criteria, the files it touches, and --- thanks to Nyquist --- a verify command. A typical plan has 2--3 tasks. More than that is a smell; GSD will usually split a big plan into multiple numbered plans within the phase rather than let one plan get bloated.
+
+After the planner writes plans, the plan-checker runs. Up to three iterations:
+
+\begin{lstlisting}[style=gsddiagram]
+  Planner writes PLAN.md files
+         |
+         v
+  Plan Checker inspects
+         |
+    +----+-----+
+    |          |
+   PASS      FAIL
+    |          |
+    v          v
+   done      Planner revises
+              |
+              loop (max 3 iterations)
+\end{lstlisting}
+
+The plan-checker checks eight dimensions including task atomicity, acceptance criteria clarity, file scope reachability, Nyquist coverage, and dependency consistency with ROADMAP.md. If after three iterations the plan still fails, it surfaces the failure to you rather than silently shipping a broken plan.
+
+Set \texttt{workflow.plan\_check: false} to disable the loop. Use the \gsdflag{skip-verify} flag on \gsdcmd{plan-phase} for a one-off skip. Both trade quality for speed.
+
+\section{XML task format, briefly}
+
+GSD plans are formatted as XML inside Markdown. The planner produces blocks that look roughly like this (simplified):
+
+\begin{lstlisting}
+<task id="01-01-t1" type="implementation">
+  <description>
+    Add JWT signing utility in src/auth/jwt.ts.
+  </description>
+  <acceptance>
+    - Exports signAccessToken() and verifyAccessToken()
+    - Uses HS256 for dev, RS256 for prod (from env)
+  </acceptance>
+  <files>
+    - src/auth/jwt.ts (new)
+    - src/auth/jwt.test.ts (new)
+  </files>
+  <verify>npm test -- src/auth/jwt.test.ts</verify>
+</task>
+\end{lstlisting}
+
+The executor reads these and implements each task atomically --- one task, one commit. The XML is not for you to read --- it's for the executor agent to parse reliably. But when a plan comes back wrong it is often instructive to open \gsdfile{PLAN.md} and scan the task XML. You can see exactly what the planner thought you wanted.
+
+\section{Other plan-phase flags worth knowing}
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Flag} & \textbf{Effect} \\
+\midrule
+\gsdflag{gaps} & Gap-closure mode. Reads an existing VERIFICATION.md and targets remaining gaps without re-running research. \\
+\gsdflag{prd $<$file$>$} & Use a PRD file instead of CONTEXT.md as the source of truth. \\
+\gsdflag{reviews} & Re-plan with cross-AI review feedback from REVIEWS.md (produced by \gsdcmd{review}). \\
+\gsdflag{validate} & Run state validation before planning begins. Catches STATE.md drift early. \\
+\gsdflag{bounce} & Run an external plan-bounce validation script after planning. Configured by \texttt{workflow.plan\_bounce\_script}. \\
+\gsdflag{auto} & Non-interactive: skip confirmation gates between sub-steps. \\
+\bottomrule
+\end{tabularx}
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item Plan-phase is research $\rightarrow$ plan $\rightarrow$ verify, not a single monolithic step.
+  \item Four parallel researchers cover stack, features, architecture, and pitfalls.
+  \item The plan-checker loop catches most bad plans before they reach the executor.
+  \item Each plan contains 2--3 atomic tasks. Larger ``plans'' are a smell.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{Execution and Waves}
+% =========================================================================
+
+With plans verified, \gsdcmd{execute-phase N} takes over. This is where GSD's context-engineering bet pays its biggest dividend: parallel executors with fresh context windows, one per plan.
+
+\section{Dependency graphs and wave grouping}
+
+When you run \gsdcmd{execute-phase}, the orchestrator first analyzes the plans in the phase. Each plan has a \texttt{Depends on} field that says which other plans (if any) must complete before it starts. The orchestrator groups plans into \emph{waves}: a wave is a set of plans with no unsatisfied dependencies, so every plan in a wave can run in parallel.
+
+\begin{lstlisting}[style=gsddiagram]
+  Wave Analysis example:
+
+    Plan 01 (no deps)       -+
+    Plan 02 (no deps)       -+-- Wave 1 (parallel: 01 and 02)
+    Plan 03 (depends: 01)   --- Wave 2 (waits for Wave 1)
+    Plan 04 (depends: 02)   -+
+    Plan 05 (depends: 03,04) -- Wave 3 (waits for Wave 2)
+\end{lstlisting}
+
+Within a wave, plans run concurrently (up to \texttt{parallelization.max\_concurrent\_agents}, default 3). Across waves, execution is sequential --- wave 2 cannot start until wave 1 is fully committed.
+
+You can execute a single wave with \gsdflag{wave N}. Useful for: replaying a failed wave, manually splitting a long execution, or resuming after interruption.
+
+\section{What each executor gets}
+
+Every executor in a wave spawns with a fresh 200K context window --- or up to 1M for 1M-class models --- and receives exactly three categories of input:
+
+\begin{enumerate}[itemsep=2pt]
+  \item Its assigned \gsdfile{PLAN.md} file. This is the authoritative task list.
+  \item Project context: PROJECT.md, STATE.md.
+  \item Phase context: CONTEXT.md, RESEARCH.md, VALIDATION.md, and UI-SPEC.md if present.
+\end{enumerate}
+
+For 1M-context models (Opus 4.6, Sonnet 4.6), GSD also injects prior-wave SUMMARY.md files so later waves can see what earlier waves shipped. This is \emph{adaptive context enrichment}. You get it automatically when you are on a 1M-class model; for 200K models, the orchestrator uses compact truncated prompts with cache-friendly ordering.
+
+\section{Atomic commits: one task, one commit}
+
+Every task in a plan produces one git commit. The commit message follows the project's convention (Conventional Commits, in most cases) and references the task ID. If a task fails --- tests don't pass, compile errors, verification fails --- the task is retried up to \texttt{workflow.node\_repair\_budget} times (default 2) via the node-repair agent before it escalates.
+
+This atomicity is what makes \gsdcmd{undo} safe. You can revert a single task without touching neighboring work.
+
+\begin{gsdtip}
+When parallelization is enabled, executors commit with \texttt{\gsdflag{no-verify}} to avoid pre-commit hook contention (especially painful with Rust and cargo lock). The orchestrator runs pre-commit hooks once per wave, after all parallel commits complete. If you need hooks on every commit, set \texttt{parallelization.enabled: false}.
+\end{gsdtip}
+
+\section{Post-execution verification}
+
+After all waves complete, a verifier agent runs. It reads every PLAN.md, SUMMARY.md, CONTEXT.md, and the REQUIREMENTS.md for the phase, and checks the codebase against the phase goal. It looks for:
+
+\begin{itemize}[itemsep=2pt]
+  \item Code that matches the plan but doesn't match the intent.
+  \item Tests that are disabled, circular, or weak on assertions.
+  \item Tasks that got committed but not wired up.
+  \item Cross-cutting concerns that slipped through individual plans.
+\end{itemize}
+
+The output is \gsdfile{\{phase\}-VERIFICATION.md}. If the verifier passes, execution is done and the phase is ready for UAT. If it fails, issues are logged for \gsdcmd{verify-work} to surface.
+
+\section{Why fresh contexts beat accumulated contexts}
+
+It's worth making the design argument explicit, because when you see the wave execution log --- five different agents each starting from a blank slate, each re-reading the phase files, each writing one commit --- it \emph{looks} wasteful. You could imagine a single agent plowing through all five tasks in one context, saving those re-reads.
+
+Don't. Here's why:
+
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Quality floor.} A fresh agent makes no decisions shaped by the noise of prior decisions. Each task gets the model's full attention, not the leftover attention after four other tasks filled the window.
+  \item \textbf{Independence.} Parallel waves are only possible because each executor is isolated. One agent one task makes parallelism a syntactic property of the phase.
+  \item \textbf{Recoverability.} A single accumulated agent that fails halfway through leaves a corrupted state. Five atomic agents either all commit or only some commit --- you can \gsdcmd{undo} the partial ones and re-execute.
+  \item \textbf{Debuggability.} When a task goes wrong, you can read the plan, look at the commit, compare them, and know exactly what that one agent did. No interleaved history to unpack.
+\end{itemize}
+
+The re-reads are the cost. They're usually cached (GSD uses cache-friendly prompt ordering to maximize prompt-cache hits). The quality win more than pays for them.
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item Wave grouping is derived from plan dependencies. Plans with no deps run in wave 1.
+  \item Each executor gets a fresh context window and a single plan. Nothing more.
+  \item One task, one commit --- that atomicity is what makes every downstream recovery command work.
+  \item The verifier is a second pass that checks the whole phase, not just individual plans.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{Verification and Shipping}
+% =========================================================================
+
+Execution wrote code. Verification proves the code matches intent. Shipping tells the world.
+
+\section{verify-work and the UAT flow}
+
+\gsdcmd{verify-work N} runs manual user acceptance testing for a completed phase. ``Manual'' is a slight misnomer --- most of the work is automated, but you are in the loop for the final judgment calls.
+
+Under the hood, verify-work reads PLAN.md, SUMMARY.md, VERIFICATION.md, and the phase's acceptance criteria, and walks you through a structured test plan. For each criterion it asks: does the delivered code satisfy this? It will run commands, show you output, and ask for your confirmation.
+
+The output is \gsdfile{\{phase\}-UAT.md} --- a structured record of what was tested, what passed, what failed, and how each failure was classified.
+
+\section{Auto-diagnosis when things fail}
+
+When verify-work finds a failure, it doesn't just log it. An auto-diagnosis step kicks in: it reads the relevant plan, the summary, the commit history, and tries to identify the root cause. Three things can happen:
+
+\begin{enumerate}[itemsep=2pt]
+  \item The diagnosis is confident enough to generate a \emph{fix plan}. A new plan file is created under the phase and you can \gsdcmd{execute-phase \gsdflag{wave $N$}} to run just the fix.
+  \item The diagnosis points at a config or context issue. You are told to re-run \gsdcmd{discuss-phase} or edit CONTEXT.md and re-plan.
+  \item The diagnosis is inconclusive. Escalated to you for manual decision.
+\end{enumerate}
+
+Crucially, \gsdcmd{verify-work} never silently edits code. It proposes fixes and you run them. That's the ``user in the loop'' part.
+
+\section{Code review before UAT}
+
+Since v1.34, GSD has a dedicated code review stage between execution and UAT:
+
+\begin{lstlisting}[style=gsddiagram]
+  /gsd-execute-phase N
+         |
+         v
+  /gsd-code-review N   <-- optional, but recommended
+         |
+         v
+  /gsd-code-review-fix N   <-- optional, auto-fix the findings
+         |
+         v
+  /gsd-verify-work N
+\end{lstlisting}
+
+\gsdcmd{code-review N} scopes files by reading \gsdfile{SUMMARY.md} (or git diff as fallback) and runs a reviewer agent configured for depth:
+
+\begin{itemize}[itemsep=2pt]
+  \item \gsdflag{depth=quick} --- pattern-matching only, ${\sim}2$ minutes.
+  \item \gsdflag{depth=standard} --- per-file analysis with language-specific checks, ${\sim}5$--15 minutes. Default.
+  \item \gsdflag{depth=deep} --- cross-file analysis with import graphs and call chains, ${\sim}15$--30 minutes.
+\end{itemize}
+
+Findings go into \gsdfile{\{phase\}-REVIEW.md}, classified as Critical / Warning / Info. You then run \gsdcmd{code-review-fix N} to auto-fix. Add \gsdflag{auto} to run a fix-and-review loop (up to 3 iterations) until clean. Add \gsdflag{all} to include Info-level findings in the fix scope.
+
+Set the default depth globally via \texttt{workflow.code\_review\_depth} in \gsdfile{config.json}.
+
+\section{Shipping: PRs and PR bodies}
+
+\gsdcmd{ship N} creates a GitHub PR from the phase's commits. Prerequisites: the phase has been verified (\gsdcmd{verify-work} passed), and \texttt{gh} CLI is installed and authenticated.
+
+The PR body is auto-generated from planning artifacts:
+
+\begin{itemize}[itemsep=2pt]
+  \item The phase goal from ROADMAP.md.
+  \item A changes summary built from all SUMMARY.md files in the phase.
+  \item The requirements addressed (REQ-IDs from REQUIREMENTS.md).
+  \item Verification status from VERIFICATION.md.
+  \item Key decisions from CONTEXT.md.
+\end{itemize}
+
+Flags:
+\begin{itemize}[itemsep=2pt]
+  \item \gsdflag{draft} --- create as a draft PR.
+  \item \gsdcmd{ship} with a milestone version (e.g., \texttt{v1.0}) ships a whole milestone instead of a phase.
+\end{itemize}
+
+If your team reviews code without the planning noise, run \gsdcmd{pr-branch} first. It creates a branch that filters out \gsdfile{.planning/} commits so the reviewer diff is clean.
+
+\section{Completing milestones}
+
+Once every phase in the milestone is verified, the wrap-up sequence is:
+
+\begin{enumerate}[itemsep=2pt]
+  \item \gsdcmd{audit-milestone} --- runs one last gap check. It reads REQUIREMENTS.md and compares against every SUMMARY.md and VERIFICATION.md to confirm nothing slipped. Produces a gap analysis report.
+  \item \gsdcmd{plan-milestone-gaps} if gaps exist --- creates one phase per gap so you can close them without re-doing audit manually.
+  \item \gsdcmd{complete-milestone} --- archives the milestone into MILESTONES.md and tags the release in git.
+  \item \gsdcmd{new-milestone} when you are ready for the next version. It reads PROJECT.md, scans seeds, prompts for the new milestone's scope, and regenerates REQUIREMENTS.md and ROADMAP.md. Optionally takes \gsdflag{reset-phase-numbers} to restart numbering at Phase 1.
+  \item \gsdcmd{milestone-summary} --- generates a comprehensive milestone summary report for team onboarding or stakeholder review.
+\end{enumerate}
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item Verify-work is automated UAT with you in the loop for final judgments.
+  \item Failed UAT produces fix plans, not silent code edits.
+  \item \gsdcmd{code-review} before UAT catches bugs UAT won't catch. Use \gsdflag{depth=deep} on production phases.
+  \item Auto-generated PR bodies pull directly from planning artifacts --- write better plans, get better PRs.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{Working with Existing Code}
+% =========================================================================
+
+Greenfield projects are easy. GSD shines on those. But most real work is brownfield --- you are adding features to a codebase that already has conventions, architecture, technical debt, and patterns you don't want the planner to reinvent. GSD has a dedicated preflight for this case.
+
+\section{gsd-map-codebase: four parallel mappers}
+
+Run this \emph{before} \gsdcmd{new-project} on any existing codebase:
+
+\begin{lstlisting}
+/gsd-map-codebase
+\end{lstlisting}
+
+Four mapper agents fire in parallel and write into \gsdfile{.planning/codebase/}:
+
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Stack Mapper} $\rightarrow$ \gsdfile{codebase/STACK.md} --- languages, frameworks, build tools, key dependencies.
+  \item \textbf{Architecture Mapper} $\rightarrow$ \gsdfile{codebase/ARCHITECTURE.md} --- layers, module boundaries, data flow, integration points.
+  \item \textbf{Convention Mapper} $\rightarrow$ \gsdfile{codebase/CONVENTIONS.md} --- naming patterns, file organization, error handling, testing style.
+  \item \textbf{Concern Mapper} $\rightarrow$ \gsdfile{codebase/CONCERNS.md} --- known rough spots, TODOs, deprecated APIs, ``here be dragons'' files.
+\end{itemize}
+
+A \gsdcmd{map-codebase} run on a small project takes a few minutes. On a large one, it can take longer --- the four agents work in parallel but each one may read dozens of files. You can narrow the scope with an argument: \gsdcmd{map-codebase auth} focuses mapping on the auth area.
+
+Two supplementary files that sometimes get produced depending on project shape:
+
+\begin{itemize}[itemsep=2pt]
+  \item \gsdfile{codebase/STRUCTURE.md} --- directory topology.
+  \item \gsdfile{codebase/TESTING.md} --- test framework, test locations, coverage.
+  \item \gsdfile{codebase/INTEGRATIONS.md} --- external services, APIs, databases.
+\end{itemize}
+
+\section{How mapping informs new-project}
+
+With \gsdfile{codebase/} populated, \gsdcmd{new-project} behaves differently: questions focus on what you are \emph{adding}, not on rediscovering what already exists. The project-researcher still runs, but it has the mapping to anchor against. REQUIREMENTS.md and ROADMAP.md are framed as delta work against the existing code.
+
+\begin{lstlisting}[style=gsddiagram]
+  /gsd-map-codebase
+         |
+         +-- Stack Mapper      --> codebase/STACK.md
+         +-- Arch Mapper       --> codebase/ARCHITECTURE.md
+         +-- Convention Mapper --> codebase/CONVENTIONS.md
+         +-- Concern Mapper    --> codebase/CONCERNS.md
+         |
+         v
+  /gsd-new-project
+         |
+  Questions focus on what you're ADDING
+  Planning automatically loads your patterns
+\end{lstlisting}
+
+\section{Lighter-weight alternatives}
+
+\gsdcmd{map-codebase} is heavy --- four parallel agents, lots of reads. For smaller needs, GSD has two lighter tools:
+
+\begin{itemize}[itemsep=2pt]
+  \item \gsdcmd{scan} --- single-focus codebase assessment. One mapper agent instead of four. Flags: \gsdflag{focus tech}, \gsdflag{focus arch}, \gsdflag{focus quality}, \gsdflag{focus concerns}, \gsdflag{focus tech+arch} (default). Use this when you just want a quick read on one dimension.
+  \item \gsdcmd{intel} --- queryable codebase intelligence. Requires \texttt{intel.enabled: true} in \gsdfile{config.json}. Subcommands: \texttt{refresh} builds the index, \texttt{query $<$term$>$} searches across files, \texttt{status} shows freshness, \texttt{diff} shows changes since the last snapshot. Produces JSON files in \gsdfile{.planning/intel/} (stack, api-map, dependency-graph, file-roles, arch-decisions).
+\end{itemize}
+
+\texttt{intel} is closer to an index than a map --- faster to query, but requires a one-time setup and periodic refreshes. Use it on codebases large enough that re-reading files at every plan-phase is painful.
+
+\section{Tips for large codebases}
+
+\begin{itemize}[itemsep=2pt]
+  \item Start with \gsdcmd{scan \gsdflag{focus concerns}} to find the rough parts before deciding where to work.
+  \item Run \gsdcmd{map-codebase} once, then commit \gsdfile{.planning/codebase/} to git. It's a shared asset for the team.
+  \item For repeated work on the same area, enable \gsdcmd{intel} and refresh it weekly.
+  \item If a phase touches a concern flagged in \gsdfile{CONCERNS.md}, raise the discussion depth --- use \gsdflag{analyze} on discuss-phase.
+\end{itemize}
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item Run \gsdcmd{map-codebase} before \gsdcmd{new-project} on existing code. Every time.
+  \item The four mappers produce four targeted files in \gsdfile{.planning/codebase/}. Commit them.
+  \item \gsdcmd{scan} is the lightweight alternative. \gsdcmd{intel} is the queryable alternative.
+  \item Brownfield questions should focus on what you are adding, not what already exists.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{Session Management}
+% =========================================================================
+
+GSD is designed to survive interruption. Context window limits, power outages, fires in the middle of a wave, an urgent Slack message --- the workflow is structured so that stopping and picking up later is a first-class operation.
+
+\section{pause-work and HANDOFF.json}
+
+\gsdcmd{pause-work} saves your place. It writes two files:
+
+\begin{itemize}[itemsep=2pt]
+  \item \gsdfile{.planning/HANDOFF.json} --- a structured machine-readable snapshot: current phase, current wave, executed plans, open questions, git status, open blockers.
+  \item \gsdfile{continue-here.md} --- a human-readable summary that Claude (or you) can read at the start of the next session.
+\end{itemize}
+
+You don't have to wait for a context warning to pause. Pause on any natural stopping point --- end of a wave, end of a day, after a risky decision you want to sleep on.
+
+\section{resume-work: what gets restored}
+
+\gsdcmd{resume-work} is the inverse. It reads HANDOFF.json and \gsdfile{continue-here.md}, reconstructs the state, and tells you exactly where you were and what's next. Crucially, it does not re-run anything. It only restores context --- you still choose the next command.
+
+Run it at the start of any new session. It is the canonical ``I'm back, catch me up'' command.
+
+\section{Long-running projects: keeping state clean}
+
+Projects that span weeks or months accumulate cruft. GSD's commands help you keep it tidy:
+
+\begin{itemize}[itemsep=2pt]
+  \item \gsdcmd{cleanup} --- archives completed phase directories from prior milestones. Keeps \gsdfile{phases/} focused on current work.
+  \item \gsdcmd{complete-milestone} --- archives the milestone into MILESTONES.md and tags it. This is the main pressure valve; use it.
+  \item \gsdcmd{health} --- validates \gsdfile{.planning/} directory integrity. Add \gsdflag{repair} to auto-fix recoverable issues.
+  \item \gsdcmd{stats} --- dashboard of project metrics. Useful for spotting long-running phases, high token usage, excessive revisions.
+\end{itemize}
+
+Run \gsdcmd{health \gsdflag{repair}} once a week on active projects. It catches STATE.md drift, stale references, and phase directories that got out of sync.
+
+\section{Context warnings and proactive pausing}
+
+GSD ships a context window monitor (\texttt{gsd-context-monitor.js}) that runs as a PostToolUse hook. It reads metrics from the statusline hook and injects warnings when context usage gets high:
+
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Level} & \textbf{Remaining} & \textbf{Agent behavior} \\
+\midrule
+Normal & $>$35\% & No warning. \\
+WARNING & $\leq$35\% & Wrap up current task; avoid starting new complex work. \\
+CRITICAL & $\leq$25\% & Stop immediately; save state via \gsdcmd{pause-work}. \\
+\bottomrule
+\end{tabularx}
+
+The agent sees the warning in its conversation and can act on it. Enable or disable via \texttt{hooks.context\_warnings} in \gsdfile{config.json}. Leave it on. The cost is zero; the benefit is ``no more running out of context in the middle of a task.''
+
+\section{Session reports and sharing with humans}
+
+\gsdcmd{session-report} generates a post-session summary with work performed, outcomes, blockers, estimated cost, and next steps. Output lands in \gsdfile{.planning/reports/SESSION\_REPORT.md}.
+
+Useful for:
+\begin{itemize}[itemsep=2pt]
+  \item Stakeholder updates at the end of a work block.
+  \item ``What did I do today?'' retrospectives.
+  \item Handing off to a teammate for the next session.
+\end{itemize}
+
+Pair it with \gsdcmd{milestone-summary} at milestone boundaries for a larger retrospective document.
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item \gsdcmd{pause-work} and \gsdcmd{resume-work} make interruption safe. Use them liberally.
+  \item HANDOFF.json is the structured state; \gsdfile{continue-here.md} is the human summary.
+  \item Context warnings fire at 35\% / 25\%. Heed them.
+  \item On long-running projects, run \gsdcmd{health \gsdflag{repair}} periodically.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{Backlog, Seeds, and Threads}
+% =========================================================================
+
+Ideas show up at inconvenient times. You are deep into Phase 3, and suddenly a perfect idea for Phase 11 arrives. Or for the next milestone. Or for something that should happen ``someday, but only if we get WebSocket infrastructure first.'' GSD has three different tools for these three different cases.
+
+\section{The backlog parking lot (999.x numbering)}
+
+\gsdcmd{add-backlog "description"} drops an idea into the backlog. Backlog items are full phase directories, but they are numbered starting at \texttt{999.1}, \texttt{999.2}, \texttt{999.3}, which keeps them outside the active phase sequence. That numbering is deliberate --- it means backlog items don't interfere with \gsdcmd{next}, and they don't show up as ``phase 11'' in the middle of your roadmap.
+
+\begin{lstlisting}
+/gsd-add-backlog "GraphQL API layer"        # -> 999.1-graphql-api-layer/
+/gsd-add-backlog "Mobile responsive redesign"  # -> 999.2-mobile-responsive-redesign/
+\end{lstlisting}
+
+Because backlog items get real phase directories, you can run \gsdcmd{discuss-phase 999.1} or \gsdcmd{plan-phase 999.1} to explore or flesh them out without promoting them yet.
+
+When you are ready to triage, run \gsdcmd{review-backlog}. It walks you through every backlog item and offers three actions per item:
+
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Promote} --- move into the active phase sequence. The orchestrator picks the right phase number and slots it in.
+  \item \textbf{Keep} --- leave it in the backlog for now.
+  \item \textbf{Remove} --- delete it.
+\end{itemize}
+
+Run \gsdcmd{review-backlog} before \gsdcmd{new-milestone}, not in the middle of a phase. It's a strategy session, not a tactical tool.
+
+\section{Seeds: forward-looking ideas with triggers}
+
+Seeds are different from backlog items. A backlog item is ``I want to do this eventually.'' A seed is ``I want this to surface automatically \emph{when X becomes true}.''
+
+\begin{lstlisting}
+/gsd-plant-seed "Add real-time collaboration when WebSocket infra is in place"
+\end{lstlisting}
+
+This writes \gsdfile{.planning/seeds/SEED-NNN-slug.md}, preserving the full WHY, WHEN, and breadcrumbs to relevant details. Seeds solve context rot: instead of a one-liner in a ``Deferred'' section that nobody reads, the seed lives as its own file with enough context for a future Claude (or a future you) to pick it up cold.
+
+The trigger happens at \gsdcmd{new-milestone}. That command scans all seeds and presents matches based on the new milestone's scope. If you plant a WebSocket-dependent seed and the next milestone adds WebSocket infrastructure, \gsdcmd{new-milestone} will surface the seed and ask if you want to include it.
+
+\section{Threads: persistent context across sessions}
+
+Threads are the lightest of the three. Use a thread when you have cross-session work that \emph{doesn't} belong to any specific phase --- debugging a production issue, investigating a performance regression, working through a library migration that touches many phases.
+
+\begin{lstlisting}
+/gsd-thread                              # list all threads
+/gsd-thread fix-deploy-key-auth          # resume existing thread
+/gsd-thread "Investigate TCP timeout in pasta service"  # create new
+\end{lstlisting}
+
+Each thread file (\gsdfile{.planning/threads/\{slug\}.md}) has four sections: Goal, Context, References, Next Steps. Threads are lighter than \gsdcmd{pause-work} --- no phase state, no plan context, just a focused cross-session knowledge store.
+
+When a thread matures into a real phase, promote it with \gsdcmd{add-phase}. When it matures into something for later, promote it with \gsdcmd{add-backlog}.
+
+\section{Choosing the right tool}
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Situation} & \textbf{Use} \\
+\midrule
+Idea for eventual work, no strong triggering condition & \gsdcmd{add-backlog} \\
+Idea that should surface at a specific future milestone & \gsdcmd{plant-seed} \\
+Cross-session investigation that spans phases & \gsdcmd{thread} \\
+Tiny capture without structure & \gsdcmd{note} or \gsdcmd{add-todo} \\
+Full ideation session on a topic & \gsdcmd{explore} \\
+\bottomrule
+\end{tabularx}
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item Three tools, three shapes: backlog for deferred work, seeds for triggered surfacing, threads for cross-session investigation.
+  \item Backlog items live as real phase directories at 999.x to stay out of the active sequence.
+  \item Seeds are scanned by \gsdcmd{new-milestone} and resurface at the right time.
+  \item \gsdcmd{note} and \gsdcmd{add-todo} cover smaller captures; \gsdcmd{explore} covers full ideation.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{Configuration}
+% =========================================================================
+
+\gsdfile{.planning/config.json} is the control panel for everything GSD does on your project. Chapter 3 introduced the skeleton. This chapter walks through each group in detail, with the before/after examples you need to actually use them.
+
+\section{Core settings}
+
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Setting} & \textbf{Default} & \textbf{What it controls} \\
+\midrule
+\texttt{mode} & \texttt{interactive} & \texttt{yolo} auto-approves decisions; \texttt{interactive} confirms at each gate. \\
+\texttt{granularity} & \texttt{standard} & Phase count: \texttt{coarse} (3--5 phases), \texttt{standard} (5--8), \texttt{fine} (8--12). \\
+\texttt{model\_profile} & \texttt{balanced} & Which model tier each agent uses. See Model Profiles below. \\
+\texttt{project\_code} & (none) & Prefix for phase directory names (e.g., \texttt{"ABC"} $\rightarrow$ \gsdfile{ABC-01-setup/}). \\
+\texttt{response\_language} & (none) & Language code for agent responses (e.g., \texttt{"pt"}, \texttt{"ko"}, \texttt{"ja"}). \\
+\texttt{context\_profile} & (none) & Pre-configured bundle for specific work types (\texttt{dev}, \texttt{research}, \texttt{review}). \\
+\bottomrule
+\end{tabularx}
+
+\section{Workflow toggles}
+
+Every workflow toggle follows the \emph{absent equals enabled} rule. If a key is missing, it defaults to \texttt{true}. You only write the key to disable the feature.
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Setting} & \textbf{Effect when enabled (default)} \\
+\midrule
+\texttt{workflow.research} & Run 4 parallel researchers during plan-phase. \\
+\texttt{workflow.plan\_check} & Run plan-checker loop (up to 3 iterations). \\
+\texttt{workflow.verifier} & Run verifier after execute-phase. \\
+\texttt{workflow.nyquist\_validation} & Map test coverage to requirements during plan-phase. \\
+\texttt{workflow.ui\_phase} & Generate UI design contracts for frontend phases. \\
+\texttt{workflow.ui\_safety\_gate} & Prompt to run ui-phase for frontend work. \\
+\texttt{workflow.node\_repair} & Autonomous task repair on verification failure. \\
+\texttt{workflow.node\_repair\_budget} & Max repair attempts per failed task (default 2). \\
+\texttt{workflow.auto\_advance} & Auto-chain discuss $\rightarrow$ plan $\rightarrow$ execute without stopping. \\
+\texttt{workflow.code\_review} & Enable \gsdcmd{code-review} and \gsdcmd{code-review-fix}. \\
+\texttt{workflow.code\_review\_depth} & Default depth: \texttt{quick} / \texttt{standard} / \texttt{deep}. \\
+\texttt{workflow.discuss\_mode} & \texttt{discuss} (interview) or \texttt{assumptions} (codebase-first). \\
+\texttt{workflow.skip\_discuss} & Bypass discuss-phase in autonomous mode. \\
+\texttt{workflow.tdd\_mode} & Enforce RED/GREEN/REFACTOR in executor. \\
+\texttt{workflow.text\_mode} & Plain-text menus (for remote Claude Code sessions). \\
+\texttt{workflow.use\_worktrees} & Git worktree isolation for parallel execution. \\
+\bottomrule
+\end{tabularx}
+
+A minimal ``prototyping'' config that disables quality agents for speed:
+
+\begin{lstlisting}
+{
+  "mode": "yolo",
+  "granularity": "coarse",
+  "model_profile": "budget",
+  "workflow": {
+    "research": false,
+    "plan_check": false,
+    "verifier": false
+  }
+}
+\end{lstlisting}
+
+A production config that turns everything up:
+
+\begin{lstlisting}
+{
+  "mode": "interactive",
+  "granularity": "fine",
+  "model_profile": "quality",
+  "workflow": {
+    "code_review_depth": "deep"
+  }
+}
+\end{lstlisting}
+
+\section{Model profiles}
+
+A profile is a pre-configured bundle of ``which model class runs which agent.'' GSD ships four:
+
+\begin{tabularx}{\textwidth}{l l l l l}
+\toprule
+\textbf{Agent} & \texttt{quality} & \texttt{balanced} & \texttt{budget} & \texttt{inherit} \\
+\midrule
+gsd-planner & Opus & Opus & Sonnet & Inherit \\
+gsd-roadmapper & Opus & Sonnet & Sonnet & Inherit \\
+gsd-executor & Opus & Sonnet & Sonnet & Inherit \\
+gsd-phase-researcher & Opus & Sonnet & Haiku & Inherit \\
+gsd-project-researcher & Opus & Sonnet & Haiku & Inherit \\
+gsd-research-synthesizer & Sonnet & Sonnet & Haiku & Inherit \\
+gsd-debugger & Opus & Sonnet & Sonnet & Inherit \\
+gsd-codebase-mapper & Sonnet & Haiku & Haiku & Inherit \\
+gsd-verifier & Sonnet & Sonnet & Haiku & Inherit \\
+gsd-plan-checker & Sonnet & Sonnet & Haiku & Inherit \\
+gsd-integration-checker & Sonnet & Sonnet & Haiku & Inherit \\
+gsd-nyquist-auditor & Sonnet & Sonnet & Haiku & Inherit \\
+\bottomrule
+\end{tabularx}
+
+\textbf{Philosophy:}
+
+\begin{itemize}[itemsep=2pt]
+  \item \texttt{quality} --- Opus for everything that makes decisions; Sonnet for read-only verification. Use when quota is available and the work is critical.
+  \item \texttt{balanced} --- Opus for planning (where architecture decisions live), Sonnet for everything else. The default, for good reason.
+  \item \texttt{budget} --- Sonnet for anything that writes code, Haiku for research and verification. Good for high-volume or less-critical phases.
+  \item \texttt{inherit} --- every agent uses the current session model. Use this when switching models dynamically (OpenCode/Kilo \texttt{/model}) or when running Claude Code via non-Anthropic providers (OpenRouter, local models) to avoid unexpected API costs.
+\end{itemize}
+
+You can also override individual agents without changing the whole profile:
+
+\begin{lstlisting}
+{
+  "model_profile": "balanced",
+  "model_overrides": {
+    "gsd-executor": "opus",
+    "gsd-codebase-mapper": "sonnet"
+  }
+}
+\end{lstlisting}
+
+Quick profile switch without editing config: \gsdcmd{set-profile quality} (or \texttt{balanced}, \texttt{budget}, \texttt{inherit}).
+
+\section{Git branching}
+
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Strategy} & \textbf{Creates branch} & \textbf{Best for} \\
+\midrule
+\texttt{none} (default) & Never & Solo development, simple projects. \\
+\texttt{phase} & At each \gsdcmd{execute-phase} & Code review per phase, granular rollback. \\
+\texttt{milestone} & At first \gsdcmd{execute-phase} of the milestone & Release branches, PR per version. \\
+\bottomrule
+\end{tabularx}
+
+Templates control the branch names:
+
+\begin{lstlisting}
+"git": {
+  "branching_strategy": "phase",
+  "phase_branch_template": "gsd/phase-{phase}-{slug}",
+  "milestone_branch_template": "gsd/{milestone}-{slug}",
+  "quick_branch_template": "gsd/quick-{num}-{slug}"
+}
+\end{lstlisting}
+
+Template variables: \texttt{\{phase\}} (zero-padded), \texttt{\{slug\}} (hyphenated name), \texttt{\{milestone\}} (version), \texttt{\{num\}} (quick task ID).
+
+\section{Parallelization}
+
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Setting} & \textbf{Default} & \textbf{Effect} \\
+\midrule
+\texttt{parallelization.enabled} & \texttt{true} & Run independent plans in parallel. \\
+\texttt{parallelization.max\_concurrent\_agents} & \texttt{3} & Maximum simultaneous executors. \\
+\texttt{parallelization.min\_plans\_for\_parallel} & \texttt{2} & Below this, force sequential. \\
+\texttt{parallelization.skip\_checkpoints} & \texttt{true} & Skip checkpoint gates during parallel runs. \\
+\bottomrule
+\end{tabularx}
+
+If you are on Rust or any language with build-lock contention and you're seeing cargo lock fights, this is the subsystem to check. GSD since v1.26 commits parallel-wave executors with \texttt{\gsdflag{no-verify}} and runs hooks once per wave, which fixes most issues. If you need hooks per commit for compliance, set \texttt{parallelization.enabled: false} and take the sequential hit.
+
+\section{Hooks and security}
+
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Setting} & \textbf{Default} & \textbf{Effect} \\
+\midrule
+\texttt{hooks.context\_warnings} & \texttt{true} & Context window usage warnings. \\
+\texttt{hooks.workflow\_guard} & \texttt{false} & Warn on edits outside GSD workflow context. \\
+\texttt{security\_enforcement} & \texttt{true} & Enable threat-model-anchored verification via \gsdcmd{secure-phase}. \\
+\texttt{security\_asvs\_level} & \texttt{1} & OWASP ASVS verification level (1 / 2 / 3). \\
+\texttt{security\_block\_on} & \texttt{high} & Minimum severity that blocks phase advancement. \\
+\bottomrule
+\end{tabularx}
+
+The prompt-injection guard hook is always active and cannot be disabled. It scans Write/Edit calls to \gsdfile{.planning/} for known injection patterns (role overrides, instruction bypasses, system tag injection) in advisory-only mode. See Appendix A for the full security context.
+
+\section{Interactive configuration}
+
+You do not have to edit \gsdfile{config.json} by hand. \gsdcmd{settings} walks you through every option interactively. \gsdcmd{set-profile} flips the model profile in one command. Behind the scenes both tools edit the same file.
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item \texttt{absent equals enabled} --- missing workflow keys default to on.
+  \item \texttt{balanced} is the default profile for a reason; only change it deliberately.
+  \item \texttt{parallelization.enabled: false} is the escape hatch for build-lock contention.
+  \item Use \gsdcmd{settings} when you don't want to touch JSON.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{UI Design Workflow}
+% =========================================================================
+
+The default AI-generated frontend looks mostly fine but never quite right: spacing is inconsistent, typography drifts, the fifth button doesn't match the first four. This is not a model failure. It is the absence of a design contract. Five components built without a shared spacing scale, color scheme, or copywriting standard produce five slightly different visual decisions. GSD's UI commands fix that by locking the contract before planning and auditing the result after execution.
+
+\section{ui-phase: lock the contract}
+
+Run \gsdcmd{ui-phase N} after \gsdcmd{discuss-phase} and before \gsdcmd{plan-phase}, for any phase that does frontend work. The flow:
+
+\begin{enumerate}[itemsep=2pt]
+  \item Read CONTEXT.md, RESEARCH.md, and REQUIREMENTS.md for existing decisions.
+  \item Detect the current design-system state: shadcn \gsdfile{components.json}, Tailwind config, existing tokens.
+  \item If the project is React/Next.js/Vite and no shadcn is installed, offer a \textbf{shadcn initialization gate} (more on this below).
+  \item Ask only unanswered design-contract questions (spacing, typography, color, copywriting, registry safety).
+  \item Write \gsdfile{\{phase\}-UI-SPEC.md}.
+  \item Validate against the 6 pillars; revision loop if blocked (max 2 iterations).
+\end{enumerate}
+
+\section{The 6 pillars}
+
+Every UI-SPEC.md and every \gsdcmd{ui-review} scores against six dimensions:
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Pillar} & \textbf{What it covers} \\
+\midrule
+Copywriting & CTA labels, empty states, error states, microcopy consistency. \\
+Visuals & Focal points, visual hierarchy, icon accessibility. \\
+Color & Accent usage discipline, 60/30/10 compliance. \\
+Typography & Font size and weight constraint adherence. \\
+Spacing & Grid alignment, token consistency. \\
+Experience Design & Loading / error / empty state coverage. \\
+\bottomrule
+\end{tabularx}
+
+Each pillar is scored 1--4 after execution. A phase that scores 4/4 on all six pillars is visually consistent. Anything below 3 on any pillar is a real finding.
+
+\section{shadcn initialization gate}
+
+For React/Next.js/Vite projects without shadcn, the UI researcher offers to initialize it. The flow:
+
+\begin{enumerate}[itemsep=2pt]
+  \item Visit \texttt{ui.shadcn.com/create} and configure your preset (colors, radius, fonts).
+  \item Copy the preset string.
+  \item Run \texttt{npx shadcn init --preset \{paste\}}.
+  \item The preset string becomes a first-class GSD planning artifact, reproducible across phases and milestones.
+\end{enumerate}
+
+The preset encodes the entire design system in one string. Commit it.
+
+\section{Registry safety gate}
+
+Third-party shadcn registries can inject arbitrary code. The safety gate --- enabled via \texttt{workflow.ui\_safety\_gate: true} (the default) --- requires two inspection steps before installing any registry component:
+
+\begin{itemize}[itemsep=2pt]
+  \item \texttt{npx shadcn view \{component\}} --- inspect before installing.
+  \item \texttt{npx shadcn diff \{component\}} --- compare against the official version.
+\end{itemize}
+
+This is not paranoia. Registry components are arbitrary code that runs in your project. The gate is a pause-and-look step, nothing more. Leave it on.
+
+\section{ui-review: retroactive visual audit}
+
+\gsdcmd{ui-review N} is the retroactive side of the workflow. Run it after execution or after \gsdcmd{verify-work}. It works on any project with frontend code, not just GSD-managed ones. If no UI-SPEC.md exists, it audits against the abstract 6-pillar standards.
+
+The review captures screenshots via Playwright CLI to \gsdfile{.planning/ui-reviews/} (auto-gitignored), scores each pillar 1--4, and writes \gsdfile{\{phase\}-UI-REVIEW.md} with the scores and a top-3 priority fix list.
+
+\section{The ui-phase safety gate}
+
+When you run \gsdcmd{plan-phase} on a phase with frontend work and no UI-SPEC.md exists, \texttt{workflow.ui\_safety\_gate: true} causes plan-phase to pause and prompt you: ``This phase looks like frontend work. Run \gsdcmd{ui-phase} first?'' You can say no and continue planning anyway, but the default is to stop you before you plan frontend work without a design contract. Disable by setting \texttt{workflow.ui\_safety\_gate: false}.
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item \gsdcmd{ui-phase} locks the design contract \emph{before} planning; \gsdcmd{ui-review} audits it after.
+  \item Six pillars: Copywriting, Visuals, Color, Typography, Spacing, Experience Design.
+  \item The shadcn preset string is a first-class planning artifact. Commit it.
+  \item The registry safety gate is a pause-and-look step, not a blocker. Keep it on.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\chapter{Troubleshooting}
+% =========================================================================
+
+Even with good practices, things go wrong. This chapter is a symptom-to-remedy catalog --- when X happens, run Y. It is organized by what you observe, not by command, so you can find the fix without already knowing which command to reach for.
+
+\section{``Commands not found''}
+
+Symptom: you type \gsdcmd{new-project} and Claude says it doesn't recognize the command. Diagnosis: GSD is not installed for the runtime you are using.
+
+Fixes:
+\begin{itemize}[itemsep=2pt]
+  \item Re-run \texttt{npx get-shit-done-cc@latest}.
+  \item For a non-Claude runtime, make sure you installed with the right flag: \texttt{--gemini}, \texttt{--opencode}, \texttt{--codex}, \texttt{--kilo}, \texttt{--copilot}, \texttt{--cline}, \texttt{--qwen}, \texttt{--codebuddy}.
+  \item For local-only install, use \texttt{--local}. For global, use \texttt{--global} (or omit for default global).
+  \item Check the version: \gsdcmd{update} shows what's installed and what's available.
+\end{itemize}
+
+\section{``Plans keep failing verification''}
+
+Symptom: \gsdcmd{plan-phase} produces plans that the plan-checker rejects repeatedly and eventually surfaces as blocked. Diagnosis: almost always a discussion gap. The planner is filling in decisions that CONTEXT.md should have locked.
+
+Fixes:
+\begin{itemize}[itemsep=2pt]
+  \item Re-run \gsdcmd{discuss-phase N}, this time with \gsdflag{analyze}. Go deeper. Give the planner enough to work with.
+  \item Check the phase goal in ROADMAP.md. If it's vague, tighten it and re-plan.
+  \item If the phase covers too much, split it with \gsdcmd{insert-phase} before re-planning.
+  \item Run \gsdcmd{list-phase-assumptions N} to preview what Claude intends to do before committing.
+\end{itemize}
+
+\section{``Execution fails or produces stubs''}
+
+Symptom: executor finishes but code is half-built, tests are stubs, or whole features are missing. Diagnosis: the plan had too much in one task, or CONTEXT.md was vague, or the task's acceptance criteria were weak.
+
+Fixes:
+\begin{itemize}[itemsep=2pt]
+  \item Read PLAN.md. If any task has more than 2--3 concrete actions, the task is too big for one context. Re-plan with finer granularity.
+  \item Check CONTEXT.md. If the specifics section is one-liners, re-discuss.
+  \item Re-plan with \gsdflag{skip-research} and a tighter CONTEXT.md --- the problem isn't research, it's intent.
+\end{itemize}
+
+\section{``Plans seem wrong or misaligned''}
+
+Symptom: the plan solves the wrong problem, chooses libraries you don't want, or misses an obvious consideration. Diagnosis: CONTEXT.md didn't capture what you meant.
+
+Fix: re-run \gsdcmd{discuss-phase N} --- most plan-misalignment issues trace back to assumptions CONTEXT.md would have prevented. Alternatively, \gsdcmd{list-phase-assumptions N} shows you what Claude intends before you commit.
+
+\section{``Discuss-phase uses technical jargon I don't understand''}
+
+Symptom: the question set is full of terms you haven't seen before. Fix: \gsdcmd{profile-user} to generate a behavioral profile. If the profile indicates a non-technical owner --- \texttt{learning\_style: guided}, \texttt{jargon} listed as a frustration trigger, or \texttt{explanation\_depth: high-level} --- gray-area questions are automatically reframed in product-outcome language instead of implementation terminology. The profile is stored at \gsdfile{\textasciitilde/.claude/get-shit-done/USER-PROFILE.md} and is read automatically on every \gsdcmd{discuss-phase} invocation.
+
+\section{``STATE.md is out of sync''}
+
+Symptom: \gsdcmd{progress} reports the wrong phase, or \gsdcmd{next} suggests the wrong command. Diagnosis: STATE.md drifted from filesystem reality (a rebase, a manual edit, a crash mid-write).
+
+Fixes:
+\begin{itemize}[itemsep=2pt]
+  \item \texttt{node gsd-tools.cjs state validate} --- detects the drift.
+  \item \texttt{node gsd-tools.cjs state sync --verify} --- dry-run showing what would change.
+  \item \texttt{node gsd-tools.cjs state sync} --- reconstructs STATE.md from disk.
+\end{itemize}
+
+These commands replaced manual STATE.md editing in v1.32. Use them.
+
+\section{``I don't know what went wrong'' --- gsd-forensics}
+
+When state, artifacts, or git history seem corrupted and you can't even describe the problem, run \gsdcmd{forensics}. It generates a diagnostic report covering:
+
+\begin{itemize}[itemsep=2pt]
+  \item Git history anomalies (orphaned commits, unexpected branch state, rebase artifacts, time gaps).
+  \item Artifact integrity (expected files for completed phases, broken cross-references).
+  \item STATE.md anomalies and session history.
+  \item Uncommitted work, conflicts, abandoned changes.
+  \item At least 4 anomaly types checked: stuck loop, missing artifacts, abandoned work, crash/interruption.
+\end{itemize}
+
+Output lands in \gsdfile{.planning/forensics/report-\{timestamp\}.md}. Optionally offers to file a GitHub issue if findings are actionable. This is the ``I'm stuck, tell me what happened'' command.
+
+\section{gsd-health repair}
+
+\gsdcmd{health} runs a series of integrity checks on \gsdfile{.planning/}: missing files, broken cross-references, STATE.md drift, phase directory consistency. Add \gsdflag{repair} to auto-fix recoverable issues.
+
+Run this weekly on active projects. It catches small issues before they become forensics-level problems.
+
+\section{Systematic debugging with gsd-debug}
+
+For actual bugs in your code (not in GSD itself), \gsdcmd{debug} is the structured path. It maintains persistent debug-session state so you can investigate, abandon, and resume without losing hypothesis history.
+
+Subcommands:
+\begin{itemize}[itemsep=2pt]
+  \item \gsdcmd{debug ``description''} --- start a new session.
+  \item \gsdcmd{debug \gsdflag{diagnose} ``description''} --- investigate without attempting fixes.
+  \item \gsdcmd{debug list} --- list all active sessions.
+  \item \gsdcmd{debug status $<$slug$>$} --- full summary of one session.
+  \item \gsdcmd{debug continue $<$slug$>$} --- resume a specific session.
+\end{itemize}
+
+When \texttt{workflow.tdd\_mode: true}, debug sessions require a failing test before any fix is applied (red $\rightarrow$ green $\rightarrow$ done).
+
+\section{Context degradation in long sessions}
+
+Symptom: quality drops mid-session, Claude starts contradicting itself, past decisions get ignored. Diagnosis: you are in context rot.
+
+Fix: \texttt{/clear} in Claude Code to start a fresh session. Then \gsdcmd{resume-work} to restore project context from HANDOFF.json and \gsdfile{continue-here.md}. GSD is designed around fresh contexts --- every subagent already gets a clean 200K window. The top-level session is the one that rots, and \texttt{/clear} is the cure.
+
+\section{Parallel execution causes build lock errors}
+
+Symptom: pre-commit hook failures, cargo lock contention, 30+ minute execution times. Diagnosis: parallel executors triggering build tools simultaneously. Fix on v1.26+: nothing --- GSD handles it. On older versions: add this to your project's \gsdfile{CLAUDE.md}:
+
+\begin{lstlisting}
+## Git Commit Rules for Agents
+All subagent/executor commits MUST use `--no-verify`.
+\end{lstlisting}
+
+To disable parallel execution entirely (last resort): \gsdcmd{settings} $\rightarrow$ set \texttt{parallelization.enabled} to \texttt{false}.
+
+\section{Quick recovery reference}
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Problem} & \textbf{Solution} \\
+\midrule
+Lost context / new session & \gsdcmd{resume-work} or \gsdcmd{progress} \\
+Phase went wrong & \gsdcmd{undo \gsdflag{phase NN}} \\
+Need to change scope & \gsdcmd{add-phase}, \gsdcmd{insert-phase}, or \gsdcmd{remove-phase} \\
+Milestone audit found gaps & \gsdcmd{plan-milestone-gaps} \\
+Something broke & \gsdcmd{debug ``description''} \\
+STATE.md out of sync & \texttt{state validate} then \texttt{state sync} \\
+Workflow state seems corrupted & \gsdcmd{forensics} \\
+Quick targeted fix & \gsdcmd{quick} \\
+Plan doesn't match your vision & \gsdcmd{discuss-phase N} then re-plan \\
+Costs running high & \gsdcmd{set-profile budget} + \gsdcmd{settings} \\
+Update broke local changes & \gsdcmd{reapply-patches} \\
+Don't know what step is next & \gsdcmd{next} \\
+\bottomrule
+\end{tabularx}
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item Most plan failures are discussion failures. Re-run \gsdcmd{discuss-phase} first.
+  \item Use \texttt{state validate} and \texttt{state sync} instead of hand-editing STATE.md.
+  \item \gsdcmd{forensics} is the ``I'm stuck'' command. Run it before giving up.
+  \item \gsdcmd{health \gsdflag{repair}} weekly keeps \gsdfile{.planning/} clean.
+\end{itemize}
+\end{gsdnote}
+
+% =========================================================================
+\appendix
+\chapter{Permissions Deep Dive}
+% =========================================================================
+
+GSD is designed for frictionless automation. The maintainers recommend running Claude Code with \texttt{\gsdflag{dangerously-skip-permissions}}, and say so in the README. This appendix lays out what that flag actually does, what the granular alternative looks like, and which approach is appropriate for which situation. Both are real and supported --- pick with eyes open.
+
+\section{What \gsdflag{dangerously-skip-permissions} does}
+
+This flag, when passed to Claude Code, skips the per-tool-call confirmation prompts that Claude Code normally shows. Without the flag, every shell command (\texttt{ls}, \texttt{grep}, \texttt{git status}, everything) requires a yes-from-you. With the flag, Claude runs commands directly.
+
+The honest case for it: GSD generates dozens of trivial shell calls per phase --- \texttt{date}, \texttt{git add}, \texttt{git commit}, \texttt{cat}, \texttt{ls}, \texttt{grep}. Stopping to approve each one is friction that defeats the point of automated planning. On a full phase with 15 tasks, you could easily be approving 200+ commands.
+
+The honest case against it: the flag is called ``dangerously'' for a reason. It removes the single biggest safety net that Claude Code offers. An agent with this flag on can execute any command it decides to --- including destructive ones --- without asking you. If a prompt-injection attack succeeded in steering the agent, the blast radius is the blast radius of shell access.
+
+\begin{gsdimportant}
+\gsdflag{dangerously-skip-permissions} disables Claude Code's primary shell-call safety gate. Use it in trusted project directories you control, not in arbitrary checkouts of code you haven't reviewed. Never use it in a session that is about to touch production infrastructure, credentials, or anything you can't \texttt{git reset} your way out of.
+\end{gsdimportant}
+
+\section{The granular alternative}
+
+If \gsdflag{dangerously-skip-permissions} is too much, you can pre-approve a specific allow list instead. Add this to your project's \gsdfile{.claude/settings.json} (the file Claude Code reads for per-project configuration):
+
+\begin{lstlisting}
+{
+  "permissions": {
+    "allow": [
+      "Bash(date:*)",
+      "Bash(echo:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(wc:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(sort:*)",
+      "Bash(grep:*)",
+      "Bash(tr:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git tag:*)"
+    ]
+  }
+}
+\end{lstlisting}
+
+This pattern whitelists the specific commands GSD needs to run without prompting, while keeping everything else gated. If Claude tries to run \texttt{rm -rf}, \texttt{curl pipe-to-shell}, or anything not in the allow list, Claude Code will still stop and ask you.
+
+The allow list is scoped to this project's \gsdfile{.claude/settings.json}. It does not affect other projects. The pattern syntax is Claude Code's, not GSD's --- \texttt{Bash(command:*)} means ``any invocation of \texttt{command}.''
+
+\section{Recommended allow lists by workflow}
+
+Different GSD workflows need different tool sets. Start with the base list above and add as needed.
+
+\textbf{Base (always needed):} as shown above --- filesystem basics, git read/write, standard Unix text tools.
+
+\textbf{Testing:} add \texttt{Bash(npm test:*)}, \texttt{Bash(pytest:*)}, \texttt{Bash(cargo test:*)}, \texttt{Bash(go test:*)}, \texttt{Bash(jest:*)}, etc., depending on your stack.
+
+\textbf{Building:} add \texttt{Bash(npm run build:*)}, \texttt{Bash(cargo build:*)}, \texttt{Bash(go build:*)}, \texttt{Bash(tsc:*)}.
+
+\textbf{Package management:} add \texttt{Bash(npm install:*)}, \texttt{Bash(cargo add:*)}, \texttt{Bash(pip install:*)} --- but \emph{only} if you trust GSD to pick dependencies in this project. Many teams deliberately keep these gated.
+
+\textbf{Shipping (optional):} add \texttt{Bash(gh pr create:*)}, \texttt{Bash(gh pr view:*)}, \texttt{Bash(gh issue create:*)} if you use \gsdcmd{ship}.
+
+\textbf{Node tooling for GSD:} add \texttt{Bash(node gsd-tools.cjs:*)} if you run state commands manually.
+
+Do \emph{not} blanket-allow \texttt{Bash(*)}. That is equivalent to \gsdflag{dangerously-skip-permissions} with more typing.
+
+\section{Choosing between the two}
+
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Situation} & \textbf{Recommendation} \\
+\midrule
+Personal side project, local dev, throwaway repo & \gsdflag{dangerously-skip-permissions} is reasonable. \\
+Team project, shared codebase, bounded trust & Granular allow list. \\
+Production-adjacent work (touches deployed configs, credentials, release tags) & Granular allow list, minimal scope. \\
+Learning / exploring GSD for the first time & Start with granular; you'll learn which commands matter. \\
+CI / headless automation & Use the granular allow list via project settings, not the flag. \\
+Brand-new runtime you haven't vetted & Granular only, until you've seen how it behaves. \\
+\bottomrule
+\end{tabularx}
+
+\section{What GSD does on its own}
+
+Separately from the permissions flag, GSD ships two runtime hooks that provide defense in depth. These are not opt-in:
+
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{\texttt{gsd-prompt-guard.js}} --- PreToolUse hook that scans Write/Edit calls targeting \gsdfile{.planning/} for known injection patterns (role overrides, instruction bypasses, system-tag injection). Advisory-only --- it flags but does not block. Always active, cannot be disabled.
+  \item \textbf{\texttt{gsd-workflow-guard.js}} --- warns when file edits happen outside a GSD workflow context (advises using \gsdcmd{quick} or \gsdcmd{fast}). Opt-in via \texttt{hooks.workflow\_guard: true}. Off by default.
+\end{itemize}
+
+These protect \gsdfile{.planning/} specifically because planning files become system prompts for future agents. User-supplied text flowing into planning artifacts is a potential indirect-prompt-injection vector, and the guard is the defense-in-depth layer for it. A prompt-injection scanner (\texttt{prompt-injection-scan.test.cjs}) also runs in GSD's CI against all agent, workflow, and command files.
+
+\section{Summary}
+
+\gsdflag{dangerously-skip-permissions} is real, recommended for personal projects, and removes every per-command safety gate. The granular allow list gives you the same automation flow with an explicit trust boundary. For team, production-adjacent, or shared work, the granular approach is the right default. For personal projects in directories you control, the flag is honest and fine. Both are supported. Pick with eyes open, and re-evaluate when your context changes.
+
+\begin{gsdnote}[title=Key Takeaways]
+\begin{itemize}[itemsep=2pt,leftmargin=1.2em]
+  \item \gsdflag{dangerously-skip-permissions} removes all per-command gates. Fine for personal work in directories you control.
+  \item The granular \texttt{permissions.allow} list is the right default for team, shared, or production-adjacent work.
+  \item GSD's prompt-guard hook protects \gsdfile{.planning/} unconditionally and cannot be disabled.
+  \item Never blanket-allow \texttt{Bash(*)}. If you want that, just use the flag.
+\end{itemize}
+\end{gsdnote}
+
+\end{document}

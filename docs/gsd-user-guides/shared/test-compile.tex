@@ -1,0 +1,115 @@
+% ============================================================================
+%  test-compile.tex
+%  Wave 0 verification — exercises every shared macro and tcolorbox
+% ============================================================================
+\documentclass[11pt,letterpaper,openany]{book}
+
+\title{GSD Wave 0 — Shared Infrastructure Test}
+\author{The Tibsfox Team}
+
+\input{gsd-guides-preamble.tex}  % preamble transitively sources gsd-color-scheme.tex
+\input{gsd-command-data.tex}
+
+\begin{document}
+
+% ---------- Title page ----------
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\headingfont\Huge\bfseries\color{gsdnavy} Wave 0 Test Compile\par}
+\vspace{0.5cm}
+{\headingfont\Large Shared LaTeX Infrastructure — GSD User Guides Suite\par}
+\vspace{2cm}
+{\large The Tibsfox Team \par}
+\vspace{0.5cm}
+{\small For GSD v1.35.0 \par}
+\vfill
+{\footnotesize \cclicense\par}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\chapter{Typography Check}
+\section{Body Text}
+This paragraph uses DejaVu Serif at the default body size. The preamble
+should have loaded fontspec, set the main font to DejaVu Serif with a
+0.95 scale, and configured monospace to DejaVu Sans Mono. If you see
+serif letters here with proper ligatures (``fi'', ``fl'') and italic
+shape (\textit{like this}) plus bold (\textbf{like this}), fonts are
+configured correctly.
+
+\section{Command Macros}
+The \gsdcmd{new-project} command starts a new GSD project. You can also
+invoke it as \gsdcolon{new-project} in skill-style syntax. Common flags
+include \gsdflag{workspace} and \gsdflag{dry-run}. Output files include
+\gsdfile{.planning/PROJECT.md} and \gsdfile{.planning/ROADMAP.md}.
+Press \gsdkbd{Enter} to confirm.
+
+\section{Code Listing}
+\begin{lstlisting}
+npx get-shit-done-cc@latest
+cd my-project
+claude
+/gsd-new-project
+\end{lstlisting}
+
+\chapter{Callout Boxes}
+
+\begin{gsdtip}
+This is a tip callout. Blue left bar, light blue background. Use for
+helpful hints and discoverable features.
+\end{gsdtip}
+
+\begin{gsdnote}
+This is a note callout. Gray left bar, light gray background. Use for
+neutral informational asides.
+\end{gsdnote}
+
+\begin{gsdsuccess}
+This is a success callout. Green left bar, light green background. Use
+when marking a verified or completed step.
+\end{gsdsuccess}
+
+\begin{gsdwarning}
+This is a warning callout. Amber left bar, light yellow background. Use
+for things that could go wrong if the reader isn't careful.
+\end{gsdwarning}
+
+\begin{gsdimportant}
+This is an important callout. Red left bar, light red background. Use
+for safety-critical guidance. Example: Never run GSD with
+\gsdflag{dangerously-skip-permissions} in interactive sessions you don't
+fully understand.
+\end{gsdimportant}
+
+\chapter{Tables}
+\section{Command Category Sample}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Command} & \textbf{Purpose} \\
+\midrule
+\gsdcmd{new-project} & Bootstrap a fresh GSD project \\
+\gsdcmd{plan-phase} & Create a plan for the current phase \\
+\gsdcmd{execute-phase} & Run the plan for the current phase \\
+\gsdcmd{verify-work} & Check delivered work against success criteria \\
+\gsdcmd{ship} & Mark a phase or milestone complete \\
+\bottomrule
+\end{tabularx}
+
+\chapter{Page Break Behavior}
+\section{Long Paragraphs}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum.
+
+\section{Second Section}
+A second section on this chapter to force the section header to the
+right side of the running header. Page \pageref{LastPage} should match
+the footer pagination.
+
+\end{document}
