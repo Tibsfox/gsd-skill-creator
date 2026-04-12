@@ -890,3 +890,83 @@ fn main() {
 ```
 
 This demonstrates ownership (values moved into threads), borrowing (`&str` in trait methods), traits (dynamic dispatch via `dyn`), generics (`Arc<dyn DataProcessor>`), error handling (`Result` with `filter_map`), smart pointers (`Arc<Mutex<HashMap>>`), closures (`move` closures), and iterators (`.filter_map().collect()` chain).
+
+---
+
+## Study Guide — Rust Language & Ownership
+
+### Key concepts
+
+1. **Ownership.** Each value has one owner. When owner
+   goes out of scope, value is dropped.
+2. **Borrowing.** `&T` (shared) and `&mut T` (exclusive)
+   references.
+3. **Lifetimes.** Compiler-tracked reference validity.
+4. **Traits.** Interface plus default methods; like
+   Haskell type classes.
+5. **Enums with data.** Algebraic data types.
+6. **`Result<T, E>` and `?`.** Explicit error handling
+   without exceptions.
+
+---
+
+## Programming Examples
+
+### Example 1 — Ownership
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1;           // s1 moved
+    // println!("{}", s1); // would error: s1 is gone
+    println!("{}", s2);
+}
+```
+
+### Example 2 — Traits
+
+```rust
+trait Area {
+    fn area(&self) -> f64;
+}
+
+struct Circle { r: f64 }
+impl Area for Circle {
+    fn area(&self) -> f64 { std::f64::consts::PI * self.r * self.r }
+}
+```
+
+### Example 3 — Result with `?`
+
+```rust
+fn read_number(path: &str) -> Result<i32, Box<dyn std::error::Error>> {
+    let content = std::fs::read_to_string(path)?;
+    Ok(content.trim().parse()?)
+}
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Fight the borrow checker
+
+Write a program that fails to compile because of
+aliasing. Fix it by refactoring, not by adding `clone()`.
+
+### DIY 2 — Implement a linked list
+
+The canonical "Rust is hard" exercise. Read *Learn Rust
+With Entirely Too Many Linked Lists* first.
+
+### TRY — Read The Rustonomicon
+
+The dark arts of unsafe Rust. Short. Essential for
+anyone writing FFI.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
