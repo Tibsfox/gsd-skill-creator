@@ -958,3 +958,29 @@ This research cross-links to the following college departments in
 *Research compiled for the PNW Research Series, tibsfox.com. Part of the Rust (RST) project within a 284-project research corpus. Items marked [CHECK] require verification against primary sources.*
 
 *Addendum (Rust 1.85 / 2024 edition, Linux kernel core-language promotion, Windows kernel rewrite) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Rust History
+
+### Questions
+
+- Why Graydon Hoare started Rust (2006-2010).
+- Why Mozilla sponsored it (and later let it go).
+- Why the Rust Foundation matters.
+- Why Linux took until 2025 to promote Rust to core.
+
+## DIY — Read one RFC
+
+Every Rust change goes through an RFC. Pick one (RFC
+0560 for error handling, RFC 2000 for const generics).
+Read it.
+
+## TRY — Install two edition versions
+
+`rustup install 1.0.0` and `rustup install stable`.
+Compile the same program in both. Observe what changed.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
