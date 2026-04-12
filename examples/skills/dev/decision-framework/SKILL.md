@@ -6,8 +6,8 @@ category: dev
 status: stable
 origin: taches-cc-resources
 modified: true
-first_seen: 2026-04-10
-first_path: examples/skills/decision-framework
+first_seen: 2026-02-07
+first_path: examples/decision-framework/SKILL.md
 superseded_by: null
 ---
 # Decision Frameworks

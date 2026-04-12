@@ -6,8 +6,8 @@ category: orchestration
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/mayor-coordinator
+first_seen: 2026-03-06
+first_path: .claude/skills/mayor-coordinator/SKILL.md
 superseded_by: null
 ---
 # Mayor Coordinator

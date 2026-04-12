@@ -34,8 +34,8 @@ category: media
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/ffmpeg-media
+first_seen: 2026-04-11
+first_path: examples/skills/media/ffmpeg-media/SKILL.md
 superseded_by: null
 ---
 # FFmpeg Media Processing Skill

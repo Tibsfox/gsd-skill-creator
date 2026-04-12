@@ -6,8 +6,8 @@ category: research
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/vision-to-mission
+first_seen: 2026-04-11
+first_path: examples/skills/research/vision-to-mission/SKILL.md
 superseded_by: null
 ---
 # Vision → Mission Skill

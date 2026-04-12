@@ -42,8 +42,8 @@ category: media
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/av-studio
+first_seen: 2026-04-11
+first_path: examples/skills/media/av-studio/SKILL.md
 superseded_by: null
 ---
 # AV Studio Production Skill

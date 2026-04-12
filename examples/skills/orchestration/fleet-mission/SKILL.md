@@ -7,8 +7,8 @@ category: orchestration
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/fleet-mission
+first_seen: 2026-03-31
+first_path: .claude/skills/fleet-mission/SKILL.md
 superseded_by: null
 ---
 # Fleet Mission
