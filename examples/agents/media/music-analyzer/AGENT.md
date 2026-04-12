@@ -15,8 +15,8 @@ category: media
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/music-analyzer
+first_seen: 2026-04-11
+first_path: examples/agents/media/music-analyzer/AGENT.md
 superseded_by: null
 ---
 # Music Analyzer Agent

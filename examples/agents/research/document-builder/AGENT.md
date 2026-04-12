@@ -11,8 +11,8 @@ category: research
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/document-builder
+first_seen: 2026-03-31
+first_path: .claude/agents/document-builder.md
 superseded_by: null
 ---
 <role>

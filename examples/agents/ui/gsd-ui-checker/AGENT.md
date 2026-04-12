@@ -8,8 +8,8 @@ category: ui
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/gsd-ui-checker
+first_seen: 2026-04-11
+first_path: examples/agents/ui/gsd-ui-checker/AGENT.md
 superseded_by: null
 ---
 <role>

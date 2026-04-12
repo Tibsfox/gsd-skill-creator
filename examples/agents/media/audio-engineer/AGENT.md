@@ -17,8 +17,8 @@ category: media
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/audio-engineer
+first_seen: 2026-04-11
+first_path: examples/agents/media/audio-engineer/AGENT.md
 superseded_by: null
 ---
 # Audio Engineer Agent

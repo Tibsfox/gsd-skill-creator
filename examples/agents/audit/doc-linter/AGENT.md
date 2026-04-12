@@ -8,8 +8,8 @@ category: audit
 status: stable
 origin: taches-cc-resources
 modified: true
-first_seen: 2026-04-10
-first_path: examples/agents/doc-linter
+first_seen: 2026-02-07
+first_path: examples/doc-linter/AGENT.md
 superseded_by: null
 ---
 # Documentation Linter Agent

@@ -8,8 +8,8 @@ category: gsd
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/gsd-integration-checker
+first_seen: 2026-02-07
+first_path: .claude/agents/gsd-integration-checker.md
 superseded_by: null
 ---
 <role>

@@ -7,8 +7,8 @@ category: gsd
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/gsd-orchestrator
+first_seen: 2026-02-08
+first_path: .claude/agents/gsd-orchestrator.md
 superseded_by: null
 ---
 <role>

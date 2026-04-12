@@ -8,8 +8,8 @@ category: dev
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/test-orchestrator
+first_seen: 2026-02-07
+first_path: .claude/agents/test-orchestrator.md
 superseded_by: null
 ---
 # Test Orchestrator Agent

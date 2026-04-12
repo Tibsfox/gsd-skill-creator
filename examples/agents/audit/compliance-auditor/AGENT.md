@@ -8,8 +8,8 @@ category: audit
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/compliance-auditor
+first_seen: 2026-02-07
+first_path: .claude/agents/compliance-auditor.md
 superseded_by: null
 ---
 # Compliance Auditor Agent

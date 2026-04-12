@@ -15,8 +15,8 @@ category: media
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/stream-producer
+first_seen: 2026-04-11
+first_path: examples/agents/media/stream-producer/AGENT.md
 superseded_by: null
 ---
 # Stream Producer Agent

@@ -8,8 +8,8 @@ category: ops
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/release-risk-scorer
+first_seen: 2026-02-07
+first_path: .claude/agents/release-risk-scorer.md
 superseded_by: null
 ---
 # Release Risk Scorer Agent

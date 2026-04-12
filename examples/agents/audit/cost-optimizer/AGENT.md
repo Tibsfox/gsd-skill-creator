@@ -8,8 +8,8 @@ category: audit
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/cost-optimizer
+first_seen: 2026-02-07
+first_path: .claude/agents/cost-optimizer.md
 superseded_by: null
 ---
 # Cost Optimizer Agent

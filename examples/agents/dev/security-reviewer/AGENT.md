@@ -8,8 +8,8 @@ category: dev
 status: stable
 origin: taches-cc-resources
 modified: true
-first_seen: 2026-04-10
-first_path: examples/agents/security-reviewer
+first_seen: 2026-02-07
+first_path: examples/security-reviewer/AGENT.md
 superseded_by: null
 ---
 # Security Reviewer Agent

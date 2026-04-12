@@ -8,8 +8,8 @@ category: audit
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/agents/codebase-navigator
+first_seen: 2026-02-07
+first_path: examples/codebase-navigator/AGENT.md
 superseded_by: null
 ---
 # Codebase Navigator Agent
