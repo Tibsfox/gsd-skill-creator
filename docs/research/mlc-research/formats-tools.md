@@ -1654,3 +1654,42 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (WebAssembly 3.0 and eBPF crossover) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Binary Formats & Tools
+
+### Formats
+
+- **ELF** (Linux, BSD, Solaris).
+- **Mach-O** (macOS, iOS).
+- **PE/COFF** (Windows).
+- **Wasm** (web, edge, plugin systems).
+- **BPF/eBPF** (Linux kernel).
+
+### Tools
+
+- `readelf`, `objdump`, `nm`, `strip`, `strings`, `ld`,
+  `ldd`, `otool` (macOS), `dumpbin` (Windows).
+
+## DIY — Dissect an ELF
+
+`readelf -a /bin/ls`. Read the ELF header, program headers,
+section headers. You'll find `.text` (code), `.data`
+(initialized), `.bss` (zeroed), `.rodata` (constants),
+`.dynamic` (dynamic linking).
+
+## DIY — Read a Wasm module
+
+Write a 5-line C program. Compile with `emcc hello.c -o
+hello.wasm`. Disassemble with `wasm2wat`.
+
+## TRY — Write a shared library and dlopen it
+
+Build a `.so`, load at runtime with `dlopen`, resolve a
+symbol with `dlsym`, call it. You've just reimplemented
+every plugin system.
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)

@@ -1550,3 +1550,37 @@ Understanding machine code is understanding what computers actually do.*
 > PNW Research Series | Computer Science Cluster | MLC
 > Part of the 287-project corpus
 > Companion projects: ASM (Assembly Language), C, C++, Rust, Go, Java, JavaScript, Python
+
+---
+
+## Study Guide — Machine Code History & Theory
+
+### Key moments
+
+- **1937 Turing.** Universal machine, defines computation.
+- **1945 EDVAC.** Stored-program concept. Von Neumann.
+- **1947 Williams tube.** First working stored-program
+  machine.
+- **1964 IBM 360.** Family-compatible ISA.
+- **1980s RISC.** Simplicity enables speed.
+- **2010s RISC-V.** Open ISA.
+
+## DIY — Read Turing 1937
+
+*On Computable Numbers*. Long. Worth it. The universal
+machine section is the foundation.
+
+## DIY — Read von Neumann 1945
+
+*First Draft of a Report on the EDVAC*. The 101-page
+document that defined the stored-program computer.
+
+## TRY — Boot an emulated PDP-11
+
+SIMH runs PDP-11 with Unix v6. Boot it. Type `cc hello.c`.
+You are now using the environment where Unix was born.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)

@@ -2176,3 +2176,62 @@ The encoding format determines:
 
 There is no universally "best" encoding. Each represents a different point
 in the design space, shaped by its historical context and target use case.
+
+---
+
+## Study Guide — Instruction Encoding
+
+### Key concepts
+
+1. **Fixed vs variable length.** RISC-V, ARM32, MIPS are
+   fixed 32-bit. x86 is 1-15 bytes. Thumb-2 and RV-C are
+   compressed variants.
+2. **Opcode tables.** The main decoder demultiplexes the
+   opcode field to a unit.
+3. **Immediate encoding.** How constants are packed into
+   instructions. RISC-V has 5 immediate formats; x86 has
+   several.
+4. **Addressing modes.** Register, register+offset,
+   PC-relative, memory indirect.
+
+---
+
+## Programming Examples
+
+### Example 1 — Disassemble a RISC-V instruction by hand
+
+```
+0x00c58533
+
+Binary: 0000_0000_1100_0101_1000_0101_0011_0011
+        imm/funct7 rs2  rs1  f3  rd   opcode
+        0000000    01100 01011 000 01010 0110011
+        rs2=x12 rs1=x11 rd=x10 f3=000 opcode=0110011 (OP)
+        add x10, x11, x12
+```
+
+### Example 2 — Use `llvm-mc`
+
+```bash
+echo 'add x10, x11, x12' | llvm-mc -triple=riscv64 -show-encoding
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Build an instruction decoder
+
+Write a Python script that takes a 4-byte RISC-V
+instruction and prints its assembly. Cover at least 10
+instructions.
+
+### TRY — Compare x86 and RISC-V encoding density
+
+Compile the same C function for x86-64 and RISC-V. Compare
+sizes. x86 usually wins on density; RISC-V wins on
+simplicity.
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
