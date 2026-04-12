@@ -1,0 +1,252 @@
+# Nutrition Department Chipset Configuration
+# Instantiation of the department template pattern for the nutrition domain.
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This chipset forks the math-department template and
+# remaps it for nutrition science, dietary assessment, food policy,
+# popular-nutrition history, food systems, and feeding pedagogy.
+
+name: nutrition-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated nutrition department providing domain-routed expertise
+  through seven named agents (Lind, Ancel Keys, Marion Nestle, Atwater,
+  Adelle Davis, Pollan, Satter), six knowledge skills, and three
+  pre-composed teams. Enforces tier labels on every claim, applies
+  historical-transparency treatment to popular-nutrition writing, and
+  persists work via Grove records linked to the college nutrition
+  department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  nutrition-science-foundations:
+    domain: nutrition
+    description: "Foundational concepts — macronutrients, energy balance, Atwater factors, reference intakes, calorimetry, food composition, and the methods of human nutrition research"
+    triggers:
+      - "calorie"
+      - "macronutrient"
+      - "energy"
+      - "reference intake"
+      - "RDA"
+      - "DRI"
+      - "composition"
+      - "atwater"
+    agent_affinity: [atwater, lind]
+
+  dietary-assessment:
+    domain: nutrition
+    description: "Methods for assessing intake — 24-hour recall, FFQ, diet diary, biomarkers, duplicate plate, controlled feeding — and how to choose among them"
+    triggers:
+      - "dietary recall"
+      - "food frequency"
+      - "FFQ"
+      - "diet diary"
+      - "biomarker"
+      - "controlled feeding"
+      - "measurement error"
+    agent_affinity: [lind, ancel-keys]
+
+  nutrient-metabolism:
+    domain: nutrition
+    description: "Biochemistry of macronutrients and key micronutrients — digestion, lipoprotein system, insulin and glucose, iron homeostasis, one-carbon metabolism"
+    triggers:
+      - "metabolism"
+      - "lipoprotein"
+      - "LDL"
+      - "HDL"
+      - "insulin"
+      - "iron"
+      - "folate"
+      - "biochemistry"
+    agent_affinity: [atwater, ancel-keys]
+
+  food-policy-and-politics:
+    domain: nutrition
+    description: "Dietary guidelines process, food labeling history, federal nutrition programs, commodity subsidies, and documented industry influence on research and policy"
+    triggers:
+      - "dietary guidelines"
+      - "DGA"
+      - "DGAC"
+      - "food policy"
+      - "food industry"
+      - "SNAP"
+      - "WIC"
+      - "food labeling"
+      - "industry funding"
+    agent_affinity: [marion-nestle, pollan]
+
+  contested-claims-in-nutrition:
+    domain: nutrition
+    description: "Active controversies — saturated fat, dietary cholesterol, low-carb vs low-fat, ultra-processed foods, red meat, sodium — and the replication status of popular single-nutrient claims"
+    triggers:
+      - "contested"
+      - "saturated fat"
+      - "red meat"
+      - "ultra-processed"
+      - "cholesterol"
+      - "sodium"
+      - "replication"
+      - "evidence tier"
+    agent_affinity: [ancel-keys, marion-nestle, adelle-davis]
+
+  feeding-pedagogy:
+    domain: nutrition
+    description: "Division of Responsibility in Feeding, child nutrition, age-appropriate autonomy, picky eating, and nutrition curriculum for learners at every level"
+    triggers:
+      - "child feeding"
+      - "picky eater"
+      - "feeding relationship"
+      - "Division of Responsibility"
+      - "sDOR"
+      - "nutrition curriculum"
+      - "family meals"
+    agent_affinity: [satter, marion-nestle]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Lind as CAPCOM)
+# ==========================================================================
+# Note: chipset.yaml lists the chair plus two key specialists, not all 7.
+# The full roster is documented in README.md and in the individual
+# AGENT.md files under examples/agents/nutrition/.
+
+agents:
+  topology: "router"
+  router_agent: lind
+
+  agents:
+    - name: lind
+      role: "department chair — classification, routing, synthesis, tier-label enforcement"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: ancel-keys
+      role: "cardiovascular specialist — lipid metabolism, dietary-pattern epidemiology, cohort methodology"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: marion-nestle
+      role: "policy specialist — DGA process, industry-influence pattern, funding disclosure, federal nutrition programs"
+      model: opus
+      tools: [Read, Grep, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  nutrition-analysis-team:
+    description: "Full department for multi-domain and contested questions"
+    agents: [lind, ancel-keys, marion-nestle, atwater, adelle-davis, pollan, satter]
+    use_when: "multi-domain, contested-claim, or full-analysis requests"
+
+  nutrition-workshop-team:
+    description: "Focused deep-dive on a single claim or study"
+    agents: [lind, ancel-keys, marion-nestle, adelle-davis]
+    use_when: "study critique, contested-claim deep dives, popular-nutrition book review"
+
+  nutrition-practice-team:
+    description: "Practice-oriented real-world application team"
+    agents: [lind, atwater, pollan, satter]
+    use_when: "family feeding, grocery store translation, meal planning, ongoing family nutrition improvement"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 nutrition Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college nutrition department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (lind) must be CAPCOM"
+        action: "block"
+
+      - check: "tier_labels_enforced"
+        description: "Lind enforces strength-of-evidence tier labels on all substantive claims"
+        action: "block"
+
+      - check: "historical_transparency_for_davis"
+        description: "Any reference to Adelle Davis or her claims applies the historical-transparency protocol"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - foundations
+      - assessment
+      - metabolism
+      - policy
+      - contested
+      - pedagogy
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "nutrition-department"
+  record_types:
+    - name: NutritionAnalysis
+      description: "Diagnostic analysis — food composition analysis, mechanism analysis, dietary-pattern analysis, contested-claim assessment"
+
+    - name: NutritionAssessment
+      description: "Adequacy assessment against reference intakes, individual nutrient status assessment, intake-versus-need comparison"
+
+    - name: NutritionReview
+      description: "Review or critique of a study, guideline document, popular-nutrition claim, or cited evidence base"
+
+    - name: NutritionExplanation
+      description: "Teaching artifact at a specified audience level — biochemistry explanation, pedagogy framing, food-system translation"
+
+    - name: NutritionSession
+      description: "Session log linking work products to interaction context, with classification metadata, tier labels, funding flags, and historical-transparency annotations"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "nutrition"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Nutrition Science Foundations"
+    - "Dietary Assessment and Research Methods"
+    - "Food Policy and Public Health Nutrition"
+    - "Food Systems and Food Culture"
+    - "Feeding Relationships and Nutrition Pedagogy"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
