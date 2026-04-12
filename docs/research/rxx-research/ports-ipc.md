@@ -2863,3 +2863,34 @@ That is the design goal. That is the porting specification.
 > Lines: ~1,150
 > Cross-references: asm-research/architectures.md, c-research/language-core.md
 > Next document: rxx-stdlib.md (ARexx standard library and built-in functions)
+
+---
+
+## Study Guide — ARexx Ports & IPC
+
+### Key concepts
+
+1. **Named ports.** Each app registered a public ARexx
+   port by name. Scripts addressed messages by port name.
+2. **ADDRESS.** The REXX keyword that set the default
+   port for subsequent commands.
+3. **Host commands.** Applications defined a set of
+   commands scripts could invoke; ARexx routed them.
+4. **Result codes and result strings.** Every host
+   command returned both.
+
+## DIY — Map ARexx to D-Bus
+
+Pick an ARexx host command set. Write an equivalent
+D-Bus service interface. Note the parallels: named
+services, methods, signals.
+
+## TRY — Build a tiny port-based IPC
+
+Python + sockets + JSON. Named server, client sends
+commands, server replies. 80 lines. You have just
+recreated ARexx ports.
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)

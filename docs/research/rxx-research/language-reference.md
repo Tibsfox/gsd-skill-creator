@@ -2955,3 +2955,50 @@ Modern implementations include:
 - **ARexx** -- included in AmigaOS 3.x+, AROS, MorphOS
 
 For porting purposes, Regina REXX is the reference implementation for testing. It is available on every major platform and faithfully implements the ANSI standard plus common extensions.
+
+---
+
+## Study Guide — REXX Language Reference
+
+### Key concepts
+
+1. **Everything is a string.** REXX is untyped — numbers
+   are just strings that look like numbers.
+2. **`SAY`** prints.
+3. **`PARSE`** is REXX's pattern matching — one of its
+   most distinctive features.
+4. **`DO ... END`** blocks.
+5. **`INTERPRET`** evaluates a string as code. First-class
+   metaprogramming.
+
+## Programming Examples
+
+### Example 1 — Hello REXX
+
+```rexx
+/* hello.rex */
+say 'Hello, REXX'
+```
+
+### Example 2 — PARSE
+
+```rexx
+line = 'tom 42 engineer'
+parse var line name age role
+say name role age
+/* tom engineer 42 */
+```
+
+## DIY — Write a config parser
+
+Use `PARSE` to read a `key=value` config file. REXX's
+parse is denser than any other language's string handling.
+
+## TRY — Write an INTERPRET-based DSL
+
+Build a small DSL that uses `INTERPRET` to execute user
+code. This was revolutionary in 1982.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)

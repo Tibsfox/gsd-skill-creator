@@ -2870,3 +2870,30 @@ Model Context Protocol that defines our current ecosystem.*
 application should be able to talk to every other application, and that the
 scripting language should be simple enough for anyone to learn in an afternoon.
 ARexx delivered on that promise in 1987. This project delivers on it again.*
+
+---
+
+## Study Guide — Porting REXX/ARexx
+
+### Key questions
+
+- What's the minimum interpreter core you need to port?
+- How do you represent ports in a Unix/Windows context?
+- How do you map REXX semantics onto modern IPC
+  (sockets, D-Bus, MCP)?
+
+## DIY — Build a minimal REXX interpreter
+
+200 lines of Python. Parse tokens, evaluate expressions,
+dispatch SAY/DO/IF. Ship it.
+
+## TRY — Map ARexx ports onto MCP
+
+Model Context Protocol resembles ARexx's port system:
+named endpoints, named messages, typed payloads. Write
+a short paper outlining the mapping.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
