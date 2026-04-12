@@ -1592,3 +1592,68 @@ node --conditions=development app.js   # Package.json conditional exports
 
 *PNW Research Series -- JavaScript and TypeScript*
 *Research conducted 2026-04-08. Engine version data current as of early 2025.*
+
+---
+
+## Study Guide — JS Runtimes & Engines
+
+### Engines
+
+- **V8** — Chrome, Node, Deno, Edge, Bun's HTTP.
+- **SpiderMonkey** — Firefox, Servo.
+- **JavaScriptCore (Nitro)** — Safari, Bun.
+- **Chakra** — Legacy Edge (dead).
+
+### Runtimes
+
+- **Node** — the original server JS runtime.
+- **Deno** — built-in TS, permissions, Web APIs.
+- **Bun** — fast, Zig-based, JavaScriptCore, npm-compatible.
+- **Cloudflare Workers** — V8 isolates.
+
+### Key concepts
+
+1. **Event loop.** Microtasks, macrotasks, I/O callbacks.
+2. **V8 inline caches.** JIT speculation on object shapes.
+3. **Hidden classes.** Objects with stable shapes get fast
+   property access.
+
+---
+
+## Programming Examples
+
+### Example 1 — Microtask vs macrotask
+
+```js
+console.log('1');
+setTimeout(() => console.log('3'), 0);
+Promise.resolve().then(() => console.log('2'));
+console.log('4');
+// Output: 1 4 2 3
+```
+
+Microtasks (promises) run before macrotasks (setTimeout).
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Benchmark three runtimes
+
+Run the same HTTP server in Node, Deno, and Bun. Measure
+req/s.
+
+### DIY 2 — Use --inspect
+
+`node --inspect app.js` gives you the Chrome DevTools
+debugger over WebSocket. Step through async code.
+
+### TRY — Write a Cloudflare Worker
+
+One file, one `fetch` handler, globally distributed.
+
+---
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)

@@ -1105,3 +1105,67 @@ Several trends are reshaping the JavaScript/TypeScript ecosystem simultaneously:
 - Angular documentation -- angular.dev
 - Vite documentation -- vite.dev
 - TypeScript documentation -- typescriptlang.org
+
+---
+
+## Study Guide — JS/TS Ecosystem & Frameworks
+
+### Tool map
+
+- **Runtimes:** Node, Deno, Bun.
+- **Package managers:** npm, pnpm, yarn, bun.
+- **Build:** Vite, esbuild, Rollup, Webpack, Turbopack.
+- **Frameworks:** React, Next.js, Vue/Nuxt, Svelte/SvelteKit,
+  Angular, Solid, Remix.
+- **Testing:** Vitest, Jest, Playwright, Cypress.
+- **Linting:** ESLint, Biome, Prettier.
+- **Type-check:** tsc, tsgo (when ready).
+
+### 1-week plan
+
+- Day 1: `pnpm create vite` a React + TS app.
+- Day 2: Add routing with react-router.
+- Day 3: Add a server with Hono or Express.
+- Day 4: Write Vitest tests.
+- Day 5: Playwright end-to-end test.
+- Day 6: Add ESLint + Prettier.
+- Day 7: Deploy to Vercel or Cloudflare Pages.
+
+---
+
+## Programming Examples
+
+### Example 1 — Vite + React + TS hello world
+
+```tsx
+// src/App.tsx
+export function App() {
+  return <h1>Hello from React + TypeScript</h1>;
+}
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Switch package managers
+
+Take any project using npm. Switch to pnpm. Measure install
+time. Usually 2-3x faster.
+
+### DIY 2 — Replace webpack with Vite
+
+Find a legacy Webpack config in one of your projects.
+Migrate to Vite. Measure dev-server start time.
+
+### TRY — Build a fullstack Next.js app
+
+10 pages, auth, database, deployed. This is the modern web
+stack in one evening.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)

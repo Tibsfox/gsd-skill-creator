@@ -1701,3 +1701,76 @@ to validation libraries or explicit runtime checks.
 | 2023 | 5.0        | Decorators (Stage 3), bundler moduleResolution    |
 | 2024 | 5.4        | NoInfer utility type                              |
 | 2025 | 5.8        | Erasable type-only syntax in JS files             |
+
+---
+
+## Study Guide — JS/TS Language & Type System
+
+### Key concepts
+
+1. **Structural typing.** A type is compatible if its members
+   match, regardless of name.
+2. **`unknown` vs `any`.** `unknown` requires narrowing;
+   `any` defeats the type system.
+3. **Type guards.** `typeof`, `instanceof`, user-defined
+   predicates (`value is T`).
+4. **Discriminated unions.** `{ kind: 'a', ... } | { kind:
+   'b', ... }`.
+5. **Generics and conditional types.** `T extends U ? X : Y`.
+
+---
+
+## Programming Examples
+
+### Example 1 — Discriminated union
+
+```ts
+type Shape =
+  | { kind: 'circle'; r: number }
+  | { kind: 'square'; s: number };
+
+function area(sh: Shape): number {
+  switch (sh.kind) {
+    case 'circle': return Math.PI * sh.r ** 2;
+    case 'square': return sh.s ** 2;
+  }
+}
+```
+
+Exhaustiveness is checked by the compiler — adding a new
+variant forces an update to `area`.
+
+### Example 2 — Type guard
+
+```ts
+function isString(x: unknown): x is string {
+  return typeof x === 'string';
+}
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Eliminate all `any`
+
+Take a TS project. Enable `noImplicitAny`, `strictNullChecks`,
+`strict`. Fix every error. The resulting type safety is
+night-and-day.
+
+### DIY 2 — Use type-challenges
+
+`type-challenges/type-challenges` on GitHub has ~150 type
+puzzles in increasing difficulty. Solve 10 of them.
+
+### TRY — Migrate a JS file to TS
+
+Rename `.js` to `.ts`. Fix the errors. Count how many bugs
+the type checker catches.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
