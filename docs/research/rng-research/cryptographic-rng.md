@@ -397,3 +397,31 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2025 quantum RNG milestones) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Cryptographic RNG
+
+### Key concepts
+
+1. **CSPRNG.** Passes statistical *and* next-bit tests.
+2. **Fortuna, ChaCha20-based DRBG** — modern designs.
+3. **`/dev/urandom`** — Linux's production CSPRNG.
+4. **HRNG** — hardware random number generator
+   (Intel RDRAND, TPM).
+5. **Quantum RNG.** Non-deterministic by physics.
+
+## DIY — Read /dev/urandom
+
+`dd if=/dev/urandom bs=1 count=100 | xxd`. 100 random
+bytes. Repeat. Different every time, and the
+randomness is of cryptographic quality.
+
+## TRY — Compare RDRAND vs ChaCha20
+
+On any modern Intel chip, you can call RDRAND directly
+(inline asm). Compare to a software ChaCha20.
+
+## Related College Departments
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)

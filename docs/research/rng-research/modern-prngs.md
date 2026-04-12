@@ -340,3 +340,32 @@ The deeper lesson of this generation of PRNG design is that **algorithm design i
 - Bernstein, D. J. (2008). "ChaCha, a variant of Salsa20." *SASC 2008*.
 - Vigna, S. (2016). "An experimental exploration of Marsaglia's xorshift generators, scrambled." *ACM TOMS*, 42(4).
 - L'Ecuyer, P. & Simard, R. (2007). "TestU01: A C Library for Empirical Testing of Random Number Generators." *ACM TOMS*, 33(4).
+
+---
+
+## Study Guide — Modern PRNGs
+
+### Key algorithms
+
+1. **PCG** (O'Neill 2014) — tiny state, excellent
+   quality.
+2. **xoshiro / xoroshiro** (Blackman-Vigna) — fast
+   nonlinear.
+3. **SplitMix** — for parallel splittability.
+4. **Philox / Threefry** (Random123) — counter-based,
+   GPU-friendly.
+
+## DIY — Implement PCG32
+
+O'Neill's paper has the 10-line reference. Type it in.
+Run TestU01 on 1 GB of output.
+
+## TRY — Compare PCG vs Mersenne Twister
+
+Same workload, both PRNGs. Measure speed, state size,
+and pass/fail on TestU01 BigCrush.
+
+## Related College Departments
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)

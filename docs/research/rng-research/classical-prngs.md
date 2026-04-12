@@ -437,4 +437,29 @@ The next generation — PCG, xoshiro, ChaCha-based CSPRNGs, and hardware entropy
 
 ---
 
+## Study Guide — Classical PRNGs
+
+### Key algorithms
+
+1. **LCG** — Linear Congruential Generator.
+2. **LFSR** — Linear Feedback Shift Register.
+3. **Mersenne Twister (MT19937)** — 1998, huge period.
+4. **Xorshift** — Marsaglia 2003.
+
+## DIY — Implement an LCG
+
+`X_{n+1} = (a X_n + c) mod m`. 5 lines. Known bad
+choice (a=1103515245, c=12345, m=2^31). Compare to a
+modern PRNG.
+
+## TRY — Reproduce Marsaglia's plot
+
+"Random numbers fall mainly in the planes" (1968).
+Plot consecutive outputs of a bad LCG in 3D. You will
+see the lattice structure.
+
+## Related College Departments
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+
 *Part of the [Random Number Generation research series](./README.md).*

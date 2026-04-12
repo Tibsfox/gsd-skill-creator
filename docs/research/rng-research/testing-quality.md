@@ -280,4 +280,26 @@ The theory has gotten better since 1969. The tests have gotten better. The gener
 
 ---
 
+## Study Guide — Testing RNG Quality
+
+### Test suites
+
+- **Diehard** — Marsaglia's original battery.
+- **NIST SP 800-22** — federal CSPRNG certification.
+- **TestU01** — L'Ecuyer's modern comprehensive suite.
+  BigCrush is the gold standard.
+
+## DIY — Run TestU01 BigCrush on your RNG
+
+`./testu01 -g <rng> -s bigcrush`. Takes hours. Any
+test that fails tells you something.
+
+## TRY — Run chi-square on a biased source
+
+Generate biased output (90% zeros, 10% ones). Run
+chi-square. Observe that the bias shows up in the
+p-value.
+
+---
+
 *Track 5 of the RNG Research Series. See also: [Track 1: History and Origins](history-origins.md)*

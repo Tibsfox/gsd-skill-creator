@@ -274,3 +274,31 @@ The applications differ -- simulation, security, algorithms, games, learning, co
 This is why we built PCG into gsd-skill-creator at the foundation layer, in both languages, with zero dependencies and cross-language parity. Randomness is not a library feature to be imported when needed. It is infrastructure -- like the allocator, like the file system, like the hash function. It is used everywhere, and it must be correct everywhere, and the only way to guarantee that is to own every byte of it.
 
 Just like the arena.
+
+---
+
+## Study Guide — RNG Applications
+
+### Application domains
+
+- **Monte Carlo simulation** — uniform, independent.
+- **Cryptography** — unpredictable.
+- **Games** — reproducible, fast.
+- **Distributed systems** — decorrelated across nodes.
+- **Machine learning** — reproducible training.
+
+## DIY — Build a Monte Carlo π estimator
+
+10 lines of any language. Sample points in the unit
+square, count those inside the unit circle, multiply
+by 4. Watch it converge slowly.
+
+## TRY — Reproduce a Minecraft seed
+
+Take a known Minecraft seed. Write code that produces
+the same first blocks. Observe the reproducibility.
+
+## Related College Departments
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
