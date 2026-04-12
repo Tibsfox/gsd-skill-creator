@@ -1019,3 +1019,77 @@ go test -cpuprofile=cpu.out && go tool pprof cpu.out     # profile
 - **The Go Programming Language** -- Donovan & Kernighan, 2015
 - **Go Proverbs** -- https://go-proverbs.github.io/
 - **Go spec** -- https://go.dev/ref/spec
+
+---
+
+## Study Guide — Go Language
+
+### Key concepts
+
+1. **Interfaces are structural, not nominal.** A type
+   implements an interface if it has the methods; no
+   `implements` keyword.
+2. **Zero values are useful.** `var m map[string]int` is nil
+   but usable for reads; `var b bytes.Buffer` is ready to use.
+3. **Errors are values.** Return `(result, error)`; check
+   `err != nil`; wrap with `fmt.Errorf("%w", err)`; unwrap
+   with `errors.Is` / `errors.As`.
+4. **No generics until 1.18, now first-class.** Type
+   parameters with constraints.
+5. **`defer` guarantees cleanup.** Runs when the function
+   returns, even on panic.
+
+---
+
+## Programming Examples
+
+### Example 1 — An interface and a struct
+
+```go
+type Stringer interface { String() string }
+
+type Point struct { X, Y int }
+func (p Point) String() string { return fmt.Sprintf("(%d,%d)", p.X, p.Y) }
+```
+
+### Example 2 — Generic container
+
+```go
+type Stack[T any] struct { items []T }
+func (s *Stack[T]) Push(v T) { s.items = append(s.items, v) }
+func (s *Stack[T]) Pop() (T, bool) {
+    var zero T
+    if len(s.items) == 0 { return zero, false }
+    n := len(s.items) - 1
+    v := s.items[n]
+    s.items = s.items[:n]
+    return v, true
+}
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Write idiomatic error handling
+
+Take a function that does three things that can fail (open,
+read, parse). Return `(T, error)`. Wrap errors with context.
+Test with `errors.Is`.
+
+### DIY 2 — Build a JSON API
+
+10 lines with net/http and encoding/json. Pipe to `jq`.
+
+### TRY — Convert a Python script
+
+Pick a Python script over 100 lines. Rewrite in Go. Observe
+what Python features you lose (dynamic typing, list
+comprehensions) and what you gain (static typing, speed,
+deployment).
+
+---
+
+## Related College Departments (Go language)
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
