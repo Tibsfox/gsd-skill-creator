@@ -927,4 +927,66 @@ For researchers, the interesting story is not that Java has added features. It's
 
 ---
 
+## Study Guide — Java Language & OOP
+
+### Key concepts
+
+1. **Classes are reference types.** `Foo f = new Foo();`
+   allocates on heap. Primitive types (`int`, `long`) are
+   value types.
+2. **Single inheritance of implementation, multiple of type.**
+   Classes extend one class; can implement many interfaces.
+3. **Records** (JDK 16) are immutable data carriers.
+4. **Sealed classes** (JDK 17) restrict subclassing to a
+   known list, enabling exhaustive pattern matching.
+5. **Pattern matching** (JDK 21) in `switch`.
+
+---
+
+## Programming Examples
+
+### Example 1 — Record + sealed + pattern matching
+
+```java
+sealed interface Shape permits Circle, Square {}
+record Circle(double r) implements Shape {}
+record Square(double s) implements Shape {}
+
+double area(Shape shape) {
+    return switch (shape) {
+        case Circle c -> Math.PI * c.r() * c.r();
+        case Square s -> s.s() * s.s();
+    };
+}
+```
+
+Compile with `javac --release 21`.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Convert a POJO to a record
+
+Find any old-style DTO with 10 fields + getters/setters.
+Replace with a record. Count lines saved.
+
+### DIY 2 — Use pattern matching for JSON
+
+Parse JSON with Jackson, then use `switch` pattern matching
+on the parsed type.
+
+### TRY — Add a new case to a sealed hierarchy
+
+Extend the `Shape` example with `Triangle`. Observe the
+compiler demand you update the switch.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+
+---
+
 *End of Part 1. Subsequent parts in this series cover the JVM and runtime architecture, concurrency (including virtual threads), the standard library, build tooling, and Java's role in the broader JVM ecosystem alongside Kotlin, Scala, Clojure, and Groovy.*

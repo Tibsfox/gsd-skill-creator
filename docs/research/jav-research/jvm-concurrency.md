@@ -1234,3 +1234,73 @@ The next part of this series turns to what people actually build on
 this stack: the JDK libraries, the frameworks that grew up around
 them, the server-side ecosystem, and Java's role in the modern
 enterprise.
+
+---
+
+## Study Guide — JVM & Concurrency
+
+### Key concepts
+
+1. **Virtual threads (JDK 21, GA in 25).** A managed lightweight
+   thread backed by many platform threads. Scaling to millions.
+2. **`CompletableFuture`** for async composition.
+3. **`synchronized` is still a thing.** Legacy code uses it.
+4. **`java.util.concurrent`** is the primary toolkit for new
+   code: `Semaphore`, `CountDownLatch`, `BlockingQueue`,
+   `ConcurrentHashMap`, `ReentrantLock`.
+5. **Memory model.** `volatile`, `happens-before`, release/acquire.
+
+---
+
+## Programming Examples
+
+### Example 1 — Virtual threads
+
+```java
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    IntStream.range(0, 10_000).forEach(i ->
+        executor.submit(() -> {
+            Thread.sleep(Duration.ofSeconds(1));
+            return i;
+        }));
+}
+```
+
+10,000 concurrent tasks on a laptop; in JDK 21+ this runs in
+about 1 second.
+
+### Example 2 — CompletableFuture pipeline
+
+```java
+CompletableFuture.supplyAsync(() -> fetch(url))
+    .thenApply(this::parse)
+    .thenAccept(System.out::println)
+    .exceptionally(ex -> { ex.printStackTrace(); return null; });
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Port a thread pool to virtual threads
+
+Take any Java service that uses `Executors.newFixedThreadPool`.
+Switch to `newVirtualThreadPerTaskExecutor`. Measure latency
+under load.
+
+### DIY 2 — Run JFR
+
+`java -XX:StartFlightRecording` + Mission Control. Profile a
+real app.
+
+### TRY — Benchmark Loom vs async Netty
+
+Implement a simple HTTP echo service with both virtual
+threads and Netty. Compare throughput and code clarity.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)

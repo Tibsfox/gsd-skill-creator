@@ -1210,3 +1210,77 @@ The through-lines that distinguish Java as an ecosystem:
 
 Java is thirty years old. It is also the platform on which a lot of the
 next thirty years will continue to be built.
+
+---
+
+## Study Guide — Java Ecosystem & Frameworks
+
+### Tool map
+
+- **JDK:** OpenJDK (reference) + Temurin, Corretto, Zulu (distributions).
+- **Build:** Maven, Gradle (Groovy/Kotlin DSL).
+- **Web frameworks:** Spring Boot, Quarkus, Micronaut, Helidon.
+- **Testing:** JUnit 5, AssertJ, Mockito, Testcontainers.
+- **Observability:** Micrometer, OpenTelemetry.
+- **Languages on JVM:** Kotlin, Scala, Clojure, Groovy.
+
+### 1-week plan
+
+- Day 1: Install Temurin JDK 25 via `sdkman`. Compile
+  HelloWorld.
+- Day 2: `spring init` a web project. Run it.
+- Day 3: Add a REST endpoint and a JPA entity.
+- Day 4: Write JUnit 5 tests with AssertJ.
+- Day 5: Dockerize with `spring-boot:build-image`.
+- Day 6: Try Quarkus and compare startup time.
+- Day 7: Explore Kotlin on the JVM.
+
+---
+
+## Programming Examples
+
+### Example 1 — Spring Boot minimal REST
+
+```java
+@SpringBootApplication
+@RestController
+public class App {
+    @GetMapping("/hello")
+    public Map<String,String> hello() {
+        return Map.of("greeting","hello");
+    }
+    public static void main(String[] args) {
+        SpringApplication.run(App.class, args);
+    }
+}
+```
+
+Build with `./mvnw spring-boot:run`. Real web server, 12
+lines.
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Native image a Spring Boot app
+
+Install GraalVM. Build with `-Pnative`. Observe millisecond
+startup time, no JVM warmup.
+
+### DIY 2 — Testcontainers for integration tests
+
+Add `testcontainers-postgresql`. Write a test that spins up
+a real Postgres in Docker. This is how modern JVM teams
+test DB code.
+
+### TRY — Compare Spring Boot vs Quarkus
+
+Build the same tiny service in both. Measure startup time,
+memory footprint, and developer experience.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
