@@ -1539,5 +1539,44 @@ The parentheses are not the point. The parentheses are just what happened becaus
 
 ---
 
+## Study Guide — Lisp Dialects & Ecosystem
+
+### Dialect map
+
+- **Common Lisp** (1984) — SBCL, CCL, ABCL, ECL.
+- **Scheme** (1975) — Racket, Chicken, Gambit, Guile, Chez.
+- **Clojure** (2007) — JVM + ClojureScript + ClojureCLR.
+- **Emacs Lisp** — everywhere Emacs is.
+- **Janet, Fennel, Hy** — modern experiments.
+
+### Key questions
+
+- Why Scheme split from Common Lisp.
+- Why Clojure took over the modern Lisp mindshare.
+- Why Emacs Lisp survives despite its warts.
+
+## DIY — Install SBCL and Quicklisp
+
+`apt install sbcl` then `curl -O https://beta.quicklisp.org/quicklisp.lisp`,
+load it, install a library. You are now in the Common Lisp
+ecosystem.
+
+## DIY — Learn Racket
+
+`DrRacket` is the friendliest Lisp IDE. Install it, work
+through *How to Design Programs*.
+
+## TRY — Build a tiny DSL
+
+Write a Scheme or Clojure macro that defines a small
+domain-specific language for a problem you understand.
+Observe that you just extended the language.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+
+---
+
 *End of Lisp Dialects and Ecosystem research document.*
 *Written April 2026 for the PNW Research Series LSP project.*

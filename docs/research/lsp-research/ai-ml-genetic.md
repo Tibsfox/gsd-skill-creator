@@ -1620,3 +1620,46 @@ in every tool the field uses today.
 That is the story this document tells. The story is, as the coda says,
 not finished.
 
+---
+
+## Study Guide — Lisp, AI, ML, Genetic Programming
+
+### Why read this
+
+Lisp is the birthplace of modern AI. Understanding how and
+why — from McCarthy's 1960 paper to GOFAI, expert systems,
+symbolic reasoning, genetic programming, and the unbroken
+line into modern ML tooling — gives you a sense of the
+field's true age.
+
+### Key concepts
+
+1. **Symbolic AI.** Early AI used Lisp because symbols are
+   first-class data. Everything from MYCIN to SHRDLU was
+   built this way.
+2. **Genetic programming (Koza, 1992).** Programs as tree
+   structures, evolved with crossover and mutation.
+3. **Macros as domain-specific languages.** Lisp was the
+   first language where you could build a DSL in the
+   language itself.
+4. **REPL-driven development.** Lisp's interactive
+   development model predates and outclasses modern
+   "notebook" environments.
+
+## DIY — Run MYCIN
+
+MYCIN source is public in several reconstructions. Clone
+one, run it. You are now running a 1970s expert system.
+
+## TRY — Koza-style GP in 100 lines
+
+Implement genetic programming in Common Lisp: random tree
+generation, crossover, mutation, fitness on a simple
+symbolic-regression problem. 100 lines of Lisp, decades of
+AI history.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)

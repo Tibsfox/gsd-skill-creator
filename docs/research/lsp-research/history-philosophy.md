@@ -1030,3 +1030,38 @@ This research cross-links to the following college departments in
 *End of document. Written for the PNW Research Series LSP project, 2026. Companion to PCH, PRL, RXX, FOR, CEE.*
 
 *Addendum (Clojure 1.12, SBCL, AI-era rediscovery) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — Lisp History & Philosophy
+
+### Questions
+
+- What did McCarthy's 1960 paper actually claim, and why was
+  "eval" the big idea?
+- Why did Lisp fragment into so many dialects?
+- Why did the Lisp Machines fail commercially?
+- Why did Lisp survive after the AI winter?
+
+## DIY — Read McCarthy 1960
+
+John McCarthy's *Recursive Functions of Symbolic Expressions
+and Their Computation by Machine, Part I* is freely
+available. Read it. 17 pages that define modern computing.
+
+## DIY — Watch SICP lectures
+
+The 1986 MIT 6.001 lectures with Abelson and Sussman are on
+YouTube and archive.org. Watch the first three. You will
+never think about programming the same way.
+
+## TRY — Paul Graham's *Roots of Lisp*
+
+Paul Graham reimplemented McCarthy's 1960 eval in ~90 lines
+of Common Lisp. Type it out, run it. You've just built Lisp
+from axioms.
+
+## Related College Departments
+
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
