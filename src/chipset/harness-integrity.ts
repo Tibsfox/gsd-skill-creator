@@ -500,32 +500,56 @@ export function checkVersionConsistency(): InvariantResult {
 /**
  * Config immutability: settings.json must not be writable by agent file-write tools.
  * OWASP finding: configuration-overwrite attack can bypass permission gates.
- * Defense: settings.json should be in the gsd-prompt-guard's protected paths.
+ * Defense: a project-tracked PreToolUse hook (gsd-config-guard.js, installed
+ * from project-claude/hooks/) must hard-block Write/Edit targeting
+ * .claude/settings.json via exit code 2. We verify protection by scanning
+ * all hook files in .claude/hooks/ for a hook that both references
+ * settings.json AND blocks (exit 2 / permissionDecision "deny"), rather
+ * than hardcoding a specific filename — this keeps the invariant robust
+ * against hook renames and allows multiple hooks to contribute protection.
  */
 export function checkConfigImmutability(): InvariantResult {
   if (!fs.existsSync(SETTINGS_PATH)) {
     return { name: 'config-immutability', passed: true, message: 'No settings.json to protect' };
   }
 
-  // Check if gsd-prompt-guard protects settings.json
-  const guardPath = path.join(HOOKS_DIR, 'gsd-prompt-guard.js');
-  if (!fs.existsSync(guardPath)) {
+  if (!fs.existsSync(HOOKS_DIR)) {
     return {
       name: 'config-immutability',
       passed: false,
-      message: 'gsd-prompt-guard.js not found — settings.json unprotected from agent writes',
+      message: 'CRITICAL: .claude/hooks/ missing — settings.json unprotected from agent writes',
     };
   }
 
-  const guardContent = fs.readFileSync(guardPath, 'utf8');
-  const protectsSettings = guardContent.includes('settings.json') ||
-    guardContent.includes('.claude/settings');
+  const hookFiles = fs
+    .readdirSync(HOOKS_DIR)
+    .filter((f) => f.endsWith('.js') || f.endsWith('.cjs') || f.endsWith('.mjs'));
+
+  const protectors: string[] = [];
+  for (const hookFile of hookFiles) {
+    let content: string;
+    try {
+      content = fs.readFileSync(path.join(HOOKS_DIR, hookFile), 'utf8');
+    } catch {
+      continue;
+    }
+    const referencesSettings =
+      content.includes('settings.json') || content.includes('.claude/settings');
+    if (!referencesSettings) continue;
+    // Must also block: exit code 2 or explicit deny decision
+    const blocks =
+      /process\.exit\(\s*2\s*\)/.test(content) ||
+      /permissionDecision\s*:\s*['"]deny['"]/.test(content);
+    if (blocks) protectors.push(hookFile);
+  }
+
   return {
     name: 'config-immutability',
-    passed: protectsSettings,
-    message: protectsSettings
-      ? 'gsd-prompt-guard.js references settings.json — write protection active'
-      : 'CRITICAL: settings.json not in prompt guard protected paths — config-overwrite attack possible',
+    passed: protectors.length > 0,
+    message:
+      protectors.length > 0
+        ? `settings.json write protection active via: ${protectors.join(', ')}`
+        : 'CRITICAL: no hook in .claude/hooks/ blocks writes to settings.json — config-overwrite attack possible',
   };
 }
 
