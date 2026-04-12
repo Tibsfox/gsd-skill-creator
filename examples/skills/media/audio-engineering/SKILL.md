@@ -44,8 +44,8 @@ category: media
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/audio-engineering
+first_seen: 2026-04-11
+first_path: examples/skills/media/audio-engineering/SKILL.md
 superseded_by: null
 ---
 # Audio Engineering Skill

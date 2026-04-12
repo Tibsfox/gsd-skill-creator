@@ -6,8 +6,8 @@ category: state
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/token-budget
+first_seen: 2026-04-04
+first_path: .claude/skills/token-budget/SKILL.md
 superseded_by: null
 ---
 # Token Budget Enforcement

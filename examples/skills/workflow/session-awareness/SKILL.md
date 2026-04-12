@@ -15,8 +15,8 @@ category: workflow
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/session-awareness
+first_seen: 2026-02-26
+first_path: project-claude/skills/session-awareness/SKILL.md
 superseded_by: null
 ---
 # Session Awareness

@@ -21,8 +21,8 @@ category: media
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/latex-authoring
+first_seen: 2026-04-11
+first_path: examples/skills/media/latex-authoring/SKILL.md
 superseded_by: null
 ---
 # LaTeX Authoring Skill

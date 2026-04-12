@@ -6,8 +6,8 @@ category: patterns
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/api-design
+first_seen: 2026-02-07
+first_path: examples/api-design/SKILL.md
 superseded_by: null
 ---
 # REST API Design

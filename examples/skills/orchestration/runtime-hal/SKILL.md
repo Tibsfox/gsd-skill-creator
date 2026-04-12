@@ -6,8 +6,8 @@ category: orchestration
 status: stable
 origin: tibsfox
 modified: false
-first_seen: 2026-04-10
-first_path: examples/skills/runtime-hal
+first_seen: 2026-03-06
+first_path: .claude/skills/runtime-hal/SKILL.md
 superseded_by: null
 ---
 # Runtime HAL
