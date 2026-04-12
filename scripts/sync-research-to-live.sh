@@ -16,11 +16,11 @@ REMOTE_SUBDIR=""
 
 # Load credentials — use python to parse .env because passwords contain shell-hostile chars
 ENV_FILE="$PROJECT_ROOT/.env"
-if [ ! -f "$ENV_FILE" ]; then
-  ENV_FILE="/path/to/projectGSD/dev-tools/gsd-skill-creator/.env"
+if [ ! -f "$ENV_FILE" ] && [ -n "$GSD_WORKSPACE_ROOT" ]; then
+  ENV_FILE="$GSD_WORKSPACE_ROOT/gsd-skill-creator/.env"
 fi
-if [ ! -f "$ENV_FILE" ]; then
-  ENV_FILE="/path/to/projectGSD/dev-tools/gsd-skill-creator-nasa/.env"
+if [ ! -f "$ENV_FILE" ] && [ -n "$GSD_WORKSPACE_ROOT" ]; then
+  ENV_FILE="$GSD_WORKSPACE_ROOT/gsd-skill-creator-nasa/.env"
 fi
 
 if [ ! -f "$ENV_FILE" ]; then

@@ -891,7 +891,7 @@ From our debug-compiled binary:
     <d>   DW_AT_producer    : GNU C23 15.2.0 -mtune=generic -march=x86-64 -g
     <11>   DW_AT_language    : 29 (C11)
     <17>   DW_AT_name        : /tmp/mlc-research/hello.c
-    <1b>   DW_AT_comp_dir    : /path/to/projectGSD/dev-tools/artemis-ii
+    <1b>   DW_AT_comp_dir    : 
     <1f>   DW_AT_low_pc      : 0x1149
     <27>   DW_AT_high_pc     : 0x38
     <2f>   DW_AT_stmt_list   : 0

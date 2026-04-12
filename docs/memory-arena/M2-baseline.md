@@ -222,7 +222,7 @@ per `MISSION.md` §Non-Goals:
 ## How to re-run
 
 ```bash
-cd /path/to/projectGSD/dev-tools/artemis-ii/src-tauri
+cd src-tauri
 cargo bench --bench arena_bench
 ```
 
