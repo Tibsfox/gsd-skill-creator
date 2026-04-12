@@ -1,0 +1,1082 @@
+% ============================================================================
+%  gsd-command-reference.tex
+%  GSD Command Reference — Wave 2 of the GSD User Guides Suite
+%  Compile: xelatex (3-pass)
+%  License: CC BY-SA 4.0 — Tibsfox
+% ============================================================================
+\documentclass[10pt,letterpaper]{article}
+
+\title{GSD Command Reference}
+\author{Tibsfox}
+\date{}
+
+\makeatletter
+\def\input@path{{../shared/}}
+\makeatother
+
+\input{gsd-guides-preamble.tex}
+\input{gsd-command-data.tex}
+
+% Denser margins — this is a reference sheet, not a narrative guide
+\usepackage{geometry}
+\geometry{letterpaper, top=0.75in, bottom=0.85in, left=0.9in, right=0.9in, headheight=14pt}
+
+% Remap chapter-level commands from the guides to article sections so
+% chapters don't eat a full page each. The source uses \chapter, \section,
+% \section*, \commandentry.
+\let\chapter\section
+\let\oldsection\section
+% In article class, \chapter no longer exists — we just aliased above.
+% Section titles styled via titleformat in the preamble may need rebinding:
+\titleformat{\section}
+  {\headingfont\Large\bfseries\color{gsdnavy}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\headingfont\large\bfseries\color{gsdnavy}}
+  {\thesubsection}{0.8em}{}
+
+% Tighten paragraph spacing for a dense reference
+\setlength{\parskip}{2pt plus 1pt}
+\setlength{\parindent}{0pt}
+
+% ---------- Command-entry macro ----------
+% Usage:
+%   \commandentry{name}{synopsis}{syntax}{produces}{example}
+% Any of produces / example may be empty ({}).
+\newcommand{\commandentry}[5]{%
+  \par\smallskip
+  \noindent{\ttfamily\bfseries\color{gsdaccent}/gsd:#1}\quad{\small #2}\par
+  \noindent\textbf{\footnotesize Syntax:} {\ttfamily\footnotesize #3}\par
+  \ifx\relax#4\relax\else
+    \noindent\textbf{\footnotesize Produces:} {\footnotesize #4}\par
+  \fi
+  \ifx\relax#5\relax\else
+    \noindent\textbf{\footnotesize Ex:} {\ttfamily\footnotesize #5}\par
+  \fi
+}
+
+% Flag table helper — use inside a commandentry or directly after
+\newcommand{\flagtable}[1]{%
+  \noindent\begin{tabularx}{\linewidth}{@{}l X@{}}
+  \toprule
+  \textbf{\footnotesize Flag} & \textbf{\footnotesize Description} \\
+  \midrule
+  #1
+  \bottomrule
+  \end{tabularx}\par\smallskip
+}
+
+\begin{document}
+
+% ---------- Title page ----------
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\headingfont\Huge\bfseries\color{gsdnavy} GSD\par}
+\vspace{0.4cm}
+{\headingfont\LARGE\bfseries\color{gsdnavy} Command Reference\par}
+\vspace{0.8cm}
+{\headingfont\large Every command, every flag, every file\par}
+\vspace{3cm}
+{\large Tibsfox\par}
+\vspace{0.4cm}
+{\small For GSD v1.35.0 \par}
+\vspace{0.4cm}
+{\small Audience: all GSD users — pin this to the wall\par}
+\vfill
+{\footnotesize \cclicense\par}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+% ============================================================================
+\chapter*{How to Read This Reference}
+\addcontentsline{toc}{chapter}{How to Read This Reference}
+
+Commands appear in their canonical v1.35.0 skill form (\texttt{/gsd:command}). The older dash form (\texttt{/gsd-command}) remains a valid alias in every supported runtime. Argument and flag syntax follows standard POSIX conventions: angle brackets \texttt{<name>} mark required arguments, square brackets \texttt{[name]} mark optional ones, and ellipses \texttt{...} indicate a repeating list. Flag tables list only flags documented in the upstream \gsdfile{docs/COMMANDS.md} source for v1.35.0.
+
+\medskip
+\noindent\textbf{Runtime invocation prefixes.} GSD v1.35.0 supports fourteen host runtimes: Claude Code, OpenCode, Gemini CLI, Kilo, Codex, GitHub Copilot, Cursor, Windsurf, Antigravity, Augment, Trae, Qwen Code, CodeBuddy, and Cline. Most of them use \texttt{/gsd-*} at a prompt. Codex uses \texttt{\$gsd-*}. Skill-style invocation (\texttt{/gsd:*}) is available on the runtimes whose skill surfaces expose it. Pick whichever form your runtime accepts; the behavior is identical.
+
+\clearpage
+
+% ============================================================================
+\chapter{Core Workflow}
+
+\commandentry{new-project}
+{Bootstrap a new project with deep context gathering — runs research, produces all planning artifacts, and writes CLAUDE.md.}
+{/gsd:new-project [-{}-auto @file.md]}
+{PROJECT.md, REQUIREMENTS.md, ROADMAP.md, STATE.md, config.json, research/, CLAUDE.md}
+{/gsd:new-project -{}-auto @prd.md}
+
+\flagtable{%
+\gsdflag{auto @file.md} & Auto-extract from a document, skip interactive questions \\
+}
+
+\commandentry{new-workspace}
+{Create an isolated multi-repo workspace with its own \gsdfile{.planning/} directory and repo copies (worktrees or clones).}
+{/gsd:new-workspace -{}-name <n> [-{}-repos r1,r2] [-{}-path /t] [-{}-strategy worktree|clone] [-{}-branch <b>] [-{}-auto]}
+{WORKSPACE.md, .planning/, repo copies}
+{/gsd:new-workspace -{}-name feature-b -{}-repos hr-ui,ZeymoAPI}
+
+\flagtable{%
+\gsdflag{name <name>} & Workspace name (required) \\
+\gsdflag{repos r1,r2} & Comma-separated repo paths or names \\
+\gsdflag{path /target} & Target directory (default: \gsdfile{\textasciitilde/gsd-workspaces/<name>}) \\
+\gsdflag{strategy worktree|clone} & Copy strategy (default: \texttt{worktree}) \\
+\gsdflag{branch <name>} & Branch to check out (default: \texttt{workspace/<name>}) \\
+\gsdflag{auto} & Skip interactive questions \\
+}
+
+\commandentry{list-workspaces}
+{List active GSD workspaces and their status. Scans \gsdfile{\textasciitilde/gsd-workspaces/} for WORKSPACE.md manifests.}
+{/gsd:list-workspaces}
+{}
+{/gsd:list-workspaces}
+
+\commandentry{remove-workspace}
+{Remove a workspace and clean up git worktrees. Refuses removal if any repo has uncommitted changes; requires name confirmation.}
+{/gsd:remove-workspace <name>}
+{}
+{/gsd:remove-workspace feature-b}
+
+\commandentry{discuss-phase}
+{Capture implementation decisions before planning through a Socratic question loop.}
+{/gsd:discuss-phase [N] [-{}-auto] [-{}-batch] [-{}-analyze] [-{}-power]}
+{\{phase\}-CONTEXT.md, \{phase\}-DISCUSSION-LOG.md}
+{/gsd:discuss-phase 2 -{}-analyze}
+
+\flagtable{%
+\gsdflag{auto} & Auto-select recommended defaults for all questions \\
+\gsdflag{batch} & Group questions for batch intake instead of one-by-one \\
+\gsdflag{analyze} & Add trade-off analysis during discussion \\
+\gsdflag{power} & File-based bulk answers from a prepared answers file \\
+}
+
+\commandentry{ui-phase}
+{Generate a UI design contract for a frontend phase before planning or execution.}
+{/gsd:ui-phase [N]}
+{\{phase\}-UI-SPEC.md}
+{/gsd:ui-phase 2}
+
+\commandentry{plan-phase}
+{Research, plan, and verify a phase. The workhorse of the main workflow.}
+{/gsd:plan-phase [N] [-{}-auto] [-{}-research|-{}-skip-research] [-{}-gaps] [-{}-skip-verify] [-{}-prd <f>] [-{}-reviews] [-{}-validate] [-{}-bounce|-{}-skip-bounce]}
+{\{phase\}-RESEARCH.md, \{phase\}-\{N\}-PLAN.md, \{phase\}-VALIDATION.md}
+{/gsd:plan-phase 1 -{}-bounce}
+
+\flagtable{%
+\gsdflag{auto} & Skip interactive confirmations \\
+\gsdflag{research} & Force re-research even if RESEARCH.md exists \\
+\gsdflag{skip-research} & Skip domain research step entirely \\
+\gsdflag{gaps} & Gap closure mode (reads VERIFICATION.md, skips research) \\
+\gsdflag{skip-verify} & Skip plan-checker verification loop \\
+\gsdflag{prd <file>} & Use a PRD file instead of discuss-phase for context \\
+\gsdflag{reviews} & Replan incorporating cross-AI review feedback from REVIEWS.md \\
+\gsdflag{validate} & Run state validation before planning begins \\
+\gsdflag{bounce} & Run external plan bounce validation after planning \\
+\gsdflag{skip-bounce} & Skip plan bounce even if enabled in config \\
+}
+
+\commandentry{execute-phase}
+{Execute all plans in a phase with wave-based parallelization, or run a single wave.}
+{/gsd:execute-phase <N> [-{}-wave N] [-{}-validate] [-{}-cross-ai|-{}-no-cross-ai]}
+{\{phase\}-\{N\}-SUMMARY.md per plan, commits, \{phase\}-VERIFICATION.md}
+{/gsd:execute-phase 1 -{}-wave 2}
+
+\flagtable{%
+\gsdflag{wave N} & Execute only the Nth wave in the phase \\
+\gsdflag{validate} & Run state validation before execution begins \\
+\gsdflag{cross-ai} & Delegate execution to an external AI CLI \\
+\gsdflag{no-cross-ai} & Force local execution even if cross-AI is enabled \\
+}
+
+\commandentry{verify-work}
+{User acceptance testing with auto-diagnosis — runs after a phase has been executed.}
+{/gsd:verify-work [N]}
+{\{phase\}-UAT.md, fix plans if issues found}
+{/gsd:verify-work 1}
+
+\commandentry{next}
+{Automatically advance to the next logical workflow step. Reads project state and dispatches to the right command (discuss, plan, execute, verify, or complete-milestone).}
+{/gsd:next}
+{}
+{/gsd:next}
+
+\commandentry{session-report}
+{Generate a session report with work summary, outcomes, and estimated resource usage.}
+{/gsd:session-report}
+{.planning/reports/SESSION\_REPORT.md}
+{/gsd:session-report}
+
+\commandentry{ship}
+{Create a pull request from completed phase work with an auto-generated PR body.}
+{/gsd:ship [N|version] [-{}-draft]}
+{GitHub PR, STATE.md updated}
+{/gsd:ship 4 -{}-draft}
+
+\flagtable{%
+\gsdflag{draft} & Create as a draft PR \\
+}
+
+\commandentry{ui-review}
+{Retroactive 6-pillar visual audit of an implemented frontend. Runs stand-alone — no active GSD project required.}
+{/gsd:ui-review [N]}
+{\{phase\}-UI-REVIEW.md, screenshots under .planning/ui-reviews/}
+{/gsd:ui-review 3}
+
+\commandentry{audit-uat}
+{Cross-phase audit of all outstanding UAT and verification items, producing a categorized report with a human test plan.}
+{/gsd:audit-uat}
+{Categorized audit report}
+{/gsd:audit-uat}
+
+\commandentry{audit-milestone}
+{Verify a milestone met its definition of done. Runs gap analysis over all executed phases.}
+{/gsd:audit-milestone}
+{Audit report with gap analysis}
+{/gsd:audit-milestone}
+
+\commandentry{complete-milestone}
+{Archive a milestone and tag the release.}
+{/gsd:complete-milestone}
+{MILESTONES.md entry, git tag}
+{/gsd:complete-milestone}
+
+\commandentry{milestone-summary}
+{Generate a comprehensive project summary from milestone artifacts (for team onboarding and review). Includes architecture decisions, phase breakdown, requirements coverage, tech debt, and a getting-started guide.}
+{/gsd:milestone-summary [version]}
+{.planning/reports/MILESTONE\_SUMMARY-v\{version\}.md}
+{/gsd:milestone-summary v1.0}
+
+\commandentry{new-milestone}
+{Start the next version cycle. Updates PROJECT.md and creates a new REQUIREMENTS.md and ROADMAP.md.}
+{/gsd:new-milestone [name] [-{}-reset-phase-numbers]}
+{Updated PROJECT.md, new REQUIREMENTS.md, new ROADMAP.md}
+{/gsd:new-milestone "v2.0 Mobile"}
+
+\flagtable{%
+\gsdflag{reset-phase-numbers} & Restart the new milestone at Phase 1 and archive old phase dirs \\
+}
+
+% ============================================================================
+\chapter{Phase Management}
+
+\commandentry{add-phase}
+{Append a new phase to the roadmap. Interactive — describe the phase to the prompter.}
+{/gsd:add-phase}
+{Updated ROADMAP.md}
+{/gsd:add-phase}
+
+\commandentry{insert-phase}
+{Insert urgent work between existing phases using decimal numbering (3 becomes 3.1, etc.).}
+{/gsd:insert-phase [N]}
+{Updated ROADMAP.md with decimal phase}
+{/gsd:insert-phase 3}
+
+\commandentry{remove-phase}
+{Remove a future phase and renumber subsequent phases.}
+{/gsd:remove-phase [N]}
+{Updated ROADMAP.md, renumbered phase dirs}
+{/gsd:remove-phase 7}
+
+\commandentry{list-phase-assumptions}
+{Preview the assumed approach for a phase before committing to plan-phase work.}
+{/gsd:list-phase-assumptions [N]}
+{}
+{/gsd:list-phase-assumptions 2}
+
+\commandentry{analyze-dependencies}
+{Analyze phase dependencies and suggest \texttt{Depends on} entries for ROADMAP.md. Run this before \gsdcolon{manager} when phases have empty \texttt{Depends on} fields.}
+{/gsd:analyze-dependencies}
+{Dependency suggestion table; optionally updates ROADMAP.md}
+{/gsd:analyze-dependencies}
+
+\commandentry{plan-milestone-gaps}
+{Create phases to close gaps surfaced by a milestone audit.}
+{/gsd:plan-milestone-gaps}
+{New phases in ROADMAP.md}
+{/gsd:plan-milestone-gaps}
+
+\commandentry{research-phase}
+{Deep ecosystem research only — standalone entry point. Usually run \gsdcolon{plan-phase} instead, which invokes research as its first step.}
+{/gsd:research-phase [N]}
+{\{phase\}-RESEARCH.md}
+{/gsd:research-phase 4}
+
+\commandentry{validate-phase}
+{Retroactively audit and fill Nyquist validation gaps for a phase.}
+{/gsd:validate-phase [N]}
+{Updated \{phase\}-VALIDATION.md}
+{/gsd:validate-phase 2}
+
+% ============================================================================
+\chapter{Navigation}
+
+\commandentry{progress}
+{Show project status and next recommended steps.}
+{/gsd:progress}
+{}
+{/gsd:progress}
+
+\commandentry{resume-work}
+{Restore full session context after a context reset or when starting a new session.}
+{/gsd:resume-work}
+{}
+{/gsd:resume-work}
+
+\commandentry{pause-work}
+{Save a context handoff when stopping mid-phase. Creates \gsdfile{continue-here.md}.}
+{/gsd:pause-work}
+{continue-here.md}
+{/gsd:pause-work}
+
+\commandentry{manager}
+{Interactive command center for managing multiple phases from one terminal. Dispatches discuss inline; dispatches plan and execute as background agents.}
+{/gsd:manager}
+{}
+{/gsd:manager}
+
+\begin{gsdnote}
+The manager respects the \texttt{manager.flags.discuss}, \texttt{manager.flags.plan}, and \texttt{manager.flags.execute} passthrough flags in \gsdfile{.planning/config.json} — see the Configuration Reference chapter.
+\end{gsdnote}
+
+\commandentry{help}
+{Show all commands and a quick usage guide.}
+{/gsd:help}
+{}
+{/gsd:help}
+
+% ============================================================================
+\chapter{Utilities}
+
+\commandentry{explore}
+{Socratic ideation session — guides an idea through probing questions, optionally spawns research, then routes output to the right GSD artifact (notes, todos, seeds, research questions, requirements, or a new phase).}
+{/gsd:explore [topic]}
+{Routed output (varies by destination)}
+{/gsd:explore authentication strategy}
+
+\commandentry{undo}
+{Safe git revert for GSD phase or plan commits. Uses the phase manifest for dependency checks and always surfaces a confirmation gate before reverting.}
+{/gsd:undo (-{}-last N | -{}-phase NN | -{}-plan NN-MM)}
+{Revert commits}
+{/gsd:undo -{}-phase 03}
+
+\flagtable{%
+\gsdflag{last N} & Show recent GSD commits for interactive selection \\
+\gsdflag{phase NN} & Revert all commits for a phase \\
+\gsdflag{plan NN-MM} & Revert all commits for a specific plan \\
+}
+
+\commandentry{import}
+{Ingest an external plan file into the GSD planning system. Detects conflicts against PROJECT.md decisions before writing.}
+{/gsd:import -{}-from <filepath>}
+{New PLAN.md validated by gsd-plan-checker}
+{/gsd:import -{}-from /tmp/team-plan.md}
+
+\flagtable{%
+\gsdflag{from <filepath>} & Path to the external plan file (required) \\
+}
+
+\commandentry{from-gsd2}
+{Reverse migration from GSD-2 format (\gsdfile{.gsd/}) back to v1 \gsdfile{.planning/} format. Flattens Milestone/Slice hierarchy to sequential phase numbers.}
+{/gsd:from-gsd2 [-{}-dry-run] [-{}-force] [-{}-path <dir>]}
+{PROJECT.md, REQUIREMENTS.md, ROADMAP.md, STATE.md, sequential phase dirs}
+{/gsd:from-gsd2 -{}-dry-run}
+
+\flagtable{%
+\gsdflag{dry-run} & Preview migration without writing \\
+\gsdflag{force} & Overwrite existing .planning/ directory \\
+\gsdflag{path <dir>} & Specify the GSD-2 root (default: current dir) \\
+}
+
+\commandentry{quick}
+{Execute an ad-hoc task with GSD guarantees — composable flags turn quick-tasks into full phases on demand.}
+{/gsd:quick [-{}-full] [-{}-discuss] [-{}-research]}
+{.planning/quick/NNN-slug/ with PLAN.md and SUMMARY.md}
+{/gsd:quick -{}-discuss -{}-research -{}-full}
+
+\flagtable{%
+\gsdflag{full} & Enable plan checking (2 iterations) and post-execution verification \\
+\gsdflag{discuss} & Lightweight pre-planning discussion \\
+\gsdflag{research} & Spawn a focused researcher before planning \\
+}
+
+\commandentry{autonomous}
+{Run all remaining phases autonomously. Respects \texttt{workflow.skip\_discuss} to bypass the discuss step.}
+{/gsd:autonomous [-{}-from N] [-{}-to N] [-{}-interactive]}
+{Phase artifacts and commits for every executed phase}
+{/gsd:autonomous -{}-from 3 -{}-to 5}
+
+\flagtable{%
+\gsdflag{from N} & Start from a specific phase number \\
+\gsdflag{to N} & Stop after completing a specific phase number \\
+\gsdflag{interactive} & Lean context with periodic user input checkpoints \\
+}
+
+\commandentry{do}
+{Route freeform text to the right GSD command. After invocation, describe what you want.}
+{/gsd:do}
+{}
+{/gsd:do}
+
+\commandentry{note}
+{Zero-friction idea capture. Append, list, or promote notes to todos.}
+{/gsd:note [text | list | promote N] [-{}-global]}
+{Project or global notes file}
+{/gsd:note "Consider caching for API responses"}
+
+\flagtable{%
+\gsdflag{global} & Use global scope for the note operation \\
+}
+
+\commandentry{debug}
+{Systematic debugging with persistent cross-session state. Subcommands manage active debug sessions.}
+{/gsd:debug [-{}-diagnose] <description> \textbar{} list \textbar{} status <slug> \textbar{} continue <slug>}
+{Debug session artifacts with Evidence, Eliminated, Resolution, TDD checkpoint}
+{/gsd:debug "Login button not responding on mobile Safari"}
+
+\flagtable{%
+\gsdflag{diagnose} & Diagnosis-only mode — investigate without attempting fixes \\
+}
+
+\commandentry{add-todo}
+{Capture an idea or task for later.}
+{/gsd:add-todo [description]}
+{todos/ entry}
+{/gsd:add-todo "Consider adding dark mode support"}
+
+\commandentry{check-todos}
+{List pending todos and select one to work on.}
+{/gsd:check-todos}
+{}
+{/gsd:check-todos}
+
+\commandentry{add-tests}
+{Generate tests for a completed phase.}
+{/gsd:add-tests [N]}
+{Test files committed atomically}
+{/gsd:add-tests 2}
+
+\commandentry{stats}
+{Display project statistics dashboard.}
+{/gsd:stats}
+{}
+{/gsd:stats}
+
+\commandentry{profile-user}
+{Generate a developer behavioral profile from Claude Code session analysis across 8 dimensions. Produces artifacts that personalize subsequent GSD responses.}
+{/gsd:profile-user [-{}-questionnaire] [-{}-refresh]}
+{USER-PROFILE.md, /gsd-dev-preferences command, CLAUDE.md profile section}
+{/gsd:profile-user -{}-questionnaire}
+
+\flagtable{%
+\gsdflag{questionnaire} & Use interactive questionnaire instead of session analysis \\
+\gsdflag{refresh} & Re-analyze sessions and regenerate the profile \\
+}
+
+\commandentry{health}
+{Validate \gsdfile{.planning/} directory integrity. With \gsdflag{repair}, auto-fix recoverable issues.}
+{/gsd:health [-{}-repair]}
+{Integrity report, optional repair actions}
+{/gsd:health -{}-repair}
+
+\flagtable{%
+\gsdflag{repair} & Auto-fix recoverable integrity issues \\
+}
+
+\commandentry{cleanup}
+{Archive accumulated phase directories from completed milestones.}
+{/gsd:cleanup}
+{Archived phase dirs}
+{/gsd:cleanup}
+
+% ============================================================================
+\chapter{Diagnostics}
+
+\commandentry{forensics}
+{Post-mortem investigation of failed or stuck GSD workflows. Checks git history, artifact integrity, STATE.md anomalies, and uncommitted work; covers at least 4 anomaly types.}
+{/gsd:forensics [description]}
+{.planning/forensics/report-\{timestamp\}.md}
+{/gsd:forensics "Phase 3 execution stalled"}
+
+\commandentry{extract-learnings}
+{Extract reusable patterns, anti-patterns, and architectural decisions from completed phase work.}
+{/gsd:extract-learnings <N> [-{}-all] [-{}-format markdown|json]}
+{.planning/learnings/\{phase\}-LEARNINGS.md}
+{/gsd:extract-learnings 3}
+
+\flagtable{%
+\gsdflag{all} & Extract learnings from all completed phases \\
+\gsdflag{format} & Output format: \texttt{markdown} (default) or \texttt{json} \\
+}
+
+% ============================================================================
+\chapter{Workstream Management}
+
+\commandentry{workstreams}
+{Manage parallel workstreams for concurrent work on different milestone areas. Subcommands select the action.}
+{/gsd:workstreams [list | create <n> | status <n> | switch <n> | progress | complete <n> | resume <n>]}
+{Workstream directories under .planning/, per-workstream state tracking}
+{/gsd:workstreams create backend-api}
+
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+\toprule
+\textbf{\footnotesize Subcommand} & \textbf{\footnotesize Description} \\
+\midrule
+\texttt{list} & List all workstreams with status (default if no subcommand) \\
+\texttt{create <name>} & Create a new workstream \\
+\texttt{status <name>} & Detailed status for one workstream \\
+\texttt{switch <name>} & Set active workstream \\
+\texttt{progress} & Progress summary across all workstreams \\
+\texttt{complete <name>} & Archive a completed workstream \\
+\texttt{resume <name>} & Resume work in a workstream \\
+\bottomrule
+\end{tabularx}
+\smallskip
+
+% ============================================================================
+\chapter{Configuration Commands}
+
+\commandentry{settings}
+{Interactive configuration of workflow toggles and model profile.}
+{/gsd:settings}
+{Updated .planning/config.json}
+{/gsd:settings}
+
+\commandentry{set-profile}
+{Quick switch of the model profile.}
+{/gsd:set-profile <profile>}
+{Updated .planning/config.json}
+{/gsd:set-profile budget}
+
+\flagtable{%
+\texttt{quality} & Opus for all decision-making, Sonnet for verification \\
+\texttt{balanced} & Opus for planning, Sonnet for everything else (default) \\
+\texttt{budget} & Sonnet for code-writing, Haiku for research and verification \\
+\texttt{inherit} & All agents use the current session model \\
+}
+
+% ============================================================================
+\chapter{Brownfield \& Analysis}
+
+\commandentry{map-codebase}
+{Analyze an existing codebase with four parallel mapper agents. Use before \gsdcolon{new-project} on a brownfield repo.}
+{/gsd:map-codebase [area]}
+{.planning/codebase/ analysis files}
+{/gsd:map-codebase auth}
+
+\commandentry{scan}
+{Rapid single-focus codebase assessment — lightweight alternative to map-codebase (one agent instead of four).}
+{/gsd:scan [-{}-focus tech|arch|quality|concerns|tech+arch]}
+{Targeted document(s) in .planning/codebase/}
+{/gsd:scan -{}-focus quality}
+
+\flagtable{%
+\gsdflag{focus <area>} & Focus area: \texttt{tech}, \texttt{arch}, \texttt{quality}, \texttt{concerns}, \texttt{tech+arch} (default) \\
+}
+
+\commandentry{intel}
+{Query, inspect, or refresh queryable codebase intelligence files. Requires \texttt{intel.enabled: true} in config.json.}
+{/gsd:intel [query <term> | status | diff | refresh]}
+{.planning/intel/ JSON files (stack, api-map, dependency-graph, file-roles, arch-decisions)}
+{/gsd:intel query authentication}
+
+\commandentry{onboard}
+{Brownfield onboarding workflow that pairs map-codebase output with a new GSD project scaffold.}
+{/gsd:onboard}
+{PROJECT.md, REQUIREMENTS.md, ROADMAP.md tailored to the mapped codebase}
+{/gsd:onboard}
+
+\commandentry{migrate}
+{Staged migration planner for legacy code — produces migration phases in the roadmap.}
+{/gsd:migrate}
+{Migration phases in ROADMAP.md}
+{/gsd:migrate}
+
+% ============================================================================
+\chapter{AI Integration}
+
+\commandentry{ai-integration-phase}
+{AI framework selection wizard for integrating AI/LLM capabilities into a phase. Spawns 3 parallel specialist agents (domain researcher, framework selector, ai researcher, eval planner).}
+{/gsd:ai-integration-phase [N]}
+{\{phase\}-AI-SPEC.md with framework recommendation, implementation guidance, evaluation strategy}
+{/gsd:ai-integration-phase 3}
+
+\commandentry{eval-review}
+{Retroactive audit of an implemented AI phase's evaluation coverage. Scores each eval dimension as COVERED/PARTIAL/MISSING.}
+{/gsd:eval-review [N]}
+{\{phase\}-EVAL-REVIEW.md with findings, gaps, and remediation guidance}
+{/gsd:eval-review 3}
+
+% ============================================================================
+\chapter{Update Commands}
+
+\commandentry{update}
+{Update GSD with a changelog preview before applying.}
+{/gsd:update}
+{}
+{/gsd:update}
+
+\commandentry{reapply-patches}
+{Restore local modifications after a GSD update. Merges back any local changes that the updater replaced.}
+{/gsd:reapply-patches}
+{}
+{/gsd:reapply-patches}
+
+% ============================================================================
+\chapter{Code Quality}
+
+\commandentry{code-review}
+{Review source files changed during a phase for bugs, security vulnerabilities, and code quality problems. Three depth levels.}
+{/gsd:code-review <N> [-{}-depth=quick|standard|deep] [-{}-files f1,f2,...]}
+{\{phase\}-REVIEW.md with severity-classified findings}
+{/gsd:code-review 2 -{}-depth=deep}
+
+\flagtable{%
+\gsdflag{depth=quick} & Pattern-matching only (\textasciitilde 2 min) \\
+\gsdflag{depth=standard} & Per-file analysis with language-specific checks (default, 5--15 min) \\
+\gsdflag{depth=deep} & Cross-file analysis including import graphs and call chains (15--30 min) \\
+\gsdflag{files f1,f2} & Explicit file list; skips SUMMARY and git scoping \\
+}
+
+\commandentry{code-review-fix}
+{Auto-fix issues found by code-review. Reads REVIEW.md, spawns a fixer agent, commits each fix atomically.}
+{/gsd:code-review-fix <N> [-{}-all] [-{}-auto]}
+{\{phase\}-REVIEW-FIX.md}
+{/gsd:code-review-fix 3 -{}-auto}
+
+\flagtable{%
+\gsdflag{all} & Include Info findings (default: Critical + Warning only) \\
+\gsdflag{auto} & Fix and re-review iteration loop, capped at 3 iterations \\
+}
+
+\commandentry{audit-fix}
+{Autonomous audit-to-fix pipeline. Runs an audit, classifies findings, fixes auto-fixable issues with test verification, and commits each fix atomically.}
+{/gsd:audit-fix [-{}-source <audit>] [-{}-severity high|medium|all] [-{}-max N] [-{}-dry-run]}
+{Fix commits with test verification; classification report}
+{/gsd:audit-fix -{}-severity high}
+
+\flagtable{%
+\gsdflag{source <audit>} & Which audit to run (default: \texttt{audit-uat}) \\
+\gsdflag{severity} & Minimum severity to process: \texttt{high}, \texttt{medium}, \texttt{all} (default: \texttt{medium}) \\
+\gsdflag{max N} & Maximum findings to fix (default: 5) \\
+\gsdflag{dry-run} & Classify findings without fixing \\
+}
+
+\commandentry{secure-phase}
+{Retroactively verify threat mitigations for a completed phase. Three operating modes: audit existing SECURITY.md, generate from PLAN.md threat model, or exit with guidance if phase not executed.}
+{/gsd:secure-phase [N]}
+{\{phase\}-SECURITY.md with threat verification results}
+{/gsd:secure-phase 5}
+
+\commandentry{docs-update}
+{Generate or update project documentation verified against the codebase. Each doc writer explores the codebase directly — no hallucinated paths.}
+{/gsd:docs-update [-{}-force] [-{}-verify-only]}
+{Up to 9 doc files: README, architecture, API, getting-started, development, testing, configuration, deployment, contributing}
+{/gsd:docs-update -{}-verify-only}
+
+\flagtable{%
+\gsdflag{force} & Skip preservation prompts, regenerate all docs \\
+\gsdflag{verify-only} & Check existing docs for accuracy, no generation \\
+}
+
+% ============================================================================
+\chapter{Fast \& Inline}
+
+\commandentry{fast}
+{Execute a trivial task inline — no subagents, no planning overhead. For typo fixes, config changes, small refactors, forgotten commits.}
+{/gsd:fast [task description]}
+{Direct edit and commit}
+{/gsd:fast "fix typo in README"}
+
+\begin{gsdnote}
+\texttt{fast} is not a replacement for \gsdcolon{quick}. Use \gsdcolon{quick} for anything needing research, multi-step planning, or verification.
+\end{gsdnote}
+
+\commandentry{review}
+{Cross-AI peer review of phase plans from external AI CLIs. Produces REVIEWS.md consumable by \gsdcolon{plan-phase -{}-reviews}.}
+{/gsd:review -{}-phase N [-{}-gemini] [-{}-claude] [-{}-codex] [-{}-coderabbit] [-{}-opencode] [-{}-qwen] [-{}-cursor] [-{}-all]}
+{\{phase\}-REVIEWS.md}
+{/gsd:review -{}-phase 3 -{}-all}
+
+\flagtable{%
+\gsdflag{phase N} & Phase number to review (required) \\
+\gsdflag{gemini} & Include Gemini CLI review \\
+\gsdflag{claude} & Include Claude CLI review (separate session) \\
+\gsdflag{codex} & Include Codex CLI review \\
+\gsdflag{coderabbit} & Include CodeRabbit review \\
+\gsdflag{opencode} & Include OpenCode review (via GitHub Copilot) \\
+\gsdflag{qwen} & Include Qwen Code review \\
+\gsdflag{cursor} & Include Cursor agent review \\
+\gsdflag{all} & Include all available CLIs \\
+}
+
+\commandentry{pr-branch}
+{Create a clean PR branch by filtering out \gsdfile{.planning/} commits so reviewers see only code changes.}
+{/gsd:pr-branch [target-branch]}
+{Clean git branch}
+{/gsd:pr-branch develop}
+
+% ============================================================================
+\chapter{Backlog, Seeds \& Threads}
+
+\commandentry{add-backlog}
+{Add an idea to the backlog parking lot using 999.x numbering. Creates the phase directory immediately so discuss-phase and plan-phase work on it.}
+{/gsd:add-backlog <description>}
+{999.x phase directory}
+{/gsd:add-backlog "GraphQL API layer"}
+
+\commandentry{review-backlog}
+{Review and promote backlog items to the active milestone. Per-item actions: Promote, Keep, Remove.}
+{/gsd:review-backlog}
+{Updated ROADMAP.md if any backlog promoted}
+{/gsd:review-backlog}
+
+\commandentry{plant-seed}
+{Capture a forward-looking idea with trigger conditions — surfaces automatically at the right milestone. Solves context rot for ideas that don't belong to the current phase.}
+{/gsd:plant-seed [idea summary]}
+{.planning/seeds/SEED-NNN-slug.md}
+{/gsd:plant-seed "Real-time collab when WebSocket infra is in"}
+
+\commandentry{thread}
+{Manage persistent context threads for cross-session work. Lighter weight than pause-work.}
+{/gsd:thread [name | description]}
+{.planning/threads/\{name\}.md}
+{/gsd:thread fix-deploy-key-auth}
+
+% ============================================================================
+\chapter{State Management (CLI)}
+
+State-management commands are invoked through the \gsdfile{gsd-tools.cjs} CLI rather than the workflow surface. They are still part of the v1.35.0 command inventory.
+
+\commandentry{tools state validate}
+{Detect drift between STATE.md and the actual filesystem.}
+{node gsd-tools.cjs state validate}
+{Validation report showing any drift}
+{node gsd-tools.cjs state validate}
+
+\commandentry{tools state sync}
+{Reconstruct STATE.md from actual project state on disk.}
+{node gsd-tools.cjs state sync [-{}-verify]}
+{Updated STATE.md}
+{node gsd-tools.cjs state sync -{}-verify}
+
+\flagtable{%
+\gsdflag{verify} & Dry-run mode — show proposed changes without writing \\
+}
+
+\commandentry{tools state planned-phase}
+{Record state transition after plan-phase completes (Planned / Ready to execute).}
+{node gsd-tools.cjs state planned-phase -{}-phase N -{}-plans N}
+{Updated STATE.md with post-planning state}
+{node gsd-tools.cjs state planned-phase -{}-phase 3 -{}-plans 2}
+
+% ============================================================================
+\chapter{Community}
+
+\commandentry{join-discord}
+{Open the Discord community invite.}
+{/gsd:join-discord}
+{}
+{/gsd:join-discord}
+
+\section*{Community Hooks}
+
+Optional git and session hooks gated behind \texttt{hooks.community: true} in \gsdfile{.planning/config.json}. All are no-ops unless explicitly enabled.
+
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+\toprule
+\textbf{\footnotesize Hook} & \textbf{\footnotesize Purpose} \\
+\midrule
+\gsdfile{gsd-validate-commit.sh} & Enforce Conventional Commits format on git commit messages \\
+\gsdfile{gsd-session-state.sh} & Track session state transitions \\
+\gsdfile{gsd-phase-boundary.sh} & Enforce phase boundary checks \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\noindent Enable with:
+\begin{lstlisting}
+{ "hooks": { "community": true } }
+\end{lstlisting}
+
+% ============================================================================
+\chapter{Configuration Reference}
+
+GSD stores project settings in \gsdfile{.planning/config.json}. The file is created by \gsdcolon{new-project} and can be updated interactively via \gsdcolon{settings} or per-key via \texttt{node gsd-tools.cjs config-set <key> <value>}.
+
+\section{Core Settings}
+
+\begin{longtable}{@{}l l l@{}}
+\toprule
+\textbf{\footnotesize Setting} & \textbf{\footnotesize Type} & \textbf{\footnotesize Default} \\
+\midrule
+\endhead
+\texttt{mode} & \texttt{interactive} \textbar{} \texttt{yolo} & \texttt{interactive} \\
+\texttt{granularity} & \texttt{coarse} \textbar{} \texttt{standard} \textbar{} \texttt{fine} & \texttt{standard} \\
+\texttt{model\_profile} & \texttt{quality/balanced/budget/inherit} & \texttt{balanced} \\
+\texttt{project\_code} & string prefix for phase dirs & (none) \\
+\texttt{response\_language} & language code (\texttt{pt}, \texttt{ko}, \texttt{ja}) & (none) \\
+\texttt{context\_profile} & \texttt{dev} \textbar{} \texttt{research} \textbar{} \texttt{review} & (none) \\
+\texttt{claude\_md\_path} & custom CLAUDE.md output path & (none) \\
+\texttt{security\_enforcement} & boolean & \texttt{true} \\
+\texttt{security\_asvs\_level} & 1 \textbar{} 2 \textbar{} 3 & \texttt{1} \\
+\texttt{security\_block\_on} & \texttt{high} \textbar{} \texttt{medium} \textbar{} \texttt{low} & \texttt{high} \\
+\bottomrule
+\end{longtable}
+
+\section{Workflow Toggles}
+
+All workflow toggles follow the \textbf{absent = enabled} pattern. Missing keys default to \texttt{true} unless otherwise noted.
+
+\begin{longtable}{@{}l l l@{}}
+\toprule
+\textbf{\footnotesize Setting} & \textbf{\footnotesize Type} & \textbf{\footnotesize Default} \\
+\midrule
+\endhead
+\texttt{workflow.research} & boolean & \texttt{true} \\
+\texttt{workflow.plan\_check} & boolean & \texttt{true} \\
+\texttt{workflow.verifier} & boolean & \texttt{true} \\
+\texttt{workflow.auto\_advance} & boolean & \texttt{false} \\
+\texttt{workflow.nyquist\_validation} & boolean & \texttt{true} \\
+\texttt{workflow.ui\_phase} & boolean & \texttt{true} \\
+\texttt{workflow.ui\_safety\_gate} & boolean & \texttt{true} \\
+\texttt{workflow.node\_repair} & boolean & \texttt{true} \\
+\texttt{workflow.node\_repair\_budget} & number & \texttt{2} \\
+\texttt{workflow.research\_before\_questions} & boolean & \texttt{false} \\
+\texttt{workflow.discuss\_mode} & \texttt{discuss} \textbar{} \texttt{assumptions} & \texttt{discuss} \\
+\texttt{workflow.skip\_discuss} & boolean & \texttt{false} \\
+\texttt{workflow.text\_mode} & boolean & \texttt{false} \\
+\texttt{workflow.use\_worktrees} & boolean & \texttt{true} \\
+\texttt{workflow.code\_review} & boolean & \texttt{true} \\
+\texttt{workflow.code\_review\_depth} & \texttt{quick/standard/deep} & \texttt{standard} \\
+\texttt{workflow.plan\_bounce} & boolean & \texttt{false} \\
+\texttt{workflow.plan\_bounce\_script} & string path & (none) \\
+\texttt{workflow.plan\_bounce\_passes} & number & \texttt{2} \\
+\texttt{workflow.code\_review\_command} & shell command & (none) \\
+\texttt{workflow.tdd\_mode} & boolean & \texttt{false} \\
+\texttt{workflow.cross\_ai\_execution} & boolean & \texttt{false} \\
+\texttt{workflow.cross\_ai\_command} & shell command & (none) \\
+\texttt{workflow.cross\_ai\_timeout} & seconds & \texttt{300} \\
+\bottomrule
+\end{longtable}
+
+\section{Planning, Hooks \& Features}
+
+\begin{longtable}{@{}l l l@{}}
+\toprule
+\textbf{\footnotesize Setting} & \textbf{\footnotesize Type} & \textbf{\footnotesize Default} \\
+\midrule
+\endhead
+\texttt{planning.commit\_docs} & boolean & \texttt{true} \\
+\texttt{planning.search\_gitignored} & boolean & \texttt{false} \\
+\texttt{hooks.context\_warnings} & boolean & \texttt{true} \\
+\texttt{hooks.workflow\_guard} & boolean & \texttt{false} \\
+\texttt{hooks.community} & boolean & \texttt{false} \\
+\texttt{features.thinking\_partner} & boolean & \texttt{false} \\
+\texttt{features.global\_learnings} & boolean & \texttt{false} \\
+\texttt{intel.enabled} & boolean & \texttt{false} \\
+\texttt{learnings.max\_inject} & number & \texttt{10} \\
+\texttt{agent\_skills} & object & \texttt{\{\}} \\
+\bottomrule
+\end{longtable}
+
+\begin{gsdnote}
+If \gsdfile{.planning/} is in \gsdfile{.gitignore}, \texttt{planning.commit\_docs} is automatically forced to \texttt{false} regardless of config.json. This prevents git errors.
+\end{gsdnote}
+
+\section{Parallelization}
+
+\begin{longtable}{@{}l l l@{}}
+\toprule
+\textbf{\footnotesize Setting} & \textbf{\footnotesize Type} & \textbf{\footnotesize Default} \\
+\midrule
+\endhead
+\texttt{parallelization.enabled} & boolean & \texttt{true} \\
+\texttt{parallelization.plan\_level} & boolean & \texttt{true} \\
+\texttt{parallelization.task\_level} & boolean & \texttt{false} \\
+\texttt{parallelization.skip\_checkpoints} & boolean & \texttt{true} \\
+\texttt{parallelization.max\_concurrent\_agents} & number & \texttt{3} \\
+\texttt{parallelization.min\_plans\_for\_parallel} & number & \texttt{2} \\
+\bottomrule
+\end{longtable}
+
+\begin{gsdwarning}
+When parallelization is enabled, executor agents commit with \gsdflag{no-verify} to avoid build-lock contention (e.g., cargo lock fights in Rust projects). The orchestrator validates hooks once after each wave completes. Set \texttt{parallelization.enabled: false} if you need hooks to run per-commit.
+\end{gsdwarning}
+
+\section{Git Branching}
+
+\begin{longtable}{@{}l l l@{}}
+\toprule
+\textbf{\footnotesize Setting} & \textbf{\footnotesize Type} & \textbf{\footnotesize Default} \\
+\midrule
+\endhead
+\texttt{git.branching\_strategy} & \texttt{none} \textbar{} \texttt{phase} \textbar{} \texttt{milestone} & \texttt{none} \\
+\texttt{git.phase\_branch\_template} & string template & \texttt{gsd/phase-\{phase\}-\{slug\}} \\
+\texttt{git.milestone\_branch\_template} & string template & \texttt{gsd/\{milestone\}-\{slug\}} \\
+\texttt{git.quick\_branch\_template} & string template \textbar{} null & \texttt{null} \\
+\bottomrule
+\end{longtable}
+
+Template variables: \texttt{\{phase\}} (zero-padded), \texttt{\{slug\}} (lowercase, hyphenated), \texttt{\{milestone\}} (e.g., \texttt{v1.0}), \texttt{\{num\}} / \texttt{\{quick\}} (quick task ID).
+
+\section{Gates, Safety \& Review}
+
+\begin{longtable}{@{}l l l@{}}
+\toprule
+\textbf{\footnotesize Setting} & \textbf{\footnotesize Type} & \textbf{\footnotesize Default} \\
+\midrule
+\endhead
+\texttt{gates.confirm\_project} & boolean & \texttt{true} \\
+\texttt{gates.confirm\_phases} & boolean & \texttt{true} \\
+\texttt{gates.confirm\_roadmap} & boolean & \texttt{true} \\
+\texttt{gates.confirm\_breakdown} & boolean & \texttt{true} \\
+\texttt{gates.confirm\_plan} & boolean & \texttt{true} \\
+\texttt{gates.execute\_next\_plan} & boolean & \texttt{true} \\
+\texttt{gates.issues\_review} & boolean & \texttt{true} \\
+\texttt{gates.confirm\_transition} & boolean & \texttt{true} \\
+\texttt{safety.always\_confirm\_destructive} & boolean & \texttt{true} \\
+\texttt{safety.always\_confirm\_external\_services} & boolean & \texttt{true} \\
+\texttt{review.models.gemini} & string & (CLI default) \\
+\texttt{review.models.claude} & string & (CLI default) \\
+\texttt{review.models.codex} & string & (CLI default) \\
+\texttt{review.models.opencode} & string & (CLI default) \\
+\texttt{review.models.qwen} & string & (CLI default) \\
+\texttt{review.models.cursor} & string & (CLI default) \\
+\bottomrule
+\end{longtable}
+
+\section{Manager Passthrough Flags}
+
+\begin{longtable}{@{}l l l@{}}
+\toprule
+\textbf{\footnotesize Setting} & \textbf{\footnotesize Type} & \textbf{\footnotesize Default} \\
+\midrule
+\endhead
+\texttt{manager.flags.discuss} & string & (none) \\
+\texttt{manager.flags.plan} & string & (none) \\
+\texttt{manager.flags.execute} & string & (none) \\
+\bottomrule
+\end{longtable}
+
+Flags are appended to each dispatched command. Invalid flag tokens are sanitized and logged as warnings; only recognized GSD flags are passed through.
+
+\section{Model Profiles}
+
+\begin{longtable}{@{}l l l l l@{}}
+\toprule
+\textbf{\footnotesize Agent} & \textbf{\footnotesize quality} & \textbf{\footnotesize balanced} & \textbf{\footnotesize budget} & \textbf{\footnotesize inherit} \\
+\midrule
+\endhead
+gsd-planner & Opus & Opus & Sonnet & inherit \\
+gsd-roadmapper & Opus & Sonnet & Sonnet & inherit \\
+gsd-executor & Opus & Sonnet & Sonnet & inherit \\
+gsd-phase-researcher & Opus & Sonnet & Haiku & inherit \\
+gsd-project-researcher & Opus & Sonnet & Haiku & inherit \\
+gsd-research-synthesizer & Sonnet & Sonnet & Haiku & inherit \\
+gsd-debugger & Opus & Sonnet & Sonnet & inherit \\
+gsd-codebase-mapper & Sonnet & Haiku & Haiku & inherit \\
+gsd-verifier & Sonnet & Sonnet & Haiku & inherit \\
+gsd-plan-checker & Sonnet & Sonnet & Haiku & inherit \\
+gsd-integration-checker & Sonnet & Sonnet & Haiku & inherit \\
+gsd-nyquist-auditor & Sonnet & Sonnet & Haiku & inherit \\
+\bottomrule
+\end{longtable}
+
+Override specific agents via \texttt{model\_overrides}. Valid values: \texttt{opus}, \texttt{sonnet}, \texttt{haiku}, \texttt{inherit}, or any fully-qualified model ID (\texttt{openai/o3}, \texttt{google/gemini-2.5-pro}, etc.). Non-Claude runtimes ship with \texttt{resolve\_model\_ids: "omit"} so each agent inherits the runtime's default model unless overridden.
+
+\section{Environment Variables}
+
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+\toprule
+\textbf{\footnotesize Variable} & \textbf{\footnotesize Purpose} \\
+\midrule
+\texttt{CLAUDE\_CONFIG\_DIR} & Override default config directory (\gsdfile{\textasciitilde/.claude/}) \\
+\texttt{GEMINI\_API\_KEY} & Detected by context monitor to switch hook event name \\
+\texttt{WSL\_DISTRO\_NAME} & Detected by installer for WSL path handling \\
+\texttt{GSD\_SKIP\_SCHEMA\_CHECK} & Skip schema drift detection during execute-phase \\
+\texttt{GSD\_PROJECT} & Override project root for multi-project workspace support \\
+\bottomrule
+\end{tabularx}
+
+\section{Global Defaults}
+
+Save settings as global defaults for future projects at \gsdfile{\textasciitilde/.gsd/defaults.json}. When \gsdcolon{new-project} creates a new config.json, it reads global defaults and merges them as the starting configuration. Per-project settings always override globals.
+
+% ============================================================================
+\chapter{File Manifest}
+
+GSD artifacts live under \gsdfile{.planning/} at the project root (or at \gsdfile{\$GSD\_PROJECT/.planning/} if overridden). The canonical layout for a typical v1.35.0 project:
+
+\begin{lstlisting}
+.planning/
+  PROJECT.md                  # Project vision, always loaded
+  REQUIREMENTS.md             # Scoped v1/v2 requirements with phase traceability
+  ROADMAP.md                  # Phase list, status, dependencies
+  STATE.md                    # Decisions, blockers, position across sessions
+  config.json                 # Workflow, model, git, gate, safety configuration
+  MILESTONES.md               # Archive of completed milestones
+  CLAUDE.md                   # Generated; written at project root by default
+  continue-here.md            # Written by /gsd:pause-work
+  research/                   # Project-level ecosystem research
+  codebase/                   # /gsd:map-codebase and /gsd:scan output
+  intel/                      # /gsd:intel JSON files (stack, api-map, etc.)
+  seeds/
+    SEED-NNN-slug.md          # /gsd:plant-seed artifacts
+  threads/
+    {thread-name}.md          # /gsd:thread cross-session knowledge stores
+  todos/                      # Captured ideas from /gsd:add-todo and /gsd:note
+  quick/
+    NNN-slug/                 # /gsd:quick ad-hoc task directory
+      PLAN.md
+      SUMMARY.md
+  forensics/
+    report-{timestamp}.md     # /gsd:forensics output
+  learnings/
+    {phase}-LEARNINGS.md      # /gsd:extract-learnings output
+  reports/
+    SESSION_REPORT.md         # /gsd:session-report
+    MILESTONE_SUMMARY-v{v}.md # /gsd:milestone-summary
+  ui-reviews/                 # Screenshots from /gsd:ui-review
+  phases/
+    NN-slug/                  # One directory per phase
+      CONTEXT.md              # From /gsd:discuss-phase
+      DISCUSSION-LOG.md       # Audit trail for discuss-phase
+      RESEARCH.md             # From /gsd:plan-phase (or /gsd:research-phase)
+      PLAN.md                 # Aggregate phase plan
+      NN-PLAN.md              # Per-wave plans (NN = wave number)
+      VALIDATION.md           # Nyquist validation data
+      NN-SUMMARY.md           # Per-plan execution summary
+      VERIFICATION.md         # From /gsd:verify-work and executor wrap-up
+      UAT.md                  # User acceptance test results
+      UI-SPEC.md              # From /gsd:ui-phase
+      UI-REVIEW.md            # From /gsd:ui-review
+      REVIEW.md               # From /gsd:code-review
+      REVIEW-FIX.md           # From /gsd:code-review-fix
+      REVIEWS.md              # From /gsd:review (cross-AI)
+      SECURITY.md             # From /gsd:secure-phase
+      AI-SPEC.md              # From /gsd:ai-integration-phase
+      EVAL-REVIEW.md          # From /gsd:eval-review
+\end{lstlisting}
+
+\section*{Workspace Layout}
+
+Workspaces created by \gsdcolon{new-workspace} live under \gsdfile{\textasciitilde/gsd-workspaces/<name>/} by default, with their own \gsdfile{.planning/} directory, a \gsdfile{WORKSPACE.md} manifest, and one or more repo copies (as worktrees or clones).
+
+\section*{Global Layout}
+
+\begin{lstlisting}
+~/.gsd/
+  defaults.json               # Global defaults merged into new projects
+~/.claude/                    # Runtime config dir (overridable via CLAUDE_CONFIG_DIR)
+\end{lstlisting}
+
+\vspace{1em}
+\begin{center}
+\small\textit{End of reference. GSD v1.35.0. This document is CC BY-SA 4.0 — The Tibsfox Team.}
+\end{center}
+
+\end{document}
