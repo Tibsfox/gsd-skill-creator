@@ -277,3 +277,127 @@ Several features of Schwarz's pedagogy become clearer in historical context:
 - **Document 2** (`02-logic-and-language.md`) develops the formal logic that this document has only sketched.
 - **Document 3** (`03-techniques-catalog.md`) presents the proof techniques whose *form* Schwarz introduces with two direct examples — direct, contrapositive, contradiction, cases, construction, induction, and more.
 - **Document 6** (`06-formalization-and-modern.md`) picks up the story of computer-assisted and formalized proof where this document leaves off.
+
+---
+
+## Study Guide — Foundations and History of Proof
+
+### Prerequisites
+
+- No mathematical prerequisites beyond high-school algebra. This is the history document — it asks you to *understand* what proof is, not to *produce* proofs yet.
+- Familiarity with basic set notation ($\in$, $\subseteq$, $\cup$, $\cap$) is helpful for the Cantor and Russell sections but not required.
+
+### Key vocabulary
+
+| Term | Definition | First appears |
+|---|---|---|
+| **Axiom** | A statement accepted without proof as the starting point of a deductive system. | Euclid, section 1.2 |
+| **Postulate** | Euclid's term for axioms specific to geometry; used interchangeably with axiom in modern mathematics. | Euclid, section 1.2 |
+| **Formal system** | A set of axioms + a set of inference rules + a language for writing statements. | Frege, section 2.3 |
+| **Consistency** | A formal system is consistent iff no contradiction can be derived from its axioms. | Hilbert, section 3.1 |
+| **Completeness** | A formal system is complete iff every true statement (in its semantics) can be proved. | Hilbert, section 3.1 |
+| **Incompleteness** | Gödel's theorems: sufficiently powerful consistent systems are necessarily incomplete. | Gödel, section 3.3 |
+| **ZFC** | Zermelo-Fraenkel set theory with the Axiom of Choice — the de facto foundation of modern mathematics. | Section 3.2 |
+| **Constructive proof** | A proof that produces an explicit witness for every existential claim, without relying on the law of excluded middle. | Section 5.1 |
+
+### Reading order
+
+1. Start with section 1 (pre-axiomatic period) to see what mathematics looked like *before* proof.
+2. Section 2 (the rigor revolution) is the historical core — take this slowly.
+3. Sections 3–4 (Hilbert, Gödel, Bourbaki) are the 20th-century story — read alongside Kline chapter 51 if available.
+4. Sections 5–7 (modern period + consequences) are forward-looking — connect to document 6.
+
+### Study plans
+
+**1-week sprint.** Read sections 1–3 carefully. Read Euclid Book I, Propositions 1–5 in the Heath translation. Write a 1-page summary: what changed between Euclid and Hilbert?
+
+**1-month deep dive.** Read Stillwell's *Mathematics and Its History* chapters 1–5 alongside this document. Attempt exercises at the end of each Stillwell chapter. Read Gödel's original 1931 paper (in English translation, e.g., in van Heijenoort's *From Frege to Gödel*). Write a 3-page essay: what does Gödel's theorem mean for mathematical certainty?
+
+**6-month foundation.** Add Kline's *Mathematical Thought from Ancient to Modern Times* (the full three volumes). Add Ferreirós's *Labyrinth of Thought* for set theory history. Add Grattan-Guinness's *The Search for Mathematical Roots* for the foundations crisis. By the end, you should be able to explain the arc from Euclid to Gödel to Lean without notes.
+
+---
+
+## TRY Session — Read Euclid's First Proof
+
+**Duration:** 20 minutes.
+**Materials:** Heath's English translation of Euclid's *Elements*, Book I, Proposition 1 (available free at many university sites and in section 1.3 of this document).
+
+**Steps:**
+
+1. Read Proposition I.1 in full. Identify: (a) the construction, (b) the proof, (c) the closing statement.
+2. For each step of the proof, write down which postulate or common notion Euclid cites.
+3. Find the hidden assumption that Euclid does *not* justify. (Hint: it involves two circles.)
+4. Write one sentence explaining why the hidden assumption matters.
+5. Check your answer: the assumption is that the two circles intersect at a point $C$. Nothing in the five postulates guarantees that two circles in a plane must intersect.
+
+**What to observe:** The structure of Euclid's proof — construction, derivation, closing — is the same structure Schwarz teaches on slide 22. The gap (unchecked intersection) is the same kind of gap that the 19th-century rigor revolution was designed to close.
+
+---
+
+## TRY Session — The Russell Paradox in Five Minutes
+
+**Duration:** 5 minutes.
+**Materials:** Pen and paper.
+
+**Steps:**
+
+1. Write down the set $R = \{x : x \notin x\}$.
+2. Ask: is $R \in R$? Write out both cases and reach the contradiction.
+3. Ask: which axiom of Frege's system allows you to form $R$? (Answer: unrestricted comprehension — for any property $P$, the set $\{x : P(x)\}$ exists.)
+4. Ask: which axiom of ZFC prevents you from forming $R$? (Answer: the axiom of separation — you can only form $\{x \in S : P(x)\}$ for some already-existing set $S$.)
+5. Write one sentence: why does the restriction to "subsets of an existing set" block the paradox?
+
+**What to observe:** The paradox is not a curiosity — it is the specific failure that forced the replacement of naive set theory with ZFC. The separation axiom is the scar tissue.
+
+---
+
+## DIY — Write a Timeline of Proof
+
+**Scope:** 1–2 hours.
+**Deliverable:** A one-page timeline (handwritten or typed) showing the major milestones in the history of proof.
+
+**Required milestones:** Euclid (~300 BCE), Cauchy/Weierstrass (~1820–1870), Cantor (~1874–1891), Frege (1879), Russell's paradox (1902), Principia Mathematica (1910), Hilbert's program (1920s), Gödel's incompleteness (1931), Bourbaki (1934), ZFC stabilization (~1950), Appel-Haken four-color proof (1976), Lean/Mathlib (~2017–present).
+
+**Stretch goal:** For each milestone, write one sentence about what the milestone changed about the definition of "proof."
+
+---
+
+## DIY — Prove That Euclid's Gap Matters
+
+**Scope:** 2–3 hours. Requires reading about non-Euclidean geometry.
+**Deliverable:** A short essay (2–3 pages).
+
+**Task:** Euclid's Proposition I.1 assumes that two circles drawn with overlapping radii must intersect. In the standard Euclidean plane, this is true. But consider the rational plane $\mathbb{Q}^2$ — points with both coordinates rational. Show that in $\mathbb{Q}^2$, Euclid's construction of an equilateral triangle fails: the two circles do not necessarily intersect at a point with rational coordinates. Give a specific example (hint: use the unit-distance equilateral triangle and show that its third vertex has coordinate $\sqrt{3}/2$, which is irrational).
+
+**What you learn:** The difference between "intuitively obvious" and "provable from the axioms" — the central lesson of the 19th-century rigor revolution.
+
+---
+
+## College & Rosetta Deep Links
+
+### Department connections
+
+| College Department | Concept IDs | Connection to this document |
+|---|---|---|
+| **Logic** | `log-formal-proof-systems` | Section 2.3 (Frege's formal system), section 3.2 (Principia + ZFC), section 5 (constructive vs. classical) |
+| **Logic** | `log-propositional-logic` | Section 2.3 (Frege's *Begriffsschrift*), section 3.3 (Gödel numbering encodes propositional formulas) |
+| **Logic** | `log-predicate-logic` | Section 2.1 (Weierstrass's $\varepsilon$-$\delta$ = nested quantifiers), section 3.2 (first-order ZFC) |
+| **Logic** | `log-argument-structure` | Entire document — the history of what counts as a valid argument |
+| **Mathematics** | `math-complex-numbers` | Section 3.3 (Gödel's proof uses arithmetic of the natural numbers, extended to the complex plane in analytic number theory) |
+| **Mathematics** | `math-number-cardinality` | Section 2.2 (Cantor's cardinality hierarchy) |
+| **Philosophy** | (reasoning, epistemology) | Section 3.3 (Gödel's consequences for mathematical certainty), section 4.1 (Bourbaki structuralism) |
+| **History** | (intellectual history) | Entire document — the evolution of mathematical rigor across 2300 years |
+
+### Rosetta panel routes
+
+The historical concepts in this document connect to Rosetta panels through concrete implementations:
+
+- **Python panel:** Cantor's diagonal argument can be implemented as a function that, given any countable list of reals, produces a real not in the list. This is a natural Python exercise connecting section 2.2 to code.
+- **Lisp panel:** Russell's paradox maps to the self-referential lambda expression `(lambda (x) (not (x x)))` applied to itself — the Y combinator's dark side.
+- **ALGOL panel:** Frege's *Begriffsschrift* was the first formal language. The ALGOL report (1960) was the first formal programming language specification. The connection between formal proof language and formal programming language is the through-line.
+- **Lean 4 (future panel):** Section 5.2 connects directly — formalized proofs are programs in a type theory. If/when a Lean panel is added to Rosetta, this document is its historical foundation.
+
+### Cross-department threads
+
+- **Logic → Mathematics → Philosophy:** The question "what is a proof?" spans all three departments. The Logic department provides the formal tools, Mathematics provides the content, and Philosophy asks the meta-question (what does provability *mean*?).
+- **Logic → Coding → Technology:** Formal proof systems → programming languages → proof assistants. The thread runs from Frege (1879) through Church (1936, lambda calculus) through Milner (1972, ML/LCF) through de Moura (2013, Lean). This is the subject of document 6 but its roots are here.
