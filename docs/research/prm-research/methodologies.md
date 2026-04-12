@@ -2193,3 +2193,36 @@ GSD illustrates this principle as well. Its artifact structure is simple (a hand
 *This document is part of the PNW Research Series, produced for the Project Management Research (PRM) cluster. It surveys the historical development, theoretical foundations, and practical applications of project management methodologies from the early twentieth century through the emergence of AI-native workflows. The survey is practitioner-informed: every methodology discussed has been evaluated not only on its theoretical merits but on its demonstrated effectiveness in real-world project contexts.*
 
 *April 2026*
+
+---
+
+## Study Guide — PM Methodologies
+
+### Methodology map
+
+- **Waterfall** — 1970s, sequential phases.
+- **PRINCE2** — UK government, structured.
+- **PMBOK** — PMI's guide, process-heavy.
+- **Agile** — 2001 manifesto, iterative.
+- **Scrum** — sprints, ceremonies, product owner.
+- **Kanban** — pull-based flow.
+- **Lean** — eliminate waste, Toyota-derived.
+- **XP** — pair programming, test-first.
+- **SAFe / LeSS / Nexus** — scaling agile.
+- **CCPM** — Critical Chain, Goldratt's TOC.
+- **Stage-Gate** — hardware/product development.
+- **GSD** — AI-native.
+
+## DIY — Run two methodologies in parallel
+
+Pick two. Run each on a small real project. Observe
+which feels right for which task.
+
+## TRY — Write your own methodology
+
+Combine the 3 rules you think matter most. Run it on a
+project. Refine.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)

@@ -2981,3 +2981,42 @@ The optimal approach for a mature organization is:
 ---
 
 *This document is part of the PNW Research Series — Project Management Cluster. It provides comprehensive coverage of project performance data, metrics frameworks, risk management, stakeholder management, quality management, and the GSD framework's approach to these disciplines. All data points are sourced from published research, industry surveys, and verifiable framework documentation.*
+
+---
+
+## Study Guide — Performance, Metrics, Risk
+
+### Key concepts
+
+1. **Earned Value Management (EVM).** PV, EV, AC, CPI,
+   SPI. The language of traditional PM.
+2. **Risk register.** Document risks with probability +
+   impact + owner + mitigation.
+3. **Monte Carlo schedule simulation.** Model
+   distributional uncertainty.
+4. **Stakeholder matrix.** Power/interest grid.
+
+## DIY — Build a risk register
+
+Pick a real project. List 10 risks. For each: probability,
+impact, owner, mitigation. This is half of real risk
+management in 30 minutes.
+
+## DIY — Compute CPI/SPI by hand
+
+Find an EVM worked example. Compute Cost Performance
+Index and Schedule Performance Index by hand. Five
+minutes of arithmetic gets you the core PM metric
+vocabulary.
+
+## TRY — Monte Carlo a project
+
+Use `@RISK`, `Analytica`, or Python's `simpy` to model
+schedule uncertainty for a multi-task project. Run
+10,000 trials. Observe the p50/p90 completion date
+spread.
+
+## Related College Departments
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
