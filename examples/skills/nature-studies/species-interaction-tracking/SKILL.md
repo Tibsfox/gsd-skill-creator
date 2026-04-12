@@ -1,11 +1,14 @@
 ---
 name: species-interaction-tracking
 description: Following what organisms do — behavior, metamorphosis, host-plant relationships, social dynamics, and the long-form ethograms that reveal how species actually live. Covers the vocabulary of ethology, the structure of a life cycle, the classic categories of species interaction, the discipline of recording behavior without premature interpretation, and the gap between a single observation and a statistically useful record. Use when the task is to understand or record what a species does rather than what it is.
-category: nature-studies
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: nature-studies
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/nature-studies/species-interaction-tracking/SKILL.md
+superseded_by: null
 ---
 # Species Interaction Tracking
 
