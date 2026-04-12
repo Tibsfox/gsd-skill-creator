@@ -7,7 +7,10 @@ type: agent
 category: astronomy
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/agents/astronomy/burbidge/AGENT.md
+superseded_by: null
 ---
 # Burbidge — Nucleosynthesis Specialist
 

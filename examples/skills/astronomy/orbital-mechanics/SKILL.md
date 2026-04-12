@@ -1,11 +1,14 @@
 ---
 name: orbital-mechanics
 description: Classical orbital mechanics from Kepler to Hohmann. Covers the six orbital elements, Kepler's three laws, vis-viva, orbit types (circular, elliptical, parabolic, hyperbolic), transfer orbits, gravity assists, the two-body problem, and practical methods for computing ephemerides. Use when reasoning about planet motion, spacecraft trajectories, comet orbits, exoplanet transits, or binary star dynamics.
-category: astronomy
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: astronomy
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/astronomy/orbital-mechanics/SKILL.md
+superseded_by: null
 ---
 # Orbital Mechanics
 

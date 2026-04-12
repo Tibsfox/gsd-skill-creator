@@ -4,8 +4,11 @@ type: team
 category: astronomy
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/teams/astronomy/astronomy-workshop-team/README.md
 description: Focused four-agent workshop team for stellar astrophysics problems that need spectroscopic classification, structural/evolutionary modeling, and nucleosynthetic interpretation in one pass. Payne-Gaposchkin leads classification and composition, Chandrasekhar-astro handles structure and evolution, Burbidge interprets nucleosynthesis, and Tyson delivers the result at the user's level. Use for stellar classification deep-dives, abundance analyses, evolutionary assessments, and any stellar-physics problem where the answer is in the star itself rather than its environment. Not for observational planning, galactic dynamics, or cosmological questions.
+superseded_by: null
 ---
 # Astronomy Workshop Team
 
