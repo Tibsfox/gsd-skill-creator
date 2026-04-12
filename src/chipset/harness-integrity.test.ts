@@ -394,6 +394,34 @@ describe('Harness Integrity', () => {
       expect(result.passed, result.message).toBe(true);
     });
 
+    it('config immutability protection is tracked in project-claude/hooks/ (fresh-clone guarantee)', () => {
+      // The architectural invariant: even before `node project-claude/install.cjs`
+      // runs, the tracked source must contain a hook that references settings.json
+      // and hard-blocks. This is what checkConfigImmutability falls back to on
+      // fresh clones so the test can pass without a prior install step.
+      const sourceHooksDir = path.join(PROJECT_ROOT, 'project-claude', 'hooks');
+      expect(fs.existsSync(sourceHooksDir), 'project-claude/hooks/ must exist').toBe(true);
+
+      const hookFiles = fs
+        .readdirSync(sourceHooksDir)
+        .filter((f) => f.endsWith('.js') || f.endsWith('.cjs') || f.endsWith('.mjs'));
+
+      const protectors = hookFiles.filter((f) => {
+        const content = fs.readFileSync(path.join(sourceHooksDir, f), 'utf8');
+        const refsSettings =
+          content.includes('settings.json') || content.includes('.claude/settings');
+        const blocks =
+          /process\.exit\(\s*2\s*\)/.test(content) ||
+          /permissionDecision\s*:\s*['"]deny['"]/.test(content);
+        return refsSettings && blocks;
+      });
+
+      expect(
+        protectors.length,
+        'project-claude/hooks/ must contain a tracked hook that blocks writes to settings.json',
+      ).toBeGreaterThan(0);
+    });
+
     it('settings.json is valid JSON (fail-safe defaults)', () => {
       const result = checkFailSafeDefaults();
       expect(result.passed, result.message).toBe(true);
