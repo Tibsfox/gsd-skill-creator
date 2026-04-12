@@ -1,11 +1,14 @@
 ---
 name: sustainability-design
 description: Designing interventions, systems, and policies for sustainability. Covers renewable energy (solar, wind, hydro, geothermal), sustainable agriculture (agroecology, permaculture, integrated pest management), conservation strategies (protected areas, corridors, rewilding), lifecycle analysis, circular economy principles, and policy instruments (carbon pricing, cap-and-trade, regulation). Use when evaluating or designing interventions that aim to reduce environmental impact while maintaining human well-being.
-category: environmental
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: environmental
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/environmental/sustainability-design/SKILL.md
+superseded_by: null
 ---
 # Sustainability Design
 

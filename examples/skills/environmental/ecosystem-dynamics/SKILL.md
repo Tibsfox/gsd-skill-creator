@@ -1,11 +1,14 @@
 ---
 name: ecosystem-dynamics
 description: Ecological organization, energy flow, food webs, biodiversity, succession, and species interactions. Covers trophic structure, primary productivity, nutrient transfer efficiency, keystone and foundation species, ecosystem services, carrying capacity, disturbance regimes, primary and secondary succession, and resilience metrics. Use when analyzing how living communities are organized, how energy and matter move through ecosystems, how disturbance and recovery shape landscapes, or why biodiversity matters for ecosystem function.
-category: environmental
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: environmental
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/environmental/ecosystem-dynamics/SKILL.md
+superseded_by: null
 ---
 # Ecosystem Dynamics
 

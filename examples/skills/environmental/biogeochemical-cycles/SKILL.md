@@ -1,11 +1,14 @@
 ---
 name: biogeochemical-cycles
 description: Carbon, nitrogen, phosphorus, sulfur, and water cycles — pools, fluxes, residence times, and anthropogenic perturbations. Covers the fast and slow carbon cycles, the Haber-Bosch disruption of the nitrogen cycle, the phosphorus bottleneck, the hydrological cycle, ocean acidification, and the planetary boundaries framework. Use when tracking chemical elements through atmosphere, hydrosphere, biosphere, and lithosphere; computing pool sizes and fluxes; or evaluating anthropogenic perturbations to global cycles.
-category: environmental
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: environmental
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/environmental/biogeochemical-cycles/SKILL.md
+superseded_by: null
 ---
 # Biogeochemical Cycles
 

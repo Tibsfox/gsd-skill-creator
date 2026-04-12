@@ -7,7 +7,10 @@ type: agent
 category: environmental
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/agents/environmental/muir/AGENT.md
+superseded_by: null
 ---
 # Muir -- Wilderness and Conservation Specialist
 

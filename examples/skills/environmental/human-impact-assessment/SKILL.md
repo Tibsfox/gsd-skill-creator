@@ -1,11 +1,14 @@
 ---
 name: human-impact-assessment
 description: Assessing anthropogenic environmental impacts — pollution pathways, habitat destruction and fragmentation, land-use change, invasive species, overharvest, and extinction debt. Covers environmental impact assessment (EIA) methodology, exposure-effect relationships, population viability analysis, IPAT and ecological footprint frameworks, and strategic environmental assessment. Use when quantifying or forecasting human impacts on ecosystems, designing monitoring programs, or evaluating a proposed intervention against a baseline.
-category: environmental
 type: skill
-first_seen: 2026-04-12
-origin: tibsfox
+category: environmental
 status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-12
+first_path: examples/skills/environmental/human-impact-assessment/SKILL.md
+superseded_by: null
 ---
 # Human Impact Assessment
 
