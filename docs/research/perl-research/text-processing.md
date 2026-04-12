@@ -1426,3 +1426,48 @@ cpan Text::CSV_XS
 ---
 
 *Perl is 39 years old. Its regex engine is the ancestor of every modern regex implementation. Its text processing idioms have been copied by every scripting language that followed. The one-liner culture it created is still the fastest way to transform text from a terminal. For ad-hoc text munging, regex-heavy parsing, and command-line text processing, nothing has surpassed it.*
+
+---
+
+## Study Guide — Perl Text Processing
+
+### Key concepts
+
+1. **Perl regex is the ancestor.** PCRE, Python re, Ruby,
+   JavaScript — all descend from Perl's regex engine.
+2. **`$_` is the implicit argument.** Many functions
+   operate on `$_` by default.
+3. **`@F` and `-a` give you awk.** `perl -lane 'print
+   $F[0]'` splits on whitespace.
+4. **Named captures.** `(?<name>...)` pull structured data.
+
+## Programming Examples
+
+### Example 1 — Extract IP addresses
+
+```bash
+perl -ne 'print $1,"\n" while /(\d+\.\d+\.\d+\.\d+)/g' access.log
+```
+
+### Example 2 — Named captures
+
+```perl
+if ($line =~ /^(?<ip>\S+)\s+\S+\s+\S+\s+\[(?<time>[^\]]+)\]/) {
+    print "$+{ip} at $+{time}\n";
+}
+```
+
+## DIY — Rewrite 10 grep pipelines in Perl
+
+Pick 10 bash pipelines you've written. Replace each with
+a Perl one-liner. Time both. Perl usually wins for
+complex cases.
+
+## TRY — Write a log parser
+
+Parse an Apache access log. Extract IP, time, URL, status.
+Output CSV. 20 lines of Perl.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
