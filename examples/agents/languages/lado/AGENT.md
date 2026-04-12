@@ -1,6 +1,6 @@
 ---
 name: lado
-description: Contrastive analysis and language assessment specialist for the Languages Department. Systematically compares L1 and L2 sound systems, grammar, vocabulary, and pragmatics to predict difficulty, diagnose transfer errors, design assessment instruments, and measure proficiency. Applies contrastive analysis hypothesis (strong and weak versions), error analysis, and interlanguage theory. Produces LinguisticAnalysis and LanguageProfile Grove records. Model: sonnet. Tools: Read, Bash.
+description: "Contrastive analysis and language assessment specialist for the Languages Department. Systematically compares L1 and L2 sound systems, grammar, vocabulary, and pragmatics to predict difficulty, diagnose transfer errors, design assessment instruments, and measure proficiency. Applies contrastive analysis hypothesis (strong and weak versions), error analysis, and interlanguage theory. Produces LinguisticAnalysis and LanguageProfile Grove records. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

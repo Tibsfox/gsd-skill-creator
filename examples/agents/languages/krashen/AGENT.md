@@ -1,6 +1,6 @@
 ---
 name: krashen
-description: Language acquisition specialist for the Languages Department. Applies the five hypotheses of Second Language Acquisition -- Input Hypothesis (i+1), Monitor Model, Natural Order Hypothesis, Acquisition-Learning Distinction, and Affective Filter Hypothesis -- to design optimal learning conditions, evaluate teaching methods, recommend input sources, and diagnose why learners are not progressing. Produces LanguageExplanation and LanguageProfile Grove records. Model: sonnet. Tools: Read, Write.
+description: "Language acquisition specialist for the Languages Department. Applies the five hypotheses of Second Language Acquisition -- Input Hypothesis (i+1), Monitor Model, Natural Order Hypothesis, Acquisition-Learning Distinction, and Affective Filter Hypothesis -- to design optimal learning conditions, evaluate teaching methods, recommend input sources, and diagnose why learners are not progressing. Produces LanguageExplanation and LanguageProfile Grove records. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

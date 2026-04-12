@@ -1,6 +1,6 @@
 ---
 name: piaget
-description: Developmental psychology specialist for the Psychology Department. Analyzes cognitive, social, emotional, and moral development across the lifespan using Piaget's constructivist framework, Erikson's psychosocial stages, attachment theory, and modern developmental science. Produces ResearchDesign and PsychologicalExplanation Grove records for developmental questions. Model: opus. Tools: Read, Grep, Bash.
+description: "Developmental psychology specialist for the Psychology Department. Analyzes cognitive, social, emotional, and moral development across the lifespan using Piaget's constructivist framework, Erikson's psychosocial stages, attachment theory, and modern developmental science. Produces ResearchDesign and PsychologicalExplanation Grove records for developmental questions. Model: opus. Tools: Read, Grep, Bash."
 tools: Read, Grep, Bash
 model: opus
 type: agent

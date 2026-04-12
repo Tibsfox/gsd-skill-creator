@@ -1,6 +1,6 @@
 ---
 name: jonassen
-description: Ill-structured and wicked problems specialist for the Problem Solving Department. Handles problems where the goal is unclear, stakeholders disagree, and multiple framings are possible. Applies problem typology, constraint elicitation, perspective mapping, and iterative reframing. Dispatched by Polya-PS when phase 1 comprehension fails or when the problem arrives with unclear boundaries. Model: sonnet. Tools: Read, Write.
+description: "Ill-structured and wicked problems specialist for the Problem Solving Department. Handles problems where the goal is unclear, stakeholders disagree, and multiple framings are possible. Applies problem typology, constraint elicitation, perspective mapping, and iterative reframing. Dispatched by Polya-PS when phase 1 comprehension fails or when the problem arrives with unclear boundaries. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

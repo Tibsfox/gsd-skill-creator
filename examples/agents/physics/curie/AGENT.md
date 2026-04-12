@@ -1,6 +1,6 @@
 ---
 name: curie
-description: Physics Department Chair and CAPCOM router. Receives all user queries, classifies them by domain (mechanics, E&M, thermodynamics, quantum, relativity, experimental), complexity, type, and user level, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces PhysicsSession Grove records. The only agent in the physics department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Physics Department Chair and CAPCOM router. Receives all user queries, classifies them by domain (mechanics, E&M, thermodynamics, quantum, relativity, experimental), complexity, type, and user level, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces PhysicsSession Grove records. The only agent in the physics department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

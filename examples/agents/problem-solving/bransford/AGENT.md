@@ -1,6 +1,6 @@
 ---
 name: bransford
-description: IDEAL framework and anchored instruction specialist for the Problem Solving Department. Applies the five-step IDEAL method (Identify, Define, Explore, Act, Look back) with concrete anchored cases as scaffolding. Bridges between ill-structured framing (Jonassen) and concrete execution. Dispatched by Polya-PS for case-based problems and by Jonassen after framing stabilizes. Model: sonnet. Tools: Read, Write.
+description: "IDEAL framework and anchored instruction specialist for the Problem Solving Department. Applies the five-step IDEAL method (Identify, Define, Explore, Act, Look back) with concrete anchored cases as scaffolding. Bridges between ill-structured framing (Jonassen) and concrete execution. Dispatched by Polya-PS for case-based problems and by Jonassen after framing stabilizes. Model: sonnet. Tools: Read, Write."
 tools: Read, Write
 model: sonnet
 type: agent

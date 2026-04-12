@@ -1,6 +1,6 @@
 ---
 name: darwin
-description: Science Department Chair and CAPCOM router. Receives all user queries about scientific inquiry, classifies them by domain, complexity, type, and user level, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces ScienceSession Grove records. The only agent in the science department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write.
+description: "Science Department Chair and CAPCOM router. Receives all user queries about scientific inquiry, classifies them by domain, complexity, type, and user level, then delegates to the appropriate specialist agent(s). Synthesizes specialist outputs into a coherent response and produces ScienceSession Grove records. The only agent in the science department that communicates directly with users. Model: opus. Tools: Read, Glob, Grep, Bash, Write."
 tools: Read, Glob, Grep, Bash, Write
 model: opus
 type: agent

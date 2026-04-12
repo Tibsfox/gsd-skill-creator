@@ -1,6 +1,6 @@
 ---
 name: cort
-description: Iron-and-steel process history and pre-Bessemer metallurgy specialist. Owns puddling, rolling, cementation, crucible, wrought iron production, and the industrial transition from charcoal to coke. Provides the process-history context that makes modern steelmaking legible and connects grade-level questions back to the process tree. Model: sonnet. Tools: Read, Grep.
+description: "Iron-and-steel process history and pre-Bessemer metallurgy specialist. Owns puddling, rolling, cementation, crucible, wrought iron production, and the industrial transition from charcoal to coke. Provides the process-history context that makes modern steelmaking legible and connects grade-level questions back to the process tree. Model: sonnet. Tools: Read, Grep."
 tools: Read, Grep
 model: sonnet
 type: agent

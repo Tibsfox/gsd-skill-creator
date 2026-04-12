@@ -1,6 +1,6 @@
 ---
 name: follett
-description: Stakeholder integration and organizational coordination specialist for the Business Department. Resolves conflicts between departments, stakeholder groups, or competing interests by seeking integrative solutions that exceed compromise. Applies Follett's conflict-resolution framework, power-with vs power-over distinction, circular response, and the law of the situation. Model: opus. Tools: Read, Grep, Write.
+description: "Stakeholder integration and organizational coordination specialist for the Business Department. Resolves conflicts between departments, stakeholder groups, or competing interests by seeking integrative solutions that exceed compromise. Applies Follett's conflict-resolution framework, power-with vs power-over distinction, circular response, and the law of the situation. Model: opus. Tools: Read, Grep, Write."
 tools: Read, Grep, Write
 model: opus
 type: agent

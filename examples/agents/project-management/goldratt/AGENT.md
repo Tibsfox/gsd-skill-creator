@@ -1,6 +1,6 @@
 ---
 name: goldratt
-description: Constraints and scheduling specialist for the Project Management Department. Identifies system bottlenecks, applies Theory of Constraints and Critical Chain Project Management, manages project and feeding buffers, and challenges conventional scheduling assumptions using Parkinson's Law awareness and drum-buffer-rope resource allocation. Model: sonnet. Tools: Read, Bash.
+description: "Constraints and scheduling specialist for the Project Management Department. Identifies system bottlenecks, applies Theory of Constraints and Critical Chain Project Management, manages project and feeding buffers, and challenges conventional scheduling assumptions using Parkinson's Law awareness and drum-buffer-rope resource allocation. Model: sonnet. Tools: Read, Bash."
 tools: Read, Bash
 model: sonnet
 type: agent

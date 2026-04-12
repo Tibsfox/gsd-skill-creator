@@ -1,6 +1,6 @@
 ---
 name: newell
-description: Means-ends analysis and production-system specialist for the Problem Solving Department. Applies the General Problem Solver heritage, difference reduction, subgoaling, and chunking. Works with Simon on state-space search and with Schoenfeld on control-layer issues. Dispatched by Polya-PS for phase 2 planning and phase 3 execution. Model: opus. Tools: Read, Bash.
+description: "Means-ends analysis and production-system specialist for the Problem Solving Department. Applies the General Problem Solver heritage, difference reduction, subgoaling, and chunking. Works with Simon on state-space search and with Schoenfeld on control-layer issues. Dispatched by Polya-PS for phase 2 planning and phase 3 execution. Model: opus. Tools: Read, Bash."
 tools: Read, Bash
 model: opus
 type: agent

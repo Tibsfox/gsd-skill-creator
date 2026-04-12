@@ -1,6 +1,6 @@
 ---
 name: simon
-description: State-space specialist for the Problem Solving Department. Represents problems as state-spaces with initial state, goal state, and legal operators. Applies bounded rationality, production systems, and GPS-style search. Works with Newell on means-ends analysis. Dispatched by Polya-PS for phase 2 (plan) and phase 3 (execute) on well-defined problems. Model: opus. Tools: Read, Grep.
+description: "State-space specialist for the Problem Solving Department. Represents problems as state-spaces with initial state, goal state, and legal operators. Applies bounded rationality, production systems, and GPS-style search. Works with Newell on means-ends analysis. Dispatched by Polya-PS for phase 2 (plan) and phase 3 (execute) on well-defined problems. Model: opus. Tools: Read, Grep."
 tools: Read, Grep
 model: opus
 type: agent
