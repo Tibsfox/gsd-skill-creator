@@ -84,3 +84,24 @@ A few patterns recur across the history:
 - **The ecosystem never replaces, only layers.** A 2026 data miner may legitimately use SAS for a regulated submission, R for a statistical model, Python for pipelines, Spark for scale, XGBoost for tabular prediction, PyTorch for embeddings, pgvector for retrieval, and MLflow for tracking — in a single project.
 
 The field guide, then, is less a map of competing islands than a layered archaeology. The tools of each era remain in production somewhere, and understanding which layer a problem sits in is itself a core practitioner skill.
+
+## Study Guide — Tools & Platforms
+
+### Tool map
+
+- **Classical:** SAS, SPSS, R, Weka.
+- **Python era:** pandas, scikit-learn, XGBoost,
+  PyTorch, Jupyter.
+- **Big data:** Hadoop, Spark, Hive, Dask.
+- **Cloud ML:** SageMaker, Vertex AI, Azure ML.
+- **Vector/embedding:** pgvector, Pinecone, Weaviate,
+  Qdrant.
+
+## DIY — Compare pandas vs DuckDB
+
+Same query. pandas loads all rows; DuckDB pushes SQL
+through Arrow. Measure.
+
+## TRY — Wire MLflow into your project
+
+Log parameters, metrics, artifacts. Compare runs.
