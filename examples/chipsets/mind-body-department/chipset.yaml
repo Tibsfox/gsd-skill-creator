@@ -1,0 +1,309 @@
+# Mind-Body Department Chipset Configuration
+# Instantiation of the department template pattern for the mind-body domain.
+#
+# The mind-body department is the department template pattern applied to
+# contemplative practice, yoga, Pilates, somatic education, internal arts,
+# martial arts, and engaged mindfulness. It is the largest department in
+# the college structure by wing count: eight wings covered by six skills,
+# with explicit coverage tracking. The chipset is non-sectarian in framing
+# and lineage-respectful in voice.
+
+name: mind-body-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated mind-body department providing lineage-respectful,
+  safety-first expertise across eight practice wings through seven
+  named agents (Iyengar, Feldenkrais, Kabat-Zinn, Pilates, Dōgen,
+  Yang, Thich Nhat Hanh), six knowledge skills, and three
+  pre-composed teams. Persists work via Grove records and integrates
+  with the college mind-body department concept graph. Forked from
+  the department template pattern first instantiated by math-department.
+
+# ==========================================================================
+# Skills — 6 domain skills covering 8 wings with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  breath-and-meditation-foundations:
+    domain: mind-body
+    description: "Breath practice and seated meditation foundations across traditions — pranayama families, shikantaza, MBSR clinical translation, engaged-mindfulness pedagogy"
+    wings_covered: [breath, meditation]
+    triggers:
+      - "breath"
+      - "pranayama"
+      - "meditation"
+      - "zazen"
+      - "shikantaza"
+      - "MBSR"
+      - "mindfulness"
+      - "sit"
+    agent_affinity: [kabat-zinn, dogen, thich-nhat-hanh, iyengar]
+
+  yoga-practice-and-alignment:
+    domain: mind-body
+    description: "Yoga practice with Iyengar-lineage alignment, prop use, staged progression, and cross-lineage routing knowledge"
+    wings_covered: [yoga]
+    triggers:
+      - "yoga"
+      - "asana"
+      - "alignment"
+      - "pose"
+      - "Iyengar"
+      - "Ashtanga"
+      - "prop"
+    agent_affinity: [iyengar, thich-nhat-hanh, kabat-zinn]
+
+  somatic-movement-pilates-feldenkrais:
+    domain: mind-body
+    description: "Somatic movement and whole-body retraining through Pilates Contrology and Feldenkrais Awareness Through Movement"
+    wings_covered: [pilates, somatics]
+    triggers:
+      - "Pilates"
+      - "Contrology"
+      - "reformer"
+      - "Feldenkrais"
+      - "ATM"
+      - "somatic"
+      - "core"
+      - "rehab"
+    agent_affinity: [pilates, feldenkrais, iyengar]
+
+  internal-arts-tai-chi-qigong:
+    domain: mind-body
+    description: "Traditional Chinese internal arts — tai chi chuan and qigong — with lineage-respectful YMAA-line voice"
+    wings_covered: [tai-chi, qigong]
+    triggers:
+      - "tai chi"
+      - "taiji"
+      - "qigong"
+      - "chi kung"
+      - "Ba Duan Jin"
+      - "zhan zhuang"
+      - "internal arts"
+    agent_affinity: [yang, iyengar, feldenkrais]
+
+  martial-arts-body-discipline:
+    domain: mind-body
+    description: "Martial arts as body discipline — stance, distance, timing, ukemi, live partner work, lineage, and the ethical container"
+    wings_covered: [martial-arts]
+    triggers:
+      - "martial arts"
+      - "judo"
+      - "jiu-jitsu"
+      - "BJJ"
+      - "karate"
+      - "aikido"
+      - "boxing"
+      - "muay thai"
+      - "kendo"
+      - "self-defense"
+    agent_affinity: [yang, feldenkrais, iyengar]
+
+  contemplative-traditions-comparative:
+    domain: mind-body
+    description: "Comparative framing across contemplative and mind-body traditions for routing, cross-tradition navigation, and lineage respect"
+    wings_covered: [breath, meditation, yoga, pilates, martial-arts, tai-chi, qigong, somatics]
+    triggers:
+      - "comparative"
+      - "tradition"
+      - "lineage"
+      - "secular vs religious"
+      - "which practice"
+      - "which tradition"
+    agent_affinity: [dogen, thich-nhat-hanh, kabat-zinn, iyengar]
+
+# ==========================================================================
+# Eight-wing coverage verification — explicit mapping
+# ==========================================================================
+# Every wing must be covered by at least one skill. No wing is orphaned.
+
+wings_coverage:
+  breath:
+    covered_by: [breath-and-meditation-foundations, contemplative-traditions-comparative]
+    lineage_root: "Patanjali's Yoga Sutras via Krishnamacharya and Iyengar"
+  meditation:
+    covered_by: [breath-and-meditation-foundations, contemplative-traditions-comparative]
+    lineage_root: "Dōgen's Fukanzazengi (Sōtō) and Kabat-Zinn's MBSR"
+  yoga:
+    covered_by: [yoga-practice-and-alignment, contemplative-traditions-comparative]
+    lineage_root: "Krishnamacharya → Iyengar, with cross-lineage notes for Ashtanga, Viniyoga, and Hatha"
+  pilates:
+    covered_by: [somatic-movement-pilates-feldenkrais, contemplative-traditions-comparative]
+    lineage_root: "Joseph Pilates's Contrology and the Elders"
+  martial-arts:
+    covered_by: [martial-arts-body-discipline, contemplative-traditions-comparative]
+    lineage_root: "Kano judo, koryū jiu-jitsu, Shaolin external and internal traditions, Western boxing and wrestling"
+  tai-chi:
+    covered_by: [internal-arts-tai-chi-qigong, contemplative-traditions-comparative]
+    lineage_root: "Chen village origin, Yang Luchan lineage, YMAA transmission"
+  qigong:
+    covered_by: [internal-arts-tai-chi-qigong, contemplative-traditions-comparative]
+    lineage_root: "Daoist yangsheng, Buddhist Yi Jin Jing, Ba Duan Jin standardization"
+  somatics:
+    covered_by: [somatic-movement-pilates-feldenkrais, contemplative-traditions-comparative]
+    lineage_root: "Moshé Feldenkrais, adjacent Alexander Technique, Hanna Somatics, Body-Mind Centering"
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Iyengar as CAPCOM)
+# Chipset YAML lists only chair + 2 key specialists; full roster is in the agents/ directory.
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: iyengar
+
+  agents:
+    - name: iyengar
+      role: "department chair — classification, safety gating, routing, synthesis, Iyengar-lineage yoga voice"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: feldenkrais
+      role: "somatic learning specialist — ATM lessons, Functional Integration frame, nervous-system-first learning, rehab-adjacent"
+      model: opus
+      tools: [Read, Grep, Write]
+
+    - name: kabat-zinn
+      role: "clinical mindfulness specialist — MBSR, secular translation, research-honest voice"
+      model: opus
+      tools: [Read, Grep, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  mind-body-analysis-team:
+    description: "Full department for multi-tradition or multi-wing queries"
+    agents: [iyengar, feldenkrais, kabat-zinn, pilates, dogen, yang, thich-nhat-hanh]
+    use_when: "multi-tradition, multi-wing, comparative or scholarly, full-analysis requests"
+
+  mind-body-workshop-team:
+    description: "Focused contemplative workshop on a single meditation/breath/presence theme"
+    agents: [iyengar, dogen, kabat-zinn, thich-nhat-hanh]
+    use_when: "contemplative depth questions, meditation program design, cross-tradition contemplative navigation"
+
+  mind-body-practice-team:
+    description: "Body-centered practice pipeline for yoga, somatic, Pilates, and internal-arts program design"
+    agents: [iyengar, feldenkrais, pilates, yang]
+    use_when: "physical program design, form diagnosis, rehab-adjacent body work, cross-method body training"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 mind-body Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college mind-body department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (iyengar) must be CAPCOM"
+        action: "block"
+
+      - check: "all_eight_wings_covered"
+        description: "Every one of the eight wings (breath, meditation, yoga, pilates, martial-arts, tai-chi, qigong, somatics) must be covered by at least one skill; no wing orphaned"
+        action: "block"
+
+      - check: "safety_posture_present"
+        description: "Every skill and every agent must enumerate its safety failure modes"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 40
+    domains_covered:
+      - breath
+      - meditation
+      - yoga
+      - pilates
+      - martial-arts
+      - tai-chi
+      - qigong
+      - somatics
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "mind-body-department"
+  record_types:
+    - name: MindBodyAnalysis
+      description: "Diagnostic analysis — somatic diagnosis, form diagnosis, tradition classification, safety triage"
+
+    - name: MindBodyPractice
+      description: "Practice artifact — ATM lesson, yoga sequence, Pilates session, tai chi form plan, qigong set, zazen session plan, MBSR practice plan, gatha selection"
+
+    - name: MindBodyReview
+      description: "Review or critique of an existing practice plan, form, or program"
+
+    - name: MindBodyExplanation
+      description: "Teaching artifact at a specified audience level and in a specified tradition voice"
+
+    - name: MindBodySession
+      description: "Session log linking work products to interaction context, with classification metadata and safety notes"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "mind-body"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Breath Practice"
+    - "Seated Meditation"
+    - "Yoga (Asana, Pranayama, and the Eight-Limb Path)"
+    - "Pilates (Contrology and the Apparatus System)"
+    - "Martial Arts as Body Discipline"
+    - "Tai Chi Chuan (Internal Martial Art)"
+    - "Qigong (Cultivation Practice)"
+    - "Somatic Movement Education"
+
+# ==========================================================================
+# Safety Posture — non-negotiable department-wide rules
+# ==========================================================================
+
+safety_posture:
+  hard_rules:
+    - "No medical-outcome cure claims for any practice. Adjunctive framing only."
+    - "No unsupervised breath retention past 1:2 ratio. Retention is teacher-taught."
+    - "No kapalabhati or bhastrika for pregnancy, hypertension, cardiovascular disease, glaucoma, epilepsy, recent surgery, active anxiety/panic disorder, or recent stroke."
+    - "No headstand or shoulderstand for beginners without trained teacher preparation."
+    - "No psychiatric substitution. Meditation is not a replacement for trauma-informed clinical care."
+    - "No no-touch-knockout or no-contact-throw mythology. Honest lineage framing only."
+    - "Mandatory halt-and-refer on acute injury, active psychosis, active suicidal ideation, active dissociation during practice."
+    - "Lineage respect is non-negotiable. Traditions are not collapsed into pseudo-synthesis."
+    - "Clinical populations receive MBSR secular framing, not mystical vocabulary, unless they explicitly request otherwise."
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
+  safety_posture_overridable: false
