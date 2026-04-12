@@ -2575,4 +2575,30 @@ This chapter has attempted, in considerable detail, to make that systemic unders
 
 ---
 
+## Study Guide — WA Formation & Governance
+
+**Note:** Per Fox Companies IP rule, this file is committed but
+not surfaced publicly.
+
+### Key concepts
+
+1. **Articles of incorporation.** Filed with WA Secretary
+   of State. RCW 23B.02.
+2. **Bylaws.** Internal governance document.
+3. **Directors and officers.** Board elected by
+   shareholders, officers appointed by board.
+4. **Shareholder rights.** Voting, inspection,
+   dissenters' rights.
+
+## DIY — Draft articles of incorporation
+
+Write articles for a hypothetical entity. WA requires
+registered agent, purpose clause, share structure,
+initial director.
+
+## TRY — Read the WBCA
+
+Washington Business Corporation Act is RCW 23B. Read
+the table of contents. Pick one chapter.
+
 *This chapter is a research artifact produced for educational purposes. It is not legal advice. Corporation law is a technical field, and the application of any statute or case to a specific situation requires the judgment of a qualified attorney familiar with the facts and the governing law. Statutes are amended; cases are overruled; commentary grows stale. The reader should verify any proposition against current authority before acting on it.*

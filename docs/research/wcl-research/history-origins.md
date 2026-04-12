@@ -1800,3 +1800,26 @@ The author gratefully acknowledges the Washington State Bar Association Business
 *End of paper.*
 
 *Addendum (2025 RCW orientation, SPC framework current state) and Related College Departments cross-link added during the Session 018 catalog enrichment pass. Per the Fox Companies IP rule, this file is committed to GitHub but not surfaced on the public tibsfox.com research site.*
+
+---
+
+## Study Guide — WA Corporate Law History (PRIVATE)
+
+### Questions
+
+- How did Washington's 1965 adoption of the MBCA differ
+  from Delaware's path?
+- Why did the WBCA 1989 recodification happen, and what
+  did it change?
+- What do Washington's SPC provisions add to the
+  corporate-form menu?
+
+## DIY — Compare WA and Delaware corporate law
+
+Pick one topic (fiduciary duties, appraisal rights,
+indemnification). Compare WA and DE statutes.
+
+## TRY — Read the SPC legislation
+
+RCW 23B.25 is the Social Purpose Corporation framework.
+Read it.

@@ -2669,4 +2669,30 @@ A: Indefinitely in theory, limited by the known-claims and unknown-claims bar pr
 
 ---
 
+## Study Guide — WA Corporate Compliance Lifecycle
+
+**Note:** Per Fox Companies IP rule, this file is committed but
+not surfaced publicly.
+
+### Key concepts
+
+1. **Annual reports.** Required every year to WA
+   Secretary of State.
+2. **Revenue clearance.** Required before dissolution.
+3. **Amendments.** Articles amended via shareholder
+   approval + filing.
+4. **Mergers.** Plan + approval + filing.
+5. **Dissolution.** Notice, wind-up, bar periods.
+
+## DIY — Read RCW 23B.14 (Dissolution)
+
+Open corporations.sos.wa.gov and find RCW 23B.14. Read
+one section. Confirm the 120-day and 3-year bar periods.
+
+## TRY — Build a compliance checklist
+
+For a hypothetical WA corporation: annual report, B&O
+tax, required filings, record retention. Put it in a
+calendar.
+
 *End of Part — WCL Compliance Lifecycle Chapter*
