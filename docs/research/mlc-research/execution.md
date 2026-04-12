@@ -1512,3 +1512,39 @@ has been revolutionized beyond recognition.
 *PNW Research Series -- Computation Cluster*
 *Machine Language and Machine Code*
 *Generated 2026-04-08*
+
+---
+
+## Study Guide — Machine Code Execution
+
+### Key concepts
+
+1. **Fetch-decode-execute cycle.** The classic three-step
+   loop. Modern CPUs pipeline and parallelize it, but the
+   abstract model is still this.
+2. **Pipelining.** Overlap execution stages.
+3. **Out-of-order execution.** Reorder to hide memory latency.
+4. **Speculative execution.** Predict and run ahead.
+5. **Traps and interrupts.** The CPU yields control to the
+   OS.
+
+## DIY — Single-step a program
+
+Write a "hello world" in assembly. Run under `gdb`. Use
+`si` (stepi) to execute one instruction at a time. Watch
+the registers change.
+
+## DIY — Trigger an exception
+
+Write a program that dereferences a null pointer. Watch
+how the CPU traps and the OS signals your process.
+
+## TRY — Implement a simple simulator
+
+Write a 3-instruction (LOAD, ADD, STORE) simulator in
+Python. This is the minimum you need to understand
+execution.
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
