@@ -998,3 +998,65 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (JDK 25 LTS generational transition) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+---
+
+## Study Guide — JVM GC Collectors
+
+### Key concepts
+
+1. **Serial, Parallel, G1, ZGC, Shenandoah.** Five production
+   collectors, each with a design point.
+2. **Generational hypothesis.** Most objects die young. Nurseries
+   and old generations exploit this.
+3. **Pause time vs throughput.** The classic tradeoff. ZGC aims
+   for sub-millisecond pauses at the cost of some throughput.
+4. **Concurrent marking.** Marking while the mutator runs, at the
+   cost of barriers.
+5. **Compaction.** Moving live objects to eliminate fragmentation.
+
+---
+
+## Programming Examples
+
+### Example 1 — Pick a collector by workload
+
+```
+# Batch throughput: ParallelGC
+-XX:+UseParallelGC
+
+# Balanced server: G1 (default in JDK 9+)
+-XX:+UseG1GC
+
+# Low-latency service: ZGC
+-XX:+UseZGC
+
+# Shenandoah (Red Hat): low pause, different tradeoffs
+-XX:+UseShenandoahGC
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Compare collectors on the same workload
+
+Pick a Java benchmark (DaCapo or Renaissance). Run with each
+of G1, ZGC, and ParallelGC. Chart p50 and p99 pauses.
+
+### DIY 2 — Read one GC paper
+
+Cheney's algorithm (1970) is 3 pages. Read it. You'll
+understand the basis for every moving collector since.
+
+### TRY — Migrate a service from G1 to ZGC
+
+Pick a real service with tail-latency SLOs. Switch to ZGC.
+Measure. Most teams see p99 improvements of 5-10x.
+
+---
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)

@@ -1369,3 +1369,37 @@ The chapters that follow in this series will return to specific collectors, allo
 
 *Next: [Tuning workflows &mdash; from symptoms to flags](./tuning-workflows.md)*
 *Previous: [Native Image, CRaC, and the post-JIT world](./native-image.md)*
+
+---
+
+## Study Guide — JVM Monitoring & Diagnostics
+
+### Tool map
+
+- **jcmd / jstat / jmap / jstack** — baseline diagnostics.
+- **JFR (Java Flight Recorder)** — low-overhead profiler.
+- **JMC (JDK Mission Control)** — JFR viewer.
+- **async-profiler** — sampling profiler with perf integration.
+- **Micrometer** — metrics library.
+- **Prometheus / Grafana** — storage and dashboards.
+
+### DIY 1 — Record a JFR profile
+
+`java -XX:StartFlightRecording=duration=60s,filename=rec.jfr -jar app.jar`
+then open `rec.jfr` in JMC.
+
+### DIY 2 — async-profiler flame graph
+
+`./profiler.sh -d 30 -f flame.html <pid>`. Open flame.html in a
+browser. The hottest stacks are the widest boxes.
+
+### TRY — Wire up Micrometer + Grafana
+
+Add `micrometer-registry-prometheus`, expose `/actuator/prometheus`,
+scrape with a local Prometheus, graph in Grafana.
+
+---
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)

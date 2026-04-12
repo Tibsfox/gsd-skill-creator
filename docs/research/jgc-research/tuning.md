@@ -1194,3 +1194,59 @@ And when your pager goes off at 3am because p99 latency just spiked to
 problem is either an allocation problem in disguise, a heap sizing
 problem, or a collector mismatch. It's almost never something exotic.
 Start with the basics, and you will usually find it.
+
+---
+
+## Study Guide — JVM GC Tuning
+
+### Decision tree
+
+1. **Is it a latency or throughput problem?** Latency → ZGC
+   or Shenandoah. Throughput → ParallelGC or G1.
+2. **Is it an allocation problem?** Profile allocations with
+   JFR. Fix the hot allocator.
+3. **Is the heap too small?** Watch GC frequency. Double
+   `-Xmx`, see what changes.
+4. **Is it metaspace?** Watch metaspace size. Look for
+   classloader leaks.
+
+### Canonical flags
+
+```
+# Modern low-latency
+-XX:+UseZGC -XX:+ZGenerational
+-Xmx8g
+-XX:+UnlockDiagnosticVMOptions
+-Xlog:gc*:file=gc.log:time,uptime,level,tags:filecount=10,filesize=50M
+
+# Throughput
+-XX:+UseParallelGC
+-XX:MaxGCPauseMillis=200  # hint, not a guarantee
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Build a GC log analyzer
+
+Parse your GC log, extract pause times, compute p99. Graph
+over a day. You'll notice daily traffic patterns in GC
+behavior.
+
+### DIY 2 — Find a latency regression
+
+Bisect a git history to find the commit that introduced a
+GC latency regression. Use JFR comparisons.
+
+### TRY — Run the Renaissance benchmark
+
+`java -jar renaissance-gpl-0.15.0.jar all`. Compare your
+workload shape to the benchmark's. The one that matches is
+your tuning starting point.
+
+---
+
+## Related College Departments
+
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
