@@ -258,3 +258,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (smoke taint research status, SB 5814 impact note) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — PNW Agriculture
+
+## DIY — Visit a PNW farmers market
+
+Pike Place, Ballard, Olympia. Talk to farmers about
+this year's conditions.
+
+## TRY — Read one WSU agronomy report
+
+Washington State University publishes extension
+bulletins. Pick one crop, read one bulletin.

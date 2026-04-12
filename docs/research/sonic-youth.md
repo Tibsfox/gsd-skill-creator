@@ -385,3 +385,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (2025–2026 member activity) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Sonic Youth
+
+## DIY — Listen to *Daydream Nation* (1988)
+
+Essential. 70 minutes. Library of Congress National
+Recording Registry.
+
+## TRY — Experiment with alternate tunings
+
+SY used 30+ custom tunings. Try D-A-D-G-A-D on an
+acoustic guitar. Note how chord voicings change.

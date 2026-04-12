@@ -375,3 +375,15 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (Norwescon 48 status, 2026 PNW convention calendar) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Norwescon
+
+## DIY — Attend Norwescon
+
+SeaTac, April, every year. Panels, guests, art show,
+masquerade. The PNW SF community in one weekend.
+
+## TRY — Volunteer as a panelist
+
+Email a proposal 4 months out. If accepted, you're on
+a panel. The fastest way into a con community.

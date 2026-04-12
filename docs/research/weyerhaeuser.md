@@ -409,3 +409,16 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (REIT status confirmation, carbon credits, working-forest policy framing) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Weyerhaeuser
+
+## DIY — Read Weyerhaeuser's 10-K
+
+Public REIT. SEC filings show acreage, species mix,
+carbon strategy.
+
+## TRY — Visit Pack Forest (UW)
+
+Managed research forest near Eatonville. See the
+difference between industrial forest and old-growth
+first-hand.

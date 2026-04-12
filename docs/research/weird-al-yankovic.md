@@ -437,3 +437,14 @@ This research cross-links to the following college departments in
 ---
 
 *Addendum (Bigger & Weirder 2026 Tour framing) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — "Weird Al"
+
+## DIY — Watch *Weird: The Al Yankovic Story* (2022)
+
+A biopic parody of itself. Watch once. Then watch it
+again with the commentary track.
+
+## TRY — See the 2026 Tour
+
+90 dates, full production. Once-a-decade tour.
