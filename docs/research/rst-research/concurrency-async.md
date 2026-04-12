@@ -1521,3 +1521,80 @@ What Rust does NOT prevent:
 - **Logic bugs in concurrent algorithms** — the compiler verifies memory safety, not algorithmic correctness
 
 The result is a language where you can write concurrent code with the confidence that if it compiles, it will not segfault, corrupt memory, or exhibit undefined behavior from data races. The hard bugs — deadlocks, performance, algorithmic correctness — remain your responsibility, but the catastrophic bugs are eliminated by the type system.
+
+---
+
+## Study Guide — Rust Concurrency & Async
+
+### Key concepts
+
+1. **`Send` and `Sync`** — auto traits that mark types safe
+   for thread transfer and shared access.
+2. **`Arc<Mutex<T>>`** — the canonical shared-mutable
+   pattern.
+3. **`tokio` runtime** — the dominant async runtime.
+4. **`async`/`await`** — syntax sugar for state machines.
+5. **`unsafe`** — opt out of some safety checks; still
+   type-safe.
+
+---
+
+## Programming Examples
+
+### Example 1 — Threaded counter
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let c = Arc::new(Mutex::new(0));
+    let mut hs = vec![];
+    for _ in 0..10 {
+        let c = Arc::clone(&c);
+        hs.push(thread::spawn(move || {
+            *c.lock().unwrap() += 1;
+        }));
+    }
+    for h in hs { h.join().unwrap(); }
+    println!("{}", c.lock().unwrap());
+}
+```
+
+### Example 2 — Tokio async HTTP fetch
+
+```rust
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let body = reqwest::get("https://example.com").await?.text().await?;
+    println!("{}", &body[..100]);
+    Ok(())
+}
+```
+
+---
+
+## DIY & TRY
+
+### DIY 1 — Port a Go program
+
+Find any goroutine/channel program. Rewrite in Rust with
+`std::thread` and `std::sync::mpsc`.
+
+### DIY 2 — Write an async web scraper
+
+Use `reqwest` + `tokio` to fetch 100 URLs concurrently
+with `futures::future::join_all`.
+
+### TRY — Read `tokio`'s source
+
+Pick one module. Read it carefully. Rust async code is
+denser than other languages, and reading canonical code
+is the best way to learn.
+
+---
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**engineering**](../../../.college/departments/engineering/DEPARTMENT.md)
