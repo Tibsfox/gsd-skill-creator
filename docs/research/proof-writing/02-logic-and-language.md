@@ -419,3 +419,160 @@ Schwarz's deck teaches disciplines 1, 4, 5, 6, 7, 8 (for existence), and 9 expli
 - **Document 3** catalogs the proof techniques (direct, contrapositive, contradiction, cases, construction, induction, etc.) whose logical foundations are described in this document.
 - **Document 5** treats the *craft* of turning logical form into readable mathematical English.
 - **Document 6** develops the Curry-Howard correspondence at greater length and connects it to modern proof assistants.
+
+---
+
+## Study Guide — Logic and Language of Proof
+
+### Prerequisites
+
+- Comfort with basic algebra (variables, equations, substitution).
+- Familiarity with truth tables is helpful but not required — section 1 teaches them from scratch.
+- Reading document 1 first provides historical context but is not mandatory.
+
+### Key vocabulary
+
+| Term | Definition | Section |
+|---|---|---|
+| **Proposition** | A statement that is either true or false. | 1 |
+| **Predicate** | A statement with free variables — becomes a proposition when the variables are bound or assigned values. | 2 |
+| **Connective** | $\neg, \land, \lor, \implies, \iff$ — the five ways to combine propositions. | 1.1 |
+| **Quantifier** | $\forall$ ("for all") and $\exists$ ("there exists") — bind free variables in predicates. | 2.1 |
+| **Tautology** | A formula true under every truth assignment. | 1.4 |
+| **Logical equivalence** | Two formulas have the same truth value under every assignment. | 1.3 |
+| **Contrapositive** | $P \implies Q$ rewritten as $\neg Q \implies \neg P$ (equivalent). | 1.3 |
+| **Converse** | $P \implies Q$ rewritten as $Q \implies P$ (NOT equivalent). | 1.3 |
+| **Natural deduction** | A proof system whose rules match how informal proofs work: introduce and eliminate connectives. | 3 |
+| **Curry-Howard correspondence** | The deep equivalence: propositions = types, proofs = programs. | 7 |
+| **Free variable** | A variable not bound by any quantifier — acts as a parameter. | 2.3 |
+| **Bound variable** | A variable captured by a quantifier — internal to a formula, can be renamed. | 2.3 |
+
+### Reading order
+
+1. Sections 1–1.4 (propositional logic) — build truth tables by hand until they're automatic.
+2. Section 2 (predicate logic) — the jump from propositions to predicates is the hardest conceptual step. Take it slowly. Negating quantified statements (section 2.2) is the single most-used skill.
+3. Section 3 (Schwarz's templates formalized) — read alongside the Schwarz deck slides 15–50.
+4. Section 4 (formal vs. informal proof) — read once, then revisit after writing your first ten proofs.
+5. Section 5 (English-to-logic translation) — use as a reference table whenever you're stuck translating a theorem statement.
+6. Section 6 (fallacies) — study each fallacy with an example you construct yourself.
+7. Section 7 (Curry-Howard) — read lightly on first pass; return to it after reading document 6.
+
+### Study plans
+
+**1-week sprint.** Master sections 1–2. Build every truth table in section 1.1 from memory. Negate 10 quantified statements (make up your own) using the rules of section 2.2. Translate 10 English sentences into formal logic using section 5.1's table.
+
+**1-month deep dive.** Work through Velleman's *How to Prove It* chapters 1–3 (propositional logic, quantifiers, proofs involving connectives). For each Velleman exercise, identify which natural-deduction rule from section 3 the proof uses. Write a 2-page "cheat sheet" mapping English proof phrases to their logical rules (section 4.2 table, expanded with your own examples).
+
+**6-month foundation.** Add Enderton's *A Mathematical Introduction to Logic* chapters 1–2 (propositional and predicate logic). Work through the completeness theorem for propositional logic (every tautology has a proof). Read Prawitz's *Natural Deduction* chapter 1 for the formal rules. Attempt to implement a simple propositional-logic tautology checker in Python or Lean.
+
+---
+
+## TRY Session — Negate a Quantified Statement
+
+**Duration:** 15 minutes.
+**Materials:** Pen and paper.
+
+**Steps:**
+
+1. Start with the $\varepsilon$-$\delta$ definition of continuity from section 2.2:
+   $$f \text{ continuous at } a \iff \forall \varepsilon > 0\, \exists \delta > 0\, \forall x\, (|x - a| < \delta \implies |f(x) - f(a)| < \varepsilon)$$
+2. Negate it by pushing $\neg$ inward: flip each quantifier ($\forall \leftrightarrow \exists$), and negate the innermost atomic statement.
+3. Write out the result. It should be:
+   $$f \text{ discontinuous at } a \iff \exists \varepsilon > 0\, \forall \delta > 0\, \exists x\, (|x - a| < \delta \land |f(x) - f(a)| \geq \varepsilon)$$
+4. Read the negation aloud in English: "There is some tolerance $\varepsilon$ such that no matter how small we make $\delta$, there is always some $x$ within $\delta$ of $a$ whose function value is at least $\varepsilon$ away from $f(a)$."
+5. Invent a function that is discontinuous at $a = 0$ and verify that the negation applies to it. (Example: $f(x) = 0$ for $x \leq 0$, $f(x) = 1$ for $x > 0$. Take $\varepsilon = 1/2$.)
+
+**What to observe:** The negation process is *mechanical* — you don't need to understand the math to push the negation through. But reading the result in English verifies that the mechanics produced something meaningful.
+
+---
+
+## TRY Session — Spot the Fallacy
+
+**Duration:** 15 minutes.
+**Materials:** Pen and paper.
+
+For each of the following "proofs," identify the logical fallacy from section 6.
+
+1. "Theorem: If $n$ is even, then $n$ is divisible by 4. Proof: Let $n = 4$. Then $n$ is even, and $n/4 = 1$, so $n$ is divisible by 4." *(Fallacy: proof by example — does not generalize beyond $n = 4$.)*
+
+2. "Theorem: $n^2$ is even implies $n$ is even. Proof: Assume $n$ is even. Then $n = 2k$, so $n^2 = 4k^2 = 2(2k^2)$ is even. Done." *(Fallacy: affirming the consequent — proved the converse, not the original.)*
+
+3. "Theorem: Every continuous function is differentiable. Proof: Let $f(x) = x^2$. Then $f$ is continuous and $f'(x) = 2x$, so $f$ is differentiable." *(Fallacy: proof by example — one function doesn't establish the universal claim, and the claim is in fact false.)*
+
+4. "Theorem: There is no largest prime. Proof: Suppose $p$ is the largest prime. Then $p + 1$ is not prime, so it has a prime factor $q$. Since $q$ divides $p + 1$ but not $p$... wait, actually $q$ could be $p + 1$ itself." *(Not actually a fallacy — this is a correct start to the standard proof. The student who wrote this stopped too early.)*
+
+**What to observe:** Fallacies are not always obvious from the surface. The "proof by example" fallacy (items 1 and 3) is the most common student error. The "affirming the consequent" fallacy (item 2) is the most dangerous because it *produces a true result* for a wrong reason.
+
+---
+
+## DIY — Build a Truth-Table Verifier
+
+**Scope:** 2–4 hours.
+**Language:** Python, Lean 4, or any language with pattern matching.
+**Deliverable:** A program that takes a propositional formula as input and evaluates it under all truth assignments, reporting whether it is a tautology, contradiction, or satisfiable.
+
+**Specification:**
+
+1. Parse formulas with atoms $p, q, r$ and connectives $\neg, \land, \lor, \implies, \iff$.
+2. Enumerate all $2^n$ truth assignments for $n$ atoms.
+3. Evaluate each assignment; print the truth table.
+4. Report: tautology / contradiction / satisfiable.
+
+**Test cases:**
+
+- $p \lor \neg p$ → tautology.
+- $p \land \neg p$ → contradiction.
+- $(p \implies q) \implies (\neg q \implies \neg p)$ → tautology (contrapositive equivalence).
+- $(p \implies q) \land p \land \neg q$ → contradiction (modus ponens check).
+- $p \implies q$ → satisfiable but not a tautology.
+
+**Stretch:** Extend to first-order formulas over a finite domain (e.g., $\{0, 1, 2\}$) — enumerate all interpretations and check quantified statements by brute force.
+
+---
+
+## DIY — Translate Schwarz's Proofs into Formal Natural Deduction
+
+**Scope:** 3–5 hours.
+**Materials:** Pen and paper (or a natural-deduction proof editor like Pandoc/Fitch).
+**Deliverable:** Formal natural-deduction derivations for Schwarz's four proofs.
+
+**Task:** Take each of the four proofs in the Schwarz deck and rewrite them as formal natural-deduction trees using the rules from section 3 (→I, ∧I, ∨I, ∨E, ∀I, ∀E, ∃I, ∃E). Each line of the tree should cite exactly one rule and name the lines it depends on.
+
+Start with the simplest (n even → n² even) and work up to the set-distributive proof (which requires ∨E case analysis).
+
+**What you learn:** The gap between an informal proof and its formal skeleton. You'll discover that the formal tree is much longer (10–20 lines for a 5-line prose proof) but that every step is unambiguous.
+
+---
+
+## College & Rosetta Deep Links
+
+### Department connections
+
+| College Department | Concept ID | Connection |
+|---|---|---|
+| **Logic** | `log-propositional-logic` | Section 1 is a complete treatment of this concept's scope |
+| **Logic** | `log-predicate-logic` | Section 2 covers quantifiers, free/bound variables, scope, negation |
+| **Logic** | `log-formal-proof-systems` | Sections 3–4 develop natural deduction as a formal proof system |
+| **Logic** | `log-argument-structure` | Section 6 (fallacies) is the negative case — what happens when argument structure breaks |
+| **Logic** | `log-causal-reasoning` | Section 1.2 note: "$P$ implies $Q$" is NOT causal — important distinction |
+| **Logic** | `log-analogical-reasoning` | Section 6: reasoning by analogy vs. reasoning by logical structure |
+| **Math** | `math-variables-unknowns` | Section 2.3 (free vs. bound variables) — the distinction between variables as parameters and variables as internal machinery |
+| **Math** | `math-equations-expressions` | Section 2 — predicates as expressions, equations as propositions |
+| **Math** | `math-functions` | Section 3.6–3.8 — function types in the Curry-Howard correspondence |
+| **Writing** | writing-process | Section 4 — the discipline of writing proofs as prose |
+| **Critical Thinking** | (reasoning skills) | Section 6 — the full fallacy catalog is a critical-thinking exercise |
+
+### Rosetta panel routes
+
+- **Python panel:** The DIY truth-table verifier is a direct Python exercise. Propositional logic evaluation maps cleanly to Python's `eval` or pattern-matching on ASTs.
+- **Lisp panel:** Propositional formulas ARE S-expressions. `(implies (and p q) p)` is valid Lisp AND valid propositional logic. A Lisp panel could implement a tautology checker as a metacircular exercise.
+- **ALGOL panel:** BNF grammar notation, invented in the ALGOL 60 report, is the same notation used for formal grammars of propositional and predicate logic. The connection is: formal language design IS logic.
+- **Java panel:** Java's type system (generics, wildcards) is a limited dependent type theory. The Curry-Howard correspondence (section 7) explains why Java generics feel like logic.
+- **Pascal panel:** Pascal's strong typing discipline was influenced by formal logic. The `if-then-else` in Pascal maps to case analysis (∨E) in natural deduction.
+- **Lean 4 (future):** Section 7 (Curry-Howard) is the direct bridge. Every Lean proof IS a typed term.
+
+### Cross-department threads
+
+- **Logic → Mathematics:** Predicate logic is the language of all mathematical definitions. Every definition in the Mathematics department (`math-euler-formula`, `math-trig-functions`, etc.) is formally a predicate in first-order logic.
+- **Logic → Coding → Technology:** Boolean algebra (propositional logic with $\{0, 1\}$) underlies digital circuits, programming conditionals, and database queries. This is the Logic → Coding → Electronics → Technology chain.
+- **Logic → Philosophy → Theology:** The question "what can be proved?" connects to epistemology (what can be known?) and to theological arguments by logical structure (e.g., the ontological argument's formal structure). Section 3.3 (Gödel) connects to the philosophical limits of formal systems.

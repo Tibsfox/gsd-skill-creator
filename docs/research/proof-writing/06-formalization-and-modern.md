@@ -411,3 +411,206 @@ Schwarz's deck ends on slide 121 with the set-equality theorem proved both ways,
 - And, if they choose, the formalization tradition of this document.
 
 Each path extends the Schwarz frame. None of them replaces it. The Definitions / Intuitions / Conventions triangle remains the organizing principle of every working mathematician's proof, whether the proof lives on paper or in Lean's kernel. The goal of this research mission has been to show what the triangle fills up with — from Euclid through Mathlib — when its corners are taken seriously.
+
+---
+
+## Study Guide — Formalization and Modern Machine-Checked Proof
+
+### Prerequisites
+
+- Documents 1–3 (foundations, logic, techniques) — formalization makes sense only after you understand what informal proof is.
+- Some programming experience — Lean 4 is a programming language, and fluency with function definitions, types, and pattern matching helps enormously.
+- Willingness to install software and work in a terminal. Lean 4 is a command-line tool with IDE integration (VS Code extension).
+
+### Key vocabulary
+
+| Term | Definition | Section |
+|---|---|---|
+| **Proof assistant** | Software that checks mathematical proofs by verifying that every step follows a formal rule. | 2 |
+| **Kernel** | The small, trusted core of a proof assistant that implements the rules of inference. If the kernel is correct, every proof it accepts is correct. | 2.2 |
+| **Tactic** | A command in a proof assistant that transforms the current proof goal. Tactics are the formal analogue of proof techniques. | 4.2 |
+| **Lean 4** | The proof assistant at the center of the 2020s formalization movement. | 2.7 |
+| **Mathlib** | The Lean 4 mathematical library — 1.5+ million lines of formalized mathematics. | 4 |
+| **Dependent type theory** | A type system where types can depend on values. The foundation of Coq, Lean, and Agda. | 3.2 |
+| **Curry-Howard** | Propositions are types, proofs are programs. The deep equivalence underlying all type-theoretic proof assistants. | Document 2, section 7 |
+| **Formalization** | The act of expressing a mathematical proof in a proof assistant's language so the kernel can check it. | 1 |
+| **Coq** | The 40-year-old proof assistant that formalized the four-color theorem and odd-order theorem. | 2.4 |
+| **Isabelle/HOL** | A proof assistant based on higher-order logic, widely used for software verification. | 2.3 |
+
+### Reading order
+
+1. Sections 1–2 (motivation + history) — understand *why* before *how*.
+2. Section 3 (foundations) — skim on first read; return when you need to understand the differences between HOL, CIC, and ZFC.
+3. Section 4 (Mathlib + Lean examples) — the practical core. Spend most time here.
+4. Section 5 (landmark formalizations) — inspiring stories; read for motivation.
+5. Sections 6–7 (craft + limitations) — read after you've written your first Lean proof.
+6. Section 8 (future) — read for perspective.
+7. Section 9 (Schwarz's proofs in Lean) — the bridge from this document back to the Schwarz deck. Try to type these proofs into a Lean file and verify them.
+
+### Study plans
+
+**1-week sprint.** Install Lean 4 (via `elan` and VS Code). Work through the first 3 chapters of *Theorem Proving in Lean 4* (Avigad, de Moura, Kong). Type in the four Lean proofs from section 9 of this document and get them to compile. That's your proof that Lean works and that Schwarz's theorems are formally checkable.
+
+**1-month deep dive.** Work through *Mathematics in Lean* (Avigad & Massot) chapters 1–5. This covers basic logic, numbers, sets, and functions in Lean — exactly the scope of Schwarz's deck and documents 2–4 of this mission. For each section, find the corresponding Mathlib theorem and read its proof.
+
+**6-month mastery.** Complete *Mathematics in Lean* in full. Contribute a small PR to Mathlib (fix a typo, add a missing lemma, or improve a docstring). Read the Liquid Tensor Experiment blog posts and the PFR formalization discussion. By the end, you should be able to formalize a theorem from your current math course in Lean 4 without following a tutorial.
+
+### Installation guide (as of 2026)
+
+```bash
+# Install elan (Lean version manager)
+curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
+
+# Create a new Lean 4 project with Mathlib
+lake +leanprover/lean4:stable init my-proofs math
+
+# Open in VS Code with the Lean 4 extension
+code my-proofs
+```
+
+The VS Code extension provides real-time feedback: as you type tactics, it shows the remaining proof goals. This interactive loop is the fastest way to learn.
+
+---
+
+## TRY Session — Your First Lean 4 Proof
+
+**Duration:** 30 minutes.
+**Materials:** Lean 4 installed (see installation guide above).
+
+**Steps:**
+
+1. Create a file `MyProofs.lean` in your project.
+2. Type Schwarz's first proof:
+   ```lean
+   import Mathlib
+
+   theorem even_sq_of_even (n : ℤ) (hn : Even n) : Even (n ^ 2) := by
+     obtain ⟨k, hk⟩ := hn
+     exact ⟨2 * k ^ 2, by rw [hk]; ring⟩
+   ```
+3. Watch the Lean infoview panel. If you see "No goals" — the proof is accepted.
+4. Now break the proof on purpose: change `2 * k ^ 2` to `k ^ 2`. Read the error message. It will tell you exactly why the proof fails.
+5. Fix it back. Add a second theorem:
+   ```lean
+   theorem even_add_of_both_odd (m n : ℤ) (hm : Odd m) (hn : Odd n) :
+       Even (m + n) := by
+     obtain ⟨k, hk⟩ := hm
+     obtain ⟨r, hr⟩ := hn
+     exact ⟨k + r + 1, by rw [hk, hr]; ring⟩
+   ```
+6. Verify it compiles. You've now formalized both of Schwarz's first two proofs.
+
+**What to observe:** Each tactic corresponds to a step in Schwarz's prose proof. `obtain` = "since $n$ is even, there is some integer $k$...". `ring` = the algebraic simplification Schwarz does in one line. The formal proof is about the same length as the informal one — but the machine checked every step.
+
+---
+
+## TRY Session — Explore Mathlib
+
+**Duration:** 20 minutes.
+**Materials:** Lean 4 with Mathlib, or just the online Mathlib docs.
+
+**Steps:**
+
+1. Go to the Mathlib docs (online or via `#check` in Lean).
+2. Search for `Even` — find the definition. Compare it to Schwarz slide 14.
+3. Search for `Odd` — find the definition. Compare it to Schwarz slide 26.
+4. Search for `Set.union_inter_distrib_right` or similar — find the distributive law. Compare to Schwarz slide 119.
+5. Pick any theorem name that looks interesting. Read its type signature. Translate it back to English. Does it match a theorem you know?
+6. Pick a theorem with a short proof (≤ 5 tactics). Read the proof. Identify each tactic and match it to a proof technique from document 3.
+
+**What to observe:** Mathlib's naming convention is predictable once you learn the rules. `even_add_even` — the sum of two even numbers is even. `Int.even_mul_succ_self` — $n(n+1)$ is even. The names ARE the theorems, compressed into identifiers.
+
+---
+
+## TRY Session — Break and Fix a Formalized Proof
+
+**Duration:** 15 minutes.
+**Materials:** Lean 4 with a working proof from TRY Session 1.
+
+**Steps:**
+
+1. Start with a working proof. Change one character — a sign, a variable name, a number.
+2. Read Lean's error message. It will show you the remaining goal that can't be closed.
+3. Diagnose: does the error message correspond to a mathematical error, or a typo that changes the meaning?
+4. Fix the error. Try a second break — this time, remove an `obtain` line entirely.
+5. Read the new error. Lean will say it doesn't know what variable you're referring to. This is the formal counterpart to "using an undefined variable" in section 6 of document 2.
+
+**What to observe:** Every error message is a lesson. Lean's errors are *specific* — they tell you exactly what's wrong and where. This is the payoff of formalization: errors are caught immediately, not after a referee reads your paper six months later.
+
+---
+
+## DIY — Formalize One Theorem from Your Current Course
+
+**Scope:** 4–8 hours (including learning time).
+**Deliverable:** A `.lean` file containing one formalized theorem from your current math course.
+
+**Task:**
+
+1. Pick a theorem from your current course that you've already proved on paper.
+2. Find the relevant Mathlib definitions (use `#check`, `example`, or the online docs).
+3. State the theorem in Lean 4.
+4. Prove it using tactics. Start with `by sorry` (which leaves a hole) and fill in tactics one at a time.
+5. When Lean accepts the full proof with no `sorry`, you're done.
+
+**Suggested starting theorems (in order of difficulty):**
+
+- The sum of two even numbers is even. (~3 tactics)
+- The composition of injective functions is injective. (~5 tactics)
+- If $a \mid b$ and $b \mid c$, then $a \mid c$. (~4 tactics)
+- $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$. (~10 tactics, or 1 `ext; simp; tauto`)
+- The identity element of a group is unique. (~5 tactics)
+
+**Stretch:** Formalize a theorem that ISN'T already in Mathlib. This is harder (you may need to build definitions first) but is a genuine contribution to the mathematical knowledge base.
+
+---
+
+## DIY — Compare Paper Proof to Formalized Proof
+
+**Scope:** 2–3 hours.
+**Deliverable:** A side-by-side document (two columns) showing a paper proof and its Lean 4 counterpart, with annotations explaining the correspondence.
+
+**Task:**
+
+1. Take one of Schwarz's four proofs (slides 22, 31, 48, 119).
+2. In the left column, write the prose proof exactly as Schwarz presents it.
+3. In the right column, write the Lean 4 proof from section 9 of this document.
+4. Draw arrows connecting each prose step to its formal counterpart.
+5. Annotate: for each step, name the natural-deduction rule (from document 2) and the Lean tactic.
+
+**What you learn:** The three representations — prose, natural-deduction rule, Lean tactic — are three views of the same logical content. Moving fluently between all three is the deepest form of proof literacy.
+
+---
+
+## College & Rosetta Deep Links
+
+### Department connections
+
+| College Department | Concept ID | Connection |
+|---|---|---|
+| **Logic** | `log-formal-proof-systems` | The entire document — proof assistants ARE formal proof systems, implemented as software |
+| **Logic** | `log-propositional-logic` | Section 4.2 — the `simp`, `tauto`, `decide` tactics automate propositional reasoning |
+| **Logic** | `log-predicate-logic` | Section 4.2 — `intro`, `obtain`, `use` tactics implement quantifier rules |
+| **Coding** | (programming, type systems) | Sections 3.2, 6 — Lean 4 is a programming language; dependent types are an extension of the type systems students learn in CS |
+| **Math** | `math-functions` | Section 4 (Mathlib) — Lean's function type `A → B` IS the Curry-Howard encoding of implication $A \implies B$ |
+| **Math** | `math-equations-expressions` | Section 4.2 — the `ring` tactic verifies algebraic equalities; `linarith` verifies linear inequalities |
+| **Math** | `math-number-cardinality` | Cantor's theorem is in Mathlib (`Set.cantor_surjective`) — the diagonal argument formalized |
+| **Mathematics** | `math-complex-numbers` | Mathlib includes `Complex.lean` with the full construction of $\mathbb{C}$ from $\mathbb{R}$ |
+| **Mathematics** | `math-euler-formula` | Mathlib includes `Complex.exp_eq_cos_add_sin_mul_I` — Euler's formula, machine-checked |
+| **Technology** | (software verification) | Section 2.3 (Isabelle/HOL used for hardware/software verification) — the same technology that checks math proofs also checks chip designs and operating system kernels |
+
+### Rosetta panel routes
+
+- **Python panel:** Python's `sympy` can verify algebraic identities computationally but NOT logically. Compare `sympy.simplify(expr)` (returns True/False, no proof) with Lean's `ring` tactic (returns a machine-checked proof OR an error). The difference is the difference between testing and proving.
+- **Lisp panel:** Lean 4's term language is structurally similar to Lisp S-expressions — both are trees of applied constructors. A Lisp programmer reading Lean term-mode proofs will recognize the structure. The Curry-Howard correspondence says these trees ARE proofs.
+- **C++ panel:** C++ templates implement a limited form of dependent typing. `std::vector<int>` is a type that depends on a type parameter; Lean's `Vector α n` is a type that depends on a type AND a value. The progression C++ → Lean parallels the progression from simple type theory to dependent type theory (section 3).
+- **Java panel:** Java generics with wildcards (`? extends T`, `? super T`) encode bounded quantification — a restricted form of predicate logic. Lean's type system is the unrestricted version.
+- **Pascal panel:** Pascal's strong typing was a historical step toward the type-theoretic view of proof. Wirth's insistence that every variable have a declared type is the same insistence that makes Lean's kernel work.
+- **Unison panel:** Unison's content-addressed code (definitions identified by hash, not by name) parallels the content-addressed approach to mathematical definitions in Lean — a definition IS its content, and renaming doesn't change it. This is the deepest Rosetta connection: Unison and Lean share a philosophical commitment to content over name.
+
+### Cross-department threads
+
+- **Logic → Coding → Technology:** Formal proof systems (Logic) → proof assistants as software (Coding) → verified software and hardware (Technology). This is the most concrete cross-department thread in the entire college structure. A chip verified in Isabelle/HOL is a chip whose correctness is a mathematical theorem.
+- **Math → Logic → Coding:** Every mathematical definition (Math) has a formal encoding (Logic) which has a computable representation (Coding). Mathlib is the living proof that this thread works at scale.
+- **Philosophy → Logic → Math:** The foundational debates (constructive vs. classical, ZFC vs. type theory, intuitionism vs. formalism) are philosophical questions (Philosophy) with logical formulations (Logic) and mathematical consequences (Math). Section 3.4 (HoTT) is the current frontier of this thread.
+- **Writing → Coding:** Section 6 (craft of formalized proof) is the intersection of writing craft and code craft. Naming conventions, comments, module structure, documentation — these are shared concerns of proof writing and software engineering. The Mathlib style guide is simultaneously a writing guide and a coding style guide.
+- **Learning → Math → Coding:** The "1-week sprint" study plan (install Lean, type four proofs) is a Learning department exercise that bridges Math and Coding. A student who completes it has both written mathematical proofs AND written functional programs, and has seen that they're the same thing.
