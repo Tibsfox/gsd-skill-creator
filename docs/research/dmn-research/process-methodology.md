@@ -85,3 +85,24 @@ The final twist in this lineage is MLOps—the application of DevOps disciplines
 ## Conclusion
 
 No single framework has proved sufficient across the full range of data mining work. KDD gave the field a vocabulary. CRISP-DM gave it a project structure that still works for individual engagements. SEMMA codified the analytical core. ASUM-DM and TDSP adapted the vocabulary to enterprise and team realities. MLOps acknowledged that models live in production and must be cared for like any other running system. The mature practitioner reads all of these as overlapping lenses on a single underlying reality: data mining is an iterative sociotechnical process whose success depends at least as much on problem framing, data plumbing, validation discipline, and operational handover as on any algorithm. The frameworks do not disagree about this; they disagree only about which slice of it is most urgent to standardize.
+
+## Study Guide — Process & Methodology
+
+### Frameworks
+
+- **KDD** (Fayyad 1996).
+- **CRISP-DM** (1996-2000, still dominant).
+- **SEMMA** (SAS).
+- **TDSP** (Microsoft).
+- **MLOps** (Google 2015, now universal).
+
+## DIY — Run one CRISP-DM cycle
+
+Pick a small problem. Walk through all six phases
+(business understanding, data understanding, prep,
+modeling, evaluation, deployment) in one week.
+
+## TRY — Set up MLflow
+
+MLflow tracks experiments. Use it on your next ML
+project. Experience the difference logged vs unlogged.

@@ -190,3 +190,22 @@ Viewed together, the foundational data mining toolkit exhibits three recurring t
 - Zaki, M. J. (2000). Scalable algorithms for association mining. *IEEE TKDE*, 12(3), 372-390.
 - Zaki, M. J. (2001). SPADE: An efficient algorithm for mining frequent sequences. *Machine Learning*, 42(1-2), 31-60.
 - Zou, H., & Hastie, T. (2005). Regularization and variable selection via the elastic net. *Journal of the Royal Statistical Society, Series B*, 67(2), 301-320.
+
+## Study Guide — Foundational Algorithms
+
+Top 10: Apriori, k-means, EM, PageRank, AdaBoost, kNN, CART,
+Naive Bayes, SVM, C4.5 (Wu et al. 2008).
+
+## DIY — Implement k-means from scratch
+
+30 lines of numpy. The simplest clustering algorithm,
+and the one every practitioner has to know.
+
+## TRY — Read Wu 2008
+
+"Top 10 algorithms in data mining" — the canonical
+survey.
+
+## Related College Departments
+
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)

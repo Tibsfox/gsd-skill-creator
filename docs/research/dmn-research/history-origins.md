@@ -94,4 +94,22 @@ No history of data mining is complete without an acknowledgment that the field h
 
 The dispute between KDD and data mining as competing names was largely settled by commercial usage in favor of data mining, though SIGKDD's conference retains the longer phrase in its official name. The later dispute between data mining and machine learning was settled by machine learning; and the still later dispute between machine learning and data science was settled, for now, by data science. Each successor term has absorbed its predecessor rather than replaced it, and the result is that the intellectual lineage traced in this document --- Bayes to Fisher to Tukey to Quinlan to Piatetsky-Shapiro to Fayyad to Ng --- is a single continuous tradition appearing under a series of names. The practitioners change jobs and change titles, the algorithms are reinvented and renamed, but the underlying project is the one Laplace articulated in 1814: common sense, reduced to calculation, applied to whatever data we happen to have.
 
+## Study Guide — Data Mining History
+
+### Questions
+
+- Why did "data mining" start as a term of abuse?
+- What did SIGKDD add in 1995 that formalized the field?
+- How did "data science" absorb "data mining"?
+
+## DIY — Read Fayyad 1996
+
+"From Data Mining to Knowledge Discovery in Databases,"
+Fayyad, Piatetsky-Shapiro, Smyth. AI Magazine. The
+canonical paper.
+
+## TRY — Read Tukey's *Exploratory Data Analysis* (1977)
+
+Still the best book on the mindset.
+
 ---
