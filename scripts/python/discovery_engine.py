@@ -67,6 +67,12 @@ def _rerank_cosine(model, query, text):
         return None
 
 
+def _label_to_query(label):
+    """Strip parenthetical qualifiers from a feed label so the token-gate
+    doesn't match against literal '(all)'. 'Astrophysics (all)' → 'Astrophysics'."""
+    return re.sub(r'\s*\([^)]*\)\s*', ' ', label).strip()
+
+
 # Phase 5: coherence filter stopwords — common English words that must not
 # count as "shared nouns" when detecting junk clusters.
 _COHERENCE_STOP = set("""
@@ -471,7 +477,7 @@ def _fetch_arxiv_entries(url, timeout=15):
         xml = resp.read().decode('utf-8')
     out = []
     for entry in re.findall(r'<entry>(.*?)</entry>', xml, re.DOTALL):
-        id_m = re.search(r'<id>http://arxiv.org/abs/([^<]+)</id>', entry)
+        id_m = re.search(r'<id>https?://arxiv.org/abs/([^<]+)</id>', entry)
         t_m = re.search(r'<title>(.*?)</title>', entry, re.DOTALL)
         p_m = re.search(r'<published>(\d{4}-\d{2}-\d{2})', entry)
         a_m = re.search(r'<summary>(.*?)</summary>', entry, re.DOTALL)
@@ -669,6 +675,7 @@ def check_arxiv_rss(state, dry_run=False):
     seen = set(state.get('seen_arxiv_ids', []))
     discoveries = []
     filtered_count = 0
+    reranker = _lazy_reranker() if DISCOVERY_V2 else None
 
     for category, label, relevance_keywords in ARXIV_RSS_FEEDS:
         try:
@@ -701,16 +708,21 @@ def check_arxiv_rss(state, dry_run=False):
                 if arxiv_id in seen:
                     continue
 
-                # Relevance filter: v2 requires ALL label-tokens present in
-                # title+abstract+category; legacy requires one-of-many keywords.
-                if DISCOVERY_V2:
-                    if not _relevance_check_all_tokens(title, abstract, category, label):
-                        filtered_count += 1
-                        continue
-                    matched_kw = label
-                else:
-                    matched_kw = _relevance_check(title, abstract, relevance_keywords)
-                    if not matched_kw:
+                # Relevance filter: both v1 and v2 use OR-of-many
+                # relevance_keywords because RSS feeds are broad categories,
+                # not topical queries — a strict AND-gate against the feed
+                # label would wipe nearly everything. v2 additionally applies
+                # a cosine rerank against a rich `label + keywords` prompt.
+                matched_kw = _relevance_check(title, abstract, relevance_keywords)
+                if not matched_kw:
+                    filtered_count += 1
+                    continue
+                if DISCOVERY_V2 and reranker is not None:
+                    rich_query = (
+                        _label_to_query(label) + ' ' + ' '.join(relevance_keywords)
+                    ).strip()
+                    cos = _rerank_cosine(reranker, rich_query, title + '. ' + abstract)
+                    if cos is None or cos < 0.35:
                         filtered_count += 1
                         continue
 
