@@ -212,8 +212,10 @@ describe('gsd-init command', () => {
 
     // Hook script
     expect(existsSync(join(projectDir, '.claude/hooks/test-hook.sh'))).toBe(true);
-    const hookStat = await stat(join(projectDir, '.claude/hooks/test-hook.sh'));
-    expect((hookStat.mode & 0o755)).toBe(0o755);
+    if (process.platform !== 'win32') {
+      const hookStat = await stat(join(projectDir, '.claude/hooks/test-hook.sh'));
+      expect((hookStat.mode & 0o755)).toBe(0o755);
+    }
 
     // CLAUDE.md
     expect(existsSync(join(projectDir, 'CLAUDE.md'))).toBe(true);
