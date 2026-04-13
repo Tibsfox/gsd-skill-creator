@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { promises as fs } from 'node:fs';
-import { join } from 'node:path';
+import { join, basename, isAbsolute } from 'node:path';
 import { tmpdir } from 'node:os';
 import { createBackup, ManifestBackup } from './manifest-backup.js';
 
@@ -73,7 +73,7 @@ describe('createBackup', () => {
 
   it('returns absolute path for backupDir', async () => {
     const record = await createBackup(manifestPath, null);
-    expect(require('node:path').isAbsolute(record.backupDir)).toBe(true);
+    expect(isAbsolute(record.backupDir)).toBe(true);
   });
 
   it('throws when manifest does not exist', async () => {
