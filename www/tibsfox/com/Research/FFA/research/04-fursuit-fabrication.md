@@ -1220,6 +1220,9 @@ Several topics from this document are expanded into detailed standalone guides:
 > **Study Guide: [Sewing Basics for Fursuit Makers](study-guides/sewing-basics-for-fursuit-makers.md)**
 > The sewing skills this module assumes you have: machine threading, tension adjustment, hand stitches (ladder stitch, whip stitch, backstitch), faux fur cutting from the backing, and seam types. Start here if any sewing step in this module is unfamiliar.
 
+> **Try Session: [Commission Your First Furry Art](try-sessions/commission-your-first-art.md)**
+> Not ready to build a full suit? Start by commissioning professional character art. A high-quality reference sheet ($100-300) becomes the construction blueprint for every fursuit component in this module --- the color guide for fur selection, the marking map for pattern layout, and the expression reference for head sculpting.
+
 ---
 
 *Module CRAFT-SUIT. Cross-references: [CRAFT-SEW], [CRAFT-BIO], [CRAFT-PLUSH], [CRAFT-RENDER]. Safety codes: SC-SAF, SC-IP.*

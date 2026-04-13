@@ -204,6 +204,8 @@ This broad foraging toolkit is the foundation of the raccoon's omnivorous genera
 
 > **[Track Identification](../try-sessions/track-identification.md)** --- Raccoon front paw prints look like tiny human handprints. Find them in mud and see the anatomy of those 438-million-neuron forepaws in the tracks they leave behind.
 
+> **[Raccoons in Literature and Media](raccoons-in-literature.md)** --- The intelligence and dexterity documented in this deep dive are what make raccoons irresistible narrative subjects. From Sterling North's *Rascal* to Marvel's Rocket Raccoon, every raccoon story is built on the cognitive abilities you have just read about.
+
 ---
 
 ## Sources

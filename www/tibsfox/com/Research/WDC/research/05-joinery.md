@@ -206,6 +206,7 @@ The timber frame revival in the PNW draws on Douglas fir's exceptional suitabili
 - **Cut a Mortise and Tenon Joint** ([try-sessions/hand-cut-mortise-tenon](try-sessions/hand-cut-mortise-tenon.md)): The most important joint in furniture. Every table, every chair, every door frame. If you can cut a mortise and tenon and a dovetail, you can build anything.
 - **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): You cannot cut a clean joint with a dull chisel. Sharpen first, then cut.
 - **The 10 Essential Woodworking Joints** ([study-guides/essential-joints-reference](study-guides/essential-joints-reference.md)): Visual reference card for all ten joints discussed in this chapter — strength ratings, difficulty ratings, tools needed, and text diagrams. The complete menu for joint selection.
+- **Restore a Vintage Hand Plane** ([try-sessions/restore-a-hand-plane](try-sessions/restore-a-hand-plane.md)): The hand plane that surfaces your stock before you cut your joints. Find a $15 Stanley Bailey at an estate sale, restore it to precision, and use it to produce the flat, smooth surfaces that make tight-fitting joints possible.
 
 ---
 

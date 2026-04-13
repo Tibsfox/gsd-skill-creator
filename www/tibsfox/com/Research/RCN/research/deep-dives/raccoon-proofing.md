@@ -198,6 +198,8 @@ This year-round activity, combined with the PNW's high urban raccoon densities, 
 
 > **[Design Your Dream Coop](../../FWL/research/try-sessions/coop-design-challenge.md)** --- If you keep chickens, your coop design IS your raccoon-proofing strategy. Hardware cloth, two-step latches, and buried aprons are designed here.
 
+> **[Raccoons in Literature and Media](raccoons-in-literature.md)** --- The raccoon you are proofing against is the same animal that Sterling North raised, that Toronto memorialized with a candlelit vigil, and that the internet named "trash panda." Understanding the cultural framing changes how you think about coexistence.
+
 ---
 
 *Sources and further reading: WDFW (Washington Department of Fish and Wildlife), "Living with Wildlife: Raccoons" (2024); Hadidian et al. (2010), "Wild Neighbors: The Humane Approach to Living with Wildlife"; Prange et al. (2004), "Survival, Cause-Specific Mortality, and Harvest of Raccoons in Ohio," Journal of Wildlife Management; Rosatte et al. (2010), "Evaluation of Raccoon Translocation," Journal of Wildlife Management; FWL-06 (Husbandry Guide); RCN-02 (Intelligence and Behavior); RCN-04 (Urban Adaptation); The Humane Society of the United States, "What to Do About Raccoons" (2024). See also [deep-dives/raccoons-and-disease] for raccoon-associated health risks and latrine cleanup protocols, [deep-dives/baby-raccoons] for orphaned kit response guidance, [FWL guides/predator-defense-pnw] for comprehensive PNW poultry predator defense.*

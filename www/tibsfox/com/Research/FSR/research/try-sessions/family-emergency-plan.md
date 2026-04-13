@@ -336,6 +336,8 @@ If you live in the Pacific Northwest, add these Cascadia-specific elements to yo
 
 > **[Radio Communications Basics](../study-guides/radio-communications-basics.md)** --- Your emergency plan includes a radio channel for family communication. The radio study guide teaches you how to use FRS/GMRS radios effectively.
 
+> **[Numbers You Should Know](../study-guides/emergency-phone-numbers.md)** --- The phone number reference sheet is the companion document to this plan. Print it, laminate it, put one copy on the refrigerator and one in the go bag. When the phone network comes back up, these are the numbers you need.
+
 ---
 
 ## College of Knowledge Connections
