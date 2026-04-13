@@ -10,7 +10,7 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { mkdtempSync, readFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, basename } from 'node:path';
 import { tmpdir } from 'node:os';
 import type { LaunchConfig } from './types.js';
 
@@ -310,7 +310,7 @@ describe('launchEmulator', () => {
 
     expect(result.configPath).toBeDefined();
     // Should contain "launch-" prefix and a timestamp
-    const filename = result.configPath!.split('/').pop()!;
+    const filename = basename(result.configPath!);
     expect(filename).toMatch(/^launch-\d+\.fs-uae$/);
   });
 });

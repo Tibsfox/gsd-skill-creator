@@ -22,7 +22,7 @@ const SKILL_PATH = resolve(__dirname, '../../project-claude/commands/gsd-dashboa
 
 /** Read the skill file content. Throws if file does not exist. */
 function readSkill(): string {
-  return readFileSync(SKILL_PATH, 'utf-8');
+  return readFileSync(SKILL_PATH, 'utf-8').replace(/\r\n/g, '\n');
 }
 
 /** Parse YAML frontmatter from markdown content. Returns key-value pairs. */

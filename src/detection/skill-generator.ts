@@ -1,4 +1,5 @@
 import { SkillStore } from '../storage/skill-store.js';
+import { basename } from 'node:path';
 import { SkillMetadata, SkillTrigger } from '../types/skill.js';
 import { type GsdSkillCreatorExtension } from '../types/extensions.js';
 import { SkillCandidate, PatternEvidence } from '../types/detection.js';
@@ -243,7 +244,7 @@ When working with ${candidate.pattern}:
     if (evidence.coOccurringFiles.length > 0) {
       const fileNames = evidence.coOccurringFiles
         .slice(0, 5)
-        .map(f => f.split('/').pop())
+        .map(f => basename(f))
         .join(', ');
       lines.push(`- **Common files:** ${fileNames}`);
     }
