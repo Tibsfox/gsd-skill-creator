@@ -36,9 +36,9 @@ See `.planning/staging/inbox/v1.41-mission-docs/` for the full mission specifica
          v
 +-------------------------------------------------+
 | Deterministic (execute every time)              |
-|   .claude/hooks/session-state.sh     SessionStart  |
-|   .claude/hooks/validate-commit.sh   PreToolUse    |
-|   .claude/hooks/phase-boundary-check.sh PostToolUse|
+|   .claude/hooks/session-state.cjs     SessionStart |
+|   .claude/hooks/validate-commit.cjs   PreToolUse   |
+|   .claude/hooks/phase-boundary-check.cjs PostToolUse|
 +-------------------------------------------------+
          |
          v
@@ -59,9 +59,9 @@ See `.planning/staging/inbox/v1.41-mission-docs/` for the full mission specifica
 | Skill-creator integration | Skill (auto-activates) | `.claude/skills/skill-integration/` |
 | Session state awareness | Skill (auto-activates) | `.claude/skills/session-awareness/` |
 | Security hygiene | Skill (auto-activates) | `.claude/skills/security-hygiene/` |
-| Commit convention enforcement | Hook (deterministic) | `.claude/hooks/validate-commit.sh` |
-| Session start context | Hook (deterministic) | `.claude/hooks/session-state.sh` |
-| Phase boundary detection | Hook (deterministic) | `.claude/hooks/phase-boundary-check.sh` |
+| Commit convention enforcement | Hook (deterministic) | `.claude/hooks/validate-commit.cjs` |
+| Session start context | Hook (deterministic) | `.claude/hooks/session-state.cjs` |
+| Phase boundary detection | Hook (deterministic) | `.claude/hooks/phase-boundary-check.cjs` |
 | Phase execution | Subagent | `.claude/agents/gsd-executor.md` |
 | Phase verification | Subagent (read-only) | `.claude/agents/gsd-verifier.md` |
 | Phase planning | Subagent | `.claude/agents/gsd-planner.md` |

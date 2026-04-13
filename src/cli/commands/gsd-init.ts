@@ -668,9 +668,9 @@ function validateInstallation(
     { name: 'skill-integration skill', path: '.claude/skills/skill-integration/SKILL.md' },
     { name: 'session-awareness skill', path: '.claude/skills/session-awareness/SKILL.md' },
     { name: 'security-hygiene skill', path: '.claude/skills/security-hygiene/SKILL.md' },
-    { name: 'session-state hook', path: '.claude/hooks/session-state.sh' },
-    { name: 'validate-commit hook', path: '.claude/hooks/validate-commit.sh' },
-    { name: 'phase-boundary-check hook', path: '.claude/hooks/phase-boundary-check.sh' },
+    { name: 'session-state hook', path: '.claude/hooks/session-state.cjs' },
+    { name: 'validate-commit hook', path: '.claude/hooks/validate-commit.cjs' },
+    { name: 'phase-boundary-check hook', path: '.claude/hooks/phase-boundary-check.cjs' },
     { name: 'gsd-dashboard', path: '.claude/commands/gsd-dashboard.md' },
     { name: 'integration config', path: '.planning/skill-creator.json' },
     { name: 'CLAUDE.md', path: 'CLAUDE.md' },
@@ -724,20 +724,20 @@ function validateInstallation(
     missing++;
   }
 
-  // Check hook script permissions
+  // Check hook script readability (Node .cjs hooks run via `node`, not exec bit)
   const hookScripts = [
-    '.claude/hooks/session-state.sh',
-    '.claude/hooks/validate-commit.sh',
-    '.claude/hooks/phase-boundary-check.sh',
+    '.claude/hooks/session-state.cjs',
+    '.claude/hooks/validate-commit.cjs',
+    '.claude/hooks/phase-boundary-check.cjs',
   ];
   for (const hookScript of hookScripts) {
     const fullPath = path.join(projectRoot, hookScript);
     try {
-      accessSync(fullPath, fsConstants.X_OK);
-      log(`  ${pc.green('✓')} ${hookScript} (executable)`, quiet);
+      accessSync(fullPath, fsConstants.R_OK);
+      log(`  ${pc.green('✓')} ${hookScript} (readable)`, quiet);
       ok++;
     } catch {
-      log(`  ${pc.red('✗')} ${hookScript} — not executable`, quiet);
+      log(`  ${pc.red('✗')} ${hookScript} — not readable`, quiet);
       missing++;
     }
   }

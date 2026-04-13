@@ -29,7 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/session-state.sh"
+            "command": "node .claude/hooks/session-state.cjs"
           }
         ]
       }
@@ -58,7 +58,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/validate-commit.sh"
+            "command": "node .claude/hooks/validate-commit.cjs"
           }
         ]
       }
@@ -69,7 +69,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/phase-boundary-check.sh"
+            "command": "node .claude/hooks/phase-boundary-check.cjs"
           }
         ]
       }
