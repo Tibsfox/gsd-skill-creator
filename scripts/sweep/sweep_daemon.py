@@ -286,7 +286,7 @@ def action_discovery_check(dry_run=False):
         print(f"    Skipped (not a discovery hour, next at :{min(h for h in DISCOVERY_HOURS if h > now.hour) if any(h > now.hour for h in DISCOVERY_HOURS) else min(DISCOVERY_HOURS)}:30)")
         return True
     print(f"    Running discovery engine (6-hour cadence)...")
-    cmd = "python3 discovery_engine.py"
+    cmd = "DISCOVERY_V2=1 python3 discovery_engine.py"
     success, output = run_cmd(cmd, dry_run, timeout=300)
     if success:
         for line in output.split('\n'):
