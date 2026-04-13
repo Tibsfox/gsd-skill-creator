@@ -205,6 +205,9 @@ The Big One is coming. Not maybe. Not probably. Coming. The question is whether 
 > **Try Session: [Hands-Only CPR](../try-sessions/hands-only-cpr.md)**
 > When hospitals are overwhelmed and EMS response times stretch, bystander medical skills save lives. CPR is the first skill. [Stop the Bleed](../try-sessions/stop-the-bleed.md) is the second.
 
+> **Study Guide: [Numbers You Should Know](../study-guides/emergency-phone-numbers.md)**
+> Print it, laminate it, put it on the refrigerator and one copy in the go bag. National emergency numbers, PNW crisis lines, wildlife contacts, utility companies, and a fill-in template for your household's ICE contacts and medical information. When the phone network is back up but your memory is not, this sheet is your communication lifeline.
+
 ---
 
 ## Cross-References

@@ -126,6 +126,8 @@ The Buff Orpington is not a breed that demands expertise. It is a breed that rew
 
 > **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- Heavy breeds like Orpingtons are prone to bumblefoot from hard landings. Learn the signs and the treatment before you need it.
 
+> **[Chicken Math](../try-sessions/chicken-math-project.md)** --- Orpingtons lay 200-280 eggs per year. What does that cost per dozen? Build the spreadsheet and find out why your beautiful golden eggs cost $5/dozen --- and why that number does not matter.
+
 ---
 
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Will (1902), "The Orpington Fowl"; Damerow (2012), "The Chicken Encyclopedia"; United Orpington Club resources. See also [FWL-02d] English Class, [FWL-04] Feather Genetics, [FWL-06] Husbandry Guide, [FWL-07] Heritage Conservation.*

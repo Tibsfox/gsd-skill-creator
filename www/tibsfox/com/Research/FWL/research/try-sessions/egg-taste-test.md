@@ -218,6 +218,8 @@ If you want to take this further:
 
 > **[Feather Art Project](feather-craft-project.md)** --- Your flock provides eggs AND feathers. Pair preserved eggs with pressed feathers from the same breeds for a display that shows both the plumage and the egg of each bird.
 
+> **[Chicken Math --- The Economics of Backyard Eggs](chicken-math-project.md)** --- Your eggs taste better. But how much do they cost? Build the spreadsheet and calculate the real cost per dozen. The taste test proves the quality; the chicken math project reveals the price.
+
 ---
 
 ## College of Knowledge Connections

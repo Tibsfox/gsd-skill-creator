@@ -6,7 +6,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 
 - **Languages:** TypeScript (src/), Rust (src-tauri/), GLSL (shaders)
 - **Build:** `npm run build`
-- **Test:** `npm test` (Vitest, 20600+ tests)
+- **Test:** `npm test` (Vitest)
 - **Lint:** `npm run lint`
 - **Key deps:** Tauri v2, xterm.js, Vite v6, Vitest
 - **Desktop frontend:** `desktop/` (Vite webview)
@@ -23,7 +23,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `src-tauri/` -- Rust backend (Tauri)
 - `desktop/` -- Vite webview frontend
 - `.college/` -- College Structure: Rosetta Core, panels, departments (culinary-arts, mathematics, mind-body), calibration
-- `docs/` -- 158+ markdown files, canonical documentation
+- `docs/` -- canonical documentation and release notes
 
 ## Commit Convention
 
@@ -31,7 +31,6 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore
 - Imperative mood, lowercase, no period, subject <72 chars
 - A PreToolUse hook enforces this automatically
-- Include `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>` on all commits
 
 ## Quick Reference
 

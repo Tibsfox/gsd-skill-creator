@@ -209,4 +209,10 @@ The least we can do — as colleagues, as institutions, as a society — is ackn
 
 ---
 
+## Try This
+
+> **[Numbers You Should Know — Emergency Contacts Reference](study-guides/emergency-phone-numbers.md)** — Safe Call Now (206-459-3020) is on this sheet. So is 988. So is Crisis Connections. Print the sheet and put it where every member of your household can see it — including the responder who might not ask for help but needs to know the number is there.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to the one who carried the weight for thirty years — and to everyone who carries it still.*
