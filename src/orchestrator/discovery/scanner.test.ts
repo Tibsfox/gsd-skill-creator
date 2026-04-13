@@ -52,7 +52,7 @@ describe('scanDirectory', () => {
 
     const result = await scanDirectory(testDir);
     expect(result).toHaveLength(1);
-    expect(result[0].startsWith('/')).toBe(true);
+    expect(require('node:path').isAbsolute(result[0])).toBe(true);
     expect(result[0]).toBe(join(testDir, 'file.md'));
   });
 
