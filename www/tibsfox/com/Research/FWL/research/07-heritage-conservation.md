@@ -318,3 +318,11 @@ Every heritage breed flock is a vote for genetic diversity, agricultural resilie
 - **Science** --- [Genetics, Ecology]: Heritage breed conservation is applied conservation genetics --- maintaining genetic diversity, avoiding inbreeding depression, and managing small populations. The parallels to endangered wild species conservation programs are direct and instructive.
 - **Nature Studies** --- [Ecology & Habitats, Citizen Science]: Heritage breed keepers function as a distributed conservation network, analogous to citizen science networks that monitor wild species. Understanding why genetic diversity matters in domestic animals reinforces the same concept in wild ecosystems.
 - **Home Economics** --- [Community, Self-Sufficiency]: Heritage breed conservation depends on community networks of small-scale keepers, breeders, and enthusiasts --- the same mutual-aid community structures that support all traditional self-sufficiency skills.
+
+---
+
+## Try This
+
+> **[Chicken Math --- The Economics of Backyard Eggs](try-sessions/chicken-math-project.md)** --- Heritage breeds often produce fewer eggs than commercial hybrids, which changes the cost-per-dozen calculation. Run the spreadsheet with heritage breed production numbers (150-220 eggs/year vs. 280-320 for commercial Leghorns) and discover why conservation economics are different from production economics --- and why the math still works out.
+
+> **[The Egg Taste Test](try-sessions/egg-taste-test.md)** --- Heritage breed eggs often differ from commercial eggs in shell thickness, yolk color, and flavor profile. Design a blind test comparing heritage and production breed eggs to discover whether the breeds described in this chapter produce a measurably different eating experience.

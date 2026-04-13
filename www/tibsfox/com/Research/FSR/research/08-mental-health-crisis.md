@@ -216,4 +216,12 @@ We know how to do this. We have known for thirty-five years. The only thing miss
 
 ---
 
+## Try This
+
+> **[Numbers You Should Know — Emergency Contacts Reference](study-guides/emergency-phone-numbers.md)** — The 988 Suicide and Crisis Lifeline, Crisis Connections (866-427-4747), and SAMHSA (800-662-4357) are the numbers that close the gap described in this chapter. Print them. Laminate them. Know them before you need them.
+
+> **[Create a Family Emergency Plan](try-sessions/family-emergency-plan.md)** — Mental health crises are emergencies too. Your family emergency plan should include not just fire exits and earthquake protocols but also the crisis line numbers, the location of the nearest crisis stabilization unit, and a communication plan for when a family member is in psychological distress.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call — and to the ones they are called to help.*

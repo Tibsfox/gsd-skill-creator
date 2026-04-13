@@ -245,3 +245,5 @@ Start with six. Start with good breeds. Build a solid coop. And welcome to the f
 > **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- Assemble your first-aid kit before the first bird arrives. This guide covers every condition a new keeper is likely to encounter.
 
 > **[The Egg Taste Test](../try-sessions/egg-taste-test.md)** --- Once your flock is laying, run the experiment: are your eggs actually better than store-bought, or is it just pride talking?
+
+> **[Chicken Math --- The Economics of Backyard Eggs](../try-sessions/chicken-math-project.md)** --- Before you buy your first chick, build the spreadsheet. Startup costs, monthly feed bills, production curves by breed, and the honest truth about cost per dozen. The math never works out the way you think --- and it does not matter.

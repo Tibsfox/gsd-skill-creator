@@ -254,5 +254,13 @@ Cities are raccoon habitat now. Not in a degraded, making-do sense, but in a gen
 
 ---
 
+## Try This
+
+> **[Raccoons in Literature and Media](deep-dives/raccoons-in-literature.md)** --- The urban raccoon that rides the garbage truck in this chapter's opening image is the same animal that Sterling North raised in 1918, that Miyazaki's Studio Ghibli animated in *Pom Poko*, and that Marvel turned into Rocket Raccoon. The "trash panda" meme era is the cultural response to the urban adaptation documented here.
+
+> **[Build a Trail Cam Station](try-sessions/build-a-trail-cam-station.md)** --- Set up a camera and document the urban adaptation described in this chapter from your own backyard. The 3 AM raccoon highway through your yard is real --- the camera proves it.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

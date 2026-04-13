@@ -298,6 +298,7 @@ A furry artist who has painted a thousand character commissions has practiced co
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): A structured first painting session that teaches value, edges, and simplification in sixty timed minutes. The ideal starting point for the learning path.
 - **Paint a PNW Landscape in 2 Hours** ([try-sessions/paint-a-landscape](try-sessions/paint-a-landscape.md)): The next step after the apple — atmospheric perspective, color temperature, and the PNW green problem. Plein air or from a window.
 - **Paint a Furry Convention Badge** ([try-sessions/convention-badge-painting](try-sessions/convention-badge-painting.md)): The furry art entry point described in Section 10. From pencil sketch to laminated badge in under an hour. Materials cost under $20.
+- **Paint From Life, Not Photos** ([try-sessions/paint-from-life-not-photos](try-sessions/paint-from-life-not-photos.md)): The most important practice shift a developing painter can make. Start with your coffee cup — 20 minutes, any medium. The observation skills transfer to every subject you will ever paint.
 - **The Painter's Shopping Guide** ([study-guides/paint-shopping-guide](study-guides/paint-shopping-guide.md)): What to buy at every budget level. Three tiers from $30 to $300+, plus the furry artist kit for convention badge work.
 
 ---
