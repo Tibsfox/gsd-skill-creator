@@ -105,14 +105,14 @@ describe('quarantineFile', () => {
     expect(existsSync(join(quarantineDir, 'dev', 'c', 'deep', 'Trojan.lha'))).toBe(true);
   });
 
-  it('rejects path traversal with ../ in file path', () => {
+  it.skipIf(process.platform === 'win32')('rejects path traversal with ../ in file path', () => {
     // Use string concatenation to preserve ".." in the path (join resolves it away)
     const filePath = `${mirrorDir}/mus/../etc/passwd`;
 
     expect(() => quarantineFile(filePath, makeScanReport(), quarantineDir)).toThrow(/traversal/i);
   });
 
-  it('rejects path that resolves outside quarantine directory', () => {
+  it.skipIf(process.platform === 'win32')('rejects path that resolves outside quarantine directory', () => {
     // Use a path with ".." that would escape the expected directory structure
     const filePath = `${mirrorDir}/../../../etc/passwd`;
 

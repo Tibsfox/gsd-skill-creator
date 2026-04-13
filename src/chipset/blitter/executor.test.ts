@@ -60,7 +60,7 @@ describe('executeOffloadOp', () => {
     expect(result.timedOut).toBe(false);
   });
 
-  it('kills scripts that exceed timeout and reports timed-out status', async () => {
+  it.skipIf(process.platform === 'win32')('kills scripts that exceed timeout and reports timed-out status', async () => {
     const operation: OffloadOperation = {
       id: 'test:timeout',
       script: '#!/bin/bash\nsleep 10',
@@ -203,7 +203,7 @@ describe('OffloadExecutor', () => {
     expect(received[0].status).toBe('failure');
   });
 
-  it('emits completion signal with timeout status', async () => {
+  it.skipIf(process.platform === 'win32')('emits completion signal with timeout status', async () => {
     const bus = new SignalBus();
     const received: CompletionSignal[] = [];
     bus.on('completion', (signal) => received.push(signal));
