@@ -53,7 +53,7 @@ function runWriteQuestion(
 // Test suite
 // ============================================================================
 
-describe('write-question.sh', () => {
+describe.skipIf(process.platform === 'win32')('write-question.sh', () => {
   let tmpDir: string;
 
   beforeEach(() => {

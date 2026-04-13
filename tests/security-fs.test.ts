@@ -130,7 +130,7 @@ describe('securityInitCommand', () => {
     expect(parsed.allowed_domains).toContain('registry.npmjs.org');
   });
 
-  it('sets directory permissions to 0700', async () => {
+  it.skipIf(process.platform === 'win32')('sets directory permissions to 0700', async () => {
     await securityInitCommand(tmpDir);
     const stat = await fs.stat(secPath());
     // Check owner-only permission (0700 = rwx------)
@@ -138,14 +138,14 @@ describe('securityInitCommand', () => {
     expect(mode).toBe(0o700);
   });
 
-  it('sets events/ directory permissions to 0700', async () => {
+  it.skipIf(process.platform === 'win32')('sets events/ directory permissions to 0700', async () => {
     await securityInitCommand(tmpDir);
     const stat = await fs.stat(secPath('events'));
     const mode = stat.mode & 0o777;
     expect(mode).toBe(0o700);
   });
 
-  it('sets blocked/ directory permissions to 0700', async () => {
+  it.skipIf(process.platform === 'win32')('sets blocked/ directory permissions to 0700', async () => {
     await securityInitCommand(tmpDir);
     const stat = await fs.stat(secPath('blocked'));
     const mode = stat.mode & 0o777;

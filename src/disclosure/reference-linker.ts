@@ -246,7 +246,7 @@ export class ReferenceLinker {
       if (entry.isDirectory()) {
         await this.walkDir(baseDir, fullPath, fileMap);
       } else if (entry.isFile() && entry.name.endsWith('.md')) {
-        const relPath = relative(baseDir, fullPath);
+        const relPath = relative(baseDir, fullPath).split('\\').join('/');
         const content = await readFile(fullPath, 'utf-8');
         fileMap.set(relPath, content);
       }
