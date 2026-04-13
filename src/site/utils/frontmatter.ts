@@ -1,4 +1,5 @@
 import yaml from 'js-yaml';
+import { basename } from 'node:path';
 import type { FrontMatter } from '../types.js';
 
 /**
@@ -8,7 +9,7 @@ import type { FrontMatter } from '../types.js';
  * - Title-casing each word
  */
 function titleFromPath(filePath: string): string {
-  const base: string = require('node:path').basename(filePath);
+  const base: string = basename(filePath);
   const name = base.replace(/\.md$/i, '');
   return name
     .replace(/[-_]/g, ' ')

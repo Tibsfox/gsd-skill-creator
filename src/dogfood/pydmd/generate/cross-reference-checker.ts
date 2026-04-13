@@ -3,6 +3,7 @@
  * Validates that all internal markdown links resolve to known output files.
  */
 
+import { dirname } from 'node:path';
 import type { ReferenceSet } from './reference-builder.js';
 import type { ScriptSet } from './script-generator.js';
 
@@ -112,7 +113,7 @@ function resolvePath(sourceDoc: string, linkPath: string): string {
 
   // For documents in subdirectories (e.g., references/foo.md linking to ../scripts/bar.py),
   // resolve relative to the source document's directory
-  const sourceDir = sourceDoc.includes('/') || sourceDoc.includes('\\') ? require('node:path').dirname(sourceDoc) : '';
+  const sourceDir = sourceDoc.includes('/') || sourceDoc.includes('\\') ? dirname(sourceDoc) : '';
 
   if (linkPath.startsWith('../')) {
     // Parent traversal from a subdirectory
