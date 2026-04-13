@@ -228,7 +228,15 @@ function installClaudeMd(entry) {
     return;
   }
 
-  // Content differs — check if legacy backup needed
+  // Content differs. CLAUDE.md is a template seed, not a managed file:
+  // it's meant to be customized per project (live numbers, local sections).
+  // Only overwrite on --force, matching the rest of the installer's policy.
+  if (!force) {
+    warn(`differs: ${entry.target} (use --force to overwrite)`);
+    return;
+  }
+
+  // --force path: archive existing as legacy if large, then deploy source
   const lineCount = targetContent.split('\n').length;
   if (lineCount > legacyThreshold) {
     const legacyPath = path.join(projectRoot, 'CLAUDE.md.legacy');
@@ -240,7 +248,6 @@ function installClaudeMd(entry) {
     }
   }
 
-  // Deploy slim version
   if (!dryRun) {
     fs.writeFileSync(targetPath, sourceContent);
   }
