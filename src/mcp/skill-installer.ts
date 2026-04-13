@@ -254,7 +254,7 @@ async function validateAndInstall(
     if (filePath === 'manifest.json') continue;
 
     // Reject absolute paths
-    if (filePath.startsWith('/')) {
+    if (filePath.startsWith('/') || require('node:path').isAbsolute(filePath)) {
       return {
         success: false,
         skillName,

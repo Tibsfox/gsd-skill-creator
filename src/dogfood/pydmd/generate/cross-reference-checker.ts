@@ -112,7 +112,7 @@ function resolvePath(sourceDoc: string, linkPath: string): string {
 
   // For documents in subdirectories (e.g., references/foo.md linking to ../scripts/bar.py),
   // resolve relative to the source document's directory
-  const sourceDir = sourceDoc.includes('/') ? sourceDoc.substring(0, sourceDoc.lastIndexOf('/')) : '';
+  const sourceDir = sourceDoc.includes('/') || sourceDoc.includes('\\') ? require('node:path').dirname(sourceDoc) : '';
 
   if (linkPath.startsWith('../')) {
     // Parent traversal from a subdirectory
