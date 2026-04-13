@@ -20,8 +20,19 @@ Usage:
 """
 
 import os
-import re
 import sys
+
+# Bootstrap: re-exec under project .venv if sentence_transformers is missing.
+# The rerank path requires it; system python3 on this host doesn't have it.
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+_VENV_PY = os.path.join(_PROJECT_ROOT, '.venv', 'bin', 'python')
+if os.path.realpath(sys.executable) != os.path.realpath(_VENV_PY) and os.path.exists(_VENV_PY):
+    try:
+        import sentence_transformers  # noqa: F401
+    except ImportError:
+        os.execv(_VENV_PY, [_VENV_PY, os.path.abspath(__file__)] + sys.argv[1:])
+
+import re
 import time
 import argparse
 from urllib.request import urlopen, Request
@@ -36,6 +47,14 @@ import discovery_engine as de  # noqa: E402
 
 ROW_RE = re.compile(
     r'^\| (\d+) \| (.*?) \| (.*?) \| (arXiv:[\w.]+v?\d*) \| (.*?) \| (DISCOVERED — .*?matched query "(.*?)".*?) \|\s*$'
+)
+
+# Citation-tracking rows look like:
+#   | 118 | Title... | paper | arXiv:2604.03228v1 | Citation tracking / Holt-Lunstad 2024
+#   | DISCOVERED — Related to Holt-Lunstad 2024, arXiv 2026-04-03 |
+CITATION_ROW_RE = re.compile(
+    r'^\| (\d+) \| (.*?) \| (.*?) \| (arXiv:[\w.]+v?\d*) \| (.*?) \| '
+    r'(DISCOVERED — Related to (.+?), arXiv [\d-]+) \|\s*$'
 )
 
 
@@ -57,6 +76,40 @@ def parse_arxiv_rows(queue_text):
             'category': category.strip(),
             'status': status.strip(),
             'query': query.strip(),
+        })
+    return out
+
+
+def parse_citation_rows(queue_text):
+    """Parse 'DISCOVERED — Related to X' citation-tracking rows.
+
+    Maps the source-paper tag (e.g., "Holt-Lunstad 2024") to its topic query
+    from discovery_engine.SCHOLAR_TRACKED so the same rerank path can run.
+    """
+    # SCHOLAR_TRACKED is (label, query, arxiv_tokens); we only need the query
+    # here because rerank runs against the full descriptive prompt.
+    scholar_map = {entry[0]: entry[1] for entry in de.SCHOLAR_TRACKED}
+    out = []
+    for i, line in enumerate(queue_text.splitlines()):
+        m = CITATION_ROW_RE.match(line)
+        if not m:
+            continue
+        num, title_col, vtt, arxiv_raw, category, status, paper_tag = m.groups()
+        arxiv_id = arxiv_raw.replace('arXiv:', '')
+        query = scholar_map.get(paper_tag.strip())
+        if query is None:
+            # Unknown source paper — skip rather than silently pass
+            continue
+        out.append({
+            'lineno': i,
+            'num': int(num),
+            'title_col': title_col.strip(),
+            'vtt': vtt.strip(),
+            'arxiv_id': arxiv_id,
+            'category': category.strip(),
+            'status': status.strip(),
+            'query': query,
+            'paper_tag': paper_tag.strip(),
         })
     return out
 
@@ -144,10 +197,14 @@ def classify(rows, use_rerank=True, cos_threshold=0.35, batch_size=100):
     return out
 
 
-def apply_rewrite(queue_text, classified):
+def apply_rewrite(queue_text, classified, citation_mode=False):
     """Flip DROP rows from DISCOVERED to OFF-TOPIC-V2 with original status inline."""
     lines = queue_text.splitlines(keepends=True)
     flipped = 0
+    if citation_mode:
+        status_re = re.compile(r'\| (DISCOVERED — Related to [^|]+?) \|\s*$')
+    else:
+        status_re = re.compile(r'\| (DISCOVERED — .*?matched query "[^"]+"[^|]*) \|\s*$')
     for c in classified:
         if c['verdict'] != 'DROP':
             continue
@@ -157,12 +214,7 @@ def apply_rewrite(queue_text, classified):
             f"OFF-TOPIC-V2 — backfill {c['reason']} "
             f"[was: {c['status']}]"
         )
-        # Replace the status column (6th column)
-        new_line = re.sub(
-            r'\| (DISCOVERED — .*?matched query "[^"]+"[^|]*) \|\s*$',
-            lambda m: f"| {new_status} |\n",
-            line,
-        )
+        new_line = status_re.sub(f"| {new_status} |\n", line)
         if new_line != line:
             lines[i] = new_line
             flipped += 1
@@ -175,15 +227,22 @@ def main():
     ap.add_argument('--no-rerank', action='store_true', help='token filter only')
     ap.add_argument('--cos-threshold', type=float, default=0.35)
     ap.add_argument('--limit', type=int, default=0, help='only process first N rows')
+    ap.add_argument('--mode', choices=['matched', 'citation'], default='matched',
+                    help='row bucket: matched-query arxiv rows or citation-tracking rows')
     args = ap.parse_args()
 
     with open(QUEUE_FILE, 'r', encoding='utf-8') as f:
         queue_text = f.read()
 
-    rows = parse_arxiv_rows(queue_text)
+    if args.mode == 'citation':
+        rows = parse_citation_rows(queue_text)
+        label = 'citation-tracking DISCOVERED'
+    else:
+        rows = parse_arxiv_rows(queue_text)
+        label = 'arXiv matched-query DISCOVERED'
     if args.limit:
         rows = rows[:args.limit]
-    print(f"Parsed {len(rows)} arXiv matched-query DISCOVERED rows")
+    print(f"Parsed {len(rows)} {label} rows")
     if not rows:
         return
 
@@ -199,18 +258,21 @@ def main():
     print(f"  DROP: {len(drop)}")
     print(f"  SKIP: {len(skip)} (fetch failures)")
 
-    # Preview first 5 of each
+    # Preview all KEEP and first 15 DROP
     print(f"\n--- KEEP preview ---")
-    for c in keep[:5]:
-        print(f"  #{c['num']} q='{c['query']}' cos={c['cosine']}")
+    for c in keep:
+        tag = f" [{c.get('paper_tag','')}]" if c.get('paper_tag') else ''
+        print(f"  #{c['num']}{tag} q='{c['query']}' cos={c['cosine']}")
         print(f"    {c['full_title'][:100]}")
     print(f"\n--- DROP preview ---")
-    for c in drop[:10]:
-        print(f"  #{c['num']} q='{c['query']}' ({c['reason']})")
+    for c in drop[:15]:
+        tag = f" [{c.get('paper_tag','')}]" if c.get('paper_tag') else ''
+        print(f"  #{c['num']}{tag} ({c['reason']})")
         print(f"    {c['full_title'][:100]}")
 
     if args.apply:
-        new_text, flipped = apply_rewrite(queue_text, classified)
+        new_text, flipped = apply_rewrite(queue_text, classified,
+                                          citation_mode=(args.mode == 'citation'))
         if flipped:
             with open(QUEUE_FILE, 'w', encoding='utf-8') as f:
                 f.write(new_text)
