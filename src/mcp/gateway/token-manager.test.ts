@@ -30,18 +30,22 @@ describe('token-manager', () => {
     it('expands ~ to home directory', () => {
       const result = resolveTokenPath('~/foo/bar');
       expect(result).not.toContain('~');
-      expect(result).toContain('foo/bar');
+      expect(result).toContain(require('node:path').join('foo', 'bar'));
     });
 
     it('resolves absolute paths unchanged', () => {
-      const result = resolveTokenPath('/tmp/gateway-token');
-      expect(result).toBe('/tmp/gateway-token');
+      const { join: pjoin, isAbsolute } = require('node:path');
+      const { tmpdir } = require('node:os');
+      const absPath = pjoin(tmpdir(), 'gateway-token');
+      const result = resolveTokenPath(absPath);
+      expect(result).toBe(absPath);
+      expect(isAbsolute(result)).toBe(true);
     });
 
     it('resolves relative paths against cwd', () => {
       const result = resolveTokenPath('token.json');
       expect(result).toContain('token.json');
-      expect(result.startsWith('/')).toBe(true);
+      expect(require('node:path').isAbsolute(result)).toBe(true);
     });
   });
 

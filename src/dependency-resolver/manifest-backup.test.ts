@@ -73,7 +73,7 @@ describe('createBackup', () => {
 
   it('returns absolute path for backupDir', async () => {
     const record = await createBackup(manifestPath, null);
-    expect(record.backupDir.startsWith('/')).toBe(true);
+    expect(require('node:path').isAbsolute(record.backupDir)).toBe(true);
   });
 
   it('throws when manifest does not exist', async () => {
