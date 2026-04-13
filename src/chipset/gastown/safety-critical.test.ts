@@ -401,7 +401,7 @@ describe('Safety-Critical Tests', () => {
   // SC-15: State directory permissions
   // State files writable only by GSD process (no world-write)
   // -------------------------------------------------------------------------
-  it('SC-15: state files are not world-writable', async () => {
+  it.skipIf(process.platform === 'win32')('SC-15: state files are not world-writable', async () => {
     // Create state files and verify permissions
     const agent = await manager.createAgent('polecat', 'test-rig');
     const agentPath = join(stateDir, 'agents', `${agent.id}.json`);

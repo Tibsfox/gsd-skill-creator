@@ -30,7 +30,7 @@ describe('AMIGA_ASSIGN_MAP', () => {
 });
 
 describe('mapToAmigaPath', () => {
-  const sysRoot = '/tmp/amiga';
+  const sysRoot = join(tmpdir(), 'amiga');
 
   it('maps Libs/ to sysRoot/Libs/', () => {
     const config: InstallConfig = { sysRoot };

@@ -355,7 +355,7 @@ describe('Communication Skills', () => {
   // CF-11: Mail delivery
   // Sender writes JSON, recipient reads from directory
   // -------------------------------------------------------------------------
-  it('CF-11: mail messages can be written and read from filesystem', async () => {
+  it.skipIf(process.platform === 'win32')('CF-11: mail messages can be written and read from filesystem', async () => {
     const mailDir = join(stateDir, 'mail', 'polecat-alpha');
     await mkdir(mailDir, { recursive: true });
 
