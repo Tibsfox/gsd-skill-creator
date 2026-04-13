@@ -185,7 +185,7 @@ export async function build(options: BuildOptions): Promise<BuildResult> {
 
     // Write output
     const outputPath = `${options.outputDir}/${page.outputPath}`;
-    const outputDir = outputPath.substring(0, outputPath.lastIndexOf('/'));
+    const outputDir = require('node:path').dirname(outputPath);
     await ensureDir(outputDir);
     await writeFile(outputPath, html);
 
@@ -214,7 +214,7 @@ export async function build(options: BuildOptions): Promise<BuildResult> {
       const mirror = generateMarkdownMirror(publishedPages);
       for (const entry of mirror) {
         const mirrorPath = `${options.outputDir}/${entry.path}`;
-        const mirrorDir = mirrorPath.substring(0, mirrorPath.lastIndexOf('/'));
+        const mirrorDir = require('node:path').dirname(mirrorPath);
         await ensureDir(mirrorDir);
         await writeFile(mirrorPath, entry.content);
       }

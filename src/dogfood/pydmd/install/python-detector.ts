@@ -388,7 +388,7 @@ export function detectPythonProject(
   if (projectName) {
     result.entryPoints = [projectName];
   } else if (result.directories.source) {
-    const name = result.directories.source.replace(/\/$/, '').split('/').pop() ?? '';
+    const name = require('node:path').basename(result.directories.source.replace(/\/$/, '')) || '';
     if (name) result.entryPoints = [name];
   }
 
