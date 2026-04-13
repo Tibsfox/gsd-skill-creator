@@ -66,10 +66,8 @@ RSS_ROW_RE = re.compile(
 )
 
 
-def _label_to_query(label):
-    """Strip parenthetical qualifiers from a feed label so token-gate
-    doesn't match against literal '(all)'. 'Astrophysics (all)' → 'Astrophysics'."""
-    return re.sub(r'\s*\([^)]*\)\s*', ' ', label).strip()
+# _label_to_query lives in discovery_engine now; re-export for local use.
+_label_to_query = de._label_to_query
 
 
 def parse_arxiv_rows(queue_text):
