@@ -864,6 +864,9 @@ def run_discovery(sources=None, dry_run=False):
     print(f"Research Discovery Engine — {datetime.now().strftime('%Y-%m-%d %H:%M:%S %Z')}")
     print(f"Sources: {', '.join(all_sources)}")
     print(f"Dry run: {dry_run}")
+    print(f"DISCOVERY_V2: {'ON' if DISCOVERY_V2 else 'off (legacy behavior)'}")
+    if DISCOVERY_V2:
+        print(f"  min_cosine: {SUPPLEMENTAL_MIN_COSINE}")
 
     all_discoveries = []
 
