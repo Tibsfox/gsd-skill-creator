@@ -154,15 +154,18 @@ describe('parseRepoUrl', () => {
 
 describe('resolveInstallPaths', () => {
   it('resolves paths relative to project root', () => {
-    const paths = resolveInstallPaths('my-repo', '/home/user/projects');
-    expect(paths.repoPath).toBe('/home/user/projects/projects/my-repo');
-    expect(paths.worktreePath).toBe('/home/user/projects/worktrees/my-repo');
-    expect(paths.configDir).toBe('/home/user/projects/.sc-git');
+    const { join: pjoin } = require('node:path');
+    const root = pjoin('/', 'home', 'user', 'projects');
+    const paths = resolveInstallPaths('my-repo', root);
+    expect(paths.repoPath).toBe(pjoin(root, 'projects', 'my-repo'));
+    expect(paths.worktreePath).toBe(pjoin(root, 'worktrees', 'my-repo'));
+    expect(paths.configDir).toBe(pjoin(root, '.sc-git'));
   });
 
   it('uses process.cwd() when no project root given', () => {
+    const { join: pjoin } = require('node:path');
     const paths = resolveInstallPaths('my-repo');
-    expect(paths.repoPath).toContain('projects/my-repo');
+    expect(paths.repoPath).toContain(pjoin('projects', 'my-repo'));
     expect(paths.configDir).toContain('.sc-git');
   });
 });

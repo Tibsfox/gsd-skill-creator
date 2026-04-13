@@ -121,7 +121,7 @@ describe('MessageWriter', () => {
     expect(filePath).toBeTruthy();
     expect(typeof filePath).toBe('string');
     // Should be an absolute path
-    expect(filePath.startsWith('/')).toBe(true);
+    expect(require('node:path').isAbsolute(filePath)).toBe(true);
     // Should be a JSON file
     expect(filePath).toMatch(/\.json$/);
     // File should exist and contain valid JSON

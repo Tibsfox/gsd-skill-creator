@@ -122,7 +122,7 @@ describe('Bus Coexistence: .msg and .bundle/ in same directories', () => {
     const msgPath = await sendMessage(config, msg);
 
     // Place a bundle dir alongside
-    const stem = msgPath.split('/').pop()!.replace(/\.msg$/, '');
+    const stem = require('node:path').basename(msgPath).replace(/\.msg$/, '');
     await placeBundleDir(priDir, stem);
 
     const filenames = await listMessages(config, 1);
@@ -138,7 +138,7 @@ describe('Bus Coexistence: .msg and .bundle/ in same directories', () => {
     const msgPath = await sendMessage(config, msg);
 
     // Place bundle companion
-    const stem = msgPath.split('/').pop()!.replace(/\.msg$/, '');
+    const stem = require('node:path').basename(msgPath).replace(/\.msg$/, '');
     const bundlePath = await placeBundleDir(priDir, stem);
 
     // Acknowledge only the .msg via den/bus
@@ -146,7 +146,7 @@ describe('Bus Coexistence: .msg and .bundle/ in same directories', () => {
 
     // .msg should be in acknowledged/
     const ackFiles = await readdir(join(config.busDir, 'acknowledged'));
-    const msgFilename = msgPath.split('/').pop()!;
+    const msgFilename = require('node:path').basename(msgPath);
     expect(ackFiles).toContain(msgFilename);
 
     // .bundle/ should REMAIN in priority dir (den/bus doesn't know about bundles)
@@ -162,7 +162,7 @@ describe('Bus Coexistence: .msg and .bundle/ in same directories', () => {
     const msgPath = await sendMessage(config, msg);
 
     // Place bundle companion
-    const stem = msgPath.split('/').pop()!.replace(/\.msg$/, '');
+    const stem = require('node:path').basename(msgPath).replace(/\.msg$/, '');
     await placeBundleDir(priDir, stem);
 
     let handlerCalled = 0;
@@ -192,7 +192,7 @@ describe('Bus Coexistence: .msg and .bundle/ in same directories', () => {
 
     // Message should be written successfully
     const priFiles = await readdir(priDir);
-    const msgFilename = msgPath.split('/').pop()!;
+    const msgFilename = require('node:path').basename(msgPath);
     expect(priFiles).toContain(msgFilename);
     expect(priFiles.filter((f) => f.endsWith('.msg')).length).toBe(1);
     expect(priFiles.filter((f) => f.endsWith('.bundle')).length).toBe(1);
@@ -233,7 +233,7 @@ describe('Bus Coexistence: .msg and .bundle/ in same directories', () => {
     const msgPath = await sendMessage(config, msg);
 
     // Place bundle companion
-    const stem = msgPath.split('/').pop()!.replace(/\.msg$/, '');
+    const stem = require('node:path').basename(msgPath).replace(/\.msg$/, '');
     const bundlePath = await placeBundleDir(priDir, stem);
 
     // Dead-letter the .msg via den/bus
@@ -241,7 +241,7 @@ describe('Bus Coexistence: .msg and .bundle/ in same directories', () => {
 
     // .msg and .meta should be in dead-letter/
     const dlFiles = await readdir(join(config.busDir, 'dead-letter'));
-    const msgFilename = msgPath.split('/').pop()!;
+    const msgFilename = require('node:path').basename(msgPath);
     expect(dlFiles).toContain(msgFilename);
     expect(dlFiles).toContain(`${msgFilename}.meta`);
 

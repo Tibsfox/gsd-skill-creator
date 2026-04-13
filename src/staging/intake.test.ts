@@ -102,8 +102,8 @@ describe('stageDocument', () => {
     });
 
     // Both paths are absolute
-    expect(result.documentPath.startsWith('/')).toBe(true);
-    expect(result.metadataPath.startsWith('/')).toBe(true);
+    expect(require('node:path').isAbsolute(result.documentPath)).toBe(true);
+    expect(require('node:path').isAbsolute(result.metadataPath)).toBe(true);
 
     // documentPath ends with the filename
     expect(result.documentPath.endsWith(filename)).toBe(true);

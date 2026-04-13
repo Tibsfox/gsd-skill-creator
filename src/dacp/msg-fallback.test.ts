@@ -238,7 +238,7 @@ describe('DACP .msg Fallback', () => {
       const bundlePath = await createBundle(makeOptions(tmpDir));
       const msgPath = await generateMsgFallback(bundlePath);
 
-      const filename = msgPath.split('/').pop()!;
+      const filename = require('node:path').basename(msgPath);
       expect(filename).toMatch(/^\d{8}-\d{6}-[A-Z]+-[a-z]+-[a-z]+\.msg$/);
     });
 

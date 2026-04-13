@@ -111,7 +111,7 @@ describe('createHelperRouter', () => {
     expect(res.statusCode).toBe(200);
     const parsed = JSON.parse(res.body);
     expect(parsed.ok).toBe(true);
-    expect(parsed.path).toContain('inbox/pending/test-message.json');
+    expect(parsed.path).toContain(require('node:path').join('inbox', 'pending', 'test-message.json'));
 
     // Verify file actually exists on disk
     const filePath = join(tmpDir, '.planning/console/inbox/pending/test-message.json');

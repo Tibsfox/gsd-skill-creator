@@ -48,8 +48,11 @@ describe('stripVolumePrefix', () => {
 
 describe('sanitizePath', () => {
   it('resolves normal path within target directory', () => {
-    const result = sanitizePath('Libs/mylib.library', '/tmp/target');
-    expect(result).toBe('/tmp/target/Libs/mylib.library');
+    const { join: pjoin } = require('node:path');
+    const { tmpdir } = require('node:os');
+    const target = pjoin(tmpdir(), 'target');
+    const result = sanitizePath('Libs/mylib.library', target);
+    expect(result).toBe(pjoin(target, 'Libs', 'mylib.library'));
   });
 
   it('throws on path traversal with ../', () => {
@@ -65,13 +68,19 @@ describe('sanitizePath', () => {
   });
 
   it('resolves clean path correctly', () => {
-    const result = sanitizePath('normal/file.txt', '/tmp/target');
-    expect(result).toBe('/tmp/target/normal/file.txt');
+    const { join: pjoin } = require('node:path');
+    const { tmpdir } = require('node:os');
+    const target = pjoin(tmpdir(), 'target');
+    const result = sanitizePath('normal/file.txt', target);
+    expect(result).toBe(pjoin(target, 'normal', 'file.txt'));
   });
 
   it('normalizes dot-slash prefix', () => {
-    const result = sanitizePath('./relative/file.txt', '/tmp/target');
-    expect(result).toBe('/tmp/target/relative/file.txt');
+    const { join: pjoin } = require('node:path');
+    const { tmpdir } = require('node:os');
+    const target = pjoin(tmpdir(), 'target');
+    const result = sanitizePath('./relative/file.txt', target);
+    expect(result).toBe(pjoin(target, 'relative', 'file.txt'));
   });
 
   it('does not throw when path resolves exactly to targetDir', () => {
