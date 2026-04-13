@@ -57,6 +57,20 @@ CITATION_ROW_RE = re.compile(
     r'(DISCOVERED — Related to (.+?), arXiv [\d-]+) \|\s*$'
 )
 
+# arXiv RSS rows look like:
+#   | 346 | Title... | paper | arXiv:2604.04950 | astro-ph / Astrophysics (all)
+#   | DISCOVERED — arXiv RSS new submission, category astro-ph (keyword: lunar) |
+RSS_ROW_RE = re.compile(
+    r'^\| (\d+) \| (.*?) \| (.*?) \| (arXiv:[\w.]+v?\d*) \| (.*?) \| '
+    r'(DISCOVERED — arXiv RSS new submission, category (\S+) \(keyword: ([^)]+)\)) \|\s*$'
+)
+
+
+def _label_to_query(label):
+    """Strip parenthetical qualifiers from a feed label so token-gate
+    doesn't match against literal '(all)'. 'Astrophysics (all)' → 'Astrophysics'."""
+    return re.sub(r'\s*\([^)]*\)\s*', ' ', label).strip()
+
 
 def parse_arxiv_rows(queue_text):
     """Return list of (lineno, num, title_col, vtt, arxiv_id, category, status, query)."""
@@ -114,25 +128,71 @@ def parse_citation_rows(queue_text):
     return out
 
 
+def parse_rss_rows(queue_text):
+    """Parse 'DISCOVERED — arXiv RSS new submission' rows.
+
+    Attaches the feed's relevance_keywords (OR-gate) and builds a rich
+    rerank query from label + keywords. Unlike the matched/citation modes,
+    RSS uses v1-style OR semantics for the token gate because RSS feeds are
+    broad categories, not topical queries — strict AND-gate on the label
+    would wipe nearly everything. Rerank still tightens.
+    """
+    feed_map = {cat: (_label_to_query(label), kws) for cat, label, kws in de.ARXIV_RSS_FEEDS}
+    out = []
+    for i, line in enumerate(queue_text.splitlines()):
+        m = RSS_ROW_RE.match(line)
+        if not m:
+            continue
+        num, title_col, vtt, arxiv_raw, category, status, cat_code, kw = m.groups()
+        arxiv_id = arxiv_raw.replace('arXiv:', '')
+        entry = feed_map.get(cat_code.strip())
+        if entry is None:
+            continue
+        clean_label, kws = entry
+        rich_query = (clean_label + ' ' + ' '.join(kws)).strip()
+        out.append({
+            'lineno': i,
+            'num': int(num),
+            'title_col': title_col.strip(),
+            'vtt': vtt.strip(),
+            'arxiv_id': arxiv_id,
+            'category': category.strip(),
+            'status': status.strip(),
+            'query': rich_query,
+            'rss_keywords': kws,
+            'feed_category': cat_code.strip(),
+            'v1_keyword': kw.strip(),
+        })
+    return out
+
+
+def _strip_version(arxiv_id):
+    """Strip trailing vN version suffix from an arXiv id."""
+    return re.sub(r'v\d+$', '', arxiv_id)
+
+
 def fetch_arxiv_batch(ids, timeout=30):
     """Fetch canonical title+abstract for a batch of arXiv ids via id_list API.
-    Returns dict keyed by the bare id (no 'v1' suffix stripping — keys as-is)."""
+    Returns dict keyed by the bare id (version suffix stripped), with an
+    alias to the versioned id so callers can look up either form."""
     url = f"http://export.arxiv.org/api/query?id_list={','.join(ids)}&max_results={len(ids)}"
     req = Request(url, headers={'User-Agent': 'GSD-ResearchBackfill/1.0'})
     with urlopen(req, timeout=timeout) as resp:
         xml = resp.read().decode('utf-8')
     entries = {}
     for entry in re.findall(r'<entry>(.*?)</entry>', xml, re.DOTALL):
-        id_m = re.search(r'<id>http://arxiv.org/abs/([^<]+)</id>', entry)
+        id_m = re.search(r'<id>https?://arxiv.org/abs/([^<]+)</id>', entry)
         t_m = re.search(r'<title>(.*?)</title>', entry, re.DOTALL)
         a_m = re.search(r'<summary>(.*?)</summary>', entry, re.DOTALL)
         if not (id_m and t_m):
             continue
         aid = id_m.group(1).strip()
-        entries[aid] = {
+        payload = {
             'title': re.sub(r'\s+', ' ', t_m.group(1).strip()),
             'abstract': re.sub(r'\s+', ' ', a_m.group(1).strip()) if a_m else '',
         }
+        entries[aid] = payload
+        entries[_strip_version(aid)] = payload
     return entries
 
 
@@ -171,13 +231,22 @@ def classify(rows, use_rerank=True, cos_threshold=0.35, batch_size=100):
         category = category_raw.split(' / ', 1)[0] if ' / ' in category_raw else category_raw
         query = r['query']
 
-        # Gate 1: all tokens
-        tok_ok = de._relevance_check_all_tokens(title, abstract, category, query)
-        if not tok_ok:
-            r.update(verdict='DROP', reason='tokens missing', cosine=None,
-                     full_title=title, abstract=abstract)
-            out.append(r)
-            continue
+        # Gate 1: token check — strict AND for matched/citation modes,
+        # permissive OR-of-many for RSS (see parse_rss_rows docstring).
+        if 'rss_keywords' in r:
+            text_low = (title + ' ' + abstract + ' ' + category).lower()
+            if not any(k.lower() in text_low for k in r['rss_keywords']):
+                r.update(verdict='DROP', reason='no rss keyword match', cosine=None,
+                         full_title=title, abstract=abstract)
+                out.append(r)
+                continue
+        else:
+            tok_ok = de._relevance_check_all_tokens(title, abstract, category, query)
+            if not tok_ok:
+                r.update(verdict='DROP', reason='tokens missing', cosine=None,
+                         full_title=title, abstract=abstract)
+                out.append(r)
+                continue
 
         # Gate 2: cosine rerank
         if model is not None:
@@ -197,14 +266,18 @@ def classify(rows, use_rerank=True, cos_threshold=0.35, batch_size=100):
     return out
 
 
-def apply_rewrite(queue_text, classified, citation_mode=False):
+_STATUS_RE_BY_MODE = {
+    'matched': re.compile(r'\| (DISCOVERED — .*?matched query "[^"]+"[^|]*) \|\s*$'),
+    'citation': re.compile(r'\| (DISCOVERED — Related to [^|]+?) \|\s*$'),
+    'rss': re.compile(r'\| (DISCOVERED — arXiv RSS new submission, category \S+ \(keyword: [^)]+\)) \|\s*$'),
+}
+
+
+def apply_rewrite(queue_text, classified, mode='matched'):
     """Flip DROP rows from DISCOVERED to OFF-TOPIC-V2 with original status inline."""
     lines = queue_text.splitlines(keepends=True)
     flipped = 0
-    if citation_mode:
-        status_re = re.compile(r'\| (DISCOVERED — Related to [^|]+?) \|\s*$')
-    else:
-        status_re = re.compile(r'\| (DISCOVERED — .*?matched query "[^"]+"[^|]*) \|\s*$')
+    status_re = _STATUS_RE_BY_MODE[mode]
     for c in classified:
         if c['verdict'] != 'DROP':
             continue
@@ -227,8 +300,8 @@ def main():
     ap.add_argument('--no-rerank', action='store_true', help='token filter only')
     ap.add_argument('--cos-threshold', type=float, default=0.35)
     ap.add_argument('--limit', type=int, default=0, help='only process first N rows')
-    ap.add_argument('--mode', choices=['matched', 'citation'], default='matched',
-                    help='row bucket: matched-query arxiv rows or citation-tracking rows')
+    ap.add_argument('--mode', choices=['matched', 'citation', 'rss'], default='matched',
+                    help='row bucket: matched-query arxiv, citation-tracking, or arXiv RSS rows')
     args = ap.parse_args()
 
     with open(QUEUE_FILE, 'r', encoding='utf-8') as f:
@@ -237,6 +310,9 @@ def main():
     if args.mode == 'citation':
         rows = parse_citation_rows(queue_text)
         label = 'citation-tracking DISCOVERED'
+    elif args.mode == 'rss':
+        rows = parse_rss_rows(queue_text)
+        label = 'arXiv RSS DISCOVERED'
     else:
         rows = parse_arxiv_rows(queue_text)
         label = 'arXiv matched-query DISCOVERED'
@@ -258,21 +334,25 @@ def main():
     print(f"  DROP: {len(drop)}")
     print(f"  SKIP: {len(skip)} (fetch failures)")
 
+    def _row_tag(c):
+        if c.get('paper_tag'):
+            return f" [{c['paper_tag']}]"
+        if c.get('feed_category'):
+            return f" [{c['feed_category']}]"
+        return ''
+
     # Preview all KEEP and first 15 DROP
     print(f"\n--- KEEP preview ---")
     for c in keep:
-        tag = f" [{c.get('paper_tag','')}]" if c.get('paper_tag') else ''
-        print(f"  #{c['num']}{tag} q='{c['query']}' cos={c['cosine']}")
+        print(f"  #{c['num']}{_row_tag(c)} q='{c['query']}' cos={c['cosine']}")
         print(f"    {c['full_title'][:100]}")
     print(f"\n--- DROP preview ---")
     for c in drop[:15]:
-        tag = f" [{c.get('paper_tag','')}]" if c.get('paper_tag') else ''
-        print(f"  #{c['num']}{tag} ({c['reason']})")
+        print(f"  #{c['num']}{_row_tag(c)} ({c['reason']})")
         print(f"    {c['full_title'][:100]}")
 
     if args.apply:
-        new_text, flipped = apply_rewrite(queue_text, classified,
-                                          citation_mode=(args.mode == 'citation'))
+        new_text, flipped = apply_rewrite(queue_text, classified, mode=args.mode)
         if flipped:
             with open(QUEUE_FILE, 'w', encoding='utf-8') as f:
                 f.write(new_text)
