@@ -313,18 +313,18 @@
     ],
     "hookScripts": [
       {
-        "source": "hooks/session-state.sh",
-        "target": ".claude/hooks/session-state.sh",
+        "source": "hooks/session-state.cjs",
+        "target": ".claude/hooks/session-state.cjs",
         "description": "SessionStart hook: inject project state"
       },
       {
-        "source": "hooks/validate-commit.sh",
-        "target": ".claude/hooks/validate-commit.sh",
+        "source": "hooks/validate-commit.cjs",
+        "target": ".claude/hooks/validate-commit.cjs",
         "description": "PreToolUse hook: enforce Conventional Commits"
       },
       {
-        "source": "hooks/phase-boundary-check.sh",
-        "target": ".claude/hooks/phase-boundary-check.sh",
+        "source": "hooks/phase-boundary-check.cjs",
+        "target": ".claude/hooks/phase-boundary-check.cjs",
         "description": "PostToolUse hook: detect phase boundary writes"
       }
     ],

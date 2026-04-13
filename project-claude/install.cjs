@@ -150,7 +150,13 @@ function installSkillDir(entry) {
   }
 }
 
-// --- Hook script install (with chmod +x) ---
+// --- Hook script install (with chmod +x on Unix) ---
+function chmodSafe(filePath, mode) {
+  if (process.platform !== 'win32') {
+    try { fs.chmodSync(filePath, mode); } catch { /* ignore on platforms without chmod */ }
+  }
+}
+
 function installHookScript(entry) {
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
@@ -167,21 +173,21 @@ function installHookScript(entry) {
     if (!dryRun) {
       ensureDir(targetPath);
       fs.writeFileSync(targetPath, sourceContent);
-      fs.chmodSync(targetPath, 0o755);
+      chmodSafe(targetPath, 0o755);
     }
     log(`  + installed: ${entry.target} (executable)`);
     stats.installed++;
   } else if (sha256(sourceContent) === sha256(targetContent)) {
     // Ensure executable even if content matches
     if (!dryRun) {
-      try { fs.chmodSync(targetPath, 0o755); } catch { /* ignore */ }
+      try { chmodSafe(targetPath, 0o755); } catch { /* ignore */ }
     }
     if (!quiet) log(`  = current:   ${entry.target}`);
     stats.current++;
   } else if (force) {
     if (!dryRun) {
       fs.writeFileSync(targetPath, sourceContent);
-      fs.chmodSync(targetPath, 0o755);
+      chmodSafe(targetPath, 0o755);
     }
     log(`  ↻ updated:   ${entry.target} (executable)`);
     stats.updated++;
@@ -548,7 +554,7 @@ function installGitHook() {
 
     if (!dryRun) {
       fs.writeFileSync(targetPath, sourceContent);
-      fs.chmodSync(targetPath, 0o755);
+      chmodSafe(targetPath, 0o755);
     }
     log('  ↻ updated:   .git/hooks/post-commit');
     stats.updated++;
@@ -556,7 +562,7 @@ function installGitHook() {
     // Target does not exist — fresh install
     if (!dryRun) {
       fs.writeFileSync(targetPath, sourceContent);
-      fs.chmodSync(targetPath, 0o755);
+      chmodSafe(targetPath, 0o755);
     }
     log('  + installed: .git/hooks/post-commit');
     stats.installed++;
@@ -591,9 +597,9 @@ function validateInstallation() {
     { name: 'session-awareness skill', path: '.claude/skills/session-awareness/SKILL.md' },
     { name: 'security-hygiene skill', path: '.claude/skills/security-hygiene/SKILL.md' },
     // Hook scripts
-    { name: 'session-state hook', path: '.claude/hooks/session-state.sh' },
-    { name: 'validate-commit hook', path: '.claude/hooks/validate-commit.sh' },
-    { name: 'phase-boundary-check hook', path: '.claude/hooks/phase-boundary-check.sh' },
+    { name: 'session-state hook', path: '.claude/hooks/session-state.cjs' },
+    { name: 'validate-commit hook', path: '.claude/hooks/validate-commit.cjs' },
+    { name: 'phase-boundary-check hook', path: '.claude/hooks/phase-boundary-check.cjs' },
     // Dashboard
     { name: 'gsd-dashboard', path: '.claude/commands/gsd-dashboard.md' },
     // Config
@@ -647,20 +653,30 @@ function validateInstallation() {
     missing++;
   }
 
-  // Check hook script permissions
+  // Check hook scripts exist (executable check only on Unix)
   const hookScripts = [
-    '.claude/hooks/session-state.sh',
-    '.claude/hooks/validate-commit.sh',
-    '.claude/hooks/phase-boundary-check.sh',
+    '.claude/hooks/session-state.cjs',
+    '.claude/hooks/validate-commit.cjs',
+    '.claude/hooks/phase-boundary-check.cjs',
   ];
   for (const hookScript of hookScripts) {
     const fullPath = path.join(projectRoot, hookScript);
-    try {
-      fs.accessSync(fullPath, fs.constants.X_OK);
-      log(`  ✓ ${hookScript} (executable)`);
-      ok++;
-    } catch {
-      log(`  ✗ ${hookScript} — not executable`);
+    if (fs.existsSync(fullPath)) {
+      if (process.platform === 'win32') {
+        log(`  ✓ ${hookScript}`);
+        ok++;
+      } else {
+        try {
+          fs.accessSync(fullPath, fs.constants.X_OK);
+          log(`  ✓ ${hookScript} (executable)`);
+          ok++;
+        } catch {
+          log(`  ✗ ${hookScript} — not executable`);
+          missing++;
+        }
+      }
+    } else {
+      log(`  ✗ ${hookScript} — missing`);
       missing++;
     }
   }
@@ -690,9 +706,9 @@ function uninstallIntegration() {
       '.claude/agents/gsd-executor.md',
       '.claude/agents/gsd-verifier.md',
       '.claude/agents/gsd-planner.md',
-      '.claude/hooks/session-state.sh',
-      '.claude/hooks/validate-commit.sh',
-      '.claude/hooks/phase-boundary-check.sh',
+      '.claude/hooks/session-state.cjs',
+      '.claude/hooks/validate-commit.cjs',
+      '.claude/hooks/phase-boundary-check.cjs',
       '.planning/skill-creator.json',
     ],
   };
