@@ -118,7 +118,7 @@ const validFullConfig = {
 // Test suite
 // ============================================================================
 
-describe('validate-config.sh', () => {
+describe.skipIf(process.platform === 'win32')('validate-config.sh', () => {
   let tmpDir: string;
 
   beforeEach(() => {
