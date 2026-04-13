@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { join, isAbsolute } from 'node:path';
 import type { TeamMember, TeamTask } from '../types/team.js';
 
 // ============================================================================
@@ -76,8 +77,7 @@ describe('validateMemberAgents', () => {
   });
 
   it('returns found when agent file exists in first search directory', () => {
-    const { join: pjoin } = require('node:path');
-    const dirs = [pjoin('/', 'project', '.claude', 'agents')];
+    const dirs = [join('/', 'project', '.claude', 'agents')];
     mockExistsSync.mockImplementation((p) =>
       String(p).replace(/\\/g, '/') === '/project/.claude/agents/coder.md'
     );
@@ -88,12 +88,11 @@ describe('validateMemberAgents', () => {
     expect(results).toHaveLength(1);
     expect(results[0].agentId).toBe('coder');
     expect(results[0].status).toBe('found');
-    expect(results[0].path).toBe(require('node:path').join('/', 'project', '.claude', 'agents', 'coder.md'));
+    expect(results[0].path).toBe(join('/', 'project', '.claude', 'agents', 'coder.md'));
   });
 
   it('returns found when agent file exists in second search directory', () => {
-    const { join: pjoin } = require('node:path');
-    const dirs = [pjoin('/', 'project', '.claude', 'agents'), pjoin('/', 'home', 'user', '.claude', 'agents')];
+    const dirs = [join('/', 'project', '.claude', 'agents'), join('/', 'home', 'user', '.claude', 'agents')];
     mockExistsSync.mockImplementation((p) =>
       String(p).replace(/\\/g, '/') === '/home/user/.claude/agents/reviewer.md'
     );
@@ -103,12 +102,11 @@ describe('validateMemberAgents', () => {
 
     expect(results).toHaveLength(1);
     expect(results[0].status).toBe('found');
-    expect(results[0].path).toBe(require('node:path').join('/', 'home', 'user', '.claude', 'agents', 'reviewer.md'));
+    expect(results[0].path).toBe(join('/', 'home', 'user', '.claude', 'agents', 'reviewer.md'));
   });
 
   it('returns missing when agent file not found in any directory', () => {
-    const { join: pjoin } = require('node:path');
-    const dirs = [pjoin('/', 'project', '.claude', 'agents'), pjoin('/', 'home', 'user', '.claude', 'agents')];
+    const dirs = [join('/', 'project', '.claude', 'agents'), join('/', 'home', 'user', '.claude', 'agents')];
     mockExistsSync.mockReturnValue(false);
     mockReaddirSync.mockReturnValue([]);
 
@@ -117,14 +115,13 @@ describe('validateMemberAgents', () => {
     expect(results).toHaveLength(1);
     expect(results[0].status).toBe('missing');
     expect(results[0].searchedPaths).toEqual([
-      pjoin('/', 'project', '.claude', 'agents', 'ghost.md'),
-      pjoin('/', 'home', 'user', '.claude', 'agents', 'ghost.md'),
+      join('/', 'project', '.claude', 'agents', 'ghost.md'),
+      join('/', 'home', 'user', '.claude', 'agents', 'ghost.md'),
     ]);
   });
 
   it('includes all searched paths even for found agents', () => {
-    const { join: pjoin } = require('node:path');
-    const dirs = [pjoin('/', 'dir-a'), pjoin('/', 'dir-b')];
+    const dirs = [join('/', 'dir-a'), join('/', 'dir-b')];
     // Found in second dir, so first dir was also searched
     mockExistsSync.mockImplementation((p) =>
       String(p).replace(/\\/g, '/') === '/dir-b/agent.md'
@@ -135,14 +132,13 @@ describe('validateMemberAgents', () => {
 
     expect(results[0].status).toBe('found');
     expect(results[0].searchedPaths).toEqual([
-      pjoin('/', 'dir-a', 'agent.md'),
-      pjoin('/', 'dir-b', 'agent.md'),
+      join('/', 'dir-a', 'agent.md'),
+      join('/', 'dir-b', 'agent.md'),
     ]);
   });
 
   it('provides suggestions with fuzzy-matched agent names when missing', () => {
-    const { join: pjoin } = require('node:path');
-    const dirs = [pjoin('/', 'project', '.claude', 'agents')];
+    const dirs = [join('/', 'project', '.claude', 'agents')];
     mockExistsSync.mockReturnValue(false);
     // Directory contains similar agent names
     mockReaddirSync.mockReturnValue([
@@ -159,8 +155,7 @@ describe('validateMemberAgents', () => {
   });
 
   it('returns correct results for multiple members (mix of found and missing)', () => {
-    const { join: pjoin } = require('node:path');
-    const dirs = [pjoin('/', 'project', '.claude', 'agents')];
+    const dirs = [join('/', 'project', '.claude', 'agents')];
     mockExistsSync.mockImplementation((p) =>
       String(p).replace(/\\/g, '/') === '/project/.claude/agents/alpha.md'
     );
@@ -184,8 +179,8 @@ describe('validateMemberAgents', () => {
     const results = validateMemberAgents([makeMember('test')]);
 
     expect(results[0].searchedPaths).toHaveLength(2);
-    expect(results[0].searchedPaths[0]).toContain(require('node:path').join('.claude', 'agents'));
-    expect(results[0].searchedPaths[1]).toContain(require('node:path').join('.claude', 'agents'));
+    expect(results[0].searchedPaths[0]).toContain(join('.claude', 'agents'));
+    expect(results[0].searchedPaths[1]).toContain(join('.claude', 'agents'));
   });
 });
 
