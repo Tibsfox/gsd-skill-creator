@@ -148,12 +148,12 @@ export async function verifyDeployment(
  * patterns.  Supports simple wildcards: `*.ext` and exact names.
  */
 function matchesExclude(file: string, patterns: string[]): boolean {
-  const basename = file.split('/').pop() ?? file;
+  const baseName = require('node:path').basename(file);
   for (const pattern of patterns) {
     if (pattern.startsWith('*.')) {
       const ext = pattern.slice(1); // e.g. ".map"
-      if (basename.endsWith(ext)) return true;
-    } else if (basename === pattern) {
+      if (baseName.endsWith(ext)) return true;
+    } else if (baseName === pattern) {
       return true;
     }
   }

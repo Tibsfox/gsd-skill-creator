@@ -14,7 +14,7 @@
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { mkdtempSync, readdirSync } from 'node:fs';
-import { join, resolve, relative, normalize } from 'node:path';
+import { join, resolve, relative, normalize, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 import type { ExtractionResult } from './types.js';
 
@@ -68,7 +68,7 @@ export function sanitizePath(rawPath: string, targetDir: string): string {
   const resolved = resolve(targetDir, normalized);
   const resolvedTarget = resolve(targetDir);
 
-  if (!resolved.startsWith(resolvedTarget)) {
+  if (!resolved.startsWith(resolvedTarget + sep) && resolved !== resolvedTarget) {
     throw new Error(
       `Path traversal detected: "${rawPath}" resolves to "${resolved}" which is outside "${resolvedTarget}"`,
     );
