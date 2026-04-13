@@ -24,12 +24,138 @@ import os
 import sys
 import json
 import re
+import gzip
+import hashlib
 import subprocess
 import argparse
+from collections import Counter
 from datetime import datetime, timezone, timedelta
 from urllib.request import urlopen, Request
 from urllib.error import URLError
 from urllib.parse import quote_plus
+
+# v2 reranker is lazy-loaded at first use
+_RERANKER = None
+_RERANKER_FAILED = False
+
+
+def _lazy_reranker():
+    """Phase 4: lazy-load sentence_transformers model (same 384-dim
+    all-MiniLM-L6-v2 used by search_corpus.py). Returns None on any
+    failure — callers fall back to primary lane only."""
+    global _RERANKER, _RERANKER_FAILED
+    if _RERANKER is not None or _RERANKER_FAILED:
+        return _RERANKER
+    try:
+        from sentence_transformers import SentenceTransformer  # type: ignore
+        _RERANKER = SentenceTransformer("all-MiniLM-L6-v2")
+    except Exception as e:
+        _RERANKER_FAILED = True
+        print(f"  WARN: reranker unavailable ({e}), supplemental lane ungated")
+        return None
+    return _RERANKER
+
+
+def _rerank_cosine(model, query, text):
+    """Return cosine(query, text) or None if model is unavailable."""
+    if model is None:
+        return None
+    try:
+        v = model.encode([query, text], normalize_embeddings=True)
+        return float((v[0] * v[1]).sum())
+    except Exception:
+        return None
+
+
+# Phase 5: coherence filter stopwords — common English words that must not
+# count as "shared nouns" when detecting junk clusters.
+_COHERENCE_STOP = set("""
+a an the and or of in on at to for from with by is are was were be been being
+this that these those it its as not if but we our you your they their he she
+his her him them there here which who whom what when where why how paper study
+results show shows new method using based model models analysis approach result
+""".split())
+
+
+def _coherence_filter(items, window=6, share=0.5):
+    """Phase 5: reject clusters whose windows of consecutive same-query
+    hits share a non-query noun across > `share` fraction of the window.
+    Window size 6, share threshold 0.5 per the fix plan."""
+    if not items:
+        return items
+    # Group by query label while preserving order
+    buckets = {}
+    order = []
+    for it in items:
+        key = it.get('_query') or it.get('domain', '')
+        if key not in buckets:
+            buckets[key] = []
+            order.append(key)
+        buckets[key].append(it)
+    kept = []
+    for key in order:
+        cluster = buckets[key]
+        if len(cluster) < window:
+            kept.extend(cluster)
+            continue
+        query_tokens = set(re.findall(r'[a-z0-9]+', key.lower()))
+        nouns_per_item = []
+        for it in cluster:
+            text = (it.get('title', '') + ' ' + it.get('_abstract', '')).lower()
+            words = re.findall(r'[a-z]{5,}', text)
+            nouns_per_item.append({
+                w for w in words
+                if w not in _COHERENCE_STOP and w not in query_tokens
+            })
+        # Check every sliding window of size `window`
+        reject_indices = set()
+        for start in range(0, len(cluster) - window + 1):
+            counts = Counter()
+            for s in nouns_per_item[start:start + window]:
+                counts.update(s)
+            for noun, count in counts.items():
+                if count / window > share:
+                    for i in range(start, start + window):
+                        reject_indices.add(i)
+                    print(f"  COHERENCE: dropping window for '{key}' on shared noun '{noun}' ({count}/{window})")
+                    break
+        for i, it in enumerate(cluster):
+            if i not in reject_indices:
+                kept.append(it)
+    return kept
+
+
+def _snapshot_url(url, abstract_text, title):
+    """Phase 6: save raw bytes (HTML or abstract text) to a gzipped
+    sha256-keyed file under SNAPSHOT_DIR. Returns the relative path or
+    None on failure. Records fetch timestamp as first line of the payload."""
+    if not url:
+        return None
+    try:
+        os.makedirs(SNAPSHOT_DIR, exist_ok=True)
+    except Exception:
+        return None
+    key = hashlib.sha256(url.encode('utf-8')).hexdigest()[:16]
+    out = os.path.join(SNAPSHOT_DIR, f"{key}.html.gz")
+    if os.path.exists(out):
+        return os.path.relpath(out, BASE_DIR)
+    ts = datetime.now(timezone.utc).isoformat()
+    body = None
+    try:
+        req = Request(url, headers={'User-Agent': 'GSD-ResearchEngine/1.0'})
+        with urlopen(req, timeout=10) as r:
+            body = r.read(2_000_000)
+    except Exception:
+        # Fallback: write abstract + title as the snapshot
+        body = (f"<!-- abstract fallback -->\n<title>{title}</title>\n"
+                f"<pre>{abstract_text}</pre>").encode('utf-8', errors='replace')
+    try:
+        with gzip.open(out, 'wb') as f:
+            f.write(f"<!-- fetched={ts} url={url} -->\n".encode('utf-8'))
+            f.write(body)
+    except Exception:
+        return None
+    return os.path.relpath(out, BASE_DIR)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATE_FILE = os.path.join(BASE_DIR, '.discovery-state.json')
@@ -194,7 +320,10 @@ def append_to_queue(items, dry_run=False):
         duration = item.get('duration', 'paper')
         vid_id = item.get('id', item.get('url', 'N/A'))
         domain = item.get('domain', 'Unknown')
-        status = f"DISCOVERED — {item.get('summary', 'awaiting review')}"
+        # Phase 3: supplemental-lane items carry a distinct status tag so
+        # reviewers can filter by confidence level.
+        tag = item.get('status_tag', 'DISCOVERED')
+        status = f"{tag} — {item.get('summary', 'awaiting review')}"
         lines.append(f"| {num} | {title} | {duration} | {vid_id} | {domain} | {status} |")
 
     if dry_run:
@@ -318,6 +447,29 @@ def _relevance_check_all_tokens(title, abstract, category, query):
     return query
 
 
+def _fetch_arxiv_entries(url, timeout=15):
+    """Fetch and parse arXiv Atom feed, returning a list of entry dicts
+    with keys: arxiv_id, title, abstract, pub_date."""
+    req = Request(url, headers={'User-Agent': 'GSD-ResearchEngine/1.0'})
+    with urlopen(req, timeout=timeout) as resp:
+        xml = resp.read().decode('utf-8')
+    out = []
+    for entry in re.findall(r'<entry>(.*?)</entry>', xml, re.DOTALL):
+        id_m = re.search(r'<id>http://arxiv.org/abs/([^<]+)</id>', entry)
+        t_m = re.search(r'<title>(.*?)</title>', entry, re.DOTALL)
+        p_m = re.search(r'<published>(\d{4}-\d{2}-\d{2})', entry)
+        a_m = re.search(r'<summary>(.*?)</summary>', entry, re.DOTALL)
+        if not id_m or not t_m:
+            continue
+        out.append({
+            'arxiv_id': id_m.group(1).strip(),
+            'title': re.sub(r'\s+', ' ', t_m.group(1).strip()),
+            'abstract': re.sub(r'\s+', ' ', a_m.group(1).strip()) if a_m else '',
+            'pub_date': p_m.group(1) if p_m else 'unknown',
+        })
+    return out
+
+
 def check_arxiv(state, dry_run=False):
     """Search arXiv for new papers matching our research interests.
     Uses ti+abs: (title + abstract) search instead of all: (full text)
@@ -327,6 +479,7 @@ def check_arxiv(state, dry_run=False):
     seen = set(state.get('seen_arxiv_ids', []))
     discoveries = []
     filtered_count = 0
+    reranker = _lazy_reranker() if DISCOVERY_V2 else None
 
     for query, category, relevance_keywords in ARXIV_QUERIES:
         try:
@@ -415,6 +568,75 @@ def check_arxiv(state, dry_run=False):
 
         except (URLError, Exception) as e:
             print(f"  ERROR [{query}]: {e}")
+
+    # Phase 3 (v2): supplemental lane — run the OR-token (legacy) query in
+    # parallel for each topic, tag hits as DISCOVERED-SUPPLEMENTAL. Phase 4
+    # gates these through an embedding cosine threshold; Phase 5 applies a
+    # coherence filter across the supplemental batch before returning.
+    supplemental = []
+    if DISCOVERY_V2:
+        for query, category, relevance_keywords in ARXIV_QUERIES:
+            try:
+                encoded = quote_plus(query)
+                url = (
+                    f"http://export.arxiv.org/api/query?"
+                    f"search_query=ti:{encoded}+OR+abs:{encoded}+AND+cat:{category}"
+                    f"&sortBy=submittedDate&sortOrder=descending"
+                    f"&max_results={ARXIV_MAX_RESULTS * 3}"
+                )
+                entries = _fetch_arxiv_entries(url)
+            except (URLError, Exception) as e:
+                print(f"  ERROR supplemental [{query}]: {e}")
+                continue
+            for e in entries:
+                arxiv_id = e['arxiv_id']
+                if arxiv_id in seen:
+                    continue
+                if e['pub_date'] != 'unknown':
+                    try:
+                        pub = datetime.strptime(e['pub_date'], '%Y-%m-%d')
+                        if (datetime.now() - pub).days > ARXIV_DAYS_BACK:
+                            continue
+                    except ValueError:
+                        pass
+                matched_kw = _relevance_check(e['title'], e['abstract'], relevance_keywords)
+                if not matched_kw:
+                    filtered_count += 1
+                    continue
+                # Phase 4: cosine gate via SentenceTransformer
+                cosine = _rerank_cosine(reranker, query, e['title'] + ' ' + e['abstract'])
+                if cosine is not None and cosine < SUPPLEMENTAL_MIN_COSINE:
+                    filtered_count += 1
+                    continue
+                cos_str = f", cos={cosine:.2f}" if cosine is not None else ""
+                supplemental.append({
+                    'title': e['title'],
+                    'duration': 'paper',
+                    'id': f'arXiv:{arxiv_id}',
+                    'domain': f'{category} / {query}',
+                    'summary': f'arXiv {e["pub_date"]}, supplemental match "{query}" (keyword: {matched_kw}{cos_str})',
+                    'source': 'arxiv',
+                    'status_tag': 'DISCOVERED-SUPPLEMENTAL',
+                    '_query': query,
+                    '_category': category,
+                    '_abstract': e['abstract'],
+                    '_url': f'http://arxiv.org/abs/{arxiv_id}',
+                    '_cosine': cosine,
+                })
+                seen.add(arxiv_id)
+                print(f"  SUPP: {arxiv_id} — {e['title'][:60]}...{cos_str}")
+
+        # Phase 5: coherence filter prunes junk clusters of supplemental hits.
+        supplemental = _coherence_filter(supplemental)
+
+    discoveries.extend(supplemental)
+
+    # Phase 6: URL snapshot at fetch time for every discovered row.
+    if DISCOVERY_V2:
+        for d in discoveries:
+            snap = _snapshot_url(d.get('_url'), d.get('_abstract', ''), d.get('title', ''))
+            if snap:
+                d['summary'] = d.get('summary', '') + f" [snapshot={snap}]"
 
     state['seen_arxiv_ids'] = list(seen)[-200:]
     state['last_arxiv_check'] = datetime.now(timezone.utc).isoformat()
