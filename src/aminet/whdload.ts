@@ -96,7 +96,7 @@ export function detectSlaveFiles(installDir: string): string[] {
     (f) => extname(f).toLowerCase() === '.slave',
   );
 
-  return slaves.sort();
+  return slaves.map(f => f.replace(new RegExp('\\\\', 'g'), '/')).sort();
 }
 
 // ---------------------------------------------------------------------------

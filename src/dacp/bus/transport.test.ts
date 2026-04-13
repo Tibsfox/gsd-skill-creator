@@ -7,7 +7,7 @@
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm, readdir, writeFile, mkdir, stat } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, basename } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { DACPTransport } from './transport.js';
@@ -148,7 +148,7 @@ describe('DACPTransport', () => {
       });
 
       // Both paths share the same stem
-      const msgFilename = msgPath.split('/').pop()!;
+      const msgFilename = basename(msgPath);
       expect(msgFilename).toMatch(/^\d{8}-\d{6}-SEND-relay-executor\.msg$/);
 
       const stem = msgPath.replace(/\.msg$/, '');
@@ -260,11 +260,11 @@ describe('DACPTransport', () => {
       expect(await stat(msgPath).then(() => true).catch(() => false)).toBe(false);
       const ackDir = join(config.busDir, 'acknowledged');
       const ackFiles = await readdir(ackDir);
-      const msgFilename = msgPath.split('/').pop()!;
+      const msgFilename = basename(msgPath);
       expect(ackFiles).toContain(msgFilename);
 
       // .bundle/ moved to acknowledged/
-      const bundleDirname = bundlePath.split('/').pop()!;
+      const bundleDirname = basename(bundlePath);
       expect(ackFiles).toContain(bundleDirname);
       expect(await stat(bundlePath).then(() => true).catch(() => false)).toBe(false);
     });
@@ -284,7 +284,7 @@ describe('DACPTransport', () => {
       expect(await stat(msgPath).then(() => true).catch(() => false)).toBe(false);
       const ackDir = join(config.busDir, 'acknowledged');
       const ackFiles = await readdir(ackDir);
-      const msgFilename = msgPath.split('/').pop()!;
+      const msgFilename = basename(msgPath);
       expect(ackFiles).toContain(msgFilename);
     });
   });

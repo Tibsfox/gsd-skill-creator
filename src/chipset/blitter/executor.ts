@@ -29,7 +29,7 @@ const SCRIPT_EXTENSIONS: Record<string, string> = {
 const INTERPRETERS: Record<string, string> = {
   bash: 'bash',
   node: 'node',
-  python: 'python3',
+  python: process.platform === 'win32' ? 'python' : 'python3',
 };
 
 /**
@@ -95,7 +95,11 @@ export async function executeOffloadOp(operation: OffloadOperation): Promise<Off
       timedOut = true;
       if (child.pid) {
         try {
-          process.kill(-child.pid, 'SIGTERM');
+          if (process.platform !== 'win32') {
+            process.kill(-child.pid, 'SIGTERM');
+          } else {
+            child.kill('SIGTERM');
+          }
         } catch {
           // Process may have already exited
           child.kill('SIGTERM');

@@ -8,8 +8,8 @@
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdir, writeFile, rm } from 'fs/promises';
-import { join } from 'path';
-import { tmpdir } from 'os';
+import { join, isAbsolute } from 'node:path';
+import { tmpdir } from 'node:os';
 import { scanDirectory, scanDirectoryForDirs } from './scanner.js';
 
 describe('scanDirectory', () => {
@@ -52,7 +52,7 @@ describe('scanDirectory', () => {
 
     const result = await scanDirectory(testDir);
     expect(result).toHaveLength(1);
-    expect(result[0].startsWith('/')).toBe(true);
+    expect(isAbsolute(result[0])).toBe(true);
     expect(result[0]).toBe(join(testDir, 'file.md'));
   });
 
