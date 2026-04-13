@@ -42,7 +42,7 @@ Douglas Adams was born on March 11, 1952 -- the same calendar date Pioneer 5 lau
 
 ### Pass 2 Refinement Summary
 
-Three research sections on Seales as the engine's first doctoral-level artist, the piano lineage's completion, and the institutional transmission distance:
+Four research sections on Seales as the engine's first doctoral-level artist, the piano lineage's completion, the institutional transmission distance, and the Douglas Adams dedication:
 
 **1. The University Scholar-Performer and the Long Call.** Seales holds a DMA from the University of Washington and directs the UW School of Music jazz studies program. He is the first artist in the engine whose career integrates doctoral-level academic scholarship with active performance at the highest level. This creates the sixth pedagogical model: after the institutional apprentice, the performance mentor, the salon builder, the expansion catalyst, the confirmation path, and now the University Scholar-Performer -- the artist who transmits jazz across the full institutional distance from bandstand to graduate seminar.
 
@@ -104,7 +104,7 @@ Garry oak woodland is historically maintained by fire -- Coast Salish peoples bu
 
 7. **The Prodigal pattern (degree 12) extends into genealogy.** Lanphere's bebop root (degree 12) is the parent of hard bop (degree 9) and cool jazz (degree 10). At degree 13, Seales's modal vocabulary extends the piano lineage beyond hard bop -- the tree grows a new branch. The jazz genealogy now has three generations visible: root (bebop), branches (hard bop, cool jazz), and contemporary extension (modal).
 
-8. **Combined E=4 sustains the moderate zone.** Seales E=2 + Vireo E=2 = combined 4. Steady after the combined E=2 floor at degrees 8 and 12. The engine's energy profile enters a sustained moderate band.
+8. **Combined E=4 sustains the moderate zone.** Seales E=2 + Vireo E=2 = combined 4. Steady after the combined E=2 floor at degrees 8 and 12. The engine's energy profile enters a sustained moderate band. The long-call degree does not need high energy -- it needs endurance.
 
 9. **The Deep Space Network traces its origin to this degree.** Pioneer 5's success at 36.2 million km was the direct catalyst for the DSN -- three complexes (Goldstone, Canberra, Madrid) spaced 120 degrees apart, providing continuous deep-space coverage. Every interplanetary mission since relies on the infrastructure this proof of concept justified.
 

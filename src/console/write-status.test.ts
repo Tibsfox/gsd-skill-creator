@@ -60,7 +60,7 @@ function runWriteStatus(
 // Test suite
 // ============================================================================
 
-describe('write-status.sh', () => {
+describe.skipIf(process.platform === 'win32')('write-status.sh', () => {
   let tmpDir: string;
 
   beforeEach(() => {
