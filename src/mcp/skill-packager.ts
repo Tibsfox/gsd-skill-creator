@@ -48,7 +48,7 @@ async function enumerateFiles(dir: string, baseDir?: string): Promise<string[]> 
       const subFiles = await enumerateFiles(fullPath, base);
       files.push(...subFiles);
     } else if (entry.isFile()) {
-      files.push(relative(base, fullPath));
+      files.push(relative(base, fullPath).split('\\').join('/'));
     }
   }
 
