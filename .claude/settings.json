@@ -29,15 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/session-state.sh"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/agent-heartbeat-start.js"
+            "command": "node .claude/hooks/session-state.cjs"
           }
         ]
       }
@@ -67,13 +59,13 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/validate-commit.sh"
+            "command": "node .claude/hooks/validate-commit.cjs"
           }
         ]
       },
       {
         "matcher": "Bash",
-        "if": "Bash(npm run build*)",
+        "if": "Bash(git push*)",
         "hooks": [
           {
             "type": "command",
@@ -117,27 +109,28 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/session-state.sh"
+            "command": "node .claude/hooks/session-state.cjs"
           }
         ]
       }
     ],
     "PostToolUse": [
       {
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
         "hooks": [
           {
             "type": "command",
             "command": "node .claude/hooks/gsd-context-monitor.js",
             "timeout": 10
           }
-        ],
-        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task"
+        ]
       },
       {
+        "matcher": "Write",
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/agent-heartbeat.js"
+            "command": "node .claude/hooks/phase-boundary-check.cjs"
           }
         ]
       }
