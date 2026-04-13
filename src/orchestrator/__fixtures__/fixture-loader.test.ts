@@ -14,7 +14,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { access, readdir, readFile } from 'fs/promises';
-import { join } from 'path';
+import { join, isAbsolute } from 'node:path';
 import { getFixturePath, getFixturePaths } from './fixture-loader.js';
 import { GsdDiscoveryService } from '../discovery/discovery-service.js';
 
@@ -25,7 +25,7 @@ import { GsdDiscoveryService } from '../discovery/discovery-service.js';
 describe('fixture-loader', () => {
   it('getFixturePath returns absolute path', () => {
     const result = getFixturePath();
-    expect(require('node:path').isAbsolute(result)).toBe(true);
+    expect(isAbsolute(result)).toBe(true);
   });
 
   it('getFixturePath default version resolves to gsd-v1.15', () => {

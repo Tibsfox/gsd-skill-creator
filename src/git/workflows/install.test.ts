@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { join } from 'node:path';
 
 // === Hoisted mock variables ===
 
@@ -154,18 +155,16 @@ describe('parseRepoUrl', () => {
 
 describe('resolveInstallPaths', () => {
   it('resolves paths relative to project root', () => {
-    const { join: pjoin } = require('node:path');
-    const root = pjoin('/', 'home', 'user', 'projects');
+    const root = join('/', 'home', 'user', 'projects');
     const paths = resolveInstallPaths('my-repo', root);
-    expect(paths.repoPath).toBe(pjoin(root, 'projects', 'my-repo'));
-    expect(paths.worktreePath).toBe(pjoin(root, 'worktrees', 'my-repo'));
-    expect(paths.configDir).toBe(pjoin(root, '.sc-git'));
+    expect(paths.repoPath).toBe(join(root, 'projects', 'my-repo'));
+    expect(paths.worktreePath).toBe(join(root, 'worktrees', 'my-repo'));
+    expect(paths.configDir).toBe(join(root, '.sc-git'));
   });
 
   it('uses process.cwd() when no project root given', () => {
-    const { join: pjoin } = require('node:path');
     const paths = resolveInstallPaths('my-repo');
-    expect(paths.repoPath).toContain(pjoin('projects', 'my-repo'));
+    expect(paths.repoPath).toContain(join('projects', 'my-repo'));
     expect(paths.configDir).toContain('.sc-git');
   });
 });

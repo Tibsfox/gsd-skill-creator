@@ -9,7 +9,7 @@
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtempSync, rmSync, readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, basename, isAbsolute } from 'node:path';
 import { tmpdir } from 'node:os';
 import { MessageWriter } from './writer.js';
 import { ensureConsoleDirectory } from './directory.js';
@@ -121,7 +121,7 @@ describe('MessageWriter', () => {
     expect(filePath).toBeTruthy();
     expect(typeof filePath).toBe('string');
     // Should be an absolute path
-    expect(require('node:path').isAbsolute(filePath)).toBe(true);
+    expect(isAbsolute(filePath)).toBe(true);
     // Should be a JSON file
     expect(filePath).toMatch(/\.json$/);
     // File should exist and contain valid JSON

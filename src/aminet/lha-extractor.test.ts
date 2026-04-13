@@ -7,7 +7,7 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, basename } from 'node:path';
 import { tmpdir } from 'node:os';
 
 // Mock child_process before importing the module under test
@@ -48,11 +48,10 @@ describe('stripVolumePrefix', () => {
 
 describe('sanitizePath', () => {
   it('resolves normal path within target directory', () => {
-    const { join: pjoin } = require('node:path');
-    const { tmpdir } = require('node:os');
-    const target = pjoin(tmpdir(), 'target');
+    
+    const target = join(tmpdir(), 'target');
     const result = sanitizePath('Libs/mylib.library', target);
-    expect(result).toBe(pjoin(target, 'Libs', 'mylib.library'));
+    expect(result).toBe(join(target, 'Libs', 'mylib.library'));
   });
 
   it('throws on path traversal with ../', () => {
@@ -68,19 +67,17 @@ describe('sanitizePath', () => {
   });
 
   it('resolves clean path correctly', () => {
-    const { join: pjoin } = require('node:path');
-    const { tmpdir } = require('node:os');
-    const target = pjoin(tmpdir(), 'target');
+    
+    const target = join(tmpdir(), 'target');
     const result = sanitizePath('normal/file.txt', target);
-    expect(result).toBe(pjoin(target, 'normal', 'file.txt'));
+    expect(result).toBe(join(target, 'normal', 'file.txt'));
   });
 
   it('normalizes dot-slash prefix', () => {
-    const { join: pjoin } = require('node:path');
-    const { tmpdir } = require('node:os');
-    const target = pjoin(tmpdir(), 'target');
+    
+    const target = join(tmpdir(), 'target');
     const result = sanitizePath('./relative/file.txt', target);
-    expect(result).toBe(pjoin(target, 'relative', 'file.txt'));
+    expect(result).toBe(join(target, 'relative', 'file.txt'));
   });
 
   it('does not throw when path resolves exactly to targetDir', () => {
