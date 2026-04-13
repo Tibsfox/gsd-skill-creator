@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm, readFile, writeFile, mkdir } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, basename, isAbsolute } from 'node:path';
 import { tmpdir } from 'node:os';
 import {
   resolveTokenPath,
@@ -30,13 +30,11 @@ describe('token-manager', () => {
     it('expands ~ to home directory', () => {
       const result = resolveTokenPath('~/foo/bar');
       expect(result).not.toContain('~');
-      expect(result).toContain(require('node:path').join('foo', 'bar'));
+      expect(result).toContain(join('foo', 'bar'));
     });
 
     it('resolves absolute paths unchanged', () => {
-      const { join: pjoin, isAbsolute } = require('node:path');
-      const { tmpdir } = require('node:os');
-      const absPath = pjoin(tmpdir(), 'gateway-token');
+      const absPath = join(tmpdir(), 'gateway-token');
       const result = resolveTokenPath(absPath);
       expect(result).toBe(absPath);
       expect(isAbsolute(result)).toBe(true);
@@ -45,7 +43,7 @@ describe('token-manager', () => {
     it('resolves relative paths against cwd', () => {
       const result = resolveTokenPath('token.json');
       expect(result).toContain('token.json');
-      expect(require('node:path').isAbsolute(result)).toBe(true);
+      expect(isAbsolute(result)).toBe(true);
     });
   });
 

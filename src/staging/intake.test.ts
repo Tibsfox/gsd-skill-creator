@@ -11,7 +11,7 @@
 
 import { describe, it, expect, afterEach } from 'vitest';
 import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, basename, isAbsolute } from 'node:path';
 import { tmpdir } from 'node:os';
 import { stageDocument, type StageDocumentResult } from './intake.js';
 import { STAGING_DIRS } from './types.js';
@@ -102,8 +102,8 @@ describe('stageDocument', () => {
     });
 
     // Both paths are absolute
-    expect(require('node:path').isAbsolute(result.documentPath)).toBe(true);
-    expect(require('node:path').isAbsolute(result.metadataPath)).toBe(true);
+    expect(isAbsolute(result.documentPath)).toBe(true);
+    expect(isAbsolute(result.metadataPath)).toBe(true);
 
     // documentPath ends with the filename
     expect(result.documentPath.endsWith(filename)).toBe(true);
