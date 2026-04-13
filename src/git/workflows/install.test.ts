@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { join } from 'node:path';
 
 // === Hoisted mock variables ===
 
@@ -154,15 +155,16 @@ describe('parseRepoUrl', () => {
 
 describe('resolveInstallPaths', () => {
   it('resolves paths relative to project root', () => {
-    const paths = resolveInstallPaths('my-repo', '/home/user/projects');
-    expect(paths.repoPath).toBe('/home/user/projects/projects/my-repo');
-    expect(paths.worktreePath).toBe('/home/user/projects/worktrees/my-repo');
-    expect(paths.configDir).toBe('/home/user/projects/.sc-git');
+    const root = join('/', 'home', 'user', 'projects');
+    const paths = resolveInstallPaths('my-repo', root);
+    expect(paths.repoPath).toBe(join(root, 'projects', 'my-repo'));
+    expect(paths.worktreePath).toBe(join(root, 'worktrees', 'my-repo'));
+    expect(paths.configDir).toBe(join(root, '.sc-git'));
   });
 
   it('uses process.cwd() when no project root given', () => {
     const paths = resolveInstallPaths('my-repo');
-    expect(paths.repoPath).toContain('projects/my-repo');
+    expect(paths.repoPath).toContain(join('projects', 'my-repo'));
     expect(paths.configDir).toContain('.sc-git');
   });
 });

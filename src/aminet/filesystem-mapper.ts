@@ -77,8 +77,9 @@ export function mapToAmigaPath(
   // Step 1: Strip volume prefix
   const cleaned = stripVolumePrefix(relativePath);
 
-  // Step 2: Split on '/' to inspect first component
-  const parts = cleaned.split('/');
+  // Step 2: Split on '/' to inspect first component (normalize backslashes for Windows)
+  const normalized = cleaned.replace(new RegExp('\\\\', 'g'), '/');
+  const parts = normalized.split('/');
   const firstComponent = parts[0];
   const assignKey = firstComponent.toLowerCase();
 
@@ -145,7 +146,7 @@ export function placeFiles(
     const sha256 = computeSha256(fileData);
 
     installed.push({
-      sourcePath: relPath,
+      sourcePath: relPath.replace(new RegExp('\\\\', 'g'), '/'),
       destPath,
       sha256,
     });
