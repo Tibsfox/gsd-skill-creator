@@ -98,8 +98,12 @@ export function validateConfigFile(
         errors.push('Malformed YAML: unbalanced square brackets [ ]');
       }
 
-      // Warn if file has no document separator and appears to be a multi-doc
-      if (content.includes('---\n') && content.split('---\n').length > 2) {
+      // Warn if the file contains multiple YAML documents. Match `---` as
+      // its own line via anchored regex so the check tolerates CRLF line
+      // endings (Windows git checkout with core.autocrlf=true). The prior
+      // literal `'---\n'` split silently missed CRLF files.
+      const docSepCount = (content.match(/^---\s*$/gm) ?? []).length;
+      if (docSepCount >= 2) {
         warnings.push('File contains multiple YAML documents -- only the first will be processed by kolla-ansible');
       }
       break;
