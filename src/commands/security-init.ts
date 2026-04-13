@@ -12,7 +12,13 @@
  */
 
 import * as fs from 'node:fs/promises';
+import * as os from 'node:os';
 import * as path from 'node:path';
+
+// Socket path default resolved at module load — os.tmpdir() returns the
+// platform-appropriate temp dir (/tmp on Linux, /var/folders/... on macOS,
+// %LOCALAPPDATA%\Temp on Windows). Hardcoding /tmp broke Windows first-run.
+const DEFAULT_PROXY_SOCKET = path.join(os.tmpdir(), 'security-proxy.sock');
 
 // ---------------------------------------------------------------------------
 // Template content
@@ -87,7 +93,7 @@ script (Phase 373) before any agent process starts.
     "allowed_domains": [
       {"domain": "api.anthropic.com", "credential_type": "api_key_header", "credential_source": "keychain", "header_name": "x-api-key"}
     ],
-    "proxy_socket": "/tmp/security-proxy.sock"
+    "proxy_socket": "${DEFAULT_PROXY_SOCKET}"
   },
   "worktree_path": null
 }
@@ -104,7 +110,7 @@ Deserialize). No configuration change can enable credential logging.
 
 \`\`\`json
 {
-  "socket_path": "/tmp/security-proxy.sock",
+  "socket_path": "${DEFAULT_PROXY_SOCKET}",
   "allowed_domains": [],
   "log_requests": true,
   "log_credentials": false
@@ -348,12 +354,12 @@ const SANDBOX_PROFILE_TEMPLATE = {
   },
   network: {
     allowed_domains: [],
-    proxy_socket: '/tmp/security-proxy.sock',
+    proxy_socket: DEFAULT_PROXY_SOCKET,
   },
 };
 
 const PROXY_CONFIG_TEMPLATE = {
-  socket_path: '/tmp/security-proxy.sock',
+  socket_path: DEFAULT_PROXY_SOCKET,
   allowed_domains: [],
   log_requests: true,
   log_credentials: false,
