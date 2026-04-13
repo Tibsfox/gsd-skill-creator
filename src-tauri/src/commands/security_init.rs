@@ -8,11 +8,22 @@
 //! overwritten. Directories are created with mode 0700 (owner only).
 
 use serde::Serialize;
+use std::env;
 use std::fs;
 use std::path::Path;
 
 #[cfg(unix)]
 use std::os::unix::fs::PermissionsExt;
+
+// Socket path default resolved at call time — env::temp_dir() returns the
+// platform-appropriate temp dir (/tmp on Linux, /var/folders/... on macOS,
+// %LOCALAPPDATA%\Temp on Windows). Hardcoding /tmp broke Windows first-run.
+fn default_proxy_socket() -> String {
+    env::temp_dir()
+        .join("security-proxy.sock")
+        .to_string_lossy()
+        .into_owned()
+}
 
 /// Response payload returned to the webview after initialization.
 #[derive(Debug, Serialize)]
@@ -312,7 +323,7 @@ fn sandbox_profile_template() -> String {
         },
         "network": {
             "allowed_domains": [],
-            "proxy_socket": "/tmp/security-proxy.sock"
+            "proxy_socket": default_proxy_socket()
         }
     }))
     .unwrap()
@@ -321,7 +332,7 @@ fn sandbox_profile_template() -> String {
 
 fn proxy_config_template() -> String {
     serde_json::to_string_pretty(&serde_json::json!({
-        "socket_path": "/tmp/security-proxy.sock",
+        "socket_path": default_proxy_socket(),
         "allowed_domains": [],
         "log_requests": true,
         "log_credentials": false
