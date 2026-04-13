@@ -254,13 +254,29 @@ HN_KEYWORDS = [
 
 HN_MIN_SCORE = 50  # minimum points to consider
 
-# ── Google Scholar (tracked papers) ──
-
+# ── Topic tracking for key papers ──
+#
+# NOTE: This isn't true citation tracking (arXiv has no citation API). It's
+# keyword-based topic tracking: for each tracked paper we search arXiv for
+# recent preprints whose *abstracts* contain ALL of the paper's topical tokens.
+# Each entry's `query` is used as the rerank prompt and as the token-gate
+# check; each entry's `arxiv_tokens` is the strict set of terms that must
+# appear in every candidate abstract (AND'd together in the arXiv search URL).
+# Keeping the two separate lets the search query be terse while the rerank
+# prompt stays descriptive.
 SCHOLAR_TRACKED = [
-    ("Holt-Lunstad 2024", "social connection critical factor mental physical health"),
-    ("Cordell 2009", "story phosphorus global food security"),
-    ("MIRAGE 2026", "illusion visual understanding mirage"),
-    ("Suryanto 2021", "lithium mediated nitrogen reduction"),
+    ("Holt-Lunstad 2024",
+     "loneliness social isolation health mortality",
+     ["loneliness", "social", "isolation"]),
+    ("Cordell 2009",
+     "peak phosphorus food security global agriculture",
+     ["phosphorus", "food", "security"]),
+    ("MIRAGE 2026",
+     "visual illusion multimodal benchmark vision-language",
+     ["visual", "illusion", "benchmark"]),
+    ("Suryanto 2021",
+     "lithium mediated nitrogen reduction ammonia electrocatalysis",
+     ["lithium", "nitrogen", "reduction"]),
 ]
 
 
@@ -786,41 +802,43 @@ def check_hn(state, dry_run=False):
     return discoveries
 
 
-# ── Source: Google Scholar (simplified — uses arXiv for citation tracking) ──
+# ── Source: topic tracking via arXiv (formerly "scholar/citation tracking") ──
+# NOTE: arXiv has no citation API. This path does keyword-based topic tracking
+# using the same abs: AND-of-tokens + rerank filter as the primary arXiv lane.
 
 def check_scholar(state, dry_run=False):
-    """Check for new papers citing our tracked key papers via arXiv.
-    Uses ti+abs: search to avoid false positives from full-text matching."""
-    print("\n=== Citation Check (via arXiv) ===")
+    """For each SCHOLAR_TRACKED entry, search arXiv for recent preprints whose
+    abstract contains ALL of the entry's arxiv_tokens, then apply the v2
+    token gate and cosine rerank (when DISCOVERY_V2 is on) to drop
+    topic-coincidence false positives."""
+    print("\n=== Tracked Topic Check (via arXiv) ===")
     seen_arxiv = set(state.get('seen_arxiv_ids', []))
     discoveries = []
+    reranker = _lazy_reranker() if DISCOVERY_V2 else None
+    filtered_count = 0
 
-    for label, query in SCHOLAR_TRACKED:
+    for label, query, arxiv_tokens in SCHOLAR_TRACKED:
+        if not arxiv_tokens:
+            print(f"  SKIP [{label}]: no arxiv_tokens configured")
+            continue
         try:
-            encoded = quote_plus(query)
-            # Use ti+abs instead of all: to reduce false positives
+            # Build AND-of-tokens across the abstract field. This is the correct
+            # arXiv search syntax; the previous `ti:X+OR+abs:X` form with a
+            # multi-word X collapsed to an unfiltered most-recent query.
+            sq = '+AND+'.join(f'abs:{quote_plus(t)}' for t in arxiv_tokens)
             url = (
                 f"http://export.arxiv.org/api/query?"
-                f"search_query=ti:{encoded}+OR+abs:{encoded}"
-                f"&sortBy=submittedDate&sortOrder=descending&max_results=3"
+                f"search_query={sq}"
+                f"&sortBy=submittedDate&sortOrder=descending&max_results=10"
             )
 
-            req = Request(url, headers={'User-Agent': 'GSD-ResearchEngine/1.0'})
-            with urlopen(req, timeout=15) as resp:
-                xml = resp.read().decode('utf-8')
+            entries = _fetch_arxiv_entries(url, timeout=15)
 
-            entries = re.findall(r'<entry>(.*?)</entry>', xml, re.DOTALL)
-            for entry in entries:
-                arxiv_id_match = re.search(r'<id>http://arxiv.org/abs/([^<]+)</id>', entry)
-                title_match = re.search(r'<title>(.*?)</title>', entry, re.DOTALL)
-                published_match = re.search(r'<published>(\d{4}-\d{2}-\d{2})', entry)
-
-                if not arxiv_id_match or not title_match:
-                    continue
-
-                arxiv_id = arxiv_id_match.group(1).strip()
-                title = re.sub(r'\s+', ' ', title_match.group(1).strip())
-                pub_date = published_match.group(1) if published_match else 'unknown'
+            for e in entries:
+                arxiv_id = e['arxiv_id']
+                title = e['title']
+                abstract = e['abstract']
+                pub_date = e['pub_date']
 
                 # Only recent
                 if pub_date != 'unknown':
@@ -834,23 +852,35 @@ def check_scholar(state, dry_run=False):
                 if arxiv_id in seen_arxiv:
                     continue
 
+                # v2 rerank gate: cosine similarity against the descriptive
+                # query. No token gate — that would be tautological with the
+                # URL filter (arxiv_tokens are guaranteed to be in the abstract
+                # because that's how we built search_query). The rerank is
+                # what catches topic-coincidence false positives.
+                if DISCOVERY_V2 and reranker is not None:
+                    cosine = _rerank_cosine(reranker, query, title + '. ' + abstract)
+                    if cosine is None or cosine < SUPPLEMENTAL_MIN_COSINE:
+                        filtered_count += 1
+                        continue
+
                 discoveries.append({
                     'title': title,
                     'duration': 'paper',
                     'id': f'arXiv:{arxiv_id}',
-                    'domain': f'Citation tracking / {label}',
-                    'summary': f'Related to {label}, arXiv {pub_date}',
+                    'domain': f'Tracked topic / {label}',
+                    'summary': f'Matches tracked topic {label}, arXiv {pub_date}',
                     'source': 'scholar',
                 })
                 seen_arxiv.add(arxiv_id)
-                print(f"  NEW: {arxiv_id} — {title[:60]}... (related to {label})")
+                print(f"  NEW: {arxiv_id} — {title[:60]}... [{label}]")
 
-        except (URLError, Exception) as e:
-            print(f"  ERROR [{label}]: {e}")
+        except (URLError, Exception) as ex:
+            print(f"  ERROR [{label}]: {ex}")
 
     state['seen_arxiv_ids'] = list(seen_arxiv)[-200:]
     state['last_scholar_check'] = datetime.now(timezone.utc).isoformat()
-    print(f"  Checked {len(SCHOLAR_TRACKED)} tracked papers, found {len(discoveries)} new related papers")
+    print(f"  Checked {len(SCHOLAR_TRACKED)} tracked topics, "
+          f"kept {len(discoveries)} new matches, filtered {filtered_count}")
     return discoveries
 
 
