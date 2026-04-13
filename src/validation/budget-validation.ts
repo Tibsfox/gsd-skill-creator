@@ -256,16 +256,16 @@ export class BudgetValidator {
     // Add message based on severity
     if (severity === 'error') {
       const excess = charCount - this.charBudget;
-      result.message = `Exceeds ${this.charBudget.toLocaleString()} character budget by ${excess.toLocaleString()} chars`;
+      result.message = `Exceeds ${this.charBudget.toLocaleString('en-US')} character budget by ${excess.toLocaleString('en-US')} chars`;
       result.suggestions = [
         'Use --force to override (skill may be truncated by Claude Code)',
         'Reduce description length',
         'Move detailed content to separate reference files',
       ];
     } else if (severity === 'warning') {
-      result.message = `Approaching budget limit (${usagePercent.toFixed(0)}% of ${this.charBudget.toLocaleString()} chars)`;
+      result.message = `Approaching budget limit (${usagePercent.toFixed(0)}% of ${this.charBudget.toLocaleString('en-US')} chars)`;
     } else if (severity === 'info') {
-      result.message = `Budget usage: ${usagePercent.toFixed(0)}% of ${this.charBudget.toLocaleString()} chars`;
+      result.message = `Budget usage: ${usagePercent.toFixed(0)}% of ${this.charBudget.toLocaleString('en-US')} chars`;
     }
 
     return result;
@@ -423,15 +423,15 @@ export function formatBudgetDisplay(result: CumulativeBudgetResult): string {
     const loadablePercent = (loadableTotal / budget) * 100;
     const bar = formatProgressBar(loadableTotal, budget);
 
-    lines.push(`Installed: ${installedTotal.toLocaleString()} chars across ${totalCount} skills`);
-    lines.push(`Loadable:  ${loadableTotal.toLocaleString()} chars (${loadedCount} of ${totalCount} skills fit)`);
-    lines.push(`Budget: ${bar} ${loadablePercent.toFixed(0)}% (${loadableTotal.toLocaleString()} / ${budget.toLocaleString()} chars)`);
+    lines.push(`Installed: ${installedTotal.toLocaleString('en-US')} chars across ${totalCount} skills`);
+    lines.push(`Loadable:  ${loadableTotal.toLocaleString('en-US')} chars (${loadedCount} of ${totalCount} skills fit)`);
+    lines.push(`Budget: ${bar} ${loadablePercent.toFixed(0)}% (${loadableTotal.toLocaleString('en-US')} / ${budget.toLocaleString('en-US')} chars)`);
   } else {
     // Single-view: backward-compatible format
     const bar = formatProgressBar(totalChars, budget);
     const usagePercent = result.usagePercent;
     lines.push(
-      `Budget: ${bar} ${usagePercent.toFixed(0)}% (${totalChars.toLocaleString()} / ${budget.toLocaleString()} chars)`
+      `Budget: ${bar} ${usagePercent.toFixed(0)}% (${totalChars.toLocaleString('en-US')} / ${budget.toLocaleString('en-US')} chars)`
     );
   }
   lines.push('');
@@ -440,7 +440,7 @@ export function formatBudgetDisplay(result: CumulativeBudgetResult): string {
   if (skills.length > 0) {
     for (const skill of skills) {
       const pct = ((skill.totalChars / budget) * 100).toFixed(1);
-      lines.push(`  ${skill.name}: ${skill.totalChars.toLocaleString()} chars (${pct}%)`);
+      lines.push(`  ${skill.name}: ${skill.totalChars.toLocaleString('en-US')} chars (${pct}%)`);
     }
   } else {
     lines.push('  No skills found');
@@ -492,7 +492,7 @@ export function generateSuggestions(skill: SkillBudgetInfo, budget: number): str
 
   // Generic reduction target
   if (excess > 0 && suggestions.length === 0) {
-    suggestions.push(`Reduce total content by ${excess.toLocaleString()} chars to fit within budget`);
+    suggestions.push(`Reduce total content by ${excess.toLocaleString('en-US')} chars to fit within budget`);
   }
 
   return suggestions;

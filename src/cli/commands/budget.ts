@@ -43,7 +43,7 @@ export async function budgetCommand(options?: { skillsDir?: string }): Promise<n
 
     p.log.message('');
     p.log.message(pc.bold('Character Budget'));
-    p.log.message(`${bar} ${pctColored} (${result.totalChars.toLocaleString()} / ${result.budget.toLocaleString()} chars)`);
+    p.log.message(`${bar} ${pctColored} (${result.totalChars.toLocaleString('en-US')} / ${result.budget.toLocaleString('en-US')} chars)`);
     p.log.message('');
 
     if (result.skills.length === 0) {
@@ -76,7 +76,7 @@ export async function budgetCommand(options?: { skillsDir?: string }): Promise<n
       }
 
       p.log.message(`  ${miniBar} ${nameColored}`);
-      p.log.message(pc.dim(`       ${skill.totalChars.toLocaleString()} chars (${pct}% of budget)`));
+      p.log.message(pc.dim(`       ${skill.totalChars.toLocaleString('en-US')} chars (${pct}% of budget)`));
       p.log.message(pc.dim(`       desc: ${skill.descriptionChars}, body: ${skill.bodyChars}`));
     }
 
@@ -97,7 +97,7 @@ export async function budgetCommand(options?: { skillsDir?: string }): Promise<n
 
     // Environment info
     p.log.message('');
-    p.log.message(pc.dim(`Budget: ${result.budget.toLocaleString()} chars (set via SLASH_COMMAND_TOOL_CHAR_BUDGET)`));
+    p.log.message(pc.dim(`Budget: ${result.budget.toLocaleString('en-US')} chars (set via SLASH_COMMAND_TOOL_CHAR_BUDGET)`));
 
     p.outro('Done.');
     return 0;
