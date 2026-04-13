@@ -5,6 +5,7 @@
  * Part of the PyDMD dogfood install pipeline (Phase 404).
  */
 
+import { basename } from 'node:path';
 import type { PythonProjectInfo, DependencySpec } from '../types.js';
 
 // --- Simple line-based TOML section parser ---
@@ -388,7 +389,7 @@ export function detectPythonProject(
   if (projectName) {
     result.entryPoints = [projectName];
   } else if (result.directories.source) {
-    const name = require('node:path').basename(result.directories.source.replace(/\/$/, '')) || '';
+    const name = basename(result.directories.source.replace(/\/$/, '')) || '';
     if (name) result.entryPoints = [name];
   }
 
