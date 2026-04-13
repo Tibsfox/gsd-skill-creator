@@ -97,8 +97,8 @@ export async function budgetEstimateCommand(options?: {
   p.log.message('');
   p.log.message(
     pc.bold(`Agent: ${profile.name}`) +
-    ` | Budget: ${(profile.budgetPercent * 100).toFixed(0)}% (${standardBudget.toLocaleString()} tokens)` +
-    ` | Ceiling: ${(profile.hardCeilingPercent * 100).toFixed(0)}% (${hardCeiling.toLocaleString()} tokens)`
+    ` | Budget: ${(profile.budgetPercent * 100).toFixed(0)}% (${standardBudget.toLocaleString('en-US')} tokens)` +
+    ` | Ceiling: ${(profile.hardCeilingPercent * 100).toFixed(0)}% (${hardCeiling.toLocaleString('en-US')} tokens)`
   );
 
   // Overall progress bar
@@ -112,25 +112,25 @@ export async function budgetEstimateCommand(options?: {
   } else {
     pctColored = pc.green(`${usagePercent.toFixed(0)}%`);
   }
-  p.log.message(`${bar} ${pctColored} (${totalTokens.toLocaleString()} / ${hardCeiling.toLocaleString()} tokens)`);
+  p.log.message(`${bar} ${pctColored} (${totalTokens.toLocaleString('en-US')} / ${hardCeiling.toLocaleString('en-US')} tokens)`);
   p.log.message('');
 
   // Per-tier sections
   if (critical.length > 0) {
     p.log.message(pc.bold('Critical (always load, up to ceiling):'));
     for (const e of critical) {
-      p.log.message(`  - ${e.name}: ${e.tokens.toLocaleString()} tokens`);
+      p.log.message(`  - ${e.name}: ${e.tokens.toLocaleString('en-US')} tokens`);
     }
-    p.log.message(pc.dim(`  Subtotal: ${criticalTokens.toLocaleString()} / ${hardCeiling.toLocaleString()} tokens`));
+    p.log.message(pc.dim(`  Subtotal: ${criticalTokens.toLocaleString('en-US')} / ${hardCeiling.toLocaleString('en-US')} tokens`));
     p.log.message('');
   }
 
   if (standard.length > 0) {
     p.log.message(pc.bold('Standard (within budget):'));
     for (const e of standard) {
-      p.log.message(`  - ${e.name}: ${e.tokens.toLocaleString()} tokens`);
+      p.log.message(`  - ${e.name}: ${e.tokens.toLocaleString('en-US')} tokens`);
     }
-    p.log.message(pc.dim(`  Subtotal: ${standardTokens.toLocaleString()} / ${standardBudget.toLocaleString()} tokens`));
+    p.log.message(pc.dim(`  Subtotal: ${standardTokens.toLocaleString('en-US')} / ${standardBudget.toLocaleString('en-US')} tokens`));
     p.log.message('');
   }
 
@@ -138,9 +138,9 @@ export async function budgetEstimateCommand(options?: {
     const remaining = Math.max(0, standardBudget - criticalTokens - standardTokens);
     p.log.message(pc.bold('Optional (remaining budget):'));
     for (const e of optional) {
-      p.log.message(`  - ${e.name}: ${e.tokens.toLocaleString()} tokens`);
+      p.log.message(`  - ${e.name}: ${e.tokens.toLocaleString('en-US')} tokens`);
     }
-    p.log.message(pc.dim(`  Subtotal: ${optionalTokens.toLocaleString()} / ${remaining.toLocaleString()} remaining tokens`));
+    p.log.message(pc.dim(`  Subtotal: ${optionalTokens.toLocaleString('en-US')} / ${remaining.toLocaleString('en-US')} remaining tokens`));
     p.log.message('');
   }
 

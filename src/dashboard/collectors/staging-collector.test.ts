@@ -14,6 +14,7 @@ vi.mock('node:fs/promises', () => ({
 
 // Import after mocks are set up
 import { collectStagingQueue } from './staging-collector.js';
+import { join } from 'node:path';
 import type { QueueEntry } from '../../staging/queue/types.js';
 
 // ---------------------------------------------------------------------------
@@ -122,7 +123,7 @@ describe('collectStagingQueue', () => {
     });
 
     expect(mockReadFile).toHaveBeenCalledWith(
-      '/custom/project/.planning/staging/queue-state.json',
+      join('/custom/project', '.planning', 'staging', 'queue-state.json'),
       'utf-8',
     );
     expect(result.entries).toHaveLength(1);
@@ -149,7 +150,7 @@ describe('collectStagingQueue', () => {
 
     await collectStagingQueue();
 
-    const expectedPath = `${process.cwd()}/.planning/staging/queue-state.json`;
+    const expectedPath = join(process.cwd(), '.planning', 'staging', 'queue-state.json');
     expect(mockReadFile).toHaveBeenCalledWith(expectedPath, 'utf-8');
   });
 });
