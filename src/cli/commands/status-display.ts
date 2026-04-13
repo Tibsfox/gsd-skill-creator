@@ -58,7 +58,7 @@ export function renderInstalledSection(result: CumulativeBudgetResult): string {
     return lines.join('\n');
   }
 
-  lines.push(pc.dim(`${skills.length} skills, ${installedTotal.toLocaleString()} chars total`));
+  lines.push(pc.dim(`${skills.length} skills, ${installedTotal.toLocaleString('en-US')} chars total`));
   lines.push('');
 
   // Sort by size descending
@@ -71,7 +71,7 @@ export function renderInstalledSection(result: CumulativeBudgetResult): string {
     const pct = ((skill.totalChars / installedTotal) * 100).toFixed(1);
     const miniBar = formatProgressBar(skill.totalChars, largestChars, 10);
     lines.push(
-      `  ${miniBar} ${skill.name}  ${skill.totalChars.toLocaleString()} chars (${pct}%)`,
+      `  ${miniBar} ${skill.name}  ${skill.totalChars.toLocaleString('en-US')} chars (${pct}%)`,
     );
   }
 
@@ -110,7 +110,7 @@ export function renderProjectionSection(result: CumulativeBudgetResult): string 
   const bar = formatProgressBar(projection.loadedTotal, projection.budgetLimit);
   const budgetPct = (projection.loadedTotal / projection.budgetLimit) * 100;
   const colorCode = budgetColorCode(budgetPct);
-  const budgetText = `${budgetPct.toFixed(0)}% (${projection.loadedTotal.toLocaleString()} / ${projection.budgetLimit.toLocaleString()} chars)`;
+  const budgetText = `${budgetPct.toFixed(0)}% (${projection.loadedTotal.toLocaleString('en-US')} / ${projection.budgetLimit.toLocaleString('en-US')} chars)`;
   const colorFn = pc[colorCode] as (s: string) => string;
   lines.push(`${bar} ${colorFn(budgetText)}`);
 
@@ -129,7 +129,7 @@ export function renderProjectionSection(result: CumulativeBudgetResult): string 
   // Headroom (BC-06: never show negative values)
   const headroom = projection.budgetLimit - projection.loadedTotal;
   if (headroom >= 0) {
-    lines.push(`Headroom: ${headroom.toLocaleString()} chars`);
+    lines.push(`Headroom: ${headroom.toLocaleString('en-US')} chars`);
   } else {
     lines.push(`Budget exceeded — ${projection.deferred.length} skills deferred`);
   }
@@ -138,7 +138,7 @@ export function renderProjectionSection(result: CumulativeBudgetResult): string 
   if (projection.deferred.length > 0) {
     lines.push('');
     for (const skill of projection.deferred) {
-      let line = `  [deferred] ${skill.name}  ${skill.charCount.toLocaleString()} chars`;
+      let line = `  [deferred] ${skill.name}  ${skill.charCount.toLocaleString('en-US')} chars`;
       if (skill.oversized) {
         line += ' ⚠ oversized';
       }

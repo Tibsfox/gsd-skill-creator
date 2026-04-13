@@ -6,7 +6,7 @@
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm, readFile, readdir } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, basename } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { bundleToMsgContent, generateMsgFallback } from './msg-fallback.js';
@@ -238,7 +238,7 @@ describe('DACP .msg Fallback', () => {
       const bundlePath = await createBundle(makeOptions(tmpDir));
       const msgPath = await generateMsgFallback(bundlePath);
 
-      const filename = msgPath.split('/').pop()!;
+      const filename = basename(msgPath);
       expect(filename).toMatch(/^\d{8}-\d{6}-[A-Z]+-[a-z]+-[a-z]+\.msg$/);
     });
 

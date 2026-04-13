@@ -104,7 +104,7 @@ describe('SessionBus', () => {
     const filePath = await bus.publish('capture', message);
 
     // File should exist in the capture loop directory
-    expect(filePath).toContain('/bus/capture/');
+    expect(filePath).toContain(join('bus', 'capture'));
     expect(filePath).toMatch(/\.msg$/);
 
     // Verify the file is in the capture directory

@@ -224,7 +224,8 @@ export function createHelperRouter(basePath: string): HelperRouter {
       const targetDir = resolve(consoleRoot, subdirectory);
       const targetPath = resolve(targetDir, body.filename);
 
-      if (!targetPath.startsWith(resolve(consoleRoot) + '/')) {
+      const resolvedRoot = resolve(consoleRoot);
+      if (!targetPath.startsWith(resolvedRoot + '/') && !targetPath.startsWith(resolvedRoot + '\\')) {
         await safeLog(body.filename, subdirectory, 0, 'error', 'Path traversal rejected');
         jsonResponse(res, 403, { error: 'Path traversal rejected' });
         return true;

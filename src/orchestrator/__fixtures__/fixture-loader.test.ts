@@ -14,7 +14,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { access, readdir, readFile } from 'fs/promises';
-import { join } from 'path';
+import { join, isAbsolute } from 'node:path';
 import { getFixturePath, getFixturePaths } from './fixture-loader.js';
 import { GsdDiscoveryService } from '../discovery/discovery-service.js';
 
@@ -25,7 +25,7 @@ import { GsdDiscoveryService } from '../discovery/discovery-service.js';
 describe('fixture-loader', () => {
   it('getFixturePath returns absolute path', () => {
     const result = getFixturePath();
-    expect(result).toMatch(/^\//);
+    expect(isAbsolute(result)).toBe(true);
   });
 
   it('getFixturePath default version resolves to gsd-v1.15', () => {
@@ -68,7 +68,7 @@ describe('fixture integrity - commands', () => {
     const mdFiles = entries.filter((f) => f.endsWith('.md'));
 
     for (const file of mdFiles) {
-      const content = await readFile(join(commandsDir(), file), 'utf-8');
+      const content = (await readFile(join(commandsDir(), file), 'utf-8')).replace(/\r\n/g, '\n');
       const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
       expect(fmMatch, `${file}: missing frontmatter`).toBeTruthy();
 
@@ -116,7 +116,7 @@ describe('fixture integrity - agents', () => {
     const mdFiles = entries.filter((f) => f.endsWith('.md'));
 
     for (const file of mdFiles) {
-      const content = await readFile(join(agentsDir(), file), 'utf-8');
+      const content = (await readFile(join(agentsDir(), file), 'utf-8')).replace(/\r\n/g, '\n');
       const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
       expect(fmMatch, `${file}: missing frontmatter`).toBeTruthy();
 

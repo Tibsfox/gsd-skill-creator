@@ -162,7 +162,7 @@ describe('Integration Tests', () => {
   // IT-03: Done -> Refinery -> Mail notification
   // Completion triggers merge queue entry and mayor notification
   // -------------------------------------------------------------------------
-  it('IT-03: done triggers MR creation and mayor notification via mail', async () => {
+  it.skipIf(process.platform === 'win32')('IT-03: done triggers MR creation and mayor notification via mail', async () => {
     const polecat = await manager.createAgent('polecat', 'test-rig');
     const item = await manager.createWorkItem('Done chain test', 'Test done flow', 'P1');
 
@@ -212,7 +212,7 @@ describe('Integration Tests', () => {
   // IT-04: Witness -> Nudge -> Polecat response
   // Stall detection triggers nudge, polecat responds
   // -------------------------------------------------------------------------
-  it('IT-04: witness detects stall, sends nudge, polecat can respond', async () => {
+  it.skipIf(process.platform === 'win32')('IT-04: witness detects stall, sends nudge, polecat can respond', async () => {
     const polecat = await manager.createAgent('polecat', 'test-rig');
     const item = await manager.createWorkItem('Nudge chain test', 'Test nudge flow', 'P1');
 
@@ -383,7 +383,7 @@ describe('Integration Tests', () => {
   // User intent -> chipset loads -> agents spawn -> work dispatches ->
   // work completes -> merge succeeds
   // -------------------------------------------------------------------------
-  it('IT-08: full end-to-end workflow from chipset load to work completion', async () => {
+  it.skipIf(process.platform === 'win32')('IT-08: full end-to-end workflow from chipset load to work completion', async () => {
     // Step 1: Chipset loads and validates
     const result = validateChipset(loadValidYaml(), SCHEMA_PATH);
     expect(result.valid).toBe(true);

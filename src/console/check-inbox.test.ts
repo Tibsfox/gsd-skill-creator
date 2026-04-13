@@ -93,7 +93,7 @@ const thirdMessage = {
 // Test suite
 // ============================================================================
 
-describe('check-inbox.sh', () => {
+describe.skipIf(process.platform === 'win32')('check-inbox.sh', () => {
   let tmpDir: string;
 
   beforeEach(() => {

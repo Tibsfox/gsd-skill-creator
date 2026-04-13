@@ -326,7 +326,7 @@ describe('Progressive Disclosure Integration Tests', () => {
   });
 
   describe('Executable permission verification', () => {
-    it('extracted scripts have executable permission', async () => {
+    it.skipIf(process.platform === 'win32')('extracted scripts have executable permission', async () => {
       const skillDir = join(tmpDir, 'script-perm-skill');
       const body = generateSkillWithScripts(600);
       const metadata = { name: 'script-perm-skill', description: 'Script permission test' };
