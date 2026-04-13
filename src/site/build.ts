@@ -1,4 +1,5 @@
 import yaml from 'js-yaml';
+import { dirname } from 'node:path';
 import type {
   BuildOptions,
   BuildResult,
@@ -185,7 +186,7 @@ export async function build(options: BuildOptions): Promise<BuildResult> {
 
     // Write output
     const outputPath = `${options.outputDir}/${page.outputPath}`;
-    const outputDir = require('node:path').dirname(outputPath);
+    const outputDir = dirname(outputPath);
     await ensureDir(outputDir);
     await writeFile(outputPath, html);
 
@@ -214,7 +215,7 @@ export async function build(options: BuildOptions): Promise<BuildResult> {
       const mirror = generateMarkdownMirror(publishedPages);
       for (const entry of mirror) {
         const mirrorPath = `${options.outputDir}/${entry.path}`;
-        const mirrorDir = require('node:path').dirname(mirrorPath);
+        const mirrorDir = dirname(mirrorPath);
         await ensureDir(mirrorDir);
         await writeFile(mirrorPath, entry.content);
       }

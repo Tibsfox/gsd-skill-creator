@@ -1,3 +1,4 @@
+import { basename } from 'node:path';
 import type { DeployConfig } from './types.js';
 
 /* ------------------------------------------------------------------ */
@@ -148,7 +149,7 @@ export async function verifyDeployment(
  * patterns.  Supports simple wildcards: `*.ext` and exact names.
  */
 function matchesExclude(file: string, patterns: string[]): boolean {
-  const baseName = require('node:path').basename(file);
+  const baseName = basename(file);
   for (const pattern of patterns) {
     if (pattern.startsWith('*.')) {
       const ext = pattern.slice(1); // e.g. ".map"
