@@ -136,6 +136,8 @@ In a starter flock of six PNW hens, two Australorps is not too many. They will l
 
 > **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- Your most productive layers are the first to show nutritional stress. Learn to read the signs before production drops.
 
+> **[Chicken Math](../try-sessions/chicken-math-project.md)** --- The Australorp's 250-300 eggs per year puts it at the top of the heritage breed production table. Run the spreadsheet: your cost per dozen with Australorps will be lower than with most heritage breeds. Still not free. Still worth it.
+
 ---
 
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Damerow (2012), "The Chicken Encyclopedia"; Australian Poultry Standards (2012); Roberts & Carter (1958), "The Australorp: Its Origin and Development"; Punnett (1923), "Heredity in Poultry."*

@@ -296,6 +296,8 @@ Build the bag. Stage it by the door. Maintain it every six months. And hope you 
 
 > **[Explore CERT Training](neighborhood-cert-overview.md)** --- Extend your preparedness from personal to community-level. CERT training teaches you to organize neighborhood response when professional help is days away.
 
+> **[Numbers You Should Know](../study-guides/emergency-phone-numbers.md)** --- Print the emergency contacts reference sheet, laminate it, and put one copy in this go bag. When infrastructure is down and your phone is dead, the numbers on that sheet --- especially your ICE contacts and utility companies --- are your communication lifeline.
+
 ---
 
 ## College of Knowledge Connections

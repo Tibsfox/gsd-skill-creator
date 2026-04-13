@@ -633,3 +633,11 @@ Digital rendering and physical fabrication share a common reference point — th
 - Prum, R.O. et al. (1999). Coherent scattering of ultraviolet light by avian feather barbs. *The Auk*, 116(4), 886–897.
 - Shawkey, M.D. & D'Alba, L. (2017). Interactions between colour-producing mechanisms and their effects on the integumentary colour palette. *Philosophical Transactions of the Royal Society B*, 372(1724), 20160536.
 - Zi, J. et al. (2003). Coloration strategies in peacock feathers. *Proceedings of the National Academy of Sciences*, 100(22), 12576–12578.
+
+---
+
+## Try This
+
+> **[Commission Your First Furry Art](try-sessions/commission-your-first-art.md)** --- Digital rendering is the artist's side. This try session covers the buyer's side --- how to find artists who produce the rendered character art described in this module, how the commission process works, and how to provide reference materials that help digital artists create accurate representations of your character.
+
+> **[Design Your Fursona](try-sessions/design-your-fursona.md)** --- The reference sheet you create in this session is the input document for the rendering pipeline. Species, color palette, markings, and distinguishing features --- the same data that drives the PBR maps in this module drives the commission brief in the artist's workflow.

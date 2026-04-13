@@ -183,6 +183,7 @@ The modern PNW woodworking scene carries forward multiple threads from this hist
 - **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): The Japanese temple carpenters described in this chapter spent years mastering tool sharpening before cutting a single joint. Start your own sharpening practice today.
 - **Cut Your First Dovetail Joint** ([try-sessions/first-joint](try-sessions/first-joint.md)): The dovetail joint appears in this chapter as an ancient technique and a modern maker's rite of passage. Cut one yourself and join the tradition.
 - **Cut a Mortise and Tenon Joint** ([try-sessions/hand-cut-mortise-tenon](try-sessions/hand-cut-mortise-tenon.md)): The mortise and tenon has been documented since the tomb of Queen Hetepheres (c. 2600 BCE). Four thousand years later, the joint has not been improved. Cut one and understand why.
+- **Restore a Vintage Hand Plane** ([try-sessions/restore-a-hand-plane](try-sessions/restore-a-hand-plane.md)): The Stanley Bailey bench plane described in the industrial history section of this chapter was made by the millions from the 1870s through the 1960s. Find one for $15 at an estate sale and restore it to precision condition — a direct, hands-on connection to the manufacturing history documented here.
 
 ---
 

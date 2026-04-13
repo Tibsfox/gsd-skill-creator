@@ -848,6 +848,9 @@ The physical techniques documented here provide ground truth for digital renderi
 > **Try Session: [Sew Your First Stuffed Animal](try-sessions/first-plush-animal.md)**
 > Plush construction uses the same cutting, sewing, and stuffing techniques documented in this module, at a smaller and more forgiving scale.
 
+> **Try Session: [Commission Your First Furry Art](try-sessions/commission-your-first-art.md)**
+> Not ready to build yet? Commission a professional illustration of your character first. The reference sheet you get back becomes your blueprint for every textile project in this module --- the color reference for fur selection, the marking guide for pattern layout, and the design document that keeps your build on-model.
+
 ---
 
 *Module CRAFT-SEW. Cross-references: [CRAFT-BIO], [CRAFT-SUIT], [CRAFT-PLUSH], [CRAFT-RENDER]. Safety codes: SC-SAF, SC-IP.*
