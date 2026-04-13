@@ -22,6 +22,7 @@ import {
 } from './types.js';
 import type { SessionSnapshot } from './types.js';
 import type { TranscriptEntry } from '../../types/observation.js';
+import { extractTextContent } from '../../types/observation.js';
 
 export interface SnapshotManagerOptions {
   maxSnapshots?: number;
@@ -187,7 +188,7 @@ export class SnapshotManager {
         (entry.type === 'user' || entry.message?.role === 'user') &&
         entry.message?.content
       ) {
-        const content = entry.message.content;
+        const content = extractTextContent(entry.message.content);
         if (content.length > 20) {
           return content.slice(0, 200);
         }
@@ -213,7 +214,7 @@ export class SnapshotManager {
     const questions = new Set<string>();
 
     for (const entry of last10) {
-      const content = entry.message!.content;
+      const content = extractTextContent(entry.message!.content);
       const lines = content.split('\n');
       for (const line of lines) {
         const trimmed = line.trim();

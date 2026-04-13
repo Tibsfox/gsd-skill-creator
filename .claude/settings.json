@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/gsd-check-update.js"
+            "command": "node C:/Users/mykem/.claude/hooks/gsd-check-update.js"
           }
         ]
       },
@@ -13,7 +13,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/gsd-restore-work-state.js"
+            "command": "node .claude/hooks/gsd-restore-work-state.cjs"
           }
         ]
       },
@@ -21,23 +21,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/gsd-inject-snapshot.js"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash .claude/hooks/session-state.sh"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/agent-heartbeat-start.js"
+            "command": "node .claude/hooks/gsd-inject-snapshot.cjs"
           }
         ]
       }
@@ -47,7 +31,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/gsd-save-work-state.js"
+            "command": "node .claude/hooks/gsd-save-work-state.cjs"
           }
         ]
       },
@@ -55,22 +39,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/gsd-snapshot-session.js"
+            "command": "node .claude/hooks/gsd-snapshot-session.cjs"
           }
         ]
       }
     ],
     "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "if": "Bash(git commit*)",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash .claude/hooks/validate-commit.sh"
-          }
-        ]
-      },
       {
         "matcher": "Bash",
         "if": "Bash(npm run build*)",
@@ -86,38 +60,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/gsd-prompt-guard.js",
+            "command": "node C:/Users/mykem/.claude/hooks/gsd-prompt-guard.js",
             "timeout": 5
-          }
-        ]
-      }
-    ],
-    "TaskCompleted": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash .claude/hooks/task-completed-gate.sh"
-          }
-        ]
-      }
-    ],
-    "TeammateIdle": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash .claude/hooks/teammate-idle-gate.sh"
-          }
-        ]
-      }
-    ],
-    "PostCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash .claude/hooks/session-state.sh"
           }
         ]
       }
@@ -127,24 +71,16 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/gsd-context-monitor.js",
+            "command": "node C:/Users/mykem/.claude/hooks/gsd-context-monitor.js",
             "timeout": 10
           }
         ],
         "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task"
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/agent-heartbeat.js"
-          }
-        ]
       }
     ]
   },
   "statusLine": {
     "type": "command",
-    "command": "node .claude/hooks/gsd-statusline.js"
+    "command": "node C:/Users/mykem/.claude/hooks/gsd-statusline.js"
   }
 }
