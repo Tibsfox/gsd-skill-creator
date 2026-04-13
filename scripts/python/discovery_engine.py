@@ -35,6 +35,26 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATE_FILE = os.path.join(BASE_DIR, '.discovery-state.json')
 QUEUE_FILE = os.path.join(BASE_DIR, '.planning', 'RESEARCH-QUEUE.md')
 
+# ── v2 feature gate (Phase 7) ──
+# All Phase 1-6 behaviors (phrase-quoting, all-tokens relevance, two-lane,
+# embedding re-ranker, coherence filter, URL snapshot) are gated on this
+# env flag. Default off means the script behaves identically to pre-fix
+# until explicitly enabled via `DISCOVERY_V2=1`.
+DISCOVERY_V2 = os.environ.get('DISCOVERY_V2', '0') == '1'
+SUPPLEMENTAL_MIN_COSINE = float(os.environ.get('DISCOVERY_MIN_COSINE', '0.35'))
+SNAPSHOT_DIR = os.path.join(BASE_DIR, '.discovery-snapshots')
+
+
+def _phrase_query(query: str) -> str:
+    """Phase 1: wrap multi-word queries in literal quotes for arXiv.
+    Single-word queries pass through unchanged. Returns the raw (un-encoded)
+    query string; callers should quote_plus() the result before inlining
+    into a URL, which preserves the quotes as %22."""
+    q = query.strip()
+    if ' ' in q:
+        return f'"{q}"'
+    return q
+
 # ── YouTube Channels ──
 
 YOUTUBE_CHANNELS = [
@@ -293,14 +313,27 @@ def check_arxiv(state, dry_run=False):
 
     for query, category, relevance_keywords in ARXIV_QUERIES:
         try:
-            # Use ti+abs: to search title and abstract only (not full text)
-            encoded = quote_plus(query)
-            url = (
-                f"http://export.arxiv.org/api/query?"
-                f"search_query=ti:{encoded}+OR+abs:{encoded}+AND+cat:{category}"
-                f"&sortBy=submittedDate&sortOrder=descending"
-                f"&max_results={ARXIV_MAX_RESULTS}"
-            )
+            # Phase 1 (v2): wrap multi-word queries in literal quotes so arXiv
+            # treats them as a phrase, not a bag of OR'd tokens. Each field
+            # clause is also parenthesised so operator precedence cannot leak.
+            if DISCOVERY_V2:
+                phrased = _phrase_query(query)
+                encoded = quote_plus(phrased)
+                search = f"%28ti:{encoded}+OR+abs:{encoded}%29+AND+cat:{category}"
+                url = (
+                    f"http://export.arxiv.org/api/query?"
+                    f"search_query={search}"
+                    f"&sortBy=submittedDate&sortOrder=descending"
+                    f"&max_results={ARXIV_MAX_RESULTS}"
+                )
+            else:
+                encoded = quote_plus(query)
+                url = (
+                    f"http://export.arxiv.org/api/query?"
+                    f"search_query=ti:{encoded}+OR+abs:{encoded}+AND+cat:{category}"
+                    f"&sortBy=submittedDate&sortOrder=descending"
+                    f"&max_results={ARXIV_MAX_RESULTS}"
+                )
 
             req = Request(url, headers={'User-Agent': 'GSD-ResearchEngine/1.0'})
             with urlopen(req, timeout=15) as resp:
