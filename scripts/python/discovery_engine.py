@@ -292,13 +292,30 @@ def check_youtube(state, dry_run=False):
 # ── Source: arXiv ──
 
 def _relevance_check(title, abstract, keywords):
-    """Check if title or abstract contains at least one relevance keyword.
+    """Check if title or abstract contains a relevance keyword.
+    In legacy mode (DISCOVERY_V2=0): returns the first matched keyword
+    or None if no keyword is present (one-of-many).
     Returns the matched keyword or None if no match."""
     text = (title + ' ' + abstract).lower()
     for kw in keywords:
         if kw.lower() in text:
             return kw
     return None
+
+
+def _relevance_check_all_tokens(title, abstract, category, query):
+    """Phase 2 (v2): strict filter — ALL query tokens must appear in the
+    combined title+abstract+category text. Case-insensitive substring
+    match per token. Returns the query string on success or None on
+    failure. Empty/whitespace queries return None."""
+    tokens = [t for t in query.lower().split() if t]
+    if not tokens:
+        return None
+    text = (title + ' ' + abstract + ' ' + (category or '')).lower()
+    for t in tokens:
+        if t not in text:
+            return None
+    return query
 
 
 def check_arxiv(state, dry_run=False):
@@ -368,11 +385,18 @@ def check_arxiv(state, dry_run=False):
                     except ValueError:
                         pass
 
-                # Relevance filter: title or abstract must contain a relevance keyword
-                matched_kw = _relevance_check(title, abstract, relevance_keywords)
-                if not matched_kw:
-                    filtered_count += 1
-                    continue
+                # Relevance filter: v2 requires ALL query tokens present in
+                # title+abstract+category; legacy requires one-of-many keywords.
+                if DISCOVERY_V2:
+                    if not _relevance_check_all_tokens(title, abstract, category, query):
+                        filtered_count += 1
+                        continue
+                    matched_kw = query
+                else:
+                    matched_kw = _relevance_check(title, abstract, relevance_keywords)
+                    if not matched_kw:
+                        filtered_count += 1
+                        continue
 
                 discoveries.append({
                     'title': title,
@@ -381,6 +405,10 @@ def check_arxiv(state, dry_run=False):
                     'domain': f'{category} / {query}',
                     'summary': f'arXiv {pub_date}, matched query "{query}" (keyword: {matched_kw})',
                     'source': 'arxiv',
+                    '_query': query,
+                    '_category': category,
+                    '_abstract': abstract,
+                    '_url': f'http://arxiv.org/abs/{arxiv_id}',
                 })
                 seen.add(arxiv_id)
                 print(f"  NEW: {arxiv_id} — {title[:70]}...")
@@ -435,11 +463,18 @@ def check_arxiv_rss(state, dry_run=False):
                 if arxiv_id in seen:
                     continue
 
-                # Relevance filter
-                matched_kw = _relevance_check(title, abstract, relevance_keywords)
-                if not matched_kw:
-                    filtered_count += 1
-                    continue
+                # Relevance filter: v2 requires ALL label-tokens present in
+                # title+abstract+category; legacy requires one-of-many keywords.
+                if DISCOVERY_V2:
+                    if not _relevance_check_all_tokens(title, abstract, category, label):
+                        filtered_count += 1
+                        continue
+                    matched_kw = label
+                else:
+                    matched_kw = _relevance_check(title, abstract, relevance_keywords)
+                    if not matched_kw:
+                        filtered_count += 1
+                        continue
 
                 discoveries.append({
                     'title': title,
