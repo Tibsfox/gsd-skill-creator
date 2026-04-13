@@ -243,7 +243,7 @@ When working with ${candidate.pattern}:
     if (evidence.coOccurringFiles.length > 0) {
       const fileNames = evidence.coOccurringFiles
         .slice(0, 5)
-        .map(f => f.split('/').pop())
+        .map(f => require('node:path').basename(f))
         .join(', ');
       lines.push(`- **Common files:** ${fileNames}`);
     }

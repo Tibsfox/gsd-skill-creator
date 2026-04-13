@@ -318,7 +318,7 @@ export class PatternAnalyzer {
 
     // Add file context if available
     if (coFiles.length > 0) {
-      const fileTypes = coFiles.slice(0, 2).map(f => f.split('/').pop()).join(' or ');
+      const fileTypes = coFiles.slice(0, 2).map(f => require('node:path').basename(f)).join(' or ');
       triggers.push(`editing ${fileTypes}`);
     }
 

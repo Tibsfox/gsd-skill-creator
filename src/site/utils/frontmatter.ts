@@ -8,7 +8,7 @@ import type { FrontMatter } from '../types.js';
  * - Title-casing each word
  */
 function titleFromPath(filePath: string): string {
-  const base = filePath.split('/').pop() ?? filePath;
+  const base: string = require('node:path').basename(filePath);
   const name = base.replace(/\.md$/i, '');
   return name
     .replace(/[-_]/g, ' ')
