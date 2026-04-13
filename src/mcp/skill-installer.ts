@@ -8,7 +8,7 @@
 
 import { mkdtemp, readFile, readdir, cp, rm, writeFile as writeFileFn } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
-import { join, resolve, relative, sep } from 'node:path';
+import { join, resolve, relative, sep, isAbsolute } from 'node:path';
 import { tmpdir } from 'node:os';
 import { pipeline } from 'node:stream/promises';
 import { createGunzip } from 'node:zlib';
@@ -254,7 +254,7 @@ async function validateAndInstall(
     if (filePath === 'manifest.json') continue;
 
     // Reject absolute paths
-    if (filePath.startsWith('/') || require('node:path').isAbsolute(filePath)) {
+    if (filePath.startsWith('/') || isAbsolute(filePath)) {
       return {
         success: false,
         skillName,

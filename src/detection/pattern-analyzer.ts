@@ -1,4 +1,5 @@
 import { createReadStream } from 'fs';
+import { basename } from 'node:path';
 import { createInterface } from 'readline';
 import { SessionObservation } from '../types/observation.js';
 import {
@@ -318,7 +319,7 @@ export class PatternAnalyzer {
 
     // Add file context if available
     if (coFiles.length > 0) {
-      const fileTypes = coFiles.slice(0, 2).map(f => require('node:path').basename(f)).join(' or ');
+      const fileTypes = coFiles.slice(0, 2).map(f => basename(f)).join(' or ');
       triggers.push(`editing ${fileTypes}`);
     }
 
