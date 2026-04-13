@@ -7,7 +7,7 @@
  */
 
 import { randomBytes, timingSafeEqual } from 'node:crypto';
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, chmod } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { homedir } from 'node:os';
 import { TokenInfoSchema, type TokenInfo, type GatewayScope } from './types.js';
@@ -62,11 +62,24 @@ export async function readToken(tokenPath: string): Promise<TokenInfo | null> {
 /**
  * Write a token info object to the given file path.
  * Creates parent directories if they don't exist.
+ *
+ * Windows posture: fs permission mode (0o600) is only honored on POSIX.
+ * On Windows, NTFS ACLs govern access and the file inherits the parent
+ * directory's ACL — typically the user profile, which is already
+ * user-scoped. For hardened deployments, operators should run
+ * `icacls <file> /inheritance:r /grant:r "%USERNAME%:F"` out of band to
+ * strip inheritance. A native ACL fallback is deferred.
  */
 export async function writeToken(tokenPath: string, tokenInfo: TokenInfo): Promise<void> {
   const resolvedPath = resolveTokenPath(tokenPath);
   await mkdir(dirname(resolvedPath), { recursive: true });
   await writeFile(resolvedPath, JSON.stringify(tokenInfo, null, 2), { mode: 0o600 });
+  // writeFile's mode option is only applied on file creation; chmod
+  // re-asserts 0o600 even if the token file already existed with looser
+  // permissions. No-op on Windows (see JSDoc above).
+  if (process.platform !== 'win32') {
+    await chmod(resolvedPath, 0o600);
+  }
 }
 
 /**
