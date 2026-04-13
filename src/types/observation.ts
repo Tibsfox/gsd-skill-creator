@@ -4,6 +4,28 @@ export type ObservationCategory = 'sessions';
 // Tier discriminant for observation storage routing
 export type ObservationTier = 'ephemeral' | 'persistent';
 
+// A single block in a Claude API content array
+export interface ContentBlock {
+  type: string;
+  text?: string;
+  id?: string;
+  name?: string;
+  input?: Record<string, unknown>;
+}
+
+/**
+ * Extract plain text from a message content field that may be a string
+ * or a Claude API ContentBlock array (as used in real transcripts).
+ */
+export function extractTextContent(content: string | ContentBlock[] | undefined): string {
+  if (!content) return '';
+  if (typeof content === 'string') return content;
+  return content
+    .filter(block => block.type === 'text' && block.text)
+    .map(block => block.text!)
+    .join('\n');
+}
+
 // Claude Code transcript entry format
 export interface TranscriptEntry {
   uuid: string;
@@ -14,7 +36,7 @@ export interface TranscriptEntry {
   type: 'user' | 'assistant' | 'tool_use' | 'tool_result' | 'system';
   message?: {
     role: 'user' | 'assistant';
-    content: string;
+    content: string | ContentBlock[];
   };
   tool_name?: string;
   tool_input?: {
