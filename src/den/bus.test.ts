@@ -161,7 +161,7 @@ describe('sendMessage', () => {
       dst: 'executor',
     });
     const path = await sendMessage(config, msg);
-    const filename = path.split('/').pop()!;
+    const filename = require('node:path').basename(path);
     expect(filename).toBe('20260220-140000-EXEC-coordinator-executor.msg');
   });
 
@@ -176,7 +176,7 @@ describe('sendMessage', () => {
     const msg = makeMessage();
     const path = await sendMessage(config, msg);
     expect(typeof path).toBe('string');
-    expect(path.startsWith('/')).toBe(true);
+    expect(require('node:path').isAbsolute(path)).toBe(true);
     expect(path.endsWith('.msg')).toBe(true);
   });
 });
@@ -295,7 +295,7 @@ describe('acknowledgeMessage', () => {
 
     await acknowledgeMessage(config, msgPath);
 
-    const filename = msgPath.split('/').pop()!;
+    const filename = require('node:path').basename(msgPath);
     const ackPath = join(config.busDir, 'acknowledged', filename);
     const s = await stat(ackPath);
     expect(s.isFile()).toBe(true);
@@ -317,7 +317,7 @@ describe('acknowledgeMessage', () => {
 
     await acknowledgeMessage(config, msgPath);
 
-    const filename = msgPath.split('/').pop()!;
+    const filename = require('node:path').basename(msgPath);
     const ackPath = join(config.busDir, 'acknowledged', filename);
     const ackContent = await readFile(ackPath, 'utf-8');
     expect(ackContent).toBe(originalContent);
@@ -352,7 +352,7 @@ describe('deadLetterMessage', () => {
 
     await deadLetterMessage(config, msgPath, 'unknown destination');
 
-    const filename = msgPath.split('/').pop()!;
+    const filename = require('node:path').basename(msgPath);
     const dlPath = join(config.busDir, 'dead-letter', filename);
     const s = await stat(dlPath);
     expect(s.isFile()).toBe(true);
@@ -364,7 +364,7 @@ describe('deadLetterMessage', () => {
 
     await deadLetterMessage(config, msgPath, 'route not found');
 
-    const filename = msgPath.split('/').pop()!;
+    const filename = require('node:path').basename(msgPath);
     const metaPath = join(config.busDir, 'dead-letter', `${filename}.meta`);
     const metaContent = await readFile(metaPath, 'utf-8');
     const meta = JSON.parse(metaContent);
@@ -381,7 +381,7 @@ describe('deadLetterMessage', () => {
 
     await deadLetterMessage(config, msgPath, reason);
 
-    const filename = msgPath.split('/').pop()!;
+    const filename = require('node:path').basename(msgPath);
     const metaPath = join(config.busDir, 'dead-letter', `${filename}.meta`);
     const meta = JSON.parse(await readFile(metaPath, 'utf-8'));
     expect(meta.reason).toBe(reason);
