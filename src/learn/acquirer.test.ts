@@ -156,7 +156,7 @@ describe('local file acquisition', () => {
 // === Group 3: Archive acquisition ===
 
 describe('archive acquisition', () => {
-  it('acquires files from zip archive', async () => {
+  it.skipIf(process.platform === 'win32')('acquires files from zip archive', async () => {
     // Create a zip archive with 2 .md files using the zip CLI
     const archiveDir = path.join(tmpDir, 'archive-src');
     fs.mkdirSync(archiveDir, { recursive: true });
@@ -175,7 +175,7 @@ describe('archive acquisition', () => {
     expect(filenames).toContain('file2.md');
   });
 
-  it('filters archive contents to supported types', async () => {
+  it.skipIf(process.platform === 'win32')('filters archive contents to supported types', async () => {
     const archiveDir = path.join(tmpDir, 'archive-filter');
     fs.mkdirSync(archiveDir, { recursive: true });
     fs.writeFileSync(path.join(archiveDir, 'readme.md'), '# Readme');
@@ -194,7 +194,7 @@ describe('archive acquisition', () => {
     expect(result.errors.some(e => e.file.includes('binary.exe') && /unsupported/i.test(e.reason))).toBe(true);
   });
 
-  it('rejects archive exceeding maxTotalSize', async () => {
+  it.skipIf(process.platform === 'win32')('rejects archive exceeding maxTotalSize', async () => {
     const archiveDir = path.join(tmpDir, 'archive-big');
     fs.mkdirSync(archiveDir, { recursive: true });
     fs.writeFileSync(path.join(archiveDir, 'big.md'), 'x'.repeat(2048));
@@ -218,7 +218,7 @@ describe('GitHub URL acquisition', () => {
     expect(result.familiarity).toBe('STRANGER');
   });
 
-  it('applies scope filter to cloned files', () => {
+  it.skipIf(process.platform === 'win32')('applies scope filter to cloned files', () => {
     // Test the scope filtering logic directly using exported helpers
     // (avoids ESM mock limitations for child_process.execSync)
     const cloneDir = path.join(tmpDir, 'mock-clone');

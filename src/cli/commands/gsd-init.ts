@@ -766,7 +766,7 @@ async function uninstallIntegration(
     for (const entry of manifest.files.standalone) {
       const target = entry.target;
       // If the target has a parent dir inside .claude/skills/ or .claude/teams/, track the dir
-      const parentDir = path.dirname(target);
+      const parentDir = path.dirname(target).replace(/\\/g, '/');
       if (parentDir !== '.' && (
         parentDir.startsWith('.claude/skills/') ||
         parentDir.startsWith('.claude/teams/') ||

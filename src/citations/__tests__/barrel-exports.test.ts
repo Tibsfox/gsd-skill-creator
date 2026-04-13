@@ -9,6 +9,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 // ============================================================================
 // Test 1: All types importable
@@ -112,7 +113,7 @@ describe('Barrel exports: functions', () => {
 describe('Chipset YAML validation', () => {
   // Load YAML content (parse as structured data without yaml dependency)
   const chipsetPath = path.resolve(
-    path.dirname(new URL(import.meta.url).pathname),
+    path.dirname(fileURLToPath(import.meta.url)),
     '../../citations/citation-management.chipset.yaml',
   );
 

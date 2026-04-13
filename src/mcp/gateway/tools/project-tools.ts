@@ -12,7 +12,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { readFile, readdir, stat, mkdir, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, basename } from 'node:path';
 import { parseProject } from '../../../orchestrator/state/project-parser.js';
 
 // ── Types ───────────────────────────────────────────────────────────────
@@ -163,7 +163,7 @@ export async function discoverProjects(root: string): Promise<ProjectSummary[]> 
  * Get full details for a GSD project at the given path.
  */
 export async function getProjectDetails(projectPath: string): Promise<ProjectDetails> {
-  const name = projectPath.split('/').pop() ?? projectPath;
+  const name = basename(projectPath);
   const planningDir = join(projectPath, '.planning');
 
   // Read PROJECT.md (optional)

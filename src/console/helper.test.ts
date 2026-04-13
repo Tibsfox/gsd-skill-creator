@@ -9,7 +9,7 @@
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtempSync, rmSync, readFileSync, existsSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, basename, isAbsolute } from 'node:path';
 import { tmpdir } from 'node:os';
 import { IncomingMessage, ServerResponse } from 'node:http';
 import { Socket } from 'node:net';
@@ -111,7 +111,7 @@ describe('createHelperRouter', () => {
     expect(res.statusCode).toBe(200);
     const parsed = JSON.parse(res.body);
     expect(parsed.ok).toBe(true);
-    expect(parsed.path).toContain('inbox/pending/test-message.json');
+    expect(parsed.path).toContain(join('inbox', 'pending', 'test-message.json'));
 
     // Verify file actually exists on disk
     const filePath = join(tmpDir, '.planning/console/inbox/pending/test-message.json');

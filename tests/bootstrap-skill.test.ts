@@ -16,7 +16,7 @@ const SKILL_PATH = resolve(__dirname, '../skills/bootstrap-guide/SKILL.md');
 
 let content: string;
 try {
-  content = readFileSync(SKILL_PATH, 'utf-8');
+  content = readFileSync(SKILL_PATH, 'utf-8').replace(/\r\n/g, '\n');
 } catch {
   content = '';
 }
