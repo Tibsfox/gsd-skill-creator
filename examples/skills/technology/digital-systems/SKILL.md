@@ -116,7 +116,7 @@ Each layer adds a header to the data, creating an "envelope inside an envelope" 
 
 ### IP Addresses and DNS
 
-Every device on the internet has an IP address (IPv4: 192.168.1.1; IPv6: 2001:db8::1). The Domain Name System (DNS) translates human-readable names (tibsfox.com) into IP addresses. DNS is distributed -- no single server holds all mappings.
+Every device on the internet has an IP address (IPv4: 10.0.0.1; IPv6: FD00::1/7). The Domain Name System (DNS) translates human-readable names (example.com) into IP addresses. DNS is distributed -- no single server holds all mappings.
 
 ### How the Web Works
 
