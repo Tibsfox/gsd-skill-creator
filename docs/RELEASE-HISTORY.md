@@ -6,7 +6,7 @@ Each version links to a detailed release notes directory with full feature descr
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
-| [v1.49.549](release-notes/v1.49.549/) | cartridge-forge Milestone | 2026-04-14 | — | — |  |
+| [v1.49.549](release-notes/v1.49.549/) | Artemis II — The Space Between the Moon and the Earth | 2026-04-14 | — | — |  |
 | [v1.49.548](release-notes/v1.49.548/) | Degree 47: The Darkroom in Space | 2026-04-05 | — | — |  |
 | [v1.49.547](release-notes/v1.49.547/) | Degree 46: The Angry Alligator | 2026-04-05 | — | — |  |
 | [v1.49.546](release-notes/v1.49.546/) | Degree 45: Soft Landing | 2026-04-05 | — | — |  |
