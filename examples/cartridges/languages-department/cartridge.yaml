@@ -18,6 +18,8 @@ chipsets:
     src: ../../chipsets/languages-department/chipset.yaml
   - kind: grove
     src: ../../chipsets/languages-department/chipset.yaml#/grove
+  - kind: evaluation
+    src: ../../chipsets/languages-department/chipset.yaml#/evaluation
   - kind: college
     src: ../../chipsets/languages-department/chipset.yaml#/college
 metadata:

@@ -18,6 +18,8 @@ chipsets:
     src: ../../chipsets/environmental-department/chipset.yaml
   - kind: grove
     src: ../../chipsets/environmental-department/chipset.yaml#/grove
+  - kind: evaluation
+    src: ../../chipsets/environmental-department/chipset.yaml#/evaluation
   - kind: college
     src: ../../chipsets/environmental-department/chipset.yaml#/college
 metadata:
