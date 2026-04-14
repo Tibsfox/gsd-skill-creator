@@ -100,6 +100,18 @@ export async function cartridgeCommand(
   const [sub, ...rest] = args;
   if (!sub) return usageError(io, 'missing subcommand');
 
+  if (sub === '--help' || sub === '-h' || sub === 'help') {
+    io.stdout('Usage:');
+    io.stdout('  skill-creator cartridge load <path> [--json]');
+    io.stdout('  skill-creator cartridge validate <path> [--json]');
+    io.stdout('  skill-creator cartridge scaffold <template> <dir> <name> [--trust <t>]');
+    io.stdout('  skill-creator cartridge metrics <path> [--json]');
+    io.stdout('  skill-creator cartridge eval <path> [--json]');
+    io.stdout('  skill-creator cartridge dedup <path> [--json]');
+    io.stdout('  skill-creator cartridge fork <path> <newId> [--out <path>] [--json]');
+    return 0;
+  }
+
   try {
     switch (sub) {
       case 'load':
