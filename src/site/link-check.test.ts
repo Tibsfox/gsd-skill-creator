@@ -232,6 +232,79 @@ describe('verifyLinks', () => {
     expect(results[0]?.status).toBe('broken-anchor');
   });
 
+  it('fragment-only #slug resolves against current page headings', async () => {
+    const builtUrls = new Set(['/docs/']);
+    const headingSlugsByPage = new Map([
+      ['/docs/', new Set(['installation', 'usage'])],
+    ]);
+    const opts = makeOpts();
+
+    const links: ExtractedLink[] = [
+      { url: '#installation', elementType: 'html-a', sourceFile: 'docs/index.html' },
+    ];
+    const results = await verifyLinks(links, builtUrls, headingSlugsByPage, opts);
+    expect(results[0]?.status).toBe('ok');
+  });
+
+  it('fragment-only #missing on current page is broken-anchor', async () => {
+    const builtUrls = new Set(['/docs/']);
+    const headingSlugsByPage = new Map([
+      ['/docs/', new Set(['installation'])],
+    ]);
+    const opts = makeOpts();
+
+    const links: ExtractedLink[] = [
+      { url: '#nope', elementType: 'html-a', sourceFile: 'docs/index.html' },
+    ];
+    const results = await verifyLinks(links, builtUrls, headingSlugsByPage, opts);
+    expect(results[0]?.status).toBe('broken-anchor');
+    expect(results[0]?.reason).toBe('anchor-not-found');
+  });
+
+  it('fragment-only at site root #slug resolves against / headings', async () => {
+    const builtUrls = new Set(['/']);
+    const headingSlugsByPage = new Map([
+      ['/', new Set(['welcome'])],
+    ]);
+    const opts = makeOpts();
+
+    const links: ExtractedLink[] = [
+      { url: '#welcome', elementType: 'html-a', sourceFile: 'index.html' },
+      { url: '#gone', elementType: 'html-a', sourceFile: 'index.html' },
+    ];
+    const results = await verifyLinks(links, builtUrls, headingSlugsByPage, opts);
+    expect(results[0]?.status).toBe('ok');
+    expect(results[1]?.status).toBe('broken-anchor');
+  });
+
+  it('fragment-only without sourceFile stays ok (no context to verify)', async () => {
+    const builtUrls = new Set<string>();
+    const headingSlugsByPage = new Map<string, Set<string>>();
+    const opts = makeOpts();
+
+    const links: ExtractedLink[] = [
+      { url: '#anywhere', elementType: 'html-a' },
+    ];
+    const results = await verifyLinks(links, builtUrls, headingSlugsByPage, opts);
+    expect(results[0]?.status).toBe('ok');
+  });
+
+  it('relative ./index.html#slug normalizes to directory URL and checks anchor', async () => {
+    const builtUrls = new Set(['/docs/']);
+    const headingSlugsByPage = new Map([
+      ['/docs/', new Set(['installation'])],
+    ]);
+    const opts = makeOpts();
+
+    const links: ExtractedLink[] = [
+      { url: './index.html#installation', elementType: 'html-a', sourceFile: 'docs/index.html' },
+      { url: './index.html#nope', elementType: 'html-a', sourceFile: 'docs/index.html' },
+    ];
+    const results = await verifyLinks(links, builtUrls, headingSlugsByPage, opts);
+    expect(results[0]?.status).toBe('ok');
+    expect(results[1]?.status).toBe('broken-anchor');
+  });
+
   it('external mock httpHead returns 200 -> ok', async () => {
     const mockHttpHead = vi.fn(async () => ({ status: 200, finalUrl: 'https://example.com/' }));
     const builtUrls = new Set<string>();
