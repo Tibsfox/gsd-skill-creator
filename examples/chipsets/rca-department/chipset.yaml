@@ -1,0 +1,302 @@
+# RCA Department Chipset Configuration
+# Retroactively completes the Session 020 (2026-04-11) RCA artifact suite by
+# binding 6 skills, 5 agents, and 3 teams into a forkable department bundle.
+#
+# Unlike math-department (which binds to an academic college department),
+# RCA is cross-cutting reliability infrastructure. It deliberately opts out
+# of college integration — see the `college:` section below and README §7.
+#
+# Follows the department template pattern established by math-department.
+# Other reliability-adjacent domains (aviation-safety, clinical-incident,
+# chaos-engineering) can fork this template and remap every section.
+
+name: rca-department-v1.0
+version: 1.0.0
+description: >
+  A methodology-routed root cause analysis department providing disciplined
+  incident investigation through five named agents (rca-investigator as
+  CAPCOM, plus four specialists covering classical, systems-theoretic,
+  causal-inference, and postmortem-authoring tracks), six knowledge skills
+  spanning classical RCA / STAMP-STPA / causal DAGs / human factors /
+  distributed systems / blameless postmortems, and three pre-composed teams
+  (deep, triage, postmortem). Persists investigations, findings, causal
+  graphs, postmortems, and session logs as Grove records under the
+  rca-department namespace.
+
+# ==========================================================================
+# Skills — 6 methodology skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  rca-classical-methods:
+    domain: rca
+    description: >
+      Classical root cause analysis techniques — 5 Whys (with Card's 2017
+      critique), Ishikawa/fishbone diagrams, Fault Tree Analysis, FMEA,
+      Cause Mapping, and Doggett's method-selection framework.
+    triggers:
+      - "root cause"
+      - "5 whys"
+      - "five whys"
+      - "fishbone"
+      - "ishikawa"
+      - "fault tree"
+      - "FTA"
+      - "FMEA"
+      - "cause map"
+      - "failure mode"
+    agent_affinity: five-whys-facilitator
+
+  rca-systems-theoretic:
+    domain: rca
+    description: >
+      Systems-theoretic approaches for complex socio-technical systems —
+      Leveson's STAMP/STPA/CAST, Rasmussen's dynamic safety model,
+      Hollnagel's FRAM, and AcciMap.
+    triggers:
+      - "STAMP"
+      - "STPA"
+      - "CAST"
+      - "control structure"
+      - "unsafe control action"
+      - "Leveson"
+      - "Rasmussen"
+      - "FRAM"
+      - "AcciMap"
+      - "socio-technical"
+      - "systems-theoretic"
+    agent_affinity: stamp-stpa-analyst
+
+  rca-causal-inference:
+    domain: rca
+    description: >
+      Mathematical foundations of RCA using Pearl's Structural Causal Models,
+      do-calculus, counterfactual reasoning, Bayesian networks, backdoor and
+      frontdoor criteria, transfer entropy, and Granger causality.
+    triggers:
+      - "causal graph"
+      - "causal DAG"
+      - "Pearl"
+      - "do-calculus"
+      - "counterfactual"
+      - "Bayesian network"
+      - "backdoor criterion"
+      - "frontdoor criterion"
+      - "causal inference"
+      - "transfer entropy"
+      - "Granger causality"
+    agent_affinity: causal-graph-builder
+
+  rca-human-factors:
+    domain: rca
+    description: >
+      Human-factors RCA — James Reason's Swiss Cheese Model, HFACS, the
+      Just Culture algorithm, Crew Resource Management findings, and
+      high-reliability organization principles.
+    triggers:
+      - "human error"
+      - "human factors"
+      - "Swiss cheese"
+      - "HFACS"
+      - "Just Culture"
+      - "crew resource management"
+      - "CRM"
+      - "operator error"
+      - "latent failure"
+      - "active failure"
+    agent_affinity: [rca-investigator, five-whys-facilitator]
+
+  rca-distributed-systems:
+    domain: rca
+    description: >
+      RCA techniques for microservices and cloud infrastructure — trace-based
+      causality (OpenTelemetry/Jaeger/Tempo), service-dependency graph
+      analysis, DynaCausal-style dynamic causality, Microsoft AgentRx for
+      AI agent failures, and causal-graph-based AIOps.
+    triggers:
+      - "distributed trace"
+      - "OpenTelemetry"
+      - "service graph"
+      - "microservice failure"
+      - "cascading failure"
+      - "DynaCausal"
+      - "AgentRx"
+      - "AIOps"
+      - "partial failure"
+      - "distributed RCA"
+    agent_affinity: [rca-investigator, causal-graph-builder]
+
+  blameless-postmortem:
+    domain: rca
+    description: >
+      Google SRE-style blameless postmortem authoring — structure, timeline
+      construction, contributing-factor extraction, action-item discipline,
+      and the cultural practices that make postmortems produce learning
+      rather than theater.
+    triggers:
+      - "postmortem"
+      - "blameless"
+      - "Google SRE postmortem"
+      - "lessons learned"
+      - "action items"
+      - "incident report"
+      - "what went well"
+      - "timeline reconstruction"
+    agent_affinity: postmortem-writer
+
+# ==========================================================================
+# Agents — 5 agents in router topology (rca-investigator as CAPCOM)
+# 3 Opus (deep reasoning) + 2 Sonnet (throughput)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: rca-investigator
+
+  agents:
+    - name: rca-investigator
+      role: "department coordinator — incident classification, method selection, delegation, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write, WebFetch]
+      is_capcom: true
+
+    - name: stamp-stpa-analyst
+      role: "systems-theoretic analyst — STPA hazard analysis and CAST retrospective investigation"
+      model: opus
+      tools: [Read, Write, Glob, Grep, Bash]
+
+    - name: causal-graph-builder
+      role: "causal-inference specialist — Bayesian networks, DAG construction, counterfactual estimation"
+      model: opus
+      tools: [Read, Write, Bash, Grep, Glob]
+
+    - name: five-whys-facilitator
+      role: "classical RCA facilitator — branching 5 Whys with evidence requirements and escalation guardrails"
+      model: sonnet
+      tools: [Read, Grep, Write, Bash]
+
+    - name: postmortem-writer
+      role: "blameless postmortem author — draft generation, blameless-language audit, action-item quality gate"
+      model: sonnet
+      tools: [Read, Write, Glob, Grep, Bash]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  rca-deep-team:
+    description: >
+      Multi-method parallel investigation for SEV1/SEV2 or high-uncertainty
+      incidents. Runs classical, systems-theoretic, causal-inference, and
+      inline human-factors + distributed-systems analyses concurrently, then
+      synthesizes findings into a unified report.
+    agents: [rca-investigator, five-whys-facilitator, stamp-stpa-analyst, causal-graph-builder, postmortem-writer]
+    use_when: "SEV1/SEV2 incidents, recurring failures, conflicting hypotheses, safety-critical systems, regulatory or legal review"
+
+  rca-triage-team:
+    description: >
+      Fast triage team for routine incidents. Classifies the incident, runs
+      a single-method shallow analysis, produces a short postmortem, and
+      escalates to rca-deep-team if the incident is deeper than it looked.
+    agents: [rca-investigator, five-whys-facilitator, causal-graph-builder, postmortem-writer]
+    use_when: "SEV3/SEV4 incidents, daily incident review, first-pass classification, training mode"
+
+  postmortem-team:
+    description: >
+      End-to-end blameless postmortem authoring and review pipeline —
+      drafting, blameless-language audit, action-item quality gate, review
+      meeting agenda generation, and asynchronous action-item tracking.
+    agents: [postmortem-writer]
+    use_when: "authoring and reviewing postmortems after investigation is complete, postmortem backlog cleanup, regulated environments requiring strict format"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 RCA Grove record types documented"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (rca-investigator) must be CAPCOM"
+        action: "block"
+
+      - check: "all_methodologies_covered"
+        description: "All 5 RCA methodologies (classical, systems-theoretic, causal-inference, human-factors, distributed-systems) must have at least one skill"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 25
+    domains_covered:
+      - classical
+      - systems-theoretic
+      - causal-inference
+      - human-factors
+      - distributed-systems
+      - postmortem
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "rca-department"
+  record_types:
+    - name: RCAInvestigation
+      description: "An investigation session with scope, severity, classification, and method(s) selected"
+
+    - name: RCAFinding
+      description: "A single causal finding — proximate cause, contributing factor, or latent condition with evidence"
+
+    - name: RCACausalGraph
+      description: "A DAG or Bayesian network relating candidate causes to outcomes, with edge annotations and effect estimates"
+
+    - name: RCAPostmortem
+      description: "A blameless postmortem document with timeline, impact, causes, lessons, and action items"
+
+    - name: RCASession
+      description: "Session log linking all work products (investigations, findings, graphs, postmortems) to interaction context"
+
+# ==========================================================================
+# College Integration — deliberate opt-out
+# ==========================================================================
+#
+# RCA is cross-cutting reliability infrastructure, not an academic discipline.
+# Unlike math-department, there is no "RCA department" in the college concept
+# graph to bind to. Forks targeting a specific applied domain (e.g.,
+# aviation-safety-department, clinical-incident-department) may choose to
+# enable college binding — the department template supports it. The baseline
+# rca-department stays domain-neutral and opts out.
+
+college:
+  department: null
+  concept_graph:
+    read: false
+    write: false
+  try_session_generation: false
+  learning_pathway_updates: false
+  wings: []
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
