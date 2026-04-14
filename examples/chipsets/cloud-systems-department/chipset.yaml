@@ -1,0 +1,274 @@
+# Cloud Systems Department Chipset Configuration
+# Tenth department built from the department template pattern.
+#
+# Binds named agents (Lamport, Dean, Ghemawat, Hamilton-cloud, Vogels,
+# DeCandia, Gray), six knowledge skills, three pre-composed teams,
+# five Grove record types, and college integration into a single
+# deployable unit.
+
+name: cloud-systems-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated cloud systems department providing domain-routed
+  expertise across distributed consensus, storage architecture,
+  networking, identity, service architecture, and reliability
+  engineering through seven named agents (Lamport, Dean, Ghemawat,
+  Hamilton-cloud, Vogels, DeCandia, Gray), six knowledge skills,
+  and three pre-composed teams. Persists work via Grove records and
+  integrates with the college cloud-systems department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills spanning the five wings
+# ==========================================================================
+
+skills:
+  distributed-consensus:
+    domain: cloud-systems
+    description: "Consensus algorithms, Lamport clocks, Paxos, Raft, quorum, TLA+"
+    triggers:
+      - "paxos"
+      - "raft"
+      - "consensus"
+      - "logical clock"
+      - "quorum"
+      - "replicated log"
+      - "tla+"
+      - "split brain"
+    agent_affinity: [lamport, dean, decandia]
+
+  service-architecture:
+    domain: cloud-systems
+    description: "SOA, microservices, API contracts, sagas, circuit breakers, mesh"
+    triggers:
+      - "microservice"
+      - "service boundary"
+      - "api versioning"
+      - "saga"
+      - "circuit breaker"
+      - "service mesh"
+      - "idempotency"
+      - "backward compat"
+    agent_affinity: [vogels, dean, hamilton-cloud]
+
+  cloud-identity-and-auth:
+    domain: cloud-systems
+    description: "Keystone tokens, OAuth, OIDC, JWT, mTLS, IAM, SPIFFE, federation"
+    triggers:
+      - "keystone"
+      - "oauth"
+      - "oidc"
+      - "jwt"
+      - "iam"
+      - "mtls"
+      - "token"
+      - "federation"
+      - "spiffe"
+    agent_affinity: [hamilton-cloud, vogels, lamport]
+
+  distributed-storage:
+    domain: cloud-systems
+    description: "GFS/Bigtable/Spanner, object/block/file, replication vs erasure, CAP"
+    triggers:
+      - "gfs"
+      - "bigtable"
+      - "spanner"
+      - "s3"
+      - "swift"
+      - "ceph"
+      - "replication"
+      - "erasure coding"
+      - "cap theorem"
+      - "snapshot"
+    agent_affinity: [ghemawat, dean, decandia]
+
+  network-fundamentals-cloud:
+    domain: cloud-systems
+    description: "VPC, VXLAN, security groups, load balancers, tail latency, SDN"
+    triggers:
+      - "vpc"
+      - "vxlan"
+      - "security group"
+      - "load balancer"
+      - "floating ip"
+      - "neutron"
+      - "sdn"
+      - "tail latency"
+      - "incast"
+    agent_affinity: [hamilton-cloud, vogels, dean]
+
+  reliability-engineering-cloud:
+    domain: cloud-systems
+    description: "SLIs/SLOs, error budgets, runbooks, postmortems, NASA SE lifecycle (PDR/CDR/ORR), TAID"
+    triggers:
+      - "slo"
+      - "sli"
+      - "error budget"
+      - "runbook"
+      - "postmortem"
+      - "incident"
+      - "chaos"
+      - "ORR"
+      - "CDR"
+      - "PDR"
+      - "TAID"
+    agent_affinity: [gray, hamilton-cloud, lamport]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Lamport as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: lamport
+
+  agents:
+    - name: lamport
+      role: "department chair — classification, routing, synthesis, consensus theory"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: dean
+      role: "scale engineer — tail latency, capacity, production Paxos"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: ghemawat
+      role: "storage architect — GFS/Bigtable/Spanner lineage, replication, durability"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: hamilton-cloud
+      role: "infrastructure economics — cost modeling, hardware, IAM at scale (James Hamilton; disambiguated from Margaret Hamilton in project-management)"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: vogels
+      role: "service architecture — SOA, API contracts, eventual consistency, you-build-you-run-it"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: decandia
+      role: "quorum storage — Dynamo-style KV, consistent hashing, N/R/W tuning"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: gray
+      role: "pedagogy & transaction processing — ACID, runbooks, postmortems, explanation"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  cloud-systems-analysis-team:
+    description: "Full department for cross-domain design reviews and complex analysis"
+    agents: [lamport, dean, ghemawat, hamilton-cloud, vogels, decandia, gray]
+    use_when: "multi-domain, design-level, or cross-cutting incident analysis"
+
+  cloud-systems-workshop-team:
+    description: "Focused architecture review — storage, scale, pedagogy"
+    agents: [lamport, ghemawat, dean, gray]
+    use_when: "storage architecture, consensus protocol design, capacity-sensitive work"
+
+  cloud-systems-practice-team:
+    description: "Operational pipeline — triage, analyze, document (incidents, postmortems, runbooks)"
+    agents: [lamport, decandia, hamilton-cloud, vogels, gray]
+    use_when: "incident response, runbook construction, postmortem writing, ops readiness"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 cloud-systems Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college cloud-systems department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (lamport) must be CAPCOM"
+        action: "block"
+
+      - check: "hamilton_disambiguation"
+        description: "hamilton-cloud name must be used throughout (not hamilton) to avoid collision with project-management Margaret Hamilton"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - consensus
+      - storage
+      - networking
+      - identity
+      - service-architecture
+      - reliability
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "cloud-systems-department"
+  record_types:
+    - name: CloudSystemsAnalysis
+      description: "Structured analysis of a system or incident — findings, severity, mitigations"
+
+    - name: CloudSystemsDesign
+      description: "Design artifact for a cloud system — boundaries, contracts, rationale"
+
+    - name: CloudSystemsReview
+      description: "Review of an existing design or runbook with verdict and action items"
+
+    - name: CloudSystemsExplanation
+      description: "Teaching artifact at a specified level with references and prerequisites"
+
+    - name: CloudSystemsSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "cloud-systems"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Identity & Networking"
+    - "Compute & Storage"
+    - "Orchestration"
+    - "NASA SE Lifecycle"
+    - "Runbook Operations"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
+  naming_notes:
+    - "hamilton-cloud carries the -cloud suffix to disambiguate from hamilton (Margaret, project-management). Preserve this when forking if the fork keeps project-management."

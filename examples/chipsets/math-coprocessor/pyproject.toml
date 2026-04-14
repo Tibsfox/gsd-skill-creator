@@ -1,0 +1,3 @@
+[tool.pytest.ini_options]
+testpaths = ["math_coprocessor/tests"]
+pythonpath = ["."]

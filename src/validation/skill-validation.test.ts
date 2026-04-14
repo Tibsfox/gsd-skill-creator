@@ -513,4 +513,66 @@ describe('Spec Alignment (SPEC-01, SPEC-04, SPEC-06)', () => {
       expect(result.success).toBe(false);
     });
   });
+
+  describe('description-frequency field (Phase B)', () => {
+    it('accepts description-frequency: always', () => {
+      const result = SkillInputSchema.safeParse({
+        name: 'test',
+        description: 'Use when X',
+        'description-frequency': 'always',
+      });
+      expect(result.success).toBe(true);
+    });
+
+    it('accepts description-frequency: on-demand', () => {
+      const result = SkillInputSchema.safeParse({
+        name: 'test',
+        description: 'Use when X',
+        'description-frequency': 'on-demand',
+      });
+      expect(result.success).toBe(true);
+    });
+
+    it('rejects description-frequency: sometimes', () => {
+      const result = SkillInputSchema.safeParse({
+        name: 'test',
+        description: 'Use when X',
+        'description-frequency': 'sometimes',
+      });
+      expect(result.success).toBe(false);
+    });
+
+    it('accepts skills without description-frequency (optional)', () => {
+      const result = SkillInputSchema.safeParse({ name: 'test', description: 'Use when X' });
+      expect(result.success).toBe(true);
+    });
+
+    it('description-frequency is in GSD_EXTENSION_FIELDS (not unknown)', () => {
+      const src = require('fs').readFileSync(
+        require('path').resolve(__dirname, './skill-validation.ts'),
+        'utf8',
+      );
+      const m = src.match(/GSD_EXTENSION_FIELDS[\s\S]*?\]/);
+      expect(m).not.toBeNull();
+      expect(m![0]).toContain("'description-frequency'");
+    });
+
+    it('SkillMetadataSchema accepts description-frequency: always', () => {
+      const result = SkillMetadataSchema.safeParse({
+        name: 'test',
+        description: 'Use when X',
+        'description-frequency': 'always',
+      });
+      expect(result.success).toBe(true);
+    });
+
+    it('SkillMetadataSchema rejects description-frequency: bad-value', () => {
+      const result = SkillMetadataSchema.safeParse({
+        name: 'test',
+        description: 'Use when X',
+        'description-frequency': 'bad-value',
+      });
+      expect(result.success).toBe(false);
+    });
+  });
 });

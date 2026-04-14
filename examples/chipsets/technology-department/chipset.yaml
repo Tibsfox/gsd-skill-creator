@@ -1,0 +1,253 @@
+# Technology Department Chipset Configuration
+# 17th department instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Covers technology literacy and innovation -- distinct
+# from the coding department (which is programming-specific).
+
+name: technology-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated technology department providing multi-perspective
+  expertise through seven named agents (Berners-Lee, Borg, Gates-M,
+  Joy, Hicks, Norman, Resnick), six knowledge skills, and three
+  pre-composed teams. Persists work via Grove records and integrates
+  with the college technology department concept graph. Covers
+  technology literacy, digital systems, design thinking, emerging
+  technologies, cybersecurity, HCI, and responsible innovation.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  digital-systems:
+    domain: technology
+    description: "Digital technology foundations — binary, architecture, networking, OS, software"
+    triggers:
+      - "how computers work"
+      - "binary"
+      - "networking"
+      - "operating system"
+      - "CPU"
+      - "internet"
+      - "protocol"
+    agent_affinity: [berners-lee, borg]
+
+  design-thinking:
+    domain: technology
+    description: "Technology design process — empathy, prototyping, testing, iteration"
+    triggers:
+      - "design thinking"
+      - "prototype"
+      - "user needs"
+      - "design brief"
+      - "iterate"
+      - "design process"
+    agent_affinity: [norman, resnick]
+
+  emerging-tech:
+    domain: technology
+    description: "Emerging technologies — AI, quantum, biotech, IoT, blockchain, robotics"
+    triggers:
+      - "artificial intelligence"
+      - "quantum computing"
+      - "biotechnology"
+      - "IoT"
+      - "blockchain"
+      - "robotics"
+      - "emerging technology"
+    agent_affinity: [joy, gates-m]
+
+  cybersecurity-basics:
+    domain: technology
+    description: "Security literacy — threats, encryption, authentication, privacy, defense in depth"
+    triggers:
+      - "cybersecurity"
+      - "encryption"
+      - "password"
+      - "phishing"
+      - "malware"
+      - "privacy"
+      - "authentication"
+    agent_affinity: [borg, berners-lee]
+
+  human-computer-interaction:
+    domain: technology
+    description: "HCI — usability heuristics, interaction paradigms, accessibility, cognitive load"
+    triggers:
+      - "usability"
+      - "user interface"
+      - "accessibility"
+      - "affordance"
+      - "interaction design"
+      - "UX"
+    agent_affinity: norman
+
+  responsible-innovation:
+    domain: technology
+    description: "Ethics of technology — equity, environmental impact, labor, governance"
+    triggers:
+      - "technology ethics"
+      - "digital equity"
+      - "responsible"
+      - "technology impact"
+      - "digital divide"
+      - "e-waste"
+      - "automation ethics"
+    agent_affinity: [gates-m, hicks, joy]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Berners-Lee as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: berners-lee
+
+  agents:
+    - name: berners-lee
+      role: "department chair — classification, routing, synthesis, information architecture"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: borg
+      role: "systems specialist — infrastructure, architecture, networking, system security"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: gates-m
+      role: "innovation & impact specialist — digital equity, social impact, global development"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: joy
+      role: "risk specialist — emerging tech risk, failure modes, precautionary analysis"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: hicks
+      role: "social analyst — social construction, labor, gender, power dynamics"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: norman
+      role: "HCI specialist — usability, affordances, accessibility, interaction design"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: resnick
+      role: "pedagogy specialist — creative learning, low floors/high ceilings/wide walls"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  tech-assessment-team:
+    description: "Full department for complex multi-domain technology assessment"
+    agents: [berners-lee, borg, gates-m, joy, hicks, norman, resnick]
+    use_when: "multi-domain assessment, technology policy, or cross-cutting evaluation"
+
+  design-team:
+    description: "Focused design evaluation and creation"
+    agents: [norman, berners-lee, borg, resnick]
+    use_when: "design review, prototype evaluation, accessibility audit"
+
+  ethics-team:
+    description: "Focused ethics and social impact analysis"
+    agents: [joy, hicks, gates-m, resnick]
+    use_when: "ethical evaluation, social impact, labor analysis, equity audit"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 technology Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college technology department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (berners-lee) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - systems
+      - design
+      - emerging-tech
+      - security
+      - hci
+      - ethics
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "technology-department"
+  record_types:
+    - name: TechAnalysis
+      description: "Systems analysis, failure mode analysis, or social construction analysis"
+
+    - name: TechDesign
+      description: "Interface evaluation, interaction design, or information architecture"
+
+    - name: TechAssessment
+      description: "Risk assessment, equity audit, or impact evaluation"
+
+    - name: TechExplanation
+      description: "Teaching artifact at a specified level with scaffolding"
+
+    - name: TechSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "technology"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Tools & Simple Machines"
+    - "Systems & Processes"
+    - "Design & Engineering Process"
+    - "Digital Technology Foundations"
+    - "Technology & Society"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

@@ -1,0 +1,275 @@
+# Logic Department Chipset Configuration
+# 25th department in the college structure
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template pattern.
+
+name: logic-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated logic department providing formal and informal
+  reasoning expertise through seven named agents (Frege, Boole,
+  Russell, Godel, Tarski, Quine, Langer), six knowledge skills,
+  and three pre-composed teams. Persists work via Grove records and
+  integrates with the college logic department concept graph.
+
+# ==========================================================================
+# Skills -- 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  propositional-logic:
+    domain: logic
+    description: "Sentential connectives, truth tables, normal forms, natural deduction, translation"
+    triggers:
+      - "propositional"
+      - "truth table"
+      - "if then"
+      - "modus ponens"
+      - "modus tollens"
+      - "tautology"
+      - "conjunction"
+      - "disjunction"
+      - "biconditional"
+      - "boolean"
+    agent_affinity: [boole, frege, russell]
+
+  predicate-logic:
+    domain: logic
+    description: "First-order logic with quantifiers, predicates, functions, identity, natural deduction for quantifiers"
+    triggers:
+      - "for all"
+      - "there exists"
+      - "quantifier"
+      - "predicate logic"
+      - "first-order"
+      - "universal"
+      - "existential"
+      - "natural deduction"
+      - "FOL"
+    agent_affinity: [frege, tarski, godel]
+
+  modal-logic:
+    domain: logic
+    description: "Necessity and possibility, Kripke semantics, systems K/T/S4/S5, epistemic/deontic/temporal extensions"
+    triggers:
+      - "necessity"
+      - "possibility"
+      - "modal"
+      - "possible world"
+      - "Kripke"
+      - "epistemic"
+      - "deontic"
+      - "temporal logic"
+      - "must"
+      - "might"
+    agent_affinity: [quine, tarski, frege]
+
+  informal-fallacies:
+    domain: logic
+    description: "Catalog of informal fallacies with examples and detection heuristics across five families"
+    triggers:
+      - "fallacy"
+      - "ad hominem"
+      - "straw man"
+      - "red herring"
+      - "false dichotomy"
+      - "slippery slope"
+      - "appeal to authority"
+      - "begging the question"
+      - "post hoc"
+      - "cherry pick"
+    agent_affinity: [russell, quine, langer]
+
+  mathematical-proof-logic:
+    domain: logic
+    description: "Logical structure of mathematical proof -- direct, contrapositive, contradiction, cases, induction"
+    triggers:
+      - "proof structure"
+      - "proof by induction"
+      - "proof by contradiction"
+      - "contrapositive"
+      - "verify proof"
+      - "proof gap"
+      - "Godel"
+      - "completeness"
+      - "soundness"
+      - "incompleteness"
+    agent_affinity: [godel, tarski, russell]
+
+  critical-argumentation:
+    domain: logic
+    description: "Practical argument identification, evaluation, steel-manning, burden of proof, rhetorical context"
+    triggers:
+      - "evaluate argument"
+      - "steel man"
+      - "burden of proof"
+      - "premise"
+      - "conclusion"
+      - "valid argument"
+      - "sound argument"
+      - "reconstruct argument"
+      - "argument map"
+    agent_affinity: [russell, langer, quine]
+
+# ==========================================================================
+# Agents -- 7 agents in router topology (Frege as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: frege
+
+  agents:
+    - name: frege
+      role: "department chair -- classification, routing, synthesis"
+      historical: "Gottlob Frege (1848-1925), Begriffsschrift"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: boole
+      role: "propositional specialist -- algebraic and truth-functional analysis"
+      historical: "George Boole (1815-1864), The Laws of Thought"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: russell
+      role: "informal argument specialist -- translation, fallacies, steel-manning"
+      historical: "Bertrand Russell (1872-1970), Principia Mathematica"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: godel
+      role: "proof and metamathematics specialist -- proof verification, completeness"
+      historical: "Kurt Godel (1906-1978), Incompleteness Theorems"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: tarski
+      role: "semantics and model theory specialist -- truth definition, countermodels, Kripke"
+      historical: "Alfred Tarski (1901-1983), Concept of Truth"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: quine
+      role: "skeptical specialist -- equivocation, opacity, modal critique"
+      historical: "W. V. O. Quine (1908-2000), Word and Object"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: langer
+      role: "pedagogy specialist -- explanation, practice, study guide writing"
+      historical: "Susanne K. Langer (1895-1985), Introduction to Symbolic Logic"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams -- 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  logic-analysis-team:
+    description: "Full department for multi-domain or systemic logic questions"
+    agents: [frege, boole, russell, godel, tarski, quine, langer]
+    use_when: "multi-domain, systemic, contested, or pedagogically serious requests"
+
+  logic-workshop-team:
+    description: "Focused evaluation of a single argument, proof, or claim"
+    agents: [frege, russell, godel, tarski, quine]
+    use_when: "single-artifact evaluation requests"
+
+  logic-practice-team:
+    description: "Sequential pipeline for turning concepts into practice routines"
+    agents: [frege, boole, russell, godel, langer]
+    use_when: "pedagogical requests (explain, study guide, practice problems, classroom activity)"
+
+# ==========================================================================
+# Evaluation Gates -- pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 logic Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college logic department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (frege) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - propositional
+      - predicate
+      - modal
+      - informal
+      - proof
+      - argumentation
+
+# ==========================================================================
+# Grove Integration -- namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "logic-department"
+  record_types:
+    - name: LogicAnalysis
+      description: "Formal or semantic analysis of a formula, argument, or logical structure"
+
+    - name: LogicConstruct
+      description: "Construction or verification of a proof, derivation, or formal object"
+
+    - name: LogicReview
+      description: "Critical review of an argument or proof with verdict and decision guidance"
+
+    - name: LogicExplanation
+      description: "Pedagogical artifact -- explanation, worked example, practice problems"
+
+    - name: LogicSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration -- department binding
+# ==========================================================================
+
+college:
+  department: "logic"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Classical Logic"
+    - "Formal Systems"
+    - "Proof and Semantics"
+    - "Argument Evaluation"
+    - "Applied Reasoning"
+
+# ==========================================================================
+# Customization -- forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

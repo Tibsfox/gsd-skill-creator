@@ -1,6 +1,6 @@
 [package]
 name = "gsd-os"
-version = "1.49.500"
+version = "1.49.441"
 edition = "2021"
 description = "GSD-OS Desktop Application"
 
@@ -25,17 +25,29 @@ regex = "1"
 reqwest = { version = "0.12", features = ["json", "stream", "rustls-tls"], default-features = false }
 futures-util = "0.3"
 zip = { version = "2", default-features = false, features = ["deflate"] }
+xxhash-rust = { version = "0.8", features = ["xxh3"] }
+libc = "0.2"
+memmap2 = "0.9"
+cudarc = { version = "0.19", default-features = false, features = ["driver", "std", "nvrtc", "fallback-dynamic-loading", "cuda-version-from-build-system"], optional = true }
+sqlx = { version = "0.8", features = ["runtime-tokio", "postgres"], optional = true }
 
 [features]
 gnome-keyring = []
 macos-keychain = []
+cuda = ["dep:cudarc"]
+postgres = ["dep:sqlx"]
 
 [dev-dependencies]
 tempfile = "3"
 zip = { version = "2", default-features = false, features = ["deflate"] }
+criterion = { version = "0.5", default-features = false, features = ["html_reports"] }
 
 [build-dependencies]
 tauri-build = { version = "2.5", features = [] }
+
+[[bench]]
+name = "arena_bench"
+harness = false
 
 [profile.release]
 panic = "abort"

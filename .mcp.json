@@ -1,12 +1,15 @@
 {
   "mcpServers": {
-    "gsd-math-coprocessor": {
-      "command": "/path/to/projectGSD/dev-tools/gsd-skill-creator/math-coprocessor/.venv/bin/python",
-      "args": ["-m", "math-coprocessor"],
-      "cwd": "/path/to/projectGSD/dev-tools/gsd-skill-creator",
-      "env": {
-        "MATH_COPROCESSOR_CONFIG": "/path/to/projectGSD/dev-tools/gsd-skill-creator/data/chipset/math-coprocessor.yaml"
-      }
+    "unison": {
+      "command": "/usr/bin/ucm",
+      "args": ["mcp"],
+      "expectedTools": [
+        "ucm_find",
+        "ucm_list",
+        "ucm_view",
+        "ucm_type_lookup",
+        "ucm_docs"
+      ]
     }
   }
 }

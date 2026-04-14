@@ -29,7 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/session-state.cjs"
+            "command": "bash .claude/hooks/gsd-session-state.sh"
           }
         ]
       }
@@ -55,17 +55,7 @@
     "PreToolUse": [
       {
         "matcher": "Bash",
-        "if": "Bash(git commit*)",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/validate-commit.cjs"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "if": "Bash(git push*)",
+        "if": "Bash(npm run build*)",
         "hooks": [
           {
             "type": "command",
@@ -82,34 +72,34 @@
             "timeout": 5
           }
         ]
-      }
-    ],
-    "TaskCompleted": [
+      },
       {
+        "matcher": "Write|Edit",
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/task-completed-gate.sh"
+            "command": "node .claude/hooks/gsd-read-guard.js",
+            "timeout": 5
           }
         ]
-      }
-    ],
-    "TeammateIdle": [
+      },
       {
+        "matcher": "Write|Edit",
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/teammate-idle-gate.sh"
+            "command": "node .claude/hooks/gsd-workflow-guard.js",
+            "timeout": 5
           }
         ]
-      }
-    ],
-    "PostCompact": [
+      },
       {
+        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/session-state.cjs"
+            "command": "bash .claude/hooks/gsd-validate-commit.sh",
+            "timeout": 5
           }
         ]
       }
@@ -123,14 +113,16 @@
             "command": "node .claude/hooks/gsd-context-monitor.js",
             "timeout": 10
           }
-        ]
+        ],
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task"
       },
       {
-        "matcher": "Write",
+        "matcher": "Write|Edit",
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/phase-boundary-check.cjs"
+            "command": "bash .claude/hooks/gsd-phase-boundary.sh",
+            "timeout": 5
           }
         ]
       }

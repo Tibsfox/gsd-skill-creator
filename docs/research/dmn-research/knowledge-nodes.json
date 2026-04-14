@@ -1,0 +1,85 @@
+{
+  "series": "DMN",
+  "title": "Data Mining Research Series",
+  "version": "1.0",
+  "date": "2026-04-10",
+  "nodes": [
+    {
+      "id": "dmn-01-history",
+      "file": "history-origins.md",
+      "title": "History and Origins",
+      "words": 4042,
+      "concepts": ["Fisher", "Tukey", "EDA", "KDD", "Fayyad", "Piatetsky-Shapiro", "Quinlan", "ID3", "CRISP-DM", "Netflix Prize", "big data", "data warehousing"],
+      "period": "1890s-2026",
+      "links": ["dmn-02-algorithms", "dmn-03-process"]
+    },
+    {
+      "id": "dmn-02-algorithms",
+      "file": "foundational-algorithms.md",
+      "title": "Foundational Algorithms",
+      "words": 3953,
+      "concepts": ["decision tree", "ID3", "C4.5", "CART", "naive Bayes", "k-NN", "SVM", "random forest", "k-means", "DBSCAN", "hierarchical clustering", "EM", "Apriori", "FP-Growth", "PCA", "LDA", "LOF"],
+      "period": "1901-2010",
+      "links": ["dmn-01-history", "dmn-04-modern", "dmn-06-tools"]
+    },
+    {
+      "id": "dmn-03-process",
+      "file": "process-methodology.md",
+      "title": "Process and Methodology",
+      "words": 2554,
+      "concepts": ["KDD process", "CRISP-DM", "SEMMA", "ASUM-DM", "TDSP", "feature engineering", "cross-validation", "reproducibility", "MLOps"],
+      "period": "1996-2026",
+      "links": ["dmn-01-history", "dmn-06-tools", "dmn-08-frontiers"]
+    },
+    {
+      "id": "dmn-04-modern",
+      "file": "modern-techniques.md",
+      "title": "Modern Techniques",
+      "words": 2331,
+      "concepts": ["gradient boosting", "XGBoost", "LightGBM", "CatBoost", "GNN", "GCN", "node2vec", "word2vec", "BERT", "LDA topics", "streaming", "concept drift", "AutoML", "causal forest", "TabPFN"],
+      "period": "2010-2026",
+      "links": ["dmn-02-algorithms", "dmn-08-frontiers"]
+    },
+    {
+      "id": "dmn-05-applications",
+      "file": "applications-domains.md",
+      "title": "Applications Across Domains",
+      "words": 2518,
+      "concepts": ["market basket analysis", "Netflix Prize", "FICO", "AlphaFold", "Sloan Digital Sky Survey", "PageRank", "COMPAS", "PredPol", "predictive maintenance", "learning analytics"],
+      "period": "1990s-2026",
+      "links": ["dmn-02-algorithms", "dmn-07-ethics"]
+    },
+    {
+      "id": "dmn-06-tools",
+      "file": "tools-platforms.md",
+      "title": "Tools and Platforms",
+      "words": 2637,
+      "concepts": ["SAS", "SPSS", "Weka", "R", "scikit-learn", "pandas", "Jupyter", "Spark", "XGBoost", "PyTorch", "SageMaker", "Databricks", "MLflow", "feature store", "vector database"],
+      "period": "1968-2026",
+      "links": ["dmn-02-algorithms", "dmn-03-process", "dmn-04-modern"]
+    },
+    {
+      "id": "dmn-07-ethics",
+      "file": "privacy-ethics.md",
+      "title": "Privacy, Ethics, and Regulation",
+      "words": 2898,
+      "concepts": ["Sweeney 1997", "AOL 2006", "Netflix re-identification", "k-anonymity", "differential privacy", "Dwork 2006", "federated learning", "GDPR", "CCPA", "EU AI Act", "COMPAS bias", "SHAP", "LIME", "fairness impossibility"],
+      "period": "1997-2026",
+      "links": ["dmn-05-applications", "dmn-08-frontiers"]
+    },
+    {
+      "id": "dmn-08-frontiers",
+      "file": "frontiers-open-problems.md",
+      "title": "Frontiers and Open Problems",
+      "words": 2733,
+      "concepts": ["LLMs as miners", "causal inference", "Pearl", "do-calculus", "mechanistic interpretability", "federated learning", "synthetic data", "data-centric AI", "TabPFN", "machine unlearning", "benchmark saturation"],
+      "period": "2020-2026",
+      "links": ["dmn-04-modern", "dmn-03-process", "dmn-07-ethics"]
+    }
+  ],
+  "totals": {
+    "documents": 8,
+    "words": 23666,
+    "concepts_covered": 100
+  }
+}

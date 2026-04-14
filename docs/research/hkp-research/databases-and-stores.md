@@ -1,0 +1,91 @@
+# Databases and Data Stores: Paradigms of Structured Storage
+*—from Codd's relations to vector embeddings, a half-century of arguing about shape—*
+
+## 1. The Relational Revolution
+
+Before 1970, data management meant wrestling with hierarchical systems like IBM's IMS (1968) or network databases shaped by the CODASYL DBTG report of 1971. Programs navigated pointers. Changing a schema meant rewriting applications. Edgar F. Codd, an English mathematician working at IBM's San Jose Research Laboratory, found this intolerable. In June 1970 he published "A Relational Model of Data for Large Shared Data Banks" in *Communications of the ACM*, Volume 13 Number 6. The paper proposed that data should be represented as mathematical relations — unordered sets of tuples — and manipulated through a small, closed algebra. Applications would state *what* they wanted, not *how* to fetch it. Physical representation became the database's problem, not the programmer's.
+
+IBM management was slow to see the commercial potential, but the research side moved. System R, begun at San Jose in 1974, became the first full-scale relational prototype. It gave us the SEQUEL language (later renamed SQL to avoid a trademark conflict), two-phase locking, cost-based query optimization, and the B-tree index. Donald Chamberlin and Raymond Boyce designed SEQUEL; Jim Gray, working on System R's transaction manager, would later define much of the theoretical vocabulary of the field. In parallel, at UC Berkeley, Michael Stonebraker and Eugene Wong launched Ingres in 1974, funded by an accidental DARPA grant intended for geographic data. Ingres produced QUEL, a cleaner query language than SQL, and trained an entire generation of database engineers. Its codebase forked into commercial Ingres, Informix, Sybase, and — via Stonebraker's follow-up project Postgres (begun 1986) — into PostgreSQL.
+
+SQL eventually won the language war, codified as ANSI X3.135 in 1986 and adopted by ISO as 9075 in 1987. Larry Ellison, reading the System R papers before IBM shipped anything, founded Software Development Laboratories in 1977 and released Oracle V2 in 1979 as the first commercial SQL database. By the early 1990s Oracle, DB2, Sybase, Informix, and Microsoft SQL Server (a Sybase fork) had turned Codd's paper into a multi-billion-dollar industry.
+
+## 2. Normalization and Its Discontents
+
+Codd followed the 1970 paper with an attack on redundancy. His normalization theory, refined across several papers from 1971 through 1974, defined a ladder of forms built on the concept of functional dependency — the formal statement that one set of attributes determines another. First Normal Form (1NF) required atomic, single-valued columns. Second Normal Form (2NF) eliminated partial dependencies on a composite key. Third Normal Form (3NF) removed transitive dependencies through non-key attributes. Boyce-Codd Normal Form (BCNF), introduced by Codd and Raymond Boyce in 1974, tightened 3NF to cover all dependencies where the determinant is a superkey. Ronald Fagin added Fourth Normal Form in 1977 to eliminate multi-valued dependencies, and Fifth Normal Form in 1979 to address join dependencies.
+
+The theory is elegant. Practice is messier. Fully normalized schemas often require many joins to answer a single user question, and joins are expensive. Denormalization — selectively copying data back into wider tables, accepting redundancy to avoid joins — became the standard compromise, especially once disk capacity cheapened faster than random-access latency improved. The tension between normal form purity and query performance remains the central schema-design dialectic of relational databases.
+
+## 3. ACID and the Transaction
+
+In 1983, Theo Härder of the University of Kaiserslautern and Andreas Reuter of the Stuttgart Technical University published "Principles of Transaction-Oriented Database Recovery" in *ACM Computing Surveys*. The paper coined ACID — Atomicity, Consistency, Isolation, Durability — as a shorthand for what a correctly implemented transaction guarantees. Atomicity says a transaction is all-or-nothing. Consistency says it moves the database from one valid state to another. Isolation says concurrent transactions appear to execute serially. Durability says committed results survive crashes. Jim Gray's earlier work at IBM (the 1976 "Notes on Data Base Operating Systems" is the foundational text) had already established most of the underlying mechanisms — write-ahead logging, two-phase commit, shadow paging — but Härder and Reuter gave the property set a name that stuck.
+
+ANSI SQL-92 formalized four transaction isolation levels, each defined by the anomalies it permits. **Read Uncommitted** allows dirty reads, in which one transaction sees another's uncommitted writes. **Read Committed** forbids dirty reads but allows non-repeatable reads, where re-reading a row returns a different value because someone committed between the two reads. **Repeatable Read** eliminates non-repeatable reads but allows phantom reads, where a range query returns different rows because new matching rows were inserted. **Serializable** forbids all three. The anomaly ladder is not free: stronger isolation costs lock contention and throughput. A half-century of database tuning has been about buying the weakest level you can live with, then working around the hazards.
+
+## 4. The NoSQL Revolt
+
+By the mid-2000s, Google, Amazon, and Facebook were running services whose working sets dwarfed what a single relational node could hold. They built bespoke stores. Google's BigTable paper appeared at OSDI in 2006 — a sparse, distributed, persistent multi-dimensional sorted map built on GFS and Chubby. Amazon's Dynamo paper landed at SOSP in 2007, introducing consistent hashing, vector clocks, and the tunable (N, R, W) quorum model, all in service of an always-writable shopping cart. Facebook's Cassandra, open-sourced in 2008, merged Dynamo's ring topology with BigTable's column-family data model.
+
+The term "NoSQL" was coined by Eric Evans at a Rackspace meetup organized by Johan Oskarsson in June 2009 in San Francisco — initially as a hashtag for a single event, later generalized as "Not Only SQL." The movement grouped wildly heterogeneous systems under one banner: schemaless document stores, wide-column stores, key-value stores, and graph databases, united mostly by their rejection of the SQL-relational-ACID default.
+
+The theoretical spine of the movement was the CAP theorem. Eric Brewer stated it in a keynote at the 2000 PODC conference: a distributed system cannot simultaneously guarantee Consistency, Availability, and Partition tolerance. Seth Gilbert and Nancy Lynch formalized and proved it in a 2002 paper at MIT. In a network that partitions, a node either serves a stale response (sacrificing consistency) or refuses (sacrificing availability). Daniel Abadi's 2010 PACELC refinement extended the picture: *if* a partition occurs, the system trades A against C, but *else* (during normal operation) it still trades latency L against consistency C. Most real systems live in the E side most of the time, and PACELC captures the steady-state cost that CAP alone hides.
+
+## 5. The Key-Value Minimum
+
+The simplest NoSQL paradigm is the key-value store, a persistent hash map. Memcached, written by Brad Fitzpatrick for LiveJournal in 2003, was not a database at all but an in-memory cache, and it taught a generation of web developers how far a pure string-to-bytes dictionary could go. Salvatore Sanfilippo released Redis in 2009, adding server-side data structures — lists, sets, sorted sets, hashes, streams — that turned the key-value paradigm into something closer to an in-memory algorithms toolbox. Amazon's DynamoDB, launched as a managed service in 2012, productized the Dynamo paper's ideas with predictable per-partition performance. RocksDB, forked from LevelDB by Facebook in 2012, embedded a log-structured merge-tree store into applications ranging from Kafka's state store to MySQL's MyRocks engine. The key-value paradigm survives because the hash map is the most useful data structure ever invented and the network does not change that.
+
+## 6. Document Stores
+
+Document databases replace the row with the JSON (or BSON) object. Damien Katz, a former Lotus Notes engineer, began CouchDB in 2005, releasing early versions through 2008; it joined Apache in 2008 and brought MVCC, an HTTP API, and eventual consistency. MongoDB, announced by 10gen (later MongoDB Inc.) in 2009, focused instead on developer ergonomics — a dynamic schema, rich query language, and indexing that felt familiar to SQL refugees. Couchbase, formed by the 2011 merger of Membase and CouchOne, combined the document model with a memcached-compatible caching tier.
+
+The core question for every document store is whether related data should be embedded in the parent document or referenced by ID. Embedding keeps reads fast and atomic but makes updates awkward and risks unbounded growth. Referencing normalizes but reintroduces the joins document stores were supposed to escape. No model wins in general; the choice is workload-specific.
+
+## 7. Columnar Stores
+
+Michael Stonebraker returned in 2005 with C-Store, a research prototype whose VLDB paper argued that analytical workloads touch few columns across many rows and so should store columns contiguously rather than rows. Compression ratios improve, SIMD vectorization becomes tractable, and queries skip columns they do not read. C-Store became Vertica commercially. MonetDB, built at the Dutch CWI institute starting in 1993 and open-sourced in 2004, had explored similar ground from a main-memory angle. Apache Parquet, developed jointly by Twitter and Cloudera in 2013, standardized a columnar on-disk format for Hadoop that has since become the lingua franca of data lakes. ClickHouse, developed internally at Yandex for Metrica and open-sourced in June 2016, pushed the paradigm into sub-second analytical query territory. Apache Druid, started at Metamarkets in 2011 and donated to the ASF in 2018, added real-time ingestion and time-partitioned segments. In analytics, columns won.
+
+## 8. Graph Databases
+
+Some data is about relationships. Neo4j, founded by Emil Eifrem, Johan Svensson, and Peter Neubauer in Sweden and released as open source in 2007, popularized the property-graph model: nodes and edges, both bearing typed attributes. Its Cypher query language, introduced in 2011, made graph traversal declarative. The older RDF-triple tradition, rooted in the Semantic Web work of the late 1990s, represents everything as subject-predicate-object triples and queries with SPARQL (W3C Recommendation, 2008). The two camps — property graph versus RDF triple — still argue about which abstraction is natural. Amazon Neptune, launched in 2018, sidesteps the fight by supporting both. TigerGraph, founded 2012 and publicly launched 2017, staked its claim on massively parallel graph analytics. Apache TinkerPop's Gremlin, a traversal-based graph DSL, competes with Cypher for the property-graph mindshare.
+
+## 9. Time-Series Databases
+
+Metrics, sensor readings, trades, telemetry — all are sequences of values indexed by time, and relational databases historically handled them poorly because they insert append-only, read range-scan, and retain by age. InfluxDB, released by InfluxData in 2013, built a native time-series engine with a line-protocol ingestion format and its own query language (InfluxQL, later Flux). TimescaleDB, released 2017, took the opposite bet: embed time-series optimization as a PostgreSQL extension and keep SQL. Prometheus, started by Matt Proud and Julius Volz at SoundCloud in 2012 and announced publicly in 2015, fused a pull-based metrics scraper with a label-oriented dimensional model and PromQL, and became the de facto Kubernetes monitoring standard when it joined the CNCF as its second hosted project in 2016. QuestDB, open-sourced in 2019, pursued the raw-performance angle with column-oriented storage and SQL. Time-series workloads justified their own paradigm because their access patterns are so skewed toward recent data, append-only writes, and downsampling that general-purpose engines leave enormous performance on the table.
+
+## 10. Vector Databases
+
+The rise of dense embedding models — word2vec in 2013, BERT in 2018, the large language models of 2020 onward — created a new retrieval problem: given a query vector, find the nearest neighbors in a collection of millions or billions of other vectors, typically using cosine or inner-product similarity. Approximate nearest-neighbor indices such as HNSW (Malkov and Yashunin, 2016) and IVF-PQ (Jégou et al., 2011) made this tractable. Pinecone, founded by Edo Liberty and launched publicly in 2021, productized ANN search as a managed service. Weaviate (SeMI Technologies, open-sourced 2019), Milvus (Zilliz, 2019, graduated from LF AI & Data in 2021), Qdrant (2021), and Chroma (2022) followed with different flavors of the same core offering. pgvector, a PostgreSQL extension released in 2021 by Andrew Kane, demonstrated that the vector-index primitive could live inside an existing relational engine, and the retrieval-augmented-generation boom of 2023 made pgvector one of the fastest-growing Postgres extensions in history.
+
+## 11. NewSQL and Distributed SQL
+
+The NoSQL movement's rejection of SQL turned out to be overstated. Applications still wanted transactions, joins, and a declarative query language — they just also wanted horizontal scale. Google Spanner, described at OSDI 2012, delivered external consistency across globally distributed replicas using TrueTime, an API built on GPS and atomic clocks that bounds uncertainty rather than pretending clocks agree. CockroachDB, founded in 2015 by ex-Googlers Spencer Kimball, Peter Mattis, and Ben Darnell, rebuilt Spanner's ideas without the atomic clocks, using hybrid logical clocks and Raft consensus. YugabyteDB, founded 2016 by ex-Facebook engineers, layered a PostgreSQL-compatible SQL front end over a sharded, Raft-replicated DocDB core. TiDB, from PingCAP (founded 2015), pursued MySQL compatibility on top of TiKV. All four share a pattern: range-partition the key space, replicate each range by consensus, layer a SQL optimizer above, and pay in per-commit latency for what you gain in elasticity and failure tolerance.
+
+## 12. Multi-Model and the One-DB Dream
+
+A recurring pitch claims that one engine can serve documents, graphs, key-values, and SQL simultaneously. ArangoDB, founded in Cologne in 2014, offers documents, graphs, and key-value under a single query language (AQL). FaunaDB, founded 2012 by former Twitter engineers Evan Weaver and Matt Freels, combines document, relational, and graph operations with Calvin-style deterministic transactions. OrientDB attempts a similar convergence from the graph side. The appeal is obvious — fewer systems to operate, consistent transactions across models — but the limits are real: specialized engines still outperform multi-model systems on their native workloads, and operational maturity is hard to spread thin across paradigms. The "one DB to rule them all" story always competes against the simpler story of "pick the right tool."
+
+## 13. What Stays
+
+The paradigms accumulate. None of them retire. Relational databases remain the default for transactional systems and will do so indefinitely because SQL, normalization, and ACID remain the cleanest answers to their problem. NoSQL stores occupy the niches where relational assumptions break — massive scale, schemaless ingestion, specialized access patterns. Columnar engines dominate analytics. Graph and time-series engines carve out workloads that general-purpose databases underserve. Vector databases are the newest stratum, reshaping retrieval for the embedding era. NewSQL tries to give back what NoSQL gave up. Each paradigm is an answer to a specific question about the shape of data and the tradeoff a workload is willing to pay. The oldest insight still holds: the hardest part of database design is knowing which questions your data is going to be asked.
+
+## Study Guide — Databases & Stores
+
+### Paradigm map
+
+- **Relational:** PostgreSQL, MySQL, SQL Server, Oracle.
+- **Document:** MongoDB, Couchbase.
+- **Key-value:** Redis, DynamoDB.
+- **Columnar:** ClickHouse, Snowflake, BigQuery.
+- **Graph:** Neo4j, Neptune.
+- **Time-series:** InfluxDB, TimescaleDB.
+- **Vector:** pgvector, Pinecone, Qdrant.
+- **NewSQL:** Spanner, CockroachDB, YugabyteDB.
+
+## DIY — Same query, 3 paradigms
+
+Model one small domain in relational, document, and
+graph. Observe which is easier.
+
+## TRY — CockroachDB single-node
+
+`cockroach start-single-node`. Create a table, insert.
+You've just run a distributed SQL engine.

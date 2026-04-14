@@ -1,0 +1,78 @@
+% ============================================================================
+%  gsd-color-scheme.tex
+%  Color palette + tcolorbox environment definitions for all GSD User Guides
+% ============================================================================
+
+\definecolor{gsdnavy}{HTML}{1B2A4A}
+\definecolor{gsdaccent}{HTML}{CB3837}
+\definecolor{gsdcodebg}{HTML}{F5F5F5}
+\definecolor{gsdcodeborder}{HTML}{CCCCCC}
+
+\definecolor{gsdtipbg}{HTML}{E8F4FD}
+\definecolor{gsdtipbar}{HTML}{2B6CB0}
+
+\definecolor{gsdwarnbg}{HTML}{FFF3CD}
+\definecolor{gsdwarnbar}{HTML}{B78D00}
+
+\definecolor{gsddangerbg}{HTML}{F8D7DA}
+\definecolor{gsddangerbar}{HTML}{B02A37}
+
+\definecolor{gsdsuccessbg}{HTML}{D4EDDA}
+\definecolor{gsdsuccessbar}{HTML}{198754}
+
+\definecolor{gsdnotebg}{HTML}{F0F0F5}
+\definecolor{gsdnotebar}{HTML}{495057}
+
+% ---------- Callout boxes ----------
+\tcbset{
+  gsdcalloutbase/.style={
+    enhanced,
+    breakable,
+    left=10pt,
+    right=8pt,
+    top=6pt,
+    bottom=6pt,
+    boxrule=0pt,
+    frame hidden,
+    borderline west={4pt}{0pt}{#1},
+    colback=#1,
+    fonttitle=\bfseries\headingfont,
+    fontupper=\small,
+    arc=2pt
+  }
+}
+
+\newtcolorbox{gsdtip}[1][Tip]{%
+  gsdcalloutbase=gsdtipbg,
+  borderline west={4pt}{0pt}{gsdtipbar},
+  colback=gsdtipbg,
+  title={#1}
+}
+
+\newtcolorbox{gsdwarning}[1][Warning]{%
+  gsdcalloutbase=gsdwarnbg,
+  borderline west={4pt}{0pt}{gsdwarnbar},
+  colback=gsdwarnbg,
+  title={#1}
+}
+
+\newtcolorbox{gsdimportant}[1][Important]{%
+  gsdcalloutbase=gsddangerbg,
+  borderline west={4pt}{0pt}{gsddangerbar},
+  colback=gsddangerbg,
+  title={#1}
+}
+
+\newtcolorbox{gsdnote}[1][Note]{%
+  gsdcalloutbase=gsdnotebg,
+  borderline west={4pt}{0pt}{gsdnotebar},
+  colback=gsdnotebg,
+  title={#1}
+}
+
+\newtcolorbox{gsdsuccess}[1][Success]{%
+  gsdcalloutbase=gsdsuccessbg,
+  borderline west={4pt}{0pt}{gsdsuccessbar},
+  colback=gsdsuccessbg,
+  title={#1}
+}

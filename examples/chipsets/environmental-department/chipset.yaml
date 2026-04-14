@@ -1,0 +1,254 @@
+# Environmental Department Chipset Configuration
+# Department instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template and remapped
+# to environmental science, ecological analysis, sustainability, and
+# environmental justice.
+
+name: environmental-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated environmental department providing domain-routed
+  expertise through seven named agents (Carson, Leopold, Shiva,
+  Muir, Wangari, Commoner, Orr), six knowledge skills, and three
+  pre-composed teams. Persists work via Grove records and integrates
+  with the college environmental department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  ecosystem-dynamics:
+    domain: environmental
+    description: "Ecological organization, food webs, energy flow, biodiversity, succession, species interactions"
+    triggers:
+      - "food web"
+      - "ecosystem"
+      - "biodiversity"
+      - "trophic"
+      - "succession"
+      - "keystone species"
+      - "carrying capacity"
+    agent_affinity: [leopold, muir]
+
+  biogeochemical-cycles:
+    domain: environmental
+    description: "Carbon, nitrogen, phosphorus, sulfur, and water cycles — pools, fluxes, residence times, perturbations"
+    triggers:
+      - "carbon cycle"
+      - "nitrogen cycle"
+      - "water cycle"
+      - "phosphorus"
+      - "ocean acidification"
+      - "eutrophication"
+      - "mass balance"
+    agent_affinity: commoner
+
+  human-impact-assessment:
+    domain: environmental
+    description: "Pollution pathways, habitat destruction, invasive species, impact assessment methodology"
+    triggers:
+      - "pollution"
+      - "impact assessment"
+      - "habitat loss"
+      - "invasive species"
+      - "extinction debt"
+      - "ecological footprint"
+      - "EIA"
+    agent_affinity: [carson, commoner]
+
+  climate-science:
+    domain: environmental
+    description: "Climate physics, radiative forcing, feedbacks, attribution, paleoclimate, regional impacts"
+    triggers:
+      - "climate change"
+      - "greenhouse effect"
+      - "radiative forcing"
+      - "climate sensitivity"
+      - "attribution"
+      - "sea level"
+      - "IPCC"
+    agent_affinity: commoner
+
+  sustainability-design:
+    domain: environmental
+    description: "Intervention design — renewable energy, sustainable agriculture, conservation strategy, lifecycle analysis"
+    triggers:
+      - "renewable"
+      - "sustainable"
+      - "conservation"
+      - "lifecycle"
+      - "permaculture"
+      - "rewilding"
+      - "circular economy"
+    agent_affinity: [shiva, wangari]
+
+  environmental-justice:
+    domain: environmental
+    description: "Distributional analysis — siting, exposure disparities, indigenous rights, climate justice"
+    triggers:
+      - "environmental justice"
+      - "disparate impact"
+      - "indigenous rights"
+      - "climate justice"
+      - "FPIC"
+      - "just transition"
+      - "exposure disparity"
+    agent_affinity: [shiva, wangari]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Carson as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: carson
+
+  agents:
+    - name: carson
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: leopold
+      role: "ecosystems and land ethic — community ecology, biodiversity, succession"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: shiva
+      role: "biodiversity, agroecology, and justice — agricultural systems, distributional analysis"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: muir
+      role: "wilderness and reference state — protected areas, reference conditions"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: wangari
+      role: "community restoration and organizing — reforestation, grassroots implementation"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: commoner
+      role: "systems and biogeochemistry — cycles, mass balance, feedbacks, unintended consequences"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: orr
+      role: "pedagogy and ecological literacy — explanations, lessons, training materials"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  environmental-analysis-team:
+    description: "Full department for complex multi-wing environmental problems"
+    agents: [carson, leopold, shiva, muir, wangari, commoner, orr]
+    use_when: "multi-wing, research-level, or full-analysis requests"
+
+  environmental-workshop-team:
+    description: "Focused ecosystem diagnosis and impact assessment"
+    agents: [leopold, muir, commoner, orr]
+    use_when: "ecosystem diagnosis, reference-state assessment, conservation evaluation"
+
+  environmental-practice-team:
+    description: "Community-scale restoration and sustainability practice pipeline"
+    agents: [wangari, shiva, commoner, orr]
+    use_when: "restoration program design, community intervention, implementation planning"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 environmental Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college environmental department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (carson) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - ecosystems
+      - earth-systems
+      - human-impacts
+      - climate
+      - sustainability
+      - justice
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "environmental-department"
+  record_types:
+    - name: EnvironmentalAnalysis
+      description: "Completed environmental analysis — diagnosis, decomposition, or systems reasoning with findings and confidence"
+
+    - name: EnvironmentalAssessment
+      description: "Baseline or condition assessment — reference state, current condition, or community-program design"
+
+    - name: EnvironmentalReview
+      description: "Policy, project, or proposal review with distributional and ecological framing"
+
+    - name: EnvironmentalExplanation
+      description: "Teaching artifact at a specified level — explanation, lesson, field activity, or learning pathway"
+
+    - name: EnvironmentalSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "environmental"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Ecosystems & Biodiversity"
+    - "Earth Systems"
+    - "Human Impacts"
+    - "Climate Science"
+    - "Sustainability & Solutions"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

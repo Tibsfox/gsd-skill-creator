@@ -1,0 +1,95 @@
+# Data Mining in Practice: Applications Across Domains
+
+*— from checkout lanes to protein folds, the case studies that gave the discipline its credibility —*
+
+## Prologue: The Myth That Launched an Industry
+
+No survey of data mining applications can begin without addressing the legend that launched a thousand marketing decks: the story of beer and diapers. The tale, as usually told, goes like this — a grocery chain ran an association-rule mining algorithm on its transaction logs and discovered that on Friday evenings, men who bought diapers also bought beer, so the store moved the two aisles adjacent and sales jumped. It is a compact, memorable fable, and it is mostly fiction.
+
+The real origin is more prosaic and more instructive. In 1992, Thomas Blischok, then managing a retail consulting practice at Teradata, ran a query for the drugstore chain Osco Drug against roughly 1.2 million market-basket transactions drawn from twenty-five stores. Among the patterns returned was a correlation between beer and diaper purchases in the 5 p.m. to 7 p.m. window. The result appeared in trade press coverage in late 1992, and Blischok recounted it at industry conferences the following year. Osco did not, however, reorganize its shelves, nor did it run a joint promotion. The anecdote was picked up, embellished, and eventually attributed to Walmart by authors who wanted a more recognizable protagonist. Daniel Power, editor of *DSSResources.com*, traced the provenance in a 2002 column that is still the definitive debunking. The point for practitioners is not that association mining is useless — it is that correlation without causal investigation, context, or lift testing will mislead. Osco's analysts knew that. Many of the people who retold the story did not.
+
+That caveat framed, the honest record of applied data mining is still remarkable. This document walks through the domains where the discipline earned its keep.
+
+## Retail and Market Basket Analysis
+
+Retail is where data mining first became a budget line. Walmart, beginning in the late 1980s, built what was for years the largest commercial data warehouse in the world on NCR Teradata hardware, eventually crossing a petabyte of transactional history by the early 2000s. The scale enabled techniques that smaller chains could not run: per-store, per-SKU demand forecasting; weather-sensitive restocking (the famous Pop-Tart pre-hurricane surge, reported by *The New York Times* in 2004, was a genuine finding from Walmart's data warehouse); and category-management decisions driven by affinity analysis rather than shelf-space politics.
+
+The algorithmic workhorse for basket analysis was the Apriori algorithm, published by Rakesh Agrawal and Ramakrishnan Srikant at IBM Almaden in 1994, followed by the FP-Growth algorithm from Han, Pei, and Yin in 2000, which eliminated Apriori's expensive candidate-generation step. These techniques powered not only shelf planning but coupon targeting, cross-sell prompts, and the earliest personalized-promotion engines at chains like Tesco (whose Clubcard, launched in 1995 and analyzed by dunnhumby, is perhaps the most-studied loyalty program in the literature).
+
+Recommendation systems diverged from classical basket analysis in the late 1990s. Amazon's item-to-item collaborative filtering, described in a 2003 *IEEE Internet Computing* paper by Linden, Smith, and York, scaled to tens of millions of users by precomputing item-item similarities offline rather than searching user neighborhoods at request time. The approach is still the template for many production recommenders.
+
+The watershed event for recommender research was the Netflix Prize, announced in October 2006 with a \$1 million purse for any team that could beat Netflix's Cinematch RMSE by 10 percent on a held-out set of ratings. The contest ran for nearly three years. The winning submission, delivered in September 2009 by the ensemble team BellKor's Pragmatic Chaos, was a blend of matrix factorization (popularized by Simon Funk's public blog posts in 2006), restricted Boltzmann machines, and temporal dynamics models. The prize transformed the field: matrix factorization became the default baseline, and the team led by Yehuda Koren at AT&T Labs produced a canonical tutorial paper in *Computer* (2009) that shaped the next decade of work. Ironically, Netflix never deployed the winning solution in full — the engineering cost of the ensemble outweighed the marginal RMSE gain over a simpler factorization model — which became its own cautionary lesson about research-to-production gaps.
+
+## Finance: Credit, Fraud, and Surveillance
+
+Credit scoring predates modern data mining by decades. The Fair Isaac Corporation, founded in 1956 by Bill Fair and Earl Isaac in San Rafael, California, introduced its first general-purpose credit-bureau score in 1989 as FICO. The underlying technique was logistic regression on a carefully constructed feature set — number of accounts, utilization ratios, length of history, recent inquiries — validated against subsequent delinquency. FICO's enduring contribution was not the math, which was standard; it was the discipline of out-of-time validation and the regulatory acceptance that followed under the Equal Credit Opportunity Act.
+
+Fraud detection traveled a different arc. Early systems at credit-card issuers were rule-based — flag any transaction above a dollar threshold in a foreign country — and produced crippling false-positive rates. HNC Software's Falcon, introduced in 1992 and later acquired by FICO, was the first widely deployed neural-network-based fraud scorer and by the mid-1990s was screening a majority of U.S. credit-card transactions. The transition from rules to learned models is one of the clearest commercial success stories of applied neural networks before the deep-learning era. More recently, graph-based approaches — modeling merchants, devices, cards, and accounts as nodes in a heterogeneous network and running label propagation or graph neural networks over subgraphs — have become standard at firms like Stripe, PayPal, and Visa, particularly for detecting mule-account rings that elude transaction-level features.
+
+Algorithmic trading is a data-mining domain even when its practitioners prefer the term quantitative finance. Renaissance Technologies' Medallion Fund, founded by Jim Simons in 1982 and closed to outside investors in 1993, is the paradigmatic case: decades of double-digit net returns driven by statistical learning on massive tick and fundamental datasets, executed at microsecond latencies. The firm's secrecy means the literature is thin, but Gregory Zuckerman's 2019 *The Man Who Solved the Market* provides the best public record.
+
+Anti-money-laundering (AML) compliance became a data-mining subdiscipline after the USA PATRIOT Act (2001) and the successive Basel II (2004) and Basel III (2010) accords imposed quantitative model-governance expectations on large banks. Transaction-monitoring systems from vendors like Actimize, SAS, and Mantas (now Oracle Financial Crime) mine transaction streams for structuring, layering, and shell-company patterns. The regulatory environment — which requires explainable model outputs and documented validation — kept logistic regression and gradient-boosted trees dominant long after deep networks took over other fraud problems.
+
+## Healthcare and Biomedicine
+
+Electronic health record (EHR) mining became a serious discipline after the HITECH Act of 2009 pushed U.S. hospitals toward digital records. Projects like the PhysioNet/Computing in Cardiology challenges (running since 2000) and the MIMIC databases from the MIT Laboratory for Computational Physiology (MIMIC-II in 2010, MIMIC-III in 2015, MIMIC-IV in 2020) gave researchers de-identified ICU data at a scale that let them study readmission prediction, sepsis onset, and mortality risk with modern techniques. Rajkomar, Oren, Chen, and colleagues at Google and UC San Francisco published a 2018 *npj Digital Medicine* paper showing that an ensemble of recurrent networks trained directly on raw FHIR records beat hand-engineered clinical scores on multiple prediction tasks. The work also surfaced the field's persistent challenges: class imbalance (sepsis is rare, death is rarer, mortality models overfit to demographics), distribution shift across hospitals, and the legal perimeter defined by HIPAA's Privacy Rule (1996, revised 2003 and 2013), which constrains both data sharing and the kinds of features models can deploy without risk of re-identification.
+
+Drug discovery saw its decisive data-mining moment in 2020 when DeepMind's AlphaFold 2 won the CASP14 protein structure prediction contest with a median global distance test score above 90 — essentially solving the decades-old problem of predicting three-dimensional protein structure from amino-acid sequence for most single-domain proteins. The system combined multiple sequence alignment inputs with an attention-based neural architecture and was published in *Nature* in July 2021. The follow-up AlphaFold-Multimer (2022) and AlphaFold 3 (May 2024) extended the method to protein complexes and protein-ligand interactions. The AlphaFold Protein Structure Database, a partnership with EMBL-EBI, now holds predicted structures for over 200 million proteins, and the 2024 Nobel Prize in Chemistry was awarded to David Baker, Demis Hassabis, and John Jumper for the overlapping body of work. AlphaFold did not replace wet-lab crystallography, but it collapsed the cost of hypothesis generation in structural biology by several orders of magnitude.
+
+Adverse drug event detection from spontaneous-reporting systems (the FDA's FAERS, the WHO's VigiBase) pioneered the disproportionality analysis methods — PRR, ROR, BCPNN — that are still the regulatory baseline, while observational studies on claims and EHR data (the OMOP common data model, the OHDSI consortium) brought statistical rigor to post-market surveillance. Readmission prediction became a policy-relevant target after the Hospital Readmissions Reduction Program (2012) penalized U.S. hospitals for excess 30-day readmissions; the LACE index and the HOSPITAL score are the best-known hand-engineered models, and dozens of ML variants have followed.
+
+## Science: From Sky Surveys to Subatomic Particles
+
+Astronomy was an early adopter by necessity. The Sloan Digital Sky Survey, which began taking data in 2000, generated petabytes of imaging and spectroscopy and required automated classification pipelines to distinguish stars, galaxies, and quasars at scale. The survey's photometric redshift estimation — mapping broadband colors to galaxy distance — was one of the first mainstream applications of random forests in natural science. The Vera C. Rubin Observatory (formerly LSST), scheduled to begin its Legacy Survey of Space and Time in 2025, will produce roughly twenty terabytes per night and rely on real-time classification pipelines to issue alerts on transient events within sixty seconds of detection.
+
+Particle physics provided one of the most visible proof points. The 2012 discovery of the Higgs boson at CERN's ATLAS and CMS experiments leaned heavily on boosted decision tree classifiers trained to separate signal events from combinatorial background. The Higgs Boson Machine Learning Challenge hosted on Kaggle in 2014, co-organized by ATLAS physicists and the LAL in Orsay, was won by Gábor Melis and drew broader attention to the performance of gradient boosting (XGBoost in particular) on physics classification tasks. Climate science uses data mining for everything from downscaling global circulation models to detecting atmospheric rivers and hurricane genesis in reanalysis datasets; bioinformatics uses it for variant calling, gene-expression clustering, and single-cell trajectory inference.
+
+## Government, Security, and the Ethics Debt
+
+Record linkage — matching individuals across censuses, tax rolls, and vital statistics — is one of the oldest applied data-mining problems. The Fellegi-Sunter probabilistic model (1969) remains the theoretical foundation; modern deployments at the U.S. Census Bureau, HMRC in the United Kingdom, and Statistics Canada use it daily.
+
+Tax fraud detection at the IRS and comparable agencies uses anomaly detection on return-level features, typically with gradient-boosted trees and network-analysis overlays for related-party schemes. Palantir Technologies, founded in 2003 with CIA In-Q-Tel backing, became the most visible and most controversial vendor of government analytics, supporting immigration enforcement (ICE contracts detailed in 2019 reporting by *The Intercept*), counterterrorism, and public-health data integration during COVID-19. The company is a useful reminder that data mining's productivity gains do not imply political neutrality.
+
+Predictive policing produced the field's most public failures. The COMPAS recidivism score, developed by Northpointe (now Equivant), was audited by ProPublica in May 2016. The investigation, led by Julia Angwin, found that COMPAS's false-positive rate for recidivism was roughly twice as high for Black defendants as for white defendants — a finding that sparked a still-active debate on algorithmic fairness and the incompatibility of competing parity definitions, formalized in papers by Chouldechova (2017) and Kleinberg, Mullainathan, and Raghavan (2017). PredPol, a place-based policing system deployed in Los Angeles and dozens of other cities, was abandoned by LAPD in 2020 after audits showed it reinforced historical patrol biases without reducing crime. Both cases illustrate a pattern the discipline has learned the hard way: optimizing a proxy target (arrests, re-arrests) on biased historical data produces a system that launders prejudice through mathematics.
+
+## Web, Social, and the Platform Economy
+
+PageRank, described by Larry Page and Sergey Brin in 1998 in the Stanford technical report that became the first public description of Google, is arguably the most consequential single application of graph mining in commercial history. The algorithm treats the web's hyperlink structure as a Markov chain and uses its stationary distribution as an authority score. It transformed search quality, funded the company that became the archetypal data-driven firm, and gave academic graph theory a lucrative second life.
+
+Ad targeting — the engine of Google, Facebook/Meta, and the programmatic display ecosystem — is a data-mining discipline operating at staggering scale. Click-through-rate prediction pipelines at Meta routinely train on trillions of examples with hundreds of billions of sparse features using factorization machines, deep cross networks, and wide-and-deep architectures. Social network analysis gave us community detection (Girvan-Newman, 2002; the Louvain method, 2008), influence-propagation models used by marketing platforms, and the entire literature on bot and misinformation detection that became policy-relevant after 2016. Sentiment mining matured from early lexicon-based approaches (the Harvard General Inquirer, SentiWordNet) to transformer-based classification that is now a commodity API call.
+
+## Manufacturing, Education, and Transportation
+
+Predictive maintenance is the canonical Industrial-IoT application: vibration, temperature, acoustic, and current-draw sensors on turbines, compressors, and bearings, streamed into anomaly-detection and remaining-useful-life models. GE's Predix platform (launched 2015) and Siemens' MindSphere (2016) were the flagship commercial plays, with mixed business results that underscored how much of the value lives in integration rather than algorithms. Digital twins — high-fidelity simulations continuously synchronized to operational data — extend the pattern to whole factories and wind farms.
+
+Education gained learning analytics as a subfield after the Society for Learning Analytics Research formed in 2011, and the massive open online course (MOOC) boom of 2012-2015 — edX, Coursera, Udacity — generated the first really large clickstream datasets for dropout prediction and adaptive sequencing. Carnegie Mellon's Open Learning Initiative, PSLC DataShop, and the Bayesian knowledge-tracing literature (Corbett and Anderson, 1995) provided the earlier theoretical scaffolding.
+
+Transportation is where data mining meets dispatch. Uber's surge pricing, documented in an extensive 2016 technical blog and subsequent papers, uses real-time spatiotemporal demand-supply estimation to clear markets in six-minute windows. Route optimization at UPS (the ORION project, fully deployed by 2016) reportedly saves the company hundreds of millions of dollars per year in fuel through right-turn-favoring routing, using historical delivery-time and traffic-flow data. Autonomous vehicle perception pipelines at Waymo, Cruise, and Mobileye are, at their core, the largest supervised-learning data-mining operations in the world: petabytes of annotated sensor fusion data, active-learning loops that preferentially label interesting failures, and long-tail mining strategies that define the difference between a demo and a deployable stack.
+
+## Coda
+
+The through-line across these domains is not a single algorithm or architecture. It is the stubborn craft of framing a business or scientific question so that existing data can answer it, validating that answer against reality, and — the part that distinguishes the durable successes from the cautionary tales — refusing to let a compelling story (beer and diapers, predictive policing, the 10-percent prize) outrun what the data actually supports.
+
+---
+
+## Study Guide — Applications Across Domains
+
+### Domains
+
+- Retail, finance, healthcare, marketing, education,
+  transportation, IoT.
+
+## DIY — Pick one domain and one dataset
+
+Kaggle has public datasets for each. Pick one, frame
+one business question, build a baseline.
+
+## TRY — Replicate a famous result
+
+"Beer and diapers" (apocryphal) or Target's pregnancy
+prediction (real). Find a paper, replicate.
+
+## Related College Departments
+
+- [**coding**](../../../.college/departments/coding/DEPARTMENT.md)
+- [**mathematics**](../../../.college/departments/mathematics/DEPARTMENT.md)

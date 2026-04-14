@@ -1,0 +1,231 @@
+# Nature Studies Department Chipset Configuration
+# Department instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template and remapped
+# to field naturalism, observation, and species-level natural history.
+
+name: nature-studies-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated nature-studies department providing domain-routed
+  expertise through seven named agents (Linnaeus, Goodall, Merian,
+  Audubon, von Humboldt, Peterson, Louv), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college nature-studies department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  field-identification:
+    domain: nature-studies
+    description: "Species identification in the field — keys, gestalt, diagnostic features, confidence protocols"
+    triggers:
+      - "identify"
+      - "what is this"
+      - "field mark"
+      - "key out"
+      - "dichotomous key"
+      - "diagnostic feature"
+    agent_affinity: [peterson, linnaeus]
+
+  taxonomic-classification:
+    domain: nature-studies
+    description: "Binomial nomenclature, hierarchy, type specimens, rank, and taxonomic authority"
+    triggers:
+      - "scientific name"
+      - "binomial"
+      - "genus"
+      - "species"
+      - "family"
+      - "taxonomy"
+      - "classification"
+    agent_affinity: linnaeus
+
+  nature-journaling:
+    domain: nature-studies
+    description: "Field notebook practice — sketches, notes, metadata, phenology, sit-spot discipline"
+    triggers:
+      - "nature journal"
+      - "field notebook"
+      - "sketch"
+      - "phenology"
+      - "sit spot"
+      - "observation log"
+    agent_affinity: [merian, louv]
+
+  bird-observation:
+    domain: nature-studies
+    description: "Birding by sight and sound — behavior, habitat, vocalization, eBird-grade records"
+    triggers:
+      - "bird"
+      - "birding"
+      - "song"
+      - "call"
+      - "eBird"
+      - "warbler"
+      - "raptor"
+    agent_affinity: [audubon, peterson]
+
+  ecosystem-mapping:
+    domain: nature-studies
+    description: "Biogeography, habitat typing, food webs, succession, keystone species, landscape patterns"
+    triggers:
+      - "ecosystem"
+      - "habitat"
+      - "biome"
+      - "food web"
+      - "succession"
+      - "keystone"
+      - "biogeography"
+    agent_affinity: [von-humboldt-nat, linnaeus]
+
+  species-interaction-tracking:
+    domain: nature-studies
+    description: "Behavior, metamorphosis, host-plant relationships, ethology, long-form field ethograms"
+    triggers:
+      - "behavior"
+      - "metamorphosis"
+      - "host plant"
+      - "ethology"
+      - "life cycle"
+      - "interaction"
+      - "ethogram"
+    agent_affinity: [goodall-nat, merian]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Linnaeus as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: linnaeus
+
+  agents:
+    - name: linnaeus
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: goodall-nat
+      role: "field ethology — primate and mammal behavior, longitudinal observation"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: merian
+      role: "entomology and metamorphosis — insect life cycles, botanical illustration, host-plant ecology"
+      model: opus
+      tools: [Read, Grep, Bash, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  nature-studies-analysis-team:
+    description: "Full department for complex multi-wing naturalist investigations"
+    agents: [linnaeus, goodall-nat, merian, audubon, von-humboldt-nat, peterson, louv]
+    use_when: "multi-wing, research-level, or full-analysis requests"
+
+  nature-studies-workshop-team:
+    description: "Focused identification and taxonomic workshop"
+    agents: [linnaeus, peterson, audubon, louv]
+    use_when: "identification-heavy, field-guide-style requests"
+
+  nature-studies-practice-team:
+    description: "Field observation pipeline — journal, track, interpret, report"
+    agents: [merian, goodall-nat, von-humboldt-nat, louv]
+    use_when: "ongoing field practice, phenology, and behavior tracking"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 nature-studies Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college nature-studies department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (linnaeus) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - outdoor-observation
+      - plants-and-fungi
+      - animals-and-birds
+      - ecology-and-habitats
+      - citizen-science
+      - taxonomy
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "nature-studies-department"
+  record_types:
+    - name: NatureStudiesAnalysis
+      description: "Completed naturalist analysis — identification, interaction, or habitat assessment with evidence"
+
+    - name: NatureStudiesFieldRecord
+      description: "Raw field observation — species, location, weather, behavior, media attachments"
+
+    - name: NatureStudiesReview
+      description: "Peer or self review of a field record or identification with correction trail"
+
+    - name: NatureStudiesExplanation
+      description: "Teaching artifact at a specified level — identification lesson, ecology concept, natural history narrative"
+
+    - name: NatureStudiesSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "nature-studies"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Outdoor Observation"
+    - "Plants & Fungi"
+    - "Animals & Birds"
+    - "Ecology & Habitats"
+    - "Citizen Science"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

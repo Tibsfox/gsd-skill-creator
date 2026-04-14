@@ -1,0 +1,261 @@
+# Chemistry Department Chipset Configuration
+# Second instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template with all
+# sections remapped to chemistry.
+
+name: chemistry-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated chemistry department providing domain-routed
+  expertise through seven named agents (Lavoisier, Mendeleev, Curie-M,
+  Pauling, Hodgkin, Franklin, Avogadro), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college chemistry department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  atomic-structure:
+    domain: chemistry
+    description: "Atomic theory, electron configuration, quantum numbers, periodic trends"
+    triggers:
+      - "electron configuration"
+      - "atomic orbital"
+      - "quantum number"
+      - "ionization energy"
+      - "periodic trend"
+      - "atomic radius"
+      - "shielding"
+    agent_affinity: [mendeleev, pauling]
+
+  chemical-bonding:
+    domain: chemistry
+    description: "Ionic, covalent, metallic bonding, molecular orbital theory, VSEPR, hybridization"
+    triggers:
+      - "bond"
+      - "covalent"
+      - "ionic"
+      - "molecular orbital"
+      - "hybridization"
+      - "VSEPR"
+      - "electronegativity"
+      - "Lewis structure"
+    agent_affinity: pauling
+
+  reactions-stoichiometry:
+    domain: chemistry
+    description: "Reaction types, balancing equations, stoichiometry, thermodynamics, kinetics"
+    triggers:
+      - "reaction"
+      - "balance"
+      - "stoichiometry"
+      - "yield"
+      - "equilibrium"
+      - "enthalpy"
+      - "kinetics"
+      - "rate law"
+    agent_affinity: [mendeleev, pauling]
+
+  organic-chemistry:
+    domain: chemistry
+    description: "Functional groups, nomenclature, mechanisms, synthesis, stereochemistry"
+    triggers:
+      - "organic"
+      - "functional group"
+      - "mechanism"
+      - "synthesis"
+      - "stereochemistry"
+      - "alkene"
+      - "alcohol"
+      - "carbonyl"
+      - "aromatic"
+    agent_affinity: [pauling, franklin]
+
+  analytical-methods:
+    domain: chemistry
+    description: "Spectroscopy, chromatography, crystallography, titration, electroanalysis"
+    triggers:
+      - "spectrum"
+      - "NMR"
+      - "IR"
+      - "mass spec"
+      - "chromatography"
+      - "HPLC"
+      - "titration"
+      - "crystallography"
+      - "X-ray diffraction"
+    agent_affinity: hodgkin
+
+  materials-chemistry:
+    domain: chemistry
+    description: "Polymers, ceramics, semiconductors, nanomaterials, crystal structure, surface chemistry"
+    triggers:
+      - "polymer"
+      - "crystal"
+      - "semiconductor"
+      - "nanomaterial"
+      - "surface"
+      - "thin film"
+      - "alloy"
+      - "composite"
+      - "ceramic"
+    agent_affinity: franklin
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Lavoisier as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: lavoisier
+
+  agents:
+    - name: lavoisier
+      role: "department chair — classification, routing, synthesis, safety oversight"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: mendeleev
+      role: "periodic / inorganic specialist — periodic trends, stoichiometry, inorganic chemistry"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: curie-m
+      role: "nuclear specialist — radioactivity, isotopes, nuclear reactions, radiation safety"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: pauling
+      role: "bonding specialist — molecular orbital theory, electronegativity, mechanisms"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: hodgkin
+      role: "analytical specialist — spectroscopy, chromatography, crystallography"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: franklin
+      role: "materials specialist — polymers, crystal structures, surface science"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: avogadro
+      role: "pedagogy guide — mole concept, explanations, learning paths"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  chemistry-analysis-team:
+    description: "Full department for complex multi-domain problems"
+    agents: [lavoisier, mendeleev, curie-m, pauling, hodgkin, franklin, avogadro]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  synthesis-team:
+    description: "Focused reaction design, synthesis planning, mechanism analysis"
+    agents: [pauling, mendeleev, franklin, avogadro]
+    use_when: "synthesis-specific requests, retrosynthetic reasoning"
+
+  lab-team:
+    description: "Experimental design, analytical methods, lab procedures, safety"
+    agents: [hodgkin, curie-m, lavoisier, avogadro]
+    use_when: "experimental design, analytical method development, lab safety"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 chemistry Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college chemistry department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (lavoisier) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - atomic-structure
+      - bonding
+      - reactions
+      - organic
+      - analytical
+      - materials
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "chemistry-department"
+  record_types:
+    - name: ChemistryAnalysis
+      description: "Analytical method or characterization with technique, data, and interpretation"
+
+    - name: ChemistryReaction
+      description: "Reaction mechanism with step-by-step electron movement and intermediates"
+
+    - name: ChemistrySynthesis
+      description: "Multi-step synthetic route with reagents, conditions, and yield estimates"
+
+    - name: ChemistryExplanation
+      description: "Teaching artifact at a specified level with worked examples"
+
+    - name: ChemistrySession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "chemistry"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Atomic Structure & Periodicity"
+    - "Chemical Bonding & Molecular Structure"
+    - "Reactions & Stoichiometry"
+    - "Organic & Biological Chemistry"
+    - "Analytical & Materials Chemistry"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

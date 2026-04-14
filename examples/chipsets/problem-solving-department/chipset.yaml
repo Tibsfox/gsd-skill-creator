@@ -1,0 +1,256 @@
+# Problem Solving Department Chipset Configuration
+# 23rd instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit.
+
+name: problem-solving-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated problem-solving department providing structured solving
+  support through seven named agents (Polya-PS, Simon, Newell, Schoenfeld,
+  Jonassen, Bransford, Brown-PS), six knowledge skills, and three
+  pre-composed teams. Persists work via Grove records and integrates with
+  the college problem-solving department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  problem-comprehension:
+    domain: problem-solving
+    description: "Understand-the-problem phase: restate, knowns, unknowns, constraints, classify, decompose"
+    triggers:
+      - "what is this problem asking"
+      - "I don't understand the problem"
+      - "help me understand"
+      - "break this down"
+      - "what are the knowns"
+      - "what is the goal"
+      - "decompose"
+    agent_affinity: [polya-ps, jonassen, simon]
+
+  strategy-selection:
+    domain: problem-solving
+    description: "Match problems to strategies: working backwards, pattern recognition, simplification, MEA"
+    triggers:
+      - "which approach"
+      - "what strategy"
+      - "how should I tackle"
+      - "working backwards"
+      - "means-ends"
+      - "pattern recognition"
+      - "decomposition"
+    agent_affinity: [polya-ps, simon, newell]
+
+  mathematical-problem-solving:
+    domain: problem-solving
+    description: "Polya four phases plus Schoenfeld control layer, applied to math and puzzle problems"
+    triggers:
+      - "solve this problem"
+      - "polya"
+      - "four phase"
+      - "look back"
+      - "devise a plan"
+      - "math problem"
+      - "puzzle"
+    agent_affinity: [schoenfeld, polya-ps, simon]
+
+  design-thinking-ps:
+    domain: problem-solving
+    description: "Design thinking for ill-structured problems: empathize, define, ideate, prototype, test"
+    triggers:
+      - "design thinking"
+      - "how might we"
+      - "brainstorm"
+      - "prototype"
+      - "ideate"
+      - "reframe"
+      - "ill-structured"
+    agent_affinity: [jonassen, bransford]
+
+  collaborative-problem-solving:
+    domain: problem-solving
+    description: "Group problem solving with explicit structure and anti-groupthink moves"
+    triggers:
+      - "team problem"
+      - "group"
+      - "brainstorm together"
+      - "reciprocal"
+      - "yes and"
+      - "devils advocate"
+      - "collaborative"
+    agent_affinity: [jonassen, brown-ps, bransford]
+
+  metacognitive-monitoring:
+    domain: problem-solving
+    description: "Active supervision of problem solving: planning, monitoring, evaluating, strategy switching"
+    triggers:
+      - "am I stuck"
+      - "am I making progress"
+      - "metacognition"
+      - "control layer"
+      - "monitor my thinking"
+      - "strategy switch"
+      - "grinding"
+    agent_affinity: [brown-ps, schoenfeld, polya-ps]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Polya-PS as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: polya-ps
+
+  agents:
+    - name: polya-ps
+      role: "department chair — classification, routing, synthesis, four-phase scaffold"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: simon
+      role: "state-space specialist — formalization, bounded rationality, GPS heritage"
+      model: opus
+      tools: [Read, Grep]
+
+    - name: newell
+      role: "means-ends specialist — difference reduction, subgoaling, production systems"
+      model: opus
+      tools: [Read, Bash]
+
+    - name: schoenfeld
+      role: "mathematical solver — Polya phases with explicit control layer"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: jonassen
+      role: "ill-structured specialist — problem typology, stakeholder elicitation, framing"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: bransford
+      role: "IDEAL and anchoring specialist — anchored instruction, case grounding"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: brown-ps
+      role: "metacognitive pedagogy — reciprocal teaching, level-appropriate explanation"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  problem-solving-analysis-team:
+    description: "Full department for multi-method problem attacks and ill-structured problems"
+    agents: [polya-ps, simon, newell, schoenfeld, jonassen, bransford, brown-ps]
+    use_when: "multi-method, ill-structured, or full-analysis requests"
+
+  problem-solving-workshop-team:
+    description: "Focused state-space solving with control layer"
+    agents: [simon, newell, schoenfeld, brown-ps]
+    use_when: "single well-defined or tractable problem deep-dive"
+
+  problem-solving-practice-team:
+    description: "Sequential practice pipeline for skill development"
+    agents: [jonassen, bransford, schoenfeld, brown-ps]
+    use_when: "drill-and-practice sessions and skill building"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 problem-solving Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college problem-solving department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (polya-ps) must be CAPCOM"
+        action: "block"
+
+      - check: "four_phase_scaffold_applied"
+        description: "Polya-PS must apply the four-phase scaffold in every synthesis"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - comprehension
+      - strategy
+      - math
+      - ill-structured
+      - collaborative
+      - metacognitive
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "problem-solving-department"
+  record_types:
+    - name: ProblemSolvingAnalysis
+      description: "Problem comprehension, state-space formalization, ill-structured framing records"
+
+    - name: ProblemSolvingPlan
+      description: "Strategies selected, means-ends plans, design-thinking ideation, practice-set frames"
+
+    - name: ProblemSolvingTrace
+      description: "Execution traces with monitoring checks, strategy switches, and control events"
+
+    - name: ProblemSolvingExplanation
+      description: "Level-appropriate explanations, practice sequences, and learning pathways"
+
+    - name: ProblemSolvingSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "problem-solving"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Understanding Problems"
+    - "Problem-Solving Strategies"
+    - "Creative & Lateral Thinking"
+    - "Collaborative Problem Solving"
+    - "Complex & Wicked Problems"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

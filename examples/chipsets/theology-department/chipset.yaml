@@ -1,0 +1,243 @@
+# Theology Department Chipset Configuration
+# Instantiation of the department template pattern for the theology domain.
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This chipset forks the math-department template and
+# remaps it for scripture, systematic theology, philosophical theology,
+# comparative religion, mysticism, and ethics. The posture is scholarly
+# and comparative — a teaching configuration, not a devotional one.
+
+name: theology-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated theology department providing tradition-routed
+  expertise through seven named agents (Augustine, Aquinas,
+  Maimonides, Rumi, Zhuangzi, Hildegard, Huston Smith), six
+  knowledge skills, and three pre-composed teams. Persists work
+  via Grove records and integrates with the college theology
+  department concept graph. Scholarly-comparative posture,
+  not devotional.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  scripture-and-interpretation:
+    domain: theology
+    description: "Scripture interpretation across traditions — hermeneutics, exegesis, textual criticism, canonical formation, history of reading practices"
+    triggers:
+      - "scripture"
+      - "exegesis"
+      - "hermeneutic"
+      - "tafsir"
+      - "midrash"
+      - "peshat"
+      - "fourfold sense"
+      - "canon"
+    agent_affinity: [augustine, maimonides]
+
+  systematic-theology:
+    domain: theology
+    description: "Systematic theology as a method — doctrinal loci, creedal formation, comparative shape of systematics across traditions"
+    triggers:
+      - "doctrine"
+      - "systematic theology"
+      - "creed"
+      - "Trinity"
+      - "Christology"
+      - "Thirteen Principles"
+      - "kalam"
+    agent_affinity: [aquinas, augustine]
+
+  philosophical-theology:
+    domain: theology
+    description: "Philosophical analysis of theological claims — classical arguments for God, divine attributes, faith-reason, problem of evil, religious epistemology"
+    triggers:
+      - "existence of God"
+      - "natural theology"
+      - "divine attributes"
+      - "problem of evil"
+      - "cosmological argument"
+      - "ontological argument"
+      - "omnipotence"
+    agent_affinity: [aquinas, maimonides]
+
+  comparative-religion:
+    domain: theology
+    description: "Comparative religion as a scholarly discipline — cross-tradition description, the dimensions framework, the ethics of comparison"
+    triggers:
+      - "comparative"
+      - "world religions"
+      - "cross-tradition"
+      - "universal"
+      - "phenomenology of religion"
+      - "dimensions"
+    agent_affinity: [huston-smith, rumi]
+
+  mysticism-and-contemplation:
+    domain: theology
+    description: "Mysticism and contemplative practice across traditions — apophatic and kataphatic, the classical maps of the path, the Katz debate"
+    triggers:
+      - "mysticism"
+      - "contemplation"
+      - "apophatic"
+      - "kataphatic"
+      - "via negativa"
+      - "fana"
+      - "dark night"
+      - "unknowing"
+    agent_affinity: [rumi, hildegard]
+
+  ethics-and-practice:
+    domain: theology
+    description: "Religious ethics and practice across traditions — moral theology, rule and virtue ethics, ritual as formation, social teaching"
+    triggers:
+      - "religious ethics"
+      - "moral theology"
+      - "ritual"
+      - "golden rule"
+      - "virtue"
+      - "sharia"
+      - "halakhah"
+      - "casuistry"
+    agent_affinity: [augustine, zhuangzi]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Augustine as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: augustine
+
+  agents:
+    - name: augustine
+      role: "department chair — classification, routing, patristic Christian voice, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: aquinas
+      role: "scholastic specialist — systematic and philosophical theology, Western Christian scholastic tradition"
+      model: opus
+      tools: [Read, Glob, Grep]
+
+    - name: maimonides
+      role: "Jewish philosophical specialist — Jewish scripture and medieval philosophy, the Jewish-Islamic-Christian philosophical conversation"
+      model: opus
+      tools: [Read, Glob, Grep]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  theology-analysis-team:
+    description: "Full department for multi-tradition comparative questions"
+    agents: [augustine, aquinas, maimonides, rumi, zhuangzi, hildegard, huston-smith]
+    use_when: "multi-tradition, research-level, or full comparative requests"
+
+  theology-workshop-team:
+    description: "Focused workshop for a single doctrinal or philosophical-theology question"
+    agents: [augustine, aquinas, maimonides, huston-smith]
+    use_when: "doctrinal argument, philosophical-theology analysis, medieval primary-source reading"
+
+  theology-practice-team:
+    description: "Pipeline-oriented contemplative-reading team for primary-source work"
+    agents: [augustine, rumi, hildegard, zhuangzi, huston-smith]
+    use_when: "contemplative primary sources, cross-tradition mysticism reading, iterative reading programs"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 theology Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college theology department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (augustine) must be CAPCOM"
+        action: "block"
+
+      - check: "descriptive_posture_maintained"
+        description: "Agent outputs describe traditions, do not endorse them"
+        action: "warn"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - scripture
+      - doctrine
+      - philosophy
+      - mysticism
+      - ethics
+      - comparative
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "theology-department"
+  record_types:
+    - name: TheologyAnalysis
+      description: "Analytical or argumentative record — argument construction, doctrinal analysis, philosophical-theology evaluation"
+
+    - name: TheologyReading
+      description: "Close reading of a primary source — scripture, doctrinal text, philosophical treatise, contemplative text, classical commentary"
+
+    - name: TheologyReview
+      description: "Review or critique of an existing argument, reading, or interpretive claim"
+
+    - name: TheologyExplanation
+      description: "Teaching artifact at a specified audience level — introductions, framings, adaptations"
+
+    - name: TheologySession
+      description: "Session log linking work products to interaction context, with classification metadata and descriptive posture flag"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "theology"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Scripture and Hermeneutics"
+    - "Systematic and Philosophical Theology"
+    - "Comparative and Historical Traditions"
+    - "Mysticism and Contemplative Practice"
+    - "Religious Ethics and Social Teaching"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

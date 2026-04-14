@@ -315,3 +315,75 @@ The TIBS (Traditions, Indigenous Knowledge & Bridge Studies) project examines ho
 9. [Weird Al Yankovic - WAL Deep Research (internal)](docs/research/weird-al-yankovic.md)
 10. [dada Band - DDA Deep Research (internal)](docs/research/dada-band.md)
 11. [TIBS - Traditions and Indigenous Knowledge (internal)](www/tibsfox/com/Research/TIBS/index.html)
+
+---
+
+## Addendum: Notes as of April 2026
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body is already current through the 48th
+running of Norwescon and references Norwescon 2026 programming
+directly. Two tight points are worth recording and one cross-link
+section is added below.
+
+### Norwescon 48 (April 2026)
+
+Norwescon 48 ran as scheduled at the DoubleTree SeaTac during the
+Easter weekend window the body describes. The 2026 convention kept
+the structural commitments the body documents: volunteer-run, 501(c)(3)
+governance, Page Ahead as charity partner for 2026, the Oasis Lounge
+and BIPOC/AAPI Lounge continuing in Wing 5B, and the same
+programming-grid-plus-party-wing-plus-hallway-conversation pattern
+that has defined the convention for most of its 48 years.
+
+### The PNW convention calendar in 2026
+
+The body's section 7.2 maps the broader PNW convention landscape.
+As of April 2026, every convention in that table is still running.
+The Pacific Northwest retains its "more science fiction
+conventions per capita than almost anywhere in the United States"
+position, and the community-infrastructure thesis the body advances
+— that volunteer conventions produce the year-round community that
+Worldcon, as a traveling event, cannot — remains the strongest
+explanation for why the PNW's literary SF scene has stayed healthy
+through forty-plus years of media-convention expansion.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)
+  — Literary science-fiction conventions are, at their center, a
+  writing-department topic. The panels, the workshops, the
+  Writers Workshop, the Philip K. Dick Award recognition — all of
+  it is about how written SF is made, discussed, and honored.
+- [**reading**](../../../.college/departments/reading/DEPARTMENT.md)
+  — Conventions are gatherings of serious readers, and the
+  reading department's treatment of genre fiction and reading
+  communities is incomplete without them.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — Organized SF fandom is one of the oldest continuous fan
+  communities in the United States (1920s → present), and
+  Norwescon inherits that tradition directly.
+- [**communication**](../../../.college/departments/communication/DEPARTMENT.md)
+  — A volunteer organization that has maintained an annual event
+  for 48 years is a communication-infrastructure study: how
+  knowledge is transmitted, how the volunteer pipeline is sustained,
+  how inclusion policies are written and enforced.
+
+---
+
+*Addendum (Norwescon 48 status, 2026 PNW convention calendar) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Norwescon
+
+## DIY — Attend Norwescon
+
+SeaTac, April, every year. Panels, guests, art show,
+masquerade. The PNW SF community in one weekend.
+
+## TRY — Volunteer as a panelist
+
+Email a proposal 4 months out. If accepted, you're on
+a panel. The fastest way into a con community.

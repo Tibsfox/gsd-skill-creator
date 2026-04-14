@@ -1,0 +1,263 @@
+# Project Management Department Chipset Configuration
+# Fifth department in the college — the meta-department that manages process
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This department is unique: it manages the process by
+# which all other departments operate. GSD workflow commands map directly
+# to PM skills.
+
+name: project-management-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated project management department providing process-routed
+  expertise through seven named agents (Brooks, Hamilton, Goldratt,
+  Deming, Lei, Gantt, Sinek), six knowledge skills, and three
+  pre-composed teams. Manages the meta-process by which all other
+  departments operate. Persists work via Grove records and integrates
+  with the college business department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  agile-methods:
+    domain: project-management
+    description: "Agile frameworks — Scrum, Kanban, XP, SAFe, sprint planning, standups, retrospectives"
+    triggers:
+      - "sprint"
+      - "standup"
+      - "backlog"
+      - "user story"
+      - "kanban"
+      - "agile"
+      - "scrum"
+      - "velocity"
+    agent_affinity: lei
+
+  risk-management:
+    domain: project-management
+    description: "Risk identification, assessment, mitigation, and contingency planning"
+    triggers:
+      - "risk"
+      - "mitigation"
+      - "contingency"
+      - "risk register"
+      - "failure mode"
+      - "impact analysis"
+      - "threat"
+    agent_affinity: hamilton
+
+  stakeholder-communication:
+    domain: project-management
+    description: "Stakeholder analysis, communication plans, status reporting, escalation paths"
+    triggers:
+      - "stakeholder"
+      - "status report"
+      - "communication plan"
+      - "escalation"
+      - "RACI"
+      - "steering committee"
+      - "sponsor"
+    agent_affinity: [sinek, brooks]
+
+  estimation-planning:
+    domain: project-management
+    description: "Effort estimation, scheduling, work breakdown structures, critical path analysis"
+    triggers:
+      - "estimate"
+      - "schedule"
+      - "work breakdown"
+      - "WBS"
+      - "critical path"
+      - "Gantt chart"
+      - "milestone"
+      - "deadline"
+      - "planning poker"
+    agent_affinity: gantt
+
+  quality-assurance:
+    domain: project-management
+    description: "Quality gates, acceptance criteria, testing strategy, continuous improvement"
+    triggers:
+      - "quality"
+      - "acceptance criteria"
+      - "definition of done"
+      - "test plan"
+      - "inspection"
+      - "audit"
+      - "defect"
+      - "six sigma"
+    agent_affinity: deming
+
+  retrospective-learning:
+    domain: project-management
+    description: "Post-mortems, lessons learned, process improvement, organizational learning"
+    triggers:
+      - "retrospective"
+      - "post-mortem"
+      - "lessons learned"
+      - "root cause"
+      - "5 whys"
+      - "kaizen"
+      - "improvement"
+      - "what went well"
+    agent_affinity: [deming, lei]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Brooks as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: brooks
+
+  agents:
+    - name: brooks
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: hamilton
+      role: "systems and risk engineer — risk analysis, systems thinking, failure prevention"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: goldratt
+      role: "constraints analyst — bottleneck identification, throughput optimization, Theory of Constraints"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: deming
+      role: "quality champion — process quality, statistical control, continuous improvement"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: lei
+      role: "agile coach — sprint facilitation, team dynamics, iterative delivery"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: gantt
+      role: "planning specialist — scheduling, estimation, work breakdown, critical path"
+      model: sonnet
+      tools: [Read, Bash, Write]
+
+    - name: sinek
+      role: "pedagogy and communication guide — stakeholder alignment, motivation, learning paths"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  project-assessment-team:
+    description: "Full department for complex project health assessments"
+    agents: [brooks, hamilton, goldratt, deming, lei, gantt, sinek]
+    use_when: "comprehensive project assessment, audit, or health check"
+
+  sprint-team:
+    description: "Focused sprint execution — planning, delivery, and process"
+    agents: [lei, gantt, deming, goldratt]
+    use_when: "sprint planning, execution tracking, or delivery optimization"
+
+  program-review-team:
+    description: "Strategic review — risk, quality, stakeholder reporting"
+    agents: [brooks, hamilton, deming, sinek]
+    use_when: "milestone review, program-level reporting, or executive briefings"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 PM Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college business department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (brooks) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - agile
+      - risk
+      - communication
+      - estimation
+      - quality
+      - retrospective
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "project-management-department"
+  record_types:
+    - name: ProjectPlan
+      description: "Project plan with scope, schedule, resources, and dependencies"
+
+    - name: ProjectRisk
+      description: "Risk register entry with probability, impact, mitigation strategy, and owner"
+
+    - name: ProjectStatus
+      description: "Status report with progress metrics, blockers, and next actions"
+
+    - name: ProjectRetrospective
+      description: "Retrospective record with observations, action items, and improvement commitments"
+
+    - name: ProjectSession
+      description: "Session log linking work products to interaction context and decisions"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "business"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  cross_department_references:
+    - "problem-solving"
+    - "critical-thinking"
+  wings:
+    - "Planning & Estimation"
+    - "Risk & Quality"
+    - "Agile & Lean"
+    - "Communication & Leadership"
+    - "Process Improvement"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

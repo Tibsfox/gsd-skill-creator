@@ -1,0 +1,104 @@
+# Personal Information Management: Finding What You Already Have
+*— the lifelong struggle of the single human to locate what they already know they possess —*
+
+## 1. The Peculiar Difficulty of Personal Search
+
+There is an intuitive expectation, rarely examined, that finding a file on one's own computer should be trivial compared to finding a document on the open Web. The personal corpus is small — gigabytes, not petabytes. The author is known. The topic is familiar. And yet, as anyone who has hunted for a half-remembered note, a tax form from three years ago, or an email containing a flight confirmation can attest, personal search is often *harder* than Web search. Susan Dumais and her collaborators at Microsoft Research made this observation rigorous in their 2003 paper "Stuff I've Seen: A System for Personal Information Retrieval and Re-Use," presented at SIGIR. They pointed out that personal information retrieval has almost none of the affordances that make Web search work. There is no link graph to produce PageRank-style signals. There is no click stream aggregated across millions of users. Metadata is sparse, inconsistent, and applied by a single, busy, forgetful author. The corpus is tiny, so even good statistical ranking has little to work with. And recall matters more than precision: a user searching their own archive usually knows the thing exists and will not be satisfied with "ten reasonably good results." They want *that* document, the one they remember, the one they already have.
+
+This asymmetry — between the ease of creating information and the difficulty of locating it later — is the central problem of Personal Information Management (PIM). It is an old problem, older than computing, and its history is a record of successive hopes that some new metaphor, filesystem, tool, or discipline might finally close the gap.
+
+## 2. Vannevar Bush and the Memex
+
+The modern history of PIM begins in July 1945, in the pages of *The Atlantic Monthly*, with Vannevar Bush's essay "As We May Think." Bush, who had directed the U.S. Office of Scientific Research and Development during the Second World War and overseen projects including the Manhattan Project, was reflecting on what scientists should do now that the war was ending. His answer was that the accumulated knowledge of humankind had become so vast that no individual could hope to navigate it with conventional indexing. What was needed was a new kind of device — one that worked the way the mind did, by association rather than by alphabetical or numerical classification.
+
+Bush called this imagined device the **Memex**. It was to be a desk containing a microfilm store, projection screens, and a keyboard. Its defining feature was the ability to create **associative trails**: a scholar reading one document could link it to another, annotate the link, and store the entire chain for later retrieval or sharing with colleagues. Bush wrote, famously, that "the human mind operates by association. With one item in its grasp, it snaps instantly to the next that is suggested by the association of thoughts." The Memex would externalize this associative web.
+
+The Memex was never built. Bush's microfilm substrate was already being overtaken by digital computing, and the physical apparatus he described was impractical. But the *idea* — of a personal, associative, trail-based knowledge store — became the foundational myth of hypertext and of PIM itself. Douglas Engelbart credited it as the inspiration for his 1968 "Mother of All Demos" and the NLS (oN-Line System) at SRI. Ted Nelson, who coined the term "hypertext" in 1965, acknowledged Bush as an ancestor of Project Xanadu. Tim Berners-Lee, in his 1989 proposal for what became the World Wide Web, cited the same lineage. Every later PIM tool — from TiddlyWiki to Roam Research — is in some sense an attempt to finally ship what Bush described.
+
+## 3. The PIM Field Takes Shape
+
+The phrase "Personal Information Management" as a named research area coalesced in the early 2000s. William Jones, a researcher at the University of Washington Information School, was central to this. His 2007 book *Keeping Found Things Found: The Study and Practice of Personal Information Management* gave the field both a name and a manifesto, and the companion project at UW — also called Keeping Found Things Found, or KFTF — produced a stream of empirical studies on how real people actually organize (and fail to organize) their own stuff. The ACM held dedicated PIM workshops co-located with SIGIR and SIGCHI beginning around 2005, and a community of researchers including Jones, Dumais, Robert Capra, Diane Kelly, David Karger, and others formalized what had been a folk topic.
+
+Three empirical findings from this research are worth keeping in mind. First, people have radically different strategies: some are "pilers" who dump everything onto the desktop and search when needed, others are "filers" who build elaborate folder hierarchies, and neither group is measurably more productive than the other. Second, the effort of filing is usually front-loaded and under-rewarded; the effort of retrieval is back-loaded and under-supported. Third, the act of deciding where to put something is cognitively expensive — each filing decision is a small categorization problem, and humans exhaust their categorization energy quickly.
+
+## 4. The File-and-Folder Wars
+
+The dominant abstraction for personal storage since the 1960s has been the hierarchical filesystem: directories containing files, each file in exactly one directory, each directory in exactly one parent. It is a tree, and trees are efficient to walk but poor at representing the multiple overlapping categories most humans actually use. A single document might belong simultaneously to "2024 taxes," "Landlord correspondence," and "Apartment hunt" — and the filesystem forces a choice.
+
+Several ambitious attempts have been made to replace the tree with something richer. **Be Inc.**'s BeOS, first released in 1995, shipped the BeFS (later BFS) filesystem, which treated file attributes as first-class indexed fields. A user could assign arbitrary typed attributes to any file and then query them like a database. The canonical BeOS demo was the mail client: each email was a single file with From, To, Subject, and Date attributes, and the "inbox" was simply a query. BeOS never achieved commercial traction, but BFS remained a standing proof of concept for filesystems-as-databases. Dominic Giampaolo, one of BFS's architects, later joined Apple and worked on Spotlight and APFS.
+
+Microsoft's most ambitious attempt at the same idea was **WinFS**, announced in 2003 as part of the "Longhorn" vision for what would become Windows Vista. WinFS was to layer a relational database over NTFS, exposing files as typed records with rich schemas. After years of development it was quietly killed in June 2006. The reasons were partly technical (performance, migration complexity) and partly cultural (developers were unwilling to adopt a schema just to save files), but the cancellation was felt in the PIM community as the definitive defeat of the "filesystem as database" dream.
+
+Apple's **Spotlight**, introduced with Mac OS X 10.4 Tiger in April 2005, took a different approach: keep the hierarchical filesystem, but build an aggressive background indexer that made full-text search of the entire disk instant. Spotlight was less ambitious than WinFS but more successful precisely because it did not require users to change their habits. Microsoft followed with improved Windows Search in Vista (2007) and Windows 7 (2009).
+
+## 5. Desktop Search and Its Retreat
+
+The mid-2000s were the golden age of desktop search. **Google Desktop**, launched in October 2004, brought Google's web-search ranking philosophy to the local disk; it indexed email, files, chat, and browser history, and presented results in a familiar unified interface. Commercial products like **X1 Search** (originally from Idealab, 2003), **Copernic Desktop Search** (2004), and the Mac-oriented **DEVONthink** (from DEVONtechnologies, first released 2002) competed on speed, recall, and AI-flavored features like DEVONthink's "See Also" associative suggestions. Yahoo! Desktop Search (based on X1) launched the same year.
+
+And then, quietly, desktop search retreated. Google Desktop was discontinued in September 2011. X1 repositioned toward enterprise e-discovery. Copernic persisted but lost cultural mindshare. The reasons are instructive. Operating-system vendors absorbed the core functionality (Spotlight, Windows Search), so stand-alone products lost their edge. More importantly, the center of gravity of personal data shifted from the local disk to cloud services — Gmail, Google Drive, Dropbox, iCloud — each with its own search, none well-integrated with the others. The unified local index became less valuable when most of the user's "stuff" no longer lived locally. DEVONthink survived in part by embracing this fragmentation: it pulled cloud data down into a curated local store that the user could actually search as a whole.
+
+## 6. Zettelkasten and the Rediscovery of the Card
+
+While software vendors were wrestling with filesystems, a parallel tradition was being rediscovered. **Niklas Luhmann** (1927–1998), a prolific German sociologist who published more than seventy books and hundreds of articles, attributed his output to a physical card-index system he called the *Zettelkasten* (slip-box). Luhmann's Zettelkasten eventually held roughly 90,000 numbered index cards, each carrying a single idea and cross-references to other cards by their identifiers. He described it, in a 1981 essay, as a "communication partner" — a second mind that could surprise him, because the non-linear structure of cross-references would surface juxtapositions he had forgotten making.
+
+Luhmann's method was known to German academics but remained obscure in the English-speaking world until the 2010s. Sönke Ahrens's 2017 book *How to Take Smart Notes*, written in English, popularized it, and the Zettelkasten concept became a small cottage industry. Its appeal is precisely that it does not require a hierarchical folder: each note is atomic, and the structure emerges from the link graph. In effect, it is Bush's Memex trail executed with paper and patience.
+
+The Zettelkasten has an even older ancestor. **Commonplace books** — personal notebooks in which readers copied extracts, quotations, and reflections for later retrieval — were a standard tool of European scholarship from the Renaissance onward. **John Locke** published a formal method in 1706 (*A New Method of Making Common-Place-Books*), proposing an indexing scheme based on the first vowel and first consonant of the keyword. The commonplace book, the Zettelkasten, the Memex, and the modern note-taking app form a continuous lineage of personal knowledge curation spanning five centuries.
+
+## 7. Productivity Frameworks: GTD and PARA
+
+PIM is not only about notes and documents; it is also about *actions*. **David Allen's** *Getting Things Done*, published in 2001, proposed a discipline rather than a tool: capture everything into a trusted inbox, process each item to its "next action," and maintain parallel lists for projects, waiting-for, and someday-maybe. GTD did not specify an implementation, but it shaped an entire generation of task software. **OmniFocus** (Omni Group, 2008), **Things** (Cultured Code, 2007), **Todoist** (2007), and **TickTick** all carry GTD's fingerprints, as do countless Notion and Obsidian templates.
+
+A later framework, **PARA** — Projects, Areas, Resources, Archive — was popularized by **Tiago Forte**, whose 2022 book *Building a Second Brain* extended Forte's earlier online course of the same name. PARA aimed specifically at creator-class knowledge workers drowning in highlights, clippings, and unfinished drafts. Its central claim was that most personal information should be filed by *actionability* rather than by topic: Projects are active efforts with deadlines, Areas are ongoing responsibilities, Resources are topics of interest, and Archive is inactive material. Whether one accepts Forte's taxonomy or not, PARA and GTD both reflect a hard-won insight: the hardest PIM problems are not technical but about deciding what deserves your attention.
+
+## 8. Personal Wikis, Notes, and the Block-Based Revival
+
+Personal knowledge tools proliferated through the 2000s. **TiddlyWiki**, created by Jeremy Ruston in 2004, was a single HTML file containing a complete personal wiki — a remarkable piece of engineering that still works two decades later. **Evernote**, launched in 2008, became the dominant consumer note app of the 2010s before stumbling on pricing changes and a 2023 layoff that gutted much of its development staff. Microsoft's **OneNote** (2003) continued quietly as part of Office. **Bear** (2016) and **Apple Notes** (rewritten and unified across iOS and macOS in 2015) held the Apple ecosystem. **Joplin** (2017) offered an open-source alternative.
+
+The second great hypertext revival arrived in the late 2010s with the block-based, bidirectional-link tools. **Notion**, founded by Ivan Zhao in 2016, treated every paragraph as a linkable block and let users nest databases and pages arbitrarily. **Roam Research**, launched publicly by Conor White-Sullivan in 2019, made the bidirectional wikilink its core gesture and explicitly invoked Luhmann and Bush; its cult-like early community, "#roamcult," treated the daily-notes page and the backlinks panel as a reincarnation of Memex trails. **Obsidian**, released in 2020 by Shida Li and Erica Xu, ran on local Markdown files and grew rapidly among users burned by Roam's hosted-only model. **Logseq** (2020) and **RemNote** (also 2020) completed a brief Cambrian explosion. By 2023 the block-based note category was crowded and maturing, with Obsidian clearly dominant among technical users because of its local-first file format and open plugin ecosystem.
+
+## 9. Local-First Software and the Sync Problem
+
+The rise of Obsidian and Logseq coincided with a broader cultural shift that **Martin Kleppmann** and collaborators named **local-first software** in a 2019 paper (and later at the 2019 Onward! conference). Kleppmann's argument was that cloud-hosted apps had quietly sacrificed user ownership, longevity, and offline resilience in exchange for collaboration, and that a new generation of tools should aim to keep data local while still supporting multi-device sync. The technical underpinning was **CRDTs** (Conflict-free Replicated Data Types), which allow independent replicas to converge without a central coordinator. Kleppmann's Automerge library became a reference implementation.
+
+Obsidian's popularity fit neatly into this movement: users kept their notes as plain Markdown in a folder they controlled, synced via iCloud, Dropbox, git, or Obsidian's own paid sync. The trade-off was real: without a central server, merging concurrent edits is genuinely hard, and no plain-text tool yet solves it perfectly. But for personal notes, imperfect sync was acceptable, and the benefit — that your knowledge base survived the vendor — was felt to be worth it.
+
+## 10. AI-Assisted PIM and Lifelogging's Return
+
+The mid-2020s brought a new wave of tools that used language models to augment personal archives. **Readwise** (2017, with its Reader product in 2022) aggregated highlights and used spaced-repetition review to re-surface them. **Reflect** and **Mem.ai** built note apps around GPT-style summarization and semantic search. **Heptabase** offered a whiteboard-centric view. **Rewind.ai**, launched in 2022, took the most aggressive approach: it captured screenshots of everything on the user's screen, ran OCR, and offered full-text and semantic search over the resulting record. Rewind explicitly evoked the project that had tried it first.
+
+That earlier project was **MyLifeBits**, led by **Gordon Bell** at Microsoft Research from 2001 to roughly 2007. Bell, a computing pioneer who had helped design the PDP and VAX lines at Digital Equipment Corporation, set out to digitize his entire life — every document, photo, email, phone call, and, eventually, passively captured images from a SenseCam worn around the neck. MyLifeBits produced real research (Jim Gemmell, Roger Lueder, and others published extensively on it), but it also produced a sobering lesson: capturing everything is easy; finding anything in the capture is hard. Bell's archive ballooned to tens of gigabytes of mostly unqueried material. The lifelogging dream, like the Memex, became a standing monument to capture-retrieval asymmetry.
+
+## 11. Ergonomics, Recognition, and the Hoarder's Dilemma
+
+Human-computer interaction has two classical laws that bear on PIM. **Hicks's Law** (William Edmund Hick, 1952) says the time to choose among *n* alternatives grows logarithmically with *n* — so a folder with twenty children is faster to scan than one with two hundred, but both are slower than simply typing a search. **Fitts's Law** (Paul Fitts, 1954) governs pointing motion and explains why keyboard-driven interfaces (command palettes, fuzzy finders) outperform deeply-nested menus for power users. A more subjective principle, often cited as "recognition over recall," holds that humans are much better at recognizing a thing they have seen than at producing its name from memory — which is why a well-designed search UI shows snippets and thumbnails rather than bare filenames.
+
+Together these considerations argue for search-first, recognition-rich interfaces over browsing-heavy ones. Yet users continue to build folders, because filing *feels* like progress and searching *feels* like failure. This is the deepest tension in the field. The ergonomic argument says: do not file, search. The psychological reality says: we need the ritual of filing to feel we have done our work.
+
+And so we arrive at the **capture-retrieval asymmetry**, the hoarder's dilemma. Every tool in the PIM canon — from commonplace book to Zettelkasten to Evernote to Obsidian to Rewind — optimizes for frictionless capture, because capture is where users give up first. The result is that personal archives grow without bound while retrieval capability grows only slowly, and most of what we save is, empirically, never read again. The existence of gigabytes of unread highlights, unopened Evernote clippings, and unscanned Rewind recordings is not a failure of any particular tool. It is the structural condition of PIM: the human who saved the information and the human who needs it later are, for practical purposes, different people with different contexts, and the earlier self can rarely anticipate what the later self will ask.
+
+## 12. Coda: the Unfinished Memex
+
+Bush imagined, in 1945, that the Memex would let a scholar retrace the associative trails of a predecessor and thereby inherit not just facts but patterns of thought. Eighty years later, with our local disks indexed, our notes bidirectionally linked, our screens captured, and our highlights semantically embedded, we are closer than ever to that vision — and further, because the volume of personal information we produce has grown faster than the tools for navigating it. The individual's lifelong struggle to find what they already have is not a problem any single product will solve. It is a condition of being a literate, recording creature in a high-bandwidth world, and the best we can do is choose tools that take capture seriously without pretending retrieval is free, and that keep our data in formats we will still be able to open when the vendor is gone.
+
+The good news, discoverable in every strand of this history from Locke's vowel-index to Obsidian's Markdown vault, is that the problem is at least stable. Each generation rediscovers the same insights, often without knowing their ancestors, and each generation ships a slightly better Memex. The trails are not lost; they are only waiting to be walked again.
+
+## Study Guide — Personal Information Management
+
+### Tools
+
+- **Obsidian** — local markdown vault, bidirectional links.
+- **Logseq** — outliner/PKM.
+- **Notion** — cloud structured.
+- **Zettelkasten** — Luhmann's method.
+- **Rewind / Screenpipe** — continuous capture.
+
+## DIY — Build a Zettelkasten
+
+100 notes, bidirectional links, atomic ideas. Use
+Obsidian.
+
+## TRY — Replicate Locke's commonplace book
+
+Use a paper notebook with vowel-index method (Locke 1706).
+30 entries. Note which tool design choices become obvious.

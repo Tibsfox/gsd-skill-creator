@@ -1,0 +1,3168 @@
+% ============================================================================
+%  gsd-going-further-guide.tex
+%  GSD: Going Further --- Skills, MCP, and Multi-Repo Workflows
+%  Compile: xelatex (3-pass) from this directory; \input@path picks up shared/
+% ============================================================================
+\documentclass[11pt,letterpaper,openany]{book}
+
+\title{GSD: Going Further}
+\author{Tibsfox}
+\date{}
+
+\makeatletter
+\def\input@path{{../shared/}}
+\makeatother
+
+\input{gsd-guides-preamble.tex}
+
+% ============================================================================
+%  Going-Further-specific preamble extensions
+% ============================================================================
+
+% ---------- Part page styling ----------
+\titleformat{\part}[display]
+  {\headingfont\Huge\bfseries\color{gsdnavy}}
+  {\partname\ \thepart}{20pt}{\Huge}
+
+% ---------- Scenario walkthrough environment (the signature element) ------
+\definecolor{gsdscenariobg}{HTML}{F9F9F9}
+
+\newtcolorbox{gsdscenario}[1][Scenario]{%
+  enhanced,
+  breakable,
+  left=12pt,
+  right=10pt,
+  top=8pt,
+  bottom=8pt,
+  boxrule=0pt,
+  frame hidden,
+  borderline west={6pt}{0pt}{gsdaccent},
+  colback=gsdscenariobg,
+  fonttitle=\bfseries\itshape\headingfont,
+  fontupper=\small,
+  arc=2pt,
+  title={Scenario: #1}
+}
+
+% ---------- Per-language code listing presets -----------------------------
+\lstdefinelanguage{jsonl}{
+  literate=
+    *{0}{{{\color{gsdnavy}0}}}{1}
+     {1}{{{\color{gsdnavy}1}}}{1}
+     {2}{{{\color{gsdnavy}2}}}{1}
+     {3}{{{\color{gsdnavy}3}}}{1}
+     {4}{{{\color{gsdnavy}4}}}{1}
+     {5}{{{\color{gsdnavy}5}}}{1}
+     {6}{{{\color{gsdnavy}6}}}{1}
+     {7}{{{\color{gsdnavy}7}}}{1}
+     {8}{{{\color{gsdnavy}8}}}{1}
+     {9}{{{\color{gsdnavy}9}}}{1}
+     {:}{{{\color{gsdaccent}{:}}}}{1}
+     {,}{{{\color{gsdaccent}{,}}}}{1}
+     {\{}{{{\color{gsdaccent}{\{}}}}{1}
+     {\}}{{{\color{gsdaccent}{\}}}}}{1}
+     {[}{{{\color{gsdaccent}{[}}}}{1}
+     {]}{{{\color{gsdaccent}{]}}}}{1},
+  string=[b]",
+  stringstyle=\color{gsdnavy!80!black},
+  showstringspaces=false
+}
+
+\lstdefinestyle{gsdjsonstyle}{
+  style=gsdcode,
+  language=jsonl,
+}
+
+\lstnewenvironment{gsdjson}{\lstset{style=gsdjsonstyle}}{}
+
+\lstdefinestyle{gsdbashstyle}{
+  style=gsdcode,
+  language=bash,
+  morekeywords={npx,claude,gsd,git,cd,export,source,echo,cat,grep,ls,mkdir,rm,touch,curl,wget},
+  keywordstyle=\color{gsdnavy}\bfseries,
+  commentstyle=\color{gray}\itshape,
+}
+
+\lstnewenvironment{gsdbash}{\lstset{style=gsdbashstyle}}{}
+
+\lstdefinelanguage{yamlflavor}{
+  morekeywords={true,false,null,yes,no},
+  keywordstyle=\color{gsdaccent},
+  morecomment=[l]{\#},
+  commentstyle=\color{gray}\itshape,
+  morestring=[b]',
+  morestring=[b]",
+  stringstyle=\color{gsdnavy!80!black},
+}
+
+\lstdefinestyle{gsdyamlstyle}{
+  style=gsdcode,
+  language=yamlflavor,
+}
+
+\lstnewenvironment{gsdyaml}{\lstset{style=gsdyamlstyle}}{}
+
+\lstnewenvironment{gsdplain}{\lstset{style=gsdcode,language=}}{}
+
+% ---------- Reusable credential safety callout ----------------------------
+\newcommand{\credentialwarning}{%
+\begin{gsdwarning}[Credential Safety]
+The values shown above are \textbf{placeholders}. Never commit real API keys,
+OAuth tokens, or database connection strings to a file that will be checked
+into version control. Use environment variables (\texttt{\$\{VAR\_NAME\}}) and
+add \texttt{.mcp.json} to \texttt{.gitignore} whenever it carries credentials.
+\end{gsdwarning}%
+}
+
+\begin{document}
+
+% ---------- Title page ----------
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\headingfont\Huge\bfseries\color{gsdnavy} GSD\par}
+\vspace{0.4cm}
+{\headingfont\LARGE\bfseries\color{gsdnavy} Going Further\par}
+\vspace{0.8cm}
+{\headingfont\large Skills, MCP, and Multi-Repo Workflows\par}
+\vspace{2cm}
+\begin{tcolorbox}[
+  enhanced,
+  width=0.78\textwidth,
+  colback=gsdnotebg,
+  colframe=gsdnotebar,
+  boxrule=0.6pt,
+  arc=3pt,
+  fonttitle=\bfseries\headingfont,
+  title={What This Guide Covers}
+]
+\small
+Three advanced GSD topics, each delivered through a complete walkthrough you
+can follow at the keyboard:
+\begin{itemize}[leftmargin=1.2em,itemsep=0.15em]
+  \item \textbf{Skills \& Slash Commands} --- the SKILL.md format, the
+        12-runtime install matrix, and how to inject custom domain
+        knowledge into GSD's subagents.
+  \item \textbf{MCP Integration} --- connecting GSD to external tools via
+        the Model Context Protocol, with full walkthroughs for Google
+        Stitch UI generation and schema-aware planning via a Postgres MCP.
+  \item \textbf{Multi-Repo Workflows} --- workstreams, workspaces, the
+        STATE.md ownership rule, and patterns for teams running GSD across
+        microservice fleets.
+\end{itemize}
+\end{tcolorbox}
+\vspace{2cm}
+{\large Tibsfox\par}
+\vspace{0.4cm}
+{\small For GSD v1.35.0 \par}
+\vspace{0.4cm}
+{\small Audience: GSD users ready to customize, integrate, and scale \par}
+\vfill
+{\footnotesize \cclicense\par}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+% ============================================================================
+%  part1-skills.tex
+%  Part I of "GSD: Going Further" — Skills & Slash Commands
+%  Input into the master document via \input{part1-skills}
+% ============================================================================
+
+\part{Skills \& Slash Commands}
+
+\chapter{How GSD Actually Works --- Skills Anatomy}
+
+Most GSD users never look under the hood. They install the tool, type
+\texttt{/gsd:new-project}, and watch Claude Code do the rest. That is exactly
+how it is supposed to feel. But the moment you want to bend GSD to fit your
+team, your domain, or your personal taste, the black box stops being a
+feature and starts being an obstacle.
+
+This chapter opens the box. By the end of it you will know where GSD stores
+its skills on disk, what a single skill file looks like, how Claude Code
+decides which skills to activate, and why the installer ships two different
+layouts depending on which version of Claude Code you have. None of this
+requires source code spelunking --- everything GSD installs is plain
+markdown, which means you can read it, diff it, copy it, and edit it with
+the same tools you already use.
+
+\section{Finding the Skills on Disk}
+
+On a Claude Code 2.1.88 or newer install, GSD writes its skills into your
+per-user Claude configuration directory. On Linux and macOS that lives at
+\texttt{\~{}/.claude/skills/}; on Windows it is
+\texttt{\%USERPROFILE\%\textbackslash.claude\textbackslash skills\textbackslash}.
+The GSD installer creates one sub-directory per command, each prefixed with
+\texttt{gsd-}, and each containing a single \texttt{SKILL.md} file:
+
+\begin{gsdplain}
+~/.claude/skills/
+├── gsd-new-project/
+│   └── SKILL.md
+├── gsd-plan-phase/
+│   └── SKILL.md
+├── gsd-execute-phase/
+│   └── SKILL.md
+├── gsd-verify-work/
+│   └── SKILL.md
+├── gsd-progress/
+│   └── SKILL.md
+├── gsd-help/
+│   └── SKILL.md
+└── ... (30+ more)
+\end{gsdplain}
+
+Go ahead and navigate there now. Run \texttt{ls \~{}/.claude/skills/} on
+your own machine. You should see a long list of \texttt{gsd-*} directories
+plus any other skills Claude Code has picked up from other tools or from
+your own hand-authored experiments. This is not a sandbox --- it is your
+real home directory, and those markdown files are the exact instructions
+Claude reads when you invoke a GSD command.
+
+\begin{gsdtip}
+You can read any GSD skill file. They are plain markdown --- no compilation,
+no opaque binaries, no generated code. If you are ever unsure what a
+\texttt{/gsd:*} command is \emph{actually} going to do, open its
+\texttt{SKILL.md} in your editor and read it. That is the entire contract.
+\end{gsdtip}
+
+\section{The SKILL.md Format}
+
+Every skill file Claude Code 2.1.88 and later consumes follows the same
+shape: a YAML frontmatter block, a heading, and an instruction body. The
+frontmatter carries two required keys --- \texttt{name} and
+\texttt{description} --- and the body is markdown prose that becomes the
+instruction set the model sees when the skill activates.
+
+Here is the minimum viable skill file:
+
+\begin{gsdplain}
+---
+name: gsd-progress
+description: "Show GSD project progress and current phase status"
+---
+# GSD Progress Report
+
+When the user asks about the current state of the project, read
+`.planning/STATE.md` and `.planning/ROADMAP.md`. Produce a compact
+summary containing:
+
+1. The current milestone (from ROADMAP.md).
+2. The active phase (from STATE.md).
+3. The most recent three completed work items.
+4. Any open blockers recorded under the "Blockers" heading.
+
+Render the output as a markdown table with two columns: "Item" and
+"Status". Do not fabricate phase data --- if STATE.md is missing, say
+so and suggest running `/gsd:new-project` to initialize it.
+\end{gsdplain}
+
+That is a complete, working skill. Drop that file into
+\texttt{\~{}/.claude/skills/gsd-progress/SKILL.md}, reopen Claude Code, and
+typing \textit{``show me the GSD progress''} will surface it as a candidate
+skill. The \texttt{name} field is the stable identifier --- it also
+determines the slash-command alias (\texttt{/gsd:progress} maps to
+\texttt{gsd-progress}) on runtimes that expose slash commands. The
+\texttt{description} field is where the real magic lives, and it deserves
+its own section.
+
+\section{How Trigger Descriptions Work}
+
+Claude Code does not load every skill on disk into every request. That
+would blow the context window inside of a dozen commands. Instead the
+runtime keeps a lightweight manifest of all installed skills --- just their
+names and descriptions --- and when a new user message arrives, it pattern
+matches the message against those descriptions to decide which skills to
+promote into the full context. Only promoted skills have their
+instruction body loaded.
+
+The \texttt{description} is therefore the \emph{activation contract}. A
+vague description like \texttt{"Help with GSD"} will match almost
+everything and almost nothing usefully. A concrete one like
+\texttt{"Show GSD project progress and current phase status"} will match
+phrases like \textit{``where are we on the project''},
+\textit{``what phase are we in''}, or \textit{``give me a status update''}
+without swamping unrelated requests.
+
+When you author your own GSD-adjacent skills, invest time in the
+description line. Use action verbs, name the artifact you operate on, and
+include a few of the phrasings users actually say out loud. A good
+description is not a summary of what the skill does --- it is a list of
+\emph{triggers} that should fire it.
+
+\begin{gsdnote}
+The frontmatter is strict YAML. Unquoted colons in the description will
+break the parser and silently disable the skill. When in doubt, wrap the
+description in double quotes. This is the single most common reason a
+hand-authored skill ``doesn't work''.
+\end{gsdnote}
+
+\section{The Installer's Role}
+
+GSD ships as an npm package. When you run \texttt{npx gsd-build install},
+the installer does three things in sequence:
+
+\begin{enumerate}
+\item \textbf{Detect the runtime.} It looks at which agent CLIs are
+installed on the current machine --- Claude Code, Codex, Cursor, Windsurf,
+and so on --- and also at the \emph{version} of Claude Code it finds. The
+2.1.88 cutoff matters: earlier versions do not understand the skills
+directory layout at all.
+\item \textbf{Read its source skill definitions.} GSD carries its command
+definitions in a single canonical form inside the npm package. These are
+the master copies.
+\item \textbf{Transform and write.} For each detected runtime, the
+installer rewrites the master skill into whatever format that runtime
+actually consumes, then drops the result into the right directory. One
+master, many derivatives.
+\end{enumerate}
+
+This architecture is why the \emph{same} \texttt{/gsd:plan-phase} command
+behaves identically whether you are driving Claude Code, Codex, or Cursor
+--- the installer is doing the translation work up front so the user-facing
+surface is uniform.
+
+\section{Skills versus Legacy Slash Commands}
+
+Before Claude Code 2.1.88, Claude Code had no notion of skills. The only
+way to ship reusable instructions was as a \emph{slash command}: a
+markdown file living at \texttt{\~{}/.claude/commands/gsd/[name].md} that
+the user invoked by literally typing its name. There was no description
+field, no trigger matching, no auto-activation --- the user had to know
+the command existed and type it explicitly.
+
+GSD still supports this old world. If the installer detects a pre-2.1.88
+Claude Code install, it writes legacy slash commands instead of skills:
+
+\begin{gsdplain}
+~/.claude/commands/gsd/
+├── new-project.md
+├── plan-phase.md
+├── execute-phase.md
+├── verify-work.md
+└── ...
+\end{gsdplain}
+
+You interact with both layouts the same way from the user side ---
+\texttt{/gsd:plan-phase} works whether it resolves to a skill or a legacy
+command --- but under the hood the runtime treats them differently. Skills
+are auto-activating and context-aware; legacy commands only fire on an
+explicit invocation. If you upgrade Claude Code from an older version, run
+\texttt{npx gsd-build install} again and the installer will migrate you
+forward automatically, leaving the legacy directory in place so nothing
+breaks mid-session.
+
+\section{What You Can Do With This Knowledge}
+
+Once you internalize that GSD skills are just markdown on disk, a long
+list of previously scary tasks becomes trivial. You can diff two installs
+to see what changed between GSD releases. You can keep a local patch
+directory and re-apply your own edits after an upgrade. You can fork a
+skill, rename it to \texttt{gsd-plan-phase-health}, tailor it to your
+domain, and have both the generic and the specialized version coexist in
+the same directory. You can hand-write skills that call GSD primitives
+without waiting for upstream to ship them. Everything is text, everything
+is readable, and nothing is hidden.
+
+The rest of this part walks through each of those capabilities in detail,
+starting with the compatibility matrix that determines where your skills
+actually land.
+
+% ============================================================================
+\chapter{Skills Across Runtimes}
+
+GSD is not a Claude Code exclusive. The installer knows about a dozen
+different agent runtimes, each with its own directory layout, its own
+file format, and its own opinions about how instructions should be
+delivered to the model. This chapter is the reference you will reach for
+when a GSD command that works on one machine appears to be missing on
+another. The short answer is almost always \textit{``it installed fine,
+but it lives somewhere else on this runtime.''}
+
+\section{The Compatibility Matrix}
+
+The table below lists every runtime the GSD installer currently supports,
+the format it emits for that runtime, the directory where the output
+lands, and the command you can run to confirm the install succeeded.
+
+{\footnotesize
+\begin{longtable}{@{}p{2.5cm} p{3.2cm} p{4.2cm} p{2.8cm}@{}}
+\toprule
+\textbf{Runtime} & \textbf{Install Format} & \textbf{Directory (Global)} & \textbf{Verify Command} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Runtime} & \textbf{Install Format} & \textbf{Directory (Global)} & \textbf{Verify Command} \\
+\midrule
+\endhead
+Claude Code 2.1.88+ & \texttt{skills/gsd-*/SKILL.md} & \texttt{\~{}/.claude/skills/} & \texttt{/gsd:help} \\
+Claude Code (legacy) & \texttt{commands/gsd/*.md} & \texttt{\~{}/.claude/commands/} & \texttt{/gsd:help} \\
+Codex & \texttt{skills/gsd-*/SKILL.md} & \texttt{\~{}/.codex/skills/} & \texttt{\$gsd-help} \\
+Copilot & prompts + agents & \texttt{\~{}/.github/} & \texttt{/gsd:help} \\
+Cursor & \texttt{skills/gsd-*/SKILL.md} & \texttt{\~{}/.cursor/} & \texttt{/gsd:help} \\
+Windsurf & markdown transform & \texttt{\~{}/.windsurf/} & \texttt{/gsd:help} \\
+OpenCode & config file & \texttt{\~{}/.config/opencode/} & \texttt{/gsd-help} \\
+Gemini CLI & skills & \texttt{\~{}/.gemini/} & \texttt{/gsd:help} \\
+Antigravity & skills & \texttt{\~{}/.gemini/antigravity/} or \texttt{./.agent/} & \texttt{/gsd:help} \\
+Cline & \texttt{.clinerules} & \texttt{\~{}/.cline/} & rules auto-loaded \\
+Augment & skills transform & \texttt{\~{}/.augment/} & \texttt{/gsd:help} \\
+Qwen Code & skills (open standard) & \texttt{\~{}/.qwen/skills/} & \texttt{/gsd:help} \\
+\bottomrule
+\end{longtable}
+}
+
+Twelve runtimes, twelve directory layouts. Four of them (Claude Code 2.1.88
+and later, Codex, Cursor, and Qwen Code) converge on the same skills-with-
+SKILL.md shape, which is the format this book treats as canonical. The
+other eight each require the installer to do some amount of translation
+work, and understanding those translations is the key to debugging any
+cross-runtime weirdness you run into.
+
+\section{How the Installer Transforms}
+
+The installer maintains a single internal representation for each GSD
+command --- call it the ``source form.'' When a runtime requires a
+different format, the installer applies a translation pass. Here are the
+three most important translations.
+
+\subsection{Skills into Prompts (Copilot)}
+
+GitHub Copilot does not have a skills directory. It has a
+\texttt{prompts/} directory for standalone prompt files and an
+\texttt{agents/} directory for role definitions, and the two work
+together. The installer splits each GSD skill in half: the instruction
+body becomes a prompt file under \texttt{\~{}/.github/prompts/gsd/}, and
+the trigger metadata plus any agent role information becomes an agent
+definition under \texttt{\~{}/.github/agents/}. Invoking
+\texttt{/gsd:plan-phase} in Copilot fires both sides simultaneously.
+
+\subsection{Skills into Rules (Cline)}
+
+Cline takes the opposite approach. It has no concept of slash commands at
+all --- instead, it reads a \texttt{.clinerules} file and treats the
+entire contents as a persistent instruction prefix injected into every
+request. The installer concatenates every GSD skill body into a single
+\texttt{.clinerules} file and drops it at
+\texttt{\~{}/.cline/.clinerules}. You will not find a
+\texttt{/gsd:plan-phase} slash command in Cline because there are no
+slash commands to find; the rules simply load automatically and Cline
+recognizes the GSD phrasings when you use them conversationally.
+
+\subsection{Skills into TOML + Markdown (Codex)}
+
+Codex uses a paired-file convention: a \texttt{.toml} file declares the
+skill metadata, and a matching \texttt{.md} file alongside it carries the
+instruction body. The installer emits both halves. If you open
+\texttt{\~{}/.codex/skills/gsd-plan-phase/} you will see a
+\texttt{skill.toml} with the name and description fields, plus a
+\texttt{SKILL.md} with the prose. Codex also uses a different invocation
+prefix: \texttt{\$gsd-help} instead of \texttt{/gsd:help}, which is worth
+memorizing if you move between machines.
+
+\section{Runtime-Specific Gotchas}
+
+Even when you know the translation rules, a few runtimes have quirks
+worth calling out explicitly.
+
+\subsection{Cline Has No Slash Commands}
+
+If a new Cline user complains that \texttt{/gsd:plan-phase} ``isn't
+working,'' they have usually not done anything wrong --- Cline literally
+does not support slash commands. The fix is not to reinstall. The fix is
+to describe what you want in natural language (\textit{``plan the next
+phase''}) and let the injected \texttt{.clinerules} do its job.
+
+\subsection{Copilot Needs Both Halves}
+
+The prompt and agent files Copilot writes work together, and if only one
+half lands (for example, because the installer was interrupted or because
+\texttt{\~{}/.github/agents/} already contained a conflicting file), the
+GSD command will misbehave in subtle ways. Re-running
+\texttt{npx gsd-build install --force} will overwrite any half-written
+state and is the standard fix.
+
+\subsection{Codex Uses TOML Pairs}
+
+If you hand-edit a Codex skill, remember that the metadata lives in the
+\texttt{.toml} file, not in frontmatter. Editing the \texttt{SKILL.md}
+body to change the \texttt{description} field will have no effect ---
+Codex never reads frontmatter. Edit the \texttt{.toml}.
+
+\subsection{Antigravity Has Two Install Dirs}
+
+Antigravity supports both a global install at
+\texttt{\~{}/.gemini/antigravity/} and a project-local install at
+\texttt{./.agent/}. The installer picks global by default but will honor
+the \texttt{--local} flag to install into the current project. This is
+the only runtime where GSD supports per-project scoped command installs
+at the runtime layer; for every other runtime, per-project customization
+happens through the \texttt{agent\_skills} mechanism described in the
+next chapter.
+
+\section{Non-Claude Model Profiles}
+
+Most GSD subagents (the executor, planner, researcher, and verifier
+roles) are built on Claude Code's subagent spawn primitive, which
+defaults to whichever Anthropic model the parent session is running.
+That is usually what you want --- consistency across the session --- but
+it is a footgun the first time you run GSD inside an OpenRouter-fronted
+Claude Code or on a locally hosted model.
+
+The problem: even when the parent session is routed through OpenRouter,
+a spawned subagent may try to call Anthropic directly unless you
+explicitly tell it not to. You end up paying OpenRouter for the parent
+and Anthropic for every subagent spawn simultaneously.
+
+GSD ships an \texttt{inherit} profile for exactly this case. When you
+select the \texttt{inherit} profile (via \texttt{/gsd:set-profile
+inherit} or by editing \texttt{.planning/config.json}), every spawned
+subagent will reuse the parent session's model configuration instead of
+defaulting to Anthropic. If the parent is on OpenRouter, the subagents
+are on OpenRouter. If the parent is on a local Ollama model, the
+subagents are too.
+
+\begin{gsdimportant}
+If GSD subagents call Anthropic models and you are paying through
+OpenRouter, switch to the \texttt{inherit} profile or you will see
+double-billing. Run \texttt{/gsd:set-profile inherit} once per project.
+\end{gsdimportant}
+
+\section{Verifying an Install}
+
+Regardless of runtime, the fastest way to confirm GSD is actually
+installed is to run the \texttt{/gsd:help} command (or its runtime-specific
+equivalent from the matrix). It is a skill like any other, and if it
+responds with the GSD command listing, everything else is wired up
+correctly. If it does not respond, the first diagnostic step is to
+\texttt{ls} the install directory for your runtime and confirm the
+\texttt{gsd-*} entries exist. Ninety percent of install problems are
+really ``I am on a runtime I did not expect to be on'' problems, and the
+matrix is there to cut that debugging time down to seconds.
+
+% ============================================================================
+\chapter{Agent Skills Injection}
+
+So far everything in this Part has been about \emph{global} skills --- the
+files GSD installs into your per-user directory that apply to every
+project you work on. That is the right default for the command layer.
+But GSD also has a sharper tool for per-project customization, one that
+does not require touching the global directory at all: \texttt{agent\_skills}.
+
+\texttt{agent\_skills} is the mechanism by which a single project teaches
+its GSD subagents things about its own domain. Those teachings live
+inside the project, travel with it through version control, and apply
+only while you are working in that project. No other project sees them.
+No global state gets polluted.
+
+\section{The Concept}
+
+When GSD spawns a subagent --- an executor running a phase, a planner
+drafting the next set of work items, or a researcher collecting
+domain information --- it builds the subagent's system prompt from a
+stack of pieces: the subagent's role definition, the current project
+state, the task at hand, and optionally, one or more
+\emph{injected skill blocks} drawn from local project directories.
+
+Those injected blocks arrive in the subagent's prompt as an
+\texttt{<agent\_skills>} section. From the subagent's point of view,
+they are just more instructions --- indistinguishable from the built-in
+role definition except that they came from a project-local directory
+rather than from the GSD source tree. This is pure prompt augmentation.
+There is no plugin system, no sandbox, no new execution path. The
+injected content simply becomes part of what the subagent sees.
+
+That simplicity is the feature. You can teach a GSD researcher about
+FDA endpoints the same way you would teach a human researcher about
+them: by handing over a short written brief. The researcher reads the
+brief, integrates it into its working knowledge, and uses it for the
+duration of the task.
+
+\section{Configuration Syntax}
+
+\texttt{agent\_skills} is configured in the project's
+\texttt{.planning/config.json} file. The key is \texttt{agent\_skills},
+and its value is an object mapping subagent type names to arrays of
+directory paths. Each path is resolved relative to the project root.
+
+\begin{gsdjson}
+{
+  "agent_skills": {
+    "executor": ["./skills/domain-knowledge/"],
+    "planner": ["./skills/planning-rules/"],
+    "researcher": ["./skills/research-sources/"]
+  }
+}
+\end{gsdjson}
+
+When a subagent of a given type spawns, the installer walks the
+directories listed under that type, reads every \texttt{.md} file it
+finds, concatenates the contents, and wraps the result in an
+\texttt{<agent\_skills>} block inside the subagent's prompt. Files are
+read in lexicographic order, so prefixing names with \texttt{01-},
+\texttt{02-}, and so on gives you explicit control over the final
+ordering when order matters.
+
+\section{Which Agent Types Accept Skills}
+
+Not every subagent type honors \texttt{agent\_skills}. As of the current
+release the supported types are:
+
+\begin{itemize}
+\item \textbf{executor} --- the phase-running worker. Injected skills
+here shape how code gets written, which conventions get followed, and
+which libraries get preferred. Good for ``our codebase uses X pattern''
+style rules.
+\item \textbf{planner} --- the task decomposition agent. Injected skills
+here shape how phases get broken into work items and what kinds of
+safety rails the planner enforces. Good for ``never do X without Y''
+style rules.
+\item \textbf{researcher} --- the information-gathering agent. Injected
+skills here shape which sources get consulted and what domain
+vocabulary gets used in the resulting \texttt{RESEARCH.md}. Good for
+teaching the researcher about APIs, standards, databases, and
+terminology it would not otherwise know.
+\end{itemize}
+
+The verifier, documenter, and other specialized subagent types currently
+use a fixed instruction set and do not read \texttt{agent\_skills}. That
+may change in a future release; for now, if you need to customize
+verification behavior, you do it by editing the global skill file
+directly.
+
+\section{Writing a Skill Directory}
+
+A skill directory is just a directory. Create it anywhere under your
+project root (convention is \texttt{./skills/[name]/}), drop one or
+more \texttt{.md} files in it, and list the directory in
+\texttt{agent\_skills}. That is the whole contract.
+
+The markdown files inside do not need frontmatter. They do not need a
+\texttt{name} or \texttt{description} field. They just need to contain
+the instructions you want the subagent to read. You can write them in
+whatever style feels natural --- prose, bullet lists, labeled sections,
+annotated code examples --- and the subagent will parse them the same
+way it parses any other instruction block.
+
+The reason naming is descriptive (rather than formal) is that every
+\texttt{.md} file's content gets concatenated together at spawn time.
+The subagent does not see file boundaries; it sees one long block of
+text. File names serve only two purposes: ordering (lexicographic) and
+readability for you when you come back to the directory in six months.
+
+\section{How Injection Affects Behavior}
+
+The injected \texttt{<agent\_skills>} block lives inside the subagent's
+prompt for the entire duration of its task. That means:
+
+\begin{itemize}
+\item The instructions persist across every tool call the subagent makes.
+A researcher that spawns a web search, then a file read, then another
+web search still has the FDA brief visible through all three calls.
+\item The instructions are visible to the model at every decision point.
+When the model is picking which URL to fetch or which section to write
+first, it is weighing those choices against the injected skill content.
+\item The instructions do not persist beyond the task. Once the subagent
+exits, the injected block goes with it. The next subagent spawn rebuilds
+the prompt from scratch, picking up any edits you made to the skill
+files in between.
+\end{itemize}
+
+That last point is important: you can edit a skill file mid-session and
+the next subagent spawn picks up the change immediately. There is no
+rebuild step, no cache to invalidate, no installer to re-run.
+
+\section{A Minimal Example}
+
+Suppose you are building a product that must never merge to
+\texttt{main} without first running an integration test. You want the
+GSD planner to refuse to generate a plan that skips this step. Here is
+the full contents of \texttt{./skills/planning-rules/no-untested-merges.md}:
+
+\begin{gsdplain}
+# Merge Safety Rule
+
+Never produce a plan whose final step is a merge to `main`, `master`,
+or any protected branch unless the plan also contains an explicit
+integration test step that runs BEFORE the merge and must pass.
+
+If a user asks for a plan that would merge without testing, respond
+with a plan that adds the missing test step and a one-line note
+explaining why.
+
+Applies to: all merge-containing phases, all branches matching
+`main`, `master`, `release/*`, or `prod`.
+\end{gsdplain}
+
+Six lines of instruction. That is enough. With this file in place and
+\texttt{planner} pointing at \texttt{./skills/planning-rules/} in
+\texttt{agent\_skills}, every subsequent \texttt{/gsd:plan-phase}
+invocation in this project will generate plans that include a test
+step before any merge, and will add a short justification when the
+user's request would have skipped one.
+
+The planner did not need to be recompiled. The GSD installer did not
+need to be rerun. You wrote six lines of markdown, saved the file, and
+the next planner spawn behaved differently. That is the entire feature.
+
+\begin{gsdnote}
+\texttt{agent\_skills} are project-local. They are defined in
+\texttt{.planning/config.json}, they reference paths under the project
+root, and they do not affect any other project on the same machine.
+Commit the skill directories along with your code so the next developer
+who clones the repo gets the same behavior automatically.
+\end{gsdnote}
+
+\section{When to Reach for This Tool}
+
+\texttt{agent\_skills} is the right tool whenever your customization
+need has three properties: it is specific to one project, it is worth
+writing down, and it would benefit from being seen by a particular
+subagent role on every spawn. Domain vocabulary, compliance rules,
+in-house API conventions, preferred libraries, house coding standards,
+data-handling constraints --- all of these fit naturally.
+
+It is the wrong tool for global rules (those belong in a hand-authored
+global skill), for one-off asks (those belong in the prompt itself),
+and for rules the whole team has not yet agreed on (those belong in a
+discussion, not a config file). Within its sweet spot, though, it is
+the single most powerful lever GSD gives you for shaping subagent
+behavior --- and the next chapter walks through a complete,
+end-to-end use of it.
+
+% ============================================================================
+\chapter{Scenario --- Custom Research Skill}
+
+\begin{gsdscenario}[Teaching GSD's Researchers Your Domain]
+
+You are three weeks into building a small health-tech application --- a
+patient intake form that needs to map its fields cleanly to the FHIR
+Patient resource, check drug interactions against an authoritative
+source, and keep one eye on the 510(k) clearance pathway in case the
+product ever grows into a regulated medical device. You are using GSD
+to manage the work. Planning, execution, and verification all run
+smoothly. But the research phase keeps coming up short.
+
+Here is what you want to fix, and how \texttt{agent\_skills} fixes it.
+
+\textbf{\large The problem.}
+
+You ran \texttt{/gsd:research-phase} yesterday on the topic
+\textit{``data sources for drug interaction checking.''} The researcher
+subagent did its job: it spawned, ran a batch of web searches, read a
+handful of Wikipedia pages and generic developer blogs, and wrote a
+tidy \texttt{RESEARCH.md} file into \texttt{.planning/research/}.
+Tidy, but wrong for your use case.
+
+The output was full of generic phrases like \textit{``drug interaction
+APIs such as those offered by various healthcare data vendors,''}
+hand-waving references to \textit{``the standard medical data format,''}
+and not a single mention of the FDA's openFDA Drug Event API, the RxNorm
+concept hierarchy, or the DrugBank identifier system. The section on
+data formats talked about JSON generically but never named FHIR, never
+mentioned the \texttt{MedicationStatement} resource, and never hinted
+that a serious health-tech product would need to handle HL7 interop.
+
+This is the researcher working exactly as designed. The problem is not
+that it is bad at research; the problem is that it has no reason to
+prefer FDA over DrugBank over a random consumer health blog, because
+nobody told it which sources are authoritative in your domain. You are
+going to tell it now.
+
+\textbf{\large Step 1: Create the skill directory.}
+
+Start by carving out a home for the domain brief. GSD convention is to
+put project-local skill directories under \texttt{./skills/}, so make
+one there with a descriptive name:
+
+\begin{gsdbash}
+mkdir -p ./skills/health-research/
+touch ./skills/health-research/SKILL.md
+\end{gsdbash}
+
+Open that new \texttt{SKILL.md} in your editor and write a real brief.
+This is the file you will hand to every future researcher spawn, so
+make it concrete. Name the endpoints, name the resources, name the
+regulations. Here is the full contents of the file we used for this
+project:
+
+\begin{gsdplain}
+# Health-Tech Research Brief
+
+When researching any topic related to drug data, patient records,
+clinical workflows, or medical devices, prefer the following
+authoritative sources over generic web results. Always cite them
+by name in the final RESEARCH.md.
+
+## Drug data
+- FDA openFDA Drug Event API:
+  https://api.fda.gov/drug/event.json
+  Use for adverse event lookups and label data.
+- RxNorm (NLM):
+  https://rxnav.nlm.nih.gov/REST/
+  Use for normalized drug name resolution.
+- DrugBank (academic tier):
+  https://go.drugbank.com/
+  Use for interaction data; cite the DrugBank ID.
+
+## Clinical trials and evidence
+- ClinicalTrials.gov search API:
+  https://clinicaltrials.gov/api/
+  Use for active and completed trials, inclusion criteria,
+  and results summaries.
+
+## Data model
+- FHIR R4 resource definitions:
+  https://hl7.org/fhir/R4/resourcelist.html
+  When modeling patient data, reference the exact FHIR resource
+  and field names (e.g., Patient.identifier, Observation.code,
+  MedicationStatement.medicationCodeableConcept).
+
+## Regulatory
+- HIPAA Privacy Rule: treat all PHI fields as requiring encryption
+  at rest and in transit. Never store unmasked PHI in logs or
+  telemetry.
+- 510(k) Premarket Notification: if a feature could classify as
+  a medical device, flag it and link to
+  https://www.fda.gov/medical-devices/premarket-submissions/
+  premarket-notification-510k
+\end{gsdplain}
+
+Notice what this file is \emph{not}. It is not a summary of everything
+there is to know about health tech. It is not a tutorial. It is not a
+policy document. It is a short, dense list of \textit{``here are the
+sources to use and the vocabulary to use when writing up your
+findings.''} Twenty-some lines is plenty. The researcher is already
+capable of doing research; you are just handing it a better rolodex.
+
+\textbf{\large Step 2: Configure \texttt{agent\_skills}.}
+
+Open \texttt{.planning/config.json} and add a \texttt{researcher} entry
+to the \texttt{agent\_skills} object. If the object does not yet exist,
+create it. Here is the relevant snippet with the new entry in place:
+
+\begin{gsdjson}
+{
+  "project_name": "health-intake",
+  "profile": "inherit",
+  "agent_skills": {
+    "researcher": ["./skills/health-research/"]
+  }
+}
+\end{gsdjson}
+
+Save the file. That is the entire configuration step. No installer
+rerun, no restart, no validation pass. The GSD runtime reads
+\texttt{.planning/config.json} on every subagent spawn, so the next
+time a researcher starts, it will pick up the new skill directory.
+
+\textbf{\large Step 3: Run \texttt{/gsd:research-phase}.}
+
+Re-run the same research phase you ran yesterday. This time the
+planner subagent reads your request, kicks off a researcher spawn, and
+the GSD runtime assembles the researcher's prompt: role definition,
+task description, project state, and now --- because you wired it up
+--- an \texttt{<agent\_skills>} block containing your health-tech brief.
+
+\begin{gsdbash}
+/gsd:research-phase "data sources for drug interaction checking"
+\end{gsdbash}
+
+What happens inside the spawn: the researcher reads the brief as part
+of its initial context, sees the named endpoints (openFDA, RxNorm,
+DrugBank), and queues those searches first. When it hits web results
+for generic health blogs, it now has a yardstick to measure them
+against, and it deprioritizes them. When it comes time to write up
+findings in \texttt{RESEARCH.md}, the vocabulary from the brief ---
+\texttt{MedicationStatement}, \texttt{Observation.code}, HIPAA,
+\texttt{510(k)} --- shows up in the prose because the researcher saw
+those terms as part of its working instructions.
+
+\textbf{\large Step 4: Verify \texttt{RESEARCH.md}.}
+
+Open \texttt{.planning/research/RESEARCH.md} and confirm the domain
+knowledge landed. Here is an excerpt from the file our example
+produced, covering the ``Drug data sources'' and ``Data format'' sections:
+
+\begin{gsdplain}
+## Drug data sources
+
+Primary: FDA openFDA Drug Event API
+  (https://api.fda.gov/drug/event.json). Use `search=` query
+  parameter for adverse event lookups; rate limit 240 req/min
+  unauthenticated.
+
+Normalization: RxNorm via the NLM RxNav REST endpoint
+  (https://rxnav.nlm.nih.gov/REST/). Use `rxcui` lookup to
+  collapse brand names to concept IDs before interaction checks.
+
+Interaction data: DrugBank academic tier. Cite DrugBank ID
+  (format DBnnnnn) in all interaction records.
+
+## FHIR Patient resource shape
+
+- Patient.identifier  (array of Identifier)
+- Patient.name        (array of HumanName)
+- Patient.telecom     (array of ContactPoint, PHI)
+- Patient.birthDate   (date)
+- Patient.address     (array of Address, PHI)
+
+PHI fields MUST be encrypted at rest per HIPAA Privacy Rule.
+\end{gsdplain}
+
+Twelve lines, and every one of them is grounded in something the
+brief told the researcher to care about. Endpoints are cited with
+real URLs. Resources are named by their exact FHIR field paths. The
+HIPAA note is present because the brief flagged it. Compare this to
+yesterday's output and the difference is not subtle --- this reads
+like something a health-tech engineer would actually hand to a
+coworker, not a generic tour of the internet.
+
+\textbf{\large Step 5: Iterate.}
+
+You will not get the brief perfect on the first try. Maybe the
+researcher missed the SNOMED CT code system, or over-cited DrugBank
+when RxNorm would have been more appropriate, or under-cited the
+510(k) clearance pathway because your wording was too hedged. The
+fix is straightforward: open \texttt{./skills/health-research/SKILL.md}
+again, sharpen the instructions, save the file, and re-run
+\texttt{/gsd:research-phase}. The next researcher spawn picks up the
+edits without any rebuild step, because \texttt{agent\_skills} reads
+live from disk on every spawn.
+
+If you find that a single monolithic file is getting unwieldy, split
+it into multiple markdown files inside the same directory. Name them
+\texttt{01-sources.md}, \texttt{02-fhir.md}, \texttt{03-regulatory.md},
+and GSD will concatenate them in lexicographic order. The subagent
+still sees one continuous block, but you get to reason about the
+pieces separately.
+
+When you are happy with the brief, commit it. The
+\texttt{./skills/health-research/} directory and the updated
+\texttt{.planning/config.json} both belong in version control, and
+every developer who clones the repo will get the same researcher
+behavior automatically --- no setup steps, no onboarding friction,
+no tribal knowledge about ``the way we do research on this project.''
+The knowledge is written down, and it travels with the code.
+
+\end{gsdscenario}
+
+\begin{gsdtip}
+Skill files are live. Edit and re-run --- there is no rebuild step.
+If a GSD subagent is missing context, the fastest path to a fix is
+almost always ``write it into the skill file and spawn again.''
+\end{gsdtip}
+
+\begin{gsdsuccess}
+You have now seen the full shape of GSD's skills system: global skills
+that live in your per-user directory and apply everywhere, legacy slash
+commands for older Claude Code versions, twelve runtime targets that
+all converge on the same user experience, and project-local
+\texttt{agent\_skills} that let you teach GSD subagents anything your
+domain needs them to know. Part II picks up from here and looks at
+agents and teams --- the mechanism by which GSD composes subagents into
+larger, coordinated work units.
+\end{gsdsuccess}
+% ============================================================================
+%  part2-mcp.tex
+%  Part II of "GSD: Going Further" --- MCP Integration
+%  Chapters 5--9.
+% ============================================================================
+
+\part{MCP Integration}
+
+\chapter{MCP Fundamentals for GSD Users}
+
+If Part I was about teaching GSD to speak your project's dialect, Part II
+is about teaching GSD to reach outside of itself. Most of the real work
+developers do involves tools: design tools, databases, ticket systems,
+cloud consoles, monitoring dashboards, that one custom script your team
+lead wrote three years ago that nobody fully understands. Claude Code can
+talk to all of them --- but only if a bridge exists. That bridge is MCP.
+
+\section{What MCP Actually Is}
+
+MCP --- the Model Context Protocol --- is an open standard, published by
+Anthropic, for connecting AI assistants to external tools and data
+sources. At its heart it is a small, stable JSON-RPC interface. A program
+that implements MCP is called an \emph{MCP server}. A program that
+connects to one is called an \emph{MCP client}. Claude Code is a client.
+Almost everything else in this chapter is a server.
+
+Each MCP server exposes a handful of \emph{tools}. A tool has a name, a
+JSON schema describing its arguments, and a function that runs when Claude
+Code invokes it. During a conversation, Claude Code sends a list-tools
+request to every connected server at startup, merges the results into its
+own tool surface, and from that point on, calling an MCP tool looks
+identical to calling a built-in one. The assistant does not know or care
+whether \texttt{read\_file} is implemented in Claude Code itself or served
+by a filesystem MCP running on your laptop.
+
+This is a much bigger deal than it sounds. Before MCP, every integration
+between an assistant and an outside service had to be hand-coded, vendor
+by vendor, with a bespoke protocol each time. MCP collapses that sprawl
+into one JSON-RPC shape that anyone can implement in a weekend. You write
+the server once, and every MCP-aware client --- Claude Code, Claude
+Desktop, the various editor plugins --- can use it without modification.
+
+\section{Why MCP Matters for GSD Specifically}
+
+Here is the part that surprises people: you don't have to tell GSD
+anything about your MCP servers. It figures them out on its own.
+
+As of GSD v1.30 (see CHANGELOG entry \#1603), the executor and planner
+subagents are explicitly instructed, in their system prompts, to inspect
+the current set of available tools before drafting a plan or executing a
+task, and to use any MCP tools they find as if they were first-class
+capabilities. That was a one-line change to the subagent prompt templates
+and it unlocked an enormous amount of behavior. If you connect a Postgres
+MCP server to Claude Code, the planner now sees \texttt{postgres.query}
+in its tool list and will naturally reach for it when you ask it to plan
+a database migration. If you connect Google Stitch's MCP, the planner
+sees \texttt{stitch.generate\_screen\_from\_text} and will write plan
+steps that call it directly.
+
+You don't edit a GSD config file to declare the tool. You don't hand-wire
+anything in \texttt{.planning/}. The subagents inherit Claude Code's
+entire tool surface, MCP and all, and they use what they find.
+
+\begin{gsdtip}[You don't need to tell GSD about your MCP servers]
+GSD's agents discover MCP tools automatically --- that's what v1.30's
+\#1603 fix added. Just configure the MCP server in Claude Code and GSD
+will pick it up on the next planning or execution run.
+\end{gsdtip}
+
+\section{Transport Types: stdio and HTTP}
+
+MCP servers come in two flavors, distinguished by how the client talks
+to them.
+
+\subsection{stdio Transport}
+
+The most common shape is \emph{stdio}: the client launches the server as
+a local subprocess and exchanges JSON-RPC messages over the child's
+standard input and standard output streams. This is simple, fast, and
+completely local --- no network stack, no authentication, no ports to
+open. Most of the MCP servers you will install for personal use are
+stdio servers, invoked as \texttt{npx} or \texttt{uvx} commands. The
+filesystem server, the GitHub server, the official Postgres reference
+server, the Stitch proxy we'll meet in Chapter 7: all stdio.
+
+The lifecycle is straightforward. When you start a Claude Code session,
+the client reads your MCP config, spawns each stdio server as a
+subprocess, speaks JSON-RPC to it over pipes, and keeps the subprocess
+alive for the duration of the session. When the session ends, the
+subprocess is killed. Restarting Claude Code restarts all your stdio
+servers from a clean slate.
+
+\subsection{HTTP Transport (Streamable HTTP)}
+
+The other shape is remote HTTP, now formally called Streamable HTTP in
+the MCP specification. Instead of spawning a subprocess, the client
+connects to an HTTP endpoint over the network and exchanges messages as
+HTTP requests with server-sent events for streaming. This is how you
+would connect to a shared team MCP server, a cloud service that exposes
+an MCP endpoint, or any tool that doesn't want to run on your machine.
+
+HTTP transport is more complicated in exchange for more power: you have
+to think about authentication (API keys in headers, bearer tokens, OAuth
+flows), endpoint availability, and the fact that your network is now in
+the critical path of every tool call. It is the right choice for
+production integrations and the wrong choice for personal utilities.
+
+\section{How Discovery Works}
+
+When Claude Code starts a session, it walks a short, ordered list of
+configuration sources and merges the results. The project-scoped file
+\texttt{.mcp.json} in the current working directory comes first; the
+user-scoped file \texttt{\~{}/.claude.json} comes second. A server name
+defined in the project file takes precedence over the same name in the
+user file, which means you can ship a project-local override for a
+server that you otherwise use everywhere.
+
+For each server entry, Claude Code either launches a subprocess (stdio)
+or opens a connection (HTTP), sends the MCP handshake, and asks for the
+server's tool listing. Those tools are added to the set of things the
+assistant can invoke in the current conversation. GSD's subagents, when
+they are spawned by commands like \texttt{/gsd:plan-phase} or
+\texttt{/gsd:execute-phase}, inherit the same tool surface from the
+parent Claude Code process. There is no second discovery step, no second
+config file, no second place for things to go wrong.
+
+The upshot is that an MCP server you add once is immediately available
+everywhere GSD does useful work: planning, execution, verification,
+review. The subagents don't need to be taught about the new tool. They
+just find it sitting on the shelf.
+
+\section{A Short History and Why It Matters}
+
+MCP is young. The specification was first published in late 2024, the
+reference implementations appeared shortly after, and the ecosystem of
+third-party servers has been expanding roughly monthly since then. In
+practical terms this means three things. First, the protocol surface
+is still small enough to read in an afternoon --- if you're curious
+about what an MCP message looks like on the wire, the spec is not yet
+so sprawling that you need a guide to navigate it. Second, new
+servers are appearing constantly, and the server you want probably
+exists (or will exist by next month) even if it doesn't show up on
+the first page of search results today. Third, the protocol is
+versioned and backwards-compatible in a way that means the config
+patterns in this guide are unlikely to break under you in the near
+term --- when the spec evolves, it does so by adding new capabilities
+to the negotiation step rather than breaking old message shapes.
+
+The reason any of this matters for a GSD user is that the protocol's
+youth shows up in rough edges. Error messages from MCP servers are
+sometimes less polished than the equivalent error from a mature
+vendor SDK; documentation for less-common servers is sometimes
+scattered across a README, a changelog, and one Discord thread; and
+the first time you wire up a new server, expect to spend ten minutes
+figuring out which environment variable the server's author chose to
+name the API key. None of this is fatal. All of it is the cost of
+being a year early. The payoff is that the glue code you write today
+will still work in three years, because the protocol itself is
+designed to outlive any one vendor's implementation.
+
+\section{What MCP Is Not}
+
+A brief list of things MCP is not, because misconceptions in this
+space are expensive.
+
+MCP is \textbf{not} a replacement for HTTP APIs. If you have a REST
+API that you love and that works, MCP does not make it faster or
+better; it wraps it. The value of MCP is not performance. It is
+standardization. An MCP server in front of your REST API means any
+MCP-aware client can use it without hand-coding the integration.
+That's worth something if you have more than one client. It's
+worth less if you only ever use one.
+
+MCP is \textbf{not} an agent framework. The protocol says nothing
+about how the assistant decides which tool to call, how to chain
+tool calls together, how to handle errors, or how to plan
+multi-step work. That's the assistant's job. MCP just moves bytes
+between a client and a server. The intelligence lives on either
+side of the wire, not in the wire itself.
+
+MCP is \textbf{not} a permissions system. Giving a tool to Claude
+Code via an MCP server grants the assistant whatever access the
+underlying credentials provide. If your Postgres MCP server
+connects with a superuser account, Claude Code gets superuser
+access to the database, and so does every subagent GSD spawns.
+Scope your credentials at the database, filesystem, or API level
+--- that's where permissions belong --- and treat MCP as a
+transport layer that will faithfully carry whatever authority you
+give it.
+
+MCP is \textbf{not} magic. The tools you install are the tools you
+get. If no one has written an MCP server for the thing you want to
+integrate with, you have two options: find a close-enough existing
+server (a generic HTTP fetch server, a shell-command runner, a
+scripting server) or write one yourself. Writing one yourself is
+surprisingly cheap --- the reference TypeScript and Python SDKs
+make a minimum-viable server about fifty lines of code --- but it
+is still work, and no amount of AI enthusiasm will conjure a
+server that doesn't exist yet.
+
+\chapter{Configuring MCP Servers}
+
+Now that you know what MCP is and why GSD cares, let's add one. There are
+three ways to register a server with Claude Code: the \texttt{claude mcp}
+CLI, a project-scoped \texttt{.mcp.json} file, and the user-scoped
+\texttt{\~{}/.claude.json} file. All three produce the same runtime
+behavior; they differ only in scope and in how much typing you do.
+
+\section{Adding Servers via the CLI}
+
+The \texttt{claude mcp add} command is the fastest way to register a
+server without hand-editing JSON. Two examples cover the two transports:
+
+\begin{gsdbash}
+# Register a local stdio server (the Stitch proxy, which we'll meet
+# in Chapter 7). The "--" separator marks the end of claude's own
+# flags and the start of the subprocess command line.
+claude mcp add stitch --transport stdio -- npx @_davideast/stitch-mcp proxy
+
+# Register a remote HTTP server at user scope (-s user means every
+# project on this machine will see it).
+claude mcp add my-api --transport http https://api.example.com/mcp -s user
+\end{gsdbash}
+
+The CLI writes the entry to the appropriate config file for you ---
+project or user scope, depending on the \texttt{-s} flag --- and from that
+point on, the server is indistinguishable from one you added by editing
+JSON directly. Use the CLI for one-shot experimentation; use JSON files
+when you want to commit the config alongside the rest of your project
+or when you want finer control over env-var injection.
+
+\section{Project-Scoped Configuration: .mcp.json}
+
+A \texttt{.mcp.json} file in the root of your project declares servers
+that are specific to this project and nowhere else. The shape is dead
+simple:
+
+\begin{gsdjson}
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/me/projects"]
+    }
+  }
+}
+\end{gsdjson}
+
+The top-level \texttt{mcpServers} object holds one entry per server,
+keyed by a short name of your choosing (this name becomes the prefix on
+tool calls --- so \texttt{filesystem.read\_file} would be the fully
+qualified tool name in the above example). The \texttt{command} is the
+binary to launch, and \texttt{args} is the argv passed to it. That's the
+minimum viable config.
+
+\section{User-Scoped Configuration: \textasciitilde/.claude.json}
+
+The user-scoped file lives at \texttt{\~{}/.claude.json} and has the
+same shape, just in a different place. Entries here apply to every
+project you open in Claude Code, unless a project-local entry with the
+same server name overrides it. Use the user-scope file for personal
+utilities: your filesystem server pointing at \texttt{\~{}/projects},
+your GitHub server with your personal access token, whatever daily-driver
+search MCP you've settled on.
+
+\section{Project vs User Scope: How to Decide}
+
+The rule of thumb is simple. If the tool is specific to this codebase ---
+a database server configured with this app's connection string, a Stitch
+project that holds this app's UI, a staging API endpoint you only ever
+hit from this repo --- use \textbf{project scope}. If the tool is a
+personal utility that you'd want in every session --- filesystem,
+GitHub, your search engine of choice --- use \textbf{user scope}. When
+in doubt, start at user scope and move it down to project scope only if
+it turns out to need project-specific credentials or paths.
+
+A slightly more nuanced version of the same rule: ask yourself what
+would happen if a teammate cloned your repo and ran Claude Code in
+it. Would they need this server to reproduce your work? If yes ---
+the database MCP, the Stitch MCP pointing at a shared project, the
+deployment API wrapper --- it belongs in project scope, committed
+(minus credentials) so the next developer gets it for free. If no
+--- your personal filesystem server, a search MCP pointing at your
+own notes, a weather server you installed for fun --- it belongs in
+user scope where it stays with you and doesn't clutter the shared
+config. The tiebreaker, when both feel true, is whether the tool
+holds state that is specific to this project. A Postgres MCP
+holding this app's connection string clearly does. A GitHub MCP
+holding your personal access token clearly does not, even if you
+only ever use it in one repo at a time.
+
+There's a third scope worth knowing about, even though most users
+will never touch it directly: the session-local scope created by
+\texttt{claude mcp add} without either \texttt{-s project} or
+\texttt{-s user}. This adds a server for the duration of the current
+Claude Code session only, in-memory, with no file changes. It is
+useful for truly one-shot experiments --- you want to poke at a new
+server for ten minutes without committing to it --- and it vanishes
+when you exit the session. Treat it as a try-before-you-buy mode.
+
+\section{Environment Variables in Config}
+
+Hardcoding an API key into \texttt{.mcp.json} is a loaded gun. Even if
+you never commit the file, it still sits on your disk in plaintext,
+readable by any process running as your user, and any casual
+\texttt{cat .mcp.json} will print it to a terminal that might be
+scrolled back or screen-shared or logged by an operator tool. The
+correct pattern is env-var interpolation: store the secret in your
+shell environment and reference it by name in the config.
+
+\begin{gsdjson}
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    }
+  }
+}
+\end{gsdjson}
+
+\credentialwarning
+
+The \texttt{env} block passes environment variables into the subprocess.
+Values of the form \texttt{\$\{NAME\}} are expanded from your own
+environment at the moment Claude Code spawns the server --- so the real
+token lives in your shell profile (or a secrets manager, or a dotenv
+file that is itself gitignored), not in the config file. If the variable
+is unset, the substitution leaves an empty string and the server will
+almost always fail with an auth error; that's the correct failure mode.
+
+\begin{gsdimportant}[.mcp.json belongs in .gitignore]
+Add \texttt{.mcp.json} to \texttt{.gitignore} whenever it carries API
+keys, OAuth client secrets, or database connection strings --- even if
+you're using env-var interpolation, because the shape of the file
+itself can leak information about your infrastructure. The user-scope
+file \texttt{\~{}/.claude.json} lives outside any repository so it is
+safer for shared credentials by default, but you should still treat it
+like an SSH key: tight file permissions, no copies in shared drives,
+no pasting into chat tools. A credential that leaves your laptop is a
+credential that has leaked, regardless of where it ended up.
+\end{gsdimportant}
+
+One more footgun worth flagging: some editors and IDEs offer to
+``helpfully'' open \texttt{.mcp.json} in a JSON schema view that pings a
+remote schema registry. Disable this for any config file that contains
+internal endpoint URLs or server names you'd rather not publish to
+someone else's telemetry. The GSD guide team has seen this happen once.
+Once is enough.
+
+\chapter{Scenario --- Google Stitch + GSD}
+
+\begin{gsdscenario}[Design-to-Code: A 5-Screen App with Stitch and GSD]
+
+Google Stitch is an AI-powered UI generation product built on Gemini 2.5
+Pro. You describe a screen in plain English (or hand it a reference
+image), and it produces production-ready frontend code in the framework
+of your choice --- HTML/CSS, React, Vue, Angular, all with Tailwind
+variants. For developers who can ship backends in their sleep but whose
+last three side projects died because the UI looked like a 2003
+wireframe, this is the exact tool you've been waiting for.
+
+Stitch ships with an official MCP integration in the form of the
+\texttt{@\_davideast/stitch-mcp} npm package. The package provides two
+things: an interactive \texttt{init} wizard that handles the painful
+Google Cloud setup, and an MCP proxy server that your Claude Code
+client connects to. The proxy is the recommended entry point, and the
+rest of this scenario walks through why.
+
+The Stitch MCP server exposes the following tools:
+\texttt{create\_project}, \texttt{generate\_screen\_from\_text},
+\texttt{get\_screen}, \texttt{get\_screen\_code},
+\texttt{get\_screen\_image}, \texttt{build\_site},
+\texttt{list\_projects}, and \texttt{list\_screens}. You won't need to
+invoke any of them by hand --- GSD's planner and executor subagents
+will find them in the tool list and wire them into the plan for you
+once you've completed setup.
+
+\vspace{6pt}
+\textbf{Step 1 --- Admit that the problem is real.}
+\vspace{4pt}
+
+You have a meal-planning app in your head. Onboarding screen, dashboard,
+recipe browser, meal calendar, shopping list: five screens total. You
+can write the backend this weekend, and you have written it in your
+head three times already. What has always stopped you is that the UI
+from each of those mental iterations looked like a homework assignment.
+You don't want to learn Figma. You don't want to be tied to one design
+tool for the rest of your career. You do want to ship. This is the
+problem Stitch is trying to solve, and the question this chapter
+answers is what happens when you hand that solved problem to GSD.
+
+\vspace{6pt}
+\textbf{Step 2 --- Set up a Google Cloud project and enable the Stitch API.}
+\vspace{4pt}
+
+Open the Google Cloud Console (console.cloud.google.com), sign in with
+the Google account you want to use for Stitch billing, and either
+create a new project or pick an existing one from the project
+dropdown. From the API \& Services section, search the product catalog
+for ``Stitch'' and click Enable on the product page. You'll be asked
+to confirm or attach a billing account; API usage bills against that
+account at whatever rate Google currently publishes, so check the
+current pricing page before you enable it if you're cost-sensitive.
+
+Two notes about this step that will save you a headache. First, the
+Stitch API is not enabled by default on any project, including new
+ones --- you always have to click Enable explicitly. Second, an active
+billing account is required; the free tier is metered, not permanent,
+and a project without billing will fail at the first tool call with an
+authentication-like error that isn't actually an authentication
+problem. Make sure billing is attached.
+
+\vspace{6pt}
+\textbf{Step 3 --- Install stitch-mcp.}
+\vspace{4pt}
+
+\begin{gsdbash}
+# Run the interactive initializer. It will walk you through
+# gcloud auth, project selection, and config generation.
+npx @_davideast/stitch-mcp init
+\end{gsdbash}
+
+The \texttt{init} wizard is the part you will love. It runs
+\texttt{gcloud auth application-default login} for you if gcloud is
+installed and you aren't already signed in, shows you the list of
+projects you have Stitch access to, lets you pick one, and then prints
+a ready-to-paste \texttt{.mcp.json} snippet at the end. It also tells
+you which environment variables it expects for the API-key path if
+you'd rather go that route instead of OAuth.
+
+\vspace{6pt}
+\textbf{Step 4 --- Choose an auth method.}
+\vspace{4pt}
+
+There are three ways to authenticate a Stitch MCP connection, and
+getting this decision right on day one is worth more than any other
+detail in this walkthrough. Here's the comparison:
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}lXlX@{}}
+\toprule
+\textbf{Method} & \textbf{Setup} & \textbf{Token Lifetime} & \textbf{Best For} \\
+\midrule
+API Key & Set \texttt{STITCH\_API\_KEY} env var & Permanent & Solo developers, quick local testing \\
+\addlinespace
+OAuth (gcloud) & \texttt{gcloud auth application-default login} & 1 hour, auto-refreshed by proxy & Teams, CI/CD, daily driver \\
+\addlinespace
+Remote MCP (Google native) & \texttt{claude mcp add stitch --transport http} & 1 hour, MANUAL refresh & Quick experiments only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The numbers in the middle column are load-bearing. Google OAuth
+application-default tokens have a \textbf{one-hour lifetime} --- this
+is a Google-wide policy, not a Stitch-specific limit, and no amount of
+configuration will extend it. What differs between rows 2 and 3 is who
+handles the refresh. The local proxy from \texttt{@\_davideast/stitch-mcp}
+watches the token's expiration, re-runs the refresh flow in the
+background when the token gets close to expiring, and transparently
+keeps your session alive for as long as Claude Code is running. A
+manually-added remote MCP does not do this --- the token expires in
+the middle of a working session, your next \texttt{generate\_screen}
+call fails with a 401, and you have to manually re-authenticate before
+you can continue.
+
+For anything resembling daily work, the OAuth-via-proxy path is the
+correct choice. The auto-refresh is the single biggest quality-of-life
+feature in the whole integration. The API-key path is legitimately
+fine for solo developers who want to get started quickly, but every
+committed key is a potential leak and every rotation is manual; budget
+for that if you go that way. The remote-MCP path is genuinely only
+useful for a quick experiment: spin it up, poke at one screen, tear it
+down. Anything longer and you'll spend more time re-authenticating
+than building.
+
+\vspace{6pt}
+\textbf{Step 5 --- Add MCP config to \texttt{.mcp.json}.}
+\vspace{4pt}
+
+Paste the config block from the \texttt{init} wizard into a
+\texttt{.mcp.json} file at the root of your project. It will look like
+this (the proxy path, which is what you want):
+
+\begin{gsdjson}
+{
+  "mcpServers": {
+    "stitch": {
+      "command": "npx",
+      "args": ["@_davideast/stitch-mcp", "proxy"]
+    }
+  }
+}
+\end{gsdjson}
+
+\credentialwarning
+
+If you decided during Step 4 to go the API-key route instead, the
+config shape is slightly different --- you supply the key through the
+\texttt{env} block rather than relying on ambient gcloud credentials:
+
+\begin{gsdjson}
+{
+  "mcpServers": {
+    "stitch": {
+      "command": "npx",
+      "args": ["@_davideast/stitch-mcp", "proxy"],
+      "env": {
+        "STITCH_API_KEY": "${STITCH_API_KEY}"
+      }
+    }
+  }
+}
+\end{gsdjson}
+
+\credentialwarning
+
+Reminder from Chapter 6: any \texttt{.mcp.json} that carries
+credentials --- API keys in \texttt{env}, connection strings, bearer
+tokens --- belongs in \texttt{.gitignore}. The env-var interpolation
+pattern (\texttt{\$\{STITCH\_API\_KEY\}}) pushes the actual secret out
+of the committed file and into your shell environment, which is
+strictly better than a literal, but doesn't replace gitignoring the
+file entirely for credential-bearing configs.
+
+\vspace{6pt}
+\textbf{Step 6 --- \texttt{/gsd:new-project}.}
+\vspace{4pt}
+
+Now the fun part. Fire up Claude Code in your empty project directory
+and run:
+
+\begin{gsdbash}
+/gsd:new-project a meal-planning app with onboarding, dashboard,
+  recipe browser, meal calendar, and shopping list --- 5 screens
+  total. Use Stitch for UI generation with React and Tailwind.
+\end{gsdbash}
+
+GSD's new-project command writes \texttt{.planning/PROJECT.md} with a
+one-paragraph description, a rough feature list, and a detected tech
+stack. This is also the moment it kicks off the \emph{discuss} phase,
+which is the structured conversation where design decisions get
+locked in before any code is written. At this point GSD does not yet
+know it will be using Stitch --- it has inferred ``React'' and
+``Tailwind'' from your prompt, but it hasn't yet seen the Stitch tools
+in its tool list because the discuss phase hasn't run. That's fine.
+The next step is where the MCP layer starts to earn its keep.
+
+\vspace{6pt}
+\textbf{Step 7 --- \texttt{/gsd:discuss-phase 1}.}
+\vspace{4pt}
+
+The discuss phase is where you lock in decisions that the planner
+will treat as constraints. This is where you commit to React +
+Tailwind as the framework (so the planner doesn't hedge later), where
+you decide whether to let Stitch pick a color palette or supply one
+yourself, and where you give the planner the Stitch project ID it
+will need to call the MCP tools. Here's a fragment of what you
+might see in the resulting \texttt{DISCUSS.md}:
+
+\begin{gsdyaml}
+## Design Decisions --- Phase 1
+
+Framework: React 18 + Tailwind CSS 3
+UI tool: Google Stitch (via stitch-mcp proxy)
+Stitch project ID: YOUR_PROJECT_ID
+Color palette: defer to Stitch (will regenerate if needed)
+Target screens: onboarding, dashboard, recipes, calendar, shopping
+
+Rationale: Stitch generates React + Tailwind natively, so no
+transpilation step. Letting Stitch pick the palette on the first
+pass gives us a starting aesthetic to react to --- easier than
+designing from a blank page.
+\end{gsdyaml}
+
+The Stitch project ID is the key piece. Without it the planner can
+reach the Stitch MCP's tool list but won't know which project to
+operate in; with it, every subsequent tool call will target the
+correct project automatically. Grab the ID from Stitch's project
+listing (or from \texttt{stitch.list\_projects} if you'd rather ask
+the MCP server itself) and paste it into the discuss phase output.
+
+\vspace{6pt}
+\textbf{Step 8 --- \texttt{/gsd:plan-phase 1}.}
+\vspace{4pt}
+
+With the discuss phase committed, run plan-phase. The planner
+subagent spawns with access to Claude Code's full tool surface ---
+which now includes every tool the Stitch MCP exposes. It reads
+\texttt{DISCUSS.md}, sees that Stitch is the chosen UI tool, sees
+\texttt{stitch.generate\_screen\_from\_text} sitting in its tool
+list, and writes plan steps that call it directly.
+
+Here's the flavor of what the resulting \texttt{PLAN.md} will look
+like once the planner is done:
+
+\begin{gsdplain}
+Task 3: Generate onboarding screen via Stitch
+  Tool:   stitch.generate_screen_from_text
+  Inputs: {
+    project_id: YOUR_PROJECT_ID,
+    prompt:     "Onboarding screen for a meal planning app. Three
+                 steps: welcome, dietary preferences, household size.
+                 Warm, approachable tone. Tailwind utility classes.",
+    framework:  "react-tailwind"
+  }
+  Output: HTML/CSS in src/screens/Onboarding.tsx
+  Depends on: Task 1 (project scaffold), Task 2 (stitch auth check)
+\end{gsdplain}
+
+The planner generates one of these blocks per screen --- five screens,
+five Stitch calls --- plus the usual scaffolding, routing, and
+integration tasks. Notice that the planner is writing tool-specific
+inputs with real Stitch-compatible field names (\texttt{project\_id},
+\texttt{framework}, \texttt{prompt}). It knows to do that because the
+MCP tool's schema tells it what arguments the tool accepts. Schemas
+beat prose every time.
+
+\vspace{6pt}
+\textbf{Step 9 --- \texttt{/gsd:execute-phase 1} and
+\texttt{/gsd:ui-review 1}.}
+\vspace{4pt}
+
+Execute-phase is where the rubber meets the road. The executor
+subagent walks through the plan task by task, calling MCP tools for
+the tasks that declare them, and writing real files on disk as the
+tools return. You'll see progress output along the lines of:
+
+\begin{gsdplain}
+[Task 3/14] Generate onboarding screen via Stitch
+  -> Calling stitch.generate_screen_from_text
+  -> Received screen_id = scr_a8f20b1e
+  -> Calling stitch.get_screen_code (framework=react-tailwind)
+  -> Wrote src/screens/Onboarding.tsx (2.4 KB)
+  -> Calling stitch.get_screen_image (for reference asset)
+  -> Wrote docs/screens/onboarding.png (47 KB)
+[Task 3/14] COMPLETE
+\end{gsdplain}
+
+Each screen produces a real file in \texttt{src/screens/} and a
+reference PNG in \texttt{docs/screens/}. The reference PNGs are not
+strictly necessary but they're worth keeping: they're what Stitch's
+renderer produced for the same prompt, and later on they make it
+much easier to reason about visual drift when you iterate on the
+copy or the palette.
+
+Once the executor has run through all five screens, run
+\texttt{/gsd:ui-review 1}. The ui-review command audits the generated
+UI against GSD's six-pillar UI standards: accessibility, usability,
+consistency, information density, responsive behavior, and visual
+polish. It will flag missing alt text, contrast failures, keyboard
+traps, and the other quiet ways AI-generated UI can be technically
+correct and practically broken. Stitch's output is generally good,
+but it is not infallible, and ui-review is where you find out.
+
+\credentialwarning
+
+\vspace{4pt}
+\end{gsdscenario}
+
+\begin{gsdtip}[Framework choice belongs in the discuss phase]
+Stitch can generate in at least six frameworks (HTML/CSS, React,
+Vue, Angular, with or without Tailwind). Tell GSD which framework
+you want during the \emph{discuss} phase, not the \emph{execute}
+phase. The planner will then write framework-specific task inputs
+that the executor can hand directly to \texttt{stitch.get\_screen\_code}
+without a conversion step. Waiting until execute-time means the
+planner has already committed to a structure it now has to rewrite.
+\end{gsdtip}
+
+\chapter{Scenario --- Database MCP + GSD Planning}
+
+\begin{gsdscenario}[Schema-Aware Planning: Postgres MCP for Migration Plans]
+
+GSD's planner is smart but not clairvoyant. Ask it to ``add a
+\texttt{user\_preferences} table'' in a project where it has no
+visibility into the database, and it will produce a plausible migration
+against a plausible schema --- not your schema. The columns it picks
+will be reasonable guesses, the foreign key names will look like what a
+textbook would suggest, and the migration will fail the moment it meets
+the real database. Worse, a junior reviewer glancing at the plan might
+not notice.
+
+A Postgres MCP server fixes this by giving the planner read-only
+introspection into the actual schema. With the MCP installed, the
+planner issues real \texttt{SELECT} statements against
+\texttt{information\_schema} before it drafts the migration, and the
+resulting plan references the columns that actually exist. The rest of
+this chapter walks through the setup.
+
+\vspace{6pt}
+\textbf{Step 1 --- Install a Postgres MCP server.}
+\vspace{4pt}
+
+The Anthropic-maintained reference server
+\texttt{@modelcontextprotocol/server-postgres} is the safest starting
+point. It is deliberately \textbf{read-only}: the only tool it exposes
+is a \texttt{query} function that runs against the database, and the
+server wraps every query in a read-only transaction so even a
+\texttt{DELETE} inside the query text cannot mutate data. That's a
+feature, not a limitation. For planning work, read-only is all you
+need and all you want.
+
+\begin{gsdbash}
+# No install step is needed -- npx fetches the package on demand
+# when Claude Code launches the subprocess. But you can pre-cache
+# it to shave a few seconds off the first session:
+npx -y @modelcontextprotocol/server-postgres --version
+\end{gsdbash}
+
+\vspace{6pt}
+\textbf{Step 2 --- Configure with a connection string.}
+\vspace{4pt}
+
+Add the server to your \texttt{.mcp.json} with a connection string
+supplied as an environment variable. Never hardcode the string into
+the file --- database URLs contain credentials by definition, and a
+credential in a config file is a credential one \texttt{git add} away
+from leaving the building.
+
+\begin{gsdjson}
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL}"
+      }
+    }
+  }
+}
+\end{gsdjson}
+
+\credentialwarning
+
+Export \texttt{DATABASE\_URL} in your shell before starting Claude
+Code (from a dotenv file, your secrets manager, or a line in your
+shell profile --- whichever you prefer). The substitution happens
+when Claude Code spawns the MCP subprocess, so the value needs to be
+set in the shell that launches Claude Code, not just in Claude Code's
+own session. And yes: this \texttt{.mcp.json} belongs in
+\texttt{.gitignore} for exactly the reasons Chapter 6 covered.
+
+\vspace{6pt}
+\textbf{Step 3 --- \texttt{/gsd:plan-phase} with schema visibility.}
+\vspace{4pt}
+
+With the Postgres MCP running, start a plan-phase command that will
+require schema knowledge. For example:
+
+\begin{gsdbash}
+/gsd:plan-phase 2 add a user_preferences table with notification
+  toggles, theme selection, and default meal calendar view
+\end{gsdbash}
+
+The planner subagent sees \texttt{postgres.query} in its tool list
+and does the right thing without being told: before drafting any
+migration steps, it inspects the existing schema with queries like:
+
+\begin{gsdplain}
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'users'
+ORDER BY ordinal_position;
+\end{gsdplain}
+
+It does this for every table the new migration might touch, not just
+the obvious ones, because it was trained to build context before
+acting. The returned rows get folded into the planning context, and
+the migration steps the planner writes are grounded in what actually
+exists.
+
+\vspace{6pt}
+\textbf{Step 4 --- Observe \texttt{PLAN.md} referencing real columns.}
+\vspace{4pt}
+
+The resulting plan will include a block that looks like this:
+
+\begin{gsdplain}
+Task 5: Migration -- create user_preferences table
+  Preconditions verified via postgres.query:
+    - users table exists with columns (id, email, created_at,
+      updated_at, last_login_at)
+    - no existing user_preferences table
+  Migration SQL:
+    ALTER TABLE users ADD COLUMN preferences JSONB;
+    -- or, if we prefer a separate table:
+    CREATE TABLE user_preferences (
+      user_id INTEGER PRIMARY KEY REFERENCES users(id),
+      ...
+    );
+\end{gsdplain}
+
+That comment block listing preconditions is the key output of the
+whole exercise. A human reviewer can look at the plan and verify, at
+a glance, that the planner saw the real schema when drafting the
+migration. The reviewer's job is no longer ``spot-check every column
+name against the real database'' --- it is the much smaller job of
+``confirm the preconditions the planner listed are the right ones.''
+
+\vspace{6pt}
+\textbf{Step 5 --- Cleanup.}
+\vspace{4pt}
+
+There is no cleanup. The Postgres MCP server is read-only and
+stateless: it holds no data on disk, writes no files, and makes no
+changes to your database. Killing Claude Code ends the subprocess;
+starting a new session respawns it from scratch with the same config.
+The only persistent trace is whatever lives in your query logs, which
+is a database-side concern and not a GSD one.
+
+\vspace{4pt}
+\end{gsdscenario}
+
+\begin{gsdimportant}[Read-only means read-only]
+The Postgres MCP server is read-only. If you want the generated
+migrations to actually run, that's a separate concern --- GSD plans
+them, you (or your CI) execute them through your normal migration
+tool (Flyway, Liquibase, Alembic, sqlx-migrate, whatever you already
+use). Do not look for an MCP server that will run migrations for
+you. The separation of planning from execution here is not a
+limitation; it is the safety boundary that keeps a planning error
+from becoming a production outage.
+\end{gsdimportant}
+
+\chapter{Building MCP-Aware GSD Workflows}
+
+The two scenarios in Chapters 7 and 8 each used one MCP server in
+isolation. Real projects accumulate servers the way shell profiles
+accumulate aliases --- a filesystem server, a GitHub server, a
+Postgres server for the main database, maybe a separate analytics
+Postgres, Stitch for UI, a custom server that wraps your internal
+deployment API. This chapter is about making the whole pile work
+together, and about the edges where MCP integration gets
+interesting.
+
+\section{Combining Agent Skills with MCP}
+
+Part I of this guide introduced agent skills --- the small project-
+scoped prompt fragments that get injected into a subagent's context
+whenever it runs in this project. Skills and MCP tools compose in a
+way that is more powerful than either one alone.
+
+The trick is that a skill can refer to an MCP tool by name. A skill
+is just prose injected into the planner's or executor's prompt, and
+if that prose says ``when planning database migrations, always call
+\texttt{postgres.query} first to inspect existing tables,'' the
+planner will do exactly that. The skill doesn't need to know how
+\texttt{postgres.query} works; it just needs to mention the name.
+The MCP server already told Claude Code about the tool's schema
+during discovery, so the planner can fill in the arguments correctly
+on its own.
+
+This pattern is how you bake team conventions into a project. Your
+team decides that every new feature needs a database schema check
+before planning? Write a one-paragraph skill that says so, mention
+the \texttt{postgres.query} tool by name, and every subsequent
+\texttt{/gsd:plan-phase} run will follow the rule without anyone
+having to remember to invoke it. The same trick works for any MCP
+server: a skill that says ``for any UI task, always call
+\texttt{stitch.list\_projects} first to confirm the Stitch project
+exists'' costs you a paragraph and saves you a class of
+``undefined project'' errors you would otherwise hit at execute
+time.
+
+A worked example makes this concrete. Suppose your team has agreed
+that every database-touching phase must start by reading the current
+schema, and every UI-touching phase must start by confirming the
+Stitch project exists and has the expected screen count. You can
+bake both rules into a skill like this (placed in
+\texttt{.claude/skills/team-conventions.md} or wherever your
+project's agent skills live):
+
+\begin{gsdplain}
+# Team conventions for planning and execution
+
+## Before any database migration task
+1. Call postgres.query with a schema inspection query
+   against information_schema.tables and information_schema.columns
+   for the affected tables.
+2. Include the returned column list in the task preconditions.
+3. Only then draft the migration SQL.
+
+## Before any Stitch-generated UI task
+1. Call stitch.list_projects and confirm the configured project
+   ID is present.
+2. Call stitch.list_screens for that project and record the
+   current screen count.
+3. If the screen count differs from what DISCUSS.md claims, stop
+   and surface the mismatch instead of generating blindly.
+\end{gsdplain}
+
+The skill is maybe thirty lines of prose. The behavior change is
+substantial: you stop finding out about schema drift at execute
+time and start finding out about it at plan time, when fixing it
+is cheap. Notice that this pattern does not require any changes to
+GSD's source code, to the MCP servers themselves, or to Claude
+Code's configuration. It is entirely text, and the text flows
+through the same discovery-and-injection paths you already use for
+every other skill.
+
+The reason this works is worth pausing on. Subagent prompts are
+assembled fresh at the start of each subagent invocation: the base
+template, the current phase's context, any applicable skills, and
+the current tool manifest. When a skill mentions a tool name, the
+planner sees that mention \emph{and} the tool's schema side by
+side. It doesn't have to guess what arguments the tool takes,
+because the schema is right there. It doesn't have to be reminded
+to use the tool, because the skill says so in plain language.
+Skills and MCP compose cleanly because they're both contributing
+to the same assembled prompt from different directions.
+
+\section{The GSD Plugin Format (Issue \#1883)}
+
+There's a larger integration idea in the pipeline. GSD issue \#1883
+tracks a plan to package GSD itself as a Claude Code plugin --- a
+single installable unit that would bundle GSD's skills, subagent
+templates, and a dedicated MCP server, all in one place. The
+promise is that a user could run one install command and get the
+entire GSD experience, with its own MCP surface exposed as a first-
+class tool set, rather than having GSD live alongside MCP as a
+separate concern.
+
+This is on the roadmap for v1.32 or later --- the plugin format is
+still evolving, and the schema the plugin manifest will use is not
+yet fixed. Committing to a specific shape in this guide would be
+premature. The thing to know is that it's coming, that it is
+specifically designed to make MCP integration a first-class part of
+GSD rather than an afterthought, and that the scenarios in this
+part will still work on the plugin version because the underlying
+primitives are unchanged. Follow the issue if you want early visibility.
+
+\section{Failure Modes: When an MCP Server is Unavailable}
+
+An MCP server can fail mid-execution. The subprocess crashes, the
+remote endpoint returns a 500, the network is flaky, the auth token
+expires at exactly the wrong moment. What happens then?
+
+Claude Code returns a tool error to the agent that made the call.
+The error is not silent: it propagates back as a failed tool
+response with an error message attached. GSD's executor subagent
+sees the error and does one of two things.
+
+The first option is a retry, chosen when the failure looks
+transient --- a network timeout, a 503, an obviously flaky response.
+The executor will retry the same tool call, sometimes with a short
+delay, before concluding that the problem is real. This handles
+most of the everyday flakiness you encounter with remote servers.
+
+The second option is to mark the task as blocked and write a
+deviation note to the execution log. A deviation note is the
+executor's way of saying ``I can't finish this task and the reason
+is not my fault.'' It includes the original plan step, the tool
+error, and enough context for a human to resume work later. The
+phase does not silently complete; it ends in a blocked state, and
+the status command (\texttt{/gsd:status} or similar) will surface
+the blockage the next time you ask.
+
+The plan does not degrade silently. Failed MCP calls are visible in
+the executor log, deviation notes make them unmissable, and the
+phase-completion gate refuses to pass a phase where execution was
+blocked on a tool error. If you've been running GSD long enough to
+trust it, this is the behavior you want --- the tool doesn't lie
+about what happened, it tells you something broke and stops.
+
+\section{Observability: Knowing What Your MCP Servers Did}
+
+An underappreciated part of running MCP at scale is knowing what
+your servers have actually been doing. Claude Code's conversation
+log shows you every tool call the assistant made, but once you have
+five or six MCP servers running, that log can get noisy, and
+correlating ``this file on disk'' with ``this tool call that
+produced it'' is not always easy from the transcript alone.
+
+Three patterns help. First, most MCP servers can be started in a
+verbose or debug mode that prints each tool invocation to stderr.
+Claude Code surfaces server stderr in its own logs, so turning on
+verbose mode on a suspect server is often the fastest way to catch
+a misbehaving call. The flag is server-specific (look for
+\texttt{--verbose}, \texttt{--log-level debug}, or an environment
+variable like \texttt{LOG\_LEVEL=debug}), but it exists almost
+everywhere because MCP server authors are themselves debugging
+their own servers against Claude Code and need the same signal.
+
+Second, for servers you write or control, emit a one-line audit
+record per tool call: timestamp, tool name, argument summary, outcome,
+duration. Pipe it to a file or to your logging pipeline. When
+something goes sideways at execute time, the audit log tells you
+what actually happened versus what the plan says was supposed to
+happen --- and those two narratives are not always the same.
+
+Third, for production-grade setups, consider wrapping your MCP
+servers behind a single reverse-proxy MCP that logs all traffic
+and then forwards calls to the appropriate underlying server. This
+adds a hop but gives you one place to look for everything. It's
+overkill for personal projects and exactly right for shared team
+infrastructure where ``who called what, when, against which
+database'' is a compliance question with an actual answer.
+
+\section{Version Drift: What Happens When a Server Changes}
+
+Your MCP servers will change under you. The Stitch proxy will
+publish a new version that renames a tool argument. The Postgres
+server will add a new capability you've been wanting. A third-party
+server you depend on will be deprecated in favor of a successor
+that is almost but not quite backwards-compatible. None of this is
+exotic; it's normal package ecosystem behavior, and MCP is no
+different from npm or pip in that regard.
+
+GSD copes with this better than you might expect, because the
+discovery step happens at the start of every session. The planner
+sees the current set of tools with the current schemas --- not a
+cached snapshot from when you first configured the server. If a
+tool's argument list changes overnight, the next plan-phase run
+will use the new shape without you having to update anything in
+GSD. If a tool disappears entirely, the planner will stop proposing
+it, because it won't see it.
+
+The failure mode to watch for is a skill that names a tool
+explicitly. If your team-conventions skill says ``always call
+\texttt{postgres.query}'' and someone upgrades the Postgres MCP to
+a version where that tool was renamed to \texttt{postgres.execute},
+the skill will keep asking for the old name, the planner will try
+to call it, and the call will fail. The fix is to update the skill
+to match. A short CI check that grep-s your skills for known MCP
+tool names and cross-references them against a list of currently-
+installed servers is cheap and will save you a debug session.
+
+\begin{gsdnote}[Best practices summary]
+A short checklist of what you should take away from Part II:
+\begin{itemize}
+  \item \textbf{Project-scoped servers} for project-specific tools: the
+        database for this app, the Stitch project for this UI, the
+        staging endpoints for this service.
+  \item \textbf{User-scoped servers} for personal utilities: filesystem,
+        GitHub, your daily-driver search MCP, anything you'd want
+        available in every Claude Code session.
+  \item \textbf{Env-var your credentials} every time, without exception.
+        Never paste a real API key into a committed file, and never
+        paste one into a file you're ``about to'' gitignore.
+  \item \textbf{\texttt{.mcp.json} belongs in \texttt{.gitignore}} any
+        time it carries secrets, even if you're using env-var
+        interpolation. The shape of the file itself can leak
+        information you don't want to publish.
+  \item \textbf{For teams, prefer OAuth with service accounts} over
+        shared API keys. Per-user auth with proper rotation is the
+        only approach that survives a team member leaving. Shared
+        keys are a time bomb with a known fuse length.
+  \item \textbf{Token expiration is real}: OAuth tokens die after an
+        hour. Use proxies that auto-refresh. Do not use raw remote
+        MCP auth for anything you plan to run longer than a
+        demo.
+\end{itemize}
+\end{gsdnote}
+
+The overarching theme of Part II is that MCP is plumbing, and good
+plumbing disappears. Once your servers are configured, the
+gitignore is in place, and the env vars are exported, you stop
+thinking about MCP at all. GSD's planner writes plans that use the
+tools you've plugged in, the executor calls them, and the outputs
+land on disk. The configuration work is upfront and small. The
+payoff is that every subsequent plan and every subsequent execution
+has access to the real state of your project --- the real schema,
+the real Stitch project, the real repository --- and the quality of
+the resulting work rises accordingly. That is the entire argument
+for connecting GSD to MCP, and it is the reason Part III will
+assume all of this is in place when it turns to multi-repo and
+monorepo workflows.
+% ============================================================================
+%  part3-multirepo.tex
+%  Part III of "GSD: Going Further" --- Multi-Repo Workflows
+%  Chapters 10--14.
+% ============================================================================
+
+\part{Multi-Repo Workflows}
+
+\chapter{Workstreams vs. Workspaces --- When to Use Which}
+
+Parts I and II taught GSD to speak your project's dialect and to reach
+outside of itself. Part III is about a more mundane but equally painful
+problem: real projects are rarely a single repository with a single
+timeline. Even when a project \emph{is} a single repo, it often runs
+several independent tracks of work in parallel --- a backend feature,
+a frontend redesign, an infrastructure migration, a one-off experiment
+--- each with its own planning cadence, its own owners, and its own
+definition of ``done''. And when the project genuinely spans multiple
+repositories, as microservice fleets and polyrepo libraries often do,
+the coordination problem multiplies.
+
+GSD has two different answers to that problem, and learning when to
+reach for each is the difference between a smooth multi-track workflow
+and a pile of overwritten STATE.md files.
+
+\section{The Problem: Shared Planning State}
+
+The default assumption baked into GSD is that a repository has one
+active plan at a time. The files in \texttt{.planning/} --- STATE.md,
+ROADMAP.md, REQUIREMENTS.md, the phase directories --- describe a
+single timeline of intent. Commands like \texttt{/gsd:progress} and
+\texttt{/gsd:next} read that timeline to decide what to tell you.
+\texttt{/gsd:execute-phase} writes to it.
+
+If you try to run two unrelated workstreams against that shared state
+at the same time, bad things happen. STATE.md flips between them as
+each track edits it. The phase numbering collides. \texttt{/gsd:progress}
+reports ``phase 4 in progress'' when you meant that for the backend
+feature, and the frontend lead reads it and wonders why their redesign
+lost two phases overnight. The ROADMAP gets clobbered because the
+last writer wins. Every single one of those symptoms traces back to
+the same root cause: two independent timelines trying to share one
+set of planning files.
+
+Workstreams and workspaces both solve that root cause. They solve it
+at different layers of the stack, and they have different costs.
+
+\section{Workstreams: One Repo, Many Timelines}
+
+Workstreams were introduced in GSD v1.28. The idea is dead simple:
+\emph{if you already have one repo, keep one repo, but give each
+independent timeline its own isolated planning subtree.} Under the
+hood, a workstream is a directory under \texttt{.planning/workstreams/}
+that contains its own STATE.md, ROADMAP.md, REQUIREMENTS.md, and
+phase directories --- a complete parallel planning tree, scoped
+under a name of your choice. When you switch to a workstream, GSD
+transparently re-roots all its planning operations to read and write
+from that subtree. The root \texttt{.planning/} is untouched.
+
+The commands are short and predictable. \texttt{/gsd:workstreams create
+<name>} creates a new one. \texttt{/gsd:workstreams switch <name>}
+makes it the active workstream for subsequent commands. \texttt{/gsd:workstreams
+list} shows all of them. \texttt{/gsd:workstreams complete <name>} archives
+one when its feature ships. The switch itself is essentially free ---
+GSD just updates a pointer to the active workstream directory --- so
+you can flip between two or three of them many times a day without
+thinking about the cost.
+
+What workstreams \emph{don't} do is give you git isolation. The code
+is still the same checkout. If two workstreams both want to edit
+\texttt{src/billing.ts} on the same branch, they will conflict in the
+same way they would without workstreams. Workstreams isolate
+\emph{planning state}, not \emph{source state}. For many real projects
+that distinction is exactly right, because the planning collision is
+the painful one and the source collision is already handled by git.
+
+\section{Workspaces: Many Repos, One Plan}
+
+Workspaces are the heavier instrument, also introduced in v1.28. A
+workspace is a separate directory --- by convention under
+\texttt{\~{}/gsd-workspaces/<name>/} --- that contains one or more
+named repositories, each checked out as either a git worktree or a
+full clone, plus a workspace-level manifest file called WORKSPACE.md.
+Each repo inside the workspace has its own independent
+\texttt{.planning/} subtree. The workspace itself is the coordination
+layer: it knows which repos are in the workspace, tracks cross-repo
+status in its manifest, and lets you run coordinated planning without
+having to merge the repos into a monorepo you didn't want.
+
+The commands mirror the workstream ones but operate at the repo-set
+level. \texttt{/gsd:new-workspace --name v2-launch --repos api,web-frontend,admin-dashboard}
+creates a workspace named \texttt{v2-launch} containing three repos.
+\texttt{/gsd:list-workspaces} shows all configured workspaces.
+\texttt{/gsd:remove-workspace v2-launch} tears one down when it's done.
+The \texttt{--strategy} flag takes one of two values:
+
+\begin{itemize}
+\item \texttt{worktree} (the default) creates a git worktree of each
+  named repo. Worktrees share object storage with the parent
+  checkout, so they're cheap to create and cheap to keep around.
+  The trade-off is that you can't have two worktrees on the same
+  branch of the same repo at the same time --- git refuses.
+\item \texttt{clone} performs a full \texttt{git clone} of each
+  named repo into the workspace directory. This is slower and uses
+  more disk, but it gives you complete isolation --- the workspace's
+  copy of each repo is genuinely independent from your main checkout
+  and can sit on any branch without conflict.
+\end{itemize}
+
+Workspaces cost more to create than workstreams because they involve
+actual git operations --- worktree creation or cloning --- and a new
+directory tree on disk. A workspace with three repos takes a few
+seconds to materialize, not the sub-millisecond switch of a workstream.
+That's the right cost when you actually need repo-level isolation,
+and the wrong cost when you don't.
+
+\section{Decision Table}
+
+The shortest path to the right answer is to ask: \emph{do my parallel
+timelines share code, or do they share planning?} If they share code,
+a workstream is what you want. If they need different code or different
+git state, a workspace is what you want.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+\textbf{Scenario} & \textbf{Use} & \textbf{Why} \\
+\midrule
+Backend + frontend in same repo &
+Workstream &
+Same code, different planning timelines. The extra cost of a
+workspace buys you nothing. \\
+\addlinespace
+Three microservices needing coordinated planning &
+Workspace (multi-repo) &
+Different repos, each already has its own
+\texttt{.planning/}. The workspace is the coordination layer. \\
+\addlinespace
+Feature branch isolation, current repo only &
+Workspace \texttt{--repos .} &
+A single-repo workspace gives you a worktree of the current repo
+with its own independent planning state. \\
+\addlinespace
+Disposable spike or prototype &
+Workspace \texttt{--strategy clone} &
+Full isolation. When the spike dies, remove the workspace and
+nothing leaks back into the main checkout. \\
+\addlinespace
+Refactor touching several repos atomically &
+Workspace \texttt{--strategy worktree} &
+Coordinated planning across the set, shared git fast-path under
+the hood. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{gsdtip}[Default to the cheaper answer]
+Workstreams are much cheaper than workspaces. If the work you're
+about to start fits in a single repo, default to creating a workstream
+and only escalate to a workspace if you genuinely need git-level
+isolation. It is always easier to graduate a workstream into a
+workspace later than it is to undo a premature workspace.
+\end{gsdtip}
+
+\section{One More Consideration: How Long Does the Work Live?}
+
+A secondary question worth asking before you pick is how long the
+timeline is expected to live. Workstreams are well suited to long-lived,
+repeating tracks: ``the backend team's current feature'', ``the ongoing
+observability migration'', ``this quarter's performance work''. They
+rotate through many features over their lifetime, and the fact that
+their STATE.md persists across those features is useful.
+
+Workspaces are better suited to \emph{cohorts of work that share a
+release} --- the kind of thing where you'd otherwise say ``we're
+shipping v2 across three services and I need to track all three
+together''. When the cohort ships, you remove the workspace. The
+repos themselves live on, but the workspace's WORKSPACE.md and its
+coordination state get archived or deleted along with the launch
+it tracked.
+
+Neither pattern is wrong for the other's use case, but using a
+workstream for a launch cohort tends to feel fiddly (you end up
+making a workstream in each repo and hand-coordinating) and using
+a workspace for a long-lived single-repo track tends to feel heavy
+(you end up with a workspace directory that never quite gets cleaned
+up). Match the lifetime of the construct to the lifetime of the work.
+
+\chapter{Scenario --- Monorepo with Independent Apps}
+
+\begin{gsdscenario}[NX-Style Monorepo: Backend, Frontend, and Mobile]
+
+You run a single git repository containing three apps under
+\texttt{apps/}: a Node backend API, a Next.js frontend, and a React
+Native mobile app. The three teams work on different cadences ---
+the backend team is mid-migration to a new ORM, the frontend team
+is redesigning the onboarding flow, the mobile team is fighting a
+long-tail of platform-specific bugs. They all share the same git
+history and a fair amount of code under \texttt{packages/}, so
+splitting into three repositories would be more disruptive than it
+is worth. But running all three teams' GSD plans against the same
+root \texttt{.planning/} has already produced one STATE.md corruption
+this month, and you are done with that.
+
+This scenario walks through giving each team its own workstream,
+running an independent GSD flow in each, and archiving them cleanly
+when features ship. Total elapsed time: about five minutes of
+commands, most of which are the normal GSD flow you already know.
+
+\textbf{Step 1. Starting layout.}
+
+The repository looks like this before you touch anything:
+
+\begin{gsdplain}
+my-monorepo/
+|-- apps/
+|   |-- backend/
+|   |-- frontend/
+|   `-- mobile/
+`-- .planning/
+    |-- workstreams/
+    |   |-- backend-api/
+    |   |   |-- ROADMAP.md
+    |   |   `-- STATE.md
+    |   `-- frontend-redesign/
+    |       |-- ROADMAP.md
+    |       `-- STATE.md
+    `-- config.json       <- shared config across workstreams
+\end{gsdplain}
+
+\noindent
+(The \texttt{.planning/workstreams/} subtree is what we're about to
+create. The root \texttt{.planning/config.json} already exists and
+stays where it is --- it holds the shared config all workstreams
+inherit from.)
+
+\textbf{Step 2. Create the backend workstream.}
+
+\begin{gsdbash}
+/gsd:workstreams create backend-api
+\end{gsdbash}
+
+\noindent
+GSD creates \texttt{.planning/workstreams/backend-api/} and
+scaffolds a fresh set of planning files inside it --- an empty
+ROADMAP.md, an initial STATE.md pointing at an un-planned phase,
+and a small WORKSTREAM.md marker file that the tooling uses to
+detect that the subtree is a workstream rather than a plain
+directory. The root \texttt{.planning/} is not touched. You should
+see output along the lines of:
+
+\begin{gsdplain}
+Created workstream: backend-api
+Path: .planning/workstreams/backend-api/
+Status: active
+\end{gsdplain}
+
+\textbf{Step 3. Switch to the new workstream.}
+
+\begin{gsdbash}
+/gsd:workstreams switch backend-api
+\end{gsdbash}
+
+\noindent
+Switching makes \texttt{backend-api} the active workstream. Every
+subsequent \texttt{/gsd:*} command in this session will read and
+write state from \texttt{.planning/workstreams/backend-api/} instead
+of the root \texttt{.planning/}. There's no second-command mystery
+here: if you forget to switch, \texttt{/gsd:progress} will tell you
+which workstream it's reporting on in its first line, so you catch
+the mistake early.
+
+\textbf{Step 4. Run a normal GSD flow, scoped to backend.}
+
+At this point, everything looks and feels like vanilla GSD. You
+start a new project for the ORM migration:
+
+\begin{gsdbash}
+/gsd:new-project
+/gsd:discuss-phase 1
+/gsd:plan-phase 1
+/gsd:execute-phase 1
+\end{gsdbash}
+
+\noindent
+The PLAN.md, STATE.md, and phase directories that come out of this
+flow all live under \texttt{.planning/workstreams/backend-api/}.
+The root \texttt{.planning/} does not see any of it. If you run
+\texttt{/gsd:progress} right now, you'll get the backend workstream's
+view --- phase 1, in progress, whatever your executor is chewing on.
+
+\textbf{Step 5. Create the frontend workstream in parallel.}
+
+While the backend team keeps going, the frontend lead wants to start
+the redesign plan. In a new terminal (or just later in the same
+terminal), they run:
+
+\begin{gsdbash}
+/gsd:workstreams create frontend-redesign
+/gsd:workstreams switch frontend-redesign
+/gsd:new-project
+/gsd:discuss-phase 1
+\end{gsdbash}
+
+\noindent
+This creates a second, entirely independent planning subtree at
+\texttt{.planning/workstreams/frontend-redesign/}. The two workstreams
+don't see each other's state files. They can be in completely
+different phases, have completely different agent configurations,
+use different \texttt{project\_code} prefixes --- the isolation is
+at the planning-state level, not at the git level.
+
+\textbf{Step 6. List workstreams.}
+
+When you want to see what's going on across the whole repo, ask:
+
+\begin{gsdbash}
+/gsd:workstreams list
+\end{gsdbash}
+
+\noindent
+The output is a small table, one row per workstream, giving you
+name, status, current phase, and when it was last touched:
+
+\begin{gsdplain}
+NAME                STATUS    PHASE   LAST TOUCHED
+backend-api         active    1       3 minutes ago
+frontend-redesign   active    1       1 minute ago
+\end{gsdplain}
+
+\noindent
+This is the one command that crosses workstream boundaries. Everything
+else respects the active-workstream scope and only shows you one
+workstream's view at a time.
+
+\textbf{Step 7. Complete and archive.}
+
+Two weeks later, the backend ORM migration ships. You finish
+the last phase, run your tests, push the merge, and then retire
+the workstream:
+
+\begin{gsdbash}
+/gsd:workstreams complete backend-api
+\end{gsdbash}
+
+\noindent
+Completion does not delete anything. GSD moves the workstream's
+directory to \texttt{.planning/workstreams/archive/backend-api/},
+sets its status to \texttt{archived}, and stops surfacing it in
+the default \texttt{list} output. If you ever need to resurrect it
+--- say to investigate a post-ship question --- you can switch back
+to the archived workstream and treat it as read-only evidence.
+
+\textbf{Step 8. Cleanup.}
+
+Repeat the \texttt{complete} step for the frontend workstream when
+its redesign ships. The root \texttt{.planning/} has stayed clean
+throughout: all the actual work lived under
+\texttt{.planning/workstreams/}, and all the archived evidence lives
+under \texttt{.planning/workstreams/archive/}. Your repo is ready
+for the next set of parallel tracks, and there's a searchable record
+of what the old tracks did.
+
+\end{gsdscenario}
+
+\begin{gsdtip}[Workstream scope is per-workstream]
+Each workstream's \texttt{/gsd:progress} only reports on that
+workstream's state. If you want a cross-workstream view, run
+\texttt{/gsd:workstreams list}. This is the right scoping default
+--- a backend dev should see backend state by default, not be
+distracted by frontend state --- but it does mean that
+``all-workstreams'' views are an explicit command rather than the
+default.
+\end{gsdtip}
+
+\chapter{Scenario --- Microservice Fleet}
+
+\begin{gsdscenario}[Three Repos, One Workspace: API + Web + Admin]
+
+You have three separate repositories on disk: \texttt{api},
+\texttt{web-frontend}, and \texttt{admin-dashboard}. They're
+independent services with independent deployment pipelines, but
+they all ship together as part of the v2 launch, and the product
+manager would like a single view of ``how is v2 going?'' that
+doesn't require opening three different planning files in three
+different checkouts. A workspace is exactly the right shape for
+this: it gives you a coordination layer on top of the three repos
+without forcing you to merge them into a monorepo.
+
+This scenario walks through creating the workspace, running
+coordinated planning across all three repos, and tearing the
+workspace down cleanly when v2 ships.
+
+\textbf{Step 1. Create the workspace.}
+
+\begin{gsdbash}
+/gsd:new-workspace --name v2-launch \
+  --repos api,web-frontend,admin-dashboard
+\end{gsdbash}
+
+\noindent
+GSD looks up each named repo --- either via relative paths, or
+via registered repo aliases (you can list the registered aliases
+with \texttt{/gsd:list-workspaces}'s config output) --- and
+materializes the workspace directory under
+\texttt{\~{}/gsd-workspaces/v2-launch/}. For each repo, GSD creates
+a git worktree (the default strategy) pointing at the repo's
+current branch and drops it inside the workspace. It also writes
+a WORKSPACE.md manifest at the workspace root listing the repos
+and their current phase status.
+
+The whole operation takes a few seconds. At the end of it, you
+have a fully usable workspace containing three independently
+planned repositories, sitting side by side.
+
+\textbf{Step 2. Inspect the workspace tree.}
+
+\begin{gsdplain}
+~/gsd-workspaces/v2-launch/
+|-- WORKSPACE.md          <- workspace manifest (orchestrator-owned)
+|-- api/                  <- repo 1 (independent .planning/)
+|   |-- .planning/
+|   |   |-- ROADMAP.md
+|   |   `-- STATE.md
+|   `-- src/
+|-- web-frontend/         <- repo 2 (independent .planning/)
+|   |-- .planning/
+|   `-- src/
+`-- admin-dashboard/      <- repo 3 (independent .planning/)
+    |-- .planning/
+    `-- src/
+\end{gsdplain}
+
+\noindent
+WORKSPACE.md is the orchestrator-owned manifest --- it tracks which
+repos belong to the workspace and what the cross-repo phase status
+is. Each repo below it is an independent checkout with its own
+\texttt{.planning/} subtree. The three \texttt{.planning/} trees
+are genuinely independent: they don't share state, they don't share
+phase numbers, they don't share REQUIREMENTS.md. The WORKSPACE.md
+manifest is the only thing that knows about all three at once.
+
+\textbf{Step 3. \texttt{cd} into each repo and run its own GSD flow.}
+
+Inside the workspace, each repo behaves like a normal GSD project.
+You change into one repo, run the normal commands, and the normal
+files land in that repo's \texttt{.planning/}:
+
+\begin{gsdbash}
+cd ~/gsd-workspaces/v2-launch/api
+/gsd:new-project
+/gsd:discuss-phase 1
+/gsd:plan-phase 1
+\end{gsdbash}
+
+\noindent
+Then the same in \texttt{web-frontend} and \texttt{admin-dashboard},
+each with its own plan. There is deliberately no shared planning
+file across the three, because the teams work in different languages,
+different release cadences, and different levels of detail. What
+they share is the workspace manifest, which is updated by the
+orchestrator --- never by the individual executors --- as each
+repo's phase status changes.
+
+\textbf{Step 4. Execute phases in each repo.}
+
+Phase work happens locally in each repo. When you run
+\texttt{/gsd:execute-phase} inside \texttt{api}, the executor operates
+on \texttt{api}'s files and writes to \texttt{api}'s
+\texttt{.planning/STATE.md}. When the phase finishes, the orchestrator
+reads the final state and updates WORKSPACE.md at the workspace root
+so that the cross-repo view stays accurate. If you do nothing, the
+manifest will drift behind; if you run the normal GSD flow, it stays
+current without any extra commands from you.
+
+\textbf{Step 5. Strategy comparison: worktree vs. clone.}
+
+The \texttt{--strategy} flag at workspace-creation time is worth
+understanding, because the two strategies have meaningfully different
+cost profiles:
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}lXXXX@{}}
+\toprule
+\textbf{Strategy} & \textbf{Speed} & \textbf{Disk} & \textbf{Isolation} & \textbf{Best for} \\
+\midrule
+worktree &
+Fast (seconds) &
+Minimal (shared objects) &
+Shared git history &
+Coordinated multi-repo planning; most launch cohorts \\
+\addlinespace
+clone &
+Slower (full clone per repo) &
+Full working copy each &
+Complete &
+Spikes you may throw away; same-branch parallel work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent
+The worktree strategy is the default because it's almost always
+what you want. It shares git object storage with the parent checkout
+on disk, so materializing three worktrees of large repos is
+essentially free. The one constraint to be aware of is that git
+refuses to have two worktrees of the same repo on the same branch
+at the same time; if the workspace and your main checkout both want
+to live on \texttt{main}, the workspace's worktree has to be on a
+different branch.
+
+Use the \texttt{clone} strategy when you specifically need full
+isolation --- for example, when you're running a disposable
+experiment and don't want git objects from the spike leaking back
+into your main checkout, or when you need the workspace and main
+checkout to sit on exactly the same branch at the same time.
+
+\textbf{Step 6. List and inspect.}
+
+When you want to see all your workspaces, or pull up the manifest
+for one:
+
+\begin{gsdbash}
+/gsd:list-workspaces
+cat ~/gsd-workspaces/v2-launch/WORKSPACE.md
+\end{gsdbash}
+
+\noindent
+\texttt{/gsd:list-workspaces} prints a table of every workspace on
+the machine, showing name, repos, strategy, and last activity.
+\texttt{WORKSPACE.md} is a plain markdown file, human-readable,
+that captures the orchestrator's cross-repo view --- phase status
+per repo, outstanding blockers, last update timestamp. You can
+skim it in any editor without running GSD.
+
+\textbf{Step 7. Cleanup.}
+
+When v2 finally ships, you retire the workspace:
+
+\begin{gsdbash}
+/gsd:remove-workspace v2-launch
+\end{gsdbash}
+
+\noindent
+This command asks you to confirm the workspace name before
+proceeding --- a small guardrail against fat-fingering the wrong
+name and destroying an active workspace. Once confirmed, GSD
+removes the workspace directory, tears down the worktrees (git
+reports each one as pruned), and cleans up the WORKSPACE.md
+manifest. The underlying repos themselves are untouched: the api,
+web-frontend, and admin-dashboard checkouts elsewhere on your
+disk are completely unaffected.
+
+\begin{gsdwarning}[Workspaces refuse removal with uncommitted changes]
+\texttt{/gsd:remove-workspace} will \textbf{refuse} to remove the
+workspace if any constituent repo has uncommitted changes. The
+protection is intentional: uncommitted work in a worktree is
+easily lost if the worktree is removed before being committed
+back, and ``I just meant to clean up'' is exactly how people
+lose an afternoon's work. Either commit, stash, or push your
+work in each repo first, then re-run the removal. If you are
+absolutely sure you want to discard the uncommitted state, do
+it explicitly --- stash or reset each repo by hand --- so that
+the decision is deliberate.
+\end{gsdwarning}
+
+\end{gsdscenario}
+
+\begin{gsdnote}[MCP scoping composes with workspaces]
+Part II introduced project-scoped \texttt{.mcp.json} as the right
+way to configure an MCP server. That pattern composes cleanly with
+workspaces: a Stitch MCP server configured inside
+\texttt{\~{}/gsd-workspaces/v2-launch/web-frontend/.mcp.json}
+lives inside that workspace's copy of the web-frontend checkout
+and does not bleed into a separate workspace's \texttt{web-frontend}
+checkout, or into your main \texttt{web-frontend} checkout elsewhere
+on disk. Multi-repo isolation and MCP scoping compose exactly the
+way you'd expect them to.
+\end{gsdnote}
+
+\chapter{Worktree Isolation Deep Dive}
+
+This chapter is the most technically delicate in Part III. The
+details matter, and one of them in particular --- the STATE.md
+ownership rule --- is the kind of thing that will silently corrupt
+your planning files if you get it wrong. Read carefully.
+
+\section{What \texttt{workflow.use\_worktrees: true} Does}
+
+In \texttt{.planning/config.json}, a workflow setting controls how
+parallel execution is sequenced:
+
+\begin{gsdjson}
+{
+  "workflow": {
+    "use_worktrees": true,
+    "cleanup_worktrees": true
+  }
+}
+\end{gsdjson}
+
+\noindent
+When \texttt{use\_worktrees} is \texttt{true},
+\texttt{/gsd:execute-phase} creates a \emph{temporary} git worktree
+for each parallel executor agent it spawns. Each agent gets its
+own private filesystem view of the same git history, rooted at
+a scratch directory under \texttt{.planning/worktrees/} (or wherever
+the config points). The agents do their work inside those scratch
+directories, and once the phase completes, the orchestrator walks
+the set and aggregates their results. If \texttt{cleanup\_worktrees}
+is also \texttt{true}, the scratch directories are removed after
+aggregation.
+
+Without worktrees, parallel executors would share the main checkout.
+That's not a theoretical problem --- it's a concrete, reproducible
+one. Two agents editing the same file race. Two agents staging
+different versions of a change overwrite each other. A half-applied
+refactor gets committed on top of an unrelated agent's fix and the
+git history becomes unreadable. Worktrees solve this by giving each
+agent a filesystem it doesn't have to share with anyone else, while
+still keeping all of them rooted in the same git repository so the
+orchestrator can collect their output.
+
+\section{The STATE.md Ownership Rule}
+
+This is the critical constraint. Get it right, and parallel execution
+is safe. Get it wrong, and you reintroduce the lost-update bug that
+Issue \#1571 was filed to fix.
+
+\begin{gsdimportant}[Single-writer model for shared planning state]
+The orchestrator owns STATE.md and ROADMAP.md. Parallel executor
+agents must \textbf{not} write to these shared planning files
+directly. Each agent writes a plan-local \textbf{SUMMARY.md} inside
+its own worktree. After each wave, the orchestrator reads the
+SUMMARY.md files from every worktree and aggregates them into
+STATE.md and ROADMAP.md in the main checkout. This single-writer
+model is the entire reason parallel GSD execution is safe. Removing
+it --- even ``just this once, for a small edit'' --- reintroduces
+the lost-update bugs that corrupted shared state before the fix
+in Issue \#1571 landed.
+\end{gsdimportant}
+
+The rule is small enough to state in one sentence: \emph{only the
+orchestrator writes to STATE.md or ROADMAP.md}. Everything else in
+the design follows from that constraint.
+
+\section{What Agents Actually Write: SUMMARY.md}
+
+Each parallel executor agent writes exactly one file in its worktree
+that is visible to the rest of the system: a plan-local SUMMARY.md.
+The SUMMARY.md format is intentionally small and additive. It
+captures:
+
+\begin{itemize}
+\item what the agent was asked to do (copied from its slice of the plan),
+\item what it actually did (files touched, tests run, tests passing),
+\item what it didn't do and why (blocking dependency, unclear requirement, environmental failure),
+\item any deviations from the plan that need to be reconciled at aggregation time.
+\end{itemize}
+
+The SUMMARY.md is written in the worktree, not in the main checkout.
+It lives next to the agent's work, and it describes what that agent
+did within its own sandbox. The orchestrator is responsible for
+reading it and deciding what to do about it. The agent never tries
+to speak on behalf of the plan as a whole, and the agent never
+writes into STATE.md or ROADMAP.md in the main checkout or in its
+own worktree. If you find yourself writing an executor that edits
+STATE.md, stop. You are reintroducing \#1571.
+
+\section{Post-Wave Aggregation}
+
+After all parallel executors in a wave finish, the orchestrator
+runs an aggregation step. It:
+
+\begin{enumerate}
+\item Enumerates the worktrees created for this wave.
+\item Reads each worktree's SUMMARY.md.
+\item Reconciles the set against the master plan --- which slices
+  completed, which slices deviated, which slices blocked.
+\item Updates STATE.md and ROADMAP.md in the main checkout with
+  the aggregated result. This is the \emph{single} write to the
+  shared planning state for the entire wave.
+\item If \texttt{cleanup\_worktrees} is \texttt{true}, removes the
+  worktrees and prunes the git worktree registry.
+\end{enumerate}
+
+\noindent
+The important property is that STATE.md goes from pre-wave to
+post-wave in exactly one transition, authored by one process (the
+orchestrator), reflecting the aggregate of what all the executors
+did. There is never a window where two writers are touching STATE.md
+at the same time, because there is only ever one writer.
+
+\section{The \texttt{git clean} Prohibition}
+
+\begin{gsdwarning}[\texttt{git clean} is prohibited in worktree context]
+As of GSD v1.32 (Issue \#2075), the executor wrapper \textbf{blocks}
+\texttt{git clean} in worktree context. Do not try to work around
+this. A stray \texttt{git clean -fd} can delete the prior wave's
+output before the orchestrator has had a chance to aggregate it ---
+including SUMMARY.md files that were the only record of what just
+happened. If you need to remove untracked files inside a worktree,
+do it explicitly per-file (\texttt{rm path/to/file}), not en masse.
+The prohibition is there because the failure mode is silent: you
+lose work and don't notice until the aggregation step asks for a
+SUMMARY.md that no longer exists on disk.
+\end{gsdwarning}
+
+The prohibition applies to any variant of the command ---
+\texttt{git clean -f}, \texttt{git clean -fd}, \texttt{git clean
+-fdx} --- and the wrapper will reject the call with a diagnostic
+that explains why. If you have a legitimate need to remove large
+quantities of untracked files from a worktree, the right move is to
+finish the wave, let the orchestrator aggregate, verify that STATE.md
+is up to date, and \emph{then} clean up outside of the worktree
+mechanism.
+
+\section{Toggling Worktrees Off}
+
+Sometimes you don't want worktree-based parallel execution. Setting
+\texttt{workflow.use\_worktrees} to \texttt{false} runs every
+executor in the main checkout, serially. Use this when:
+
+\begin{itemize}
+\item Your environment doesn't support git worktrees cleanly. Some
+  CI runners and some older Windows setups have limitations that
+  make worktrees flaky. Serial execution is more boring but more
+  predictable in those environments.
+\item You're debugging and want a single deterministic file tree.
+  Worktrees make it harder to \texttt{cd} into ``the'' checkout
+  and poke around, because there are several checkouts. Turning
+  them off is a reasonable diagnostic step.
+\item You intentionally want sequential execution --- for example,
+  on a very small machine where the memory cost of running three
+  agents in parallel is worse than the wall-clock cost of running
+  them in series.
+\end{itemize}
+
+The trade-off is loss of parallelism. Phases will take longer to
+execute. The STATE.md ownership rule still applies in serial mode
+--- the orchestrator is still the only writer --- but the risk of
+races in the main checkout goes away because there is never more
+than one executor running at a time. If you find yourself fighting
+worktree edge cases and you don't specifically need parallelism,
+the boring serial path is a legitimate choice and not a defeat.
+
+\begin{gsdtip}[Orchestrator-only-writes is the rule]
+The orchestrator-only-writes-STATE.md rule is what makes parallel
+GSD execution safe. If you ever find yourself tempted to have an
+executor agent write directly to STATE.md or ROADMAP.md ---
+``just for this one case, to update a small field'' --- stop and
+reread Issue \#1571. You are about to reintroduce the bug that
+the current design exists to prevent.
+\end{gsdtip}
+
+\chapter{Team Patterns for Multi-Repo GSD}
+
+The previous chapters were about mechanics. This chapter is about
+the boring operational discipline that turns the mechanics into
+something a team of humans can actually live with. None of it is
+exotic. All of it is the kind of thing that quietly separates a
+team with a consistent GSD workflow from a team where every repo
+behaves slightly differently and no one can remember why.
+
+\section{Standardizing Config Across Repos}
+
+The single biggest lever for consistency is a shared
+\texttt{.planning/config.json} template that every repo in your team
+copies in. Without a template, every repo ends up with a slightly
+different configuration --- one has worktrees enabled, another
+doesn't, a third uses a different \texttt{project\_code} prefix,
+a fourth has three agent skill paths the others don't know about.
+The teams don't notice at first, and then six months later somebody
+asks ``why does the billing repo's GSD output look different from
+the accounts repo?'' and the answer is a sprawl of micro-decisions
+no one wrote down.
+
+The fix is to commit a canonical template to a shared
+\texttt{gsd-templates} repo and pull it into every new project
+via a setup script. The template should pin the fields that matter
+for team consistency:
+
+\begin{itemize}
+\item \texttt{workflow.use\_worktrees} --- typically \texttt{true}
+  for teams that execute phases in parallel.
+\item \texttt{workflow.cleanup\_worktrees} --- typically \texttt{true}
+  to avoid accumulating stale worktree directories.
+\item \texttt{project\_code} --- the short prefix used for phase
+  directories. Leave this as a template variable so each repo
+  substitutes its own code at setup time.
+\item Any shared agent-skill paths --- if your team has a library
+  of skills living in a shared directory, the paths belong here
+  so every repo picks them up.
+\item Any shared verifier or reviewer configuration that your team
+  applies uniformly.
+\end{itemize}
+
+What should \emph{not} go in the team template is anything specific
+to a single repo: repo-specific build commands, local credentials,
+one-off overrides. Those belong in the repo's own config, layered
+over the template.
+
+\section{MCP Server Scoping, Restated}
+
+Chapter 12 touched on this in passing and it's worth restating
+because it's the single most common mistake teams make with MCP in
+a multi-repo context: do not try to maintain a single global
+\texttt{\~{}/.claude.json} for a microservice fleet. Use
+project-scoped \texttt{.mcp.json} files, one per repo, and commit
+the non-sensitive parts.
+
+The reason is that microservices are each their own context. The
+billing service wants a connection to the billing database. The
+auth service wants a connection to the auth database. If you wire
+both of those into a single global MCP config, every Claude Code
+session in every repo gets every database, and the failure modes
+are confusing --- wrong DB picked up, permissions errors from a
+service that should never have been able to reach that DB in the
+first place, credentials leaking across contexts. Project-scoped
+\texttt{.mcp.json} files keep each service's tool surface minimal
+and make it obvious from the repo alone what external systems
+that service talks to.
+
+Workspaces, as we saw in Chapter 12, compose cleanly with this
+pattern. Each repo inside a workspace carries its own
+\texttt{.mcp.json}, and a workspace doesn't reach across its
+constituent repos to share MCP servers.
+
+\section{Workstream Naming Conventions}
+
+Workstream names end up in \texttt{/gsd:workstreams list} output,
+in \texttt{.planning/workstreams/} directory listings, in commit
+messages, and occasionally in PR descriptions. A little discipline
+here pays off indefinitely:
+
+\begin{itemize}
+\item \textbf{Verb-noun format.} \texttt{add-billing},
+  \texttt{migrate-auth}, \texttt{refactor-orm}. Every workstream
+  is \emph{doing} something, and the name should make that obvious
+  at a glance.
+\item \textbf{No timestamps in the name.} A workstream called
+  \texttt{2026-04-backend-work} looks tidy at creation time and
+  looks dreadful six months later when you have fifteen of them
+  and none of the names tell you what the work was. Use creation
+  timestamps via the \texttt{last touched} column in
+  \texttt{/gsd:workstreams list}, not in the name.
+\item \textbf{Don't use a bare ticket ID as the whole name.} A
+  workstream called \texttt{JIRA-1234} is opaque. Pair the ticket
+  ID with a short description: \texttt{JIRA-1234-billing-flow}.
+  You get the ticket traceability and the at-a-glance readability
+  at the same time, and the cost is a handful of extra characters.
+\item \textbf{Short is better than long.} Aim for workstream names
+  that fit in a reasonable table column. 30 characters is plenty;
+  60 is painful.
+\end{itemize}
+
+None of these rules are enforced by the tooling. They are the kind
+of thing you write down in your team's \texttt{gsd-templates} repo
+next to the config template and agree to honor.
+
+\section{The \texttt{project\_code} Field}
+
+A small but underrated piece of team config is the
+\texttt{project\_code} field in \texttt{.planning/config.json}.
+It's a short prefix --- three or four letters --- that GSD uses
+when it names phase directories and in some default commit message
+templates. Setting it once:
+
+\begin{gsdjson}
+{
+  "project_code": "BCS"
+}
+\end{gsdjson}
+
+\noindent
+means that phase directories come out looking like
+\texttt{BCS-phase-1-auth-refactor} instead of just
+\texttt{phase-1-auth-refactor}. When a human later skims a flat
+directory listing --- or reads a commit message that references a
+phase --- the prefix tells them immediately which project the
+phase belongs to. In a single-repo workflow the prefix is mostly
+decorative. In a multi-repo team workflow, where a reviewer might
+be looking at phases from several different services in the same
+week, the prefix is a small but constant cue that prevents
+cross-project confusion.
+
+Pick short, memorable codes: \texttt{BCS} for billing-core-service,
+\texttt{PAY} for payments, \texttt{ADM} for admin-dashboard. Three
+or four characters, upper-case, no punctuation. Record the mapping
+somewhere humans can find it --- a short table in your team README
+or in the \texttt{gsd-templates} repo works fine.
+
+\section{Ticket-Based Phase Identifiers}
+
+GSD supports tagging phases with external ticket identifiers ---
+the Jira issue, the Linear ticket, the GitHub issue number, whatever
+your team tracks work in. The mechanism is to record the ticket
+reference as phase metadata at planning time, and GSD will carry it
+through to commit message templates and PR descriptions automatically.
+
+The details of which config key holds the ticket reference are
+version-specific and worth checking against your GSD release's
+documentation before you commit to a convention. What matters at
+the team level is the \emph{pattern}: choose one ticket system,
+pick one field name, put it in the team config template, and make
+sure every planner is using it. When it's set up, you get traceable
+commits without any extra effort from the people doing the work ---
+the ticket ID threads through from plan to commit to PR automatically.
+
+The payoff shows up when you're looking at a six-month-old
+commit and wondering why it exists. If the commit says ``implement
+session token rotation'' and the message also carries
+\texttt{PAY-1734}, you click through to the ticket and get the full
+context. Without that thread, you're archaeologizing.
+
+\begin{gsdsuccess}[Standardize the boring parts]
+Standardize the boring parts --- config template, naming
+conventions, MCP scoping, ticket integration --- and your team's
+GSD output will look consistent across repos even when different
+humans are driving different services. The interesting parts ---
+what to plan, how to scope phases, when to escalate a workstream
+to a workspace --- stay where they belong: in the hands of the
+people doing the work. Operational consistency and creative
+autonomy are not in tension. They live at different layers of the
+stack, and a well-set-up team separates them cleanly.
+\end{gsdsuccess}
+% ============================================================================
+%  appendices.tex
+%  Three quick-reference appendices for "GSD: Going Further".
+% ============================================================================
+
+\appendix
+
+\chapter{Runtime Compatibility Matrix}
+\label{app:runtime-matrix}
+
+A consolidated lookup of every coding-agent runtime that GSD's installer
+targets. Use this when you need to verify the install path, the verify
+command, or the workspace/MCP support level for a runtime without paging
+back through Part~I.
+
+\begin{small}
+\begin{longtable}{@{}p{2.4cm}p{2.4cm}p{3.6cm}p{1.8cm}p{1.4cm}p{1.4cm}@{}}
+\toprule
+\textbf{Runtime} & \textbf{Skills Format} & \textbf{Install Dir (global)} &
+\textbf{Verify} & \textbf{MCP} & \textbf{Workspace} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Runtime} & \textbf{Skills Format} & \textbf{Install Dir (global)} &
+\textbf{Verify} & \textbf{MCP} & \textbf{Workspace} \\
+\midrule
+\endhead
+Claude Code 2.1.88+ & \texttt{skills/gsd-*/SKILL.md} &
+\texttt{\textasciitilde/.claude/skills/} & \texttt{/gsd:help} & yes & yes \\
+Claude Code (legacy) & \texttt{commands/gsd/*.md} &
+\texttt{\textasciitilde/.claude/commands/} & \texttt{/gsd:help} & yes & yes \\
+Codex & \texttt{skills/gsd-*/SKILL.md} &
+\texttt{\textasciitilde/.codex/skills/} & \texttt{\$gsd-help} & partial & yes \\
+Copilot & prompts + agents &
+\texttt{\textasciitilde/.github/} & \texttt{/gsd:help} & partial & no \\
+Cursor & \texttt{skills/gsd-*/SKILL.md} &
+\texttt{\textasciitilde/.cursor/} & \texttt{/gsd:help} & yes & yes \\
+Windsurf & markdown transform &
+\texttt{\textasciitilde/.windsurf/} & \texttt{/gsd:help} & partial & yes \\
+OpenCode & config file &
+\texttt{\textasciitilde/.config/opencode/} & \texttt{/gsd-help} & yes & yes \\
+Gemini CLI & skills &
+\texttt{\textasciitilde/.gemini/} & \texttt{/gsd:help} & yes & yes \\
+Antigravity & skills &
+\texttt{\textasciitilde/.gemini/antigravity/} & \texttt{/gsd:help} & yes & yes \\
+Cline & \texttt{.clinerules} &
+\texttt{\textasciitilde/.cline/} & auto-loaded & no & partial \\
+Augment & skills transform &
+\texttt{\textasciitilde/.augment/} & \texttt{/gsd:help} & partial & yes \\
+Qwen Code & skills (open standard) &
+\texttt{\textasciitilde/.qwen/skills/} & \texttt{/gsd:help} & yes & yes \\
+\bottomrule
+\end{longtable}
+\end{small}
+
+\textbf{Notes.} The \texttt{MCP} column reflects whether the host runtime
+exposes Model Context Protocol tool surfaces to its agents. \texttt{partial}
+means MCP is supported via configuration but the host's discovery story is
+limited (e.g., Cline reads its rules file but does not expose MCP tools the
+same way Claude Code does). The \texttt{Workspace} column tracks GSD
+multi-repo workspace support; \texttt{partial} means the runtime accepts
+GSD's installed skill files but does not run worktree-based phases.
+
+\begin{gsdtip}
+Antigravity has both a global install directory and a per-project
+\texttt{./.agent/} directory. GSD's installer auto-detects which to use
+based on whether you run the install script with \texttt{--global} or from
+inside a project directory.
+\end{gsdtip}
+
+\chapter{MCP Server Quick-Reference}
+\label{app:mcp-reference}
+
+A scan-friendly table of MCP servers used in this guide, plus a couple of
+honourable mentions you'll reach for early. Each row lists the package, the
+transport, the auth model, and the minimal config snippet you'd drop into
+\texttt{.mcp.json}.
+
+\begin{small}
+\begin{tabularx}{\textwidth}{@{}llllX@{}}
+\toprule
+\textbf{Server} & \textbf{Package} & \textbf{Transport} & \textbf{Auth} &
+\textbf{Minimal Config Snippet} \\
+\midrule
+Google Stitch &
+\texttt{@\_davideast/stitch-mcp} &
+stdio (proxy) &
+OAuth / API key &
+\texttt{\{"command":"npx","args":["@\_davideast/stitch-mcp","proxy"]\}} \\
+\addlinespace
+Postgres &
+\texttt{@modelcontextprotocol/} \texttt{server-postgres} &
+stdio &
+connection string &
+\texttt{\{"command":"npx","args":["-y","@modelcontextprotocol/server-postgres"],"env":\{"DATABASE\_URL":"\$\{DATABASE\_URL\}"\}\}} \\
+\addlinespace
+Filesystem &
+\texttt{@modelcontextprotocol/} \texttt{server-filesystem} &
+stdio &
+none (path scoped) &
+\texttt{\{"command":"npx","args":["-y","@modelcontextprotocol/server-filesystem","/abs/path"]\}} \\
+\addlinespace
+GitHub &
+\texttt{@modelcontextprotocol/} \texttt{server-github} &
+stdio &
+PAT &
+\texttt{\{"command":"npx","args":["-y","@modelcontextprotocol/server-github"],"env":\{"GITHUB\_PERSONAL\_ACCESS\_TOKEN":"\$\{GITHUB\_TOKEN\}"\}\}} \\
+\addlinespace
+Brave Search &
+\texttt{@modelcontextprotocol/} \texttt{server-brave-search} &
+stdio &
+API key &
+\texttt{\{"command":"npx","args":["-y","@modelcontextprotocol/server-brave-search"],"env":\{"BRAVE\_API\_KEY":"\$\{BRAVE\_API\_KEY\}"\}\}} \\
+\bottomrule
+\end{tabularx}
+\end{small}
+
+\begin{gsdimportant}
+Every snippet that contains a credential reference here uses an environment
+variable placeholder. Drop the snippet into a real \texttt{.mcp.json} only
+after exporting the corresponding variable in your shell, and add
+\texttt{.mcp.json} to \texttt{.gitignore} if it carries any credentials.
+\end{gsdimportant}
+
+\textbf{Choosing a transport.} stdio is the right default for tools that
+live next to your code. Use HTTP transport (\texttt{--transport http}) for
+cloud services and shared team servers; the GSD User Guide and the project's
+\texttt{docs/USER-GUIDE.md} cover the HTTP setup in more depth.
+
+\chapter{Workspace Command Cheat Sheet}
+\label{app:cheatsheet}
+
+The dense version. Print this page and tape it next to your monitor.
+
+\section*{Workstreams (single-repo, isolated planning state)}
+
+\begin{gsdplain}
+/gsd:workstreams create <name>      Create a new workstream
+/gsd:workstreams switch <name>      Switch the active workstream
+/gsd:workstreams list               Show all workstreams (active + archived)
+/gsd:workstreams complete <name>    Archive a workstream when done
+\end{gsdplain}
+
+State lives under \texttt{.planning/workstreams/<name>/}. Switching is fast --
+GSD just swaps which subtree it reads.
+
+\section*{Workspaces (multi-repo or full-isolation)}
+
+\begin{gsdplain}
+/gsd:new-workspace --name <name> --repos <repo1,repo2,...>
+                       [--strategy worktree|clone]
+/gsd:list-workspaces
+/gsd:remove-workspace <name>
+\end{gsdplain}
+
+Strategies:
+\begin{itemize}[leftmargin=2em,itemsep=0.2em]
+  \item \texttt{worktree} (default) -- git worktrees, lightweight, shares git
+        history. Cannot have two worktrees on the same branch.
+  \item \texttt{clone} -- full \texttt{git clone}, complete isolation, higher
+        disk cost. Use for spikes and throw-aways.
+\end{itemize}
+
+Workspaces live under \texttt{\textasciitilde/gsd-workspaces/<name>/} with a
+\texttt{WORKSPACE.md} manifest at the root.
+
+\begin{gsdwarning}
+\texttt{/gsd:remove-workspace} refuses removal if any constituent repo has
+uncommitted changes. Commit, stash, or push first.
+\end{gsdwarning}
+
+\section*{Relevant config keys}
+
+\begin{gsdplain}
+.planning/config.json:
+
+  workflow.use_worktrees: true | false
+      Per-phase parallel executor isolation via git worktrees.
+
+  workflow.cleanup_worktrees: true | false
+      Whether the orchestrator removes worktrees after phase completion.
+
+  project_code: "<prefix>"
+      Short prefix used in phase directory names and commit messages.
+
+  agent_skills:
+    executor:   ["./skills/<dir>/", ...]
+    planner:    ["./skills/<dir>/", ...]
+    researcher: ["./skills/<dir>/", ...]
+      Inject custom instruction directories into specific subagent types.
+\end{gsdplain}
+
+\section*{The single rule that makes parallel execution safe}
+
+\begin{gsdimportant}
+The orchestrator owns STATE.md and ROADMAP.md. Parallel executor agents
+write only their plan-local SUMMARY.md. The orchestrator aggregates after
+each wave. Issue \#1571 documents what happens when this rule is broken --
+don't be the one who reintroduces it.
+\end{gsdimportant}
+
+\end{document}

@@ -1,0 +1,53 @@
+{
+  "projectCode": "PSH",
+  "packTitle": "Possession Sound Heritage — Shoreline History, Maritime Culture & Habitat Recovery from Edmonds to Mukilteo",
+  "modules": [
+    {
+      "moduleId": "boathouses-maritime",
+      "title": "Boathouses & Maritime Culture: Edmonds Boathouses, Meadowdale Beach, Norma Beach, Franklin Boathouse Fish Smoking, Picnic Point Boathouse, Kicker Boats, Fish Scale Insulation, Price Family UW Quarterback, Shoreline Community Life"
+    },
+    {
+      "moduleId": "industrial-shoreline",
+      "title": "Industrial Shoreline History: Standard Oil Point Wells 1911 Tank Farm, Puget Sound Sand & Gravel Company Bluff Mining, Pope & Talbot Lumber, Great Northern Railway Industrial Corridor, Chevron Environmental Cleanup, Point Wells Redevelopment"
+    },
+    {
+      "moduleId": "shipwrecks",
+      "title": "Shipwrecks & Maritime Casualties: MV Pacific Queen Shipwreck Point, Possession Lane Vessel Remains, Franzen Beach Ship-Breaking, Possession Sound Maritime History, BNSF Railroad Riprap Groundings"
+    },
+    {
+      "moduleId": "land-history",
+      "title": "Land History & Geological Events: Historic Landslides Picnic Point to Norma Beach, 1996-97 Winter Slides, BNSF Track Closures, Horseback Beach Access, Pre-Development Shoreline Character, Bluff Recession"
+    },
+    {
+      "moduleId": "indigenous-sovereignty",
+      "title": "Indigenous Sovereignty: Tulalip Tribes Treaty of Point Elliott 1855, Swinomish Indian Tribal Community, Boldt Decision Fishing Rights, Coast Salish Shoreline Use, Usual and Accustomed Areas, Cultural Resources Protection"
+    },
+    {
+      "moduleId": "habitat-preservation",
+      "title": "Habitat Preservation & Recovery: Possession Sound Nearshore Ecology, Port Susan Marine Stewardship, Snohomish River Estuary Restoration, Puget Sound Partnership Action Agenda, PSNERP, Forage Fish Spawning, Salmon Recovery, Shellfish Bed Reclassification"
+    }
+  ],
+  "bibliography": [
+    "USGS Publication MF-2346 — Landslide Activity Coastal Bluffs Shilshole Bay to Everett",
+    "Mukilteo Historical Society archives",
+    "Edmonds Historical Museum",
+    "Puget Sound Maritime Historical Society (PSMHS)",
+    "HistoryLink.org — Washington State history essays",
+    "WA Department of Ecology Toxics Cleanup Program",
+    "WA DNR Division of Geology and Earth Resources",
+    "Tulalip Tribes Natural Resources Department",
+    "Swinomish Indian Tribal Community climate programs",
+    "Northwest Indian Fisheries Commission",
+    "Puget Sound Partnership — Vital Signs, Action Agenda",
+    "NOAA Fisheries — Puget Sound Nearshore Ecosystem Restoration",
+    "Snohomish County Marine Resources Committee",
+    "WDFW nearshore technical reports"
+  ],
+  "safetyRules": [
+    "SC-IND: All Indigenous content sourced from tribal publications, government documents, or peer-reviewed sources only (ABSOLUTE)",
+    "SC-ARCH: No disclosure of specific archaeological site locations (ABSOLUTE)",
+    "SC-TREATY: Treaty rights presented factually per court decisions and published tribal sources (GATE)",
+    "SC-PRIV: Respect private property at Franzen Beach and residential shoreline properties (ANNOTATE)",
+    "SC-ENV: Environmental contamination data from Ecology TCP database — do not speculate beyond documented findings (GATE)"
+  ]
+}

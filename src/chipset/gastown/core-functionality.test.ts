@@ -247,11 +247,11 @@ describe('Agent Topology Skills', () => {
     const beforeHook = await manager.getHook(polecat.id);
     expect(beforeHook).toBeNull();
 
-    // After hook: state is active with work item
+    // After hook: state is pending with work item (GUPP activation follows)
     await manager.setHook(polecat.id, item.beadId);
     const hook = await manager.getHook(polecat.id);
 
-    expect(hook!.status).toBe('active');
+    expect(hook!.status).toBe('pending');
     expect(hook!.workItem).toBeDefined();
     expect(hook!.workItem!.beadId).toBe(item.beadId);
     expect(hook!.lastActivity).toBeTruthy();
@@ -289,8 +289,10 @@ describe('Agent Topology Skills', () => {
     const finalAgent = await manager.getAgent(polecat.id);
     expect(finalAgent!.status).toBe('terminated');
 
+    // clearHook writes an empty hook (SKILL.md "Cleared, not deleted")
     const finalHook = await manager.getHook(polecat.id);
-    expect(finalHook).toBeNull();
+    expect(finalHook!.status).toBe('empty');
+    expect(finalHook!.workItem).toBeUndefined();
   });
 
   // -------------------------------------------------------------------------
@@ -437,7 +439,7 @@ describe('Communication Skills', () => {
     // Agent polls hook
     const hook = await manager.getHook(agent.id);
     expect(hook).not.toBeNull();
-    expect(hook!.status).toBe('active');
+    expect(hook!.status).toBe('pending');
     expect(hook!.workItem!.beadId).toBe(item.beadId);
     expect(hook!.workItem!.title).toBe('Poll test');
   });
@@ -450,16 +452,17 @@ describe('Communication Skills', () => {
     const agent = await manager.createAgent('polecat', 'test-rig');
     const item = await manager.createWorkItem('Clear test', 'Test hook clear', 'P1');
 
-    // Hook is set
+    // Hook is set (lands in pending per GUPP lifecycle)
     await manager.setHook(agent.id, item.beadId);
     const hookBefore = await manager.getHook(agent.id);
     expect(hookBefore).not.toBeNull();
-    expect(hookBefore!.status).toBe('active');
+    expect(hookBefore!.status).toBe('pending');
 
-    // Done retirement clears hook
+    // Done retirement clears hook — empty file persists (not unlinked)
     await manager.clearHook(agent.id);
     const hookAfter = await manager.getHook(agent.id);
-    expect(hookAfter).toBeNull();
+    expect(hookAfter!.status).toBe('empty');
+    expect(hookAfter!.workItem).toBeUndefined();
 
     // Agent can now receive new work
     const item2 = await manager.createWorkItem('New work', 'After clear', 'P2');
@@ -579,8 +582,9 @@ describe('Dispatch & Retirement', () => {
     const finalAgent = await manager.getAgent(polecat.id);
     expect(finalAgent!.status).toBe('terminated');
 
+    // clearHook writes an empty hook (SKILL.md "Cleared, not deleted")
     const finalHook = await manager.getHook(polecat.id);
-    expect(finalHook).toBeNull();
+    expect(finalHook!.status).toBe('empty');
   });
 
   // -------------------------------------------------------------------------

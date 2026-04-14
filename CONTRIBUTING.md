@@ -2,7 +2,25 @@
 
 Thanks for taking the time to contribute. This document is the canonical guide for how work lands in this repository. It covers branch targets, the rebase workflow, cross-platform portability rules, commit conventions, and what to include in issues and pull requests.
 
-If you're a first-time contributor, read this end-to-end once before filing anything. It will save review round-trips on both sides.
+1. Fork the repository
+2. Clone your fork: `git clone <your-fork-url>`
+3. Install dependencies: `npm install`
+4. Install project-claude hooks: `node project-claude/install.cjs`
+5. Run tests: `npm test`
+6. Build: `npm run build`
+
+### About step 4
+
+`project-claude/install.cjs` copies project-specific hooks (including
+`gsd-config-guard.js`, which hard-blocks agent writes to `.claude/settings.json`)
+from `project-claude/hooks/` into `.claude/hooks/` and merges hook
+registrations into `.claude/settings.json`.
+
+The harness-integrity test (`src/chipset/harness-integrity.test.ts`) will
+still pass on a fresh clone without this step because `checkConfigImmutability`
+falls back to scanning the tracked source in `project-claude/hooks/` — but
+at runtime the protection is only active once install has run. Treat this
+as a one-time post-clone step.
 
 ---
 

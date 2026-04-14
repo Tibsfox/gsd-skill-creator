@@ -1,0 +1,247 @@
+# Math Department Chipset Configuration
+# First instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Other departments (physics, CS, linguistics, etc.)
+# can fork this template and remap every section.
+
+name: math-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated mathematics department providing domain-routed
+  expertise through seven named agents (Hypatia, Euclid, Gauss,
+  Euler, Noether, Ramanujan, Polya), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college math department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  proof-techniques:
+    domain: math
+    description: "Proof writing and verification — 13 techniques with worked examples"
+    triggers:
+      - "prove that"
+      - "proof strategy"
+      - "verify this proof"
+      - "induction"
+      - "contradiction"
+      - "contrapositive"
+    agent_affinity: euclid
+
+  algebraic-reasoning:
+    domain: math
+    description: "Symbolic manipulation, equation solving, algebraic structures"
+    triggers:
+      - "solve for"
+      - "factor"
+      - "simplify"
+      - "group theory"
+      - "ring"
+      - "modular"
+      - "polynomial"
+    agent_affinity: [gauss, noether]
+
+  geometric-intuition:
+    domain: math
+    description: "Spatial reasoning, coordinate geometry, transformations, trigonometry"
+    triggers:
+      - "triangle"
+      - "geometry"
+      - "angle"
+      - "trigonometry"
+      - "coordinate"
+      - "area"
+      - "volume"
+    agent_affinity: [euclid, euler]
+
+  numerical-analysis:
+    domain: math
+    description: "Calculus operations, series, numerical methods, optimization"
+    triggers:
+      - "compute"
+      - "integrate"
+      - "derivative"
+      - "series"
+      - "numerical"
+      - "converge"
+    agent_affinity: euler
+
+  pattern-recognition:
+    domain: math
+    description: "Sequence analysis, conjecture generation, experimental math"
+    triggers:
+      - "pattern"
+      - "sequence"
+      - "conjecture"
+      - "OEIS"
+      - "combinatorics"
+    agent_affinity: ramanujan
+
+  mathematical-modeling:
+    domain: math
+    description: "Problem formulation, abstraction, applied math, modeling"
+    triggers:
+      - "model"
+      - "formulate"
+      - "real-world"
+      - "optimization"
+      - "regression"
+    agent_affinity: [euler, polya]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Hypatia as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: hypatia
+
+  agents:
+    - name: hypatia
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: euclid
+      role: "proof engineer — formal proofs, logical verification"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: gauss
+      role: "number theorist — arithmetic, algebra, computation"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: euler
+      role: "analyst — calculus, series, numerical methods"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: noether
+      role: "algebraist — abstract structures, symmetry, invariants"
+      model: opus
+      tools: [Read, Grep]
+
+    - name: ramanujan
+      role: "conjecture engine — pattern detection, experimental math"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: polya
+      role: "pedagogy guide — heuristics, explanation, learning paths"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  math-investigation-team:
+    description: "Full department for complex multi-domain problems"
+    agents: [hypatia, euclid, gauss, euler, noether, ramanujan, polya]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  proof-workshop-team:
+    description: "Focused proof construction and verification"
+    agents: [euclid, noether, gauss, polya]
+    use_when: "proof-specific requests"
+
+  discovery-team:
+    description: "Conjecture pipeline — explore, compute, verify, document"
+    agents: [ramanujan, euclid, gauss, polya]
+    use_when: "pattern exploration and conjecture generation"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 math Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college math department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (hypatia) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - proof
+      - algebra
+      - geometry
+      - analysis
+      - patterns
+      - modeling
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "math-department"
+  record_types:
+    - name: MathProof
+      description: "Formal or semi-formal proof with steps and verification"
+
+    - name: MathConjecture
+      description: "Unproven claim with evidence and confidence score"
+
+    - name: MathDerivation
+      description: "Computational derivation with step-by-step work"
+
+    - name: MathExplanation
+      description: "Teaching artifact at a specified level"
+
+    - name: MathSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "math"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Number & Operations"
+    - "Patterns & Algebraic Thinking"
+    - "Geometry & Spatial Thinking"
+    - "Data & Probability"
+    - "Statistics & Inference"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

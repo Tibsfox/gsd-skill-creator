@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Political Science, History &amp; the Complex Plane — GSD Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4A148C;
+      --secondary: #1565C0;
+      --tertiary: #263238;
+      --accent: #6A1B9A;
+      --gold: #F57F17;
+      --gold-light: #FFF8E1;
+      --light-primary: #F3E5F5;
+      --light-secondary: #E3F2FD;
+      --row-gray: #F5F5F5;
+      --border-gray: #BDBDBD;
+      --subtle-gray: #757575;
+      --dark-text: #212121;
+      --bg: #FAFAFA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--dark-text);
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #6A1B9A 60%, var(--secondary) 100%);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+    header .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+      opacity: 0.85;
+    }
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    header .subtitle {
+      font-size: 1rem;
+      opacity: 0.82;
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+    header .formula {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+    }
+    .pipeline {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+      opacity: 0.75;
+      letter-spacing: 0.08em;
+    }
+    .pipeline span { color: var(--gold); font-weight: 600; }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+    .card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: block;
+    }
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(74, 20, 140, 0.15);
+      transform: translateY(-2px);
+    }
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+    }
+    .card-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--subtle-gray);
+      line-height: 1.5;
+    }
+    .card-size {
+      display: inline-block;
+      margin-top: 0.7rem;
+      font-size: 0.72rem;
+      background: var(--light-primary);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    section h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--light-primary);
+    }
+    .contents-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 700px) { .contents-grid { grid-template-columns: 1fr; } }
+    .stage-block {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .stage-header {
+      padding: 0.6rem 1rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: white;
+    }
+    .stage-header.s1 { background: var(--primary); }
+    .stage-header.s2 { background: var(--secondary); }
+    .stage-header.s3 { background: var(--tertiary); }
+    .stage-items {
+      padding: 0.8rem 1rem;
+      list-style: none;
+    }
+    .stage-items li {
+      font-size: 0.8rem;
+      color: var(--dark-text);
+      padding: 3px 0;
+      border-bottom: 1px solid var(--row-gray);
+    }
+    .stage-items li:last-child { border-bottom: none; }
+    .usage {
+      background: var(--light-secondary);
+      border-left: 4px solid var(--secondary);
+      border-radius: 0 4px 4px 0;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 2rem;
+    }
+    .usage h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.7rem;
+    }
+    .usage ol {
+      padding-left: 1.3rem;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--dark-text);
+    }
+    .recompile {
+      background: var(--row-gray);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .recompile h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--tertiary);
+      margin-bottom: 0.5rem;
+    }
+    .recompile code {
+      display: block;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: var(--tertiary);
+      line-height: 1.8;
+    }
+    .modules-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 700px) { .modules-list { grid-template-columns: 1fr 1fr; } }
+    .module-chip {
+      background: white;
+      border: 1px solid var(--border-gray);
+      border-radius: 4px;
+      padding: 0.6rem;
+      text-align: center;
+      font-size: 0.72rem;
+    }
+    .module-chip .m-num { font-weight: 700; color: var(--accent); font-size: 0.85rem; }
+    .module-chip .m-name { color: var(--dark-text); line-height: 1.3; margin-top: 2px; }
+    .formula-block {
+      background: var(--gold-light);
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      padding: 1rem 1.4rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      color: var(--primary);
+    }
+    .formula-block .label {
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .formula-block .eq { font-size: 1.2rem; }
+    .formula-block .desc {
+      font-size: 0.78rem;
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--subtle-gray);
+      margin-top: 0.4rem;
+    }
+    .closing {
+      background: var(--light-primary);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 6px 6px 0;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .closing p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--dark-text);
+    }
+    .closing .attr {
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      color: var(--subtle-gray);
+      margin-top: 0.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--subtle-gray);
+      border-top: 1px solid #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">GSD Research Mission Package</div>
+  <h1>Political Science, History<br>&amp; the Complex Plane</h1>
+  <div class="subtitle">College of Knowledge · Complex Plane of Experience Mapping</div>
+  <div class="formula">z(t) = R(t) + i·X(t)</div>
+  <div class="pipeline">
+    VISION <span>→</span> RESEARCH <span>→</span> MISSION
+  </div>
+</header>
+
+<div class="container">
+
+  <section style="margin-bottom:2rem;">
+    <h2>Downloads</h2>
+    <div class="cards">
+      <a class="card" href="polsci_complex_plane_mission.pdf" download>
+        <div class="card-icon">📄</div>
+        <div class="card-title">Mission Package PDF</div>
+        <div class="card-desc">Complete 3-stage document: Vision Guide, Research Reference, Mission Package. 26 pages.</div>
+        <div class="card-size">PDF · 26 pages</div>
+      </a>
+      <a class="card" href="polsci_complex_plane_mission.tex" download>
+        <div class="card-icon">🔧</div>
+        <div class="card-title">LaTeX Source (.tex)</div>
+        <div class="card-desc">XeLaTeX source with DejaVu fonts. Recompile with three xelatex passes to modify.</div>
+        <div class="card-size">.tex · XeLaTeX</div>
+      </a>
+    </div>
+  </section>
+
+  <section style="margin-bottom:2rem;">
+    <h2>Five Research Modules</h2>
+    <div class="modules-list">
+      <div class="module-chip"><div class="m-num">M1</div><div class="m-name">Political Science Foundations</div></div>
+      <div class="module-chip"><div class="m-num">M2</div><div class="m-name">Historical Arc (1648–2026)</div></div>
+      <div class="module-chip"><div class="m-num">M3</div><div class="m-name">Current Global State</div></div>
+      <div class="module-chip"><div class="m-num">M4</div><div class="m-name">Complex Plane Framework</div></div>
+      <div class="module-chip"><div class="m-num">M5</div><div class="m-name">College of Knowledge Integration</div></div>
+    </div>
+  </section>
+
+  <div class="formula-block">
+    <div class="label">Core Mathematical Framework</div>
+    <div class="eq">z(t) = R(t) + i·X(t)</div>
+    <div class="desc">R(t) = institutional democracy level (V-Dem index) · X(t) = experienced legitimacy (felt participation, narrative, polarization topology)</div>
+  </div>
+
+  <section style="margin-bottom:2rem;">
+    <h2>Document Contents</h2>
+    <div class="contents-grid">
+      <div class="stage-block">
+        <div class="stage-header s1">Stage 1 — Vision</div>
+        <ul class="stage-items">
+          <li>Vision narrative</li>
+          <li>5 problem statements</li>
+          <li>Complex plane core concept</li>
+          <li>Historical epoch map (ASCII)</li>
+          <li>Module architecture diagram</li>
+          <li>Chipset configuration</li>
+          <li>12 success criteria</li>
+          <li>Document relationships</li>
+          <li>Through-line</li>
+        </ul>
+      </div>
+      <div class="stage-block">
+        <div class="stage-header s2">Stage 2 — Research</div>
+        <ul class="stage-items">
+          <li>Systems theory findings</li>
+          <li>Complexity as paradigm</li>
+          <li>6 historical inflection pts</li>
+          <li>Quantitative baseline table</li>
+          <li>Regional current signals</li>
+          <li>z(t) formal definition</li>
+          <li>Attractor regime table</li>
+          <li>Euler bridge to Space Between</li>
+          <li>CoK directory spec</li>
+          <li>21-source bibliography</li>
+        </ul>
+      </div>
+      <div class="stage-block">
+        <div class="stage-header s3">Stage 3 — Mission</div>
+        <ul class="stage-items">
+          <li>Mission objective</li>
+          <li>Wave architecture (ASCII)</li>
+          <li>10 deliverables table</li>
+          <li>Component token budget</li>
+          <li>Model assignment rationale</li>
+          <li>5-wave execution plan</li>
+          <li>Cache optimization strategy</li>
+          <li>22-test test plan</li>
+          <li>Verification matrix</li>
+          <li>12-role crew manifest</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="usage">
+    <h3>How to Use This Package</h3>
+    <ol>
+      <li>Open the PDF and review the Vision (Stage 1) to confirm scope and module architecture.</li>
+      <li>Hand this package to <strong>gsd-skill-creator</strong> via Claude Code with: <em>"Execute this mission package."</em></li>
+      <li>The orchestrator will run Wave 0 autonomously; present at CAPCOM Gate 1 after Wave 1 completes.</li>
+      <li>Review M1–M3 and M5 at Gate 1; approve or request revisions before Wave 2 (Opus) begins.</li>
+      <li>Review M4 mathematical framework at Gate 2; check Euler bridge fidelity to <em>The Space Between</em>.</li>
+      <li>Wave 3 publishes to <code>.college/polsci-history/</code> and <code>tibsfox.com/Missions/</code>.</li>
+    </ol>
+  </div>
+
+  <div class="recompile">
+    <h3>Recompile LaTeX (Three Passes Required)</h3>
+    <code>xelatex -interaction=nonstopmode polsci_complex_plane_mission.tex</code>
+    <code>xelatex -interaction=nonstopmode polsci_complex_plane_mission.tex</code>
+    <code>xelatex -interaction=nonstopmode polsci_complex_plane_mission.tex</code>
+  </div>
+
+  <div class="closing">
+    <p>"Every system has a real part and an imaginary part. The engineers who forget the imaginary part build bridges that collapse in the wind — not because they calculated the load wrong, but because they forgot that wind is a rotating vector, not a linear force. Political systems are no different. The institutions are the bridge. The experienced legitimacy is the wind."</p>
+    <div class="attr">— GSD College of Knowledge, Political Science / History Department, Inaugural Mission · April 6, 2026</div>
+  </div>
+
+</div>
+
+<footer>
+  GSD Ecosystem · Tibsfox, Inc. (Washington State PBC) · Activation Profile: Squadron (12 roles) · 5–7 context windows · April 6, 2026
+</footer>
+
+</body>
+</html>

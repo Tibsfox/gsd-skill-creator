@@ -443,3 +443,75 @@ The lesson: persistence is not the absence of disruption. It is the ability to a
 - [Pearl Jam Gigaton climate themes - VOA](https://learningenglish.voanews.com/a/new-pearl-jam-album-heavy-on-climate-activism/5347380.html)
 - [MoPOP: Mike McCready on the Influence of Jimi Hendrix](https://www.mopop.org/blog/posts/watch-mike-mccready-on-the-influence-of-jimi-hendrix)
 - [Green River Band - GRV Deep Research (internal)](docs/research/green-river-band.md)
+
+---
+
+## Addendum: Dark Matter tour close and Matt Cameron's departure (2024–2025)
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. Pearl Jam's recent activity between the body's
+writing and the enrichment window includes two genuinely
+significant events: the close of the Dark Matter World Tour and the
+departure of a long-serving drummer.
+
+**Dark Matter World Tour (May 4, 2024 → May 18, 2025).** The
+twelfth-studio-album tour began at Rogers Arena in Vancouver and
+closed at PPG Paints Arena in Pittsburgh roughly 54 weeks later. The
+tour ran across West Coast, European (with some illness-related
+cancellations), North American East Coast, Midwest, Western, and
+Oceania (Australia / New Zealand) legs. Reviews were
+characteristically warm, set lists drew from the full 12-album
+catalog, and 10 of 11 *Dark Matter* tracks appeared in the tour's
+rotation. Production was built around an art-direction language
+specific to the new record.
+
+**Matt Cameron's departure (July 2025).** The Dark Matter tour was
+Matt Cameron's last as Pearl Jam's drummer. Cameron, who had played
+with the band since 1998 — nearly three decades, outstripping every
+previous Pearl Jam drummer by a wide margin — announced his
+departure in July 2025 after the tour closed. Cameron's Pearl Jam
+tenure is the longest any Pearl Jam drummer has held, and his exit
+reopens the drummer chair for the first time since *Yield* (1998).
+As of April 2026 no permanent replacement has been announced and
+the band has not scheduled new touring.
+
+**Sources:** [Dark Matter World Tour — Wikipedia](https://en.wikipedia.org/wiki/Dark_Matter_World_Tour) · [Pearl Jam — Dark Matter U.S. Tour 2025 — pearljam.com](https://pearljam.com/news/artist-presale-2025-us-tour) · [Two Nights with Pearl Jam in LA: 'Dark Matter' Tour Review — Rock Cellar Magazine](https://rockcellarmagazine.com/pearl-jam-concert-review-2024-kia-forum-los-angeles-dark-matter-photos/) · [Pearl Jam 'Dark Matter World Tour' — PLSN, August 2024](https://plsn.com/archives/august-2024/pearl-jam-dark-matter-world-tour/)
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**music**](../../../.college/departments/music/DEPARTMENT.md) —
+  Pearl Jam is one of the most-studied cases of a 1990s band's
+  survival into the streaming era, and the music department's
+  treatment of late-career American rock is incomplete without
+  them.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The band's thirty-four-year arc (1990–2024+) is a history of
+  how the music industry changed around a band that stayed
+  stable, and the Ticketmaster-lawsuit era in particular is a
+  case study in artist resistance to corporate consolidation.
+- [**environmental**](../../../.college/departments/environmental/DEPARTMENT.md)
+  — Pearl Jam's environmental activism through the Vitalogy
+  Foundation and the *Gigaton* album's climate framing are
+  environmental-department topics.
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)
+  — Eddie Vedder's lyric writing, particularly its socially
+  engaged posture, is a writing-department topic.
+
+---
+
+*Addendum (Dark Matter tour close, Matt Cameron departure) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Pearl Jam
+
+## DIY — Listen to *Ten* (1991) end-to-end
+
+The debut that broke the band. Sit with it on good
+speakers.
+
+## TRY — Read *Not For You: Pearl Jam and the Present Tense*
+
+Ronen Givony's book-length treatment. Best critical
+appraisal of PJ in print.

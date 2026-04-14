@@ -355,7 +355,8 @@ export const GsdExtensionSchema = z.object({
   triggers: TriggerPatternsSchema.optional(),
   learning: SkillLearningSchema.optional(),
   enabled: z.boolean().optional(),
-  version: z.number().optional(),
+  // Accept both legacy integer versions (v1, v2) and modern semver strings ("1.0.0")
+  version: z.union([z.number(), z.string()]).optional(),
   extends: SkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
@@ -408,10 +409,18 @@ export const SkillInputSchema = z.object({
   enabled: z.boolean().default(true),
   triggers: TriggerPatternsSchema.optional(),
   learning: SkillLearningSchema.optional(),
-  version: z.number().optional(),
+  // Accept both legacy integer versions (v1, v2) and modern semver strings ("1.0.0")
+  version: z.union([z.number(), z.string()]).optional(),
   extends: SkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
+
+  // Critique gate field: when true, publish requires a converged critique run on record.
+  'requires-critique': z.boolean().optional(),
+
+  // CSO discipline field (Phase B): describes how frequently the skill is loaded.
+  // Drives the word-count budget in description-quality validation.
+  'description-frequency': z.enum(['always', 'on-demand']).optional(),
 }).passthrough(); // Preserve unknown fields
 
 // Type inference from schema
@@ -479,10 +488,17 @@ export const SkillMetadataSchema = z.object({
   triggers: TriggerPatternsSchema.optional(),
   enabled: z.boolean().optional(),
   learning: SkillLearningSchema.optional(),
-  version: z.number().optional(),
+  // Accept both legacy integer versions (v1, v2) and modern semver strings ("1.0.0")
+  version: z.union([z.number(), z.string()]).optional(),
   extends: SkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
+
+  // Critique gate field: when true, publish requires a converged critique run on record.
+  'requires-critique': z.boolean().optional(),
+
+  // CSO discipline field (Phase B): describes how frequently the skill is loaded.
+  'description-frequency': z.enum(['always', 'on-demand']).optional(),
 }).passthrough(); // Preserve unknown fields
 
 /** Type inference for full metadata schema */
@@ -525,7 +541,7 @@ export const CLAUDE_EXTENSION_FIELDS = ['context', 'agent', 'model', 'hooks', 'd
 /**
  * Fields used by gsd-skill-creator extensions (legacy root-level or internal).
  */
-const GSD_EXTENSION_FIELDS = ['triggers', 'enabled', 'version', 'extends', 'createdAt', 'updatedAt', 'learning'] as const;
+const GSD_EXTENSION_FIELDS = ['triggers', 'enabled', 'version', 'extends', 'createdAt', 'updatedAt', 'learning', 'requires-critique', 'description-frequency'] as const;
 
 /**
  * Result of classifying frontmatter fields.

@@ -1,0 +1,78 @@
+# Math Co-Processor Chipset Configuration
+# Parsed by math_coprocessor/config.py at server startup.
+# Controls VRAM budget, chip enable/disable, precision defaults,
+# thermal limits, and inference coexistence settings.
+
+name: math-coprocessor-v1.0
+version: 1.0.0
+
+# VRAM budget in MB — hard ceiling for all math operations combined.
+# The VRAM manager rejects allocations that would exceed this limit.
+# Set to 0 to disable GPU acceleration entirely (CPU-only mode).
+vram_budget_mb: 750
+
+# Default precision for all chips. Individual tool calls can override.
+default_precision: fp64
+
+# Thermal protection — reduce throughput when GPU temp exceeds this (Celsius).
+thermal_limit_c: 85
+
+# Chip configuration — enable/disable individual chips and set per-chip options.
+chips:
+  algebrus:
+    enabled: true
+    gpu_operations:
+      - gemm
+    cpu_fallback:
+      - solve
+      - svd
+      - eigen
+      - det
+      - inv
+
+  fourier:
+    enabled: true
+    gpu_operations: []
+    cpu_fallback:
+      - fft
+      - ifft
+      - spectrum
+
+  vectora:
+    enabled: true
+    gpu_operations: []
+    cpu_fallback:
+      - gradient
+      - transform
+      - batch_eval
+
+  statos:
+    enabled: true
+    gpu_operations: []
+    cpu_fallback:
+      - describe
+      - monte_carlo
+      - regression
+
+  symbex:
+    enabled: true
+    gpu_operations: []
+    cpu_fallback:
+      - eval
+      - verify
+    kernel_cache:
+      max_entries: 64
+      log_evictions: true
+
+# Inference coexistence — CUDA stream isolation settings.
+# Ensures math dispatches don't starve or interfere with LoRA inference.
+inference_coexistence:
+  # Use a dedicated CUDA stream for math operations (isolates from inference).
+  dedicated_stream: true
+  # Stream priority: 0 = default, negative = higher priority.
+  # Math ops run at lower priority than inference by default.
+  stream_priority: 1
+  # Maximum concurrent math operations before queueing.
+  max_concurrent_ops: 4
+  # Synchronize after each operation (safer but slower).
+  sync_after_op: true
