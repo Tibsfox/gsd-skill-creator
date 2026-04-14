@@ -591,7 +591,7 @@ Consider: the partnership began accidentally (Schirra's personal purchase), beca
 
 ### What the Hasselblad partnership teaches about industrial-scientific collaboration
 
-Across the 190+ research missions in our research catalog, few subjects offer as clean a case study in industrial-scientific collaboration as the Hasselblad-NASA partnership. Three structural observations emerge:
+Across the 242+ research missions in our research catalog, few subjects offer as clean a case study in industrial-scientific collaboration as the Hasselblad-NASA partnership. Three structural observations emerge:
 
 **1. Accidental partnerships can outlast deliberate ones.** The Hasselblad partnership was not planned, not procured, and not the result of a competitive bidding process. It began with one person's initiative and was formalized only after the product had proven itself in the field. This accidental origin gave the partnership a foundation of demonstrated performance rather than anticipated performance --- a foundation that proved more durable than many deliberately structured contractor relationships.
 
