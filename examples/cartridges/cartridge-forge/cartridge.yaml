@@ -1,0 +1,34 @@
+id: cartridge-forge
+name: Cartridge Forge
+version: 0.1.0
+author: tibsfox
+description: >-
+  The forge that makes cartridges. Dogfoods the unified Cartridge + Chipset
+  model by shipping as a cartridge itself — the first cartridge through the
+  new unified schema is the one that teaches the system how to ship more.
+trust: system
+provenance:
+  origin: tibsfox
+  createdAt: 2026-04-14T12:00:00Z
+  sourceCommits:
+    - 52625ee44
+    - 9579fb10f
+  researchGrounding:
+    - .planning/mission/cartridge-forge/00-milestone-spec.md
+    - .planning/mission/cartridge-forge/01-wave-execution-plan.md
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: metrics
+    src: ./chipsets/metrics.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: dogfood
+  wave: 2A
+  tags:
+    - forge
+    - dogfood
+    - cartridge-forge

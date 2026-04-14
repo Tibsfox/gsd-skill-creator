@@ -1,0 +1,31 @@
+namespace: cartridge-forge
+record_types:
+  - name: ForgeBuildSession
+    description: >-
+      A single invocation of the forge (scaffold/validate/eval/fork/migrate).
+      Captures inputs, outcome, and any deviations so future sessions can
+      learn from past runs.
+
+  - name: CartridgeDecision
+    description: >-
+      A shape decision made by forge-architect — what chipsets the target
+      cartridge needs, routing topology choice, department decomposition,
+      fork-vs-migrate call.
+
+  - name: ValidationOutcome
+    description: >-
+      The result of running `cartridge validate` or `cartridge eval` on a
+      cartridge. Records pass/fail per gate, error paths, and any proposed
+      fix messages.
+
+  - name: ForkLineage
+    description: >-
+      A directed-acyclic record of a fork operation: source cartridge id,
+      new id, trust boundary change, any renamed agents, and the commit
+      sha of the source state.
+
+  - name: MigrationRecord
+    description: >-
+      A legacy->unified migration event. Records the legacy id, the
+      unified id, which chipsets were synthesized, and whether any manual
+      schema extension was needed.
