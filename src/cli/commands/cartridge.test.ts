@@ -1,5 +1,5 @@
 /**
- * Cartridge CLI tests — CL-01..CL-08.
+ * Cartridge CLI tests — CL-01..CL-14 + help smoke.
  *
  * Tests the pure `cartridgeCommand(args, io)` entry point with an injected IO
  * sink. Does not spawn the real binary — these are library-level tests.
@@ -162,5 +162,61 @@ teams: {}
     const io = makeIO();
     const code = await cartridgeCommand(['load'], io);
     expect(code).toBe(2);
+  });
+
+  it('CL-10 scaffold with invalid template name returns exit 1', async () => {
+    const io = makeIO();
+    const code = await cartridgeCommand(
+      ['scaffold', 'not-a-template', scaffoldDir, 'cli-test'],
+      io,
+    );
+    expect(code).toBe(1);
+    expect(io.err.join('\n').toLowerCase()).toContain('template');
+  });
+
+  it('CL-11 metrics on nonexistent path returns exit 1', async () => {
+    const io = makeIO();
+    const missing = join(workRoot, 'does-not-exist.yaml');
+    const code = await cartridgeCommand(['metrics', missing, '--json'], io);
+    expect(code).toBe(1);
+    const parsed = JSON.parse(io.out.join('\n'));
+    expect(parsed.ok).toBe(false);
+    expect(typeof parsed.error).toBe('string');
+  });
+
+  it('CL-12 dedup on nonexistent path returns exit 1', async () => {
+    const io = makeIO();
+    const missing = join(workRoot, 'ghost.yaml');
+    const code = await cartridgeCommand(['dedup', missing], io);
+    expect(code).toBe(1);
+    expect(io.err.join('\n')).toContain('cartridge:');
+  });
+
+  it('CL-13 fork missing newId returns exit 2', async () => {
+    const io = makeIO();
+    const path = await scaffold(io);
+    const code = await cartridgeCommand(['fork', path], io);
+    expect(code).toBe(2);
+    expect(io.err.join('\n')).toContain('fork requires');
+  });
+
+  it('CL-14 eval on nonexistent path returns exit 1', async () => {
+    const io = makeIO();
+    const missing = join(workRoot, 'phantom.yaml');
+    const code = await cartridgeCommand(['eval', missing, '--json'], io);
+    expect(code).toBe(1);
+    const parsed = JSON.parse(io.out.join('\n'));
+    expect(parsed.ok).toBe(false);
+  });
+
+  it('cartridge --help prints usage and exits 0 (smoke)', async () => {
+    const io = makeIO();
+    const code = await cartridgeCommand(['--help'], io);
+    expect(code).toBe(0);
+    const out = io.out.join('\n');
+    expect(out).toContain('Usage:');
+    for (const sub of ['load', 'validate', 'scaffold', 'metrics', 'eval', 'dedup', 'fork']) {
+      expect(out).toContain(`cartridge ${sub}`);
+    }
   });
 });
