@@ -1,0 +1,18 @@
+activation_tracking:
+  triggers: true
+  skill_loads: true
+  agent_routes: true
+  team_uses: true
+benchmarks:
+  - trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 25
+    domains_covered:
+      - scaffold
+      - validate
+      - eval
+      - fork
+      - migrate
+      - distill
+telemetry_sinks:
+  - jsonl
+  - grove

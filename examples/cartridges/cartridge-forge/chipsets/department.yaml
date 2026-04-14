@@ -1,0 +1,171 @@
+skills:
+  cartridge-scaffold:
+    domain: forge
+    description: >-
+      Generate a new cartridge skeleton from a template. Produces a valid
+      cartridge.yaml that round-trips through the loader and validator
+      without edits.
+    triggers:
+      - scaffold cartridge
+      - new cartridge
+      - create department
+      - bootstrap cartridge
+    agent_affinity: forge-architect
+
+  cartridge-validate:
+    domain: forge
+    description: >-
+      Run schema validation and cross-chipset consistency checks on a
+      cartridge. Reports errors with path-qualified messages and separates
+      warnings from hard failures.
+    triggers:
+      - validate cartridge
+      - check cartridge
+      - lint cartridge
+    agent_affinity:
+      - forge-architect
+      - forge-validator
+
+  cartridge-eval:
+    domain: forge
+    description: >-
+      Run the evaluation chipset gates declared in pre_deploy against the
+      cartridge itself. Used as the self-dogfood gate for the forge.
+    triggers:
+      - eval cartridge
+      - run gates
+      - pre-deploy check
+    agent_affinity: forge-validator
+
+  cartridge-fork:
+    domain: forge
+    description: >-
+      Clone a cartridge with a new id and forkOf provenance. Preserves the
+      original chipset shape and stamps the new cartridge with fork-origin
+      metadata.
+    triggers:
+      - fork cartridge
+      - clone cartridge
+      - branch cartridge
+    agent_affinity: forge-librarian
+
+  cartridge-migrate:
+    domain: forge
+    description: >-
+      Migrate a legacy content cartridge (old src/bundles/cartridge shape)
+      into the unified Cartridge + Chipset model with explicit migrate
+      provenance.
+    triggers:
+      - migrate cartridge
+      - upgrade cartridge
+      - legacy to unified
+    agent_affinity: forge-librarian
+
+  cartridge-distill:
+    domain: forge
+    description: >-
+      Distill raw research sources (notes, papers, transcripts) into a
+      minimal content cartridge skeleton. Stub in v1 — the v2 pipeline uses
+      the research coprocessor.
+    triggers:
+      - distill sources
+      - distill research
+      - sources to cartridge
+    agent_affinity: forge-distiller
+
+agents:
+  topology: router
+  router_agent: forge-architect
+  agents:
+    - name: forge-architect
+      role: >-
+        Opus-class agent that makes the shape decisions — what chipsets a
+        cartridge needs, how to decompose a department, when to fork vs
+        migrate. Routes work to the other forge agents.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+      is_capcom: true
+
+    - name: forge-validator
+      role: >-
+        Opus-class agent that runs validation, interprets failures, and
+        proposes minimal fixes. Owns the `cartridge validate` and
+        `cartridge eval` surfaces.
+      model: opus
+      tools:
+        - Read
+        - Grep
+
+    - name: forge-librarian
+      role: >-
+        Opus-class agent that handles provenance-preserving operations:
+        fork, migrate, and the content-addressed deduplication reports.
+        Owns history and lineage.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Grep
+        - Glob
+
+    - name: forge-distiller
+      role: >-
+        Sonnet agent that runs the stub distiller and prepares input
+        scaffolding for the v2 research-coprocessor pipeline when it lands.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+
+    - name: forge-scribe
+      role: >-
+        Sonnet agent that writes and updates human-readable docs
+        (README.md, CORE-CONCEPTS, migration guides) based on decisions
+        made by the architect and librarian.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+
+teams:
+  forge-design-team:
+    description: >-
+      Design a new cartridge from scratch. Architect decomposes the goal,
+      distiller extracts concepts from any source material, scribe writes
+      the user-facing docs.
+    agents:
+      - forge-architect
+      - forge-distiller
+      - forge-scribe
+    use_when: creating a brand-new cartridge from an idea or research package
+
+  forge-migration-team:
+    description: >-
+      Migrate or fork an existing cartridge. Librarian does the mechanical
+      work, validator runs the gates, scribe updates the migration notes.
+    agents:
+      - forge-librarian
+      - forge-validator
+      - forge-scribe
+    use_when: migrating a legacy cartridge or forking an existing one
+
+  forge-review-team:
+    description: >-
+      Review a proposed cartridge before ship. Architect critiques shape,
+      validator runs gates, librarian checks provenance + dedup.
+    agents:
+      - forge-architect
+      - forge-validator
+      - forge-librarian
+    use_when: pre-ship review of any cartridge
+
+customization:
+  rename_agents: true
+  replace_skills: false
+  override_models: true
