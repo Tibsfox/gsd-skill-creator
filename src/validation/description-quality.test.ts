@@ -251,3 +251,116 @@ describe('DescriptionQualityValidator', () => {
     });
   });
 });
+
+// =============================================================================
+// Phase B PLAN-contract tests (locked field names from PLAN.md must_haves)
+// These test the additive PLAN-specified aliases alongside the existing fields.
+// =============================================================================
+
+import { ANTI_CAPABILITY_PATTERNS, ValidateDescriptionOptions } from './description-quality.js';
+
+describe('ANTI_CAPABILITY_PATTERNS (Phase B)', () => {
+  it('matches "manages" in a description', () => {
+    expect(ANTI_CAPABILITY_PATTERNS.some(p => p.test('Manages workflow state.'))).toBe(true);
+  });
+
+  it('matches "validates" in a description', () => {
+    expect(ANTI_CAPABILITY_PATTERNS.some(p => p.test('Validates GSD artifacts.'))).toBe(true);
+  });
+
+  it('matches "handles" in a description', () => {
+    expect(ANTI_CAPABILITY_PATTERNS.some(p => p.test('Handles auth flows.'))).toBe(true);
+  });
+
+  it('does not match text with no capability verbs', () => {
+    expect(ANTI_CAPABILITY_PATTERNS.some(p => p.test('Use when the user asks for help.'))).toBe(false);
+  });
+});
+
+describe('triggerPurity + antiCapabilityMatches (Phase B PLAN contract)', () => {
+  const v = new DescriptionQualityValidator();
+
+  it('scores low when description starts with capability verb', () => {
+    const r = v.validate('Manages workflow state and orchestrates handoffs.');
+    expect(r.triggerPurity).toBeLessThan(0.5);
+    expect(r.antiCapabilityMatches?.length).toBeGreaterThan(0);
+  });
+
+  it('scores high when description starts with "Use when..."', () => {
+    const r = v.validate('Use when the user asks to clean up legacy code before refactor.');
+    expect(r.triggerPurity).toBeGreaterThanOrEqual(0.5);
+  });
+
+  it('emits triggerPurityWarning when triggerPurity < 0.5', () => {
+    const r = v.validate('Manages and orchestrates and configures.');
+    expect(r.triggerPurityWarning).toBeDefined();
+  });
+
+  it('does not emit triggerPurityWarning when triggerPurity >= 0.5', () => {
+    const r = v.validate('Use when the user asks for help before proceeding.');
+    expect(r.triggerPurityWarning).toBeUndefined();
+  });
+});
+
+describe('word count budget via ValidateDescriptionOptions (Phase B PLAN contract)', () => {
+  const v = new DescriptionQualityValidator();
+  const longDesc = (n: number) => Array(n).fill('word').join(' ');
+
+  it('wordCountViolation set for always-on description > 200 words', () => {
+    const opts: ValidateDescriptionOptions = { descriptionFrequency: 'always' };
+    const r = v.validate(longDesc(201), opts);
+    expect(r.wordCountViolation).toBeDefined();
+    expect(r.wordCountViolation).toContain('200');
+  });
+
+  it('wordCountViolation set for on-demand description > 500 words', () => {
+    const opts: ValidateDescriptionOptions = { descriptionFrequency: 'on-demand' };
+    const r = v.validate(longDesc(501), opts);
+    expect(r.wordCountViolation).toBeDefined();
+    expect(r.wordCountViolation).toContain('500');
+  });
+
+  it('no wordCountViolation when within budget', () => {
+    const opts: ValidateDescriptionOptions = { descriptionFrequency: 'always' };
+    const r = v.validate('Use when the user needs help.', opts);
+    expect(r.wordCountViolation).toBeUndefined();
+  });
+
+  it('no wordCountViolation when description-frequency not specified (defaults on-demand)', () => {
+    const r = v.validate(longDesc(450));
+    expect(r.wordCountViolation).toBeUndefined();
+  });
+});
+
+describe('backward compatibility guard (Phase B)', () => {
+  const v = new DescriptionQualityValidator();
+
+  it('existing qualityScore remains a number 0..1', () => {
+    const r = v.validate('Use when the user asks. Manages workflow.');
+    expect(typeof r.qualityScore).toBe('number');
+    expect(r.qualityScore).toBeGreaterThanOrEqual(0);
+    expect(r.qualityScore).toBeLessThanOrEqual(1);
+  });
+
+  it('existing hasCapabilityStatement still populated', () => {
+    const r = v.validate('Manages workflow.');
+    expect(r.hasCapabilityStatement).toBe(true);
+  });
+
+  it('existing suggestions still generated as array', () => {
+    const r = v.validate('short');
+    expect(Array.isArray(r.suggestions)).toBe(true);
+  });
+
+  it('CAPABILITY_PATTERNS export still present and unchanged', async () => {
+    const mod = await import('./description-quality.js');
+    expect(mod.CAPABILITY_PATTERNS).toBeDefined();
+    expect(mod.CAPABILITY_PATTERNS.length).toBeGreaterThan(0);
+  });
+
+  it('USE_WHEN_PATTERN export still present and unchanged', async () => {
+    const mod = await import('./description-quality.js');
+    expect(mod.USE_WHEN_PATTERN).toBeDefined();
+    expect(mod.USE_WHEN_PATTERN.test('Use when foo')).toBe(true);
+  });
+});
