@@ -1,0 +1,82 @@
+# RCA Department trigger benchmark fixture
+# 30 test cases — meets chipset.yaml: evaluation.benchmark.test_cases_minimum (25)
+# Each case is a natural-language query paired with the skill(s) that should
+# be activated. The test in src/chipset/rca-department.test.ts runs these
+# cases against the chipset's trigger patterns and asserts accuracy meets
+# evaluation.benchmark.trigger_accuracy_threshold (0.85).
+#
+# A case is counted correct when at least one expected skill matches via
+# case-insensitive substring on any of its trigger phrases.
+
+test_cases:
+  # --- rca-classical-methods (5 cases) ---
+  - query: "Run a 5 whys on the checkout outage"
+    expected_skills: [rca-classical-methods]
+  - query: "Build me a fishbone diagram for incident INC-42"
+    expected_skills: [rca-classical-methods]
+  - query: "Compute the fault tree cut sets for the pump failure"
+    expected_skills: [rca-classical-methods]
+  - query: "Run an FMEA on the new deploy pipeline"
+    expected_skills: [rca-classical-methods]
+  - query: "What's the root cause of the database latency spike?"
+    expected_skills: [rca-classical-methods]
+
+  # --- rca-systems-theoretic (5 cases) ---
+  - query: "Run STPA on the automated trading system"
+    expected_skills: [rca-systems-theoretic]
+  - query: "Perform a CAST analysis of the aviation incident"
+    expected_skills: [rca-systems-theoretic]
+  - query: "Build the control structure for this socio-technical system"
+    expected_skills: [rca-systems-theoretic]
+  - query: "Apply Leveson's STAMP to the healthcare incident"
+    expected_skills: [rca-systems-theoretic]
+  - query: "Identify the unsafe control action in the rollback workflow"
+    expected_skills: [rca-systems-theoretic]
+
+  # --- rca-causal-inference (5 cases) ---
+  - query: "Build a causal DAG from the metrics data"
+    expected_skills: [rca-causal-inference]
+  - query: "Compute the counterfactual for last Tuesday's incident"
+    expected_skills: [rca-causal-inference]
+  - query: "Apply Pearl do-calculus to this intervention question"
+    expected_skills: [rca-causal-inference]
+  - query: "Check the backdoor criterion for this causal query"
+    expected_skills: [rca-causal-inference]
+  - query: "Use Granger causality to rank the candidate causes"
+    expected_skills: [rca-causal-inference]
+
+  # --- rca-human-factors (5 cases) ---
+  - query: "Apply HFACS to the pilot error incident"
+    expected_skills: [rca-human-factors]
+  - query: "Run a Swiss cheese analysis of the medication error"
+    expected_skills: [rca-human-factors]
+  - query: "Is this a Just Culture case or a system design failure?"
+    expected_skills: [rca-human-factors]
+  - query: "This looks like operator error — dig deeper into human factors"
+    expected_skills: [rca-human-factors]
+  - query: "Evaluate the crew resource management factors"
+    expected_skills: [rca-human-factors]
+
+  # --- rca-distributed-systems (5 cases) ---
+  - query: "Trace the cascading failure across the microservice mesh"
+    expected_skills: [rca-distributed-systems]
+  - query: "Pull the distributed trace from OpenTelemetry and diagnose"
+    expected_skills: [rca-distributed-systems]
+  - query: "Build the service graph and find the partial failure source"
+    expected_skills: [rca-distributed-systems]
+  - query: "Apply AgentRx to diagnose the AI agent failure"
+    expected_skills: [rca-distributed-systems]
+  - query: "Run distributed RCA using AIOps causal graphs"
+    expected_skills: [rca-distributed-systems]
+
+  # --- blameless-postmortem (5 cases) ---
+  - query: "Draft a blameless postmortem for INC-4827"
+    expected_skills: [blameless-postmortem]
+  - query: "Write up the incident report with the Google SRE postmortem template"
+    expected_skills: [blameless-postmortem]
+  - query: "Extract the lessons learned and action items from the transcript"
+    expected_skills: [blameless-postmortem]
+  - query: "Reconstruct the timeline for the postmortem"
+    expected_skills: [blameless-postmortem]
+  - query: "What went well and what went wrong in the incident response?"
+    expected_skills: [blameless-postmortem]
