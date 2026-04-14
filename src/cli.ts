@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { createRequire } from 'node:module';
 import { resolve as pathResolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { createStores, createApplicationContext } from './index.js';
@@ -2004,7 +2005,9 @@ Pattern Storage:
 `);
 }
 
-main().catch((err) => {
-  p.log.error(err.message);
-  process.exit(1);
-});
+if (process.argv[1] && fileURLToPath(import.meta.url) === pathResolve(process.argv[1])) {
+  main().catch((err) => {
+    p.log.error(err.message);
+    process.exit(1);
+  });
+}
