@@ -158,4 +158,55 @@ describe('Quality Audit', () => {
     expect(detCheck).toBeDefined();
     expect(detCheck!.passed).toBe(true);
   });
+
+  // ---- New checks: external-links, anchor-fragments, relative-links ----
+
+  it('runAudit reports new external-links check (skipped by default)', async () => {
+    const { readFile, walkDir } = createAuditFS(makeValidBuild());
+    const result = await runAudit('build', { readFile, walkDir });
+
+    const extCheck = result.checks.find((c) => c.name === 'external-links');
+    expect(extCheck).toBeDefined();
+    // Default: checkExternal is false → passes (skipped)
+    expect(extCheck!.passed).toBe(true);
+    expect(extCheck!.details).toMatch(/skipped/i);
+  });
+
+  it('runAudit reports anchor-fragments check (passes on valid build)', async () => {
+    const { readFile, walkDir } = createAuditFS(makeValidBuild());
+    const result = await runAudit('build', { readFile, walkDir });
+
+    const anchorCheck = result.checks.find((c) => c.name === 'anchor-fragments');
+    expect(anchorCheck).toBeDefined();
+    // Valid build has no broken anchors
+    expect(anchorCheck!.passed).toBe(true);
+  });
+
+  it('runAudit reports relative-links check (passes on valid build)', async () => {
+    const { readFile, walkDir } = createAuditFS(makeValidBuild());
+    const result = await runAudit('build', { readFile, walkDir });
+
+    const relCheck = result.checks.find((c) => c.name === 'relative-links');
+    expect(relCheck).toBeDefined();
+    expect(relCheck!.passed).toBe(true);
+  });
+
+  it('runAudit existing link-integrity check still passes / fails as before (regression guard)', async () => {
+    // Passing case
+    const { readFile: rf1, walkDir: wf1 } = createAuditFS(makeValidBuild());
+    const r1 = await runAudit('build', { readFile: rf1, walkDir: wf1 });
+    const liPass = r1.checks.find((c) => c.name === 'link-integrity');
+    expect(liPass).toBeDefined();
+    expect(liPass!.passed).toBe(true);
+
+    // Failing case
+    const files = makeValidBuild();
+    files['build/broken/index.html'] = `<!DOCTYPE html><html><body><a href="/nonexistent/">Broken</a></body></html>`;
+    const { readFile: rf2, walkDir: wf2 } = createAuditFS(files);
+    const r2 = await runAudit('build', { readFile: rf2, walkDir: wf2 });
+    const liFail = r2.checks.find((c) => c.name === 'link-integrity');
+    expect(liFail).toBeDefined();
+    expect(liFail!.passed).toBe(false);
+    expect(liFail!.details).toContain('nonexistent');
+  });
 });
