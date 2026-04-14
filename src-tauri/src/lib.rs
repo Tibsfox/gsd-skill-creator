@@ -8,9 +8,11 @@ pub mod api;
 mod state;
 mod tmux;
 mod mcp_host;
+pub mod memory_arena;
 pub mod staging;
 pub mod ipc;
 pub mod magic;
+pub mod pcg;
 pub mod services;
 mod watcher;
 
@@ -32,6 +34,9 @@ pub fn run() {
             app.manage(tokio::sync::Mutex::new(security::SecurityState::new()));
             app.manage(tokio::sync::Mutex::new(state::ApiClientState::default()));
             app.manage(tokio::sync::Mutex::new(services::launcher::ServiceLauncher::new_without_emitter()));
+            app.manage(commands::memory_arena::ArenaState::default());
+            app.manage(commands::memory_arena::ArenaSetState::default());
+            app.manage(commands::memory_arena::CgroupState::default());
 
             // v1.49.7 (PR #24 @PatrickRobotham): gate tmux session auto-detection
             // and monitor on tmux availability. Without tmux, these would poll a
@@ -138,6 +143,25 @@ pub fn run() {
             commands::staging::staging_trigger_intake,
             commands::staging::staging_get_debrief,
             commands::staging::staging_list_quarantine,
+            commands::memory_arena::arena_init,
+            commands::memory_arena::arena_stats,
+            commands::memory_arena::arena_alloc,
+            commands::memory_arena::arena_get,
+            commands::memory_arena::arena_free,
+            commands::memory_arena::arena_touch,
+            commands::memory_arena::arena_checkpoint,
+            commands::memory_arena::arena_list_ids,
+            commands::memory_arena::arena_set_init,
+            commands::memory_arena::arena_set_alloc,
+            commands::memory_arena::arena_set_get_hot,
+            commands::memory_arena::arena_set_sweep,
+            commands::memory_arena::arena_set_gc,
+            commands::memory_arena::arena_set_flush,
+            commands::memory_arena::arena_set_free,
+            commands::memory_arena::arena_set_list_ids,
+            commands::memory_arena::cgroup_init,
+            commands::memory_arena::cgroup_state,
+            commands::memory_arena::cgroup_grow,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

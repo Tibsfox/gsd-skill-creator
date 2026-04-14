@@ -1,0 +1,259 @@
+# Languages Department Chipset Configuration
+# 20th instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Language learning as meta-skill — applicable to any
+# target language.
+
+name: languages-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated languages department providing domain-routed
+  expertise through seven named agents (Saussure, Chomsky-L, Krashen,
+  Baker, Crystal, Lado, Bruner-L), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college languages department concept graph.
+  Treats language learning as a meta-skill applicable to any target
+  language rather than teaching any single language.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  phonetics-phonology:
+    domain: languages
+    description: "Sound systems, IPA, articulatory/acoustic phonetics, phonological rules, suprasegmentals"
+    triggers:
+      - "pronunciation"
+      - "phoneme"
+      - "IPA"
+      - "accent"
+      - "sound system"
+      - "tone"
+      - "intonation"
+      - "ear training"
+    agent_affinity: [crystal, chomsky-l]
+
+  grammar-syntax:
+    domain: languages
+    description: "Word order typology, morphology, agreement, phrase structure, cross-linguistic grammar"
+    triggers:
+      - "word order"
+      - "grammar"
+      - "syntax"
+      - "tense"
+      - "case"
+      - "agreement"
+      - "conjugation"
+      - "declension"
+    agent_affinity: [chomsky-l, krashen]
+
+  vocabulary-acquisition:
+    domain: languages
+    description: "Frequency-based learning, spaced repetition, cognates, reading progression"
+    triggers:
+      - "vocabulary"
+      - "flashcard"
+      - "spaced repetition"
+      - "word list"
+      - "cognate"
+      - "reading"
+      - "frequency"
+    agent_affinity: [krashen, bruner-l]
+
+  pragmatics-communication:
+    domain: languages
+    description: "Speech acts, politeness, register, conversation strategies, cross-cultural communication"
+    triggers:
+      - "polite"
+      - "formal"
+      - "informal"
+      - "conversation"
+      - "register"
+      - "speech act"
+      - "communication"
+      - "turn-taking"
+    agent_affinity: [baker, bruner-l]
+
+  translation-interpretation:
+    domain: languages
+    description: "Translation strategies, equivalence theory, interpretation modes, cultural adaptation"
+    triggers:
+      - "translate"
+      - "interpret"
+      - "translation"
+      - "equivalent"
+      - "how do you say"
+      - "back-translation"
+      - "localization"
+    agent_affinity: [saussure, lado]
+
+  language-learning-strategies:
+    domain: languages
+    description: "Meta-cognitive strategies, study planning, motivation, immersion design, plateau diagnosis"
+    triggers:
+      - "how to learn"
+      - "study plan"
+      - "motivation"
+      - "plateau"
+      - "strategy"
+      - "immersion"
+      - "stuck"
+      - "not improving"
+    agent_affinity: [krashen, bruner-l]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Saussure as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: saussure
+
+  agents:
+    - name: saussure
+      role: "department chair — classification, routing, synthesis, structural equivalence"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: chomsky-l
+      role: "syntax specialist — universal grammar, generative syntax, typological comparison"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: krashen
+      role: "acquisition specialist — input hypothesis, comprehensible input, affective filter"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: baker
+      role: "sociolinguist — bilingualism, code-switching, language policy, identity"
+      model: opus
+      tools: [Read, Grep, Bash, Write]
+
+    - name: crystal
+      role: "phonetician & encyclopedist — sound systems, language families, diversity, change"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: lado
+      role: "contrastive analyst — L1-L2 comparison, error diagnosis, language testing"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: bruner-l
+      role: "pedagogy guide — scaffolding, narrative teaching, learning pathways"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  language-analysis-team:
+    description: "Full department for complex multi-domain linguistics problems"
+    agents: [saussure, chomsky-l, krashen, baker, crystal, lado, bruner-l]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  immersion-team:
+    description: "Focused acquisition and immersion program design"
+    agents: [krashen, baker, crystal, bruner-l]
+    use_when: "learning plan design, immersion programs, heritage language, plateau diagnosis"
+
+  translation-team:
+    description: "Translation evaluation, contrastive analysis, cross-cultural communication"
+    agents: [lado, saussure, baker, bruner-l]
+    use_when: "translation tasks, interpreter training, cross-linguistic transfer"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 languages Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college languages department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (saussure) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - phonetics
+      - grammar
+      - vocabulary
+      - pragmatics
+      - translation
+      - strategy
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "languages-department"
+  record_types:
+    - name: LinguisticAnalysis
+      description: "Structural, contrastive, or sociolinguistic analysis of language phenomena"
+
+    - name: LanguageProfile
+      description: "Learner proficiency assessment, acquisition stage, input recommendations"
+
+    - name: TranslationRecord
+      description: "Source-target mapping with strategy, equivalence judgment, quality assessment"
+
+    - name: LanguageExplanation
+      description: "Teaching artifact at a specified level with analogies and scaffolding notes"
+
+    - name: LanguageSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "languages"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Sound Systems"
+    - "Grammar Patterns"
+    - "Vocabulary & Reading"
+    - "Speaking & Listening"
+    - "Language & Culture"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

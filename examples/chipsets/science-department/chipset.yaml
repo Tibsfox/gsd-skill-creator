@@ -1,0 +1,250 @@
+# Science Department Chipset Configuration
+# 16th department in the college structure
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Science as a meta-discipline: how to DO science,
+# not any specific science.
+
+name: science-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated science department providing domain-routed expertise
+  in scientific inquiry through seven named agents (Darwin, McClintock,
+  Sagan, Goodall, Feynman-S, Wu, Pestalozzi), six knowledge skills,
+  and three pre-composed teams. Covers the scientific method, experimental
+  design, data analysis, earth and life systems as inquiry contexts,
+  science communication, and the history and philosophy of science.
+  Persists work via Grove records and integrates with the college
+  science department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  scientific-method:
+    domain: science
+    description: "The scientific method as epistemological framework — observation, hypothesis, testing, analysis, conclusion"
+    triggers:
+      - "scientific method"
+      - "how do scientists"
+      - "hypothesis"
+      - "falsifiable"
+      - "controlled experiment"
+      - "evidence-based"
+    agent_affinity: feynman-s
+
+  experimental-design-sci:
+    domain: science
+    description: "Experimental design — variables, controls, randomization, blinding, sample size, replication"
+    triggers:
+      - "design an experiment"
+      - "independent variable"
+      - "control group"
+      - "sample size"
+      - "randomize"
+      - "confounding variable"
+    agent_affinity: [mcclintock, wu]
+
+  data-analysis-sci:
+    domain: science
+    description: "Data collection, analysis, and interpretation — measurement, statistics, graphing, error analysis"
+    triggers:
+      - "analyze data"
+      - "standard deviation"
+      - "significant figures"
+      - "error analysis"
+      - "p-value"
+      - "graph this data"
+    agent_affinity: [wu, mcclintock]
+
+  earth-life-systems:
+    domain: science
+    description: "Earth and life systems as inquiry contexts — ecosystems, biodiversity, climate, geology"
+    triggers:
+      - "ecosystem"
+      - "biodiversity"
+      - "climate"
+      - "geological"
+      - "field study"
+      - "ecology"
+    agent_affinity: [goodall, mcclintock]
+
+  science-communication:
+    domain: science
+    description: "Science communication — CER framework, lab reports, peer review, audience adaptation, source evaluation"
+    triggers:
+      - "explain to"
+      - "science communication"
+      - "lab report"
+      - "peer review"
+      - "claims evidence reasoning"
+      - "baloney detection"
+    agent_affinity: [sagan, pestalozzi]
+
+  history-philosophy-science:
+    domain: science
+    description: "History and philosophy of science — paradigm shifts, landmark discoveries, nature of science, science and society"
+    triggers:
+      - "paradigm shift"
+      - "nature of science"
+      - "who discovered"
+      - "history of science"
+      - "theory versus law"
+      - "pseudoscience"
+    agent_affinity: [feynman-s, sagan]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Darwin as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: darwin
+
+  agents:
+    - name: darwin
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: mcclintock
+      role: "experimental design — controlled experiments, close observation, pattern recognition"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: sagan
+      role: "communication — science popularization, narrative, public understanding"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: goodall
+      role: "field research — observation protocols, longitudinal studies, ecological systems"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: feynman-s
+      role: "methodology — epistemology, methodological evaluation, demarcation"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: wu
+      role: "precision and rigor — measurement protocols, error analysis, quantitative standards"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: pestalozzi
+      role: "pedagogy — hands-on activities, head-heart-hand framework, learning pathways"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  science-investigation-team:
+    description: "Full department for complex multi-domain scientific inquiry"
+    agents: [darwin, mcclintock, sagan, goodall, feynman-s, wu, pestalozzi]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  lab-design-team:
+    description: "Focused experimental design and measurement specification"
+    agents: [mcclintock, wu, darwin, pestalozzi]
+    use_when: "experimental design, protocol review, measurement planning"
+
+  communication-team:
+    description: "Science communication, public understanding, and misinformation response"
+    agents: [sagan, goodall, feynman-s, pestalozzi]
+    use_when: "public communication, educational narrative, misinformation defense"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 science Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college science department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (darwin) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - methodology
+      - experimental-design
+      - data-analysis
+      - earth-life-systems
+      - communication
+      - history-philosophy
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "science-department"
+  record_types:
+    - name: ScientificInvestigation
+      description: "Complete investigation record with research question, methodology, findings, and limitations"
+
+    - name: ExperimentalDesign
+      description: "Controlled experiment protocol with variables, controls, measurement specs, and confound analysis"
+
+    - name: ScienceReport
+      description: "Evaluation, critique, or assessment record with findings and recommendations"
+
+    - name: ScienceExplanation
+      description: "Teaching artifact or communication piece at a specified audience level"
+
+    - name: ScienceSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "science"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Observation & Inquiry"
+    - "Hypothesis & Experimental Design"
+    - "Data Collection & Analysis"
+    - "Scientific Communication & Argumentation"
+    - "History & Nature of Science"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

@@ -1,0 +1,66 @@
+{
+  "projectCode": "SYA",
+  "packTitle": "Systems Administration — History, Fundamentals, Automation, AI-Driven Operations, and the Future of Infrastructure Management",
+  "modules": [
+    {
+      "moduleId": "history-evolution",
+      "title": "History & Evolution: Mainframe Era 1950s IBM Time-Sharing, Unix Revolution 1970s Bell Labs Thompson Ritchie, Client-Server 1980s, Internet Era 1990s Apache LAMP Stack, Cloud Computing 2006 AWS EC2, Containers Docker 2013 Kubernetes 2015 Google, Serverless Lambda 2014, SAGE USENIX LISA Conference LOPSA Professional Guild Dissolved 2025, Tom Limoncelli Practice of System Administration"
+    },
+    {
+      "moduleId": "linux-fundamentals",
+      "title": "Linux Fundamentals: Kernel Architecture Monolithic Modular, Boot Process BIOS UEFI GRUB systemd, Package Management apt yum dnf pacman, Filesystem Hierarchy Standard FHS /etc /var /usr /home, User Management PAM NSS LDAP, Process Management ps top htop kill nice, Shell Scripting Bash POSIX, Permissions chmod chown ACLs SELinux AppArmor, Cron Systemd Timers Job Scheduling"
+    },
+    {
+      "moduleId": "networking",
+      "title": "Networking: OSI 7-Layer Model TCP/IP Stack, DNS BIND Unbound Resolution Recursion, DHCP Lease Management, HTTP HTTPS TLS Certificate Management Let's Encrypt, SSH Key Management Tunneling ProxyJump, Firewalls iptables nftables UFW, Load Balancing HAProxy Nginx Reverse Proxy, VPN WireGuard OpenVPN IPsec, Network Monitoring tcpdump Wireshark netstat ss, BGP Routing OSPF VLAN Subnetting CIDR"
+    },
+    {
+      "moduleId": "storage-filesystems",
+      "title": "Storage & Filesystems: Block Storage SAN iSCSI FC, File Storage NFS CIFS SMB, Object Storage S3 MinIO, Filesystems ext4 XFS Btrfs ZFS, RAID Levels 0 1 5 6 10, LVM Logical Volume Management Thin Provisioning Snapshots, Backup Strategies 3-2-1 Rule Incremental Differential, Disaster Recovery RTO RPO, Database Administration PostgreSQL MySQL Redis, Data Lifecycle Management Retention Archival"
+    },
+    {
+      "moduleId": "monitoring-observability",
+      "title": "Monitoring & Observability: Three Pillars Logs Metrics Traces, Prometheus Grafana Stack, ELK Elasticsearch Logstash Kibana, OpenTelemetry OTLP Instrumentation, Alerting PagerDuty OpsGenie On-Call Rotation, SLOs SLIs SLAs Error Budgets, Capacity Planning Forecasting, Performance Tuning Profiling, Health Checks Synthetic Monitoring, SNMP Collectd Node Exporter"
+    },
+    {
+      "moduleId": "security-hardening",
+      "title": "Security & Hardening: CIS Benchmarks Center Internet Security, Patch Management Vulnerability Scanning, Intrusion Detection IDS IPS Suricata OSSEC, Log Analysis SIEM Correlation, SSH Hardening Key-Only Auth Fail2ban, Firewall Rules Least Privilege, SELinux AppArmor Mandatory Access Control, Certificate Management PKI TLS, Secrets Management Vault HashiCorp, Compliance NIST 800-53 SOC2 PCI-DSS"
+    },
+    {
+      "moduleId": "automation-iac",
+      "title": "Automation & Infrastructure as Code: Configuration Management Ansible Puppet Chef SaltStack, Terraform Pulumi CloudFormation OpenTofu, GitOps ArgoCD Flux Reconciliation, CI/CD Pipeline Integration GitHub Actions GitLab CI Jenkins, Immutable Infrastructure Packer AMI Golden Images, Infrastructure Drift Detection NSync Reconciliation, InfraFix Technology-Agnostic IaC Repair, IaCGen Deployability-Centric Generation 153 Scenarios"
+    },
+    {
+      "moduleId": "cloud-containers",
+      "title": "Cloud & Container Orchestration: AWS Azure GCP Multi-Cloud Strategy, Kubernetes Architecture Control Plane etcd API Server Scheduler, Pod Lifecycle Deployments StatefulSets DaemonSets, Service Mesh Istio Linkerd Envoy, Helm Charts Package Management, Container Runtime containerd CRI-O, Docker Build Multi-Stage Security Scanning, Registry Management Harbor ECR, Namespace Resource Quotas RBAC"
+    },
+    {
+      "moduleId": "aiops-future",
+      "title": "AIOps & The Future: Self-Healing Infrastructure Autonomous Remediation, LLM-Driven Operations Copilots DevOps Agents, Agentic SRE Closed-Loop Pipeline Detect Diagnose Remediate, AIOps 1.0 Pattern Recognition to AIOps 2.0 Agentic Execution, Telemetry Manipulation Attacks AI Oops Security Risks, Predictive Operations eBPF-Based Telemetry Automatic Collection, Platform Engineering Internal Developer Platforms Golden Paths, FinOps Cloud Cost Optimization Resource Rightsizing"
+    },
+    {
+      "moduleId": "professional-practice",
+      "title": "Professional Practice: On-Call Best Practices Escalation Runbooks, Change Management ITIL CAB Process, Documentation Knowledge Base Wiki, Incident Response Severity Classification War Room, Postmortem Culture Blameless Google SRE, Toil Elimination Automation ROI, Communication Skills Stakeholder Management, Ethics Code LOPSA SAGE, Career Paths Linux Admin to DevOps to SRE to Platform Engineer, Mentorship Teaching the Next Generation"
+    }
+  ],
+  "bibliography": [
+    "Limoncelli, T., Hogan, C., Chalup, S. — The Practice of System and Network Administration (3rd ed., 2016)",
+    "Limoncelli, T., Chalup, S., Hogan, C. — The Practice of Cloud System Administration (2014)",
+    "Google SRE Book — Site Reliability Engineering (O'Reilly, 2016)",
+    "Beyer, B., Murphy, N., Rensin, D., Kawahara, K., Thorne, S. — The Site Reliability Workbook (2018)",
+    "Nemeth, E., Snyder, G., Hein, T., Whaley, B., Mackin, D. — UNIX and Linux System Administration Handbook (5th ed., 2017)",
+    "arXiv:2510.20211 — NSync: Automated IaC Reconciliation with AI Agents (2025)",
+    "arXiv:2503.17220 — InfraFix: Technology-Agnostic IaC Repair (2025)",
+    "arXiv:2602.09937 — Why Do AI Agents Fail at Cloud RCA (2026)",
+    "arXiv:2501.12461 — Empowering AIOps: LLMs for IT Operations (2025)",
+    "Zenodo:19234454 — Self-Healing Infrastructure: Autonomous LLM Agents for IaC (2026)",
+    "USENIX LISA Conference Proceedings (1986-present)",
+    "LOPSA (League of Professional System Administrators, 2004-2025, dissolved)"
+  ],
+  "safety_rules": [
+    "Security configurations must reference CIS benchmarks or equivalent standards",
+    "Do not publish working credentials, keys, or tokens in examples",
+    "Infrastructure examples should use non-production IP ranges (RFC 5737: 192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24)",
+    "Note when advice is platform-specific vs. general"
+  ]
+}

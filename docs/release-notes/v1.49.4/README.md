@@ -27,7 +27,7 @@ Four new top-level directories with self-documenting README.md files:
     { "name": "my-app", "path": "/home/user/code/my-app" }
   ],
   "upstream_forks": {
-    "get-shit-done": "/path/to/projectGSD/dev-tools/get-shit-done"
+    "get-shit-done": ".claude/get-shit-done"
   },
   "www": { "build_dir": "site", "tools_dir": "tools" }
 }

@@ -1,0 +1,254 @@
+# Astronomy Department Chipset Configuration
+# Batch 9 instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template and remapped
+# to observational astronomy, stellar physics, solar-system dynamics,
+# and cosmology.
+
+name: astronomy-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated astronomy department providing wing-routed
+  expertise through seven named agents (Hubble, Payne-Gaposchkin,
+  Chandrasekhar-astro, Caroline Herschel, Rubin, Burbidge, Tyson),
+  six knowledge skills, and three pre-composed teams. Persists
+  work via Grove records and integrates with the college astronomy
+  department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  celestial-coordinates:
+    domain: astronomy
+    description: "Celestial coordinate systems and sky positioning — horizon, equatorial, ecliptic, galactic, plus transforms, epoch, and planisphere use"
+    triggers:
+      - "right ascension"
+      - "declination"
+      - "altitude"
+      - "azimuth"
+      - "planisphere"
+      - "precession"
+      - "coordinate transform"
+    agent_affinity: [caroline-herschel, hubble]
+
+  stellar-spectroscopy:
+    domain: astronomy
+    description: "Stellar spectra — OBAFGKM classification, MK luminosity, line identification, Doppler shift, curve-of-growth abundance analysis"
+    triggers:
+      - "spectrum"
+      - "spectral type"
+      - "OBAFGKM"
+      - "absorption line"
+      - "redshift"
+      - "radial velocity"
+      - "abundance"
+    agent_affinity: [payne-gaposchkin, burbidge]
+
+  orbital-mechanics:
+    domain: astronomy
+    description: "Kepler's laws, vis-viva, orbital elements, transfer orbits, gravity assists, binary dynamics, ephemeris computation"
+    triggers:
+      - "orbit"
+      - "Kepler"
+      - "semi-major axis"
+      - "eccentricity"
+      - "Hohmann"
+      - "orbital period"
+      - "two-body"
+    agent_affinity: [chandrasekhar-astro, hubble]
+
+  distance-ladder:
+    domain: astronomy
+    description: "Cosmic distance ladder — parallax, Cepheids, RR Lyrae, Type Ia SNe, redshift-distance, Hubble tension"
+    triggers:
+      - "parallax"
+      - "Cepheid"
+      - "distance ladder"
+      - "period-luminosity"
+      - "Hubble constant"
+      - "standard candle"
+    agent_affinity: [hubble, rubin]
+
+  cosmological-observation:
+    domain: astronomy
+    description: "Observational cosmology — Hubble law, CMB, BBN, dark matter, dark energy, Lambda-CDM parameters, current tensions"
+    triggers:
+      - "Big Bang"
+      - "CMB"
+      - "cosmic microwave background"
+      - "dark matter"
+      - "dark energy"
+      - "Lambda-CDM"
+      - "cosmology"
+    agent_affinity: [hubble, rubin]
+
+  naked-eye-observing:
+    domain: astronomy
+    description: "Naked-eye and binocular observing — dark adaptation, constellation recognition, star hopping, meteors, Moon phases, practice discipline"
+    triggers:
+      - "stargazing"
+      - "constellation"
+      - "meteor shower"
+      - "Moon phase"
+      - "naked eye"
+      - "dark sky"
+      - "binocular"
+    agent_affinity: [caroline-herschel, tyson]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Hubble as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: hubble
+
+  agents:
+    - name: hubble
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: payne-gaposchkin
+      role: "spectroscopy — classification, composition, Saha-Boltzmann analysis"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: chandrasekhar-astro
+      role: "structure and dynamics — stellar models, evolution, orbital mechanics"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: caroline-herschel
+      role: "observation — planning, identification, cataloging"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: rubin
+      role: "galactic dynamics and dark matter — rotation curves, mass profiles"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: burbidge
+      role: "nucleosynthesis — B^2FH processes, chemical evolution"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: tyson
+      role: "pedagogy — level-appropriate explanation, public astronomy"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  astronomy-analysis-team:
+    description: "Full department for complex multi-wing astronomy problems"
+    agents: [hubble, payne-gaposchkin, chandrasekhar-astro, caroline-herschel, rubin, burbidge, tyson]
+    use_when: "multi-wing, research-level, or full-analysis requests"
+
+  astronomy-workshop-team:
+    description: "Focused stellar-physics deep-dive — classification, structure, nucleosynthesis, explanation"
+    agents: [payne-gaposchkin, chandrasekhar-astro, burbidge, tyson]
+    use_when: "stellar-physics problems where the answer is in the star itself"
+
+  astronomy-practice-team:
+    description: "Observation-to-analysis practice pipeline"
+    agents: [caroline-herschel, chandrasekhar-astro, payne-gaposchkin, tyson]
+    use_when: "guided observing sessions, citizen science, classroom labs, iterative skill building"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 astronomy Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college astronomy department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (hubble) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - observing
+      - earth-moon-sun
+      - stellar
+      - solar-system
+      - cosmology
+      - spectroscopy
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "astronomy-department"
+  record_types:
+    - name: AstronomyAnalysis
+      description: "Quantitative analysis — classification, abundance, rotation curve, stellar model, orbital calculation"
+
+    - name: AstronomyObservation
+      description: "Observing session record — plan, identification, visual sighting, catalog entry"
+
+    - name: AstronomyReview
+      description: "Critical review of a claim, result, or other work product with verdict and supporting evidence"
+
+    - name: AstronomyExplanation
+      description: "Teaching artifact at a specified level with analogies and next steps"
+
+    - name: AstronomySession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "astronomy"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Observing the Sky"
+    - "Earth-Moon-Sun System"
+    - "Stellar Physics"
+    - "Solar System"
+    - "Cosmology"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

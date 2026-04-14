@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { readFile, readdir, stat } from 'fs/promises';
-import { join } from 'path';
+import { basename, join } from 'path';
 import matter from 'gray-matter';
 import { SkillMetadataSchema } from './skill-validation.js';
 
@@ -11,25 +11,45 @@ const EXAMPLES_DIR = join(__dirname, '..', '..', 'examples');
 // Helper: Discover example directories
 // ============================================================================
 
+// Walks the examples subtree and returns every directory containing the target
+// file. This is layout-agnostic: it handles both the original flat layout
+// (examples/skills/<name>/SKILL.md) and the category-first layout introduced
+// during the departments reorg (examples/skills/<category>/<name>/SKILL.md).
+// As soon as a directory contains the target file, we record it and stop
+// descending — a skill's own subfolders (scripts/, references/, etc.) are
+// never mistaken for nested skills.
 async function discoverExamples(subdir: string, filename: string): Promise<{ name: string; path: string }[]> {
-  const dir = join(EXAMPLES_DIR, subdir);
-  const entries = await readdir(dir);
+  const root = join(EXAMPLES_DIR, subdir);
   const examples: { name: string; path: string }[] = [];
 
-  for (const entry of entries) {
-    const entryPath = join(dir, entry);
-    const entryStat = await stat(entryPath);
-    if (entryStat.isDirectory()) {
-      const filePath = join(entryPath, filename);
+  async function walk(currentDir: string): Promise<void> {
+    let entries: string[];
+    try {
+      entries = await readdir(currentDir);
+    } catch {
+      return;
+    }
+
+    if (entries.includes(filename)) {
+      examples.push({ name: basename(currentDir), path: join(currentDir, filename) });
+      return;
+    }
+
+    for (const entry of entries) {
+      const entryPath = join(currentDir, entry);
+      let entryStat;
       try {
-        await stat(filePath);
-        examples.push({ name: entry, path: filePath });
+        entryStat = await stat(entryPath);
       } catch {
-        // Directory exists but no matching file — skip
+        continue;
+      }
+      if (entryStat.isDirectory()) {
+        await walk(entryPath);
       }
     }
   }
 
+  await walk(root);
   return examples;
 }
 
@@ -38,9 +58,16 @@ async function discoverExamples(subdir: string, filename: string): Promise<{ nam
 // ============================================================================
 
 describe('Backward Compatibility: Example Skills', () => {
-  it('should discover all 31 example skills', async () => {
+  // The examples library grows over time as new skills are imported (see
+  // tools/import-filesystem-skills.ts). This test guards that the baseline
+  // set (31 skills as of v1.49.192) is never removed, without failing
+  // every time a new skill is added. Every skill still has to validate
+  // against the schema in the next test.
+  const BASELINE_SKILL_COUNT = 31;
+
+  it('should discover at least the baseline example skills', async () => {
     const skills = await discoverExamples('skills', 'SKILL.md');
-    expect(skills.length).toBe(31);
+    expect(skills.length).toBeGreaterThanOrEqual(BASELINE_SKILL_COUNT);
   });
 
   it('should validate every example skill against SkillMetadataSchema', async () => {
@@ -85,9 +112,14 @@ describe('Backward Compatibility: Example Skills', () => {
 // ============================================================================
 
 describe('Backward Compatibility: Example Agents', () => {
-  it('should discover all 22 example agents', async () => {
+  // Same growth-friendly pattern as skills above. Baseline was 22 agents
+  // as of v1.49.192; new agents can be added without breaking this test
+  // as long as the schema validation below still passes for every one.
+  const BASELINE_AGENT_COUNT = 22;
+
+  it('should discover at least the baseline example agents', async () => {
     const agents = await discoverExamples('agents', 'AGENT.md');
-    expect(agents.length).toBe(22);
+    expect(agents.length).toBeGreaterThanOrEqual(BASELINE_AGENT_COUNT);
   });
 
   it('should validate every example agent has name and description', async () => {

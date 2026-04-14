@@ -1,0 +1,269 @@
+# Digital Literacy Department Chipset Configuration
+# 24th department in the college structure
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template pattern.
+
+name: digital-literacy-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated digital literacy department providing practical,
+  evidence-based expertise through seven named agents (Rheingold,
+  boyd, Palfrey, Noble, Jenkins, Ito, Kafai), six knowledge skills,
+  and three pre-composed teams. Persists work via Grove records and
+  integrates with the college digital-literacy department concept graph.
+
+# ==========================================================================
+# Skills -- 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  information-evaluation:
+    domain: digital-literacy
+    description: "SIFT, lateral reading, reverse image search, primary source verification"
+    triggers:
+      - "is this true"
+      - "is this credible"
+      - "fact check"
+      - "source credibility"
+      - "misinformation"
+      - "SIFT"
+      - "lateral reading"
+      - "fake news"
+      - "reverse image"
+    agent_affinity: [palfrey, rheingold]
+
+  digital-citizenship:
+    domain: digital-literacy
+    description: "Digital footprint, online etiquette, collaboration, attribution, cyberbullying response"
+    triggers:
+      - "digital footprint"
+      - "online etiquette"
+      - "sharing responsibly"
+      - "cyberbullying"
+      - "attribution"
+      - "copyright"
+      - "creative commons"
+      - "digital citizenship"
+    agent_affinity: [boyd, jenkins, rheingold]
+
+  computational-literacy:
+    domain: digital-literacy
+    description: "Hardware, operating systems, networks, information representation -- how systems work"
+    triggers:
+      - "how does the internet work"
+      - "CPU"
+      - "RAM"
+      - "operating system"
+      - "DNS"
+      - "HTTPS"
+      - "binary"
+      - "file format"
+      - "network"
+    agent_affinity: [ito, rheingold]
+
+  data-privacy:
+    domain: digital-literacy
+    description: "Passwords, MFA, data collection, cookies, privacy laws, breach response"
+    triggers:
+      - "password"
+      - "two-factor"
+      - "MFA"
+      - "privacy settings"
+      - "data collection"
+      - "tracking"
+      - "cookies"
+      - "GDPR"
+      - "data breach"
+    agent_affinity: [palfrey, boyd]
+
+  media-creation:
+    domain: digital-literacy
+    description: "Writing, images, video, audio, presentations, accessibility, remix, attribution"
+    triggers:
+      - "create media"
+      - "make a video"
+      - "podcast"
+      - "presentation design"
+      - "accessibility"
+      - "alt text"
+      - "remix"
+      - "fair use"
+      - "copyright-safe"
+    agent_affinity: [jenkins, kafai]
+
+  algorithmic-awareness:
+    domain: digital-literacy
+    description: "Recommendation systems, algorithmic bias, filter bubbles, AI limitations, opacity"
+    triggers:
+      - "algorithm"
+      - "recommendation"
+      - "filter bubble"
+      - "algorithmic bias"
+      - "AI hallucination"
+      - "why did I see this"
+      - "personalization"
+      - "search ranking"
+    agent_affinity: [noble, palfrey]
+
+# ==========================================================================
+# Agents -- 7 agents in router topology (Rheingold as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: rheingold
+
+  agents:
+    - name: rheingold
+      role: "department chair -- classification, routing, synthesis"
+      historical: "Howard Rheingold (b. 1947), Net Smart"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: boyd
+      role: "social context specialist -- networked publics, contextual integrity, youth practice"
+      historical: "danah boyd (b. 1977), It's Complicated"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: palfrey
+      role: "institutional specialist -- law, policy, source credibility, institutional analysis"
+      historical: "John Palfrey (b. 1972), Born Digital"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: noble
+      role: "algorithmic bias specialist -- power asymmetry, documented cases"
+      historical: "Safiya Umoja Noble (b. 1970), Algorithms of Oppression"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: jenkins
+      role: "participatory culture specialist -- remix, fandom, collective intelligence"
+      historical: "Henry Jenkins (b. 1958), Convergence Culture"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: ito
+      role: "connected learning specialist -- HOMAGO, interest-driven practice"
+      historical: "Mizuko Ito (b. 1968), Digital Youth Project"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: kafai
+      role: "pedagogy specialist -- constructionist learning design"
+      historical: "Yasmin Kafai, Connected Code"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams -- 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  digital-literacy-analysis-team:
+    description: "Full department for multi-perspective analysis"
+    agents: [rheingold, boyd, palfrey, noble, jenkins, ito, kafai]
+    use_when: "multi-domain, systemic, or educator-level requests"
+
+  digital-literacy-workshop-team:
+    description: "Focused evaluation of a specific source or artifact"
+    agents: [rheingold, palfrey, noble, boyd, kafai]
+    use_when: "single-artifact evaluation requests"
+
+  digital-literacy-practice-team:
+    description: "Pipeline for turning concepts into repeatable practice"
+    agents: [rheingold, ito, jenkins, kafai]
+    use_when: "practice plan and fluency development requests"
+
+# ==========================================================================
+# Evaluation Gates -- pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 digital-literacy Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college digital-literacy department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (rheingold) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - information
+      - citizenship
+      - systems
+      - privacy
+      - media
+      - algorithmic
+
+# ==========================================================================
+# Grove Integration -- namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "digital-literacy-department"
+  record_types:
+    - name: DigitalLiteracyAnalysis
+      description: "Framework-driven analysis of a source, practice, or algorithmic system"
+
+    - name: DigitalLiteracyReview
+      description: "Multi-framework evaluation of a specific artifact or claim"
+
+    - name: DigitalLiteracyExplanation
+      description: "Level-appropriate explanation or practice plan"
+
+    - name: DigitalLiteracyArtifact
+      description: "Learner-produced work (media, analysis, activity output)"
+
+    - name: DigitalLiteracySession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration -- department binding
+# ==========================================================================
+
+college:
+  department: "digital-literacy"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Digital Foundations"
+    - "Information Literacy"
+    - "Digital Communication"
+    - "Online Safety"
+    - "Algorithmic Awareness"
+
+# ==========================================================================
+# Customization -- forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

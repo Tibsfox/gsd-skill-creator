@@ -1,0 +1,258 @@
+# Geography Department Chipset Configuration
+# 15th department in the college structure
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Follows the department template pattern established by
+# the math-department chipset.
+
+name: geography-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated geography department providing domain-routed expertise
+  through seven named agents (Humboldt, Reclus, Massey, Sauer, Said-g,
+  Tobler, Carson), six knowledge skills, and three pre-composed teams.
+  Persists work via Grove records and integrates with the college
+  geography department concept graph.
+
+# ==========================================================================
+# Skills -- 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  physical-geography:
+    domain: geography
+    description: "Earth systems science -- tectonics, landforms, climate, hydrology, biogeography"
+    triggers:
+      - "plate tectonics"
+      - "landform"
+      - "erosion"
+      - "biome"
+      - "climate zone"
+      - "ocean current"
+      - "glacier"
+      - "volcano"
+      - "earthquake"
+    agent_affinity: [reclus, humboldt]
+
+  human-geography:
+    domain: geography
+    description: "Population, migration, cultural diffusion, urbanization, economic geography"
+    triggers:
+      - "population"
+      - "migration"
+      - "urbanization"
+      - "cultural diffusion"
+      - "economic geography"
+      - "gentrification"
+      - "food desert"
+      - "settlement"
+    agent_affinity: [massey, sauer]
+
+  cartography-gis:
+    domain: geography
+    description: "Map projections, coordinate systems, thematic mapping, GIS, remote sensing"
+    triggers:
+      - "map projection"
+      - "GIS"
+      - "choropleth"
+      - "remote sensing"
+      - "coordinate"
+      - "spatial analysis"
+      - "Mercator"
+      - "satellite imagery"
+    agent_affinity: tobler
+
+  environmental-geography:
+    domain: geography
+    description: "Climate change, deforestation, conservation, pollution, environmental justice"
+    triggers:
+      - "climate change"
+      - "deforestation"
+      - "conservation"
+      - "biodiversity"
+      - "pollution"
+      - "environmental justice"
+      - "sustainability"
+      - "desertification"
+    agent_affinity: [carson, reclus]
+
+  geopolitics:
+    domain: geography
+    description: "Territorial conflict, borders, sovereignty, postcolonial geography, critical geopolitics"
+    triggers:
+      - "geopolitics"
+      - "border"
+      - "sovereignty"
+      - "territorial"
+      - "postcolonial"
+      - "Orientalism"
+      - "contested territory"
+    agent_affinity: [said-g, massey]
+
+  fieldwork-methods:
+    domain: geography
+    description: "Field observation, sampling, GPS, environmental monitoring, data collection"
+    triggers:
+      - "fieldwork"
+      - "field study"
+      - "sampling"
+      - "transect"
+      - "quadrat"
+      - "GPS"
+      - "field observation"
+    agent_affinity: [carson, humboldt, sauer, tobler]
+
+# ==========================================================================
+# Agents -- 7 agents in router topology (Humboldt as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: humboldt
+
+  agents:
+    - name: humboldt
+      role: "department chair -- classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: reclus
+      role: "physical geographer -- Earth systems, landforms, climate, hydrology"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: massey
+      role: "human/social geographer -- power-geometry, inequality, urbanization"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: sauer
+      role: "cultural landscape -- landscape morphology, human-environment interaction"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: said-g
+      role: "geopolitics -- critical geopolitics, postcolonial analysis, territorial conflict"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: tobler
+      role: "cartographer/GIS -- projection, spatial analysis, mapping, visualization"
+      model: sonnet
+      tools: [Read, Bash, Write]
+
+    - name: carson
+      role: "pedagogy/environment -- environmental communication, teaching, learning paths"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams -- 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  geography-analysis-team:
+    description: "Full department for complex multi-domain geographic problems"
+    agents: [humboldt, reclus, massey, sauer, said-g, tobler, carson]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  fieldwork-team:
+    description: "Focused field research design and observation"
+    agents: [carson, humboldt, sauer, tobler]
+    use_when: "field study design, sampling, observation protocol"
+
+  mapping-team:
+    description: "Cartographic design, spatial analysis, and visualization"
+    agents: [tobler, reclus, massey, carson]
+    use_when: "map production, GIS analysis, spatial statistics"
+
+# ==========================================================================
+# Evaluation Gates -- pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 geography Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college geography department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (humboldt) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - physical
+      - human
+      - cartographic
+      - environmental
+      - geopolitical
+      - fieldwork
+
+# ==========================================================================
+# Grove Integration -- namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "geography-department"
+  record_types:
+    - name: GeographicAnalysis
+      description: "Systematic geographic analysis with domain, method, and findings"
+
+    - name: SpatialModel
+      description: "Spatial model with variables, relationships, and spatial pattern description"
+
+    - name: FieldReport
+      description: "Field observation record with location, features, and interpretations"
+
+    - name: GeographicExplanation
+      description: "Teaching artifact at a specified level with analogies and pathways"
+
+    - name: GeographySession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration -- department binding
+# ==========================================================================
+
+college:
+  department: "geography"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Earth Systems & Physical Geography"
+    - "Human Geography & Cultural Landscapes"
+    - "Maps, Spatial Analysis & GIS"
+    - "Astronomy & Our Place in Space"
+    - "Climate, Weather & Environmental Change"
+
+# ==========================================================================
+# Customization -- forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

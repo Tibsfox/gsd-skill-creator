@@ -1,0 +1,972 @@
+\documentclass[11pt,letterpaper,openany]{book}
+\title{GSD: The Beginner's Guide}
+\author{Tibsfox}
+\date{}
+
+% Tell XeLaTeX where to find shared inputs
+\makeatletter
+\def\input@path{{../shared/}}
+\makeatother
+
+\input{gsd-guides-preamble.tex}
+\input{gsd-command-data.tex}
+
+\begin{document}
+
+% ============================================================
+% Title page
+% ============================================================
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\headingfont\Huge\bfseries\color{gsdnavy} GSD\par}
+  \vspace{0.4cm}
+  {\headingfont\LARGE The Beginner's Guide\par}
+  \vspace{1.2cm}
+  {\large\itshape Build real projects with AI ---\\
+  no coding experience required.\par}
+  \vspace{2cm}
+  {\large For GSD v1.35.0\par}
+  \vfill
+  {\large Tibsfox\par}
+  \vspace{1cm}
+  \cclicense
+  \vspace{1cm}
+\end{titlepage}
+
+\frontmatter
+\pagenumbering{roman}
+\tableofcontents
+\cleardoublepage
+
+\mainmatter
+\pagenumbering{arabic}
+
+% ============================================================
+\chapter{Who This Guide Is For}
+% ============================================================
+
+Welcome. If you've ever had an idea for a small tool, a personal website, a
+script that organizes your photos, or a little game---and you stopped because
+you thought \emph{``I'd need to learn to code first''}---this guide is for you.
+
+You don't need to learn to code. You need a good partner. GSD makes
+Claude, Anthropic's AI assistant, into that partner.
+
+GSD stands for \emph{Get Shit Done}. It's a small, free add-on for AI coding
+assistants that keeps the AI organized while it builds what you asked for.
+That's the whole pitch. You describe what you want in plain language. GSD
+helps the AI think carefully, plan the work, do the work, and check its own
+results. You stay in the driver's seat, but you don't have to be the mechanic.
+
+\section{What Kind of Projects GSD Helps With}
+
+GSD is happiest with software-shaped projects: websites, small apps,
+browser extensions, scripts that automate a chore, a tool that takes a
+spreadsheet and makes something useful out of it. It also does well with
+\emph{creative} software: a little game, an interactive story, a digital
+zine, an art generator.
+
+It can help you fix a bug in something you already have. It can help you
+read code someone else wrote and explain it to you. It can help you learn
+by doing.
+
+It is \emph{not} a magic wand that builds anything you can imagine with
+zero effort. You still need to know what you want, and you still need to
+answer questions the assistant asks you along the way. That part is good
+news: the better you describe your idea, the better the result.
+
+\section{What You Don't Need to Know}
+
+\begin{itemize}
+  \item You do not need to know how to program.
+  \item You do not need to know what ``git'' is.
+  \item You do not need to have used a terminal before.
+  \item You do not need a computer science degree.
+  \item You do not need to understand what's happening ``under the hood.''
+\end{itemize}
+
+You \emph{will} be typing a few commands into a window, and I'll walk you
+through every one of them. I'll also tell you what each command does in plain
+English before you run it.
+
+\begin{gsdtip}[A gentle promise]
+If something in this guide uses a word you don't know, I'll define it on the
+spot. If a chapter feels confusing, it's the chapter's fault, not yours.
+Skim ahead, come back, re-read. The commands are forgiving.
+\end{gsdtip}
+
+\section{What You'll Be Able to Do by the End}
+
+By the time you reach the last page, you will have:
+
+\begin{enumerate}
+  \item Installed GSD on your computer.
+  \item Started a real project with \gsdcmd{new-project}.
+  \item Watched the assistant build and check its own work.
+  \item Used \gsdcmd{progress} and \gsdcmd{next} to navigate the project.
+  \item Fixed things that weren't quite right.
+  \item Finished a milestone and started a new one.
+\end{enumerate}
+
+That's a full loop. Once you've done it once, you've done it. Everything
+else is variations on the theme.
+
+\bigskip
+\noindent In the next chapter we'll set everything up. It takes about
+fifteen minutes.
+
+% ============================================================
+\chapter{Setting Up}
+% ============================================================
+
+You need four things. Three of them you probably already have.
+
+\section{What You'll Need}
+
+\begin{enumerate}
+  \item \textbf{A computer.} Mac, Windows, or Linux. GSD works on all three.
+  \item \textbf{An internet connection.} The assistant talks to Anthropic's
+        servers to think.
+  \item \textbf{Claude Code.} This is Anthropic's coding assistant. It runs
+        on your computer and is the thing GSD plugs into. You can get it at
+        \texttt{claude.com/claude-code}. A free trial is usually available;
+        a paid plan unlocks more.
+  \item \textbf{Node.js.} This is a free tool that lets your computer run
+        the GSD installer. You only install it once.
+\end{enumerate}
+
+\section{Installing Node.js}
+
+Go to \texttt{nodejs.org}, click the big green ``LTS'' download button, run
+the installer, click through the defaults. That's it.
+
+\begin{gsdnote}[What \emph{is} Node.js, really?]
+Node.js is a piece of software that runs small programs written in a
+language called JavaScript. GSD's installer is one of those small programs.
+You will not be writing any JavaScript yourself. Node.js is just the engine
+that starts the installer.
+\end{gsdnote}
+
+To check that it worked, open a terminal window.
+
+\begin{itemize}
+  \item \textbf{Mac:} press \gsdkbd{Cmd}+\gsdkbd{Space}, type
+        \texttt{terminal}, press \gsdkbd{Enter}.
+  \item \textbf{Windows:} open the Start menu, type
+        \texttt{powershell}, press \gsdkbd{Enter}.
+  \item \textbf{Linux:} you already know.
+\end{itemize}
+
+A black (or light, if that's your taste) window opens with a blinking cursor.
+Type:
+
+\begin{lstlisting}
+node --version
+\end{lstlisting}
+
+Press \gsdkbd{Enter}. You should see something like \texttt{v20.11.0}. If
+you do, Node.js is installed and you can close the terminal.
+
+\begin{gsdtip}[Version numbers]
+The exact numbers don't matter for this guide, as long as the first number
+is at least 18. If you see \texttt{v18}, \texttt{v20}, or \texttt{v22},
+you're fine.
+\end{gsdtip}
+
+\section{Running the GSD Installer}
+
+With Node.js installed, installing GSD is a single command. Open Claude
+Code (it gives you its own terminal prompt) and type:
+
+\begin{lstlisting}
+npx get-shit-done-cc@latest
+\end{lstlisting}
+
+Press \gsdkbd{Enter}. The installer will ask you two questions.
+
+\section{What the Installer Asks}
+
+\textbf{Question 1: Which runtime?} The installer lists several AI coding
+assistants it supports. Pick \textbf{Claude Code}. (If you're using a
+different assistant, pick that one---the rest of this guide still applies;
+only the way you type commands changes very slightly.)
+
+\textbf{Question 2: Global or local?} Pick \textbf{Global}. ``Global''
+means GSD is available in every project on your computer. ``Local'' means
+only in the current folder. For a first project, global is easier.
+
+The installer will print a few lines about copying files, then finish.
+That's it. GSD is installed.
+
+\section{Verifying It Worked}
+
+In Claude Code, type:
+
+\begin{lstlisting}
+/gsd-help
+\end{lstlisting}
+
+Press \gsdkbd{Enter}. You should see a list of GSD commands scroll past.
+If you do, congratulations---GSD is working. If you don't, see
+Appendix~A for troubleshooting.
+
+\begin{gsdsuccess}[You're installed]
+The hardest part of this whole guide is now behind you. Everything from
+here on is just talking to your assistant.
+\end{gsdsuccess}
+
+\bigskip
+\noindent Next up: a short chapter on \emph{what} GSD is actually doing,
+so the commands in Chapter~4 feel like friends instead of strangers.
+
+% ============================================================
+\chapter{What Is GSD?}
+% ============================================================
+
+You don't strictly need to read this chapter. You could skip to Chapter~4,
+run the commands, and have a project. But if you understand \emph{why} GSD
+exists, the commands will feel obvious instead of arbitrary. It's a short
+chapter. Stick with me.
+
+\section{The Problem: AI Forgets Mid-Conversation}
+
+If you've used an AI chatbot for anything longer than a quick question,
+you've probably noticed something strange: it gets worse as the
+conversation gets longer. It forgets what you said earlier. It contradicts
+itself. It starts giving vaguer answers. People who use AI assistants for
+real work have a nickname for this: \emph{``context rot.''}
+
+It happens because an AI assistant has a limited ``conversation memory''---
+the amount of back-and-forth it can hold in its head at once. When the
+conversation fills up that memory, old things start getting squeezed out
+or blurred. Try to build a real project in one long chat and the
+assistant will lose the thread.
+
+\section{The Solution: GSD Keeps the AI Organized}
+
+GSD solves the memory problem in a clever way: instead of keeping one
+long conversation, it writes everything important down into files, and
+starts fresh conversations when it needs to. Each fresh conversation is
+given exactly the notes it needs and nothing more.
+
+Think of it like this: imagine you hired a very skilled contractor to
+build a treehouse, but the contractor had a medical condition that made
+him forget everything at lunchtime. The only way to get the treehouse
+built is to:
+
+\begin{enumerate}
+  \item Write down the plan in the morning while he still remembers the
+        conversation.
+  \item After lunch, hand him the written plan and say ``build exactly
+        this.''
+  \item Check what he built against the plan at the end of the day.
+\end{enumerate}
+
+GSD is the clipboard. The assistant is the contractor. You are the
+homeowner who hired him. GSD keeps notes, hands out plans, and checks work,
+so the assistant can stay focused on one small task at a time and do it well.
+
+\section{The Workflow, As a Story}
+
+Here's the whole GSD workflow in one paragraph:
+
+\begin{quote}
+\emph{You describe what you want. GSD asks you questions until it
+understands. It writes down everything it learned---what you want, how
+it's going to build it, in what order. It breaks the work into phases.
+For each phase: it makes a plan, it does the work, it checks the work.
+When all phases are done, you ship a version. When you want to add
+more, you start a new version.}
+\end{quote}
+
+That's it. That's GSD. The commands in Chapter~4 each correspond to
+one step of that story.
+
+\section{What ``Spec-Driven Development'' Means}
+
+You might see the phrase \emph{spec-driven development} in GSD's
+documentation. It sounds jargony but the idea is homey: before you build
+something, write down what you're building. The written description is
+called a ``spec'' (short for specification). Spec-driven development just
+means: write the spec first, then build from the spec.
+
+GSD writes the spec \emph{with you}, by asking questions. You don't have
+to know how to write a spec. You just have to answer the questions
+honestly.
+
+\begin{gsdnote}[The spec lives in your project]
+When GSD writes a spec, it lives in a folder called \gsdfile{.planning/}
+inside your project. You don't normally open those files yourself, but
+they're yours. They're yours to read, yours to keep, yours to hand to
+another developer or another AI later.
+\end{gsdnote}
+
+\bigskip
+\noindent Enough theory. Let's build something.
+
+% ============================================================
+\chapter{Your First Project --- A Complete Walkthrough}
+% ============================================================
+
+This is the longest chapter in the guide. Take your time. If you follow
+along on your own computer, you'll have a real project by the end.
+
+For the walkthrough I'll pretend we're building a small personal website:
+a one-page site with a bio, a list of projects, and a contact link. Pick
+your own idea if you prefer---the steps are identical.
+
+\section{Start a Project Folder}
+
+Before you run any GSD commands, make a folder for your project. In the
+terminal:
+
+\begin{lstlisting}
+mkdir my-website
+cd my-website
+\end{lstlisting}
+
+\texttt{mkdir} means ``make directory'' (a directory is the same thing as
+a folder). \texttt{cd} means ``change directory''---it's how you walk
+into the folder you just made. After \texttt{cd my-website}, your
+terminal is ``inside'' that folder.
+
+\begin{gsdtip}[Pick a sensible name]
+Use lowercase letters and dashes instead of spaces: \texttt{my-website},
+\texttt{photo-tagger}, \texttt{birthday-quiz}. It makes everything easier
+later.
+\end{gsdtip}
+
+Now open Claude Code in this folder. (In most setups, Claude Code picks
+up the folder you started it in.)
+
+\section{The First Command: \gsdcmd{new-project}}
+
+This command is how you tell GSD ``I have an idea and I want to start a
+project.'' Type:
+
+\begin{lstlisting}
+/gsd-new-project
+\end{lstlisting}
+
+Press \gsdkbd{Enter}. GSD wakes up and starts asking questions.
+
+\section{What GSD Asks You, and Why}
+
+GSD's first job is to understand your idea well enough to build it. It
+does this by asking a series of questions. The exact questions vary, but
+they usually cover things like:
+
+\begin{itemize}
+  \item What is the project? (One or two sentences is fine.)
+  \item Who is it for? (Yourself? Your friends? Strangers on the internet?)
+  \item What should it do when you're done? (Three or four bullet points.)
+  \item Are there things that are explicitly \emph{out of scope}? (Things
+        you do \emph{not} want, so the assistant doesn't gold-plate.)
+  \item Is there anything it should look like or feel like? (A mood, a
+        color, another site you admire.)
+\end{itemize}
+
+Answer each question the way you'd answer a friend. If you're not sure
+about an answer, say ``I'm not sure, what do you recommend?''---the
+assistant will offer options.
+
+\begin{gsdtip}[This is the most important step]
+The better you answer these questions, the better the final project.
+People who rush this step end up with projects that miss the mark. People
+who take their time end up surprised by how good the result is. Budget
+ten or fifteen minutes for the first question-and-answer session. You
+won't regret it.
+\end{gsdtip}
+
+\section{What Gets Created}
+
+When the question session finishes, GSD will write a handful of files
+into a folder called \gsdfile{.planning/} inside your project. The
+important ones are:
+
+\begin{itemize}
+  \item \gsdfile{.planning/PROJECT.md} --- the summary of your idea. The
+        thing you just described, written up cleanly.
+  \item \gsdfile{.planning/REQUIREMENTS.md} --- a more detailed breakdown
+        of what ``done'' looks like.
+  \item \gsdfile{.planning/ROADMAP.md} --- the plan. A list of phases
+        (numbered 1, 2, 3\ldots) that together add up to your project.
+  \item \gsdfile{.planning/STATE.md} --- a living status file. GSD updates
+        it as you progress.
+\end{itemize}
+
+You don't have to read any of these files. But if you're curious, open
+\gsdfile{PROJECT.md} in any text editor and read it. It should feel like
+your idea, written back to you.
+
+\begin{gsdimportant}[Don't edit these files by hand]
+If you want to change something in the plan---say you forgot to mention
+a feature---don't open \gsdfile{ROADMAP.md} and type into it. Instead,
+tell the assistant: \emph{``I forgot to mention I want a dark mode
+toggle. Can you update the roadmap?''} It will update the files
+correctly and keep everything consistent.
+\end{gsdimportant}
+
+\section{Understanding the Roadmap}
+
+The roadmap is the most interesting of the files. It divides your
+project into \textbf{phases}. A phase is a bite-sized chunk of work that
+ends in something working. For a personal website, GSD might generate
+phases like:
+
+\begin{enumerate}
+  \item \textbf{Phase 1:} Project skeleton and layout.
+  \item \textbf{Phase 2:} Bio and about section.
+  \item \textbf{Phase 3:} Projects list.
+  \item \textbf{Phase 4:} Contact section and polish.
+\end{enumerate}
+
+Each phase is completed on its own. You finish Phase 1 (and \emph{see}
+it working) before Phase 2 starts. This is how GSD keeps itself honest:
+small chunks, visible progress, no six-week silent marathon that ends
+in a pile of broken files.
+
+\begin{gsdnote}[Phases are not sacred]
+If you start the first phase and realize the plan is wrong, you can
+stop and ask the assistant to revise the roadmap. Plans are meant to
+change.
+\end{gsdnote}
+
+\section{Checking Where You Are}
+
+At any point, you can ask GSD to tell you where you are in the project:
+
+\begin{lstlisting}
+/gsd-progress
+\end{lstlisting}
+
+This prints a small status report: which phase you're on, what's done,
+what's next. It's a friendly ``you are here'' sign, and you'll use it
+constantly.
+
+\bigskip
+\noindent You now have a project, a plan, and a roadmap. Nothing has
+been \emph{built} yet---that's what the next chapter is for.
+
+% ============================================================
+\chapter{Building Your First Phase}
+% ============================================================
+
+GSD builds your project one phase at a time. In this chapter we'll walk
+through the three commands that make up a single phase: plan, execute,
+verify.
+
+\section{What a ``Phase'' Is, Again}
+
+A phase is a chunk of work with a clear beginning and end. For your
+first phase, GSD will pick something small enough to finish quickly but
+big enough that you can see real progress. In our website example,
+Phase 1 is usually just ``set up the skeleton'': a page that loads and
+shows ``Hello, world'' or similar.
+
+Each phase goes through three steps:
+
+\begin{enumerate}
+  \item \textbf{Plan} --- GSD researches and writes a detailed plan for
+        the phase.
+  \item \textbf{Execute} --- GSD does the work in the plan.
+  \item \textbf{Verify} --- GSD checks the work and asks you to
+        double-check.
+\end{enumerate}
+
+Let's go.
+
+\section{Step One: \gsdcmd{plan-phase}}
+
+Type:
+
+\begin{lstlisting}
+/gsd-plan-phase 1
+\end{lstlisting}
+
+Press \gsdkbd{Enter}. (The \texttt{1} at the end means ``phase 1.'' If
+you leave it off, GSD uses the next phase that needs planning, which is
+also fine for a first-time run.)
+
+GSD now goes off and thinks. It may take a few minutes. It might ask you
+a clarifying question or two. When it's done, it will have written a
+detailed plan file for the phase into the \gsdfile{.planning/} folder.
+You don't have to read it, but if you do, you'll see something
+refreshingly clear: here's what we'll build, here's what each part does,
+here's how we'll know it worked.
+
+\begin{gsdtip}[Feel free to review the plan]
+Before running the next command, you can always ask the assistant:
+\emph{``Can you summarize the plan for me in plain English?''} It will
+give you a short, readable summary. If anything sounds wrong, say so
+before moving on.
+\end{gsdtip}
+
+\section{Step Two: \gsdcmd{execute-phase}}
+
+Once the plan exists, ask GSD to build it:
+
+\begin{lstlisting}
+/gsd-execute-phase 1
+\end{lstlisting}
+
+This is the fun part. The assistant will start creating files, writing
+code, and generally making things happen. You'll see a running log of
+what it's doing. At some points it will stop and ask for your permission
+before doing something potentially important---for example, before
+running a command that changes files in a significant way.
+
+\begin{gsdimportant}[About permission prompts]
+Claude Code will occasionally pause and ask you to approve an action.
+Always read the prompt before approving. The default behavior---where
+the assistant asks first---is the safe setting, and it is the correct
+setting for beginners. You should leave it alone. You'll see suggestions
+online telling you to turn the prompts off for convenience. Don't. Those
+prompts are your seat belt.
+\end{gsdimportant}
+
+\begin{gsdwarning}[A note on ``skip permissions'' flags]
+You may come across a command-line flag in other tutorials that
+completely disables permission prompts. Do not use it. It exists for
+experienced developers running automated pipelines in throwaway
+environments, and it bypasses every safety check the assistant has. For
+everything in this guide, the default interactive mode is what you
+want.
+\end{gsdwarning}
+
+When the phase finishes, GSD will usually have created several new
+files in your project. Congratulations---something real exists now.
+
+\section{Step Three: \gsdcmd{verify-work}}
+
+Before moving on, ask GSD to check its own work:
+
+\begin{lstlisting}
+/gsd-verify-work 1
+\end{lstlisting}
+
+This runs a short self-review. GSD looks at what was built, compares
+it to what the plan said should happen, runs any tests that were
+written, and reports back. If everything passed, you'll see a cheerful
+summary. If something is off, GSD will tell you exactly what and
+suggest a fix plan.
+
+\begin{gsdsuccess}[Phase 1 complete]
+When verify-work reports success, the phase is done. Seriously---pause
+for a moment to notice that a real piece of software now exists on your
+computer that didn't exist an hour ago. You made that happen. It's a
+small thing, and also it isn't.
+\end{gsdsuccess}
+
+\section{What to Do If Something Isn't Right}
+
+Sometimes the phase finishes and the result doesn't match what you
+had in your head. That's normal. Here's the order of things to try:
+
+\begin{enumerate}
+  \item \textbf{Describe what's wrong.} Tell the assistant, in plain
+        English, what you expected versus what you got. ``The page
+        loads, but the heading says `Hello world' and I wanted it to
+        say my name.''
+  \item \textbf{Let it fix.} The assistant will usually propose a
+        small fix and, with your permission, apply it.
+  \item \textbf{Re-run verify.} Type \gsdcmd{verify-work} again to
+        confirm the fix worked.
+  \item \textbf{If you're stuck,} try \gsdcmd{debug} followed by a
+        description: \texttt{/gsd-debug "Heading doesn't update when
+        I change my name"}. GSD has a systematic debugging mode that
+        walks through the problem step by step.
+\end{enumerate}
+
+If you ever feel truly lost, Appendix~A has more help.
+
+\bigskip
+\noindent You now know the full rhythm: plan, execute, verify, repeat
+for the next phase. The next chapter covers the little commands that
+help you find your way around a project in progress.
+
+% ============================================================
+\chapter{Navigating Your Project}
+% ============================================================
+
+A GSD project grows as you work on it. After a few phases, you'll have
+a handful of plan files, some finished code, maybe a note or two. This
+chapter is about the short, reassuring commands that tell you where
+you are and what to do next.
+
+\section{\texorpdfstring{\gsdcmd{progress}}{/gsd-progress} --- ``Where am I?''}
+
+Run this any time you want a bird's-eye view:
+
+\begin{lstlisting}
+/gsd-progress
+\end{lstlisting}
+
+You'll see a summary of the project, which phase is current, what's
+complete, and what's on deck. This is the command to run when you
+come back to the project after a break and have no idea what you
+were doing.
+
+\section{\texorpdfstring{\gsdcmd{next}}{/gsd-next} --- ``What should I do next?''}
+
+If \gsdcmd{progress} says ``where am I,'' \gsdcmd{next} says ``what
+next.'' Run it and GSD figures out the correct next step for your
+project and either does it or tells you the command to run:
+
+\begin{lstlisting}
+/gsd-next
+\end{lstlisting}
+
+If Phase 1 is planned but not executed, \gsdcmd{next} will execute it.
+If Phase 2 hasn't been planned, it will plan it. If every phase is
+done, it will suggest completing the milestone. It's the ``just keep
+going'' button.
+
+\section{\texorpdfstring{\gsdcmd{help}}{/gsd-help} --- ``What commands exist?''}
+
+If you forget which commands GSD offers:
+
+\begin{lstlisting}
+/gsd-help
+\end{lstlisting}
+
+You'll see the full list. You won't need most of them for a while,
+but it's nice to know they're there.
+
+\section{The \gsdfile{.planning/} Directory}
+
+I mentioned this folder earlier; it's worth a section of its own
+because you'll see it a lot. \gsdfile{.planning/} is where GSD keeps
+the project's brain: the spec, the roadmap, the plans for each phase,
+the status file, notes. It lives inside your project folder, right
+alongside the code GSD writes.
+
+\begin{gsdimportant}[Do not delete this folder]
+If you delete \gsdfile{.planning/}, GSD forgets everything about your
+project. Not the code---the code is safe---but everything about
+\emph{why} the code is the way it is, what's planned next, and what's
+been decided. The folder is small (usually a few hundred kilobytes at
+most), so there's no reason to delete it.
+\end{gsdimportant}
+
+\begin{gsdnote}[If your project is in version control]
+If you're using version control (Git) with your project, the
+\gsdfile{.planning/} folder can be committed along with the code. It
+means the next person to open the project (including future-you on a
+different computer) gets the plan, not just the code.
+\end{gsdnote}
+
+\section{Pausing and Resuming}
+
+If you have to stop mid-work (lunch, the end of the day, the cat
+pressed a key), GSD has two commands to make coming back painless:
+
+\begin{lstlisting}
+/gsd-pause-work
+/gsd-resume-work
+\end{lstlisting}
+
+\gsdcmd{pause-work} writes a short handoff note summarizing where
+you are. \gsdcmd{resume-work} reads it back and brings the assistant
+up to speed in a fresh session. Use them whenever you close your
+laptop.
+
+\bigskip
+\noindent That's navigation. The next chapter covers the ``quick task''
+mode for when you don't need the full phase workflow.
+
+% ============================================================
+\chapter{Quick Tasks}
+% ============================================================
+
+Not every task deserves a full roadmap. Sometimes you just want to
+add a footer to your website, or rename a button, or tweak a color.
+For those, GSD has a lighter command: \gsdcmd{quick}.
+
+\section{When to Use \texorpdfstring{\gsdcmd{quick}}{/gsd-quick}}
+
+Use it for small, self-contained tasks that you could describe in
+one or two sentences. Things like:
+
+\begin{itemize}
+  \item ``Add a footer with my copyright to the bottom of every page.''
+  \item ``Change the background color to a warm beige.''
+  \item ``Fix this bug where the submit button does nothing.''
+  \item ``Add a favicon.''
+\end{itemize}
+
+For anything that feels bigger than a sentence or two---a new
+section, a new feature, a rethink of the layout---use the full
+planning workflow (Chapter~4 and 5) instead.
+
+\section{How to Use It}
+
+\begin{lstlisting}
+/gsd-quick
+\end{lstlisting}
+
+GSD will ask you what you want done. Describe it in plain English.
+It will propose a short plan, ask your permission to proceed, and
+then do the work.
+
+\begin{gsdtip}[Quick doesn't mean sloppy]
+Even in quick mode, GSD still plans first and verifies afterward---
+just with less ceremony. Your work is still safe.
+\end{gsdtip}
+
+If you'd like GSD to be a little more thorough for a particular
+quick task, you can add flags:
+
+\begin{itemize}
+  \item \gsdflag{discuss} --- have a short pre-planning discussion
+        first.
+  \item \gsdflag{research} --- let GSD look things up before planning.
+  \item \gsdflag{full} --- run the full plan-check and verification
+        steps.
+\end{itemize}
+
+For example: \texttt{/gsd-quick --full}.
+
+\bigskip
+\noindent The next chapter is a collection of small habits that make
+the whole experience smoother.
+
+% ============================================================
+\chapter{Tips for Success}
+% ============================================================
+
+Everyone who uses GSD well does the same small number of things.
+They are not secrets and none of them are clever---they're just
+habits. Here they are.
+
+\section{Be Specific About What You Want}
+
+``Make me a website'' gets you an average website. ``Make me a
+one-page site for my grandmother's 80th birthday, with her photo,
+a short tribute, a photo gallery of the grandkids, and a guestbook
+where people can leave messages'' gets you \emph{that} website. The
+more specific you are, the closer the result is to what you pictured.
+
+This is the \#1 habit. It outweighs every other piece of advice in
+this chapter combined.
+
+\section{Let GSD Ask Questions}
+
+\begin{sloppypar}
+When GSD asks a question---during \gsdcmd{new-project}, during
+planning, during execution---answer it. Don't skip it, don't say
+``whatever,'' don't type ``idk.'' Every question it asks is because
+it noticed a place where the result could go in two different
+directions and it wants you to pick. If you don't pick, it picks
+for you, and you may not like its choice.
+\end{sloppypar}
+
+\begin{gsdtip}[If you truly don't know]
+Say so: \emph{``I don't know, which do you recommend and why?''} GSD
+will give you a recommendation with reasons, and you can just agree
+if the reasoning sounds good.
+\end{gsdtip}
+
+\section{Don't Edit \gsdfile{.planning/} Files by Hand}
+
+I said this earlier but it bears repeating. If you want to change
+the plan, talk to the assistant. Editing \gsdfile{.planning/} files
+directly is like rewriting the blueprints while the contractor is
+still reading them: confusing, and things will fall out of sync.
+
+\section{Capture Ideas With \texorpdfstring{\gsdcmd{add-todo}}{/gsd-add-todo}}
+
+You'll get ideas while the assistant is working on something else.
+``Oh, I should add a search box.'' ``It would be nice if the images
+had captions.'' Don't try to hold those in your head. Run:
+
+\begin{lstlisting}
+/gsd-add-todo "Add search box to the bio page"
+\end{lstlisting}
+
+GSD will save it to a list. Later, when you're ready, you can review
+the list:
+
+\begin{lstlisting}
+/gsd-check-todos
+\end{lstlisting}
+
+You'll see everything you captured and can pick one to work on.
+
+\section{Take Breaks}
+
+This is less about GSD and more about you. A fresh set of eyes
+catches things tired eyes miss. If something is going in circles,
+step away for twenty minutes. When you come back, run
+\gsdcmd{resume-work} and you'll be picked up exactly where you
+left off.
+
+\section{Celebrate Small Wins}
+
+The first time a phase completes successfully, stop and look at
+what you made. Open the thing in a browser, run the script, see
+the output. \emph{Tell someone.} Building real things is a big
+deal, and the whole point of GSD is that you get to do it.
+
+\bigskip
+\noindent The final chapter covers what happens when you finish
+your first project and want to do more.
+
+% ============================================================
+\chapter{What's Next?}
+% ============================================================
+
+You finished the last phase. \gsdcmd{verify-work} says everything
+checks out. What now?
+
+\section{Complete the Milestone}
+
+A ``milestone'' in GSD is a completed version of your project. When
+all phases of a milestone are done, run:
+
+\begin{lstlisting}
+/gsd-complete-milestone
+\end{lstlisting}
+
+GSD will archive the planning documents for this milestone, update
+a historical log of everything you've shipped, and (if you're using
+version control) tag a release. It's your graduation ceremony for
+that version of the project.
+
+\section{Start a New Milestone}
+
+When you're ready to add more---new features, a bigger redesign,
+whatever---start a new milestone:
+
+\begin{lstlisting}
+/gsd-new-milestone
+\end{lstlisting}
+
+GSD will ask you what the new milestone is about, generate a new
+roadmap for it, and you're back in the plan-execute-verify loop for
+this new version. The old milestone is still there, archived, so
+you can always look back.
+
+\begin{gsdtip}[Versions are free]
+Don't be shy about calling something ``done'' and starting a new
+milestone. A project with five small completed milestones is healthier
+than a project with one never-finished milestone. Ship early, ship
+often, celebrate each one.
+\end{gsdtip}
+
+\section{When You're Ready for More}
+
+This guide has covered the core workflow. GSD has many more commands
+for special situations: bringing GSD into an existing codebase,
+running phases in the background, reviewing code, generating tests,
+digging into bugs, and more. Run \gsdcmd{help} any time to see the
+full list.
+
+Everything you learned here still applies. The extra commands are
+just variations on the same rhythm: describe, plan, do, check.
+
+\section{Getting Help}
+
+GSD has an active community on Discord. If you're stuck, have a
+question, or just want to share what you built, the people there are
+friendly and have probably run into the same thing you're running
+into. You can join from inside GSD:
+
+\begin{lstlisting}
+/gsd-join-discord
+\end{lstlisting}
+
+\begin{gsdsuccess}[You did it]
+You started with an idea and you finished something real. That is
+the entire point. Everything else is just practice. The next project
+will be easier, the one after that easier still, and before long
+you'll be surprised at what you can make.
+\end{gsdsuccess}
+
+% ============================================================
+\appendix
+\chapter{Troubleshooting}
+% ============================================================
+
+A short list of things that sometimes go wrong and what to do about
+them.
+
+\section{``Command Not Found''}
+
+\textbf{Symptom:} you type \gsdcmd{help} (or any GSD command) and the
+assistant says it doesn't recognize it.
+
+\textbf{Fix:} close Claude Code completely and open it again. GSD
+commands get picked up when the assistant starts, so a fresh start
+usually does it. If that doesn't work, re-run the installer
+(\texttt{npx get-shit-done-cc@latest}) and pick the same options as
+before.
+
+\section{``Something Went Wrong With the Project''}
+
+\textbf{Symptom:} you get errors mentioning missing files, or
+\gsdcmd{progress} reports something confusing about the project
+state.
+
+\textbf{Fix:} run the health check:
+
+\begin{lstlisting}
+/gsd-health
+\end{lstlisting}
+
+It will tell you what's wrong. If it offers to repair, let it:
+
+\begin{lstlisting}
+/gsd-health --repair
+\end{lstlisting}
+
+This fixes most common issues automatically.
+
+\section{``I'm Completely Lost''}
+
+\textbf{Symptom:} you stepped away from a project for a week and you
+have no idea what you were doing.
+
+\textbf{Fix:} two commands, in order:
+
+\begin{lstlisting}
+/gsd-resume-work
+/gsd-progress
+\end{lstlisting}
+
+\gsdcmd{resume-work} brings the assistant up to speed; \gsdcmd{progress}
+reminds you. Between them you'll be re-oriented in under a minute.
+
+\section{``The Phase Produced Something I Don't Want''}
+
+\textbf{Symptom:} \gsdcmd{execute-phase} finished, but the result is
+wrong in some way.
+
+\textbf{Fix:} first, describe the problem to the assistant in your
+own words. Most issues resolve with a short conversation. If you'd
+rather undo the phase entirely and start over:
+
+\begin{lstlisting}
+/gsd-undo --phase 1
+\end{lstlisting}
+
+This rolls back the phase's changes safely. You can then re-plan and
+re-execute it.
+
+\section{``Everything Is Fine, I'm Just Anxious''}
+
+\textbf{Symptom:} things are working but you're worried you're doing
+it wrong.
+
+\textbf{Fix:} you're not. Run \gsdcmd{progress}, see that you're in
+a valid state, take a breath, and keep going. The workflow is
+forgiving. Mistakes are recoverable. You are allowed to be a
+beginner.
+
+\bigskip
+\begin{center}
+\textit{--- End of guide ---}
+\end{center}
+
+\end{document}

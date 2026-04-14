@@ -238,3 +238,60 @@ JanSport joins **GRV** (Green River), **PJM** (Pearl Jam), **SNY** (Sonic Youth'
 18. PR Newswire -- #LightenTheLoad campaign launches (May 2020, July 2020, May 2021)
 19. Marketing Dive / Adweek -- Campaign analysis and engagement data
 20. American Psychological Association -- *Stress in America: Generation Z* (October 2018); Pew Research Center teen anxiety data (2019)
+
+---
+
+## Addendum: JanSport in 2025–2026 — VF portfolio and ownership
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. JanSport is a long-running PNW-origin brand
+(Seattle, 1967, Murray Pletz and Skip Yowell) now owned by **VF
+Corporation**, the Denver-headquartered apparel holding company.
+Two 2024–2025 points are worth recording:
+
+- **Founder legacy update.** The Seattle Times published a
+  December 2024 feature on the JanSport founders and the
+  brand's family history; the body above already cites this
+  piece. It remains the best recent narrative treatment of the
+  brand's PNW origins.
+- **L2 Brands collegiate partnership (February 27, 2025).**
+  JanSport formalized a collegiate partnership with L2 Brands
+  (announced via PR Newswire in February 2025) that expanded
+  the brand's presence in college-bookstore channels. This is
+  not a strategic change — JanSport has been the default
+  college-bookstore backpack brand for decades — but the
+  formal partnership is a piece of 2025 business-press
+  infrastructure worth flagging.
+- **VF portfolio position.** VF Corporation's broader portfolio
+  restructuring through 2024–2025 (divestitures, cost
+  reductions, focus on a smaller set of core brands) has kept
+  JanSport as a continuing VF holding rather than a divestiture
+  candidate as of April 2026, though the corporate-restructuring
+  conversation is ongoing and JanSport's long-term status within
+  VF is something practitioner analysts continue to watch.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**business**](../../../.college/departments/business/DEPARTMENT.md) — JanSport's ownership structure, portfolio position within VF, and long-running college-bookstore distribution strategy are business-department topics.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md) — The 1967 Seattle founding and the 58-year brand history are PNW business-history material.
+- [**art**](../../../.college/departments/art/DEPARTMENT.md) — Backpack design, fabric patterning, and the visual branding of student gear are art-and-design topics.
+- [**materials**](../../../.college/departments/materials/DEPARTMENT.md) — Cordura fabric, nylon specifications, hardware selection, and the engineering of a backpack that survives daily use for decades are materials-department topics.
+
+---
+
+*Addendum (2024 family feature, L2 Brands 2025 partnership, VF portfolio status) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — JanSport
+
+## DIY — Visit a JanSport outlet
+
+PNW stores still carry legacy models. See the original
+build quality.
+
+## TRY — Repair a classic JanSport
+
+Lifetime warranty. Send in an old pack, get it
+repaired. See the program working.

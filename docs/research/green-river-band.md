@@ -448,3 +448,75 @@ The sound the forest made was grunge. Green River was the first band to record i
 - [Green River Discography -- Discogs](https://www.discogs.com/artist/270968-Green-River)
 - [Green River -- Dry as a Bone / Rehab Doll -- Discogs](https://www.discogs.com/release/380108-Green-River-Dry-As-A-Bone-Rehab-Doll)
 - [Grunge -- Wikipedia](https://en.wikipedia.org/wiki/Grunge)
+
+---
+
+## Addendum: 2025–2026 — still the ancestor
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. Green River is a foundational Seattle band whose
+role in grunge history is settled; the 2025 data is about the
+continued status of its former members' ongoing projects and the
+band's placement in the ongoing Pacific Northwest musical memory.
+
+**Former members in 2025.** Mark Arm and Steve Turner continue to
+record and tour with **Mudhoney**, whose 2024–2025 work remains
+active. Jeff Ament and Stone Gossard continue to anchor **Pearl
+Jam** (see the companion `pearl-jam.md` bucket), which had a
+prolific 2024–2025 including the *Dark Matter* album cycle and
+world tour. Bruce Fairweather remained in **Love Battery** /
+**Monster Magnet** orbits. Alex Vincent has been largely out of
+the public recording scene.
+
+**Historical placement.** Every 2025 Seattle-grunge retrospective
+— the kind of work that appears on the anniversaries of
+*Nevermind*, *Ten*, and *Superunknown* — treats Green River as
+the origin point from which Pearl Jam and Mudhoney diverged, and
+from which the broader Seattle sound emerged. The 1987 *Dry As
+a Bone* EP on Sub Pop, referenced in the body, is still cited as
+the first document on which the word "grunge" was applied to a
+specific musical practice rather than as a generic insult.
+
+**Sub Pop archives.** The Sub Pop label — still active in 2025
+and marking its 38th year in the business — has continued to
+reissue and remaster its 1980s catalog, including the Green
+River recordings. The label's ongoing stewardship of the
+Green River catalog matters for this document because it means
+the band's body of work is still in print, still on streaming
+services, and still discoverable by new listeners.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**music**](../../../.college/departments/music/DEPARTMENT.md) —
+  Green River is one of the foundational case studies for the
+  history of grunge as a musical genre.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — The Seattle music-scene history of the mid-1980s is a worked
+  example of how local scenes produce outsized cultural impact.
+- [**art**](../../../.college/departments/art/DEPARTMENT.md) —
+  Grunge as visual and design aesthetic (the Sub Pop cover art,
+  the flannel-and-doc-marten visual language) is an
+  art-department topic.
+- [**writing**](../../../.college/departments/writing/DEPARTMENT.md)
+  — Music journalism and critical writing about grunge and the
+  Seattle scene is a body of writing worth studying in its own
+  right.
+
+---
+
+*Addendum (former-members activity 2025, historical placement) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Green River
+
+## DIY — Listen to *Rehab Doll* (1988)
+
+Green River's final album — the missing link between
+punk and grunge.
+
+## TRY — Trace the alumni
+
+Mudhoney, Pearl Jam, Mother Love Bone all descend
+from Green River. Build a family tree.

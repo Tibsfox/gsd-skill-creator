@@ -235,7 +235,7 @@ describe('enumerateSessions', () => {
       firstPrompt: 'Build the auth module',
       summary: 'Implemented JWT authentication',
       gitBranch: 'feature/auth',
-      projectPath: '/path/to/projectproject',
+      projectPath: '/home/user/projects/test-project',
       isSidechain: false,
     };
     createTestProject(base, 'full-fields', makeValidIndex([fullSession]));
@@ -253,7 +253,7 @@ describe('enumerateSessions', () => {
     expect(session.firstPrompt).toBe('Build the auth module');
     expect(session.summary).toBe('Implemented JWT authentication');
     expect(session.gitBranch).toBe('feature/auth');
-    expect(session.projectPath).toBe('/path/to/projectproject');
+    expect(session.projectPath).toBe('/home/user/projects/test-project');
     expect(session.isSidechain).toBe(false);
     expect(session.projectSlug).toBe('full-fields');
   });

@@ -1,0 +1,253 @@
+# Reading Department Chipset Configuration
+# 19th department in the college structure
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template pattern.
+
+name: reading-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated reading department providing domain-routed
+  expertise through seven named agents (Austen, Morrison, Borges,
+  Achebe, Rosenblatt, Chomsky-R, Clay), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college reading department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  phonics-decoding:
+    domain: reading
+    description: "Letter-sound relationships, decoding strategies, syllable types, morphemic analysis"
+    triggers:
+      - "phonics"
+      - "decode"
+      - "sound out"
+      - "syllable"
+      - "letter sounds"
+      - "spelling pattern"
+    agent_affinity: [chomsky-r, clay]
+
+  vocabulary-development:
+    domain: reading
+    description: "Word learning strategies, morphology, context clues, academic vocabulary, figurative language"
+    triggers:
+      - "vocabulary"
+      - "word meaning"
+      - "context clues"
+      - "prefix"
+      - "suffix"
+      - "root word"
+      - "figurative language"
+      - "idiom"
+    agent_affinity: [chomsky-r, austen, morrison]
+
+  reading-comprehension:
+    domain: reading
+    description: "Comprehension strategies, text structure, schema theory, close reading, summarizing"
+    triggers:
+      - "comprehension"
+      - "main idea"
+      - "summarize"
+      - "inference"
+      - "text structure"
+      - "understand the passage"
+      - "what does this mean"
+    agent_affinity: [rosenblatt, clay]
+
+  critical-reading:
+    domain: reading
+    description: "Argument analysis, bias identification, source evaluation, rhetorical strategies"
+    triggers:
+      - "bias"
+      - "argument"
+      - "credibility"
+      - "evaluate this source"
+      - "propaganda"
+      - "rhetoric"
+      - "persuasion"
+    agent_affinity: achebe
+
+  literary-analysis:
+    domain: reading
+    description: "Narrative elements, literary devices, critical lenses, intertextuality, theme and symbolism"
+    triggers:
+      - "literary analysis"
+      - "symbolism"
+      - "theme"
+      - "narrative voice"
+      - "point of view"
+      - "irony"
+      - "allusion"
+      - "metaphor"
+    agent_affinity: [morrison, borges, austen]
+
+  information-literacy:
+    domain: reading
+    description: "Research process, source evaluation, digital literacy, media literacy, citation"
+    triggers:
+      - "research"
+      - "find sources"
+      - "evaluate this website"
+      - "citation"
+      - "plagiarism"
+      - "database search"
+      - "reliable source"
+    agent_affinity: [achebe, rosenblatt]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Austen as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: austen
+
+  agents:
+    - name: austen
+      role: "department chair — classification, routing, synthesis, close reading"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: morrison
+      role: "literary analyst — narrative voice, race, representation, craft"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: borges
+      role: "intertextuality specialist — allusion, influence, metafiction, genre"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: achebe
+      role: "critical reader — postcolonial analysis, bias, world literature, source evaluation"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: rosenblatt
+      role: "reader response — transactional theory, comprehension, reader experience"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: chomsky-r
+      role: "linguist — phonology, morphology, syntax for reading"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: clay
+      role: "pedagogy specialist — Running Records, assessment, scaffolding, early literacy"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  reading-analysis-team:
+    description: "Full department for complex multi-domain reading problems"
+    agents: [austen, morrison, borges, achebe, rosenblatt, chomsky-r, clay]
+    use_when: "multi-domain, advanced, or full-analysis requests"
+
+  literacy-team:
+    description: "Focused foundational and developmental reading instruction"
+    agents: [clay, chomsky-r, rosenblatt, austen]
+    use_when: "decoding, vocabulary, fluency, or comprehension skill instruction"
+
+  book-club-team:
+    description: "Interpretive discussion for deep reading of literary texts"
+    agents: [morrison, borges, achebe, clay]
+    use_when: "book discussions, close reading, cross-text comparison"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 reading Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college reading department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (austen) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - decoding
+      - vocabulary
+      - comprehension
+      - critical-analysis
+      - literary-analysis
+      - information-literacy
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "reading-department"
+  record_types:
+    - name: ReadingAnalysis
+      description: "Analytical assessment of a text, source, or reader behavior"
+
+    - name: TextAnnotation
+      description: "Passage-level annotations with span-based notes on craft, bias, structure, or intertextuality"
+
+    - name: LiteraryInterpretation
+      description: "Multi-layered interpretation of a literary text with critical lens, devices, and themes"
+
+    - name: ReadingExplanation
+      description: "Teaching artifact explaining a reading concept or strategy at a specified level"
+
+    - name: ReadingSession
+      description: "Session log linking work products to interaction context and reader profile"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "reading"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Foundations of Reading"
+    - "Vocabulary & Language"
+    - "Comprehension & Meaning-Making"
+    - "Critical Reading & Analysis"
+    - "Reading Across the Curriculum"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

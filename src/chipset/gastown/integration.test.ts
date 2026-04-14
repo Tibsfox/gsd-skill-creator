@@ -142,12 +142,15 @@ describe('Integration Tests', () => {
     await manager.setHook(polecat.id, item.beadId);
     await manager.updateWorkStatus(item.beadId, 'hooked');
 
-    // Step 3: Hook triggers GUPP — agent should detect hook and go active
+    // Step 3: Hook triggers GUPP — agent detects pending hook, then activates
     const hook = await manager.getHook(polecat.id);
     expect(hook).not.toBeNull();
-    expect(hook!.status).toBe('active');
+    expect(hook!.status).toBe('pending');
 
-    // GUPP activates: agent transitions to active
+    // GUPP activates: hook transitions pending -> active, agent goes active
+    await manager.activateHook(polecat.id);
+    const activeHook = await manager.getHook(polecat.id);
+    expect(activeHook!.status).toBe('active');
     await manager.updateAgentStatus(polecat.id, 'active');
     const agent = await manager.getAgent(polecat.id);
     expect(agent!.status).toBe('active');
@@ -334,10 +337,10 @@ describe('Integration Tests', () => {
     expect(recoveredAgent).not.toBeNull();
     expect(recoveredAgent!.status).toBe('active');
 
-    // Hook survived the crash
+    // Hook survived the crash (still in pending — agent never activated)
     const recoveredHook = await recoveredManager.getHook(polecat.id);
     expect(recoveredHook).not.toBeNull();
-    expect(recoveredHook!.status).toBe('active');
+    expect(recoveredHook!.status).toBe('pending');
     expect(recoveredHook!.workItem!.beadId).toBe(item.beadId);
 
     // GUPP can re-fire: work item is still intact
