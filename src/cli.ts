@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { createRequire } from 'node:module';
+import { resolve as pathResolve } from 'node:path';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { createStores, createApplicationContext } from './index.js';
@@ -34,6 +35,32 @@ import { FeedbackStore, RefinementEngine, VersionManager } from './learning/inde
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
 import { SkillStore } from './storage/skill-store.js';
 import { SkillIndex } from './storage/skill-index.js';
+
+/**
+ * Resolve the skills base path for a CLI invocation.
+ * Honors `--skills-dir <path>` and `--skills-dir=<path>`; falls back to the
+ * scope default when the flag is absent. Relative paths are resolved against
+ * process.cwd() so `examples/skills/coding` works from the repo root.
+ *
+ * Exported for unit testing in src/cli.test.ts.
+ */
+export function parseSkillsDir(args: string[], scope: SkillScope): string {
+  // Equals form: --skills-dir=<value>
+  const eq = args.find((a) => a.startsWith('--skills-dir='));
+  if (eq) {
+    const value = eq.slice('--skills-dir='.length);
+    if (value) return pathResolve(process.cwd(), value);
+  }
+  // Separated form: --skills-dir <value>
+  const idx = args.indexOf('--skills-dir');
+  if (idx >= 0 && idx + 1 < args.length) {
+    const value = args[idx + 1]!;
+    if (value && !value.startsWith('-')) {
+      return pathResolve(process.cwd(), value);
+    }
+  }
+  return getSkillsBasePath(scope);
+}
 
 /**
  * Create skill store and index for a specific scope.
@@ -713,7 +740,7 @@ async function main() {
         : undefined;
 
       const exitCode = await critiqueCommand(skillName, {
-        skillsDir: getSkillsBasePath(scope),
+        skillsDir: parseSkillsDir(args, scope),
         maxIter: !isNaN(maxIter!) ? maxIter : undefined,
         checkExternal: args.includes('--check-external'),
         mock: args.includes('--mock'),
@@ -1302,7 +1329,7 @@ async function main() {
       const outputIdx = args.findIndex(a => a === '--output' || a === '-o');
       const output = outputIdx >= 0 ? args[outputIdx + 1] : undefined;
       const exitCode = await publishCommand(skillName, {
-        skillsDir: getSkillsBasePath(scope),
+        skillsDir: parseSkillsDir(args, scope),
         output,
       });
       if (exitCode !== 0) process.exit(exitCode);
