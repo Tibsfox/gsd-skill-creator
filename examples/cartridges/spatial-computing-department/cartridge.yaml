@@ -1,0 +1,25 @@
+id: spatial-computing-department
+name: Spatial Computing Department
+version: 1.0.0
+author: tibsfox
+description: >-
+  Bulk W2B.2 migration — wraps the existing department chipset as a
+  unified cartridge with department/grove/college chipset bindings.
+trust: system
+provenance:
+  origin: migrate
+  createdAt: 2026-04-14T12:50:00Z
+  sourceCommits:
+    - 52625ee44
+  researchGrounding:
+    - examples/chipsets/spatial-computing-department/chipset.yaml
+chipsets:
+  - kind: department
+    src: ../../chipsets/spatial-computing-department/chipset.yaml
+  - kind: grove
+    src: ../../chipsets/spatial-computing-department/chipset.yaml#/grove
+  - kind: college
+    src: ../../chipsets/spatial-computing-department/chipset.yaml#/college
+metadata:
+  migrated_from: examples/chipsets/spatial-computing-department/
+  wave: 2B.2
