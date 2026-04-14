@@ -20,6 +20,7 @@ import { budgetEstimateCommand } from './cli/commands/budget-estimate.js';
 import { resolveCommand } from './cli/commands/resolve.js';
 import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
 import { testCommand } from './cli/commands/test.js';
+import { cartridgeCommand } from './cli/commands/cartridge.js';
 import { chipCommand } from './cli/commands/chip.js';
 import { evalCommand } from './cli/commands/eval.js';
 import { simulateCommand, simulateHelp } from './cli/commands/simulate.js';
@@ -283,6 +284,12 @@ async function main() {
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
+      break;
+    }
+
+    case 'cartridge': {
+      const code = await cartridgeCommand(args);
+      if (code !== 0) process.exit(code);
       break;
     }
 
