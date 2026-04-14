@@ -1,0 +1,147 @@
+version: 1
+description: >-
+  Trigger-accuracy benchmark for the cartridge-forge department. Each case
+  pairs a user utterance with the skill we expect to fire. Target: >=85%
+  accuracy across 25+ cases.
+
+cases:
+  # -- scaffold (5) -----------------------------------------------------
+  - id: sc-01
+    utterance: scaffold a new department cartridge called inventory
+    expected_skill: cartridge-scaffold
+    domain: scaffold
+
+  - id: sc-02
+    utterance: bootstrap a cartridge for the robotics department
+    expected_skill: cartridge-scaffold
+    domain: scaffold
+
+  - id: sc-03
+    utterance: create a new cartridge from the department template
+    expected_skill: cartridge-scaffold
+    domain: scaffold
+
+  - id: sc-04
+    utterance: can you scaffold a content cartridge for the lighthouse project
+    expected_skill: cartridge-scaffold
+    domain: scaffold
+
+  - id: sc-05
+    utterance: new cartridge please, coprocessor template, gpu-ray-tracer
+    expected_skill: cartridge-scaffold
+    domain: scaffold
+
+  # -- validate (5) -----------------------------------------------------
+  - id: va-01
+    utterance: validate examples/cartridges/cartridge-forge/cartridge.yaml
+    expected_skill: cartridge-validate
+    domain: validate
+
+  - id: va-02
+    utterance: lint this cartridge and tell me what is wrong
+    expected_skill: cartridge-validate
+    domain: validate
+
+  - id: va-03
+    utterance: check the math-department cartridge for schema errors
+    expected_skill: cartridge-validate
+    domain: validate
+
+  - id: va-04
+    utterance: is my cartridge.yaml valid
+    expected_skill: cartridge-validate
+    domain: validate
+
+  - id: va-05
+    utterance: run the validator on the space-between cartridge
+    expected_skill: cartridge-validate
+    domain: validate
+
+  # -- eval (5) ---------------------------------------------------------
+  - id: ev-01
+    utterance: run the pre-deploy gates on cartridge-forge
+    expected_skill: cartridge-eval
+    domain: eval
+
+  - id: ev-02
+    utterance: eval the cartridge and show me the gate results
+    expected_skill: cartridge-eval
+    domain: eval
+
+  - id: ev-03
+    utterance: is this cartridge ready to ship
+    expected_skill: cartridge-eval
+    domain: eval
+
+  - id: ev-04
+    utterance: run gates against the rca-department cartridge
+    expected_skill: cartridge-eval
+    domain: eval
+
+  - id: ev-05
+    utterance: pre-deploy check please
+    expected_skill: cartridge-eval
+    domain: eval
+
+  # -- fork (4) ---------------------------------------------------------
+  - id: fk-01
+    utterance: fork the rca-department cartridge into my-rca
+    expected_skill: cartridge-fork
+    domain: fork
+
+  - id: fk-02
+    utterance: clone cartridge-forge and call it forge-user
+    expected_skill: cartridge-fork
+    domain: fork
+
+  - id: fk-03
+    utterance: branch the math-department cartridge for my algebra work
+    expected_skill: cartridge-fork
+    domain: fork
+
+  - id: fk-04
+    utterance: I want to customize rca-department without touching the original
+    expected_skill: cartridge-fork
+    domain: fork
+
+  # -- migrate (4) ------------------------------------------------------
+  - id: mg-01
+    utterance: migrate the old space-between content cartridge to the unified schema
+    expected_skill: cartridge-migrate
+    domain: migrate
+
+  - id: mg-02
+    utterance: upgrade this legacy cartridge to the new Cartridge + Chipset format
+    expected_skill: cartridge-migrate
+    domain: migrate
+
+  - id: mg-03
+    utterance: port the legacy cartridges from src/bundles/cartridge
+    expected_skill: cartridge-migrate
+    domain: migrate
+
+  - id: mg-04
+    utterance: legacy to unified, please, preserve the id
+    expected_skill: cartridge-migrate
+    domain: migrate
+
+  # -- distill (4) ------------------------------------------------------
+  - id: ds-01
+    utterance: distill these research notes into a cartridge skeleton
+    expected_skill: cartridge-distill
+    domain: distill
+
+  - id: ds-02
+    utterance: I have 30 papers, turn them into a cartridge
+    expected_skill: cartridge-distill
+    domain: distill
+
+  - id: ds-03
+    utterance: sources to cartridge for the PNW field notes
+    expected_skill: cartridge-distill
+    domain: distill
+
+  - id: ds-04
+    utterance: distill my chat logs into a first-pass content cartridge
+    expected_skill: cartridge-distill
+    domain: distill
