@@ -56,7 +56,9 @@ jobs:
         run: |
           npx tsx tools/import-filesystem-skills.ts \
             --skills .claude/skills \
+            --skills examples/skills \
             --agents .claude/agents \
             --agents examples/agents/gsd \
+            --teams examples/teams \
             --chipsets data/chipset
       - run: npx vitest run
