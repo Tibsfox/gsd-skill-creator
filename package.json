@@ -33,8 +33,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/cli.ts",
-    "test": "vitest",
-    "test:integration": "vitest run --include '**/*.integration.test.ts'",
+    "test": "vitest --project root --project space-between",
+    "test:integration": "vitest run --project integration",
     "setup:claude": "skill-creator gsd-init",
     "setup:claude:force": "skill-creator gsd-init --force",
     "setup:claude:check": "skill-creator gsd-init --dry-run",
