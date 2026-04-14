@@ -233,14 +233,32 @@ function classifyUrl(url: string): {
 
 /**
  * Normalize an absolute URL path to match builtUrls format.
- * /foo → /foo/
+ * /foo → /foo/, /foo/index.html → /foo/, /index.html → /
  */
 function normalizeInternalUrl(url: string): string {
   const hashIdx = url.indexOf('#');
-  const path = hashIdx >= 0 ? url.slice(0, hashIdx) : url;
+  let path = hashIdx >= 0 ? url.slice(0, hashIdx) : url;
   const fragment = hashIdx >= 0 ? url.slice(hashIdx + 1) : undefined;
+  // Canonicalize /dir/index.html → /dir/ and /index.html → / to match builtUrls
+  if (path === '/index.html' || path === 'index.html') {
+    path = '/';
+  } else if (path.endsWith('/index.html')) {
+    path = path.slice(0, -'index.html'.length);
+  }
   const normalized = path.endsWith('/') ? path : path + '/';
   return fragment !== undefined ? normalized + '#' + fragment : normalized;
+}
+
+/**
+ * Map a source file path to its served page URL, matching the builtUrls
+ * convention used by runLinkCheck: `foo/index.html` → `/foo/`, `index.html` → `/`.
+ */
+function sourceFileToPageUrl(sourceFile: string): string {
+  if (sourceFile === 'index.html') return '/';
+  if (sourceFile.endsWith('/index.html')) {
+    return '/' + sourceFile.slice(0, -'/index.html'.length) + '/';
+  }
+  return '/' + sourceFile;
 }
 
 /**
@@ -255,7 +273,7 @@ function resolveRelativeUrl(url: string, sourceFile: string): string {
 
   try {
     const resolved = new URL(url, PLACEHOLDER_BASE + sourceDir.slice(1));
-    return resolved.pathname;
+    return resolved.pathname + (resolved.hash || '');
   } catch {
     return url;
   }
@@ -365,8 +383,17 @@ export async function verifyLinks(
     // --- Fragment-only anchor (#slug) ---
     if (classification.isFragment) {
       const slug = url.slice(1);
-      // Fragment-only: refers to current page — we'd need sourceFile page URL
-      // Treat as ok (we can't resolve current page without more context)
+      if (!sourceFile) {
+        // No source context — can't resolve which page the fragment belongs to
+        results.push({ ...link, status: 'ok' });
+        continue;
+      }
+      const pageUrl = sourceFileToPageUrl(sourceFile);
+      const slugs = headingSlugsByPage.get(pageUrl);
+      if (slugs && !slugs.has(slug)) {
+        results.push({ ...link, status: 'broken-anchor', reason: 'anchor-not-found' });
+        continue;
+      }
       results.push({ ...link, status: 'ok' });
       continue;
     }
