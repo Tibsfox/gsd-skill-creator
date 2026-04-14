@@ -4,7 +4,7 @@ Community documentation for [GSD (Get Shit Done)](https://github.com/gsd-build/g
 
 ## What's here
 
-Four standalone XeLaTeX documents:
+Five standalone XeLaTeX documents:
 
 | Document | Pages | Audience |
 |---|---|---|
@@ -12,6 +12,7 @@ Four standalone XeLaTeX documents:
 | `tex/gsd-intermediate-guide.tex` | 57 | Daily users — full workflow, configuration, recovery |
 | `tex/gsd-advanced-guide.tex` | 38 | Senior engineers, leads — architecture, security, scale |
 | `tex/gsd-command-reference.tex` | 19 | Everyone — pin-to-the-wall reference for all 75 commands |
+| `tex/gsd-going-further-guide.tex` | 68 | Customizers — skills, MCP integration, multi-repo |
 
 Plus shared LaTeX infrastructure in `shared/`:
 
