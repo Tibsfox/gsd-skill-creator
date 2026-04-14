@@ -1,0 +1,28 @@
+id: rca-department
+name: Root Cause Analysis Department
+version: 1.0.0
+author: tibsfox
+description: >-
+  Cross-cutting reliability infrastructure forked from the department
+  template. Five named agents (rca-investigator as CAPCOM plus four
+  specialists), six methodology skills, three pre-composed teams,
+  Grove persistence for investigations/findings/graphs/postmortems.
+  Deliberately opts out of college binding — see chipset college:.
+trust: system
+provenance:
+  origin: migrate
+  createdAt: 2026-04-14T12:45:00Z
+  sourceCommits:
+    - 52625ee44
+  researchGrounding:
+    - examples/chipsets/rca-department/chipset.yaml
+chipsets:
+  - kind: department
+    src: ../../chipsets/rca-department/chipset.yaml
+  - kind: grove
+    src: ../../chipsets/rca-department/chipset.yaml#/grove
+  - kind: college
+    src: ../../chipsets/rca-department/chipset.yaml#/college
+metadata:
+  migrated_from: examples/chipsets/rca-department/
+  wave: 2B
