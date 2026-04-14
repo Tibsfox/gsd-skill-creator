@@ -1,6 +1,7 @@
 ---
 name: debugging-testing
-description: Debugging strategies and testing methodologies from printf to formal verification. Covers debugging techniques (binary search debugging, rubber duck, printf/logging, interactive debuggers, time-travel debugging, git bisect), testing levels (unit, integration, end-to-end, acceptance), test-driven development (red-green-refactor cycle, test-first design benefits, when TDD helps and when it hurts), test design (equivalence partitioning, boundary values, property-based testing, mutation testing), profiling and performance debugging (CPU profilers, memory profilers, flame graphs), and the debugging mindset (scientific method applied to code). Use when finding bugs, writing tests, setting up testing infrastructure, or diagnosing performance problems.
+description: Use when the user reports a bug they can't reproduce, asks where to start debugging, or mentions a Heisenbug / production-only failure. Drives the observe→hypothesize→predict→test→iterate scientific method.
+description-frequency: on-demand
 type: skill
 category: coding
 status: stable
