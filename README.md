@@ -329,6 +329,7 @@ All documentation lives in [`docs/`](docs/).
 | [Comparison](docs/COMPARISON.md) | Skills vs Agents vs Teams |
 | [Release History](docs/RELEASE-HISTORY.md) | Version index linking to [per-release notes](docs/release-notes/) (89 versions) |
 | [Troubleshooting](docs/TROUBLESHOOTING.md) | Common issues and solutions |
+| [Cartridge Forge](docs/cartridge/) | Unified cartridge/chipset format, `skill-creator cartridge` CLI, migration guide |
 | [Examples](examples/) | 34 ready-to-use skills, agents, and teams |
 
 ---
