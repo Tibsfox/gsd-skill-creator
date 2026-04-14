@@ -209,6 +209,54 @@ teams: {}
     expect(parsed.ok).toBe(false);
   });
 
+  it('CL-15 --allow-validation-debt downgrades agent_affinity errors to warnings', async () => {
+    const io = makeIO();
+    await scaffold(io);
+    const yamlPath = join(scaffoldDir, 'chipsets', 'department.yaml');
+    const broken = `skills:
+  orphan-skill:
+    domain: cli
+    description: References a non-existent agent
+    agent_affinity: ghost-agent
+agents:
+  topology: router
+  router_agent: placeholder-agent
+  agents:
+    - name: placeholder-agent
+      role: lead
+teams: {}
+`;
+    const { writeFileSync } = await import('node:fs');
+    writeFileSync(yamlPath, broken, 'utf8');
+
+    const strictIO = makeIO();
+    const strictCode = await cartridgeCommand(
+      ['validate', join(scaffoldDir, 'cartridge.yaml'), '--json'],
+      strictIO,
+    );
+    expect(strictCode).toBe(1);
+
+    const allowIO = makeIO();
+    const allowCode = await cartridgeCommand(
+      [
+        'validate',
+        join(scaffoldDir, 'cartridge.yaml'),
+        '--json',
+        '--allow-validation-debt',
+      ],
+      allowIO,
+    );
+    expect(allowCode).toBe(0);
+    const parsed = JSON.parse(allowIO.out.join('\n'));
+    expect(parsed.valid).toBe(true);
+    expect(parsed.errors).toEqual([]);
+    expect(parsed.warnings.length).toBeGreaterThanOrEqual(1);
+    const joined = parsed.warnings
+      .map((w: { message: string }) => w.message)
+      .join('\n');
+    expect(joined).toContain('known-validation-debt');
+  });
+
   it('cartridge --help prints usage and exits 0 (smoke)', async () => {
     const io = makeIO();
     const code = await cartridgeCommand(['--help'], io);

@@ -20,6 +20,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `.claude/hooks/` -- deterministic hooks (commit validation, session state, phase boundary)
 - `project-claude/` -- source of project-specific Claude config (installed via `node project-claude/install.cjs`)
 - `src/` -- TypeScript library and CLI
+- `src/cartridge/` -- unified cartridge/chipset format + `skill-creator cartridge …` CLI (see `docs/cartridge/`)
 - `src-tauri/` -- Rust backend (Tauri)
 - `desktop/` -- Vite webview frontend
 - `.college/` -- College Structure: Rosetta Core, panels, departments (culinary-arts, mathematics, mind-body), calibration

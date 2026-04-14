@@ -355,6 +355,12 @@ It ships with:
 
 The cartridge format is the first composition mechanism in gsd-skill-creator — treating knowledge packs as tracks in a mix, not siloed reference documents. Cartridge infrastructure includes types, a loader, validator, registry, and packer/unpacker.
 
+### Cartridge Forge (v1.49.x)
+
+The **unified** cartridge format lives in `src/cartridge/` and is surfaced by the `skill-creator cartridge …` CLI. A cartridge is a YAML file that binds a header (id, version, trust, provenance) to a list of **chipsets** — eight initial kinds (department, grove, college, coprocessor, content, muse, evaluation, forge). Chipsets can be inline or referenced by `src:` + `#/` fragment. The forge provides seven subcommands — `load`, `validate`, `scaffold`, `metrics`, `eval`, `dedup`, `fork` — each with `--json` output and stable exit codes.
+
+The forge dogfoods itself: `examples/cartridges/cartridge-forge/cartridge.yaml` is a cartridge that teaches the system how to create cartridges. See [`docs/cartridge/`](cartridge/) for the normative spec, chipset taxonomy, forging guide, migration guide, and metrics reference.
+
 ---
 
 ## Mission Packs
