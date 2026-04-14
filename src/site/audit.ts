@@ -1,5 +1,8 @@
 /* ---- Quality audit runner for site generator build output ---- */
 
+import { runLinkCheck } from './link-check.js';
+import type { VerifiedLink } from './link-check.js';
+
 export interface AuditCheck {
   name: string;
   passed: boolean;
@@ -15,6 +18,14 @@ export interface AuditResult {
 export interface AuditOptions {
   readFile: (path: string) => Promise<string>;
   walkDir: (dir: string) => Promise<string[]>;
+  /** Enable external HEAD checks in the link-check stage (default false). */
+  checkExternal?: boolean;
+  /** Injected HEAD client for external link checks (uses node:http/https if absent). */
+  httpHead?: (url: string) => Promise<{ status: number; finalUrl: string }>;
+  /** Read cache for external link checks. */
+  readCache?: (path: string) => Promise<string>;
+  /** Write cache for external link checks. */
+  writeCache?: (path: string, content: string) => Promise<void>;
 }
 
 /* ---- Size thresholds ---- */
@@ -113,6 +124,67 @@ export async function runAudit(
       : `Broken links: ${brokenLinks.join('; ')}`,
   });
 
+  // ---- 3b. Extended link checks (external, anchor, relative) ----
+  // Delegates to src/site/link-check.ts; preserves existing link-integrity above unchanged.
+  {
+    const checkExternal = options.checkExternal ?? false;
+    let verifiedLinks: VerifiedLink[] = [];
+
+    try {
+      verifiedLinks = await runLinkCheck(buildDir, {
+        readFile,
+        walkDir,
+        checkExternal,
+        httpHead: options.httpHead,
+        readCache: options.readCache,
+        writeCache: options.writeCache,
+      });
+    } catch {
+      // If link-check fails, report as warnings and continue
+      warnings.push('Extended link check failed (skipped)');
+    }
+
+    // external-links check
+    if (!checkExternal) {
+      checks.push({
+        name: 'external-links',
+        passed: true,
+        details: 'Skipped (--check-external off)',
+      });
+    } else {
+      const externalBroken = verifiedLinks.filter((l) => l.status === 'broken-external');
+      checks.push({
+        name: 'external-links',
+        passed: externalBroken.length === 0,
+        details: externalBroken.length === 0
+          ? 'All external links reachable'
+          : `Broken external links: ${externalBroken.map((l) => l.url).join('; ')}`,
+      });
+    }
+
+    // anchor-fragments check
+    const anchorBroken = verifiedLinks.filter((l) => l.status === 'broken-anchor');
+    checks.push({
+      name: 'anchor-fragments',
+      passed: anchorBroken.length === 0,
+      details: anchorBroken.length === 0
+        ? 'All anchor fragments resolve'
+        : `Broken anchor fragments: ${anchorBroken.map((l) => l.url).join('; ')}`,
+    });
+
+    // relative-links check (broken-internal links that came from relative URLs)
+    const relativeBroken = verifiedLinks.filter(
+      (l) => l.status === 'broken-internal' && isRelativeUrl(l.url),
+    );
+    checks.push({
+      name: 'relative-links',
+      passed: relativeBroken.length === 0,
+      details: relativeBroken.length === 0
+        ? 'All relative links resolve'
+        : `Broken relative links: ${relativeBroken.map((l) => l.url).join('; ')}`,
+    });
+  }
+
   // ---- 4. Schema.org JSON-LD validity ----
   const schemaErrors: string[] = [];
   for (const file of htmlFiles) {
@@ -185,6 +257,12 @@ export async function runAudit(
 }
 
 /* ---- Helpers ---- */
+
+/** Detect relative URLs (start with ./ or ../ or contain no scheme) */
+function isRelativeUrl(url: string): boolean {
+  return url.startsWith('./') || url.startsWith('../') ||
+    (!url.startsWith('/') && !url.startsWith('http') && !url.startsWith('//'));
+}
 
 /** URLs that are not page links (assets, meta files) */
 function isAssetUrl(href: string): boolean {
