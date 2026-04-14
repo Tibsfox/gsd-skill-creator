@@ -1,0 +1,42 @@
+id: math-coprocessor
+name: Math Co-Processor
+version: 1.0.0
+author: tibsfox
+description: >-
+  GPU-accelerated mathematics co-processor — five chips (algebrus,
+  fourier, vectora, statos, symbex) dispatched via MCP server with
+  fp64 precision defaults, 750 MB VRAM budget, and dedicated CUDA
+  stream for inference coexistence.
+trust: system
+provenance:
+  origin: migrate
+  createdAt: 2026-04-14T12:45:00Z
+  sourceCommits:
+    - 52625ee44
+  researchGrounding:
+    - examples/chipsets/math-coprocessor/chipset.yaml
+chipsets:
+  - kind: coprocessor
+    package:
+      name: math_coprocessor
+      language: python
+    mcp:
+      config: mcp-config.json
+    runtime:
+      vram_budget_mb: 750
+      cuda_streams: 1
+    chips:
+      - name: algebrus
+        function: linear algebra (gemm, solve, svd, eigen, det, inv)
+      - name: fourier
+        function: spectral analysis (fft, ifft, spectrum)
+      - name: vectora
+        function: vector calculus (gradient, transform, batch_eval)
+      - name: statos
+        function: statistics (describe, monte_carlo, regression)
+      - name: symbex
+        function: symbolic expressions (eval, verify)
+metadata:
+  migrated_from: examples/chipsets/math-coprocessor/
+  wave: 2B
+  runtime_config: examples/chipsets/math-coprocessor/chipset.yaml
