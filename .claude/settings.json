@@ -29,7 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/gsd-session-state.sh"
+            "command": "node .claude/hooks/session-state.cjs"
           }
         ]
       }
@@ -98,7 +98,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/gsd-validate-commit.sh",
+            "command": "node .claude/hooks/validate-commit.cjs",
             "timeout": 5
           }
         ]
@@ -121,7 +121,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/gsd-phase-boundary.sh",
+            "command": "node .claude/hooks/phase-boundary-check.cjs",
             "timeout": 5
           }
         ]
