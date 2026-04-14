@@ -8,13 +8,15 @@ import { dirname, join } from 'node:path';
 // ============================================================================
 
 // Mock the heavy dependencies before importing critiqueCommand
+const VALID_TRIGGERING = `## Naive Prompt\nText.\n\n## Expected Baseline Failure\nText.\n\n## Expected Skill Activation\nText.\n\n## Rationalization Table\n| R | C |\n|---|---|\n| a | b |\n| c | d |\n| e | f |`;
+
 vi.mock('../../critique/draft.js', () => ({
   loadDraft: vi.fn(async (skillDir: string) => ({
     skillName: 'test-skill',
     skillDir,
     body: '---\nname: test-skill\ndescription: A test\n---\n\n# Test Skill\n',
     metadata: { name: 'test-skill', description: 'A test' },
-    files: new Map(),
+    files: new Map([['triggering.test.md', VALID_TRIGGERING]]),
   })),
 }));
 
