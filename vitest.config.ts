@@ -48,6 +48,24 @@ export default defineConfig({
           exclude: ['**/node_modules/**'],
         },
       },
+      // Integration tests — env-gated via GSD_*_INTEGRATION=1 inside the files.
+      // Opt-in only: selected via `vitest run --project integration`.
+      {
+        test: {
+          name: 'integration',
+          globals: true,
+          include: [
+            'src/**/*.integration.test.ts',
+            'tests/**/*.integration.test.ts',
+            '.college/**/*.integration.test.ts',
+          ],
+          exclude: [
+            'dist/**',
+            'desktop/**',
+            'node_modules/**',
+          ],
+        },
+      },
     ],
     coverage: {
       provider: 'v8',
