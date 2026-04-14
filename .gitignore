@@ -12,6 +12,9 @@ node_modules/
 # Brainstorm session data (local only)
 .brainstorm/
 
+# Discovery runtime state (local only)
+.discovery-state.json
+
 # Archive (deprecated code, hidden)
 .archive/
 
