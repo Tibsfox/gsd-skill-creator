@@ -520,6 +520,7 @@ async function walkSource(
   sourceDir: string,
   kind: ResourceKind,
   excludes: string[],
+  depth = 0,
 ): Promise<ParsedResource[]> {
   if (isExcluded(sourceDir, excludes)) return [];
   const out: ParsedResource[] = [];
@@ -531,7 +532,8 @@ async function walkSource(
   }
   for (const entry of entries.sort()) {
     if (entry.startsWith('.')) continue;
-    if (isExcluded(join(sourceDir, entry), excludes)) continue;
+    const entryPath = join(sourceDir, entry);
+    if (isExcluded(entryPath, excludes)) continue;
     let parsed: ParsedResource | null = null;
     switch (kind) {
       case 'skills':
@@ -547,7 +549,25 @@ async function walkSource(
         parsed = await parseChipset(sourceDir, entry);
         break;
     }
-    if (parsed) out.push(parsed);
+    if (parsed) {
+      out.push(parsed);
+      continue;
+    }
+    // Nested-category support: when the entry didn't resolve to a resource
+    // but is a directory, descend one level. This handles layouts like
+    // examples/skills/psychology/social-psychology/SKILL.md without
+    // requiring every category to be passed as a separate source. We cap
+    // the recursion at depth 1 to keep behavior predictable.
+    if (depth >= 1) continue;
+    let isDir = false;
+    try {
+      isDir = (await stat(entryPath)).isDirectory();
+    } catch {
+      continue;
+    }
+    if (!isDir) continue;
+    const nested = await walkSource(entryPath, kind, excludes, depth + 1);
+    out.push(...nested);
   }
   return out;
 }
