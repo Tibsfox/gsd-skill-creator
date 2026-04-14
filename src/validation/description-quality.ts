@@ -23,7 +23,7 @@ export const CAPABILITY_PATTERNS: RegExp[] = [
  * all matches within a single description pass.
  */
 export const ANTI_CAPABILITY_PATTERNS: RegExp[] = [
-  /\b(guides?|manages?|handles?|provides?|enforces?|validates?|generates?|creates?|configures?|orchestrates?|coordinates?|automates?|monitors?|analyzes?)\b/gi,
+  /\b(guides?|manages?|handles?|provides?|enforces?|validates?|generates?|creates?|configures?|orchestrates?|coordinates?|automates?|monitors?|analyzes?)\b/i,
 ];
 
 /**
@@ -69,6 +69,17 @@ export interface DescriptionQualityOptions {
 }
 
 /**
+ * PLAN-contract options type (Phase B locked naming).
+ * Uses `descriptionFrequency` (camelCase) instead of `frequency` to match
+ * the frontmatter field `description-frequency`. Both option shapes are
+ * accepted by validate() for backward compatibility.
+ */
+export interface ValidateDescriptionOptions {
+  /** Corresponds to the 'description-frequency' frontmatter field. Defaults to 'on-demand'. */
+  descriptionFrequency?: DescriptionFrequency;
+}
+
+/**
  * Result of quality assessment for a skill description.
  *
  * Legacy fields preserve backward compatibility. Phase B fields are all
@@ -81,7 +92,7 @@ export interface QualityAssessment {
   suggestions: string[];
   warning?: string;
 
-  // Phase B additions — CSO discipline
+  // Phase B additions — CSO discipline (existing field names preserved)
   antiCapabilityHits?: string[];
   triggerPurity?: number;
   wordCount?: number;
@@ -90,6 +101,14 @@ export interface QualityAssessment {
     actual: number;
     frequency: DescriptionFrequency;
   };
+
+  // Phase B PLAN-contract aliases (locked field names from PLAN.md must_haves)
+  /** Alias for antiCapabilityHits; populated identically. */
+  antiCapabilityMatches?: string[];
+  /** Set when triggerPurity < 0.5; describes the routing-quality failure. */
+  triggerPurityWarning?: string;
+  /** Human-readable budget violation string; set when wordCountBudgetExceeded is set. */
+  wordCountViolation?: string;
 }
 
 // ============================================================================
@@ -97,8 +116,15 @@ export interface QualityAssessment {
 // ============================================================================
 
 export class DescriptionQualityValidator {
-  validate(description: string, options: DescriptionQualityOptions = {}): QualityAssessment {
-    const frequency: DescriptionFrequency = options.frequency ?? 'on-demand';
+  validate(
+    description: string,
+    options: DescriptionQualityOptions | ValidateDescriptionOptions = {},
+  ): QualityAssessment {
+    // Resolve frequency from either option shape (backward compat + PLAN contract)
+    const legacyOpts = options as DescriptionQualityOptions;
+    const planOpts = options as ValidateDescriptionOptions;
+    const frequency: DescriptionFrequency =
+      legacyOpts.frequency ?? planOpts.descriptionFrequency ?? 'on-demand';
 
     const hasCapabilityStatement = this.detectCapabilityStatement(description);
     const hasUseWhenClause = USE_WHEN_PATTERN.test(description);
@@ -151,6 +177,16 @@ export class DescriptionQualityValidator {
       );
     }
 
+    // PLAN-contract aliases (locked field names from PLAN.md must_haves)
+    const antiCapabilityMatches = antiCapabilityHits;
+    const triggerPurityWarning =
+      triggerPurity < 0.5
+        ? `triggerPurity ${triggerPurity.toFixed(2)} below 0.5 — description reads as a capability dump, not a routing trigger`
+        : undefined;
+    const wordCountViolation = wordCountBudgetExceeded
+      ? `${wordCountBudgetExceeded.actual} words exceeds ${wordCountBudgetExceeded.budget}-word budget for ${wordCountBudgetExceeded.frequency === 'always' ? 'always-on' : 'on-demand'} skill descriptions`
+      : undefined;
+
     return {
       hasCapabilityStatement,
       hasUseWhenClause,
@@ -161,6 +197,10 @@ export class DescriptionQualityValidator {
       triggerPurity,
       wordCount,
       wordCountBudgetExceeded,
+      // PLAN-contract aliases
+      antiCapabilityMatches,
+      triggerPurityWarning,
+      wordCountViolation,
     };
   }
 
@@ -179,9 +219,11 @@ export class DescriptionQualityValidator {
 function extractAntiCapabilityHits(description: string): string[] {
   const hits = new Set<string>();
   for (const pattern of ANTI_CAPABILITY_PATTERNS) {
-    pattern.lastIndex = 0;
+    // Create a global copy for exec-loop iteration (exported pattern has no g flag
+    // to avoid stateful .test() issues for external callers).
+    const globalPattern = new RegExp(pattern.source, 'gi');
     let match: RegExpExecArray | null;
-    while ((match = pattern.exec(description)) !== null) {
+    while ((match = globalPattern.exec(description)) !== null) {
       const raw = match[0].toLowerCase();
       hits.add(canonicalizeVerb(raw));
     }
