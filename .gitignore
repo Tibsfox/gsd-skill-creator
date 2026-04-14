@@ -93,3 +93,8 @@ prometheus/
 .local/
 # Token telemetry runtime data (anchored at root; src/telemetry/ is source code)
 /telemetry/
+# Tibsfox-specific publishing infrastructure (local-only, not for distribution)
+scripts/sweep/sweep_daemon.py
+scripts/sync-research-to-live.sh
+scripts/python/sync-usgs.py
+scripts/python/build-learn-pages.py
