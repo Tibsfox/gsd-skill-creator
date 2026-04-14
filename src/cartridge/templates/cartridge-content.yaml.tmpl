@@ -1,0 +1,47 @@
+id: {{slug}}
+name: {{name}}
+version: 0.1.0
+author: unknown
+description: A scaffolded content cartridge. Edit this description.
+trust: {{trust}}
+provenance:
+  origin: scaffold
+  createdAt: 1970-01-01T00:00:00Z
+chipsets:
+  - kind: content
+    deepMap:
+      concepts:
+        - id: placeholder-concept
+          name: Placeholder Concept
+          description: Replace this with a real concept.
+          depth: read
+          tags:
+            - placeholder
+      connections: []
+      entryPoints:
+        - placeholder-concept
+      progressionPaths:
+        - id: intro
+          name: Introduction
+          description: Start here.
+          steps:
+            - placeholder-concept
+    story:
+      title: {{name}}
+      narrative: A placeholder narrative. Replace with a real story.
+      chapters:
+        - id: ch1
+          title: Opening
+          summary: Where we begin.
+          conceptRefs:
+            - placeholder-concept
+      throughLine: A placeholder through-line.
+  - kind: voice
+    vocabulary:
+      - placeholder
+    orientation:
+      angle: 0
+      magnitude: 1
+    voice:
+      tone: neutral
+      style: narrative
