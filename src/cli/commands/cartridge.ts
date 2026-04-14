@@ -55,7 +55,7 @@ function usageError(io: CartridgeCommandIO, message: string): number {
   io.stderr('');
   io.stderr('Usage:');
   io.stderr('  skill-creator cartridge load <path> [--json]');
-  io.stderr('  skill-creator cartridge validate <path> [--json]');
+  io.stderr('  skill-creator cartridge validate <path> [--json] [--allow-validation-debt]');
   io.stderr('  skill-creator cartridge scaffold <template> <dir> <name> [--trust <t>]');
   io.stderr('  skill-creator cartridge metrics <path> [--json]');
   io.stderr('  skill-creator cartridge eval <path> [--json]');
@@ -103,7 +103,7 @@ export async function cartridgeCommand(
   if (sub === '--help' || sub === '-h' || sub === 'help') {
     io.stdout('Usage:');
     io.stdout('  skill-creator cartridge load <path> [--json]');
-    io.stdout('  skill-creator cartridge validate <path> [--json]');
+    io.stdout('  skill-creator cartridge validate <path> [--json] [--allow-validation-debt]');
     io.stdout('  skill-creator cartridge scaffold <template> <dir> <name> [--trust <t>]');
     io.stdout('  skill-creator cartridge metrics <path> [--json]');
     io.stdout('  skill-creator cartridge eval <path> [--json]');
@@ -156,25 +156,46 @@ function handleLoad(args: string[], io: CartridgeCommandIO): number {
   return 0;
 }
 
+const VALIDATION_DEBT_MARKERS = ['agent_affinity', 'domains_covered'];
+
 function handleValidate(args: string[], io: CartridgeCommandIO): number {
   const positional = positionalArgs(args);
   const path = positional[0];
   if (!path) return usageError(io, 'validate requires <path>');
+  const allowDebt = args.includes('--allow-validation-debt');
   const cartridge = loadCartridge(path);
-  const result = validateCartridge(cartridge);
+  const raw = validateCartridge(cartridge);
+  const debtErrors = raw.errors.filter((e) =>
+    VALIDATION_DEBT_MARKERS.some((m) => e.path.includes(m)),
+  );
+  const hardErrors = raw.errors.filter((e) => !debtErrors.includes(e));
+  const effective = allowDebt
+    ? {
+        ...raw,
+        valid: hardErrors.length === 0,
+        errors: hardErrors,
+        warnings: [
+          ...raw.warnings,
+          ...debtErrors.map((e) => ({
+            path: e.path,
+            message: `known-validation-debt: ${e.message}`,
+          })),
+        ],
+      }
+    : raw;
   if (jsonMode(args)) {
-    printJson(io, result);
+    printJson(io, effective);
   } else {
-    if (result.valid) {
-      io.stdout(`OK  ${cartridge.id}  ${result.warnings.length} warning(s)`);
+    if (effective.valid) {
+      io.stdout(`OK  ${cartridge.id}  ${effective.warnings.length} warning(s)`);
     } else {
       io.stderr(`FAIL  ${cartridge.id}`);
-      for (const e of result.errors) {
+      for (const e of effective.errors) {
         io.stderr(`  ${e.path}: ${e.message}`);
       }
     }
   }
-  return result.valid ? 0 : 1;
+  return effective.valid ? 0 : 1;
 }
 
 function handleScaffold(args: string[], io: CartridgeCommandIO): number {
