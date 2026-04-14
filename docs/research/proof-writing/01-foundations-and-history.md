@@ -438,9 +438,9 @@ This matters for section 3: Hilbert's program was not only about pure mathematic
 
 ## Lessons Learned & Retrospectives — Third Pass
 
-### What 190+ research missions taught about writing history
+### What 242+ research missions taught about writing history
 
-Across our research catalog — 190+ projects, 28 series, 1.88M words — the historical documents that aged best share three properties:
+Across our research catalog — 242+ projects, 28 series, 1.88M+ words — the historical documents that aged best share three properties:
 
 1. **They cite primary sources, not secondary summaries.** The Euclid excerpt in section 1.3 works because it reproduces the proof itself, not a paraphrase. Our strongest historical research (the `lsp-research/history-philosophy.md` Church/Princeton section, the `pch-research/` punch-card era) does the same.
 

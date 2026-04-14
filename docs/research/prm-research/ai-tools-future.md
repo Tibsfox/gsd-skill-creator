@@ -1335,7 +1335,7 @@ GSD's execution runtime is Claude Code (Anthropic's agentic coding tool). This c
 
 ### Limitation 6: Unproven at Enterprise Scale
 
-GSD has been demonstrated on projects ranging from small utilities to mid-size systems (21,000+ tests, 190+ missions/research projects). It has not been validated on:
+GSD has been demonstrated on projects ranging from small utilities to mid-size systems (24,000+ tests, 242+ missions/research projects). It has not been validated on:
 - Multi-year enterprise programs with hundreds of contributors
 - Projects with regulatory compliance requirements (HIPAA, SOX, FedRAMP)
 - Safety-critical systems (avionics, medical devices, nuclear)
@@ -2070,9 +2070,9 @@ Multiple open-source projects have demonstrated AI agents contributing code, cre
 Major technology companies (Microsoft, Google, Amazon, Meta) have deployed AI coding assistants internally. Microsoft's internal studies show significant productivity gains with GitHub Copilot. These are not fully autonomous agents, but they represent a step toward AI as team member.
 
 **3. GSD's documented execution:**
-GSD has produced documented results across 190+ projects/missions, including:
-- 21,000+ passing tests
-- 190+ research projects delivered
+GSD has produced documented results across 242+ projects/missions, including:
+- 24,000+ passing tests
+- 242+ research projects delivered
 - Multi-agent parallel execution demonstrated at scale
 - Consistent delivery velocity across extended project timelines
 - Knowledge preservation across session boundaries

@@ -580,9 +580,9 @@ The craft response: normalize struggle. A blank page before a proof is supposed 
 
 ## Lessons Learned & Retrospectives — Third Pass
 
-### What 190+ missions taught about writing craft
+### What 242+ missions taught about writing craft
 
-Our research corpus spans 190+ completed missions and 1.88M+ words. The craft principles that worked best across all that output:
+Our research corpus spans 242+ completed missions and 1.88M+ words. The craft principles that worked best across all that output:
 
 1. **The best research documents start with "why should you care?"** — not with definitions. Compare the opening of `docs/research/lsp-research/history-philosophy.md` ("Lisp is not a programming language. Or rather...") with a typical textbook opening ("Definition 1.1: A Lisp program is..."). The former pulls the reader in; the latter pushes them away.
 
