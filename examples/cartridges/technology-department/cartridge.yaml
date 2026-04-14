@@ -1,0 +1,25 @@
+id: technology-department
+name: Technology Department
+version: 1.0.0
+author: tibsfox
+description: >-
+  Bulk W2B.2 migration — wraps the existing department chipset as a
+  unified cartridge with department/grove/college chipset bindings.
+trust: system
+provenance:
+  origin: migrate
+  createdAt: 2026-04-14T12:50:00Z
+  sourceCommits:
+    - 52625ee44
+  researchGrounding:
+    - examples/chipsets/technology-department/chipset.yaml
+chipsets:
+  - kind: department
+    src: ../../chipsets/technology-department/chipset.yaml
+  - kind: grove
+    src: ../../chipsets/technology-department/chipset.yaml#/grove
+  - kind: college
+    src: ../../chipsets/technology-department/chipset.yaml#/college
+metadata:
+  migrated_from: examples/chipsets/technology-department/
+  wave: 2B.2
