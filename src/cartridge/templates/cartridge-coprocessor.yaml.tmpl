@@ -1,0 +1,20 @@
+id: {{slug}}
+name: {{name}}
+version: 0.1.0
+author: unknown
+description: A scaffolded coprocessor cartridge. Edit this description.
+trust: {{trust}}
+provenance:
+  origin: scaffold
+  createdAt: 1970-01-01T00:00:00Z
+chipsets:
+  - kind: coprocessor
+    package:
+      name: {{slug}}
+      language: python
+    runtime:
+      vram_budget_mb: 4096
+      cuda_streams: 2
+    chips:
+      - name: placeholder-chip
+        function: Replace with a real chip function.
