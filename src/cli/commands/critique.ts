@@ -23,6 +23,8 @@ import { RealSubagentClient, MockSubagentClient } from '../../critique/subagent-
 import { specComplianceStage } from '../../critique/stages/spec-compliance.js';
 import { codeQualityStage } from '../../critique/stages/code-quality.js';
 import { linkCheckStage } from '../../critique/stages/link-check.js';
+import { csoDescriptionStage } from '../../critique/stages/cso-description.js';
+import { triggeringStructureStage } from '../../critique/stages/triggering-structure.js';
 import { reviseDraft } from '../../critique/revise.js';
 import type { CritiqueFinding, CritiqueConfig, SkillDraft } from '../../critique/types.js';
 import Anthropic from '@anthropic-ai/sdk';
@@ -173,6 +175,8 @@ export async function critiqueCommand(
     specComplianceStage(client),
     codeQualityStage(client),
     linkCheckStage(linkOpts),
+    csoDescriptionStage(),           // Phase B — pure
+    triggeringStructureStage(),      // Phase B — pure
   ];
 
   // --- Build config ---
