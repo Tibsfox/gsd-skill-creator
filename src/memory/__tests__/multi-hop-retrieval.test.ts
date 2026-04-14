@@ -192,10 +192,13 @@ describe('Multi-Hop Retrieval Benchmark', () => {
     expect(Object.keys(typeMap).length).toBeGreaterThan(0);
   });
 
-  // Q4: "What does flight-ops depend on, and what type is each dependency?"
+  // Q4: "What does gsd-executor depend on, and what type is each dependency?"
   // (2-hop: subject→dependsOn→object, then object→hasType→type)
+  // Uses gsd-executor because it ships in tracked examples/agents/gsd/, so the
+  // CI-generated fixture always has it. flight-ops lives in untracked .claude/agents/
+  // and is only present locally.
   it('Q4: follow dependency chain with type resolution', () => {
-    const deps = tripleStore.forSubject('flight-ops');
+    const deps = tripleStore.forSubject('gsd-executor');
     const dependsOn = deps.filter(t => t.predicate === 'dependsOn');
 
     if (dependsOn.length > 0) {
@@ -204,9 +207,9 @@ describe('Multi-Hop Retrieval Benchmark', () => {
         const types = tripleStore.query(d.object, 'hasType', null);
         resolved.push({ dep: d.object, type: types[0]?.object ?? 'unknown' });
       }
-      console.log(`\n  Q4 flight-ops dependencies: ${resolved.map(r => `${r.dep}(${r.type})`).join(', ')}`);
+      console.log(`\n  Q4 gsd-executor dependencies: ${resolved.map(r => `${r.dep}(${r.type})`).join(', ')}`);
     } else {
-      console.log(`\n  Q4 flight-ops has no extracted dependencies (metadata may not include them)`);
+      console.log(`\n  Q4 gsd-executor has no extracted dependencies (metadata may not include them)`);
     }
     // Not asserting specific deps — the test validates the multi-hop traversal works
     expect(deps.length).toBeGreaterThan(0); // At minimum hasType + belongsToWing
@@ -243,16 +246,16 @@ describe('Multi-Hop Retrieval Benchmark', () => {
   });
 
   // Q6: "Use path() to follow a 2-hop chain"
+  // Uses gsd-executor for the same reason as Q4 — it's in tracked
+  // examples/agents/gsd/ so the CI fixture reliably contains it.
   it('Q6: path traversal — subject → predicate chain', () => {
-    // Start at any agent, follow hasType then... we need reverse traversal.
-    // Instead: find all subjects of type "agent", then check their wing
-    const types = tripleStore.path('flight-ops', ['hasType']);
+    const types = tripleStore.path('gsd-executor', ['hasType']);
     expect(types).toContain('agent');
 
-    const wings = tripleStore.path('flight-ops', ['belongsToWing']);
+    const wings = tripleStore.path('gsd-executor', ['belongsToWing']);
     expect(wings).toContain('agents');
 
-    console.log(`\n  Q6 flight-ops path: hasType→[${types}], belongsToWing→[${wings}]`);
+    console.log(`\n  Q6 gsd-executor path: hasType→[${types}], belongsToWing→[${wings}]`);
   });
 
   // Q7: "Find the source hash for a specific fact and verify it exists in the store"
