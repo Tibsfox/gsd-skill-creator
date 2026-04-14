@@ -1,0 +1,24 @@
+skills:
+  placeholder-skill:
+    domain: {{slug}}
+    description: Placeholder skill. Replace with a real capability.
+    triggers:
+      - placeholder
+    agent_affinity: placeholder-agent
+agents:
+  topology: router
+  router_agent: placeholder-agent
+  agents:
+    - name: placeholder-agent
+      role: department coordinator
+      model: sonnet
+      tools:
+        - Read
+        - Write
+      is_capcom: true
+teams:
+  placeholder-team:
+    description: Placeholder team. Replace with a real team.
+    agents:
+      - placeholder-agent
+    use_when: placeholder situations
