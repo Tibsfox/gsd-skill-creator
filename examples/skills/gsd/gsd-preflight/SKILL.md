@@ -1,6 +1,7 @@
 ---
 name: gsd-preflight
-description: Validates GSD artifacts before running workflows. Use when user mentions 'preflight', 'validate', or reports GSD failures.
+description: Use when GSD commands are failing or .planning/ artifacts look inconsistent. Run before any GSD execute-phase or verify-work attempt to catch cross-artifact mismatches early.
+description-frequency: on-demand
 type: skill
 category: gsd
 status: stable
