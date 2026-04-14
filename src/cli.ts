@@ -63,6 +63,35 @@ export function parseSkillsDir(args: string[], scope: SkillScope): string {
 }
 
 /**
+ * Parse a generic string-valued CLI flag.
+ * Honors `--name <value>` (separated) and `--name=<value>` (equals form).
+ * Returns undefined when the flag is absent, when the next token starts with `-`
+ * (meaning the flag value is missing and the next arg is another flag), or when
+ * the equals form has an empty value. Never mutates `args`.
+ *
+ * Exported for unit testing in src/cli.test.ts and shared across case handlers
+ * that need single-value flags (critique, publish, etc.).
+ */
+export function parseStringFlag(args: string[], name: string): string | undefined {
+  // Equals form: --name=<value>
+  const prefix = `${name}=`;
+  const eq = args.find((a) => a.startsWith(prefix));
+  if (eq) {
+    const value = eq.slice(prefix.length);
+    return value || undefined;
+  }
+  // Separated form: --name <value>
+  const idx = args.indexOf(name);
+  if (idx >= 0 && idx + 1 < args.length) {
+    const value = args[idx + 1]!;
+    if (value && !value.startsWith('-')) {
+      return value;
+    }
+  }
+  return undefined;
+}
+
+/**
  * Create skill store and index for a specific scope.
  */
 function createScopedStoreAndIndex(scope: SkillScope) {
