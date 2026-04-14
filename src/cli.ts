@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { createRequire } from 'node:module';
+import { resolve as pathResolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { createStores, createApplicationContext } from './index.js';
@@ -27,12 +29,68 @@ import { publishCommand } from './cli/commands/publish.js';
 import { installCommand } from './cli/commands/install.js';
 import { statusCommand } from './cli/commands/status.js';
 import { auditCommand } from './cli/commands/audit.js';
+import { critiqueCommand } from './cli/commands/critique.js';
 import { handleMigratePlaneCommand } from './plane/migration.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
 import { SkillStore } from './storage/skill-store.js';
 import { SkillIndex } from './storage/skill-index.js';
+
+/**
+ * Resolve the skills base path for a CLI invocation.
+ * Honors `--skills-dir <path>` and `--skills-dir=<path>`; falls back to the
+ * scope default when the flag is absent. Relative paths are resolved against
+ * process.cwd() so `examples/skills/coding` works from the repo root.
+ *
+ * Exported for unit testing in src/cli.test.ts.
+ */
+export function parseSkillsDir(args: string[], scope: SkillScope): string {
+  // Equals form: --skills-dir=<value>
+  const eq = args.find((a) => a.startsWith('--skills-dir='));
+  if (eq) {
+    const value = eq.slice('--skills-dir='.length);
+    if (value) return pathResolve(process.cwd(), value);
+  }
+  // Separated form: --skills-dir <value>
+  const idx = args.indexOf('--skills-dir');
+  if (idx >= 0 && idx + 1 < args.length) {
+    const value = args[idx + 1]!;
+    if (value && !value.startsWith('-')) {
+      return pathResolve(process.cwd(), value);
+    }
+  }
+  return getSkillsBasePath(scope);
+}
+
+/**
+ * Parse a generic string-valued CLI flag.
+ * Honors `--name <value>` (separated) and `--name=<value>` (equals form).
+ * Returns undefined when the flag is absent, when the next token starts with `-`
+ * (meaning the flag value is missing and the next arg is another flag), or when
+ * the equals form has an empty value. Never mutates `args`.
+ *
+ * Exported for unit testing in src/cli.test.ts and shared across case handlers
+ * that need single-value flags (critique, publish, etc.).
+ */
+export function parseStringFlag(args: string[], name: string): string | undefined {
+  // Equals form: --name=<value>
+  const prefix = `${name}=`;
+  const eq = args.find((a) => a.startsWith(prefix));
+  if (eq) {
+    const value = eq.slice(prefix.length);
+    return value || undefined;
+  }
+  // Separated form: --name <value>
+  const idx = args.indexOf(name);
+  if (idx >= 0 && idx + 1 < args.length) {
+    const value = args[idx + 1]!;
+    if (value && !value.startsWith('-')) {
+      return value;
+    }
+  }
+  return undefined;
+}
 
 /**
  * Create skill store and index for a specific scope.
@@ -695,6 +753,45 @@ async function main() {
       break;
     }
 
+    case 'critique':
+    case 'crit': {
+      if (args.includes('--help') || args.includes('-h')) {
+        await critiqueCommand(undefined, {});
+        break;
+      }
+      const scope = parseScope(args);
+      const skillArgs = args.slice(1).filter((a) => !a.startsWith('-'));
+      const skillName = skillArgs[0];
+
+      // Parse flags
+      const maxIterArg = args.find((a) => a.startsWith('--max-iter'));
+      const maxIter = maxIterArg
+        ? parseInt(maxIterArg.includes('=') ? maxIterArg.split('=')[1]! : args[args.indexOf(maxIterArg) + 1]!, 10)
+        : undefined;
+
+      const exitCode = await critiqueCommand(skillName, {
+        skillsDir: parseSkillsDir(args, scope),
+        maxIter: !isNaN(maxIter!) ? maxIter : undefined,
+        checkExternal: args.includes('--check-external'),
+        mock: args.includes('--mock'),
+      });
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'test-triggering': {
+      const scope = parseScope(args);
+      const skillName = args.slice(1).filter((a) => !a.startsWith('-'))[0];
+      const { testTriggeringCommand } = await import('./cli/commands/test-triggering.js');
+      const exitCode = await testTriggeringCommand(skillName, {
+        skillsDir: parseSkillsDir(args, scope),
+        mock: args.includes('--mock'),
+        overrideTriggering: parseStringFlag(args, '--override-triggering'),
+      });
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'history':
     case 'hist': {
       const skillName = args[1];
@@ -1275,8 +1372,10 @@ async function main() {
       const outputIdx = args.findIndex(a => a === '--output' || a === '-o');
       const output = outputIdx >= 0 ? args[outputIdx + 1] : undefined;
       const exitCode = await publishCommand(skillName, {
-        skillsDir: getSkillsBasePath(scope),
+        skillsDir: parseSkillsDir(args, scope),
         output,
+        overrideCritique: parseStringFlag(args, '--override-critique'),
+        overrideTriggering: parseStringFlag(args, '--override-triggering'),
       });
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1436,6 +1535,40 @@ async function main() {
       const { wwwCommand } = await import('./fs/commands/www.js');
       const exitCode = await wwwCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'skill': {
+      // skill <subcommand> [args] — namespaced entry point for skill-level commands.
+      // Provides `skill-creator skill test-triggering <name>` alongside the top-level
+      // `skill-creator test-triggering <name>` (Q3 dual registration).
+      const subcommand = args[1];
+      const subArgs = args.slice(2);
+
+      switch (subcommand) {
+        case 'test-triggering': {
+          const scope = parseScope(subArgs);
+          const skillName = subArgs.filter((a) => !a.startsWith('-'))[0];
+          const { testTriggeringCommand } = await import('./cli/commands/test-triggering.js');
+          const exitCode = await testTriggeringCommand(skillName, {
+            skillsDir: parseSkillsDir(subArgs, scope),
+            mock: subArgs.includes('--mock'),
+            overrideTriggering: parseStringFlag(subArgs, '--override-triggering'),
+          });
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        default: {
+          p.log.message('');
+          p.log.message('Skill subcommands:');
+          p.log.message('  test-triggering <name>   Run triggering test for a skill');
+          p.log.message('');
+          p.log.message('Examples:');
+          p.log.message('  skill-creator skill test-triggering my-skill');
+          p.log.message('  skill-creator skill test-triggering my-skill --mock');
+        }
+      }
       break;
     }
 
@@ -1872,7 +2005,9 @@ Pattern Storage:
 `);
 }
 
-main().catch((err) => {
-  p.log.error(err.message);
-  process.exit(1);
-});
+if (process.argv[1] && fileURLToPath(import.meta.url) === pathResolve(process.argv[1])) {
+  main().catch((err) => {
+    p.log.error(err.message);
+    process.exit(1);
+  });
+}

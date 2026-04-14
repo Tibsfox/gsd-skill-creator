@@ -1,0 +1,40 @@
+{
+  "projectCode": "YTB",
+  "packTitle": "YouTube Video Processing Batch — OWASP, IoT Security, Nuclear Energy, CMU ML, CppCon, PLM, Engineering from Tracked Channels",
+  "modules": [
+    {
+      "moduleId": "owasp-appsec",
+      "title": "OWASP Application Security April 2026 Batch: AppSec Israel Highlight, German OWASP Day Highlight, MCP Deception Incubator Honeytraps Zero Trust, Trust No One Agents Zero Trust Machine Identity, Beyond Checklist Adversary Simulation, Securing Apps Without Budget, Noise vs Signal LLMs Threat Modeling, XDR Pipelines App-Level Threats, Vibe Coders Secure Coding Literacy, 9125 Days OWASP Did We Make Software Safer, Developer First Security Mindset"
+    },
+    {
+      "moduleId": "iot-nuclear",
+      "title": "IoT Security and Nuclear Energy: Hacking Tesla Model S Marc Rogers, Who Owns Security IoT, IoT Security Not Just Devices, Opportunity for Security IoT Market, NRC One Government One Mission Safe Nuclear Deployment, NRC Critical Links Nuclear Supply Chain, NRC Modernizing Mission Work AI Vision Into Action"
+    },
+    {
+      "moduleId": "cmu-cppcon-plm",
+      "title": "CMU ML Production and CppCon and PLM: Safety ML Production CMU Lecture 16, System Security ML Production CMU Lecture 15, ML Security ML Production CMU Lecture 14, Rust C++ Interop Challenges Victor Ciura CppCon 2025, Constexpr STL Containers C++20 Falls Short CppCon, groov Async Special Function Registers CppCon, Work Contracts High-Perf Low-Latency Concurrency CppCon, CAD Chaos Clean Context Drafter Trace.Space PLM, Configuration Management BOM Chaos PLM"
+    },
+    {
+      "moduleId": "engineering-misc",
+      "title": "Engineering Education and Miscellaneous: Stiffness Method Indeterminate Truss Analysis MATLAB, Engineering Mechanics Beams Lecture 3 Equilibrium, Stiffness Method Beam Element Flexibility Method, Enterprise Network Design Tier 2 Tier 3 Architecture, FortiGate Firewall Initial Configuration, Understanding MPLS LSR LDP Label Switching, Subnetting Questions IPv4 IPv6, ASP Storage Capacity Calculations Hidden Risk, BCSP Chapter 19 Adult Learning ADDIE TNA"
+    },
+    {
+      "moduleId": "professional-education",
+      "title": "Professional Education and Leadership: Brown SPS Masters Healthcare Leadership April 7, Brown SPS Myths of Leadership Rethinking Effective Leaders, Brown SPS Masters Technology Leadership Faculty Chat, IE Brown Executive MBA Application, DataVerse Hub Systems Crash Load Balancing Scaling, DataVerse Hub System Design Session Data Professionals, Chai Pe Charcha Real Talk Data Careers Interviews"
+    },
+    {
+      "moduleId": "hardware-tech",
+      "title": "Hardware and Technology Deep Dives: Asianometry VLIW Impossible Computer, Asianometry Mexico City Sinking Lands, Asianometry From Fiber to AI Laser Giant Rebirth, Asianometry Singapore Sound Card Hero, MCP Dev Summit NYC Day 1 AgenticAI Foundation 8h47m, MCP Dev Summit NYC Day 2 AgenticAI Foundation 9h01m, Centralized MCP Security OAuth Governance Control Planes, Orchestrating Intelligence MCP NimbleBrain Studio, Building Stateful Transactional MCP Servers Concierge AI"
+    }
+  ],
+  "bibliography": [
+    "YouTube channels: OWASPGLOBAL, IoTSecurityFoundation-TV, NRCgovVideo, christiankastner6150, CppCon, TheFutureOfPLM, EngineeringTheCurriculum, NetSec-Academy, QHSETalks, BrownSPS, DataVerse_Hub, Asianometry, AgenticAI-Foundation",
+    "Transcripts downloaded for high-priority items",
+    "Cross-references to AGT, SYA, RCA, GSI existing projects"
+  ],
+  "safety_rules": [
+    "YouTube content is not peer-reviewed — note speaker credentials",
+    "Conference talks may contain vendor marketing — extract claims, verify independently",
+    "MCP Dev Summit recordings are 18 hours total — segment processing required"
+  ]
+}

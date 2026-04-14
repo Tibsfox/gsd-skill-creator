@@ -1,0 +1,126 @@
+{
+  "series": "HKP",
+  "title": "Housekeeping Research Series",
+  "subtitle": "Data management, storage, and fast retrieval",
+  "version": "1.0",
+  "date": "2026-04-10",
+  "nodes": [
+    {
+      "id": "hkp-01-foundations",
+      "file": "data-foundations.md",
+      "title": "Data Foundations",
+      "words": 3702,
+      "concepts": ["DIKW pyramid", "Shannon 1948", "Codd 1970", "structured vs unstructured", "schema-on-read", "JSON", "Protobuf", "Avro", "Parquet", "Karlton naming", "URI", "content addressing", "Dublin Core 1995", "FAIR", "W3C PROV 2013", "entity resolution", "data gravity", "Kitchin 2014"],
+      "period": "1948-2026",
+      "role": "foundation",
+      "links": ["hkp-02-storage", "hkp-03-databases", "hkp-08-catalogs"]
+    },
+    {
+      "id": "hkp-02-storage",
+      "file": "storage-hierarchy.md",
+      "title": "Storage Hierarchy",
+      "words": 3307,
+      "concepts": ["Jacquard 1804", "Hollerith 1890", "UNIVAC tape 1951", "core memory", "IBM RAMAC 1956", "Winchester 1973", "Kryder's law", "Masuoka flash 1980", "SSD", "NVMe 2011", "Optane 2017-2022", "CXL", "memory wall 1995", "HBM", "S3 2006", "LTO tape", "DNA storage 2012", "Jeff Dean latency numbers"],
+      "period": "1804-2026",
+      "role": "physical-layer",
+      "links": ["hkp-01-foundations", "hkp-03-databases", "hkp-06-caching"]
+    },
+    {
+      "id": "hkp-03-databases",
+      "file": "databases-and-stores.md",
+      "title": "Databases and Data Stores",
+      "words": 2389,
+      "concepts": ["Codd 1970", "System R 1974", "Ingres", "SQL 1986", "Härder Reuter ACID 1983", "isolation levels", "Brewer CAP 2000", "BigTable 2006", "Dynamo 2007", "Cassandra 2008", "Redis 2009", "MongoDB 2009", "C-Store 2005", "Parquet", "ClickHouse 2016", "Neo4j 2007", "InfluxDB 2013", "Prometheus 2012", "Pinecone 2021", "pgvector", "Spanner 2012", "CockroachDB"],
+      "period": "1970-2026",
+      "role": "paradigm-layer",
+      "links": ["hkp-01-foundations", "hkp-02-storage", "hkp-04-indexes", "hkp-05-search"]
+    },
+    {
+      "id": "hkp-04-indexes",
+      "file": "indexing-and-retrieval.md",
+      "title": "Indexing and Retrieval",
+      "words": 3032,
+      "concepts": ["Luhn hashing 1953", "consistent hashing 1997", "Bayer B-tree 1972", "LSM 1996", "Pugh skip list 1990", "PATRICIA trie 1968", "ART 2013", "inverted index", "Lucene segments", "quadtree 1974", "kd-tree 1975", "R-tree 1984", "LSH 1998", "FAISS", "IVF", "product quantization 2010", "HNSW 2016", "DiskANN 2019", "SCANN 2020", "Bloom 1970", "HyperLogLog 2007", "Count-Min 2005"],
+      "period": "1953-2026",
+      "role": "structures-layer",
+      "links": ["hkp-03-databases", "hkp-05-search", "hkp-06-caching"]
+    },
+    {
+      "id": "hkp-05-search",
+      "file": "search-and-query.md",
+      "title": "Search and Query",
+      "words": 2999,
+      "concepts": ["Chamberlin Boyce SEQUEL 1974", "Selinger optimizer 1979", "Gremlin", "Cypher 2011", "SPARQL 2008", "SMART system 1961", "TF-IDF 1972", "BM25 1994", "Lucene 1999", "Elasticsearch 2010", "PageRank 1998", "LSI 1990", "word2vec 2013", "BERT search 2019", "DPR 2020", "ColBERT 2020", "BEIR 2021", "SPLADE 2021", "RRF 2009", "LambdaMART", "RAG 2020"],
+      "period": "1961-2026",
+      "role": "user-interface-layer",
+      "links": ["hkp-03-databases", "hkp-04-indexes", "hkp-09-pim"]
+    },
+    {
+      "id": "hkp-06-caching",
+      "file": "caching-and-tiering.md",
+      "title": "Caching and Tiering",
+      "words": 2525,
+      "concepts": ["Denning working set 1968", "MESI coherence", "NUMA", "TLB", "Belady optimal 1966", "LRU", "CLOCK", "LFU", "LRU-K 1993", "2Q 1994", "ARC 2003", "W-TinyLFU 2015", "Caffeine", "memcached 2003", "CDN", "Varnish", "cache invalidation", "thundering herd", "HSM", "S3 Intelligent Tiering 2018", "MRC", "SHARDS 2015", "crossfade tiers"],
+      "period": "1966-2026",
+      "role": "locality-layer",
+      "links": ["hkp-02-storage", "hkp-04-indexes", "hkp-07-lifecycle"]
+    },
+    {
+      "id": "hkp-07-lifecycle",
+      "file": "lifecycle-and-housekeeping.md",
+      "title": "Lifecycle and Housekeeping",
+      "words": 2546,
+      "concepts": ["DAMA-DMBOK", "SOX", "HIPAA", "GDPR storage limitation", "PostgreSQL VACUUM", "autovacuum", "MVCC bloat", "LSM compaction", "RocksDB", "Cassandra tombstones", "gc_grace_seconds", "Kafka compaction", "3-2-1 backup", "RPO RTO", "Lambda Architecture 2011", "Rabin fingerprinting 1981", "ZFS dedup", "zstd 2015", "Parquet compression", "GDPR Article 17", "crypto-shredding", "LOCKSS", "machine unlearning"],
+      "period": "1981-2026",
+      "role": "time-layer",
+      "links": ["hkp-03-databases", "hkp-06-caching", "hkp-08-catalogs"]
+    },
+    {
+      "id": "hkp-08-catalogs",
+      "file": "catalogs-and-governance.md",
+      "title": "Catalogs, Lineage, Governance",
+      "words": 2811,
+      "concepts": ["Apache Atlas 2015", "DataHub 2020", "Amundsen 2019", "Collibra", "Alation", "FAIR Wilkinson 2016", "OpenLineage 2020", "Marquez", "W3C PROV 2013", "Great Expectations 2018", "Monte Carlo observability", "Confluent Schema Registry", "data contracts 2022", "data mesh 2019", "Dehghani", "MDM", "Tamr", "DAMA-DMBOK", "CDO role", "LLM data discovery 2023"],
+      "period": "1970s-2026",
+      "role": "semantic-layer",
+      "links": ["hkp-01-foundations", "hkp-07-lifecycle"]
+    },
+    {
+      "id": "hkp-09-pim",
+      "file": "personal-information-management.md",
+      "title": "Personal Information Management",
+      "words": 3072,
+      "concepts": ["Vannevar Bush Memex 1945", "Engelbart", "Nelson Xanadu", "William Jones PIM 2007", "BeOS BFS 1995", "Spotlight 2005", "WinFS", "Google Desktop 2004", "Luhmann Zettelkasten", "Ahrens 2017", "Locke commonplace 1706", "GTD Allen 2001", "PARA Forte 2022", "TiddlyWiki 2004", "Evernote 2008", "Notion 2016", "Roam 2019", "Obsidian 2020", "Logseq", "Kleppmann local-first 2019", "CRDTs", "Rewind.ai", "Mem.ai", "MyLifeBits 2001", "Dumais Stuff I've Seen 2003"],
+      "period": "1945-2026",
+      "role": "individual-scale",
+      "links": ["hkp-05-search", "hkp-08-catalogs"]
+    }
+  ],
+  "arcs": [
+    {
+      "name": "Physical to logical",
+      "path": ["hkp-02-storage", "hkp-03-databases", "hkp-04-indexes", "hkp-05-search"],
+      "description": "How bits become usable information"
+    },
+    {
+      "name": "Finding things fast",
+      "path": ["hkp-04-indexes", "hkp-05-search", "hkp-06-caching"],
+      "description": "The retrieval spine"
+    },
+    {
+      "name": "Care over time",
+      "path": ["hkp-07-lifecycle", "hkp-08-catalogs"],
+      "description": "Governance and housekeeping"
+    },
+    {
+      "name": "Scale contrast",
+      "path": ["hkp-05-search", "hkp-09-pim"],
+      "description": "Why personal retrieval is harder than web retrieval"
+    }
+  ],
+  "totals": {
+    "documents": 9,
+    "words": 26383,
+    "concepts_covered": 180
+  }
+}

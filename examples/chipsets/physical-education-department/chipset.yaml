@@ -1,0 +1,239 @@
+# Physical Education Department Chipset Configuration
+# Instantiation of the department template pattern for physical education.
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This chipset forks the math-department template and
+# remaps it for movement, fitness, coaching, pedagogy, inclusion, and
+# lifetime physical practice.
+
+name: physical-education-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated physical education department providing domain-routed
+  expertise through seven named agents (Naismith, Kenneth Cooper, Jesse
+  Feiring Williams, Berenson, Sørensen, Wooden, Siedentop), six knowledge
+  skills, and three pre-composed teams. Persists work via Grove records
+  and integrates with the college physical-education department concept
+  graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  movement-fundamentals:
+    domain: physical-education
+    description: "Fundamental movement skills, motor learning stages, developmental progressions, and gross-to-fine teaching progressions"
+    triggers:
+      - "motor skill"
+      - "locomotor"
+      - "manipulative"
+      - "movement fundamentals"
+      - "catching"
+      - "throwing"
+      - "developmental milestone"
+    agent_affinity: [naismith, siedentop]
+
+  cardiovascular-fitness:
+    domain: physical-education
+    description: "Cardiovascular fitness assessment and prescription — VO2max, Cooper test, FITT framework, target heart rate zones, energy systems"
+    triggers:
+      - "cardio"
+      - "aerobic"
+      - "cooper test"
+      - "VO2max"
+      - "heart rate"
+      - "FITT"
+      - "endurance"
+    agent_affinity: [kenneth-cooper, naismith]
+
+  strength-and-conditioning:
+    domain: physical-education
+    description: "Strength, power, and conditioning — seven adaptations, periodization, age-appropriate resistance, plyometrics, injury prevention"
+    triggers:
+      - "strength"
+      - "resistance"
+      - "weight training"
+      - "periodization"
+      - "1RM"
+      - "plyometric"
+      - "power"
+    agent_affinity: [wooden, kenneth-cooper]
+
+  sport-education-pedagogy:
+    domain: physical-education
+    description: "Sport Education model — seasons, affiliation, formal competition, record-keeping, festivity, culminating event, roles, assessment"
+    triggers:
+      - "sport education"
+      - "unit plan"
+      - "curriculum"
+      - "season design"
+      - "GPAI"
+      - "PE assessment"
+      - "roles"
+    agent_affinity: [siedentop, jesse-feiring-williams]
+
+  coaching-and-teaching:
+    domain: physical-education
+    description: "Coaching as teaching — Wooden's Pyramid of Success, practice design, feedback discipline, M+M pattern, instructional economy"
+    triggers:
+      - "coaching"
+      - "practice design"
+      - "pyramid of success"
+      - "feedback"
+      - "wooden"
+      - "drill"
+      - "team practice"
+    agent_affinity: [wooden, siedentop]
+
+  inclusive-physical-education:
+    domain: physical-education
+    description: "Inclusive PE plus lifetime fitness activities — gender equity, adapted physical education, universal design, aerobic dance, group fitness, lifelong movement practices"
+    triggers:
+      - "inclusion"
+      - "adapted PE"
+      - "gender equity"
+      - "disability"
+      - "universal design"
+      - "accommodation"
+      - "IEP"
+      - "aerobic dance"
+      - "group fitness"
+      - "lifetime fitness"
+    agent_affinity: [berenson, sorensen, siedentop]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Naismith as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: naismith
+
+  agents:
+    - name: naismith
+      role: "department chair — classification, routing, synthesis, safety framing"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: kenneth-cooper
+      role: "cardiovascular specialist — aerobic assessment, FITT prescription, energy systems"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: jesse-feiring-williams
+      role: "curriculum philosophy specialist — whole-child framing, purpose articulation, principle-based critique"
+      model: opus
+      tools: [Read, Grep, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  physical-education-analysis-team:
+    description: "Full department for multi-domain or program-level PE problems"
+    agents: [naismith, kenneth-cooper, jesse-feiring-williams, berenson, sorensen, wooden, siedentop]
+    use_when: "multi-domain, program-level, or transformation-scale PE requests"
+
+  physical-education-workshop-team:
+    description: "Focused curriculum and pedagogy workshop for a single unit or assessment"
+    agents: [naismith, jesse-feiring-williams, siedentop, berenson]
+    use_when: "Sport Education unit design, assessment rubric design, unit transformation"
+
+  physical-education-practice-team:
+    description: "Operational practice team for ongoing coaching and conditioning delivery"
+    agents: [naismith, kenneth-cooper, wooden, sorensen]
+    use_when: "in-season practice design, integrated conditioning, group fitness class sequences, coach mentoring"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 physical education Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college physical education department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (naismith) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - movement
+      - cardio
+      - strength
+      - pedagogy
+      - coaching
+      - inclusion
+      - lifetime-fitness
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "physical-education-department"
+  record_types:
+    - name: PhysicalEducationAnalysis
+      description: "Diagnostic analysis — fitness assessment, motor gap diagnosis, equity audit, motor-learning stage assessment, role diagnosis"
+
+    - name: PhysicalEducationPractice
+      description: "Designed practice artifact — lesson plan, unit plan, practice plan, training program, group fitness class, adaptation plan"
+
+    - name: PhysicalEducationReview
+      description: "Review or critique of an existing program, unit, rubric, or practice — including inclusion reviews and philosophical critiques"
+
+    - name: PhysicalEducationExplanation
+      description: "Teaching artifact at a specified audience level — history lessons, purpose statements, concept explanations"
+
+    - name: PhysicalEducationSession
+      description: "Session log linking work products to interaction context, with classification metadata"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "physical-education"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Movement and Motor Learning"
+    - "Fitness Science and Health Literacy"
+    - "Sport Pedagogy and Curriculum"
+    - "Coaching and Practice Design"
+    - "Inclusion, Equity, and Lifetime Activity"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

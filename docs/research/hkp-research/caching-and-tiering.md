@@ -1,0 +1,89 @@
+# Caching and Tiering: Keeping Hot Data Close
+
+*— the science and art of working sets, eviction, and the economics of proximity —*
+
+## 1. Why Caching Works At All
+
+Caching is not a clever trick; it is a consequence of how real workloads reference memory. If programs accessed every address with equal probability, no cache smaller than the full address space would ever help. The reason hierarchies of fast, small stores accelerate slow, large stores is that references cluster. Peter J. Denning formalized this insight in his 1968 paper "The Working Set Model for Program Behavior" (*Communications of the ACM*, 11(5)), defining the working set `W(t, τ)` as the set of pages referenced by a process during the interval `(t − τ, t]`. Denning argued that if the operating system could keep at least `W(t, τ)` resident, the process would run essentially undisturbed; otherwise it would thrash, spending more time fetching pages than computing on them. The model gave us a first-class noun — *working set* — that made "how much memory does this program need right now?" a measurable quantity rather than a guess.
+
+Denning's paper also codified the two locality principles that every cache exploits. **Temporal locality** says that a reference to address `a` at time `t` predicts a future reference to `a` at `t + δ`; loops, hot loop variables, and recently touched database rows all exhibit it. **Spatial locality** says that a reference to `a` predicts a reference to `a + k` for small `k`; sequential scans, structure-of-arrays iteration, and prefetchable array walks all depend on it. The folk "90/10 rule" — 90% of the execution time is spent in 10% of the code, and 90% of the references hit 10% of the data — is a rough summary of these effects. Jim Gray's "5-minute rule" (Gray and Putzolu, 1987, later updated by Gray and Graefe 1997 and Graefe 2008) took the same observation and cast it economically: any page re-referenced more often than once every five minutes was, at the then-current cost of RAM versus disk, cheaper to keep resident than to refetch. The threshold changes with technology, but the structure of the argument is permanent.
+
+## 2. The CPU Cache Hierarchy
+
+The most tightly engineered caching system on Earth lives a millimetre from the ALU. Modern x86-64 chips carry a three-level hierarchy: an **L1** of 32–48 KiB split into instruction and data halves with ~4-cycle latency, an **L2** of 256 KiB to 2 MiB per core with ~12-cycle latency, and a shared **L3** (the "last-level cache") of tens of megabytes with ~40-cycle latency. Beyond L3 sits DRAM at 150–300 cycles, and beyond that NVMe and network. Each level is organized around **cache lines**, typically 64 bytes on x86 and 128 bytes on POWER and Apple Silicon, because the unit of transfer between levels is a whole line rather than a word.
+
+Because multiple cores share data, cache hierarchies implement coherence protocols. The classical **MESI** protocol (Papamarcos and Patel, "A Low-Overhead Coherence Solution for Multiprocessors with Private Cache Memories," ISCA 1984) labels every line as Modified, Exclusive, Shared, or Invalid, and uses bus snooping to guarantee that at most one cache holds a line in Modified state. AMD's **MOESI** adds an Owned state to allow dirty-sharing without a writeback; Intel's **MESIF** adds a Forwarder state to designate a single responder for shared reads, reducing bus chatter. These protocols are invisible to software until they are not: **false sharing**, where two unrelated variables land in the same 64-byte line and cause a ping-pong of invalidations between cores, is the canonical performance bug of concurrent code. Denser still is the **NUMA tax**: on a dual-socket server, fetching a line from the remote socket's L3 can cost 150–250 ns versus 30 ns locally, which is why `numactl` bindings and page migration policies matter for any large in-memory database.
+
+## 3. Virtual Memory as the Original Cache
+
+Long before userspace heard the word "cache," operating systems were running one. The MMU treats physical RAM as a cache for the backing store of virtual pages, translations are cached in the **TLB**, and a miss in either structure triggers a page fault that the kernel handles by demand-paging. Laszlo Belady's 1966 paper "A Study of Replacement Algorithms for a Virtual-Storage Computer" (*IBM Systems Journal*, 5(2)) defined the eviction problem and proved the **optimal algorithm**: evict the page whose next use lies furthest in the future. Belady's **MIN** (often called OPT) is unimplementable because it needs the future, but it provides the lower bound against which every real policy is measured. Belady also discovered **Belady's anomaly**: under FIFO replacement, giving a workload *more* memory can, for certain reference strings, *increase* the fault rate — a result so counterintuitive it launched the formal study of stack algorithms (Mattson, Gecsei, Slutz, and Traiger, "Evaluation Techniques for Storage Hierarchies," *IBM Systems Journal* 9(2), 1970), those for which adding memory can never hurt.
+
+## 4. Database Buffer Pools and the Two Caches Problem
+
+Databases learned early that they could not trust the OS to manage their hot pages. PostgreSQL's `shared_buffers`, Oracle's System Global Area (SGA) buffer cache, SQL Server's buffer pool, MySQL InnoDB's `innodb_buffer_pool_size`, and DB2's buffer pools all implement an application-level page cache that understands transactions, dirty-page flushing, checkpoints, and the distinction between sequentially scanned pages (which should not pollute the cache) and index root pages (which should never leave). This creates the **two caches problem**: a page read from disk travels first into the OS page cache and then into the database buffer pool, consuming RAM twice. DBAs traditionally addressed it by setting `shared_buffers` to around 25% of RAM and letting the OS handle the rest, or by opening files with `O_DIRECT` to bypass the OS cache entirely — the path MySQL InnoDB and most serious OLTP engines take.
+
+## 5. Eviction Policies: A Family Tree
+
+From Belady's OPT descend a lineage of practical approximations.
+
+**LRU** — least-recently-used — keeps a doubly linked list ordered by last access. On a hit, move the page to the head; on eviction, drop the tail. LRU's weakness is that a single large sequential scan can flush the entire cache of hot random-access pages, a pathology known as *cache pollution*.
+
+**CLOCK** (Corbató, MIT CTSS, 1968) approximates LRU with a circular buffer and a reference bit per page, advancing a hand and clearing bits until it finds a zero. Multics, BSD, and Linux's page-frame reclaim all descend from CLOCK. **Second Chance** is a simpler FIFO variant with the same reference-bit trick.
+
+**LFU** — least-frequently-used — keeps a per-page counter, but suffers the "once-hot-forever" problem: a page that was popular last week but untouched today remains unevictable.
+
+**LRU-K** (Elizabeth O'Neil, Patrick O'Neil, and Gerhard Weikum, "The LRU-K Page Replacement Algorithm for Database Disk Buffering," SIGMOD 1993) tracks the time of the `K`-th most recent reference and evicts the page with the oldest `K`-th reference, distinguishing transient from persistent popularity. LRU-2 became standard in several database products.
+
+**2Q** (Theodore Johnson and Dennis Shasha, "2Q: A Low Overhead High Performance Buffer Management Replacement Algorithm," VLDB 1994) splits the cache into a FIFO queue for first-time references and an LRU queue for proven hot pages, achieving LRU-2's accuracy with O(1) cost per reference.
+
+**ARC** — the Adaptive Replacement Cache — was introduced by Nimrod Megiddo and Dharmendra Modha at IBM Almaden in "ARC: A Self-Tuning, Low Overhead Replacement Cache" (FAST 2003). ARC maintains two LRU lists (recency and frequency) plus two ghost lists of recently evicted keys, and continuously rebalances between them by watching which ghost list a new reference hits. ARC's dominance of LRU on nearly every benchmark, combined with IBM's US patent 6,996,676, created the famous **ARC patent saga**: Sun used ARC in ZFS, OpenSolaris carried a modified version, and the patent cast a cloud over BSD and Linux adoption for years before expiring in the 2020s. **CAR** (Bansal and Modha, FAST 2004) replaced ARC's list management with two clocks, delivering ARC's adaptivity at CLOCK's O(1) cost.
+
+**LIRS** (Jiang and Zhang, "LIRS: An Efficient Low Inter-reference Recency Set Replacement Policy," SIGMETRICS 2002) tracks *inter-reference recency* — the number of distinct blocks referenced between two consecutive references to a block — rather than raw recency, and is the basis of MySQL's mid-point insertion LRU and of JBoss cache implementations.
+
+**W-TinyLFU** (Gil Einziger, Roy Friedman, and Ben Manes, "TinyLFU: A Highly Efficient Cache Admission Policy," Euromicro PDP 2014; production form in Ben Manes's Caffeine library circa 2015) uses a Count-Min sketch as an admission filter: a newcomer is only allowed to evict a resident entry if the sketch says the newcomer has been seen at least as often. An aging mechanism halves all counters periodically. W-TinyLFU backs Caffeine (the default cache in Spring, Cassandra 4, and countless JVM systems) and consistently matches or beats ARC on real traces.
+
+## 6. Distributed Cache Hierarchies
+
+The same family tree reappears one level up the stack. **memcached** was written by Brad Fitzpatrick at LiveJournal in 2003 to stop the database from collapsing under read load; it remains a textbook shared-nothing, consistent-hashed, in-memory key-value store. **Redis** (Salvatore Sanfilippo, 2009) extended the idea with data structures and persistence, and is now as often used as a cache (with `maxmemory-policy allkeys-lru` or `allkeys-lfu`) as a primary store. **CDNs** — Akamai from 1998 onward, Cloudflare, Fastly — push caching to the geographic edge, turning latency into a locality problem measured in milliseconds and thousands of kilometres. **Varnish** (Poul-Henning Kamp, 2006) rethought the HTTP reverse proxy around the assumption that the kernel already manages memory-versus-disk, and exposed VCL for declarative cache logic. **Nginx microcaching** stores even dynamic responses for 1–10 seconds, absorbing thundering herds on hot URLs.
+
+## 7. Cache Invalidation: The Hard Problem
+
+Phil Karlton's aphorism — "there are only two hard things in computer science: cache invalidation and naming things" — is the industry's favourite joke because it hurts. The invalidation strategies are well catalogued: **TTL** (expire after N seconds, simple but stale), **write-through** (write to cache and backing store atomically, consistent but slow), **write-back** (write to cache, flush later, fast but loses data on crash), **write-around** (write straight to backing store, read-through on miss, protects the cache from write bursts), and **explicit invalidation** (publish-subscribe or CDC-driven purges). Every strategy is a compromise between freshness, throughput, and operational pain.
+
+The **cache stampede**, or **thundering herd**, is what happens when a popular key expires and a thousand concurrent requests all miss simultaneously, sending a thousand concurrent backend queries. Mitigations include **request coalescing** (Varnish `vcl_req`'s `req.hash_always_miss`, Go's `singleflight`), **probabilistic early expiration** (Vattani, Chierichetti, Lowenstein, "Optimal Probabilistic Cache Stampede Prevention," VLDB 2015), and **lock-on-miss** where a single request refreshes while others serve the stale value.
+
+## 8. Hierarchical and Tiered Storage
+
+Long before cloud object stores, IBM mainframes shipped **HSM** — Hierarchical Storage Management — in the 1970s, automatically migrating cold datasets from DASD to tape and back on demand. The lineage runs through DFSMShsm, IBM Tivoli Storage Manager (TSM, later Spectrum Protect), Veritas NetBackup, and into modern cloud tiers. **Amazon S3 Intelligent-Tiering** (launched November 2018 at AWS re:Invent) automates the same idea at planetary scale: objects not touched for 30 days drop from Frequent Access to Infrequent Access, 90 days to Archive Instant Access, 180 days to Archive Access, and a year to Deep Archive, with per-tier pricing reflecting the retrieval cost. **Azure Blob Storage** exposes Hot, Cool, Cold, and Archive tiers; **Google Cloud Storage** exposes Standard, Nearline, Coldline, and Archive. In every case the economics are the same: pay less per byte-month for data you rarely touch, pay more per retrieval when you do.
+
+Databases implement their own tiering. **Elasticsearch Index Lifecycle Management (ILM)** moves indices through Hot, Warm, Cold, and Frozen tiers, rolling shards onto cheaper storage and eventually onto searchable snapshots in S3. **Apache Druid** splits real-time segments (served from memory on ingestion nodes) from historical segments in deep storage (S3 or HDFS). Time-series databases like InfluxDB and TimescaleDB use retention policies and continuous aggregates to roll up raw samples into coarser hot summaries, dropping or archiving the originals.
+
+## 9. Promotion, Demotion, and the Crossfade
+
+Every tiered system eventually confronts the *policy problem*: when should a chunk move up, when should it move down, and how do you avoid thrashing a block that sits exactly on the boundary? Naive thresholds produce oscillation — an item bounces between RAM and SSD on every access. Classical answers apply **hysteresis**: promote when a counter crosses `H`, demote only when it falls below `H − Δ`, so the same item cannot ping-pong on a single-access perturbation. The gsd-skill-creator **Memory Arena** work on the `artemis-ii` branch (2025–2026) pushed this further into a **crossfade** model: tier transitions are not binary flips but overlapping ramps where both copies exist briefly, checksums are validated on the destination before the source is released, and an orphan-recovery sweep reclaims any allocations left behind by an aborted move. The crossfade abolishes the "lost write during promotion" class of bug by construction, and its symmetry (±10% around a target fill) means promote and demote share almost all of their implementation.
+
+## 10. Prefetching: Guessing the Future
+
+Caching exploits the past; prefetching exploits the predictable future. **Hardware prefetchers** inside modern cores detect stride patterns and pull cache lines ahead of the load instructions that will need them. **Software prefetch** hints (`__builtin_prefetch` on GCC, `PREFETCHT0/T1/T2/NTA` on x86) let the compiler nudge the memory system. Operating systems implement **read-ahead**: Linux's `page-cluster` and `readahead(2)` detect sequential access and fetch the next N pages in advance. Databases prefetch leaf pages during B-tree scans and probe pages for hash joins. At the top of the stack, **predictive prefetching** uses models — Markov chains historically, LSTM and transformer models more recently — to prefetch web resources, CDN objects, and even machine-learning training batches.
+
+## 11. Measuring the Working Set
+
+Right-sizing a cache is an optimization problem that needs a cost function, and the canonical cost function is the **miss ratio curve (MRC)**: the miss ratio as a function of cache size. Mattson's 1970 stack algorithm gave us MRCs in a single pass over the reference trace, but only for stack policies and only at the cost of storing the entire reference history. **SHARDS** — Spatially Hashed Approximate Reuse Distance Sampling — from Carl Waldspurger, Nohhyun Park, Alex Garthwaite, and Irfan Ahmad ("Efficient MRC Construction with SHARDS," FAST 2015) produces accurate MRCs from a small uniform hash sample, bringing online MRC estimation within the budget of production systems. **Counter Stacks** (Jake Wires, Stephen Ingram, Zachary Drudi, Nicholas Harvey, and Andrew Warfield, "Characterizing Storage Workloads with Counter Stacks," OSDI 2014) use probabilistic counters to estimate reuse distances over arbitrarily long windows with bounded memory. Together these techniques give operators the thing Denning promised in 1968: a real-time, actionable measurement of the working set, which turns "how much cache do I need?" from a religious argument into a line on a chart. In a world where DRAM is the most expensive line item in a datacentre bill and the fastest tier is also the one you cannot over-provision, that graph is the difference between paying for the cache your workload actually needs and paying for the cache you were afraid not to buy.
+
+## Study Guide — Caching & Tiering
+
+### Key concepts
+
+1. **LRU, LFU, ARC, W-TinyLFU** — eviction policies.
+2. **Miss ratio curves** — cost function for sizing.
+3. **Hardware vs software prefetch** — ready vs hinted.
+4. **Tiered storage** — hot/warm/cold migration.
+
+## DIY — Implement LRU + MRC
+
+200 lines of Python. Feed a reference trace, plot MRC.
+
+## TRY — Tune Redis eviction
+
+On a running Redis, switch eviction policy (`maxmemory-
+policy allkeys-lru` → `allkeys-lfu`). Measure hit ratio.

@@ -16,11 +16,11 @@ REMOTE_SUBDIR=""
 
 # Load credentials — use python to parse .env because passwords contain shell-hostile chars
 ENV_FILE="$PROJECT_ROOT/.env"
-if [ ! -f "$ENV_FILE" ]; then
-  ENV_FILE="/path/to/projectGSD/dev-tools/gsd-skill-creator/.env"
+if [ ! -f "$ENV_FILE" ] && [ -n "$GSD_WORKSPACE_ROOT" ]; then
+  ENV_FILE="$GSD_WORKSPACE_ROOT/gsd-skill-creator/.env"
 fi
-if [ ! -f "$ENV_FILE" ]; then
-  ENV_FILE="/path/to/projectGSD/dev-tools/gsd-skill-creator-nasa/.env"
+if [ ! -f "$ENV_FILE" ] && [ -n "$GSD_WORKSPACE_ROOT" ]; then
+  ENV_FILE="$GSD_WORKSPACE_ROOT/gsd-skill-creator-nasa/.env"
 fi
 
 if [ ! -f "$ENV_FILE" ]; then
@@ -51,7 +51,9 @@ FTP_PATH="${FTP_PATH:-/}"
 DRY_RUN=""
 NASA_ONLY=""
 LOCAL_DIR="$LOCAL_BASE/Research"
-REMOTE_DIR="$FTP_PATH/Research"
+# FTP login lands in public_html/Research/ — that IS the Research/ web root.
+# Do NOT append /Research to $FTP_PATH or content goes to public_html/Research/Research/.
+REMOTE_DIR="$FTP_PATH"
 
 for arg in "$@"; do
   case "$arg" in
@@ -59,7 +61,7 @@ for arg in "$@"; do
     --nasa-only)
       NASA_ONLY="yes"
       LOCAL_DIR="$LOCAL_BASE/Research/NASA"
-      REMOTE_DIR="$FTP_PATH/Research/NASA"
+      REMOTE_DIR="$FTP_PATH/NASA"
       ;;
   esac
 done
@@ -107,8 +109,10 @@ with open('$ENV_FILE') as f:
 # Escape for lftp (backslash special chars)
 pwd_esc = pwd.replace('\\\\', '\\\\\\\\').replace('\"', '\\\\\"')
 script = f'''set ssl:verify-certificate no
-set net:max-retries 3
+set net:max-retries 10
 set net:reconnect-interval-base 5
+set net:reconnect-interval-multiplier 1.5
+set net:timeout 30
 set mirror:use-pget-n 4
 open -u {user},\"{pwd_esc}\" {host}
 mirror --reverse --verbose --only-newer --no-perms $DRY_RUN $EXCLUDES '$LOCAL_DIR' '$REMOTE_DIR'

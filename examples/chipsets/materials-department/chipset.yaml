@@ -1,0 +1,239 @@
+# Materials Department Chipset Configuration
+# Instantiation of the department template pattern for the materials
+# engineering domain.
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This chipset forks the math-department template and
+# remaps it for selection, process, nonferrous alloys, failure analysis,
+# nanomaterials, and characterization.
+
+name: materials-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated materials department providing domain-routed
+  expertise through seven named agents (Bessemer, Ashby, Smalley,
+  Cort, Merica, Gordon, Cottrell), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college materials department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  materials-selection:
+    domain: materials
+    description: "Systematic materials selection using the Ashby method — indices, charts, Pareto trade-offs"
+    triggers:
+      - "select"
+      - "choose"
+      - "which material"
+      - "Ashby"
+      - "performance index"
+      - "trade-off"
+      - "Pareto"
+    agent_affinity: [ashby, bessemer]
+
+  iron-and-steel-processes:
+    domain: materials
+    description: "Iron and steel production from ore to product — blast furnace, puddling, Bessemer, BOF, EAF"
+    triggers:
+      - "steel"
+      - "iron"
+      - "blast furnace"
+      - "Bessemer"
+      - "BOF"
+      - "EAF"
+      - "puddling"
+      - "rolling"
+    agent_affinity: [bessemer, cort]
+
+  nonferrous-alloys:
+    domain: materials
+    description: "Aluminum, copper, titanium, nickel, magnesium — strengthening mechanisms and alloy design"
+    triggers:
+      - "aluminum"
+      - "titanium"
+      - "nickel superalloy"
+      - "copper alloy"
+      - "magnesium"
+      - "age hardening"
+      - "precipitation"
+    agent_affinity: [merica, ashby]
+
+  structural-failure-analysis:
+    domain: materials
+    description: "Diagnosis of structural failures — fracture, fatigue, creep, SCC, embrittlement"
+    triggers:
+      - "failure"
+      - "fracture"
+      - "fatigue"
+      - "crack"
+      - "brittle"
+      - "creep"
+      - "stress corrosion"
+      - "embrittlement"
+    agent_affinity: [gordon, cottrell]
+
+  nanomaterials-and-carbon:
+    domain: materials
+    description: "Carbon allotropes and nanoscale materials — fullerenes, nanotubes, graphene, 2D materials"
+    triggers:
+      - "nanotube"
+      - "graphene"
+      - "fullerene"
+      - "C60"
+      - "nanomaterial"
+      - "2D material"
+      - "carbon allotrope"
+    agent_affinity: [smalley, ashby]
+
+  materials-characterization:
+    domain: materials
+    description: "Measurement techniques — microscopy, diffraction, spectroscopy, thermal analysis, mechanical test"
+    triggers:
+      - "characterization"
+      - "microscopy"
+      - "SEM"
+      - "TEM"
+      - "XRD"
+      - "EDS"
+      - "metallography"
+      - "hardness"
+    agent_affinity: [cottrell, gordon]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Bessemer as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: bessemer
+
+  agents:
+    - name: bessemer
+      role: "department chair — classification, routing, synthesis, process-material coupling"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: ashby
+      role: "selection specialist — performance indices, Ashby charts, Pareto trade-offs"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: smalley
+      role: "nanomaterials specialist — fullerenes, nanotubes, graphene, 2D materials"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  materials-analysis-team:
+    description: "Full department for multi-subdomain materials problems"
+    agents: [bessemer, ashby, smalley, cort, merica, gordon, cottrell]
+    use_when: "multi-subdomain, research-level, or full-analysis requests"
+
+  materials-workshop-team:
+    description: "Focused selection workshop backed by failure-mode screening"
+    agents: [bessemer, ashby, gordon, cottrell]
+    use_when: "design review, grade decision, selection under a dominant constraint"
+
+  materials-practice-team:
+    description: "Pipeline-oriented practice — characterization and qualification"
+    agents: [cort, merica, cottrell, bessemer]
+    use_when: "ongoing incoming inspection, process qualification, specification refinement"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 materials Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college materials department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (bessemer) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - selection
+      - ferrous-process
+      - nonferrous-alloys
+      - failure-analysis
+      - nanomaterials
+      - characterization
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "materials-department"
+  record_types:
+    - name: MaterialsAnalysis
+      description: "Diagnostic analysis — failure mechanism, root cause, microstructure finding, characterization result"
+
+    - name: MaterialsSelection
+      description: "Selection report — function, objective, constraints, index, filter, ranked shortlist"
+
+    - name: MaterialsReview
+      description: "Review or critique of a design, specification, prior selection, or characterization plan"
+
+    - name: MaterialsExplanation
+      description: "Teaching artifact at a specified audience level"
+
+    - name: MaterialsSession
+      description: "Session log linking work products to interaction context, with classification metadata"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "materials"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Materials Selection & Performance"
+    - "Ferrous Metallurgy & Process History"
+    - "Nonferrous Alloys & Heat Treatment"
+    - "Failure Analysis & Fracture Mechanics"
+    - "Nanomaterials & Low-Dimensional Systems"
+    - "Characterization & Measurement"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

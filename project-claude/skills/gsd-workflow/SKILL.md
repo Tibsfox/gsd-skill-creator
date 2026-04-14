@@ -1,15 +1,7 @@
 ---
 name: gsd-workflow
-description: >
-  GSD project management workflow routing, phase execution guidance,
-  and lifecycle management. Use this skill whenever the user mentions
-  planning, executing, verifying, or managing project phases, milestones,
-  or roadmaps. Also activates for: natural language like "what should I
-  work on", "continue where I left off", "build phase X", "is the
-  milestone complete", any /gsd: command, references to .planning/ files,
-  discussions about project scope or status, and when YOLO mode or
-  autonomous operation is mentioned. This is the primary workflow
-  orchestration skill for the GSD ecosystem.
+description: Use when the user asks "what should I work on", mentions GSD phases, ROADMAP, or .planning/ artifacts. Routes to the correct GSD command for the current project state.
+description-frequency: on-demand
 user-invocable: true
 ---
 

@@ -1,0 +1,272 @@
+# Trades Department Chipset Configuration
+# Instantiation of the department template pattern for the trades domain.
+#
+# The Trades Department is a craft-and-dignity department. Vitruvius chairs
+# it with the firmitas/utilitas/venustas triad as the organizing lens. The
+# roster combines technical specialists (Edison, Nasmyth, Brunel-TR) with
+# pedagogical specialists (Rose, Crawford) and includes Taylor with explicit
+# historical transparency on the labor-relations critique of scientific
+# management.
+
+name: trades-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated trades department providing domain-routed craft
+  expertise through seven named agents (Vitruvius, Edison, Nasmyth,
+  Brunel-TR, Taylor, Rose, Crawford), six knowledge skills, and three
+  pre-composed teams. Persists work via Grove records and integrates
+  with the college trades department concept graph. Historical
+  transparency is applied explicitly to Taylor and to the
+  mechanization-history content.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  craft-methodology:
+    domain: trades
+    description: "Craft methodology — the arc from intent through layout, roughing, fitting, finishing, inspection, and the error-correction embedded in traditional sequencing"
+    triggers:
+      - "craft methodology"
+      - "craft arc"
+      - "intent"
+      - "layout"
+      - "roughing"
+      - "fitting"
+      - "finishing"
+      - "inspection"
+      - "process knowledge"
+    agent_affinity: [vitruvius, crawford, rose]
+
+  workshop-practice:
+    domain: trades
+    description: "Workshop practice — shop setup, layout, safety, sequencing, and the practical discipline of running a shop as a designed environment"
+    triggers:
+      - "workshop"
+      - "shop layout"
+      - "shop practice"
+      - "bench"
+      - "tool room"
+      - "shop safety"
+      - "jig library"
+      - "tool maintenance"
+    agent_affinity: [edison, nasmyth, vitruvius]
+
+  tool-and-machine:
+    domain: trades
+    description: "Tools and machines as the leverage-amplification layer of the trades — from hand tool to powered hand tool to stationary machine to CNC to robotic cell"
+    triggers:
+      - "tool selection"
+      - "tool vs machine"
+      - "hand tool"
+      - "power tool"
+      - "stationary machine"
+      - "CNC"
+      - "precision power"
+      - "machine shop"
+    agent_affinity: [nasmyth, brunel-tr, edison]
+
+  materials-and-fit:
+    domain: trades
+    description: "Materials and fit — how wood, metal, stone, fabric, and composite materials behave, move, and require allowances for real fits to survive seasonal and thermal cycles"
+    triggers:
+      - "wood movement"
+      - "thermal expansion"
+      - "moisture content"
+      - "tolerance stack"
+      - "fit allowance"
+      - "material failure"
+      - "metallurgy"
+    agent_affinity: [vitruvius, nasmyth, brunel-tr]
+
+  apprenticeship-pedagogy:
+    domain: trades
+    description: "Apprenticeship pedagogy — observe, practice, correct loops, the apprentice ladder, the master as model, and modern adaptations of traditional apprenticeship"
+    triggers:
+      - "apprenticeship"
+      - "apprentice"
+      - "pedagogy"
+      - "observe practice correct"
+      - "master apprentice"
+      - "trade school"
+      - "teaching craft"
+    agent_affinity: [rose, crawford, vitruvius]
+
+  measurement-and-tolerance:
+    domain: trades
+    description: "Measurement and tolerance — datums, tolerance stacks, accuracy vs precision vs resolution, measurement tool selection by required tolerance, and the discipline of verified measurement"
+    triggers:
+      - "measurement"
+      - "tolerance"
+      - "datum"
+      - "accuracy"
+      - "precision"
+      - "tolerance stack"
+      - "gauge block"
+      - "micrometer"
+      - "caliper"
+    agent_affinity: [nasmyth, taylor, brunel-tr]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Vitruvius as CAPCOM)
+# The chipset lists the chair plus two key specialists; the full roster
+# is documented in README.md.
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: vitruvius
+
+  agents:
+    - name: vitruvius
+      role: "department chair — triad framing, classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: edison
+      role: "workshop and invention-environment specialist — shop layout, flow, tool rooms, cross-specialty collaboration"
+      model: opus
+      tools: [Read, Glob, Grep, Bash]
+
+    - name: nasmyth
+      role: "precision power and machine-shop specialist — machine tool selection, tolerances, metallurgy, feeds and speeds"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  trades-analysis-team:
+    description: "Full trades department for multi-domain craft problems spanning methodology, workshop, tools, materials, pedagogy, and measurement"
+    agents: [vitruvius, edison, nasmyth, brunel-tr, taylor, rose, crawford]
+    use_when: "multi-domain trades questions, complex shop-and-pedagogy problems, curriculum design with multiple lenses"
+
+  trades-workshop-team:
+    description: "Focused workshop and machine-shop team for single-shop design, layout, and improvement questions"
+    agents: [vitruvius, edison, nasmyth, crawford]
+    use_when: "shop redesign, tooling investment, layout diagnosis, invention-environment design"
+
+  trades-practice-team:
+    description: "Pedagogy and learning pipeline — apprenticeship design, stuck-learner diagnosis, institutional defense of trades education"
+    agents: [vitruvius, rose, crawford, nasmyth]
+    use_when: "curriculum design, apprenticeship program design, stuck learners, trades education defense"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 trades Grove record types documented"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (vitruvius) must be CAPCOM"
+        action: "block"
+
+      - check: "historical_transparency_on_taylor"
+        description: "Taylor agent must include the labor-relations framing as a core output, not a postscript"
+        action: "block"
+
+      - check: "brunel_tr_suffix_applied"
+        description: "The -tr suffix on brunel-tr must be consistent across chipset, README, and all cross-references"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - craft-methodology
+      - workshop-practice
+      - tool-and-machine
+      - materials-and-fit
+      - apprenticeship-pedagogy
+      - measurement-and-tolerance
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "trades-department"
+  record_types:
+    - name: TradesAnalysis
+      description: "Diagnostic analysis — shop diagnosis, fit-failure analysis, task decomposition, tolerance-budget audit, learner diagnosis"
+
+    - name: TradesCraft
+      description: "Designed artifact — jig or fixture design, shop layout, machine selection, dedicated tooling design, apprenticeship program"
+
+    - name: TradesReview
+      description: "Review or critique — existing shop evaluation, proposed pedagogy critique, machine tool evaluation, measurement program review"
+
+    - name: TradesExplanation
+      description: "Teaching artifact at a specified audience level — cognitive description, philosophical framing, historical background, technique explanation"
+
+    - name: TradesSession
+      description: "Session log linking work products to interaction context, with classification metadata and historical-transparency notes"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "trades"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Craft Methodology and Process"
+    - "Workshop Practice and Culture"
+    - "Tools, Machines, and Mechanization"
+    - "Materials, Fit, and Tolerance"
+    - "Apprenticeship, Pedagogy, and the Cognitive Life of Craft"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
+
+# ==========================================================================
+# Historical Transparency Policy
+# ==========================================================================
+
+historical_transparency:
+  - figure: taylor
+    note: |
+      Frederick W. Taylor's time-study methods are included for their
+      technical content. The labor-relations critique is mandatory in
+      every invocation — the Watertown Arsenal strike, the separation
+      of thinking from doing, and the Braverman/Rose/Crawford critiques
+      are surfaced as core outputs, not as postscripts. The Toyota
+      Production System is named as a worker-participative alternative.
+
+  - figure: brunel-tr
+    note: |
+      Marc Brunel's mechanization of block-making at Portsmouth is
+      historically celebrated but also displaced 100 skilled craftsmen
+      per 10 unskilled operators. The skill-transfer tradeoff is named
+      explicitly in Brunel-TR's output rather than hidden. The -tr
+      suffix distinguishes this agent from examples/agents/engineering/brunel
+      (Isambard Kingdom Brunel, Marc's son).

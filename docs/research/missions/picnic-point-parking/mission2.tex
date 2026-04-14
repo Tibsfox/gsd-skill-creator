@@ -1,0 +1,1105 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Engineering domain: Technology/Steel color scheme
+\definecolor{primary}{HTML}{263238}       % Steel blue — section headers
+\definecolor{secondary}{HTML}{1565C0}     % Electric blue — subsection headers
+\definecolor{tertiary}{HTML}{37474F}      % Graphite — subsubsection headers
+\definecolor{accent}{HTML}{1976D2}        % Accent blue
+\definecolor{lightprimary}{HTML}{ECEFF1}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnorange}{HTML}{E65100}    % For safety/constraint callouts
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{warnbox}{
+  colback=lightsecondary, colframe=warnorange,
+  arc=2pt, boxrule=0.8pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Picnic Point Parking Structure}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package — Mission 2}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Picnic Point Parking Structure -- Mission Package 2},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ─── TITLE PAGE ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE --- MISSION 2 OF 2}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Picnic Point Parking\\[0.3em]Structure Feasibility}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Ground Level + 2-Floor Parking Structure with Overpass Integration}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Snohomish County, Washington --- Full Engineering Feasibility Study}}
+
+\vspace{1.2cm}
+{\normalsize\sffamily\textcolor{secondary}{Extends: Mission 1 --- Picnic Point Park Deep Research}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Combined datasets required for complete site analysis}}
+
+\vspace{2cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Idea to Completion Engineering Pipeline}}
+
+\vspace{2cm}
+{\small\sffamily\textcolor{subtlegray}{Date: April 7, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles)  |  Estimated: 8--12 context windows across 5--7 sessions}}
+\end{center}
+\newpage
+
+% ─── TABLE OF CONTENTS ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Parking Structure Feasibility --- Vision Guide}
+
+\metafield{Date:}{April 7, 2026}
+\metafield{Status:}{Initial Vision / Engineering Feasibility Phase}
+\metafield{Depends on:}{Mission 1 (Picnic Point Park Deep Research) --- full dataset required before execution}
+\metafield{Context:}{Extension mission; uses Mission 1 ecology, geology, and site data as primary inputs}
+
+\subsection{Vision}
+
+Picnic Point Park's single defining constraint is not its size, its ecology, or its railroad barrier --- it is parking. The small lot fills by midmorning on any warm weekend. Visitors who cannot find a space miss the park entirely. The Snohomish County Parks website for Meadowdale Beach Park --- 1.5 miles south --- explicitly redirects visitors to Picnic Point when the Meadowdale lower lot is inaccessible. This means Picnic Point's parking problem is a regional access problem: it gates two parks simultaneously.
+
+The existing pedestrian overpass over the BNSF mainline is the park's most expensive piece of infrastructure and its most permanent feature. Any parking enhancement must reckon with the overpass, not ignore it. The vision here is not to replace or route around the overpass but to integrate with it: to design a ground-level-plus-two-floor parking structure whose top deck elevation aligns with, or ties directly into, the overpass entry level --- converting the climb to the overpass from a walk across a parking lot into a walk across a structured deck. This turns a constraint into an asset.
+
+The structure must earn its place on a coastal bluff site adjacent to Puget Sound. The parking lot sits on glacially derived unconsolidated deposits identified in Mission 1's geology module. It is within Snohomish County's shoreline jurisdiction (Shoreline Management Act, 200-foot setback zone) and subject to Critical Area regulations covering geologically hazardous areas (landslide and erosion hazard). It is within 400 feet of a geological hazard area per SCC 30.52. Every design choice --- footprint, foundation type, structural system, stormwater management, materials --- must be justified against these constraints and documented for the permitting agencies that will review it: Snohomish County PDS, Washington State Ecology, potentially BNSF Railway (overpass interface), and the Army Corps of Engineers (Section 404 coastal zone review).
+
+This is a complete engineering feasibility study: idea to completion. It produces the technical foundation for a 30\% design submittal, a SEPA environmental checklist, a permitting pathway map, a construction cost estimate, and a public outreach brief --- everything Snohomish County Parks would need to take the project from concept to funding application.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Acute parking capacity failure.} The existing lot is small and reaches capacity before peak hours on warm weekdays and virtually all weekend days. There is no overflow parking. Visitors are turned away. The park's restrooms, picnic tables, and overpass are sized for far more visitors than the lot can admit.
+
+  \item \textbf{ADA accessibility gap.} The existing overpass is noted in Mission 1 as requiring ``assistance'' for visitors with mobility challenges. A new parking structure with a rooftop deck at overpass elevation creates the first opportunity to establish a continuous ADA-compliant accessible route from vehicle to beach via the overpass, resolving a longstanding equity and compliance issue.
+
+  \item \textbf{Stormwater impact on Puget Sound and shellfish closure.} Mission 1 established that Picnic Point's beach has a year-round shellfish closure driven by water quality impairment likely caused by stormwater runoff. The existing surface parking lot contributes uncontrolled impervious runoff directly toward Puget Sound. A structured parking facility with engineered Low Impact Development (LID) stormwater controls --- required under Snohomish County's NPDES Phase I Permit and Drainage Manual --- would reduce this contribution and potentially support shellfish closure remediation.
+
+  \item \textbf{Glacially derived bluff geotechnical uncertainty.} Mission 1 established that the site sits on unconsolidated glacial till deposits over which the USGS has documented repeated landslide activity on the Seattle--Everett BNSF corridor. Foundation design for a 2-floor structure on this substrate requires a site-specific geotechnical investigation. This uncertainty is the critical path item that determines whether and how the structure can be built.
+
+  \item \textbf{Complex regulatory environment.} The site sits within Washington's Shoreline Management Act jurisdiction (Puget Sound shoreline), Snohomish County Critical Area regulations (geologically hazardous area, within 500 feet of marine water), and the NPDES Phase I stormwater permit framework. A Shoreline Substantial Development Permit and SEPA review are required. If BNSF Railway easement rights are involved in the overpass tie-in, a separate coordination process applies. Each of these permitting tracks operates on its own timeline and can independently delay the project.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Stack-and-bridge:} A 3-level open-air precast concrete parking structure (ground + 2 floors) positioned on the existing parking lot footprint, with the Level 3 deck designed to align with the existing overpass approach elevation, providing a direct horizontal connection from the top deck to the overpass without stairs or ramp. The structure replaces the surface lot and multiplies capacity approximately threefold on the same footprint.
+
+\subsubsection{Site Layout Concept}
+
+\begin{asciibox}
+PICNIC POINT PARK — PARKING STRUCTURE SITE CONCEPT
+
+PICNIC POINT ROAD (east)
+         |
+    [ENTRY/EXIT]
+         |
+  +------+------+
+  |   LEVEL 1   |  <- Ground floor: surface replacement + accessible stalls
+  |  PARKING    |     ADA spaces at grade with accessible path to elevator/ramp
+  |             |
+  +------+------+
+  |   LEVEL 2   |  <- Floor 2: upper deck
+  |  PARKING    |
+  |             |
+  +------+------+
+  |   LEVEL 3   |  <- Roof deck: open top level
+  |  PARKING    |  -- -- -- TIE-IN BRIDGE ---> [EXISTING OVERPASS]
+  |_____________|                                       |
+                                                   [BNSF MAINLINE]
+                                                        |
+                                                    [BEACH / PARK]
+
+Structural system: open-air precast concrete (double-tee decks on precast
+  columns and beams); PCI-certified preferred for seismic Zone D
+Foundation: deep piles (drilled piers or driven) through glacial till
+  to bearing stratum — geotechnical investigation required
+Stormwater: LID BMPs — bioretention planters on structure perimeter,
+  permeable pavement on approach drive, oil/water separator for garage floor drainage
+Tie-in: new covered pedestrian bridge span (15-25 ft) from Level 3
+  deck edge to existing overpass landing; new ADA ramp/elevator on
+  structure for Level 1-to-Level 3 accessible route
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+ENGINEERING FEASIBILITY MODULE ARCHITECTURE
+
+Module A: Site Survey & Geotechnical Investigation
+  - Topographic survey (LiDAR + field survey)
+  - Subsurface exploration program (borings, SPT/CPT)
+  - Slope stability and landslide hazard analysis
+  - Foundation system recommendation (pile type, depth, capacity)
+  - Seismic hazard: Site Class, Seismic Design Category (IBC)
+
+Module B: Structural Engineering & Design
+  - Structural system selection (precast vs. cast-in-place)
+  - Gravity, lateral, and seismic load calculations (IBC 2021 / ASCE 7-22)
+  - Level 3 deck-to-overpass tie-in: span, connection, load transfer
+  - ADA-compliant vertical circulation (elevator + ramp design)
+  - 30% design drawings package
+
+Module C: Permitting & Regulatory Pathway
+  - Snohomish County PDS: building permit, Critical Areas review
+  - SEPA environmental checklist + threshold determination
+  - Shoreline Substantial Development Permit (Ecology)
+  - BNSF Railway coordination (overpass easement/interface)
+  - Permit pathway map with timeline and fee estimate
+
+Module D: Stormwater & Environmental Engineering
+  - Impervious surface calculation (existing vs. proposed)
+  - LID BMP selection per Snohomish County Drainage Manual
+  - Oil/water separator for vehicle deck runoff
+  - Stormwater management report (MR 1-5 compliance)
+  - Shellfish closure nexus: stormwater improvement potential
+
+Module E: Cost Estimating & Funding Strategy
+  - Engineer's estimate (RSMeans-calibrated, Pacific Northwest)
+  - Per-stall cost analysis (above-grade open-air target: $28K-$35K/stall)
+  - Construction phasing options (phase 1: ground level; phase 2: floors 2-3)
+  - Grant and funding sources: RCO, WA Wildlife and Recreation Program, FHWA
+  - 20-year life-cycle cost comparison vs. surface expansion alternatives
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A: Site Survey \& Geotechnical Investigation}
+
+Define the complete site investigation program: topographic and utility survey requirements, subsurface exploration scope (number of borings, depths, field testing methods), laboratory testing program, slope stability analysis methodology for the bluff-adjacent setting, and foundation system recommendation. The output must be sufficient to support a 30\% structural design and a Snohomish County Critical Areas geotechnical report submittal. Integrate Mission 1's geology findings (Vashon Stade glacial till, drift cell dynamics, USGS landslide mapping) as the baseline desktop study.
+
+\subsubsection{Module B: Structural Engineering \& Design}
+
+Develop the structural concept to 30\% design level. Select the structural system (precast preferred for coastal environment and seismic Zone D per IBC 2021), develop preliminary member sizing, calculate gravity and seismic loads (Snohomish County prescribes Seismic Design Category D/D2 for IBC/IRC respectively), and design the Level 3-to-overpass tie-in bridge (span estimate 15--25 ft, structural connection strategy, ADA grade compliance max 5\% or 1:20 ramp). Include ADA-compliant vertical circulation design (elevator plus stair tower) and vehicle barrier system. Produce a 30\% drawing set: site plan, floor plans, sections, and structural framing plan.
+
+\subsubsection{Module C: Permitting \& Regulatory Pathway}
+
+Map the complete permitting sequence. The structure is in Shoreline Management Act jurisdiction (Puget Sound is a shoreline of statewide significance; development within 200 feet requires a Shoreline Substantial Development Permit). The site is subject to Snohomish County Critical Area regulations (geological hazard area; within 500 feet of marine water). SEPA review is required per WAC 197-11; if Determination of Significance is issued, an EIS must be prepared. A Land Disturbing Activity permit is required (impervious area creation exceeds 2,000 sq ft threshold). If the overpass tie-in affects any BNSF Railway easement or structure, a separate railroad coordination and encroachment agreement is required. Produce a permit pathway flowchart, agency contact matrix, and estimated timeline (likely 18--36 months from application to building permit issuance).
+
+\subsubsection{Module D: Stormwater \& Environmental Engineering}
+
+Prepare the stormwater management analysis per Snohomish County Drainage Manual (effective July 1, 2021) and NPDES Phase I Permit. New impervious surface exceeding 2,000 sq ft triggers Minimum Requirements 1--5; the project likely also triggers MR 6--9 given total impervious area of a 3-level structure. LID BMPs required ``where feasible'' under SCC 30.63A and county LID policy. Evaluate: bioretention cells at structure perimeter, permeable pavement on entry drive, oil/water separator for Level 1 floor drain discharge, and vegetated roof option for Level 3 (if non-parking area is created). Quantify impervious area reduction compared to uncontrolled surface lot. Address shellfish closure nexus: document whether stormwater improvement from this project would materially reduce pollutant loading to Picnic Point Creek/beach and thus support future shellfish closure remediation advocacy.
+
+\subsubsection{Module E: Cost Estimating \& Funding Strategy}
+
+Produce a Class 4 (pre-design) engineer's cost estimate calibrated to Pacific Northwest construction costs (RSMeans City Cost Index for Everett/Seattle area). Apply above-grade open-air precast parking structure baseline of \$80--\$100 per gross square foot (industry standard per Kiwi Newton / industry sources). Estimate per-stall cost target of \$28,000--\$35,000. Develop 20-year life-cycle cost comparison: proposed structure vs. surface lot expansion alternatives (if any land is available) vs. no-build. Identify applicable funding programs: Washington Recreation and Conservation Office (RCO) grants (County must have updated PRVP for eligibility --- Snohomish County adopted updated plan December 2024), Washington Wildlife and Recreation Program, FHWA Transportation Alternatives Program, ADA accessibility improvement grants, and potential BNSF Railway coordination funding (precedent: Meadowdale used Federal Rail Administration funds). Develop a two-phase construction option: Phase 1 (ground floor + structural frame for upper floors) to reduce upfront cost and allow phased funding.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: picnic_point_parking_structure_feasibility
+  profile: Fleet
+  extends: picnic_point_park_deep_research  # Mission 1 dataset required
+  models:
+    opus:    30%   # Geotechnical synthesis, structural system judgment,
+                   # regulatory strategy, cost-benefit analysis
+    sonnet:  60%   # Survey scope, drawing specs, permit matrix, BMP selection,
+                   # cost estimating, document assembly
+    haiku:   10%   # Calculation templates, code lookup schemas, drawing checklists
+  waves: 5
+  parallel_tracks: 3
+  crew_size: 17
+  estimated_tokens: 420000
+  sessions: 5-7
+  cache_strategy: |
+    prime_on_mission1_geology_module (Module C from M1)
+    prime_on_mission1_site_overview (coordinates, bluff elevation, overpass geometry)
+    share_geotechnical_findings_across_B_C_D
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}
+  \item Ground-level + 2-floor (3 total levels) open-air precast concrete parking structure on existing parking lot footprint
+  \item Pedestrian bridge tie-in from Level 3 deck to existing BNSF railroad overpass
+  \item ADA-compliant accessible route from Level 1 to Level 3 and onto the overpass
+  \item Site-specific geotechnical investigation scope and foundation system recommendation
+  \item 30\% structural design drawings (site plan, floor plans, sections, structural framing)
+  \item Complete permitting pathway map: SEPA, Shoreline SDP, Critical Areas, LDA, building permit
+  \item Stormwater management report (LID BMPs, MR 1--9 compliance assessment)
+  \item Class 4 engineer's cost estimate with per-stall and total project cost
+  \item Two-phase construction option analysis
+  \item Grant and funding source identification
+  \item Connection to Mission 1 shellfish closure and stormwater nexus
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}
+  \item 60\% or 100\% construction documents (requires actual geotechnical report and permit feedback)
+  \item Below-grade (underground) parking (cost-prohibitive on coastal bluff; seismic/groundwater risk)
+  \item Modification of the existing BNSF overpass structure itself (BNSF coordination required; separate mission)
+  \item Traffic impact analysis (separate engagement; not warranted at feasibility phase)
+  \item Park improvements beyond the parking structure and tie-in bridge
+  \item Utilities (water, sewer, electrical) beyond stormwater --- assumed to exist and be serviceable
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Topographic survey scope defined with sufficient accuracy to support 30\% civil design (1-foot contour interval minimum).
+  \item Geotechnical investigation program specified: minimum 3 soil borings at proposed column locations, SPT data, laboratory testing for bearing capacity, Atterberg limits, grain size; slope stability analysis for bluff proximity.
+  \item Foundation system recommended (pile type, diameter, estimated depth, design bearing capacity) with rationale for coastal bluff glacial till conditions.
+  \item Seismic Design Category confirmed as D (IBC 2021) for Snohomish County; Site Class assigned pending geotechnical data.
+  \item Structural system selected and justified (open-air precast preferred); preliminary member sizing completed for gravity and seismic loads.
+  \item Level 3 deck-to-overpass tie-in bridge designed to 30\% level: span, connection type, ADA grade compliance (max 5\% slope / 1:20), structural connection to existing overpass documented.
+  \item ADA-compliant accessible route from Level 1 parking to overpass deck established, including vertical circulation element (elevator shaft or switchback ramp design).
+  \item Permitting pathway map produced showing: SEPA lead agency, Shoreline SDP track, Critical Areas report requirement, LDA permit, building permit sequence; estimated calendar timeline from application to issuance.
+  \item BNSF Railway interface identified and coordination pathway described (if overpass tie-in affects railway easement or structure).
+  \item Stormwater management report prepared to MR 1--5 level with LID BMP selection; MR 6--9 applicability assessed.
+  \item Oil/water separator specified for Level 1 floor drain discharge (vehicle deck runoff to Puget Sound watershed).
+  \item Shellfish closure stormwater nexus documented: estimated pollutant load reduction from proposed LID BMPs vs. existing uncontrolled surface lot.
+  \item Class 4 engineer's estimate produced: total project cost, per-stall cost, and cost breakdown by discipline (civil/site, structural, architectural, MEP, permitting).
+  \item Two-phase construction option defined with Phase 1 cost, Phase 1 stall count, and Phase 2 increment.
+  \item Funding sources identified with eligibility assessment for at least 3 applicable programs.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Mission 1: Picnic Point Park Deep Research & \textbf{Required predecessor} & Module C (Geology) provides bluff substrate baseline; Module A (Ecology) drives stormwater and shellfish nexus; site coordinates and overpass geometry from Module E \\
+Lord Hill Park Parking Improvements (OTAK, 2024) & Snohomish County precedent & County's own 30\% parking lot design scope-of-work is the process template \\
+WSDOT Geotechnical Design Manual & Engineering standard & Foundation design, slope stability, seismic hazard methodology \\
+WA State Building Code 2021 (IBC) & Structural code & Seismic Design Category D; Chapter 18 soils and foundations \\
+Snohomish County Drainage Manual (2021) & Stormwater standard & Minimum Requirements 1--9; LID BMP feasibility \\
+Meadowdale Beach Estuary Restoration & Funding precedent & FRA + NOAA + county multi-agency model; BNSF Railway cooperation \\
+Snohomish County SMP (update due 2029) & Shoreline standard & Current SMP governs SDP; sea level rise requirements added 2023 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The parking structure is not the destination. It is the machine that makes the destination accessible.
+
+Mission 1's through-line described the pedestrian overpass as a diagram of the tension at the heart of Puget Sound recovery --- the infrastructure that simultaneously enables access and fragments ecology. The parking structure completes that diagram by addressing the other half of the problem: it is possible to love a park into overuse, to damage the very thing that draws people there, simply by making it hard to park. The visitor who circles the lot and leaves has not experienced the park. The volunteer who cannot bring their tools because there is nowhere to park does not plant the native shrubs. The restoration effort in Mission 1 --- nine events, hundreds of volunteers, 89 native species in a single morning --- depends on a functional front door.
+
+The Meadowdale Beach estuary restoration showed that a $15 million investment in access infrastructure could simultaneously restore salmon habitat, improve ADA accessibility, and earn six national awards. A parking structure at Picnic Point is a smaller ask with the same philosophy: infrastructure that serves people while serving the ecosystem. The LID stormwater controls reduce the runoff that keeps the shellfish closure in place. The ADA-compliant route from the top deck to the overpass opens the beach to visitors who currently cannot make the crossing. The expanded capacity lets the park absorb the visitor load that the overpass was always designed to carry.
+
+Idea to completion. That is the scope.
+
+\newpage
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Parking Structure Feasibility --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles the engineering, regulatory, and cost data needed to execute the five feasibility modules. Agents must load Mission 1's Research Reference (Stage 2) as the site baseline before beginning any module. All structural, geotechnical, and environmental claims must be sourced to the government agencies and professional organizations listed below.
+
+\textbf{Key source organizations:}
+\begin{itemize}
+  \item \textbf{Snohomish County PDS} (Planning and Development Services) --- building permits, Critical Areas, SEPA, LDA
+  \item \textbf{Snohomish County DCNR} --- Parks and Recreation; Drainage Manual; NPDES Phase I permit
+  \item \textbf{Washington State Department of Ecology} --- SEPA, Shoreline Management Act, stormwater
+  \item \textbf{Washington State Department of Transportation (WSDOT)} --- Geotechnical Design Manual; seismic hazard
+  \item \textbf{Washington State Building Code (IBC 2021 as adopted)} --- structural design standards
+  \item \textbf{U.S. Access Board / FHWA} --- ADA pedestrian facility requirements
+  \item \textbf{Precast/Prestressed Concrete Institute (PCI)} --- precast parking structure design standards
+  \item \textbf{RSMeans Construction Cost Data} --- Pacific Northwest cost benchmarks
+  \item \textbf{BNSF Railway} --- overpass and railroad right-of-way coordination
+  \item \textbf{Recreation and Conservation Office (RCO)} --- Washington State grant eligibility
+\end{itemize}
+
+\subsection{Module A Reference: Site Survey \& Geotechnical Investigation}
+
+\subsubsection{Site Context from Mission 1}
+
+The Picnic Point Park parking lot sits on the upland (east) side of the BNSF mainline, atop a coastal bluff composed of unconsolidated glacially derived deposits (Vashon Stade till, outwash, and lacustrine materials, approximately 15,000--13,000 years before present). The USGS has mapped repeated landslide events along the Seattle--Everett BNSF corridor, including events in the winters of 1996 and 1997 that closed the mainline. The bluff elevation is approximately 79 feet at the park's bluff-top location per the Picnic Point CDP elevation datum.
+
+\subsubsection{Geotechnical Investigation Scope (Required)}
+
+Per Washington State Building Code 2021 (IBC Chapter 18) and WSDOT Geotechnical Design Manual, a site-specific geotechnical investigation is required for any structure on unconsolidated soils on or near geologically hazardous areas. Per Snohomish County PDS, all development within 400 feet of a geological hazard area requires a critical areas assessment. A geotechnical report for this project must include:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Investigation Element} & \tableheader{Minimum Requirement} \\
+\midrule
+Soil borings & Minimum 3 borings at proposed column locations; minimum 30 ft depth or 10 ft into bearing stratum, whichever is greater \\
+Standard Penetration Tests (SPT) & Every 2.5 ft in the upper 10 ft; every 5 ft below; continuous in soft/loose zones \\
+Laboratory testing & Grain size, Atterberg limits, moisture content, unconfined compressive strength (cohesive soils) \\
+Groundwater & Static groundwater level from borings; seasonal variation assessment \\
+Bearing capacity & Allowable bearing pressure for deep foundation elements (pile type TBD) \\
+Slope stability & Factor of Safety $\geq$ 1.5 static, $\geq$ 1.1 seismic for bluff adjacent to structure \\
+Seismic hazard & Site Class assignment (ASCE 7-22 Table 20.3-1); spectral accelerations Ss and S1 from USGS hazard maps \\
+Foundation recommendation & Pile type (drilled pier or driven H-pile or pipe pile), diameter/size, estimated depth, design axial and lateral capacity \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Seismic Design Category}
+
+Per Snohomish County Code SCC 30.52F Part 300 and the 2024 Minimum Submittal Requirements for Structural Plans: \textbf{Seismic Design Category D} applies to structures designed per IBC. SDC D2 applies for prescriptive IRC design. The Washington State licensed design professional is responsible for determining if a higher SDC is applicable at the specific site. For a 3-level parking structure, IBC design is required; SDC D governs. This has significant implications for the structural system: moment frames or shear walls must be designed for high seismic demand; precast concrete with Precast Hybrid Moment Frame (PHMF) or other seismic-resistant connection system is appropriate.
+
+\subsubsection{Geotechnical Investigation Timeline}
+
+Per WSDOT guidance, a geotechnical investigation for a project of this scale takes 2--6 months from engagement to final report, depending on field crew scheduling, laboratory turnaround, and report review. This is the \textbf{critical path item} for the feasibility study. It must be initiated at the earliest possible project phase.
+
+\subsection{Module B Reference: Structural Engineering \& Design}
+
+\subsubsection{Structural System Selection}
+
+Industry data supports open-air precast concrete as the preferred system for this site:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{System} & \tableheader{Pros for This Site} & \tableheader{Cons / Considerations} \\
+\midrule
+Open-air precast concrete (double-tee) & Factory-manufactured quality; off-site prefab reduces site disruption; PCI-certified seismic systems (PHMF); fastest erection; lowest cost & Joints require sealant maintenance (plan for 100k+/yr after year 5 for larger structures); heavy precast elements require deep foundations; logistics for large piece delivery to coastal road \\
+Cast-in-place post-tensioned concrete & Fewer joints; better long-term durability; more open column-free layouts & Slower; requires larger on-site crew and forming area; higher initial cost; weather-dependent \\
+Structural steel with precast deck & Adaptable; faster than CIP; good seismic performance & Higher material cost; marine corrosion exposure requires galvanization or protective coating; maintenance cost \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Recommendation:} Precast concrete with PCI-certified seismic connection system (PHMF or equivalent) per Clark Pacific PARC system or equivalent West Coast precast manufacturer. Preferred for this site due to coastal environment, SDC D, and need to minimize on-site disruption to park ecology and restoration work.
+
+\subsubsection{Key Design Parameters}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Parameter} & \tableheader{Value / Standard} \\
+\midrule
+Design code & IBC 2021 / ASCE 7-22 / ACI 318-19 \\
+Seismic Design Category & D (Snohomish County prescription) \\
+Live load (parking) & 40 psf (IBC Table 1607.1); vehicle load per IBC Section 1607.7 \\
+Live load (parking garage floor) & Not less than 50 psf per IBC 1607.7; not reducible \\
+Vehicle barrier & Per IBC Section 1607.8; resist 6,000 lb horizontal force at 18 in. height \\
+Stall dimensions & 8.5 ft $\times$ 18 ft standard; 10 ft $\times$ 20 ft ADA van-accessible \\
+Drive aisle width & 24 ft two-way minimum \\
+Floor-to-floor height & 10.5--11 ft (allows 7 ft min clearance with structural depth) \\
+Open-air classification & Requires $>$ 1/6 of perimeter area open on each level for open-air classification (IBC 406.5) \\
+Structural depth (double-tee) & 24--32 in. typical; determines floor-to-floor height \\
+Approximate footprint (3 levels) & Site-dependent; estimate 175 ft $\times$ 75 ft = 13,125 sq ft per level; 150+ stalls per level \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Level 3 Deck to Overpass Tie-In Bridge}
+
+The critical design challenge of this project. Key parameters and constraints:
+
+\begin{itemize}
+  \item \textbf{Span:} Estimated 15--25 ft from Level 3 deck edge to existing overpass landing. Exact span determined by survey and overpass as-built drawings.
+  \item \textbf{Structural type:} Short-span prefabricated pedestrian bridge (steel or precast concrete). For clear widths $\leq$ 7 ft, no vehicle live load required per AASHTO pedestrian guide specifications. If $>$ 7 ft, maintenance vehicle load (5,000 lbs) must be designed for.
+  \item \textbf{Grade:} ADA requires maximum slope of 5\% (1:20) on pedestrian overpasses where approach slope exceeds 1:20, per US Access Board PROWAG Section R407. This is the primary geometric constraint on the tie-in: Level 3 deck elevation must be set to achieve this grade to the overpass landing. Landings at top and bottom of any ramp, minimum 5 ft long.
+  \item \textbf{Width:} Minimum 8 ft clear width to match approach path. Match existing overpass deck width if possible.
+  \item \textbf{Clearance to BNSF tracks:} The bridge does not span the tracks (the existing overpass does that). The tie-in bridge spans only from the parking structure deck to the overpass landing. No additional BNSF clearance requirement beyond what the existing overpass already provides. However, any modification to the overpass structure or its supports requires BNSF Railway coordination and an encroachment agreement.
+  \item \textbf{Connection to existing overpass:} Structural connection at the overpass landing must be designed by the structural engineer to not compromise the existing overpass structure's integrity. A geotechnical report for the overpass foundation should be obtained from Snohomish County as-builts.
+  \item \textbf{Service life:} 75 years minimum per AASHTO pedestrian bridge design guide.
+\end{itemize}
+
+\subsubsection{ADA Accessible Route}
+
+Per US Access Board PROWAG and ADA Standards for Accessible Design:
+\begin{itemize}
+  \item Accessible parking stalls on Level 1 (at grade): required ratio = 1 van-accessible stall per 6 accessible stalls; 1 accessible stall per 25 total stalls (IBC Table 1106.1). For a 450-stall structure: 18 accessible stalls minimum; 3 van-accessible.
+  \item Vertical circulation from Level 1 to Level 3: elevator (preferred; required if grade change exceeds 30 inches) OR a series of switchback ramps not exceeding 1:12 slope (8.33\%), with 60-in. landings at each turn. For a 2-story structure (approximately 21--22 ft grade change), ramps are feasible but require significant plan area; elevator is strongly preferred.
+  \item The tie-in bridge grade to the existing overpass constitutes the final accessible leg. If the existing overpass itself is not ADA-compliant (the Mission 1 reference to requiring ``assistance'' implies it is not), the County triggers an ADA obligation to bring the altered path of travel into compliance when making ``alterations'' (per Title II and ADA). This may require adding ramps or lifts at the overpass if the tie-in bridge constitutes an alteration.
+\end{itemize}
+
+\subsection{Module C Reference: Permitting \& Regulatory Pathway}
+
+\subsubsection{Permit Types Required}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Permit / Review} & \tableheader{Agency} & \tableheader{Est. Duration} & \tableheader{Key Trigger} \\
+\midrule
+SEPA Environmental Review & Snohomish County PDS (lead); Ecology & 60--120 days & Required for all land use permits; may trigger EIS if DS issued \\
+Shoreline Substantial Development Permit & Snohomish County + Ecology filing & 4--6 months & Development within Puget Sound 200-ft shoreline jurisdiction \\
+Critical Areas Review & Snohomish County PDS & Concurrent with land use & Site within 400 ft of geological hazard area \\
+Land Disturbing Activity (LDA) Permit & Snohomish County DCNR & Concurrent & New impervious surface $>$ 2,000 sq ft \\
+Building Permit & Snohomish County PDS & 3--6 months & New structure; structural plans stamped by WA PE/Architect \\
+BNSF Encroachment Agreement & BNSF Railway (private) & 6--18 months & Any tie-in affecting railway ROW or overpass structure \\
+Army Corps Section 404 / Ecology Section 401 & USACE / Ecology & If wetlands/waters affected & No direct water impact anticipated; confirm with site survey \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{SEPA Pathway Detail}
+
+Per Snohomish County SCC 30.61 and WAC 197-11: A 3-level parking structure on a coastal bluff, adjacent to a shoreline and geological hazard area, will almost certainly receive a Determination of Significance (DS), triggering an Environmental Impact Statement requirement. Agencies and the Tulalip Tribes must be notified as part of the SEPA process. Snohomish County PDS is the lead agency. An EIS adds 12--24 months and significant cost (\$200,000--\$500,000 typical for a project of this scale) to the schedule.
+
+\textbf{Mitigation strategy:} A Mitigated Determination of Non-Significance (MDNS) is possible if the applicant commits to specific mitigation measures upfront --- e.g., full geotechnical report prior to SEPA submission, LID stormwater controls, pile foundation to avoid bluff disturbance, no work in shoreline buffer, no disturbance to BNSF overpass structure, Tulalip cultural resources survey. This is the preferred outcome and should be the design team's explicit goal.
+
+\subsubsection{Shoreline Master Program}
+
+Puget Sound is a shoreline of statewide significance. Under the Snohomish County SMP (currently under 10-year review, due by 2029), development within 200 feet of the ordinary high water mark requires a Shoreline Substantial Development Permit (SDP). The parking lot likely falls within 200 feet of OHWM given the site's configuration (railroad tracks are approximately 50 feet from the bluff edge, bluff drop is approximately 79 feet, but the horizontal distance from the lot to OHWM is the relevant measure). A pre-application meeting with Snohomish County Shoreline staff is strongly recommended early in design.
+
+Note: The 2023 state legislature amended RCW 90.58.630 to require local SMPs to address sea level rise impacts. While the Snohomish County SMP update is not due until 2029, the project's permitting may need to account for projected sea level rise at the bluff base as a condition of the SDP.
+
+\subsection{Module D Reference: Stormwater \& Environmental Engineering}
+
+\subsubsection{Regulatory Framework}
+
+Snohomish County is a Phase I NPDES Municipal Stormwater Permit holder (the largest category, in place since 1995, current permit effective August 1, 2024 through July 31, 2029). The Snohomish County Drainage Manual (effective July 1, 2021) governs. For a project creating more than 2,000 sq ft of new and/or replaced impervious surface: Minimum Requirements 1--5 apply. For projects that create more than 5,000 sq ft of new/replaced impervious surface (this project far exceeds that): Minimum Requirements 1--9 apply, including:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{MR \#} & \tableheader{Requirement} & \tableheader{Application to This Project} \\
+\midrule
+1 & Stormwater site plan & Required; must show all impervious surfaces, flow paths, and BMPs \\
+2 & Construction SWPPP & Erosion/sediment control during construction on coastal bluff \\
+3 & Source control BMPs & Oil/water separator for vehicle deck runoff; drip pads \\
+4 & Preservation of natural drainage & Bioretention to maintain pre-development hydrology at discharge point \\
+5 & On-site stormwater management (LID) & Permeable pavement on entry drive; bioretention planters at structure perimeter \\
+6 & Runoff treatment & Stormwater treatment BMP before discharge (bioretention or media filter) \\
+7 & Flow control & Detention/retention to limit peak flow to pre-development rates \\
+8 & Wetlands protection & Not triggered unless surface-connected wetlands present on site \\
+9 & Basin planning & Must evaluate cumulative basin-scale impacts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{LID BMP Feasibility}
+
+Snohomish County policy requires LID BMPs ``where feasible'' (SCC 30.63A). For this site:
+
+\begin{itemize}
+  \item \textbf{Permeable pavement (entry drive):} Feasible if underlying soils have infiltration rate $>$ 0.3 in/hr. Geotechnical report must include infiltration testing. Coastal soils may have variable rates; design for low-infiltration scenario.
+  \item \textbf{Bioretention cells:} Feasible at structure perimeter and at entry drive edges. Must be sized to treat 91st percentile storm event per Ecology guidance.
+  \item \textbf{Green/vegetated roof (Level 3):} Feasible for non-parking areas of Level 3 deck (approach ramps, pedestrian areas). Adds structural dead load (approx. 15--25 psf for extensive green roof); must be accounted for in structural design.
+  \item \textbf{Oil/water separator:} Required for Level 1 floor drain before any discharge to stormwater system. Standard requirement for parking garage floor drains per county code.
+  \item \textbf{Cistern/reuse:} Possible for Level 3 roof runoff collection for landscape irrigation; evaluate cost-benefit.
+\end{itemize}
+
+\subsubsection{Shellfish Closure Nexus}
+
+Mission 1 established that the WDFW/DOH shellfish closure at Picnic Point is year-round, driven by water quality impairment likely from stormwater runoff from the urbanized upland watershed. The existing surface parking lot contributes uncontrolled vehicle-associated pollutants (petroleum hydrocarbons, metals, suspended solids) directly to the stormwater drainage network leading to Picnic Point Creek and the beach. The proposed parking structure with LID controls and an oil/water separator would:
+
+\begin{enumerate}
+  \item Intercept petroleum hydrocarbons from vehicle drip before they enter stormwater (oil/water separator on Level 1 floor drain).
+  \item Filter suspended solids and metals through bioretention cells before discharge.
+  \item Reduce peak flow rates to Picnic Point Creek (bioretention flow attenuation).
+\end{enumerate}
+
+This stormwater improvement should be quantified in the stormwater management report and explicitly documented as a potential contribution to shellfish closure remediation advocacy. This creates a co-benefit narrative for grant applications (ecology + access + recreation).
+
+\subsection{Module E Reference: Cost Estimating \& Funding Strategy}
+
+\subsubsection{Cost Benchmarks (Above-Grade Open-Air Precast)}
+
+Per Kiwi Newton industry analysis and RSMeans construction cost data (Pacific Northwest):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Cost Element} & \tableheader{Benchmark} \\
+\midrule
+Above-grade open-air structure & \$80--\$100 per gross sq ft (design-build) \\
+Design-bid-build premium & Add 40--60\% vs. design-build (slower; more competitive bid exposure) \\
+Per-stall cost target & \$28,000--\$35,000 per stall \\
+Stalls per level (estimated) & 120--175 (3-level $\times$ 13,000 sq ft per level = approx. 39,000 sq ft GFA) \\
+Estimated total structure GFA & 39,000--45,000 sq ft \\
+Estimated structure cost & \$3.1M--\$4.5M (design-build basis) \\
+Tie-in pedestrian bridge & \$200,000--\$800,000 (depends on span, type, ADA requirements) \\
+Geotechnical investigation & \$75,000--\$150,000 \\
+Permitting (SEPA/SDP/LDA) & \$50,000--\$250,000 (MDNS scenario; EIS would add \$200K--\$500K) \\
+Stormwater (LID BMPs + oil/water separator) & \$150,000--\$350,000 \\
+ADA elevator & \$150,000--\$250,000 \\
+Site civil (entry drive, utilities, lighting) & \$300,000--\$600,000 \\
+\midrule
+\textbf{Estimated total project cost} & \textbf{\$4.2M--\$7.0M (pre-design Class 4 estimate)} \\
+\textbf{Range with EIS (if triggered)} & \textbf{\$4.6M--\$8.0M} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Pacific Northwest cost adjustment:} RSMeans City Cost Index for Seattle/Everett area typically runs 115--125\% of national average. All unit costs should be adjusted accordingly.
+
+\subsubsection{Phasing Strategy}
+
+\textbf{Phase 1:} Ground level only (approximately 120--175 stalls) with full structural frame (columns, footings) designed and constructed for eventual 3-level build-out. Phase 1 stalls on ground floor; Level 2 and Level 3 framing erected but decked as open frame only. Phase 1 cost: approximately \$1.5M--\$2.5M.
+
+\textbf{Phase 2:} Add Level 2 deck (approximately 1--2 years later pending funding). Cost: approximately \$0.8M--\$1.2M incremental.
+
+\textbf{Phase 3:} Add Level 3 deck and tie-in bridge. Cost: approximately \$1.0M--\$1.8M incremental including bridge.
+
+Phasing is the recommended approach given the scale of capital commitment and the likely 18--36 month permitting timeline.
+
+\subsubsection{Funding Sources}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Funding Source} & \tableheader{Type} & \tableheader{Eligibility Notes} \\
+\midrule
+WA Recreation and Conservation Office (RCO) & State grant & Snohomish County adopted updated Park and Recreation Visioning Plan December 2024, satisfying RCO eligibility requirement. Outdoor Recreation Account and local parks grants applicable. \\
+WA Wildlife and Recreation Program & State grant & Applicable to local parks with recreation infrastructure. County must apply through RCO. \\
+FHWA Transportation Alternatives Program (TAP) & Federal & Pedestrian access improvements (ADA overpass tie-in qualifies). Administered through WSDOT. \\
+ADA Compliance / Title II funding & Federal/State & DOJ and state ADA programs fund accessibility upgrades in public facilities. Tie-in bridge and elevator are strong candidates. \\
+Federal Rail Administration (FRA) & Federal & Precedent: Meadowdale used FRA funds for railroad crossing improvement. Overpass tie-in bridge coordination with BNSF may qualify. \\
+Snohomish County Capital Improvement Program (CIP) & County & County's own CIP; Parks Division annually programs capital projects. Requires adoption into 6-year CIP. \\
+LWCF (Land and Water Conservation Fund) & Federal/State pass-through via RCO & Applicable if project enhances public outdoor recreation. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Type} & \tableheader{Boundary} \\
+\midrule
+Geotechnical claims & ABSOLUTE & All bearing capacity, slope stability, and settlement data must come from a licensed WA geotechnical engineer. No values may be assumed without a site-specific investigation. \\
+BNSF Railway interface & GATE & Any statement about modification of the existing overpass structure requires BNSF coordination; do not represent as feasible without railroad review. \\
+SEPA outcome prediction & ANNOTATE & Present MDNS vs. DS pathways as options; do not predict which the county will issue. \\
+Shellfish closure remediation & ANNOTATE & Present stormwater improvement as a potential contributing factor; do not claim it will resolve the closure (other upland sources may exist). \\
+Cost estimates & GATE & All cost figures must be identified as Class 4 pre-design estimates with stated variance (typically $\pm$50\%); do not present as bids. \\
+ADA compliance assertion & GATE & Present ADA requirements per US Access Board and FHWA; do not assert compliance without engineer of record review. \\
+Tulalip cultural resources & ABSOLUTE & Any ground disturbance in Snohomish County triggers Unanticipated Discovery obligations; Tulalip Tribes must be notified as part of SEPA. Never represent cultural clearance without a licensed archaeologist. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Regulatory Sources}
+
+\begin{itemize}
+  \item Snohomish County PDS. \textit{Structural Plans Requirements.} \url{https://snohomishcountywa.gov/2910/Structural-Plans-Requirements}
+  \item Snohomish County PDS. \textit{Critical Area Requirements.} \url{https://snohomishcountywa.gov/2925/Critical-Area-Requirements}
+  \item Snohomish County PDS. \textit{SEPA.} \url{https://snohomishcountywa.gov/1213/SEPA}
+  \item Snohomish County DCNR. \textit{Land Disturbing Activity and Stormwater Regulations.} \url{https://www.snohomishcountywa.gov/1489/Land-Disturbing-Activity-LDA-and-Stormwa}
+  \item Snohomish County DCNR. \textit{Low Impact Development.} \url{https://snohomishcountywa.gov/5570/Low-Impact-Development}
+  \item Snohomish County DCNR. \textit{Drainage Manual (2021).} \url{https://snohomishcountywa.gov/1130/Drainage-Manual}
+  \item Snohomish County PDS. \textit{Minimum Submittal Requirements for Structural Plans 2024.} Including Seismic Design Category D2 prescription.
+  \item Snohomish County Code SCC 30.52F Part 300. Seismic Design Category provisions.
+  \item Snohomish County Code SCC 30.26. General Development Standards -- Parking.
+  \item Snohomish County Code SCC 30.63A. Drainage. (Minimum Requirements 1--9)
+  \item Snohomish County Parks. \textit{Lord Hill Park Parking Lot Improvements Scope of Work (OTAK, 2024).} Precedent for 30\% parking design process.
+  \item Snohomish County Parks. \textit{Park and Recreation Visioning Plan (PRVP, 2022); Comprehensive Plan Update (December 2024).}
+  \item Washington State Department of Ecology. \textit{State Environmental Policy Act (SEPA).} \url{https://ecology.wa.gov/regulations-permits/sepa/environmental-review}
+  \item Washington State Department of Ecology. \textit{Shoreline Permitting Manual.} Publication No. 17-06-029.
+  \item Washington State Legislature. \textit{Shoreline Management Act} (RCW 90.58). 2023 amendment re: sea level rise.
+  \item WSDOT. \textit{Geotechnical Design Manual.} M 46-03.16. Chapters 3, 6, 7, 8 (Field Investigation, Seismic Design, Slope Stability, Foundation Design).
+  \item WSDOT. \textit{Engineering Geology and Geotechnical Engineering.} \url{https://wsdot.wa.gov/engineering-standards/construction-materials/engineering-geology-and-geotechnical-engineering}
+  \item Washington State Building Code 2021 (IBC as adopted). Chapter 18: Soils and Foundations. Chapter 16: Structural Design (Sections 1607.7, 1607.8). Chapter 4: Open Parking Garages (Section 406).
+  \item USGS. \textit{Map Showing Recent and Historic Landslide Activity on Coastal Bluffs of Puget Sound Between Shilshole Bay and Everett.} Publication MF-2346. (Cited in Mission 1; applies directly to this site.)
+  \item U.S. Access Board. \textit{Proposed Accessibility Guidelines for Pedestrian Facilities in the Public Right-of-Way (PROWAG).} Final Rule, August 2023.
+  \item Federal Highway Administration. \textit{Pedestrians and Accessible Design.} \url{https://www.fhwa.dot.gov/programadmin/pedestrians.cfm}
+  \item Washington State Department of Ecology. \textit{NPDES Phase I Municipal Stormwater Permit} (effective August 1, 2024--July 31, 2029).
+\end{itemize}
+
+\subsubsection{Professional \& Industry Sources}
+
+\begin{itemize}
+  \item Kiwi Newton. \textit{How Much Does It Cost to Build a Parking Structure?} Industry cost benchmarks: \$80--\$100/sq ft above-grade open-air; \$28,000--\$35,000/stall. \url{https://www.kiwinewton.com/how-much-does-it-cost-to-build-a-parking-structure/}
+  \item Clark Pacific. \textit{Precast + Parking; PARC System; Precast Hybrid Moment Frame (PHMF).} West Coast precast parking manufacturer and PCI-certified seismic systems. \url{https://www.clarkpacific.com/precast-parking/}
+  \item Schaefer Inc. \textit{Parking Structure Options: Precast vs. Cast-in-Place.} Joint maintenance cost data; system comparison. \url{https://schaefer-inc.com/parking-structure-options-pre-cast-vs-cast-in-place/}
+  \item Fehr Graham. \textit{Mastering Pedestrian Bridge Design.} ADA grade requirements, AASHTO standards, service life. \url{https://www.fehrgraham.com/about-us/blog/mastering-pedestrian-bridge-design}
+  \item Precast/Prestressed Concrete Institute (PCI). Design standards for precast parking structures.
+  \item RSMeans Data Online. \textit{Parking Garage Construction Cost Estimate.} \url{https://www.rsmeans.com/model-pages/parking-garage}
+  \item Recreation and Conservation Office (RCO), Washington State. Grant program eligibility requirements.
+  \item MRSC Washington. \textit{Shoreline Management Act; State Environmental Policy Act.} Legal precedent and practice guidance.
+\end{itemize}
+
+\newpage
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete engineering feasibility study for a ground-level + 2-floor open-air parking structure at Picnic Point Park, Snohomish County, Washington, including: 30\% structural design drawings, geotechnical investigation scope, permitting pathway map, LID stormwater management report, and a Class 4 engineer's cost estimate with phasing and funding strategy. The deliverable set is sufficient for Snohomish County Parks to initiate a geotechnical investigation, schedule a pre-application SEPA meeting, and apply for capital funding.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: FOUNDATION (Sequential)
+  [Haiku] Load Mission 1 geology + site data -> site_baseline.json
+         Code schemas: IBC SDC-D checklist, LID MR 1-9 matrix, permit matrix
+
+WAVE 1A (Parallel Track A):        WAVE 1B (Parallel Track B):      WAVE 1C (Parallel Track C):
+  [Opus]  Module A:                [Sonnet] Module C:               [Sonnet] Module D:
+  Geotech Scope +                  Permit Pathway                   Stormwater +
+  Foundation Recommendation        Map + SEPA Strategy              LID BMPs +
+                                                                    Shellfish Nexus
+
+WAVE 2: STRUCTURAL (Sequential - requires Module A output)
+  [Opus]   Module B: Structural system + 30% design + tie-in bridge spec
+  [Sonnet] 30% Drawing Set: site plan, floor plans, sections, framing plan
+
+WAVE 3: COST + SYNTHESIS (Sequential)
+  [Opus]   Module E: Cost estimate + phasing + funding strategy
+  [Opus]   Cross-module synthesis: ADA route, SEPA mitigation package,
+           shellfish co-benefit narrative, overall feasibility assessment
+
+WAVE 4: PUBLICATION + VERIFICATION (Sequential)
+  [Sonnet] Document compiler + bibliography
+  [Sonnet] Verification agent (SC, CF, IN, EC tests)
+  [Opus]   Final gate: Tulalip cultural resources; cost estimate disclaimers;
+           BNSF interface boundaries; geotechnical claim boundaries
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Data Layer} --- Mission 1 dataset (geology, site context, stormwater nexus) loaded as baseline
+  \item \textbf{Investigation Layer} --- Geotechnical scope and regulatory matrix (Wave 1)
+  \item \textbf{Engineering Layer} --- Structural design and stormwater engineering (Wave 2)
+  \item \textbf{Business Layer} --- Cost estimating, phasing, and funding strategy (Wave 3)
+  \item \textbf{Publication Layer} --- Final document assembly and verification (Wave 4)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}L{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component} \\
+\midrule
+1 & site\_baseline.json & Mission 1 geology, site coordinates, overpass geometry loaded; IBC, LID, permit code schemas indexed & W0-BASE \\
+2 & Geotech Investigation Scope & Min. 3 borings specified; SPT protocol; lab testing; slope stability; SDC determination; foundation system recommended & W1A-GEO \\
+3 & Permit Pathway Map & All 6+ permit types identified; timeline; SEPA MDNS strategy documented & W1B-PERMIT \\
+4 & Stormwater Report & MR 1--9 matrix; LID BMPs selected; oil/water separator specified; shellfish nexus quantified & W1C-SW \\
+5 & 30\% Structural Design & System selected + justified; loading calcs; tie-in bridge spec; ADA route; drawing set (site plan, 3 floor plans, 2 sections, framing plan) & W2-STRUCT \\
+6 & Class 4 Cost Estimate & Total project cost; per-stall cost; 5-discipline breakdown; 3-phase option; $\pm$50\% range stated & W3-COST \\
+7 & Funding Strategy & $\geq$ 3 funding sources with eligibility assessment; grant application readiness checklist & W3-FUND \\
+8 & Cross-Module Synthesis & ADA route traced end-to-end; SEPA MDNS mitigation package; shellfish co-benefit narrative; overall feasibility verdict & W3-SYN \\
+9 & Final Document (PDF) & All 5 modules integrated; bibliography complete; passes verification & W4-PUB \\
+10 & Verification Report & All SC, CF, IN, EC tests run; no BLOCK failures; cost disclaimer present & W4-VER \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}C{1.5cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-BASE & Mission 1 Stage 2 & Haiku & 12,000 \\
+W1A-GEO & W0-BASE & Opus & 50,000 \\
+W1B-PERMIT & W0-BASE & Sonnet & 40,000 \\
+W1C-SW & W0-BASE & Sonnet & 38,000 \\
+W2-STRUCT & W1A-GEO (required) & Opus & 65,000 \\
+W2-DRAW & W2-STRUCT & Sonnet & 35,000 \\
+W3-COST & W2-STRUCT, W1A-GEO & Opus & 40,000 \\
+W3-FUND & W3-COST & Sonnet & 25,000 \\
+W3-SYN & All Wave 1--3 & Opus & 50,000 \\
+W4-PUB & All Wave 1--3, W3-SYN & Sonnet & 45,000 \\
+W4-VER & W4-PUB & Sonnet & 25,000 \\
+W4-GATE & W4-VER & Opus & 30,000 \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total estimated}} & \textbf{455,000} \\
+\multicolumn{3}{r}{\textbf{Buffer (10\%)}} & \textbf{45,000} \\
+\multicolumn{3}{r}{\textbf{Budget ceiling}} & \textbf{500,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned Tasks \& Rationale} \\
+\midrule
+Opus & 30\% & W1A-GEO (geotechnical judgment; foundation recommendation on uncertain substrate); W2-STRUCT (structural system selection and seismic design for SDC D); W3-COST (cost estimate requires calibrated engineering judgment); W3-SYN (cross-module integration and feasibility verdict); W4-GATE (Tulalip cultural resources; cost disclaimer; BNSF boundaries) \\
+Sonnet & 60\% & W1B-PERMIT, W1C-SW, W2-DRAW, W3-FUND, W4-PUB, W4-VER (structured content, permit matrices, drawing specs, code lookups, bibliography, verification) \\
+Haiku & 10\% & W0-BASE (JSON schemas, code checklists, Mission 1 data loading, IBC SDC-D matrix) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Output} \\
+\midrule
+0 & Data Foundation & Sequential & Haiku & site\_baseline.json; code schemas \\
+1A & Geotechnical Scope & Parallel & Opus & Module A \\
+1B & Permit Pathway & Parallel & Sonnet & Module C \\
+1C & Stormwater & Parallel & Sonnet & Module D \\
+2 & Structural Design & Sequential & Opus + Sonnet & Module B + 30\% drawings \\
+3 & Cost + Synthesis & Sequential & Opus + Sonnet & Module E + cross-module synthesis \\
+4 & Publication + Verify & Sequential & Sonnet + Opus & Final PDF + verification report \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Critical Path Note}
+
+Wave 1A (Geotechnical Scope) is the critical path item for the entire feasibility study. Wave 2 (Structural Design) cannot be executed without Wave 1A's foundation system recommendation. In actual project execution (not GSD simulation), the geotechnical investigation itself takes 2--6 months and must be physically conducted in the field. The GSD mission produces the scope and specification for this investigation; the County then commissions a licensed geotechnical engineer to execute it. Wave 2 should not be executed in GSD until the actual geotechnical report is available. The GSD mission produces a ``placeholder structural system'' at Wave 2 based on likely foundation conditions, flagged explicitly for geotechnical engineer review.
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Mission 1 Dataset]
+        |
+   W0-BASE (Haiku)
+        |
+   +----+----+----+
+   |         |    |
+W1A-GEO  W1B-PERMIT  W1C-SW  (Parallel)
+(Opus)   (Sonnet)   (Sonnet)
+   |
+   | [CRITICAL PATH — wait for geotech data in real project]
+   |
+W2-STRUCT (Opus) <--- W1A-GEO required
+W2-DRAW   (Sonnet) <-- W2-STRUCT
+   |
+W3-COST (Opus) <--- W2-STRUCT + W1A-GEO
+W3-FUND (Sonnet) <-- W3-COST
+W3-SYN  (Opus)  <--- ALL Wave 1-3 + W1B-PERMIT + W1C-SW
+   |
+W4-PUB  (Sonnet) <--- ALL
+W4-VER  (Sonnet) <--- W4-PUB
+W4-GATE (Opus)   <--- W4-VER
+   |
+[RELEASE]
+\end{asciibox}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Mission 1 Stage 2 Research Reference is the primary cache payload --- all agents must load it at Wave 0 and cache for Wave 1--4
+  \item site\_baseline.json (W0-BASE output) is cached and provided to all Wave 1 parallel agents simultaneously
+  \item W1A-GEO (geotechnical scope) is cached for W2-STRUCT, W3-COST, and W3-SYN --- it is the highest-reuse document in the mission
+  \item IBC SDC-D code checklist (W0 schema) is cached in W2-STRUCT context to prevent code lookup overhead
+  \item LID MR 1--9 matrix (W0 schema) is cached in W1C-SW and W3-SYN contexts
+\end{itemize}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical (SC) & Non-negotiable engineering and legal boundaries & 7 & BLOCK \\
+Core Functionality (CF) & Deliverable acceptance against 15 success criteria & 22 & BLOCK \\
+Integration (IN) & Cross-module relationship validation & 6 & BLOCK \\
+Edge Cases (EC) & Robustness; alternative scenario handling & 5 & LOG \\
+\midrule
+\multicolumn{2}{r}{\textbf{Total}} & \textbf{40} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-GEO & Geotechnical claims boundary & No specific bearing capacity values, slope stability factors, or pile depths stated without explicit disclaimer that these require a site-specific licensed WA geotechnical engineer report \\
+SC-COST & Cost estimate disclaimer & All cost figures identified as Class 4 ($\pm$50\%) pre-design estimates; no figures presented as bids or final costs \\
+SC-BNSF & BNSF Railway interface & Tie-in bridge connection to overpass described as requiring BNSF encroachment agreement; no statement that it is approved or feasible without railroad review \\
+SC-SEPA & SEPA outcome & MDNS and DS outcomes both presented; no prediction of which the county will issue; EIS cost/time impact described \\
+SC-ADA & ADA compliance & ADA requirements stated per US Access Board and FHWA; no assertion of compliance without engineer of record review \\
+SC-IND & Tulalip cultural resources & Tulalip Tribes named specifically; SEPA notification obligation stated; unanticipated discovery protocol referenced; no cultural clearance claimed without licensed archaeologist \\
+SC-SRC & Source quality & All structural, geotechnical, and regulatory claims traceable to IBC/WSDOT/Ecology/county code or PCI/RSMeans professional standards \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Geotech boring count & Minimum 3 borings specified at proposed column locations \\
+CF-02 & Boring depth & 30 ft minimum or 10 ft into bearing stratum, whichever deeper \\
+CF-03 & Seismic Design Category & SDC D confirmed for IBC design; SDC D2 noted for IRC; site-class determination pending geotech \\
+CF-04 & Structural system selected & Open-air precast concrete selected with explicit justification vs. alternatives \\
+CF-05 & Live load specified & 40 psf / 50 psf parking garage floor load per IBC 1607.7; not reducible \\
+CF-06 & Tie-in bridge span estimated & Span of 15--25 ft stated as estimate pending survey \\
+CF-07 & ADA tie-in grade & Max 5\% slope (1:20) stated; 60-in. landings at ramp transitions \\
+CF-08 & ADA accessible stall count & Minimum ratio per IBC Table 1106.1 calculated for total stall count \\
+CF-09 & Elevator specified & Elevator (or switchback ramp) for Level 1-to-Level 3 ADA route \\
+CF-10 & All 6+ permit types listed & SEPA, SDP, Critical Areas, LDA, building permit, BNSF coordination \\
+CF-11 & SEPA timeline stated & 60--120 days for DNS/MDNS; EIS adds 12--24 months \\
+CF-12 & MR 1--9 applicability & MR 1--5 minimum; MR 6--9 assessed as triggered \\
+CF-13 & Oil/water separator & Specified for Level 1 floor drain; standard for parking garage \\
+CF-14 & LID BMPs selected & Minimum 2 BMPs specified (bioretention + permeable pavement or equivalent) \\
+CF-15 & Total cost range & \$4.2M--\$8.0M range stated with $\pm$50\% Class 4 disclaimer \\
+CF-16 & Per-stall cost & \$28,000--\$35,000 target per stall cited \\
+CF-17 & Phase 1 cost isolated & Phase 1 (ground level + frame) cost separately stated \\
+CF-18 & $\geq$ 3 funding sources & RCO, FHWA/TAP, and at least one other source with eligibility notes \\
+CF-19 & PRVP eligibility confirmed & Snohomish County December 2024 PRVP update noted as satisfying RCO requirement \\
+CF-20 & 30\% drawing set listed & Site plan, 3 floor plans, 2 sections, structural framing plan itemized \\
+CF-21 & Shellfish nexus documented & Stormwater improvement potential to reduce pollutant load to Picnic Point Creek noted \\
+CF-22 & BNSF coordination pathway & Encroachment agreement process described even if not fully detailed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Mission 1 geology feeds Module A & Vashon Stade glacial till, USGS landslide mapping, and bluff elevation from M1 explicitly cited as desktop study baseline in geotechnical scope \\
+IN-02 & Module A feeds Module B & Foundation system recommendation from Module A is referenced in structural system selection \\
+IN-03 & ADA route traced end-to-end & Full accessible route from vehicle to beach documented: Level 1 ADA stall $\rightarrow$ elevator/ramp $\rightarrow$ Level 3 deck $\rightarrow$ tie-in bridge $\rightarrow$ existing overpass $\rightarrow$ park/beach \\
+IN-04 & Stormwater connects to ecology & LID BMPs in Module D linked to shellfish closure reduction potential in Module D and cross-module synthesis \\
+IN-05 & Permit timeline feeds cost estimate & SEPA/SDP timeline (18--36 months) reflected in project schedule section of cost estimate \\
+IN-06 & Phasing consistent & Phase 1 stall count and cost in Module E consistent with structural floor plan stall count in Module B \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Topographic survey scope defined & CF-20 & Pending \\
+2. Geotech investigation program specified & CF-01, CF-02, SC-GEO & Pending \\
+3. Foundation system recommended & CF-03, IN-01, IN-02 & Pending \\
+4. Seismic Design Category confirmed & CF-03 & Pending \\
+5. Structural system selected and justified & CF-04, CF-05 & Pending \\
+6. Tie-in bridge designed to 30\% level & CF-06, CF-07 & Pending \\
+7. ADA accessible route established & CF-08, CF-09, IN-03 & Pending \\
+8. Permitting pathway map produced & CF-10, CF-11 & Pending \\
+9. BNSF interface identified & CF-22, SC-BNSF & Pending \\
+10. Stormwater report to MR 1--5 & CF-12, CF-13, CF-14 & Pending \\
+11. Oil/water separator specified & CF-13 & Pending \\
+12. Shellfish closure nexus documented & CF-21, IN-04 & Pending \\
+13. Class 4 cost estimate produced & CF-15, CF-16, SC-COST & Pending \\
+14. Two-phase option defined & CF-17, IN-06 & Pending \\
+15. Funding sources identified & CF-18, CF-19 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; critical path management \\
+PLAN & Planner & Wave decomposition; 3-track Wave 1 coordination; dependency sequencing \\
+SCOUT & Research Agent & Additional code lookup; RSMeans cost data retrieval; RCO grant eligibility research \\
+TOPO & Topology Manager & Agent team restructuring if Wave 2 must wait for real geotech data \\
+ARCH & Architecture Agent & Cross-cutting structural and regulatory decisions (SDC D, open-air classification) \\
+EXEC-1 & Executor Alpha & Module A (Geotech Scope) + Module E (Cost/Funding) document production \\
+EXEC-2 & Executor Beta & Module C (Permit Pathway) + Module D (Stormwater) document production \\
+EXEC-3 & Executor Gamma & Module B (Structural) 30\% drawing set production \\
+CRAFT-GEO & Geotechnical Specialist & Module A: subsurface investigation scope; pile foundation design basis; slope stability \\
+CRAFT-STRUCT & Structural Specialist & Module B: loading calcs, system selection, tie-in bridge, ADA vertical circulation \\
+CRAFT-PERMIT & Regulatory Specialist & Module C: SEPA strategy; SDP pathway; BNSF coordination \\
+CRAFT-SW & Stormwater Specialist & Module D: LID BMP design; MR 1--9 matrix; shellfish nexus quantification \\
+INTEG & Integration Agent & Wave 3 cross-module synthesis; ADA route; feasibility verdict \\
+VERIFY & Verification Agent & Full 40-test plan execution; verification report \\
+CAPCOM & HITL Interface & Human approval at post-W0, post-W1, post-W2, post-W3 boundaries \\
+BUDGET & Resource Manager & Token budget tracking; flag if geotech wait requires session suspension \\
+LOG & Chronicle Agent & Commit messages; wave completion summaries; critical path flags \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission & Picnic Point Parking Structure Engineering Feasibility \\
+Mission Number & 2 of 2 (extends Mission 1: Picnic Point Park Deep Research) \\
+Activation Profile & Fleet (17 roles) \\
+Total Modules & 5 (A: Geotech, B: Structural, C: Permitting, D: Stormwater, E: Cost/Funding) \\
+Waves & 5 (0: Foundation, 1: Parallel 3-track, 2: Structural, 3: Cost+Synthesis, 4: Publication) \\
+Parallel Tracks & 3 (Wave 1A: Geotech; Wave 1B: Permits; Wave 1C: Stormwater) \\
+Token Budget & 455,000 estimated / 500,000 ceiling \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Safety Tests & 7 mandatory-pass BLOCK gates \\
+Total Tests & 40 \\
+Success Criteria & 15 \\
+HITL Checkpoints & 4 (post-W0, post-W1, post-W2, post-W3) \\
+Critical Path Item & Geotechnical investigation (real-world: 2--6 months; GSD: scope only) \\
+Estimated Sessions & 5--7 \\
+Estimated Total Project Cost & \$4.2M--\$8.0M (Class 4, $\pm$50\%) \\
+Estimated Permitting Timeline & 18--36 months from application to building permit \\
+Status & Ready for GSD Orchestrator (requires Mission 1 dataset) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The goal of the project is to design and engineer improvements to the parking lot, vehicular circulation, trail entry points from the lot, as well as associated improvements and/or amenities in the estate area. Work will include public outreach, design and permitting, grant-seeking, and construction of the improvements.''}\\[0.5em]
+\hspace*{\fill}--- Snohomish County Parks, Lord Hill Park Parking Lot Improvements Project Description, 2024
+
+\vspace{0.8em}
+The Lord Hill project is the template. Picnic Point is the ambition. The same process --- survey, 30\% design, SEPA, funding --- applied to a site where the parking lot doesn't just serve a park: it gatekeeps an overpass, an ecosystem, nine years of restoration work, and a beach that hundreds of volunteers have given their Saturdays to bring back to health. Engineer the front door well. Everything else follows.
+\end{quotebox}
+
+\end{document}

@@ -1,0 +1,87 @@
+{
+  "projectCode": "PSH",
+  "packTitle": "Possession Sound Heritage — Shoreline History, Maritime Culture, Defense & Habitat Recovery from Edmonds to Mukilteo",
+  "modules": [
+    {
+      "moduleId": "boathouses",
+      "title": "Boathouses & Maritime Culture: Losvar Mukilteo Boathouse Norwegian Kicker Boats, McConnell Boathouse, Norma Beach Norma Ganzina Italian Immigrant 1929, Haines Wharf Meadowdale Marine Barn from Irondale, Andy's Boat House Edmonds, Fish Smoking, Puget Sound Salmon Fishing Derby Culture"
+    },
+    {
+      "moduleId": "industrial",
+      "title": "Industrial Shoreline: Standard Oil Point Wells 1911 Tank Farm Chevron Cleanup, Puget Sound Sand & Gravel Company Bluff Mining Destabilization, Pope & Talbot Port Gamble Lumber, Great Northern Railway 1893 Industrial Corridor, Crown Lumber Mukilteo"
+    },
+    {
+      "moduleId": "shipwrecks",
+      "title": "Shipwrecks & Franzen Beach: MV Pacific Queen USS Weight ARS-35 Twin Screw WWII Salvage Vessel, Franzen Family New Zealand Inupiat Ship-Breaking 26 Ships Burned, Possession Lane, Schooner Equator Robert Louis Stevenson, Mukilteo Ammunition Dock WWII"
+    },
+    {
+      "moduleId": "geology",
+      "title": "Land History & Geological Events: Historic Landslides Picnic Point to Norma Beach, 1996-97 Winter Slides Catastrophic, BNSF Track Closures, Vashon Glacial Till Esperance Sand Lawton Clay, Bluff Recession, Fossil Wood Whidbey Formation 80000 Years"
+    },
+    {
+      "moduleId": "indigenous",
+      "title": "Indigenous Sovereignty: Tulalip Tribes Treaty of Point Elliott 1855 Mukilteo, Swinomish Indian Tribal Community Clam Gardens, Boldt Decision 1974 Rafeedie Decision 1994 Fishing Rights, Coast Salish Snohomish People sduhubsh, Usual and Accustomed Areas Possession Sound"
+    },
+    {
+      "moduleId": "habitat",
+      "title": "Habitat Preservation & Recovery: Possession Sound Nearshore Ecology, Qwuloolt Estuary Tulalip $20.5M Restoration, Port Susan Marine Stewardship, Southern Resident Killer Whales Possession Triangle J Pod, Forage Fish Spawning Surf Smelt Sand Lance, Eelgrass Beds, Everett Harbor 11 Cleanup Sites"
+    },
+    {
+      "moduleId": "lighthouses",
+      "title": "The Lighthouses: Mukilteo Light Station 1906 Carl Leick Peter Christiansen Keeper Losvar Connection, Point No Point 1880 Oldest Puget Sound, Paired Treaties Paired Lights Across the Water, Fresnel Lens, Admiralty Head"
+    },
+    {
+      "moduleId": "defense",
+      "title": "Defense & Aerospace: Boeing Everett Factory 1966 Paine Field, Naval Station Everett 1994, NAS Whidbey Island EA-18G Growler, Puget Sound Naval Shipyard Bremerton 1891 WWII 32500 Workers, Edmonds-Kingston Ferry Commuters, Shipwright Heritage Wood to Steel Transition"
+    },
+    {
+      "moduleId": "forts",
+      "title": "Coastal Defense & Military History: Triangle of Fire Fort Casey Fort Worden Fort Flagler Admiralty Inlet, Fort Ebey 1942 Battery 248 Radar, Camp Hayden 16-inch Guns, Fort Ward Rich Passage Mines, Fort Whitman Deception Pass, Ebey's Landing Colonel Isaac Ebey 1857, Paine Field WWII Cold War"
+    },
+    {
+      "moduleId": "noise",
+      "title": "The Sound Landscape: OLF Coupeville Field Carrier Landing Practice Growler 113-119 dB, Ebey's Landing National Historical Reserve Conflict, Paine Field Commercial Airport Controversy, BNSF Railroad 50 Trains Daily, Chinook Helicopters, Sound Propagation Over Water"
+    },
+    {
+      "moduleId": "roads",
+      "title": "Roads & Rails: Highway 99 Pacific Highway 1927 Prohibition Roadhouses Gunnysack Hill Ole Bloss, Keeler's Korner 1927 National Register, Seattle-Everett Interurban Railway 1910-1939, Alderwood Manor Chicken Ranches, Community Transit Swift Blue BRT, Mosher Flag Station"
+    },
+    {
+      "moduleId": "community",
+      "title": "Community Life & Culture: Taste of Edmonds Festival 1987, MukFest Mukilteo Lighthouse Festival, Edmonds Underwater Park 1970 First Pacific Coast, Edmonds Arts Festival 1957, Schools Meadowdale Mariner Edmonds-Woodway Cascade Kamiak, Lawyer Milloy Jermaine Kearse NFL Alumni"
+    },
+    {
+      "moduleId": "picnicpoint",
+      "title": "Picnic Point Community: Sandy Sandborg Picnic Point Pathways, Old Wooden Bridge Picnic Point Creek, Landslide Severed Road to Norma Beach, Serene Lake Elementary, Alderwood Water District 6315 Picnic Point Road, Picnic Point Park Naming History, Olympic Fly Fishers Restoration"
+    }
+  ],
+  "bibliography": [
+    "USGS Publication MF-2346 — Landslide Activity Coastal Bluffs",
+    "Mukilteo Historical Society — Muk Revisited series",
+    "Edmonds Historical Museum — 32,000+ item collection",
+    "Puget Sound Maritime Historical Society (PSMHS) — Pacific Queen identification",
+    "HistoryLink.org — Washington State history encyclopedia",
+    "Lynnwood-Alderwood Manor Heritage Association — Meadowdale series",
+    "Coast Defense Study Group (CDSG)",
+    "Naval History and Heritage Command",
+    "Puget Sound Navy Museum — PSNS history",
+    "Tulalip Tribes Natural Resources Department",
+    "Northwest Indian Fisheries Commission",
+    "Puget Sound Partnership — Action Agenda",
+    "NOAA Fisheries — Puget Sound nearshore",
+    "WA Department of Ecology — Toxics Cleanup Program",
+    "WA DNR Division of Geology and Earth Resources",
+    "US Lighthouse Society",
+    "National Park Service — Ebey's Landing NHR",
+    "Sound Defense Alliance",
+    "Center for Wooden Boats (Seattle)"
+  ],
+  "safetyRules": [
+    "SC-IND: All Indigenous content sourced from tribal publications, government documents, or peer-reviewed sources only (ABSOLUTE)",
+    "SC-ARCH: No disclosure of specific archaeological site locations (ABSOLUTE)",
+    "SC-TREATY: Treaty rights presented factually per court decisions and published tribal sources (GATE)",
+    "SC-PRIV: Respect private property at Franzen Beach and residential shoreline properties (ANNOTATE)",
+    "SC-ENV: Environmental contamination data from Ecology TCP database only (GATE)",
+    "SC-MIL: Military operational details from public/declassified sources only (GATE)"
+  ]
+}

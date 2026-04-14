@@ -1,4 +1,0 @@
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["."]
-import_mode = "importlib"
