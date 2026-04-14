@@ -164,6 +164,9 @@ def _snapshot_url(url, abstract_text, title):
     return os.path.relpath(out, BASE_DIR)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Repo root = scripts/python -> scripts -> repo. Used by staging targets that
+# must land at the canonical top-level `.planning/` tree, not a scripts-local one.
+REPO_ROOT = os.path.dirname(os.path.dirname(BASE_DIR))
 STATE_FILE = os.path.join(BASE_DIR, '.discovery-state.json')
 QUEUE_FILE = os.path.join(BASE_DIR, '.planning', 'RESEARCH-QUEUE.md')
 
@@ -175,6 +178,13 @@ QUEUE_FILE = os.path.join(BASE_DIR, '.planning', 'RESEARCH-QUEUE.md')
 DISCOVERY_V2 = os.environ.get('DISCOVERY_V2', '0') == '1'
 SUPPLEMENTAL_MIN_COSINE = float(os.environ.get('DISCOVERY_MIN_COSINE', '0.35'))
 SNAPSHOT_DIR = os.path.join(BASE_DIR, '.discovery-snapshots')
+
+# ── research-intake staging (handoff 2026-04-13) ──
+# Dual-write: every discovery also lands in `.planning/research-intake/inbox/`
+# as a per-item markdown + .meta.json pair matching StagingMetadata shape.
+# Processed items flow downstream into `.planning/staging/` by a later step.
+# Opt out with `STAGING_ENABLED=0` for a clean rollback.
+STAGING_ENABLED = os.environ.get('STAGING_ENABLED', '1') == '1'
 
 
 def _phrase_query(query: str) -> str:
@@ -924,6 +934,25 @@ def run_discovery(sources=None, dry_run=False):
 
     if 'scholar' in all_sources:
         all_discoveries.extend(check_scholar(state, dry_run))
+
+    # Research-intake staging: dual-write every discovery as a per-item
+    # markdown + .meta.json under `.planning/research-intake/inbox/`. Runs
+    # parallel to append_to_queue; the queue remains the tracking log while
+    # staging holds processed-ready items for downstream sc-learn pickup.
+    if all_discoveries and STAGING_ENABLED and not dry_run:
+        try:
+            import research_staging as _rs
+            staged = 0
+            for d in all_discoveries:
+                try:
+                    _rs.stage_discovery(REPO_ROOT, d, d.get('source', 'unknown'))
+                    staged += 1
+                except Exception as e:
+                    print(f"  STAGING ERROR [{d.get('id', '?')}]: {e}")
+            print(f"  Staged {staged}/{len(all_discoveries)} discoveries to "
+                  f"{_rs.RESEARCH_INBOX}/")
+        except ImportError as e:
+            print(f"  STAGING SKIPPED: research_staging import failed ({e})")
 
     # Append to queue
     if all_discoveries:
