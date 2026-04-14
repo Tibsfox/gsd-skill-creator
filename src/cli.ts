@@ -1360,6 +1360,7 @@ async function main() {
       const exitCode = await publishCommand(skillName, {
         skillsDir: parseSkillsDir(args, scope),
         output,
+        overrideCritique: parseStringFlag(args, '--override-critique'),
       });
       if (exitCode !== 0) process.exit(exitCode);
       break;
