@@ -89,3 +89,5 @@ apps/the-space-between-engine/package-lock.json
 www/
 # Prometheus sweep metrics artifact — moved to .planning/prometheus/
 prometheus/
+# Local session scratch (checkpoints, critique logs, conversation notes)
+.local/
