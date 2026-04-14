@@ -91,3 +91,5 @@ www/
 prometheus/
 # Local session scratch (checkpoints, critique logs, conversation notes)
 .local/
+# Token telemetry runtime data (anchored at root; src/telemetry/ is source code)
+/telemetry/
