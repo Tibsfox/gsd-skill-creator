@@ -53,5 +53,10 @@ jobs:
           node-version: '22'
       - run: npm ci
       - name: Generate Grove arena snapshot (fixture for grove-migration-live tests)
-        run: npx tsx tools/import-filesystem-skills.ts
+        run: |
+          npx tsx tools/import-filesystem-skills.ts \
+            --skills .claude/skills \
+            --agents .claude/agents \
+            --agents examples/agents/gsd \
+            --chipsets data/chipset
       - run: npx vitest run
