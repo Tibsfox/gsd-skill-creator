@@ -21,6 +21,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { packSkill } from '../../mcp/index.js';
 import { SkillStore } from '../../storage/skill-store.js';
 import { getSkillsBasePath } from '../../types/scope.js';
+import { validateTriggeringTestFile } from '../../validation/triggering-validation.js';
 
 // ============================================================================
 // Public interface
@@ -31,6 +32,8 @@ export interface PublishOptions {
   output?: string;
   /** Bypass critique gate with a mandatory reason string (logged to overrides.log). */
   overrideCritique?: string;
+  /** Bypass triggering gate with a mandatory reason string (logged to triggering-logs/overrides.log). */
+  overrideTriggering?: string;
   /** Injected store (for testing; production uses SkillStore). */
   _store?: { exists: (name: string) => Promise<boolean> };
 }
@@ -129,6 +132,118 @@ async function enforceGate(
 }
 
 // ============================================================================
+// Triggering gate (Phase B)
+// ============================================================================
+
+interface TriggeringStatusSidecar {
+  triggeringTestHash: string;
+  status: string;
+}
+
+/**
+ * Enforce the triggering-test publish gate.
+ *
+ * Activated when triggering.test.md can be read from skillDir.
+ * Returns null on pass, or an error message string on failure.
+ * When overrideTriggering is set, writes to triggering-logs/overrides.log and returns null.
+ *
+ * Implementation note: uses readFile (not access) to check file existence so the
+ * mocked readFile in tests controls gate activation — consistent with enforceGate pattern.
+ */
+async function enforceTriggeringGate(
+  skillName: string,
+  skillDir: string,
+  overrideTriggering: string | undefined,
+): Promise<string | null> {
+  const triggeringLogsDir = join('.local', 'triggering-logs');
+  const overridesLog = join(triggeringLogsDir, 'overrides.log');
+
+  // Override path — bypass gate, write audit log (matches --override-critique pattern)
+  if (overrideTriggering) {
+    const timestamp = new Date().toISOString();
+    const entry = `${timestamp}\t${skillName}\tpublish\t${overrideTriggering}\n`;
+    try {
+      await mkdir(triggeringLogsDir, { recursive: true });
+      let existing = '';
+      try {
+        existing = await readFile(overridesLog, 'utf-8');
+      } catch {
+        // File doesn't exist yet — that's fine
+      }
+      await writeFile(overridesLog, existing + entry);
+    } catch (err) {
+      p.log.warn(
+        `Could not write triggering override log: ${err instanceof Error ? err.message : String(err)}`,
+      );
+    }
+    p.log.warn(
+      pc.yellow(`Triggering gate bypassed for "${skillName}" — override reason recorded`),
+    );
+    return null;
+  }
+
+  // Read triggering.test.md — gate activates only when the file is present and readable.
+  // Any read failure (ENOENT, permission error, unexpected mock) means gate does not apply.
+  let triggeringContent: string;
+  try {
+    triggeringContent = await readFile(join(skillDir, 'triggering.test.md'), 'utf-8');
+  } catch {
+    // File absent or unreadable — triggering gate does not apply for this skill
+    return null;
+  }
+
+  // Structural validation
+  const structural = validateTriggeringTestFile(triggeringContent);
+  if (!structural.valid) {
+    return (
+      `Skill "${skillName}" has triggering.test.md but structural validation failed:\n` +
+      `  - ${structural.errors.join('\n  - ')}\n` +
+      `  Run: skill-creator test-triggering ${skillName}`
+    );
+  }
+
+  // Read .triggering-status.json sidecar
+  const statusPath = join(skillDir, '.triggering-status.json');
+  let statusRaw: string;
+  try {
+    statusRaw = await readFile(statusPath, 'utf-8');
+  } catch {
+    return (
+      `Skill "${skillName}" has no passing triggering test on record.\n` +
+      `  Run: skill-creator test-triggering ${skillName}`
+    );
+  }
+
+  let status: TriggeringStatusSidecar;
+  try {
+    status = JSON.parse(statusRaw) as TriggeringStatusSidecar;
+  } catch {
+    return (
+      `Skill "${skillName}" has corrupt .triggering-status.json — re-run: skill-creator test-triggering ${skillName}`
+    );
+  }
+
+  // Check status === 'passed'
+  if (status.status !== 'passed') {
+    return (
+      `Skill "${skillName}" last triggering test did not pass (status: ${status.status}).\n` +
+      `  Run: skill-creator test-triggering ${skillName}`
+    );
+  }
+
+  // Hash check — ensure triggering.test.md hasn't changed since last run
+  const currentHash = createHash('sha256').update(triggeringContent).digest('hex');
+  if (status.triggeringTestHash !== currentHash) {
+    return (
+      `Skill "${skillName}" triggering.test.md has changed since last test run (hash mismatch).\n` +
+      `  Run: skill-creator test-triggering ${skillName}`
+    );
+  }
+
+  return null;
+}
+
+// ============================================================================
 // publishCommand
 // ============================================================================
 
@@ -180,6 +295,20 @@ export async function publishCommand(
       p.log.error(gateError);
       return 1;
     }
+  }
+
+  // --- Enforce triggering gate ---
+  // enforceTriggeringGate returns null when triggering.test.md is absent (no gate).
+  // When the file is present, it enforces: structural validity + passing status sidecar
+  // + hash match. override-triggering bypasses and writes an audit log entry.
+  const triggeringError = await enforceTriggeringGate(
+    skillName,
+    skillDir,
+    options.overrideTriggering,
+  );
+  if (triggeringError) {
+    p.log.error(triggeringError);
+    return 1;
   }
 
   // Determine output path

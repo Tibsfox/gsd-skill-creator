@@ -1374,6 +1374,7 @@ async function main() {
         skillsDir: parseSkillsDir(args, scope),
         output,
         overrideCritique: parseStringFlag(args, '--override-critique'),
+        overrideTriggering: parseStringFlag(args, '--override-triggering'),
       });
       if (exitCode !== 0) process.exit(exitCode);
       break;
