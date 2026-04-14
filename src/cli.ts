@@ -27,6 +27,7 @@ import { publishCommand } from './cli/commands/publish.js';
 import { installCommand } from './cli/commands/install.js';
 import { statusCommand } from './cli/commands/status.js';
 import { auditCommand } from './cli/commands/audit.js';
+import { critiqueCommand } from './cli/commands/critique.js';
 import { handleMigratePlaneCommand } from './plane/migration.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
@@ -692,6 +693,32 @@ async function main() {
       } else {
         p.log.error(`Refinement failed: ${result.error}`);
       }
+      break;
+    }
+
+    case 'critique':
+    case 'crit': {
+      if (args.includes('--help') || args.includes('-h')) {
+        await critiqueCommand(undefined, {});
+        break;
+      }
+      const scope = parseScope(args);
+      const skillArgs = args.slice(1).filter((a) => !a.startsWith('-'));
+      const skillName = skillArgs[0];
+
+      // Parse flags
+      const maxIterArg = args.find((a) => a.startsWith('--max-iter'));
+      const maxIter = maxIterArg
+        ? parseInt(maxIterArg.includes('=') ? maxIterArg.split('=')[1]! : args[args.indexOf(maxIterArg) + 1]!, 10)
+        : undefined;
+
+      const exitCode = await critiqueCommand(skillName, {
+        skillsDir: getSkillsBasePath(scope),
+        maxIter: !isNaN(maxIter!) ? maxIter : undefined,
+        checkExternal: args.includes('--check-external'),
+        mock: args.includes('--mock'),
+      });
+      if (exitCode !== 0) process.exit(exitCode);
       break;
     }
 
