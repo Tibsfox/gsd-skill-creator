@@ -68,11 +68,19 @@ A curated timeline of the most significant milestones across the v1.0 → v1.49.
 - **v1.49.500** (2026-04-13) — last npx-published `skill-creator`
   checkpoint. Marks the beginning of the combined NASA/360 engine
   second pass.
-- **v1.49.549** (2026-04-14) — cartridge-forge Milestone. Ships the
-  unified Cartridge/Chipset schema, `skill-creator cartridge …` CLI,
-  forge source modules, and additive migration of 43 existing
-  department chipsets. 23,645 tests passing, zero new runtime
-  dependencies, the forge's own cartridge is the first to self-evaluate.
+- **v1.49.549** (2026-04-14) — **Artemis II: The Space Between the Moon
+  and the Earth.** Omnibus mission release covering the full 13-day
+  Artemis II arc (2026-04-01 → 2026-04-14): ~356 point releases
+  (v1.49.193 → v1.49.549), the Seattle 360 / Sound of Puget Sound
+  second pass through Degree 359, the Memory Arena Rust stack M1 → M13
+  with IPC and Grove integration (710 Rust + 393 TS tests), the Grove
+  content-addressed format with 299 resources imported, Phase B
+  skill-author-discipline, 1.88M+ words of research corpus expansion,
+  NASA missions v1.0 → v1.5, and — shipping the unified
+  Cartridge/Chipset schema under the same release — cartridge-forge
+  with seven CLI subcommands and 43 department migrations. Full suite
+  23,645 passing, zero new runtime dependencies from the forge work,
+  PR #32 merged artemis-ii → dev preserving all 670 commits.
 
 For anything not in this list, consult
 [`docs/RELEASE-HISTORY.md`](docs/RELEASE-HISTORY.md).
