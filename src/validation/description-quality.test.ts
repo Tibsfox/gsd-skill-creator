@@ -5,6 +5,7 @@ import {
   ANTI_CAPABILITY_PATTERNS,
   USE_WHEN_PATTERN,
 } from './description-quality.js';
+import type { ValidateDescriptionOptions } from './description-quality.js';
 
 describe('DescriptionQualityValidator', () => {
   const validator = new DescriptionQualityValidator();
@@ -256,8 +257,6 @@ describe('DescriptionQualityValidator', () => {
 // Phase B PLAN-contract tests (locked field names from PLAN.md must_haves)
 // These test the additive PLAN-specified aliases alongside the existing fields.
 // =============================================================================
-
-import { ANTI_CAPABILITY_PATTERNS, ValidateDescriptionOptions } from './description-quality.js';
 
 describe('ANTI_CAPABILITY_PATTERNS (Phase B)', () => {
   it('matches "manages" in a description', () => {
