@@ -414,6 +414,9 @@ export const SkillInputSchema = z.object({
   extends: SkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
+
+  // Critique gate field: when true, publish requires a converged critique run on record.
+  'requires-critique': z.boolean().optional(),
 }).passthrough(); // Preserve unknown fields
 
 // Type inference from schema
@@ -486,6 +489,9 @@ export const SkillMetadataSchema = z.object({
   extends: SkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
+
+  // Critique gate field: when true, publish requires a converged critique run on record.
+  'requires-critique': z.boolean().optional(),
 }).passthrough(); // Preserve unknown fields
 
 /** Type inference for full metadata schema */
@@ -528,7 +534,7 @@ export const CLAUDE_EXTENSION_FIELDS = ['context', 'agent', 'model', 'hooks', 'd
 /**
  * Fields used by gsd-skill-creator extensions (legacy root-level or internal).
  */
-const GSD_EXTENSION_FIELDS = ['triggers', 'enabled', 'version', 'extends', 'createdAt', 'updatedAt', 'learning'] as const;
+const GSD_EXTENSION_FIELDS = ['triggers', 'enabled', 'version', 'extends', 'createdAt', 'updatedAt', 'learning', 'requires-critique'] as const;
 
 /**
  * Result of classifying frontmatter fields.
