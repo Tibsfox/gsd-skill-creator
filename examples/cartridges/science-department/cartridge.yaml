@@ -18,6 +18,8 @@ chipsets:
     src: ../../chipsets/science-department/chipset.yaml
   - kind: grove
     src: ../../chipsets/science-department/chipset.yaml#/grove
+  - kind: evaluation
+    src: ../../chipsets/science-department/chipset.yaml#/evaluation
   - kind: college
     src: ../../chipsets/science-department/chipset.yaml#/college
 metadata:
