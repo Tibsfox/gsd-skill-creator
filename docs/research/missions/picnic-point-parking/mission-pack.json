@@ -1,0 +1,49 @@
+{
+  "projectCode": "PPS",
+  "packTitle": "Picnic Point Parking Structure Feasibility — Ground Level + 2-Floor with Overpass Integration",
+  "modules": [
+    {
+      "moduleId": "geotechnical",
+      "title": "Site Survey & Geotechnical Investigation: LiDAR Topographic Survey, Subsurface Borings SPT/CPT, Slope Stability Analysis, Foundation System Recommendation, Seismic Design Category D, Glacial Till Bearing Capacity"
+    },
+    {
+      "moduleId": "structural",
+      "title": "Structural Engineering & Design: Open-Air Precast Concrete Parking Structure, IBC 2021 Seismic Zone D, ASCE 7-22 Load Calculations, Level 3 Deck-to-Overpass Tie-In Bridge, ADA Accessible Vertical Circulation, 30% Design Drawings"
+    },
+    {
+      "moduleId": "permitting",
+      "title": "Permitting & Regulatory Pathway: Snohomish County PDS Building Permit, SEPA Environmental Checklist, Shoreline Substantial Development Permit, Critical Areas Review, BNSF Railway Coordination, Land Disturbing Activity Permit"
+    },
+    {
+      "moduleId": "stormwater",
+      "title": "Stormwater & Environmental Engineering: Impervious Surface Calculation, LID BMP Selection, Snohomish County Drainage Manual MR 1-9, Oil/Water Separator, Bioretention Planters, Permeable Pavement, NPDES Phase I Compliance, Shellfish Closure Nexus"
+    },
+    {
+      "moduleId": "cost-funding",
+      "title": "Cost Estimating & Funding Strategy: RSMeans Pacific Northwest Calibration, Precast Parking Structure $80-$100/sqft, Per-Stall Cost $28K-$35K, Two-Phase Construction, RCO Grants, FHWA Transportation Alternatives, WA Wildlife and Recreation Program, 20-Year Life-Cycle Comparison"
+    }
+  ],
+  "bibliography": [
+    "Snohomish County PDS — Structural Plans Requirements, Critical Area Requirements, SEPA",
+    "Snohomish County DCNR — Land Disturbing Activity, Low Impact Development, Drainage Manual (2021)",
+    "WSDOT — Geotechnical Design Manual M 46-03.16",
+    "Washington State Building Code 2021 (IBC) — Chapter 18 Soils/Foundations, Chapter 16 Structural",
+    "USGS Publication MF-2346 — Coastal Bluffs Landslide Activity, Shilshole Bay to Everett",
+    "U.S. Access Board — PROWAG Final Rule August 2023",
+    "FHWA — Pedestrians and Accessible Design",
+    "Washington State Dept of Ecology — SEPA, Shoreline Permitting Manual, NPDES Phase I",
+    "Snohomish County Parks — Lord Hill Park Parking Improvements (OTAK 2024), PRVP 2022",
+    "Clark Pacific — Precast + Parking, PARC System, PHMF",
+    "Schaefer Inc — Parking Structure Options: Precast vs Cast-in-Place",
+    "Kiwi Newton — How Much Does It Cost to Build a Parking Structure?"
+  ],
+  "safetyRules": [
+    "SC-GEO: All bearing capacity, slope stability, settlement claims must come from licensed WA geotechnical engineer — no values assumed without site-specific investigation (ABSOLUTE)",
+    "SC-BNSF: Any overpass modification statement requires BNSF coordination — do not represent as feasible without railroad review (GATE)",
+    "SC-SEPA: Present MDNS vs DS pathways as options — do not predict which the county will issue (ANNOTATE)",
+    "SC-SHELL: Present stormwater improvement as potential contributing factor — do not claim it will resolve shellfish closure (ANNOTATE)",
+    "SC-COST: All cost figures are Class 4 pre-design estimates with ±50% variance — do not present as bids (GATE)",
+    "SC-ADA: Present ADA requirements per US Access Board and FHWA — do not assert compliance without engineer of record review (GATE)",
+    "SC-TULALIP: Ground disturbance in Snohomish County triggers Unanticipated Discovery obligations — Tulalip Tribes must be notified as part of SEPA (ABSOLUTE)"
+  ]
+}

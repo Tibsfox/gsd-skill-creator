@@ -1,0 +1,254 @@
+# Writing Department Chipset Configuration
+# 18th instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department reference template.
+
+name: writing-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated writing department providing domain-routed
+  expertise through seven named agents (Woolf, Baldwin, Angelou,
+  Orwell, Le Guin, Strunk, Calkins), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college writing department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  narrative-craft:
+    domain: writing
+    description: "Narrative construction — story structure, character, POV, conflict, setting, pacing"
+    triggers:
+      - "write a story"
+      - "character development"
+      - "point of view"
+      - "plot structure"
+      - "worldbuilding"
+      - "fiction"
+      - "narrative"
+    agent_affinity: [woolf, le-guin, angelou]
+
+  expository-writing:
+    domain: writing
+    description: "Essay and argument — thesis, evidence, reasoning, paragraph architecture, clarity"
+    triggers:
+      - "essay"
+      - "thesis"
+      - "argument"
+      - "persuade"
+      - "expository"
+      - "op-ed"
+      - "nonfiction"
+    agent_affinity: [orwell, baldwin, calkins]
+
+  poetry-form:
+    domain: writing
+    description: "Poetic forms and techniques — sonnet, villanelle, haiku, meter, sound, imagery"
+    triggers:
+      - "poem"
+      - "poetry"
+      - "sonnet"
+      - "haiku"
+      - "meter"
+      - "stanza"
+      - "verse"
+      - "rhyme"
+    agent_affinity: [angelou, woolf]
+
+  revision-editing:
+    domain: writing
+    description: "Revision and editing — structural revision, sentence editing, workshop, self-editing"
+    triggers:
+      - "revise"
+      - "edit"
+      - "tighten"
+      - "workshop"
+      - "feedback"
+      - "draft"
+      - "rewrite"
+    agent_affinity: [strunk, orwell, calkins, baldwin]
+
+  research-writing:
+    domain: writing
+    description: "Research writing — academic genres, citation, source evaluation, research argument"
+    triggers:
+      - "research paper"
+      - "cite"
+      - "sources"
+      - "bibliography"
+      - "literature review"
+      - "MLA"
+      - "APA"
+      - "academic"
+    agent_affinity: [orwell, strunk, calkins]
+
+  voice-style:
+    domain: writing
+    description: "Voice and style — authorial presence, diction, syntax, register, distinctive voices"
+    triggers:
+      - "voice"
+      - "style"
+      - "tone"
+      - "register"
+      - "diction"
+      - "find my voice"
+      - "writing style"
+    agent_affinity: [woolf, baldwin, angelou, strunk, orwell]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Woolf as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: woolf
+
+  agents:
+    - name: woolf
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: baldwin
+      role: "essay and voice — nonfiction craft, moral clarity, truth-telling"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: angelou
+      role: "poetry and memoir — form, sound, rhythm, embodied voice"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: orwell
+      role: "clarity and argument — structure, jargon elimination, logical coherence"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: le-guin
+      role: "fiction and worldbuilding — narrative structure, speculative construction"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: strunk
+      role: "mechanics and style — sentence economy, grammar, parallel construction"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: calkins
+      role: "pedagogy — workshop structure, conferencing, scaffolding, assessment"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  writers-workshop-team:
+    description: "Full department for complex multi-form problems"
+    agents: [woolf, baldwin, angelou, orwell, le-guin, strunk, calkins]
+    use_when: "multi-form, advanced, or full-workshop requests"
+
+  editing-team:
+    description: "Focused editing, revision, and prose refinement"
+    agents: [orwell, strunk, baldwin, calkins]
+    use_when: "revision, argument strengthening, style audit requests"
+
+  genre-team:
+    description: "Creative genre composition — fiction, poetry, creative nonfiction"
+    agents: [le-guin, angelou, woolf, calkins]
+    use_when: "creative writing, form exploration, genre analysis requests"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 writing Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college writing department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (woolf) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - fiction
+      - poetry
+      - essay
+      - research
+      - revision
+      - style
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "writing-department"
+  record_types:
+    - name: WritingAnalysis
+      description: "Close reading or style analysis of a text with craft observations"
+
+    - name: WritingDraft
+      description: "Composed text with craft notes, structure map, and voice observations"
+
+    - name: WritingCritique
+      description: "Editorial feedback with revision directives and prioritized issues"
+
+    - name: WritingExplanation
+      description: "Teaching artifact — technique explanation, workshop plan, or exercise set"
+
+    - name: WritingSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "writing"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Reading as Discovery"
+    - "Story & Narrative"
+    - "Poetry & Language"
+    - "The Writing Process"
+    - "Literary Analysis"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

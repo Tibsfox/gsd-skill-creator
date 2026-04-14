@@ -1,0 +1,251 @@
+# Statistics Department Chipset Configuration
+# 21st department instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template and remapped
+# to statistical reasoning, inference, modeling, and communication.
+
+name: statistics-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated statistics department providing domain-routed
+  expertise through seven named agents (Pearson, Bayes, Gosset,
+  Box, Efron, Wasserstein, George), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college statistics department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  descriptive-statistics:
+    domain: statistics
+    description: "Summarizing and visualizing data — measures of center, spread, shape, position, graphical displays"
+    triggers:
+      - "summarize"
+      - "mean"
+      - "median"
+      - "standard deviation"
+      - "histogram"
+      - "box plot"
+      - "describe this data"
+    agent_affinity: [pearson, gosset]
+
+  probability-theory:
+    domain: statistics
+    description: "Probability foundations — sample spaces, conditional probability, Bayes' theorem, distributions, CLT"
+    triggers:
+      - "probability"
+      - "conditional"
+      - "Bayes' theorem"
+      - "distribution"
+      - "expected value"
+      - "central limit theorem"
+    agent_affinity: [bayes, pearson]
+
+  inferential-statistics:
+    domain: statistics
+    description: "Drawing conclusions from data — confidence intervals, hypothesis tests, p-values, power, effect sizes"
+    triggers:
+      - "test whether"
+      - "significant"
+      - "hypothesis"
+      - "confidence interval"
+      - "p-value"
+      - "power analysis"
+      - "sample size"
+    agent_affinity: [gosset, pearson, wasserstein]
+
+  regression-modeling:
+    domain: statistics
+    description: "Modeling relationships — linear regression, multiple regression, logistic regression, diagnostics"
+    triggers:
+      - "predict"
+      - "regression"
+      - "model"
+      - "R-squared"
+      - "residual"
+      - "logistic"
+      - "fit a model"
+    agent_affinity: [box, efron]
+
+  bayesian-methods:
+    domain: statistics
+    description: "Bayesian inference — priors, posteriors, MCMC, credible intervals, Bayes factors, hierarchical models"
+    triggers:
+      - "prior"
+      - "posterior"
+      - "Bayesian"
+      - "MCMC"
+      - "credible interval"
+      - "Bayes factor"
+      - "update beliefs"
+    agent_affinity: [bayes, efron]
+
+  statistical-computing:
+    domain: statistics
+    description: "Computational statistics — bootstrap, permutation tests, simulation, cross-validation, reproducibility"
+    triggers:
+      - "bootstrap"
+      - "simulate"
+      - "permutation test"
+      - "cross-validation"
+      - "Monte Carlo"
+      - "resample"
+    agent_affinity: efron
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Pearson as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: pearson
+
+  agents:
+    - name: pearson
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: bayes
+      role: "probabilistic reasoning — Bayesian inference, prior-to-posterior updating"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: gosset
+      role: "experimental statistics — t-tests, small-sample inference, design"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: box
+      role: "modeling and diagnostics — regression, response surface, time series"
+      model: opus
+      tools: [Read, Grep, Bash, Write]
+
+    - name: efron
+      role: "computational statistics — bootstrap, permutation, simulation"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: wasserstein
+      role: "communication — p-value reform, audience adaptation, reporting standards"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: george
+      role: "pedagogy — active learning, simulation-based inference, conceptual understanding"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  stats-analysis-team:
+    description: "Full department for complex multi-domain statistical problems"
+    agents: [pearson, bayes, gosset, box, efron, wasserstein, george]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  consulting-team:
+    description: "Applied statistical consulting — model building with client communication"
+    agents: [box, pearson, gosset, george]
+    use_when: "applied analysis, study design, client-facing results"
+
+  methods-team:
+    description: "Methodological comparison — Bayesian vs. frequentist vs. computational"
+    agents: [bayes, efron, box, george]
+    use_when: "method comparison, paradigm evaluation, sensitivity analysis"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 statistics Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college statistics department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (pearson) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - descriptive
+      - probability
+      - inference
+      - regression
+      - bayesian
+      - computation
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "statistics-department"
+  record_types:
+    - name: StatisticalAnalysis
+      description: "Completed statistical test or analysis with assumptions, results, and effect sizes"
+
+    - name: StatisticalModel
+      description: "Fitted model with coefficients, diagnostics, and iteration history"
+
+    - name: DataReport
+      description: "Audience-adapted report of findings with recommendations and caveats"
+
+    - name: StatisticalExplanation
+      description: "Teaching artifact or methodological comparison at a specified level"
+
+    - name: StatisticsSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "statistics"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Accounting Principles & Bookkeeping"
+    - "Financial Statements & Analysis"
+    - "Probability & Randomness"
+    - "Statistical Analysis & Inference"
+    - "Financial Literacy & Personal Finance"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

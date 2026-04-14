@@ -28,6 +28,9 @@ desktop/node_modules/
 # Citation cache (regenerable API responses)
 data/citations/cache/
 
+# Discovery engine URL snapshots (local audit trail, not committed)
+scripts/python/.discovery-snapshots/
+
 # Compiled man pages (source is .scd)
 extra/man/*.1
 extra/man/*.5
@@ -53,7 +56,25 @@ contrib/upstream/*/
 !contrib/README.md
 
 # Local project data
-media/
+/media/
+
+# Artifacts (local only — transcripts, audio, channel scans, summaries)
+artifacts/
+
+# Python cache
+__pycache__/
+*.pyc
+.venv/
+
+# Local data stores (regenerable)
+.grove/
+.chroma/
+
+# Runtime state (regenerable)
+.cadence-state.json
+
+# Stray VTT transcripts (should be in artifacts/)
+yt-queue-*.en.vtt
 
 # Lost and found (orphaned files from refactors)
 lost-and-found/
@@ -61,20 +82,10 @@ lost-and-found/
 
 # User-local config
 .sc-config.json
-the-space-between-engine/package-lock.json
+apps/the-space-between-engine/package-lock.json
 .env
 # API directory (local only — credentials, sync scripts, schemas)
-www/tibsfox/com/api/
-
-# Runtime state
-.bg-shell/
-
-# LaTeX build artifacts (sources are .tex)
-www/**/*.aux
-www/**/*.idx
-www/**/*.log
-www/**/*.out
-www/**/*.toc
-
-# Compiled binaries (sources are .c)
-scripts/nasa/shader-viewer
+# Published site content (228 MB, regenerable, lives on disk for sync scripts)
+www/
+# Prometheus sweep metrics artifact — moved to .planning/prometheus/
+prometheus/

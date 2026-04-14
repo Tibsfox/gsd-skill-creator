@@ -1,0 +1,256 @@
+# Music Department Chipset Configuration
+# Second instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. The music department validates the department template
+# by applying it to a domain with fundamentally different reasoning
+# requirements than mathematics.
+
+name: music-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated music department providing domain-routed expertise
+  through seven named agents (Bach, Rameau, Clara Schumann, Messiaen,
+  Coltrane, Bartok, Kodaly), six knowledge skills, and three
+  pre-composed teams. Persists work via Grove records and integrates
+  with the college music department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  harmony-analysis:
+    domain: music
+    description: "Harmonic analysis — chord identification, Roman numeral analysis, voice leading, modulation detection"
+    triggers:
+      - "chord progression"
+      - "harmonic analysis"
+      - "voice leading"
+      - "modulation"
+      - "Roman numeral"
+      - "cadence"
+      - "figured bass"
+    agent_affinity: rameau
+
+  counterpoint:
+    domain: music
+    description: "Contrapuntal writing — species counterpoint, fugue, canon, invertible counterpoint"
+    triggers:
+      - "counterpoint"
+      - "fugue"
+      - "canon"
+      - "species counterpoint"
+      - "invertible"
+      - "stretto"
+      - "subject and answer"
+    agent_affinity: [bach, rameau]
+
+  rhythm-meter:
+    domain: music
+    description: "Rhythmic analysis — time signatures, polyrhythm, metric modulation, groove patterns"
+    triggers:
+      - "rhythm"
+      - "time signature"
+      - "meter"
+      - "polyrhythm"
+      - "syncopation"
+      - "metric modulation"
+      - "tempo"
+    agent_affinity: [bartok, coltrane]
+
+  form-analysis:
+    domain: music
+    description: "Musical form — sonata, rondo, theme-and-variations, through-composed, sectional analysis"
+    triggers:
+      - "sonata form"
+      - "rondo"
+      - "theme and variations"
+      - "musical form"
+      - "exposition"
+      - "development"
+      - "recapitulation"
+      - "ABA"
+    agent_affinity: [bartok, bach]
+
+  orchestration:
+    domain: music
+    description: "Instrumentation and orchestration — ranges, timbres, doublings, score reduction, transposition"
+    triggers:
+      - "orchestration"
+      - "instrumentation"
+      - "score"
+      - "arrange"
+      - "transposition"
+      - "register"
+      - "timbre"
+      - "doubling"
+    agent_affinity: messiaen
+
+  ear-training:
+    domain: music
+    description: "Aural skills — interval recognition, chord quality, dictation, sight-singing pedagogy"
+    triggers:
+      - "ear training"
+      - "interval"
+      - "sight-singing"
+      - "dictation"
+      - "aural skills"
+      - "solfege"
+      - "relative pitch"
+    agent_affinity: kodaly
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Bach as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: bach
+
+  agents:
+    - name: bach
+      role: "department chair — classification, routing, synthesis"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: rameau
+      role: "harmony specialist — chord grammar, voice leading, tonal analysis"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: clara-schumann
+      role: "performance specialist — interpretation, expression, repertoire guidance"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: messiaen
+      role: "composition specialist — orchestration, color, modes of limited transposition"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: coltrane
+      role: "improvisation specialist — jazz harmony, modal interchange, spontaneous composition"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: bartok
+      role: "ethnomusicology and form specialist — folk traditions, formal structures, rhythmic systems"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: kodaly
+      role: "pedagogy guide — ear training, sequential learning, musicianship development"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  music-analysis-team:
+    description: "Full department for complex multi-domain analysis"
+    agents: [bach, rameau, clara-schumann, messiaen, coltrane, bartok, kodaly]
+    use_when: "multi-domain, research-level, or full-analysis requests"
+
+  composition-workshop-team:
+    description: "Focused composition, harmony, and orchestration"
+    agents: [bach, rameau, messiaen, bartok]
+    use_when: "composition, arranging, or orchestration requests"
+
+  performance-prep-team:
+    description: "Performance interpretation, ear training, and repertoire guidance"
+    agents: [clara-schumann, kodaly, coltrane, rameau]
+    use_when: "performance preparation, audition prep, or aural skills development"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 music Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college music department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (bach) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - harmony
+      - counterpoint
+      - rhythm
+      - form
+      - orchestration
+      - ear-training
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "music-department"
+  record_types:
+    - name: MusicAnalysis
+      description: "Analytical document — harmonic, formal, or rhythmic analysis of a work or passage"
+
+    - name: MusicComposition
+      description: "Original composition or arrangement with notation, voicing, and instrumentation"
+
+    - name: MusicPerformance
+      description: "Performance notes — interpretation markings, expression guidance, practice strategy"
+
+    - name: MusicTranscription
+      description: "Transcription or dictation artifact with source reference and accuracy notes"
+
+    - name: MusicSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "music"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Rhythm & Movement"
+    - "Melody & Voice"
+    - "Harmony & Structure"
+    - "Instruments & Ensemble"
+    - "Music History & Culture"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"

@@ -1,0 +1,86 @@
+{
+  "name": "Artemis II Session 6 Research Mappings",
+  "description": "College department mappings for Session 6 research findings (2026-04-04)",
+  "mappings": [
+    {
+      "source": "12 Primitives Analysis (Nate B Jones)",
+      "departments": ["coding", "engineering", "cloud-systems"],
+      "topics": [
+        {"dept": "coding", "topic": "Tool Registry Design", "concept": "Metadata-first tool registries — define capabilities as data before implementation"},
+        {"dept": "coding", "topic": "Permission Systems", "concept": "Tiered trust: built-in > plug-in > user-defined, with audit trails"},
+        {"dept": "engineering", "topic": "Crash Recovery", "concept": "Session persistence, workflow state separation, structured crash events"},
+        {"dept": "cloud-systems", "topic": "Token Budget Enforcement", "concept": "Pre-execution budget checking, hard limits per agent/convoy"}
+      ],
+      "rosetta": "Agent Architecture → 12 harness primitives map to Gastown chipset"
+    },
+    {
+      "source": "Kara Rawson — RL Framework for AI Agents in Game Systems",
+      "departments": ["mathematics", "coding", "electronics", "mind-body"],
+      "topics": [
+        {"dept": "mathematics", "topic": "Markov Decision Processes", "concept": "MDP/POMDP formalization for agent state-action-reward cycles"},
+        {"dept": "mathematics", "topic": "Optimization Algorithms", "concept": "PPO, SAC, DQN, CQL — gradient-based policy optimization"},
+        {"dept": "coding", "topic": "Entity Component Systems", "concept": "ECS architecture for game engines — data-oriented design"},
+        {"dept": "electronics", "topic": "GPU Acceleration", "concept": "Vulkan compute shaders, CUDA kernels for parallel RL training"},
+        {"dept": "mind-body", "topic": "Intrinsic Curiosity", "concept": "ICM — prediction error as intrinsic reward drives exploration"}
+      ],
+      "rosetta": "Reinforcement Learning → bridges mathematics (MDP) to mind-body (curiosity) through coding (ECS)"
+    },
+    {
+      "source": "Marc Andreessen — Death of the Browser",
+      "departments": ["history", "coding", "philosophy", "business"],
+      "topics": [
+        {"dept": "history", "topic": "Computing Platform Shifts", "concept": "Mainframe → PC → Internet → Mobile → AI. Each shift obsoletes the last UI paradigm."},
+        {"dept": "coding", "topic": "Unix Primitive Architecture", "concept": "Agent = LLM + bash + filesystem + markdown + cron. Simplicity over protocol complexity."},
+        {"dept": "philosophy", "topic": "80-Year Overnight Success", "concept": "Neural nets (1943) → expert systems → transformers → agents. Compounding research payoff."},
+        {"dept": "business", "topic": "Institutional Adoption Friction", "concept": "Technical capability outpaces organizational readiness. Velocity vs. operational discipline."}
+      ],
+      "rosetta": "Platform Shift → validates file-native agent architecture, challenges MCP complexity"
+    },
+    {
+      "source": "p3nGu1nZz Channel — Game Engine Architecture (10 videos)",
+      "departments": ["coding", "mathematics", "physics", "electronics", "philosophy"],
+      "topics": [
+        {"dept": "coding", "topic": "Deterministic Atomic Buffers", "concept": "Order-independent accumulation — commutative operations make execution order irrelevant"},
+        {"dept": "coding", "topic": "Specification Driven Development", "concept": "SDD: maintain spec alongside code. 'TDD with a maintained spec.' Drift ≤ 1cm."},
+        {"dept": "coding", "topic": "Frame Graph Architecture", "concept": "Declarative DAG with auto-barrier inference — system infers execution waves from declared I/O"},
+        {"dept": "mathematics", "topic": "Decision Transformers", "concept": "Goal-conditioned sequence modeling — trajectory-aware decisions replace reactive policies"},
+        {"dept": "physics", "topic": "Quantum Game Engines", "concept": "CUDA-Q on RTX 4060 Ti: 28-qubit simulation. QAE gives quadratic speedup on Monte Carlo."},
+        {"dept": "electronics", "topic": "Vulkan Rendering Pipeline", "concept": "Deferred rendering, Cook-Torrance BRDF, two-tier RT/rasterization fallback"},
+        {"dept": "philosophy", "topic": "MDA Framework", "concept": "Mechanics → Dynamics → Aesthetics: second-order design problem, feel emerges from rules"},
+        {"dept": "mathematics", "topic": "Predictive Coding Networks", "concept": "Free Energy Principle: prediction error as the single learning rule. Morphogenesis from local rules."}
+      ],
+      "rosetta": "Game Engine Architecture → unified thesis: declarative > imperative, determinism as foundation, emergence from simple rules"
+    },
+    {
+      "source": "CMU Safety + OWASP Security",
+      "departments": ["engineering", "coding", "critical-thinking"],
+      "topics": [
+        {"dept": "engineering", "topic": "Safety Engineering", "concept": "Reliability ≠ safety. System-level hazard analysis. Making components more reliable can make systems less safe."},
+        {"dept": "coding", "topic": "Configuration Immutability", "concept": "Config-overwrite attack: file-write tool modifies approval config to bypass human-in-the-loop"},
+        {"dept": "critical-thinking", "topic": "Threat Modeling", "concept": "Tool enumeration as primary artifact. Trust boundaries define the attack surface."}
+      ],
+      "rosetta": "Safety Engineering → harness integrity invariants, fail-safe defaults, defense in depth"
+    },
+    {
+      "source": "GraphRAG vs VectorRAG (Unwaver Framework)",
+      "departments": ["data-science", "mathematics", "coding"],
+      "topics": [
+        {"dept": "data-science", "topic": "Entity Resolution", "concept": "Canonicalization + voting beats both pure graph and pure vector retrieval"},
+        {"dept": "mathematics", "topic": "Reciprocal Rank Fusion", "concept": "RRF(k=60): fuse multiple retrieval lanes without learned weights"},
+        {"dept": "coding", "topic": "Concept-Level Embeddings", "concept": "Embed entities alongside pages for semantic bridging across documents"}
+      ],
+      "rosetta": "Information Retrieval → 3-lane search (vector + FTS + concept) validated"
+    },
+    {
+      "source": "HPC White-Box Compute Research (20 years)",
+      "departments": ["electronics", "engineering", "economics", "history"],
+      "topics": [
+        {"dept": "electronics", "topic": "GPU Architecture Evolution", "concept": "ATI V9800 → Tesla V100 → RTX PRO 6000: from render to ML to AI. $/TFLOP collapsed 100x."},
+        {"dept": "engineering", "topic": "System Design Methodology", "concept": "5-tier white-box builds: budget, gaming, scientific, rack-optimized, cutting-edge"},
+        {"dept": "economics", "topic": "DRAM Crisis Economics", "concept": "AI datacenter buildout consuming all DRAM fab capacity. RAM now 28-34% of build cost."},
+        {"dept": "history", "topic": "Moore's Law Trajectory", "concept": "4004 (2,250 transistors) → modern (100B/mm²) = 533,333x in 47 years. 3D stacking next."}
+      ],
+      "rosetta": "Compute Economics → price/performance frontier tracking across 5 tiers, TOP500 ceiling reference"
+    }
+  ]
+}

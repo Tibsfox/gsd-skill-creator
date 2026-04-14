@@ -100,6 +100,11 @@
         "description": "GSD statusline with colorful project status display"
       },
       {
+        "source": "hooks/gsd-config-guard.js",
+        "target": ".claude/hooks/gsd-config-guard.js",
+        "description": "PreToolUse: hard-block Write/Edit targeting .claude/settings.json"
+      },
+      {
         "source": "hooks/gsd-inject-snapshot.js",
         "target": ".claude/hooks/gsd-inject-snapshot.js",
         "description": "Session start: inject latest snapshot"

@@ -203,16 +203,16 @@ describe('Safety-Critical Tests', () => {
     const item1 = await manager.createWorkItem('Task 1', 'First work', 'P1');
     const item2 = await manager.createWorkItem('Task 2', 'Second work', 'P2');
 
-    // First hook assignment succeeds
+    // First hook assignment succeeds (lands in pending per GUPP lifecycle)
     await manager.setHook(agent.id, item1.beadId);
     const hook = await manager.getHook(agent.id);
     expect(hook).not.toBeNull();
-    expect(hook!.status).toBe('active');
+    expect(hook!.status).toBe('pending');
     expect(hook!.workItem!.beadId).toBe(item1.beadId);
 
     // Second assignment must throw (single-assignment enforcement)
     await expect(manager.setHook(agent.id, item2.beadId)).rejects.toThrow(
-      /already has an active hook/,
+      /already has a pending hook/,
     );
 
     // Original hook is unchanged

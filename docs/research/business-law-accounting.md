@@ -352,3 +352,116 @@ Double-entry bookkeeping is a Rosetta Stone concept. Every transaction has two s
 44. [FASB: Generally Accepted Accounting Principles](https://fasb.org/)
 45. [Investopedia: Financial Statements](https://www.investopedia.com/terms/f/financial-statements.asp)
 46. [IFRS Foundation: IFRS Standards](https://www.ifrs.org/)
+
+---
+
+## Addendum: 2025 federal and Washington-state updates
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. The body above is a stable reference rather than a
+changing topic — entity types, double-entry bookkeeping, and federal
+tax classification do not shift year over year — but two 2025 events
+are concrete enough that a reader using the paper as a starting point
+should know about them.
+
+### CTA / BOI reporting status
+
+The body's discussion of federal regulatory compliance does not
+explicitly cover the **Corporate Transparency Act (CTA)** Beneficial
+Ownership Information (BOI) reporting regime, which has been the
+largest recent change to small-business federal compliance since
+the CTA took effect in January 2024. As of 2025, the BOI reporting
+requirement has had a turbulent legal history:
+
+- **January 2024** — BOI reporting under CTA takes effect for all
+  new entities; existing entities have until January 1, 2025 to
+  file initial reports.
+- **Throughout 2024** — multiple federal court challenges,
+  nationwide injunctions entered and lifted, and a period of
+  acute practitioner uncertainty about whether existing entities
+  were required to file or not.
+- **March 2025** — FinCEN issued an **interim final rule**
+  exempting **U.S.-based reporting companies and U.S. beneficial
+  owners** from most of the BOI reporting requirements. Foreign
+  reporting companies remain subject.
+- **April 2026** — The rule remains the operative guidance.
+  Domestic small businesses that incorporated in the U.S. with
+  U.S. owners generally do not need to file BOI reports, though
+  practitioners recommend monitoring FinCEN guidance for any
+  further changes.
+
+The practical effect for Washington LLCs and Oregon LLCs (the
+subject of the body's entity-formation section) is that the
+BOI-reporting compliance burden was briefly large, then briefly
+vast, and is now substantially reduced for domestic entities. The
+body's section 4 "Federal Regulatory Compliance" should be read
+against this 2025 rule change when used as a reference.
+
+### Washington 2025 tax package — B&O and sales tax reform
+
+The body's Washington State entity-formation section notes that
+Washington's B&O tax is levied on gross receipts and that Washington
+has no state income tax. Both are still true. What has changed is
+that **HB 2081** (signed May 20, 2025) restructured the B&O rate
+table and **SB 5814** (same signing date) expanded the retail sales
+tax to cover digital and professional services. The specific
+changes:
+
+- **HB 2081** — 0.5% surcharge on B&O for businesses with
+  >$250M Washington-taxable revenue, effective January 1, 2026.
+  Service & Other Activities rate at the >$5M gross tier rises
+  from 1.75% to 2.1%. Advanced computing surcharge rises from
+  1.22% to 7.5% with cap rising from $9M to $75M.
+- **SB 5814** — Retail sales tax now applies to advertising
+  services, IT training/support, custom software development,
+  temporary staffing, live presentations, and security
+  services, effective October 2025.
+
+A Washington LLC formed for consulting, software development, or
+digital services work in 2026 faces a meaningfully different tax
+environment than the same entity would have in 2024. The full
+treatment of these changes lives in the `wtx-research` bucket of
+this research catalog; the short-form takeaway for the
+business-law-accounting reader is that Washington is no longer a
+clearly low-tax state for service businesses, and any entity
+formation decision that depends on the state's tax profile should
+be reassessed against the 2025 package before commitment.
+
+For the full primary-source reading, see [KPMG's May 2025 SALT alert](https://kpmg.com/kpmg-us/content/dam/kpmg/taxnewsflash/pdf/2025/05/washington-salt-alert-may28-2025.pdf) and [Moss Adams's October 2025 interim sales-tax guidance](https://www.mossadams.com/articles/2025/10/washington-sales-tax-interim-guidance).
+
+**Sources for this addendum:** KPMG SALT alert (May 2025), Moss Adams interim guidance (October 2025), and the `wtx-research` bucket in this research catalog.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**business**](../../../.college/departments/business/DEPARTMENT.md)
+  — Entity formation, cooperative structures, securities, and
+  double-entry bookkeeping are core business-department topics.
+- [**economics**](../../../.college/departments/economics/DEPARTMENT.md)
+  — Tax structure, the cost of capital, and the economic
+  incentives built into different entity choices are
+  economics-department topics.
+- [**history**](../../../.college/departments/history/DEPARTMENT.md)
+  — Double-entry bookkeeping traces back to Luca Pacioli's 1494
+  Summa, and tribal sovereignty jurisprudence has its own long
+  historical arc that this paper's section 3 sketches.
+- [**critical-thinking**](../../../.college/departments/critical-thinking/DEPARTMENT.md)
+  — Legal reasoning under regulatory uncertainty (the CTA story
+  is a canonical example) is a critical-thinking exercise.
+
+---
+
+*Addendum (2025 CTA/BOI status, Washington HB 2081 + SB 5814) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — Business Law & Accounting
+
+## DIY — Read one CTA/BOI regulation
+
+FinCEN posts them publicly. Understand the exemptions.
+
+## TRY — Double-entry bookkeeping by hand
+
+Track income/expense for one week with paper ledgers.
+You'll understand GAAP faster than any textbook.

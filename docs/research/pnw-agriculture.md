@@ -216,3 +216,57 @@ The single most important agricultural fact in the PNW is the Cascade Range rain
 32. Food Chemistry Advances / PLOS One -- Thiophenol Discovery
 33. Science/AAAS / Grape and Wine Magazine -- Gordonia alkanivorans Research
 34. Northwest Power and Conservation Council -- Columbia River Uses
+
+---
+
+## Addendum: 2025–2026 notes
+
+This addendum was added in April 2026 as part of a catalog-wide
+enrichment pass. Washington's tree-fruit and irrigated-agriculture
+economy is stable year-over-year, and the body above is broadly
+current; two 2025-specific points are worth flagging.
+
+- **Wildfire smoke taint** remains an active research frontier.
+  The Tomasino Lab at OSU and collaborators continue to publish
+  through 2024–2025 on the chemistry of smoke-affected wine,
+  including the **thiophenol** and **Gordonia alkanivorans**
+  bacterial-remediation threads the body references. The 2025
+  vintage conversation in the PNW wine industry is consistently
+  framed around smoke-taint risk management, which has gone from
+  a 2020-era outlier concern to a core viticulture discipline.
+- **SB 5814 services sales tax (Washington)** — effective October
+  2025 — extends the retail sales tax to a range of professional
+  services. Most farm-direct activity is exempt, but agricultural
+  consulting, bookkeeping, and software services sold to farms
+  are now in the sales-tax base. See the `wtx-research` bucket
+  for full treatment; the practitioner-facing point for this
+  document is that Washington farms' administrative and
+  professional-services costs have risen modestly in 2025–2026
+  and the industry is still working out the boundary between
+  exempt and taxable services.
+
+## Related College Departments
+
+This research cross-links to the following college departments in
+`.college/departments/`:
+
+- [**environmental**](../../../.college/departments/environmental/DEPARTMENT.md) — Irrigation, water rights, and the Columbia River Basin's agricultural water use are environmental-department topics.
+- [**nature-studies**](../../../.college/departments/nature-studies/DEPARTMENT.md) — Pest pressure (codling moth, apple maggot) and the ecology of tree fruit in the PNW landscape are nature-studies material.
+- [**culinary-arts**](../../../.college/departments/culinary-arts/DEPARTMENT.md) — Washington's apple, cherry, pear, and wine-grape production feed directly into culinary-arts instruction on PNW foodways.
+- [**business**](../../../.college/departments/business/DEPARTMENT.md) — Agricultural marketing, regional farm economies, and the interaction with state tax policy are business-department topics.
+
+---
+
+*Addendum (smoke taint research status, SB 5814 impact note) and Related College Departments cross-link added during the Session 018 catalog enrichment pass.*
+
+## Study Guide — PNW Agriculture
+
+## DIY — Visit a PNW farmers market
+
+Pike Place, Ballard, Olympia. Talk to farmers about
+this year's conditions.
+
+## TRY — Read one WSU agronomy report
+
+Washington State University publishes extension
+bulletins. Pick one crop, read one bulletin.

@@ -1,0 +1,681 @@
+# Minecraft Knowledge World Chipset Configuration
+# Assembles 20 skills, 10 agents, and 5 teams into a unified routing configuration.
+# Generated during Phase 194 (Chipset Assembly).
+
+schema_version: "1.0"
+
+chipset:
+  name: minecraft-knowledge-world
+  description: >
+    Complete chipset for the Minecraft Knowledge World project.
+    Assembles infrastructure, platform, Minecraft server, Amiga emulation,
+    and knowledge world capabilities into 5 coordinated teams with 10 agents
+    and 20 skills. Total token budget: 31.5% (under 40% ceiling).
+  version: "1.0.0"
+  project: gsd-skill-creator
+  created: "2026-02-18"
+  updated: "2026-02-19"
+
+skills:
+  # Plan 01: Infrastructure Foundation (5 skills, 7% budget)
+  - name: hardware-discovery
+    source: infra/skills/hardware-discovery.md
+    token_budget: "1.5%"
+    priority: 95
+    team: mc-infra
+    agents: [infra-scout]
+    plan_origin: "01-infrastructure-foundation"
+    phase_origin: "169"
+    enabled: true
+    dependencies: []
+
+  - name: resource-budgeting
+    source: infra/skills/resource-budgeting.md
+    token_budget: "1%"
+    priority: 90
+    team: mc-infra
+    agents: [infra-scout]
+    plan_origin: "01-infrastructure-foundation"
+    phase_origin: "169"
+    enabled: true
+    dependencies: [hardware-discovery]
+
+  - name: pxe-boot
+    source: infra/skills/pxe-boot.md
+    token_budget: "1.5%"
+    priority: 80
+    team: mc-infra
+    agents: [infra-provisioner]
+    plan_origin: "01-infrastructure-foundation"
+    phase_origin: "170"
+    enabled: true
+    dependencies: []
+
+  - name: kickstart-provisioning
+    source: infra/skills/kickstart-provisioning.md
+    token_budget: "1%"
+    priority: 75
+    team: mc-infra
+    agents: [infra-provisioner]
+    plan_origin: "01-infrastructure-foundation"
+    phase_origin: "171"
+    enabled: true
+    dependencies: [pxe-boot]
+
+  - name: vm-lifecycle
+    source: infra/skills/vm-lifecycle.md
+    token_budget: "2%"
+    priority: 70
+    team: mc-infra
+    agents: [infra-provisioner]
+    plan_origin: "01-infrastructure-foundation"
+    phase_origin: "172"
+    enabled: true
+    dependencies: [kickstart-provisioning]
+
+  # Plan 02: Minecraft Server (5 skills, 7.5% budget)
+  - name: minecraft-deployment
+    source: infra/skills/minecraft-deployment.md
+    token_budget: "2%"
+    priority: 65
+    team: mc-ops
+    agents: [mc-deployer]
+    plan_origin: "02-minecraft-server"
+    phase_origin: "173"
+    enabled: true
+    dependencies: [vm-lifecycle]
+
+  - name: mod-management
+    source: infra/skills/mod-management.md
+    token_budget: "1.5%"
+    priority: 60
+    team: mc-ops
+    agents: [mc-deployer]
+    plan_origin: "02-minecraft-server"
+    phase_origin: "174"
+    enabled: true
+    dependencies: [minecraft-deployment]
+
+  - name: server-configuration
+    source: infra/skills/server-configuration.md
+    token_budget: "1.5%"
+    priority: 60
+    team: mc-ops
+    agents: [mc-deployer]
+    plan_origin: "02-minecraft-server"
+    phase_origin: "175"
+    enabled: true
+    dependencies: [minecraft-deployment]
+
+  - name: client-setup
+    source: infra/skills/client-setup.md
+    token_budget: "1%"
+    priority: 45
+    team: mc-ops
+    agents: [mc-verifier]
+    plan_origin: "02-minecraft-server"
+    phase_origin: "176"
+    enabled: true
+    dependencies: [mod-management]
+
+  - name: integration-verification
+    source: infra/skills/integration-verification.md
+    token_budget: "1.5%"
+    priority: 40
+    team: mc-ops
+    agents: [mc-verifier]
+    plan_origin: "02-minecraft-server"
+    phase_origin: "177"
+    enabled: true
+    dependencies: [server-configuration, mod-management, client-setup]
+
+  # Plan 03: Platform Portability (4 skills, 7.5% budget)
+  - name: platform-discovery
+    source: infra/skills/platform-discovery.md
+    token_budget: "2%"
+    priority: 90
+    team: mc-platform
+    agents: [platform-scout]
+    plan_origin: "03-platform-portability"
+    phase_origin: "178"
+    enabled: true
+    dependencies: []
+
+  - name: distro-abstraction
+    source: infra/skills/distro-abstraction.md
+    token_budget: "1.5%"
+    priority: 82
+    team: mc-platform
+    agents: [platform-scout]
+    plan_origin: "03-platform-portability"
+    phase_origin: "179"
+    enabled: true
+    dependencies: [platform-discovery]
+
+  - name: hypervisor-abstraction
+    source: infra/skills/hypervisor-abstraction.md
+    token_budget: "2%"
+    priority: 78
+    team: mc-platform
+    agents: [platform-engineer]
+    plan_origin: "03-platform-portability"
+    phase_origin: "180"
+    enabled: true
+    dependencies: [platform-discovery]
+
+  - name: hardware-adaptation
+    source: infra/skills/hardware-adaptation.md
+    token_budget: "2%"
+    priority: 74
+    team: mc-platform
+    agents: [platform-engineer]
+    plan_origin: "03-platform-portability"
+    phase_origin: "181"
+    enabled: true
+    dependencies: [platform-discovery, distro-abstraction]
+
+  # Plan 04: Amiga Emulation (3 skills, 5% budget)
+  - name: uae-emulation
+    source: infra/skills/uae-emulation.md
+    token_budget: "2%"
+    priority: 50
+    team: mc-amiga
+    agents: [amiga-emulator]
+    plan_origin: "04-amiga-emulation"
+    phase_origin: "182-183"
+    enabled: true
+    dependencies: [hardware-adaptation, distro-abstraction]
+
+  - name: asset-conversion
+    source: infra/skills/asset-conversion.md
+    token_budget: "2%"
+    priority: 48
+    team: mc-amiga
+    agents: [amiga-archivist]
+    plan_origin: "04-amiga-emulation"
+    phase_origin: "184"
+    enabled: true
+    dependencies: [uae-emulation]
+
+  - name: content-curation
+    source: infra/skills/content-curation.md
+    token_budget: "1%"
+    priority: 45
+    team: mc-amiga
+    agents: [amiga-archivist]
+    plan_origin: "04-amiga-emulation"
+    phase_origin: "185"
+    enabled: true
+    dependencies: [asset-conversion]
+
+  # Plan 05: Knowledge World Design (3 skills, 4.5% budget)
+  - name: world-design
+    source: infra/skills/world-design.md
+    token_budget: "1.5%"
+    priority: 35
+    team: mc-creative
+    agents: [world-architect]
+    plan_origin: "05-knowledge-world-design"
+    phase_origin: "186"
+    enabled: true
+    dependencies: []
+
+  - name: schematic-library
+    source: infra/skills/schematic-library.md
+    token_budget: "1.5%"
+    priority: 30
+    team: mc-creative
+    agents: [world-architect]
+    plan_origin: "05-knowledge-world-design"
+    phase_origin: "187-188"
+    enabled: true
+    dependencies: [world-design]
+
+  - name: educational-curriculum
+    source: infra/skills/educational-curriculum.md
+    token_budget: "1.5%"
+    priority: 25
+    team: mc-creative
+    agents: [curriculum-designer]
+    plan_origin: "05-knowledge-world-design"
+    phase_origin: "189-190"
+    enabled: true
+    dependencies: [schematic-library, world-design]
+
+agents:
+  - name: infra-scout
+    description: "Hardware discovery and resource budgeting specialist"
+    skills: [hardware-discovery, resource-budgeting]
+    team: mc-infra
+    model: sonnet
+    tools: "Read, Bash, Glob, Grep"
+
+  - name: infra-provisioner
+    description: "PXE boot, kickstart provisioning, and VM lifecycle worker"
+    skills: [pxe-boot, kickstart-provisioning, vm-lifecycle]
+    team: mc-infra
+    model: sonnet
+    tools: "Read, Write, Bash, Glob, Grep"
+
+  - name: platform-scout
+    description: "Platform subsystem discovery and distribution abstraction specialist"
+    skills: [platform-discovery, distro-abstraction]
+    team: mc-platform
+    model: sonnet
+    tools: "Read, Bash, Glob, Grep"
+
+  - name: platform-engineer
+    description: "Hypervisor abstraction and hardware-adaptive configuration worker"
+    skills: [hypervisor-abstraction, hardware-adaptation]
+    team: mc-platform
+    model: sonnet
+    tools: "Read, Write, Bash, Glob, Grep"
+
+  - name: amiga-emulator
+    description: "FS-UAE installation and Amiga emulation configuration specialist"
+    skills: [uae-emulation]
+    team: mc-amiga
+    model: sonnet
+    tools: "Read, Write, Bash, Glob, Grep"
+
+  - name: amiga-archivist
+    description: "Amiga asset conversion and content curation worker"
+    skills: [asset-conversion, content-curation]
+    team: mc-amiga
+    model: sonnet
+    tools: "Read, Write, Bash, Glob, Grep"
+
+  - name: world-architect
+    description: "Knowledge World spatial design and schematic library leader"
+    skills: [world-design, schematic-library]
+    team: mc-creative
+    model: sonnet
+    tools: "Read, Write, Glob, Grep"
+
+  - name: curriculum-designer
+    description: "Educational curriculum and guided build methodology specialist"
+    skills: [educational-curriculum]
+    team: mc-creative
+    model: sonnet
+    tools: "Read, Write, Glob, Grep"
+
+  - name: mc-deployer
+    description: "Minecraft server deployment, mod management, and configuration worker"
+    skills: [minecraft-deployment, mod-management, server-configuration]
+    team: mc-ops
+    model: sonnet
+    tools: "Read, Write, Bash, Glob, Grep, WebFetch"
+
+  - name: mc-verifier
+    description: "Integration verification and client setup specialist"
+    skills: [integration-verification, client-setup]
+    team: mc-ops
+    model: sonnet
+    tools: "Read, Bash, Glob, Grep"
+
+teams:
+  - name: mc-infra
+    description: "Infrastructure pipeline: hardware discovery, resource budgeting, PXE provisioning, and VM deployment"
+    topology: pipeline
+    lead_agent: infra-scout
+    members: [infra-scout, infra-provisioner]
+    resource_locks:
+      - "infra/scripts/discover-hardware.sh"
+      - "infra/scripts/calculate-budget.sh"
+      - "infra/scripts/deploy-pxe.sh"
+      - "infra/scripts/deploy-kickstart.sh"
+      - "infra/scripts/vm-lifecycle.sh"
+      - "infra/scripts/provision-vm.sh"
+      - "infra/scripts/deploy-minecraft.sh"
+      - "infra/scripts/vm-backend-*.sh"
+      - "infra/templates/pxe/**"
+      - "infra/templates/dnsmasq/**"
+      - "infra/templates/kickstart/**"
+      - "infra/inventory/hardware-profile.yaml"
+      - "infra/local/resource-budget.yaml"
+    sync_points:
+      - event: "hardware-profile-ready"
+        action: "Signal mc-platform that hardware-profile.yaml is complete"
+      - event: "server-deployed"
+        action: "Signal mc-ops that Minecraft server is deployed and responding"
+    message_bus: ".planning/artifacts/mc-infra/"
+
+  - name: mc-platform
+    description: "Platform portability: parallel subsystem discovery, distribution abstraction, and hardware adaptation"
+    topology: map-reduce
+    lead_agent: platform-scout
+    members: [platform-scout, platform-engineer]
+    resource_locks:
+      - "infra/scripts/discover-all.sh"
+      - "infra/scripts/discover-audio.sh"
+      - "infra/scripts/discover-network.sh"
+      - "infra/scripts/discover-usb.sh"
+      - "infra/scripts/discover-distro.sh"
+      - "infra/scripts/lib/discovery-common.sh"
+      - "infra/scripts/lib/pkg-abstraction.sh"
+      - "infra/scripts/lib/pkg-names.sh"
+      - "infra/scripts/lib/fw-abstraction.sh"
+      - "infra/scripts/vm-ctl.sh"
+      - "infra/scripts/container-ctl.sh"
+      - "infra/scripts/lib/hypervisor-common.sh"
+      - "infra/scripts/lib/hv-*.sh"
+      - "infra/scripts/lib/container-fallback.sh"
+      - "infra/scripts/generate-local-values.sh"
+      - "infra/scripts/assess-gpu.sh"
+      - "infra/scripts/assess-audio.sh"
+      - "infra/inventory/hardware-capabilities.yaml"
+      - "infra/local/local-values.yaml"
+    sync_points:
+      - event: "abstraction-ready"
+        action: "Signal mc-infra that pkg-abstraction.sh and fw-abstraction.sh are ready"
+      - event: "local-values-ready"
+        action: "Signal mc-amiga that local-values.yaml is generated and valid"
+    message_bus: ".planning/artifacts/mc-platform/"
+
+  - name: mc-amiga
+    description: "Amiga emulation pipeline: UAE installation, asset format conversion, and content curation"
+    topology: pipeline
+    lead_agent: amiga-emulator
+    members: [amiga-emulator, amiga-archivist]
+    resource_locks:
+      - "infra/scripts/install-fs-uae.sh"
+      - "infra/scripts/setup-aros-rom.sh"
+      - "infra/scripts/configure-uae-display.sh"
+      - "infra/scripts/configure-uae-audio.sh"
+      - "infra/scripts/render-uae-config.sh"
+      - "infra/scripts/launch-amiga-app.sh"
+      - "infra/scripts/setup-whdload.sh"
+      - "infra/scripts/setup-amiga-exchange.sh"
+      - "infra/scripts/convert-ilbm.sh"
+      - "infra/scripts/convert-tracker.sh"
+      - "infra/scripts/batch-convert.sh"
+      - "infra/scripts/generate-asset-catalog.sh"
+      - "infra/config/uae/**"
+      - "infra/amiga/**"
+    sync_points:
+      - event: "assets-curated"
+        action: "Signal mc-creative that curated collection is complete with legal review"
+    message_bus: ".planning/artifacts/mc-amiga/"
+
+  - name: mc-creative
+    description: "Knowledge World creative swarm: world design, schematic creation, curriculum development, and Amiga Corner"
+    topology: swarm
+    lead_agent: world-architect
+    members: [world-architect, curriculum-designer]
+    resource_locks:
+      - "infra/minecraft/world-design/**"
+      - "infra/world/**"
+      - "minecraft/schematics/**"
+      - "infra/knowledge-world/**"
+      - "infra/scripts/validate-world-layout.sh"
+    sync_points:
+      - event: "world-layout-ready"
+        action: "Signal mc-ops that master world plan is defined with district coordinates"
+    message_bus: ".planning/artifacts/mc-creative/"
+
+  - name: mc-ops
+    description: "Operations leader-worker: deployment, verification, backup, monitoring, golden image, and runbooks"
+    topology: leader-worker
+    lead_agent: mc-deployer
+    members: [mc-deployer, mc-verifier]
+    resource_locks:
+      - "infra/scripts/backup-world.sh"
+      - "infra/scripts/restore-world.sh"
+      - "infra/scripts/check-minecraft-health.sh"
+      - "infra/scripts/monitor-*.sh"
+      - "infra/scripts/golden-image.sh"
+      - "infra/scripts/rapid-rebuild.sh"
+      - "infra/templates/monitoring/**"
+      - "infra/templates/alerting/**"
+      - "infra/docs/runbook-*.md"
+      - "infra/docs/day-*.md"
+      - "infra/docs/incident-response.md"
+    sync_points:
+      - event: "ops-ready"
+        action: "Signal that all operational systems are in place"
+    message_bus: ".planning/artifacts/mc-ops/"
+
+routing:
+  rules:
+    # Infrastructure Foundation routes (priority 80-95)
+    - intent_pattern: "discover.*hardware|hardware.*profile|hardware.*capabilit|system.*inventory|what.*hardware"
+      team: mc-infra
+      agents: [infra-scout]
+      skills: [hardware-discovery]
+      priority: 95
+      description: "Hardware capability discovery and profiling"
+
+    - intent_pattern: "resource.*budget|vm.*allocat|calculate.*budget|how much.*ram|vm.*sizing"
+      team: mc-infra
+      agents: [infra-scout]
+      skills: [resource-budgeting]
+      priority: 90
+      description: "VM resource allocation and budget calculation"
+
+    - intent_pattern: "pxe.*boot|network.*boot|dnsmasq.*config|tftp.*setup|boot.*menu"
+      team: mc-infra
+      agents: [infra-provisioner]
+      skills: [pxe-boot]
+      priority: 80
+      description: "PXE network boot infrastructure deployment"
+
+    - intent_pattern: "kickstart.*deploy|provision.*centos|install.*os|base.*image|kickstart.*template"
+      team: mc-infra
+      agents: [infra-provisioner]
+      skills: [kickstart-provisioning]
+      priority: 75
+      description: "CentOS kickstart automated provisioning"
+
+    - intent_pattern: "vm.*(create|start|stop|snapshot|clone|destroy)|provision.*vm|virtual.*machine|golden.*image"
+      team: mc-infra
+      agents: [infra-provisioner]
+      skills: [vm-lifecycle]
+      priority: 70
+      description: "VM lifecycle management and provisioning pipeline"
+
+    # Platform Portability routes (priority 74-90)
+    - intent_pattern: "platform.*discover|full.*discover|discover.*(audio|network|usb|distro)|capabilit.*database|subsystem.*detect"
+      team: mc-platform
+      agents: [platform-scout]
+      skills: [platform-discovery]
+      priority: 90
+      description: "Extended subsystem discovery and unified capabilities"
+
+    - intent_pattern: "package.*(install|remove|manage)|firewall.*(open|close|rule|manage)|cross.*distro|pkg.*abstract|distro.*abstract"
+      team: mc-platform
+      agents: [platform-scout]
+      skills: [distro-abstraction]
+      priority: 82
+      description: "Cross-distribution package and firewall abstraction"
+
+    - intent_pattern: "hypervisor.*(abstract|detect|manage)|container.*(fallback|deploy)|vm.*ctl|podman.*minecraft|unified.*vm"
+      team: mc-platform
+      agents: [platform-engineer]
+      skills: [hypervisor-abstraction]
+      priority: 78
+      description: "Unified VM/container operations across hypervisors"
+
+    - intent_pattern: "hardware.*adapt|generate.*local.values|adaptive.*config|assess.*(gpu|audio)|tier.*classif"
+      team: mc-platform
+      agents: [platform-engineer]
+      skills: [hardware-adaptation]
+      priority: 74
+      description: "Hardware-adaptive configuration generation"
+
+    # Minecraft Server routes (priority 40-65)
+    - intent_pattern: "minecraft.*deploy|fabric.*server|jvm.*tun|minecraft.*health|server.*deploy"
+      team: mc-ops
+      agents: [mc-deployer]
+      skills: [minecraft-deployment]
+      priority: 65
+      description: "Minecraft Fabric server deployment with JVM tuning"
+
+    - intent_pattern: "mod.*(install|update|check|deploy)|fabric.*mod|syncmatica|modrinth|mod.*manifest"
+      team: mc-ops
+      agents: [mc-deployer]
+      skills: [mod-management]
+      priority: 60
+      description: "Fabric mod lifecycle and Modrinth API integration"
+
+    - intent_pattern: "server.*propert|whitelist.*(add|remove|manage)|rcon.*(config|setup|password)|server.*config|player.*manage"
+      team: mc-ops
+      agents: [mc-deployer]
+      skills: [server-configuration]
+      priority: 60
+      description: "Server properties, whitelist, and RCON management"
+
+    - intent_pattern: "client.*setup|prism.*launcher|connect.*minecraft|fabric.*client|troubleshoot.*connect"
+      team: mc-ops
+      agents: [mc-verifier]
+      skills: [client-setup]
+      priority: 45
+      description: "Cross-platform Minecraft client setup and onboarding"
+
+    - intent_pattern: "integration.*test|verify.*pipeline|end.to.end|pipeline.*check|deployment.*verify"
+      team: mc-ops
+      agents: [mc-verifier]
+      skills: [integration-verification]
+      priority: 40
+      description: "End-to-end pipeline verification across 7 stages"
+
+    # Amiga Emulation routes (priority 45-50)
+    - intent_pattern: "uae.*(install|config|setup)|amiga.*(emulat|run|launch)|fs-uae|aros.*rom|whdload"
+      team: mc-amiga
+      agents: [amiga-emulator]
+      skills: [uae-emulation]
+      priority: 50
+      description: "FS-UAE installation and Amiga emulation configuration"
+
+    - intent_pattern: "convert.*(iff|ilbm|mod|med|amiga)|asset.*(convert|catalog|batch)|batch.*convert|amiga.*file"
+      team: mc-amiga
+      agents: [amiga-archivist]
+      skills: [asset-conversion]
+      priority: 48
+      description: "Amiga file format conversion and catalog generation"
+
+    - intent_pattern: "curate.*content|legal.*(check|guide|status)|amiga.*(legal|license|collection)|content.*catalog"
+      team: mc-amiga
+      agents: [amiga-archivist]
+      skills: [content-curation]
+      priority: 45
+      description: "Legally distributable Amiga content curation"
+
+    # Knowledge World routes (priority 25-35)
+    - intent_pattern: "world.*(design|layout|plan)|district.*(create|palette|plan)|wayfind|sign.*standard|coordinate.*range"
+      team: mc-creative
+      agents: [world-architect]
+      skills: [world-design]
+      priority: 35
+      description: "Spatial layout with themed districts and wayfinding"
+
+    - intent_pattern: "schematic.*(create|catalog|share|library)|litematica|syncmatica.*share|build.*spec"
+      team: mc-creative
+      agents: [world-architect]
+      skills: [schematic-library]
+      priority: 30
+      description: "Litematica schematic catalog and lifecycle management"
+
+    - intent_pattern: "curriculum.*(create|design)|guided.*build|spatial.*learn|education.*content|amiga.*corner"
+      team: mc-creative
+      agents: [curriculum-designer]
+      skills: [educational-curriculum]
+      priority: 25
+      description: "Spatial learning experiences and Amiga Corner exhibit"
+
+  default_team: mc-infra
+
+  disambiguation:
+    - patterns: ["discover.*hardware", "platform.*discover"]
+      strategy: specificity
+      winner: "hardware-discovery for base CPU/RAM/GPU; platform-discovery for audio/network/usb/distro"
+      rationale: "hardware-discovery handles base hardware via discover-hardware.sh; platform-discovery handles extended subsystems via discover-all.sh"
+
+    - patterns: ["vm.*(create|start|stop)", "hypervisor.*(abstract|detect)"]
+      strategy: context
+      winner: "vm-lifecycle for provisioning pipeline; hypervisor-abstraction for backend dispatch"
+      rationale: "vm-lifecycle is infrastructure-level provisioning via provision-vm.sh; hypervisor-abstraction is platform-level dispatch via vm-ctl.sh"
+
+    - patterns: ["minecraft.*deploy", "server.*config"]
+      strategy: specificity
+      winner: "minecraft-deployment for Fabric/JVM; server-configuration for properties/whitelist/RCON"
+      rationale: "minecraft-deployment handles Fabric installation and JVM tuning; server-configuration handles server.properties, whitelist, and RCON"
+
+    - patterns: ["minecraft.*deploy", "mod.*(install|update)"]
+      strategy: specificity
+      winner: "minecraft-deployment for base server; mod-management for Fabric mod lifecycle"
+      rationale: "minecraft-deployment handles base server deployment; mod-management handles individual mod operations via Modrinth API"
+
+    - patterns: ["convert.*(iff|mod)", "curate.*content"]
+      strategy: specificity
+      winner: "asset-conversion for file format conversion; content-curation for legal/licensing"
+      rationale: "asset-conversion handles IFF/MOD binary conversion; content-curation handles legal assessment and catalog curation"
+
+    - patterns: ["district.*(create|plan)", "schematic.*(catalog|library)"]
+      strategy: specificity
+      winner: "world-design for spatial layout; schematic-library for individual builds"
+      rationale: "world-design handles district-level layout and coordinates; schematic-library handles individual build specs and catalog"
+
+    - patterns: ["schematic.*(catalog|library)", "curriculum.*(create|design)"]
+      strategy: specificity
+      winner: "schematic-library for catalog/naming; educational-curriculum for guided learning"
+      rationale: "schematic-library manages catalog and naming conventions; educational-curriculum creates guided build learning experiences"
+
+budget:
+  ceiling_percent: 40
+  headroom_percent: 8.5
+  skill_budgets:
+    hardware-discovery: "1.5%"
+    resource-budgeting: "1%"
+    pxe-boot: "1.5%"
+    kickstart-provisioning: "1%"
+    vm-lifecycle: "2%"
+    minecraft-deployment: "2%"
+    mod-management: "1.5%"
+    server-configuration: "1.5%"
+    client-setup: "1%"
+    integration-verification: "1.5%"
+    platform-discovery: "2%"
+    distro-abstraction: "1.5%"
+    hypervisor-abstraction: "2%"
+    hardware-adaptation: "2%"
+    uae-emulation: "2%"
+    asset-conversion: "2%"
+    content-curation: "1%"
+    world-design: "1.5%"
+    schematic-library: "1.5%"
+    educational-curriculum: "1.5%"
+  team_budgets:
+    mc-infra: "7%"
+    mc-ops: "7.5%"
+    mc-platform: "7.5%"
+    mc-amiga: "5%"
+    mc-creative: "4.5%"
+  loading_order:
+    # Level 0: No dependencies (loaded first, ordered by priority)
+    - hardware-discovery
+    - platform-discovery
+    - pxe-boot
+    - world-design
+    # Level 1: Single dependency on Level 0 skills
+    - resource-budgeting
+    - distro-abstraction
+    - hypervisor-abstraction
+    - kickstart-provisioning
+    # Level 2: Dependencies on Level 1 skills
+    - hardware-adaptation
+    - vm-lifecycle
+    - schematic-library
+    # Level 3: Dependencies on Level 2 skills
+    - minecraft-deployment
+    - uae-emulation
+    - educational-curriculum
+    # Level 4: Dependencies on Level 3 skills
+    - mod-management
+    - server-configuration
+    - asset-conversion
+    # Level 5: Dependencies on Level 4 skills
+    - client-setup
+    - content-curation
+    # Level 6: Dependencies on Level 5 skills
+    - integration-verification
+  total_allocated: "31.5%"

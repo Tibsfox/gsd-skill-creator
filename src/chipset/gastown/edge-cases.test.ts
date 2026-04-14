@@ -113,10 +113,10 @@ describe('Edge Case Tests', () => {
 
     // Attempting to assign item3 to either polecat should fail
     await expect(manager.setHook(polecat1.id, item3.beadId)).rejects.toThrow(
-      /already has an active hook/,
+      /already has a pending hook/,
     );
     await expect(manager.setHook(polecat2.id, item3.beadId)).rejects.toThrow(
-      /already has an active hook/,
+      /already has a pending hook/,
     );
 
     // When a polecat frees up, the queued bead can be dispatched
@@ -147,7 +147,7 @@ describe('Edge Case Tests', () => {
     // The state file should be consistent — not corrupted by the failed attempt
     const hook = await manager.getHook(agent.id);
     expect(hook).not.toBeNull();
-    expect(hook!.status).toBe('active');
+    expect(hook!.status).toBe('pending');
     expect(hook!.workItem!.beadId).toBe(item1.beadId);
 
     // Verify the JSON file is valid and complete
@@ -155,7 +155,7 @@ describe('Edge Case Tests', () => {
     const content = await readFile(hookPath, 'utf8');
     const parsed = JSON.parse(content);
     expect(parsed.agentId).toBe(agent.id);
-    expect(parsed.status).toBe('active');
+    expect(parsed.status).toBe('pending');
   });
 
   // -------------------------------------------------------------------------

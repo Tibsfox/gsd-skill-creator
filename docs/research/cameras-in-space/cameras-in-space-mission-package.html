@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cameras in Space — GSD Research Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary:   #311B92;
+      --secondary: #0277BD;
+      --tertiary:  #B8860B;
+      --accent:    #F9A825;
+      --lightprim: #EDE7F6;
+      --lightsec:  #E1F5FE;
+      --rowgray:   #F5F5F5;
+      --border:    #BDBDBD;
+      --subtle:    #757575;
+      --dark:      #212121;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #F8F7FC;
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #1A237E 50%, #0D47A1 100%);
+      color: white;
+      padding: 3.5rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(249,168,37,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(2,119,189,0.18) 0%, transparent 50%);
+    }
+    .header-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
+    .gsd-label {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(249,168,37,0.4);
+      padding: 0.3rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+    header .subtitle {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 0.5rem;
+    }
+    header .tagline {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(249,168,37,0.9);
+      margin-top: 1rem;
+    }
+    .pipeline-badge {
+      margin-top: 1.5rem;
+      display: inline-flex;
+      gap: 0.6rem;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+    }
+    .pipeline-badge span { color: var(--accent); font-weight: 600; }
+    .pipeline-badge .arrow { opacity: 0.5; }
+
+    /* ── MAIN ── */
+    main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+    /* ── META BAR ── */
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.25rem;
+      border-radius: 4px;
+      margin-bottom: 2.5rem;
+      font-size: 0.85rem;
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 0.1rem; }
+    .meta-item .label { color: var(--subtle); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .meta-item .value { font-weight: 600; color: var(--dark); }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── FILE CARDS ── */
+    .file-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .card {
+      background: #ECE8F6;
+      border: 1px solid #C5BDED;
+      border-radius: 6px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(49,27,146,0.12); }
+    .card-header {
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .card-icon { font-size: 1.3rem; }
+    .card-title { font-weight: 600; font-size: 0.9rem; }
+    .card-body { padding: 1rem; flex: 1; }
+    .card-desc { font-size: 0.83rem; color: var(--subtle); line-height: 1.5; }
+    .card-foot {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid #C5BDED;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+    }
+    .card-size { color: var(--subtle); }
+    .dl-btn {
+      background: var(--accent);
+      color: #1a1a1a;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+      text-decoration: none;
+    }
+
+    .card.tex { background: #E1F5FE; border-color: #90CAF9; }
+    .card.tex .card-header { background: var(--secondary); }
+    .card.tex .card-foot { border-color: #90CAF9; }
+
+    /* ── CONTENTS ── */
+    .contents { margin-bottom: 2.5rem; }
+    .stage-block {
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .stage-title {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      padding: 0.6rem 1rem;
+      text-transform: uppercase;
+    }
+    .stage-title.s2 { background: var(--secondary); }
+    .stage-title.s3 { background: var(--tertiary); }
+    .stage-items { background: white; }
+    .stage-item {
+      padding: 0.55rem 1rem;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      border-bottom: 1px solid var(--rowgray);
+    }
+    .stage-item:last-child { border-bottom: none; }
+    .stage-item .bullet {
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    /* ── USAGE ── */
+    .usage-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .usage-box h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+    }
+    .usage-box ol {
+      padding-left: 1.4rem;
+      font-size: 0.85rem;
+      line-height: 1.75;
+      color: #333;
+    }
+    .usage-box code {
+      background: var(--rowgray);
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.82rem;
+      font-family: 'DM Mono', 'Courier New', monospace;
+    }
+
+    /* ── RECOMPILE ── */
+    .recompile {
+      background: var(--rowgray);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .recompile h3 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--subtle); }
+    .recompile pre {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: #333;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    /* ── QUOTE ── */
+    .closing-quote {
+      background: var(--lightprim);
+      border-left: 4px solid var(--primary);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 5px 5px 0;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--dark);
+    }
+    .closing-quote .attribution {
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      color: var(--subtle);
+      margin-top: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--subtle);
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="gsd-label">GSD Research Mission Package</div>
+    <h1>Cameras in Space<br/>A Deep History of Space Photography</h1>
+    <p class="subtitle">From Hasselblad on the Moon to Artemis II Around It</p>
+    <p class="tagline">A Deep Research Study</p>
+    <div class="pipeline-badge">
+      <span>Vision</span><span class="arrow">→</span>
+      <span>Research</span><span class="arrow">→</span>
+      <span>Mission</span>
+      &nbsp;·&nbsp; Full Pipeline Execution
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- META BAR -->
+  <div class="meta-bar">
+    <div class="meta-item"><span class="label">Date</span><span class="value">April 11, 2026</span></div>
+    <div class="meta-item"><span class="label">Status</span><span class="value">Ready for GSD Orchestrator</span></div>
+    <div class="meta-item"><span class="label">Profile</span><span class="value">Fleet (16 roles)</span></div>
+    <div class="meta-item"><span class="label">Modules</span><span class="value">6 (3 parallel tracks)</span></div>
+    <div class="meta-item"><span class="label">Waves</span><span class="value">5 (0 → 3)</span></div>
+    <div class="meta-item"><span class="label">Token Budget</span><span class="value">~241K</span></div>
+    <div class="meta-item"><span class="label">Sessions</span><span class="value">4–5 estimated</span></div>
+    <div class="meta-item"><span class="label">Anchor Date</span><span class="value">5 days post-Artemis II splashdown</span></div>
+  </div>
+
+  <!-- FILE CARDS -->
+  <div class="section-label">Mission Files</div>
+  <div class="file-cards">
+    <a class="card" href="mission.pdf" download>
+      <div class="card-header">
+        <span class="card-icon">📄</span>
+        <span class="card-title">Mission Package PDF</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Complete 31-page document covering all three stages: Vision Guide, Research Reference, and Mission Package. Ready for handoff to GSD skill-creator.</p>
+      </div>
+      <div class="card-foot">
+        <span class="card-size">mission.pdf · 31 pages</span>
+        <a class="dl-btn" href="mission.pdf" download>↓ Download</a>
+      </div>
+    </a>
+
+    <a class="card tex" href="mission.tex" download>
+      <div class="card-header">
+        <span class="card-icon">📝</span>
+        <span class="card-title">LaTeX Source</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Full XeLaTeX source file. Modify content, update research findings, and recompile as the mission evolves. Space/physics color scheme — cosmic purple, nebula blue, star gold.</p>
+      </div>
+      <div class="card-foot">
+        <span class="card-size">mission.tex · XeLaTeX</span>
+        <a class="dl-btn" href="mission.tex" download>↓ Download</a>
+      </div>
+    </a>
+  </div>
+
+  <!-- CONTENTS -->
+  <div class="section-label">Document Contents</div>
+  <div class="contents">
+
+    <div class="stage-block">
+      <div class="stage-title">Stage 1 — Vision Document</div>
+      <div class="stage-items">
+        <div class="stage-item"><span class="bullet">▸</span><span>Vision narrative — the triangle of camera, crew, and curriculum across 64 years</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Problem statement — 5 concrete, recognizable problems in space photography</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Mission architecture — ASCII diagrams of 6-module map and 5-wave plan</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Module descriptions — Origins, Hasselblad, Digital Transition, ISS, RIT Pipeline, Artemis II</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Chipset configuration — Fleet profile YAML with full agent roster</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>12 success criteria, scope boundaries, relationship map, through-line</span></div>
+      </div>
+    </div>
+
+    <div class="stage-block">
+      <div class="stage-title s2">Stage 2 — Research Reference</div>
+      <div class="stage-items">
+        <div class="stage-item"><span class="bullet">▸</span><span>Module 1: Origins — Mercury drugstore camera through Apollo 17; Reseau plate; film stocks</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Module 2: Hasselblad Partnership — HEC/HEDC specs; 12 cameras on the Moon; Earthrise production</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Module 3: Digital Transition — Kodak DCS760 (2001) → Nikon Z9 (2024) complete lineage table</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Module 4: ISS Platform — Equipment ecosystem; CRIDR radiation repair; Don Pettit / orbital tracker</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Module 5: RIT–NASA Pipeline — Institutional timeline 1975–2026; Davidhazy; Reichert; Willoughby</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Module 6: Artemis II — Verified 32-camera manifest; D5 qualification rationale; iconic imagery analysis</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Safety/sensitivity table + 30+ source bibliography (NASA, Hasselblad AB, RIT, Smithsonian)</span></div>
+      </div>
+    </div>
+
+    <div class="stage-block">
+      <div class="stage-title s3">Stage 3 — Mission Package</div>
+      <div class="stage-items">
+        <div class="stage-item"><span class="bullet">▸</span><span>Milestone spec — 9 deliverables with acceptance criteria and component specs</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Wave execution plan — Waves 0 through 3 with task tables and model assignments (Opus 30% / Sonnet 60% / Haiku 10%)</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Token budget — ~241K total across all waves with per-wave breakdown</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Test plan — 38 tests: 6 safety-critical (BLOCK), 18 core, 8 integration, 6 edge-case</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Verification matrix — All 12 success criteria mapped to test IDs</span></div>
+        <div class="stage-item"><span class="bullet">▸</span><span>Fleet crew manifest — 16 named roles (FLIGHT, PLAN, SCOUT, EXEC×3, CRAFT-HIST, CRAFT-TECH, VERIFY, INTEG, CAPCOM, BUDGET, SURGEON, TOPO, ARCH, LOG)</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- USAGE -->
+  <div class="section-label">How to Use</div>
+  <div class="usage-box">
+    <h3>Handing off to GSD skill-creator</h3>
+    <ol>
+      <li>Open a new conversation with Claude Code (or paste into your GSD orchestrator).</li>
+      <li>Attach <code>mission.pdf</code> or paste the contents of <code>mission.tex</code> as context.</li>
+      <li>Say: <em>"Execute this GSD research mission starting at Wave 0."</em></li>
+      <li>Approve Wave 0 outputs (schemas, source index, shared tables) via CAPCOM before Wave 1 begins.</li>
+      <li>Three parallel tracks (1A, 1B, 1C) can run in separate sessions simultaneously — coordinate via FLIGHT.</li>
+      <li>Approve Wave 2 synthesis before Wave 3 publication begins.</li>
+      <li>Final deliverable: a complete research document on space photography history, 1962–2026.</li>
+    </ol>
+  </div>
+
+  <!-- RECOMPILE -->
+  <div class="recompile">
+    <h3>Recompiling the LaTeX source</h3>
+    <pre>xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex</pre>
+    <p style="font-size:0.78rem;margin-top:0.5rem;color:var(--subtle)">Three passes required for TOC, cross-references, and page count. Requires XeLaTeX with DejaVu fonts and the tcolorbox, tabularx, and booktabs packages.</p>
+  </div>
+
+  <!-- CLOSING QUOTE -->
+  <div class="section-label">Through-Line</div>
+  <div class="closing-quote">
+    "For the Artemis II mission, there are four people on that vehicle going around the moon, and there are eight billion of us on the ground that don't get to go on that ride. Through the pictures they get, they're taking the rest of the world on the ride with them."
+    <div class="attribution">— Paul Reichert ('01, RIT Photographic Sciences), Flight Operations Imagery Instructor, NASA Johnson Space Center<br/>
+    <br/>
+    And behind him: Wally Schirra walking into a Houston camera shop in 1962. A Hasselblad stripped down to its essential light-gathering soul. A camera on the Moon. Twelve cameras still on the Moon. A curriculum built in Rochester. Four astronauts with a Nikon and a window. An Earthset photograph. The chain is unbroken.</div>
+  </div>
+
+</main>
+
+<footer>GSD Research Mission Package · Cameras in Space · April 11, 2026 · Ready for GSD Orchestrator</footer>
+
+</body>
+</html>

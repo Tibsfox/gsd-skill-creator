@@ -1,0 +1,1130 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Space/Physics Color Scheme ---
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue
+\definecolor{tertiary}{HTML}{B8860B}      % Star gold (darker for text)
+\definecolor{accent}{HTML}{F9A825}        % Star gold bright (highlights)
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Light purple
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF8E1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% --- Section Formatting ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- Custom Environments ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% --- Table Helpers ---
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers and Footers ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Cameras in Space: A Deep History}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Hyperlinks ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Cameras in Space -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+%  TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Cameras in Space\\[0.3em]A Deep History of Space Photography}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{From Hasselblad on the Moon to Artemis II Around It}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: April 11, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet \quad|\quad Estimated: 8--10 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+%  TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Cameras in Space --- Vision Guide}
+
+\subsection*{Metadata}
+\metafield{Date:}{April 11, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (foundational research mission)}
+\metafield{Context:}{Triggered by Artemis II launch (April 1, 2026) and the RIT alumni story revealing the deep, continuous pipeline between photographic education and NASA mission imagery}
+
+\subsection{Vision}
+
+Every photograph taken from space is a twice-impossible act. First, it required humanity to leave its cradle --- a feat of engineering, courage, and national will. Second, it required someone on that vehicle to understand light, optics, and composition well enough to capture what they were seeing in a way that another human, standing on Earth, could feel. Those two impossibilities colliding is the story of cameras in space.
+
+The history begins in 1962 with a Houston camera shop and a Naval Captain named Wally Schirra who refused to accept a bad camera. Schirra walked out of that shop with a Hasselblad 500C and, by doing so, set in motion a sixty-year partnership between Swedish precision engineering and American space ambition. The cameras Hasselblad built for NASA had their leather stripped, their mirrors removed, their viewfinders abandoned --- stripped to essential light-gathering instruments built to operate between minus 85 degrees and 248 degrees Fahrenheit, weighted in grams rather than pounds, leaving twelve of their bodies on the lunar surface because the Moon rocks brought home were worth more than the cameras that documented them.
+
+The visual legacy of that partnership --- ``Earthrise,'' the ``Blue Marble,'' Buzz Aldrin's visor reflecting the Sea of Tranquility --- did not just document exploration. It changed what exploration meant. Images from space became environmental catalysts, public connectors, and scientific datasets simultaneously. When astronauts later moved to digital systems on the International Space Station, the question of which camera to use became both a technical and a philosophical one: radiation resistance, low-light performance, and lens interoperability all mattered. Nikon's DSLRs became the new workhorses, with the Nikon D5 eventually flying to the Moon aboard Orion.
+
+Then there is the human chain. Behind every iconic space photograph is not just a camera but a curriculum. The Rochester Institute of Technology's School of Photographic Arts and Sciences has, for over three decades, fed a steady stream of imaging specialists into NASA's Johnson Space Center. Paul Reichert ('01) and Katrina Willoughby ('04) spent two years training the Artemis II crew, designing modules that simulate the spatial constraints of a pressurized spacesuit, the lighting challenges of photographing through spacecraft glass, and the irreversibility of a once-in-history moment. They are the inheritors of a tradition that connects Wally Schirra's instinct about a good camera to the stunning ``Earthset'' photograph captured by the Artemis II crew as they flew around the far side of the Moon on April 6, 2026.
+
+This research mission traces all of it: the hardware, the institutions, the people, and the photographs that changed how we see ourselves.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Documentation loss risk.} Space photography has always operated under the constraint that second chances are nearly impossible. Equipment failures, limited time windows, and one-way weight budgets (cameras left on the Moon) mean that each mission's photographic record is irreplaceable. As missions grow more complex, the gap between what is scientifically desired and what crews can reliably capture widens.
+
+  \item \textbf{Camera qualification complexity.} The transition from dedicated, custom-built film cameras (Hasselblad) to off-the-shelf digital systems (Nikon) introduced new engineering challenges: radiation-induced pixel damage, lubricant behavior in vacuum, battery performance in thermal extremes. Understanding which modifications are necessary --- and which represent unnecessary mass --- is an ongoing materials and engineering problem.
+
+  \item \textbf{Astronaut photography training gap.} Astronauts are selected for scientific, piloting, and engineering skills. Most have limited photography backgrounds. The two-year training programs run by flight operations imagery instructors like Reichert and Willoughby compress a professional photographic education into mission-specific modules --- a difficult pedagogical challenge that scales with crew diversity and mission complexity.
+
+  \item \textbf{Institutional knowledge fragility.} The RIT-to-NASA pipeline exists because of specific faculty connections (Professor Andrew Davidhazy) and alumni networks. The institutional knowledge of how to photograph in deep space --- beyond low Earth orbit --- is concentrated in a small number of specialists. Artemis II marked the first crewed deep-space mission in over 50 years, and the body of expertise for that environment is thin.
+
+  \item \textbf{Historical record fragmentation.} The photographic archives from Mercury, Gemini, and Apollo are vast, complex, and unevenly digitized. The cross-referencing of camera models, film stocks, mission parameters, and image metadata represents an ongoing archival challenge, while the cultural significance of individual photographs (Earthrise, Blue Marble) has been studied far less rigorously than their technical production.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Every photograph from space is a triangle --- camera, crew, and curriculum --- and the history of space photography is the history of how those three vertices were aligned across six decades.
+
+This research decomposes that triangle into six research modules that run in parallel: the hardware evolution from film to digital; the Hasselblad partnership specifically; the ISS as the longest-running photographic platform in history; astronaut training methodology; the RIT institutional pipeline; and the Artemis program as the living present of all of the above.
+
+\subsubsection{Mission Architecture: Six Research Modules}
+
+\begin{asciibox}
+CAMERAS IN SPACE --- MODULE MAP
+================================
+
+MODULE 1: ORIGINS            MODULE 2: HASSELBLAD
+[Mercury, Gemini, Apollo]    [Partnership, Hardware, Legacy]
+Camera evolution 1961-1972   Schirra to Apollo 17
+Glenn's drugstore camera     12 bodies left on the Moon
+Schirra / Hasselblad 500C    500C -> 500EL -> HEC -> HEDC
+         |                              |
+         +-----------+  +--------------+
+                     |  |
+MODULE 3: DIGITAL TRANSITION     MODULE 4: ISS PHOTOGRAPHY
+[Space Shuttle to ISS]           [Platform, Equipment, Method]
+Hasselblad 553ELS                Kodak DCS760 -> Nikon D-series
+Transition to Nikon DSLRs        D4 / D5 / Z9 ecosystem
+Kodak DCS760 first digital       Nikon Z9 delivered 2024
+         |                              |
+         +-----------+  +--------------+
+                     |  |
+MODULE 5: RIT-NASA PIPELINE      MODULE 6: ARTEMIS PROGRAM
+[Institution, People, Methods]   [Orion cameras, Artemis II]
+Photographic Sciences BS         32 cameras on Orion
+Davidhazy -> Reichert/Willoughby Nikon D5 + Z9 + GoPro Hero4
+25-year astronaut training       RIT alumni on ground support
+\end{asciibox}
+
+\subsubsection{Wave Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  [HAIKU] Schema definitions, source index, shared glossary
+  Sequential, ~0.5 sessions
+
+WAVE 1A (parallel): Origins + Hasselblad Partnership
+  [SONNET/OPUS] Module 1 + Module 2 survey and deep research
+  Parallel track A, ~1.5 sessions
+
+WAVE 1B (parallel): Digital Transition + ISS Platform
+  [SONNET/OPUS] Module 3 + Module 4 survey and deep research
+  Parallel track B, ~1.5 sessions
+
+WAVE 1C (parallel): RIT Pipeline + Artemis Program
+  [OPUS] Module 5 + Module 6, requires current-event sourcing
+  Parallel track C, ~1.5 sessions
+
+WAVE 2: Synthesis
+  [OPUS] Cross-module integration, legacy analysis, visual narrative
+  Sequential, ~1 session
+
+WAVE 3: Publication + Verification
+  [SONNET] Final document assembly, source checking, PDF production
+  Sequential, ~0.5 sessions
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins (1961--1972)}
+Survey of pre-Hasselblad space photography beginning with John Glenn's Ansco Autoset (purchased at a drugstore), through the modified Hasselblad 500C first flown on Mercury 8 (1962), the full Gemini program (1964--1966), and the Apollo missions. Focus on camera modifications, film stocks (Kodak Panatomic-X, Ektachrome SO-168), the Reseau plate system, and the iconic photographs produced.
+
+\subsubsection{Module 2: The Hasselblad Partnership}
+Deep dive into the Hasselblad--NASA collaboration from 1962--2000. Camera family lineage: 500C $\to$ SWC prototype $\to$ HEC $\to$ HEDC (lunar surface camera). Material engineering: removal of leather, aluminum plating, special lubricants, silver paint for thermal management, enlarged controls for gloved operation. The twelve camera bodies left on the lunar surface. Legacy and cultural impact.
+
+\subsubsection{Module 3: Digital Transition (Shuttle Era)}
+Coverage of the Hasselblad 553ELS Space Shuttle camera (used through early 1990s), the introduction of 35mm Nikon film cameras (Apollo 15, 1971), and the eventual transition to digital. Kodak DCS760 as first digital camera on ISS (2001), followed by Nikon D1X, D2Xs, D3 series, D4, D5, and Nikon Z9 (2024). Camera modification philosophy (modified vs.\ off-the-shelf procurement decisions).
+
+\subsubsection{Module 4: ISS as Photographic Platform}
+The International Space Station as a 25-year continuous photography platform. Equipment ecosystem: Nikon D5 primary (53 units ordered 2017), Nikon Z9 mirrorless (delivered 2024), Sony A7S II (first 4K commercial footage, 2016), GoPro variants, smartphone integration. Cosmic radiation damage and pixel repair (RIT Cosmic Radiation Damage Image Repair project). Earth observation photography as scientific dataset. Astronaut photographers: Don Pettit, Scott Kelly, Soichi Noguchi, Matthew Dominick.
+
+\subsubsection{Module 5: The RIT--NASA Pipeline}
+Institutional history of Rochester Institute of Technology's School of Photographic Arts and Sciences and its relationship with NASA Johnson Space Center. Timeline: first NASA hires (Sowa, Locke, 1987), faculty connector Professor Andrew Davidhazy, Paul Reichert ('01) and Katrina Willoughby ('04), RIT orbital sidereal tracker (Prof.\ Ted Kinsman, 2024). Training methodology: 70--80 imaging classes per mission, mock-up vehicles, simulation of space lighting conditions. The 25-year astronaut training legacy.
+
+\subsubsection{Module 6: Artemis Program Photography}
+The most photographed crewed lunar mission in history. Orion spacecraft: 32 cameras total, 15 mounted, 17 handheld. Equipment manifest: 2$\times$ Nikon D5 (radiation-qualified), 1$\times$ Nikon Z9, GoPro Hero4 Black (exterior, revealed by EXIF metadata), iPhones (crew personal), 80-400mm and wide-angle lenses. Mission photography objectives: lunar far-side documentation, scientific data for Earth-observation teams, crew documentation, public outreach. Weight limit: 15--20 lbs of camera equipment total. Connection to Earthrise (1968) and the attempt to recreate it.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  profile: fleet
+  modules: 6
+  parallel_tracks: 3
+  sessions: 4-5
+  
+  model_allocation:
+    opus:   30pct  -- synthesis, cross-module integration, legacy analysis
+    sonnet: 60pct  -- survey, document assembly, source verification
+    haiku:  10pct  -- schemas, templates, scaffolding
+  
+  agents:
+    FLIGHT:     Orchestrator (mission direction, go/no-go gates)
+    PLAN:       Planner (wave decomposition, parallel track optimization)
+    SCOUT:      Research Agent (web search, source validation)
+    EXEC-A:     Executor Track A (Modules 1+2)
+    EXEC-B:     Executor Track B (Modules 3+4)
+    EXEC-C:     Executor Track C (Modules 5+6)
+    CRAFT-HIST: History Specialist (Mercury/Apollo/Gemini context)
+    CRAFT-TECH: Technical Specialist (camera engineering, optics)
+    VERIFY:     Verification (source validation, accuracy checking)
+    INTEG:      Integration (cross-module relationships)
+    CAPCOM:     HITL Interface (human approval at wave boundaries)
+    BUDGET:     Resource Manager (token budget tracking)
+    SURGEON:    Health Monitor (research quality)
+    TOPO:       Topology Manager (agent restructuring)
+    ARCH:       Architecture (cross-cutting decisions)
+    LOG:        Chronicle (audit trail, commit messages)
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Mercury, Gemini, and Apollo camera hardware and photographic records
+  \item Hasselblad--NASA partnership from 1962--2000
+  \item Space Shuttle and ISS camera evolution (digital transition)
+  \item ISS photography platform: equipment, techniques, notable astronaut photographers
+  \item RIT School of Photographic Arts and Sciences institutional history with NASA
+  \item Artemis II mission photography: hardware, training, results (April 2026)
+  \item Astronaut photography training methodology and curriculum
+  \item Cultural and scientific impact of specific iconic photographs
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Soviet/Russian space photography programs (separate research mission)
+  \item Robotic/probe/satellite imagery (Hubble, JWST, Mars rovers) beyond brief comparison
+  \item Commercial/private spaceflight photography (SpaceX, Blue Origin) beyond ISS context
+  \item Film processing and darkroom methodology
+  \item Artemis III and beyond (forthcoming missions)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item All six research modules produce structured reference documents with primary-source citations from NASA, peer-reviewed publications, or institutional records.
+  \item Camera hardware lineage is documented with specific model numbers, modification records, and mission assignments from Mercury 8 (1962) through Artemis II (2026).
+  \item The Hasselblad partnership is characterized with quantitative data: number of camera bodies flown, left on Moon, images taken per mission, temperature operating ranges.
+  \item The ISS camera evolution is documented with a complete timeline from Kodak DCS760 (2001) through Nikon Z9 (2024), including procurement details and modification status.
+  \item The RIT--NASA institutional pipeline is mapped with named individuals, graduation years, roles, and mission assignments spanning 1987--2026.
+  \item Artemis II camera manifest is documented with verified equipment list, weight constraints, and photographic objectives.
+  \item Astronaut photography training curriculum is characterized with training hours, module types, and simulation methods.
+  \item A minimum of five iconic photographs are analyzed for their technical production: camera model, lens, film/sensor, exposure settings where known, and cultural impact.
+  \item Cross-module connections are explicitly documented: at least three examples of hardware decisions influencing training decisions, or training outcomes influencing hardware selection.
+  \item All numerical claims (temperatures, weights, image counts, mission durations) are attributed to specific primary sources.
+  \item The document addresses the radiation-damage challenge for cameras beyond low Earth orbit and the Artemis-specific qualification requirements.
+  \item A synthesis section articulates the through-line: how the Schirra--Hasselblad decision of 1962 echoes in the Reichert--Willoughby training of 2024--2026.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+Soviet Space Photography & Parallel research mission, Russian program documentation & Future \\
+JWST / Hubble Imaging & Adjacent domain; robotic vs.\ crewed photography distinctions & Future \\
+Artemis III Planning & Successor mission; photography lessons from Artemis II & Future \\
+NASA Earth Observation Archive & Overlapping subject: ISS photography as scientific dataset & Existing \\
+RIT Photographic Sciences Curriculum & Foundational institutional document & Existing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+There is a photograph from April 6, 2026, of the Earth setting behind the cratered rim of the Moon --- an ``Earthset'' captured through the window of the Orion spacecraft by one of the four crew members of Artemis II, using a Nikon D5 that a flight operations imagery instructor from Rochester, New York helped them learn to use. That instructor, Paul Reichert, graduated in 2001 from the same RIT program that was first connected to NASA in 1987. His connection to NASA came through a faculty member, Andrew Davidhazy, who was himself passing on a photographic tradition stretching back to Walter Schirra's insistence in 1962 that the camera mattered as much as the mission.
+
+The GSD ecosystem philosophy rests on the idea that the spaces between --- between disciplines, between institutions, between generations --- are where the most important work happens. The pipeline from a Swedish camera company's precision optics to an Earthset photograph sixty years later is a perfect expression of that philosophy. Hardware begets curriculum begets imagery begets meaning. Every frame is a node in a network that neither the engineers nor the educators nor the astronauts could have built alone.
+
+\newpage
+% ============================================================
+%  STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Cameras in Space --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles primary-source findings across all six research modules. It is organized to support agent-level research during Wave 1 execution. Each module section contains verified data, key findings, and identified gaps for further investigation.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item NASA History Division (history.nasa.gov) --- primary archive for mission photography records
+  \item NASA Johnson Space Center (jsc.nasa.gov) --- training programs, equipment records
+  \item Smithsonian National Air and Space Museum --- artifact catalog (Hasselblad cameras)
+  \item Hasselblad AB (hasselblad.com/about/history) --- manufacturer history and technical records
+  \item NASA Spinoff Program (spinoff.nasa.gov) --- technology transfer documentation
+  \item Rochester Institute of Technology (rit.edu) --- institutional history, alumni records
+  \item The Planetary Society (planetary.org) --- Artemis II mission coverage
+  \item NASA Lunar and Planetary Institute --- Apollo photographic archive
+\end{itemize}
+
+\subsection{Module 1: Origins Reference --- Mercury Through Apollo (1961--1972)}
+
+\subsubsection{Pre-Hasselblad Era}
+
+John Glenn's February 1962 Mercury-Atlas 6 (Friendship 7) flight marked the beginning of American space photography. Photography was treated as a recreational afterthought: an Ansco Autoset 35mm camera (manufactured by Minolta) was purchased from a local drugstore and hastily modified for use in a pressure suit. NASA did not know at the time whether weightlessness would impair an astronaut's ability to see, breathe, eat, or swallow --- photography was the least of anyone's concerns. Glenn's drugstore camera nonetheless produced the first American orbital photographs, establishing a baseline that would quickly be exceeded.
+
+\subsubsection{The Schirra Moment (1962)}
+
+In the summer of 1962, astronaut Walter ``Wally'' Schirra walked into a Houston photo supply shop looking for a camera he could take into space. He had been recommended to Hasselblad by photographers from Life and National Geographic. He purchased a Hasselblad 500C.
+
+Recognizing the camera's quality, Schirra proposed to NASA that it be adapted for space use, as the prior camera had delivered disappointing results. The resulting modifications were radical in their minimalism:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Modification} & \tableheader{Rationale} \\
+\midrule
+Leather covering removed & Weight reduction; thermal management \\
+Auxiliary shutter removed & Weight reduction; simplification \\
+Reflex mirror removed & Weight reduction; no need for optical viewfinder \\
+Viewfinder removed & Weight reduction; astronauts trained to aim by feel \\
+New 70-exposure magazine & Standard magazine held only 12 frames \\
+Matte black outer paint & Minimize reflections in spacecraft window \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The modified 500C flew on Mercury 8 (MA-8) in October 1962. Schirra captured high-quality images across his six orbits of the Earth. The results were so superior to previous space photography that NASA decided from that point forward to use Hasselblad cameras on all space missions.
+
+\subsubsection{Apollo Camera Family}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Camera} & \tableheader{Mission(s)} & \tableheader{Key Features} \\
+\midrule
+500C (modified) & Mercury 8, last Mercury & 70-exposure magazine; no viewfinder \\
+Hasselblad EL & Apollo 8 onward & Electric motor drive; automated film advance \\
+HEC (Electric Camera) & Apollo 8--17 (command module) & Black anodized; 7-pole locking contact; no viewfinder; 80mm f/2.8 Zeiss Planar \\
+HEDC (Data Camera) & Apollo 11--17 (lunar surface) & Reseau plate; silver paint for thermal; 60mm Zeiss Biogon f/5.6; 200-exposure magazine \\
+SWC (prototype) & Never flown & Wide-angle; abandoned in favor of 500EL \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Reseau Plate:} The HEDC featured a glass plate engraved with crosses in a precise grid, calibrated to 0.002mm tolerance, placed immediately in front of the film plane. The crosses appear on every exposed frame and allow calibration of distances and heights in photographs --- critical because on the lunar surface there are no recognizable landmarks by which to judge scale.
+
+\textbf{Thermal engineering:} The HEDC was painted silver (not black as on the command module cameras) because lunar surface temperatures reach three times those encountered on Earth. The camera operated reliably between approximately -85\textdegree{}F and +248\textdegree{}F.
+
+\textbf{Cameras left on the Moon:} To meet weight margins for return, cameras with lenses were left behind on the lunar surface from Apollo 11 through Apollo 17. A total of 12 Hasselblad HEDC bodies remain on the Moon. One was returned because it jammed, and examination revealed fine lunar dust had entered the body. Hasselblad subsequently donated the lunar dust to a school; the camera is exhibited at the Kansas Cosmosphere and Space Center.
+
+\textbf{Apollo 8 and Earthrise (December 24, 1968):} Astronaut Bill Anders captured Earthrise using a 250mm lens on a Hasselblad EL camera with Kodak Ektachrome SO-168 film. The image, depicting Earth rising over the lunar horizon, was taken in color (Anders initially photographed it in black and white). It has been called one of the greatest photographs of the 20th century by Time, Life, Sky and Telescope, and numerous other publications, and is credited with catalyzing the environmental movement.
+
+\textbf{Film stocks used on Apollo 8:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Three magazines: Kodak Panatomic-X (fine grain, 80 ASA, black and white)
+  \item Two magazines: Kodak Ektachrome SO-168 (color)
+  \item One magazine: Ektachrome (color, second batch)
+\end{itemize}
+
+Kodak developed specially thin film emulsions at NASA's request to allow more exposures per magazine.
+
+\subsection{Module 2: The Hasselblad Partnership Reference}
+
+\subsubsection{Institutional Origins}
+
+Hasselblad was founded in 1941 in Gothenburg, Sweden. The company did not learn that its cameras were being used in space until 1965, when NASA released photographs of Ed White's spacewalk on Gemini 4. Hasselblad ``put two and two together,'' recognized their cameras in the images, and contacted NASA to explore a formal collaboration. The result was one of the most productive industrial-scientific partnerships in photographic history.
+
+Initial collaboration meetings were held at Hasselblad headquarters in Gothenburg. Over time, Hasselblad opened operations in Parsippany, New Jersey; Redmond, Washington; France; and Denmark --- growth directly attributable to the NASA partnership and its global visibility.
+
+\subsubsection{Technical Co-Development}
+
+NASA and Hasselblad co-developed a series of improvements that benefited both space and commercial photography:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Innovation} & \tableheader{Application} \\
+\midrule
+70mm film magazine & Developed for Mercury; standard capacity increased from 12 to 70--200 exposures \\
+Special vacuum lubricants & Required for operation in space; also improved commercial reliability \\
+Aluminum exterior plating & Replaced leatherette; thermal and weight benefits \\
+Bayonet locking magazine contacts & Replaced standard 5-pole contact; prevents accidental detachment \\
+Large-tab focus/aperture rings & Required for gloved operation; improved ergonomics commercially \\
+Mirror mechanism fixation (side walls) & Structural improvement incorporated from space camera designs \\
+553ELS Space Shuttle camera & Direct commercial descendent of space-program HEC; used on Shuttle missions into the 1990s \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Scale of the Partnership}
+
+For over four decades, Hasselblad supplied camera equipment to NASA. Hasselblad cameras took an average of 1,500 to 2,000 photographs on each Space Shuttle mission. Apollo missions generated approximately 20,000 Hasselblad photographs (BW and color) across the program. In total, 13 HEDC (Hasselblad Electric Data Camera) bodies were used to photograph the lunar surface during Apollo 11--17 (July 1969 to December 1972); 12 remain on the Moon.
+
+\subsection{Module 3: Digital Transition Reference}
+
+\subsubsection{Space Shuttle to Early ISS}
+
+NASA's relationship with Nikon began as early as Apollo 15 (1971), when Nikon supplied 35mm cameras. Through the Space Shuttle era, Hasselblad's 553ELS (a modified 553ELX) served as the primary still camera, featuring modified mirror fixation, aluminum outer cladding, a special 7-pole contact, and electronic data imprinting of time and frame number on each exposure.
+
+\textbf{First digital camera on ISS:} The Kodak DCS760 arrived in 2001, marking the transition to digital capture. It featured an APS-H sensor in a Nikon F5 body at 6.3 megapixels.
+
+\subsubsection{Nikon DSLR Lineage on ISS}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.8cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Camera} & \tableheader{Years Active} & \tableheader{Units / Notes} & \tableheader{Key Capabilities} \\
+\midrule
+Kodak DCS760 & 2001--2005 & Limited & 6.3 MP, Nikon F5 body \\
+Nikon D1X & 2005--2007 & -- & 5.3 MP APS-C \\
+Nikon D2Xs & 2007--2009 & 76 units & 12.4 MP, ruggedized \\
+Nikon D3 series & 2009--2017 & Multiple & 12.1--24.5 MP full-frame, D3S excelled in low light \\
+Nikon D4 & 2013+ & 38 units & Primary camera for ISS Earth obs \\
+Nikon D5 & 2017+ & 53 units & 20.8 MP, no hardware mods, low-light and radiation qualified \\
+Nikon Z9 & 2024+ & Several & Delivered CRS-30 Feb 2024; 45.7 MP, 8K video \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Sony A7S II} captured the first commercial 4K video footage from space in 2016. Canon EOS Cinema cameras (C700, C300 II) have also been used for 4K video on the ISS, though Nikon DSLRs remain the primary still photography platform.
+
+\subsection{Module 4: ISS Photography Platform Reference}
+
+\subsubsection{Current Equipment Ecosystem (2024--2025)}
+
+As of late 2025, the primary ISS cameras include the Nikon Z9 (flagship mirrorless, 45.7 MP, ISO up to 102,400, 120fps burst), the Nikon D5 (maintained for radiation resilience and operational familiarity), and a wide array of Nikon F and Z lenses. Notable lenses include the Nikkor 600mm f/4G AF-S VR ED, the Nikon 800mm f/5.6E FL ED VR (with 1.4$\times$ teleconverter for 1120mm effective), and the Nikon 24-70mm f/2.8E ED VR for general coverage. Fifteen Nikon FTZ II mount adapters allow F-mount legacy lenses to work on Z9 bodies.
+
+\subsubsection{Radiation Damage and the CRIDR Project}
+
+Cameras operating on the ISS are subject to cosmic radiation that progressively damages CMOS/CCD sensor pixels, causing them to generate spurious signals (``hot pixels''). At 10,000 to 50,000 images per week, manual pixel repair in post-processing is infeasible.
+
+RIT's Center for Detectors developed the Cosmic Radiation Damage Image Repair (CRIDR) algorithm, which identifies damaged pixels and replaces their values with statistical averages of surrounding pixels. The algorithm was developed as a senior project by imaging science student Kevin Moser under the mentorship of Professor Don Figer, facilitated by RIT alumnus Peter Blacksberg ('75) and astronaut Don Pettit. This represents a direct example of the RIT--NASA research loop producing operational tools.
+
+\subsubsection{Notable ISS Photographer-Astronauts}
+
+\textbf{Don Pettit}: NASA's longest-tenured astronaut at the time of his 2024--2025 ISS tour; developed innovative astrophotography techniques including star-trail long exposures. Collaborated with RIT on both the CRIDR project and the orbital sidereal tracker camera mount (designed by Prof.\ Ted Kinsman, shipped to ISS in 2024). Pettit also used the RIT-designed mount to track stars during orbital movement.
+
+\textbf{Scott Kelly}: 340-day ISS mission (2015--2016); became internationally prominent via social media photography. President Obama directly tweeted appreciation of his images.
+
+\textbf{Matthew Dominick}: Used the Nikon Z9 (delivered 2024) for aurora and orbital photography in 2024--2025.
+
+\subsection{Module 5: RIT--NASA Pipeline Reference}
+
+\subsubsection{Institutional Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Individual(s)} & \tableheader{Event} \\
+\midrule
+1975 & Peter Blacksberg ('75) & Photography degree; later facilitated multiple RIT-NASA research connections \\
+1987 & Mark Sowa ('87), Sheri Dunnette Locke ('87) & First NASA hires direct from RIT; Imagery Acquisition Group \\
+Early 2000s & Andrew Davidhazy (faculty) & NASA sought imaging experts; alumnus connected recruiters to Davidhazy, who posted the opportunity \\
+2001 & Paul Reichert ('01) & Joined NASA's Photo/TV Operations group two weeks after graduation; first decade: Space Shuttle program \\
+2004 & Katrina Willoughby ('04) & Joined NASA as flight operations imagery instructor \\
+2011 & Paul Reichert & Transitioned from Space Shuttle to ISS program after Shuttle retirement \\
+2014 & Peter Blacksberg & Met Don Pettit at a lecture; began RIT--Pettit collaboration \\
+2017 & Kevin Moser (student) & CRIDR algorithm developed; delivered to NASA \\
+2023--2024 & Ted Kinsman (faculty) & Designed orbital sidereal tracker camera mount for Don Pettit; shipped to ISS \\
+2024--2026 & Reichert \& Willoughby & Two-year Artemis II crew photography training program \\
+April 2026 & Reichert \& Willoughby & Primary ground support for Artemis II imagery during mission \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Training Methodology}
+
+Willoughby and Reichert's training approach reflects professional photographic education adapted for the constraints of spaceflight:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Classroom instruction}: Camera operation, exposure theory, lens selection, lighting principles, scientific imaging objectives
+  \item \textbf{Mock-up training}: Johnson Space Center maintains mock-ups of all mission vehicles; astronauts practice with flight-equivalent hardware in the Orion mock-up
+  \item \textbf{Problem-based learning}: Trainers present a photographic challenge or request; astronauts work through solutions independently (because on mission, the trainers cannot be there)
+  \item \textbf{Environmental simulation}: Training conducted at night to simulate lunar EVA lighting; astronauts practice in shadow conditions matching expected mission scenarios
+  \item \textbf{Imagery-as-data framing}: The mission requires imagery not just for public outreach but as engineering data; if something breaks, a photograph may be the only way to show ground crews what happened
+  \item \textbf{Scale}: Approximately 70--80 imaging classes per mission training flow; additional sessions added for crew members who need more time
+\end{itemize}
+
+Together, Reichert and Willoughby have trained nearly every nationally and internationally active astronaut over the past 25 years --- more than 150 astronauts by Reichert's estimate.
+
+\subsection{Module 6: Artemis II Photography Reference}
+
+\subsubsection{Mission Overview}
+
+Artemis II launched April 1, 2026 from Kennedy Space Center. Crew: NASA astronauts Reid Wiseman (Commander), Victor Glover (Pilot), Christina Koch (Mission Specialist), and CSA astronaut Jeremy Hansen (Mission Specialist). 10-day mission; lunar flyby April 6, 2026; splashdown Pacific Ocean April 10, 2026. First crewed lunar mission in over 50 years. Mission reached 252,760 miles from Earth, a new record for the farthest distance humans have ever traveled.
+
+\subsubsection{Camera Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Camera} & \tableheader{Type / Notes} & \tableheader{Primary Use} \\
+\midrule
+Nikon D5 ($\times$2) & DSLR, 2016, radiation-qualified & Primary mission photography; lunar surface detail; low-light performance \\
+Nikon Z9 ($\times$1) & Mirrorless, 2024, 45.7 MP & High-resolution stills and 8K video \\
+GoPro Hero4 Black & Action cam, 2014 (revealed by EXIF) & Exterior mounted; documentary footage \\
+iPhones ($\times$4) & Personal crew devices & Interior documentation; quick photography \\
+Spacecraft-mounted cameras & 15 installed cameras & Engineering monitoring, navigation, crew safety, exterior documentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Total cameras aboard:} 32 (devices including any instrument with a lens capable of capturing photos or video).
+
+\textbf{Weight constraint:} Approximately 15--20 lbs of handheld camera equipment. Selection philosophy: versatile gear capable of handling multiple scenarios (interior crew shots to 400mm lunar surface detail).
+
+\textbf{Lenses used:} Nikon 80-400mm (lunar surface craters); wide-angle lenses (star fields, Earth views). A 30-year-old Nikkor 35mm f/2 AF-D prime also flew aboard.
+
+\subsubsection{Why the Nikon D5 in 2026?}
+
+The D5 is a camera released in 2016, yet it was the primary mission camera for Artemis II. Key reasons:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Radiation qualification}: The D5 has undergone formal qualification testing for operation beyond low Earth orbit. The Z9 and newer cameras have not been tested to the same standard for deep space radiation.
+  \item \textbf{Low-light performance}: The D5's ISO performance and proven track record in extreme environments (conflict journalism, professional sports) translates directly to the challenges of deep space imaging.
+  \item \textbf{Operational reliability}: NASA cannot afford equipment failure on a once-in-a-generation mission. The D5's decade of proven performance in demanding environments provides documented reliability.
+  \item \textbf{Training familiarity}: ISS astronauts and ground support teams have used the D5 for years; training infrastructure is already built around it.
+\end{itemize}
+
+\subsubsection{Selected Imagery from Artemis II}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Earthrise 2026}: Astronauts attempted to recreate the iconic 1968 Earthrise (Apollo 8, Bill Anders). Flight logistics and partial lunar illumination meant conditions differed significantly from 1968.
+  \item \textbf{Solar Eclipse from Orion (April 6, 2026)}: The Moon fully eclipsed the Sun from the crew's perspective for nearly 54 minutes of totality --- far longer than any Earth-based eclipse. The corona, stars, and Earthlight (sunlight reflected off Earth onto the Moon) were all visible simultaneously.
+  \item \textbf{Earthset}: Earth setting behind the lunar limb, captured at 6:41 p.m.\ EDT April 6, 2026, described as a ``generational'' photograph.
+  \item \textbf{Vavilov Crater close-up}: Captured with a handheld camera at 400mm focal length as the crew flew around the far side of the Moon; showed transition from smooth crater floor to rugged rim terrain.
+  \item \textbf{Milky Way}: Crew photographed the Milky Way from deep space; confirmed as photo of the day for April 8, 2026.
+  \item \textbf{Earth with zodiacal light and auroras}: Commander Wiseman photographed Earth shortly after translunar injection burn (April 2, 2026); two auroras visible simultaneously with zodiacal light.
+\end{itemize}
+
+\subsubsection{Photography as Mission Data}
+
+Willoughby's framing of imagery as data, not just documentation, was tested throughout the Artemis II mission. A dedicated science team at NASA requested specific lunar surface imagery during the flyby. Imagery of equipment failures or anomalies would provide ground crews with information they could obtain no other way. The crew spent approximately seven hours at the windows during the lunar flyby, taking turns documenting the far side of the Moon --- a perspective never visible from Earth and still largely unexplored through photography.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+All numerical claims & GATE & Must be attributed to NASA, Hasselblad, RIT, or peer-reviewed sources \\
+Mission photography data & ANNOTATE & Images from Artemis II are NASA public domain; credit requirements apply \\
+Astronaut personal information & ANNOTATE & Use only publicly disclosed details; no personal data beyond mission records \\
+RIT alumni career details & ANNOTATE & Use only information from official RIT and NASA sources \\
+Camera EXIF metadata analysis & ANNOTATE & Third-party analysis (e.g., GoPro Hero4 identification) should be noted as derived \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item NASA History Division: ``Astronaut Still Photography During Apollo'' (nasa.gov/history)
+  \item NASA Spinoff 2008: ``Historic Partnership Captures Our Imagination'' (spinoff.nasa.gov)
+  \item NASA Johnson Space Center: Artemis II FAQ, Mission Gallery, and Mission Blog (nasa.gov)
+  \item NASA: ``Journey to the Moon'' Artemis II gallery (nasa.gov/gallery)
+  \item Smithsonian National Air and Space Museum: ``Camera, Hasselblad, 70mm, Apollo 11'' (airandspace.si.edu)
+  \item NASA Apollo Lunar Surface Journal (Apollo 11 Hasselblad documentation) (nasa.gov/history/alsj)
+\end{itemize}
+
+\subsubsection{Manufacturer and Institutional Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Hasselblad AB: ``Hasselblad in Space'' company history (hasselblad.com)
+  \item Hasselblad AB: ``Hasselblad Celebrates 50 Years on the Moon'' press release, July 2019
+  \item Rochester Institute of Technology: ``RIT alumni train Artemis II astronauts in photography'' (rit.edu, April 6, 2026)
+  \item Rochester Institute of Technology: ``RIT tech helps NASA astronaut photograph the cosmos'' (rit.edu, March 2026)
+  \item Rochester Institute of Technology: ``Found in Space'' (rit.edu, 2008)
+  \item Rochester Institute of Technology: ``NASA astronaut photography gets big boost from RIT'' (rit.edu, 2017)
+  \item Rochester Institute of Technology: ``Returning astronaut learned photo skills from grad'' (rit.edu, 2015)
+  \item RIT School of Photographic Arts and Sciences program page (rit.edu/artdesign)
+  \item RIT Photographic Sciences BS program page (rit.edu/study)
+  \item Nikon news: ``NASA orders 53 unmodified Nikon D5 digital SLR cameras'' (nikon.com, 2017)
+\end{itemize}
+
+\subsubsection{Professional and Journalistic Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item NPR: ``How NASA Chose The Camera That Went To The Moon'' (npr.org, July 13, 2019)
+  \item The Washington Post: ``How NASA turns astronauts into photographers'' (washingtonpost.com, 2016)
+  \item KPRC Click2Houston: ``Inside Artemis II: The cameras capturing those stunning new close-ups of the Moon'' (click2houston.com, April 8, 2026)
+  \item The Planetary Society: ``The best images from Artemis II'' (planetary.org, April 2026)
+  \item Digital Camera World: ``Artemis II astronauts have 32 cameras aboard'' (digitalcameraworld.com, 2026)
+  \item Digital Camera World: ``GoPro Hero4 Black identified in Artemis II EXIF metadata'' (digitalcameraworld.com, April 8, 2026)
+  \item TechRadar: ``NASA reveals generational Earthset photo taken on a Nikon D5'' (techradar.com, April 2026)
+  \item Space.com: ``NASA's Artemis 2 camera gear'' (space.com, 2026)
+  \item Digital Trends: ``50 years later, the first camera on the Moon is still collecting lunar dust'' (digitaltrends.com, July 2019)
+  \item DPReview: ``NASA just ordered 53 Nikon D5 DSLRs'' (dpreview.com, August 2017)
+  \item Spectrum Local News: ``RIT alumni helped train Artemis astronauts capture historic images'' (spectrumlocalnews.com, April 10, 2026)
+  \item Wikipedia: ``List of cameras on the International Space Station'' (en.wikipedia.org, updated March 2026)
+\end{itemize}
+
+\newpage
+% ============================================================
+%  STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Cameras in Space --- Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document tracing the history of cameras in space from 1962 to 2026, covering hardware evolution, institutional partnerships, astronaut training methodology, and the cultural significance of space photography. The document will serve as a permanent reference resource for the intersection of photographic technology and human spaceflight, with particular attention to the Hasselblad--NASA partnership, the transition to digital imaging systems, and the RIT--NASA institutional pipeline culminating in the Artemis II mission.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+CAMERAS IN SPACE --- WAVE EXECUTION ARCHITECTURE
+==================================================
+
+WAVE 0: Foundation (Sequential)
+  W0-1: Shared schema + glossary [HAIKU]
+  W0-2: Master source index with URLs [HAIKU]
+  W0-3: Shared data tables: camera models, missions, dates [HAIKU]
+
+WAVE 1: Parallel Research Tracks
+  TRACK A                  TRACK B                  TRACK C
+  W1A-1: Module 1 survey   W1B-1: Module 3 survey   W1C-1: Module 5 survey
+  W1A-2: Module 2 survey   W1B-2: Module 4 survey   W1C-2: Module 6 survey
+  W1A-3: Module 1 deep     W1B-3: Module 3 deep     W1C-3: Module 5 deep
+  W1A-4: Module 2 deep     W1B-4: Module 4 deep     W1C-4: Module 6 deep
+  [SONNET + OPUS]          [SONNET + OPUS]          [OPUS primary]
+
+WAVE 2: Synthesis (Sequential)
+  W2-1: Cross-module integration [OPUS]
+  W2-2: Legacy analysis: Schirra 1962 --> Artemis II 2026 [OPUS]
+  W2-3: Cultural significance synthesis [OPUS]
+  W2-4: Iconic photograph production analysis [OPUS]
+
+WAVE 3: Publication + Verification (Sequential)
+  W3-1: Document assembly [SONNET]
+  W3-2: Source verification sweep [SONNET]
+  W3-3: Final PDF production [SONNET]
+  W3-4: Delivery + index page [SONNET]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared schemas, camera model glossary, mission timeline, source index. Prevents inconsistencies across parallel tracks.
+  \item \textbf{Research Layer} --- Six module survey documents compiled from primary NASA, RIT, and Hasselblad sources, plus peer-reviewed and professional journalism sources.
+  \item \textbf{Analysis Layer} --- Cross-module relationships, legacy analysis, cultural impact assessment.
+  \item \textbf{Synthesis Layer} --- Integrated narrative connecting hardware evolution, institutional partnerships, and photographic outcomes.
+  \item \textbf{Publication Layer} --- Final assembled document, verified bibliography, formatted PDF.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criterion} & \tableheader{Component Spec} \\
+\midrule
+1 & Foundation schemas & All six modules share consistent data structures and terminology & W0-1 through W0-3 \\
+2 & Module 1 reference (Origins) & Timeline 1961--1972 with sourced camera specs and mission assignments & W1A-1, W1A-3 \\
+3 & Module 2 reference (Hasselblad) & Partnership history with technical specs, modification tables, 12 bodies on Moon documented & W1A-2, W1A-4 \\
+4 & Module 3 reference (Digital Transition) & Complete camera lineage table from Kodak DCS760 through Z9 & W1B-1, W1B-3 \\
+5 & Module 4 reference (ISS Platform) & Equipment ecosystem 2024--2025 with radiation-damage documentation & W1B-2, W1B-4 \\
+6 & Module 5 reference (RIT--NASA) & Institutional timeline with named individuals, years, roles & W1C-1, W1C-3 \\
+7 & Module 6 reference (Artemis II) & Verified 32-camera manifest with equipment rationale and imagery analysis & W1C-2, W1C-4 \\
+8 & Synthesis document & Cross-module connections, legacy arc, iconic photograph analysis & W2-1 through W2-4 \\
+9 & Final assembled document & Complete publication-quality PDF with bibliography & W3-1 through W3-3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Foundation & None & Haiku & 4K \\
+W1A: Origins + Hasselblad & W0 & Sonnet+Opus & 25K \\
+W1B: Digital + ISS & W0 & Sonnet+Opus & 25K \\
+W1C: RIT + Artemis & W0 & Opus & 30K \\
+W2: Synthesis & W1A, W1B, W1C & Opus & 20K \\
+W3: Publication & W2 & Sonnet & 15K \\
+\midrule
+\textbf{Total} & & & \textbf{$\sim$119K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+W0 schemas & Haiku & Simple data structure generation; no judgment required \\
+W1A survey (Origins) & Sonnet & Standard source compilation; well-documented history \\
+W1A deep (Hasselblad) & Sonnet & Technical specification work; structured source extraction \\
+W1B survey (Digital) & Sonnet & Equipment lineage table compilation \\
+W1B deep (ISS) & Sonnet & Current-events sourcing; structured analysis \\
+W1C (RIT--NASA) & Opus & Institutional narrative; nuanced relationship analysis \\
+W1C (Artemis II) & Opus & Current-event synthesis; cultural significance judgment \\
+W2 Synthesis & Opus & Cross-module integration; legacy arc; cultural analysis \\
+W3 Publication & Sonnet & Document assembly; formatting; source verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Mode} & \tableheader{Tasks} & \tableheader{Model} & \tableheader{Blocker} \\
+\midrule
+Wave 0 & Sequential & Schemas, source index, shared tables & Haiku & None \\
+Wave 1A & Parallel & Origins + Hasselblad deep research & Sonnet/Opus & Wave 0 \\
+Wave 1B & Parallel & Digital transition + ISS platform & Sonnet/Opus & Wave 0 \\
+Wave 1C & Parallel & RIT pipeline + Artemis II & Opus & Wave 0 \\
+Wave 2 & Sequential & Synthesis + legacy arc & Opus & All Wave 1 \\
+Wave 3 & Sequential & Assembly + verification + PDF & Sonnet & Wave 2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}XL{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+W0-1 & Define shared schemas: camera record, mission record, person record, source record & schemas.json & Haiku \\
+W0-2 & Build master source index with URLs and access status for all 30+ sources & sources.json & Haiku \\
+W0-3 & Generate shared reference tables: all camera models, all NASA missions, all RIT alumni named & tables.json & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Track} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W1A-1 & A: Origins & Mercury/Gemini/Apollo camera survey; timeline 1961--1972 & Sonnet \\
+W1A-2 & A: Hasselblad & Partnership history; modification catalog; 12 cameras on Moon & Sonnet \\
+W1A-3 & A: Origins deep & Reseau plate; Earthrise production analysis; film stocks & Opus \\
+W1A-4 & A: Hasselblad deep & HEC vs HEDC engineering; vacuum lubricants; cultural impact & Opus \\
+W1B-1 & B: Digital & Camera lineage from Kodak DCS760 to Nikon Z9 & Sonnet \\
+W1B-2 & B: ISS Platform & Equipment ecosystem; radiation damage; CRIDR project & Sonnet \\
+W1B-3 & B: Digital deep & Procurement history; modification decisions; Canon/Sony roles & Opus \\
+W1B-4 & B: ISS deep & Don Pettit photography; orbital sidereal tracker; astronaut photographers & Sonnet \\
+W1C-1 & C: RIT pipeline & Institutional timeline 1975--2026; named individuals; training stats & Opus \\
+W1C-2 & C: Artemis II & 32-camera manifest; mission imagery; weight constraints & Opus \\
+W1C-3 & C: RIT deep & Training methodology deep-dive; Davidhazy connection; program history & Opus \\
+W1C-4 & C: Artemis deep & D5 radiation qualification; GoPro EXIF discovery; iconic imagery analysis & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W2-1 & Cross-module integration: how hardware decisions drove training decisions and vice versa & Opus \\
+W2-2 & Legacy arc: trace the chain from Schirra 1962 through Davidhazy through Reichert to Artemis II 2026 & Opus \\
+W2-3 & Cultural significance: Earthrise, Blue Marble, Earthset --- space photography as cultural catalyst & Opus \\
+W2-4 & Iconic photograph analysis: technical production + cultural impact for at least 5 photographs & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W3-1 & Document assembly: merge all module documents and synthesis into final structure & Sonnet \\
+W3-2 & Source verification sweep: confirm all numerical claims are attributed; check URLs & Sonnet \\
+W3-3 & Final PDF production with complete bibliography & Sonnet \\
+W3-4 & Delivery package: PDF + index.html + source .tex or .md files & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Wave 0 outputs (schemas, source index, tables) are injected at the top of every Wave 1 agent context window --- prime cache targets.
+  \item Module documents from Wave 1 are injected in full into Wave 2 synthesis agent; cache headers placed after each module boundary.
+  \item Source bibliography is compiled once in Wave 0 and referenced by ID throughout; no re-lookup of source metadata in later waves.
+  \item All three Wave 1 tracks can run in parallel with a shared read-only cache of Wave 0 outputs.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XC{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Estimated Input} & \tableheader{Estimated Output} & \tableheader{Subtotal} \\
+\midrule
+Wave 0 & 2K & 4K & 6K \\
+Wave 1A (Origins + Hasselblad) & 15K & 25K & 40K \\
+Wave 1B (Digital + ISS) & 15K & 25K & 40K \\
+Wave 1C (RIT + Artemis) & 20K & 30K & 50K \\
+Wave 2 (Synthesis) & 30K & 20K & 50K \\
+Wave 3 (Publication) & 40K & 15K & 55K \\
+\midrule
+\textbf{Total} & \textbf{122K} & \textbf{119K} & \textbf{$\sim$241K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0 Foundation
+ |
+ +-------> W1A: Origins + Hasselblad  --------+
+ |                                             |
+ +-------> W1B: Digital + ISS  ---------------+--> W2: Synthesis --> W3: Publication
+ |                                             |
+ +-------> W1C: RIT + Artemis  --------------+
+
+Parallel constraint: W1A, W1B, W1C may all run simultaneously after W0.
+Sequential constraint: W2 requires all three Wave 1 tracks complete.
+Sequential constraint: W3 requires W2 complete.
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Failure} \\
+\midrule
+Safety-Critical & Non-negotiable source and accuracy standards & 6 & BLOCK \\
+Core Functionality & Deliverable acceptance per success criterion & 18 & BLOCK \\
+Integration & Cross-module validation & 8 & BLOCK \\
+Edge Cases & Robustness and temporal currency & 6 & LOG \\
+\midrule
+\textbf{Total} & & \textbf{38} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality across all modules & All citations traceable to NASA, Hasselblad AB, RIT, peer-reviewed journals, or established professional publications. Zero entertainment media or unsourced blogs. \\
+SC-NUM & Numerical attribution & Every camera specification (weight, temperature range, exposure count, image resolution), mission date, unit count, and training statistic attributed to a specific named source. \\
+SC-ADV & No policy advocacy & Document presents evidence and findings without advocating for specific space program funding, commercial vs.\ government spaceflight positions, or educational policy. \\
+SC-IMG & Image copyright compliance & No reproduction of copyrighted NASA images beyond fair attribution; all image references described in text rather than reproduced. \\
+SC-CURR & Artemis II currency & All Artemis II facts (launch date, crew, camera manifest, imagery) verified against official NASA sources post-April 1, 2026. \\
+SC-ATTR & RIT alumni attribution & All named individuals' roles, graduation years, and career facts verified against RIT official news sources and NASA records; no fabricated biographical details. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Camera lineage completeness & Lineage from Mercury 500C through Nikon Z9 documented with no gaps in major transitions \\
+CF-02 & Hasselblad modification catalog & At least 6 documented modifications to the 500C for Mercury 8 with sourced rationale \\
+CF-03 & 12 bodies on Moon documented & Apollo lunar surface camera inventory: at least 12 HEDC bodies confirmed with sourced support \\
+CF-04 & ISS digital camera table completeness & Table covers Kodak DCS760 (2001) through Nikon Z9 (2024) with 8+ entries \\
+CF-05 & Artemis II manifest verified & All 32 cameras accounted for (15 mounted + 17 handheld) with sourced equipment list \\
+CF-06 & RIT timeline completeness & Timeline covers 1975--2026 with at least 8 named milestones and sourced individuals \\
+CF-07 & Iconic photograph analysis & At least 5 photographs analyzed: camera model, lens, film/sensor, cultural impact \\
+CF-08 & Training methodology characterization & At least 4 training methods (classroom, mock-up, problem-based, environmental simulation) described with sourced detail \\
+CF-09 & Radiation damage documented & CRIDR project described with student name, faculty, astronaut collaborator, and operational application \\
+CF-10 & D5 qualification rationale & At least 3 sourced reasons why Nikon D5 rather than newer cameras flew on Artemis II \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Hardware $\to$ training cascade & Document explicitly traces how Hasselblad no-viewfinder design led to chest-mount and feel-based training \\
+IN-02 & RIT $\to$ Artemis cascade & Document explicitly traces Davidhazy connection through Reichert/Willoughby to Artemis II training and ground support \\
+IN-03 & Digital transition $\to$ ISS training impact & Document notes how transition to unmodified DSLRs changed training approach (commercial vs.\ custom hardware) \\
+IN-04 & Radiation damage $\to$ camera selection & Document connects radiation-damage problem (Module 4) to D5 qualification rationale (Module 6) \\
+IN-05 & Cross-module data consistency & Same camera (e.g., Nikon D5) referenced in Modules 3, 4, 5, and 6 uses consistent specifications \\
+IN-06 & Cultural impact thread & Earthrise (Module 2) and Earthset (Module 6) are explicitly linked as bookending moments \\
+IN-07 & Document self-containment & Glossary and context allow a reader with no prior knowledge to understand all six modules without external references \\
+IN-08 & Legacy arc coherence & Synthesis section traces unbroken chain from Schirra 1962 to Artemis II 2026 with no unexplained gaps \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All six modules with primary-source citations & SC-SRC, CF-01 & Pending \\
+2. Camera lineage documented with model numbers & CF-01, CF-04 & Pending \\
+3. Hasselblad data quantitative & CF-02, CF-03 & Pending \\
+4. ISS camera evolution complete timeline & CF-04, IN-05 & Pending \\
+5. RIT--NASA pipeline named individuals & CF-06, SC-ATTR & Pending \\
+6. Artemis II manifest verified & CF-05, SC-CURR & Pending \\
+7. Astronaut training curriculum characterized & CF-08, IN-03 & Pending \\
+8. Iconic photographs analyzed ($\geq$5) & CF-07, IN-06 & Pending \\
+9. Cross-module connections documented & IN-01, IN-02, IN-04 & Pending \\
+10. All numerical claims attributed & SC-NUM & Pending \\
+11. Radiation challenge addressed & CF-09, CF-10, IN-04 & Pending \\
+12. Legacy arc coherent & IN-02, IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave go/no-go gates; final quality review \\
+PLAN & Planner & Wave decomposition; parallel track timing; dependency management \\
+SCOUT & Research Agent & Web search; source validation; gap-fill research \\
+EXEC-A & Executor Track A & Module 1 (Origins) + Module 2 (Hasselblad) document production \\
+EXEC-B & Executor Track B & Module 3 (Digital) + Module 4 (ISS) document production \\
+EXEC-C & Executor Track C & Module 5 (RIT) + Module 6 (Artemis) document production \\
+CRAFT-HIST & History Specialist & Mercury/Gemini/Apollo era context; cultural significance analysis \\
+CRAFT-TECH & Technical Specialist & Camera engineering; optics; radiation; materials science \\
+VERIFY & Verification & Source validation; numerical attribution; URL checking \\
+INTEG & Integration Agent & Cross-module relationship validation; legacy arc coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; escalation of judgment calls \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection; source quality monitoring \\
+TOPO & Topology Manager & Mid-mission agent restructuring if needed \\
+ARCH & Architecture & Cross-cutting structural decisions for final document \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (16 roles) \\
+Research Modules & 6 \\
+Parallel Tracks & 3 (Wave 1A, 1B, 1C) \\
+Wave Count & 5 (Wave 0 through Wave 3) \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Estimated Token Budget & $\sim$241K total \\
+Estimated Sessions & 4--5 \\
+Estimated Context Windows & 8--10 \\
+Safety-Critical Tests & 6 (all BLOCK-level) \\
+Total Tests & 38 \\
+Primary Source Organizations & NASA, Hasselblad AB, RIT, Smithsonian, ESA \\
+Mission Anchor Date & April 11, 2026 (5 days post-Artemis II splashdown) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``For the Artemis II mission, there are four people on that vehicle going around the moon, and there are eight billion of us on the ground that don't get to go on that ride. Through the pictures they get, they're taking the rest of the world on the ride with them.''}
+
+\vspace{0.5em}
+--- Paul Reichert ('01, RIT Photographic Sciences), Flight Operations Imagery Instructor, NASA Johnson Space Center
+
+\vspace{0.8em}
+\textit{And behind him: Wally Schirra walking into a Houston camera shop in 1962. A Hasselblad 500C stripped down to its essential light-gathering soul. A camera on the Moon. Twelve cameras still on the Moon. A curriculum built in Rochester. Four astronauts with a Nikon and a window. An Earthset photograph. The chain is unbroken.}
+\end{quotebox}
+
+\end{document}

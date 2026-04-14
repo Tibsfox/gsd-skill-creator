@@ -1,0 +1,51 @@
+{
+  "projectCode": "ALR",
+  "packTitle": "Artemis Learning Resources — Study Guides, DIY Projects, AI Programming, LIVE Coverage & OPEN Problems Expansion",
+  "modules": [
+    {
+      "moduleId": "ai-programming",
+      "title": "AI Programming Examples: Claude Code Skill Development Tutorial, MCP Server Building Guide Python TypeScript, Agent Orchestration Patterns Implementation, LightRAG Integration Hands-On, Tool Poisoning Detection Lab, Multi-Model Verification Ensemble Setup, Context Compression Techniques Practical"
+    },
+    {
+      "moduleId": "diy-electronics",
+      "title": "DIY Electronics Projects: Vacuum Tube Amplifier Build from CastlePast Series, LED Controller Arduino ESP32, 555 Timer Circuit Projects, Sensor Networks IoT Security-First Design, BESS Battery Monitoring Dashboard, RTL-SDR Radio Receiver Projects, Photonic Experiments with Fiber Optics"
+    },
+    {
+      "moduleId": "study-guides",
+      "title": "Study Guides & Learning Pathways: CMU ML in Production 16-Lecture Study Guide, OWASP Application Security Learning Path, CppCon Systems Programming Track, Corporate Finance Damodaran Pathway, Configuration Management Certification Prep, Structural Engineering Stiffness Method Tutorial, Legal Technology IP Strategy Primer"
+    },
+    {
+      "moduleId": "live-expansion",
+      "title": "LIVE Page Coverage Expansion: Artemis II Mission Dashboard Enhancement Real-Time Telemetry, Weather Station Network Mukilteo Convergence Zone, Earthquake Monitor Cascadia Subduction Zone SWIFZ, Tide Prediction Puget Sound NOAA Stations, Air Quality Index PNW Wildfire Season, ISS Tracker Visible Passes PNW, Solar Activity Monitor NOAA SWPC"
+    },
+    {
+      "moduleId": "open-math-problems",
+      "title": "OPEN Problems Mathematics Expansion: Riemann Hypothesis Zeta Zero Spacing Montgomery-Dyson, Collatz Conjecture Computational Verification, P vs NP Complexity Classes, Birch and Swinnerton-Dyer Conjecture, Navier-Stokes Existence and Smoothness, Yang-Mills Mass Gap, Twin Prime Conjecture Zhang Maynard, Goldbach Conjecture Helfgott Ternary, ABC Conjecture Mochizuki, Hodge Conjecture, Erdos Prize Problems 105 Tracked 53K Pool"
+    },
+    {
+      "moduleId": "open-cs-problems",
+      "title": "OPEN Problems Computer Science: Agentic Reasoning Limits Single vs Multi Agent, Context Window Scaling Laws, Tool Poisoning Detection Completeness, Agent Identity Verification at Scale, MCP Protocol Formal Verification, Code Generation Correctness Guarantees, Multi-Modal Grounding Verification MIRAGE Problem"
+    },
+    {
+      "moduleId": "open-physics-problems",
+      "title": "OPEN Problems Physics & Engineering: Quantum Computing Error Correction Threshold, Room Temperature Superconductivity, Dark Matter Detection Direct Indirect, Fusion Energy Net Positive Q>1 Sustained, Carbon Capture Gigaton Scale, Battery Energy Density Theoretical Limits, Photonic Computing Practical Integration"
+    },
+    {
+      "moduleId": "diy-science",
+      "title": "DIY Science Projects: Weather Station Build Raspberry Pi BME280, Citizen Science Forage Fish Spawning Survey, Backyard Ecology Plot Monitoring, Radio Astronomy Hydrogen Line 1420MHz, Water Quality Testing Kit Puget Sound, Soil Analysis for PNW Gardens, Microscopy Diatom Identification Puget Sound"
+    }
+  ],
+  "bibliography": [
+    "ERDOS-TRACKER.md — 105 prize problems, $53K pool",
+    "www/tibsfox/com/Research/OPEN/ — 12 unsolved problems currently tracked",
+    "www/tibsfox/com/Research/LIVE/ — real-time page hub",
+    "CMU ML in Production — 16 lectures processed",
+    "OWASP Global AppSec — 15 conference talks",
+    "CppCon 2025 — 5 systems programming talks"
+  ],
+  "safety_rules": [
+    "DIY electronics must include safety warnings for mains voltage",
+    "Citizen science protocols must follow established methodology",
+    "Open problems must cite current state of the art and known bounds"
+  ]
+}

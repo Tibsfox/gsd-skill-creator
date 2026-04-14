@@ -4,20 +4,38 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "skill-creator": "./dist/cli.js"
+    "skill-creator": "dist/cli.js",
+    "gsd-skill-creator": "project-claude/install.cjs"
   },
   "files": [
     "dist",
     "project-claude"
+  ],
+  "description": "Adaptive learning layer for Claude Code — skills, agents, teams, and chipsets",
+  "author": "Tibsfox",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tibsfox/gsd-skill-creator.git"
+  },
+  "keywords": [
+    "claude-code",
+    "ai-agents",
+    "skills",
+    "gsd",
+    "adaptive-learning",
+    "claude",
+    "anthropic"
   ],
   "engines": {
     "node": ">=18.0.0"
   },
   "scripts": {
     "build": "tsc",
+    "postbuild": "node scripts/postbuild.mjs",
     "dev": "tsx src/cli.ts",
-    "test": "vitest",
-    "test:integration": "vitest run --include '**/*.integration.test.ts'",
+    "test": "vitest --project root --project space-between",
+    "test:integration": "vitest run --project integration",
     "setup:claude": "skill-creator gsd-init",
     "setup:claude:force": "skill-creator gsd-init --force",
     "setup:claude:check": "skill-creator gsd-init --dry-run",
@@ -25,10 +43,9 @@
     "desktop:build": "cd src-tauri && PKG_CONFIG_PATH=\"$(pwd)/.pkgconfig:${PKG_CONFIG_PATH:-}\" npx tauri build",
     "desktop:test": "cd desktop && npx vitest run",
     "docs:api": "npx typedoc",
-    "sync": "node www/tibsfox/com/api/sync-local.mjs",
-    "sync:remote": "node www/tibsfox/com/api/sync-local.mjs --remote",
-    "sync:files": "lftp -u claudefox@tibsfox.com ftp.tibsfox.com -e 'set ssl:verify-certificate no; mirror -R --only-newer --parallel=4 www/tibsfox/com/Research/ .; quit'",
-    "deploy": "npm run sync:remote && npm run sync:files"
+    "sync": "bash scripts/sync-research-to-live.sh --dry-run",
+    "sync:live": "bash scripts/sync-research-to-live.sh",
+    "deploy": "bash scripts/sync-research-to-live.sh"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",

@@ -1,0 +1,257 @@
+# Engineering Department Chipset Configuration
+# Ninth instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. Forked from the math-department template and remapped
+# to engineering domain.
+
+name: engineering-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated engineering department providing domain-routed
+  expertise through seven named agents (Brunel, Tesla, Roebling,
+  Johnson-K, Watt, Lovelace-E, Polya-E), six knowledge skills, and
+  three pre-composed teams. Persists work via Grove records and
+  integrates with the college engineering department concept graph.
+
+# ==========================================================================
+# Skills — 6 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  design-process:
+    domain: engineering
+    description: "Engineering design cycle — requirements, specifications, constraints, iteration, prototyping"
+    triggers:
+      - "design process"
+      - "design cycle"
+      - "requirements"
+      - "specifications"
+      - "trade study"
+      - "Pugh matrix"
+      - "morphological chart"
+    agent_affinity: brunel
+
+  structural-analysis:
+    domain: engineering
+    description: "Statics, dynamics, stress/strain, materials selection, failure modes, FEA concepts"
+    triggers:
+      - "structural"
+      - "stress"
+      - "strain"
+      - "beam"
+      - "column"
+      - "buckling"
+      - "load"
+      - "bridge"
+      - "truss"
+    agent_affinity: [roebling, watt]
+
+  systems-engineering:
+    domain: engineering
+    description: "Requirements management, V-model, integration, verification, validation, NASA SE handbook"
+    triggers:
+      - "systems engineering"
+      - "V-model"
+      - "verification"
+      - "validation"
+      - "requirements traceability"
+      - "interface control"
+      - "configuration management"
+    agent_affinity: [johnson-k, brunel]
+
+  prototyping-fabrication:
+    domain: engineering
+    description: "CAD, 3D printing, CNC, workshop skills, rapid prototyping, testing"
+    triggers:
+      - "prototype"
+      - "3D print"
+      - "CNC"
+      - "fabrication"
+      - "CAD"
+      - "manufacture"
+      - "workshop"
+    agent_affinity: [lovelace-e, watt]
+
+  engineering-ethics:
+    domain: engineering
+    description: "Safety, codes, professional responsibility, Challenger/Columbia, whistleblowing, public welfare"
+    triggers:
+      - "engineering ethics"
+      - "safety"
+      - "code of ethics"
+      - "Challenger"
+      - "Columbia"
+      - "whistleblowing"
+      - "professional responsibility"
+      - "factor of safety"
+    agent_affinity: [brunel, roebling]
+
+  technical-communication:
+    domain: engineering
+    description: "Technical writing, specifications, reports, presentations, documentation standards"
+    triggers:
+      - "technical writing"
+      - "engineering report"
+      - "specifications"
+      - "engineering drawing"
+      - "presentation"
+      - "documentation"
+    agent_affinity: [polya-e, johnson-k]
+
+# ==========================================================================
+# Agents — 7 agents in router topology (Brunel as CAPCOM)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: brunel
+
+  agents:
+    - name: brunel
+      role: "department chair — classification, routing, synthesis, design review"
+      model: opus
+      tools: [Read, Glob, Grep, Bash, Write]
+      is_capcom: true
+
+    - name: tesla
+      role: "electrical/systems engineer — circuits, power, control, EMC, systems integration"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: roebling
+      role: "structural/civil engineer — statics, stress analysis, structural design, failure analysis"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: johnson-k
+      role: "aerospace/computational engineer — orbital mechanics, trajectory, systems engineering, verification"
+      model: opus
+      tools: [Read, Grep, Bash]
+
+    - name: watt
+      role: "mechanical/thermal engineer — thermodynamics, heat transfer, mechanisms, fluid systems"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: lovelace-e
+      role: "materials/manufacturing engineer — material selection, fabrication, quality control"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: polya-e
+      role: "pedagogy guide — problem-solving framework, explanation, learning paths"
+      model: sonnet
+      tools: [Read, Write]
+
+# ==========================================================================
+# Teams — 3 pre-composed configurations
+# ==========================================================================
+
+teams:
+  engineering-review-team:
+    description: "Full department for design reviews, safety analysis, multi-domain problems"
+    agents: [brunel, tesla, roebling, johnson-k, watt, lovelace-e, polya-e]
+    use_when: "multi-domain, safety-critical, or full design review requests"
+
+  design-sprint-team:
+    description: "Rapid concept development and trade studies"
+    agents: [brunel, tesla, roebling, polya-e]
+    use_when: "early-stage design exploration and concept generation"
+
+  systems-team:
+    description: "Systems engineering, integration, and verification"
+    agents: [johnson-k, tesla, watt, polya-e]
+    use_when: "systems-level problems, V-model, integration, and V&V"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 engineering Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college engineering department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (brunel) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - structural
+      - electrical
+      - aerospace
+      - mechanical
+      - materials
+      - ethics
+      - systems
+      - pedagogy
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "engineering-department"
+  record_types:
+    - name: EngineeringDesign
+      description: "Design concept, trade study, or design sprint output with evaluation"
+
+    - name: EngineeringAnalysis
+      description: "Technical analysis with governing equations, solution, and verification"
+
+    - name: EngineeringReview
+      description: "Design review findings, action items, and safety assessment"
+
+    - name: EngineeringExplanation
+      description: "Teaching artifact at a specified level using Polya framework"
+
+    - name: EngineeringSession
+      description: "Session log linking work products to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "engineering"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "The Engineering Design Process"
+    - "Materials & Structures"
+    - "Mechanisms & Systems"
+    - "Prototyping & Testing"
+    - "Engineering Ethics & Impact"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
