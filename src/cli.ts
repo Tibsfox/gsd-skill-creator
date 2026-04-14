@@ -778,6 +778,19 @@ async function main() {
       break;
     }
 
+    case 'test-triggering': {
+      const scope = parseScope(args);
+      const skillName = args.slice(1).filter((a) => !a.startsWith('-'))[0];
+      const { testTriggeringCommand } = await import('./cli/commands/test-triggering.js');
+      const exitCode = await testTriggeringCommand(skillName, {
+        skillsDir: parseSkillsDir(args, scope),
+        mock: args.includes('--mock'),
+        overrideTriggering: parseStringFlag(args, '--override-triggering'),
+      });
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'history':
     case 'hist': {
       const skillName = args[1];
@@ -1520,6 +1533,40 @@ async function main() {
       const { wwwCommand } = await import('./fs/commands/www.js');
       const exitCode = await wwwCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'skill': {
+      // skill <subcommand> [args] — namespaced entry point for skill-level commands.
+      // Provides `skill-creator skill test-triggering <name>` alongside the top-level
+      // `skill-creator test-triggering <name>` (Q3 dual registration).
+      const subcommand = args[1];
+      const subArgs = args.slice(2);
+
+      switch (subcommand) {
+        case 'test-triggering': {
+          const scope = parseScope(subArgs);
+          const skillName = subArgs.filter((a) => !a.startsWith('-'))[0];
+          const { testTriggeringCommand } = await import('./cli/commands/test-triggering.js');
+          const exitCode = await testTriggeringCommand(skillName, {
+            skillsDir: parseSkillsDir(subArgs, scope),
+            mock: subArgs.includes('--mock'),
+            overrideTriggering: parseStringFlag(subArgs, '--override-triggering'),
+          });
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        default: {
+          p.log.message('');
+          p.log.message('Skill subcommands:');
+          p.log.message('  test-triggering <name>   Run triggering test for a skill');
+          p.log.message('');
+          p.log.message('Examples:');
+          p.log.message('  skill-creator skill test-triggering my-skill');
+          p.log.message('  skill-creator skill test-triggering my-skill --mock');
+        }
+      }
       break;
     }
 

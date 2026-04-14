@@ -117,7 +117,8 @@ export async function validateSingleSkill(
     if (typeof skill.metadata.description === 'string') {
       const { DescriptionQualityValidator } = await import('../../validation/description-quality.js');
       const validator = new DescriptionQualityValidator();
-      const freq = (skill.metadata['description-frequency'] === 'always' ? 'always' : 'on-demand') as 'always' | 'on-demand';
+      const metadataRecord = skill.metadata as Record<string, unknown>;
+      const freq = (metadataRecord['description-frequency'] === 'always' ? 'always' : 'on-demand') as 'always' | 'on-demand';
       const csoResult = validator.validate(skill.metadata.description, { descriptionFrequency: freq });
 
       const csoMessages: string[] = [];
