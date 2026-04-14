@@ -3,13 +3,13 @@ Version:        1.49.5
 Release:        1%{?dist}
 Summary:        GSD-OS - AI-powered project management desktop
 
-License:        MIT
+License:        BUSL-1.1
 URL:            https://github.com/Tibsfox/gsd-skill-creator
 Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  cargo >= 1.70
 BuildRequires:  rust >= 1.70
-BuildRequires:  nodejs >= 18
+BuildRequires:  nodejs >= 22
 BuildRequires:  npm
 BuildRequires:  webkit2gtk4.1-devel
 BuildRequires:  gtk3-devel
@@ -90,7 +90,7 @@ install -Dm644 extra/systemd/gsd-os-agent.service %{buildroot}%{_userunitdir}/gs
 %{_userunitdir}/gsd-os-agent.service
 
 %changelog
-* Thu Feb 27 2026 GSD Project <gsd@tibsfox.com> - 1.49.5-1
+* Thu Feb 27 2026 Tibsfox <tibsfox@tibsfox.com> - 1.49.5-1
 - Filesystem reorganization for Linux standards compliance
 - Added man pages, shell completions, desktop entry
 - Added systemd user service for headless mode
