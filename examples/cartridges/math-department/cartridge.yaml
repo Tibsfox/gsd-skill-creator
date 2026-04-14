@@ -1,0 +1,27 @@
+id: math-department
+name: Mathematics Department
+version: 1.0.0
+author: tibsfox
+description: >-
+  First instantiation of the department template pattern. Seven named
+  agents (Hypatia, Euclid, Gauss, Euler, Noether, Ramanujan, Polya), six
+  knowledge skills, three pre-composed teams, five Grove record types,
+  and college math-department binding.
+trust: system
+provenance:
+  origin: migrate
+  createdAt: 2026-04-14T12:40:00Z
+  sourceCommits:
+    - 52625ee44
+  researchGrounding:
+    - examples/chipsets/math-department/chipset.yaml
+chipsets:
+  - kind: department
+    src: ../../chipsets/math-department/chipset.yaml
+  - kind: grove
+    src: ../../chipsets/math-department/chipset.yaml#/grove
+  - kind: college
+    src: ../../chipsets/math-department/chipset.yaml#/college
+metadata:
+  migrated_from: examples/chipsets/math-department/
+  wave: 2B
