@@ -31,6 +31,7 @@
 import { readFileSync } from 'node:fs';
 import { dirname, isAbsolute, resolve } from 'node:path';
 import { parse as parseYaml } from 'yaml';
+import { normalizeEvaluationChipset } from './normalizers/evaluation.js';
 import { CartridgeSchema, type Cartridge } from './types.js';
 
 export interface LoadCartridgeOptions {
@@ -134,8 +135,8 @@ function resolveChipsetEntry(
   const obj = entry as Record<string, unknown>;
   const src = obj.src;
   if (typeof src !== 'string' || src.length === 0) {
-    // Inline chipset — pass through untouched.
-    return obj;
+    // Inline chipset — normalize by kind and pass through.
+    return normalizeByKind(obj, undefined);
   }
 
   if (remainingDepth <= 0) {
@@ -206,7 +207,17 @@ function resolveChipsetEntry(
     );
   }
 
-  return merged;
+  return normalizeByKind(merged, filePath);
+}
+
+function normalizeByKind(
+  payload: Record<string, unknown>,
+  sourceFile: string | undefined,
+): Record<string, unknown> {
+  if (payload.kind === 'evaluation') {
+    return normalizeEvaluationChipset(payload, { sourceFile });
+  }
+  return payload;
 }
 
 function splitSrcReference(
