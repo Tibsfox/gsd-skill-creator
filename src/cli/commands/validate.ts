@@ -112,6 +112,34 @@ export async function validateSingleSkill(
     if (isLegacyFormat(skill.metadata as unknown)) {
       warnings.push('Skill uses legacy extension field placement. Re-save to migrate to new format.');
     }
+
+    // ---- CSO description quality (Phase B — warning-only by default) ----
+    if (typeof skill.metadata.description === 'string') {
+      const { DescriptionQualityValidator } = await import('../../validation/description-quality.js');
+      const validator = new DescriptionQualityValidator();
+      const freq = (skill.metadata['description-frequency'] === 'always' ? 'always' : 'on-demand') as 'always' | 'on-demand';
+      const csoResult = validator.validate(skill.metadata.description, { descriptionFrequency: freq });
+
+      const csoMessages: string[] = [];
+      if (csoResult.antiCapabilityMatches && csoResult.antiCapabilityMatches.length > 0) {
+        const unique = [...new Set(csoResult.antiCapabilityMatches.map(s => s.toLowerCase()))];
+        for (const verb of unique) {
+          csoMessages.push(
+            `CSO: description uses capability verb "${verb}" — rewrite as "Use when [context]..."`
+          );
+        }
+      }
+      if (csoResult.wordCountViolation) {
+        csoMessages.push(`Word budget: ${csoResult.wordCountViolation}`);
+      }
+
+      const strict = process.env.GSD_CSO_STRICT === '1';
+      if (strict) {
+        for (const m of csoMessages) errors.push(m);
+      } else {
+        for (const m of csoMessages) warnings.push(m);
+      }
+    }
   } catch (error) {
     const errMsg = error instanceof Error ? error.message : String(error);
     errors.push(`Failed to read skill: ${errMsg}`);
