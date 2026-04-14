@@ -18,6 +18,8 @@ chipsets:
     src: ../../chipsets/astronomy-department/chipset.yaml
   - kind: grove
     src: ../../chipsets/astronomy-department/chipset.yaml#/grove
+  - kind: evaluation
+    src: ../../chipsets/astronomy-department/chipset.yaml#/evaluation
   - kind: college
     src: ../../chipsets/astronomy-department/chipset.yaml#/college
 metadata:

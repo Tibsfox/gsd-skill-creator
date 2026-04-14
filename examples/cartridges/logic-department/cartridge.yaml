@@ -18,6 +18,8 @@ chipsets:
     src: ../../chipsets/logic-department/chipset.yaml
   - kind: grove
     src: ../../chipsets/logic-department/chipset.yaml#/grove
+  - kind: evaluation
+    src: ../../chipsets/logic-department/chipset.yaml#/evaluation
   - kind: college
     src: ../../chipsets/logic-department/chipset.yaml#/college
 metadata:
