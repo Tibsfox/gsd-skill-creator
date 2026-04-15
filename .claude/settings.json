@@ -104,6 +104,26 @@
         ]
       }
     ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/pre-compact-snapshot.cjs"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/post-compact-recovery.cjs"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
