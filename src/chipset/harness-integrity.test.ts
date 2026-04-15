@@ -10,8 +10,9 @@
  * Run: npx vitest run src/chipset/harness-integrity.test.ts
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import * as fs from 'node:fs';
+import * as os from 'node:os';
 import * as path from 'node:path';
 import { execSync } from 'node:child_process';
 
@@ -49,20 +50,59 @@ import {
 // ---------------------------------------------------------------------------
 // Paths
 // ---------------------------------------------------------------------------
+//
+// Tests operate against a tmpdir populated by `node project-claude/install.cjs`
+// (see beforeAll below). HARNESS_CLAUDE_DIR points the helpers in
+// harness-integrity.ts at the same tmpdir. This validates the *installed*
+// harness — the artifact end users actually run — and works identically on
+// CI (where .claude/ does not exist) and local dev (where .claude/ has extra
+// unmanaged content the test should ignore).
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname ?? __dirname, '../..');
-const CLAUDE_DIR = path.join(PROJECT_ROOT, '.claude');
-const AGENTS_DIR = path.join(CLAUDE_DIR, 'agents');
-const HOOKS_DIR = path.join(CLAUDE_DIR, 'hooks');
-const SKILLS_DIR = path.join(CLAUDE_DIR, 'skills');
-const SETTINGS_PATH = path.join(CLAUDE_DIR, 'settings.json');
 const GITIGNORE_PATH = path.join(PROJECT_ROOT, '.gitignore');
+
+let CLAUDE_DIR: string;
+let AGENTS_DIR: string;
+let HOOKS_DIR: string;
+let SKILLS_DIR: string;
+let SETTINGS_PATH: string;
 
 // ===========================================================================
 // Permission Invariants
 // ===========================================================================
 
 describe('Harness Integrity', () => {
+  let tmpRoot: string;
+
+  beforeAll(() => {
+    // Create a tmpdir and install project-claude/ into it. This gives the
+    // tests a known, reproducible filesystem that matches what end users get
+    // from `npx skill-creator`. Without this, CI (which has no .claude/) and
+    // local dev (which has extra unmanaged content) see different worlds.
+    tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'harness-integrity-'));
+    // install.cjs requires a git repo to install the post-commit hook
+    execSync('git init --quiet', { cwd: tmpRoot, stdio: 'pipe' });
+    const installScript = path.join(PROJECT_ROOT, 'project-claude', 'install.cjs');
+    execSync(`node ${JSON.stringify(installScript)} --local --quiet`, {
+      cwd: tmpRoot,
+      stdio: 'pipe',
+    });
+
+    CLAUDE_DIR = path.join(tmpRoot, '.claude');
+    AGENTS_DIR = path.join(CLAUDE_DIR, 'agents');
+    HOOKS_DIR = path.join(CLAUDE_DIR, 'hooks');
+    SKILLS_DIR = path.join(CLAUDE_DIR, 'skills');
+    SETTINGS_PATH = path.join(CLAUDE_DIR, 'settings.json');
+    process.env.HARNESS_CLAUDE_DIR = CLAUDE_DIR;
+  });
+
+  afterAll(() => {
+    delete process.env.HARNESS_CLAUDE_DIR;
+    if (tmpRoot && fs.existsSync(tmpRoot)) {
+      fs.rmSync(tmpRoot, { recursive: true, force: true });
+    }
+  });
+
   describe('Permission Invariants', () => {
     it('all shell hook scripts are executable', () => {
       const results = checkHookScriptsExecutable();
