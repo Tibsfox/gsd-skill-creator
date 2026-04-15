@@ -1,6 +1,10 @@
 ---
 name: mayor-coordinator
 description: Northbridge coordination pattern for multi-agent orchestration. Creates convoys, dispatches work via sling, monitors progress, and handles escalations. Never executes work directly.
+format: 2025-10-02
+version: 1.0.0
+status: active
+updated: 2026-03-06
 ---
 
 # Mayor Coordinator

@@ -2,6 +2,9 @@
 name: research-engine
 description: Autonomous research pipeline — topic to structured documents with HTML/PDF output. Proven at HEL (28 docs, 91K words) and OOPS (9 docs, 20K words) scale.
 version: 1.0.0
+format: 2025-10-02
+status: active
+updated: 2026-04-12
 ---
 
 # Research Engine

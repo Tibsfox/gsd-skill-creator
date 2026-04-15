@@ -1,6 +1,10 @@
 ---
 name: polecat-worker
 description: ALU execution pattern for ephemeral autonomous work. Detects hooked work, enters GUPP autonomous mode, executes the assigned bead, commits and pushes results, then self-terminates. Never coordinates other agents.
+format: 2025-10-02
+version: 1.0.0
+status: active
+updated: 2026-03-06
 ---
 
 # Polecat Worker

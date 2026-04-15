@@ -8,7 +8,7 @@ export type SkillStatus = z.infer<typeof SkillStatusSchema>;
 export const SkillFrontmatterSchema = z
   .object({
     name: z.string().min(1),
-    description: z.string().min(1).max(250),
+    description: z.string().min(1).max(500),
     format: z.string().optional(),
     version: z.string().optional(),
     status: SkillStatusSchema.optional(),

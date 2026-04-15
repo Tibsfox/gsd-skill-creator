@@ -2,6 +2,9 @@
 name: publish-pipeline
 description: Markdown to HTML/PDF build + FTP sync to configured remote host. Pandoc + xelatex templates, branded output, automated deployment. Proven on 29-document HEL series.
 version: 1.0.0
+format: 2025-10-02
+status: active
+updated: 2026-04-12
 ---
 
 # Publish Pipeline

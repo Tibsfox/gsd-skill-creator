@@ -2,6 +2,9 @@
 name: data-fidelity
 description: Fact-checking and source verification workflow for research documents. Launches parallel fact-checkers, aggregates findings, applies corrections systematically.
 version: 1.0.0
+format: 2025-10-02
+status: active
+updated: 2026-03-31
 ---
 
 # Data Fidelity
