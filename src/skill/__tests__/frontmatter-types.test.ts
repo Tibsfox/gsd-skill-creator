@@ -17,8 +17,8 @@ describe('SkillFrontmatterSchema', () => {
     expect(r.name).toBe('example');
   });
 
-  it('rejects descriptions over 250 chars', () => {
-    const long = 'x'.repeat(251);
+  it('rejects descriptions over 500 chars', () => {
+    const long = 'x'.repeat(501);
     const r = SkillFrontmatterSchema.safeParse({ name: 'x', description: long });
     expect(r.success).toBe(false);
   });
