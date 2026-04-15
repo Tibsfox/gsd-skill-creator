@@ -10,9 +10,9 @@
         "description": "GSD master routing agent"
       },
       {
-        "source": "skills/beautiful-commits/SKILL.md",
-        "target": ".claude/skills/beautiful-commits/SKILL.md",
-        "description": "Beautiful commits skill"
+        "source": "skills/commit-style/SKILL.md",
+        "target": ".claude/skills/commit-style/SKILL.md",
+        "description": "Commit style skill (merged beautiful-commits + git-commit)"
       },
       {
         "source": "skills/cartridge-forge/SKILL.md",
@@ -45,19 +45,14 @@
         "description": "GSD preflight skill"
       },
       {
-        "source": "skills/gsd-onboard/SKILL.md",
-        "target": ".claude/skills/gsd-onboard/SKILL.md",
-        "description": "GSD onboard skill"
+        "source": "skills/gsd-guide/SKILL.md",
+        "target": ".claude/skills/gsd-guide/SKILL.md",
+        "description": "GSD guide skill (merged gsd-onboard + gsd-explain)"
       },
       {
         "source": "skills/gsd-trace/SKILL.md",
         "target": ".claude/skills/gsd-trace/SKILL.md",
         "description": "GSD trace skill"
-      },
-      {
-        "source": "commands/beautiful-commits.md",
-        "target": ".claude/commands/beautiful-commits.md",
-        "description": "Beautiful commits command"
       },
       {
         "source": "commands/file-operation-patterns.md",
@@ -83,11 +78,6 @@
         "source": "commands/gsd-preflight.md",
         "target": ".claude/commands/gsd-preflight.md",
         "description": "GSD preflight command"
-      },
-      {
-        "source": "commands/gsd-onboard.md",
-        "target": ".claude/commands/gsd-onboard.md",
-        "description": "GSD onboard command"
       },
       {
         "source": "commands/gsd-trace.md",
