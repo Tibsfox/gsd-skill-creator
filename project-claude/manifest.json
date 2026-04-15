@@ -100,6 +100,16 @@
         "description": "PreToolUse: hard-block Write/Edit targeting .claude/settings.json"
       },
       {
+        "source": "hooks/gsd-check-update.js",
+        "target": ".claude/hooks/gsd-check-update.js",
+        "description": "SessionStart: background npm version check with stale-hook detection"
+      },
+      {
+        "source": "hooks/gsd-prompt-guard.js",
+        "target": ".claude/hooks/gsd-prompt-guard.js",
+        "description": "PreToolUse: scan Write/Edit to .planning/ for prompt-injection + invisible Unicode (HI-12)"
+      },
+      {
         "source": "hooks/gsd-inject-snapshot.js",
         "target": ".claude/hooks/gsd-inject-snapshot.js",
         "description": "Session start: inject latest snapshot"
@@ -352,6 +362,11 @@
         "description": "PostToolUse hook: detect phase boundary writes"
       },
       {
+        "source": "hooks/gsd-response-scan.cjs",
+        "target": ".claude/hooks/gsd-response-scan.cjs",
+        "description": "PostToolUse hook: scan all tool responses (incl. MCP) for prompt-injection + invisible Unicode (HI-11)"
+      },
+      {
         "source": "hooks/pre-compact-snapshot.cjs",
         "target": ".claude/hooks/pre-compact-snapshot.cjs",
         "description": "PreCompact hook: snapshot session state before compaction"
@@ -380,6 +395,11 @@
         "source": "hooks/worktree-init.cjs",
         "target": ".claude/hooks/worktree-init.cjs",
         "description": "SessionStart hook: initialize worktree state"
+      },
+      {
+        "source": "hooks/worktree-cleanup.sh",
+        "target": ".claude/hooks/worktree-cleanup.sh",
+        "description": "Manual/cron: remove stale .claude/worktrees entries (>24h, no uncommitted changes)"
       },
       {
         "source": "hooks/lib/hook-output.cjs",
