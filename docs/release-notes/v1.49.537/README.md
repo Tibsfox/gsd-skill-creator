@@ -162,6 +162,23 @@ v1.49.538  = NASA 1.38  + degree 37  Pass 2  ← next
 | `SPS/research/releases/036-annas-hummingbird/pass2-refinement.md` | Pass 2 | ~900 |
 | `docs/release-notes/v1.49.537/README.md` | Release Note | — |
 
+## Emerging Patterns at Degree 36
+
+| Pattern | Status | Degree 36 Value |
+|---------|--------|-----------------|
+| S36 Artists | 37 documented (degrees 0-36) | Jimi Hendrix -- E=6 maximum, Blues Rock, Central District supreme export |
+| SPS Species | 37 documented (degrees 0-36) | Anna's Hummingbird -- only PNW resident, dive-display, third non-vocal mechanism |
+| NASA Missions | 37 aligned (1.0-1.36) | Ranger 8 -- 7,137 Sea of Tranquility images, photographing Apollo's future |
+| Energy Ceiling | E=6 returns / combined 11 | First E=6 since Jones (0); new all-time combined max breaks previous 10 |
+| CD Global Names | 3 documented | Jones (0) infrastructure → Charles (30) synthesis → Hendrix (36) explosion |
+| Jones-Hendrix Axis | ESTABLISHED | Same neighborhood, 36-degree span, opposite modes, both permanently transformative |
+| Frisell-Hendrix Axis | ESTABLISHED (35 degrees) | Guitar's full range: contemplative loops → feedback explosions |
+| Non-Vocal Sound Mechanisms | 3 distinct physics | Percussion (22) + Oscillation (35) + Aerodynamics (36) -- three branches |
+| Hummingbird Pair | COMPLETE | Rufous migrant (35) + Anna's resident (36) -- two strategies, one platform |
+| Ranger Extended Success | 2 flights, 11,445 images | Ranger 7 (4,308) + Ranger 8 (7,137) -- convergence is not accidental |
+| Genre Gradient | Rock enters via blues | Jazz → Jazz compounds → Soul/R&B → Blues → Blues Rock (4 steps from origin) |
+| Metabolic Extremity | 4 g overwintering @ 40°C | Anna's Hummingbird -- engine's most extreme thermoregulatory feat |
+
 ## Pattern Tables at Degree 36
 
 ### E=6 Appearances

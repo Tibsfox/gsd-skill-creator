@@ -151,7 +151,24 @@ v1.49.527  = NASA 1.27  + degree 26  Pass 2  ← next (swallow quintet begins)
 | `SPS/research/releases/025-american-robin/pass2-refinement.md` | Pass 2 | ~1,500 |
 | `docs/release-notes/v1.49.526/README.md` | Release Note | — |
 
-## Pattern Tables at Degree 25
+## Emerging Patterns at Degree 25
+
+| Pattern | Status | Degree 25 Value |
+|---------|--------|-----------------|
+| S36 Artists | 26 documented (degrees 0-25) | Black Stax -- first pure non-jazz genre, Central District fourth era |
+| SPS Species | 26 documented (degrees 0-25) | American Robin -- the archetype, most democratic species, convergence trio complete |
+| NASA Missions | 26 aligned (1.0-1.25) | Ranger 1 -- new program, failed in orbit, failure altitude rising |
+| Genre Gradient | COMPLETE (Jazz → Neo-Soul) | 25 degrees from pure Jazz to pure Neo-Soul; jazz quadrant closed, soul quadrant open |
+| Convergence Trio | COMPLETE (23-24-25) | Grosbeak → Tanager → Robin; source preceded by its echoes |
+| Turdidae Quintet | COMPLETE (5 species) | Varied (2) → Hermit (7) → Swainson's (18) → Veery (19) → Robin (25) |
+| Parulidae Quintet | COMPLETE (5 species) | Orthogonal quintet -- intensification vs. thrush direction/timbre |
+| Central District Eras | 4 distinct eras | Postwar jazz → salon → neo-soul collective → Neo-Soul primary |
+| New-Program Failure | PATTERN (3 instances) | Pioneer (1) surface → Mercury (16) atmosphere → Ranger (25) orbit |
+| Energy Profile | E=4 sustained × 5 | Degrees 21-25 all combined 8 -- longest energy plateau |
+| Artist-City Patterns | 26 | +Archetype/Baseline (the accessible source) |
+| Prior-Artist Dedication | FIRST INSTANCE | Ernestine Anderson (degree 3) returns as dedicatee |
+
+
 
 ### Genre Gradient (Complete)
 
