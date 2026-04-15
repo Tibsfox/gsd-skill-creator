@@ -98,6 +98,23 @@ The Hermit Warbler is the third consecutive *Setophaga* and the victim in the di
 
 </details>
 
+## Emerging Patterns at Degree 40
+
+| Pattern | Status | Degree 40 Value |
+|---------|--------|-----------------|
+| S36 Artists | 41 documented (degrees 0-40) | Alice Smith -- The Endurance Vocalist, four-octave range, BRC lineage, seventh woman |
+| SPS Species | 41 documented (degrees 0-40) | Hermit Warbler -- eighth Parulidae, third consecutive *Setophaga*, displacement victim |
+| NASA Missions | 41 aligned (1.0-1.41) | Gemini 5 -- Cooper returns, 8-day endurance, first fuel cells, phantom rendezvous |
+| NASA Programs | 5 (Gemini endurance era) | Pioneer ✓ / Mercury ✓ / Ranger ✓ / Mariner active / Gemini active (maneuver → EVA → endurance) |
+| Parulidae Family | FAMILY LEAD (8 species) | Three ahead of Hirundinidae and Turdidae (5 each) |
+| *Setophaga* Trio | COMPLETE (degrees 38-39-40) | BTG bystander → Townsend's aggressor → Hermit victim -- displacement cascade |
+| Energy Profile | E≥5 × 9 consecutive | Degrees 32-40 -- longest sustained high-energy sequence |
+| Fuel Cell Era | BEGINS at degree 40 | Every crewed spacecraft after Gemini 5 uses fuel cells through Shuttle |
+| Cooper Arc | 3 appearances | Liberty Bell 7 sank (20, Grissom) → Faith 7 solo (24) → Gemini 5 crew (40) |
+| Women in Engine | 7 documented | Anderson, Bown, Monge, Loud, Shepherd, Eager, **Smith** |
+| Angular Fraction | 1/9 of circle | First significant fraction beyond the opening quadrant |
+| Habitat Range | +MOUNTAIN CONIFER CANOPY | 50 meters above forest floor, narrowband canopy-level song |
+
 ## Programs Active at Degree 40
 
 | Program | Status | Degrees |
