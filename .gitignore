@@ -105,3 +105,8 @@ scripts/python/build-learn-pages.py
 /.bg-shell/
 # Stale per-session continuation handoffs (local scratch)
 /.continue-here.md
+# Compiled shader-viewer binary (source is shader-viewer.c)
+scripts/nasa/shader-viewer
+# Fox Companies IP — local-only site content (books + essays)
+src/site/content/books/
+src/site/content/essays/
