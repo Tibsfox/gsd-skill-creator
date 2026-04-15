@@ -34,6 +34,8 @@ Every retirement flows through seven stages in strict order. The pipeline has an
 | 6 | Cleanup | Destroy worktree, clear hook, remove dispatch record. |
 | 7 | Terminate | Mark agent as terminated; release resources back to the pool. |
 
+Stages: `VALIDATE → COMMIT → PUSH → SUBMIT → NOTIFY → CLEANUP → TERMINATE`.
+
 Full TypeScript implementations live in [`references/retirement-implementation.md`](references/retirement-implementation.md).
 
 ## "Done Means Gone" — Irreversibility Rules
