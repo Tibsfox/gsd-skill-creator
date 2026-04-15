@@ -17,20 +17,24 @@ process.stdin.on('end', () => {
       process.exit(0);
     }
 
-    // Extract message from -m flag
+    // Extract message from -m flag.
+    // Order matters: heredoc first, because the double-quoted pattern's
+    // [^"]* will greedy-match the entire "$(cat <<'EOF'\n...\nEOF\n)" body
+    // across newlines and capture the literal "$(cat <<'EOF'" as the subject.
     let msg = '';
-    // Double-quoted -m
-    const dq = cmd.match(/-m\s+"([^"]*)"/);
-    if (dq) msg = dq[1];
+    // Heredoc pattern: -m "$(cat <<'EOF'\n<body>\nEOF\n)"
+    // Capture the full body so wave marker validation works on the real lines.
+    const hd = cmd.match(/-m\s+"\$\(cat <<'EOF'\s*\n([\s\S]*?)\nEOF/);
+    if (hd) msg = hd[1];
+    // Double-quoted -m (no newlines — a real subject is a single line)
+    if (!msg) {
+      const dq = cmd.match(/-m\s+"([^"\n]*)"/);
+      if (dq) msg = dq[1];
+    }
     // Single-quoted -m
     if (!msg) {
-      const sq = cmd.match(/-m\s+'([^']*)'/);
+      const sq = cmd.match(/-m\s+'([^'\n]*)'/);
       if (sq) msg = sq[1];
-    }
-    // Heredoc pattern: -m "$(cat <<'EOF'\n...)"
-    if (!msg) {
-      const hd = cmd.match(/-m\s+"\$\(cat <<'EOF'\s*\n([^\n]*)/);
-      if (hd) msg = hd[1].trim();
     }
 
     if (msg) {
