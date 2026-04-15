@@ -26,6 +26,10 @@ export interface ScaffoldOptions {
   targetDir: string;
   name: string;
   trust?: 'system' | 'user' | 'community';
+  author?: string;
+  description?: string;
+  tags?: string[];
+  createdAt?: string;
 }
 
 export interface ScaffoldResult {
@@ -71,6 +75,12 @@ export function scaffoldCartridge(options: ScaffoldOptions): ScaffoldResult {
   const { template, name } = options;
   const targetDir = resolve(options.targetDir);
   const trust = options.trust ?? 'user';
+  const author = options.author ?? 'unknown';
+  const description =
+    options.description ??
+    `A scaffolded ${template} cartridge. Edit this description.`;
+  const createdAt = options.createdAt ?? new Date().toISOString();
+  const tags = options.tags ?? [];
 
   const manifest = MANIFESTS[template];
   if (!manifest) {
@@ -93,10 +103,18 @@ export function scaffoldCartridge(options: ScaffoldOptions): ScaffoldResult {
   }
 
   const slug = name;
+  const tagsList =
+    tags.length > 0
+      ? tags.map((t) => `    - ${t}`).join('\n')
+      : `    - ${slug}`;
   const substitutions: Record<string, string> = {
     name,
     slug,
     trust,
+    author,
+    description,
+    createdAt,
+    tagsList,
   };
 
   const filesWritten: string[] = [];
