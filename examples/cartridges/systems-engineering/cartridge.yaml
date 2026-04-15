@@ -1,0 +1,38 @@
+id: systems-engineering
+name: Systems Engineering
+version: 0.1.0
+author: tibsfox
+description: >-
+  A full cartridge for systems engineering — the discipline of designing,
+  integrating, and verifying complex technical systems across their
+  lifecycle. Covers stakeholder needs and requirements, system
+  architecture modeling, interface control, trade studies and analysis,
+  verification and validation, risk and opportunity management,
+  configuration and change control, reliability / availability /
+  maintainability, safety and assurance, human factors, and lifecycle
+  transition. Built to compose with other cartridges (project-management,
+  engineering, safety, reliability) via the grove layer.
+trust: user
+provenance:
+  origin: scaffold
+  createdAt: 2026-04-14T19:07:08.660Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - examples/cartridges/systems-administration/cartridge.yaml
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - systems-engineering
+    - incose
+    - requirements
+    - architecture
+    - verification
+    - validation
+    - lifecycle

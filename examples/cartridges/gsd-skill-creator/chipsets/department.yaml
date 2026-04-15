@@ -1,0 +1,410 @@
+skills:
+  skill-authoring:
+    domain: authoring
+    description: >-
+      Create a new skill from scratch — frontmatter (name, description,
+      triggers, tools), the skill body prose, and the invocation contract.
+      Covers the SKILL.md convention, trigger phrase design, scoping
+      rules (when to invoke vs. when NOT), and the read-before-edit
+      discipline that production skills must respect.
+    triggers:
+      - create a skill
+      - new skill
+      - author a skill
+      - write skill frontmatter
+      - skill.md
+      - draft a skill
+      - skill authoring
+    agent_affinity:
+      - skill-forger
+      - skill-creator-capcom
+
+  agent-authoring:
+    domain: authoring
+    description: >-
+      Create a new agent — role prose, model selection (opus/sonnet/haiku),
+      tool allowlist, isolation mode, and memory scope. Covers when to
+      write an agent vs. a skill, the capcom pattern (is_capcom flag),
+      router topology, and the tradeoffs between single-shot agents and
+      long-running orchestrators.
+    triggers:
+      - create an agent
+      - new agent
+      - author an agent
+      - agent frontmatter
+      - agent role
+      - pick a model for this agent
+      - agent tool allowlist
+    agent_affinity:
+      - skill-forger
+      - skill-creator-capcom
+
+  team-composition:
+    domain: authoring
+    description: >-
+      Compose agents into a team — roster, use_when clause, routing
+      topology, and the workflow shape the team is built around. Teams
+      are shaped by recurring situations (author, review, incident,
+      drill), not by role buckets. Covers the difference between a team
+      and a multi-agent invocation.
+    triggers:
+      - compose a team
+      - new team
+      - team roster
+      - team use_when
+      - multi-agent team
+      - team workflow
+    agent_affinity:
+      - skill-forger
+
+  chipset-assembly:
+    domain: authoring
+    description: >-
+      Bundle skills, agents, and teams into a chipset matching one of the
+      eight kinds in the cartridge spec (department, grove, college,
+      coprocessor, content, muse, evaluation, forge). Covers the
+      discriminator field, src: refs vs. inline, JSON-pointer fragments,
+      and cross-chipset field rules.
+    triggers:
+      - build a chipset
+      - chipset yaml
+      - department chipset
+      - coprocessor chipset
+      - content chipset
+      - chipset kind
+      - discriminated chipset
+    agent_affinity:
+      - cartridge-smith
+      - skill-forger
+
+  cartridge-forging:
+    domain: authoring
+    description: >-
+      Drive the cartridge forge loop end to end — scaffold, fill,
+      scaffold-companions, validate, eval, dedup, metrics, commit. Never
+      hand-author cartridge.yaml from scratch; always scaffold first. The
+      forge is the mechanism; this skill is the playbook. Dogfoods the
+      cartridge-forge skill.
+    triggers:
+      - forge a cartridge
+      - create cartridge
+      - scaffold cartridge
+      - cartridge forge loop
+      - build a cartridge from scratch
+      - cartridge template
+    agent_affinity:
+      - cartridge-smith
+      - skill-creator-capcom
+
+  cartridge-validation:
+    domain: validation
+    description: >-
+      Run and interpret the four forge gates — validate (schema), eval
+      (pre-deploy gates declared in evaluation.yaml), dedup (no
+      cross-chipset collisions), and metrics (shape report). Handles
+      validation debt via --allow-validation-debt and
+      KNOWN-VALIDATION-DEBT.md tracking. Gate results drive ship/no-ship.
+    triggers:
+      - validate cartridge
+      - cartridge eval gate
+      - dedup cartridge
+      - cartridge metrics
+      - forge gate failed
+      - validation debt
+      - pre-deploy gate
+    agent_affinity:
+      - cartridge-smith
+
+  grove-memory-import:
+    domain: grove
+    description: >-
+      Import filesystem skills, agents, teams, and chipsets into the
+      grove content-addressed arena via tools/import-filesystem-skills.ts.
+      Covers source directory selection, exclusion rules (wasteland/,
+      muses/), dedup on unique name binding, and the resulting
+      .grove/arena.json snapshot. Grove import is the on-ramp from flat
+      files to content-addressed memory.
+    triggers:
+      - import skills into grove
+      - grove arena snapshot
+      - import-filesystem-skills
+      - arena.json
+      - grove ingest
+      - populate grove
+      - grove bindings
+    agent_affinity:
+      - grove-keeper
+      - skill-forger
+
+  grove-record-modeling:
+    domain: grove
+    description: >-
+      Design grove record types and namespaces for a cartridge. Record
+      types capture the durable artifacts a cartridge produces (authored
+      skill, forged cartridge, validation result, migration log). Each
+      type has a name, description, and lives under a cartridge-scoped
+      namespace. Good record types outlive the skills that write them.
+    triggers:
+      - design grove records
+      - grove record type
+      - grove namespace
+      - grove schema
+      - content-addressed record
+      - durable artifact schema
+      - record type descriptions
+    agent_affinity:
+      - grove-keeper
+
+  grove-query-retrieval:
+    domain: grove
+    description: >-
+      Query the grove arena — single-hop lookup by name, SkillView +
+      SignatureView projections, ActivityLog reads, and multi-hop
+      retrieval (dependency chains, cross-wing keyword intersection,
+      subject→predicate path traversal). Covers the SkillCodebase
+      interface and the query patterns exercised by
+      multi-hop-retrieval.test.ts.
+    triggers:
+      - query grove
+      - grove lookup
+      - skillview
+      - signatureview
+      - multi-hop retrieval
+      - grove dependency chain
+      - find skill in grove
+    agent_affinity:
+      - grove-keeper
+
+  grove-migration:
+    domain: grove
+    description: >-
+      Migrate grove state between format versions. Covers the
+      grove-migration-live test suite's expectations (tier
+      classification, chunk promotion), SkillDiff-driven incremental
+      migration, and the JSON↔ArenaSet migration path used by the memory
+      arena stack. Migrations are content-addressed and reversible when
+      the source is retained.
+    triggers:
+      - migrate grove
+      - grove format migration
+      - grove tier classification
+      - arenaset migration
+      - grove format version
+      - skilldiff migrate
+    agent_affinity:
+      - grove-keeper
+
+  grove-export-snapshot:
+    domain: grove
+    description: >-
+      Export grove state — write a .grove/arena.json snapshot, serialize
+      a SkillView or SkillCodebase projection, produce a GroveNamespace
+      manifest. Snapshots are the portable, content-addressed handoff
+      format between machines, sessions, and migrations. Also the fixture
+      format CI consumes for grove-dependent tests.
+    triggers:
+      - export grove
+      - grove snapshot
+      - write arena.json
+      - grove namespace export
+      - grove manifest
+      - serialize skillcodebase
+    agent_affinity:
+      - grove-keeper
+
+  skill-testing:
+    domain: testing
+    description: >-
+      Write vitest tests for skills, agents, and cartridges — trigger
+      accuracy tests, round-trip load/validate tests, gate assertions,
+      and grove round-trip property tests. Includes the test-first
+      discipline for publish gating (Phase B skill-author-discipline),
+      and the pattern of skipIf(CI) for tests that need richer fixtures
+      than CI can cheaply generate.
+    triggers:
+      - test a skill
+      - vitest for skill
+      - skill trigger accuracy
+      - cartridge round-trip test
+      - grove test fixture
+      - publish gate test
+      - skipif ci
+    agent_affinity:
+      - skill-forger
+      - cartridge-smith
+
+  package-publishing:
+    domain: publishing
+    description: >-
+      Publish gsd-skill-creator via npx/npm. Covers version bumps across
+      package.json / Cargo.toml / tauri.conf.json, the skill-creator
+      binary (future skill-center), pre-publish validation, release
+      notes authoring in docs/release-notes/, and the distinction
+      between dev-only (source) and installed (binary) invocation of
+      the cartridge CLI.
+    triggers:
+      - publish skill-creator
+      - bump version
+      - release notes
+      - npx publish
+      - version drift
+      - cartridge cli not installed
+      - skill-creator binary
+    agent_affinity:
+      - publish-engineer
+      - skill-creator-capcom
+
+  gsd-harness-integration:
+    domain: integration
+    description: >-
+      Wire skills, agents, and cartridges into the Claude Code harness —
+      .claude/settings.json permissions, hooks (PreToolUse, SessionStart,
+      UserPromptSubmit), .claude/commands/gsd/ command definitions, and
+      the project-claude install flow (node project-claude/install.cjs).
+      Covers harness-integrity invariants (hook files exist, version
+      sync, MCP binary gating) and the read-before-edit discipline the
+      harness enforces.
+    triggers:
+      - harness integration
+      - claude settings.json
+      - claude hooks
+      - pretooluse hook
+      - project-claude install
+      - gsd command
+      - harness integrity
+    agent_affinity:
+      - skill-creator-capcom
+      - publish-engineer
+
+agents:
+  topology: router
+  router_agent: skill-creator-capcom
+  agents:
+    - name: skill-creator-capcom
+      role: >-
+        Opus-class capcom for the cartridge. Owns shape decisions —
+        when to author a skill vs. an agent vs. a cartridge, how to
+        split a domain across chipsets, when grove record modeling is
+        required, and routing between the other agents. Holds the
+        authoring taste that keeps cartridges coherent.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+      is_capcom: true
+
+    - name: skill-forger
+      role: >-
+        Sonnet agent that writes the actual files — SKILL.md frontmatter
+        and body, agent role prose, team roster yaml, department chipset
+        entries. The hands that execute the authoring plan the capcom
+        approves.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+
+    - name: cartridge-smith
+      role: >-
+        Sonnet agent that drives the cartridge forge loop — scaffold,
+        scaffold-companions, validate, eval, dedup, metrics — and handles
+        validation debt bookkeeping. Owns the forge CLI invocation
+        pattern (source vs. installed binary) and the four-gate ship
+        contract.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+    - name: grove-keeper
+      role: >-
+        Opus-class specialist for the grove content-addressed memory
+        subsystem. Owns record-type design, namespace layout,
+        import/export pipelines, multi-hop retrieval patterns, format
+        migrations, and the arena.json snapshot contract. Authority on
+        any cartridge that touches grove state.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+    - name: publish-engineer
+      role: >-
+        Sonnet agent that owns the publish and harness-integration
+        surface — version sync across package.json / Cargo.toml /
+        tauri.conf.json, release notes, project-claude install wiring,
+        hook file integrity, and the tests that guard all of it. A
+        publish never ships without this agent's sign-off.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+teams:
+  skill-authoring-team:
+    description: >-
+      Author a new skill, agent, or team from a blank slate. Capcom
+      decides shape and scope, skill-forger writes the files, cartridge-
+      smith runs the forge gates to confirm the new artifact round-trips
+      through validate/eval/dedup.
+    agents:
+      - skill-creator-capcom
+      - skill-forger
+      - cartridge-smith
+    use_when: creating a new skill, agent, or team from scratch
+
+  grove-operations-team:
+    description: >-
+      Any end-to-end grove task — import a filesystem library, design
+      record types for a new cartridge, write a multi-hop retrieval
+      query, migrate between format versions, produce a snapshot.
+      Grove-keeper owns correctness; skill-forger writes the code;
+      capcom approves schema changes that cross cartridge boundaries.
+    agents:
+      - grove-keeper
+      - skill-forger
+      - skill-creator-capcom
+    use_when: anything touching .grove/arena.json, grove record types, or content-addressed retrieval
+
+  cartridge-forge-team:
+    description: >-
+      End-to-end cartridge forging — scaffold, fill (all chipsets, all
+      companion markdown), run four forge gates, commit. The default
+      team for any "create a cartridge" request. Dogfoods the
+      cartridge-forge skill on its own artifacts.
+    agents:
+      - skill-creator-capcom
+      - skill-forger
+      - cartridge-smith
+      - grove-keeper
+    use_when: forging a new cartridge of any template (department, content, coprocessor)
+
+  publish-release-team:
+    description: >-
+      Ship a new gsd-skill-creator release. Publish-engineer drives
+      version bumps, release notes, and install wiring; cartridge-smith
+      re-runs forge gates on every shipped cartridge; capcom signs off
+      on the final release shape and writes the milestone retro.
+    agents:
+      - publish-engineer
+      - cartridge-smith
+      - skill-creator-capcom
+    use_when: cutting a release, bumping versions, publishing to npm/npx

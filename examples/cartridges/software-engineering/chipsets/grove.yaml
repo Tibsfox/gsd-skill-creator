@@ -1,0 +1,48 @@
+namespace: software-engineering
+record_types:
+  - name: TheoremRecord
+    description: >-
+      A stated theorem and its status. Records the statement
+      (informal and formal), the assumptions, the proof
+      technique (induction, construction, contradiction,
+      reduction, mechanized), the proof artifact or sketch, and
+      links to any program it is about.
+
+  - name: ProofArtifact
+    description: >-
+      A machine-checkable or paper proof. Records the target
+      theorem, the system used (Coq, Lean, Isabelle, Agda, F*,
+      or pen-and-paper natural deduction), the source file or
+      script, the check status (accepted / rejected / unfinished),
+      and the axioms it depends on.
+
+  - name: TypeJudgment
+    description: >-
+      A typing derivation — Γ ⊢ e : τ. Records the context,
+      the expression, the type, the typing rules applied, and
+      the language or calculus the judgment lives in (STLC,
+      System F, λΠ, System Fω, Rust-like).
+
+  - name: ComplexityAnalysis
+    description: >-
+      A complexity argument for an algorithm or data structure.
+      Records the model of computation, the cost metric, the
+      tight upper and lower bounds (big-O / big-Omega /
+      big-Theta), amortized vs. worst case, and the proof or
+      adversary argument that supports each bound.
+
+  - name: LanguageSpec
+    description: >-
+      A specification of a programming language or calculus.
+      Records the grammar, the typing rules, the operational
+      or denotational semantics, the metatheoretic results
+      (progress, preservation, strong normalization, decidability
+      of type checking), and the reference implementation if any.
+
+  - name: LearningPathway
+    description: >-
+      A study plan toward a CS-theory goal. Records the
+      learner's starting point, the target competence, the
+      ordered list of textbooks / courses / problem sets, the
+      prerequisite graph, and the checkpoints where
+      understanding will be validated.

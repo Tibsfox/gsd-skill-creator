@@ -1,0 +1,99 @@
+namespace: housekeeping
+record_types:
+  - name: HousekeepingSweep
+    description: >-
+      One run of a scheduled or ad-hoc housekeeping sweep. Fields:
+      scope (paths walked), rules applied, findings (stale files,
+      gitignore drift, orphan dotfiles, untracked runtime state),
+      actions proposed, and the subset of actions actually taken
+      after human approval. Content-addressed so two sweeps of the
+      same scope can be diffed to see drift.
+
+  - name: StaleFileReport
+    description: >-
+      The output of a stale-file scan. Fields: match rule, file
+      list, last-modified timestamps, last git-blame age, whether
+      any code references the file, and a recommendation
+      (archive / ignore / promote). Explicitly not a deletion
+      authorization — deletions require a separate human-approved
+      action and the standing rule is archive, not delete.
+
+  - name: SnapshotRecord
+    description: >-
+      A consistent point-in-time snapshot of a tree. Fields:
+      scope (paths included), tier (hot/warm/cold/frozen), tool
+      used, content hash of the snapshot manifest, timestamp,
+      retention class, and pointer to the ArchiveEntry that
+      persists it in cold storage if applicable.
+
+  - name: ArchiveEntry
+    description: >-
+      A single cold-archive move. Fields: source path, target
+      storage, tool and version (tar/zstd/borg/restic), content
+      hash of the packed artifact, manifest of included files,
+      verification verdict, and the timestamp the live copy was
+      recycled. An ArchiveEntry without a green verification
+      verdict is never cited as a successful archive.
+
+  - name: DatasetLifecycleEvent
+    description: >-
+      A transition of a dataset between lifecycle states — raw,
+      curated, derived, archived. Fields: dataset id, from-state,
+      to-state, transformation applied (with tool and config
+      hash), source content hash, destination content hash, and
+      the timestamp. Walking the chain for a dataset reconstructs
+      its full provenance without needing conversation memory.
+
+  - name: DedupReport
+    description: >-
+      The output of a dedup scan. Fields: each collision set
+      with its content hash, the files in that set, their paths,
+      the proposed canonical location, and the justification.
+      Canonicalization is human-approved — the report is
+      evidence, not action.
+
+  - name: RetentionPolicy
+    description: >-
+      A declared retention policy for a namespace or path prefix.
+      Fields: scope, tier classification, retention duration per
+      tier, archive format, restore-drill cadence, and escalation
+      path for policy violations. Policies are versioned — a new
+      record supersedes the old without mutating it.
+
+  - name: RetentionAudit
+    description: >-
+      The output of a policy-compliance audit. Fields: scope,
+      RetentionPolicy version it was audited against, findings
+      (under-retention, over-retention, missing-policy), proposed
+      remediations (always archive, never delete), and the
+      audit verdict. Referenced by the retention-audit-team
+      when proposing remediations.
+
+  - name: RestoreDrillResult
+    description: >-
+      The outcome of a test-restore drill. Fields: ArchiveEntry
+      being tested, target environment, time-to-restore, integrity
+      verdict (content-hash match), any drift detected, and the
+      auditor sign-off. An ArchiveEntry's `verified` state is
+      conditional on having at least one green RestoreDrillResult
+      within its policy window.
+
+  - name: MediaMigration
+    description: >-
+      A migration of archived data between media or formats —
+      tar → zstd, borg-v1 → borg-v2, LTO → object storage,
+      deprecated codec → current. Fields: source ArchiveEntry,
+      destination ArchiveEntry, tool and version, format delta,
+      source content hash, destination content hash, and
+      verification verdict. Migrations are themselves reproducible
+      from this record.
+
+  - name: GroveActivityLog
+    description: >-
+      Append-only signed activity log for this namespace. Every
+      sweep, archive, snapshot, dedup, audit, restore drill, and
+      media migration emits one signed entry. Replaying a
+      project's custodial history means walking this log in
+      order and rehydrating the record graph — the same
+      content-addressed discipline the rest of the GSD grove
+      system uses.

@@ -1,0 +1,39 @@
+id: data-science
+name: Data Science
+version: 0.1.0
+author: tibsfox
+description: >-
+  A full cartridge for data science — the discipline of turning
+  raw data into decisions. Covers problem framing and success
+  metrics, data acquisition and ingestion, cleaning and validation,
+  exploratory data analysis, feature engineering, statistical
+  modeling, machine learning modeling, model evaluation and
+  validation, experimentation and A/B testing, data visualization
+  and storytelling, pipeline reproducibility, and ethics / privacy
+  / governance. Tooling-agnostic — works with Python, R, SQL, Julia,
+  or notebook-first workflows.
+trust: user
+provenance:
+  origin: scaffold
+  createdAt: 2026-04-14T19:35:20.603Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - examples/cartridges/systems-administration/cartridge.yaml
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - data-science
+    - statistics
+    - machine-learning
+    - analytics
+    - experimentation
+    - visualization
+    - reproducibility
+    - ethics

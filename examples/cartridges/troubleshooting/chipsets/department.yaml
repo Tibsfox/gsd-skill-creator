@@ -1,0 +1,367 @@
+skills:
+  problem-framing-and-symptom-capture:
+    domain: framing
+    description: >-
+      Turn a vague "it's broken" into a precise, falsifiable problem
+      statement. Capture what is observed vs. what is expected, when
+      and how often, environmental conditions, and any recent change.
+      Domain-agnostic — works for a leaking pipe, a failing server, a
+      misbehaving engine, or a team dynamic.
+    triggers:
+      - frame the problem
+      - what's actually broken
+      - capture symptoms
+      - define the issue
+      - expected vs observed
+      - problem statement
+      - it's broken
+    agent_affinity:
+      - troubleshoot-lead
+      - symptom-interviewer
+
+  divide-and-conquer-bisection:
+    domain: bisection
+    description: >-
+      Halve the search space at each step to localize a fault. Swap
+      known-good components, disable half the configuration, roll
+      back to a mid-point revision, or physically partition a
+      system into halves and test each. The canonical strategy when
+      the suspect set is large.
+    triggers:
+      - bisect
+      - narrow it down
+      - halve the search
+      - swap components
+      - git bisect
+      - binary search for fault
+      - isolate by halves
+    agent_affinity:
+      - comparative-analyst
+      - hypothesis-tester
+
+  five-whys-root-cause:
+    domain: root-cause
+    description: >-
+      Walk backward from a symptom through the causal chain until a
+      fixable upstream cause is reached — typically five levels deep.
+      Prevents "fix the symptom, ship the bug" by forcing the
+      question one more level down, and stops at the first cause
+      the team actually controls.
+    triggers:
+      - five whys
+      - root cause
+      - why did that happen
+      - underlying cause
+      - causal chain
+      - ask why again
+    agent_affinity:
+      - troubleshoot-lead
+      - incident-historian
+
+  hypothesis-and-test:
+    domain: hypothesis
+    description: >-
+      Apply the scientific method to faults — state a falsifiable
+      hypothesis, design the cheapest experiment that would
+      disprove it, run the experiment, record the result, update or
+      replace the hypothesis. Avoids the "keep changing things"
+      anti-pattern.
+    triggers:
+      - form a hypothesis
+      - test a theory
+      - falsify
+      - run an experiment
+      - scientific method
+      - what would disprove this
+    agent_affinity:
+      - hypothesis-tester
+      - troubleshoot-lead
+
+  observation-and-measurement:
+    domain: observation
+    description: >-
+      Choose the right instrument and read it correctly. Covers
+      multimeters, oscilloscopes, pressure gauges, thermal cameras,
+      log tails, profilers, stethoscopes, feeler gauges, and direct
+      sensory observation (sight, sound, smell, touch). The mantra:
+      measure, don't guess.
+    triggers:
+      - measure it
+      - what does the gauge say
+      - read the logs
+      - instrumentation
+      - multimeter
+      - oscilloscope
+      - profiler
+      - what do you see
+    agent_affinity:
+      - symptom-interviewer
+      - hypothesis-tester
+
+  reproducibility-and-isolation:
+    domain: reproducibility
+    description: >-
+      Get the failure to happen on demand. Strip variables until the
+      smallest set that still reproduces the fault is found.
+      Essential for any intermittent or context-sensitive problem —
+      an unreproducible fault cannot be fixed with confidence.
+    triggers:
+      - reproduce the issue
+      - make it happen
+      - minimal reproduction
+      - strip variables
+      - isolate the cause
+      - reliable repro
+      - steps to reproduce
+    agent_affinity:
+      - hypothesis-tester
+
+  fault-tree-and-failure-mode:
+    domain: fault-tree
+    description: >-
+      Enumerate every plausible failure mode and organize them as a
+      fault tree — root symptom at the top, OR / AND branches
+      downward to every conceivable cause. Drives systematic
+      coverage where intuition alone would miss a branch. Pairs
+      naturally with FMEA when the system is safety-critical.
+    triggers:
+      - fault tree
+      - failure mode
+      - fmea
+      - fta
+      - enumerate causes
+      - all possible reasons
+      - systematic coverage
+    agent_affinity:
+      - comparative-analyst
+      - troubleshoot-lead
+
+  comparative-diagnosis:
+    domain: comparative
+    description: >-
+      Diagnose by comparing the suspect system to a known-good
+      reference. Side-by-side readings, diff of configs, twin
+      machines, A/B swaps, or a peer unit in the same fleet. Surfaces
+      differences that are invisible when only the broken unit is in
+      view.
+    triggers:
+      - compare to a working one
+      - known good reference
+      - diff the configs
+      - side by side
+      - swap and see
+      - ab test the fix
+    agent_affinity:
+      - comparative-analyst
+
+  intermittent-and-transient-faults:
+    domain: intermittent
+    description: >-
+      Hunt the worst category of fault — the one that won't repeat
+      on demand. Covers heisenbugs, thermal-dependent faults, flaky
+      tests, loose connections, environmental triggers, and the
+      discipline of long-duration soak testing to force a transient
+      into the open.
+    triggers:
+      - intermittent
+      - only sometimes
+      - flaky
+      - heisenbug
+      - can't reproduce
+      - thermal fault
+      - loose connection
+      - soak test
+    agent_affinity:
+      - hypothesis-tester
+      - comparative-analyst
+
+  safe-state-and-containment:
+    domain: containment
+    description: >-
+      Stop the bleeding before diagnosing. Put the system in a safe
+      state, contain collateral damage, preserve forensic evidence,
+      and communicate the impact radius. Diagnosis and repair are
+      always secondary to preventing harm and data loss.
+    triggers:
+      - safe state
+      - contain the damage
+      - preserve evidence
+      - stop the bleeding
+      - shut it down
+      - safe mode
+      - isolate from production
+    agent_affinity:
+      - troubleshoot-lead
+
+  post-incident-analysis:
+    domain: post-incident
+    description: >-
+      After stabilization, reconstruct the timeline, identify
+      contributing factors, distinguish symptom from cause, and
+      produce a blameless post-incident report with concrete
+      preventive actions and owners. The feedback loop that turns
+      an incident into institutional learning.
+    triggers:
+      - post incident
+      - postmortem
+      - blameless review
+      - incident report
+      - timeline reconstruction
+      - lessons learned
+      - preventive actions
+    agent_affinity:
+      - incident-historian
+      - troubleshoot-lead
+
+  mentoring-and-handoff:
+    domain: handoff
+    description: >-
+      Teach another troubleshooter to finish the job. Explain the
+      current hypothesis, what has been ruled out, what measurements
+      were taken, and why. Writes handoff notes that let a fresh
+      pair of eyes continue without re-running the ruled-out
+      branches. Critical for long-running or shift-based diagnosis.
+    triggers:
+      - hand off
+      - brief the next shift
+      - what have you tried
+      - teach me to debug this
+      - troubleshooting notes
+      - walk me through it
+    agent_affinity:
+      - incident-historian
+      - troubleshoot-lead
+
+agents:
+  topology: router
+  router_agent: troubleshoot-lead
+  agents:
+    - name: troubleshoot-lead
+      role: >-
+        Opus-class agent that owns the shape of the investigation —
+        framing, strategy selection (bisection vs. fault tree vs.
+        hypothesis), containment decisions, and routing to the other
+        troubleshooting agents. Acts as capcom for the cartridge and
+        makes the stop / keep-going call.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+      is_capcom: true
+
+    - name: symptom-interviewer
+      role: >-
+        Sonnet agent that gathers observations from the reporter,
+        the instruments, and the environment. Asks the "when, how
+        often, what changed, what does it look / sound / smell
+        like" questions and turns fuzzy reports into structured
+        symptom records.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+
+    - name: hypothesis-tester
+      role: >-
+        Opus-class agent that designs and runs experiments.
+        Formulates falsifiable hypotheses, picks the cheapest test
+        that would disprove each, executes it, records the
+        outcome, and feeds the result back into the active
+        hypothesis set.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+    - name: comparative-analyst
+      role: >-
+        Sonnet agent that runs bisection, A/B swaps, and
+        comparisons against a known-good reference. Mechanical
+        discipline over creative leaps — its job is to halve the
+        search space, not to guess.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+
+    - name: incident-historian
+      role: >-
+        Sonnet agent that keeps the investigation diary —
+        timeline, hypotheses considered and ruled out, measurements
+        taken, containment actions, and the eventual post-incident
+        report. Carries institutional memory forward.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+
+teams:
+  troubleshoot-triage-team:
+    description: >-
+      First-response triage on a live fault. Lead frames the problem
+      and makes the containment call, symptom-interviewer captures
+      what is actually happening, historian opens the incident
+      record so nothing is lost during the rush.
+    agents:
+      - troubleshoot-lead
+      - symptom-interviewer
+      - incident-historian
+    use_when: >-
+      a failure has just been reported and the scope, severity, and
+      containment need are still unknown
+
+  troubleshoot-deep-dive-team:
+    description: >-
+      Structured deep dive on a hard fault. Lead picks the
+      strategy, hypothesis-tester runs experiments,
+      comparative-analyst handles the bisection and known-good
+      comparisons. Moves methodically when intuition has failed.
+    agents:
+      - troubleshoot-lead
+      - hypothesis-tester
+      - comparative-analyst
+    use_when: >-
+      the fault has been reproduced but the root cause is not yet
+      localized and guessing has stopped working
+
+  troubleshoot-intermittent-team:
+    description: >-
+      Hunt an intermittent or environmentally triggered fault.
+      Hypothesis-tester designs the soak / stress test,
+      comparative-analyst runs same-fleet comparisons, historian
+      logs every occurrence so the pattern can be seen across time.
+    agents:
+      - hypothesis-tester
+      - comparative-analyst
+      - incident-historian
+    use_when: >-
+      the fault will not reproduce on demand and the investigation
+      needs long-duration or environmental evidence
+
+  troubleshoot-postmortem-team:
+    description: >-
+      Blameless post-incident review after stabilization. Historian
+      drives the timeline, lead ensures cause vs. symptom is kept
+      straight, hypothesis-tester confirms proposed preventive
+      actions would actually catch a recurrence.
+    agents:
+      - incident-historian
+      - troubleshoot-lead
+      - hypothesis-tester
+    use_when: >-
+      the system is stable and the team is ready to extract
+      institutional learning from the incident

@@ -1,0 +1,120 @@
+namespace: get-shit-done
+record_types:
+  - name: ProjectRoadmap
+    description: >-
+      A snapshot of ROADMAP.md at a point in time. Captures the
+      phase graph, requirement-to-phase mapping, success criteria
+      per phase, dependency edges, and the coverage-validation
+      checklist. The content address is the hash of the serialized
+      roadmap; updates append a new record and leave the old one
+      queryable so `/gsd milestone-summary` can diff roadmaps
+      across a milestone boundary.
+
+  - name: MilestoneRecord
+    description: >-
+      A milestone definition and its lifecycle events. Fields:
+      milestone id, parent project, phase set, success criteria,
+      open/close timestamps, ship verdict, and pointers to the
+      SessionReport and VerificationResult records produced
+      during closeout. Used by `/gsd audit-milestone` and
+      `/gsd milestone-summary`.
+
+  - name: PhasePlan
+    description: >-
+      A frozen PLAN.md for a single phase. Captures task
+      breakdown, dependency tree, files-modified contract,
+      deviation-handling rules, goal-backward gate inputs, and
+      the plan-checker verdict at the moment the plan was
+      accepted. Every execution run links back to the PhasePlan
+      it is executing so deviations can be reconciled.
+
+  - name: PhaseResearch
+    description: >-
+      The RESEARCH.md output of `/gsd research-phase`, plus its
+      source material manifest — URLs fetched, docs grepped,
+      subagent fleet composition, and the synthesizer verdict.
+      Referenced by PhasePlan via content address so a plan can
+      cite the exact research state it was built on, even after
+      new research runs have landed.
+
+  - name: PhaseAssumptions
+    description: >-
+      The structured assumption list produced by
+      gsd-assumptions-analyzer during `/gsd discuss-phase`. Each
+      assumption has an id, evidence chain, confidence level,
+      and a resolution status (open / confirmed / invalidated).
+      The planner consumes the confirmed set; the verifier
+      re-checks the invalidated set against shipped code.
+
+  - name: ExecutionWave
+    description: >-
+      One atomic wave commit during phase execution. Captures
+      the wave number, the git commit sha, the files actually
+      modified (reconciled against the PhasePlan files-modified
+      contract), the test delta, any deviation escalations that
+      fired, and the checkpoint state written to `.planning/`.
+      Replaying an ExecutionWave chain reconstructs the exact
+      execution path of a phase.
+
+  - name: VerificationResult
+    description: >-
+      The output of `/gsd verify-work` or `/gsd validate-phase`.
+      Captures goal-backward verdict (pass / fail / partial),
+      the phase goal being checked, the evidence chain, any
+      gaps found against success criteria, and pointers to the
+      PhasePlan and ExecutionWave set that were verified.
+      MilestoneRecord closeout requires a green VerificationResult
+      for every phase in the milestone.
+
+  - name: DebugSession
+    description: >-
+      A scientific-method debug investigation. Fields: hypothesis
+      chain, experiments run, observations, refinements, final
+      root cause, fix commits, and the regression-guard tests
+      added. Durable so a future occurrence of the same symptom
+      can be traced to the prior session via multi-hop retrieval
+      instead of re-investigated from scratch.
+
+  - name: BacklogEntry
+    description: >-
+      A single backlog or todo item with provenance. Fields:
+      title, body, origin (which skill / phase / session added
+      it), created-at, parent phase (if any), priority, and
+      current status. `/gsd review-backlog` replays the open
+      set; `/gsd plant-seed` creates an entry explicitly for
+      future retrieval.
+
+  - name: SessionReport
+    description: >-
+      The output of `/gsd session-report`, `/gsd pause-work`,
+      or `/gsd thread`. Captures what the session did, what
+      moved in the repo, what's still open, and the handoff
+      context the next session needs to pick up without
+      re-reading the conversation. Every other record type
+      in this namespace can link back to the SessionReport
+      that produced it.
+
+  - name: UIReview
+    description: >-
+      The output of `/gsd ui-review` and the 6-pillar visual
+      audit. Captures UI-SPEC contract references, audit
+      verdicts per pillar, BLOCK/FLAG/PASS status, screenshot
+      hashes, and remediation items. Paired with a PhasePlan
+      when the phase is a UI phase.
+
+  - name: CodebaseIntelSnapshot
+    description: >-
+      The output of `/gsd map-codebase` — a structured intel
+      pack covering tech stack, architecture, quality signals,
+      and concerns. Content-addressed so the planner can cite
+      the exact repo state it was planning against, and so
+      drift between snapshots is detectable across milestones.
+
+  - name: GroveActivityLog
+    description: >-
+      The append-only activity log for this namespace. Every
+      record creation, link, export, and migration emits one
+      entry, signed by the actor (agent or human). This is the
+      meta-record that makes replay possible — rehydrating a
+      project from grove means walking the activity log in
+      order and reconstructing the record graph.

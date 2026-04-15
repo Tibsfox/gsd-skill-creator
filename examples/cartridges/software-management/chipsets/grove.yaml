@@ -1,0 +1,48 @@
+namespace: software-management
+record_types:
+  - name: CodebaseMap
+    description: >-
+      A structured inventory of a codebase. Records languages,
+      top-level modules, entry points, build targets, test
+      surfaces, generated code, vendored dependencies, and
+      lines-of-code per module. The durable artifact produced
+      by an onboarding or ramp-up pass.
+
+  - name: ArchitectureExtraction
+    description: >-
+      The de facto architecture derived from existing code —
+      layers, modules, bounded contexts, shared kernels, and
+      their implicit contracts. Notes divergences from any
+      documented design so the gap is visible.
+
+  - name: DependencyGraph
+    description: >-
+      A snapshot of the dependency graph. Records internal
+      imports, external packages, version pins, cycles, orphan
+      modules, and high-fan-in hotspots. Timestamped so drift
+      can be measured across snapshots.
+
+  - name: ReviewFinding
+    description: >-
+      A single code-review observation. Records the file, line
+      range, severity (blocking / non-blocking / nit), theme
+      (correctness, design, perf, security, style), the
+      suggested change, and whether it was accepted, deferred,
+      or rejected by the author.
+
+  - name: PortingTask
+    description: >-
+      A planned or in-flight port / translation effort. Records
+      source platform or language, target, scope, shared
+      behavioral test suite, correspondence table, current
+      cutover state, and the regression plan against the
+      original.
+
+  - name: DeploymentRecord
+    description: >-
+      A production deployment event. Records artifact version,
+      source commit SHA, rollout strategy (canary / blue-green /
+      rolling / flag), percentage steps, bake times, guardrail
+      metrics observed, success / rollback verdict, deploy
+      engineer, and links to the change record and any
+      post-deploy incident.

@@ -1,0 +1,371 @@
+skills:
+  requirements-and-user-stories:
+    domain: requirements
+    description: >-
+      Turn a product idea or bug report into concrete, implementable
+      work items. Write user stories with acceptance criteria, split
+      epics into shippable increments, surface open questions
+      before code is written, and keep the backlog honest about
+      what is actually ready to pick up.
+    triggers:
+      - user story
+      - acceptance criteria
+      - backlog grooming
+      - story points
+      - slice the epic
+      - ready for dev
+      - requirements clarification
+    agent_affinity:
+      - sd-tech-lead
+      - sd-developer
+
+  design-and-api-shaping:
+    domain: design
+    description: >-
+      Shape module boundaries, data models, and public APIs before
+      writing the implementation. Covers function signatures, type
+      contracts, error models, naming, and the design-doc or ADR
+      that records the decision. Design lives on paper long
+      enough to get the shape right.
+    triggers:
+      - api design
+      - design doc
+      - adr
+      - type contract
+      - module boundary
+      - interface shape
+      - before i code this
+    agent_affinity:
+      - sd-tech-lead
+      - sd-reviewer
+
+  implementation-and-coding:
+    domain: implementation
+    description: >-
+      Write the code. Covers idiomatic style for the target
+      language, error handling at boundaries, avoiding premature
+      abstraction, small commits, and the discipline of making the
+      change easy before making the easy change. The daily work of
+      turning a design into running software.
+    triggers:
+      - write the code
+      - implement this
+      - add the function
+      - fill in the stub
+      - make it work
+      - code the feature
+    agent_affinity:
+      - sd-developer
+
+  version-control-workflow:
+    domain: version-control
+    description: >-
+      Operate git (or equivalent) as a first-class engineering
+      tool. Covers branching strategy, conventional commits, clean
+      history via rebase / squash, resolving conflicts on intent
+      not just text, writing commit messages that explain the
+      why, and opening pull requests that a reviewer can actually
+      land.
+    triggers:
+      - git workflow
+      - branch strategy
+      - rebase
+      - merge conflict
+      - commit message
+      - pull request
+      - clean history
+    agent_affinity:
+      - sd-developer
+      - sd-tech-lead
+
+  automated-testing:
+    domain: testing
+    description: >-
+      Write and maintain automated tests — unit, integration,
+      end-to-end, property-based, and snapshot. Pick the right
+      level for the risk, keep tests fast and deterministic, and
+      treat a failing test as a first-class bug. The safety net
+      that makes refactoring possible.
+    triggers:
+      - write a test
+      - unit test
+      - integration test
+      - e2e test
+      - property based
+      - test coverage
+      - flaky test
+    agent_affinity:
+      - sd-test-engineer
+      - sd-developer
+
+  code-review:
+    domain: review
+    description: >-
+      Review pull requests with discipline — correctness first,
+      design next, style last. Covers leaving feedback that is
+      specific and kind, distinguishing blocking from
+      nit-level, and the author side of receiving review without
+      defensiveness. A review is a conversation, not a gate.
+    triggers:
+      - code review
+      - review this pr
+      - leave feedback
+      - request changes
+      - approve pr
+      - review comments
+    agent_affinity:
+      - sd-reviewer
+      - sd-tech-lead
+
+  refactoring-and-tech-debt:
+    domain: refactoring
+    description: >-
+      Change the shape of existing code without changing its
+      behavior. Small, test-backed steps — rename, extract,
+      inline, move — applied continuously so tech debt does not
+      compound. Knows when to refactor in place vs. when to open
+      a dedicated cleanup PR.
+    triggers:
+      - refactor
+      - clean up the code
+      - tech debt
+      - rename
+      - extract function
+      - simplify this
+      - make it easier to change
+    agent_affinity:
+      - sd-developer
+      - sd-reviewer
+
+  debugging-and-diagnosis:
+    domain: debugging
+    description: >-
+      Locate and fix defects in running code. Covers reading
+      stack traces, minimal reproduction, print / logger / debugger
+      discipline, bisecting regressions with git, and writing a
+      failing test before the fix so the bug cannot return
+      silently.
+    triggers:
+      - debug this
+      - fix the bug
+      - stack trace
+      - repro steps
+      - git bisect
+      - regression test
+      - why is this broken
+    agent_affinity:
+      - sd-developer
+      - sd-tech-lead
+
+  build-and-ci:
+    domain: build
+    description: >-
+      Own the build system and continuous integration pipeline.
+      Covers reproducible builds, dependency pinning, cache
+      strategy, CI stage decomposition, fast feedback on PRs,
+      and keeping a green main branch as a team invariant.
+    triggers:
+      - build config
+      - ci pipeline
+      - github actions
+      - reproducible build
+      - dependency lock
+      - cache ci
+      - green main
+    agent_affinity:
+      - sd-release-engineer
+      - sd-developer
+
+  release-and-deploy:
+    domain: release
+    description: >-
+      Cut releases and get them to users or servers. Covers
+      semantic versioning, changelogs, release notes, artifact
+      packaging, deploy strategy (blue-green, canary, rolling),
+      rollback plans, and the post-deploy verification checklist.
+    triggers:
+      - cut a release
+      - ship it
+      - semver bump
+      - changelog
+      - deploy to prod
+      - rollback plan
+      - canary
+    agent_affinity:
+      - sd-release-engineer
+      - sd-tech-lead
+
+  documentation-and-knowledge:
+    domain: documentation
+    description: >-
+      Write and maintain the documentation that outlives any one
+      engineer — READMEs, API docs, architecture decision records,
+      runbooks, and inline comments that explain intent when it
+      is non-obvious. Defaults to no comment unless the why would
+      surprise a reader.
+    triggers:
+      - write docs
+      - readme
+      - api docs
+      - adr
+      - runbook
+      - update documentation
+      - inline comment
+    agent_affinity:
+      - sd-developer
+      - sd-tech-lead
+
+  performance-and-profiling:
+    domain: performance
+    description: >-
+      Measure before optimizing. Covers microbenchmarks,
+      profilers (CPU, allocation, IO), flame graphs, identifying
+      the actual hot path, and optimizing only what the data
+      justifies. Documents the before / after numbers so the win
+      is auditable.
+    triggers:
+      - profile this
+      - benchmark
+      - hot path
+      - flame graph
+      - optimize performance
+      - memory usage
+      - measure first
+    agent_affinity:
+      - sd-developer
+      - sd-tech-lead
+
+agents:
+  topology: router
+  router_agent: sd-tech-lead
+  agents:
+    - name: sd-tech-lead
+      role: >-
+        Opus-class agent that owns technical direction for the
+        cartridge. Makes design and architecture decisions, routes
+        work to the other sd agents, arbitrates review
+        disagreements, and acts as capcom. The single technical
+        voice that approves merging to main and cutting releases.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+        - Bash
+      is_capcom: true
+
+    - name: sd-developer
+      role: >-
+        Sonnet agent that does the everyday implementation work —
+        writing features, fixing bugs, refactoring, updating tests
+        and docs as part of the change. The hands that produce
+        most of the diff.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+    - name: sd-reviewer
+      role: >-
+        Opus-class agent that reviews pull requests for
+        correctness, design, and long-term maintainability.
+        Distinguishes blocking from nit, leaves specific and kind
+        feedback, and gives an explicit approve / request-changes
+        verdict.
+      model: opus
+      tools:
+        - Read
+        - Grep
+        - Glob
+
+    - name: sd-test-engineer
+      role: >-
+        Sonnet agent that owns the test suite — writes new unit
+        and integration tests, keeps the suite fast and
+        deterministic, hunts flaky tests, and enforces the rule
+        that every bug fix ships with a failing-then-passing
+        regression test.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+
+    - name: sd-release-engineer
+      role: >-
+        Sonnet agent that owns build, CI, and release. Keeps the
+        pipeline reproducible and fast, cuts versioned releases,
+        writes changelogs, manages rollback plans, and runs the
+        post-deploy verification checklist.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+
+teams:
+  sd-feature-team:
+    description: >-
+      Ship a new feature end-to-end. Tech lead shapes the design,
+      developer implements, test engineer writes the suite that
+      protects it, reviewer lands the PR.
+    agents:
+      - sd-tech-lead
+      - sd-developer
+      - sd-test-engineer
+      - sd-reviewer
+    use_when: >-
+      building a new user-facing feature or substantial
+      capability that will need design, implementation, and
+      tests together
+
+  sd-review-team:
+    description: >-
+      Structured code review on a non-trivial PR. Reviewer owns
+      the review, tech lead approves design changes, developer
+      responds to feedback. A conversation, not a gate.
+    agents:
+      - sd-reviewer
+      - sd-tech-lead
+      - sd-developer
+    use_when: >-
+      a PR touches shared architecture, crosses module
+      boundaries, or is too large for a single reviewer
+
+  sd-bugfix-team:
+    description: >-
+      Diagnose and fix a defect. Developer reproduces and
+      bisects, test engineer writes the failing regression test
+      that would have caught it, tech lead approves the scope of
+      the fix so it stays minimal.
+    agents:
+      - sd-developer
+      - sd-test-engineer
+      - sd-tech-lead
+    use_when: >-
+      a bug report is confirmed and the team is ready to
+      reproduce, regression-test, and fix it
+
+  sd-release-team:
+    description: >-
+      Cut and ship a release. Release engineer drives the
+      pipeline and changelog, tech lead signs off on scope and
+      versioning, test engineer confirms the suite is green and
+      the smoke tests pass on the release candidate.
+    agents:
+      - sd-release-engineer
+      - sd-tech-lead
+      - sd-test-engineer
+    use_when: >-
+      cutting a tagged release, preparing a deploy, or
+      preparing a rollback after a bad release

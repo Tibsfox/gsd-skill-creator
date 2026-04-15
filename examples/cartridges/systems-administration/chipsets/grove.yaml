@@ -1,0 +1,41 @@
+namespace: systems-administration
+record_types:
+  - name: OpsRun
+    description: >-
+      A single operational action taken on a host — package upgrade,
+      service restart, user change, mount edit. Captures actor, target
+      host, command, exit code, timestamp, and any rollback step that
+      was rehearsed.
+
+  - name: IncidentTimeline
+    description: >-
+      An ordered sequence of events during a live incident. Each entry
+      has a timestamp, observation source (journal, metric, human),
+      severity, and the action (if any) that was taken in response.
+
+  - name: RunbookEntry
+    description: >-
+      A verified operational procedure. Records preconditions, steps,
+      expected outcomes, rollback plan, last-verified date, and the
+      identity of the sysadmin who last walked it through on a staging
+      host.
+
+  - name: BackupVerification
+    description: >-
+      The outcome of a restore drill. Records scope (hosts/paths),
+      backup generation restored, achieved RPO and RTO, any integrity
+      mismatches, and whether the restored state passed the hardening
+      baseline.
+
+  - name: HardeningBaseline
+    description: >-
+      A snapshot of the host security baseline — SSH config, firewall
+      rules, SELinux/AppArmor profiles, sudoers, auditd rules, package
+      hold list. Used to detect drift and drive hardening work.
+
+  - name: ChangeRecord
+    description: >-
+      Change-management metadata for a planned operational action —
+      scope, risk class, approver, change window, rollback plan,
+      post-change verification checklist, and link to the OpsRun
+      that executed it.
