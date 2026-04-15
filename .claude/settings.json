@@ -134,6 +134,36 @@
         ]
       }
     ],
+    "PermissionDenied": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/permission-recovery.cjs"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/notification-logger.cjs"
+          }
+        ]
+      }
+    ],
+    "WorktreeCreate": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/worktree-init.cjs"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
