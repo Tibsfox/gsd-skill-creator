@@ -61,13 +61,9 @@ GUPP operates between the orchestrator's structural gates. Within a phase, withi
 
 The watchdog restart mechanism has strict limits to prevent infinite restart loops:
 
-| Limit | Value |
-|-------|-------|
-| Max restart threshold | 1800s (30 min, hard cap) |
-| Max restarts per bead | 3 |
-| Restart cooldown | 60s minimum between consecutive restarts |
-
-After 3 restarts for the same work item, escalation to human is mandatory.
+- **Max restart threshold:** 1800s (30 min) — hard cap, cannot be configured higher.
+- **Max restarts per bead:** 3 — after 3 restarts for the same work item, escalation to human is mandatory.
+- **Restart cooldown:** 60s minimum between consecutive restarts for the same agent.
 
 ### Human Escalation
 
