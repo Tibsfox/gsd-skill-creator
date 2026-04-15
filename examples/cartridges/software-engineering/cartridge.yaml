@@ -1,0 +1,45 @@
+id: software-engineering
+name: Software Engineering
+version: 0.1.0
+author: tibsfox
+description: >-
+  A full cartridge for software engineering as a theoretical and
+  mathematical discipline — the computer-science foundations
+  underneath daily programming work. Covers discrete mathematics,
+  formal logic and proof, computability and complexity, automata
+  and formal languages, type theory and type systems, lambda
+  calculus and functional foundations, program semantics
+  (operational, denotational, axiomatic), algorithms and data
+  structures with correctness and complexity analysis, programming
+  language theory (syntax, parsing, compilers), formal methods and
+  machine-checked verification (Hoare logic, model checking, proof
+  assistants), CS curriculum and learning pathways, and category
+  theory for computer science. Theory-first, language-specific
+  where it matters, education-aware throughout. Pairs with
+  `software-development` (applied) and `software-management`
+  (operational).
+trust: user
+provenance:
+  origin: scaffold
+  createdAt: 2026-04-14T19:31:45.846Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - examples/cartridges/systems-administration/cartridge.yaml
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - software-engineering
+    - computer-science
+    - theory
+    - formal-methods
+    - type-theory
+    - lambda-calculus
+    - curriculum
+    - proof

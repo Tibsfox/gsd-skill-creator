@@ -1,0 +1,37 @@
+id: systems-operations
+name: Systems Operations
+version: 0.1.0
+author: tibsfox
+description: >-
+  A full cartridge for production systems operations and SRE-adjacent
+  runtime work. Covers incident command and live response, release and
+  deployment orchestration, change management and CAB workflow, SLO and
+  error-budget accounting, observability pipeline care, alert triage and
+  tuning, runbook execution, capacity and load management, configuration
+  drift control, chaos and game-day exercises, operational readiness
+  review, and blameless postmortems. Composes with systems-administration
+  (host-level surface), security (authz and audit), and cloud-systems
+  (infra provisioning) via the grove layer.
+trust: user
+provenance:
+  origin: scaffold
+  createdAt: 2026-04-14T19:00:00Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - examples/cartridges/systems-administration/cartridge.yaml
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - systems-operations
+    - sysops
+    - sre
+    - incident-response
+    - release-management
+    - observability

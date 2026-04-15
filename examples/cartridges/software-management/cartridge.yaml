@@ -1,0 +1,41 @@
+id: software-management
+name: Software Management
+version: 0.1.0
+author: tibsfox
+description: >-
+  A full cartridge for software management — the discipline of
+  understanding, reviewing, moving, and shipping existing codebases
+  rather than writing new ones from scratch. Covers codebase mapping
+  and inventory, architecture extraction, dependency graph analysis,
+  code review at scale, static analysis and linting, code porting
+  across platforms, language translation and rewrite, API surface
+  diffing, production deployment orchestration, rollout strategy
+  (canary / blue-green / feature flags), incident rollback and
+  recovery, and post-deploy observability. Pairs with
+  `software-development` (the writing side) and `troubleshooting`
+  (the diagnosis side).
+trust: user
+provenance:
+  origin: scaffold
+  createdAt: 2026-04-14T19:27:45.167Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - examples/cartridges/systems-administration/cartridge.yaml
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - software-management
+    - code-mapping
+    - code-review
+    - porting
+    - translation
+    - deployment
+    - rollback
+    - observability

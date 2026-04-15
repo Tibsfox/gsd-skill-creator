@@ -1,0 +1,47 @@
+namespace: troubleshooting
+record_types:
+  - name: SymptomReport
+    description: >-
+      A structured record of an observed fault. Captures what is
+      seen vs. expected, when and how often, environmental
+      conditions, reporter identity, recent changes, and any
+      sensory notes (sight, sound, smell, touch, taste where safe).
+      Domain-agnostic — works for any observable system.
+
+  - name: HypothesisTest
+    description: >-
+      A single scientific-method step in an investigation. Records
+      the falsifiable hypothesis, the cheapest experiment that
+      would disprove it, the procedure run, the measurement taken,
+      the outcome, and whether the hypothesis survived or was
+      retired.
+
+  - name: BisectionTrace
+    description: >-
+      A trace of divide-and-conquer narrowing. Records the full
+      suspect set, each halving step, which half was exonerated,
+      what instrument or swap was used to decide, and the final
+      localized element.
+
+  - name: FaultTreeNode
+    description: >-
+      One node in a fault tree — the top event or a contributing
+      cause. Records parent node, AND / OR gate type, children,
+      current status (unexplored / ruled-out / confirmed), and the
+      evidence that moved its status.
+
+  - name: RootCauseFinding
+    description: >-
+      The durable outcome of a five-whys or equivalent analysis.
+      Records the observed symptom, the causal chain back to a
+      fixable upstream cause, the confidence level, the corrective
+      action, and links to any preventive action on other systems
+      that share the same cause.
+
+  - name: PostIncidentReport
+    description: >-
+      A blameless post-incident writeup. Records the timeline,
+      contributing factors, detection and response delays,
+      distinguishes symptom from cause, lists preventive actions
+      with owners and due dates, and links back to the triggering
+      SymptomReport and the RootCauseFinding that closed it.

@@ -1,0 +1,32 @@
+id: systems-administration
+name: Systems Administration
+version: 0.1.0
+author: tibsfox
+description: >-
+  A full cartridge for Linux/Unix systems administration. Covers the daily
+  surface area of a working sysadmin — users and access, packages and
+  patches, services, filesystems and storage, networking and firewall,
+  backup and restore, logging and audit, monitoring, scheduling, hardening,
+  incident triage, and capacity planning. Built to compose with other
+  cartridges (security, networking, cloud-systems) via the grove layer.
+trust: user
+provenance:
+  origin: scaffold
+  createdAt: 2026-04-14T18:00:00Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - examples/cartridges/cartridge-forge/chipsets/department.yaml
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - systems-administration
+    - sysadmin
+    - linux
+    - operations

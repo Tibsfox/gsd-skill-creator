@@ -1,0 +1,386 @@
+skills:
+  routing-and-switching:
+    domain: routing
+    description: >-
+      Operate the L2/L3 fabric — OSPF and IS-IS interior routing, static
+      routes, VLAN and trunk configuration, spanning-tree topology,
+      link aggregation, and VRF separation. Covers adds, moves, and
+      changes on router and switch configurations with rollback discipline.
+    triggers:
+      - ospf
+      - isis
+      - static route
+      - vlan
+      - trunk port
+      - spanning tree
+      - lacp
+      - vrf
+      - routing table
+    agent_affinity:
+      - netops-engineer
+      - netops-architect
+
+  bgp-and-peering:
+    domain: bgp
+    description: >-
+      Own external and internal BGP — session health, route policy,
+      prefix filters, AS-path filters, MED and local-preference tuning,
+      and communities. Drives peering relationships with transit
+      providers, peers, and route servers. Enforces RPKI validation
+      and max-prefix safeties.
+    triggers:
+      - bgp session
+      - ebgp
+      - ibgp
+      - peering
+      - route map
+      - prefix filter
+      - rpki
+      - looking glass
+      - as path
+    agent_affinity:
+      - netops-architect
+      - netops-engineer
+
+  firewall-and-acl-ops:
+    domain: firewall
+    description: >-
+      Operate network-edge firewalls and ACLs — zone policy,
+      stateful inspection, NAT, and deny/permit lists on routers and
+      switches. Distinct from host firewalls (sysadmin territory) —
+      this is the fabric-level policy that sits in front of hosts.
+    triggers:
+      - firewall rule
+      - acl
+      - zone policy
+      - nat rule
+      - deny list
+      - permit list
+      - packet filter
+      - edge firewall
+    agent_affinity:
+      - netops-engineer
+      - netops-security-officer
+
+  load-balancer-operations:
+    domain: loadbalancer
+    description: >-
+      Run L4 and L7 load balancers — VIPs, pool members, health checks,
+      persistence, TLS termination, certificate rotation, and policy
+      routing. Covers hardware (F5, A10), cloud (ALB/NLB, GCLB), and
+      software (haproxy, envoy) balancers with the same operational grammar.
+    triggers:
+      - vip
+      - load balancer
+      - health check
+      - pool member
+      - tls termination
+      - haproxy
+      - envoy
+      - f5
+      - alb
+    agent_affinity:
+      - netops-engineer
+      - netops-architect
+
+  vpn-and-tunneling:
+    domain: vpn
+    description: >-
+      Operate site-to-site and remote-access VPNs — IPsec tunnels,
+      WireGuard peers, SSL/TLS VPN, GRE, and VXLAN overlays. Covers
+      tunnel bring-up, rekeying, MTU/MSS fitting, and troubleshooting
+      Phase 1 / Phase 2 failures.
+    triggers:
+      - ipsec tunnel
+      - wireguard
+      - site to site vpn
+      - remote access vpn
+      - gre tunnel
+      - vxlan
+      - tunnel down
+      - rekey
+    agent_affinity:
+      - netops-engineer
+      - netops-security-officer
+
+  dns-operations:
+    domain: dns
+    description: >-
+      Operate authoritative and recursive DNS — zone files, record
+      management, delegation, DNSSEC signing and key rollover, anycast
+      configuration, and RPZ policy. Owns zone-change discipline:
+      every change is version-controlled with rollback in seconds.
+    triggers:
+      - dns zone
+      - dns record
+      - dnssec
+      - ksk rollover
+      - zsk rollover
+      - authoritative dns
+      - recursive dns
+      - rpz
+    agent_affinity:
+      - netops-engineer
+      - netops-security-officer
+
+  ipam-and-addressing:
+    domain: ipam
+    description: >-
+      Manage IPv4 and IPv6 allocation — prefix assignment, subnet
+      planning, reservation registries, and reverse-DNS alignment.
+      Enforces the rule that no IP is assigned outside the IPAM of
+      record; ad-hoc allocations create drift that kills audits.
+    triggers:
+      - ip allocation
+      - subnet planning
+      - prefix assignment
+      - ipam
+      - ipv6 rollout
+      - reverse dns
+      - address reclaim
+    agent_affinity:
+      - netops-engineer
+      - netops-architect
+
+  network-monitoring-and-telemetry:
+    domain: telemetry
+    description: >-
+      Collect and analyze network telemetry — SNMP, streaming
+      telemetry (gNMI, OpenConfig), NetFlow/sFlow/IPFIX, syslog, and
+      trap handling. Feeds the NMS, the traffic-analysis stack, and
+      the alerting layer. Owns the collector health checks.
+    triggers:
+      - snmp poll
+      - streaming telemetry
+      - gnmi
+      - netflow
+      - sflow
+      - ipfix
+      - syslog
+      - nms
+      - interface counters
+    agent_affinity:
+      - netops-monitoring-engineer
+      - netops-engineer
+
+  ddos-mitigation:
+    domain: ddos
+    description: >-
+      Detect and mitigate volumetric and application-layer DDoS —
+      scrubbing center failover, BGP flowspec announcement, rate
+      limiting at the edge, anycast absorption, and upstream ACL
+      requests. Owns the decision to null-route a target versus
+      scrub in place.
+    triggers:
+      - ddos attack
+      - volumetric attack
+      - flowspec
+      - rtbh
+      - null route
+      - scrubbing center
+      - rate limit edge
+      - mitigation playbook
+    agent_affinity:
+      - netops-security-officer
+      - netops-incident-responder
+
+  circuit-and-carrier-management:
+    domain: circuit
+    description: >-
+      Manage physical and virtual circuits — transit, IP transit,
+      wavelength, MPLS, ethernet transport, and cross-connects. Owns
+      circuit IDs, LOAs, A/Z ends, carrier escalation contacts, and
+      the paper trail from order through turn-up to retirement.
+    triggers:
+      - circuit down
+      - carrier ticket
+      - cross connect
+      - loa cfa
+      - mpls circuit
+      - ip transit
+      - wavelength
+      - turn up
+      - circuit id
+    agent_affinity:
+      - netops-engineer
+      - netops-architect
+
+  network-change-window:
+    domain: change
+    description: >-
+      Operate the network change-window discipline — MOP authoring,
+      risk classification, peer review, change-advisory approval,
+      staged cutover, post-change verification, and rollback. Enforces
+      the rule that no production network device is touched outside
+      a scheduled window without an incident declared.
+    triggers:
+      - change window
+      - mop
+      - method of procedure
+      - cutover
+      - peer review config
+      - post change verify
+      - rollback config
+    agent_affinity:
+      - netops-architect
+      - netops-engineer
+
+  network-incident-response:
+    domain: incident
+    description: >-
+      Triage live network outages — link flaps, routing black holes,
+      BGP session drops, broadcast storms, MTU mismatches, asymmetric
+      routing. Runs the show commands, captures counters, correlates
+      across telemetry, and stabilizes before handing to postmortem.
+    triggers:
+      - network outage
+      - link flap
+      - bgp flap
+      - routing loop
+      - broadcast storm
+      - mtu issue
+      - asymmetric routing
+      - packet loss
+    agent_affinity:
+      - netops-incident-responder
+      - netops-engineer
+
+agents:
+  topology: router
+  router_agent: netops-architect
+  agents:
+    - name: netops-architect
+      role: >-
+        Opus-class agent and capcom for the cartridge. Owns topology
+        decisions — routing protocol choice, peering strategy,
+        addressing plans, load-balancer placement, and the long-horizon
+        shape of the fabric. Routes work between the other netops
+        agents and holds the go/no-go on major changes.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+      is_capcom: true
+
+    - name: netops-engineer
+      role: >-
+        Sonnet agent that executes routine network changes — VLAN adds,
+        route policy updates, ACL edits, load-balancer pool members,
+        DNS records, IPAM allocations, circuit turn-ups. The hands
+        that touch the devices, always under MOP and change window.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+
+    - name: netops-incident-responder
+      role: >-
+        Opus-class agent specialized in live network outage diagnosis.
+        Runs show commands, correlates telemetry, localizes the
+        failing segment (link, peer, protocol, host), stabilizes the
+        fabric, and hands a clean packet to postmortem.
+      model: opus
+      tools:
+        - Read
+        - Bash
+        - Grep
+        - Glob
+
+    - name: netops-security-officer
+      role: >-
+        Opus-class agent that owns network security posture — ACLs,
+        edge firewall policy, DDoS mitigation playbooks, VPN trust
+        anchors, DNSSEC key custody, and the RPKI validator state.
+        Authorized to block changes that widen the attack surface.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+
+    - name: netops-monitoring-engineer
+      role: >-
+        Sonnet agent that owns the network telemetry pipeline — SNMP
+        collectors, streaming-telemetry endpoints, NetFlow analyzers,
+        NMS health, dashboards, and alert rule hygiene. Enforces the
+        "every network page has a runbook" rule at the NOC layer.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+
+teams:
+  netops-change-window-team:
+    description: >-
+      Execute a scheduled network change. Architect reviews the MOP
+      and approves the risk class, engineer performs the cutover,
+      monitoring-engineer watches telemetry through the window,
+      security-officer signs off on any policy changes in scope.
+    agents:
+      - netops-architect
+      - netops-engineer
+      - netops-monitoring-engineer
+      - netops-security-officer
+    use_when: executing a scheduled maintenance window on production network devices
+
+  netops-incident-team:
+    description: >-
+      Live network outage response. Incident-responder drives triage,
+      engineer executes stabilization steps, monitoring-engineer
+      surfaces the telemetry signal, architect handles escalation and
+      vendor/carrier engagement.
+    agents:
+      - netops-incident-responder
+      - netops-engineer
+      - netops-monitoring-engineer
+      - netops-architect
+    use_when: a production network outage or severe degradation is observed
+
+  netops-peering-team:
+    description: >-
+      Bring up a new BGP peering session or transit circuit. Architect
+      owns the policy decisions (prefix filters, communities,
+      local-preference), engineer configures and turns up, security-
+      officer validates RPKI and max-prefix safeties.
+    agents:
+      - netops-architect
+      - netops-engineer
+      - netops-security-officer
+    use_when: establishing a new BGP peer, transit provider, or IX connection
+
+  netops-ddos-response-team:
+    description: >-
+      Mitigate an in-progress DDoS attack. Security-officer owns the
+      mitigation playbook, incident-responder localizes the attack
+      vector, engineer pushes flowspec or null-route changes,
+      monitoring-engineer validates the mitigation reduces signal.
+    agents:
+      - netops-security-officer
+      - netops-incident-responder
+      - netops-engineer
+      - netops-monitoring-engineer
+    use_when: a volumetric or application-layer DDoS attack is underway
+
+  netops-capacity-team:
+    description: >-
+      Review network capacity and plan augments. Architect owns the
+      long-horizon topology, monitoring-engineer provides traffic
+      trend data, engineer scopes the physical and logical work,
+      security-officer reviews any zone or policy implications.
+    agents:
+      - netops-architect
+      - netops-monitoring-engineer
+      - netops-engineer
+      - netops-security-officer
+    use_when: quarterly capacity review or when a link approaches 80% sustained utilization

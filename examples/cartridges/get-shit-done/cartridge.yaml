@@ -1,0 +1,43 @@
+id: get-shit-done
+name: Get Shit Done
+version: 0.1.0
+author: tibsfox
+description: >-
+  Full GSD (Get Shit Done) project management cartridge. Covers the entire
+  GSD surface area — roadmaps, milestones, phases, the
+  research→plan→execute→verify loop, backlog and todo grooming, debugging
+  and forensics, UI cycle, session handoff, shipping, and the grove
+  content-addressed memory subsystem that makes every plan, research
+  finding, assumption, wave, verification, and debug session durable and
+  replayable across sessions. Ships both as an in-tree example and as a
+  core cartridge that installs into every gsd-skill-creator harness via
+  project-claude, so any project that adopts gsd-skill-creator picks up
+  the full GSD workflow on day one.
+trust: system
+provenance:
+  origin: forge
+  createdAt: 2026-04-14T19:56:15.347Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - docs/cartridge/CARTRIDGE-SPEC.md
+    - docs/GROVE-FORMAT.md
+    - .claude/commands/gsd/
+    - .claude/agents/gsd-*.md
+    - src/memory/grove-format.ts
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - gsd
+    - project-management
+    - phases
+    - milestones
+    - grove
+    - memory
+    - workflow

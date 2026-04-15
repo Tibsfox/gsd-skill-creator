@@ -1,0 +1,59 @@
+namespace: systems-operations
+record_types:
+  - name: IncidentReport
+    description: >-
+      The authoritative record of a declared incident. Captures
+      severity, declaration time, stabilization time, resolution time,
+      incident commander, affected services, customer impact scope,
+      and pointers to the timeline, bridge transcript, and postmortem.
+
+  - name: PagerEvent
+    description: >-
+      A single alert-to-page event. Records alert rule, firing time,
+      resolution time, the paged on-call rotation, acknowledgment
+      latency, whether a runbook existed, and whether the page was
+      actionable or noise. Feeds alert-health review.
+
+  - name: ReleaseRecord
+    description: >-
+      A production release from start of ramp to full rollout or
+      rollback. Records build identifier, release strategy (canary,
+      ramp, blue/green), ramp timeline, go/no-go decisions at each
+      gate, final disposition, and SLO burn observed during the ramp.
+
+  - name: ChangeRequest
+    description: >-
+      A change-management RFC. Captures scope, risk class, blast
+      radius estimate, approver list, approved change window, rollback
+      plan, post-change verification checklist, and linkage to any
+      ReleaseRecord or OpsRun that executed under it.
+
+  - name: SLOState
+    description: >-
+      A point-in-time snapshot of an SLO and its error budget. Records
+      the SLI definition, target, current burn rate, budget remaining,
+      evaluation window, and the release-freeze state implied by the
+      current burn.
+
+  - name: RunbookExecution
+    description: >-
+      A record of a runbook being executed against a live system.
+      Captures the runbook identifier and version, executing agent or
+      human, step-by-step outcomes, approval-gate decisions, exit
+      status, and any deviations taken from the documented procedure.
+
+  - name: Postmortem
+    description: >-
+      A blameless postmortem document. Records the incident being
+      analyzed, reconstructed timeline, contributing factors (never
+      single-cause), what went well, what went poorly, where we got
+      lucky, action items with owners and due dates, and the review
+      meeting attendance.
+
+  - name: ReadinessChecklist
+    description: >-
+      An Operational Readiness Review checklist for a new service or
+      major change. Records the reviewed items (monitoring, runbook,
+      SLO proposal, capacity, rollback rehearsal, on-call staffing),
+      verdict per item, overall go/no-go, and signature of the
+      chairing commander.
