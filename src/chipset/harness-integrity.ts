@@ -20,14 +20,19 @@ import { execSync } from 'node:child_process';
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname ?? __dirname, '../..');
 
-const CLAUDE_DIR = path.join(PROJECT_ROOT, '.claude');
-const AGENTS_DIR = path.join(CLAUDE_DIR, 'agents');
-const HOOKS_DIR = path.join(CLAUDE_DIR, 'hooks');
-const SKILLS_DIR = path.join(CLAUDE_DIR, 'skills');
-const SETTINGS_PATH = path.join(CLAUDE_DIR, 'settings.json');
+// Resolved lazily so tests can override via HARNESS_CLAUDE_DIR (e.g. point at a
+// tmpdir populated by `node project-claude/install.cjs`). Without an override
+// they resolve to the project's installed `.claude/` tree.
+function claudeDir(): string {
+  return process.env.HARNESS_CLAUDE_DIR ?? path.join(PROJECT_ROOT, '.claude');
+}
+function agentsDir(): string { return path.join(claudeDir(), 'agents'); }
+function hooksDir(): string { return path.join(claudeDir(), 'hooks'); }
+function skillsDir(): string { return path.join(claudeDir(), 'skills'); }
+function settingsPath(): string { return path.join(claudeDir(), 'settings.json'); }
 const GITIGNORE_PATH = path.join(PROJECT_ROOT, '.gitignore');
 
-// Tracked source for project-specific hooks. Installed into HOOKS_DIR by
+// Tracked source for project-specific hooks. Installed into hooksDir() by
 // `node project-claude/install.cjs`. Used as a fallback by
 // checkConfigImmutability so the invariant holds on fresh clones before
 // install has been run.
@@ -88,16 +93,16 @@ function readMarkdownFiles(dir: string): Array<{ name: string; content: string }
  * Read all SKILL.md files from skill subdirectories.
  */
 function readSkillFiles(): Array<{ name: string; content: string; dir: string }> {
-  if (!fs.existsSync(SKILLS_DIR)) return [];
-  return fs.readdirSync(SKILLS_DIR)
+  if (!fs.existsSync(skillsDir())) return [];
+  return fs.readdirSync(skillsDir())
     .filter((d) => {
-      const skillPath = path.join(SKILLS_DIR, d, 'SKILL.md');
+      const skillPath = path.join(skillsDir(), d, 'SKILL.md');
       return fs.existsSync(skillPath);
     })
     .map((d) => ({
       name: d,
       dir: d,
-      content: fs.readFileSync(path.join(SKILLS_DIR, d, 'SKILL.md'), 'utf8'),
+      content: fs.readFileSync(path.join(skillsDir(), d, 'SKILL.md'), 'utf8'),
     }));
 }
 
@@ -130,18 +135,18 @@ function isGitignored(target: string, patterns: string[]): boolean {
 
 export function checkHookScriptsExecutable(): InvariantResult[] {
   const results: InvariantResult[] = [];
-  if (!fs.existsSync(HOOKS_DIR)) {
+  if (!fs.existsSync(hooksDir())) {
     results.push({
       name: 'hook-dir-exists',
       passed: false,
-      message: `Hooks directory does not exist: ${HOOKS_DIR}`,
+      message: `Hooks directory does not exist: ${hooksDir()}`,
     });
     return results;
   }
 
-  const hookFiles = fs.readdirSync(HOOKS_DIR).filter((f) => f.endsWith('.sh'));
+  const hookFiles = fs.readdirSync(hooksDir()).filter((f) => f.endsWith('.sh'));
   for (const file of hookFiles) {
-    const fullPath = path.join(HOOKS_DIR, file);
+    const fullPath = path.join(hooksDir(), file);
     const stat = fs.statSync(fullPath);
     const isExec = (stat.mode & 0o111) !== 0;
     results.push({
@@ -157,7 +162,7 @@ export function checkHookScriptsExecutable(): InvariantResult[] {
 
 export function checkSettingsHookReferences(): InvariantResult[] {
   const results: InvariantResult[] = [];
-  if (!fs.existsSync(SETTINGS_PATH)) {
+  if (!fs.existsSync(settingsPath())) {
     results.push({
       name: 'settings-exists',
       passed: false,
@@ -166,7 +171,7 @@ export function checkSettingsHookReferences(): InvariantResult[] {
     return results;
   }
 
-  const settings = JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf8'));
+  const settings = JSON.parse(fs.readFileSync(settingsPath(), 'utf8'));
   const hooks = settings.hooks ?? {};
 
   for (const [eventName, hookGroups] of Object.entries(hooks)) {
@@ -182,7 +187,7 @@ export function checkSettingsHookReferences(): InvariantResult[] {
         const fileMatch = cmd.match(/(?:node|bash)\s+(\S+)/);
         if (!fileMatch) continue;
 
-        const refPath = path.resolve(PROJECT_ROOT, fileMatch[1]);
+        const refPath = path.resolve(path.dirname(claudeDir()), fileMatch[1]);
         const exists = fs.existsSync(refPath);
         results.push({
           name: `hook-ref:${eventName}:${path.basename(refPath)}`,
@@ -199,9 +204,9 @@ export function checkSettingsHookReferences(): InvariantResult[] {
 
 export function checkNoVerificationBypasses(): InvariantResult[] {
   const results: InvariantResult[] = [];
-  if (!fs.existsSync(SETTINGS_PATH)) return results;
+  if (!fs.existsSync(settingsPath())) return results;
 
-  const content = fs.readFileSync(SETTINGS_PATH, 'utf8');
+  const content = fs.readFileSync(settingsPath(), 'utf8');
   const dangerousPatterns = ['--no-verify', '--force'];
 
   for (const pattern of dangerousPatterns) {
@@ -276,7 +281,7 @@ export function checkNoEnvFilesTracked(): InvariantResult {
 
 export function checkAgentFrontmatter(): InvariantResult[] {
   const results: InvariantResult[] = [];
-  const agents = readMarkdownFiles(AGENTS_DIR);
+  const agents = readMarkdownFiles(agentsDir());
 
   for (const agent of agents) {
     const fm = extractFrontmatter(agent.content);
@@ -296,7 +301,7 @@ export function checkAgentFrontmatter(): InvariantResult[] {
 
 export function checkAgentToolConstraints(): InvariantResult[] {
   const results: InvariantResult[] = [];
-  const agents = readMarkdownFiles(AGENTS_DIR);
+  const agents = readMarkdownFiles(agentsDir());
 
   for (const agent of agents) {
     const fm = extractFrontmatter(agent.content);
@@ -527,11 +532,11 @@ export function checkVersionConsistency(): InvariantResult {
  *     hardcoded filename, so the test survives refactors.
  */
 export function checkConfigImmutability(): InvariantResult {
-  if (!fs.existsSync(SETTINGS_PATH)) {
+  if (!fs.existsSync(settingsPath())) {
     return { name: 'config-immutability', passed: true, message: 'No settings.json to protect' };
   }
 
-  const installedProtectors = scanHooksForSettingsProtection(HOOKS_DIR);
+  const installedProtectors = scanHooksForSettingsProtection(hooksDir());
   const sourceProtectors = scanHooksForSettingsProtection(PROJECT_CLAUDE_HOOKS_DIR);
 
   // Active-runtime protection — the ideal state.
@@ -614,7 +619,7 @@ function scanHooksForSettingsProtection(hooksDir: string): string[] {
  */
 export function checkAgentToolRiskClassification(): InvariantResult[] {
   const results: InvariantResult[] = [];
-  const agents = readMarkdownFiles(AGENTS_DIR);
+  const agents = readMarkdownFiles(agentsDir());
   const highRiskTools = ['Bash', 'Write', 'Edit', 'MultiEdit'];
 
   for (const agent of agents) {
@@ -687,7 +692,7 @@ export function checkAgentToolRiskClassification(): InvariantResult[] {
  */
 export function checkHookFailureBehavior(): InvariantResult[] {
   const results: InvariantResult[] = [];
-  if (!fs.existsSync(SETTINGS_PATH)) {
+  if (!fs.existsSync(settingsPath())) {
     results.push({
       name: 'hook-failure-behavior',
       passed: false,
@@ -696,7 +701,7 @@ export function checkHookFailureBehavior(): InvariantResult[] {
     return results;
   }
 
-  const settings = JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf8'));
+  const settings = JSON.parse(fs.readFileSync(settingsPath(), 'utf8'));
   const hooks = settings.hooks ?? {};
 
   // Critical events that MUST have hooks
@@ -876,7 +881,7 @@ export function checkResponseDlpCapability(): InvariantResult[] {
   const results: InvariantResult[] = [];
 
   // Check if PostToolUse hooks exist (they can scan responses)
-  if (!fs.existsSync(SETTINGS_PATH)) {
+  if (!fs.existsSync(settingsPath())) {
     results.push({
       name: 'response-dlp:no-settings',
       passed: false,
@@ -885,7 +890,7 @@ export function checkResponseDlpCapability(): InvariantResult[] {
     return results;
   }
 
-  const settings = JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf8'));
+  const settings = JSON.parse(fs.readFileSync(settingsPath(), 'utf8'));
   const hooks = settings.hooks ?? {};
   const postHooks = hooks.PostToolUse;
 
@@ -1025,12 +1030,12 @@ export function checkMcpEnvPathSafety(): InvariantResult[] {
 export function checkFailSafeDefaults(): InvariantResult {
   // Verify that hooks reference files that exist (already covered)
   // This check ensures settings.json itself is valid JSON
-  if (!fs.existsSync(SETTINGS_PATH)) {
+  if (!fs.existsSync(settingsPath())) {
     return { name: 'fail-safe-defaults', passed: true, message: 'No settings.json — harness uses built-in defaults' };
   }
 
   try {
-    const content = fs.readFileSync(SETTINGS_PATH, 'utf8');
+    const content = fs.readFileSync(settingsPath(), 'utf8');
     JSON.parse(content);
     return { name: 'fail-safe-defaults', passed: true, message: 'settings.json is valid JSON' };
   } catch {
@@ -1115,7 +1120,7 @@ export function checkUnicodeCompositionScanning(): InvariantResult[] {
   const results: InvariantResult[] = [];
 
   // Check if any hook or guard scans for Unicode injection
-  const guardPath = path.join(HOOKS_DIR, 'gsd-prompt-guard.js');
+  const guardPath = path.join(hooksDir(), 'gsd-prompt-guard.js');
   if (!fs.existsSync(guardPath)) {
     results.push({
       name: 'unicode-scan:no-guard',
@@ -1216,7 +1221,7 @@ export function checkSkillNoImpersonation(): InvariantResult[] {
  */
 export function checkSubagentToolConstraintEnforcement(): InvariantResult[] {
   const results: InvariantResult[] = [];
-  const agents = readMarkdownFiles(AGENTS_DIR);
+  const agents = readMarkdownFiles(agentsDir());
 
   for (const agent of agents) {
     const fm = extractFrontmatter(agent.content);
