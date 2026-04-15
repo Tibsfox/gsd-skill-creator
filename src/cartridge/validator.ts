@@ -73,9 +73,47 @@ export function validateCartridge(
   checkDepartmentAgentAffinity(cartridge, errors);
   checkDepartmentRouterAgent(cartridge, errors);
   checkEvaluationDomainsCovered(cartridge, errors);
+  checkSkillDomainsDeclared(cartridge, warnings);
   checkTrustScope(cartridge, errors);
 
   return { valid: errors.length === 0, errors, warnings };
+}
+
+/**
+ * Warn when a skill declares a `domain:` that is not listed in any
+ * evaluation chipset's `benchmark.domains_covered`. The reverse check
+ * (declared-but-not-mentioned) is already an error via
+ * checkEvaluationDomainsCovered — this rule catches forgotten additions
+ * to domains_covered when skills grow. Warning-level by design: the
+ * forge loop wants this surfaced before commit, but existing cartridges
+ * must not fail validate when this invariant is violated.
+ */
+function checkSkillDomainsDeclared(
+  cartridge: Cartridge,
+  warnings: CartridgeValidationIssue[],
+): void {
+  const departments = findChipsets(cartridge, 'department');
+  const evals = findChipsets(cartridge, 'evaluation');
+  if (departments.length === 0 || evals.length === 0) return;
+  const declared = new Set<string>();
+  for (const ev of evals) {
+    for (const d of ev.benchmark.domains_covered) {
+      declared.add(d.toLowerCase());
+    }
+  }
+  for (const dept of departments) {
+    for (const [skillKey, skill] of Object.entries(dept.skills)) {
+      const domain = skill.domain;
+      if (!domain) continue;
+      if (!declared.has(domain.toLowerCase())) {
+        warnings.push({
+          chipsetKind: 'department',
+          path: `chipsets[${chipsetIndex(cartridge, dept)}].skills.${skillKey}.domain`,
+          message: `skill '${skillKey}' declares domain '${domain}' but no evaluation chipset lists it in benchmark.domains_covered`,
+        });
+      }
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
