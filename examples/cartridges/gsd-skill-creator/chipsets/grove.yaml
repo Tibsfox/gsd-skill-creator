@@ -1,0 +1,56 @@
+namespace: gsd-skill-creator
+record_types:
+  - name: AuthoredSkill
+    description: >-
+      A skill that was authored via this cartridge. Captures the skill
+      id, cartridge it belongs to (if any), frontmatter fields, trigger
+      list, author, authoring timestamp, and the forge-gate verdicts at
+      the moment of authoring. Durable even when the underlying
+      SKILL.md moves or is renamed.
+
+  - name: AuthoredAgent
+    description: >-
+      An agent that was authored via this cartridge. Captures name,
+      role, model selection, tool allowlist, is_capcom flag, containing
+      cartridge, and the authoring timestamp. Shares a parent link
+      with the AuthoredSkill records that triggered its creation.
+
+  - name: ForgedCartridge
+    description: >-
+      A cartridge produced by the cartridge-forge loop. Captures id,
+      template (department/content/coprocessor), slug, author, chipset
+      count, skill/agent/team/record-type counts, validation debt
+      flag, and the commit sha of the creation commit. The content
+      address for a ForgedCartridge is the hash of its cartridge.yaml
+      plus all referenced chipset files.
+
+  - name: GroveImportManifest
+    description: >-
+      The outcome of a filesystem→grove import run. Records source
+      directories walked, exclusion rules applied, raw artifact count,
+      unique binding count after dedup, import duration, and the
+      resulting arena.json path and hash. One manifest per import;
+      successive imports produce a chain.
+
+  - name: GroveMigrationLog
+    description: >-
+      A format-version migration event for the grove arena. Records
+      source format version, destination format version, chunk counts
+      per tier (hot/warm/cold), promoted/demoted deltas, SkillDiff
+      summary, and whether the migration was reversible. Required
+      reading before any grove-format schema change.
+
+  - name: CartridgeEvalResult
+    description: >-
+      The verdict of running the four forge gates on a cartridge —
+      validate, eval, dedup, metrics. Captures cartridge id, gate
+      name, exit code, error list, accepted validation debt, and the
+      timestamp. Aggregated across time to surface flaky gates or
+      decaying cartridges.
+
+  - name: PublishEvent
+    description: >-
+      A gsd-skill-creator publish action — version number, publish
+      target (npm/npx/debian/rpm), included cartridge ids, release
+      notes path, tagged commit sha, and the post-publish harness-
+      integrity verdict. The publish ledger for the project.

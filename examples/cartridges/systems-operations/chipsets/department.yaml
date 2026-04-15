@@ -1,0 +1,374 @@
+skills:
+  incident-command:
+    domain: incident
+    description: >-
+      Drive a live production incident from detection to stabilization.
+      Establishes incident commander role, opens the comms bridge, sets
+      severity, assigns scribe and liaison, runs the situation-report
+      cadence, and hands off cleanly at shift change. The commander owns
+      the room, not the fix.
+    triggers:
+      - declare incident
+      - sev1
+      - sev2
+      - incident commander
+      - open bridge
+      - situation report
+      - ops call
+      - stabilize outage
+    agent_affinity:
+      - sysops-commander
+      - sysops-runner
+
+  release-orchestration:
+    domain: release
+    description: >-
+      Drive staged rollouts — canary, percentage ramp, blue/green, and
+      feature-flag gated releases. Owns rollback criteria, ramp
+      thresholds, and the decision to pause or revert. Integrates with
+      CI/CD systems but never replaces the human go/no-go gate.
+    triggers:
+      - deploy release
+      - canary
+      - rollback
+      - blue green
+      - ramp percentage
+      - feature flag
+      - release gate
+      - promote build
+    agent_affinity:
+      - sysops-runner
+      - sysops-change-manager
+
+  change-management:
+    domain: change
+    description: >-
+      Operate the change-management loop — RFC authoring, risk
+      classification, CAB review, approval gates, change windows, and
+      post-change verification. Enforces the rule that every production
+      touch has an approver, a window, and a rollback plan on record.
+    triggers:
+      - submit rfc
+      - change request
+      - cab review
+      - change window
+      - approve change
+      - post change verify
+      - rollback plan
+    agent_affinity:
+      - sysops-change-manager
+      - sysops-commander
+
+  slo-and-error-budget:
+    domain: slo
+    description: >-
+      Define SLIs and SLOs, track error-budget burn rate, and decide
+      when to freeze or unfreeze releases based on budget state. Owns
+      the quarterly SLO review and the conversation with product when
+      the budget is exhausted. Keeps SLOs honest — no vanity targets.
+    triggers:
+      - define sli
+      - set slo
+      - error budget
+      - burn rate
+      - slo review
+      - budget exhausted
+      - freeze releases
+    agent_affinity:
+      - sysops-reliability-engineer
+      - sysops-commander
+
+  observability-pipeline:
+    domain: observability
+    description: >-
+      Care and feeding of the metrics, logs, and traces pipeline —
+      collectors, aggregators, retention policy, index health, and
+      sampling strategy. Keeps the pipeline itself observable and
+      addresses the "who monitors the monitors" problem.
+    triggers:
+      - metrics pipeline
+      - log ingestion
+      - trace sampling
+      - retention policy
+      - prometheus scrape
+      - otel collector
+      - dashboard broken
+    agent_affinity:
+      - sysops-observability-engineer
+      - sysops-runner
+
+  alert-triage-and-tuning:
+    domain: alerting
+    description: >-
+      Route, triage, and tune alerts to keep pager signal high. Reviews
+      alert-to-page ratios, deduplicates noisy rules, and enforces the
+      rule that every page has a runbook. Owns the weekly alert-health
+      review.
+    triggers:
+      - alert firing
+      - tune alert
+      - pager noise
+      - page without runbook
+      - silence alert
+      - alert routing
+      - alert fatigue
+    agent_affinity:
+      - sysops-observability-engineer
+      - sysops-reliability-engineer
+
+  runbook-execution:
+    domain: runbook
+    description: >-
+      Execute operational runbooks against live systems with
+      human-approval gates at destructive steps. Parses structured
+      runbooks, validates preconditions, tracks progress, and emits a
+      run record on completion. Refuses to improvise off-runbook.
+    triggers:
+      - run runbook
+      - execute procedure
+      - step through runbook
+      - approval gate
+      - precondition check
+      - operational procedure
+    agent_affinity:
+      - sysops-runner
+      - sysops-commander
+
+  capacity-and-load-management:
+    domain: capacity
+    description: >-
+      Manage capacity at runtime — autoscaling policies, rate limits,
+      load-shedding rules, connection pool sizing, and hot-path
+      back-pressure. Distinct from sysadmin capacity planning in that
+      it owns live traffic controls, not host rightsizing.
+    triggers:
+      - autoscale
+      - rate limit
+      - load shed
+      - overload
+      - back pressure
+      - traffic surge
+      - connection pool
+    agent_affinity:
+      - sysops-reliability-engineer
+      - sysops-runner
+
+  configuration-drift-control:
+    domain: config
+    description: >-
+      Manage runtime configuration via Ansible/Salt/Puppet/Chef or
+      equivalent, detect drift from declared state, and drive
+      reconciliation. Owns the rule that no production host is
+      configured by hand without a follow-up config-as-code change.
+    triggers:
+      - ansible run
+      - puppet drift
+      - salt state
+      - chef converge
+      - config drift
+      - reconcile state
+      - config as code
+    agent_affinity:
+      - sysops-runner
+      - sysops-change-manager
+
+  chaos-and-game-days:
+    domain: chaos
+    description: >-
+      Design and run chaos experiments and scheduled game days — fault
+      injection, dependency failure drills, region evacuation, load
+      tests against production-like targets. Owns the blast-radius
+      review and the abort criteria for every experiment.
+    triggers:
+      - game day
+      - chaos experiment
+      - fault injection
+      - failure drill
+      - evacuation drill
+      - blast radius
+      - abort criteria
+    agent_affinity:
+      - sysops-reliability-engineer
+      - sysops-commander
+
+  postmortem-and-learning:
+    domain: postmortem
+    description: >-
+      Run blameless postmortems after incidents and near-misses.
+      Reconstructs timeline, identifies contributing factors without
+      naming scapegoats, extracts action items with owners and due
+      dates, and files the writeup into the learning library.
+    triggers:
+      - postmortem
+      - blameless review
+      - incident retro
+      - root cause
+      - contributing factors
+      - action items
+      - lessons learned
+    agent_affinity:
+      - sysops-reliability-engineer
+      - sysops-commander
+
+  operational-readiness-review:
+    domain: readiness
+    description: >-
+      Run ORR for new services or major changes before they reach
+      production — monitoring coverage, runbook existence, SLO
+      proposal, capacity headroom, rollback rehearsal, on-call rota
+      staffing. No service crosses the line without a signed checklist.
+    triggers:
+      - operational readiness
+      - orr review
+      - launch checklist
+      - ready for production
+      - go live gate
+      - readiness review
+      - pre launch
+    agent_affinity:
+      - sysops-commander
+      - sysops-reliability-engineer
+
+agents:
+  topology: router
+  router_agent: sysops-commander
+  agents:
+    - name: sysops-commander
+      role: >-
+        Opus-class incident commander and capcom for the cartridge.
+        Owns the room during a live incident — sets severity, drives
+        the comms cadence, routes between runner/reliability/
+        observability/change-manager, and makes the human go/no-go
+        calls. Does not fix anything itself; it commands.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+      is_capcom: true
+
+    - name: sysops-runner
+      role: >-
+        Sonnet agent that executes runbooks and deployment steps
+        end-to-end — canary ramps, rollbacks, config pushes, restart
+        sequences, load-shed toggles. The hands that touch production,
+        always under an approval gate for destructive steps.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+
+    - name: sysops-reliability-engineer
+      role: >-
+        Opus-class agent that owns SLO design, error-budget accounting,
+        chaos experiment design, capacity modeling, and postmortem
+        authorship. The long-horizon voice that argues for reliability
+        investment when the budget is healthy and for freezes when it
+        is not.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+
+    - name: sysops-observability-engineer
+      role: >-
+        Sonnet agent that owns the metrics/logs/traces pipeline,
+        dashboards, alert rules, and the weekly alert-health review.
+        Enforces the "every page has a runbook" rule and hunts down
+        noisy alerts that train the team to ignore pages.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+
+    - name: sysops-change-manager
+      role: >-
+        Opus-class agent that owns the change-management loop — RFC
+        intake, risk classification, CAB coordination, approval gates,
+        change-window scheduling, and the post-change verification
+        checklist. Authorized to block changes that lack a rollback
+        plan.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+
+teams:
+  sysops-incident-team:
+    description: >-
+      Live incident response from detection through stabilization.
+      Commander runs the room, runner executes stabilization steps,
+      observability-engineer surfaces signal from the pipeline,
+      reliability-engineer captures the timeline for postmortem.
+    agents:
+      - sysops-commander
+      - sysops-runner
+      - sysops-observability-engineer
+      - sysops-reliability-engineer
+    use_when: a production incident has been declared at any severity
+
+  sysops-release-team:
+    description: >-
+      Drive a staged production rollout. Change-manager validates the
+      approved window and rollback plan, runner executes the ramp,
+      commander holds the go/no-go gate at each step, reliability-
+      engineer watches SLO burn during the ramp.
+    agents:
+      - sysops-change-manager
+      - sysops-runner
+      - sysops-commander
+      - sysops-reliability-engineer
+    use_when: pushing a release to production via canary, ramp, or blue/green
+
+  sysops-readiness-team:
+    description: >-
+      Run an Operational Readiness Review for a new service or major
+      change. Commander chairs, reliability-engineer reviews SLOs and
+      capacity, observability-engineer verifies monitoring coverage,
+      change-manager books the launch window.
+    agents:
+      - sysops-commander
+      - sysops-reliability-engineer
+      - sysops-observability-engineer
+      - sysops-change-manager
+    use_when: a new service or high-risk change is requesting go-live
+
+  sysops-game-day-team:
+    description: >-
+      Run a chaos experiment or scheduled game day. Reliability-
+      engineer designs the experiment and blast-radius review,
+      commander owns abort criteria, runner executes the injection,
+      observability-engineer verifies signal integrity throughout.
+    agents:
+      - sysops-reliability-engineer
+      - sysops-commander
+      - sysops-runner
+      - sysops-observability-engineer
+    use_when: running a scheduled game day or chaos experiment in any environment
+
+  sysops-postmortem-team:
+    description: >-
+      Conduct a blameless postmortem for an incident or near-miss.
+      Reliability-engineer drafts, commander validates the timeline
+      from the incident, observability-engineer contributes signal
+      evidence, change-manager tracks action items to closure.
+    agents:
+      - sysops-reliability-engineer
+      - sysops-commander
+      - sysops-observability-engineer
+      - sysops-change-manager
+    use_when: within 5 business days of an incident at sev2 or above, or any near-miss

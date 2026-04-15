@@ -1,0 +1,324 @@
+skills:
+  user-and-access-management:
+    domain: access
+    description: >-
+      Manage local users, groups, sudoers, SSH authorized_keys, and PAM
+      policy. Covers adduser/usermod/passwd, group membership changes,
+      least-privilege sudo rules, key rotation, and lockout on offboarding.
+    triggers:
+      - add user
+      - remove user
+      - rotate ssh key
+      - grant sudo
+      - revoke access
+      - offboard user
+      - lock account
+    agent_affinity:
+      - sysadmin-operator
+      - sysadmin-security-officer
+
+  package-and-patch-management:
+    domain: packaging
+    description: >-
+      Install, upgrade, hold, and remove packages across apt/dnf/pacman/zypper.
+      Drive unattended-upgrades / dnf-automatic, handle kernel updates and
+      planned reboots, and reconcile held packages during incident recovery.
+    triggers:
+      - install package
+      - upgrade system
+      - apply patches
+      - kernel update
+      - hold package
+      - unattended upgrades
+    agent_affinity:
+      - sysadmin-operator
+
+  service-lifecycle:
+    domain: services
+    description: >-
+      Drive systemd units, timers, and socket activation. Cover enable,
+      start, stop, restart, reload, mask, status, journal inspection, and
+      dependency troubleshooting. Writes new unit files with correct
+      [Unit]/[Service]/[Install] sections and hardening directives.
+    triggers:
+      - restart service
+      - enable service
+      - systemd unit
+      - service failing
+      - check journal
+      - systemctl status
+    agent_affinity:
+      - sysadmin-operator
+
+  filesystem-and-storage:
+    domain: storage
+    description: >-
+      Manage mounts, fstab, LVM volume groups and logical volumes, quotas,
+      and disk health (smartctl). Handles df/du investigations, filesystem
+      resize, snapshot scheduling on ZFS/btrfs, and safe expansion of
+      critical partitions.
+    triggers:
+      - disk full
+      - resize filesystem
+      - add storage
+      - mount volume
+      - smartctl
+      - lvm extend
+      - zfs snapshot
+    agent_affinity:
+      - sysadmin-operator
+
+  network-and-firewall:
+    domain: networking
+    description: >-
+      Configure network interfaces, routes, DNS, and firewalls
+      (nftables/iptables/ufw/firewalld). Diagnose connectivity with
+      ss/ip/tcpdump/traceroute, tune resolv.conf and NetworkManager, and
+      implement host-level segmentation.
+    triggers:
+      - open port
+      - firewall rule
+      - network down
+      - dns not resolving
+      - packet capture
+      - configure interface
+      - traceroute
+    agent_affinity:
+      - sysadmin-operator
+      - sysadmin-security-officer
+
+  backup-and-restore:
+    domain: backup
+    description: >-
+      Operate backup tooling (rsync, borg, restic, ZFS send/recv) with
+      retention policies, encryption at rest, and offsite rotation. Owns
+      restore-test discipline — a backup is not verified until a restore
+      has been exercised.
+    triggers:
+      - run backup
+      - restore from backup
+      - test restore
+      - rotate backups
+      - borg prune
+      - offsite copy
+    agent_affinity:
+      - sysadmin-backup-custodian
+
+  log-and-audit:
+    domain: logging
+    description: >-
+      Inspect and retain logs via journald, rsyslog, and logrotate. Query
+      journals for failure modes, configure audit rules via auditd, and
+      enforce retention policy that satisfies both debugging and compliance
+      needs.
+    triggers:
+      - journalctl
+      - check logs
+      - audit log
+      - log rotation
+      - retention policy
+      - grep journal
+    agent_affinity:
+      - sysadmin-operator
+      - sysadmin-security-officer
+
+  monitoring-and-alerting:
+    domain: monitoring
+    description: >-
+      Stand up and maintain node_exporter, Prometheus targets, Grafana
+      dashboards, and simple cron-driven health checks. Tune alert
+      thresholds to reduce pager fatigue while covering true outages.
+    triggers:
+      - add monitor
+      - prometheus target
+      - alert firing
+      - grafana dashboard
+      - node exporter
+      - health check
+    agent_affinity:
+      - sysadmin-operator
+
+  cron-and-scheduling:
+    domain: scheduling
+    description: >-
+      Own scheduled work via crontab, systemd timers, at, and anacron.
+      Enforce idempotency, locking (flock), and failure notification so a
+      missed or retried run never corrupts shared state.
+    triggers:
+      - schedule job
+      - cron not running
+      - systemd timer
+      - recurring task
+      - at job
+      - flock
+    agent_affinity:
+      - sysadmin-operator
+
+  hardening-and-baseline:
+    domain: hardening
+    description: >-
+      Apply and maintain a host security baseline. Covers SSH hardening,
+      fail2ban, SELinux/AppArmor policy, CIS benchmark enforcement,
+      least-privilege review, and drift detection against an approved
+      baseline.
+    triggers:
+      - harden host
+      - ssh hardening
+      - cis benchmark
+      - selinux policy
+      - apparmor
+      - fail2ban
+      - baseline drift
+    agent_affinity:
+      - sysadmin-security-officer
+
+  incident-triage:
+    domain: incident
+    description: >-
+      Diagnose live incidents — load spikes, IO stalls, OOM kills, runaway
+      processes, kernel messages. Uses top/htop, iotop, iostat, dmesg,
+      strace, perf, and the journal to localize the failing subsystem and
+      stabilize before root-causing.
+    triggers:
+      - server slow
+      - load high
+      - oom killed
+      - disk io stall
+      - dmesg errors
+      - debug production
+      - triage outage
+    agent_affinity:
+      - sysadmin-incident-responder
+
+  capacity-and-performance:
+    domain: capacity
+    description: >-
+      Track resource trends with sar/sysstat, iostat, vmstat, and pidstat.
+      Rightsize CPU, memory, and IO reservations, forecast growth, and
+      justify hardware or instance changes with historical data.
+    triggers:
+      - capacity plan
+      - rightsizing
+      - resource trend
+      - sar report
+      - iostat
+      - vmstat
+      - performance regression
+    agent_affinity:
+      - sysadmin-architect
+      - sysadmin-operator
+
+agents:
+  topology: router
+  router_agent: sysadmin-architect
+  agents:
+    - name: sysadmin-architect
+      role: >-
+        Opus-class agent that owns shape decisions — runbook design,
+        change windows, escalation trees, capacity forecasting, and
+        routing between the other sysadmin agents. Acts as capcom for
+        the cartridge.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+      is_capcom: true
+
+    - name: sysadmin-operator
+      role: >-
+        Sonnet agent that executes routine ops — package upgrades,
+        service lifecycle, user management, scheduled jobs, monitoring
+        target maintenance. The hands that do the everyday work.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+
+    - name: sysadmin-incident-responder
+      role: >-
+        Opus-class agent specialized in live incident diagnosis. Runs
+        triage loops (top/iostat/dmesg/journalctl), stabilizes the
+        system, records a timeline, and hands a clean packet to
+        root-cause analysis.
+      model: opus
+      tools:
+        - Read
+        - Bash
+        - Grep
+        - Glob
+
+    - name: sysadmin-security-officer
+      role: >-
+        Opus-class agent that owns hardening, audit, access review, and
+        compliance drift. Authors and enforces the security baseline and
+        signs off on risky changes (open ports, new sudo rules, new
+        services).
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+
+    - name: sysadmin-backup-custodian
+      role: >-
+        Sonnet agent that owns backup jobs, retention, offsite rotation,
+        and — most importantly — restore drills. A backup it has not
+        test-restored is treated as unverified.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Bash
+
+teams:
+  sysadmin-runbook-team:
+    description: >-
+      Build a new runbook from scratch. Architect decomposes the goal,
+      operator drafts the mechanical steps, security-officer reviews the
+      blast radius and approval gates.
+    agents:
+      - sysadmin-architect
+      - sysadmin-operator
+      - sysadmin-security-officer
+    use_when: authoring a new runbook or updating an existing one
+
+  sysadmin-incident-team:
+    description: >-
+      Live outage response. Incident-responder drives triage, operator
+      executes stabilization steps, architect handles escalation and
+      communication.
+    agents:
+      - sysadmin-incident-responder
+      - sysadmin-operator
+      - sysadmin-architect
+    use_when: a production host is unhealthy and service is impacted
+
+  sysadmin-hardening-team:
+    description: >-
+      Apply or audit a host security baseline. Security-officer owns the
+      policy, operator applies mechanical changes, architect approves
+      any baseline-level exceptions.
+    agents:
+      - sysadmin-security-officer
+      - sysadmin-operator
+      - sysadmin-architect
+    use_when: onboarding a new host, hardening sprint, or compliance audit
+
+  sysadmin-dr-drill-team:
+    description: >-
+      Run a disaster-recovery drill end-to-end. Backup-custodian restores
+      to a staging target, architect validates RPO/RTO, security-officer
+      checks that recovered state still meets the hardening baseline.
+    agents:
+      - sysadmin-backup-custodian
+      - sysadmin-architect
+      - sysadmin-security-officer
+    use_when: periodic DR drill or pre-change safety check

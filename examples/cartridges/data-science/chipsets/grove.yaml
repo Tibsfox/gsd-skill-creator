@@ -1,0 +1,47 @@
+namespace: data-science
+record_types:
+  - name: Dataset
+    description: >-
+      A versioned dataset used in an analysis. Records source,
+      schema, row count, time window, provenance, refresh
+      cadence, quality checks that passed on ingest, known
+      limitations, and the hash that identifies this exact
+      version.
+
+  - name: FeatureSet
+    description: >-
+      A named collection of features derived from one or more
+      datasets. Records each feature's definition, source
+      columns, transformation, data type, value range, owner,
+      and the dataset versions it was computed from.
+
+  - name: ModelCard
+    description: >-
+      A model's provenance and fitness record. Records intended
+      use, training data and feature set, model class and
+      hyperparameters, evaluation metrics (overall and per
+      slice), fairness audit results, known failure modes,
+      and the engineer who approved deployment.
+
+  - name: ExperimentResult
+    description: >-
+      The outcome of an A/B test or quasi-experiment. Records
+      hypothesis, design (arms, randomization, sample size,
+      power), primary and guardrail metrics, observed effect
+      size with confidence interval, decision, and any
+      caveats about novelty, primacy, or selection effects.
+
+  - name: Visualization
+    description: >-
+      A chart or dashboard used to communicate a finding.
+      Records the underlying dataset version, chart type,
+      encoding choices, annotation, audience, the narrative
+      it supports, and any accessibility notes.
+
+  - name: InsightReport
+    description: >-
+      A delivered analysis — report, memo, or dashboard launch.
+      Records the question it answers, the datasets and models
+      used, the key findings with effect sizes, the decision
+      it recommends, caveats and limitations, and the
+      stakeholder who received it.

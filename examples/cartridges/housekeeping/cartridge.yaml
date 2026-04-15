@@ -1,0 +1,47 @@
+id: housekeeping
+name: Housekeeping
+version: 0.1.0
+author: tibsfox
+description: >-
+  Housekeeping, data management, and archiving cartridge. Covers the
+  full custodial surface — repo hygiene, gitignore and untracked-state
+  discipline, stale-file detection (find-but-don't-delete), log and
+  session-transcript retention, snapshot scheduling, cold-archive
+  operations, dataset lifecycle (raw → curated → archived), naming
+  and layout conventions, content-addressed dedup, storage tiering
+  (hot / warm / cold / frozen), restore drills, media and format
+  migration as old formats obsolesce, and retention-policy audits.
+  Built around a single hard rule — archive, never delete — so
+  logs, docs, session transcripts, and historical artifacts are
+  preserved in a durable tier even after they leave the hot working
+  set. Grove-backed: every sweep, archive, dedup, snapshot, restore
+  drill, and retention audit is content-addressed so the custodial
+  history of the project is itself queryable and replayable. Ships
+  both as an in-tree example and as a core cartridge that installs
+  into every gsd-skill-creator harness via project-claude.
+trust: system
+provenance:
+  origin: forge
+  createdAt: 2026-04-14T20:10:03.163Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - docs/cartridge/CARTRIDGE-SPEC.md
+    - docs/GROVE-FORMAT.md
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - housekeeping
+    - data-management
+    - archiving
+    - retention
+    - snapshots
+    - grove
+    - memory
+    - hygiene

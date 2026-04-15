@@ -1,0 +1,372 @@
+skills:
+  codebase-mapping-and-inventory:
+    domain: mapping
+    description: >-
+      Walk an unfamiliar codebase and produce a structured inventory —
+      languages, modules, entry points, build targets, test surfaces,
+      generated files, and vendored dependencies. The first thing to
+      do when you inherit a repo. Output feeds every downstream
+      skill in this cartridge.
+    triggers:
+      - map the codebase
+      - what's in this repo
+      - inventory
+      - unfamiliar repo
+      - walk the tree
+      - entry points
+      - where does execution start
+    agent_affinity:
+      - sm-codebase-cartographer
+      - sm-lead
+
+  architecture-extraction:
+    domain: architecture-extraction
+    description: >-
+      Derive the de facto architecture from the code as it stands —
+      layers, modules, bounded contexts, shared kernels, and the
+      implicit contracts between them. Distinguishes the
+      architecture that was designed from the one that actually
+      exists. Produces diagrams and ADR-shaped notes.
+    triggers:
+      - extract architecture
+      - as-built architecture
+      - de facto design
+      - layer diagram
+      - bounded contexts
+      - reverse engineer design
+    agent_affinity:
+      - sm-codebase-cartographer
+      - sm-lead
+
+  dependency-graph-analysis:
+    domain: dependencies
+    description: >-
+      Build and analyze the dependency graph — internal imports,
+      external packages, transitive deps, cycles, orphan modules,
+      and high-fan-in hotspots. Identifies coupling risks before a
+      port, review, or refactor touches them.
+    triggers:
+      - dependency graph
+      - import graph
+      - circular deps
+      - coupling analysis
+      - fan in
+      - orphan module
+      - transitive deps
+    agent_affinity:
+      - sm-codebase-cartographer
+
+  code-review-at-scale:
+    domain: review
+    description: >-
+      Review large or unfamiliar changesets — full PRs, multi-commit
+      branches, or entire vendored drops. Covers reading code by
+      intent first, grouping comments by theme, distinguishing
+      blocking concerns from stylistic nits, and producing a
+      written review summary the author can act on.
+    triggers:
+      - review a large pr
+      - review this branch
+      - review the vendored drop
+      - big review
+      - unfamiliar code review
+      - write a review summary
+    agent_affinity:
+      - sm-reviewer
+      - sm-lead
+
+  static-analysis-and-linting:
+    domain: static-analysis
+    description: >-
+      Run and curate static analysis — linters, type checkers,
+      security scanners, complexity metrics, dead-code detectors.
+      Distinguishes signal from noise, suppresses at the right
+      scope, and feeds new findings back into the review and
+      porting workflows.
+    triggers:
+      - static analysis
+      - lint the repo
+      - type check
+      - security scan
+      - complexity metrics
+      - dead code
+      - suppress warnings
+    agent_affinity:
+      - sm-reviewer
+      - sm-codebase-cartographer
+
+  code-porting-between-platforms:
+    domain: porting
+    description: >-
+      Port existing code to a new platform while preserving
+      behavior — different OS, different architecture, different
+      runtime, or different deployment target. Covers conditional
+      compilation, platform-specific shims, CI matrix extension,
+      and a regression plan against the original platform.
+    triggers:
+      - port to linux
+      - port to windows
+      - port to arm
+      - cross platform
+      - new target
+      - platform shim
+      - conditional compilation
+    agent_affinity:
+      - sm-porter-translator
+      - sm-lead
+
+  language-translation-and-rewrite:
+    domain: translation
+    description: >-
+      Translate a module from one language to another — typescript
+      to rust, python to go, c to zig. Works in small, test-backed
+      slices that keep both versions runnable during the cutover.
+      Produces a translation plan, a correspondence table, and a
+      shared behavioral test suite that both implementations pass.
+    triggers:
+      - rewrite in rust
+      - translate to go
+      - port from python
+      - rewrite this module
+      - cross language
+      - language rewrite
+      - correspondence table
+    agent_affinity:
+      - sm-porter-translator
+
+  api-surface-diffing:
+    domain: api-diff
+    description: >-
+      Detect breaking changes across versions — exported symbols,
+      type signatures, default behaviors, wire protocols,
+      serialization shapes. Separates additive (safe) from
+      breaking (not safe) changes and flags the ones that need a
+      semver major or a deprecation period.
+    triggers:
+      - api diff
+      - breaking change
+      - semver major
+      - abi compatibility
+      - public surface
+      - deprecation
+      - exported symbols
+    agent_affinity:
+      - sm-reviewer
+      - sm-porter-translator
+
+  production-deployment-orchestration:
+    domain: deployment
+    description: >-
+      Drive a production deployment end-to-end — artifact promotion
+      from staging, change-window scheduling, approval chain,
+      running the deploy pipeline, verifying each stage, and
+      closing out the change record. The controlled path from
+      "green build" to "running in prod."
+    triggers:
+      - deploy to prod
+      - production rollout
+      - promote artifact
+      - change window
+      - cut the deploy
+      - deploy pipeline
+      - production push
+    agent_affinity:
+      - sm-deploy-engineer
+      - sm-lead
+
+  rollout-strategy-and-canary:
+    domain: rollout
+    description: >-
+      Choose and operate the right rollout shape — canary,
+      blue-green, rolling, feature flag, or dark launch. Defines
+      success metrics, guardrails, bake times, percentage steps,
+      and the abort conditions that trigger an automatic
+      rollback.
+    triggers:
+      - canary
+      - blue green
+      - feature flag
+      - rolling deploy
+      - dark launch
+      - bake time
+      - guardrail metric
+    agent_affinity:
+      - sm-deploy-engineer
+
+  incident-rollback-and-recovery:
+    domain: rollback
+    description: >-
+      Execute a clean rollback when a deploy goes bad — revert
+      artifact, drain in-flight work, reconcile any
+      forward-incompatible state (migrations, caches, queues),
+      notify stakeholders, and capture the evidence needed for
+      the post-incident review.
+    triggers:
+      - rollback
+      - revert the deploy
+      - back out
+      - undo migration
+      - bad deploy
+      - drain traffic
+      - emergency rollback
+    agent_affinity:
+      - sm-deploy-engineer
+      - sm-lead
+
+  observability-and-post-deploy-verification:
+    domain: observability
+    description: >-
+      Watch the system during and after a deploy. Covers
+      metric / log / trace dashboards, error-rate SLOs, latency
+      histograms, smoke-test probes, and the written verification
+      checklist that has to be green before a deploy is declared
+      complete.
+    triggers:
+      - post deploy checks
+      - smoke tests
+      - slo
+      - error rate
+      - latency histogram
+      - deploy verification
+      - watch the dashboards
+    agent_affinity:
+      - sm-deploy-engineer
+      - sm-lead
+
+agents:
+  topology: router
+  router_agent: sm-lead
+  agents:
+    - name: sm-lead
+      role: >-
+        Opus-class agent that owns the shape of the software
+        management effort. Decides whether a codebase needs a
+        mapping pass, a review, a port, a translation, or a deploy,
+        routes work to the specialist agents, and approves the
+        handoffs between them. Acts as capcom for the cartridge.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+        - Bash
+      is_capcom: true
+
+    - name: sm-codebase-cartographer
+      role: >-
+        Opus-class agent specialized in understanding existing
+        code. Produces codebase maps, architecture extractions,
+        and dependency graphs. Reads by intent, not by line
+        number, and outputs artifacts that every other agent in
+        the cartridge can consume.
+      model: opus
+      tools:
+        - Read
+        - Grep
+        - Glob
+        - Bash
+
+    - name: sm-reviewer
+      role: >-
+        Opus-class agent that reviews large or unfamiliar
+        changesets, runs static analysis, curates findings into
+        blocking vs. nit, and writes review summaries that an
+        author can act on. Also owns API surface diffing for
+        breaking-change detection.
+      model: opus
+      tools:
+        - Read
+        - Grep
+        - Glob
+        - Bash
+
+    - name: sm-porter-translator
+      role: >-
+        Opus-class agent that moves code — across platforms or
+        across languages. Writes translation plans, maintains
+        correspondence tables, authors shared behavioral tests
+        that both implementations must pass, and drives the
+        cutover in small test-backed slices.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+    - name: sm-deploy-engineer
+      role: >-
+        Sonnet agent that runs production deployments end-to-end —
+        artifact promotion, rollout strategy execution, post-deploy
+        verification, and clean rollback when a deploy goes bad.
+        Owns the change record and the evidence package.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+
+teams:
+  sm-mapping-team:
+    description: >-
+      Ramp up on an unfamiliar or inherited codebase. Lead frames
+      the questions to answer, cartographer builds the inventory,
+      architecture extraction, and dependency graph, reviewer
+      spot-checks static analysis findings against the map.
+    agents:
+      - sm-lead
+      - sm-codebase-cartographer
+      - sm-reviewer
+    use_when: >-
+      inheriting a repo, onboarding onto an unfamiliar service,
+      or preparing for a port / translation / deep review
+
+  sm-review-team:
+    description: >-
+      Review a large or unfamiliar changeset at scale. Reviewer
+      drives, cartographer provides the map that makes blast
+      radius legible, lead arbitrates blocking vs. nit and signs
+      off on the final verdict.
+    agents:
+      - sm-reviewer
+      - sm-codebase-cartographer
+      - sm-lead
+    use_when: >-
+      a PR or vendored drop is too large or too unfamiliar for a
+      single reviewer to evaluate in one pass
+
+  sm-porting-team:
+    description: >-
+      Port or translate code while preserving behavior.
+      Cartographer identifies coupling and platform-specific
+      surfaces, porter-translator does the actual move in
+      test-backed slices, reviewer audits the correspondence
+      table and the behavioral test suite.
+    agents:
+      - sm-codebase-cartographer
+      - sm-porter-translator
+      - sm-reviewer
+    use_when: >-
+      moving code to a new platform, rewriting a module in a
+      different language, or running a staged cutover where
+      both implementations live side by side
+
+  sm-deploy-team:
+    description: >-
+      Cut and verify a production deployment. Deploy engineer
+      runs the rollout, lead owns the approval chain and the
+      go / no-go calls, reviewer confirms the artifact under
+      rollout matches the reviewed commit range.
+    agents:
+      - sm-deploy-engineer
+      - sm-lead
+      - sm-reviewer
+    use_when: >-
+      promoting a build to production, running a canary or
+      blue-green rollout, or executing an emergency rollback

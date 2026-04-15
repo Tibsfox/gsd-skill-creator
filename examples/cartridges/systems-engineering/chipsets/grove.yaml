@@ -1,0 +1,46 @@
+namespace: systems-engineering
+record_types:
+  - name: RequirementItem
+    description: >-
+      A single system or subsystem requirement. Captures the shall
+      statement, rationale, source (stakeholder, derived, regulatory),
+      verification method, allocation to architecture element, parent
+      and child links, and current baseline status.
+
+  - name: ArchitectureModel
+    description: >-
+      A system architecture artifact — logical or physical. Records the
+      modeling language (SysML, block diagrams, ad-hoc), the view
+      captured (functional, structural, behavioral), the elements and
+      relationships, and the requirements it satisfies.
+
+  - name: InterfaceDefinition
+    description: >-
+      A controlled interface between two system elements. Records the
+      endpoints, direction, data / energy / material exchanged, protocol
+      or medium, timing and performance budgets, owning ICD, and the
+      change history for the interface.
+
+  - name: TradeStudy
+    description: >-
+      A structured trade-off analysis between alternatives. Records the
+      decision at stake, the alternatives considered, criteria and
+      weights, scores, sensitivity notes, the chosen option, and the
+      rationale — enough for a reviewer to reconstruct and, if needed,
+      revisit the decision.
+
+  - name: VerificationRecord
+    description: >-
+      Evidence that a requirement has been verified. Records the
+      requirement id, method (inspection / analysis / demonstration /
+      test), the procedure executed, the configuration under test,
+      results, pass / fail verdict, and the engineer who approved
+      closure.
+
+  - name: RiskItem
+    description: >-
+      A tracked technical risk or opportunity. Records the description,
+      likelihood and impact scores, the affected system element,
+      mitigation plan, current burn-down status, owner, and the next
+      review date. Links to any architecture, requirement, or safety
+      artifact it touches.

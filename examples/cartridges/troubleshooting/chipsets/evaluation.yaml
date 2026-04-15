@@ -1,0 +1,21 @@
+pre_deploy:
+  - all_skills_have_descriptions
+  - all_agents_have_roles
+  - grove_record_types_defined
+  - has_evaluation_chipset
+benchmark:
+  trigger_accuracy_threshold: 0.85
+  test_cases_minimum: 25
+  domains_covered:
+    - framing
+    - bisection
+    - root-cause
+    - hypothesis
+    - observation
+    - reproducibility
+    - fault-tree
+    - comparative
+    - intermittent
+    - containment
+    - post-incident
+    - handoff

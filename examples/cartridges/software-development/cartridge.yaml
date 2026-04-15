@@ -1,0 +1,38 @@
+id: software-development
+name: Software Development
+version: 0.1.0
+author: tibsfox
+description: >-
+  A full cartridge for software development — the daily surface area
+  of a working software engineer. Covers requirements and user
+  stories, design and API shaping, implementation, version control
+  workflow, automated testing, code review, refactoring and tech
+  debt, debugging and diagnosis, build and CI, release and deploy,
+  documentation and knowledge capture, and performance profiling.
+  Language- and stack-agnostic — composes with language-specific
+  cartridges (typescript, rust, python, go) and with
+  troubleshooting, systems-engineering, and project-management.
+trust: user
+provenance:
+  origin: scaffold
+  createdAt: 2026-04-14T19:23:47.947Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - examples/cartridges/systems-administration/cartridge.yaml
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - software-development
+    - engineering
+    - coding
+    - testing
+    - ci-cd
+    - code-review
+    - sdlc

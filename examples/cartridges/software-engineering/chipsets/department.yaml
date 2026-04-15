@@ -1,0 +1,383 @@
+skills:
+  discrete-mathematics-foundations:
+    domain: discrete-math
+    description: >-
+      The mathematical vocabulary of computer science — sets,
+      relations, functions, equivalence classes, partial orders,
+      induction, recursion, combinatorics, graphs, number theory
+      basics, and elementary probability. The prerequisite layer
+      that every later skill in this cartridge assumes.
+    triggers:
+      - discrete math
+      - set theory
+      - induction proof
+      - combinatorics
+      - graph theory
+      - equivalence relation
+      - pigeonhole
+      - cs prerequisites
+    agent_affinity:
+      - cs-professor
+      - algorithms-analyst
+
+  formal-logic-and-proof:
+    domain: logic
+    description: >-
+      Propositional and predicate logic, natural deduction,
+      sequent calculus, soundness and completeness, proof
+      techniques (direct, contrapositive, contradiction,
+      structural induction, strong induction). The substrate for
+      every formal argument about a program.
+    triggers:
+      - propositional logic
+      - predicate logic
+      - natural deduction
+      - sequent calculus
+      - proof technique
+      - soundness completeness
+      - structural induction
+    agent_affinity:
+      - proof-theorist
+      - cs-professor
+
+  computability-and-complexity:
+    domain: complexity
+    description: >-
+      Turing machines, decidability, reductions, the halting
+      problem, time and space complexity, big-O / big-Theta /
+      big-Omega, P / NP / NP-complete, space hierarchies, and
+      the limits of what any program can do. Separates "hard to
+      write" from "theoretically impossible."
+    triggers:
+      - turing machine
+      - halting problem
+      - decidability
+      - np complete
+      - big o analysis
+      - reduction proof
+      - complexity class
+      - space hierarchy
+    agent_affinity:
+      - cs-professor
+      - algorithms-analyst
+
+  automata-and-formal-languages:
+    domain: automata
+    description: >-
+      Finite automata (DFA / NFA), regular expressions and
+      regular languages, pushdown automata and context-free
+      grammars, the Chomsky hierarchy, pumping lemmas, closure
+      properties, and the decidability boundary between each
+      language class.
+    triggers:
+      - dfa
+      - nfa
+      - regular language
+      - context free grammar
+      - pushdown automaton
+      - chomsky hierarchy
+      - pumping lemma
+    agent_affinity:
+      - language-theorist
+      - cs-professor
+
+  type-theory-and-type-systems:
+    domain: types
+    description: >-
+      Simply typed lambda calculus, System F / polymorphism,
+      dependent types, subtyping, type inference (Hindley-Milner),
+      the Curry-Howard correspondence, and the design space of
+      real type systems (ML, Haskell, Rust, Idris, Lean).
+      Explains why a type error catches a bug before it happens.
+    triggers:
+      - type theory
+      - type system
+      - hindley milner
+      - system f
+      - dependent types
+      - curry howard
+      - type inference
+      - subtyping
+    agent_affinity:
+      - language-theorist
+      - proof-theorist
+
+  lambda-calculus-and-functional-foundations:
+    domain: lambda-calculus
+    description: >-
+      Untyped and typed lambda calculus, alpha / beta / eta
+      conversion, reduction strategies (normal order, call by
+      value, call by need), Church encodings, combinators (S, K,
+      I), fixed-point operators, and the bridge from pure
+      calculus to practical functional languages.
+    triggers:
+      - lambda calculus
+      - beta reduction
+      - church encoding
+      - combinator
+      - y combinator
+      - call by value
+      - normal form
+    agent_affinity:
+      - language-theorist
+
+  program-semantics:
+    domain: semantics
+    description: >-
+      Operational (small-step and big-step), denotational, and
+      axiomatic semantics. How to say precisely what a program
+      means — not just what it does when you run it. The
+      foundation for reasoning about equivalence, refinement,
+      and correctness.
+    triggers:
+      - operational semantics
+      - denotational semantics
+      - axiomatic semantics
+      - small step
+      - big step
+      - program meaning
+      - refinement
+    agent_affinity:
+      - proof-theorist
+      - language-theorist
+
+  algorithms-and-data-structures:
+    domain: algorithms
+    description: >-
+      Design paradigms (divide and conquer, dynamic programming,
+      greedy, backtracking, randomized, amortized), core data
+      structures (heaps, balanced trees, hash tables, union-find,
+      tries, graphs), correctness proofs via loop invariants,
+      and worst / average / amortized complexity analysis.
+    triggers:
+      - algorithm design
+      - dynamic programming
+      - divide and conquer
+      - greedy algorithm
+      - data structure
+      - loop invariant
+      - amortized analysis
+    agent_affinity:
+      - algorithms-analyst
+      - cs-professor
+
+  programming-language-theory:
+    domain: pl-theory
+    description: >-
+      Syntax, parsing theory (LL / LR / PEG), abstract syntax
+      trees, name resolution, scoping rules, evaluation orders,
+      effect systems, module systems, and the fundamental design
+      trade-offs every language maker eventually faces. Covers
+      the compiler pipeline at the conceptual level.
+    triggers:
+      - parser theory
+      - ll parser
+      - lr parser
+      - ast
+      - scoping rules
+      - effect system
+      - language design
+      - compiler pipeline
+    agent_affinity:
+      - language-theorist
+
+  formal-methods-and-verification:
+    domain: verification
+    description: >-
+      Hoare logic, weakest preconditions, separation logic,
+      invariants, model checking (finite and infinite state),
+      and machine-checked proof assistants (Coq, Lean, Isabelle,
+      Agda, F*). How to prove — not merely test — that a
+      program matches its specification.
+    triggers:
+      - hoare logic
+      - weakest precondition
+      - separation logic
+      - model checking
+      - coq
+      - lean prover
+      - isabelle
+      - agda
+      - f star
+      - machine checked proof
+    agent_affinity:
+      - proof-theorist
+
+  cs-curriculum-and-learning-pathways:
+    domain: curriculum
+    description: >-
+      The canonical textbooks, course sequencing, and open
+      courseware for a rigorous CS education — SICP, CLRS, TAPL,
+      PFPL, HoTT Book, Sipser, Arora-Barak, and the standard
+      undergraduate / graduate paths through them. Designs a
+      personal study plan that matches a learner's starting
+      point and goal.
+    triggers:
+      - cs curriculum
+      - where to start
+      - textbook recommendation
+      - sicp
+      - clrs
+      - tapl
+      - self study plan
+      - course sequence
+    agent_affinity:
+      - curriculum-advisor
+      - cs-professor
+
+  category-theory-for-computer-science:
+    domain: category-theory
+    description: >-
+      Categories, functors, natural transformations, products
+      and coproducts, monads, adjunctions, and their concrete
+      appearance in programming — why `Maybe` and `List` are
+      monads, what a `fmap` actually is, and how Kleisli
+      categories give effectful computation a clean algebra.
+    triggers:
+      - category theory
+      - functor
+      - monad
+      - natural transformation
+      - adjunction
+      - kleisli
+      - free monad
+      - applicative
+    agent_affinity:
+      - language-theorist
+      - proof-theorist
+
+agents:
+  topology: router
+  router_agent: cs-professor
+  agents:
+    - name: cs-professor
+      role: >-
+        Opus-class agent that owns the theoretical shape of the
+        cartridge. Frames questions, picks the right layer of
+        abstraction (logic, complexity, semantics, types), routes
+        work to specialist agents, and acts as capcom. Comfortable
+        in a proof, a complexity argument, or a textbook sequencing
+        discussion.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+      is_capcom: true
+
+    - name: proof-theorist
+      role: >-
+        Opus-class agent specialized in formal logic, proof
+        techniques, semantics, and machine-checked verification.
+        Writes proofs in natural deduction, Hoare triples, and
+        proof-assistant scripts (Coq / Lean / Isabelle / Agda).
+        Owns the Curry-Howard side of the cartridge.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+
+    - name: language-theorist
+      role: >-
+        Opus-class agent specialized in programming language
+        theory, type systems, lambda calculus, parsing, and
+        compiler-pipeline-level concerns. The agent you reach
+        for when designing or analyzing a language, a type
+        system, or an operational semantics.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+
+    - name: algorithms-analyst
+      role: >-
+        Sonnet agent specialized in algorithms, data structures,
+        complexity analysis, and combinatorial reasoning. Writes
+        loop invariants, amortized bounds, and reduction proofs.
+        The daily workhorse of the theory side.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+
+    - name: curriculum-advisor
+      role: >-
+        Sonnet agent specialized in CS pedagogy — textbooks,
+        course sequencing, self-study pathways, prerequisite
+        graphs, and matching a learner's starting point to the
+        right next book or lecture series. Outputs study plans
+        the learner can actually follow.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+
+teams:
+  se-theory-foundations-team:
+    description: >-
+      Build or audit a learner's theoretical foundation. Professor
+      frames the goal, curriculum advisor sequences the pathway,
+      algorithms analyst verifies prerequisite coverage by
+      exercising proof and analysis problems.
+    agents:
+      - cs-professor
+      - curriculum-advisor
+      - algorithms-analyst
+    use_when: >-
+      ramping up a new learner, filling prerequisite gaps, or
+      designing a self-study plan toward a CS-theory goal
+
+  se-proof-and-verification-team:
+    description: >-
+      Produce a machine-checkable proof or a formal verification
+      artifact. Proof theorist drives the proof, professor
+      approves the specification being proved, language theorist
+      confirms the semantic model is faithful to the language
+      under study.
+    agents:
+      - proof-theorist
+      - cs-professor
+      - language-theorist
+    use_when: >-
+      proving correctness of an algorithm, verifying a language
+      feature, or building a proof-assistant artifact
+
+  se-language-design-team:
+    description: >-
+      Design or analyze a programming language or type system.
+      Language theorist owns the design, proof theorist checks
+      soundness and decidability, professor evaluates the
+      design against existing PL-theory literature.
+    agents:
+      - language-theorist
+      - proof-theorist
+      - cs-professor
+    use_when: >-
+      designing a new language, extending a type system, or
+      analyzing an existing language's soundness
+
+  se-curriculum-and-learning-team:
+    description: >-
+      Produce a learning pathway, reading list, or course
+      sequence for a CS-theory goal. Curriculum advisor drives
+      selection, professor validates rigor and ordering,
+      algorithms analyst sanity-checks the exercise set.
+    agents:
+      - curriculum-advisor
+      - cs-professor
+      - algorithms-analyst
+    use_when: >-
+      building a study plan, choosing textbooks, or mapping a
+      learner's current knowledge to a target curriculum

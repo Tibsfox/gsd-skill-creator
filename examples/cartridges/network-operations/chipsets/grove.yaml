@@ -1,0 +1,58 @@
+namespace: network-operations
+record_types:
+  - name: NetworkIncident
+    description: >-
+      The authoritative record of a network outage or degradation
+      event. Captures severity, detection source, affected segments
+      (links, peers, POPs), observed symptoms, stabilization and
+      resolution times, incident commander, and pointers to the
+      timeline, telemetry snapshots, and postmortem.
+
+  - name: RouteChange
+    description: >-
+      A change to the routing state — route policy edit, prefix
+      filter update, static route add/remove, OSPF/ISIS area change,
+      or BGP community update. Records device, pre/post config diff,
+      operator, change window, verification steps, and rollback ID.
+
+  - name: PeeringSession
+    description: >-
+      A BGP peering relationship. Records peer AS, peer name,
+      addresses (v4/v6), session state, import/export policies,
+      max-prefix limits, RPKI validation stance, last established
+      time, and linkage to the circuit or IX that carries it.
+
+  - name: MaintenanceWindow
+    description: >-
+      A scheduled network change window. Captures window start/end,
+      scope (devices, circuits, services), risk class, MOP reference,
+      approvers, executing engineer, customer notification state,
+      and post-change verification outcome.
+
+  - name: CircuitRecord
+    description: >-
+      A physical or virtual circuit. Records circuit ID, carrier,
+      A and Z ends, capacity, service type (IP transit, MPLS,
+      wavelength, ethernet), LOA/CFA reference, install date,
+      contract term, and current operational state.
+
+  - name: DDoSEvent
+    description: >-
+      A DDoS attack event and its mitigation. Records attack vector,
+      peak bandwidth, peak pps, target prefixes, mitigation actions
+      taken (scrub, flowspec, null-route), mitigation start/end, and
+      residual customer impact after mitigation was applied.
+
+  - name: DNSChange
+    description: >-
+      A DNS zone or record change. Captures zone, record type and
+      value (before/after), TTL, operator, change window, DNSSEC
+      signing state at the time of change, propagation verification,
+      and rollback reference.
+
+  - name: NetworkCapacitySnapshot
+    description: >-
+      A point-in-time snapshot of network capacity and utilization.
+      Records top-N links by utilization, 95th-percentile values,
+      headroom by POP and by peer, forecasted exhaustion dates, and
+      the augments queued in response.

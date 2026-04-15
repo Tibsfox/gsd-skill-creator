@@ -1,0 +1,488 @@
+skills:
+  project-roadmapping:
+    domain: roadmap
+    description: >-
+      Bootstrap a new GSD project and author its roadmap. Covers
+      `/gsd new-project`, domain research, phase decomposition,
+      requirement-to-phase mapping, success criteria derivation,
+      dependency graphing, and the coverage-validation checklist
+      that keeps a roadmap honest. The roadmap is the spine every
+      later phase hangs off of.
+    triggers:
+      - new gsd project
+      - bootstrap project
+      - gsd new-project
+      - author roadmap
+      - decompose into phases
+      - requirement to phase mapping
+      - phase dependency graph
+    agent_affinity:
+      - gsd-capcom
+      - gsd-roadmapper
+
+  milestone-management:
+    domain: milestone
+    description: >-
+      Open, track, summarize, audit, and close GSD milestones.
+      Covers `/gsd new-milestone`, `/gsd milestone-summary`,
+      `/gsd audit-milestone`, `/gsd plan-milestone-gaps`, and
+      `/gsd complete-milestone`. A milestone is a phase cluster
+      with its own success criteria and ship gate; this skill
+      owns the whole lifecycle and writes a clean closeout
+      report into grove.
+    triggers:
+      - new milestone
+      - complete milestone
+      - close milestone
+      - milestone summary
+      - audit milestone
+      - plan milestone gaps
+      - milestone health
+    agent_affinity:
+      - gsd-capcom
+      - gsd-verifier
+
+  phase-planning:
+    domain: plan
+    description: >-
+      Author, insert, update, and retire phase plans via
+      `/gsd plan-phase`, `/gsd add-phase`, `/gsd insert-phase`,
+      and `/gsd remove-phase`. Produces a PLAN.md with task
+      breakdown, dependency analysis, files-modified list,
+      deviation-handling rules, and the goal-backward gate
+      that gsd-plan-checker enforces before execution.
+    triggers:
+      - plan phase
+      - new phase plan
+      - insert phase
+      - add phase
+      - remove phase
+      - update phase plan
+      - phase task breakdown
+      - plan.md
+    agent_affinity:
+      - gsd-capcom
+      - gsd-planner
+
+  phase-discussion:
+    domain: discuss
+    description: >-
+      Drive pre-plan phase discussion via `/gsd discuss-phase`.
+      Surfaces gray-area decisions, collects advisor research,
+      enumerates assumptions through the assumptions-analyzer,
+      and leaves a decision log that feeds directly into the
+      planner. Used when a phase is too ambiguous to plan
+      directly and needs a design pass first.
+    triggers:
+      - discuss phase
+      - gray area decisions
+      - phase design discussion
+      - list phase assumptions
+      - advisor research
+    agent_affinity:
+      - gsd-capcom
+      - gsd-planner
+
+  phase-research:
+    domain: research
+    description: >-
+      Run the upstream research pass for a phase via
+      `/gsd research-phase`. Fans out a researcher fleet,
+      aggregates findings into RESEARCH.md, captures research
+      grounding citations, and makes the output addressable
+      in grove so the planner and executor can cite it.
+    triggers:
+      - research phase
+      - phase research
+      - research.md
+      - research pass
+      - researcher fleet
+      - phase-researcher
+    agent_affinity:
+      - gsd-capcom
+      - gsd-phase-researcher
+
+  phase-execution:
+    domain: execute
+    description: >-
+      Execute a phase plan end-to-end via `/gsd execute-phase`,
+      `/gsd do`, `/gsd quick`, `/gsd fast`, `/gsd next`, and
+      `/gsd autonomous`. Runs atomic wave commits, handles
+      deviation escalation, writes checkpoint state into grove,
+      and honors the files-modified contract from the plan.
+      This is the hands-on-keyboard surface for GSD work.
+    triggers:
+      - execute phase
+      - gsd do
+      - gsd next
+      - gsd quick
+      - gsd fast
+      - run phase
+      - wave commit
+      - autonomous execution
+    agent_affinity:
+      - gsd-capcom
+      - gsd-executor
+
+  phase-verification:
+    domain: verify
+    description: >-
+      Run goal-backward verification on a completed phase via
+      `/gsd verify-work`, `/gsd validate-phase`, and
+      `/gsd audit-uat`. Checks that the codebase delivers what
+      the phase promised — not just that tasks were ticked —
+      and writes a VERIFICATION.md into grove with a
+      pass/fail verdict and the evidence chain.
+    triggers:
+      - verify work
+      - validate phase
+      - audit uat
+      - goal-backward verification
+      - verification.md
+      - phase verdict
+    agent_affinity:
+      - gsd-capcom
+      - gsd-verifier
+
+  backlog-and-todos:
+    domain: backlog
+    description: >-
+      Groom the backlog and per-phase todo list via
+      `/gsd add-backlog`, `/gsd review-backlog`, `/gsd add-todo`,
+      `/gsd check-todos`, and `/gsd plant-seed`. Each entry gets
+      a durable grove record with provenance, so nothing falls
+      through the cracks when a phase closes or a session
+      hands off.
+    triggers:
+      - add backlog
+      - review backlog
+      - add todo
+      - check todos
+      - plant seed
+      - groom backlog
+      - pending work
+    agent_affinity:
+      - gsd-capcom
+
+  debugging-and-forensics:
+    domain: debug
+    description: >-
+      Investigate bugs and regressions via `/gsd debug`,
+      `/gsd forensics`, and `/gsd health`. Runs scientific-method
+      debug sessions (hypothesis → experiment → observation →
+      refinement), manages checkpoints, and closes the loop by
+      writing a DebugSession record into grove for future
+      retrieval.
+    triggers:
+      - gsd debug
+      - debug session
+      - forensics
+      - bug hypothesis
+      - regression investigation
+      - gsd health
+      - scientific debugging
+    agent_affinity:
+      - gsd-capcom
+      - gsd-debugger
+
+  ui-phase-workflow:
+    domain: ui
+    description: >-
+      Drive the frontend-specific phase cycle via
+      `/gsd ui-phase` and `/gsd ui-review`. Produces a UI-SPEC
+      design contract, runs the 6-pillar visual audit, and
+      writes UI-REVIEW.md with BLOCK/FLAG/PASS verdicts so
+      frontend work stays contract-driven.
+    triggers:
+      - ui phase
+      - ui review
+      - ui spec
+      - ui audit
+      - design contract
+      - visual audit
+    agent_affinity:
+      - gsd-capcom
+      - gsd-planner
+      - gsd-verifier
+
+  codebase-mapping:
+    domain: map
+    description: >-
+      Build and refresh the project intel pack via
+      `/gsd map-codebase`. Spawns parallel codebase-mapper runs
+      for tech / arch / quality / concerns, writes structured
+      intel files, and keeps `.planning/intel/` synchronized
+      with the real state of the repo.
+    triggers:
+      - map codebase
+      - codebase intel
+      - refresh intel
+      - architecture snapshot
+      - project intel
+    agent_affinity:
+      - gsd-capcom
+      - gsd-phase-researcher
+
+  grove-memory-operations:
+    domain: grove
+    description: >-
+      The core of this cartridge — operate GSD's grove
+      content-addressed memory. Covers record-type modeling,
+      import/export, multi-hop retrieval, diff inspection,
+      signature verification, activity-log replay, namespace
+      queries, and migration between arena snapshots. Every
+      other skill in this cartridge produces records that
+      this skill knows how to read, link, and reconcile.
+      When a session hands off or a phase closes, grove is
+      what carries the context forward — not the conversation
+      window.
+    triggers:
+      - grove query
+      - grove import
+      - grove export
+      - grove record
+      - grove memory
+      - multi-hop retrieval
+      - content addressed
+      - skill view
+      - grove namespace
+      - activity log
+      - arena snapshot
+      - replay grove
+    agent_affinity:
+      - gsd-capcom
+      - gsd-executor
+
+  session-handoff:
+    domain: handoff
+    description: >-
+      Produce clean session handoffs via `/gsd session-report`,
+      `/gsd note`, `/gsd pause-work`, `/gsd resume-work`, and
+      `/gsd thread`. Each handoff writes a SessionReport record
+      into grove so the next session — human or agent — can
+      resume without re-reading the conversation history.
+    triggers:
+      - session report
+      - pause work
+      - resume work
+      - thread
+      - gsd note
+      - handoff
+      - session boundary
+    agent_affinity:
+      - gsd-capcom
+
+  ship-and-release:
+    domain: ship
+    description: >-
+      Prepare and execute release via `/gsd ship`, `/gsd pr-branch`,
+      and `/gsd review`. Covers branch hygiene, PR composition,
+      release-note authoring, and the final go/no-go against
+      milestone success criteria. The last-mile skill of the
+      cartridge.
+    triggers:
+      - gsd ship
+      - ship milestone
+      - pr branch
+      - release notes
+      - go no-go
+      - final review
+    agent_affinity:
+      - gsd-capcom
+      - gsd-verifier
+
+  user-and-project-profile:
+    domain: profile
+    description: >-
+      Manage per-user and per-project settings via
+      `/gsd profile-user`, `/gsd set-profile`, `/gsd settings`,
+      `/gsd stats`, and `/gsd progress`. Keeps the cartridge's
+      behavior tuned to developer preferences (verbosity,
+      autonomy, cadence) and exposes project-wide progress
+      telemetry.
+    triggers:
+      - profile user
+      - set profile
+      - gsd settings
+      - gsd stats
+      - gsd progress
+      - developer preferences
+    agent_affinity:
+      - gsd-capcom
+
+agents:
+  topology: router
+  router_agent: gsd-capcom
+  agents:
+    - name: gsd-capcom
+      role: >-
+        Opus-class capcom for the whole GSD pipeline. Owns routing
+        between roadmapper, planner, researcher, executor, verifier,
+        debugger, and the UI agents. Enforces phase boundaries,
+        escalates gray-area decisions, and writes the project-level
+        grove activity log. Every command in this cartridge starts
+        (or ends) at capcom.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+      is_capcom: true
+
+    - name: gsd-roadmapper
+      role: >-
+        Opus-class agent that creates project roadmaps with phase
+        breakdown, requirement-to-phase mapping, success-criteria
+        derivation, and coverage validation. Runs only at project
+        or milestone bootstrap — after that, the planner takes
+        over per phase.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Bash
+        - Grep
+        - Glob
+
+    - name: gsd-planner
+      role: >-
+        Opus-class agent that authors phase plans — task breakdown,
+        dependency analysis, files-modified contract, deviation
+        rules, and goal-backward gate inputs. Every phase that
+        reaches execution passes through this agent first.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Bash
+        - Grep
+        - Glob
+
+    - name: gsd-phase-researcher
+      role: >-
+        Opus-class agent that runs the pre-plan research pass.
+        Fans out researcher subagents, synthesizes findings into
+        RESEARCH.md, and captures research grounding citations
+        the planner can cite directly.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Bash
+        - Grep
+        - Glob
+
+    - name: gsd-executor
+      role: >-
+        Sonnet-class agent that executes phase plans end-to-end —
+        atomic wave commits, checkpoint management, deviation
+        handling, and files-modified enforcement. The hands that
+        do the mechanical work once a plan is frozen.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+    - name: gsd-verifier
+      role: >-
+        Opus-class agent that runs goal-backward verification on
+        completed phases. Reads the phase goal, checks that the
+        codebase actually delivers it, and writes VERIFICATION.md
+        with a pass/fail verdict and evidence chain.
+      model: opus
+      tools:
+        - Read
+        - Bash
+        - Grep
+        - Glob
+
+    - name: gsd-debugger
+      role: >-
+        Opus-class agent that runs scientific-method debug
+        sessions — hypothesis, experiment, observation, refinement.
+        Manages session checkpoints and writes a DebugSession
+        record into grove so the investigation is durable.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+teams:
+  gsd-project-bootstrap-team:
+    description: >-
+      Stand up a new GSD project from zero. Capcom routes,
+      project-researcher gathers domain context, roadmapper
+      drafts the phase graph, planner stress-tests the first
+      phase. Outcome: a ROADMAP.md + a planned-and-checked
+      Phase 1, plus the initial grove namespace.
+    agents:
+      - gsd-capcom
+      - gsd-roadmapper
+      - gsd-phase-researcher
+      - gsd-planner
+    use_when: bootstrapping a new GSD project or milestone
+
+  gsd-phase-cycle-team:
+    description: >-
+      Run one full phase cycle — research → plan → execute →
+      verify — without leaving the cartridge. Capcom orchestrates,
+      phase-researcher runs the upstream pass, planner authors
+      PLAN.md, executor ships waves, verifier closes the loop.
+      This is the default team for day-to-day GSD work.
+    agents:
+      - gsd-capcom
+      - gsd-phase-researcher
+      - gsd-planner
+      - gsd-executor
+      - gsd-verifier
+    use_when: running a normal phase from research through verification
+
+  gsd-debug-session-team:
+    description: >-
+      Drive a scientific-method debug session. Debugger owns
+      the hypothesis loop, executor runs experiments, verifier
+      confirms the fix delivers the original phase goal without
+      regressing it. Closes by writing a DebugSession record
+      into grove.
+    agents:
+      - gsd-capcom
+      - gsd-debugger
+      - gsd-executor
+      - gsd-verifier
+    use_when: investigating a bug, regression, or failing verification
+
+  gsd-milestone-closeout-team:
+    description: >-
+      Close a milestone. Verifier audits phase verdicts,
+      planner writes the milestone-summary and gap plan,
+      capcom authors the release notes and drives the ship
+      decision. Writes a MilestoneRecord into grove.
+    agents:
+      - gsd-capcom
+      - gsd-verifier
+      - gsd-planner
+    use_when: completing a milestone and preparing to ship
+
+  gsd-grove-memory-team:
+    description: >-
+      Maintain the grove memory substrate. Capcom coordinates
+      import/export runs, executor applies migrations between
+      arena snapshots, verifier cross-checks record integrity
+      (content hash + signature + activity-log replay). Run
+      this team whenever grove state moves — new project,
+      new namespace, cross-cartridge link, or arena upgrade.
+    agents:
+      - gsd-capcom
+      - gsd-executor
+      - gsd-verifier
+    use_when: importing, migrating, or auditing grove memory state

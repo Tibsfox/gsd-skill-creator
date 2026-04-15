@@ -1,0 +1,465 @@
+skills:
+  series-definition:
+    domain: series
+    description: >-
+      Define a new release series. Covers the three canonical shapes —
+      daily-cadence degree series (Seattle 360: one release per degree
+      for 360 degrees), mission-catalog series (NASA: 720 missions
+      tracked in a CSV-driven catalog), and book-as-release series
+      (Thicc Splines Save Lives / Blender book: chapter flow published
+      as a single shipped version with a research corpus). Produces
+      a ReleaseSeries record with id, scope, cadence, arc, catalog
+      source, and success criteria.
+    triggers:
+      - new release series
+      - define series
+      - 360 series
+      - nasa series
+      - book series
+      - series arc
+      - release catalog
+      - series scope
+    agent_affinity:
+      - release-capcom
+      - release-roadmapper
+
+  version-policy:
+    domain: version
+    description: >-
+      Own semver policy for the project. Decides major / minor /
+      subminor bumps, enforces subminor cadence (e.g. v1.49.N where
+      N increments per release in a series), handles pre-release and
+      build-metadata tags, and reconciles version across
+      `package.json`, `Cargo.toml`, `tauri.conf.json`, and any other
+      authoritative version files. Writes a VersionDecision record
+      per bump with the semver rationale.
+    triggers:
+      - bump version
+      - semver decision
+      - version policy
+      - subminor cadence
+      - version drift
+      - package version
+      - tag version
+    agent_affinity:
+      - release-capcom
+      - release-engineer
+
+  release-branching:
+    domain: branching
+    description: >-
+      Manage branch and tag hygiene for the release pipeline. Covers
+      dev → main merge strategy, release branches when cadence
+      requires them, tag creation (`v<major>.<minor>.<subminor>`),
+      hotfix branches off the last shipped tag, and the rule that
+      work happens on dev and only verified commits land on main.
+      Enforces the "PRs as work items" pattern.
+    triggers:
+      - release branch
+      - merge to main
+      - create tag
+      - branch strategy
+      - hotfix branch
+      - release pr
+      - git tag
+    agent_affinity:
+      - release-capcom
+      - release-engineer
+
+  changelog-generation:
+    domain: changelog
+    description: >-
+      Build changelogs from conventional-commits git history. Groups
+      commits by type (feat, fix, docs, refactor, perf, test, chore),
+      highlights breaking changes, and suggests the semver bump to
+      version-policy. Runs per release and produces a ChangelogEntry
+      grove record linked to the ReleaseRecord.
+    triggers:
+      - generate changelog
+      - conventional commits
+      - changelog entry
+      - breaking changes
+      - release changelog
+      - what changed
+    agent_affinity:
+      - release-capcom
+      - release-engineer
+
+  release-note-authoring:
+    domain: notes
+    description: >-
+      Author the release-note package for a single release. Writes
+      `docs/release-notes/<version>/README.md` with the mandatory
+      sections — Summary, Key Features, Retrospective, Lessons
+      Learned — and a full-body GitHub release text. Enforces the
+      "docs are the story" rule (full verbosity) and the no
+      co-author-line rule.
+    triggers:
+      - write release notes
+      - release readme
+      - github release body
+      - docs/release-notes
+      - release summary
+      - release feature list
+    agent_affinity:
+      - release-capcom
+      - release-engineer
+
+  series-cadence-ops:
+    domain: cadence
+    description: >-
+      Run the per-release cadence loop inside an active series.
+      Picks the next item off the series catalog (next degree, next
+      mission, next chapter), drives it through the plan → build →
+      ship → retro loop, carries the prior release's retrospective
+      forward so the next one can improve on it, and honors the
+      "one release at a time, sequential, no batching" rule.
+    triggers:
+      - next release
+      - next degree
+      - next mission
+      - advance cadence
+      - series loop
+      - one at a time
+      - sequential release
+    agent_affinity:
+      - release-capcom
+      - release-engineer
+
+  flywheel-orchestration:
+    domain: flywheel
+    description: >-
+      Orchestrate the release flywheel — the feedback loop that makes
+      each release improve on the last. Reads the prior release's
+      ReleaseRetrospective, derives a FlywheelDelta (what we changed
+      between N and N+1 and why), and feeds the delta into the next
+      cadence's planning inputs. The flywheel is what separates a
+      release series from a list of releases.
+    triggers:
+      - release flywheel
+      - carry forward
+      - feed retro forward
+      - flywheel delta
+      - improve next release
+      - series momentum
+    agent_affinity:
+      - release-capcom
+      - release-retrospective-analyst
+
+  build-and-publish:
+    domain: publish
+    description: >-
+      Execute the build-and-publish chain. Calls into the
+      publish-pipeline (pandoc → HTML/PDF), packages any binary
+      artifacts, uploads to the CDN / FTP target, cuts the GitHub
+      release, and writes a PublishArtifact record per output with
+      its content hash and distribution target. Proven on the 360
+      series daily cadence and on book releases like Thicc Splines
+      Save Lives (v1.49.203).
+    triggers:
+      - build release
+      - publish release
+      - ftp sync
+      - github release
+      - pandoc build
+      - release artifact
+      - ship release
+    agent_affinity:
+      - release-capcom
+      - release-publisher
+
+  release-verification:
+    domain: verify
+    description: >-
+      Pre-ship and post-ship verification for a release. Pre-ship
+      checks: tests green, version drift resolved, changelog
+      generated, release notes authored, artifacts built. Post-ship
+      checks: tag visible on origin, GitHub release live, published
+      artifacts reachable over HTTP, smoke test of key entry points.
+      Writes a ReleaseVerification record into grove.
+    triggers:
+      - verify release
+      - pre ship gate
+      - post ship smoke
+      - release smoke test
+      - release gate
+      - ship gate
+    agent_affinity:
+      - release-capcom
+      - release-verifier
+
+  retrospective-and-lessons:
+    domain: retro
+    description: >-
+      Run the per-release retrospective — what worked, what surprised
+      us, what we'd change, and the carry-forward item for the next
+      release. Writes a ReleaseRetrospective record and updates the
+      series-level lessons-learned chain. Enforces the "retrospective
+      + lessons learned" section requirement in release notes.
+    triggers:
+      - release retrospective
+      - lessons learned
+      - post release retro
+      - what went well
+      - what to change
+      - carry forward
+    agent_affinity:
+      - release-capcom
+      - release-retrospective-analyst
+
+  release-grove-memory:
+    domain: grove
+    description: >-
+      The core of this cartridge — operate the grove memory
+      substrate for the release pipeline. Every other skill in the
+      cartridge writes into this namespace, and this skill owns the
+      query / link / diff / replay / export surface. A complete
+      series (360 degrees, 720 missions, or a book-as-release) can
+      be rehydrated from grove by walking the GroveActivityLog and
+      reconstructing ReleaseSeries → SeriesCatalog → ReleaseRecord* →
+      ReleaseRetrospective* → FlywheelDelta* in order. Cross-series
+      links let the flywheel of one series feed into another.
+    triggers:
+      - release grove
+      - grove release record
+      - series replay
+      - rehydrate series
+      - release memory
+      - release activity log
+      - cross series link
+    agent_affinity:
+      - release-capcom
+      - release-engineer
+
+  release-communications:
+    domain: comms
+    description: >-
+      Compose and route release announcements — site posts, Discord,
+      social, mailing list. Stores each announcement as a
+      ReleaseCommunication record with its distribution targets so
+      the same text can be re-sent, versioned, or retracted. Also
+      owns deprecation notices for retired releases.
+    triggers:
+      - release announcement
+      - announce release
+      - discord post
+      - release social
+      - deprecation notice
+      - release comms
+    agent_affinity:
+      - release-capcom
+      - release-publisher
+
+  hotfix-and-patch:
+    domain: hotfix
+    description: >-
+      Ship an out-of-cadence hotfix for a shipped release. Branches
+      from the last tag, applies the minimal fix, bumps the subminor
+      (or adds a patch tag), and writes a HotfixRecord linked to
+      the root-cause DebugSession (from the get-shit-done cartridge)
+      and the affected ReleaseRecord. Skips the series cadence but
+      still runs pre/post-ship verification.
+    triggers:
+      - hotfix
+      - urgent patch
+      - out of cadence
+      - emergency release
+      - patch release
+      - rollback release
+    agent_affinity:
+      - release-capcom
+      - release-engineer
+      - release-verifier
+
+  series-closeout:
+    domain: closeout
+    description: >-
+      Close out a completed release series. Verifies every catalog
+      item shipped, authors the series-level retrospective, rolls up
+      the flywheel deltas into a single "what we learned across N
+      releases" document, and writes a SeriesRetrospective record
+      into grove. Used at degree 360, mission 720, or after the
+      final chapter of a book ships.
+    triggers:
+      - close series
+      - series retrospective
+      - end of series
+      - series complete
+      - wrap series
+    agent_affinity:
+      - release-capcom
+      - release-retrospective-analyst
+      - release-verifier
+
+agents:
+  topology: router
+  router_agent: release-capcom
+  agents:
+    - name: release-capcom
+      role: >-
+        Opus-class capcom for the whole release pipeline. Owns
+        routing between roadmapper, engineer, publisher, verifier,
+        and retrospective-analyst. Enforces the "one release at a
+        time, sequential" rule and drives the flywheel between
+        releases. Every command in this cartridge starts or ends
+        at capcom.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+      is_capcom: true
+
+    - name: release-roadmapper
+      role: >-
+        Opus-class agent that designs new release series. Picks the
+        shape (degree / mission / book / custom), authors the
+        catalog, sets the cadence, and writes the initial
+        ReleaseSeries + SeriesCatalog records. Runs once per series
+        at bootstrap.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Bash
+        - Grep
+        - Glob
+
+    - name: release-engineer
+      role: >-
+        Sonnet-class agent that does the mechanical work — version
+        bumps, branch operations, tag creation, changelog runs,
+        release-note scaffolding, and edits across the multiple
+        version files (package.json, Cargo.toml, tauri.conf.json).
+        The hands that prepare a release for ship.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+    - name: release-publisher
+      role: >-
+        Sonnet-class agent that drives the build-and-publish chain.
+        Runs pandoc, sync-to-live, GitHub release creation, and
+        the communications fan-out. Writes PublishArtifact and
+        ReleaseCommunication records as it goes.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Bash
+        - Grep
+        - Glob
+
+    - name: release-verifier
+      role: >-
+        Opus-class agent that owns pre-ship and post-ship
+        verification. Runs the ship gates, smoke-tests the
+        published artifacts over HTTP, confirms tag visibility on
+        origin, and signs off on the release-verification record
+        before capcom closes the cycle.
+      model: opus
+      tools:
+        - Read
+        - Bash
+        - Grep
+        - Glob
+
+    - name: release-retrospective-analyst
+      role: >-
+        Opus-class agent that runs per-release and per-series
+        retrospectives, computes flywheel deltas between releases,
+        and maintains the lessons-learned chain. Its output is what
+        makes the flywheel turn — every subsequent release reads
+        the prior retro before planning.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Bash
+        - Grep
+        - Glob
+
+teams:
+  release-series-bootstrap-team:
+    description: >-
+      Stand up a new release series from zero. Capcom routes,
+      roadmapper picks the shape (degree / mission / book / custom)
+      and authors the catalog, engineer verifies that versioning
+      and branch strategy are sound. Outcome: a ReleaseSeries + a
+      fully populated SeriesCatalog + the flywheel initialized.
+    agents:
+      - release-capcom
+      - release-roadmapper
+      - release-engineer
+    use_when: defining a new release series (360-style, NASA-style, book, or custom)
+
+  release-cycle-team:
+    description: >-
+      Run one full release cycle inside an active series — bump
+      version, build artifacts, ship, verify, retro, feed the
+      flywheel forward. This is the default team for day-to-day
+      release work.
+    agents:
+      - release-capcom
+      - release-engineer
+      - release-publisher
+      - release-verifier
+      - release-retrospective-analyst
+    use_when: shipping the next release in an active series
+
+  release-hotfix-team:
+    description: >-
+      Ship an out-of-cadence hotfix. Engineer branches from the
+      last tag, applies the minimal fix, publisher drives the
+      release, verifier runs the smoke test. Skips cadence but
+      keeps the ship gates.
+    agents:
+      - release-capcom
+      - release-engineer
+      - release-publisher
+      - release-verifier
+    use_when: an urgent fix is required between scheduled releases
+
+  release-series-closeout-team:
+    description: >-
+      Close out a completed release series. Verifier confirms every
+      catalog item shipped, retrospective-analyst writes the
+      series-level retrospective, capcom authors the closeout
+      announcement. Writes a SeriesRetrospective into grove.
+    agents:
+      - release-capcom
+      - release-verifier
+      - release-retrospective-analyst
+    use_when: finishing a release series (degree 360, mission 720, final book chapter)
+
+  release-flywheel-team:
+    description: >-
+      Drive the flywheel between releases. Retrospective-analyst
+      reads the prior retro, computes the delta, capcom feeds it
+      into the next cadence's planning inputs. Runs between every
+      release in an active series, not just at series boundaries.
+    agents:
+      - release-capcom
+      - release-retrospective-analyst
+    use_when: the previous release has shipped and the next is about to start
+
+  release-grove-memory-team:
+    description: >-
+      Maintain the grove memory substrate for the release pipeline.
+      Capcom coordinates import/export, engineer applies migrations
+      between arena snapshots, verifier cross-checks record
+      integrity (content hash + signature + activity-log replay).
+      Run whenever release grove state moves — new series,
+      cross-series link, or arena upgrade.
+    agents:
+      - release-capcom
+      - release-engineer
+      - release-verifier
+    use_when: importing, migrating, or auditing release grove memory

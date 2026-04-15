@@ -1,0 +1,108 @@
+namespace: release-engine
+record_types:
+  - name: ReleaseSeries
+    description: >-
+      The definition of a release series. Fields: id, name, shape
+      (degree / mission / book / custom), cadence (daily / weekly /
+      per-chapter / per-mission), arc description, success criteria,
+      start timestamp, and pointers to the canonical examples this
+      series draws from (e.g. "Seattle 360" for degree cadence,
+      "NASA 720" for mission cadence, "Thicc Splines Save Lives"
+      for the book-as-release pattern). Content-addressed so
+      catalog changes append new versions rather than mutating the
+      original.
+
+  - name: SeriesCatalog
+    description: >-
+      The ordered catalog of items in a series — one row per
+      planned release. For a degree series, 360 rows. For NASA,
+      720 rows pulled from the mission CSV. For the Blender book,
+      one row per published chapter plus a final "book shipped"
+      row. Each entry has a slug, intended version, status
+      (planned / shipped / skipped), and any catalog-specific
+      metadata (e.g. mission id, degree number, chapter path).
+
+  - name: ReleaseRecord
+    description: >-
+      A single shipped release. Fields: version string, git tag,
+      commit sha, series id + catalog-entry id (if part of a
+      series), shipped timestamp, artifact manifest, release-note
+      path, GitHub release URL, and the set of PublishArtifact
+      records it produced. The content address is the hash of the
+      shipped tag commit plus the release-note file.
+
+  - name: VersionDecision
+    description: >-
+      The semver rationale for a single version bump. Records the
+      prior version, the new version, the axis that moved (major /
+      minor / subminor / patch), the input that drove it
+      (breaking change / feature / fix / cadence-tick), and the
+      set of version files touched (package.json, Cargo.toml,
+      tauri.conf.json, etc.). Enables audit of "why did we go
+      from X to Y."
+
+  - name: ChangelogEntry
+    description: >-
+      A changelog produced from conventional-commits git history
+      for a single release. Groups commits by type, highlights
+      breaking changes, and links each group back to the commit
+      shas it came from. Paired 1:1 with a ReleaseRecord.
+
+  - name: ReleaseRetrospective
+    description: >-
+      The per-release retrospective. Fields: what worked, what
+      surprised us, what to change, carry-forward item, and
+      confidence scores. The carry-forward is the hook the
+      flywheel pulls on — the next release reads this record
+      before it plans.
+
+  - name: FlywheelDelta
+    description: >-
+      The computed delta between two consecutive releases — what
+      we actually changed in the release process between N and
+      N+1, and why. Derived from the ReleaseRetrospective at N
+      and the VersionDecision / ChangelogEntry at N+1. This is
+      the evidence that the flywheel is turning; an empty
+      FlywheelDelta chain means the series is stagnating.
+
+  - name: PublishArtifact
+    description: >-
+      A single built and distributed artifact — HTML page, PDF,
+      tarball, npm package, binary. Fields: content hash, build
+      inputs, build tool versions, output path, distribution
+      target (FTP / GitHub release / npm registry), and the
+      ReleaseRecord it was produced for. Content-addressed so
+      the same artifact shipped under two versions is detectable.
+
+  - name: HotfixRecord
+    description: >-
+      An out-of-cadence patch release. Links to the affected
+      ReleaseRecord, the root-cause DebugSession (from the
+      get-shit-done cartridge), the minimal diff applied, and
+      the verification verdict. Hotfixes skip the series cadence
+      but still write a ReleaseRecord.
+
+  - name: ReleaseCommunication
+    description: >-
+      A composed announcement for a release — site post, Discord
+      message, social post, mailing list blast, deprecation
+      notice. Stores the rendered text, the distribution target,
+      the timestamp, and a link to the ReleaseRecord. Versioned
+      so the same announcement can be retracted or re-sent.
+
+  - name: SeriesRetrospective
+    description: >-
+      The end-of-series retrospective — "what we learned across
+      N releases." Aggregates the ReleaseRetrospective chain and
+      the FlywheelDelta chain into a single synthesis, plus a
+      lessons-learned section that seeds the next series. Written
+      once per series, at closeout.
+
+  - name: GroveActivityLog
+    description: >-
+      The append-only activity log for this namespace. Every
+      record creation, link, export, and migration emits one
+      signed entry. Replaying a series means walking this log in
+      order and rehydrating the record graph; it is what makes
+      "rewind this series to release N" possible without
+      mutating shipped records.
