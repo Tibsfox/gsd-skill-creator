@@ -1,0 +1,45 @@
+namespace: software-development
+record_types:
+  - name: FeatureSpec
+    description: >-
+      A baselined description of a feature to be built. Records
+      user story, acceptance criteria, open questions, owner,
+      estimated shape, and links to any design document or ADR
+      that shaped it. The durable artifact that precedes
+      implementation.
+
+  - name: CodeReviewRecord
+    description: >-
+      The outcome of reviewing a pull request. Captures
+      reviewer, author, PR link, per-comment severity (blocking
+      vs. nit), the final verdict (approve / request-changes /
+      needs-more-eyes), and any follow-up issues filed.
+
+  - name: TestSuiteResult
+    description: >-
+      The outcome of a test suite run. Records commit SHA, test
+      target (unit / integration / e2e / property), pass / fail /
+      skipped counts, duration, failed test names, and the
+      artifact location for logs.
+
+  - name: BuildArtifact
+    description: >-
+      A produced build output. Records the commit SHA, build
+      environment, toolchain version, output path or URL, size,
+      checksum, and whether the build was reproducible against a
+      prior run of the same commit.
+
+  - name: ReleaseEntry
+    description: >-
+      A tagged release of the project. Records version (semver),
+      release date, commit SHA, changelog excerpt, artifact
+      links, rollback target, smoke-test verdict, and the
+      release engineer who signed off.
+
+  - name: DebugSession
+    description: >-
+      A focused debugging session. Records the original symptom,
+      minimal reproduction steps, hypotheses explored and
+      retired, the commit that introduced the bug (if found),
+      the failing regression test authored, and the final fix
+      commit.

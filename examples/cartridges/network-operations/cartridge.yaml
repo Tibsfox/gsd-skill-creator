@@ -1,0 +1,38 @@
+id: network-operations
+name: Network Operations
+version: 0.1.0
+author: tibsfox
+description: >-
+  A full cartridge for network operations center (NOC) work. Covers
+  routing and switching, BGP and peering, firewall and ACL operations,
+  load balancers and VIPs, VPN and tunneling, DNS operations, IP address
+  management, network monitoring and telemetry, DDoS mitigation,
+  circuit and carrier management, network change windows, and network
+  incident response. Distinct from systems-administration (host-level
+  network config) in that it owns the fabric between hosts — the
+  routers, switches, transit, peering, and edge. Composes with
+  systems-operations, security, and cloud-systems via the grove layer.
+trust: user
+provenance:
+  origin: scaffold
+  createdAt: 2026-04-14T19:30:00Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - examples/cartridges/systems-administration/cartridge.yaml
+    - examples/cartridges/systems-operations/cartridge.yaml
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - network-operations
+    - netops
+    - noc
+    - bgp
+    - routing
+    - peering

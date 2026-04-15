@@ -1,0 +1,40 @@
+id: gsd-skill-creator
+name: GSD Skill Creator
+version: 0.1.0
+author: tibsfox
+description: >-
+  Dogfood cartridge for gsd-skill-creator itself. Covers the full authoring
+  surface — skills, agents, teams, chipsets, cartridges — plus the grove
+  content-addressed memory subsystem (import, record modeling, query,
+  multi-hop retrieval, migration, export), skill testing discipline,
+  package publishing via npx, and GSD harness integration (hooks,
+  settings, commands). Ships in examples/cartridges/ AND wires into the
+  project-claude install so every gsd-skill-creator installation carries
+  the cartridge that teaches it how to author its own.
+trust: system
+provenance:
+  origin: forge
+  createdAt: 2026-04-14T19:43:52.583Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - docs/cartridge/CARTRIDGE-SPEC.md
+    - docs/GROVE-FORMAT.md
+    - src/cartridge/types.ts
+    - src/memory/grove-format.ts
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - skill-creator
+    - skill-authoring
+    - cartridge
+    - grove
+    - memory
+    - forge
+    - authoring

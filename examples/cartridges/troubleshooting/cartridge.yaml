@@ -1,0 +1,39 @@
+id: troubleshooting
+name: Troubleshooting
+version: 0.1.0
+author: tibsfox
+description: >-
+  A full cartridge for general-purpose troubleshooting across all
+  domains — software, hardware, mechanical, electrical, plumbing,
+  chemical and process, biological, organizational, and human-system.
+  Covers problem framing and symptom capture, divide-and-conquer
+  bisection, five-whys root-cause, hypothesis-and-test, observation
+  and measurement, reproducibility and isolation, fault-tree and
+  failure-mode analysis, comparative diagnosis, intermittent and
+  transient faults, safe-state and containment, post-incident
+  analysis, and mentoring handoff. Domain-agnostic by design —
+  composes over any physical or abstract system.
+trust: user
+provenance:
+  origin: scaffold
+  createdAt: 2026-04-14T19:18:12.652Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - examples/cartridges/systems-administration/cartridge.yaml
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - troubleshooting
+    - diagnosis
+    - root-cause
+    - debugging
+    - incident
+    - failure-analysis
+    - five-whys

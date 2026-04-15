@@ -1,0 +1,391 @@
+skills:
+  problem-framing-and-success-metrics:
+    domain: framing
+    description: >-
+      Turn a fuzzy business or research question into a concrete
+      data problem. Defines the unit of analysis, the outcome
+      variable, the success metric, the decision the answer will
+      drive, and the counterfactual — what "doing nothing" looks
+      like. Stops projects that cannot be measured before any
+      data is loaded.
+    triggers:
+      - frame the problem
+      - success metric
+      - decision criteria
+      - what question are we answering
+      - unit of analysis
+      - counterfactual
+      - project scoping
+    agent_affinity:
+      - ds-lead
+      - statistician
+
+  data-acquisition-and-ingestion:
+    domain: acquisition
+    description: >-
+      Pull data from its source — databases, warehouses, APIs,
+      files, event streams, web scrapes, third-party vendors.
+      Handles auth, rate limits, schema discovery, incremental
+      pulls, and the provenance record that links every row
+      back to where it came from.
+    triggers:
+      - pull data
+      - ingest
+      - extract
+      - api data
+      - database query
+      - web scrape
+      - provenance
+      - data source
+    agent_affinity:
+      - data-wrangler
+
+  data-cleaning-and-validation:
+    domain: cleaning
+    description: >-
+      Turn a raw dataset into a trusted one. Covers missing
+      values, outliers, type coercion, deduplication, schema
+      enforcement, referential integrity, unit consistency, and
+      the validation suite that runs every time the data is
+      refreshed.
+    triggers:
+      - clean the data
+      - missing values
+      - outliers
+      - deduplicate
+      - schema validation
+      - type coercion
+      - data quality
+    agent_affinity:
+      - data-wrangler
+
+  exploratory-data-analysis:
+    domain: eda
+    description: >-
+      Look at the data before modeling it. Covers summary
+      statistics, univariate and bivariate distributions,
+      correlation structure, segment comparisons, and the quick
+      visualizations that surface surprises before any model is
+      trained. The discipline of looking before leaping.
+    triggers:
+      - eda
+      - explore the data
+      - summary statistics
+      - distributions
+      - correlation matrix
+      - look at the data
+      - first look
+    agent_affinity:
+      - data-wrangler
+      - statistician
+
+  feature-engineering:
+    domain: features
+    description: >-
+      Derive the variables a model will actually use. Covers
+      encoding (one-hot, target, embedding), scaling,
+      transformation (log, Box-Cox), interaction and ratio
+      features, time-series lags, text vectorization, and
+      principled feature selection.
+    triggers:
+      - feature engineering
+      - encoding
+      - feature scaling
+      - feature selection
+      - interaction features
+      - embeddings
+      - tf idf
+      - lag features
+    agent_affinity:
+      - ml-modeler
+      - data-wrangler
+
+  statistical-modeling:
+    domain: statistics
+    description: >-
+      Classical statistical modeling — linear and generalized
+      linear models, mixed effects, survival, time series,
+      Bayesian inference, hypothesis testing, confidence
+      intervals. The side of modeling that cares about
+      estimation, uncertainty, and interpretable coefficients.
+    triggers:
+      - regression
+      - generalized linear model
+      - mixed effects
+      - bayesian inference
+      - hypothesis test
+      - confidence interval
+      - survival analysis
+      - time series
+    agent_affinity:
+      - statistician
+
+  machine-learning-modeling:
+    domain: ml
+    description: >-
+      Build predictive models — supervised (classification,
+      regression, ranking), unsupervised (clustering,
+      dimensionality reduction), and deep learning. Covers
+      model selection, hyperparameter tuning, regularization,
+      and the discipline of leaving a clean test set alone
+      until the very end.
+    triggers:
+      - train a model
+      - classification
+      - regression model
+      - clustering
+      - hyperparameter tuning
+      - cross validation
+      - deep learning
+      - xgboost
+    agent_affinity:
+      - ml-modeler
+
+  model-evaluation-and-validation:
+    domain: evaluation
+    description: >-
+      Measure whether a model is good enough to ship. Covers
+      task-appropriate metrics (AUC, F1, RMSE, MAPE, NDCG),
+      calibration, slice-level performance, error analysis,
+      train / val / test discipline, and bias / fairness audits
+      on protected subgroups.
+    triggers:
+      - evaluate the model
+      - confusion matrix
+      - auc
+      - rmse
+      - calibration
+      - slice evaluation
+      - error analysis
+      - fairness audit
+    agent_affinity:
+      - ml-modeler
+      - statistician
+
+  experimentation-and-ab-testing:
+    domain: experimentation
+    description: >-
+      Design and analyze experiments. Covers hypothesis
+      formulation, randomization, power analysis, sample size,
+      A/B and multi-arm designs, sequential testing, novelty
+      and primacy effects, guardrail metrics, and causal
+      inference from observational data when experiments are
+      impossible.
+    triggers:
+      - ab test
+      - experiment design
+      - power analysis
+      - sample size
+      - causal inference
+      - randomized trial
+      - treatment effect
+      - guardrail metric
+    agent_affinity:
+      - statistician
+      - ds-lead
+
+  data-visualization-and-storytelling:
+    domain: visualization
+    description: >-
+      Turn analysis into something a decision-maker can act on.
+      Covers chart-type selection (grammar of graphics),
+      annotation, color and accessibility, dashboard layout,
+      narrative structure, and the written summary that tells
+      the story in three sentences before the reader sees the
+      first chart.
+    triggers:
+      - visualize
+      - chart type
+      - dashboard
+      - data story
+      - executive summary
+      - grammar of graphics
+      - figure caption
+    agent_affinity:
+      - insights-communicator
+      - ds-lead
+
+  pipeline-and-reproducibility:
+    domain: pipeline
+    description: >-
+      Turn a notebook experiment into a reproducible pipeline.
+      Covers environment pinning, deterministic seeds, DAG
+      orchestration (Airflow / Prefect / Dagster), artifact and
+      experiment tracking (MLflow / W&B / DVC), and the rule
+      that every published result must be rerunnable from its
+      recorded inputs.
+    triggers:
+      - reproducible pipeline
+      - airflow
+      - prefect
+      - dagster
+      - mlflow
+      - dvc
+      - experiment tracking
+      - deterministic seed
+    agent_affinity:
+      - data-wrangler
+      - ml-modeler
+
+  ethics-privacy-and-governance:
+    domain: ethics
+    description: >-
+      Keep the work honest. Covers PII identification and
+      minimization, consent and lawful basis, differential
+      privacy, bias and fairness audits, model cards, data
+      sheets for datasets, and the governance review that
+      flags uses outside the original consent boundary.
+    triggers:
+      - pii
+      - privacy
+      - differential privacy
+      - bias audit
+      - model card
+      - data ethics
+      - consent
+      - governance review
+    agent_affinity:
+      - ds-lead
+      - statistician
+
+agents:
+  topology: router
+  router_agent: ds-lead
+  agents:
+    - name: ds-lead
+      role: >-
+        Opus-class agent that owns the data-science effort
+        end-to-end. Frames the problem, picks the right method
+        class (describe / predict / infer / prescribe), routes
+        work to specialists, and acts as capcom. Makes the
+        "is this actually answerable with data" call before
+        any time is burned.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+        - Glob
+      is_capcom: true
+
+    - name: data-wrangler
+      role: >-
+        Sonnet agent specialized in acquisition, cleaning, EDA,
+        and reproducible pipelines. Handles the 60–80% of the
+        work that sits between "raw source" and "ready to
+        model." Writes the validation suite that protects every
+        downstream step.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+    - name: statistician
+      role: >-
+        Opus-class agent specialized in statistical modeling,
+        experimentation, and causal inference. The agent you
+        reach for when uncertainty, interpretability, or a
+        treatment effect matters more than raw predictive
+        accuracy.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+
+    - name: ml-modeler
+      role: >-
+        Opus-class agent specialized in machine learning and
+        deep learning modeling — feature engineering, model
+        selection, tuning, regularization, evaluation, and
+        error analysis. The agent that owns the train / val /
+        test discipline.
+      model: opus
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+
+    - name: insights-communicator
+      role: >-
+        Sonnet agent specialized in visualization, narrative,
+        and delivery. Turns model output and statistical
+        findings into charts, dashboards, and written
+        summaries that a non-technical decision-maker can act
+        on in minutes.
+      model: sonnet
+      tools:
+        - Read
+        - Write
+        - Edit
+        - Grep
+
+teams:
+  ds-discovery-team:
+    description: >-
+      Scope a new data-science question and decide whether it
+      is answerable. Lead frames the problem and the success
+      metric, data-wrangler pulls a sample and runs EDA,
+      statistician sanity-checks that the question is
+      statistically meaningful before resources are committed.
+    agents:
+      - ds-lead
+      - data-wrangler
+      - statistician
+    use_when: >-
+      a new project is proposed and the team needs to decide
+      "can we actually answer this with the data we have"
+
+  ds-modeling-team:
+    description: >-
+      Build a predictive or explanatory model end-to-end.
+      Data-wrangler prepares the feature set, ml-modeler trains
+      and evaluates, statistician reviews the validation design
+      and any fairness audit.
+    agents:
+      - data-wrangler
+      - ml-modeler
+      - statistician
+    use_when: >-
+      the problem has been framed and the data is ready, and
+      the team needs a trained-and-evaluated model
+
+  ds-experiment-team:
+    description: >-
+      Design and analyze an experiment or quasi-experiment.
+      Statistician owns design, power, and causal inference,
+      lead aligns with stakeholders on what decision the
+      experiment will unlock, data-wrangler builds the
+      instrumentation and analysis pipeline.
+    agents:
+      - statistician
+      - ds-lead
+      - data-wrangler
+    use_when: >-
+      an A/B test, quasi-experiment, or causal-inference study
+      is being designed or analyzed
+
+  ds-delivery-team:
+    description: >-
+      Package findings for decision-makers. Insights
+      communicator drafts the visualizations and narrative,
+      lead approves the framing against the original success
+      metric, ml-modeler or statistician provides any
+      technical caveats that must appear with the result.
+    agents:
+      - insights-communicator
+      - ds-lead
+      - ml-modeler
+    use_when: >-
+      a project has reached conclusions and needs to be
+      delivered as a report, dashboard, or decision memo

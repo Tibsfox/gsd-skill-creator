@@ -1,0 +1,44 @@
+id: release-engine
+name: Release Engine
+version: 0.1.0
+author: tibsfox
+description: >-
+  Continuous release engine for GSD projects. Covers the full release
+  surface — series definition (360-style, NASA-style), versioning and
+  semver policy, branching and tagging, changelog and release-note
+  authoring, build and publish, pre-ship verification, per-release
+  retrospectives, the flywheel that compounds those retros into the
+  next cadence, hotfix handling, and release communications. Every
+  artifact — series catalog, release record, retro, flywheel delta,
+  publish artifact, hotfix — is content-addressed in grove so the
+  whole pipeline is replayable across sessions and machines. Ships
+  both as an in-tree example and as a core cartridge that installs
+  into every gsd-skill-creator harness via project-claude.
+trust: system
+provenance:
+  origin: forge
+  createdAt: 2026-04-14T20:04:00.534Z
+  researchGrounding:
+    - docs/cartridge/FORGING-GUIDE.md
+    - docs/cartridge/CARTRIDGE-SPEC.md
+    - docs/GROVE-FORMAT.md
+    - .claude/skills/publish-pipeline/SKILL.md
+    - docs/release-notes/
+chipsets:
+  - kind: department
+    src: ./chipsets/department.yaml
+  - kind: grove
+    src: ./chipsets/grove.yaml
+  - kind: evaluation
+    src: ./chipsets/evaluation.yaml
+metadata:
+  staging: scaffold
+  tags:
+    - release-engine
+    - release
+    - versioning
+    - flywheel
+    - series
+    - cadence
+    - grove
+    - memory
