@@ -84,6 +84,23 @@ Three structural alignments deepening the organism-mission resonance:
 
 </details>
 
+## Emerging Patterns at Degree 46
+
+| Pattern | Status | Degree 46 Value |
+|---------|--------|-----------------|
+| S36 Artists | 47 documented (degrees 0-46) | Rocky Votolato -- the confessional, punk-to-folk convert, 250 shows/year, Waxwing alum |
+| SPS Species | 47 documented (degrees 0-46) | Spotted Towhee -- second Passerellidae, ground-scratching specialist, the rasp |
+| NASA Missions | 47 aligned (1.0-1.47) | Gemini 9A -- angry alligator shroud, three rendezvous, Cernan's EVA crisis |
+| NASA Programs | 6 (7 crewed Gemini flights) | Every failure taught -- lessons went directly into Apollo EVA design |
+| Passerellidae Family | Consecutive pair (45-46) | Song Sparrow → Spotted Towhee; family's ground-level vocabulary deepens |
+| Genre Stages | Folk continues (Stage 27) | Two consecutive folk-primary degrees; sustained territory, not anomaly |
+| Energy Profile | E=3/E=3 (step up from softest) | 45's E=2/2 rises to 46's E=3/3 |
+| EVA Curriculum | REWRITTEN | Foot restraints, liquid cooling, visor anti-fog, humidity, task simplification |
+| Astronaut Fatalities | +See and Bassett (Feb 28, 1966) | T-38 crash into McDonnell plant where their spacecraft was being assembled |
+| Cernan Arc | BEGINS at degree 46 | Fogged visor on Gemini 9A → last footprint on Apollo 17 (six years) |
+| Rendezvous Profiles | 3 validated | Co-elliptic + equiperiod + optical from above -- Apollo contingency playbook |
+| Towhee Split (1995) | Mirrors 9/9A redesignation | Rufous-sided → Spotted/Eastern; one entity became two |
+
 ## Programs Active at Degree 46
 
 | Program | Status | Degrees |
