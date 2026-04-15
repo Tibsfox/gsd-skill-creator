@@ -2,6 +2,9 @@
 name: fleet-mission
 description: Parallel agent fleet dispatch with progress tracking and result aggregation. Launch N agents, monitor completion, merge results. Proven at 7-agent scale.
 version: 1.0.0
+format: 2025-10-02
+status: active
+updated: 2026-03-31
 ---
 
 # Fleet Mission

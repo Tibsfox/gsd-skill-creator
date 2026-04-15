@@ -1,6 +1,10 @@
 ---
 name: nudge-sync
 description: Synchronous immediate signaling channel for inter-agent communication. Implements latest-wins single-file nudge pattern for health checks, stall detection, and urgent pings.
+format: 2025-10-02
+version: 1.0.0
+status: active
+updated: 2026-03-06
 ---
 
 # Nudge Sync

@@ -2,6 +2,9 @@
 name: ecosystem-alignment
 description: Upstream version checking, agentskills.io spec compliance audit, Claude Code feature gap analysis. Activates on updates, version checks, or alignment work.
 version: 1.0.0
+format: 2025-10-02
+status: active
+updated: 2026-03-31
 ---
 
 # Ecosystem Alignment
