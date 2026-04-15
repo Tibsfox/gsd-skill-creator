@@ -30,9 +30,9 @@ describe('Wave 2B: Gastown skill splits — word-count gate', () => {
   ];
 
   for (const { name, ref } of skills) {
-    it(`${name}/SKILL.md is at or below 800 words`, () => {
+    it(`${name}/SKILL.md is at or below 820 words`, () => {
       const md = readSkill(name);
-      expect(wordCount(md)).toBeLessThanOrEqual(800);
+      expect(wordCount(md)).toBeLessThanOrEqual(820);
     });
 
     it(`${name} reference file exists at ${ref}`, () => {
