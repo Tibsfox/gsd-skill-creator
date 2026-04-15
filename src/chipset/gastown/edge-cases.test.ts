@@ -16,6 +16,7 @@ import * as path from 'node:path';
 import { mkdtemp, rm, mkdir, writeFile, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { resolveSkillPath } from './test-fixtures.js';
 
 // ---------------------------------------------------------------------------
 // Shared paths and helpers
@@ -199,10 +200,7 @@ describe('Edge Case Tests', () => {
   // HAL falls back to polling strategy, all features degrade gracefully
   // -------------------------------------------------------------------------
   it('EC-05: runtime HAL skill documents polling fallback for unknown runtimes', () => {
-    const content = fs.readFileSync(
-      path.resolve(PROJECT_ROOT, '.claude/skills/runtime-hal/SKILL.md'),
-      'utf8',
-    );
+    const content = fs.readFileSync(resolveSkillPath('runtime-hal'), 'utf8');
 
     // Verify unknown provider maps to polling
     expect(content).toMatch(/unknown.*polling/i);

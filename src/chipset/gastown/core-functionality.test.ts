@@ -18,6 +18,7 @@ import * as path from 'node:path';
 import { mkdtemp, rm, readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { resolveSkillDir, resolveSkillPath } from './test-fixtures.js';
 
 // ---------------------------------------------------------------------------
 // Shared paths and helpers
@@ -122,7 +123,7 @@ describe('Chipset Definition', () => {
       expect(directories, `No directory mapping for skill: ${skillName}`).toBeDefined();
 
       for (const dirName of directories) {
-        const skillDir = path.resolve(PROJECT_ROOT, `.claude/skills/${dirName}`);
+        const skillDir = resolveSkillDir(dirName);
         const exists = fs.existsSync(skillDir);
         expect(
           exists,
@@ -330,10 +331,7 @@ describe('Agent Topology Skills', () => {
   // Clean MR: rebase -> test -> merge -> push -> close
   // -------------------------------------------------------------------------
   it('CF-10: refinery merge pipeline is documented as 5-stage FIFO', () => {
-    const content = fs.readFileSync(
-      path.resolve(PROJECT_ROOT, '.claude/skills/refinery-merge/SKILL.md'),
-      'utf8',
-    );
+    const content = fs.readFileSync(resolveSkillPath('refinery-merge'), 'utf8');
 
     // Verify the 5-stage pipeline
     expect(content).toContain('CHECKOUT');
