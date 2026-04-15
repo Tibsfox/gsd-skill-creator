@@ -195,10 +195,10 @@ v1.49.517     = degree 16      Pass 2  ← next
 | `NASA/1.15/organism.md` | Organism Pairing | ~4,800 |
 | `docs/release-notes/v1.49.516/README.md` | Release Note | -- |
 
-## Complete State at Degree 15
+## Emerging Patterns at Degree 15
 
-| Thread | State | Key Detail |
-|--------|-------|------------|
+| Pattern | Status | Degree 15 Value |
+|---------|--------|-----------------|
 | S36 Artists | 16 documented (degrees 0-15) | First E=3. Second trumpet. Third UW product. Builder-Stayer. Origin Records. |
 | SPS Species | 16 documented (degrees 0-15) | First E=3 SPS. Accelerando. Anti-resolution. Second consecutive Parulidae. Willow riparian. |
 | NASA Missions | 16 aligned (1.0-1.15) | TIROS-1 weather satellite. 22,952 photos. RCA/Weather Bureau. |

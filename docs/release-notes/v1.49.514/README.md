@@ -175,10 +175,10 @@ v1.49.515     = degree 14      Pass 2  ← next
 | `NASA/1.13/organism.md` | Organism Pairing | ~4,200 |
 | `docs/release-notes/v1.49.514/README.md` | Release Note | -- |
 
-## Complete State at Degree 13
+## Emerging Patterns at Degree 13
 
-| Thread | State | Key Detail |
-|--------|-------|------------|
+| Pattern | Status | Degree 13 Value |
+|---------|--------|-----------------|
 | S36 Artists | 14 documented (degrees 0-13) | Third pianist (Seales). First DMA. Sixth pedagogical model. |
 | SPS Species | 14 documented (degrees 0-13) | First Vireonidae. First oak woodland. Repetition-without-variation. |
 | NASA Missions | 14 aligned (1.0-1.13) | Pioneer 5 deep space. 36.2M km record. IMF confirmed. |
