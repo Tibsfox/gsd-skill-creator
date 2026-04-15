@@ -2,9 +2,10 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { spawnSync } from 'node:child_process';
 import { existsSync, unlinkSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { resolveHookPath } from '../fixtures/test-hooks.js';
 
-const NOTIF = join(process.cwd(), '.claude/hooks/notification-logger.cjs');
-const WT = join(process.cwd(), '.claude/hooks/worktree-init.cjs');
+const NOTIF = resolveHookPath('notification-logger.cjs');
+const WT = resolveHookPath('worktree-init.cjs');
 
 function run(hook: string, stdin: string): { stdout: string; code: number | null } {
   const res = spawnSync('node', [hook], { input: stdin, encoding: 'utf8' });

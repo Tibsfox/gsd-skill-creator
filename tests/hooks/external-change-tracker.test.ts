@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { spawnSync } from 'node:child_process';
-import { join } from 'node:path';
+import { resolveHookPath } from '../fixtures/test-hooks.js';
 
-const HOOK = join(process.cwd(), '.claude/hooks/external-change-tracker.cjs');
+const HOOK = resolveHookPath('external-change-tracker.cjs');
 
 function run(stdin: string, cwd?: string): { stdout: string; code: number | null } {
   const res = spawnSync('node', [HOOK], {
