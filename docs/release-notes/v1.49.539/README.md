@@ -98,6 +98,23 @@ Three new research sections deepening the acoustic, ecological, and structural a
 
 </details>
 
+## Emerging Patterns at Degree 38
+
+| Pattern | Status | Degree 38 Value |
+|---------|--------|-----------------|
+| S36 Artists | 39 documented (degrees 0-38) | Booker T. Jones -- The Touring Anchor, Stax, Hammond B-3, last M.G. standing |
+| SPS Species | 39 documented (degrees 0-38) | Black-throated Gray Warbler -- sixth Parulidae, The Drawl, first dry habitat |
+| NASA Missions | 39 aligned (1.0-1.38) | Gemini 3 / Molly Brown -- first crewed Gemini, first orbital maneuver |
+| NASA Programs | 5 (Gemini begins) | Pioneer ✓ / Mercury ✓ / Ranger ✓ / Mariner active / Gemini opened |
+| Parulidae Family | FAMILY LEAD (6 species) | Sextet surpasses Hirundinidae and Turdidae (both at 5) |
+| Family Return Gap | Warbler = 18 degrees | Longest Parulidae absence (20→38) followed by return |
+| Setophaga Pair | ESTABLISHED | Yellow (16, highlighter) ↔ Black-throated Gray (38, ink drawing) |
+| Energy Profile | E≥5 × 7 consecutive | Degrees 32-38 -- longest sustained high-energy sequence |
+| Label Infrastructure | Atlantic/Stax deal mapped | Charles at 30 (Atlantic) + Jones at 38 (Stax) -- distribution pair |
+| Artist-City Pattern | +The Touring Anchor | Repeated-performance / gravitational connection, not biographical |
+| Habitat Range | +DRY WOODLAND | First xeric ecosystem (Garry oak, ponderosa pine) |
+| Grissom Arc | Return (degree 18 gap) | Liberty Bell 7 sank (20) → Molly Brown flies (38); Apollo 1 ahead |
+
 ## Programs Active at Degree 38
 
 | Program | Status | Degrees |
