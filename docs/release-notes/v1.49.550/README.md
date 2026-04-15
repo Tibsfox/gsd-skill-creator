@@ -156,10 +156,9 @@ are NOT regressions caused by this milestone.
 The milestone ran across two flight-ops sessions due to an API 500 crash
 mid-Wave 2D. The crashed session's in-flight work (new files + 19 backfilled
 SKILL.md files) was verified by the resumed flight-ops and committed intact
-without re-running the backfill. The handoff document at
-`.local/conversations/platform-alignment-wave1-handoff.md` made the resume
-straightforward — the primary value-add of maintaining wave-boundary handoffs
-even within a single session.
+without re-running the backfill. The wave-boundary handoff document made the
+resume straightforward — the primary value-add of maintaining handoffs even
+within a single session.
 
 Wave 3 surfaced 8 test failures: 3 pre-existing (harness-integrity, flagged),
 2 Wave 2D fixture drift (frontmatter-types cap, gastown word-count gate), and
@@ -194,4 +193,4 @@ Twelve platform improvements shipped, zero new dependencies, net +163 tests.
 - Wave execution plan: `docs/missions/platform-alignment/08-wave-execution-plan.md`
 - Test plan: `docs/missions/platform-alignment/09-test-plan.md`
 - Skill lifecycle spec: `docs/missions/platform-alignment/07-skill-lifecycle-spec.md`
-- Wave 0+1 handoff: `.local/conversations/platform-alignment-wave1-handoff.md`
+- Wave 0+1 handoff: maintained internally during the milestone
