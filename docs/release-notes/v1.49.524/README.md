@@ -42,19 +42,47 @@ E=4 on both tracks for the third consecutive degree (21-22-23). Combined 8 susta
 <details>
 <summary>Full Release Notes -- Click to expand</summary>
 
-## Retrospective: Degree 23 Lessons Learned
+## Part A: Allen Stone -- THE PREACHER'S SON
 
-1. **Fresh dual-builds work.** The NASA catalog provides sufficient mission data to write meaningful resonance sections without a pre-built research.md. The engine does not need 15-file NASA packs to produce paired releases -- the catalog row + S36/SPS Pass 1 + accumulated engine context is sufficient for the Pass 2 refinement model.
+### Pass 2 Refinement Summary
 
-2. **The internet-mediated career is a new launch vehicle.** Every prior artist used live performance, institutional connections, or label partnerships. Stone used YouTube. The medium changes the velocity. The "Unaware" video is the engine's first digital-native career ignition.
+Allen Stone assembled his musical education alone, in Chewelah, Washington -- population 2,600, Stevens County, northeast Washington, an hour north of Spokane, 300 miles east of Seattle. His father was a minister at Addy New Life Christian Center. Stone began singing in church at age three, was leading worship by fourteen. The church was his conservatory: gospel hymns for formal musical education, congregation-leading for performance training, the emotional directness of worship music for the foundation of a vocal style that would later earn comparisons to Stevie Wonder and Donny Hathaway. At fifteen, he discovered Wonder's *Innervisions* (1973), and the album transformed his understanding of what music could be. He began collecting classic soul and R&B -- Marvin Gaye, Hathaway, Bill Withers, Sam Cooke -- in a town with no record stores, no mentors in the genre, no scene to absorb. Every prior S36 artist either grew up inside a scene, was trained by institutions within one, or migrated to a major city that had one. Stone assembled his education from recordings, alone, in a place where nobody else was listening to the same music. The autodidact from a town with one stoplight.
 
-3. **Convergent vocal resemblance is a powerful concept.** The grosbeak sounds like a robin without being related to a robin. Independent optimization for shared habitat conditions produces acoustic similarity -- the biological equivalent of precision engineering hitting the same target through different mechanisms.
+The "Unaware" video is the engine's most structurally significant career moment since Ernestine Anderson's Concord label revival at degree 3. In April 2011, Stone filmed a live performance in his mother's living room in Chewelah -- the band packed into a small-town living room, Stone singing with the full force of a gospel-trained voice. Sixteen million YouTube views. The contrast between the modest setting and the extraordinary vocal power created a narrative audiences found irresistible. Conan O'Brien, David Letterman, Jay Leno -- all within months. ATO Records (Dave Matthews's label) signed him. The first internet-mediated career in the engine: not discovered by a label, not launched by a venue, not validated by an institution, but ignited by a YouTube video filmed in a rural Washington living room. The medium changed the velocity. Farnsworth invented the television that broadcast Schirra's precision flight; the same technology, evolved through six decades to YouTube, broadcast Stone's precision singing.
 
-4. **The eastern Washington pipeline deepens.** Three artists: Lanphere/Wenatchee (12), Monge/Spokane (20), Stone/Chewelah (23). Each further from Seattle than the last. The engine documents a widening geographic funnel.
+The eastern Washington pipeline deepens: Lanphere/Wenatchee (degree 12), Monge/Spokane (degree 20), Stone/Chewelah (degree 23). Each further from Seattle than the last, the geographic funnel widening from the Cascades toward Idaho. The Berklee connection extends: Stone served as Herb Alpert Visiting Artist at Berklee in 2023, joining Jones (degree 0), Frisell (degree 1), and Lorber (degree 15) in the Berklee network. Four Berklee connections in twenty-four degrees.
 
-5. **Sigma 7 is the Mercury program's most boring and most important flight.** No drama. No emergencies. No off-target splashdowns. Pure engineering validation. The importance of boring: it proves the system works without heroics.
+### Retrospective: Degree 23 Patterns Established
 
-6. **The beaver as ecosystem engineer parallels Schirra as mission engineer.** Both reshape their environment through infrastructure. Both operate by building systems rather than performing feats. The dam and the flight plan serve the same function: structured modification of the environment to produce reliable outcomes.
+1. **The internet-mediated career is a new launch vehicle.** Every prior artist used live performance, institutional connections, or label partnerships. Stone used YouTube. The medium changes the velocity. The "Unaware" video is the engine's first digital-native career ignition.
+
+2. **The eastern Washington pipeline deepens.** Three artists: Lanphere/Wenatchee (12), Monge/Spokane (20), Stone/Chewelah (23). Each further from Seattle than the last. The engine documents a widening geographic funnel.
+
+3. **Berklee as institutional web.** Stone's 2023 Herb Alpert visiting artistship adds a fourth Berklee node to Jones, Frisell, and Lorber. The institutional web tightens as the degree count grows.
+
+4. **Church-as-conservatory.** Gospel hymns for formal musical education, congregation-leading for performance training, emotional directness of worship as the foundation of a soul vocal style. The preacher's son as a distinct artist-city pattern.
+
+---
+
+## Part B: Black-headed Grosbeak -- THE CONVERGENT VOICE
+
+### Pass 2 Refinement Summary
+
+The Black-headed Grosbeak's song returns the engine to tonal melody after the flicker's broadband percussion. Rich, rolling phrases of slurred whistles, robin-like in quality, E=4, filling the mixed forest canopy with a warmth that reads as familiarity even on first hearing -- because the song sounds like the American Robin, which appears at degree 25 but which every listener already knows. The resemblance is not mimicry. The grosbeak (Cardinalidae) and the robin (Turdidae) are not closely related. The similarity is convergent evolution -- two unrelated lineages arriving at similar acoustic solutions through independent optimization for shared habitat conditions. Both are large-bodied songbirds (the grosbeak at 38-47g, the robin at 77-85g) that sing from elevated perches in mixed forest and open woodland. Both produce rich, complex, frequency-modulated phrases. The vocal apparatus and the acoustic environment selected for similar solutions through different paths.
+
+Cardinalidae is the fifteenth family in the engine, the first heavy-billed seed-crusher. The grosbeak's conical bill and massive jaw musculature are built for cracking seeds -- an ecological niche distinct from the insectivorous warblers and thrushes that have dominated the engine's avifauna. The bill is a tool, the way the flicker's bill is a tool, but where the flicker uses its bill as a percussion instrument, the grosbeak uses its bill as a vise. Two Picidae bills (degrees 21-22) and one Cardinalidae bill (degree 23) -- three degrees, three bill functions: probing (flicker on ground), drumming (flicker on snag), crushing (grosbeak on seed). The engine's bill-as-tool catalog begins. The beaver -- Schirra's degree organism -- builds with its teeth what the grosbeak crushes with its bill: infrastructure, the reshaping of environment through jaw-powered engineering.
+
+### Retrospective: Degree 23 Lessons Learned
+
+1. **Convergent vocal resemblance is a powerful concept.** The grosbeak sounds like a robin without being related to a robin. Independent optimization for shared habitat conditions produces acoustic similarity -- the biological equivalent of precision engineering hitting the same target through different mechanisms.
+
+2. **Cardinalidae enters.** Fifteenth family. Heavy-billed seed-crusher. Convergent robin-like song. A new family that immediately foreshadows a species still ahead at degree 25.
+
+3. **The bill-as-tool catalog begins.** Three consecutive degrees, three bill functions: probing (flicker on ground, 21), drumming (flicker on snag, 22), crushing (grosbeak on seed, 23). The engine's taxonomy of tool use begins.
+
+4. **Fresh dual-builds work.** The NASA catalog provides sufficient mission data to write meaningful resonance sections without a pre-built research.md. The engine does not need 15-file NASA packs to produce paired releases -- the catalog row + S36/SPS Pass 1 + accumulated engine context is sufficient for the Pass 2 refinement model.
+
+5. **The beaver as ecosystem engineer parallels Schirra as mission engineer.** Both reshape their environment through infrastructure. Both operate by building systems rather than performing feats. The dam and the flight plan serve the same function: structured modification of the environment to produce reliable outcomes.
 
 ### Carry-Forward Items from Degree 23
 
