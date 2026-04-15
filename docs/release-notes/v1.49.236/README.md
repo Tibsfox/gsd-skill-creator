@@ -2,35 +2,35 @@
 
 **Released:** 2026-04-01
 **Degree:** 96 of 360 -- Sixth degree of Quadrant II
-**Part A:** STRFKR -- Indie Electronic, E=5, Polyvinyl Records, Portland, GENRE STAGE 78 (Indie Electronic, seventy-eight genre stages in 96 degrees, synth-pop with indie sensibility danceable electronic beats DIY production values catchy melodies irreverent spirit, distinguished from Electronic 95 cinematic festival-scale and Electronic/Experimental 94 studio-as-instrument and Dream Pop/Electronic 93 reverb-driven intimate and Electronic Pop 86 structured melodic), THE SYNTH-POP PULSE 97th acoustic element (driving synth bass lines pulsing electronic rhythms catchy melodies layered over danceable beats constant forward motion no dramatic build no cinematic arc relentless joyful groove, distinct from euphoric build 95 cinematic tension-release and producer's palette 94 experimental studio and shimmer veil 93 reverb-as-architecture), THE DIY MAXIMALIST 97th artist-city pattern (artist operating with DIY ethos self-produced independent low-budget while delivering maximalist energy in live performance, STRFKR records scrappy and self-directed STRFKR live shows explosions of energy costumes confetti joyful chaos, Portland provides economic and cultural conditions, distinct from Bellingham pipeline 95 geographic incubation and cross-genre bridge 94 connecting communities), Portland, Polyvinyl Records, BACK-TO-BACK E=5 WITH ODESZA (95), legendary live shows costumed confetti joyful chaos
-**Part B:** Wood Frog (*Lithobates sylvaticus*) -- duck-like clucking chorus, E=4, vernal pool, Ranidae, NEW FAMILY (46th), Anura continues, FREEZE TOLERANCE (survives being frozen solid up to 65% body water as ice heart stops thaws in spring first freeze-tolerant species cryoprotectant glucose), VERNAL POOL (first temporary habitat, seasonal pools that fill with snowmelt dry by summer fishless), duck-like clucking chorus 97th species-side acoustic element (rapid low-pitched raspy clucking resembling duck quacking from vernal pool breeding aggregations, distinct from mass wing buzz 95 passive collective emergence and amplified krek-krek 86 high-pitched sharp and bell-like peep 90 high ethereal), E=4 (active vocalization breeding chorus dozens to hundreds calling, matches Pacific Treefrog 86 E=4 both anuran choruses), THIRTY-SIXTH CONSECUTIVE ORIGINAL CSV
+**Part A:** STRFKR -- Indie Electronic, E=5, Polyvinyl Records, Portland, GENRE STAGE 78 (Indie Electronic, seventy-eight genre stages in 96 degrees, synth-pop with indie sensibility danceable electronic beats DIY production catchy melodies irreverent spirit, distinguished from Electronic 95 cinematic festival-scale euphoric builds and Electronic/Experimental 94 studio-as-instrument genre-blending and Dream Pop/Electronic 93 reverb-laden intimate and Electronic Pop 86 structured melodic melancholic), THE SYNTH-POP PULSE 97th acoustic element (driving infectious synth bass lines pulsing electronic rhythms catchy melodies over danceable beats constant forward motion no dramatic build relentless joyful groove, distinct from euphoric build 95 cinematic tension-release and producer's palette 94 experimental studio and shimmer veil 93 reverb-as-architecture), THE DIY MAXIMALIST 97th artist-city pattern (DIY ethos self-produced independent low-budget yet maximalist live energy explosions of costumes confetti joyful chaos Portland infrastructure cheap studios DIY venues Polyvinyl, distinct from Bellingham pipeline 95 geographic incubation and cross-genre bridge 94 connecting scenes), Portland, Polyvinyl Records, BACK-TO-BACK E=5 ELECTRONIC with ODESZA (95), Joshua Hodges, legendary live shows
+**Part B:** Wood Frog (*Lithobates sylvaticus*) -- duck-like clucking chorus, E=4, vernal pool, Ranidae, NEW FAMILY (46th), Anura continues (third entry), FREEZE TOLERANCE (survives frozen solid 65% body water as ice heart stops thaws in spring first freeze-tolerant species in engine cryoprotectant glucose), VERNAL POOL HABITAT (first temporary habitat in engine fishless ephemeral), duck-like clucking chorus 97th species-side acoustic element (raspy percussive rhythmic clucking resembles quacking ducks dozens to hundreds calling simultaneously, distinct from amplified krek-krek 86 high-pitched and bell-like peep 90 ethereal and mass wing buzz 95 collective shimmering), E=4 (chorus effect dozens to hundreds calling simultaneously vernal pool amplification brief but intense 1-2 week breeding season), THIRTY-SIXTH CONSECUTIVE ORIGINAL CSV
 **Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** The pulse and the freeze. Relentless energy and resilient biology. On the music side, **STRFKR** arrives with Indie Electronic -- the project of **Joshua Hodges**, founded in **Portland, Oregon** in 2007. Known for infectious synth-pop and explosive live performances -- costumed, confetti, joyful chaos. Polyvinyl Records. **Genre Stage 78** -- Indie Electronic. E=5. **BACK-TO-BACK E=5** with ODESZA (95) -- consecutive maximum-energy electronic entries. The **synth-pop pulse** is the 97th acoustic element: driving synth bass lines, pulsing rhythms, catchy melodies, constant forward motion -- no dramatic build, just relentless joyful groove. Where ODESZA builds to euphoric drops, STRFKR maintains relentless groove. The **DIY maximalist** is the 97th artist-city pattern: DIY ethos meets maximalist live energy -- scrappy records, explosive shows, Portland's infrastructure makes it possible. On the species side, the **wood frog** (*Lithobates sylvaticus*) introduces **NEW FAMILY Ranidae (46th)** and the engine's **first freeze-tolerant species** -- it survives being **frozen solid**, up to **65% of body water as ice**, heart stops, thaws in spring to resume activity. The duck-like clucking chorus is the 97th acoustic element (species side) -- rapid, low-pitched, raspy clucking from vernal pool breeding aggregations. E=4. The **vernal pool** is the first temporary habitat in the engine -- seasonal pools that fill with snowmelt and dry by summer. Both sides are about persistence -- STRFKR maintains relentless pulse through DIY ethos; the wood frog persists through the freeze. **Thirty-sixth consecutive original CSV.** The pulse and the freeze.
+**Note:** The pulse and the freeze. Relentless groove and extreme survival. On the music side, **STRFKR** arrives with Indie Electronic -- the project of **Joshua Hodges**, founded in **Portland, Oregon** in 2007. Originally a solo project, STRFKR grew into a full band known for infectious synth-pop and explosive live performances. Deliberately provocative name -- Hodges assumed it would never need to be a "real" band name. **Polyvinyl Records**. **Genre Stage 78** -- Indie Electronic. E=5. **Back-to-back E=5 electronic** with ODESZA (95). The **synth-pop pulse** is the 97th acoustic element: driving synth bass lines, pulsing electronic rhythms, catchy melodies over danceable beats -- constant forward motion, relentless joyful groove. The **DIY maximalist** is the 97th artist-city pattern: DIY ethos with maximalist live energy, Portland's cheap studios and DIY venues making it possible. STRFKR live shows are legendary -- costumed, confetti, inflatables, joyful chaos. On the species side, the **wood frog** (*Lithobates sylvaticus*) introduces **Ranidae** as **NEW FAMILY (46th)** and the **second anuran family** (after Hylidae at degrees 86 and 90). Third amphibian entry. The wood frog is the engine's **first freeze-tolerant species** -- survives being **frozen solid**, up to **65% body water as ice**, heart stops, blood crystallizes, thaws in spring with cryoprotectant glucose. The duck-like clucking chorus is the 97th acoustic element (species side) -- raspy, percussive, duck-like. E=4. **Vernal pool** habitat -- first temporary habitat in the engine. Among the very first amphibians to breed each year -- calling while snow is still on the ground. **Thirty-sixth consecutive original CSV.** The pulse and the freeze. STRFKR maintains relentless pulse; the wood frog endures the freeze. Both about persistence.
 
 ## Summary
 
-The synth-pop pulse and the duck-like clucking. Degree 96 is persistence on both sides -- relentless electronic groove and biological resilience.
+The synth-pop pulse and the duck-like clucking chorus. Degree 96 is persistence on both sides -- relentless groove and extreme survival.
 
-On the music side, **STRFKR** arrives with Indie Electronic -- the project of **Joshua Hodges**, founded in **Portland, Oregon** in 2007. Originally conceived as a solo project, the deliberately provocative name reflects the assumption it would never need to be a real band name. STRFKR grew into a full band known for infectious synth-pop and explosive live performances. Key albums: *STRFKR* (2008, self-titled debut), *Reptilians* (2011, Polyvinyl Records), *Miracle Mile* (2013, commercial breakthrough), *Being No One, Going Nowhere* (2016, meditation-influenced). STRFKR's live shows are legendary in the Portland scene -- high-energy, costumed, confetti, inflatables, joyful chaos. **Genre Stage 78** -- Indie Electronic. E=5. **BACK-TO-BACK E=5** with ODESZA (95) -- consecutive maximum-energy electronic entries. Seventh electronic-adjacent entry in eleven degrees (86, 90, 91, 93, 94, 95, 96). STRFKR is a product of **Portland's indie infrastructure** -- cheap rehearsal spaces, DIY venues, indie labels, audiences that reward authenticity. **The synth-pop pulse** is the 97th acoustic element -- driving synth bass lines, pulsing rhythms, catchy melodies, constant forward motion, relentless joyful groove. Where ODESZA (95) builds to euphoric drops, STRFKR maintains constant groove -- no dramatic arc, just joy engineered for movement. **The DIY maximalist** is the 97th artist-city pattern -- DIY ethos (self-produced, independent, low-budget) meets maximalist live energy (costumes, confetti, explosive shows). Portland's infrastructure enables the pattern.
+On the music side, **STRFKR** arrives with Indie Electronic -- the project of **Joshua Hodges**, founded in **Portland** in 2007. Originally a solo project that grew into a full band. Known for infectious synth-pop and explosive live shows. **Polyvinyl Records**. Key albums: *STRFKR* (2008, self-titled debut, DIY), *Reptilians* (2011, expanded sound), *Miracle Mile* (2013, commercial breakthrough), *Being No One, Going Nowhere* (2016, meditation-influenced). Live shows are legendary in Portland -- costumed, confetti, inflatables, joyful chaos. **Genre Stage 78** -- Indie Electronic. E=5. **Back-to-back E=5 electronic** with ODESZA (95). Distinguished from ODESZA (95, cinematic festival-scale), Erik Blood (94, experimental), and The Postal Service (86, melancholic). STRFKR is scrappy, dance-floor-scale, constant groove. **The synth-pop pulse** is the 97th acoustic element -- driving synth bass, pulsing rhythms, catchy melodies, constant forward motion. No dramatic arc, just joy engineered for movement. **The DIY maximalist** is the 97th artist-city pattern -- Portland's infrastructure (cheap studios, DIY venues, Polyvinyl) enables DIY production with maximalist live energy. Seventh electronic-adjacent entry in eleven degrees (86, 90, 91, 93, 94, 95, 96).
 
-On the species side, the **wood frog** (*Lithobates sylvaticus*) introduces **NEW FAMILY Ranidae (46th)** -- true frogs, the second anuran family after Hylidae (86, 90). Third amphibian entry. The engine returns to **Amphibia** after nine insect entries (87-95). The wood frog is the engine's **first freeze-tolerant species** -- it survives being **frozen solid**, with up to **65% of body water as ice**, heart stops beating, no breathing, no brain activity. The frog produces cryoprotectant glucose at 100x normal levels, preventing intracellular ice damage. When spring arrives, the heart restarts, blood flows, and the frog hops to a breeding pool within hours. This is not hibernation -- the frog is frozen solid and comes back. The **duck-like clucking chorus** is the 97th acoustic element (species side) -- rapid, low-pitched, raspy clucking from vernal pool breeding aggregations that sounds remarkably like ducks. E=4. The **vernal pool** is the first temporary habitat in the engine -- seasonal pools that fill with snowmelt and spring rain, then dry completely by summer. Fishless (too ephemeral for fish), making them safe for amphibian eggs and larvae. Wood frogs are among the very first amphibians to breed each year -- often calling while snow is still on the ground. Breeding season extremely compressed: 1-2 weeks. **Thirty-sixth consecutive original CSV species.**
+On the species side, the **wood frog** (*Lithobates sylvaticus*) introduces **Ranidae** as **NEW FAMILY (46th)** -- true frogs. Third amphibian entry (86, 90, 96). Second anuran family (after Hylidae). The wood frog is the engine's **first freeze-tolerant species** -- it survives being **frozen solid**. Up to **65% of body water** converts to ice. Heart stops. No breathing. No brain activity. Blood sugar rises to **100x normal** as cryoprotectant glucose prevents ice crystals from destroying cells. Ice forms between cells, not within them. The frog **thaws in spring** and resumes normal activity within hours. Can survive multiple freeze-thaw cycles per winter. The duck-like clucking chorus is the 97th acoustic element (species side) -- raspy, percussive, rhythmic clucking resembling a group of ducks. E=4. **Vernal pool** habitat -- temporary seasonal pools that fill with snowmelt and spring rain, dry by summer. Fishless and safe for amphibian eggs. First temporary habitat in the engine. Wood frogs breed while snow is still on the ground -- among the very first amphibians each year. **Thirty-sixth consecutive original CSV species.**
 
-The pulse and the freeze. STRFKR maintains relentless synth-pop pulse through DIY ethos and Portland infrastructure. The wood frog persists through the freeze -- frozen solid, heart stopped, then thawing to cluck in vernal pools at the first sign of spring. Both about persistence. Both about energy that endures.
+The pulse and the freeze. STRFKR delivers relentless pulse -- constant forward motion, joyful groove. The wood frog endures the freeze -- frozen solid, heart stopped, thawed in spring. Both about resilience and persistence. The pulse that never stops and the organism that survives being stopped.
 
 ## Key Features
 
 | Metric | Part A: STRFKR | Part B: Wood Frog |
 |--------|----------------|-------------------|
-| Genre | Indie Electronic (Genre Stage 78, seventy-eight genre stages in 96 degrees, synth-pop with indie sensibility, danceable electronic beats with DIY production, catchy melodies, irreverent spirit, distinguished from Electronic 95 cinematic festival-scale and Electronic/Experimental 94 studio-as-instrument and Dream Pop/Electronic 93 and Electronic Pop 86, seventh electronic entry in eleven degrees) | -- |
-| Energy | E=5 (back-to-back E=5 with ODESZA 95, legendary live shows, Polyvinyl Records, national touring, costumed confetti joyful chaos, maximum energy) | E=4 (active vocalization, breeding chorus, dozens to hundreds calling simultaneously, vernal pool amplification, matches Pacific Treefrog 86 E=4, both anuran choruses at E=4) |
-| Label | Polyvinyl Records (primary label for major releases) | -- |
-| Family | -- | Ranidae (NEW FAMILY 46th, true frogs, second anuran family after Hylidae 86 and 90) |
-| Order | -- | Anura (continuing, third anuran entry 86 90 96) |
-| Class | -- | Amphibia (returning after nine insect entries 87-95, insect era ends) |
-| Acoustic Element | the synth-pop pulse (97th, driving synth bass pulsing rhythms catchy melodies constant forward motion relentless joyful groove, no dramatic build, distinct from euphoric build 95 cinematic tension-release and producer's palette 94 experimental studio and shimmer veil 93 reverb-as-architecture) | duck-like clucking chorus (97th species-side, rapid low-pitched raspy clucking from vernal pool breeding aggregations resembling duck quacking, distinct from mass wing buzz 95 passive collective emergence and amplified krek-krek 86 high-pitched sharp and bell-like peep 90 high ethereal) |
-| Artist-City Pattern | The DIY Maximalist (97th, DIY ethos meets maximalist live energy, scrappy records explosive shows, Portland infrastructure enables it, distinct from Bellingham pipeline 95 geographic incubation and cross-genre bridge 94 connecting communities) | -- |
-| Structural Firsts | GENRE STAGE 78 (Indie Electronic), THE SYNTH-POP PULSE 97th acoustic element (relentless joyful groove), THE DIY MAXIMALIST 97th artist-city pattern (DIY meets maximalist), BACK-TO-BACK E=5 (ODESZA 95 + STRFKR 96), PORTLAND ACT (second Portland entry after Y La Bamba 61), SEVENTH ELECTRONIC ENTRY IN ELEVEN DEGREES (86 90 91 93 94 95 96) | NEW FAMILY RANIDAE (46th), FREEZE TOLERANCE (first freeze-tolerant species, 65% body ice, heart stops, thaws), VERNAL POOL (first temporary habitat), DUCK-LIKE CLUCKING (97th species-side acoustic element), RETURN TO AMPHIBIA (after insect era 87-95), ANURAN FAMILY PAIR (Hylidae 86 + Ranidae 96), THIRTY-SIXTH CONSECUTIVE ORIGINAL CSV |
+| Genre | Indie Electronic (Genre Stage 78, seventy-eight genre stages in 96 degrees, synth-pop with indie sensibility, danceable beats, DIY production, distinguished from Electronic 95 cinematic festival-scale, Electronic/Experimental 94 studio-as-instrument, Dream Pop/Electronic 93 intimate, Electronic Pop 86 structured melodic, seventh electronic entry in eleven degrees) | -- |
+| Energy | E=5 (back-to-back E=5 with ODESZA 95, legendary live shows, Polyvinyl Records, costumed explosive performances, Portland scene staple) | E=4 (chorus effect dozens to hundreds calling simultaneously, vernal pool amplification, brief intense 1-2 week breeding season, higher than mayfly 95 E=3, comparable to Pacific Treefrog 86 E=4) |
+| Label | Polyvinyl Records (indie label, creative freedom, national distribution) | -- |
+| Family | -- | 46th family (NEW, Ranidae, true frogs, second anuran family after Hylidae) |
+| Order | -- | Anura (continuing, third entry -- Pacific Treefrog 86, Spring Peeper 90, Wood Frog 96) |
+| Class | -- | Amphibia (returning to amphibians after insect era, third amphibian entry) |
+| Acoustic Element | the synth-pop pulse (97th, driving synth bass lines pulsing electronic rhythms catchy melodies constant forward motion relentless joyful groove, distinct from euphoric build 95 cinematic tension-release and producer's palette 94 experimental studio and shimmer veil 93 reverb-as-architecture) | duck-like clucking chorus (97th species-side, raspy percussive rhythmic clucking resembling ducks dozens to hundreds calling simultaneously from vernal pools, distinct from amplified krek-krek 86 high-pitched and bell-like peep 90 ethereal ascending and mass wing buzz 95 collective shimmering) |
+| Artist-City Pattern | The DIY Maximalist (97th, DIY ethos self-produced low-budget yet maximalist live energy costumed confetti joyful chaos Portland infrastructure cheap studios DIY venues Polyvinyl, distinct from Bellingham pipeline 95 geographic incubation and cross-genre bridge 94 connecting scenes) | -- |
+| Structural Firsts | GENRE STAGE 78 (Indie Electronic), THE SYNTH-POP PULSE 97th acoustic element (driving relentless joyful groove), THE DIY MAXIMALIST 97th artist-city pattern (Portland DIY with maximalist live energy), BACK-TO-BACK E=5 ELECTRONIC (ODESZA 95 + STRFKR 96), SEVENTH ELECTRONIC ENTRY IN ELEVEN DEGREES (86 90 91 93 94 95 96), PORTLAND CONNECTION (second Portland act after Y La Bamba 61) | NEW FAMILY (46th, Ranidae true frogs), SECOND ANURAN FAMILY (after Hylidae 86/90), FIRST FREEZE-TOLERANT SPECIES (frozen solid 65% body water ice heart stops thaws spring), FIRST TEMPORARY HABITAT (vernal pool fishless ephemeral), DUCK-LIKE CLUCKING CHORUS (97th species-side acoustic element), THIRTY-SIXTH CONSECUTIVE ORIGINAL CSV, AMPHIBIA RETURNS (after insect era 87-95) |
 | Research Words | ~5,500 | ~5,500 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
@@ -38,7 +38,7 @@ The pulse and the freeze. STRFKR maintains relentless synth-pop pulse through DI
 <details>
 <summary>Full Release Notes -- Click to expand</summary>
 
-## Part A: STRFKR -- THE SYNTH-POP PULSE (Indie Electronic, E=5, Polyvinyl Records, Portland, GENRE STAGE 78 Indie Electronic Seventy-Eight Genre Stages Synth-Pop With Indie Sensibility Danceable Beats DIY Production, The Synth-Pop Pulse 97th Acoustic Element Driving Synths Pulsing Rhythms Constant Forward Motion Relentless Joyful Groove, The DIY Maximalist 97th Artist-City Pattern DIY Ethos Meets Maximalist Live Energy Portland Infrastructure, Back-To-Back E=5 With ODESZA 95, Second Portland Act After Y La Bamba 61)
+## Part A: STRFKR -- THE SYNTH-POP PULSE (Indie Electronic, E=5, Polyvinyl Records, Portland, GENRE STAGE 78 Indie Electronic Seventy-Eight Genre Stages Synth-Pop Danceable DIY, The Synth-Pop Pulse 97th Acoustic Element Driving Relentless Joyful Groove, The DIY Maximalist 97th Artist-City Pattern Portland DIY Maximalist Live Energy, Back-to-Back E=5 Electronic, Seventh Electronic Entry)
 
 Full deep research covering STRFKR at degree 96, Genre Stage 78, and the synth-pop pulse:
 
@@ -51,142 +51,125 @@ Distinguished from prior electronic entries:
 - **Erik Blood** (degree 94) is Electronic/Experimental -- studio-as-instrument, genre-blending. STRFKR is pop-structured, melody-forward, dance-oriented.
 - **The Postal Service** (degree 86) is Electronic Pop -- melancholic, structured. STRFKR is exuberant, driving, joyful.
 
-Seventy-eight genre stages in 96 degrees. Seventh electronic-adjacent entry in eleven degrees (86, 90, 91, 93, 94, 95, 96).
+Seventy-eight genre stages in 96 degrees.
 
 ### STRFKR -- Danceable Joy, DIY Spirit
 
-**Formation and Career:** STRFKR is the project of **Joshua Hodges**, founded in **Portland, Oregon** in 2007. Originally a solo project, the deliberately provocative name reflects the assumption it would never need to be a "real" band name. STRFKR grew into a full band known for infectious synth-pop and explosive live performances.
+**Formation and Career:** STRFKR (also known as Starfucker) is the project of **Joshua Hodges**, founded in **Portland, Oregon** in 2007. Originally a solo project. The deliberately provocative name reflects the assumption it would never need to be a "real" band name.
 
 Key albums:
-- *STRFKR* (2008) -- self-titled debut. DIY production. Underground following.
-- *Reptilians* (2011) -- expanded sound. Polyvinyl Records.
+- *STRFKR* (2008) -- self-titled debut. DIY production. Instant underground following.
+- *Reptilians* (2011) -- expanded sound, wider audience. Polyvinyl Records.
 - *Miracle Mile* (2013) -- commercial breakthrough. Synth-pop at its catchiest.
 - *Being No One, Going Nowhere* (2016) -- meditation-influenced. Still danceable.
 
-STRFKR's live shows are legendary -- high-energy, costumed, confetti, inflatables, joyful chaos.
+STRFKR's live shows are legendary -- high-energy, costumed, joyful chaos. Confetti, inflatables, uninhibited celebration.
 
-**Portland and DIY Infrastructure:** STRFKR is a product of Portland's indie infrastructure -- cheap rehearsal spaces, DIY venues, indie labels (Polyvinyl), and an audience that rewards authenticity over polish.
+**Portland and DIY Infrastructure:** STRFKR is a product of Portland's indie infrastructure -- cheap rehearsal spaces, DIY venues, an audience that values independent production, and distribution through Polyvinyl that allows staying independent while reaching a national audience.
 
-**The Synth-Pop Pulse:** STRFKR's defining sonic quality -- driving synth bass lines, pulsing electronic rhythms, catchy melodies. Where ODESZA builds to euphoric drops, STRFKR maintains constant forward motion -- relentless groove, no dramatic arc, just joy engineered for movement.
-
-### STRUCTURAL EVENT: E=5 -- Back-to-Back with ODESZA
-
-E=5 reflects STRFKR's legendary live energy, Polyvinyl Records, national touring. **BACK-TO-BACK E=5** with ODESZA (95) -- consecutive maximum-energy electronic entries. Two consecutive E=5 electronic acts.
+**The Synth-Pop Pulse:** Driving synth bass lines, pulsing electronic rhythms, catchy melodies layered over danceable beats. Where ODESZA (95) builds to euphoric drops, STRFKR maintains constant forward motion -- relentless groove, no dramatic arc, just joy engineered for movement.
 
 ### THE SYNTH-POP PULSE -- 97th Acoustic Element
 
-The ninety-seventh acoustic element is **the synth-pop pulse** -- driving synth bass lines, pulsing electronic rhythms, catchy melodies layered over danceable beats. Constant forward motion. No dramatic build, no cinematic arc. Relentless, joyful groove. The audience experience is physical: bodies moving to the pulse.
+The ninety-seventh acoustic element is **the synth-pop pulse** -- driving, infectious groove of synth bass lines, pulsing electronic rhythms, and catchy melodies. Constant forward motion. No dramatic build, no cinematic arc, just relentless, joyful groove. The audience experience is physical: bodies moving to the pulse.
 
 Contrasts:
-- **The euphoric build** (degree 95, ODESZA) -- cinematic architecture with tension and release. The synth-pop pulse is flat, driving, joyful. Both electronic, different architectures of energy.
+- **The euphoric build** (degree 95, ODESZA) -- cinematic architecture with tension and release. The synth-pop pulse is flat, driving, joyful. Both electronic, different energy architectures. ODESZA builds; STRFKR pulses.
 - **The producer's palette** (degree 94, Erik Blood) -- experimental, genre-unbounded. The synth-pop pulse is pop-structured and dance-oriented.
 - **The shimmer veil** (degree 93, NAVVI) -- reverb-as-architecture, intimate. The synth-pop pulse is upfront, dry, driving.
 
 ### THE DIY MAXIMALIST -- 97th Artist-City Pattern
 
-The ninety-seventh artist-city pattern is **the DIY maximalist** -- an artist who operates with DIY ethos while delivering maximalist energy in live performance. STRFKR records are scrappy; STRFKR live shows are explosions of energy. Portland's infrastructure makes it possible: cheap studios, DIY venues, indie labels, audiences that reward energy over polish.
-
-Contrasts:
-- **The Bellingham pipeline** (degree 95, ODESZA) -- geographic origin and launch trajectory. The DIY maximalist is about production ethos and live energy.
-- **The cross-genre bridge** (degree 94, Erik Blood) -- connecting genres. The DIY maximalist is about tension between DIY production and maximalist performance.
+The ninety-seventh artist-city pattern is **the DIY maximalist** -- DIY ethos in production (self-produced, independent, low-budget) combined with maximalist energy in live performance. Portland provides the conditions: cheap studios, DIY venues, indie labels (Polyvinyl), and audiences that reward authenticity over polish.
 
 ### CROSS-REFERENCES (Part A)
 
 | Connection | From | To | Nature |
 |-----------|------|-----|--------|
-| S36-095 | STRFKR (96) | ODESZA (95) | BACK-TO-BACK E=5 ELECTRONIC! Consecutive degrees. Both electronic, both E=5. ODESZA is cinematic; STRFKR is scrappy. Different architectures of energy. |
+| S36-095 | STRFKR (96) | ODESZA (95) | BACK-TO-BACK E=5 ELECTRONIC! ODESZA is cinematic festival-scale; STRFKR is scrappy dance-floor-scale. Consecutive degrees. Different architectures of electronic energy. |
 | S36-061 | STRFKR (96) | Y La Bamba (61) | PORTLAND CONNECTION. Both Portland-based. Y La Bamba is Latin-folk-experimental; STRFKR is indie electronic. Portland's genre diversity. |
-| S36-086 | STRFKR (96) | The Postal Service (86) | ELECTRONIC PARALLEL. Both electronic with indie sensibility. Postal Service is melancholic; STRFKR is exuberant. |
-| S36-073 | STRFKR (96) | LAKE (73) | INDIE POP ENERGY PARALLEL. Both infectious, both joyful, both indie. LAKE is lo-fi pop; STRFKR is synth-pop. Same spirit, different instruments. |
-| S36-080 | STRFKR (96) | Mates of State (80) | E=5 EXUBERANCE PARALLEL. Both E=5, both exuberant. Mates of State is organ-and-drums; STRFKR is synths-and-beats. Same intensity, different palettes. |
+| S36-086 | STRFKR (96) | The Postal Service (86) | ELECTRONIC PARALLEL. Both electronic with indie sensibility. Postal Service is melancholic; STRFKR is exuberant. Different emotional registers. |
+| S36-073 | STRFKR (96) | LAKE (73) | INDIE POP ENERGY PARALLEL. Both infectious, joyful, indie. LAKE is lo-fi pop; STRFKR is synth-pop. Same joyful spirit, different instruments. |
+| S36-080 | STRFKR (96) | Mates of State (80) | E=5 EXUBERANCE PARALLEL. Both E=5, both exuberant, both energetic live performers. Same joyful intensity, different palettes. |
 
 ---
 
-## Part B: Wood Frog (*Lithobates sylvaticus*) -- FREEZE TOLERANCE AND THE DUCK-LIKE CLUCKING (NEW FAMILY Ranidae 46th, Anura Continues, Freeze Tolerance First Freeze-Tolerant Species 65% Body Ice Heart Stops Thaws In Spring Cryoprotectant Glucose, Vernal Pool First Temporary Habitat Seasonal Fishless Ephemeral, Duck-Like Clucking 97th Species-Side Acoustic Element, E=4, Thirty-Sixth Consecutive Original CSV)
+## Part B: Wood Frog (*Lithobates sylvaticus*) -- DUCK-LIKE CLUCKING CHORUS (NEW FAMILY 46th Ranidae True Frogs Second Anuran Family, First Freeze-Tolerant Species 65% Body Water Ice Heart Stops Thaws Spring, Vernal Pool First Temporary Habitat, E=4, Thirty-Sixth Consecutive Original CSV)
 
 Full deep research covering the wood frog, freeze tolerance, and the vernal pool:
 
-### NEW FAMILY: RANIDAE -- 46th Family / ANURA Continues
+### NEW FAMILY: Ranidae -- 46th Family / Anura Continues
 
-**Ranidae** -- true frogs. The 46th family. The second anuran family (after Hylidae at degrees 86 and 90). *Lithobates sylvaticus* -- the wood frog.
+**Ranidae** -- true frogs. The 46th family. The second anuran family (after Hylidae at 86 and 90). Third amphibian entry.
 
 Classification:
 - **Kingdom:** Animalia
 - **Phylum:** Chordata
-- **Class:** Amphibia (returning after insect era)
-- **Order:** Anura (continuing frog order)
+- **Class:** Amphibia (returning to amphibians after insect era)
+- **Order:** Anura (continuing -- third entry)
 - **Family:** Ranidae -- NEW FAMILY (46th). True frogs.
 - **Genus:** *Lithobates*
 - **Species:** *Lithobates sylvaticus* (wood frog)
 
-Three amphibian entries:
+Three amphibian entries across two families:
 
 | Degree | Order | Family | Species | Sound |
 |--------|-------|--------|---------|-------|
-| 86 | Anura | Hylidae | Pacific Treefrog | Amplified krek-krek |
+| 86 | Anura | Hylidae | Pacific Treefrog | Amplified krek-krek wall of sound |
 | 90 | Anura | Hylidae | Spring Peeper-Like Chorus | Bell-like peep chorus |
-| **96** | **Anura** | **Ranidae** | **Wood Frog** | **Duck-like clucking** |
-
-Three amphibian entries. Two families across one order. Ranidae is the 46th family and the second anuran family.
+| **96** | **Anura** | **Ranidae** | **Wood Frog** | **Duck-like clucking chorus** |
 
 ### THE SOUND: DUCK-LIKE CLUCKING CHORUS -- 97th Species-Side Acoustic Element
 
-The wood frog breeding chorus -- a distinctive **duck-like clucking**. Male wood frogs produce rapid, low-pitched clucking that resembles duck quacking. When dozens to hundreds call simultaneously from a vernal pool, the collective effect is remarkably duck-like.
+Male wood frogs produce a rapid, low-pitched clucking that resembles the quacking of ducks. A series of short, raspy notes: *cluck-cluck-cluck-cluck*. Dozens to hundreds of males calling simultaneously from a vernal pool create a remarkably duck-like chorus. Fundamental frequency approximately 1,000-2,500 Hz. Lower than Pacific Treefrog and spring peeper.
 
-**Acoustic character:** Raspy, percussive, rhythmic clucking. Low-pitched for a frog. Not bell-like (spring peeper) or sharp (Pacific Treefrog). Warm but rough-edged. The sound of early spring.
+**Why E=4:** Chorus effect with dozens to hundreds calling. Audible from a distance. Brief but intense (1-2 week breeding season). Vernal pool amplification.
 
-**Why E=4:** Active vocalization from breeding aggregation. Dozens to hundreds calling. Compressed breeding season (1-2 weeks). Vernal pool amplification. Matches Pacific Treefrog (86, E=4) -- both anuran breeding choruses at E=4.
-
-### ECOLOGY: FREEZE TOLERANCE
+### ECOLOGY: FREEZE TOLERANCE -- SURVIVING BEING FROZEN SOLID
 
 The wood frog is the engine's **first freeze-tolerant species**:
-- **Frozen solid:** Up to 65% of body water as ice.
-- **Heart stops:** No breathing. No brain activity.
-- **Cryoprotectants:** Glucose at 100x normal levels prevents intracellular ice damage.
-- **Thaws in spring:** Heart restarts. Blood flows. Hops to breeding pool within hours.
-- **Multiple freeze-thaw cycles:** Can survive being frozen and thawed multiple times per winter.
+- **Frozen solid** -- up to 65% body water converts to ice
+- **Heart stops** -- no breathing, no brain activity
+- **Cryoprotectant glucose** -- blood sugar rises to 100x normal, prevents ice from destroying cells
+- **Ice forms between cells, not within them**
+- **Thaws in spring** -- heart restarts, frog resumes normal activity within hours
+- **Multiple freeze-thaw cycles** per winter
 
-This is not hibernation. The frog is frozen solid and comes back.
+**Vernal pool** -- temporary seasonal pools. Fishless (safe for amphibian eggs). Woodland setting. First temporary habitat in the engine.
 
-### ECOLOGY: VERNAL POOL
-
-The **vernal pool** is the first temporary habitat in the engine:
-- **Temporary seasonal pools** that fill with snowmelt and dry by summer.
-- **Fishless** -- too ephemeral for fish. Safe for amphibian larvae.
-- **Woodland setting** -- leaf litter, shade, moist microclimate.
-- **Ephemeral** -- exists weeks to months, then vanishes.
+**Early spring breeding** -- among the very first amphibians to breed each year. Calling while snow is still on the ground.
 
 ### STRUCTURAL EVENTS SUMMARY
 
-1. **Ranidae enters** -- 46th family (NEW). True frogs. Second anuran family. Third amphibian entry.
-2. **Duck-like clucking chorus** -- 97th species-side acoustic element. E=4. Raspy, duck-like.
-3. **Freeze tolerance** -- first freeze-tolerant species. 65% body ice. Heart stops. Thaws.
-4. **Vernal pool** -- first temporary habitat. Seasonal. Fishless.
+1. **Ranidae enters** -- 46th family (NEW). Second anuran family. Third amphibian entry.
+2. **Duck-like clucking chorus** -- 97th species-side acoustic element. E=4. Raspy, percussive, duck-like.
+3. **Freeze tolerance** -- first freeze-tolerant species. Frozen solid, heart stops, thaws in spring.
+4. **Vernal pool** -- first temporary habitat in the engine.
 5. **Thirty-sixth consecutive original CSV.**
 
 ### CROSS-REFERENCES (Part B)
 
 | Connection | From | To | Nature |
 |-----------|------|-----|--------|
-| SPS-086 | Wood Frog (96) | Pacific Treefrog (86) | ANURAN FAMILY PAIR! Both frogs. Hylidae (86) and Ranidae (96). Both E=4. Different calls. Ten degrees apart. |
-| SPS-090 | Wood Frog (96) | Spring Peeper-Like Chorus (90) | AMPHIBIAN TRIO. Three amphibian entries (86, 90, 96). High peep vs low cluck. Opposite registers. |
-| SPS-095 | Wood Frog (96) | Mayfly Emergence (95) | WATER CONNECTION. Back-to-back water species. Mayfly in streams E=3; Wood Frog in vernal pools E=4. Passive vs active sound. |
-| SPS-094 | Wood Frog (96) | Stonefly Hatch (94) | AQUATIC SEQUENCE. Three consecutive water species (94, 95, 96). Stream, lake, vernal pool. Three aquatic habitats. |
-| SPS-058 | Wood Frog (96) | Wood Duck (58) | WOOD-AND-WATER NAMESAKE. Both "wood" species. Both woodland water. Wood Frog's call sounds like a duck. |
+| SPS-086 | Wood Frog (96) | Pacific Treefrog (86) | ANURAN FAMILY PAIR! Both Anura. Hylidae (86) and Ranidae (96). Both breed in water. Krek-krek E=4 vs duck-like clucking E=4. Same energy, different calls, ten degrees apart. |
+| SPS-090 | Wood Frog (96) | Spring Peeper-Like Chorus (90) | AMPHIBIAN TRIO. Three entries (86, 90, 96). High bell-like peep vs low duck-like cluck. Opposite acoustic registers. Both early spring breeders. |
+| SPS-095 | Wood Frog (96) | Mayfly Emergence (95) | WATER CONNECTION. Back-to-back water species. Mayfly in streams/lakes E=3; Wood Frog in vernal pools E=4. Passive vs active sound. |
+| SPS-094 | Wood Frog (96) | Stonefly Hatch (94) | AQUATIC SEQUENCE. Three consecutive water species (94, 95, 96). Stonefly in cold streams, mayfly in streams/lakes, wood frog in vernal pools. |
+| SPS-058 | Wood Frog (96) | Wood Duck (58) | WOOD-AND-WATER NAMESAKE. Both "wood" species. Both woodland water habitats. Duck-like connection: wood frog's call sounds like a duck. |
 
 ---
 
 ## Parallel: STRFKR x Wood Frog -- The Pulse and the Freeze
 
-The synth-pop pulse and the duck-like clucking. Relentless energy and resilient biology.
+The synth-pop pulse and the duck-like clucking chorus. Persistence on both sides.
 
-**1. Both About Persistence** -- STRFKR maintains relentless groove -- constant forward motion, never stopping, joyful pulse that drives bodies to move. The wood frog persists through the freeze -- frozen solid, heart stopped, then thawing to call in vernal pools at the first sign of spring. Both endure.
+**1. Both About Persistence** -- STRFKR delivers relentless pulse -- constant forward motion, never stopping. The wood frog survives being frozen solid -- heart stops, blood crystallizes, then thaws and resumes. The pulse that never stops and the organism that survives being stopped.
 
-**2. DIY vs Survival** -- STRFKR operates with DIY ethos: self-produced, independent, low-budget records. The wood frog operates with biological minimalism: glucose as cryoprotectant, vernal pools as temporary breeding sites, compressed 1-2 week breeding season. Both maximize output from minimal infrastructure.
+**2. Both Resilient** -- STRFKR maintains DIY ethos while delivering maximalist energy. The wood frog maintains life through the most extreme survival strategy in the engine. Both thrive through resilience.
 
-**3. E=5 vs E=4** -- STRFKR at E=5 (legendary live shows, costumed chaos, maximum energy). Wood Frog at E=4 (active vocalization, breeding chorus, dozens calling). Both energetic -- STRFKR through technology and performance; the wood frog through biological urgency (compressed breeding window).
+**3. E=5 vs E=4** -- STRFKR at E=5 (legendary live shows, Polyvinyl, Portland). Wood Frog at E=4 (chorus of dozens to hundreds, vernal pool amplification). Both at chorus scale -- electronic pulse and biological chorus.
 
-**4. Portland and the Vernal Pool** -- Portland's indie infrastructure provides the economic conditions for DIY maximalism. The vernal pool provides the ecological conditions for amphibian breeding -- temporary, fishless, safe. Both are specific environments that enable specific strategies.
+**4. Portland and Vernal Pool** -- Portland provides the infrastructure for STRFKR's DIY maximalism. The vernal pool provides the temporary stage for the wood frog's breeding chorus. Both stages are specific and enabling.
 
 ---
 
@@ -292,7 +275,7 @@ The synth-pop pulse and the duck-like clucking. Relentless energy and resilient 
 | 95 | the euphoric build / the mass wing buzz over water | 95 | ODESZA / Mayfly Emergence |
 | **96** | **the synth-pop pulse / the duck-like clucking chorus** | **96** | **STRFKR / Wood Frog** |
 
-The acoustic progression adds degree 96. On the artist side, the synth-pop pulse (96) is STRFKR -- driving synth bass, pulsing rhythms, constant forward motion, relentless joyful groove. E=5. From the euphoric build (95, cinematic tension-release, E=5) to the synth-pop pulse (96, constant groove, E=5). Back-to-back E=5 electronic entries. From cinematic architecture (ODESZA builds and releases) to flat driving pulse (STRFKR maintains constant motion). Both E=5, different architectures of electronic energy. On the species side, the duck-like clucking chorus (96) is the wood frog -- rapid, low-pitched, raspy clucking from vernal pool breeding aggregations. E=4. From the mass wing buzz over water (95, passive collective emergence, E=3) to the duck-like clucking (96, active vocalization, E=4). Passive to active. Insect to amphibian. The engine exits the insect era and returns to Amphibia.
+The acoustic progression adds degree 96. On the artist side, the synth-pop pulse (96) is STRFKR -- driving synth bass, pulsing rhythms, constant forward motion, relentless joyful groove. E=5. From the euphoric build (95, cinematic tension-release, layered synths, festival-scale crescendo) to the synth-pop pulse (96, constant groove, no dramatic arc, dance-floor-scale joy). From architecture to pulse -- from building to driving. Both electronic, different architectures of energy: ODESZA builds; STRFKR pulses. On the species side, the duck-like clucking chorus (96) is the wood frog -- raspy, percussive, duck-like clucking from vernal pool breeding aggregations, E=4. From the mass wing buzz over water (95, collective shimmering buzz, E=3) to the duck-like clucking chorus (96, active vocalization, duck-like percussive, E=4). Passive collective to active chorus. The engine rises from E=3 to E=4 and returns to Anura after the insect era.
 
 ## Artist-City Patterns (97 patterns)
 
@@ -396,7 +379,7 @@ The acoustic progression adds degree 96. On the artist side, the synth-pop pulse
 | 95 | The Bellingham Pipeline | 95 | ODESZA |
 | **96** | **The DIY Maximalist** | **96** | **STRFKR** |
 
-Ninety-seven named patterns across ninety-seven degrees. The DIY Maximalist (96) introduces the pattern of an artist operating with DIY ethos -- self-produced, independent, low-budget -- while delivering maximalist energy in live performance. STRFKR records are scrappy and self-directed; STRFKR live shows are explosions of costumes, confetti, and joyful chaos. Portland provides the economic and cultural conditions. From the Bellingham Pipeline (95, geographic incubation) to the DIY Maximalist (96, production ethos). The progression from 94 to 95 to 96: the cross-genre bridge (connecting communities), the Bellingham pipeline (incubating launches), the DIY maximalist (maximizing live energy from minimal production). Three consecutive patterns about how artists operate within their city's infrastructure.
+Ninety-seven named patterns across ninety-seven degrees. The DIY Maximalist (96) introduces the pattern of an artist who operates with DIY ethos -- self-produced, independent, low-budget -- while delivering maximalist energy in live performance. Portland provides the conditions: cheap studios, DIY venues, Polyvinyl distribution, audiences that reward authenticity. From the Bellingham Pipeline (95, geographic incubation launching artists) to the DIY Maximalist (96, production ethos enabling maximalist performance). The progression from 94 to 95 to 96: the cross-genre bridge (connecting communities), the Bellingham pipeline (incubating launches), the DIY maximalist (enabling energy). Three consecutive patterns about infrastructure -- how scenes connect (94), how cities launch (95), how cities sustain (96).
 
 ## Genre Evolution (78 stages)
 
@@ -455,28 +438,28 @@ Ninety-seven named patterns across ninety-seven degrees. The DIY Maximalist (96)
 | 77 | 95 | Electronic | ODESZA |
 | **78** | **96** | **Indie Electronic** | **STRFKR** |
 
-Genre Stage 78 -- Indie Electronic at degree 96. Seventy-eight genre stages in 96 degrees (~0.81 per degree). **Indie Electronic** describes STRFKR's music: synth-pop with indie sensibility, danceable electronic beats with DIY production values, catchy melodies with irreverent spirit. The seventh electronic-adjacent entry in eleven degrees: Indie Electronic (86), Ethereal/Electronic (90), Drone/Noise (91), Dream Pop/Electronic (93), Electronic/Experimental (94), Electronic (95), Indie Electronic (96). Seven of the last eleven genre stages have been electronic-inflected. The engine continues mapping the electronic landscape -- each entry uses electronics differently: pop structure (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95), joyful pulse (96). Note: Indie Electronic appears at both degree 86 (The Postal Service) and degree 96 (STRFKR) -- the same genre label, but different uses. Postal Service is melancholic crossover; STRFKR is exuberant synth-pop.
+Genre Stage 78 -- Indie Electronic at degree 96. Seventy-eight genre stages in 96 degrees (~0.81 per degree). **Indie Electronic** describes STRFKR's music: synth-pop with indie sensibility, danceable electronic beats with DIY production values, catchy melodies. The seventh electronic-adjacent entry in eleven degrees: Electronic Pop (86), Ethereal/Electronic (90), Drone/Noise (91), Dream Pop/Electronic (93), Electronic/Experimental (94), Electronic (95), Indie Electronic (96). Seven of the last eleven genre stages have been electronic-inflected. STRFKR adds the indie-electronic intersection: pop-structured, melody-forward, dance-oriented, DIY. Distinct from ODESZA's cinematic festival-scale (95) and Erik Blood's experimental studio (94).
 
 ## Energy Distribution
 
-**Artist-side (after degree 96):** E1:3 (3.1%), E2:31 (32.0%), E3:27 (27.8%), E4:22 (22.7%), E5:13 (13.4%), E6:2 (2.1%). Total: 97 (degrees 0-96, 97 entries counting origin). E=5 gains STRFKR (96) reaching 13 deployments. **BACK-TO-BACK E=5:** ODESZA (95) and STRFKR (96). Consecutive maximum energy. The electronic era energy: E=3 (Sky Cries Mary 90), E=2 (Hovercraft 91), E=3 (Trance Mission 92), E=3 (NAVVI 93), E=4 (Erik Blood 94), E=5 (ODESZA 95), E=5 (STRFKR 96) -- continuous rise from Hovercraft minimum through to back-to-back E=5 peaks. Seven consecutive electronic entries.
+**Artist-side (after degree 96):** E1:3 (3.1%), E2:31 (32.0%), E3:27 (27.8%), E4:22 (22.7%), E5:13 (13.4%), E6:2 (2.1%). Total: 97 (degrees 0-96, 97 entries counting origin). E=5 gains STRFKR (96) reaching 13 deployments. Back-to-back E=5 electronic: ODESZA (95) and STRFKR (96). The electronic era energy at its peak.
 
-**Species-side (after degree 96):** E=4 for wood frog (96) rises from mayfly (95, E=3). The sequence since 86: E=4, E=4, E=4, E=4, E=4, E=2, E=3, E=5, E=2, E=3, E=4. The engine returns to E=4. The wood frog matches the Pacific Treefrog (86, E=4) -- both anuran choruses at E=4. The amphibian return brings the species energy back to the level of the treefrog.
+**Species-side (after degree 96):** E=4 for wood frog (96) rises from mayfly (95, E=3). The sequence since 86: E=4, E=4, E=4, E=4, E=4, E=2, E=3, E=5, E=2, E=3, E=4. Return to E=4 as the engine exits the insect era and returns to amphibians. Anuran chorus energy matches the Pacific Treefrog (86, E=4).
 
 ## Cross-References (Combined)
 
 | Connection | From | To | Nature |
 |-----------|------|-----|--------|
-| S36-095 | STRFKR (96) | ODESZA (95) | BACK-TO-BACK E=5 ELECTRONIC. Both electronic, both E=5. Cinematic vs scrappy. Different architectures. |
-| S36-061 | STRFKR (96) | Y La Bamba (61) | PORTLAND CONNECTION. Both Portland. Latin-folk vs indie electronic. Genre diversity. |
-| S36-086 | STRFKR (96) | The Postal Service (86) | ELECTRONIC PARALLEL. Both electronic with indie sensibility. Melancholic vs exuberant. |
-| S36-073 | STRFKR (96) | LAKE (73) | INDIE POP ENERGY PARALLEL. Both infectious and joyful. Lo-fi pop vs synth-pop. |
-| S36-080 | STRFKR (96) | Mates of State (80) | E=5 EXUBERANCE PARALLEL. Both E=5, both exuberant. Different instruments, same intensity. |
-| SPS-086 | Wood Frog (96) | Pacific Treefrog (86) | ANURAN FAMILY PAIR. Both frogs. Hylidae and Ranidae. Both E=4. Different calls. Ten degrees apart. |
-| SPS-090 | Wood Frog (96) | Spring Peeper-Like Chorus (90) | AMPHIBIAN TRIO. Three amphibian entries (86, 90, 96). High peep vs low cluck. |
+| S36-095 | STRFKR (96) | ODESZA (95) | BACK-TO-BACK E=5 ELECTRONIC. Cinematic festival-scale vs scrappy dance-floor-scale. |
+| S36-061 | STRFKR (96) | Y La Bamba (61) | PORTLAND CONNECTION. Both Portland-based. Different genres, same infrastructure. |
+| S36-086 | STRFKR (96) | The Postal Service (86) | ELECTRONIC PARALLEL. Both electronic with indie sensibility. Different emotional registers. |
+| S36-073 | STRFKR (96) | LAKE (73) | INDIE POP ENERGY PARALLEL. Both infectious, joyful, indie. Different instruments, same spirit. |
+| S36-080 | STRFKR (96) | Mates of State (80) | E=5 EXUBERANCE PARALLEL. Both E=5, both exuberant, both energetic live performers. |
+| SPS-086 | Wood Frog (96) | Pacific Treefrog (86) | ANURAN FAMILY PAIR. Hylidae and Ranidae. Same energy, different calls, ten degrees apart. |
+| SPS-090 | Wood Frog (96) | Spring Peeper-Like Chorus (90) | AMPHIBIAN TRIO. Three entries (86, 90, 96). Opposite acoustic registers. |
 | SPS-095 | Wood Frog (96) | Mayfly Emergence (95) | WATER CONNECTION. Back-to-back water species. Passive vs active sound. |
-| SPS-094 | Wood Frog (96) | Stonefly Hatch (94) | AQUATIC SEQUENCE. Three consecutive water species (94, 95, 96). Three habitats. |
-| SPS-058 | Wood Frog (96) | Wood Duck (58) | WOOD-AND-WATER NAMESAKE. Both "wood" species. Both woodland water. Call sounds like a duck. |
+| SPS-094 | Wood Frog (96) | Stonefly Hatch (94) | AQUATIC SEQUENCE. Three consecutive water species (94, 95, 96). |
+| SPS-058 | Wood Frog (96) | Wood Duck (58) | WOOD-AND-WATER NAMESAKE. Both "wood" species. Duck-like call connection. |
 
 ## Infrastructure
 
@@ -491,46 +474,42 @@ Genre Stage 78 -- Indie Electronic at degree 96. Seventy-eight genre stages in 9
 ## Retrospective
 
 **What Worked:**
-1. STRFKR as Indie Electronic at Genre Stage 78 is accurate -- synth-pop with indie sensibility, danceable beats, DIY production. Genuinely distinct from Electronic (95, cinematic), Electronic/Experimental (94, studio exploration), Dream Pop/Electronic (93, intimate). Seventh electronic entry in eleven degrees sustains without repetition
-2. The synth-pop pulse (97th acoustic element) captures the sonic reality -- constant forward motion, relentless groove, no dramatic arc. Distinct from the euphoric build (95, tension-release architecture) and the producer's palette (94, experimental exploration)
-3. The DIY maximalist (97th artist-city pattern) is observationally accurate -- STRFKR's DIY records and maximalist live shows are well-documented. Portland's infrastructure enables the pattern
-4. BACK-TO-BACK E=5 (ODESZA 95 + STRFKR 96) is structurally dramatic -- consecutive maximum-energy electronic acts. The electronic energy peaks and holds
-5. E=5 for STRFKR is defensible -- legendary live shows, Polyvinyl Records, national touring. The live energy warrants maximum
-6. NEW FAMILY Ranidae (46th) is taxonomically significant -- true frogs, second anuran family. The engine returns to Amphibia after nine insect entries
-7. Freeze tolerance is a genuine biological phenomenon -- well-documented in the scientific literature (Storey and Storey 1988). 65% body ice, cardiac arrest, cryoprotectant glucose, revival. Not speculative
-8. Vernal pool as first temporary habitat is structurally novel -- no prior entry used a temporary habitat
-9. Duck-like clucking is a distinctive and well-documented sound -- consistently described as "duck-like" in field guides
-10. The anuran E=4 consistency (treefrog 86 and wood frog 96) is structurally interesting -- both anuran breeding choruses at the same energy level
-11. Thirty-six consecutive original CSV species continues data reliability
+1. STRFKR as Indie Electronic at Genre Stage 78 is accurate -- synth-pop with indie sensibility, DIY production, danceable beats. Genuinely distinct from Electronic (95, cinematic festival-scale), Electronic/Experimental (94, studio exploration), and Electronic Pop (86, structured melodic). The seventh electronic entry maps the indie-electronic intersection
+2. The synth-pop pulse (97th acoustic element) captures the driving, relentless quality -- constant forward motion, no build-and-release, just groove. Distinct from the euphoric build (95, tension-release architecture)
+3. The DIY maximalist (97th artist-city pattern) describes a real Portland phenomenon -- DIY production combined with maximalist live energy. Portland's infrastructure makes this possible
+4. E=5 for STRFKR is defensible -- legendary live shows, Polyvinyl Records, Portland scene staple. Back-to-back E=5 with ODESZA
+5. NEW FAMILY (46th) Ranidae is taxonomically significant -- true frogs, second anuran family, third amphibian entry
+6. Freeze tolerance is a genuine biological marvel -- frozen solid, heart stops, thaws in spring. First freeze-tolerant species in the engine. Verified physiology
+7. Vernal pool as first temporary habitat adds a new habitat category -- ephemeral, fishless, spring-only
+8. Duck-like clucking chorus is acoustically distinct from all prior amphibian entries -- lower, raspier, percussive
+9. Thirty-six consecutive original CSV species continues data reliability
 
 **What Could Be Better:**
-1. PNW-specific wood frog population data not deeply profiled -- ACCEPTED, biology and acoustics are core contributions
-2. NO RAPTOR in 97 entries -- CRITICAL, persists
-3. NO PASSERIFORM in 40 degrees -- forty consecutive non-passerines (57-96). EXTREME
-4. NO MARINE SPECIES -- 97 entries without a marine specialist. SIGNIFICANT
+1. NO RAPTOR in 97 entries -- CRITICAL, persists from degree 90
+2. NO PASSERIFORM in 40 degrees -- forty consecutive non-passerines (57-96). EXTREME
+3. NO MARINE SPECIES -- 97 entries without a marine specialist. SIGNIFICANT
 
 ## Lessons Learned
 
-1. Seven electronic-adjacent entries in eleven degrees (86, 90, 91, 93, 94, 95, 96) sustain without repetition. Each maps a different relationship: pop structure (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95), joyful pulse (96). Seven purposes, one technology. The electronic landscape is exhaustively mapped
-2. Back-to-back E=5 electronic entries (ODESZA 95, STRFKR 96) demonstrate that maximum energy can sustain across consecutive degrees when the sonic architectures are distinct -- cinematic builds (ODESZA) vs constant groove (STRFKR)
-3. The return to Amphibia after nine insect entries (87-95) is a clean transition. The insect era lasted nine degrees, seven orders, nine families. The wood frog breaks the insect streak and returns to a familiar taxon (Anura) with a new family (Ranidae). The engine knows when to exit a sustained exploration
-4. Freeze tolerance as a survival strategy is fundamentally different from any prior ecological contribution. No prior species had a comparable survival mechanism. The engine now contains species whose survival strategy involves apparent death -- the most extreme biological resilience yet
-5. The vernal pool as temporary habitat introduces a new habitat category. Prior habitats were permanent (streams, ponds, forests, grasslands). The vernal pool is explicitly ephemeral. This opens a new axis for habitat diversity
+1. Back-to-back E=5 electronic entries (ODESZA 95, STRFKR 96) sustain without repetition because the sonic architectures are fundamentally different -- cinematic tension-release vs constant forward groove. Energy level alone does not determine distinction; architecture does
+2. The insect era (87-95, nine entries) ends and amphibians return at degree 96. The engine demonstrates it can sustain deep exploration of one class and then shift back. The wood frog's Ranidae (46th family) adds taxonomic depth to the anuran lineage
+3. Freeze tolerance introduces the most extreme survival strategy in the engine -- literally frozen solid. This is a new category of biological resilience beyond anything prior
+4. Portland now has two entries (Y La Bamba 61, STRFKR 96) separated by 35 degrees. Both independent, both DIY-aligned, radically different genres. Portland's infrastructure supports genre diversity
+5. Vernal pool as the first temporary habitat opens a new category. Prior aquatic habitats were permanent. The engine now includes ephemeral ecosystems
 6. Thirty-six consecutive original CSV species (61-96). Data reliability sustained
-7. The gap analysis persists: no raptor, no passerine since degree 56, no marine species. These gaps are extreme
 
 ---
 
 The synth-pop pulse and the duck-like clucking chorus.
 
-Degree 96. The pulse and the freeze. Relentless energy and resilient biology.
+Degree 96. The pulse and the freeze. Persistence on both sides.
 
-On the music side, STRFKR works the synth-pop pulse -- Indie Electronic at Genre Stage 78. E=5. Joshua Hodges. Portland. Polyvinyl Records. Legendary live shows -- costumed, confetti, joyful chaos. The synth-pop pulse is the 97th acoustic element -- driving synth bass, pulsing rhythms, constant forward motion, relentless joyful groove. The DIY maximalist is the 97th artist-city pattern -- DIY ethos meets maximalist live energy, Portland's infrastructure enables it. BACK-TO-BACK E=5 with ODESZA (95). Seventh electronic entry in eleven degrees. The engine maps joyful pulse.
+On the music side, STRFKR works the synth-pop pulse -- Indie Electronic at Genre Stage 78. E=5. Joshua Hodges. Portland, Polyvinyl Records. Legendary live shows -- costumed, confetti, joyful chaos. The synth-pop pulse is the 97th acoustic element -- driving synth bass, relentless groove, constant forward motion. The DIY maximalist is the 97th artist-city pattern -- Portland's infrastructure enabling DIY production with maximalist energy. Back-to-back E=5 with ODESZA. Seventh electronic entry. The engine adds the sound of relentless joyful groove.
 
-On the species side, the wood frog thaws from the freeze -- NEW FAMILY Ranidae (46th). Freeze tolerance: 65% body ice, heart stops, cryoprotectant glucose, thaws in spring. First freeze-tolerant species. Vernal pool: first temporary habitat, seasonal, fishless, ephemeral. The duck-like clucking chorus is the 97th species-side acoustic element -- rapid, raspy, duck-like from breeding aggregations. E=4. Third amphibian entry. Second anuran family. Return to Amphibia after insect era (87-95). Thirty-sixth consecutive original CSV. The insect era ends. The frog thaws.
+On the species side, the wood frog emerges from the vernal pool -- NEW FAMILY (46th), Ranidae, true frogs. Second anuran family. Third amphibian entry. First freeze-tolerant species -- frozen solid, 65% body water as ice, heart stops, thaws in spring. Duck-like clucking chorus is the 97th species-side acoustic element -- raspy, percussive, duck-like. E=4. Vernal pool -- first temporary habitat. Early spring breeder, calling while snow is on the ground. Thirty-sixth consecutive original CSV. The engine adds freeze tolerance and the sound of ducks that are not ducks.
 
-The pulse and the freeze. STRFKR maintains relentless groove. The wood frog survives the freeze. Both persist. Both endure. Both deliver energy from minimal infrastructure -- DIY records and vernal pools.
+The pulse and the freeze. STRFKR delivers relentless pulse -- constant forward motion, never stopping. The wood frog survives being stopped -- frozen solid, heart ceased, thawed back to life. The pulse that never stops and the organism that survives being stopped. Both resilient. Both persistent. Both returning.
 
-*Degree 96. The pulse and the freeze. The synth-pop pulse drives. The duck-like clucking rises from thawed pools. Both persistent. Both resilient. The engine adds joyful persistence and biological resilience.*
+*Degree 96. The pulse and the freeze. The groove drives forward. The frog thaws in spring. Both relentless in their way -- the pulse refuses to stop; the freeze cannot stop what the thaw restores. The engine adds persistence.*
 
 </details>
