@@ -288,7 +288,7 @@ async function main() {
     }
 
     case 'cartridge': {
-      const code = await cartridgeCommand(args);
+      const code = await cartridgeCommand(args.slice(1));
       if (code !== 0) process.exit(code);
       break;
     }
