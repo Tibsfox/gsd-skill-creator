@@ -101,3 +101,7 @@ scripts/sweep/sweep_daemon.py
 scripts/sync-research-to-live.sh
 scripts/python/sync-usgs.py
 scripts/python/build-learn-pages.py
+# Background-shell orchestrator runtime state
+/.bg-shell/
+# Stale per-session continuation handoffs (local scratch)
+/.continue-here.md
