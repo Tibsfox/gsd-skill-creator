@@ -168,6 +168,7 @@ interface Args {
   agentSources: string[];
   teamSources: string[];
   chipsetSources: string[];
+  cartridgeSources: string[];
   excludes: string[];
   dryRun: boolean;
   verbose: boolean;
@@ -182,6 +183,7 @@ function parseArgs(argv: string[]): Args {
     agentSources: [],
     teamSources: [],
     chipsetSources: [],
+    cartridgeSources: [],
     excludes: [...DEFAULT_EXCLUDES],
     dryRun: false,
     verbose: false,
@@ -203,6 +205,9 @@ function parseArgs(argv: string[]): Args {
         break;
       case '--chipsets':
         args.chipsetSources.push(argv[++i]);
+        break;
+      case '--cartridges':
+        args.cartridgeSources.push(argv[++i]);
         break;
       case '--exclude':
         args.excludes.push(argv[++i]);
@@ -243,6 +248,13 @@ function parseArgs(argv: string[]): Args {
     const defaults = [join(cwd, 'data/chipset')];
     args.chipsetSources = defaults.filter((p) => existsSync(p));
   }
+  if (args.cartridgeSources.length === 0) {
+    const defaults = [
+      join(cwd, '.claude/cartridges'),
+      join(cwd, 'examples/cartridges'),
+    ];
+    args.cartridgeSources = defaults.filter((p) => existsSync(p));
+  }
   return args;
 }
 
@@ -276,7 +288,7 @@ Default excludes:
 
 // ─── Resource kinds ─────────────────────────────────────────────────────────
 
-type ResourceKind = 'skills' | 'agents' | 'teams' | 'chipsets';
+type ResourceKind = 'skills' | 'agents' | 'teams' | 'chipsets' | 'cartridges';
 
 interface ParsedResource {
   kind: ResourceKind;
@@ -494,6 +506,43 @@ async function parseChipset(sourceDir: string, entry: string): Promise<ParsedRes
   };
 }
 
+/**
+ * Cartridge: directory containing cartridge.yaml. Registered as a single
+ * grove record per cartridge — the cartridge.yaml is the body. This is
+ * the ForgedCartridge record pattern: the cartridge is the durable
+ * artifact, not its individual companion files.
+ */
+async function parseCartridge(sourceDir: string, dirName: string): Promise<ParsedResource | null> {
+  const dirPath = join(sourceDir, dirName);
+  try {
+    const s = await stat(dirPath);
+    if (!s.isDirectory()) return null;
+  } catch {
+    return null;
+  }
+  const cartridgePath = join(dirPath, 'cartridge.yaml');
+  if (!existsSync(cartridgePath)) return null;
+  const raw = await readFile(cartridgePath, 'utf-8');
+  const idMatch = raw.match(/^id:\s*["']?([^"'\n]+)["']?\s*$/m);
+  const nameMatch = raw.match(/^name:\s*["']?([^"'\n]+)["']?\s*$/m);
+  const descMatch = raw.match(/^description:\s*(?:>-?\s*\n((?:[ \t]+.+\n?)+)|["']?([^"'\n]+)["']?)/m);
+  const id = idMatch ? idMatch[1].trim() : dirName;
+  const description = descMatch
+    ? (descMatch[1] ?? descMatch[2] ?? '').trim().replace(/\s+/g, ' ')
+    : nameMatch
+      ? `Cartridge: ${nameMatch[1].trim()}`
+      : `Cartridge: ${dirName}`;
+  return {
+    kind: 'cartridges',
+    rawName: dirName,
+    name: `cartridges/${id}`,
+    description,
+    body: raw,
+    sourcePath: cartridgePath,
+    activationPatterns: [],
+  };
+}
+
 function extractActivationPatterns(frontmatter: Record<string, unknown>): string[] {
   if (Array.isArray(frontmatter.activationPatterns)) {
     return frontmatter.activationPatterns.map(String);
@@ -547,6 +596,9 @@ async function walkSource(
         break;
       case 'chipsets':
         parsed = await parseChipset(sourceDir, entry);
+        break;
+      case 'cartridges':
+        parsed = await parseCartridge(sourceDir, entry);
         break;
     }
     if (parsed) {
@@ -652,6 +704,8 @@ async function main(): Promise<void> {
   for (const s of args.teamSources) console.log(`              ${s}`);
   console.log(`  chipsets:   ${args.chipsetSources.length} source(s)`);
   for (const s of args.chipsetSources) console.log(`              ${s}`);
+  console.log(`  cartridges: ${args.cartridgeSources.length} source(s)`);
+  for (const s of args.cartridgeSources) console.log(`              ${s}`);
   console.log();
 
   const invoke = createNodeArenaInvoke({ snapshotPath: args.arenaPath });
@@ -683,6 +737,11 @@ async function main(): Promise<void> {
     all.push(...found);
     console.log(`Chipsets  (${src}): ${found.length}`);
   }
+  for (const src of args.cartridgeSources) {
+    const found = await walkSource(src, 'cartridges', args.excludes);
+    all.push(...found);
+    console.log(`Cartridges(${src}): ${found.length}`);
+  }
   console.log();
 
   // Import.
@@ -699,6 +758,7 @@ async function main(): Promise<void> {
     agents: { imported: 0, skipped: 0, errors: 0 },
     teams: { imported: 0, skipped: 0, errors: 0 },
     chipsets: { imported: 0, skipped: 0, errors: 0 },
+    cartridges: { imported: 0, skipped: 0, errors: 0 },
   };
   for (const r of results) {
     if (r.action === 'imported') byKind[r.kind].imported++;
