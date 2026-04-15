@@ -10,9 +10,10 @@ import {
 } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { resolveHookPath } from '../fixtures/test-hooks.js';
 
-const PRE = join(process.cwd(), '.claude/hooks/pre-compact-snapshot.cjs');
-const POST = join(process.cwd(), '.claude/hooks/post-compact-recovery.cjs');
+const PRE = resolveHookPath('pre-compact-snapshot.cjs');
+const POST = resolveHookPath('post-compact-recovery.cjs');
 
 function run(script: string, stdin: string, cwd?: string): { stdout: string; code: number | null } {
   const res = spawnSync('node', [script], {
