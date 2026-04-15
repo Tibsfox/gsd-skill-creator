@@ -124,6 +124,16 @@
         ]
       }
     ],
+    "FileChanged": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/external-change-tracker.cjs"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
