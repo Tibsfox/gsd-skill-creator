@@ -82,6 +82,23 @@ Three structural alignments deepening the organism-mission resonance:
 
 </details>
 
+## Emerging Patterns at Degree 47
+
+| Pattern | Status | Degree 47 Value |
+|---------|--------|-----------------|
+| S36 Artists | 48 documented (degrees 0-47) | Pedro the Lion -- the parable, folk triangle hub, dual-lens songwriting, Shorewood connection |
+| SPS Species | 48 documented (degrees 0-47) | Dark-eyed Junco -- third Passerellidae, 630M individuals, precision trill, white tail flash |
+| NASA Missions | 48 aligned (1.0-1.48) | Lunar Orbiter 1 -- FIRST US MOON ORBIT, Bimat film in space, first Earth-from-Moon photo |
+| NASA Programs | 7 (Lunar Orbiter BEGUN) | Pioneer/Mercury/Ranger/Mariner/Gemini/Surveyor + **Lunar Orbiter begun** |
+| Passerellidae Streak | UNPRECEDENTED 3-degree run | Song Sparrow (45) → Spotted Towhee (46) → Dark-eyed Junco (47) |
+| Taxonomic Recursion | FIRST (Oregon Junco inside Dark-eyed) | Degree 11 subspecies enclosed by degree 47 species complex -- 36-degree nesting |
+| Folk Triangle | COMPLETE (Jurado/Votolato/Bazan) | Three consecutive folk-adjacent degrees (45-47) orbiting Pedro the Lion |
+| Genre Stages | +Indie Folk (Stage 28) | Third consecutive folk-adjacent; longest folk run in engine |
+| Lunar Reconnaissance | DUAL infrastructure | Surveyor on surface (45) + Orbiter in sky (47) -- Apollo infrastructure complete |
+| Boeing-Seattle | FIRST PNW-built mission | Lunar Orbiter built in Seattle metro; Moon mapped by PNW engineering |
+| Passerellidae Song Arc | Complexity → rasp → minimal trill | Melodic (45) → textural (46) → pared-down (47) |
+| First Earthrise | August 23, 1966 | Camera turned the other way; one frame of Earth from lunar vicinity |
+
 ## Programs Active at Degree 47
 
 | Program | Status | Degrees |

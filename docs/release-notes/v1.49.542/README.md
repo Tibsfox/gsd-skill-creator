@@ -99,6 +99,23 @@ Three structural alignments between the Nashville Warbler and Gemini 7:
 
 </details>
 
+## Emerging Patterns at Degree 41
+
+| Pattern | Status | Degree 41 Value |
+|---------|--------|-----------------|
+| S36 Artists | 42 documented (degrees 0-41) | Shawn Smith -- The Endurance Singer, Capitol Hill 32 years, Brad/Satchel/Pigeonhed/solo |
+| SPS Species | 42 documented (degrees 0-41) | Nashville Warbler -- ninth Parulidae, fourth consecutive, the misnomer, two-part song |
+| NASA Missions | 42 aligned (1.0-1.42) | Gemini 7 -- 14-day record, 330 hours, medical baseline for Apollo, G5C suit |
+| NASA Programs | 5 (Gemini endurance doubles) | Pioneer ✓ / Mercury ✓ / Ranger ✓ / Mariner active / Gemini active (endurance ceiling doubles) |
+| Parulidae Family | 9 species, 4 consecutive (38-41) | First genus break in the run -- *Setophaga* trio → *Leiothlypis* |
+| *Leiothlypis* Return | 21-degree gap (20→41) | Orange-crowned → Nashville, shrubby slope → brushy clearing |
+| Energy Profile | E≥5 streak BROKEN at 9 | Degrees 32-40 E≥5 run ends; Smith's E=4 registers interior energy |
+| Endurance Ceiling | Doubles in one degree | 8 days (Gemini 5, degree 40) → 14 days (Gemini 7, degree 41) |
+| Lovell Arc | BEGINS at degree 41 | First spaceflight -- Gemini 12, Apollo 8 (first lunar orbit), Apollo 13 ahead |
+| Geographic Nodes | +CAPITOL HILL (3rd) | Central District + Tacoma + Capitol Hill -- alternative/indie scene |
+| Dual-Subspecies Problem | Nashville *ruficapilla*/*ridgwayi* | East vs. west populations, one species two objectives |
+| Deceased Artists | +Shawn Smith (1965-2019) | Died April 3, 2019; endurance has a cost |
+
 ## Programs Active at Degree 41
 
 | Program | Status | Degrees |
