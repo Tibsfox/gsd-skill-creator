@@ -1,6 +1,10 @@
 ---
 name: mail-async
 description: Durable asynchronous messaging channel for inter-agent communication. Implements write-once read-many filesystem mail using atomic writes and directory-based mailboxes.
+format: 2025-10-02
+version: 1.0.0
+status: active
+updated: 2026-03-06
 ---
 
 # Mail Async

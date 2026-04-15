@@ -1,6 +1,10 @@
 ---
 name: refinery-merge
 description: DMA merge queue pattern for sequential, deterministic merge request processing. Checks out branches, rebases onto main, runs tests, merges, and pushes. Never auto-resolves conflicts.
+format: 2025-10-02
+version: 1.0.0
+status: active
+updated: 2026-03-06
 ---
 
 # Refinery Merge

@@ -1,6 +1,10 @@
 ---
 name: token-budget
 description: Token budget tracking and enforcement for Gastown convoy-level execution. Hard limits with pre-execution checking, per-convoy and per-agent tracking, structured stop reasons.
+format: 2025-10-02
+version: 1.0.0
+status: active
+updated: 2026-04-04
 ---
 
 # Token Budget Enforcement
