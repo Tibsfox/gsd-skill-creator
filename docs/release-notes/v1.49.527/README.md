@@ -38,7 +38,51 @@ E=4 sustained for the sixth consecutive degree (21-26). Combined 8. The soul qua
 <details>
 <summary>Full Release Notes -- Click to expand</summary>
 
-## Carry-Forward Items from Degree 26
+## Part A: Shaina Shepherd -- THE REDIRECTED VOICE
+
+### Pass 2 Refinement Summary
+
+Shaina Shepherd is the fourth woman in twenty-seven degrees -- after Ernestine Anderson (degree 3), Patti Bown (degree 6), and Whitney Monge (degree 20). The gender gap has narrowed from fourteen degrees (7-20) to six (21-26), and the pattern of each woman bringing a structural first persists. Shepherd was born and raised in Tacoma -- the engine's first artist from the south Puget Sound corridor. Gospel upbringing: her mother sang in the church choir, Shepherd emulated the steady richness of her tone, joined the choir herself. Gospel as the sole childhood musical environment -- not rural church worship like Stone's Chewelah (degree 23) or dynastic inheritance like Artis's Motown family (degree 24), but urban gospel as the water she breathed before any other influence entered her world.
+
+She pursued classical opera at NYU Steinhardt -- the engine's first East Coast conservatory, alongside Berklee and Cornish and UW in the institutional pipeline. At twenty-two, a vocal cord injury ended her operatic career. The structural arc is Nina Simone's exactly: classically trained, interrupted by circumstance, redirected into popular music, producing a voice that carries classical technique into spaces where it is not expected. Simone was rejected from Curtis; Shepherd's cords failed at NYU. Both pivots produced artists whose soul music carries the weight of a classical education. Shepherd names Quincy Jones among her primary influences -- degree 0's subject, twenty-six degrees later, surfacing in the self-described lineage of a Tacoma-born soul singer. The circle curves. The Joan Jett discovery -- "Cherry Bomb" by The Runaways, found on a library card -- was the gateway from gospel to rock, from the music her upbringing sanctioned to the music it called "the Devil's music." The injury that destroyed her opera career was the event that freed her voice for soul.
+
+### Retrospective: Degree 26 Patterns Established
+
+1. **The Nina Simone arc is a structural template.** Classical training → interruption by injury or rejection → redirection into popular music → voice that carries classical technique into unexpected spaces. Shepherd's cord injury mirrors Simone's Curtis rejection.
+
+2. **The gender gap narrows.** Four women in 27 degrees (Anderson 3, Bown 6, Monge 20, Shepherd 26). Gap from 14 degrees (7-20) to 6 (21-26). Each woman brings a structural first.
+
+3. **Tacoma enters.** First south Puget Sound artist. Geographic diversification continues southward from the Seattle-Spokane-Wenatchee-Chewelah spine.
+
+4. **Quincy Jones influence persists across the engine.** Named by Shepherd at degree 26; already loop-closed with Artis Sr.'s *Thriller* keyboards at degree 24. The degree-0 subject's influence surfaces repeatedly.
+
+5. **Soul quadrant confirms.** Two consecutive pure-soul degrees (25-26) with no jazz qualifier. The genre transition is complete.
+
+---
+
+## Part B: Purple Martin -- THE SKY OPENS
+
+### Pass 2 Refinement Summary
+
+The Purple Martin opens the sky. For twenty-six degrees, every species occupied a surface -- forest canopy, understory, shrub, lawn, marsh edge, snag. The robin sang from a rooftop. The flicker drummed from a dead alder. The tanager sang from a Douglas-fir branch. Every bird in the engine perched on something to produce its sound. The martin occupies the sky itself. *Progne subis* is the engine's first aerial insectivore -- a bird that catches food on the wing, drinks on the wing, and spends more waking hours in flight than any previous species. The sky is not a corridor between perches; it is the habitat. The feeding ground. The workplace.
+
+The largest North American swallow (19-20 cm, 45-60g), the martin sings a rich gurgling liquid song unlike anything the engine has heard -- not the clear whistles of thrushes, not the rolling warbles of the convergence trio, not the buzzy trills of warblers, but something wet and tumbling, as if the sound itself were made of water. *Progne* from Greek mythology: Procne transformed into a swallow in Ovid's *Metamorphoses*. Shape-shifting, flight, return. The mythological origin connects the genus to the oldest stories humans have told about swallows.
+
+The Purple Martin begins a swallow trio spanning degrees 26-27-28 -- three consecutive Hirundinidae, the only comparable family cluster to the warbler quintet (degrees 14-17, 20). And the western Purple Martin is almost entirely dependent on human-provided nest boxes -- a conservation story where the species' survival in the PNW depends on manufactured housing mounted on pilings over water. Habitat loss and competition from European Starlings and House Sparrows drove western populations to near-extirpation. The nest-box programs brought them back. The engine's first human-dependent conservation case. The organism pairing -- western sword fern -- is the PNW's most ubiquitous forest-floor fern, covering understory in green cascades, thriving through every disturbance. The fern covers the forest floor. The martin covers the sky. Between them, the vertical column of the PNW ecosystem is mapped.
+
+### Retrospective: Degree 26 Lessons Learned
+
+1. **Aerial singing is initialized.** First species that sings in flight. First bird that does not perch to produce its sound. The sky enters the engine as habitat, not as corridor.
+
+2. **Hirundinidae enters as the swallow trio.** Three consecutive degrees (26-27-28) of Hirundinidae -- the only cluster comparable to the warbler quintet. Sixteenth family.
+
+3. **Nest-box conservation as a structural first.** The engine's first human-dependent conservation case. Species survival in the PNW depends on manufactured housing mounted over water.
+
+4. **The vertical ecosystem is mapped.** Sword fern covers the forest floor, Purple Martin covers the sky. Between them, the vertical column of the PNW ecosystem is complete.
+
+5. **Ranger fix-one-find-next confirms across the program.** Two consecutive failures (Ranger 1 and 2), different mechanisms (propellant settling vs. roll gyro), same outcome (stranded in orbit). The same pattern Pioneer documented.
+
+### Carry-Forward Items from Degree 26
 
 - **Ranger program:** Two consecutive failures (25-26). Different mechanisms, same outcome (stranded in orbit). Convergence pending.
 - **Women:** 4 in 27 degrees (Anderson 3, Bown 6, Monge 20, Shepherd 26). Gap narrowed from 14 degrees to 6.
