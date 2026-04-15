@@ -40,19 +40,45 @@ Mercury is complete. Nine flights across nine degrees (16-24): MR-1 four inches 
 <details>
 <summary>Full Release Notes -- Click to expand</summary>
 
-## Retrospective: Degree 24 Lessons Learned
+## Part A: Ron Artis II -- THE DYNASTY
 
-1. **The Mercury program is complete.** Nine flights across nine degrees (16-24): MR-1 (four inches) → MR-2 (Ham) → MA-5 (Enos orbital) → Freedom 7 (Shepard) → Liberty Bell 7 (Grissom, sank) → Friendship 7 (Glenn orbital) → Aurora 7 (Carpenter) → Sigma 7 (Schirra precision) → Faith 7 (Cooper, 34 hours). The full arc from false start to farewell.
+### Pass 2 Refinement Summary
 
-2. **The *Thriller* loop is the engine's most powerful cross-reference.** Jones produced *Thriller* at degree 0. Artis Sr. played on *Thriller* at degree 24. Twenty-four degrees of separation, one recording session. The engine's longest connection.
+Ron Artis II closes the engine's largest loop. His father, Ron Artis Sr., played keyboards on Michael Jackson's *Thriller* -- the best-selling album in history, produced by Quincy Jones, who appears at degree 0. Degree 0 and degree 24, connected through one recording session in a Westlake Audio studio in Los Angeles in 1982. The engine began with the man who produced *Thriller*; twenty-four degrees later, the son of a man who played on *Thriller* sings soul in Seattle.
 
-3. **The convergence trio (degrees 23-24-25) is the richest acoustic convergence.** Three robin-like warbles from three species in two families, each with a different texture (rich, hoarse, bright). The archetype arrives at degree 25 AFTER its acoustic ghosts at 23-24.
+The Motown dynasty: Ron Artis Sr. and Victoria Artis raised eleven children on the North Shore of Oahu -- Stephanie, Ron II, Victor, Stevon, PraiseJesus, Spirit, Martis, Kailua, American, Thunderstorm, and Artis. Every child was raised in music. The Ron Artis Family Band performed regularly from their Haleiwa compound, the Art...is gallery doubling as a community venue. Ron II learned piano by age four, received a guitar for his thirteenth birthday, developed mastery of both plus ukulele, bass, and vocals. The family moved from mainland to Hawaii when Ron II was approximately four -- the engine's first cross-Pacific migration, 2,500 miles of ocean, from Motown Detroit to surf-culture North Shore. Brother Thunderstorm reached the finals of NBC's *The Voice* Season 18. Mick Fleetwood mentored Ron II from the Hawaii music community. Jack Johnson, fellow North Shore artist, gave him opening-slot tours.
+
+### Retrospective: Degree 24 Patterns Established
+
+1. **The *Thriller* loop is the engine's most powerful cross-reference.** Jones produced *Thriller* at degree 0. Artis Sr. played on *Thriller* at degree 24. Twenty-four degrees of separation, one recording session. The engine's longest connection.
+
+2. **The family ecosystem as launch vehicle.** Eleven siblings, a family band, a gallery-as-venue, Mick Fleetwood mentorship, Jack Johnson tour slots. Career ignition through dynasty rather than institution or internet.
+
+3. **Cross-Pacific pipeline initialized.** First non-continental origin. 2,500 miles of ocean from Motown Detroit to North Shore Oahu to Seattle.
 
 4. **KEXP as label proxy is a new institutional model.** The radio station replacing the recording label as the artist's primary platform. Media-as-launchpad. Cooper's Faith 7 broadcast live to global TV = KEXP broadcasting Artis II's sessions to the Seattle audience.
 
-5. **E=4 sustained for four degrees (21-24) is the engine's longest peak.** Combined 8 x 4. The soul/funk quadrant demands volume.
+---
 
-6. **Cooper's manual reentry is the Mercury program's most consequential pilot action.** When every automatic system failed, the pilot flew the spacecraft home by hand using visual references to the stars and the horizon. The human as ultimate backup system.
+## Part B: Western Tanager -- THE CONVERGENCE TRIO MIDDLE VOICE
+
+### Pass 2 Refinement Summary
+
+The Western Tanager sings a hoarse robin-like warble from the conifer canopy -- the second of three consecutive robin-like songs, the convergence trio building toward the archetype. The Black-headed Grosbeak at degree 23 sings a rich robin-like warble. The tanager at degree 24 sings a hoarse version. The American Robin at degree 25 will deliver the original. Three species in two families (Cardinalidae twice, Turdidae once), each arriving at similar acoustic solutions through independent evolutionary paths. The tanager is the trio's middle voice -- coarser than the grosbeak, not yet the robin, the approximation that reveals the convergence pattern.
+
+And the Western Tanager is not a tanager at all: molecular phylogenetics reassigned *Piranga* from Thraupidae (true tanagers) to Cardinalidae (cardinals and grosbeaks). The common name persists from a classification that the science has abandoned. A bird misnamed for a family it does not belong to, singing a song that sounds like a species it is not related to. The Pacific Madrone does the same thing -- peeling bark to reveal smooth red-orange wood that looks like no other PNW tree, growing on dry rocky slopes where nothing else will grow, the tree that refuses to be ordinary. Cooper's Faith 7 refused to be ordinary: when the systems failed, the pilot took over and flew it home.
+
+### Retrospective: Degree 24 Lessons Learned
+
+1. **The Mercury program is complete.** Nine flights across nine degrees (16-24): MR-1 (four inches) → MR-2 (Ham) → MA-5 (Enos orbital) → Freedom 7 (Shepard) → Liberty Bell 7 (Grissom, sank) → Friendship 7 (Glenn orbital) → Aurora 7 (Carpenter) → Sigma 7 (Schirra precision) → Faith 7 (Cooper, 34 hours). The full arc from false start to farewell.
+
+2. **The convergence trio (degrees 23-24-25) is the richest acoustic convergence.** Three robin-like warbles from three species in two families, each with a different texture (rich, hoarse, bright). The archetype arrives at degree 25 AFTER its acoustic ghosts at 23-24.
+
+3. **E=4 sustained for four degrees (21-24) is the engine's longest peak.** Combined 8 x 4. The soul/funk quadrant demands volume.
+
+4. **Cooper's manual reentry is the Mercury program's most consequential pilot action.** When every automatic system failed, the pilot flew the spacecraft home by hand using visual references to the stars and the horizon. The human as ultimate backup system.
+
+5. **Misnamed taxonomy as a structural motif.** The Western Tanager is a cardinal that retained the tanager common name. The misnomer persists because language is slower than phylogenetics.
 
 ### Carry-Forward Items from Degree 24
 
@@ -64,6 +90,19 @@ Mercury is complete. Nine flights across nine degrees (16-24): MR-1 four inches 
 - **Energy:** E=4/E=4 for fourth consecutive degree. Combined 8 x 4. Peak sustained.
 
 </details>
+
+## Emerging Patterns
+
+| Pattern | Status at Degree 24 | Established |
+|---------|---------------------|-------------|
+| Mercury program | COMPLETE (9 flights, 9 degrees) | Four inches to 34 hours, MR-1 to Faith 7 |
+| *Thriller* loop | Degree 0 ↔ 24 | Jones produced, Artis Sr. played, one session |
+| Convergence trio | 2/3 | Grosbeak (23) → Tanager (24) → Robin (25) |
+| Cardinalidae pair | 2 consecutive | Grosbeak (23) + Tanager (24) |
+| Cross-Pacific pipeline | Initialized | Hawaii → Seattle, first non-continental origin |
+| Energy peak | E=4 x 4 consecutive | Degrees 21-24, combined 8 sustained |
+| Manual reentry | 1 (Cooper) | Pilot as ultimate backup system |
+| Misnamed taxonomy | 1 (Western Tanager) | Common name retained from abandoned classification |
 
 ## The Mercury Program -- Final State
 
