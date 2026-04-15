@@ -22,6 +22,7 @@ import * as path from 'node:path';
 import { mkdtemp, rm, readFile, readdir, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { resolveSkillPath } from './test-fixtures.js';
 
 // ---------------------------------------------------------------------------
 // Shared paths and helpers
@@ -52,8 +53,7 @@ function toYaml(data: Record<string, unknown>): string {
 }
 
 function readSkillFile(skillName: string): string {
-  const skillPath = path.resolve(PROJECT_ROOT, `.claude/skills/${skillName}/SKILL.md`);
-  return fs.readFileSync(skillPath, 'utf8');
+  return fs.readFileSync(resolveSkillPath(skillName), 'utf8');
 }
 
 // ---------------------------------------------------------------------------

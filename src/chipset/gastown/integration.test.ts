@@ -18,6 +18,7 @@ import * as path from 'node:path';
 import { mkdtemp, rm, mkdir, writeFile, readFile, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { resolveSkillPath } from './test-fixtures.js';
 
 // ---------------------------------------------------------------------------
 // Shared paths and helpers
@@ -354,10 +355,7 @@ describe('Integration Tests', () => {
   // Runtime detection selects correct GUPP strategy
   // -------------------------------------------------------------------------
   it('IT-07: runtime HAL documents strategy selection for each provider', () => {
-    const content = fs.readFileSync(
-      path.resolve(PROJECT_ROOT, '.claude/skills/runtime-hal/SKILL.md'),
-      'utf8',
-    );
+    const content = fs.readFileSync(resolveSkillPath('runtime-hal'), 'utf8');
 
     // Verify all providers are documented
     expect(content).toContain('claude');
