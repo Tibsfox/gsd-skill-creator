@@ -187,6 +187,69 @@ function installSkillDir(entry) {
   }
 }
 
+// --- Cartridge directory install (recursive) ---
+function walkDirRel(baseDir, relBase = '') {
+  const out = [];
+  const absDir = path.join(baseDir, relBase);
+  let entries;
+  try {
+    entries = fs.readdirSync(absDir, { withFileTypes: true });
+  } catch {
+    return out;
+  }
+  for (const e of entries) {
+    if (e.name.startsWith('.')) continue;
+    const rel = relBase ? path.join(relBase, e.name) : e.name;
+    if (e.isDirectory()) {
+      out.push(...walkDirRel(baseDir, rel));
+    } else if (e.isFile()) {
+      out.push(rel);
+    }
+  }
+  return out;
+}
+
+function installCartridgeDir(entry) {
+  const sourceBase = path.join(sourceDir, entry.source);
+  const targetBase = path.join(projectRoot, entry.target);
+
+  if (!fs.existsSync(sourceBase)) {
+    warn(`Cartridge source directory missing: ${entry.source}`);
+    return;
+  }
+
+  ensureDirPath(targetBase);
+  const files = walkDirRel(sourceBase);
+
+  for (const rel of files) {
+    const sourcePath = path.join(sourceBase, rel);
+    const targetPath = path.join(targetBase, rel);
+    const sourceContent = readFileSafe(sourcePath);
+    if (sourceContent === null) {
+      warn(`Cartridge file unreadable: ${entry.source}/${rel}`);
+      continue;
+    }
+    const targetContent = readFileSafe(targetPath);
+    if (targetContent === null) {
+      if (!dryRun) {
+        ensureDir(targetPath);
+        fs.writeFileSync(targetPath, sourceContent);
+      }
+      log(`  + installed: ${entry.target}/${rel}`);
+      stats.installed++;
+    } else if (sha256(sourceContent) === sha256(targetContent)) {
+      if (!quiet) log(`  = current:   ${entry.target}/${rel}`);
+      stats.current++;
+    } else if (force) {
+      if (!dryRun) fs.writeFileSync(targetPath, sourceContent);
+      log(`  ↻ updated:   ${entry.target}/${rel}`);
+      stats.updated++;
+    } else {
+      warn(`differs: ${entry.target}/${rel} (use --force to overwrite)`);
+    }
+  }
+}
+
 // --- Hook script install (with chmod +x on Unix) ---
 function chmodSafe(filePath, mode) {
   if (process.platform !== 'win32') {
@@ -650,6 +713,14 @@ function validateInstallation() {
     { name: 'integration config', path: '.planning/skill-creator.json' },
     // CLAUDE.md
     { name: 'CLAUDE.md', path: 'CLAUDE.md' },
+    // Dogfood cartridge
+    { name: 'gsd-skill-creator cartridge', path: '.claude/cartridges/gsd-skill-creator/cartridge.yaml' },
+    // Core GSD cartridge
+    { name: 'get-shit-done cartridge', path: '.claude/cartridges/get-shit-done/cartridge.yaml' },
+    // Release engine cartridge
+    { name: 'release-engine cartridge', path: '.claude/cartridges/release-engine/cartridge.yaml' },
+    // Housekeeping cartridge
+    { name: 'housekeeping cartridge', path: '.claude/cartridges/housekeeping/cartridge.yaml' },
   ];
 
   let ok = 0;
@@ -744,6 +815,10 @@ function uninstallIntegration() {
       '.claude/skills/skill-integration',
       '.claude/skills/session-awareness',
       '.claude/skills/security-hygiene',
+      '.claude/cartridges/gsd-skill-creator',
+      '.claude/cartridges/get-shit-done',
+      '.claude/cartridges/release-engine',
+      '.claude/cartridges/housekeeping',
     ],
     files: [
       '.claude/agents/observer.md',
@@ -919,6 +994,15 @@ function main() {
   if (manifest.files.settingsHooks) {
     log('Settings hooks:');
     installSettings(manifest.files.settingsHooks);
+    log('');
+  }
+
+  // Install cartridges (recursive directory copy)
+  if (manifest.files.cartridges) {
+    log('Cartridges:');
+    for (const entry of manifest.files.cartridges) {
+      installCartridgeDir(entry);
+    }
     log('');
   }
 
