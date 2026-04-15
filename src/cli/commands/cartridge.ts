@@ -30,6 +30,7 @@ import {
   scaffoldCartridge,
   type ScaffoldTemplate,
 } from '../../cartridge/scaffold.js';
+import { scaffoldCompanions } from '../../cartridge/scaffold-companions.js';
 import { validateCartridge } from '../../cartridge/validator.js';
 
 export interface CartridgeCommandIO {
@@ -58,6 +59,7 @@ function usageError(io: CartridgeCommandIO, message: string): number {
   io.stderr('  skill-creator cartridge validate <path> [--json] [--allow-validation-debt]');
   io.stderr('  skill-creator cartridge scaffold <template> <dir> <name> [--trust <t>]');
   io.stderr('                                       [--author <a>] [--description <d>] [--tags a,b,c]');
+  io.stderr('  skill-creator cartridge scaffold-companions <path> [--overwrite] [--json]');
   io.stderr('  skill-creator cartridge metrics <path> [--json]');
   io.stderr('  skill-creator cartridge eval <path> [--json]');
   io.stderr('  skill-creator cartridge dedup <path> [--json]');
@@ -107,6 +109,7 @@ export async function cartridgeCommand(
     io.stdout('  skill-creator cartridge validate <path> [--json] [--allow-validation-debt]');
     io.stdout('  skill-creator cartridge scaffold <template> <dir> <name> [--trust <t>]');
     io.stdout('                                       [--author <a>] [--description <d>] [--tags a,b,c]');
+    io.stdout('  skill-creator cartridge scaffold-companions <path> [--overwrite] [--json]');
     io.stdout('  skill-creator cartridge metrics <path> [--json]');
     io.stdout('  skill-creator cartridge eval <path> [--json]');
     io.stdout('  skill-creator cartridge dedup <path> [--json]');
@@ -122,6 +125,8 @@ export async function cartridgeCommand(
         return handleValidate(rest, io);
       case 'scaffold':
         return handleScaffold(rest, io);
+      case 'scaffold-companions':
+        return handleScaffoldCompanions(rest, io);
       case 'metrics':
         return handleMetrics(rest, io);
       case 'eval':
@@ -231,6 +236,28 @@ function handleScaffold(args: string[], io: CartridgeCommandIO): number {
   } else {
     io.stdout(`scaffolded ${name} -> ${result.targetDir}`);
     io.stdout(`${result.filesWritten.length} file(s) written`);
+  }
+  return 0;
+}
+
+function handleScaffoldCompanions(
+  args: string[],
+  io: CartridgeCommandIO,
+): number {
+  const positional = positionalArgs(args);
+  const path = positional[0];
+  if (!path) return usageError(io, 'scaffold-companions requires <path>');
+  const overwrite = args.includes('--overwrite');
+  const result = scaffoldCompanions({ path, overwrite });
+  if (jsonMode(args)) {
+    printJson(io, { ok: true, ...result });
+  } else {
+    io.stdout(`${result.cartridgeId}`);
+    io.stdout(
+      `  wrote ${result.filesWritten.length} file(s), skipped ${result.filesSkipped.length} existing`,
+    );
+    for (const f of result.filesWritten) io.stdout(`  + ${f}`);
+    for (const f of result.filesSkipped) io.stdout(`  . ${f}`);
   }
   return 0;
 }
