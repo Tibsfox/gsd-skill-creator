@@ -57,6 +57,7 @@ function usageError(io: CartridgeCommandIO, message: string): number {
   io.stderr('  skill-creator cartridge load <path> [--json]');
   io.stderr('  skill-creator cartridge validate <path> [--json] [--allow-validation-debt]');
   io.stderr('  skill-creator cartridge scaffold <template> <dir> <name> [--trust <t>]');
+  io.stderr('                                       [--author <a>] [--description <d>] [--tags a,b,c]');
   io.stderr('  skill-creator cartridge metrics <path> [--json]');
   io.stderr('  skill-creator cartridge eval <path> [--json]');
   io.stderr('  skill-creator cartridge dedup <path> [--json]');
@@ -105,6 +106,7 @@ export async function cartridgeCommand(
     io.stdout('  skill-creator cartridge load <path> [--json]');
     io.stdout('  skill-creator cartridge validate <path> [--json] [--allow-validation-debt]');
     io.stdout('  skill-creator cartridge scaffold <template> <dir> <name> [--trust <t>]');
+    io.stdout('                                       [--author <a>] [--description <d>] [--tags a,b,c]');
     io.stdout('  skill-creator cartridge metrics <path> [--json]');
     io.stdout('  skill-creator cartridge eval <path> [--json]');
     io.stdout('  skill-creator cartridge dedup <path> [--json]');
@@ -209,11 +211,20 @@ function handleScaffold(args: string[], io: CartridgeCommandIO): number {
     | 'user'
     | 'community'
     | undefined;
+  const author = getFlagValue(args, 'author');
+  const description = getFlagValue(args, 'description');
+  const tagsFlag = getFlagValue(args, 'tags');
+  const tags = tagsFlag
+    ? tagsFlag.split(',').map((t) => t.trim()).filter((t) => t.length > 0)
+    : undefined;
   const result = scaffoldCartridge({
     template: template as ScaffoldTemplate,
     targetDir: dir,
     name,
     trust,
+    author,
+    description,
+    tags,
   });
   if (jsonMode(args)) {
     printJson(io, { ok: true, ...result });
