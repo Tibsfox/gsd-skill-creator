@@ -167,10 +167,10 @@ v1.49.520     = degree 19      Pass 2  ← next
 | `NASA/1.18/degree-sync.json` | Degree Sync | ~350 lines |
 | `docs/release-notes/v1.49.519/README.md` | Release Note | -- |
 
-## Complete State at Degree 18
+## Emerging Patterns at Degree 18
 
-| Thread | State | Key Detail |
-|--------|-------|------------|
+| Pattern | Status | Degree 18 Value |
+|---------|--------|-----------------|
 | S36 Artists | 19 documented (degrees 0-18) | Soul/Jazz. First band. First dual-degree artist. Capitol Hill enters. Jazz becomes method. |
 | SPS Species | 19 documented (degrees 0-18) | Third Turdidae. Second Catharus. Ascending spiral. Crepuscular transition. Melodic thinking. |
 | NASA Missions | 19 aligned (1.0-1.18) | MA-5: Enos orbital. Lever malfunction -- shocked for correct responses. Capsule qualified. Glenn 83 days away. |
