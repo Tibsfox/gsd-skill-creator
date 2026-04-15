@@ -184,10 +184,10 @@ v1.49.516     = degree 15      Pass 2  ← next
 | `NASA/1.14/organism.md` | Organism Pairing | ~4,800 |
 | `docs/release-notes/v1.49.515/README.md` | Release Note | -- |
 
-## Complete State at Degree 14
+## Emerging Patterns at Degree 14
 
-| Thread | State | Key Detail |
-|--------|-------|------------|
+| Pattern | Status | Degree 14 Value |
+|---------|--------|-----------------|
 | S36 Artists | 15 documented (degrees 0-14) | Fourth pianist (Parks). First post-genre. Seventh pedagogical model. |
 | SPS Species | 15 documented (degrees 0-14) | First Parulidae. First dense shrub. Repetition-with-resolution. |
 | NASA Missions | 15 aligned (1.0-1.14) | Echo 1 passive comsat. 30.5m Mylar balloon. Langley Research Center. |

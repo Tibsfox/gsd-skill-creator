@@ -157,10 +157,10 @@ v1.49.518     = degree 17      Pass 2  ← next
 | `NASA/1.16/organism.md` | Organism Pairing | ~5,400 |
 | `docs/release-notes/v1.49.517/README.md` | Release Note | -- |
 
-## Complete State at Degree 16
+## Emerging Patterns at Degree 16
 
-| Thread | State | Key Detail |
-|--------|-------|------------|
+| Pattern | Status | Degree 16 Value |
+|---------|--------|-----------------|
 | S36 Artists | 17 documented (degrees 0-16) | First Jazz Fusion. Third Berklee. Kenny G discovery. Genre gradient enters. |
 | SPS Species | 17 documented (degrees 0-16) | Third Parulidae. Crescendo. Brightest warbler. Triptych complete. |
 | NASA Missions | 17 aligned (1.0-1.16) | Mercury enters. MR-1 four-inch failure. Sneak circuit. |

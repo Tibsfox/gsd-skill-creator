@@ -146,10 +146,10 @@ v1.49.519     = degree 18      Pass 2  ← next
 | `NASA/1.17/organism.md` | Organism Pairing | ~5,000 |
 | `docs/release-notes/v1.49.518/README.md` | Release Note | -- |
 
-## Complete State at Degree 17
+## Emerging Patterns at Degree 17
 
-| Thread | State | Key Detail |
-|--------|-------|------------|
+| Pattern | Status | Degree 17 Value |
+|---------|--------|-----------------|
 | S36 Artists | 18 documented (degrees 0-17) | Jazz/Comedy superposition. First Cornish student. Loop pedal lineage complete. |
 | SPS Species | 18 documented (degrees 0-17) | Fourth Parulidae. Warbler quartet complete. Rhythmic drive. Bandit mask. |
 | NASA Missions | 18 aligned (1.0-1.17) | MR-2: Ham qualifies capsule. 253 km. 17 g abort. Booster anomalies delay Shepard. |

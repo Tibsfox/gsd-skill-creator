@@ -133,6 +133,19 @@ v1.49.507  = NASA 1.6   + degree 6   Pass 2  ← next (second cycle begins)
 | `SPS/research/releases/005-red-breasted-nuthatch/pass2-refinement.md` | NEW | 2,702 |
 | `docs/release-notes/v1.49.506/README.md` | NEW | — |
 
+## Emerging Patterns at Degree 5
+
+| Pattern | Status | Degree 5 Value |
+|---------|--------|----------------|
+| Central District Thread | PENTAD COMPLETE | Berry — native-born, sixty years, The Persistence (6/6 CD artists) |
+| SPS Communication Architecture | VOICE 6 | Steady Beat — yank-yank metronome, temporal reference |
+| NASA Failure Taxonomy | COMPLETE + FIRST SUCCESS | Pioneer 4 — escape velocity, heliocentric orbit |
+| NASA Botanical Profile | LAYER 6 (COMPLETE) | Douglas-fir — canopy tree, the defining structure |
+| Amiga Principle | PHYSICAL | Berry as embodied ensemble — one body, four voices |
+| Artist-City Taxonomy | 8 PATTERNS | Export, Draw, Builder, Exile, Stay, Teacher, Resident, **Persistence** |
+| Interspecies Network | FIRST EDGE ACTIVE | Chickadee (broadcaster, deg 3) → Nuthatch (receiver, deg 5) |
+| Output Models | 4 TYPES | Recording, Infrastructure, Residency, **Continuous Presence** |
+
 ## The Opening Pentad — Complete State at Degree 5
 
 | Thread | Complete Sequence |
