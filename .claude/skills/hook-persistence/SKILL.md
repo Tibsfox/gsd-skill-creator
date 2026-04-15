@@ -1,6 +1,10 @@
 ---
 name: hook-persistence
 description: Pull-based work assignment channel implementing GUPP (Get Up and Push Protocol). Manages single-active-work-item hooks per agent with filesystem persistence and atomic state transitions.
+format: 2025-10-02
+version: 1.0.0
+status: active
+updated: 2026-03-06
 ---
 
 # Hook Persistence

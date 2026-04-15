@@ -1,6 +1,10 @@
 ---
 name: runtime-hal
 description: Runtime HAL for multi-runtime agent orchestration. Detects active AI assistant (Claude Code, Codex, Gemini, Cursor) and exposes uniform interface for startup injection, GUPP enforcement, and communication selection.
+format: 2025-10-02
+version: 1.0.0
+status: active
+updated: 2026-03-31
 ---
 
 # Runtime HAL

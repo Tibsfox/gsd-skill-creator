@@ -3,6 +3,9 @@ name: issue-triage-pr-review
 description: Issue triage and PR review — scans issues, triages, fixes, submits PRs, then adversarially reviews all open PRs. Parallel agent dispatch with worktree isolation.
 version: 1.0.0
 user-invocable: true
+format: 2025-10-02
+status: active
+updated: 2026-03-31
 ---
 
 # Issue Triage & PR Review Workflow
