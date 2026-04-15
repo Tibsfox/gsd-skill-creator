@@ -122,6 +122,23 @@ v1.49.532  = NASA 1.32  + degree 31  Pass 2  ← next
 | `SPS/research/releases/030-barn-swallow/pass2-refinement.md` | Pass 2 | ~900 |
 | `docs/release-notes/v1.49.531/README.md` | Release Note | — |
 
+## Emerging Patterns at Degree 30
+
+| Pattern | Status | Degree 30 Value |
+|---------|--------|-----------------|
+| S36 Artists | 31 documented (degrees 0-30) | Ray Charles -- the Genius, largest name since Jones, gospel-blues-jazz-country fusion |
+| SPS Species | 31 documented (degrees 0-30) | Barn Swallow -- endurance singer, obligate human-structure nester |
+| NASA Missions | 31 aligned (1.0-1.30) | Mariner 1 -- destroyed by software error, $18.5M punctuation, first interplanetary attempt |
+| Jones-Charles Axis | ESTABLISHED | Degrees 0 and 30 -- invisible architect ↔ visible Genius, same neighborhood |
+| Family Quintets | 3 complete | Turdidae (direction/timbre) + Parulidae (intensity) + Hirundinidae (texture/fluidity) |
+| Swallow Quintet | COMPLETE (26-30) | Engine's longest consecutive-family run; four liquid + one rough |
+| New-Program Failure | PATTERN (4 instances) | Pioneer (1) → Mercury (16) → Ranger (25) → Mariner (30); failure-mode evolution |
+| Energy Profile | E=4 decade complete | 10 consecutive degrees at combined 8 -- the decade of maximum energy |
+| Central District | 10 entries in 31 degrees | Structural dominance of engine's first quadrant |
+| Genre Thread | Jazz returns as modifier | R&B/Jazz -- jazz as method, R&B as identity, after 5-degree absence (25-29) |
+| Human Integration | OBLIGATE SYMBIONT | Barn Swallow bound to human architecture; Mariner killed by human code |
+| Global Scale | 2 global names | Jones (0) and Charles (30) -- the engine's two most famous artists |
+
 ## Pattern Tables at Degree 30
 
 ### New-Program Failure Pattern (Quadruple Confirmed)
