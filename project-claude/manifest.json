@@ -15,6 +15,11 @@
         "description": "Beautiful commits skill"
       },
       {
+        "source": "skills/cartridge-forge/SKILL.md",
+        "target": ".claude/skills/cartridge-forge/SKILL.md",
+        "description": "Cartridge forge skill — drives the scaffold → validate → eval → dedup loop"
+      },
+      {
         "source": "skills/file-operation-patterns/SKILL.md",
         "target": ".claude/skills/file-operation-patterns/SKILL.md",
         "description": "File operation patterns skill"
@@ -368,6 +373,28 @@
       "source": "settings-hooks.json",
       "target": ".claude/settings.json",
       "description": "New hook registrations for session-state, validate-commit, phase-boundary-check"
-    }
+    },
+    "cartridges": [
+      {
+        "source": "../examples/cartridges/gsd-skill-creator",
+        "target": ".claude/cartridges/gsd-skill-creator",
+        "description": "Dogfood cartridge — the playbook gsd-skill-creator uses to author its own skills/agents/teams/chipsets/cartridges and operate grove memory"
+      },
+      {
+        "source": "../examples/cartridges/get-shit-done",
+        "target": ".claude/cartridges/get-shit-done",
+        "description": "Core GSD cartridge — 15 skills, 7 agents, 5 teams, 13 grove record types covering the full research→plan→execute→verify→ship loop plus grove content-addressed memory"
+      },
+      {
+        "source": "../examples/cartridges/release-engine",
+        "target": ".claude/cartridges/release-engine",
+        "description": "Release engine cartridge — 14 skills, 6 agents, 6 teams, 12 grove record types for continuous release series (360-style degree cadence, NASA-style mission catalog, book-as-release), versioning, branching, publishing, retros, and the flywheel"
+      },
+      {
+        "source": "../examples/cartridges/housekeeping",
+        "target": ".claude/cartridges/housekeeping",
+        "description": "Housekeeping / data management / archiving cartridge — 14 skills, 5 agents, 5 teams, 11 grove record types. Archive-over-delete discipline covering repo hygiene, stale-file detection, log retention, snapshots, cold archive, dataset lifecycle, dedup, tiering, restore drills, media migration, and retention audits"
+      }
+    ]
   }
 }
