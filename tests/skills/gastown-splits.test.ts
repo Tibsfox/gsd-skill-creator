@@ -1,8 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-
-const SKILLS_DIR = join(process.cwd(), '.claude', 'skills');
+import { SKILLS_DIR } from '../fixtures/test-hooks.js';
 
 function readSkill(name: string): string {
   return readFileSync(join(SKILLS_DIR, name, 'SKILL.md'), 'utf8');
