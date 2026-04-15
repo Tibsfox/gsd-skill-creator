@@ -3,8 +3,9 @@ import { spawnSync } from 'node:child_process';
 import { writeFileSync, mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { resolveHookPath } from '../fixtures/test-hooks.js';
 
-const HELPER = join(process.cwd(), '.claude/hooks/lib/hook-output.cjs');
+const HELPER = resolveHookPath('lib/hook-output.cjs');
 
 function runScript(scriptBody: string, stdin = ''): { stdout: string; code: number | null } {
   const dir = mkdtempSync(join(tmpdir(), 'hook-output-test-'));

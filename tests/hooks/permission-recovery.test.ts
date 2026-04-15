@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { spawnSync } from 'node:child_process';
 import { existsSync, unlinkSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { resolveHookPath } from '../fixtures/test-hooks.js';
 
-const HOOK = join(process.cwd(), '.claude/hooks/permission-recovery.cjs');
+const HOOK = resolveHookPath('permission-recovery.cjs');
 
 function run(stdin: string): { stdout: string; code: number | null } {
   const res = spawnSync('node', [HOOK], { input: stdin, encoding: 'utf8' });

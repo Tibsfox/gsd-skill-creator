@@ -309,6 +309,30 @@
         "target": ".claude/skills/security-hygiene",
         "description": "Security hygiene for self-modifying systems skill",
         "files": ["SKILL.md"]
+      },
+      {
+        "source": "skills/team-control",
+        "target": ".claude/skills/team-control",
+        "description": "Team control skill",
+        "files": ["SKILL.md"]
+      },
+      {
+        "source": "skills/sling-dispatch",
+        "target": ".claude/skills/sling-dispatch",
+        "description": "Sling dispatch skill (gastown wave 2B)",
+        "files": ["SKILL.md", "references/gastown-origin.md", "references/pipeline-implementation.md"]
+      },
+      {
+        "source": "skills/done-retirement",
+        "target": ".claude/skills/done-retirement",
+        "description": "Done retirement skill (gastown wave 2B)",
+        "files": ["SKILL.md", "references/gastown-origin.md", "references/retirement-implementation.md"]
+      },
+      {
+        "source": "skills/gupp-propulsion",
+        "target": ".claude/skills/gupp-propulsion",
+        "description": "Gupp propulsion skill (gastown wave 2D)",
+        "files": ["SKILL.md", "heartbeat.md", "references/boundaries.md", "references/gastown-origin.md", "references/metrics-and-learning.md", "references/runtime-strategies.md"]
       }
     ],
     "hookScripts": [
@@ -326,6 +350,41 @@
         "source": "hooks/phase-boundary-check.cjs",
         "target": ".claude/hooks/phase-boundary-check.cjs",
         "description": "PostToolUse hook: detect phase boundary writes"
+      },
+      {
+        "source": "hooks/pre-compact-snapshot.cjs",
+        "target": ".claude/hooks/pre-compact-snapshot.cjs",
+        "description": "PreCompact hook: snapshot session state before compaction"
+      },
+      {
+        "source": "hooks/post-compact-recovery.cjs",
+        "target": ".claude/hooks/post-compact-recovery.cjs",
+        "description": "PostCompact hook: recover session state after compaction"
+      },
+      {
+        "source": "hooks/external-change-tracker.cjs",
+        "target": ".claude/hooks/external-change-tracker.cjs",
+        "description": "PostToolUse hook: track external file changes"
+      },
+      {
+        "source": "hooks/permission-recovery.cjs",
+        "target": ".claude/hooks/permission-recovery.cjs",
+        "description": "PreToolUse hook: recover from permission denials"
+      },
+      {
+        "source": "hooks/notification-logger.cjs",
+        "target": ".claude/hooks/notification-logger.cjs",
+        "description": "Notification hook: log Claude notifications"
+      },
+      {
+        "source": "hooks/worktree-init.cjs",
+        "target": ".claude/hooks/worktree-init.cjs",
+        "description": "SessionStart hook: initialize worktree state"
+      },
+      {
+        "source": "hooks/lib/hook-output.cjs",
+        "target": ".claude/hooks/lib/hook-output.cjs",
+        "description": "Shared hook output helper library"
       }
     ],
     "claudeMd": {

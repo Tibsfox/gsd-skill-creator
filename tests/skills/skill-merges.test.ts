@@ -5,8 +5,7 @@ import {
   checkCoverage,
   type SkillDescriptor,
 } from '../../src/skill/activation-equivalence.js';
-
-const SKILLS_DIR = join(process.cwd(), '.claude', 'skills');
+import { SKILLS_DIR } from '../fixtures/test-hooks.js';
 
 function parseDescription(md: string): string {
   const m = md.match(/^---\n([\s\S]*?)\n---/);
