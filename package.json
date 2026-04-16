@@ -1,6 +1,6 @@
 {
   "name": "gsd-skill-creator",
-  "version": "1.49.550",
+  "version": "1.49.551",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -9,7 +9,11 @@
   },
   "files": [
     "dist",
-    "project-claude"
+    "project-claude",
+    "examples/cartridges/gsd-skill-creator",
+    "examples/cartridges/get-shit-done",
+    "examples/cartridges/release-engine",
+    "examples/cartridges/housekeeping"
   ],
   "description": "Adaptive learning layer for Claude Code — skills, agents, teams, and chipsets",
   "author": "Tibsfox",
