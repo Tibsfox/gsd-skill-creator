@@ -1,0 +1,156 @@
+{
+  "degree": 50,
+  "version": "v1.49.554",
+  "nasa_number": "1.51",
+  "title": "The Midcourse Correction",
+  "released": "2026-04-15",
+  "pass": 2,
+  "threads": {
+    "mission": {
+      "name": "Surveyor 2",
+      "designation": "Surveyor 2",
+      "date": "1966-09-20",
+      "end_date": "1966-09-23",
+      "duration_hours": 63,
+      "result": "FAILURE",
+      "crew": [],
+      "target": {
+        "designation": "Sinus Medii (Central Bay)",
+        "planned_landing_site": "0 deg N, 1.5 deg W",
+        "actual_impact_site": "5.5 deg N, 12 deg W (SE of Copernicus)",
+        "impact_velocity_mph": 6000
+      },
+      "launch_vehicle": {
+        "designation": "Atlas SLV-3C / Centaur D (AC-7)",
+        "launch_site": "LC-36A, Cape Kennedy",
+        "performance": "Nominal — all stages performed correctly"
+      },
+      "spacecraft": {
+        "manufacturer": "Hughes Aircraft Company",
+        "mass_kg": 292.0,
+        "wet_mass_kg": 995.2,
+        "propulsion": {
+          "retrorocket": "Thiokol TE-364-2 solid-fuel motor",
+          "vernier_engines": "3x Thiokol TD-339, hypergolic (N2H4/N2O4), 130N each, throttleable 30-100%"
+        }
+      },
+      "failure_mode": {
+        "event": "Midcourse correction failure at T+16h11m",
+        "cause": "Vernier engine 3 failed to ignite — probable propellant valve failure or fuel line blockage",
+        "effect": "Asymmetric thrust from 2 of 3 engines caused uncontrollable tumble",
+        "recovery_attempts": "Multiple JPL command sequences over several hours — none successful",
+        "outcome": "Lunar impact at ~2700 m/s, total loss, no surface data returned"
+      },
+      "program": "Surveyor",
+      "program_flight": 2,
+      "program_total": 7,
+      "program_success_rate": "5 of 7 (71%)",
+      "significance": "First U.S. lunar probe failure after Surveyor 1's success. Demonstrated fragility of single-string vernier engine design. Led to enhanced valve testing and propellant line modifications for Surveyor 3+. The failure that taught the program where its fragility lived."
+    },
+    "artist": {
+      "name": "Mirah",
+      "full_name": "Mirah Yom Tov Zeitlyn",
+      "genre": "Indie Folk",
+      "energy": 2,
+      "years_active": "1997-present",
+      "neighborhood": "Olympia",
+      "city": "Olympia",
+      "label": "K Records",
+      "born": "1974-09-17",
+      "birthplace": "Philadelphia, Pennsylvania",
+      "education": "Evergreen State College, Olympia",
+      "acoustic_element": "The Intimate Architecture",
+      "acoustic_element_number": 51,
+      "artist_city_pattern": "The Incubator Graduate",
+      "artist_city_pattern_number": 51,
+      "blue_note": "The Submerged Current",
+      "blue_note_number": 50,
+      "collaborators": ["Phil Elverum (The Microphones / Mount Eerie)", "Karl Blau"],
+      "significance": "First Evergreen State College student in engine, sixth consecutive folk-adjacent (BREAKS swallow quintet record), Phil Elverum partnership deepest Olympia creative collaboration, K Records artist, intimate architecture as acoustic element"
+    },
+    "organism": {
+      "name": "Mountain Chickadee",
+      "binomial": "Poecile gambeli",
+      "authority": "Ridgway, 1886",
+      "family": "Paridae",
+      "order": "Passeriformes",
+      "energy": 2,
+      "call_type": "Descending pure-toned whistle: fee-bee-bay, 3.5-4.0 kHz descending to 2.5-3.0 kHz",
+      "habitat": "Subalpine conifer forest: Engelmann spruce, subalpine fir, whitebark pine, mountain hemlock, 1800-3400m",
+      "pnw_status": "Year-round resident in Cascades and eastern WA mountains; altitudinal migrant in severe winters",
+      "population": 14000000,
+      "conservation": "IUCN Least Concern",
+      "acoustic_element": "The Memory",
+      "acoustic_element_number": 51,
+      "key_adaptation": "Extraordinary spatial memory — caches tens of thousands of food items, enlarged hippocampus, population-level hippocampal variation correlated with winter severity",
+      "field_mark": "White supercilium (eyebrow stripe) — unique among North American chickadees",
+      "subspecies_in_pnw": ["P. g. abbreviatus (northern/central Cascades, BC)", "P. g. baileyae (southern Cascades, Sierra Nevada)"],
+      "significance": "Third Paridae completing three-chickadee elevation gradient (lowland/mid/subalpine), BREAKS five-consecutive Passerellidae streak, spatial memory specialist, named for William Gambel who died before reaching his destination"
+    }
+  },
+  "resonance_matrix": {
+    "the_midcourse_correction": {
+      "theme": "The small adjustment that determines whether the trajectory reaches its destination — success and failure separated by a single valve",
+      "mission": "Surveyor 2's midcourse correction failed when vernier engine 3 did not ignite. Two of three engines firing created an asymmetric torque that tumbled the spacecraft. The correction was small — a few m/s of delta-v — but its absence was total.",
+      "artist": "Mirah's creative method is continuous low-thrust guidance — many small arrangement decisions, no single one load-bearing. The intimate architecture distributes creative weight across dozens of elements. No single point of failure. The anti-vernier.",
+      "organism": "The Mountain Chickadee's spatial memory performs thousands of midcourse corrections — each cache retrieval is a precise navigational act, each one individually small, the aggregate sustaining the bird through winter. No single cache is the mission."
+    },
+    "the_architecture_of_redundancy": {
+      "theme": "Systems designed to absorb failure versus systems designed to avoid it",
+      "mission": "Surveyor 2 had zero redundancy in its vernier engine system — three engines, each single-string, the failure of any one fatal. The mass budget prohibited a fourth engine. Efficiency without resilience.",
+      "artist": "Mirah's albums are built from many small elements (voice, guitar, strings, horns, found sounds) — no single element load-bearing. Remove any one and the song changes but does not collapse. Resilience through distribution.",
+      "organism": "The Mountain Chickadee caches tens of thousands of food items across its territory. The loss of any subset (raided, buried, forgotten) is absorbed by the remainder. The system tolerates high waste in exchange for high survivability."
+    },
+    "the_descent": {
+      "theme": "Things that move downward — falling spacecraft, descending songs, cached seeds dropping through time",
+      "mission": "Surveyor 2 descended to the lunar surface at 2,700 m/s — an uncontrolled ballistic impact instead of the planned soft landing. The descent was governed by physics alone after the midcourse correction failed.",
+      "artist": "Mirah's sound descends into intimacy — each album moving deeper into the small, the close, the precisely placed. The trajectory is inward rather than outward, quieter rather than louder.",
+      "organism": "The fee-bee-bay descends through frequency space: 4.0 kHz to 2.5 kHz, a pure tonal whistle falling through the thin mountain air. The song descends. The cached seed descends through time — stored in autumn, retrieved in winter."
+    },
+    "the_thread_from_gemini_11": {
+      "theme": "Eight days between triumph and failure — the continuous narrative of September 1966",
+      "mission": "Gemini 11 splashed down September 15 with four firsts. Surveyor 2 launched September 20 and failed. Pete Conrad, who flew Gemini 11, would later walk to Surveyor 3 on the Moon — the spacecraft that proved the Surveyor 2 failure had been fixed.",
+      "artist": "Mirah at degree 50 follows Kimya Dawson at degree 49 — both Olympia, both K Records, both folk-adjacent. The thread from one degree to the next is continuous, each building on what the previous established.",
+      "organism": "The Mountain Chickadee at degree 50 follows the Fox Sparrow at degree 49 — breaking the Passerellidae streak but continuing the Passeriformes order. The thread changes family but not class. The elevation gradient extends upward."
+    }
+  },
+  "theory_bridge": {
+    "music_to_math": [
+      "Intimate architecture as distributed redundancy: Mirah's production method distributes creative weight across many small elements, analogous to the Mountain Chickadee distributing survival resources across thousands of caches — both are resilience architectures",
+      "The Surveyor 2 failure as a single-point-of-failure lesson: three vernier engines with zero redundancy vs. Mirah's multi-element arrangements with graceful degradation — efficiency vs. resilience as a design spectrum",
+      "Six consecutive folk-adjacent degrees (45-50) as a low-energy basin in genre space: E=2-3-3-2-3-2, the longest sustained quiet register in the engine"
+    ],
+    "organism_to_math": [
+      "Hippocampal plasticity as adaptive memory allocation: the Mountain Chickadee grows and shrinks its memory hardware seasonally, a biological analog of dynamic memory management in computing systems",
+      "Cache distribution as spatial hash table: tens of thousands of key-value pairs (location → food item) indexed by a biological spatial hash function, with O(1) retrieval and graceful degradation under deletion",
+      "Three-chickadee elevation gradient as a biological proof that niche partitioning is stable across the engine's timescale: degrees 3, 9, and 50 span 47 degrees without displacement or overlap collapse"
+    ]
+  },
+  "creative_synthesis": {
+    "title": "Degree Fifty: The Midcourse Correction",
+    "narrative": "On September 20, 1966, a valve failed to open in a small engine on a spacecraft headed for the Moon, and the mission tumbled into silence. In an Olympia apartment, Mirah built songs from many small elements — no single one essential, the whole greater than the sum. In the subalpine Cascades, a Mountain Chickadee cached its ten-thousandth seed of the autumn and flew to the next tree. Three systems. One designed for perfection and destroyed by a single failure. Two designed for resilience and sustained by redundancy. The midcourse correction that matters is the one you distribute across so many small acts that no single failure can stop the traverse.",
+    "haiku": "One valve stays shut.\nTen thousand seeds in the bark.\nThe small acts hold true."
+  },
+  "engine_state": {
+    "degree": 50,
+    "degrees_complete": 51,
+    "degrees_remaining": 309,
+    "percent_complete": 14.2,
+    "quadrant": "I",
+    "genre_stage": 32,
+    "passerellidae_streak": 0,
+    "passerellidae_streak_note": "BROKEN at degree 50 — Mountain Chickadee (Paridae) ends 5-consecutive Passerellidae (degrees 45-49)",
+    "folk_run": 6,
+    "folk_run_note": "New record — sixth consecutive folk-adjacent (degrees 45-50), surpasses swallow quintet",
+    "gemini_flights_complete": 9,
+    "gemini_flights_remaining": 1,
+    "gemini_final_note": "Gemini 12 (Lovell/Aldrin, Nov 1966) is the final Gemini flight — Aldrin solves EVA",
+    "surveyor_missions_complete": 2,
+    "surveyor_missions_note": "1 success (Surveyor 1), 1 failure (Surveyor 2), 5 remaining",
+    "marine_species_count": 0,
+    "marine_species_overdue": true,
+    "first_failure": true,
+    "first_failure_note": "Surveyor 2 is the first total mission failure in the NASA Mission Series",
+    "pnw_connections": ["Mirah based in Olympia, Evergreen State College", "Mountain Chickadee resident in Cascades (P. g. abbreviatus)", "William Gambel died in California mountains age 28"]
+  }
+}
