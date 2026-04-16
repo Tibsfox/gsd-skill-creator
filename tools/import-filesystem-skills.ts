@@ -169,6 +169,9 @@ interface Args {
   teamSources: string[];
   chipsetSources: string[];
   cartridgeSources: string[];
+  releaseSources: string[];
+  releaseMin: number;
+  releaseMax: number;
   excludes: string[];
   dryRun: boolean;
   verbose: boolean;
@@ -184,6 +187,9 @@ function parseArgs(argv: string[]): Args {
     teamSources: [],
     chipsetSources: [],
     cartridgeSources: [],
+    releaseSources: [],
+    releaseMin: 501,
+    releaseMax: 548,
     excludes: [...DEFAULT_EXCLUDES],
     dryRun: false,
     verbose: false,
@@ -208,6 +214,15 @@ function parseArgs(argv: string[]): Args {
         break;
       case '--cartridges':
         args.cartridgeSources.push(argv[++i]);
+        break;
+      case '--releases':
+        args.releaseSources.push(argv[++i]);
+        break;
+      case '--release-min':
+        args.releaseMin = parseInt(argv[++i], 10);
+        break;
+      case '--release-max':
+        args.releaseMax = parseInt(argv[++i], 10);
         break;
       case '--exclude':
         args.excludes.push(argv[++i]);
@@ -255,6 +270,10 @@ function parseArgs(argv: string[]): Args {
     ];
     args.cartridgeSources = defaults.filter((p) => existsSync(p));
   }
+  if (args.releaseSources.length === 0) {
+    const defaults = [join(cwd, 'docs/release-notes')];
+    args.releaseSources = defaults.filter((p) => existsSync(p));
+  }
   return args;
 }
 
@@ -270,16 +289,22 @@ Options:
   --agents <dir>        Agent source (repeatable)
   --teams <dir>         Team source (repeatable)
   --chipsets <dir>      Chipset source (repeatable)
+  --cartridges <dir>    Cartridge source (repeatable)
+  --releases <dir>      Release-notes source (repeatable)
+  --release-min <N>     Lowest v1.49.<N> to import (default: 501)
+  --release-max <N>     Highest v1.49.<N> to import (default: 548)
   --exclude <pattern>   Skip paths containing this substring (repeatable)
   --dry-run             Don't write to the arena; just report
   --verbose             Print every resource as it's processed
   --help, -h            Print this help and exit
 
 Defaults for sources:
-  skills:   .claude/skills, ~/.claude/skills
-  agents:   .claude/agents, ~/.claude/agents
-  teams:    ~/.claude/teams, .claude/teams
-  chipsets: data/chipset
+  skills:     .claude/skills, ~/.claude/skills
+  agents:     .claude/agents, ~/.claude/agents
+  teams:      ~/.claude/teams, .claude/teams
+  chipsets:   data/chipset
+  cartridges: .claude/cartridges, examples/cartridges
+  releases:   docs/release-notes (v1.49.501..v1.49.548 by default)
 
 Default excludes:
   ${DEFAULT_EXCLUDES.join(', ')}
@@ -288,7 +313,7 @@ Default excludes:
 
 // ─── Resource kinds ─────────────────────────────────────────────────────────
 
-type ResourceKind = 'skills' | 'agents' | 'teams' | 'chipsets' | 'cartridges';
+type ResourceKind = 'skills' | 'agents' | 'teams' | 'chipsets' | 'cartridges' | 'releases';
 
 interface ParsedResource {
   kind: ResourceKind;
@@ -543,6 +568,107 @@ async function parseCartridge(sourceDir: string, dirName: string): Promise<Parse
   };
 }
 
+/**
+ * Release: a versioned release-notes directory (e.g. docs/release-notes/v1.49.548)
+ * containing README.md with the Pass-2 paired-engine header block:
+ *
+ *     # v1.49.548 -- Degree 47: Title
+ *     **Released:** 2026-04-05
+ *     **Degree:** 47 of 360
+ *     **Part A:** Artist -- genre, ...
+ *     **Part B:** Species -- call, ...
+ *     **NASA Mission:** 1.48 -- Mission Name (...)
+ *     **NASA Organism:** ...
+ *     **Dedication:** ...
+ *     **Series:** NASA Paired Release Engine ...
+ *     **Engine Position:** ...
+ *
+ * Grove name: releases/v1.49.548-degree-047 (zero-padded degree keeps
+ * lexical sort matching chronological order). The full README is stored
+ * as the body so every Part A / Part B / NASA detail is recoverable.
+ *
+ * Returns null if the README is missing, the degree header is absent,
+ * or the parsed version number is outside [releaseMin, releaseMax].
+ */
+async function parseRelease(
+  sourceDir: string,
+  dirName: string,
+  releaseMin: number,
+  releaseMax: number,
+): Promise<ParsedResource | null> {
+  const versionMatch = dirName.match(/^v1\.49\.(\d+)$/);
+  if (!versionMatch) return null;
+  const versionNum = parseInt(versionMatch[1], 10);
+  if (versionNum < releaseMin || versionNum > releaseMax) return null;
+
+  const readmePath = join(sourceDir, dirName, 'README.md');
+  try {
+    const s = await stat(readmePath);
+    if (!s.isFile()) return null;
+  } catch {
+    return null;
+  }
+  const raw = await readFile(readmePath, 'utf-8');
+
+  // Heading: `# v1.49.548 -- Degree 47: The Darkroom in Space`
+  const headingMatch = raw.match(/^#\s*v[\d.]+\s+(?:--|—)\s*Degree\s+(\d+):\s*(.+?)\s*$/m);
+  if (!headingMatch) return null;
+  const degreeNum = parseInt(headingMatch[1], 10);
+  const title = headingMatch[2].trim();
+
+  // Bold-prefixed metadata fields. Values stop at end-of-line.
+  const fields: Record<string, string> = {};
+  const fieldRe = /^\*\*([^:*]+):\*\*\s*(.+?)\s*$/gm;
+  let fm: RegExpExecArray | null;
+  while ((fm = fieldRe.exec(raw)) !== null) {
+    const key = fm[1].trim();
+    const value = fm[2].trim();
+    if (!(key in fields)) fields[key] = value;
+  }
+
+  // Pull name prefixes from Part A / Part B / NASA Mission. The Pass-2
+  // header convention uses ` -- ` (double dash) to separate the name
+  // from the descriptor tail.
+  const nameFromField = (field: string | undefined): string => {
+    if (!field) return '';
+    const sep = field.search(/\s(?:--|—)\s/);
+    const head = sep > 0 ? field.substring(0, sep) : field;
+    // Cut at first `(` for NASA Mission tails that include parentheticals.
+    const paren = head.indexOf(' (');
+    return (paren > 0 ? head.substring(0, paren) : head).trim();
+  };
+
+  const artistName = nameFromField(fields['Part A']);
+  const speciesName = nameFromField(fields['Part B']);
+  // NASA Mission: `1.48 -- Lunar Orbiter 1 (...)` → strip leading version.
+  const missionField = fields['NASA Mission'];
+  let missionName = '';
+  if (missionField) {
+    const stripped = missionField.replace(/^\d+\.\d+\s+(?:--|—)\s*/, '');
+    missionName = nameFromField(stripped) || stripped.split(/[(—-]/)[0].trim();
+  }
+
+  const degreeTag = String(degreeNum).padStart(3, '0');
+  const name = `releases/${dirName}-degree-${degreeTag}`;
+
+  // Short description: Degree heading + three names. Cap to keep within
+  // Grove schema description limits.
+  const tailParts = [artistName, speciesName, missionName].filter((p) => p.length > 0);
+  let description = `Degree ${degreeNum}: ${title}`;
+  if (tailParts.length > 0) description += ` — ${tailParts.join(' / ')}`;
+  if (description.length > 300) description = description.substring(0, 297) + '...';
+
+  return {
+    kind: 'releases',
+    rawName: dirName,
+    name,
+    description,
+    body: raw,
+    sourcePath: readmePath,
+    activationPatterns: [],
+  };
+}
+
 function extractActivationPatterns(frontmatter: Record<string, unknown>): string[] {
   if (Array.isArray(frontmatter.activationPatterns)) {
     return frontmatter.activationPatterns.map(String);
@@ -561,6 +687,32 @@ function extractActivationPatterns(frontmatter: Record<string, unknown>): string
       .filter((p) => p.length > 0);
   }
   return [];
+}
+
+// ─── Release walker (single-level, version-dir pattern) ────────────────────
+
+async function walkReleases(
+  sourceDir: string,
+  releaseMin: number,
+  releaseMax: number,
+  excludes: string[],
+): Promise<ParsedResource[]> {
+  if (isExcluded(sourceDir, excludes)) return [];
+  const out: ParsedResource[] = [];
+  let entries: string[];
+  try {
+    entries = await readdir(sourceDir);
+  } catch {
+    return out;
+  }
+  for (const entry of entries.sort()) {
+    if (entry.startsWith('.')) continue;
+    const entryPath = join(sourceDir, entry);
+    if (isExcluded(entryPath, excludes)) continue;
+    const parsed = await parseRelease(sourceDir, entry, releaseMin, releaseMax);
+    if (parsed) out.push(parsed);
+  }
+  return out;
 }
 
 // ─── Walk a source directory by kind ────────────────────────────────────────
@@ -706,6 +858,8 @@ async function main(): Promise<void> {
   for (const s of args.chipsetSources) console.log(`              ${s}`);
   console.log(`  cartridges: ${args.cartridgeSources.length} source(s)`);
   for (const s of args.cartridgeSources) console.log(`              ${s}`);
+  console.log(`  releases:   ${args.releaseSources.length} source(s) [v1.49.${args.releaseMin}..v1.49.${args.releaseMax}]`);
+  for (const s of args.releaseSources) console.log(`              ${s}`);
   console.log();
 
   const invoke = createNodeArenaInvoke({ snapshotPath: args.arenaPath });
@@ -742,6 +896,11 @@ async function main(): Promise<void> {
     all.push(...found);
     console.log(`Cartridges(${src}): ${found.length}`);
   }
+  for (const src of args.releaseSources) {
+    const found = await walkReleases(src, args.releaseMin, args.releaseMax, args.excludes);
+    all.push(...found);
+    console.log(`Releases  (${src}): ${found.length}`);
+  }
   console.log();
 
   // Import.
@@ -759,6 +918,7 @@ async function main(): Promise<void> {
     teams: { imported: 0, skipped: 0, errors: 0 },
     chipsets: { imported: 0, skipped: 0, errors: 0 },
     cartridges: { imported: 0, skipped: 0, errors: 0 },
+    releases: { imported: 0, skipped: 0, errors: 0 },
   };
   for (const r of results) {
     if (r.action === 'imported') byKind[r.kind].imported++;
