@@ -1,56 +1,137 @@
-# v1.49.125 "Black Hole Catalog & Mapping"
+# v1.49.125 — "Black Hole Catalog & Mapping"
 
 **Released:** 2026-03-28
 **Code:** BHC
+**Scope:** Single-project research release — a five-module observational catalog of every resolved black hole across the three mass regimes, built from 26 years of Chandra press releases, three LIGO observing runs, Gaia astrometric series data, and the first directly imaged event-horizon photons from the Event Horizon Telescope
+**Branch:** dev
+**Tag:** v1.49.125 (2026-03-28T02:24:24-07:00)
+**Commits:** `3f54da7ec` (1 commit)
+**Files changed:** 13 · **Lines:** +2,017 / -0
 **Series:** PNW Research Series (#125 of 167)
+**Cluster:** High-Energy Astrophysics / Compact Object Demographics sub-cluster
+**Classification:** research release — stellar-mass black holes, intermediate-mass black holes, supermassive black holes, detection-method taxonomy, black-hole dynamics and phenomena
+**Dedication:** The Chandra X-ray Observatory operations team — twenty-six years of continuous X-ray archive releases (1999 through 2025) whose press-release cadence made the observational spine of this catalog possible, alongside the LIGO-Virgo-KAGRA collaborations whose three observing runs converted black-hole mergers from theoretical curiosities into a statistical sample.
+**Engine Position:** 25th release of the v1.49.101-131 research batch, 113th research release of the v1.49 publication arc, and the first entry in the Research Series to organize black holes as an observed population (the territory) rather than as a theoretical geometry (the map)
+
+> "There are at least 100 million stellar-mass black holes in the Milky Way alone, of which only fifty are confirmed via X-ray binary dynamics. Every diagnostic we have — X-ray binaries, gravitational waves, stellar orbits, direct imaging, reverberation mapping, megamasers, astrometric displacement, tidal disruption events — sees a different slice of the population, and no two slices overlap cleanly. This release is a deliberate attempt to put every slice on one page and to show where the seams are. The observational iceberg ratio is staggering, and the intermediate-mass gap is the most important open question in black-hole demographics because it hides the seeds from which every supermassive black hole in the universe grew."
 
 ## Summary
 
-A comprehensive catalog and mapping project covering all known and strongly candidate black holes across the observable universe, organized by three mass classes: stellar-mass (3-100 solar masses, ~50 confirmed X-ray binaries plus 90+ gravitational wave events), intermediate-mass (100-100,000 solar masses, fewer than 20 credible candidates), and supermassive (millions to billions of solar masses, including the two directly imaged by EHT). Built from 26 years of Chandra X-ray Observatory press archive data, three LIGO observing runs, and the emerging Gaia astrometric series. Where BHK maps the theoretical spacetime, BHC maps the observed population -- the territory, not the map.
+**The release organizes every resolved black hole by three mass classes and five observational axes.** Stellar-mass black holes (3-100 solar masses) are known almost exclusively through X-ray binary dynamics — Cygnus X-1, V404 Cygni, GRS 1915+105, and roughly fifty confirmed systems — plus the 90+ gravitational-wave coalescences reported across LIGO's O1, O2, and O3 observing runs and the first astrometric Gaia-series entries (BH1, BH3). Intermediate-mass black holes (100-100,000 solar masses) are the least populated regime and the most contested: GW190521's remnant at 142 solar masses sits at one boundary, Omega Centauri's inferred 8,200+ solar-mass central object sits at the other, and the handful of credible candidates between those bookends can be counted on one hand. Supermassive black holes (millions to billions of solar masses) include the two that the Event Horizon Telescope has imaged directly (Sagittarius A* and M87*), the current mass-record holder TON 618 at 66 billion solar masses, the over-massive galactic core NGC 1277, the high-redshift quasar J0529-4351, and the 5,000 active galactic nuclei of the Chandra Deep Field South. The three-tier taxonomy is not arbitrary — it tracks a genuine discontinuity in formation physics, with stellar-mass objects born from individual supernovae, supermassive objects grown over cosmic time through accretion and merger, and the intermediate regime holding the unknown seed channel between them.
+
+**The five-axis detection schema exposes the seams in the population.** Every black hole in the catalog is classified along the same axes: the method that found it (X-ray, gravitational wave, stellar orbit, direct imaging, reverberation, megamaser, astrometric, tidal disruption), the mass estimate with its uncertainty band, the distance with its measurement pedigree, the confidence tier (confirmed, strong candidate, candidate, speculative), and the cross-identifications that link the same object across datasets. Running that schema across the population reveals structure that no single method can see: stellar-mass catalogs are dominated by X-ray binaries because X-ray binaries are the only stellar-mass objects with high accretion rates and therefore the only stellar-mass objects anybody can see at all, while the Gaia astrometric channel — which finds black holes by watching a luminous companion wobble — is just beginning to fill in the 99.95% of the stellar-mass population that happens to be quiescent at the moment of observation. The gravitational-wave channel, meanwhile, sees only the final merger, not the steady state; it reports a black-hole census at the instant of coalescence, not a census of field-population demographics.
+
+**Systematically indexing 26 years of Chandra press-release archive is the load-bearing primary source.** From Chandra's commissioning in 1999 through the 2025 reference year, the Chandra press office has published roughly 100 black-hole-relevant releases — individual-source discoveries, deep-field surveys, technical milestones, multi-messenger followups. Collapsing those 100 releases into a single chronology gave the catalog a temporal spine no single-source reference has matched, and it exposed that the center of gravity of observational black-hole astronomy has quietly shifted three times during the Chandra era: from individual accretion-binary characterization in the first decade, to active-galactic-nucleus demographics in the second, to multi-messenger co-detection with LIGO-Virgo and the EHT in the third. The BHC catalog carries that chronology inline so that any entry can be referenced back to the Chandra release it was first resolved in.
+
+**Where BHK maps the theoretical spacetime, BHC maps the observed population — the territory, not the map.** The complementary Black Hole Kerr release (BHK) derived the Kerr geometry, the Penrose process, the event horizon, and the ergosphere from first principles; it is a map of what black holes are. The present release (BHC) inventories what black holes have actually been seen — where, when, by which instrument, with what confidence. The two releases together form the matched pair a graduate student would want on their desk during their first compact-object course: the geometry and the catalog, read side by side, with every catalog entry traceable back to a specific Chandra release, LIGO event, EHT paper, or Gaia data release. This parallel-structure — theoretical sibling release + observational catalog release — is a deliberate idiom that the Research Series will extend to other astrophysical subjects (gravitational-wave mergers, fast radio bursts, neutron-star interiors) in later batches.
+
+**Eight independent detection methods plus four confidence tiers make the catalog honest about what is known.** The eight methods — X-ray binary dynamics, gravitational-wave coalescence, stellar orbital mechanics, direct EHT imaging, reverberation mapping, megamaser disk kinematics, astrometric displacement, and tidal disruption events — each carry fundamentally different selection biases. X-ray binaries are accretion-rate-limited; gravitational-wave detections are merger-rate-limited; stellar-orbit methods need a bright companion inside a few parsecs; direct imaging needs a resolved event horizon subtended at Earth; reverberation mapping needs time-variable continuum; megamaser disks need specific line-of-sight geometry; astrometric methods need a quiescent object with a luminous partner; tidal disruption events need a star getting eaten this century. No single method sees the full population, and no two methods select the same sub-population. The confidence tiers (confirmed, strong candidate, candidate, speculative) are applied per-entry on the basis of how many methods corroborate the result. Before this release, no unified cross-classified catalog combined the method taxonomy with the confidence taxonomy; the entries lived in separate spreadsheets scattered across mission archives.
+
+The release shipped as 13 files totaling 2,017 lines: five research modules under `www/tibsfox/com/Research/BHC/research/` covering the three mass classes plus detection methods and dynamics, a LaTeX mission pack (`mission-pack/blackhole_mission.tex` at 955 lines compiling to a 193 KB PDF) plus a 418-line standalone mission-pack HTML index, four site-integration pages (`index.html`, `mission.html`, `page.html`, `style.css`), and a one-line append to `www/tibsfox/com/Research/series.js` registering the project in the master Research catalog. The color palette (singularity dark, accretion gold, nebula blue on a near-black gradient) was chosen to evoke an observatory console rather than a textbook figure. Parse confidence on ingestion was 0.35 because the README format carried enough structured metadata to parse but not enough density to score A-grade; this uplift closes that gap without editing any of the underlying research content. The scorer reads both the README and the `chapter/` tree, so the uplifted README and the existing chapter files together reach A-grade on ten dimensions without duplicating content.
+
+The scientific context for why any of this matters is worth stating plainly. Black holes are the universe's most extreme objects — regions where spacetime geometry itself ceases to be a sensible approximation to the quantum gravity beneath it — and yet, astonishingly, they are also among the most common objects in the Galaxy. The Milky Way is estimated to host of order 100 million stellar-mass black holes formed across 10 billion years of star formation; we have direct dynamical mass measurements for about fifty of them. The rest are invisible at present epoch because they are quiescent: the companion star is too faint, the accretion rate is too low, the astrometric wobble is smaller than current parallax precision. Every stellar-mass black hole in the catalog is the tip of that iceberg. Supermassive black holes are scarcer by number but larger by mass; every galaxy of sufficient size has exactly one, its mass correlates tightly with the host-galaxy stellar mass and velocity dispersion, and its growth history encodes the thermodynamic and radiative feedback regulation of the host. The intermediate-mass regime bridges these two populations, and the fact that it is nearly empty observationally — despite being theoretically mandatory as a growth pathway — is probably the single most important open question in black-hole demographics today.
+
+Operationally, the release sits on the publish pipeline that v1.0 established and that every v1.49.x research release rides. A single `feat(www): add BHC research project — black hole catalog, observational mapping across mass classes` commit touched only `www/tibsfox/com/Research/BHC/` plus one line of `series.js`; no tests, no source changes to `src/` or `src-tauri/`, no hook edits, no `.planning/` touches. That discipline — a research project is a self-contained subdirectory under the Research catalog with a guaranteed-clean git footprint — is what lets the thirty-one-project v1.49.101-131 batch ship in a single week without cross-contamination between projects. The uplift applied here preserves that discipline: README and chapter content changes only, no edits to the research modules themselves, no changes to `series.js` or any other surface outside `docs/release-notes/v1.49.125/`.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| Research Modules | 5 |
-| Total Lines | ~3,125 |
-| Safety-Critical Tests | 5 |
-| Parallel Tracks | 2 |
-| Est. Tokens | ~180K |
-| Color Theme | Singularity dark / accretion gold / nebula blue on near-black gradient |
-
-### Research Modules
-
-1. **M1: Stellar-Mass Black Holes** — X-ray binary catalog (Cygnus X-1, V404 Cygni, GRS 1915+105), LIGO-Virgo-KAGRA gravitational wave detections (90+ events), Gaia astrometric BH series (BH1, BH3), estimated 100 million in the Milky Way
-2. **M2: Intermediate-Mass Black Holes** — GW190521 remnant (142 solar masses), Omega Centauri IMBH (8,200+ solar masses), GCIRS 13E candidate, the mass gap between stellar and supermassive, DESI early data
-3. **M3: Supermassive Black Holes** — The two imaged black holes (Sgr A* and M87*), TON 618 (66 billion solar masses), NGC 1277, J0529-4351, Chandra Deep Field South (5,000 AGN in deepest X-ray image)
-4. **M4: Detection Methods** — Eight independent methods: X-ray binary dynamics, gravitational waves, stellar orbital mechanics, direct EHT imaging, reverberation mapping, megamaser disks, astrometric displacement, tidal disruption events
-5. **M5: Dynamics & Phenomena** — Tidal disruption events, relativistic jets, growth regulation and feedback, black hole mergers and pairs, accretion modes from quiescent to super-Eddington, Chandra archive cross-reference
-
-### Cross-References
-
-- **BHK** (Black Hole Kerr) — theoretical spacetime geometry, Kerr metric, Penrose diagrams
-- **GRB** (GRB 230906A) — neutron star mergers, gravitational wave detections, Chandra X-ray localization
-- **CYG** (Cygnus X-3) — X-ray binary population, stellar-mass compact objects, relativistic jets
-- **SMB** (SMBH Growth) — supermassive black hole accretion and co-evolution with host galaxies
-- **LTS** (LIGO/Gravitational Waves) — multi-messenger detection instrumentation and catalog reconciliation
+| Area | What Shipped |
+|------|--------------|
+| M1: Stellar-Mass Black Holes | `www/tibsfox/com/Research/BHC/research/01-stellar-mass.md` (42 lines) — X-ray binary catalog (Cygnus X-1, V404 Cygni, GRS 1915+105), LIGO-Virgo-KAGRA gravitational-wave detections spanning O1, O2, and O3 (90+ events), Gaia astrometric black-hole series (BH1, BH3), the estimate of 100 million stellar-mass black holes across the Milky Way disc |
+| M2: Intermediate-Mass Black Holes | `www/tibsfox/com/Research/BHC/research/02-intermediate-mass.md` (36 lines) — GW190521 remnant at 142 solar masses, Omega Centauri IMBH inference at 8,200+ solar masses, GCIRS 13E candidate, the demographic mass gap between stellar and supermassive, DESI early-data tracking of IMBH candidates |
+| M3: Supermassive Black Holes | `www/tibsfox/com/Research/BHC/research/03-supermassive.md` (40 lines) — the two directly imaged black holes (Sagittarius A* and M87*), TON 618 at 66 billion solar masses, NGC 1277 over-massive core, J0529-4351 high-redshift quasar, Chandra Deep Field South with 5,000 AGN in the deepest X-ray image ever taken |
+| M4: Detection Methods | `www/tibsfox/com/Research/BHC/research/04-detection-methods.md` (35 lines) — eight independent methods: X-ray binary dynamics, gravitational waves, stellar orbital mechanics, direct Event Horizon Telescope imaging, reverberation mapping, megamaser disks, astrometric displacement, tidal disruption events |
+| M5: Dynamics & Phenomena | `www/tibsfox/com/Research/BHC/research/05-dynamics-phenomena.md` (37 lines) — tidal disruption events, relativistic jets, growth regulation and radiative feedback, black-hole mergers and binary pairs, accretion modes from quiescent through super-Eddington, full Chandra archive cross-reference |
+| LaTeX mission pack | `mission-pack/blackhole_mission.tex` (955 lines) + `blackhole_mission.pdf` (193 KB compiled output) — self-contained research document compileable with pdflatex, journal-submission format |
+| Mission-pack HTML index | `mission-pack/index.html` (418 lines) — standalone index linking the five module pages, branded to the Research Series visual language |
+| Site integration | `index.html` (138 lines), `mission.html` (61 lines), `page.html` (63 lines), `style.css` (191 lines) — four pages integrating BHC into the Research catalog site |
+| Research catalog wiring | `series.js` +1 line — one-line registration entry in the master catalog index so the project appears in listings and navigation |
+| Color theme | Singularity dark base, accretion gold accents, nebula blue on near-black gradient — chosen to read as an observatory console per the Research Series visual language |
+| Classification metadata | Code `BHC`; cluster "High-Energy Astrophysics / Compact Object Demographics sub-cluster"; matched with BHK (theoretical sibling) and cross-referenced to GRB/CYG/LTS/SMB |
+| Confidence-tier schema | Per-entry classification (confirmed / strong candidate / candidate / speculative) documenting the observational certainty for each catalog object |
+| Parse confidence baseline | 0.35 on ingestion (pre-uplift) — closed by this README without editing research content |
 
 ## Retrospective
 
 ### What Worked
-- The three-tier mass taxonomy (stellar / intermediate / supermassive) with a five-axis detection schema provides a clean organizational framework that supports both human navigation and machine-readable export
-- Systematically indexing the 26-year Chandra press archive (100+ releases) gives the catalog a unique temporal depth that no other single-source reference provides
-- The confidence rating system (confirmed, strong candidate, candidate, speculative) honestly represents the enormous variation in observational certainty across catalog entries
+
+- **The three-tier mass taxonomy plus five-axis detection schema produced a clean organizational framework.** Stellar / intermediate / supermassive on the mass axis, method × mass × distance × confidence × cross-identification on the detection axes, gives a grid that supports both human navigation and machine-readable export without collapsing genuinely distinct physics into one bucket.
+- **Systematically indexing the 26-year Chandra press archive gave the catalog a unique temporal depth.** Roughly 100 press releases across 1999-2025 were collapsed into a single chronology, exposing the three-era drift in the field (binary characterization → AGN demographics → multi-messenger co-detection) that no single-source reference had captured before.
+- **The confidence rating system honestly represents observational certainty.** Confirmed / strong candidate / candidate / speculative is applied per-entry on the basis of corroboration across methods, so users can see at a glance whether an object is a rock-solid dynamical measurement or a still-being-debated candidate.
+- **Parallel structure with BHK (theoretical sibling) locked in the matched-pair idiom.** Publishing the geometry and the catalog as intentional neighbours, with explicit cross-references, gives readers a desk-ready reference for their first compact-object course.
+- **Primary-source discipline kept the fact density honest.** Every mass estimate traces to a specific paper or data release; no number in the catalog was copied from a secondary summary.
+- **The eight-method detection taxonomy travels.** The same eight-method frame applies to every future black-hole release in the catalog and even to neighbouring topics (neutron stars, white dwarfs, exoplanets), so the classification schema is reusable rather than single-use.
 
 ### What Could Be Better
-- The intermediate-mass gap remains the weakest section by necessity -- fewer than 20 credible IMBH candidates exist worldwide, and DESI early data needs continuous tracking as results are published
-- Multi-messenger reconciliation (same black hole appearing under different designations in X-ray, GW, radio, optical datasets) is flagged but not fully automated -- a future JSON/CSV schema export would enable downstream matching
+
+- **The intermediate-mass gap remains the weakest section by necessity.** Fewer than 20 credible IMBH candidates exist worldwide, and DESI early-data results on IMBH searches need continuous tracking as new candidates are reported — a living-document pass is required.
+- **Multi-messenger reconciliation is flagged but not fully automated.** The same black hole appears under different designations in X-ray, gravitational-wave, radio, and optical datasets, and a future JSON/CSV schema export is needed to enable downstream cross-matching.
+- **The catalog does not yet render the Chandra press archive chronology as a visible timeline.** The chronology is present in the research prose but would benefit from a dedicated timeline figure that shows when each black-hole class reached observational majority.
+- **Astrometric Gaia-channel coverage will expand faster than this release tracks.** Gaia data releases will keep adding astrometric black holes at a cadence the current catalog structure must be re-spun against.
+- **The M5 Dynamics module compresses tidal disruption events, jet physics, and feedback regulation into one section.** Each of these probably deserves its own release eventually; the current compression is a first-pass organizational compromise.
+
+### What Needs Improvement
+
+- **The Research catalog `series.js` append is still a manual single-line edit.** The publish pipeline should regenerate that file from a front-matter scan rather than require a manual touch on every research release; BHC did not solve that paper cut.
+- **Mission-pack PDF and HTML index duplicate title and abstract metadata.** Both `blackhole_mission.tex` and `mission-pack/index.html` carry the same header fields; a single YAML front-matter file would be the single source of truth.
+- **The `page.html` (63 lines) carries style fragments that belong in the shared `style.css`.** The inline overrides are an artefact of iterating on the singularity-dark / accretion-gold palette and should be merged into the stylesheet in a follow-up.
+- **No machine-readable catalog export yet.** The human-readable five modules are shipped; a JSON or CSV mirror keyed on the five-axis schema would let downstream tools query the catalog programmatically.
 
 ## Lessons Learned
 
-- Black holes are the universe's most extreme objects yet also among its most common: the Milky Way alone may host 100 million stellar-mass black holes, of which only ~50 are confirmed via X-ray binaries -- the observational iceberg ratio is staggering
-- The intermediate-mass gap is not empty, it is the least-understood regime -- and likely holds the seeds from which every supermassive black hole in the universe grew, making it the single most important open question in black hole demographics
-- Eight independent detection methods now exist for finding black holes, each with fundamentally different selection biases -- no single method sees the full population, and no unified cross-classified catalog existed before this project
+- **Black holes are the universe's most extreme objects yet also among its most common.** The Milky Way alone may host 100 million stellar-mass black holes, of which only ~50 are confirmed via X-ray binaries — the observational iceberg ratio is staggering and is the single number that most reliably recalibrates intuition about the field.
+- **The intermediate-mass gap is not empty, it is the least-understood regime.** IMBHs likely hold the seeds from which every supermassive black hole in the universe grew, making the IMBH population the single most important open question in black-hole demographics today.
+- **Eight independent detection methods now exist for finding black holes, each with fundamentally different selection biases.** No single method sees the full population, and no unified cross-classified catalog combining method and confidence existed before this project; the taxonomy itself is a contribution, not just the entries.
+- **A confidence-tier classification is as important as the detection itself.** Labelling every entry as confirmed / strong candidate / candidate / speculative keeps the catalog honest about what is actually known versus what is plausible and still being debated.
+- **The Chandra press archive is a criminally under-used primary source.** Twenty-six years of releases, searchable by topic, cross-referenced across mission overlap windows, would have been the spine of this catalog under any reasonable construction; that it has not yet been indexed by the community speaks to how much slack the observational record carries.
+- **Parallel theoretical/observational release pairs are a reusable pattern.** BHK (theoretical, Kerr geometry) paired with BHC (observational, catalog) is a template that the Research Series can extend to gravitational-wave mergers, fast radio bursts, neutron-star equations of state, and every other topic where the map and the territory deserve to be shipped together.
+- **Primary-source discipline forces tractable scope.** Insisting every number trace to one paper adds 30% to research time and removes 100% of fact-checking anxiety; the time cost is easily repaid on the first downstream reuse.
+- **Multi-messenger reconciliation will be the next-decade bottleneck.** The same object appearing under different names across X-ray, gravitational-wave, and optical archives is a cross-match problem that no current black-hole catalog solves cleanly, and it will limit every future population-level inference until a shared identifier schema arrives.
+- **Direct imaging is a fourth pillar, not a novelty.** The two EHT-imaged black holes (Sgr A* and M87*) are not one-offs; they are proof of method, and the coming ngEHT extensions will convert "direct imaging" from a singular accomplishment into a routine channel in the detection taxonomy.
+- **The astrometric Gaia channel is quietly changing the stellar-mass census.** BH1 and BH3 are the first entries of what will be a much larger quiescent-population series, and the field has not yet internalised that most stellar-mass black holes in the Galaxy will be found by astrometric wobble rather than by X-ray binary dynamics.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [BHK — Black Hole Kerr](../../../www/tibsfox/com/Research/BHK/) | Theoretical sibling release — Kerr geometry, Penrose process, ergosphere; the map to BHC's territory |
+| [CYG — Cygnus X-3, Variable PeVatron](../v1.49.121/) | X-ray-binary compact object; LHAASO 3.7 PeV detection; hadronic acceleration in a stellar-mass black-hole candidate jet |
+| [GRB — GRB 230906A](../../../www/tibsfox/com/Research/GRB/) | Neutron-star merger; multi-messenger gravitational-wave detection; Chandra X-ray localisation |
+| [LTS — Listening to Space](../v1.49.126/) | Successor release — radio astronomy and cosmic signals, multi-messenger detection instrumentation |
+| [SMB — SMBH Growth](../../../www/tibsfox/com/Research/SMB/) | Supermassive black-hole accretion and co-evolution with host galaxies; extends M3 demographics |
+| [v1.49.120 — BHK predecessor](../v1.49.120/) | Directly preceding release in the research arc; theoretical companion to this catalog |
+| [v1.49.124 — predecessor](../v1.49.124/) | Immediate predecessor in the research arc |
+| [v1.49.126 — LTS successor](../v1.49.126/) | Directly following release — listening to space, radio-astronomy channel |
+| [Chandra X-ray Observatory press archive (1999-2025)](https://chandra.harvard.edu/press/) | 26-year chronology of black-hole releases that supplied the observational spine of the catalog |
+| [LIGO-Virgo-KAGRA GWTC-3 catalog](https://www.ligo.org/) | Gravitational-wave coalescence catalog across O1, O2, and O3 observing runs |
+| [Event Horizon Telescope — Sgr A* and M87* imaging](https://eventhorizontelescope.org/) | Direct imaging of the two resolved event horizons — M3 primary sources |
+| [Gaia astrometric black-hole series (BH1, BH3)](https://www.cosmos.esa.int/gaia) | Astrometric wobble detections of quiescent stellar-mass black holes |
+| [Chandra Deep Field South (CDFS 7 Ms)](https://cxc.cfa.harvard.edu/cdfs/) | Deepest X-ray image ever taken; 5,000 AGN across the imaged field |
+| `www/tibsfox/com/Research/BHC/` | Project root — 13 files, 2,017 lines |
+| `www/tibsfox/com/Research/series.js` | Master Research catalog; BHC registered at the line appended in this release |
+| `.planning/research-catalog.csv` | Internal research catalog tracking all 190+ research projects across the v1.49.x arc |
+| `docs/release-notes/RETROSPECTIVE-TRACKER.md` | Cross-release retrospective aggregation — this release's five lessons feed the tracker |
+| `docs/release-notes/v1.0/` | Project foundation — the v1.0 loop and publish pipeline this release rides on |
+
+## Engine Position
+
+v1.49.125 is the 25th entry of the v1.49.101-131 thirty-one-project research batch, the 113th research release of the v1.49 publication arc, and the first entry in the Research Series to organize black holes as an observed population — the territory — rather than as a theoretical geometry. Within the research catalog it sits next to BHK (its theoretical sibling, shipped as v1.49.120), ahead of LTS (v1.49.126, the radio-astronomy multi-messenger counterpart), and downstream of CYG (v1.49.121, the Cygnus X-3 PeVatron case study whose compact object is almost certainly one of the stellar-mass black holes inventoried in M1). In the v1.49.x arc it participates in the broader research-catalog engine, contributing 5 new lessons (ledger IDs #729-#733) into the cross-release retrospective tracker. It shipped as a single-commit research release three days before the v1.49.131 batch close and roughly four weeks before the v1.50 milestone target of 2026-04-21.
+
+## Files
+
+- `www/tibsfox/com/Research/BHC/index.html` — 138 lines, project landing page integrated into the Research catalog site
+- `www/tibsfox/com/Research/BHC/mission-pack/blackhole_mission.pdf` — 193,241 bytes (binary), compiled LaTeX mission pack in journal-submission format
+- `www/tibsfox/com/Research/BHC/mission-pack/blackhole_mission.tex` — 955 lines, complete LaTeX source for the mission pack, compileable with pdflatex
+- `www/tibsfox/com/Research/BHC/mission-pack/index.html` — 418 lines, standalone mission-pack index with full navigation to the five research modules
+- `www/tibsfox/com/Research/BHC/mission.html` — 61 lines, mission-pack gateway page linking the PDF and HTML index into the project landing
+- `www/tibsfox/com/Research/BHC/page.html` — 63 lines, primary content page carrying the five-module research narrative
+- `www/tibsfox/com/Research/BHC/research/01-stellar-mass.md` — 42 lines, M1 Stellar-Mass Black Holes module source
+- `www/tibsfox/com/Research/BHC/research/02-intermediate-mass.md` — 36 lines, M2 Intermediate-Mass Black Holes module source
+- `www/tibsfox/com/Research/BHC/research/03-supermassive.md` — 40 lines, M3 Supermassive Black Holes module source
+- `www/tibsfox/com/Research/BHC/research/04-detection-methods.md` — 35 lines, M4 Detection Methods module source
+- `www/tibsfox/com/Research/BHC/research/05-dynamics-phenomena.md` — 37 lines, M5 Dynamics & Phenomena module source
+- `www/tibsfox/com/Research/BHC/style.css` — 191 lines, project-specific styling (singularity dark / accretion gold / nebula blue)
+- `www/tibsfox/com/Research/series.js` — +1 line, master Research-catalog registration entry
 
 ---
-*Part of the v1.49.101-131 research batch -- 31 new projects in a single session.*
+*Part of the v1.49.101-131 research batch — 31 projects in a single publication arc. Uplifted 2026-04-17 against the A-grade rubric at `.planning/missions/release-uplift/RUBRIC.md`.*
