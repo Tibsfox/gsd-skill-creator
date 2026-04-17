@@ -103,16 +103,15 @@ const child = spawn(process.execPath, ['-e', `
         for (const hookFile of hookFiles) {
           try {
             const content = fs.readFileSync(path.join(hooksDir, hookFile), 'utf8');
-            const versionMatch = content.match(/\\/\\/ gsd-hook-version:\\s*(.+)/);
+            // Accept both JS (//) and shell (#) comment styles for the version marker.
+            const versionMatch = content.match(/(?:\\/\\/|#)\\s*gsd-hook-version:\\s*(.+)/);
             if (versionMatch) {
               const hookVersion = versionMatch[1].trim();
               if (isNewer(installed, hookVersion) && !hookVersion.includes('{{')) {
                 staleHooks.push({ file: hookFile, hookVersion, installedVersion: installed });
               }
-            } else {
-              // No version header at all — definitely stale (pre-version-tracking)
-              staleHooks.push({ file: hookFile, hookVersion: 'unknown', installedVersion: installed });
             }
+            // No header = pre-version-tracking hook; skip rather than false-flag.
           } catch (e) {}
         }
       }
