@@ -3,6 +3,22 @@
   "project": "gsd-skill-creator",
   "description": "Project-specific .claude files that extend GSD framework",
   "files": {
+    "autoDiscover": [
+      {
+        "kind": "agents",
+        "source_dir": "agents",
+        "target_dir": ".claude/agents",
+        "pattern": "*.md",
+        "description": "Auto-install any .md file under project-claude/agents/ not otherwise listed."
+      },
+      {
+        "kind": "skills",
+        "source_dir": "skills",
+        "target_dir": ".claude/skills",
+        "pattern": "*/SKILL.md",
+        "description": "Auto-install any project-claude/skills/<name>/SKILL.md not otherwise listed."
+      }
+    ],
     "standalone": [
       {
         "source": "agents/gsd-orchestrator.md",
