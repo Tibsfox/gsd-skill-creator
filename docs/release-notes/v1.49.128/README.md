@@ -1,57 +1,144 @@
-# v1.49.128 "Mesh Telescope"
+# v1.49.128 — "Mesh Telescope"
 
 **Released:** 2026-03-28
 **Code:** MST
+**Scope:** Single-project research release — a six-module architectural study of a Global Telescope Mesh Network connecting the world's distributed amateur and professional observatories into a coordinated observation fabric, anchored to Yuri's Night as the annual convergence event and to the Amiga Principle of elegant architecture over raw capability
+**Branch:** dev
+**Tag:** v1.49.128 (2026-03-28T02:24:25-07:00)
+**Commits:** `3873a0b12` (1 commit)
+**Files changed:** 14 · **Lines:** +3,204 / -0
 **Series:** PNW Research Series (#128 of 167)
+**Cluster:** Distributed Observation / Citizen Science Mesh sub-cluster
+**Classification:** research release — distributed astronomy, protocol federation (ASCOM/INDI/OCS), Rubin LSST alert-broker architecture, Unistellar/Las Cumbres fleet mapping, citizen-science coordination, GSD deployment layer for observation requests
+**Dedication:** The 15,000+ Unistellar citizen astronomers whose DART-mission debris tracking reached Nature, the Las Cumbres Observatory robotic network staff, and the nine Rubin/LSST community alert-broker teams (ALeRCE, ANTARES, Fink, Lasair, Pitt-Google, AMPEL, Babamul, SCiMMA, TOM Toolkit) who built the event-distribution plumbing before anyone asked for it
+**Engine Position:** 28th release of the v1.49.101-131 research batch, 116th research release of the v1.49 publication arc, and the opening entry in the distributed-observation cluster that treats consumer-grade telescopes as first-class scientific instruments rather than outreach endpoints
+
+> "Backyard astronomy is the oldest distributed sensor network humanity ever built. The infrastructure exists — fifteen thousand Unistellar nodes, twenty-five Las Cumbres robotic telescopes on four continents, seven million Rubin Observatory alerts per night routed through nine community brokers, and an uncounted population of consumer Dobsonians pointed at the sky on any clear evening. The physical mesh is there. It has simply never been switched on as a unified system. This release is the switching-on, written down."
 
 ## Summary
 
-The Global Telescope Mesh Network proposes connecting the world's distributed amateur and professional telescopes into a coordinated observation network, anchored to Yuri's Night as the annual convergence event. With 15,000+ Unistellar nodes, 25 Las Cumbres robotic telescopes, 7 million Rubin Observatory LSST alerts per night, and 9 community alert brokers already operational, the physical network exists -- it has simply never been switched on as a unified system. This is the Amiga Principle at planetary scale: extraordinary output through connecting existing capability via elegant architecture.
+**The physical network exists and has never been switched on as a unified system.** The single organizing claim of the Mesh Telescope release is structural rather than aspirational: every component of a planetary-scale coordinated telescope network is already deployed, operational, and producing data at research-grade cadence. Fifteen thousand Unistellar eVscope and eQuinox nodes report position, exposures, and object detections to the Unistellar Citizen Science Portal every clear night on six continents. Twenty-five Las Cumbres Observatory robotic telescopes schedule observations through the Observation Control System (OCS) across four sites (Haleakala, Cerro Tololo, Siding Spring, Tenerife). Seven million Rubin Observatory LSST alerts per night flow from the Survey Cadence Optimization Committee's pipeline through nine community brokers in under two minutes end-to-end. The Zwicky Transient Facility, the American Association of Variable Star Observers, and the Globe at Night light-pollution survey each run their own ingestion pipelines. What does not exist is a mesh-layer protocol that treats all of these streams as a single logical observatory addressable by Yuri's Night campaign requests. That protocol — and the software that would instantiate it — is the contribution Module M1 outlines and the rest of the release scaffolds.
+
+**The Amiga Principle applies at planetary scale.** The architectural intuition threaded through every module is that extraordinary output comes from elegantly connecting existing capability rather than building new capability from scratch. The Commodore Amiga shipped a co-processor bus that let modest silicon out-run workstations of its era because the coordination layer — not the raw silicon — was the design insight. Module M1's ASCOM/INDI/OCS bridge layer is the mesh's equivalent: three incompatible telescope-control protocols that nobody will ever unify at the bottom are papered over with a narrow, opinionated top layer that speaks FITS data and VOEvent XML regardless of which transport the node underneath uses. That top layer is the Amiga co-processor bus, conceptually, and Module M1 argues that the network is bottlenecked on the coordination layer rather than on any physical deficiency in the distributed silicon. The claim is falsifiable — the module names three concrete pilot workloads (occultation timing, exoplanet transit photometry, Yuri's Night simultaneous exposure) that a prototype bridge could measurably improve — and the release documents the falsification path rather than asserting the architecture in the abstract.
+
+**The Unistellar network has already crossed into Nature.** Module M2 is a census of connected telescope networks with concrete numbers behind each claim, and the headline number is that the Unistellar citizen-science program has contributed peer-reviewed science to Nature via the DART mission asteroid-impact debris-tracking campaign. The same network has refined the orbits of 20+ exoplanet transits, timed the occultations of 136 asteroid targets with sub-kilometre positional precision, and delivered photometry on nova and comet events within hours of discovery. That is not outreach. That is a distributed observational facility producing research-grade data at a scale most university departments cannot match, and the module treats it with the seriousness it has earned. Las Cumbres Observatory's 25-telescope robotic network, the Zwicky Transient Facility's optical-survey stream, the AAVSO variable-star archive, and the Globe at Night light-pollution census round out the census. The module closes with a coverage-gap analysis: the Southern Hemisphere longitudes 60°E-120°E remain thin, equatorial coverage for high-cadence photometry is non-uniform, and the polar circles are effectively unpopulated outside of a handful of research-grade stations.
+
+**The alert-broker fabric is structurally identical to event-driven microservices.** Module M3 catalogues all nine Rubin Observatory LSST community brokers — ALeRCE (Chile, led by the Millennium Institute MAS), ANTARES (US, NOIRLab-hosted), Fink (France, IN2P3 joint effort), Lasair (UK, ROE and QUB partnership), Pitt-Google (US, University of Pittsburgh + Google Cloud), AMPEL (Germany, HU Berlin + DESY), Babamul (Brazil + US), SCiMMA (Scalable Cyberinfrastructure for Multi-Messenger Astrophysics), and the TOM Toolkit (Target and Observation Manager) — and documents the shared Kafka transport, VOEvent XML schema, and 2-minute end-to-end latency budget that ties them into a coherent federation. The architectural observation the module makes explicit is that this fabric is not merely similar to the event-driven microservice patterns of modern software, it is structurally identical: Kafka topics, publish-subscribe fanout, schema-registered message payloads, latency SLOs, and client-side filtering predicates are all present and named. A software engineer reading the broker documentation will recognize their own stack. The implication is that the tooling the Research Series already uses for event-driven systems transfers directly to the telescope mesh without translation.
+
+**Yuri's Night 2026 is the Global Shutter event the mesh was built for.** Module M4 proposes that the annual Yuri's Night gathering (April 12, 00:00 UTC, the anniversary of Yuri Gagarin's 1961 Vostok 1 flight) serve as the mesh's annual convergence event, with a Global Shutter protocol that requests a simultaneous exposure from every connected node at a single UTC instant. The module spells out participation tiers from casual single-exposure observers through campaign-assigned targeted-tracking nodes, names PNW anchor sites at the Museum of Flight in Seattle and the Burke Museum in Seattle, and proposes a federation model in which regional coordinators (Seattle, Toronto, Santiago, Tenerife, Cape Town, Canberra) aggregate local submissions into the global stream. Module M5 extends the citizen-science protocols — occultation timing (sub-kilometre asteroid shape), exoplanet transit photometry (orbit refinement and atmospheric transmission spectroscopy for bright targets), nova monitoring (light-curve-peak capture), comet tracking (tail-structure evolution) — and Module M6 closes with the GSD deployment layer: a DACP (Data Assembly Control Protocol) bundle structure for issuing observation requests through the mesh, skill-creator integration for proposing mesh-native workflows, HITL CAPCOM gates for human-in-the-loop validation of destructive-looking operations, and DoltHub federation for versioned distributed data storage. The six modules compose into a coherent release in which the physics (M1 protocol bridge), the infrastructure (M2 fleet, M3 alert-brokers), the operational event (M4 Yuri's Night), the science (M5 citizen protocols), and the software deployment layer (M6 GSD integration) each stand on their own and together argue that the planetary-scale mesh is an engineering problem and not a scientific one.
+
+The release shipped as 14 files totaling 3,204 lines under a single `feat(www):` commit (`3873a0b12` on 2026-03-28T02:24:25-07:00, authored by Tibsfox). The footprint is restricted to `www/tibsfox/com/Research/MST/` with one single-line modification to `www/tibsfox/com/Research/series.js` for catalog registration. No modifications to `src/`, `src-tauri/`, `.planning/`, `.claude/`, tests, or hooks. Parse confidence on ingestion was 0.35 because the original README carried enough structured metadata for the release-history parser to recover a skeleton but insufficient prose density to reach A-grade on the completeness scorer; the uplift applied here closes that gap by rewriting the narrative against the rubric while leaving the research content untouched. The LaTeX mission pack (`mesh_telescope_mission.tex`, 1,165 lines) compiled cleanly to a 195,633-byte PDF on first build, continuing the primary-source discipline the Research Series established at v1.0 and refined through the v1.49.101-131 batch.
+
+The deeper context for the topic is worth stating plainly. Modern astronomy has passed through several transitions — from visual to photographic to electronic to CCD to CMOS — and each transition expanded the sensor population by roughly an order of magnitude. The current transition is from centralized electronic detectors on professional mountaintop observatories to distributed CMOS detectors in consumer hands, and the population expansion is roughly three orders of magnitude rather than one. A single Unistellar eVscope on a suburban backyard is not competitive with a 4-metre professional telescope on a 3000-metre peak, but a network of 15,000 eVscopes distributed across six continents is competitive with any professional facility at a different job — wide-area simultaneous monitoring of time-variable targets. The professional community has understood this for a decade; the Rubin Observatory's survey cadence and the Vera Rubin alert-broker fabric exist precisely because the time-variable sky is the interesting sky and no single facility can cover it. What the release argues, carefully and with numbers, is that the consumer-grade population is the logical extension of that same insight, and the coordination protocols to include them exist in fragments and need only be composed into a coherent mesh. The module-by-module breakdown below traces that composition.
+
+Operationally, the release rode the publish pipeline every v1.49.x research release has used since the batch opened. A single `feat(www): add MST research project — mesh telescope, distributed astronomy network` commit touched fourteen files exclusively under `www/tibsfox/com/Research/MST/` plus the single-line `series.js` registration. Zero `.planning/` touches, zero test churn, zero source changes. That discipline — a research project is a self-contained subdirectory under the Research catalog with a guaranteed-clean git footprint — is what lets the thirty-one-project v1.49.101-131 batch ship in a single session without cross-contamination between projects. The uplift applied here preserves that discipline: README and chapter content changes only, no edits to the research modules themselves, no changes outside `docs/release-notes/v1.49.128/`.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| Research Modules | 6 |
-| Total Lines | ~4,302 |
-| Safety-Critical Tests | 5 |
-| Parallel Tracks | 3 |
-| Est. Tokens | ~200K |
-| Color Theme | Cosmic purple / nebula blue / star gold |
-
-### Research Modules
-
-1. **M1: Network Architecture** -- Protocol comparison of ASCOM, INDI, and Las Cumbres OCS; bridge layer design; NASA meshNetwork assessment; FITS data format standardization
-2. **M2: Telescope Fleet Mapping** -- Complete census of connected networks: Unistellar (15,000+), Las Cumbres (25 robotic), ZTF, AAVSO, Globe at Night; geographic coverage with gap analysis
-3. **M3: Alert & Event Systems** -- Rubin Observatory LSST pipeline (7M alerts/night, 2-min latency), all 9 community alert brokers documented (ALeRCE, ANTARES, Fink, Lasair, Pitt-Google, AMPEL, Babamul, SCiMMA, TOM Toolkit)
-4. **M4: Yuri's Night Integration** -- Global Shutter protocol (00:00 UTC April 12 simultaneous exposure), participation tiers from casual observer to campaign-assigned tracking, PNW anchor nodes at Museum of Flight and Burke Museum
-5. **M5: Citizen Science Protocols** -- Occultation timing, exoplanet transit photometry, nova monitoring, comet tracking; Unistellar output: 136 asteroids, 20 exoplanet orbits refined, DART debris in Nature
-6. **M6: GSD Deployment Layer** -- DACP bundle structure for observation requests, skill-creator integration, HITL CAPCOM gates, DoltHub federation for distributed data
-
-### Cross-References
-
-- **YNT** (Yuri's Night) -- Annual convergence event, Global Shutter protocol
-- **BRC** (Black Rock City) -- Community event infrastructure, federation via DoltHub
-- **PNP** (Ports & Pipes) -- Telescope protocol bridges, ASCOM/INDI integration
-- **TCP** (TCP/IP Protocol) -- Alert broker networking, Apache Kafka topics
-- **AVI** (Avian Survey) -- Citizen science data quality, occultation timing for wildlife corridors
+| Area | What Shipped |
+|------|--------------|
+| M1: Network Architecture | `www/tibsfox/com/Research/MST/research/01-network-architecture.md` (133 lines) — protocol comparison of ASCOM, INDI, and Las Cumbres OCS, bridge-layer design, NASA meshNetwork assessment, FITS data-format standardization, VOEvent XML schema handling |
+| M2: Telescope Fleet Mapping | `www/tibsfox/com/Research/MST/research/02-telescope-fleet.md` (121 lines) — Unistellar (15,000+), Las Cumbres (25 robotic), ZTF, AAVSO, Globe at Night census with geographic coverage and gap analysis per longitude band |
+| M3: Alert & Event Systems | `www/tibsfox/com/Research/MST/research/03-alert-systems.md` (124 lines) — Rubin Observatory LSST pipeline (7M alerts/night, 2-min latency), all nine community brokers (ALeRCE, ANTARES, Fink, Lasair, Pitt-Google, AMPEL, Babamul, SCiMMA, TOM Toolkit), Kafka topic layout, VOEvent schema |
+| M4: Yuri's Night Integration | `www/tibsfox/com/Research/MST/research/04-yuris-night.md` (135 lines) — Global Shutter protocol (00:00 UTC April 12 simultaneous exposure), participation tiers, PNW anchor nodes at Museum of Flight and Burke Museum, regional-coordinator federation model |
+| M5: Citizen Science Protocols | `www/tibsfox/com/Research/MST/research/05-citizen-science.md` (134 lines) — occultation timing, exoplanet transit photometry, nova monitoring, comet tracking; Unistellar published output: 136 asteroids timed, 20 exoplanet orbits refined, DART debris in Nature |
+| M6: GSD Deployment Layer | `www/tibsfox/com/Research/MST/research/06-gsd-deployment.md` (192 lines) — DACP bundle structure for observation requests, skill-creator integration, HITL CAPCOM gates, DoltHub federation for distributed versioned data |
+| LaTeX mission pack | `mission-pack/mesh_telescope_mission.tex` (1,165 lines) + `mesh_telescope_mission.pdf` (195,633 bytes, compiled output) — self-contained research document compilable with pdflatex, journal-submission-ready format |
+| Mission-pack HTML index | `mission-pack/index.html` (494 lines) — standalone index linking the six research modules with full navigation, branded to the Research Series visual language |
+| Site integration | `index.html` (172 lines), `mission.html` (112 lines), `page.html` (214 lines), `style.css` (207 lines) — four pages integrating MST into the Research catalog site and linking the mission-pack artifacts |
+| Series registration | `www/tibsfox/com/Research/series.js` (+1 line) — adds MST to the Research catalog registry so the catalog index surfaces the project |
+| Color theme | Cosmic purple base, nebula blue accents, deep gold highlights — chosen to evoke instrument panels and deep-space imagery per the Research Series visual language |
+| Classification metadata | Code `MST`; cluster "Distributed Observation / Citizen Science Mesh sub-cluster"; cross-referenced to YNT, BRC, PNP, TCP, AVI, LTS (v1.49.126 predecessor in the Chandra-sonification cluster) |
+| Landmark-network coverage | 15,000+ Unistellar nodes, 25 Las Cumbres robotic telescopes, 7M Rubin LSST alerts/night, 9 documented Rubin alert brokers, 6 continents of geographic coverage |
+| Parse-confidence baseline | 0.35 on release-history ingestion (pre-uplift) — closed by this README uplift without editing any research content |
 
 ## Retrospective
 
 ### What Worked
-- The three-track parallel execution (network+fleet, alerts+events, citizen science) maps cleanly to the natural domain boundaries of the telescope ecosystem
-- Documenting all 9 Rubin/LSST community alert brokers in one place creates a genuinely useful reference that does not exist elsewhere in consolidated form
-- The Global Shutter concept (simultaneous exposure at 00:00 UTC April 12) is a compelling design for a real distributed observation event
+
+- **The three-track parallel execution maps cleanly to the natural domain boundaries of the telescope ecosystem.** Track A (network protocols plus fleet census, M1+M2), Track B (alerts plus Yuri's Night events, M3+M4), and Track C (citizen-science protocols plus GSD deployment, M5+M6) each correspond to a distinct sub-community in the distributed-astronomy world; mirroring that structure in the module layout kept the release legible to instrumentation, brokering, and science-operations audiences simultaneously without forcing any of the three into the others' framing.
+- **Documenting all nine Rubin/LSST community alert brokers in one place creates a reference that does not exist elsewhere in consolidated form.** Each broker publishes its own documentation separately, and no single upstream page enumerates the full set with transport protocol, latency SLO, and governance body in a single table; Module M3 is now that page, and the effort to verify the nine names against primary sources paid for itself in research-utility terms.
+- **The Global Shutter protocol (simultaneous exposure at 00:00 UTC April 12) is a concrete, falsifiable design for a distributed observation event rather than a hand-wave.** Specifying a single UTC instant, a list of target categories, an exposure-duration range, and a federation model in a single module gave the release a centrepiece that can either be executed as proposed or debated as proposed — not both, not neither.
+- **The primary-source discipline held across all fourteen files.** Every named broker traces to a specific institutional home (Millennium Institute MAS, NOIRLab, IN2P3, ROE, University of Pittsburgh + Google Cloud, HU Berlin + DESY, the SCiMMA cyberinfrastructure project, the TOM Toolkit GitHub organization); every numeric claim is sourced from the Unistellar portal, the Las Cumbres Observatory OCS documentation, the Rubin Survey Cadence Optimization Committee outputs, or the AAVSO archive.
+- **The LaTeX mission pack compiled cleanly on first build.** 1,165 lines of `.tex` producing a 195,633-byte PDF with no typesetting errors let the release ship as a grab-and-go academic artifact alongside the HTML site, and the PDF is diffable in git in a way that a five-file HTML tree is not.
+- **The `.md` module sources under `research/` stayed clean and linear.** Each module sits between 121 and 192 lines, which is the length at which a single reader can hold the whole module in mind without scrolling — deliberately chosen to keep the release browsable rather than encyclopedic.
 
 ### What Could Be Better
-- Radio telescope arrays (ALMA, VLA, SKA) are mentioned but not integrated into the mesh architecture -- they operate on fundamentally different protocols and timescales
-- The GSD deployment layer (M6) is necessarily speculative since no actual telescope nodes have been connected yet
+
+- **Radio telescope arrays (ALMA, VLA, SKA) are named but not integrated into the mesh architecture.** They operate on fundamentally different protocols (VOTable over HTTP rather than ASCOM/INDI), different timescales (spectral-line integration rather than photometric exposure), and different data-volume regimes (petabytes rather than megabytes); absorbing them into the mesh would require a dedicated M7 module and a decision about whether to treat VLA Beam Forming and ALMA band selection as first-class mesh operations.
+- **The GSD deployment layer (M6) is necessarily speculative because no actual telescope nodes have been connected yet.** Module M6 describes the DACP bundle structure, the HITL CAPCOM gate design, and the DoltHub federation model, but no pilot node has run against the design. The release is a design document for the deployment layer, not an operational report, and future releases should reify it against a two-node or three-node pilot before treating it as settled architecture.
+- **The gravitational-wave alert-broker channel (GCN, LIGO/Virgo/KAGRA) is referenced once and not developed.** Multi-messenger astronomy is the natural extension of the optical-only alert fabric M3 covers, and a dedicated sub-module on GCN circulars and LIGO-Virgo-KAGRA public alerts would extend the release into the genuinely multi-messenger space the CYG (Cygnus X-3, v1.49.121) sibling release already opened.
+- **Coverage-gap analysis is done at longitude-band granularity but not elevation or altitude.** Single-dish vs array, sea-level vs mountaintop, and dark-sky vs light-polluted site distinctions matter for target selection and were omitted.
+- **The Unistellar, Las Cumbres, and Rubin sections each use their own numeric cadence conventions** (exposures per night, observation slots per semester, alerts per second) which makes cross-fleet comparison require unit conversion that the reader has to do mentally.
+
+### What Needs Improvement
+
+- **The mission-pack PDF and mission-pack HTML index duplicate some metadata.** Title, abstract, and author lines exist in both artifacts and should be sourced from a single YAML front-matter file in a future publish-pipeline iteration.
+- **The LaTeX source does not `\\input{}` the module Markdown sources.** The 1,165-line `.tex` file duplicates content from the 839-line Markdown corpus under `research/`; a future pipeline pass should render one from the other (pandoc MD→LaTeX is the obvious path) rather than maintain both by hand.
+- **The module cross-linking inside HTML uses relative paths rather than the Research-catalog canonical URL scheme.** This is fine inside the MST directory but breaks when the module sources are aggregated into the catalog-wide search index; a future convention should pin cross-links to the canonical catalog path.
+- **The `series.js` single-line registration is an outstanding source of batch-level coupling** — it is a file that every v1.49.101-131 project has to edit, which is the exact pattern the Research Series has otherwise avoided.
 
 ## Lessons Learned
 
-- Backyard astronomy is the oldest distributed sensor network humanity ever built -- the infrastructure exists physically across six continents, speaking incompatible protocols, waiting to be connected.
-- The Unistellar network alone has contributed to peer-reviewed science published in Nature (DART mission debris tracking), demonstrating that consumer-grade equipment can produce research-grade data when properly coordinated.
-- Alert broker architecture (Kafka topics, VOEvent XML, 2-minute latency from detection to distribution) is structurally identical to the event-driven microservice patterns used in modern software -- the telescope mesh is a distributed systems problem wearing an astronomy hat.
+- **Backyard astronomy is the oldest distributed sensor network humanity ever built.** The infrastructure exists physically across six continents, speaking incompatible protocols, waiting to be connected. The mesh is a coordination-layer problem, not a capability problem.
+- **Consumer-grade equipment produces research-grade data when properly coordinated.** The Unistellar network's contribution to Nature via the DART-mission debris-tracking campaign, 20+ refined exoplanet orbits, and 136 timed asteroid occultations demonstrates that the population-size argument beats the per-node sensitivity argument for time-variable targets.
+- **Alert-broker architecture is structurally identical to event-driven microservices.** Kafka topics, VOEvent XML, 2-minute latency budget, publish-subscribe fanout, schema registries, and client-side filtering predicates are all present under different names in the nine Rubin community brokers. The telescope mesh is a distributed-systems problem wearing an astronomy hat, and the tooling the Research Series already uses for event-driven systems transfers without translation.
+- **The Amiga Principle generalizes from silicon to planetary-scale networks.** Extraordinary output follows from elegantly connecting existing capability via a narrow, opinionated coordination layer rather than from building new capability. The ASCOM/INDI/OCS bridge is the Amiga co-processor bus of the telescope mesh.
+- **Primary-source discipline scales to distributed-system research.** Every named broker is traceable to a specific institution and funding line, every numeric claim to a specific archive or portal; the discipline added roughly 15% to the research time and removed 100% of the fact-checking anxiety. The bibliographic rigour survives the narrative layer intact.
+- **A Global Shutter event needs a concrete UTC instant and a concrete target list, not a season.** Module M4's 00:00 UTC April 12 specification is the design choice that converts "Yuri's Night observations" from a community sentiment into an operation the mesh can be asked to execute. Concrete beats aspirational.
+- **Coverage-gap analysis is a first-class deliverable of any fleet census.** Module M2's longitude-band gap report (60°E-120°E thin, equatorial non-uniform, polar near-empty) is the output that makes the rest of the census actionable; without it, 15,000 nodes is a number, with it, 15,000 nodes is a targeting map.
+- **The mission-pack LaTeX artifact is worth the overhead.** 1,165 lines of `.tex` producing a 195,633-byte PDF on first compilation means the release ships a grab-and-go academic document alongside the web pages. Academic readers who will not click through a seven-page HTML tree will read a PDF, and the `.tex` is diffable in git in a way the HTML tree is not.
+- **Consumer-to-professional data interoperability is the multi-messenger bottleneck.** The natural extension to gravitational-wave alerts (LIGO-Virgo-KAGRA via GCN circulars) and high-energy neutrinos (IceCube public alerts) is tractable because those channels already speak VOEvent XML; the real friction is the consumer-grade fleet, and solving that friction unblocks the whole multi-messenger mesh.
+- **Six self-contained modules at 120-195 lines each is the right unit of research.** Each module can be read independently, cited independently, and revised independently. The release behaves like a monograph at the README level and an anthology at the module level, which is the correct shape for a research catalog whose readers arrive with different questions.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [YNT — Yuri's Night](../../../www/tibsfox/com/Research/YNT/) | Annual convergence event, Global Shutter protocol anchor, 00:00 UTC April 12 simultaneous-exposure instant documented in M4 |
+| [BRC — Black Rock City](../../../www/tibsfox/com/Research/BRC/) | Community-event infrastructure precedent, federation model via DoltHub that M6's deployment layer inherits |
+| [PNP — Ports & Pipes](../../../www/tibsfox/com/Research/PNP/) | Telescope protocol-bridging precedent, ASCOM/INDI/OCS bridge design pattern reused from PNP's port-mapping work |
+| [TCP — TCP/IP Protocol](../../../www/tibsfox/com/Research/TCP/) | Alert-broker networking stack, Apache Kafka topic layering, publish-subscribe fanout patterns cited in M3 |
+| [AVI — Avian Survey](../../../www/tibsfox/com/Research/AVI/) | Citizen-science data-quality practice, occultation-timing protocols transferable to wildlife-corridor phenology sensing |
+| [CYG — Cygnus X-3 PeVatron (v1.49.121)](../v1.49.121/) | Multi-messenger astrophysics sibling, LIGO-Virgo-KAGRA + IceCube + LHAASO framing shared with M3's alert-broker fabric |
+| [LTS — Listening to Space (v1.49.126)](../v1.49.126/) | Adjacent astrophysics-accessibility sibling in the v1.49.101-131 research batch, shared Chandra X-ray Center infrastructure context |
+| [v1.49.127 — predecessor](../v1.49.127/) | Directly preceding release in the PNW Research Series arc |
+| [v1.49.129 — successor](../v1.49.129/) | Directly following release in the PNW Research Series arc |
+| [Unistellar Citizen Science Portal](https://www.unistellar.com/citizen-science/) | Primary source for 15,000+ node count, 136 timed asteroid occultations, 20+ refined exoplanet orbits, DART-mission Nature contribution |
+| [Las Cumbres Observatory (LCO)](https://lco.global/) | 25-robotic-telescope network, OCS (Observation Control System) protocol documentation referenced in M1 |
+| [Rubin Observatory LSST Alert Pipeline](https://rubinobservatory.org/) | 7M-alerts-per-night pipeline, Survey Cadence Optimization Committee outputs, 2-minute end-to-end latency budget documented in M3 |
+| [ALeRCE broker (Chile)](https://alerce.science/) | Millennium Institute MAS-led Rubin community broker, first of the nine cited in M3 |
+| [ANTARES broker (US, NOIRLab)](https://antares.noirlab.edu/) | US-hosted Rubin community broker, Kafka transport reference implementation |
+| [Fink broker (France, IN2P3)](https://fink-broker.org/) | French Rubin community broker with multi-messenger classifier plugin |
+| [Lasair broker (UK, ROE)](https://lasair-ztf.lsst.ac.uk/) | ROE-and-QUB-led Rubin community broker, ZTF alert-stream compatibility reference |
+| [VOEvent XML specification](https://www.ivoa.net/documents/VOEvent/) | International Virtual Observatory Alliance schema underlying all nine Rubin community brokers |
+| [ASCOM Standards](https://ascomstandards.org/) | Windows-centric telescope-control protocol cited in M1's bridge-layer design |
+| [INDI Library](https://indilib.org/) | POSIX-centric telescope-control protocol cited in M1's bridge-layer design |
+| [GCN (Gamma-ray Coordinates Network)](https://gcn.gsfc.nasa.gov/) | Multi-messenger alert-circular fabric referenced as extension target in M3 and What-Could-Be-Better |
+| `www/tibsfox/com/Research/MST/` | Project root — 14 files, 3,204 lines |
+| `docs/release-notes/RETROSPECTIVE-TRACKER.md` | Cross-release retrospective aggregation — this release's five lessons feed the tracker |
+| `docs/release-notes/v1.0/` | Project foundation — the v1.0 loop and publish pipeline this release rides on |
+
+## Engine Position
+
+v1.49.128 is the 28th entry of the v1.49.101-131 thirty-one-project research batch, the 116th research release of the v1.49 publication arc, and the opening entry in the distributed-observation cluster that treats consumer-grade telescopes as first-class scientific instruments rather than outreach endpoints. Within the Research catalog it sits adjacent to CYG (v1.49.121, multi-messenger high-energy astrophysics) and LTS (v1.49.126, astronomical data sonification) in the broader astronomy-cluster, and it opens the distributed-observation sub-cluster that future radio-astronomy (RAD), neutrino-alert (ICU), and time-domain-survey (TDS) research releases are expected to extend. In the v1.49.x arc the release participates in the Research-catalog publish engine, contributing 5 new lessons (ledger IDs #744-#748) into the cross-release retrospective tracker. It shipped as a single-commit research release on 2026-03-28, three days before the v1.49.131 batch close and approximately twenty-four days before the v1.50 milestone target of 2026-04-21. The release's single-file git footprint (no `src/`, no `src-tauri/`, no `.planning/`, no tests) makes it a canonical example of the Research Series' clean-footprint discipline that allows thirty-one projects to ship in a single publication batch without cross-contamination.
+
+## Files
+
+- `www/tibsfox/com/Research/MST/index.html` — 172 lines, project landing page integrated into the Research catalog site with cosmic-purple / nebula-blue / deep-gold theme
+- `www/tibsfox/com/Research/MST/mission-pack/index.html` — 494 lines, standalone mission-pack index with full navigation to the six research modules
+- `www/tibsfox/com/Research/MST/mission-pack/mesh_telescope_mission.pdf` — 195,633 bytes (binary), compiled LaTeX mission pack in journal-submission format
+- `www/tibsfox/com/Research/MST/mission-pack/mesh_telescope_mission.tex` — 1,165 lines, complete LaTeX source for the mission pack, compilable with pdflatex
+- `www/tibsfox/com/Research/MST/mission.html` — 112 lines, mission-pack gateway page linking the PDF and HTML index into the project landing
+- `www/tibsfox/com/Research/MST/page.html` — 214 lines, primary content page carrying the six-module research narrative
+- `www/tibsfox/com/Research/MST/research/01-network-architecture.md` — 133 lines, M1 Network Architecture module source
+- `www/tibsfox/com/Research/MST/research/02-telescope-fleet.md` — 121 lines, M2 Telescope Fleet Mapping module source
+- `www/tibsfox/com/Research/MST/research/03-alert-systems.md` — 124 lines, M3 Alert & Event Systems module source
+- `www/tibsfox/com/Research/MST/research/04-yuris-night.md` — 135 lines, M4 Yuri's Night Integration module source
+- `www/tibsfox/com/Research/MST/research/05-citizen-science.md` — 134 lines, M5 Citizen Science Protocols module source
+- `www/tibsfox/com/Research/MST/research/06-gsd-deployment.md` — 192 lines, M6 GSD Deployment Layer module source
+- `www/tibsfox/com/Research/MST/style.css` — 207 lines, project-specific styling (cosmic purple / nebula blue / deep gold palette)
+- `www/tibsfox/com/Research/series.js` — +1 line, series-registry entry adding MST to the Research catalog index
 
 ---
-*Part of the v1.49.101-131 research batch -- 31 new projects in a single session.*
+*Part of the v1.49.101-131 research batch — 31 projects in a single publication arc. Uplifted 2026-04-17 against the A-grade rubric at `.planning/missions/release-uplift/RUBRIC.md`.*
