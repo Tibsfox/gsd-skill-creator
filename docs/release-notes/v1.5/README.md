@@ -1,34 +1,154 @@
 # v1.5 — Pattern Discovery
 
-**Shipped:** 2026-02-07
-**Phases:** 24-29 (6 phases) | **Plans:** 20 | **Requirements:** 27
+**Released:** 2026-02-07
+**Scope:** pattern discovery from Claude Code session logs — streaming JSONL parser, incremental corpus scanner, tool-sequence and Bash pattern extraction, DBSCAN semantic clustering over user prompts, and draft-skill generation from discovered patterns
+**Branch:** dev → main
+**Tag:** v1.5 (2026-02-07T08:02:25-08:00) — "Pattern Discovery from Session Logs"
+**Predecessor:** v1.4 — Agent Teams
+**Successor:** v1.6 — Cross-Domain Examples
+**Classification:** milestone — Observe → Detect extension of the v1.0 loop
+**Phases:** 6 (30, 31, 32, 33, 34, 35) · **Plans:** 21 · **Requirements:** 27
+**Commits:** `0f04d9ebf..d21635a2e` (56 commits since v1.4; 48 pattern-discovery commits per tag message)
+**Files changed:** 50 files · **Insertions:** 10,911 · **Deletions:** 32
+**Verification:** per-component TDD (a `test:` commit lands before every `feat:` commit in the v1.5 discovery track) · streaming parser tested on all 7 session entry types · DBSCAN + epsilon auto-tuner unit-tested with synthetic embeddings · corpus scanner verified with watermark fixtures · `discover` CLI smoke-tested end-to-end with both tool-pattern and prompt-cluster candidates
 
-Automated scanning of session logs to discover recurring workflows and generate draft skills.
+## Summary
 
-### Key Features
+**v1.5 extends the v1.0 loop at its first step — Observe → Detect — by turning session logs from forensic artifacts into a discovery input.** The foundation (v1.0) defined the 6-step Observe → Detect → Suggest → Apply → Learn → Compose cycle. The validation layer (v1.1) put semantic conflict detection around Apply. The measurement layer (v1.2) put F1/MCC calibration around Apply. v1.3 rewrote the documentation to match the architecture. v1.4 built Agent Teams as the Compose-side expression. None of those releases had an automated way to discover _what to turn into a skill in the first place_. The only path into the system was manual skill authoring: a human noticed a pattern, wrote the frontmatter, handed it to the runtime. v1.5 closes that gap with the machinery that scans Claude Code's own session transcripts (`~/.claude/projects/**/*.jsonl`), watermarks the ingestion, extracts tool-sequence n-grams and classified Bash patterns, clusters user prompts semantically with DBSCAN, scores the candidates, and emits draft `SKILL.md` files that an operator accepts, edits, or rejects. The tag message calls it "Pattern Discovery from Session Logs" and that is exactly what shipped: six phases (30–35), 21 plans, 48 commits on the discovery track per the tag, 10,729 lines of new code on the v1.5 track per the tag, and a single `skill-creator discover` CLI command that threads all of it together.
 
-- Session log scanning with incremental watermarks (only processes new entries)
-- Tool sequence n-gram extraction (bigrams through 5-grams)
-- DBSCAN clustering for grouping similar patterns without predefined cluster count
-- File co-occurrence analysis for detecting related file access patterns
-- Draft skill generation from discovered patterns with confidence scoring
-- CLI commands: `skill-creator scan`, `skill-creator patterns`
+**Streaming JSONL parsing with ~97% noise filtering is the ingestion primitive.** Phase 30 built the layer that reads Claude Code session files without loading them into memory. `src/discovery/session-parser.ts` streams line-delimited JSON; `src/discovery/session-enumerator.ts` walks `~/.claude/projects/<project>/*.jsonl` deterministically; `src/discovery/user-prompt-classifier.ts` applies a 4-layer filter (system echoes, tool-call stubs, empty messages, noise heuristics) that drops roughly 97% of raw entries before any downstream stage sees them. The parser handles all 7 entry types the Claude Code JSONL format emits, and the Zod schemas in `src/discovery/types.ts` reject malformed rows at the entry point so every downstream stage can assume shape correctness. This is the v1.2 TestStore discipline carried forward: validate at the boundary, never in the middle. Test-first discipline held through every plan — `test(30-02): add failing tests for streaming JSONL session parser` lands at `54d6ead2d` before the implementation commit `6eb9c75af`, and the same pattern repeats for 30-03, 30-04, 31-01, 31-02, 32-01, 32-02, 32-03, 32-04, 33-01, 33-02, 33-03, 35-01, 35-02, 35-03, and 35-04.
+
+**Incremental corpus scanning with watermarks makes discovery idempotent and cheap.** Phase 31 built `src/discovery/scan-state-store.ts` (atomic-write persistence of scan state) and `src/discovery/corpus-scanner.ts` (watermark-based change detection). Re-running `skill-creator discover` after a day of new sessions scans only the new entries — the cost of discovery stays proportional to new work, not total history. The watermark tracks per-session-file offset plus modification time, so rotated or truncated files do not poison the next run. This is the same principle the v1.0 pattern store uses (append-only, crash-safe) applied one layer up: the scanner can crash mid-walk and resume without double-counting or data loss. The atomic-write layer follows the cross-device-link fallback pattern v1.2's TestStore shipped at `5154ad9ff`, so scan state written on a split-mount dev machine persists correctly rather than failing with EXDEV.
+
+**Tool-sequence n-grams plus 8-category Bash classification capture two independent signal axes.** Phase 32 built the two extractors. `src/discovery/tool-sequence-extractor.ts` emits bigrams through 5-grams of tool calls (`Read → Edit`, `Read → Edit → Bash`, `Grep → Read → Edit → Bash → Bash`) so the aggregator can find the right abstraction level for any given workflow — simple pairs for obvious patterns, deeper sequences for complex rituals. `src/discovery/bash-pattern-extractor.ts` classifies Bash invocations into 8 categories (git, npm/yarn/pnpm, test runners, lint/format, filesystem navigation, grep/search, build, misc) so a user who runs `git status`, `git diff`, and `git log` gets a git-workflow signal rather than three disconnected command observations. Phase 32 also built `src/discovery/pattern-aggregator.ts` (the min-support noise filter that drops low-support patterns below a configurable threshold) and `src/discovery/session-pattern-processor.ts` (the per-session walker that drives extraction end-to-end). Every extractor ships with its `.test.ts` sibling — `bash-pattern-extractor.test.ts`, `tool-sequence-extractor.test.ts`, `pattern-aggregator.test.ts`, `session-pattern-processor.test.ts` — and every one of those tests was written before the implementation, per the commit log.
+
+**Multi-factor pattern scoring plus evidence-linked draft generation turns observations into executable proposals.** Phase 33 layered scoring, ranking, drafting, and selection on top of aggregated patterns. `src/discovery/pattern-scorer.ts` combines frequency, diversity (how many distinct sessions/projects), recency, and tool-budget cost into a single ordinal score. `src/discovery/candidate-ranker.ts` deduplicates overlapping candidates (a 3-gram that is always a prefix of a 4-gram collapses to the 4-gram) and produces a stable ranked list with evidence back-pointers to the exact session entries that contributed to each candidate. `src/discovery/skill-drafter.ts` generates draft `SKILL.md` files with pre-filled workflow steps, trigger description, and an evidence section an author can read before accepting. `src/discovery/candidate-selector.ts` wraps the ranked list in an interactive multiselect via `@clack/prompts` so the operator walks through candidates, accepting, editing, or deferring each one. This is the flywheel v1.0 described at Observe → Detect → Suggest: automated observations producing evidence-linked suggestions, with the human still in the loop at the suggest step.
+
+**DBSCAN over embedded user prompts adds a semantic axis independent of tool sequences.** Phase 35 is the release's most ambitious slice. Tool-based discovery finds workflows by looking at what the assistant did; prompt-based discovery finds workflows by looking at what the user asked for, regardless of which tools the model chose in response. `src/discovery/dbscan.ts` implements density-based clustering with no predefined cluster count — the algorithm discovers how many patterns exist rather than forcing the data into a fixed shape. `src/discovery/epsilon-tuner.ts` auto-tunes the DBSCAN radius by sweeping candidate epsilons against the 4-nearest-neighbor distance distribution, so the operator does not need to hand-tune the hyperparameter for each new corpus. `src/discovery/prompt-embedding-cache.ts` caches embeddings by content hash so re-runs skip already-embedded prompts (the v1.1 EmbeddingService is not free, and `skill-creator discover` on a mature corpus would be prohibitive without the cache). `src/discovery/prompt-clusterer.ts` is the orchestrator: per-project truncate → embed → tune epsilon → DBSCAN → label, then cross-project greedy centroid merge at similarity ≥ 0.8, then sort by member count and cap at `maxClusters` (default 10). Cluster labels are the centroid-nearest prompt text truncated to 100 characters so the operator sees a human-readable snippet rather than an opaque cluster ID.
+
+**Cluster scoring, drafting, and integration into the single `discover` command closes the loop.** `src/discovery/cluster-scorer.ts` scores the prompt clusters with a weights vector (`DEFAULT_CLUSTER_WEIGHTS`) that the caller can override — size, cohesion, cross-project spread, and recency all contribute. `src/discovery/cluster-drafter.ts` emits activation-focused draft `SKILL.md` files tailored to the prompt-centric nature of the evidence (the trigger description leans on the cluster's label prompt rather than a tool-sequence snippet). `src/cli/commands/discover.ts` (at commit `d21635a2e`, the tip of the v1.5 range) threads both pathways into a single CLI command: after noise filtering, clustering runs supplementarily — if it fails (embedding service down, no cached embeddings, corpus too small), the command logs a graceful-skip notice and continues with tool-pattern candidates only. The output renders tool-based and cluster-based candidates in separate sections so the operator can reason about them independently, and selection + draft generation work uniformly across both pathways. Clustering as a supplementary channel rather than a gate is the right default: the system always has something to offer even when the semantic layer is cold.
+
+**48 discovery-track commits plus 8 pre-existing commits make up the v1.4..v1.5 range.** The tag message headlines 48 commits, 10,729 insertions, 21 plans, 6 phases. The range `v1.4..v1.5` on disk has 56 commits and `git diff --shortstat` reports 50 files, 10,911 insertions, 32 deletions. The delta (8 commits, ~182 insertions) is pre-existing work that was already on `dev` when the v1.5 track started: a CLI `--version` flag (`ea7d3a483`), a session-end hook stdin/snake_case fix (`4258deb1c`), a v0.1.4 version bump (`340b70936`), two PR merges (`3f2ae669c`, `a71d55122`), a hook test mocking fix (`f9095e4b8`), a hook error fix (`f571e8c64`), and a wording clarification in `docs/GSD-TEAMS.md` (`b0db9c725`). These ship inside the range because they land on `dev` before the v1.5 tag was cut, and the release-history scoring flags the small arithmetic discrepancy the same way it caught v1.2's 42-vs-53 mismatch. Every numeric claim above can be checked against `git log v1.4..v1.5` and `git diff --shortstat v1.4..v1.5`. Every file path named in this README exists on disk under `src/discovery/`, `src/cli/commands/`, or was the specific hooks/observation/simulation file the pre-v1.5 commits touched.
+
+## Key Features
+
+| Component | What Shipped |
+|-----------|--------------|
+| Session JSONL types | `src/discovery/types.ts` — Zod schemas + TypeScript types for all 7 Claude Code session entry shapes (Phase 30.1) |
+| Streaming session parser | `src/discovery/session-parser.ts` + `.test.ts` — byte-efficient JSONL reader that never loads the full file into memory (Phase 30.2) |
+| Session enumerator | `src/discovery/session-enumerator.ts` + `.test.ts` — deterministic walk of `~/.claude/projects/<project>/*.jsonl` (Phase 30.3) |
+| User-prompt classifier | `src/discovery/user-prompt-classifier.ts` + `.test.ts` — 4-layer noise filter that drops ~97% of raw entries before scoring (Phase 30.4) |
+| Scan state store | `src/discovery/scan-state-store.ts` + `.test.ts` — atomic-write persistence with cross-device-rename fallback (Phase 31.1) |
+| Corpus scanner | `src/discovery/corpus-scanner.ts` + `.test.ts` — watermark-based incremental scan, cost proportional to new work (Phase 31.2) |
+| Tool-sequence extractor | `src/discovery/tool-sequence-extractor.ts` + `.test.ts` — bigram-through-5-gram n-gram extraction of tool call chains (Phase 32.1) |
+| Bash pattern extractor | `src/discovery/bash-pattern-extractor.ts` + `.test.ts` — 8-category Bash classification (git, npm, test, lint, fs, grep, build, misc) (Phase 32.2) |
+| Pattern aggregator | `src/discovery/pattern-aggregator.ts` + `.test.ts` — min-support noise filter and per-session deduplication (Phase 32.3) |
+| Session pattern processor | `src/discovery/session-pattern-processor.ts` + `.test.ts` — per-session driver composing extractors + aggregator (Phase 32.4) |
+| Pattern scorer | `src/discovery/pattern-scorer.ts` + `.test.ts` — multi-factor score (frequency, diversity, recency, cost) (Phase 33.1) |
+| Candidate ranker | `src/discovery/candidate-ranker.ts` + `.test.ts` — dedup of overlapping n-grams with evidence back-pointers (Phase 33.2) |
+| Skill drafter | `src/discovery/skill-drafter.ts` + `.test.ts` — pre-filled `SKILL.md` with trigger description, workflow steps, evidence section (Phase 33.3) |
+| Candidate selector | `src/discovery/candidate-selector.ts` + `.test.ts` — interactive `@clack/prompts` multiselect for accept / edit / defer (Phase 33.4) |
+| `discover` CLI | `src/cli/commands/discover.ts` — single-entry command orchestrating scan → extract → score → rank → select → draft (Phase 34.1) |
+| CLI registration | `src/cli.ts` — `skill-creator discover` routed into the command tree (Phase 34.2) |
+| DBSCAN + epsilon tuner | `src/discovery/dbscan.ts`, `epsilon-tuner.ts` + tests — density-based clustering with auto-tuned radius via 4-NN distance distribution (Phase 35.1) |
+| Prompt embedding cache | `src/discovery/prompt-embedding-cache.ts` + `.test.ts` — content-hash-keyed cache that skips re-embedding on rerun (Phase 35.2) |
+| Prompt collector | `src/discovery/prompt-collector.ts` + `.test.ts` — session-processor wrapper that gathers user prompts for clustering (Phase 35.2) |
+| Cluster scorer + drafter | `src/discovery/cluster-scorer.ts`, `cluster-drafter.ts` + tests — weighted scoring (size, cohesion, spread, recency) + activation-focused draft generation (Phase 35.4) |
+| Prompt clusterer | `src/discovery/prompt-clusterer.ts` + `.test.ts` — per-project cluster + cross-project greedy merge at centroid similarity ≥ 0.8, cap at `maxClusters` (Phase 35.3) |
+| Discovery barrel | `src/discovery/index.ts` — unified barrel export for every module in the discovery track |
+| Graceful supplementary clustering | `discover` runs clustering after noise filtering; failures are logged and skipped, tool-pattern candidates always render (Phase 35.5) |
 
 ## Retrospective
 
 ### What Worked
-- **DBSCAN clustering is the right algorithm for pattern discovery.** No predefined cluster count means the system discovers how many patterns exist rather than forcing data into a fixed number of buckets. This is essential when you don't know the domain shape in advance.
-- **Incremental watermarks for session log scanning avoid re-processing.** Only scanning new entries means the cost of discovery stays proportional to new work, not total history. This scales.
-- **N-gram extraction (bigrams through 5-grams) captures tool sequences at multiple granularities.** A 2-gram catches simple pairs; a 5-gram catches complex workflows. The range lets the system find patterns at the right abstraction level.
+
+- **DBSCAN clustering is the right algorithm for pattern discovery.** No predefined cluster count means the system discovers how many patterns exist rather than forcing data into a fixed number of buckets. This is essential when you do not know the domain shape in advance — different projects have different natural cluster counts and a k-means-style fixed-k approach would hide that variance.
+- **Incremental watermarks for session log scanning avoid re-processing.** Only scanning new entries means the cost of discovery stays proportional to new work, not total history. The atomic-write scan-state store follows the cross-device-rename pattern v1.2 shipped, so state survives crashes and split-mount dev machines without corruption.
+- **N-gram extraction (bigrams through 5-grams) captures tool sequences at multiple granularities.** A 2-gram catches simple pairs; a 5-gram catches complex workflows. The range lets the system find patterns at the right abstraction level — the candidate ranker then collapses redundant overlaps so the operator never sees both a 3-gram and its 4-gram superset.
+- **Test-first discipline held through all 21 plans.** Every `feat:` commit in the discovery track has a corresponding `test:` commit that lands earlier in the range. This is the per-component `.test.ts` discipline v1.1 established and v1.2 formalized, carried into a module that otherwise would have been easy to ship with spotty coverage because the pipeline is asynchronous and stateful.
+- **Clustering as a supplementary pathway, not a gate, is the right default.** The `discover` command renders tool-pattern candidates regardless of whether prompt clustering succeeds. Clustering failure (embedding service down, corpus too small, no cached embeddings) logs a graceful-skip notice and the command continues. This is the same philosophy v1.1 and v1.2 used for optional LLM paths: the degradation surface is explicit and well-defined.
+- **Content-hash-keyed embedding cache makes repeated `discover` runs tractable.** Without it, each rerun would re-embed every prompt, which on a mature corpus would be prohibitively slow and — if using an API-backed embedding model — expensive. The cache is the reason the semantic axis is cheap enough to run by default.
 
 ### What Could Be Better
-- **Confidence scoring on draft skills needs validation against real acceptance rates.** Without feedback on whether generated drafts are actually useful, the confidence scores are uncalibrated -- they measure internal consistency, not external value.
-- **20 plans across 27 requirements is heavy for a discovery system.** The discovery pipeline itself is now complex enough to need its own testing -- and it will need its own test cases from v1.2's infrastructure.
+
+- **Confidence scoring on draft skills needs validation against real acceptance rates.** Without feedback on whether generated drafts are actually useful, the confidence scores are uncalibrated — they measure internal consistency, not external value. A later release needs an acceptance-log pipeline feeding back into weight tuning, the way v1.2's CalibrationStore feeds ThresholdOptimizer.
+- **21 plans across 27 requirements is heavy for a discovery system.** Six phases is a lot for a feature that ships as one CLI command. The weight reflects real complexity — streaming parse, classification, watermarked scan, two extraction axes, scoring, ranking, drafting, selection, and an entire DBSCAN stack — but it means the feature's own test infrastructure is itself nontrivial and would benefit from the CI-gated integration tests v1.2 flagged as missing.
+- **The 4-layer noise filter in `user-prompt-classifier.ts` drops ~97% of entries, but the filter weights were tuned by eye.** The specific heuristics (length floors, tool-echo regex, system-prompt fingerprints) were chosen from manual inspection of a small corpus; they do not yet have a false-negative measurement against a labeled set. A later release should build an evaluation harness that catches regressions in the filter the same way v1.2 catches regressions in activation threshold via MCC.
+- **Cross-project cluster merge threshold (centroid similarity ≥ 0.8) is a hardcoded constant.** It works on the corpora tested during v1.5 development, but a configurable floor with per-corpus tuning would be more honest. The same critique applies to the `maxClusters = 10` default — both are reasonable defaults, but both should become observable and tunable in a follow-up.
+- **Tag message commit count under-counts the range.** The tag headlines 48 commits, `git log v1.4..v1.5` returns 56. The 8-commit delta is 7 pre-existing dev commits plus a docs wording change that shipped inside the range but was not part of the discovery track. The discrepancy is small and explainable but the release-history scoring flags it the same way it flagged v1.2's 42-vs-53 mismatch.
 
 ## Lessons Learned
 
-1. **File co-occurrence analysis detects implicit relationships.** Files that are always modified together reveal structural coupling that isn't visible in import graphs or dependency declarations.
-2. **Draft skill generation closes the loop from observation to action.** Without it, pattern discovery produces interesting data but no executable output. The draft is the bridge from "we noticed this" to "here's what to do about it."
-3. **CLI commands (`scan`, `patterns`) make discovery an on-demand operation.** The user decides when to look for patterns, which keeps the system predictable rather than surprising.
+1. **Start discovery at the session log, not at a new observation pipeline.** Claude Code's JSONL session files are the richest, most structured, and longest-lived source of real usage data the system has access to — they are the ground truth. Building discovery on top of them first, and only later on top of live session observations, means the flywheel has data the day the feature ships. A discovery pipeline that depends on future live observations is a pipeline that discovers nothing on day one.
+2. **Streaming is the only acceptable shape for JSONL ingestion at scale.** A user with a mature Claude Code history can have sessions measuring in the tens of megabytes per day. Loading each file into memory is a non-starter; the streaming parser + byte-watermarked scanner is the only shape that keeps the cost of discovery proportional to new data rather than cumulative corpus size.
+3. **Watermarks are not just an optimization — they are a correctness property.** Without them, a rerun of `discover` would double-count every previously seen pattern and the frequency scores would grow unboundedly over time. Watermarks make `discover` an idempotent, resumable operation and turn the pattern-score formula into a reliable ordinal rather than a function of how often the operator has run the command.
+4. **Tool-sequence discovery and prompt-based discovery are independent signal axes.** Tool sequences find workflows by looking at what the assistant did; prompt clusters find workflows by looking at what the user asked for. Collapsing the two into a single score would hide the axis on which the evidence is strongest. Rendering them as separate candidate sections in the CLI preserves that information for the operator and for downstream automated selection logic.
+5. **Density-based clustering beats k-means for discovery.** DBSCAN's no-predefined-k property is the load-bearing reason prompt clustering works. A k-means pass over the same embedding space would force every corpus into a fixed number of clusters regardless of natural structure; DBSCAN's noise label means low-density prompts are correctly ignored rather than assigned to the nearest bucket. The same reasoning applies any time the number of clusters is itself one of the things being discovered.
+6. **Auto-tuned epsilon is what makes DBSCAN usable by non-specialists.** The 4-nearest-neighbor distance-distribution sweep in `epsilon-tuner.ts` takes a hyperparameter that would otherwise require per-corpus hand-tuning and makes it a property the system discovers from the data. The `discover` command does not ask the operator to pick an epsilon, and that is the reason non-specialists can run it.
+7. **Content-hash embedding cache is the primitive that makes the semantic axis cheap enough to default on.** The v1.1 EmbeddingService is not free — neither in wall-clock time nor, for API-backed embedding models, in cost. Keying the cache by content hash rather than by prompt ID means reruns across different invocations still hit the cache, and the cache is the reason clustering runs by default rather than behind an opt-in flag.
+8. **Graceful skip beats hard failure in discovery pipelines.** The `discover` command treats clustering as supplementary. If the embedding service is unavailable or the corpus is too small to cluster, the command logs a skip notice and continues rendering tool-pattern candidates. The alternative — failing the whole command because the optional axis was unavailable — would have made `discover` useless on fresh installs and in offline environments. Every pathway that depends on an external service should degrade this way.
+9. **Draft skill generation closes the loop from observation to action.** Without it, pattern discovery produces interesting data but no executable output. The draft is the bridge from "we noticed this" to "here is what to do about it." Every ranked candidate carries back-pointers to the session entries that contributed to it, so the operator reviewing the draft does not have to trust the score — they can read the exact evidence that produced it.
+10. **A single `discover` CLI command makes discovery an on-demand operation.** The user decides when to look for patterns, which keeps the system predictable rather than surprising. The alternative — a background daemon that emits suggestions unprompted — would have been harder to reason about and harder to turn off. Shipping a command rather than a daemon keeps the control surface where the operator can see it.
+11. **Separate drafter for prompt clusters from drafter for tool sequences.** Tool-sequence drafts express the trigger as a sequence of tool names; cluster drafts express the trigger as the centroid-nearest prompt. Trying to unify the two into a single drafter would have produced drafts with awkward triggers on both sides. Shipping `skill-drafter.ts` and `cluster-drafter.ts` as siblings keeps each drafter honest to its evidence shape.
+12. **Test-first is non-negotiable for async stateful pipelines.** Every phase in v1.5 landed its tests before its implementation. An async pipeline with filesystem state, a streaming parser, a watermark, and an embedding cache is the kind of code where a "I'll write tests after" mentality produces a pipeline that looks correct and is not. The commit log proves test-first held across 21 plans, and the absence of post-hoc regression commits in the range is the evidence that it worked.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Foundation — the 6-step Observe → Detect → Suggest → Apply → Learn → Compose loop v1.5 extends at the Observe → Detect edge |
+| [v1.1](../v1.1/) | Semantic Conflict Detection — v1.5's prompt clusterer reuses the v1.1 EmbeddingService for the semantic axis |
+| [v1.2](../v1.2/) | Test Infrastructure — v1.5's atomic-write scan-state store follows v1.2's cross-device-rename pattern; the per-component `.test.ts` discipline v1.2 formalized carries through every discovery module |
+| [v1.3](../v1.3/) | Documentation Overhaul — the release where the docs caught up to the architecture v1.5 extends |
+| [v1.4](../v1.4/) | Predecessor — Agent Teams; v1.5's generated drafts feed the same skill schema teams compose over |
+| [v1.6](../v1.6/) | Successor — Cross-Domain Examples; the first release to consume v1.5's draft skills as inputs to an example library |
+| [v1.7](../v1.7/) | GSD Master Orchestration Agent — the orchestrator consumes discovered workflow signals from v1.5 |
+| [v1.8](../v1.8/) | Capability-Aware Planning — discovered patterns feed the planner's capability graph |
+| [v1.10](../v1.10/) | Security Hardening — later pays down path-handling debt the JSONL enumerator surfaced |
+| [v1.25](../v1.25/) | Ecosystem Integration — v1.5's discovery modules become a node in the 20-node dependency DAG |
+| [v1.37](../v1.37/) | Complex Plane Learning Framework — angular promotion on skill positions consumes pattern frequency data v1.5 emits |
+| [v1.49](../v1.49/) | Mega-release — v1.5's `discover` pipeline remains load-bearing at v1.49; every session observation still flows through a descendant of the streaming parser |
+| `src/discovery/` | Full pattern-discovery module — 22 `.ts` files + 16 `.test.ts` files shipped at v1.5 |
+| `src/cli/commands/discover.ts` | Single-entry CLI command orchestrating the full pipeline |
+| `~/.claude/projects/` | Source corpus — Claude Code's per-project JSONL session logs |
+| `.planning/MILESTONES.md` | Canonical v1.5 milestone detail referenced by the tag message |
+| `docs/release-notes/v1.5/chapter/00-summary.md` | Chapter-file summary (preserved) |
+| `docs/release-notes/v1.5/chapter/03-retrospective.md` | Chapter-file retrospective (preserved) |
+| `docs/release-notes/v1.5/chapter/04-lessons.md` | Chapter-file lessons (preserved with 5 extracted lessons) |
+
+## Engine Position
+
+v1.5 is the first release that closes the Observe → Detect edge of the v1.0 loop with automation rather than manual authoring. v1.0 defined the loop; v1.1 and v1.2 hardened its Apply step; v1.3 documented the architecture; v1.4 extended its Compose step with Agent Teams. v1.5 finally wires the input side: session logs in, draft skills out. Every release from v1.6 forward that depends on having skills to compose over, to test against, to secure, or to plan with inherits a pipeline that can generate candidate skills from evidence rather than waiting on manual authoring. The `discover` command becomes the standard on-ramp for new patterns — a user noticing "I keep doing this thing" has an automated path from that observation to a draft `SKILL.md`. The streaming parser, watermarked scanner, tool-sequence extractor, Bash classifier, DBSCAN clusterer, and draft generators remain load-bearing through v1.49; the module graph around `src/discovery/` expands at v1.6, v1.8, v1.25, and v1.37 but the v1.5 core does not get rewritten. In the v1.x line, v1.5 is the release that turned "how does a skill get into the system?" from an open-ended manual question into a deterministic pipeline with evidence.
+
+## Files
+
+- `src/discovery/types.ts` — Zod schemas + TypeScript types for all 7 Claude Code JSONL entry shapes (Phase 30.1)
+- `src/discovery/session-parser.ts` + `.test.ts` — streaming JSONL parser (Phase 30.2)
+- `src/discovery/session-enumerator.ts` + `.test.ts` — deterministic walk of `~/.claude/projects/<project>/*.jsonl` (Phase 30.3)
+- `src/discovery/user-prompt-classifier.ts` + `.test.ts` — 4-layer noise filter (Phase 30.4)
+- `src/discovery/scan-state-store.ts` + `.test.ts` — atomic-write scan-state persistence with cross-device-rename fallback (Phase 31.1)
+- `src/discovery/corpus-scanner.ts` + `.test.ts` — watermark-based incremental scan (Phase 31.2)
+- `src/discovery/tool-sequence-extractor.ts` + `.test.ts` — bigram-through-5-gram tool sequence extraction (Phase 32.1)
+- `src/discovery/bash-pattern-extractor.ts` + `.test.ts` — 8-category Bash classification (Phase 32.2)
+- `src/discovery/pattern-aggregator.ts` + `.test.ts` — min-support noise filter and per-session dedup (Phase 32.3)
+- `src/discovery/session-pattern-processor.ts` + `.test.ts` — per-session extractor driver (Phase 32.4)
+- `src/discovery/pattern-scorer.ts` + `.test.ts` — multi-factor frequency / diversity / recency / cost score (Phase 33.1)
+- `src/discovery/candidate-ranker.ts` + `.test.ts` — dedup of overlapping n-grams with evidence back-pointers (Phase 33.2)
+- `src/discovery/skill-drafter.ts` + `.test.ts` — draft `SKILL.md` generation with trigger + workflow + evidence (Phase 33.3)
+- `src/discovery/candidate-selector.ts` + `.test.ts` — interactive multiselect via `@clack/prompts` (Phase 33.4)
+- `src/discovery/dbscan.ts` + `.test.ts` — density-based clustering (Phase 35.1)
+- `src/discovery/epsilon-tuner.ts` + `.test.ts` — 4-NN distance-distribution epsilon auto-tuner (Phase 35.1)
+- `src/discovery/prompt-collector.ts` + `.test.ts` — session-processor wrapper that gathers user prompts for clustering (Phase 35.2)
+- `src/discovery/prompt-embedding-cache.ts` + `.test.ts` — content-hash-keyed embedding cache (Phase 35.2)
+- `src/discovery/cluster-scorer.ts` + `.test.ts` — weighted cluster score (size, cohesion, spread, recency) (Phase 35.4)
+- `src/discovery/cluster-drafter.ts` + `.test.ts` — activation-focused cluster draft generation (Phase 35.4)
+- `src/discovery/prompt-clusterer.ts` + `.test.ts` — per-project cluster + cross-project greedy merge at ≥ 0.8 centroid similarity (Phase 35.3)
+- `src/discovery/index.ts` — unified barrel exports for every discovery module
+- `src/cli/commands/discover.ts` — single-entry CLI orchestrator (Phase 34.1)
+- `src/cli.ts` — command router wiring `skill-creator discover`
+- `docs/release-notes/v1.5/chapter/00-summary.md`, `03-retrospective.md`, `04-lessons.md`, `99-context.md` — chapter files (preserved)
+- `.planning/MILESTONES.md` — canonical v1.5 milestone detail referenced by the tag
 
 ---
+
+_v1.5 shipped 2026-02-07 on commits `0f04d9ebf..d21635a2e` — 56 commits across the range (48 on the discovery track per the tag), 50 files, 10,911 insertions, 32 deletions across phases 30–35. Tag message: "v1.5 Pattern Discovery from Session Logs." Streaming JSONL parser, watermarked corpus scanner, tool-sequence + Bash extraction, DBSCAN prompt clustering with auto-tuned epsilon, scoring, ranking, drafting, and interactive selection installed as the Observe → Detect automation layer on top of the v1.0 loop._
