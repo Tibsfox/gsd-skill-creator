@@ -4,69 +4,71 @@
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 602 releases · 333 with retrospectives · 275 with extracted lessons · quality A:1 B:8 C:4 D:50 F:539 (avg 25) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+
+> **Drift detected:** 0 releases flag a retrospective but have no `03-retrospective.md` on disk; 57 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
+**Snapshot:** 602 releases · 333 with retrospectives · 332 with extracted lessons · quality A:1 B:8 C:4 D:50 F:539 (avg 25) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
-| [v1.49.559](release-notes/v1.49.559) | Degree 55: The Unmanned Work Continues | 2026-04-16 | 1 | — | — | [✓](release-notes/v1.49.559/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.558](release-notes/v1.49.558) | Degree 54: In Memoriam -- Tough and Competent | 2026-04-16 | 3 | — | — | [✓](release-notes/v1.49.558/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.557](release-notes/v1.49.557) | Degree 53: The Last Gemini | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.557/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.556](release-notes/v1.49.556) | Degree 52: The Complete Picture | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.556/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.555](release-notes/v1.49.555) | Degree 51: The Fix | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.555/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.554](release-notes/v1.49.554) | Degree 50: The Midcourse Correction | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.554/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.553](release-notes/v1.49.553) | Degree 49: The First Revolution | 2026-04-15 | 2 | — | — | [✓](release-notes/v1.49.553/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.552](release-notes/v1.49.552) | Degree 48: The Quiet Retrieval | 2026-04-15 | 3 | — | — | [✓](release-notes/v1.49.552/chapter/03-retrospective.md) | — | F 44 |  |
+| [v1.49.559](release-notes/v1.49.559) | Degree 55: The Unmanned Work Continues | 2026-04-16 | 1 | — | — | [✓](release-notes/v1.49.559/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.558](release-notes/v1.49.558) | Degree 54: In Memoriam -- Tough and Competent | 2026-04-16 | 3 | — | — | [✓](release-notes/v1.49.558/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.557](release-notes/v1.49.557) | Degree 53: The Last Gemini | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.557/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.556](release-notes/v1.49.556) | Degree 52: The Complete Picture | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.556/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.555](release-notes/v1.49.555) | Degree 51: The Fix | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.555/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.554](release-notes/v1.49.554) | Degree 50: The Midcourse Correction | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.554/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.553](release-notes/v1.49.553) | Degree 49: The First Revolution | 2026-04-15 | 2 | — | — | [✓](release-notes/v1.49.553/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.552](release-notes/v1.49.552) | Degree 48: The Quiet Retrieval | 2026-04-15 | 3 | — | — | [✓](release-notes/v1.49.552/chapter/03-retrospective.md) | 8 _(no file)_ | F 44 |  |
 | [v1.49.551](release-notes/v1.49.551) | Cartridge Tarball Fix | 2026-04-15 | 4 | — | — | — | — | F 0 |  |
 | [v1.49.550](release-notes/v1.49.550) | Platform Alignment Milestone | 2026-04-15 | 52 | — | — | [✓](release-notes/v1.49.550/chapter/03-retrospective.md) | [6](release-notes/v1.49.550/chapter/04-lessons.md) | F 14 |  |
 | [v1.49.549](release-notes/v1.49.549) | Artemis II: The Space Between the Moon and the Earth | 2026-04-14 | 752 | — | — | [✓](release-notes/v1.49.549/chapter/03-retrospective.md) | [2](release-notes/v1.49.549/chapter/04-lessons.md) | F 10 |  |
-| [v1.49.548](release-notes/v1.49.548) | Degree 47: The Darkroom in Space | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.548/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.547](release-notes/v1.49.547) | Degree 46: The Angry Alligator | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.547/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.546](release-notes/v1.49.546) | Degree 45: Soft Landing | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.546/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.545](release-notes/v1.49.545) | Degree 44: The Roll That Made an Astronaut | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.545/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.544](release-notes/v1.49.544) | Degree 43: Thirty-Five Years of Listening | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.544/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.543](release-notes/v1.49.543) | Degree 42: The First Rendezvous | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.543/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.542](release-notes/v1.49.542) | Degree 41: Fourteen Days in a Volkswagen | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.542/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.541](release-notes/v1.49.541) | Degree 40: Eight Days or Bust | 2026-04-05 | 15 | — | — | [✓](release-notes/v1.49.541/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.540](release-notes/v1.49.540) | Degree 39: The Spacewalk | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.540/chapter/03-retrospective.md) | — | F 25 |  |
-| [v1.49.539](release-notes/v1.49.539) | Degree 38: Gemini Begins | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.539/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.538](release-notes/v1.49.538) | Degree 37: The Final Ranger | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.538/chapter/03-retrospective.md) | — | F 25 |  |
-| [v1.49.537](release-notes/v1.49.537) | Degree 36: Hendrix | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.537/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.536](release-notes/v1.49.536) | Degree 35: First Images of Mars | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.536/chapter/03-retrospective.md) | — | F 25 |  |
-| [v1.49.535](release-notes/v1.49.535) | Degree 34: Mars Begins | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.535/chapter/03-retrospective.md) | — | F 25 |  |
-| [v1.49.534](release-notes/v1.49.534) | Degree 33: The Photographs | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.534/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.533](release-notes/v1.49.533) | Degree 32: Cameras Failed | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.533/chapter/03-retrospective.md) | — | F 25 |  |
-| [v1.49.532](release-notes/v1.49.532) | Degree 31: First Interplanetary | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.532/chapter/03-retrospective.md) | — | F 25 |  |
-| [v1.49.531](release-notes/v1.49.531) | Degree 30: The Genius | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.531/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.530](release-notes/v1.49.530) | Degree 29: The Rough Edge | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.530/chapter/03-retrospective.md) | — | F 25 |  |
-| [v1.49.529](release-notes/v1.49.529) | Degree 28: Impact Without Data | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.529/chapter/03-retrospective.md) | — | F 25 |  |
-| [v1.49.528](release-notes/v1.49.528) | Degree 27: The Near Miss | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.528/chapter/03-retrospective.md) | — | F 28 |  |
-| [v1.49.527](release-notes/v1.49.527) | Degree 26: The Second Failure | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.527/chapter/03-retrospective.md) | — | F 38 |  |
-| [v1.49.526](release-notes/v1.49.526) | Degree 25: The Archetype | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.526/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.525](release-notes/v1.49.525) | Degree 24: Faith 7 | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.525/chapter/03-retrospective.md) | — | F 35 |  |
-| [v1.49.524](release-notes/v1.49.524) | Degree 23: The Precision Flight | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.524/chapter/03-retrospective.md) | — | F 39 |  |
-| [v1.49.523](release-notes/v1.49.523) | Degree 22: Luminescence | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.523/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.522](release-notes/v1.49.522) | Degree 21: Godspeed | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.522/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.521](release-notes/v1.49.521) | Degree 20: The Bell That Sank | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.521/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.520](release-notes/v1.49.520) | Degree 19: The Leap | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.520/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.519](release-notes/v1.49.519) | Degree 18: The Ascending Spiral | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.519/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.518](release-notes/v1.49.518) | Degree 17: The Test Subject | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.518/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.517](release-notes/v1.49.517) | Degree 16: Four Inches | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.517/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.516](release-notes/v1.49.516) | Degree 15: The Weather Eye | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.516/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.515](release-notes/v1.49.515) | Degree 14: The Reflector | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.515/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.514](release-notes/v1.49.514) | Degree 13: The Long Call | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.514/chapter/03-retrospective.md) | — | F 39 |  |
-| [v1.49.513](release-notes/v1.49.513) | Degree 12: The Prodigal and the Irruption | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.513/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.512](release-notes/v1.49.512) | Degree 11: The Edge | 2026-04-05 | 2 | — | — | [✓](release-notes/v1.49.512/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.511](release-notes/v1.49.511) | Degree 10: The Noise Floor | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.511/chapter/03-retrospective.md) | — | F 41 |  |
-| [v1.49.510](release-notes/v1.49.510) | Degree 9: The Confirmation | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.510/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.509](release-notes/v1.49.509) | Degree 8: The Threshold of Perception | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.509/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.508](release-notes/v1.49.508) | Degree 7: The Harmonic Series | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.508/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.507](release-notes/v1.49.507) | Degree 6: The Erasure and the Question | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.507/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.506](release-notes/v1.49.506) | Degree 5: Escape Velocity | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.506/chapter/03-retrospective.md) | — | F 46 |  |
-| [v1.49.505](release-notes/v1.49.505) | Degree 4: The Indicator Species | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.505/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.504](release-notes/v1.49.504) | Degree 3: The Meaning-Maker | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.504/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.503](release-notes/v1.49.503) | Degree 2: The Infrastructure Builder | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.503/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.502](release-notes/v1.49.502) | Degree 1: Pioneer Signal | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.502/chapter/03-retrospective.md) | — | F 44 |  |
-| [v1.49.501](release-notes/v1.49.501) | Degree 0: The Paired Engine Begins | 2026-04-04 | 146 | — | — | [✓](release-notes/v1.49.501/chapter/03-retrospective.md) | — | F 38 |  |
+| [v1.49.548](release-notes/v1.49.548) | Degree 47: The Darkroom in Space | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.548/chapter/03-retrospective.md) | 8 _(no file)_ | F 44 |  |
+| [v1.49.547](release-notes/v1.49.547) | Degree 46: The Angry Alligator | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.547/chapter/03-retrospective.md) | 8 _(no file)_ | F 44 |  |
+| [v1.49.546](release-notes/v1.49.546) | Degree 45: Soft Landing | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.546/chapter/03-retrospective.md) | 8 _(no file)_ | F 44 |  |
+| [v1.49.545](release-notes/v1.49.545) | Degree 44: The Roll That Made an Astronaut | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.545/chapter/03-retrospective.md) | 7 _(no file)_ | F 44 |  |
+| [v1.49.544](release-notes/v1.49.544) | Degree 43: Thirty-Five Years of Listening | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.544/chapter/03-retrospective.md) | 7 _(no file)_ | F 44 |  |
+| [v1.49.543](release-notes/v1.49.543) | Degree 42: The First Rendezvous | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.543/chapter/03-retrospective.md) | 8 _(no file)_ | F 44 |  |
+| [v1.49.542](release-notes/v1.49.542) | Degree 41: Fourteen Days in a Volkswagen | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.542/chapter/03-retrospective.md) | 7 _(no file)_ | F 44 |  |
+| [v1.49.541](release-notes/v1.49.541) | Degree 40: Eight Days or Bust | 2026-04-05 | 15 | — | — | [✓](release-notes/v1.49.541/chapter/03-retrospective.md) | 6 _(no file)_ | F 44 |  |
+| [v1.49.540](release-notes/v1.49.540) | Degree 39: The Spacewalk | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.540/chapter/03-retrospective.md) | 6 _(no file)_ | F 25 |  |
+| [v1.49.539](release-notes/v1.49.539) | Degree 38: Gemini Begins | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.539/chapter/03-retrospective.md) | 7 _(no file)_ | F 44 |  |
+| [v1.49.538](release-notes/v1.49.538) | Degree 37: The Final Ranger | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.538/chapter/03-retrospective.md) | 6 _(no file)_ | F 25 |  |
+| [v1.49.537](release-notes/v1.49.537) | Degree 36: Hendrix | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.537/chapter/03-retrospective.md) | 8 _(no file)_ | F 44 |  |
+| [v1.49.536](release-notes/v1.49.536) | Degree 35: First Images of Mars | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.536/chapter/03-retrospective.md) | 6 _(no file)_ | F 25 |  |
+| [v1.49.535](release-notes/v1.49.535) | Degree 34: Mars Begins | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.535/chapter/03-retrospective.md) | 6 _(no file)_ | F 25 |  |
+| [v1.49.534](release-notes/v1.49.534) | Degree 33: The Photographs | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.534/chapter/03-retrospective.md) | 6 _(no file)_ | F 44 |  |
+| [v1.49.533](release-notes/v1.49.533) | Degree 32: Cameras Failed | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.533/chapter/03-retrospective.md) | 6 _(no file)_ | F 25 |  |
+| [v1.49.532](release-notes/v1.49.532) | Degree 31: First Interplanetary | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.532/chapter/03-retrospective.md) | 6 _(no file)_ | F 25 |  |
+| [v1.49.531](release-notes/v1.49.531) | Degree 30: The Genius | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.531/chapter/03-retrospective.md) | 6 _(no file)_ | F 44 |  |
+| [v1.49.530](release-notes/v1.49.530) | Degree 29: The Rough Edge | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.530/chapter/03-retrospective.md) | 6 _(no file)_ | F 25 |  |
+| [v1.49.529](release-notes/v1.49.529) | Degree 28: Impact Without Data | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.529/chapter/03-retrospective.md) | 6 _(no file)_ | F 25 |  |
+| [v1.49.528](release-notes/v1.49.528) | Degree 27: The Near Miss | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.528/chapter/03-retrospective.md) | 7 _(no file)_ | F 28 |  |
+| [v1.49.527](release-notes/v1.49.527) | Degree 26: The Second Failure | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.527/chapter/03-retrospective.md) | 5 _(no file)_ | F 38 |  |
+| [v1.49.526](release-notes/v1.49.526) | Degree 25: The Archetype | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.526/chapter/03-retrospective.md) | 6 _(no file)_ | F 44 |  |
+| [v1.49.525](release-notes/v1.49.525) | Degree 24: Faith 7 | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.525/chapter/03-retrospective.md) | 3 _(no file)_ | F 35 |  |
+| [v1.49.524](release-notes/v1.49.524) | Degree 23: The Precision Flight | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.524/chapter/03-retrospective.md) | 4 _(no file)_ | F 39 |  |
+| [v1.49.523](release-notes/v1.49.523) | Degree 22: Luminescence | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.523/chapter/03-retrospective.md) | 7 _(no file)_ | F 44 |  |
+| [v1.49.522](release-notes/v1.49.522) | Degree 21: Godspeed | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.522/chapter/03-retrospective.md) | 7 _(no file)_ | F 44 |  |
+| [v1.49.521](release-notes/v1.49.521) | Degree 20: The Bell That Sank | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.521/chapter/03-retrospective.md) | 6 _(no file)_ | F 44 |  |
+| [v1.49.520](release-notes/v1.49.520) | Degree 19: The Leap | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.520/chapter/03-retrospective.md) | 7 _(no file)_ | F 44 |  |
+| [v1.49.519](release-notes/v1.49.519) | Degree 18: The Ascending Spiral | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.519/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.518](release-notes/v1.49.518) | Degree 17: The Test Subject | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.518/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.517](release-notes/v1.49.517) | Degree 16: Four Inches | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.517/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.516](release-notes/v1.49.516) | Degree 15: The Weather Eye | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.516/chapter/03-retrospective.md) | 10 _(no file)_ | F 44 |  |
+| [v1.49.515](release-notes/v1.49.515) | Degree 14: The Reflector | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.515/chapter/03-retrospective.md) | 1/10 _(no file)_ | F 44 |  |
+| [v1.49.514](release-notes/v1.49.514) | Degree 13: The Long Call | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.514/chapter/03-retrospective.md) | 10 _(no file)_ | F 39 |  |
+| [v1.49.513](release-notes/v1.49.513) | Degree 12: The Prodigal and the Irruption | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.513/chapter/03-retrospective.md) | 8 _(no file)_ | F 44 |  |
+| [v1.49.512](release-notes/v1.49.512) | Degree 11: The Edge | 2026-04-05 | 2 | — | — | [✓](release-notes/v1.49.512/chapter/03-retrospective.md) | 8 _(no file)_ | F 44 |  |
+| [v1.49.511](release-notes/v1.49.511) | Degree 10: The Noise Floor | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.511/chapter/03-retrospective.md) | 7 _(no file)_ | F 41 |  |
+| [v1.49.510](release-notes/v1.49.510) | Degree 9: The Confirmation | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.510/chapter/03-retrospective.md) | 6 _(no file)_ | F 44 |  |
+| [v1.49.509](release-notes/v1.49.509) | Degree 8: The Threshold of Perception | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.509/chapter/03-retrospective.md) | 7 _(no file)_ | F 44 |  |
+| [v1.49.508](release-notes/v1.49.508) | Degree 7: The Harmonic Series | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.508/chapter/03-retrospective.md) | 7 _(no file)_ | F 44 |  |
+| [v1.49.507](release-notes/v1.49.507) | Degree 6: The Erasure and the Question | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.507/chapter/03-retrospective.md) | 6 _(no file)_ | F 44 |  |
+| [v1.49.506](release-notes/v1.49.506) | Degree 5: Escape Velocity | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.506/chapter/03-retrospective.md) | 7 _(no file)_ | F 46 |  |
+| [v1.49.505](release-notes/v1.49.505) | Degree 4: The Indicator Species | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.505/chapter/03-retrospective.md) | 5 _(no file)_ | F 44 |  |
+| [v1.49.504](release-notes/v1.49.504) | Degree 3: The Meaning-Maker | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.504/chapter/03-retrospective.md) | 5 _(no file)_ | F 44 |  |
+| [v1.49.503](release-notes/v1.49.503) | Degree 2: The Infrastructure Builder | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.503/chapter/03-retrospective.md) | 4 _(no file)_ | F 44 |  |
+| [v1.49.502](release-notes/v1.49.502) | Degree 1: Pioneer Signal | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.502/chapter/03-retrospective.md) | 4 _(no file)_ | F 44 |  |
+| [v1.49.501](release-notes/v1.49.501) | Degree 0: The Paired Engine Begins | 2026-04-04 | 146 | — | — | [✓](release-notes/v1.49.501/chapter/03-retrospective.md) | 5 _(no file)_ | F 38 |  |
 | [v1.49.500](release-notes/v1.49.500) | Degree 359: Unwound Leaves Turn Inside You + Puget Sound in Silence | 2026-04-03 | 0 | — | — | — | — | F 15 |  |
 | [v1.49.499](release-notes/v1.49.499) | Degree 358: Sleater-Kinney Dig Me Out + All-Species Dawn Chorus | 2026-04-03 | 0 | — | — | — | — | F 15 |  |
 | [v1.49.498](release-notes/v1.49.498) | Degree 357: Bikini Kill + Orca Female-Led Hunt | 2026-04-03 | 0 | — | — | — | — | F 10 |  |
@@ -384,7 +386,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.186](release-notes/v1.49.186) | — | 2026-03-30 | 1 | — | — | — | — | F 43 |  |
 | [v1.49.185](release-notes/v1.49.185) | — | 2026-03-30 | 1 | — | — | — | — | F 43 |  |
 | [v1.49.184](release-notes/v1.49.184) | — | 2026-03-30 | 2 | — | — | — | — | F 45 |  |
-| [v1.49.183](release-notes/v1.49.183) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.183/chapter/03-retrospective.md) | — | F 35 |  |
+| [v1.49.183](release-notes/v1.49.183) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.183/chapter/03-retrospective.md) | 4/8 _(no file)_ | F 35 |  |
 | [v1.49.182](release-notes/v1.49.182) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.182/chapter/03-retrospective.md) | [5/15](release-notes/v1.49.182/chapter/04-lessons.md) | D 65 |  |
 | [v1.49.181](release-notes/v1.49.181) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.181/chapter/03-retrospective.md) | [4/12](release-notes/v1.49.181/chapter/04-lessons.md) | F 55 |  |
 | [v1.49.180](release-notes/v1.49.180) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.180/chapter/03-retrospective.md) | [2/7](release-notes/v1.49.180/chapter/04-lessons.md) | F 55 |  |
