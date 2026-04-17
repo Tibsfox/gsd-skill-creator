@@ -7,10 +7,41 @@
 //   node tools/release-history/score-completeness.mjs v1.49.165  # one release
 //   node tools/release-history/score-completeness.mjs --summary  # print distribution
 
-import { readFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { join, dirname } from 'node:path';
 import { loadConfig, REPO_ROOT } from './config.mjs';
 import { openDb } from './db.mjs';
+
+// Build the scored corpus from README.md + any chapter/*.md files.
+// Many degrees keep rich retrospective + lessons content in the chapter
+// tree; scoring on README alone misses that content. Concatenate with
+// separators so section-header regexes still work correctly across the
+// boundary.
+function buildReleaseCorpus(readmePath, version) {
+  let text = readFileSync(readmePath, 'utf8');
+  const chapterDir = join(dirname(readmePath), 'chapter');
+  if (!existsSync(chapterDir)) return text;
+  let chapterNames;
+  try {
+    chapterNames = readdirSync(chapterDir)
+      .filter(n => n.endsWith('.md'))
+      .sort();
+  } catch {
+    return text;
+  }
+  for (const name of chapterNames) {
+    try {
+      let chapter = readFileSync(join(chapterDir, name), 'utf8');
+      // Demote all headings by one level when concatenating so the
+      // chapter's H1 title becomes H2 inside the combined text. This
+      // keeps scorer regexes (which look for `## Lessons`, `## Retro`,
+      // etc.) working without a separate heading-level dimension.
+      chapter = chapter.replace(/^(#{1,5})(\s+)/gm, '#$1$2');
+      text += '\n\n<!-- chapter: ' + name + ' -->\n\n' + chapter;
+    } catch {}
+  }
+  return text;
+}
 
 // --- dimension graders ---
 // Each returns an integer score for its dimension.
@@ -34,7 +65,7 @@ function scoreHeaderBlock(text) {
 
 // Summary section with bolded findings — **SOMETHING** at line start
 function scoreSummaryFindings(text) {
-  const summary = extractSection(text, /^##\s+Summary\s*$/mi);
+  const summary = extractSection(text, /^##\s+Summary\b/mi);
   if (!summary) return 0;
   // Count bolded lead-ins: lines starting with **PHRASE.** or **PHRASE:**
   const findings = [...summary.matchAll(/^\s*\*\*[^*\n]{3,100}(?:\.|:)\*\*/gm)].length;
@@ -48,7 +79,7 @@ function scoreSummaryFindings(text) {
 
 // Key Features table — must be a pipe-table after Key Features heading
 function scoreKeyFeatures(text) {
-  const section = extractSection(text, /^##\s+Key Features\s*$/mi);
+  const section = extractSection(text, /^##\s+Key Features\b/mi);
   if (!section) return 0;
   const tableLines = section.split(/\r?\n/).filter(l => /^\s*\|/.test(l)).length;
   if (tableLines >= 5) return 10;
@@ -84,17 +115,30 @@ function scoreRetrospective(text) {
   return score;
 }
 
-// Lessons Learned with numbered entries
+// Lessons Learned with numbered entries OR bullets (both formats occur).
+// When the combined corpus contains multiple Lessons sections (README
+// with bullets + chapter with numbered), take the best score across all.
 function scoreLessons(text) {
-  const section = extractSection(text, /^#{2,4}\s+Lessons(?:\s+Learned)?\s*$/mi);
-  if (!section) return 0;
-  // Numbered: "1. **..." or just "1. ..."
-  const numbered = [...section.matchAll(/^\s*\d+\.\s+/gm)].length;
-  if (numbered >= 8) return 10;
-  if (numbered >= 5) return 7;
-  if (numbered >= 3) return 4;
-  if (numbered >= 1) return 2;
-  return 0;
+  const re = /^#{2,4}\s+Lessons(?:\s+Learned)?\b/gmi;
+  let best = 0;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    // Slice from match to next heading of same-or-higher level
+    const start = m.index + m[0].length;
+    const tail = text.slice(start);
+    const endMatch = tail.match(/^#{1,4}\s+/m);
+    const section = endMatch ? tail.slice(0, endMatch.index) : tail;
+    const numbered = [...section.matchAll(/^\s*\d+\.\s+/gm)].length;
+    const bulleted = [...section.matchAll(/^\s*[-*]\s+\*\*/gm)].length;
+    const count = Math.max(numbered, bulleted);
+    let s = 0;
+    if (count >= 8) s = 10;
+    else if (count >= 5) s = 7;
+    else if (count >= 3) s = 4;
+    else if (count >= 1) s = 2;
+    if (s > best) best = s;
+  }
+  return best;
 }
 
 // Cross-references
@@ -224,7 +268,7 @@ function scoreRelease(text, releaseType) {
 
 // Word count in the Summary section — rewards long-form essays.
 function scoreProseDepth(text) {
-  const summary = extractSection(text, /^##\s+Summary\s*$/mi);
+  const summary = extractSection(text, /^##\s+Summary\b/mi);
   if (!summary) return 0;
   const words = (summary.trim().match(/\S+/g) || []).length;
   if (words >= 2000) return 15;
@@ -237,7 +281,7 @@ function scoreProseDepth(text) {
 // Density of capitalized multi-word noun phrases in the Summary —
 // a proxy for named entities (people, places, songs, taxa, missions).
 function scoreNamedEntities(text) {
-  const summary = extractSection(text, /^##\s+Summary\s*$/mi);
+  const summary = extractSection(text, /^##\s+Summary\b/mi);
   if (!summary) return 0;
   // Multi-word capitalized sequences: "Gus Grissom", "Lunar Orbiter 3",
   // "Sound of Puget Sound", "Varied Thrush", etc.
@@ -258,7 +302,7 @@ function scoreNamedEntities(text) {
 // proxy — count mentions of "the same", "both", "each", "mirror"
 // as prose-crosslink signals.
 function scoreProseCrossSync(text) {
-  const summary = extractSection(text, /^##\s+Summary\s*$/mi);
+  const summary = extractSection(text, /^##\s+Summary\b/mi);
   if (!summary) return 0;
   const paragraphs = summary.split(/\n\n+/);
   const crossWords = /\b(the same|both sides|each (side|degree)|mirror|synchroniz|at the same time|convergenc|paired|in parallel)\b/i;
@@ -322,7 +366,7 @@ async function main() {
       scored++;
       continue;
     }
-    const text = readFileSync(readmePath, 'utf8');
+    const text = buildReleaseCorpus(readmePath, r.version);
     const { score, grade, dimensions } = scoreRelease(text, r.release_type);
     dist[grade]++;
     scored++;
