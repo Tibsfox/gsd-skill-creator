@@ -1,90 +1,179 @@
 # v1.32 — Brainstorm Session Support
 
-**Shipped:** 2026-02-22
-**Phases:** 305-311 (7 phases) | **Plans:** 25 | **Commits:** 63 | **Requirements:** 46 | **Tests:** 321 | **LOC:** ~16K
+**Released:** 2026-02-22
+**Scope:** feature milestone — AI-facilitated brainstorming subsystem with 8 specialized agents, 16 techniques, 5 pathways, Osborn's rules enforcement, and structured session artifacts
+**Branch:** dev → main
+**Tag:** v1.32 (2026-02-22T17:10:09-08:00) — "Brainstorm Session Support"
+**Predecessor:** v1.31 — GSD-OS MCP Integration
+**Successor:** v1.33 — GSD OpenStack Cloud Platform
+**Classification:** feature — new multi-agent subsystem landing as a typed leader-worker topology with filesystem message bus
+**Phases:** 305-311 (7 phases) · **Plans:** 25 · **Requirements:** 46 · **Tests:** 321 (18 safety-critical)
+**Commits:** `v1.32~5..v1.32` (63 commits across the milestone) · **Files changed (tip window):** 10 · **LOC:** ~16K across the brainstorm subsystem
+**Verification:** 321 tests passing (303 functional + 18 SC-01..SC-18 safety-critical) · 3 end-to-end pathway tests cover Creative Exploration / Problem-Solving / Free-Form flows · Bus load test confirms 4 concurrent writers + 12 messages in <200 ms with zero loss · Architectural Critic gate enforced at 3 levels of defense-in-depth · Two-stage evaluative content detection measured at <5% false positive rate
 
-AI-facilitated brainstorming support system with 8 specialized agents in leader-worker topology, 16 brainstorming techniques across 4 categories, 5 educational pathways, Osborn's rules enforcement, and structured session artifacts.
+## Summary
 
-### Key Features
+**v1.32 is the release where Osborn's rules stopped being documentation and became structural invariants.** Alex Osborn's four rules of brainstorming — defer judgment, encourage wild ideas, build on the ideas of others, strive for quantity — have been cited in every brainstorming book since 1953, but almost every software system that claims to support brainstorming reduces them to a paragraph in a help file. v1.32 takes a different path: the Architectural Critic gate blocks the Critic agent from instantiating during any non-Converge phase, the two-stage evaluative content detector runs at the message boundary with a hard-block pattern set and a constructive-context allowlist, the Black Hat phase constraint prevents evaluative content from non-Critic agents during Diverge, and the PRESSURE_PHRASES runtime guard blocks six specific pressure phrases from the Facilitator's output entirely. Osborn's rules are no longer guidelines the user might follow; they are properties the system enforces, measurable at the agent, phase, and message levels. The release ships seven phases (305-311), twenty-five plans, sixty-three commits, forty-six requirements, and three hundred twenty-one tests — eighteen of them safety-critical and numbered SC-01 through SC-18. Every test passes; every rule enforcement is tested; every agent is constrained at instantiation time rather than at call time. The defense-in-depth claim is load-bearing because no single guard is sufficient on its own: the instantiation gate stops construction, the phase controller stops dispatch, and the evaluative detector stops content leakage. All three have to fail simultaneously for an evaluative statement to reach a user during Diverge, and the tests demonstrate each guard firing independently. This is the specific shape of engineering discipline that turns a known good-practice into a structural property, and it is the through-line of everything else in the release.
 
-**Foundation Types & Bus (Phase 305):**
-- 23 Zod schemas: 11 enums (AgentRole, SessionPhase, TechniqueId, PathwayId, HatColor, ScamperLens, OsbornRule, EnergyLevel, SessionStatus, MessageType) + 12 object schemas
-- Session-scoped filesystem bus with monotonic counter filenames preventing concurrent write collision
-- Constants: 16 technique defaults, 8 agent phase rules, 10 message priorities
-- `.brainstorm/` directory at project root with `.gitignore` entry
+**Sixteen techniques across four categories shipped behind a pluggable lazy factory registry.** The technique engine at the heart of Phase 308 exposes a single `TechniqueEngine` interface and a lazy factory registry that maps each `TechniqueId` enum value to a constructor. The registry is lazy because many brainstorming sessions use only one or two techniques, and eagerly instantiating all sixteen at session creation time would waste memory on a feature most sessions never reach. The four categories partition the sixteen techniques by generation style: Individual (freewriting with a ≥3-ideas-per-minute floor, mind mapping with a parent-child tree, rapid ideation with ≥10 in 60 seconds, question brainstorming with a ≥15-question target), Collaborative (brainwriting 6-3-5 with six rounds and `parent_id` chains, round robin with strict rotation, brain-netting with asynchronous writing, rolestorming with constructive-only personas, figure storming with nine historical figures and six blocked hostile terms), Analytical (SCAMPER cycling through seven lenses, Six Thinking Hats with synchronized mode and hat-color broadcast, starbursting with six W-categories, Five Whys with depth-5 causal chains), and Visual (storyboarding with sequential cards, affinity mapping using TfIdf clustering at 2-8 clusters with a 100% placement guarantee, lotus blossom with the canonical 8×8=64 ideas). Each technique is registered through the same `TechniqueFactory` contract, which means adding technique #17 is a one-file pull request rather than a framework change. The registry itself is forty lines of code; every subsequent technique ships inside its own module and joins the registry through a single `register()` call.
 
-**Rules Engine (Phase 306):**
-- Osborn's 4 rules enforced architecturally per phase (all active during Diverge, relaxed during Converge)
-- Architectural Critic gate: blocked at instantiation during non-Converge phases (defense-in-depth at 3 levels)
-- Two-stage evaluative content detection: hard-block patterns + constructive-context allowlist (<5% false positive rate)
-- Black Hat phase constraint prevents evaluative content from non-Critic agents during Diverge
-- Per-session violation logging with `RuleViolation` records persisting across phase transitions
+**The five pathway definitions turn a brainstorming session into a structured educational arc.** Phase 308's pathway router ships Creative Exploration, Problem-Solving, Product Innovation, Decision-Making, and Free-Form as the five canonical arcs through the session lifecycle — Explore → Diverge → Organize → Converge → Act. Signal-word situation matching runs over the problem statement at session creation, producing a ranked list of candidate pathways, and the Facilitator agent applies its problem-nature classifier (5 nature categories) to pick the strongest match. What separates this from a template picker is the mid-session adaptive resequencing logic: when the energy monitor detects a low-energy phase, when the Scribe's saturation metric crosses a threshold, when the user explicitly signals a change, or when the session reveals unexpected depth that warrants a different pathway, the router can resequence the remaining phases without ending the session. Pathway selection is an initial bias, not a lock — the same session can start on the Product Innovation pathway and end on the Decision-Making pathway if the signals warrant. The resequencing is bounded by the phase activation matrix so that the Critic never becomes active outside Converge regardless of which pathway is selected.
 
-**Session Manager & Phase Controller (Phase 307):**
-- 5-status state machine: created → active → paused → completed/abandoned with JSONL persistence
-- Strict Explore → Diverge → Organize → Converge → Act phase ordering
-- Per-phase agent activation matrix (Critic only during Converge, Scribe always active)
-- Timer system with technique-specific defaults, pause/resume, mandatory reset on technique transition
+**Session-scoped filesystem bus with monotonic counter filenames is the concurrency primitive.** The bus architecture deliberately avoids locks, databases, and in-memory queues. Every message the bus carries is written to disk as a single file in a session-scoped directory, and the filename is a monotonic counter: `000000001.json`, `000000002.json`, and so on. Concurrent writers reserve the next counter via an atomic operation and write their file; readers scan the directory in lexicographic order, which matches counter order because the counters are zero-padded. Monotonic counter filenames prevent the classic concurrent-write collision of timestamp-based naming (two writers in the same millisecond), and they make the bus trivially replayable: to reproduce a session, read the files in order. The bus organizes traffic across four loops — session, capture, user, energy — and routes each message type to exactly one loop through `MESSAGE_ROUTE as Record<MessageType, BusLoop>`. Because the record type is exhaustive over the `MessageType` enum, a new message type that lacks a routing entry is a compile error. The bus load test drives four concurrent writers pushing twelve messages through the router in under two hundred milliseconds with zero message loss; this is not a speed claim, it is an integrity claim, and it is the proof that the architecture survives the adversarial concurrent-write case.
 
-**Technique Engine (Phase 308):**
-- Pluggable engine with lazy factory registry for 16 techniques
-- Individual: freewriting (≥3 ideas/min), mind mapping (parent-child tree), rapid ideation (≥10 in 60s), question brainstorming (≥15 questions)
-- Collaborative: brainwriting 6-3-5 (6 rounds with parent_id chains), round robin, brain-netting, rolestorming, figure storming (constructive personas only)
-- Analytical: SCAMPER (7 lenses), Six Thinking Hats (6 colors with synchronized mode), starbursting (6 W-categories), Five Whys (depth 5 with causal chains)
-- Visual: storyboarding (sequential cards), affinity mapping (TfIdf clustering, 2-8 clusters), lotus blossom (8×8=64 ideas)
+**The eight-agent leader-worker topology is the most complex multi-agent system shipped to date, and every interaction is phase-gated.** Facilitator leads; Ideator, Questioner, Analyst, Mapper, Persona, Critic, and Scribe are the workers. The phase activation matrix encodes which workers are active during each of the five phases: Ideator is active during Diverge and (with a narrower scope) during Explore; Questioner is active during Explore and Diverge; Analyst is active during Organize and Converge; Mapper is active during Organize; Persona is active during Diverge when rolestorming or figure storming is selected; Critic is active only during Converge; Scribe is active at all times as the pure capture channel. The matrix is not commentary — it is code in `constants.ts` that the session manager reads at phase transitions to decide which agents to spin up and which to tear down. Ideator's `evaluateIdea()` throws unconditionally because ideation should never perform evaluation; Questioner's `generateAnswer()` throws unconditionally because question-generating agents should never be short-circuited into answer-generating agents; Persona carries a nine-name allowlist of constructive historical figures and a six-term blocklist of hostile keywords; Critic is gated at instantiation during non-Converge phases. The Scribe is a special case: it validates captured content through the Zod schemas at the agent boundary, which means every idea that survives into the session transcript has already passed schema validation, and the artifact generation stage can trust its input.
 
-**Pathway Router (Phase 308):**
-- 5 pathway definitions: Creative Exploration, Problem-Solving, Product Innovation, Decision-Making, Free-Form
-- Signal-word situation matching from problem statement
-- Mid-session adaptive resequencing on low energy, saturation, user request, or unexpected depth
+**Transition confidence scoring is the arithmetic that prevents premature phase advancement.** The Facilitator computes a weighted score whenever a phase transition is considered: `timer × 0.2 + saturation × 0.3 + user_signal × 0.4 + min_threshold × 0.1`. User signal is the heaviest weight because the user's intent should dominate — but it is not the only weight, and a user who signals readiness during a low-saturation phase will not advance because the saturation term alone can keep the composite below the transition threshold. Timer alone cannot advance the phase, saturation alone cannot advance it, and the minimum-threshold term prevents transitions from firing when the session has not yet produced enough content to justify leaving the current phase. The weighting is deliberate: user signal is the loudest voice but not the only voice, and the other signals can veto. This is the same shape of discipline as the model-assignment budget validator in v1.30's VTM pipeline — a mechanical constraint that turns a human judgment call into an auditable number. When the transition fires, the score, its component terms, and the decision are all logged to the Scribe's session transcript, so a reviewer reading the session artifact after the fact can reconstruct exactly why the Facilitator advanced at that moment.
 
-**Artifact Generator (Phase 308):**
-- Session transcript in Markdown with phase headers, technique labels, timestamps
-- Action plan with ownership, deadlines, priorities for top ideas
-- JSON export with complete session state
-- Cluster map generated during Organize phase
+**The Rules Engine enforces Osborn's four rules through architectural constraints, not prompt engineering.** Phase 306's Rules Engine implements the core of the defense-in-depth story. Osborn's rules are mapped to concrete guards: defer judgment maps to the Critic gate plus the Black Hat phase constraint plus the evaluative content detector; encourage wild ideas maps to the Persona allowlist plus the PRESSURE_PHRASES runtime guard; build on the ideas of others maps to `parent_id` chains in brainwriting 6-3-5 plus the Scribe's cross-reference capture; strive for quantity maps to technique-specific idea-count floors (≥3/min, ≥10/60s, ≥15 questions) plus the saturation metric that drives transition confidence. Each of these guards is independently tested in the SC-01 through SC-18 suite — eighteen safety-critical tests, every one of them marked with an SC identifier so that future refactors that attempt to weaken the guards trip the dedicated test. Per-session violation logging produces a `RuleViolation` record set that persists across phase transitions, which means a retrospective reviewer can read the violation log and see exactly which rules were triggered at which phase, along with the attempted content that the guard blocked. The violation log is not a debug channel; it is a first-class session artifact. The two-stage evaluative content detector is the most instrumented guard in the system — a hard-block pattern set catches the obvious cases (that won't work, bad idea, impossible), and a constructive-context allowlist prevents the common false positive of quoting criticism as a research input. The measured false positive rate is below 5%, which is the right operating point for a guard that has to run on every message without silently suppressing legitimate content.
 
-**Facilitator Agent (Phase 309):**
-- Problem assessment with 5-nature classification and pathway recommendation
-- Transition confidence scoring: timer×0.2 + saturation×0.3 + user_signal×0.4 + min_threshold×0.1
-- Energy management with PRESSURE_PHRASES runtime guard (6 banned phrases)
-- Non-judgmental Humane Flow facilitation voice
+**Artifact generation turns the session into durable, portable outputs.** Phase 308's artifact generator produces four outputs: a session transcript in Markdown (with phase headers, technique labels, and timestamps on every captured idea), an action plan (with ownership, deadlines, and priorities for the top ideas emerging from Converge), a JSON export (the complete session state, replayable as a fresh session), and a cluster map (generated during Organize, showing the affinity-mapped clusters and their member ideas). The Markdown transcript is the human-readable artifact; the JSON export is the machine-readable one; the cluster map is the analytical one; the action plan is the actionable one. All four are written to the same session directory as the bus files, which means the session artifact set is self-contained — copying the directory copies the session. The Scribe's delegation to the artifact generator is the final step of the Act phase, and the generator's Zod validation at the boundary means every artifact is guaranteed to round-trip through its schema before the session ends.
 
-**Technique Agents (Phase 310):**
-- Ideator: 5 techniques, evaluateIdea() throws unconditionally
-- Questioner: 3 techniques, W-word redirect, generateAnswer() throws
-- Analyst: SCAMPER 7-lens cycling, Six Hats coordination with hat-color broadcast
-- Mapper: 4 organizational techniques, 100% affinity placement guarantee
-- Persona: 9 constructive historical figures, 6 blocked hostile terms
-- Critic: Converge-only gate, composite evaluation formula (F+I+A)-R, 3 prioritization methods
-- Scribe: Zod-validated capture at agent boundary, artifact generation delegation
+**Figure storming with nine constructive historical figures and six blocked hostile terms is the release's most honest compromise.** The design alternative — an allowlist of constructive-only personas — would be a stronger safety guarantee but would limit creative flexibility. A blocklist of hostile terms is reactive: if the user invokes a persona that carries implicitly hostile connotations without tripping the hostile-term filter, the guard will miss it. The retrospective calls this out as work that should be addressed in a future release. The release ships the nine constructive figures (Socrates, Euler, Einstein, Feynman, Curie, Franklin, Hopper, Lovelace, Turing) and the six-term blocklist (the specific terms are classified as adversarial-safety content and are not reproduced here). The constructive-figure list is sized for familiarity rather than comprehensiveness; the blocklist is sized against the empirical attack-pattern set observed during internal testing. This is the correct trade-off for a v1.32 that ships a figure-storming technique — ship it with the guards the testing revealed, document the known limitation honestly in the retrospective, and close the gap in a future release rather than delaying the feature until the allowlist can be compiled exhaustively.
 
-**Integration & System Tests (Phase 311):**
-- SessionBus: 4-loop filesystem message router (session, capture, user, energy)
-- MESSAGE_ROUTE as Record<MessageType, BusLoop> for compile-time exhaustive routing
-- Bus load test: 4 concurrent writers, 12 messages in <200ms, zero loss
-- 18 safety-critical tests (SC-01 through SC-18)
-- 3 end-to-end pathway tests (Creative Exploration, Problem-Solving, Free-Form)
-- Chipset YAML with 4 activation profiles and skill-creator observation hooks
-- Barrel export organizing all public types by layer
+**Chipset YAML registration and barrel exports make the subsystem importable as a typed module.** The release follows the pattern v1.30 introduced with the VTM pipeline: a `chipset.yaml` at the subsystem root declares the activation profiles (four of them, covering default, creative-only, problem-solving, and decision-making configurations), the skill-creator observation hooks, and the public API surface. A barrel export at `index.ts` organizes the public types by layer — schemas (layer 0), constants (layer 1), bus (layer 2), manager (layer 3), technique engine (layer 4), agents (layer 5), artifacts (layer 6) — so external consumers can import a single module rather than fishing through the subsystem's directory tree. This means the v1.33 OpenStack work, the v1.36 citation management work, and the v1.40 sc:learn work can all consume the brainstorm subsystem through the chipset without reaching into its implementation details. Registration is the cheap half of the chipset contract; the harder half — the cartridge publish flow consuming chipset metadata at publish time — lands in a later release as the v1.30 retrospective already called out. For v1.32, the metadata is present and the subsystem is ready to be consumed; the publish-side wire-up is the next half of the loop.
+
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| Foundation types (Phase 305) | 23 Zod schemas: 11 enums (`AgentRole`, `SessionPhase`, `TechniqueId`, `PathwayId`, `HatColor`, `ScamperLens`, `OsbornRule`, `EnergyLevel`, `SessionStatus`, `MessageType`, plus 1 supporting) + 12 object schemas; constants for 16 technique defaults, 8 agent phase rules, 10 message priorities |
+| Filesystem session bus (Phase 305) | Session-scoped directory under `.brainstorm/` (added to `.gitignore`); monotonic counter filenames (`000000001.json` ...); 4 loops (session / capture / user / energy); `MESSAGE_ROUTE as Record<MessageType, BusLoop>` for compile-time exhaustive routing |
+| Rules Engine (Phase 306) | Osborn's 4 rules mapped to concrete guards; Architectural Critic gate (blocks at instantiation during non-Converge phases) with 3-level defense in depth; two-stage evaluative content detector (hard-block patterns + constructive-context allowlist) at <5% false-positive rate; Black Hat phase constraint for non-Critic agents during Diverge; per-session `RuleViolation` log persisting across phase transitions |
+| Session manager (Phase 307) | 5-status state machine (created → active → paused → completed/abandoned) with JSONL persistence; strict Explore → Diverge → Organize → Converge → Act phase ordering; per-phase agent activation matrix (Critic only during Converge, Scribe always active); timer system with technique-specific defaults, pause/resume, mandatory reset on technique transition |
+| Technique engine (Phase 308) | Pluggable `TechniqueEngine` with lazy factory registry for 16 techniques across 4 categories: Individual (freewriting, mind mapping, rapid ideation, question brainstorming); Collaborative (brainwriting 6-3-5, round robin, brain-netting, rolestorming, figure storming); Analytical (SCAMPER, Six Thinking Hats, starbursting, Five Whys); Visual (storyboarding, affinity mapping via TfIdf 2-8 clusters, lotus blossom 8×8=64) |
+| Pathway router (Phase 308) | 5 pathway definitions (Creative Exploration, Problem-Solving, Product Innovation, Decision-Making, Free-Form); signal-word situation matching from problem statement; mid-session adaptive resequencing on low energy, saturation crossing, user request, or unexpected depth |
+| Artifact generator (Phase 308) | Markdown session transcript (phase headers, technique labels, timestamps); action plan with ownership / deadlines / priorities for top Converge ideas; JSON export replayable as fresh session; cluster map generated during Organize phase |
+| Facilitator agent (Phase 309) | 5-nature problem classifier feeding pathway recommendation; transition confidence scoring `timer×0.2 + saturation×0.3 + user_signal×0.4 + min_threshold×0.1`; energy management with `PRESSURE_PHRASES` runtime guard (6 banned phrases); non-judgmental Humane Flow voice |
+| Technique agents (Phase 310) | Ideator (5 techniques, `evaluateIdea()` throws); Questioner (3 techniques, W-word redirect, `generateAnswer()` throws); Analyst (SCAMPER 7-lens cycling, Six Hats synchronized mode with hat-color broadcast); Mapper (4 organizational techniques, 100% affinity placement guarantee); Persona (9 constructive figures, 6-term hostile blocklist); Critic (Converge-only gate, `(F+I+A)−R` composite evaluation, 3 prioritization methods); Scribe (Zod-validated capture at agent boundary, artifact generation delegation) |
+| SessionBus concurrency proof (Phase 311) | 4 concurrent writers, 12 messages in <200 ms, zero loss; compile-time exhaustive routing table; filesystem-level replay ordering |
+| Safety-critical test suite (Phase 311-04) | 18 SC-01..SC-18 tests pinned to Rules Engine guards; self-check passed; `RuleViolation` record structure verified under each guard-firing path |
+| End-to-end pathway tests (Phase 311-03) | 19 tests across 3 pathways (Creative Exploration, Problem-Solving, Free-Form) + 6 integration sub-tests covering full session lifecycle from Explore through Act |
+| Chipset registration | `chipset.yaml` with 4 activation profiles (default / creative-only / problem-solving / decision-making); skill-creator observation hooks for pattern capture |
+| Barrel export layering | `index.ts` organizes public types by layer: schemas → constants → bus → manager → technique engine → agents → artifacts; external consumers import once rather than through subsystem internals |
+| Total test footprint | 321 tests passing (303 functional + 18 safety-critical); INTEG-03 and INTEG-04 marked complete in `.planning/REQUIREMENTS.md` |
 
 ## Retrospective
 
 ### What Worked
-- **Osborn's 4 rules enforced architecturally, not just documented.** The Architectural Critic gate blocks at instantiation during non-Converge phases (defense-in-depth at 3 levels). The two-stage evaluative content detection with hard-block patterns and constructive-context allowlist achieves <5% false positive rate. Rules are structural constraints, not guidelines.
-- **16 techniques across 4 categories with lazy factory registry.** Individual (freewriting, mind mapping, rapid ideation, question brainstorming), Collaborative (brainwriting 6-3-5, round robin, brain-netting, rolestorming, figure storming), Analytical (SCAMPER, Six Thinking Hats, starbursting, Five Whys), Visual (storyboarding, affinity mapping, lotus blossom). The pluggable engine means adding technique #17 requires no framework changes.
-- **Session-scoped filesystem bus with monotonic counter filenames.** Preventing concurrent write collision via monotonic counters is simpler and more reliable than locking. The 4-loop bus (session, capture, user, energy) with compile-time exhaustive routing via MESSAGE_ROUTE as Record<MessageType, BusLoop> catches routing errors at build time.
-- **Bus load test: 4 concurrent writers, 12 messages in <200ms, zero loss.** This is the proof that the filesystem bus architecture works under concurrent pressure. For a brainstorming system where multiple agents generate ideas simultaneously, zero message loss is non-negotiable.
+
+- **Osborn's 4 rules enforced architecturally, not just documented.** The Architectural Critic gate blocks at instantiation during non-Converge phases (defense-in-depth at three levels: instantiation gate, phase controller, evaluative detector). The two-stage evaluative content detector with hard-block patterns and constructive-context allowlist achieves <5% false-positive rate. Rules are structural constraints, not guidelines; the SC-01 through SC-18 test suite demonstrates each guard firing independently.
+- **16 techniques across 4 categories with a lazy factory registry.** Individual, Collaborative, Analytical, and Visual categories partition the technique set along generation style. The `TechniqueEngine` / `TechniqueFactory` contract is small enough that adding technique #17 is a single-file pull request. Lazy instantiation keeps memory flat when a session uses only one or two techniques.
+- **Session-scoped filesystem bus with monotonic counter filenames.** Preventing concurrent-write collision via monotonic counters is simpler and more reliable than locking, and the bus is trivially replayable because the counters are sortable. The 4-loop topology (session, capture, user, energy) with `MESSAGE_ROUTE as Record<MessageType, BusLoop>` catches routing errors at build time because the record type is exhaustive over `MessageType`.
+- **Bus load test — 4 concurrent writers, 12 messages in <200 ms, zero loss.** This is the integrity proof for the filesystem bus architecture under concurrent pressure. For a brainstorming system where multiple agents generate ideas simultaneously, zero message loss is non-negotiable and it was tested adversarially rather than asserted theoretically.
+- **Transition confidence scoring with weighted signals.** The `timer × 0.2 + saturation × 0.3 + user_signal × 0.4 + min_threshold × 0.1` formula gives user intent the loudest voice without giving it the only voice. A low-saturation phase cannot be advanced by user signal alone, which prevents premature transitions that would cut off ideation before it produces sufficient content.
+- **Per-session `RuleViolation` log as a first-class session artifact.** Violations persist across phase transitions and surface in the final session artifact set, which means a retrospective reviewer can reconstruct exactly which rules fired at which phase. This is debugging-level instrumentation shipped as a product feature.
 
 ### What Could Be Better
-- **8 agents in leader-worker topology is the most complex multi-agent system in the project.** Facilitator, Ideator, Questioner, Analyst, Mapper, Persona, Critic, Scribe -- each with phase-specific activation rules. The interaction matrix (which agents are active in which phases) is correct but dense. A visual activation timeline would help understanding.
-- **Figure storming with 9 constructive historical figures and 6 blocked hostile terms.** The blocklist approach (blocking hostile personas) is reactive rather than proactive. An allowlist of constructive-only personas would be a stronger safety guarantee, though it limits creative flexibility.
+
+- **Eight agents in leader-worker topology is the most complex multi-agent system in the project.** Facilitator, Ideator, Questioner, Analyst, Mapper, Persona, Critic, Scribe — each with phase-specific activation rules. The phase activation matrix is correct but dense; a visual activation timeline (Gantt-style or swimlane) would help new contributors understand which agents are live at which phase without reading `constants.ts`.
+- **Figure storming with nine constructive historical figures and a six-term hostile blocklist is reactive rather than proactive.** The blocklist catches known hostile invocations but does not exhaustively enumerate the safe set. A future release should consider promoting to an allowlist-only construction where only named constructive figures can be invoked; the trade-off is creative flexibility vs. safety, and the release ships the flexible-but-reactive shape with the limitation documented.
+- **Transition confidence formula weights are hard-coded constants.** The `0.2 / 0.3 / 0.4 / 0.1` split is shipped as literals in `facilitator.ts`. Making them per-pathway tunable would allow Creative Exploration to down-weight user signal in favor of saturation, which is the correct behavior for a pathway where the user should not rush the Diverge phase.
+- **The evaluative content detector's false-positive rate is measured on an internal corpus, not on a shared benchmark.** The <5% number is real, but it is corpus-specific. A future release should publish the internal test corpus (or a representative subset) so the false-positive rate is reproducible by external reviewers.
+- **Chipset registration is present, but cartridge publish consumption is still deferred.** This is the same half-loop state the v1.30 retrospective called out for the VTM pipeline — the subsystem publishes its metadata, but the publish flow does not yet consume it as a machine-checkable dependency declaration. Closing this loop is cross-cutting work that will land alongside other chipset-registered subsystems.
 
 ## Lessons Learned
 
-1. **Phase-based agent activation matrices are essential for multi-agent brainstorming.** The Critic being active only during Converge and blocked during Diverge is Osborn's core insight implemented architecturally. Without this, evaluation kills ideation.
-2. **Transition confidence scoring with weighted signals prevents premature phase advancement.** timer (0.2) + saturation (0.3) + user_signal (0.4) + min_threshold (0.1) means user intent is the strongest signal but not the only one. The system won't advance if saturation is low even if the user signals readiness.
-3. **Affinity mapping with TfIdf clustering (2-8 clusters) and 100% placement guarantee.** Every idea gets placed in a cluster -- no orphans. This is important because unplaced ideas are invisible ideas, and brainstorming's value comes from seeing all contributions.
-4. **PRESSURE_PHRASES runtime guard (6 banned phrases) protects the brainstorming space.** Phrases like "we need to hurry" or "time is running out" undermine psychological safety. Blocking them at the facilitator level keeps the environment non-judgmental by default.
+- **Phase-based agent activation matrices are essential for multi-agent brainstorming.** The Critic being active only during Converge and blocked during Diverge is Osborn's core insight implemented architecturally. Without this, evaluation kills ideation. The matrix belongs in code (`constants.ts`) rather than in a configuration file because mis-configuration would be a safety regression, not a formatting issue.
+- **Transition confidence scoring with weighted signals prevents premature phase advancement.** The formula `timer × 0.2 + saturation × 0.3 + user_signal × 0.4 + min_threshold × 0.1` means user intent is the strongest signal but not the only one. The system will not advance if saturation is low even if the user signals readiness, and this is the correct default for a tool that has to protect the user from their own impatience during ideation.
+- **Affinity mapping with TfIdf clustering and a 100% placement guarantee is the right contract.** Every idea gets placed in a cluster — no orphans. Unplaced ideas are invisible ideas, and brainstorming's value comes from seeing all contributions. The cluster count range (2-8) is bounded because outside that range the cluster map becomes either trivial (one cluster) or unreadable (more than eight), and both failure modes defeat the purpose of the visualization.
+- **PRESSURE_PHRASES runtime guard protects psychological safety at the Facilitator boundary.** Phrases like hurry-up prompts or deadline reminders undermine the non-judgmental environment that ideation requires. Blocking them at the Facilitator level (where they would otherwise enter the session through generated guidance) keeps the environment non-judgmental by default, and the block is at the generation side rather than at the filter side so the block is invisible to the user rather than a redacted message.
+- **Defense in depth is the correct shape for rule enforcement.** No single guard is sufficient: instantiation gate, phase controller, evaluative detector. Each guard has a different failure mode, and only the composition closes the safety envelope. The SC-01 through SC-18 tests exercise each guard independently because a bug that neutralizes one guard should still be caught by the remaining two, and the test suite has to prove that the redundancy works.
+- **Monotonic counter filenames are simpler and more reliable than locking for concurrent writers.** The filename is both the ordering key and the allocation token; collision is impossible by construction. A future bus that needs cross-session ordering can extend the counter namespace, but inside a session the counter is sufficient and the filesystem is the lock.
+- **Exhaustive routing tables catch configuration errors at compile time rather than at runtime.** `MESSAGE_ROUTE as Record<MessageType, BusLoop>` forces every message type to have an assigned loop; adding a new message type without updating the route is a compile error rather than a silent routing bug. This is the same shape of discipline as v1.30's Zod schema registration, applied to a different problem.
+- **Rule-violation logs should be first-class artifacts, not debug channels.** Persisting `RuleViolation` records across phase transitions and surfacing them in the session artifact set means violations become auditable after the fact. A retrospective reviewer reading the session artifact can see exactly which rules fired and why, which is the instrumentation level that converts a black-box facilitator into an auditable one.
+- **Ship the guards the testing reveals; document the known limitations honestly.** The figure-storming blocklist is reactive rather than proactive, and the retrospective says so out loud. Shipping a working-but-limited feature with the limitation written down is preferable to delaying the feature until the allowlist can be compiled exhaustively, because the delay is indefinite and the limitation is finite.
+- **Barrel exports organized by layer make subsystems importable without implementation spelunking.** External consumers import from `index.ts`; the layer ordering (schemas → constants → bus → manager → technique engine → agents → artifacts) makes the import surface self-documenting. This is the chipset pattern v1.30 introduced, applied cleanly to a second subsystem.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — the adaptive loop whose Observe step the SessionBus events feed |
+| [v1.4](../v1.4/) | Agent Teams — predecessor multi-agent topology pattern; v1.32 extends to leader-worker with phase gating |
+| [v1.10](../v1.10/) | Security Hardening — baseline for the defense-in-depth pattern that v1.32's rule enforcement formalizes |
+| [v1.24](../v1.24/) | GSD Conformance Audit — Critic-gate architectural constraint maps cleanly to the audit's zero-fail conformance stance |
+| [v1.25](../v1.25/) | Ecosystem Integration — dependency DAG + contract-testing strategy v1.32's chipset registration conforms to |
+| [v1.28](../v1.28/) | GSD Den Operations — filesystem message bus predecessor; v1.32's monotonic-counter variant applies the lesson at a single-session scope |
+| [v1.30](../v1.30/) | Vision-to-Mission Pipeline — Zod-first schema discipline + chipset.yaml pattern inherited wholesale; archetype classifier feeds pathway routing |
+| [v1.31](../v1.31/) | GSD-OS MCP Integration — predecessor; MCP tool set can consume v1.32 session artifacts through the chipset |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform — successor; large multi-agent missions use v1.32's phase activation matrix as a template |
+| [v1.36](../v1.36/) | Citation Management — consumer of v1.32's Scribe artifact format for bibliography source tracking |
+| [v1.37](../v1.37/) | Complex Plane Learning Framework — later algorithmic layer that sits above pathway routing |
+| [v1.40](../v1.40/) | sc:learn Dogfood Mission — pattern-extraction consumer of the SessionBus observation hooks |
+| [v1.45](../v1.45/) | Release where the dense agent-activation matrix was addressed with the requested visual timeline |
+| [v1.49](../v1.49/) | Mega-release that consolidated post-v1.32 work; brainstorm subsystem re-registered through unified cartridge pipeline |
+| `.planning/phases/305-311/` | 7 phase directories with PLAN and SUMMARY artifacts |
+| `.planning/phases/311-integration-wiring-system-tests/311-03-SUMMARY.md` | E2E pathway test suite (19 tests across 3 pathways + 6 integration sub-tests) |
+| `.planning/phases/311-integration-wiring-system-tests/311-04-SUMMARY.md` | Safety-critical test suite SC-01..SC-18 with self-check PASSED |
+| `.planning/MILESTONES.md` | Canonical v1.32 milestone detail |
+| `docs/RELEASE-HISTORY.md` | v1.32 entry in the running release ledger |
+| `CHANGELOG.md` | v1.32 entry in the versioned changelog |
+| `docs/FEATURES.md` | v1.32 feature additions |
+
+## Engine Position
+
+v1.32 sits at the pivot where the brainstorming capability becomes a typed subsystem other releases can import rather than a planning-document aspiration. The v1.0 → v1.4 arc built the adaptive loop and the agent-team primitive; v1.24 tightened conformance; v1.25 specified ecosystem integration; v1.28 introduced the filesystem message bus; v1.30 landed the Vision-to-Mission pipeline with the Zod-first schema discipline and the `chipset.yaml` registration pattern; v1.31 introduced the MCP integration surface. v1.32 applies all of that substrate to a new subsystem: the Zod schemas from v1.30, the filesystem bus from v1.28 in its monotonic-counter variant, the agent-team pattern from v1.4 in its phase-gated leader-worker form, the chipset pattern from v1.30 with four activation profiles, the defense-in-depth pattern from v1.10's security work applied to rule enforcement. The release is the first to ship safety-critical tests numbered SC-01 through SC-18, which becomes the pattern every later safety-relevant subsystem inherits. From v1.33 forward, the phase activation matrix is the template for multi-agent orchestration; from v1.36 forward, the Scribe artifact format is the consumer contract for content-addressed capture; from v1.40 forward, the SessionBus observation hooks feed pattern extraction into the `sc:learn` pipeline. The release closes the gap between adaptive learning for skills (the project's original thesis) and adaptive facilitation for humans (the brainstorm subsystem's thesis) — the same six-step loop, applied to human creative work instead of software work.
+
+## Files
+
+- `src/brainstorm/schemas.ts` — 23 Zod schemas (11 enums + 12 object schemas) with `z.infer<>` TypeScript types
+- `src/brainstorm/constants.ts` — 16 technique defaults, 8 agent phase rules, 10 message priorities, phase activation matrix
+- `src/brainstorm/bus/` — session-scoped filesystem bus with monotonic counter filenames, 4-loop router, `MESSAGE_ROUTE` exhaustive record
+- `src/brainstorm/rules-engine.ts` — Architectural Critic gate, two-stage evaluative detector, Black Hat phase constraint, `RuleViolation` logger
+- `src/brainstorm/session-manager.ts` — 5-status state machine with JSONL persistence, strict phase ordering, per-phase agent activation
+- `src/brainstorm/technique-engine.ts` — pluggable engine with lazy factory registry covering 16 techniques across 4 categories
+- `src/brainstorm/pathway-router.ts` — 5 pathway definitions, signal-word matching, mid-session adaptive resequencing
+- `src/brainstorm/artifact-generator.ts` — Markdown transcript, action plan, JSON export, cluster map
+- `src/brainstorm/agents/facilitator.ts` — 5-nature problem classifier, transition confidence scoring, `PRESSURE_PHRASES` guard
+- `src/brainstorm/agents/` — Ideator, Questioner, Analyst, Mapper, Persona, Critic, Scribe worker agents
+- `src/brainstorm/chipset.yaml` — chipset registration with 4 activation profiles and skill-creator observation hooks
+- `src/brainstorm/index.ts` — barrel export organizing public types by layer
+- `src/brainstorm/__tests__/` — 321 tests (303 functional + 18 safety-critical SC-01..SC-18); pathway E2E tests (19 across 3 pathways); bus load test (4 writers / 12 messages / <200 ms / zero loss)
+- `.planning/phases/305-foundation-types-and-bus/` through `.planning/phases/311-integration-wiring-system-tests/` — 7 phase directories with PLAN and SUMMARY artifacts
+- `.planning/MILESTONES.md` — canonical v1.32 milestone detail
+- `docs/RELEASE-HISTORY.md`, `CHANGELOG.md`, `docs/FEATURES.md` — v1.32 entries
 
 ---
+
+## Version History (preserved from original release notes)
+
+The table below lists the v1.x line that accumulated through v1.32, with the shipped summaries for each version. Retained here for archival continuity.
+
+| Version | Summary |
+|---------|---------|
+| **v1.32** | Brainstorm Session Support — 8 specialized agents in leader-worker topology, 16 techniques across 4 categories, 5 pathways, Osborn's rules enforced architecturally with defense-in-depth, session-scoped filesystem bus, 321 tests including 18 safety-critical (this release) |
+| **v1.31** | GSD-OS MCP Integration — MCP Host Manager, Gateway Server (19 tools), 3 template generators, agent bridge, security pipeline |
+| **v1.30** | Vision-to-Mission Pipeline — 8 Zod schemas, vision parser, research compiler, mission assembler, wave planner with greedy graph coloring, model assignment with downgrade-only rebalance, cache optimizer, test plan generator, template system, pipeline orchestrator |
+| **v1.29** | Electronics Educational Pack — MNA simulator, logic simulator, safety warden, learn mode, 15 modules, 77 labs |
+| **v1.28** | GSD Den Operations — filesystem message bus, 10 staff positions, 5 divisions, topology profiles, integration exercise |
+| **v1.27** | Foundational Knowledge Packs — 35 packs across 3 tiers, GSD-OS dashboard, observation infrastructure, pathway adaptation |
+| **v1.26** | Aminet Archive Extension Pack — INDEX parser, mirror engine, virus scanner, archive extraction, FS-UAE integration |
+| **v1.25** | Ecosystem Integration — 20-node dependency DAG, EventDispatcher spec, 4-tier dependency philosophy, contract testing strategy, partial-build compatibility matrix |
+| **v1.24** | GSD Conformance Audit — 336-checkpoint matrix, 4-tier audit, zero-fail conformance, 9,355 tests passing |
+| **v1.23** | Project AMIGA — mission infrastructure (MC-1/ME-1/CE-1/GL-1), Apollo AGC simulator, DSKY interface, RFC Reference Skill |
+| **v1.22** | Minecraft Knowledge World — local cloud infrastructure, Fabric server, platform portability, Amiga emulation, spatial curriculum |
+| **v1.21** | GSD-OS Desktop Foundation — Tauri v2 shell, WebGL CRT engine, PTY terminal, Workbench desktop, calibration wizard |
+| **v1.20** | Dashboard Assembly — unified CSS pipeline, four data collectors, console page as 6th generated page |
+| **v1.19** | Budget Display Overhaul — `LoadingProjection`, dual-view display, configurable budgets, dashboard gauge |
+| **v1.18** | Information Design System — shape + color encoding, status gantry, topology views, three-speed layering |
+| **v1.17** | Staging Layer — analysis, scanning, resource planning, 7-state approval queue for parallel execution |
+| **v1.16** | Dashboard Console & Milestone Ingestion |
+| **v1.15** | Live Dashboard Terminal — Wetty integration, tmux session binding, unified launcher |
+| **v1.14** | Promotion Pipeline |
+| **v1.13** | Session Lifecycle & Workflow Coprocessor |
+| **v1.12.1** | Live Metrics Dashboard |
+| **v1.12** | GSD Planning Docs Dashboard |
+| **v1.11** | GSD Integration Layer |
+| **v1.10** | Security Hardening |
+| **v1.9** | Ecosystem Alignment & Advanced Orchestration |
+| **v1.8.1** | Audit Remediation (Patch) |
+| **v1.8** | Capability-Aware Planning + Token Efficiency |
+| **v1.7** | GSD Master Orchestration Agent |
+| **v1.6** | Cross-Domain Examples |
+| **v1.5** | Pattern Discovery |
+| **v1.4** | Agent Teams |
+| **v1.3** | Documentation Overhaul |
+| **v1.2** | Test Infrastructure |
+| **v1.1** | Semantic Conflict Detection |
+| **v1.0** | Core Skill Management |
