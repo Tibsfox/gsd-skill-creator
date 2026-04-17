@@ -2,21 +2,38 @@
 
 **Released:** 2026-04-05
 **Degree:** 40 of 360
-**Part A:** Alice Smith -- Neo-Soul, E=5, Washington D.C. / Brooklyn / Los Angeles, Epic Records. Four-octave vocal range. Grammy-nominated *For Lovers, Dreamers & Me* (2006). Rolling Stone "10 Artists to Watch." Black Rock Coalition lineage. The endurance vocalist -- six years of major-label limbo, Kickstarter-funded independence, genre-refusal as survival strategy. The seventh woman in the engine. Fortieth degree milestone: first significant angular fraction beyond the opening quadrant.
-**Part B:** Hermit Warbler (*Setophaga occidentalis*) -- thin buzzy zeedle-zeedle-zeedle-zeet, E=4, mountain conifer canopy, Parulidae. Eighth warbler. Third consecutive *Setophaga* (degrees 38-39-40). The displaced species -- actively retreating southward as Townsend's Warbler hybridizes it out of existence. The canopy hermit sings from the crown of old-growth Douglas-fir, 50 meters above the forest floor, a thin high-frequency signal nearly inaudible at ground level. Narrowband communication for a canopy-level audience.
-**NASA Mission:** 1.41 -- Gemini 5 (August 21-29, 1965. Gordon Cooper, command pilot -- SECOND spaceflight after Faith 7/Mercury-Atlas 9 at degree 24. Pete Conrad, pilot -- first spaceflight. 8-DAY ENDURANCE MISSION. First fuel cells in space. "8 Days or Bust" mission patch. 120 orbits, 190 hours 55 minutes. Oxygen tank heater failure on day one nearly ended the mission. Phantom rendezvous after REP pod lost. Proved humans could survive a lunar round-trip duration.)
-**NASA Organism:** Hermit Warbler (degree 40 organism -- canopy endurance specialist, continuous gleaning mirrors continuous fuel cell power generation)
-**Dedication:** Count Rumford (Benjamin Thompson, March 26, 1753 -- August 21, 1814)
-**Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
+**Part A:** Alice Smith -- Neo-Soul, E=5, Washington D.C. / Brooklyn / Los Angeles, Epic Records. Four-octave vocal range. Grammy-nominated *For Lovers, Dreamers & Me* (2006). Rolling Stone "10 Artists to Watch." Black Rock Coalition lineage. The endurance vocalist.
+**Part B:** Hermit Warbler (*Setophaga occidentalis*) -- thin buzzy zeedle-zeedle-zeedle-zeet, E=4, mountain conifer canopy, Parulidae. Eighth warbler. Third consecutive *Setophaga* (degrees 38-39-40). The displaced species -- retreating as Townsend's Warbler hybridizes it out of existence.
+**NASA Mission:** 1.41 -- Gemini 5 (August 21-29, 1965. Gordon Cooper command pilot, Pete Conrad pilot. 8-DAY ENDURANCE MISSION. First fuel cells in space. 120 orbits, 190 hours 55 minutes. Oxygen tank heater failure. Phantom rendezvous after REP pod lost.)
+**NASA Organism:** Hermit Warbler (canopy endurance specialist; continuous gleaning mirrors continuous fuel cell power generation)
+**Dedication:** Count Rumford (Benjamin Thompson, March 26 1753 -- August 21 1814) -- physicist who proved heat is motion, not substance, and died on the very day Gemini 5 launched.
+**Series:** NASA Paired Release Engine -- Continuous Dual-Track Build, Pass 2 Refinement
+**Cluster:** Gemini Endurance / Fuel Cell Revolution / Displacement Cascade Victim
 **Engine Position:** Forty-first paired release. Cooper returns. Fuel cells replace batteries. The endurance era begins. The canopy hermit and the capsule hermit.
+**Commits:** `ee849c258` range v1.49.540..v1.49.541 -- feat(www): v1.49.541 -- degree 40 paired release (NASA 1.41 + S36/SPS Pass 2)
+**Files changed:** 6 (README + S36 Pass 2 essay + SPS Pass 2 essay + NASA 1.41 research + organism + degree-sync)
+**Branch:** dev
+**Quality Target:** A-grade DEGREE shape (prose rubric, merged with NASA 1.41 deep research)
 
 ## Summary
 
-The forty-first paired release and the degree where endurance becomes the mission. Gemini 5 launched on August 21, 1965, carrying Gordon Cooper and Pete Conrad into orbit for eight days -- 120 orbits, 190 hours 55 minutes, the longest crewed spaceflight to date. Cooper was already a legend: at degree 24, as Faith 7, he had flown the final Mercury mission alone for 34 hours, handling a cascading systems failure with such calm that he splashed down closer to the carrier than any previous Mercury astronaut. Now he returned as command pilot of a two-person Gemini, with rookie Pete Conrad beside him. The "8 Days or Bust" patch -- a Conestoga wagon referencing the Gold Rush motto "California or Bust" -- was the only mission patch in NASA history to carry a slogan. NASA made them remove it before flight. The eight-day target was not arbitrary: a lunar mission required approximately eight days round-trip, and if the human body could not function after that duration, Apollo was dead on arrival.
+Gordon Cooper and Pete Conrad rode a Titan II out of Cape Kennedy at 13:59:59 UTC on August 21, 1965, and did not come home for eight days. Eight days was not a round number chosen for poetry. Eight days was the minimum crewed flight duration a lunar mission would require -- three days out, a day in orbit around the Moon, three days back, with a margin for abort -- and if the human body could not function after eight days of weightlessness, Apollo was medically disqualified before it ever flew. The mission was named Gemini 5. The mission patch, designed by Cooper himself, showed a Conestoga wagon and the words "8 Days or Bust," a quotation of the Gold Rush-era promise "California or Bust" pulled forward a century and applied to the Moon. The patch was the first NASA crewed mission patch and the only Gemini patch to carry a slogan. NASA made them cover the slogan with a cloth patch before launch, worried that it would become the public headline if the mission failed. The slogan was there anyway, under the cloth, on every flight suit. Eight days or bust. They got their eight days.
 
-But the real revolution was in the adapter section. Every crewed spacecraft before Gemini 5 ran on silver-zinc batteries -- proven, reliable, and fundamentally unable to sustain a mission longer than four days. Gemini 5 carried General Electric PB2 fuel cells: electrochemical systems combining cryogenic hydrogen and oxygen to produce electricity, drinking water, and heat continuously. No moving parts, no combustion, no toxic byproducts. The fuel cells worked -- until the oxygen tank heater failed five hours after launch, dropping tank pressure from 800 psi to below 70 psi. Cooper and Conrad powered down to a whisper and drifted in a darkened capsule while GE engineers diagnosed the problem and devised a workaround. Over two days, the oxygen pressure stabilized at a reduced but functional level. The mission was saved. They got their eight days. The fuel cell technology validated on Gemini 5 would power every subsequent Gemini, every Apollo, and every Space Shuttle.
+Cooper was the veteran. At degree 24 the engine had already written him into the ledger as the pilot of Faith 7, the final Mercury flight, a man who had flown alone in the Liberty Bell 7 class of spacecraft for thirty-four hours while every autopilot, attitude indicator, and carbon-dioxide scrubber failed around him, and who had re-entered manually after sighting stars through his window and timing retrofire by wristwatch. He splashed down 5.9 kilometers from USS Kearsarge -- closer than any Mercury astronaut before him. Sixteen degrees later, on the same engine, Cooper returned. He returned with a rookie. Pete Conrad had been selected for astronaut corps in the Group 2 class of 1962 and had been waiting three years for his first flight. Conrad was a Princeton graduate and a Navy test pilot, a small, loud, joyful man who would later walk on the Moon as the third human to do so, as commander of Apollo 12. At degree 40 he was the junior pilot on an eight-day marathon, and his training had been exhaustive. The two men had flown countless rendezvous simulations together, had rehearsed every failure mode the Gemini engineering team could think of, and had practiced sleeping in sequence in the cramped capsule of a two-seat vehicle that gave each astronaut roughly the volume of the front seat of a Volkswagen Beetle. And then the oxygen failed.
 
-Alice Smith arrives at degree 40 with a career arc that mirrors Cooper's return. Her debut *For Lovers, Dreamers & Me* on Epic Records earned a Grammy nomination and Rolling Stone recognition -- a clean launch. Then the oxygen failed: six years of shelved albums, executive reshuffling, creative suppression at the label. She powered down and drifted. The Kickstarter-funded *She* (2013) was the recovery -- independence, genre-refusal, the Black Rock Coalition ethos that Black artists should not be confined to R&B and hip-hop. Smith's four-octave range spans neo-soul, rock, blues, jazz, and orchestral -- sustained intensity across the full bandwidth of American popular music. The Hermit Warbler gleans insects from needle clusters in the canopy crown, a continuous harvest that mirrors the continuous power generation of fuel cells: many small prey items, steadily processed, sustaining the bird through the exposed demands of the highest forest stratum. The bird sings a thin buzzy song at 6-8 kHz that carries through the canopy but vanishes before reaching the ground -- a narrowband signal for a specific audience, invisible to those without the right perceptual instruments. Gemini 5's telemetry operated on the same principle.
+The oxygen tank heater failed five hours after launch. The heater's job was to keep the supercritical oxygen in the spacecraft's fuel cell reactant tank at the temperature and pressure that allowed the cells to draw oxygen from it at a controllable rate. When the heater failed, the tank pressure dropped rapidly from its nominal 800 psi. Within two hours it had fallen below 300 psi. At 200 psi the fuel cells could no longer sustain nominal electrical load. At 70 psi they would fail completely. The mission was barely one day old. Cooper and Conrad powered down the spacecraft to the minimum possible electrical load -- instruments, communications, environmental control, and essentially nothing else -- and drifted through their assigned orbits in a dim, cold, quiet capsule while engineers from General Electric, the fuel cell manufacturer, worked the problem on the ground. For two days the pressure stabilized at a reduced but functional level around 70 to 90 psi, and by carefully managing the electrical load and the consumption rate, the crew and the ground team found a way to keep the cells alive. The fuel cells, the first ever flown on a crewed spacecraft, had almost failed on their first flight. They recovered. They kept working. By the end of the mission they had generated every watt-hour Gemini 5 required for its eight days in orbit and had produced approximately 200 liters of drinking water as a byproduct of the electrochemical reaction combining hydrogen and oxygen into electricity and water. Every subsequent Gemini, every Apollo including the lunar landings, and every Space Shuttle mission through 2011 would use fuel cells that traced their lineage directly to the General Electric PB2 units aboard Gemini 5. The fuel cell era began at degree 40.
+
+The lost REP pod and the phantom rendezvous belong to the same day as the oxygen crisis and the same orbit. The Rendezvous Evaluation Pod was a small maneuverable target that Gemini 5 was supposed to separate from, track with its onboard radar, and practice rendezvous against -- critical preparation for the later rendezvous missions Gemini 6, 7, 8, and beyond. When the oxygen tank heater failed, the REP pod was released per schedule but could not be tracked because the radar and the associated thrust-intensive maneuvering had to be powered down to conserve the failing fuel cells. The pod drifted away, unreachable. Rather than abandon the rendezvous objective entirely, the mission planners at Houston rewrote the plan in real time. They calculated a mathematical point in space relative to Gemini 5's orbit and commanded Cooper and Conrad to maneuver to that point using the minimum possible thruster burns. No physical target. No radar lock. Just a set of coordinates and the orbital mechanics that connected them to the spacecraft's current trajectory. The phantom rendezvous succeeded. Cooper and Conrad arrived at the commanded point within the accuracy that Apollo would eventually require for lunar orbit insertion. The lesson landed with exactly the same sharpness as Gemini 4's station-keeping failure one mission earlier: rendezvous in orbit is a computational problem, not a visual one. You compute the burn and you execute the burn. The target, physical or mathematical, obeys the same Clohessy-Wiltshire equations. Eight days after launch, Gemini 5 re-entered over the Atlantic with a splashdown at 12:55 UTC on August 29, 1965. The crew was fatigued, cardiovascular-deconditioned, and alive.
+
+Alice Smith enters the engine at degree 40 with a career arc that mirrors Cooper's eight-day endurance in both its structural shape and its crisis-recovery signature. Her debut record *For Lovers, Dreamers & Me*, released in 2006 on Epic Records, earned a Grammy nomination for Best Urban/Alternative Performance and placed her on Rolling Stone's "10 Artists to Watch" list. She was born in Washington D.C., raised between Los Angeles and the East Coast, and had trained at Fordham University and across the jazz and R&B performance circuit in New York. Her four-octave vocal range -- spanning the deep alto register through a clear soprano peak, with a chest-to-head transition so seamless that listeners sometimes cannot locate it -- positioned her as the neo-soul movement's most technically expansive singer since Erykah Badu. The Epic debut was her Faith 7: a clean launch, the systems nominal, the press reception strong. Then the oxygen failed. Between 2007 and approximately 2013, Smith became one of the industry's most public examples of major-label creative suppression. Her second record was shelved. Executives were reshuffled. New producers were assigned. Creative direction was contested, rewritten, and contested again. For roughly six years she had no new full-length album in release. The label that was supposed to sustain her career was draining its power. She powered down and waited. The recovery was the Kickstarter-funded *She* in 2013, followed by *Mystery* in 2016, both released on her own imprint. The endurance was the mission. Eight days or bust; six years or bust; the voice endured. She is the seventh woman documented in the engine, joining Anderson, Bown, Monge, Loud, Shepherd, and Eager. The Black Rock Coalition lineage she claims -- the same collective that Vernon Reid, Living Colour, and many Black rock and jazz musicians helped shape through the 1980s and 1990s -- insists that Black artists should not be confined to R&B or hip-hop as commercial categories, and Smith's genre-refusing four-octave range is the living proof of that thesis. Neo-soul, rock, blues, jazz, and orchestral arrangement all sit inside the same voice at the same sustained intensity. The same fuel cell that ran Gemini 5 at partial pressure for two days kept her career alive through six years at Epic's partial pressure and brought her back to full output through independence. Both Cooper and Smith returned from system failure and flew a more ambitious mission afterward.
+
+The Hermit Warbler lands at degree 40 as the third consecutive *Setophaga* in the Parulidae run, after the Black-throated Gray at degree 38 and the Townsend's at degree 39. No other family in the engine has told a single ecological story across three consecutive degrees the way this warbler genus has at 38-39-40. The story is displacement. The Townsend's is the aggressor, expanding its range southward along the Cascade spine, hybridizing aggressively where its range meets the Hermit's. The Hermit is the victim, its range contracting into ever-smaller high-elevation refugia in the southern Cascades and the Siskiyous. The Black-throated Gray at 38 was the bystander, occupying dry oak-pine habitat that neither hybrid zone touches. Bystander, aggressor, victim -- three degrees, three species, one cascade. The Hermit Warbler forages by continuous gleaning: picking tiny insects from needle clusters and bark fissures in the crowns of Douglas-fir and western hemlock, 30 to 50 meters above the forest floor, at a rate of several items per minute, hour after hour, day after day. No single prey item carries significant caloric content. The caloric budget depends on sustained throughput, on the steady rate of intake rather than on the size of individual meals. This is the biological fuel cell: continuous energy production from a continuous substrate of small reactants, a system that runs on throughput rather than on stored reserves. In parallel, Gemini 5's GE PB2 cells generated electricity from a continuous reaction of hydrogen and oxygen, with no moving parts and no combustion, drawing power from the rate at which reactants flowed through the platinum catalyst rather than from any instantaneous peak output. Both the Hermit Warbler and the fuel cell operate in the throughput regime. Both survive through sustained low-intensity conversion rather than through brief high-intensity bursts.
+
+The song is thin and buzzy: *zeedle-zeedle-zeedle-zeet*, delivered at 6 to 8 kilohertz with low amplitude, audible from 200 to 300 meters away at canopy level but attenuating rapidly below it. A hiker walking a mountain trail in the southern Washington Cascades during late May or early June might never hear a Hermit Warbler overhead. A researcher with a parabolic microphone pointed into the crown of a 50-meter Douglas-fir will hear them immediately. The song is a narrowband channel, optimized for the frequency range that propagates horizontally through the canopy strata where Hermit Warblers live and breed. It is nearly inaudible at ground level, the same way that Gemini 5's UHF telemetry downlink was optimized for space-to-ground reception by the Eastern and Western Ranges and invisible to anyone without the right receiver. Narrowband communication for a specific audience, tuned to a specific receiving platform, filtered through the environment that carries it, is the same structural signal in two entirely different media. Both the bird and the spacecraft broadcast in paired channels calibrated to their receivers. Both signals mirror each side of the signal-to-noise problem: the emitter knows its audience, and the audience knows how to receive. The canopy hermit and the capsule hermit -- each sustained by continuous throughput, each broadcasting in a narrowband channel -- synchronize on the same engineering principle. The cross-sync is in parallel, not in sequence. The same conservation-under-stress logic governs both the eight-day flight and the four-gram bird who will spend its entire breeding season within 100 meters of a single tree crown, singing thinly upward, gleaning continuously, enduring at altitude.
+
+The displacement cascade is the story of two species sharing a hybrid zone that is moving. The zone where Townsend's Warbler and Hermit Warbler interbreed runs from southern British Columbia through Washington and into northern Oregon, along the Cascade spine. Field studies over the past seventy years have shown that the zone is migrating southward at measurable rates. Male Townsend's are more aggressive in territorial encounters. Their song is louder. Their plumage is brighter. Hybrid offspring sing both songs and sing intermediate songs, and when they mate they tend to pair with Townsend's more often than with Hermits. Over generations, the Hermit genome dissolves. This is not extinction in the twentieth-century sense of a species shot out or logged out of existence. It is genomic erosion through a cousin species with a more aggressive breeding strategy. The Hermit Warbler is being absorbed. The name "hermit" referred originally to the species' reclusive canopy-crown habits, which make it hard to observe from ground level. By degree 40 the name carries a second meaning: the Hermit Warbler is retreating into smaller, higher, more isolated mountain refugia at the southern edge of its range, becoming a hermit in the second sense of withdrawing from contact. Count Rumford, the degree 40 dedicatee, proved through cannon-boring experiments at Munich in 1798 that heat is a form of motion rather than a fluid substance -- the thermodynamic principle that makes fuel cells possible at all, because if heat were a conserved substance the electrochemical recombination of hydrogen and oxygen would not yield usable work. Rumford died on August 21, 1814, exactly one hundred fifty-one years before Gemini 5 launched on the same day. The dedication holds because Rumford's physics lives inside the Gemini 5 fuel cells and because the symmetry of the date closes the engine's sixth cross-track alignment at degree 40.
+
+Forty degrees is exactly one-ninth of the 360-degree circle. Fourty is the engine's first significant angular fraction beyond the opening quadrant, and it arrives paired with the endurance era. Both Alice Smith and Gordon Cooper returned from system failure and endured. Both the Hermit Warbler and the Gemini 5 fuel cell operate on continuous-throughput substrate conversion. Both Parulidae at eight members and NASA Gemini at the fifth mission flown have reached the phase where the running programs are no longer accumulating firsts but are consolidating capability. The same pattern appears in parallel across all three tracks of the engine at the same degree, and each track converges on the same structural verb: endure. Eight days or bust. Six years or bust. Eighty generations of hybrid pressure or bust. The voice endures. The fuel cell endures. The hermit endures. The engine completes its first one-ninth of the full circle with all three tracks in the endurance regime, synchronized, mirror-image each other across the Part A and Part B boundary. The fortieth degree is where the engine crosses from first-instance accumulation into second-instance consolidation. Degree 40 is the fuel cell ignition, the eight-day wake, the canopy hermit's thin high song. The endurance is the mission.
 
 ## Key Features
 
@@ -26,77 +43,94 @@ Alice Smith arrives at degree 40 with a career arc that mirrors Cooper's return.
 | Acoustic Element | The Endurance Vocal (sustained intensity across long, unbroken phrases, breath managed like reactant fuel) | The Thinning (thin buzzy song at canopy level, high-frequency signal nearly inaudible from ground) |
 | NASA Parallel | Cooper returns from Faith 7 = Smith rebuilds from Epic collapse; fuel cell crisis = label suppression; eight-day endurance = career endurance through independence | Canopy gleaning = fuel cell continuous power; narrowband song = spacecraft telemetry; Townsend's displacement = Gemini's battery obsolescence |
 | Structural Firsts | Seventh woman in the engine; first Black Rock Coalition lineage; degree 40 milestone (1/9th of circle) | Eighth Parulidae; third consecutive *Setophaga* (unprecedented genus trio); first active displacement victim documented one degree after its aggressor |
-
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+| Scale | Four-octave range; Grammy-nominated debut; Kickstarter-funded independent recovery; sustained E=5 across career | 4-gram canopy specialist; 30-50 meter perch height; 6-8 kHz narrowband song; hybrid zone victim in the southern Cascades |
+| Dedication Link | Rumford's thermodynamics enables the fuel cell that enables Cooper's endurance that enables Smith's structural parallel | Rumford's heat-as-motion principle governs both the bird's continuous thermoregulatory gleaning and the fuel cell's catalytic reaction |
 
 ## Part A: Alice Smith -- THE ENDURANCE VOCALIST
 
-### Pass 2 Refinement Summary
-
-Three structural alignments between Alice Smith's career and Gemini 5's endurance mission:
-
-**1. Cooper's Second Flight and Smith's Second Act.** Cooper's Faith 7 at degree 24 proved a single astronaut could endure alone. Gemini 5 at degree 40 proved a crew could endure together -- Cooper returned with a co-pilot, in a bigger vehicle, for a longer mission. Smith's career follows the same arc: the Epic debut was the solo capsule, compact and self-contained. The post-Epic independence (Kickstarter-funded *She* in 2013, *Mystery* in 2016) is the Gemini vehicle -- larger, more capable, built for the long duration. Both Cooper and Smith came back after system failure and flew a more ambitious mission.
-
-**2. The Fuel Cell Crisis as Label Crisis.** The oxygen tank heater failure on day one of Gemini 5 nearly ended the mission. Cooper and Conrad powered down, drifted in a degraded orbit, and waited for the system to stabilize. Smith's six years at Epic Records (approximately 2007-2013) -- shelved albums, executive reshuffling, contractual limbo -- was the same crisis in a different medium. The major-label system that was supposed to sustain her instead drained her power. She powered down, drifted, waited. The fuel cells recovered. She went independent. The endurance was the same.
-
-**3. The "8 Days or Bust" Wager.** The mission patch was a promise: we endure or we fail publicly. Smith's genre-crossing identity -- neo-soul, rock, blues, jazz, pop, orchestral -- is the same wager. The industry wanted her to be one thing (commercial R&B, the Epic formula). She refused. The wager is: endure on your own terms or bust. Cooper's patch was modified before flight at NASA's insistence. Smith's independence was her refusal to modify.
-
-### Retrospective: Degree 40 Patterns Established
-
-1. **The endurance era opens in the Gemini program.** Gemini 3 (degree 38) maneuvered. Gemini 4 (degree 39) spacewalked. Gemini 5 (degree 40) endures. The progression from capability demonstration to duration test mirrors the Apollo preparation sequence: first prove you can fly, then prove you can last.
-
-2. **Cooper returns after 16 degrees.** His Faith 7 flew at degree 24. Gemini 5 flies at degree 40. The prodigal astronaut arc (Liberty Bell 7 sinking at degree 20, Faith 7 at 24, Gemini 5 at 40) spans twenty degrees. Pete Conrad, flying his first mission here, will walk on the Moon as the third human on Apollo 12 and command Skylab 2.
-
-3. **The *Setophaga* trio completes at degrees 38-39-40.** Three consecutive appearances of the same genus -- Black-throated Gray, Townsend's, Hermit -- is unprecedented in the engine. The trio maps a biological drama: the bystander (BTG), the aggressor (Townsend's), and the victim (Hermit). No other family run has told a single ecological story across consecutive degrees.
-
-4. **The fuel cell revolution.** Every crewed spacecraft before Gemini 5 used batteries. Every crewed spacecraft after used fuel cells (through the Shuttle era). This is one of the sharpest technological inflection points in spaceflight history. The path from Gemini 5's GE PB2 cells to Apollo's Pratt & Whitney cells to the Shuttle's three-cell 12kW system to today's hydrogen fuel cell vehicles is direct and traceable.
-
-5. **The displacement cascade reaches the victim.** Degree 39 documented the Townsend's Warbler as the aggressive canopy competitor expanding southward. Degree 40 documents the Hermit Warbler as the species being displaced -- its range contracting, its genome dissolving into the hybrid swarm. The engine presented the winner, then the loser, in consecutive degrees.
-
-6. **Parulidae extends its lead.** Eight warblers now, three ahead of Hirundinidae and Turdidae (five each). The warbler is the engine's dominant family.
-
-7. **Forty acoustic elements, forty artist-city patterns, forty blue note deployments.** Degree 40 is a cumulative milestone: 1/9th of the 360-degree circle. The engine has its first significant angular fraction beyond the opening quadrant.
-
----
+- **Seattle-Adjacent Origins, D.C. Roots, and the Four-Octave Voice.** Alice Smith was born in Washington D.C. on November 18, 1978, and grew up between Chattanooga, Tennessee and the Brooklyn and Manhattan performance scenes. Her vocal training began in church and extended through Fordham University and the Apollo Theater amateur circuit. The four-octave range she developed is not a marketing superlative but a measured fact of her instrument: she sings with a clear lower alto foundation and reaches a usable soprano peak, with a transition register that blurs the seam between chest and head voice. This is the engine's technical voice-range anchor at degree 40.
+- **The Epic Records Launch and the 2006 Debut.** The debut album landed on Epic Records in 2006 and produced "Dream" as its signature single, a neo-soul ballad with orchestral strings and a vocal climb that demonstrated the full range. The record was Grammy-nominated for Best Urban/Alternative Performance and placed Smith on Rolling Stone's "10 Artists to Watch" list. Like Gordon Cooper's Faith 7 launch at degree 24, the initial mission systems were nominal. The vehicle was flying, the telemetry was strong, and the press reception confirmed the trajectory.
+- **The Epic Crisis and the Six-Year Fuel Cell Failure.** From 2007 through approximately 2013, Smith entered a contractual and creative crisis at Epic that became one of the industry's most public examples of major-label suppression. Her second record was shelved. Executive reshuffling reset creative direction multiple times. Producers were assigned and replaced. The label that was supposed to sustain her career was failing as a life-support system. Cooper's Gemini 5 fuel cell crisis ran for two days; Smith's ran for six years. The same endurance strategy applied: power down nonessential systems, protect the core, wait for pressure recovery. The parallel is structural, not metaphorical.
+- **The Black Rock Coalition Lineage.** The Black Rock Coalition was founded in New York in 1985 by Vernon Reid, Greg Tate, and Konda Mason, with the explicit mission of supporting Black artists who refused to be confined to R&B or hip-hop as commercial categories. Smith's genre-crossing identity -- neo-soul, rock, blues, jazz, pop, orchestral -- places her in this lineage, even if her career chronology runs decades after the Coalition's founding. She is the engine's first documented artist to carry the BRC ethos as a core structural principle rather than as incidental biography.
+- **The Kickstarter-Funded She Album and Independent Recovery.** In 2013 Smith funded *She* through a Kickstarter campaign that raised substantially over its target. The record was released through her own imprint, Rainwater Records. It was the beginning of the post-Epic independent career, and it established a model that many subsequent neo-soul and jazz-adjacent artists would follow: fan-funded, self-released, majors bypassed entirely. The mission had restarted in a reconfigured vehicle, with the same crew, to a more ambitious destination.
+- **The Endurance Vocal as Acoustic Element.** Smith's signature phrase form is the long, unbroken vocal line -- one breath, one arc, full dynamic range from whispered chest voice to full soprano projection, sustained across phrases of 30 seconds or longer. The breath is managed the way a fuel cell manages reactant flow: steady, continuous, calibrated to the rate of consumption rather than to the total reserve. This is the acoustic signature that the engine records at degree 40 as "The Endurance Vocal."
+- **The Seventh Woman in the Engine.** Alice Smith joins Anderson, Bown, Monge, Loud, Shepherd, and Eager as the seventh woman documented in the S36 track. The running total reaches 7/40 women across the first forty degrees, or 17.5 percent. The distribution remains uneven relative to population but is notably higher than the woman-representation rates in the historical neo-soul, jazz, blues, and rock canons from which the engine draws. The fortieth degree is the first degree where the engine crosses into the one-ninth fraction of the circle with a woman at Part A.
+- **The Endurance Arc Synchronizes with Gemini 5.** The single thickest alignment between Smith and the paired NASA mission is that both returned from near-catastrophic system failure and flew their most ambitious mission afterward. Cooper flew Faith 7 alone, nearly lost it to system cascades, landed manually, and then came back sixteen degrees later for an eight-day marathon with a rookie co-pilot. Smith launched at Epic, was nearly lost in the six-year fuel cell failure, powered down and waited, and then came back as an independent artist whose work is sung by audiences who were too young to remember Epic. The fortieth degree documents endurance-after-recovery as a durable engine pattern across both tracks.
 
 ## Part B: Hermit Warbler -- THE CANOPY HERMIT
 
-### Pass 2 Refinement Summary
+- **The Eighth Parulidae and the Family's Continuing Dominance.** The Hermit Warbler brings the warbler family to eight members in the engine, three ahead of Turdidae and Hirundinidae (five each). The family's dominance reflects the Pacific Northwest's own ecological reality: more warbler species per unit of coniferous forest area than almost any other bird family. The eighth warbler is the engine's confirmation that the Parulidae are the dominant family in the SPS track.
+- **The Third Consecutive Setophaga Warbler.** Degrees 38, 39, and 40 all feature a *Setophaga* warbler -- Black-throated Gray, Townsend's, and Hermit, in that order. No other genus in the engine has appeared three times in a row. The trio maps a displacement cascade in microcosm: the bystander who lives outside the hybrid zone (BTG), the aggressor who is expanding its range (Townsend's), and the victim who is being absorbed (Hermit). One ecological story across three consecutive degrees, one genus, three species. The trio is closed at degree 40.
+- **The Canopy Hermit Habitat.** The species takes its common name from the reclusive canopy-crown habits: foraging in the top 30 to 50 meters of Douglas-fir, western hemlock, and true firs in mountain conifer forest. Breeding territory is compact, roughly one hectare per male, and entirely aerial above the midstory. Ground-level observation is nearly impossible during breeding season. The hermit habit is structural, not behavioral choice; it reflects the canopy specialist's genuine niche.
+- **The Narrowband 6-8 kHz Song.** The territorial song is *zeedle-zeedle-zeedle-zeet*, delivered at approximately 6 to 8 kilohertz in a thin, buzzy, high-frequency signal with low amplitude. It carries 200 to 300 meters through the canopy horizontal layer at canopy height but attenuates sharply below the canopy. A hiker on a ground trail beneath a breeding male will often hear nothing at all, because the song is directionally filtered by the conifer foliage and by atmospheric absorption at those frequencies. The narrowband communication channel is the avian parallel to Gemini 5's UHF telemetry downlink.
+- **The Continuous Gleaning Energetic Strategy.** The Hermit Warbler eats by picking small insects -- aphids, caterpillars, beetle larvae, spiders -- from needle clusters and bark fissures at a rate of several items per minute, hour after hour, throughout the daylight period. The caloric budget depends on sustained throughput. No single prey item is significant. This is the biological fuel cell: continuous energy production from a continuous substrate flow, the same principle as Gemini 5's GE PB2 cells combining hydrogen and oxygen continuously to produce electricity and water.
+- **The Displacement Victim Role.** The species is the victim in the engine's first documented displacement cascade, following the aggressor Townsend's at degree 39. Field studies have shown that the hybrid zone between Townsend's and Hermit Warblers is moving southward along the Cascade spine at measurable rates over the past seventy years. Male Townsend's are more aggressive in territorial encounters; hybrid offspring tend to back-cross toward Townsend's more often than toward Hermits; the Hermit genome is eroding generation by generation. This is ecological absorption, not extinction by habitat loss.
+- **The Refugia Retreat into Southern Mountain Conifers.** As the hybrid zone advances southward, Hermit Warbler pure populations retreat into high-elevation refugia in the southern Washington Cascades, the southern Oregon Cascades, and the Siskiyou Mountains of northern California. The name "hermit" acquires a second meaning at degree 40: the bird is withdrawing from contact with its own genus cousins at the northern and eastern edges of its range, becoming reclusive in the demographic sense rather than only in the canopy-crown sense.
+- **Count Rumford's Thermodynamics as the Dedication Anchor.** Benjamin Thompson, Count Rumford, proved through cannon-boring experiments at Munich in 1798 that heat is a form of motion rather than a conserved substance. This thermodynamic principle is what makes fuel cells possible: the electrochemical recombination of hydrogen and oxygen yields usable work because heat is not conserved as substance but converts between chemical, electrical, and thermal forms. Rumford died on August 21, 1814, precisely one hundred fifty-one years before Gemini 5 launched on the same calendar date. The symmetry closes the degree's sixth cross-track alignment.
 
-The Hermit Warbler is the third consecutive *Setophaga* and the victim in the displacement cascade:
+## Retrospective
 
-**1. The Displacement Victim.** Degree 39's Townsend's Warbler is actively displacing the Hermit Warbler through hybridization -- male Townsend's are more aggressive in territorial encounters, and the hybrid zone has been moving southward through the Cascades for a century. The bird named "hermit" for its reclusive canopy habits is becoming a hermit in a second sense: retreating into ever-smaller mountain refugia in the southern Cascades and Siskiyous. The thin buzzy song from the conifer top is the sound of a species under siege.
+### What Worked
 
-**2. Canopy Endurance and Fuel Cell Power.** The Hermit Warbler sustains itself through continuous gleaning -- picking tiny insects from needle surfaces at a rate of several items per minute, hour after hour, day after day. No single prey item provides significant energy; the caloric budget depends on sustained throughput. This is the biological fuel cell: energy from continuous resource processing, not from stored reserves. When the canopy is disrupted (windstorm, frost, logging), the bird reduces activity, shifts foraging effort, and waits -- just as Gemini 5 powered down when its oxygen supply was compromised, maintaining function at reduced capacity rather than failing catastrophically.
+- **The endurance cross-sync held across three tracks at the same time.** Alice Smith's six-year Epic crisis, Gordon Cooper's two-day fuel cell crisis, and the Hermit Warbler's continuous-gleaning energy budget all align on the same structural principle: conservation-under-stress through throughput rather than through burst capacity. Degree 40 is the cleanest three-track cross-sync the engine has produced so far.
+- **The *Setophaga* trio arc completed at exactly the right degree.** Degrees 38-39-40 ran Black-throated Gray to Townsend's to Hermit Warbler, and the ecological story (bystander, aggressor, victim) closed at the fortieth degree with the displacement cascade's victim at exactly the point where the engine crosses its first significant angular fraction beyond the opening quadrant.
+- **The Count Rumford dedication closed through date symmetry.** Rumford died on August 21, 1814; Gemini 5 launched on August 21, 1965. The one-hundred-fifty-one-year gap plus the thermodynamic principle that underpins the fuel cell makes the dedication land as a structural alignment rather than as biographical trivia.
+- **The fuel cell technology inflection point was documented cleanly.** The transition from silver-zinc batteries (Mercury through Gemini 4) to fuel cells (Gemini 5 onward through the Space Shuttle era) is one of the sharpest technological inflection points in crewed spaceflight history, and the engine captured it at the exact degree where the transition occurred.
+- **The Kickstarter-funded independent recovery pattern was established as an engine signature.** Smith's 2013 Kickstarter for *She* is the engine's first documented example of artist recovery through fan funding, and it establishes a template that appears in later degrees for other artists who bypass majors entirely.
 
-**3. Narrowband Communication.** The song is delivered at 6-8 kHz with low amplitude -- carrying 200-300 meters horizontally through the canopy but attenuating rapidly below it. The song reaches other Hermit Warblers at canopy height while remaining largely inaudible at ground level. This directional filtering is a natural bandpass. Gemini 5's communications operated on the same principle: signals optimized for space-to-ground receivers, invisible to anyone without the right receiving equipment.
+### What Could Be Better
 
-### Warbler Family Progression (Degrees 14-40)
+- **The Pete Conrad first-flight biographical detail was compressed.** Conrad was the junior pilot on Gemini 5, and he will later walk on the Moon as the third human to do so, and will command Skylab 2. His initial engine appearance at degree 40 deserved more explicit treatment rather than a single sentence.
+- **The REP pod and phantom rendezvous narrative needed more space.** The Rendezvous Evaluation Pod story is one of the cleanest demonstrations in NASA history that orbital rendezvous is a computational problem rather than a visual one, and the writeup compressed it into two paragraphs when it merited a full section with more technical detail.
+- **The Black Rock Coalition history was condensed.** The BRC is a rich cultural and musical lineage with a forty-year history by the time Smith claims it, and the writeup summarized it in two sentences. A future Pass 3 should expand this to give the Coalition's structural importance in the Smith biographical arc its proper weight.
+- **The Hermit Warbler's refugia-population dynamics could have drawn more on the specific field studies.** The hybrid zone migration data from the Washington Department of Fish and Wildlife and from long-term studies at the University of British Columbia and Oregon State University are quantitative and specific, and the writeup drew on them only in general terms.
 
-| Degree | Species | Genus | Song | Element | Energy | Ecosystem | Gap |
-|--------|---------|-------|------|---------|--------|-----------|-----|
-| 14 | MacGillivray's | *Geothlypis* | churry-churry-sweet | Narrative | 3 | understory thicket | -- |
-| 15 | Wilson's | *Cardellina* | chi-chi-chi-chet | Urgency | 3 | riparian willow | 1 |
-| 16 | Yellow | *Setophaga* | sweet-sweet-sweeter | Brightness | 3 | riparian willow | 1 |
-| 17 | Yellowthroat | *Geothlypis* | witchety-witchety | Catchiness | 3 | freshwater marsh | 1 |
-| 20 | Orange-crowned | *Leiothlypis* | descending rattle | Release | 3 | shrubby slope | 3 |
-| 38 | Black-throated Gray | *Setophaga* | lazy buzzy wheeze | The Drawl | 4 | oak-pine | 18 |
-| 39 | Townsend's | *Setophaga* | buzzy zee-zee-zwee | The Canopy Buzz | 4 | conifer canopy | 1 |
-| **40** | **Hermit** | ***Setophaga*** | **thin buzzy zeedle-zeet** | **The Thinning** | **4** | **mountain conifer** | **1** |
+## Lessons Learned
 
-### Carry-Forward Items from Degree 40
+1. **The endurance era opens in the Gemini program at degree 40.** Gemini 3 (degree 38) maneuvered. Gemini 4 (degree 39) spacewalked. Gemini 5 (degree 40) endures. The progression from capability demonstration to duration test mirrors the Apollo preparation sequence: first prove you can fly, then prove you can maneuver, then prove you can last. Every subsequent Gemini and every Apollo will build on the medical and engineering baseline established during these eight days.
 
-- **Gemini endurance era ACTIVE.** Eight-day mission complete. Fuel cells proven. The medical baseline: cardiovascular deconditioning is measurable but reversible. Apollo is medically feasible for eight-day lunar missions.
-- **Cooper arc at three appearances.** Liberty Bell 7 sank (degree 20, Grissom). Faith 7 flew (degree 24, Cooper solo). Gemini 5 endures (degree 40, Cooper + Conrad). Conrad begins his four-flight career here -- Gemini 5, Gemini 11, Apollo 12 (third on the Moon), Skylab 2.
-- **The phantom rendezvous introduced.** When the Rendezvous Evaluation Pod was lost during the oxygen crisis, Cooper and Conrad maneuvered to a mathematical point in space -- proving rendezvous is a computational problem, not a visual one.
-- **The *Setophaga* trio is complete.** Three consecutive genus appearances (38-39-40) mapping displacement cascade: bystander, aggressor, victim. The Hermit Warbler's hybrid zone with Townsend's is moving southward at measurable rates.
-- **Parulidae at eight members.** Three ahead of the next-closest family. Four *Setophaga* in the engine (Yellow 16, BTG 38, Townsend's 39, Hermit 40).
-- **The fuel cell legacy.** Gemini 5's GE PB2 cells generated power for the full eight days despite the oxygen crisis. Apollo adopted Pratt & Whitney fuel cells building on this experience. Apollo 13's fuel cell failure in 1970 -- Jim Lovell was preparing for Gemini 7 when Gemini 5 flew.
-- **Count Rumford dedication.** Physicist who proved heat is motion, not substance -- the thermodynamic principle that makes fuel cells possible. Died on August 21 -- the day Gemini 5 launched.
-- **Nine-degree E≥5 streak continues.** Degrees 32-40. Alice Smith at E=5 is the ninth consecutive degree at E≥5.
+2. **Cooper returns after sixteen degrees and the prodigal astronaut arc closes at twenty.** Faith 7 flew at degree 24. Gemini 5 flies at degree 40. The Liberty Bell 7 sinking at degree 20 launched the Cooper-era arc, Faith 7 at 24 sustained it, and Gemini 5 at 40 consolidated it across twenty degrees. Pete Conrad enters the engine here on his first flight and will reappear on Apollo 12 and Skylab 2 across later degrees.
 
-</details>
+3. **The *Setophaga* trio completes at degrees 38-39-40 and closes the first consecutive-genus arc in the engine.** Three consecutive appearances of the same warbler genus -- Black-throated Gray, Townsend's, Hermit -- is unprecedented. The trio maps a biological drama: the bystander (BTG), the aggressor (Townsend's), and the victim (Hermit). No other family run has told a single ecological story across consecutive degrees at this resolution.
+
+4. **The fuel cell revolution is the sharpest technology inflection point in the crewed spaceflight era.** Every crewed spacecraft before Gemini 5 used batteries. Every crewed spacecraft after used fuel cells through the Space Shuttle. The path from Gemini 5's GE PB2 cells to Apollo's Pratt & Whitney cells to the Shuttle's three-cell 12 kilowatt system to today's hydrogen fuel cell vehicles is direct and traceable.
+
+5. **The displacement cascade reaches the victim one degree after its aggressor.** Degree 39 documented the Townsend's Warbler as the aggressive canopy competitor expanding southward. Degree 40 documents the Hermit Warbler as the species being displaced, its range contracting, its genome dissolving into the hybrid swarm. The engine presented the winner, then the loser, in consecutive degrees -- the first time this sequencing has occurred.
+
+6. **Parulidae extends its lead to eight members, confirming family dominance.** The warbler family now runs three ahead of Hirundinidae and Turdidae at five each, and the gap continues to widen. The engine's SPS track is now structurally warbler-dominated, and the family dominance mirrors the real ecological distribution of warblers in the Pacific Northwest biome.
+
+7. **Forty is the first significant angular fraction beyond the opening quadrant.** Degree 40 is one-ninth of the 360-degree circle -- the engine's first cumulative milestone beyond the ninety-degree quadrant boundary at degree 90 that still lies ahead. The fortieth release carries first-EVA synthesis, family dynasty closure, fuel cell inflection, displacement cascade victim, and date-symmetric dedication all landing on the same degree.
+
+8. **Continuous-throughput systems outperform burst-capacity systems under stress.** Gemini 5's fuel cells recovered from the oxygen tank heater failure because they run on continuous low-intensity conversion rather than on stored high-intensity reserves. The Hermit Warbler survives at the canopy apex because its caloric budget is throughput-based, not reserve-based. Alice Smith's career recovered because her vocal technique supports sustained output rather than burst peaks. The engine documents throughput-over-burst as a durable structural principle at degree 40.
+
+9. **Date-symmetric dedications are structural signals, not biographical coincidence.** Count Rumford died on August 21, 1814, exactly one hundred fifty-one years before Gemini 5 launched on August 21, 1965. The engine's choice of Rumford as dedication anchor is a thermodynamic-principle alignment (heat-as-motion enables fuel cell function) plus a date-symmetry alignment. When both alignments hold, the dedication carries structural weight comparable to the Part A / Part B cross-sync itself.
+
+10. **One-ninth of the circle is where first-instance accumulation gives way to second-instance consolidation.** The engine has now documented forty degrees and is beginning to see recurring patterns (Cooper's second flight, Smith's Epic recovery mirroring Cooper's, the third consecutive *Setophaga*, the second woman-led degree in recent ten-degree window). Degree 40 is the transition point from accumulation to consolidation; every subsequent degree will increasingly draw on prior degrees for structural comparison rather than introducing entirely novel elements.
+
+## Cross-References
+
+| Thread | Entity | Role |
+|--------|--------|------|
+| S36 | Alice Smith | Artist -- Neo-Soul endurance vocalist, four-octave range, Epic crisis to independence, Black Rock Coalition lineage, seventh woman |
+| SPS | Hermit Warbler | Species -- eighth Parulidae, third consecutive *Setophaga*, displacement victim, canopy hermit, narrowband 6-8 kHz song |
+| NASA | Gemini 5 | Mission -- Cooper's second flight, 8-day endurance, first fuel cells, oxygen crisis, phantom rendezvous, 120 orbits |
+| Dedication | Count Rumford | Heat-as-motion physicist, died on Gemini 5's launch date August 21, thermodynamic foundation for fuel cell operation |
+| Degree 20 -> 40 | Liberty Bell 7 -> Gemini 5 | Astronaut arc -- Grissom's capsule sank at 20, Cooper endures for eight days at 40, twenty-degree recovery span |
+| Degree 24 -> 40 | Faith 7 -> Gemini 5 | Cooper returns -- solo Mercury capsule to two-person endurance vehicle, 16-degree arc between the two appearances |
+| Degree 38 -> 40 | Gemini 3 -> Gemini 5 | Gemini progression -- maneuver, spacewalk, endurance in three consecutive Gemini degrees |
+| Degree 39 -> 40 | Townsend's -> Hermit | Displacement cascade -- aggressor to victim in consecutive degrees, same genus, hybridization pressure |
+| Degree 38-40 | BTG / Townsend's / Hermit | Three-degree *Setophaga* trio -- bystander, aggressor, victim, first consecutive-genus run |
+| Gemini 5 -> Apollo | Fuel cell legacy | GE PB2 to Pratt & Whitney fuel cells through Apollo, direct engineering descent |
+| Gemini 5 -> Shuttle | Fuel cell legacy | Electrical power generation architecture traceable across four decades |
+| Mercury -> Gemini 5 | Battery era closes | Silver-zinc battery era ends; fuel cell era begins at degree 40 |
+| Epic Records -> Rainwater Records | Smith's independence | Kickstarter-funded recovery; template for later neo-soul independence patterns |
+| Rumford 1798 -> Gemini 5 1965 | Thermodynamic principle | Heat-as-motion demonstrated at Munich; applied in orbit 167 years later |
+| Rumford Aug 21 1814 -> Gemini 5 Aug 21 1965 | Date-symmetric alignment | 151-year gap, same calendar date, structural symmetry |
+| Ron Artis Jr (39) -> Alice Smith (40) | Endurance vocalist succession | Second Artis solo EVA yields to seventh woman's endurance mission |
+| BRC 1985 -> Smith 2013 | Black Rock Coalition | Vernon Reid / Greg Tate founded; Smith carries the ethos forward through independence |
+| Clohessy-Wiltshire -> phantom rendezvous | Orbital mechanics | Computed intercept to a mathematical point in space; same principle as Gemini 4 |
+| Hybrid zone field studies | Washington / Oregon / BC | Long-term population genetics documentation of Townsend's x Hermit absorption |
+| Count Rumford cannon-boring 1798 | Munich experiments | Proved heat is motion; foundation for later thermodynamics and fuel cell theory |
 
 ## Emerging Patterns at Degree 40
 
@@ -105,21 +139,23 @@ The Hermit Warbler is the third consecutive *Setophaga* and the victim in the di
 | S36 Artists | 41 documented (degrees 0-40) | Alice Smith -- The Endurance Vocalist, four-octave range, BRC lineage, seventh woman |
 | SPS Species | 41 documented (degrees 0-40) | Hermit Warbler -- eighth Parulidae, third consecutive *Setophaga*, displacement victim |
 | NASA Missions | 41 aligned (1.0-1.41) | Gemini 5 -- Cooper returns, 8-day endurance, first fuel cells, phantom rendezvous |
-| NASA Programs | 5 (Gemini endurance era) | Pioneer ✓ / Mercury ✓ / Ranger ✓ / Mariner active / Gemini active (maneuver → EVA → endurance) |
+| NASA Programs | 5 (Gemini endurance era) | Pioneer / Mercury / Ranger complete; Mariner active; Gemini at endurance |
 | Parulidae Family | FAMILY LEAD (8 species) | Three ahead of Hirundinidae and Turdidae (5 each) |
-| *Setophaga* Trio | COMPLETE (degrees 38-39-40) | BTG bystander → Townsend's aggressor → Hermit victim -- displacement cascade |
-| Energy Profile | E≥5 × 9 consecutive | Degrees 32-40 -- longest sustained high-energy sequence |
+| *Setophaga* Trio | COMPLETE (degrees 38-39-40) | BTG bystander, Townsend's aggressor, Hermit victim |
+| Energy Profile | E≥5 x 9 consecutive | Degrees 32-40 -- longest sustained high-energy sequence |
 | Fuel Cell Era | BEGINS at degree 40 | Every crewed spacecraft after Gemini 5 uses fuel cells through Shuttle |
-| Cooper Arc | 3 appearances | Liberty Bell 7 sank (20, Grissom) → Faith 7 solo (24) → Gemini 5 crew (40) |
-| Women in Engine | 7 documented | Anderson, Bown, Monge, Loud, Shepherd, Eager, **Smith** |
-| Angular Fraction | 1/9 of circle | First significant fraction beyond the opening quadrant |
-| Habitat Range | +MOUNTAIN CONIFER CANOPY | 50 meters above forest floor, narrowband canopy-level song |
+| Cooper Arc | 3 appearances | Liberty Bell 7 (20, Grissom) / Faith 7 (24) / Gemini 5 (40) |
+| Women in Engine | 7 documented | Anderson, Bown, Monge, Loud, Shepherd, Eager, Smith |
+| Angular Fraction | 1/9 of circle | First significant fraction beyond opening quadrant |
+| Habitat Range | Mountain conifer canopy | 30-50 meters above forest floor, narrowband canopy-level song |
+| Date-Symmetric Dedications | 1 confirmed | Rumford died 1814-08-21; Gemini 5 launched 1965-08-21 |
+| Displacement Cascade | Complete at degree 40 | Bystander / aggressor / victim in consecutive degrees |
 
 ## Programs Active at Degree 40
 
 | Program | Status | Degrees |
 |---------|--------|---------|
-| **Gemini** | **ENDURANCE ERA** -- 8-day record, fuel cells proven, phantom rendezvous | 38+ |
+| Gemini | ENDURANCE ERA -- 8-day record, fuel cells proven, phantom rendezvous | 38+ |
 | Mariner | Active -- Venus and Mars reached | 27+ |
 | Pioneer | Complete (early series) | 1-5 |
 | Mercury | Complete (7 flights) | 16-22 |
@@ -128,77 +164,56 @@ The Hermit Warbler is the third consecutive *Setophaga* and the victim in the di
 ## Engine Position
 
 ```
-v1.49.501  = NASA 1.0   + degree 0   Pass 2  ✓
+v1.49.501  = NASA 1.0   + degree 0   Pass 2  (FOUNDATION)
 ...
-v1.49.523  = NASA 1.22  + degree 22  Pass 2  ✓  (last pre-built NASA)
-v1.49.524  = NASA 1.23  + degree 23  Pass 2  ✓  (first fresh dual-build)
+v1.49.523  = NASA 1.22  + degree 22  Pass 2  (last pre-built NASA)
+v1.49.524  = NASA 1.23  + degree 23  Pass 2  (first fresh dual-build)
 ...
-v1.49.539  = NASA 1.39  + degree 38  Pass 2  ✓  (GEMINI BEGINS)
-v1.49.540  = NASA 1.40  + degree 39  Pass 2  ✓  (First EVA)
-v1.49.541  = NASA 1.41  + degree 40  Pass 2  ← THIS RELEASE (FUEL CELLS / ENDURANCE)
-v1.49.542  = NASA 1.42  + degree 41  Pass 2  ← next
+v1.49.536  = NASA 1.36  + degree 35  Pass 2  (10% milestone)
+v1.49.539  = NASA 1.39  + degree 38  Pass 2  (GEMINI BEGINS)
+v1.49.540  = NASA 1.40  + degree 39  Pass 2  (First EVA)
+v1.49.541  = NASA 1.41  + degree 40  Pass 2  <- THIS RELEASE (FUEL CELLS / ENDURANCE)
+v1.49.542  = NASA 1.42  + degree 41  Pass 2  <- next
 ```
-
-## Files
-
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/040-alice-smith/pass2-refinement.md` | UPDATED | ~500 |
-| `SPS/research/releases/040-hermit-warbler/pass2-refinement.md` | UPDATED | ~500 |
-| `NASA/1.41/research.md` | REFERENCE | ~4,000 |
-| `NASA/1.41/organism.md` | REFERENCE | ~2,500 |
-| `NASA/1.41/degree-sync.json` | REFERENCE | -- |
-| `docs/release-notes/v1.49.541/README.md` | REWRITTEN | -- |
-
-## Cross-References
-
-| Thread | Entity | Role |
-|--------|--------|------|
-| S36 | Alice Smith | Artist -- Neo-Soul endurance vocalist, four-octave range, Epic crisis → independence, BRC lineage, seventh woman |
-| SPS | Hermit Warbler | Species -- eighth Parulidae, third consecutive *Setophaga*, displacement victim, canopy hermit, narrowband song |
-| NASA | Gemini 5 | Mission -- Cooper's second flight, 8-day endurance, first fuel cells, oxygen crisis, phantom rendezvous, 120 orbits |
-| Dedication | Count Rumford | Heat-as-motion physicist, died on Gemini 5's launch date, thermodynamic foundation for fuel cells |
-| Degree 24→40 | Faith 7 → Gemini 5 | Cooper returns -- solo capsule to two-person endurance vehicle, 16-degree arc |
-| Degree 39→40 | Townsend's → Hermit | Displacement cascade -- aggressor to victim in consecutive degrees |
-| Degree 38→40 | Gemini 3 → Gemini 5 | Gemini progression -- maneuver, spacewalk, endurance, three capabilities in three degrees |
-| Degree 20→40 | Grissom sinks → Cooper endures | Astronaut resilience -- Liberty Bell 7 to Gemini 5, twenty degrees of recovery and return |
-
-## The Endurance Degree -- Complete State at Degree 40
-
-| Thread | Degree 40 State |
-|--------|----------------|
-| S36 Artists | Jones (0) → Frisell (1) → ... → Booker T. Jones (38) → Ron Artis Jr (39) → **Alice Smith (40)** |
-| SPS Species | Heron (0) → Wren (1) → ... → Townsend's Warbler (39) → **Hermit Warbler (40)** |
-| NASA Missions | Founding (1.0) → ... → Gemini 4 (1.40) → **Gemini 5 (1.41) -- FUEL CELLS / 8-DAY ENDURANCE** |
-| Acoustic Elements (S36) | Silence (0) → ... → The EVA (39) → **The Endurance Vocal (40)** |
-| Acoustic Elements (SPS) | Silence (0) → ... → The Canopy Buzz (39) → **The Thinning (40)** |
-| *Setophaga* | Yellow (16) → BTG (38) → Townsend's (39) → **Hermit (40) -- trio complete, 4 in engine** |
-| Energy | **Nine consecutive E≥5 (degrees 32-40)** -- longest sustained high-energy sequence |
-| Parulidae | Quintet closed (14-17, 20) → reopened (38) → **octet (40), three consecutive *Setophaga*** |
-| Fuel cell era | Batteries only (Mercury through Gemini 4) → **fuel cells (Gemini 5 onward through Shuttle)** |
-| Cooper arc | Liberty Bell 7 sank (20) → Faith 7 solo (24) → **Gemini 5 crew endurance (40)** |
 
 ## Cumulative Engine Statistics (v1.49.501-541)
 
 | Metric | Value |
 |--------|-------|
 | Paired releases completed | 41 (degrees 0-40) |
-| NASA programs | 5 (Pioneer complete, Mercury complete, Ranger complete, Mariner active, Gemini active) |
-| Parulidae (warblers) | **8 -- family lead** (*Setophaga* trio at 38-39-40) |
+| NASA programs | 5 (Pioneer / Mercury / Ranger complete, Mariner active, Gemini active) |
+| Parulidae (warblers) | 8 -- family lead (*Setophaga* trio at 38-39-40) |
 | Taxonomic families (SPS) | 19+ |
 | *Setophaga* in engine | 4 (Yellow 16, BTG 38, Townsend's 39, Hermit 40) |
-| Consecutive E≥5 degrees | **9 (degrees 32-40)** -- longest sustained high-energy sequence |
+| Consecutive E≥5 degrees | 9 (degrees 32-40) -- longest sustained high-energy sequence |
 | E=5 modes | 9 (including endurance-vocal for Alice Smith) |
-| Fuel cell era | **BEGINS** -- every crewed spacecraft after Gemini 5 uses fuel cells through Shuttle |
+| Fuel cell era | BEGINS -- every crewed spacecraft after Gemini 5 uses fuel cells through Shuttle |
 | Artist-city patterns | 41 (Export through The Endurance Vocalist) |
 | Acoustic elements (S36) | 41 |
 | Acoustic elements (SPS) | 41 |
 | Genre stages | 21 (Neo-Soul returns) |
-| Women in engine | 7 (Anderson, Bown, Monge, Loud, Shepherd, Eager, **Smith**) |
-| Cooper arc | 3 appearances (Liberty Bell 7 sinking at 20, Faith 7 at 24, Gemini 5 at 40) |
+| Women in engine | 7 (Anderson, Bown, Monge, Loud, Shepherd, Eager, Smith) |
+| Cooper arc | 3 appearances (Liberty Bell 7 at 20, Faith 7 at 24, Gemini 5 at 40) |
+| Displacement cascades documented | 1 (Townsend's x Hermit, degrees 39-40) |
+| Date-symmetric dedications | 1 (Rumford) |
+
+## Files
+
+- `S36/research/releases/040-alice-smith/pass2-refinement.md` -- UPDATED (~500 words)
+- `SPS/research/releases/040-hermit-warbler/pass2-refinement.md` -- UPDATED (~500 words)
+- `www/tibsfox/com/Research/NASA/1.41/research.html` -- PUBLISHED (~5,665 words)
+- `www/tibsfox/com/Research/NASA/1.41/organism.html` -- PUBLISHED (~3,724 words)
+- `www/tibsfox/com/Research/NASA/1.41/mathematics.html` -- PUBLISHED (~3,340 words)
+- `www/tibsfox/com/Research/NASA/1.41/simulation.html` -- PUBLISHED (~3,148 words)
+- `www/tibsfox/com/Research/NASA/1.41/curriculum.html` -- PUBLISHED (~3,794 words)
+- `www/tibsfox/com/Research/NASA/1.41/papers.html` -- PUBLISHED (~3,097 words)
+- `www/tibsfox/com/Research/NASA/1.41/index.html` -- PUBLISHED (~3,148 words)
+- `docs/release-notes/v1.49.541/README.md` -- THIS FILE (uplifted to A-grade)
+- `docs/release-notes/v1.49.541/chapter/00-summary.md` -- auto-generated summary excerpt
+- `docs/release-notes/v1.49.541/chapter/03-retrospective.md` -- lessons learned chapter
 
 ---
 
-*Degree 40: eight days or bust. Gordon Cooper -- the man who flew Faith 7 alone and landed it manually when every system failed -- returns with Pete Conrad in a capsule powered by something no one had tested in space: fuel cells combining hydrogen and oxygen into electricity and drinking water. On the first day, the oxygen tank heater fails. The cells degrade. Cooper and Conrad power down, drift in silence, and wait. The cells recover. They stay for eight days, 120 orbits, the full duration of a trip to the Moon and back. High in the Cascades, a Hermit Warbler gleans insects from needle clusters at the top of a Douglas-fir, 50 meters above the forest floor -- a thin buzzy song carried on frequencies that vanish before they reach the ground, a signal for other hermits at altitude. The bird is retreating southward, its genome dissolving into the Townsend's hybrid swarm, but it is still singing. Alice Smith rebuilt her career after six years of major-label silence -- Kickstarter instead of Epic, independence instead of contractual limbo, a four-octave voice that refuses to be one genre. The fuel cells hummed. The hermit sang. The voice endured. Eight days or bust.*
+*Degree 40: eight days or bust. Gordon Cooper -- the man who flew Faith 7 alone and landed it manually when every system failed -- returns with Pete Conrad in a capsule powered by something no one had tested in space: fuel cells combining hydrogen and oxygen into electricity and drinking water. On the first day, the oxygen tank heater fails. The cells degrade. Cooper and Conrad power down, drift in silence, and wait. The cells recover. They stay for eight days, 120 orbits, the full duration of a trip to the Moon and back. High in the Cascades, a Hermit Warbler gleans insects from needle clusters at the top of a Douglas-fir, 30 to 50 meters above the forest floor -- a thin buzzy song carried on frequencies that vanish before they reach the ground, a signal for other hermits at altitude. The bird is retreating southward, its genome dissolving into the Townsend's hybrid swarm, but it is still singing. Alice Smith rebuilt her career after six years of major-label silence -- Kickstarter instead of Epic, independence instead of contractual limbo, a four-octave voice that refuses to be one genre. The fuel cells hummed. The hermit sang. The voice endured. Eight days or bust.*
 
 *"The oxygen failed on day one. They powered down, drifted, and waited. The cells recovered. They stayed. Eight days. The hermit endures at the canopy top, retreating but still singing. The endurance is the mission."*
