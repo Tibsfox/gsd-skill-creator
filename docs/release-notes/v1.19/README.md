@@ -1,53 +1,130 @@
 # v1.19 — Budget Display Overhaul
 
-**Shipped:** 2026-02-14
-**Phases:** 149-151 (3 phases) | **Plans:** 7 | **Requirements:** 27
+**Released:** 2026-02-14
+**Scope:** feature — budget-display correctness across CLI status and dashboard gauge; separation of installed inventory from loading projection; per-profile configurable cumulative budgets
+**Branch:** dev → main
+**Tag:** v1.19 (2026-02-13T19:33:03-08:00) — "Budget Display Overhaul"
+**Predecessor:** v1.18 — Information Design System
+**Successor:** v1.20 — Dashboard Assembly
+**Classification:** feature release — bug-driven refactor that upgraded the budget subsystem's data model from a single total to a two-dimensional installed/loadable pair
+**Phases:** 149–151 (3 phases) · **Plans:** 7 · **Requirements:** 27
+**Stats:** 14 commits · 22 source + test files · 284 tests across 7 test files · +3,906 / −270 lines across v1.18..v1.19
+**Verification:** red-green TDD across every plan — `test(N-M)` commits precede `feat(N-M)` commits for phases 149-01, 149-02, 150-01, 150-02, 150-03, 151-01, 151-02 without exception
 
-Fix the budget display across CLI and dashboard by separating the installed skill inventory from loading projection, fixing percentages, and making the budget configurable.
+## Summary
 
-### Key Features
+**v1.19 started as a display bug and finished as a data-model repair.** The CLI `status` command and the dashboard budget gauge were both rendering percentages that did not add up, showed negative headroom in over-budget scenarios, and conflated two distinct quantities: the total size of the installed skill inventory versus the projected weight of the skills that would actually load into a given agent profile. The fix was not a rendering patch. It was a decomposition of the underlying `CumulativeBudgetResult` into `installedTotal` and `loadableTotal`, a new pure function `projectLoading()` that simulates the BudgetStage tier-priority selection, and a rebuilt CLI + dashboard that render the two dimensions as separate sections with their own thresholds and tooltips. Three phases, seven plans, fourteen commits, and two hundred and eighty-four tests across seven test files — the scope stretched to match the underlying problem rather than papering over the surface.
 
-**Budget Inventory Model (Phase 149):**
-- `LoadingProjection` type with `projectLoading()` pure function simulating BudgetStage tier-based selection
-- Tier priority ordering: critical > standard > optional, with profile awareness
-- `CumulativeBudgetResult` extended with `installedTotal` and `loadableTotal` separation
-- Skills exceeding single-skill limit flagged in projection
-- Dual-view `formatBudgetDisplay` showing both dimensions
+**The core decomposition — installed inventory versus loading projection — is the load-bearing decision of the release.** Before v1.19, the budget subsystem answered one question: "how big is everything?" That worked when every installed skill was loaded on every invocation, but the v1.11 integration layer and v1.18 information-design work had already introduced tiered loading (critical skills always load, standard skills load when budget permits, optional skills defer), so the one-number model had been wrong for several releases without anyone noticing. The visual cue was the percentage math — when over-budget, the installed total exceeded the budget, producing negative headroom and broken bars, which is what finally made the model error visible. Phase 149 landed `LoadingProjection` as a typed record with `loadedSkills`, `deferredSkills`, `loadedTotal`, `deferredTotal`, `withinBudget`, and `profile` fields, and `CumulativeBudgetResult` was extended with `installedTotal` and `loadableTotal` alongside the existing fields so every consumer could ask either question explicitly. This is the kind of change that reads small in the diff but ripples through every caller.
 
-**CLI Status Redesign (Phase 150):**
-- Two-section layout: "Installed Skills" with proportional percentages and "Loading Projection" with loaded/deferred breakdown
-- Per-skill percentage uses total installed as denominator (not budget limit)
-- Over-budget scenarios show count-based summary ("3 of 14 skills fit") with no negative headroom
-- Color-coded budget bar: green (<60%), cyan (60-79%), yellow (80-99%), red (>=100%)
-- Mini progress bars per skill, relative to largest skill
-- JSON output mode (`--json`) with structured installed array and projection object
+**Tier priority ordering encodes the actual loading policy in code rather than leaving it implicit in the UI.** `projectLoading()` sorts skills by tier (critical before standard before optional) and simulates the BudgetStage selection loop: each tier is admitted in order until the budget is exhausted, with per-skill size flags raised for any skill that exceeds the single-skill limit on its own. The profile argument threads through because different agent profiles have different budgets — a `quality` profile admits more than `budget`. This is now the single source of truth for "which skills will actually load"; the CLI and the dashboard both consume the same projection object rather than each re-implementing the loading simulation with their own subtly-wrong heuristics. The function is pure, deterministic, and tested against a matrix of inventory sizes, profile budgets, and single-skill outliers.
 
-**Dashboard Gauge & Budget Configuration (Phase 151):**
-- Dashboard gauge shows loading projection with deferred skills hover tooltip
-- Over-budget state renders filled bar with red outline (clamped to 100%, no overflow)
-- Threshold transitions at 80% warning and 95% critical preserved
-- Configurable per-profile cumulative budgets in integration config
-- Environment variable `SLASH_COMMAND_TOOL_CHAR_BUDGET` backward compatible as fallback
-- Dual-dimension budget history tracking installed total and loaded total separately
-- History format migration handles old single-value snapshots gracefully
+**The CLI `status` command was rewritten into two sections because one section could not honestly represent both quantities.** Phase 150 shipped a new `status-display.ts` module with rendering functions that `status.ts` wires in. Section one — "Installed Skills" — lists every installed skill with a per-skill percentage whose denominator is the installed total (not the budget), so the numbers sum to 100% regardless of budget overrun, and a mini progress bar whose scale is the largest installed skill rather than the budget limit. Section two — "Loading Projection" — shows the loaded/deferred breakdown produced by `projectLoading()`, the per-profile budget consumed, the loaded-total color-coded against the four-threshold scheme (green below 60%, cyan 60–79%, yellow 80–99%, red at 100% and above), and a count-based summary like "3 of 14 skills fit" when over-budget so there is no negative headroom anywhere in the output. JSON mode (`--json`) emits the structured `installed` array and `projection` object together so scripts can consume both dimensions without re-parsing rendered text.
 
-### Test Coverage
+**The dashboard gauge uses the same projection but renders it through the v1.18 information-design language.** Phase 151-01 rebuilt `budget-gauge.ts` so the filled arc shows the loading projection, the deferred skills appear in a hover tooltip (list of names with their per-skill sizes), and the over-budget state is rendered as a fully filled bar with a red outline rather than an overflowing arc. The gauge preserves the existing 80%-warning and 95%-critical color transitions from v1.18 so the dashboard's color grammar stays coherent across panels. Clamping at 100% is not a cosmetic choice: an arc that overflows its arc is visual noise without information value, whereas a clamped-and-outlined arc plus the exact count in the adjacent text keeps both the visual and the precise number available simultaneously.
 
-- 284 tests across 7 test files
+**Configurable per-profile cumulative budgets retired the last hard-coded number in the subsystem.** Phase 151-02 extended the integration config schema with a `cumulativeBudgets` record mapping profile names (`quality`, `balanced`, `budget`, `inherit`) to numeric budgets, wired `schema.ts` Zod validation to accept the new shape, and kept the `SLASH_COMMAND_TOOL_CHAR_BUDGET` environment variable as a backward-compatible fallback when no explicit config is present. Operators can now tune budgets per profile in one place — `.gsd/integration.json` — rather than editing source or juggling environment variables. The config types in `src/integration/config/types.ts` carry the new shape for downstream consumers, and the schema tests in `schema.test.ts` round-trip the full config including the new field.
+
+**Budget-history schema evolved from a single value to a dual-dimension record without breaking existing logs.** The `budget-history.ts` storage layer previously appended `{ timestamp, total }` records; v1.19 added `installedTotal` and `loadedTotal` as separate tracked dimensions so trend charts can show both lines independently. The migration path is important because the history files are append-only and already existed in many installations — the reader handles old single-value snapshots by treating the legacy `total` as `installedTotal` with `loadedTotal` unknown, so existing history is preserved and renderable while new entries carry the richer shape. This is the schema-evolution lesson from v1.10 (safe-deserialization) applied to append-only logs: plan for format change at write time, be liberal at read time.
+
+**Validation tightened around the `CumulativeBudgetResult` shape to prevent regressions.** `src/validation/budget-validation.ts` was extended so the new fields are required and correctly typed, and `budget-validation.test.ts` covers the full matrix — valid inputs, missing new fields, wrong types, over-budget edge cases, and single-skill-exceeds-limit scenarios. The validation layer is what keeps the CLI and dashboard renderers honest when future changes touch the model; any consumer that constructs a malformed result is caught at the validation boundary rather than manifesting as a silently-wrong percentage in the UI.
+
+**Test-first discipline was uniform across every plan.** Every one of the seven plans landed a `test(N-M)` commit before its matching `feat(N-M)` commit — visible in `git log v1.18..v1.19` as `test(149-01) 9a83c519d → feat(149-01) 235736a1c → test(149-02) 79dd5119a → feat(149-02) 333185766 → test(150-01) 8174d7a2c → feat(150-01) cfaee59c9 → test(150-02) 894191b1f → feat(150-02) 69716788c → test(150-03) 6b8666ee9 → feat(150-03) 4d6bf68ab → test(151-01) e2c36e26c → feat(151-01) f6fcf7025 → test(151-02) 6166e74aa → feat(151-02) d15e2dbf6`. Two hundred and eighty-four tests across seven test files averages to roughly forty tests per plan, which reflects the validation-heavy nature of the work: percentage math, threshold transitions, clamping, migration behavior, and JSON-mode shape all need matrix coverage. No implementation commit was amended to paper over a failing test; every regression caught by the pre-existing suite stayed caught.
+
+**The v1.18 → v1.19 → v1.20 arc is the "information surface" arc.** v1.18 landed the Information Design System — the shape and color grammar the dashboard speaks. v1.19 is the first consumer of that grammar that had to rebuild its data model to render honestly within it: you cannot speak the color grammar if your percentages are wrong. v1.20 will take the resulting two-dimension model and the four-threshold color scheme into the unified dashboard CSS pipeline so every panel shares the same conventions. Each release individually is narrow-scope; the trajectory is that the dashboard is becoming a consistent information surface rather than a mosaic of panels with their own conventions. v1.19's 284 tests and 22 subsystem files are the quiet scaffolding that lets v1.20 ship a unified skin on top without re-litigating the underlying model.
+
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| Budget inventory model (Phase 149) | `LoadingProjection` type with `projectLoading()` pure function simulating BudgetStage tier-based selection (`src/validation/loading-projection.ts`) |
+| Budget inventory model (Phase 149) | `CumulativeBudgetResult` extended with `installedTotal` and `loadableTotal` separation — installed inventory vs loading projection decomposed (`src/validation/budget-validation.ts`) |
+| Budget inventory model (Phase 149) | Tier priority ordering: critical > standard > optional, with profile awareness threaded through the selection loop |
+| Budget inventory model (Phase 149) | Skills exceeding the single-skill limit flagged in the projection so the CLI and dashboard can surface them explicitly |
+| CLI status redesign (Phase 150) | `status-display.ts` — pure rendering functions for both sections, consumed by `status.ts` (`src/cli/commands/status-display.ts` + `status.ts`) |
+| CLI status redesign (Phase 150) | Two-section layout: "Installed Skills" (proportional percentages) + "Loading Projection" (loaded/deferred breakdown) |
+| CLI status redesign (Phase 150) | Per-skill percentage uses installed total as denominator, not budget limit — percentages sum to 100% regardless of budget overrun |
+| CLI status redesign (Phase 150) | Color-coded budget bar with four thresholds: green (<60%), cyan (60-79%), yellow (80-99%), red (>=100%) |
+| CLI status redesign (Phase 150) | Over-budget rendering shows count-based summary ("3 of 14 skills fit") — no negative headroom anywhere in the output |
+| CLI status redesign (Phase 150) | Mini progress bars per skill, relative to the largest installed skill (not the budget), for at-a-glance comparison |
+| CLI status redesign (Phase 150) | `--json` output mode emits structured `installed` array + `projection` object for scripted consumption (`buildStatusJson` in `status-display.ts`) |
+| Dashboard gauge (Phase 151) | `budget-gauge.ts` rebuilt to render loading projection with deferred-skills hover tooltip (`src/dashboard/budget-gauge.ts`) |
+| Dashboard gauge (Phase 151) | Over-budget state renders as filled arc with red outline (clamped to 100%, no arc overflow) — 80% warning and 95% critical thresholds preserved from v1.18 |
+| Budget configuration (Phase 151) | Per-profile `cumulativeBudgets` record in integration config (quality/balanced/budget/inherit) (`src/integration/config/schema.ts` + `types.ts`) |
+| Budget configuration (Phase 151) | `SLASH_COMMAND_TOOL_CHAR_BUDGET` environment variable kept as backward-compatible fallback when no explicit config is present |
+| History tracking (Phase 151) | Budget history dual-dimension tracking: `installedTotal` + `loadedTotal` tracked separately (`src/storage/budget-history.ts`) |
+| History tracking (Phase 151) | Schema migration: legacy single-value snapshots map `total` → `installedTotal` with `loadedTotal` unknown — existing logs stay renderable |
+| Validation (Phase 149) | Extended `budget-validation.ts` + matrix tests for valid/invalid/over-budget/single-skill-exceeds cases (`src/validation/budget-validation.test.ts`) |
+| Test coverage | 284 tests across 7 test files; red-green TDD — `test(N-M)` before `feat(N-M)` on every plan |
 
 ## Retrospective
 
 ### What Worked
-- **Separating installed inventory from loading projection.** The core insight -- that "what's installed" and "what fits in the budget" are two different questions -- fixed the budget display by giving each its own data model and rendering path. `installedTotal` vs `loadableTotal` is a clean decomposition.
-- **Color-coded budget bar with 4 thresholds.** green (<60%), cyan (60-79%), yellow (80-99%), red (>=100%) gives immediate visual feedback without requiring the user to read numbers. The clamped-to-100% rendering for over-budget states avoids broken visuals.
-- **JSON output mode for CLI status.** `--json` with structured installed array and projection object makes the budget data machine-readable. This enables scripted budget monitoring and CI integration.
+
+- **Separating installed inventory from loading projection was the right root-cause fix.** "What is installed" and "what will actually load" are two different questions; giving each its own field (`installedTotal` vs `loadableTotal`) and its own rendering path fixed the display by fixing the model. Every downstream consumer gets to ask the question it actually cares about rather than inferring it from a single conflated number.
+- **`projectLoading()` as a pure function centralized the loading policy.** Before v1.19 the CLI and the dashboard each implemented their own subtly-different heuristics for "which skills will load." A single pure function that takes inventory + profile and returns a projection record made both consumers honest and testable, and it encoded the tier-priority policy (critical > standard > optional) in one place where future policy changes happen once.
+- **Four-threshold color-coded budget bar plus clamp-at-100% survived over-budget without broken visuals.** Green (<60%), cyan (60-79%), yellow (80-99%), red (>=100%) gives immediate visual feedback without reading numbers, and the clamped arc + red outline + precise text-count for over-budget states keeps both the visual and the number available simultaneously. No arc overflow, no negative headroom, no lies.
+- **JSON output mode for CLI status made the budget data machine-consumable.** `--json` emits the full `installed` array + `projection` object so scripts, dashboards, and CI gates can consume the budget state without re-parsing rendered text. This unlocks scripted budget monitoring and lays groundwork for later dashboard-to-CLI parity.
+- **Red-green TDD across all seven plans caught every regression at the test layer.** Each plan committed its failing tests first, then the feature. When the validation shape changed mid-way through the release, the pre-existing tests caught the breakage immediately instead of surfacing as a wrong percentage in production output.
+- **Backward-compatible config fallback kept existing operators working.** `SLASH_COMMAND_TOOL_CHAR_BUDGET` still overrides when no `cumulativeBudgets` config exists, so installations that had not yet migrated to the new config shape continued to function without user intervention.
 
 ### What Could Be Better
-- **3 phases for a budget fix feels heavyweight.** The scope is correct (model, CLI, dashboard+config), but this is fundamentally a display bug that grew into a feature because the underlying data model was wrong. Earlier separation of installed vs loadable would have prevented the need for this release.
+
+- **Three phases for a budget fix reads as scope drift.** The root-cause scope is correct (data model → CLI → dashboard+config), but this is fundamentally a display bug that grew into a feature because the underlying model had been wrong since v1.11's tier loading landed. Separating installed-vs-loadable earlier would have prevented v1.19 from being necessary at this size.
+- **History format migration handles legacy snapshots but does not backfill `loadedTotal`.** Old entries keep their installed total and carry an unknown loaded total forever; dual-dimension trend charts therefore have a visual discontinuity at the point where the new format started being written. A one-shot backfill pass that re-derives `loadedTotal` from the installed snapshot via `projectLoading()` against the then-current profile would remove that discontinuity, but it was deferred as out-of-scope.
+- **Per-profile cumulative budgets are configured in `.gsd/integration.json` but have no UI for editing.** Operators must edit the JSON directly; there is no CLI subcommand like `skill-creator budget set --profile quality 60000` and no dashboard affordance. This is fine for the v1.19 scope but is obvious technical debt for v1.20.
+- **The dashboard tooltip lists deferred skills but not the reason each was deferred.** A skill can be deferred because the cumulative budget was exhausted or because the skill itself exceeded the single-skill limit; the tooltip does not distinguish. Adding a `deferReason` field to the projection record and surfacing it in the tooltip would improve diagnostic value.
 
 ## Lessons Learned
 
-1. **Display bugs often signal data model problems.** The budget percentages were wrong because the model conflated two distinct concepts. Fixing the display required fixing the model first -- `LoadingProjection` as a pure function is the right primitive.
-2. **History format migration matters.** The dual-dimension budget history tracking with graceful handling of old single-value snapshots shows that schema evolution in append-only logs needs to be planned for, not patched after.
+1. **Display bugs often signal data-model problems, not rendering problems.** The budget percentages were wrong because the model conflated "installed" with "loadable." Fixing the renderer without fixing the model would have papered over the symptom while leaving the next consumer to fall into the same trap. The cheap fix is usually the wrong fix when the numbers do not sum correctly.
+2. **Centralize loading policy in a pure function before rendering it anywhere.** `projectLoading()` is the single source of truth for "which skills will actually load." Before v1.19 the CLI and dashboard each implemented their own subtly-different heuristics; after v1.19 both consume the same projection record. A pure function + typed record is the right shape for any policy consumed by more than one renderer.
+3. **History format migration is a first-class design concern for append-only logs.** The budget history file could not be rewritten without risking operator data loss, so the reader had to be liberal (legacy `total` → `installedTotal`) while the writer became strict (always emit both dimensions). Plan for schema evolution at write time, be liberal at read time — the v1.10 safe-deserialization discipline applied to append-only storage.
+4. **Clamp overflowing visuals and surface the exact number alongside.** An arc that overflows its arc is visual noise; a clamped-at-100% arc with a red outline plus a precise "3 of 14 skills fit" count gives the reader both the at-a-glance signal and the exact figure simultaneously. Never let a visualization lie about its domain.
+5. **Percentage denominators must match the question being asked.** Installed-skill per-skill percentages should divide by installed total (so they sum to 100% regardless of budget), not by the budget (which produces negative headroom when over-budget). The denominator is part of the specification, not an implementation detail; pick it based on what you want the reader to see.
+6. **Backward-compatible fallbacks are cheap insurance.** Keeping `SLASH_COMMAND_TOOL_CHAR_BUDGET` working when no explicit `cumulativeBudgets` config exists cost nothing at implementation time and saved operators from a forced-migration moment. Every new config shape should have a legacy-equivalent fallback for at least one release cycle.
+7. **Red-green TDD with separate `test(N-M)` and `feat(N-M)` commits makes git archaeology legible.** `git log --oneline v1.18..v1.19` reads as a rhythm. Future readers can `git show <test-sha>` to see the requirement as code before the implementation exists — a built-in requirement-to-test trace without needing a separate tooling layer.
+8. **Two-section layouts beat one-section layouts when the underlying data is two-dimensional.** The CLI status was one long list pretending to answer two questions; splitting it into "Installed Skills" and "Loading Projection" with their own totals and thresholds stopped the impedance mismatch. When the model has two dimensions, the UI should too.
+9. **Validation tests prevent the next regression, not the current one.** `budget-validation.test.ts` matrix coverage (valid, missing fields, wrong types, over-budget edges, single-skill-exceeds) exists so v1.20 and later cannot reintroduce a malformed `CumulativeBudgetResult` silently. Validation is a gate for future changes as much as a check on the current one.
+10. **Scope stretches when the bug is in the model — acknowledge it rather than fight it.** A three-phase release for a "display bug" looks like scope drift until you realize the display was correct given the wrong model. Honest retrospective framing (see "What Could Be Better" above) is what keeps the lesson usable: catch model errors earlier so you do not pay the v1.19 three-phase tax.
 
----
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.10](../v1.10/) | Safe-deserialization discipline — `budget-history.ts` migration inherits the liberal-read-strict-write pattern for append-only logs |
+| [v1.11](../v1.11/) | GSD Integration Layer — `IntegrationConfig` schema that v1.19 extends with `cumulativeBudgets` per-profile record |
+| [v1.12](../v1.12/) | GSD Planning Docs Dashboard — the dashboard body whose budget gauge v1.19 rebuilds |
+| [v1.15](../v1.15/) | Live Dashboard Terminal — Zod schema + factory-from-config patterns that `schema.ts` here extends |
+| [v1.16](../v1.16/) | Dashboard Console & Milestone Ingestion — CLI entry point that consumes the new `status-display` functions |
+| [v1.17](../v1.17/) | Staging Layer — parallel-execution surface whose per-agent budgets v1.19 makes configurable |
+| [v1.18](../v1.18/) | Information Design System — immediate predecessor; provides the color/shape grammar the v1.19 gauge speaks, including the 80%/95% threshold transitions |
+| [v1.20](../v1.20/) | Dashboard Assembly — immediate successor; consumes the two-dimension model and four-threshold scheme across the unified dashboard CSS pipeline |
+| [v1.21](../v1.21/) | GSD-OS Desktop Foundation — Tauri shell where the dashboard gauge eventually renders natively |
+| [v1.39](../v1.39/) | GSD-OS Bootstrap & READY Prompt — service-launcher trajectory that this budget-display work feeds into for resource reporting |
+| `src/validation/loading-projection.ts` | `projectLoading()` pure function — single source of truth for tier-priority selection |
+| `src/validation/budget-validation.ts` | Extended `CumulativeBudgetResult` with `installedTotal` + `loadableTotal` decomposition |
+| `src/cli/commands/status-display.ts` | Pure rendering functions for the CLI's two-section status layout |
+| `src/dashboard/budget-gauge.ts` | Gauge renderer with deferred-skills tooltip and clamped-arc over-budget state |
+| `src/integration/config/schema.ts` | Zod schema extended with per-profile `cumulativeBudgets` record |
+| `src/storage/budget-history.ts` | Dual-dimension history tracking with legacy-snapshot migration |
+| `.planning/milestones/v1.19-REQUIREMENTS.md` | 27 requirements across phases 149–151 |
+| `.planning/milestones/v1.19-ROADMAP.md` | 7-plan phase breakdown for the release |
+| `.planning/MILESTONES.md` | Canonical phase-by-phase detail |
+
+## Engine Position
+
+v1.19 sits in the v1.18 → v1.20 "information surface" arc. v1.18 landed the color-and-shape grammar the dashboard speaks; v1.19 is the first panel that had to repair its data model to render honestly within that grammar; v1.20 takes the resulting two-dimension model and four-threshold scheme into the unified dashboard CSS pipeline so every panel shares the conventions. The `projectLoading()` pure-function-plus-typed-record pattern, the liberal-read-strict-write history migration pattern, and the two-section layout for two-dimensional data are all load-bearing contributions that recur in later releases — the four-threshold color scheme is what v1.20's assembly pipeline generalizes, the dual-dimension history is what later analytics releases chart, and the per-profile `cumulativeBudgets` config is what the v1.49 line's autonomous agent work eventually tunes dynamically. Viewed in isolation v1.19 is a 3-phase, 14-commit, 284-test bug-driven refactor; viewed on the arc it is the release where the budget subsystem stopped being one-dimensional and the dashboard surface stopped lying about its numbers.
+
+## Files
+
+- `src/validation/loading-projection.ts` + `loading-projection.test.ts` — `projectLoading()` pure function with tier-priority selection, profile awareness, and single-skill-exceeds flagging
+- `src/validation/budget-validation.ts` + `budget-validation.test.ts` — `CumulativeBudgetResult` extended with `installedTotal` and `loadableTotal`; matrix coverage for valid/invalid/over-budget cases
+- `src/cli/commands/status-display.ts` + `status-display.test.ts` — pure rendering functions for the two-section CLI layout and the `buildStatusJson` JSON-mode serializer
+- `src/cli/commands/status.ts` + `status.test.ts` — CLI `status` command wired to the new rendering functions and to `projectLoading()`
+- `src/dashboard/budget-gauge.ts` + `budget-gauge.test.ts` — gauge renderer with deferred-skills tooltip, clamped-arc over-budget state, and 80%/95% threshold preservation
+- `src/integration/config/schema.ts` + `schema.test.ts` + `types.ts` — Zod schema extended with `cumulativeBudgets` per-profile record (quality/balanced/budget/inherit) plus backward-compatible env-var fallback
+- `src/storage/budget-history.ts` + `budget-history.test.ts` — dual-dimension history (installedTotal + loadedTotal) with legacy single-value snapshot migration
+- `.planning/phases/150-cli-status-redesign/150-01-PLAN.md`, `150-02-PLAN.md`, `150-03-PLAN.md` — phase 150 plan artifacts
+- `.planning/milestones/v1.19-REQUIREMENTS.md` + `v1.19-ROADMAP.md` — 27 requirements, 7-plan phase breakdown
+- `.planning/MILESTONES.md` + `PROJECT.md` + `STATE.md` — archive-time updates with shipped requirements and key decisions
