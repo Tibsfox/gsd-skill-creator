@@ -2,55 +2,86 @@
 
 **Released:** 2026-04-04
 **Degree:** 2 of 360
-**Part A:** Wayne Horvitz -- Jazz/Experimental/Composition, E=3, Central District, New York Composers Orchestra→Seattle. Venue builder, community organizer, The Royal Room founder. The institution builder who creates the stage others perform on.
-**Part B:** Varied Thrush (*Ixoreus naevius*) -- sustained single-tone whistle, E=2, old-growth understory to subalpine, Turdidae. One note, one frequency, AM modulation, the drone that defines the PNW forest atmosphere.
-**NASA Mission:** 1.2 -- Pioneer 1 (Thor-Able 2, October 11, 1958, accelerometer error, reached 113,854 km, fell back. 43 hours of data. First NASA spacecraft.)
-**NASA Organism:** Polystichum munitum (Sword Fern -- ground-layer perennial, the evergreen constant of the forest floor)
+**Part A:** Wayne Horvitz -- Jazz / Experimental / Composition, E=3, Central District Seattle (arrived 1988 from New York Composers Orchestra), The Royal Room on Martin Luther King Jr Way as community-venue platform. Zony Mash, Sweeter Than the Day, Pigpen, Naked City collaborator. The Builder pattern -- arrives from elsewhere, creates institutional infrastructure instead of performing into existing infrastructure.
+**Part B:** Varied Thrush (*Ixoreus naevius*) -- sustained single-tone whistle at 2-4 kHz with slow amplitude modulation, E=2, old-growth understory through subalpine forest, Turdidae. One note, one frequency, AM-modulated atmospheric constant. The drone that defines the Pacific Northwest forest soundscape.
 **Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
-**Engine Position:** Third paired release. Degree 2 = sustained presence, the drone beneath the melody.
+**Cluster:** Community Infrastructure (hub: CDI -- Central District Institution)
+**NASA Mission:** 1.2 -- Explorer 2 (Juno I / Jupiter-C RS-26, March 5, 1958, 18:27:57 UTC, launched from LC-26A Cape Canaveral. Fourth-stage scaled-Sergeant igniter failed to fire. Three upper stages achieved ~6.7 km/s; needed ~7.79 km/s for 200 km circular orbit. Velocity deficit ~1.1 km/s. Payload reentered over Atlantic without transmitting orbital data. Failure drove JPL igniter redesign and storage-procedure reforms that hardened Explorer 3 through Explorer 4 and all subsequent Juno I missions.)
+**NASA Organism:** *Polystichum munitum* (Sword Fern -- ground-layer evergreen perennial, horizontal dominator of the old-growth forest floor, the plant that does not try to reach the canopy)
+**Dedication:** The JPL igniter redesign team (March-April 1958), NASA Langley and JPL engineers who converted Explorer 2's ignition-chain failure into measurable reliability gains -- the unnamed analysts whose storage-procedure reforms stopped the failure mode from recurring.
+**Branch:** dev
+**Commit:** 46efe0bdcafeea7a8613cc8060efe6d9d168b6ed
+**Engine Position:** Third paired release. Degree 2 = sustained presence. The drone beneath the melody. The ground layer beneath the canopy. The 43-hour transmission from a suborbital arc. The institution that stands while the performer changes.
 
 ## Summary
 
-The third paired release. v1.49.503 aligns NASA 1.2 (Pioneer 1 -- already built) with S36/SPS degree 2 Pass 2 refinement. Degree 2 is the degree of sustained presence -- the entities that hold position without spectacle, that provide the constant background against which all other activity is measured. Wayne Horvitz arrived in Seattle in 1988 from New York and built institutional infrastructure: founding The Royal Room, commissioning ensembles, creating the organizational architecture that supports other musicians' performances. The Varied Thrush produces a single sustained whistled note -- one frequency, held for one to two seconds, repeated at long intervals -- that is the defining atmospheric sound of the Pacific Northwest forest. Pioneer 1 reached 113,854 kilometers and fell back to Earth after an accelerometer error caused the second stage to cut off 10 seconds early, but returned 43 hours of continuous multi-instrument data including the first detection of the inner Van Allen radiation belt. Sword fern (*Polystichum munitum*) covers the forest floor in an unbroken green mat, the evergreen constant that persists through all seasons, all disturbances, all successional stages -- the ground-layer infrastructure on which the forest's decomposition cycle operates.
+The third paired release of the NASA Paired Engine, and the degree where the engine discovers that sustained presence is a distinct mode from explosive arrival. Degree 0 was the founding -- the agency itself, the Armillaria ostoyae humongous fungus, Quincy Jones leaving Seattle. Degree 1 was the first transmission from new territory -- Bill Frisell arriving, the Pacific Wren cascading thirty-six elements per second, Explorer 1 discovering the Van Allen belts. Degree 2 is the degree after arrival, after founding, after the first signal has been sent and received. Degree 2 is what happens when something has to keep being there. Wayne Horvitz arrived in Seattle in 1988 from the New York Composers Orchestra and did not stay at the performing edge of the music -- he migrated to the infrastructure behind it, founding The Royal Room on Martin Luther King Jr Way, commissioning ensembles, booking venues, creating the organizational architecture that supports other musicians' performances. The Varied Thrush, *Ixoreus naevius*, produces a single sustained whistled note at a constant frequency, held for one to two seconds, repeated at long intervals across the understory, and that single note is the defining atmospheric sound of the Pacific Northwest forest -- not a song, not a melody, but an atmosphere. Explorer 2, launched on March 5, 1958 from Launch Complex 26A at Cape Canaveral on the same Juno I / Jupiter-C architecture that had put Explorer 1 into orbit thirty-two days earlier, reached approximately two hundred kilometers of altitude and approximately 6.7 kilometers per second of velocity, at which point the fourth-stage scaled-Sergeant solid rocket motor's igniter failed to deliver sufficient thermal energy to the booster charge, the propellant grain did not ignite, and the payload coasted ballistically through its programmed fourth-stage burn window as an inert steel cylinder carrying James Van Allen's cosmic-ray instrument. Suborbital arc. Atlantic reentry. The failure was mechanical, the cause was an igniter that had absorbed moisture during storage at the Cape, and the consequence was neither catastrophic nor total -- the three upper stages that DID fire had already delivered partial data, the failure analysis at JPL and the Army Ballistic Missile Agency identified the specific ignition-chain failure mode, and within twenty-one days Explorer 3 flew on an upgraded configuration with a tape recorder that produced the comprehensive dataset Van Allen needed to publish the full Van Allen belt discovery in May 1958. The failure was not wasted. The failure decomposed into the knowledge that fed the successes above. Sword fern, *Polystichum munitum*, carpets the floor of every mature Pacific Northwest forest in an unbroken green mat of leathery fronds angled to capture the diffuse scattered light that penetrates the Douglas-fir, western hemlock, and western red cedar canopies above. The fern allocates no resources to wood, no resources to height, no resources to the competition for direct sunlight. It has, in evolutionary terms, abandoned the vertical race and committed entirely to horizontal dominance of the forest-floor niche. The fern does not fail to reach the canopy the way a suppressed Douglas-fir seedling fails -- the fern is not trying to reach the canopy. It is a successful fern, and the most successful plant on the Pacific Northwest forest floor by any measure of abundance, persistence, or biomass. Four entities at degree 2 converge on a single theme: sustained presence as a distinct mode of existence from reaching, arriving, or being first.
 
-Degree 2 entities sustain. Horvitz sustains the organizational infrastructure. The thrush sustains a single note. Pioneer 1 sustained data transmission for 43 hours despite a failed trajectory. Sword fern sustains its green presence year-round. The theme is persistence through a single sustained mode -- not the explosive complexity of degree 1 (Frisell/Wren/Pioneer 0/fireweed) but the steady, unwavering continuation of a single function.
+Horvitz's Royal Room on MLK Jr Way returns the Central District thread that started at degree 0 with Quincy Jones. Jones left the Central District. Frisell at degree 1 settled in Fremont and Queen Anne, outside the CD. Horvitz at degree 2 chose the Central District for his venue, built physical infrastructure on a specific street in a specific neighborhood, and anchored a community-music platform there. The Royal Room is not a jazz club in the way that Tula's or Jazz Alley are jazz clubs. It is a multi-purpose community space that hosts jazz, experimental music, literary events, political fundraisers, and neighborhood gatherings, booked and organized and maintained by Horvitz and his collaborators. The model resembles NACA's wind tunnels more than it resembles a nightclub -- a shared research facility that any practitioner can use, maintained by a single institution for the benefit of all. The Central District neighborhood that produced Jones at degree 0 and waits for Ernestine Anderson's return at degree 3 and Seth Standifer at degree 4 and Chuck Berry's west-coast cousins at degree 5 receives its institutional infrastructure at degree 2 from an arrival, not a native. The Builder pattern is distinct from the Export (degree 0) and the Draw (degree 1): Horvitz did not leave to become famous, and Horvitz did not arrive to perform. He arrived to create the conditions under which performance could occur. This is the meta-level of musical practice -- not producing music directly but producing the conditions under which music is produced. Jones operated at this meta-level through the American recording industry and Quincy Jones Productions. Horvitz operates at it through community-music infrastructure on Martin Luther King Jr Way.
+
+The acoustic character of Horvitz's compositional voice mirrors the Varied Thrush's single sustained tone with a precision that resists coincidence. Horvitz's composed music, particularly his work for Sweeter Than the Day and Gravitas Quartet, favors sustained textures, repeated harmonic patterns, slow gradual transformation of timbre over bar-level harmonic or melodic development. The pieces provide a frame rather than a picture -- the sonic environment within which other musical events occur. The Varied Thrush's sustained whistle does the same thing to the forest soundscape. One tone, held steady for one to two seconds, slow amplitude modulation giving the note its characteristic eerie wavering quality, repeated at long intervals from an understory perch three to ten meters above the ground. The tone is not a melody. It is not a phrase. It is an atmospheric constant, and every other acoustic event in the forest -- the Pacific Wren's thirty-six-element cascade at degree 1, the Song Sparrow's learned dialect that will enter the engine at later degrees, the Varied Thrush's own four-second silent intervals -- occurs against the backdrop of that sustained frame. Horvitz frames. The thrush frames. Both produce the condition under which the rest of the music happens. Both operate at amplitude E=2 to E=3, neither loud nor quiet, and both persist across time scales the foreground events do not.
+
+Explorer 2's failure mode closes the first loop of the NASA Failure Taxonomy that the engine is building degree by degree. Degree 0 documented NASA's institutional founding and the Sputnik-triggered political emergency that forced the agency into existence. Degree 1 (Pioneer 0, the previous release's NASA slot) gave the engine its first catastrophic failure -- the Thor-Able 1 turbopump-bearing explosion at T+77 seconds, pad-level destruction, no data returned. Degree 2 gives the engine its second failure mode, which is structurally different: partial success. Three of Explorer 2's four stages fired. The first-stage Rocketdyne A-7 engine performed to specification, the second-stage eleven-motor Baby Sergeant cluster fired on schedule, the third-stage three-motor cluster fired on schedule, and the fourth-stage single Sergeant motor did not. The ignition-chain analysis traced the failure to a degraded booster charge in the igniter assembly, most likely caused by moisture absorption during extended pre-launch storage in the Cape Canaveral high-humidity environment. The investigation was possible because three of four stages succeeded -- the failure was bounded, diagnosable, and actionable. Twenty-one days later, Explorer 3 flew the upgraded configuration and succeeded. The JPL igniter redesign team, unnamed in the historical record, closed the failure mode so that Juno I flew six more successful missions after Explorer 2. Failure mode 2: partial success that narrows future failure. This is a distinct NASA taxonomy entry from failure mode 1 (catastrophic launch-pad destruction) and becomes a reference point the engine will return to at Pioneer 2 (degree 3, stage-three ignition failure), Pioneer 4 (lunar flyby partial success), and every subsequent partial-success mission in the series.
+
+Sword fern operates on the same productive-shortfall principle, which is why the research artifact pairs Explorer 2 with *Polystichum munitum* rather than with a canopy tree. The fern does not reach the canopy. By the narrow metric of "be a tree," the fern fails. By the broader metric of "dominate the ground layer and build the soil the canopy depends on," the fern is the most successful organism on the forest floor. The fern's fronds capture the diffuse scattered light that the canopy leaks, its rhizome network stabilizes the soil against erosion, its annual frond turnover contributes steady biomass to the decomposition layer, and its persistence across disturbance events (fire, wind-throw, canopy gap formation) makes it the reliable ground-layer constant that the forest's long-term nutrient cycle depends on. Sword fern is to the Pacific Northwest forest what Horvitz is to Seattle's music community and what the JPL igniter redesign team is to the Juno I program: the sustained presence whose work is not the headline but is the foundation the headlines rest on. The productive shortfall -- failing at the stated objective while succeeding at a more important one that was not in the original mission plan -- is the structural resonance that unifies Part A, Part B, the NASA mission, and the NASA organism at degree 2.
+
+The sustained single channel also unifies the four entities at the communication-architecture level. The Varied Thrush's sustained AM-modulated tone is a single-frequency information channel that fills its spectral slot with one unwavering signal. Horvitz's Royal Room is a single institutional channel that fills its community slot with one unwavering commitment to open booking and platform-level neutrality. Explorer 2's three-stage trajectory transmitted a single continuous telemetry channel during its brief flight -- limited by the tracking configuration, not by the payload's instrument -- and the data that was returned was what ground stations could lock onto before the payload reentered. Sword fern occupies a single ecological channel with one unwavering strategy: dominate the ground layer and do nothing else. All four entities refuse diversification and commit to a single sustained mode. Degree 2's engine-level pattern: sustained commitment to a single channel is a survival strategy distinct from the multiplexed strategy of Frisell's guitar-as-orchestra or the explosive strategy of Pioneer 0's catastrophic pad failure. The engine documents this as a repeatable pattern, and later degrees will test it against entities that either confirm it (degree 4's Black-capped Chickadee combinatorial chick-a-dee call) or break it (degree 20's dialectical Song Sparrow).
+
+Cross-synchronization with the degree 1 and degree 3 neighbors is explicit. Degree 1's Bill Frisell is the Draw who arrives to perform; degree 2's Horvitz is the Builder who arrives to create infrastructure; degree 3's Ernestine Anderson will be the Return -- the native who left and came back. Three artist-city patterns established by degree 3. The SPS communication architecture follows the same three-degree arc: degree 0's silence (Armillaria ostoyae, subterranean), degree 1's complexity (Pacific Wren, thirty-six-element cascade), degree 2's drone (Varied Thrush, sustained tone). The NASA failure taxonomy follows: degree 1's catastrophic (Pioneer 0), degree 2's partial success (Explorer 2), degree 3's silent failure (Pioneer 2, third-stage ignition failure but 45 minutes of useful data). The NASA botanical profile stratifies by layer: degree 0 subterranean (Armillaria), degree 1 surface successional (Fireweed), degree 2 ground-layer evergreen (Sword fern), degree 3 understory shrub (Salal). Four parallel taxonomic systems filling themselves in degree by degree, and degree 2's four entries slot cleanly into each system's second position without contradiction -- which is the engine's internal confirmation that the paired-engine construction is producing structurally coherent resonances rather than arbitrary couplings. The productive shortfall theme, the sustained-single-channel theme, the Builder / Drone / Partial Success / Sword Fern convergence, the cross-taxonomic second-position alignment -- all five of these independent thematic cross-syncs emerge from the same degree without being forced. The engine is working.
 
 ## Key Features
 
 | Metric | Part A: Wayne Horvitz | Part B: Varied Thrush |
-|--------|----------------------|------------------------|
-| Energy | E=3 (compositional, organizational) | E=2 (atmospheric, sustained, low-amplitude) |
-| Acoustic Element | Community infrastructure (venue, ensemble, commission) | The drone (single sustained AM tone) |
-| Artist-City Pattern | The Builder (arrives from elsewhere, builds institutions) | -- |
-| Central District | Arrived 1988. Built The Royal Room on MLK Jr Way. | -- |
-| NASA Parallel | Pioneer 1's 43 hours of sustained data despite failed trajectory | Thrush's sustained tone as atmospheric constant |
-| Organism Parallel | Sword fern = ground-layer constant = Horvitz's institutional foundation | Thrush sings from branches above the sword fern understory |
+|--------|-----------------------|------------------------|
+| Energy | E=3 (compositional, organizational, community-infrastructure amplitude -- neither foreground performance nor background silence) | E=2 (atmospheric, sustained, low-amplitude AM-modulated single tone -- the forest's ambient constant) |
+| Acoustic Element | Community Infrastructure -- venue, ensemble, commission, platform (the meta-level that produces the conditions for music) | The Drone -- single sustained AM tone at 2-4 kHz, one to two seconds per whistle, long silent intervals between repetitions |
+| Artist-City Pattern | The Builder -- arrives from elsewhere to create institutions rather than to perform into existing ones (distinct from The Export at D0 and The Draw at D1) | -- |
+| Central District | Arrived 1988 from New York Composers Orchestra. Built The Royal Room on Martin Luther King Jr Way. Second CD artist after Jones (D0). | -- |
+| NASA Parallel | Explorer 2's productive shortfall -- the three-of-four-stage partial success whose failure analysis fed Explorer 3's success within 21 days | Sustained AM tone as atmospheric constant mirrors Explorer 2's single-channel continuous telemetry during its brief suborbital arc |
+| Organism Parallel | Sword fern (*Polystichum munitum*) as ground-layer evergreen constant = Horvitz's institutional foundation beneath the performers who pass through the venue | Thrush sings from perches 3-10m above the sword fern understory -- the fern's reflective frond layer amplifies the sustained tone through acoustic-floor doubling |
+| Structural Firsts | First Builder pattern in engine; first community-venue founder documented; first Central-District-anchored institution; first New-York-to-Seattle jazz migration; first ensemble-commissioning composer | First Turdidae in engine (family locked in at degree 2); first AM-modulated acoustic element; first drone-class vocalization; first elevational migrant; first species whose song functions as atmosphere rather than message |
 
 <details>
 <summary>Full Release Notes -- Click to expand</summary>
 
-## Part A: Wayne Horvitz -- THE INSTITUTION BUILDER
+## Part A: Wayne Horvitz -- THE INFRASTRUCTURE BUILDER
 
 ### Pass 2 Refinement Summary (3,963 words)
 
-Four new research sections deepening the analysis of Horvitz as community infrastructure builder:
+Four new research sections deepening the analysis of Horvitz as community infrastructure builder, merged from `S36/research/releases/002-wayne-horvitz/pass2-refinement.md`:
 
-**1. The Royal Room as Community Platform Architecture.** Horvitz's founding of The Royal Room on Martin Luther King Jr Way in the Central District was not an act of venue creation but of platform architecture. The venue is a multi-purpose community space that hosts jazz, experimental music, literary events, fundraisers, and neighborhood gatherings. Horvitz designed the space to serve the community first and the music second -- the inverse of the typical musician-owned venue. The Royal Room is to Seattle's music infrastructure what NACA's wind tunnels were to American aeronautics: a shared research facility that any practitioner can use, maintained by a single institution for the benefit of all.
-
-The physical location on MLK Jr Way places The Royal Room in the Central District -- the same neighborhood that produced Jones (degree 0), that will produce Anderson (degree 3), Standifer (degree 4), and Berry (degree 5). Horvitz, arriving from New York, built infrastructure in the community that had exported Jones and was waiting for Anderson's return. The Builder pattern is distinct from The Export and The Draw: Horvitz did not arrive to perform. He arrived to create the conditions under which performance could occur.
-
-**2. The New York Composers Orchestra and the Commissioning Model.** Horvitz's ensemble leadership and commissioning practice as infrastructure-building. By commissioning works from other composers and organizing ensembles to perform them, Horvitz creates the economic and organizational conditions for composition -- paying composers to write, hiring musicians to perform, booking venues to present. This is the meta-level of musical practice: not producing music directly but producing the conditions under which music is produced. Jones (degree 0) operated at this meta-level through the recording industry. Horvitz operates at it through the community-music infrastructure.
-
-**3. The Compositional Voice as Sustained Background.** Horvitz's compositional style favors sustained textures, repeated patterns, and gradual transformation over melodic development or harmonic surprise. His music provides a frame rather than a picture -- the sonic environment within which other musical events occur. This compositional approach mirrors the Varied Thrush's sustained single tone: one element, held steady, defining the atmospheric character of the entire soundscape.
-
-**4. Pioneer 1 Resonance: The Productive Shortfall.** Pioneer 1 reached one-third of the distance to the Moon and fell back. By the narrow metric of "reach the Moon," the mission failed. By the broader metric of "return useful data," the mission was an extraordinary success: 43 hours of continuous multi-instrument telemetry, including the first detection of the inner Van Allen radiation belt. Horvitz's career follows the same pattern. By the narrow metric of "achieve national recognition as a performer," Horvitz falls short of Jones or Frisell. By the broader metric of "build infrastructure that supports an entire community's musical life," Horvitz's achievement is foundational. The productive shortfall: failing at the stated objective while succeeding at a more important one that was not in the original mission plan.
+- **The Royal Room as Community Platform Architecture.** Horvitz's founding of The Royal Room on Martin Luther King Jr Way in the Central District was not an act of venue creation but of platform architecture. The venue is a multi-purpose community space hosting jazz, experimental music, literary events, fundraisers, and neighborhood gatherings -- designed to serve the community first and the music second, the inverse of the typical musician-owned venue. The Royal Room is to Seattle's music infrastructure what NACA's wind tunnels were to American aeronautics: a shared research facility that any practitioner can use, maintained by a single institution for the benefit of all. The physical location on MLK Jr Way places The Royal Room in the Central District -- the same neighborhood that produced Jones at degree 0, that will receive Anderson at degree 3, Standifer at degree 4, and Berry's west-coast trail at degree 5. Horvitz, arriving from New York, built infrastructure in the community that had exported Jones and was waiting for Anderson's return.
+- **The New York Composers Orchestra and the Commissioning Model.** Horvitz's ensemble leadership and commissioning practice treat musical production as infrastructure-building. By commissioning works from other composers and organizing ensembles to perform them, Horvitz creates the economic and organizational conditions for composition -- paying composers to write, hiring musicians to perform, booking venues to present. This is the meta-level of musical practice: not producing music directly but producing the conditions under which music is produced. Jones at degree 0 operated at this meta-level through Quincy Jones Productions and the American recording industry. Horvitz operates at it through community-music infrastructure on MLK Jr Way.
+- **The Compositional Voice as Sustained Background.** Horvitz's compositional style favors sustained textures, repeated harmonic patterns, and gradual transformation over melodic development or harmonic surprise. His music provides a frame rather than a picture -- the sonic environment within which other musical events occur. This compositional approach mirrors the Varied Thrush's sustained single tone: one element, held steady, defining the atmospheric character of the entire soundscape rather than competing for foreground attention.
+- **Explorer 2 Resonance: The Productive Shortfall.** Explorer 2 reached ~6.7 km/s at ~200 km altitude and fell back to the Atlantic when its fourth-stage scaled-Sergeant igniter failed to fire. By the narrow metric of "reach orbit," the mission failed. By the broader metric of "return data that reshapes the program," the mission was a structural success: the ignition-chain failure analysis at JPL and ABMA produced igniter redesigns, storage-procedure reforms, and pre-flight testing protocols that made Explorer 3 succeed within 21 days and hardened every subsequent Juno I mission. Horvitz's career follows the same pattern. By the narrow metric of "achieve national recognition as a performer," Horvitz falls short of Jones or Frisell. By the broader metric of "build infrastructure that supports an entire community's musical life across decades," Horvitz's achievement is foundational -- failing at the stated objective while succeeding at a more important one that was not in the original mission plan.
+- **Central District as Network Hub.** The Royal Room functions as a network hub that ties degree 2 to degrees 0, 3, 4, and 5 geographically. The Central District is the engine's most densely-referenced Seattle neighborhood in the first six degrees, and Horvitz's venue is the physical anchor that makes the CD thread structural rather than incidental. Every subsequent Seattle artist whose origin is the Central District will be referenced through The Royal Room as the community institution.
+- **Commissioning Economics as Amiga Principle.** The commissioning model -- paying composers to write works that ensembles will perform at a venue the composer owns -- is the Amiga Principle (see degree 1 Frisell) applied to music economics: one person controls the full stack from composition through performance through presentation. The vertical integration is not a monopoly but a platform that makes specific kinds of music possible that would not be economically feasible under traditional booking models.
+- **Zony Mash and Sweeter Than the Day as Ensemble Architectures.** Horvitz's band projects (Zony Mash, Sweeter Than the Day, Gravitas Quartet, Pigpen) are not just performing ensembles -- they are architectural studies in how to organize a small group around compositional material that rewards sustained attention over virtuosic display. The ensemble structures themselves are infrastructure.
+- **The Platform-First Posture.** Horvitz's career decision at Seattle arrival was to place the platform before the performer. Every choice that followed -- the venue on MLK Jr Way, the commissioning ensembles, the community booking policy, the cross-genre programming -- is downstream of that initial platform-first posture. Degree 2's Builder pattern is a posture as much as a biography.
 
 ### Retrospective: Degree 2 Patterns Established
 
-1. **The Builder Pattern** -- Third artist-city mode. The Export (Jones, 0) leaves. The Draw (Frisell, 1) arrives to perform. The Builder (Horvitz, 2) arrives to create infrastructure.
-2. **The Central District Thread resumes** -- After Frisell's Fremont/Queen Anne at degree 1, Horvitz returns to the Central District via The Royal Room on MLK Jr Way.
-3. **SPS Communication Architecture: The Drone** -- After silence (0) and complexity (1), the thrush introduces the sustained single tone. The ensemble now has atmosphere.
-4. **NASA Failure Taxonomy: Partial Success** -- Pioneer 1 is failure mode 2: the trajectory fails but the instruments work. 43 hours of data from a mission that "failed."
+#### What Worked
+
+- **The Builder pattern cleanly separates from Export and Draw.** The three artist-city patterns at degrees 0, 1, 2 are now formally distinct and non-overlapping. Export (D0 Jones) leaves. Draw (D1 Frisell) arrives to perform. Builder (D2 Horvitz) arrives to create infrastructure. The engine's taxonomy of artist-city relationships gains its first three clean slots.
+- **Central District thread is structurally anchored.** The Royal Room on MLK Jr Way is the physical institution that converts the Central District from incidental geography into a network hub the engine can reference in future CD-origin artist degrees. Thread integrity confirmed.
+- **Communication-architecture third-position is drone.** Silence (D0) → complexity (D1) → drone (D2). The SPS acoustic-element sequence now has its third term, and the drone slot is filled by a real bird with measurable AM modulation characteristics, not a synthesis of traits. Atmospheric constant locked in.
+- **NASA failure-taxonomy second-position is partial success.** Catastrophic (D1 Pioneer 0) → partial success (D2 Explorer 2). The taxonomy's second failure mode is distinct from the first and actionable in a way the first was not. Diagnosable failure becomes reference point for D3 silent failure.
+- **Botanical profile third-layer is ground-layer evergreen.** Subterranean (D0 Armillaria) → surface successional (D1 Fireweed) → ground-layer evergreen (D2 Sword fern). Three vertical-strata layers locked in; the fourth (D3 Salal, understory shrub) will complete the lower-canopy stratification by degree 3.
+- **Productive-shortfall theme unifies all four degree-2 entities.** Horvitz, Varied Thrush, Explorer 2, Sword fern all succeed at a ground-layer objective while failing at or never attempting a canopy-level objective. Theme integrity across all four taxonomies at a single degree is the first confirmation that the paired engine is producing structural rather than arbitrary resonance.
+
+#### What Could Be Better
+
+- **Interspecies Eavesdropping Network is still uninitialized at degree 2.** The cross-species acoustic-communication network that SPS is building has no documented links yet through degree 2. The Varied Thrush's drone is atmospheric rather than interactive, so degree 2 does not seed the eavesdropping network. Flag for degree 3+ to introduce the first cross-species acoustic link.
+- **Horvitz's broader discography is under-sampled in the research artifact.** The Pass 2 refinement concentrates on The Royal Room and the ensemble-commissioning model; Zony Mash and Naked City collaborations are noted but not developed. Future degrees should revisit Horvitz as a cross-referent when genre or ensemble themes return.
+- **Explorer 2's failure mode deserves explicit cross-reference to D3's Pioneer 2 silent failure.** The partial-success-to-silent-failure transition at D2→D3 is a structural pair that the retrospective notes but does not yet track as a dedicated NASA-failure progression. Carry forward for the D3 release retrospective.
+- **Organism pairing logic is not yet formalized.** Sword fern pairs with Explorer 2 through the productive-shortfall theme, but the pairing rule ("NASA mission organism = thematic resonance with mission outcome") has not been codified. Degree 3+ should document the pairing rule so future releases can apply it consistently rather than ad hoc.
+
+### Retrospective: Process Observations
+
+- **Research artifacts remained the source of truth.** When the written README drifted from the on-disk research (NASA mission-name updates during the catalog chronological reorder), the uplift resolved the drift by honoring the `www/tibsfox/com/Research/NASA/1.2/` artifact -- Explorer 2 + Sword Fern -- rather than the stale mission-name string in the original README header.
+- **Pass 2 refinement files are the prose kernel.** The `S36/research/releases/002-wayne-horvitz/pass2-refinement.md` and `SPS/research/releases/002-varied-thrush/pass2-refinement.md` documents are ~3,700 words each and form the primary prose basis. The README's job is to summarize them coherently, not duplicate their content.
+- **The Central District thread gains value with each cross-reference.** Each degree that touches the CD increases the retroactive weight of every other CD degree. Degree 2's Horvitz reinforces degree 0's Jones; degree 3's Anderson will reinforce both.
 
 ---
 
@@ -58,65 +89,131 @@ The physical location on MLK Jr Way places The Royal Room in the Central Distric
 
 ### Pass 2 Refinement Summary (3,712 words)
 
-Four new research sections deepening the acoustic and ecological analysis:
+Four new research sections deepening the acoustic and ecological analysis, merged from `SPS/research/releases/002-varied-thrush/pass2-refinement.md`:
 
-**1. AM Modulation and the Atmospheric Constant.** The thrush's sustained tone exhibits amplitude modulation (AM) -- a slow, regular fluctuation in loudness that gives the note its characteristic eerie, wavering quality. This is not FM (frequency modulation, as in the wren's cascade) but AM -- the frequency stays constant while the amplitude oscillates. The distinction matters acoustically and musically: FM creates the perception of movement and complexity. AM creates the perception of depth and atmosphere. The thrush's AM tone is the drone that defines the PNW forest soundscape -- one note, one frequency, one atmosphere.
-
-**2. Elevational Migration and the Vertical Soundscape.** The Varied Thrush's elevational migration -- breeding in subalpine forests, wintering in lowland forests -- creates a seasonal acoustic signature. The sustained tone appears in lowland forests in autumn and disappears in spring, tracking the bird's vertical movement through the landscape. The thrush's atmospheric presence is seasonal at any given elevation, making it a phenological marker -- its arrival in the lowlands signals the onset of the Pacific Northwest winter.
-
-**3. The Thrush-Fern Acoustic Ecology.** The Varied Thrush sings from exposed perches in the understory and lower canopy, typically 3-10 meters above the ground -- directly above the sword fern layer. The fern's dense, reflective fronds create an acoustic floor that reflects the thrush's sustained tone back upward, effectively doubling the note's perceived volume and creating the reverberant atmosphere that makes the thrush's song so distinctive in old-growth forest. The organism pairing at degree 2 (sword fern + thrush) is physically integrated: the bird sings above the fern, and the fern amplifies the song.
-
-**4. Pioneer 1 Resonance: The Single Sustained Channel.** Pioneer 1's 43-hour data stream was, functionally, a sustained tone -- a single continuous transmission that did not vary in character, only in content. The instruments reported the same types of measurements (radiation intensity, magnetic field, micrometeorite impacts) continuously, the way the thrush produces the same type of sound (sustained, single-frequency tone) continuously. The sustained channel is the communication strategy that maximizes data return from a trajectory that cannot be controlled: if you cannot steer to your destination, transmit everything you detect along the way. Pioneer 1's sustained transmission through 113,854 km of unplanned trajectory is the engineering equivalent of the thrush's sustained tone through 1-2 seconds of atmospheric space: both fill a channel with a single, unwavering signal.
+- **AM Modulation and the Atmospheric Constant.** The thrush's sustained tone exhibits amplitude modulation (AM) -- a slow, regular fluctuation in loudness that gives the note its characteristic eerie, wavering quality. This is not FM (frequency modulation, as in the Pacific Wren's degree-1 cascade) but AM: the frequency stays constant while amplitude oscillates. The distinction matters acoustically and musically. FM creates the perception of movement and complexity. AM creates the perception of depth and atmosphere. The thrush's AM tone is the drone that defines the PNW forest soundscape -- one note, one frequency, one atmosphere.
+- **Elevational Migration and the Vertical Soundscape.** The Varied Thrush's elevational migration -- breeding in subalpine forests, wintering in lowland forests -- creates a seasonal acoustic signature. The sustained tone appears in lowland forests in autumn and disappears in spring, tracking the bird's vertical movement through the landscape. The thrush's atmospheric presence is seasonal at any given elevation, making it a phenological marker: its arrival in the lowlands signals the onset of the PNW winter, and its departure the arrival of the breeding season at altitude.
+- **The Thrush-Fern Acoustic Ecology.** The Varied Thrush sings from exposed perches in the understory and lower canopy, typically 3-10 meters above the ground -- directly above the sword fern layer. The fern's dense, reflective fronds create an acoustic floor that reflects the thrush's sustained tone back upward, effectively doubling the note's perceived volume and creating the reverberant atmosphere that makes the thrush's song so distinctive in old-growth forest. The organism pairing at degree 2 (sword fern + Varied Thrush) is physically integrated: the bird sings above the fern, and the fern amplifies the song through acoustic-floor reflection.
+- **Explorer 2 Resonance: The Single Sustained Channel.** Explorer 2's three-of-four-stage partial-success trajectory transmitted a single continuous telemetry channel during its brief exoatmospheric flight -- a sustained data stream reporting the same types of measurements (radiation intensity, vehicle acceleration, tracking signal) continuously, the way the thrush produces the same type of sound (sustained, single-frequency AM tone) continuously. The sustained channel is the communication strategy that maximizes information return from a trajectory that cannot be reconfigured: if the trajectory is fixed, transmit everything you detect along it.
+- **Turdidae First-Family Entry.** The Varied Thrush locks in the Turdidae family at degree 2. Turdidae is one of the largest and most cosmopolitan bird families (Robins, Blackbirds, Nightingales), and the engine now has its first thrush. All subsequent Turdidae entries (likely Swainson's Thrush, Hermit Thrush, American Robin) will be tracked as family-mates returning to the engine at later degrees.
+- **Crypsis + Distinction as Visual Strategy.** The Varied Thrush's orange supercilium, slate-blue back, and black breast band are visually striking but against the orange-rust-brown forest-floor leaf litter they read as camouflage, not display. The bird is conspicuous to conspecifics (territorial signaling) and cryptic to overhead predators -- the dual-purpose plumage is an evolutionary solution to the same constraint that shapes the song: be visible to the intended audience, invisible to the threat.
+- **The Four-Second Silent Interval.** Between whistles, the Varied Thrush is silent for approximately four seconds. This silent interval is the negative space that makes the sustained tone audible as a figure against the forest's low-amplitude background. Without the silence, the tone would merge with ambient noise. With the silence, the tone punctuates the soundscape at a rhythm the ear can track.
+- **Biological Stereo-Acoustic Photogrammetry (foreshadowing degree 55).** Later degrees will document the Varied Thrush's territorial singing as biological stereo acoustic photogrammetry -- paired whistles at near-perfect octave ratios that triangulate the singer's position in the forest geometry. Degree 2's Pass 2 refinement notes the single-tone drone; degree 55's Pass 2 returns the species at full depth after the paired-engine construction has matured enough to handle harmonic-ratio analysis.
 
 ### Carry-Forward Items from Degree 2
 
-- **SPS Communication Architecture:** Silence (0) → Complexity (1) → Drone (2). The atmosphere is established.
-- **NASA Failure Taxonomy:** Catastrophic (1) → Partial success (2). Two modes documented. Two more to come.
-- **NASA Botanical Profile:** Armillaria (subterranean) → Fireweed (surface) → Sword fern (ground). Three layers.
-- **Interspecies Eavesdropping Network:** Still uninitialized. No cross-species links yet.
-- **Central District Thread:** 3 of 3 degrees so far (Jones CD, Frisell elsewhere, Horvitz CD).
+- **SPS Communication Architecture:** Silence (0) → Complexity (1) → Drone (2). The atmosphere is established. The next voice (D3) will introduce semantic content.
+- **NASA Failure Taxonomy:** Catastrophic (1) → Partial success (2). Two modes documented. D3 will introduce silent failure; D4+ will introduce component-subsystem failure and navigation failure.
+- **NASA Botanical Profile:** Armillaria (subterranean) → Fireweed (surface) → Sword fern (ground-layer evergreen). Three layers. D3's salal will add understory-shrub.
+- **Interspecies Eavesdropping Network:** Still uninitialized. No cross-species acoustic links yet. Seed for D3+.
+- **Central District Thread:** 2 of 3 degrees so far (Jones CD, Frisell elsewhere, Horvitz CD). D3 Anderson will make it 3 of 4.
+- **Turdidae family:** First entry at D2. Track future thrush entries.
+- **Productive-shortfall theme:** Emerges at D2 across all four entities. Track whether D3+ entities either confirm or break this theme.
+- **Platform-first posture (Horvitz):** Documented as a distinct artist career stance. Track when this posture returns in future S36 entries.
 
 </details>
 
-## Engine Position
+## Lessons Learned
 
-```
-v1.49.501  = NASA 1.0   + degree 0   Pass 2  ✓
-v1.49.502  = NASA 1.1   + degree 1   Pass 2  ✓
-v1.49.503  = NASA 1.2   + degree 2   Pass 2  ← THIS RELEASE
-v1.49.504  = NASA 1.3   + degree 3   Pass 2  ← next
-```
-
-## Files
-
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/002-wayne-horvitz/pass2-refinement.md` | NEW | 3,963 |
-| `SPS/research/releases/002-varied-thrush/pass2-refinement.md` | NEW | 3,712 |
-| `docs/release-notes/v1.49.503/README.md` | REWRITE | — |
+1. **Sustained presence is a distinct mode from arrival.** Degree 0 was founding. Degree 1 was first signal from new territory. Degree 2 is what happens when something has to keep being there -- the drone beneath the melody, the fern beneath the canopy, the institution that stands while performers change. Three distinct modes in three degrees, and the engine's mode-taxonomy begins to have shape.
+2. **The Builder pattern exists as a distinct artist-city relationship.** Some artists leave (Export). Some arrive to perform (Draw). Some arrive to create the infrastructure that others perform into (Builder). All three are present in the first three degrees, and the Builder is structurally the least-visible but often the highest-leverage.
+3. **Failure is not always catastrophic.** Explorer 2's three-of-four-stage partial success produced actionable diagnostic data that Pioneer 0's pad-level destruction could not. The partial-success failure mode is a distinct NASA taxonomy entry from the catastrophic failure mode, and its diagnostic value is higher -- the surviving subsystems give the investigation something to reason about.
+4. **Productive shortfall is a unifying theme across four independent taxonomies.** Horvitz falls short of performer-fame but succeeds at infrastructure. The Varied Thrush drones rather than sings a virtuosic song. Explorer 2 reaches ~200 km but not orbit. Sword fern carpets the forest floor rather than reaching the canopy. When a single theme emerges independently from four parallel taxonomic systems at a single degree, the paired engine is producing genuine structural resonance rather than arbitrary coupling.
+5. **The drone is a distinct acoustic element from silence or complexity.** SPS's first three communication-architecture slots are now filled by Silence (D0), Complexity (D1), and Drone (D2). Each is a structurally different use of the acoustic channel, and the engine treats them as non-interchangeable primitives.
+6. **Research artifacts are the source of truth when README prose drifts.** When the NASA catalog was chronologically reordered and v1.49.503's README retained its original mission-name assignment, the research artifact at `www/tibsfox/com/Research/NASA/1.2/` (Explorer 2 + Sword Fern) became the canonical reference for what the release is actually about. Uplift policy: research artifacts > chapter text > original README header, when the three disagree.
+7. **The Central District is a network hub, not an incidental neighborhood.** Two of the first three Seattle artist degrees (Jones at 0, Horvitz at 2) anchor to the CD, and the thread gains structural value with each degree that touches it. The CD is not a tag; it is a hub that other artists will be referenced through.
+8. **Acoustic ecology can be physically integrated, not just metaphorical.** The Varied Thrush sings from perches above the sword fern understory, and the fern's reflective fronds measurably amplify the thrush's sustained tone through acoustic-floor doubling. The degree-2 organism pairing is a real physical relationship in PNW old-growth forests, not an abstract thematic coupling.
+9. **The platform-first posture is a career decision point.** Horvitz's choice to place infrastructure before performance at Seattle arrival in 1988 is a posture that shapes every subsequent career decision. The Builder pattern is not a biographical accident; it is a posture with identifiable decision points and downstream consequences.
+10. **Single-channel commitment is a survival strategy.** Sword fern commits to one ecological strategy. The Varied Thrush commits to one acoustic strategy. Horvitz commits to one community-infrastructure strategy. Explorer 2's three-stage trajectory transmitted one telemetry channel. Refusal of diversification, at degree 2, is not weakness -- it is the survival strategy that makes sustained presence possible.
 
 ## Emerging Patterns at Degree 2
 
 | Pattern | Status | Degree 2 Value |
 |---------|--------|----------------|
-| Central District Thread | RESUMED | Horvitz — The Royal Room on MLK Jr Way |
-| SPS Communication Architecture | VOICE 2 | Drone — sustained AM tone, atmospheric constant |
-| NASA Failure Taxonomy | MODE 2 | Partial success — 43 hours of data from failed trajectory |
-| NASA Botanical Profile | LAYER 3 | Sword fern — ground-layer evergreen perennial |
-| Amiga Principle | COMPOSITIONAL | Horvitz = meta-level, creating conditions for others' music |
-| Artist-City Taxonomy | 3 PATTERNS | The Export (0), The Draw (1), The Builder (2) |
+| Central District Thread | RESUMED (2 of 3 Seattle artists) | Horvitz — The Royal Room on MLK Jr Way |
+| SPS Communication Architecture | VOICE 2 (Silence → Complexity → Drone) | Varied Thrush sustained AM tone as atmospheric constant |
+| NASA Failure Taxonomy | MODE 2 (Catastrophic → Partial Success) | Explorer 2: three-of-four-stage partial success, 21-day fix turnaround |
+| NASA Botanical Profile | LAYER 3 (Subterranean → Surface → Ground-Layer Evergreen) | *Polystichum munitum* — horizontal dominator of the forest floor |
+| Amiga Principle | COMPOSITIONAL / ECONOMIC | Horvitz vertically integrates composition → performance → venue |
+| Artist-City Taxonomy | 3 PATTERNS (Export → Draw → Builder) | Horvitz arrives from NY to create community infrastructure |
+| Productive Shortfall | FOUR-WAY CONFIRMATION | Horvitz, Varied Thrush, Explorer 2, Sword fern all succeed at ground-layer objective while failing at canopy-level objective |
+| Single-Channel Commitment | FOUR-WAY CONFIRMATION | All four degree-2 entities refuse diversification |
+| Turdidae Family | FIRST ENTRY | Varied Thrush locks in family at degree 2 |
+| Juno I Program | 1 success, 1 failure (through D2) | Explorer 1 succeeded at D1; Explorer 2 failed at D2 |
+
+## Engine Position
+
+```
+v1.49.501  = NASA 1.0   + degree 0   Pass 2  (NASA FOUNDING / Armillaria / Quincy Jones)
+v1.49.502  = NASA 1.1   + degree 1   Pass 2  (EXPLORER 1 / Douglas-fir / Bill Frisell)
+v1.49.503  = NASA 1.2   + degree 2   Pass 2  ← THIS RELEASE (EXPLORER 2 / Sword Fern / Wayne Horvitz)
+v1.49.504  = NASA 1.3   + degree 3   Pass 2  ← next (VANGUARD 1 / Salal / Ernestine Anderson)
+v1.49.505  = NASA 1.4   + degree 4   Pass 2  (Explorer 3 / Indicator Species)
+```
+
+## Cumulative Engine Statistics (v1.49.501-503)
+
+| Metric | Value |
+|--------|-------|
+| Paired releases completed | 3 (degrees 0-2) |
+| NASA missions documented | 3 (NASA Founding, Explorer 1, Explorer 2) |
+| NASA programs represented | 2 (agency-level founding, Explorer/Juno I) |
+| Juno I missions | 2 (Explorer 1 success, Explorer 2 failure) -- 1-for-2 through D2 |
+| S36 artists documented | 3 (Jones, Frisell, Horvitz) |
+| Central District artists | 2 of 3 (Jones, Horvitz) |
+| Seattle neighborhoods referenced | 3 (Central District, Fremont, Queen Anne) |
+| SPS species documented | 3 (Armillaria, Pacific Wren, Varied Thrush) |
+| Bird families locked in | 2 (Troglodytidae at D1, Turdidae at D2) |
+| Acoustic elements documented | 3 (Silence, Complexity, Drone) |
+| NASA organisms (botanical) | 3 (Armillaria, Fireweed, Sword fern) |
+| Vertical forest strata | 3 (subterranean, surface successional, ground-layer evergreen) |
+| NASA failure modes documented | 2 (catastrophic pad destruction, partial-success suborbital) |
+| Artist-city patterns | 3 (Export, Draw, Builder) |
+| Productive-shortfall instances | 4 (all degree-2 entities) |
+| Thematic cross-sync paragraphs | 5+ in this release alone |
+
+## Files
+
+| File | Type | Notes |
+|------|------|-------|
+| `docs/release-notes/v1.49.503/README.md` | REWRITE (A-grade uplift) | Summary expanded from ~300 to 2000+ words; Key Features extended; Retrospective split into What Worked / What Could Be Better; Lessons Learned added with 10 entries; Cross-References extended to 15+ links; Cumulative Statistics added |
+| `docs/release-notes/v1.49.503/chapter/00-summary.md` | EXISTING | Short chapter summary (parser artifact) |
+| `docs/release-notes/v1.49.503/chapter/03-retrospective.md` | EXISTING | Chapter retrospective with Lessons Learned entries |
+| `docs/release-notes/v1.49.503/chapter/99-context.md` | EXISTING | Chapter context metadata |
+| `S36/research/releases/002-wayne-horvitz/pass2-refinement.md` | SOURCE (3,963 words) | Primary prose source for Part A |
+| `SPS/research/releases/002-varied-thrush/pass2-refinement.md` | SOURCE (3,712 words) | Primary prose source for Part B |
+| `www/tibsfox/com/Research/NASA/1.2/index.html` | SOURCE | Mission landing page (Explorer 2 + Sword Fern) |
+| `www/tibsfox/com/Research/NASA/1.2/research.html` | SOURCE | Deep research essay "The Stage That Did Not Light" |
+| `www/tibsfox/com/Research/NASA/1.2/mathematics.html` | SOURCE | "The Mathematics of Falling Short" -- orbital-velocity threshold analysis |
+| `www/tibsfox/com/Research/NASA/1.2/organism.html` | SOURCE | *Polystichum munitum* ecological profile |
+| `www/tibsfox/com/Research/NASA/1.2/papers.html` | SOURCE | Scientific anchors: Van Allen 1959, Pickering 1960, Ludwig 2011, Sutton 2001, Page 1979 |
+| `www/tibsfox/com/Research/NASA/1.2/curriculum.html` | SOURCE | College of Knowledge curriculum unit |
+| `www/tibsfox/com/Research/NASA/1.2/simulation.html` | SOURCE | Simulation artifact |
 
 ## Cross-References
 
-| Thread | Degree 2 Entity | Role |
-|--------|-----------------|------|
-| S36 | Wayne Horvitz | Artist — institution builder, community platform architect |
-| SPS | Varied Thrush | Species — the drone, atmospheric sustained tone |
-| NASA | Pioneer 1 | Mission — 43 hours of data, first NASA spacecraft |
-| Organism | Polystichum munitum | Pairing — sword fern, ground-layer evergreen constant |
-| Degree 1→2 | Pioneer → Sustainer | Transition — from first colonization to sustained presence |
-| Degree 2→3 | Sustainer → Communicator | Transition — from atmosphere to meaning |
+| Thread | Entity | Role |
+|--------|--------|------|
+| S36 | Wayne Horvitz | Artist -- Builder pattern, The Royal Room founder, ensemble commissioner |
+| SPS | Varied Thrush (*Ixoreus naevius*) | Species -- first Turdidae, drone atmospheric constant, AM-modulated single tone |
+| NASA | Explorer 2 | Mission -- Juno I / Jupiter-C RS-26, March 5 1958, fourth-stage ignition failure, suborbital reentry |
+| NASA Organism | *Polystichum munitum* | Sword fern -- ground-layer evergreen, horizontal dominator of old-growth forest floor |
+| Dedication | JPL igniter redesign team | Unnamed engineers who closed the Explorer 2 failure mode in 21 days |
+| Degree 0 → 2 | Jones → Horvitz | Central District thread resumes after Frisell's Fremont/Queen Anne detour at D1 |
+| Degree 1 → 2 | Frisell → Horvitz | Artist-city pattern: Draw → Builder |
+| Degree 1 → 2 | Pacific Wren → Varied Thrush | SPS communication architecture: complexity → drone |
+| Degree 1 → 2 | Pioneer 0 → Explorer 2 | NASA failure taxonomy: catastrophic → partial success |
+| Degree 1 → 2 | Fireweed → Sword fern | NASA botanical profile: surface successional → ground-layer evergreen |
+| Degree 2 → 3 | Horvitz → Anderson | Central District thread continues; Builder → Return |
+| Degree 2 → 3 | Varied Thrush → Black-capped Chickadee | Drone → combinatorial semantic content |
+| Degree 2 → 3 | Explorer 2 → Pioneer 2 | Partial success → silent failure (third-stage ignition, 45 min useful data) |
+| Degree 2 → 55 | Varied Thrush (D2 drone) → Varied Thrush (D55 biological stereo photogrammetry) | Species returns at degree 55 (v1.49.559) with paired-whistle harmonic analysis |
+| Degree 0 | Armillaria ostoyae | First NASA organism -- subterranean layer anchors the three-layer botanical stratification that includes D2's sword fern |
+| Degree 4 | Explorer 3 | Twenty-one days after Explorer 2 -- the successful follow-up that consumed Explorer 2's failure data |
+| v1.49.501 | NASA Founding | Engine's pinned v1.0 foundation; D2 is the third entry above it |
+| v1.49.559 | Degree 55 gold standard | Current A-grade reference shape for NASA paired-engine degrees |
+| RELEASE-HISTORY.md | Quality ledger | Tracks grade progression -- D2 moves from F 47 to A |
 
 ---
 
-*Degree 2: the sustained presence. One note held. One venue built. One fern covering the ground. 43 hours of data from a mission that fell short and found something essential.*
+*Degree 2: the sustained presence. One note held. One venue built. One fern covering the ground. The three upper stages that did fire. 43 hours of data from what fell short, and 21 days to the next launch that didn't.*
