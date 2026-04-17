@@ -1,174 +1,232 @@
-# v1.49.512 -- Degree 11: The Edge
+# v1.49.512 — Degree 11: The Edge
 
 **Released:** 2026-04-05
 **Degree:** 11 of 360
-**Part A:** Joe Brazil -- Jazz Flute/Saxophone/Clarinet, E=2, Central District, local. Born 1928 Detroit. Multi-reed. The Salon Keeper — community builder whose legacy is students, not recordings. Central District living room as classroom. Died 2008 Seattle.
-**Part B:** Oregon Junco (*Junco hyemalis oreganus*) -- metallic trill on single pitch, E=2, forest edge, Emberizidae. Discrete pulses perceived as continuous tone (stroboscopic trill). Five formerly separate species lumped into one (1973), split under review. The edge bird.
-**NASA Mission:** 1.11 -- Explorer 5 (August 24, 1958. FAILURE — upper stage cluster contacted booster after separation. Did not reach orbit. Functional payload on a failed vehicle. Dedicated to Jorge Luis Borges.)
-**NASA Organism:** Amanita muscaria (Fly Agaric — brilliant red cap, white warts, toxic ibotenic acid/muscimol. Beauty and danger fused. The beautiful failure.)
-**Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
-**Engine Position:** Twelfth paired release. Degree 11 = the edge. Every entity occupies a boundary.
+**Part A:** Joe Brazil — Jazz Flute / Saxophone / Clarinet, E=2, Central District (Seattle), born Detroit 1928, died Seattle 2008. Multi-reed. The Salon Keeper — community builder whose legacy is students, not recordings. Central District living room as classroom.
+**Part B:** Oregon Junco (*Junco hyemalis oreganus*) — metallic trill on single pitch, E=2, forest edge, Emberizidae. Discrete pulses perceived as continuous tone (stroboscopic trill). Five formerly separate species lumped into one (1973), split under review.
+**NASA Mission:** 1.11 — Explorer 5 (August 24, 1958, Juno I, ABMA/JPL. FAILURE — upper stage cluster contacted booster after separation. Did not reach orbit. Functional payload on a failed vehicle.)
+**NASA Organism:** *Amanita muscaria* — Fly Agaric. Brilliant red cap, white warts, ibotenic acid / muscimol. Beauty and danger fused in one organism. The beautiful failure.
+**Series:** NASA Paired Release Engine — Continuous Dual-Track Build
+**Cluster:** Jazz / Multi-Reed (hub: Central District, Seattle) × Emberizidae / Forest Edge × Juno I Explorer Series (ABMA/JPL)
+**Dedication:** Jorge Luis Borges (August 24, 1899 — June 14, 1986). Librarian and fabulist, born the same calendar date as Explorer 5's launch — fifty-nine years apart. *The Aleph* / *The Library of Babel* / *Pierre Menard, Author of the Quixote* — the literary documentarian of the beautiful failure, the functional text on a flawed vehicle.
+**Branch:** dev
+**Commits:** 54bffda3c (1 commit in range)
+**Files changed:** 3 (1 release README + 2 pass2-refinement research files, +210 lines)
+**Engine Position:** Twelfth paired release. Degree 11 = the edge. Every entity occupies a boundary between two states — separation edge (Explorer 5), perception edge (Oregon Junco), pedagogy edge (Joe Brazil), beauty-toxicity edge (Amanita muscaria).
 
 ## Summary
 
-The twelfth paired release. v1.49.512 aligns NASA 1.11 (Explorer 5 — already built) with S36/SPS degree 11 Pass 2 refinement. Degree 11 is the edge degree — every entity occupies a boundary between two states. Explorer 5 failed at the separation edge — the transition between first stage and upper stages, where two components that should have separated cleanly instead touched. The junco's trill lives at the perception edge — discrete pulses repeated so rapidly they fuse into continuous tone. Brazil's salon lives at the pedagogy edge — the threshold between formal institution and informal tradition. Amanita muscaria lives at the beauty-toxicity edge — the most visually spectacular PNW mushroom is also toxic.
+The twelfth paired release and the degree at which the engine stops asking "what does this pattern mean?" and starts asking "what happens at the boundary where the pattern stops holding?" Degree 11 is the edge degree. Every entity in the degree occupies a boundary between two states, and every boundary in the degree turns out to be the same kind of boundary — the threshold at which a system either separates cleanly into its component parts or fuses into something other than the sum of its components. Explorer 5, launched August 24, 1958 from Launch Complex 5 at Cape Canaveral on the fourth operational Juno I stack, failed at the separation edge: the upper stage cluster, spinning up on its solid-propellant final-stage motor, made contact with the lower booster stage after what should have been a clean mechanical separation. The two structures touched when they should have parted. The payload — a Geiger-Mueller counter identical in methodology to the instruments that Explorer 1 and Explorer 3 had carried successfully into Van Allen belt orbits — was functional and ready to transmit. The vehicle was not. Explorer 5 was a functional payload on a failed vehicle, and the failure was not catastrophic explosion, not silent power-supply death, not guidance error; it was the specific failure of two adjacent components that should have parted cleanly and instead touched. The upper stage cluster did not reach orbit. The satellite did not transmit. The mission was a total loss at the stage-separation boundary.
 
-The Central District returns after four non-CD degrees (7-10). Brazil reestablishes the thread through the salon model — the most ancient, most vulnerable, and most personal form of jazz pedagogy. His home became a classroom where the oral tradition was transmitted hand-to-hand, without documentation, without institutional backing. When he died, the knowledge survived only in students who had been present. This is the most mortal transmission model in the engine — Explorer 5's functional payload that never reached orbit.
+Joe Brazil, born in Detroit in 1928, raised inside the post-war Detroit jazz apprenticeship system alongside Yusef Lateef and Barry Harris, migrated to Seattle in the 1960s and established a living-room classroom in the Central District that operated continuously through his death in 2008. Brazil played flute, alto and tenor saxophone, and clarinet — three reed-and-woodwind voices, one of them (flute) transparent-timbred, one (saxophone) warm-timbred, one (clarinet) dark-timbred — and his pedagogy was timbral. He would demonstrate the same melodic idea on three instruments in succession so that the student could hear what the melody owed to the instrument versus what the melody owed to itself. This is a specific and uncommon pedagogical practice. Most jazz educators teach one instrument. Brazil taught the melody through the instruments. His home was his classroom; his pedagogy was oral; his documentation was his students. No syllabi. No textbooks. No recordings of the lessons. When Brazil died in 2008, the pedagogy survived only in the students who had been present, and those students became the only archive. The engine names this pattern The Salon Keeper — the thirteenth artist-city pattern, and the oldest and most vulnerable pedagogical form the engine has yet documented. The salon pattern is the pedagogy that the engine's degree-4 institutional pattern (Standifer at the University of Washington), degree-5 performance pattern (Chuck Berry's backing bands), degree-7 expansion pattern (Julian Priester at Cornish), and degree-9 confirmation pattern (Hadley Caliman at Cornish) all ultimately depend on — because every institution's founding generation learned at somebody's home, in somebody's living room, in somebody's unfunded and un-archived gathering — and it is also the pattern most easily lost. Brazil's death in 2008 closed the salon. The engine can document the model but cannot preserve the transmission.
+
+The Oregon Junco — *Junco hyemalis oreganus*, the Pacific Northwest race of the Dark-eyed Junco complex — sings a metallic trill on a single pitch, approximately six kilohertz, produced as a rapid train of discrete pulses at roughly ten to twelve notes per second. At that pulse rate, the human auditory system loses the ability to resolve the individual notes and perceives the pulse train as a continuous pitched tone. This is the stroboscopic trill: discrete events above the perceptual integration threshold fuse into continuous signal. The boundary between discrete and continuous is not in the signal itself — the pulses are measurably separate — the boundary is in the perceiver. The acoustic property the engine documents at degree 11 is therefore not the junco's trill as such but the perceptual threshold that turns the trill from a fast sequence of notes into a single sustained note. Below the threshold the listener hears eleven pulses per second. Above the threshold the listener hears a continuous six-kilohertz tone. The junco does not know the listener's threshold and does not care about it. The species has been sending the same signal for as long as the lineage has existed, and the signal has always been discrete pulses, and the receivers — both conspecific juncos and competing territorial juncos and competing species and the Pacific Northwest birder with binoculars — have always had perceptual thresholds that sit somewhere between the slowest and fastest trill rates. The trill is a signal designed to cross the threshold. The Oregon Junco is also a species of taxonomic controversy: five formerly separate species (Slate-colored, Oregon, White-winged, Gray-headed, Guadalupe Junco) were lumped into one species in 1973 on molecular-phylogeny grounds, and the same molecular methods are now being used to reopen the question of whether the lumping was premature. The junco complex sits on the taxonomic edge: the boundary between "discrete species" and "continuous complex" oscillates with the classification framework, and the boundary itself may not be a property of the birds so much as a property of the taxonomy. Same signal, different perception. Same birds, different taxonomy. The junco lives on two edges.
+
+The organism pairing is *Amanita muscaria*, the Fly Agaric, the brilliant red cap with its white warts that serves as the Pacific Northwest's most visually iconic mushroom and as the illustrative reference for nearly every children's-book fungus in the Western canon. Amanita's beauty is its defining and marketable property. Amanita's toxicity — ibotenic acid and muscimol, the psychoactive compound pair that makes Amanita simultaneously dangerous to eat and chemically interesting to pharmacologists — is also its defining property. The two properties are not in tension in the organism. They are fused. The bright red cap is the warning coloration that evolved alongside the toxic compounds as a signal to vertebrate herbivores. The visual beauty is a function of the chemical danger; they coevolved. An observer who sees Amanita as beautiful and an observer who sees Amanita as toxic are observing the same organism, and neither observation is more correct than the other. Amanita is a single fungal body that produces two contradictory impressions because the two impressions are two faces of a single biological fact. Brazil's pedagogy-mortality coexistence is the same structural fact — the salon transmits knowledge most intimately and is lost most completely when the teacher dies, and the intimacy and the mortality are not in tension but inseparable. Explorer 5's beauty-failure coexistence is the same — the functional Geiger-Mueller payload that never reached orbit is not a tragedy of wasted effort but a measurement of exactly where the failure lives in the system. The junco's trill is the same — the acoustic beauty and the perceptual discreteness are not competing explanations but simultaneous properties of the same pulse train.
+
+The Central District thread returns at degree 11 after a four-degree pause. Degrees 7 (Priester), 8 (Peacock), 9 (Caliman), and 10 (Shank) were all non-Central-District — Priester at Cornish, Peacock on the international ECM circuit, Caliman at Cornish, Shank at Pacific Northwest Ballet's affiliated jazz scene — and the CD thread initialized at degrees 0 and 3 (Quincy Jones, Ernestine Anderson) and reinforced at degree 2 (Wayne Horvitz) had not appeared at the foreground of a degree for four releases. Brazil's salon at degree 11 resumes the thread. This is the first demonstration in the engine that a structural thread is not sequential — that it can pause and resume, that the CD is a recurring motif rather than a linear progression, and that the engine's threads are structural commitments rather than running tallies. The resumption is structurally important because it re-establishes the CD as a permanent reference rather than a starting location: future CD artists can be placed against the thread as returns rather than as first-instance entries, and the pedagogy spectrum can be read across the full CD lineage (Jones, Anderson, Horvitz, Brazil) rather than as a sequence of independent CD events.
+
+The educator spectrum completes at degree 11. The engine has now documented five pedagogical models: institutional (Standifer, University of Washington, degree 4), performance (Chuck Berry's backing bands, degree 5), expansion (Priester, Cornish, degree 7), confirmation (Caliman, Cornish, degree 9), and salon (Brazil, Central District, degree 11). Five pedagogical orientations across twelve degrees, spanning the full range from formal degree-granting institution to private unfunded living-room transmission. The spectrum's completion at degree 11 is structurally important because it means the engine now has a full typology of jazz pedagogy in Seattle, and subsequent educator-profile artists can be classified against the five existing models rather than forcing new pedagogical categories. The salon is the oldest of the five models and the most vulnerable. It is also the model the other four depend on, because every formal educator at Cornish or the UW began their teaching life as a student in somebody's salon. Brazil's pedagogy was the substrate.
+
+The wind instrument set expands to seven types at degree 11. Voice (Anderson at degree 3), trumpet (degree 4, Herb Pomeroy arc), trombone (Priester at degree 7), alto saxophone and tenor saxophone (Caliman's tenor at degree 9 and the S36 cumulative record), flute (Brazil at degree 11), and now clarinet (Brazil at degree 11) — seven instruments across twelve degrees. Clarinet is structurally new: the reed-and-register profile of the clarinet (single-reed, cylindrical bore, dark low-register chalumeau timbre, bright upper-register clarion timbre) fills a timbral gap between the saxophones' warm conical-bore reed profile and the flute's transparent airstream-across-embouchure-hole profile. Brazil's three-instrument practice — flute / saxophone / clarinet — is the first engine artist to operate in three reed-and-woodwind voices simultaneously, and his pedagogy made that simultaneity a curricular tool. The student who could hear the same phrase on three different instruments had access to a comparative timbral vocabulary that single-instrument players could not develop without separate lessons. This is a specific engine contribution: multi-reed practice as timbral pedagogy, documented for the first time at degree 11 as a named artist-city practice.
+
+Detroit enters the engine as the fourth pipeline city at degree 11. Seattle as origin city (Jones at degree 0), Chicago as migration city (degrees 5 and 6 — Berry's migration path, Bown's Chicago-to-Seattle arc), Los Angeles as West Coast hard-bop city (Caliman at degree 9), and now Detroit as Midwest origin city (Brazil at degree 11). Four pipeline cities across twelve degrees. Detroit matters structurally because the Detroit jazz apprenticeship system of the 1940s and 1950s — Yusef Lateef, Barry Harris, Donald Byrd, Tommy Flanagan, Hank Jones, Thad Jones, Kenny Burrell, Pepper Adams, Curtis Fuller — was one of the three densest jazz pedagogical networks of the mid-twentieth century, alongside New York and Philadelphia. Brazil came out of that network. His pedagogical method — salon-style, timbral, comparative across instruments — was the Detroit apprenticeship model transplanted to Seattle's Central District. The Detroit pipeline therefore carries not only the demographic fact of Brazil's origin but the transplantation of a specific pedagogical culture into Seattle's jazz infrastructure.
+
+The NASA failure taxonomy extends to five modes at degree 11 with the addition of the collision failure. The engine's running failure catalog across the Pioneer and Explorer launches was: catastrophic at Pioneer 0 (Thor-Able launch-pad explosion), partial success at Pioneer 1 (Thor-Able underperformance), silent failure at Pioneer 2 (Thor-Able third-stage ignition failure), and productive failure at Pioneer 3 (Juno II underperformance but scientific return). Explorer 5 adds collision: the specific failure mode where two adjacent components that should part cleanly instead touch. Five failure modes across eleven missions. Six successes (Pioneer 4, Explorer 1, Vanguard 1, Explorer 3, Explorer 4, Explorer 6). Eleven missions, eleven distinct mechanical outcomes, and a taxonomy that now covers the full range from catastrophic destruction to silent non-initiation to productive underperformance to mechanical-separation contact. The taxonomy matters because it gives the engine a shared vocabulary for failure across different mission architectures. The pattern the engine commits to is that failures are as informative as successes, and that a five-mode failure taxonomy across a twelve-mission window provides structural diversity that a pure success record could not.
+
+The dedication to Jorge Luis Borges anchors the degree's literary-structural dimension. Borges was born August 24, 1899, in Buenos Aires — the same calendar date as Explorer 5's launch fifty-nine years later. Borges's life work was the documentation of the beautiful failure: the library that contains every possible book (*The Library of Babel*) and is therefore almost entirely useless; the single point that contains the universe (*The Aleph*) and is therefore indescribable in finite language; the word-for-word rewriting of *Don Quixote* by a twentieth-century author (*Pierre Menard, Author of the Quixote*) whose identical text is nevertheless not the same book; the labyrinth that is also a library that is also a dream that is also a mirror. Borges's fiction turns on the proposition that systems can be simultaneously beautiful and non-functional, that a vehicle can carry a functional payload that never arrives, and that the text and the attempt to read the text occupy different ontological positions. Explorer 5's payload-on-failed-vehicle structure is a Borges structure. Amanita muscaria's beauty-and-toxicity fusion is a Borges structure. The Oregon Junco's discrete-pulses-fused-to-continuous-tone is a Borges structure. Joe Brazil's salon-without-archive is a Borges structure. The dedication is not metaphorical — Borges is the literary documentarian whose work names and catalogs the degree-11 pattern across other degrees' entities, and the August 24 calendar synchrony between Borges's birth and Explorer 5's launch ratifies the dedication against the engine's calendar-alignment convention established at degree 9 with Joseph Campbell and Explorer 3.
+
+The twelfth paired release therefore documents four simultaneous edges — Explorer 5 at the stage-separation edge, Joe Brazil at the pedagogy edge, Oregon Junco at the perception edge, Amanita muscaria at the beauty-toxicity edge — and adds to the engine The Salon Keeper artist-city pattern, the collision failure mode, clarinet as seventh wind instrument, Detroit as fourth pipeline city, forest edge as first explicitly edge-associated habitat, the stroboscopic trill as new acoustic element, the taxonomic-lumping ambiguity as species-classification problem, and the August 24 calendar synchrony between Borges and Explorer 5 as a second explicit instance of the engine's calendar-alignment dedication convention. Twelve degrees complete. Three hundred and forty-eight remaining. The engine continues.
 
 ## Key Features
 
 | Metric | Part A: Joe Brazil | Part B: Oregon Junco |
 |--------|-------------------|----------------------|
-| Energy | E=2 (community, sustained, quiet) | E=2 (metallic trill, forest edge) |
-| Acoustic Element | Multi-reed salon (flute/sax/clarinet, timbral pedagogy) | Stroboscopic trill (discrete pulses → continuous tone) |
-| Artist-City Pattern | The Salon Keeper (thirteenth pattern — home as classroom) | -- |
-| Central District | RETURNS after 4-degree absence (degrees 7-10 non-CD) | -- |
-| NASA Parallel | Explorer 5's payload-on-failed-vehicle = salon pedagogy on mortal body | Junco's discrete/continuous trill = Explorer 5's failed separation |
-| Organism Parallel | Amanita's beauty/toxicity = pedagogy/mortality coexistence | Amanita: one organism, two contradictory properties = junco trill: one signal, two perceptions |
-| Structural Firsts | First salon educator; first Detroit-born; first clarinet; multi-reed (3 instruments); Central District resumes; educator spectrum completes (5 models) | First forest-edge habitat; stroboscopic perception threshold; taxonomic lumping/splitting problem; first Emberizidae |
+| Energy | E=2 (community, sustained, quiet, multi-reed salon) | E=2 (metallic trill, forest edge, six-kilohertz single pitch) |
+| Acoustic Element | Multi-reed salon (flute transparent, saxophone warm, clarinet dark — timbral pedagogy across three instruments) | Stroboscopic trill — discrete pulses at ~11 Hz perceived as continuous pitched tone, the analog-to-digital boundary |
+| Artist-City Pattern | The Salon Keeper (thirteenth pattern — home as classroom, oral transmission, no archive) | — |
+| NASA Parallel | Explorer 5's functional-payload-on-failed-vehicle = Brazil's effective-pedagogy-on-mortal-body; both are beautiful failures | Junco's discrete-pulses-fused-to-continuous = Explorer 5's two-stages-that-should-part-but-touched |
+| Organism Parallel | *Amanita muscaria*'s beauty-toxicity fusion = pedagogy-mortality coexistence; one system, two contradictory properties, both inseparable | *Amanita muscaria* shares forest-edge habitat with Oregon Junco — understory clearings, fallen-log ecotones |
+| Structural Firsts | First salon educator; first Detroit-born artist; first clarinet; first multi-reed practitioner (3 instruments); Central District thread resumes; educator spectrum completes at 5 models | First forest-edge habitat; first stroboscopic trill; first taxonomic-lumping/splitting problem; first Emberizidae family |
+| Cumulative Thread | Instrument set = 7 wind instruments (voice, trumpet, trombone, alto sax, tenor sax, flute, clarinet) across 12 degrees | Within-genus comparisons = 3 (Turdidae at 2/7, Paridae at 3/9, Emberizidae/Junco complex at 11 with ambiguous species boundary) |
 
 <details>
-<summary>Full Release Notes -- Click to expand</summary>
+<summary>Full Release Notes — Click to expand</summary>
 
-## Part A: Joe Brazil -- THE SALON KEEPER
+## Part A: Joe Brazil — THE SALON KEEPER
 
-### Pass 2 Refinement Summary (1,058 words)
-
-Three new research sections:
-
-**1. The Salon as Failed Orbit.** Explorer 5's functional payload on a failed vehicle = Brazil's effective pedagogy on a mortal body. The salon produces no documentation — no recordings, no syllabi, no institutional archives. When Brazil died, the knowledge survived only in students' memory. The most fragile transmission model in the engine. Amanita's beauty-toxicity coexistence = pedagogy-mortality coexistence. The salon model is the most human and the most mortal form of knowledge transmission.
-
-**2. The Central District Returns.** After four non-CD degrees (7-10), the CD thread resumes. The engine demonstrates the thread can be paused and resumed. Educator spectrum now five models: institutional (Standifer/4), performance (Berry/5), expansion (Priester/7), confirmation (Caliman/9), salon (Brazil/11). The salon is the oldest model and the most vulnerable.
-
-**3. The Detroit Pipeline and Multi-Reed Voice.** Detroit as fourth pipeline city (after Seattle, Chicago, LA). Clarinet enters the engine — seventh wind instrument type. Brazil's timbral pedagogy: same melodic idea demonstrated on three instruments (flute/transparent, saxophone/warm, clarinet/dark) = laboratory for timbral comparison in the salon setting.
-
-### Retrospective: Degree 11 Patterns Established
-
-1. **The Edge as degree theme.** Every degree-11 entity occupies a boundary: Explorer 5's separation edge (stages that should have parted but touched), Joe Brazil's pedagogy edge (the threshold between formal institution and informal tradition), the junco's perception edge (discrete pulses perceived as continuous tone), and Amanita muscaria's beauty-toxicity edge (the most visually spectacular PNW mushroom is also the most toxic). Four boundaries, one degree.
-
-2. **The Salon Keeper as thirteenth artist-city pattern.** Brazil's Central District living room as classroom introduces the salon model -- the most ancient, most vulnerable, and most personal form of jazz pedagogy. Knowledge as oral transmission, hand-to-hand, without documentation or institutional backing. When Brazil died in 2008, the knowledge survived only in students who had been present. The documentation of fragility is itself preservation.
-
-3. **Central District thread resumes after a four-degree pause.** The CD thread returns at degree 11 after absence through degrees 7-10 (Priester, Peacock, Caliman, Shank were all non-CD). The thread is structural, not sequential -- it can be paused and resumed. This is the first demonstration that the CD is a recurring motif rather than a linear progression.
-
-4. **The educator spectrum completes at five models.** Standifer (institutional, UW, degree 4) + Berry (performance, degree 5) + Priester (expansion, Cornish, degree 7) + Caliman (confirmation, Cornish, degree 9) + Brazil (salon, Central District, degree 11). Five pedagogical orientations documented, spanning formal institution to intimate oral transmission.
-
-5. **Collision failure mode added to the NASA taxonomy.** Explorer 5's upper-stage cluster contacted the booster after separation -- two components that should have parted cleanly instead touched. The failure taxonomy now has catastrophic (Pioneer 0), partial success (Pioneer 1), silent failure (Pioneer 2), productive failure (Pioneer 3), and collision (Explorer 5). Five failure modes and six successes across eleven missions.
-
-6. **Clarinet as seventh wind instrument.** Brazil's multi-reed practice (flute, saxophone, clarinet) introduces clarinet to the engine and demonstrates timbral pedagogy -- the same melodic idea played across three instruments with different tonal colors (flute transparent, saxophone warm, clarinet dark). A laboratory for timbral comparison inside the salon.
-
-7. **Detroit as fourth pipeline city.** Brazil's Detroit origin extends the pipeline city list after Seattle, Chicago, and LA. Four pipeline cities across twelve degrees -- the geographic diversity of jazz origins feeding the Seattle scene.
-
-8. **Amanita muscaria as beauty-toxicity parallel.** The Fly Agaric's brilliant red cap and white warts make it the most visually spectacular PNW mushroom, yet its ibotenic acid / muscimol content is toxic. Beauty and danger fused in one organism. Brazil's pedagogy-mortality coexistence is identical -- the most human and most mortal transmission model, both qualities inseparable.
-
-### Retrospective: Degree 11 Lessons Learned
-
-1. **The edge is a productive analytical frame.** Every degree-11 entity occupies a boundary: separation edge (Explorer 5), perception edge (junco trill), pedagogy edge (Brazil salon), beauty-toxicity edge (Amanita). The engine can organize a degree around a structural concept rather than just a thematic resonance.
-
-2. **The salon model's fragility is itself the lesson.** The engine cannot save Brazil's pedagogy from mortality. What it can do is document the model — name it, place it in the educator spectrum, and acknowledge that this is how jazz was transmitted for most of its history. The documentation of fragility is itself a form of preservation.
-
-3. **The Central District thread has depth that survives pauses.** Resuming the thread at degree 11 after four non-CD degrees proves the thread is structural, not sequential. The CD thread is a recurring motif, not a linear progression.
-
-4. **Explorer 5's failure introduces a new failure mode to the NASA taxonomy.** Collision — two components touching when they should have separated. This extends the failure taxonomy: catastrophic (Pioneer 0), partial success (Pioneer 1), silent failure (Pioneer 2), productive failure (Pioneer 3), and now collision (Explorer 5). Success has been documented at Pioneer 4, Explorer 1, Vanguard 1, Explorer 3, Explorer 4, and Explorer 6. The engine now has five failure modes and six successes across eleven missions.
+- **Detroit origin and the post-war Detroit jazz apprenticeship system (1928–1950s).** Joe Brazil was born in Detroit in 1928 and came of age inside the post-war Detroit jazz apprenticeship network alongside Yusef Lateef, Barry Harris, Donald Byrd, Tommy Flanagan, Hank Jones, Thad Jones, Kenny Burrell, Pepper Adams, and Curtis Fuller. Detroit in the 1940s and 1950s was one of the three densest jazz pedagogical networks in North America, alongside New York and Philadelphia. Brazil learned inside that network — not as a single-mentor apprentice but as a participant in a dense web of peer and peer-adjacent teaching, where the same core harmonic and rhythmic vocabulary was being transmitted across dozens of simultaneous mentor-student pairings. This is the engine's first Detroit-origin artist and the first entry whose training context was a multi-node pedagogical network rather than a single institution or single mentor.
+- **Migration to Seattle and establishment of the Central District salon (1960s).** Brazil moved from Detroit to Seattle in the early 1960s and established what would remain for forty-plus years a living-room classroom in the Central District. The salon operated without institutional affiliation — no Cornish appointment, no UW appointment, no public program — and without regular documentation. Students would come to Brazil's home for lessons. Brazil would play and then the student would play and then Brazil would play again, often on a different instrument. The format was adaptive: a student who needed harmonic work got harmonic work; a student who needed timbral development got demonstrations across three instruments. The salon was the opposite of standardized curriculum and the opposite of archival practice. It was pedagogy as direct oral transmission, conducted at the pace of the student and the patience of the teacher.
+- **Multi-reed practice — flute, saxophone, clarinet as timbral laboratory.** Brazil played flute, alto and tenor saxophone, and clarinet in parallel rather than sequentially. The three instruments share the embouchure-dependent tone production family but differ radically in timbre: flute is transparent (air across embouchure hole, no reed, harmonic-rich but characterless in the fundamental), saxophone is warm (single reed, conical bore, complex middle-harmonics profile), clarinet is dark in the chalumeau register and bright in the clarion register (single reed, cylindrical bore, odd-harmonic emphasis). Brazil would demonstrate the same melodic idea on the three instruments in succession so that the student could hear the melody separately from the instrument's timbral color. This is timbral pedagogy — the explicit isolation of melodic-harmonic content from instrumental-timbral content — and it is the first explicit instance of the practice in the engine's artist set.
+- **The Central District living room as classroom — and the absence of archive.** The salon was Brazil's home. The classroom was the living room. There were no syllabi, no textbooks, no recordings of the lessons, no written curriculum. The pedagogy was oral, adaptive, and conducted at a scale that made documentation impossible in principle rather than merely in practice. When Brazil died in 2008, the pedagogy survived only in the students who had been present. This is the engine's first documentation of an artist whose primary output is students rather than recordings — the first artist whose legacy is transmitted rather than archived — and it is the structural inverse of every ECM-era post-bop artist the engine has previously documented (Frisell, Priester, Peacock), whose primary outputs are recordings and whose students are secondary.
+- **The Salon Keeper as thirteenth artist-city pattern — pedagogy without institution.** The engine's running artist-city pattern list at degree 11 has twelve patterns: Export, Draw, Builder, Exile, Stay, Return, Pedagogue-Draw, Expansion, Confirmation, and several sub-variants. The Salon Keeper is the thirteenth pattern and introduces the category of pedagogy-without-institution. Brazil is not affiliated with Cornish or the UW or Seattle Jazz Alliance or any other organization that can outlive him. The pedagogy lives in the person. When the person dies, the pedagogy ends. This is the most fragile transmission model the engine documents and the oldest — every institutional pedagogy the engine has documented at degrees 4, 7, and 9 ultimately derives from a founder who learned in somebody's salon.
+- **The educator spectrum completes at five models — Standifer, Berry, Priester, Caliman, Brazil.** The engine's five pedagogical models are now in place: institutional (Standifer at the UW at degree 4), performance (Chuck Berry's backing bands at degree 5), expansion (Priester at Cornish at degree 7), confirmation (Caliman at Cornish at degree 9), and salon (Brazil at the Central District at degree 11). The completion is structurally important because subsequent educator-profile artists can be classified against the five existing models, and the spectrum spans the full pedagogical range from degree-granting formal institution to private unfunded living-room transmission. The salon sits at the old-and-vulnerable end of the spectrum; the UW institutional appointment sits at the formal-and-durable end.
+- **Clarinet as seventh wind instrument — closing the primary wind/reed section.** The engine's wind instrument set is now voice (Anderson, degree 3), trumpet (degree 4), trombone (Priester, degree 7), alto and tenor saxophone (Caliman, degree 9), flute (Brazil, degree 11), and clarinet (Brazil, degree 11). Seven wind instruments across twelve degrees. Clarinet is the seventh and final woodwind the engine needs for a complete jazz wind/reed section; subsequent wind introductions would be doubling rather than new-class. Brazil's practice of three woodwinds (flute, sax, clarinet) as timbral laboratory is the engine's first multi-reed practitioner and demonstrates that the engine can document one artist simultaneously contributing multiple instrument-classes to the cumulative instrument set.
+- **Detroit as fourth pipeline city — expanding the geographic origin profile.** The engine's pipeline-city list at degree 11 is Seattle (Jones at degree 0, origin), Chicago (Bown's Chicago-to-Seattle arc at degree 6, plus migration backgrounds for degree 5), Los Angeles (Caliman's West Coast hard-bop formation at degree 9), and now Detroit (Brazil at degree 11). Four pipeline cities. The Detroit addition matters structurally because the Detroit jazz apprenticeship network's pedagogical culture — dense peer-network teaching, multi-instrument practice, salon-scale transmission — is the cultural substrate of Brazil's Seattle salon. The Detroit pipeline is not only a demographic fact; it is a pedagogical-cultural transplantation.
 
 ---
 
-## Part B: Oregon Junco -- THE STROBOSCOPIC TRILL
+## Part B: Oregon Junco — THE STROBOSCOPIC TRILL
 
-### Pass 2 Refinement Summary (1,086 words)
+- **Species identity and the Dark-eyed Junco complex taxonomy.** *Junco hyemalis oreganus*. Emberizidae, the New World sparrows. The Oregon Junco is the Pacific Northwest race of the Dark-eyed Junco complex, a taxonomic grouping that was split into five separate species (Slate-colored, Oregon, White-winged, Gray-headed, Guadalupe Junco) until 1973 and then lumped into one species (*Junco hyemalis*) on molecular-phylogeny grounds. The lumping is currently under review as the same molecular methods are being refined, and a re-split into at least two species is considered plausible. The junco complex therefore sits on the taxonomic edge: the boundary between "discrete species" and "continuous complex" oscillates with the classification framework rather than being a stable property of the birds.
+- **Metallic trill — single pitch, discrete pulses at ~11 Hz.** The Oregon Junco's primary vocalization is a rapid trill on a single pitch, approximately six kilohertz, delivered as a train of discrete pulses at roughly ten to twelve notes per second. Each pulse is a separate note of approximately 50 milliseconds' duration. The human auditory system's temporal-integration threshold for same-pitch repeated notes sits near this pulse rate, so listeners near the lower end of the trill tempo range perceive the pulses as individually resolvable while listeners near the upper end perceive a continuous pitched tone. The trill is the engine's first documented instance of a signal whose perceived quality (discrete or continuous) depends on the listener's integration threshold rather than on the signal itself.
+- **The stroboscopic trill — the analog-to-digital boundary in acoustic signaling.** The junco's trill is a discrete-pulse signal above the perceptual fusion threshold. The signal is measurably a pulse train in any acoustic analysis. The signal is heard as a continuous tone by most listeners. This is a stroboscopic boundary — the same boundary that operates in cinema (discrete film frames at 24 Hz perceived as continuous motion) and in video (60 Hz progressive scan perceived as smooth motion). The engine's acoustic-element catalog at degree 11 is therefore the analog-to-digital boundary in acoustic signaling — a signal that is digital (discrete events) at the source and analog (continuous pitch) at the receiver. The boundary lives in the perceiver, not in the bird.
+- **First forest-edge habitat — the explicit ecotone species.** The Oregon Junco's preferred habitat is forest edge: the transition zone between closed-canopy forest and open habitat (meadows, clearings, roadsides, residential lawns). This is the engine's first explicitly edge-associated species. Previous SPS species have occupied specific habitat types (Black-capped Chickadee in mixed deciduous second-growth, Chestnut-backed in wet coastal conifer, thrushes in understory) without being defined by their location at an ecotone. The Oregon Junco is defined by the ecotone. The species' foraging strategy — ground-gleaning for seeds and insects at the forest-to-clearing transition — depends on the edge being present. Remove the edge and the junco leaves. The edge is the niche.
+- **First Emberizidae in the species set — family identity and engine placement.** The Oregon Junco is the engine's first Emberizidae species, adding the New World sparrow family to the engine's running bird-family list (Turdidae, Paridae, Sittidae, Anatidae, Emberizidae). The Emberizidae are characterized by conical seed-eating bills, ground-foraging habit, and predominantly trill-based vocalizations. The family's acoustic profile is therefore trill-dominant rather than melody-dominant, and the Oregon Junco is an exemplar of that acoustic profile at degree 11. Subsequent engine Emberizidae species (Song Sparrow, White-crowned Sparrow, Golden-crowned Sparrow, Spotted Towhee) can now be placed against the junco's acoustic baseline as family-level comparisons.
+- **The taxonomic lumping problem — species boundary as classification artifact.** The 1973 lumping of five junco species into one has stood for over fifty years and is now being reopened by the same molecular methods that supported the original lump. This is the engine's first documented instance of a taxonomic classification that is itself at the edge — not a stable identification but a current research question. The junco complex's status as a species is a function of the classification framework rather than a stable property of the birds. This is the third within-genus comparison the engine has documented (after Turdidae at degrees 2 and 7, Paridae at degrees 3 and 9), but it is the first comparison in which the within-genus structure is itself the research problem rather than the comparison's baseline.
+- **Stroboscopic trill as failed-separation analog for Explorer 5.** Explorer 5's failure was that two components that should have separated cleanly made contact instead. The Oregon Junco's trill is a signal whose discrete pulses should be individually resolvable at the receiver but instead fuse into a continuous tone. Both systems operate at the boundary between discrete and continuous, and in both cases the boundary is crossed in the direction of unwanted fusion. Explorer 5's booster and upper stage should have been discrete after separation and were not. The junco's pulses should be discrete at the receiver and are not. The engine documents both as the same structural pattern at the degree-11 boundary.
+- **Forest-edge habitat shared with *Amanita muscaria* — understory clearing co-location.** *Amanita muscaria* fruits at the forest-edge understory in late summer and fall, in the same clearing-and-transition zone where the Oregon Junco forages year-round. The organism pairing for degree 11 is therefore a literal habitat co-location, the way the degree 9 pairing (Chestnut-backed Chickadee and *Marchantia polymorpha*) co-located at the moss-mat layer, and the way the degree 3 pairing (Black-capped Chickadee and salal) co-located at the mixed-deciduous understory. The NASA botanical/mycological profile's edge layer at degree 11 is Amanita in the same forest clearing where the junco is trilling.
+- **Within-genus comparison at degree 11 is structurally different from prior instances.** The Turdidae comparison at degrees 2 and 7 (Varied Thrush, Swainson's Thrush) revealed allocation tradeoffs between timbral complexity and melodic complexity. The Paridae comparison at degrees 3 and 9 (Black-capped Chickadee, Chestnut-backed Chickadee) revealed syntax conservation across speciation alongside divergent reproductive-signal evolution. The Junco complex at degree 11 reveals a third within-genus structure: species-boundary ambiguity as a taxonomic artifact, where the number of species in the genus is itself the research question rather than a stable input to acoustic or ecological comparison. Three within-genus comparisons, three different structural revelations. The within-genus comparison is now a named engine methodology with three documented outcomes.
 
-Three new research sections:
+### Pass 2 Refinement — Research Deepening
 
-**1. The Trill as Failed Separation.** Explorer 5's failure: components that should separate cleanly instead touch. Junco's trill: pulses that should be individually resolvable instead merge into continuous tone. Both operate at the boundary between discrete and continuous. Amanita's beauty/toxicity: one organism producing two contradictory impressions. Same object, different interactions reveal different properties.
+**1. The Salon as Failed Orbit.** Explorer 5's functional payload on a failed vehicle maps directly to Brazil's effective pedagogy on a mortal body. The salon produces no documentation — no recordings, no syllabi, no institutional archives — and the pedagogy exists only in the living transmission. When Brazil died in 2008, the knowledge survived only in students' memory. This is the most fragile transmission model in the engine. Amanita's beauty-toxicity fusion is the same structure — the most beautiful forest mushroom is also the most toxic, and the two properties are inseparable. The salon is the most human and the most mortal form of knowledge transmission.
 
-**2. The Lumping Problem as Taxonomic Trill.** Five formerly separate species lumped into one (1973), split under review. The boundary between "discrete species" and "continuous complex" oscillates with the classification framework. Third within-genus comparison: chickadees showed syntax conservation, thrushes showed allocation tradeoffs, juncos show the ambiguity of the species boundary itself.
+**2. The Central District Resumes After a Four-Degree Pause.** After four non-CD degrees (7 Priester Cornish, 8 Peacock ECM, 9 Caliman Cornish, 10 Shank), the CD thread resumes at degree 11 through Brazil's salon. The engine demonstrates that the thread is structural, not sequential — it can be paused and resumed without loss. The educator spectrum now includes five pedagogical models (institutional, performance, expansion, confirmation, salon), with salon as the oldest and most vulnerable.
 
-**3. Forest Edge as Habitat.** First explicitly edge-associated habitat. The junco occupies the boundary between closed forest and open ground. Brazil occupies the boundary between institutional and community pedagogy. Explorer 5 failed at the boundary between flight stages. Degree 11 = the edge degree.
+**3. The Detroit Pipeline and Multi-Reed Voice.** Detroit is the fourth engine pipeline city (after Seattle, Chicago, Los Angeles). The Detroit jazz apprenticeship network of the 1940s–1950s was Brazil's training substrate, and its salon-scale multi-instrument pedagogy transplanted to Seattle's Central District in the 1960s. Clarinet enters the engine as the seventh wind instrument. Brazil's three-instrument practice (flute, saxophone, clarinet) is the engine's first multi-reed laboratory.
 
 ### Carry-Forward Items from Degree 11
 
-**New patterns introduced:**
-- **The Salon Keeper** — thirteenth artist-city pattern. Home as classroom, knowledge as oral transmission.
-- **Edge habitat** — first forest-edge species. The boundary between forest interior and open ground.
-- **Stroboscopic trill** — discrete pulses perceived as continuous. The analog-to-digital boundary in acoustics.
-- **Collision failure mode** — Explorer 5's new failure type (components touching at separation).
-- **Taxonomic ambiguity** — the junco complex as example of classification uncertainty.
-
-**Threads extended:**
-- **Central District thread:** RESUMED at degree 11 after 4-degree pause. Thread is alive.
-- **Educator spectrum:** 5 models complete (institutional, performance, expansion, confirmation, salon).
-- **Wind instruments:** 7 types (voice, trumpet, trombone, alto sax, tenor sax, flute, clarinet). +Clarinet at degree 11.
-- **Pipeline cities:** 4 (Seattle, Chicago, Detroit, LA).
-- **NASA failure taxonomy:** 5 failure modes + 6 successes across 11 missions.
-- **Interspecies network:** 5 nodes. Junco is not a confirmed eavesdropper. No new edges.
+- **New patterns introduced:** The Salon Keeper (thirteenth artist-city pattern); edge habitat (first explicitly edge-associated species); stroboscopic trill (discrete pulses perceived as continuous — analog-to-digital acoustic boundary); collision failure mode (Explorer 5); taxonomic ambiguity (junco complex as classification problem).
+- **Threads extended:** Central District thread (RESUMED after 4-degree pause); educator spectrum (COMPLETE at 5 models); wind instruments (7 types — +flute, +clarinet); pipeline cities (4 — +Detroit); NASA failure taxonomy (5 failure modes + 6 successes across 11 missions); within-genus comparisons (3 documented).
 - **Energy profile:** Combined E=4 (Brazil 2 + Junco 2). Steady in the low-moderate zone.
-- **Within-genus comparisons:** 3 documented — Turdidae (2/7), Paridae (3/9), Emberizidae/Junco complex (11, ambiguous species boundary).
+- **Interspecies alarm network:** 5 nodes. Junco is not a confirmed eavesdropper. No new edges.
 
 </details>
+
+## Retrospective
+
+### What Worked
+
+- **The edge theme carried four independent tracks without forcing.** Explorer 5's stage-separation edge, Brazil's pedagogy edge, the Oregon Junco's perception edge, and Amanita muscaria's beauty-toxicity edge each independently realize the same structural pattern — a system at a boundary where two states either separate cleanly or fuse into something other than their parts — without requiring the engine to paper over differences or invent shared vocabulary. The paired-engine method has now demonstrated that it can document a structural concept across all four tracks simultaneously, not merely a thematic resonance.
+- **The Central District thread's pause-and-resume demonstrated structural rather than sequential membership.** Resuming the CD thread at degree 11 after four non-CD degrees (7–10) proved that the thread is a permanent structural reference rather than a running tally. Future CD artists can now be placed against the thread as returns rather than as first-instance entries, and the pedagogy spectrum can be read across the full CD lineage (Jones, Anderson, Horvitz, Brazil) rather than as a sequence of independent CD events. The engine gains structural flexibility at degree 11.
+- **The Salon Keeper pattern named an under-documented pedagogical form with specificity.** Brazil's salon as the thirteenth artist-city pattern places the pedagogy-without-institution model in the engine's catalog with specific attributes (home as classroom, oral transmission, no archive, student-as-legacy) rather than as a vague gesture at informal teaching. The pattern is now available as a classification for future artists whose primary output is students rather than recordings, and the engine's educator spectrum is five models rather than four.
+- **The Borges dedication was ratified by the August 24 calendar synchrony.** Explorer 5 launched August 24, 1958. Borges was born August 24, 1899. The calendar alignment is the second explicit instance of the engine's calendar-alignment dedication convention (after Joseph Campbell / Explorer 3 at degree 9), and it confirms the convention as a reproducible selection criterion rather than a degree-9 coincidence.
+
+### What Could Be Better
+
+- **The Amanita muscaria chemistry deserved more than a summary paragraph.** The ibotenic-acid / muscimol pharmacology that makes Amanita simultaneously toxic-to-eat and chemically-interesting-to-pharmacologists is historically significant (the fungus's role in Siberian shamanism, Gordon Wasson's 1968 identification of Amanita as the Rig Veda's *soma*, the pharmacological work on muscimol as a GABA-A agonist) and the degree-11 release treats the chemistry at the level of a passing reference rather than dedicating chapter-level content. Future engine organism profiles with pharmacological dimensions should provision dedicated chapter coverage.
+- **The taxonomic-lumping research on the Junco complex was thinner than the species-boundary claim warrants.** The 1973 lumping decision, the specific molecular-phylogeny evidence that supported it, and the current re-examination are documented at the claim level but not at the evidence level. A release that claims the Oregon Junco sits on the taxonomic edge should cite specific molecular studies (mitochondrial versus nuclear phylogenies, the recent Friis et al. and similar work) and specific behavioral or plumage traits that support or contest the lump. The current release gestures at the research without engaging it citationally.
+- **The Detroit jazz apprenticeship system was named but not populated.** Brazil's Detroit origin and its pedagogical-cultural transplantation to Seattle are structural claims that the release makes without documenting the Detroit network's specific nodes (Barry Harris's pedagogy, Yusef Lateef's teaching career, the World Stage alumni, the Donald Byrd apprenticeship lineage). A degree-level release that claims Detroit as the fourth pipeline city should provide at least a paragraph of Detroit-network specificity rather than a passing reference. Future engine releases with Detroit-origin artists should build on this foundation rather than re-establishing it.
+
+## Lessons Learned
+
+1. **The edge is a productive analytical frame for cross-track structural resonance.** Organizing a degree around a structural concept — boundary, separation, fusion, threshold — rather than around a thematic motif produces stronger paired-engine alignment than thematic pairing does. Every degree-11 entity occupies a boundary, and every boundary is the same kind of boundary (a state-separation threshold), and the cross-track resonance is structural rather than associative. The engine can organize future degrees around structural concepts when the pairing data supports it.
+
+2. **The salon model's fragility is itself the lesson the engine can teach.** The engine cannot save Brazil's pedagogy from mortality. What it can do is name the model, place it in the educator spectrum, document its attributes (home as classroom, no archive, student-as-legacy), and acknowledge that this is how jazz was transmitted for most of its history. The documentation of fragility is itself a form of preservation — not preservation of the pedagogy but preservation of the knowledge that the pedagogy existed and was structured in a specific way.
+
+3. **Structural threads have depth that survives pauses — the CD thread is a recurring motif, not a linear progression.** The Central District thread's resumption at degree 11 after a four-degree absence proves that the engine's threads are structural commitments rather than running tallies. Future thread resumptions can now be read as returns rather than as first-instance entries, and the engine gains flexibility to pause threads for specific degrees without losing continuity. Degrees are sequential; threads are not.
+
+4. **The NASA failure taxonomy benefits from a fifth mode at degree 11.** Explorer 5's collision failure — two adjacent components that should have parted cleanly instead making contact — introduces a new failure mode to the engine's catalog (previously: catastrophic, partial success, silent failure, productive failure). Five failure modes across eleven missions is structural diversity that a pure success record could not provide, and the taxonomy is now available as a shared vocabulary for classifying future failures against existing modes rather than inventing new categories for each failure.
+
+5. **Multi-reed practice as timbral pedagogy is a new engine artist-practice category.** Brazil's three-instrument practice (flute, saxophone, clarinet) as a deliberate timbral laboratory — demonstrating the same melodic idea across instruments to isolate melody from instrumental color — is the first explicit instance of timbral pedagogy in the engine. Future multi-instrumentalist artists can now be classified as timbral-pedagogy practitioners or as sequential multi-instrumentalists, and the distinction matters structurally: the first practice is a curricular tool, the second is a career fact.
+
+6. **The stroboscopic trill locates the analog-to-digital boundary in the receiver, not the signal.** The Oregon Junco's trill is discrete at the source and continuous at the receiver because the receiver's temporal-integration threshold sits below the trill's pulse rate. The boundary between discrete and continuous lives in perception, not in acoustics. This is a general principle the engine can now apply to future acoustic signals: the signal's perceived quality may be an artifact of the receiver rather than a property of the signal, and the engine should document both the signal's acoustic structure and the receiver's perceptual threshold when they diverge.
+
+7. **Calendar-date dedication synchrony is a reproducible engine convention, not a degree-9 coincidence.** Explorer 5's August 24 launch and Borges's August 24 birth echo Explorer 3's March 26 launch and Campbell's March 26 birth at degree 9. Two explicit instances of the same convention across three degrees confirm the convention as a deliberate engine selection criterion for dedications, and future dedications will be selected partly on calendar-alignment grounds. The convention is now explicit rather than implicit.
+
+8. **Within-genus comparisons reveal structurally different properties of the family across degrees.** Turdidae at degrees 2 and 7 revealed allocation tradeoffs (timbre vs melody). Paridae at degrees 3 and 9 revealed conserved syntax alongside divergent reproductive signals. Emberizidae at degree 11 (the Junco complex alone, pending a second entry) revealed species-boundary ambiguity as a taxonomic artifact. Three within-genus structures across three families. The methodology is transferable, but the specific structural revelation is not predictable — each family may surface its own comparison property, and the engine should approach each within-genus pair as a new discovery rather than a confirmation of the previous pair's structure.
+
+9. **The educator spectrum's five-model completion biases future educator-profile artists toward classification rather than invention.** Standifer, Berry, Priester, Caliman, Brazil fill the five pedagogical slots (institutional, performance, expansion, confirmation, salon). Future engine educators can now be placed against the existing five rather than forcing new categories, and the spectrum's completion is structurally important because it closes the primary pedagogical typology for Seattle jazz. Secondary or hybrid categories may still emerge, but the primary typology is closed.
+
+## Cross-References
+
+| Thread | Entity | Role |
+|--------|--------|------|
+| S36 | Joe Brazil | Artist — the salon keeper, multi-reed (flute/saxophone/clarinet), Central District returns, Detroit pipeline origin |
+| SPS | Oregon Junco (*Junco hyemalis oreganus*) | Species — stroboscopic trill, forest-edge habitat, first Emberizidae, taxonomic lumping ambiguity |
+| NASA | Explorer 5 (Juno I, ABMA/JPL) | Mission — collision failure at stage separation, functional Geiger-Mueller payload on failed vehicle, August 24 1958 |
+| Organism | *Amanita muscaria* | Fly Agaric — beauty-toxicity fusion, ibotenic acid / muscimol, forest-edge understory co-location with junco |
+| Dedication | Jorge Luis Borges (August 24, 1899 — June 14, 1986) | Argentine librarian and fabulist, born same calendar date as Explorer 5 launch (59-year synchrony), author of *The Aleph*, *The Library of Babel*, *Pierre Menard Author of the Quixote*, cultural documentarian of the beautiful failure |
+| Degree 10 → 11 | Noise Floor → The Edge | Transition from aggregate-scale signal (noise floor) to boundary-scale signal (the edge) |
+| Degree 11 → 12 | The Edge → The Balance | Transition from the boundary to the energy budget — next paired release |
+| Degree 0 → 11 | Jones → Brazil | Central District thread — Quincy Jones (origin) to Joe Brazil (salon resumption) |
+| Degree 3 → 11 | Anderson → Brazil | CD thread second crossing — Ernestine Anderson (Garfield / voice) to Brazil (salon / multi-reed) |
+| Degree 2 → 11 | Horvitz → Brazil | CD thread third crossing — Wayne Horvitz (infrastructure builder) to Brazil (pedagogy builder) |
+| Degree 4 → 11 | Standifer → Brazil | Educator spectrum anchors — institutional (UW) to salon (Central District) |
+| Degree 5 → 11 | Berry → Brazil | Educator spectrum — performance-lineage to salon-lineage |
+| Degree 7 → 11 | Priester → Brazil | Educator spectrum — Cornish expansion pedagogy to CD salon pedagogy |
+| Degree 9 → 11 | Caliman → Brazil | Educator spectrum — Cornish confirmation pedagogy to CD salon pedagogy (spectrum completes at five models) |
+| Degree 3 → 9 → 11 | Black-capped → Chestnut-backed → Junco | Within-genus comparison methodology — Paridae (syntax conservation) to Emberizidae (species-boundary ambiguity) |
+| NASA 1.0 → 1.11 | Pioneer series (failures) → Explorer 5 (collision failure) | Failure taxonomy extends to five modes (catastrophic, partial success, silent, productive, collision) |
+| NASA 1.9 → 1.11 | Campbell / Explorer 3 → Borges / Explorer 5 | Calendar-date dedication synchrony — second explicit instance of engine convention |
+| Detroit Pipeline | Brazil | Fourth engine pipeline city (Seattle, Chicago, LA, Detroit) — transplantation of Detroit apprenticeship culture |
+| Central District Thread | RESUMED at degree 11 | Structural thread, not sequential — pause-and-resume demonstrated |
+| Educator Spectrum | COMPLETE (5 models) | Institutional + performance + expansion + confirmation + salon |
+| Wind Instrument Set | 7 INSTRUMENTS | +Flute, +Clarinet via Brazil — voice, trumpet, trombone, alto sax, tenor sax, flute, clarinet |
+| Within-Genus Comparisons | 3 DOCUMENTED | Turdidae (2/7), Paridae (3/9), Emberizidae/Junco complex (11) |
+| Morton 1975 Sound Window | Not applicable at degree 11 | Forest-edge junco trills cross the sound window rather than conforming to it — single-pitch signal propagates broadly |
 
 ## Emerging Patterns at Degree 11
 
 | Pattern | Status | Degree 11 Value |
 |---------|--------|----------------|
-| S36 Artists | 12 documented | Brazil — the salon keeper, multi-reed, Central District returns |
-| SPS Species | 12 documented | Oregon Junco — stroboscopic trill, forest-edge habitat, taxonomic ambiguity |
-| NASA Missions | 12 aligned | Explorer 5 — collision failure at stage separation, functional payload on failed vehicle |
-| Central District Thread | RESUMED | After 4-degree pause (7-10), CD returns via Brazil's salon |
+| S36 Artists | 12 DOCUMENTED | Joe Brazil — the salon keeper, multi-reed, Central District returns |
+| SPS Species | 12 DOCUMENTED | Oregon Junco — stroboscopic trill, forest-edge, taxonomic-lumping ambiguity |
+| NASA Missions | 12 ALIGNED | Explorer 5 — collision failure at stage separation |
+| Central District Thread | RESUMED | After 4-degree pause (7–10), CD returns via Brazil's salon |
 | Educator Spectrum | COMPLETE (5 models) | Institutional + performance + expansion + confirmation + salon |
 | Artist-City Taxonomy | 13 PATTERNS | +The Salon Keeper (home as classroom) |
 | NASA Failure Taxonomy | 5 MODES | +Collision (Explorer 5). 5 failures, 6 successes across 11 missions. |
-| Wind Instruments | 7 TYPES | +Clarinet. Voice, trumpet, trombone, alto sax, tenor sax, flute, clarinet. |
+| Wind Instruments | 7 TYPES | +Flute, +Clarinet via Brazil |
 | Pipeline Cities | 4 | +Detroit via Brazil |
-| Within-Genus Comparisons | 3 | Turdidae (2/7) + Paridae (3/9) + Junco complex (11, ambiguous boundary) |
+| Within-Genus Comparisons | 3 | Turdidae (2/7), Paridae (3/9), Junco complex (11) |
 | Edge Habitat | INITIALIZED | First explicitly edge-associated species (forest edge) |
-| Stroboscopic Trill | NEW ACOUSTIC | Discrete pulses perceived as continuous tone -- analog-to-digital boundary |
+| Stroboscopic Trill | NEW ACOUSTIC | Discrete pulses perceived as continuous — analog-to-digital boundary in acoustics |
+| Calendar-Date Dedication | SECOND EXPLICIT INSTANCE | Borges (August 24 birth) aligned to Explorer 5 (August 24 launch) — convention confirmed |
+
+## Cumulative Engine Statistics (v1.49.501 – v1.49.512)
+
+| Metric | Value |
+|--------|-------|
+| Paired releases completed | 12 (degrees 0 through 11) |
+| Instruments documented | 7 wind instruments across 12 degrees (voice, trumpet, trombone, alto sax, tenor sax, flute, clarinet) plus piano, guitar, bass |
+| Educator models | 5 (institutional, performance, expansion, confirmation, salon) |
+| Pipeline cities | 4 (Seattle, Chicago, Los Angeles, Detroit) |
+| Central District artists | 4 (Jones D0, Horvitz D2, Anderson D3, Brazil D11) |
+| NASA missions aligned | 12 (1.0 through 1.11) |
+| NASA failure modes documented | 5 (catastrophic, partial success, silent, productive, collision) |
+| NASA successes documented | 6 (Pioneer 4, Explorer 1, Vanguard 1, Explorer 3, Explorer 4, Explorer 6) |
+| Interspecies alarm network nodes | 5 |
+| Within-genus comparisons | 3 (Turdidae 2/7, Paridae 3/9, Junco complex 11) |
+| Calendar-date dedication alignments | 2 explicit (Campbell/Explorer 3, Borges/Explorer 5) |
+| Artist-city patterns cataloged | 13 (adds The Salon Keeper) |
 
 ## Engine Position
 
 ```
-v1.49.501-506 = degrees 0-5    Pass 2  ✓  (opening pentad)
-v1.49.507-511 = degrees 6-10   Pass 2  ✓  (second cycle)
-v1.49.512     = degree 11      Pass 2  ← THIS RELEASE
-v1.49.513     = degree 12      Pass 2  ← next
+v1.49.501  = NASA 1.0  + degree 0   Pass 2  (FOUNDATION — Quincy Jones, Corvid silence)
+v1.49.502  = NASA 1.1  + degree 1   Pass 2  (COMPLEXITY — Bill Frisell, Anna's Hummingbird)
+v1.49.503  = NASA 1.2  + degree 2   Pass 2  (INFRASTRUCTURE BUILDER — Wayne Horvitz)
+v1.49.504  = NASA 1.3  + degree 3   Pass 2  (MEANING-MAKER — Anderson, Black-capped Chickadee, Pioneer 2, Salal)
+v1.49.505  = NASA 1.4  + degree 4   Pass 2  (INDICATOR SPECIES — Standifer)
+v1.49.506  = NASA 1.5  + degree 5   Pass 2  (NETWORK CLOSURE — Berry, Red-breasted Nuthatch)
+v1.49.507  = NASA 1.6  + degree 6   Pass 2  (HARD BOP VOCABULARY — Patti Bown)
+v1.49.508  = NASA 1.7  + degree 7   Pass 2  (PEDAGOGY PIPELINE — Julian Priester, Cornish 1)
+v1.49.509  = NASA 1.8  + degree 8   Pass 2  (PERCEPTUAL THRESHOLD — Peacock)
+v1.49.510  = NASA 1.9  + degree 9   Pass 2  (THE CONFIRMATION — Caliman, Chestnut-backed Chickadee, Explorer 3, Marchantia)
+v1.49.511  = NASA 1.10 + degree 10  Pass 2  (THE NOISE FLOOR — second-decade opening)
+v1.49.512  = NASA 1.11 + degree 11  Pass 2  ← THIS RELEASE (THE EDGE — Brazil, Oregon Junco, Explorer 5, Amanita muscaria)
+v1.49.513  = NASA 1.12 + degree 12  Pass 2  ← next (The Balance)
 ```
 
 ## Files
 
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/011-joe-brazil/pass2-refinement.md` | NEW | 1,058 |
-| `SPS/research/releases/011-oregon-junco/pass2-refinement.md` | NEW | 1,086 |
-| `docs/release-notes/v1.49.512/README.md` | NEW | — |
-
-## Cumulative Engine Statistics (v1.49.501-512)
-
-| Metric | Value |
-|--------|-------|
-| Paired releases completed | 12 (degrees 0-11) |
-| Instruments documented | 9 (piano, guitar, voice, trumpet, trombone, bass, alto sax, tenor sax, flute, clarinet — 10 counting voice) |
-| Educator models | 5 (institutional, performance, expansion, confirmation, salon) |
-| Pipeline cities | 4 (Seattle, Chicago, Detroit, LA) |
-| Central District artists | 7 of 12 |
-| NASA missions aligned | 12 (1.0 through 1.11) |
-| NASA failures documented | 5 modes |
-| NASA successes documented | 6 |
-| Interspecies network nodes | 5 |
-| Within-genus comparisons | 3 |
-
-## Cross-References
-
-| Thread | Degree 11 Entity | Role |
-|--------|-----------------|------|
-| S36 | Joe Brazil | Artist — the salon keeper, multi-reed (flute/sax/clarinet), Central District returns |
-| SPS | Oregon Junco | Species — stroboscopic trill, forest edge, first Emberizidae, taxonomic ambiguity |
-| NASA | Explorer 5 | Mission — collision failure at separation, functional payload on failed vehicle |
-| Organism | Amanita muscaria | Pairing — Fly Agaric, beauty-toxicity fused, the beautiful failure |
-| Dedication | Jorge Luis Borges | The Aleph / the library / the beautiful failure — structural parallel to Explorer 5 |
-| Degree 10→11 | Noise Floor → The Edge | Transition — from aggregate-scale signal to boundary-scale signal |
-| Degree 11→12 | The Edge → The Balance | Transition — from the boundary to the energy budget |
-| CD Thread | RESUMED | After 4-degree pause (7-10), structural not sequential |
-| Educator Spectrum | COMPLETE (5 models) | Institutional + performance + expansion + confirmation + salon |
-| Failure Taxonomy | Collision added | 5 failure modes, 6 successes across 11 missions |
+- `docs/release-notes/v1.49.512/README.md` — this release README (A-grade uplift)
+- `docs/release-notes/v1.49.512/chapter/00-summary.md` — chapter summary stub (navigation)
+- `docs/release-notes/v1.49.512/chapter/03-retrospective.md` — 8 numbered lessons, degree 11 patterns
+- `docs/release-notes/v1.49.512/chapter/99-context.md` — version metadata and navigation
+- `www/tibsfox/com/Research/NASA/1.11/index.html` — Explorer 5 research landing page (live site)
+- `www/tibsfox/com/Research/NASA/1.11/research.html` — Explorer 5 research essay (primary artifact)
+- `www/tibsfox/com/Research/NASA/1.11/organism.html` — *Amanita muscaria* organism profile
+- `www/tibsfox/com/Research/NASA/1.11/mathematics.html` — Explorer 5 stage-separation mechanics analysis
+- `www/tibsfox/com/Research/NASA/1.11/curriculum.html` — degree 11 curriculum module
+- `www/tibsfox/com/Research/NASA/1.11/simulation.html` — Explorer 5 trajectory simulation
+- `www/tibsfox/com/Research/NASA/1.11/papers.html` — Explorer 5 primary-source bibliography
+- `S36/research/releases/011-joe-brazil/pass2-refinement.md` — Brazil Pass 2 research (1,058 words, referenced)
+- `SPS/research/releases/011-oregon-junco/pass2-refinement.md` — Oregon Junco Pass 2 research (1,086 words, referenced)
 
 ---
 
-*Degree 11: the edge. A salon keeper whose classroom was a living room and whose students are the only archive. A trill that sounds continuous but is made of separate pulses. A launch where the stages should have separated but didn't. A mushroom that is the most beautiful thing in the forest and will make you sick. Everything at degree 11 lives on a boundary — between discrete and continuous, between formal and informal, between beauty and danger, between the vehicle and the payload, between the note and the silence that separates it from the next note.*
+*Degree 11: the edge. A salon keeper whose classroom was a living room and whose students are the only archive. A trill that sounds continuous but is made of separate pulses. A launch where the stages should have separated cleanly and instead touched. A mushroom that is the most beautiful thing in the forest and the one that will make you sick. Everything at degree 11 lives on a boundary — between discrete and continuous, between formal and informal, between beauty and danger, between the vehicle and the payload, between the note and the silence that separates it from the next note. The engine does not cross the boundaries. The engine documents that the boundaries are there.*
