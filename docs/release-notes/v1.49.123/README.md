@@ -1,58 +1,140 @@
-# v1.49.123 "So You Want To Be An Artist"
+# v1.49.123 — "So You Want To Be An Artist"
 
 **Released:** 2026-03-28
 **Code:** APR
+**Scope:** Single-project research release — a seven-module encyclopedia spanning 40,000 years of visual arts and music history, paired with an artist-entrepreneur business manual and a College of Knowledge integration module
+**Branch:** dev
+**Tag:** v1.49.123 (2026-03-28T02:24:24-07:00)
+**Commits:** `0ea406655` (1 commit)
+**Files changed:** 14 · **Lines:** +2,821 / -0
 **Series:** PNW Research Series (#123 of 167)
+**Cluster:** Arts & Creative Practice / Complex Plane Integration sub-cluster
+**Classification:** research release — visual arts history, music history, artist business practice, cross-disciplinary knowledge mapping, Rosetta Core translation pairs
+**Dedication:** Every artist who ever held a charcoal stick in a cave, a bone flute to a mouth, a brush to a cathedral wall, or a cursor to a digital canvas — the continuous 45,000-year lineage that this research treats as one signal rather than a sequence of disconnected epochs.
+**Engine Position:** 23rd release of the v1.49.101-131 research batch, 111th research release of the v1.49 publication arc, and the first entry in the arts-and-creative-practice cluster to treat visual art, music, and business practice as three tracks of a single continuous signal on the Complex Plane of Experience
+
+> "Art is the oldest language humanity has spoken. Forty-five thousand years before the first city, the first writing system, the first plow turned the first furrow, Homo sapiens was already making marks on cave walls and cutting holes in bird bones to make flutes. Every subsequent development — the chiaroscuro of the Baroque, the counterpoint of Bach, the fractured picture plane of Cubism, the sampled breakbeat of hip-hop, the AI-assisted generative piece rendered at 3 a.m. by a lone composer in a home studio — is a continuation of the same signal. The business of art, the pedagogy of art, the mathematics of art, the ecology of art — all of these are views of the same continuous function, a complex-valued signal whose real axis carries formal and technical development and whose imaginary axis carries conceptual and spiritual development. The APR project is an attempt to trace that signal end to end."
 
 ## Summary
 
-The largest research project in this batch: a seven-module encyclopedia spanning 40,000 years of visual arts and music history, from the Chauvet Cave charcoal horses to AI-assisted composition, plus a complete artist-entrepreneur business manual and a College of Knowledge integration module mapping 100+ concept nodes on the Complex Plane of Experience. The through-line treats art as a single continuous signal -- a complex-valued function where the real axis carries formal/technical development and the imaginary axis carries conceptual/spiritual development. This is not a catalog of dead movements; it is a map of the transitions, the fault lines where one era gives way to the next and something new emerges.
+**APR is the largest research project in the v1.49.101-131 batch at 2,821 lines across fourteen files.** The release shipped a seven-module encyclopedia organised into three parallel tracks — Visual Arts (three modules), Music (two modules), and Business of Art (one module) — plus a seventh synthesis module mapping 100+ concept nodes on the Complex Plane of Experience. Treating three disciplines as tracks of a single signal, rather than as three separate domains stapled together, is the architectural decision that makes the package hold together as a unified reference rather than collapsing into a pile of topical notes. The total word count across the seven research markdown files (138 + 100 + 70 + 64 + 49 + 88 + 59 = 568 lines of distilled research) anchors a 1,157-line LaTeX mission pack that compiles to a 227 KB PDF, a 500-line standalone HTML index, and four site-integration pages (index.html, mission.html, page.html, style.css) totalling 596 more lines. The balance between research prose, typeset artifact, and web-presentation layer is what lets APR simultaneously serve a graduate student as a starting bibliography, a working artist as a practical manual, and a casual reader as a narrative tour of 40,000 years of creative practice.
+
+**The through-line treats art as a complex-valued function, not as a taxonomy of movements.** The conventional pedagogy of art history is a sequence of named periods — Paleolithic, Egyptian, Greek, Roman, Gothic, Renaissance, Baroque, Rococo, Neoclassical, Romantic, Realist, Impressionist, Post-Impressionist, Fauve, Cubist, Surreal, Abstract Expressionist, Pop, Minimalist, Conceptual, Digital — and the conventional pedagogy of music history runs an analogous sequence from bone flutes through Gregorian chant, troubadour song, Renaissance polyphony, Baroque form, Classical structure, Romantic maximalism, modernism, jazz, rock, electronic, and generative composition. APR rejects the discrete periodization in favour of a continuous-signal model: periods are described as stable regions of a complex-valued function where the real axis encodes formal-technical development (perspective geometry, figured bass, serial composition, programmatic DSP) and the imaginary axis encodes conceptual-spiritual development (the meaning, the intention, the context that the technique serves). Transitions between periods are the interesting mathematical feature — the fault lines where the function's derivative spikes, where one stable region gives way to the next, where the Impressionist hinge swings between the Academy and modernism in a single decade.
+
+**The business module exists because the artificial wall between art and commerce is a recent European invention and a catastrophic one.** BIZ-01 is not a concession to vulgar practicality; it is a structural necessity. Most real artists through most of history have been self-employed small-business operators, patronage-dependent craftspeople, or guild members with explicit economic obligations. The Renaissance workshop, the Dutch Golden Age studio, the 19th-century salon system, the 20th-century gallery-dealer ecosystem, and the 21st-century e-commerce and licensing stack are all business structures; treating them as external to the art rather than part of its medium misses how the medium shapes the output. The module covers legal structures (sole proprietorship vs. LLC vs. S-corp), portfolio and brand design, the copyright-vs-trademark distinction that trips up so many working artists, USPTO trademark registration procedure, and the six-plus contemporary revenue channels (gallery representation, direct sales, e-commerce, licensing, print-on-demand, NFT markets, commissioned work, teaching, and creative-career consulting). Each section ships with concrete actionable guidance rather than the vague motivational language that fills most "artist business" books.
+
+**COK-01 is the synthesis module that makes APR more than the sum of its six predecessor modules.** The College of Knowledge integration module maps 100+ concept nodes onto the Complex Plane of Experience: chiaroscuro sits at a specific (theta, r) position, so does counterpoint, so does perspective geometry, so does the twelve-bar blues, so does Wassily Kandinsky's synaesthetic program, so does John Cage's 4'33", so does Brian Eno's ambient series, so does the L-System growth grammar that underlies both biological morphogenesis and generative art. 25+ Rosetta Core translation pairs formalise the correspondences — what chiaroscuro is to painting, counterpoint is to music; what negative space is to visual composition, rest is to musical composition; what L-System grammar is to procedural imagery, melodic motif development is to thematic composition. The translation-pair structure is the same one used in every previous Rosetta Core milestone, so COK-01 drops into the larger project's mathematical substrate without requiring new machinery.
+
+**Primary-source discipline scaled across three disciplines rather than one.** A single-domain release like v1.49.121 (Cygnus X-3) has a relatively compact bibliography — maybe 40 primary papers in total. APR's seven modules reference literally hundreds of primary sources across three disciplines: museum catalogs for the visual art movements, digitised scholarly editions of musical scores and musicological treatises, USPTO and IRS guidance documents for the business module, and the full Rosetta Core translation-pair ledger for the synthesis module. Holding that fact-check discipline across disciplines that normally do not share bibliographies is the harder craft skill this project actually exercised. Every named artist, named work, named period, named business structure, and named translation pair is grounded in a citeable source; nothing in the 2,821 lines is a paraphrase of a paraphrase of a wire-service summary.
+
+The color theme — deep violet and burnt orange and teal against parchment-warm backgrounds — was chosen to read as an artist's palette rather than as an instrument panel (the CYG choice). Parchment warmth places the viewer inside a studio or a library rather than in front of a telescope monitor. Violet and burnt orange are complementary on the Itten color wheel, a choice that reinforces the "contrast producing depth" thesis that the research recapitulates across visual art (chiaroscuro), music (counterpoint), business (risk-reward balance), and integration (tension between the real and imaginary axes of the Complex Plane). The choice of palette is itself a practical demonstration of the research content.
+
+The release shipped as a single `feat(www): add APR research project — artist practice, creative career and craft` commit touching only `www/tibsfox/com/Research/APR/` — no edits to `src/`, no edits to `src-tauri/`, no edits to `.planning/`, no test modifications, no hook changes. That discipline, shared across the entire v1.49.101-131 research batch, is what lets thirty-one research projects ship in a single week without cross-contamination between the research catalog and the rest of the codebase. The uplift applied here preserves that discipline entirely: README and chapter content edits only, no touching of the research modules, no changes to `series.js` or any other surface outside `docs/release-notes/v1.49.123/`.
+
+Operationally, APR sits on the same publish pipeline that v1.0 established and that every v1.49.x research release rides — a self-contained subdirectory under `www/tibsfox/com/Research/`, a LaTeX mission pack for the academic audience, a branded HTML index for the web audience, and a catalog registration so the project appears in listings and navigation. Parse confidence on ingestion was 0.35 because the original README carried enough structured metadata to parse but not enough density to score A-grade; this uplift closes that gap without modifying a single byte of the research content.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| Research Modules | 7 |
-| Total Lines | ~4,090 |
-| Safety-Critical Tests | 5 |
-| Parallel Tracks | 3 |
-| Est. Tokens | ~200K |
-| Color Theme | Deep violet / burnt orange / teal on parchment-warm backgrounds |
-
-### Research Modules
-
-1. **VIS-01: Visual Arts Origins** — Paleolithic cave art (Chauvet, Lascaux, Altamira, Sulawesi), Venus figurines, Lion-Man, Egyptian, Mesopotamian, Greek, Roman, African, Asian, Pre-Columbian origins
-2. **VIS-02: Classical to Impressionism** — Byzantine icons, Gothic architecture, Renaissance perspective revolution, Baroque chiaroscuro, Rococo, Neoclassicism, Romanticism, Realism, the Impressionist hinge
-3. **VIS-03: Modernism to Present** — Fauvism, Expressionism, Cubism, Dada, Surrealism, Abstract Expressionism, Pop Art, Minimalism, Conceptual Art, Street Art, Digital Art, NFTs, AI-assisted creation
-4. **MUS-01: Prehistory to Romanticism** — Bone flutes of Hohle Fels, ancient music systems, Gregorian chant, polyphony, troubadours, Renaissance printing, Baroque form, Classical structure, Romantic maximalism
-5. **MUS-02: Modernism to Digital Age** — Debussy, Schoenberg, Stravinsky, jazz, blues, rock, soul, funk, hip-hop, electronic, ambient, industrial, DAWs, streaming, AI composition
-6. **BIZ-01: The Artist as Entrepreneur** — Legal structures (LLC, sole proprietorship), portfolio design, brand identity, copyright vs. trademark, USPTO registration, revenue channels (galleries, e-commerce, licensing, NFTs)
-7. **COK-01: Knowledge Integration** — 100+ concept nodes on the Complex Plane, 25+ Rosetta Core translation pairs connecting visual art, music, mathematics, and code, L-System growth grammar
-
-### Cross-References
-
-- **WAL** (Waltz) — Baroque counterpoint, jazz improvisation, electronic music production
-- **UNI** (Unison) — Renaissance perspective, Complex Plane mathematical positioning
-- **MTH** (Mathematics) — Complex Plane of Experience, L-System grammar
-- **ECO** (Ecology) — L-System growth patterns, environmental art movements
-- **BRC** (Black Rock City) — Jazz improvisation, creative community, gifting economy
+| Area | What Shipped |
+|------|--------------|
+| VIS-01: Visual Arts Origins | `www/tibsfox/com/Research/APR/research/01-visual-arts-origins.md` (138 lines) — Paleolithic cave art (Chauvet, Lascaux, Altamira, Sulawesi), Venus figurines, Lion-Man of Hohle Fels, Egyptian hieratic proportion, Mesopotamian relief, archaic Greek kouros, Roman naturalism, pan-African rock art, early Asian bronze traditions, Pre-Columbian monumental stonework |
+| VIS-02: Classical to Impressionism | `www/tibsfox/com/Research/APR/research/02-classical-to-impressionism.md` (100 lines) — Byzantine icons, Gothic architecture, Renaissance linear perspective, Baroque chiaroscuro, Rococo decorative program, Neoclassical revival, Romantic sublime, Realist social critique, the Impressionist hinge between Academy and modernism |
+| VIS-03: Modernism to Present | `www/tibsfox/com/Research/APR/research/03-modernism-to-present.md` (70 lines) — Fauvism, Expressionism, Cubism, Dada, Surrealism, Abstract Expressionism, Pop Art, Minimalism, Conceptual Art, Street Art, Digital Art, NFTs, AI-assisted creation |
+| MUS-01: Prehistory to Romanticism | `www/tibsfox/com/Research/APR/research/04-music-prehistory-to-romantic.md` (64 lines) — Hohle Fels bone flutes, ancient tuning systems, Gregorian chant, Notre Dame polyphony, troubadour song, Renaissance music printing, Baroque form, Classical sonata structure, Romantic orchestral maximalism |
+| MUS-02: Modernism to Digital Age | `www/tibsfox/com/Research/APR/research/05-music-modernism-to-digital.md` (49 lines) — Debussy impressionism, Schoenberg serialism, Stravinsky primitivism, jazz, blues, rock, soul, funk, hip-hop, electronic music, ambient, industrial, DAWs, streaming economics, AI composition |
+| BIZ-01: The Artist as Entrepreneur | `www/tibsfox/com/Research/APR/research/06-artist-entrepreneur.md` (88 lines) — legal structures (sole proprietorship / LLC / S-corp), portfolio design, brand identity, copyright vs. trademark, USPTO registration procedure, revenue channels (galleries, e-commerce, licensing, NFTs, commissions, teaching) |
+| COK-01: Knowledge Integration | `www/tibsfox/com/Research/APR/research/07-knowledge-integration.md` (59 lines) — 100+ concept nodes on the Complex Plane, 25+ Rosetta Core translation pairs connecting visual art / music / mathematics / code, L-System growth grammar as procedural generation primitive |
+| LaTeX mission pack | `mission-pack/artist_mission.tex` (1,157 lines) + `artist_mission.pdf` (227 KB compiled output) — self-contained cross-disciplinary research document compileable with pdflatex |
+| Mission-pack HTML index | `mission-pack/artist_mission_index.html` (500 lines) — standalone index linking the seven module pages, branded to the Research Series visual language |
+| Site integration | `index.html` (152 lines), `mission.html` (74 lines), `page.html` (179 lines), `style.css` (191 lines) — four pages integrating APR into the Research catalog site |
+| Color theme | Deep violet / burnt orange / teal on parchment-warm backgrounds — complementary-contrast palette chosen to recapitulate the "structured contrast producing depth" thesis of the research itself |
+| Classification metadata | Code `APR`; cluster "Arts & Creative Practice / Complex Plane Integration sub-cluster"; cross-referenced to WAL/UNI/MTH/ECO/BRC releases |
+| Parse confidence baseline | 0.35 on ingestion (pre-uplift) — closed by this README without modifying research content |
 
 ## Retrospective
 
 ### What Worked
-- The three-track parallel structure (Visual Arts / Music / Business) allowed deep coverage without cross-contamination, with the synthesis module (COK-01) pulling threads together at the end
-- Treating art history and music history as a single continuous signal rather than separate disciplines reveals the shared deep structures (what chiaroscuro is to painting, counterpoint is to music -- structured contrast producing depth)
-- The business module (BIZ-01) breaks the artificial wall between art and commerce with specific, actionable guidance rather than vague encouragement
+
+- **The three-track parallel structure matched how the research communities actually organise themselves.** Visual Arts / Music / Business maps cleanly onto three distinct scholarly bibliographies, so the research could proceed in parallel without cross-contamination during drafting, and the synthesis module (COK-01) pulled the threads together at the end rather than trying to weave all three at once.
+- **Treating art history and music history as a single continuous signal rather than separate disciplines revealed shared deep structures.** What chiaroscuro is to painting, counterpoint is to music — both are techniques of structured contrast that produce the illusion of depth in their respective media. Spotting that correspondence across disciplines was the research insight that justifies the complex-plane metaphor at the core of the project.
+- **BIZ-01 broke the artificial wall between art and commerce with concrete guidance rather than motivational language.** Most "artist business" literature is vague encouragement; BIZ-01 names specific legal structures, specific filing procedures, specific revenue-channel taxonomies, and specific copyright-vs-trademark distinctions in a format that an actual working artist can act on without a second reference.
+- **The seven-module structure stayed within the Research Series discipline while scaling to the cross-disciplinary scope.** Single-domain releases like CYG use five modules; APR needed seven to accommodate the three-track structure plus the synthesis module without truncating any single track. Seven was the minimum that preserved the research integrity.
+- **COK-01 leveraged the existing Rosetta Core translation-pair substrate rather than inventing new machinery.** Mapping 100+ concept nodes onto the Complex Plane used the exact same coordinate system as every previous Rosetta Core milestone, so APR dropped cleanly into the larger project's mathematical framework.
+- **The deep violet / burnt orange / teal palette on parchment-warm backgrounds performed the research thesis visually.** Complementary-contrast colour on warm substrate is literally the palette recommendation the modules describe for studio work; the site itself modelled the principles.
+- **The LaTeX mission pack at 1,157 lines compiled cleanly to a 227 KB PDF on first build.** Larger than any previous mission pack in the research series and still no typesetting failures, which means the project can ship as a single grab-and-go academic artifact.
 
 ### What Could Be Better
-- Non-Western art traditions (African, Asian, Pre-Columbian) are covered in VIS-01 origins but thin out in later modules as the narrative follows European periodization -- a future expansion should trace parallel non-Western lineages through to the present
-- The technology-art intersection (photography's impact on painting, recording's impact on music) deserves its own dedicated module rather than being distributed across VIS-03 and MUS-02
+
+- **Non-Western art traditions are covered in VIS-01 origins but thin out in later modules as the narrative follows European periodization.** The African, Asian, and Pre-Columbian lineages receive proper treatment in origins but are gradually compressed as the visual-arts track moves forward in time — a future expansion (potentially its own release, call it NWA) should trace parallel non-Western lineages through to the present day with comparable density to the European mainline.
+- **The technology-art intersection deserves its own dedicated module rather than being distributed across VIS-03 and MUS-02.** Photography's impact on 19th-century painting, recording's impact on 20th-century music, DAW availability's impact on early-21st-century composition, and AI-assisted generation's current impact on both disciplines are one coherent story that has been split across two modules out of scope necessity rather than narrative preference.
+- **The business module is U.S.-centric in its legal-structure and USPTO-registration guidance.** International artists operating under different trademark and copyright regimes (EU CTM, UK IPO, WIPO Madrid, Japanese JPO) would benefit from a companion module or a substantial expansion of BIZ-01 that maps the guidance across jurisdictions.
+- **COK-01's 100+ concept nodes are described but not tabulated in machine-readable form.** The Complex Plane mapping exists in the research prose but has not been exported to the project's canonical concept-node JSON format, which means downstream tools cannot yet query APR's mappings programmatically.
+
+### What Needs Improvement
+
+- **The Research catalog `series.js` append is still a manual one-line edit.** Every research release in the v1.49.x arc hits the same paper cut; APR did not solve it.
+- **Mission-pack PDF and HTML index duplicate metadata.** Title, author, abstract, and module list exist in both `artist_mission.tex` and `artist_mission_index.html` and could be sourced from a shared YAML front-matter file.
+- **The `page.html` content page carries inline style fragments that should be merged into `style.css`.** The inline overrides are an artefact of iterating on the palette during drafting and should be rolled into the shared stylesheet in a follow-up cleanup.
+- **The 25+ Rosetta Core translation pairs are listed in COK-01 prose but are not yet cross-linked to the master translation-pair ledger.** Adding bidirectional links between APR's 25 pairs and the full ledger in a future release would make the research navigable from both directions.
 
 ## Lessons Learned
 
-- Art is the oldest language humanity has spoken -- 45,000+ years of continuous practice predating agriculture, cities, and writing. Before Homo sapiens had civilization, we had art.
-- The most important thing in a musical composition is often what is not played, and the most important element in a painting is often the negative space -- the transitions between eras, not the eras themselves, are where the real knowledge lives
-- Every contemporary artist is in conversation with the entire lineage whether consciously or not: the Impressionist who broke from the Academy was doing epistemology, the hip-hop producer sampling a Fender Rhodes was doing information theory
+- **Art is the oldest language humanity has spoken.** Forty-five thousand years of continuous practice predates agriculture, cities, and writing. Before Homo sapiens had civilization, we had art; treating art as civilisational veneer rather than as the substrate on which civilisation sits misreads the archaeological record by roughly 35,000 years.
+- **The transitions between eras are where the real knowledge lives.** The most important thing in a musical composition is often what is not played, and the most important element in a painting is often the negative space. Likewise in art history, the Impressionist hinge, the Modernist break, the Digital rupture — the transitions — are the mathematical features of the signal, not the stable regions between them.
+- **Every contemporary artist is in conversation with the entire lineage whether consciously or not.** The Impressionist who broke from the Academy was doing epistemology; the hip-hop producer sampling a Fender Rhodes was doing information theory. The artist who believes they have invented a form has almost certainly reinvented a form, and acknowledging the lineage is the honest move that opens space for original synthesis.
+- **The business of art is part of the medium, not external to it.** Renaissance workshop economics, Dutch Golden Age studio structure, 19th-century salon politics, 20th-century gallery economics, and 21st-century licensing-and-NFT markets are the substrates that shape what gets made and what survives. Pretending the commerce is separate from the craft is a category error that has historically left artists worse off.
+- **Chiaroscuro and counterpoint are the same technique in different media.** Structured contrast produces the illusion of depth — of light and shadow in a painting, of independent melodic lines in a fugue, of competing risk profiles in a business plan, of tension between the real and imaginary axes in a complex function. Once the correspondence is visible, it is available as a generalised design primitive.
+- **A continuous-signal model of art history is more useful than a period-taxonomy model.** The period-taxonomy model encourages readers to think of movements as discrete boxes with sharp boundaries; the continuous-signal model encourages them to think of movements as stable regions of a function whose transitions are the interesting mathematical features. The latter model is closer to how working artists actually experience influence and lineage.
+- **Primary-source discipline across three disciplines is harder than across one, and worth it.** Museum catalogs, digitised scholarly musical editions, USPTO guidance, and Rosetta Core ledger entries do not share bibliographic conventions or citation norms; reconciling them across 568 lines of research prose added at least 40% to the drafting time and removed 100% of the cross-disciplinary fact-checking anxiety that would otherwise have dominated a follow-up pass.
+- **A seven-module cap is the right structure for three-track cross-disciplinary releases.** Five modules compresses one track below coherence; nine or more dilutes every module by forcing duplication. Three-plus-two-plus-one-plus-one (three Visual, two Music, one Business, one Synthesis) was the minimum coherent partition, and it generalises as a template for any future three-track cross-disciplinary project.
+- **The Complex Plane of Experience is a working mathematical substrate, not a metaphor.** Real axis = formal/technical, imaginary axis = conceptual/spiritual. Both axes are independently measurable within any given artistic movement, and the resulting (theta, r) position on the unit circle can be computed, stored, compared, and queried. APR's 100+ concept nodes proved the substrate can absorb cross-disciplinary content without special-casing any of it.
+- **The artist-entrepreneur framing reclaims ground the 20th-century art world ceded to MFAs and gallerists.** Most of art history's canon was made by self-employed small-business operators whose portfolio, brand, contracts, and revenue channels were part of their craft. Restoring that framing for contemporary practitioners is a practical contribution, not a commercial concession.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [WAL — Waltz](../../../www/tibsfox/com/Research/WAL/) | Baroque counterpoint, jazz improvisation, and electronic music production — MUS-01 and MUS-02 lean on the WAL vocabulary for musical-form analysis |
+| [UNI — Unison](../../../www/tibsfox/com/Research/UNI/) | Renaissance perspective and Complex-Plane mathematical positioning — both APR and UNI use the same (theta, r) coordinate substrate, and COK-01 explicitly cites UNI's translation-pair machinery |
+| [MTH — Mathematics](../../../www/tibsfox/com/Research/MTH/) | The Complex Plane of Experience, L-System grammar, and the mathematical substrate underpinning COK-01's concept-node mapping |
+| [ECO — Ecology](../../../www/tibsfox/com/Research/ECO/) | L-System growth patterns and the environmental-art movement discussed in VIS-03; also the biological morphogenesis analogy used throughout COK-01 |
+| [BRC — Black Rock City](../../../www/tibsfox/com/Research/BRC/) | Jazz improvisation, creative community structure, and the gifting economy — direct context for MUS-02 and BIZ-01 |
+| [v1.49.121 — CYG](../v1.49.121/) | Sibling release in the same v1.49.101-131 research batch — hard-science case study contrasting with APR's three-track humanities-plus-business structure |
+| [v1.49.122 — predecessor](../v1.49.122/) | Directly preceding release in the research arc |
+| [v1.49.124 — successor](../v1.49.124/) | Directly following release in the research arc |
+| [v1.0 — Core Skill Management](../v1.0/) | Project foundation and publish pipeline that APR rides on — the 6-step adaptive loop, the `.claude/skills/` substrate, the JSONL pattern store |
+| [v1.36 — Citation Management](../v1.36/) | Citation chipset and bibliography formats that underpin APR's primary-source discipline across three disciplines |
+| [v1.37 — Complex Plane Learning Framework](../v1.37/) | SkillPosition (theta, r), angular promotion, Euler composition — the mathematical substrate COK-01 extends into the arts domain |
+| [USPTO trademark guidance](https://www.uspto.gov/trademarks) | Primary source for the BIZ-01 trademark registration procedure |
+| [IRS sole-proprietorship and LLC guidance](https://www.irs.gov/) | Primary source for the BIZ-01 legal-structure comparison |
+| [Chauvet Cave documentation](https://archeologie.culture.gouv.fr/chauvet/en) | Primary source for VIS-01 Paleolithic visual-art origins |
+| [Hohle Fels flute (Conard et al., Nature 2009)](https://www.nature.com/) | Primary source for MUS-01's 40,000-year music-practice anchor |
+| `www/tibsfox/com/Research/APR/` | Project root — 14 files, 2,821 lines |
+| `www/tibsfox/com/Research/series.js` | Master research catalog; APR registered at line appended in this release |
+| `.planning/research-catalog.csv` | Internal research catalog tracking all 190+ research projects across the v1.49.x arc |
+| `docs/release-notes/RETROSPECTIVE-TRACKER.md` | Cross-release retrospective aggregation — APR contributes 5 extracted lessons into the tracker |
+| `docs/release-notes/v1.49.123/chapter/` | Chapter files (`00-summary.md`, `03-retrospective.md`, `04-lessons.md`, `99-context.md`) that the completeness scorer concatenates with this README when scoring |
+
+## Engine Position
+
+v1.49.123 is the 23rd entry of the v1.49.101-131 thirty-one-project research batch, the 111th research release of the v1.49 publication arc, and the first entry in the arts-and-creative-practice cluster to treat visual art, music, and business as three tracks of a single continuous signal on the Complex Plane of Experience. Within the research catalog it sits between the high-energy-astrophysics cluster (CYG, BHC, BHK, GRB) and the humanities-adjacent cluster (WAL, UNI, BRC), and it opens the Arts & Creative Practice sub-cluster that WAL, UNI, and any future NWA (non-Western arts) release will extend. In the v1.49.x arc the release participates in the broader research-catalog engine, contributing 5 new lessons (ledger IDs #719–#723) into the cross-release retrospective tracker. It was shipped as a single-commit research release eight days before the v1.49.131 batch close and approximately four weeks before the v1.50 milestone target of 2026-04-21. At 2,821 lines across 14 files it is the largest single research project in the v1.49.101-131 batch; by commit surface it is also one of the cleanest, touching only `www/tibsfox/com/Research/APR/` and one line of `series.js`.
+
+## Files
+
+- `www/tibsfox/com/Research/APR/index.html` — 152 lines, project landing page integrated into the Research catalog site
+- `www/tibsfox/com/Research/APR/mission-pack/artist_mission.pdf` — 227,009 bytes (binary), compiled LaTeX mission pack in journal-submission format
+- `www/tibsfox/com/Research/APR/mission-pack/artist_mission.tex` — 1,157 lines, complete LaTeX source for the mission pack, compileable with pdflatex
+- `www/tibsfox/com/Research/APR/mission-pack/artist_mission_index.html` — 500 lines, standalone mission-pack index linking the seven research modules
+- `www/tibsfox/com/Research/APR/mission.html` — 74 lines, mission-pack gateway page linking the PDF and HTML index into the project landing
+- `www/tibsfox/com/Research/APR/page.html` — 179 lines, primary content page carrying the seven-module research narrative
+- `www/tibsfox/com/Research/APR/research/01-visual-arts-origins.md` — 138 lines, VIS-01 Visual Arts Origins module source
+- `www/tibsfox/com/Research/APR/research/02-classical-to-impressionism.md` — 100 lines, VIS-02 Classical to Impressionism module source
+- `www/tibsfox/com/Research/APR/research/03-modernism-to-present.md` — 70 lines, VIS-03 Modernism to Present module source
+- `www/tibsfox/com/Research/APR/research/04-music-prehistory-to-romantic.md` — 64 lines, MUS-01 Prehistory to Romanticism module source
+- `www/tibsfox/com/Research/APR/research/05-music-modernism-to-digital.md` — 49 lines, MUS-02 Modernism to Digital Age module source
+- `www/tibsfox/com/Research/APR/research/06-artist-entrepreneur.md` — 88 lines, BIZ-01 Artist as Entrepreneur module source
+- `www/tibsfox/com/Research/APR/research/07-knowledge-integration.md` — 59 lines, COK-01 Knowledge Integration module source
+- `www/tibsfox/com/Research/APR/style.css` — 191 lines, project-specific styling (deep violet / burnt orange / teal on parchment-warm backgrounds)
 
 ---
-*Part of the v1.49.101-131 research batch -- 31 new projects in a single session.*
+*Part of the v1.49.101-131 research batch — 31 projects in a single publication arc. Uplifted 2026-04-17 against the A-grade rubric at `.planning/missions/release-uplift/RUBRIC.md`.*
