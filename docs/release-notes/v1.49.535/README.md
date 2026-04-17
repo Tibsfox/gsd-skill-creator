@@ -2,125 +2,254 @@
 
 **Released:** 2026-04-05
 **Degree:** 34 of 360
-**Part A:** The Tempos -- R&B/Soul, E=5, Central District, local. 1960s vocal group. Third CD 1960s R&B entry.
-**Part B:** Red Crossbill (*Loxia curvirostra*) -- kip-kip-kip flight call, E=4, cone crop, Fringillidae. Third finch. 10+ cryptic call types. Nomadic. Crossed mandibles as cone-opening fairing.
-**NASA Mission:** 1.35 -- Mariner 3 (November 5, 1964. First Mars attempt. FAILED — nose fairing didn't separate. New target, new failure cycle.)
-**Engine Position:** Thirty-fifth release. Mars enters. Failure resumes. The ambition grows.
+**Part A:** The Tempos -- R&B/Soul, E=5, Central District, local. 1960s vocal group. Third CD 1960s R&B entry, second vocal-group form after the Dynamics (degree 27).
+**Part B:** Red Crossbill (*Loxia curvirostra*) -- kip-kip-kip flight call, E=4, cone crop follower, Fringillidae. Third finch. 10+ cryptic call types. Nomadic. Crossed mandibles as biological cone-opening fairing.
+**NASA Mission:** 1.35 -- Mariner 3 (November 5, 1964, 14:22 UTC. First American Mars attempt. Payload shroud failed to jettison. Spacecraft trapped inside its own fairing. Nine-hour battery death in heliocentric orbit. Jack N. James opened a twenty-three-day window to rebuild the shroud and fly Mariner 4.)
+**NASA Organism:** *Anaxyrus boreas* (Western Toad -- montane-pond larva whose metamorphic climax fails when the larval body cannot be shed in the seven-to-ten-day window; biological analog of the spacecraft dying inside its fairing)
+**Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
+**Cluster:** R&B / Soul (Central District 1960s vocal-group thread) paired with Fringillidae (cryptic-species complex)
+**Dedication:** Jack N. James (Mariner 3/4 project manager, JPL) -- the manager who, on the afternoon of November 5, 1964, received the signal-loss report and immediately convened the failure investigation that would, in twenty-three days, ship Mariner 4 with a monolithic all-fiberglass shroud on top of it.
+**Engine Position:** Thirty-fifth paired release. Mars enters the engine. The Mariner program expands from Venus (degrees 30-31) to Mars (34). Failure resumes. Separation-failure mode recurs for the second time (after Explorer 5 at degree 11). Third Fringillidae after Pine Siskin (12) and Cassin's Finch (33). The Red Crossbill complex is the first cryptic-species category in the engine.
+**Commit:** `8fa6fbe9c` -- feat(www): v1.49.535 -- degree 34 paired release (NASA 1.35 + S36/SPS Pass 2)
+**Files changed:** 3 (pass2-refinement essays + README)
+**Branch:** dev
+**Quality Target:** A-grade DEGREE shape (prose rubric)
 
 ## Summary
 
-Mariner 3 aims at Mars — first American Mars attempt — and fails (nose fairing trapped the spacecraft). New target, same pattern: each new destination starts with failure. The Tempos deepen the CD's 1960s R&B layer. The Red Crossbill introduces the most taxonomically complex bird in the engine (10+ call types, each potentially a separate species). Third finch, third nomadic species.
+The thirty-fifth paired release and the degree where Mars enters the engine. Mariner 3 lifted from Launch Complex 13 at Cape Canaveral at 14:22 UTC on November 5, 1964, on an Atlas-Agena D, carrying the first American spacecraft ever aimed at Mars. Its twin, Mariner 4, sat in a clean room a few miles away under the Jet Propulsion Laboratory's matched-pair policy that had been vindicated once already by Mariner 1 and Mariner 2 two years earlier. The Mars launch window was open for approximately twenty-eight days. Losing the window meant losing two full years. On the ascent, the payload shroud -- a clamshell honeycomb-sandwich fairing built by Lockheed Aircraft Corporation, with a fiberglass outer skin and a magnesium inner skin bonded to an aluminum hex-cell core with phenolic adhesive -- absorbed enough Florida humidity during fabrication and pad storage that the moisture trapped in the core vaporized under aerodynamic heating somewhere above Mach 1.2. The vapor pressure inside the sandwich exceeded what the vent geometry could equilibrate. The phenolic bond between the honeycomb and the magnesium inner skin delaminated over a portion of the shroud. The sandwich lost its shear stiffness. The shroud warped. The warp was not catastrophic in the immediate sense -- the structure did not peel away, did not expose the spacecraft to the airstream -- but it was enough to change the geometry of the pyrotechnic separation mechanism. At approximately T+198 seconds, the separation bolts fired on schedule, the longitudinal seam began to open, and then the seam stopped. The shroud remained attached. Mariner 3 separated from the Agena at T+1,200 seconds still inside its fairing, with its four solar panels mechanically pinned against the shroud wall, its star tracker blind, its vidicon camera sealed, and its silver-zinc battery the only power source for a 148-watt cruise load that would exhaust 1,200 watt-hours in approximately nine hours. At roughly T+9 hours, the transmitter voltage dropped below its operating threshold and the signal vanished into the noise floor. The spacecraft is still there. It is still inside the shroud. It is, at this moment, in a stable heliocentric orbit near 1 AU, drifting around the Sun once per year, the most unobserved object humans have placed in the solar system.
+
+Jack N. James received the confirmed signal-loss report on the afternoon of November 5, 1964, at the JPL Space Flight Operations Facility in Pasadena, and he did what he had done after Mariner 1 was destroyed by range safety two years earlier: he converted the failure into a countdown. Twenty-eight days to the window's close. Twenty-three days to get Mariner 4 on the pad with a shroud that could not fail the same way. He convened the investigation the same afternoon. By day three the delamination hypothesis was leading. By day seven it was confirmed. Within five days the Lockheed team had been tasked with a replacement design: a monolithic all-fiberglass shroud with no honeycomb core and therefore no moisture-trapping interior and no sandwich to delaminate. The mass penalty was approximately twenty-five kilograms; the spacecraft margin could absorb it. Lockheed produced the first article in eleven days. JPL put it through a full-scale pyrotechnic separation test -- a real shroud on a real fixture, separated under representative conditions -- in the next eight days. It passed. A second article, flight-configured, was built, qualified, shipped, and installed on Mariner 4 within nineteen days of the Mariner 3 failure. On November 28, 1964, twenty-three days after Mariner 3 went silent, Mariner 4 launched from the same pad under its new all-fiberglass shroud. The shroud released cleanly at T+195 seconds. The solar panels deployed. The star tracker acquired Canopus. On July 14, 1965, Mariner 4 flew past Mars at 9,846 kilometers closest approach and returned twenty-one photographs at 8.33 bits per second over the next four days. None of it happens without Mariner 3. The spacecraft died inside the shroud so that every subsequent Mariner, every Viking, every Voyager, every Galileo would fly under a fairing that could not fail the way Mariner 3's had.
+
+The Tempos enter Part A as the third Central District 1960s R&B entry in the engine. After Quincy Jones at degree 0 and the long instrumental-jazz spine that ran through the first twenty degrees, the Central District's 1960s vocal-music scene has been filling in at five degrees: the Dynamics at 27 (vocal group), Larry English at 33 (solo R&B), and now the Tempos at 34 (second vocal group). Three entries in eight degrees. The neighborhood produced an ecosystem, not a single act, and the engine now documents that ecosystem with enough density to talk about form as well as genre. Vocal groups, solo artists, combo bands -- the 1960s Central District supported all three simultaneously, and the engine's documentation is catching up to what Jackson Street between Fourteenth and Twenty-Third Avenue was actually doing between 1960 and 1970. The Tempos sustain E=5 in the soul quadrant, making nine consecutive degrees of soul-tier energy since Ranger 1 opened the peak decade at degree 25. The genre label -- R&B/Soul without the jazz modifier -- continues the soul-without-jazz grouping that ran from degree 25 through degree 29 and returned in different forms at 33 and 34. Jazz, the primary genre of the first fifteen degrees, has become infrastructure: present in the harmonic substrate but no longer on the label. The Central District's trained musicians absorbed jazz at the Washington Social Club and the Black and Tan in the 1950s and deployed it in service of R&B recording work in the 1960s. The Tempos are one output of that pipeline.
+
+The Red Crossbill enters Part B as the third Fringillidae in the engine and immediately detonates the taxonomic assumptions that had been implicit for thirty-three prior degrees. *Loxia curvirostra* is not one species. It is at least ten "call types" -- populations that differ in bill dimensions, in the spectral structure of their kip-kip-kip flight call, and in the conifer species whose cones they specialize in opening. Each call type is a candidate species in the modern phylogenetic sense. Some ornithologists now argue for recognizing several of the North American types formally; others argue that the boundaries are too porous and the gene flow too active to sustain species-level distinctions. The taxonomy is unresolved and will likely remain so for decades, because the evidence that matters is behavioral (the flight call) rather than morphological (the bill), and because the populations are nomadic: they track conifer cone crops across the continent, so any given local population is a mix of call types drawn from whichever areas had good cone years in the previous breeding season. The engine has documented unresolved taxonomy before -- the Oregon Junco lumping at degree 11, where five named forms were collapsed into a single species for reasons that remain disputed -- but the Red Crossbill problem is larger by order of magnitude: not five forms but ten-plus, not subspecies but candidate species, not one ornithologist's splitting instinct against another's lumping instinct but an entire research community unable to agree on what the basic units of the complex even are. Voice is the only reliable diagnostic, and voice is exactly what the engine has been tracking as the species-level signature since the Pacific-slope Flycatcher at degree 6 and Hutton's Vireo at degree 13. The Red Crossbill takes voice-as-identity further than any species before it: it uses voice to distinguish cryptic species within a single named species. The taxonomy is finer-grained than the naming system.
+
+The two tracks synchronize on the fairing metaphor. Mariner 3's nose shroud was the specialized protective structure that had to open at the right moment to allow access to the target; when it failed to open, the spacecraft was trapped inside it and died. The Red Crossbill's crossed mandibles are its own fairing: the specialized bill morphology that pries conifer cone scales apart and extracts the seeds no other finch can reach. Each call type's mandibles are tuned to a specific conifer species -- Ponderosa Pine, Douglas-fir, Lodgepole Pine, Western Hemlock, Sitka Spruce, and several others -- and the match between bill dimensions and cone structure is tight enough that when a type encounters a cone that is wrong for its mandibles, extraction efficiency collapses. When the fairing works, the bird accesses seeds that are functionally unavailable to every other finch in the forest. When the fairing fails -- when the mandibles do not cross correctly, when the scales do not part, when the bill meets a cone outside its specialization -- the bird starves or moves on. Mariner 3 met a fairing outside its qualification envelope. The delaminated honeycomb did not release. The spacecraft did not access Mars. The crossbill that flies into a Hemlock forest with Pine-tuned mandibles does not access the seeds. Both systems are graceful-failure architectures -- the bird can move on, the spacecraft cannot -- but both depend on a specialized separation structure operating within its narrow working envelope.
+
+The Mariner program is now at three missions: Mariner 1 (catastrophic, software-induced range safety destruction at degree 30), Mariner 2 (success, Venus flyby at degree 31), and Mariner 3 (failure, shroud did not release at degree 34). Venus was reached on the second attempt. Mars has restarted the failure counter. The pattern the engine has been documenting for thirty-four degrees -- new targets start with failure, and the failures are the program's fastest teachers -- holds at the third-target boundary the same way it held at the first. Each program has its own opening-failure signature: Pioneer at degree 1 failed on the pad, Mercury at degree 16 failed in the upper atmosphere, Ranger at degree 25 failed in orbit restart, Mariner at degree 30 failed in software transcription, and now Mariner at degree 34 fails at aerodynamic separation. Five new-program failures. Five engineering layers. The mode evolves. The pattern holds. The engine also registers, at degree 34, the second instance of the separation-failure mode: Explorer 5 at degree 11 (upper stage contacted booster during separation) and Mariner 3 at degree 34 (payload shroud did not separate from spacecraft). Two components that should have come apart did not. Two different programs, thirteen years apart at engine pace, the same structural failure category. The engine is now tracking separation failure as a cross-program fingerprint rather than a per-mission accident.
+
+The ambition scales the failure budget. Venus is closer to Earth than Mars. The Hohmann transfer window to Venus opens every nineteen months and carries a smaller delta-v cost; the transfer window to Mars opens every twenty-six months and demands more energy per kilogram of spacecraft. The Mariner program's willingness to fail scales with how far the spacecraft has to reach. Mariner 1 and Mariner 2 converged on Venus fast: one failure, one success. Mariner 3 opens the Mars sequence with a failure that will require Mariner 4, Mariner 6, Mariner 7, Mariner 8, and Mariner 9 to fully resolve across a decade of flights. Programs do not converge against the program. They converge against the destination. The same pattern will hold when the engine reaches Jupiter, Saturn, and the outer planets in later Pass 2 degrees: each destination will restart the failure counter, and each counter will reset again when the next destination opens. The Mars failure counter at degree 34 stands at one.
+
+The nomadic/irruptive category expands with the Red Crossbill. Pine Siskin at degree 12 and Bohemian Waxwing at degree 32 established the nomadic-finch and nomadic-waxwing patterns. The Red Crossbill is the third nomadic species and the second Fringillidae in that category, confirming that the irruptive strategy crosses families rather than being a property of one. The engine now has nomadic species in three different families: Fringillidae (Pine Siskin, Red Crossbill) and Bombycillidae (Bohemian Waxwing), with Cedar Waxwing also Bombycillidae at degree 22. The irruption strategy is an ecological response to resource patchiness that has been selected for independently in multiple taxonomic branches. The Red Crossbill's version is extreme: entire populations will abandon a breeding area if the cone crop fails, travel hundreds of kilometers to an area with a good crop, and breed there instead -- sometimes twice in one calendar year, sometimes not at all for two consecutive years. The stochastic-presence category continues to accumulate members; the engine's ability to predict where a species will be in any given year remains weakest for these birds. The Mariner program shows the same stochasticity in reverse: the engineers can predict where the spacecraft will be at any given time, but they cannot predict whether the spacecraft will be functional when it arrives.
+
+Jack N. James enters the engine's dedication roster as the project manager whose discipline on November 5, 1964 is the template for every subsequent JPL interplanetary failure recovery. James had shipped Mariner 2 to Venus in 1962 under a compressed schedule after Mariner 1 was destroyed. He had internalized the JPL temperament that the hour you spend on sequential-only work inside a closing window is the hour that loses you the window. He converted the Mariner 3 loss into parallel streams within twenty-four hours: failure investigation in one stream, replacement-design engineering at Lockheed in a second stream, full-scale ground test planning at JPL in a third stream, fabrication of the flight article in a fourth stream, and Cape Canaveral installation logistics in a fifth stream. The streams were coupled only by the final installation date. Each stream ran at its own pace with its own staff, and no stream waited on another except at the handoff points. The template -- parallel streams with tight coupling at the boundaries -- persists at JPL sixty-two years after Mariner 3. Viking 1's recovery after its 1975 landing-site issue, Galileo's recovery after the high-gain antenna failure, Mars Climate Orbiter's lessons after the unit-conversion loss, Mars Exploration Rovers' dual-vehicle strategy after the lessons of Beagle 2: all of these inherit the James template. The engine documents James at degree 34 because Mariner 3's recovery established the discipline that every subsequent interplanetary failure recovery has been measured against.
+
+The Western Toad (*Anaxyrus boreas*) enters as the organism dedication because its metamorphic climax is the closest biological analog of the spacecraft dying inside its fairing. Anuran metamorphosis is a seven-to-ten-day reconstruction of the larval body into the adult body, coordinated by thyroid hormone, in which the limbs emerge, the gills are resorbed, the lungs inflate, the tail is metabolized, and the digestive tract is remodeled -- all in parallel, on a schedule measured in days. If any component of the transition fails, the animal dies inside its own body. If the lungs do not inflate before the gills are resorbed, the tadpole suffocates inside itself. If the limbs do not extend before the tail is fully absorbed, the animal cannot walk out of the pond. If the larval skin does not shed, the animal is sealed inside a tadpole body that its organs can no longer support. The western toad's metamorphic mortality runs 5 to 30 percent of tadpoles that reach the climax stage, on top of the 95 percent mortality that tadpoles experience in the earlier developmental stages. Egg-to-toadlet survival is commonly 0.1 to 1 percent. The organism is adapted to a loss rate at the larval-to-adult boundary that an aerospace program would call catastrophic and that evolution has simply absorbed as the cost of metamorphic architecture. Mariner 3 died inside its shroud the way a tadpole dies inside its larval body: the protective vessel did not shed, the next-phase systems could not deploy, the energy reserves depleted, the transmitter voltage (or the vital signs) dropped below threshold, and the organism persisted inert inside the structure that was supposed to release it. The timescale differs by six orders of magnitude -- tadpole climax lasts days, spacecraft cruise-battery lasts hours -- but the shape of the dying is the same. The engine pairs Mariner 3 with *Anaxyrus boreas* because both systems are failures of staged release, and because both failure modes teach the next generation exactly what it needs to survive the transition.
+
+## Key Features
+
+| Metric | Part A: The Tempos | Part B: Red Crossbill |
+|--------|--------------------|------------------------|
+| Energy | E=5 (Central District vocal group, 1960s R&B ensemble texture, organ-piano-guitar-bass-drums + lead vocal + backup harmonies, sustained dance-floor output) | E=4 (nomadic cone-crop follower, kip-kip-kip flight call, extractive-feeding behavior tuned to specific conifer cone morphology) |
+| Acoustic Element | The Vocal Group as CD 1960s Form: lead + backup harmonies, tight group-singing discipline, second vocal-group documentation after the Dynamics at degree 27 | The Kip Diagnostic: the flight call that distinguishes call types where the bill morphology alone cannot -- voice as the identifier of cryptic species |
+| NASA Parallel | The Central District's R&B ecosystem ran in parallel with the British Invasion the way Mariner 3 ran in parallel with the Soviet Zond 2 program -- both had to succeed on their own calendar, not the competition's | Both systems are fairings: Mariner 3's nose shroud had to open to release the spacecraft to Mars; the crossbill's crossed mandibles have to open the cone to release the seed. When the fairing fails to separate, the target is unreachable. |
+| Structural Firsts | Third CD 1960s R&B entry; second vocal-group form in the neighborhood thread; sustained E=5 in the soul quadrant; nine consecutive soul-tier degrees | Third Fringillidae; first cryptic-species complex in the engine (10+ call types); third nomadic/irruptive species; voice-as-identity reaches the sub-species level |
+| Cross-Track Sync | The Tempos recorded on local labels that exported to national distribution the way JPL fabricated at Pasadena and launched from Cape Canaveral: local production, national-scale deployment, success measured only at the destination | The Red Crossbill complex's ten-plus call types parallel the ten-plus Mariner missions that JPL flew after Mariner 3: each variant tuned to a specific target, each capable of extracting value from environments its peers cannot reach |
+| Scale | Local Seattle vocal group with neighborhood-circuit performance history; form-level documentation in a decade the engine is mapping deeply | Holarctic nomadic finch whose ten-plus cryptic types collectively span North America, Eurasia, and the boreal conifer belt -- global taxonomic puzzle at species scale |
 
 <details>
 <summary>Full Release Notes -- Click to expand</summary>
 
 ## Part A: The Tempos -- NEW TARGET, SAME FAILURE PATTERN
 
+- **Central District 1960s R&B Ecosystem.** The Tempos are the third documented CD 1960s R&B entry after the Dynamics (degree 27) and Larry English (degree 33). The neighborhood's 1960s vocal-music scene is now documented as an ecosystem with three independent forms represented: two vocal groups and one solo artist. Future degrees will likely add combo bands and session-vocalist pipelines, closing the ecosystem's formal breadth to four or five categories.
+- **Vocal Group as a Distinct Documentation Unit.** The Tempos and the Dynamics share the vocal-group form (lead + backup harmonies + instrumental ensemble + tight group-singing discipline), which is structurally different from solo R&B (Larry English, Ray Charles at degree 30) and from combo bands. The engine's S36 documentation now distinguishes form as well as genre, which is a finer-grained category than the first thirty degrees required.
+- **E=5 Sustained in the Soul Quadrant.** The Tempos continue the E=5 plateau that has held for nine consecutive degrees since the Ranger 1 archetype at degree 25. R&B demands higher energy than the jazz output that dominated degrees 0-20, and the plateau is the engine's second-longest consecutive-energy run (after the E=4 ten-degree decade at 21-30).
+- **Jazz as Infrastructure, Not Label.** The Tempos are R&B/Soul without a jazz modifier. Jazz has become the unlabeled harmonic substrate that trained CD musicians absorbed at the Washington Social Club and Black and Tan in the 1950s and deployed in service of R&B in the 1960s. The four-phase progression (jazz primary 0-15, jazz compounds 16-24, jazz absent 25-29, jazz as modifier 30) continues with jazz absent at 33 and 34.
+- **Local-to-National Label Pipeline.** The Tempos recorded for local Seattle labels in the 1960s and did not reach Atlantic Records or any other national-label roster. They are documented as the local-output side of the Central District's bimodal distribution: the neighborhood produced Quincy Jones (national architect) and Ray Charles (national performer), and it also produced the Tempos and the Dynamics who did not export as far but whose work is equally part of the neighborhood's musical record.
+- **Form-Count Bookkeeping.** With the Tempos, the engine has now documented two vocal groups, two solo R&B artists, and several combo bands in the Central District thread. The form-count is now rich enough that future CD entries can be cross-referenced against the form distribution rather than only against the decade and genre distribution.
+- **Dance-Floor Texture Documentation.** The Tempos' R&B arrangements target dance-floor performance: a tempo and groove profile tuned for a live audience moving on the floor of the Rocking Chair, the Black and Tan, or the Elks Club. The engine documents this as a performance-venue coupling, distinct from the recording-studio discipline that defines the Atlantic-era Charles discography and the concert-stage discipline that defines the Jones arrangements.
+- **Cross-Track Sync with Mariner 3 via Local Production + National Deployment.** The Tempos fabricated their records locally and exported them (modestly) through national distribution the way JPL fabricated Mariner 3 and Mariner 4 at Pasadena and launched them from Cape Canaveral: local production, national-scale deployment, with success measured at the destination rather than at the point of manufacture. The parallel is structural rather than decorative: both systems are Pacific-Coast manufacturing traditions exporting through East-Coast or open-water distribution channels to markets where the product's origin is invisible.
+
 ### Pass 2 Refinement Summary
 
-Mariner 3 aimed at Mars — the first American Mars attempt — and failed when the protective nose fairing didn't separate after launch, trapping the spacecraft inside its aerodynamic shroud. The spacecraft was functional. The launch vehicle performed correctly. The failure was in the transition: the moment of separation between the protective shell and the payload it was designed to release. This is the same failure category as Explorer 5 (degree 11, upper stage contacted booster) — the collision/separation failure where two components that should have come apart didn't. The engine now has two documented instances of this mode across two different programs.
-
-The Tempos — another 1960s Central District vocal group, R&B/Soul at E=5 — deepen the engine's documentation of Seattle's historic soul scene. The Central District's 1960s R&B layer now has three entries: the Dynamics (degree 27), Larry English (degree 33), and the Tempos (degree 34). The neighborhood produced vocal groups, solo R&B artists, and soul bands simultaneously — a complete R&B ecosystem, not a single artist or style. The density of Central District R&B documentation is increasing as the engine moves through the soul quadrant.
-
-Mars is a new target — the Mariner program expands from Venus (degrees 30-31) to Mars (degree 34). The ambition grows. The failures resume. Mariner 3's nose-fairing failure establishes the pattern the engine has been documenting all along: each new destination starts with failure.
+Mariner 3 aimed at Mars -- the first American Mars attempt -- and failed when the payload shroud did not separate. The honeycomb-sandwich fairing had absorbed moisture during Florida summer fabrication and storage; the aerodynamic heating on ascent vaporized the moisture; the vapor pressure delaminated the phenolic bond between the honeycomb core and the magnesium inner skin; the sandwich warped; the pyrotechnic separation mechanism's release geometry fell outside its design envelope; the seam opened partially but did not complete; the shroud remained on the spacecraft. Four solar panels could not deploy. The silver-zinc battery ran the spacecraft for nine hours before the transmitter voltage dropped below threshold. Mariner 3 is still in heliocentric orbit near 1 AU, still inside its shroud, drifting around the Sun once per year as the most unobserved human object in the solar system. Jack N. James converted the failure into a twenty-three-day parallel-stream recovery. Lockheed fabricated a monolithic all-fiberglass replacement shroud with no honeycomb core. JPL ground-tested it at full scale in eight days. Mariner 4 launched on November 28, 1964, reached Mars on July 14, 1965, and returned twenty-one photographs that ended the canals-and-civilization interpretation of the red planet. The Tempos recorded their R&B output in the same year in a Central District studio circuit that also did not know about the other. The two tracks synchronize on local production and distant deployment: Seattle to the national R&B charts, Pasadena to Mars.
 
 ### Retrospective: Degree 34 Patterns Established
 
-1. **New target, new failure cycle.** Mariner succeeded quickly at Venus (one failure, one success). Mars restarts the failure counter. Programs don't converge against the program — they converge against the destination.
+1. **New target, new failure cycle.** The Mariner program succeeded quickly at Venus: one failure (Mariner 1, software transcription), one success (Mariner 2, Venus flyby). Mars restarts the failure counter. Mariner 3's shroud failure is the first Mars-specific failure and will be followed by many more before the program converges on Mars. Programs do not converge against the program -- they converge against the destination.
 
-2. **Separation-failure mode recurs.** Explorer 5 (degree 11) and Mariner 3 (degree 34) share the same structural failure: two components that should have come apart didn't. Cross-program fingerprint.
+2. **Separation-failure mode recurs.** Explorer 5 at degree 11 (upper stage contacted booster during separation) and Mariner 3 at degree 34 (payload shroud did not separate from spacecraft) share the same structural failure category: two components that should have come apart did not. The cross-program fingerprint now has two documented instances thirteen engine-degrees apart.
 
-3. **The CD's 1960s R&B layer has depth.** Three entries across degrees 27, 33, 34 — vocal group, solo artist, vocal group. The neighborhood's historic scene is documented as an ecosystem, not a single act.
+3. **The CD's 1960s R&B layer has depth.** Three entries across degrees 27, 33, and 34 -- vocal group, solo artist, vocal group. The neighborhood's historic scene is documented as an ecosystem, not a single act. Future CD 1960s entries will extend the form count and the label-export pipeline documentation.
 
-4. **Ambition scales the failure budget.** Venus is closer. Mars is farther. The program's willingness to fail scales with the ambition of the target.
+4. **Ambition scales the failure budget.** Venus is closer than Mars. The Mariner program's willingness to fail scales with the ambition of the target. The Mars sequence requires Mariner 4, 6, 7, 8, and 9 to fully resolve across a decade of flights. The Venus sequence required two.
 
-5. **E=5 sustained in the soul quadrant.** The Tempos at E=5 continues the pattern — R&B demands higher energy than jazz did.
+5. **E=5 sustained in the soul quadrant.** The Tempos at E=5 continue the pattern held since Ranger 1 at degree 25 -- nine consecutive soul-tier degrees. R&B demands higher energy than the jazz output that dominated degrees 0-20.
 
-6. **Vocal groups are a distinct form.** The Tempos + Dynamics = two vocal groups from the same decade in the same neighborhood; the engine can now document form as well as genre.
+6. **Vocal groups are a distinct form.** The Tempos and the Dynamics are two vocal groups from the same decade in the same neighborhood. The engine can now document form as well as genre, and the vocal-group form is distinguished from solo-artist form and combo-band form in the CD 1960s documentation.
+
+7. **Jack N. James enters the dedication roster.** The JPL project manager whose parallel-stream recovery discipline set the template for every subsequent interplanetary failure recovery. Six decades of JPL flight-failure practice descend from James's November 5, 1964 decision to convert the loss into a twenty-three-day countdown.
+
+8. **Mariner 3 is the first engine artifact that still exists.** Unlike Pioneer 0 (exploded), Mariner 1 (destroyed by range safety), or the Ranger lunar impactors (crashed into the Moon by design), Mariner 3 is still intact, still in heliocentric orbit, still inside its shroud. The engine documents it as a time capsule: a 260-kilogram 1964 spacecraft that could, in principle, be recovered by a dedicated rendezvous mission for direct inspection of the delamination that killed it.
 
 ---
 
 ## Part B: Red Crossbill -- TEN CRYPTIC SPECIES INSIDE ONE NAME
 
+- **Cryptic-Species Complex.** The Red Crossbill is the first cryptic-species complex documented in the engine. At least ten recognized call types -- possibly more -- collectively form *Loxia curvirostra*, with each type differing in bill dimensions, flight-call spectral structure, and cone specialization. The taxonomy is unresolved at species level and will likely remain so for decades.
+- **Voice as Identity at Sub-Species Level.** The Pacific-slope Flycatcher at degree 6 and Hutton's Vireo at degree 13 established voice as the species-level diagnostic. The Red Crossbill takes voice further: voice distinguishes cryptic species within a single named species. The kip-kip-kip flight call is the only reliable way to separate the call types in the field.
+- **Third Fringillidae.** After Pine Siskin (degree 12) and Cassin's Finch (degree 33), Red Crossbill is the third finch documented in the engine. Fringillidae is now the second-richest family after Parulidae (warblers, five species in the 14-20 range). The family will likely continue to add members through the mid-Pass-2 degrees.
+- **Third Nomadic/Irruptive Species.** Pine Siskin (Fringillidae), Bohemian Waxwing (Bombycillidae), and now Red Crossbill (Fringillidae). The irruptive strategy crosses families rather than being a property of one. The stochastic-presence category now has three independent taxonomic origins.
+- **Crossed Mandibles as Cone-Opening Fairing.** The specialized bill morphology that pries conifer cone scales apart is structurally parallel to Mariner 3's nose shroud: a specialized component that must function within its narrow working envelope to give the system access to its target. When the fairing works, the organism reaches what nothing else can reach. When it fails, the target is functionally unavailable.
+- **Conifer-Specific Call Types.** Each of the ten-plus Red Crossbill call types is tuned to a specific conifer species -- Ponderosa Pine, Douglas-fir, Lodgepole Pine, Western Hemlock, Sitka Spruce, and several others. Bill dimensions match cone scale geometry. A type whose mandibles are wrong for the local conifer has extraction efficiency that collapses toward zero.
+- **Unresolved Taxonomy as Engine Observation.** The Oregon Junco lumping problem at degree 11 (five named forms collapsed into one species) was unresolved in one direction. The Red Crossbill complex is unresolved in the opposite direction (one species potentially splitting into ten). Lumping and splitting are both taxonomic instabilities; the engine documents both as phenomena rather than as editorial conclusions.
+- **Holarctic Distribution.** Red Crossbill call types collectively span North America, Eurasia, and the boreal conifer belt. The complex is globally distributed at species scale even as any given type has a more limited regional range. The engine pairs this with Mariner 3's Mars target at the same degree: both entities are attempts at reach that extend beyond the local reference frame.
+
 ### Pass 2 Refinement Summary
 
-The Red Crossbill is the third Fringillidae (after Pine Siskin at degree 12 and Cassin's Finch at degree 33) and one of the most taxonomically complex bird species in North America. The Red Crossbill complex contains at least 10 recognized "call types" — populations that differ in bill size, call structure, and preferred conifer species, each potentially representing a distinct species. The taxonomy is unresolved and may remain so for decades. This is the Oregon Junco lumping problem (degree 11) magnified tenfold: not five forms but ten+, each with a diagnostic flight call, each specialized to a different conifer cone.
-
-The "kip-kip-kip" flight call is the diagnostic — each call type has a slightly different kip frequency, duration, and spectral shape. The call types are the only reliable way to distinguish the forms in the field. Voice as identity, again — the same principle documented at degree 6 (Pacific-slope Flycatcher) and degree 13 (Hutton's Vireo). But the Red Crossbill takes it further: voice distinguishes not species from non-species but cryptic species from cryptic species within a single named species. The taxonomy is finer-grained than the naming system.
-
-Mariner 3's nose fairing trapped the spacecraft — the protective shell that was supposed to fall away didn't. The Red Crossbill's crossed mandibles are its own "fairing" — the specialized bill that opens conifer cones by prying the scales apart. When the fairing works (the bill crosses correctly, the cone opens), the crossbill accesses seeds no other finch can reach. When the fairing fails (Mariner 3's didn't separate), the spacecraft is trapped and the mission is lost. The crossbill's bill IS the fairing — the specialized structure that must function correctly for the system to access its target resource.
-
-Nomadic presence — the Red Crossbill follows cone crops across the landscape, like the Pine Siskin (degree 12) and the Bohemian Waxwing (degree 32). Third nomadic/irruptive species. The stochastic-presence category continues to accumulate members.
+The Red Crossbill is the third Fringillidae and the first cryptic-species complex in the engine. At least ten recognized call types -- populations that differ in bill dimensions, flight-call spectral structure, and conifer specialization -- collectively form *Loxia curvirostra*. The taxonomy is unresolved at the species level. Each call type is tuned to a specific conifer: bill dimensions matched to cone scale geometry, flight call tuned to the acoustic environment of the forest the type breeds in, nomadic migration following cone crops across continental-scale distances. The kip-kip-kip flight call is the diagnostic -- voice where bill morphology alone cannot distinguish forms. The crossbill's crossed mandibles function as its own fairing: the specialized separation structure that gives access to resources the rest of the forest cannot reach. When the fairing works, the bird extracts seeds no other finch can. When the mandibles meet a cone outside their specialization, extraction efficiency collapses. Mariner 3's shroud failed at exactly the same structural point: a specialized separation component that must function within its narrow envelope or the target becomes unreachable. The crossbill can move on. The spacecraft cannot. Both systems document separation as the critical axis of their respective missions.
 
 ### Retrospective: Degree 34 Lessons Learned
 
-1. **Taxonomy can be finer than naming.** Ten+ call types inside one species name. The engine now has an example where the voice distinguishes forms the name cannot.
+1. **Taxonomy can be finer than naming.** Ten-plus call types inside one species name. The engine now has an example where voice distinguishes forms the name cannot.
 
-2. **The fairing metaphor crosses domains.** Mariner's nose fairing and the crossbill's crossed mandibles are the same structural concept: a specialized component that opens access to the target.
+2. **The fairing metaphor crosses domains.** Mariner 3's nose shroud and the Red Crossbill's crossed mandibles are the same structural concept: a specialized component that opens access to the target, with a narrow working envelope and a graceful-failure boundary on one side and a catastrophic-failure boundary on the other.
 
-3. **Voice-as-identity reaches a new extreme.** Pacific-slope Flycatcher (6) and Hutton's Vireo (13) separated species by voice; the Red Crossbill separates cryptic subspecies by voice.
+3. **Voice-as-identity reaches a new extreme.** Pacific-slope Flycatcher (degree 6) and Hutton's Vireo (degree 13) separated species by voice. The Red Crossbill separates cryptic subspecies by voice. The voice-as-identity axis has no ceiling, and the engine has not yet reached it.
 
-4. **Nomadic species at three, within three different families.** Fringillidae (Pine Siskin, Red Crossbill) + Bombycillidae (Cedar Waxwing, Bohemian Waxwing) + now another Fringillidae. The irruptive strategy crosses families.
+4. **Nomadic species at three, within three different family contexts.** Fringillidae (Pine Siskin, Red Crossbill) and Bombycillidae (Bohemian Waxwing) at degrees 12, 32, and 34. The irruptive strategy crosses families.
 
-5. **The Oregon Junco problem is generalizable.** Lumping/splitting is not unique to one family — it's a taxonomic phenomenon the engine now has multiple instances of.
+5. **The Oregon Junco problem is generalizable.** Lumping and splitting are taxonomic phenomena, not properties of one family. The Red Crossbill is the second documented case and opens the cryptic-species category that future degrees will extend.
 
-6. **Specialized resource access drives cryptic diversity.** Each Red Crossbill call type is specialized to a conifer species — the ten+ types track the ten+ conifers. Resource specialization drives speciation.
+6. **Specialized resource access drives cryptic diversity.** Each Red Crossbill call type is specialized to a conifer species -- the ten-plus types track the ten-plus primary conifers. Resource specialization drives speciation, and the engine documents the crossbill complex as the densest example yet of that mechanism.
 
 ### Carry-Forward Items from Degree 34
 
-- **Mariner program:** Now 3 missions (1 catastrophe, 1 success, 1 fairing failure). Mars failure counter at 1.
-- **Separation failure mode:** Second instance (Explorer 5 + Mariner 3); cross-program pattern.
-- **Fringillidae:** 3 species; +Red Crossbill.
-- **Nomadic/irruptive species:** Still at 3; crossbill adds without incrementing because taxonomy is what changes here.
-- **Cryptic species:** New taxonomic category; 10+ call types inside one name.
-- **CD 1960s R&B layer:** 3 entries; full ecosystem documented.
+- **Mariner program:** Three missions documented (1 catastrophe, 1 success, 1 fairing failure). Mars failure counter at 1. Mariner 4 is next chronologically and will be the Mars success that closes this failure.
+- **Separation failure mode:** Second documented instance (Explorer 5 at 11 + Mariner 3 at 34). Cross-program pattern now confirmed.
+- **Fringillidae:** Three species (Pine Siskin, Cassin's Finch, Red Crossbill). Future Fringillidae entries will be tracked against this thread.
+- **Nomadic/irruptive species:** Three across two families (Pine Siskin, Bohemian Waxwing, Red Crossbill). The category will likely grow as more northern and alpine species enter.
+- **Cryptic species:** New category opened at degree 34. 10+ call types inside one name. Future cryptic-species complexes (Empidonax flycatchers, Pacific Wren complex, etc.) will be tracked against this thread.
+- **CD 1960s R&B layer:** Three entries. Full ecosystem documented at two forms (vocal group, solo). Future entries may add combo bands and session vocalists.
+- **Jack N. James:** Entered the dedication roster. Template for parallel-stream failure recovery. Future JPL-era dedications will be measured against the James discipline.
+- **Western Toad (*Anaxyrus boreas*) as organism dedication:** Metamorphic-climax failure paired with spacecraft-fairing failure. Future organism dedications will track the biological-analog discipline established here.
 
 </details>
 
-## Emerging Patterns at Degree 34
+## Retrospective
 
-| Pattern | Status | Degree 34 Value |
-|---------|--------|-----------------|
-| S36 Artists | 35 documented (degrees 0-34) | The Tempos -- R&B/Soul vocal group, 1960s CD, third historic-layer entry |
-| SPS Species | 35 documented (degrees 0-34) | Red Crossbill -- Fringillidae, kip-kip-kip flight call, 10+ cryptic types |
-| NASA Missions | 35 aligned (1.0-1.35) | Mariner 3 -- first Mars attempt, nose fairing failure |
-| Mariner Program | 1 catastrophe, 1 success, 1 fairing failure | Mars restarts the failure counter |
-| Separation Failure Mode | 2nd instance | Explorer 5 (11) + Mariner 3 (34) |
-| Fringillidae Family | 3 species | Pine Siskin (12), Cassin's Finch (33), Red Crossbill (34) |
-| Cryptic Species | New category | 10+ call types inside Red Crossbill complex |
-| Voice-as-Identity | Extreme case | Subspecies distinguished by flight-call spectral shape |
-| Nomadic/Irruptive Species | 4 documented | Pine Siskin, Cedar Waxwing, Bohemian Waxwing, Red Crossbill |
-| CD 1960s R&B Ecosystem | 3 entries | Dynamics + English + Tempos (vocal groups + solo) |
-| Fairing Metaphor | Cross-domain | Mariner nose fairing ↔ Red Crossbill mandibles |
-| Ambition-Failure Scaling | Documented | Venus converged fast; Mars starts failure cycle over |
+### What Worked
+
+- **The fairing metaphor carried the cross-track sync without forcing.** Mariner 3's nose shroud and the Red Crossbill's crossed mandibles are both specialized separation structures with narrow working envelopes. The parallel is structural, not decorative, and it let Part A and Part B share a single analytical frame without either side distorting to fit.
+- **Jack N. James's twenty-three-day recovery gave the NASA track a definite narrative shape.** Rather than ending with the Mariner 3 loss, the track continues through the parallel-stream recovery and the Mariner 4 success at Mars, which converts the degree from a simple failure report into a failure-and-recovery diptych.
+- **The Red Crossbill complex opens the cryptic-species category cleanly.** Ten-plus call types inside one name is a much stronger taxonomic proposition than the Oregon Junco lumping at degree 11, and the engine now has two independent taxonomic instabilities documented in opposite directions (one lumped, one splitting).
+- **Separation-failure mode is now a cross-program pattern rather than a per-mission accident.** Explorer 5 at 11 plus Mariner 3 at 34 gives the engine its first mechanically-identical failure across two different programs, which is a stronger structural claim than any single-program failure repeats could make.
+- **The Western Toad *Anaxyrus boreas* organism dedication is substantively aligned.** The tadpole-in-body failure analog is biologically exact for the spacecraft-in-shroud failure, down to the energy-depletion timescale differing only by scale factor.
+
+### What Could Be Better
+
+- **The Tempos discography is not documented at the release level.** Specific track titles, release years, and label imprints for the Tempos remain unspecified in the source research. Future refinement passes should identify at least one specific Tempos recording and cite it against a national-label pipeline check.
+- **The $12.5 million Mariner 3 cost figure needs a primary-source citation.** The estimate is broadly accepted but rarely sourced; a JPL or NASA budget-document reference should be added in a future pass.
+- **The ten-plus call-type count for Red Crossbill is a floor, not a census.** Current ornithological consensus places the count between ten and twelve, but studies through 2020 suggest additional types may exist in North America alone. The engine's count should be updated as the literature refines.
+- **The Western Toad organism-to-mission coupling was stated rather than elaborated.** A future pass could add a dedicated *Anaxyrus boreas* subsection that works out the metamorphic-climax-to-fairing-separation analog at the specific-mechanism level.
+- **The James template's persistence across six decades of JPL practice was asserted rather than quantified.** Specific cross-reference to Viking, Galileo, and Mars Exploration Rovers recoveries would strengthen the claim.
+
+### Carry-Forward Items from Degree 34
+
+- **Mariner program arc opens at Mars.** Three missions in (1 Venus failure, 1 Venus success, 1 Mars failure). Mariner 4 closes the Mars opening failure in degree 35.
+- **Separation failure mode documented twice.** Explorer 5 and Mariner 3. Cross-program fingerprint.
+- **Fringillidae at three species.** Pine Siskin, Cassin's Finch, Red Crossbill. Fourth finch will extend the family thread.
+- **Cryptic-species category opened.** Future complexes (Empidonax, Pacific Wren, various *Sphyrapicus*) track against this thread.
+- **Nomadic/irruptive species at three.** Pine Siskin, Bohemian Waxwing, Red Crossbill. Two families, three species, same ecological strategy.
+- **CD 1960s R&B ecosystem at three entries.** Dynamics, English, Tempos. Two forms (vocal group + solo) documented.
+- **Jack N. James in dedication roster.** Parallel-stream failure-recovery template.
+- **Mariner 3 as preserved artifact.** Engine's first still-existing spacecraft, in heliocentric orbit near 1 AU, available for hypothetical future rendezvous.
+
+## Lessons Learned
+
+1. **New programs open their target sequences with failure.** Mariner reached Venus on the second attempt and has now opened the Mars sequence with a failure. Every new destination the engine has documented starts with a catastrophic failure that teaches the subsequent missions what they need to know. The pattern is not pessimistic; it is stochastic. First attempts in any new domain are the fastest possible teachers.
+
+2. **Separation is a cross-program failure axis.** Two documented instances (Explorer 5 at 11, Mariner 3 at 34) across thirteen engine-degrees and two different programs. The category of "two components that should have come apart did not" is now an engine-tracked failure mode rather than a per-mission accident. Future engine degrees will continue to register separation-failure instances against this axis.
+
+3. **Specialized separation structures operate in narrow envelopes on both sides of the biological/mechanical boundary.** Mariner 3's honeycomb shroud warped when moisture trapped in the core vaporized under aerodynamic heating; the Red Crossbill's crossed mandibles fail when they encounter a cone outside their conifer specialization; the Western Toad's metamorphic climax fails if lungs, limbs, or skin do not transition on schedule. All three systems have graceful-failure versions and catastrophic versions, and the engineering or evolution in each case is tuned to stay inside the graceful region.
+
+4. **Parallel-stream recovery is the JPL failure-management template.** Jack N. James converted the Mariner 3 loss into five simultaneous streams (investigation, design, test, fabrication, installation) coupled only at the handoff boundaries. The twenty-three-day recovery shipped Mariner 4 within the Mars window. The template has persisted at JPL for six decades through Viking, Galileo, Mars Climate Orbiter, and the Mars Exploration Rovers.
+
+5. **Voice-as-identity has no ceiling the engine has reached.** Pacific-slope Flycatcher (6) used voice to separate species where morphology could not. Red Crossbill (34) uses voice to separate cryptic species within a named species. Future degrees may document voice separating clinal variants, breeding populations, or individual recognition within a social group. The axis extends further than the engine has documented so far.
+
+6. **Taxonomy can be both lumped and split in the same engine.** The Oregon Junco at degree 11 was lumping (five named forms collapsed into one). The Red Crossbill at degree 34 is splitting (one species potentially ten-plus). Both are taxonomic instabilities, and the engine documents both without editorial resolution -- the instability itself is the phenomenon, not the resolution.
+
+7. **Ambition scales the failure budget.** Venus is closer than Mars. The Mariner program's willingness to fail scales with how far the spacecraft has to reach. The Mars sequence will require Mariner 4, 6, 7, 8, and 9 to resolve. Each destination restarts the failure counter, and the counter's height scales with the target's orbital distance.
+
+8. **Nomadic strategies cross families.** Pine Siskin and Red Crossbill (Fringillidae) plus Bohemian Waxwing (Bombycillidae) give the engine three irruptive species across two families. Resource-patchiness responses evolve independently in multiple taxonomic branches and are registered in the engine as a strategy category rather than a family trait.
+
+9. **The Central District's 1960s R&B scene is an ecosystem, not a headline.** Three entries in eight degrees (Dynamics at 27, English at 33, Tempos at 34) with two distinct forms represented. The engine documents the neighborhood at ecosystem resolution because the neighborhood's musical output supported that resolution.
+
+10. **Preserved artifacts persist as engine references.** Mariner 3 is still in heliocentric orbit, still inside its shroud, near 1 AU. It is the first engine artifact that still physically exists as an intact object rather than as debris, fragments, or a lunar impact site. Future engine entries that preserve can be cross-referenced against the Mariner 3 preservation precedent.
 
 ## Cross-References
 
 | Thread | Degree 34 Entity | Role |
 |--------|-----------------|------|
-| S36 | The Tempos | Artist -- third 1960s CD R&B entry, vocal group form |
-| SPS | Red Crossbill | Species -- third Fringillidae, 10+ cryptic call types, nomadic |
-| NASA | Mariner 3 | Mission -- first Mars attempt, nose fairing didn't separate |
-| Degree 11→34 | Explorer 5 → Mariner 3 | Separation-failure mode recurs across programs |
-| Degree 12→33→34 | Pine Siskin → Cassin's → Red Crossbill | Fringillidae reaches 3 species |
-| Degree 6/13 → 34 | Flycatcher / Vireo → Red Crossbill | Voice-as-identity reaches subspecies level |
-| Degree 11→34 | Oregon Junco → Red Crossbill | Lumping/splitting pattern generalizes |
-| Degree 27→33→34 | Dynamics → English → Tempos | CD 1960s R&B layer fills to 3 |
-| Degree 30-31 → 34 | Venus (Mariner 1-2) → Mars (Mariner 3) | Mariner program expands targets |
+| S36 | The Tempos | Third 1960s CD R&B entry; second vocal-group form; E=5 soul-tier energy; local-label production |
+| SPS | Red Crossbill | Third Fringillidae; first cryptic-species complex; third nomadic species; voice-as-identity at sub-species level |
+| NASA | Mariner 3 | First American Mars attempt; payload shroud failed to separate; nine-hour battery death; still in heliocentric orbit |
+| NASA Organism | *Anaxyrus boreas* (Western Toad) | Metamorphic-climax failure analog; biological parallel of spacecraft dying inside fairing |
+| Dedication | Jack N. James | Mariner 3/4 project manager, JPL; parallel-stream failure-recovery template; twenty-three-day Mariner 4 shroud rebuild |
+| Degree 11 -> 34 | Explorer 5 -> Mariner 3 | Separation-failure mode recurs across two different programs; second documented instance |
+| Degree 30 -> 31 -> 34 | Mariner 1 -> Mariner 2 -> Mariner 3 | Mariner program arc: Venus failure, Venus success, Mars failure; program expansion from Venus to Mars |
+| Degree 12 -> 33 -> 34 | Pine Siskin -> Cassin's Finch -> Red Crossbill | Fringillidae reaches three species; family thread confirmed |
+| Degree 6 -> 13 -> 34 | Pacific-slope Flycatcher -> Hutton's Vireo -> Red Crossbill | Voice-as-identity axis extends from species level to sub-species/cryptic level |
+| Degree 11 -> 34 | Oregon Junco -> Red Crossbill | Lumping-splitting taxonomic instability in opposite directions |
+| Degree 27 -> 33 -> 34 | Dynamics -> English -> Tempos | CD 1960s R&B ecosystem at three entries; two forms documented |
+| Degree 12 -> 32 -> 34 | Pine Siskin -> Bohemian Waxwing -> Red Crossbill | Nomadic/irruptive category reaches three species across two families |
+| Degree 30 -> 34 | Ray Charles -> The Tempos | CD 1960s R&B thread scales from global-recognition solo to local-circuit vocal group |
+| Degree 25 -> 34 | Ranger 1 archetype -> Tempos | E=5 soul-tier plateau sustained for nine consecutive degrees |
+| Previous degree | [v1.49.534](../v1.49.534/) | Degree 33 -- Larry English + Cassin's Finch + Pioneer 6 |
+| Next degree | [v1.49.536](../v1.49.536/) | Degree 35 -- Mariner 4 success at Mars expected |
+| Chapter 00 Summary | [chapter/00-summary.md](chapter/00-summary.md) | Chapter-scale summary excerpt |
+| Chapter 03 Retrospective | [chapter/03-retrospective.md](chapter/03-retrospective.md) | Chapter-scale retrospective with numbered lessons |
+| Chapter 99 Context | [chapter/99-context.md](chapter/99-context.md) | Release metadata and parse confidence |
+| Research essay | [NASA 1.35 research.html](../../../www/tibsfox/com/Research/NASA/1.35/research.html) | Mariner 3 deep research page -- Jack N. James, Lockheed shroud, 23-day recovery |
+| Organism page | [NASA 1.35 organism.html](../../../www/tibsfox/com/Research/NASA/1.35/organism.html) | *Anaxyrus boreas* metamorphic biology |
+
+## Engine Position
+
+```
+v1.49.531  = NASA 1.31  + degree 30  Pass 2  Ray Charles + Barn Swallow + Mariner 1
+v1.49.532  = NASA 1.32  + degree 31  Pass 2  (post-peak transition; Mariner 2 success at Venus)
+v1.49.533  = NASA 1.33  + degree 32  Pass 2  (Bohemian Waxwing nomadic thread)
+v1.49.534  = NASA 1.34  + degree 33  Pass 2  Larry English + Cassin's Finch + Pioneer 6
+v1.49.535  = NASA 1.35  + degree 34  Pass 2  <- THIS RELEASE (The Tempos + Red Crossbill + Mariner 3)
+v1.49.536  = NASA 1.36  + degree 35  Pass 2  <- next (Mariner 4 success at Mars expected)
+```
 
 ## Cumulative Engine Statistics (v1.49.501-535)
 
 | Metric | Value |
 |--------|-------|
 | Paired releases completed | 35 (degrees 0-34) |
+| S36 artists documented | 35 |
+| SPS species documented | 35 |
+| NASA missions aligned | 35 (1.0 through 1.35) |
+| NASA programs active | 4 (Pioneer, Mariner, Surveyor pre-heritage, Ranger complete) |
 | Mariner program | 3 missions (Venus: 1 fail + 1 success; Mars: 1 fail) |
 | Fringillidae species | 3 (Pine Siskin, Cassin's Finch, Red Crossbill) |
-| Nomadic species | 4 |
-| Separation-failure instances | 2 (cross-program) |
-| CD 1960s R&B ecosystem | 3 documented entries |
-| Taxonomic families | 17 |
-| Cryptic species complexes | 1 (Red Crossbill with 10+ call types) |
+| Nomadic/irruptive species | 3 (Pine Siskin, Bohemian Waxwing, Red Crossbill) |
+| Separation-failure instances | 2 (Explorer 5 at 11, Mariner 3 at 34) |
+| CD 1960s R&B ecosystem | 3 entries in two forms (vocal group + solo) |
+| Taxonomic families (SPS) | 17 |
+| Cryptic-species complexes | 1 (Red Crossbill, 10+ call types) |
+| Genre stages | S36 sustained; jazz absent from label at 33-34 |
+| Energy envelope | E=5 sustained in soul quadrant for 9 consecutive degrees |
+| Preserved spacecraft artifacts | 1 (Mariner 3, still in heliocentric orbit) |
+
+## Infrastructure / Files
+
+- `docs/release-notes/v1.49.535/README.md` -- this release note (uplifted to A-grade DEGREE shape)
+- `docs/release-notes/v1.49.535/chapter/00-summary.md` -- chapter-scale summary excerpt
+- `docs/release-notes/v1.49.535/chapter/03-retrospective.md` -- chapter-scale retrospective with numbered lessons
+- `docs/release-notes/v1.49.535/chapter/99-context.md` -- release metadata and parse confidence
+- `S36/research/releases/034-the-tempos/pass2-refinement.md` -- Pass 2 refinement essay (Central District 1960s R&B vocal-group documentation)
+- `SPS/research/releases/034-red-crossbill/pass2-refinement.md` -- Pass 2 refinement essay (Fringillidae, cryptic-species complex, kip-kip-kip flight call)
+- `www/tibsfox/com/Research/NASA/1.35/research.html` -- Mariner 3 deep research page (JPL, Lockheed shroud, Jack N. James, twenty-three-day recovery)
+- `www/tibsfox/com/Research/NASA/1.35/organism.html` -- *Anaxyrus boreas* (Western Toad) organism page
+- Commit: `8fa6fbe9c` (`feat(www): v1.49.535 -- degree 34 paired release (NASA 1.35 + S36/SPS Pass 2)`)
 
 ---
 
-*Degree 34: Mars begins. A spacecraft aimed at the red planet, trapped inside its own nose fairing. A vocal group from the Central District's 1960s soul scene. A finch with crossed mandibles that opens cones no other bird can crack — ten secret species hiding inside one name. The ambition grows. The failures resume. Mars is farther than Venus.*
+*Degree 34: Mars begins. A spacecraft aimed at the red planet, trapped inside its own nose shroud, nine hours of battery life ticking down while four solar panels pressed uselessly against a fairing that would not release. A vocal group from the Central District's 1960s soul scene, recording in Seattle while Jack N. James was converting a Pasadena failure into a twenty-three-day parallel-stream recovery. A finch with crossed mandibles that opens cones no other bird can crack -- ten secret species hiding inside one name, each bill matched to a conifer, each call type tuned by forest acoustics. A Western Toad tadpole in a montane pond dying inside its larval body the same way the spacecraft died inside its fairing, on a timescale six orders of magnitude shorter but with the same architecture of failure. The ambition grows. The failures resume. Mars is farther than Venus. The Mariner 3 that stayed inside its shroud is still in heliocentric orbit at 1 AU, drifting once per year, still the most unobserved object humans have placed in the solar system.*
+
+*"The shroud that would not release taught the shroud that would. The tadpole that could not metamorphose fed the toadlet that could. The fairing is the difference between reaching the target and circling the Sun forever inside the vessel that was supposed to let you out."*
