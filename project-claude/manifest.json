@@ -17,6 +17,14 @@
         "target_dir": ".claude/skills",
         "pattern": "*/SKILL.md",
         "description": "Auto-install any project-claude/skills/<name>/SKILL.md not otherwise listed."
+      },
+      {
+        "kind": "hook-scripts",
+        "source_dir": "hooks",
+        "target_dir": ".claude/hooks",
+        "pattern": ["*.cjs", "*.sh"],
+        "exclude": ["hooks/post-commit"],
+        "description": "Auto-install any project-claude/hooks/*.cjs or *.sh not otherwise listed. Routed through installHookScript for executable bit. .js hooks are handled via standalone[]; post-commit is the git hook installed separately."
       }
     ],
     "standalone": [
