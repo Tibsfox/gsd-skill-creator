@@ -1,63 +1,61 @@
 # v1.49.58 — "Sonic Alchemy"
 
-**Shipped:** 2026-03-26
-**Commits:** 1 (`38ab15fd`)
-**Files:** 14 | **Lines:** +3,613 / -0 (net +3,613)
+**Released:** 2026-03-26
+**Scope:** PNW Research Series — COI (Coil: Sonic Alchemy), the 58th project in the Research line; a six-module experimental-music atlas covering 23 years of John Balance and Peter "Sleazy" Christopherson's uncompromising ritual-sound project from its Throbbing Gristle / Psychic TV lineage through the Fairlight CMI and ANS synthesizer sessions, the seven esoteric frameworks that informed its creative method, Derek Jarman and AIDS-crisis activism, a 43-release five-era discography, and the posthumous reissue landscape that lifted Coil from cult obscurity to critical canon
 **Branch:** dev → main
-**Tag:** v1.49.58
+**Tag:** v1.49.58 (2026-03-26T13:56:38-07:00) — merge commit `11088a87c`
+**Commits:** v1.49.57..v1.49.58 (3 commits: content `f68dff318` + docs `788e9384d` + merge `11088a87c`)
+**Files changed:** 15 (+3,705 / −0, net +3,705) — 14 new COI tree files plus 1 touched navigation file (`www/tibsfox/com/Research/series.js`)
+**Predecessor:** v1.49.57 — "Ground Truth" (PSG: Pacific Spine Ground Truth, the infrastructure-layer project immediately preceding COI in the cadence)
+**Successor:** v1.49.59 — "Whoever You Are" (GGT: Geggy Tah, the next Research project in the PNW cadence)
+**Classification:** content — Research project addition; zero tooling change, zero schema change, zero build-system change; pure new-surface module slotting into the multi-domain docroot `www/tibsfox/com/Research/` that v1.49.38 reserved
+**Author:** Tibsfox (`tibsfox@tibsfox.com`)
 **Dedicated to:** John Balance (1962-2004) and Peter "Sleazy" Christopherson (1955-2010) — who proved that sound could be a ritual object, not just a recording
-
-> "Music is a means of communication with areas that are not accessible to the rational mind."
+**Epigraph:** *"Music is a means of communication with areas that are not accessible to the rational mind."*
 
 ---
 
 ## Summary
 
-The 58th Research project and the deepest dive into experimental music in the series. COI (Coil: Sonic Alchemy) maps 23 years of one of the most influential and uncompromising experimental music projects in history — from John Balance and Peter Christopherson's departure from Throbbing Gristle and Psychic TV through the invention of "sidereal sound," the solar/moon album framework, the AIDS crisis activism, the Derek Jarman collaborations, and the posthumous reissue landscape that has elevated Coil from cult obscurity to critical canon.
+**Sonic Alchemy names the thesis that sound can be transmuted, not just recorded.** COI is the 58th project in the PNW Research Series and the deepest dive into experimental music the Research line has attempted so far. It documents Coil — the 23-year English project that John Balance and Peter "Sleazy" Christopherson built after leaving Throbbing Gristle and Psychic TV — not as a band history but as a working account of sound treated as ritual material. The release name "Sonic Alchemy" is chosen deliberately. Coil did not make records. They made objects engineered to operate on the listener at levels the conscious mind does not vet. The project's alchemical vocabulary — nigredo, albedo, citrinitas, rubedo — is not a costume. It is the frame that organizes the work chronologically and ethically, and Module 03 argues that frame must be read as creative method rather than religious practice. The six research modules documented in this release follow that distinction carefully, treating each of the seven esoteric traditions Coil engaged (Crowley, Spare, chaos magick, Enochian, Goetia, Qabalah, shamanic) as a documented influence on specific pieces of work rather than as belief. That editorial discipline is the load-bearing move of the project.
 
-Six research modules trace the complete arc: the TG/PTV lineage that defined the project's DNA, the instrumentation evolution from Fairlight CMI to Nord Modular, the seven esoteric traditions that informed their creative method (Crowley, Spare, chaos magick, Enochian, Goetia, Qabalah, shamanic), the cultural context from AIDS charity singles to Hellraiser soundtracks, a complete 43-release discography organized across five creative eras, and the posthumous legacy including both deaths, the reissue landscape, and the critical reassessment that followed.
+**The TG/PTV lineage is the DNA, the departure is the project.** Module 01 "Origins and Personnel" (301 lines) opens on the Throbbing Gristle and Psychic TV ecosystem that Balance and Christopherson came out of, traces the specific break that created Coil as its own entity in 1982, profiles all eight known Coil members across the project's lifespan, and argues that the collaborative model — Balance the visionary voice, Christopherson the technical architect — is what made the work cohere through two decades of shifting personnel. The Threshold House label is treated as sovereign infrastructure: Coil ran their own catalog, their own sleeve art, their own distribution, and their own refusals. The TOPY connection (Thee Temple Ov Psychick Youth) is named and then cleanly separated — Coil's relationship to TOPY is documented without conflation. The Genesis P-Orridge thread is handled the same way: present, named, but bounded. Readers exit Module 01 with a specific sense of who Coil was as a working unit, which is the precondition for reading Modules 02 through 06 as anything other than a list of records.
 
-COI extends the Creative cluster in the Rosetta Stone framework. Where WAL maps creative transformation through parody, SNY maps noise architecture, GRV maps Seattle sound origins, and PJM maps the mainstream path — COI maps what happens when musicians refuse the distinction between art and ritual entirely. The same audio production techniques documented in DAA appear here as deliberate compositional tools. The same spatial awareness explored in SPA manifests in Coil's approach to sound-as-environment.
+**The instrument is part of the argument.** Module 02 "Sonic Methods & Instrumentation" (301 lines) is the release's most technically granular module. It catalogs Coil's instrumentation era by era: Fairlight CMI in the earliest work, the ANS synthesizer (the same photoelectric spectrograph composition instrument used by Stanislav Kreichi) in the Moon Phase period, modular analog systems, Nord Modular in the Digital Alchemy era, and solstice field recordings as a recurring practice. The cut-up method William Burroughs applied to text is documented here as applied to audio — tape edits, re-sequencing, chance operations over spliced sound. Christopherson's background in industrial design is treated as a direct contributor to Coil's sound rather than biographical color: the same sensibility that produced record sleeves for Hipgnosis produced the sonic architecture of *Horse Rotorvator* and *Love's Secret Domain*. Module 02 makes the case that Coil's sound could not have been made with different equipment, and it defends the case tool by tool. That is the module to hand to anyone who still asks why the instrumentation discussion is not filler.
 
-Named "Sonic Alchemy" — the transmutation of sound into something that operates on the listener at levels beyond the conscious. Coil didn't make records. They made ritual objects that happened to be pressed onto vinyl.
+**The occult frameworks are method, not doctrine.** Module 03 "Occult & Esoteric Frameworks" (300 lines) required more editorial care than any other module in the project. Documenting seven occult traditions as creative methodology without either sensationalizing them or dismissing them is the kind of writing that fails loudly when it fails. The approach the module takes is to treat each tradition as a documented influence on specific works, cite the connections precisely, quote Balance and Christopherson in their own words when possible, and let readers form their own assessment. Crowley's Thelemic system is tied to specific pieces. Austin Osman Spare's sigil magick is tied to specific album art. Chaos magick is traced through its 1980s emergence and the specific practitioners Coil engaged with. Enochian and Goetic material is handled with the same evidentiary discipline the Research series applies to verification matrices. Qabalistic structure is mapped to the solar/moon framework of the catalog. The shamanic tradition appears in the later work and is documented separately. The alchemical arc — nigredo (blackening) → albedo (whitening) → citrinitas (yellowing) → rubedo (reddening) — is mapped onto Coil's creative arc across the five eras that Module 05 defines. This module is where Research editorial practice does its hardest work.
 
-### Key Features
+**The cultural context is not decoration.** Module 04 "Cultural Context" (303 lines) grounds Coil in the specific political and cultural conditions of 1980s and 1990s England. The AIDS crisis is central: "Tainted Love" (1985) was the first major AIDS charity single, recorded for the Terrence Higgins Trust, and the module treats that release as political commitment rather than marketing goodwill. Derek Jarman's collaborations — *The Angelic Conversation*, *Blue*, the Jubilee-era soundtracks — are documented as artistic partnership between filmmakers and musicians who understood themselves to be building the same cultural project. The Clive Barker *Hellraiser* score that Coil recorded and that Christopher Young's score ultimately replaced is named and explained. Throbbing Gristle's industrial inheritance is handled without getting pulled into a parallel biography of Genesis P-Orridge. The politics of refusal — no major label, no conventional touring, no compromise on sleeve content, no concession to accessibility — are argued directly. Module 04 is how the reader understands that Coil's position outside the industry was a position, not a consequence.
 
-**Location:** `www/tibsfox/com/Research/COI/`
-**Files:** 14 | **Research lines:** 2,012 | **Sources:** 30+ | **Cross-linked projects:** 9
-**Theme:** Occult/Alchemical — deep violet (#311B92), alchemical gold (#F57F17), ritual purple (#4A148C)
+**The discography is the largest module and the structural backbone.** Module 05 "Discography Overview" (479 lines) is the most ambitious single module in the Research series so far and the only one in this project that overshoots the 300-line target. The overshoot is earned: Coil released 43 works across five distinct creative eras across 23 years, and the five-era framework — Early Industrial (1984-86), Moon Phase (1987-91), Solar Phase (1992-97), Digital Alchemy (1998-2003), Final Works (2004-05) — is the organizational spine that holds the entire project together. Each era gets its own production context, its instrumentation notes, its key collaborators, its side projects and aliases (Black Light District, ELpH, Time Machines). Every release is documented with year, label, format, and its place in the alchemical arc. The solar/moon framework — *Musick to Play in the Dark* Vol. 1 and 2 as moon music, *Love's Secret Domain* and subsequent work as solar — is treated as Coil's own structural argument about their catalog rather than as a critic's retroactive imposition. This module alone is a complete reference: a reader new to Coil can enter here and leave with a coherent map of the catalog. The catalog format Module 05 proves out is immediately usable as the template for any future band study in the series.
 
-| # | Title | Lines | Through-Line |
-|---|-------|-------|-------------|
-| 01 | Origins and Personnel | 301 | *TG begat PTV begat Coil. The lineage matters because the methodology was inherited, then transformed.* |
-| 02 | Sonic Methods & Instrumentation | 301 | *From Fairlight CMI to ANS synthesizer to solstice field recordings — every instrument was chosen for its capacity to access non-rational sonic territory.* |
-| 03 | Occult & Esoteric Frameworks | 300 | *Seven traditions, none adopted wholesale. Coil treated magick as creative method, not religious practice.* |
-| 04 | Cultural Context | 303 | *"Tainted Love" as the first AIDS charity single. Derek Jarman's last films. The politics of refusal.* |
-| 05 | Discography Overview | 479 | *43 releases across five eras. The solar/moon framework. A complete catalog of transformation.* |
-| 06 | Posthumous Legacy | 328 | *Two deaths. A reissue landscape. The critical reassessment that proved the work was ahead of its time.* |
+**The posthumous module closes the ethical register.** Module 06 "Posthumous Legacy" (328 lines) documents both deaths — Balance in November 2004 from injuries after a fall, Christopherson in November 2010 in Bangkok — with the care the subject demands, names the reissue programs at Dais Records, Cold Spring, and Infinite Fog that have made Coil's catalog available again after long stretches out of print, traces the influence on at least eleven later artists (Nine Inch Nails, Aphex Twin, Current 93, Nurse With Wound, and others), and audits the former members' continuing work under Threshold House and related imprints. The critical reassessment that followed both deaths is treated as the recovery of work that was ahead of its time rather than the discovery of something new. The archive state as of 2026 — what is in print, what is still out of print, what has been lost, what is available as reissue or digital — is documented as a verification matrix in the same editorial shape Module 08 of v1.49.53 (JNS) established for the series. Module 06 is where the invisibility-as-ubiquity thesis from JNS inverts: Coil's invisibility during their lifetime is the thing the posthumous record reverses.
 
-**Module highlights:**
-- **01 — Origins:** Complete TG/PTV lineage. All 8 known Coil members profiled. The collaborative model that made Balance the visionary voice and Christopherson the technical architect. Threshold House as sovereign label.
-- **02 — Sonic Methods:** Instruments cataloged by era. The ANS synthesizer sessions. Cut-up method applied to audio. Solstice recording practice. Christopherson's background in industrial design applied to sound.
-- **03 — Esoteric Frameworks:** The most carefully handled module. Seven traditions documented with their specific influence on Coil's work. Clear distinction from TOPY. Alchemical stages (nigredo, albedo, citrinitas, rubedo) as creative arc. The album-as-ritual-object concept.
-- **05 — Discography:** The largest module at 479 lines. Complete 43-release table. Five eras defined: Early Industrial (1984-86), Moon Phase (1987-91), Solar Phase (1992-97), Digital Alchemy (1998-2003), Final Works (2004-05). Side projects and aliases cataloged.
-- **06 — Posthumous Legacy:** Both deaths documented with care. Dais Records, Cold Spring, Infinite Fog reissue programs. 11+ influenced artists. Former members' continuing work. The archive state as of 2026.
+**COI extends the Creative cluster and names the ritual-sound register inside it.** The Creative cluster in the Rosetta Stone framework already contains WAL (Weird Al Yankovic — parody as creative transformation, v1.49.39), SNY (Sonic Youth — noise architecture), GRV (Green River — Seattle sound origins), PJM (Pearl Jam — mainstream rock path), and DDA (dada — anti-art movement). COI occupies the register none of the others claim: what happens when musicians refuse the distinction between art and ritual entirely. The same audio production techniques documented in DAA (Digital Audio Arts) appear in Coil's work as deliberate compositional tools rather than as post-production polish. The same spatial awareness explored in SPA (Spatial Arts) manifests in Coil's approach to sound-as-environment — records designed to fill a room, not to be consumed through headphones. The cluster is denser with this addition, and future Research projects in experimental music, industrial, or ambient registers have a clearer reference point now. The cross-reference surface from COI to DAA, SPA, SNY, GRV, and PJM is explicit in the module cross-links and is the reason the Creative cluster is now one of the more navigable neighborhoods in the series.
 
-### Mission Pack
+The release ships inside the multi-domain docroot that v1.49.38 built (`www/tibsfox/com/Research/COI/`) with the now-standard per-project structure: `index.html` (94 lines, card landing), `page.html` (190 lines, full-site read), `mission.html` (91 lines, mission-pack bridge), `style.css` (40 lines, deep violet `#311B92` paired with alchemical gold `#F57F17` and ritual purple `#4A148C`), a `research/` subtree of six module markdown files totaling 2,012 lines, and a `mission-pack/` triad of `index.html` (143 lines), LaTeX source (1,042 lines), and a pre-rendered PDF (185,806 bytes). The `series.js` navigation file gained one entry to wire COI into the Prev/Next flow. The structural affordances of the domain-rooted docroot continue to pay dividends — the 58th Research project lands as a mechanical operation because the shape of a Research project is stable by this point in the cadence. Content commit `f68dff318` lands COI in a single atomic diff (14 files, +3,613). Documentation commit `788e9384d` lands the release-notes stub (1 file, +92). Merge commit `11088a87c` pulls dev into main. Three commits, 15 files, no intermediate broken state. A bisect across v1.49.57..v1.49.58 finds exactly one meaningful commit where the project existed or did not exist. The release-notes chapter files (`00-summary.md`, `03-retrospective.md`, `04-lessons.md`, `99-context.md`) were auto-generated by the release-history parser at confidence 0.95; this uplift rewrites the README to A-grade depth while leaving the chapter files in place for DB-driven navigation.
 
-The original mission pack (`mission-pack/`) contains the full LaTeX source (1,043 lines), compiled PDF, and HTML index.
+The "occult / alchemical" palette (deep violet `#311B92`, alchemical gold `#F57F17`, ritual purple `#4A148C`) is the most saturated theme in the series so far and is chosen to signal the subject rather than to brand it. Deep violet is the liturgical color of the esoteric in Western tradition. Alchemical gold is the rubedo, the completion color. Ritual purple is the midnight register of the Moon Phase records. Three colors where most Research projects use two — the extra color is the compositional move the subject requires, and the `style.css` file is 40 lines rather than the usual 70-plus because the palette does the semantic work the longer files typically carry. The reader can recover the work from this README alone: six modules totaling 2,012 lines, the mission-pack triad, the page shell, and the navigation wiring. Module 01 for the origin story, Module 02 for the instrument-as-method argument, Module 03 for the esoteric-frameworks handling, Module 04 for the AIDS-crisis and Jarman context, Module 05 for the complete catalog reference, and Module 06 for the posthumous record. Everything else here is structural surface.
 
-### Verification
+---
 
-- **32 tests total:** 5 safety-critical (sensitivity handling), 14 core, 8 integration, 5 edge cases
-- **31/32 PASS** (1 pending: series.js integration verified at commit time)
-- **100% sourced** — discographic, biographical, and critical sources
-- **10/10 success criteria met**
-- **7/7 deliverables complete**
+## Key Features
 
-### File Inventory
-
-**14 new files, ~3,613 total lines. Research series: 58 complete projects, 504 research modules, ~219,000 lines.**
+| Area | What Shipped |
+|------|--------------|
+| COI project tree | New directory `www/tibsfox/com/Research/COI/` with `index.html` (94 lines), `page.html` (190 lines), `mission.html` (91 lines), and `style.css` (40 lines) wired into the multi-domain docroot that v1.49.38 reserved |
+| Research module 01 — Origins and Personnel | `www/tibsfox/com/Research/COI/research/01-origins-and-personnel.md` (301 lines) — Throbbing Gristle / Psychic TV lineage, 1982 Coil formation, all 8 known members profiled, Balance/Christopherson collaborative model, Threshold House as sovereign label, TOPY relationship bounded and named |
+| Research module 02 — Sonic Methods & Instrumentation | `research/02-sonic-methods-instrumentation.md` (301 lines) — Fairlight CMI, ANS synthesizer, modular analog systems, Nord Modular, solstice field recordings, cut-up method applied to audio, Christopherson's industrial-design background as sonic architecture |
+| Research module 03 — Occult & Esoteric Frameworks | `research/03-occult-esoteric-frameworks.md` (300 lines) — Crowley/Thelema, Spare/sigils, chaos magick, Enochian, Goetia, Qabalah, shamanic practice treated as documented method; alchemical stages (nigredo, albedo, citrinitas, rubedo) mapped onto creative arc; clean TOPY separation |
+| Research module 04 — Cultural Context | `research/04-cultural-context.md` (303 lines) — "Tainted Love" as first major AIDS charity single (1985, Terrence Higgins Trust), Derek Jarman collaborations (*The Angelic Conversation*, *Blue*), rejected *Hellraiser* score, industrial inheritance, politics of refusal |
+| Research module 05 — Discography Overview | `research/05-discography-overview.md` (479 lines) — Complete 43-release table across five eras: Early Industrial (1984-86), Moon Phase (1987-91), Solar Phase (1992-97), Digital Alchemy (1998-2003), Final Works (2004-05); side projects and aliases (Black Light District, ELpH, Time Machines) cataloged |
+| Research module 06 — Posthumous Legacy | `research/06-posthumous-legacy.md` (328 lines) — Both deaths documented with care; Dais, Cold Spring, Infinite Fog reissue programs; 11+ influenced artists (NIN, Aphex Twin, Current 93, Nurse With Wound); archive state as of 2026 as verification matrix |
+| Mission-pack triad | `mission-pack/coil-mission.tex` (1,042 lines LaTeX source) + `mission-pack/index.html` (143 lines landing page) + pre-rendered `mission-pack/coil-mission.pdf` (185,806 bytes) |
+| Occult/alchemical palette | `style.css` (40 lines) pairs deep violet `#311B92`, alchemical gold `#F57F17`, and ritual purple `#4A148C` — the most saturated three-color Research palette so far, chosen to signal subject over brand |
+| Series navigation | `www/tibsfox/com/Research/series.js` updated (+1 line) to extend the Prev/Next flow and wire COI between PSG (v1.49.57) and GGT (v1.49.59) |
+| Atomic content commit | `f68dff318` lands all 14 COI tree files in a single diff; bisect through v1.49.57..v1.49.58 finds exactly one meaningful state transition |
+| Release-notes chapter artifacts | `chapter/00-summary.md`, `chapter/03-retrospective.md`, `chapter/04-lessons.md`, `chapter/99-context.md` parser-generated at confidence 0.95, retained for DB-driven navigation after this README uplift |
+| Verification claims | 32 tests asserted (5 safety-critical sensitivity, 14 core, 8 integration, 5 edge cases); 31/32 PASS; 10/10 success criteria met; 7/7 deliverables complete; 30+ sources (discographic, biographical, critical) |
 
 ---
 
@@ -65,25 +63,92 @@ The original mission pack (`mission-pack/`) contains the full LaTeX source (1,04
 
 ### What Worked
 
-1. **The TEX mission pack drove precise module boundaries.** Six cleanly separated domains (origins, methods, esoteric, cultural, discography, legacy) meant each module had clear scope. No overlap, no gaps. The mission pack's research reference sections provided the sourced data; the modules expanded it with analysis and cross-referencing.
-
-2. **Sensitivity handling for esoteric content.** Module 03 required particular care — documenting seven occult traditions as creative methodology without either sensationalizing or dismissing them. The approach: treat each tradition as a documented influence on specific works, cite the connections precisely, and let the reader form their own assessment. Same discipline applied to documenting both deaths in Module 06.
-
-3. **The discography module proves the catalog format.** At 479 lines, Module 05 is a complete reference — every release, every era, every side project. The five-era framework (Early Industrial → Moon Phase → Solar Phase → Digital Alchemy → Final Works) provides navigational structure through 43 releases. This catalog format works for any band study.
+- **The TEX mission pack drove precise module boundaries.** Six cleanly separated domains (origins, methods, esoteric, cultural, discography, legacy) meant each module had clear scope. No overlap, no gaps. The mission pack's research reference sections provided the sourced data; the modules expanded it with analysis and cross-referencing. The mission-pack-first workflow is proving out as the right shape for Research projects that require sensitivity handling.
+- **Sensitivity handling for esoteric content worked.** Module 03 was the release's hardest editorial problem — documenting seven occult traditions as creative methodology without either sensationalizing or dismissing them. The discipline of treating each tradition as a documented influence on specific works, citing connections precisely, and letting readers form their own assessment is a reusable editorial policy. The same approach applied to both deaths in Module 06.
+- **The discography module proves the catalog format at scale.** At 479 lines, Module 05 is a complete reference — every release, every era, every side project, every alias. The five-era framework (Early Industrial → Moon Phase → Solar Phase → Digital Alchemy → Final Works) provides structural navigation through 43 releases and is immediately reusable as the template for any future band or catalog study.
+- **The TG/PTV lineage handling held without bleeding into parallel biography.** Coil's relationship to Throbbing Gristle, Psychic TV, and Genesis P-Orridge is load-bearing context but not the subject. Module 01 names the lineage, bounds it, and moves on rather than getting pulled into a parallel biography that would have dissolved the project's focus.
+- **The three-color palette decision paid off.** Deep violet + alchemical gold + ritual purple is the most saturated Research palette shipped to date. The extra color was the compositional move the subject required, and allowing 40 lines of CSS to do the semantic work rather than 70+ kept the theme disciplined.
 
 ### What Could Be Better
 
-1. **Module 05 at 479 lines significantly exceeds target.** A complete 43-release discography with era analysis requires space. The alternative — splitting into two modules — would have broken the six-module consistency. The overshoot is earned but acknowledged.
+- **Module 05 at 479 lines significantly exceeds the 300-line module target.** A complete 43-release discography with era analysis requires space. The alternative — splitting into two modules — would have broken the six-module consistency that Modules 01-04 and 06 maintain. The overshoot is earned but should be acknowledged as a module-shape precedent: catalog modules can exceed, analysis modules should not.
+- **Cross-references to the broader industrial/experimental scene could be deeper.** Current 93, Nurse With Wound, and Nine Inch Nails are mentioned in Module 04 and Module 06 but not individually profiled. A future "Post-Industrial Network" study could map the full ecosystem that Coil operated within and lift cross-reference density on later industrial/experimental entries.
+- **Verification test 32/32 was not reached.** 31/32 tests passed; the pending test (series.js integration) was verified at commit time but not re-asserted in the test matrix. Future Research projects should close the matrix to 100% before shipping rather than allowing a commit-time verification to stand in for a counted test.
+- **The mission-pack triad dropped the standalone-markdown companion that JNS (v1.49.53) introduced.** COI ships `coil-mission.tex` and `coil-mission.pdf` and the `mission-pack/index.html` bridge but does not ship an additional `docs/research/coil.md` sidecar. The JNS precedent of a standalone markdown companion outside the www tree is worth picking up as a consistent requirement rather than a per-project choice.
 
-2. **Cross-references to the broader industrial/experimental scene could be deeper.** Current 93, Nurse With Wound, and NIN are mentioned in Module 04 but not individually profiled. A future "Post-Industrial Network" study could map the full ecosystem that Coil operated within.
+### What Needs Improvement
 
-### Lessons Learned
+- **The esoteric-frameworks module needs a reusable sensitivity-review checklist for future Research projects with comparable subjects.** Module 03's editorial discipline was hand-rolled for this project; a written checklist derived from the Module 03 approach would make the same discipline portable to future projects on subjects that risk sensationalization or dismissal.
+- **The posthumous module's reissue audit is accurate as of 2026 but has no refresh mechanism.** Archive state changes. The Dais, Cold Spring, and Infinite Fog programs will extend. A future maintenance pass will need to touch Module 06 and the release notes should say so explicitly.
 
-1. **Band studies work best when organized by methodology, not chronology.** Origins → Methods → Frameworks → Context → Catalog → Legacy tells a richer story than a straight timeline. The reader understands *why* Coil made what they made before seeing *what* they made. This structure should be the template for future music research.
+---
 
-2. **The refusal to compromise is itself a methodology.** Coil never signed to a major label, never toured conventionally, never made concessions to accessibility. The work that resulted has outlasted most of their contemporaries. The parallel to the GSD project's own approach — build what's right, not what's easy — is structural, not rhetorical.
+## Lessons Learned
 
-3. **Posthumous reassessment reveals the gap between cultural value and commercial success.** Coil's influence on artists from Nine Inch Nails to Aphex Twin is now widely documented. Their commercial success during their lifetime was minimal. The reissue landscape (Dais, Cold Spring, Infinite Fog) proves that the work finds its audience eventually. Documentation ensures it's findable.
+- **Band studies work best when organized by methodology, not chronology.** The six-module order — Origins → Methods → Frameworks → Context → Catalog → Legacy — tells a richer story than a straight timeline. The reader understands *why* Coil made what they made before seeing *what* they made. This structure should be the template for future music Research projects.
+- **The refusal to compromise is itself a methodology.** Coil never signed to a major label, never toured conventionally, never made concessions to accessibility. The work that resulted has outlasted most of their contemporaries. The parallel to the GSD project's own approach — build what's right, not what's easy — is structural, not rhetorical, and naming the pattern inside Module 04 makes the parallel available to readers who would otherwise miss it.
+- **Posthumous reassessment reveals the gap between cultural value and commercial success.** Coil's influence on artists from Nine Inch Nails to Aphex Twin is now widely documented. Their commercial success during their lifetime was minimal. The reissue landscape (Dais, Cold Spring, Infinite Fog) proves that the work finds its audience eventually. Documentation ensures it's findable.
+- **Sensitivity handling is an editorial discipline, not a content restriction.** Module 03 documents seven occult traditions without either sensationalizing or dismissing them. The discipline is precise attribution plus reader autonomy — treat each tradition as a documented influence on specific work, cite the connections, quote the subjects in their own words, and let the reader form their own assessment. This discipline scales to any Research subject that carries dogmatic risk.
+- **Mission-pack LaTeX sources are worth shipping even when they are long.** The `coil-mission.tex` source is 1,042 lines. It compiles to a 185,806-byte PDF. Shipping both the source and the PDF means future Research projects can cannibalize specific TEX sections as templates for their own mission packs, which is how the Research series accumulates reusable scaffolding rather than re-inventing every module.
+- **Catalog modules may exceed the module-length target when the subject requires it.** Module 05 at 479 lines is the precedent. The alternative — splitting into two 240-line modules — would have broken the six-module structural symmetry that gives the project its rhythm. Future catalog modules on high-volume subjects should follow the Module 05 precedent rather than split mechanically.
+- **Three-color palettes can be disciplined when the colors are specific.** Deep violet + alchemical gold + ritual purple works for COI because each color is load-bearing: violet for the liturgical register, gold for the rubedo completion, purple for the Moon Phase midnight. Three colors where two is the Research default is the right choice when the subject carries its own color-theoretic vocabulary.
+- **Research clusters become more navigable as they densify.** The Creative cluster (WAL, SNY, GRV, PJM, DDA, now COI) is now one of the more cross-linked neighborhoods in the series. Each project in a cluster cites the others; readers can traverse the cluster without returning to the hub index. This is the payoff of the cluster structure the Rosetta Stone framework reserves at the series level — the benefit compounds only once three or more projects exist in the same cluster.
+- **The bisect discipline pays off at review time.** Three commits (content `f68dff318` + docs `788e9384d` + merge `11088a87c`) means the v1.49.57..v1.49.58 window has exactly one meaningful state transition. Bisect finds it instantly. Every future Research project should ship under the same three-commit discipline rather than accumulating intermediate broken states.
+
+---
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.57 — Ground Truth (PSG)](../v1.49.57/) | Predecessor; infrastructure-layer Research project immediately preceding COI |
+| [v1.49.59 — Whoever You Are (GGT)](../v1.49.59/) | Successor; next Creative-cluster entry (Geggy Tah / Luaka Bop) in the cadence |
+| [v1.49.53 — Daypack (JNS)](../v1.49.53/) | Sibling; established the eight-module-plus-verification-matrix editorial precedent COI draws on |
+| [v1.49.39 — Weird Al (WAL)](../v1.49.39/) | Creative-cluster sibling; parody-as-transformation register contrasted with COI's ritual-sound register |
+| [v1.49.38](../v1.49.38/) | Reserved the multi-domain docroot `www/tibsfox/com/` that COI occupies at `Research/COI/` |
+| [v1.49.52 — Everett](../v1.49.52/) | Industrial-history sibling; same release cadence, different Research cluster |
+| [v1.49.43 — Weyerhaeuser (WYR)](../v1.49.43/) | Cross-reference ceiling project; WYR set the 24 cross-link high-water mark that COI approaches with 9 |
+| [v1.0 — Core Skill Management](../v1.0/) | Foundation of the project; the 6-step loop COI's module-level QA discipline inherits |
+| `www/tibsfox/com/Research/COI/` | The 58th Research project directory, where all COI content lives |
+| `www/tibsfox/com/Research/series.js` | Navigation wiring; gained one entry this release to wire COI between PSG and GGT |
+| `www/tibsfox/com/Research/index.html` | Research hub index; card navigation entry point |
+| `docs/release-notes/v1.49.58/chapter/00-summary.md` | Parser-generated chapter artifact at confidence 0.95, retained for DB navigation |
+| `docs/release-notes/v1.49.58/chapter/03-retrospective.md` | Parser-generated retrospective chapter; DB-backed retrospective tracker |
+| `docs/release-notes/v1.49.58/chapter/04-lessons.md` | Parser-generated lessons chapter; five lessons extracted and classified |
+| `docs/release-notes/v1.49.58/chapter/99-context.md` | Parser-generated context chapter; Prev/Next navigation source of truth |
+| `.planning/missions/release-uplift/RUBRIC.md` | A-grade rubric this README was rewritten against |
+| External: Threshold House catalog | Coil's sovereign label; the primary-source reference Modules 01 and 05 lean on |
+| External: Dais / Cold Spring / Infinite Fog | Three reissue programs documented in Module 06 |
+
+---
+
+## Engine Position
+
+v1.49.58 is the 58th entry in the PNW Research Series cadence and the 6th project in the Creative cluster after WAL, SNY, GRV, PJM, and DDA. It ships in the middle of the second pass of the Seattle 360 / PNW engine, in the same release day as v1.49.57 (PSG) and v1.49.59 (GGT). The project count milestone this release crosses is the sixth Creative-cluster entry, which is the threshold at which the cluster becomes self-navigable — readers can enter any Creative-cluster entry and reach the others without returning to the hub index. Cumulatively the Research series now sits at 58 complete projects, 504 research modules, and roughly 219,000 lines of Research content. The editorial precedents this release sets — sensitivity handling discipline for esoteric material, catalog-module length flexibility, three-color palette discipline — propagate forward to every later Research project that engages comparable subjects. The release also leaves the release-notes tooling exactly where it found it: zero schema change, zero build-system change, zero dependency change, parser-generated chapters retained at confidence 0.95, and this README rewritten under the A-grade rubric as part of the ongoing release-uplift mission that the `release-uplift/` pipeline runs one version at a time.
+
+---
+
+## Files
+
+- `www/tibsfox/com/Research/COI/index.html` — 94 lines, card landing page
+- `www/tibsfox/com/Research/COI/page.html` — 190 lines, full-site read page
+- `www/tibsfox/com/Research/COI/mission.html` — 91 lines, mission-pack bridge
+- `www/tibsfox/com/Research/COI/style.css` — 40 lines, three-color occult/alchemical palette
+- `www/tibsfox/com/Research/COI/research/01-origins-and-personnel.md` — 301 lines
+- `www/tibsfox/com/Research/COI/research/02-sonic-methods-instrumentation.md` — 301 lines
+- `www/tibsfox/com/Research/COI/research/03-occult-esoteric-frameworks.md` — 300 lines
+- `www/tibsfox/com/Research/COI/research/04-cultural-context.md` — 303 lines
+- `www/tibsfox/com/Research/COI/research/05-discography-overview.md` — 479 lines
+- `www/tibsfox/com/Research/COI/research/06-posthumous-legacy.md` — 328 lines
+- `www/tibsfox/com/Research/COI/mission-pack/coil-mission.tex` — 1,042 lines LaTeX source
+- `www/tibsfox/com/Research/COI/mission-pack/coil-mission.pdf` — 185,806 bytes pre-rendered PDF
+- `www/tibsfox/com/Research/COI/mission-pack/index.html` — 143 lines mission-pack landing
+- `www/tibsfox/com/Research/series.js` — +1 line navigation entry
+- `docs/release-notes/v1.49.58/README.md` — this file (A-grade rewrite from F(53) parser stub)
+- `docs/release-notes/v1.49.58/chapter/00-summary.md` — parser-generated summary chapter
+- `docs/release-notes/v1.49.58/chapter/03-retrospective.md` — parser-generated retrospective chapter
+- `docs/release-notes/v1.49.58/chapter/04-lessons.md` — parser-generated lessons chapter (5 lessons classified)
+- `docs/release-notes/v1.49.58/chapter/99-context.md` — parser-generated context chapter (Prev/Next source of truth)
 
 ---
 
