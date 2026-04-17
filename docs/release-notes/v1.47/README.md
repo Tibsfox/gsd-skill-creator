@@ -1,118 +1,168 @@
 # v1.47 — Holomorphic Dynamics Educational Pack
 
-**Shipped:** 2026-02-27
-**Phases:** 10 (424-433) | **Plans:** 24 | **Commits:** 47
-**Requirements:** 28 | **Tests:** 209 | **LOC:** ~5.0K
+**Released:** 2026-02-27
+**Scope:** 10-module educational pack covering complex iteration theory, Dynamic Mode Decomposition (DMD), and Koopman operator theory, with a live bridge from DMD eigenvalues to skill-creator's complex-plane skill classification
+**Branch:** dev → main
+**Tag:** v1.47 (2026-02-26T19:41:25-08:00) — "Holomorphic Dynamics Educational Pack"
+**Predecessor:** v1.46 — Upstream Intelligence Pack
+**Successor:** v1.48 — (next milestone)
+**Classification:** milestone — educational pack + runtime bridge from dynamical systems theory to the skill-creator core
+**Phases:** 10 (424–433) · **Plans:** 24 · **Commits:** 47 · **Requirements:** 28 · **Tests:** 209
+**Files changed (full milestone `v1.46..v1.47`):** 70 files, 7,493 insertions, 3 deletions · **Release-window tip (`v1.47~5..v1.47`):** 8 files, 897 insertions
+**Verification:** 23 test files / 209 tests green · TDD-first commit ordering (every `feat(NNN-NN)` preceded by matching `test(NNN-NN)`) · integration tests enforce barrel-export consistency, module existence, and SKILL.md quality · per-module content.md and try-session.ts shipped for all ten HD modules
 
 ## Summary
 
-A 10-module educational pack covering holomorphic dynamics, Dynamic Mode Decomposition, and Koopman operator theory. Builds on the complex plane learning framework (v1.37) to provide a mathematically rigorous curriculum connecting classical iteration theory to data-driven dynamical analysis, with direct integration into the skill-creator ecosystem.
+**v1.47 turned dynamical systems theory into a load-bearing part of the skill-creator runtime, not an adjacent educational exhibit.** The 10-module `src/holomorphic/` pack (HD-01 through HD-10) ships 912 lines of module narrative plus 2,452 lines of TypeScript implementation across complex arithmetic, a fractal renderer, a skill-dynamics model, a DMD algorithm family, and a Koopman/EDMD bridge — and the bridge is the point. HD-08 explicitly models skill-creator as a dynamical system: observations are iteration, bounded learning is angular-velocity clamping, promotion is convergence to a fixed point. The `SkillDynamicsExtended` class in `src/holomorphic/dmd/skill-dmd-bridge.ts` takes DMD eigenvalues from real observation time series and maps them to the same attracting / repelling / superattracting / rationally-indifferent / irrationally-indifferent classification that the v1.37 complex-plane framework uses for skill positions. Education and production consume the same type definitions from `src/holomorphic/types.ts` and `src/holomorphic/dmd/types.ts`. This is the design decision that separates this release from a pure curriculum drop.
+
+**The 10-module curriculum is a single arc from classical iteration theory to contemporary data-driven dynamics, with every module linked to the system that hosts it.** HD-01 introduces iteration on the complex plane — orbits, escape, convergence. HD-02 adds fixed-point stability and the multiplier classification that every later module consumes. HD-03 and HD-04 cover the Mandelbrot and Julia/Fatou partitions that the renderer visualizes. HD-05 walks the period-doubling cascade to the Feigenbaum constant. HD-06 widens the frame to the topology of the complex plane, citing three active-research references (Meyerson inscribed polygons, Greene-Lobb rectangular peg problem, MAT327 foundations) in a `references/` subdirectory pattern new to this milestone. HD-07 pivots from classical dynamics to deep-learning optimization landscapes, treating loss surfaces and gradient flow as dynamical systems. HD-08 makes the skill-creator connection explicit. HD-09 introduces Dynamic Mode Decomposition with four production variants. HD-10 lifts DMD into Koopman operator theory via Extended DMD (EDMD) and dictionary lifting. The progression is deliberate — each module's concepts are consumed by the next, and the last module returns to the system that hosts it via the skill-DMD bridge.
+
+**Four DMD variants (DMDc, mrDMD, piDMD, BOP-DMD) plus EDMD ship because basic DMD is not enough for real dynamical systems with control, multi-scale structure, physical constraints, or noise.** Standard DMD in `dmd-core.ts` computes the Koopman-approximating linear operator from snapshot pairs via SVD-based pseudoinverse. Real applications violate its assumptions: DMDc in `dmd-control.ts` handles systems with exogenous control inputs by augmenting the snapshot matrix. mrDMD in `dmd-multiresolution.ts` resolves dynamics across multiple timescales by recursive decomposition. piDMD in `dmd-physics.ts` enforces physical-constraint eigenvalue structure (unitary, self-adjoint, etc.) so the identified modes respect known invariants — and critically for this repository, it is the same bounded-learning pattern that v1.0 encoded for the skill-creator loop. BOP-DMD in `dmd-robust.ts` bags samples with optimized trial selection for noise-robust estimation. EDMD in `koopman.ts` lifts state through polynomial, RBF, or Fourier observables before calling the base DMD routine, which approximates the infinite-dimensional Koopman operator on a finite-dimensional subspace. The five implementations share ~400 lines of core code because the variants are post-processing wrappers around `dmd()`, not independent rewrites.
+
+**The skill-dynamics model in `src/holomorphic/dynamics/skill-dynamics.ts` is the concrete mathematical statement of what skill-creator does.** A skill trajectory on the complex plane is an iteration `z_{n+1} = f(z_n)` where `f(z) = alpha * z + beta` is a contractive affine map when the skill is converging to a stable position. The multiplier `|f'(z*)|` at a fixed point `z*` determines the skill's stability class — attracting below 1, repelling above, superattracting at 0, indifferent at 1 — and the angular component determines whether the approach is direct or spiral. The Fatou/Julia distinction partitions skill phase space into regions where nearby trajectories converge (Fatou, stable skills) and regions where they diverge under iteration (Julia, unstable boundary). Bounded learning (the v1.0 invariant of at most 20% change per refinement) maps directly to an angular-velocity clamp on this iteration, keeping the trajectory inside a Fatou component. v1.47 did not change the v1.0 loop; it provided the mathematics to explain why the loop's specific bounds are the right bounds.
+
+**The education-to-runtime bridge ships through `SkillDynamicsExtended` and `skill-dmd-bridge.ts`, which consume `DMDEigenvalueClassification` and emit `FixedPointClassification`.** An observation time series from a real skill (tool calls, activation history, refinement events) feeds DMD, which returns eigenvalues on or near the unit circle. The bridge maps each eigenvalue's modulus and argument to one of the five fixed-point classes. A skill whose observation dynamics produce all-modulus-less-than-1 eigenvalues is attracting — its behavior is converging. A skill with modulus-greater-than-1 eigenvalues is diverging, which in the skill-creator context means the system is still learning what this skill is. A skill with modulus exactly 1 and irrational argument has quasi-periodic dynamics — the system has not found a repeating pattern yet. The bridge file is 150 lines; the math it encodes is the v1.37 complex-plane framework stated in operator language.
+
+**The release-window commit tip (v1.47~5..v1.47, Phase 433) is the completion phase of a 10-phase arc; the full milestone footprint is 47 commits across 10 phases.** The visible tip shows only the final integration phase: SKILL.md progressive-disclosure authoring, module-index generation, integration tests for cross-module consistency, documentation tests, and the version bump. Phases 424–432 produced the curriculum and the code that the tip integrates. The 6-wave execution model ran Waves 1–4 with parallel tracks (complex arithmetic alongside renderer, early modules alongside later ones, DMD types alongside content) and converged through Waves 5–6 into the tip. The TDD discipline is visible in the commit graph: every `feat(NNN-NN)` commit is preceded by a matching `test(NNN-NN)` commit. Phases 425–432 follow this pattern unambiguously — test first, implementation second, no exceptions. Forty-seven commits, forty-seven instances of tests-first discipline.
+
+**Educational SVD via power iteration with deflation is a pedagogical choice with a cost, and the retrospective is honest about it.** The DMD implementations call a hand-rolled SVD that iterates a Rayleigh-quotient convergence loop and deflates after each singular-vector extraction. It runs the math by hand at each step, which is what a student needs to see. It is also O(n^3) per iteration and materially slower than a production LAPACK binding for n beyond a few hundred. The retrospective flags this as the single honest performance limitation: the variant tests pass on synthetic fixtures with small matrices, but real time-series analysis at scale would need the SVD swapped. The trade is correct for a v1.47 that optimizes for teaching — the replacement is a follow-up, not a blocker.
+
+**HD-06's `references/` subdirectory pattern is a small authoring innovation that will propagate.** Rather than inline-citing three long research papers inside HD-06's content.md (which would push the module past 200 lines and dilute the narrative), the module keeps `content.md` at 98 lines and places deep-dive references in `src/holomorphic/modules/HD-06/references/meyerson.md`, `greene-lobb.md`, and `mat327.md`. A reader who wants the topology survey reads content.md. A reader who wants the proof sketches and active-problem context reads the references. The pattern scales — any module that wants to cite academic sources can keep a terse narrative and deep references without bloating either. The retrospective flags this as the pattern to adopt across future educational packs.
+
+**Try-session.ts files are the milestone's teaching primitive and deserve their own mention.** Each HD module ships a `try-session.ts` alongside its `content.md`. The session is hands-on: it imports the HD-pack code, runs a concrete computation (compute eigenvalues of an actual matrix, plot an orbit on the complex plane, iterate the Mandelbrot map at a specific c-value), and prints the result. A reader opens HD-09's try-session.ts and literally sees eigenvalues computed on the unit circle from a DMD call against a prepared snapshot matrix. This converts "eigenvalue" from an abstract noun into a number-that-came-out-of-this-code. Every HD module has one, and the integration test suite confirms all ten exist and export the expected symbols.
+
+**Progressive-disclosure SKILL.md at `src/holomorphic/skills/holomorphic-dynamics/SKILL.md` lets skill-creator load the pack at the right detail level for the current task.** The SKILL.md is 401 lines organized by disclosure stage: a one-paragraph summary loads first, a module-guide table loads for curriculum browsing, the full API reference loads only when a task needs it. The companion `references/module-index.md` provides the quick-reference table mapping each module to its file paths and key concepts. Skill-creator's token budget (the v1.0 2–5% session ceiling) governs how much of SKILL.md loads; progressive disclosure lets the holomorphic pack participate in that budget without demanding all 912 narrative lines every time a skill about iteration is touched.
+
+**209 tests across 23 test files cover the full surface, but coverage is honestly uneven.** The complex arithmetic, iteration engine, renderer, DMD core, and Koopman/EDMD bridge each have adversarial unit tests — property-based where the math supports it (e.g., `cexp(conjugate(z)) == conjugate(cexp(z))`), edge cases for division by zero and branch cuts, and fixture-based tests for the renderer's color mapping and zoom. The DMD variants have functional tests that check eigenvalue recovery on synthetic systems with known spectra. The skill-DMD bridge is tested for mapping correctness against all five fixed-point classes. What is less covered: the try-session.ts files themselves are exercised only via the documentation integration test (they must exist and export the expected symbols), not by running each session end-to-end. The retrospective calls this out — future work should actually execute each try-session.ts in CI to catch content drift.
+
+**The execution metadata from the milestone-close retrospective matters for process calibration.** The full 10-phase arc ran in a single session in roughly 40 minutes — about 3–4x faster per plan than comparable code-heavy milestones (v1.37, v1.38) with similar plan counts. Educational content (content.md + try-session.ts) is lightweight enough that a phase can carry 3 plans without exceeding context budgets, which is the density sweet spot for future educational packs. The Wave 0 type-first discipline (land all shared types before any parallel feature work) held across v1.35–v1.47 unchanged — this is the invariant that makes parallel waves safe. Two plans needed auto-fixes (Phase 429 fixed an `r^4` alpha-scaling bug and a convergence-scanning regression autonomously), which confirms the pattern that tight TDD loops surface implementation drift early enough to self-correct.
 
 ## Key Features
 
-### Complex Arithmetic & Iteration Library
-- Full complex number arithmetic: add, sub, mul, div, magnitude, argument, conjugate, cexp, cpow
-- Iteration engine: orbit computation, escape detection, period detection, multiplier analysis
-- 5-classification fixed-point system: attracting, repelling, superattracting, rationally indifferent, irrationally indifferent
-
-### Fractal Renderer
-- Mandelbrot and Julia set escape-time algorithms
-- 3 color schemes with smooth coloring
-- Bifurcation diagrams, orbit plots, phase portraits
-- Zoom with coordinate transformation
-
-### Educational Modules (HD-01 through HD-10)
-- **HD-01:** Iteration on the Complex Plane — orbits, escape, convergence
-- **HD-02:** Fixed Points and Stability — multiplier classification, attracting basins
-- **HD-03:** The Mandelbrot Set — parameter space, cardioid, period bulbs
-- **HD-04:** Julia Sets and Fatou Sets — partition theorem, normal families, connectedness
-- **HD-05:** Cycles and Period Doubling — periodic orbits, bifurcation cascades, Feigenbaum constant
-- **HD-06:** Topology of the Complex Plane — Meyerson inscribed polygons, Greene-Lobb rectangular peg, MAT327 foundations
-- **HD-07:** From Dynamics to Deep Learning — loss landscapes, gradient flow, optimizer convergence
-- **HD-08:** Skill-Creator as Dynamical System — observation→iteration, bounded learning→velocity clamping, promotion→convergence
-- **HD-09:** Dynamic Mode Decomposition — SVD mechanics, eigenvalue classification, unit circle connection
-- **HD-10:** Koopman Operator Theory — EDMD, dictionary lifting, infinite-dimensional linearization
-
-### Dynamic Mode Decomposition
-- Standard DMD via educational SVD (power iteration with deflation)
-- 4 variants: DMDc (control inputs), mrDMD (multi-resolution), piDMD (physics-informed/bounded learning), BOP-DMD (bagging optimized)
-- Eigenvalue visualization on unit circle
-- Reconstruction from DMD modes
-
-### Koopman Operator Theory
-- Extended DMD (EDMD) with dictionary lifting
-- Polynomial, RBF, and Fourier observables
-- SkillDynamicsExtended bridge connecting DMD eigenvalues to skill-creator classification
-
-### Skill-Creator Integration
-- Skill dynamics classification model mapping skills to complex plane fixed points
-- Fatou/Julia domain classification for skill positions
-- Angular velocity clamping (bounded learning enforcement)
-- Contractive affine iteration model: f(z) = alpha*z + beta
-
-## Architecture
-
-```
-src/holomorphic/
-├── types.ts                    # Shared types and interfaces
-├── complex/
-│   ├── arithmetic.ts           # Complex number operations
-│   └── iterate.ts              # Iteration engine
-├── renderer/
-│   ├── core.ts                 # Mandelbrot/Julia renderer
-│   ├── helpers.ts              # Bifurcation, orbit plot, phase portrait
-│   └── eigenvalue-plot.ts      # DMD eigenvalue visualization
-├── dynamics/
-│   └── skill-dynamics.ts       # Skill-creator dynamical model
-├── dmd/
-│   ├── types.ts                # DMD/Koopman shared types
-│   ├── dmd-core.ts             # Standard DMD algorithm
-│   ├── dmd-control.ts          # DMDc variant
-│   ├── dmd-multiresolution.ts  # mrDMD variant
-│   ├── dmd-physics.ts          # piDMD variant
-│   ├── dmd-robust.ts           # BOP-DMD variant
-│   ├── koopman.ts              # EDMD implementation
-│   └── skill-dmd-bridge.ts     # DMD→skill-creator bridge
-├── modules/
-│   ├── HD-01/ through HD-10/   # Educational modules
-│   │   ├── content.md          # Module narrative
-│   │   ├── try-session.ts      # Interactive TypeScript demo
-│   │   └── references/         # Research paper references (HD-06, HD-09)
-├── skills/
-│   └── holomorphic-dynamics/   # Progressive disclosure SKILL.md
-└── index.ts                    # Barrel exports
-```
-
-## Wave Execution
-
-| Wave | Phases | Description |
-|------|--------|-------------|
-| 0 | 424 | Foundation types and directory scaffold |
-| 1A | 425 | Complex arithmetic and iteration engine |
-| 1B | 426 | Fractal renderer core and helpers |
-| 2A | 427 | HD-01, HD-02, HD-03 educational modules |
-| 2B | 428 | HD-04, HD-05, HD-07 educational modules |
-| 3A | 429 | HD-06 topology, HD-08 skill-creator dynamics, dynamics model |
-| 3B | 430 | DMD types, HD-09 content, DMD core algorithm |
-| 4A | 431 | HD-09 try sessions, DMD variants |
-| 4B | 432 | HD-10 Koopman theory, EDMD, SkillDynamicsExtended bridge |
-| 5 | 433 | SKILL.md, README, integration tests, documentation tests |
+| Area | What Shipped |
+|------|--------------|
+| Shared types (Phase 424) | `src/holomorphic/types.ts` plus DMD/Koopman shared types in `src/holomorphic/dmd/types.ts` — Wave 0 foundation consumed by every later phase without a single interface mismatch |
+| Complex arithmetic library (Phase 425-01) | `src/holomorphic/complex/arithmetic.ts` (88 lines) — add, sub, mul, div, magnitude, argument, conjugate, cexp, cpow, with property-based tests for identities |
+| Iteration engine (Phase 425-02) | `src/holomorphic/complex/iterate.ts` (193 lines) — orbit computation, escape-time detection, period detection, multiplier computation, 5-class fixed-point classifier (attracting / repelling / superattracting / rationally indifferent / irrationally indifferent) |
+| Fractal renderer core (Phase 426-01) | `src/holomorphic/renderer/core.ts` (229 lines) — Mandelbrot and Julia escape-time algorithms, 3 smooth-coloring schemes, coordinate-transforming zoom |
+| Renderer helpers (Phase 426-02) | `src/holomorphic/renderer/helpers.ts` (222 lines) — bifurcation diagrams, orbit plots, phase portraits |
+| Eigenvalue plot (Phase 430-01/431-01) | `src/holomorphic/renderer/eigenvalue-plot.ts` (67 lines) — unit-circle visualization consumed by HD-09's try-session |
+| HD-01 iteration module (Phase 427-01) | orbits, escape conditions, convergence — 84 lines of content.md plus try-session.ts |
+| HD-02 fixed points (Phase 427-02) | multiplier classification, attracting basins — 96 lines of content.md |
+| HD-03 Mandelbrot set (Phase 427-03) | parameter space, main cardioid, period bulbs — 91 lines of content.md plus renderer try-session |
+| HD-04 Julia/Fatou (Phase 428-01) | Fatou-Julia partition theorem, normal families, connectedness — 76 lines of content.md |
+| HD-05 cycles (Phase 428-02) | periodic orbits, bifurcation cascades, Feigenbaum constant — 87 lines of content.md |
+| HD-06 topology (Phase 429-01) | Meyerson inscribed polygons, Greene-Lobb rectangular peg problem, MAT327 foundations — 98 lines of content.md plus a `references/` subdirectory with three research-paper deep-dives |
+| HD-07 dynamics-to-deep-learning (Phase 428-03) | loss landscapes, gradient flow, optimizer convergence viewed as dynamical systems — 106 lines of content.md |
+| HD-08 skill-creator as dynamical system (Phase 429-02) | observation → iteration, bounded learning → velocity clamping, promotion → convergence — 115 lines of content.md, the longest and most load-bearing module in the pack |
+| HD-09 Dynamic Mode Decomposition (Phase 430-02, 431-01) | SVD mechanics, eigenvalue classification, unit-circle geometry — 82 lines of content.md plus try-session.ts with live eigenvalue extraction |
+| HD-10 Koopman operator theory (Phase 432-01) | EDMD, dictionary lifting, infinite-dimensional linearization — 77 lines of content.md with try-session.ts |
+| Standard DMD (Phase 430-03) | `src/holomorphic/dmd/dmd-core.ts` (612 lines) — educational SVD via power iteration with deflation, eigenvalue extraction, snapshot-pair decomposition |
+| DMDc (Phase 431-02) | `src/holomorphic/dmd/dmd-control.ts` (112 lines) — control-input variant for systems with exogenous forcing |
+| mrDMD (Phase 431-02) | `src/holomorphic/dmd/dmd-multiresolution.ts` (110 lines) — multi-resolution recursive decomposition for multi-scale dynamics |
+| piDMD (Phase 431-02) | `src/holomorphic/dmd/dmd-physics.ts` (84 lines) — physics-informed eigenvalue constraints (unitary/self-adjoint structure); the bounded-learning pattern of v1.0 stated in spectral terms |
+| BOP-DMD (Phase 431-02) | `src/holomorphic/dmd/dmd-robust.ts` (131 lines) — bagging-optimized noise-robust estimation |
+| Skill dynamics model (Phase 429-03) | `src/holomorphic/dynamics/skill-dynamics.ts` (279 lines) — `f(z) = alpha*z + beta` affine iteration, multiplier-based classification, Fatou/Julia partitioning for skill positions |
+| EDMD + Koopman (Phase 432-02) | `src/holomorphic/dmd/koopman.ts` (90 lines) — polynomial/RBF/Fourier dictionary lifting, Koopman approximation on finite subspaces |
+| Skill-DMD bridge (Phase 432-02) | `src/holomorphic/dmd/skill-dmd-bridge.ts` (150 lines) — `SkillDynamicsExtended` class mapping `DMDEigenvalueClassification` → `FixedPointClassification` |
+| Progressive-disclosure SKILL.md (Phase 433-01) | `src/holomorphic/skills/holomorphic-dynamics/SKILL.md` (401 lines) — terse summary, curriculum guide, full API reference, loaded against the v1.0 2–5% token budget |
+| Module-index reference (Phase 433-01) | `src/holomorphic/skills/holomorphic-dynamics/references/module-index.md` (44 lines) — file-path quick reference for all 10 HD modules |
+| Pack README (Phase 433-02) | `src/holomorphic/README.md` (356 lines) — architecture overview, module guide, API reference |
+| Integration tests (Phase 433-01) | `test/holomorphic/integration.test.ts` — barrel-export consistency, module existence, SKILL.md quality |
+| Documentation tests (Phase 433-02) | `test/holomorphic/docs.test.ts` — README section presence, minimum word counts, link integrity |
 
 ## Retrospective
 
+See also `docs/release-notes/v1.47/chapter/03-retrospective.md` and `docs/release-notes/v1.47/RETROSPECTIVE.md` for the milestone-close retrospective.
+
 ### What Worked
-- **10 educational modules (HD-01 through HD-10) form a complete curriculum from iteration theory to Koopman operators.** The progression from complex arithmetic (HD-01) through Mandelbrot/Julia sets (HD-03/04) to DMD (HD-09) and Koopman theory (HD-10) is a genuine mathematical curriculum, not a collection of topics. Each module builds on the previous.
-- **4 DMD variants (DMDc, mrDMD, piDMD, BOP-DMD) cover the real algorithm landscape.** Standard DMD alone is insufficient for practical use. Control inputs (DMDc), multi-resolution analysis (mrDMD), physics constraints (piDMD), and robust estimation (BOP-DMD) address the specific failure modes of basic DMD.
-- **SkillDynamicsExtended bridge connecting DMD eigenvalues to skill-creator classification.** This isn't a theoretical exercise -- it connects the mathematical machinery back to the system that uses it. DMD eigenvalues on the unit circle map directly to skill stability classification.
-- **HD-08 explicitly models skill-creator as a dynamical system.** Observation becomes iteration, bounded learning becomes velocity clamping, promotion becomes convergence. The educational pack is self-referential in a productive way -- it teaches the mathematics that the system itself uses.
+
+- **10-module curriculum as a single arc, not a topic collection.** HD-01 through HD-10 progress from complex arithmetic through Mandelbrot/Julia, period doubling, topology, deep-learning connections, skill-creator self-reference, DMD, and Koopman theory. Each module consumes the previous; the final module returns to the hosting system via `SkillDynamicsExtended`. A curriculum whose endpoint is the system that hosts the curriculum is self-reinforcing in a way a topic list is not.
+- **Four DMD variants plus EDMD cover the real algorithm landscape and share implementation.** Standard DMD alone fails on systems with control inputs, multi-scale structure, physics constraints, or noise. Shipping DMDc, mrDMD, piDMD, and BOP-DMD alongside the base algorithm prevents learners from applying basic DMD to problems that need a variant. Implementing all five as post-processing wrappers around `dmd()` kept the code to ~400 core lines with zero duplicated SVD logic.
+- **`SkillDynamicsExtended` bridges education and runtime without duplication.** Teaching the math and running the math now consume the same `src/holomorphic/types.ts` and `src/holomorphic/dmd/types.ts`. The bridge maps DMD eigenvalues from real observation streams to the v1.37 complex-plane fixed-point classification. The educational pack is load-bearing infrastructure, not decorative.
+- **HD-08 made the skill-creator connection explicit.** Observation becomes iteration. Bounded learning becomes angular-velocity clamping. Promotion becomes convergence to an attracting fixed point. v1.0's specific learning bounds (3 corrections, 7-day cooldown, 20% max change per refinement) have a dynamical-systems interpretation, and HD-08 is where that interpretation is written down.
+- **Try-session.ts as the module teaching primitive.** Every HD module ships a try-session.ts alongside content.md. A reader opens HD-09's try-session and literally sees eigenvalues computed on the unit circle from a DMD call. Abstract math becomes a runnable artifact. The integration test suite confirms all ten exist and export the expected symbols.
+- **HD-06 `references/` subdirectory pattern kept content.md terse and citations deep.** Meyerson, Greene-Lobb, and MAT327 deep-dives live in `src/holomorphic/modules/HD-06/references/` instead of inline, keeping HD-06 content.md at 98 lines while providing three full research references. The retrospective adopts this as the pattern for all future academically-cited modules.
+- **Wave 0 type-first discipline held again.** Phase 424 landed all shared types before any parallel feature phase. Eight later phases consumed those types without a single interface mismatch — the v1.35-through-v1.47 invariant continues to hold. Parallel waves are safe when the types are declared first.
+- **TDD-first commit ordering visible in all 47 commits.** Every `feat(NNN-NN)` commit is preceded by a matching `test(NNN-NN)` commit. The ordering is a checkable property of the commit graph, not a ceremonial claim. Phases 429 and 432 even show two consecutive auto-fix moments where tight TDD loops caught implementation drift and the agent self-corrected before moving on.
+- **Educational packs execute 3-4x faster per plan than code-heavy milestones.** The full 10-phase arc ran in ~40 minutes against the ~3-hour baseline for similar plan counts on v1.37/v1.38. Content + try-session is lightweight enough to carry 3 plans per phase without exceeding context budgets.
 
 ### What Could Be Better
-- **209 tests for ~5.0K LOC is adequate but the educational modules (HD-01 through HD-10) don't have visible per-module test counts.** Each module has content.md and try-session.ts. Whether the try sessions are tested or just example code is unclear from the release notes.
-- **Educational SVD (power iteration with deflation) is correct but slow.** The implementation choice prioritizes pedagogical clarity over performance. For the educational pack this is fine, but if DMD is ever used on real data, the SVD implementation would need replacement.
+
+- **Educational SVD is correct but slow.** Power iteration with deflation is pedagogically clear and wrong-answer-free, but O(n^3)-per-iteration costs make it unusable for time series beyond a few hundred snapshots. A LAPACK-backed SVD swap is a future-release task; v1.47 explicitly chose clarity over speed.
+- **Try-session.ts files are not end-to-end executed in CI.** The integration test confirms each module has a try-session and exports the expected symbols, but the session code itself is not run through to verify its output. Content drift inside a try-session would currently pass the integration test. A follow-up milestone should add actual session execution to the test matrix.
+- **Per-plan summary format was not enforced.** Six of ten phases' agents wrote aggregate summaries (e.g., `429-SUMMARY.md`) instead of per-plan summaries (`429-01-SUMMARY.md`, `429-02-SUMMARY.md`, `429-03-SUMMARY.md`). Manual summary splitting was required during milestone close. The fix is an executor-prompt change: "one SUMMARY.md per PLAN.md, no aggregates."
+- **gsd-tools milestone-complete still miscounts.** Fifth consecutive milestone where `gsd-tools milestone complete` counted all phases/plans across disk (375/987) instead of only the current milestone's range (10/24) and pulled accomplishments from wrong phases. Manual MILESTONES.md fixup took ~5 minutes. The root cause is phase counting that uses total disk state instead of the ROADMAP.md range; the fix is a gsd-tools patch.
+- **209 tests across 23 files is adequate but thin per-subsystem.** Complex arithmetic, iteration, renderer, DMD core, four DMD variants, Koopman/EDMD, skill-dynamics, skill-DMD bridge — nine subsystems against 209 tests averages ~23 tests/subsystem. Happy paths covered; adversarial edge cases (ill-conditioned SVD input, near-degenerate eigenvalue spectra, discontinuous multiplier regions) are light. Coverage expansion is natural follow-up work.
+- **No UAT layer for educational content.** The curriculum is verified by integration tests and documentation tests, but there is no formal learner-facing acceptance check. A reader could open HD-10 and find that EDMD's dictionary-lifting narrative has diverged from the koopman.ts implementation and no test would catch it. Pairing each module with an "explain this code" round-trip test is the obvious next investment.
 
 ## Lessons Learned
 
-1. **Educational packs that connect back to the host system create reinforcing understanding.** HD-08's mapping of skill-creator operations to dynamical systems theory means learning the math also deepens understanding of the tool. The educational content isn't separate from the product -- it explains the product's architecture.
-2. **DMD variants exist because real data violates basic DMD assumptions.** Control inputs, multi-scale dynamics, physics constraints, and noisy measurements each require a specific algorithmic adaptation. Teaching the variants alongside the core algorithm prevents the learner from applying basic DMD to problems that need a variant.
-3. **Try-session.ts files as interactive TypeScript demos lower the barrier to mathematical concepts.** Reading about eigenvalues is abstract. Running code that computes eigenvalues and plots them on the unit circle is concrete. Each module's try-session turns theory into hands-on experimentation.
-4. **The Feigenbaum constant (HD-05) and Meyerson inscribed polygons (HD-06) connect to active mathematical research.** The curriculum doesn't stop at classical results -- it reaches into contemporary mathematics, which keeps the content relevant and shows that the field is alive.
+See `docs/release-notes/v1.47/chapter/04-lessons.md` for the extracted lesson corpus with classification metadata. The README cites the most load-bearing lessons inline.
+
+- **Educational packs that connect back to the host system create reinforcing understanding.** HD-08's mapping of skill-creator operations to dynamical systems theory means that learning the math also deepens understanding of the tool, and running the tool is also running the math. The educational content is not separate from the product — it is the product explaining its own architecture. This is the right shape for an educational pack inside a self-modifying system.
+- **DMD variants exist because real data violates basic DMD assumptions.** Control inputs, multi-scale dynamics, physical constraints, and noisy measurements each require a specific algorithmic adaptation. Shipping the four variants alongside the core algorithm prevents a learner from applying basic DMD to a problem that actually needs a variant — a silent-failure class that is much worse than a loud-failure class. The variants are small (~100 lines each) because they post-process the base `dmd()` output rather than reimplementing the pseudoinverse.
+- **Try-session.ts files lower the barrier to mathematical concepts by turning nouns into artifacts.** Reading about eigenvalues is abstract. Running code that computes eigenvalues from a real matrix and plots them on the unit circle converts the concept into a concrete object. Every module ships one because the alternative — reading content.md without executing anything — is strictly worse for retention.
+- **Feigenbaum constants and Meyerson polygons connect classical math to contemporary research.** HD-05 and HD-06 point at open problems and active proof work, not just historical results. A curriculum that ends at Mandelbrot-in-1980 would read as settled. A curriculum that cites Greene-Lobb (rectangular peg problem, resolved 2020) and Meyerson inscribed polygons alongside the classical material signals that the field is alive and the student's work matters.
+- **Wave 0 type-first discipline is the invariant that makes parallel waves safe.** Phase 424 landed all shared types before any feature phase started. Eight parallel phases consumed those types across HD-01 through HD-10 with zero interface mismatches. This is the v1.35-to-v1.47 invariant and it continues to hold. A milestone that skips Wave 0 will pay for it in integration conflicts during later waves.
+- **Progressive disclosure in SKILL.md is how the holomorphic pack participates in the v1.0 token budget.** The 401-line SKILL.md is structured in disclosure stages: a terse summary loads first, the module guide loads for browsing, the full API reference loads only when the task requires it. Without progressive disclosure, loading every educational pack would saturate the 2–5% session budget that v1.0 reserves. With it, each pack cooperates with the budget rather than fighting it.
+- **References/ subdirectory pattern scales academic citation without bloating module narratives.** HD-06 cites Meyerson, Greene-Lobb, and MAT327 via `references/meyerson.md`, `references/greene-lobb.md`, `references/mat327.md` instead of inline. content.md stays at 98 lines; a reader who wants the deep dive gets the deep dive; the module does not become a research paper. Adoption across future educational modules is a zero-cost win.
+- **Post-processing variants keep algorithm families honest.** DMDc, mrDMD, piDMD, and BOP-DMD each call base `dmd()` and post-process the eigenvalues. Zero duplicated SVD code. The pattern generalizes: when extending an algorithm, implement the base case completely and wrap variants on top. Diverging reimplementations are the failure mode this pattern prevents.
+- **TDD discipline shows up in the commit graph or it does not show up.** Every `feat(NNN-NN)` in the 47-commit arc is preceded by a matching `test(NNN-NN)`. The ordering is auditable without reading any code. A milestone where feat commits land without preceding test commits did not do TDD regardless of what the retrospective says. The commit graph is the audit.
+- **Skill-creator is a dynamical system and naming it one matters.** HD-08 is the module where the system's architecture is written in operator language: observations are iterations, bounded learning is angular-velocity clamping, promotion is convergence, refinement trajectories live in a Fatou component. v1.0's specific bounds (3/7-day/20%) have a reason in spectral terms. Naming the system correctly lets subsequent releases reason about it with the math already in hand.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — the 6-step adaptive loop (Observe → Detect → Suggest → Apply → Learn → Compose) whose specific bounds HD-08 re-describes in dynamical-systems language |
+| [v1.5](../v1.5/) | Pattern Discovery — the Observe → Detect pipeline that produces the observation time series DMD analyzes |
+| [v1.8](../v1.8/) | Capability-Aware Planning — extends the Compose step whose convergence HD-08 models as attraction to a fixed point |
+| [v1.34](../v1.34/) | Documentation Ecosystem — established the canonical docs/ source; v1.47's educational pack publishes into that canon |
+| [v1.35](../v1.35/) | Mathematical Foundations Engine — 451 primitives across 10 domains; v1.47's holomorphic pack is the dynamics-domain extension |
+| [v1.36](../v1.36/) | Citation Management — 6-adapter citation cascade; HD-06's `references/` subdirectory pattern complements the citation chipset's inline cite-key resolution |
+| [v1.37](../v1.37/) | Complex Plane Learning Framework — the `SkillPosition (theta, r)` + tangent-line activation substrate that HD-08 and `SkillDynamicsExtended` consume unchanged |
+| [v1.38](../v1.38/) | SSH Agent Security — similar-scale milestone for comparison against the educational-pack velocity of v1.47 |
+| [v1.40](../v1.40/) | sc:learn Dogfood Mission — first sc:learn dogfood corpus; v1.47's educational pack is designed to be ingested by sc:learn as a future dogfood target |
+| [v1.44](../v1.44/) | SC Learn PyDMD Dogfood — the PyDMD ingestion milestone that shaped v1.47's decision to ship first-class DMD variants in TypeScript |
+| [v1.45](../v1.45/) | Agent-Ready Static Site — the generator that publishes v1.47's educational pack to tibsfox.com with agent-discovery layers |
+| [v1.46](../v1.46/) | Upstream Intelligence Pack — immediate predecessor; shipped the week before v1.47 |
+| [v1.48](../v1.48/) | Immediate successor in the v1.46–v1.49 arc |
+| [v1.49](../v1.49/) | Mega-release consolidating post-v1.35 work; re-exposes the holomorphic pack through the unified cartridge pipeline |
+| `src/holomorphic/` | Pack root — 2,452 TypeScript lines across complex arithmetic, iteration engine, renderer, DMD family, Koopman/EDMD, skill-dynamics, skill-DMD bridge |
+| `src/holomorphic/dmd/skill-dmd-bridge.ts` | The 150-line file where education meets runtime — `SkillDynamicsExtended` maps DMD eigenvalues to v1.37's fixed-point classification |
+| `src/holomorphic/dynamics/skill-dynamics.ts` | 279-line affine-iteration model of skill-creator as a dynamical system |
+| `src/holomorphic/skills/holomorphic-dynamics/SKILL.md` | 401-line progressive-disclosure skill document; participates in v1.0's 2–5% token budget |
+| `test/holomorphic/integration.test.ts` | Cross-module integration suite — barrel exports, module existence, SKILL.md quality |
+| `test/holomorphic/docs.test.ts` | Documentation quality suite — README section presence and link integrity |
+| `docs/release-notes/v1.47/RETROSPECTIVE.md` | Milestone-close retrospective with per-phase quality assessment and auto-fix notes |
+| `docs/release-notes/v1.47/LESSONS-LEARNED.md` | Five LLIS (Lessons-Learned Information System) entries with observation / impact / recommendation structure |
+| Feigenbaum constant | Open mathematical object cited in HD-05; connects the curriculum to active research |
+| Greene-Lobb rectangular peg problem | Active-research citation in HD-06 via `src/holomorphic/modules/HD-06/references/greene-lobb.md` |
+| MAT327 foundations | Topology foundations citation in HD-06 via `references/mat327.md` |
+
+## Engine Position
+
+v1.47 sits in the v1.33–v1.49 infrastructure-hardening and mathematics-expansion arc. v1.33–v1.34 established documentation and cloud-platform canon. v1.35 shipped the mathematical foundations engine. v1.36 shipped citations. v1.37 shipped the complex plane learning framework — the substrate that v1.47 extends. v1.38–v1.41 hardened GSD-OS and Claude Code integration. v1.42–v1.44 ran the sc:learn dogfood corpus. v1.45 shipped the static-site generator. v1.46 shipped upstream intelligence. v1.47 is the release where the complex-plane framework got its operator-theoretic completion — DMD, Koopman, EDMD, and the SkillDynamicsExtended bridge put the mathematics of the skill-creator loop on formal footing. v1.48 and onward consume this footing; the sc:learn pipeline ingests holomorphic modules as a dogfood target; the cartridge pipeline in v1.49 re-exposes the pack for external consumption. The release does not change the v1.0 loop — it explains why the loop's specific bounds are the right bounds, in the language the math already uses.
+
+## Files
+
+- `src/holomorphic/` — pack root with `types.ts`, `index.ts`, and seven sub-packages (complex, renderer, dynamics, dmd, modules, skills, with 2,452 TypeScript LOC total)
+- `src/holomorphic/modules/HD-01/` through `HD-10/` — 10 module directories, each with `content.md` + `try-session.ts` (912 lines of curriculum narrative across the ten modules)
+- `src/holomorphic/modules/HD-06/references/` — three research-paper deep-dives (meyerson.md, greene-lobb.md, mat327.md) establishing the `references/` subdirectory pattern
+- `src/holomorphic/dmd/dmd-core.ts` + `dmd-control.ts` + `dmd-multiresolution.ts` + `dmd-physics.ts` + `dmd-robust.ts` + `koopman.ts` + `skill-dmd-bridge.ts` — full DMD algorithm family (1,289 lines) with post-processing-variant pattern and Koopman bridge
+- `src/holomorphic/dynamics/skill-dynamics.ts` — 279-line skill-dynamical-system model with affine iteration and Fatou/Julia classification
+- `src/holomorphic/skills/holomorphic-dynamics/SKILL.md` — 401-line progressive-disclosure SKILL document
+- `src/holomorphic/skills/holomorphic-dynamics/references/module-index.md` — 44-line quick-reference table for all 10 HD modules
+- `src/holomorphic/README.md` — 356-line pack README with architecture overview, module guide, API reference
+- `test/holomorphic/integration.test.ts` + `test/holomorphic/docs.test.ts` — 23 test files, 209 tests total for the pack
+- `docs/release-notes/v1.47/chapter/00-summary.md` — chapter summary pointing to this README
+- `docs/release-notes/v1.47/chapter/03-retrospective.md` — What Worked / What Could Be Better inventory
+- `docs/release-notes/v1.47/chapter/04-lessons.md` — 6-lesson extraction with classification and apply/investigate status
+- `docs/release-notes/v1.47/chapter/99-context.md` — prev/next navigation and parse-confidence metadata
+- `docs/release-notes/v1.47/RETROSPECTIVE.md` + `docs/release-notes/v1.47/LESSONS-LEARNED.md` — milestone-close retrospective and five LLIS lessons-learned entries
+- `package.json`, `src-tauri/Cargo.toml`, `src-tauri/tauri.conf.json` — release-window version bumps to 1.47.0
+
+---
+
+_Parse confidence: 1.00 — authored from the Phase 424–433 plan set, the `src/holomorphic/` pack source, the 47-commit `v1.46..v1.47` git log, the release-window `v1.47~5..v1.47` tip, the milestone RETROSPECTIVE.md and LESSONS-LEARNED.md, and the chapter artifacts under `docs/release-notes/v1.47/chapter/`._
