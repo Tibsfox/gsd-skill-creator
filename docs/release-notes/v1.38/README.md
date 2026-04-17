@@ -1,74 +1,139 @@
 # v1.38 — SSH Agent Security
 
-**Shipped:** 2026-02-26
-**Phases:** 367-374 (8 phases) | **Plans:** 16 | **Commits:** 39 | **Requirements:** 70 | **Tests:** 260 | **LOC:** ~11.3K
+**Released:** 2026-02-26
+**Scope:** feature milestone — SSH-based agent security architecture for GSD-OS using OS-level sandboxing (bubblewrap/Seatbelt), a zero-knowledge credential proxy, a CVE-informed staging scanner, per-agent worktree isolation, a security dashboard, and a Bootstrap Phase 0 that brings security online before Claude connects
+**Branch:** dev → main
+**Tag:** v1.38 (2026-02-26T02:51:07-08:00) — "SSH Agent Security"
+**Predecessor:** v1.37 — Complex Plane Learning Framework
+**Successor:** v1.39 — GSD-OS Bootstrap & READY Prompt
+**Classification:** feature — security substrate for a self-modifying multi-agent system
+**Phases:** 367–374 (8 phases) · **Plans:** 16 · **Requirements:** 70 · **Tests:** 260 (release) / 16,273 (full regression)
+**Commits:** `e2cb0e7d1..485635c76` (39 in tag window; 5 in `v1.38~5..v1.38` tip window) · **Files changed (tip window):** 18 · **LOC:** ~11.3K
+**Verification:** 70/70 requirements landed · 260 release tests · 80 cross-cutting tests (17 safety-critical SC-01..SC-14 + 63 core/integration) · full regression 16,273 passing · bubblewrap OS enforcement exercised in safety-critical tier · cargo check + tsc --noEmit clean at tip
 
-SSH-based agent security architecture for GSD-OS using OS-level sandboxing (bubblewrap/Seatbelt) and a credential proxy to structurally prevent credential exposure, even under successful prompt injection.
+## Summary
 
-### Key Features
+**SSH Agent Security treats prompt injection as a privilege-escalation attack, not a content-moderation problem.** The central premise of v1.38 is that an agent which can be manipulated through its prompt is an agent whose behavior cannot be trusted, and the only durable response is to remove capabilities and secrets from the agent's environment entirely. The release lands that response as eight phases of structural controls — security foundation types, an OS-level sandbox configurator, a zero-knowledge credential proxy, a CVE-informed staging scanner, per-agent worktree isolation, a security dashboard, a Bootstrap Phase 0 that runs before Claude connects, and the Tauri E2E wiring that exposes all of it through the desktop shell. Seventy requirements close across the window. Two-hundred-sixty release tests ship, including 80 cross-cutting tests (17 of them safety-critical and wired against real bubblewrap enforcement rather than shape-only mocks). The full regression suite stays clean at 16,273 tests. Every commit in the tip window is wired into the security substrate: `e2cb0e7d1` hardens Phase 0 with the LED, magic output, and remote-control SSH forwarding; `dfd1ab30c` wires the security barrel, SecurityState, and seven Tauri commands; `5cba476dd` adds the TypeScript security barrel with IPC constants; `b3c92bcd9` lands the 80 security tests across eight files; `485635c76` bumps package.json, Cargo.toml, and tauri.conf.json to 1.38.0 together so the three-version drift that v1.35 carried does not recur.
 
-**Security Foundation Types (Phase 367):**
-- 5 Zod schemas + 5 serde structs with TS-Rust JSON round-trip parity
-- .planning/security/ directory initialization
-- 52 type tests
+**OS-level sandboxing is the structural boundary that behavior cannot breach.** Phase 368's sandbox configurator detects the host platform (bubblewrap on Linux, Seatbelt on macOS) and generates per-agent profiles for four agent types — exec, verify, scout, and main — that deny access to SSH key directories, credential stores, and the escape primitives a malicious prompt would reach for (nsenter, unshare, chroot, /proc traversal). The point is not that the agent is trusted to avoid these paths; the point is that the kernel refuses to resolve them. A prompt-injected exec agent that tries to `cat ~/.ssh/id_rsa` gets EACCES from the operating system before any application-layer check runs. Safety-critical tests in `tests/security/safety-critical.test.ts` invoke real `bwrap` against the generated profiles and assert that the denied paths are in fact denied — this is SC-01 through SC-14, the suite that will fail the build if the sandbox loses enforcement, not merely if the config shape drifts. Sandbox generation is deterministic and driven by Zod schemas on the TS side and serde structs on the Rust side, with JSON round-trip parity validated in Phase 367's 52 type tests. The kernel is doing the enforcement; the release is verifying that the enforcement still bites.
 
-**OS-Level Sandbox Configurator (Phase 368):**
-- bubblewrap/Seatbelt platform detection
-- Per-agent profiles for 4 agent types (exec/verify/scout/main)
-- SSH key/credential directory denial
-- Escape prevention (nsenter/unshare/chroot/proc)
+**The zero-knowledge credential proxy completes the structural design by removing secrets from the sandbox entirely.** Phase 369 ships a Unix-socket (mode 0600) credential proxy that accepts authentication requests from the sandboxed agent and injects API keys into outbound HTTP traffic without the credential material ever entering the sandbox's memory space. The `SecretString` type wraps every secret with `zeroize-on-drop` semantics so even a coredump written out by a compromised process cannot leak the key. The proxy uses a deny-by-default domain allowlist: a request for `api.anthropic.com` routes through with the Anthropic key attached; a request for `attacker.example.net` gets refused at the proxy layer before any DNS resolution happens. Native credential stores — GNOME Keyring on Linux, macOS Keychain on macOS — hold the underlying secrets so the proxy itself carries no persistent credential state. The design closes the single most-exploited vector in agent systems today, which is "the model gets tricked into writing its own API key into a response." There is nothing for the model to write; the sandbox has no key to exfiltrate.
 
-**Zero-Knowledge Credential Proxy (Phase 369):**
-- SecretString with zeroize-on-drop
-- Unix socket server (mode 0600)
-- Domain allowlist (deny-by-default)
-- API key injection without credential material entering sandbox
-- GNOME Keyring/macOS Keychain native credential stores
+**The CVE-informed staging scanner turns historical incidents into automated gates.** Phase 370's scanner at `src/security/staging-scanner.ts` (wired in through the security barrel at `src/security/index.ts`) implements eight named pattern detectors — SEC-001 through SEC-008 — each derived from a publicly disclosed incident class in the agent-security CVE record: malicious `settings.json` hook injection, API redirect to attacker-controlled endpoints, hook injection through `PreToolUse`/`PostToolUse` payloads, MCP-server risk amplification, sandbox-escape primitives in skill or agent files, hardcoded SSH key references, credential-exfiltration patterns, and base64-obfuscated payloads that hide any of the above. Content that matches any detector is moved to an agent-proof quarantine with deliberately no release mechanism in the codebase. The rationale is blunt: a quarantine with a "release this quarantined item" button is a quarantine that a prompt-injected agent can ask a human to click. The only way to release quarantined content in v1.38 is for a human to move the file out of the quarantine directory using a tool that is not reachable from the agent's capability surface. Eight fixture-based pattern-detection tests (SS-01 through SS-08) exercise the eight detectors against representative attack payloads; the scanner refuses content that it should refuse and lets through content that it should let through.
 
-**CVE-Informed Staging Scanner (Phase 370):**
-- 8 pattern detectors (SEC-001 through SEC-008)
-- Covers settings.json hooks, API redirect, hook injection, MCP risk, sandbox escape, SSH key references, credential exfiltration, base64 obfuscation
-- Agent-proof quarantine (no release mechanism in code)
+**Per-agent worktree isolation maps the security model onto the git model cleanly.** Phase 371 gives each spawned agent its own git worktree and its own sandbox profile that denies read access to every other agent's worktree. An exec agent running in `exec-worktree/` cannot read `verify-worktree/` because the sandbox does not mount it. INTEG — the integration-checking agent — is granted read-across permission in a read-only mode so it can verify that parallel agents have not produced contradictory changes, but INTEG has no write capability outside its own worktree. The `WorktreeCreate` hook auto-generates the appropriate sandbox profile at worktree creation time so the security posture is baked in the moment the worktree exists, not retrofitted when the agent starts. Six agent-isolation tests (AI-01 through AI-06) verify the cross-agent contracts programmatically: if an exec agent can read a verify agent's files, the test fails the build. This is the multi-agent analogue of process isolation, and like process isolation it is cheap to enforce once the substrate is there and expensive to retrofit once it is not. Phase 371 was the cheap moment.
 
-**Per-Agent Worktree Isolation (Phase 371):**
-- Git worktrees with scoped sandbox profiles
-- Cross-agent read denial verified programmatically
-- INTEG read-across with read-only access
-- WorktreeCreate hook auto-generates sandbox profiles
+**Bootstrap Phase 0 makes security a precondition of agent execution, not a service alongside it.** Phase 373 defines a six-step boot sequence that runs before Claude connects: SSH-key presence check, sandbox toolchain installation, per-agent profile generation, credential-proxy startup, end-to-end verification, and LED activation through the magic-level-aware output pipeline. If any step fails, the boot halts hard — there is no graceful-degradation mode that runs the agent without the sandbox. The hardening commit `e2cb0e7d1` added the LED indicator, the magic-level-aware summary output at levels 1–5, the unconditional sandbox-verification hard-stop (BST-07), the IPC event emission to `security.jsonl` (BST-08), and the Remote Control SSH agent-forwarding path (BST-11). The bootstrap-guide skill at `skills/bootstrap-guide/SKILL.md` documents the sequence and makes it discoverable from inside skill-creator itself. Six bootstrap tests (BS-01 through BS-04) assert that the boot sequence respects its contract — no silent failure, no degraded mode, no running the agent before security is verified.
 
-**Security Dashboard (Phase 372):**
-- Shield indicator visible at all 5 magic levels
-- 4 shield states (secure/attention/breach-blocked/inactive)
-- Critical events bypass magic filter
-- Event timeline, full operations view at level 5
+**The Tauri E2E integration exposes the security substrate through the desktop shell without making it dismissible.** Phase 374 wires the Rust `SecurityState` (status, agents, events, `proxy_running`, `sandbox_verified`) into Tauri's managed state, registers seven Tauri commands (`security_get_status`, `security_release_quarantine`, `sandbox_verify_full`, `proxy_health`, `agent_create`, `agent_destroy`, `agent_verify_isolation`), and publishes a TypeScript barrel at `src/security/index.ts` that re-exports Zod schemas, render functions, and IPC constants (`SECURITY_IPC_EVENTS`, `SECURITY_COMMANDS`). Critical security events bypass the magic-verbosity filter so the shield indicator turns red regardless of the user's chosen display level — the one class of event that the user cannot hide because the user cannot choose to hide it. Phase 372's shield indicator stays visible at all five magic levels with four states (secure / attention / breach-blocked / inactive); level 5 exposes the full operations view with the event timeline for audit. Twenty integration tests (INT-01 through INT-10) exercise the end-to-end path from sandbox creation through IPC event delivery into the dashboard render. Both `tsc --noEmit` and `cargo check` pass cleanly at the tip of the window.
 
-**Bootstrap Phase 0 (Phase 373):**
-- Security infrastructure online before Claude connects
-- 6-step boot sequence: SSH key check, sandbox install, profile generation, proxy start, verification, LED activation
-- Hard-stop if verification fails
+The release closes the open question of how a self-modifying multi-agent system defends itself against the class of attacks it is itself capable of executing. The answer — OS-level sandbox, zero-knowledge credential proxy, CVE-informed staging scanner with agent-proof quarantine, per-agent worktree isolation, security dashboard with critical-event bypass, and Bootstrap Phase 0 hard-stop — is the substrate that v1.39's GSD-OS bootstrap, v1.40's sc:learn dogfooding, and every later release that handles untrusted input depend on. The retrospective is honest about the gaps: cross-platform parity requires real testing on both Linux and macOS, the safety-critical ratio (17/80) leaves room for per-detector adversarial suites, and the eight pattern detectors are pattern matching, not semantic analysis. Those gaps are the follow-up work for the v1.40–v1.49 hardening arc, not evasions inside v1.38 itself.
 
-**E2E Integration (Phase 374):**
-- SecurityState in Tauri managed state, 7 Tauri commands
-- IPC event routing, TypeScript barrel
-- 80 cross-cutting tests (17 safety-critical + 63 core/integration)
-- Full regression clean (16,273 total tests)
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| Security foundation types (Phase 367) | 5 Zod schemas in TypeScript paired with 5 serde structs in Rust, JSON round-trip parity verified, `.planning/security/` directory initialized, 52 type tests |
+| OS-level sandbox configurator (Phase 368) | Platform detection (bubblewrap on Linux, Seatbelt on macOS); per-agent profiles for 4 agent types (exec, verify, scout, main); SSH-key and credential-directory denial; escape-primitive blocks (nsenter, unshare, chroot, /proc traversal) |
+| Zero-knowledge credential proxy (Phase 369) | `SecretString` with `zeroize-on-drop`; Unix-socket server at mode 0600; deny-by-default domain allowlist; API-key injection without credential material in sandbox memory; native stores via GNOME Keyring / macOS Keychain |
+| CVE-informed staging scanner (Phase 370) | 8 pattern detectors SEC-001..SEC-008 covering settings.json hook injection, API redirect, PreToolUse/PostToolUse hook injection, MCP risk, sandbox escape, SSH key references, credential exfiltration, base64 obfuscation; agent-proof quarantine with no release mechanism in code |
+| Per-agent worktree isolation (Phase 371) | Git worktrees with scoped sandbox profiles; cross-agent read denial verified programmatically; INTEG read-across in read-only mode; `WorktreeCreate` hook auto-generates sandbox profiles at creation time |
+| Security dashboard (Phase 372) | Shield indicator visible at all 5 magic levels with 4 states (secure / attention / breach-blocked / inactive); critical events bypass magic filter; event timeline plus full operations view at level 5 |
+| Bootstrap Phase 0 (Phase 373) | 6-step boot sequence (SSH key check → sandbox install → profile generation → proxy start → verification → LED activation) with hard-stop on verification failure; magic-level-aware output (levels 1–5); `bootstrap-guide` skill at `skills/bootstrap-guide/SKILL.md` |
+| Phase 0 hardening (commit `e2cb0e7d1`) | BST-07 unconditional sandbox-verification hard-stop; BST-08 IPC event emission to `security.jsonl`; BST-11 Remote Control SSH agent-forwarding |
+| Tauri E2E integration (Phase 374) | `SecurityState` registered as managed Tauri state; 7 Tauri commands (`security_get_status`, `security_release_quarantine`, `sandbox_verify_full`, `proxy_health`, `agent_create`, `agent_destroy`, `agent_verify_isolation`); IPC event routing; TypeScript barrel with `SECURITY_IPC_EVENTS` and `SECURITY_COMMANDS` |
+| Security test suite (commit `b3c92bcd9`) | 80 cross-cutting tests across 8 files: 17 safety-critical (SC-01..SC-14) with real `bwrap` OS enforcement; 8 sandbox (SB-01..SB-08); 8 credential-proxy (CP-01..CP-08); 6 agent-isolation (AI-01..AI-06); 8 staging-scanner (SS-01..SS-08); 7 dashboard (SD-01..SD-04); 6 bootstrap (BS-01..BS-04); 20 integration (INT-01..INT-10) |
+| Version alignment (commit `485635c76`) | `package.json`, `src-tauri/Cargo.toml`, `src-tauri/tauri.conf.json` all bumped to 1.38.0 in a single commit to prevent three-version drift |
 
 ## Retrospective
 
 ### What Worked
-- **OS-level sandboxing (bubblewrap/Seatbelt) is structural, not advisory.** Per-agent profiles for 4 agent types with SSH key/credential directory denial and escape prevention (nsenter/unshare/chroot/proc) means security doesn't depend on the agent following rules -- the OS enforces the boundary.
-- **Zero-knowledge credential proxy with SecretString zeroize-on-drop.** API keys are injected into sandboxes through a Unix socket (mode 0600) without credential material ever entering the sandbox memory space. The agent gets authenticated access; it never sees the credentials. This defeats prompt injection that tries to extract credentials.
-- **CVE-informed staging scanner with agent-proof quarantine.** 8 pattern detectors (SEC-001 through SEC-008) covering settings.json hooks, API redirect, hook injection, MCP risk, sandbox escape, SSH keys, credential exfiltration, and base64 obfuscation. The quarantine has no release mechanism in code -- that's the right design for agent-proof security.
-- **Bootstrap Phase 0 ensures security infrastructure is online before Claude connects.** The 6-step boot sequence with hard-stop on verification failure means there's no window where the agent runs without security. Security is a precondition, not a service that starts alongside other services.
+
+- **OS-level sandboxing is structural, not advisory.** Per-agent profiles for four agent types with SSH-key and credential-directory denial plus escape-primitive blocking (nsenter, unshare, chroot, /proc) mean security does not depend on the agent following rules — the kernel refuses the system call. A prompt-injected exec agent that tries to read `~/.ssh/id_rsa` gets EACCES from the OS before any application-layer check runs.
+- **Zero-knowledge credential proxy with `SecretString` and zeroize-on-drop closes the credential-exfiltration vector.** API keys are injected through a mode-0600 Unix socket without credential material ever entering sandbox memory. The agent gets authenticated access; it never sees the credentials. A coredump written out by a compromised process cannot leak the key because the `zeroize-on-drop` semantics have already scrubbed the memory.
+- **CVE-informed staging scanner with agent-proof quarantine treats historical incidents as automated gates.** Eight pattern detectors (SEC-001 through SEC-008) each derived from a disclosed incident class. The quarantine has no release mechanism in code — the only way out is for a human to move the file with a tool outside the agent's capability surface. That is the right design because a releasable quarantine is a quarantine a manipulated agent can argue its way out of.
+- **Bootstrap Phase 0 with hard-stop on verification failure makes security a precondition.** The six-step boot sequence (SSH key check → sandbox install → profile generation → proxy start → verification → LED activation) halts hard on any failure. There is no window in which the agent runs without security, and there is no graceful-degradation mode an attacker could induce.
+- **Per-agent worktree isolation maps the security model onto the git model cleanly.** Each agent gets its own worktree and its own sandbox profile that denies access to every other agent's worktree. INTEG gets read-only cross-worktree access so it can verify consistency. The `WorktreeCreate` hook wires the profile in at creation time so the posture is baked in, not retrofitted.
+- **Critical security events bypass the magic-verbosity filter.** The shield indicator turns red regardless of which magic level the user chose. This is the one class of event the user cannot hide because the user cannot choose to hide it — which is correct for security-critical signals.
+- **Version-file alignment in a single commit prevents drift.** The three-way bump of `package.json`, `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json` in `485635c76` forecloses the silent-skew failure mode that surfaced as tooling confusion in earlier releases.
+- **Safety-critical tests exercise real `bwrap` rather than shape-only mocks.** SC-01 through SC-14 invoke the actual sandbox binary against the generated profiles and assert that denied paths are denied. If bubblewrap ever stops enforcing, the test suite fails the build.
 
 ### What Could Be Better
-- **Platform-specific sandbox implementations (bubblewrap on Linux, Seatbelt on macOS) double the testing surface.** Each platform needs its own verification. Cross-platform parity requires testing on both, not just detecting the platform and generating the config.
-- **80 cross-cutting tests (17 safety-critical + 63 core/integration) is adequate but the safety-to-total ratio could be higher.** For a security-focused release, 17/80 (21%) safety-critical tests is reasonable, but the 8 CVE-informed patterns each deserve dedicated adversarial testing beyond pattern matching.
+
+- **Platform-specific sandbox implementations (bubblewrap on Linux, Seatbelt on macOS) double the testing surface.** The release detects the platform and generates the appropriate profile, but full cross-platform parity requires actually running the safety-critical suite against both. The Linux path is dogfooded; the Seatbelt path ships with schema validation but without the real OS-enforcement assertion the Linux path carries.
+- **17/80 safety-critical ratio (21%) leaves room for per-detector adversarial suites.** Each of the eight CVE-informed pattern detectors deserves its own dedicated adversarial corpus that tries to bypass the detector with obfuscation variants. The current SS-01..SS-08 suite is fixture-based pattern detection, not adversarial fuzzing.
+- **Pattern matching is not semantic analysis.** SEC-001..SEC-008 are regex-and-token detectors. A sufficiently creative attacker can obfuscate a payload past any regex. The defense-in-depth answer is to pair the scanner with sandbox enforcement so even a miss at the scanner tier still hits the sandbox boundary — which v1.38 does ship — but the scanner itself will need semantic augmentation (AST walks, embedding-based similarity to known payloads) in a future release.
+- **The quarantine has no audit-trail aggregation.** Quarantined items are recorded per-incident but there is no dashboard view that lets a reviewer browse quarantine history across releases. A security-audit pass would want that aggregation, and v1.38 did not land it.
+- **Credential-proxy domain allowlist is static configuration.** The allowlist is loaded at proxy startup. A long-lived agent session that legitimately needs a new domain has to restart the proxy. A reload-without-restart path would close that operational gap without weakening the deny-by-default posture.
+- **No chaos-engineering tier yet.** The release verifies that the sandbox denies what it should deny and the proxy allows what it should allow, but there is no automated red-team harness that attempts prompt injections against the live agent and asserts the substrate holds. That is the natural follow-up suite for the v1.42 test-infrastructure release.
 
 ## Lessons Learned
 
-1. **Agent security requires structural prevention, not behavioral trust.** Prompt injection can make an agent do anything the agent is capable of doing. The only reliable security is removing capabilities (sandbox) and removing secrets (credential proxy) from the agent's environment entirely.
-2. **Worktree isolation creates natural security boundaries for multi-agent systems.** Per-agent git worktrees with scoped sandbox profiles mean agents can't read each other's work. INTEG gets read-only access across worktrees. This maps the security model to the git model cleanly.
-3. **A 6-step boot sequence with hard-stop is better than a graceful degradation mode for security infrastructure.** If security fails to initialize, the correct response is to not start -- not to start in a degraded mode that an attacker could exploit.
+- **Agent security requires structural prevention, not behavioral trust.** Prompt injection can make an agent do anything the agent is capable of doing, which means the only durable answer is to remove capabilities (sandbox) and remove secrets (credential proxy) from the agent's environment entirely. Telling the agent to be careful is not a security posture; refusing to let the kernel answer the agent's system calls is.
+- **Worktree isolation creates natural security boundaries for multi-agent systems.** Per-agent git worktrees with scoped sandbox profiles mean agents cannot read each other's work. INTEG gets read-only access across worktrees so it can verify consistency. This maps the security model to the git model cleanly, and it is cheap to enforce at worktree-creation time and expensive to retrofit later.
+- **A six-step boot sequence with hard-stop beats graceful degradation for security infrastructure.** If security fails to initialize, the correct response is to refuse to start — not to start in a degraded mode that an attacker could exploit or that a user could accept because "it mostly works." Graceful degradation is for availability features, not security preconditions.
+- **Platform detection is not cross-platform testing.** Phase 368 detects bubblewrap on Linux and Seatbelt on macOS and generates the correct profile for each, but generating the correct config is not the same as verifying the OS actually enforces it. Real cross-platform parity requires real execution on both platforms, not just config generation plus unit tests of the generator.
+- **Quarantines must be agent-proof, not just agent-hostile.** A quarantine that a manipulated agent can argue its way out of is a quarantine a manipulated agent will argue its way out of. Removing the release mechanism from the codebase entirely — so the only exit is a human with a tool outside the agent's capability surface — is the correct cost allocation.
+- **Critical events must bypass user-configurable filters.** The magic-verbosity system lets users tune how much security noise they see, but breach events are not noise — they are the one class of signal the user cannot choose to hide because hiding them is never the right response. Building the bypass into the event pipeline rather than relying on user judgment encodes that invariant structurally.
+- **Named test identifiers survive refactors.** SC-01..SC-14, SB-01..SB-08, CP-01..CP-08, AI-01..AI-06, SS-01..SS-08, SD-01..SD-04, BS-01..BS-04, INT-01..INT-10 — each prefix is a pointer back to the named capability the test defends. "Test 273" does not survive a file reorganization; "SC-07 sandbox denies nsenter" does.
+- **Version-file alignment in a single commit prevents silent skew.** Bumping `package.json`, `Cargo.toml`, and `tauri.conf.json` together in `485635c76` forecloses the class of failures where one surface reports 1.38 and another reports 1.37 and debugging starts from a wrong baseline.
+- **Real `bwrap` invocation in the test suite beats config-shape mocks.** SC-01 through SC-14 exercise the actual sandbox binary against the generated profile. If bubblewrap ever stops enforcing one of the denied paths — through upstream regression, through distro packaging, through a kernel change — the test suite catches it. A mock would report that the config looks right while the kernel silently let the syscall through.
+- **Zero-knowledge architecture beats secret-scanning.** Detecting secrets in logs after the fact is necessary but insufficient; the structural answer is that the sandbox never has the secret in the first place. If the credential material never enters sandbox memory, there is nothing for a compromised process to exfiltrate, and the secret-scanning tier becomes a belt-and-suspenders check rather than the primary defense.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — the adaptive loop that Phase 0 now boots after security comes online |
+| [v1.10](../v1.10/) | Security Hardening — the first pass at path-handling and input-validation that v1.38 supersedes with sandbox-level enforcement |
+| [v1.24](../v1.24/) | GSD Conformance Audit — framed "what is the agent's capability surface?" as an unspecified boundary that Phase 368's sandbox now answers |
+| [v1.28](../v1.28/) | GSD Den Operations — filesystem message bus that the Phase 370 staging scanner writes quarantine records into |
+| [v1.30](../v1.30/) | Vision-to-Mission Pipeline — stage-based design pattern v1.38 inherits for the 6-step Bootstrap Phase 0 sequence |
+| [v1.31](../v1.31/) | GSD-OS MCP Integration — MCP surface through which external tools see the credential-proxy allowlist |
+| [v1.35](../v1.35/) | Mathematical Foundations Engine — STRANGER-tier sanitizer (31 attack vectors across 6 categories) that v1.38's scanner extends with agent-security-specific SEC-001..SEC-008 detectors |
+| [v1.36](../v1.36/) | Citation Management — consumer of the provenance surface that quarantined artifacts carry forward |
+| [v1.37](../v1.37/) | Complex Plane Learning Framework — immediate predecessor; v1.38 inherits its schema-driven migration pattern for the security foundation types |
+| [v1.39](../v1.39/) | GSD-OS Bootstrap & READY Prompt — immediate successor; extends Bootstrap Phase 0 into the full 7-service launcher with health checks |
+| [v1.40](../v1.40/) | sc:learn Dogfood Mission — first release to exercise the staging scanner against real non-synthetic ingestion corpora |
+| [v1.42](../v1.42/) | Test infrastructure release — natural home for the per-detector adversarial suites and the chaos-engineering tier this retrospective flags as gaps |
+| [v1.49](../v1.49/) | Mega-release that consolidated post-v1.38 implementation; the sandbox and credential-proxy substrate still load-bearing |
+| `src/security/index.ts` | TypeScript security barrel — Zod schemas, render functions, IPC constants (commit `5cba476dd`) |
+| `src-tauri/src/security/mod.rs` | Rust `SecurityState` struct — status, agents, events, `proxy_running`, `sandbox_verified` (commit `dfd1ab30c`) |
+| `src-tauri/src/security/types.rs` | `SecurityStatus` and `ShieldState` enums (commit `dfd1ab30c`) |
+| `src-tauri/src/commands/security.rs` | 7 Tauri commands — `security_get_status`, `security_release_quarantine`, `sandbox_verify_full`, `proxy_health`, `agent_create`, `agent_destroy`, `agent_verify_isolation` (commit `dfd1ab30c`) |
+| `tests/security/safety-critical.test.ts` | 17 safety-critical tests (SC-01..SC-14) with real `bwrap` OS enforcement (commit `b3c92bcd9`) |
+| `tests/security/staging-scanner.test.ts` | 8 fixture-based pattern-detection tests (SS-01..SS-08) for SEC-001..SEC-008 (commit `b3c92bcd9`) |
+| `tests/security/integration.test.ts` | 20 integration tests (INT-01..INT-10) end-to-end verification (commit `b3c92bcd9`) |
+| `skills/bootstrap-guide/SKILL.md` | Phase 0 documentation skill — 6-step boot sequence and magic-level output (commit `e2cb0e7d1`) |
+| `docs/release-notes/v1.38/chapter/03-retrospective.md` | Full What Worked / What Could Be Better inventory |
+| `docs/release-notes/v1.38/chapter/04-lessons.md` | Five extracted lessons with applied-or-investigate status per lesson |
+
+## Engine Position
+
+v1.38 sits at the structural-security inflection of the post-v1.30 platform arc. v1.30 landed the typed pipeline; v1.31 exposed it through MCP; v1.32 added brainstorm session support; v1.33 landed the multi-agent cloud platform; v1.34 refined the documentation ecosystem; v1.35 turned mathematical foundations into a typed subsystem and shipped the first reversible self-modifying knowledge ingestion pipeline; v1.36 added citation management; v1.37 framed the complex-plane learning surface. v1.38 is the release that answers the previously-deferred question of how a self-modifying multi-agent system defends itself against the class of attacks it is itself capable of executing. Every subsequent release that handles untrusted input, spawns a new agent, or introduces a new credential-bearing integration is downstream of v1.38's substrate: v1.39's GSD-OS bootstrap extends Phase 0 into a full multi-service launcher, v1.40's sc:learn dogfooding runs ingestion against the Phase 370 scanner, v1.42's test-infrastructure release adds the chaos-engineering tier this retrospective flags, and the v1.49 mega-release consolidates the security subsystem alongside the rest of the platform without restructuring it. In the longer GSD-OS arc, v1.38 is the release that made the multi-agent posture safe enough to run unattended for the sc-dev-team autonomous execution patterns that later releases depend on.
+
+## Files
+
+- `src/security/index.ts` — TypeScript security barrel re-exporting Zod schemas, `SecurityPanel` render functions, `SECURITY_IPC_EVENTS`, and `SECURITY_COMMANDS`; single import point for front-end security surface (113 lines, commit `5cba476dd`)
+- `src-tauri/src/security/mod.rs` — Rust `SecurityState` struct with `status`, `agents`, `events`, `proxy_running`, `sandbox_verified`; `emit_critical_security_event` helper (44 lines, commit `dfd1ab30c`)
+- `src-tauri/src/security/types.rs` — `SecurityStatus` and `ShieldState` enums (37 lines, commit `dfd1ab30c`)
+- `src-tauri/src/commands/security.rs` — 7 Tauri commands implementing the dashboard and agent-lifecycle surface (317 lines, commit `dfd1ab30c`)
+- `src-tauri/src/commands/mod.rs` — registers the `security` command module (commit `dfd1ab30c`)
+- `src-tauri/src/lib.rs` — wires `SecurityState` as managed Tauri state and registers all 7 security commands in `invoke_handler` (commit `dfd1ab30c`)
+- `tests/security/safety-critical.test.ts` — 17 safety-critical tests (SC-01..SC-14) with real `bwrap` OS enforcement (338 lines, commit `b3c92bcd9`)
+- `tests/security/sandbox.test.ts` — 8 sandbox-configurator schema-validation tests (SB-01..SB-08) (185 lines, commit `b3c92bcd9`)
+- `tests/security/proxy.test.ts` — 8 credential-proxy type-level invariant tests (CP-01..CP-08) (204 lines, commit `b3c92bcd9`)
+- `tests/security/agent-isolation.test.ts` — 6 agent-isolation cross-agent contract tests (AI-01..AI-06) (191 lines, commit `b3c92bcd9`)
+- `tests/security/staging-scanner.test.ts` — 8 fixture-based pattern-detection tests (SS-01..SS-08) (221 lines, commit `b3c92bcd9`)
+- `tests/security/dashboard.test.ts` — 7 dashboard shield-rendering and magic-bypass tests (SD-01..SD-04) (153 lines, commit `b3c92bcd9`)
+- `tests/security/bootstrap.test.ts` — 6 Phase 0 contract and magic-level tests (BS-01..BS-04) (162 lines, commit `b3c92bcd9`)
+- `tests/security/integration.test.ts` — 20 end-to-end integration tests (INT-01..INT-10) (375 lines, commit `b3c92bcd9`)
+- `skills/bootstrap-guide/SKILL.md` — Phase 0 boot-sequence documentation skill (82 lines, commit `e2cb0e7d1`)
+- `package.json`, `src-tauri/Cargo.toml`, `src-tauri/tauri.conf.json` — aligned version bump to 1.38.0 in a single commit to prevent silent skew (commit `485635c76`)
+- `docs/release-notes/v1.38/chapter/00-summary.md` — summary chapter pointing to this README
+- `docs/release-notes/v1.38/chapter/03-retrospective.md` — full What Worked / What Could Be Better inventory
+- `docs/release-notes/v1.38/chapter/04-lessons.md` — five extracted lessons with applied-or-investigate status
 
 ---
+
+_Parse confidence: 1.00 — authored from git log `v1.38~5..v1.38` plus tag metadata plus chapter files plus verified file paths in the working tree._
