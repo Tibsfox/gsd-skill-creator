@@ -44,6 +44,8 @@ const STEPS = [
   { name: 'chapter',           script: 'chapter.mjs',             required: true },
   { name: 'score',             script: 'score-completeness.mjs',  required: true },
   { name: 'regen-history-md',  script: 'regen-history-md.mjs',    required: true },
+  { name: 'reconcile',         script: 'pipeline-reconciler.mjs', required: true },
+  { name: 'drift-check',       script: 'quality-drift-check.mjs', required: true },
   { name: 'audit',             script: 'audit.mjs',               required: true },
 ];
 
