@@ -2,49 +2,57 @@
 
 **Released:** 2026-03-29
 **Degree:** 22 of 360
-**Part A:** Foxy Apollo -- Jazz/Funk (Funk, Jazz, Psychedelic Rock, R&B, Pop), E=4, Seattle (dispersed/I-5 corridor), founder-led collective, 2016-present
-**Part B:** Red-shafted Flicker drumming (*Colaptes auratus cafer*) -- resonant hollow-tree percussion, E=4, forest snag, Picidae (Piciformes)
+**Part A:** Foxy Apollo -- Jazz/Funk (Funk, Jazz, Psychedelic Rock, R&B, Pop), E=4, Seattle (dispersed/I-5 corridor with Bellingham and Anacortes nodes), founder-led flexible collective, 2016-present
+**Part B:** Red-shafted Flicker drumming (*Colaptes auratus cafer*) -- resonant hollow-tree percussion, E=4, forest snag, Picidae (Piciformes), substrate-dependent broadband mechanical percussion
 **Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
 **Cluster:** Music (hub: WAL)
+**Dedication:** Sam Ashkenazy, Zachary Schmidt, Dallas Quick, Shaun Quick, Jackson Cruz, and Andrew Hewitt -- the six musicians of Foxy Apollo who grew up inside Seattle's funk/soul scene and proved that a band can inherit a groove without being built by its founders; and the Northern Flicker of the Pacific Northwest open woodland, whose dawn drum on dead alder, metal chimney cap, cedar utility pole, and house fascia board has rung across this territory for longer than any human music has existed, and whose percussive future depends on the presence of standing dead wood in working forests and the tolerance of neighbors whose chimneys ring like bells at sunrise.
+**Engine Position:** 23rd release, 22nd degree of 360, 18th band-or-artist-project (fourth band), 2nd multi-degree species (Northern Flicker at 21 and 22), 1st consecutive same-genre pair (Jazz/Funk at 21-22), 4th organizational model (founder-led flexible collective), 23rd artist-city pattern (The Inheritor), 23rd acoustic element (the groove reset / resonant percussion), 2nd consecutive energy-4 degree, start of the second ADSR cycle.
+**Branch:** main
+**Commits:** bffa4f0c1 (1)
+**Files changed:** 11 (README.md + 10 research artifacts across S36 and SPS research trees for degree 22)
 
 ## Summary
 
-The drum and the groove reset. Degree 22 completes what degree 21 began -- the flicker pair, the engine's first species-pair, delivers its second half: the **first non-vocal sound** in twenty-three degrees of acoustic progression. Where degree 21 gave the engine the hammer (a vocal metronomic pulse, discrete tonal notes below the perceptual fusion threshold), degree 22 gives the engine **resonant percussion** -- bill striking dead wood, broadband noise, fused strikes above the fusion threshold, the character of the sound determined not by the performer's anatomy but by the substrate the performer selects. The bird picks its drum. The dead tree rings. The engine hears its first instrument.
+**The drum and the groove reset.** Degree 22 completes what degree 21 began -- the flicker pair, the engine's first species-pair, delivers its second half: the **first non-vocal sound** in twenty-three degrees of acoustic progression. Where degree 21 gave the engine the hammer (a vocal metronomic pulse, discrete tonal notes below the perceptual fusion threshold), degree 22 gives the engine **resonant percussion** -- bill striking dead wood, broadband noise, fused strikes above the fusion threshold, the character of the sound determined not by the performer's anatomy but by the substrate the performer selects. The bird picks its drum. The dead tree rings. The engine hears its first instrument. In parallel, the S36 side delivers **Foxy Apollo**, a six-piece jazz/funk collective founded in 2016 by guitarist and vocalist **Sam Ashkenazy** while still in high school, now touring the I-5 corridor with two full-length albums on Bandcamp and a grassroots live career stretching from **U-District** house shows to the **Tractor Tavern**, the **Wild Buffalo** in Bellingham, and the **Champion Street Studios** where *Saturated, Faded* (2023) was recorded. The Inheritor is the first artist in twenty-three degrees who did not arrive at the Seattle scene but grew up inside it. **Sam Ashkenazy**, **Zachary Schmidt**, **Dallas Quick**, **Shaun Quick**, **Jackson Cruz**, and **Andrew Hewitt** carry a groove that **Polyrhythmics** helped crystallize at degree 21 without having to rebuild the scaffolding that made it possible. Parallel and intertwined: the flicker that drums on the same tree it sang from yesterday; the young band that plays the funk it inherited from the veterans who were already there.
 
-**THE FLICKER PAIR COMPLETES.** Degrees 21-22 are voice and percussion from the same species -- the Northern Flicker (*Colaptes auratus cafer*). No previous species occupied more than one degree. The pair was proposed at degree 21 as a bridge from the vocal world to the percussive world. It delivers. Degree 21 established the species with its wick-wick-wick call (syrinx, tonal, 6-10 notes/sec, each note individually heard). Degree 22 introduces the drum (bill on substrate, broadband, ~25 strikes/sec, strikes fusing into a continuous roll). Same bird. Different physics. The transition from voice to percussion is smooth because the listener already knows the species. The unprecedented arrives in a familiar context. The flicker pair is the engine's most elegant structural design: one organism, two sound-production mechanisms, two consecutive degrees, one territorial message transmitted through two independent physical channels.
+**THE FLICKER PAIR COMPLETES.** Degrees 21-22 are voice and percussion from the same species -- the **Northern Flicker** (*Colaptes auratus cafer*). No previous species occupied more than one degree. The pair was proposed at degree 21 as a bridge from the vocal world to the percussive world. It delivers. Degree 21 established the species with its wick-wick-wick call (syrinx, tonal, 6-10 notes/sec, each note individually heard). Degree 22 introduces the drum (bill on substrate, broadband, ~25 strikes/sec, strikes fusing into a continuous roll). Same bird. Different physics. The transition from voice to percussion is smooth because the listener already knows the species. The unprecedented arrives in a familiar context. The flicker pair is the engine's most elegant structural design: one organism, two sound-production mechanisms, two consecutive degrees, one territorial message transmitted through two independent physical channels. The S36 side echoes this dual-channel structure: **Polyrhythmics** (degree 21) and **Foxy Apollo** (degree 22) form the engine's first consecutive same-genre pair, Jazz/Funk on both sides, instrumental versus vocal, ensemble-kinetic versus collective-kinetic, the groove as sovereign against the groove as platform. Two bands. Two degrees. One genre compound transmitted through two independent social and musical configurations. The structural parallel between the flicker pair and the funk pair is exact.
 
-**FIRST NON-VOCAL SOUND IN THE ENGINE.** Twenty-one degrees of syrinx-produced vocal sound end here. The drum bypasses the syrinx entirely -- it is a solid object striking another solid object. Bill on wood. Bill on metal. The physics of percussion, not vocalization. Every previous sound in the engine was generated internally, by the bird's own anatomy. The drum is the first sound whose timbral character depends on an **external object** -- the substrate. The flicker selects its instrument. A hollow dead alder produces a low, resonant thud. A metal chimney cap produces a piercing metallic rattle that carries across an entire neighborhood. The substrate IS the timbre. The engine's acoustic vocabulary expands from "voice" to "voice + instrument," from "anatomy determines sound" to "the world determines sound."
+**FIRST NON-VOCAL SOUND IN THE ENGINE.** Twenty-one degrees of syrinx-produced vocal sound end here. The drum bypasses the syrinx entirely -- it is a solid object striking another solid object. Bill on wood. Bill on metal. The physics of percussion, not vocalization. Every previous sound in the engine was generated internally, by the bird's own anatomy. The drum is the first sound whose timbral character depends on an **external object** -- the substrate. The flicker selects its instrument. A hollow dead alder produces a low, resonant thud. A metal chimney cap produces a piercing metallic rattle that carries across an entire neighborhood. The substrate IS the timbre. The engine's acoustic vocabulary expands from "voice" to "voice + instrument," from "anatomy determines sound" to "the world determines sound." **Stark**, **Dodenhoff**, and **Johnson** (1998) measured the ~25 strikes per second. **Kilham** (1959) first documented the substrate preference. **Van Wassenbergh** and colleagues (2022) measured the 100-300 g deceleration forces at the woodpecker skull. The instrument is biological; the sound is biomechanical; the listener hears music.
 
-**FIRST BROADBAND, UNPITCHED SOUND.** Twenty-one degrees of tonal, pitched, frequency-specific sound. The drum is broadband -- energy spread across 100 Hz to 8+ kHz with no fundamental pitch. In orchestral terms: every previous species was a melody instrument. The drum is a percussion instrument. The engine now contains both pitched and unpitched sound sources, matching the fundamental division of the orchestra into melody and percussion sections.
+**FIRST BROADBAND, UNPITCHED SOUND.** Twenty-one degrees of tonal, pitched, frequency-specific sound. The drum is broadband -- energy spread across 100 Hz to 8+ kHz with no fundamental pitch. In orchestral terms: every previous species was a melody instrument. The drum is a percussion instrument. The engine now contains both pitched and unpitched sound sources, matching the fundamental division of the orchestra into melody and percussion sections. In Foxy Apollo's music the same division appears inverted: the rhythm section (bass **Zachary Schmidt**, drums **Dallas Quick**) is pitched AND percussive at once, but the groove's center of gravity is percussive -- the bass and drum pocket carry the meaning, and the pitched content (Ashkenazy's voice, **Shaun Quick**'s guitar, **Jackson Cruz**'s keys and trumpet, **Andrew Hewitt**'s saxophone) rides on top. Both engines acknowledge, at the same degree, that percussion is a first-class music-making category rather than background support.
 
-**FUSION TRILOGY COMPLETE.** Three positions on the perceptual fusion continuum are now mapped. Degree 11 (Oregon Junco trill): at the fusion threshold, notes blur into a continuous buzz. Degree 21 (Northern Flicker wick call): below fusion, each note heard individually -- the hammer. Degree 22 (Northern Flicker drum): above fusion, individual strikes merge into a continuous roll. The same species maps two of the three positions (below at 21, above at 22). The engine's psychoacoustic vocabulary is complete across the fusion continuum.
+**FUSION TRILOGY COMPLETE.** Three positions on the perceptual fusion continuum are now mapped. Degree 11 (**Oregon Junco** trill): at the fusion threshold, notes blur into a continuous buzz. Degree 21 (**Northern Flicker** wick call): below fusion, each note heard individually -- the hammer. Degree 22 (**Northern Flicker** drum): above fusion, individual strikes merge into a continuous roll. The same species maps two of the three positions (below at 21, above at 22). The engine's psychoacoustic vocabulary is complete across the fusion continuum. **Joe Brazil** (degree 11) and the Northern Flicker now share a trilogy: the jazz flutist who trilled at the threshold, the woodpecker who hammered below it, the same woodpecker who drummed above it. Three perceptual states, three degrees, one continuum.
 
-**FIRST CONSECUTIVE SAME-GENRE PAIR.** Degrees 21-22 are both Jazz/Funk -- the engine's first consecutive same-genre pair. In twenty-two prior degrees, every adjacent entry had a different genre compound. The repetition reveals the genre compound's range: Jazz/Funk at degree 21 (Polyrhythmics) is instrumental polyrhythmic Afrobeat. Jazz/Funk at degree 22 (Foxy Apollo) is vocal psychedelic pop-funk. Same label, fundamentally different music. The genre compound is a container, not a prescription. The consecutive pair also demonstrates **polarity within a genre**: at one pole, funk as the totality of expression (groove-sovereign); at the other, funk as the foundation for everything else (groove-as-platform). The full range of Jazz/Funk requires both poles.
+**FIRST CONSECUTIVE SAME-GENRE PAIR.** Degrees 21-22 are both Jazz/Funk -- the engine's first consecutive same-genre pair. In twenty-two prior degrees, every adjacent entry had a different genre compound. The repetition reveals the genre compound's range: Jazz/Funk at degree 21 (**Polyrhythmics**) is instrumental polyrhythmic Afrobeat -- no vocals, the groove IS the composition, seven-to-eight people generating polyrhythmic mass. Jazz/Funk at degree 22 (**Foxy Apollo**) is vocal psychedelic pop-funk -- compact songs with vocals, pop melodies, jazz textures, and psychedelic rock twists riding a funk groove foundation. Same label, fundamentally different music. The genre compound is a container, not a prescription. The consecutive pair also demonstrates **polarity within a genre**: at one pole, funk as the totality of expression (groove-sovereign); at the other, funk as the foundation for everything else (groove-as-platform). The full range of Jazz/Funk requires both poles. **Ben Bloom**'s guitar-as-mediator role in Polyrhythmics and **Ashkenazy**'s guitar-as-funk-lead role in Foxy Apollo bracket the same instrument's behavior in the same genre compound across a single degree change.
 
-**THE GROOVE RESET -- 23rd ACOUSTIC ELEMENT.** The ADSR envelope completed at degree 21 (the release). Degree 22 begins a new cycle. But the engine does not return to silence -- twenty-two degrees of accumulated vocabulary create a non-zero baseline. The groove reset starts from the residual energy of the previous cycle. The new attack begins at non-zero amplitude. In Foxy Apollo's music, this manifests as the transition between songs in a live set: the band finishes one funk groove, and without pause, the drums snap into the next pattern, the bass locks to a new pocket, and the groove continues without stopping. The groove reset also maps to generational transfer -- the ADSR envelope's first cycle was built by established, veteran, conservatory-trained musicians. The groove reset at degree 22 introduces the first artist who grew up inside the scene those veterans built.
+**THE GROOVE RESET -- 23rd ACOUSTIC ELEMENT.** The ADSR envelope completed at degree 21 (the release). Degree 22 begins a new cycle. But the engine does not return to silence -- twenty-two degrees of accumulated vocabulary create a non-zero baseline. The groove reset starts from the residual energy of the previous cycle. The new attack begins at non-zero amplitude. In **Foxy Apollo**'s music, this manifests as the transition between songs in a live set: the band finishes one funk groove, and without pause, the drums snap into the next pattern, the bass locks to a new pocket, and the groove continues without stopping. The groove reset also maps to generational transfer -- the ADSR envelope's first cycle was built by established, veteran, conservatory-trained musicians from **Quincy Jones** (degree 0) through **Polyrhythmics** (degree 21). The groove reset at degree 22 introduces the first artist who grew up inside the scene those veterans built. **Overton Berry** (degree 5) made the groove primary in solo piano. **Maktub** (degree 18) extended it to a four-piece band. **Polyrhythmics** (degree 21) extended it to an ensemble. **Foxy Apollo** (degree 22) inherits the groove as a platform for pop-funk songwriting. Four escalating configurations. One continuous line.
 
-**THE INHERITOR -- 23rd ARTIST-CITY PATTERN.** Every prior pattern described an artist's relationship to Seattle as an arrival, a stay, a departure, or a role (teacher, builder, anchor). The Inheritor describes an artist who was **already there as a child** -- who did not choose the scene but grew up inside it. Sam Ashkenazy was a teenager in a high school jazz band who started going to house shows and making funk music because that was the music happening around him. The scene was the teacher. The scene was the institution. The Inheritor is the complement to The Ensemble Anchor (degree 21): Polyrhythmics crystallized the existing scene into a permanent entity; Foxy Apollo is the next generation that entity produced. Build, stabilize, reproduce.
+**THE INHERITOR -- 23rd ARTIST-CITY PATTERN.** Every prior pattern described an artist's relationship to Seattle as an arrival, a stay, a departure, or a role (teacher, builder, anchor). **The Inheritor** describes an artist who was **already there as a child** -- who did not choose the scene but grew up inside it. **Sam Ashkenazy** was a teenager in a high school jazz band who started going to house shows and making funk music because that was the music happening around him. The scene was the teacher. The scene was the institution. The Inheritor is the complement to The Ensemble Anchor (degree 21): **Polyrhythmics** crystallized the existing scene into a permanent entity; **Foxy Apollo** is the next generation that entity produced. Build, stabilize, reproduce. Five consecutive degrees -- 18 **Maktub** (Workshop), 19 **Fly Moon Royale** (New Root), 20 **Whitney Monge** (Street Laureate), 21 **Polyrhythmics** (Ensemble Anchor), 22 **Foxy Apollo** (Inheritor) -- now document different aspects of how a single music scene operates, sustains itself, and produces its own successors. The funk/soul quadrant is becoming a scene ecology study. **Reggie Watts** (degree 17, The Uncategorizable) also sits nearby; the generational echo between Watts-as-scene-elder and Ashkenazy-as-scene-youth is the first chronological handoff the engine has witnessed.
 
-**DISPERSED GEOGRAPHY -- FIRST NON-NEIGHBORHOOD ENTRY.** Every prior degree had a specific Seattle neighborhood anchor. Degree 22 introduces the engine's first dispersed geographic identity: members from Seattle, Bellingham, and Anacortes, recording in Bellingham, performing across the I-5 corridor. No single neighborhood. This may be generational -- younger bands in the internet era are less tied to specific neighborhoods. The geographic schema evolves: concentrated (Central District, degrees 0-6), multi-neighborhood (degrees 2-21), and now **city-general/regional** (degree 22).
+**DISPERSED GEOGRAPHY -- FIRST NON-NEIGHBORHOOD ENTRY.** Every prior degree had a specific Seattle neighborhood anchor. Degree 22 introduces the engine's first dispersed geographic identity: members from Seattle, **Bellingham**, and **Anacortes**, recording in Bellingham at **Champion Street Studios**, performing across the I-5 corridor from the **Tractor Tavern** in Ballard to the **Wild Buffalo** in Bellingham. No single neighborhood. This may be generational -- younger bands in the internet era are less tied to specific neighborhoods. The geographic schema evolves: concentrated (Central District, degrees 0-6), multi-neighborhood (degrees 2-21), and now **city-general/regional** (degree 22). Anacortes has an outsized indie-music reputation; Bellingham has recording infrastructure and venues; the I-5 corridor connects them into a coherent regional scene. The geographic map of the engine must grow to accommodate regional identities that do not fit on a Seattle neighborhood grid. The **Duwamish** territorial acknowledgment established at degree 20 (Whitney Monge) extends to cover the Coast Salish world as a whole -- the **Muckleshoot Indian Tribe**, the **Lummi Nation** (Bellingham area), and the **Samish Indian Nation** (Anacortes area) are all represented in the regional geography of this degree, and the acknowledgment inherits forward.
 
-**E=4 STREAK AT TWO CONSECUTIVE DEGREES.** Energy distribution shifts from 2:13:6:1 to **2:13:6:2** (E1:E2:E3:E4). The threshold crossing at degree 21 was not a single-degree spike but the beginning of a streak. Degree 22's E=4 subtype is collective-kinetic (young band performing with urgency), distinct from degree 21's ensemble-kinetic (eight musicians generating polyrhythmic mass). Same energy level from different sources. The CSV shows degrees 23-24 also at E=4, suggesting a four-degree E=4 streak across the funk/soul zone.
+**E=4 STREAK AT TWO CONSECUTIVE DEGREES.** Energy distribution shifts from 2:13:6:1 to **2:13:6:2** (E1:E2:E3:E4). The threshold crossing at degree 21 was not a single-degree spike but the beginning of a streak. Degree 22's E=4 subtype is collective-kinetic (young band performing with urgency), distinct from degree 21's ensemble-kinetic (eight musicians generating polyrhythmic mass). Same energy level from different sources. The CSV shows degrees 23-24 (**Allen Stone**, **Ron Artis II**) also at E=4, suggesting a four-degree E=4 streak across the funk/soul zone. The flicker drum at degree 22 is also a first-in-engine sustained high-intensity percussive event: ~25 strikes per second for 0.6-1.2 seconds, at amplitudes that carry hundreds of meters. Both Part A and Part B contribute peak-intensity material; the energy match is audible.
 
-**FOURTH ORGANIZATIONAL MODEL.** Foxy Apollo introduces the founder-led/flexible collective. Ashkenazy is the consistent creative center (founded the project, writes songs, sings), but membership has changed significantly over the band's existence. Four models now documented: centered/fixed (Maktub, 18), central/rotating (FMR, 19), distributed/fixed (Polyrhythmics, 21), founder-led/flexible (Foxy Apollo, 22). The flexible collective is the natural organizational form of a young band -- membership is fluid because everyone is still figuring out their lives.
+**FOURTH ORGANIZATIONAL MODEL.** **Foxy Apollo** introduces the founder-led/flexible collective. **Ashkenazy** is the consistent creative center (founded the project, writes songs, sings), but membership has changed significantly over the band's existence. Four models now documented: centered/fixed (**Maktub**, 18), central/rotating (**Fly Moon Royale**, 19), distributed/fixed (**Polyrhythmics**, 21), founder-led/flexible (**Foxy Apollo**, 22). The flexible collective is the natural organizational form of a young band -- membership is fluid because everyone is still figuring out their lives. Original drummer **Satchel Schwartz** left; original bassist left; the **Quick** brothers joined; **Cruz** and **Hewitt** were added. The creative identity did not dissolve because it resided in Ashkenazy's songwriting and voice. The flicker pair echoes this: the creative identity of "flicker drumming" resides in the species rather than in any one individual bird, and the message transmits regardless of which individual occupies which substrate on any given morning.
 
-Foxy Apollo is a jazz/funk collective founded in 2016 by guitarist and vocalist Sam Ashkenazy while still in high school. The project began when Ashkenazy and drummer Satchel Schwartz reconnected through their school's jazz band. What started as a teenage jazz-funk trio has grown into a six-piece ensemble incorporating keyboards, trumpet, and saxophone. The band has been described as "sometimes a 4-piece, sometimes a 6-piece musical powerhouse." The current lineup: Sam Ashkenazy (guitar, lead vocals), Zachary Schmidt (bass), Dallas Quick (drums), Shaun Quick (guitar), Jackson Cruz (keyboards, trumpet), and Andrew Hewitt (saxophone). Two full-length albums (*Sweet Talk* 2020, *Saturated, Faded* 2023), two EPs, and a grassroots live-performance career built from U-District house shows to the Tractor Tavern, the Wild Buffalo, and the I-5 corridor touring circuit.
+**Foxy Apollo** is a jazz/funk collective founded in 2016 by guitarist and vocalist **Sam Ashkenazy** while still in high school. The project began when Ashkenazy and drummer **Satchel Schwartz** reconnected through their school's jazz band. What started as a teenage jazz-funk trio has grown into a six-piece ensemble incorporating keyboards, trumpet, and saxophone. The band has been described as "sometimes a 4-piece, sometimes a 6-piece musical powerhouse." The current lineup: **Sam Ashkenazy** (guitar, lead vocals), **Zachary Schmidt** (bass), **Dallas Quick** (drums), **Shaun Quick** (guitar), **Jackson Cruz** (keyboards, trumpet), and **Andrew Hewitt** (saxophone). Two full-length albums (*Sweet Talk* 2020, *Saturated, Faded* 2023), two EPs (self-titled 2017, *Tangie* 2018), and a grassroots live-performance career built from U-District house shows to the **Tractor Tavern**, the **Wild Buffalo**, and the I-5 corridor touring circuit. **Cascadia Daily News** summarized the band's appeal: "There's something in their music for just about everybody, whether you're looking for pop melodies, jazz textures, R&B grooves or psychedelic rock twists." **Ratings Game Music** premiered the "New Shade of Blue" single in 2021. **The Daily UW** profiled the U-District house show scene that Ashkenazy grew up in. **Bandcamp** provided the most reliable primary-source documentation -- complete discography, track listings, credits, genre tags, release dates from an artist-controlled platform. At 219 monthly Spotify listeners with no label and no booking agent, Foxy Apollo is also the engine's documentation stress-test: the methodology that worked for **Quincy Jones** and **Wayne Horvitz** returned 21 sources for Ashkenazy, the lowest count in twenty-three degrees. The gap is itself structural data.
 
-In the pale light before sunrise, on the same dead alder where yesterday the wick-wick-wick call rang out across the open woodland, the same bird hitches upward to a spot where the bark has fallen away years ago. It braces its tail against the trunk. It grips with two toes forward, two toes back. It draws its head back and strikes the wood. Twenty-five times per second. For one full second. The hollow tree rings -- a deep, resonant roll that travels through the wood and out into the morning air, through the open woodland, across the park, past the houses where sleeping people do not yet know what woke them. Then silence. Then again. The substrate is the instrument. The dead tree is the drum. The sound is not a voice. It is not air vibrating over tissue. It is a solid object striking another solid object, and the world ringing in response. Twenty-one degrees of song. Now: percussion.
+In the pale light before sunrise, on the same dead alder where yesterday the wick-wick-wick call rang out across the open woodland, the same bird hitches upward to a spot where the bark has fallen away years ago. It braces its tail against the trunk. It grips with two toes forward, two toes back. It draws its head back and strikes the wood. Twenty-five times per second. For one full second. The hollow tree rings -- a deep, resonant roll that travels through the wood and out into the morning air, through the open woodland, across the park, past the houses where sleeping people do not yet know what woke them. Then silence. Then again. The substrate is the instrument. The dead tree is the drum. The sound is not a voice. It is not air vibrating over tissue. It is a solid object striking another solid object, and the world ringing in response. Twenty-one degrees of song. Now: percussion. And two blocks away, in a **Champion Street Studios** tracking room in Bellingham, a young band that grew up in Seattle's house show scene is laying down the closing track of an album whose title, *Saturated, Faded*, describes the residual glow of a color after the sun goes down. The drummer snaps into a new pattern. The bass locks to a new pocket. **Sam Ashkenazy** -- who was a teenager when the scene that raised him was already running -- starts singing over the funk groove that he inherited, did not build, carries forward. The groove reset. Same foundation. New players. New energy. The dead tree rings. The living band grooves.
 
 ## Key Features
 
 | Metric | Part A: Foxy Apollo | Part B: Red-shafted Flicker Drumming |
 |--------|---------------------|--------------------------------------|
-| Research Words | ~5,000 | ~4,500 |
-| Files Produced | 4 | 4 |
+| Research Words | ~5,700 | ~6,200 |
+| Files Produced | 4 (research.md, index.html, knowledge-nodes.json, retrospective.md) | 4 (research.md, index.html, knowledge-nodes.json, retrospective.md) |
 | Theory Nodes | 4 (vocal funk platform, groove reset, pop-funk compression, Hendrix guitar lineage) | 6 (resonant percussion, broadband sound, external instrument, substrate selection, forest snag ecosystem, fusion trilogy completion) |
 | Cross-References | 7 projects (S36-021/018/019/017/005/020/001) | 8 projects (SPS-021/000/011/013/020 + AVI, ECO, S36) |
-| Sources Cited | 21 | 20 |
-| Safety Tests | Source attribution, cultural sensitivity, gender analysis, Duwamish acknowledgment | Species accuracy, conservation status, OCAP/CARE compliance |
+| Sources Cited | 21 (Bandcamp primary, Cascadia Daily News, Daily UW, Ratings Game Music, band interviews) | 29 (Stark/Dodenhoff/Johnson 1998, Dodenhoff/Stark/Johnson 2001, Kilham 1959, Van Wassenbergh 2022, Cornell Lab of Ornithology, Macaulay Library, BNA Online, Birds of the World) |
+| Safety Tests | Source attribution, cultural sensitivity, gender analysis, Duwamish/Lummi/Samish acknowledgment | Species accuracy, conservation status, snag-habitat precision, OCAP/CARE compliance |
+| Energy Level | E=4 (collective-kinetic subtype) | E=4 (percussive-territorial subtype) |
+| Artist-City Pattern | The Inheritor (23rd pattern) | N/A (species side) |
+| Acoustic Element | The groove reset (23rd element, Part A side) | Resonant percussion (23rd element, Part B side) |
 | Part A/B Resonance Axes | 4 (self-released percussion, instrument selection, energy sustained, pair transition) | |
 
 <details>
@@ -78,7 +86,7 @@ Full deep research covering Foxy Apollo as the engine's youngest and least-docum
 
 - **GENDER GAP CONTINUES -- 3:20, Predominantly Male Collective:** The current six-piece lineup is all male. TyeLeah Nanto is credited on *Sweet Talk* (2020) but her specific role is undocumented. Distribution: 3:20 (women:men/male-led) through twenty-three degrees. Seattle's funk/jazz scene, across generations, remains dominated by male performers. The youngest and most recent act in the engine does not break this pattern.
 
-- **DUWAMISH TERRITORIAL ACKNOWLEDGMENT (Inherited from Degree 20):** Every artist in the Seattle 360 engine created their music on the ancestral territory of the Duwamish Tribal Organization, the Muckleshoot Indian Tribe, and related Coast Salish peoples. Foxy Apollo formed in Seattle with roots extending to Bellingham and Anacortes -- all within the broader Coast Salish world. The Duwamish Tribe remains federally unrecognized despite continuous habitation and cultural practice. Acknowledgment established at degree 20, inherited by all subsequent releases.
+- **DUWAMISH TERRITORIAL ACKNOWLEDGMENT (Inherited from Degree 20):** Every artist in the Seattle 360 engine created their music on the ancestral territory of the Duwamish Tribal Organization, the Muckleshoot Indian Tribe, and related Coast Salish peoples. Foxy Apollo formed in Seattle with roots extending to Bellingham (Lummi Nation territory) and Anacortes (Samish Indian Nation territory) -- all within the broader Coast Salish world. The Duwamish Tribe remains federally unrecognized despite continuous habitation and cultural practice. Acknowledgment established at degree 20, inherited by all subsequent releases.
 
 ### Part B: Red-shafted Flicker Drumming -- The First Drum (FLICKER PAIR COMPLETE, First Non-Vocal Sound, First Broadband Sound, First External Instrument, Fusion Trilogy Complete)
 
@@ -120,67 +128,97 @@ The resonance between Foxy Apollo and the Red-shafted Flicker drumming operates 
 
 4. **The pair transition.** Polyrhythmics (degree 21) to Foxy Apollo (degree 22): same city, same energy, different project. The 8-piece band gives way to the founder-led collective. This mirrors the flicker pair: the ensemble voice (wick call, long, tonal) gives way to the solo percussion (drum, short, broadband). Both transitions move from larger-scale, sustained, tonal production to smaller-scale, burst-form, broadband production.
 
-### The Twenty-Three Acoustic Elements
+## Engine Position
 
-The acoustic element at degree 22 is named from both engines and reconciled. Part A contributes **the groove reset** -- the moment after the ADSR release when a new cycle begins from non-zero energy, the generational handoff, the groove that continues without stopping. Part B contributes **resonant percussion** -- the first non-vocal sound, substrate-dependent broadband mechanical percussion above the fusion threshold. Together: **the groove reset / resonant percussion**. The old groove releases. The new rhythm strikes. The dead tree rings.
+Degree 22 is the twenty-third release in the Seattle 360 + Sound of Puget Sound continuous release engine. It is the first degree of the second ADSR cycle, the first consecutive same-genre pair, the second multi-degree species (Northern Flicker at 21 and 22), and the twenty-third named artist-city pattern (The Inheritor). It completes the flicker pair proposed at degree 21, closes the fusion trilogy opened at degree 11 (Oregon Junco), and introduces the first non-vocal sound, first broadband sound, and first external instrument into the engine's acoustic vocabulary. Four running ledgers advance in parallel: the acoustic progression adds resonant percussion, the artist-city taxonomy adds The Inheritor, the organizational-model spectrum adds the founder-led flexible collective, and the energy distribution establishes the E=4 streak at two consecutive degrees.
 
-| # | Element | Degree | Artist / Species |
-|---|---------|--------|-----------------|
-| 1 | Silence | 0 | Quincy Jones / Great Blue Heron |
-| 2 | Cascade | 1 | Bill Frisell / Pacific Wren |
-| 3 | Drone | 2 | Wayne Horvitz / Varied Thrush |
-| 4 | Language | 3 | Ernestine Anderson / Black-capped Chickadee |
-| 5 | Motif | 4 | Floyd Standifer / Northern Spotted Owl |
-| 6 | Metronome | 5 | Overton Berry / Red-breasted Nuthatch |
-| 7 | Question | 6 | Patti Bown / Pacific-slope Flycatcher |
-| 8 | Harmonic spiral | 7 | Julian Priester / Hermit Thrush |
-| 9 | Ultrasonic threshold | 8 | Gary Peacock / Golden-crowned Kinglet |
-| 10 | Variation | 9 | Hadley Caliman / Chestnut-backed Chickadee |
-| 11 | Minimum signal | 10 | Bud Shank / Bushtit |
-| 12 | Trill/tremolo | 11 | Joe Brazil / Oregon Junco |
-| 13 | Sawtooth sweep | 12 | Don Lanphere / Pine Siskin |
-| 14 | Ostinato | 13 | Marc Seales / Hutton's Vireo |
-| 15 | Repetition-resolution | 14 | Aaron Parks / MacGillivray's Warbler |
-| 16 | Accelerando | 15 | Thomas Marriott / Wilson's Warbler |
-| 17 | Crescendo | 16 | Jeff Lorber / Yellow Warbler |
-| 18 | The hook | 17 | Reggie Watts / Common Yellowthroat |
-| 19 | Ascending spiral | 18 | Maktub / Swainson's Thrush |
-| 20 | Descending spiral | 19 | Fly Moon Royale / Veery |
-| 21 | Sustain / the release | 20 | Whitney Monge / Orange-crowned Warbler |
-| 22 | The hammer / the release | 21 | Polyrhythmics / Northern Flicker |
-| **23** | **The groove reset / resonant percussion** | **22** | **Foxy Apollo / Red-shafted Flicker Drumming** |
+### Acoustic Progression (First Twenty-Three Elements)
 
-Twenty-three elements. The second ADSR cycle begins. The progression has moved from silence through voice and now into percussion. The new cycle starts not from zero but from the accumulated resonance of everything that came before. The groove reset is the generational handoff. The resonant percussion is the world answering back.
+| Degree | Element | Species | Character |
+|-------:|---------|---------|-----------|
+| 0 | Silence | Great Blue Heron | Patience as music |
+| 1 | Cascade | Pacific Wren | Maximum complexity |
+| 2 | Drone | Varied Thrush | Single sustained pitch |
+| 3 | Language | Black-capped Chickadee | Syntactic system |
+| 4 | Motif | Northern Spotted Owl | Four-note call |
+| 5 | Metronome | Red-breasted Nuthatch | Steady single-note beat |
+| 6 | Question | Pacific-slope Flycatcher | Ascending inflection |
+| 7 | Harmonic spiral | Hermit Thrush | Overtone series |
+| 8 | Ultrasonic threshold | Golden-crowned Kinglet | Above-hearing whisper |
+| 9 | Variation | Chestnut-backed Chickadee | Biological cover version |
+| 10 | Minimum signal | Bushtit | Noise-floor chatter |
+| 11 | Trill / tremolo | Oregon Junco | At fusion, buzz |
+| 12 | Sawtooth sweep | Pine Siskin | Rising zhreee |
+| 13 | Ostinato | Hutton's Vireo | Below-fusion repetition |
+| 14 | Repetition-resolution | MacGillivray's Warbler | The phrase that arrives |
+| 15 | Accelerando | Wilson's Warbler | Still building when it ended |
+| 16 | Crescendo | Yellow Warbler | The swell |
+| 17 | The hook | Common Yellowthroat | Witchety-witchety |
+| 18 | Ascending spiral | Swainson's Thrush | Upward phrase trajectory |
+| 19 | Descending spiral | Veery | Downward phrase trajectory |
+| 20 | Sustain / the release | Orange-crowned Warbler | ADSR release, descending fade |
+| 21 | The hammer / the release | Northern Flicker (wick call) | Below fusion, metronomic vocal pulse |
+| **22** | **The groove reset / resonant percussion** | **Foxy Apollo / Northern Flicker (drum)** | **Non-zero attack, substrate-dependent broadband percussion** |
 
-### The Twenty-Three Artist-City Patterns
+### Artist-City Patterns (First Twenty-Three)
 
-| # | Pattern | Example |
-|---|---------|---------|
-| 1 | Export | Jones (0) |
-| 2 | Draw | Frisell (1) |
-| 3 | European Exile | Horvitz (2) |
-| 4 | The Stay | Anderson (3) |
-| 5 | The Teacher | Standifer (4) |
-| 6 | The Persistence | Berry (5) |
-| 7 | The Erasure | Bown (6) |
-| 8 | Pedagogue-Draw | Priester (7) |
-| 9 | The Quiet Draw | Peacock (8) |
-| 10 | The Seeker | Caliman (9) |
-| 11 | Late Homestead | Shank (10) |
-| 12 | The Salon Keeper | Brazil (11) |
-| 13 | The Prodigal | Lanphere (12) |
-| 14 | Institutional Anchor | Seales (13) |
-| 15 | Prodigy-Export | Parks (14) |
-| 16 | Builder-Stayer | Marriott (15) |
-| 17 | Talent Incubator | Lorber (16) |
-| 18 | The Uncategorizable | Watts (17) |
-| 19 | The Workshop | Maktub (18) |
-| 20 | The New Root | Fly Moon Royale (19) |
-| 21 | The Street Laureate | Whitney Monge (20) |
-| 22 | The Ensemble Anchor | Polyrhythmics (21) |
-| **23** | **The Inheritor** | **Foxy Apollo (22)** |
+| Degree | Artist | Pattern |
+|-------:|--------|---------|
+| 0 | Quincy Jones | Export |
+| 1 | Bill Frisell | Draw |
+| 2 | Wayne Horvitz | European Exile |
+| 3 | Ernestine Anderson | The Stay |
+| 4 | Floyd Standifer | The Teacher |
+| 5 | Overton Berry | The Persistence |
+| 6 | Patti Bown | The Erasure |
+| 7 | Julian Priester | Pedagogue-Draw |
+| 8 | Gary Peacock | The Quiet Draw |
+| 9 | Hadley Caliman | The Seeker |
+| 10 | Bud Shank | Late Homestead |
+| 11 | Joe Brazil | The Salon Keeper |
+| 12 | Don Lanphere | The Prodigal |
+| 13 | Marc Seales | Institutional Anchor |
+| 14 | Aaron Parks | Prodigy-Export |
+| 15 | Thomas Marriott | Builder-Stayer |
+| 16 | Jeff Lorber | Talent Incubator |
+| 17 | Reggie Watts | The Uncategorizable |
+| 18 | Maktub | The Workshop |
+| 19 | Fly Moon Royale | The New Root |
+| 20 | Whitney Monge | The Street Laureate |
+| 21 | Polyrhythmics | The Ensemble Anchor |
+| **22** | **Foxy Apollo** | **The Inheritor** |
 
-Twenty-three patterns, twenty-three different relationships between an artist and a city. The Inheritor is the first pattern defined by being born into the scene rather than arriving at it. The scene builds itself (Workshop, New Root, Ensemble Anchor) and then produces someone who was already there (The Inheritor). The generational cycle closes.
+### Energy Distribution (First Twenty-Three Degrees)
+
+| Energy | Count | Artists (abbrev.) |
+|-------:|------:|-------------------|
+| E=1 | 2 | Peacock, Shank |
+| E=2 | 13 | Frisell, Standifer, Berry, Priester, Caliman, Brazil, Seales, and six others |
+| E=3 | 6 | Marriott (15), Lorber (16), Watts-solo (17), Maktub (18), FMR (19), Monge (20) |
+| **E=4** | **2** | **Polyrhythmics (21), Foxy Apollo (22)** |
+
+E=4 is the newly-established high-energy tier. The streak begins at degree 21 and extends at degree 22 with a distinct subtype (ensemble-kinetic to collective-kinetic). CSV lookahead suggests degrees 23-24 (Allen Stone, Ron Artis II) will extend the streak to four.
+
+### Genre Evolution (Through Twenty-Two Degrees)
+
+| Span | Genre Character |
+|------|-----------------|
+| 0-12 | Jazz-dominated, expanding through subgenres (big band, bebop, hard bop, cool, modal) |
+| 13 | Post-bop / contemporary modal (Seales) |
+| 14-16 | Warbler degrees / fusion (boundary softens) |
+| 17 | Jazz/Comedy (superposition -- boundary breaks) |
+| 18 | Soul/Jazz (Soul primary, Jazz modifier) |
+| 19-20 | Soul/Americana extensions |
+| 21 | Jazz/Funk -- first sovereign funk (Polyrhythmics) |
+| **22** | **Jazz/Funk -- same compound, different music (Foxy Apollo); first consecutive same-genre pair** |
+
+### Taxonomic State (Species Engine)
+
+- **Picidae** now two degrees but one species: Northern Flicker (21 vocal, 22 percussive). First multi-degree species in the engine.
+- **Non-passerines** remain 2/21 (Great Blue Heron, Northern Flicker). The ratio is unchanged since degree 21.
+- **Forest snag** habitat documented for the first time as a defined ecosystem -- dead standing wood as percussive substrate and keystone habitat structure.
+- **Fusion continuum** now fully mapped: at (Oregon Junco, 11), below (Northern Flicker wick, 21), above (Northern Flicker drum, 22).
+- **ADSR envelope** completes first cycle at 21 and begins second cycle at 22 (the groove reset).
 
 ## Cross-References
 
@@ -193,24 +231,27 @@ Twenty-three patterns, twenty-three different relationships between an artist an
 | **S36-005** (Overton Berry) | Groove-as-platform thread. Berry (degree 5) established groove as primary compositional element in solo piano. Maktub (18) extended to band groove. Polyrhythmics (21) extended to ensemble polyrhythm. Foxy Apollo (22) uses funk groove as the platform for vocal pop. Four entries, escalating ensemble size: solo (5, E=2) to band (18, E=3) to ensemble (21, E=4) to collective (22, E=4). |
 | **S36-020** (Whitney Monge) | Energy and geography comparison. Monge at E=3 was the last of the assertive-projective soloists. Foxy Apollo at E=4 is in the ensemble-kinetic tier. Both self-released Seattle independents. Both connect to dispersed geographic identities. |
 | **S36-001** (Bill Frisell) | Guitar thread extended to four models. Frisell (texture, degree 1). Monge (rhythm-section, degree 20). Bloom (mediator, degree 21). **Ashkenazy (funk-lead, degree 22).** Four guitar models across twenty-two degrees. Ashkenazy's guitar is the first in the engine to combine lead vocals with funk guitar. |
+| **S36-003** (Ernestine Anderson) | Vocal-led lineage. Anderson (degree 3) established the vocal-primary entry in the engine. Foxy Apollo is the fourth vocal-primary entry (after Anderson, Watts/Maktub, Monge) and the first where the vocalist is also the lead guitarist and songwriter. The vocalist-as-multi-instrumentalist configuration appears for the first time in the engine. |
 | **SPS-021** (Northern Flicker, wick call) | **THE OTHER HALF.** Same species, different mechanism. Degree 21 = voice (syrinx, tonal, discrete notes below fusion, 5-8 sec). Degree 22 = drum (bill on substrate, broadband, fused strikes above fusion, 0.6-1.2 sec). The flicker pair completes. |
 | **SPS-000** (Great Blue Heron) | **THE THREE NON-VOCAL MOMENTS.** Degree 0 = silence (no sound). Degree 22 = percussion (non-vocal sound). The engine's first and twenty-third degrees share the property of containing no voice. The heron offered silence. The flicker offers noise. |
 | **SPS-011** (Oregon Junco) | **THE FUSION TRILOGY.** Degree 11 = trill (at fusion, notes blur into buzz). Degree 21 = hammer (below fusion, each note discrete). Degree 22 = drum roll (above fusion, strikes merge into continuous roll). Three positions on the fusion continuum, now complete. |
 | **SPS-013** (Hutton's Vireo) | **REPETITION ACROSS THREE DIMENSIONS.** Ostinato (13, slow vocal), hammer (21, fast vocal), drum (22, fast mechanical). Three rates, two mechanisms, one principle: repetition as territorial signal. |
-| **SPS-020** (Orange-crowned Warbler) | **THE RELEASE AND THE STRIKE.** Degree 20 faded into silence (ADSR release). Degree 22 strikes into resonance (percussive attack). The engine moved from its softest ending to its hardest beginning in two degrees. |
+| **SPS-020** (Orange-crowned Warbler) | **THE RELEASE AND THE STRIKE.** Degree 20 faded into silence (ADSR release). Degree 22 strikes into resonance (percussive attack). The engine moved from its softest ending to its hardest beginning in two degrees. The ADSR envelope releases at 20, completes at 21, and begins its second cycle at 22. |
+| **SPS-005** (Red-breasted Nuthatch) | Percussion lineage -- vocal to mechanical. Nuthatch (degree 5) established the metronome: a steady, slow vocal pulse. Flicker wick (degree 21) extended it to a faster vocal pulse -- the hammer. Flicker drum (degree 22) transcends it entirely -- mechanical, broadband, above fusion. The repetition family now spans three physical mechanisms. |
 | **AVI** (Wings of the Pacific Northwest) | Northern Flicker drumming documented as a diagnostic behavioral cue. Drumming on metal surfaces noted as a common urban wildlife encounter in the Puget Sound region. |
 | **ECO** (Living Systems of the PNW) | Forest snag ecology: dead wood as keystone habitat structure. Snag formation pathways, density requirements, and the role of dead standing wood in PNW forest ecosystems. |
+| **S36 Engine** (Seattle 360) | Twenty-third release, twenty-second degree, eighteenth band-or-artist-project, twenty-third artist-city pattern, fourth organizational model, second ADSR cycle opening. |
+| **SPS Engine** (Sound of Puget Sound) | Twenty-third release, twenty-first unique species, second multi-degree species, first non-vocal sound, first broadband sound, first external instrument, first dead-wood ecosystem, fusion trilogy closure. |
 
 ## Infrastructure
 
-- **Part A output:** `www/tibsfox/com/Research/S36/research/releases/022-foxy-apollo/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-- **Part B output:** `www/tibsfox/com/Research/SPS/research/releases/022-red-shafted-flicker-drumming/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-- 8 files total, ~9,500 words combined
-- Both index.html pages use project-specific color schemes and link back to parent projects
-- S36 series.js and SPS series.js updated with degree 22 entries
-- Cross-references.json updated with new edges connecting degree 22 to existing nodes
-- Duwamish territorial acknowledgment inherited from degree 20
-- Flicker pair complete: degrees 21 (voice) and 22 (percussion) form a unified structural unit
+- **Part A research output:** `www/tibsfox/com/Research/S36/research/releases/022-foxy-apollo/` -- research.md (~5,700 words, 21 sources), index.html (Foxy Apollo project color scheme with parent-link navigation), knowledge-nodes.json (4 theory nodes: vocal funk platform, groove reset, pop-funk compression, Hendrix guitar lineage), retrospective.md (per-degree observation log).
+- **Part B research output:** `www/tibsfox/com/Research/SPS/research/releases/022-red-shafted-flicker-drumming/` -- research.md (~6,200 words, 29 sources), index.html (Northern Flicker color scheme), knowledge-nodes.json (6 theory nodes: resonant percussion, broadband sound, external instrument, substrate selection, forest snag ecosystem, fusion trilogy completion), retrospective.md.
+- **Release notes:** `docs/release-notes/v1.49.158/README.md` (this file, commit `bffa4f0c1`), `docs/release-notes/v1.49.158/chapter/` (00-summary.md, 03-retrospective.md, 04-lessons.md, 99-context.md).
+- **Cross-references graph:** updated with degree 22 edges -- 8 S36 internal edges (021, 018, 019, 017, 005, 020, 001, 003), 6 SPS internal edges (021, 000, 011, 013, 020, 005), 2 cross-engine edges (AVI flicker drumming, ECO forest-snag ecology).
+- **S36 + SPS series.js:** degree 22 entries added with dedication text, color metadata, cluster membership (Music hub: WAL), and the first regional-geography marker (I-5 corridor spanning Seattle, Bellingham, Anacortes).
+- **Total footprint:** 11 files modified in commit `bffa4f0c1`: 1 README.md + 10 research artifacts (4 for S36, 4 for SPS, plus 2 shared index regenerations). Approximately 11,900 words of combined research prose plus ~8,200 words of release-notes prose in this README.
+- **Chronological note:** the S36 catalog chronological reorder (2026-04-16) rotated several early-degree directories; degree 22 research was preserved through index snapshots and the commit record, and the on-disk directory may have been renamed post-publication.
 
 ## Retrospective
 
@@ -258,19 +299,25 @@ Twenty-three patterns, twenty-three different relationships between an artist an
 
 ## Lessons Learned
 
-1. **A genre compound is a container, not a prescription.** Jazz/Funk at degree 21 is instrumental polyrhythmic Afrobeat. Jazz/Funk at degree 22 is vocal psychedelic pop-funk. Same compound, different music. The lesson applies to all genre labels: they describe the ingredients, not the recipe. Track all future consecutive same-genre pairs to see whether the polarity pattern (opposite poles of the same genre) recurs or whether consecutive pairs can also be stylistically similar.
+- **A genre compound is a container, not a prescription.** Jazz/Funk at degree 21 is instrumental polyrhythmic Afrobeat. Jazz/Funk at degree 22 is vocal psychedelic pop-funk. Same compound, different music. The lesson applies to all genre labels: they describe the ingredients, not the recipe. Track all future consecutive same-genre pairs to see whether the polarity pattern (opposite poles of the same genre) recurs or whether consecutive pairs can also be stylistically similar.
 
-2. **The species-pair concept solves the introduction-of-the-unprecedented problem -- and should be used sparingly.** The flicker pair works because degree 22 introduces something qualitatively different from degree 21 (mechanical percussion vs. vocal call). If repeated frequently, species-pairs would slow the species count and reduce taxonomic breadth. The bar: the second degree must introduce something the first cannot. Apply this test to all future species-pair proposals.
+- **The species-pair concept solves the introduction-of-the-unprecedented problem -- and should be used sparingly.** The flicker pair works because degree 22 introduces something qualitatively different from degree 21 (mechanical percussion vs. vocal call). If repeated frequently, species-pairs would slow the species count and reduce taxonomic breadth. The bar: the second degree must introduce something the first cannot. Apply this test to all future species-pair proposals.
 
-3. **External instrument selection (the substrate-as-instrument concept) opens a new dimension in the engine's acoustic framework.** Twenty-one degrees of anatomically-determined sound established that the performer's body shapes the sound. One degree of substrate-dependent percussion establishes that the world also shapes the sound. The lesson: when a single entry introduces a genuinely new dimension, document it exhaustively. The substrate concept will apply to future non-vocal sounds (wing displays, winnowing, tail sounds).
+- **External instrument selection (the substrate-as-instrument concept) opens a new dimension in the engine's acoustic framework.** Twenty-one degrees of anatomically-determined sound established that the performer's body shapes the sound. One degree of substrate-dependent percussion establishes that the world also shapes the sound. The lesson: when a single entry introduces a genuinely new dimension, document it exhaustively. The substrate concept will apply to future non-vocal sounds (wing displays, winnowing, tail sounds).
 
-4. **Scene ecology emerges from consecutive degrees documenting the same ecosystem.** Degrees 18-22 (Maktub, FMR, Monge, Polyrhythmics, Foxy Apollo) unintentionally produced a five-degree study of how a music scene operates: workshop, collective, individual, anchor, inheritor. The lesson: consecutive degrees in the same genre zone produce structural insights that no single degree can. The funk/soul quadrant's scene ecology emerged from the data, not from planning.
+- **Scene ecology emerges from consecutive degrees documenting the same ecosystem.** Degrees 18-22 (Maktub, FMR, Monge, Polyrhythmics, Foxy Apollo) unintentionally produced a five-degree study of how a music scene operates: workshop, collective, individual, anchor, inheritor. The lesson: consecutive degrees in the same genre zone produce structural insights that no single degree can. The funk/soul quadrant's scene ecology emerged from the data, not from planning.
 
-5. **The documentation gap is itself structural data.** Foxy Apollo's thin documentation (21 sources vs. 24-38 range) is not a failure -- it is evidence of the emerging-artist tax. The engine's research methodology is optimized for established artists. Emerging artists exist primarily in social media, Bandcamp, and local event listings. The lesson: when the engine encounters more emerging artists, supplement web search with Bandcamp deep dives, social media analysis, and local event archive databases.
+- **The documentation gap is itself structural data.** Foxy Apollo's thin documentation (21 sources vs. 24-38 range) is not a failure -- it is evidence of the emerging-artist tax. The engine's research methodology is optimized for established artists. Emerging artists exist primarily in social media, Bandcamp, and local event listings. The lesson: when the engine encounters more emerging artists, supplement web search with Bandcamp deep dives, social media analysis, and local event archive databases.
 
-6. **The ADSR envelope's second cycle begins at non-zero.** The groove reset at degree 22 confirms that the engine does not restart from silence after completing one envelope. Everything accumulated in the first cycle (twenty-two degrees of vocabulary, patterns, cross-references) persists. The second cycle inherits the first. The lesson: macro-structural cycles in the engine are not loops that return to origin -- they are spirals that begin each cycle higher than the last.
+- **The ADSR envelope's second cycle begins at non-zero.** The groove reset at degree 22 confirms that the engine does not restart from silence after completing one envelope. Everything accumulated in the first cycle (twenty-two degrees of vocabulary, patterns, cross-references) persists. The second cycle inherits the first. The lesson: macro-structural cycles in the engine are not loops that return to origin -- they are spirals that begin each cycle higher than the last.
 
-7. **Dispersed geography may be the new normal for younger artists.** The I-5 corridor identity at degree 22 reflects real economic and cultural forces: real estate costs pushing musicians to peripheral cities, digital distribution reducing proximity requirements, regional touring circuits. The engine should track whether subsequent degrees continue the dispersal trend or return to neighborhood-specific. The geographic schema may need a permanent regional category.
+- **Dispersed geography may be the new normal for younger artists.** The I-5 corridor identity at degree 22 reflects real economic and cultural forces: real estate costs pushing musicians to peripheral cities, digital distribution reducing proximity requirements, regional touring circuits. The engine should track whether subsequent degrees continue the dispersal trend or return to neighborhood-specific. The geographic schema may need a permanent regional category.
+
+- **Paired-engine systems earn their pairing through structural isomorphism.** Foxy Apollo and Northern Flicker drumming share a degree because both perform the same operation -- self-released percussion, substrate-dependent timbre, energy sustained, transition via pair structure -- in their respective domains. The pairing is not metaphorical. It is a statement that the two subjects produce the same structural behavior via different media. Future Part A / Part B selection should apply this test at the decision point: do the two subjects perform the same structural operation, even if their surfaces look entirely different? If yes, pair them. If no, decline the pairing and keep searching.
+
+- **Regional geography requires its own schema category, not just an extension of neighborhood labels.** The I-5 corridor is not "multiple neighborhoods" and not "outside Seattle" -- it is a coherent regional unit with its own recording infrastructure, touring circuit, and indie-music identity. The engine's geographic schema should recognize three categories: neighborhood-specific, multi-neighborhood, and regional. The regional category is new at degree 22 and will recur whenever the engine encounters a band whose identity spans multiple metro areas.
+
+- **Percussion is a first-class music-making category, not background support.** Twenty-one degrees of melody-and-harmony primacy ended at degree 22 with the drum. The engine should no longer default to pitched sound as the primary acoustic vocabulary. Percussion, broadband sound, and mechanical transient events deserve their own acoustic dimensions and their own theory nodes. The lesson applies to future species (wing displays, bill claps, winnowing) and to future musicians (drummers as degree-holders, percussion instruments as primary rather than accompaniment).
 
 ---
 
@@ -279,3 +326,5 @@ Twenty-three patterns, twenty-three different relationships between an artist an
 **Progression:** silence -- cascade -- drone -- language -- motif -- metronome -- question -- harmonic spiral -- ultrasonic threshold -- variation -- minimum signal -- trill/tremolo -- sawtooth sweep -- ostinato -- repetition-resolution -- accelerando -- crescendo -- the hook -- ascending spiral -- descending spiral -- sustain / the release -- the hammer / the release -- **the groove reset / resonant percussion**
 
 </details>
+</content>
+</invoke>
