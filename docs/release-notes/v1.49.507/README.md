@@ -1,137 +1,225 @@
-# v1.49.507 -- Degree 6: The Erasure and the Question
+# v1.49.507 — Degree 6: The Erasure and the Question
 
 **Released:** 2026-04-04
 **Degree:** 6 of 360
-**Part A:** Patti Bown -- Jazz Piano/Hard Bop/Avant-Garde, E=2, Central District, Columbia Records, born 1931 Seattle, Seattle University, exported to NYC. *Patti Bown Plays Big Piano* (1958). Worked with Quincy Jones, Oliver Nelson, Duke Pearson. Motown session pianist. Died 2008 Philadelphia. Forgotten. The Erasure.
-**Part B:** Pacific-slope Flycatcher (*Empidonax difficilis*) -- upslurred wheeet, E=2, riparian alder, Tyrannidae. Voice as primary identity -- species exists as recognized taxon because of its call. First neotropical migrant (April-September only). First seasonal voice. The ascending question mark.
-**NASA Mission:** 1.6 -- Explorer 6 (August 7, 1959. Earth orbiter. First crude photograph of Earth from orbit -- single photocell scanning 100 scan lines over 40 minutes. Ring current confirmation. Multi-instrument magnetospheric survey. Dedicated to Vincent van Gogh.)
-**NASA Organism:** Trametes versicolor (Turkey Tail Fungus -- concentric color bands as scan lines, white-rot decomposer, lignin breaker, medicinal PSK polysaccharide, the most common bracket fungus in PNW forests)
-**Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
+**Scope:** NASA paired-engine degree release — S36 Pass 2 + SPS Pass 2 + NASA 1.6
+**Branch:** dev
+**Commit:** `dabebc7c7` — feat(www): v1.49.507 — degree 6 paired release (NASA 1.6 + S36/SPS Pass 2)
+**Files changed:** 8
+**Part A:** Patti Bown — Jazz Piano / Hard Bop / Avant-Garde, E=2, Central District Seattle, Columbia Records, born 1931 Seattle, Seattle University, exported to NYC. *Patti Bown Plays Big Piano* (1958). Worked with Quincy Jones, Oliver Nelson, Duke Pearson. Motown session pianist. Died 2008 Philadelphia. Forgotten. The Erasure.
+**Part B:** Pacific-slope Flycatcher (*Empidonax difficilis*) — upslurred wheeet, E=2, riparian alder, Tyrannidae. Voice as primary identity; the species exists as a recognized taxon because of its call. First neotropical migrant in the engine (April–September only). First seasonal voice. The ascending question mark.
+**NASA Mission:** 1.6 — Explorer 6 (August 7, 1959. Earth orbiter. First crude photograph of Earth from orbit — single photocell scanning 100 scan lines across 40 minutes. Ring current confirmation. Multi-instrument magnetospheric survey. Dedicated to Vincent van Gogh.)
+**NASA Organism:** *Trametes versicolor* — Turkey Tail Fungus, concentric color bands as scan lines, white-rot decomposer, lignin breaker, medicinal PSK polysaccharide, the most common bracket fungus in PNW forests.
+**Series:** NASA Paired Release Engine — Continuous Dual-Track Build
+**Cluster:** Jazz / Piano — The Erasure (hub: Central District, Columbia Records)
+**Dedication:** Vincent van Gogh — an artist whose output was real and significant, invisible to the market during his lifetime, recognized posthumously. The structural parallel to Patti Bown's career arc made explicit.
 **Engine Position:** Seventh paired release. First release of the second cycle. Degree 6 = the question, the erasure, the seasonal voice.
 
 ## Summary
 
-The seventh paired release and the first of the second cycle. The opening pentad (degrees 0-5) established all foundational patterns. Degree 6 begins extending those patterns into new territory — new failure modes (erasure instead of recovery), new temporal modes (seasonal presence instead of year-round), new ecosystems (riparian alder instead of conifer forest), and new identity models (voice-constituted taxonomy instead of plumage-based).
+The seventh paired release and the first of the second cycle. The opening pentad — degrees 0 through 5 — established the foundational patterns of the NASA Paired Release Engine: the Central District thread anchored by Quincy Jones, Bill Frisell, Wayne Horvitz, Ernestine Anderson, Zanaida Standifer, and Earl Berry; the NASA failure taxonomy from Vanguard TV-3's catastrophic disintegration through Pioneer 1's partial success, Pioneer 2's silent failure, Pioneer 3's range failure, and Pioneer 4's escape velocity achievement; the SPS Communication Architecture from silence through complexity, atmosphere, meaning, diagnosis, and reception; the NASA botanical profile from Armillaria fungus through Fireweed, Sword Fern, Salal, Usnea, and Douglas-fir. Degree 6 begins extending those patterns into new territory — new failure modes, new temporal modes, new ecosystems, and new identity models. What the first six releases locked in structurally, this release begins to stretch.
 
-Patti Bown was born in 1931 in Seattle's Central District — the seventh consecutive degree connected to that neighborhood. She studied at Seattle University (seventh educational pipeline in the engine), moved to New York, debuted on Columbia Records with *Patti Bown Plays Big Piano* (1958), worked with Quincy Jones and Oliver Nelson, performed Motown session work, was favorably reviewed in DownBeat — and was forgotten. No reissues, no retrospectives, no Grammy nominations. She died in 2008 in Philadelphia. The Central District did not mourn publicly. The Erasure is the dark twin of The Export: same departure, same destination, opposite outcome. Jones left and the world knew his name. Bown left and nobody preserved hers.
+Patti Bown was born in 1931 in Seattle's Central District — the seventh consecutive degree connected to that neighborhood. She studied at Seattle University (the seventh educational pipeline feeding the engine after Garfield High, Cornish, and the Jackson Street performance circuit). She moved to New York in the late 1950s, debuted on Columbia Records with *Patti Bown Plays Big Piano* in 1958, worked with Quincy Jones and Oliver Nelson and Duke Pearson, performed Motown session work through the 1960s, was favorably reviewed in DownBeat — and then, across the decades that followed, she was forgotten. No reissues. No retrospectives. No Grammy nominations. No Concord-style revival. She died in 2008 in Philadelphia. The Central District did not mourn her publicly. The Erasure is the dark twin of The Export that Quincy Jones embodied at degree 0: same departure geography, same destination geography, opposite preservation outcome. Jones left and the world knew his name. Bown left and nobody preserved hers. The engine catalogues the Erasure as the ninth artist-city pattern — structurally distinct from the first eight, requiring its own vocabulary because its downstream consequences (absence from institutional memory, absence from pedagogical canon, absence from reissue economies) are different from the consequences of Export, Draw, Builder, Exile, Stay, Return, Stayed-Out, and Re-Imported.
 
-The Pacific-slope Flycatcher lifts a single upslurred whistle from the riparian alder — "ptseet" — an ascending question that hangs unresolved. This is the first species in the engine whose identity is constituted entirely by voice. The 1989 taxonomic split from the Cordilleran Flycatcher was driven by vocal differences; the species exists as a recognized taxon because of its call. It is also the first neotropical migrant — present April through September, absent October through March — introducing seasonal presence to the SPS communication architecture. And its three-phrase dawn song (ptseet... ptsik... suweet) is the first multi-section formal structure in the engine.
+The Pacific-slope Flycatcher (*Empidonax difficilis*) lifts a single upslurred whistle from the riparian alder thickets of the Pacific Northwest — "ptseet" — an ascending question that hangs unresolved. This is the first species in the engine whose identity is constituted entirely by voice. The 1989 taxonomic split from the Cordilleran Flycatcher was driven not by plumage, morphology, range, or habitat — on all those axes the two species are indistinguishable — but by vocal differences analyzed spectrographically. The species exists as a recognized taxon because of its call. It is also the first neotropical migrant in the SPS engine — present April through September in the Pacific Northwest, absent October through March as it winters in southern Mexico and Central America — introducing seasonal presence to the SPS communication architecture. The ensemble's membership now changes with the calendar. Seven acoustic roles, one of them available only half the year. And its three-phrase dawn song (ptseet... ptsik... suweet) is the first multi-section formal structure in the engine — ternary form, the simplest complete formal organization, the foundational shape from which fugue, sonata, and rondo all extend. Where the first six species produced unitary signals (Anna's Hummingbird's dive buzz, Black-capped Chickadee's D-note string, Varied Thrush's whistle, Red-breasted Nuthatch's yank, Pacific Wren's cascade), the Pacific-slope Flycatcher produces a small composition.
 
-Explorer 6 orbited Earth and produced the first photograph from orbit — a crude, barely-recognizable crescent assembled from 100 scan lines by a single photocell as the spacecraft spun. The photograph was historically significant and quickly forgotten, superseded by TIROS, Lunar Orbiter, and Apollo within a decade. Turkey tail grows in concentric color bands on dead wood — each band a scan line recording the chemical conditions of one growth period. The most common bracket fungus in PNW forests, and the white-rot decomposer that breaks lignin, the resistant polymer no other organism can touch.
+Explorer 6 orbited Earth on August 7, 1959, and returned the first photograph from orbit — a crude, barely-recognizable crescent assembled from 100 scan lines by a single photocell as the spacecraft spun on its spin-stabilization axis. The photograph was historically significant: the first time any civilization saw its own planet from outside the atmosphere, predating the TIROS weather satellites, the Lunar Orbiter program, Apollo 8's Earthrise, and every subsequent Blue Marble by years or decades. And the photograph was quickly forgotten. TIROS-1 launched in April 1960 and immediately produced higher-resolution imagery. Lunar Orbiter in 1966 produced imagery no photocell could match. Apollo 8 in 1968 produced the iconic Earthrise. Explorer 6's crescent was superseded within a decade and superseded again within a second decade. The mission's scientific legacy — confirmation of the ring current, multi-instrument magnetospheric survey, proof that a spinning spacecraft could produce usable imagery — persisted in the scientific record. The photograph itself did not persist in cultural memory. The parallel to Patti Bown's Columbia debut is structural: historically significant, quickly superseded, preserved in specialist archives but absent from the canonical narrative.
+
+Turkey tail (*Trametes versicolor*) grows in concentric color bands on dead wood — each band a scan line recording the chemical conditions of one growth period, identical in principle to Explorer 6's 100-line photocell image. Turkey tail is the most common bracket fungus in Pacific Northwest forests, and it is the white-rot decomposer that breaks lignin, the resistant three-dimensional cross-linked polymer no other organism in the temperate forest can fully metabolize. Armillaria (degree 0) is a pathogen. Fireweed (degree 1) is a disturbance colonizer. Sword fern (degree 2) is an understory perennial. Salal (degree 3) is a shrub-layer rhizome. Usnea (degree 4) is a canopy epiphyte. Douglas-fir (degree 5) is the canopy dominant. Turkey tail (degree 6) is the recycler — the organism that returns the dead tree's nutrients to the soil so the next Douglas-fir can rise. The NASA botanical profile now spans the full forest vertical: pathogen, disturbance, understory, shrub, epiphyte, canopy, decomposer. Degree 6 adds the layer that closes the carbon loop.
+
+The cross-resonance between Part A and Part B is the engine's densest erasure-theme match. Bown's identity was constituted incrementally by each performance — every Columbia session, every Motown date, every DownBeat review a scan line — but the accumulation was not preserved. The Pacific-slope Flycatcher's identity is constituted incrementally by each call — every ptseet from every riparian alder across the Pacific Northwest a scan line — and the accumulation is preserved by the taxonomic apparatus precisely because the vocal-analysis scientific community was calibrated to resolve what the plumage-analysis scientific community had missed. The flycatcher's preservation is what Bown's preservation could have been if the jazz industry's legacy-preservation mechanism had been calibrated the way the ornithological vocal-analysis community was calibrated. Same identity-constituted-by-signal structure. Opposite preservation outcomes. The engine documents this convergence explicitly because it bears on the engine's own work: the paired-release method is itself a preservation calibration, and the calibration it chooses determines what the engine can resolve.
+
+The cross-resonance between Part A and the NASA mission deepens the same theme. Explorer 6's photocell scanned at the detection threshold the spacecraft's bandwidth allowed — above that threshold, features resolved; below it, features dissolved into noise. The jazz industry's legacy-preservation mechanism operates like Explorer 6's photocell: it scans the landscape and resolves features above a brightness threshold while leaving others below the noise floor. The threshold is not neutral. It is structurally biased — calibrated to detect male artists more readily than female, vocalists more readily than instrumentalists, continuous recording contracts more readily than single releases, explosive style shifts more readily than incremental craftsmanship, artists with institutional sponsors more readily than artists without. Bown was spectrally dim across every channel the industry was calibrated to detect. She was female in an instrumentalist lineage, she released one headline album (Columbia 1958) and then moved to session work, her style was hard bop rather than avant-garde, and she had no sustained institutional sponsor after Columbia declined to release a follow-up. The Erasure is not an accident of individual circumstance. It is a resolution failure of a biased scanner. Turkey tail's role as decomposer in this resonance is explicit: the engine decomposes the lignin of the Erasure — breaking the resistant cross-linked structure of neglect into processable components (gender barrier, instrumentalist barrier, single-album barrier, session-work invisibility, post-revival indifference) that can be analyzed, documented, and understood.
+
+The cross-resonance between Part B and Explorer 6 extends the scanning-as-identity-construction theme. Explorer 6's spinning-spacecraft architecture produced periodic data windows — in view of the photocell for part of each rotation, out of view for the rest. The spacecraft's highly eccentric orbit compounded the periodicity — in radio range of specific ground stations for part of each orbit, out of range for the rest. The photograph assembled incrementally over 40 minutes from thousands of partial scans. The Pacific-slope Flycatcher's annual cycle creates the seasonal analog: in range April through September, out of range October through March. The SPS communication architecture now includes its first seasonal voice, its first periodic presence, its first acoustic role whose membership in the ensemble depends on the calendar. Seven roles total in the SPS through degree 6 — silence, complexity, atmosphere, meaning, diagnosis, reception, ascending question — and the seventh is the first to be temporally conditional. Future migrants (Swainson's Thrush, Warbling Vireo, Wilson's Warbler, Orange-crowned Warbler) will multiply the seasonal voices. The ensemble will eventually be a chamber group whose roster rotates twice per year. This release introduces that possibility.
+
+The cross-resonance between Part B and turkey tail extends the shared-substrate theme. The Pacific-slope Flycatcher nests in living alder, typically red alder (*Alnus rubra*) and occasionally white alder. Turkey tail grows on dead alder — alder is one of its preferred substrates along with birch, maple, and oak. The flycatcher and the fungus are vertically co-located in the same tree at different points of its life cycle: the flycatcher uses the living canopy for nesting and foraging; the fungus uses the dead trunk for decomposition once the tree falls. The paired engine's music-bird-mission-organism alignment is not merely structural at degree 6 — it is literal biological co-location, the same as it was at degree 3 (chickadee + salal in the same forest cubic meter). The flycatcher's 2–3% annual population decline in the Pacific Northwest is the first negative population trend in the engine that is not accompanied by Endangered Species Act listing or other institutional conservation alarm — a quiet erosion at the ecosystem level paralleling Bown's quiet erasure at the cultural level. The engine introduces a new conservation category at degree 6: declining without listing. The Pacific-slope Flycatcher is the first entry in that category. It will not be the last.
+
+The Van Gogh dedication extends the Erasure theme explicitly. Van Gogh's productive career was nine years long — 1881 to 1890 — during which he produced over 2,100 works including the Sunflowers series, the Starry Night, the Wheat Field with Crows. He sold one painting during his lifetime. He died by suicide in July 1890, poor, institutionally invisible, believing his work had failed. The posthumous recognition built gradually through the 1890s and 1900s as Theo's widow Johanna Bonger worked tirelessly to preserve the archive and promote the work. By the 1920s Van Gogh was a canonical modernist. By the 1990s his paintings commanded among the highest prices ever recorded at auction. The Sunflowers sold in 1987 for $39.9 million. The Portrait of Dr. Gachet sold in 1990 for $82.5 million. The posthumous market valued what the contemporaneous market had not been calibrated to resolve. Bown's career has not yet found its Bonger. The engine documents the absence. The dedication names the parallel.
+
+The piano lineage at degree 5 through degree 6 is the engine's first consecutive instrument pair, and it inverts every dimension simultaneously. Earl Berry at degree 5 played stride — rooted voicings, left-hand bass notes and chord hits, self-sufficient solo architecture, a style built during the 1920s and 1930s and preserved in Central District venues through the 1960s. Patti Bown at degree 6 played hard bop — rootless voicings in the right hand, bass supplied by a separate bass player, trio architecture dependent on a network of collaborators, a style built during the 1950s and 1960s in the bebop afterwave. The inversion is total: rooted versus rootless, solo versus trio, continuous venue versus episodic session, stayed in the Central District versus left for New York, recognized in local memory versus erased from national memory, male versus female. The degree-adjacency produces structural contrast rather than structural progression. The lesson for the engine: adjacent degrees may be mirrors as often as they are steps. The piano lineage's total inversion was not predicted by the opening pentad; it emerged from the carry-forward discipline of degree 5 into degree 6. Future consecutive-instrument pairs will be examined for similar inversion structures.
+
+The Central District thread reaches its seventh consecutive degree at degree 6. Jones (Export), Frisell (Draw), Horvitz (Builder), Anderson (Exile/Stay), Standifer (Migration/Return), Berry (Venue Anchor), Bown (Erasure). Six of seven primary artists are Central District natives or long-term residents; Frisell is the lone non-CD artist, drawn to Seattle later in his career. The thread is now load-bearing to the point of saturation. The engine acknowledges this explicitly: six consecutive Central District degrees is a structural declaration, but seven approaches the point where the declaration risks becoming an assumption. Diversification is flagged as imminent. Future degrees will introduce Pacific Northwest artists from outside the Central District — Tacoma, Portland, Olympia, the San Juan Islands, Vancouver BC, Spokane — so the engine's geographical narrative does not collapse into a single neighborhood's story. The Central District is the engine's hub; hub-and-spoke requires spokes. The spokes begin at degree 7.
+
+The Explorer program's entry at degree 6 diversifies the NASA mission lineage. Pioneer 0 through Pioneer 4 (degrees 1 through 5) all launched on ABMA or Air Force vehicles associated with the Pioneer program. Explorer 6 launched on a Thor-Able stack — originally an Air Force asset, operated at degree 6 by NASA and ARPA jointly — marking the NASA mission series's first departure from the Pioneer monolith. Future degrees will introduce Mariner (planetary), Ranger (lunar impact), Surveyor (lunar soft-landing), Gemini (crewed), Apollo (crewed lunar), Mariner-Voyager-Pioneer-outer-system, Viking (Mars), and the long tail of Earth-observing, astrophysics, and planetary-science missions. The engine's NASA track will not be a single mission family; it will be the full fifty-year institutional history in one mission per degree. Degree 6 opens that door.
 
 ## Key Features
 
 | Metric | Part A: Patti Bown | Part B: Pacific-slope Flycatcher |
 |--------|-------------------|----------------------------------|
-| Energy | E=2 (hard bop intensity, not volume) | E=2 (thin whistle, riparian understory) |
-| Acoustic Element | Hard bop piano (rootless voicings, percussive comping) | Ascending question (upslurred "ptseet") |
-| Artist-City Pattern | The Erasure (exported, succeeded, forgotten) | -- |
-| Central District | Born 1931. Seattle University. Exported to NYC. Erased. | -- |
-| NASA Parallel | Explorer 6's first photograph = significant, quickly forgotten | Flycatcher's voice-constituted identity = identity built from minimal repeated scans |
-| Organism Parallel | Turkey tail decomposes lignin = engine decomposes the Erasure | Flycatcher nests in living alder; turkey tail decomposes dead alder — shared substrate |
-| Structural Firsts | First female instrumentalist in engine; second pianist; seventh CD artist; The Erasure pattern; gender-instrumentalist barrier documented | First neotropical migrant; first seasonal voice; first multi-section formal structure (ternary dawn song); first riparian alder ecosystem; first declining-population species without ESA listing |
+| Energy | E=2 (hard bop intensity, rootless voicings, percussive comping — not volume) | E=2 (thin upslurred whistle, riparian understory, seasonal presence) |
+| Acoustic Element | Hard bop piano (rootless voicings, percussive comping, network-dependent trio) | Ascending question (upslurred "ptseet"), three-phrase dawn song (ternary form) |
+| Artist-City Pattern | The Erasure (exported, succeeded, forgotten) — ninth pattern in taxonomy | — |
+| Central District | Born 1931. Seattle University. Exported to NYC. Erased from memory. | — |
+| NASA Parallel | Explorer 6's first photograph — significant, quickly superseded, forgotten | Flycatcher's voice-constituted identity — identity built incrementally from minimal repeated scans, as Explorer 6's photograph built from 100 photocell scan lines |
+| Organism Parallel | Turkey tail decomposes lignin = engine decomposes the Erasure's resistant cross-linked structure | Flycatcher nests in living alder; turkey tail decomposes dead alder — shared substrate, vertical co-location across the tree's life cycle |
+| Structural Firsts | First female instrumentalist in engine; second pianist; seventh CD artist; The Erasure pattern named; gender-instrumentalist barrier documented | First neotropical migrant; first seasonal voice; first multi-section formal structure (ternary dawn song); first riparian alder ecosystem; first declining-population species without ESA listing |
+| S36 Words (Pass 2) | 2,087 (pass2-refinement on erasure, pianistic inversion, gender barrier) | — |
+| SPS Words (Pass 2) | — | 1,912 (pass2-refinement on voice-as-identity, seasonal scan, ternary form, riparian alder) |
 
 <details>
-<summary>Full Release Notes -- Click to expand</summary>
+<summary>Full Release Notes — Click to expand</summary>
 
-## Part A: Patti Bown -- THE ERASURE
+## Part A: Patti Bown — THE ERASURE
 
-### Pass 2 Refinement Summary (2,087 words)
+- **Central District Origins (1931–1949).** Born 1931 in Seattle's Central District — the neighborhood compressed between 12th Avenue and 23rd, between Yesler Way and Jackson Street, that produced Quincy Jones, Ernestine Anderson, and the Jackson Street jazz substrate of the 1940s and 1950s. Bown grew up in the same geographical substrate as Jones (one year older than she) and Anderson (three years older). Classical piano study began early; the hard bop turn came later, in her college years.
+- **Seattle University and the Formal Training Track (1949–1955).** Unlike Jones (Garfield High, Berklee briefly, then immediate professional trajectory), Bown completed a formal college music degree at Seattle University — the engine's seventh educational pipeline and the first Catholic-institutional educational pipeline. The classical-training-to-hard-bop transition shaped her voicings: the rootless right-hand chords are more harmonically sophisticated than a purely jazz-apprentice pianist would have produced, reflecting the formal conservatory background.
+- **The Columbia Debut — *Patti Bown Plays Big Piano* (1958).** Columbia Records released the album in 1958 under the production oversight of George Avakian, the same producer who shaped Miles Davis's *Kind of Blue* the following year. The album showcased Bown's hard bop trio work — rootless voicings, percussive comping, bebop-derived lines, and a compositional sensibility that DownBeat's contemporaneous review specifically praised. The album was the first and last Columbia release under Bown's name.
+- **Quincy Jones Collaborations (1959–1964).** Bown worked extensively as Jones's session pianist on his Mercury Records big-band albums of the early 1960s — *Big Band Bossa Nova*, *Around the World*, *I Dig Dancers*. The Central District connection held: the degree-0 artist and the degree-6 artist collaborated professionally for five years, yet the degree-6 artist's visibility did not rise with the degree-0 artist's. The session-pianist role is structurally invisible. Jones became Jones; Bown's name appeared in liner notes only.
+- **Oliver Nelson and Duke Pearson (1961–1966).** Session work expanded to Oliver Nelson's *The Blues and the Abstract Truth* orchestra sessions (her playing audible on the album's ensemble passages even when not soloing), Duke Pearson's Blue Note dates, and a widening network of New York hard bop leaders. The craft was respected within the session community. The session community's invisibility to the broader jazz public limited the reputational benefit.
+- **Motown Session Work (1965–1972).** Bown moved partly into Motown session work in the mid-1960s — an unusual cross-genre move for a jazz-trained pianist, and one that further invisibilized her within the jazz legacy-preservation apparatus. Motown pianists were institutionally absorbed into the label's Funk Brothers tradition, which did not individuate pianistic contributions the way jazz session work did. Bown's Motown years left almost no publicly attributable discography traces.
+- **The Long Fade (1972–2008).** From the mid-1970s forward, Bown's visibility in the jazz press declined steadily. No second leader album. No reissues of the Columbia debut. No Concord-style revival signing. No Grammy nomination. No Jazz Master designation from the NEA. She died in 2008 in Philadelphia. The Central District did not mourn her publicly. The Seattle Times did not run a major obituary. The Erasure is not a single event — it is a thirty-year progressive fade.
+- **The Gender-Instrumentalist Barrier.** The engine's first explicitly named structural barrier. Jazz vocal performance was a culturally sanctioned role for women throughout the twentieth century (Anderson at degree 3 is the engine's first vocalist). Jazz instrumental performance — particularly piano, trumpet, saxophone, and drums — was culturally coded as male, and the institutional apparatus of legacy preservation was calibrated around that coding. Bown was female in an instrumentalist lineage; Mary Lou Williams, Marian McPartland, Toshiko Akiyoshi, Geri Allen, and a small set of other female jazz pianists achieved preservation by combining exceptional longevity with explicit advocacy work and institutional alliances that Bown did not assemble. The barrier is documented at degree 6 as structurally resistant — a cross-linked polymer requiring non-specific oxidative decomposition (the turkey tail analogy made explicit).
 
-Three new research sections deepening the structural analysis of erasure, pianistic inversion, and the gender barrier:
+### Pass 2 Refinement — Deep Analysis (S36 Research, 2,087 words)
 
-**1. The Erasure as Failed Scan — What the Industry's Photocell Could Not Resolve.** The jazz industry's legacy-preservation mechanism operates like Explorer 6's photocell: it scans the landscape and resolves features above a brightness threshold while leaving others below the noise floor. The threshold is structurally biased — calibrated to detect male artists more than female, vocalists more than instrumentalists, continuous recording contracts more than single releases. Bown was spectrally dim across every channel the industry was calibrated to detect. Turkey tail's role as decomposer: the S36 engine decomposes the lignin of the Erasure — breaking the resistant structure of neglect into processable components (gender barrier, instrumentalist barrier, single-album barrier, session-work invisibility) that can be analyzed, documented, and understood.
+**1. The Erasure as Failed Scan — What the Industry's Photocell Could Not Resolve.** The jazz industry's legacy-preservation mechanism operates like Explorer 6's photocell: it scans the landscape and resolves features above a brightness threshold while leaving others below the noise floor. The threshold is structurally biased. Bown was spectrally dim across every channel the industry was calibrated to detect: female in an instrumentalist lineage, single-album leader, session-heavy post-debut career, hard bop rather than avant-garde, no sustained institutional sponsor. Turkey tail's role as decomposer: the engine decomposes the lignin of the Erasure — breaking the resistant cross-linked structure of neglect into analyzable components.
 
 **2. The Piano Lineage Inverts — Stride to Hard Bop, Rooted to Rootless.** Berry (degree 5) and Bown (degree 6) form the engine's first consecutive instrument pair. Every dimension inverts: rooted/rootless, solo/trio, continuous/episodic, stayed/left, recognized/erased, male/female. Berry's self-sufficient stride (Pioneer 4's self-contained spacecraft) versus Bown's collaborative rootless voicings (Explorer 6's network-dependent imaging). The piano lineage is a mirror, not a progression.
 
-**3. Explorer 6 Resonance — The First Picture Nobody Remembers.** Explorer 6's photograph: historically significant, quickly superseded by TIROS, Lunar Orbiter, Apollo. Bown's Columbia debut: historically significant, quickly superseded by Hancock, Tyner, Corea. Both proved something was possible, the proof was consumed, and the proof-maker's name was not preserved. The Van Gogh dedication extends the resonance: an artist whose output was real and significant, invisible to the market during his lifetime, with structural parallels to Bown's career arc. The gender barrier as lignin: a three-dimensional cross-linked structure resistant to any single enzymatic attack, requiring the non-specific oxidative decomposition that the engine provides.
-
-### Retrospective: Degree 6 Patterns Established
-
-1. **The Erasure as ninth artist-city pattern.** Bown's trajectory — exported, succeeded on Columbia Records, session-worked through Motown, favorably reviewed, died 2008 Philadelphia, forgotten — is the dark twin of The Export (Quincy Jones, degree 0). Same departure, same destination, opposite preservation outcome. The Erasure is structurally distinct, not a minor variant.
-
-2. **Piano lineage inversion — Berry (5) ↔ Bown (6).** The engine's first consecutive instrument pair inverts every dimension: rooted stride vs. rootless hard-bop voicings, solo vs. trio, continuous vs. episodic, stayed vs. left, recognized vs. erased, male vs. female. The degree-adjacency produces contrast, not progression.
-
-3. **Explorer program enters the mission lineage.** Explorer 6 (Thor-Able, NASA/ARPA) breaks the Pioneer-only monolith of degrees 1-5. The scan-line photograph — 100 lines assembled by a single photocell from a spinning spacecraft — is historically significant and quickly forgotten, mirroring Bown's Columbia debut as the first-picture-nobody-remembers.
-
-4. **Turkey tail as decomposer layer.** *Trametes versicolor* extends the NASA botanical profile beyond the canopy (degrees 0-5) to the recycling stratum. The white-rot decomposer breaks lignin — the resistant polymer no other organism can touch — the same role the engine plays by decomposing the structural bias that produced the Erasure.
-
-5. **Van Gogh as structural dedication parallel.** An artist whose output was real and significant, invisible to the market during his lifetime, recognized posthumously — the same career arc as Bown. The dedication framework connects each release to a historical figure whose life echoes the degree's pattern.
-
-6. **Seventh consecutive Central District degree.** Bown (born 1931, Seattle University) keeps the CD thread unbroken into the second cycle, even as the pattern begins acknowledging saturation. Six of seven primary artists are Central District; diversification is flagged as imminent.
-
-### Retrospective: Degree 6 Lessons Learned
-
-1. **The engine must document what the canon dropped.** Bown's inclusion is not advocacy; it is inventory. A map of Seattle's musical geography that only counts filter survivors is incomplete. The Erasure is not a minor variant of The Export — it is a structurally distinct outcome requiring its own pattern name and its own analytical framework.
-
-2. **The piano lineage's total inversion was unexpected.** The degree 5→6 transition inverts every dimension simultaneously — voicings, context, left-hand function, training, trajectory, gender, visibility. This suggests that the engine's degree-adjacency produces structural contrasts as readily as structural progressions. Adjacent degrees may be mirrors as often as they are steps.
-
-3. **The gender-instrumentalist barrier is the most resistant structure encountered so far.** Unlike the Central District thread (which documents a functioning community) or the NASA failure taxonomy (which documents convergent engineering), the Erasure documents a systemic failure — a structural bias in the legacy-preservation system that operated against Bown despite her achievement. The engine's role is documentation, not correction, but the documentation itself begins the decomposition.
-
-4. **Session work is a new labor mode.** Three pianistic labor modes from one city: architect (Jones, degree 0), venue anchor (Berry, degree 5), anonymous professional (Bown, degree 6). The session pianist's invisibility is structurally different from the venue pianist's locality — Berry is known by the room, Bown is known by the liner note (if at all).
-
-5. **The Explorer program introduces a new institutional lineage.** Pioneer (degrees 1-5) used ABMA/Air Force launch vehicles. Explorer 6 uses a Thor-Able (originally Air Force, now NASA/ARPA) — a different institutional path. The NASA mission series is no longer monolithically Pioneer. Multiple programs, multiple institutional sponsors, multiple engineering approaches. The mission diversity will continue to expand.
+**3. Explorer 6 Resonance — The First Picture Nobody Remembers.** Explorer 6's photograph: historically significant, quickly superseded by TIROS, Lunar Orbiter, Apollo. Bown's Columbia debut: historically significant, quickly superseded by Hancock, Tyner, Corea. Both proved something was possible; the proof was consumed; the proof-maker's name was not preserved. The Van Gogh dedication extends the resonance: an artist whose output was real and significant, invisible during his lifetime, with structural parallels to Bown's career arc. The gender barrier as lignin: a three-dimensional cross-linked structure resistant to any single enzymatic attack, requiring the non-specific oxidative decomposition the engine provides.
 
 ---
 
-## Part B: Pacific-slope Flycatcher -- THE ASCENDING QUESTION
+## Part B: Pacific-slope Flycatcher — THE ASCENDING QUESTION
 
-### Pass 2 Refinement Summary (1,912 words)
+- **Species Identity and Range.** *Empidonax difficilis*. Tyrannidae, the tyrant flycatcher family. Neotropical migrant: breeds April through September in the Pacific Northwest and coastal California, winters October through March in southern Mexico and northern Central America. Riparian alder specialist with secondary occupation of Douglas-fir understory near water. The 1989 taxonomic split from the Cordilleran Flycatcher — driven entirely by vocal analysis — is the species's defining event.
+- **Voice-Constituted Identity.** The first species in the engine whose taxonomic recognition is constituted by vocal difference. Morphology, plumage, range, and habitat did not distinguish Pacific-slope from Cordilleran; spectrographic analysis of the male position note ("ptseet" versus "ptsik") did. The species exists as a recognized taxon because of its call. Voice is not a secondary identifier — it is the primary identifier.
+- **The First Neotropical Migrant and the Seasonal Scan.** Degrees 0 through 5 documented year-round resident species (corvids, hummingbirds, chickadees, thrushes, wrens, nuthatches). Degree 6 introduces the first neotropical migrant and the first seasonal voice in the SPS communication architecture. Explorer 6's highly eccentric orbit created periodic data windows; the flycatcher's annual cycle creates a seasonal data window. The ensemble's membership changes with the calendar.
+- **The Upslurred Question — Acoustic Shape.** The "ptseet" position note is a 200–400 millisecond upslur from approximately 3 kHz to 5 kHz, rising through the hearing range with the acoustic contour of a question mark. Every phrase is a question. The identity-signaling call never resolves downward. This is the engine's first acoustic role that is unresolved by design.
+- **The Three-Phrase Dawn Song — Ternary Form.** The dawn song consists of three distinct phrases in fixed order: ptseet (the upslurred question), ptsik (a short buzzy utterance), and suweet (a longer sweet whistle). Repeated as a unit. The engine's first multi-section formal structure — ternary form, the simplest complete formal organization, the foundational shape from which fugue, sonata, rondo, and song all extend. Acoustic architecture begins at degree 6.
+- **Riparian Alder as New Ecosystem.** The first deciduous-dominated habitat in the engine. Degrees 0 through 5 documented conifer forest, conifer edge, estuary, conifer understory, mixed conifer, and conifer canopy — all coniferous or conifer-transition ecosystems. Riparian alder is deciduous, thin in spatial extent (a ribbon along streams and rivers rather than a continuous canopy), biodiverse per unit area, and vulnerable to riparian degradation. The ecological range of the engine expands.
+- **Declining Population Without ESA Listing — New Conservation Category.** Pacific-slope Flycatcher populations have declined 2–3% annually across the Pacific Northwest in the last two decades, per Breeding Bird Survey data. The species is not listed under the Endangered Species Act and is not presently flagged by most state conservation agencies. The engine introduces a new conservation category at degree 6: declining without institutional alarm. A quiet erosion at the ecosystem level paralleling Bown's quiet erasure at the cultural level.
+- **Turkey Tail Co-Location.** The flycatcher nests in living alder. Turkey tail decomposes dead alder. Shared substrate, different life-cycle stages of the same tree. The paired-engine music-bird-mission-organism alignment is literal biological co-location at degree 6, consistent with degree 3's chickadee + salal same-cubic-meter alignment.
 
-Four new research sections deepening the acoustic, temporal, and ecological analysis:
+### Pass 2 Refinement — Deep Analysis (SPS Research, 1,912 words)
 
-**1. Voice as Identity and the Species That Exists Because of Its Call.** The 1989 split was driven by vocal differences — the species is constituted by its call. Explorer 6's scan-line imaging built identity from minimal repeated data. Turkey tail's concentric bands build visual identity from sequential growth rings. The flycatcher's identity is constructed incrementally from repeated calls, each one a scan line in the acoustic portrait. Bown's identity was similarly incremental (each performance a scan line) but the accumulation was not preserved.
+**1. Voice as Identity and the Species That Exists Because of Its Call.** The 1989 split was driven by vocal differences — the species is constituted by its call. Explorer 6's scan-line imaging built identity from minimal repeated data. Turkey tail's concentric bands build visual identity from sequential growth rings. The flycatcher's identity is constructed incrementally from repeated calls. Bown's identity was similarly incremental — each performance a scan line — but the accumulation was not preserved.
 
-**2. The First Neotropical Migrant and the Seasonal Scan.** Explorer 6's highly eccentric orbit created periodic data windows — in range for part of each orbit, out of range for the rest. The flycatcher's annual cycle creates a seasonal data window — "in range" April-September, "out of range" October-March. The SPS communication architecture now includes its first seasonal voice. The ensemble's membership changes with the calendar. Seven acoustic roles, one of them available only half the year.
+**2. The First Neotropical Migrant and the Seasonal Scan.** Explorer 6's highly eccentric orbit created periodic data windows — in range for part of each orbit, out of range for the rest. The flycatcher's annual cycle creates a seasonal data window — "in range" April through September, "out of range" October through March. The SPS communication architecture now includes its first seasonal voice.
 
 **3. The Upslurred Question and the Three-Phrase Dawn Song.** The dawn song (ptseet... ptsik... suweet) is the engine's first multi-section formal structure — ternary form, the simplest complete formal organization. Explorer 6's multi-instrument data collection (magnetometer + particle detectors + photocell) is multi-channel science. The flycatcher's three-phrase song is multi-section acoustics. Both produce composite portraits from distinct components.
 
-**4. Riparian Alder as New Ecosystem.** First deciduous-dominated habitat in the engine. The flycatcher nests in living alder; turkey tail decomposes dead alder — shared substrate. Riparian corridors are thin, biodiverse, and vulnerable. The flycatcher's 2-3% annual population decline is the first negative trend in the engine without ESA listing — a quiet erosion paralleling Bown's quiet erasure.
+**4. Riparian Alder as New Ecosystem.** First deciduous-dominated habitat in the engine. The flycatcher nests in living alder; turkey tail decomposes dead alder — shared substrate. Riparian corridors are thin, biodiverse, and vulnerable. The flycatcher's 2–3% annual population decline is the first negative trend in the engine without ESA listing — a quiet erosion paralleling Bown's quiet erasure.
 
 ### Carry-Forward Items from Degree 6
 
-**New patterns introduced:**
-- **The Erasure** — ninth artist-city pattern. Exported, succeeded, forgotten. Dark twin of The Export.
+- **The Erasure** — ninth artist-city pattern. Exported, succeeded, forgotten. Dark twin of The Export (Jones, degree 0).
 - **Seasonal presence** — first SPS species available only part of the year. Future migrants will add more seasonal voices.
-- **Multi-section formal structure** — the ternary dawn song. Future species may introduce more complex forms.
+- **Multi-section formal structure** — ternary dawn song. Future species may introduce more complex forms (fugue, call-response, antiphonal).
 - **Riparian ecosystem** — first deciduous-dominated habitat. The engine's ecological range expands beyond conifer forest and estuary.
-- **Declining population without ESA listing** — a new conservation category: quiet decline without institutional alarm.
-
-**Threads extended:**
-- **Central District thread:** Seven consecutive degrees, six CD artists. The concentration is acknowledged as historically valid and approaching saturation. Future degrees will diversify.
-- **Piano lineage:** Two consecutive pianists (Berry, Bown) with total dimensional inversion. The full range of Central District piano practice is now documented.
-- **Gender thread:** Two women in seven degrees (Anderson, Bown). Vocalist vs. instrumentalist. Recognized vs. erased. The gender-instrumentalist barrier documented.
-- **NASA program diversity:** Pioneer → Explorer. Multiple institutional lineages active.
-- **NASA Botanical Profile extension:** Armillaria (subterranean) → Fireweed (surface) → Sword fern (ground) → Salal (shrub) → Usnea (canopy epiphyte) → Douglas-fir (canopy tree) → **Turkey tail (decomposer on fallen wood)**. The profile now includes the decomposition layer — the recycling system that returns the dead tree's nutrients to the soil.
-
-**Interspecies network status:** Two nodes (chickadee, nuthatch), one directed edge. No new edges at degree 6. The flycatcher does not participate in the chickadee alarm network as a confirmed eavesdropper (no published experimental evidence). Future degrees may add edges as documented listener species enter the circle.
+- **Declining population without ESA listing** — new conservation category. Quiet decline without institutional alarm.
+- **Explorer program in mission lineage** — Pioneer monolith broken; NASA mission series begins institutional diversification.
+- **NASA botanical profile decomposer layer** — turkey tail completes the vertical forest profile through its recycling layer.
+- **Central District thread saturation warning** — 7 of 7 degrees is a structural declaration; diversification expected at degree 7+.
 
 </details>
+
+## Retrospective
+
+### What Worked
+
+- **The Erasure pattern name crystallized late but load-bearing.** The pattern was latent in the research through the first five pass-1 passes; degree 6's pass-2 refinement forced explicit naming, and the name now back-applies to earlier session artists the engine had not catalogued (Berry's own partial erasure at degree 5 reads differently in the degree 6 retrospective). Naming patterns late is lossy for earlier degrees; naming them explicitly at the first degree where they dominate produces cleaner forward structure.
+- **The piano lineage inversion was unexpected and structurally rich.** The degree 5 → 6 transition inverted every dimension simultaneously without prior engine prediction. The inversion produced the engine's first "adjacent degrees are mirrors" observation, a structural category that had not existed before degree 6. The observation back-applies to examine earlier adjacent pairs (degree 2 → 3, Horvitz → Anderson, is a Central District continuity rather than an inversion; degree 4 → 5 is also continuity; 5 → 6 is the first mirror).
+- **The cross-resonance density matched degree 3's high-water mark.** Four independent phenomena (Bown's career, flycatcher's voice-constituted identity, Explorer 6's forgotten photograph, turkey tail's decomposition of lignin) all exhibit the same scanning-threshold / resolved-or-unresolved pattern. The density is the engine's second independent confirmation that the paired-release method surfaces genuine structural parallels rather than arbitrary pairings.
+- **The NASA botanical profile completed its vertical forest architecture.** Layers 0 through 6 — pathogen, disturbance, understory, shrub, epiphyte, canopy, decomposer — span the full temperate-forest vertical. The profile is no longer provisional; it is a named seven-layer model with turkey tail closing the carbon loop. Future organism pairings will work against this closed structure rather than extending it.
+
+### What Could Be Better
+
+- **The Central District saturation warning came too late.** Seven consecutive CD degrees is past the point where the pattern is a declaration and into the zone where it becomes an assumption. The engine should have flagged saturation at degree 5 or earlier and planned diversification for degree 6 rather than degree 7. The discipline for subsequent saturating threads: plan the diversification pivot one degree before saturation, not at or after.
+- **The chapter tree remains thin — only three chapter files.** `00-summary.md`, `03-retrospective.md`, and `99-context.md` are the only chapters. A degree-6 paired release with this conceptual density warrants dedicated chapters for Bown's Columbia session analysis, the 1989 taxonomic split methodology, Explorer 6's spin-stabilization imaging architecture, and the turkey tail lignin-decomposition chemistry. Pass 2 refinement invested in research words; chapter provisioning lagged.
+- **The Van Gogh dedication underexplored.** The dedication is named in the header but not developed into a dedicated dedication chapter or dedication sub-section. Van Gogh's posthumous recognition architecture (Theo's widow Johanna Bonger's archive work, the 1890s and 1900s gradual market recognition, the 1920s canonical modernist placement) is structurally informative for the engine's own work on Bown. The dedication deserves its own chapter at a future pass.
+- **The session-work invisibility structural claim lacks a control comparison.** The engine claims session work is structurally invisible to legacy preservation. The claim would benefit from a contrast case — a session pianist whose visibility rose (Herbie Hancock in his mid-1960s Blue Note session period, before *Maiden Voyage*) paired against a session pianist whose visibility did not rise (Bown). The contrast case would strengthen the claim or complicate it.
+
+### Process Observations
+
+- **The second cycle opened without ceremony.** Degree 6 is the first release of the second cycle (degrees 6 through 11 in the expected structure), but the release did not mark the cycle transition. A future engine discipline: the first release of each new cycle includes an explicit cycle-opening note summarizing what the prior cycle established and what the new cycle extends.
+- **The research artifact paths continue to be provisional.** The release references `S36/research/releases/006-patti-brown/pass2-refinement.md` and `SPS/research/releases/006-pacific-slope-flycatcher/pass2-refinement.md`. Note the path typo — "patti-brown" rather than "patti-bown" — which would break site-pipeline lookups. Future releases should path-verify research artifacts before committing the README.
+- **The Explorer 6 technical depth remained proportional to degree 6's narrative weight but underdeveloped for the mission's own significance.** Explorer 6 deserves a full mission chapter covering the Thor-Able 3 upper stage, the STL (Space Technology Laboratories) spacecraft design, the spin-stabilization imaging architecture, the ring current confirmation methodology, and the ARPA/NASA joint-operation context. The release treated Explorer 6 as Part A's parallel rather than as its own first-class subject.
+
+## Lessons Learned
+
+1. **The Erasure is a structurally distinct artist-city pattern.** Bown's trajectory — exported, succeeded on Columbia, session-worked through Motown, favorably reviewed, died Philadelphia 2008, forgotten — is the dark twin of The Export (Jones, degree 0). Same departure, same destination, opposite preservation outcome. The Erasure is not a minor variant; it requires its own pattern name and its own analytical framework because its downstream consequences (absence from pedagogy, absence from reissue economies, absence from institutional canon) differ from the Export's downstream consequences (sustained visibility, Grammy recognition, Jazz Master designation).
+2. **Adjacent degrees may be mirrors rather than steps.** The degree 5 → 6 transition inverts every dimension simultaneously — voicings, context, gender, visibility, pattern. The engine's degree-adjacency produces structural contrasts as readily as structural progressions. Future consecutive-instrument pairs will be examined for similar inversion structures. Adjacency is not directionality.
+3. **The gender-instrumentalist barrier is the most resistant structure encountered so far.** Unlike the Central District thread (which documents a functioning community) or the NASA failure taxonomy (which documents convergent engineering), the Erasure documents a systemic failure — a structural bias in the legacy-preservation system that operated against Bown despite her achievement. The engine's role is documentation, not correction, but the documentation itself begins the decomposition. Turkey tail's non-specific oxidative lignin decomposition is the structural model.
+4. **Session work is a distinct labor mode requiring its own taxonomy.** Three pianistic labor modes from one city: architect (Jones, degree 0), venue anchor (Berry, degree 5), session professional (Bown, degree 6). The session pianist's invisibility is structurally different from the venue pianist's locality — Berry is known by the room, Bown is known (if at all) by the liner note. The labor taxonomy is a new engine category.
+5. **The Explorer program breaks the Pioneer monolith.** Pioneer 0 through Pioneer 4 all launched on ABMA or Air Force vehicles associated with the Pioneer program. Explorer 6 launches on a Thor-Able stack operated by NASA and ARPA jointly. The NASA mission series is no longer monolithically Pioneer. Multiple programs, multiple institutional sponsors, multiple engineering approaches. Mission diversity will continue to expand across the 720-mission catalog.
+6. **Voice-constituted identity is a distinct species category.** The Pacific-slope Flycatcher's identity is constituted by its call rather than its plumage, morphology, range, or habitat. The 1989 taxonomic split was driven by spectrographic vocal analysis. This is the first SPS species for which voice is the primary identifier rather than a secondary one, and the category deserves its own taxonomic axis in the engine.
+7. **Seasonal presence introduces temporal conditionality to the SPS ensemble.** The Pacific-slope Flycatcher is present April through September and absent October through March. The SPS communication architecture now has its first role whose membership depends on the calendar. Future migrants will multiply the seasonal voices. The ensemble is eventually a chamber group with a rotating roster.
+8. **Ternary form is the engine's first multi-section acoustic architecture.** The dawn song (ptseet... ptsik... suweet) is the engine's first three-part formal structure. Ternary form is the simplest complete formal organization — the foundational shape from which fugue, sonata, and rondo extend. Acoustic architecture begins at degree 6, and future species may introduce more complex forms (call-response, antiphonal, strophic, through-composed).
+9. **Riparian alder extends the ecosystem range into deciduous habitat.** Degrees 0 through 5 documented coniferous or conifer-transition ecosystems. Degree 6's riparian alder is the first deciduous-dominated habitat — a ribbon ecosystem, thin in spatial extent, biodiverse per unit area, and vulnerable to riparian degradation. The ecological range of the engine now spans conifer forest, conifer edge, estuary, conifer understory, mixed conifer, conifer canopy, and riparian deciduous.
+10. **Declining without listing is a new conservation category.** Pacific-slope Flycatcher populations have declined 2–3% annually for two decades without ESA listing or state conservation alarm. The engine introduces "declining without institutional alarm" as a conservation category at degree 6. Future species trends will be classified against this category.
+11. **The Central District thread saturated at degree 6.** Seven consecutive CD degrees is past declaration and into assumption. The engine flags saturation at degree 6 and plans diversification at degree 7. Future saturating threads will be flagged one degree earlier to allow pivot planning.
+
+## Cross-References
+
+| Thread | Entity | Role |
+|--------|--------|------|
+| S36 | Patti Bown | Artist — the erasure, female instrumentalist, hard bop pianist, Columbia 1958 debut, Motown session work, Philadelphia 2008 |
+| SPS | Pacific-slope Flycatcher (*Empidonax difficilis*) | Species — voice-constituted identity, seasonal migrant, ascending question, ternary dawn song |
+| NASA | Explorer 6 (Thor-Able 3) | Mission — first Earth photograph from orbit, scan-line imaging, ring current confirmation, August 7 1959 |
+| Organism | *Trametes versicolor* (Turkey Tail) | Pairing — white-rot decomposer, lignin breaker, concentric scan-line bands, PNW bracket fungus |
+| Dedication | Vincent van Gogh (1853–1890) | Erased during lifetime, recognized posthumously — structural parallel to Bown's career arc |
+| Degree 0 → 6 | Quincy Jones → Patti Bown | Central District — The Export paired to The Erasure, same Columbia Records destination, opposite preservation outcomes |
+| Degree 3 → 6 | Ernestine Anderson → Patti Bown | Gender thread — vocalist recognized (Anderson) paired to instrumentalist erased (Bown); Central District female musicians across instrumental axis |
+| Degree 5 → 6 | Earl Berry → Patti Bown | Piano lineage inversion — stride/rooted/solo/stayed/recognized (Berry) paired to hard bop/rootless/trio/left/erased (Bown); every dimension inverts |
+| Degree 6 → 7 | Bown → (next artist) | Central District diversification pivot — saturation at 7 consecutive CD degrees; diversification begins at degree 7 |
+| NASA 1.5 → 1.6 | Pioneer 4 → Explorer 6 | Mission lineage — ABMA/Pioneer monolith broken, Thor-Able/Explorer program enters, NASA/ARPA joint operation |
+| NASA 1.6 → 1.7 | Explorer 6 → (next mission) | Mission diversification — Explorer program enters, Pioneer program paused, multiple institutional lineages active |
+| NASA Organism D5 → D6 | Douglas-fir → Turkey Tail | Botanical profile — canopy dominant (Douglas-fir) paired to decomposer (turkey tail); vertical forest profile completes |
+| SPS Architecture D0–D6 | Silence → Complexity → Atmosphere → Meaning → Diagnosis → Reception → Ascending Question | Communication architecture — first six roles year-round, seventh role seasonal |
+| Artist-City Taxonomy | Export → Draw → Builder → Exile → Stay → Return → Venue Anchor → Migration → Erasure | Nine patterns through degree 6; The Erasure is the ninth |
+| Columbia Records thread | Bown (1958), Jones (big-band 1950s-60s), Davis *Kind of Blue* (1959) | Same label, same era, divergent preservation outcomes |
+| DownBeat magazine | 1958 favorable review of Bown's Columbia debut | Primary source for contemporary critical reception |
+| Templeton, Greene, Davis 2005 | *Science* | Precedent for bioacoustic-driven taxonomy (chickadee D-notes) that the 1989 Pacific-slope / Cordilleran vocal split extends |
+| Phillips 1989 taxonomic split | *Auk*, Pacific-slope and Cordilleran Flycatcher | Primary source for Part B voice-constituted identity claim |
+| Turkey tail PSK clinical studies | Japanese oncology literature 1970s-2000s | Primary source for the medicinal decomposer profile |
+| Breeding Bird Survey (PNW) | Pacific-slope Flycatcher 2–3% annual decline | Primary source for the declining-without-listing conservation claim |
+| Van Gogh — Theo / Bonger archive | Amsterdam 1890s-1900s | Primary source for the dedication's posthumous-recognition architecture |
 
 ## Engine Position
 
 ```
-v1.49.501-506 = degrees 0-5   Pass 2  ✓  (opening pentad complete)
-v1.49.507     = degree 6      Pass 2  ← THIS RELEASE (second cycle begins)
-v1.49.508     = degree 7      Pass 2  ← next
+v1.49.501 = NASA 1.0 + degree 0  Pass 2  (FOUNDATION       — Jones / Corvid / NASA Founding / Armillaria)
+v1.49.502 = NASA 1.1 + degree 1  Pass 2  (THE COMPLEXITY   — Frisell / Hummingbird / Pioneer 0 / Fireweed)
+v1.49.503 = NASA 1.2 + degree 2  Pass 2  (INFRASTRUCTURE   — Horvitz / Thrush / Pioneer 1 / Sword Fern)
+v1.49.504 = NASA 1.3 + degree 3  Pass 2  (MEANING          — Anderson / Chickadee / Pioneer 2 / Salal)
+v1.49.505 = NASA 1.4 + degree 4  Pass 2  (DIAGNOSIS        — Standifer / Wren / Pioneer 3 / Usnea)
+v1.49.506 = NASA 1.5 + degree 5  Pass 2  (ESCAPE VELOCITY  — Berry / Nuthatch / Pioneer 4 / Douglas-fir)
+v1.49.507 = NASA 1.6 + degree 6  Pass 2  ← THIS RELEASE (THE ERASURE AND THE QUESTION — Bown / Flycatcher / Explorer 6 / Turkey Tail)
+v1.49.508 = NASA 1.7 + degree 7  Pass 2  ← next (Central District diversification begins)
 ```
 
-## Files
+## Cumulative Engine Statistics (v1.49.501–507)
 
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/006-patti-brown/pass2-refinement.md` | NEW | 2,087 |
-| `SPS/research/releases/006-pacific-slope-flycatcher/pass2-refinement.md` | NEW | 1,912 |
-| `docs/release-notes/v1.49.507/README.md` | NEW | — |
+| Metric | Value |
+|--------|-------|
+| Paired releases completed | 7 (degrees 0–6) |
+| S36 Pass 2 words (cumulative) | ~25,485 |
+| SPS Pass 2 words (cumulative) | ~23,097 |
+| NASA missions aligned | 7 (1.0 through 1.6) |
+| NASA programs active | 2 (Pioneer, Explorer) |
+| NASA botanical profile layers | 7 (pathogen, disturbance, understory, shrub, epiphyte, canopy, decomposer) |
+| Central District artists | 6 of 7 (all except Frisell) |
+| Pianists documented | 2 (Berry, Bown) |
+| Women documented | 2 (Anderson, Bown) |
+| Interspecies network edges | 1 (chickadee → nuthatch) |
+| SPS acoustic roles | 7 (including first seasonal) |
+| Artist-city patterns named | 9 (Export, Draw, Builder, Exile, Stay, Return, Venue Anchor, Migration, Erasure) |
+| Multi-section formal structures documented | 1 (ternary dawn song) |
+| Neotropical migrants documented | 1 (Pacific-slope Flycatcher) |
+| Ecosystems documented | 7 (conifer forest, conifer edge, estuary, conifer understory, mixed conifer, conifer canopy, riparian alder) |
+| Conservation categories | 3 (ESA-listed, state-flagged, declining-without-listing) |
+| Cross-resonance parallel phenomena | 4 (career / voice / photograph / lignin — matches degree 3 high) |
 
 ## Emerging Patterns at Degree 6
 
 | Pattern | Status | Degree 6 Value |
 |---------|--------|----------------|
-| Central District Thread | SATURATING | 7th consecutive degree, 6th CD artist. Acknowledged, diversification needed. |
+| Central District Thread | SATURATING | 7th consecutive degree, 6th CD artist. Diversification planned for degree 7. |
 | SPS Communication Architecture | VOICE 7 | Ascending question — first seasonal voice, first multi-section form |
-| NASA Mission Diversity | EXPANDING | Explorer program enters (Explorer 6). No longer Pioneer-only. |
-| NASA Botanical Profile | LAYER 7 | Turkey tail — decomposer layer (recycling system) |
+| NASA Mission Diversity | EXPANDING | Explorer program enters. Pioneer-only monolith broken. |
+| NASA Botanical Profile | COMPLETE (vertical) | Turkey tail — decomposer layer, closes the carbon loop |
 | Piano Lineage | COMPLETE (first cycle) | Berry (stride/rooted/solo) ↔ Bown (hard bop/rootless/trio). Full inversion. |
 | Artist-City Taxonomy | 9 PATTERNS | +Erasure (Bown). Dark twin of Export. |
 | Gender Thread | 2 of 7 | Anderson (vocalist, recognized) + Bown (instrumentalist, erased) |
@@ -139,33 +227,16 @@ v1.49.508     = degree 7      Pass 2  ← next
 | Amiga Principle | SMALL GROUP | Bown = trio leader (between Jones's large ensemble and Berry's solo) |
 | Conservation Status | NEW CATEGORY | Declining without ESA listing. Quiet erosion. |
 
-## Cross-References
+## Infrastructure / Files
 
-| Thread | Degree 6 Entity | Role |
-|--------|-----------------|------|
-| S36 | Patti Bown | Artist — the erasure, female instrumentalist, hard bop pianist, Columbia debut |
-| SPS | Pacific-slope Flycatcher | Species — voice-constituted identity, seasonal migrant, ascending question |
-| NASA | Explorer 6 | Mission — first Earth photograph, scan-line imaging, ring current confirmation |
-| Organism | Trametes versicolor | Pairing — turkey tail, white-rot decomposer, concentric scan-line bands |
-| Dedication | Vincent van Gogh | Erased during lifetime, recognized posthumously — structural parallel to Bown |
-| Degree 5→6 | Canopy → Decomposer | Transition — from the tree that defines the forest to the fungus that recycles it |
-| Degree 6→7 | Question → ? | The second cycle continues. Central District diversification begins. |
-
-## Cumulative Engine Statistics (v1.49.501-507)
-
-| Metric | Value |
-|--------|-------|
-| Paired releases completed | 7 (degrees 0-6) |
-| S36 Pass 2 words (cumulative) | ~25,485 |
-| SPS Pass 2 words (cumulative) | ~23,097 |
-| NASA missions aligned | 7 (1.0 through 1.6) |
-| Central District artists | 6 of 7 (all except Frisell) |
-| Pianists documented | 2 (Berry, Bown) |
-| Women documented | 2 (Anderson, Bown) |
-| Interspecies network edges | 1 (chickadee → nuthatch) |
-| Botanical profile layers | 7 (including decomposer) |
-| Artist-city patterns named | 9 |
-| SPS acoustic roles | 7 (including first seasonal) |
+- `docs/release-notes/v1.49.507/README.md` — this file (A-grade uplift ~3,000-word Summary, Part A / Part B, Retrospective, Lessons, Cross-References, Engine Position, Cumulative Statistics)
+- `docs/release-notes/v1.49.507/chapter/00-summary.md` — auto-parsed chapter summary (parse confidence 0.50)
+- `docs/release-notes/v1.49.507/chapter/03-retrospective.md` — 6 numbered lessons carried forward into the uplifted README Lessons Learned section
+- `docs/release-notes/v1.49.507/chapter/99-context.md` — release metadata, prev/next navigation, parse source
+- `S36/research/releases/006-patti-bown/pass2-refinement.md` — 2,087-word Pass 2 refinement, erasure as failed scan, piano lineage inversion, Explorer 6 resonance (research tree — path declared at release, may be regenerated via site pipeline)
+- `SPS/research/releases/006-pacific-slope-flycatcher/pass2-refinement.md` — 1,912-word Pass 2 refinement, voice as identity, seasonal scan, ternary form, riparian alder ecosystem
+- `www/tibsfox/com/Research/NASA/1.6/research.html` — Explorer 6 mission narrative on tibsfox.com (live site artifact)
+- `www/tibsfox/com/Research/NASA/1.6/organism.html` — Turkey Tail botanical profile (NASA organism layer 7)
 
 ---
 
