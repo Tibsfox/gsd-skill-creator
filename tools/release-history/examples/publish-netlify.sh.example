@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Publish release chapters as a Netlify deploy.
+#
+# Prerequisites:
+#   - netlify-cli installed (`npm install -g netlify-cli`)
+#   - `netlify login` done once
+#   - NETLIFY_SITE_ID set or `netlify link` run in the repo
+#
+# Usage:
+#   ./publish-netlify.sh                # preview deploy URL
+#   ./publish-netlify.sh --execute      # production deploy
+
+set -euo pipefail
+
+STAGING_DIR=".release-story-staging"
+PROD=0
+for arg in "$@"; do
+  case "$arg" in --execute) PROD=1 ;; esac
+done
+
+if [ ! -d "$STAGING_DIR" ]; then
+  echo "Staging dir $STAGING_DIR not found."
+  exit 1
+fi
+
+if [ "$PROD" -eq 1 ]; then
+  echo "=== Netlify production deploy ==="
+  netlify deploy --prod --dir="$STAGING_DIR"
+else
+  echo "=== Netlify preview deploy ==="
+  netlify deploy --dir="$STAGING_DIR"
+fi

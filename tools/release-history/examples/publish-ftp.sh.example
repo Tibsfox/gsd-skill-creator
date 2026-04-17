@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Publish release chapters to an FTP host via lftp mirror.
+#
+# Loads credentials from .env (FTP_HOST, FTP_USER, FTP_PASS, FTP_PATH).
+#
+# Usage:
+#   ./publish-ftp.sh                # dry-run
+#   ./publish-ftp.sh --execute      # push
+
+set -euo pipefail
+
+# --- Configure these ---
+STAGING_DIR=".release-story-staging"
+REMOTE_SUBPATH="release-story"  # under FTP_PATH
+# ------------------------
+
+if [ -f ".env" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source .env
+  set +a
+fi
+
+if [ -z "${FTP_HOST:-}" ] || [ -z "${FTP_USER:-}" ] || [ -z "${FTP_PASS:-}" ]; then
+  echo "Missing FTP_HOST / FTP_USER / FTP_PASS in .env"
+  exit 1
+fi
+
+DRY="--dry-run"
+for arg in "$@"; do
+  case "$arg" in --execute) DRY="" ;; esac
+done
+
+if [ ! -d "$STAGING_DIR" ]; then
+  echo "Staging dir $STAGING_DIR not found."
+  exit 1
+fi
+
+REMOTE_DIR="${FTP_PATH:-/}${REMOTE_SUBPATH}"
+
+echo "=== lftp mirror $STAGING_DIR/ → $FTP_HOST:$REMOTE_DIR/ ==="
+
+# Use a heredoc-fed lftp script (password stays out of env-var exposure in ps)
+LFTP_SCRIPT=$(cat <<EOF
+set ssl:verify-certificate no
+set net:max-retries 10
+set net:reconnect-interval-base 5
+set net:timeout 30
+set mirror:use-pget-n 4
+set mirror:parallel-transfer-count 4
+open -u ${FTP_USER},${FTP_PASS} ${FTP_HOST}
+mirror --reverse --verbose --no-perms --continue $DRY ${STAGING_DIR}/ ${REMOTE_DIR}/
+bye
+EOF
+)
+
+echo "$LFTP_SCRIPT" | lftp
+
+echo
+if [ -z "$DRY" ]; then
+  echo "=== Sync complete ==="
+else
+  echo "=== Dry-run complete. Re-run with --execute to push. ==="
+fi
