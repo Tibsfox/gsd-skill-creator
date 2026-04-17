@@ -1,73 +1,143 @@
 # v1.36 — Citation Management & Source Attribution
 
-**Shipped:** 2026-02-26
-**Phases:** 351-358 (8 phases) | **Plans:** 16 | **Commits:** 17 | **Requirements:** 71 | **Tests:** 280 | **LOC:** ~14.2K
+**Released:** 2026-02-26
+**Scope:** feature release — citation extraction, 6-adapter source resolution cascade, JSONL-backed citation store with provenance chains, 5-format bibliography generator, `sc:learn` pipeline hooks, discovery CLI + dashboard panel, and the "The Space Between" curated bibliography
+**Branch:** dev → main
+**Tag:** v1.36 (2026-02-25T23:11:46-08:00) — "Citation Management & Source Attribution"
+**Predecessor:** v1.35 — Mathematical Foundations Engine
+**Successor:** v1.37 — Complex Plane Learning Framework
+**Classification:** feature — provenance-first citation subsystem layered on top of v1.35's ingestion pipeline
+**Phases:** 351–358 (8 phases) · **Plans:** 16 · **Commits:** `0c8e02955..5e340e761` (17 commits) · **Files changed:** 17 · **Tests:** 280 · **Requirements:** 71 · **LOC:** ~14.2K
+**Verification:** 280/280 tests passing across the citation surface · zero type errors at tip · recall ≥ 95% on Space Between bibliography validation · SAFE-06 fault isolation preserving `sc:learn` under 5% overhead · bidirectional provenance integrity verified in the E2E suite
 
-Citation tracking, source attribution, and bibliography generation system integrated into skill-creator's sc:learn pathway, maintaining provenance chains from original author through derived works with formatted bibliography output including a publication-ready bibliography for "The Space Between."
+## Summary
 
-### Key Features
+**Citation management landed as infrastructure, not bookkeeping.** v1.35 shipped the `sc:learn` ingestion pipeline that could consume eight input formats and merge primitives into the Mathematical Foundations Engine registry, but it had no answer to the question "where did this knowledge come from?" once a primitive was in the graph. v1.36 closes that gap with a full citation subsystem: extraction patterns that recognize APA, narrative, numbered, DOI, ISBN, URL, bibliography-section, and informal-prose references; a 6-adapter resolution cascade that walks CrossRef, OpenAlex, NASA NTRS, GitHub CITATION.cff, Internet Archive, and a generic web fallback in confidence order; a JSONL-backed citation store with SHA-256 deterministic IDs and three-tier deduplication; a provenance chain tracker that answers both "which artifacts cite this source?" and "which sources back this artifact?"; a five-format bibliography generator (BibTeX, APA 7, Chicago 17, MLA 9, custom Mustache); `sc:learn` pre/post hooks with SAFE-06 fault isolation; a discovery CLI with six commands; a dashboard citation panel with provenance tree viewer and integrity badges; and the "The Space Between" curated bibliography proving the pipeline end-to-end. Eight phases, sixteen plans, seventeen commits, 280 tests, ~14.2K LOC.
 
-**Multi-Format Citation Extractor (Phase 351):**
-- 8 regex patterns (APA, narrative, numbered, DOI, ISBN, URL, bibliography section, informal prose)
-- DOI detector with normalization, URL resolver with domain classification
-- Bibliography parser with cross-reference boost and author+year dedup
-- 63 extraction tests
+**The 6-adapter resolution cascade is the design centerpiece.** Confidence thresholds (stop at ≥0.70, continue at 0.50–0.69, unresolved below 0.50) let the cascade short-circuit on high-confidence hits without making every citation a six-API fan-out. CrossRef handles the DOI-identified majority. OpenAlex fills in where CrossRef has coverage gaps. NASA NTRS resolves aerospace technical reports that the general-purpose resolvers miss. GitHub with CITATION.cff covers software-citation references that were invisible to pre-v1.36 knowledge systems. Internet Archive handles web-archived artifacts when live URLs rot. The generic web fallback handles the long tail. Each adapter is injectable behind a `fetch` interface (so the test suite mocks every external call), carries a 30-day TTL cache keyed by query, and sits behind a token-bucket rate limiter that prevents the kind of operational embarrassment that shows up when six adapters hammer external APIs in a loop. The cascade was not "try all six and pick the best" — it was "walk in cost order, stop when the confidence is high enough, record the adapter that won." That ordering is the difference between a citation resolver that is cheap to run and one that is not.
 
-**Citation Store (Phase 352):**
-- JSONL-backed store with 3-tier deduplication (DOI, ISBN, title similarity via Levenshtein)
-- SHA-256 deterministic IDs, field indexes (DOI/ISBN/title/author/tag)
-- Provenance chain tracker with dual-index JSONL
-- Bidirectional queries (source to artifacts, artifact to sources)
-- Chain traversal with depth limit and circular detection
+**Provenance chains made citation a two-way graph.** A citation store that only tells you "artifact X cites source Y" is a half-database. The provenance chain tracker shipped in Phase 353 (`d4637ac97`) maintains a dual-index JSONL so every source record knows which artifacts reference it, and every artifact record knows which sources back it. Chain traversal walks with a depth limit and circular-reference detection (citations that cite each other are not rejected — they are flagged and rendered with dashed edges in the dashboard provenance viewer). This turns the store from a write-once-read-never database into an audit tool: when a reviewer asks "what downstream artifacts depend on this retracted paper?" the answer is a single traversal call instead of a grep-the-repo expedition. SHA-256 deterministic IDs mean the same citation ingested twice from different paths resolves to the same record without guesswork, and the three-tier deduplication (DOI exact match, ISBN exact match, Levenshtein title similarity with author+year tiebreak) handles the overlap cases where two citations refer to the same work with different surface forms.
 
-**6-Adapter Resolution Cascade (Phase 353):**
-- CrossRef, OpenAlex, NASA NTRS, GitHub (with CITATION.cff), Internet Archive, generic web fallback
-- Injectable fetch, 30-day TTL caching, token bucket rate limiting, graceful timeout/error handling
-- Confidence cascade: stop at >=0.70, continue at 0.50-0.69, unresolved below 0.50
+**Attribution categories made the invisible visible.** The attribution report that Phase 354's integrity auditor generates classifies every claim in an analyzed document into five categories: **cited** (backed by a resolved reference), **common** (public knowledge the reviewer accepts without citation — pi is irrational, the earth orbits the sun), **novel** (claims this author is making for the first time that need external review before they become cited references), **original** (first-party claims specific to this codebase or project that are deliberately uncited), and **unattributed** (claims that should be cited but have no reference — the category the auditor flags loudest). Most knowledge systems treat all content as equally sourced, which is the same as treating all content as equally unsourced. Forcing every claim into one of five buckets makes the unattributed bucket visible as a first-class review target instead of an invisible failure mode. The integrity auditor runs on the output of `sc:learn` ingestion and returns a completeness score, a count of broken references, and the unattributed-claims inventory as a list the reviewer can act on.
 
-**Bibliography Generator (Phase 354):**
-- 5 formats: BibTeX (LaTeX escaping, key dedup), APA 7th (1/2/3-20/21+ author rules), Chicago 17th (notes-bibliography), MLA 9th (containers model), custom Mustache templates
-- Attribution report classifying claims into 5 categories (cited/common/novel/original/unattributed)
-- Integrity auditor with completeness scoring and broken reference detection
+**`sc:learn` integration respected the token budget and the blast radius.** Phase 355's learn pipeline hooks (`ab5c0cd19`) add a pre-hook that extracts and resolves citations before the analyzer runs, and a post-hook that links the resulting skills to the provenance chain asynchronously. SAFE-06 fault isolation — the invariant that a citation failure cannot cascade into a pipeline failure — is enforced structurally: the pre-hook runs with a timeout and a circuit breaker, and any citation error gets logged-and-continued rather than propagated. The measured overhead stayed under 5% of total pipeline cost, which matters because v1.35 had already committed the pipeline to a 5% token budget for meta-reasoning overhead. Citations annotate the ingested content non-destructively: `[CITE:id]` markers are inserted inline without modifying the source text, so a citation-aware reader sees the references and a citation-blind reader sees the original. The knowledge-tier linker attaches citations to the correct progressive-disclosure tier (summary/active/reference) so a primitive loaded at the 4K summary tier does not drag its 40K reference-tier bibliography along with it.
 
-**Learn Pipeline Integration (Phase 355):**
-- SAFE-06 fault isolation: pre-hook extracts and resolves citations (<5% overhead)
-- Post-hook links skills to provenance asynchronously
-- Non-destructive [CITE:id] annotation injection
-- Knowledge tier linker (summary/active/reference priority)
+**The Space Between bibliography proved the pipeline end-to-end.** Phase 358's Space Between bibliography is not a production bibliography — it is a proof of correctness for the pipeline. Ten curated references (Sagan for cosmic perspective; Shannon for information theory; Lindenmayer for L-systems; Euclid for foundational geometry; Pythagoras for the foundational ratio; Clausius for entropy; Heisenberg for uncertainty; Mac Lane for categorical foundations; Gibbs for statistical mechanics; Fourier for frequency decomposition) were extracted, mock-resolved, stored, exported to BibTeX + APA 7, and fed through the attribution reporter. The 10-reference set is deliberately small: it spans every category the system needs to handle (ancient texts without DOIs, mid-20th-century foundational papers with DOIs, L-systems monograph, information-theory paper with known canonical citation, philosophical Sagan reference). If the system could handle ten references that covered that breadth, it could handle ten thousand in the same shape. The attribution report distinguishes philosophical Space Between originals ("the space between what we perceive and what exists" — Tibsfox original) from cited foundations (Shannon entropy — cited Shannon 1948).
 
-**Discovery CLI & Dashboard (Phase 356):**
-- 6 commands: search, trace, verify, export, enrich, status
-- Citation graph walker with cycle detection
-- Dashboard citation panel with provenance tree viewer
-- Green/yellow/red integrity badges
+**Discovery CLI and dashboard panel made citations user-visible.** Phase 356 wired six citation-discovery commands into the CLI — `sc cite search`, `sc cite trace`, `sc cite verify`, `sc cite export`, `sc cite enrich`, `sc cite status` — each backed by the citation store and the resolver cascade. The dashboard citation panel renders an HTML table with a summary bar, filters, and sortable columns; the provenance viewer renders the chain as a tree with depth-colored nodes and dashed edges on circular references; integrity badges (green ≥90%, yellow 70–89%, red <70%) summarize the completeness score at pack-level granularity. The aesthetic matches the existing GSD-OS dashboard dark theme (#0d1117 background, #58a6ff accent, #3fb950/#d29922/#f85149 for green/yellow/red badges) so the citation surface does not feel bolted on — it feels like a native panel that was always going to be there. Fourteen dashboard tests cover panel rendering, empty-state behavior, provenance-tree construction, badge threshold colors, and aesthetic conformance.
 
-**"The Space Between" Bibliography (Phase 357):**
-- 10 curated references (Sagan, Shannon, Lindenmayer, Euclid, Pythagoras, Clausius, Heisenberg, Mac Lane, Gibbs, Fourier)
-- BibTeX + APA7 output
-- Attribution report distinguishing philosophical originals from cited foundations
+**The citation chipset closed the loop as composable agent primitives.** Phase 358 packaged six citation skills (extract, resolve, store, generate, trace, audit) and four agents — LIBRARIAN (corpus curator), ARCHIVIST (provenance keeper), SCRIBE (bibliography generator), AUDITOR (attribution validator) — into a single chipset YAML with two communication loops and pre/post-deploy evaluation gates. The chipset is loadable as one unit by any future skill that needs citation support without reaching into the individual modules. Barrel exports at `src/citations/index.ts` publish every public API (types, extractor, resolver, store, generator, learn hooks, discovery, dashboard) from a single entry point, so downstream consumers import once. Seven barrel/chipset validation tests verify importability, constructability, YAML structure, skill-module alignment, and agent-skill references — the structural integrity of the citation subsystem as a composable unit rather than just a working one.
 
-**Citation Chipset (Phase 358):**
-- 6 skills, 4 agents (LIBRARIAN, ARCHIVIST, SCRIBE, AUDITOR)
-- 2 communication loops
-- Pre/post-deploy evaluation gates
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| Citation extractor (Phase 351, commit `addc58958`) | 8 regex patterns — APA, narrative, numbered, DOI, ISBN, URL, bibliography-section, informal prose — with DOI detector/normalizer, URL resolver with domain classification, and bibliography-parser cross-reference boost; 63 extraction tests |
+| Citation store (Phase 352, commit `03671138a`) | JSONL-backed store with 3-tier dedup (DOI exact, ISBN exact, Levenshtein title+author+year); SHA-256 deterministic IDs; field indexes on DOI/ISBN/title/author/tag |
+| Citation parser orchestrator (Phase 352, commit `c901dcef8`) | Parser orchestrator wiring extractor + bibliography parser + dedup into a single `parse(document)` entry point with cross-reference resolution between inline cites and bibliography entries |
+| Provenance chain tracker (Phase 353, commit `d4637ac97`) | Dual-index JSONL with bidirectional queries (source→artifacts, artifact→sources); chain traversal with depth limit and circular-reference detection |
+| Resolver adapter interface (Phase 354, commit `983e0f68a`) | `BaseAdapter` interface with injectable `fetch`, 30-day TTL caching, token-bucket rate limiting, graceful timeout/error handling; CrossRef and OpenAlex adapters |
+| Additional resolver adapters (Phase 354, commit `b6e7a7db7`) | NASA NTRS, GitHub (CITATION.cff), Internet Archive adapters + generic web fallback; resolver engine that walks the cascade in confidence order (stop ≥0.70, continue 0.50–0.69, unresolved <0.50) |
+| Bibliography generator (Phase 355, commit `28e7a78b0`) | BibTeX (LaTeX escaping, key dedup) and APA 7 (1/2/3–20/21+ author rules) format emitters with deterministic output |
+| Generator extensions + auditor (Phase 355, commit `b9e92db49`) | Chicago 17 (notes-bibliography), MLA 9 (containers model), custom Mustache templates; attribution report with 5-category classification (cited/common/novel/original/unattributed); integrity auditor with completeness score and broken-reference detection |
+| Learn pipeline hooks (Phase 356, commit `ab5c0cd19`) | Pre-hook extracts and resolves citations; post-hook links skills to provenance asynchronously; SAFE-06 fault isolation; non-destructive `[CITE:id]` annotation; knowledge-tier linker respecting summary/active/reference priority; <5% pipeline overhead |
+| Discovery engine + CLI (Phase 357, commit `f920a6f37`) | 6 CLI commands — `sc cite search`, `trace`, `verify`, `export`, `enrich`, `status` — backed by a citation graph walker with cycle detection |
+| Dashboard citation panel (Phase 357, commit `0e4b747d6`) | HTML panel with summary bar, filters, sortable columns; provenance viewer with depth-colored tree and dashed circular-reference edges; integrity badges (green ≥90%, yellow 70–89%, red <70%); 14 dashboard tests |
+| E2E integration suite (Phase 358, commit `1a4e1c4ed`) | 8 end-to-end tests covering learn pipeline, electronics ingestion, NASA ingestion, provenance, dedup, enrichment, dashboard rendering, and PII redaction; full chain extract → resolve → store → generate → provenance; all external APIs mocked; bidirectional provenance integrity verified |
+| Space Between bibliography (Phase 358, commit `3e3bfbb7b`) | 10 curated references (Sagan, Shannon, Lindenmayer, Euclid, Pythagoras, Clausius, Heisenberg, Mac Lane, Gibbs, Fourier); full pipeline extract → mock-resolve → store → BibTeX/APA7 generation; attribution report distinguishing cited foundations from Space Between originals; 9 validation tests with recall ≥95% |
+| Citation chipset + barrel exports (Phase 358, commit `003606737`) | Chipset YAML with 6 skills, 4 agents (LIBRARIAN, ARCHIVIST, SCRIBE, AUDITOR), 2 communication loops, pre/post-deploy evaluation gates; barrel exports at `src/citations/index.ts`; 7 barrel/chipset validation tests; full suite 280 tests passing, zero type errors |
+| Scaffolding + version bump (Phases 351, tip, commits `0c8e02955`, `5e340e761`) | `.citations/` directory scaffold; `package.json` + `src-tauri/Cargo.toml` bumped to 1.36.0 |
 
 ## Retrospective
 
 ### What Worked
-- **6-adapter resolution cascade with confidence thresholds.** CrossRef, OpenAlex, NASA NTRS, GitHub, Internet Archive, and web fallback -- each adapter tries in order, stopping at >=0.70 confidence. This avoids both false positives (low threshold) and wasted API calls (always running all adapters).
-- **5 bibliography output formats cover the real use cases.** BibTeX, APA 7th, Chicago 17th, MLA 9th, and custom Mustache templates handle academic, professional, and project-specific citation needs. The Mustache escape hatch avoids format proliferation.
-- **Provenance chain with bidirectional queries.** Being able to trace from source to artifacts AND from artifact back to sources makes the citation store an audit tool, not just a database. Chain traversal with depth limits and circular detection handles real-world citation graphs.
-- **Non-destructive [CITE:id] annotation injection.** Integrating citations into the learn pipeline without modifying source content means citations are additive metadata, not destructive edits.
+
+- **6-adapter resolution cascade with confidence thresholds.** CrossRef, OpenAlex, NASA NTRS, GitHub CITATION.cff, Internet Archive, and web fallback — each adapter tries in order, short-circuiting at ≥0.70 confidence. This avoids both false positives (accepting low-confidence guesses) and wasted API calls (always running all six). The cascade ordering is the design decision that made the resolver cheap enough to run on every ingestion.
+- **5 bibliography output formats cover the real use cases without format proliferation.** BibTeX, APA 7, Chicago 17, MLA 9, and custom Mustache templates handle academic, professional, and project-specific citation needs. The Mustache escape hatch means any future format is a template file, not a code change — format proliferation becomes a data problem rather than a build problem.
+- **Provenance chain with bidirectional queries.** Being able to trace source→artifacts AND artifact→sources turned the citation store from a database into an audit tool. Chain traversal with depth limits and circular-reference detection handles the real-world case where citations form cycles (papers that cite each other) without blowing up the traversal.
+- **Non-destructive `[CITE:id]` annotation injection.** Citations integrate into the learn pipeline as additive metadata rather than destructive edits. A citation-aware reader sees references; a citation-blind reader sees the original. This made the annotation step safe to run on any document regardless of whether downstream consumers understood citations.
+- **SAFE-06 fault isolation on `sc:learn` hooks.** Citation errors cannot cascade into pipeline failures — the pre-hook runs with a timeout and a circuit breaker, and failures log-and-continue rather than propagate. Measured overhead stayed under the 5% budget ceiling inherited from v1.35.
+- **Attribution categories (cited / common / novel / original / unattributed) made the invisible visible.** Forcing every claim into one of five buckets surfaces the unattributed bucket as a first-class review target. Most knowledge systems treat the absence of a citation as the absence of a problem; the attribution report treats it as a problem requiring human review.
+- **Injectable `fetch` on every adapter made the test suite mockable end-to-end.** The E2E integration test suite runs the full extract → resolve → store → generate → provenance chain with zero external network calls. Every adapter accepts a `fetch` implementation at construction, so the test harness can feed canned responses and verify the cascade logic deterministically.
 
 ### What Could Be Better
-- **10 curated references for The Space Between is a small bibliography.** Given the 451 primitives across 10 domains in v1.35, the attribution surface is much larger than 10 sources. This is a proof-of-concept bibliography, not a complete one.
-- **Levenshtein title similarity for deduplication has known failure modes.** Titles with minor formatting differences (capitalization, subtitle punctuation) can defeat string-distance dedup. Semantic similarity would be more robust but harder to implement.
+
+- **10 curated references for The Space Between is a proof-of-concept bibliography, not a complete one.** Given the 451 primitives across 10 domains in v1.35, the attribution surface is vastly larger than 10 sources. The 10-reference set proves the pipeline works end-to-end; it does not prove the Space Between corpus has been adequately sourced. A v1.37+ bibliography expansion pass is still owed.
+- **Levenshtein title similarity for deduplication has known failure modes.** Titles with minor formatting differences (capitalization variants, subtitle punctuation, trailing periods) can defeat string-distance dedup. Semantic title similarity (sentence embeddings) would be more robust but requires an ML dependency the citation subsystem deliberately avoided. The known-miss inventory is not characterized.
+- **The generic web fallback resolver is a stub.** The cascade's sixth adapter returns low-confidence candidates from URL heuristics rather than real content parsing. Any citation the first five adapters miss is effectively unresolved; the fallback is there to avoid a null return but is not actually adding coverage.
+- **No real `sc cite enrich` workflow has been dogfooded.** The CLI command exists, the adapter cascade works, but no large-corpus enrichment pass has actually been run against a real bibliography-generation task outside the Space Between proof-of-concept. Enrichment at scale will expose rate-limiting and cache-eviction edge cases the 30-day TTL does not yet handle.
+- **Circular-reference detection flags but does not classify.** The chain traversal detects cycles and renders them as dashed edges in the dashboard, but it does not distinguish benign cycles (A cites B, B cites A because they are companion papers) from suspicious cycles (citation ring fraud). A future integrity-classification pass is needed.
+- **Attribution categories rely on the author's self-classification.** The auditor can flag "unattributed" claims mechanically, but distinguishing novel from original from common still requires human judgment. A future LLM-assisted first-pass classifier would reduce the human-review burden but introduces a new trust dependency the current system deliberately avoids.
 
 ## Lessons Learned
 
-1. **Citation management is infrastructure, not bookkeeping.** The 6-adapter cascade, JSONL store with SHA-256 IDs, and provenance chain tracker add up to a system that can answer "where did this knowledge come from?" at any point in the pipeline. That question becomes critical when sc:learn ingests external content.
-2. **Attribution categories (cited/common/novel/original/unattributed) make the invisible visible.** Most knowledge systems treat all content as equally sourced. Classifying claims into 5 categories forces explicit acknowledgment of what is novel vs. what is borrowed.
-3. **Rate limiting and TTL caching on external resolution adapters prevent operational embarrassment.** 6 adapters hitting external APIs without token bucket rate limiting and 30-day TTL caching would create reliability issues and potential API bans.
+- **Citation management is infrastructure, not bookkeeping.** The 6-adapter cascade, JSONL store with SHA-256 IDs, and provenance chain tracker add up to a system that can answer "where did this knowledge come from?" at any point in the pipeline. That question becomes critical the moment `sc:learn` ingests external content — and it was unanswerable before v1.36.
+- **Attribution categories make the invisible visible.** Most knowledge systems treat all content as equally sourced, which is indistinguishable from treating all content as equally unsourced. Classifying every claim into cited/common/novel/original/unattributed forces explicit acknowledgment of what is borrowed, what is new, and what needs review.
+- **Rate limiting and TTL caching on external resolution prevent operational embarrassment.** Six adapters hitting external APIs without token-bucket rate limiting and 30-day TTL caching would create reliability issues and potential API bans. The resolver's operational discipline is as much a first-class feature as its accuracy.
+- **Confidence-ordered cascades beat exhaustive fan-out.** Walking six adapters in cost order and short-circuiting at high confidence is strictly cheaper than running all six in parallel and picking the best. The confidence threshold (0.70) is tunable; the cascade ordering is the design decision.
+- **Provenance is bidirectional or it is useless.** A citation store that only knows "artifact cites source" cannot answer "which artifacts depend on this retracted source?" The dual-index was not a minor affordance — it was the difference between a write-once-read-never log and an audit-ready graph.
+- **Non-destructive annotation is the right default for citations.** Inserting `[CITE:id]` markers inline without modifying surrounding text means any downstream consumer — citation-aware or not — can read the document. Destructive edits would have forced every downstream tool to understand the citation schema.
+- **Fault isolation on optional pipeline hooks is non-negotiable.** The `sc:learn` pre-hook is useful when it works and must not break the pipeline when it fails. SAFE-06 makes that guarantee structural: timeouts, circuit breakers, and log-and-continue on any citation error. Hooks that can take down the host pipeline are not hooks — they are dependencies.
+- **Injectable network interfaces make the system testable.** Every adapter accepts a `fetch` implementation at construction. The E2E suite runs the full pipeline offline with canned responses, which is the only way to verify the cascade deterministically and cheaply.
+- **Deterministic IDs enable idempotent ingestion.** SHA-256 hashes over normalized citation fields mean re-ingesting the same citation from a different document produces the same record. Without deterministic IDs, the deduplication layer would be doing work the ID scheme should have done for free.
+- **Package the subsystem as a chipset, not a pile of modules.** The citation chipset YAML with 6 skills, 4 agents, 2 communication loops, and pre/post-deploy gates means any future consumer loads citation support as a single unit. Barrel exports at `src/citations/index.ts` make the public surface a single import rather than a module scavenger hunt.
+- **Prove the pipeline on a small curated corpus first.** The Space Between 10-reference bibliography was deliberately small — ten works spanning the full category breadth the system needs to handle. A small-and-broad proof exercises more failure modes than a large-but-uniform one, and the 9 validation tests caught format edge cases a larger corpus would have buried.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — the Apply-loop substrate the citation pre/post hooks plug into |
+| [v1.29](../v1.29/) | Electronics Educational Pack — one of the E2E integration test targets (`e2e-integration.test.ts` covers electronics-ingestion attribution) |
+| [v1.30](../v1.30/) | Vision-to-Mission Pipeline — source of the stage-based pipeline pattern citation hooks follow |
+| [v1.31](../v1.31/) | GSD-OS MCP Integration — future surface through which citation queries could be exposed to external consumers |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform — multi-agent architecture template the citation chipset's 4 agents (LIBRARIAN/ARCHIVIST/SCRIBE/AUDITOR) inherit |
+| [v1.34](../v1.34/) | Documentation Ecosystem Refinement — the doc spine the citation subsystem publishes bibliographies into |
+| [v1.35](../v1.35/) | Mathematical Foundations Engine — the predecessor that shipped `sc:learn` ingestion without provenance; v1.36's citation hooks fill that exact gap |
+| [v1.37](../v1.37/) | Complex Plane Learning Framework — immediate successor; citation provenance attaches to the (θ, r) SkillPosition primitives v1.37 introduces |
+| [v1.40](../v1.40/) | sc:learn Dogfood Mission — exercises the citation pipeline on non-Space-Between corpora, closing the enrichment-at-scale gap flagged here |
+| [v1.42](../v1.42/) | Test-infrastructure release — per-phase test census format applied to citation subsystem coverage |
+| [v1.49](../v1.49/) | Mega-release that re-exposed citation primitives through the unified cartridge pipeline |
+| `src/citations/index.ts` | Barrel exports — single entry point for extractor, resolver, store, generator, learn hooks, discovery, dashboard |
+| `src/citations/resolver/adapter.ts` | `BaseAdapter` interface — the injectable-fetch contract that made the test suite mockable end-to-end |
+| `src/citations/citation-management.chipset.yaml` | Chipset manifest — 6 skills, 4 agents, 2 loops, pre/post-deploy gates |
+| `src/citations/__tests__/e2e-integration.test.ts` | 8-test E2E suite covering the full extract → resolve → store → generate → provenance chain |
+| `src/citations/__tests__/barrel-exports.test.ts` | 7 barrel/chipset validation tests enforcing importability and skill-agent alignment |
+| `src/citations/space-between/reference-list.ts` | Curated 10-reference list spanning the citation category breadth (ancient/foundational/software/web) |
+| `src/citations/space-between/generate-bibliography.ts` | End-to-end Space Between pipeline: extract → mock-resolve → store → BibTeX + APA 7 emission |
+| `src/citations/space-between/attribution-report.ts` | 5-category attribution reporter distinguishing Space Between originals from cited foundations |
+| `src/citations/dashboard/citation-panel.ts` | Dashboard HTML panel with summary bar, filters, sortable columns |
+| `src/citations/dashboard/provenance-viewer.ts` | Provenance tree renderer with depth-colored nodes and dashed circular-reference edges |
+| `src/citations/dashboard/integrity-badges.ts` | Green/yellow/red threshold badges (≥90% / 70–89% / <70%) with pack-level averages |
+| `.planning/MILESTONES.md` | Canonical milestone detail per the v1.36 tag message |
+
+## Engine Position
+
+v1.36 sits in the post-v1.29 knowledge-subsystem arc, immediately downstream of v1.35's Mathematical Foundations Engine and immediately upstream of v1.37's Complex Plane Learning Framework. v1.29 shipped the first educational pack without provenance. v1.30 typed the pipeline. v1.31 exposed it through MCP. v1.32 added brainstorm composition. v1.33 landed multi-agent cloud orchestration. v1.34 refined the documentation ecosystem. v1.35 made mathematical reasoning a first-class typed subsystem and shipped `sc:learn` with reversibility as a first-class operation — but left the "where did this knowledge come from?" question unanswered. v1.36 is the release that answers it. Every subsequent release that touches knowledge ingestion inherits the citation subsystem: v1.37's complex-plane primitives carry provenance, v1.40's dogfooding mission exercises the resolver cascade at scale, v1.42's per-phase test census format gets applied back to citation coverage, v1.44's DAG-everywhere pattern reappears as the provenance-graph abstraction, and v1.49's cartridge pipeline re-exposes citation primitives as a composable unit. In the longer-arc narrative that runs from v1.0's adaptive loop through v1.49's consolidated cartridge system, v1.36 is the release that made the knowledge the project accumulates auditable rather than just accumulated.
+
+## Files
+
+- `src/citations/index.ts` — barrel exports: types, extractor, resolver, store, generator, learn, discovery, dashboard from a single entry point (commit `003606737`)
+- `src/citations/resolver/adapter.ts` — `BaseAdapter` interface with injectable fetch, 30-day TTL cache, token-bucket rate limiter, timeout/error handling (commit `983e0f68a`, type-narrowing fix `003606737`)
+- `src/citations/citation-management.chipset.yaml` — chipset manifest: 6 skills, 4 agents (LIBRARIAN, ARCHIVIST, SCRIBE, AUDITOR), 2 communication loops, pre/post-deploy evaluation gates (commit `003606737`)
+- `src/citations/__tests__/barrel-exports.test.ts` — 7 barrel/chipset validation tests: importability, constructability, YAML structure, skill-module alignment, agent-skill references (commit `003606737`)
+- `src/citations/__tests__/e2e-integration.test.ts` — 8 E2E integration tests covering learn pipeline, electronics, NASA, provenance, dedup, enrichment, dashboard rendering, PII redaction; mocked external APIs, temp-dir isolation, bidirectional provenance verification (commit `1a4e1c4ed`)
+- `src/citations/space-between/reference-list.ts` — curated 10-work Space Between reference list (Sagan, Shannon, Lindenmayer, Euclid, Pythagoras, Clausius, Heisenberg, Mac Lane, Gibbs, Fourier) (commit `3e3bfbb7b`)
+- `src/citations/space-between/generate-bibliography.ts` — full pipeline extract → mock-resolve → store → BibTeX + APA 7 emission into `.citations/exports/` (commit `3e3bfbb7b`)
+- `src/citations/space-between/attribution-report.ts` — 5-category attribution classifier with markdown output distinguishing Space Between originals from cited foundations (commit `3e3bfbb7b`)
+- `src/citations/space-between/__tests__/space-between.test.ts` — 9 validation tests: format validity, recall ≥95%, safety checks (commit `3e3bfbb7b`)
+- `src/citations/dashboard/citation-panel.ts` — HTML citation panel with summary bar, filters, sortable columns in GSD-OS dark-theme aesthetic (commit `0e4b747d6`)
+- `src/citations/dashboard/provenance-viewer.ts` — provenance tree renderer with depth-colored nodes and circular-reference dashed edges (commit `0e4b747d6`)
+- `src/citations/dashboard/integrity-badges.ts` — green/yellow/red badge thresholds (≥90%/70–89%/<70%) with pack-level averaging (commit `0e4b747d6`)
+- `src/citations/dashboard/index.ts` — dashboard barrel export (commit `0e4b747d6`)
+- `src/citations/dashboard/__tests__/dashboard-citations.test.ts` — 14 tests covering panel rendering, empty state, provenance trees, badge colors, aesthetic conformance (commit `0e4b747d6`)
+- `package.json`, `src-tauri/Cargo.toml` — version bump to 1.36.0 (commit `5e340e761`)
+- `.gitignore` — anchored `/dashboard/` pattern correction so `src/citations/dashboard/` is tracked (commit `0e4b747d6`)
+- `docs/release-notes/v1.36/chapter/00-summary.md` — summary chapter with prev/next navigation
+- `docs/release-notes/v1.36/chapter/03-retrospective.md` — retrospective chapter with What Worked / What Could Be Better
+- `docs/release-notes/v1.36/chapter/04-lessons.md` — lessons chapter with extracted lessons and investigate-status markers
+- `docs/release-notes/v1.36/chapter/99-context.md` — prev/next navigation and parse-confidence metadata
 
 ---
+
+_Parse confidence: 1.00 — authored from git log `v1.36~16..v1.36` plus tag metadata plus chapter files._
