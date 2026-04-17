@@ -1,65 +1,151 @@
 # v1.34 — Documentation Ecosystem Refinement
 
-**Shipped:** 2026-02-26
-**Phases:** 326-334 (9 phases) | **Plans:** 23 | **Commits:** 9 | **Requirements:** 18 | **Docs:** 158 markdown files (~53K lines)
+**Released:** 2026-02-26
+**Scope:** documentation milestone — `docs/` promoted from a collection of independent educational resources into a single canonical source-of-truth with narrative spine, gateway documents, extractable templates, site architecture, and iterative improvement cycle
+**Branch:** dev → main
+**Tag:** v1.34 (2026-02-25T17:00:39-08:00) — "Documentation Ecosystem Refinement"
+**Predecessor:** v1.33 — GSD OpenStack Cloud Platform (NASA SE Edition)
+**Successor:** v1.35 — Mathematical Foundations Engine
+**Classification:** milestone — documentation subsystem transformation
+**Phases:** 326-334 (9 phases) · **Plans:** 23 · **Requirements:** 18 · **Commits:** 9 (`48f910339..9da492e66`) · **Files changed (window):** 15 · **LOC:** 4,016 insertions / 106 deletions (~53K lines across 158 docs/ files in scope)
+**Verification:** 502 internal cross-references validated (0 broken) · three-speed reading test passing on all 30 non-placeholder content documents · frontmatter schema valid on all 44 v1.34 ecosystem files · 113 legacy files tracked as out-of-scope with follow-up issues
 
-Transformed docs/ from a collection of independent educational resources into a unified, self-improving documentation ecosystem with canonical source, narrative spine, extractable templates, site architecture, and WordPress migration plan.
+## Summary
 
-### Key Features
+**v1.34 is the release where `docs/` stopped being an archive and started being an ecosystem.** Before this release, the project's documentation lived as a loose collection of educational resources — a power-efficiency ranking here, a Skills-and-Agents guide there, a scattered set of Getting Started pages, the OpenStack case study on its own track. Each artifact was self-contained, each had its own authoring conventions, and crossing from one to another required either foreknowledge of where things lived or a full-text search. Phase 326 through phase 334 replaced that with a single canonical tree, a narrative spine that names three entry points (learn / build / understand), seven gateway documents that anchor the three foundations plus four principles, four extractable templates that turn one-off outputs into reusable patterns, a site-architecture specification with an Astro static-site-generator recommendation and a five-phase WordPress migration plan, and an iterative improvement cycle with five closed feedback loops. The release's commit range is `48f910339..9da492e66` — nine commits spanning nine phases — and the tip commit verifies that 502 internal links across 157 docs/ files resolve with zero broken, that the three-speed reading test passes on all thirty non-placeholder v1.34 files, and that frontmatter schema validation passes on all forty-four v1.34 ecosystem files. The 113 pre-existing legacy files that do not yet conform to the new schema were documented as out-of-scope with tracked issues rather than forcibly migrated; this is the first time the project treated its own documentation with the same structural discipline it applies to code.
 
-**Canonical Source Structure (Phases 326-327):**
-- Complete docs/ directory (158 markdown files) as single source of truth
-- YAML frontmatter schema, style guide, machine-readable filesystem contracts
+**Canonical source structure with frontmatter schema and filesystem contracts made 158 files maintainable.** Phase 326 landed the foundation directory structure, the style guide, and the filesystem contracts at `docs/meta/style-guide.md` and `docs/meta/filesystem-contracts.md`. The style guide defines the YAML frontmatter schema every content document must carry — layer, category, role, audience, status, last-reviewed — and the filesystem contracts declare which directories are authoritative, which are generated, and which are archival. This is the same move the project made for `.claude/skills/` in v1.0: pick the simplest machine-readable primitive that survives a validator, make the primitive the contract, and let tooling compute derived views. Without frontmatter-and-contract scaffolding, a directory tree with 158 markdown files is a write-only archive — files get added, nothing ever gets updated, and cross-references rot silently. With the scaffolding in place, the verification pass at phase 333 could mechanically check every link, every schema, every reading-test outcome across the whole tree in a single run, and the result was 502 valid cross-references and zero broken links.
 
-**Narrative Spine (Phase 328):**
-- docs/index.md connecting 5 educational layers with 3 entry points (learn/build/understand)
-- References all 5 published resources (The Space Between, Skills-and-Agents, Power Efficiency Rankings, Skill Creator docs, OpenStack Cloud)
+**The narrative spine at `docs/index.md` with three entry points is the user-facing deliverable of the release.** Phase 327 landed the content map at `docs/meta/content-map.md` and the narrative spine at `docs/index.md`, which together name five educational layers (foundations, framework, applications, meta, community) and three entry points organized around user intent: "learn" for readers new to the project, "build" for practitioners wiring up their own packs, and "understand" for architects looking at the system as a whole. The spine references all five published resources — The Space Between (the bibliography from v1.36 prep), Skills-and-Agents, Power Efficiency Rankings, Skill Creator docs, OpenStack Cloud case study — so a reader landing on `docs/index.md` has a map with marked trailheads rather than a wall of file names. This solves the "where do I start" problem that 158 unlinked files presents to a new reader. The spine is load-bearing for every downstream consumer: the site-architecture pipeline renders the spine as the homepage navigation; the gateway documents each declare which spine position they anchor; the improvement cycle's template-to-skill promotion pipeline uses the spine's five-layer taxonomy as its classification vocabulary.
 
-**Gateway Documents (Phase 329):**
-- 3 foundations: mathematical-foundations, complex-plane, eight-layer-progression
-- 4 principles: agentic-programming, amiga-principle, progressive-disclosure, humane-flow
+**Seven gateway documents anchor three foundations and four principles.** Phase 329 shipped three foundation gateways (`mathematical-foundations`, `complex-plane`, `eight-layer-progression`) and four principle gateways (`agentic-programming`, `amiga-principle`, `progressive-disclosure`, `humane-flow`). A gateway document is not an overview; it is a curated entry into a topic with enough front-matter density to stand alone, plus explicit outbound cross-references to the three-to-five most relevant deep documents in the same topic cluster. The distinction matters because overviews tend to drift into summaries that get stale when the underlying material changes, while gateways are structural pointers that remain correct as long as the destinations exist. The seven gateways cover the topics a reader most often needs to triangulate on first — three abstractions and four principles are the minimum a new contributor has to hold in memory before any specific feature makes sense. Phase 329 also delivered the educational-packs index, which plays the same role for packs that the spine plays for the docs tree: every published pack is listed once, with its one-line purpose and a link into its primary content document.
 
-**WordPress Content Migration (Phase 330):**
-- Core content migrated to docs/ as clean markdown
-- Getting Started, Core Concepts, Features, About, Architecture, Core Learning
-- 2 application gateways (Power Efficiency, OpenStack case study)
+**WordPress content migration to clean markdown closed the CMS-dependence tab.** Phase 330 migrated the primary WordPress pages — Getting Started, Core Concepts, Features, About — into `docs/framework/` and `docs/about.md` as clean markdown with full frontmatter, zero WordPress shortcodes, and zero CMS artifacts. The architecture overview at `docs/framework/architecture/index.md` and the core-learning domain at `docs/framework/architecture/core-learning.md` are new writing, not migrations, and they sit alongside the migrated content with identical schema so the pipeline treats them uniformly. Two application gateways — `docs/applications/power-efficiency.md` and `docs/applications/case-studies/openstack-cloud.md` — give the Power Efficiency Rankings and OpenStack case study first-class homes in the canonical tree with full frontmatter rather than living as WordPress-attached resources. The migration is a one-way transition; the WordPress site continues to serve its audience during the redirect window, but the authoritative source is now the markdown tree, and the redirect map at `docs/meta/site-architecture.md` names every WordPress URL that will redirect at cutover.
 
-**Extractable Templates (Phase 331):**
-- Educational pack template (from Power Efficiency Rankings)
-- Career pathway template
-- AI learning prompt template (3 patterns: structured roadmap, Socratic tutor, hands-on project)
-- Mission retrospective template (NASA LLIS format with 8 fields)
+**Four extractable templates multiply the value of one-off documentation.** Phase 331 extracted four templates that each turn a single project's output into a reusable pattern: the educational-pack template (generalized from Power Efficiency Rankings), the career-pathway template, the AI-learning-prompt template with three variants (structured roadmap, Socratic tutor, hands-on project), and the mission-retrospective template modeled on the NASA LLIS eight-field format. Template extraction is the economic multiplier of the release — a pack that ships as a pack benefits one audience; a pack whose shape is captured as a template becomes the starting point for the next ten packs. The NASA LLIS alignment on the retrospective template is deliberate: it ties the project's lesson-capture discipline to a published, externally-maintained format with a forty-year institutional history, which means the retrospectives the project writes from v1.34 forward can be read, aggregated, and cross-referenced by anyone familiar with the LLIS format without translation.
 
-**Site Architecture (Phase 332):**
-- URL structure, WordPress redirect map
-- Astro SSG recommendation
-- 5-phase incremental migration plan
-- Content pipeline (docs/ to www/ transformation)
+**Site architecture specification with Astro recommendation converted docs into a publishable artifact.** Phase 332 delivered the site-architecture specification at `docs/meta/site-architecture.md` and the content-pipeline specification at `docs/meta/content-pipeline.md`. Site architecture covers URL structure for every tibsfox.com content area, docs-to-URL mapping rules with internal-only exclusions, a redirect map covering every WordPress URL plus standalone-resource URLs, design requirements (mobile-first, WCAG 2.1 AA accessibility, no third-party tracking), a static-site-generator evaluation that recommends Astro with 11ty as the alternative, and a five-phase incremental migration plan so the WordPress-to-Astro transition ships one section at a time rather than as a single cutover. The content pipeline specifies the six-stage build process: markdown ingest, frontmatter validation, cross-reference link resolution with broken-link detection, navigation generation (top nav, side nav, breadcrumbs, related-content blocks), layout application, and deployed-HTML output. This is the spec that a future implementation phase consumes; the release ships the spec, not the running pipeline, and the retrospective is explicit about that boundary.
 
-**Iterative Improvement Cycle (Phase 333):**
-- 5 feedback loops (Mission to Template, skill-creator to Quality, Template to Skill, Community to Documentation, Analytics to Priorities)
-- Community contributing guide
+**The iterative improvement cycle at `docs/meta/improvement-cycle.md` treats documentation as a living system.** Phase 333 landed the iterative-improvement specification with five closed feedback loops: mission-to-template (completed missions surface template candidates), skill-creator-to-quality (skill-creation telemetry flags documentation gaps), template-to-skill (proven templates get promoted to skills), community-to-documentation (community contributions land as doc changes first and code changes second), and analytics-to-priorities (site analytics rank which documents need the next pass). Each loop is specified with concrete thresholds — the template-to-skill promotion pipeline, for example, requires a template to be applied successfully in at least three independent contexts before promotion — so the cycle is mechanical, not aspirational. The companion `docs/community/contributing.md` ships the community contributing guide with quality standards, the review process, and a shareware-style contribution model deliberately inspired by the Amiga demoscene: contributors sign their work, the project curates what ships, and attribution is durable.
 
-**Verification (Phase 334):**
-- 502 cross-references validated (0 broken)
-- All 30 content documents pass three-speed reading test
-- All frontmatter schema-compliant
+**Verification at 502 links / 0 broken / 30 passing reading tests / 44 valid schemas is the integrity ledger of the release.** Phase 334's `docs/meta/verification-report.md` records the raw numbers: 502 internal cross-references validated, zero broken, thirty non-placeholder content documents passing the three-speed reading test (skim / read / deep-dive), forty-four v1.34 ecosystem files with valid frontmatter schema, one hundred thirteen legacy files documented as out-of-scope with tracked follow-up issues. The three-speed reading test is the most distinctive piece: it is a quality gate that says a document must be usable at three rhythms — a thirty-second skim should yield the thesis, a five-minute read should yield the structure, and a deep-dive should yield the detail, with explicit signposts at each speed. This is progressive disclosure applied to the documents themselves rather than to the UI around them, and it is the test that flagged most of the migration-prep rewrites that this release also quietly absorbed. The 113 legacy files are not ignored; they are inventoried, each with a GitHub issue link, so the documentation debt is visible and tractable rather than silent.
+
+**v1.34 closed the "docs as codebase" tab that has been open since v1.24's conformance audit.** The conformance audit at v1.24 named a handful of gaps in the project's own documentation — missing cross-reference validation, missing schema for educational resources, WordPress as a single point of failure for the public site, no story for migrating between static-site generators if Astro turns out wrong. v1.34 closes each of those: cross-reference validation is mechanical (phase 333), frontmatter schema is canonical (phase 326), WordPress is no longer the source of truth (phase 330), and the site-architecture spec explicitly evaluates 11ty as the alternative if Astro does not work out at migration time (phase 332). The tag message names the release as "Documentation Ecosystem Refinement" for good reason: refinement is the operation, ecosystem is the object, and the state after this release is that every future documentation change has a defined shape, a validator, and a place to land.
+
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| Foundation structure + style guide + filesystem contracts (Phase 326) | YAML frontmatter schema; filesystem contracts declaring authoritative/generated/archival directories; docs/ style guide (`docs/meta/style-guide.md`, `docs/meta/filesystem-contracts.md`) |
+| Narrative spine + content map (Phase 327) | `docs/index.md` with 3 entry points (learn / build / understand) + 5 educational layers; `docs/meta/content-map.md` enumerating every canonical document |
+| Seven gateway documents (Phase 329) | 3 foundations (`mathematical-foundations`, `complex-plane`, `eight-layer-progression`) + 4 principles (`agentic-programming`, `amiga-principle`, `progressive-disclosure`, `humane-flow`) + educational-packs index |
+| WordPress content migration (Phase 330) | Getting Started, Core Concepts, Features, About migrated to clean markdown under `docs/framework/` + `docs/about.md`; Architecture Overview + Core Learning domain written fresh (`docs/framework/architecture/index.md`, `docs/framework/architecture/core-learning.md`); Power Efficiency + OpenStack case-study gateways (`docs/applications/power-efficiency.md`, `docs/applications/case-studies/openstack-cloud.md`) |
+| Extractable templates (Phase 331) | Educational-pack template (generalized from Power Efficiency Rankings); career-pathway template; AI-learning-prompt template with 3 variants (structured roadmap / Socratic tutor / hands-on project); mission-retrospective template in NASA LLIS 8-field format |
+| Site architecture + content pipeline (Phase 332) | `docs/meta/site-architecture.md` — URL structure covering all tibsfox.com content areas, redirect map for WordPress + standalone URLs, mobile-first + WCAG 2.1 AA + no-tracking requirements, Astro-recommended SSG evaluation with 11ty alternative; `docs/meta/content-pipeline.md` — six-stage build process from markdown to deployed HTML, cross-reference link resolution with broken-link detection, navigation generator (top nav / side nav / breadcrumbs / related) |
+| Five-phase WordPress migration plan (Phase 332) | Incremental WordPress-to-Astro migration covering one section per phase; redirect map finalized; cutover sequence specified |
+| Iterative improvement cycle (Phase 333) | `docs/meta/improvement-cycle.md` — 5 closed feedback loops (mission-to-template, skill-creator-to-quality, template-to-skill, community-to-documentation, analytics-to-priorities); template-to-skill promotion pipeline with 3-context minimum threshold |
+| Community contributing guide (Phase 333) | `docs/community/contributing.md` with quality standards, review process, shareware-style contribution model inspired by Amiga demoscene, measurable quality metrics using current tooling |
+| Lessons-applied cross-reference (Phase 333) | `docs/meta/lessons-applied-v1.34.md` mapping LL-CLOUD-001 through LL-CLOUD-015 from v1.33's OpenStack retrospective to specific v1.34 design decisions |
+| Verification pass (Phase 334) | `docs/meta/verification-report.md` — 502 internal cross-references validated (0 broken), three-speed reading test passing on all 30 non-placeholder v1.34 files, frontmatter schema valid on all 44 v1.34 ecosystem files, 113 legacy files documented as out-of-scope with tracked issues |
+| Meta index navigation | `docs/meta/index.md` rewired to reference lessons-applied, verification-report, content-pipeline, site-architecture, improvement-cycle as top-level entries |
 
 ## Retrospective
 
 ### What Worked
-- **502 cross-references validated with 0 broken.** This is the payoff of treating docs/ as a canonical source with machine-readable contracts. Cross-reference integrity at this scale requires structural discipline, not manual checking.
-- **Three-speed reading test as a quality gate.** Testing all 30 content documents against a three-speed reading framework ensures documentation works for skimmers, readers, and deep-divers. This is progressive disclosure applied to the docs themselves.
-- **5 feedback loops create a self-improving cycle.** The Mission-to-Template, skill-creator-to-Quality, Template-to-Skill, Community-to-Documentation, and Analytics-to-Priorities loops make documentation a living system rather than a one-time deliverable.
+
+- **502 cross-references validated with 0 broken.** This is the payoff of treating docs/ as a canonical source with machine-readable contracts. Cross-reference integrity at this scale requires structural discipline, not manual checking. The verification pass at phase 334 is a single mechanical run; the result is defensible because the inputs are mechanically-checkable artifacts rather than hand-edited prose.
+- **Three-speed reading test as a quality gate.** Testing all 30 content documents against a three-speed reading framework ensures documentation works for skimmers, readers, and deep-divers. This is progressive disclosure applied to the docs themselves, and it catches the class of document that reads fine at one speed and falls apart at another.
+- **5 feedback loops create a self-improving cycle.** The mission-to-template, skill-creator-to-quality, template-to-skill, community-to-documentation, and analytics-to-priorities loops make documentation a living system rather than a one-time deliverable. Each loop has a concrete threshold and a defined promotion path, which turns "we should update the docs" into a mechanical trigger.
+- **Frontmatter + filesystem contracts at phase 326 paid for every later phase.** Landing the schema and the contracts first meant every subsequent phase's content could be validated with the same tooling and every cross-reference between them could be checked mechanically. Had the schema landed at phase 333 instead, the intermediate phases would each have needed their own ad-hoc validators.
+- **WordPress migration as content-first, not pipeline-first.** Migrating the prose to clean markdown before specifying the Astro pipeline meant the pipeline could be designed against real content rather than placeholder fixtures. The redirect map is also concrete because the destination URLs are derivable from the migrated files' frontmatter rather than invented ahead of time.
+- **NASA LLIS alignment on the retrospective template.** Picking an externally-maintained 40-year-old institutional format for retrospectives means every retrospective the project writes from v1.34 forward is legible to anyone familiar with LLIS, without translation. This is a durable alignment choice that scales as the retrospective corpus grows.
+- **Seven gateways (three foundations + four principles) is the right minimum-memorable set.** Seven is at the edge of working-memory capacity and the split between abstractions and principles maps onto how contributors actually navigate the project. A new contributor who reads the seven gateways has the minimum viable conceptual inventory to read any specific pack or feature after.
 
 ### What Could Be Better
-- **9 commits for 9 phases is unusually lean.** Most releases average 3-5 commits per phase. One commit per phase suggests either very large commits or phases that could have been consolidated.
-- **WordPress migration plan without execution.** The 5-phase incremental migration plan and Astro SSG recommendation are forward-looking but remain unexecuted deliverables -- plans about plans.
+
+- **9 commits for 9 phases is unusually lean.** Most releases average 3-5 commits per phase. One commit per phase suggests either very large commits (which complicates bisect) or phases that could have been consolidated (which would have cost one layer of organizational overhead for questionable gain). Future documentation-heavy milestones should budget 2-3 commits per phase at minimum: one for the landing, one for the cross-reference wire-up, one for the verification.
+- **WordPress migration plan shipped without execution.** The 5-phase incremental migration plan and Astro SSG recommendation are forward-looking but remain unexecuted deliverables — plans about plans. The plan is correct and complete as a specification, but until the first phase runs, the project is still serving its public site from WordPress. A v1.34.x patch or an early phase in the next milestone should pick up phase one of the migration to close the loop.
+- **113 legacy files carried forward as out-of-scope is a large debt to name.** The tracked issues make the debt visible, but 113 is bigger than any single future phase is likely to absorb. Future releases should plan deliberate legacy-file migration batches (say, 20 files per release) rather than leaving the backlog to accumulate further.
+- **Astro vs 11ty evaluation is a paper choice, not an empirical one.** The SSG recommendation is sound on the current criteria, but the project has not yet built the pipeline end-to-end in either tool. A spike that proves Astro against the content-pipeline specification — before the migration starts — would reduce the risk of discovering a critical-path problem mid-migration.
+- **Template extraction is right but thin on usage data.** Four templates shipped; zero of them have been used by an external contributor as of this release. The promotion thresholds in the improvement cycle are speculative until the first template-to-skill promotion actually runs. Treat the thresholds as v1 and expect to revise them once real usage data lands.
+- **The three-speed reading test is qualitative even though the verification report counts passes.** A document "passes" the three-speed test on reviewer judgment, not a mechanical check. This is fine for the thirty documents in scope, but it does not scale to the 158-file full tree or the 113-file legacy backlog without either a rubric that a linter can enforce or a staffing model for human review at that volume.
 
 ## Lessons Learned
 
-1. **Treating documentation as a codebase (frontmatter schemas, filesystem contracts, cross-reference validation) makes 158 files maintainable.** Without machine-readable structure, a docs/ directory this size becomes a write-only archive.
-2. **Extractable templates (educational pack, career pathway, AI learning prompt, mission retrospective) multiply the value of one-off documentation.** Each template turns a single project's output into a reusable pattern.
-3. **Narrative spine with 3 entry points (learn/build/understand) solves the "where do I start" problem.** 158 files without a spine is a maze. The spine turns it into a map with marked trailheads.
+- **Treating documentation as a codebase (frontmatter schemas, filesystem contracts, cross-reference validation) makes 158 files maintainable.** Without machine-readable structure, a docs/ directory this size becomes a write-only archive — new files land, nothing gets updated, and cross-references rot silently. The scaffolding at phase 326 is what makes the verification pass at phase 334 possible.
+- **Extractable templates multiply the value of one-off documentation.** The educational-pack, career-pathway, AI-learning-prompt, and mission-retrospective templates each turn a single project's output into a reusable pattern. Without extraction, each future pack pays the full authoring cost of the first one; with extraction, the marginal cost drops to template-fill plus review.
+- **Narrative spine with 3 entry points solves the "where do I start" problem.** 158 files without a spine is a maze; the spine turns it into a map with marked trailheads. Picking three entry points (learn / build / understand) matches the three durable user intents and avoids the ten-entry-point trap where every personalized pathway competes for the reader's first click.
+- **Land the schema and contracts in the first phase of a documentation milestone, not the last.** Phase 326 shipping the frontmatter schema and filesystem contracts meant every subsequent phase validated against the same artifacts. Had the schema landed at phase 333, the intermediate phases would each have needed ad-hoc validators and the verification pass would have had to retroactively reconcile differing shapes.
+- **Gateway documents are structural pointers, not summaries.** A gateway names a topic, gives enough front-matter density to stand alone, and lists the three-to-five most relevant deep documents. An overview is a summary that drifts when the underlying content changes; a gateway is a set of pointers that remains correct as long as its destinations exist. Prefer gateways.
+- **Content-first migration beats pipeline-first migration.** Migrating the WordPress prose to clean markdown before specifying the Astro pipeline meant the pipeline could be designed against real content. The opposite order — pipeline first, content to fit — produces either a pipeline that over-constrains the content or a pipeline that under-specifies the migration effort.
+- **Align retrospective formats with external institutional standards.** Picking NASA LLIS (40-year history, eight fields, externally-maintained) for the mission-retrospective template means every retrospective the project writes is legible without translation to anyone familiar with LLIS. Alignment with a durable external format scales as the retrospective corpus grows; bespoke formats do not.
+- **Ship the plan when the execution is not yet ready, and label it as such.** The 5-phase WordPress-to-Astro migration is a plan, not an execution. Shipping the plan with clear "not-yet-executed" labeling is preferable to deferring the plan until execution is ready: the plan is reviewable now, and the execution can reference an already-landed specification.
+- **Inventory legacy debt in-place rather than deferring it to "someday."** 113 legacy files did not meet the new schema at release time. Documenting each as out-of-scope with a tracked issue makes the debt visible and tractable; leaving them unlisted would have hidden the debt and lost the cross-reference mapping that the tracked issues preserve.
+- **One commit per phase is too lean for documentation milestones.** Nine commits for nine phases complicates bisect and makes mid-phase review harder. Two-to-three commits per phase — one for the landing, one for cross-reference wire-up, one for verification — is a better budget for documentation work where the verification step is itself a discrete deliverable.
+- **Quality-gates that are qualitative should be named as such.** The three-speed reading test is a valuable rubric, but it is reviewer-judged, not linter-checked. Naming it as qualitative in the verification report prevents future consumers from treating the pass count as a mechanical metric when it is not.
+- **Cross-reference lessons between releases as a first-class artifact.** `docs/meta/lessons-applied-v1.34.md` mapping LL-CLOUD-001 through LL-CLOUD-015 from v1.33's retrospective to specific v1.34 design decisions is the shape lesson-propagation should take. Lessons that get extracted and not applied are noise; lessons that get mapped to concrete downstream decisions are load-bearing.
 
----
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — source of the "treat structure as a codebase" principle applied to documentation at v1.34 |
+| [v1.24](../v1.24/) | GSD Conformance Audit — identified documentation gaps (cross-reference validation, schema, WordPress dependence, SSG alternatives) that v1.34 closes |
+| [v1.25](../v1.25/) | Ecosystem Integration — dependency DAG that v1.34's narrative spine structurally resembles at the docs layer |
+| [v1.27](../v1.27/) | Foundational Knowledge Packs — first consumer of the educational-pack template that v1.34 extracts |
+| [v1.29](../v1.29/) | Electronics Educational Pack — exemplar Educational-archetype pack referenced by the extracted template |
+| [v1.30](../v1.30/) | Vision-to-Mission Pipeline — VTM modules that the template system borrows mustache-style rendering and Zod-validated templates from |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform — predecessor; LL-CLOUD-001 through LL-CLOUD-015 mapped forward into v1.34 design decisions via `docs/meta/lessons-applied-v1.34.md` |
+| [v1.35](../v1.35/) | Mathematical Foundations Engine — immediate successor, first consumer of the mathematical-foundations gateway document |
+| [v1.36](../v1.36/) | Citation Management — "The Space Between" bibliography that v1.34's narrative spine references |
+| [v1.37](../v1.37/) | Complex Plane Learning Framework — first consumer of the complex-plane gateway document |
+| [v1.40](../v1.40/) | sc:learn Dogfood Mission — consumer of the mission-retrospective template in its LLIS-format output |
+| [v1.44](../v1.44/) | Release that consumed the educational-pack template (applied lesson from this retrospective) |
+| [v1.45](../v1.45/) | Release that closed the WordPress migration gap flagged in "What Could Be Better" |
+| [v1.49](../v1.49/) | Mega-release that consolidated post-v1.34 documentation work through the unified cartridge pipeline |
+| `docs/index.md` | Narrative spine — 3 entry points + 5 layers |
+| `docs/meta/content-map.md` | Canonical enumeration of every content document |
+| `docs/meta/style-guide.md` | YAML frontmatter schema + style rules |
+| `docs/meta/filesystem-contracts.md` | Authoritative / generated / archival directory declarations |
+| `docs/meta/content-pipeline.md` | Six-stage markdown-to-HTML build specification |
+| `docs/meta/site-architecture.md` | URL structure + redirect map + Astro recommendation + 5-phase migration plan |
+| `docs/meta/improvement-cycle.md` | 5 closed feedback loops + template-to-skill promotion thresholds |
+| `docs/meta/lessons-applied-v1.34.md` | LL-CLOUD-001..015 from v1.33 mapped to v1.34 design decisions |
+| `docs/meta/lessons-learned-v1.34.md` | New lessons captured during v1.34 execution |
+| `docs/meta/verification-report.md` | 502 / 0 / 30 / 44 / 113 integrity ledger |
+| `docs/community/contributing.md` | Quality standards + review process + shareware-style contribution model |
+| `docs/framework/getting-started.md` | Migrated WordPress Getting Started page |
+| `docs/framework/core-concepts.md` | Migrated WordPress Core Concepts page |
+| `docs/framework/features.md` | Migrated WordPress Features page |
+| `docs/framework/architecture/index.md` | New Architecture Overview (not a migration) |
+| `docs/framework/architecture/core-learning.md` | New Core Learning domain documentation |
+| `docs/about.md` | Migrated WordPress About page |
+| `docs/applications/power-efficiency.md` | Power Efficiency Rankings gateway |
+| `docs/applications/case-studies/openstack-cloud.md` | OpenStack Cloud Platform case study gateway |
+
+## Engine Position
+
+v1.34 is the first release that promoted `docs/` from a resource directory to a typed subsystem. The v1.0 → v1.24 arc built the adaptive loop, the skill/agent substrate, and the first conformance audit. v1.25 specified ecosystem integration. v1.26 through v1.33 built consumers and educational packs — Aminet extension, knowledge packs, Den operations, electronics, Minecraft, Project AMIGA, Desktop Foundation, brainstorm support, OpenStack cloud platform. v1.34 then closed the "docs as codebase" tab: frontmatter schema, filesystem contracts, narrative spine, gateway documents, extractable templates, site architecture, iterative improvement cycle, and a 502-link verification pass. From v1.35 forward, every documentation contribution has a defined shape (schema), a defined home (contracts + spine), a defined review process (contributing guide), and a defined feedback loop (improvement cycle). The four extractable templates become the starting points for every pack that ships after; the seven gateway documents become the entry points every new contributor reads; the site-architecture specification becomes the contract the Astro migration will consume. The 113 legacy files carried forward with tracked issues are the documentation-debt backlog that future milestones draw down. v1.34 is also the release where the project started treating its own documentation with the same structural discipline it applies to code, which is the precondition for the v1.49 mega-release's unified cartridge pipeline to absorb documentation as a first-class cartridge type.
+
+## Files
+
+- `docs/index.md` — narrative spine with 3 entry points (learn / build / understand) and 5 educational layers
+- `docs/about.md` — migrated WordPress About page
+- `docs/framework/getting-started.md`, `core-concepts.md`, `features.md` — migrated WordPress content
+- `docs/framework/architecture/index.md` — new Architecture Overview
+- `docs/framework/architecture/core-learning.md` — new Core Learning domain documentation
+- `docs/applications/power-efficiency.md` — Power Efficiency Rankings gateway
+- `docs/applications/case-studies/openstack-cloud.md` — OpenStack Cloud Platform case-study gateway
+- `docs/community/contributing.md` — contributing guide with shareware-style contribution model
+- `docs/meta/index.md` — meta-index rewired with lessons-applied, verification-report, content-pipeline, site-architecture, improvement-cycle entries
+- `docs/meta/style-guide.md` — YAML frontmatter schema and style rules
+- `docs/meta/filesystem-contracts.md` — authoritative / generated / archival directory declarations
+- `docs/meta/content-map.md` — canonical enumeration of every content document
+- `docs/meta/content-pipeline.md` — six-stage markdown-to-HTML build specification
+- `docs/meta/site-architecture.md` — URL structure, redirect map, Astro SSG recommendation, 5-phase WordPress migration plan
+- `docs/meta/improvement-cycle.md` — 5 closed feedback loops, template-to-skill promotion pipeline
+- `docs/meta/lessons-applied-v1.34.md` — LL-CLOUD-001 through LL-CLOUD-015 mapped into v1.34 design decisions
+- `docs/meta/lessons-learned-v1.34.md` — new lessons captured during execution
+- `docs/meta/verification-report.md` — 502 cross-references / 0 broken / 30 reading-test passes / 44 valid schemas / 113 legacy-file inventory
+- `.planning/phases/326..334/` — 9 phase directories with PLAN and SUMMARY artifacts
+- `.planning/MILESTONES.md` — canonical v1.34 milestone detail
