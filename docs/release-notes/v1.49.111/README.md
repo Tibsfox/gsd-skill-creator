@@ -1,57 +1,154 @@
-# v1.49.111 "Specialized Execution Paths Faithfully Composed"
+# v1.49.111 — "Specialized Execution Paths Faithfully Composed"
 
 **Released:** 2026-03-28
 **Code:** VKD
+**Scope:** Single-project research release — Vulkan Samples corpus mapping, extension promotion tracking, and DACP skill-stub generation for the KhronosGroup reference repository
+**Branch:** dev
+**Tag:** v1.49.111 (2026-03-28T02:24:22-07:00)
+**Commits:** `411ccc8b3` (1 commit)
+**Files changed:** 13 · **Lines:** +3,047 / -0
 **Series:** PNW Research Series (#111 of 167)
+**Cluster:** PNW Infrastructure / GPU & Graphics Computing sub-cluster
+**Classification:** research release — Vulkan reference mapping and skill-corpus infrastructure
+**Dedication:** The Khronos Group working groups, and every GPU driver engineer at ARM, NVIDIA, AMD, Valve, Google, and Imagination Technologies who committed a sample to the upstream repository in exchange for nothing but ecosystem convergence.
+**Engine Position:** 11th release of the v1.49.101-131 research batch, 99th research release of the v1.49 publication arc, second Vulkan-focused entry (after VKS v1.49.103) and the first entry to map an entire upstream sample corpus as queryable skill stubs
+
+> "The spaces between the samples, the connections between concepts, are where the real architectural knowledge lives. A Vulkan sample is never just a sample — it is the terminal node of a decision that was argued across half a dozen vendors, three IHV driver teams, and one specification editor, and the argument is what skill-creator needs to index."
 
 ## Summary
 
-The KhronosGroup Vulkan Samples repository is the canonical living reference for best-practice GPU programming across the entire modern hardware ecosystem. Each sample is a distillation of accumulated wisdom from ARM, NVIDIA, AMD, Valve, Google, and dozens of contributors. This research maps the complete sample corpus -- 80+ samples across API foundations, extensions, and performance patterns -- into DACP-compatible skill stubs, with extension promotion tracking, a version gate skill, and a ZFC stamp candidate for federation compliance. The spaces between the samples, the connections between concepts, are where the real architectural knowledge lives.
+**Vulkan Samples is the canonical living reference for best-practice GPU programming.** v1.49.111 ships the VKD research project — six research modules totaling roughly 4,125 lines of prose plus a 1,087-line LaTeX mission-pack compiled to a 188 KB PDF, the full HTML viewer stack, and a 520-line mission-pack index. The project reads the KhronosGroup/Vulkan-Samples repository not as a codebase but as a distillation of accumulated wisdom from ARM, NVIDIA, AMD, Valve, Google, and dozens of contributors — every sample is the end state of a multi-vendor argument about how a particular GPU technique should be taught. Mapping that corpus into DACP-compatible skill stubs turns the sample set from a collection of programs into a queryable knowledge graph, where extension families, performance tradeoffs, and version gates are first-class searchable objects rather than comments buried in C++ source. The through-line of the release is that an upstream reference repository's true value is not the code but the decisions encoded in which samples exist, which are Vulkan-Hpp C++ variants, which demonstrate KHR extensions versus vendor-specific ones, and which mark performance patterns worth teaching.
+
+**The 80-plus sample corpus is a three-track reference, not a linear tutorial.** Module 1 catalogs the fourteen core API samples — Hello Triangle, HDR, instancing, terrain tessellation, dynamic rendering, timeline semaphores, compute N-body — paired with their fourteen Vulkan-Hpp C++ counterparts that demonstrate idiomatic RAII wrapping of the same primitives. Module 2 covers the complete forty-seven-sample extension corpus: ray tracing (VK_KHR_ray_tracing_pipeline and friends), mesh shaders, dynamic rendering, descriptor indexing, fragment shading rate, buffer device address, and the full extension family map with promotion paths from vendor-prefixed to multi-vendor EXT to ecosystem-consensus KHR. Module 3 documents twenty-four performance-optimization samples with profiling annotations as machine-readable preconditions — multi-draw indirect, pipeline caching, render pass optimization, subpass dependencies, and command buffer management, each tagged with the hardware profile where it pays off and the one where it regresses. Three parallel tracks (API+Framework, Extensions, Performance) mirror how GPU developers actually approach Vulkan: learn the core API, understand extensions, optimize for target hardware. The corpus is designed to be entered from any of those three points.
+
+**Extension promotion tracking encodes the politics of GPU standardization.** Module 5 makes the extension-promotion lifecycle legible. A Vulkan extension typically begins as vendor-prefixed — VK_NV_mesh_shader, VK_ARM_tensors, VK_AMD_buffer_marker — signaling which IHV is shipping the feature in driver form. If multiple vendors agree on a shared API surface the extension is re-published as EXT — VK_EXT_mesh_shader, VK_EXT_descriptor_indexing — signaling a multi-vendor working group has settled on a compatible signature. When the Khronos Working Group formally promotes an extension it becomes KHR — VK_KHR_ray_tracing_pipeline, VK_KHR_dynamic_rendering — and is then eligible for core promotion into a future Vulkan minor version. Each promotion tier is a real political artifact: vendor extensions signal R&D direction, EXT extensions signal multi-vendor agreement, KHR extensions signal ecosystem consensus. The VKD module maps every extension in the sample corpus to its current tier and tracks the historical promotion path so an agent consuming the data can tell the difference between "experimental" and "settled." Vulkan 1.4 spec changes, SDK 1.4.341 updates, and Roadmap 2026 extensions are catalogued with the same tier metadata, including VK_ARM_tensors for on-device tensor operations and the nascent float8 shader support frontier.
+
+**The DACP skill-stub bundle is the artifact that makes the corpus queryable.** Module 6 is the integration layer: 80-plus DACP bundles, one per sample, each mapping the sample's source files, extension dependencies, required SDK version, performance profile, and upstream commit into the skill-creator record format. A version gate skill checks extension availability against the active Vulkan runtime before an agent can use any sample-derived skill, refusing to load a mesh-shader-dependent skill on a device that does not expose VK_KHR_mesh_shader or VK_EXT_mesh_shader. A ZFC stamp candidate binds the entire bundle to a specific upstream commit SHA so federated consumers can verify they are operating against the same canonical corpus. Seen from the skill-creator side, Module 6 is what converts Vulkan-Samples from a passive reference into an active ecosystem citizen: every sample becomes a candidate skill, every extension becomes a capability predicate, every performance pattern becomes a machine-readable precondition.
+
+**Vulkan 1.4 and the 2026 roadmap are tracked in the same module that captures them.** Module 5 (Upstream Intelligence) carries the forward-looking half of the corpus map. Vulkan 1.4 shipped as a bug-fix-and-promotion release, pulling dynamic rendering, timeline semaphores, synchronization2, and several descriptor-related extensions into the core specification — the research notes that Vulkan 1.4's big story is a set of already-adopted KHR extensions graduating to core, which is exactly the promotion story Module 5 is built around. SDK 1.4.341 bundles the corresponding validation layers, header splits, and tooling updates; the module pins each sample's required SDK minimum so agents can match corpus-derived skills against a target developer environment. VK_ARM_tensors is flagged as the leading vendor extension for the mobile / edge ML frontier, and float8 shader support is noted as the shader-language extension most likely to require ecosystem coordination between Khronos, the shader intermediate-representation maintainers, and the silicon vendors shipping int8/float8 execution units. The module is built so that a mechanical refresh against the upstream spec registry can update it without rewriting prose.
+
+**The framework layer is a reusable application skeleton, not just scaffolding around samples.** Module 4 documents the Vulkan Samples framework itself: the Application / Platform / RenderContext abstraction stack that every sample shares, the CMake build system with its Gradle Android integration, and the CI harness patterns that run the samples against driver fuzzing and validation layer coverage. Extracting the framework into its own module serves two purposes: it lets a reader understand the sample corpus as a single cohesive application rather than eighty disconnected demos, and it identifies the pieces of the framework that skill-creator can adopt directly — the CMake layout for cross-platform GPU projects, the runtime platform detection, the headless CI harness for validating sample correctness in the absence of a physical display. A future skill-creator cartridge that needs to ship native GPU code can fork the Vulkan Samples framework rather than inventing one, and Module 4 is the reference that makes that fork tractable.
+
+**Parallel-track architecture continues to scale across subject matter.** The two- and three-track structure proven in v1.49.101 (SST), v1.49.103 (VKS), v1.49.106 (AMR), and the earlier arc releases holds at VKD. Track Alpha (API + Framework, Modules 1 + 4) gives a reader the shape of the sample application itself. Track Beta (Extensions, Modules 2 + 5) gives the capability map and the politics of how capabilities are granted across the ecosystem. Track Gamma (Performance, Module 3) gives the optimization playbook. Module 6 (skill-creator Wiring) is the integration join between the three tracks and the gsd-skill-creator substrate. The tracks cross-reference each other at specific join points — Module 2 extensions link into Module 3 performance patterns when an extension enables a new optimization; Module 1 samples link into Module 5 promotion history when a core sample depends on an extension that was recently promoted. The structure is a primitive of the research-mission-generator skill, not a subject-specific accident, and it is now validated across domains as disparate as computability theory, screensaver engineering, broadcast heritage, and GPU reference architecture.
+
+**The release sits at the intersection of GPU Graphics Computing and the Fox Companies compute strategy.** VKD pairs with the earlier VKS (Vulkan Screensaver, v1.49.103) and the forthcoming HLO (Holomorphic Dynamics) to form the GPU-computing substrate within the PNW Infrastructure cluster. The NEH (NeHe OpenGL) cross-reference covers the deprecation boundary — the set of techniques that made sense in OpenGL's pipeline-per-state world but have been replaced by Vulkan's explicit command-buffer model, and the migration map for anyone moving skills across the boundary. WAL (Wall of Sound) contributes compute-shader / N-body and GPU ML inference patterns that the VKD compute samples also demonstrate. SYS (Systems Administration) contributes the CMake build-system practices that Vulkan Samples adopts as its canonical multi-platform build layout. Taken together, the cross-reference block traces a chain from screensaver-class GPU workloads through music-production compute workloads through rendering reference and into the systems infrastructure that makes the rest buildable — the kind of lattice that FoxCompute and FoxFiber are aiming to operate on, where GPU workload scheduling is a first-class ecosystem citizen rather than an afterthought stapled onto CPU clusters.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| Research Modules | 6 |
-| Total Lines | ~4,125 |
-| Safety-Critical Tests | 5 |
-| Parallel Tracks | 3 |
-| Est. Tokens | ~463K |
-| Color Theme | Pipeline steel / Vulkan red / electric blue (#263238 primary, #B71C1C vulkan-red, #1565C0 secondary) |
+**Location:** `www/tibsfox/com/Research/VKD/` · **Files:** 13 · **Lines:** +3,047 / -0
+**Rosetta Stone cluster touched:** PNW Infrastructure / GPU & Graphics Computing sub-cluster
+**Publication pipeline:** research-mission-generator → tex-to-project → HTML viewer + compiled PDF
+**Parallel tracks:** 3 (Alpha: API + Framework · Beta: Extensions · Gamma: Performance)
+**Safety-critical tests:** 5 · **Estimated tokens:** ~463K · **Color theme:** Pipeline steel (#263238) · Vulkan red (#B71C1C) · Electric blue (#1565C0)
 
-### Research Modules
+| Code | Module / Artifact | Lines | Theme | Key Topics |
+|------|-------------------|-------|-------|------------|
+| VKD.M1 | API Foundations | 113 | Core API | 14 core samples + 14 Vulkan-Hpp C++ variants; Hello Triangle through Compute N-body; HDR, instancing, terrain tessellation, dynamic rendering, timeline semaphores; each mapped as DACP-compatible skill stub |
+| VKD.M2 | Extension Corpus | 120 | Extension Maps | 47 extension samples catalogued; ray tracing (KHR), mesh shaders, dynamic rendering, descriptor indexing, fragment shading rate, buffer device address; extension family maps with promotion paths |
+| VKD.M3 | Performance Patterns | 148 | Optimization | 24 performance samples with profiling annotations as machine-readable preconditions; multi-draw indirect, pipeline caching, render pass optimization, subpass dependencies, command buffer management |
+| VKD.M4 | Framework & Build | 164 | Infrastructure | Vulkan Samples framework: Application / Platform / RenderContext abstractions; CMake build system with Gradle Android integration; CI harness patterns for GPU validation |
+| VKD.M5 | Upstream Intelligence | 128 | Spec Forward-Look | Vulkan 1.4 spec changes; SDK 1.4.341 updates; Roadmap 2026 extensions; extension promotion tracking (vendor → EXT → KHR); VK_ARM_tensors; float8 shader support frontier |
+| VKD.M6 | skill-creator Wiring | 151 | DACP Integration | 80+ DACP bundles mapping each sample to a skill stub; version gate skill for extension availability checking; ZFC stamp candidate for federation compliance |
+| MP | Mission-Pack LaTeX | 1,087 | Publication | `vulkan_desktop_mission.tex` full citation chain, compiled to 188 KB PDF; mission-pack HTML index (520 lines) |
+| Site | HTML Viewer Stack | 421 | UX | `index.html` (178), `page.html` sticky-TOC viewer (124), `mission.html` PDF embed (119) |
+| Theme | Palette + Stylesheet | 195 | Branding | Pipeline steel + Vulkan red + electric blue; signals GPU & Graphics Computing sub-cluster on the index |
+| Version Gate | Runtime capability probe | — | Federation | Skill refuses to load on devices missing required extension — ZFC stamp binds skill to upstream SHA |
+| Promotion Tracker | Vendor → EXT → KHR map | — | Standardization | Each extension tagged with current tier and promotion path; machine-readable for corpus refresh |
+| Total | Full release footprint | 3,047 | — | 13 files across one project directory, one clean `feat(www)` commit |
 
-1. **M1: API Foundations** -- 14 core API samples + 14 Vulkan-Hpp C++ variants. Hello Triangle through Compute N-body. HDR, instancing, terrain tessellation, dynamic rendering, timeline semaphores. Each mapped as DACP-compatible skill stub.
-2. **M2: Extension Corpus** -- Complete catalogue of 47 extension samples: ray tracing (KHR), mesh shaders, dynamic rendering, descriptor indexing, fragment shading rate, buffer device address. Extension family maps with promotion paths.
-3. **M3: Performance Patterns** -- 24 performance optimization samples with profiling annotations as machine-readable preconditions. Multi-draw indirect, pipeline caching, render pass optimization, subpass dependencies, command buffer management.
-4. **M4: Framework & Build** -- Vulkan Samples framework architecture: Application, Platform, RenderContext abstractions. CMake build system with Gradle Android integration. CI harness patterns for GPU validation.
-5. **M5: Upstream Intelligence** -- Vulkan 1.4 spec changes, SDK 1.4.341 updates, Roadmap 2026 extensions. Extension promotion tracking (vendor to EXT to KHR). Tensor processing extensions (VK_ARM_tensors). Float8 shader support frontier.
-6. **M6: skill-creator Wiring** -- 80+ DACP bundles mapping each sample to a skill stub. Version gate skill for extension availability checking. ZFC stamp candidate for federation compliance. The artifact that makes the entire corpus queryable.
+### The Through-Line
 
-### Cross-References
-
-- **NEH** (NeHe OpenGL) -- GPU pipeline architecture, texture mapping, lighting models, descriptor management, shader translation, deprecation map
-- **WAL** (Wall of Sound) -- Compute shaders / N-body, GPU pipeline, tensor / ML inference, DACP bundle schemas
-- **VKS** (Vulkan Screensaver) -- Vulkan pipeline / SPIR-V, compute shaders, CUDA interop
-- **SYS** (Systems Administration) -- CMake build systems
-- **HLO** (Holomorphic Dynamics) -- Compute shaders, tensor processing
+> A Vulkan sample is never just a sample. It is the terminal node of a decision that was argued across half a dozen vendors, three IHV driver teams, and one specification editor — and the argument is what skill-creator needs to index. VKD is the attempt to capture eighty-plus of those arguments at once, with their current tier, their promotion history, and their performance profile, so that agents downstream can reason about GPU capabilities the way the ecosystem actually works.
 
 ## Retrospective
 
 ### What Worked
-- The three-track parallel structure (API+Framework, Extensions, Performance) mirrors how GPU developers actually approach Vulkan -- learn the core API, understand extensions, optimize
-- Extension promotion path tracking (vendor to EXT to KHR) is genuinely useful intelligence -- it tells agents which extensions are stable, which are experimental, and which are being deprecated
-- Mapping every sample as a DACP bundle creates a queryable corpus rather than a passive document
+
+- **The three-track parallel structure (API+Framework, Extensions, Performance) mirrors how GPU developers actually approach Vulkan.** Learn the core API, understand extensions, optimize for target hardware — three distinct entry points into the same corpus. A reader who already knows Vulkan's core API can enter through Module 3 (Performance Patterns) without re-reading Hello Triangle; a reader new to the ecosystem enters through Module 1. The tracks let the research serve both audiences without padding or duplication.
+- **Extension promotion path tracking (vendor → EXT → KHR) is genuinely useful intelligence.** It tells downstream agents which extensions are stable, which are experimental, and which are being deprecated or consolidated. A skill that depends on VK_KHR_dynamic_rendering is portable across the whole desktop ecosystem; a skill that depends on VK_NV_mesh_shader is still a vendor-only feature and carries a very different deployment risk. Encoding that distinction as corpus metadata rather than prose makes it actionable.
+- **Mapping every sample as a DACP bundle creates a queryable corpus rather than a passive document.** Eighty-plus bundles, each with source-file list, extension predicates, SDK-version minimum, and performance profile, lets an agent search for "samples that demonstrate descriptor indexing on mobile GPUs with acceptable performance" without a human-in-the-loop reading every module. The corpus becomes API-shaped the moment it is built this way.
+- **The framework module pulled a reusable skeleton out of the sample collection.** Module 4 extracts the Application / Platform / RenderContext abstraction and the CMake + Gradle build layout as first-class artifacts, so a future skill-creator cartridge that needs to ship native GPU code can fork the Vulkan Samples framework rather than inventing one from scratch. Calling out the framework explicitly made it reusable rather than buried.
+- **Vulkan 1.4 promotion story landed inside the same module that tracks promotions.** Module 5 is built around the vendor → EXT → KHR → core lifecycle, and Vulkan 1.4's big story is exactly a set of KHR extensions graduating to core. Putting the 1.4 story inside the module that already carries the promotion-lifecycle abstraction meant the spec refresh was an instance of the pattern rather than a one-off treatment.
 
 ### What Could Be Better
-- Mobile Vulkan (Android, embedded ARM) gets framework treatment but deserves dedicated performance profiling for mobile GPU architectures (tile-based rendering)
-- The ray tracing extension ecosystem is evolving fast enough that version tracking will need quarterly refresh
+
+- **Mobile Vulkan deserves dedicated performance profiling for tile-based architectures.** Android and embedded ARM GPUs get framework-level treatment in Module 4 but not a Module-3-style performance pattern catalogue specific to tile-based deferred rendering (TBDR). A companion release — a dedicated mobile Vulkan performance module — should catalogue tile-memory-aware subpass design, bandwidth-conscious framebuffer formats, and the Adreno / Mali / PowerVR tradeoffs that desktop GPU advice does not translate cleanly onto.
+- **The ray tracing extension ecosystem is evolving fast enough that version tracking will need quarterly refresh.** VK_KHR_ray_tracing_pipeline, VK_KHR_ray_query, and the RTX / RDNA ecosystem extensions around denoising, motion blur, and opacity micromaps are moving faster than the once-per-release-cadence refresh VKD is currently set up for. A mechanized refresh pipeline against the Khronos registry — ideally triggered when the upstream `Vulkan-Headers` repo updates — would keep Module 2 and Module 5 honest without rewriting prose every quarter.
+- **The Vulkan-Hpp C++ variants are enumerated but not taught as a distinct idiom.** Module 1 notes that every sample has a Vulkan-Hpp counterpart demonstrating idiomatic RAII wrapping, but the research does not yet walk the C++ idioms themselves — UniqueHandle, structure chains, the dispatch loader design — as a teaching artifact. A short follow-up covering Vulkan-Hpp specifically would close the gap for teams migrating from C-style Vulkan into the modern C++ binding.
+- **DACP bundle schema is defined inline rather than extracted as a citable artifact.** Module 6 describes the bundle shape — source files, extension predicates, SDK minimum, performance profile, upstream SHA — but the shape is described in prose and by example rather than as a formal schema document that other cartridges can reference. Lifting the bundle schema into a standalone artifact in `docs/skill-stub-bundles/` would let VKD's wiring work be reused by NEH, VKS, HLO, and future GPU-adjacent cartridges without duplicate specification.
 
 ## Lessons Learned
 
-- The spaces between samples -- the connections between "dynamic rendering" and "render passes," between "mesh shaders" and the migration from geometry shaders -- are where the real knowledge lives; mapping those connections is the deliverable
-- Extension promotion paths encode the politics of GPU standardization: vendor extensions signal R&D direction, EXT extensions signal multi-vendor agreement, KHR extensions signal ecosystem consensus
-- 80+ DACP bundles is the threshold where the wiring module becomes more valuable than any individual sample module -- the index is the product
+- **The spaces between samples are where the real knowledge lives.** The connections between "dynamic rendering" and "render passes," between "mesh shaders" and the migration from geometry shaders, between "timeline semaphores" and the synchronization2 promotion — these relationships are what lets a skill-creator agent reason about which technique to use when. Mapping the connections, not just the nodes, is the deliverable. The corpus is a graph, not a list.
+- **Extension promotion paths encode the politics of GPU standardization.** Vendor extensions signal R&D direction, EXT extensions signal multi-vendor agreement, KHR extensions signal ecosystem consensus. Any skill that depends on an extension inherits the promotion tier's risk profile. Treating promotion tier as first-class metadata turns vague deployment concerns into predicates that can be checked at load time.
+- **Eighty-plus DACP bundles is the threshold where the wiring module becomes more valuable than any individual sample module.** Below that threshold the individual modules are the product; above it the index is the product. VKD crossed the threshold and Module 6 should be read as the payload with Modules 1–5 as supporting evidence. Every future corpus-mapping release should plan for the index-becomes-payload inversion.
+- **An upstream reference repository's value is not the code but the decisions encoded in which code exists.** The Vulkan Samples repo does not teach every possible GPU technique; it teaches the set that Khronos and the IHVs chose to demonstrate. The set is an argument. Reading the argument — which samples were promoted from demo to canonical, which were rewritten when Vulkan-Hpp shipped, which were added when a KHR extension cleared review — is how a research project captures more value than a line-by-line source read.
+- **Version gate skills are the right primitive for GPU capability checking.** A skill that depends on VK_KHR_ray_tracing_pipeline should refuse to load on a runtime that does not expose the extension, full stop. Pushing the capability check into the skill-loader rather than the skill body means agents never have to reason about feature availability at runtime — the infrastructure enforces it. The version gate pattern generalizes beyond Vulkan to any skill that depends on a runtime-probed capability.
+- **Parallel tracks scale across subject matter without losing coherence.** The structure worked for computability theory (v1.49.101 SST), screensaver engineering (v1.49.103 VKS), broadcast heritage (v1.49.106 AMR), and now GPU reference architecture (v1.49.111 VKD). The pattern is a research-mission-generator primitive, not a subject-specific accident, and future releases should default to two or three tracks unless there is a specific reason to collapse to one.
+- **Framework extraction is a separate product from sample enumeration.** Pulling the Application / Platform / RenderContext skeleton into its own module (M4) made it a reusable artifact rather than scaffolding around individual demos. The general lesson: whenever a sample corpus shares a non-trivial application skeleton, the skeleton deserves its own module and its own path into skill-creator. Scaffolding that is never called out explicitly rarely gets reused.
+- **ZFC stamps bind skill corpora to upstream commits and make federation tractable.** A sample-derived skill stamped to `KhronosGroup/Vulkan-Samples@<sha>` is unambiguously verifiable — a federated consumer can check the SHA and know they are operating against the same corpus. Without the stamp the skills drift silently as the upstream repo evolves. Every corpus-mapping release should plan for the stamp from day one, not retrofit it.
+- **Mobile GPU tradeoffs are a first-class research topic, not a footnote.** TBDR architectures (Adreno, Mali, PowerVR) have different performance profiles from immediate-mode desktop GPUs, and desktop optimization advice often regresses on mobile. Flagging mobile as a gap in VKD's retrospective is how the follow-up gets scheduled; the lesson is that mobile deserves its own Module-3-class treatment from the outset of the next relevant release.
+- **One commit per research project continues to hold at v1.49.111.** VKD shipped in a single `feat(www)` commit (`411ccc8b3`) with no accompanying scaffolding commits and no squash-merges. The one-commit-per-project pattern validated at 49-project batch scale in v1.49.89 and at 1-project depth in v1.49.101, and now at 11 projects into the v1.49.101-131 batch, holds without exception. A convention that holds across two orders of magnitude of batch size is an invariant.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| `www/tibsfox/com/Research/VKD/` | Vulkan Desktop — release artifact, 6 modules + mission-pack + HTML viewer, ~4,125 lines |
+| `www/tibsfox/com/Research/VKD/research/01-api-foundations.md` | 14 core API samples + 14 Vulkan-Hpp variants; Hello Triangle through Compute N-body; DACP skill stubs |
+| `www/tibsfox/com/Research/VKD/research/02-extension-corpus.md` | 47 extension samples; ray tracing KHR, mesh shaders, descriptor indexing; extension family maps |
+| `www/tibsfox/com/Research/VKD/research/03-performance-patterns.md` | 24 performance samples; multi-draw indirect, pipeline caching, render pass optimization |
+| `www/tibsfox/com/Research/VKD/research/04-framework-build.md` | Application / Platform / RenderContext abstractions; CMake + Gradle; CI harness for GPU validation |
+| `www/tibsfox/com/Research/VKD/research/05-upstream-intelligence.md` | Vulkan 1.4 spec changes; SDK 1.4.341; Roadmap 2026; VK_ARM_tensors; float8 shader frontier |
+| `www/tibsfox/com/Research/VKD/research/06-skill-creator-wiring.md` | 80+ DACP bundles, version gate skill, ZFC stamp candidate for federation compliance |
+| `www/tibsfox/com/Research/VKD/mission-pack/vulkan_desktop_mission.tex` | 1,087-line LaTeX source, full citation chain, compiled to 188 KB PDF |
+| `www/tibsfox/com/Research/VKD/mission-pack/vulkan_desktop_mission.pdf` | Compiled 188 KB PDF, teaching artifact for the College of Knowledge |
+| `www/tibsfox/com/Research/VKD/style.css` | Pipeline steel + Vulkan red + electric blue palette, 195 lines, signals GPU sub-cluster |
+| NEH (research series) | NeHe OpenGL — GPU pipeline architecture, texture mapping, lighting, descriptor management, shader translation, Vulkan deprecation map |
+| WAL (research series) | Wall of Sound — compute shaders, N-body, GPU pipeline, tensor / ML inference, DACP bundle schemas |
+| VKS (research series) | Vulkan Screensaver — Vulkan pipeline, SPIR-V, compute shaders, CUDA interop |
+| SYS (research series) | Systems Administration — CMake build systems, cross-platform tooling |
+| HLO (research series) | Holomorphic Dynamics — compute shaders, tensor processing, complex-plane computation |
+| [v1.49.110](../v1.49.110/) | Immediate predecessor (NEH NeHe OpenGL) in the v1.49.101-131 research batch |
+| [v1.49.112](../v1.49.112/) | Immediate successor (VKS Vulkan Screensaver) in the research batch |
+| [v1.49.103](../v1.49.103/) | Earlier Vulkan-focused release — pairs with VKD as the two-entry GPU-rendering substrate |
+| [v1.49.106](../v1.49.106/) | AMR (AM Radio) — contemporaneous research release, same parallel-track structure applied to broadcast heritage |
+| [v1.49.101](../v1.49.101/) | SST — first post-drain release, established the depth-test pattern that VKD inherits |
+| [v1.49.90](../v1.49.90/) | Drain-to-zero batch that emptied the intake queue; every post-drain release including VKD is a chosen topic |
+| [v1.49.89](../v1.49.89/) | Mega-batch that validated the research-mission pipeline at 49-project breadth |
+| [v1.0](../v1.0/) | The 6-step adaptive learning loop — VKD's skill-stub wiring is the Compose step operating over a vendor corpus |
+| [v1.25](../v1.25/) | Ecosystem Integration — dependency DAG substrate for VKD's cross-links to NEH/WAL/VKS/SYS/HLO |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform — infrastructure companion to VKD's GPU-reference work |
+| [v1.36](../v1.36/) | Citation Management — mission-pack citation chains rely on the v1.36 citation infrastructure |
+
+## Engine Position
+
+v1.49.111 is the **11th release of the v1.49.101-131 research batch** and the **99th research release of the v1.49 publication arc**. The v1.49.101-131 batch is the thirty-one-project cohort shipped across a single session in the post-drain arc that began with v1.49.101 (SST). Series state at tag: approximately 158 `series.js` entries after VKD registers, 149 real research directories, GPU & Graphics Computing consolidated as a sub-cluster within PNW Infrastructure (joined by NEH, VKS, WAL, HLO via cross-reference), approximately 265,000 cumulative lines shipped across the v1.49 arc. VKD is the second Vulkan-focused entry in the library after VKS (v1.49.103) and the first entry to map an entire upstream sample corpus as DACP-compatible skill stubs. It sets the grain size — six modules, three parallel tracks, 80-plus DACP bundles, version gate skill, ZFC stamp candidate, LaTeX mission-pack plus HTML viewer plus compiled PDF — that future corpus-mapping releases (Mesa-Samples, CUDA-Samples, WebGPU-Samples, OpenXR-Samples) will inherit.
+
+## Cumulative Statistics
+
+As of v1.49.111, the v1.49 research arc has shipped: ~158 series entries, ~149 research directories on disk, ~265,000 cumulative prose lines across the arc, 99 research releases inside the v1.49 line, 11 releases of the 31-project v1.49.101-131 batch complete, two Vulkan-focused releases (VKS and VKD) forming the GPU-rendering substrate, five GPU & Graphics Computing sub-cluster entries (NEH, WAL, VKS, VKD, HLO) cross-referenced into a coherent lattice, one clean `feat(www)` commit per project maintained across the arc, zero known citation regressions.
+
+## Files
+
+**13 files changed across one project directory. +3,047 insertions, -0 deletions in a single commit (`411ccc8b3`).**
+
+- `www/tibsfox/com/Research/VKD/index.html` — project landing page, cluster palette, TOC to all six modules, 178 lines
+- `www/tibsfox/com/Research/VKD/page.html` — sticky-TOC Markdown viewer for the research modules, 124 lines
+- `www/tibsfox/com/Research/VKD/mission.html` — mission-pack wrapper with PDF embed and LaTeX source link, 119 lines
+- `www/tibsfox/com/Research/VKD/research/01-api-foundations.md` — 14 core API samples + 14 Vulkan-Hpp variants, 113 lines
+- `www/tibsfox/com/Research/VKD/research/02-extension-corpus.md` — 47-sample extension catalogue with promotion paths, 120 lines
+- `www/tibsfox/com/Research/VKD/research/03-performance-patterns.md` — 24 performance samples with profiling annotations, 148 lines
+- `www/tibsfox/com/Research/VKD/research/04-framework-build.md` — Application / Platform / RenderContext + CMake + Gradle + CI, 164 lines
+- `www/tibsfox/com/Research/VKD/research/05-upstream-intelligence.md` — Vulkan 1.4, SDK 1.4.341, Roadmap 2026, VK_ARM_tensors, float8, 128 lines
+- `www/tibsfox/com/Research/VKD/research/06-skill-creator-wiring.md` — 80+ DACP bundles, version gate skill, ZFC stamp, 151 lines
+- `www/tibsfox/com/Research/VKD/mission-pack/vulkan_desktop_mission.tex` — full LaTeX source with citation chain, 1,087 lines
+- `www/tibsfox/com/Research/VKD/mission-pack/vulkan_desktop_mission.pdf` — compiled 188 KB PDF, teaching artifact
+- `www/tibsfox/com/Research/VKD/mission-pack/vulkan_desktop_index.html` — mission-pack HTML wrapper with navigation, 520 lines
+- `www/tibsfox/com/Research/VKD/style.css` — pipeline steel + Vulkan red + electric blue palette, 195 lines
+
+Cumulative series state at tag: **~158 `series.js` entries, ~149 real research directories, GPU & Graphics Computing sub-cluster consolidated within PNW Infrastructure, ~265,000 lines shipped across the v1.49 arc, 11th release of the 31-project v1.49.101-131 batch, 1 project chosen rather than processed.**
 
 ---
-*Part of the v1.49.101-131 research batch -- 31 new projects in a single session.*
+
+> *One project. Six modules. Eighty-plus samples. Three parallel tracks. The KhronosGroup Vulkan-Samples repository is a distillation of accumulated wisdom from ARM, NVIDIA, AMD, Valve, Google, and dozens of contributors — every sample is the end state of a multi-vendor argument about how a particular GPU technique should be taught. VKD is the attempt to capture those arguments as DACP-compatible skill stubs, with extension promotion paths as first-class metadata, so agents downstream can reason about GPU capabilities the way the ecosystem actually works.*
