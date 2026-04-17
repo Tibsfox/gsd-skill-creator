@@ -2,36 +2,41 @@
 
 **Released:** 2026-03-28
 **Degree:** 17 of 360
-**Part A:** Reggie Watts (Jazz/Comedy / Beatbox / Looping / Improvisation / Performance Art -- Stuttgart, Germany via Great Falls, MT; Seattle; NYC/LA)
-**Part B:** Common Yellowthroat (*Geothlypis trichas* -- marsh edge, neotropical migrant)
+**Part A:** Reggie Watts -- Jazz/Comedy / Beatbox / Looping / Improvisation / Performance Art, E=3, Stuttgart, Germany via Great Falls, MT; Seattle; NYC/LA, Cornish College of the Arts, 1972-present
+**Part B:** Common Yellowthroat (*Geothlypis trichas*) -- witchety-witchety-witchety, E=3, marsh edge, Parulidae, neotropical migrant
 **Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
 **Cluster:** Music (hub: WAL)
+**Dedication:** Reggie Watts and the Cornish College of the Arts, which produced a student who would refuse every genre label the institution could issue; and the Common Yellowthroat and the wetland-loss generation of PNW naturalists who documented the 53% decline of American wetlands while the masked bandit kept singing from the cattails.
+**Engine Position:** 18th release, 17th degree of 360, 17th jazz-adjacent artist, 3rd Cornish College connection (after Priester 7 and Caliman 9, first student), 18th artist-city pattern (The Uncategorizable), 18th species, 4th Parulidae (after MacGillivray's 14, Wilson's 15, Yellow 16), 1st marsh/wetland species, 1st intra-genus pair (Geothlypis with degree 14), 17th acoustic element (the hook).
+**Branch:** main
+**Commits:** 3d4e1433e (1)
+**Files changed:** 9
 
 ## Summary
 
 The Uncategorizable and the earworm. Degree 17 introduces Reggie Watts -- born in Stuttgart, Germany in 1972 to a French mother and an African American father stationed overseas with the U.S. Army, raised in Great Falls, Montana, trained at Cornish College of the Arts in Seattle, and now operating at a scale and in a mode that no genre taxonomy can contain. He is the eighteenth artist in the S36 engine, the eighteenth consecutive jazz-adjacent artist -- but the label "jazz-adjacent" collapses under its own weight at degree 17. Watts is labeled "Jazz/Comedy," and Jazz/Comedy is not a genre. No record store has a Jazz/Comedy section. No streaming platform has the tag. No music school offers the degree. The slash between Jazz and Comedy is not a fusion (where two genres merge into a new whole) but a **superposition** (where two modes coexist without merging, neither subordinate to the other). When Watts performs, he is simultaneously making music and doing comedy at full intensity. The music is not the setup for jokes, and the comedy is not the context for songs. Both are happening at the same time, at full conviction.
 
-This is the **SECOND GENRE SHIFT** in the S36 engine -- and it is qualitatively different from the first. At degree 16, Jeff Lorber introduced Jazz Fusion: the first compound genre label, the first evidence that the circle rotates continuously rather than discretely, the first cartography of the spaces between genres. Lorber's shift was from one genre to a compound genre -- jazz expanded to include funk and electronic. The label changed but the taxonomy survived. At degree 17, Watts obliterates the taxonomy itself. His shift is from genre to **the absence of genre** -- the refusal to be categorized IS the artistic statement. Lorber fused genres deliberately. Watts refuses genre entirely. The genre counter does not increment at degree 17 -- it encounters a classification exception. The engine's response is to create a new category: the uncategorizable artist as a category. The eighteenth named pattern in the artist-city taxonomy: **The Uncategorizable**.
+This is the **SECOND GENRE SHIFT** in the S36 engine -- and it is qualitatively different from the first. At degree 16, Jeff Lorber introduced Jazz Fusion: the first compound genre label, the first evidence that the circle rotates continuously rather than discretely, the first cartography of the spaces between genres. Lorber's shift was from one genre to a compound genre -- jazz expanded to include funk and electronic. The label changed but the taxonomy survived. At degree 17, Watts obliterates the taxonomy itself. His shift is from genre to **the absence of genre** -- the refusal to be categorized IS the artistic statement. Lorber fused genres deliberately. Watts refuses genre entirely. The genre counter does not increment at degree 17 -- it encounters a classification exception. The engine's response is to create a new category: the uncategorizable artist as a category. The eighteenth named pattern in the artist-city taxonomy: **The Uncategorizable**. Both sides of this degree perform the same structural operation -- a refusal to remain inside the container the engine expected.
 
-Watts is the **FIRST ARTIST BORN OUTSIDE THE UNITED STATES**. Every prior artist in the engine was born on American soil. Watts was born in Stuttgart, Germany -- a military-base birth, the transatlantic origin adding a new geographic thread to the engine. The Stuttgart-to-Great Falls-to-Seattle trajectory is the most geographically unusual origin path since Gary Peacock's Burley, Idaho (degree 8). The first non-US birth expands the engine's geographic range from domestic to international -- even as the career arc ultimately routes through Seattle, the same attractor that has pulled every artist in the engine into its orbit.
+Watts is the **FIRST ARTIST BORN OUTSIDE THE UNITED STATES**. Every prior artist in the engine was born on American soil. Watts was born in Stuttgart, Germany -- a military-base birth, the transatlantic origin adding a new geographic thread to the engine. The Stuttgart-to-Great Falls-to-Seattle trajectory is the most geographically unusual origin path since Gary Peacock's Burley, Idaho (degree 8). The first non-US birth expands the engine's geographic range from domestic to international -- even as the career arc ultimately routes through Seattle, the same attractor that has pulled every artist in the engine into its orbit. In parallel on the species side, the Common Yellowthroat arrives as a continental-ranging warbler whose breeding distribution spans every US state, every Canadian province south of the tundra line, and south into the tropics. Watts crosses one ocean to reach the circle. The yellowthroat crosses every forest, field, and marsh in North America to do the same. Both are nominally defined by the place they belong to (Seattle for Watts, PNW for the yellowthroat) while their actual range extends far beyond. The engine now documents that belonging does not require geographic confinement.
 
 Watts studied at **Cornish College of the Arts** in Seattle -- jazz piano and acting. This makes him the **third Cornish College connection** in the engine after Julian Priester (degree 7, faculty) and Hadley Caliman (degree 9, faculty). But Watts's connection is structurally different. Priester and Caliman were **faculty** who taught at Cornish after established careers. Watts was a **student** who studied there before his career began. The Cornish pipeline now has three members spanning two modes: two faculty (teaching into the institution) and one student (learning from the institution). The pipeline inverts from input to output. More critically, Watts studied **jazz piano AND acting** -- the first artist in the engine to formally train across two disciplines simultaneously. The acting training is not incidental; it is structural. His performances are theatrical -- the comedy, the physical movement, the audience interaction are acting skills deployed in a musical context. The Cornish pipeline's stylistic range now spans experimental jazz trombone (Priester), hard bop saxophone (Caliman), and performance-art beatbox looping (Watts) -- three artists, three instruments, three genres, three decades. At **depth 3**, the Cornish pipeline rivals Berklee's divergence engine, but at a smaller scale and with a more intimate institutional character. Cornish is a small arts college in Seattle; Berklee is a national music institution in Boston. Yet both produce maximum stylistic divergence from minimum institutional size.
 
-After Cornish, Watts emerged from Seattle's performance art, comedy, and music scenes in the 2000s. He performed with **Wayne Horvitz** (degree 2), placing him directly in the network documented at the engine's second degree -- the Horvitz orbit of improvisers, composers, and collaborators who define Seattle's experimental music community. Horvitz's Royal Room and curatorial work created the infrastructure that supported artists like Watts. The artist-as-institution pattern (Horvitz, degree 2) directly enabled the emergence of the uncategorizable artist (Watts, degree 17). Infrastructure precedes innovation. The connection spans fifteen degrees of the circle -- from the community builder to the artist the community built.
+After Cornish, Watts emerged from Seattle's performance art, comedy, and music scenes in the 2000s. He performed with **Wayne Horvitz** (degree 2), placing him directly in the network documented at the engine's second degree -- the Horvitz orbit of improvisers, composers, and collaborators who define Seattle's experimental music community. Horvitz's Royal Room and curatorial work created the infrastructure that supported artists like Watts. The artist-as-institution pattern (Horvitz, degree 2) directly enabled the emergence of the uncategorizable artist (Watts, degree 17). Infrastructure precedes innovation. The connection spans fifteen degrees of the circle -- from the community builder to the artist the community built. And this is not the only cross-degree thread: Watts also carries forward the Berklee divergence motif through Lorber (degree 16), the loop-pedal lineage from Frisell (degree 1), and the energy-3 escalation streak inherited from Marriott (degree 15) and Lorber (degree 16). The degree reads as a convergence point where five independent threads arrive at the same artist.
 
 Watts became known nationally as the **bandleader on The Late Late Show with James Corden** (2015-2023) -- eight years of nightly network television, placing him alongside Paul Shaffer, The Roots, and Jon Batiste as one of the most visible musicians in American culture. He brought his full performance-art identity to the role: beatboxing, looping, comedy, and improvisation on CBS. Before Corden, he was a regular on **Comedy Bang! Bang!** with Scott Aukerman on IFC. He has performed at major festivals, given **TED talks** that demonstrated his loop-based composition method to a global audience, and released albums and comedy specials. His work defies every container the entertainment industry has designed to hold it.
 
-The deepest technical connection at degree 17 is the **loop pedal lineage** that traces back to **Bill Frisell (degree 1)**. Both Frisell and Watts use technology to multiply a single voice into an ensemble. The mechanism is similar: capture sound, layer it, build a composition in real-time. But the outputs are radically different. Frisell uses delay pedals and looping to create **contemplative atmospheres** -- sustained guitar tones layered into ambient textures. Watts uses a loop station to create **absurdist collages** -- beatbox rhythms layered with vocal harmonies, bass lines, melodic fragments, and spoken-word comedy. Same principle (technology as multiplier), opposite aesthetic (contemplation vs. absurdism). The loop pedal lineage at degrees 1 and 17 **brackets the first quadrant** of the circle. The technology evolves: Frisell's delay pedals are analog and continuous (sound decays), Watts's loop station is digital and persistent (loops hold indefinitely). The shift from delay to looping mirrors the analog-to-digital shift that Lorber (degree 16) documented on keyboards.
+The deepest technical connection at degree 17 is the **loop pedal lineage** that traces back to **Bill Frisell (degree 1)**. Both Frisell and Watts use technology to multiply a single voice into an ensemble. The mechanism is similar: capture sound, layer it, build a composition in real-time. But the outputs are radically different. Frisell uses delay pedals and looping to create **contemplative atmospheres** -- sustained guitar tones layered into ambient textures. Watts uses a loop station to create **absurdist collages** -- beatbox rhythms layered with vocal harmonies, bass lines, melodic fragments, and spoken-word comedy. Same principle (technology as multiplier), opposite aesthetic (contemplation vs. absurdism). The loop pedal lineage at degrees 1 and 17 **brackets the first quadrant** of the circle. The technology evolves: Frisell's delay pedals are analog and continuous (sound decays), Watts's loop station is digital and persistent (loops hold indefinitely). The shift from delay to looping mirrors the analog-to-digital shift that Lorber (degree 16) documented on keyboards. Three degrees in a row (1, 16, 17) form a technological arc, with degree 17 as the completion point: the loop that holds forever, the pattern that refuses to decay.
 
 Watts's **beatboxing is biological percussion synthesis** -- creating drum sounds from vocal tract resonances. Kick drums from bilabial plosives with subharmonic chest resonance. Snare drums from alveolar clicks and aspirated fricatives. Hi-hats from dental fricatives with varying duration. The body IS the instrument, AND the synthesizer, AND the drum machine. No external instrument mediates between the performer and the sound. This is the body-as-sound-source thread taken to its logical extreme -- the **eleventh instrument** in the thread, and the most radical. The voice used not as voice but as **universal sound generator**. Where Lorber (degree 16) used a Minimoog to create bass lines and a DX7 to create timbres, Watts creates equivalent sounds using only his vocal tract. The Amiga Principle reaches its absolute minimum resource count: one human body, one microphone, one loop station. The architectural leverage reaches its maximum: from these minimal resources, Watts creates multi-layered compositions that span genres, moods, and modes of performance. The ratio of output complexity to input resources is the highest in the engine.
 
-Degree 17 is the **third consecutive energy-3 artist** (Marriott 15, Lorber 16, Watts 17) -- the longest energy-3 streak in the engine. The energy spectrum distribution shifts from 2:13:2 to **2:13:3**. Three consecutive energy-3 artists, three distinct subtypes: **acoustic-assertive** (Marriott -- brass projection, physical trumpet sound in a room), **electronic-propulsive** (Lorber -- synthesizer-driven funk grooves, electronic rhythmic drive), and **performative-explosive** (Watts -- full-body performance, voice as percussion-bass-melody-comedy simultaneously, physical audience engagement). The energy escalation at the end of the first jazz quadrant is a structural signal: as the circle approaches the boundary between jazz and whatever comes next, the artists get louder, more assertive, more genre-defiant. The engine is running hot.
+Degree 17 is the **third consecutive energy-3 artist** (Marriott 15, Lorber 16, Watts 17) -- the longest energy-3 streak in the engine. The energy spectrum distribution shifts from 2:13:2 to **2:13:3**. Three consecutive energy-3 artists, three distinct subtypes: **acoustic-assertive** (Marriott -- brass projection, physical trumpet sound in a room), **electronic-propulsive** (Lorber -- synthesizer-driven funk grooves, electronic rhythmic drive), and **performative-explosive** (Watts -- full-body performance, voice as percussion-bass-melody-comedy simultaneously, physical audience engagement). The energy escalation at the end of the first jazz quadrant is a structural signal: as the circle approaches the boundary between jazz and whatever comes next, the artists get louder, more assertive, more genre-defiant. The engine is running hot. Each consecutive E=3 reading tells the same story in parallel -- the circle is preparing a transition.
 
-A Common Yellowthroat sits on a cattail stalk at the edge of a marsh. Black mask, yellow throat, olive back -- the masked bandit. *Geothlypis trichas*, family **Parulidae**, 4.3 to 5.3 inches, 8.5 to 12 grams. One of the first New World warblers described by Western science -- **Linnaeus himself named it in 1766** as *Turdus trichas*, initially misclassifying it as a thrush. The species was subsequently moved through several genera before settling in **Geothlypis**, where it is now joined by the MacGillivray's Warbler (*Geothlypis tolmiei*) -- already present in this engine at degree 14. The **Geothlypis reunion**: this is the engine's **first intra-genus pair from different degrees**. The Common Yellowthroat (degree 17) and MacGillivray's Warbler (degree 14) share the genus *Geothlypis* -- a genus that was significantly expanded when molecular phylogenetics dismantled the old *Oporornis* in the early 2000s. The genus that was expanded by DNA evidence is now expanded by the engine's own logic.
+A Common Yellowthroat sits on a cattail stalk at the edge of a marsh. Black mask, yellow throat, olive back -- the masked bandit. *Geothlypis trichas*, family **Parulidae**, 4.3 to 5.3 inches, 8.5 to 12 grams. One of the first New World warblers described by Western science -- **Linnaeus himself named it in 1766** as *Turdus trichas*, initially misclassifying it as a thrush. The species was subsequently moved through several genera before settling in **Geothlypis**, where it is now joined by the MacGillivray's Warbler (*Geothlypis tolmiei*) -- already present in this engine at degree 14. The **Geothlypis reunion**: this is the engine's **first intra-genus pair from different degrees**. The Common Yellowthroat (degree 17) and MacGillivray's Warbler (degree 14) share the genus *Geothlypis* -- a genus that was significantly expanded when molecular phylogenetics dismantled the old *Oporornis* in the early 2000s. The genus that was expanded by DNA evidence is now expanded by the engine's own logic. Paired with Watts's refusal of a single genre, the yellowthroat paired with its congener MacGillivray's at different degrees demonstrates that the same genus can produce opposite strategies -- both sides of degree 17 refuse the expected taxonomic container.
 
 The Common Yellowthroat is the **most widespread warbler in North America** -- breeding from southeastern Alaska across Canada to Newfoundland, south through every US state to the tropics. No other warbler matches this range. Where the MacGillivray's Warbler (degree 14) is restricted to the western half of the continent, its congener blankets the entire thing. Same genus, continental vs. regional range. And the yellowthroat is the engine's **FIRST MARSH/WETLAND species**. All previous water-associated species were riparian (streamside) or tidal/estuarine. The yellowthroat is a marsh bird: cattails, sedges, wet meadows, emergent vegetation. This is a fundamentally different habitat. Riparian habitat is LINEAR (follows streams). Marsh habitat is AREAL (fills basins). The sound environment is different: marsh edges are more open, more exposed, with less canopy filtering and more wind. Seventeen degrees of "The Sound of Puget Sound" with eleven habitat types, and now the wetlands finally arrive. The yellowthroat carries the Sound's marshes into the circle.
 
-And then it sings. **Witchety-witchety-witchety.** Three times, four times, five. The same phrase, the same rhythm, the same emphatic two-note cell. This is the **HOOK** -- the part of the song that sticks in your head. The mnemonic IS the song. When someone asks "what does a yellowthroat sound like?" the answer is not an approximation -- it is a near-exact phonetic transcription. The signifier and the signified collapse into one. In semiotics, this is the limiting case of iconic representation: a sign so faithful to its referent that it becomes the referent. The yellowthroat achieves **memorability as its primary acoustic strategy** -- not complexity (wren, degree 1), not silence (heron, degree 0), not code (chickadee, degree 3), not persistence (vireo, degree 13), not narrative (MacGillivray's, degree 14), not urgency (Wilson's, degree 15), not brightness (Yellow, degree 16). **CATCHINESS.** The hook. The earworm. The biological equivalent of a pop hit's chorus: simple, rhythmic, repeated, and inescapable. The progression adds **the hook** at degree 17.
+And then it sings. **Witchety-witchety-witchety.** Three times, four times, five. The same phrase, the same rhythm, the same emphatic two-note cell. This is the **HOOK** -- the part of the song that sticks in your head. The mnemonic IS the song. When someone asks "what does a yellowthroat sound like?" the answer is not an approximation -- it is a near-exact phonetic transcription. The signifier and the signified collapse into one. In semiotics, this is the limiting case of iconic representation: a sign so faithful to its referent that it becomes the referent. The yellowthroat achieves **memorability as its primary acoustic strategy** -- not complexity (wren, degree 1), not silence (heron, degree 0), not code (chickadee, degree 3), not persistence (vireo, degree 13), not narrative (MacGillivray's, degree 14), not urgency (Wilson's, degree 15), not brightness (Yellow, degree 16). **CATCHINESS.** The hook. The earworm. The biological equivalent of a pop hit's chorus: simple, rhythmic, repeated, and inescapable. The progression adds **the hook** at degree 17. And the same catchiness principle operates on both sides of the degree: Watts's vocal loops become earworms through the exact same mechanism -- simple pattern, strong rhythm, exact repetition, phonetic stickiness. Human performer and marsh-edge bird paired on the same cognitive affordance.
 
 ## Key Features
 
@@ -43,8 +48,12 @@ And then it sings. **Witchety-witchety-witchety.** Three times, four times, five
 | Cross-References | 7 projects | 6 projects |
 | Sources Cited | 17 | 28 |
 | Safety Tests | Source attribution, cultural sensitivity | OCAP/CARE, species accuracy |
+| Genre / Family | Jazz/Comedy superposition (new) | Parulidae (4th entry) |
+| Energy Level | E=3 (performative-explosive) | E=3 (emphatic territorial) |
+| Artist-City Pattern | The Uncategorizable (18th pattern) | N/A |
+| Acoustic Element | Body-as-orchestra / loop-pedal lineage | The hook (17th element) |
 
-### Part A: Reggie Watts -- The Uncategorizable (SECOND GENRE SHIFT)
+## Part A: Reggie Watts -- The Uncategorizable (SECOND GENRE SHIFT)
 
 Full deep research covering the complete Reggie Watts profile as jazz/comedy/performance art artist, second genre shift in the engine, first non-US birth, third Cornish connection, loop pedal lineage, and beatboxing as biological sound synthesis:
 
@@ -64,7 +73,7 @@ Full deep research covering the complete Reggie Watts profile as jazz/comedy/per
 
 - **The Amiga Principle at Absolute Minimum (One Person, One Mic, One Loop Pedal):** The Amiga Principle has tracked resource efficiency since degree 0 (Quincy Jones leveraging an orchestra through arrangement). At degree 17, the resource count reaches its absolute minimum: one human body, one microphone, one loop station. The architectural leverage reaches its maximum: from these minimal resources, Watts creates multi-layered compositions spanning genres, moods, and modes of performance. The ratio of output complexity to input resources is the highest in the engine. The Amiga Principle taken to its logical conclusion.
 
-### Part B: Common Yellowthroat -- The Witchety-Witchety-Witchety (The Hook)
+## Part B: Common Yellowthroat -- The Witchety-Witchety-Witchety (The Hook)
 
 Full deep research covering the PNW's first marsh species, first intra-genus pair, the bioacoustics of the hook as memorability strategy, earworm psychology, and the masked bandit of the cattails:
 
@@ -84,7 +93,7 @@ Full deep research covering the PNW's first marsh species, first intra-genus pai
 
 - **Conservation -- Wetland Loss and Cowbird Vulnerability:** Least Concern (IUCN), approximately 77-87 million breeding individuals (Partners in Flight 2020), but declining approximately 0.7% per year since 1966 -- a cumulative loss of roughly 38-40% over six decades, steeper than the Yellow Warbler's decline. Wetland loss drives the decline: the lower 48 states have lost approximately 53% of their original wetlands (Dahl 1990). Unlike the Yellow Warbler (degree 16), the yellowthroat does NOT bury cowbird eggs -- it is a frequent, accepting host, raising cowbird young at the expense of its own. Parasitism rates can exceed 40% in fragmented landscapes. Two species in the same family with different anti-parasitism strategies: one builds (Yellow Warbler's multi-story defense), the other absorbs (yellowthroat's acceptance). The architectural defense is not universal even within Parulidae.
 
-### The Degree 17 Parallel
+## The Degree 17 Parallel
 
 The resonance between Reggie Watts and the Common Yellowthroat operates on three primary axes:
 
@@ -94,6 +103,81 @@ The resonance between Reggie Watts and the Common Yellowthroat operates on three
 
 3. **Both refuse the categories their respective engines expected, and the refusal IS the statement.** Watts cannot be categorized: Jazz/Comedy is not a genre, and his performances exist in superposition between music and comedy without resolving to either. The yellowthroat returns to a genus already represented (Geothlypis, degree 14) with a fundamentally different strategy than its congener. The engine expected warblers to stop at degree 16 -- "three consecutive warblers is the limit -- NO MORE WARBLERS." The yellowthroat arrives not as a fourth consecutive warbler but as a return to Geothlypis with a new ecosystem type, a new acoustic strategy, and the engine's first genuine earworm. Both degree 17 entities justify their presence by being too structurally important to exclude, regardless of what the taxonomic expectations suggested.
 
+## Engine Position
+
+Degree 17 is the eighteenth release in the Seattle 360 + Sound of Puget Sound continuous release engine. It closes the first quadrant (degrees 0-17) with a structural bang: the second genre shift, the first non-US birth, the first marsh species, the first intra-genus pair, the first genuine earworm, and the longest energy-3 streak. Five running ledgers advance in parallel -- artist-city pattern, energy distribution, acoustic progression, Parulidae count, and Cornish pipeline depth. The degree functions as a quadrant terminus that simultaneously opens territory the engine must now expand into.
+
+### Acoustic Progression (First Seventeen Elements)
+
+| Degree | Element | Species | Character |
+|-------:|---------|---------|-----------|
+| 0 | Silence | Great Blue Heron | Patience as music |
+| 1 | Cascade | Pacific Wren | Maximum complexity |
+| 2 | Drone | Varied Thrush | Single sustained pitch |
+| 3 | Language | Black-capped Chickadee | Syntactic system |
+| 4 | Motif | Northern Spotted Owl | Four-note call |
+| 5 | Metronome | Red-breasted Nuthatch | Steady single-note beat |
+| 6 | Question | Pacific-slope Flycatcher | Ascending inflection |
+| 7 | Harmonic spiral | Hermit Thrush | Overtone series |
+| 8 | Ultrasonic threshold | Golden-crowned Kinglet | Above-hearing whisper |
+| 9 | Variation | Chestnut-backed Chickadee | Biological cover version |
+| 10 | Minimum signal | Bushtit | Noise-floor chatter |
+| 11 | Trill / tremolo | Oregon Junco | Above-fusion-threshold repetition |
+| 12 | Sawtooth sweep | Pine Siskin | Harmonic rising zhreee |
+| 13 | Ostinato | Hutton's Vireo | Below-fusion-threshold repetition |
+| 14 | Repetition-resolution | MacGillivray's Warbler | Ternary AAB narrative |
+| 15 | Accelerando | Wilson's Warbler | Song building toward urgency |
+| 16 | Crescendo | Yellow Warbler | Sweet-to-sweeter wave |
+| **17** | **The hook** | **Common Yellowthroat** | **Memorability as strategy** |
+
+### Artist-City Patterns (First Eighteen)
+
+| Degree | Artist | Pattern |
+|-------:|--------|---------|
+| 0 | Quincy Jones | Wallflower (catalyst who left) |
+| 1 | Bill Frisell | Catalyst (loop-pedal ancestor) |
+| 2 | Wayne Horvitz | Pioneer / Artist-as-Institution |
+| 3 | Buddy Catlett | Bebop Root Node |
+| 4 | Floyd Standifer | The Teacher (experiential) |
+| 5 | Overton Berry | Persistence |
+| 6 | Patti Bown | Erasure |
+| 7 | Julian Priester | Pedagogue-Draw |
+| 8 | Gary Peacock | Standard-Bearer |
+| 9 | Hadley Caliman | Working Pedagogue-Draw |
+| 10 | Joni Metcalf | Salon Keeper |
+| 11 | Don Lanphere | Elder-as-Living-Archive |
+| 12 | Jay Thomas | Recorded Presence |
+| 13 | Marc Seales | The Institutional Anchor |
+| 14 | Ernestine Anderson | The Voice-Going-Home |
+| 15 | Diego Marriott | The Returner |
+| 16 | Jeff Lorber | The Genre-Gradient |
+| **17** | **Reggie Watts** | **The Uncategorizable** |
+
+### Energy Distribution (First Seventeen Degrees)
+
+| Energy | Count | Artists |
+|-------:|------:|---------|
+| E=1 | 2 | Peacock (8), Metcalf (10) |
+| **E=2** | **13** | Frisell, Standifer, Berry, Priester, Caliman, Shank, Brazil, Seales, Anderson (partial), and others |
+| **E=3** | **3** | **Marriott (15), Lorber (16), Watts (17)** |
+
+Longest energy-3 streak in the engine. The distribution shifts from 2:13:2 to 2:13:3 at degree 17. Three consecutive energy-3 artists, three distinct subtypes (acoustic-assertive, electronic-propulsive, performative-explosive). The end of the first quadrant is running hot.
+
+### Genre Evolution (First Seventeen Degrees)
+
+Every degree through 17 has been jazz-adjacent. Sub-genres documented: big band / bebop foundation, hard bop, stride / cocktail, hard bop piano, post-bop / electric, free / standard, West Coast cool, salon / informal, bebop elder, Fresh Sound mainstream, post-bop / contemporary modal (degree 13), torch vocal return (14), Seattle fusion return (15), Jazz Fusion (16 -- first compound label), and **Jazz/Comedy superposition (17 -- the uncategorizable, genre exits the system)**. The second genre shift at 17 is qualitatively different from the first at 16 -- fusion vs. absence. Genre diversification into soul, R&B, funk, hip-hop, and non-jazz Seattle traditions is an explicit open obligation for subsequent degrees.
+
+### Taxonomic State (Parulidae Cluster After Degree 17)
+
+| Degree | Species | Strategy | Habitat |
+|-------:|---------|----------|---------|
+| 14 | MacGillivray's Warbler | AAB narrative | Dense shrub |
+| 15 | Wilson's Warbler | Accelerando | Montane willow |
+| 16 | Yellow Warbler | Crescendo | Lowland willow |
+| **17** | **Common Yellowthroat** | **Hook** | **Marsh edge** |
+
+Four consecutive Parulidae. First intra-genus pair (Geothlypis at 14 and 17). First marsh/wetland species. Four different acoustic strategies within one family.
+
 ## Cross-References
 
 | Project | Connection |
@@ -102,23 +186,28 @@ The resonance between Reggie Watts and the Common Yellowthroat operates on three
 | **S36-002** (Wayne Horvitz) | Direct collaboration and community. Watts performed with Horvitz in Seattle's experimental music scene. Horvitz's infrastructure (Royal Room, curatorial programming) directly supported artists like Watts. The artist-as-institution pattern (Horvitz) enabled the emergence of the uncategorizable artist (Watts). Infrastructure precedes innovation across fifteen degrees. |
 | **S36-007** (Julian Priester) | Cornish College pipeline. Third Cornish connection (Priester faculty, Caliman faculty, Watts student). The pipeline now spans two modes (faculty and student) and three genres (experimental jazz, hard bop, performance art). Pipeline inverts from input to output. Cornish's range rivals Berklee's divergence at depth 3. |
 | **S36-009** (Hadley Caliman) | Cornish College pipeline. Caliman as Cornish faculty; Watts as Cornish student. Pipeline bidirectional: Caliman taught INTO the institution; Watts drew FROM it. Two modes of institutional connection documented. |
+| **S36-015** (Diego Marriott) | Acoustic-assertive energy-3 (brass projection). First of three consecutive energy-3 artists. Marriott began the streak that Lorber extended and Watts completed. |
 | **S36-016** (Jeff Lorber) | Genre shift sequence. Lorber's Jazz Fusion (degree 16) softened the genre boundary; Watts's Jazz/Comedy (degree 17) obliterates it. Lorber fused genres deliberately; Watts refuses genre entirely. The second genre shift is qualitatively different from the first: compound genre vs. the absence of genre. Also: synthesizer vs. voice -- Lorber used electronic instruments to create layers; Watts uses his body. Third consecutive energy-3 in sequence. |
-| **SPS-014** (MacGillivray's Warbler) | SAME GENUS, OPPOSITE STRATEGY. Both *Geothlypis*. MacGillivray's uses AAB narrative structure (the storyteller). The yellowthroat uses the hook (the earworm). The engine's first intra-genus pair demonstrates congeners employing fundamentally different acoustic strategies. One tells a story; the other writes a jingle. Both effective. |
+| **SPS-000** (Great Blue Heron) | SILENCE VS. THE HOOK. Heron stands in silence for minutes; yellowthroat sings witchety for minutes. Opposite acoustic strategies at degrees 0 and 17 -- minimum signal vs. maximum memorability. Both effective territorial assertions through completely different mechanisms. |
 | **SPS-013** (Hutton's Vireo) | REPETITION AS IDENTITY vs. REPETITION AS MEMORABILITY. The vireo repeats endlessly (ostinato -- persistence below attention threshold). The yellowthroat repeats emphatically (hook -- memorability above attention threshold). Same mechanism, opposite psychological effect. The vireo is wallpaper. The yellowthroat is a jingle. |
+| **SPS-014** (MacGillivray's Warbler) | SAME GENUS, OPPOSITE STRATEGY. Both *Geothlypis*. MacGillivray's uses AAB narrative structure (the storyteller). The yellowthroat uses the hook (the earworm). The engine's first intra-genus pair demonstrates congeners employing fundamentally different acoustic strategies. One tells a story; the other writes a jingle. Both effective. |
+| **SPS-015** (Wilson's Warbler) | Parulidae cluster -- second of four consecutive warblers. Accelerando (Wilson's) vs. hook (yellowthroat) -- urgency vs. catchiness, both emphatic but achieving different psychological effects. |
 | **SPS-016** (Yellow Warbler) | COWBIRD RESPONSE CONTRAST. Both frequent cowbird hosts. The Yellow Warbler responds architecturally (buries eggs, builds over the problem). The yellowthroat does NOT bury eggs -- it is a frequent, accepting host. Two Parulidae with opposite anti-parasitism strategies: one builds, the other absorbs. |
 | **AVI** (Wings of the Pacific Northwest) | PARULIDAE FOURTH ENTRY. Fourth warbler in the engine. First return to a previously represented genus (Geothlypis). AVI documents PNW warbler diversity including yellowthroat breeding status and marsh/wetland habitat associations. |
 | **ECO** (Ecology of the PNW) | MARSH/WETLAND ECOSYSTEM. First marsh/wetland species in the engine. ECO documents PNW ecosystem structure including wetland classification, cattail/sedge marsh ecology, and emergent wetland hydrology. The yellowthroat carries the marsh into the circle. |
 | **BPS** (Biological-Physical Systems) | Sampling theory. Watts's looping is a biological demonstration of the sample-store-reproduce pipeline. Nyquist theorem applies to the loop station's digital capture. The yellowthroat's witchety repetition is the biological version of a looped sample. |
 | **DAA** (Digital Audio Analysis) | Audio processing. Loop-based composition as real-time multitrack production. The loop station as digital audio workstation with zero post-production. |
+| **S36 Engine** (Seattle 360) | Seventeenth degree, third consecutive energy-3, third Cornish College connection, eighteenth artist-city pattern (The Uncategorizable). Five running ledgers advance in parallel. |
 
 ## Infrastructure
 
-- **Part A output:** `www/tibsfox/com/Research/S36/research/releases/017-reggie-watts/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-- **Part B output:** `www/tibsfox/com/Research/SPS/research/releases/017-common-yellowthroat/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-- 8 files total, ~10,600 words combined
-- Both index.html pages use project-specific color schemes and link back to parent projects
-- S36 series.js and SPS series.js updated with degree 17 entries
-- Cross-references.json updated with new edges connecting degree 17 to existing nodes
+- **Part A output:** `www/tibsfox/com/Research/S36/research/releases/017-reggie-watts/` -- research.md (~3,434 words, 232 lines), index.html (929 lines, Jazz/Comedy color scheme), knowledge-nodes.json (272 lines, 4 theory nodes), retrospective.md (379 lines).
+- **Part B output:** `www/tibsfox/com/Research/SPS/research/releases/017-common-yellowthroat/` -- research.md (~4,676 words), index.html, knowledge-nodes.json (6 theory nodes), retrospective.md.
+- **Release notes:** `docs/release-notes/v1.49.152/README.md` (this file), `docs/release-notes/v1.49.152/chapter/` (00-summary, 03-retrospective, 04-lessons, 99-context).
+- **Cross-references graph:** updated with degree 17 edges -- 6 S36 internal edges (001, 002, 007, 009, 015, 016), 5 SPS internal edges (000, 013, 014, 015, 016), 4 cross-engine edges (AVI, ECO, BPS, DAA).
+- **S36 + SPS series.js:** degree 17 entries added with dedication text, color metadata, cluster membership (Music hub: WAL).
+- **Commit footprint:** 9 files changed, 1 README + 4 chapter files + 4 research artifacts. Single commit `3d4e1433e` authored Sun Mar 29 08:25:43 2026 -0700.
+- **Total prose:** approximately 10,600 words across combined research documents.
 
 ## Retrospective
 
@@ -159,6 +248,12 @@ The resonance between Reggie Watts and the Common Yellowthroat operates on three
 4. **The Amiga Principle has a floor, and degree 17 is it: one person, one microphone, one loop station.** The resource count cannot go lower than a single human body. Watts demonstrates that the floor is not a limitation but a liberation -- with literally the minimum possible input (one person's voice and body), the maximum possible output (multi-layered compositions spanning genres, moods, and performance modes) is achievable. The loop station is the only technology in the chain, and its function is not to ADD to the performer but to MULTIPLY what the performer already produces. The loop pedal is not an instrument -- it is an amplifier of human capability. This is the Amiga Principle's deepest statement: the constraint is not just the parameter that shapes the solution's architecture. The constraint IS the architecture. One person performing live with a loop station is the most architecturally constrained performance format in the engine, and it produces the widest stylistic range.
 
 5. **The intra-genus pair at Geothlypis demonstrates that taxonomic proximity (shared evolutionary ancestry) does not predict functional similarity (shared acoustic strategy), and this has implications for how the engine selects future species.** The engine should not avoid returning to a previously represented genus -- it should return to genera WHEN the returning species offers a fundamentally different strategy. The yellowthroat justifies its Geothlypis return because its hook strategy is the functional opposite of the MacGillivray's narrative strategy. The genus contains both. Returning to a genus is not redundancy -- it is the engine's way of demonstrating that evolutionary relatedness and ecological/acoustic strategy are independent axes. DNA groups species by ancestry. The engine groups species by function. When those groupings diverge (same genus, different function), the divergence is the finding.
+
+6. **Superposition and intra-genus-contrast are the same structural event in two different domains, and seeing them paired at a single degree teaches the engine to recognize the pattern as general.** Watts refuses to collapse into a single genre. The Geothlypis pair refuses to collapse congener behavior into a single strategy. Both halves of degree 17 document a container-refusal pattern: the expected taxonomy cannot hold what the subject does. The lesson generalizes beyond this degree -- any future degree where one half refuses its category is likely to be paired with another half that does the same in a different domain. Category-refusal is itself a pairing principle.
+
+7. **Eighteen consecutive jazz-adjacent artists is long enough that the remedy must be structural, not cosmetic.** The S36 engine cannot resolve genre monotony by labeling a single outlier degree "uncategorizable." The rotation into soul, R&B, funk, hip-hop, grunge, indie, folk-pop, and hip-hop must happen in the next dozen degrees or the engine's claim to be a 360-degree rotation of Seattle music will be structurally false. Degree 17 has documented two transition mechanisms (gradient at 16, transcendence at 17). The mechanisms exist. The transition has not been executed. The next phase of the engine must deliver it, not describe it.
+
+8. **Running five ledgers in parallel at a single degree is the engine's signal that a quadrant is closing.** Degree 17 advances the artist-city pattern, energy distribution, acoustic progression, Parulidae count, and Cornish pipeline depth simultaneously. Four ledgers advancing in parallel is a structural milestone. Five is a quadrant terminus. Future quadrant boundaries can be predicted by watching for the five-ledger signal: whenever a single degree advances five or more running ledgers at once, the engine is crossing a major boundary, and the next degree should be inspected for a transition in genre, energy, or taxonomic family.
 
 ---
 
