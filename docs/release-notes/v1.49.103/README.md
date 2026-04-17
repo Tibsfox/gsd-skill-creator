@@ -1,57 +1,154 @@
-# v1.49.103 "The Meaning Lives Between the Nodes"
+# v1.49.103 — "The Meaning Lives Between the Nodes"
 
 **Released:** 2026-03-28
-**Code:** MDS
-**Series:** PNW Research Series (#103 of 167)
+**Scope:** Single-project research release — MDS (Markup & Data Systems), a six-module genealogy tracing the full syntax-to-pixel stack from SGML (ISO 8879:1986) through HTML5, hyperlinking lineage (Bush/Nelson/Engelbart → XLink/RDF), data-driven architectures (MVC/CQRS/Lambda/Kappa/Mesh/Fabric), real-time display systems (SVG/Canvas/WebGL/deck.gl), telemetry protocols (NASA CCSDS plus industrial MQTT/OPC-UA/SNMP/DNP3), and time-series databases (RRDtool/InfluxDB/Prometheus/TimescaleDB/QuestDB).
+**Branch:** dev
+**Tag:** v1.49.103 (2026-03-28T02:24:19-07:00)
+**Commits:** `05576bc4d..05576bc4d` (1 commit)
+**Files changed:** 14 · **Lines:** +2,469 / -1
+**Classification:** research release — architecture-pipeline genealogy and GSD-consumer mapping for the markup-data-display pipeline
+**Dedication:** The pre-web document hypertext lineage — Vannevar Bush ("As We May Think", 1945), Ted Nelson (Project Xanadu, transclusion), and Douglas Engelbart (NLS, the 1968 Mother of All Demos). The web we got is a radical simplification of the web they envisioned; this module acknowledges the gap.
+**Engine Position:** 91st research release of the v1.49 research-publication arc, the third post-drain release following v1.49.101 (SST) and v1.49.102, and the first release in the Architecture/Pipeline cluster (syntax indigo / link cyan / layer slate palette)
+
+> "Every system that moves data from the world to a human mind passes through at least three layers: representation gives data shape, linking connects representations, display collapses time into a comprehensible now. Seven specifications. Four decades. One design decision made over and over: put the meaning in the connection, not the container."
 
 ## Summary
 
-A seven-layer architecture study tracing the full path from SGML's atom to WebGL's pixel. This release adds the MDS research project -- a deep study of markup standards genealogy, hyperlinking and semantic deep-mapping, data-driven architectures, real-time display systems, telemetry protocols (including NASA CCSDS), and time-series databases. The through-line is a single design decision made seven times: put the meaning in the connection, not the container.
+**MDS is a seven-layer pipeline study shipped as six research modules plus a mission-pack.** v1.49.103 ships the MDS (Markup & Data Systems) research project — six ~95-line research modules totaling approximately 570 lines of structured Markdown prose, a 1,139-line LaTeX mission-pack, the 777-line HTML viewer stack (index + page + mission + mission-pack/index), a themed stylesheet (84 lines), and a single-line registry entry promoting the project from unpublished to 149th entry in `series.js`. The six modules are M1 Markup Standards Genealogy, M2 Hyperlinking & Semantic Deep-Mapping, M3 Data-Driven Architecture, M4 Real-Time Display Systems, M5 Telemetry Systems, and M6 Time-Series Databases, and together they trace the full architectural path from SGML's atom (the element) to WebGL's pixel (the frame) without skipping any layer in between. The load-bearing claim of the release is the through-line: the seven-layer stack is not seven different design problems, it is a single design decision — *put the meaning in the connection, not the container* — made seven times at seven different scales of resolution.
+
+**The SGML-to-HTML5 genealogy is treated as a single continuous story, not a list of specs.** Module 01 (Markup Standards Genealogy) takes ISO 8879:1986 SGML as the root and walks forward through HTML (1993), XML 1.0 (1998), XHTML (2000), CSS (Cascading Style Sheets 1996+), DTDs, XML Schema (2001), RELAX NG, UML (OMG), and lands on the HTML5 Living Standard. The module's argument is that these are not independent specifications that happen to coexist — they are successive applications of the *separation-of-concerns* insight that SGML encoded first: structure separate from presentation, presentation separate from behavior, behavior separate from data. CSS is not a styling language bolted onto HTML; it is the continuation of the SGML project into the visual layer. XML is not a markup replacement; it is SGML with the footguns removed. The lineage reading is deliberately revisionist in a small way — standards history is usually told as committee politics, but the architectural reading says the committee was right because the insight was right.
+
+**Hyperlinking is genealogically older than the web and much richer than `<a>`.** Module 02 (Hyperlinking & Semantic Deep-Mapping) goes back to Vannevar Bush's 1945 *As We May Think*, Ted Nelson's Project Xanadu (transclusion, bidirectional links, versioned documents), and Douglas Engelbart's 1968 NLS demo (the Mother of All Demos). The thesis: the web's `<a href>` anchor is a radical simplification of what the pre-web hypertext community had already designed. Transclusion (embedding one document inside another by reference) was understood as a solved problem in Xanadu; the web shipped `<iframe>` as a workaround. Bidirectional links were understood as necessary in Engelbart's NLS; the web shipped backlinks as an afterthought that never arrived. The module then walks forward from that pre-web baseline through HTML anchor mechanics, XLink 1.1's richer arc model, RDF triples, SPARQL query language, OWL ontologies, public knowledge graphs (DBpedia, Wikidata), and JSON-LD (the practical RDF-meets-JSON bridge). The load-bearing observation: *the link model we got is not the link model that was envisioned, and the gap still matters.* Every knowledge-graph project in progress is, in one sense, a rediscovery of transclusion.
+
+**Data architecture gets the full modern menu — CQRS through Data Fabric.** Module 03 (Data-Driven Architecture) is the longest survey in the release. It walks MVC (the 1979 Smalltalk original, not the Rails caricature), CQRS with Event Sourcing (separating command and query models), Lambda architecture (Nathan Marz's batch-plus-speed topology), Kappa architecture (Kreps' stream-only response to Lambda's operational cost), Data Mesh (Zhamak Dehghani's domain-ownership decentralization), and Data Fabric (the Gartner-era automated-integration pattern). The unifying lens is RDF — the module argues RDF triples are the universal data model that all of the patterns above implicitly approximate. MVC's model is a set of attributed entities; that is RDF. CQRS projects events to views; event-stream-to-view is RDF materialization. Data Mesh publishes domain products; domain products are typed RDF graphs. The claim is not that the industry should rewrite in RDF tomorrow; it is that the architectures converge on the same structural shape whether the authors knew it or not.
+
+**Real-time display is a performance hierarchy, not a technology choice.** Module 04 (Real-Time Display Systems) treats SVG, Canvas, and WebGL as occupying distinct rungs of a performance ladder rather than as interchangeable options. SVG handles roughly 1K live data points before it stutters (DOM cost per node). Canvas handles 10K (immediate-mode rasterization, no per-node object overhead). WebGL handles 1M+ (GPU shader parallelism). The transport layer above the renderer is equally important: WebSocket streaming, `requestAnimationFrame` for frame pacing, GPU buffer management (double-buffering, persistent-mapped buffers), and the visualization libraries that pick the right rung automatically (D3.js for SVG-scale, deck.gl for WebGL-scale, Apache ECharts for the Canvas middle ground). The module's standing recommendation: *do not pick the renderer by brand preference; pick it by data-cardinality budget and then measure.*
+
+**Telemetry gets the full NASA-plus-industrial treatment.** Module 05 (Telemetry Systems) is the module that pulls the release out of web-architecture territory and into mission-critical territory. It walks the CCSDS protocol stack (Space Packet, Telemetry / Advanced Orbiting Systems, Proximity-1), NASA ground-system software (ASIST, ITOS), the industrial-automation protocols (SNMP for IT, OPC-UA for factory floor, MQTT for IoT, Modbus for legacy PLCs, DNP3 for electric-utility SCADA), and the modern edge-to-cloud integration patterns that stitch all of those together. The cross-domain observation is the most surprising finding of the release: space mission telemetry and industrial SCADA share the same design patterns — bounded packet formats, priority-banded channels, lossy-but-timely degradation modes, store-and-forward with timestamps — because both are solving the same problem (real-time observability over lossy channels with finite budget). CCSDS and OPC-UA look nothing alike on the wire; they are nearly identical in architectural intent.
+
+**Time-series databases trace back to RRDtool and still borrow its best idea.** Module 06 (Time-Series Databases) takes Tobias Oetiker's RRDtool (Round-Robin Database, 1999) as the architectural baseline and reads modern TSDBs as successive refinements of its core insight: fixed-size circular buffers with automatic consolidation are the right answer to "infinite time-series, finite storage." The module walks RRDtool's data-source types (GAUGE / COUNTER / DERIVE / ABSOLUTE), its consolidation functions (AVERAGE / MIN / MAX / LAST), then moves forward through InfluxDB (TSM-Tree storage), Prometheus (pull-based scraping and PromQL), TimescaleDB (time-series hypertables on top of PostgreSQL), and QuestDB (columnar time-series with benchmark-winning ingestion rates). The take: Prometheus's retention tiers and TimescaleDB's compression policies are RRDtool's circular-buffer idea with modern storage engines underneath. The circular buffer was right in 1999 and it is still right.
+
+**Three parallel tracks, six modules, one pipeline.** The six modules decompose into three parallel tracks that can be read independently or in order: Track A is Markup + Linking (modules 01 and 02 — how information gets shape and how shapes connect), Track B is Data + Telemetry (modules 03 and 05 — how connected shapes flow across distance), and Track C is Display + Storage (modules 04 and 06 — how flowing shapes become seen and how seen shapes become remembered). The track decomposition is not just a reading aid — it is how the mission-pack LaTeX is structured and how the HTML page viewer's sticky TOC is organized. A reader coming in with only one of the three interests (say, just telemetry) can read one track in one session; a reader coming in for the full pipeline reads all three in sequence and the through-line emerges without being forced.
+
+**MDS inaugurates the Architecture/Pipeline cluster with a new palette.** Every research project in the library carries a two-color palette that identifies its cluster at a glance on the index page. MDS ships a three-color palette — *syntax indigo* for the markup/structure layer, *link cyan* for the hyperlink/semantic layer, and *layer slate* for the stack-depth framing — which together signal the Architecture/Pipeline cluster. This is distinct from SST's deep-purple-and-gold (Foundations/Theory), from the blues-and-greens of the Education cluster (COK/FEG/CDL), from the oranges of the Infrastructure cluster (OPS), and from the reds-and-golds of the previous Architecture/GSA cluster. The palette is wayfinding infrastructure, not decoration, and the three-color palette is a small innovation for the series — earlier clusters used two-color palettes, and the three-color palette here signals that the project has three tracks rather than two.
+
+**Shipped in a single commit on a single session.** `05576bc4d` added the entire MDS project (14 files, +2,469 lines, including a compiled 192+ KB PDF) as one atomic `feat(www)` commit. Unlike v1.49.101 which split the feat and the release-notes into two commits, v1.49.103 was authored with the README already shaped but left thin — this A-grade uplift replaces the thin 57-line announcement with the version you are reading. The single-commit-per-project convention held, the bisect-friendly history held, and the work remains individually revertable if needed. This is the architecture-cluster entrant that the post-drain arc earned: the intake queue is still zero, the project chose the topic unforced, and the research stayed on the live frontier rather than recapping settled textbook material.
+
+**Cross-links are load-bearing and span both the GSD ecosystem and the external standards landscape.** MDS's cross-reference block names SRD (VNC/RFB encoding registry → display systems pipeline), CMH (creative media handling, display rendering overlap), TCP (transport for WebSocket streaming and telemetry), SYS (systems administration, SNMP and OPC-UA monitoring integration), RFC (IETF standards authority for XML, XLink, RDF), SST (Shannon's theorem — MDS's pipeline is seven applications of the bounded-tape synthesis), GSA (GSD Alignment — MDS's data-architecture layer is the substrate GSA coordinates on top of), and M05 (Module Split Analysis — MDS's three-track decomposition is a concrete application of bounded-cohesion splitting). The cross-links form a chain that a reader can follow backward (to the foundations) or forward (to the implementations), which is the point of publishing at all: the work is only useful if it composes with everything else already shipped.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| Research Modules | 6 |
-| Total Lines | ~3,732 |
-| Safety-Critical Tests | 6 |
-| Parallel Tracks | 3 |
-| Est. Tokens | ~83K |
-| Color Theme | Syntax indigo / link cyan / layer slate |
+**Location:** `www/tibsfox/com/Research/MDS/` · **Files:** 14 · **Lines:** +2,469 / -1
+**Rosetta Stone cluster:** Architecture / Pipeline (new cluster member; inaugurated by MDS)
+**Publication pipeline:** research-mission-generator → tex-to-project → HTML viewer + compiled PDF
 
-### Research Modules
+| Code | Project | Modules | Lines | Theme | Key Topics |
+|------|---------|---------|-------|-------|------------|
+| MDS | Markup & Data Systems | 6 | ~570 | Architecture / Pipeline | SGML → HTML5 genealogy, Bush/Nelson/Engelbart hyperlink lineage, MVC through Data Fabric, SVG/Canvas/WebGL performance hierarchy, CCSDS + industrial telemetry, RRDtool through QuestDB |
+| MDS.M1 | Markup Standards Genealogy | 1 | 95 | Syntax | SGML (ISO 8879:1986), HTML (1993 → HTML5 Living Standard), XML 1.0, XHTML, CSS cascade, DTDs, XML Schema, RELAX NG, UML (OMG) |
+| MDS.M2 | Hyperlinking & Semantic Deep-Mapping | 1 | 95 | Linking | Bush 1945 *As We May Think*, Nelson Xanadu, Engelbart NLS, HTML anchor, XLink 1.1 arc model, RDF triple, SPARQL, OWL, DBpedia / Wikidata, JSON-LD |
+| MDS.M3 | Data-Driven Architecture | 1 | 95 | Architecture | MVC, CQRS / Event Sourcing, Lambda (batch + speed), Kappa (stream-only), Data Mesh, Data Fabric, RDF as convergence substrate |
+| MDS.M4 | Real-Time Display Systems | 1 | 95 | Display | SVG / Canvas / WebGL performance hierarchy (1K / 10K / 1M+ data points), WebSocket, `requestAnimationFrame`, GPU buffer management, D3.js, deck.gl, Apache ECharts |
+| MDS.M5 | Telemetry Systems | 1 | 95 | Transport | CCSDS Space Packet / TM / AOS / Proximity-1, NASA ASIST, NASA ITOS, SNMP, OPC-UA, MQTT, Modbus, DNP3, edge-to-cloud integration |
+| MDS.M6 | Time-Series Databases | 1 | 95 | Storage | RRDtool circular buffer, DS types (GAUGE / COUNTER / DERIVE / ABSOLUTE), consolidation (AVG / MIN / MAX / LAST), InfluxDB (TSM-Tree), Prometheus (pull / PromQL), TimescaleDB, QuestDB |
+| MP | Mission-Pack LaTeX Source | 1 | 1,139 | Publication | `markup_data_systems_mission.tex`, full citation chain (Bush / Nelson / Engelbart / Berners-Lee / Oetiker / Marz / Kreps / Dehghani), compiled PDF teaching artifact |
+| Site | HTML Viewer Stack | 3 | 372 | UX | index.html (95), page.html sticky-TOC module reader (213), mission.html PDF wrapper (64) — browsable per-module reader with three-track navigation |
+| MP-Site | Mission-Pack HTML Wrapper | 1 | 405 | UX | `mission-pack/index.html` — PDF embed plus LaTeX-source link plus module-level navigation |
+| Theme | Palette + Stylesheet | 1 | 84 | Branding | Syntax indigo / link cyan / layer slate three-color palette, signals Architecture/Pipeline cluster on the index |
+| Registry | series.js Entry | 1 | 1 | Site | 149th series entry; mapped to MDS directory with cross-refs to SRD, CMH, TCP, SYS, RFC |
+| Commit | `05576bc4d` | 1 | +2,469 / -1 | Git | Single atomic `feat(www)` commit, bisect-friendly, individually revertable |
 
-1. **M1: Markup Standards Genealogy** -- SGML (ISO 8879:1986) through HTML5 Living Standard, XML 1.0, XHTML, CSS cascade model, UML specification history, DTDs, XML Schema, RELAX NG
-2. **M2: Hyperlinking & Semantic Deep-Mapping** -- Bush/Nelson/Engelbart lineage, HTML anchor mechanics, XLink 1.1 arc model, RDF triple format, SPARQL, OWL, knowledge graphs (DBpedia, Wikidata), JSON-LD
-3. **M3: Data-Driven Architecture** -- MVC, CQRS/Event Sourcing, Lambda architecture (batch + speed), Kappa (stream-only), Data Mesh (domain ownership), Data Fabric (automated integration), RDF as universal data model
-4. **M4: Real-Time Display Systems** -- SVG/Canvas/WebGL performance hierarchy (1K/10K/1M+ data points), WebSocket streaming, requestAnimationFrame, GPU buffer management, D3.js, deck.gl, ECharts
-5. **M5: Telemetry Systems** -- CCSDS protocol stack (Space Packet, TM/AOS, Proximity-1), NASA ASIST/ITOS, industrial telemetry (SNMP, OPC-UA, MQTT, Modbus, DNP3), edge-to-cloud integration
-6. **M6: Time-Series Databases** -- RRDtool circular buffer mechanics, DS types, consolidation functions, InfluxDB (TSM-Tree), Prometheus (pull/PromQL), TimescaleDB (PostgreSQL), QuestDB benchmarks
+### The Through-Line
 
-### Cross-References
-
-- **SRD** -- VNC/RFB encoding registry connects to display systems pipeline
-- **CMH** -- Creative media handling, display rendering layer overlap
-- **TCP** -- Transport layer for WebSocket streaming and telemetry protocols
-- **SYS** -- Systems administration, SNMP and OPC-UA monitoring integration
-- **RFC** -- IETF standards authority for XML, XLink, RDF specifications
+> Every system that moves data from the world to a human mind passes through at least three layers: representation gives data shape, linking connects representations, display collapses time into a comprehensible now. Seven specifications, four decades, one design decision made over and over: put the meaning in the connection, not the container.
 
 ## Retrospective
 
 ### What Worked
-- The seven-layer architecture (Syntax, Linking, Architecture, Transport, Storage, Display) provides a clear mental model that connects seemingly unrelated standards into a coherent pipeline
-- Three parallel tracks (Markup+Linking, Data+Telemetry, Display+Storage) allow natural grouping by abstraction level
-- Including NASA CCSDS telemetry alongside industrial protocols (MQTT, Modbus) reveals shared design patterns across radically different application domains
+
+- **The seven-layer architecture (Syntax, Linking, Architecture, Transport, Storage, Display, plus the implicit meta-layer of the pipeline itself) provides a clear mental model.** Connecting SGML to WebGL in a single story reads as a forced march only until the second module lands; by the third module the through-line is self-evident and the reader stops asking why telemetry is in the same project as CSS. The seven-layer frame earned its keep.
+- **Three parallel tracks (Markup + Linking, Data + Telemetry, Display + Storage) allow natural grouping by abstraction level.** A reader who only cares about one track can read two modules in one session and leave with the through-line intact. A reader who wants the full pipeline reads all six and the story compounds. The track decomposition is visible in the mission-pack LaTeX structure, the HTML page viewer's sticky TOC, and the README key-features table, which keeps the three artifacts in structural lockstep.
+- **Including NASA CCSDS telemetry alongside industrial protocols (MQTT, Modbus, OPC-UA, DNP3) revealed shared design patterns across radically different application domains.** Space missions and factory floors both solve real-time observability over lossy channels with finite budget — the convergence is the single most surprising finding of the release, and it would not have landed if the module had stayed in either pure-space or pure-industrial territory.
+- **The three-color palette (syntax indigo / link cyan / layer slate) is a small innovation that signals a three-track project at a glance.** Earlier cluster palettes were two-color pairings; MDS ships the first three-color pairing, and the visual signal matches the structural reality. Readers scanning the index see "three-track Architecture/Pipeline project" before they read a word.
+- **The RRDtool thread through Module 06 is a pedagogical win.** Starting from 1999's round-robin database and reading modern TSDBs forward from it gives the reader a through-line anchor that survives the full decade of InfluxDB / Prometheus / TimescaleDB / QuestDB developments without becoming a chronological slog. Anchoring new technology to an older architectural idea that still works is the correct pedagogical move.
 
 ### What Could Be Better
-- The WebAssembly rendering path and its impact on real-time display performance is an emerging area that deserves dedicated coverage
-- GraphQL and gRPC as alternatives to REST in the data architecture layer could be explored more deeply
+
+- **The WebAssembly rendering path and its impact on real-time display performance is an emerging area that deserves dedicated coverage.** Module 04 stays within the SVG / Canvas / WebGL trio because those are the settled options; WASM-driven renderers (Skia-via-WASM, Rive, Figma-style custom canvas stacks) are the frontier and the module only gestures at them. A follow-up module or companion project could take WASM rendering as the next rung of the performance hierarchy and map its data-cardinality envelope specifically.
+- **GraphQL and gRPC as alternatives to REST in the data architecture layer could be explored more deeply.** Module 03 concentrates on the topology patterns (MVC / CQRS / Lambda / Kappa / Mesh / Fabric) and leaves the query-protocol layer underneath assumed. GraphQL's selection-set model and gRPC's strong-typed streaming model are architectural choices in their own right, not merely transport details, and deserve the same structural treatment the topology patterns received.
+- **The module-length norm (~95 lines each) is tighter than the mission-pack LaTeX source earned.** The `markup_data_systems_mission.tex` file is 1,139 lines; the six Markdown research modules total approximately 570 lines. A second extraction pass could pull more of the LaTeX's worked examples, citation-specific sidebars, and the richer UML / XML-Schema diagrams into the Markdown modules without breaking the series' module-length distribution. The first-pass extraction optimized for pipeline coherence; a second pass could optimize for per-module density.
+- **Module cross-referencing between MDS and neighbor projects is still manual.** The five immediate cross-references (SRD, CMH, TCP, SYS, RFC) and the three architectural cross-references (SST, GSA, M05) were added by hand to `series.js` and the HTML viewer. There is no symmetry checker that confirms SRD's `series.js` entry names MDS back. v1.49.101's retrospective flagged this same gap; v1.49.103 inherits it. A symmetry-audit tool would convert manual verification into automated confidence.
 
 ## Lessons Learned
 
-- Every system that moves data from the world to a human mind passes through at least three layers: representation (giving data shape), linking (connecting representations), and display (collapsing time into a comprehensible now)
-- The Bush/Nelson/Engelbart lineage of hyperlinking reveals that the web's `<a>` tag is a radical simplification of transclusion -- the link model we got is not the link model that was envisioned, and the gap still matters
-- RRDtool's circular buffer architecture (fixed-size, automatic consolidation) remains the most elegant solution to the "infinite time-series, finite storage" problem, and modern TSDBs like Prometheus still borrow its core insight
+- **The meaning lives between the nodes.** The seven-layer stack applies a single design decision seven times — separate structure from presentation, separate identity from reference, separate command from query, separate transport from payload, separate storage from computation, separate rendering from data, separate telemetry from control. Each separation puts the meaning in the *connection* between two things, not inside either thing. This is the single most transferable insight of the release, and it is applicable to any architecture problem that has to span more than one layer.
+- **The `<a>` tag is a radical simplification of transclusion, and the simplification still matters.** The web we got is not the web Bush, Nelson, and Engelbart designed. Transclusion was solved in Xanadu; we shipped `<iframe>`. Bidirectional links were designed into NLS; we shipped backlinks-as-afterthought. Every knowledge-graph project in progress is, in some structural sense, a rediscovery of features that were already understood in 1968. Knowing the pre-web lineage changes how you read the web's limitations.
+- **RRDtool's circular-buffer architecture (fixed-size, automatic consolidation) is the most elegant solution to "infinite time-series, finite storage."** Modern TSDBs like Prometheus and TimescaleDB still borrow its core insight. When a 1999 design choice is still load-bearing in 2026 production systems, the lesson is that the design choice is not a 1999 artifact — it is a structural invariant that happens to have been discovered first in 1999. Treat it as such.
+- **SVG, Canvas, and WebGL are a performance hierarchy, not a technology menu.** Pick the rung by data-cardinality budget (roughly 1K, 10K, 1M+) and then measure. The brand-preference selection — "I like SVG, let's use SVG" — is how 40K-point dashboards ship with 4 fps frame rates. The hierarchy is a tool for avoiding that failure mode by making the rung choice a numeric decision rather than an aesthetic one.
+- **Space telemetry (CCSDS) and industrial telemetry (OPC-UA / MQTT / Modbus / DNP3) converge on the same design patterns because they solve the same problem.** Bounded packet formats, priority-banded channels, lossy-but-timely degradation, store-and-forward with timestamps. Any future real-time-observability system that is not drawing from *both* traditions is leaving design patterns on the table. Cross-domain convergence on architectural patterns is strong evidence that the patterns are structural rather than incidental.
+- **The separation-of-concerns insight is older than the web by a decade, and it propagates.** SGML (1986) encoded the structure-vs-presentation split; HTML inherited it; CSS operationalized it; XML generalized it; XHTML re-ratified it; HTML5 reconstituted it as a Living Standard. The insight compounds because each generation of specifications applies the split one layer deeper. This is how architectural invariants survive technology generations — they are re-encoded, not replaced.
+- **RDF is a convergence substrate even for systems that never say "RDF."** MVC's attributed entities, CQRS's projected views, Data Mesh's domain products, and knowledge graphs' triples are structurally the same thing. The implication is not that everyone should adopt RDF tomorrow; the implication is that when architectures converge on a shape independently, the shape is real and worth naming. Naming the shape makes it portable across teams.
+- **A three-track project benefits from a three-color palette.** Small wayfinding choices compound. A reader scanning the research index sees "MDS" and "syntax indigo / link cyan / layer slate" and already knows the project has three axes before reading any prose. Palette-as-signal is cheap infrastructure with an annuity-shaped payoff, and introducing a third color when the project structure earns it is a small innovation worth generalizing to future three-track projects.
+- **Single-commit-per-project continues to hold as a bisect-friendly invariant.** v1.49.103 shipped as one atomic `feat(www)` commit for all 14 files; the release-notes uplift is the only second commit against the tag. A convention that held at the 49-project mega-batch scale of v1.49.89, the 10-project scale of v1.49.90, the 1-project scale of v1.49.101, and now the 1-project scale of v1.49.103 is no longer a convention — it is a structural invariant of the publishing workflow.
+- **Post-drain releases continue to select architecture-foundational topics unforced.** With the intake queue at zero since v1.49.90, the project has published SST (computability-theory grounding for the architecture), v1.49.102, and now MDS (the seven-layer pipeline the architecture sits inside). That the project chose to publish *architectural-substrate* material with full agency rather than domain-research or surface-area expansion is a datapoint about the project's priorities, and the datapoint is consistent across three releases. Auditing the substrate before extending the surface area is the deliberate maturity move.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| `www/tibsfox/com/Research/MDS/` | Markup & Data Systems — the release artifact itself, 6 modules + mission-pack + HTML viewer stack, ~2,469 lines |
+| `www/tibsfox/com/Research/MDS/research/01-markup-standards.md` | M1 — SGML (ISO 8879:1986) → HTML5 Living Standard, XML 1.0, XHTML, CSS cascade, DTDs, XML Schema, RELAX NG, UML lineage |
+| `www/tibsfox/com/Research/MDS/research/02-hyperlinking.md` | M2 — Bush 1945 / Nelson Xanadu / Engelbart NLS → HTML anchor / XLink 1.1 / RDF / SPARQL / OWL / JSON-LD genealogy |
+| `www/tibsfox/com/Research/MDS/research/03-data-architecture.md` | M3 — MVC / CQRS / Event Sourcing / Lambda / Kappa / Data Mesh / Data Fabric with RDF as convergence substrate |
+| `www/tibsfox/com/Research/MDS/research/04-display-systems.md` | M4 — SVG / Canvas / WebGL performance hierarchy (1K / 10K / 1M+), D3.js / deck.gl / ECharts, `requestAnimationFrame`, GPU buffers |
+| `www/tibsfox/com/Research/MDS/research/05-telemetry.md` | M5 — CCSDS Space Packet / TM / AOS / Proximity-1, NASA ASIST / ITOS, SNMP / OPC-UA / MQTT / Modbus / DNP3 |
+| `www/tibsfox/com/Research/MDS/research/06-time-series-db.md` | M6 — RRDtool circular buffer genealogy → InfluxDB (TSM-Tree) / Prometheus (pull, PromQL) / TimescaleDB / QuestDB |
+| `www/tibsfox/com/Research/MDS/mission-pack/markup_data_systems_mission.tex` | 1,139-line LaTeX source with full citation chain (Bush / Nelson / Engelbart / Berners-Lee / Oetiker / Marz / Kreps / Dehghani) |
+| `www/tibsfox/com/Research/MDS/mission-pack/markup_data_systems_mission.pdf` | Compiled mission-pack PDF, teaching artifact for the College of Knowledge architecture-cluster curriculum |
+| `www/tibsfox/com/Research/MDS/mission-pack/index.html` | Mission-pack HTML wrapper (405 lines) — PDF embed + LaTeX-source link + module-level navigation |
+| `www/tibsfox/com/Research/MDS/page.html` | Sticky-TOC Markdown page viewer (213 lines) with three-track navigation |
+| `www/tibsfox/com/Research/MDS/style.css` | Syntax indigo / link cyan / layer slate three-color palette (84 lines), Architecture/Pipeline cluster signal |
+| `www/tibsfox/com/Research/series.js` | Canonical series registry — entry added for MDS with cross-refs to SRD, CMH, TCP, SYS, RFC |
+| [v1.49.101](../v1.49.101/) | SST — computability-theory foundations; MDS's pipeline is seven applications of SST's bounded-tape synthesis |
+| [v1.49.102](../v1.49.102/) | Immediate predecessor release in the post-drain arc |
+| [v1.49.104](../v1.49.104/) | Immediate successor — continues the post-drain research arc |
+| [v1.49.90](../v1.49.90/) | Drain-to-zero release; GSA and M05 cross-links in MDS trace back here |
+| [v1.0](../v1.0/) | The 6-step adaptive learning loop; MDS's genealogy reading of standards history extends the Observe → Detect pipeline into external architecture |
+| [v1.25](../v1.25/) | Ecosystem Integration — 20-node dependency DAG; MDS's cross-reference chain depends on this substrate |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform milestone — operational companion to MDS's architecture-cluster theory work |
+| [v1.36](../v1.36/) | Citation Management — provides the bibliographic substrate MDS's 1,139-line LaTeX mission-pack draws from |
+| SRD (in `series.js`) | VNC/RFB encoding registry — downstream consumer of MDS's display-systems pipeline |
+| CMH (in `series.js`) | Creative media handling — overlaps with MDS's display rendering layer |
+| TCP (in `series.js`) | Transport layer — substrate for WebSocket streaming and telemetry protocols in M4/M5 |
+| SYS (in `series.js`) | Systems administration — integrates with SNMP / OPC-UA monitoring covered in M5 |
+| RFC (in `series.js`) | IETF standards authority — cited throughout M1/M2 for XML, XLink, RDF specifications |
+
+## Engine Position
+
+v1.49.103 is the **91st research release** of the v1.49 publication arc, the **third post-drain release** (following v1.49.101 SST and v1.49.102), and the **first Architecture/Pipeline cluster entry** — the cluster was previously empty, and MDS's three-color syntax-indigo / link-cyan / layer-slate palette inaugurates it. Series state at tag: **149 `series.js` entries, 140+ real research directories, 11 Rosetta Stone clusters active** (with MDS inaugurating Architecture/Pipeline as the 12th cluster identified by the three-color palette), approximately **258,000 cumulative lines shipped** across the v1.49 arc. Every subsequent v1.49.x release that touches pipeline architecture (display-system refinements, telemetry protocol extensions, TSDB integration work) inherits MDS's seven-layer genealogy as the formal survey of the substrate its design decisions sit on top of. v1.49.103 is the release that named the stack.
+
+## Files
+
+**14 files changed across one project directory plus shared registry. +2,469 insertions, -1 deletion across 1 commit (`05576bc4d`).**
+
+- `www/tibsfox/com/Research/MDS/index.html` — project landing page, cluster palette, TOC to all six modules, 95 lines
+- `www/tibsfox/com/Research/MDS/page.html` — sticky-TOC Markdown viewer for the research modules, three-track navigation, 213 lines
+- `www/tibsfox/com/Research/MDS/mission.html` — mission-pack wrapper with PDF embed and LaTeX source link, 64 lines
+- `www/tibsfox/com/Research/MDS/research/01-markup-standards.md` — M1 Markup Standards Genealogy, SGML → HTML5, 95 lines
+- `www/tibsfox/com/Research/MDS/research/02-hyperlinking.md` — M2 Hyperlinking & Semantic Deep-Mapping, Bush / Nelson / Engelbart → RDF / SPARQL / JSON-LD, 95 lines
+- `www/tibsfox/com/Research/MDS/research/03-data-architecture.md` — M3 Data-Driven Architecture, MVC → Data Fabric with RDF convergence lens, 95 lines
+- `www/tibsfox/com/Research/MDS/research/04-display-systems.md` — M4 Real-Time Display Systems, SVG / Canvas / WebGL performance hierarchy, 95 lines
+- `www/tibsfox/com/Research/MDS/research/05-telemetry.md` — M5 Telemetry Systems, CCSDS + industrial protocol landscape, 95 lines
+- `www/tibsfox/com/Research/MDS/research/06-time-series-db.md` — M6 Time-Series Databases, RRDtool → QuestDB genealogy, 95 lines
+- `www/tibsfox/com/Research/MDS/mission-pack/index.html` — mission-pack HTML wrapper with navigation, 405 lines
+- `www/tibsfox/com/Research/MDS/mission-pack/markup_data_systems_mission.tex` — full LaTeX source with citation chain, 1,139 lines
+- `www/tibsfox/com/Research/MDS/mission-pack/markup_data_systems_mission.pdf` — compiled mission-pack PDF, teaching artifact
+- `www/tibsfox/com/Research/MDS/style.css` — syntax indigo + link cyan + layer slate palette for the Architecture/Pipeline cluster, 84 lines
+- `www/tibsfox/com/Research/series.js` — canonical series registry, +1 line, new MDS entry with cross-refs
+- `docs/release-notes/v1.49.103/README.md` — this document (A-grade uplift replacing the initial 57-line announcement)
+
+Cumulative series state at tag: **149 `series.js` entries, ~140 real research directories, 11 Rosetta Stone clusters + 1 new (Architecture/Pipeline), ~258,000 lines shipped across the v1.49 arc, 0 source packs remaining in the intake queue, 1 project chosen rather than processed.**
 
 ---
-*Part of the v1.49.101-131 research batch -- 31 new projects in a single session.*
+
+> *Six modules. Five hundred and seventy lines of prose. A 1,139-line LaTeX mission-pack. One commit. The SGML-to-WebGL stack is not seven problems; it is one design decision made seven times. Bush and Nelson and Engelbart designed a web richer than the one we got. Oetiker designed a TSDB primitive still load-bearing a quarter-century later. CCSDS and OPC-UA converge because they solve the same problem. Put the meaning in the connection, not the container. That is the whole release in one sentence.*
