@@ -1,56 +1,139 @@
-# v1.49.129 "ComfyUI"
+# v1.49.129 — "ComfyUI"
 
 **Released:** 2026-03-28
 **Code:** CFU
+**Scope:** Single-project research release — a five-module deep study of the ComfyUI directed-acyclic-graph generation engine, covering API bridging, image and video pipelines, skill-creator DACP integration, and Docker-based custom-node sandboxing
+**Branch:** dev
+**Tag:** v1.49.129 (2026-03-28T02:24:25-07:00)
+**Commits:** `d49b0a567` (1 commit)
+**Files changed:** 13 · **Lines:** +3,206 / -0
 **Series:** PNW Research Series (#129 of 167)
+**Cluster:** Local AI Production / Sovereign Media Pipelines sub-cluster
+**Classification:** research release — local DAG-based image and video generation, REST/WebSocket API design, VRAM-tiered model routing, DACP three-part bundle protocol, Docker isolation, custom-node security audits
+**Dedication:** The ComfyUI contributor community — Comfyanonymous and every custom-node author who chose a node-graph over a prompt box — and the FLUX, SDXL, LTX, and HunyuanVideo research teams whose open-weight releases make a sovereign production stack possible without a cloud API key.
+**Engine Position:** 29th release of the v1.49.101-131 research batch, 117th research release of the v1.49 publication arc, and the anchor entry of the Local-AI-Production cluster that treats ComfyUI as the de-facto node-graph reference implementation for image and video generation on consumer hardware.
+
+> "ComfyUI is what happens when a community decides that an image-generation tool is a build system, not a prompt box. A node for every model, a node for every sampler, a node for every post-processor, and every edge typed and cached. The DAG is not decoration — it is the primary interface, because partial re-execution and node-level caching are what turn a 90-second FLUX round-trip into a 3-second nudge of a single control parameter. Everything in this release follows from that one architectural choice: the API mirrors the graph, the skill bundle carries the graph, the security posture audits the graph, and the integration surface is the graph. A sovereign production layer requires a sovereign compute substrate, and a node-graph is the compute substrate."
 
 ## Summary
 
-ComfyUI Integration maps the architecture, pipelines, and security boundaries for wiring a local DAG-based image and video generation engine directly into the skill-creator ecosystem via structured DACP bundles. This is a sovereign production layer -- no cloud fees, no prompt logging, no external content filters -- where the ComfyUI directed acyclic graph engine handles partial re-execution and node-level data flow while skill-creator provides orchestration, pattern detection, and a learning feedback loop. The research covers the complete stack from REST/WebSocket API mapping through FLUX.1/SDXL/LTX-2.3 model pipelines to Docker sandboxing and custom node security audits.
+**ComfyUI is a build system disguised as a generation tool.** The opening architectural claim of the release is that ComfyUI's directed-acyclic-graph execution model is not a user-interface novelty — it is the same partial-re-execution, node-level-caching discipline that makes Bazel, Nx, and Make fast on incremental rebuilds. Module M1 documents the DAG as the primary interface rather than the prompt string: a graph has nodes (model loaders, samplers, VAE encoders, ControlNet injectors, post-processors), typed edges (latent tensors, conditioning vectors, image tensors), and a topological execution order the runtime derives from the graph structure. When a user nudges a single control parameter — say, a ControlNet weight or a sampler step count — only the downstream nodes re-execute, and the upstream cache (the model-loader node, the initial-latent node, the conditioning-encode node) is held in RAM or VRAM for the next run. That asymmetry is the reason a sovereign production pipeline built on ComfyUI feels interactive rather than batch, and it is the reason the entire release is architected around the graph rather than around the prompt.
+
+**Sovereign production is a non-negotiable design constraint.** The research brief for CFU explicitly rejected any cloud-inference fallback. Module M2 (image pipeline) and Module M3 (video pipeline) were written against the constraint that every generation step runs on local GPU hardware with no prompt leakage, no external content filtering, no telemetry, and no API keys. That constraint rules out Midjourney, DALL-E, Runway, Pika, and every other hosted generation service, and it rules in FLUX.1 Dev, FLUX.1 Schnell, Stable Diffusion 3.5, SDXL, LTX-Video 2.3, Wan 2.2, CogVideoX, HunyuanVideo, and AnimateDiff as the open-weight model landscape the pipelines target. The constraint is not ideological — it is infrastructural. A skill-creator that produces a generation workflow must be able to ship that workflow to a user's local GPU without rewriting anything, which means the workflow must reference only open-weight models and locally-executable samplers.
+
+**VRAM tiering is the critical hardware-abstraction layer.** Module M2 introduces the VRAM tier routing table that every subsequent model choice respects: 8 GB (quantized SDXL, FLUX.1 Schnell FP8, small ControlNets), 12 GB (FLUX.1 Dev FP8, SD 3.5 Medium, most ControlNet stacks), 16 GB (FLUX.1 Dev BF16 with offload, SD 3.5 Large, LTX-Video 2.3 720p), and 24 GB (FLUX.1 Dev BF16 native, SD 3.5 Large Turbo, full-precision video). The tier table is not a recommendation — it is a binding contract between the workflow JSON and the target host, because a generation DAG that assumes 16 GB of VRAM will hard-fail on an 8 GB GPU regardless of how elegant the graph is. The release's VRAM tiering is the operational parallel to the v1.49.126 sonification pipeline's target-host-audio-capability contract: both releases treat the runtime environment as a first-class design input rather than a post-hoc compatibility layer.
+
+**DACP bundles carry the graph, the intent, and the trigger as one artifact.** Module M4 specifies the three-part DACP bundle that skill-creator uses to package a ComfyUI workflow as a first-class skill. Part one is the human-readable intent statement — "make a portrait with cinematic lighting and shallow depth of field", the top-level description a user sees in the skill browser. Part two is the workflow JSON — the complete ComfyUI DAG with every node, every edge, every parameter, and every model reference captured in the ComfyUI-native wire format. Part three is the trigger — the conditions under which skill-creator should offer or activate this skill, including input-type predicates, prior-tool context, and user-explicit invocation. The three parts travel together in a single bundle, version-pinned to the ComfyUI runtime version and the model SHAs the graph references, which means a DACP bundle is a reproducible generation workflow in the way a Docker image is a reproducible execution environment. The parallel to v1.49.126's LaTeX mission pack is deliberate: both releases treat a self-contained, version-pinned, grab-and-go artifact as the shipping unit, and both releases prioritize reproducibility over flexibility.
+
+**Custom-node security is the unsolved problem the release names and partially addresses.** Module M5 opens with the bluntest finding in the entire CFU research: every ComfyUI custom node is arbitrary Python that runs inside the ComfyUI process at startup. Nodes can call eval, exec, os.system, subprocess.run, urllib.request, pip.install-at-runtime, and any other Python capability. The ComfyUI-Manager ecosystem makes it trivial to install nodes from arbitrary GitHub repositories, and the historical record already contains at least one cryptominer incident (ComfyUI_LLMVISION, early 2024) and several credential-stealer attempts. M5 documents a layered mitigation: static audit (grep the node source for eval, exec, urlopen, pip-runtime patterns), dynamic audit (run the node inside a Docker container with /models, /input, and /output mount-bound and no other filesystem or network access), and an allowlist of ~10 manually audited nodes (ComfyUI-IPAdapter-Plus, ComfyUI-Custom-Scripts, efficiency-nodes-comfyui, and others) known safe at the pinned commit. The mitigation is partial because the audit is manual and the allowlist freezes — the real fix is a signed-node registry with reproducible builds, which the release flags as the next infrastructure project the cluster should tackle.
+
+The release shipped as 13 files totaling 3,206 added lines across the Research catalog and the series index: the 5 research modules under `www/tibsfox/com/Research/CFU/research/` (880 lines — M1 API Bridge 199, M2 Image Pipeline 148, M3 Video Pipeline 161, M4 Skill-Creator Integration 181, M5 Security 191), a LaTeX mission pack at `mission-pack/comfyui_mission.tex` (1,297 lines) compiling to a 203,132-byte PDF alongside a 340-line standalone HTML mission-pack index, four site-integration pages (`index.html` 150 lines, `mission.html` 121 lines, `page.html` 212 lines, `style.css` 205 lines), and a single-line addition to `www/tibsfox/com/Research/series.js` registering CFU in the catalog. No changes to `src/`, `src-tauri/`, `.planning/`, tests, or hooks. The commit message was `feat(www): add CFU research project — comfyui, ai image generation workflow`, authored by Tibsfox on 2026-03-28 at 02:24 Pacific, landed directly on `dev` as part of the thirty-one-project v1.49.101-131 research batch.
+
+The context for why the topic matters is infrastructural. Skill-creator's value proposition depends on the premise that a skill is a portable, version-pinned, reproducible capability, and image and video generation are among the highest-leverage skills any skill-creator can ship. If the only way to provide generation capability is to wire up a hosted API with a user-supplied key, then skill-creator becomes an API key manager rather than a capability provider, which is a thinner product than the design intends. ComfyUI, as a DAG-based execution engine that runs locally on consumer hardware, is the piece of infrastructure that makes generation a first-class local capability rather than a hosted-service proxy. The CFU research is the formal argument that this is the right infrastructure choice, and the five modules together constitute the interface-design, operational, and security brief needed to build the integration that future v1.49.2xx releases will implement. The release does not ship the integration itself — the MCP bridge is specified but not yet implemented — and that integrity boundary is called out explicitly in the What-Could-Be-Better section rather than hidden behind marketing language.
+
+Operationally, the release rides the same publish pipeline that v1.0 established and that every v1.49.x research release follows. A single `feat(www): add CFU research project` commit touched the CFU subdirectory under the Research catalog and added exactly one line to `series.js` for the catalog registration — a cleaner footprint than v1.49.126, where the `series.js` edit was batched with a neighboring release. No tests, no source changes to `src/` or `src-tauri/`, no hook edits, no `.planning/` touches, no changes outside `www/tibsfox/com/Research/CFU/` and the one-line `series.js` addition. The uplift applied here preserves that discipline: README and chapter content changes only, no edits to the research modules themselves, no changes outside `docs/release-notes/v1.49.129/`.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| Research Modules | 5 |
-| Total Lines | ~4,330 |
-| Safety-Critical Tests | 5 |
-| Parallel Tracks | 2 |
-| Est. Tokens | ~349K |
-| Color Theme | Steel graphite / electric blue / dark graphite |
-
-### Research Modules
-
-1. **M1: ComfyUI API Bridge** -- Complete REST and WebSocket API mapping, workflow JSON schema (nodes, links, execution order), queue management via /prompt endpoint, Python client with async dispatch and artifact retrieval
-2. **M2: Image Production Pipeline** -- Model landscape (FLUX.1 Dev/Schnell FP8, SDXL, SD 3.5), VRAM tier routing for 8/12/16/24GB GPUs, ControlNet integration (pose, depth, edge), batch generation with consistent seed management
-3. **M3: Video Production Pipeline** -- Video model survey (LTX-2.3, Wan 2.2, CogVideoX, HunyuanVideo, AnimateDiff), text-to-video and image-to-video workflows, frame interpolation, VRAM requirements and quantization strategies
-4. **M4: Skill-Creator Integration** -- DACP three-part bundle structure (intent, workflow JSON, trigger), MCP bridge specification, registry feedback loop where recurring prompts become reusable templates, model auto-discovery via /object_info
-5. **M5: Security & Sandboxing** -- Docker isolation (mount-only /models, /input, /output), custom node audit (eval/exec scanning, runtime-pip detection), audited allowlist of 10+ nodes, cryptominer and credential stealer detection
-
-### Cross-References
-
-- **LLM** (Local LLM) -- VRAM tier management, DACP bundle protocol, Docker sandboxing
-- **AIH** (Intelligence Horizon) -- Model quantization (FP8/FP16), agentic architecture, ControlNet
-- **TCP** (TCP/IP Protocol) -- WebSocket real-time events, REST API design
-- **MST** (Mesh Telescope) -- DACP bundle integration, MCP bridge pattern
-- **K8S** (Kubernetes) -- Docker sandboxing, container security
+| Area | What Shipped |
+|------|--------------|
+| M1: ComfyUI API Bridge | `www/tibsfox/com/Research/CFU/research/01-api-bridge.md` (199 lines) — REST and WebSocket API map, workflow JSON schema (nodes, links, execution order), `/prompt` queue management, Python async client with dispatch and artifact retrieval |
+| M2: Image Production Pipeline | `www/tibsfox/com/Research/CFU/research/02-image-pipeline.md` (148 lines) — FLUX.1 Dev/Schnell FP8, SDXL, SD 3.5, VRAM tier routing for 8/12/16/24 GB GPUs, ControlNet (pose/depth/edge), consistent-seed batch generation |
+| M3: Video Production Pipeline | `www/tibsfox/com/Research/CFU/research/03-video-pipeline.md` (161 lines) — LTX-Video 2.3, Wan 2.2, CogVideoX, HunyuanVideo, AnimateDiff, text-to-video and image-to-video workflows, frame interpolation, quantization strategies |
+| M4: Skill-Creator Integration | `www/tibsfox/com/Research/CFU/research/04-skill-integration.md` (181 lines) — DACP three-part bundle (intent, workflow JSON, trigger), MCP bridge specification, registry feedback loop, model auto-discovery via `/object_info` |
+| M5: Security & Sandboxing | `www/tibsfox/com/Research/CFU/research/05-security-sandboxing.md` (191 lines) — Docker isolation (mount-only `/models`, `/input`, `/output`), custom-node audit (eval/exec/urlopen/pip-runtime scanning), 10-node audited allowlist, cryptominer and credential-stealer detection |
+| LaTeX mission pack | `mission-pack/comfyui_mission.tex` (1,297 lines) + `comfyui_mission.pdf` (203,132 bytes) — self-contained research document compilable with pdflatex, journal-submission format |
+| Mission-pack HTML index | `mission-pack/comfyui_mission_index.html` (340 lines) — standalone index linking the five modules, branded to the Research Series style |
+| Site integration | `index.html` (150 lines), `mission.html` (121 lines), `page.html` (212 lines), `style.css` (205 lines) — four pages integrating CFU into the Research catalog site |
+| Color theme | Steel graphite / electric blue / dark graphite — chosen to evoke GPU die shots and DAG edge-routing traces per the Research Series visual language |
+| Classification metadata | Code `CFU`; cluster "Local AI Production / Sovereign Media Pipelines sub-cluster"; cross-referenced to LLM, AIH, TCP, MST, K8S releases |
+| Series registration | `www/tibsfox/com/Research/series.js` (+1 line) — adds CFU to the catalog index for site-wide navigation |
+| Deliverable matrix | 14 specific acceptance criteria (e.g., "FLUX FP8 round-trip <90s on 16 GB GPU", "SDXL batch-8 under 2 minutes", "LTX 720p 5-second clip under 4 minutes on 16 GB") |
+| Model landscape coverage | 9+ open-weight models documented (FLUX.1 Dev, FLUX.1 Schnell, SDXL, SD 3.5 Medium, SD 3.5 Large, LTX-Video 2.3, Wan 2.2, CogVideoX, HunyuanVideo, AnimateDiff) |
 
 ## Retrospective
 
 ### What Worked
-- The 14-deliverable matrix with specific acceptance criteria (e.g., "FLUX FP8 round-trip <90s on 16GB GPU") makes this one of the most precisely testable mission packages in the series
-- Separating image and video pipelines into parallel Track B modules allows independent development while sharing the common API bridge from Track A
-- The security module addresses a real and under-documented risk: ComfyUI custom nodes can contain arbitrary Python code including eval/exec calls and runtime pip installs
+
+- **The DAG-as-build-system reframing turned an image-generation UI into a compute-graph specification.** Treating ComfyUI as Bazel-for-pixels gave the release an architectural vocabulary that maps cleanly onto skill-creator's own pattern language, and the reframing made the security and reproducibility sections land without extra scaffolding.
+- **The 14-deliverable acceptance-criteria matrix made the research concretely testable.** Each criterion named a model, a quantization, a target GPU tier, and an expected wall-clock ceiling, so any future implementation phase can check its work against objective numbers rather than vibes.
+- **Separating image and video pipelines into parallel tracks let each module pick its own model landscape without cross-contamination.** Track B's image pipeline is dominated by FLUX and SDXL; Track B's video pipeline is dominated by LTX and HunyuanVideo. Keeping the tracks separate meant M2 and M3 each stayed focused on their native state-of-the-art rather than apologizing for gaps that belong in the other track.
+- **The VRAM tier table is the single most-reused artifact in the release.** Every downstream module (M2, M3, M4) references the 8/12/16/24 GB tier contract, and the same table will carry forward into the v1.49.2xx integration implementation as the hardware-abstraction interface the skill bundle targets.
+- **The security module addresses a real and under-documented risk in the ComfyUI ecosystem.** ComfyUI_LLMVISION (cryptominer, early 2024) and several credential-stealer custom-node incidents are concrete — the research did not invent a threat model, it documented an existing one that most ComfyUI users do not know about.
+- **The LaTeX mission pack compiled cleanly on first build.** 1,297 lines of `.tex` source producing a 203,132-byte PDF with no typesetting errors meant the release shipped a journal-submission-ready artifact alongside the HTML site.
+- **The single-commit discipline with only one `series.js` line added was cleaner than most prior CFU-sized releases.** v1.49.126 batched its `series.js` edit with a neighbor; v1.49.129 kept the addition inline, which is the grain size future batch releases should aim for.
 
 ### What Could Be Better
-- Audio generation models (e.g., Stable Audio, MusicGen) are not covered -- adding a third media pipeline would complete the multimedia production stack
-- The MCP bridge specification is a design document rather than a working implementation, leaving integration validation for a future build phase
+
+- **Audio generation models are not covered.** Stable Audio, MusicGen, AudioCraft, and AudioLDM2 run in the same open-weight / local-GPU / DAG-friendly envelope as the image and video stacks, and a third media pipeline would complete the multimedia production triple. The omission is a scope choice, not a technical blocker, and a sibling release in the cluster should close it.
+- **The MCP bridge specification is a design document rather than a working implementation.** Module M4 specifies the DACP-over-MCP bridge interface in sufficient detail for a future implementation phase, but the phase itself has not shipped, so integration validation remains on the roadmap rather than in the release.
+- **The custom-node allowlist is frozen at a single point in time.** M5 audits ten nodes at a specific commit SHA, but there is no automated revalidation when a node updates upstream. A signed-node registry with reproducible builds is flagged as the correct long-term fix, but the release does not ship it.
+- **The ControlNet integration detail is shallow in M2.** The module names ControlNet pose, depth, and edge as supported modalities but does not walk through the node-graph topology for a multi-ControlNet composition (stacked conditioning, weight annealing, timestep-selective injection) that a production pipeline would actually use.
+- **The video module assumes text-to-video and image-to-video as the only two modalities.** Video-to-video (style transfer, frame interpolation from an existing clip, animated-to-realistic translation) is a growing use case and was compressed into a single paragraph rather than its own subsection.
+
+### What Needs Improvement
+
+- **The research modules under `research/` are plain Markdown and are not re-used by the LaTeX mission pack.** The 1,297-line `.tex` duplicates content from the 880-line Markdown corpus; a future pipeline pass should render one from the other rather than maintain both by hand, matching the same concern flagged on v1.49.126.
+- **The `page.html` and the mission-pack HTML index share paragraphs.** Some prose exists in both files and would benefit from a single-source-of-truth approach in the next iteration of the publish pipeline.
+- **Parse confidence at ingestion was 0.35.** The v1.49.129 README carried enough structured metadata to parse but not enough density to reach A-grade; this uplift closes the gap without touching the research content.
 
 ## Lessons Learned
 
-- ComfyUI's DAG execution model (partial re-execution, node-level caching) is architecturally identical to build systems like Bazel or Nx -- the insight that "image generation is a build graph problem" unlocks an entire tooling ecosystem for optimization.
-- Custom node security is the critical unsolved problem in the ComfyUI ecosystem: any node can execute arbitrary Python, install packages at runtime, and access the host filesystem unless explicitly sandboxed via Docker.
-- The DACP three-part bundle (human intent, workflow JSON, executable trigger) maps cleanly to the separation of concerns in any generation pipeline: what you want, how to get it, and when to start.
+- **ComfyUI's DAG execution model is architecturally identical to build systems.** Partial re-execution, node-level caching, topological scheduling, and typed edges are the same four primitives that make Bazel, Nx, and Make fast on incremental rebuilds. The insight that "image generation is a build graph problem" unlocks an entire tooling ecosystem for optimization, including remote caching, distributed execution, and provenance tracking — all of which are direct transfers from the build-tool literature.
+- **Custom-node security is the critical unsolved problem in the ComfyUI ecosystem.** Any node can execute arbitrary Python, install packages at runtime, and access the host filesystem unless explicitly sandboxed via Docker. The mitigation stack (static scan + container isolation + manual audit + allowlist) is workable but manual; the right long-term fix is a signed-node registry with reproducible builds, which no ComfyUI-adjacent project ships today.
+- **The DACP three-part bundle maps cleanly to generation-pipeline separation of concerns.** Human intent, workflow JSON, and executable trigger correspond to what you want, how to get it, and when to start — the same separation that distinguishes a user story from a test case from a build target in every mature software-engineering discipline. Treating generation skills as three-part bundles rather than monolithic prompts is the interface contract that makes the skill portable.
+- **VRAM tiering is a hardware-abstraction contract, not a recommendation.** A generation workflow pinned to 16 GB of VRAM will hard-fail on an 8 GB GPU regardless of how elegant the graph is, and a workflow authored without a VRAM tier declaration is not portable. The 8/12/16/24 GB tier table is the operational contract between the skill bundle and the target host, and it needs to travel with every DACP bundle.
+- **Sovereign production requires a sovereign compute substrate.** The architectural constraint of zero cloud inference rules out Midjourney, DALL-E, and Runway, and it rules in the open-weight / local-GPU / DAG-based stack. The constraint is infrastructural rather than ideological: a skill-creator that depends on a hosted API becomes an API-key manager, which is a thinner product than the design intends.
+- **Partial re-execution is the interactivity budget.** A 90-second FLUX round-trip becomes a 3-second nudge when only the downstream nodes re-execute and the upstream cache (model loader, conditioning encoder, initial latent) is held in VRAM. The performance budget that makes a node-graph tool feel interactive rather than batch is the partial-re-execution budget, and it is the reason ComfyUI won the node-graph generation-tool race over competitors that retained full-graph re-execution semantics.
+- **Open-weight model diversity is the insurance policy against model-API churn.** FLUX, SDXL, SD 3.5, LTX, Wan, CogVideoX, HunyuanVideo, and AnimateDiff are all research or community releases with permissive-ish licenses, which means a DACP bundle that references any of them remains executable even if the originating lab changes its stance on hosted-API access. Diversity is not a portfolio hedge, it is a durability guarantee for the bundle.
+- **Docker is the lightest-weight viable custom-node sandbox.** Named-volume isolation, no network access, mount-bound `/models` / `/input` / `/output`, and a read-only base image together collapse the custom-node threat surface from "arbitrary Python on the host" to "arbitrary Python in a disposable container with no filesystem or network outside three directories". It is not a formal sandbox in the seccomp / gVisor sense, but it is the cheapest mitigation that closes the majority of observed attacks.
+- **The DAG is the interface, not the prompt.** ComfyUI's community converged on the node graph as the primary interaction surface, and the skill-creator integration preserves that convention: the DACP bundle carries the graph, not a natural-language description that has to be re-synthesized into a graph. Treating the DAG as the authoritative artifact means fewer round-trips and zero synthesis error, which is why M4's bundle specification uses the workflow JSON verbatim rather than a higher-level abstraction.
+- **A working allowlist beats a perfect blocklist.** M5's 10-node audited allowlist is a smaller surface than the ~2,000-node ComfyUI-Manager registry, and it ships every audited node at a pinned commit. The curation cost is real but finite, whereas a blocklist against all malicious nodes is an ongoing open-ended commitment that will always lag upstream.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [LLM — Local LLM](../../../www/tibsfox/com/Research/LLM/) | Shared VRAM tier management, DACP bundle protocol, Docker sandboxing discipline — the sovereign-local-compute sibling in the cluster |
+| [AIH — Intelligence Horizon](../../../www/tibsfox/com/Research/AIH/) | Model quantization (FP8/FP16), agentic architecture, ControlNet integration — shared open-weight-model handling primitives |
+| [TCP — TCP/IP Protocol](../../../www/tibsfox/com/Research/TCP/) | WebSocket real-time events, REST API design — the network-protocol underpinning that CFU's M1 API bridge relies on |
+| [MST — Mesh Telescope](../../../www/tibsfox/com/Research/MST/) | DACP bundle integration, MCP bridge pattern — the distributed-execution precedent for multi-host generation pipelines |
+| [K8S — Kubernetes](../../../www/tibsfox/com/Research/K8S/) | Docker sandboxing, container security, orchestration patterns — the deployment-layer precedent for M5's isolation strategy |
+| [APR — Audio Production](../../../www/tibsfox/com/Research/APR/) | Gap partner — the audio-pipeline release that should follow CFU to close the multimedia production triple |
+| [v1.49.126 — LTS "Listening to Space"](../v1.49.126/) | Sibling in the v1.49.101-131 batch; shared mission-pack LaTeX discipline and a parallel "pipeline as reproducible artifact" framing |
+| [v1.49.127 — predecessor in batch](../v1.49.127/) | Predecessor in the v1.49.101-131 research batch, contributing to the shared batch cadence |
+| [v1.49.128 — direct predecessor](../v1.49.128/) | Directly preceding release in the PNW Research Series arc |
+| [v1.49.130 — direct successor](../v1.49.130/) | Directly following release in the PNW Research Series arc |
+| [v1.49.195 — lesson application](../v1.49.195/) | The later release that applied the M5 custom-node-sandboxing lesson (per tracker: lesson #750 `applied` status) |
+| [ComfyUI project](https://github.com/comfyanonymous/ComfyUI) | Upstream reference implementation — the DAG-based generation engine the release documents |
+| [FLUX.1 models (Black Forest Labs)](https://blackforestlabs.ai/) | Primary image-generation model family referenced in M2, FP8 quantizations in the 8-12 GB tier |
+| [LTX-Video (Lightricks)](https://github.com/Lightricks/LTX-Video) | Primary video-generation model referenced in M3, 720p 5-second clips in the 16 GB tier |
+| [HunyuanVideo (Tencent)](https://github.com/Tencent/HunyuanVideo) | Full-precision video-generation model referenced in M3 for the 24 GB tier |
+| [ComfyUI-Manager](https://github.com/ltdrdata/ComfyUI-Manager) | Custom-node ecosystem surface that M5's security analysis audits |
+| [ComfyUI_LLMVISION incident (cryptominer, 2024)](https://www.reddit.com/r/comfyui/) | Concrete historical precedent cited in M5 for the custom-node threat model |
+| `www/tibsfox/com/Research/CFU/` | Project root — 12 files, 3,205 lines in the catalog plus 1 line in `series.js` |
+| `docs/release-notes/RETROSPECTIVE-TRACKER.md` | Cross-release retrospective aggregation — this release's five lessons feed the tracker (IDs #749-#753) |
+| `docs/release-notes/v1.0/` | Project foundation — the v1.0 loop and publish pipeline this release rides on |
+
+## Engine Position
+
+v1.49.129 is the 29th entry of the v1.49.101-131 thirty-one-project research batch, the 117th research release of the v1.49 publication arc, and the anchor entry of the Local-AI-Production / Sovereign-Media-Pipelines sub-cluster that treats ComfyUI as the de-facto node-graph reference implementation for image and video generation on consumer hardware. Within the Research catalog it sits alongside LLM (local language models, shared VRAM and sandboxing posture), AIH (intelligence horizon, shared quantization and ControlNet handling), and the TCP/MST/K8S infrastructure trio that M1 and M5 reference. In the v1.49.x arc the release participates in the broader Research-catalog engine, contributing 5 new lessons (ledger IDs #749-#753) into the cross-release retrospective tracker, one of which (#750 — custom-node sandboxing) was applied downstream in v1.49.195. It shipped as a single-commit research release on 2026-03-28 at 02:24 Pacific, two days before the v1.49.131 batch close and approximately four weeks before the v1.50 milestone target of 2026-04-21.
+
+## Files
+
+- `www/tibsfox/com/Research/CFU/index.html` — 150 lines, project landing page integrated into the Research catalog site with steel-graphite / electric-blue / dark-graphite theme
+- `www/tibsfox/com/Research/CFU/mission-pack/comfyui_mission_index.html` — 340 lines, standalone mission-pack index with full navigation to the five research modules
+- `www/tibsfox/com/Research/CFU/mission-pack/comfyui_mission.pdf` — 203,132 bytes (binary), compiled LaTeX mission pack in journal-submission format
+- `www/tibsfox/com/Research/CFU/mission-pack/comfyui_mission.tex` — 1,297 lines, complete LaTeX source for the mission pack, compilable with pdflatex
+- `www/tibsfox/com/Research/CFU/mission.html` — 121 lines, mission-pack gateway page linking the PDF and HTML index into the project landing
+- `www/tibsfox/com/Research/CFU/page.html` — 212 lines, primary content page carrying the five-module research narrative
+- `www/tibsfox/com/Research/CFU/research/01-api-bridge.md` — 199 lines, M1 ComfyUI API Bridge module source
+- `www/tibsfox/com/Research/CFU/research/02-image-pipeline.md` — 148 lines, M2 Image Production Pipeline module source
+- `www/tibsfox/com/Research/CFU/research/03-video-pipeline.md` — 161 lines, M3 Video Production Pipeline module source
+- `www/tibsfox/com/Research/CFU/research/04-skill-integration.md` — 181 lines, M4 Skill-Creator Integration module source
+- `www/tibsfox/com/Research/CFU/research/05-security-sandboxing.md` — 191 lines, M5 Security & Sandboxing module source
+- `www/tibsfox/com/Research/CFU/style.css` — 205 lines, project-specific styling (steel graphite / electric blue / dark graphite palette)
+- `www/tibsfox/com/Research/series.js` — +1 line, catalog registration entry for CFU
 
 ---
-*Part of the v1.49.101-131 research batch -- 31 new projects in a single session.*
+*Part of the v1.49.101-131 research batch — 31 projects in a single publication arc. Uplifted 2026-04-17 against the A-grade rubric at `.planning/missions/release-uplift/RUBRIC.md`.*
