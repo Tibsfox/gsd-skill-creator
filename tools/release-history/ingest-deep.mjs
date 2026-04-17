@@ -137,21 +137,72 @@ function extractRetrospectives(text) {
       }
     }
   }
-  // Also: "## Retrospective" block may contain all sub-kinds nested
-  if (sections['retrospective']) {
-    const nested = splitIntoSections('## _dummy_\n' + sections['retrospective']);
-    // Children of ## Retrospective are ### What Worked, ### What Could Be Better, etc.
+  // Also: any heading that STARTS with "retrospective" (e.g.
+  // "Retrospective: Degree 0 Patterns Established") may contain the retro
+  // content. Find the best candidate key and try three strategies:
+  //   (a) markdown sub-headings:          ### What Worked
+  //   (b) bold inline markers:            **What Worked:**
+  //   (c) whole body as lessons_learned
+  const retroKey = Object.keys(sections).find(k =>
+    k === 'retrospective' || k.startsWith('retrospective_')
+  );
+  if (retroKey) {
+    const body = sections[retroKey];
+    const nested = splitIntoSections('## _dummy_\n' + body);
+    let capturedAny = false;
     for (const { kinds, kind } of mapping) {
-      if (out.find(r => r.kind === kind)) continue; // already captured
+      if (out.find(r => r.kind === kind)) { capturedAny = true; continue; }
       for (const k of kinds) {
         if (nested[k] && nested[k].trim()) {
           out.push({ kind, body_md: nested[k].trim() });
+          capturedAny = true;
           break;
         }
       }
     }
+    if (!capturedAny) {
+      // Strategy (b): split by bold markers like **What Worked:** / **Lessons Learned:**
+      const boldBlocks = splitByBoldMarkers(body);
+      for (const { label, body: blockBody } of boldBlocks) {
+        const key = normalizeHeading(label);
+        for (const { kinds, kind } of mapping) {
+          if (out.find(r => r.kind === kind)) continue;
+          if (kinds.includes(key)) {
+            out.push({ kind, body_md: blockBody.trim() });
+            capturedAny = true;
+          }
+        }
+      }
+    }
+    if (!capturedAny) {
+      // Strategy (c): whole-body fallback as lessons_learned
+      const trimmed = body.trim();
+      if (trimmed.length > 40) {
+        out.push({ kind: 'lessons_learned', body_md: trimmed });
+      }
+    }
   }
   return out;
+}
+
+// Split a markdown block on bold-marker lines like `**What Worked:**` and return
+// [{ label, body }] pairs. Lines before the first marker are dropped.
+function splitByBoldMarkers(body) {
+  const markerRe = /^\s*\*\*([^*]+?)[:：]?\*\*\s*$/;
+  const lines = body.split(/\r?\n/);
+  const blocks = [];
+  let current = null;
+  for (const line of lines) {
+    const m = markerRe.exec(line.trim());
+    if (m) {
+      if (current) blocks.push(current);
+      current = { label: m[1].replace(/[:：]$/, '').trim(), body: '' };
+    } else if (current) {
+      current.body += (current.body ? '\n' : '') + line;
+    }
+  }
+  if (current) blocks.push(current);
+  return blocks.filter(b => b.body.trim().length > 0);
 }
 
 async function processVersion(client, version, text, dryRun, stats) {

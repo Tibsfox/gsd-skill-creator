@@ -5,12 +5,27 @@
 // Preserves header prose (the two paragraphs above the table). Rewrites only the
 // table itself. Idempotent.
 
-import { readFileSync, writeFileSync } from 'node:fs';
-import { loadConfig } from './config.mjs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { join, relative, dirname } from 'node:path';
+import { loadConfig, REPO_ROOT } from './config.mjs';
 import { openDb } from './db.mjs';
 
 const ctx_cfg = loadConfig();
 const HISTORY = ctx_cfg.index_file_abs;
+const SOURCE_DIR = ctx_cfg.source_dir;  // relative path like "docs/release-notes"
+
+// Paths of published chapter subfiles, relative to the repo root.
+function chapterFileRel(version, filename) {
+  return `${SOURCE_DIR}/${version}/chapter/${filename}`;
+}
+function chapterFileExists(version, filename) {
+  return existsSync(join(REPO_ROOT, chapterFileRel(version, filename)));
+}
+// A link target used from inside the HISTORY file — relative to the HISTORY file's directory.
+function linkFromHistoryTo(relFromRepoRoot) {
+  const historyDir = dirname(HISTORY);
+  return relative(historyDir, join(REPO_ROOT, relFromRepoRoot));
+}
 
 async function main() {
   const client = await openDb(ctx_cfg);
@@ -61,21 +76,50 @@ async function main() {
     '|---------|------|---------|--------|-------|-------|---------|-------|',
   ];
 
+  // Track any drift between DB claims and actual chapter files on disk.
+  const driftRetro = [];
+  const driftLessons = [];
+
   const body = rows.map(r => {
     const isGhost = r.source_readme.includes('never existed') || r.source_readme.includes('dead link');
-    // Ghosts point at /chapter/ since we now seed chapter stubs there
-    const linkPath = isGhost
-      ? `release-notes/${r.version}/chapter/`
-      : `release-notes/${r.version}/`;
-    const versionCell = `[${r.version}](${linkPath})`;
-    const retro = r.has_retrospective ? '✓' : '—';
-    let lessons = '—';
-    if (r.lesson_count > 0) {
-      lessons = r.applied_count > 0 ? `${r.applied_count}/${r.lesson_count}` : `${r.lesson_count}`;
+    // Ghosts point at /chapter/ since we seed chapter stubs there
+    const versionLinkRel = isGhost
+      ? `${SOURCE_DIR}/${r.version}/chapter/`
+      : `${SOURCE_DIR}/${r.version}/`;
+    const versionCell = `[${r.version}](${linkFromHistoryTo(versionLinkRel)})`;
+
+    // Retro cell — link to chapter file if present on disk
+    let retroCell = '—';
+    if (r.has_retrospective) {
+      const retroFile = chapterFileRel(r.version, '03-retrospective.md');
+      if (chapterFileExists(r.version, '03-retrospective.md')) {
+        retroCell = `[✓](${linkFromHistoryTo(retroFile)})`;
+      } else {
+        retroCell = '✓ _(no file)_';
+        driftRetro.push(r.version);
+      }
     }
+
+    // Lessons cell — link to chapter file if present on disk
+    let lessonsCell = '—';
+    if (r.lesson_count > 0) {
+      const label = r.applied_count > 0 ? `${r.applied_count}/${r.lesson_count}` : `${r.lesson_count}`;
+      if (chapterFileExists(r.version, '04-lessons.md')) {
+        lessonsCell = `[${label}](${linkFromHistoryTo(chapterFileRel(r.version, '04-lessons.md'))})`;
+      } else {
+        lessonsCell = `${label} _(no file)_`;
+        driftLessons.push(r.version);
+      }
+    }
+
     const notes = isGhost ? '_no original README, chapter stub only_' : '';
-    return `| ${versionCell} | ${esc(r.name) || '—'} | ${r.shipped || '—'} | ${r.phases ?? '—'} | ${r.plans ?? '—'} | ${retro} | ${lessons} | ${notes} |`;
+    return `| ${versionCell} | ${esc(r.name) || '—'} | ${r.shipped || '—'} | ${r.phases ?? '—'} | ${r.plans ?? '—'} | ${retroCell} | ${lessonsCell} | ${notes} |`;
   });
+
+  // Surface drift in the summary line so it doesn't hide
+  if (driftRetro.length || driftLessons.length) {
+    header[5] = header[5] + `\n\n> **Drift detected:** ${driftRetro.length} releases flag a retrospective but have no \`03-retrospective.md\` on disk; ${driftLessons.length} flag lessons without \`04-lessons.md\`. Run \`node tools/release-history/publish.mjs --execute\` to sync, or investigate with \`node tools/release-history/audit.mjs\`.`;
+  }
 
   const out = [...header, ...body, ''].join('\n');
   writeFileSync(HISTORY, out);
