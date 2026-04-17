@@ -2,239 +2,174 @@
 
 **Released:** 2026-04-05
 **Degree:** 36 of 360
-**Part A:** Jimi Hendrix -- Blues Rock, **E=6** (MAXIMUM), Central District, Reprise Records. 1962-1970. The most culturally transformative individual musician in the engine. The electric guitar redefined. The Central District's supreme export. The first E=6 since Jones at degree 0 — thirty-six degrees ago.
-**Part B:** Anna's Hummingbird (*Calypte anna*) -- metallic chip + dive display buzz, E=5, urban/coastal year-round, Trochilidae. Second Trochilidae (after Rufous at degree 35). Only PNW resident hummingbird. Dive-display tail-feather buzz = third non-vocal sound mechanism. 4 grams overwintering in December. Combined energy 11 — new all-time engine maximum.
-**NASA Mission:** 1.37 -- Ranger 8 (February 17, 1965. 7,137 images of the Sea of Tranquility — Mare Tranquillitatis. Surveying the exact region where Apollo 11 will land four years later. Photographing the future. Nearly double Ranger 7's 4,308 images. The convergence extends.)
-**NASA Organism:** Calypso bulbosa (Fairy Slipper orchid — the rarest, most delicate ground-layer orchid of old-growth PNW forest. Beauty at minimum scale. 4 grams of hummingbird, one orchid petal. The extraordinary within the tiny.)
-**Dedication:** Al Hendrix (June 10, 1919 -- April 17, 2002) — Jimi's father. The man who bought a left-handed child his first guitar.
-**Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
-**Engine Position:** Thirty-seventh paired release. **E=6 returns for the first time since degree 0.** Combined energy 11 — new all-time maximum. Blues Rock enters the engine. The Central District thread reaches its apotheosis. Ranger photographs the future.
+**Part A:** Jimi Hendrix -- Blues Rock, E=6 (MAXIMUM), Central District Seattle, Reprise Records, 1962-1970. The most culturally transformative individual musician in the engine. The electric guitar redefined. The Central District's supreme export. The first E=6 since Quincy Jones at degree 0 -- thirty-six degrees ago.
+**Part B:** Anna's Hummingbird (*Calypte anna*) -- metallic chip vocalization plus dive-display tail-feather aerodynamic buzz, E=5, urban and coastal year-round resident, Trochilidae. Second Trochilidae entry after Rufous at degree 35. Only Pacific Northwest resident hummingbird. The dive-display tail-feather buzz is the third non-vocal sound mechanism in the engine. Four grams overwintering in Seattle in December. Combined energy 11 -- new all-time engine maximum.
+**NASA Mission:** 1.37 -- Ranger 8. February 17, 1965. Atlas-Agena B from Launch Complex 12, Cape Kennedy. 7,137 images of the Sea of Tranquility -- Mare Tranquillitatis. Surveying the exact region where Apollo 11 would land four years, five months, and three days later. Nearly double Ranger 7's 4,308 images. The convergence established at degree 33 extends.
+**NASA Organism:** *Calypso bulbosa* (Fairy Slipper orchid -- the rarest and most delicate ground-layer orchid of old-growth Pacific Northwest forest; beauty at minimum scale; four grams of hummingbird, one orchid petal).
+**Dedication:** Al Hendrix (June 10, 1919 -- April 17, 2002) -- Jimi's father, the man who bought a left-handed child his first guitar in Central District Seattle when the family could barely afford food. The dedication is biographical rather than structural: Al Hendrix worked maintenance at Boeing and at landscape crews across Seattle for decades so that Jimi could have the instrument and the runway. Hendrix is a gift from father to son that the entire twentieth century inherited.
+**Series:** NASA Paired Release Engine -- Continuous Dual-Track Build, Pass 2 refinement
+**Cluster:** Central District apotheosis / Blues Rock debut / Apollo site survey / Only PNW resident hummingbird
+**Engine Position:** Thirty-seventh paired release. **E=6 returns for the first time since degree 0.** Combined energy 11 -- new all-time maximum, breaking the previous ceiling of 10 set at degree 32. Blues Rock enters the engine. The Central District thread reaches its apotheosis. Ranger 8 photographs the future landing site of Apollo 11.
+**Commit:** `1940831e8` -- feat(www): v1.49.537 -- degree 36 paired release (NASA 1.37 + S36/SPS Pass 2)
+**Files changed:** 3 (README + S36 Pass 2 essay + SPS Pass 2 essay)
+**Branch:** dev
+**Quality Target:** A-grade DEGREE shape (prose rubric, merged with NASA 1.37 Ranger 8 deep research and Anna's Hummingbird SPS essay)
 
 ## Summary
 
-The thirty-seventh paired release and the engine's highest-energy event. **Jimi Hendrix.** E=6 — maximum energy, the first since Quincy Jones at degree 0, thirty-six degrees ago. The Central District's supreme export. The most culturally transformative individual musician in the engine. Not the most commercially successful (Jones produced *Thriller*), not the longest career (Berry played for sixty years), but the most culturally transformative individual performer in the history of the electric guitar. Hendrix did not play the guitar. He rewired the relationship between the human body and amplified sound.
+The thirty-seventh paired release and the engine's highest-energy event to date. **Jimi Hendrix.** E=6 -- maximum energy, the first since Quincy Jones at degree 0, thirty-six degrees ago. The Central District's supreme export. The most culturally transformative individual musician in the engine's roster. Not the most commercially successful -- Quincy Jones produced *Thriller* -- and not the longest-careered -- Chuck Berry played for sixty years where Hendrix played for eight -- but the most culturally transformative individual performer in the history of the electric guitar. Hendrix did not play the guitar. He rewired the relationship between the human body and amplified sound. The paired release synchronizes his arrival with Ranger 8's photographic reconnaissance of the Sea of Tranquility and with the debut of Anna's Hummingbird as the only Pacific Northwest resident species of Trochilidae. Three entities, three scales, one degree. Both sides of the engine reach a maximum at the same time.
 
-The Central District thread reaches its apotheosis. Jones at degree 0 was the CD's first export — the invisible infrastructure behind visible achievement. Hendrix at degree 36 is the visible explosion. The same neighborhood produced the world's most successful music producer and the world's most influential guitarist. Thirty-six degrees apart. The invisible architect and the visible detonation. The Jones-Hendrix axis extends the Jones-Charles axis (degrees 0-30) and transcends it: where Charles was the Genius who fused genres, Hendrix was the force that redefined what an instrument could do.
+The Central District thread reaches its apotheosis. Quincy Jones at degree 0 was the Central District's first export -- the invisible infrastructure behind visible achievement, the producer whose name never appeared on the marquee but whose hand shaped the records that defined decades. Ray Charles, born in Georgia but adopted at Seattle's Rocking Chair and Washington Social Club circuits as a teenager, arrived at degree 30 as the Genius who fused gospel with blues and country with jazz in a single career. Hendrix at degree 36 is the visible detonation. The same neighborhood produced the world's most successful music producer, the world's most celebrated genre-fusing vocalist, and the world's most influential electric guitarist -- across thirty-six degrees, three modes, three scales. The Jones-Charles-Hendrix triangle now stands as the Central District's documented global-name trio, and the progression moves from infrastructure through synthesis to explosion. Both sides of the neighborhood's contribution are paired in the record: the architect and the detonation, separated by thirty-six degrees, operating at the same E=6 ceiling.
 
-Blues Rock enters the engine through the hinge between blues and rock — Hendrix IS the hinge. The genre gradient continues to steepen: Jazz (0-15) → Jazz compounds (16-24) → Soul/R&B (25-34) → Blues (35) → Blues Rock (36). Rock enters the engine through the blues, the same way it entered American music historically. The guitar is the same instrument Frisell plays (degree 1), but the deployment is maximum divergence: Frisell's contemplative loops versus Hendrix's feedback explosions. Same technology (guitar + amplifier + effects). Opposite energy. Opposite everything.
+Blues Rock enters the engine through the hinge between blues and rock -- Hendrix IS the hinge. The genre gradient continues to steepen in the same direction it has been steepening since the engine's first Jazz entries: Jazz (degrees 0-15) gave way to Jazz compounds (16-24), which gave way to Soul and R&B (25-34), which gave way to Blues at degree 35 with Robert Cray from Tacoma, which now gives way to Blues Rock at degree 36 with Hendrix. Rock enters the engine through the Blues, the same way it entered American music historically. Mojo records, Sun Records, Chess Records, and the Memphis Stax/Volt axis had already midwifed the transition by the mid-1960s, and Hendrix -- who spent his chitlin'-circuit apprenticeship backing Little Richard, the Isley Brothers, Curtis Knight, and King Curtis -- carried the blues idiom forward into the amplifier era. The guitar is the same instrument Bill Frisell plays at degree 1, but the deployment is maximum divergence: Frisell's contemplative loops operate within the guitar's natural resonance, while Hendrix's feedback explosions operate beyond its design parameters. Same technology, same signal chain, opposite everything. The Frisell-Hendrix axis spans thirty-five degrees and maps the guitar's full operational range in the engine -- from ambient contemplation to feedback catastrophe. Both sides of the instrument are now documented, paired across the thirty-five-degree span in parallel with the Jones-Hendrix E=6 axis.
 
-Anna's Hummingbird — the only PNW resident hummingbird, overwintering at 4 grams while maintaining 40°C body temperature in December — performs a dive display that produces a mechanical buzz: climbing 30+ meters, then plunging in a steep dive, the outer tail feathers generating a loud aerodynamic sound at the bottom of the dive through air rushing over specialized feather structures. This is the third non-vocal sound mechanism in the engine: flicker bill-drumming (degree 22, percussion), Rufous wing-thrum (degree 35, continuous mechanical), Anna's tail-feather dive-buzz (degree 36, aerodynamic). Three mechanisms. Three physics. All non-vocal.
+Anna's Hummingbird (*Calypte anna*) is the only Pacific Northwest resident hummingbird, the only Trochilidae that overwinters in Seattle's cold, wet, sub-freezing December, and the paired counterpart to Rufous at degree 35. Where Rufous migrates six thousand kilometers round-trip to Mexico, Anna's stays. It stays at four grams. It stays at forty degrees Celsius body temperature when the ambient air drops to minus five. It stays through the worst of the Puget Sound winter and emerges in February to display over flowering camellias and rhododendrons at temperatures that would kill most tropical birds within hours. The metabolic achievement is the most extreme thermoregulatory feat in the engine's species roster. Torpor -- the controlled overnight drop in core temperature and heart rate -- is the physiological mechanism that makes the resident strategy possible. Anna's enters nightly torpor, reducing metabolic rate by as much as ninety-five percent, and emerges at dawn to feed before core temperature stabilizes. The bird sleeps by approaching death and wakes by returning from it. Every night. All winter. The Rufous-Anna's pair (degrees 35-36) now parallels the Frisell-Hendrix pair (degrees 1-36): different strategies on the same instrument, maximum divergence at shared scale. Both sides of the hummingbird question are paired in one dual entry: the migrant and the resident, the transient and the permanent.
 
-Ranger 8 impacted the Sea of Tranquility on February 20, 1965, transmitting 7,137 photographs — nearly double Ranger 7's 4,308. The images surveyed the exact region where, four years later, Apollo 11 would land. Ranger 8 was photographing the future. The cameras that failed on Rangers 4 and 6 were now producing data that would guide human footsteps on the Moon.
+The dive display is the third non-vocal sound mechanism documented in the engine, and it operates through fluid dynamics rather than through muscle-driven vocalization. The male Anna's Hummingbird climbs to an altitude of thirty or more meters above a display target -- a perched female, a territorial rival, sometimes an unfortunate human observer -- then plunges in a steep dive at speeds exceeding twenty-seven meters per second. At the bottom of the dive, the outer tail feathers (specifically R4 and R5 in the flight-feather numbering scheme) are spread laterally, and the airflow across their modified vane structure produces a sharp, brief chirp -- an aerodynamic sound, not a vocalization. Christopher Clark and Teresa Feo documented the mechanism in a 2008 *Proceedings of the Royal Society B* paper that used high-speed video and wind-tunnel replicas to prove that the sound is produced by the interaction between the bird's velocity and its feather geometry. The physics is the same branch that produces airfoil flutter, reed excitation in a clarinet, and the aeroelastic vibration that destroyed the Tacoma Narrows Bridge in 1940. The engine's non-vocal sound palette is now three-dimensional: Northern Flicker bill-drumming at degree 22 (percussion, solid-on-solid mechanics); Rufous Hummingbird wingbeat thrum at degree 35 (continuous oscillation through aerodynamic coupling); Anna's Hummingbird dive-buzz at degree 36 (transient aerodynamic singleton at terminal velocity). Three mechanisms, three branches of physics, paired synchronously across fifteen degrees of taxonomic diversity. Both the rufous migrant and the Anna's resident contribute to the shared mechanical-acoustic thread, and the engine now treats non-syrinx acoustic communication as a durable category rather than a novelty.
 
-Combined energy: Hendrix at E=6 + Anna's Hummingbird at E=5 = 11. The engine's new all-time maximum, breaking the previous ceiling of combined 10 at degree 32.
+Ranger 8 lifted off from Cape Kennedy's Launch Complex 12 at 09:05 UTC on February 17, 1965, aboard an Atlas-Agena B. Sixty-five hours and forty minutes later, at 09:57:37 UTC on February 20, 1965, the spacecraft impacted the surface of Mare Tranquillitatis at 2.67°N latitude, 24.65°E longitude, transmitting its final half-frame 0.09 seconds before impact from an altitude of approximately 150 meters. In the final twenty-three minutes of flight, Ranger 8 transmitted 7,137 photographs through its six cameras -- two P-chain partial-scan cameras, four F-chain full-scan cameras -- at an aggregate data rate of roughly 1.5 megabits per second, one of the highest-bandwidth spacecraft downlinks in existence at that point in history. The images were received at Goldstone in the Mojave Desert and recorded on both magnetic tape and kinescope film. The mission was a total success. The same spacecraft design had failed catastrophically on Rangers 1 through 6 -- Atlas-Agena restart malfunctions, guidance errors, dead spacecraft, power failures, and cruelest of all the Ranger 6 camera-wiring arc that killed the cameras on a spacecraft that otherwise worked perfectly -- before Ranger 7 finally delivered 4,308 images of Mare Cognitum in July 1964. Ranger 8 nearly doubled that image count. The convergence established at Ranger 7 (degree 33) extended and strengthened at Ranger 8.
+
+The Sea of Tranquility images were not retrospective documentation. They were prescient. Four years, five months, and three days after Ranger 8 impacted the mare, Neil Armstrong piloted Eagle to a landing at 0.67°N latitude, 23.47°E longitude -- approximately seventy kilometers from Ranger 8's impact point, in the same geological feature, on the same basaltic plain, surveyed by the same cameras. The Apollo Site Selection Board evaluated several candidate landing regions in the mid-1960s -- Oceanus Procellarum, Sinus Medii, and several mare areas -- and selected Mare Tranquillitatis on the basis of a combination of smoothness, lighting geometry, communication geometry, and approach trajectory constraints. Ranger 8's 7,137 images were the close-range confirmation that the selection was sound. The spacecraft photographed craters down to a resolution of 1.5 meters per pixel, documenting surface texture, slope angles, crater density, and boulder distribution across the landing zone. Surveyor 5 would later soft-land in Mare Tranquillitatis in September 1967 and confirm the bearing strength of the regolith. Lunar Orbiter missions (1966-1967) would map the sites at even higher resolution. But Ranger 8 was the first spacecraft to look closely at the terrain where humans would eventually walk, and what it saw was navigable. The kamikaze cartographer photographed the future and then disintegrated into a fifteen-meter crater, leaving its last frame as a gift to the mission that would follow.
+
+Combined energy at degree 36: Hendrix at E=6 plus Anna's Hummingbird at E=5 equals eleven -- the engine's new all-time maximum, breaking the previous ceiling of combined ten set at degree 32. The combined-eleven degree may stand as the engine's peak for many degrees to come, because reaching E=6 requires a generational figure, and only two generational figures have been documented so far (Jones at zero, Hendrix at thirty-six). The ceiling has been broken. The question is whether it will be broken again -- and if so, when. The engine synchronizes the maximum with Ranger 8's successful photographic mission, with Anna's Hummingbird's overwintering resident strategy, and with Blues Rock's debut as the genre that arrives when blues meets amplification. All three achievements land on the same degree. All three represent a peak in their own track. Both sides of the paired release converge on the shared structural variable of sustained maximum output under physical constraint, and the cross-sync is not metaphor -- it is the same engineering observation expressed in three media: electric guitar overdriven beyond design parameters, spacecraft camera operating at maximum data rate through minimum link margin, and hummingbird metabolism sustaining four-gram homeostasis at sub-freezing ambient temperatures for months. Each operates at the edge of its operating envelope. Each holds that edge continuously. Each produces something extraordinary from the constraint rather than in spite of it.
+
+The paired symmetry between Hendrix and Ranger 8 runs through the six-element count. Hendrix's Stratocaster has six strings tuned E-A-D-G-B-e (or E-flat when he detuned a half-step for darker voicings), and the low E is the foundation tone of the instrument's harmonic vocabulary. Ranger 8 carried six cameras -- two P-chain, four F-chain -- each tuned to a different focal length and scan rate, each capturing a different slice of the lunar descent profile. Six strings, six cameras. Both systems used multiple tuned elements to capture a complete picture -- one of a landscape, one of a sound. The pairing is structural rather than accidental: both the guitar and the camera array are multi-element instruments whose total output is greater than any individual element could produce, and both rely on the synchronization of their elements to produce the coherent whole. When Hendrix plays "Red House" or "Voodoo Child (Slight Return)," all six strings are present even when only three or four are actively sounding, because the instrument resonates as a unit. When Ranger 8 photographed Mare Tranquillitatis, all six cameras were transmitting simultaneously even when only one was producing the definitive frame, because the mission required the full tuned array. Both sides operate as coordinated ensembles at the E=6 ceiling.
+
+The engine's genre archaeology continues to dig downward through time. Jazz was catalogued first across degrees 0-15 because jazz was the surface-level genre most visible in Seattle's musical history. Then the Jazz compounds opened (16-24), then the Soul and R&B descendants (25-34), then pure Blues at degree 35, and now Blues Rock at degree 36. Rock enters through the Blues because that is how rock entered American music historically -- not through invention but through amplification of an existing form. Hendrix himself said it plainly in interviews: "I don't play any unusual chords -- I play blues and mix it up with what I hear." The Stratocaster, the Marshall amplifier, the Uni-Vibe and the wah pedal and the Fuzz Face were the amplification layer added on top of a twelve-bar blues foundation. "Voodoo Child (Slight Return)" is a twelve-bar blues. "Red House" is a twelve-bar blues. "Hey Joe" is a Billy Roberts blues in the tradition of the chitlin'-circuit guitar heroes Hendrix backed as a teenager. The form is the same. The expression is transformed by a factor of E=6. The parallel to Ranger 8 lands on the same structural principle: familiar technology (television camera, vidicon tube, S-band radio), unprecedented application (a descending spacecraft transmitting at 1.5 megabits per second from 380,000 kilometers), transformative result (the first close-up photographs of an Apollo landing site). Both entities operated at the edge of what their instruments could do, pushing the hardware beyond its design specifications into territory where the output surprised even the engineers. Both are paired at the same degree because they are the same structural event expressed in two different materials.
+
+The engine crosses into territory where the energy ceiling has now been explicitly broken. The preceding decade (degrees 21 through 35) sustained a combined energy of approximately eight to ten, with the ceiling at ten first touched at degree 32. Degree 36 delivers combined eleven. The next several degrees may represent post-peak territory -- the gradient that comes after a generational maximum, comparable to what happened after Jones at degree 0 when the next several degrees (Frisell at 1, Hampton Hawes at 2, the slow build toward Hard Bop and Cool) stepped down from the E=6 ceiling while the engine continued to accumulate depth across other dimensions. The carry-forward assumption is that E=6 will not return for many degrees -- perhaps another thirty-six, perhaps longer -- and that Anna's resident strategy will anchor the hummingbird thread while future Trochilidae entries (Calliope, Black-chinned, Costa's) add taxonomic depth without matching the E=5 peak. Mare Tranquillitatis becomes the engine's first documented Apollo landing site, and future NASA missions will synchronize with the site at Apollo 11 proper (around degree 70 on the current pacing) and with subsequent Apollo landings at Ocean of Storms, Fra Mauro, Hadley Rille, Descartes, and Taurus-Littrow. The paired-release structure is now stable enough to carry the peak, and the carry-forward questions concern what shape the post-peak degrees take.
 
 ## Key Features
 
 | Metric | Part A: Jimi Hendrix | Part B: Anna's Hummingbird |
 |--------|---------------------|-----------------------------|
-| Energy | **E=6** (maximum — first since degree 0) | E=5 (metabolic extremity, display intensity) |
-| Acoustic Element | Electric guitar: feedback, distortion, full frequency spectrum | Metallic chip + dive-display tail-feather aerodynamic buzz |
-| Genre Significance | Blues Rock enters — rock arrives through the blues | Third non-vocal sound mechanism (aerodynamic) |
-| Central District | Supreme export. The visible explosion. | — |
-| NASA Parallel | Hendrix played where music would go = Ranger 8 photographed where humanity would walk | Anna's dive display = Ranger 8's descent: high-altitude approach, maximum output at impact |
-| Scale | Most transformative individual musician in the engine | 4 grams. Overwintering. 40°C in December. |
+| Energy | **E=6** (maximum -- first since Quincy Jones at degree 0, thirty-six degrees ago) | E=5 (metabolic extremity, display intensity, only PNW resident hummingbird) |
+| Acoustic Element | Electric guitar: feedback, distortion, wah filter, full frequency spectrum, multi-channel effects chain | Metallic chip vocalization plus dive-display tail-feather aerodynamic buzz (R4-R5 feather geometry) |
+| Genre / Taxonomic Significance | Blues Rock enters the engine -- rock arrives through the blues, historically paralleled | Third non-vocal sound mechanism (aerodynamic, fluid-dynamic); second Trochilidae; first PNW resident |
+| Geographic Anchor | Central District Seattle -- supreme export; the visible detonation after Jones's invisible infrastructure | Urban and coastal PNW year-round -- Seattle backyards, campus grounds, suburban feeders |
+| NASA Parallel | Hendrix played where music would go = Ranger 8 photographed where humanity would walk | Anna's dive display in the same medium (air) that Ranger 8 traversed at 2.68 km/s on approach |
+| Scale | Most transformative individual musician in engine; career 1962-1970 (eight years); legacy permanent | Four grams; overwintering in Seattle at sub-freezing December temperatures; 40°C body temperature |
+| Structural Firsts | Second E=6 entry; Blues Rock genre debut; Central District apotheosis; new combined-energy maximum | First PNW resident Trochilidae; third non-vocal sound mechanism; metabolic ceiling for engine species |
 
 <details>
 <summary>Full Release Notes -- Click to expand</summary>
 
 ## Part A: Jimi Hendrix -- THE EXPLOSION
 
-### Pass 2 Refinement Summary
+- **E=6 Returns After Thirty-Six Degrees.** The engine's energy scale maxes at E=6, and only two entries reach it: Quincy Jones at degree 0 and Jimi Hendrix at degree 36. Both are Central District products. Both are globally transformative. But their modes are opposite. Jones's E=6 was organizational -- the energy of an invisible infrastructure builder coordinating global productions across decades. Hendrix's E=6 is physical -- the energy of a body interfacing with electricity, feedback, distortion, and the full frequency spectrum of an overdriven Marshall amplifier stack. Two E=6 entries, both CD, both global, operating at completely different scales and in completely different modes. The thirty-six-degree gap is the engine's longest energy-level return interval.
+- **The Central District Apotheosis -- Jones, Charles, Hendrix.** Three Central District names across thirty-six degrees, three modes, three scales. Jones at degree 0 was the infrastructure builder -- the producer whose invisible hand shaped *Thriller*, the *Roots* score, *In the Heat of the Night*. Charles at degree 30 was the synthesizer -- the Genius who fused gospel, blues, country, and jazz across six decades. Hendrix at degree 36 is the detonation -- the guitarist whose four-year professional career from 1966 to 1970 redefined what an electric guitar could do. Infrastructure through synthesis to explosion. Each more visible than the last, each more concentrated in time: Jones across decades, Charles across decades, Hendrix across four years. The focus narrows; the intensity rises to E=6. The Central District's three global names now constitute a documented pattern.
+- **Blues Rock Enters Through the Historical Pathway.** The genre gradient descends through Jazz (0-15) to Jazz compounds (16-24) to Soul and R&B (25-34) to Blues at degree 35 (Robert Cray) to Blues Rock at degree 36 (Hendrix). Rock enters the engine through the Blues because that is how rock entered American music historically. Hendrix IS the hinge: the musician who stood at the exact junction between blues tradition and rock explosion, who played blues changes with rock energy, who sang blues lyrics over distorted power chords. "Red House" is a twelve-bar blues played through feedback. "Voodoo Child (Slight Return)" is a twelve-bar blues played through a wah-wah pedal. The form is preserved; the expression is transformed.
+- **The Frisell-Hendrix Guitar Axis Spans Thirty-Five Degrees.** Bill Frisell at degree 1 and Jimi Hendrix at degree 36 map the guitar's full operational range in the engine -- from ambient contemplation through feedback catastrophe. Same instrument (electric guitar). Same signal chain concept (guitar to effects to amplifier). Maximum divergence in output. Frisell operates within the guitar's natural resonance; Hendrix overdrives the instrument beyond its design parameters. The thirty-five-degree span is the engine's documented maximum divergence on a shared technological platform, and both ends of the axis coexist in the same catalogue.
+- **The Six-String, Six-Camera Cross-Sync.** Hendrix's Stratocaster had six strings tuned E-A-D-G-B-e (or E-flat in his detuned voicings), with the low E as the instrument's harmonic foundation. Ranger 8 carried six cameras in two independent chains -- two P-chain partial-scan and four F-chain full-scan -- each tuned to a different focal length and scan rate. Six strings, six cameras. Both systems used multiple tuned elements synchronized as an ensemble to produce output greater than any individual element could. The pairing is structural rather than accidental, and it lands on the shared E=6 designation that marks both the maximum energy level in the engine and the low-E string of the Stratocaster.
+- **The Chitlin' Circuit Apprenticeship (1962-1966).** Before Hendrix was Hendrix, he was James Marshall Hendrix, an itinerant rhythm guitarist backing Little Richard, the Isley Brothers, King Curtis, Wilson Pickett, Sam Cooke, Curtis Knight, and a dozen other R&B headliners on the Black-club circuit the segregation-era South referred to as the chitlin' circuit. Four years of apprenticeship across hundreds of bar-band gigs, absorbing the blues idiom at its source and the showmanship of the soul revue. The runway was long. The launch, when it came in 1966 with the Jimi Hendrix Experience, compressed the apprenticeship into four years of concentrated output: *Are You Experienced*, *Axis: Bold as Love*, *Electric Ladyland*, and the posthumous recordings. Four years of public work for forty years of apprenticeship afterward.
+- **The Marshall Stack and the Uni-Vibe -- Amplification as Instrument.** Hendrix did not play a Stratocaster in isolation; he played a full signal chain -- guitar, Fuzz Face, Uni-Vibe, wah pedal, Octavia, Marshall amplifier, speaker cabinet. Each element was a tuning parameter. The Fuzz Face compressed dynamic range and added harmonic overtones; the Uni-Vibe cycled phase and pitch at low frequencies; the Marshall stack's preamp saturation shaped the attack envelope. The signal chain is the instrument. Hendrix's innovations were as much about the chain's configuration as about the playing technique, and Eddie Kramer's engineering at Olympic Studios and the Record Plant captured the chain in a way that preserved the live sound for permanent recording. The instrument was transformed by the recording technology in parallel with the way the technology was transformed by the instrument.
+- **Al Hendrix and the Left-Handed Guitar.** The dedication is biographical. Al Hendrix worked maintenance and landscape jobs for decades in Central District Seattle to support his son. When Jimi was sixteen, Al bought him a used acoustic guitar; when Jimi proved left-handed, Al bought him a right-handed electric that Jimi restrung and played upside down, becoming the iconic visual signature of his performing style. The gift made the career possible. The father's forty years of wage labor enabled the son's four years of global reinvention. Al outlived Jimi by thirty-two years, passing away on April 17, 2002, at the age of eighty-two. The release dedicates degree 36 to him rather than to Jimi himself because the dedication tracks the debt: Jimi is the degree; Al is the person the degree honors.
 
-Four research sections on Hendrix as the engine's maximum-energy event, the Central District's apotheosis, and the Jones-Hendrix axis:
+## Part B: Anna's Hummingbird -- THE RESIDENT AND THE DIVE
 
-**1. E=6 Returns — Maximum Energy After Thirty-Six Degrees.** The engine's energy scale maxes at E=6. Only two entries reach it: Jones at degree 0 and Hendrix at degree 36. Both are Central District products. Both are globally transformative. But their modes are opposite. Jones's E=6 was organizational — the energy of an invisible infrastructure builder coordinating global productions across decades. Hendrix's E=6 is physical — the energy of a body interfacing with electricity, feedback, distortion, and the full frequency spectrum of an overdriven Marshall amplifier stack. Two E=6 entries, both CD, both global, operating at completely different scales and in completely different modes.
+- **The Only PNW Resident Hummingbird.** Rufous at degree 35 is a migrant -- a summer breeder that departs for Mexico in autumn and returns in spring. Anna's is the resident -- the only Trochilidae species that overwinters in the Pacific Northwest. At four grams. In December. In Seattle. Maintaining a core body temperature of 40 degrees Celsius when the ambient air drops below freezing. The metabolic achievement is the most extreme thermoregulatory feat in the engine's species roster, and it exceeds anything documented in the preceding thirty-five degrees.
+- **Torpor as the Mechanism.** The resident strategy is enabled by nightly torpor: a controlled, hours-long drop in core body temperature and heart rate that reduces metabolic expenditure by as much as ninety-five percent. Anna's entering torpor drops core temperature from 40°C to as low as 9°C and heart rate from over a thousand beats per minute during active flight to roughly fifty beats per minute at rest. The bird approaches death each night and returns from it each morning. The mechanism is physiologically comparable to hibernation but operates on a circadian rather than seasonal cycle. Without torpor, overwintering in Seattle would be metabolically impossible at four grams.
+- **The Dive Display as Aerodynamic Sound Production.** The male Anna's Hummingbird climbs thirty or more meters above a display target and plunges at speeds exceeding twenty-seven meters per second. At the bottom of the dive, the outer tail feathers R4 and R5 are spread laterally, and airflow across their modified vane structure produces a sharp, brief "chirp" -- an aerodynamic sound rather than a vocalization. Christopher Clark and Teresa Feo documented the mechanism in 2008 using high-speed video and wind-tunnel replicas. The physics is aeroelastic flutter, the same branch that produces airfoil buzz, clarinet reed excitation, and the oscillation that destroyed the Tacoma Narrows Bridge in 1940.
+- **Three Non-Vocal Sound Mechanisms Now Documented.** The engine's non-vocal sound palette is now three-dimensional. Northern Flicker bill-drumming at degree 22 uses percussion (solid-on-solid mechanics). Rufous wingbeat thrum at degree 35 uses continuous aerodynamic oscillation (forty-to-sixty Hz wing cycles). Anna's dive-buzz at degree 36 uses transient aerodynamic singleton at terminal velocity. Three mechanisms, three branches of physics, three independent instances -- percussion, oscillation, transient aerodynamics -- establish non-syrinx acoustic communication as a durable engine category rather than a one-off novelty.
+- **The Rufous-Anna's Pair as Strategy Axis.** The Rufous-Anna's pair (degrees 35-36) now parallels the Frisell-Hendrix pair (degrees 1-36): different strategies on the same instrument, maximum divergence at shared scale. Rufous migrates six thousand kilometers round-trip; Anna's stays. Rufous is aggressive and territorial in breeding; Anna's is territorial year-round. Rufous wing-thrum is continuous aerodynamic oscillation; Anna's dive-buzz is a transient singleton. Two species in the same family, two strategies on the same body plan. The pair documents Trochilidae's operational range.
+- **Urban Expansion and the Northward March.** Anna's Hummingbird was historically restricted to coastal California and Baja California. Over the twentieth century -- particularly after the 1950s -- the species expanded northward into Oregon, Washington, British Columbia, and southern Alaska, aided by the proliferation of ornamental flowering plants (camellia, flowering currant, fuchsia), hummingbird feeders, and urban microclimates. Seattle's backyard feeders now support year-round Anna's populations that did not exist there before the 1970s. The species is documenting a range-expansion event in real time, and the engine catches it at degree 36.
+- **The Combined-Eleven Ceiling.** E=6 (Hendrix) plus E=5 (Anna's) equals eleven -- the engine's new all-time combined-energy maximum, breaking the previous ceiling of ten set at degree 32. The ceiling represents the sum of maximum individual contributions, and breaking it requires both a generational figure on Part A and a species operating at physiological extremity on Part B. Degree 36 delivers both simultaneously. Combined eleven may stand as the engine's peak for many degrees to come, because E=6 on Part A and E=5 on Part B are each rare; their simultaneous occurrence on the same degree is doubly so.
+- **Four Grams and the Fairy Slipper Orchid.** The NASA Organism pairing is *Calypso bulbosa* -- the Fairy Slipper orchid, the rarest and most delicate ground-layer orchid of old-growth Pacific Northwest forest. The pairing is explicitly scale-based: four grams of hummingbird and one orchid petal. Both entities are at the minimum scale of their respective kingdoms and both achieve the extraordinary within that scale. The orchid flowers for ten days each spring, pollinated by naive queen bumblebees fooled by the lack of a true nectar reward. The hummingbird overwinters at four grams through sub-freezing nights. Both are extreme solutions to scale-limited existence, and both are paired in the same dual entry.
 
-The thirty-six-degree gap between E=6 appearances is the engine's longest energy-level return interval. The E=6 level is reserved for the transformative — the figures who don't merely excel within a genre but redefine the possibility space for everyone who follows. Jones redefined what a producer could be. Hendrix redefined what a guitar could do. Both redefinitions are permanent.
+## Retrospective
 
-**2. The Central District's Apotheosis — Jones, Charles, Hendrix.** Three Central District names at three scales:
+### What Worked
 
-| Degree | Artist | Mode | E | Central District Role |
-|--------|--------|------|---|----------------------|
-| 0 | Quincy Jones | Invisible architect | 6 | The export who built the world's infrastructure |
-| 30 | Ray Charles | Visible Genius | 4 | The voice who fused everything |
-| **36** | **Jimi Hendrix** | **Visible explosion** | **6** | **The force who redefined the instrument** |
+- **The paired E=6 / E=5 convergence delivered a landmark without forcing the cross-sync.** Hendrix's maximum energy designation and Anna's Hummingbird's metabolic extremity landed on the same degree organically; both entries were next up in their respective Pass 2 sequences, and the combined-eleven ceiling emerged from the arithmetic rather than from pre-planning. Landmark degrees that assemble themselves from the calendar are stronger than landmark degrees that require scheduling.
+- **The six-string, six-camera cross-sync reads as structural rather than decorative.** Hendrix's Stratocaster has six strings; Ranger 8 carried six cameras. Both systems used multiple tuned elements synchronized as an ensemble to produce output greater than any individual element could. The cross-sync is not invented; the six-element count is a genuine shared structural feature, and the engine's paired-track discipline surfaced it without the writer needing to strain the parallel.
+- **The Frisell-Hendrix axis mirrors the Rufous-Anna's axis and both mirror the Jones-Hendrix axis.** Three thirty-five-degree spans now document maximum divergence on shared platforms: guitar (Frisell contemplative / Hendrix explosive), hummingbird (Rufous migrant / Anna's resident), and Central District E=6 (Jones infrastructure / Hendrix detonation). Three parallel axes across the same thirty-six-degree window confirm that the engine's pairing discipline is producing consistent cross-track structure rather than one-off coincidences.
+- **The dive-display physics citation strengthened the Part B essay.** The 2008 Clark-Feo research on hummingbird aeroelastic tail-feather sound was cited explicitly, elevating the acoustic claim from field-guide level to primary-literature level. This is a standard the preceding degree (Rufous wingbeat thrum) should have met but did not; degree 36 corrects the gap.
+- **The Al Hendrix dedication reframed the release.** The first draft dedicated degree 36 to Jimi Hendrix himself, which is both obvious and redundant -- the degree IS Jimi Hendrix. Shifting the dedication to Al Hendrix, the father who bought the first guitar, reframes the release as a gift from one generation to the next and acknowledges the labor infrastructure that makes exceptional careers possible. Biographical dedications of this kind work when they surface a less-visible figure whose contribution is structurally essential.
 
-Jones → Charles → Hendrix: the Central District's three global names across 36 degrees. The progression: infrastructure (Jones) → synthesis (Charles) → explosion (Hendrix). Organization → fusion → detonation. Each more visible than the last. Each more concentrated: Jones operated across decades and dozens of artists. Charles operated across genres. Hendrix operated across four years (1966-1970) and one instrument. The focus narrows. The intensity increases. E=6.
+### What Could Be Better
 
-**3. Blues Rock and the Genre Gradient's Steepest Descent.** The genre progression at degree 36:
-
-| Phase | Degrees | Genre | Distance from Jazz |
-|-------|---------|-------|-------------------|
-| Pure Jazz | 0-15 | Jazz | 0 |
-| Jazz Compounds | 16-24 | Jazz/X | 1 step |
-| Soul/R&B | 25-34 | Neo-Soul, R&B | 2 steps |
-| Blues | 35 | Blues | 3 steps |
-| **Blues Rock** | **36** | **Blues Rock** | **4 steps** |
-
-Rock enters through the blues — the same historical pathway. Hendrix IS the hinge: the musician who stood at the exact junction between blues tradition and rock explosion, who played blues changes with rock energy, who sang blues lyrics over distorted power chords. The genre gradient does not jump — it descends step by step. Jazz → Soul → R&B → Blues → Blues Rock. Each step historically and structurally necessary.
-
-The Frisell-Hendrix axis (degrees 1 and 36) maps the guitar's full range in the engine: Frisell's contemplative ambient loops → Hendrix's feedback explosions. Same instrument (electric guitar), same signal chain concept (guitar → effects → amplifier), maximum divergence in output. Thirty-five degrees separate the quietest guitar in the engine from the loudest.
-
-**4. Ranger 8 Photographs the Future.** Ranger 8's 7,137 images of the Sea of Tranquility are not retrospective documentation — they are prescient. Four years before Apollo 11, Ranger 8 photographed the landing site at resolution sufficient to identify terrain hazards, crater distributions, and surface characteristics. The spacecraft that was designed to crash into the Moon produced data that would enable humans to walk on it. Hendrix produced music that would define the future of rock guitar for sixty years. Both operated in a brief window (Ranger 8's final 23 minutes; Hendrix's 1966-1970 peak) and produced output that outlasted the window by orders of magnitude. The brief transmission. The permanent impact.
-
----
-
-## Part B: Anna's Hummingbird -- THE DIVE AND THE RESIDENT
-
-### Pass 2 Refinement Summary
-
-Four research sections on the dive display, the resident strategy, the hummingbird pair, and non-vocal sound mechanisms:
-
-**1. The Dive Display — Aerodynamic Sound Production.** The male Anna's Hummingbird climbs 30+ meters above the display target, then plunges in a steep dive at speeds exceeding 27 m/s. At the bottom of the dive, the outer tail feathers (R4 and R5) are spread, and the airflow over their modified vane structure produces a loud, brief "chirp" or "squeak" — an aerodynamic sound, not a vocalization. The sound is produced by the interaction between the bird's velocity and its feather geometry. The physics:
-
-| Non-Vocal Sound | Degree | Mechanism | Physics |
-|----------------|--------|-----------|---------|
-| Flicker bill-drumming | 22 | Bill on resonant wood | Percussion (solid-on-solid) |
-| Rufous wing-thrum | 35 | Wing-beat frequency modulation | Continuous mechanical (oscillation) |
-| **Anna's dive-buzz** | **36** | **Tail-feather aerodynamic** | **Aerodynamic (fluid dynamics)** |
-
-Three mechanisms: percussion, oscillation, aerodynamics. Three branches of physics: solid mechanics, oscillatory mechanics, fluid dynamics. The engine's non-vocal sound palette is now three-dimensional.
-
-**2. The Only PNW Resident Hummingbird.** Rufous (degree 35) is a migrant — summer breeder, winter departure. Anna's is the RESIDENT — the only hummingbird that overwinters in the Pacific Northwest. At 4 grams. In December. Maintaining 40°C body temperature when ambient temperatures drop below freezing. The metabolic achievement is the most extreme thermoregulatory feat in the engine's species roster.
-
-The Rufous-Anna's pair (degrees 35-36) parallels the Frisell-Hendrix pair (degrees 1-36): different strategies on the same instrument. The Rufous migrates (leaves when conditions deteriorate). Anna's stays (overwinters through the worst). Frisell is contemplative (works within the guitar's natural resonance). Hendrix is explosive (overdrives the guitar beyond its design parameters). The migrant and the resident. The contemplative and the explosive. Two ways to operate the same basic platform.
-
-**3. Combined Energy 11 — New All-Time Maximum.** E=6 (Hendrix) + E=5 (Anna's) = combined 11. The previous maximum was combined 10 at degree 32. The engine's energy ceiling rises:
-
-| Degree | Combined Energy | Event |
-|--------|----------------|-------|
-| 0 | 6+? = varies | Jones E=6 (first release) |
-| 21-30 | 8 (4+4) | The decade of maximum sustained energy |
-| 32 | 10 (5+5) | Previous ceiling |
-| **36** | **11 (6+5)** | **New all-time maximum** |
-
-The ceiling has been broken. Combined 11 may stand as the engine's peak for many degrees — E=6 is the maximum, and reaching it requires a generational figure.
-
-**4. Ranger 8's Extended Success — The Convergence Holds.** Ranger 7 proved the cameras worked (4,308 images). Ranger 8 proved the success was not accidental (7,137 images — nearly double). The convergence extends. The same pattern: Pioneer 4 (degree 5) proved escape velocity, and later Pioneer missions extended the success. Mercury's later flights extended the orbital capability. Ranger 8 extends the photographic capability. The convergence is not a one-time event — it is the establishment of a new baseline from which further progress is made.
-
-The Sea of Tranquility images: the future Apollo 11 landing site photographed at close range, four years before the landing. Ranger 8 didn't just succeed — it was prescient. The photographs guided the selection of the landing site that would become the most famous place in the solar system. Seven failures, then photographs of the future.
-
-### Retrospective: Degree 36 Patterns Established
-
-1. **E=6 returns after thirty-six degrees.** The engine's maximum energy level — reserved for the globally transformative. Jones (0) and Hendrix (36). Both Central District. Both permanently redefined their fields.
-
-2. **Combined energy 11 is the new ceiling.** Breaking the previous 10 at degree 32. May stand as the engine's peak for many degrees.
-
-3. **Three Central District global names documented.** Jones (0), Charles (30), Hendrix (36). The neighborhood's contribution to American music spans from invisible infrastructure to visible explosion.
-
-4. **Three non-vocal sound mechanisms established.** Percussion (22), oscillation (35), aerodynamics (36). Three branches of physics. The engine's non-vocal palette is three-dimensional.
-
-5. **Blues Rock enters through the historical pathway.** Jazz → Soul → R&B → Blues → Blues Rock. Rock arrives through the blues, the same way it entered American music. Hendrix IS the hinge.
-
-6. **The Frisell-Hendrix guitar axis spans 35 degrees.** Contemplative loops (degree 1) → feedback explosions (degree 36). Same instrument. Maximum divergence.
-
-7. **Ranger's extended success.** 7,137 images after 4,308. The convergence extends. The success is not accidental.
-
-8. **Hummingbird pair complete.** Rufous (migrant, 35) and Anna's (resident, 36). Two strategies on one platform.
+- **The *Electric Ladyland* and Band of Gypsys discographic detail is compressed.** The Part A essay sketches the four-year career arc but does not dedicate section-level depth to the individual studio albums. A future refinement could break out each album as a sub-entry with release date, label, session engineers (Eddie Kramer is essential here), and two or three representative tracks, elevating the essay from bibliographical sketch to proper discography.
+- **The Monterey Pop Festival (June 1967) and Woodstock (August 1969) performances are mentioned but not situated.** Both festivals were inflection points for Hendrix's public reception -- Monterey for the American debut and the burning guitar, Woodstock for the Star-Spangled Banner -- and both deserve dedicated treatment. A future refinement could dedicate a section to the festival appearances as performance art on the cultural level.
+- **The Fairy Slipper orchid pairing is asserted rather than developed.** The scale-based analogy between four-gram hummingbird and single-petal orchid is introduced but not elaborated. *Calypso bulbosa*'s nectar-reward deception of naive queen bumblebees, its old-growth forest habitat requirement, and its declining conservation status all warrant their own sub-section. The organism pairing is under-used as currently written.
+- **The Ranger program failure history is mentioned but not enumerated in the README.** The six Ranger failures preceding Ranger 7 are referenced as a single phrase; the research essay documents each failure individually. The README could absorb a failure-enumeration table (Ranger 1 through Ranger 6, one line each) to strengthen the success-after-failure narrative that degrees 33, 35, and 36 are collectively building.
+- **The Apollo 11 landing-site geometry is under-quantified.** Ranger 8 impacted at 2.67°N, 24.65°E; Apollo 11 landed at 0.67°N, 23.47°E; the separation is approximately seventy kilometers. The seventy-kilometer figure is cited but not mapped against the lunar surface diameter (3,474 km) or the Apollo landing ellipse (roughly 20 km long-axis). A future refinement could dedicate a paragraph to the geometric relationship between Ranger 8's impact point and Apollo 11's landing ellipse.
 
 ### Carry-Forward Items from Degree 36
 
-- **E=6: Two instances total.** Jones (0) and Hendrix (36). The next E=6 — if it comes — will be another generational figure.
-- **Combined 11: New ceiling.** May stand for many degrees.
-- **Central District triple:** Jones (0), Charles (30), Hendrix (36). Three global names, three modes, three scales.
-- **Non-vocal sounds: Three mechanisms.** Percussion, oscillation, aerodynamics. Future mechanisms will extend the palette.
-- **Blues Rock: Rock enters the engine.** The genre gradient may continue steepening — pure rock, hard rock, or divergent genres ahead.
-- **Hummingbird pair: COMPLETE.** Rufous (migrant) + Anna's (resident). Two Trochilidae.
-- **Ranger extended success: Active.** Ranger 9 may follow at a future degree, completing the program's success arc.
-- **Guitar axis: 35 degrees.** Frisell (1) → Hendrix (36). The instrument's full range documented. Future guitarists will fall between these poles.
+- **E=6: Two instances documented.** Quincy Jones at degree 0 and Jimi Hendrix at degree 36. The next E=6 -- if and when it comes -- will be another generational figure operating at a similar scale of cultural transformation. The carry-forward assumption is that E=6 will not return for many degrees, possibly another thirty-six or longer.
+- **Combined-eleven ceiling is the new engine maximum.** The previous ceiling was combined ten at degree 32. Breaking it required E=6 on Part A and E=5 on Part B simultaneously. May stand for many degrees.
+- **Central District triple is documented.** Jones at 0, Charles at 30, Hendrix at 36. Three global names from one Seattle neighborhood, three modes (infrastructure / synthesis / detonation), three scales. Future Central District entries will add depth behind the trio rather than extend it.
+- **Non-vocal sound mechanisms: Three independent instances.** Percussion (Flicker at 22), continuous oscillation (Rufous at 35), transient aerodynamic (Anna's at 36). The category is now durable. Future non-syrinx acoustic entries (Grouse drumming, Snipe winnowing, Ruffed Grouse courtship) can slot into the existing ledger.
+- **Blues Rock: Rock has entered the engine.** The genre gradient may continue steepening through Hard Rock, Proto-Metal, and divergent genres ahead, or it may return to Soul/R&B descendants. Carry-forward question: does the engine continue the rock trajectory or revert to the preceding genre neighborhood?
+- **Hummingbird pair: Complete.** Rufous (migrant, degree 35) and Anna's (resident, degree 36). Both Trochilidae. Both at E=5. Two strategies on one body plan. Future hummingbirds (Calliope, Black-chinned, Rufous return, Costa's) will add taxonomic depth without resetting the strategy axis.
+- **Ranger program: Extended success.** Ranger 7 (4,308 images at degree 33) plus Ranger 8 (7,137 images at degree 36) equals 11,445 Ranger photographs total. Ranger 9 (Alphonsus crater, March 1965) may appear at a future degree to close the program on a trio of successes after the six failures.
+- **Apollo site survey: First Apollo-relevant degree.** Ranger 8 surveyed the Apollo 11 landing site four years before the landing. The engine now carries forward an Apollo site-survey thread that will intersect with Apollo 11 itself at approximately degree 70 and with subsequent Apollo landings at later degrees.
 
 </details>
 
-## Engine Position
+## Lessons Learned
 
-```
-v1.49.532  = NASA 1.32  + degree 31  Pass 2  ✓
-v1.49.533  = NASA 1.33  + degree 32  Pass 2  ✓
-v1.49.534  = NASA 1.34  + degree 33  Pass 2  ✓  (Ranger 7, the photographs)
-v1.49.535  = NASA 1.35  + degree 34  Pass 2  ✓
-v1.49.536  = NASA 1.36  + degree 35  Pass 2  ✓
-v1.49.537  = NASA 1.37  + degree 36  Pass 2  ← THIS RELEASE
-v1.49.538  = NASA 1.38  + degree 37  Pass 2  ← next
-```
+1. **E=6 is reserved for generational transformation.** The engine's maximum energy level has appeared twice in thirty-seven releases: Quincy Jones at degree 0 and Jimi Hendrix at degree 36. Both Central District Seattle. Both permanently redefined their fields. The thirty-six-degree gap is the engine's longest energy-level return interval, and the carry-forward expectation is that E=6 will remain rare. The lesson is that maximum energy is not a thing to distribute evenly; it is reserved for the figures who transform the possibility space for everyone who follows.
 
-## Files
+2. **Combined energy eleven is the new engine ceiling.** The previous ceiling was combined ten at degree 32. Breaking it required E=6 on Part A (a rare event) and E=5 on Part B (uncommon) simultaneously (doubly so). The ceiling will likely stand for many degrees because reaching it requires both sides of the paired release to operate at their peak at the same time. Future planning should treat combined-eleven as the ceiling rather than as a routine milestone.
 
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/036-jimi-hendrix/pass2-refinement.md` | Pass 2 | ~1,300 |
-| `SPS/research/releases/036-annas-hummingbird/pass2-refinement.md` | Pass 2 | ~900 |
-| `docs/release-notes/v1.49.537/README.md` | Release Note | — |
+3. **The Central District produces global names across three modes.** Jones (infrastructure, degree 0), Charles (synthesis, degree 30), Hendrix (detonation, degree 36). Three modes, three scales, three global names from the same neighborhood. The lesson is that a single geographic cluster can support multiple mode types without the modes collapsing into each other, and the engine's narrative is stronger for documenting the distinction rather than treating the three as variants of a single Central District export story.
 
-## Emerging Patterns at Degree 36
+4. **Non-vocal sound mechanisms are three-dimensional.** Percussion (Flicker 22), continuous oscillation (Rufous 35), transient aerodynamic (Anna's 36). Three independent mechanisms, three branches of physics. The engine's non-syrinx acoustic communication category is now durable and will absorb future entries (Grouse drumming, Snipe winnowing, Ruffed Grouse wing-clap) without straining the category boundaries. The lesson is that physical-mechanism categories should be built from independent instances rather than asserted from a single case.
 
-| Pattern | Status | Degree 36 Value |
-|---------|--------|-----------------|
-| S36 Artists | 37 documented (degrees 0-36) | Jimi Hendrix -- E=6 maximum, Blues Rock, Central District supreme export |
-| SPS Species | 37 documented (degrees 0-36) | Anna's Hummingbird -- only PNW resident, dive-display, third non-vocal mechanism |
-| NASA Missions | 37 aligned (1.0-1.36) | Ranger 8 -- 7,137 Sea of Tranquility images, photographing Apollo's future |
-| Energy Ceiling | E=6 returns / combined 11 | First E=6 since Jones (0); new all-time combined max breaks previous 10 |
-| CD Global Names | 3 documented | Jones (0) infrastructure → Charles (30) synthesis → Hendrix (36) explosion |
-| Jones-Hendrix Axis | ESTABLISHED | Same neighborhood, 36-degree span, opposite modes, both permanently transformative |
-| Frisell-Hendrix Axis | ESTABLISHED (35 degrees) | Guitar's full range: contemplative loops → feedback explosions |
-| Non-Vocal Sound Mechanisms | 3 distinct physics | Percussion (22) + Oscillation (35) + Aerodynamics (36) -- three branches |
-| Hummingbird Pair | COMPLETE | Rufous migrant (35) + Anna's resident (36) -- two strategies, one platform |
-| Ranger Extended Success | 2 flights, 11,445 images | Ranger 7 (4,308) + Ranger 8 (7,137) -- convergence is not accidental |
-| Genre Gradient | Rock enters via blues | Jazz → Jazz compounds → Soul/R&B → Blues → Blues Rock (4 steps from origin) |
-| Metabolic Extremity | 4 g overwintering @ 40°C | Anna's Hummingbird -- engine's most extreme thermoregulatory feat |
+5. **Rock enters American music through the Blues, and the engine should track that pathway explicitly.** Jazz → Jazz compounds → Soul/R&B → Blues → Blues Rock is the genre gradient the engine has traversed across thirty-six degrees, and each step is historically and structurally necessary. Skipping steps would have weakened the gradient; forcing non-historical orderings would have broken the archaeology. The lesson is that genre sequencing should respect the underlying historical pathway, and the engine's genre archaeology continues to dig downward through time.
 
-## Pattern Tables at Degree 36
+6. **Axes of maximum divergence on shared platforms strengthen the catalogue.** The Frisell-Hendrix guitar axis (degrees 1 and 36) documents the instrument's full operational range from contemplative to explosive. The Rufous-Anna's hummingbird axis (degrees 35 and 36) documents Trochilidae's full strategy range from migrant to resident. The Jones-Hendrix Central District axis (degrees 0 and 36) documents E=6 from invisible architect to visible detonation. Three axes, three platforms, each operating across spans of twenty or more degrees. The lesson is that paired release discipline should surface these axes explicitly rather than letting them remain implicit in the catalogue.
 
-### E=6 Appearances
+7. **Ranger 8 photographed the future, and the engine should carry forward Apollo site-survey threading.** The mission's 7,137 images of Mare Tranquillitatis surveyed the Apollo 11 landing site four years, five months, and three days before Eagle touched down seventy kilometers from Ranger 8's impact crater. Ranger 8 is the first Apollo-relevant degree in the engine. Future NASA missions through Surveyor, Lunar Orbiter, Apollo 8, and Apollo 11 proper will intersect with the thread. The lesson is that mission-to-mission temporal precedence should be tracked as a structural feature of the NASA track, not just as trivia.
 
-| Degree | Artist | Mode | Central District | Field Redefined |
-|--------|--------|------|-----------------|----------------|
-| 0 | Quincy Jones | Invisible architect | Yes | Music production |
-| **36** | **Jimi Hendrix** | **Visible explosion** | **Yes** | **Electric guitar** |
+8. **Dedications track debts rather than names.** The first draft of degree 36 dedicated the release to Jimi Hendrix himself, which is redundant because the degree IS Jimi Hendrix. Shifting the dedication to Al Hendrix -- the father who bought the first guitar, who worked maintenance and landscape jobs for decades, who enabled the career by providing the runway -- reframed the release as a gift from one generation to the next. The lesson is that dedications should surface the less-visible structural contributor rather than repeating the visible central figure.
 
-### Central District Global Names
+9. **The six-element count is a genuine cross-track structural feature.** Hendrix's Stratocaster has six strings; Ranger 8 carried six cameras. Both systems used multiple tuned elements synchronized as an ensemble to produce coherent output greater than any individual element. The cross-sync is not invented; the count is a genuine shared feature and it lands on the E=6 designation that already marks both the engine's maximum energy level and the Stratocaster's low-E foundation string. The lesson is that structural cross-syncs should be surfaced when the underlying arithmetic is genuine, not when the parallel is merely metaphorical.
 
-| Degree | Artist | Genre | Mode | Scale |
-|--------|--------|-------|------|-------|
-| 0 | Quincy Jones | Jazz/Pop | Infrastructure | Decades, dozens of artists |
-| 30 | Ray Charles | R&B/Jazz | Synthesis | Decades, all genres |
-| **36** | **Jimi Hendrix** | **Blues Rock** | **Explosion** | **4 years, one instrument** |
-
-### Non-Vocal Sound Mechanisms
-
-| Degree | Species | Mechanism | Physics |
-|--------|---------|-----------|---------|
-| 22 | Northern Flicker | Bill-drumming on resonant wood | Percussion (solid-on-solid) |
-| 35 | Rufous Hummingbird | Wing-beat frequency modulation | Oscillation (continuous mechanical) |
-| **36** | **Anna's Hummingbird** | **Tail-feather dive-buzz** | **Aerodynamics (fluid dynamics)** |
-
-### Guitar Axis
-
-| Degree | Guitarist | Style | Energy | Deployment |
-|--------|-----------|-------|--------|-----------|
-| 1 | Bill Frisell | Ambient loops, contemplative | E=3 | Within natural resonance |
-| **36** | **Jimi Hendrix** | **Feedback, distortion, explosions** | **E=6** | **Beyond design parameters** |
-
-### Hummingbird Pair
-
-| Degree | Species | Strategy | Sound Production | Residency |
-|--------|---------|----------|-----------------|-----------|
-| 35 | Rufous Hummingbird | Migrant (summer only) | Wing-thrum (oscillation) | Seasonal |
-| **36** | **Anna's Hummingbird** | **Resident (year-round)** | **Tail-feather dive-buzz (aerodynamic)** | **Permanent** |
+10. **Four-gram overwintering is the engine's current metabolic ceiling.** Anna's Hummingbird maintains forty degrees Celsius core body temperature at four grams through Seattle's sub-freezing December using nightly torpor as the enabling mechanism. No other species in the engine's roster operates this close to the metabolic edge for this long. The lesson is that metabolic-extremity ledgers should be tracked explicitly; future species at this body-mass scale (Calliope Hummingbird, Black-chinned Hummingbird, Bushtit winter aggregation) will be compared against this benchmark.
 
 ## Cross-References
 
 | Thread | Degree 36 Entity | Role |
 |--------|-----------------|------|
-| S36 | Jimi Hendrix | Artist — E=6 maximum, Blues Rock, Central District supreme export |
-| SPS | Anna's Hummingbird | Species — only PNW resident hummingbird, dive-display, third non-vocal sound |
-| NASA | Ranger 8 | Mission — 7,137 images of Sea of Tranquility, photographing Apollo's future |
-| Jones-Hendrix | Degrees 0 and 36 | The E=6 axis: invisible architect ↔ visible explosion |
-| Jones-Charles-Hendrix | Degrees 0, 30, 36 | Three Central District global names: infrastructure → synthesis → detonation |
-| Frisell-Hendrix | Degrees 1 and 36 | Guitar axis: contemplative loops ↔ feedback explosions (35-degree span) |
-| Energy | Combined 11 | New all-time maximum (E=6 + E=5), breaking 10 at degree 32 |
-| Non-Vocal Sounds | Three mechanisms | Percussion (22) → Oscillation (35) → Aerodynamics (36) |
-| Ranger | Extended success | 7,137 images (Ranger 8) after 4,308 (Ranger 7) — convergence extends |
-| Hummingbird | Pair complete | Rufous migrant (35) + Anna's resident (36) |
-| Genre | Blues Rock | Rock enters through blues: Jazz → Soul → R&B → Blues → Blues Rock |
-| Degree 35→36 | Blues → Blues Rock | Transition: pure blues → the hinge where rock begins |
-| Degree 36→37 | Hendrix → Post-peak | Transition: after E=6, the engine enters post-maximum territory |
+| S36 | Jimi Hendrix | Artist -- E=6 maximum, Blues Rock debut, Central District supreme export, second E=6 after Jones |
+| SPS | Anna's Hummingbird (*Calypte anna*) | Species -- only PNW resident hummingbird, dive-display aerodynamic buzz, third non-vocal sound mechanism |
+| NASA | Ranger 8 | Mission -- 7,137 images of Sea of Tranquility; Apollo 11 landing-site survey four years before landing |
+| NASA Organism | *Calypso bulbosa* | Fairy Slipper orchid -- rarest ground-layer PNW orchid; paired at four-gram scale with hummingbird |
+| Jones-Hendrix axis | Degrees 0 and 36 | The E=6 axis: invisible architect ↔ visible detonation; both Central District; both global |
+| Jones-Charles-Hendrix triple | Degrees 0, 30, 36 | Three Central District global names: infrastructure → synthesis → detonation across three modes |
+| Frisell-Hendrix guitar axis | Degrees 1 and 36 | Guitar axis: contemplative loops ↔ feedback explosions; thirty-five-degree span; max divergence |
+| Rufous-Anna's Trochilidae pair | Degrees 35 and 36 | Hummingbird pair: migrant ↔ resident; same body plan, opposite strategies |
+| Energy ceiling | Combined 11 (E=6 + E=5) | New all-time maximum; breaks previous ten set at degree 32; may stand for many degrees |
+| Non-vocal sound mechanisms | Three branches documented | Percussion (22) → continuous oscillation (35) → transient aerodynamic (36); three branches of physics |
+| Ranger program | Extended success | 4,308 (Ranger 7, degree 33) + 7,137 (Ranger 8, degree 36) = 11,445 Ranger photographs total |
+| Apollo-site survey thread | First degree | Ranger 8 photographs Apollo 11 landing site four years before Eagle lands seventy km away |
+| Genre gradient | Blues Rock enters | Jazz → Jazz compounds → Soul/R&B → Blues (35) → Blues Rock (36); rock arrives through blues |
+| Al Hendrix dedication | Central District father | Biographical dedication rather than structural; maintenance and landscape labor enabled the career |
+| Chitlin' circuit apprenticeship | 1962-1966 | Four years backing Little Richard, Isley Brothers, King Curtis, Curtis Knight on Black-club circuit |
+| Clark-Feo 2008 paper | Primary literature | Hummingbird aeroelastic tail-feather sound production; wind-tunnel replicas confirmed mechanism |
+| Previous degree | [v1.49.536](../v1.49.536/) | Degree 35 -- Robert Cray blues root + Rufous Hummingbird + Mariner 4 Mars flyby |
+| Next degree | [v1.49.538](../v1.49.538/) | Degree 37 -- post-peak continuation; Trochilidae thread context |
+| Chapter 00 Summary | [chapter/00-summary.md](chapter/00-summary.md) | Chapter-scale summary excerpt |
+| Chapter 03 Retrospective | [chapter/03-retrospective.md](chapter/03-retrospective.md) | Chapter-scale retrospective with numbered lessons |
+| Chapter 99 Context | [chapter/99-context.md](chapter/99-context.md) | Release metadata and parse confidence |
+| Research essay | [NASA 1.37 research.md](../../../www/tibsfox/com/Research/NASA/1.37/research.md) | Ranger 8 deep research page (live site source, Summary essay primary) |
+| Research essay: organism | [NASA 1.37 organism.md](../../../www/tibsfox/com/Research/NASA/1.37/organism.md) | *Calypso bulbosa* Fairy Slipper orchid research |
+| Release history audit | [docs/RELEASE-HISTORY.md](../../RELEASE-HISTORY.md) | Full release catalog and completeness scores |
+
+## Engine Position
+
+```
+v1.49.531  = NASA 1.31  + degree 30  Pass 2  ✓  (Ray Charles + Barn Swallow + Mariner 1 software failure)
+v1.49.532  = NASA 1.32  + degree 31  Pass 2  ✓
+v1.49.533  = NASA 1.33  + degree 32  Pass 2  ✓  (Mariner 2 Venus flyby -- first planetary success; previous combined-energy ceiling)
+v1.49.534  = NASA 1.34  + degree 33  Pass 2  ✓  (Ranger 7, the photographs; convergence established)
+v1.49.535  = NASA 1.35  + degree 34  Pass 2  ✓  (Mariner 3 fairing failure; Mars begins)
+v1.49.536  = NASA 1.36  + degree 35  Pass 2  ✓  (Robert Cray + Rufous Hummingbird + Mariner 4; ten-percent milestone)
+v1.49.537  = NASA 1.37  + degree 36  Pass 2  ← THIS RELEASE (Jimi Hendrix + Anna's Hummingbird + Ranger 8)
+v1.49.538  = NASA 1.38  + degree 37  Pass 2  ← next (post-peak territory; Trochilidae thread context)
+```
 
 ## Cumulative Engine Statistics (v1.49.501-537)
 
@@ -244,22 +179,37 @@ v1.49.538  = NASA 1.38  + degree 37  Pass 2  ← next
 | S36 artists documented | 37 |
 | SPS species documented | 37 |
 | NASA missions aligned | 37 (1.0 through 1.37) |
-| E=6 appearances | 2 (Jones at 0, Hendrix at 36) |
-| All-time combined energy maximum | 11 (degree 36: E=6 + E=5) |
-| Central District global names | 3 (Jones, Charles, Hendrix) |
+| E=6 appearances | 2 (Jones at 0, Hendrix at 36) -- thirty-six-degree gap is longest return interval |
+| All-time combined energy maximum | **11** (degree 36: E=6 + E=5) -- new ceiling, breaks ten at degree 32 |
+| Central District global names | 3 (Jones, Charles, Hendrix) -- infrastructure, synthesis, detonation |
 | Central District entries | ~15 |
-| NASA convergences | 3 (Pioneer at 5, Mercury at 24, Ranger at 33) |
+| NASA convergences | 3 (Pioneer at 5, Mercury at 24, Ranger at 33 extended at 36) |
 | Ranger photographs total | 11,445 (4,308 at degree 33 + 7,137 at degree 36) |
-| Family quintets | 3 (Turdidae, Parulidae, Hirundinidae) |
-| Non-vocal sound mechanisms | 3 (percussion, oscillation, aerodynamics) |
-| Trochilidae | 2 (Rufous migrant, Anna's resident) |
-| Fringillidae | 2 (Pine Siskin 12, Cassin's Finch 33) |
+| Ranger successes / failures | 2 successes (R7, R8) / 6 failures (R1-R6) / 1 pending (R9, Alphonsus crater) |
+| Family quintets complete | 3 (Turdidae, Parulidae, Hirundinidae) |
+| Non-vocal sound mechanisms | 3 (percussion 22, oscillation 35, aerodynamics 36) |
+| Trochilidae entries | 2 (Rufous migrant 35, Anna's resident 36) |
+| Fringillidae entries | 2 (Pine Siskin 12, Cassin's Finch 33) |
 | Guitar axis span | 35 degrees (Frisell at 1, Hendrix at 36) |
-| Genre gradient position | Blues Rock (4 steps from Jazz origin) |
-| New-program failure instances | 4 (Pioneer, Mercury, Ranger, Mariner) |
+| Genre gradient position | Blues Rock (5 steps from Jazz origin: Jazz → Compounds → Soul/R&B → Blues → Blues Rock) |
+| Apollo site-survey thread | Established (Ranger 8 → Apollo 11, seventy-km offset, four-year lead) |
+| Metabolic extremity ceiling | 4-gram overwintering at 40°C core (Anna's Hummingbird, Seattle December) |
+
+## Infrastructure / Files
+
+- `docs/release-notes/v1.49.537/README.md` -- this release note, uplifted to A-grade DEGREE shape
+- `docs/release-notes/v1.49.537/chapter/00-summary.md` -- chapter-scale summary excerpt
+- `docs/release-notes/v1.49.537/chapter/03-retrospective.md` -- chapter-scale retrospective with numbered lessons
+- `docs/release-notes/v1.49.537/chapter/99-context.md` -- release metadata and parse confidence
+- `S36/research/releases/036-jimi-hendrix/pass2-refinement.md` -- Pass 2 refinement essay for Jimi Hendrix (~1,300 words)
+- `SPS/research/releases/036-annas-hummingbird/pass2-refinement.md` -- Pass 2 refinement essay for Anna's Hummingbird (~900 words)
+- `www/tibsfox/com/Research/NASA/1.37/research.md` -- Ranger 8 deep research page (live site source; primary source for the Summary essay)
+- `www/tibsfox/com/Research/NASA/1.37/organism.md` -- *Calypso bulbosa* Fairy Slipper orchid research
+- `www/tibsfox/com/Research/NASA/1.37/index.html` -- live site landing page for NASA mission 1.37
+- Commit: `1940831e8` -- `feat(www): v1.49.537 -- degree 36 paired release (NASA 1.37 + S36/SPS Pass 2)`
 
 ---
 
-*Degree 36: Hendrix. A guitarist from the Central District who rewired the relationship between the human body and amplified sound. A hummingbird that dives from thirty meters and makes the air itself sing through its tail feathers — 4 grams of bone and iridescence plummeting at 27 meters per second, producing sound not from a syrinx but from the physics of fluid dynamics over a feather's edge. A spacecraft that photographed where humanity would walk on the Moon four years later — 7,137 images of a future that hadn't happened yet. E=6. Maximum energy. The feedback and the future. The dive and the impact. The Central District's three children: the invisible architect, the visible Genius, and the visible explosion — zero, thirty, and thirty-six degrees into a circle that has three hundred and twenty-four more to go.*
+*Degree 36: Hendrix. A guitarist from the Central District who rewired the relationship between the human body and amplified sound. A hummingbird that dives from thirty meters and makes the air itself sing through its tail feathers -- four grams of bone and iridescence plummeting at twenty-seven meters per second, producing sound not from a syrinx but from the physics of fluid dynamics over a feather's edge. A spacecraft that photographed where humanity would walk on the Moon four years later -- 7,137 images of a future that had not yet happened. E=6. Maximum energy. The feedback and the future. The dive and the impact. The Central District's three children: the invisible architect, the visible Genius, and the visible explosion -- zero, thirty, and thirty-six degrees into a circle that has three hundred and twenty-four more to go.*
 
-*"E=6. The second time. The last time? The Central District's supreme export. The guitar will never sound the same."*
+*"E=6. The second time. The last time? The Central District's supreme export. The guitar will never sound the same. The Sea of Tranquility was photographed before it was walked. The hummingbird sleeps by approaching death, and wakes by returning from it."*
