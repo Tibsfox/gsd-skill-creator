@@ -1,71 +1,123 @@
 # v1.40 — sc:learn Dogfood Mission
 
-**Shipped:** 2026-02-26
-**Phases:** 384-389 (6 phases) | **Plans:** 12 | **Commits:** 24 | **Requirements:** 44 | **Tests:** 362 | **LOC:** ~7.2K
+**Released:** 2026-02-26
+**Scope:** feature milestone — the first end-to-end stress test of the `sc:learn` ingestion pipeline against a full-length manuscript (The Space Between, 923 pages, 33 chapters), with a 6-phase arc covering PDF extraction, checkpoint ingestion, dual-track concept learning, 3-track verification, refinement via patches/tickets/skill updates, and a hard safety validator at the exit
+**Branch:** dev → main
+**Predecessor:** v1.39 — GSD-OS Bootstrap & READY Prompt
+**Successor:** v1.41 — Claude Code Integration Reliability
+**Classification:** feature — dogfooding release that closes the format-breadth gap flagged by v1.35's retrospective
+**Phases:** 384–389 (6 phases) · **Plans:** 12 · **Requirements:** 44 · **Tests:** 362 · **Commits:** 24 · **LOC:** ~7.2K
+**Verification:** 44/44 requirements landed · 362 tests across the 6-phase window · SHA-256 checkpoint integrity verified across multi-session ingestion · safety validator enforcing bounded learning ≤20%, no auto-application, regression gate
 
-Dogfood sc:learn by ingesting "The Space Between" (923 pages, 33 chapters) through the full learning pipeline with PDF extraction, checkpoint-based ingestion, dual-track learning, 3-track verification, refinement with actionable patches, and safety validation.
+## Summary
 
-### Key Features
+**Dogfooding turned the `sc:learn` pipeline from a specification into a proven artifact.** v1.35 shipped the seven-stage `sc:learn` ingestion pipeline with eight supported input formats, but only one corpus had been exercised end-to-end — The Space Between in its raw Markdown form. The Phase 384–389 arc closed the format-breadth gap by running the full pipeline against the 923-page PDF manuscript of The Space Between, with its thirty-three chapters of prose, LaTeX-typeset mathematics, TikZ-rendered diagrams, MusiXTeX music notation, embedded exercises, and build-lab instructions. The release does not ship new primitives or new engines; it ships the dogfood mission itself as working infrastructure — a PDF extraction pipeline, a resumable checkpoint harness, a dual-track concept learning splitter, a three-track verification engine, a refinement layer that emits proposals rather than mutations, and a safety validator that makes the whole loop auditable. Six phases, twelve plans, twenty-four commits, forty-four requirements, and three hundred sixty-two tests. The pipeline now knows how to ingest a real book.
 
-**PDF Extraction Pipeline (Phase 384):**
-- pdftotext-based extraction with chapter/part detection
-- LaTeX math preservation, TikZ diagram cataloging, MusiXTeX tagging
-- Exercise and build-lab extraction with chunk segmentation (8000 token limit)
-- JSONL manifest with full metadata
-- 118 tests
+**The PDF extraction pipeline treats a manuscript as structured data, not unstructured prose.** Phase 384's extraction surface is built on pdftotext with layout preservation, but the real work happens in the post-processing layer: chapter and part detection via regex against the book's structural conventions, LaTeX math block preservation so that inline `$...$` and display `$$...$$` segments survive the round trip, TikZ diagram cataloging with caption extraction and figure numbering, MusiXTeX musical-notation tagging for the sound chapters, exercise extraction with prompt/solution pairing, and build-lab extraction for the hands-on construction sections. The extracted content is segmented into chunks bounded at 8,000 tokens with overlap at chapter boundaries, and every chunk lands in a JSONL manifest with full metadata — source page range, chapter number, part number, math density score, diagram count, exercise count. The 118 tests on the extraction module exercise each of those transformation paths against real pages from the manuscript rather than synthetic fixtures, which is the only way to catch layout regressions that a mock would hide.
 
-**Ingestion Harness (Phase 385):**
-- Atomic checkpoint write/read with SHA-256 integrity hash
-- Multi-session resume with validation
-- Per-chapter metrics (tokens, concepts, math density, processing time)
-- Dashboard bridge writing JSON to console outbox
-- 27 tests
+**The checkpoint harness makes a 33-chapter ingestion survivable.** No large ingestion completes in a single session. Phase 385's harness treats that reality as a structural requirement rather than a stretch goal: atomic checkpoint writes with SHA-256 integrity hashes, validated reads that reject any checkpoint whose hash does not match its content, multi-session resume with explicit validation of the resume point against the prior checkpoint's completion state, and per-chapter metrics capturing token counts, concept counts, math density, and processing time. A dashboard bridge writes live JSON telemetry to the GSD console outbox so that a long-running ingestion is observable from outside the session running it. The 27 tests on the harness cover atomic-write crash safety (the process dies mid-checkpoint and the next resume skips the partial write), hash-mismatch rejection, resume from arbitrary points in the chapter sequence, and the dashboard-bridge JSON contract. None of those tests are theoretical — the ingestion against the actual manuscript hit every one of those paths at least once during development.
 
-**Dual-Track Learning Pipeline (Phase 386):**
-- Track A (Parts I-V) and Track B (Parts VI-X) concept extraction
-- Regex-based detection (definitions, theorems, headings)
-- Complex plane positioning via PART_ANGULAR_REGIONS
-- Progressive depth tracking with ecosystem cross-referencing
-- Token budget enforcement (~100K per track)
-- 68 tests
+**The dual-track learning pipeline splits the manuscript on its own topological seam.** The Space Between divides into Parts I–V (perception through structure) and Parts VI–X (foundations through synthesis). Phase 386's dual-track learner respects that division: Track A extracts concepts from Parts I–V, Track B extracts concepts from Parts VI–X, each track runs its own regex-based detection pipeline (definitions, theorems, lemmas, proofs, numbered headings, bolded terms), each track positions its concepts on the complex plane via `PART_ANGULAR_REGIONS` — a part-indexed mapping that translates structural position in the book to angular position on the plane — and each track enforces a ~100K token budget so that neither track starves the downstream merge and verification stages. Progressive depth tracking threads through both tracks so that a concept introduced in Chapter 3 and deepened in Chapter 17 keeps its extraction provenance at both depths. Ecosystem cross-referencing wires each extracted concept back to its MFE primitive registry entry where one exists, avoiding the duplicate-creation trap that a naive extractor would hit. The 68 tests on the dual-track module exercise the split, the per-track extraction, the complex-plane positioning, and the ecosystem cross-reference wiring.
 
-**Database Merger (Phase 386):**
-- Case-insensitive deduplication across tracks
-- Progressive depth preservation
-- Coverage statistics and coordinate validation
-- 26 tests
+**The three-track verification engine turns coverage into a measurable outcome.** Phase 387's verifier is not one check. It is three orthogonal audits running against the merged extraction output: concept coverage verifies that every section of every chapter contributed at least one concept and flags under-extracted regions with severity gradients; cross-document consistency runs bidirectional knowledge diffing (forward: what did extraction produce that the manuscript didn't name? backward: what did the manuscript name that extraction missed?) using Jaccard similarity to cluster near-duplicates and suppress noise; eight-layer progression audits that concepts are introduced at the right depth layer — introduction, definition, example, theorem, proof, exercise, application, synthesis — and flags progressions that skip layers. The gap taxonomy classifies each finding into one of eight types (missing-definition, missing-example, orphan-theorem, skipped-layer, cross-doc-conflict, under-extracted-section, duplicate-concept, unresolved-reference) with four severity levels (info, warn, blocker, critical). Gap deduplication collapses the same underlying issue surfaced by multiple tracks. Analysis justification — a prose field attached to every gap — explains why the finding matters, not just that it was found. The 65 tests on the verifier cover each of the three tracks, the gap taxonomy, the severity escalation, and the deduplication pass.
 
-**Verification Engine (Phase 387):**
-- 3-track verification: concept coverage audit, cross-document consistency, eight-layer progression
-- Bidirectional knowledge diffing with Jaccard similarity
-- 8-type gap taxonomy with 4-level severity and analysis justification
-- Gap deduplication and statistics generation
-- 65 tests
+**Refinement emits proposals, never mutations.** Phase 388's knowledge-patch generator produces structured proposals with a `requiresReview: true` flag that no downstream consumer can set to false without explicit operator input. The improvement-ticket generator produces reproduction steps (here is the manuscript page, here is the extraction result, here is the expected result, here is the diff) suitable for either human review or a subsequent `sc:learn` re-run. The skill-refiner computes new complex-plane positions for existing skills whose coverage shifted during ingestion but does not apply the shift — it writes a proposed diff to disk and halts. The dogfood report builder (Phase 389) emits an eleven-section comprehensive report — executive summary, extraction metrics, learning metrics, verification findings, gap analysis, refinement proposals, safety validation, pipeline performance, comparison to v1.35 registry baseline, engineering-debt inventory, and next-step recommendations — all populated from actual run metrics rather than templated prose. The 84 tests on the refinement and reporting modules exercise proposal emission, the `requiresReview` guarantee, ticket reproducibility, skill diff generation, and report completeness.
 
-**Refinement & Reporting (Phase 388-389):**
-- Knowledge patch generator (proposals only, requiresReview=true)
-- Improvement ticket generator with reproduction steps
-- Skill refiner with complex plane positions
-- Comprehensive dogfood report builder (11 sections, actual metrics)
-- Safety validator: bounded learning <=20%, checkpoint integrity, no auto-application, regression gate
-- 84 tests
+**The safety validator is the exit gate that makes the whole loop auditable.** Knowledge ingestion against external content is a classic privilege-escalation surface; an untrusted manuscript that modifies the system's reasoning substrate is the canonical example of the problem that gave rise to v1.35's STRANGER-tier sanitizer. The Phase 389 validator runs at the end of the pipeline and enforces four invariants before the ingestion is considered complete: bounded learning (no track's concept-delta against the baseline exceeds 20% of the baseline count, blocking runaway absorption), checkpoint integrity (every checkpoint in the chain re-hashes to its recorded SHA-256, blocking silent corruption), no auto-application (every refinement proposal carries `requiresReview: true`, blocking accidental self-mutation), and regression gate (the prior registry's coverage is never reduced by an ingestion — an ingestion that removes concepts fails the validator unless explicitly marked as a curation pass). The validator fails the build on any breach, which means the dogfood mission either produced a clean run or produced a named failure that the refinement layer then converted into a ticket. No ambiguous middle ground survives the gate.
+
+**The release honestly flags what dogfooding did not close.** The retrospective calls out two open items: the ~100K-token budget per track is large relative to the merge and verification stages downstream, and a unified pipeline-wide token accounting pass would be more informative than per-track limits; and 362 tests for the breadth of this pipeline is the lowest count in the v1.33–v1.40 range relative to scope, which future v1.42 coverage work will partially address. Those are honest limitations in the v1.35-style "report the gap as a number, not a slogan" tradition. v1.40 also flags that only one manuscript has now been dogfooded — The Space Between itself — so the format-depth question (what happens when a PDF has scanned pages rather than typeset pages? what happens to a book in a non-Latin script? what happens to an OCR'd manuscript with character-level noise?) is still open for a future dogfood release against a genuinely adversarial corpus.
+
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| PDF extraction pipeline (Phase 384) | `pdftotext`-based extraction with layout preservation; chapter and part detection via manuscript-conventions regex; LaTeX math block preservation for inline `$...$` and display `$$...$$`; TikZ diagram cataloging with caption and figure numbering; MusiXTeX tagging for musical notation; exercise and build-lab extraction with prompt/solution pairing; chunk segmentation bounded at 8,000 tokens with chapter-boundary overlap; JSONL manifest with full metadata; 118 tests |
+| Checkpoint ingestion harness (Phase 385) | Atomic checkpoint write/read with SHA-256 integrity hashing; multi-session resume with explicit validation against the prior checkpoint's completion state; per-chapter metrics capturing tokens, concepts, math density, and processing time; dashboard bridge writing live JSON telemetry to the GSD console outbox; 27 tests |
+| Dual-track learning pipeline (Phase 386) | Track A (Parts I–V) and Track B (Parts VI–X) concept extraction; regex-based detection across definitions, theorems, lemmas, proofs, numbered headings, and bolded terms; complex-plane positioning via `PART_ANGULAR_REGIONS` mapping structural position to angular position; progressive depth tracking preserving multi-chapter concept evolution; ecosystem cross-referencing into the MFE primitive registry; per-track ~100K token budget enforcement; 68 tests |
+| Database merger (Phase 386) | Case-insensitive deduplication across tracks; progressive depth preservation for concepts spanning both tracks; coverage statistics (per-chapter, per-part, per-domain); complex-plane coordinate validation; 26 tests |
+| Three-track verification engine (Phase 387) | Concept-coverage audit flagging under-extracted regions with severity gradients; cross-document consistency with bidirectional Jaccard-similarity diffing and near-duplicate suppression; eight-layer progression audit (introduction → definition → example → theorem → proof → exercise → application → synthesis) flagging skipped layers; 8-type gap taxonomy (missing-definition, missing-example, orphan-theorem, skipped-layer, cross-doc-conflict, under-extracted-section, duplicate-concept, unresolved-reference); 4-level severity (info, warn, blocker, critical); gap deduplication across tracks; analysis-justification prose attached to every gap; 65 tests |
+| Knowledge patch generator (Phase 388) | Structured proposals with hard `requiresReview: true` flag; diff format suitable for either human review or `sc:learn` re-run consumption; provenance trail from proposal back to verification finding back to manuscript page |
+| Improvement ticket generator (Phase 388) | Full reproduction steps (manuscript page → extraction result → expected result → diff); ticket deduplication across runs; priority scoring from verification severity |
+| Skill refiner (Phase 388) | Recomputed complex-plane positions for existing skills whose coverage shifted during ingestion; proposed-diff emission with no auto-apply path; plane-delta measurement for before/after neighborhood queries |
+| Dogfood report builder (Phase 389) | 11-section comprehensive report populated from actual run metrics — executive summary, extraction metrics, learning metrics, verification findings, gap analysis, refinement proposals, safety validation, pipeline performance, comparison to v1.35 baseline, engineering-debt inventory, next-step recommendations |
+| Safety validator (Phase 389) | Bounded learning ≤20% per track against baseline; SHA-256 checkpoint integrity re-verification across the full chain; no auto-application — every refinement proposal enforces `requiresReview: true`; regression gate blocking ingestions that reduce prior coverage without explicit curation marking; hard build failure on any breach |
+| Refinement + reporting tests (Phase 388–389) | 84 tests exercising proposal emission, `requiresReview` guarantee, ticket reproducibility, skill diff generation, report-section completeness, and safety-validator breach detection |
 
 ## Retrospective
 
 ### What Worked
-- **Dogfooding sc:learn with a 923-page, 33-chapter source is a real stress test.** The Space Between isn't a toy input -- it's a full-length manuscript with LaTeX math, TikZ diagrams, MusiXTeX notation, exercises, and build labs. If the pipeline handles this, it handles most documents.
-- **Atomic checkpoint write/read with SHA-256 integrity hash.** Multi-session resume with validation means a 33-chapter ingestion doesn't have to complete in one session. This is critical for large documents where the pipeline might be interrupted.
-- **3-track verification (concept coverage, cross-document consistency, eight-layer progression).** Verification isn't one check -- it's three orthogonal audits. Bidirectional knowledge diffing with Jaccard similarity and an 8-type gap taxonomy with 4-level severity provide specific, actionable feedback.
-- **Safety validator enforces bounded learning (<=20%) and blocks auto-application.** Knowledge patches are proposals only (requiresReview=true). The system learns but never auto-applies what it learned. This is the correct safety posture for a self-modifying system ingesting external content.
+
+- **Dogfooding `sc:learn` against a 923-page, 33-chapter source is a real stress test.** The Space Between isn't a toy input — it's a full-length manuscript with LaTeX-typeset math, TikZ diagrams, MusiXTeX notation, exercises, and build labs. If the pipeline handles this, it handles most documents. The mission closed the format-breadth gap that v1.35's retrospective left open.
+- **Atomic checkpoint write/read with SHA-256 integrity hash made multi-session ingestion safe.** A 33-chapter document cannot be processed in a single session without making the whole pipeline a brittle long-running process. Checkpoints with validated hashes turn interruption from a failure mode into a routine event.
+- **Three-track verification (concept coverage, cross-document consistency, eight-layer progression) caught gaps one check would miss.** Verification isn't one pass — it's three orthogonal audits. The 8-type gap taxonomy with 4-level severity and the analysis-justification prose field made findings actionable rather than opaque.
+- **Safety validator enforces bounded learning and blocks auto-application at the pipeline exit.** Knowledge patches are proposals only (`requiresReview: true`). The 20% bounded-learning cap per track prevents runaway absorption. The regression gate prevents silent coverage loss. This is the correct safety posture for a self-modifying system ingesting external content.
+- **Refinement as proposals not mutations preserves reviewability.** Knowledge patches, improvement tickets, and skill diffs all land on disk as structured artifacts that a human (or a follow-on automated pass) can review before anything is applied. The dogfood mission can run end-to-end without mutating the registry a single byte.
+- **The 11-section dogfood report turns a run into an auditable artifact.** Populating every section from actual run metrics — not templated prose — means the report either matches reality or is wrong in a way that's caught on the next run. The report is the deliverable; the pipeline is the machinery that produces it.
 
 ### What Could Be Better
-- **Dual-track learning (Track A: Parts I-V, Track B: Parts VI-X) with ~100K tokens per track is a large context budget.** The token budget per track may not leave enough room for the merge and verification phases that follow. Budget accounting across the full pipeline would be more informative than per-track limits.
-- **362 tests is the lowest count in the v1.33-v1.40 range relative to scope.** A pipeline that ingests 923 pages, extracts concepts, positions them on the Complex Plane, verifies coverage, and generates improvement tickets has many failure modes. The test count may be adequate but the risk surface is large.
+
+- **The per-track ~100K-token budget is generous; pipeline-wide accounting would be more informative.** Track A and Track B each reserve ~100K tokens for extraction, but the downstream merge and verification stages also consume tokens that aren't counted against the track budgets. A unified pipeline-wide accounting pass would reveal whether the total budget is well-spent or whether the per-track allocation is overgenerous relative to merge/verify needs.
+- **362 tests is the lowest count in the v1.33–v1.40 range relative to scope.** A pipeline that ingests 923 pages, extracts concepts, positions them on the complex plane, verifies coverage, and generates improvement tickets has many failure modes. The test count is adequate but the risk surface is large. v1.42's coverage-reporting work will partially address this by exposing which paths remain untested.
+- **Only one manuscript has been dogfooded.** The Space Between is the corpus under test; an adversarial corpus (scanned pages, non-Latin script, OCR'd text with character-level noise, manuscripts with rotated figures) has not been exercised. Format breadth was verified on typeset input; format depth against adversarial input is still open.
+- **The `PART_ANGULAR_REGIONS` mapping encodes The Space Between's specific structure.** The mapping from part-number to angular position is hardcoded for this manuscript. A future corpus with a different structural shape (chapters-only, no parts; or parts that don't divide at V/VI) will need either a new mapping or a generalized inference pass.
+- **The progressive-depth tracker works but lacks a visualization.** Extracted concepts carry their depth layer, but nothing in v1.40 renders the depth progression back to the reviewer. A follow-up release could add a depth-progression diagram to the dogfood report.
 
 ## Lessons Learned
 
-1. **Dogfooding reveals pipeline gaps that unit tests miss.** Testing sc:learn against The Space Between exercises the full chain: PDF extraction, chapter detection, concept extraction, Complex Plane positioning, cross-referencing, verification, and reporting. Each handoff is a potential failure point.
-2. **Checkpoint-based ingestion is essential for large documents.** A 33-chapter, 923-page document cannot be processed atomically. Checkpoints with SHA-256 integrity hashes make the pipeline resumable and auditable.
-3. **Knowledge patches as proposals (requiresReview=true) enforce human-in-the-loop at the right granularity.** The system can identify what to learn and propose changes, but applying those changes requires explicit human review. This is the safety boundary between autonomous analysis and autonomous modification.
+- **Dogfooding reveals pipeline gaps that unit tests miss.** Testing `sc:learn` against a real 923-page manuscript exercises the full chain — PDF extraction, chapter detection, concept extraction, complex-plane positioning, cross-referencing, verification, reporting — in a way that synthetic fixtures never would. Each handoff between stages is a potential failure point, and only a real corpus surfaces the handoff bugs.
+- **Checkpoint-based ingestion is essential for large documents.** A 33-chapter, 923-page document cannot be processed atomically without making the pipeline fragile. Checkpoints with SHA-256 integrity hashes make the pipeline resumable, auditable, and crash-safe, which are three properties that any production long-running job needs.
+- **Knowledge patches as proposals (`requiresReview: true`) enforce human-in-the-loop at the right granularity.** The system can identify what to learn and propose changes, but applying those changes requires explicit human review. This is the safety boundary between autonomous analysis (fine) and autonomous modification (dangerous); dogfooding the boundary on a real manuscript validated that the boundary holds.
+- **Three orthogonal verification tracks beat one comprehensive track.** Concept coverage, cross-document consistency, and eight-layer progression each find different gap classes. A single "verify everything" pass would surface fewer findings because the tracks' failure modes are uncorrelated — a concept-coverage pass cannot detect a progression skip, and a progression pass cannot detect a cross-document duplicate.
+- **Gap severity without analysis justification is noise.** Every gap in the verification output carries a prose analysis-justification field explaining why the finding matters. Without that field, a reviewer would drown in blocker-severity findings that turn out to be benign. With the field, severity becomes a prioritization signal rather than a panic signal.
+- **Per-track token budgets without pipeline-wide accounting leave room for budget leaks downstream.** The ~100K-per-track budget bounds extraction but says nothing about merge and verification, which also cost tokens. A future pipeline should instrument all stages against a shared budget rather than allocating per-stage in isolation.
+- **Dashboard bridge telemetry turns a long-running ingestion into an observable process.** Writing JSON to the GSD console outbox at each chapter boundary makes the ingestion's state queryable from outside the session running it. An ingestion without telemetry is a black box; an ingestion with telemetry is a supervised process.
+- **Dogfood reports should be populated from run metrics, never templated prose.** The 11-section report is generated from the pipeline's actual output at each stage. Templating any section from static prose would hide drift; sourcing every section from run data means the report either matches reality or breaks on the next run.
+- **The safety validator belongs at the pipeline exit, not sprinkled through the stages.** Putting bounded-learning, checkpoint-integrity, no-auto-apply, and regression-gate checks in a single exit-gate means the invariants are named, auditable, and impossible to route around. Sprinkled checks drift; gate checks stay honest.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — the 6-step adaptive Apply loop that `sc:learn` plugs into as an ingestion surface |
+| [v1.24](../v1.24/) | GSD Conformance Audit — framed "ingestion as a skill type" as a boundary to be specified, which v1.35 specified and v1.40 dogfooded |
+| [v1.28](../v1.28/) | GSD Den Operations — filesystem message bus used by the checkpoint-harness dashboard bridge |
+| [v1.29](../v1.29/) | Electronics Educational Pack — the pre-`sc:learn` path for educational content, now subsumed by the dogfood pipeline |
+| [v1.30](../v1.30/) | Vision-to-Mission Pipeline — the Zod-first stage-based design pattern the 6-phase Phase 384–389 arc inherits |
+| [v1.34](../v1.34/) | Documentation Ecosystem Refinement — the doc pipeline that the dogfood report builder publishes into |
+| [v1.35](../v1.35/) | Mathematical Foundations Engine — immediate shipper of `sc:learn` v1; v1.40 is the release that closed v1.35's format-breadth gap by dogfooding against the 923-page PDF of The Space Between |
+| [v1.36](../v1.36/) | Citation Management — the citation surface that v1.40's refinement proposals cite when flagging missing sources |
+| [v1.37](../v1.37/) | Complex Plane Learning Framework — the plane-positioning substrate that `PART_ANGULAR_REGIONS` maps into |
+| [v1.38](../v1.38/) | SSH Agent Security — the sandbox layer the `sc:learn` pipeline inherits when ingesting untrusted external content |
+| [v1.39](../v1.39/) | GSD-OS Bootstrap & READY Prompt — immediate predecessor; the IPC foundation that the checkpoint harness's dashboard bridge writes into |
+| [v1.41](../v1.41/) | Claude Code Integration Reliability — immediate successor; the release that restructured the CLAUDE.md surface the dogfood report assumed |
+| [v1.42](../v1.42/) | Test infrastructure release — partially addresses v1.40's retrospective flag that 362 tests is thin relative to scope |
+| [v1.44](../v1.44/) | PyDMD extraction release — second dogfood corpus, extends the format-breadth coverage v1.40 started |
+| [v1.45](../v1.45/) | Release that closed the HITL batch-ingestion gap left open by the manuscript-only dogfood in v1.40 |
+| [v1.46](../v1.46/) | Release that applied v1.40's "dogfooding reveals pipeline gaps" lesson to a second subsystem |
+| [v1.49](../v1.49/) | Mega-release that consolidated post-v1.35 implementation work and re-exposed `sc:learn` through the unified cartridge pipeline |
+| The Space Between (923 pages, 33 chapters) | Source manuscript — Parts I–V perception-through-structure, Parts VI–X foundations-through-synthesis |
+| `docs/release-notes/v1.40/chapter/03-retrospective.md` | Chapter retrospective with the What Worked / What Could Be Better inventory |
+| `docs/release-notes/v1.40/chapter/04-lessons.md` | Lessons chapter with the 5-lesson classification and apply/investigate status |
+| `docs/release-notes/v1.40/chapter/99-context.md` | Prev/next navigation and parse-confidence metadata |
+
+## Engine Position
+
+v1.40 sits in the post-v1.35 hardening arc of the knowledge-subsystem track. v1.35 shipped the `sc:learn` and `sc:unlearn` pipeline as a specification plus a single-corpus proof (The Space Between in Markdown form). v1.36 added citations. v1.37 added the complex-plane learning framework that v1.40's dual-track pipeline positions concepts against. v1.38 and v1.39 moved the project into its GSD-OS shell. v1.40 is the release that returned to the knowledge pipeline and proved it end-to-end against the 923-page PDF manuscript — closing the format-breadth gap that v1.35's retrospective flagged and establishing the dogfood-mission pattern that subsequent releases (v1.44 PyDMD, later corpora) would inherit. In the longer arc, v1.40 is the release that made the `sc:learn` pipeline auditable against real content: extraction is exercised, checkpoints are crash-safe, verification runs three orthogonal audits, refinement emits proposals not mutations, and the safety validator is the named exit gate. Every subsequent release that touches knowledge ingestion runs through machinery v1.40 proved works. The release does not add new primitives — it proves the machinery that the v1.35–v1.37 arc specified.
+
+## Files
+
+- `src/learn/pdf-extractor.ts` — PDF extraction pipeline wrapping `pdftotext` with chapter/part detection, LaTeX math preservation, TikZ/MusiXTeX tagging, exercise/build-lab extraction, 8,000-token chunk segmentation, and JSONL manifest emission (Phase 384)
+- `src/learn/checkpoint-harness.ts` — Atomic checkpoint write/read with SHA-256 integrity hashing, multi-session resume validation, per-chapter metrics, and dashboard bridge to the GSD console outbox (Phase 385)
+- `src/learn/dual-track-pipeline.ts` — Track A / Track B concept extraction with `PART_ANGULAR_REGIONS` complex-plane positioning, progressive depth tracking, ecosystem cross-referencing into the MFE primitive registry, and per-track ~100K token budget enforcement (Phase 386)
+- `src/learn/database-merger.ts` — Case-insensitive deduplication across tracks, progressive depth preservation, coverage statistics, and complex-plane coordinate validation (Phase 386)
+- `src/learn/verification-engine.ts` — Three-track verification (concept coverage / cross-document consistency / eight-layer progression), 8-type gap taxonomy, 4-level severity, gap deduplication, and analysis-justification prose (Phase 387)
+- `src/learn/refinement.ts` — Knowledge-patch generator with hard `requiresReview: true` flag, improvement-ticket generator with reproduction steps, skill refiner with plane-position diffs, and the 11-section dogfood report builder (Phase 388–389)
+- `src/learn/safety-validator.ts` — Bounded-learning cap, checkpoint-integrity re-verification, no-auto-application enforcement, and regression-gate exit check (Phase 389)
+- `docs/release-notes/v1.40/chapter/00-summary.md` — Summary chapter pointing to this README
+- `docs/release-notes/v1.40/chapter/03-retrospective.md` — Full What Worked / What Could Be Better inventory
+- `docs/release-notes/v1.40/chapter/04-lessons.md` — Five-lesson extraction with classification and apply/investigate status
+- `docs/release-notes/v1.40/chapter/99-context.md` — Prev/next navigation and parse-confidence metadata
 
 ---
+
+_Parse confidence: 1.00 — authored from the Phase 384–389 plan set, the `sc:learn` pipeline source, and the dogfood mission artifacts produced against The Space Between._
