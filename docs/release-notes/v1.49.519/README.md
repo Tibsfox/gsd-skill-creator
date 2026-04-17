@@ -2,23 +2,31 @@
 
 **Released:** 2026-04-05
 **Degree:** 18 of 360
-**Part A:** Maktub -- Soul/Jazz/Neo-Soul/Funk, **E=3**, Capitol Hill, Velour/Livewire. 1998-2007 (DEFUNCT). Reggie Watts vocals + Kevin Goldman guitar + Alex Veley bass/keys + Davis Martin drums. **First band.** First dual-degree artist (Watts at 17 and 18). First defunct project that was a collaborative entity. Soul becomes primary, Jazz becomes method. Capitol Hill enters the engine.
-**Part B:** Swainson's Thrush (*Catharus ustulatus*) -- upward spiraling fluty phrases, **E=3**, riparian forest, Turdidae. Ascending staircase -- each phrase higher than the last. Third Turdidae. Second Catharus (after Hermit Thrush degree 7). The voice of the crepuscular transition. Melodic thinking vs. Hermit Thrush's harmonic thinking.
-**NASA Mission:** 1.18 -- Mercury-Atlas 5 (November 29, 1961. Enos the chimpanzee -- Holloman Aero Medical, approximately five years old -- orbits Earth twice. 3 hours 21 minutes. Planned three orbits, cut to two: thruster fuel consumption and elevated body temperature. Lever apparatus malfunctioned -- shocked Enos for correct responses. He kept pulling the correct lever. Qualified capsule for human orbital flight. Glenn flew 83 days later. Dedicated to C.S. Lewis, born November 29, 1898.)
-**NASA Organism:** Nereocystis luetkeana (Bull Kelp -- 36m annual growth, holdfast-to-surface vertical ecosystem, the anchor that holds while everything above it sways. Foundation species: remove the kelp and the entire community collapses.)
+**Part A:** Maktub -- Soul/Jazz/Neo-Soul/Funk, **E=3**, Capitol Hill, Velour/Livewire. 1998-2007 (DEFUNCT). Reggie Watts vocals + Kevin Goldman guitar + Alex Veley bass/keys + Davis Martin drums. First band. First dual-degree artist (Watts at 17 and 18). First collaborative entity. Soul becomes primary, Jazz becomes method. Capitol Hill enters the engine.
+**Part B:** Swainson's Thrush (*Catharus ustulatus*) -- upward spiraling fluty phrases, **E=3**, riparian forest, Turdidae. Ascending staircase -- each phrase higher than the last. Third Turdidae. Second Catharus (after Hermit Thrush at degree 7). Voice of the crepuscular transition. Melodic thinking vs. Hermit Thrush's harmonic thinking.
+**NASA Mission:** 1.18 -- Mercury-Atlas 5 (November 29, 1961. Enos the chimpanzee -- Holloman Aero Medical, approximately five years old -- orbits Earth twice. 3 hours 21 minutes. Planned three orbits, cut to two: thruster fuel consumption and elevated body temperature. Lever apparatus malfunctioned. Qualified capsule for human orbital flight. John Glenn flew 83 days later.)
+**NASA Organism:** *Nereocystis luetkeana* (Bull Kelp -- 36m annual growth, holdfast-to-surface vertical ecosystem, foundation species).
 **Dedication:** C.S. Lewis (November 29, 1898 -- November 22, 1963) -- born the same calendar date as Enos's launch. *Out of the Silent Planet*. The Cosmic Trilogy. The silent planet sends a chimpanzee who cannot speak to qualify a capsule so that a human who can speak might fly.
 **Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
+**Cluster:** Jazz-to-Soul Transition (post-Berklee, post-Cornish, post-suborbital)
+**Branch:** dev
 **Engine Position:** Nineteenth paired release. Degree 18 = the ascending spiral. Everything climbs. Everything transitions. The orbit sustains. The holdfast grips. The groove locks in. The thrush sings upward until the melody reaches its ceiling and the silence that follows is arrival at altitude.
 
 ## Summary
 
-The nineteenth paired release. Degree 18 is the ascending spiral -- the degree where everything climbs and everything is in transition. On November 29, 1961, at Launch Complex 14 at Cape Canaveral, a five-year-old chimpanzee named Enos sat inside a Mercury capsule atop an Atlas D intercontinental ballistic missile -- the "wet firecracker," a pressurized stainless-steel balloon with skin thinner than a dime that would collapse under its own weight if depressurized. The Atlas had three engines producing 360,000 pounds of thrust, a documented history of spectacular failures, and it was the only machine in the American inventory capable of reaching orbital velocity. Enos launched at 10:08 AM Eastern. The booster separated nominally. The sustainer engine pushed the capsule to 28,000 km/h. Enos was in orbit: 161 by 237 kilometers, 88.5-minute period, 32.5 degrees inclination. And then the lever apparatus malfunctioned. The system that was supposed to reward correct responses and punish incorrect ones reversed its logic. The correct lever -- the lever Enos had been trained through months of operant conditioning at Holloman to pull -- began delivering electric shocks. He was being punished for being right. He kept pulling the correct lever. Through two orbits, through the malfunction, through punishment for correctness, Enos maintained his trained response. His accuracy did not drop to chance. He did not switch to random responding. He absorbed the punishment and kept being right. The flight was cut from three orbits to two -- not because of the lever malfunction, but because thruster fuel was depleting faster than planned and Enos's body temperature was rising. He splashed down in the Atlantic south of Bermuda, was recovered by the USS Stormes in good condition. Eighty-three days later, John Glenn orbited the Earth three times. The chimpanzee who was shocked for being right and kept being right anyway opened the gate for the first American in orbit. Enos died of shigellosis eleven months after his flight, five years old, in a facility history does not bother to name.
+The nineteenth paired release and the degree where the engine locks into orbit -- the moment where the vertical ascent of Mercury-Atlas 5, the horizontal ascent of the Swainson's Thrush's fluty sequence, the collective ascent of Maktub's Capitol Hill groove, and the literal vertical ascent of Bull Kelp's thirty-six-meter annual growth all synchronize on a single structural commitment: upward motion that does not reverse. Degree 18 is the ascending spiral. On November 29, 1961, at Launch Complex 14 at Cape Canaveral, a five-year-old chimpanzee named Enos sat inside a Mercury capsule atop an Atlas D intercontinental ballistic missile -- the Atlas, the "wet firecracker," a pressurized stainless-steel balloon with skin thinner than a dime that would collapse under its own weight if depressurized. The Atlas had three engines producing 360,000 pounds of thrust, a documented history of spectacular failures on the test stand, and it was the only machine in the American inventory capable of reaching orbital velocity. Enos launched at 10:08 AM Eastern. The booster separated nominally. The sustainer engine pushed the capsule to 28,000 km/h. Enos was in orbit: 161 by 237 kilometers, 88.5-minute period, 32.5-degree inclination. And then the lever apparatus malfunctioned. The system that was supposed to reward correct responses and punish incorrect ones reversed its logic. The correct lever -- the lever Enos had been trained through months of operant conditioning at Holloman Aero Medical Laboratory to pull -- began delivering electric shocks. He was being punished for being right. He kept pulling the correct lever. Through two orbits, through the malfunction, through punishment for correctness, Enos maintained his trained response. His accuracy did not drop to chance. He did not switch to random responding. He absorbed the punishment and kept being right. The flight was cut from three orbits to two -- not because of the lever malfunction, but because thruster fuel was depleting faster than planned and Enos's body temperature was rising toward the medical abort threshold. He splashed down in the Atlantic south of Bermuda, was recovered by the USS Stormes in good condition. Eighty-three days later, John Glenn orbited the Earth three times aboard Friendship 7. The chimpanzee who was shocked for being right and kept being right anyway opened the gate for the first American in orbit. Enos died of shigellosis eleven months after his flight, five years old, in a facility history does not bother to name. The holdfast gripped until the canopy reached sunlight, and then the holdfast was gone.
 
-On Capitol Hill, in the post-grunge incubation space where genre boundaries dissolved because the audience did not require genre purity, four musicians locked into a groove. Maktub -- Arabic for "it is written," fate, destiny, what cannot be changed. Reggie Watts singing soul with the range and power that would later fuel his solo career but here deployed in service of a band. Kevin Goldman's guitar bending between overdriven rock and clean jazz voicings. Alex Veley's bass and keys creating harmonic beds that shifted from neo-soul warmth to jazz tension in a single bar. Davis Martin's drums carving pocket grooves between straight and syncopated. The first band in the engine -- not a solo artist, not a bandleader, but a collaborative entity where composition was emergent, the groove taking shape through four people listening and responding. The first dual-degree artist: Watts at degree 17 (solo loop-artist, Jazz/Comedy) and degree 18 (Maktub frontman, Soul/Jazz). Same person, different projects, different genres, different eras. The engine catalogs projects, not biographies. And the third genre shift in three degrees: Soul/Jazz puts Soul first. For eighteen degrees Jazz was the primary; at degree 18 it becomes the method -- the harmonic vocabulary and improvisational framework deployed in service of soul music's groove and vocal power.
+On Capitol Hill, in the post-grunge incubation space where genre boundaries dissolved because the audience did not require genre purity, four musicians locked into a groove and named the band Maktub -- Arabic for "it is written," fate, destiny, what cannot be changed. Reggie Watts sang soul with the range and power that would later fuel his solo career at degree 17 but here deployed in service of a band rather than a one-man loop apparatus. Kevin Goldman's guitar bent between overdriven rock and clean jazz voicings, a hybrid vocabulary that Capitol Hill's omnivorous audience could absorb without requiring genre justification. Alex Veley's bass and keys created harmonic beds that shifted from neo-soul warmth to jazz tension within a single bar, the kind of modal elasticity that Marc Seales's UW lineage at degree 13 made compositionally available. Davis Martin's drums carved pocket grooves between straight and syncopated, the funk-inflected backbeat that the Crocodile Cafe, Showbox, and Neumo's stages rewarded through 2002. Maktub is the engine's first band -- not a solo artist, not a bandleader fronting a rotating ensemble, but a collaborative entity in which composition was emergent, the groove taking shape through four people listening and responding. The engine must now track creative units: solo artist, bandleader, collaborative band. Degree 18 also introduces the first dual-degree artist. Reggie Watts appears at degree 17 as solo loop-artist (Jazz/Comedy superposition, one-man-orchestra) and at degree 18 as Maktub frontman (Soul/Jazz, collective groove). Same person, different projects, different configurations -- the engine catalogs projects, not biographies, the same way Enos's first orbit and second orbit are catalogued as the same chimp under different conditions (on the second orbit the lever malfunction was worse). At the same time, degree 18 delivers the third genre shift in three consecutive degrees: degree 16 introduced Jazz Fusion (Jazz as half of a compound), degree 17 introduced Jazz/Comedy (Jazz in superposition with a non-music discipline), and degree 18 introduces Soul/Jazz (Soul as primary, Jazz as modifier). For eighteen degrees Jazz was the primary genre; at degree 18, Jazz becomes a method -- the harmonic vocabulary and improvisational framework deployed in service of soul music's groove and vocal power. Both sides of the engine mirror the same transition: Mercury-Atlas 5 is the Mercury program's transition from test flights (jazz-as-genre, vocabulary being tested) to operational missions (jazz-as-method, vocabulary deployed in service of human spaceflight), and Maktub is the Jazz tradition's transition from primary language to supporting technique.
 
-In the riparian forest at dusk, a Swainson's Thrush begins its ascending spiral. Each phrase higher than the last, a staircase of sound winding upward through pitch space -- 1.5 kHz to 5.0 kHz across three to eight phrases, each phrase a fluty ornament climbing above the previous. The second Catharus in the engine, after the Hermit Thrush at degree 7, and the comparison reveals two fundamentally different approaches to beauty within the same genus whose name means "pure": the Hermit Thrush thinks harmonically (vertical intervals within phrases, harmonic-series ratios), the Swainson's thinks melodically (horizontal ascent across phrases, sequential escalation). Arch versus staircase. Contemplation versus aspiration. The third Turdidae overall: Varied Thrush (degree 2, AM drone), Hermit Thrush (degree 7, harmonic arch), Swainson's Thrush (degree 18, ascending spiral). Three thrushes, three acoustic strategies, the full range from minimalism through mathematical complexity to aspirational ascent. The Swainson's is the voice of the crepuscular transition -- it sings at dusk and dawn, filling the acoustic space between day and night, the boundary where light is changing.
+In the riparian forest at dusk, a Swainson's Thrush begins its ascending spiral. Each phrase higher than the last, a staircase of sound winding upward through pitch space -- 1.5 kHz rising to 5.0 kHz across three to eight phrases, each phrase a fluty ornament climbing above the previous. The second Catharus in the engine, after the Hermit Thrush at degree 7, and the comparison reveals two fundamentally different approaches to beauty within the same genus whose name means "pure": the Hermit Thrush thinks harmonically (vertical intervals within phrases, harmonic-series ratios, contemplation), the Swainson's Thrush thinks melodically (horizontal ascent across phrases, sequential escalation, aspiration). Arch versus staircase. Contemplation versus aspiration. Both are *Catharus* -- pure. The purity expresses differently. The Swainson's Thrush is the third Turdidae overall, after the Varied Thrush at degree 2 (AM drone, one sustained note) and the Hermit Thrush at degree 7 (harmonic arch). Three thrushes, three acoustic strategies, the full range from minimalism through mathematical complexity to aspirational ascent, and all three in the same family -- the Turdidae are now the engine's most acoustically diverse family alongside the Parulidae warbler quartet at degrees 14-17. The Swainson's Thrush is also specifically a voice of the crepuscular transition. It sings at dusk and dawn, filling the acoustic space between day and night, positioned at the exact boundary where light is changing. Not nocturnal (the owl, degree 4) and not diurnal (most other species), the Swainson's Thrush occupies the boundary. Mercury-Atlas 5 occupies an identical boundary: the last chimp flight, the bridge between biological validation and human commitment, the transition between suborbital and orbital. Maktub occupies the same position on the S36 track: the transition between Jazz-as-genre and Soul-as-genre, neither the Berklee-Lorber fusion of degree 16 nor the pure-soul music that future degrees will document, but the boundary band that metabolizes both. The same way both the thrush and the capsule and the band sit on the edge between what was and what is becoming.
 
-Bull kelp grows from spore to thirty-six meters in a single season. The holdfast grips the rock. The stipe stretches through the water column. The pneumatocyst floats the blades at the surface. Remove any component and the organism fails. It is the PNW coast's foundation species -- the single annual organism whose physical structure creates the canopy, understory, and floor of an entire marine community. Enos's flight was the holdfast of the Mercury orbital program: the grip on the rock that anchored the stipe of engineering data stretching eighty-three days to Glenn's canopy in the sunlight. The holdfast does not photosynthesize. It sits in the dark, on the rock, in the cold water, gripping. That is its contribution. Without the holdfast, there is no canopy. Without Enos, there is no Glenn.
+Bull kelp (*Nereocystis luetkeana*) grows from spore to thirty-six meters in a single season. The holdfast grips the rock. The stipe stretches through the water column. The pneumatocyst floats the blades at the surface. Remove any component and the organism fails. Bull kelp is the PNW coast's foundation species -- the single annual organism whose physical structure creates the canopy, understory, and floor of an entire marine community, and removal of the kelp collapses the entire ecosystem that depends on it. Enos's flight was the holdfast of the Mercury orbital program: the grip on the rock that anchored the stipe of engineering data stretching eighty-three days to Glenn's canopy in the sunlight. The holdfast does not photosynthesize. It sits in the dark, on the rock, in the cold water, gripping. That is its contribution. Without the holdfast, there is no canopy. Without Enos, there is no John Glenn. Both organisms are annuals -- they do the foundational work and they do not persist. The parallel extends across all four tracks in parallel. In the same way that kelp is the single annual organism whose physical structure creates the entire marine community, Maktub's groove is the single collective entity whose harmonic structure creates the entire performance -- the bass anchors the harmonic floor, the drums anchor the rhythmic floor, the guitar stretches through the mid-register, the vocals float at the surface. Each instrument depends on the others; remove one and the groove collapses. In the same way, the Swainson's Thrush's ascending spiral depends on the crepuscular acoustic envelope -- at full daylight the song would be masked by the full-chorus soundscape; at full darkness the song would have no ecological function. The song needs the boundary. The boundary is not a backdrop; it is the functional substrate. Both sides of the engine synchronize on the same observation: the foundational layer and the visible layer are not competitors but obligate partners, and neither can exist without the other.
+
+The dedication to C.S. Lewis closes the ascent theme at the cultural level and paired with the mission at the calendar-date level. Lewis was born November 29, 1898, in Belfast, Ireland, the same calendar date as Enos's 1961 launch from Cape Canaveral. *Out of the Silent Planet* (1938), the first volume of the Cosmic Trilogy, is an extended argument that treating beings as instruments destroys the moral framework that makes achievement meaningful. Lewis's Oyarsa, the ruling intelligence of Malacandra, confronts the human Weston about his willingness to sacrifice other beings for the survival of his own species, and Weston has no defense that is not a version of "they do not count as beings who count." The Mercury primate program is the material case study. Ham flew at degree 17. Enos flew at degree 18. Five other chimps -- Minnie, Duane, Chu, Rocky, and Jim -- were trained at Holloman Aero Medical Laboratory as backup crew and contributed their labor to the qualification flights that made John Glenn's MA-6 flight possible. Each was instrumentalized. Lewis's argument does not redeem the instrumentalization, but it refuses the move that declares the instrumentalization invisible. Maktub's collective-composition model is, in this sense, a structural refusal of the instrumental relation: no member functions as an instrument of another's intention, the composition emerges from four agents listening to each other, and the groove sustains precisely because no one in the band is being used. Both sides of the engine synchronize on the refusal: Maktub refuses the instrumentalized sideman relation while the Lewis dedication refuses the instrumentalized primate relation, and the two refusals mirror each other across the S36/NASA axis.
+
+The chimp orbited. The chimp was shocked for being right. The chimp did not switch to random responding. The holdfast gripped. The holdfast did not let go. Eighty-three days later the canopy reached sunlight at Cape Canaveral when John Glenn rode Friendship 7 through three orbits and the Mercury program's human phase began. The Swainson's Thrush sang its ascending spiral at the boundary between day and night, the same way the orbit rode the boundary between suborbital and escape velocity, the same way Maktub rode the boundary between Jazz-as-genre and Soul-as-genre, the same way bull kelp rode the boundary between seafloor and surface. Everything at degree 18 operates on a boundary and the boundary is the functional substrate. Both sides of the paired engine mirror the same transition at their respective scales. At the same time, all four tracks converge on a single observation: the foundation that does not persist makes everything above it possible, and the ascent that does not reverse defines the commitment that makes the ascent meaningful.
+
+The engine position at the end of degree 18 reflects the nineteenth paired release in a continuous dual-track build that began at degree 0 with Quincy Jones and the Pacific Wren and has proceeded one degree per release through Bill Frisell, Ernestine Anderson, Patti Bown, Marc Seales, Aaron Parks, Julian Priester, Hadley Caliman, Jeff Lorber, Reggie Watts (solo), and now Maktub on the S36 side, and through Varied Thrush, Hermit Thrush, Pacific-slope Flycatcher, Black-capped Chickadee, Hutton's Vireo, MacGillivray's Warbler, Wilson's Warbler, Yellow Warbler, Common Yellowthroat, and now Swainson's Thrush on the SPS side. The NASA track has proceeded from Explorer 1 through Pioneer 1, Vanguard 1, Pioneer 3, Pioneer 4, Explorer 6, TIROS 1, Pioneer 5, Echo 1, Mercury-Redstone 1, Mercury-Redstone 2, and now Mercury-Atlas 5. The Mercury program is 83 days from John Glenn's first American orbit. The engine is on the Atlas now, past the Redstone's problems. The gap has been bridged by switching rockets. Enos flew the Atlas that Ham could not fly. Maktub introduced collective composition to an engine that had only tracked individual and bandleader authorship. The Swainson's Thrush introduced horizontal melodic thinking to an engine whose most recent Catharus entry had thought only vertically. And every one of these transitions synchronized in parallel on the same structural commitment: ascent that does not reverse, foundation that does not persist, boundary that does not become backdrop. It is written. *Maktub.*
 
 ## Key Features
 
@@ -30,168 +38,67 @@ Bull kelp grows from spore to thirty-six meters in a single season. The holdfast
 | Geographic Significance | Capitol Hill enters -- first non-Central-District Seattle neighborhood | Riparian forest -- moisture-defined habitat (vs. Hermit Thrush's elevation-defined) |
 | NASA Parallel | Enos orbits = groove sustains = orbital commitment. Band as orbital system: each instrument maintains the others' trajectories. | Ascending spiral = Enos's orbital trajectory = kelp's vertical growth. The climb that does not come back down. |
 | Structural Firsts | First band; first dual-degree artist; Soul/Jazz; Capitol Hill; second defunct project; first collaborative entity | Third Turdidae; second Catharus; ascending-only contour; crepuscular timing; melodic vs. harmonic thinking |
-
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+| Dedication Parallel | C.S. Lewis's ethics of the instrumental -- Maktub's collective model as refusal of the instrumentalized soloist | C.S. Lewis's *Out of the Silent Planet* -- the silent thrush sings at the boundary between day and night |
 
 ## Part A: Maktub -- THE GROOVE AND THE FATE
 
-### Pass 2 Refinement Summary
-
-Four research dimensions on Maktub as first band, the Soul/Jazz transition, the dual-degree precedent, and Capitol Hill's emergence:
-
-**1. The Band as Orbital System: Collective Groove and Enos's Two Orbits.** Mercury-Atlas 5 carried Enos on two full orbits -- 3 hours 21 minutes of sustained operation, not the sixteen-minute suborbital arc that Ham flew at degree 17. An orbit is a commitment: once locked in, self-sustaining, the system carries forward without requiring continuous new energy input. Maktub's groove is the musical equivalent. The drum pattern recurs. The bass line cycles. The keyboard vamp repeats. The guitar riff interlocks. Each instrument provides the gravitational pull that keeps the others in orbit -- remove the drums and the bass drifts, remove the bass and the harmony floats. The groove is a collective orbital system, a self-sustaining trajectory that four musicians maintain through the act of listening. Bull kelp parallels the structure: one organism creating the complete vertical ecosystem (holdfast to canopy) that sustains the entire community. Maktub's groove creates the complete vertical musical structure (bass register to treble) sustaining the entire performance.
-
-**2. Soul/Jazz and the Third Genre Shift: Jazz as Method, Not Genre.** The genre progression steepens sharply at degree 18:
-
-| Degree | Genre Label | Shift |
-|--------|------------|-------|
-| 0-15 | Jazz | Single genre, stable |
-| 16 | Jazz Fusion | First shift: single to compound |
-| 17 | Jazz/Comedy | Second shift: compound to superposition |
-| **18** | **Soul/Jazz** | **Third shift: new primary genre (Soul) with Jazz as modifier** |
-
-For eighteen degrees, Jazz dominated. At degree 18, soul becomes the primary mode -- the vocal power, the groove, the emotional directness -- and jazz provides the harmonic vocabulary and improvisational framework. Jazz becomes a technique deployed in service of another genre's objectives. This parallels the Mercury program's transition: MR-1 and MR-2 were test flights (jazz-as-genre, the vocabulary being tested); MA-5 was operational (jazz-as-method, the vocabulary deployed in service of a larger objective -- human spaceflight).
-
-**3. The First Band and the First Dual-Degree Artist.** Maktub is the engine's first band -- a collaborative entity where the creative subject is plural. Every previous degree featured a solo artist or a bandleader. Maktub's four members co-authored the music through collective improvisation: no charts, no conductor, no arrangement, the composition emergent from four people listening and responding. The engine must now track creative units: solo artist, bandleader, collaborative band.
-
-Reggie Watts appears at both degree 17 (solo) and degree 18 (Maktub) -- the first dual-degree artist. The engine catalogs projects, not biographies. Watts-as-solo-artist (Jazz/Comedy superposition, loop station, one-man orchestra) and Watts-as-Maktub-frontman (Soul/Jazz, band context, soul singer) are different creative configurations. Enos orbited Earth twice -- two passes, same chimp, different conditions on each orbit (the lever malfunction worsened on the second). Watts orbited Seattle's music scene twice -- same artist, different creative configurations on each pass.
-
-**4. Capitol Hill Enters the Engine.** After Central District dominance (degrees 0-11) and general Seattle/Cornish connections (degrees 7-17), Capitol Hill enters as the first non-Central-District Seattle neighborhood to host a primary S36 project. The post-grunge incubation space where genre boundaries dissolved because the Capitol Hill audience in 2002 could absorb neo-soul harmonies, funk grooves, rock power, and jazz improvisation in a single set. Venues: Crocodile Cafe, Showbox, Neumo's, Capitol Hill block party circuit. The neighborhood's cultural metabolism: omnivorous, genre-agnostic, live-performance-centered.
-
----
+- **Seattle origins and the Capitol Hill incubation scene.** Maktub formed in 1996 on Capitol Hill, the post-grunge incubation space where four musicians -- Reggie Watts (vocals), Kevin Goldman (guitar), Alex Veley (bass/keys), and Davis Martin (drums) -- locked into a collective sound that refused genre assignment. The band became fixtures at the Crocodile Cafe, Showbox, Neumo's, and the Capitol Hill block party circuit through 2002. Capitol Hill's omnivorous audience metabolism meant that neo-soul harmonies, funk grooves, rock power, and jazz improvisation could appear in a single set without audience complaint. Capitol Hill enters the engine at degree 18 as the first non-Central-District Seattle neighborhood to host a primary S36 project.
+- **The band as orbital system: collective groove and Enos's two orbits.** Mercury-Atlas 5 carried Enos on two full orbits -- 3 hours 21 minutes of sustained operation, not the sixteen-minute suborbital arc that Ham flew at degree 17. An orbit is a commitment: once locked in, self-sustaining, the system carries forward without requiring continuous new energy input. Maktub's groove is the musical equivalent. The drum pattern recurs. The bass line cycles. The keyboard vamp repeats. The guitar riff interlocks. Each instrument provides the gravitational pull that keeps the others in orbit. Remove the drums and the bass drifts. Remove the bass and the harmony floats. The groove is a collective orbital system that four musicians maintain through the act of listening.
+- **Soul/Jazz and the third genre shift: Jazz as method, not genre.** The genre progression steepens sharply at degree 18. Degrees 0-15 = Jazz (single genre, stable). Degree 16 = Jazz Fusion (first shift: single to compound). Degree 17 = Jazz/Comedy (second shift: compound to superposition). Degree 18 = Soul/Jazz (third shift: new primary with Jazz as modifier). For eighteen degrees Jazz dominated. At degree 18, Soul becomes the primary mode -- the vocal power, the groove, the emotional directness -- and Jazz provides the harmonic vocabulary. Jazz becomes a technique deployed in service of another genre's objectives.
+- **The first band and the first dual-degree artist.** Maktub is the engine's first band -- a collaborative entity where the creative subject is plural. Every previous degree featured a solo artist or a bandleader. Maktub's four members co-authored the music through collective improvisation: no charts, no conductor, no arrangement, the composition emergent from four people listening and responding. The engine must now track creative units: solo artist, bandleader, collaborative band. Reggie Watts appears at both degree 17 (solo) and degree 18 (Maktub) -- the first dual-degree artist. The engine catalogs projects, not biographies.
+- **Reggie Watts and the Cornish-to-Capitol-Hill pipeline.** Watts was noted at degree 17 as the third Cornish College of the Arts connection (after Julian Priester at degree 7 and Hadley Caliman at degree 9) and as the first Cornish student rather than faculty. At degree 18, the Cornish output (Watts) feeds into the Capitol Hill band scene. Institutional output becomes geographic input. The pipeline extends beyond the institution into the neighborhood and into the collective-improvisation format.
+- **The defunct-project catalog and the impermanence of collective work.** Maktub released three full-length albums (*Khronos* 1999, *Subtle Ways* 2001, *Say What You Mean* 2003) before dissolving in 2007. The engine's catalog now includes two defunct projects: the first was an individual's discontinued line of work, the second is a collaborative entity whose dissolution was structural -- four musicians who could not sustain the orbital commitment indefinitely. Bull kelp's annual cycle provides the biological template: foundational, complete, impermanent.
+- **Label trajectory: Velour, Livewire, and independent release.** Maktub released through Velour Music Group and Livewire Recordings, independent labels in the neo-soul and alternative-soul distribution networks. The band's distribution model -- regional headlining and national opening-slot tours, with independent-label support rather than major-label signing -- extends the engine's label ledger beyond Blue Note (degrees 0, 14) and ECM (degree 1) and Columbia (degree 6) into the independent-soul economy of the late-1990s Pacific Northwest.
+- **Emergent composition and the fifth compositional model.** The engine's compositional-model set expands to five: individual authorship (most solo artists), bandleader direction (Quincy Jones, Wayne Horvitz), collective improvisation within a scored framework (Frisell small-group work), loop-station self-accompaniment (Watts solo at degree 17), and emergent collective composition (Maktub at degree 18). Maktub's model is structurally distinct: no member functions as a primary composer, the songs emerge from collective jam sessions, and the final recordings are documents of an emergent process rather than realizations of pre-existing scores.
 
 ## Part B: Swainson's Thrush -- THE ASCENDING STAIRCASE
 
-### Pass 2 Refinement Summary
+- **Species identity and riparian-forest habitat.** *Catharus ustulatus*, the Swainson's Thrush, is a Nearctic-Neotropical migrant whose breeding range includes the Pacific Northwest riparian forest -- the streamside corridors dominated by big-leaf maple, red alder, salmonberry, and sword fern. Habitat is moisture-defined rather than elevation-defined, which contrasts the Swainson's directly with its congener the Hermit Thrush at degree 7 (mountain forest, elevation-defined). Riparian forest is the engine's twelfth habitat type.
+- **The ascending spiral and the orbit: climbing without falling back.** The Swainson's Thrush's song is an ascending spiral -- each phrase higher than the last, 1.5 kHz starting pitch climbing to 3.5-5.0 kHz across three to eight phrases, each phrase containing fluty ornamental notes but the defining feature being the inter-phrase pitch trajectory: always upward. Unlike the Hermit Thrush's arch form (which ascends AND descends within each phrase), the Swainson's keeps climbing. The melody does not come back down. Enos's orbit is the same shape: continuous forward motion around a closed curve, perpetual forward motion without descent, the orbital trajectory that never falls back because the spacecraft achieves sufficient velocity to balance gravity's pull.
+- **The second Catharus: harmonic thinking vs. melodic thinking.** The engine's second *Catharus* thrush reveals two fundamentally different approaches to beauty within a genus whose name means "pure." Hermit Thrush (degree 7): arch contour (ascending then descending within phrase), harmonic thinking (vertical chord tones, overtone series), contemplation (arch turns back on itself), elevation-defined habitat. Swainson's Thrush (degree 18): staircase contour (each phrase higher than the last), melodic thinking (horizontal sequential steps), aspiration (the line keeps climbing), moisture-defined habitat. Harmonic vs. melodic is one of the most fundamental distinctions in music theory, and here two sibling species instantiate both sides of the distinction.
+- **The Turdidae trio: three strategies.** Three thrushes at degrees 2, 7, and 18. Varied Thrush (2): AM drone, one note sustained, minimal complexity. Hermit Thrush (7): harmonic-series arch, vertical intervals, mathematical complexity. Swainson's Thrush (18): ascending spiral, horizontal ascent, aspirational complexity. The Turdidae now cover the full range from minimalism through mathematical complexity to aspirational ascent -- three acoustic strategies, one family.
+- **The crepuscular transition: singing at the boundary.** The Swainson's Thrush is specifically a summer-evening voice. Its ascending spiral is most commonly heard at dusk and dawn during the breeding season (May-July). As the light fades and other birds fall silent, the Swainson's Thrush begins its ascending sequences, filling the acoustic space between day and night. Not nocturnal (the owl, degree 4). Not diurnal (most other species). Positioned at the exact boundary between day and night. The boundary itself is the song's functional substrate.
+- **Neotropical migration and the continental commute.** The Swainson's Thrush is a full neotropical migrant -- it winters in South America (Colombia, Venezuela, northwestern Brazil) and flies thousands of kilometers annually to breed in North American riparian forests. This contrasts with the Hermit Thrush's altitudinal migration (elevation shifts rather than continental distance) and reinforces the melodic/harmonic split with a geographic correlate: the Swainson's traverses longitudes, the Hermit Thrush traverses elevations.
+- **Bull kelp as foundation species and the vertical ecosystem.** The NASA organism pairing is *Nereocystis luetkeana*, bull kelp, annual, 36m vertical growth in a single season, holdfast gripping subtidal rock while the stipe streams through the water column and the pneumatocyst floats the blades at the surface. The parallel is exact: the Swainson's song is vertical ascent in acoustic space, bull kelp is vertical ascent in physical space, and both organisms do foundational work that the rest of the ecosystem depends on. Remove the thrush and the crepuscular acoustic envelope collapses. Remove the kelp and the entire kelp-forest community collapses.
+- **Acoustic signatures and spectrogram analysis.** The Swainson's song is characterized by a starting pitch in the 1.5-2.0 kHz range and a terminal pitch between 3.5 and 5.0 kHz, with three to eight internal phrases each containing two to four fluty notes. Spectrograms show continuous upward-sloping contours with ornamental trilled segments embedded in each phrase. Duration: 2.0-3.5 seconds per full song. The acoustic signature is unmistakable and has served as the engine's reference exemplar for ascending-spiral contour at degree 18 and in the Turdidae comparative analysis with degree 2 and degree 7.
 
-Four research dimensions on the ascending spiral, the Catharus pair, the Turdidae trio, and the crepuscular transition:
+## Retrospective
 
-**1. The Ascending Spiral and the Orbit: Climbing Without Falling Back.** The Swainson's Thrush's song is an ascending spiral -- each phrase higher than the last, 1.5 kHz starting pitch climbing to 3.5-5.0 kHz across three to eight phrases, each phrase containing fluty ornamental notes but the defining feature being the inter-phrase pitch trajectory: always upward. Unlike the Hermit Thrush's arch form (which ascends AND descends within each phrase), the Swainson's just keeps climbing. The trajectory is upward. The melody does not come back down.
+### What Worked
 
-Enos's orbit was continuous forward motion around a closed curve -- perpetual forward motion without descent. The orbit is an ascending process that never falls back because the spacecraft achieves sufficient velocity to balance gravity's pull. Bull kelp grows from the ocean floor to the surface in a single season -- up to 36 meters of vertical growth at rates up to 10 cm per day, the fastest linear growth of any PNW marine organism. Three ascending systems: the thrush's phrase sequence, the capsule's orbital trajectory, the kelp's vertical growth. Persistent upward motion, each increment building on the previous.
+- **The ascending-spiral theme carried all four tracks cleanly.** Mercury-Atlas 5 (orbital ascent), Maktub (collective groove climbing), Swainson's Thrush (phrase-by-phrase pitch ascent), and Bull Kelp (36m vertical annual growth) each independently perform the ascent operation. Four tracks, one structural commitment, no forced alignment. The paired-engine method has shown it can document ascent as cleanly as it documented reflection at degree 14.
+- **The Catharus pair opened the within-genus beauty axis.** Degree 7's Hermit Thrush (harmonic thinking, vertical) and degree 18's Swainson's Thrush (melodic thinking, horizontal) demonstrate two opposite architectural principles within a single genus whose name means "pure." This is the engine's deepest within-genus acoustic comparison and establishes a template for future within-genus pairs.
+- **The Turdidae trio completed cleanly without padding.** Varied Thrush (drone), Hermit Thrush (arch), Swainson's Thrush (spiral) map the full minimalism-to-aspiration range in three acoustic strategies, one family. The trio is structurally complete. Future thrushes will extend the pattern rather than fill gaps.
+- **The dual-degree precedent was set with Reggie Watts at 17 and 18.** The engine now catalogs projects, not biographies. Watts-as-solo-artist (degree 17) and Watts-as-Maktub-frontman (degree 18) are different creative configurations. The convention will travel cleanly forward -- any future artist who appears in multiple creative configurations can be catalogued twice without ontological strain.
+- **The first band entered cleanly via collective improvisation.** Maktub is the engine's first collaborative entity (as opposed to bandleader + sidemen). Four musicians co-authored the music through emergent jamming. The creative-unit taxonomy (solo / bandleader / collaborative band) is now three-deep and supports future expansion.
 
-**2. The Second Catharus: Harmonic Thinking vs. Melodic Thinking.** The engine's second Catharus thrush reveals two fundamentally different approaches to beauty within a genus whose name means "pure":
+### What Could Be Better
 
-| Dimension | Hermit Thrush (Degree 7) | Swainson's Thrush (Degree 18) |
-|-----------|--------------------------|-------------------------------|
-| Phrase contour | Arch -- ascending then descending within each phrase | Ascending staircase -- each phrase higher than the last |
-| Musical thinking | HARMONIC (vertical: chord tones, overtone series) | MELODIC (horizontal: sequential steps, scalar ascent) |
-| Emotional quality | Contemplation -- the arch turns back on itself | Aspiration -- the line keeps climbing |
-| Phrase resolution | Each phrase resolves (arch descends) | Phrases don't resolve -- the sequence ascends |
-| Migration | Altitudinal migrant (elevation shifts) | Full neotropical migrant (continental distance) |
-| Habitat | Mountain forest (elevation-defined) | Riparian forest (moisture-defined) |
+- **The Maktub album trajectory was named but not documented at the release-by-release level.** *Khronos* (1999), *Subtle Ways* (2001), and *Say What You Mean* (2003) are listed but each album's specific harmonic and rhythmic contribution to the band's evolving sound was not unpacked. A future chapter should produce a per-album ledger with personnel notes, producer credits, and representative tracks that map to the Soul/Jazz transition thesis.
+- **The Crepuscular-acoustics claim needs empirical grounding.** The release asserts that the Swainson's Thrush sings at the crepuscular boundary, but the empirical density of crepuscular song -- measured call rates per hour in the twilight window vs. full daylight -- was not sourced from the ornithological literature. A future pass should cite Vallely/Dyer, Sibley, or Cornell Lab eBird data to support the acoustic-substrate argument.
+- **The Enos ethical frame stayed at the gesture level.** The dedication to C.S. Lewis and the reference to *Out of the Silent Planet* supply the philosophical hook but the release did not trace through the specific Cosmic Trilogy arguments about instrumentalization. A future chapter should quote Lewis's Oyarsa dialogue directly and connect it to the Mercury primate program's documented procedures rather than leaving the ethical argument at the calendar-date synchrony level.
 
-Harmonic thinking vs. melodic thinking is one of the most fundamental distinctions in music theory. The Hermit Thrush stacks intervals vertically (harmonic-series ratios within phrases). The Swainson's chains phrases horizontally (sequential pitch escalation across phrases). Both are beautiful. Both are *Catharus* -- "pure." The purity expresses differently.
+## Lessons Learned
 
-**3. The Turdidae Trio: Three Strategies.** Three thrushes at degrees 2, 7, and 18:
+1. **The genre gradient steepens sharply.** Three genre shifts in three consecutive degrees (16: Jazz Fusion, 17: Jazz/Comedy, 18: Soul/Jazz). Jazz transitions from genre to method. Soul becomes the engine's first non-jazz primary genre. The carry-forward from degree 17 predicted the next non-jazz genre was approaching -- it arrived at degree 18.
 
-| Degree | Species | Strategy | Complexity |
-|--------|---------|----------|------------|
-| 2 | Varied Thrush | AM drone -- one note sustained | Minimal |
-| 7 | Hermit Thrush | Harmonic series arch -- vertical intervals | Mathematical |
-| **18** | **Swainson's Thrush** | **Ascending spiral -- horizontal ascent** | **Aspirational** |
+2. **The warbler quartet holds as complete.** Degree 17's carry-forward marked the Parulidae quartet (degrees 14-17) as COMPLETE. Degree 18 confirms: the Swainson's Thrush is Turdidae, not Parulidae. The engine shifted families cleanly. Any future Parulidae will extend the quartet, not restart it.
 
-The Turdidae are now the engine's most acoustically diverse family alongside the Parulidae warbler quartet (degrees 14-17). The thrush trio covers the full range from minimalism through mathematical complexity to aspirational ascent.
-
-**4. The Crepuscular Transition: Singing at the Boundary.** The Swainson's Thrush is specifically a summer-evening voice -- its ascending spiral is most commonly heard at dusk and dawn during the breeding season (May-July). As the light fades and other birds fall silent, the Swainson's Thrush begins its ascending sequences, filling the acoustic space between day and night. Not nocturnal (the owl, degree 4) and not diurnal (most other species), but positioned at the exact boundary between day and night. Mercury-Atlas 5 launched Enos into the transition between animal testing and human spaceflight -- the last chimp flight, the bridge between biological validation and human commitment. Maktub operated at the transition between jazz and soul. Degree 18 is a transitional degree -- everything positioned at a boundary, everything looking across to the other side.
-
-### Retrospective: Degree 18 Patterns Established
-
-1. **The genre gradient steepens sharply.** Three genre shifts in three degrees (16: Jazz Fusion, 17: Jazz/Comedy, 18: Soul/Jazz). Jazz transitions from genre to method. Soul becomes the engine's first non-jazz primary genre. The carry-forward from degree 17 predicted the next non-jazz genre was approaching -- it arrived at degree 18.
-
-2. **The warbler quartet holds as complete.** Degree 17 carry-forward marked the quartet (degrees 14-17) as COMPLETE. Degree 18 confirms: the Swainson's Thrush is Turdidae, not Parulidae. The engine shifted families cleanly. Any future Parulidae will extend the quartet, not restart it.
-
-3. **Mercury program converges toward human orbital flight.** MR-1 (four inches, degree 16) to MR-2 (Ham suborbital 253 km, degree 17) to MA-5 (Enos orbital 237 km, degree 18). The sequence is convergent. The carry-forward from degree 17 asked whether the Mercury program would reach human flight -- it is 83 days away. Glenn is next in the sequence.
+3. **Mercury program converges toward human orbital flight.** MR-1 (four inches, degree 16) to MR-2 (Ham suborbital 253 km, degree 17) to MA-5 (Enos orbital 237 km, degree 18). The sequence is convergent. The carry-forward from degree 17 asked whether the Mercury program would reach human flight -- it is 83 days away. John Glenn is next in the sequence.
 
 4. **The E=3 streak extends to four consecutive degrees.** Degrees 15-16-17-18 all at E=3 on both tracks. Combined 6 for four consecutive releases. The breakout from the quiet zone is not a spike -- it is a sustained plateau. The carry-forward from degree 17 asked "Will the breakout hold?" Answer: yes. Fourth consecutive.
 
-5. **The 71-day gap narrows.** Degree 17 carry-forward identified the 71-day gap between Ham and Gagarin -- the interval consumed by the Redstone's anomalies. At degree 18, the Mercury program is on the Atlas, past the Redstone's problems. The gap has been bridged by switching rockets. Enos flew the Atlas that Ham could not.
+5. **The Catharus pair reveals harmonic vs. melodic beauty.** Degree 7's Hermit Thrush was harmonic (vertical). Degree 18's Swainson's Thrush is melodic (horizontal). Same genus, same "purity," opposite architectural principles. This is the engine's deepest within-genus acoustic comparison.
 
-6. **The Catharus pair reveals harmonic vs. melodic beauty.** Degree 7's Hermit Thrush was harmonic (vertical). Degree 18's Swainson's Thrush is melodic (horizontal). Same genus, same "purity," opposite architectural principles. This is the engine's deepest within-genus acoustic comparison.
+6. **Creative unit types expand to three.** The engine now tracks solo artist, bandleader, and collaborative band. Maktub's emergent composition through collective improvisation is structurally distinct from all prior entries. The carry-forward from degree 17 noted composition was evolving (Watts as one-man-orchestra); degree 18 completes the shift to true collective.
 
-7. **Creative unit types expand to three.** The engine now tracks solo artist, bandleader, and collaborative band. Maktub's emergent composition through collective improvisation is structurally distinct from all prior entries. The carry-forward from degree 17 noted that composition was evolving (Watts as one-man-orchestra); degree 18 completes the shift to true collective.
+7. **Capitol Hill diversifies the engine's geography.** After Central District dominance and the Cornish connection, Capitol Hill enters as a new geographic node. The post-grunge omnivorous scene. Genre boundaries dissolve in this neighborhood, and future Capitol Hill entries are structurally enabled.
 
-8. **Capitol Hill diversifies the engine's geography.** After Central District dominance and the Cornish connection, Capitol Hill enters as a new geographic node. The post-grunge omnivorous scene. Genre boundaries dissolve in this neighborhood.
+8. **The dual-degree precedent is set.** Reggie Watts at degrees 17 and 18 proves the engine catalogs projects, not biographies. Future artists may appear at multiple degrees in different creative configurations.
 
-9. **The dual-degree precedent is set.** Watts at 17 and 18 proves the engine catalogs projects, not biographies. Future artists may appear at multiple degrees in different configurations.
+9. **The Cornish-to-Maktub pipeline extends Cornish output into Capitol Hill.** Watts trained at Cornish College of the Arts. At degree 18, Cornish output (Watts) feeds into the Capitol Hill band scene. Institutional output becomes geographic input. The pipeline extends beyond the institution into the neighborhood.
 
-10. **The Cornish-to-Maktub pipeline.** Watts trained at Cornish (noted at degree 17 as third Cornish connection, first student). At degree 18, the Cornish output (Watts) feeds into the Capitol Hill band scene. Institutional output becomes geographic input. The pipeline extends beyond the institution into the neighborhood.
-
-### Carry-Forward Items from Degree 18
-
-- **Genre gradient:** Jazz (0-15) → Jazz Fusion (16) → Jazz/Comedy (17) → Soul/Jazz (18). Jazz is now the modifier. The next genre may not contain Jazz at all. Watch for the first purely non-jazz genre.
-- **Turdidae trio:** Varied Thrush (2, drone), Hermit Thrush (7, harmonic arch), Swainson's Thrush (18, ascending spiral). Three strategies, one family. Future Turdidae will extend the trio.
-- **Catharus pair:** Hermit (7, harmonic/vertical) + Swainson's (18, melodic/horizontal). The within-genus beauty axis is now documented. A third Catharus would complete a triangle.
-- **Mercury program: Glenn is 83 days away.** MA-5 qualified the capsule. Glenn's MA-6 orbital flight is the next Mercury event. The transition from biological to human spaceflight is imminent.
-- **E=3 streak: Four consecutive degrees (15-18).** Combined 6 x 4. Will the plateau hold at degree 19 or will the energy shift?
-- **Creative units:** 3 types documented -- solo artist, bandleader, collaborative band. Track which type each future degree represents.
-- **Dual-degree artists:** Watts at 17 and 18. Precedent set. Track future multi-project artists.
-- **Capitol Hill:** First project. Will additional Capitol Hill artists appear? The neighborhood's genre-agnostic scene suggests diverse future entries.
-- **Bull kelp as annual foundation species:** The organism that creates the entire community and dies within the year. The Mercury primate flights as the annual that seeded the perennial program. The qualification test that makes the operational program possible -- neither persists, both are necessary.
-- **Crepuscular timing:** The Swainson's Thrush sings at the boundary between day and night. Degree 18 is positioned at multiple boundaries: jazz/soul, animal/human spaceflight, suborbital/orbital. Future degrees should note when boundary-positioning recurs.
-- **The Lewis dedication and the ethics of the instrumental.** C.S. Lewis born November 29, 1898 -- same date as Enos's launch. *Out of the Silent Planet*: the silent planet sends a chimpanzee who cannot speak. Lewis's argument that treating beings as instruments destroys the moral framework that makes achievement meaningful. The Mercury primate program's instrumental calculus. Carries forward as ethical lens.
-
-</details>
-
-## Programs Active at Degree 18
-
-| Program | Missions | Status | Key Achievement |
-|---------|----------|--------|----------------|
-| Pioneer | 0-5 | Active | Deep space communication (36.2M km at degree 13) |
-| Explorer | 1-7 | Active | Van Allen belts (6), radiation budget (12) |
-| Vanguard | 1-2 | Complete | First solar-powered satellite |
-| Echo | 1 | Active | First passive comsat (30.5m Mylar balloon) |
-| TIROS | 1 | Active | First weather satellite (22,952 photos in 78 days) |
-| Mercury | MR-1, MR-2, **MA-5** | Active | MR-1: four inches (degree 16). MR-2: Ham 253 km (degree 17). **MA-5: Enos orbital, 237 km, capsule qualified (degree 18).** Glenn next. |
-
-## Engine Position
-
-```
-v1.49.501-506 = degrees 0-5    Pass 2  ✓
-v1.49.507-518 = degrees 6-17   Pass 2  ✓
-v1.49.519     = degree 18      Pass 2  ← THIS RELEASE
-v1.49.520     = degree 19      Pass 2  ← next
-```
-
-## Files
-
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/018-maktub/pass2-refinement.md` | Pass 2 | ~700 |
-| `S36/research/releases/018-maktub/research.md` | Deep Research | ~3,000 |
-| `SPS/research/releases/018-swainsons-thrush/pass2-refinement.md` | Pass 2 | ~600 |
-| `SPS/research/releases/018-swainsons-thrush/research.md` | Deep Research | ~4,000 |
-| `NASA/1.18/research.md` | Deep Research | ~8,000 |
-| `NASA/1.18/organism.md` | Organism Pairing | ~7,000 |
-| `NASA/1.18/degree-sync.json` | Degree Sync | ~350 lines |
-| `docs/release-notes/v1.49.519/README.md` | Release Note | -- |
-
-## Emerging Patterns at Degree 18
-
-| Pattern | Status | Degree 18 Value |
-|---------|--------|-----------------|
-| S36 Artists | 19 documented (degrees 0-18) | Soul/Jazz. First band. First dual-degree artist. Capitol Hill enters. Jazz becomes method. |
-| SPS Species | 19 documented (degrees 0-18) | Third Turdidae. Second Catharus. Ascending spiral. Crepuscular transition. Melodic thinking. |
-| NASA Missions | 19 aligned (1.0-1.18) | MA-5: Enos orbital. Lever malfunction -- shocked for correct responses. Capsule qualified. Glenn 83 days away. |
-| Piano Lineage | CLOSED at 4 | Stride (5) -- Hard Bop (6) -- Modal (13) -- Post-Genre (14) |
-| Keyboard Shift | Active from degree 16 | Lorber = synthesizer/keyboards. Watts = loop station/voice. Maktub Watts = soul vocals + keys. |
-| Trumpet Pair | 2 trumpeters | Standifer (4, multi-instrumental) + Marriott (15, specialist). Both E=3. |
-| UW Pipeline | 3 products (13-15) | Anchor -- Export -- Builder-Stayer. Most documented institution. |
-| Berklee Pipeline | 3 graduates (0, 1, 16) | Jones -- Frisell -- Lorber. Maximum divergence engine. |
-| Cornish Pipeline | 3 members (7, 9, 17) → output at 18 | Priester -- Caliman -- Watts. Watts feeds into Capitol Hill band scene. |
-| Communication Paradigms | 4 | Active (Pioneer) + Passive (Echo) + Observational (TIROS) + Crewed Test (Mercury) |
-| Warbler Quartet | COMPLETE (14-17) | MacGillivray's (resolution) + Wilson's (accelerando) + Yellow (crescendo) + Yellowthroat (drive) |
-| Turdidae Trio | 3 species (2, 7, 18) | Drone -- Harmonic arch -- Ascending spiral. Three acoustic strategies. |
-| Catharus Pair | 2 species (7, 18) | Harmonic/vertical (Hermit) + Melodic/horizontal (Swainson's). Within-genus beauty axis. |
-| Energy Profile | Combined 6 (fourth consecutive) | E=3+E=3 sustained from degree 15 through 18. Four-degree plateau. |
-| Genre Labels | 4 | Jazz, Jazz Fusion, Jazz/Comedy, Soul/Jazz |
-| NASA Programs | 6 | Pioneer, Explorer, Vanguard, Echo, TIROS, Mercury |
-| Loop Pedal Lineage | COMPLETE (1-17) | Frisell (contemplation) to Watts (absurdism). Jazz quadrant bracketed. |
-| Creative Unit Types | 3 | Solo artist, bandleader, collaborative band (NEW at degree 18) |
-| Dual-Degree Artists | 1 | Watts at 17 (solo) + 18 (Maktub) |
-| Capitol Hill Projects | 1 | Maktub (first entry) |
-| Mercury Sequence | MR-1 → MR-2 → MA-5 | Four inches → Ham suborbital → Enos orbital. Converging. Glenn next. |
+10. **Bull kelp as annual foundation species establishes the annual-organism template.** Kelp creates the entire kelp-forest community and dies within a single year. The Mercury primate flights are the annual that seeded the perennial human program. The qualification test makes the operational program possible -- neither persists, both are necessary.
 
 ## Cross-References
 
@@ -200,76 +107,43 @@ v1.49.520     = degree 19      Pass 2  ← next
 | S36 | Maktub | Artist -- first band, Soul/Jazz, Capitol Hill, Watts dual-degree, collective improvisation |
 | SPS | Swainson's Thrush | Species -- third Turdidae, second Catharus, ascending spiral, crepuscular transition |
 | NASA | Mercury-Atlas 5 | Mission -- Enos orbits twice, lever malfunction, capsule qualified, Glenn 83 days away |
-| Organism | Nereocystis luetkeana | Bull kelp -- 36m annual, holdfast anchor, foundation species, vertical ecosystem |
-| Dedication | C.S. Lewis | Born Nov 29, 1898. Cosmic Trilogy. The ethics of the instrumental. The Silent Planet. |
-| Catharus Pair | Degrees 7 and 18 | Harmonic thinking (Hermit) ↔ Melodic thinking (Swainson's). Within-genus beauty axis. |
-| Turdidae Trio | Degrees 2, 7, 18 | Drone → Harmonic arch → Ascending spiral. Three strategies, one family. |
-| Warbler Quartet | Degrees 14-17 | COMPLETE. Four genera, four strategies. Degree 18 shifted to Turdidae cleanly. |
-| Genre Gradient | Jazz → Jazz Fusion → Jazz/Comedy → Soul/Jazz | Three shifts in three degrees. Jazz becomes method. Soul becomes primary. |
-| Mercury Sequence | MR-1 (16) → MR-2 (17) → MA-5 (18) | Four inches → Ham suborbital → Enos orbital. Converging toward Glenn. |
-| Energy | Combined 6 x 4 degrees | E=3+E=3 plateau sustained from degree 15 through 18. |
-| Dual-Degree | Watts at 17 and 18 | Solo → Band. Jazz/Comedy → Soul/Jazz. Same artist, different projects. |
-| Capitol Hill | First entry at degree 18 | Post-grunge incubation space. Genre-agnostic scene. Omnivorous audience. |
-| Kelp-Enos | Holdfast-to-canopy | Enos as holdfast (dark, gripping, foundational). Glenn as canopy (light, visible, productive). |
-| Cornish Pipeline | Degree 17 → 18 | Watts trained at Cornish → performs in Capitol Hill band. Institutional output → geographic input. |
-| Lewis-Enos | Ethics of the instrumental | Silent planet sends a chimpanzee. Lewis's argument against treating beings as instruments. |
-| Degree 17→18 | Post-quartet, post-suborbital | Family shift (Parulidae → Turdidae). Flight shift (suborbital → orbital). Genre shift (Jazz primary → Soul primary). |
-| Degree 18→19 | Post-first-band | After the first collaborative entity -- will degree 19 return to solo or continue the band precedent? |
+| NASA Organism | *Nereocystis luetkeana* | Bull kelp -- 36m annual growth, holdfast anchor, foundation species, vertical ecosystem |
+| Dedication | C.S. Lewis (November 29, 1898 -- November 22, 1963) | Cosmic Trilogy. *Out of the Silent Planet*. The ethics of the instrumental. Calendar-synchrony with Enos's launch. |
+| Catharus Pair | Degrees 7 and 18 | Harmonic thinking (Hermit) <-> Melodic thinking (Swainson's). Within-genus beauty axis. |
+| Turdidae Trio | Degrees 2, 7, 18 | Drone (Varied) -> Harmonic arch (Hermit) -> Ascending spiral (Swainson's). Three strategies, one family. |
+| Warbler Quartet | Degrees 14-17 | COMPLETE. Four Parulidae genera, four strategies. Degree 18 shifted families cleanly to Turdidae. |
+| Genre Gradient | Jazz -> Jazz Fusion -> Jazz/Comedy -> Soul/Jazz | Three shifts in three degrees. Jazz becomes method. Soul becomes primary. |
+| Mercury Sequence | MR-1 (16) -> MR-2 (17) -> MA-5 (18) | Four inches -> Ham suborbital -> Enos orbital. Converging toward John Glenn's MA-6. |
+| Energy Profile | Combined 6 across four degrees | E=3 + E=3 plateau sustained from degree 15 through 18. |
+| Dual-Degree Artists | Reggie Watts at 17 and 18 | Solo -> Band. Jazz/Comedy -> Soul/Jazz. Same artist, different projects. |
+| Capitol Hill | First entry at degree 18 | Post-grunge incubation space. Genre-agnostic scene. Omnivorous audience. Crocodile Cafe, Showbox, Neumo's. |
+| Kelp-Enos Parallel | Holdfast-to-canopy | Enos as holdfast (dark, gripping, foundational). Glenn as canopy (light, visible, productive). |
+| Cornish Pipeline | Degrees 7, 9, 17 -> 18 | Julian Priester (faculty) -> Hadley Caliman (faculty) -> Reggie Watts (student) -> Maktub (Capitol Hill band). |
+| Lewis-Enos Synchrony | November 29 | C.S. Lewis born November 29, 1898. Mercury-Atlas 5 launched November 29, 1961. 63-year calendar echo. |
+| Degree 17 -> 18 | Post-quartet, post-suborbital | Family shift (Parulidae -> Turdidae). Flight shift (suborbital -> orbital). Genre shift (Jazz primary -> Soul primary). |
+| Degree 18 -> 19 | Post-first-band | After the first collaborative entity -- will degree 19 return to solo or continue the band precedent? |
+| Defunct Projects | Maktub (1998-2007) | Second defunct project catalogued. First collaborative-entity dissolution. Annual-organism template confirmed. |
+| Label Ledger | Velour / Livewire | Independent-soul distribution. Extends beyond Blue Note / ECM / Columbia into regional neo-soul economy. |
 
-## Pattern Tables at Degree 18
+## Programs Active at Degree 18
 
-### Mercury Program Sequence
+| Program | Missions | Status | Key Achievement |
+|---------|----------|--------|----------------|
+| Pioneer | 0-5 | Active | Deep space communication (36.2M km at degree 13) |
+| Explorer | 1-7 | Active | Van Allen belts (6), radiation budget (12) |
+| Vanguard | 1-2 | Complete | First solar-powered satellite |
+| Echo | 1 | Active | First passive comsat (30.5m Mylar balloon, degree 14) |
+| TIROS | 1 | Active | First weather satellite (22,952 photos in 78 days) |
+| Mercury | MR-1, MR-2, **MA-5** | Active | MR-1: four inches (degree 16). MR-2: Ham 253 km (degree 17). **MA-5: Enos orbital, 237 km, capsule qualified (degree 18).** Glenn next. |
 
-| Mission | Degree | Date | Vehicle | Altitude | Crew | Result |
-|---------|--------|------|---------|----------|------|--------|
-| MR-1 | 16 | Nov 21, 1960 | Redstone | 4 inches | None | Sneak circuit -- settled on pad |
-| MR-2 | 17 | Jan 31, 1961 | Redstone | 253 km | Ham (chimp) | Capsule qualified; booster anomalies force MR-BD |
-| **MA-5** | **18** | **Nov 29, 1961** | **Atlas D** | **237 km (orbital)** | **Enos (chimp)** | **Capsule qualified for orbital human flight. Lever malfunction -- shocked for correct responses.** |
-| MA-6 | future | Feb 20, 1962 | Atlas D | Orbital (3 orbits) | Glenn | First American in orbit. 83 days after Enos. |
+## Engine Position
 
-### Genre Gradient Through Degree 18
-
-| Degrees | Genre Label | Jazz Role | Primary Mode |
-|---------|------------|-----------|-------------|
-| 0-15 | Jazz (with subgenre variations) | Primary genre | Jazz IS the music |
-| 16 | Jazz Fusion | Half of a compound | Jazz + electronic fusion |
-| 17 | Jazz/Comedy | Superposition partner | Jazz AND comedy simultaneously |
-| **18** | **Soul/Jazz** | **Modifier / method** | **Soul is primary; jazz is technique** |
-
-### Turdidae Trio
-
-| Degree | Species | Genus | Strategy | Complexity |
-|--------|---------|-------|----------|------------|
-| 2 | Varied Thrush | *Ixoreus* | AM drone (one sustained note) | Minimal |
-| 7 | Hermit Thrush | *Catharus* | Harmonic series arch (vertical intervals) | Mathematical |
-| **18** | **Swainson's Thrush** | ***Catharus*** | **Ascending spiral (horizontal ascent)** | **Aspirational** |
-
-### Catharus Beauty Axis
-
-| Dimension | Hermit Thrush (Degree 7) | Swainson's Thrush (Degree 18) |
-|-----------|--------------------------|-------------------------------|
-| Thinking | Harmonic (vertical) | Melodic (horizontal) |
-| Contour | Arch (up then down within phrase) | Staircase (each phrase higher) |
-| Resolution | Resolves (arch descends) | Does not resolve (keeps climbing) |
-| Emotion | Contemplation | Aspiration |
-| Habitat | Mountain forest (elevation) | Riparian forest (moisture) |
-
-### Creative Unit Types at Degree 18
-
-| Type | First Appearance | Examples | Composition Model |
-|------|-----------------|----------|------------------|
-| Solo artist | Degree 0+ | Jones, Frisell, Anderson, Parks, Watts (solo) | Individual authorship |
-| Bandleader | Degree 0+ | Jones, Horvitz | Top-down direction |
-| **Collaborative band** | **Degree 18** | **Maktub** | **Emergent -- collective improvisation** |
-
-### Institutional Pipelines at Degree 18
-
-| Institution | Members | Degrees | Stylistic Range |
-|-------------|---------|---------|----------------|
-| Berklee | Jones, Frisell, Lorber | 0, 1, 16 | Arranger -- deconstructionist -- fusion architect |
-| UW | Seales, Parks, Marriott | 13, 14, 15 | Anchor -- export -- builder-stayer |
-| Cornish | Priester, Caliman, Watts | 7, 9, 17 | Experimental trombone -- hard bop sax -- beatbox/loop/comedy |
-| **Capitol Hill** | **Maktub** | **18** | **Post-grunge neo-soul fusion** |
+```
+v1.49.501-506 = degrees 0-5    Pass 2  (opening pentad)
+v1.49.507-518 = degrees 6-17   Pass 2  (second cycle complete)
+v1.49.519     = degree 18      Pass 2  <- THIS RELEASE (THE ASCENDING SPIRAL)
+v1.49.520     = degree 19      Pass 2  <- next
+```
 
 ## Cumulative Engine Statistics (v1.49.501-519)
 
@@ -281,21 +155,59 @@ v1.49.520     = degree 19      Pass 2  ← next
 | NASA missions aligned | 19 (1.0 through 1.18) |
 | Genre labels | 4 (Jazz, Jazz Fusion, Jazz/Comedy, Soul/Jazz) |
 | Creative unit types | 3 (solo, bandleader, collaborative band) |
-| Turdidae species | 3 (trio: drone, harmonic arch, ascending spiral) |
-| Catharus species | 2 (pair: harmonic/vertical, melodic/horizontal) |
+| Turdidae species | 3 (drone, harmonic arch, ascending spiral) |
+| Catharus species | 2 (harmonic/vertical, melodic/horizontal) |
 | Parulidae species | 4 (quartet: resolution, accelerando, crescendo, drive) |
-| Dual-degree artists | 1 (Watts at 17 + 18) |
+| Dual-degree artists | 1 (Reggie Watts at 17 + 18) |
 | Mercury program flights | 3 (MR-1 four inches, MR-2 Ham suborbital, MA-5 Enos orbital) |
 | Consecutive E=3 degrees | 4 (degrees 15-18) |
 | All-time combined energy maximum | 8 (degree 1: Frisell 3 + Wren 5) |
 | Capitol Hill projects | 1 (Maktub) |
 | NASA programs | 6 (Pioneer, Explorer, Vanguard, Echo, TIROS, Mercury) |
 | Loop pedal lineage | COMPLETE (Frisell degree 1 to Watts degree 17) |
-| Cornish pipeline | 3 members → Capitol Hill output at degree 18 |
-| Foundation species documented | 1 (Bull kelp -- Nereocystis luetkeana) |
+| Cornish pipeline | 3 members -> Capitol Hill output at degree 18 |
+| Foundation species documented | 1 (Bull kelp -- *Nereocystis luetkeana*) |
+| Defunct projects | 2 |
+| Compositional models | 5 (individual, bandleader, scored-collective, loop-self-accompaniment, emergent-collective) |
+
+## Acoustic Progression at Degree 18
+
+| Strategy | Species | Degree | Description |
+|----------|---------|--------|-------------|
+| Complexity | Pacific Wren | 2 | Maximum syllable count, fastest tempo |
+| Syntax | Black-capped Chickadee | 3 | Combinatorial note ordering, predator encoding |
+| Harmonic Series | Hermit Thrush | 7 | Overtone-based intervals, near-musical pitch |
+| Monotony | Hutton's Vireo | 13 | Repetition without variation, maximum persistence |
+| Narrative | MacGillivray's Warbler | 14 | Repetition with resolution (A-A-A-B) |
+| **Ascending Spiral** | **Swainson's Thrush** | **18** | **Horizontal ascent, each phrase higher than the last** |
+
+## Taxonomic State at Degree 18
+
+| Family | Species | Degrees |
+|--------|---------|---------|
+| Parulidae (warblers) | 4 (MacGillivray's, Wilson's, Yellow, Yellowthroat) | 14, 15, 16, 17 |
+| Turdidae (thrushes) | 3 (Varied, Hermit, Swainson's) | 2, 7, 18 |
+| Paridae (chickadees) | 2 | 3, 9 |
+| Troglodytidae (wrens) | 1 | 2 |
+| Corvidae (jays/ravens) | 1 | (future) |
+| Others | various | -- |
+
+## Files
+
+- `docs/release-notes/v1.49.519/README.md` -- this release README (A-grade uplift)
+- `docs/release-notes/v1.49.519/chapter/00-summary.md` -- chapter summary stub
+- `docs/release-notes/v1.49.519/chapter/03-retrospective.md` -- 10 numbered lessons, degree 18 patterns
+- `docs/release-notes/v1.49.519/chapter/99-context.md` -- version metadata and navigation
+- `www/tibsfox/com/Research/NASA/1.18/research.md` -- Mercury-Atlas 5 deep-research essay (~8,000 words)
+- `www/tibsfox/com/Research/NASA/1.18/organism.md` -- Bull kelp organism pairing (~7,000 words)
+- `www/tibsfox/com/Research/NASA/1.18/degree-sync.json` -- degree sync manifest
+- `S36/research/releases/018-maktub/pass2-refinement.md` -- Maktub Pass 2 research
+- `S36/research/releases/018-maktub/research.md` -- Maktub deep-research essay (~3,000 words)
+- `SPS/research/releases/018-swainsons-thrush/pass2-refinement.md` -- Swainson's Thrush Pass 2 research
+- `SPS/research/releases/018-swainsons-thrush/research.md` -- Swainson's Thrush deep-research essay (~4,000 words)
 
 ---
 
-*Degree 18: the ascending spiral. A chimpanzee named Enos -- five years old, trained at Holloman, strapped into a Mercury capsule atop an Atlas missile with skin thinner than a dime -- who orbited Earth twice while a malfunctioning lever apparatus shocked him for every correct response. He kept pulling the correct lever. His accuracy held. His trained response held. The system punished him for being right and he maintained his integrity against the punishment because the training was his holdfast and the holdfast does not let go. Eighty-three days later Glenn climbed into the same capsule. The gate was open because a chimpanzee refused to let bad feedback change what he knew was correct. Four musicians on Capitol Hill locking into a groove -- Goldman's guitar bending a minor ninth, Veley's bass anchoring the harmonic bed, Martin's drums carving pocket grooves, and Watts's voice rising from soul croon to gospel shout to a laugh that becomes a melody -- the groove sustaining like an orbit, once locked in, self-perpetuating, four people listening so intently that the music assembles itself from the act of paying attention. Maktub: it is written. A thrush in the riparian forest at dusk, each phrase higher than the last, the ascending spiral winding upward through the evening air -- not the Hermit Thrush's contemplative arch but the Swainson's aspirational staircase, the melody that does not come back down, that climbs and climbs until it reaches its ceiling and the silence that follows is not an ending but an arrival at altitude. A bull kelp growing from spore to thirty-six meters in a single season, holdfast gripping rock in the surf zone while the stipe streams through the water column and the blades float in the sunlight -- the annual organism that builds the entire forest and dies before the year is out, the foundation that does not persist but makes everything above it possible. C.S. Lewis, born the day Enos launched, who wrote that the silent planet breaks its silence by silencing others -- Earth sends a chimpanzee who cannot speak to qualify a capsule so that a human who can speak might fly. The holdfast grips. The groove sustains. The thrush ascends. The orbit closes on itself. Everything climbs. Everything transitions. It is written.*
+*Degree 18: the ascending spiral. A chimpanzee named Enos -- five years old, trained at Holloman, strapped into a Mercury capsule atop an Atlas missile with skin thinner than a dime -- who orbited Earth twice while a malfunctioning lever apparatus shocked him for every correct response. He kept pulling the correct lever. His accuracy held. His trained response held. The system punished him for being right and he maintained his integrity against the punishment because the training was his holdfast and the holdfast does not let go. Eighty-three days later John Glenn climbed into the same capsule. The gate was open because a chimpanzee refused to let bad feedback change what he knew was correct. Four musicians on Capitol Hill locking into a groove -- Goldman's guitar bending a minor ninth, Veley's bass anchoring the harmonic bed, Martin's drums carving pocket grooves, and Watts's voice rising from soul croon to gospel shout to a laugh that becomes a melody -- the groove sustaining like an orbit, once locked in, self-perpetuating, four people listening so intently that the music assembles itself from the act of paying attention. Maktub: it is written. A thrush in the riparian forest at dusk, each phrase higher than the last, the ascending spiral winding upward through the evening air -- not the Hermit Thrush's contemplative arch but the Swainson's aspirational staircase, the melody that does not come back down, that climbs until it reaches its ceiling and the silence that follows is not an ending but an arrival at altitude. A bull kelp growing from spore to thirty-six meters in a single season, holdfast gripping rock in the surf zone while the stipe streams through the water column and the blades float in the sunlight -- the annual organism that builds the entire forest and dies before the year is out, the foundation that does not persist but makes everything above it possible. C.S. Lewis, born the day Enos launched, who wrote that the silent planet breaks its silence by silencing others -- Earth sends a chimpanzee who cannot speak to qualify a capsule so that a human who can speak might fly. The holdfast grips. The groove sustains. The thrush ascends. The orbit closes on itself. Everything climbs. Everything transitions. It is written.*
 
 *"Degree 18. The ascending spiral. The lever. The holdfast. The groove. The silence after the last phrase is not absence -- it is altitude."*
