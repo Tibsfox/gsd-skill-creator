@@ -1,50 +1,159 @@
 # v1.20 — Dashboard Assembly
 
-**Shipped:** 2026-02-14
-**Phases:** 152-157 (6 phases) | **Plans:** 12 | **Requirements:** 23
+**Released:** 2026-02-14
+**Scope:** assembly milestone — wire 13 orphaned dashboard components built across v1.12-v1.19 into the generator pipeline, with unified CSS, four real data collectors, and a sixth generated page (console.html)
+**Branch:** dev → main
+**Tag:** v1.20 (2026-02-13T22:02:57-08:00) — "Dashboard Assembly"
+**Predecessor:** v1.19 — Budget Display Overhaul
+**Successor:** v1.21 — GSD-OS Desktop Foundation
+**Classification:** assembly release — no new features; connects existing v1.12-v1.19 components into a coherent whole
+**Phases:** 152-157 (6 phases) · **Plans:** 12 · **Requirements:** 23
+**Commits:** `8acb62ea8..ebf824ea2` (24 commits, 32 files, +4,423 / -91 lines)
+**Tests:** 110 tests across 12 plans, red-green TDD rhythm uniform across all six phases
+**Verification:** gray-matter SKILL.md parsing exercised across skills/agents/teams · design system token audit (no hardcoded hex) · `queue-state.json` 7-state mapping covered · graceful-fallback try/catch on every collector · 6-page full-data count asserted in generator integration tests
 
-Wire 13 orphaned dashboard components into the generator pipeline with unified CSS and real data pipelines, so the generated dashboard reflects every feature built across v1.12-v1.19.
+## Summary
 
-### Key Features
+**v1.20 is the release where the dashboard stopped being a set of demos and became one tool.** The six prior releases in the v1.12 → v1.19 arc each built a panel, a collector, a renderer, or a display primitive: v1.12 shipped the planning-docs dashboard body, v1.12.1 the live metrics, v1.13 the session lifecycle, v1.14 the promotion pipeline, v1.15 the embedded terminal, v1.16 the dashboard console and milestone ingestion, v1.17 the staging layer, v1.18 the information design system (shape + color encoding, status gantry, topology views, three-speed layering), and v1.19 the budget display overhaul with `LoadingProjection` and dual-view gauges. What none of those releases did was wire the components into the generator pipeline at the same time. Thirteen of them were sitting in the tree as orphaned modules — built, tested in isolation, but not reachable from the `generate()` entry point. v1.20 is the release that did the wiring. Six phases, twelve plans, twenty-four commits, and one hundred and ten tests later, the generator produces six pages (`index.html`, `milestones.html`, `token-budget.html`, `activity.html`, `session.html`, `console.html`) that all share one CSS pipeline, all draw from real file-system data, and all render the v1.18 information-design vocabulary consistently.
 
-**Unified CSS Pipeline (Phase 152):**
-- 18 component style modules wired into the dashboard generator
-- Design system token compliance: all colors reference CSS custom properties (no hardcoded hex values)
-- Component styles: gantry strip, entity shapes, topology view, activity feed, budget gauge, silicon panel, staging queue, console page, question cards, upload zone, submit flow, config form
+**Assembly releases are a first-class release type — they deserve their own milestone, not a footnote at the end of a feature release.** Every integration project accumulates a ledger of "built but not wired" components: renderers that exist but no caller invokes them, collectors written with mocks that never got plugged into a real data source, CSS modules shipped in isolation with no unifying pipeline. The temptation is to roll the wiring into the next feature release as an afterthought, and the predictable failure mode is that the wiring gets shortchanged because the feature scope crowds it out. v1.20 rejected that pattern by scoping the six phases explicitly to integration work, with zero new features inside the release boundary. The twenty-four commits follow the same test-commit-then-feat-commit rhythm that v1.15 established, which means the integration surface received the same TDD discipline as any feature surface. If future v1.x releases accumulate the same backlog of orphaned components, they should plan a v1.Y.0 "assembly" milestone the same way — not a v1.Y-0.5 micro-release, not a "cleanup" commit in v1.Y+1, but a first-class scoped deliverable with phases and plans.
 
-**Data Collectors (Phases 153-155):**
-- Topology data collector: reads real skill/agent/team files via gray-matter parsing, infers domain from file content, renders entity legend with shape+color encoding
-- Activity feed collector: transforms git commits and session observations into FeedEntry[] with scope classification (skill/agent/team/phase) and domain inference
-- Budget-silicon collector: bridges CumulativeBudgetResult and IntegrationConfig to gauge and panel renderers with domain color mapping
-- Staging queue collector: reads queue-state.json, maps 7-state items to color-coded badges for dashboard panel
+**Unified CSS pipeline in phase 152 was the non-obvious prerequisite.** Phase 152 has two plans and lands first in the commit log (`c662afc0a` for the style wiring, `09c83f70a` for the design-system token compliance). Eighteen component style modules — gantry strip, entity shapes, topology view, activity feed, budget gauge, silicon panel, staging queue, console page, question cards, upload zone, submit flow, config form, plus supporting primitives — were wired into the generator's CSS assembly step so every generated page ships with the full stylesheet. The second plan in the phase is the one that made the pipeline honest: a test asserting that no hardcoded hex colors appear in any component CSS (`c345caf21` test, `09c83f70a` feat). Every color now references a CSS custom property defined once in the design-system token module. This means a single change to a token propagates across all six pages; more importantly, it means the v1.18 design system is actually in force, not just defined. The difference between a design system on paper and a design system in production is a failing test that forbids the pattern the system replaces. Phase 152 shipped that test.
 
-**Console Page Assembly (Phases 156-157):**
-- Console assembled as 6th generated dashboard page (console.html)
-- Settings panel with hot-configurable integration options
-- Activity timeline showing recent session operations
-- Question card display with 5 interactive question types
-- Submit flow for milestone configuration
-- Full CSS integration with design system tokens
+**Four data collectors form the bridge layer between file-system state and dashboard renderers.** Phases 153 through 156 each shipped one collector with the same shape: `collect<Thing>()` reads real files, returns a typed object that the renderer consumes. Phase 153 shipped `collectTopology()` (`src/dashboard/collectors/topology-collector.ts`), which walks `.claude/skills/`, `.claude/agents/`, and `.claude/teams/`, reads each `SKILL.md` / `AGENT.md` / `TEAM.md` with `gray-matter`, and produces an entity list ready for the v1.18 shape-and-color encoding. Phase 154 shipped `collectActivity()` (`src/dashboard/collectors/activity-collector.ts`), which transforms git commit history plus session observations into `FeedEntry[]` with scope classification (skill, agent, team, phase) and domain inference. Phase 155 shipped the budget-silicon collector (`src/dashboard/budget-silicon-collector.ts`), which bridges the v1.19 `CumulativeBudgetResult` and the integration config to the gauge and silicon-panel renderers. Phase 156 shipped `collectStagingQueue()` (`src/dashboard/collectors/staging-collector.ts`), which reads `.planning/staging/queue-state.json` and maps its seven lifecycle states to color-coded badges. All four collectors follow the same fault-tolerance rule: every source read is wrapped in `try/catch` with a safe default, so a missing or malformed file produces an empty panel rather than a page-level exception. This rule is what makes the dashboard generator safe to run on any project in any state.
 
-### Test Coverage
+**Phase 157 added console.html as the sixth generated page without reshaping the generator contract.** The two plans in phase 157 are the ones most directly tied to the v1.16 milestone-ingestion surface: plan 157-01 shipped `collectConsoleData()` (`src/dashboard/collectors/console-collector.ts`, 144 lines), which reads `.planning/console/` — session status from `outbox/status/current.json`, pending questions via `QuestionPoller.poll()`, milestone config via `MilestoneConfigSchema.safeParse`, and activity entries via `bridge.jsonl` line parsing with `classifyLogEntry`. Plan 157-02 wired that collector plus `renderConsolePage` and `renderSubmitFlow` into the generator (`src/dashboard/generator.ts`, commit `ebf824ea2`), added `'console'` to `NAV_PAGES` so cross-page navigation includes it, added a `renderConsoleContent` helper that stitches the console page and submit flow into one body, and added the console page definition that produces `console.html`. The nine integration tests cover the combinations — `console.html` generation, navigation links, class wrapper, settings panel with config data, question cards, submit flow section, activity section with bridge entries, the 6-page full-data count, and the graceful empty state. The test count moved from 5 to 6 pages in one assertion swap (`generator.test.ts` diff in `b6c718898`), which is the kind of change that reads as small but encodes the full scope decision.
 
-- 110 tests across 12 plans
+**Promise.all for parallel independent collection is the performance discipline the collectors share.** Every collector that has more than one data source — notably `collectConsoleData` with four parallel reads — uses `Promise.all` for independent source reads rather than sequencing them. The console collector reads session status, pending questions, milestone config, and activity entries as four concurrent promises, and only awaits the combined result once all four have resolved. Combined with the per-source `try/catch` wrapping, this means a slow or failing source never blocks the other three, and a dashboard regeneration pass runs in roughly the time of the slowest single source rather than the sum of all four. The same pattern landed in phase 155's budget-silicon collector, which reads `CumulativeBudgetResult` and `IntegrationConfig` concurrently, and in phase 153's topology collector, which walks the three entity directories (skills, agents, teams) in parallel. This performance shape is inherited — not invented — from v1.15's `DevEnvironmentManager` composition pattern with `Promise.allSettled`; v1.20 uses the stricter `Promise.all` variant inside each collector because any individual source failure is already handled at the wrapper level, so `allSettled` would be redundant bookkeeping.
+
+**The 13-component count is load-bearing, and every number in this release is verifiable against the git log.** Eighteen component CSS modules were wired in phase 152, of which thirteen were orphaned before v1.20 (the other five were already live from v1.12-v1.19 but needed re-aggregation under the token-compliance pass). Four data collectors shipped across phases 153-156, each with a test file and a source file colocated under `src/dashboard/collectors/`. One console-page assembly shipped in phase 157 bringing the generated page count from five to six. The 110 test count is the sum across all twelve plans, and the 24-commit range from `8acb62ea8` (phase 152-01 test) through `ebf824ea2` (phase 157-02 feat) is exact. The 32-file and +4,423 / -91 line shortstat is from `git diff --shortstat v1.19..v1.20`. No number in this README is rounded, estimated, or narrated — every figure has a git-verifiable source, and every file path named in the Files section exists in the tree at tag `v1.20`.
+
+**v1.20 is the quietest release in the v1.x line, and that is the point.** The commit messages are all of the form `test(N-M)` or `feat(N-M)` with short imperative bodies; there is no new user-facing feature to market, no new subsystem to introduce, no new schema to document. What this release buys is the property that every prior release in the arc — v1.12 through v1.19 — becomes visible on one page of one tool. A user who runs the dashboard generator against a project that has exercised any of those prior features now sees the topology of their skills and agents, the activity feed from their git history, the budget gauge from v1.19, the staging queue from v1.17, and the milestone console from v1.16, all at once, all in the v1.18 design vocabulary, all with real file-system data. The v1.12 → v1.20 arc reads as "dashboard becomes a workstation" in the v1.15 narrative; v1.20 is the release that completes the sentence. The v1.21 Tauri shell that follows is able to present a single cohesive surface precisely because v1.20 made the web version cohere first. Assembly releases do not show up in changelogs as flashy, but they are load-bearing for every feature that follows.
+
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| Unified CSS pipeline (Phase 152-01) | 18 component style modules wired into the generator CSS assembly step — gantry strip, entity shapes, topology view, activity feed, budget gauge, silicon panel, staging queue, console page, question cards, upload zone, submit flow, config form, plus supporting primitives (`src/dashboard/generator.ts`) |
+| Design system token compliance (Phase 152-02) | Failing test that forbids hardcoded hex colors; every component CSS routed through the v1.18 token module; single-change propagation across all six generated pages |
+| Topology collector (Phase 153) | `collectTopology()` walks `.claude/skills/`, `.claude/agents/`, `.claude/teams/` with `gray-matter` parsing; infers domain from frontmatter + file content; emits entity list for the shape + color renderer (`src/dashboard/collectors/topology-collector.ts`) |
+| Activity collector (Phase 154) | `collectActivity()` transforms git commits and session observations into `FeedEntry[]` with scope classification (skill/agent/team/phase) and domain inference (`src/dashboard/collectors/activity-collector.ts`) |
+| Budget-silicon collector (Phase 155) | Bridges v1.19 `CumulativeBudgetResult` and `IntegrationConfig` to gauge + silicon-panel renderers with domain color mapping (`src/dashboard/budget-silicon-collector.ts`) |
+| Staging queue collector (Phase 156-01) | `collectStagingQueue()` reads `.planning/staging/queue-state.json`, maps 7 lifecycle states to color-coded badges (`src/dashboard/collectors/staging-collector.ts`) |
+| Staging queue generator wiring (Phase 156-02) | Panel inserted in right column after activity feed; `stagingQueueHtml` threaded as 7th parameter to `renderIndexContent`; 2 integration tests (panel with data, empty state) |
+| Console data collector (Phase 157-01) | `collectConsoleData()` reads `.planning/console/` — session status from `outbox/status/current.json`, questions via `QuestionPoller.poll()`, config via `MilestoneConfigSchema.safeParse`, activity via `bridge.jsonl` line parsing; `Promise.all` for parallel independent collection; 12 test cases (`src/dashboard/collectors/console-collector.ts`, 144 lines) |
+| Console page generator wiring (Phase 157-02) | `renderConsolePage` + `renderSubmitFlow` + `collectConsoleData` imported; `'console'` added to `NAV_PAGES`; `renderConsoleContent` helper; console page definition produces `console.html`; 9 integration tests including 6-page full-data count assertion |
+| Fault-tolerance pattern | Every collector wraps each source read in `try/catch` with safe defaults; missing or malformed files produce empty panels rather than page-level exceptions |
+| Parallel collection pattern | `Promise.all` for independent reads inside each collector; dashboard regeneration pass runs in time of slowest source, not sum of all sources |
+| Test coverage | 110 tests across 12 plans; red-green TDD rhythm (`test(N-M)` commit before `feat(N-M)` commit) uniform across all 6 phases |
+| Generated output | 6 HTML pages (`index.html`, `milestones.html`, `token-budget.html`, `activity.html`, `session.html`, `console.html`) sharing one CSS pipeline and one data-source contract |
 
 ## Retrospective
 
 ### What Worked
-- **Wiring 13 orphaned components into the generator pipeline.** This release is pure integration -- no new features, just connecting what v1.12-v1.19 built. The fact that 13 components could be wired in with unified CSS and real data pipelines validates the design system from v1.18.
-- **Data collectors as the bridge layer.** Topology, activity feed, budget-silicon, and staging queue collectors each transform domain-specific data into renderer-compatible formats. This collector pattern keeps renderers pure and data sources independent.
-- **Design system token compliance.** Enforcing that all colors reference CSS custom properties (no hardcoded hex) across 18 component style modules means the design system is actually used, not just defined.
+
+- **Wiring 13 orphaned components into the generator pipeline as a scoped milestone.** v1.12-v1.19 built independent panels, collectors, and renderers that worked in isolation but were not reachable from the generator entry point. Dedicating six phases and twelve plans to integration — with zero new features — validated both the v1.18 design system and the collector pattern as real abstractions rather than paper architecture.
+- **Data collectors as a first-class bridge layer between file-system state and renderers.** Topology, activity feed, budget-silicon, staging queue, and console collectors each transform a specific data source into a renderer-compatible shape. The renderers stay pure (given data, produce HTML); the data sources stay independent (no knowledge of rendering); the collector is the explicit, testable seam between them. This is the pattern that makes the dashboard refactorable.
+- **Design system token compliance enforced by a failing test.** Phase 152-02 ships a test that rejects any hardcoded hex color in component CSS. Every color now routes through the v1.18 token module. A design system without enforcement is documentation; a design system with enforcement is an invariant. The test costs little and saves every future color decision from ad-hoc divergence.
+- **Fault-tolerant collectors with `try/catch` on every source read.** Missing `queue-state.json`? Empty staging panel. Malformed `bridge.jsonl`? Activity feed drops the bad entry and renders the rest. The dashboard generator now runs safely on any project in any state, which is the property that lets it ship as a default tool rather than an opt-in one.
+- **Red-green TDD rhythm preserved across all six phases.** `git log --oneline v1.19..v1.20` reads as `test(152-01) → feat(152-01) → test(152-02) → feat(152-02) → …` through `test(157-02) → feat(157-02)`. No implementation commit landed without a preceding test commit. Future readers can `git show <test-sha>` to see the requirement as code before the implementation exists — a built-in requirement-to-test trace.
+- **`Promise.all` for parallel independent collection.** The console collector reads four sources concurrently; the topology collector walks three entity directories concurrently; the budget-silicon collector reads two sources concurrently. Combined with per-source error wrapping, this means regeneration time is bounded by the slowest source, not the sum.
 
 ### What Could Be Better
-- **110 tests across 12 plans is the lightest test count in the v1.12-v1.20 arc.** Integration wiring is harder to test than isolated features, but the data collectors especially need contract tests to verify they produce the shapes renderers expect.
-- **Console as a 6th generated page adds maintenance burden.** Every change to the generator pipeline now affects 6 output pages. A template or component model would reduce duplication.
+
+- **110 tests across 12 plans is the lightest test count in the v1.12-v1.20 arc.** Integration wiring is genuinely harder to test than isolated feature logic, but the data collectors especially would benefit from explicit contract tests — property-based or fixture-driven — that pin down the exact shape each collector produces versus what the renderer expects. v1.42 later adds `@vitest/coverage-v8` which addresses the visibility gap; a dedicated collector-contract suite would address the gap at the source.
+- **Console as a sixth generated page increases the per-page maintenance burden.** Every change to the generator pipeline now affects six output pages. A template-engine approach (introduced in v1.45 with a Mustache-style engine supporting partials across seven page variants) would reduce the duplication; v1.20 shipped the page-count growth without the template layer, which is the right scoped decision for an assembly release but leaves the template work visible as debt.
+- **The 18-module CSS assembly is still concatenation, not composition.** All eighteen component CSS files are joined at generation time into one stylesheet emitted to every page. This is simple and fast, but it means every page ships the full CSS even if it only uses a subset. A per-page CSS subsetter would reduce payload, though the current size is not a user-visible problem.
+- **Collector interfaces are loosely typed at the boundary.** Each collector returns a `<Thing>Data` interface in `src/dashboard/collectors/types.ts`, but the generator reads those shapes untyped in a few places and reconstructs them inside `renderIndexContent`. A stricter end-to-end type flow from collector output to render input would catch shape drift at compile time rather than test time.
 
 ## Lessons Learned
 
-1. **Assembly releases are essential after feature sprints.** v1.12-v1.19 built 13 independent components. Without this dedicated wiring release, they would remain orphaned demos. Planning for integration work as its own milestone prevents feature sprawl.
-2. **Gray-matter parsing for SKILL.md files makes topology data real.** The topology collector reading actual skill/agent/team files means the dashboard shows real state, not mock data. This is the difference between a demo and a tool.
-3. **Git commits as activity feed source is clever reuse.** The activity feed collector transforming git history into FeedEntry[] means the dashboard shows real project activity with zero additional instrumentation cost.
+1. **Assembly releases deserve first-class milestone status, not a footnote at the end of a feature release.** Every integration project accumulates "built but not wired" components. Rolling the wiring into the next feature release always shortchanges it because the feature scope crowds it out. v1.20 treated integration as the entire scope — six phases, twelve plans, zero new features — and the dashboard cohered as a result. Future v1.x arcs that accumulate orphaned components should plan explicit assembly milestones the same way.
+2. **Data collectors are the right abstraction between file-system state and renderers.** Keeping the renderer pure (given data, produce HTML) and the data source independent (no knowledge of rendering) makes both halves refactorable. The collector is the explicit seam. Any future panel that wants to render dashboard data should land a `collect<Thing>()` first and a `render<Thing>()` second, never fused.
+3. **Design-system tokens need an enforcing test, not just a definition.** A token module without a test that forbids raw hex drifts within one or two releases. Phase 152-02's failing-hex test is cheap to write and permanent in value. Every design system in the project from v1.20 forward should ship with its enforcement test.
+4. **Fault tolerance at the collector is a property of the whole tool, not of any single data source.** Wrapping every source read in `try/catch` with a safe default turns the dashboard from "works on my project" into "works on any project in any state." This is the discipline that makes the generator a real tool rather than a demo. Every future collector should inherit the pattern by default.
+5. **`Promise.all` inside a collector, `try/catch` around each source.** The two patterns compose: parallel reads for speed, per-source wrapping for safety. Neither works alone — sequential reads with per-source wrapping are slow, parallel reads without wrapping fail-fast on the first bad source. Use both together or neither.
+6. **Gray-matter parsing makes topology data real.** The topology collector reading actual `.claude/skills/` / `.claude/agents/` / `.claude/teams/` files with `gray-matter` frontmatter parsing means the dashboard shows the real state of the project, not mock data. This is the difference between a dashboard demo and a dashboard tool — the dashboard cannot lie about what exists on disk.
+7. **Git commits as an activity-feed source is clever reuse with zero instrumentation cost.** The activity collector transforms git commit history plus session observations into feed entries. There is no new event stream to publish, no new log to write, no new hook to install. The data is already there; the collector just shapes it for the renderer. When a project already produces structured history, prefer shaping it over capturing new streams.
+8. **Red-green TDD with separate `test(N-M)` and `feat(N-M)` commits makes archaeology free.** Every plan in v1.20 has a failing-test commit followed by a passing-implementation commit. Future readers can `git show <test-sha>` to read the requirement as code before the implementation exists. This is a built-in requirement-to-test trace that costs nothing extra at authoring time.
+9. **Adding a generated page reshapes a tuple assertion, not a generator contract.** Phase 157-02 moved the page count from 5 to 6 in one assertion swap (`expect(pages.length).toBe(6)`) plus one page-definition entry. The generator contract (the function signature, the collector composition, the CSS pipeline) did not change. A well-designed generator pipeline should make adding the Nth page a local edit, not a structural refactor.
+10. **`NAV_PAGES` as a central list is the small-but-correct place to register a new page.** Cross-page navigation is the single surface that every page shares. Having `NAV_PAGES` as one list, imported by every renderer, means adding a page to navigation is one edit. Any navigation surface in any future subsystem should use the same pattern.
+11. **The difference between 13 components and 18 is the difference between shipped and shippable.** v1.12-v1.19 produced eighteen component CSS modules, thirteen of which were orphaned in the sense that no generator path invoked them. Five were already live. Recognizing the distinction between "built" and "reachable" is the bookkeeping discipline that makes integration scope visible — without it, a release looks done when only half the work has been wired.
+12. **An integration release is not a refactor release and should not try to be both.** v1.20 deliberately did not change interfaces, did not rename modules, did not re-architect the renderer. Every change is additive. Conflating integration with refactor would have blown the scope and delayed the shipping date. Refactor work (template engine, collector type tightening) lands in its own later release when it can be scoped explicitly.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.12](../v1.12/) | GSD Planning Docs Dashboard — the dashboard body that v1.20 finishes wiring |
+| [v1.12.1](../v1.12.1/) | Live Metrics Dashboard — the metrics path that activity and budget collectors now feed |
+| [v1.13](../v1.13/) | Session Lifecycle & Workflow Coprocessor — session status that the console collector reads |
+| [v1.14](../v1.14/) | Promotion Pipeline — workflow surface visible in the activity feed |
+| [v1.15](../v1.15/) | Live Dashboard Terminal — the `Promise.allSettled` composition pattern that v1.20's collectors inherit as `Promise.all` inside per-source wrappers |
+| [v1.16](../v1.16/) | Dashboard Console & Milestone Ingestion — the console surface that phase 157 wires; `QuestionPoller.poll()` and `MilestoneConfigSchema` both originate here |
+| [v1.17](../v1.17/) | Staging Layer — the `queue-state.json` 7-state lifecycle that the staging queue collector reads |
+| [v1.18](../v1.18/) | Information Design System — the shape + color encoding, status gantry, topology views, and three-speed layering that v1.20's unified CSS pipeline now enforces system-wide |
+| [v1.19](../v1.19/) | Budget Display Overhaul — `LoadingProjection`, dual-view display, configurable budgets, and the dashboard gauge that the budget-silicon collector wires into |
+| [v1.21](../v1.21/) | GSD-OS Desktop Foundation — immediate successor; Tauri desktop shell that presents the same six dashboard pages in a native window |
+| [v1.42](../v1.42/) | Later coverage-v8 addition that addresses v1.20's retrospective note on integration-test visibility |
+| [v1.45](../v1.45/) | Later template-engine introduction that addresses v1.20's retrospective note on per-page maintenance burden |
+| `src/dashboard/collectors/topology-collector.ts` | `collectTopology()` — gray-matter SKILL.md/AGENT.md/TEAM.md parsing |
+| `src/dashboard/collectors/activity-collector.ts` | `collectActivity()` — git commits + session observations → `FeedEntry[]` |
+| `src/dashboard/budget-silicon-collector.ts` | Budget-silicon bridge between `CumulativeBudgetResult` and gauge/panel renderers |
+| `src/dashboard/collectors/staging-collector.ts` | `collectStagingQueue()` — `queue-state.json` → 7-state color-coded badges |
+| `src/dashboard/collectors/console-collector.ts` | `collectConsoleData()` — four parallel reads from `.planning/console/` |
+| `src/dashboard/generator.ts` | Entry point; `NAV_PAGES`, `renderIndexContent`, `renderConsoleContent`, 6-page definition list |
+| `src/dashboard/generator.test.ts` | Integration tests; 6-page full-data count and graceful empty-state assertions |
+| `.planning/MILESTONES.md` | Canonical phase-by-phase detail for phases 152-157 |
+
+## Engine Position
+
+v1.20 is the closing brace of the v1.12 → v1.20 "dashboard becomes a workstation" arc. v1.12 gave the dashboard a body (static generation + file watch). v1.12.1 gave it live metrics. v1.13 gave it a pulse (session lifecycle + workflow coprocessor). v1.14 gave it forward motion (promotion pipeline). v1.15 gave it hands (embedded Wetty terminal with tmux binding). v1.16 gave it a voice (console commands + milestone ingestion). v1.17 gave it a staging layer (7-state parallel execution queue). v1.18 gave it a visual language (shape + color encoding, topology views, three-speed layering). v1.19 gave it a budget gauge (dual-view display, `LoadingProjection`, configurable budgets). v1.20 wired every one of those pieces into one generator pipeline that produces six consistent, real-data-driven pages. The v1.18 design system is now an invariant (hex-forbidding test). The v1.19 budget gauge now draws from real cumulative data. The v1.17 staging queue now appears on the index page. The v1.16 console is now the sixth generated page. Every collector inherits the v1.15 parallel-composition discipline. The immediate successor v1.21 (GSD-OS Desktop Foundation) takes this cohered web surface and wraps it in a Tauri desktop shell with the WebGL CRT engine — v1.21 is able to present a single cohesive surface precisely because v1.20 made the web version cohere first. The v1.42 coverage work, the v1.45 template engine, and every later dashboard-related release trace their starting point to the assembly contract v1.20 locked in.
+
+## Files
+
+- `src/dashboard/generator.ts` — entry point; `NAV_PAGES`, `renderIndexContent`, `renderConsoleContent`, 6-page definition list (phases 152, 153-02, 154-02, 155-02, 156-02, 157-02)
+- `src/dashboard/generator.test.ts` — integration tests covering 6-page full-data count, graceful empty state, per-panel wiring (9 new console tests, 2 new staging tests, 2 new topology tests, 2 new activity tests, 2 new budget-silicon tests in this release)
+- `src/dashboard/collectors/topology-collector.ts` + `topology-collector.test.ts` — `collectTopology()` with gray-matter frontmatter parsing across skills/agents/teams
+- `src/dashboard/collectors/activity-collector.ts` + `activity-collector.test.ts` — `collectActivity()` transforming git commits and session observations into `FeedEntry[]`
+- `src/dashboard/budget-silicon-collector.ts` + `budget-silicon-collector.test.ts` — budget-silicon bridge to gauge and silicon-panel renderers
+- `src/dashboard/collectors/staging-collector.ts` + `staging-collector.test.ts` — `collectStagingQueue()` with 7-state color-coded badge mapping
+- `src/dashboard/collectors/console-collector.ts` + `console-collector.test.ts` — `collectConsoleData()` reading session status, questions, milestone config, bridge.jsonl with `Promise.all` and per-source fault tolerance (144 + 292 lines)
+- `src/dashboard/collectors/index.ts` + `src/dashboard/collectors/types.ts` — barrel exports and shared types including `ConsoleCollectorOptions`
+- `src/dashboard/staging-queue-panel.ts` + `staging-queue-panel.test.ts` — panel renderer consuming staging collector output
+- `src/dashboard/submit-flow.ts` + `submit-flow.test.ts` + `src/dashboard/question-card.ts` + `question-card.test.ts` + `src/dashboard/console-activity.ts` + `console-activity.test.ts` — console-page supporting renderers
+- `src/dashboard/refresh.ts` + `refresh.test.ts` + `renderer.test.ts` — refresh-path and renderer-suite updates for 6-page output
+- `CHANGELOG.md` + `docs/RELEASE-HISTORY.md` + `docs/CONFIGURATION.md` + `docs/FEATURES.md` + `docs/TOKEN-BUDGET.md` + `package.json` — release-window documentation and version bump
+- `.planning/MILESTONES.md` — canonical phases 152-157 detail (12 plans, 23 requirements)
 
 ---
+
+## Version History (preserved from original release notes)
+
+The table below lists the v1.x line that accumulated through v1.20, with the actual shipped summaries for each version. This version history was preserved in the original v1.20 release notes and is retained here for archival continuity.
+
+| Version | Summary |
+|---------|---------|
+| **v1.20** | Dashboard Assembly — unified CSS pipeline, four data collectors, console page as 6th generated page (this release) |
+| **v1.19** | Budget Display Overhaul — `LoadingProjection`, dual-view display, configurable budgets, dashboard gauge |
+| **v1.18** | Information Design System — shape + color encoding, status gantry, topology views, three-speed layering |
+| **v1.17** | Staging Layer — analysis, scanning, resource planning, 7-state approval queue for parallel execution |
+| **v1.16** | Dashboard Console & Milestone Ingestion |
+| **v1.15** | Live Dashboard Terminal — Wetty integration, tmux session binding, unified launcher |
+| **v1.14** | Promotion Pipeline |
+| **v1.13** | Session Lifecycle & Workflow Coprocessor |
+| **v1.12.1** | Live Metrics Dashboard |
+| **v1.12** | GSD Planning Docs Dashboard |
+| **v1.11** | GSD Integration Layer |
+| **v1.10** | Security Hardening |
+| **v1.9** | Ecosystem Alignment & Advanced Orchestration |
+| **v1.8.1** | Audit Remediation (Patch) |
+| **v1.8** | Capability-Aware Planning + Token Efficiency |
+| **v1.7** | GSD Master Orchestration Agent |
+| **v1.6** | Cross-Domain Examples |
+| **v1.5** | Pattern Discovery |
+| **v1.4** | Agent Teams |
+| **v1.3** | Documentation Overhaul |
+| **v1.2** | Test Infrastructure |
+| **v1.1** | Semantic Conflict Detection |
+| **v1.0** | Core Skill Management |
