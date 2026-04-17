@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Publish release chapters to a remote host via rsync over ssh.
+#
+# Pattern:
+#   1. `publish.mjs --execute` already staged chapters under STAGING_DIR.
+#   2. This script rsyncs STAGING_DIR to the remote.
+#   3. We don't delete on the remote (--delete is opt-in via --with-delete).
+#
+# Usage:
+#   ./publish-rsync.sh                # dry-run
+#   ./publish-rsync.sh --execute      # actually push
+#   ./publish-rsync.sh --execute --with-delete  # also remove remote files we no longer have
+
+set -euo pipefail
+
+# --- Configure these ---
+REMOTE_HOST="user@example.com"
+REMOTE_PATH="/var/www/example.com/release-story"
+STAGING_DIR=".release-story-staging"
+# ------------------------
+
+DRY="--dry-run"
+DELETE=""
+for arg in "$@"; do
+  case "$arg" in
+    --execute)     DRY="" ;;
+    --with-delete) DELETE="--delete" ;;
+  esac
+done
+
+if [ ! -d "$STAGING_DIR" ]; then
+  echo "Staging dir $STAGING_DIR not found. Run publish.mjs first:"
+  echo "  node tools/release-history/publish.mjs --execute --target website"
+  exit 1
+fi
+
+echo "=== rsync $STAGING_DIR/ → $REMOTE_HOST:$REMOTE_PATH/ ==="
+rsync -avz --progress $DRY $DELETE \
+  --exclude='.git/' --exclude='.env' \
+  "$STAGING_DIR/" "$REMOTE_HOST:$REMOTE_PATH/"
+
+if [ -z "$DRY" ]; then
+  echo
+  echo "=== Sync complete ==="
+else
+  echo
+  echo "=== Dry-run complete. Re-run with --execute to push. ==="
+fi

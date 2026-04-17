@@ -1,0 +1,32 @@
+{
+  "$schema": "./tools/release-history/config.schema.json",
+  "_comment": "Project-specific overrides — copy to release-history.local.json (gitignored) and customize. Deep-merged over release-history.config.json.",
+
+  "db": {
+    "_note": "Use Postgres for shared infrastructure; SQLite (default) for single-user or CI projects.",
+    "driver": "postgres",
+    "postgres_url_env": "RH_POSTGRES_URL"
+  },
+
+  "publish": {
+    "_note": "Add additional targets for your own website / mirror. Each target is a local_copy; your own rsync/ftp/s3 script picks it up from there.",
+    "targets": [
+      { "name": "github",  "kind": "local_copy", "dest": "docs/release-notes/{version}/chapter/{file}" },
+      { "name": "website", "kind": "local_copy", "dest": "www/example.com/release-story/{version}/{file}" }
+    ]
+  },
+
+  "leak_scan_patterns": [
+    "your-company-name",
+    "your_secret_pattern"
+  ],
+
+  "ghosts": [
+    {
+      "version": "v1.0.0-example",
+      "name": "A release indexed in RELEASE-HISTORY.md that never got its own README dir",
+      "shipped_at": "2024-01-01",
+      "retrospective_status": "not_applicable"
+    }
+  ]
+}

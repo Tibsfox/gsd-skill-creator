@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Publish release chapters to an AWS S3 bucket (e.g. for static hosting or CloudFront).
+#
+# Prerequisites:
+#   - aws cli installed and configured (`aws configure` or AWS_PROFILE)
+#   - bucket exists with static website hosting or CloudFront fronting it
+#
+# Usage:
+#   ./publish-s3.sh                # dry-run
+#   ./publish-s3.sh --execute      # push
+
+set -euo pipefail
+
+# --- Configure these ---
+S3_BUCKET="s3://your-bucket-name/release-story"
+STAGING_DIR=".release-story-staging"
+AWS_PROFILE="${AWS_PROFILE:-default}"
+CLOUDFRONT_DISTRIBUTION_ID=""   # optional: if set, invalidate after upload
+# ------------------------
+
+DRY="--dryrun"
+for arg in "$@"; do
+  case "$arg" in
+    --execute) DRY="" ;;
+  esac
+done
+
+if [ ! -d "$STAGING_DIR" ]; then
+  echo "Staging dir $STAGING_DIR not found."
+  exit 1
+fi
+
+echo "=== aws s3 sync $STAGING_DIR/ → $S3_BUCKET/ ==="
+aws --profile "$AWS_PROFILE" s3 sync \
+  $DRY \
+  --content-type "text/markdown; charset=utf-8" \
+  --cache-control "public, max-age=3600" \
+  --exclude '.git/*' --exclude '.env' \
+  "$STAGING_DIR/" "$S3_BUCKET/"
+
+if [ -z "$DRY" ] && [ -n "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
+  echo
+  echo "=== Invalidating CloudFront distribution $CLOUDFRONT_DISTRIBUTION_ID ==="
+  aws --profile "$AWS_PROFILE" cloudfront create-invalidation \
+    --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
+    --paths '/release-story/*'
+fi
+
+echo
+echo "=== Done ==="
