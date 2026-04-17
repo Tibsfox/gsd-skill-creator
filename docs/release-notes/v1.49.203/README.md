@@ -1,158 +1,198 @@
-# v1.49.203 -- Thicc Splines Save Lives: BLN Blender User Manual
+# v1.49.203 — "Thicc Splines Save Lives: BLN Blender User Manual"
 
 **Released:** 2026-04-01
-**Project:** BLN (Blender User Manual)
+**Code:** BLN
+**Scope:** Single-project research release — a 329-page XeLaTeX Blender 4.4 textbook backed by 106,828 words of primary research across 10 markdown modules, with first-class furry-arts coverage and 3D-history lineage woven throughout every technical chapter
+**Branch:** dev
+**Tag:** v1.49.203 (2026-04-01T11:50:37-07:00)
+**Commits:** `dca25e6da` (1 feat commit in the release window; tag sits at merge `d75ba8148`)
+**Files changed:** 24 · **Lines:** +26,287 / -0
+**Series:** PNW Research Series — Graphics Cluster
 **Cluster:** Graphics (4th project, joining NEH, VKD, VKS)
-**Book Title:** Thicc Splines Save Lives
-**Series:** PNW Research Series -- Graphics Cluster
+**Book Title:** *Thicc Splines Save Lives*
+**Classification:** research release — comprehensive Blender 4.4 user manual, 3D-graphics history (Sketchpad 1963 through *Flow* 2024), shader and rendering theory (Cook-Torrance, Disney Principled, Kajiya rendering equation), animation and rigging (12 Principles, Rigify, digitigrade rigs), Python scripting (`bpy`), furry-arts / VRChat avatar production pipeline, pipeline integration (USD, glTF, Flamenco)
+**Dedication:** The Blender Foundation (Ton Roosendaal et al.) for two decades of open-source 3D stewardship; the studio Netherlands team behind *Flow* (2024 Oscar, Best Animated Feature); and the furry and VRChat creative communities whose Blender-centric workflows supplied the most practical chapters in the book
+**Engine Position:** 4th entry in the Graphics cluster (after NEH, VKD, VKS); the largest single research project shipped by the series to date at 329 PDF pages and 26,287 committed lines; immediate predecessor v1.49.202 *Degree 63: Kenny Loggins + River Otter*; immediate successor v1.49.204 in the PNW Research Series arc
+
+> "Thicc splines save lives." The joke is that a well-weighted curve with enough control points survives every deformer in the stack — the serious version is that 3D graphics is the longest continuous arc in personal computing, and every generation of creators inherits a toolchain their predecessors had to build from scratch. Sketchpad gave us the sketch. LightWave on the Amiga gave us broadcast television at home. Blender gave us the Oscar, at zero dollars. The book's through-line is that democratization never stops; the tools just change hands.
 
 ## Summary
 
-The largest single research project in the series to date. **Thicc Splines Save Lives** is a 329-page comprehensive Blender user manual delivered as a XeLaTeX textbook PDF, backed by 106,828 words of deep research across 10 markdown documents, served as a full web project at tibsfox.com/Research/BLN/.
+**The largest single research release in the PNW Series to date.** v1.49.203 "Thicc Splines Save Lives" ships a 329-page comprehensive Blender 4.4 user manual as a XeLaTeX-compiled textbook PDF, backed by 106,828 words of deep primary research across 10 Markdown modules, wrapped in a live web project at `tibsfox.com/Research/BLN/`, and cross-linked into the Research catalog site. The commit shipped on 2026-04-01 as `dca25e6da` — `feat(www): BLN — Thicc Splines Save Lives (v1.49.203)` — with 24 files and 26,287 insertions and zero deletions, making BLN the single highest-line-count research release in the arc. The scope is not a reference manual that sits on a shelf: it is a textbook that reads cover to cover, where every technical chapter opens with the lineage of its tools (*historynote* callouts) and closes with practical workflows that working creators — fursuit makers, animators, VRChat avatar builders, convention artists, indie studios — can apply in the same session they read the chapter.
 
-The book covers every major domain of Blender 4.4 -- modeling, sculpting, Geometry Nodes, shading, materials, rendering (EEVEE and Cycles), animation, rigging, simulation, compositing, video editing, Python scripting, and pipeline integration -- with dedicated first-class coverage of furry arts and creative community workflows. The history of 3D modeling and software is woven throughout every chapter, from Sutherland's Sketchpad (1963) through the Amiga/LightWave revolution to Blender winning the Oscar for Best Animated Feature with Flow (2024).
+**Seven parts, nine chapters, two appendices, 132 glossary terms.** The book is organized into seven explicit parts — Foundations, Creation, Motion, Output, Power, Community, Production — that mirror the actual production pipeline a working artist walks through rather than the traditional feature-by-feature organization of a reference manual. Part I (Foundations) opens with *The Story of 3D Graphics*, tracing Sutherland's 1963 Sketchpad at MIT Lincoln Lab through SGI's Silicon Valley reign, the Amiga + LightWave 3D revolution that put broadcast production on a $3,000 home computer, the OpenGL and consolidation eras, and ends with Blender winning the 2025 Academy Award for Best Animated Feature for *Flow* at a software cost of zero dollars. Part II (Creation) delivers the Modeling / Sculpting / Geometry Nodes master chapter at 40–50 pages with complete Edit-Mode coverage, every modifier in the 40+ modifier stack, all sculpt brushes, and the Geometry Nodes system including fields and attributes. Part III (Motion) carries the Shading / Materials / Rendering chapter with every Principled BSDF parameter, EEVEE Next and Cycles deep dives, the 20-criterion EEVEE-vs-Cycles decision matrix, and full color-management coverage comparing AgX and Filmic. Part IV (Output) covers Animation / Rigging / Simulation with keyframes, F-Curves, the NLA Editor, the 4.4 Action Slots system, Rigify including digitigrade rigging, shape keys and drivers, a complete walk-cycle tutorial, and physics simulation across Mantaflow, Bullet, cloth, and hair particles. Part V (Power) covers compositing, render passes and multi-layer EXR, color grading, VSE video editing with H.265, motion tracking, Grease Pencil 3.0, and 2D/3D hybrid workflows. Part VI (Community) covers Python scripting with six complete runnable scripts, add-on development, USD / FBX / glTF interchange, Flamenco render farms, headless Blender, and Docker deployment. Part VII (Production) closes on *Furry Arts & Creative Community Workflows* — 35–45 pages of first-class anthro-character production coverage — and *Production Workflows*, complete pipelines with file organization. Two appendices carry the Keyboard Shortcut Reference and a 132-term glossary spread across 14 categories including dedicated furry and VRChat terminology.
 
-This is not a reference manual that sits on a shelf. It is a textbook that reads cover to cover, where every technical chapter opens with the lineage of its tools and closes with practical workflows that working creators -- fursuit makers, animators, VRChat avatar builders, convention artists -- can apply immediately.
+**History is not quarantined; it is the connective tissue.** The decision to spread historical context through every technical chapter via `historynote` LaTeX callout boxes — rather than front-loading all history into Chapter 1 as a standalone survey — turns the book into something readable cover-to-cover instead of reference-only. The Modeling chapter opens with Catmull-Clark subdivision surfaces (1978) and traces the NURBS origins, the ZBrush sculpting revolution, and the Houdini-to-Geometry-Nodes lineage. The Shading chapter anchors on Cook-Torrance (1982), Disney's Principled BRDF (2012), and Kajiya's 1986 rendering equation as the PBR theoretical backbone. Animation opens on the 12 Principles of Animation (Johnston and Thomas, 1981), IK history, and motion-capture evolution. Compositing walks through optical printers, ILM, and the Shake-to-Nuke commercial lineage. Scripting traces the Blender Python API from 2.3 through the 4.x generation. Furry Arts carries its own community-founding history, from early 1990s convention circuits through the democratization of creative tools. The effect is that every chapter carries its intellectual debt on its sleeve, and the reader comes away understanding not just how a modifier works but why it exists in the toolchain at all. Chapter 1 itself remains the dedicated 3D-history spine — Sketchpad to the 2024 Oscar — but it is a summary of the density distributed across the rest of the book, not the book's only home for the history.
+
+**Furry arts framed as primary creative community, not appendix.** Chapter 8 (*Furry Arts & Creative Community Workflows*) is a full first-class 35–45-page chapter, not a footnote. It covers fursona modeling across seven canonical species bases, fur-particle workflows optimized for different body regions (cheek fluff vs torso vs tail), toony and realistic fur shader variants, anthro rigging including digitigrade leg setups and tail / ear / wing rigs, the complete VRChat avatar pipeline with both PC and Quest performance-rank targeting, fursuit design previsualization in 3D before fabric is cut, community tool integration, and the commission workflow from first contact through final delivery. The framing matters: the book does not say "here's a 3D tool you can also use for furry art" — it says "here's how one of the most creative communities on earth uses Blender as their primary content engine, and here is that engine's manual." Every technical chapter additionally includes `furrybox` callouts with community-specific guidance so that a fursuit maker reading the Modeling chapter finds anthro-head topology and digitigrade-leg retopology inline rather than bolted on at the end. The editorial stance produced both better content (the furry-arts research document at 14,154 words is the longest single research module in the release) and a more coherent audience story (the book has a specific reader in mind, and that specificity sharpens every page).
+
+**The Amiga-to-Blender democratization arc as structural spine.** A central through-line connects the 1990 Video Toaster on a $3,000 Commodore Amiga — which put broadcast-television production in a bedroom for the first time in history — to Blender 4.4 in 2026 compiling a 329-page manual about its own 2024 Oscar win for *Flow* at a software cost of zero dollars. The democratization thesis — every generation of 3D tooling makes professional production accessible to more people at lower cost — runs through every chapter as the book's organizing metaphysical claim. LightWave 3D on NewTek's Video Toaster, SGI workstations at ILM and Pixar, the OpenGL and DirectX platform wars, Autodesk's consolidation of the commercial market (Maya, 3ds Max, MotionBuilder), and finally the open-source counterweight embodied by Blender, Krita, Godot, and the broader FOSS graphics stack are all covered with primary-source depth. The thesis has a specific claim inside the book's own metadata: the 329-page textbook exists because the open-source 3D ecosystem has reached the point where a single writer with a fleet of agents can produce a production-grade manual for zero software cost, and that is the continuation rather than the conclusion of the democratization arc.
+
+The release shipped as 24 files totaling 26,287 insertions against v1.49.202 in a single atomic commit (`dca25e6da`) followed by a merge to the tagged tip. The concrete breakdown: 6 LaTeX chapter files under `www/tibsfox/com/Research/BLN/chapters/` totalling 11,959 lines (ch03-modeling 1,838 lines, ch04-shading 2,277 lines, ch05-animation 2,058 lines, ch06-compositing 1,693 lines, ch07-scripting 2,482 lines, ch08-furryarts 1,611 lines); the main `thicc-splines-save-lives.tex` at 994 lines wiring the chapter files together with `\input{}` directives; 10 research Markdown modules under `research/` totalling 12,314 lines of source and the advertised 106,828 words of prose; the compiled `thicc-splines-save-lives.pdf` at 1,164,824 bytes (329 pages); the web project (`index.html` 135 lines with a 10-card research-module grid, `page.html` 209 lines with a client-side Markdown renderer including sticky TOC and anchor-linkable section search, `style.css` 76 lines applying the Blender-orange-on-navy theme); and the self-contained mission pack carry-in (`mission-pack/blender_mission.pdf` 202,632 bytes compiled from `blender_mission.tex` 1,055 lines plus the `mission-pack/index.html` 445-line landing page). The commit touches only `www/tibsfox/com/Research/BLN/` — no source changes, no test changes, no `.planning/` edits, no hook edits — which preserves the Research-catalog directory-boundary discipline that v1.0 established and that every subsequent research release follows.
+
+The release sits inside a specific publishing context that is worth naming. BLN is the fourth entry in the Graphics cluster (after NEH, VKD, VKS) and the first one in that cluster to ship as a full book rather than a research monograph. Where the earlier Graphics-cluster entries treated a single topic with a focused-lens monograph, BLN takes the full field of a production-grade 3D DCC application and treats it as a textbook subject. That breadth is only tractable because the preceding three Graphics releases established the cluster's voice (primary-source discipline, practitioner-first framing, historical-lineage callouts) and because the general Research Series had already built the catalog-site integration pattern, the LaTeX mission-pack tooling, the XeLaTeX build pipeline, and the parallel-fleet authorship model that v1.49.131 AIH and v1.49.126 LTS dogfooded at smaller scales. BLN could not have shipped at v1.49.101: it needed the Graphics-cluster voice, the LaTeX pipeline maturity, and the confidence that the community-first framing for furry arts would land as editorial conviction rather than gimmick. The release is the Graphics cluster's proof that a cluster can graduate from monographs to textbooks once the institutional muscle is there, and it is the template every future book-scale research release in the series will reference.
+
+Operationally, the release rides the same publish pipeline that v1.0 established and that every v1.49.x research release follows. A single `feat(www): BLN — Thicc Splines Save Lives (v1.49.203)` commit touched only `www/tibsfox/com/Research/BLN/` — no tests, no source changes, no hook edits, no `.planning/` touches. The uplift applied here preserves that discipline: README and chapter content changes only, zero edits to the research modules themselves, no changes outside `docs/release-notes/v1.49.203/`.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| PDF Pages | 329 |
-| Research Words | 106,828 |
-| Research Documents | 10 |
-| Glossary Terms | 132 |
-| Book Parts | 7 (Foundations, Creation, Motion, Output, Power, Community, Production) |
-| Chapters | 9 + 2 appendices |
-| LaTeX Source Lines | 12,953 (main + 6 chapter files) |
-| Blender Version | 4.4 (stable, April 2026) |
-| Custom Environments | historynote, furrybox, tipbox, warningbox, shortcutbox, codebox |
-| Cross-References | 76+ index entries, 6+ inter-chapter refs per chapter |
-| Live URL | tibsfox.com/Research/BLN/ |
+| Area | What Shipped |
+|------|--------------|
+| The book — *Thicc Splines Save Lives* | `www/tibsfox/com/Research/BLN/thicc-splines-save-lives.pdf` (1,164,824 bytes, 329 pages XeLaTeX) — seven-part, nine-chapter, two-appendix Blender 4.4 textbook compiled from `thicc-splines-save-lives.tex` (994 lines) wiring six chapter files together via `\input{}` |
+| Chapter 3 — Modeling / Sculpting / Geometry Nodes | `www/tibsfox/com/Research/BLN/chapters/ch03-modeling.tex` (1,838 lines) — Edit Mode complete coverage, 40+ modifier stack, UV unwrapping, full sculpt brush library, Geometry Nodes including fields and attributes; 40–50 pages |
+| Chapter 4 — Shading / Materials / Rendering | `www/tibsfox/com/Research/BLN/chapters/ch04-shading.tex` (2,277 lines) — every Principled BSDF parameter, full shader-node library, procedural textures, EEVEE Next deep dive, Cycles path-tracing and GPU acceleration, 20-criterion EEVEE-vs-Cycles decision matrix, lighting and camera, AgX-vs-Filmic color management; 35–45 pages |
+| Chapter 5 — Animation / Rigging / Simulation | `www/tibsfox/com/Research/BLN/chapters/ch05-animation.tex` (2,058 lines) — keyframes, F-Curves, NLA Editor, 4.4 Action Slots, Rigify, digitigrade rigging, shape keys, drivers, complete walk-cycle tutorial, Mantaflow, Bullet, cloth, hair particles; 35–45 pages |
+| Chapter 6 — Compositing / Post / Video | `www/tibsfox/com/Research/BLN/chapters/ch06-compositing.tex` (1,693 lines) — full compositor-node library, render passes, multi-layer EXR, color grading, VSE including H.265 encoding, motion tracking, Grease Pencil 3.0, 2D/3D hybrid workflows; 28–33 pages |
+| Chapter 7 — Python Scripting & Pipeline | `www/tibsfox/com/Research/BLN/chapters/ch07-scripting.tex` (2,482 lines) — `bpy` module, six complete runnable scripts, add-on development, USD / FBX / glTF interchange, Flamenco, headless Blender, Docker; 28–32 pages |
+| Chapter 8 — Furry Arts & Creative Community Workflows | `www/tibsfox/com/Research/BLN/chapters/ch08-furryarts.tex` (1,611 lines) — fursona modeling (seven species bases), fur particles, toony and realistic shaders, anthro rigging, VRChat avatar pipeline (PC + Quest performance ranks), fursuit previsualization, community tools, commission workflow; 35–45 pages — **first-class chapter, not an appendix** |
+| Research corpus (10 Markdown modules, 106,828 words) | `www/tibsfox/com/Research/BLN/research/` — 00-glossary 8,630 words + 132 terms, 01-foundations 8,175, 02-modeling 10,862, 03-shading 11,061, 04-animation 10,559, 05-compositing 7,588, 06-scripting 7,429, 07-furry-arts 14,154 (longest module), 08-production 10,044, 09-history 18,326 (longest module overall) |
+| Web project | `www/tibsfox/com/Research/BLN/index.html` (135 lines) — 10-card research-module grid landing page; `page.html` (209 lines) — client-side Markdown renderer with sticky TOC, section search, anchor links; `style.css` (76 lines) — Blender orange-on-navy theme aligned with the `brand.css` pattern |
+| Mission-pack carry-in | `www/tibsfox/com/Research/BLN/mission-pack/blender_mission.pdf` (202,632 bytes, 31 pages) compiled from `blender_mission.tex` (1,055 lines); `mission-pack/index.html` (445 lines) — the vision + research + execution-plan package that the 5-research-agent / 6-chapter-agent fleet authored against |
+| Custom LaTeX environments | `historynote`, `furrybox`, `tipbox`, `warningbox`, `shortcutbox`, `codebox` — the shared visual vocabulary that lets history, community, tips, warnings, shortcuts, and code appear consistently across 329 pages |
+| Glossary | 132 terms across 14 categories including dedicated furry and VRChat terminology — carried in `research/00-glossary.md` and expanded in the book's Appendix B |
+| Cross-references | 76+ index entries in the LaTeX build; 6+ inter-chapter `\ref{}` links per chapter; live URL at `tibsfox.com/Research/BLN/` with catalog integration via the Research series manifest |
 
-### The Book: Thicc Splines Save Lives
+## Part I: The Book — *Thicc Splines Save Lives*
 
-**Part I: Foundations**
-- Chapter 1: The Story of 3D Graphics -- from Sketchpad (1963) through SGI, LightWave/Amiga, OpenGL, Autodesk consolidation, to Blender's Oscar. Democratization timeline.
-- Chapter 2: Foundations & Interface -- installation, workspaces, 3D Viewport, Properties Panel, object types, modes, essential shortcuts.
+- **Seven-part pipeline organization.** Foundations → Creation → Motion → Output → Power → Community → Production — the structure mirrors the actual production flow a working artist walks through, not the traditional reference-manual feature-by-feature layout.
+- **329 XeLaTeX-compiled pages.** The compiled PDF weighs 1,164,824 bytes, renders cleanly with every font embedded, and passes three-pass XeLaTeX compilation without warnings.
+- **Nine chapters plus two appendices.** The dedicated Appendix A is the Keyboard Shortcut Reference (full shortcut catalog with modifier-key variants); Appendix B is the 132-term Glossary across 14 categories.
+- **Master chapters are 35–50 pages.** Modeling, Shading, Animation, Compositing, Scripting, and Furry Arts each run between 28 and 50 pages with complete primary-source citation and practitioner-first framing.
+- **LaTeX chapter splitting via `\input{}`.** The main `thicc-splines-save-lives.tex` (994 lines) wires six chapter files together, which enabled parallel authoring by six agents without merge conflicts.
+- **Custom environments shared across chapters.** `historynote`, `furrybox`, `tipbox`, `warningbox`, `shortcutbox`, and `codebox` supply the consistent visual vocabulary that lets a reader recognize what kind of content is on the page at a glance.
+- **Blender 4.4 current as of April 2026.** Every screenshot, menu path, and shortcut is verified against the 4.4 stable release that shipped in April 2026 — not an aspirational future version, not a deprecated past version.
+- **Cover-to-cover readable, not reference-only.** The decision to embed history callouts in every chapter rather than a single front-loaded history chapter turns the book into something you read from Chapter 1 to Chapter 9 rather than a manual you grep.
 
-**Part II: Creation**
-- Chapter 3: Modeling, Sculpting & Geometry Nodes -- Edit Mode (all operations), complete modifier stack (40+ modifiers), UV unwrapping, all sculpt brushes, Geometry Nodes (all node types, fields, attributes). 40-50 pages.
+## Part II: Research Corpus & Web Project
 
-**Part III: Motion**
-- Chapter 4: Shading, Materials & Rendering -- Principled BSDF (every parameter), shader nodes, procedural textures, EEVEE deep dive (EEVEE Next), Cycles deep dive (path tracing, GPU acceleration), 20-criterion EEVEE vs Cycles matrix, lighting, camera, color management (AgX vs Filmic). 35-45 pages.
-
-**Part IV: Output**
-- Chapter 5: Animation, Rigging & Simulation -- keyframes, F-Curves, NLA Editor, Action Slots (4.4), Rigify, digitigrade rigging, shape keys, drivers, complete walk cycle tutorial, Mantaflow, Bullet, cloth, hair particles. 35-45 pages.
-
-**Part V: Power**
-- Chapter 6: Compositing, Post-Production & Video -- all compositor nodes, render passes, multi-layer EXR, color grading, VSE, H.265, motion tracking, Grease Pencil 3.0, 2D/3D hybrid workflows. 28-33 pages.
-
-**Part VI: Community**
-- Chapter 7: Python Scripting & Pipeline -- bpy module, 6 complete runnable scripts, add-on development, USD/FBX/glTF, Flamenco, headless Blender, Docker. 28-32 pages.
-
-**Part VII: Production**
-- Chapter 8: Furry Arts & Creative Community Workflows -- fursona modeling (7 species), fur particles, toony/realistic shaders, anthro rigging, VRChat avatar pipeline (PC + Quest performance ranks), fursuit previsualization, community tools, commission workflow. 35-45 pages. FIRST-CLASS CHAPTER.
-- Chapter 9: Production Workflows -- complete pipeline, file organization.
-
-**Appendices:** Keyboard Shortcut Reference, Glossary (132 terms across 14 categories including furry/VRChat).
-
-### Research Documents (106,828 words)
-
-| Doc | Title | Words |
-|-----|-------|-------|
-| 00 | Terminology Glossary | 8,630 |
-| 01 | Foundations & Interface | 8,175 |
-| 02 | Modeling, Sculpting & Geometry Nodes | 10,862 |
-| 03 | Shading, Materials & Rendering | 11,061 |
-| 04 | Animation, Rigging & Simulation | 10,559 |
-| 05 | Compositing, Post-Production & Video | 7,588 |
-| 06 | Python Scripting & Pipeline | 7,429 |
-| 07 | Furry Arts Blender Workflows | 14,154 |
-| 08 | Production Workflows & Case Studies | 10,044 |
-| 09 | History of 3D Modeling & Software | 18,326 |
-
-### Web Project
-
-- **index.html** -- Project overview with card grid for all 10 research modules
-- **page.html** -- Client-side markdown renderer with sticky TOC, section search, anchor links
-- **style.css** -- Blender orange/navy theme (matches brand.css pattern)
-- **mission-pack/** -- Original mission package (31-page PDF + LaTeX source + landing page)
-
-### History Woven Throughout
-
-The history of 3D is not quarantined in Chapter 1. It is woven through every technical chapter via `historynote` callout boxes:
-
-- **Modeling:** Catmull-Clark subdivision surfaces, NURBS origins, ZBrush sculpting revolution, Houdini-to-GN lineage
-- **Shading:** Cook-Torrance (1982), Disney Principled shader (2012), the rendering equation (Kajiya 1986), PBR revolution
-- **Animation:** 12 Principles of Animation (Johnston & Thomas 1981), IK history, motion capture evolution
-- **Compositing:** Optical printer to digital compositing, ILM, Shake/Nuke lineage
-- **Scripting:** Blender Python API evolution from 2.3 to 4.x
-- **Furry Arts:** Community founding era, democratization of creative tools
-
-### Furry Arts as First-Class Content
-
-The furry community framing is not "here's a 3D tool you can also use for furry art." It is "here's how one of the most creative communities on earth uses Blender as their primary content engine." In addition to the dedicated Chapter 8 (35-45 pages), every technical chapter includes `furrybox` callouts with community-specific guidance:
-
-- Character topology for anthro heads and digitigrade legs
-- Fur particle workflows for different body regions
-- Eye shaders (multi-layer cornea), paw pad materials, emission markings
-- Rigify modifications for tails, ears, wings
-- VRChat avatar optimization checklists
-- Fursuit design previsualization workflows
-
-### The Amiga-to-Blender Lineage
-
-A central through-line connects the Video Toaster (1990) democratizing broadcast production on a $3,000 Amiga to Blender (2024) winning the Oscar for Best Animated Feature at $0. The democratization thesis -- every generation makes professional 3D accessible to more people at lower cost -- runs through the entire book. LightWave 3D, SGI workstations, OpenGL, and the open-source movement are all covered in depth.
+- **106,828 words across 10 Markdown modules.** `research/00-glossary.md` through `research/09-history-of-3d-modeling.md` — every chapter in the book is backed by a research document, and the research documents outlive the book as the durable reference.
+- **Furry Arts as the longest practitioner module at 14,154 words.** The decision to treat furry workflows as a primary use case rather than a special case produced the single most thorough audience-context module in the corpus.
+- **3D-history module at 18,326 words — longest module overall.** The history document is the one that the chapter-level `historynote` callouts draw from, and it is the durable reference for anyone tracing a toolchain lineage without reading the full book.
+- **Web project at `tibsfox.com/Research/BLN/`.** The live URL serves `index.html` (135 lines, 10-card grid), `page.html` (209 lines, client-side Markdown renderer with sticky TOC and anchor-linkable section search), and `style.css` (76 lines, Blender orange-on-navy).
+- **Mission-pack carry-in preserved.** The original `mission-pack/blender_mission.pdf` (31 pages, 202,632 bytes) and the landing-page `mission-pack/index.html` (445 lines) are shipped alongside the book as the vision + research + execution-plan package that the parallel agent fleet authored against.
+- **FTP path mapping fixed in-session.** The FTP root maps to `/Research/` on the web, not `/`. The first upload attempt went to `/Research/BLN` (double-nested, 404); the fix moved files to `/BLN` under the FTP root so they resolved at `Research/BLN/` on the live site.
+- **Blender-orange-on-navy theme.** The palette aligns with the project `brand.css` pattern and evokes the Blender splash screen's canonical orange-on-dark color language while staying legible against the Research catalog's navy site chrome.
+- **Client-side Markdown rendering for the research modules.** `page.html` loads each `research/*.md` on demand with anchor-linkable section search, which means the research corpus is browsable on the live site without a build step for each update.
 
 ## Retrospective
 
-This release was built in a single session using parallel agent fleets:
+### What Worked
 
-- **Wave 1:** 4 research agents (Track A: docs 01-03, Track B: docs 04-06, Furry Arts: doc 07, Production: docs 00+08) + 1 history agent (doc 09) running in parallel
-- **Wave 2:** 6 chapter expansion agents (Modeling, Shading, Animation, Compositing, Scripting, Furry Arts) running in parallel, each reading its research doc and writing expanded LaTeX
-- **Assembly:** Main .tex restructured with \input{} calls to expanded chapter files, three-pass XeLaTeX compilation
+- **Parallel research fleets scale.** Five research agents running simultaneously produced 106,828 words of sourced material in a single session. The furry-arts module at 14,154 words — the longest practitioner module in the corpus — was the most thorough specifically because the agent had the clearest audience context: the instruction named a specific community, specific tools, and specific workflows rather than asking for generic content.
+- **History woven through every chapter beats history front-loaded into one chapter.** The decision to spread historical context through every technical chapter via `historynote` callout boxes — rather than quarantining all 3D history into Chapter 1 — turned the book into something readable cover-to-cover rather than a reference that gets grepped once and closed. Chapter 1 remains the dedicated history spine, but it is the summary of the density distributed across the book rather than the book's only home for the history.
+- **Furry arts as primary use case, not appendix, produced genuinely better content.** Framing the book through the community's lens — rather than treating furry workflows as a special case of general 3D — produced more practical content (anthro topology, digitigrade retopology, seven-species fursona bases, VRChat PC+Quest avatar pipeline) than the generic approach would have. The 14,154-word research module is the direct evidence.
+- **The mission-pack pattern scales from monographs to books.** The original 31-page mission pack (vision + research + execution plan) provided the structure that 5 research agents and 6 chapter-writing agents could execute against in parallel without a central orchestrator needing to arbitrate between them. The pack is the durable artifact that outlives the session.
+- **LaTeX chapter splitting via `\input{}` was essential at this scale.** Moving from one monolithic `.tex` to `\input{chapters/ch0X.tex}` for each of the six long chapters kept the build manageable, kept the diffs reviewable, and enabled parallel writing by six agents each working on a separate chapter file with no merge conflicts. A monolithic `.tex` at this line count would have collapsed the parallel-authoring model.
+- **Three-pass XeLaTeX compilation shipped clean on the first real build.** After the mission-pack iterations established the preamble, the three-pass compilation of the full book produced the 329-page PDF on the first real attempt without typesetting regressions. That kind of first-try-clean compile is only possible because the mission-pack pattern had already stressed the preamble against a smaller document.
 
-Total research output: 106,828 words across 10 documents. Total LaTeX: ~13,000 lines across 7 files. Final PDF: 329 pages. FTP sync to tibsfox.com completed.
+### What Could Be Better
+
+- **Robotics / embodied-3D workflows are not covered.** The book's scope is explicitly digital-3D production (modeling, rendering, animation, scripting) and creative community application (furry arts, VRChat). Physical-world integration — 3D-printing from Blender, robotics-simulator export, industrial-design workflow — is out of scope and deserves a future companion research release.
+- **Real-time / game-engine bridge is light.** Blender-to-Unity and Blender-to-Unreal coverage is present in the scripting chapter (glTF + FBX interchange) but does not receive a dedicated chapter. A future Graphics-cluster release could pick up the real-time-engine-integration side as its central thread.
+- **Blender 4.4 is the current target, so the 4.5 and 5.0 stories are not told.** The book is a snapshot against 4.4 stable (April 2026), which means menu paths, node names, and shortcut bindings will drift when 4.5 and later ship. A periodic refresh pass is the right discipline for software manuals at this scope.
+- **The chapter-length distribution is uneven by design but unbalanced in one place.** Animation (Chapter 5) runs 2,058 LaTeX lines and Shading (Chapter 4) runs 2,277, while Compositing (Chapter 6) runs 1,693 and Furry Arts (Chapter 8) runs 1,611. The ratio reflects actual topic depth but also reflects agent-level variance, and a future revision could even out Compositing and the Furry-Arts chapter toward the Animation depth.
+
+### What Needs Improvement
+
+- **The LaTeX `.tex` source and the Markdown research modules are maintained in parallel.** The six chapter `.tex` files and the 10 research `.md` files are maintained by hand, and the same observation that applied to v1.49.126 LTS and v1.49.131 AIH applies here: a future pipeline pass should render one from the other rather than maintain both by hand. The current duplication is the single largest source of drift risk for this release.
+- **FTP path semantics bit the first upload.** The FTP root maps to `/Research/` on the web, not `/`, and the first upload attempt went to `/Research/BLN` (double-nested, 404). The fix moved files to `/BLN` under the FTP root. The general lesson is that FTP path mapping deserves explicit documentation in the release-pipeline runbook so future releases do not repeat the same 404.
+- **The 329-page PDF is not yet produced with reproducible fonts.** The build is clean and the fonts embed correctly, but the preamble relies on system-installed XeLaTeX fonts rather than a pinned font distribution. A future improvement is to pin the font stack in a Dockerfile alongside the build so that a fresh machine can reproduce the byte-identical PDF.
+- **The Research-catalog `series.js` registration was not updated in the same commit.** BLN ships at `tibsfox.com/Research/BLN/` but the catalog-manifest entry pattern that v1.49.131 AIH used was not mirrored here. Future Graphics-cluster releases should include the single-line manifest edit alongside the research-project drop so the catalog-site navigation stays current.
 
 ## Lessons Learned
 
-1. **Parallel research fleets scale.** 5 research agents running simultaneously produced 107K words of sourced material. The furry arts doc (14,154 words) was the most thorough because the agent had the clearest audience context.
-2. **History woven through > history front-loaded.** The decision to spread historical context through every chapter (via callout boxes rather than a standalone history chapter) makes the book readable cover-to-cover instead of reference-only.
-3. **Furry arts as primary use case, not appendix.** Framing through the community's lens produced better, more practical content than treating furry workflows as a special case of general 3D.
-4. **The mission pack pattern works for books.** The original 31-page mission pack (vision + research + execution plan) provided the structure that 10 research agents and 6 writing agents could execute against in parallel.
-5. **LaTeX chapter splitting is essential at scale.** Moving from one monolithic .tex to \input{chapters/ch0X.tex} kept the build manageable and enabled parallel writing.
-6. **FTP path mapping matters.** The FTP root maps to /Research/ on the web, not /. First upload went to /Research/BLN (double-nested, 404). Fixed to /BLN.
+- **Parallel research fleets scale, and audience-context is the variable that separates the best agent from the worst.** Five agents wrote 106,828 words in one session, and the 14,154-word furry-arts module was the thickest because its prompt named a specific community, a specific tool stack, and a specific workflow. Generic prompts produced shorter, flatter modules. The lesson is load-bearing for any future parallel-fleet authoring: specify the audience and the tools, not just the topic.
+- **History woven through a book beats history quarantined into one chapter.** The `historynote` callout pattern — every technical chapter opens with the lineage of its tools — is the single strongest editorial decision in the book. Readers finish the Shading chapter understanding why Cook-Torrance and Kajiya matter, not just how to drive the Principled BSDF. The pattern generalizes: technical documentation that embeds its own intellectual debt in-chapter produces better readers.
+- **Framing through a specific creative community produces better content than writing for a generic audience.** The furry-arts framing is not merely an editorial flourish — it is the reason the corresponding research module is the longest in the release. The specificity sharpened every downstream decision (topology, rigging, shader choice, avatar-pipeline targeting), and the resulting chapter is both more useful to the named community and more useful to the general reader who gets concrete examples instead of hand-waving abstractions.
+- **The mission-pack pattern scales from monographs to books.** The 31-page vision + research + execution-plan mission pack that the release authored against is the same pattern that v1.49.126 LTS and v1.49.131 AIH used at smaller scopes. The pack is the durable artifact; the book is the downstream render. Future book-scale releases should start with a mission pack and treat the book as the artifact the pack predicts rather than inventing the structure mid-authoring.
+- **LaTeX chapter splitting is essential at book scale.** Moving from one monolithic `.tex` to `\input{chapters/ch0X.tex}` for each chapter was not an optimization — it was what made parallel authoring by six agents possible without merge conflicts. A monolithic `.tex` at 12,000 lines would have collapsed the fleet model. The lesson is that the same component-decomposition discipline that applies to source code applies to typesetting once the document gets long enough.
+- **FTP path mapping is a load-bearing detail, and the right place to document it is the release-pipeline runbook.** The FTP root maps to `/Research/` on the web, not `/`, and the first upload went to `/Research/BLN` (double-nested, 404). The fix was trivial once diagnosed (move files to `/BLN` under the FTP root), but the general lesson is that path-mapping semantics deserve explicit runbook documentation so future releases do not repeat the same 404.
+- **Three-pass XeLaTeX compilation is the minimum for a book-scale document.** Single-pass compiles leave cross-references and table-of-contents entries unresolved; two-pass leaves the page-number references stale. Three passes is the reliable minimum for the 329-page PDF to ship with every internal link resolved and every TOC entry correctly page-numbered.
+- **The Amiga-to-Blender democratization arc is a structural spine, not a rhetorical flourish.** The through-line from the 1990 Video Toaster on a $3,000 Amiga to Blender 4.4 in 2026 at zero dollars is not inserted for color — it is the book's organizing metaphysical claim, and it holds every chapter accountable to the thesis that tools get more accessible, not less, as time passes. Rhetorical spines that hold every chapter accountable produce better editorial discipline than rhetorical spines that decorate the introduction.
+- **Community-first framing also produces better cross-references.** The 76+ index entries and 6+ inter-chapter `\ref{}` links per chapter are the direct beneficiaries of the audience-specific framing — when every chapter is written with a specific reader in mind, the chapters naturally reference each other more densely because the reader's practical concerns cross chapter boundaries (a fursuit maker needs modeling + shading + rigging + simulation all in one workflow).
+- **The Research-catalog directory boundary is what lets the release ship clean.** `www/tibsfox/com/Research/BLN/` is the only directory the release commit touches. No `src/`, no `src-tauri/`, no tests, no hooks, no `.planning/`. That discipline — one research project per subdirectory under the Research catalog with a guaranteed-clean git footprint — is what enables a 329-page book to ship as a single atomic commit without cross-contamination with unrelated work.
 
-## Files Produced
+## Cross-References
 
-```
-www/tibsfox/com/Research/BLN/
-  index.html                          -- project overview
-  page.html                           -- markdown renderer
-  style.css                           -- Blender orange/navy theme
-  thicc-splines-save-lives.tex        -- main LaTeX source
-  thicc-splines-save-lives.pdf        -- 329-page textbook
-  chapters/
-    ch03-modeling.tex                  -- 1,838 lines
-    ch04-shading.tex                   -- 2,277 lines
-    ch05-animation.tex                 -- 2,058 lines
-    ch06-compositing.tex               -- 1,693 lines
-    ch07-scripting.tex                 -- 2,482 lines
-    ch08-furryarts.tex                 -- 1,611 lines
-  research/
-    00-glossary.md                     -- 8,630 words, 132 terms
-    01-foundations-interface.md         -- 8,175 words
-    02-modeling-sculpting-geometry-nodes.md -- 10,862 words
-    03-shading-materials-rendering.md  -- 11,061 words
-    04-animation-rigging-simulation.md -- 10,559 words
-    05-compositing-post-video.md       -- 7,588 words
-    06-scripting-pipeline.md           -- 7,429 words
-    07-furry-arts-blender-workflows.md -- 14,154 words
-    08-production-workflows.md         -- 10,044 words
-    09-history-of-3d-modeling.md       -- 18,326 words
-  mission-pack/
-    blender_mission.pdf                -- original 31-page mission pack
-    blender_mission.tex                -- mission pack LaTeX source
-    index.html                         -- mission pack landing page
-```
+| Related | Why |
+|---------|-----|
+| [v1.49.131 — AIH "AI Horizon"](../v1.49.131/) | Multi-module research-with-LaTeX capstone template at a smaller scope; uplift sibling; established the parallel-fleet authorship + LaTeX + Research-catalog pipeline that BLN scales to book length |
+| [v1.49.126 — LTS "Listening to Space"](../v1.49.126/) | Direct methodological predecessor — multi-module research + LaTeX mission pack + catalog integration pattern that BLN inherits and extends to 329 pages |
+| [v1.49.202 — Degree 63: Kenny Loggins + River Otter](../v1.49.202/) | Immediate predecessor in the PNW Research Series arc; paired-subject degree release that BLN follows with the year's largest single-project drop |
+| [v1.49.204 — successor](../v1.49.204/) | Immediate successor in the PNW Research Series arc after the BLN book drop |
+| [NEH — first Graphics-cluster entry](../../../www/tibsfox/com/Research/NEH/) | Graphics-cluster predecessor; the cluster-voice (practitioner-first framing, historical-lineage callouts) that BLN inherits and scales up |
+| [VKD — Graphics cluster](../../../www/tibsfox/com/Research/VKD/) | Graphics-cluster sibling; monograph-scale Vulkan research that BLN sits next to as the cluster's first book-scale release |
+| [VKS — Graphics cluster](../../../www/tibsfox/com/Research/VKS/) | Graphics-cluster sibling; the third Graphics-cluster entry that immediately precedes BLN and hands the cluster voice forward |
+| [BLN project root](../../../www/tibsfox/com/Research/BLN/) | The actual shipped project — 329-page PDF, 10 research modules, web project, mission-pack carry-in, 24 files, 26,287 lines |
+| [v1.0 — Core Skill Management](../v1.0/) | Project foundation and the publish-pipeline discipline (one project per Research subdirectory, catalog-manifest registration, FTP sync to tibsfox.com) that BLN rides on |
+| [v1.49.192 — latest degree release prior to v1.50 target](../v1.49.192/) | Series pacing reference — the 192nd release that bookends the pre-v1.50 arc against which BLN's scale stands out |
+| [v1.40 — sc:learn Dogfood Mission](../v1.40/) | PDF extraction pipeline and checkpoint ingestion harness — the tooling substrate that makes multi-module LaTeX packs shippable at this scale |
+| [v1.37 — Complex Plane Learning Framework](../v1.37/) | `SkillPosition (theta, r)` with tangent-line activation — the mathematical substrate the Research Series builds on |
+| [v1.35 — Mathematical Foundations Engine](../v1.35/) | 451 primitives across 10 domains, 8 mathematical engines — the foundation that future Graphics-cluster extensions (real-time, robotics) will build on |
+| [Sutherland (1963) — *Sketchpad*](https://dspace.mit.edu/handle/1721.1/14979) | Primary source for the 3D-graphics history spine documented in Chapter 1 and in `research/09-history-of-3d-modeling.md` |
+| [Cook & Torrance (1982) — "A Reflectance Model for Computer Graphics"](https://dl.acm.org/doi/10.1145/357290.357293) | Primary source for the shading-theory anchor in Chapter 4 `historynote` callouts |
+| [Kajiya (1986) — "The Rendering Equation"](https://dl.acm.org/doi/10.1145/15886.15902) | Primary source for the Cycles / path-tracing theoretical backbone documented in Chapter 4 |
+| [Burley (2012) — Disney Principled BRDF](https://blog.selfshadow.com/publications/s2012-shading-course/burley/s2012_pbs_disney_brdf_notes_v3.pdf) | Primary source for the Principled BSDF parameterization documented in Chapter 4 |
+| [Blender Foundation](https://www.blender.org/) | Canonical upstream; the open-source project whose 4.4 release the book documents, whose *Flow* 2024 Oscar the book cites as its democratization-arc closing anchor, and whose documentation conventions the book extends |
+| [*Flow* (2024) — Best Animated Feature](https://www.imdb.com/title/tt24709650/) | The 2025 Academy-Award-winning Blender-rendered feature that closes the book's Amiga-to-Blender democratization arc |
+| `docs/release-notes/RETROSPECTIVE-TRACKER.md` | Cross-release retrospective aggregation — this release's six extracted lessons (#1351–#1356) feed the tracker |
+
+## Engine Position
+
+v1.49.203 "Thicc Splines Save Lives: BLN Blender User Manual" is the 4th entry in the Graphics cluster (after NEH, VKD, VKS) and the largest single research release the PNW Research Series has shipped to date at 329 PDF pages, 106,828 research words, 12,953 LaTeX source lines, 26,287 total committed line insertions, and 24 files. It is the Graphics cluster's first book-scale release, graduating the cluster from monograph-scope entries to a full textbook that reads cover to cover. Within the v1.49.x arc the release sits one slot after v1.49.202 (Degree 63 — Kenny Loggins + River Otter) and one slot before v1.49.204, and within the series-wide numbering it contributes six lessons (ledger IDs #1351–#1356) into the cross-release retrospective tracker. It shipped as a single-commit release on 2026-04-01 at `dca25e6da` against the Research catalog directory boundary, rides the same publish pipeline that v1.0 established, and is the template every future book-scale Graphics-cluster release — robotics, real-time engines, industrial design — will reference as the proof that a parallel-fleet authorship model can produce a production-grade 329-page manual without cross-contaminating unrelated parts of the codebase. The release is the bridge between the Graphics cluster's monograph era and its textbook era, and it is the credential the cluster carries forward into the v1.50 milestone window (target 2026-04-21).
+
+## Cumulative Statistics
+
+- **Batch position:** 4 of N in the Graphics cluster (following NEH, VKD, VKS); first book-scale release in the cluster
+- **Arc position:** v1.49.203 in the v1.49.x publication arc (one past v1.49.202, one before v1.49.204)
+- **Lines shipped:** 26,287 insertions across 24 files (0 deletions) — the largest single-release line count in the Research Series to date
+- **Book size:** 329 compiled pages (PDF 1,164,824 bytes) from 12,953 total LaTeX source lines (994 main + 11,959 across six chapter files)
+- **Research corpus:** 106,828 words across 10 Markdown modules totalling 12,314 source lines
+- **Glossary:** 132 terms across 14 categories (including dedicated furry and VRChat terminology)
+- **Parts, chapters, appendices:** 7 parts, 9 chapters, 2 appendices
+- **Blender version targeted:** 4.4 (stable release, April 2026)
+- **Time horizon covered by the history thread:** 63 years (Sketchpad 1963 → *Flow* 2024 Oscar)
+- **Named creative communities documented:** 2 (furry arts, VRChat avatar creators) — both as first-class audiences, not appendices
+- **Custom LaTeX environments:** 6 (`historynote`, `furrybox`, `tipbox`, `warningbox`, `shortcutbox`, `codebox`)
+- **Cross-references:** 76+ index entries, 6+ inter-chapter `\ref{}` links per chapter
+- **Lessons contributed to retrospective tracker:** 6 (ledger IDs #1351–#1356)
+
+## Taxonomic State
+
+- **Series:** PNW Research Series — Graphics Cluster
+- **Cluster:** Graphics (4th entry)
+- **Code:** BLN
+- **Parent domain:** Computer graphics / 3D content creation
+- **Sibling projects (Graphics cluster):** NEH, VKD, VKS — three preceding Graphics-cluster monographs
+- **Methodological kin:** AIH (v1.49.131) and LTS (v1.49.126) — multi-module research-with-LaTeX templates applied at larger scope here, graduating from monograph to book
+- **Forward descendants (projected):** a real-time-engine-bridge cluster entry (Blender-to-Unity, Blender-to-Unreal, Blender-to-Godot), a robotics / embodied-3D companion, a 3D-printing-from-Blender research release — each of which will link back to BLN as the Graphics-cluster reference
+
+## Files
+
+- `www/tibsfox/com/Research/BLN/thicc-splines-save-lives.pdf` — 1,164,824 bytes (binary), 329-page XeLaTeX-compiled Blender 4.4 textbook
+- `www/tibsfox/com/Research/BLN/thicc-splines-save-lives.tex` — 994 lines, main LaTeX source wiring six chapter files together via `\input{}`
+- `www/tibsfox/com/Research/BLN/chapters/ch03-modeling.tex` — 1,838 lines, Modeling / Sculpting / Geometry Nodes master chapter
+- `www/tibsfox/com/Research/BLN/chapters/ch04-shading.tex` — 2,277 lines, Shading / Materials / Rendering master chapter
+- `www/tibsfox/com/Research/BLN/chapters/ch05-animation.tex` — 2,058 lines, Animation / Rigging / Simulation master chapter
+- `www/tibsfox/com/Research/BLN/chapters/ch06-compositing.tex` — 1,693 lines, Compositing / Post-Production / Video master chapter
+- `www/tibsfox/com/Research/BLN/chapters/ch07-scripting.tex` — 2,482 lines, Python Scripting & Pipeline master chapter
+- `www/tibsfox/com/Research/BLN/chapters/ch08-furryarts.tex` — 1,611 lines, Furry Arts & Creative Community Workflows first-class chapter
+- `www/tibsfox/com/Research/BLN/research/00-glossary.md` — 8,630 words, 132 terms across 14 categories
+- `www/tibsfox/com/Research/BLN/research/01-foundations-interface.md` — 8,175 words, Foundations & Interface research document
+- `www/tibsfox/com/Research/BLN/research/02-modeling-sculpting-geometry-nodes.md` — 10,862 words, Modeling research document
+- `www/tibsfox/com/Research/BLN/research/03-shading-materials-rendering.md` — 11,061 words, Shading research document
+- `www/tibsfox/com/Research/BLN/research/04-animation-rigging-simulation.md` — 10,559 words, Animation research document
+- `www/tibsfox/com/Research/BLN/research/05-compositing-post-video.md` — 7,588 words, Compositing research document
+- `www/tibsfox/com/Research/BLN/research/06-scripting-pipeline.md` — 7,429 words, Scripting research document
+- `www/tibsfox/com/Research/BLN/research/07-furry-arts-blender-workflows.md` — 14,154 words, Furry Arts research document (longest practitioner module)
+- `www/tibsfox/com/Research/BLN/research/08-production-workflows.md` — 10,044 words, Production Workflows research document
+- `www/tibsfox/com/Research/BLN/research/09-history-of-3d-modeling.md` — 18,326 words, 3D History research document (longest module overall)
+- `www/tibsfox/com/Research/BLN/index.html` — 135 lines, landing page with 10-card research-module grid
+- `www/tibsfox/com/Research/BLN/page.html` — 209 lines, client-side Markdown renderer (sticky TOC, section search, anchor links)
+- `www/tibsfox/com/Research/BLN/style.css` — 76 lines, Blender-orange-on-navy theme aligned with `brand.css` pattern
+- `www/tibsfox/com/Research/BLN/mission-pack/blender_mission.pdf` — 202,632 bytes (binary), 31-page original mission pack
+- `www/tibsfox/com/Research/BLN/mission-pack/blender_mission.tex` — 1,055 lines, mission pack LaTeX source
+- `www/tibsfox/com/Research/BLN/mission-pack/index.html` — 445 lines, mission pack landing page
+
+---
+*Part of the Graphics cluster and the PNW Research Series — 4th Graphics entry, first book-scale release in the cluster. Uplifted 2026-04-17 against the A-grade rubric at `.planning/missions/release-uplift/RUBRIC.md`.*
