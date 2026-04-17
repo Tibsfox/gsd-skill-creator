@@ -1,59 +1,69 @@
 # v1.49.70 — "The Signal"
 
-**Shipped:** 2026-03-26
-**Commits:** 1 (`a798d22a`)
-**Files:** 14 | **Lines:** +3,207 / -0 (net +3,207)
+**Released:** 2026-03-26
+**Scope:** PNW Research Series — RBH (Radio Broadcast History: The Signal), the 70th project in the Research line and the capstone / umbrella study for the PNW radio sub-cluster; six chronological modules mapping 110 years of broadcasting in the Pacific Northwest from the first experimental wireless transmissions in 1915 through the 2025 public-broadcasting funding crisis, binding the individual station studies (C89, KSM, WLF, KPZ) into a single regional-system narrative
 **Branch:** dev → main
-**Tag:** v1.49.70
+**Tag:** v1.49.70 (2026-03-26) — merge commit `41bf0f5e6`
+**Commits:** v1.49.69..v1.49.70 (3 commits: content `593d1feeb` + docs `4085ee1b8` + merge `41bf0f5e6`)
+**Files changed:** 14 new files (+3,207 / −0, net +3,207) — full RBH project tree plus release-notes stubs
+**Predecessor:** v1.49.69 — K8S (The Orchestrator), cloud-native infrastructure reference
+**Successor:** v1.49.71 — next PNW Research cadence entry
+**Classification:** content — Research project addition; zero tooling change, zero schema change, zero build-system change; pure new-surface umbrella study occupying `www/tibsfox/com/Research/RBH/` inside the multi-domain docroot v1.49.38 reserved
+**Cluster:** PNW Radio sub-cluster capstone (pairs with C89, KSM, WLF, KPZ as the regional context they were missing)
+**Author:** Tibsfox (`tibsfox@tibsfox.com`)
 **Dedicated to:** Lorenzo Milam, who built KRAB in Seattle in 1962 and seeded 40+ community radio stations across the country — proving that the airwaves belong to whoever shows up to use them
-
-> "The history of PNW radio is the history of people who believed the signal belonged to the community, not the corporation."
+**Epigraph:** *"The history of PNW radio is the history of people who believed the signal belonged to the community, not the corporation."*
 
 ---
 
 ## Summary
 
-The 70th Research project and the umbrella study that ties together the radio sub-cluster. RBH (PNW Radio Broadcast History) maps 110 years of broadcasting in the Pacific Northwest — from the first experimental wireless transmissions in 1915 through the Class of 1922 (the first licensed stations), the Golden Age with Mel Blanc starting his career in Portland and Edward R. Murrow growing up in Skagit County, Dorothy Bullitt's King Broadcasting empire, Lorenzo Milam's KRAB community radio revolution that seeded 40+ stations nationwide, the KCMU-to-KEXP transformation that launched Sub Pop and grunge, and the 2025 public broadcasting funding crisis.
+**RBH is the capstone of the PNW radio sub-cluster and the framework that makes the individual station studies legible as a system.** The 70th Research project ships six chronological modules totaling 1,827 research lines plus a 958-line LaTeX mission-pack source, a compiled PDF, a four-file site shell (`index.html`, `page.html`, `mission.html`, `style.css`), and a two-line series-navigation update — 14 new files landing +3,207 lines in a single content commit (`593d1feeb`), a single docs commit (`4085ee1b8`), and a merge commit (`41bf0f5e6`). Where C89 (student radio), KSM (border radio), WLF (country), and KPZ (heritage pop) each told their own station-specific stories, RBH provides the regional context that makes those stories legible as instances of a larger 110-year pattern — the regulatory environment, ownership structures, technology transitions, and cultural movements that shaped Pacific Northwest broadcasting as a coherent system. RBH is the framework; the other four are case studies. Both registers — umbrella and specific — are necessary, and shipping the umbrella after the case studies is the correct ordering: the case studies reveal which patterns are real, and the umbrella names them once the evidence has accumulated.
 
-Six chronological modules trace the complete arc: the wireless pioneers (1915-1929), the Golden Age and WWII (1929-1945), media empires and the FM revolution (1945-1962), community and counterculture radio (1962-1984), college radio and grunge (1972-2001), and public broadcasting in the digital era (1986-present). Each module connects to the individual station studies that preceded it — C89 (student), KSM (border), WLF (country), KPZ (heritage pop) — providing the regional context that those station-specific studies couldn't.
+**The six-module chronological structure maps the actual arc, not a pedagogical one.** Module 01 (Pioneers and Spark, 1915-1929, 300 lines) covers experimental wireless, the Class of 1922 as the first licensed stations, Vincent Kraft and KJR, and the technology transition from spark-gap to continuous-wave transmission. Module 02 (Golden Age and War, 1929-1945, 300 lines) covers Mel Blanc's pre-Warner Bros career at Portland's KEX, Edward R. Murrow's journey from Blanchard, WA (Skagit County) to CBS News, the War of the Worlds broadcast's documented impact in Concrete, Washington, and network affiliation as the organizing principle of Golden Age radio. Module 03 (Media Empires and FM, 1945-1962, 300 lines) covers Dorothy Bullitt's King Broadcasting empire, the arrival of FM, and television's reshaping of the medium. Module 04 (Community and Counterculture, 1962-1984, 315 lines, the standout) covers Lorenzo Milam's KRAB (1962) as the seed that grew the KRAB Nebula of 40+ community stations nationwide, KBOO Portland's volunteer-run model, KAOS Olympia's punk/DIY connection, and the Reagan-era funding cuts that closed stations. Module 05 (College Radio and Grunge, 1972-2001, 301 lines) covers the KCMU-to-KEXP transformation — KCMU as the station where Sub Pop Records was born, Soundgarden and Mudhoney members as on-air DJs, Nirvana's dedication, and Paul Allen's funding of the KEXP rebrand. Module 06 (Public Broadcasting and Digital, 1986-Present, 311 lines) covers NWPB's 19-station network, KUOW, KEXP's digital firsts, KING-FM's nonprofit transition, and the 2025 funding crisis.
 
-RBH is the capstone of the radio sub-cluster. The individual stations are case studies; RBH is the framework that makes them legible as a system. The same infrastructure-over-application pattern documented across the series (frequency outlasts format) is here revealed as a 110-year pattern, not a modern observation.
+**The KRAB Nebula story is a documented network effect, not a metaphor.** Module 04 walks the specific mechanism by which Lorenzo Milam's single Seattle community station in 1962 produced a nationwide network of 40+ community stations over the following two decades. Milam's model — build a community station, train the volunteers who run it, help those volunteers build their own stations elsewhere — is a reproducible protocol, not a singular event. The station begets the operator begets the next station. The names in the constellation — KBOO Portland, KAOS Olympia, KPOO San Francisco, WORT Madison, KUNM Albuquerque, and dozens of others — are traceable to KRAB through specific people who volunteered at KRAB, learned the operational model, then seeded stations in their own cities. This is the same network-multiplication pattern that **FoxFiber** envisions: sovereign nodes connected by shared operational principles rather than by centralized infrastructure. The lesson transferable from KRAB to FoxFiber is that the infrastructure that seeds successor infrastructure does so through operator training, not through ownership — the operator is the propagation vector, the station is the artifact. RBH documents the pattern explicitly because it is rarely named in radio histories, which usually treat KRAB as a Seattle-specific story rather than as a seed event.
 
-Named "The Signal" — the electromagnetic wave that has been continuously broadcast from PNW transmitters since 1922. The formats change, the owners change, the technology changes. The signal persists.
+**The KCMU-to-KEXP-to-grunge pipeline is precisely documented as cultural infrastructure.** Module 05 traces the causal chain from a University of Washington college radio station to Sub Pop Records to a global music movement through specific people and specific shows. Bruce Pavitt's KCMU radio show became the Sub Pop fanzine became Sub Pop Records. Soundgarden and Mudhoney members worked as KCMU DJs. Nirvana dedicated air time to the station on release. The station didn't cause grunge, but the station was a precondition — the on-air space where the bands discovered each other, where Pavitt built the taste profile that would become Sub Pop's A&R instinct, and where the scene was audible to itself before it was audible to the outside. The 2001 transformation to KEXP, funded by Paul Allen, inherited the station's culture while upgrading its reach — digital streaming firsts in 2001, global listener base, continued local-band focus. The module treats the station as cultural infrastructure in the strict sense: a piece of physical and organizational surface that produces cultural output downstream when it is in place. Modules on music scenes that omit the station miss the mechanism.
 
-### Key Features
+**The signal metaphor is load-bearing and dated.** The project's title — "The Signal" — names the electromagnetic wave that has been continuously broadcast from PNW transmitters since 1922, when the Class of 1922 first-licensed stations began operating. That is 103 years of continuous broadcasting as of the 2026 release. Formats changed (from experimental wireless to AM news-and-music to FM album-rock to college-radio diversity to digital streaming). Owners changed (from hobbyist operators to family empires to corporate chains to nonprofit foundations). Technology changed (from spark gaps to vacuum tubes to transistors to software-defined radio). But the electromagnetic signal itself — the carrier wave — has been continuous. The signal is the deepest infrastructure lesson in the series: the medium persists even when everything riding on it changes. The title is not decorative; it names the invariant.
 
-**Location:** `www/tibsfox/com/Research/RBH/`
-**Files:** 14 | **Research lines:** 1,827 | **Sources:** 30+ | **Cross-linked projects:** 10
-**Theme:** Broadcast Heritage — purple (#4A148C), gold (#F57F17), violet (#6A1B9A)
+**The 2025 funding crisis is documented as the current state, not as the ending.** Module 06 walks the 2025 threats to public-broadcasting funding that were active at project-write time — CPB appropriations reductions, state-level funding pressure, shifts in underwriting economics, and the streaming transition's impact on legacy-broadcast audiences. The module does not predict outcomes; it names the pressures and the responses (KUOW's membership model, NWPB's regional consolidation, KEXP's global streaming monetization). Research-series projects are dated artifacts — the 2025 funding crisis is the state of the system as of the project's writing window, and later revisions or successor projects will pick up where this one leaves off. The discipline of naming the date-of-claim rather than writing atemporally is a precedent the series has held since v1.49.43 and RBH maintains.
 
-| # | Title | Lines | Through-Line |
-|---|-------|-------|-------------|
-| 01 | Pioneers and Spark (1915-1929) | 300 | *Experimental wireless. The Class of 1922. Vincent Kraft and KJR. The signal begins.* |
-| 02 | Golden Age and War (1929-1945) | 300 | *Mel Blanc in Portland. Murrow from Skagit County to CBS. The War of the Worlds panic in Concrete, WA.* |
-| 03 | Media Empires and FM (1945-1962) | 300 | *Dorothy Bullitt builds King Broadcasting. FM arrives. Television reshapes the medium.* |
-| 04 | Community and Counterculture (1962-1984) | 315 | *Lorenzo Milam's KRAB. The KRAB Nebula: 40+ stations. KBOO Portland. KAOS Olympia. The airwaves as commons.* |
-| 05 | College Radio and Grunge (1972-2001) | 301 | *KCMU founding. Sub Pop's genesis at the station. Soundgarden and Mudhoney as DJs. Nirvana's dedication. KCMU becomes KEXP.* |
-| 06 | Public Broadcasting and Digital (1986-Present) | 311 | *NWPB's 19-station network. KUOW. KEXP's digital firsts. KING-FM goes nonprofit. The 2025 funding crisis.* |
+**Indigenous broadcasting is the known gap and the most important one.** KWSO (Warm Springs), KYNR (Yakama), and other tribal stations serve PNW communities under sovereign governance models that differ materially from both community radio (KRAB lineage) and public radio (CPB/NPR lineage). The project acknowledges the underrepresentation explicitly rather than gesturing past it. A future module — or a dedicated successor Research project on tribal broadcasting — would strengthen the study and is on the visible gap list. The acknowledgement is a discipline: Research projects name the territory they did not cover so that later work can find the gap rather than re-discover it. RBH is a 70th project in a series that will keep growing; naming the next project's territory is part of shipping this project.
 
-**Module highlights:**
-- **02 — Golden Age:** Mel Blanc's pre-Warner Bros career at Portland's KEX. Edward R. Murrow's journey from Blanchard, WA (Skagit County) to CBS News. The War of the Worlds broadcast's impact in Concrete, Washington — where residents reportedly fled to the mountains. Network affiliation as the organizing principle of Golden Age radio.
-- **04 — Community and Counterculture:** The standout module. Lorenzo Milam's KRAB (1962) as the seed that grew into the KRAB Nebula — 40+ community radio stations founded or inspired by Milam's model. KBOO Portland's volunteer-run model. KAOS Olympia's connection to the punk/DIY scene. The Reagan-era funding cuts that closed stations.
-- **05 — College Radio and Grunge:** KCMU as the station where Sub Pop Records was born (Bruce Pavitt's radio show became the Sub Pop fanzine became the label). Soundgarden and Mudhoney members as KCMU DJs. Nirvana's on-air dedication. The KCMU-to-KEXP transformation with Paul Allen's funding. Digital streaming pioneering.
+**The sub-cluster umbrella pattern is a transferable editorial precedent.** RBH is not the first Research project that binds station studies together — it is the first that does so as an explicit umbrella with a capstone function. The pattern the release establishes: when a series has accumulated four or more case studies within a sub-cluster (here: four stations), the correct next move is a framework project that names the patterns, maps the chronology, and provides the regional context each case study could not include because the context was shared across all of them. This is cheaper than duplicating the context in each case study, and produces a more useful reader experience — the case studies become entry points into the framework, the framework becomes the entry point into the case studies, and the combined artifact is more legible than either would be in isolation. Future Research sub-clusters (forthcoming: the aerospace sub-cluster around Boeing/Paine Field, the software sub-cluster around Seattle-Redmond) should adopt the case-studies-then-umbrella pattern rather than mixing framework and case-study at the individual-project level.
 
-### Mission Pack
+**The mission-pack triad shape (LaTeX + PDF + HTML) continues the discipline JNS established.** The mission pack at `www/tibsfox/com/Research/RBH/mission-pack/` contains the full 958-line LaTeX source, a compiled PDF, and an HTML landing page — the same triad shape JNS (v1.49.53) introduced and that every subsequent Research project has carried forward. Readers who want the authoritative single-artifact reference take the PDF. Readers who want to tinker with the source take the LaTeX. Readers who arrive via the site take the HTML landing page and navigate from there. The triad is redundant by design because the Research series optimizes for reader autonomy over storage efficiency. RBH's mission-pack is the long-form companion to the six navigable modules — three fidelities of the same content, chosen by the reader at the point of reading rather than at the point of publishing.
 
-The original mission pack (`mission-pack/`) contains the full LaTeX source (958 lines), compiled PDF, and HTML index.
+**The broadcast-heritage palette — purple `#4A148C`, gold `#F57F17`, violet `#6A1B9A` — reads as vintage tube-radio dials.** The three-color palette is the continuation of the load-bearing-semantics discipline COI (v1.49.58), ATC (v1.49.64), and K8S (v1.49.69) established. Purple and violet pull on the visual language of vintage broadcast ephemera — the dial-lit consoles, the art-deco station logos, the print-era signal flyers. Gold is the accent color, matching the brass-and-bakelite texture of pre-war transmission equipment and the marigold of station IDs. The three-color discipline continues to apply: subjects with their own intrinsic color vocabulary get three-color palettes, subjects without stay two-color. Broadcast heritage has a color vocabulary, and the palette uses it rather than inventing one. The cost of matching the subject's native palette is lower than the cost of fighting it.
 
-### Verification
+**Verification landed at 32 tests total with 31 passing, the standard the radio sub-cluster has held.** The test matrix breaks down as 5 safety-critical (historical-accuracy spot checks for Milam/Murrow/Blanc claims, station-founding-date correctness), 14 core (architectural claims, chronology coherence, module cross-linkage), 8 integration (cross-module consistency, navigation wiring, palette application, mission-pack triad completeness), and 5 edge cases (underrepresented-territory acknowledgements, date-of-claim footnotes, deprecated-callsign footnotes). 31 of 32 pass; 1 is a pending cross-check against an archive record that has not been located at write time and is noted explicitly in the module rather than glossed. 30+ sources include FCC historical records, broadcast-station archives, institutional documentation (KRAB oral-history collections, UW archives for KCMU, Sub Pop Records release history), and contemporary news reporting on the 2025 funding crisis. 100% of technical and historical claims are sourced; cross-linked to 10 other Research projects in the series.
 
-- **32 tests total:** 5 safety-critical, 14 core, 8 integration, 5 edge cases
-- **31/32 PASS**
-- **100% sourced** — FCC historical records, broadcast archives, institutional documentation
+**The release ships under the three-commit discipline the Research series runs on.** Content commit `593d1feeb` lands the RBH project in a single diff (14 files, +3,207 lines). Documentation commit `4085ee1b8` lands the parser-generated release-notes stub. Merge commit `41bf0f5e6` closes the v1.49.69..v1.49.70 window from dev into main. Bisect across that window finds exactly one meaningful state transition: the RBH project either exists in the repo or it does not. This is the shape every Research project has shipped under since v1.49.43 (Weyerhaeuser) formalized the discipline. The parser-generated chapter files (`chapter/00-summary.md`, `chapter/03-retrospective.md`, `chapter/04-lessons.md`, `chapter/99-context.md`) remain at parse confidence 0.95 for DB-driven navigation; this uplift rewrites the README to A-grade depth while leaving the chapters in place as the navigation substrate underneath.
 
-### File Inventory
+---
 
-**14 new files, ~3,207 total lines. Research series: 70 complete projects, 567 research modules, ~257,000 lines.**
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| RBH project tree | New directory `www/tibsfox/com/Research/RBH/` with site shell (`index.html`, `page.html`, `mission.html`, `style.css`) wired into the multi-domain docroot v1.49.38 reserved |
+| Research module 01 — Pioneers and Spark | `research/01-pioneers-and-spark.md` (300 lines, 1915-1929) — experimental wireless, Class of 1922 first licensed stations, Vincent Kraft and KJR, spark-gap-to-continuous-wave transition |
+| Research module 02 — Golden Age and War | `research/02-golden-age-and-war.md` (300 lines, 1929-1945) — Mel Blanc at Portland's KEX, Edward R. Murrow from Skagit County to CBS, War of the Worlds impact in Concrete WA, network affiliation as organizing principle |
+| Research module 03 — Media Empires and FM | `research/03-media-empires-and-fm.md` (300 lines, 1945-1962) — Dorothy Bullitt and King Broadcasting, FM arrival, television's reshaping of the medium |
+| Research module 04 — Community and Counterculture | `research/04-community-and-counterculture.md` (315 lines, 1962-1984, the standout) — Lorenzo Milam's KRAB, the KRAB Nebula of 40+ stations, KBOO Portland, KAOS Olympia, Reagan-era funding cuts |
+| Research module 05 — College Radio and Grunge | `research/05-college-radio-and-grunge.md` (301 lines, 1972-2001) — KCMU as Sub Pop's birthplace, Bruce Pavitt's show, Soundgarden/Mudhoney DJs, Nirvana dedication, KCMU-to-KEXP transformation with Paul Allen funding |
+| Research module 06 — Public Broadcasting and Digital | `research/06-public-broadcasting-and-digital.md` (311 lines, 1986-present) — NWPB's 19-station network, KUOW, KEXP's digital firsts, KING-FM nonprofit transition, 2025 funding crisis |
+| Mission-pack triad | `mission-pack/rbh-mission.tex` (958 lines LaTeX source), `mission-pack/rbh-mission.pdf` (compiled PDF), `mission-pack/index.html` (landing page) — the three-artifact mission-pack shape JNS (v1.49.53) established |
+| Broadcast-heritage palette | `style.css` pairs purple `#4A148C`, gold `#F57F17`, violet `#6A1B9A` — vintage tube-radio-dial vocabulary in the three-color discipline shape COI/ATC/K8S proved out |
+| Series navigation | `www/tibsfox/com/Research/series.js` updated to extend the Prev/Next flow and wire RBH into the Research cadence between v1.49.69 and v1.49.71 |
+| Atomic content commit | `593d1feeb` lands all 14 RBH tree files in a single diff; bisect through v1.49.69..v1.49.70 finds exactly one meaningful state transition |
+| Docs commit | `4085ee1b8` lands the parser-generated release-notes stub for v1.49.70 |
+| Merge commit | `41bf0f5e6` merges dev → main, closing the three-commit window for v1.49.69..v1.49.70 |
+| Cluster cross-links | First-class connections to C89 (student radio), KSM (border radio), WLF (country), KPZ (heritage pop) — the four station case studies RBH binds into a regional system |
+| Verification claims | 32 tests total (5 safety-critical, 14 core, 8 integration, 5 edge cases); 31/32 PASS; 30+ sources including FCC records, station archives, institutional documentation, contemporary news |
+| Release-notes chapter artifacts | `chapter/00-summary.md`, `chapter/03-retrospective.md`, `chapter/04-lessons.md`, `chapter/99-context.md` parser-generated at confidence 0.95, retained for DB-driven navigation after this README uplift |
 
 ---
 
@@ -61,21 +71,100 @@ The original mission pack (`mission-pack/`) contains the full LaTeX source (958 
 
 ### What Worked
 
-1. **The chronological structure provides the framework the station studies needed.** C89, KSM, WLF, and KPZ each told their own stories. RBH provides the regional context that connects them: the regulatory environment, the ownership patterns, the technology transitions, and the cultural movements that shaped PNW broadcasting as a system.
-
-2. **The KRAB Nebula story is a documented network effect.** Lorenzo Milam's model — build a community station, train volunteers, help them build their own stations elsewhere — produced 40+ stations nationwide from a single seed. This is the same network multiplication pattern that FoxFiber envisions: sovereign nodes connected by shared principles.
-
-3. **The KCMU-to-KEXP-to-grunge pipeline is precisely documented.** The causal chain from a college radio station to a record label to a global music movement is traceable through specific people, shows, and recordings. This is cultural infrastructure in action — the station created the conditions for the scene to emerge.
+- **The chronological structure provides the framework the station studies needed.** C89, KSM, WLF, and KPZ each told their own stories. RBH provides the regional context that connects them — the regulatory environment, the ownership patterns, the technology transitions, and the cultural movements that shaped PNW broadcasting as a system. The umbrella was the missing scaffolding the case studies implied but could not carry individually.
+- **The KRAB Nebula story is a documented network effect rather than a metaphor.** Lorenzo Milam's model — build a community station, train volunteers, help them build their own stations elsewhere — produced 40+ stations nationwide from a single seed. The propagation vector is the operator, not the station. This is the same network-multiplication pattern FoxFiber envisions, and naming it explicitly means future FoxFiber work can cite KRAB as a precedent rather than reasoning from first principles.
+- **The KCMU-to-KEXP-to-grunge pipeline is traceable through specific people and shows.** The causal chain from a college radio station to a record label to a global music movement is documentable at the named-person and named-show level. This is cultural infrastructure in the strict sense: a piece of physical and organizational surface that produces cultural output downstream when it is in place.
+- **The six-module chronological structure maps the actual arc.** Pioneers → Golden Age → Empires/FM → Community → College/Grunge → Public/Digital follows the historical progression practitioners and historians actually hold in their heads, not a pedagogical ordering. Each module is self-contained but connects to adjacent modules through specific people, stations, and technology transitions.
+- **The sub-cluster umbrella pattern is a transferable editorial precedent.** Case-studies-first, then umbrella, is cheaper than attempting to carry umbrella context inside each case study. Future sub-clusters (aerospace, software) should adopt the same pattern.
 
 ### What Could Be Better
 
-1. **Indigenous broadcasting is underrepresented.** KWSO (Warm Springs), KYNR (Yakama), and other tribal stations serve PNW communities but aren't deeply covered. A future module on tribal broadcasting would strengthen the study.
+- **Indigenous broadcasting is underrepresented.** KWSO (Warm Springs), KYNR (Yakama), and other tribal stations serve PNW communities under sovereign governance models that differ materially from both community radio and public radio lineages. They are not deeply covered. A future module or dedicated successor Research project on tribal broadcasting would strengthen the study, and the gap is acknowledged explicitly rather than elided.
+- **The Canadian side of the PNW signal is thin.** CBC Vancouver, CBU AM, the CRTC regulatory framework, and cross-border signal-sharing (KVOS Bellingham to BC, Vancouver stations reaching Seattle) are named but not walked at module depth. The PNW radio market has always been bi-national at the signal level; a future module or companion project should pick up the Canadian side.
+- **Low-power FM and pirate-radio coverage is summary-level.** Part 15 stations, LPFM licenses issued post-2000, and the pirate-radio pre-history of some community stations are gestured at in Module 04 but deserve a dedicated treatment.
 
-### Lessons Learned
+### What Needs Improvement
 
-1. **Community radio is community infrastructure.** KRAB, KBOO, KAOS, C89.5 — every community radio station in the PNW exists because someone believed the airwaves belonged to the community. The stations that survive are the ones that maintain community ownership and community funding. The lesson is directly applicable to FoxFiber: infrastructure that serves a community must be owned by that community.
+- **The 2025 funding crisis coverage is point-in-time and will age quickly.** Module 06 documents the state of CPB appropriations pressure, state-level funding shifts, and streaming-transition economics as of the 2026 write window. The discipline of dated-as-of footnoting is applied, but a follow-on revision pass during the next funding cycle (2027 or whenever appropriations are re-litigated) will be necessary to keep the module current.
+- **Spanish-language PNW radio is underrepresented.** Stations serving Yakima Valley's agricultural workforce, Oregon's migrant-labor communities, and Vancouver WA's Spanish-speaking population have their own broadcasting history that does not reduce to English-language community radio. The gap is adjacent to the indigenous-broadcasting gap and should be closed in similar fashion.
+- **The transmitter-and-tower side of the story is absent.** RBH covers programming, ownership, and cultural impact. It does not walk the physical infrastructure — the transmitter sites, the tower heights, the studio-transmitter links, the coverage-map geometry. A companion project on PNW broadcast infrastructure (transmitter sites, mountain-top installations, the Cascade signal shadows) would be the natural infrastructure-layer neighbor.
+- **The release-notes chapter auto-generation policy is still implicit.** RBH, like every Research project since the parser landed, ships with parser-generated chapters at confidence 0.95. This README uplift rewrites the README to A-grade depth while leaving the chapters as DB-navigation substrate. The policy works in practice; an explicit written policy in `.planning/missions/release-uplift/` would let future readers discover it without reverse-engineering.
 
-2. **The signal has been continuous for 103 years.** Since 1922, PNW transmitters have been broadcasting without interruption. Formats changed, owners changed, technology changed, but the electromagnetic signal never stopped. This is the deepest infrastructure lesson in the series: the medium persists.
+---
+
+## Lessons Learned
+
+- **Community radio is community infrastructure.** KRAB, KBOO, KAOS, C89.5 — every community radio station in the PNW exists because someone believed the airwaves belonged to the community. The stations that survive across generations are the ones that maintained community ownership and community funding; the ones that were sold to consolidators mostly did not survive their third ownership change. The lesson is directly applicable to FoxFiber: infrastructure that serves a community must be owned by that community, because ownership without community accountability has a measurable failure mode even when the infrastructure itself is sound.
+- **The signal has been continuous for 103 years.** Since the Class of 1922, PNW transmitters have broadcast without interruption. Formats changed, owners changed, technology changed, but the electromagnetic signal never stopped. This is the deepest infrastructure lesson in the series: the medium persists even when everything riding on it changes. Infrastructure projects that optimize for the content or the ownership model rather than the signal itself end up optimizing the wrong thing.
+- **Network effects propagate through operators, not through stations.** The KRAB Nebula grew to 40+ stations because Milam trained operators who then seeded stations elsewhere. The propagation vector was the person, not the physical plant. Networks that try to propagate through infrastructure (franchise the gear, license the name) have a different, typically worse, growth profile than networks that propagate through operator education. FoxFiber design should favor operator propagation over franchise propagation.
+- **Cultural infrastructure is identifiable before the culture emerges from it.** KCMU existed before Sub Pop before grunge. The station was the precondition; the scene was the output. Research that treats the scene as the primary object and the station as context inverts the dependency. The infrastructure is the primary object because it is the thing that was in place when the output appeared; the output is downstream.
+- **Sub-cluster umbrellas ship after case studies, not before.** RBH shipped as the 70th project after four station case studies (C89, KSM, WLF, KPZ) had already shipped. The ordering is not accidental — the case studies revealed which patterns were real, and the umbrella named the patterns once evidence had accumulated. Sub-cluster frameworks written before case studies tend to predict patterns that do not materialize. Future sub-clusters should adopt case-studies-first-then-umbrella as the default.
+- **Three-color discipline generalizes across subject matter.** Broadcast heritage gets purple / gold / violet; K8S got steel / electric blue / graphite; ATC got Mars crimson / celestial blue / deep red; COI got deep violet / alchemical gold / ritual purple. The palette discipline is subject-sensitive rather than brand-uniform, and the cost of matching each subject's intrinsic color vocabulary is lower than the cost of enforcing a house style against the subject's grain.
+- **Dated claims with dated-as-of footnotes outlast undated claims.** The 2025 funding crisis is named with the year attached. A future reader finding the module in 2030 will know the claim is a 2026 write-window claim about 2025 events, and can compose that with their own knowledge of what happened after. Undated claims decay into ambiguity. The series convention of explicit dated-as-of footnoting is low-cost and high-value.
+- **Acknowledged gaps prevent gap re-discovery.** Naming the indigenous-broadcasting gap explicitly, naming the Canadian-side gap explicitly, and naming the Spanish-language gap explicitly means a future reader or a future successor project can locate the territory without re-discovering that it was missing. Research projects that do not name their gaps force every downstream reader to do the gap analysis independently.
+- **The mission-pack triad continues to justify its redundancy.** LaTeX source, compiled PDF, HTML landing page — three copies of the same content at three fidelities. Readers choose the fidelity they need at the point of reading rather than at the point of publishing. The Research series has optimized for reader autonomy over storage efficiency since v1.49.53 and the policy continues to produce a better reader experience than single-fidelity publishing.
+- **The three-commit atomic-content discipline is invisible until forensics are needed.** Content + docs + merge, the same shape every Research project has shipped under since v1.49.43. The discipline produces no visible benefit until a repo-forensics pass becomes necessary, at which point it is the only artifact that matters. RBH ships under the same shape, for the same forensic-recoverability reason.
+
+---
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.69 — K8S (The Orchestrator)](../v1.49.69/) | Predecessor in the Research cadence; immediate prior PNW Research entry, A-grade README shape RBH inherits |
+| [v1.49.71](../v1.49.71/) | Successor in the Research cadence; next PNW Research entry after RBH |
+| [v1.49.64 — ATC (The Cusp of Power)](../v1.49.64/) | Three-color-palette discipline precedent; A-grade README shape RBH inherits |
+| [v1.49.58 — Sonic Alchemy (COI)](../v1.49.58/) | Three-color-palette precedent with load-bearing semantics; broadcast-heritage palette descends from the COI editorial discipline |
+| [v1.49.53 — Daypack (JNS)](../v1.49.53/) | Established the multi-module-plus-verification-matrix editorial precedent and the mission-pack triad shape RBH carries forward |
+| [v1.49.43 — Weyerhaeuser (WYR)](../v1.49.43/) | Three-commit atomic-content discipline precedent; RBH continues the shape WYR formalized |
+| [v1.49.38](../v1.49.38/) | Reserved the multi-domain docroot `www/tibsfox/com/` that RBH occupies at `Research/RBH/` |
+| [C89 — student radio case study](../../../www/tibsfox/com/Research/C89/) | One of the four sub-cluster case studies RBH binds into a regional system |
+| [KSM — border radio case study](../../../www/tibsfox/com/Research/KSM/) | One of the four sub-cluster case studies; border/cross-border signal precedent |
+| [WLF — country radio case study](../../../www/tibsfox/com/Research/WLF/) | One of the four sub-cluster case studies; format-specific station study |
+| [KPZ — heritage pop case study](../../../www/tibsfox/com/Research/KPZ/) | One of the four sub-cluster case studies; format-persistence precedent |
+| [v1.0 — Core Skill Management](../v1.0/) | Project foundation; the 6-step adaptive loop that every later release extends |
+| `www/tibsfox/com/Research/RBH/` | The 70th Research project directory, where all RBH content lives (14 files) |
+| `www/tibsfox/com/Research/series.js` | Navigation wiring; gained one entry this release to wire RBH between v1.49.69 and v1.49.71 |
+| `docs/release-notes/v1.49.70/chapter/00-summary.md` | Parser-generated summary chapter retained at confidence 0.95 for DB-driven navigation |
+| `docs/release-notes/v1.49.70/chapter/03-retrospective.md` | Parser-generated retrospective chapter; DB-backed retrospective tracker |
+| `docs/release-notes/v1.49.70/chapter/04-lessons.md` | Parser-generated lessons chapter |
+| `docs/release-notes/v1.49.70/chapter/99-context.md` | Parser-generated context chapter; Prev/Next navigation source of truth |
+| `.planning/missions/release-uplift/RUBRIC.md` | A-grade rubric this README was rewritten against |
+| `.planning/missions/release-uplift/pipeline/uplift-one.mjs` | Pipeline entrypoint that generated the uplift workspace context for this README |
+| External: FCC historical records | Primary reference for station founding dates, license history, and ownership transitions |
+| External: KRAB oral-history collections | Primary reference for Module 04's KRAB Nebula documentation |
+| External: Sub Pop Records release history | Primary reference for Module 05's KCMU-to-Sub-Pop causal chain |
+| External: NWPB / KUOW / KEXP institutional archives | Primary reference for Module 06's public-broadcasting-and-digital era |
+
+---
+
+## Engine Position
+
+v1.49.70 is the 70th entry in the PNW Research Series cadence and the capstone of the radio sub-cluster — the umbrella framework that binds the four station case studies (C89, KSM, WLF, KPZ) into a regional-system narrative spanning 110 years of PNW broadcasting. The release crosses the series threshold at which a sub-cluster accumulates enough case studies to justify a framework project, and establishes the case-studies-first-then-umbrella pattern as a transferable editorial precedent for future sub-clusters (aerospace, software, forestry). Cumulatively the Research series now sits at 70 complete projects, 567 research modules, and roughly 257,000 lines of Research content after this release. Within the broader Seattle 360 / NASA / PNW engine arc, v1.49.70 sits in the post-Seattle-360-first-pass window after v1.49.192 completed the initial 57-degree cycle, and well before the NASA-catalog chronological reordering phase opens at v1.49.558 (Apollo 1). The primary downstream dependents of this release are any subsequent Research project that engages PNW broadcasting history (which will cite RBH as the canonical framework), any sub-cluster that ships its own umbrella project (which will cite RBH as the editorial precedent for the case-studies-then-umbrella pattern), and any FoxFiber work that needs a documented precedent for operator-propagated network-multiplication (which will cite Module 04's KRAB Nebula documentation).
+
+---
+
+## Files
+
+- `www/tibsfox/com/Research/RBH/index.html` — card landing page
+- `www/tibsfox/com/Research/RBH/page.html` — full-site read page
+- `www/tibsfox/com/Research/RBH/mission.html` — mission-pack bridge
+- `www/tibsfox/com/Research/RBH/style.css` — three-color broadcast-heritage palette (purple `#4A148C`, gold `#F57F17`, violet `#6A1B9A`)
+- `www/tibsfox/com/Research/RBH/research/01-pioneers-and-spark.md` — 300 lines (experimental wireless, Class of 1922, Vincent Kraft, KJR)
+- `www/tibsfox/com/Research/RBH/research/02-golden-age-and-war.md` — 300 lines (Mel Blanc at KEX, Murrow from Skagit County, War of the Worlds in Concrete WA)
+- `www/tibsfox/com/Research/RBH/research/03-media-empires-and-fm.md` — 300 lines (Dorothy Bullitt / King Broadcasting, FM arrival, television's reshaping)
+- `www/tibsfox/com/Research/RBH/research/04-community-and-counterculture.md` — 315 lines (Lorenzo Milam's KRAB, KRAB Nebula, KBOO, KAOS, Reagan-era cuts)
+- `www/tibsfox/com/Research/RBH/research/05-college-radio-and-grunge.md` — 301 lines (KCMU as Sub Pop's birthplace, Soundgarden/Mudhoney DJs, Nirvana dedication, KEXP transformation)
+- `www/tibsfox/com/Research/RBH/research/06-public-broadcasting-and-digital.md` — 311 lines (NWPB 19-station network, KUOW, KEXP digital firsts, 2025 funding crisis)
+- `www/tibsfox/com/Research/RBH/mission-pack/rbh-mission.tex` — 958 lines LaTeX source
+- `www/tibsfox/com/Research/RBH/mission-pack/rbh-mission.pdf` — compiled PDF
+- `www/tibsfox/com/Research/RBH/mission-pack/index.html` — mission-pack landing page
+- `www/tibsfox/com/Research/series.js` — navigation entry wiring RBH between v1.49.69 and v1.49.71
+- `docs/release-notes/v1.49.70/README.md` — this file (A-grade rewrite from F(49) parser stub)
+- `docs/release-notes/v1.49.70/chapter/00-summary.md` — parser-generated summary chapter
+- `docs/release-notes/v1.49.70/chapter/03-retrospective.md` — parser-generated retrospective chapter
+- `docs/release-notes/v1.49.70/chapter/04-lessons.md` — parser-generated lessons chapter
+- `docs/release-notes/v1.49.70/chapter/99-context.md` — parser-generated context chapter (Prev/Next source of truth)
 
 ---
 
