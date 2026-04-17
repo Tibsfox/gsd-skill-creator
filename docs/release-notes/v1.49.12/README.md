@@ -1,143 +1,190 @@
-# v1.49.12 -- Heritage Skills Educational Pack
+# v1.49.12 — Heritage Skills Educational Pack
 
-**Shipped:** 2026-03-02
-**Type:** Feature (major milestone)
-**Phases:** 28-39 (12 phases, 45 plans)
-
----
+**Released:** 2026-03-02
+**Scope:** four-tradition heritage living skills educational pack — 18 Skill Hall rooms, Trail Badge system, Cultural Sovereignty architecture, Heritage Book pipeline
+**Branch:** dev → main
+**Tag:** v1.49.12 (2026-03-02)
+**Commits:** v1.49.11..v1.49.12 (82 commits, head `8d9784df8`)
+**Files changed:** 284 (+47,038 / −9)
+**Predecessor:** v1.49.11 — gsd-init Hardening
+**Successor:** v1.49.13
+**Classification:** feature — major milestone, largest non-degree release in v1.49.x to date
+**Phases covered:** 28–39 (12 phases, 45 plans) across two sequential delivery arcs
+**Verification:** 1,818 heritage-skills-pack tests · 22,820 total project tests · 36 red-team adversarial scenarios (18 per phase) · safety monotonicity tests MONO-01 through MONO-10 · pan-Indigenous language scan across all 18 rooms · cleared for deployment
 
 ## Summary
 
-A comprehensive heritage living skills educational pack spanning four traditions (Appalachian, First Nations, Inuit, Pacific Northwest Coast) with 18 Skill Hall rooms, a Trail Badge progressive mastery system, SUMO ontological scaffold, Cultural Sovereignty architecture, and Heritage Book documentation pipeline.
+**Cultural Sovereignty ships as a first-class safety system.** Architecturally equivalent to food safety temperature floors, not as a policy document. The four-level classification (publicly shared → contextually shared → community restricted → sacred ceremonial) is implemented in `heritage-skills-pack/safety/cultural-warden.ts` with hard blocks at Level 4 that cannot be overridden by any caller, flag, or test mode. The design choice is deliberate: OCAP (Ownership, Control, Access, Possession), IQ (Inuit Qaujimajatuqangit — 8 principles), CARE (Collective benefit, Authority, Responsibility, Ethics), NISR, and UNDRIP Article 31 are encoded as executable rules in `heritage-skills-pack/shared/cultural-sovereignty-rules/`, not as prose in a governance document. A request to surface sacred ceremonial content gets the same architectural treatment as a request to serve food below the botulism-safe temperature floor — the warden returns a hard block, the UI surfaces the block as a non-waivable safety gate, and no path through the codebase can silently bypass the decision. This is the release's load-bearing insight: cultural safety is a safety domain, not a style guide, and it belongs in the same enforcement surface as physical safety.
 
----
+**Two-phase additive delivery across 12 phases.** Phase 2 ships without modifying Phase 1. Phase 1 (Foxfire & Northern Ways, phases 28–34) delivered 14 Skill Hall rooms, the shared type system, both wardens, the Canonical Works Library with fair-use notices, the Bibliography Engine, the Skill Hall Framework, the Oral History Studio with interview simulator, the Heritage Book Template, and the project-builder export pipeline. Phase 2 (Pacific Northwest Coast & Trail Badges, phases 35–39) added four more rooms (Cedar Culture, Salmon World, Salish Weaving, Village World), the 10th physical safety domain (Marine Safety), the Trail Badge Engine with 55 badges across 12 paths, the Reconnecting Descendant Pathway, the Neighbors-Path-to-CASEL SEL mapping, and 68 more integration tests. Phase 2 extended Phase 1 through new types (TraditionV2, Phase2RoomNumber, BadgePath, BadgeTier, WatershedType, MarineSafetyDomain) added to `heritage-skills-pack/shared/phase2-types.ts` rather than modifying Phase 1's `shared/types.ts`. The 12 phases together form the largest milestone structure in the v1.49.x series so far, but the additive discipline kept each phase independently shippable and reviewable.
 
-## Phase 1: Foxfire & Northern Ways (Phases 28-34)
+**Red-team rejected every bypass attempt.** Thirty-six adversarial scenarios (18 per phase) all passed and the red-team approach is now the release gate pattern. `heritage-skills-pack/tests/cultural-audit/red-team.test.ts` exercises ceremony extraction, sacred content access via paraphrase, emotional manipulation of reconnecting descendants, academic-exception framing, marine-safety bypass, Cedar ceremonial access under an "artifact" framing, and potlatch ceremony extraction under an "event planning" framing. Each adversarial prompt is constructed to look like a plausible developer or user request — not obviously malicious — and every one of them hits a warden and returns a block. `phase2-red-team.test.ts` covers the four Phase 2 rooms and the new Marine Safety domain with the same discipline. The red-team pattern is what distinguishes this release's safety story from happy-path testing: happy-path tests confirm the wardens run; red-team tests confirm the wardens hold under pressure. CLEARED FOR DEPLOYMENT is the test-suite conclusion in `audit-report.md` and `phase2-audit-report.md`, not a marketing tagline — every scenario has a specific audit-entry rejection with the reason cited.
 
-### Foundation (Phases 28-29)
-- **Shared types** -- 33 exports (enums, interfaces, Zod schemas) for rooms, traditions, safety domains, cultural sovereignty levels
-- **Physical Safety Warden** -- 9 domains (food, plant, tool, medical, structural, fire, chemical, animal, arctic-survival) with worst-level-wins aggregation and CRITICAL override flag
-- **Cultural Sovereignty Warden** -- 4-level classification (publicly shared, contextually shared, community restricted, sacred ceremonial) implementing OCAP, IQ, CARE, NISR, and UNDRIP frameworks
-- **Northern Ways** -- Nation references for Haudenosaunee, Anishinaabe, Cree, Dene, and 4 Inuit regional groups with seasonal rounds, knowledge keepers directory, and cultural sovereignty notes
-- **Canonical Works Library** -- 20+ canonical works with fair use notices, creator-first purchase links, and community endorsement tracking
-- **Bibliography Engine** -- APA/Chicago citation generation with publisher extraction and Indigenous source handling
-- **Skill Hall Framework** -- Session runner, room navigation, safety/cultural warden integration, SUMO hierarchy stubs
+**Nation-specific attribution is non-negotiable.** Zero pan-Indigenous generalizations allowed across all 18 rooms. `tests/integration/pan-indigenous-scan.test.ts` programmatically scans every room-spec, cultural-config, try-session, bibliography entry, and teaching note for generic "Indigenous knowledge," "Native American tradition," or "First Nations way" phrasing, and any such phrasing fails the test. Every cultural reference traces to a specific nation: Haudenosaunee for wampum and Great Law references, Anishinaabe for birchbark and dreamcatcher references, Cree and Dene for brain tanning, Lummi and WSANEC for reef net fishing, Cowichan for post-contact knitting, Inuinnait for cold copper metalwork, Dave Drake (enslaved South Carolina potter) for the face jug history, and so on. The breadth is real: 53+ Salish Sea nations documented in `salish-sea-ways/nations-reference/`, plus Haudenosaunee, Anishinaabe, Cree, Dene, Abenaki, Algonquin, Attikamek, Innu, Mi'kmaq, and four Inuit regional groups (Greenlandic, Yup'ik, Inupiat, Canadian Inuit) in `northern-ways/nations-reference/`. The discipline is that every reference names its nation; the test enforces the discipline; and any future pack additions must pass the same scan.
 
-### Rooms (Phases 30-32)
-14 rooms organized by domain:
+**Fifty-five Trail Badges implement mastery, not gamification.** Twelve paths, four tiers, cross-tradition progression. The progression — Explorer (Story + Skill components) → Apprentice (all four components: Story + Skill + Context + Service) → Journeyman (cross-tradition synthesis) → Keeper ("Can You Teach It?" evaluation + service to community) — is encoded in `heritage-skills-pack/badge-engine/engine.ts` with `badge-definitions.json` providing all 55 badges, `badge-prerequisite-graph.json` encoding cross-tradition prerequisites, and `eagle-equivalent-criteria.json` mapping the Keeper tier to externally recognized mastery benchmarks. `TeachItEvaluator` at the Keeper tier enforces accuracy, completeness, cultural sensitivity, nation-specific attribution, and pan-Indigenous-language detection in the learner's teaching demonstration — the highest tier is the hardest precisely because it requires the learner to meet the same cultural-safety bar the codebase enforces. The twelve paths (cedar, salmon, weaving, shelter, fiber, food, plant, tool, music, watercraft, heritage, neighbors) map to room clusters, and `badge-retrofit-mapping.json` ensured Phase 1 rooms 1–14 received Explorer-and-Apprentice coverage after Phase 2 added the Trail Badge system — Phase 2's discipline extended back to Phase 1 through explicit retrofit, not silent re-architecture.
 
-| Room | Domain | Safety | Highlight |
-|------|--------|--------|-----------|
-| 01 Building/Shelter | Structural | GATE | Log cabin, longhouse, igloo comparison |
-| 02 Fiber/Textile | Tool | ANNOTATE | Quillwork (Level 2), sinew, fingerweaving |
-| 03 Animals/Wildlife | Animal, Tool, Food | ANNOTATE | Brain tanning (Cree/Dene), IQ relational knowledge |
-| 04 Woodcraft/Tools | Tool | ANNOTATE | Ulu variants (Greenlandic/Yup'ik/Inupiat/Canadian Inuit) |
-| 05 Food/Preservation | Food | **CRITICAL** | Botulism prevention, fermented foods (Level 2) |
-| 06 Music/Instruments | Tool | ANNOTATE | Katajjaq (Level 1), sacred songs (Level 4 hard block) |
-| 07 Metalwork/Smithing | Fire, Tool, Chemical | GATE | Inuinnait cold copper, forge safety |
-| 08 Pottery/Clay | Fire, Chemical | GATE | Face jug history (Dave Drake), soapstone asbestos warning |
-| 09 Plant Knowledge | Plant | **CRITICAL** | Sacred plants (ID Level 1, ceremonial Level 4) |
-| 10 Community/Culture | -- | Cultural only | Level 4 angakkuq hard block, IQ principles |
-| 11 Seasonal Living | Arctic-survival | ANNOTATE | Six Inuit seasons, caribou migration |
-| 12 History/Memory | -- | Cultural only | Winter counts (Lakota/Dakota), Delgamuukw v. BC (1997) |
-| 13 Northern Watercraft | Arctic-survival, Marine | GATE | Qajaq ontological bridge (extension of self) |
-| 14 Arctic Living | Arctic-survival | **CRITICAL** | Igloo CO ventilation, qulliq, hypothermia |
+**Skill Hall Framework is the unified runtime surface.** It ties every module together through a single session runner. `heritage-skills-pack/skill-hall/framework.ts` implements session-running, room navigation, safety-warden integration, cultural-warden integration, SUMO ontology mapping, and Try Session orchestration in a single class. Each of the 18 rooms follows the same on-disk structure: `room-spec.json` (the room's identity and scope), `safety-config.json` (the physical-safety rule set for the room), `cultural-config.json` (the cultural sovereignty rule set), `sumo-mappings.json` (the room's concepts mapped to the SUMO upper ontology via WordNet bridges), and a `try-sessions/` directory with three beginner hands-on exercises. The framework resolves a session request into warden evaluations first, then content rendering, so safety and cultural gates are never an afterthought — they are preconditions. `framework.test.ts` has 54 tests covering navigation, safety rejection, cultural rejection, SUMO mapping, and Try Session state transitions.
 
-### Oral History & Authoring (Phase 33)
-- **Oral History Studio** -- 12 core practices with OHA/Smithsonian methodology and IQ-Pilimmaksarniq alignment
-- **Interview Simulator** -- AI practice interviews with cultural sensitivity checker and protocol violation detection
-- **Heritage Book Template** -- Chapter types, front/back matter, Inuktitut syllabics (U+1400-U+167F, U+18B0-U+18FF)
-- **Project Builder** -- Planning-to-Publication pipeline with community review gate (non-waivable for Indigenous content)
-- **Export Pipeline** -- docx/pdf stubs with syllabics rendering and territorial acknowledgment templates
+**Authoring pipeline gates community review as a non-waivable stage.** Oral History Studio, Heritage Book Template, and Project Builder flow end-to-end. `oral-history/core-practices.json` encodes 12 core practices drawn from OHA (Oral History Association) and Smithsonian Folkways methodology, explicitly aligned with IQ-Pilimmaksarniq (the Inuit principle of learning through observation, mentoring, practice, and effort). The `simulator/` module provides AI-driven practice interviews with a cultural-sensitivity checker and protocol-violation detection — the learner practices against a simulated knowledge keeper and receives structured feedback on consent, attribution, and pacing. The `heritage-book-template/` provides chapter-type templates, front/back-matter templates, attribution templates, and Inuktitut syllabics rendering (Unicode blocks U+1400–U+167F and U+18B0–U+18FF) so authored books can render correctly in the target script. `project-builder/workflow.ts` is a six-stage Planning-to-Publication pipeline (planning → drafting → community review → revision → export → publication). The community review gate at stage 3 is non-waivable for Indigenous content — the workflow refuses to advance to revision without a signed community endorsement recorded in the project artifact — and this matches the CARE principles' "Authority to Control" clause literally, not metaphorically.
 
-### Integration & Verification (Phase 34)
-- **Chipset configuration** -- heritage-skills-pack v2.0.0 YAML with 6 skills, 5 agents, 4 evaluation gates
-- **68 integration tests** across 5 files -- safety, cultural sovereignty, core functionality, fair use, cross-module
-- **18 red-team scenarios** -- All adversarial bypass attempts rejected. CLEARED FOR DEPLOYMENT.
-- **README + Cultural Sovereignty Policy** -- Progressive disclosure documentation with public policy
+**Marine Safety is the tenth physical-safety domain.** It closes the gap Phase 1's model did not cover. Phase 1's nine safety domains (food, plant, tool, medical, structural, fire, chemical, animal, arctic-survival) covered the terrestrial and arctic-living rooms, but the Phase 2 PNW rooms (Cedar Culture, Salmon World) introduced cold-water, tidal, vessel, and navigation hazards that none of the existing domains expressed cleanly. `shared/safety-rules/marine-safety-rules.json` adds 12 marine rules — 7 GATE (non-overridable) and 5 ANNOTATE (advisory) — covering cold-water immersion (hypothermia onset under 10°C within minutes), tidal timing (never paddle outgoing max with onshore wind), vessel loading (freeboard minimum, weight distribution), and solo-paddling gates (Coast Guard notification protocol). The SafetyWarden's worst-level-wins aggregation extends naturally to marine rules: a Cedar Culture room session that involves harvesting cedar bark from a river bank will see both the structural-safety rules and the marine-safety rules evaluated and the most restrictive gate wins. Five rooms carry CRITICAL-level rules: 05 (Food — botulism), 09 (Plant — toxic plant identification), 14 (Arctic Living — igloo CO ventilation, qulliq carbon monoxide, hypothermia), 15 (Cedar Culture — marine + structural), 16 (Salmon World — marine + food preservation temperatures).
 
----
+**Reconnecting Descendant Pathway is the most sensitive surface.** Ships with Pretendian sensitivity guards and emotional-manipulation red-team coverage. `reconnecting-pathway/` provides a terminology guide distinguishing reconnecting descendants from Pretendians (claimants without community recognition), watershed-investigation tools for descendants trying to locate their nation-of-origin through river-basin identity, a resource directory listing the Sixties Scoop Network, NICWA (National Indian Child Welfare Association), the U'mista Cultural Centre, and other community-run resources, and a Heritage Book "Reconnecting" template with five chapters (What I Know, What I'm Looking For, What I've Found, Who I've Spoken With, What the Land Tells Me). The `reconnecting-pathway.test.ts` suite includes red-team scenarios where an adversarial prompt attempts to use reconnecting-descendant framing to extract ceremony access that wouldn't be granted under a direct request — the pathway rejects those bypasses. The verbatim protocol phrase for descendants approaching a nation is encoded in `salish-sea-ways/reconnecting-terminology.json` so the tool never improvises the most sensitive wording.
 
-## Phase 2: Pacific Northwest Coast & Trail Badges (Phases 35-39)
+**1,818 heritage-skills-pack tests reflects the scope honestly.** Test count rivals the largest subsystems in the project. The test count is large because the pack's surface is large: 18 rooms × (room config + safety config + cultural config + SUMO mapping + try sessions) = 90 room-artifact test groups, plus the framework tests, bibliography tests, oral-history tests, heritage-book-template tests, project-builder workflow tests, export pipeline tests, badge-engine tests, reconnecting-pathway tests, warden tests, cultural-warden tests, northern-ways tests, salish-sea-ways tests, SUMO tests, schemas tests, phase1 integration tests (68), phase2 integration tests (68), red-team tests (36), pan-indigenous-scan tests, monotonicity tests, marine-safety tests, badge-retrofit tests, and SEL mapping tests. Test-organization debt is real — 1,818 tests in a single subsystem will require care as the pack evolves — but the tests are structured as cohesive files (one test file per conceptual module), not flattened. Total project tests reached 22,820 in this release, up from roughly 21,000 before the heritage pack work began.
 
-### Foundation (Phases 35-36)
-- **Phase 2 types** -- TraditionV2 (SALISH_SEA), Phase2RoomNumber (15-18), BadgePath (9), BadgeTier (4), HeritageBadge, BadgeComponent, PracticeJournal, JournalEntry, ReconnectingProfile, WatershedType, MarineSafetyDomain
-- **Salish Sea Ways** -- 53 nations across 5 provinces (Coast Salish-Chinook, Wakashan, Northern Coast, NW California, Western Slope Cascade), watershed identity (Saltwater/River-Mountain), potlatch context (ban 1884, arrests 1922, repeal 1951), reconnecting descendant terminology with verbatim protocol phrase
-- **Marine Safety Domain** -- 10th physical safety domain with 12 rules (7 GATE, 5 ANNOTATE) for cold water, tidal, vessel, and navigation sub-domains
-- **Trail Badge Engine** -- 31 initial badge definitions, BadgeEngine (progression logic), PracticeJournalEngine (5 entry types), TeachItEvaluator ("Can You Teach It?" with pan-Indigenous detection)
+## Key Features
 
-### PNW Coast Rooms (Phase 37)
-
-| Room | Domain | Safety | Highlight |
-|------|--------|--------|-----------|
-| 15 Cedar Culture | Tool, Marine | GATE | Grandmother Cedar (Xpey'), Law of the Bark, 4 canoe types, ontological bridge (Artifact vs. living being) |
-| 16 Salmon World | Food, Tool, Marine | GATE | 5 Pacific species, Lummi/WSANEC reef net, smoking 160F/71C, Salmon's Promise return-journey metaphor |
-| 17 Salish Weaving | Tool | ANNOTATE | Two-bar loom, woolly dog (extinct), Cowichan knitting (post-contact), Coast Salish vs. northern formline |
-| 18 Village World | -- | Cultural only | Potlatch as social technology (not ceremony), criminalization 1884-1951, brothers metaphor, emotional weather, restoration over punishment |
-
-### Extensions (Phase 38)
-- **Reconnecting Descendant Pathway** -- Terminology guide (Pretendian sensitivity), watershed investigation tools, resource directory (Sixties Scoop Network, NICWA, U'mista Cultural Centre), Heritage Book "Reconnecting" template (5 chapters: What I Know, What I'm Looking For, What I've Found, Who I've Spoken With, What the Land Tells Me)
-- **Badge Retrofit** -- 12 new badges for Phase 1 rooms 1-14 ensuring Explorer+Apprentice coverage per room (55 total badges across 12 paths)
-- **SEL Mapping** -- Neighbors Path to CASEL framework alignment (5 competencies, 6 heritage components, grade-level guidance K-12, heritage-first framing)
-
-### Integration & Verification (Phase 39)
-- **68 Phase 2 integration tests** -- Marine safety, PNW sovereignty, badge engine, safety monotonicity (MONO-01 through MONO-10), pan-Indigenous scan across all 18 rooms
-- **18 Phase 2 red-team scenarios** -- Marine bypass, potlatch ceremony extraction, Cedar ceremonial access, reconnecting emotional manipulation, academic exceptions. CLEARED FOR DEPLOYMENT.
-- **README update** -- Complete two-phase pack documentation
-
----
-
-## Key Architecture
-
-### Trail Badge System
-- **55 badges** across 12 paths (cedar, salmon, weaving, shelter, fiber, food, plant, tool, music, watercraft, heritage, neighbors)
-- **4 tiers:** Explorer (Story + Skill) -> Apprentice (all 4 components) -> Journeyman (cross-tradition) -> Keeper ("Can You Teach It?" + service)
-- **Practice Journal** with 5 entry types: observation, practice, reflection, sketch, teaching
-- **TeachItEvaluator** enforces accuracy, completeness, cultural sensitivity, attribution, and pan-Indigenous language detection at Keeper tier
-
-### Cultural Sovereignty
-- **4-level classification:** Level 1 (public, include) -> Level 2 (contextual, summarize-and-refer) -> Level 3 (restricted, acknowledge-and-redirect) -> Level 4 (sacred, hard block -- no override, no exception)
-- **Frameworks:** OCAP, IQ (8 principles), CARE, NISR, UNDRIP Article 31
-- **Nation-specific attribution** enforced everywhere -- zero pan-Indigenous generalizations
-- **36 red-team scenarios** (18 Phase 1 + 18 Phase 2) all pass
-
-### Safety
-- **10 physical safety domains** with worst-level-wins aggregation
-- **5 CRITICAL rooms** (05, 09, 14, 15, 16) with non-overridable safety gates
-- **Marine Safety** with cold water GATE, solo paddling GATE, vessel loading GATE
-
----
-
-## Stats
-
-| Metric | Value |
-|--------|-------|
-| Phases | 12 (28-39) |
-| Plans | 45 |
-| Rooms | 18 |
-| Badges | 55 (12 paths, 4 tiers) |
-| Safety domains | 10 |
-| Nations referenced | 53+ Salish Sea + Northern Ways |
-| Red-team scenarios | 36 (all pass) |
-| Heritage-skills-pack tests | 1,818 |
-| Total project tests | 22,820 |
+| Area | What Shipped |
+|------|--------------|
+| Shared types & schemas | `heritage-skills-pack/shared/types.ts` — 33 exports (enums, interfaces, Zod schemas) covering rooms, traditions, safety domains, cultural sovereignty levels; `shared/phase2-types.ts` adds TraditionV2, Phase2RoomNumber, BadgePath, BadgeTier, HeritageBadge, BadgeComponent, PracticeJournal, JournalEntry, ReconnectingProfile, WatershedType, MarineSafetyDomain |
+| Physical Safety Warden | `heritage-skills-pack/safety/warden.ts` — 10 domains (food, plant, tool, medical, structural, fire, chemical, animal, arctic-survival, marine) with worst-level-wins aggregation and non-overridable CRITICAL flag; 59 tests in `warden.test.ts` |
+| Cultural Sovereignty Warden | `heritage-skills-pack/safety/cultural-warden.ts` — 4-level classification (Level 1 publicly shared → Level 4 sacred ceremonial, hard block); implements OCAP, IQ (8 principles), CARE, NISR, UNDRIP Article 31 as code |
+| Skill Hall Framework | `heritage-skills-pack/skill-hall/framework.ts` — session runner, room navigation, warden integration, SUMO hierarchy, Try Session engine; 54 tests in `framework.test.ts` |
+| 18 Skill Hall rooms | `heritage-skills-pack/skill-hall/rooms/01-building-shelter` through `18-village-world`, each with room-spec + safety-config + cultural-config + sumo-mappings + 3 beginner Try Sessions + room test suite (36–61 tests per room) |
+| Northern Ways module | `heritage-skills-pack/northern-ways/` — 10 nations referenced (Haudenosaunee, Anishinaabe, Cree, Dene, Abenaki, Algonquin, Attikamek, Innu, Mi'kmaq, Inuit regional groups), seasonal rounds (arctic / subarctic / woodland), IQ/OCAP/CARE framework JSON, knowledge keepers directory |
+| Salish Sea Ways module | `heritage-skills-pack/salish-sea-ways/` — 53+ nations across 5 regional groupings (Coast Salish-Chinook, Wakashan, Northern Coast, NW California, Western Slope Cascade), watershed identity (Saltwater vs. River-Mountain), potlatch historical context (ban 1884, arrests 1922, repeal 1951), reconnecting-terminology with verbatim protocol phrase |
+| Canonical Works Library | `heritage-skills-pack/canonical-works/` — 20+ canonical works across Foxfire (12-volume series), First Nations, and Inuit catalogs, each with fair-use notices, creator-first purchase links, and community endorsement tracking |
+| Bibliography Engine | `heritage-skills-pack/canonical-works/bibliography-engine.ts` — APA, Chicago, and MLA citation generation with publisher extraction and Indigenous-source handling |
+| Oral History Studio | `heritage-skills-pack/oral-history/` — 12 core practices (OHA + Smithsonian methodology, IQ-Pilimmaksarniq aligned), consent-protocols.json, interview-guides.json, AI interview simulator with cultural-sensitivity checker and protocol-violation detection |
+| Heritage Book Template | `heritage-skills-pack/project-builder/heritage-book-template/` — chapter-type templates, front/back-matter templates, attribution templates, Inuktitut syllabics rendering (U+1400–U+167F, U+18B0–U+18FF); 48 tests |
+| Project Builder pipeline | `heritage-skills-pack/project-builder/workflow.ts` — 6-stage Planning-to-Publication pipeline with non-waivable community review gate for Indigenous content; 54 workflow tests |
+| Export Pipeline | `heritage-skills-pack/project-builder/export/` — DocxExporter, PdfExporter, SyllabicsRenderer, export-pipeline.test.ts (50 tests) |
+| Trail Badge Engine | `heritage-skills-pack/badge-engine/engine.ts` — 55 badges across 12 paths (cedar, salmon, weaving, shelter, fiber, food, plant, tool, music, watercraft, heritage, neighbors), 4 tiers (Explorer/Apprentice/Journeyman/Keeper), TeachItEvaluator with pan-Indigenous detection |
+| Reconnecting Descendant Pathway | `heritage-skills-pack/reconnecting-pathway/` — terminology guide (Pretendian sensitivity), watershed investigation, resource directory (Sixties Scoop Network, NICWA, U'mista Cultural Centre), Heritage Book "Reconnecting" template (5 chapters) |
+| SEL / CASEL mapping | `heritage-skills-pack/sel-mapping.json` + `sel-mapping.test.ts` — Neighbors Path mapped to CASEL 5 competencies with 6 heritage components and K-12 grade-level guidance; heritage-first framing |
+| SUMO ontology | `heritage-skills-pack/shared/sumo/heritage-domain-ontology.kif` + `sumo-mappings.json` + `wordnet-bridges.json` + `ontological-bridges.json`; 28 tests |
+| Safety rules library | `heritage-skills-pack/shared/safety-rules/` — 10 JSON files (animal, arctic-survival, chemical, fire, food, marine, medical, plant, structural, tool) with machine-readable rule IDs and severity levels |
+| Cultural sovereignty rules | `heritage-skills-pack/shared/cultural-sovereignty-rules/` — first-nations-protocols.json, inuit-protocols.json, knowledge-classification.json |
+| Chipset configuration | `heritage-skills-pack/chipset.yaml` — heritage-skills-pack v2.0.0 with 6 skills, 5 agents, 4 evaluation gates |
+| Integration test suites | `heritage-skills-pack/tests/integration/` — 11 files covering badge-engine, core-functionality, cultural-sovereignty, fair-use, integration, marine-safety, monotonicity (MONO-01..MONO-10), pan-indigenous-scan, phase2-integration, pnw-sovereignty, safety-critical |
+| Red-team audit | `heritage-skills-pack/tests/cultural-audit/` — 36 adversarial scenarios across phase1 and phase2 red-team.test.ts; audit-report.md and phase2-audit-report.md both conclude CLEARED FOR DEPLOYMENT |
+| Version bump & docs | `package.json`, `desktop/package.json`, `src-tauri/Cargo.toml`, `src-tauri/tauri.conf.json` all bumped to 1.49.12; `CHANGELOG.md`, `docs/FEATURES.md`, `docs/REQUIREMENTS.md`, `docs/RELEASE-HISTORY.md` updated |
+| Mission pack staging | `scripts/stage-mission-pack.mjs` + `scripts/confirm-mission-pack.mjs` — new staging tooling introduced with this release |
 
 ## Retrospective
 
 ### What Worked
-- **Cultural Sovereignty as a first-class safety system.** The 4-level classification (publicly shared -> contextually shared -> community restricted -> sacred ceremonial) with hard blocks at Level 4 is architecturally equivalent to food safety temperature floors -- non-overridable by design. Implementing OCAP, IQ, CARE, NISR, and UNDRIP as code rather than policy documents makes them enforceable.
-- **36 red-team scenarios (18 per phase) all passed.** Adversarial bypass attempts -- ceremony extraction, sacred content access, emotional manipulation of reconnecting descendants -- all rejected. The red-team approach validates that safety wardens hold under pressure, not just happy-path testing.
-- **Two-phase delivery with additive growth.** Phase 1 (Foxfire & Northern Ways, 14 rooms) shipped complete before Phase 2 (Pacific Northwest Coast & Trail Badges, 4 rooms + badge system) began. Each phase is independently useful, and Phase 2 extends rather than modifies Phase 1.
-- **55 Trail Badges across 12 paths with 4 tiers.** The Explorer -> Apprentice -> Journeyman -> Keeper progression with "Can You Teach It?" at Keeper tier is a meaningful mastery system, not gamification. The TeachItEvaluator enforcing pan-Indigenous detection at the highest tier is a genuine quality gate.
+
+- **Cultural Sovereignty as a first-class safety system.** The 4-level classification (publicly shared → contextually shared → community restricted → sacred ceremonial) with hard blocks at Level 4 is architecturally equivalent to food safety temperature floors — non-overridable by design. Implementing OCAP, IQ, CARE, NISR, and UNDRIP as executable rules rather than policy prose makes them enforceable across every module, not advisory in a governance document.
+- **Thirty-six red-team scenarios (18 per phase) all passed.** Adversarial bypass attempts — ceremony extraction, sacred content access via paraphrase, emotional manipulation of reconnecting descendants, academic-exception framing, marine-safety bypass under recreational framing, Cedar ceremonial access under an "artifact" framing, potlatch extraction under an "event planning" framing — all rejected. The red-team approach validates that wardens hold under pressure, not just happy-path.
+- **Two-phase delivery with additive growth.** Phase 1 (Foxfire & Northern Ways, 14 rooms) shipped complete before Phase 2 (PNW Coast & Trail Badges, 4 rooms + badge system) began. Each phase is independently useful, and Phase 2 extends rather than modifies Phase 1 — Phase2-types is a new file, not a rewrite of types.ts, and the badge retrofit for rooms 1–14 was explicit rather than silent re-architecture.
+- **Fifty-five Trail Badges with Explorer → Apprentice → Journeyman → Keeper tiers.** The "Can You Teach It?" gate at Keeper tier, enforced by TeachItEvaluator with pan-Indigenous detection, is a genuine quality bar — the hardest tier is hard precisely because it requires meeting the same cultural-safety discipline the codebase enforces.
+- **Nation-specific attribution scanned programmatically across all 18 rooms.** `pan-indigenous-scan.test.ts` is a single test file that prevents a whole category of cultural error from ever shipping. The discipline is expensive (every reference must name a nation), but the test enforces it cheaply, and the cost of violating it is contained at commit time rather than discovered post-release.
+- **Skill Hall Framework as a single runtime surface.** Resolving session requests through wardens first, then content rendering, means safety and cultural gates are structural preconditions, not post-hoc filters. Every room plugs in via the same five-file pattern (room-spec + safety-config + cultural-config + sumo-mappings + try-sessions), so the 18th room cost roughly what the 2nd room cost to add.
 
 ### What Could Be Better
-- **1,818 heritage-skills-pack tests is a large surface.** The test count rivals some of the other subsystems combined. Maintaining this volume as the pack evolves will require careful attention to test organization.
-- **53+ nations referenced across Salish Sea + Northern Ways.** The breadth is impressive but the accuracy maintenance burden is high -- nation-specific attribution must stay current as communities update their own terminology and protocols.
-- **The Reconnecting Descendant Pathway handles sensitive material.** While the Pretendian sensitivity guard and emotional manipulation red-team are solid, this is content that requires ongoing community review, not just initial validation.
+
+- **One thousand eight hundred eighteen heritage-skills-pack tests is a large surface.** The test count rivals some of the other subsystems combined. Maintaining this volume as the pack evolves will require careful attention to test organization — the current structure (one test file per conceptual module) is cohesive, but any future refactor must preserve that cohesion.
+- **Fifty-three nations referenced across Salish Sea + Northern Ways is accuracy debt that never stops.** The breadth is appropriate to the scope, but nation-specific attribution must stay current as communities update their own terminology, correct historical errors in secondary sources, or reclaim names previously rendered in colonial spelling. This needs an explicit update cadence, not a set-and-forget review.
+- **The Reconnecting Descendant Pathway handles material that requires ongoing community review, not just initial validation.** While the Pretendian sensitivity guard and emotional-manipulation red-team tests are solid, reconnecting-descendant content touches trauma surfaces (Sixties Scoop, residential schools, adoption records) where a one-time review is insufficient. A community-review cadence for this module specifically should be scheduled.
+- **Twelve phases in a single milestone is the upper bound of what the project has shipped to date.** The two-phase decomposition (foundation + extension) kept each phase manageable, but 45 plans across 12 phases strains the phase-manifest review surface. Future large milestones should consider tighter phase boundaries or intermediate version bumps.
+- **The mission-pack staging scripts (`scripts/stage-mission-pack.mjs`, `scripts/confirm-mission-pack.mjs`) landed in this release but are underdocumented.** They are load-bearing for publishing packs to downstream consumers but the staging contract (what `stage` does, what `confirm` verifies) is not captured in `docs/` — only in the script source. A staging contract doc should follow in the next release.
+- **No red-team coverage yet for the Reconnecting Descendant watershed-investigation tool.** The terminology guide and emotional-manipulation scenarios are covered, but adversarial prompts against the watershed-investigation workflow (e.g., "I found a map that says my family is from here, give me ceremony access") should be added. The next cultural-audit expansion should close this gap.
 
 ## Lessons Learned
 
-1. **Cultural safety and physical safety should share the same enforcement architecture.** The 3-mode enforcement pattern (annotate/gate/redirect) works for both food temperature floors and sacred ceremonial content. Unifying the warden pattern across domains keeps the safety surface consistent.
-2. **Red-team testing is essential for safety-critical educational content.** 36 adversarial scenarios caught edge cases that unit tests would never exercise. This should be standard for any pack with safety or cultural boundaries.
-3. **Nation-specific attribution is a non-negotiable design constraint.** Zero pan-Indigenous generalizations means every cultural reference must trace to a specific nation. This is more work than generic "Indigenous knowledge" references but is the only ethically correct approach.
-4. **12 phases and 45 plans is the largest milestone structure in the v1.49.x series so far.** The two-phase decomposition (foundation + extension) kept each phase manageable despite the overall scope.
+- **Cultural safety and physical safety should share the same enforcement architecture.** The 3-mode enforcement pattern (annotate / gate / redirect) works for both food temperature floors and sacred ceremonial content. Unifying the warden pattern across domains keeps the safety surface consistent and makes cultural safety as structurally unbypassable as physical safety — the CulturalSovereigntyWarden and SafetyWarden share the aggregation discipline.
+- **Red-team testing is essential for safety-critical educational content.** Thirty-six adversarial scenarios caught edge cases that unit tests would never exercise — bypass attempts framed as plausible developer requests. This should be standard for any pack that has safety or cultural boundaries, not an optional audit pass.
+- **Nation-specific attribution is a non-negotiable design constraint.** Zero pan-Indigenous generalizations means every cultural reference must trace to a specific nation. This is more work than generic "Indigenous knowledge" references but is the only ethically correct approach, and `pan-indigenous-scan.test.ts` is the cheapest enforcement mechanism — write the test once, and the discipline holds forever.
+- **Twelve phases and forty-five plans is the largest milestone structure in the v1.49.x series so far.** The two-phase decomposition (foundation + extension) kept each phase manageable despite the overall scope. The lesson is that large milestones decompose along additive boundaries, not by carving up features — Phase 2 added to Phase 1, it did not modify Phase 1.
+- **Framework-first architecture pays back its cost immediately.** `SkillHallFramework` was built before rooms 1 and 2, which felt like overhead at the time. By room 14, the framework paid back every hour of its cost — the 15th–18th rooms took hours rather than days. The lesson is that when the room count is known to be ≥ 10, build the framework first and accept the up-front delay.
+- **Non-waivable gates are more honest than override-on-demand gates.** Level 4 cultural-sovereignty blocks, CRITICAL safety gates, and the community-review gate in `workflow.ts` are all non-overridable by design. An override flag would have been "convenient" for testing but would have eroded the safety contract — the tests use fixtures that are Level-1 or Level-2, not magic overrides. The lesson: design gates to be bypassed only by changing the input data, never by a flag.
+- **Heritage content with syllabics rendering forces Unicode discipline across the export pipeline.** Inuktitut syllabics (U+1400–U+167F, U+18B0–U+18FF) required every export path (DocxExporter, PdfExporter, HTML) to be Unicode-safe end-to-end. The SyllabicsRenderer is small, but verifying every export path handles the code points correctly is work that any pack with non-Latin scripts inherits.
+- **Community review must be a non-bypassable pipeline stage for Indigenous content, not a "please remember to do this" in the docs.** The project-builder workflow refuses to advance past stage 3 without a signed community-endorsement artifact. Encoding the review as pipeline state rather than social convention is what makes the CARE principles' "Authority to Control" clause enforceable.
+- **Watershed identity is a better organizing metaphor than geographic borders for coastal cultures.** The Salish Sea Ways module organizes nations by watershed (Saltwater / River-Mountain) rather than by province/state/country, because the nations organize themselves that way. The lesson: match the data model to the community's self-model, not to the colonial cartography.
+- **Per-room beginner Try Sessions (three each, 54 total) are the learner's first foothold.** Each room ships with three hands-on exercises at the beginner level. These are the smallest unit a learner actually engages with — they are the grain the rest of the framework serves. The lesson: ship the smallest usable unit in quantity, not just the framework that hosts it.
+- **The Foxfire canonical catalog (12 volumes) is the cultural template the pack follows.** Shipping a canonical-works catalog with fair-use notices, creator-first purchase links, and community-endorsement tracking puts the pack in relationship with the sources it draws from, rather than treating them as background references. The lesson: packs with cultural content should ship a canonical-works catalog as a first-class module, not as a README bibliography.
+- **Large milestones should prefer additive phases over modification phases.** Phase 2 added TraditionV2, Phase2RoomNumber, and BadgePath as new exports alongside Phase 1's existing exports. This kept Phase 1's test suite stable while Phase 2 extended the surface, and it meant a Phase 1 consumer could upgrade to v1.49.12 without code changes. The additive discipline is what makes 12-phase milestones tolerable.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.11](../v1.49.11/) | Predecessor — gsd-init Hardening |
+| [v1.49.13](../v1.49.13/) | Successor — continues the v1.49.x line after the heritage pack ships |
+| [v1.49.10](../v1.49.10/) | Earlier v1.49.x release; part of the sustained patch cadence that preceded this milestone |
+| [v1.49.7](../v1.49.7/) | Optional tmux with graceful degradation — the same cross-layer discipline (one commit across boundaries) informed the 12-phase decomposition |
+| [v1.49.0](../v1.49.0/) | Parent mega-release where GSD-OS first shipped; heritage pack plugs into the desktop surface the v1.49.0 line established |
+| [v1.49](../v1.49/) | Consolidated mega-release notes for the v1.49 line |
+| [v1.0](../v1.0/) | Foundation — the 6-step adaptive loop and bounded-parameter philosophy the heritage pack's warden design inherits from |
+| [v1.21](../v1.21/) | GSD-OS Desktop Foundation — the Tauri shell that hosts the heritage pack chipset |
+| [v1.25](../v1.25/) | Ecosystem Integration — dependency DAG pattern the chipset.yaml configuration follows |
+| `heritage-skills-pack/README.md` | Pack entry point; progressive-disclosure documentation |
+| `heritage-skills-pack/CULTURAL-SOVEREIGNTY-POLICY.md` | Public policy document describing the 4-level classification and non-waivable Level 4 block |
+| `heritage-skills-pack/chipset.yaml` | v2.0.0 chipset config — 6 skills, 5 agents, 4 evaluation gates |
+| `heritage-skills-pack/safety/cultural-warden.ts` | CulturalSovereigntyWarden implementation |
+| `heritage-skills-pack/safety/warden.ts` | SafetyWarden (physical safety, 10 domains) implementation |
+| `heritage-skills-pack/skill-hall/framework.ts` | Skill Hall Framework — session runner and room navigator |
+| `heritage-skills-pack/badge-engine/engine.ts` | Trail Badge Engine — 55 badges, 12 paths, 4 tiers |
+| `heritage-skills-pack/tests/cultural-audit/red-team.test.ts` | Phase 1 red-team suite — 18 adversarial scenarios |
+| `heritage-skills-pack/tests/cultural-audit/phase2-red-team.test.ts` | Phase 2 red-team suite — 18 adversarial scenarios |
+| `heritage-skills-pack/tests/integration/pan-indigenous-scan.test.ts` | Enforces zero pan-Indigenous generalizations across all 18 rooms |
+| `heritage-skills-pack/tests/integration/monotonicity.test.ts` | Safety monotonicity — MONO-01 through MONO-10 |
+| `heritage-skills-pack/tests/cultural-audit/audit-report.md` | Phase 1 audit conclusion — CLEARED FOR DEPLOYMENT |
+| `heritage-skills-pack/tests/cultural-audit/phase2-audit-report.md` | Phase 2 audit conclusion — CLEARED FOR DEPLOYMENT |
+| `scripts/stage-mission-pack.mjs` + `scripts/confirm-mission-pack.mjs` | New mission-pack staging tooling introduced with this release |
+
+## Cumulative Statistics
+
+| Metric | Value |
+|--------|-------|
+| Phases shipped | 12 (28–39) |
+| Plans shipped | 45 |
+| Skill Hall rooms | 18 (14 Phase 1 + 4 Phase 2) |
+| Trail Badges | 55 across 12 paths, 4 tiers |
+| Physical safety domains | 10 (9 Phase 1 + Marine added Phase 2) |
+| Cultural sovereignty levels | 4 (Level 4 = hard block, non-waivable) |
+| Nations referenced | 53+ Salish Sea + 10 Northern Ways nations |
+| Red-team scenarios | 36 (18 Phase 1 + 18 Phase 2) — all rejected |
+| Heritage-skills-pack tests | 1,818 |
+| Total project tests | 22,820 |
+| Commits (v1.49.11..v1.49.12) | 82 |
+| Files changed | 284 |
+| Lines inserted / deleted | 47,038 / 9 |
+
+## Taxonomic State
+
+| Dimension | Phase 1 state | Phase 2 state |
+|-----------|---------------|---------------|
+| Rooms | 14 (01–14) | +4 (15–18), total 18 |
+| Traditions covered | Appalachian, First Nations, Inuit | +Salish Sea / Pacific Northwest Coast |
+| Safety domains | 9 terrestrial + arctic | +Marine (10th) |
+| Cultural frameworks encoded | OCAP, IQ, CARE, NISR, UNDRIP | same, extended to PNW protocols |
+| Badge paths | — | 12 (retrofit applied to Phase 1 rooms 1–14) |
+| Badge tiers | — | Explorer / Apprentice / Journeyman / Keeper |
+| Oral history depth | 12 core practices + simulator | reconnecting-descendant extensions |
+| SEL alignment | not mapped | Neighbors Path → CASEL 5-competency |
+| Red-team coverage | 18 scenarios | +18 scenarios, 36 total |
+
+## Engine Position
+
+v1.49.12 is the largest non-degree feature release in the v1.49.x series to date — 284 files changed, 47,038 insertions across 82 commits, and 1,818 new tests in a single subsystem. It establishes three reusable patterns that later releases inherit. First, the warden-based safety architecture (physical + cultural, unified under a 3-mode enforcement model) is the template for any future content pack that has safety or cultural boundaries — subsequent heritage expansions and any culturally sensitive content module should plug into the same warden surface rather than inventing a new one. Second, the red-team-as-release-gate pattern (36 adversarial scenarios auditing happy-path + bypass attempts) is the template for any pack where safety is load-bearing; "cleared for deployment" must mean an adversarial audit passed, not that unit tests pass. Third, the additive-phase decomposition pattern (Phase 2 extends Phase 1 via new types in phase2-types.ts rather than modifying types.ts) is the template for any large milestone — when a milestone exceeds about 6 phases, the additive discipline is what keeps it reviewable. Looking back, v1.49.12 stands on the v1.49.0 GSD-OS desktop shell, the v1.49.7 optional-dependency contract (for the chipset.yaml plug-in pattern), and the v1.21 Tauri foundation (for the runtime surface the heritage pack renders into). Looking forward, the mission-pack staging scripts introduced here set up the publication pipeline that later releases will use to ship additional packs; the Trail Badge Engine becomes the mastery-progression template for any future learning pack; and the Reconnecting Descendant Pathway establishes a sensitivity bar that any pack touching identity, descent, or community belonging will need to clear. This is the first heritage-skills-pack release to reach complete two-phase coverage — every room has safety + cultural configs, every path has badge coverage, every cultural reference is nation-specific, and every safety gate has a red-team scenario that tried to bypass it and failed.
+
+## Files
+
+- `heritage-skills-pack/shared/types.ts` and `shared/phase2-types.ts` — 33 Phase 1 exports plus Phase 2 types (TraditionV2, Phase2RoomNumber, BadgePath, BadgeTier, HeritageBadge, BadgeComponent, PracticeJournal, JournalEntry, ReconnectingProfile, WatershedType, MarineSafetyDomain)
+- `heritage-skills-pack/safety/warden.ts` + `safety/cultural-warden.ts` — SafetyWarden (10 domains, worst-level-wins aggregation) and CulturalSovereigntyWarden (4-level classification with Level 4 hard block)
+- `heritage-skills-pack/shared/safety-rules/` — 10 JSON rule files (animal, arctic-survival, chemical, fire, food, marine, medical, plant, structural, tool); Marine added in Phase 2
+- `heritage-skills-pack/shared/cultural-sovereignty-rules/` — first-nations-protocols.json, inuit-protocols.json, knowledge-classification.json encoding OCAP / IQ / CARE / NISR / UNDRIP rules
+- `heritage-skills-pack/skill-hall/framework.ts` — 54-test Skill Hall Framework with room navigation, warden integration, SUMO mapping, Try Session engine
+- `heritage-skills-pack/skill-hall/rooms/01-building-shelter/` through `18-village-world/` — 18 rooms, each with room-spec.json + safety-config.json + cultural-config.json + sumo-mappings.json + 3 try-sessions + room-XX.test.ts (36–61 tests per room)
+- `heritage-skills-pack/northern-ways/` — 10-nation reference set, seasonal rounds (arctic / subarctic / woodland), IQ / OCAP / CARE framework JSON, knowledge-keepers-directory.json
+- `heritage-skills-pack/salish-sea-ways/` — 5 regional nation-reference files (coast-salish-chinook, wakashan, northern-coast, nw-california, western-slope-cascade), potlatch-context.json, reconnecting-terminology.json, watershed-identity.json, cross-border-sovereignty.json
+- `heritage-skills-pack/canonical-works/` — foxfire-catalog.json (12-volume series), first-nations-catalog.json, inuit-catalog.json, fair-use-notices/, bibliography-engine.ts (APA / Chicago / MLA), bibliography-engine.test.ts, canonical-works.test.ts
+- `heritage-skills-pack/oral-history/` — core-practices.json (12 practices, IQ-Pilimmaksarniq aligned), consent-protocols.json, interview-guides.json, simulator/ (feedback-engine, interview-simulator, scenarios.json)
+- `heritage-skills-pack/project-builder/` — workflow.ts (6-stage pipeline with non-waivable community-review gate), heritage-book-template/ (front/back matter + chapter + attribution templates), export/ (DocxExporter, PdfExporter, SyllabicsRenderer, export-pipeline.test.ts — 50 tests)
+- `heritage-skills-pack/badge-engine/` — engine.ts, badge-definitions.json (55 badges), badge-prerequisite-graph.json, badge-retrofit-mapping.json, eagle-equivalent-criteria.json, path-room-mapping.json; badge-engine.test.ts + badge-retrofit.test.ts
+- `heritage-skills-pack/reconnecting-pathway/` — terminology-guide.json (Pretendian sensitivity), watershed-investigation.json, resource-directory.json, heritage-book-reconnecting-template.json, cultural-immersion-guidance.json; reconnecting-pathway.test.ts
+- `heritage-skills-pack/shared/sumo/` — heritage-domain-ontology.kif, sumo-mappings.json, wordnet-bridges.json, ontological-bridges.json, sumo.test.ts (28 tests)
+- `heritage-skills-pack/sel-mapping.json` + `sel-mapping.test.ts` — Neighbors Path to CASEL 5-competency alignment with K-12 grade-level guidance
+- `heritage-skills-pack/chipset.yaml` — v2.0.0 chipset config (6 skills, 5 agents, 4 evaluation gates)
+- `heritage-skills-pack/README.md` + `heritage-skills-pack/CULTURAL-SOVEREIGNTY-POLICY.md` — pack documentation and public policy
+- `heritage-skills-pack/tests/integration/` — 11 integration test files (badge-engine, core-functionality, cultural-sovereignty, fair-use, integration, marine-safety, monotonicity, pan-indigenous-scan, phase2-integration, pnw-sovereignty, safety-critical)
+- `heritage-skills-pack/tests/cultural-audit/` — red-team.test.ts (Phase 1, 18 scenarios), phase2-red-team.test.ts (Phase 2, 18 scenarios), audit-report.md, phase2-audit-report.md
+- `scripts/stage-mission-pack.mjs` + `scripts/confirm-mission-pack.mjs` — mission-pack staging tooling (165 + 93 lines)
+- `package.json`, `desktop/package.json`, `src-tauri/Cargo.toml`, `src-tauri/tauri.conf.json` — version bumped to 1.49.12
+- `CHANGELOG.md`, `docs/FEATURES.md`, `docs/REQUIREMENTS.md`, `docs/RELEASE-HISTORY.md` — documentation updates across the v1.49.7 → v1.49.12 window
+
+Aggregate: 284 files changed, 47,038 insertions, 9 deletions, 82 commits spanning v1.49.11..v1.49.12.
