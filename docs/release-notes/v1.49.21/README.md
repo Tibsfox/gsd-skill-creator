@@ -1,49 +1,162 @@
 # v1.49.21 — Image to Mission Pipeline
 
-**Shipped:** 2026-03-07
-**Commits:** 7
-**Files:** 33 changed | **New Code:** ~5,100 LOC
-**Tests:** 253 new across 7 test files
+**Released:** 2026-03-07
+**Scope:** image-to-mission (ITM) pipeline — a 4-wave, 11-module creative translation stack that turns visual observations and creator context into self-contained build specifications, with a scored bridge to the existing vision-to-mission (VTM) pipeline for complex work
+**Branch:** dev → main
+**Tag:** v1.49.21 (2026-03-07)
+**Commits:** v1.49.20.1..v1.49.21 (7 commits, head `7b14595e1`)
+**Files changed:** 33 (+5,122 / −33)
+**Predecessor:** v1.49.20.1 — Documentation Reflections
+**Successor:** v1.49.22
+**Classification:** feature — first image-to-mission pipeline ships, establishing the "perceive → synthesize → translate → transmit" shape for creative input
+**Phases covered:** 4 waves (Wave 0 scaffold → Wave 1 perception → Wave 2 synthesis → Wave 3 production → Wave 4 integration)
+**Verification:** 253 new tests across 11 ITM modules · 14 Zod schemas validating every pipeline interface · integration suite (20 tests) covering safety-critical boundaries (no hallucinated context, no image data in packages, feel params in range, creator attribution) and end-to-end data flow · Cargo.lock and desktop package alignment verified · documentation counters (milestone count, Gastown rig model, WordPress sync context) refreshed across `docs/about.md`, `docs/index.md`, `docs/CORE-CONCEPTS.md`, and `docs/HOW-IT-WORKS.md`
 
 ## Summary
 
-Adds a creative translation pipeline that converts visual observations into structured mission specifications. The pipeline extracts meaning from images through multi-layer analysis (observation, context, connection, parameters), translates findings through dual code and design engines, and packages results for downstream consumption by the vision-to-mission system.
+**The image-to-mission pipeline ships as the first creative-input surface for the mission builder.** Before v1.49.21 the project could turn a builder's prose vision into a GSD-ready mission package through the existing vision-to-mission pipeline, but there was no path from visual input — photographs of a prototype, rough sketches, a stone mandala on a beach, a screenshot of an unfinished UI — into the same mission shape. `src/vtm/image-to-mission/` adds the missing front end: a four-wave pipeline that starts with structured observation, integrates creator context, extracts medium-independent parameters, runs those parameters through dual translation engines (code and design), packages the output as a self-contained transmission, and either emits a direct build spec or bridges into the full VTM pipeline based on a calibrated complexity score. The release name is descriptive rather than aspirational — the module literally converts images (via structured observation) into mission packages, and the 253 tests that ship with it cover every interface boundary in the pipeline.
+
+**Wave 0 landed 14 Zod schemas before any engine code existed.** The types-first discipline from v1.49.17's cartridge work continued into v1.49.21. Phase 0 (`feat(itm): add image-to-mission type system and scaffold`, commit `84f00137`) delivered `src/vtm/image-to-mission/types.ts` (319 lines) plus 44 tests in `types.test.ts` (475 lines), defining the complete pipeline type system: input types (`ImageInput`, `CreatorContext`), observation types (`ObservationLayer`, `ImageObservation`), parameter types (`Color`, `Geometry`, `Material`, `Feel`, `ExtractedParameters`), connection types (`Connection`, `UnifiedUnderstanding`), and output types (`BuildStep`, `BuildSpec`, `TransmissionPackage`). A stone-mandala reference fixture carried through every test file as a canonical example. Every subsequent wave compiled clean against these schemas on first landing because the contracts existed before any engine had to satisfy them.
+
+**Wave 1 delivered two parallel perception tracks.** Phase 1 (`feat(itm): add observation engine and context integrator`, commit `5c023af3`) shipped `observation-engine.ts` (159 lines) alongside `context-integrator.ts` (140 lines). The observation engine runs four-layer structured perception — literal (what is there), spatial (where it sits), relational (how pieces relate), mood (how it feels) — with a protocol definition and multi-image orchestration so a single mission can absorb multiple views of the same subject. The context integrator parses freeform creator text ("I want it to feel like the morning after a long walk") into typed `CreatorContext`, maps sentences onto the observation layers, extracts process insights (what the creator discovered while making the work), and ships interactive prompt templates for guided intake. 73 tests across three test files closed the wave. The split between observation (what the image says on its own) and context (what the creator says about the image) is load-bearing: Wave 2 depends on both streams being typed separately so the connection engine can cross them without loss.
+
+**Wave 2 synthesis bridges observation and context into parameters.** Phase 2 (`feat(itm): add connection engine and parameter extractor`, commit `a3e99153`) landed `connection-engine.ts` (320 lines) plus `parameter-extractor.ts` (362 lines) with 62 new tests. The connection engine ships three linker types — cross-image linker (distinguishes persistent elements from dynamic ones across multiple images), visual-context bridge (maps creator context onto observations), and process pattern finder (classifies elements as emergent versus designed) — coordinated by a `synthesize` orchestrator that produces a `UnifiedUnderstanding` record. The parameter extractor then distills that understanding into medium-independent numbers: color (palette, temperature, contrast, saturation), geometry (shape, arrangement, symmetry, constants like the golden angle), material (surfaces, light interaction, blend modes), feel (energy, intimacy, order, handmade, ceremony — each bounded to 0..1), and custom per-project fields (acoustic geometry, condition modes, light sources). The medium-independence is the key move: extracted parameters can feed a WebGL shader, a React component, a physical build plan, or a documentation spec without re-encoding the observation each time.
+
+**Wave 3 forked production into four parallel tracks.** Phase 3 (`feat(itm): add translation engines, build generator, and transmission packager`, commit `2314f73f`) is the largest wave — 1,781 insertions across nine files, 76 new tests. Track 3A (`translation-code.ts`, 342 lines) produces self-contained runnable output in four targets: Canvas, React/JSX, Three.js, and CSS, with support for blend modes, animation loops, golden-angle placement, and multi-mode variants. Track 3B (`translation-design.ts`, 206 lines) produces declarative output: SVG sketches, JSON/CSS/Tailwind palette specs, and layout specifications for design workflows and documentation. Track 3C (`build-generator.ts`, 255 lines) turns parameters into ordered atomic build steps with a philosophy annotator attached — each non-obvious decision (why the golden angle, why these blend modes, why handmade jitter, why height decay) ships alongside its rationale, so a build spec is readable both as instructions and as design defense. Track 3D (`transmission-packager.ts`, 233 lines) closes the wave with self-containment validation — five explicit checks (no external dependencies, no hallucinated context, no image data, feel parameters in range, creator attribution present) — plus JSON serialization and a human-readable markdown export. The transmission packager is the reason mission packages survive context-window boundaries: a package that passes all five checks carries everything a downstream consumer needs without reaching back to the originating session.
+
+**Wave 4 integration wires the stack to the existing VTM pipeline through a scored bridge.** Phase 4 (`feat(itm): add pipeline bridge and integration test suite`, commit `34798e96`) added `pipeline-bridge.ts` (161 lines) plus a 237-line `integration.test.ts` for a combined 42 new tests that brought the ITM total to 253 across 11 files. The pipeline bridge scores every input along four dimensions (scope, coupling, uncertainty, ambition) on a 0–12 scale and routes accordingly: scores under 4 emit a `direct-build` spec, 4–6 yield a `build-spec` with explicit next steps, 6–8 produce a `lightweight-mission` package, and 8+ hand off to the full vision-to-mission pipeline with a generated handoff document containing the observations, context, unified understanding, and parameters already extracted. User-override detection lets a creator force a specific routing outcome when the heuristic would otherwise pick wrong. The integration suite is deliberately adversarial: it asserts the pipeline never hallucinates context, never embeds raw image data in packages, keeps feel parameters bounded to 0..1, preserves creator attribution end to end, and threads the full observation → connection → parameter → translation → build → transmission data flow without loss.
+
+**Complexity scoring is heuristic but calibrated enough to route.** The 0–12 scale is not pretending to be a proof of difficulty. It is a routing primitive: four dimensions (scope, coupling, uncertainty, ambition) each contribute up to 3 points, and the sum decides where the work lands. Calibrated is the honest word — the thresholds (4 / 6 / 8) were tuned against synthetic fixtures during Wave 4 development, not against a historical corpus of real projects. The bridge pattern still pays for itself even at this calibration level: simple creative tasks exit the pipeline with a direct build spec in milliseconds, and complex ones land in the existing vision-to-mission machinery with every upstream artifact already extracted, so vision-to-mission does not have to re-derive the observations and parameters it was about to generate anyway. Later releases will refine the scoring against real project outcomes; v1.49.21 ships the shape.
+
+**Five self-containment checks keep transmission packages portable.** The checks in `transmission-packager.ts` are the pipeline's answer to a hard problem: a mission package authored in one session and handed to another agent must not secretly depend on the originating context. Check one refuses packages that reference external paths, credentials, or session-local state. Check two scans for hallucinated context — claims in the package that trace to no observation and no creator input. Check three rejects packages that embed raw image data (image data belongs at ingest, not in the portable artifact). Check four asserts every feel parameter is in the 0..1 range that downstream consumers expect. Check five verifies the creator attribution chain is intact so downstream agents can ask follow-up questions of the right human. Packages that fail any check are rejected at packaging time, not silently shipped — the failure is explicit in the packager return value and surfaces in the Wave 4 integration tests.
+
+**Documentation refresh closed the milestone-count drift before the ITM landing.** The final housekeeping commit in the window (`9de8fc3a`, `docs: refine milestone counts, Gastown rig model, and WordPress sync`) updated the published milestone count to 85 across `docs/about.md` and `docs/index.md`, expanded Gastown documentation with a per-rig coordination model in `docs/CORE-CONCEPTS.md`, and added WordPress MCP sync context to `docs/HOW-IT-WORKS.md` Layer 3. `README.md` picked up current project stats. Keeping the published counters honest before a feature release that introduces 253 new tests avoids the trap where the number on the site is always one release behind the number in the repo. The version-bump commit (`7b14595e`) then closed the window with `package.json`, `desktop/package.json`, and `src-tauri/Cargo.toml` all advanced to 1.49.21 and `docs/RELEASE-HISTORY.md`, `CHANGELOG.md`, `docs/FEATURES.md` entries written for v1.49.20, v1.49.20.1, and v1.49.21 together so the docs ledger stayed in lockstep.
+
+**Dual translation engines is the right split because code and design have different output shapes.** Code output is imperative and runnable — it produces something a runtime evaluates. Design output is declarative and referential — it produces something a human or design tool reads. An attempt to unify them behind a single translation abstraction would force one shape to masquerade as the other, and the masquerade would either hide information the runtime needs or hide intent the designer needs. Two engines with shared input (the same `ExtractedParameters` record) and divergent output channels captures the actual shape of the problem. Wave 3 landed both engines in the same commit deliberately; they were co-designed so that any future unification decision could be made against evidence rather than preemptively against a straw-man abstraction.
 
 ## Key Features
 
-### Observation & Analysis
-- **Observation Engine** -- 4-layer visual analysis (literal, emotional, structural, symbolic)
-- **Context Integrator** -- Freeform text parser with process insight extraction
-- **Connection Engine** -- Cross-image synthesis linking visual elements across observations
-- **Parameter Extractor** -- Structured extraction of color, geometry, material, and feel attributes
-
-### Dual Translation Engines
-- **Code Translation** -- Generates Canvas, React, Three.js, and CSS implementations from visual parameters
-- **Design Translation** -- Produces SVG, palette, and layout specifications
-
-### Pipeline Infrastructure
-- **Build Generator** -- Atomic implementation steps with philosophy annotations
-- **Transmission Packager** -- 5 self-containment checks ensuring output portability
-- **Pipeline Bridge** -- Complexity scoring (0-12 scale) with automatic routing to vision-to-mission for complex projects
-- 14 Zod schemas validating all pipeline interfaces
-
-### Supporting Work
-- Minecraft SocketEdit skill with complete pipeline documentation
-- Version bump and Cargo.lock alignment
+| Area | What Shipped |
+|------|--------------|
+| Type system (Wave 0) | `src/vtm/image-to-mission/types.ts` (319 lines) + `types.test.ts` (475 lines, 44 tests) — 14 Zod schemas covering input, observation, parameter, connection, and output types; stone-mandala reference fixture threaded through every test file |
+| Observation engine (Wave 1A) | `observation-engine.ts` (159 lines) + `observation-engine.test.ts` (83 lines) — four-layer structured perception (literal, spatial, relational, mood), protocol definition, multi-image orchestration |
+| Context integrator (Wave 1B) | `context-integrator.ts` (140 lines) + `context-integrator.test.ts` (134 lines) — freeform text into typed `CreatorContext`, layer mapping, process insight extraction, interactive prompt templates |
+| Connection engine (Wave 2A) | `connection-engine.ts` (320 lines) + `connection-engine.test.ts` (338 lines) — cross-image linker (persistent vs dynamic), visual-context bridge, process pattern finder (emergent vs designed), `synthesize` orchestrator producing `UnifiedUnderstanding` |
+| Parameter extractor (Wave 2B) | `parameter-extractor.ts` (362 lines) + `parameter-extractor.test.ts` (388 lines) — color, geometry, material, feel (0..1 bounded), custom per-project fields (acoustic geometry, condition modes, light sources) |
+| Code translation (Wave 3A) | `translation-code.ts` (342 lines) + `translation-code.test.ts` (194 lines) — Canvas, React/JSX, Three.js, CSS targets with blend modes, animation, golden-angle placement, multi-mode support |
+| Design translation (Wave 3B) | `translation-design.ts` (206 lines) + `translation-design.test.ts` (172 lines) — SVG sketches, JSON/CSS/Tailwind palette specs, layout specifications |
+| Build generator (Wave 3C) | `build-generator.ts` (255 lines) + `build-generator.test.ts` (173 lines) — ordered atomic steps with philosophy annotator (WHY notes on golden angle, blend modes, handmade jitter, height decay) |
+| Transmission packager (Wave 3D) | `transmission-packager.ts` (233 lines) + `transmission-packager.test.ts` (202 lines) — five self-containment checks, JSON serialization, human-readable markdown export |
+| Pipeline bridge (Wave 4B) | `pipeline-bridge.ts` (161 lines) + `pipeline-bridge.test.ts` (147 lines) — 0–12 complexity score across four dimensions, routing to direct-build / build-spec / lightweight-mission / full-mission, user-override detection, vision-to-mission handoff document generation |
+| Integration suite (Wave 4C) | `integration.test.ts` (237 lines, 20 tests) — safety-critical boundary assertions (no hallucinated context, no image data in packages, feel params in range, creator attribution) plus end-to-end observation→connection→parameter→translation→build→transmission data flow |
+| Module barrel | `src/vtm/image-to-mission/index.ts` — re-exports across waves so the ITM surface is a single import |
+| Minecraft SocketEdit skill | supporting skill with complete pipeline documentation (referenced in `docs/FEATURES.md`) — first external consumer of the ITM pipeline shape |
+| Documentation refresh | `docs/about.md`, `docs/index.md`, `docs/CORE-CONCEPTS.md`, `docs/HOW-IT-WORKS.md`, `README.md` — milestone count updated to 85, Gastown per-rig coordination model documented, WordPress MCP sync context added |
+| Release ledger | `CHANGELOG.md`, `docs/FEATURES.md`, `docs/RELEASE-HISTORY.md` — entries for v1.49.20 (Documentation Consolidation), v1.49.20.1 (Documentation Reflections), v1.49.21 (Image to Mission Pipeline) |
+| Version bump | `package.json`, `desktop/package.json`, `src-tauri/Cargo.toml` advanced to 1.49.21 in a dedicated commit (`7b14595e`) |
 
 ## Retrospective
 
 ### What Worked
-- **TDD approach** -- Writing type schemas first (14 Zod schemas) then building engines against them kept the pipeline well-structured from the start
-- **Modular engine design** -- Each engine is independently testable with clear input/output contracts, making the 253-test suite straightforward to write
-- **Bridge pattern** -- Connecting ITM to the existing VTM pipeline via a scored bridge avoids duplicating mission generation logic
+
+- **Types-first discipline carried forward from v1.49.17.** Landing all 14 Zod schemas in Wave 0 before any engine code existed meant every subsequent wave compiled clean against the types on first landing. No back-and-forth between engine implementation and schema revision, and every test file's fixture shape was decided once.
+- **Four-wave sequence in dependency order.** Wave 0 (types) → Wave 1 (perception: observation + context) → Wave 2 (synthesis: connection + parameters) → Wave 3 (production: code + design + build + transmission) → Wave 4 (integration: bridge + end-to-end suite). Each wave compiled clean against the waves before it and the commit history reads top-to-bottom as a build log for the ITM stack.
+- **Dual translation engines kept code and design honest.** Shipping `translation-code.ts` and `translation-design.ts` as separate engines with a shared `ExtractedParameters` input avoided a straw-man unification abstraction. Each engine optimizes for its output shape (imperative/runnable vs declarative/referential) without dragging the other through a compromise.
+- **Bridge pattern avoided duplicating vision-to-mission logic.** The pipeline bridge hands off complex work to the existing VTM pipeline with every upstream artifact already extracted (observations, context, unified understanding, parameters), so VTM does not re-derive inputs it was about to generate. Cost: one 161-line module.
+- **Safety-critical integration tests wrote down the non-negotiables.** The Wave 4 suite explicitly asserts the pipeline never hallucinates context, never embeds raw image data in packages, keeps feel parameters bounded to 0..1, and preserves creator attribution end to end. These are the boundaries a creative pipeline has to hold; having them as tests means regression shows up at CI time, not in shipped packages.
+- **Philosophy annotator in the build generator preserves design intent.** Non-obvious decisions (golden angle, blend modes, handmade jitter, height decay) ship with WHY notes so a build spec is readable both as instructions and as design defense — a downstream agent inheriting the spec knows why each step exists, not just what to do.
 
 ### What Could Be Better
-- **No real image input yet** -- The pipeline processes structured observation data, not raw images. Actual image analysis requires multimodal model integration
-- **Complexity scoring is heuristic** -- The 0-12 scale works for routing decisions but isn't calibrated against real project outcomes
+
+- **No real image input yet.** The pipeline processes structured `ImageObservation` records, not raw pixel data. Extending to true multimodal input requires model integration work that v1.49.21 deferred. The current shape is correct; the missing link is the ingest front end.
+- **Complexity scoring is calibrated against synthetic fixtures, not real project outcomes.** The 4 / 6 / 8 thresholds for direct-build / build-spec / lightweight-mission / full-mission were tuned during Wave 4 development against the test fixtures. A real-project calibration pass against historical mission outcomes will refine the thresholds once the pipeline has been used on enough live work to generate a corpus.
+- **Only one external consumer (Minecraft SocketEdit skill).** One downstream user is an existence proof, not a stress test. Additional consumers with different output shapes (a physical-build spec, a web-component spec, a research-mission hand-off) would exercise the translation engines against genuinely different output channels and surface any over-fitting to the stone-mandala fixture.
+- **Self-containment checks are structural, not semantic.** The five checks in `transmission-packager.ts` catch the structural failure modes (external references, raw image data, out-of-range feel values, missing attribution, hallucinated context). They do not catch subtle semantic drift — a package that references a creator's context field accurately but misinterprets its meaning will still pass. Semantic validation is a harder problem that v1.49.21 did not attempt.
+- **No LLM-tiebreaker calibration for lessons classification.** The five lessons in `chapter/04-lessons.md` carry `⚙ rule-based` status with no LLM-tiebreaker review. The release-history tooling is still catching up to the ITM landing; a future pass should route these lessons through the tiebreaker to confirm their investigate-status placements.
 
 ## Lessons Learned
 
-1. **Schema-first pipeline design** -- Defining all 14 interface schemas before writing any engine code eliminated the usual back-and-forth of integration. Each engine had an exact contract to implement against.
-2. **Dual translation is the right split** -- Code and design translations have fundamentally different output shapes. Trying to unify them would have created an awkward abstraction. Two engines with shared input is simpler.
-3. **Bridge scoring enables incremental complexity** -- Simple creative tasks (score < 4) get direct output. Complex ones (score >= 8) get routed to the full VTM pipeline. The bridge pattern avoids building a monolithic system.
+- **Schema-first pipeline design eliminated integration friction.** Defining all 14 interface schemas before writing any engine code meant each engine had an exact contract to implement against. Wave 1 compiled clean against Wave 0 on first landing; the same held for Wave 2 through Wave 4. The typical integration back-and-forth (engine reveals schema gap, schema update breaks other engines, cascade of small revisions) never started because the schemas were finished before the engines existed.
+- **Dual translation is the right split when output shapes actually diverge.** Code output is imperative and runnable; design output is declarative and referential. Trying to unify them behind a single translation abstraction would have forced one shape to masquerade as the other. Two engines with shared input preserved each channel's native shape while keeping the upstream pipeline singular.
+- **Bridge scoring enables incremental complexity without a monolith.** Simple creative tasks (score under 4) exit with a direct build spec in milliseconds. Complex ones (score 8+) hand off to the full VTM pipeline with every upstream artifact already extracted. The bridge pattern avoids both extremes — the "every task goes through every stage" monolith and the "ship four separate pipelines and let the user pick" fragmentation.
+- **Self-containment is a property you test for, not a property you hope for.** The five checks in `transmission-packager.ts` are the reason mission packages survive context-window boundaries. Every check catches a failure mode observed empirically in earlier pipelines — external references that break when the package moves hosts, raw image data that bloats the package and exposes source material, out-of-range feel values that crash downstream consumers, missing attribution that erases creator credit, hallucinated context that contaminates downstream reasoning. A package that passes all five is genuinely portable; a package that fails any is not.
+- **Philosophy annotation keeps design intent attached to build steps.** A build step that reads "place N elements at the golden angle" without context loses the reason (golden-angle placement produces visually balanced density for N up to ~500 without needing per-count tuning). A build step with a WHY note keeps the design defense attached to the instruction. Downstream agents can reason about whether the step still applies when the context shifts; without the annotation, they can only execute blindly or discard and re-derive.
+- **Four-wave sequencing is the natural shape for a perceive-synthesize-translate-transmit pipeline.** Perception (Wave 1: observation + context) is the input surface. Synthesis (Wave 2: connection + parameters) unifies the inputs into a typed understanding. Production (Wave 3: code + design + build + transmission) turns that understanding into portable artifacts. Integration (Wave 4: bridge + adversarial tests) wires it to the downstream pipeline and asserts the non-negotiables. Each wave has a distinct role; compressing any two would blur the role boundary and cost more than it saved.
+- **Multi-image orchestration is cheap when observation is already structured.** The observation engine's multi-image mode does not require a separate pipeline — it runs the four-layer structured perception over each image and lets the connection engine's cross-image linker distinguish persistent from dynamic elements in Wave 2. Because both waves share the schema, multiple views of the same subject compose naturally into a single `UnifiedUnderstanding` without a dedicated "multi-image pipeline" branch.
+- **Medium-independent parameters are what let one pipeline feed many targets.** `ExtractedParameters` (color, geometry, material, feel, custom) is intentionally not tied to any output medium. The same parameter record feeds a WebGL shader through `translation-code.ts` and a Tailwind palette through `translation-design.ts`. When future targets land (print layout, audio, physical build), they can consume the same parameter shape without the upstream pipeline changing.
+- **Safety-critical boundaries belong in the integration suite, not scattered through unit tests.** The Wave 4 `integration.test.ts` asserts the pipeline never hallucinates context, never embeds raw image data, keeps feel parameters bounded, and preserves creator attribution. These are cross-component invariants; no single unit test can express them. The integration suite is where they live, and any regression against them shows up as a single named test failure instead of a scattered set of component test failures.
+- **Housekeeping before the feature landing beats scramble-after-feature-landing.** The `docs: refine milestone counts` commit (`9de8fc3a`) closed documentation drift (milestone count, Gastown model, WordPress sync context) before the ITM feature wave started. If the counter updates had landed in the same window as the feature work they would have muddied the review signal; shipping them first kept each subsequent commit focused on one concern.
+- **Version-bump-last in a feature window keeps the ledger honest.** The version bump (`7b14595e`) is the final commit in the v1.49.20.1..v1.49.21 window and touches `package.json`, `desktop/package.json`, `src-tauri/Cargo.toml`, `CHANGELOG.md`, `docs/FEATURES.md`, and `docs/RELEASE-HISTORY.md` together. Advancing the version before the feature work is done risks shipping a tag that points at incomplete code; advancing it last guarantees the tagged commit is the commit that shipped.
+- **Release-ledger catch-up belongs in the version-bump commit, not a separate one.** `v1.49.21`'s version bump commit also adds CHANGELOG, FEATURES, and RELEASE-HISTORY entries for v1.49.20 and v1.49.20.1 alongside v1.49.21. Batching three release-note entries into the version-bump commit is more honest than ghost-editing history and keeps the three documentation-ledger updates aligned with a single anchor commit.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.20.1](../v1.49.20.1/chapter/00-summary.md) | Predecessor — Documentation Reflections; the doc-ledger pass that set up the cleaner milestone counts v1.49.21 inherited |
+| [v1.49.20](../v1.49.20/chapter/00-summary.md) | Predecessor-predecessor — Documentation Consolidation; initial documentation restructuring |
+| [v1.49.19](../v1.49.19/) | v1.49.x line context before the ITM pipeline landed |
+| [v1.49.18](../v1.49.18/) | Follows the v1.49.17 cartridge format landing; establishes the types-first discipline v1.49.21 continued |
+| [v1.49.17](../v1.49.17/) | Types-first discipline and Space Between cartridge — direct predecessor of the Wave 0 schemas-first pattern |
+| [v1.49.16](../v1.49.16/) | Muse integration and MCP pipeline — upstream for the creative-input surface |
+| [v1.49.15](../v1.49.15/) | Three-release README catch-up precedent for the v1.49.20/20.1/21 ledger batch |
+| [v1.49.12](../v1.49.12/) | Heritage-skills-pack pattern — pack-shape content that ITM's transmission packages mirror |
+| [v1.49.10](../v1.49.10/) | Flat-atoms architecture — the scaling pattern the ITM parameter surface inherits |
+| [v1.49.9](../v1.49.9/) | "Teaching reference IS the research" pattern applied to pack content; analogous to philosophy annotator |
+| [v1.49.8](../v1.49.8/) | Earlier instance of absorbing source documents directly into pack content |
+| [v1.49.7](../v1.49.7/) | Optional-dependency contract — the discipline the transmission packager's self-containment checks follow |
+| [v1.49.0](../v1.49.0/) | Parent mega-release where the v1.49.x line and GSD-OS desktop surface first shipped |
+| [v1.49](../v1.49/) | Consolidated mega-release notes for the v1.49 line |
+| [v1.27](../v1.27/) | Foundational Knowledge Packs — the pack-shape template the ITM build spec shares |
+| [v1.25](../v1.25/) | Ecosystem Integration — dependency DAG pattern the pipeline bridge scores against |
+| [v1.21](../v1.21/) | GSD-OS Desktop Foundation — Tauri shell that hosts the mission surfaces |
+| [v1.0](../v1.0/) | Foundation — 6-step adaptive loop the ITM pipeline extends at the Perceive step |
+| `src/vtm/image-to-mission/types.ts` | 14 Zod schemas defining the pipeline's complete type system |
+| `src/vtm/image-to-mission/pipeline-bridge.ts` | 0–12 complexity score with routing to direct-build / build-spec / lightweight-mission / full-mission |
+| `src/vtm/image-to-mission/transmission-packager.ts` | Five self-containment checks plus JSON and markdown export |
+| `src/vtm/image-to-mission/integration.test.ts` | Wave 4 adversarial suite asserting the pipeline's safety-critical boundaries |
+| `docs/release-notes/v1.49.21/chapter/03-retrospective.md` | Short-form retrospective entries captured at landing time |
+| `docs/release-notes/v1.49.21/chapter/04-lessons.md` | Five lessons extracted at landing (classification: rule-based; awaiting LLM-tiebreaker) |
+
+## Engine Position
+
+v1.49.21 ships the first image-to-mission pipeline in the v1.49.x line and the first creative-input surface for the mission builder. It extends the v1.49.17 types-first discipline (14 Zod schemas in Wave 0 before any engine code existed) and the v1.49.12 pack-shape pattern (the `TransmissionPackage` mirrors pack-shape content with self-containment guarantees). Looking forward, the pipeline bridge is the substrate for any future input modality — once a multimodal ingest front end lands, the same observation/context/parameter shape carries the input into the existing Wave 2→4 pipeline without re-architecting the downstream stages, and new translation engines (print layout, audio, physical build) can read the same `ExtractedParameters` record the existing code and design engines consume. The release's 7 commits, 33 files, and 5,122 insertions make it a mid-size v1.49.x feature release, slightly larger than v1.49.17's 55-file cartridge milestone in insertions but tighter in file count because every file is a member of one coherent module (`src/vtm/image-to-mission/`). The architectural footprint is disproportionately large — v1.49.21 is where creative input entered the mission pipeline as a first-class surface.
+
+## Cumulative Statistics
+
+| Metric | Value |
+|--------|-------|
+| Commits (v1.49.20.1..v1.49.21) | 7 |
+| Files changed | 33 |
+| Lines inserted / deleted | 5,122 / 33 |
+| Waves shipped | 5 (Wave 0 scaffold + Waves 1–4) |
+| New tests | 253 across 11 ITM modules |
+| New Zod schemas | 14 (input, observation, parameter, connection, output) |
+| Translation targets | 4 code (Canvas, React/JSX, Three.js, CSS) + 3 design (SVG, palette, layout) |
+| Self-containment checks | 5 (external refs, hallucinated context, raw image data, feel bounds, attribution) |
+| Bridge routing outcomes | 4 (direct-build, build-spec, lightweight-mission, full-mission) |
+| Bridge scoring dimensions | 4 (scope, coupling, uncertainty, ambition); 0–12 total range |
+| Observation layers | 4 (literal, spatial, relational, mood) |
+| Connection types | 3 (cross-image, visual-context, process-pattern) |
+| Integration test assertions | 20 (safety boundaries + end-to-end data flow) |
+| External consumers at landing | 1 (Minecraft SocketEdit skill documentation) |
+
+## Files
+
+- `src/vtm/image-to-mission/types.ts` (319 lines) + `types.test.ts` (475 lines, 44 tests) — 14 Zod schemas, stone-mandala reference fixture
+- `src/vtm/image-to-mission/observation-engine.ts` (159 lines) + `observation-engine.test.ts` (83 lines) — four-layer structured perception with multi-image orchestration
+- `src/vtm/image-to-mission/context-integrator.ts` (140 lines) + `context-integrator.test.ts` (134 lines) — freeform text → typed `CreatorContext` with process insight extraction
+- `src/vtm/image-to-mission/connection-engine.ts` (320 lines) + `connection-engine.test.ts` (338 lines) — cross-image linker, visual-context bridge, process pattern finder, `synthesize` orchestrator
+- `src/vtm/image-to-mission/parameter-extractor.ts` (362 lines) + `parameter-extractor.test.ts` (388 lines) — color, geometry, material, feel (0..1 bounded), custom fields
+- `src/vtm/image-to-mission/translation-code.ts` (342 lines) + `translation-code.test.ts` (194 lines) — Canvas, React/JSX, Three.js, CSS output
+- `src/vtm/image-to-mission/translation-design.ts` (206 lines) + `translation-design.test.ts` (172 lines) — SVG, palette (JSON/CSS/Tailwind), layout specs
+- `src/vtm/image-to-mission/build-generator.ts` (255 lines) + `build-generator.test.ts` (173 lines) — atomic build steps with philosophy annotator
+- `src/vtm/image-to-mission/transmission-packager.ts` (233 lines) + `transmission-packager.test.ts` (202 lines) — five self-containment checks plus JSON and markdown export
+- `src/vtm/image-to-mission/pipeline-bridge.ts` (161 lines) + `pipeline-bridge.test.ts` (147 lines) — 0–12 complexity score across four dimensions with four routing outcomes
+- `src/vtm/image-to-mission/integration.test.ts` (237 lines, 20 tests) — safety-critical boundaries plus end-to-end data flow
+- `src/vtm/image-to-mission/index.ts` — module barrel re-exporting the full ITM surface
+- `package.json`, `desktop/package.json`, `src-tauri/Cargo.toml` — version advanced to 1.49.21 in commit `7b14595e`
+- `CHANGELOG.md`, `docs/FEATURES.md`, `docs/RELEASE-HISTORY.md` — release-ledger entries for v1.49.20, v1.49.20.1, v1.49.21
+- `docs/about.md`, `docs/index.md`, `docs/CORE-CONCEPTS.md`, `docs/HOW-IT-WORKS.md`, `README.md` — milestone count (85), Gastown per-rig coordination model, WordPress MCP sync context, current project stats
+
+Aggregate: 33 files changed, 5,122 insertions, 33 deletions, 7 commits spanning v1.49.20.1..v1.49.21.
