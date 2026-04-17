@@ -15,13 +15,17 @@ import { openDb } from './db.mjs';
 // --- dimension graders ---
 // Each returns an integer score for its dimension.
 
-// Header block: **Released:** (or **Shipped:**) + at least 3 other bold fields
+// Header block: **Released:** (or **Shipped:**) + at least 3 other bold fields.
+// The canonical template puts the colon inside the bold markers:
+// `**Released:** YYYY-MM-DD`. Older notes sometimes use `**Released**: …`.
+// Accept either form.
 function scoreHeaderBlock(text) {
-  const hasDate = /\*\*(?:Released|Shipped|Date)\*\*?\s*:\s*\d{4}-\d{2}-\d{2}/m.test(text);
+  const hasDate = /\*\*(?:Released|Shipped|Date)(?::\*\*|\*\*:)\s*\d{4}-\d{2}-\d{2}/m.test(text);
   if (!hasDate) return 0;
-  // Count all **Field:** patterns in the first 40 lines
+  // Count all **Field:** (colon-inside) or **Field**: (colon-outside) patterns
+  // in the first 40 lines.
   const head = text.split(/\r?\n/).slice(0, 40).join('\n');
-  const fields = [...head.matchAll(/^\s*\*\*[A-Z][A-Za-z ]+\*\*:/gm)].length;
+  const fields = [...head.matchAll(/^\s*\*\*[A-Z][A-Za-z ]+(?::\*\*|\*\*:)/gm)].length;
   if (fields >= 4) return 10;
   if (fields >= 3) return 7;
   if (fields >= 2) return 4;
