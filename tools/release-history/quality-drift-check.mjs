@@ -57,7 +57,7 @@ async function main() {
 
   // Recent 20 releases (newest first by semver)
   const { rows: recent } = await db.query(`
-    SELECT s.score, s.grade
+    SELECT s.score, s.grade, r.release_type
     FROM release_history.release_score s
     JOIN release_history.release r ON r.version = s.version
     ORDER BY r.semver_major DESC, r.semver_minor DESC, r.semver_patch DESC
@@ -65,7 +65,14 @@ async function main() {
   `);
   const recentAvg = recent.length > 0
     ? recent.reduce((s, r) => s + r.score, 0) / recent.length : 0;
-  const recentAllF = recent.slice(0, T.recent20_all_F_alert).every(r => r.grade === 'F');
+  // "recent all F" alert is type-aware — degree-type releases use a prose
+  // format that scores low on the structured rubric by design, so they
+  // shouldn't trip the authoring-regression alarm. Only fire when
+  // non-degree releases in the recent window are all F.
+  const recentWindow = recent.slice(0, T.recent20_all_F_alert);
+  const nonDegreeRecent = recentWindow.filter(r => r.release_type !== 'degree');
+  const recentAllF = nonDegreeRecent.length > 0
+    && nonDegreeRecent.every(r => r.grade === 'F');
 
   await db.close();
 

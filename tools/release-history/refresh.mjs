@@ -41,6 +41,7 @@ const STEPS = [
   { name: 'extract-metrics',   script: 'extract-metrics.mjs',     required: !fast },
   { name: 'extract-lessons',   script: 'extract-lessons.mjs',     required: true },
   { name: 'classify',          script: 'classify-and-track.mjs',  required: !noClassify },
+  { name: 'classify-types',    script: 'classify-types.mjs',      required: true },
   { name: 'chapter',           script: 'chapter.mjs',             required: true },
   { name: 'score',             script: 'score-completeness.mjs',  required: true },
   { name: 'regen-history-md',  script: 'regen-history-md.mjs',    required: true },
