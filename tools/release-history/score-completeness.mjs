@@ -171,7 +171,39 @@ function gradeOf(score) {
   return 'F';
 }
 
-function scoreRelease(text) {
+function scoreRelease(text, releaseType) {
+  // Prose rubric for degree-type paired-engine releases. Different
+  // scoring dimensions (prose depth + named-entity density + Part A/B
+  // sync), but the same 10-column storage schema so release_score
+  // stays one table. Columns map by position:
+  //   header_block              ← header_block (same)
+  //   summary_findings          ← prose_depth (word count tiers)
+  //   key_features_table        ← named_entity_density
+  //   part_a_depth              ← part_a_depth (same)
+  //   part_b_depth              ← part_b_depth (same)
+  //   retrospective_structure   ← retrospective_structure (same)
+  //   lessons_learned           ← lessons_learned (same, prose-style OK)
+  //   cross_references          ← cross_sync (A/B thematic crosslinks)
+  //   running_ledgers           ← running_ledgers (same)
+  //   infrastructure_block      ← dedication + engine_position marker
+  if (releaseType === 'degree') {
+    const dimensions = {
+      header_block:            scoreHeaderBlock(text),
+      summary_findings:        scoreProseDepth(text),
+      key_features_table:      scoreNamedEntities(text),
+      part_a_depth:            scorePartDepth(text, 'A'),
+      part_b_depth:            scorePartDepth(text, 'B'),
+      retrospective_structure: scoreRetrospective(text),
+      lessons_learned:         scoreLessons(text),
+      cross_references:        scoreProseCrossSync(text),
+      running_ledgers:         scoreRunningLedgers(text),
+      infrastructure_block:    scoreDedicationMarker(text),
+    };
+    const score = Object.values(dimensions).reduce((s, v) => s + v, 0);
+    return { score, grade: gradeOf(score), dimensions };
+  }
+
+  // Structured rubric — feature, milestone, patch, unclassified
   const dimensions = {
     header_block:            scoreHeaderBlock(text),
     summary_findings:        scoreSummaryFindings(text),
@@ -188,6 +220,67 @@ function scoreRelease(text) {
   return { score, grade: gradeOf(score), dimensions };
 }
 
+// --- prose rubric graders ---
+
+// Word count in the Summary section — rewards long-form essays.
+function scoreProseDepth(text) {
+  const summary = extractSection(text, /^##\s+Summary\s*$/mi);
+  if (!summary) return 0;
+  const words = (summary.trim().match(/\S+/g) || []).length;
+  if (words >= 2000) return 15;
+  if (words >= 1000) return 10;
+  if (words >= 500) return 5;
+  if (words >= 200) return 2;
+  return 0;
+}
+
+// Density of capitalized multi-word noun phrases in the Summary —
+// a proxy for named entities (people, places, songs, taxa, missions).
+function scoreNamedEntities(text) {
+  const summary = extractSection(text, /^##\s+Summary\s*$/mi);
+  if (!summary) return 0;
+  // Multi-word capitalized sequences: "Gus Grissom", "Lunar Orbiter 3",
+  // "Sound of Puget Sound", "Varied Thrush", etc.
+  const matches = summary.match(/\b([A-Z][a-z]+(?:\s+(?:[A-Z][a-z]+|[a-z]{1,3}|\d+))+)\b/g) || [];
+  const unique = new Set(matches).size;
+  if (unique >= 40) return 10;
+  if (unique >= 25) return 7;
+  if (unique >= 15) return 4;
+  if (unique >= 5)  return 2;
+  return 0;
+}
+
+// Cross-sync: thematic linking between Part A and Part B. Count
+// paragraphs where both the Part A subject and Part B subject are
+// named together (or a transitional phrase like "and", "while",
+// "the same way" connects them). Heuristic: count paragraphs that
+// contain both "Part A" / "Part B" themed markers, OR a moderate
+// proxy — count mentions of "the same", "both", "each", "mirror"
+// as prose-crosslink signals.
+function scoreProseCrossSync(text) {
+  const summary = extractSection(text, /^##\s+Summary\s*$/mi);
+  if (!summary) return 0;
+  const paragraphs = summary.split(/\n\n+/);
+  const crossWords = /\b(the same|both sides|each (side|degree)|mirror|synchroniz|at the same time|convergenc|paired|in parallel)\b/i;
+  let hits = 0;
+  for (const p of paragraphs) {
+    if (crossWords.test(p)) hits++;
+  }
+  if (hits >= 5) return 10;
+  if (hits >= 3) return 7;
+  if (hits >= 1) return 4;
+  return 0;
+}
+
+// Dedication + Engine Position markers (Fox Companies degree style)
+function scoreDedicationMarker(text) {
+  const head = text.split(/\r?\n/).slice(0, 30).join('\n');
+  let score = 0;
+  if (/^\s*\*\*Dedication:?\*\*:?\s/mi.test(head)) score += 3;
+  if (/^\s*\*\*Engine Position:?\*\*:?\s/mi.test(head)) score += 2;
+  return score;
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const summary = args.includes('--summary');
@@ -198,8 +291,8 @@ async function main() {
 
   const { rows: releases } = await db.query(
     explicit
-      ? `SELECT version, source_readme FROM release_history.release WHERE version = $1`
-      : `SELECT version, source_readme FROM release_history.release
+      ? `SELECT version, source_readme, release_type FROM release_history.release WHERE version = $1`
+      : `SELECT version, source_readme, release_type FROM release_history.release
          ORDER BY semver_major, semver_minor, semver_patch`,
     explicit ? [explicit] : []
   );
@@ -230,7 +323,7 @@ async function main() {
       continue;
     }
     const text = readFileSync(readmePath, 'utf8');
-    const { score, grade, dimensions } = scoreRelease(text);
+    const { score, grade, dimensions } = scoreRelease(text, r.release_type);
     dist[grade]++;
     scored++;
 
