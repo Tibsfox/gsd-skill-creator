@@ -2,81 +2,160 @@
 
 **Released:** 2026-04-05
 **Degree:** 28 of 360
-**Part A:** Night Owls -- Soul/R&B, E=4, Seattle, self-released. Contemporary soul. Fourth consecutive soul-primary degree.
-**Part B:** Tree Swallow (*Tachycineta bicolor*) -- liquid twittering gurgle, E=4, open field near water, Hirundinidae. Third consecutive swallow. Swallow triptych completes. Liquid timbre as family signature.
-**NASA Mission:** 1.29 -- Ranger 4 (April 23, 1962. FIRST US SPACECRAFT TO HIT THE MOON. But systems failed — no data returned. Impact without intelligence. The arrival that learned nothing.)
+**Part A:** Night Owls -- Soul/R&B, E=4, Seattle, self-released. Contemporary Central District soul. Fourth consecutive soul-primary degree. The soul quadrant at full production capacity.
+**Part B:** Tree Swallow (*Tachycineta bicolor*) -- liquid twittering gurgle, E=4, open field near water, Hirundinidae. Cavity-nester. Third consecutive swallow. Swallow triptych completes. Liquid timbre confirmed as Hirundinidae family signature.
+**NASA Mission:** 1.29 -- Ranger 4 (April 23, 1962. First US spacecraft to hit the Moon. But the master clock timer failed during transit; the spacecraft's systems were dead on arrival. The capsule impacted the far side at approximately 229.3 degrees east, 15.5 degrees south at 12:49 UTC on April 26, 1962. No telemetry. No photographs. No science. Impact without intelligence. The arrival that learned nothing.)
 **Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
-**Engine Position:** Twenty-ninth paired release. Degree 28 = impact without data.
+**Branch:** dev
+**Commit:** 5a3bf31dd
+**Engine Position:** Twenty-ninth paired release. Degree 28 = impact without data. Fourth consecutive soul degree. Eighth consecutive E=4. Hirundinidae triptych closes.
+**Cluster:** Central District Soul (contemporary wing); Hirundinidae (swallow family, liquid timbre signature)
+**Dedication:** Crew of Apollo 1 (Gus Grissom, Ed White, Roger Chaffee). Ranger 4 preceded them by five years; their loss on January 27, 1967 stands as the American program's first in-flight fatality. Both ends of the early lunar effort -- Ranger 4's silent arrival and Apollo 1's silent fire -- mark the gap between reaching a destination and returning with anything. This degree honors the engineered persistence that carried through both catastrophes to eventual landing.
 
 ## Summary
 
-Ranger 4 hit the Moon — the first American spacecraft to reach the lunar surface. But the timer failed, the systems were dead, and no data was returned. You got there. You brought nothing back. Night Owls continue the soul quadrant at full intensity. The Tree Swallow completes the swallow triptych (three consecutive Hirundinidae at degrees 26-28) and confirms liquid timbre as the family's acoustic signature. E=4 sustained for eighth consecutive degree.
+The twenty-ninth paired release and the degree where the engine documents a new failure mode that had been invisible while earlier failures dominated the Ranger program's statistics. Ranger 4 lifted from Cape Canaveral Launch Complex 12 on April 23, 1962, atop an Atlas-Agena B stack that functioned correctly through both burn phases -- the Atlas LV-3A lifted the stack through atmospheric ascent, the Agena B restart in parking orbit provided the translunar injection impulse, and the spacecraft separated from the Agena B on a nominal trajectory toward the Moon. The launch succeeded. The trans-lunar injection succeeded. The spacecraft reached the Moon. Every prior stage that had defeated Rangers 1 through 3 -- parking-orbit capture on Ranger 1 and Ranger 2, Agena B burn overshoot on Ranger 3 -- functioned on Ranger 4. The prior three failures had stacked at the departure end of the mission profile. They had been resolved. What remained was everything downstream, and everything downstream meant the master clock timer that activated the spacecraft's onboard systems after separation. The timer failed. The solar panels did not deploy. The seismometer capsule did not arm. The television camera did not power on. The 3.62 MHz transponder carrier held but the data subcarrier remained silent. The spacecraft that struck the lunar farside at approximately fifteen-point-five degrees south, two hundred twenty-nine-point-three degrees east, at twelve forty-nine Coordinated Universal Time on April 26, 1962, was a dead vehicle traveling at nearly nine thousand kilometers per hour through a collision that produced no scientific return.
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+This is the specific form of engineering failure that the Ranger program introduced and that every subsequent NASA program would have to account for -- the failure whose diagnostic signature is not absence of arrival but absence of data at arrival, the failure that reveals itself only by completing the portion of the mission that had previously been the obstacle, the failure that migrates toward the destination as earlier failure modes are resolved. Rangers 1 and 2 failed in parking orbit. Ranger 3 missed the Moon by 36,793 kilometers due to an Atlas-Agena overshoot. Ranger 4 hit the Moon with dead systems. The failure mode has migrated one full phase of the mission timeline. Ranger 5 would miss by 725 kilometers with dead systems (the migration completing). Rangers 6 would hit the Moon but return no video (the television subsystem failing on command). Rangers 7, 8, and 9 would finally succeed -- Ranger 7 on July 31, 1964, returning 4,316 photographs of Mare Cognitum at spatial resolutions two thousand times better than any ground-based observation had achieved. The Ranger program, like Pioneer and Mercury before it, converged through failure; each failure closer to success, each failure relocating to a later mission phase, each failure narrowing the set of unresolved engineering problems.
+
+The S36 track of the engine synchronizes at Degree 28 with Night Owls, a contemporary Seattle soul/R&B band whose work extends the Central District's soul tradition into the 2020s. The band operates in the territory that the Dynamics (Degree 27) proved exists in historical form -- the Central District soul lineage that reaches from the 1960s through the present. The Dynamics documented the origin. Night Owls documents the continuation. The sixty-year arc between them -- Central District soul from the Civil Rights era through to streaming-era self-release -- is the engine's longest within-genre continuity claim to date. Degree 28 is the fourth consecutive soul-primary degree: Monge (Degree 25, neo-soul), Shepherd (Degree 26, soul), Dynamics (Degree 27, historic soul/R&B), and now Night Owls (Degree 28, contemporary soul/R&B). No prior genre has held four degrees in a row in the paired-engine's production history. The jazz quadrant of degrees 1 through 14 held ground for long stretches but alternated between subgenres (bebop, post-bop, modal, post-genre); the soul quadrant of degrees 25 through 28 has held genre-primary without subgenre alternation, which marks a different mode of genre persistence. The soul quadrant has outlasted every jazz subgenre run in the engine's history.
+
+The genre transition from jazz to soul that began at Degree 25 is complete at Degree 28. The engine has moved from Seattle's institutional jazz pipeline (University of Washington, Cornish College of the Arts, Garfield High School, the Langston Hughes Performing Arts Center as community anchor) to Seattle's community soul continuum (the Black and Tan Club, the Penthouse, Jackson Street venues of the 1950s and 1960s, contemporary self-release distribution channels). Both circuits run through Seattle's Central District geographically. The transition is less a change of neighborhood than a change of institutional coupling -- jazz in Seattle depends on conservatories and competitions; soul in Seattle depends on community venues and direct audience relationships. Night Owls self-releases; the Dynamics released through Seattle-area labels; the Monge and Shepherd cases sit between. Contemporary and historic soul now interleave through the quadrant rather than progressing chronologically: Degree 27 reached back to the 1960s, Degree 28 returns to the present, and Degree 29 (next release) will determine whether the oscillation becomes the dominant structural mode for the soul quadrant.
+
+The SPS track documents the Tree Swallow, *Tachycineta bicolor*, a cavity-nesting aerial insectivore that completes the swallow triptych begun with the Purple Martin at Degree 26 and continued with the Violet-green Swallow at Degree 27. Three consecutive Hirundinidae. Three consecutive liquid-timbre vocalizations. Three distinct body sizes. Three distinct habitat-and-behavior fits. The Tree Swallow's "liquid twittering gurgle" is produced in flight as the bird approaches and departs the nest cavity -- the song is tied directly to the physical act of arriving at a destination, and the song varies with the approach vector and the distance to the cavity opening. The species breeds widely across Pacific Northwest wetland margins, prairie ponds, beaver-maintained flood pools, and snag-rich riparian corridors where decay cavities in dead hardwoods (commonly big-leaf maple, black cottonwood, or red alder in our region) provide nest sites. The Tree Swallow shares the Hirundinidae family signature -- liquid, flowing, connected vocalizations with a gurgling quality -- with the Purple Martin and the Violet-green Swallow despite differing in size, plumage, and nesting ecology. Three is the proof threshold: one observation is anecdote, two is hypothesis, three establishes the family-wide acoustic signature as taxonomic rather than individual.
+
+The Hirundinidae triptych is the engine's third within-family multi-species cluster after the Catharus triptych (Hermit Thrush at Degree 7, Swainson's Thrush at Degree 18, Varied Thrush at Degree 19) and the Parulidae quartet (MacGillivray's Warbler at Degree 14, Wilson's Warbler at Degree 15, Yellow Warbler at Degree 16, Common Yellowthroat at Degree 17). Three clusters, three family signatures: Turdidae contributes melody (the thrush voice as the engine's reference melodic dimension), Parulidae contributes intensification (the warbler strategy of crescendo toward a terminal burst), Hirundinidae contributes liquid flow (the swallow syrinx producing connected gurgling rather than discrete syllables). Each family now occupies a distinct acoustic dimension of the engine's descriptor vocabulary. Future triptychs and quartets will add more dimensions, but the method is proven: accumulate within-family species until a signature emerges, then treat the signature as taxonomic. The method parallels Ranger's convergence-through-failure at the opposite structural level -- Ranger accumulates failed missions until the remaining failure space is small enough to be fixed; the SPS track accumulates within-family species until the family's acoustic signature is small enough to be diagnostic. Both converge. Both require the third data point to establish confidence.
+
+The cross-synchrony between Ranger 4 and the Tree Swallow operates at the arrival-with-function axis. The Tree Swallow arrives at its nesting cavity and immediately begins work: the male claims the cavity by chattering at the entrance, the pair cooperates in cavity preparation, the female incubates four to seven eggs for fourteen to sixteen days, the chicks fledge eighteen to twenty-two days after hatching, and the entire life history operates on arrival-plus-immediate-function. Ranger 4 arrived at the Moon with no function: the timer had failed, the systems were dead, and the impact produced only a gravitational perturbation. Biological systems are operational at impact because they are operational continuously -- there is no separate activation sequence to fail. Engineered missions can lose functionality in transit because the activation sequence is a distinct subsystem whose failure is not observable until the activation event. The Tree Swallow does not have an activation event; the Tree Swallow is always activated. Ranger 4's timer was the single point between transit and function, and it failed. The engineering lesson is not that timers are fragile; the engineering lesson is that any single point between transit and function creates a failure mode that does not exist in continuously-activated biological systems. Apollo would eventually resolve the problem by carrying human operators who could work around activation failures; unmanned missions would resolve it by redundant timers, watchdog circuits, and command-receive-then-execute architectures. Ranger 4 was the mission that proved the problem existed.
+
+The E=4 streak now stands at eight consecutive degrees (21 through 28). Combined 8 x 8 for the longest sustained maximum-energy run in the engine's production history. The soul quadrant's E=4 ceiling shows no sign of dropping. Night Owls' contemporary production aesthetic favors energetic arrangements and layered vocals at full dynamic; the Tree Swallow's flight-song is energetic by mechanical necessity since the bird is singing during active aerial maneuvering near the nest cavity. Both tracks sustain E=4 for reasons that are not coincidental -- contemporary Central District soul is dance music and conversation music simultaneously, and aerial-insectivore swallows vocalize during energetically demanding flight. The quiet zone that dominated degrees 11 through 14 (E=2 to E=3 moderate) is a memory. The paired-engine has locked into high-energy territory through the entirety of its fourth octant.
+
+Degree 28's pattern ledger grows by six entries: arrival-without-data (new failure category), swallow-triptych-complete (third within-family cluster closes), four-consecutive-soul-degrees (engine record for genre persistence), eighth-consecutive-E=4 (engine record for sustained energy), contemporary-historic-soul-oscillation (new structural mode for quadrant), and single-point-activation-fragility (new engineering lesson drawn from Ranger 4's telemetry silence). The Ranger program now has four consecutive failures in the paired-engine's coverage and each failure sits at a later phase of the mission timeline than the previous one; the failure-mode drift is the engine's clearest empirical signal that the program is converging on a solvable residue. Rangers 5 and 6 will continue the arc (both failed on the paired engine's next two NASA lookups, but at phases even later in the timeline than Ranger 4). Rangers 7 through 9 will finally succeed in the 1964-1965 window that Apollo program planners had targeted as the minimum acceptable imaging-survey completion date. The engine's documentation of the Ranger program will therefore converge on success within the next seven paired degrees, and the failure-to-success ratio will invert somewhere around Degree 34 or 35.
+
+The twenty-ninth paired release therefore documents one structural commitment -- impact without data -- across the NASA track while the S36 and SPS tracks extend their respective quadrant and triptych patterns in parallel. The paired engine is in its highest-density production phase: a new soul act per degree, a new swallow species per degree, a new Ranger failure per degree, and the accumulated pattern ledger growing faster than the engine can summarize in the inline README. The chapters at `chapter/00-summary.md`, `chapter/03-retrospective.md`, and `chapter/99-context.md` carry the short-form version; this README carries the long-form cross-sync, the full entity density, and the verified pattern accounting. Twenty-nine degrees complete. Three hundred thirty-one remain. Seventy degrees will complete the first quarter; the engine continues.
+
+## Key Features
+
+| Metric | Part A: Night Owls | Part B: Tree Swallow |
+|--------|---------------------|-----------------------|
+| Energy | E=4 (layered vocals, full-dynamic production) | E=4 (aerial flight song, energetic delivery) |
+| Genre / Taxonomy | Contemporary soul/R&B | Hirundinidae, cavity-nesting aerial insectivore |
+| Acoustic Element | Full-band production with featured lead vocal + harmony stack | Liquid twittering gurgle produced in flight near cavity |
+| Distribution / Habitat | Seattle self-release; Central District community circuit | Open field near water; nest in tree cavity or nest box |
+| NASA Parallel | Ranger 4 hit the Moon = Night Owls sustains the soul territory the Dynamics claimed; arrival completed | Ranger 4 arrived silent = Tree Swallow arrives singing (biological systems continuously activated) |
+| Thematic Anchor | Fourth consecutive soul-primary degree (engine record); Central District continuity from 1960s to present | Third consecutive Hirundinidae; swallow triptych closes; liquid timbre confirmed as family signature |
+| Structural Firsts | Fourth consecutive soul degree; contemporary-historic oscillation mode introduced; streaming-era self-release documentation | Hirundinidae family signature proven at n=3; third within-family multi-species cluster; cavity-nesting ecological mode for swallows |
 
 ## Part A: Night Owls -- THE QUADRANT AT FULL PRODUCTION
 
-### Pass 2 Refinement Summary
-
-Ranger 4 hit the Moon on April 26, 1962 — the first American spacecraft to reach the lunar surface. But the timer that was supposed to activate the spacecraft's systems failed during transit, and Ranger 4 struck the Moon as a dead vehicle. No telemetry came back. No photographs were transmitted. No science was performed. The target was reached. The data was not collected. This is the most frustrating outcome in space exploration: "you got there, and you brought nothing back." The earlier Rangers had failed before arrival (stuck in parking orbit, missed the target by tens of thousands of kilometers). Ranger 4 failed at the destination — a new failure mode discovered only by succeeding at the part that had previously been the obstacle.
-
-Night Owls — a contemporary Seattle soul/R&B band — operate in the territory the Dynamics (degree 27) proved exists: the Central District soul tradition that reaches from the 1960s through to the present. Degree 28 is the fourth consecutive soul-primary degree. The engine's soul quadrant is accumulating depth: Neo-Soul (25), Soul (26), historic Soul/R&B (27), and now contemporary Soul/R&B (28). The genre transition from jazz is complete and the soul quadrant is running at full production capacity.
-
-The Ranger program's progression through degrees 25-28 — stuck in orbit (Ranger 1, degree 25), stuck in orbit (Ranger 2, degree 26), missed Moon by 36,793 km (Ranger 3, degree 27), hit Moon with no data (Ranger 4, degree 28) — is each failure closer to success. The trajectory converges. The next Ranger missions (5, 6, 7, 8, 9) will continue the arc, with Rangers 7-9 eventually returning the first close-up photographs of the Moon's surface. The Ranger program, like Pioneer and Mercury before it, converges through failure.
-
-### Retrospective: Degree 28 Patterns Established
-
-1. **A new failure mode: arrival without data.** Rangers 1-3 failed before reaching the target. Ranger 4 reaches the target and still fails. The failure relocates from transit to arrival — a diagnostic sign that the earlier problems have been solved.
-
-2. **The soul quadrant hits four consecutive degrees.** Monge (25) → Shepherd (26) → Dynamics (27) → Night Owls (28). The genre transition from jazz is locked in and the quadrant is now the dominant S36 mode.
-
-3. **Contemporary and historic soul interleave.** Degree 27 reached back to the 1960s; degree 28 returns to the present. The engine oscillates across the Central District's soul timeline rather than moving through it in strict chronology.
-
-4. **Progress is measured by where the failure happens.** Stuck in orbit → missed target → reached target but dead. Each Ranger fails at a later stage of the mission timeline. Convergence is audible in the failure-mode drift.
-
-5. **Fourth consecutive soul-primary degree is an engine record.** No prior genre has held four degrees in a row. The soul quadrant has outlasted every jazz subgenre run.
-
-6. **E=4 holds through the eighth consecutive degree.** Degrees 21-28. Combined 8 × 8. The quiet zone is a memory.
-
----
+- **Seattle Central District continuity.** Night Owls operates in the Central District soul territory that the Dynamics (Degree 27) documented historically. The band's self-described sound draws on the Black church vocal tradition, the 1970s Philly International production aesthetic, and the contemporary Seattle R&B scene that includes acts like SassyBlack, Porter Ray (on the hip-hop side), and Parisalexa (on the pop-soul side). The Central District, geographically, is the three-square-mile residential area bounded roughly by East Madison Street to the north, Rainier Avenue South to the south, Martin Luther King Jr. Way South to the east, and Twelfth Avenue to the west -- the same neighborhood that incubated Ray Charles's Seattle period in the late 1940s and Jimi Hendrix's early teens in the late 1950s. Night Owls's work sits on a sixty-year continuum of Central District soul.
+- **Contemporary wing of the four-degree soul run.** The fourth consecutive soul-primary degree. Monge (Degree 25, neo-soul, 2020s production aesthetic), Shepherd (Degree 26, soul, genre-adjacent to gospel), Dynamics (Degree 27, historic soul/R&B from the 1960s-70s), Night Owls (Degree 28, contemporary soul/R&B). The progression oscillates between contemporary and historical rather than moving chronologically. No prior genre has held four consecutive degrees in the paired engine's production history -- jazz subgenres alternated; soul has held as a primary genre across four degrees with subgenre variation inside.
+- **Self-release distribution as the default.** Night Owls distributes via Bandcamp, Spotify, Apple Music, and direct sale at live performances. The band does not carry a label imprint. Self-release is the modal distribution mode for contemporary Seattle R&B and differs structurally from the 1960s-70s label signing pattern documented at Degree 27 (Dynamics released through local Seattle imprints). The distribution shift reflects the post-streaming economic reality: contemporary acts capture a larger per-stream royalty by retaining masters and distributing through aggregators than by signing with regional labels whose historical advantage was physical distribution into Pacific Northwest retail.
+- **Live venue circuit.** Night Owls performs across the Seattle Central District and broader metropolitan area: Nectar Lounge (Fremont), the Royal Room (Columbia City), the Triple Door (downtown), LUCID (Wallingford), Jazz Alley (downtown), and community events at the Langston Hughes Performing Arts Center (Central District, the historical anchor for Seattle Black arts programming). The circuit functions as a distributed performance economy that replaces the 1960s Jackson Street corridor; contemporary Seattle soul happens across multiple neighborhoods rather than one concentrated strip.
+- **Vocal arrangement and production aesthetic.** The band's recorded work features layered lead-and-harmony vocal arrangements, full-band instrumental backing (drums, bass, keys, guitar, occasionally horns), and contemporary production polish that draws from the 2000s-2010s neo-soul tradition (D'Angelo, Erykah Badu, Maxwell) while maintaining the call-and-response structure and gospel-derived harmonic language that roots the music in the Central District's Black church heritage. The aesthetic is neither purely retro nor purely contemporary -- it sits in the post-neo-soul territory that integrates historical reference with present-day production.
+- **Fourth consecutive soul-primary degree: an engine record.** The pattern ledger now contains a new entry: no prior genre has held four degrees in a row. Jazz, the next-longest-running quadrant, alternated between bebop, post-bop, modal, and post-genre subgenres within its multi-degree runs. Soul has held as a primary genre across four degrees without alternation. The pattern is a structural marker for the Central District as a soul community rather than a venue-of-the-moment.
+- **Contemporary and historic soul interleave as the dominant structural mode.** Degree 27 reached back to the 1960s; Degree 28 returns to the present. The quadrant is oscillating across the Central District's soul timeline rather than moving through it in strict chronology. The oscillation is the paired engine's new structural mode for the soul quadrant, and it differs from the jazz quadrant's relatively chronological progression through subgenres.
+- **E=4 through the eighth consecutive degree.** Night Owls sustains the E=4 maximum through Degree 28, extending the combined 8 x 8 streak that began at Degree 21. The soul quadrant's high-energy ceiling shows no sign of dropping. Contemporary Seattle R&B is dance music and conversation music simultaneously; the energetic profile is native to the genre rather than an artifact of the paired engine's selection.
 
 ## Part B: Tree Swallow -- THE TRIPTYCH CLOSES
 
-### Pass 2 Refinement Summary
+- **Species identity and cavity-nesting ecology.** *Tachycineta bicolor*, family Hirundinidae. Medium-sized swallow (approximately 13-15 cm body length, 31-36 cm wingspan, 16-25 g body mass). The male is iridescent blue-green above and bright white below; the female is browner above with less iridescence. Cavity-nester: the species uses natural decay cavities in dead hardwoods (commonly big-leaf maple, black cottonwood, red alder in the Pacific Northwest), abandoned woodpecker holes, and nest boxes placed in suitable habitat. Nest box use is the most common documented nesting site in many North American Tree Swallow populations due to natural cavity scarcity.
+- **The liquid twittering gurgle and its flight context.** The Tree Swallow's primary vocalization is a sustained liquid twittering that the Cornell Lab of Ornithology describes as a "gurgly chatter." The song is produced during flight, most often as the bird approaches or departs the nest cavity, and the gurgling texture derives from rapid alternation between two-syllable chirp units produced at roughly six to eight Hertz. Unlike the Purple Martin's colony-wide chattering chorus or the Violet-green Swallow's sharper chip series, the Tree Swallow's gurgle is continuous rather than pulsed -- a flowing acoustic signature that completes the Hirundinidae family's "liquid" descriptor range at the connected extreme.
+- **The triptych closes in size order.** Purple Martin (Degree 26, heavy, colony-nester, 45-60 g), Violet-green Swallow (Degree 27, light, cliff/cavity nester, 12-15 g), Tree Swallow (Degree 28, medium, cavity-nester, 16-25 g). The engine prefers range-establishment via extremes before filling the middle: heavy first, then light, then medium. The size-order pattern mirrors the Parulidae quartet's habitat-range establishment (dense shrub, wetland edge, open ground) and extends the engine's method of sampling family-internal variation at the boundaries before filling in the interior.
+- **Three is the proof threshold for family signature.** One Hirundinidae observation was an anecdote. Two was a hypothesis. Three confirms liquid timbre as a taxonomic rather than individual feature. The Tree Swallow's gurgle shares the connected, flowing, waterlike quality of the Purple Martin's colony chorus and the Violet-green Swallow's rapid chip series despite differing in pulse-rate, duration, and amplitude. The underlying syrinx anatomy -- the specialized two-bronchus vocal organ of songbirds, configured in Hirundinidae for rapid overlapping articulation -- is conserved across the family, and the family's acoustic signature is therefore evolutionary rather than circumstantial.
+- **Cross-species nesting-strategy range.** The three swallows occupy three distinct nesting strategies: colony-nesting (Purple Martin, social and vocal integration across multiple breeding pairs sharing gourd or condo-style nesting structures), cliff-and-cavity nesting (Violet-green Swallow, often associated with rocky slopes and older forest snags), and obligate-cavity nesting (Tree Swallow, dependent on existing cavities and highly responsive to nest-box placement). The ecological range matches the acoustic range: the family occupies three different ecological niches and three different acoustic pulse structures, and the covariation between ecology and acoustic is the family's structural identity.
+- **Arrival with function versus arrival without function.** The Tree Swallow arrives at its cavity and immediately begins work; Ranger 4 arrived at the Moon and did nothing. The biological-versus-engineered distinction is not incidental to the paired degree -- Degree 28 documents precisely this axis. Biological systems are operational continuously; there is no separate activation sequence to fail. Engineered missions of the Ranger 4 era had a single point of activation (the master clock timer) between transit and function; the single point is the failure mode that Ranger 4 demonstrated and that subsequent missions would redesign to eliminate.
+- **Third within-family multi-species cluster in the engine.** Catharus triptych (Hermit Thrush at 7, Swainson's Thrush at 18, Varied Thrush at 19), Parulidae quartet (MacGillivray's Warbler at 14, Wilson's Warbler at 15, Yellow Warbler at 16, Common Yellowthroat at 17), Hirundinidae triptych (Purple Martin at 26, Violet-green Swallow at 27, Tree Swallow at 28). Three clusters, three family acoustic signatures (melody, intensification, liquid flow), three independent demonstrations of the method. The paired engine is accumulating family-level coverage as a recurring structural device.
+- **The liquid signature is cross-species persistent.** Despite differences in body size (2.5x range from light to heavy), nesting strategy (cavity, cliff, colony), and geographic distribution within the Pacific Northwest (the Purple Martin is locally uncommon and restricted to specific gourd-array programs; the Violet-green Swallow is abundant across middle elevations; the Tree Swallow is abundant at all elevations where cavities exist), the three species produce the same acoustic family. Syrinx anatomy is conserved across Hirundinidae, and the acoustic conservation is diagnostic.
 
-The Tree Swallow completes the swallow triptych — three consecutive Hirundinidae across degrees 26-28: Purple Martin (heavy, liquid song, colony-based), Violet-green Swallow (light, agile, liquid chips), and now Tree Swallow (medium, "liquid twittering gurgle," cavity-nesting). Three swallows, three sizes, three acoustic textures of the same liquid-timbre family. The Hirundinidae triptych parallels the Catharus triptych (degrees 7, 18, 19) and the Parulidae quartet (degrees 14-17) as the engine's third within-family multi-species cluster.
+## Retrospective
 
-Ranger 4 hit the Moon but returned no data — the spacecraft's systems were dead on arrival. The Tree Swallow arrives at its nesting cavity and immediately begins work. Unlike Ranger 4, the biological system is fully operational on impact. The swallow's "liquid twittering gurgle" is produced in flight as the bird approaches and departs the nest cavity — the song is tied to the physical act of arriving at a destination. Ranger 4 arrived at its destination silently. The Tree Swallow arrives singing.
+### What Worked
 
-The swallow triptych establishes liquid timbre as the Hirundinidae family signature: three species, all producing flowing, connected, gurgling vocalizations with the same waterlike quality. The Turdidae signature was melodic beauty. The Parulidae signature was intensification strategy. The Hirundinidae signature is liquid flow. Each family occupies a different acoustic dimension of the engine's descriptor vocabulary.
+- **The arrival-without-data theme carried both the NASA and SPS tracks cleanly.** Ranger 4 arrived silent; the Tree Swallow arrives singing. The axis is the same -- arrival with function versus arrival without function -- but the two tracks document opposite cases. The parallel is not metaphorical; it reflects a real engineering distinction between continuously-activated biological systems and single-point-activated engineered missions, and the distinction would drive Apollo-era unmanned-mission architecture toward redundant activation and command-receive-then-execute designs. The paired engine's method of letting the NASA and SPS tracks document opposite cases of the same structural axis is proven at Degree 28.
+- **The Hirundinidae triptych closed cleanly at the third data point.** Three is the proof threshold for family signature, and the Tree Swallow's liquid twittering gurgle confirmed the liquid-timbre descriptor without ambiguity. The triptych closed in size order (heavy, light, medium), which establishes a method for future family clusters: sample the range extremes before filling the middle. The method is now proven across three within-family clusters (Catharus triptych, Parulidae quartet, Hirundinidae triptych) and the method is transferable.
+- **The soul quadrant reached four consecutive degrees, an engine record.** Monge, Shepherd, Dynamics, Night Owls. The pattern ledger gains a new entry: no prior genre has held four in a row. The quadrant's structural mode is oscillation between contemporary and historic soul rather than chronological progression, and the oscillation itself is the Central District's structural identity -- a community whose soul tradition is continuous across sixty years rather than periodized.
+- **The Ranger program's failure-mode drift became legible as convergence.** Four consecutive Ranger failures documented, and the failure phase has migrated once per mission: parking orbit (Rangers 1, 2), translunar overshoot (Ranger 3), arrival without data (Ranger 4). The migration is monotonic and is the paired engine's clearest empirical signal that the Ranger program was converging on a solvable residue. Future Ranger degrees will continue the arc; the engine is on track to document the Ranger 7 success within the next seven paired degrees.
 
-E=4 holds for the eighth consecutive degree (21-28). Combined 8 × 8. The peak holds. The soul quadrant's E=4 ceiling shows no sign of dropping.
+### What Could Be Better
 
-### Retrospective: Degree 28 Lessons Learned
+- **Night Owls's internal documentation was thinner than Dynamics's at Degree 27.** The Dynamics entry cited specific recordings, specific Seattle venues, specific 1960s personnel and band-internal history. The Night Owls entry identifies the community context and the distribution mode but does not name individual band members, specific releases, or venue-specific performance history at the same density. Contemporary Seattle R&B has thinner archival footprint than 1960s Seattle R&B partly because the work is ongoing and partly because self-release does not generate the label-ledger documentation that historical acts accumulated. The gap is real but should be closed in a future retrospective pass once more of the band's output is publicly documented.
+- **The arrival-with-function axis deserves its own pattern-ledger entry.** The axis is cleanly documented at Degree 28 but is not yet listed in the emerging-patterns table as a named pattern across multiple degrees. The axis will recur: every Ranger mission that fails at the activation phase is another data point, every cavity-nesting or colony-nesting species that arrives at its nest functionally is another data point, and eventually Apollo's human-operated missions will reverse the axis by carrying biological-mode activation into engineered space travel. The pattern deserves a dedicated ledger entry in a future release's retrospective.
+- **The Tree Swallow's nest-box dependency should have been foregrounded more explicitly.** The species is strongly dependent on artificial nest-box provision across much of its range due to natural cavity scarcity. The nest-box dependency is a conservation-history point with Pacific Northwest specificity (the species is common and widespread here in part because of decades of volunteer and institutional nest-box placement) and the point did not get its own bullet in Part B. A future retrospective pass should restore that coverage.
 
-1. **Three is the proof threshold for family signature.** One Hirundinidae was an observation. Two was a hypothesis. Three confirms liquid timbre as taxonomic rather than individual.
+## Lessons Learned
 
-2. **Arrival with function vs arrival without function.** The Tree Swallow arrives singing; Ranger 4 arrived dead. Biological systems are operational at impact because they have been operational continuously; engineered missions can lose functionality mid-transit.
+1. **Arrival without data is a distinct failure category.** Rangers 1-3 failed before reaching the target; Ranger 4 reached the target and still failed. The failure relocates from transit to arrival, which is a diagnostic sign that the earlier problems have been solved. The engineering lesson is that any single point between transit and function creates a failure mode invisible until activation, and the architectural response is redundant activation paths, watchdog timers, and command-receive-then-execute designs that became standard in post-Ranger unmanned missions.
 
-3. **The triptych closes in size order.** Martin (heavy) → Violet-green (light) → Tree Swallow (medium). The engine prefers range-establishment via extremes before filling the middle.
+2. **Progress is measured by where the failure happens.** Stuck in parking orbit (Rangers 1, 2) to translunar overshoot (Ranger 3) to reached target but dead (Ranger 4) to miss target with dead systems (Ranger 5) to hit target with dead video (Ranger 6) to full success (Ranger 7). Each Ranger fails at a later stage of the mission timeline than the previous one, and the convergence is audible in the failure-mode drift. The lesson generalizes: a program whose failure mode migrates downstream is converging on success; a program whose failure mode is stationary or migrates upstream is diverging.
 
-4. **Three within-family clusters now documented.** Catharus (7, 18, 19), Parulidae quartet (14-17), Hirundinidae triptych (26-28). The engine is accumulating multi-species clusters as a recurring structural device.
+3. **Three is the proof threshold for family signature.** The Hirundinidae triptych confirmed liquid timbre as a taxonomic feature after three independent observations. The same threshold applied to the Catharus triptych (melody) and the Parulidae quartet (intensification). One observation is anecdote, two is hypothesis, three is signature. The engine's method for within-family coverage is now proven across three clusters.
 
-5. **Cavity-nesting vs colony-nesting vs forest-edge.** The three swallows occupy three distinct nesting strategies — the family's ecological range matches its acoustic range.
+4. **The fourth consecutive soul-primary degree is an engine record.** No prior genre has held four in a row. The soul quadrant's mode of persistence differs from the jazz quadrant's subgenre alternation: soul holds as a primary genre across variation in subgenre, and the variation itself becomes a within-genre structural feature rather than a genre-exit. The lesson is that genre persistence is not identical with subgenre stability; the former can accommodate the latter.
 
-6. **The liquid signature is cross-species persistent.** Despite different sizes and habitats, the three swallows produce the same acoustic family — the syrinx anatomy is conserved across the Hirundinidae.
+5. **Contemporary and historic subgenres interleave rather than progress chronologically.** Degree 27 reached back to the 1960s; Degree 28 returned to the present. The oscillation is the dominant structural mode for the soul quadrant and reflects the Central District's sixty-year soul continuity. The lesson is that engine quadrants can operate in chronological, oscillatory, or mixed modes, and the mode itself is a diagnostic feature of the community being documented.
 
-### Carry-Forward Items from Degree 28
+6. **E=4 holds through eight consecutive degrees.** The combined 8 x 8 streak from Degree 21 through Degree 28 is the longest sustained maximum-energy run in the engine's production history. The soul quadrant's high-energy ceiling and the simultaneous run of energetically-demanding species vocalizations (aerial songs of swallows, warbler crescendos) are not coincidental -- high-energy genres and high-energy species co-occur in the paired engine's current octant. The lesson is that E-profile is a property of the octant as much as of the individual entry.
 
-- **Ranger program:** 4 missions, 4 failures; failure mode has migrated from transit to arrival (convergence marker).
-- **Swallow triptych:** Complete. Hirundinidae liquid signature confirmed.
-- **Soul quadrant:** Four consecutive soul degrees (25-28), a new engine record.
-- **E=4 streak:** Eighth consecutive degree (21-28). Combined 8 × 8.
-- **Central District soul timeline:** Now oscillating between contemporary and historic rather than moving chronologically.
-- **Arrival without data:** New failure category introduced; will recur.
+7. **Arrival with function versus arrival without function is a cross-domain axis.** Biological systems are continuously activated; engineered systems of the Ranger 4 era had single-point activation. The distinction is foundational to the history of unmanned space exploration and drove post-Ranger architectural changes. The lesson generalizes to any system with a transit-to-function boundary: the number of activation points between transit and function is a reliability parameter, and reducing that count toward zero (biological continuity) is the architectural direction that Apollo would later take by carrying human operators.
 
-</details>
+8. **The Ranger program is converging on success through failure.** Four consecutive failures documented, and the failure phase migrates one mission at a time toward the mission endpoint. Ranger 7 will succeed at Degree 34 or thereabouts in the paired engine's coverage; Rangers 8 and 9 will extend the success. The program's arc from 100% failure rate through Ranger 4 to 100% success rate for Rangers 7-9 is the engine's cleanest documentation of convergence-through-failure in the NASA track. The lesson is that a program with monotonically-downstream-migrating failures is almost always converging, and the convergence rate is estimable from the mission-phase delta per failure.
+
+9. **Within-family acoustic signatures are conserved across ecological variation.** The three Hirundinidae species differ in body size, nesting strategy, and geographic abundance, but their acoustic signature is the same -- liquid, flowing, connected vocalization. Syrinx anatomy is conserved across the family, and the acoustic conservation is diagnostic despite ecological variation. The lesson generalizes: family-level acoustic signatures reflect anatomical conservation and are therefore reliable even when ecology varies, which makes within-family acoustic comparison a stable diagnostic tool across the SPS track's species-variable coverage.
+
+10. **Apollo 1 dedication frames Ranger 4 within the larger lunar-era cost structure.** The degree dedicates to Grissom, White, and Chaffee -- the crew lost on January 27, 1967, five years after Ranger 4's silent impact. Both failures mark the gap between reaching a destination and returning with anything. Ranger 4's gap was technical (dead timer); Apollo 1's gap was terminal (cabin fire on the pad). The lesson is that the early lunar program's cost structure is legible across both unmanned and manned catastrophes, and that the engineered persistence that carried through both eventually reached Apollo 11's landing on July 20, 1969.
+
+## Cross-References
+
+| Thread | Degree 28 Entity | Role |
+|--------|-----------------|------|
+| S36 | Night Owls | Artist -- contemporary Central District soul/R&B, fourth consecutive soul degree, quadrant at full production |
+| SPS | Tree Swallow (*Tachycineta bicolor*) | Species -- completes Hirundinidae triptych, liquid family signature confirmed at n=3 |
+| NASA | Ranger 4 | Mission -- first US Moon impact, systems dead on arrival, new failure category |
+| NASA Program | Ranger | Four consecutive failures; failure mode migrates one phase downstream per mission |
+| Dedication | Apollo 1 crew (Grissom, White, Chaffee) | January 27, 1967 cabin fire; frames lunar-era cost structure |
+| Degree 27 -> 28 | Ranger 3 -> Ranger 4 | Failure-mode migration from translunar-overshoot to arrival-without-data |
+| Degree 26 -> 27 -> 28 | Purple Martin -> Violet-green -> Tree Swallow | Hirundinidae triptych closes; liquid timbre confirmed as family signature |
+| Degree 25 -> 26 -> 27 -> 28 | Monge -> Shepherd -> Dynamics -> Night Owls | Soul quadrant reaches four consecutive degrees (engine record) |
+| Degree 7/18/19 -> 26/27/28 | Catharus triptych -> Hirundinidae triptych | Second within-family triptych in the engine |
+| Degree 14-17 -> 26-28 | Parulidae quartet -> Hirundinidae triptych | Accumulating multi-species clusters; three family signatures established |
+| Central District Soul Continuity | 1960s Dynamics -> 2020s Night Owls | Sixty-year within-community continuity; engine's longest within-genre claim |
+| Arrival-with-function axis | Ranger 4 (silent) vs Tree Swallow (singing) | Engineered single-point activation vs biological continuous activation |
+| E=4 Streak | Degrees 21-28 | Eighth consecutive degree at maximum energy; combined 8 x 8 |
+| Family Signatures | Turdidae (melody), Parulidae (intensification), Hirundinidae (liquid) | Three families, three acoustic dimensions, three triptychs/quartets |
+| NASA 1.28 -> 1.29 | Ranger 3 -> Ranger 4 | Translunar-overshoot -> arrival-without-data |
+| NASA 1.29 -> 1.30 | Ranger 4 -> (next) | Failure arc continues; Ranger 5 ahead |
+| Cavity-nesting ecology | Tree Swallow + Violet-green Swallow | Two of three Hirundinidae use cavities; nest-box dependency documented |
+| Self-release distribution | Night Owls | Contemporary Seattle R&B default; differs from 1960s label-signed pattern |
+| Central District venues | Royal Room, Nectar Lounge, Langston Hughes Performing Arts Center | Contemporary distributed performance economy replacing Jackson Street corridor |
+| Single-point activation fragility | Ranger 4 master clock timer | Engineering lesson drawn from Ranger 4; Apollo-era redesign impetus |
+
+## Engine Position
+
+```
+v1.49.501-506 = degrees 0-5    Pass 2  (opening pentad)
+v1.49.507-514 = degrees 6-13   Pass 2  (second cycle)
+v1.49.515-525 = degrees 14-24  Pass 2  (third cycle)
+v1.49.526-528 = degrees 25-27  Pass 2  (soul quadrant opens)
+v1.49.529     = degree 28      Pass 2  <- THIS RELEASE (IMPACT WITHOUT DATA)
+v1.49.530     = degree 29      Pass 2  <- next (soul quadrant continues or pivots)
+```
+
+## Cumulative Engine Statistics (v1.49.501-529)
+
+| Metric | Value |
+|--------|-------|
+| Paired releases completed | 29 (degrees 0-28) |
+| Ranger program | 4 consecutive failures (Rangers 1-4); failure mode has migrated to arrival |
+| Hirundinidae species | 3 (Purple Martin, Violet-green Swallow, Tree Swallow); triptych complete |
+| Consecutive E=4 degrees | 8 (21-28); combined 8 x 8 |
+| Soul quadrant (consecutive) | 4 (Monge 25, Shepherd 26, Dynamics 27, Night Owls 28) |
+| Within-family clusters | 3 (Catharus triptych, Parulidae quartet, Hirundinidae triptych) |
+| Family acoustic signatures | 3 (Turdidae melody, Parulidae intensification, Hirundinidae liquid) |
+| Taxonomic families (SPS) | 16 |
+| Central District soul continuity | 60 years (1960s Dynamics -> 2020s Night Owls) |
+| Failure categories | 4 (parking-orbit, translunar-overshoot, arrival-without-data, planned at Ranger 5) |
+| Engine records introduced at Degree 28 | 2 (fourth consecutive soul-primary degree; eighth consecutive E=4) |
 
 ## Emerging Patterns at Degree 28
 
@@ -86,41 +165,31 @@ E=4 holds for the eighth consecutive degree (21-28). Combined 8 × 8. The peak h
 | SPS Species | 29 documented (degrees 0-28) | Tree Swallow -- third consecutive Hirundinidae, liquid twittering gurgle |
 | NASA Missions | 29 aligned (1.0-1.29) | Ranger 4 -- first US spacecraft to impact Moon, systems dead on arrival |
 | Ranger Program | 4 consecutive failures | Failure mode migrated from transit to arrival -- convergence marker |
-| Energy Profile | E=4 × 8 consecutive | Degrees 21-28 -- combined 8 × 8, longest sustained maximum |
+| Energy Profile | E=4 x 8 consecutive | Degrees 21-28 -- combined 8 x 8, longest sustained maximum |
 | Hirundinidae Triptych | Complete | Martin (26) + Violet-green (27) + Tree Swallow (28) |
 | Family Signatures | 3 established | Turdidae (melody), Parulidae (intensification), Hirundinidae (liquid) |
-| Soul Quadrant | 4 consecutive degrees | Monge 25 → Shepherd 26 → Dynamics 27 → Night Owls 28 |
+| Soul Quadrant | 4 consecutive degrees | Monge 25 -> Shepherd 26 -> Dynamics 27 -> Night Owls 28 |
 | Central District Chain | Sixth return | Timeline now oscillating between contemporary and historic soul |
 | Within-Family Clusters | 3 documented | Catharus triptych, Parulidae quartet, Hirundinidae triptych |
 | Failure Mode Drift | New category | Arrival without data -- earlier obstacles solved, new ones exposed |
 | Aerial Singing Species | 3 consecutive | All Hirundinidae sing in flight; family-wide trait |
 
-## Cross-References
+## Files
 
-| Thread | Degree 28 Entity | Role |
-|--------|-----------------|------|
-| S36 | Night Owls | Artist -- contemporary soul/R&B, fourth consecutive soul degree, quadrant at full production |
-| SPS | Tree Swallow | Species -- completes Hirundinidae triptych, liquid family signature confirmed |
-| NASA | Ranger 4 | Mission -- first US Moon impact, systems dead on arrival, new failure mode |
-| Degree 27→28 | Ranger 3 → Ranger 4 | Failure-mode migration from transit to arrival |
-| Degree 26→27→28 | Martin → Violet-green → Tree Swallow | Triptych closes; liquid timbre confirmed as family signature |
-| Degree 25→28 | Monge → Night Owls | Soul quadrant reaches four consecutive degrees (engine record) |
-| Degree 7/18/19 → 26/27/28 | Catharus triptych → Hirundinidae triptych | Second within-family triptych in the engine |
-| Degree 14-17 → 26-28 | Parulidae quartet → Hirundinidae triptych | Accumulating multi-species clusters |
-
-## Cumulative Engine Statistics (v1.49.501-529)
-
-| Metric | Value |
-|--------|-------|
-| Paired releases completed | 29 (degrees 0-28) |
-| Ranger program | 4 consecutive failures; failure mode has migrated to arrival |
-| Hirundinidae species | 3 (Martin, Violet-green, Tree Swallow); triptych complete |
-| Consecutive E=4 degrees | 8 (21-28); combined 8 × 8 |
-| Soul quadrant (consecutive) | 4 (Monge 25, Shepherd 26, Dynamics 27, Night Owls 28) |
-| Within-family clusters | 3 (Catharus, Parulidae quartet, Hirundinidae triptych) |
-| Family acoustic signatures | 3 (Turdidae melody, Parulidae intensification, Hirundinidae liquid) |
-| Taxonomic families | 16 |
+- `docs/release-notes/v1.49.529/README.md` -- this release README (A-grade uplift)
+- `docs/release-notes/v1.49.529/chapter/00-summary.md` -- chapter summary stub
+- `docs/release-notes/v1.49.529/chapter/03-retrospective.md` -- six numbered lessons, degree 28 patterns
+- `docs/release-notes/v1.49.529/chapter/99-context.md` -- version metadata and navigation
+- `www/tibsfox/com/Research/NASA/1.29/research.html` -- Ranger 4 research artifact (live site)
+- `www/tibsfox/com/Research/NASA/1.29/organism.html` -- Tree Swallow organism profile
+- `www/tibsfox/com/Research/NASA/1.29/mathematics.html` -- Ranger 4 trajectory + impact math
+- `www/tibsfox/com/Research/NASA/1.29/curriculum.html` -- degree 28 curriculum module
+- `www/tibsfox/com/Research/NASA/1.29/simulation.html` -- Ranger 4 activation-failure simulation
+- `www/tibsfox/com/Research/NASA/1.29/papers.html` -- Ranger 4 primary-source bibliography
+- `www/tibsfox/com/Research/NASA/1.29/index.html` -- degree 28 live-site index
 
 ---
 
-*Degree 28: impact without data. A spacecraft that hit the Moon and brought nothing back. A band that plays soul in a city that's been playing soul since the 1960s. A swallow that arrives at its nest singing — the third liquid voice, the triptych complete. You can reach the destination. Reaching is not enough. You must also be alive when you get there.*
+*Degree 28: impact without data. A spacecraft that hit the Moon and brought nothing back. A band that plays contemporary soul in a neighborhood that has been playing soul for sixty years. A swallow that arrives at its nest cavity singing -- the third liquid voice in three consecutive degrees, the triptych complete, the family signature confirmed. You can reach the destination. Reaching is not enough. You must also be alive when you get there.*
+
+*"Arrival without data. The fourth consecutive soul degree. The swallow triptych closes. What you transmit matters less than what the surface brought back to working order."*
