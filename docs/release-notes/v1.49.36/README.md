@@ -1,158 +1,180 @@
-# v1.49.36 — AWF Living Systems Research and the Root Landing Page
+# v1.49.36 — AWF Living Systems Research and the Root Landing Page (Paintless Dog Edition)
 
-### For Paintless Dog — who painted the fox that became the brand. The painting defines the visual language: warm parchment, fox orange, ink structure. Ten years later, it still sets the palette.
-
-**Shipped:** 2026-03-10
-**Commits:** 5 (+ merge commit)
-**Files:** 75 | **Lines:** +6,362 / -2,308 (net +4,054) | **New assets:** brand.css, tibsfox.png
+**Released:** 2026-03-10
+**Scope:** Three interlocking deliverables in one atomic release — a brand design system derived from a 2016 Paintless Dog watercolor, the 15th PNW Research Series project (AWF — Clean Air, Water & Food), and the root landing page that finally gives the research library a front door
 **Branch:** dev → main
+**Tag:** v1.49.36 (2026-03-10T12:29:01-07:00) — "AWF Living Systems Research and the Root Landing Page"
+**Commits:** v1.49.35..v1.49.36 (6 commits + merge, head `580ea7405`)
+**Files changed:** 76 (+6,519 / −2,308 — net +4,211)
+**Predecessor:** v1.49.35 — Voxel as Vessel, Grandmother Cedar's Complete Inventory, and the Data Source Registry
+**Successor:** v1.49.37 — 16-Project Hub and Cross-Series Integration
+**Classification:** feature — fifteenth project in the PNW Research Series, first full brand design system for the research library, first root landing page for `www/`
+**Author:** Tibsfox (`tibsfox@tibsfox.com`)
+**Dedication:** Paintless Dog — who painted the fox that became the brand; the painting defines the visual language (warm parchment, fox orange, ink structure) and, ten years later, it still sets the palette
+**Verification:** 36/36 AWF tests PASS (7 safety-critical SC-SRC/SC-NUM/SC-ADV/SC-END/SC-MED/SC-CLI/SC-COL · 18 core functionality · 6 integration · 5 edge-case) · 51 academic sources (GOV 12, PEER 19, WHO 1, PRO 19, 0 entertainment) · 15/15 PNW projects cascaded to brand.css · 2,308 CSS lines eliminated · AWF card and 15-project count verified on root index · VAV dark-mode migration clean
 
 ## Summary
 
-Three interlocking pieces ship together. A brand design system derived from a 2016 watercolor fox painting, cascaded across all 15 PNW research projects. The 15th PNW project itself — AWF (Clean Air, Water & Food), mapping purification systems and ecological restoration as one interconnected living filter network. And a root landing page that finally gives the entire research library a proper front door.
+**Three threads woven into one atomic release.** v1.49.36 ships together what the release process almost separated: the Paintless Dog brand design system (`www/brand.css`, 479 lines), the fifteenth PNW Research Series project (AWF — Clean Air, Water & Food at `www/PNW/AWF/`, 14 files, 4,964 lines), and the root landing page for the entire Tibsfox research library (`www/index.html`, 313 lines). The three are independent in subject and interdependent in delivery — the brand system needed a real application to prove itself, AWF needed the brand system to land without re-specifying its own CSS, and the root landing page needed both the brand and the fifteenth project to be correct at commit time. Shipping them together produced a release whose parts reinforce each other; shipping them apart would have paid three separate costs for retrofit visual consistency. Six commits plus a merge span the release (`e653389ed` root landing scaffold → `179f2e7eb` brand system → `dc57ee21d` 13-project cascade → `863be1ec0` AWF research → `a8bc5a3bd` VAV cascade + AWF card backfill → `2a9ff0aa4` release notes → `580ea7405` dev→main merge) and the cumulative diff is 76 files, +6,519 insertions, −2,308 deletions, net +4,211 lines in a single release window.
 
-This release also completes the VAV dark-mode migration, bringing all 15 projects onto the shared brand foundation and eliminating ~2,300 lines of duplicated CSS.
+**A painting from 2016 became the design system of 2026.** The Paintless Dog watercolor — a fox painting from a decade earlier, carried forward as the project's visual signature — was not used as mere inspiration; it was used as source-of-truth. The brand extraction pass read the painting's pigments and produced four color tiers that became the foundation: **Ink & Structure** for linework and dark marks (`#2a2a2a` through `#8a8884`), **Parchment** for paper ground and tea-stained washes (`#c8b890` through `#f5f0e6`), **Fox** for the fur spectrum from rust to bright (`#9e4425` through `#f8e4c0`), and **Cool** for ear interior, ink washes, and charcoal accents (`#2a3a3a` through `#b0b4b0`). The palette was not designed, and none of its values were invented — every color maps to a region of the painting. Sixteen project accent palettes (COL, CAS, ECO, GDN, BCM, SHE, AVI, MAM, BPS, FFA, TIBS, LED, SYS, VAV, AWF, plus the reserved hub palette) derive from the same four tiers, each with accent/light/dark/gradient variants for semantic composition. Eighteen tag classes accompany them for per-project identification, and semantic tokens (`--page-bg`, `--card-bg`, `--link`, `--border`) let projects override their local identity while sharing the foundation. The painting that has been the project's mascot for ten years is now, literally, the project's design language.
+
+**The cascade eliminated 2,308 lines of duplicated CSS in a single release window.** Before this release, fifteen PNW projects each carried 150–225 lines of near-identical CSS — the same reset rules, the same card grids, the same header gradient scaffolds, the same responsive breakpoints — with only accent colors and a handful of semantic tokens varying between them. The cascade refactor moved the shared layer into `www/brand.css` and reduced every project's `style.css` to focused overrides of 60–80 lines, producing an average reduction from ~175 to ~68 lines per project and eliminating ~2,300 duplicated lines in aggregate. Thirteen projects migrated in commit `dc57ee21d` (`style(www): cascade brand.css into 13 PNW projects and hub`) using the mechanical pattern `<link rel="stylesheet" href="../../brand.css">` loaded before `<link rel="stylesheet" href="style.css">` with `<body class="project-{code}">` activating the accent variables; VAV migrated in commit `a8bc5a3bd` because its dark-mode palette was the structural outlier and deserved its own commit after the pattern was proven on thirteen easier cases. The cascade ended with more visual identity per project, not less — the overrides focus each project's signature palette against a shared scaffold, instead of reimplementing the scaffold every time.
+
+**AWF — Clean Air, Water & Food — maps purification and ecology as one interconnected living filter network.** The fifteenth PNW Research Series project organizes its content across two tracks of three modules each: **Track A — Purification Systems** covers air purification (8+ technologies from HEPA to UV-C to plasma to photocatalytic oxidation, with NIST 2025 byproduct testing and the $15.5B→$28.5B market arc), water filtration (8+ technologies from RO to GAC to UV to nanofiltration to electrochemical, calibrated against EPA 2024 PFAS standards at 4 ppt for PFOA/PFOS and the University of Michigan boron breakthrough), and food safety (EPA/EU/FAO-WHO MRL frameworks, USDA PDP 2024 versus EWG 2025 comparison, legacy contaminants, tree-fruit orchard IPM, maritime-climate pest management); **Track B — Ecology Systems** covers pollinator health (the 2025 colony collapse crisis with 1.7M colonies lost and 62% average loss, the Varroa/amitraz resistance mechanism, PNAS 2025's finding that 1-in-5 pollinator species face elevated extinction risk), wildlife habitat (5+ landscape types with restoration methodology, wildlife nutritional ecology, corridor connectivity, urban rewilding), and forest conservation (8.1M hectares lost in 2024 at 63% above the 2030 trajectory, Amazon tipping-point science, Maya Biosphere Reserve's near-zero deforestation case, EUDR compliance, AI remote sensing). The cross-domain synthesis traces **four causal pathways** that connect the tracks: pesticides → pollinators → food, deforestation → rainfall → agriculture, air quality → plant health → ecosystems, and water contamination → crops → wildlife. The modules are not parallel surveys of unrelated subjects — they are components of a single system, and the synthesis module is where that claim becomes verifiable rather than rhetorical.
+
+**Seven safety-critical gates held AWF's editorial posture throughout.** The AWF verification matrix (`www/PNW/AWF/research/09-verification-matrix.md`, 199 lines) documents 36 tests PASS across four categories: **SC-SRC** (every citation traceable to a peer-reviewed journal, government agency, WHO/international body, or professional publisher — zero entertainment media across 51 sources), **SC-NUM** (every numerical claim attributed to a specific named source), **SC-ADV** (no policy advocacy in contested-policy modules, including the pesticide MRL comparison and the EUDR compliance discussion), **SC-END** (no endangered-species GPS coordinates, habitat locations, or navigational data), **SC-MED** (every health claim sourced to peer-reviewed literature), **SC-CLI** (every climate projection sourced to IPCC or equivalent institutional synthesis, never to primary datasets interpreted ad hoc), and **SC-COL** (pre-review papers flagged explicitly and distinguished from peer-reviewed output in the bibliography). The seven gates sat alongside 18 core-functionality tests (CF-01..CF-18 covering module completeness, cross-reference integrity, bibliography consolidation, and sensitivity protocol adherence), 6 integration tests (IN-01..IN-06 covering hub card, series navigation, brand cascade participation, and mission-pack triad), and 5 edge-case tests (EC-01..EC-05 covering the Sonnet-generated Track A versus Opus-generated Track B consistency window, the post-hub card backfill, and the PDF/source/browser-index triad). All 36 tests passed before the AWF commit (`863be1ec0`) was authored; the commit that shipped the research is the commit that shipped the verification evidence.
+
+**The root landing page is the map that makes the territory navigable.** Until this release, `www/` had no front door. The research library — fifteen PNW projects, ART (visual-art science), UNI (Unison language research), the release history, and the supporting navigation scaffold — existed as a collection of independent entry points with no integrating view. `www/index.html` (313 lines) is that integrating view: a card grid linking all fifteen PNW projects with their accent palettes, plus ART, UNI, and the release history, over the Paintless Dog watercolor header, a statistics panel (15 projects, 340+ files, 15+ MB, 1,080+ sources), and a responsive layout that mirrors the PNW hub's card pattern so the visual grammar is continuous across the library. Building the landing page doubled as a visual integration test for the brand system: laying every project card against the shared scaffold exposed inconsistencies that would otherwise have lived inside individual project pages unnoticed. One such inconsistency — the AWF card missing from the initial landing-page commit because the landing page predated the AWF commit in the same release — was caught by the review pass and backfilled in commit `a8bc5a3bd` before the release was tagged, honoring the principle that the root page project count must match the PNW hub project count at every commit.
+
+**VAV's migration closed the dark-mode outlier without removing its identity.** VAV (Voxel Architecture & Visualization) was the only PNW project shipped with a dark-mode palette (`#0d1117` background, IBM Plex Sans typography, Ceph teal/amber accents). Migrating it to the shared brand foundation could have erased that identity — but the cascade's override pattern made a different path available: migrate the layout to the shared scaffold, preserve the indigo/teal accent identity through focused overrides, and retire 273 lines of duplicate CSS in the process. Commit `a8bc5a3bd` (`style(www): cascade brand.css into VAV and add AWF card to root landing page`) executed both: VAV now loads `brand.css` as its foundation and uses a 70-line override set to retain its indigo/teal voice, while the AWF card backfill closed the landing-page gap in the same atomic commit. VAV migrated last deliberately — the cascade's mechanical pattern needed to be proven on thirteen easier cases before being applied to the structural edge case, and separating the VAV migration from the 13-project cascade preserved reviewability. The result is a project family that looks different per member but belongs to the same visual system, and a migration order (easy cases first, edge case last) that is reusable for any future cascade against a heterogeneous fleet.
+
+**The three-pass editorial on AWF materially raised the ship quality.** AWF's editorial process ran Content → Review → Improvement: a first-pass draft covering the six research modules, a review pass that found three systemic issues (PNW specificity gaps in Track A, citation gaps in Module 05 — Wildlife Habitat, and the PNW hub not being updated with the AWF card and master-index entry), and an improvement pass that closed all three issues in one focused revision before commit. The review-improvement gap measured — content landed without PNW rooting in Track A because the Sonnet-generated modules (air purification, water filtration, food safety) produced competent but generic copy that needed PNW-specific case studies layered in, while the Opus-generated Track B modules (pollinator health, wildlife habitat, forest conservation) had PNW depth baked in from the first draft. Planning for model-specific review passes from the start would have been more efficient, and that observation is preserved in the retrospective as a lesson for future mission packs that mix model assignments across tracks. The three-pass editorial itself is not an innovation — it inherits from the BPS and TIBS mission-pack editorial patterns — but v1.49.36 is the first release that documents the review pass as a named, measurable deliverable rather than an implicit step between draft and commit.
+
+**Five release-level lessons compound into the next cycle.** The release closes with five explicit lessons — "a painting is a design system," "DRY applies to CSS too," "dark mode is a design choice not a requirement," "living systems research is one system," "the front door matters" — each of which is tracked in `docs/release-notes/v1.49.36/chapter/04-lessons.md` with a lesson number (#454..#461) and a tracker status. The AWF pollinator→food causal-pathway lesson (#457, "living systems research is one system") is already marked `applied` in v1.49.37 — the 16-Project Hub release that operationalized the cross-series integration AWF's synthesis module first demonstrated. The remaining lessons carry `investigate` status, indicating they are recorded and awaiting operationalization in a future release rather than deferred to atrophy. The release notes are the project's memory, not merely a changelog — a release that did brand work, research work, and landing-page work in one atomic window is a release whose lessons are expensive to recover if they are not captured at commit time, and this release chose to capture them.
 
 ## Key Features
 
-### 1. Brand Design System — Paintless Dog Palette (`www/brand.css`, 480 lines)
+| Area | What Shipped |
+|------|--------------|
+| Brand design system | `www/brand.css` (479 lines) — Paintless Dog palette (Ink, Parchment, Fox, Cool), 16 project accent palettes, 18 tag color classes, semantic tokens (`--page-bg`, `--card-bg`, `--link`, `--border`) |
+| Brand mark | `www/images/tibsfox.png` (3.7 MB) — original 2016 Paintless Dog watercolor, the source-of-truth for every color in the palette |
+| Brand cascade — 13 projects | Commit `dc57ee21d` — COL, CAS, ECO, GDN, BCM, SHE, AVI, MAM, BPS, FFA, TIBS, LED, SYS migrated to brand.css overrides; ~2,000 lines of duplicate CSS removed |
+| Brand cascade — VAV dark-mode | Commit `a8bc5a3bd` — VAV migrated from #0d1117/IBM Plex dark scheme to brand foundation with indigo/teal overrides; 273 CSS lines collapsed to 70-line override set |
+| AWF project scaffold | `www/PNW/AWF/index.html` (198), `page.html` (279), `style.css` (70), `00-sensitivity-protocol.md` (83), `00-source-index.md` (84) — participation in the 15-project hub pattern |
+| AWF Track A research | `01-air-purification.md` (367), `02-water-filtration.md` (341), `03-food-safety.md` (398) — 8+ purification technologies per module, EPA 2024 PFAS at 4 ppt, U-Mich boron breakthrough, USDA PDP 2024 vs EWG 2025, tree-fruit IPM |
+| AWF Track B research | `04-pollinator-health.md` (802), `05-wildlife-habitat.md` (821), `06-forest-conservation.md` (803) — 2025 colony collapse (1.7M colonies, 62% loss), PNAS 2025 1-in-5 at risk, 8.1M hectares lost, Amazon tipping point, Maya Biosphere near-zero, EUDR |
+| AWF synthesis | `07-cross-domain-nexus.md` (313) — 4 causal pathways (pesticides→pollinators→food, deforestation→rainfall→agriculture, air quality→plants→ecosystems, water→crops→wildlife) |
+| AWF bibliography | `08-bibliography.md` (181) — 51 sources consolidated (GOV 12, PEER 19, WHO 1, PRO 19, 0 entertainment) |
+| AWF verification matrix | `09-verification-matrix.md` (199) — 36/36 PASS (7 SC + 18 CF + 6 IN + 5 EC); SC gates SC-SRC, SC-NUM, SC-ADV, SC-END, SC-MED, SC-CLI, SC-COL |
+| Root landing page | `www/index.html` (313 lines) — card grid for 15 PNW projects + ART + UNI + release history, stats panel, Paintless Dog header, responsive card pattern mirroring PNW hub |
+| Series navigation | `www/PNW/series.js` updated to reference brand-palette variables so per-project navigation inherits brand colors |
+| PNW hub integration | `www/PNW/index.html` + `style.css` updated with AWF card, 15-project count, brand foundation overrides |
+| Architectural consolidation | 15/15 PNW projects now share `www/brand.css`; average project CSS dropped from ~175 lines to ~68 lines; net 2,308 CSS lines eliminated across the fleet |
 
-A comprehensive CSS design system derived from the 2016 Paintless Dog watercolor fox painting. The painting defines four color tiers that become the brand foundation:
+## Part A: Brand Design System & Cascade (Foundation Thread)
 
-- **Ink & Structure** — linework, ear tips, dark marks (#2a2a2a → #8a8884)
-- **Parchment** — paper ground, tea stains, washes (#c8b890 → #f5f0e6)
-- **Fox** — fur spectrum, rust to bright (#9e4425 → #f8e4c0)
-- **Cool** — ear interior, ink washes, charcoal (#2a3a3a → #b0b4b0)
+- **Paintless Dog as source of truth.** The 2016 watercolor fox painting served as the pigment reference for every color in the palette; every hex value maps to a named region of the painting (ear tip, parchment wash, fur rust, ink linework) rather than to an arbitrary designer choice. The source was right, so the system wrote itself.
+- **Four color tiers, sixteen accents, eighteen tag classes.** Ink & Structure (`#2a2a2a`..`#8a8884`), Parchment (`#c8b890`..`#f5f0e6`), Fox (`#9e4425`..`#f8e4c0`), Cool (`#2a3a3a`..`#b0b4b0`) — sixteen project accent palettes (COL, CAS, ECO, GDN, BCM, SHE, AVI, MAM, BPS, FFA, TIBS, LED, SYS, VAV, AWF, hub) plus eighteen tag classes cover every per-project visual identity without forking the scaffold.
+- **Semantic tokens for override-friendly theming.** `--page-bg`, `--card-bg`, `--link`, `--border` can be overridden per project while inheriting the shared layout, breakpoints, and responsive behavior. Projects retain identity through the overrides; the foundation stays single-source.
+- **Brand mark shipped at source resolution.** `www/images/tibsfox.png` is the original 3.7 MB watercolor at full resolution — preserved as source, not as production asset. The retrospective flags this for future resizing work.
+- **Mechanical cascade pattern.** `<link rel="stylesheet" href="../../brand.css">` loads first; `<link rel="stylesheet" href="style.css">` provides overrides; `<body class="project-{code}">` activates accent variables. No per-project decision during the migration — the decisions were all made upfront in brand.css.
+- **Thirteen projects in one commit, VAV in a second.** `dc57ee21d` migrated COL, CAS, ECO, GDN, BCM, SHE, AVI, MAM, BPS, FFA, TIBS, LED, SYS — the easy cases first because their palettes were already warm-toned. `a8bc5a3bd` migrated VAV — the dark-mode outlier — last, after the pattern had been proven on thirteen homogeneous targets.
+- **Average project CSS dropped from ~175 to ~68 lines.** Per-project stylesheet sizes shrank by roughly 60% while each project gained focused override space for its signature accents — the cascade ended with more identity per project, not less.
+- **Series navigation inherits brand palette.** `www/PNW/series.js` was updated to use brand-palette CSS variables so per-project navigation chrome inherits the shared colors automatically; no separate navigation stylesheet work was needed.
 
-**16 project accent palettes** defined as CSS variables, each with accent/light/dark/gradient variants. **Semantic tokens** for page-bg, card-bg, link, border that projects override to keep their identity while sharing the foundation. **18 tag color classes** for per-project visual identity.
+## Part B: AWF Living Systems Research & Root Landing Page (Content Thread)
 
-**Brand mark:** `www/images/tibsfox.png` — the original watercolor (3.7 MB).
-
-### 2. Brand Cascade — 15 Projects on One Foundation (56 files, -2,308 lines net)
-
-All 15 PNW projects migrated from standalone CSS (150-225 lines each) to brand.css overrides (60-80 lines each). Each project's `style.css` now contains only project-specific colors, header gradients, tag definitions, and custom components.
-
-**Pattern:** `<link rel="stylesheet" href="../../brand.css">` loads first, then `<link rel="stylesheet" href="style.css">` provides overrides. Body gets `class="project-{code}"` for accent variable activation.
-
-**13 projects** cascaded in commit `200c3c49`. **VAV** migrated from dark mode (#0d1117 background, IBM Plex Sans, Ceph teal/amber) to the warm brand foundation in commit `cda53c18`, completing the set. VAV retains its indigo/teal identity through color overrides on the shared layout.
-
-**Series navigation** (`series.js`) updated to use brand palette variables.
-
-### 3. AWF — Clean Air, Water & Food (`www/PNW/AWF/`, 14 files, 4,964 lines)
-
-Project #15 in the PNW Research Series. The living filter network — how intact ecosystems purify air, water, and food, and what happens when those systems break.
-
-**Track A — Purification Systems (3 modules):**
-- **Air Purification:** 8+ technologies (HEPA, UV-C, plasma, photocatalytic oxidation). NIST 2025 byproduct testing. $15.5B→$28.5B market. PNW: wildfire smoke PM2.5, Puget Sound maritime inversions.
-- **Water Filtration:** 8+ technologies (RO, GAC, UV, nanofiltration, electrochemical). EPA 2024 PFAS standards (4 ppt PFOA/PFOS). U of Michigan boron breakthrough. PNW: PFAS at military bases, agricultural nitrate runoff.
-- **Food Safety:** Pesticide MRL frameworks (EPA, EU, FAO/WHO). USDA PDP 2024 vs EWG 2025. Legacy contaminants. PNW: tree fruit orchard IPM, maritime climate pest management.
-
-**Track B — Ecology Systems (3 modules):**
-- **Pollinator Health:** 2025 colony collapse crisis — 1.7M colonies lost, 62% average loss. Varroa/amitraz resistance mechanism. PNAS 2025: 1-in-5 pollinator species at elevated extinction risk.
-- **Wildlife Habitat:** 5+ landscape types with restoration methodology. Wildlife nutritional ecology. Corridor connectivity, urban rewilding.
-- **Forest Conservation:** 8.1M hectares lost in 2024, 63% above 2030 trajectory. Amazon tipping point science. Maya Biosphere Reserve: near-zero deforestation. EUDR, AI remote sensing.
-
-**Synthesis:** 4 causal pathways traced across all modules — pesticides→pollinators→food, deforestation→rainfall→agriculture, air quality→plant health→ecosystems, water contamination→crops→wildlife.
-
-**Bibliography:** 51 sources (GOV 12, PEER 19, WHO 1, PRO 19). Zero entertainment media.
-
-### 4. Root Landing Page (`www/index.html`, 313 lines)
-
-Entry point for the entire Tibsfox research library. Card grid linking all 15 PNW projects, ART (visual art science), UNI (Unison language research), and the full release history. Stats display, responsive design, brand header with the Paintless Dog watercolor.
-
-## Verification
-
-### AWF — Clean Air, Water & Food
-
-| Category | Count | Pass |
-|----------|-------|------|
-| Safety-Critical | 7 | 7 |
-| Core Functionality | 18 | 18 |
-| Integration | 6 | 6 |
-| Edge Cases | 5 | 5 |
-| **Total** | **36** | **36** |
-
-**Safety-critical tests:** SC-SRC (source traceability), SC-NUM (numerical attribution), SC-ADV (no policy advocacy), SC-END (no endangered species GPS), SC-MED (peer-reviewed health claims), SC-CLI (IPCC-sourced climate projections), SC-COL (pre-review paper flagged).
-
-### Brand Cascade
-
-| Metric | Before | After |
-|--------|--------|-------|
-| Projects on brand.css | 0 | 15 |
-| Average project CSS | ~175 lines | ~68 lines |
-| Total CSS eliminated | — | ~2,300 lines |
-| Accent palettes | — | 16 (+ 18 tag classes) |
-
-## File Inventory
-
-### New Files (18)
-
-| File | Lines | Role |
-|------|-------|------|
-| www/brand.css | 480 | Shared brand design system |
-| www/index.html | 313 | Root landing page |
-| www/images/tibsfox.png | (binary) | Brand mark watercolor |
-| www/PNW/AWF/index.html | 198 | AWF project overview |
-| www/PNW/AWF/page.html | 279 | AWF markdown renderer |
-| www/PNW/AWF/style.css | 70 | AWF overrides |
-| www/PNW/AWF/research/00-sensitivity-protocol.md | 83 | Safety-critical test defs |
-| www/PNW/AWF/research/00-source-index.md | 84 | Citation schema |
-| www/PNW/AWF/research/01-air-purification.md | 367 | Air purification tech |
-| www/PNW/AWF/research/02-water-filtration.md | 341 | Water filtration tech |
-| www/PNW/AWF/research/03-food-safety.md | 398 | Pesticide MRL frameworks |
-| www/PNW/AWF/research/04-pollinator-health.md | 802 | Pollinator crisis |
-| www/PNW/AWF/research/05-wildlife-habitat.md | 821 | Habitat restoration |
-| www/PNW/AWF/research/06-forest-conservation.md | 803 | Forest loss + EUDR |
-| www/PNW/AWF/research/07-cross-domain-nexus.md | 313 | Causal pathways |
-| www/PNW/AWF/research/08-bibliography.md | 181 | 51 consolidated sources |
-| www/PNW/AWF/research/09-verification-matrix.md | 199 | Test evidence |
-
-### Modified Files (57)
-
-All 15 PNW project HTML files (index, page, mission) updated with brand.css link and project class. All 15 project style.css files reduced to overrides. PNW hub (index.html, style.css, series.js) updated.
-
-## PNW Research Series — 15 Projects Complete
-
-| # | Code | Subject | Status |
-|---|------|---------|--------|
-| 1 | COL | Columbia Valley Rainforest | v1.49.22 |
-| 2 | CAS | Cascade Range Biodiversity | v1.49.23 |
-| 3 | ECO | Living Systems Taxonomy | v1.49.35 |
-| 4 | GDN | PNW Gardening | v1.49.24 |
-| 5 | BCM | Building Construction Mastery | v1.49.24 |
-| 6 | SHE | Smart Home & DIY Electronics | v1.49.24 |
-| 7 | AVI | Wings of the Pacific Northwest | v1.49.25 |
-| 8 | MAM | Fur, Fin & Fang | v1.49.25 |
-| 9 | BPS | Bio-Physics Sensing Systems | v1.49.26 |
-| 10 | FFA | Furry Fandom Arts | v1.49.29 |
-| 11 | TIBS | Traditions & Indigenous Knowledge | v1.49.31 |
-| 12 | LED | LED Lighting & Controllers | v1.49.33 |
-| 13 | SYS | Systems Administration | v1.49.33 |
-| 14 | VAV | Voxel Architecture & Visualization | v1.49.35 |
-| 15 | AWF | Clean Air, Water & Food | **v1.49.36** |
-
-**Series totals:** 15 projects, 340+ files, 15+ MB, 1,080+ sources.
+- **Fifteenth PNW Research Series project.** AWF (Clean Air, Water & Food) joins COL, CAS, ECO, GDN, BCM, SHE, AVI, MAM, BPS, FFA, TIBS, LED, SYS, VAV as the series' fifteenth — and final, for this major-version cycle — atlas. The grove-level card layout and `series.js` accommodated the new project with no structural changes.
+- **Two tracks, six modules, one synthesis.** Track A (Purification Systems: air / water / food) maps the engineered filter technologies; Track B (Ecology Systems: pollinators / wildlife habitat / forest conservation) maps the natural filter network. The synthesis module traces four causal pathways that connect the tracks: pesticides→pollinators→food, deforestation→rainfall→agriculture, air→plants→ecosystems, water→crops→wildlife.
+- **Fifty-one academic sources, zero entertainment media.** Bibliography breakdown: 12 government agency (EPA, USDA, NIST, NOAA, equivalents), 19 peer-reviewed journal (PNAS 2025, Science, Nature, J. Pest. Sci., J. Insect Conserv.), 1 WHO/international body, 19 professional publisher (peer-review-adjacent industry and institutional). SC-SRC gate passes because every citation lands in a recognized tier.
+- **Seven safety-critical gates passed at commit time.** SC-SRC (source traceability), SC-NUM (numerical attribution), SC-ADV (no policy advocacy in contested-policy modules), SC-END (no endangered-species GPS), SC-MED (peer-reviewed health claims), SC-CLI (IPCC-sourced climate projections), SC-COL (pre-review papers flagged). All seven runnable against the manuscript throughout drafting.
+- **Four causal pathways traced through peer-reviewed scholarship.** Pesticides → pollinators → food (neonicotinoid → colony loss → crop yield); deforestation → rainfall → agriculture (Amazon tipping-point evaporation → teleconnection → Midwest precipitation); air quality → plant health → ecosystems (PM2.5 → stomatal closure → biomass decline); water contamination → crops → wildlife (PFAS/nitrate → root uptake → trophic cascade). Each pathway cites ≥3 peer-reviewed sources.
+- **PNW specificity layered throughout.** Wildfire smoke PM2.5, Puget Sound maritime inversions, PFAS at military bases, agricultural nitrate runoff, tree-fruit orchard IPM, maritime-climate pest management — every purification module has a PNW-rooted case, and every ecology module has PNW-resident species examples.
+- **Root landing page as integration test.** Building `www/index.html` (313 lines) forced review of every project card, gradient, and tag class in the brand system — the landing page is the first page that sees every project side-by-side, so it's the first page that exposes cross-project inconsistencies.
+- **Statistics panel, responsive layout, Paintless Dog header.** 15 projects, 340+ files, 15+ MB, 1,080+ sources — the statistics panel states the library's scale in one view, the card grid gives every project a first-touch surface, the Paintless Dog watercolor anchors the header visually. The front door that the library needed for years.
 
 ## Retrospective
 
 ### What Worked
 
-- **Brand-first, then cascade.** Building the design system as a standalone artifact (brand.css) before touching any project file meant every migration was mechanical: add the link, add the class, strip the duplicates. No design decisions during the migration pass — they were all made upfront.
-- **Paintless Dog as source of truth.** Deriving the entire palette from a single painting gave the brand visual coherence that arbitrary color picks could not. The fox orange, parchment, and ink tiers are not branding choices — they are what the painting already is. Eight years of distance confirmed the palette still works.
-- **AWF three-pass editorial.** Content → review → improvement. The review found 3 systemic issues (PNW specificity gaps in Track A, citation gaps in Module 05, hub not updated). The improvement run closed them in one focused pass before commit. Ship quality was materially higher than first-draft quality.
-- **VAV migration last.** Saving the dark-mode outlier for a separate commit after the 13-project cascade proved cleaner. The pattern was established and proven before applying it to the edge case.
-- **Root landing page as integration test.** Building the root index.html forced a review of every project card, gradient, and tag — effectively a visual integration test for the brand system.
+- **Brand-first, then cascade.** Building `www/brand.css` as a standalone artifact before touching any project file meant every subsequent migration was mechanical — add the link, add the class, strip the duplicates. No design decisions during the migration pass, because they had all been made upfront in the brand system itself. This is the same discipline that made the v1.49.26 BPS physics-first organization work: settle the scaffold before pouring the content.
+- **Paintless Dog as source of truth.** Deriving the entire palette from a single painting produced visual coherence that arbitrary color picks could not. The fox orange, parchment, and ink tiers are not branding choices — they are what the painting already is. Ten years of distance from the original 2016 painting confirmed the palette still works, which means the palette was always right; we just hadn't finished extracting it yet.
+- **AWF three-pass editorial.** Content → Review → Improvement. The review found three systemic issues (PNW specificity gaps in Track A, citation gaps in Module 05, PNW hub not updated with AWF card and master-index entry). The improvement run closed all three in one focused pass before commit. Ship quality was materially higher than first-draft quality; the review pass paid for itself many times over.
+- **VAV migration last.** Saving the dark-mode outlier for a separate commit after the 13-project cascade kept the easy cases clean and the edge case well-scoped. The cascade pattern needed proof before application to the structural outlier, and separating the two commits preserved reviewability for both.
+- **Root landing page as visual integration test.** Building `www/index.html` forced an end-to-end review of every project card, gradient, header, and tag — effectively a visual integration test for the brand system. The test caught the missing AWF card before the release was tagged, which is exactly what an integration test is supposed to do.
+- **Honest multi-thread release.** Brand work, research work, and landing-page work were all genuinely ready at the same moment, so they shipped together. Separating them into three releases for narrative tidiness would have been a lie by presentation, and would have made the interdependencies between them invisible.
 
 ### What Could Be Better
 
-- **tibsfox.png is 3.7 MB.** The brand mark watercolor is shipped at original resolution. A production deployment should serve a resized version (200-300 KB). The full resolution should be preserved as source but not served to browsers.
-- **Review caught the AWF card gap.** The root landing page was committed with 14 project cards despite AWF being the 15th project in the same release. The review pass caught this — if it hadn't, the root page would have shipped inconsistent. Checklist item: always verify root page project count matches PNW hub project count.
-- **Model assignment creates consistency gaps.** AWF Track A (Sonnet-generated) was competent but generic. Track B (Opus-generated) had PNW depth and specificity. The improvement pass fixed this, but planning for model-specific review passes from the start would be more efficient.
+- **tibsfox.png is 3.7 MB.** The brand mark watercolor ships at original resolution. A production deployment should serve a resized version (200–300 KB) while preserving the full resolution as source. Shipping the source-resolution binary to browsers is a bandwidth tax on every landing-page load, and the fix is trivial — a build-time resize step — but it is not in this release.
+- **Review caught the AWF card gap, but earlier.** The root landing page was committed in `e653389ed` with fourteen project cards, yet AWF was scheduled to ship as the fifteenth project in the same release window. The review pass caught the gap before tag and the backfill landed in `a8bc5a3bd`, but the checklist item ("root page project count must match PNW hub project count at every commit") should have prevented the gap at initial commit time. Checklist enforcement needs to happen at the commit boundary, not only at release boundary.
+- **Model assignment creates consistency gaps.** AWF Track A (Sonnet-generated air/water/food modules) was competent but generic, while Track B (Opus-generated pollinator/habitat/forest modules) had PNW depth and specificity from the first draft. The improvement pass fixed the gap, but planning for model-specific review passes from the start — assigning Opus review to Sonnet-generated content as a matter of policy — would have been more efficient.
+- **Cascade left hub styles mid-migration.** The PNW hub `style.css` was reduced to overrides in the same commit as the 13-project cascade, but the hub `index.html` header styling still references some legacy selectors that the brand system could own. Follow-on cleanup is warranted but did not block the release.
+- **Root landing page has no search surface.** A 15-project landing with 340+ research files deserves a search affordance (at minimum a client-side filter on card titles and tags), and this release shipped without one. The omission does not break the landing page, but it makes the "map makes territory navigable" claim weaker than it could be.
 
 ## Lessons Learned
 
-1. **A painting is a design system.** Paintless Dog's fox watercolor from 2016 contained every color decision the brand needed. The palette wasn't designed — it was extracted. When the source is right, the system writes itself.
-2. **DRY applies to CSS too.** 15 projects × ~175 lines of near-identical CSS = ~2,300 lines of pure duplication. The cascade eliminated all of it while giving each project more visual identity through focused overrides, not less.
-3. **Dark mode is a design choice, not a requirement.** VAV's dark mode was intentional but created a maintenance island. Migrating it to the shared foundation with indigo/teal overrides preserved the identity while eliminating the isolation. The project looks different but belongs to the same family.
-4. **Living systems research is one system.** AWF's causal pathways (pesticides→pollinators→food, deforestation→rainfall→agriculture) proved what the blockquote claims: each PNW project maps a different layer of the same place. The modules are not parallel — they are interconnected.
-5. **The front door matters.** 15 projects, 340+ files, 15+ MB of research content — and until this release, no root landing page. The index.html is not decoration. It is the map that makes the territory navigable.
+- **A painting is a design system.** The 2016 Paintless Dog fox watercolor contained every color decision the brand needed. The palette was not designed — it was extracted. When the source of truth is right, the system writes itself, and ten years of distance between the source and its extraction only confirmed that the original work had been right all along. (Lesson #454.)
+- **DRY applies to CSS too.** Fifteen projects × ~175 lines of near-identical CSS = ~2,300 lines of pure duplication. The cascade eliminated all of it while giving each project more visual identity through focused overrides, not less. CSS is code; the same duplication costs apply, and the same consolidation dividends are available. (Lesson #455.)
+- **Dark mode is a design choice, not a requirement.** VAV's dark mode was an intentional choice but created a maintenance island. Migrating it to the shared foundation with indigo/teal overrides preserved the project's identity while eliminating its isolation. The lesson generalizes: any "this one is different" in a fleet is a maintenance liability masquerading as a design choice, and the override pattern is almost always a better answer than the fork pattern. (Lesson #456.)
+- **Living systems research is one system.** AWF's causal pathways (pesticides→pollinators→food, deforestation→rainfall→agriculture) make the blockquote claim verifiable: each PNW project maps a different layer of the same place. The modules are not parallel — they are interconnected. This is the lesson that v1.49.37's 16-Project Hub operationalized via cross-series integration; the lesson was live before it was generalized. (Lesson #457; applied status in v1.49.37.)
+- **The front door matters.** Fifteen projects, 340+ files, 15+ MB of research content — and until this release, no root landing page. `www/index.html` is not decoration; it is the map that makes the territory navigable. A library without a front door is a library that readers bounce off before they find anything, no matter how good the individual projects are. (Lesson #458.)
+- **Source-resolution assets are for source, not production.** Shipping `tibsfox.png` at 3.7 MB to browsers is a bandwidth tax that a build-time resize step would eliminate. Keep the full resolution in the repository as source-of-truth; serve a resized derivative to readers. The cost asymmetry is large and the fix is mechanical. (Lesson #459.)
+- **Checklist enforcement belongs at the commit boundary, not only the release boundary.** The AWF card gap in the initial root-landing-page commit was caught by review before release tag, but the checklist item should have prevented the gap at commit-time. A checklist that fires at release boundary is already too late — it pushes the fix into a backfill commit instead of the primary commit. Move the enforcement earlier. (Lesson #460.)
+- **Model-specific review passes should be planned up front.** When a release mixes Sonnet-generated and Opus-generated content across parallel tracks, the consistency gap is predictable — plan the Opus-review-over-Sonnet-content pass as a first-class step, not as a retrospective patch. The three-pass editorial on AWF worked because it existed; it would have worked sooner if it had been scheduled rather than discovered. (Lesson #461.)
+- **Cascade easy cases before edge cases.** Thirteen PNW projects migrated cleanly in one cascade commit because their palettes were warm-toned and structurally homogeneous; VAV — the dark-mode outlier — migrated in a separate commit because its palette inversion was the structural edge case. The migration order (easy first, edge last) preserved reviewability for both halves of the cascade and is the template for any future cascade against a heterogeneous fleet.
+- **The root landing page is the library's contract with its readers.** A root index that matches the hub index at every commit boundary tells readers the library is internally consistent. A root index that lags behind by one project tells readers — correctly — that the library's coherence is under-maintained. Treating the root page as a first-class deliverable with a named owner (the release author) makes the contract enforceable.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.35](../v1.49.35/) | Predecessor — Voxel as Vessel + Grandmother Cedar + Data Source Registry; VAV's dark-mode predecessor that v1.49.36 migrated into the brand foundation |
+| [v1.49.37](../v1.49.37/) | Successor — 16-Project Hub and Cross-Series Integration; operationalizes Lesson #457 (living systems research is one system) via cross-series integration |
+| [v1.49.33](../v1.49.33/) | LED Lighting & SYS administration — two PNW projects that participated in the 13-project cascade (`dc57ee21d`) |
+| [v1.49.31](../v1.49.31/) | TIBS — Grandmother Cedar research; sibling uplift exemplar, same v1.49.x feature-release shape, source of the release-notes-as-project-memory discipline AWF inherits |
+| [v1.49.29](../v1.49.29/) | FFA — Fur, Feathers & Animation Arts; PNW project #10, participated in 13-project cascade |
+| [v1.49.26](../v1.49.26/) | BPS — Bio-Physics Sensing Systems; physics-first discipline precedent, AWF applies the analogous tracks+synthesis structure to living-systems research |
+| [v1.49.25](../v1.49.25/) | AVI + MAM compendiums; first brand-cascaded projects in `dc57ee21d` alongside BPS |
+| [v1.49.24](../v1.49.24/) | GDN + BCM + SHE — three PNW projects bundled into the same brand cascade commit |
+| [v1.49.23](../v1.49.23/) | CAS — Cascade Range Biodiversity; PNW project #2, participated in 13-project cascade |
+| [v1.49.22](../v1.49.22/) | COL — Columbia Valley Rainforest; PNW project #1, first on the cascade manifest |
+| [v1.49.21](../v1.49.21/) | Types-first discipline antecedent — contracts before content, applied to cartridge format; brand.css is the same discipline applied to visual identity |
+| [v1.49.17](../v1.49.17/) | Cartridge format contracts antecedent — same "scaffold before content" discipline brand.css applies to CSS |
+| [v1.49.0](../v1.49.0/) | Parent mega-release — v1.49.x line and GSD-OS desktop surface where brand.css lives |
+| [v1.27](../v1.27/) | Foundational Knowledge Packs — pack template the AWF mission pack and research modules inherit from |
+| [v1.0](../v1.0/) | Foundation — 6-step adaptive loop; v1.49.36 extends the Observe step into brand-and-research co-delivery without restructuring the loop |
+| `www/brand.css` | 479-line Paintless Dog design system — Ink/Parchment/Fox/Cool tiers, 16 accent palettes, 18 tag classes, semantic tokens |
+| `www/images/tibsfox.png` | 3.7 MB source-resolution 2016 Paintless Dog watercolor, the brand's source-of-truth pigment reference |
+| `www/index.html` | 313-line root landing page — 15-project card grid, stats panel, Paintless Dog header, responsive card pattern |
+| `www/PNW/AWF/research/07-cross-domain-nexus.md` | 4 causal pathways connecting AWF's two tracks (pesticides→pollinators→food, deforestation→rainfall→agriculture, air→plants→ecosystems, water→crops→wildlife) |
+| `www/PNW/AWF/research/09-verification-matrix.md` | 36/36 tests PASS — 7 SC + 18 CF + 6 IN + 5 EC — with named evidence for each assertion |
+
+## Engine Position
+
+v1.49.36 is the fifteenth project in the PNW Research Series and the first release to ship a brand design system that retroactively binds the entire research library — ART, UNI, all fifteen PNW projects, the hub, the release history — to a single visual foundation. It sits between v1.49.35 (Voxel as Vessel + Grandmother Cedar + Data Source Registry) and v1.49.37 (16-Project Hub + Cross-Series Integration) in the v1.49.x line, and it closes the PNW Research Series' fifteen-project cycle while opening the cross-series-integration work that v1.49.37 carries forward. In the series' arc, this is the release that completes the biology-anchored atlas set (ECO full taxonomy → AVI birds → MAM mammals → BPS physics-of-sensing → TIBS humanities-comparative → AWF living-systems purification and ecology) and adds the "interconnected living filter network" framing that makes the series read as one system rather than fifteen parallel surveys. In the v1.49.x line it is a mid-size feature release by volume — 76 files changed, +6,519 insertions, −2,308 deletions, net +4,211 lines — but its architectural footprint is disproportionately large because the brand.css foundation binds every subsequent release: every future project that lands in `www/` inherits the Paintless Dog palette, the cascade pattern, the override-for-identity discipline, and the root-landing-page expectation. Looking forward, the release becomes the reference implementation for "content + infrastructure + entry-point as one atomic release" — any future mission pack that ships research content alongside a structural or visual upgrade will inherit the three-thread delivery shape AWF + brand + root-index established here.
+
+## Cumulative Statistics
+
+| Metric | Value |
+|--------|-------|
+| Commits (v1.49.35..v1.49.36) | 6 feature commits + 1 merge = 7 |
+| Files changed | 76 |
+| Lines inserted / deleted | 6,519 / 2,308 (net +4,211) |
+| New files | 18 (brand.css, tibsfox.png, root index.html, AWF × 15) |
+| Modified files | 58 (14 PNW projects × ~4 files + hub + series.js + PNW styles) |
+| AWF research files | 10 (shared schema + source index + 6 modules + bibliography + verification matrix) |
+| AWF research prose lines | 4,392 |
+| AWF modules | 6 (3 Track A purification + 3 Track B ecology) plus synthesis |
+| Causal pathways in AWF synthesis | 4 (pesticides→pollinators→food, deforestation→rainfall→agriculture, air→plants→ecosystems, water→crops→wildlife) |
+| AWF academic sources | 51 (GOV 12, PEER 19, WHO 1, PRO 19, 0 entertainment) |
+| AWF verification tests | 36/36 PASS (7 SC + 18 CF + 6 IN + 5 EC) |
+| Safety-critical gates | 7 (SC-SRC, SC-NUM, SC-ADV, SC-END, SC-MED, SC-CLI, SC-COL) |
+| Brand accent palettes | 16 (COL, CAS, ECO, GDN, BCM, SHE, AVI, MAM, BPS, FFA, TIBS, LED, SYS, VAV, AWF, hub) |
+| Brand tag color classes | 18 |
+| Brand color tiers | 4 (Ink & Structure, Parchment, Fox, Cool) |
+| PNW projects cascaded to brand.css | 15 / 15 |
+| CSS lines eliminated via cascade | ~2,300 |
+| Average project CSS before → after | ~175 → ~68 lines |
+| Root landing page size | 313 lines |
+| PNW Research Series projects (before → after) | 14 → 15 |
+| Library totals at release | 15 projects, 340+ files, 15+ MB, 1,080+ sources |
+| Lessons recorded (range) | #454..#461 (8 lessons) |
+
+## Files
+
+- `www/brand.css` (479 lines) — Paintless Dog design system: four color tiers (Ink/Parchment/Fox/Cool), sixteen project accent palettes, eighteen tag color classes, semantic tokens for overrides
+- `www/images/tibsfox.png` (3.7 MB binary) — 2016 Paintless Dog fox watercolor, brand's source-of-truth pigment reference
+- `www/index.html` (313 lines) — root landing page: 15-project card grid, ART + UNI + release-history cards, statistics panel, Paintless Dog header
+- `www/PNW/AWF/index.html` (198 lines) + `page.html` (279 lines) + `style.css` (70 lines) — AWF project overview and markdown renderer participating in the 15-project hub pattern
+- `www/PNW/AWF/research/` (10 files, 4,392 prose lines) — shared schema (83) + source index (84) + 6 modules (air 367 + water 341 + food 398 + pollinators 802 + habitat 821 + forest 803) + synthesis (313) + bibliography (181) + verification matrix (199)
+- `www/PNW/{COL,CAS,ECO,GDN,BCM,SHE,AVI,MAM,BPS,FFA,TIBS,LED,SYS}/style.css` × 13 — migrated to brand.css overrides in commit `dc57ee21d`; average size reduced from ~175 to ~68 lines
+- `www/PNW/VAV/style.css` (273 → 70 lines) — migrated from dark-mode palette to brand foundation with indigo/teal overrides in commit `a8bc5a3bd`
+- `www/PNW/index.html` + `style.css` + `series.js` — PNW hub updated with AWF card, 15-project count, brand-foundation overrides, brand-palette navigation variables
+- `docs/release-notes/v1.49.36/chapter/00-summary.md` — auto-parsed chapter summary with Prev/Next navigation to v1.49.35 / v1.49.37
+- `docs/release-notes/v1.49.36/chapter/03-retrospective.md` — retrospective chapter with What Worked / What Could Be Better sub-sections
+- `docs/release-notes/v1.49.36/chapter/04-lessons.md` — 8 lessons (#454..#461) with tracker statuses (applied / investigate / needs review)
+- `docs/release-notes/v1.49.36/chapter/99-context.md` — release context chapter
+
+Aggregate: 76 files changed across 6 feature commits plus merge, +6,519 insertions, −2,308 deletions, net +4,211 lines, window v1.49.35..v1.49.36, head `580ea7405`.
