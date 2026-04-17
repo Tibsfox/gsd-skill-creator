@@ -4,5 +4,6 @@
 _Parse confidence: 0.50 — source `docs/release-notes/v1.49.558/README.md`_
 ## Summary
 No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned); see `03-retrospective.md`.
 ---
 **Prev:** [v1.49.557](../v1.49.557/00-summary.md) · **Next:** [v1.49.559](../v1.49.559/00-summary.md)
