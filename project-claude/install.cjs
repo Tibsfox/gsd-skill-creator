@@ -129,6 +129,64 @@ function installStandalone(entry) {
   }
 }
 
+// --- Auto-discovery ---
+// block shape:
+//   { "kind": "agents",  "source_dir": "agents",  "target_dir": ".claude/agents",  "pattern": "*.md" }
+//   { "kind": "skills",  "source_dir": "skills",  "target_dir": ".claude/skills",  "pattern": "*/SKILL.md" }
+// Skips any file already listed in manifest.files.standalone[] or .skills[]
+// to avoid double-installing.
+function installAutoDiscover(block, manifest) {
+  const sourceBase = path.join(sourceDir, block.source_dir);
+  if (!fs.existsSync(sourceBase)) {
+    warn(`Auto-discover source missing: ${block.source_dir}`);
+    return;
+  }
+
+  // Build set of already-claimed source paths from the manifest
+  const claimed = new Set();
+  for (const s of (manifest.files.standalone || [])) claimed.add(s.source);
+  for (const s of (manifest.files.skills || [])) claimed.add(s.source);
+
+  const candidates = enumerateMatches(sourceBase, block.source_dir, block.pattern);
+  let found = 0;
+  for (const rel of candidates) {
+    if (claimed.has(rel)) continue; // already handled by manifest
+    found++;
+    const entry = {
+      source: rel,
+      target: path.join(block.target_dir, path.relative(block.source_dir, rel)),
+      description: `[auto-discovered from ${block.source_dir}]`,
+    };
+    installStandalone(entry);
+  }
+  if (found === 0) log(`  = ${block.kind}: no new files to discover`);
+}
+
+// Return source-dir-relative paths matching pattern.
+// Supported patterns: "*.md" (flat), "*/SKILL.md" (one level deep).
+function enumerateMatches(sourceBase, sourceDirRel, pattern) {
+  const out = [];
+  if (pattern === '*.md') {
+    for (const name of fs.readdirSync(sourceBase)) {
+      const full = path.join(sourceBase, name);
+      if (fs.statSync(full).isFile() && name.endsWith('.md')) {
+        out.push(path.join(sourceDirRel, name));
+      }
+    }
+  } else if (pattern === '*/SKILL.md') {
+    for (const name of fs.readdirSync(sourceBase)) {
+      const skillDir = path.join(sourceBase, name);
+      const skillFile = path.join(skillDir, 'SKILL.md');
+      if (fs.statSync(skillDir).isDirectory() && fs.existsSync(skillFile)) {
+        out.push(path.join(sourceDirRel, name, 'SKILL.md'));
+      }
+    }
+  } else {
+    warn(`Unsupported auto-discover pattern: ${pattern}`);
+  }
+  return out;
+}
+
 // --- Skill directory install ---
 function installSkillDir(entry) {
   const sourceBase = path.join(sourceDir, entry.source);
@@ -954,6 +1012,18 @@ function main() {
     log('Skills:');
     for (const entry of manifest.files.skills) {
       installSkillDir(entry);
+    }
+    log('');
+  }
+
+  // Auto-discover: enumerate agents + skills not listed in the manifest.
+  // This lets new files under project-claude/agents/*.md and
+  // project-claude/skills/<name>/SKILL.md flow to .claude/ without
+  // editing manifest.json.
+  if (manifest.files.autoDiscover) {
+    log('Auto-discovery:');
+    for (const block of manifest.files.autoDiscover) {
+      installAutoDiscover(block, manifest);
     }
     log('');
   }
