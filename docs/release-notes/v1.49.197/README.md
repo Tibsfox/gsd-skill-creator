@@ -1,461 +1,247 @@
-# v1.49.197 -- Degree 58: Death Cab for Cutie + Wood Duck
+# v1.49.197 "Degree Fifty-Eight"
 
 **Released:** 2026-04-01
 **Degree:** 58 of 360
-**Part A:** Death Cab for Cutie -- Indie Rock, E=4, Barsuk to Atlantic, Bellingham to Capitol Hill
-**Part B:** Wood Duck (*Aix sponsa*) -- the pond whistle, E=3, lowland pond, Anatidae
+**Part A:** Death Cab for Cutie -- Indie Rock, E=4, 1997-present, Bellingham to Capitol Hill, Barsuk to Atlantic
+**Part B:** Wood Duck (*Aix sponsa*) -- the pond whistle, E=3, lowland pond, Anatidae, cavity nester
 **Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
 **Cluster:** Music (hub: WAL)
+**Scope:** Degree 58 deep research -- Death Cab for Cutie (Indie Rock, E=4) x Wood Duck (*Aix sponsa*, E=3) -- 19 files, the largest single-degree package in engine history (10 album sub-pages plus standard core)
+**Branch:** main
+**Commit:** c721baab6619d3f5d795142d8432bd3d03f02d70
+**Files changed:** 20 (release notes + chapter set + 4 research artifacts + 11 album sub-pages + 1 album index)
 **Note:** Part B substitution -- Wood Duck replaces Red-legged Frog (CSV original) per SPS scope rule: birds and mammals only. Lowland pond habitat preserved. 14th consecutive CSV substitution.
 **Special:** This degree includes 10 individual album sub-pages with deep influence analysis -- the largest single-degree package in engine history (19 files vs standard 8).
+**Dedication:** To the leap of faith -- to Wood Duck ducklings who at one day old climb to the lip of a tree cavity and jump four to twenty meters into the open world below, and to **Ben Gibbard**, **Chris Walla**, **Nick Harmer**, and **Nathan Good** who in 1997 in a Bellingham dorm at Western Washington University started a band named for a Bonzo Dog Doo-Dah Band novelty in The Beatles' *Magical Mystery Tour* and rode the I-5 corridor south to Seattle's Capitol Hill, and to **Jason McGerr** who replaced Good in 2001, and to Walla who departed in 2014 after seventeen years co-architecting the band's sound, and to **Thomas Bewick** whose engraving art lent its surname to a wren the previous degree, and to **Carl Linnaeus** who in 1758 named the most colorful duck in North America *Aix sponsa* -- the waterbird in bridal dress.
+**Engine Position:** Degree 58 of 360 -- 16.1% of the circle; the FIRST INDIE ROCK classification (Genre Stage 40); the folk-adjacent tridecad (45-57) ENDS as the engine's longest single-family run; **Bellingham** enters the engine as the FIRST Bellingham-origin artist and the engine's NORTHERNMOST artist origin; **Anatidae** enters as the 25th avian family; **Anseriformes** enters as the 8th avian order; **THREE CONSECUTIVE NEW ORDERS** (Columbiformes 56, Coraciiformes 57, Anseriformes 58) -- an unprecedented diversification event; the FIRST WATERFOWL and FIRST SWIMMING SPECIES in the engine; the ache (59th acoustic element, artist-side); the pond whistle (59th acoustic element, species-side); The Bellingham Ascent (59th artist-city pattern); E=4 returns after the E=2 three-peat (55-56-57); cavity-nesting chain links Wood Duck (58) to Pileated Woodpecker (54) -- infrastructure inheritor and infrastructure creator; 14th consecutive CSV substitution within the amphibian belt; the largest single-degree package in engine history at 19 files.
 
 ## Summary
 
-The ache and the pond whistle. Degree 58 shatters the folk-adjacent streak at thirteen degrees with **Death Cab for Cutie**, the engine's first **Indie Rock** classification -- Genre Stage 40 -- and the flagship artist of **Barsuk Records**, continuing the Barsuk trio (57-58-59) with its most commercially significant act. E=4 returns after the E=2 three-peat (55-56-57), jolting the engine out of its quietest sustained passage. **Bellingham** enters the engine for the first time as Death Cab's city of origin, the northernmost artist origin yet, formed at Western Washington University before the band migrated south to Capitol Hill and became the defining act of Seattle's indie rock infrastructure. The indie-to-major transition -- Barsuk Records to Atlantic Records -- documents what happens when an independent label's flagship band outgrows the infrastructure that built it. Ten individual album sub-pages with deep influence analysis make this the largest single-degree package in engine history: 19 files versus the standard 8, an unprecedented depth of discographic documentation. On the species side, **Wood Duck** (*Aix sponsa*) enters as the first representative of **Anatidae** (25th family) and **Anseriformes** (8th order), delivering **three consecutive new orders** across degrees 56-57-58 (Columbiformes, Coraciiformes, Anseriformes) -- an accelerating diversification event without precedent. The Wood Duck is the engine's first waterfowl, its first swimming species, a cavity nester in old-growth trees whose ducklings leap from heights of up to 20 meters on their first day of life. The reversed beauty parallel holds: Death Cab is among the most emotionally precise bands in indie rock, hiding extraordinary depth within understated packaging; the Wood Duck is among the most colorful ducks in the world, hiding in forested ponds beneath the canopy. The ache carries. The pond whistle rises.
+The ache and the pond whistle. Degree 58 shatters the folk-adjacent streak at thirteen degrees with **Death Cab for Cutie**, the engine's first **Indie Rock** classification -- **Genre Stage 40** -- and the flagship artist of **Barsuk Records**, continuing the **Barsuk trio** (degrees 57-58-59) with its most commercially significant act. **E=4** returns after the **E=2 three-peat** (55-56-57), jolting the engine out of its quietest sustained passage. **Bellingham** enters the engine for the first time as Death Cab's city of origin, the northernmost artist origin yet, formed at **Western Washington University** before the band migrated south to **Capitol Hill** and became the defining act of Seattle's indie rock infrastructure. The **indie-to-major transition** -- Barsuk Records to **Atlantic Records** -- documents what happens when an independent label's flagship band outgrows the infrastructure that built it. Ten individual album sub-pages with deep influence analysis make this the largest single-degree package in engine history: 19 files versus the standard 8, an unprecedented depth of discographic documentation. On the species side, **Wood Duck** (*Aix sponsa*) enters as the first representative of **Anatidae** (25th family) and **Anseriformes** (8th order), delivering **three consecutive new orders** across degrees 56-57-58 (**Columbiformes**, **Coraciiformes**, Anseriformes) -- an accelerating diversification event without precedent. The Wood Duck is the engine's first waterfowl, its first swimming species, a cavity nester in old-growth trees whose ducklings leap from heights of up to 20 meters on their first day of life. The reversed beauty parallel holds: Death Cab is among the most emotionally precise bands in indie rock, hiding extraordinary depth within understated packaging; the Wood Duck is among the most colorful ducks in the world, hiding in forested ponds beneath the canopy. Both sides of degree 58 mirror each other on the same axis: hidden beauty waiting to be found, beauty that asks the observer to come close. The same degree. In parallel. Both sides. At the same time.
+
+**Death Cab for Cutie** was formed in **Bellingham, Washington** in 1997 by **Ben Gibbard** (vocals, guitar), **Chris Walla** (guitar, production), **Nick Harmer** (bass), and **Nathan Good** (drums, later replaced by **Jason McGerr** in 2001). The band's name comes from a song performed by the **Bonzo Dog Doo-Dah Band** in The Beatles' *Magical Mystery Tour* film (1967) -- a novelty title that belies the seriousness of the music. Bellingham is the engine's northernmost artist origin -- a college town of approximately 90,000 people, home to Western Washington University, situated on **Bellingham Bay** at the northern edge of the Puget Sound, 90 miles north of Seattle and 21 miles south of the Canadian border. The city sits between the **San Juan Islands** to the west and **Mount Baker** to the east, on the ancestral territory of the **Lummi Nation** and the **Nooksack Tribe**. Bellingham's independent music infrastructure in the late 1990s was built around WWU's campus culture: house shows, the **Underground Coffeehouse**, college radio (**KUGS** 89.3 FM), independent record stores, and a network of all-ages venues that served the student population. Death Cab for Cutie formed in this environment -- Gibbard was a WWU student, Walla was engineering in Bellingham -- and the band's early sound carries the insularity and intimacy of a college-town project: music made for a small audience, refined in bedrooms and basements, released on cassettes and CDRs before Barsuk Records provided national distribution. The Bellingham-to-Seattle pipeline that Death Cab exemplifies is a recurring pattern in PNW music: bands form in Bellingham's protected creative environment, build an audience through WWU's infrastructure, and then migrate south to Seattle when they outgrow the college town's capacity.
+
+The **Bellingham Ascent** is the artist-city pattern for degree 58: an artist or band that forms in Bellingham's college-town ecosystem and ascends through Seattle's infrastructure to national and international prominence. The "ascent" captures both the southward migration (Bellingham to Seattle) and the upward trajectory (local band to platinum act). Death Cab for Cutie is the paradigmatic case -- the band that defines what the Bellingham-to-Seattle pipeline produces. The Bellingham Ascent is distinct from **The Export** (degree 0, **Quincy Jones**) in that the artist does not leave the Pacific Northwest but rather moves within it, ascending through the regional infrastructure rather than departing for national centers. Death Cab never became a New York band or a Los Angeles band. They became a Seattle band, which is to say they became a Pacific Northwest band operating from Seattle's infrastructure. The ascent stays within the region. Both sides of degree 58 share this pattern of geographic specificity. In parallel. At the same time. The Wood Duck, too, stays within its region -- a forested pond species whose distribution is tightly bound to the wet, mature, lowland forests of the temperate Pacific Northwest. Each species, each band, mirrors the other on the same axis of place attachment.
+
+The **indie-to-major transition** at degree 58 creates a structural parallel to the **label-bridge pattern** at degree 57 (**Laura Gibson**). Laura Gibson is a Portland artist connected to Seattle through Barsuk Records -- the label as bridge between cities. Death Cab is a Bellingham/Seattle band that bridges independent and major-label infrastructure -- the transition as bridge between economies. Both degrees examine what labels do, how they function as infrastructure, and what happens when artists and labels operate at different scales. The same Barsuk Records anchor sustains both degrees of the trio. In parallel. At the same time. Death Cab released its first four studio albums on Barsuk: *Something About Airplanes* (1998), *We Have the Facts and We're Voting Yes* (2000), *The Photo Album* (2001), and **Transatlanticism** (2003). These four albums built the band from a Bellingham dorm-room project into one of the most important indie rock acts of the 2000s. Barsuk grew with Death Cab -- the label's identity was shaped by the band's trajectory, and the band's identity was shaped by the label's curatorial environment. When Death Cab signed with Atlantic Records for *Plans* (2005), the departure was a milestone not just for the band but for the independent music ecosystem: it tested whether an indie band could move to a major label without losing the qualities that made it essential. The answer was complicated. *Plans* went platinum. The music remained recognizably Death Cab. But something shifted -- the relationship between artist and infrastructure changed, and that change is part of what degree 58 documents.
+
+**Genre Stage 40** marks the engine's first Indie Rock classification. The folk-adjacent zone occupied thirteen genre stages (27-39) across thirteen degrees (45-57), beginning with **Damien Jurado**'s murmur at degree 45 and ending with Laura Gibson's rattle at degree 57 -- the longest single-family run in the engine. Degree 58 breaks the streak cleanly: Death Cab for Cutie's music is built on indie rock's vocabulary of guitar-driven arrangements, rhythmic precision, and lyrical interiority. It shares emotional territory with the folk zone (introspection, literary language, Pacific Northwest geography) but occupies a fundamentally different sonic architecture. The folk singer sits alone with a guitar. The indie rock band builds a four-piece arrangement around the voice. The break is structural, not emotional. The full genre evolution runs **Jazz** (0-15) to **Jazz Fusion** (16) to **Jazz/Comedy** (17) to **Soul/Jazz** (18-19) to **Jazz/R&B** (20) to **Jazz/Funk** (21-22) to **Soul/Jazz** (23-24) to **Neo-Soul** (25) to **Soul** (26) to **Soul/R&B** (27-28) to **Jazz/Funk** (29) to **R&B/Jazz** (30) to **R&B/Soul** (31) to **Pure R&B** (32-33) to **R&B/Soul** (34) to **Blues** (35) to **Blues Rock** (36-37) to **R&B/Soul** (38) to **Blues/Soul** (39) to **Neo-Soul** (40) to **Soul/Blues** (41) to **Gospel/R&B** (42) to **Arena Rock** (43) to **Electronic/R&B** (44) to the folk zone (45-57) to **Indie Rock** (58). Genre Stage 40 -- the fortieth distinct genre classification in 59 degrees. Indie Rock arrives as the successor to the longest genre zone in the engine, carrying forward the literary sensibility and Pacific Northwest rootedness of the folk zone while introducing a new sonic foundation.
+
+**E=4** at degree 58 jolts the engine after the **E=2 three-peat** at **Shelby Earl** (55), **Lemolo** (56), and Laura Gibson (57). Death Cab's commercial profile is substantial: platinum albums (*Plans*, *Narrow Stairs*), major festival headlining slots, a Grammy nomination, mainstream radio airplay, a transition from independent to major label distribution, and a cultural footprint that extends far beyond the Pacific Northwest indie scene. E=4 is the energy of the widely known -- artists whose work has crossed from indie recognition into mainstream cultural awareness without reaching the universal fame of E=5 or E=6. Death Cab is known. Death Cab is played on radio. Death Cab soundtracks television shows and films (*The O.C.* was a pivotal moment). But Death Cab is not **Jimi Hendrix** (E=6, degree 36), not Quincy Jones (E=5, degree 0). E=4 is exactly right. Artist-side energy distribution after degree 58: E1:2 (3.4%), E2:19 (32.2%), E3:13 (22.0%), E4:14 (23.7%), E5:10 (16.9%), E6:1 (1.7%). E=4 rises to 14, closing the gap with E=2's 19. The E=2 three-peat is answered by the E=4 return. The quiet passage ends. Energy rises. Both sides of degree 58 carry this energy lift -- the species side at E=3 still sits in the quiet majority but introduces a conspicuous waterfowl whose colors compete with songbirds for visual attention. In parallel. At the same time. Both sides of the engine confirm a rotation up the energy ladder.
+
+The **Barsuk Records trio** (57-58-59) continues with Death Cab as its centerpiece. Laura Gibson (57) opened the trio's window with folk at E=2. Death Cab (58) is the trio's center -- the band most synonymous with Barsuk Records, the act that put the label on the map, the flagship that defined what Barsuk meant to the independent music world. **The Long Winters** (59) will close the trio. The progression within the Barsuk window traces the label's creative range: from whispered Portland folk through the defining indie rock band to idiosyncratic power pop. **John Roderick** of The Long Winters produced the **Shelby Earl** debut at degree 55, threading the label web back through the folk-adjacent streak and forward into the upcoming trio close. The same label sustains three consecutive degrees. In parallel. At the same time. The species side carries a parallel multi-degree thread through the **cavity-nesting chain** -- **Pileated Woodpecker** at degree 54 excavated the cavities; **Wood Duck** at degree 58 inherits them -- four degrees apart but functionally linked through one ecosystem service. Both sides of degree 58 are embedded in multi-degree infrastructure webs.
+
+**The ache** is the 59th acoustic element in the engine's acoustic progression. On the artist side, the ache enters through Death Cab for Cutie's music as the signature emotional quality of Ben Gibbard's songwriting: a persistent, low-grade emotional pain that saturates the band's catalog from *Something About Airplanes* through *Asphalt Meadows*. The ache is not the scream, not the cry, not the breakdown. It is the sustained awareness of loss, distance, and impermanence that runs beneath the surface of songs about relationships, geography, and time. "I Will Follow You into the Dark" aches. "What Sarah Said" aches. "Transatlanticism" aches across eight minutes of building intensity that never resolves into catharsis -- the ache persists even at the song's loudest moment. The ache is Death Cab's primary instrument: not the guitar, not the drums, but the feeling that something beautiful is already in the process of ending. The ache follows the rattle (degree 57) in the acoustic progression. The contrast is sharp: the rattle was mechanical, non-melodic, percussive -- the sound of bones shaking. The ache is emotional, tonal, sustained -- the sound of a feeling that will not leave. The rattle interrupted the folk zone's quiet. The ache introduces the indie rock zone's emotional register. Where the folk zone's acoustic elements mapped modes of delivery (murmur, confessional, parable tone), the indie rock zone begins with a mode of feeling. The ache is not a technique. It is a condition.
+
+Meanwhile, in a forested lowland pond beside a Cascade foothill stream, a male **Wood Duck** in breeding plumage paddles into a patch of dappled sunlight beneath a canopy of bigleaf maple and Douglas fir. His head is iridescent green and purple with white striping, his eye is red, his bill is red-orange, his breast is chestnut flecked with white, his flanks are buff, and his speculum is iridescent blue-green. He looks like he was painted rather than grown. The female nearby -- gray-brown with a teardrop white eye-ring -- climbs the trunk of a large Douglas fir snag, her sharp claws gripping the bark. She enters a cavity 12 meters above the ground, originally excavated by a Pileated Woodpecker years before. Inside the cavity she lays 11 eggs in a nest lined with down plucked from her own breast. After 30 days of incubation, the ducklings hatch. Within 24 hours of hatching, they climb to the lip of the cavity using sharp claws on their feet, and at the mother's call they jump. They fall 12 meters to the forest floor below, bouncing on impact, their light weight and fluffy down absorbing the shock. The mother leads them to water. The leap holds. *Aix sponsa.* The waterbird in bridal dress. The pond whistle.
+
+**Anatidae** -- the duck, goose, and swan family -- is the 25th avian family in the engine, containing approximately 174 species worldwide. The Wood Duck is the first Anatidae in the engine, the first waterfowl of any kind, and the first species whose primary mode of locomotion includes swimming. For 58 degrees, the engine's species have walked, perched, hopped, flown, hovered, plunge-dived, and climbed. None has swum. The Wood Duck swims. It floats on still water beneath overhanging branches, paddling among fallen logs and emergent vegetation in the lowland ponds and slow-moving streams of the Pacific Northwest. The swimming species arrives. **Anseriformes** is the 8th order in the engine. Order distribution after degree 58: **Passeriformes** 49 (83.1%), **Strigiformes** 1, **Pelecaniformes** 1, **Charadriiformes** 1, **Apodiformes** 1, **Piciformes** 1, Columbiformes 1, Coraciiformes 1, Anseriformes 1. Eight non-passerine orders now represented. Nine total orders. The Passeriformes proportion drops below 84% for the first time. Both sides of degree 58 carry expansion vectors. In parallel. At the same time. Death Cab expands the genre map (first Indie Rock); the Wood Duck expands the order map (Anseriformes enters) and the locomotion map (swimming enters).
+
+**Three consecutive new orders** at degrees 56-57-58 -- **Band-tailed Pigeon** (Columbiformes), **Belted Kingfisher** (Coraciiformes), Wood Duck (Anseriformes) -- has never occurred before in the engine. The previous record was two consecutive new orders (56-57), documented at degree 57. Degree 58 extends the streak to three. The inter-order gaps are compressing dramatically: the gap between Apodiformes (35) and Piciformes (54) was 19 degrees. The gap between Piciformes (54) and Columbiformes (56) was 2 degrees. The gap between Columbiformes (56) and Coraciiformes (57) was 1 degree. The gap between Coraciiformes (57) and Anseriformes (58) is 1 degree. The engine's taxonomic diversification is accelerating. After 49 Passeriformes in 53 entries, the last five entries include four non-passerine orders across three families. The Passeriformes monopoly is not just loosening -- it is fracturing. The same compression is visible on the artist side. The Folk-zone tridecad held thirteen consecutive folk-adjacent degrees. Now Indie Rock breaks the lock at the same degree the Anseriformes breaks the avian lock. Both sides of degree 58 enact the same structural gesture: the lock breaks; the new category arrives. In parallel. At the same time.
+
+The **CSV substitution** at degree 58 replaces **Red-legged Frog** (*Rana aurora*) with Wood Duck. The substitution preserves the **lowland pond habitat** that connects the two species. The Red-legged Frog is a pond-dwelling amphibian of the Pacific Northwest lowlands -- still water, emergent vegetation, overhanging woody debris. The Wood Duck occupies the same habitat: lowland ponds, slow-moving streams, and forested wetlands with standing dead trees for nesting cavities. Both species require still or slow water with adjacent forest. Both are lowland species rather than montane. Both depend on the interface between forest and water. Different classes (amphibian vs. bird), same habitat, same still water. This is the 14th consecutive CSV substitution (degrees 45-58), extending through the amphibian belt of the original CSV. The engine continues replacing amphibians with birds that share the habitat, the energy level, or the ecosystem role. The Red-legged Frog is a species of conservation concern -- listed as threatened under the **Endangered Species Act** in its southern range (California) and declining throughout the Pacific Northwest due to habitat loss, invasive species (particularly the **American Bullfrog**), and degradation of lowland pond habitat. The Wood Duck replacement preserves the conservation dimension: the Wood Duck itself was nearly driven to extinction by market hunting and habitat loss in the 19th century, recovering only through aggressive conservation efforts including the placement of artificial nesting boxes -- one of the great conservation success stories in North American ornithology.
+
+**The pond whistle** is the 59th acoustic element on the species side. The Wood Duck's primary vocalization is a rising, squealing whistle -- *oo-eek* -- a sound that carries across still water with surprising clarity. The male's call is a thin, rising *jeeee* or *ji-ihb*. The female's call is a louder, more emphatic *oo-eek, oo-eek* given in flight and when alarmed. Both calls have a whistling quality that is unlike any previous acoustic element in the engine: not a trill, not a buzz, not a rattle, not a song. It is a whistle -- pure, thin, rising, carrying across the surface of still water. The pond whistle. The pond whistle follows the rattle (degree 57) in the species-side acoustic progression. The contrast mirrors the artist-side transition from rattle to ache: the rattle was harsh, mechanical, percussive; the pond whistle is clean, tonal, directional. The rattle filled a stream corridor with noise. The pond whistle crosses a still pond with a single rising note. Both are quiet relative to songbird song -- neither the Kingfisher's rattle nor the Wood Duck's whistle competes with a thrush or a wren in volume or complexity. But both carry. The rattle carries because it is harsh. The whistle carries because it is pure. Two strategies for being heard across water. Both sides of degree 58 share the principle of quiet that travels: the ache carries across decades; the pond whistle carries across a still pond. In parallel. At the same time. Both sides of the engine confirm that what travels furthest is not what is loudest but what is most precise.
+
+**Cavity nesting** in old-growth trees connects the Wood Duck to the Pileated Woodpecker (degree 54). The female Wood Duck selects a natural cavity in a standing dead or dying tree (typically a large snag -- Douglas fir, bigleaf maple, black cottonwood -- with a cavity excavated originally by a Pileated Woodpecker or enlarged by decay). The nest cavity is typically 4-20 meters above the ground, sometimes higher. The female lines the cavity with down plucked from her breast and lays 7-15 eggs. After 28-37 days of incubation, the ducklings hatch and must leave the nest within 24 hours. The duckling exodus is among the most dramatic events in avian biology. The day-old ducklings -- weighing approximately 20 grams, covered in down, unable to fly -- climb to the cavity entrance using sharp claws on their feet and **leap**. They fall 4-20 meters to the ground or water below, bouncing on impact, their light weight and fluffy down absorbing the shock. The mother calls from below, and the ducklings respond by jumping one after another. Within minutes, all surviving ducklings have made the leap and follow the mother to water. This is the leap of faith that resonates with Death Cab's own leap -- from Barsuk to Atlantic, from indie to major, from the safety of the known to the exposure of the unknown. The same gesture mirrors on both sides of degree 58. In parallel. At the same time.
+
+**The reversed beauty parallel** holds the deepest cross-sync of degree 58. The Wood Duck and Death Cab for Cutie share a structural inversion: extraordinary beauty contained within unexpected packaging. The Wood Duck is among the most colorful ducks in the world -- iridescent greens, purples, chestnuts, whites arranged in patterns of astonishing complexity. But it hides. It lives in forested ponds, under overhanging branches, in the shadows of old-growth canopy. The most beautiful duck in North America is also one of the most hidden. You have to go to the quiet water, to the still pond beneath the trees, to find it. Death Cab for Cutie is among the most emotionally precise bands in indie rock -- the ache in Gibbard's lyrics operates at a level of specificity and sustained feeling that few bands achieve. But the packaging is understated: four musicians in flannel and jeans, moderate tempos, clean guitar tones, no pyrotechnics. The most emotionally devastating band in indie rock looks and sounds, at first listen, like every other indie rock band. Both the duck and the band hide their beauty. Both require attention to reveal their depth. Both reward patience. Both sides of degree 58 mirror each other on the same axis of hidden beauty. In parallel. At the same time. The same organizing principle, manifesting on both sides of the engine, synchronized at the moment the folk-adjacent tridecad ends and the engine pivots into a new acoustic territory.
+
+The ten albums produce ten album sub-pages, each with its own deep influence analysis -- an unprecedented level of discographic documentation in the engine. ***Something About Airplanes*** (1998, Barsuk) is the bedroom origin: lo-fi Bellingham recordings, Gibbard's voice still searching for its register, production by Walla in its rawest form. ***We Have the Facts and We're Voting Yes*** (2000, Barsuk) sharpens the edges; Walla's production cleans the form; "Company Calls" and the title track establish the ache as primary mode. ***The Photo Album*** (2001, Barsuk) refines further; "A Movie Script Ending" and "Styrofoam Plates" introduce anger alongside the ache. ***Transatlanticism*** (2003, Barsuk) is the masterpiece; the title track's eight-minute build is the engine's defining document of sustained longing; "The Sound of Settling" and "The New Year" became indie anthems; the album that made the major-label transition inevitable. ***Plans*** (2005, Atlantic) is the crossing; "Soul Meets Body," "Crooked Teeth," "I Will Follow You into the Dark"; platinum certification; the indie-to-major bridge crossed; the ache survives the transition. ***Narrow Stairs*** (2008, Atlantic) is the darkening; "I Will Possess Your Heart" opens with a four-minute instrumental build; "Cath..." and "No Sunlight"; the band reclaims edge against the polish of *Plans*. ***Codes and Keys*** (2011, Atlantic) is the experiment; synthesizers, electronic textures, a departure from guitar-driven arrangements; divisive; the band tests how far the Death Cab identity can stretch. ***Kintsugi*** (2015, Atlantic) is the fracture repaired; named for the Japanese art of repairing broken pottery with gold; recorded after Walla's departure; the band remakes itself without its co-architect. ***Thank You for Today*** (2018, Atlantic) is the continuation; the first album entirely without Walla's involvement; the ache persists. ***Asphalt Meadows*** (2022, Atlantic) is the late-career statement; renewed energy, sharper arrangements; the band's 10th album proves the ache is not a young person's emotion -- it deepens with time.
+
+Both sides of degree 58 confirm the engine's expansion vectors. Bellingham enters as the engine's third PNW geographic anchor (alongside Seattle and Portland), making the I-5 corridor a triangle rather than a line. Anseriformes enters as the engine's eighth avian order, breaking the Passeriformes proportion below 84% for the first time. Indie Rock enters as Genre Stage 40, the fortieth genre classification in 59 degrees. The Wood Duck swims into the engine's locomotion map as the fifth mode (after perching, flight/hovering, climbing, plunge-diving). E=4 returns after the E=2 three-peat. Three consecutive new orders shatter the Passeriformes monopoly. The folk-adjacent tridecad ends at thirteen. The same degree marks every one of these transitions. In parallel. At the same time. The folk zone, thirteen degrees of whispered intimacy, recedes behind the engine like the shore of a pond seen from the water -- still visible, still beautiful, but no longer where the engine is standing. The cavity was safe. The open water is where you live. The duckling jumps. The band signs. The leap of faith is the structural gesture of degree 58: leaving the cavity for the open water, leaving the label for the arena, leaving the folk zone for indie rock. Ben Gibbard aches from a stage. The Wood Duck whistles from a pond. Both sounds are quiet. Both carry further than they should. Both reward the observer who comes close.
 
 ## Key Features
 
 | Metric | Part A: Death Cab for Cutie | Part B: Wood Duck |
-|--------|---------------------------|-------------------|
-| Genre | Indie Rock | -- |
-| Energy | E=4 | E=3 |
-| Label | Barsuk Records → Atlantic Records | -- |
+|--------|----------------------------|--------------------|
+| Genre | Indie Rock (Genre Stage 40 -- first in engine) | -- |
+| Energy | E=4 (returns after E=2 three-peat 55-56-57) | E=3 (lowland pond, regularly observed) |
+| Label | Barsuk Records (1998-2003) -> Atlantic Records (2005-present) | -- |
 | Family | -- | Anatidae (25th family) |
 | Order | -- | Anseriformes (8th order) |
-| Acoustic Element | the ache (59th) | the pond whistle (59th) |
+| Acoustic Element | the ache (59th, artist-side) | the pond whistle (59th, species-side) |
 | Artist-City Pattern | The Bellingham Ascent (59th) | -- |
-| Structural Firsts | Folk streak breaks at 13, first Indie Rock, E=4 returns, Bellingham enters, indie-to-major, Barsuk flagship | ANATIDAE enters, three consecutive new orders (56-57-58), first waterfowl, first swimming species, cavity nester |
-| Research Words | ~11,000 | ~6,000 |
-| Files Produced | 15 (4 core + 11 album pages) | 4 |
-| Cross-References | 9 | 8 |
-| Album Sub-Pages | 10 (with deep influence analysis per album) | -- |
-
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
-
-## Part A: Death Cab for Cutie -- THE ACHE (E=4, Indie Rock, Barsuk Records → Atlantic Records, Bellingham → Capitol Hill, Folk Streak Breaks at 13, Genre Stage 40 First Indie Rock, E=4 Returns After E=2 Three-Peat, Barsuk Trio Continues 57-58-59 Flagship Artist, Bellingham Enters Engine First Bellingham-Origin Artist, Indie-to-Major Transition, 10 Album Sub-Pages, The Bellingham Ascent 59th Artist-City Pattern)
-
-Full deep research covering Death Cab for Cutie as the folk-streak breaker, the Barsuk Records flagship, and the engine's first Indie Rock classification:
-
-### STRUCTURAL EVENT: FOLK-ADJACENT STREAK BREAKS AT 13 -- Genre Stage 40
-
-Thirteen consecutive folk-adjacent degrees (45-57) -- the tridecad -- end here. Death Cab for Cutie is classified as **Indie Rock**, not Folk, not Indie Folk, not any folk-adjacent variant. Genre Stage 40 marks the engine's first Indie Rock classification. The folk zone occupied thirteen genre stages (27-39) across thirteen degrees, the longest single-family run in the engine. It began with Damien Jurado's murmur at degree 45 and ended with Laura Gibson's rattle at degree 57. Degree 58 breaks the streak cleanly: Death Cab for Cutie's music is built on indie rock's vocabulary of guitar-driven arrangements, rhythmic precision, and lyrical interiority -- it shares emotional territory with the folk zone (introspection, literary language, Pacific Northwest geography) but occupies a fundamentally different sonic architecture. The folk singer sits alone with a guitar. The indie rock band builds a four-piece arrangement around the voice. The break is structural, not emotional.
-
-Full genre evolution: Jazz (0-15) to Jazz Fusion (16) to Jazz/Comedy (17) to Soul/Jazz (18-19) to Jazz/R&B (20) to Jazz/Funk (21-22) to Soul/Jazz (23-24) to Neo-Soul (25) to Soul (26) to Soul/R&B (27-28) to Jazz/Funk (29) to R&B/Jazz (30) to R&B/Soul (31) to Pure R&B (32-33) to R&B/Soul (34) to Blues (35) to Blues Rock (36-37) to R&B/Soul (38) to Blues/Soul (39) to Neo-Soul (40) to Soul/Blues (41) to Gospel/R&B (42) to Arena Rock (43) to Electronic/R&B (44) to **Folk zone (45-57)** to **Indie Rock (58)**. Genre Stage 40 -- the fortieth distinct genre classification in 59 degrees. Indie Rock arrives as the successor to the longest genre zone in the engine, carrying forward the literary sensibility and Pacific Northwest rootedness of the folk zone while introducing a new sonic foundation.
-
-### E=4 RETURNS AFTER E=2 THREE-PEAT
-
-Death Cab for Cutie at E=4. After three consecutive E=2 degrees (Shelby Earl 55, Lemolo 56, Laura Gibson 57) -- the quietest sustained run in the engine -- E=4 returns with force. Death Cab for Cutie's commercial profile is substantial: platinum albums (*Plans*, *Narrow Stairs*), major festival headlining slots, a Grammy nomination, mainstream radio airplay, a transition from independent to major label distribution, and a cultural footprint that extends far beyond the Pacific Northwest indie scene. E=4 is the energy of the widely known -- artists whose work has crossed from indie recognition into mainstream cultural awareness without reaching the universal fame of E=5 or E=6. Death Cab is known. Death Cab is played on radio. Death Cab soundtracks television shows and films (*The O.C.* was a pivotal moment). But Death Cab is not Hendrix (E=6), not Quincy Jones (E=5). E=4 is exactly right.
-
-Artist-side energy distribution after degree 58: E1:2 (3.4%), E2:19 (32.2%), E3:13 (22.0%), E4:14 (23.7%), E5:10 (16.9%), E6:1 (1.7%). E=4 rises to 14, closing the gap with E=2's 19. The E=2 three-peat is answered by the E=4 return. The quiet passage ends. Energy rises.
-
-### BARSUK TRIO CONTINUES (57-58-59) -- Death Cab Is the Flagship
-
-The Barsuk Records trio continues at its second degree. Laura Gibson (57) opened the window with folk at E=2. Death Cab for Cutie (58) is the trio's centerpiece -- the band most synonymous with Barsuk Records, the act that put the label on the map, the flagship that defined what Barsuk meant to the independent music world. The Long Winters (59) will close the trio. The progression within the Barsuk window traces the label's creative range: from whispered Portland folk through the defining indie rock band to idiosyncratic power pop.
-
-Death Cab for Cutie's relationship with Barsuk Records is foundational. The band released its first four studio albums on Barsuk: *Something About Airplanes* (1998), *We Have the Facts and We're Voting Yes* (2000), *The Photo Album* (2001), and *Transatlanticism* (2003). These four albums built the band from a Bellingham dorm-room project into one of the most important indie rock acts of the 2000s. Barsuk grew with Death Cab -- the label's identity was shaped by the band's trajectory, and the band's identity was shaped by the label's curatorial environment. When Death Cab signed with Atlantic Records for *Plans* (2005), the departure was a milestone not just for the band but for the independent music ecosystem: it tested whether an indie band could move to a major label without losing the qualities that made it essential. The answer was complicated. *Plans* went platinum. The music remained recognizably Death Cab. But something shifted -- the relationship between artist and infrastructure changed, and that change is part of what degree 58 documents.
-
-### BELLINGHAM ENTERS THE ENGINE -- First Bellingham-Origin Artist
-
-Death Cab for Cutie was formed in **Bellingham, Washington** in 1997 by **Ben Gibbard** (vocals, guitar), **Chris Walla** (guitar, production), **Nick Harmer** (bass), and **Nathan Good** (drums, later replaced by **Jason McGerr** in 2001). Bellingham is the engine's northernmost artist origin -- a college town of approximately 90,000 people, home to Western Washington University, situated on Bellingham Bay at the northern edge of the Puget Sound, 90 miles north of Seattle and 21 miles south of the Canadian border. The city sits between the San Juan Islands to the west and Mount Baker to the east, on the ancestral territory of the **Lummi Nation** and the **Nooksack Tribe**.
-
-Bellingham's independent music infrastructure in the late 1990s was built around WWU's campus culture: house shows, the Underground Coffeehouse, college radio (KUGS 89.3 FM), independent record stores, and a network of all-ages venues that served the student population. The city's isolation from Seattle (a 90-minute drive without traffic, two hours in practice) created a self-contained scene where bands could develop without the pressure of the Seattle market. Death Cab for Cutie formed in this environment -- Ben Gibbard was a WWU student, Chris Walla was engineering in Bellingham -- and the band's early sound carries the insularity and intimacy of a college-town project: music made for a small audience, refined in bedrooms and basements, released on cassettes and CDRs before Barsuk Records provided national distribution.
-
-The **Bellingham-to-Seattle pipeline** that Death Cab exemplifies is a recurring pattern in PNW music: bands form in Bellingham's protected creative environment, build an audience through WWU's infrastructure, and then migrate south to Seattle when they outgrow the college town's capacity. The pipeline runs through the I-5 corridor, the same highway that connects Portland to Seattle, but 90 miles in the opposite direction. Death Cab's migration from Bellingham to Capitol Hill -- from college dorms to the center of Seattle's indie rock scene -- is the defining instance of this northward pipeline.
-
-### THE BELLINGHAM ASCENT -- FIFTY-NINTH ARTIST-CITY PATTERN
-
-The Bellingham Ascent is the artist-city pattern for degree 58: an artist or band that forms in Bellingham's college-town ecosystem and ascends through Seattle's infrastructure to national and international prominence. The "ascent" captures both the southward migration (Bellingham to Seattle) and the upward trajectory (local band to platinum act). Death Cab for Cutie is the paradigmatic case -- the band that defines what the Bellingham-to-Seattle pipeline produces. The Bellingham Ascent is distinct from the Export (degree 0, Quincy Jones) in that the artist does not leave the Pacific Northwest but rather moves within it, ascending through the regional infrastructure rather than departing for national centers. Death Cab never became a New York band or a Los Angeles band. They became a Seattle band, which is to say they became a Pacific Northwest band operating from Seattle's infrastructure. The ascent stays within the region.
-
-### INDIE-TO-MAJOR TRANSITION -- Barsuk to Atlantic
-
-Death Cab for Cutie's departure from Barsuk Records to Atlantic Records in 2004 is one of the defining events in 2000s independent music. The transition documents what happens when an independent label's flagship band outgrows the infrastructure that built it. Barsuk released four Death Cab albums. Atlantic released the next five. The transition was not acrimonious -- Barsuk and the band maintained a respectful relationship, and the label continued to distribute the earlier catalog. But the structural shift was real: Death Cab moved from independent distribution (Barsuk's network of independent record stores, college radio, and DIY touring) to major-label distribution (Atlantic's radio promotion, retail placement, television licensing, and marketing apparatus).
-
-The indie-to-major transition at degree 58 creates a structural parallel to the label-bridge pattern at degree 57. Laura Gibson (57) is a Portland artist connected to Seattle through Barsuk Records -- the label as bridge between cities. Death Cab (58) is a Bellingham/Seattle band that bridges independent and major-label infrastructure -- the transition as bridge between economies. Both degrees examine what labels do, how they function as infrastructure, and what happens when artists and labels operate at different scales.
-
-### BIOGRAPHY: Death Cab for Cutie -- Bellingham, Capitol Hill, 10 Albums, KEXP Relationship
-
-Death Cab for Cutie is an American indie rock band formed in Bellingham, Washington in 1997. The band's name comes from a song performed by the **Bonzo Dog Doo-Dah Band** in The Beatles' *Magical Mystery Tour* film (1967) -- a novelty title that belies the seriousness of the music. The founding lineup: **Ben Gibbard** (vocals, rhythm guitar, piano), **Chris Walla** (lead guitar, keyboards, production), **Nick Harmer** (bass), and **Nathan Good** (drums). Good was replaced by **Jason McGerr** in 2001. **Chris Walla departed in 2014** after 17 years, replaced by **Dave Depper** and **Zac Rae** in various configurations. Walla's departure was the most significant personnel change in the band's history -- he had produced the first four albums and co-defined the band's sonic identity. The post-Walla era required Death Cab to rebuild its production approach while maintaining continuity.
-
-The band's relationship with **KEXP** (formerly KCMU) is foundational. KEXP was among the first radio stations to champion Death Cab, playing the band's early Barsuk releases when commercial radio would not. Death Cab's trajectory from college-radio darling to mainstream act traces the arc of KEXP itself -- from a University of Washington student station to one of the most influential independent radio stations in the world. The band and the station grew together, each amplifying the other. Death Cab's KEXP in-studio sessions are landmark recordings in the station's archive.
-
-Ten studio albums across 27 years (1998-2025). The discography spans the full arc of independent-to-major, analog-to-digital, college-town-to-arena:
-
-### THE ACHE -- FIFTY-NINTH ACOUSTIC ELEMENT
-
-The ache is the 59th acoustic element in the engine's acoustic progression. On the artist side, the ache enters through Death Cab for Cutie's music as the signature emotional quality of Ben Gibbard's songwriting: a persistent, low-grade emotional pain that saturates the band's catalog from *Something About Airplanes* through *Asphalt Meadows*. The ache is not the scream, not the cry, not the breakdown. It is the sustained awareness of loss, distance, and impermanence that runs beneath the surface of songs about relationships, geography, and time. "I Will Follow You into the Dark" aches. "What Sarah Said" aches. "Transatlanticism" aches across eight minutes of building intensity that never resolves into catharsis -- the ache persists even at the song's loudest moment. The ache is Death Cab's primary instrument: not the guitar, not the drums, but the feeling that something beautiful is already in the process of ending.
-
-The ache follows the rattle (degree 57) in the acoustic progression. The contrast is sharp: the rattle was mechanical, non-melodic, percussive -- the sound of bones shaking. The ache is emotional, tonal, sustained -- the sound of a feeling that will not leave. The rattle interrupted the folk zone's quiet. The ache introduces the indie rock zone's emotional register. Where the folk zone's acoustic elements mapped modes of delivery (murmur, confessional, parable tone), the indie rock zone begins with a mode of feeling. The ache is not a technique. It is a condition.
-
-### DISCOGRAPHY OVERVIEW (10 Albums)
-
-1. ***Something About Airplanes*** (1998, Barsuk) -- The bedroom origin. Lo-fi Bellingham recordings, Gibbard's voice still searching for its register. Production by Chris Walla in its rawest form.
-2. ***We Have the Facts and We're Voting Yes*** (2000, Barsuk) -- The sharpening. Walla's production cleans the edges. Gibbard's lyrics find their precision. "Company Calls" and "Title Track" establish the ache as primary mode.
-3. ***The Photo Album*** (2001, Barsuk) -- The refinement. Tighter arrangements, more confident performances. "A Movie Script Ending" and "Styrofoam Plates" -- anger enters the catalog alongside the ache.
-4. ***Transatlanticism*** (2003, Barsuk) -- The masterpiece. The title track's eight-minute build is the engine's defining document of sustained longing. "The Sound of Settling" and "The New Year" became indie anthems. The album that made the major-label transition inevitable.
-5. ***Plans*** (2005, Atlantic) -- The crossing. First major-label album. "Soul Meets Body," "Crooked Teeth," "I Will Follow You into the Dark." Platinum certification. The indie-to-major bridge is crossed. The ache survives the transition.
-6. ***Narrow Stairs*** (2008, Atlantic) -- The darkening. "I Will Possess Your Heart" opens with a four-minute instrumental build. "Cath..." and "No Sunlight." The band pushes against the polish of *Plans*, reclaiming edge.
-7. ***Codes and Keys*** (2011, Atlantic) -- The experiment. Synthesizers, electronic textures, a departure from guitar-driven arrangements. Divisive among fans. The band tests how far the Death Cab identity can stretch.
-8. ***Kintsugi*** (2015, Atlantic) -- The fracture repaired. Named for the Japanese art of repairing broken pottery with gold. Recorded after Chris Walla's departure. The band remakes itself without its co-architect.
-9. ***Thank You for Today*** (2018, Atlantic) -- The continuation. The first album entirely without Walla's involvement. The ache persists. The band proves it can outlast its founding configuration.
-10. ***Asphalt Meadows*** (2022, Atlantic) -- The late-career statement. Renewed energy, sharper arrangements. The band's 10th album demonstrates that the ache is not a young person's emotion -- it deepens with time.
-
-### ALBUM SUB-PAGES -- 10 Individual Albums with Deep Influence Analysis
-
-Each of the 10 albums receives its own sub-page with deep influence analysis -- an unprecedented level of discographic documentation in the engine. The album sub-pages examine:
-
-1. **Something About Airplanes** -- Influences: Built to Spill's guitar layering, Modest Mouse's Pacific Northwest geography, lo-fi bedroom recording aesthetics of the late 1990s. The Bellingham sound before Seattle shaped it.
-2. **We Have the Facts and We're Voting Yes** -- Influences: The Cure's emotional precision, Sunny Day Real Estate's emo architecture, the sharpening effect of Chris Walla's increasingly confident production.
-3. **The Photo Album** -- Influences: The Smiths' jangle-and-ache formula, New Order's rhythmic drive, the emotional directness of the post-punk revival.
-4. **Transatlanticism** -- Influences: Radiohead's *OK Computer* (scope and ambition), U2's *The Joshua Tree* (landscape as emotional metaphor), Sigur Ros's sustained builds. The album that made Death Cab a generational band.
-5. **Plans** -- Influences: The Postal Service (Gibbard's electronic side project informing the main band), major-label production values meeting indie sensibility, the marriage of accessibility and depth.
-6. **Narrow Stairs** -- Influences: Led Zeppelin's dynamic range (Gibbard has cited), post-punk's angularity, the desire to resist the polish that major-label resources make possible.
-7. **Codes and Keys** -- Influences: Depeche Mode's synthesizer textures, Peter Gabriel's art-rock experiments, the question of whether a guitar band can become an electronic band without losing its identity.
-8. **Kintsugi** -- Influences: The necessity of reinvention after losing a founding member. Rich Costey's production (replacing Walla). The Japanese philosophy of finding beauty in brokenness.
-9. **Thank You for Today** -- Influences: The Cure's late-career consistency, the challenge of remaining relevant across generational shifts, the normalization of the post-Walla lineup.
-10. **Asphalt Meadows** -- Influences: Sonic Youth's noise textures (surprising for Death Cab), the pandemic's compression of time and space, the band's recognition that urgency and age are not opposed.
-
-### CHRIS WALLA DEPARTURE
-
-Chris Walla departed Death Cab for Cutie in 2014 after 17 years as lead guitarist, keyboardist, and producer. Walla produced the first four Death Cab albums (*Something About Airplanes*, *We Have the Facts*, *The Photo Album*, *Transatlanticism*) and co-defined the band's sonic identity: the interlocking guitar lines, the careful dynamics, the production approach that balanced clarity with emotional texture. His departure is the most significant personnel change in the band's history -- more significant than Nathan Good's replacement by Jason McGerr in 2001, because Walla's role extended beyond performance into the architectural decision-making of how Death Cab records sound. The post-Walla era (*Kintsugi*, *Thank You for Today*, *Asphalt Meadows*) required the band to externalize its production process, working with outside producers (Rich Costey, John Congleton) for the first time. The band survived. The ache persists. But the sound changed, and the change is documented across the album sub-pages.
-
----
-
-## Part B: Wood Duck -- THE POND WHISTLE (ANATIDAE 25th Family 8th Order Anseriformes FIRST WATERFOWL, Three Consecutive New Orders 56-57-58, First Swimming Species, Cavity Nester, E=3, Lowland Pond, 14th CSV Substitution Red-legged Frog Replaced, Most Colorful Duck, Reversed Beauty Parallel)
-
-Full deep research covering the Wood Duck as the first Anatidae, the engine's first waterfowl and swimming species, and the completion of three consecutive new orders:
-
-### ANATIDAE ENTERS ENGINE -- 25th Family, 8th Order Anseriformes, First Waterfowl
-
-Triple structural event: new family, new order, new ecological guild. Anatidae -- the duck, goose, and swan family -- is one of the most recognizable bird families in the world, containing approximately 174 species. The Wood Duck is the first Anatidae in the engine, the first waterfowl of any kind, and the first species whose primary mode of locomotion includes swimming. For 58 degrees, the engine's species have walked, perched, hopped, flown, hovered, plunge-dived, and climbed. None has swum. The Wood Duck swims. It floats on still water beneath overhanging branches, paddling among fallen logs and emergent vegetation in the lowland ponds and slow-moving streams of the Pacific Northwest. The swimming species arrives.
-
-Anseriformes is the 8th order in the engine. Order distribution after degree 58: Passeriformes 49 (83.1%), Strigiformes 1, Pelecaniformes 1, Charadriiformes 1, Apodiformes 1, Piciformes 1, Columbiformes 1, Coraciiformes 1, Anseriformes 1. Eight non-passerine orders now represented. Nine total orders. The Passeriformes proportion drops below 84% for the first time.
-
-### THREE CONSECUTIVE NEW ORDERS (56-57-58) -- Unprecedented Diversification
-
-Columbiformes at degree 56 (Band-tailed Pigeon). Coraciiformes at degree 57 (Belted Kingfisher). Anseriformes at degree 58 (Wood Duck). Three consecutive degrees, three new orders. This has never occurred before in the engine. The previous record was two consecutive new orders (56-57), documented at degree 57. Degree 58 extends the streak to three. The inter-order gaps are compressing dramatically: the gap between Apodiformes (35) and Piciformes (54) was 19 degrees. The gap between Piciformes (54) and Columbiformes (56) was 2 degrees. The gap between Columbiformes (56) and Coraciiformes (57) was 1 degree. The gap between Coraciiformes (57) and Anseriformes (58) is 1 degree. The engine's taxonomic diversification is accelerating. After 49 Passeriformes in 53 entries, the last five entries include four non-passerine orders across three families. The Passeriformes monopoly is not just loosening -- it is fracturing.
-
-### TAXONOMY: AIX SPONSA (Linnaeus, 1758)
-
-*Aix* = from the Ancient Greek word for a type of waterbird mentioned by Aristotle. *sponsa* = Latin for "promised one" or "bride," referring to the male's ornate breeding plumage -- the bird is dressed for a wedding. Full translation: "the waterbird in bridal dress." The Wood Duck was described by Carl Linnaeus in 1758, the same year as the Belted Kingfisher -- both are original Linnaean species.
-
-Physical description: 47-54 cm (18.5-21 inches), 450-680 grams. The male Wood Duck in breeding plumage is among the most colorful birds in North America: iridescent green and purple head with white stripes, red eyes, red-orange bill, chestnut breast with white flecks, buff flanks, iridescent blue-green speculum. The female is gray-brown with a distinctive white teardrop-shaped eye ring -- subtle by comparison, but elegantly marked. The male's plumage is so elaborate that early European naturalists struggled to believe it was real -- the colors seem painted rather than grown, ornamental rather than functional. The Wood Duck is the bird that looks like it was designed by an artist who was told there were no constraints.
-
-### CSV SUBSTITUTION: Red-legged Frog Replaced -- Fourteenth Consecutive
-
-Red-legged Frog (*Rana aurora*) replaced by Wood Duck. The substitution preserves the **lowland pond habitat** that connects the two species. The Red-legged Frog is a pond-dwelling amphibian of the Pacific Northwest lowlands -- still water, emergent vegetation, overhanging woody debris. The Wood Duck occupies the same habitat: lowland ponds, slow-moving streams, and forested wetlands with standing dead trees for nesting cavities. Both species require still or slow water with adjacent forest. Both are lowland species rather than montane. Both depend on the interface between forest and water. Different classes (amphibian vs. bird), same habitat, same still water.
-
-This is the 14th consecutive CSV substitution (degrees 45-58), extending through the amphibian belt of the original CSV. The engine continues replacing amphibians with birds that share the habitat, the energy level, or the ecosystem role. The Red-legged Frog is a species of conservation concern -- listed as threatened under the Endangered Species Act in its southern range (California) and declining throughout the Pacific Northwest due to habitat loss, invasive species (particularly the American Bullfrog), and degradation of lowland pond habitat. The Wood Duck replacement preserves the conservation dimension: the Wood Duck itself was nearly driven to extinction by market hunting and habitat loss in the 19th century, recovering only through aggressive conservation efforts including the placement of artificial nesting boxes -- one of the great conservation success stories in North American ornithology.
-
-### FIRST WATERFOWL, FIRST SWIMMING SPECIES
-
-The Wood Duck is the engine's first waterfowl and its first swimming species. This is a fundamental ecological expansion. Previous species occupied four primary locomotion modes: perching (most Passeriformes), flying/hovering (Anna's Hummingbird, degree 35), climbing (Pileated Woodpecker, degree 54), and plunge-diving (Belted Kingfisher, degree 57). Swimming adds a fifth mode. The Wood Duck does not merely visit water (like the Kingfisher, which enters water only to strike prey) -- it lives on water, floating for extended periods, feeding from the water's surface and from shallow depths, sleeping on water, raising its young on water. Water is not a hunting medium for the Wood Duck. It is home.
-
-The arrival of a swimming species changes the engine's habitat coverage. Previous aquatic associations were limited to stream-adjacent species (American Dipper, Belted Kingfisher) and wading species (Great Blue Heron). The Wood Duck introduces the still-water guild: ponds, sloughs, beaver ponds, slow backwaters, and forested wetlands. These are the quiet waters of the Pacific Northwest -- not the dramatic cascading streams of the Cascades but the still, tea-colored ponds of the lowland forest floor, where fallen logs break the surface and cavity trees stand at the water's edge. The engine's aquatic coverage now spans fast streams (Dipper, Kingfisher), tidal margins (Heron), and still ponds (Wood Duck).
-
-### CAVITY NESTING IN OLD-GROWTH TREES
-
-The Wood Duck is a cavity nester -- one of the few duck species that nests in tree holes rather than on the ground. The female selects a natural cavity in a standing dead or dying tree (typically a large snag -- Douglas fir, bigleaf maple, black cottonwood -- with a cavity excavated originally by a Pileated Woodpecker or enlarged by decay). The nest cavity is typically 4-20 meters above the ground, sometimes higher. The female lines the cavity with down plucked from her breast and lays 7-15 eggs. After 28-37 days of incubation, the ducklings hatch and must leave the nest within 24 hours.
-
-The duckling exodus is among the most dramatic events in avian biology. The day-old ducklings -- weighing approximately 20 grams, covered in down, unable to fly -- climb to the cavity entrance using sharp claws on their feet and **leap**. They fall 4-20 meters to the ground or water below, bouncing on impact, their light weight and fluffy down absorbing the shock. The mother calls from below, and the ducklings respond by jumping one after another. Within minutes, all surviving ducklings have made the leap and follow the mother to water. This is the leap of faith that resonates with Death Cab's own leap -- from Barsuk to Atlantic, from indie to major, from the safety of the known to the exposure of the unknown.
-
-The cavity-nesting habit connects the Wood Duck to the Pileated Woodpecker (degree 54) -- the woodpecker excavates the cavities that the Wood Duck later uses. This is an ecosystem service chain: the woodpecker creates infrastructure that the duck inherits. The engine now documents both the creator and the inheritor of cavity infrastructure.
-
-### THE POND WHISTLE -- FIFTY-NINTH ACOUSTIC ELEMENT (Species-Side)
-
-The pond whistle is the 59th acoustic element, species-side. The Wood Duck's primary vocalization is a rising, squealing whistle -- *oo-eek* -- a sound that carries across still water with surprising clarity. The male's call is a thin, rising *jeeee* or *ji-ihb*. The female's call is a louder, more emphatic *oo-eek, oo-eek* given in flight and when alarmed. Both calls have a whistling quality that is unlike any previous acoustic element in the engine: not a trill, not a buzz, not a rattle, not a song. It is a whistle -- pure, thin, rising, carrying across the surface of still water. The pond whistle.
-
-The pond whistle follows the rattle (degree 57) in the species-side acoustic progression. The contrast mirrors the artist-side transition from rattle to ache: the rattle was harsh, mechanical, percussive; the pond whistle is clean, tonal, directional. The rattle filled a stream corridor with noise. The pond whistle crosses a still pond with a single rising note. Both are quiet relative to songbird song -- neither the Kingfisher's rattle nor the Wood Duck's whistle competes with a thrush or a wren in volume or complexity. But both carry. The rattle carries because it is harsh. The whistle carries because it is pure. Two strategies for being heard across water.
-
-### E=3 -- LOWLAND POND ENERGY
-
-E=3 at degree 58 for the Wood Duck. The Wood Duck is readily observed in appropriate habitat -- lowland ponds, slow streams, park ponds, beaver ponds -- and is one of the more frequently encountered waterfowl in the Pacific Northwest's forested lowlands. It is not rare. It is not secretive in the way of rail species or bitterns. But it is not as conspicuous as the Mallard (which dominates urban ponds) or as abundant as geese. The Wood Duck is a forest-interior species that requires specific habitat -- still water adjacent to mature trees with cavities. Its distribution is tied to habitat quality rather than habitat availability. You find Wood Ducks where the forest meets the water and the trees are old enough to have cavities. E=3 captures this: a species that is regularly encountered in good habitat but absent from degraded or urban environments.
-
-Species-side energy distribution after degree 58: E1:5, E2:14, E3:15, E4:22, E5:3. E=3 rises to 15, taking the sole lead over E=2 at 14. E=4 continues to lead overall at 22 (37.3%). The quiet majority (E1+E2+E3) = 34 of 59 (57.6%).
-
-### REVERSED BEAUTY PARALLEL -- The Most Colorful Duck and the Most Emotionally Precise Band
-
-The Wood Duck and Death Cab for Cutie share a structural inversion: extraordinary beauty contained within unexpected packaging. The Wood Duck is among the most colorful ducks in the world -- iridescent greens, purples, chestnuts, whites arranged in patterns of astonishing complexity. But it hides. It lives in forested ponds, under overhanging branches, in the shadows of old-growth canopy. The most beautiful duck in North America is also one of the most hidden. You have to go to the quiet water, to the still pond beneath the trees, to find it. Death Cab for Cutie is among the most emotionally precise bands in indie rock -- the ache in Gibbard's lyrics operates at a level of specificity and sustained feeling that few bands achieve. But the packaging is understated: four musicians in flannel and jeans, moderate tempos, clean guitar tones, no pyrotechnics. The most emotionally devastating band in indie rock looks and sounds, at first listen, like every other indie rock band. Both the duck and the band hide their beauty. Both require attention to reveal their depth. Both reward patience.
-
-### CROSS-REFERENCES
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-057 | Wood Duck (58) | Belted Kingfisher (57) | Consecutive aquatic species. Stream diver vs pond swimmer. Rattle vs pond whistle. Back-to-back-to-back new orders continues. |
-| SPS-056 | Wood Duck (58) | Band-tailed Pigeon (56) | Three consecutive new orders. Columbiformes, Coraciiformes, Anseriformes. Forest canopy vs forest pond. |
-| SPS-054 | Wood Duck (58) | Pileated Woodpecker (54) | Cavity chain. Woodpecker creates cavities; Wood Duck inherits them. Infrastructure creator and infrastructure user. |
-| SPS-052 | Wood Duck (58) | American Dipper (52) | Aquatic guild expansion. Fast stream vs still pond. Stream walker vs pond swimmer. |
-| SPS-014 | Wood Duck (58) | Great Blue Heron (14) | Wetland guild. Heron wades in tidal margins; Wood Duck swims in forest ponds. Both require water-forest interface. |
-| SPS-035 | Wood Duck (58) | Anna's Hummingbird (35) | Iridescence shared. Both species display structural coloration -- light refracted through feather nanostructures rather than pigment. |
-| SPS-001 | Wood Duck (58) | Pacific Wren (1) | Old-growth forest dependence. Wren nests in root tangles; Wood Duck nests in tree cavities. Both require mature forest structure. |
-| SPS-004 | Wood Duck (58) | Northern Spotted Owl (4) | Cavity nesters in old-growth. Both depend on large trees with natural cavities. Both indicators of mature forest health. |
-
----
-
-## Parallel: Death Cab for Cutie x Wood Duck
-
-Five resonance axes:
-
-**1. The leap of faith -- ducklings jump from tree cavities; the band jumped from Barsuk to Atlantic.** Wood Duck ducklings, one day old, climb to the mouth of a cavity 4-20 meters above the ground and jump. They cannot fly. They fall, bounce, survive, and follow their mother to water. Death Cab for Cutie, after four albums on Barsuk Records -- the label that raised them -- jumped to Atlantic Records. They could not know whether they would survive the transition. They fell into the major-label system, bounced, survived, and followed the music to platinum. Both leaps are irreversible. Once the duckling jumps, it cannot climb back into the cavity. Once the band signs with the major, it cannot un-sign. The leap of faith is the defining structural gesture of degree 58: the moment when the safe enclosure is abandoned and the open world is entered for the first time.
-
-**2. Hidden beauty revealed -- the most colorful duck hides in forested ponds; the most emotionally precise band hides within understated arrangements.** The Wood Duck is dressed for a wedding in iridescent green and purple, but it lives in the shadows of pond-side forest where few observers venture. Death Cab for Cutie's emotional devastation is wrapped in clean guitar tones and moderate tempos that do not announce themselves as extraordinary. Both require the observer to come close, to pay attention, to look past the setting and see what is actually there. The pond must be visited. The album must be listened to past the first impression. Beauty hides in both cases -- not because it is ashamed but because it does not need to be seen by everyone. It needs to be seen by the right observer.
-
-**3. Cavity to open water -- the Wood Duck moves from hidden tree cavity to visible pond; Death Cab moved from bedroom 4-track to platinum arena band.** The duckling's journey from cavity to pond is a journey from enclosure to exposure. The cavity is dark, warm, protected. The pond is open, bright, full of predators. The band's journey from Bellingham dorm rooms to Madison Square Garden is the same trajectory at a different scale: from the enclosed safety of the lo-fi bedroom recording to the exposed visibility of the arena stage. Both organisms begin in cavities and end on open water. The cavity provides safety. The open water provides food, growth, and life. The transition is necessary. The leap is the mechanism.
-
-**4. Geographic specificity -- both tied to specific PNW waterways and landscapes.** Death Cab for Cutie's music is saturated with Pacific Northwest geography: Bellingham Bay, Capitol Hill, the I-5 corridor, the rain, the gray light, the mountains visible from the city. "Transatlanticism" is about the distance between Seattle and London, but it is written from Seattle -- the longing radiates outward from a specific place. The Wood Duck is tied to specific PNW waterways: the lowland ponds of the Puget Sound basin, the slow backwaters of Cascade foothill streams, the beaver ponds of the Olympic and Cascade foothills. Both the band and the bird are legible only in the context of their geography. Remove Death Cab from the Pacific Northwest and the music loses its anchor. Remove the Wood Duck from the forested pond and the species loses its habitat. Both are place-specific. Both are PNW-specific. Both carry their geography in their identity.
-
-**5. The ache and the whistle -- both sounds are quiet, precise, and carry further than their volume suggests.** The ache in Death Cab's music is not loud. It does not scream. It persists at a low register, beneath the guitar lines and drum patterns, in the space between Gibbard's words. The Wood Duck's pond whistle is not loud. It does not project like a wren's song or a kingfisher's rattle. It rises -- a thin, clean note crossing still water. Both sounds are quiet. Both are precise. And both carry further than their volume suggests. The ache carries across decades -- people who heard *Transatlanticism* in 2003 still feel it in 2026. The pond whistle carries across the entire surface of a still pond -- a sound that should be inaudible at 100 meters but arrives clearly because still water transmits sound without distortion. Quiet precision travels. The ache and the whistle both prove this.
-
----
-
-## Acoustic Progression (59 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle | 57 | Laura Gibson / Belted Kingfisher |
-| **58** | **the ache / the pond whistle** | **58** | **Death Cab for Cutie / Wood Duck** |
-
-The folk zone's thirteen-element acoustic taxonomy (degrees 45-57) is complete: murmur, confessional, parable tone, held rest, lullaby subversion, intimate architecture, communal harmony, testimony roar, cathedral harmony, fraternal jangle, ember glow, dream haze, the rattle. Degree 58 opens a new acoustic territory. The ache is the first element of the post-folk era -- an emotional register rather than a sonic technique, a feeling rather than a sound. The pond whistle is its species-side counterpart: clean, tonal, rising, carrying across still water. The rattle shook the folk zone apart. The ache and the pond whistle begin building something new.
-
-## Artist-City Patterns (59 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Quiet Polymath | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| **58** | **The Bellingham Ascent** | **58** | **Death Cab for Cutie** |
-
-Fifty-nine named patterns across fifty-nine degrees. The Bellingham Ascent introduces the college-town-to-city pipeline as a named artist-city pattern -- the northward migration from Bellingham's WWU incubator through the I-5 corridor to Seattle's Capitol Hill infrastructure. The Bellingham Ascent is distinct from the Export (degree 0), which leaves the region entirely, and from the Label Bridge (degree 57), which connects cities through institutional infrastructure. The Bellingham Ascent is a physical migration within the region, a band carrying its songs south on the interstate, arriving in Seattle with an identity already formed in the college town's protected creative space.
-
-## Genre Evolution (40 stages at degree 58)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| **40** | **58** | **Indie Rock** | **Death Cab for Cutie** |
-
-Full evolution: Jazz (0-15) to Jazz Fusion (16) to Jazz/Comedy (17) to Soul/Jazz (18-19) to Jazz/R&B (20) to Jazz/Funk (21-22) to Soul/Jazz (23-24) to Neo-Soul (25) to Soul (26) to Soul/R&B (27-28) to Jazz/Funk (29) to R&B/Jazz (30) to R&B/Soul (31) to Pure R&B (32-33) to R&B/Soul (34) to Blues (35) to Blues Rock (36-37) to R&B/Soul (38) to Blues/Soul (39) to Neo-Soul (40) to Soul/Blues (41) to Gospel/R&B (42) to Arena Rock (43) to Electronic/R&B (44) to **Folk zone (45-57)** to **Indie Rock (58)**. Genre Stage 40 -- the fortieth genre stage in the engine. The folk-adjacent streak of thirteen consecutive degrees (genre stages 27-39) ends. Indie Rock arrives as the first non-folk-adjacent genre in fourteen degrees. The break is clean: Death Cab for Cutie's guitar-driven arrangements, rhythmic precision, and four-piece band architecture belong to indie rock's vocabulary, not folk's. The emotional DNA carries forward -- literary lyrics, Pacific Northwest geography, introspective orientation -- but the sonic foundation changes. The folk singer sits alone. The indie rock band builds together.
-
-## Energy Distribution (after degree 58)
-
-**Artist-side:** E1:2 (3.4%), E2:19 (32.2%), E3:13 (22.0%), E4:14 (23.7%), E5:10 (16.9%), E6:1 (1.7%). Previously E6:2 was reported at some degrees but this corrects to E6:1 -- Jimi Hendrix stands alone at E=6. E=4 rises to 14 with Death Cab's entry, closing the gap with E=2's dominant 19. The E=2 three-peat (55-56-57) is answered by the E=4 return. The quiet majority (E1+E2+E3) = 34 of 59 (57.6%), declining slightly from 58.6% as E=4 gains ground.
-
-**Species-side:** E1:5 (8.5%), E2:14 (23.7%), E3:15 (25.4%), E4:22 (37.3%), E5:3 (5.1%). E=3 takes the solo lead at 15, surpassing E=2's 14. E=4 continues to lead overall at 22. The quiet majority (E1+E2+E3) = 34 of 59 (57.6%).
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-057 | Death Cab for Cutie (58) | Laura Gibson (57) | Barsuk trio. Folk to indie rock. Genre break at 13. E=2 to E=4. Label bridge to Bellingham ascent. |
-| S36-053 | Death Cab for Cutie (58) | Fleet Foxes (53) | Seattle indie rock titans. Sub Pop vs Barsuk. Cathedral harmony vs the ache. Both generational bands. |
-| S36-052 | Death Cab for Cutie (58) | Brandi Carlile (52) | E=4 shared. Arena-capable PNW artists. Testimony roar vs the ache. Both crossed from indie to mainstream. |
-| S36-047 | Death Cab for Cutie (58) | Pedro the Lion (47) | Barsuk-adjacent. David Bazan's indie rock parallels Gibbard's. Parable tone vs the ache. Literary precision shared. |
-| S36-045 | Death Cab for Cutie (58) | Damien Jurado (45) | Folk zone bookend reference. Jurado opened the folk streak Death Cab breaks. Murmur vs ache. |
-| S36-041 | Death Cab for Cutie (58) | Shawn Smith (41) | Scene natives. Both emerged from Seattle's 1990s infrastructure. Partition vs ache. Different scenes, same city. |
-| S36-036 | Death Cab for Cutie (58) | Jimi Hendrix (36) | Seattle's two most iconic rock exports across generations. Sonic boom vs the ache. E=6 vs E=4. |
-| S36-043 | Death Cab for Cutie (58) | Ann Wilson (43) | Seattle rock lineage. Heart to Death Cab -- arena rock to indie rock, two generations of Seattle guitar music. |
-| S36-059 | Death Cab for Cutie (58) | The Long Winters (59, upcoming) | Barsuk trio closes. Indie rock continuity. The label cluster's third and final degree. |
-| SPS-057 | Wood Duck (58) | Belted Kingfisher (57) | Consecutive aquatic species. Stream diver vs pond swimmer. Rattle vs pond whistle. Three consecutive new orders. |
-| SPS-056 | Wood Duck (58) | Band-tailed Pigeon (56) | Three consecutive new orders complete. Columbiformes, Coraciiformes, Anseriformes. Forest canopy vs forest pond. |
-| SPS-054 | Wood Duck (58) | Pileated Woodpecker (54) | Cavity chain. Woodpecker excavates; Wood Duck inherits. Infrastructure creator and user. |
-| SPS-052 | Wood Duck (58) | American Dipper (52) | Aquatic guild expansion. Fast stream vs still pond. Stream walker vs pond swimmer. |
-| SPS-014 | Wood Duck (58) | Great Blue Heron (14) | Wetland guild. Heron wades tidal margins; Wood Duck swims forest ponds. Water-forest interface. |
-| SPS-035 | Wood Duck (58) | Anna's Hummingbird (35) | Iridescence shared. Structural coloration in both species -- light refracted through feather nanostructures. |
-| SPS-001 | Wood Duck (58) | Pacific Wren (1) | Old-growth forest dependence. Wren nests in root tangles; Wood Duck nests in tree cavities. Mature forest required. |
-| SPS-004 | Wood Duck (58) | Northern Spotted Owl (4) | Cavity nesters in old-growth. Both depend on large trees. Both indicators of mature forest health. |
-
-## Infrastructure
-
-**Part A Core:** `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part A Album Sub-Pages:**
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/something-about-airplanes.md`
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/we-have-the-facts.md`
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/the-photo-album.md`
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/transatlanticism.md`
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/plans.md`
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/narrow-stairs.md`
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/codes-and-keys.md`
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/kintsugi.md`
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/thank-you-for-today.md`
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/asphalt-meadows.md`
-- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/index.html`
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/058-wood-duck/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.197/README.md`
-
-**Total: 19 files** -- the largest single-degree package in engine history (standard is 8).
+| Structural Firsts | Folk streak breaks at 13, first Indie Rock, E=4 returns, Bellingham enters (northernmost), indie-to-major transition documented, Barsuk flagship | Anatidae enters, Anseriformes enters, three consecutive new orders (56-57-58), first waterfowl, first swimming species, cavity inheritor of Pileated Woodpecker |
+| Research Words | ~11,000 (research.md ~7,500 + retrospective.md ~3,500) | ~6,000 (research.md ~4,000 + retrospective.md ~2,000) |
+| Files Produced | 15 (4 core + 11 album pages including album index) | 4 (research, retrospective, knowledge-nodes, index.html) |
+| Cross-References | 9 within Part A | 8 within Part B |
+| Album Sub-Pages | 10 (with deep influence analysis per album) + 1 album index | -- |
+| Total Files | 19 -- the largest single-degree package in engine history (standard is 8) | -- |
+
+## Part A: Death Cab for Cutie -- The Ache
+
+Full deep research covering Death Cab for Cutie as the folk-streak breaker, the Barsuk Records flagship, the engine's first Indie Rock classification, and the band whose discography spans the indie-to-major transition that defined 2000s independent music:
+
+- **Structural Event: Folk-Adjacent Tridecad Breaks at Thirteen Degrees -- Genre Stage 40.** Thirteen consecutive folk-adjacent degrees (45-57) -- the tridecad -- end here. Death Cab for Cutie is classified as Indie Rock, not Folk, not Indie Folk, not any folk-adjacent variant. Genre Stage 40 marks the engine's first Indie Rock classification. The folk zone occupied thirteen genre stages (27-39) across thirteen degrees, the longest single-family run in the engine. It began with **Damien Jurado**'s murmur at degree 45 and ended with **Laura Gibson**'s rattle at degree 57. Death Cab's music shares emotional territory with the folk zone (introspection, literary language, Pacific Northwest geography) but occupies a fundamentally different sonic architecture. The break is structural, not emotional. The folk singer sits alone with a guitar. The indie rock band builds a four-piece arrangement around the voice.
+- **Biography: Death Cab for Cutie -- Bellingham 1997, Capitol Hill Migration, Lineup Across Three Eras.** Founding lineup at Western Washington University in 1997: **Ben Gibbard** (vocals, rhythm guitar, piano), **Chris Walla** (lead guitar, keyboards, production), **Nick Harmer** (bass), **Nathan Good** (drums, replaced by **Jason McGerr** in 2001). The band's name comes from a song performed by the **Bonzo Dog Doo-Dah Band** in The Beatles' *Magical Mystery Tour* (1967). Walla's departure in 2014 after seventeen years was the most significant personnel change in the band's history; Walla had produced the first four albums and co-defined the band's sonic identity. Replacements included **Dave Depper** and **Zac Rae** in various configurations. The post-Walla era required Death Cab to externalize its production approach, working with **Rich Costey** (*Kintsugi*) and **John Congleton** for the first time.
+- **Discography Across Twenty-Seven Years -- Ten Studio Albums 1998-2022.** *Something About Airplanes* (1998, Barsuk), *We Have the Facts and We're Voting Yes* (2000, Barsuk), *The Photo Album* (2001, Barsuk), *Transatlanticism* (2003, Barsuk), *Plans* (2005, Atlantic), *Narrow Stairs* (2008, Atlantic), *Codes and Keys* (2011, Atlantic), *Kintsugi* (2015, Atlantic), *Thank You for Today* (2018, Atlantic), *Asphalt Meadows* (2022, Atlantic). Four albums on Barsuk Records -- the indie infrastructure. Six albums on Atlantic Records -- the major-label era. The discography spans the full arc of independent-to-major, analog-to-digital, college-town-to-arena.
+- **The Indie-to-Major Transition -- Barsuk to Atlantic Records 2004.** Death Cab's departure from Barsuk Records to Atlantic Records is one of the defining events in 2000s independent music. The transition documents what happens when an independent label's flagship band outgrows the infrastructure that built it. Barsuk released four Death Cab albums; Atlantic released the next six. The transition was not acrimonious -- Barsuk and the band maintained a respectful relationship, and the label continued to distribute the earlier catalog. But the structural shift was real: Death Cab moved from independent distribution (Barsuk's network of independent record stores, college radio, DIY touring) to major-label distribution (Atlantic's radio promotion, retail placement, television licensing, marketing apparatus). *Plans* went platinum. The music remained recognizably Death Cab. But something shifted -- the relationship between artist and infrastructure changed.
+- **The Bellingham Ascent -- Fifty-Ninth Artist-City Pattern.** The Bellingham Ascent is the artist-city pattern for degree 58: an artist or band that forms in Bellingham's college-town ecosystem and ascends through Seattle's infrastructure to national and international prominence. The "ascent" captures both the southward migration (Bellingham to Seattle) and the upward trajectory (local band to platinum act). The Bellingham Ascent is distinct from The Export (degree 0, Quincy Jones) in that the artist does not leave the Pacific Northwest but rather moves within it, ascending through the regional infrastructure rather than departing for national centers. Death Cab never became a New York band or a Los Angeles band. They became a Seattle band, which is to say they became a Pacific Northwest band operating from Seattle's infrastructure. The ascent stays within the region.
+- **The Ache -- Fifty-Ninth Acoustic Element (Artist-Side).** The acoustic quality of sustained emotional pain -- a persistent, low-grade awareness of loss that runs beneath the surface of the music. Not the scream, not the cry, not the breakdown; the ache is the sustained awareness of loss, distance, and impermanence that runs beneath songs about relationships, geography, and time. "I Will Follow You into the Dark" aches; "What Sarah Said" aches; "Transatlanticism" aches across eight minutes of building intensity that never resolves into catharsis. The ache is Death Cab's primary instrument: not the guitar, not the drums, but the feeling that something beautiful is already in the process of ending. The ache follows the rattle (degree 57) in the artist-side acoustic progression. The contrast is sharp: the rattle was mechanical, non-melodic, percussive; the ache is emotional, tonal, sustained.
+- **E=4 Returns After E=2 Three-Peat (55-56-57).** Death Cab's commercial profile is substantial: platinum albums (*Plans*, *Narrow Stairs*), major festival headlining slots, a Grammy nomination, mainstream radio airplay, transition from independent to major label distribution, cultural footprint extending far beyond the Pacific Northwest indie scene. E=4 is the energy of the widely known -- artists whose work has crossed from indie recognition into mainstream cultural awareness without reaching the universal fame of E=5 or E=6. Death Cab is known. Death Cab is played on radio. *The O.C.* was a pivotal moment. But Death Cab is not Hendrix (E=6), not Quincy Jones (E=5). E=4 is exactly right. Artist-side energy distribution after degree 58: E1:2 (3.4%), E2:19 (32.2%), E3:13 (22.0%), E4:14 (23.7%), E5:10 (16.9%), E6:1 (1.7%).
+- **The Barsuk Trio Continues (Degrees 57-58-59) -- Death Cab Is the Flagship.** The Barsuk Records trio continues at its second degree. Laura Gibson (57) opened the window with folk at E=2. Death Cab for Cutie (58) is the trio's centerpiece -- the band most synonymous with Barsuk Records. The Long Winters (59) will close the trio. The band released its first four studio albums on Barsuk. Barsuk grew with Death Cab -- the label's identity was shaped by the band's trajectory, and the band's identity was shaped by the label's curatorial environment. **John Roderick** of The Long Winters produced the **Shelby Earl** debut at degree 55, threading the label web back through the folk-adjacent streak and forward into the upcoming trio close.
+- **Bellingham Enters the Engine -- First Bellingham-Origin Artist, Northernmost Origin.** Bellingham is the engine's northernmost artist origin -- a college town of approximately 90,000 people, home to **Western Washington University**, situated on **Bellingham Bay** at the northern edge of the Puget Sound, 90 miles north of Seattle and 21 miles south of the Canadian border. The city sits between the **San Juan Islands** to the west and **Mount Baker** to the east, on the ancestral territory of the **Lummi Nation** and the **Nooksack Tribe**. Bellingham's independent music infrastructure in the late 1990s was built around WWU's campus culture: house shows, the **Underground Coffeehouse**, college radio (**KUGS** 89.3 FM), independent record stores, all-ages venues. The Bellingham-to-Seattle pipeline that Death Cab exemplifies is a recurring pattern in PNW music.
+- **Ten Album Sub-Pages -- Largest Single-Degree Package in Engine History.** Each of the ten studio albums receives its own sub-page with deep influence analysis -- an unprecedented level of discographic documentation in the engine. Influences traced include **Built to Spill** (guitar layering on debut), **Modest Mouse** (Pacific Northwest geography), **The Cure** (emotional precision on second album), **Sunny Day Real Estate** (emo architecture), **The Smiths** (jangle-and-ache on *Photo Album*), **Radiohead** *OK Computer* (scope on *Transatlanticism*), **U2** *The Joshua Tree* (landscape as emotional metaphor), **Sigur Ros** (sustained builds), **The Postal Service** (Gibbard's electronic side project informing *Plans*), **Led Zeppelin** (dynamic range on *Narrow Stairs*), **Depeche Mode** (synthesizer textures on *Codes and Keys*), **Peter Gabriel** (art-rock experiments), and **Sonic Youth** (noise textures on *Asphalt Meadows*). 19 files versus the standard 8. The engine record.
+- **Chris Walla Departure -- 2014, Co-Architect Lost.** Walla departed Death Cab for Cutie in 2014 after seventeen years as lead guitarist, keyboardist, and producer. Walla produced the first four Death Cab albums (*Something About Airplanes*, *We Have the Facts*, *The Photo Album*, *Transatlanticism*) and co-defined the band's sonic identity: the interlocking guitar lines, the careful dynamics, the production approach that balanced clarity with emotional texture. His departure is the most significant personnel change in the band's history -- more significant than Nathan Good's replacement by Jason McGerr in 2001, because Walla's role extended beyond performance into the architectural decision-making of how Death Cab records sound. The post-Walla era required the band to externalize its production process, working with outside producers (Rich Costey, John Congleton) for the first time. The band survived. The ache persists.
+- **KEXP Relationship -- Foundational Broadcast Partnership.** The band's relationship with **KEXP** (formerly KCMU) is foundational. KEXP was among the first radio stations to champion Death Cab, playing the band's early Barsuk releases when commercial radio would not. Death Cab's trajectory from college-radio darling to mainstream act traces the arc of KEXP itself -- from a University of Washington student station to one of the most influential independent radio stations in the world. The band and the station grew together, each amplifying the other. Death Cab's KEXP in-studio sessions are landmark recordings in the station's archive.
+
+## Part B: Wood Duck -- The Pond Whistle
+
+Full deep research covering the Wood Duck as the first Anatidae, the first Anseriformes, the engine's first waterfowl and swimming species, and the completion of three consecutive new orders that fracture the Passeriformes monopoly:
+
+- **Anatidae Enters the Engine -- 25th Family, Eighth Order Anseriformes, First Waterfowl.** Triple structural event: new family, new order, new ecological guild. **Anatidae** -- the duck, goose, and swan family -- is one of the most recognizable bird families in the world, containing approximately 174 species. The Wood Duck is the first Anatidae in the engine, the first waterfowl of any kind, and the first species whose primary mode of locomotion includes swimming. **Anseriformes** is the 8th order in the engine. Order distribution after degree 58: **Passeriformes** 49 (83.1%), **Strigiformes** 1, **Pelecaniformes** 1, **Charadriiformes** 1, **Apodiformes** 1, **Piciformes** 1, **Columbiformes** 1, **Coraciiformes** 1, Anseriformes 1. The Passeriformes proportion drops below 84% for the first time.
+- **Three Consecutive New Orders (Degrees 56-57-58) -- Unprecedented Diversification.** **Columbiformes** at degree 56 (**Band-tailed Pigeon**). **Coraciiformes** at degree 57 (**Belted Kingfisher**). Anseriformes at degree 58 (Wood Duck). Three consecutive degrees, three new orders. This has never occurred before in the engine. The previous record was two consecutive new orders (56-57). The inter-order gaps are compressing dramatically: Apodiformes-to-Piciformes spanned 19 degrees; Piciformes-to-Columbiformes spanned 2 degrees; Columbiformes-to-Coraciiformes spanned 1 degree; Coraciiformes-to-Anseriformes spans 1 degree. After 49 Passeriformes in 53 entries, the last five entries include four non-passerine orders across three families. The Passeriformes monopoly is fracturing.
+- **Taxonomy: *Aix Sponsa* -- Linnaeus 1758.** *Aix* = from the Ancient Greek word for a type of waterbird mentioned by **Aristotle**. *sponsa* = Latin for "promised one" or "bride," referring to the male's ornate breeding plumage -- the bird is dressed for a wedding. Full translation: "the waterbird in bridal dress." The Wood Duck was described by **Carl Linnaeus** in 1758, the same year as the Belted Kingfisher -- both are original Linnaean species. Physical description: 47-54 cm (18.5-21 inches), 450-680 grams. The male in breeding plumage is among the most colorful birds in North America: iridescent green and purple head with white stripes, red eyes, red-orange bill, chestnut breast with white flecks, buff flanks, iridescent blue-green speculum. The female is gray-brown with a distinctive white teardrop-shaped eye ring -- subtle by comparison, but elegantly marked.
+- **CSV Substitution: Red-Legged Frog Replaced -- Fourteenth Consecutive.** **Red-legged Frog** (*Rana aurora*) replaced by Wood Duck. The substitution preserves the lowland pond habitat that connects the two species. Both species require still or slow water with adjacent forest. Both are lowland species rather than montane. Both depend on the interface between forest and water. Different classes (amphibian vs. bird), same habitat, same still water. This is the 14th consecutive CSV substitution (degrees 45-58), extending through the amphibian belt of the original CSV. The Red-legged Frog is a species of conservation concern -- listed as threatened under the **Endangered Species Act** in its southern range (California) and declining throughout the Pacific Northwest. The Wood Duck replacement preserves the conservation dimension: the Wood Duck itself was nearly driven to extinction by market hunting and habitat loss in the 19th century, recovering through aggressive conservation efforts including artificial nesting boxes -- one of the great conservation success stories in North American ornithology.
+- **First Waterfowl, First Swimming Species -- Locomotion Mode Five.** Previous species occupied four primary locomotion modes: perching (most Passeriformes), flying/hovering (**Anna's Hummingbird**, degree 35), climbing (**Pileated Woodpecker**, degree 54), and plunge-diving (Belted Kingfisher, degree 57). Swimming adds a fifth mode. The Wood Duck does not merely visit water (like the Kingfisher, which enters water only to strike prey) -- it lives on water, floating for extended periods, feeding from the water's surface and from shallow depths, sleeping on water, raising its young on water. Water is not a hunting medium for the Wood Duck. It is home. The arrival of a swimming species changes the engine's habitat coverage. Previous aquatic associations were limited to stream-adjacent species (**American Dipper**, Belted Kingfisher) and wading species (**Great Blue Heron**). The Wood Duck introduces the still-water guild: ponds, sloughs, beaver ponds, slow backwaters, forested wetlands.
+- **Cavity Nesting in Old-Growth Trees -- Inheritor of Pileated Woodpecker Cavities.** The Wood Duck is a cavity nester -- one of the few duck species that nests in tree holes rather than on the ground. The female selects a natural cavity in a standing dead or dying tree (typically a large snag -- Douglas fir, bigleaf maple, black cottonwood -- with a cavity excavated originally by a Pileated Woodpecker or enlarged by decay). The nest cavity is typically 4-20 meters above the ground. The female lines the cavity with down plucked from her breast and lays 7-15 eggs. After 28-37 days of incubation, the ducklings hatch and must leave the nest within 24 hours. The cavity-nesting habit connects the Wood Duck to the **Pileated Woodpecker** (degree 54) -- the woodpecker excavates the cavities that the Wood Duck later uses. This is an ecosystem service chain: the woodpecker creates infrastructure that the duck inherits.
+- **The Duckling Exodus -- Leap of Faith from Tree Cavity to Forest Floor.** The duckling exodus is among the most dramatic events in avian biology. The day-old ducklings -- weighing approximately 20 grams, covered in down, unable to fly -- climb to the cavity entrance using sharp claws on their feet and **leap**. They fall 4-20 meters to the ground or water below, bouncing on impact, their light weight and fluffy down absorbing the shock. The mother calls from below, and the ducklings respond by jumping one after another. Within minutes, all surviving ducklings have made the leap and follow the mother to water. This is the leap of faith that resonates with Death Cab's own leap -- from Barsuk to Atlantic, from indie to major, from the safety of the known to the exposure of the unknown.
+- **The Pond Whistle -- Fifty-Ninth Acoustic Element (Species-Side).** The Wood Duck's primary vocalization is a rising, squealing whistle -- *oo-eek* -- a sound that carries across still water with surprising clarity. The male's call is a thin, rising *jeeee* or *ji-ihb*. The female's call is a louder, more emphatic *oo-eek, oo-eek* given in flight and when alarmed. Both calls have a whistling quality that is unlike any previous acoustic element in the engine: not a trill, not a buzz, not a rattle, not a song. It is a whistle -- pure, thin, rising, carrying across the surface of still water. The pond whistle. The pond whistle follows the rattle (degree 57) in the species-side acoustic progression. The contrast mirrors the artist-side transition from rattle to ache.
+- **E=3 -- Lowland Pond Energy.** The Wood Duck is readily observed in appropriate habitat -- lowland ponds, slow streams, park ponds, beaver ponds -- and is one of the more frequently encountered waterfowl in the Pacific Northwest's forested lowlands. It is not rare; it is not secretive in the way of rail species or bitterns. But it is not as conspicuous as the **Mallard** (which dominates urban ponds) or as abundant as geese. The Wood Duck is a forest-interior species that requires specific habitat -- still water adjacent to mature trees with cavities. Its distribution is tied to habitat quality rather than habitat availability. E=3 captures this: a species that is regularly encountered in good habitat but absent from degraded or urban environments. Species-side energy distribution after degree 58: E1:5, E2:14, E3:15, E4:22, E5:3.
+- **The Reversed Beauty Parallel -- Most Colorful Duck Hides Like Most Emotionally Precise Band.** The Wood Duck and Death Cab share a structural inversion: extraordinary beauty contained within unexpected packaging. The Wood Duck is among the most colorful ducks in the world but lives in forested ponds beneath overhanging branches. The most beautiful duck in North America is also one of the most hidden. Death Cab is among the most emotionally precise bands in indie rock but the packaging is understated: four musicians in flannel and jeans, moderate tempos, clean guitar tones, no pyrotechnics. Both the duck and the band hide their beauty. Both require attention to reveal their depth. Both reward patience.
+- **Conservation Recovery -- One of the Great North American Ornithology Success Stories.** The Wood Duck was nearly extirpated in the 19th century by market hunting (the male's plumage was prized for fly-tying and decoration) and habitat loss (clearing of bottomland forests for agriculture). By 1900 the species was thought to be approaching extinction. Twentieth-century conservation efforts -- the **Migratory Bird Treaty Act of 1918**, hunting regulations, and the widespread placement of artificial nesting boxes designed to compensate for the loss of natural cavity trees -- reversed the decline. Wood Duck populations are now stable to increasing across North America. The species is **IUCN Least Concern**. Estimated North American breeding population: approximately 4 million. The recovery is one of the great North American ornithology success stories.
+- **Habitat: Lowland Pond, Forested Wetland, Beaver Pond, Slow Stream.** Year-round resident in western Washington (some northern populations migrate; PNW birds largely sedentary). Preferred habitat: lowland ponds with overhanging trees, forested wetlands, beaver ponds (the beaver is a Wood Duck infrastructure ally, creating the still-water habitat the duck requires), slow-moving streams with adjacent mature forest. The species avoids open water without forest cover. The interface between forest and water is the Wood Duck's habitat. Cascade foothill ponds, **Olympic Peninsula** wetlands, **Puget Sound lowlands** with mature riparian forest -- all support Wood Duck populations. Both sides of degree 58 are tied to specific PNW landscapes.
 
 ## Retrospective
 
-**What Worked:**
-1. Ten album sub-pages with deep influence analysis creates unprecedented discographic depth -- each album becomes a self-contained research document tracing influences, production decisions, and cultural context
-2. Death Cab for Cutie as Barsuk flagship makes the label-trio structure legible -- this is the band the label is known for, the center of the curatorial window
-3. Folk streak breaking at 13 is handled as a major structural event with full documentation of what the tridecad meant and what Indie Rock changes
-4. Bellingham entering the engine extends the geographic footprint northward for the first time -- the I-5 corridor now has three anchors (Portland, Seattle, Bellingham)
-5. Indie-to-major transition (Barsuk to Atlantic) documents a real infrastructure question: what happens when artists outgrow the institutions that built them
-6. The ache as acoustic element captures Death Cab's signature quality without reducing it to a production technique -- it is a feeling, not a sound, and that distinction matters
-7. Wood Duck as first waterfowl and swimming species is a genuine ecological expansion -- the engine's aquatic coverage now includes fast streams, tidal margins, and still ponds
-8. Three consecutive new orders (56-57-58) is a dramatic diversification event that the data supports -- the Passeriformes monopoly is genuinely fracturing
-9. Cavity nesting chain (Pileated Woodpecker creates, Wood Duck inherits) documents ecosystem service relationships across degrees
-10. The reversed beauty parallel (most colorful duck / most emotionally precise band) emerged naturally from the material without forcing
-11. Chris Walla departure documentation creates a before/after framework for understanding how bands survive the loss of a co-architect
-12. 19-file package proves the engine can scale its output per degree when the material demands it -- Death Cab's 10-album discography required 10 sub-pages
+### What Worked
 
-**What Could Be Better:**
-1. EXISTENTIAL CRISIS CONTINUES: Still no marine species in 59 degrees of "The Sound of Puget Sound" -- SALTWATER still untouched
-2. No raptor in 59 degrees -- predator canopy still empty
-3. No nocturnal species since degree 4 -- 54 degrees since the owl
-4. No mammal in 59 entries -- species engine 100% avian (though SPS scope now includes mammals)
-5. 14th consecutive amphibian CSV substitution -- the frog belt continues
-6. 19-file package is the engine record, but album sub-pages need a navigational index to be discoverable
-7. The leap-of-faith parallel (ducklings jumping / band jumping labels) risks anthropomorphizing the biological material
-8. Gender ratio (17:42, 28.8%) still below 30% non-male -- the folk zone's non-male majority (53.8%) has not shifted the overall ratio enough
+- **Ten album sub-pages with deep influence analysis create unprecedented discographic depth.** Each album becomes a self-contained research document tracing influences, production decisions, and cultural context. The 19-file package proves the engine can scale its output per degree when the material demands it -- Death Cab's 10-album discography required 10 sub-pages.
+- **Death Cab for Cutie as Barsuk flagship makes the label-trio structure legible.** This is the band the label is known for, the center of the curatorial window. The trio (Laura Gibson 57, Death Cab 58, The Long Winters 59) acquires structural meaning when the centerpiece is the flagship.
+- **Folk streak breaking at thirteen is handled as a major structural event.** Full documentation of what the tridecad meant and what Indie Rock changes. Genre Stage 40 is not just "Indie Rock enters" but "the tridecad closes and Indie Rock is its successor."
+- **Bellingham entering the engine extends the geographic footprint northward.** The I-5 corridor now has three anchors (Portland, Seattle, Bellingham). The PNW map becomes a triangle, not a line. The Bellingham Ascent as artist-city pattern formalizes the college-town-to-city pipeline.
+- **Indie-to-major transition (Barsuk to Atlantic) documents a real infrastructure question.** What happens when artists outgrow the institutions that built them. The transition is not framed as betrayal or sellout but as structural shift; the answer is "complicated" and the complication is the documentation.
+- **The ache as acoustic element captures Death Cab's signature quality without reducing it to a production technique.** It is a feeling, not a sound, and that distinction matters. The ache is a condition, not a method.
+- **Wood Duck as first waterfowl and swimming species is a genuine ecological expansion.** The engine's aquatic coverage now includes fast streams (American Dipper, Belted Kingfisher), tidal margins (Great Blue Heron), and still ponds (Wood Duck). Swimming as a fifth locomotion mode opens new structural ground.
+- **Three consecutive new orders (56-57-58) is a dramatic diversification event the data supports.** The Passeriformes monopoly is genuinely fracturing -- four new orders in five degrees (54-58). Not coincidence; structural inflection.
+- **Cavity nesting chain (Pileated Woodpecker creates, Wood Duck inherits) documents ecosystem service relationships across degrees.** The engine now has both creator and inheritor of cavity infrastructure. Future species entries in cavity guilds will inherit this scaffolding.
+- **The reversed beauty parallel emerged naturally from the material.** Most colorful duck hidden in forested ponds; most emotionally precise band hidden within understated arrangements. The parallel was not in the original brief; it surfaced when the research came together.
+- **Chris Walla departure documentation creates a before/after framework.** Understanding how bands survive the loss of a co-architect requires the framework. Future band-degree entries facing similar transitions will use the same scaffold.
+- **Nineteen-file package proves the engine scales when material demands it.** But the standard remains 8; this is exceptional, not the new norm.
+
+### What Could Be Better
+
+- **EXISTENTIAL CRISIS CONTINUES: still no marine species in 59 degrees of "The Sound of Puget Sound" -- saltwater untouched.** The crisis first flagged at degree 50 has now extended through nine additional degrees without resolution. The Sound's name is saltwater; the species roster is freshwater + suburban. A marine species (Common Loon, Glaucous-winged Gull, Pigeon Guillemot, Bald Eagle) is now ABSOLUTE PRIORITY for the degrees immediately following 58.
+- **No raptor in 59 degrees -- predator canopy still empty.** Bald Eagle, Red-tailed Hawk, Osprey, Peregrine Falcon. The hawk-and-eagle gap is acute and widening with each non-raptor degree.
+- **No nocturnal species since degree 4 -- 54 degrees since the Northern Spotted Owl.** A second owl (Barred, Great Horned) or a nighthawk would address the nocturnal acoustic gap.
+- **No mammal in 59 entries -- species engine 100% avian.** SPS scope explicitly includes mammals (river otter, harbor seal, orca, elk, mountain goat, marten). The avian monopoly is becoming its own structural debt.
+- **14th consecutive amphibian CSV substitution -- the frog belt continues.** Eleven through fourteen replacements; the engine remains deep in the amphibian belt with no clear exit point in the CSV ahead.
+- **19-file package is the engine record, but album sub-pages need a navigational index to be discoverable.** The album index (index.html) addresses this partially; future bands with deep discographies should ship the index from day one, not bolted on.
+- **The leap-of-faith parallel (ducklings jumping / band jumping labels) risks anthropomorphizing the biological material.** The parallel is structural and works on its own terms, but reviewers should watch for over-extension when biology and biography are paired.
+- **Gender ratio (17:42, 28.8%) still below 30% non-male.** The folk zone's non-male majority (53.8%) has not shifted the overall ratio enough. Indie Rock's male-dominated history will not help; deliberate selection will be required to push past 30%.
 
 ## Lessons Learned
 
-1. Album sub-pages are the right unit for bands with deep discographies -- individual albums deserve their own influence analysis when the catalog spans distinct eras (Barsuk era vs Atlantic era)
-2. The folk-streak break requires documentation of both what ended and what begins -- Genre Stage 40 is not just "Indie Rock enters" but "the tridecad closes and Indie Rock is its successor"
-3. Bellingham as a third geographic anchor (alongside Portland and Seattle) reveals that the I-5 corridor has three nodes, not two -- the engine's PNW map is a triangle, not a line
-4. E=4 returning after E=2 three-peat creates a felt energy shift that the numbers capture: the quiet passage ends, the engine accelerates
-5. Three consecutive new orders is a statistical anomaly worth naming: the Passeriformes lock, which held for 49 of the first 53 entries, has produced four new orders in five degrees (54-58)
-6. Cavity nesting creates cross-degree ecological chains that are visible only when enough species have accumulated -- infrastructure creator (Woodpecker) and infrastructure inheritor (Wood Duck) are separated by four degrees but functionally linked
-7. The indie-to-major transition is a label pattern, not just an artist pattern -- degree 58 documents how Barsuk and Atlantic relate to each other, not just how Death Cab relates to each label
-8. Swimming as a locomotion mode is genuinely new in the engine and requires documenting the still-water habitat type that no previous species occupied
-9. 19 files per degree is sustainable when the material justifies it -- but it should remain exceptional, not the new standard
-10. The ache-and-whistle parallel proves that acoustic elements can work across registers: the ache is emotional (artist-side), the pond whistle is physical (species-side), and both describe sounds that carry further than expected
+- **Album sub-pages are the right unit for bands with deep discographies.** Individual albums deserve their own influence analysis when the catalog spans distinct eras (Barsuk era vs Atlantic era for Death Cab). Future deep-discography artists should ship album sub-pages plus an index from the start, not retrofitted.
+- **The folk-streak break requires documentation of both what ended and what begins.** Genre Stage 40 is not just "Indie Rock enters" but "the tridecad closes and Indie Rock is its successor." Future genre-zone transitions should be named on both sides of the boundary, not just on the new-arrival side.
+- **Bellingham as a third geographic anchor reveals that the I-5 corridor has three nodes, not two.** The engine's PNW map is a triangle, not a line. Future degrees from Bellingham, Portland, or Seattle should explicitly position themselves in the triangle. Olympia would be a fourth node; Tacoma a fifth; Vancouver, BC a sixth (cross-border).
+- **E=4 returning after E=2 three-peat creates a felt energy shift the numbers capture.** The quiet passage ends, the engine accelerates. Future energy-distribution shifts should be flagged explicitly when they correspond to felt narrative momentum.
+- **Three consecutive new orders is a statistical anomaly worth naming.** The Passeriformes lock, which held for 49 of the first 53 entries, has produced four new orders in five degrees (54-58). Future order entries should be flagged against the running Passeriformes proportion.
+- **Cavity nesting creates cross-degree ecological chains visible only when enough species accumulate.** Infrastructure creator (Pileated Woodpecker, degree 54) and infrastructure inheritor (Wood Duck, degree 58) are separated by four degrees but functionally linked. Future ecosystem service chains should be named when both ends are present.
+- **The indie-to-major transition is a label pattern, not just an artist pattern.** Degree 58 documents how Barsuk and Atlantic relate to each other, not just how Death Cab relates to each label. Future indie-to-major transitions should use the bilateral framing.
+- **Swimming as a locomotion mode is genuinely new and requires documenting the still-water habitat type.** No previous species occupied still-water habitat. The Wood Duck opens the lowland-pond and beaver-pond habitat types as engine-recognized environments. Future water-living species should reference the still-water guild as established at degree 58.
+- **Nineteen files per degree is sustainable when material justifies it -- but it should remain exceptional.** The standard remains 8. Future album-deep packages must prove the discography demands the depth before they get the page count.
+- **The ache-and-whistle parallel proves acoustic elements can work across registers.** The ache is emotional (artist-side); the pond whistle is physical (species-side); both describe sounds that carry further than expected. Future acoustic pairings should test the emotional-physical axis explicitly.
 
----
+## Cross-References
 
-The ache and the pond whistle. Degree 58 breaks the folk-adjacent streak at thirteen with Death Cab for Cutie -- the Barsuk Records flagship, the Bellingham ascent, the band that jumped from indie to major and survived the fall. Ten albums, ten sub-pages, nineteen files: the largest single-degree package in the engine's history, documenting a band whose emotional precision operates at the level of a feeling rather than a technique. The ache is not a sound Death Cab makes. It is the sound Death Cab is. On the species side, the Wood Duck swims into the engine as the first waterfowl, the first swimming species, the cavity nester whose ducklings leap from tree hollows on their first day of life. Three consecutive new orders -- Columbiformes, Coraciiformes, Anseriformes -- shatter the Passeriformes monopoly. The most colorful duck in North America hides in forested ponds beneath overhanging branches. The most emotionally precise band in indie rock hides extraordinary beauty within understated arrangements. Both require patience. Both reward attention. The duckling jumps. The band signs. The leap of faith is the structural gesture of degree 58: leaving the cavity for the open water, leaving the label for the arena, leaving the folk zone for indie rock. The cavity was safe. The open water is where you live. Ben Gibbard aches from a stage. The Wood Duck whistles from a pond. Both sounds are quiet. Both carry further than they should. And the folk zone, thirteen degrees of whispered intimacy, recedes behind them like the shore of a pond seen from the water -- still visible, still beautiful, but no longer where you are standing.
+| Ref | Side | Title | Resonance |
+|-----|------|-------|-----------|
+| S36-057 | Part A | Laura Gibson | Barsuk trio (57-58-59); folk to indie rock; genre break at 13; E=2 to E=4; label bridge to Bellingham ascent |
+| S36-053 | Part A | Fleet Foxes | Seattle indie rock titans; Sub Pop vs Barsuk; cathedral harmony vs the ache; both generational bands |
+| S36-052 | Part A | Brandi Carlile | E=4 shared; arena-capable PNW artists; testimony roar vs the ache; both crossed from indie to mainstream |
+| S36-047 | Part A | Pedro the Lion | Barsuk-adjacent; David Bazan's indie rock parallels Gibbard's; parable tone vs the ache; literary precision shared |
+| S36-045 | Part A | Damien Jurado | Folk zone bookend; Jurado opened the folk streak Death Cab breaks; murmur vs ache |
+| S36-041 | Part A | Shawn Smith | Scene natives; both emerged from Seattle's 1990s infrastructure; partition vs ache; different scenes, same city |
+| S36-036 | Part A | Jimi Hendrix | Seattle's two most iconic rock exports across generations; sonic boom vs the ache; E=6 vs E=4 |
+| S36-043 | Part A | Ann Wilson | Seattle rock lineage; Heart to Death Cab; arena rock to indie rock; two generations of Seattle guitar music |
+| S36-055 | Part A | Shelby Earl | John Roderick (Long Winters) thread; same Barsuk-orbit web; Local 638 to Barsuk to Atlantic |
+| S36-059 | Part A | The Long Winters | Barsuk trio closes; indie rock continuity; the label cluster's third and final degree |
+| S36-000 | Part A | Quincy Jones | The Export vs The Bellingham Ascent; engine origin to degree 58; both leave their formative city for opportunity |
+| SPS-057 | Part B | Belted Kingfisher | Consecutive aquatic species; stream diver vs pond swimmer; rattle vs pond whistle; three consecutive new orders |
+| SPS-056 | Part B | Band-tailed Pigeon | Three consecutive new orders complete; Columbiformes, Coraciiformes, Anseriformes; forest canopy vs forest pond |
+| SPS-054 | Part B | Pileated Woodpecker | Cavity chain; woodpecker excavates; Wood Duck inherits; infrastructure creator and user |
+| SPS-052 | Part B | American Dipper | Aquatic guild expansion; fast stream vs still pond; stream walker vs pond swimmer |
+| SPS-014 | Part B | Great Blue Heron | Wetland guild; heron wades tidal margins; Wood Duck swims forest ponds; water-forest interface |
+| SPS-035 | Part B | Anna's Hummingbird | Iridescence shared; structural coloration in both species -- light refracted through feather nanostructures |
+| SPS-001 | Part B | Pacific Wren | Old-growth forest dependence; wren nests in root tangles; Wood Duck nests in tree cavities; mature forest required |
+| SPS-004 | Part B | Northern Spotted Owl | Cavity nesters in old-growth; both depend on large trees; both indicators of mature forest health |
+| AVI | Part B | Wings of the Pacific Northwest | PNW avian survey; species integration; Anatidae addition |
+| ECO | Part B | PNW Living Systems | Ecoregion mapping; lowland pond and forested wetland habitats |
+| NASA | Cross | Seattle 360 Paired Releases | NASA CSV as paired driver for future Pass 2 cross-syncs |
 
-*Degree 58. Folk streak broken. Barsuk flagship. The ache enters. The pond whistle rises. Three consecutive new orders. The leap holds.*
+## Acoustic Progression
 
-</details>
+The acoustic progression on both sides reaches 59 elements at degree 58. On the artist side, the sequence from degree 45 through 58 is: **the murmur** (45, Damien Jurado) -> **the confessional** (46, **Rocky Votolato**) -> **the parable tone** (47, **Pedro the Lion**) -> **the held rest** (48, **Sera Cahoone**) -> **the lullaby subversion** (49, **Kimya Dawson**) -> **the intimate architecture** (50, **Mirah**) -> **the communal harmony** (51, **Grand Archives**) -> **the testimony roar** (52, **Brandi Carlile**) -> **the cathedral harmony** (53, **Fleet Foxes**) -> **the fraternal jangle** (54, **Ivan & Alyosha**) -> **the ember glow** (55, **Shelby Earl**) -> **the dream haze** (56, **Lemolo**) -> **the rattle** (57, **Laura Gibson** / **Belted Kingfisher**) -> **the ache** (58, Death Cab for Cutie). The folk zone's thirteen-element acoustic taxonomy (degrees 45-57) is complete: murmur, confessional, parable tone, held rest, lullaby subversion, intimate architecture, communal harmony, testimony roar, cathedral harmony, fraternal jangle, ember glow, dream haze, the rattle. Degree 58 opens a new acoustic territory. The ache is the first element of the post-folk era -- an emotional register rather than a sonic technique, a feeling rather than a sound. On the species side, the parallel sequence reaches **the pond whistle** at degree 58 -- clean, tonal, rising, carrying across still water. The rattle shook the folk zone apart. The ache and the pond whistle begin building something new.
 
----
+## Artist-City Patterns
 
-*v1.49.197 -- Degree 58 of 360. Death Cab for Cutie (Indie Rock, E=4, Barsuk to Atlantic, Bellingham to Capitol Hill) + Wood Duck (Anatidae, E=3, lowland pond, the pond whistle). Folk streak broken at 13. First Indie Rock. Bellingham enters. Three consecutive new orders. The ache carries. The pond whistle rises.*
+The artist-city pattern table reaches 59 entries at degree 58. Recent patterns: the ember glow (55, Shelby Earl, **Fremont** -- The Infrastructure Beneficiary), the dream haze (56, Lemolo -- The Duo Collective), the rattle (57, Laura Gibson -- The Label Bridge), and now **The Bellingham Ascent** (58, Death Cab for Cutie). The Bellingham Ascent introduces the college-town-to-city pipeline as a named artist-city pattern -- the northward migration from Bellingham's WWU incubator through the I-5 corridor to Seattle's Capitol Hill infrastructure. The Bellingham Ascent is distinct from The Export (degree 0, Quincy Jones), which leaves the region entirely, and from the Label Bridge (degree 57), which connects cities through institutional infrastructure. The Bellingham Ascent is a physical migration within the region, a band carrying its songs south on the interstate, arriving in Seattle with an identity already formed in the college town's protected creative space.
+
+## Genre Evolution
+
+Genre Stage 40 at degree 58 -- the first Indie Rock classification in the engine. The folk-adjacent family occupied genre stages 27-39 across thirteen consecutive degrees (45-57): Folk (5x), Indie Folk (4x), Folk Punk (1x), Folk/Rock (1x), Singer-Songwriter (1x), Folk again at 56 and 57. Singer-Songwriter at Genre Stage 36 (Shelby Earl, degree 55) was the most recent new sub-genre before Indie Rock breaks the family lock. The full engine genre evolution runs Jazz (0-15) to Jazz Fusion (16) to Jazz/Comedy (17) to Soul/Jazz (18-19) to Jazz/R&B (20) to Jazz/Funk (21-22) to Soul/Jazz (23-24) to Neo-Soul (25) to Soul (26) to Soul/R&B (27-28) to Jazz/Funk (29) to R&B/Jazz (30) to R&B/Soul (31) to Pure R&B (32-33) to R&B/Soul (34) to Blues (35) to Blues Rock (36-37) to R&B/Soul (38) to Blues/Soul (39) to Neo-Soul (40) to Soul/Blues (41) to Gospel/R&B (42) to Arena Rock (43) to Electronic/R&B (44) to **Folk zone (45-57)** to **Indie Rock (58)**. Indie Rock arrives as the successor to the longest genre zone in the engine.
+
+## Energy Distribution
+
+**Artist-side** after degree 58: E1:2 (3.4%), E2:19 (32.2%), E3:13 (22.0%), E4:14 (23.7%), E5:10 (16.9%), E6:1 (1.7%). E=4 rises to 14 with Death Cab's entry, closing the gap with E=2's dominant 19. The E=2 three-peat (55-56-57) is answered by the E=4 return. The quiet majority (E1+E2+E3) = 34 of 59 (57.6%), declining slightly from 58.6% as E=4 gains ground.
+
+**Species-side** after degree 58: E1:5 (8.5%), E2:14 (23.7%), E3:15 (25.4%), E4:22 (37.3%), E5:3 (5.1%). E=3 takes the solo lead at 15, surpassing E=2's 14. E=4 continues to lead overall at 22. The quiet majority (E1+E2+E3) = 34 of 59 (57.6%).
+
+## Engine Position
+
+Degree 58 of 360 = 16.1% of the circle. Fifty-nine degrees completed (0-58), 301 remaining. 59 acoustic elements per side. 59 artist-city patterns. 58 blue note deployments. 25 avian families, Anatidae at 1 member (new). 9 avian orders (Passeriformes, Pelecaniformes, Strigiformes, Charadriiformes, Apodiformes, Piciformes, Columbiformes, Coraciiformes, Anseriformes). 40 genre stages. 49 of 59 Passeriformes entries (83.1%) -- below 84% for the first time. Gender ratio artist side: 17 women of 59 (~28.8%). Ten-degree rolling window observations: folk-adjacent tridecad ENDS at thirteen consecutive degrees (longest single-family run in engine), first Indie Rock classification (Genre Stage 40), Bellingham enters as northernmost artist origin, Anatidae enters as 25th family, Anseriformes enters as 8th order, three consecutive new orders (56-57-58, unprecedented), first waterfowl, first swimming species, fifth locomotion mode (swimming), cavity-nesting chain (Pileated Woodpecker creates, Wood Duck inherits), 14th consecutive CSV substitution, E=4 returns after E=2 three-peat. Next milestone: degree 60 closes one-sixth of the circle and remains under structural pressure to deliver a marine species (the saltwater crisis at 59 degrees deep).
+
+## Cumulative Statistics
+
+Through degree 58:
+- 59 degrees completed (0-58), 301 remaining
+- 59 acoustic elements on each side (artist and species), 118 total labeled phenomena
+- 59 artist-city patterns
+- 58 blue note deployments
+- 25 avian families, 9 avian orders
+- 40 genre stages
+- 5 sound-production / locomotion modes (perching, flight/hovering, climbing, plunge-diving, swimming)
+- 17 women of 59 artists (~28.8%)
+- Three consecutive new orders (56-57-58) -- engine record
+- Folk-adjacent tridecad (45-57) -- thirteen consecutive degrees, longest single-family run in engine history
+- First Indie Rock classification (Genre Stage 40, degree 58)
+- First Anatidae member, first waterfowl, first swimming species (Wood Duck, degree 58)
+- First Bellingham-origin artist (Death Cab for Cutie, degree 58)
+- Cavity-nesting chain documented across degrees (Pileated Woodpecker creates, Wood Duck inherits)
+- CSV substitution: 14th consecutive amphibian-class replacement (45-58)
+- Current Part A energy distribution: 2:19:13:14:10:1 (E1:E2:E3:E4:E5:E6)
+- Current Part B energy distribution: 5:14:15:22:3 (E1:E2:E3:E4:E5)
+- Research words this degree: ~17,000 (Part A ~11,000 + Part B ~6,000) -- engine record per degree
+- 19 files this degree -- engine record per degree (standard 8)
+- Cumulative research words across degrees 0-58: approximately 700,000+ words
+
+## Files
+
+- `docs/release-notes/v1.49.197/README.md` -- this release note
+- `docs/release-notes/v1.49.197/chapter/00-summary.md` -- chapter summary index
+- `docs/release-notes/v1.49.197/chapter/03-retrospective.md` -- retrospective chapter
+- `docs/release-notes/v1.49.197/chapter/04-lessons.md` -- lessons chapter (10 lessons extracted)
+- `docs/release-notes/v1.49.197/chapter/99-context.md` -- context and navigation
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/research.md` (~7,500 words)
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/retrospective.md`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/index.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/knowledge-nodes.json`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/something-about-airplanes.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/we-have-the-facts.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/the-photo-album.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/transatlanticism.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/plans.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/narrow-stairs.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/codes-and-keys.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/kintsugi.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/thank-you-for-today.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/asphalt-meadows.html`
+- `www/tibsfox/com/Research/S36/research/releases/058-death-cab-for-cutie/albums/index.html`
+- `www/tibsfox/com/Research/SPS/research/releases/058-wood-duck/research.md` (~4,000 words)
+- `www/tibsfox/com/Research/SPS/research/releases/058-wood-duck/retrospective.md`
+- `www/tibsfox/com/Research/SPS/research/releases/058-wood-duck/index.html`
+- `www/tibsfox/com/Research/SPS/research/releases/058-wood-duck/knowledge-nodes.json`
+- **Commit:** `c721baab6619d3f5d795142d8432bd3d03f02d70` -- `feat(www): degree 58 -- Death Cab for Cutie + Wood Duck (v1.49.197)` (20 files changed, 8028 insertions)
+- **Total: 19 research/release files** -- the largest single-degree package in engine history (standard is 8).
