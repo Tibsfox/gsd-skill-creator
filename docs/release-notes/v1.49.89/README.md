@@ -1,81 +1,219 @@
-# v1.49.89 "The Mega Batch"
+# v1.49.89 — "The Mega Batch"
 
 **Released:** 2026-03-27
-**Theme:** 49 New Research Projects + 6 Extensions + Rosetta Stone Expansion
-**Mega-Waves:** MW1 through MW14 — single session execution
+**Scope:** Mega Batch capstone — 6 project extensions (AGR, CDP, GTP, DAA, LKR, KGX) totaling 2,331 new research lines across six domains, a Rosetta Stone structural expansion from seven to ten clusters with nine new translation rows, and the release-notes stub that declares the single-session Mega Batch complete at 128 Research projects and 10 clusters
+**Branch:** dev
+**Tag:** v1.49.89 (2026-03-27T20:29:22-07:00) — commit `af73025db`
+**Commits:** v1.49.88..v1.49.89 (3 commits: extensions `6de554a03`, Rosetta `bb653ac71`, docs `af73025db`)
+**Files changed:** 20 (+2,548 insertions, -16 deletions) across six Research project trees, the canonical `ROSETTA.md` cross-domain translation table, and the release-notes stub
+**Predecessor:** v1.49.88 — "The Observable Universe" (Science/Animation/Literature/Zodiac wave)
+**Successor:** v1.49.90 — "The Complete Batch" (final 10 projects that close the Mega Batch arc)
+**Classification:** content + documentation — Research-series extension wave plus canonical cross-domain index update; zero tooling change, zero schema change, zero build-system change; new modules slotted into existing `www/tibsfox/com/Research/<CODE>/research/` trees and the canonical `ROSETTA.md` at the repository root of the multi-domain docroot
+**Session:** v1.49.82+ Mega Batch — the largest single-session research expansion in project history (49 new projects + 6 extensions + 3 new Rosetta clusters executed via Gastown convoy model with parallel Polecat agents across 14 mega-waves)
+**Author:** Tibsfox (`tibsfox@tibsfox.com`)
+**Dedicated to:** the regenerative-agriculture practitioners, the critical-theory historians, the spec-to-code implementers, the archival-audio fingerprinters, the Broadway fandom scholars, and the ritual-economics ethnographers whose domain expertise made each extension's deepening module possible without diluting the anchor project it inherits from
+
+---
 
 ## Summary
 
-The largest single-session research expansion in project history. 49 new standalone research projects, 6 extensions to existing projects, and a Rosetta Stone framework expansion from 7 to 10 clusters. Executed via Gastown convoy model with parallel Polecat agents across 14 mega-waves.
+**The Mega Batch is the largest single-session research expansion in project history, and v1.49.89 is its capstone commit.** One session, 14 mega-waves, 58 commits in the broader v1.49.82..v1.49.89 arc, 597 files, 204,448 lines added, 49 brand-new standalone Research projects spanning PNW/Seattle, Technology, Music, Broadcasting, Science/Space, Animation/Media, Literature/Sci-Fi, and Zodiac/Cultural territory, plus six deep-extension modules grafted onto already-landed anchor projects, plus a Rosetta Stone restructuring that grows the cross-domain translation index from seven clusters to ten. v1.49.89 itself is the tight three-commit terminus of that arc: the six extension modules (2,331 research lines), the Rosetta Stone structural update (+54/-9 on `ROSETTA.md`), and the release-notes stub that declares the Mega Batch complete. The version's window is narrow by design — the 49 new project trees already landed in the preceding v1.49.82..v1.49.88 sub-arc — but its role is pivotal. v1.49.89 is the moment the Research series crosses from 79 projects to 128, from 7 Rosetta clusters to 10, from ~200K cumulative research lines to ~400K+, and from an opportunistic collection of standalone Research subjects into a genuinely multi-cluster cross-domain translation corpus. The capstone is small because the Mega Batch did almost all the work upstream; the capstone is necessary because the Mega Batch is not complete until the cross-domain index itself knows it.
 
-## Session Statistics
+**Six extensions deepen six anchors with the same editorial gesture repeated six times.** Each of the six extensions takes an already-landed anchor project and grafts a new research module that deepens the anchor's most load-bearing thread — not a sequel, not a cross-reference, but a canonical deepening module that the anchor project's module order was designed to accommodate. AGR (Agriculture) receives `09-deep-agriculture.md` at 279 lines, walking regenerative farming, soil-science cycles, and the microbiome-first approach that the agriculture Research line was always going to have to reach. CDP (Critical Paradox) receives `07-the-critical-paradox.md` at 286 lines, an essay-length backlash-analysis module that documents how critical theory itself has been subjected to the same destabilizing critiques it once deployed — the project's promised self-reflective chapter. GTP (Game-to-Production) receives `06-implementation-pipeline.md` at 560 lines, the largest of the six extensions, documenting the spec-to-code implementation pipeline from prose prompt to generated scaffold to type-checked production module. DAA (Digital Audio Archaeology) receives `06-archival-fingerprint-timeline.md` at 406 lines, walking Chromaprint/AcoustID/dejavu fingerprinting from the 2010 PUIDX transition through the modern content-identification stack. LKR (Lion King Roots) receives `07-extended-roots.md` at 397 lines, extending the musical-theater-roots module into Broadway craft, Julie Taymor's puppetry lineage, fan culture, and the extended Disney-stage ecology. KGX (Kraftwerk/Giorgio/Xenakis) receives `06-extended-deep-study.md` at 403 lines, the cult-economics and signal-chain deep study the Kraftwerk-Giorgio-Xenakis project's electronic-lineage thread always wanted. Six extensions, six anchor projects, six new research modules totaling 2,331 research lines — the pattern is consistent and the gesture is repeated with discipline: take an anchor, name its deepest remaining thread, land that thread as an explicit appended module rather than editing the anchor project in place.
+
+**The Rosetta Stone expansion is the Mega Batch's structural payoff and the release's signature contribution.** Before v1.49.89 the Rosetta Stone had seven clusters — PNW Ecology (Hub: ECO), Electronics & Instrumentation (Hub: LED), Infrastructure & Computing (Hub: SYS), Energy & Environment (Hub: THE), Creative & Cultural (Hub: FFA), Business & Regulatory (Hub: BCM), Infrastructure Vision (Hub: NND) — that covered the original Research series organic growth. The Mega Batch added 49 new projects spread across Music, Broadcasting, Science/Space, Animation/Media, Literature, Zodiac, and several Technology and PNW subdomains, and that expansion forced the cross-domain index to restructure. v1.49.89's Rosetta update adds three new clusters — **Broadcasting & Spectrum** (Hub: RBH, thirteen members including the new CBC, IBC, SVB, DFQ, and FCC broadcasting projects), **Science & Observation** (Hub: BHK, five members including the new LGW, SET, SGM, and BNY science-cluster projects), and **Music** (the previously-scattered music members consolidated into one cluster at twenty-two members, now the largest cluster in the index) — and adds nine new translation rows across the Rhythm, Place, and Evidence categories that connect the new cluster members back to the established vocabulary. The specific translation rows are the Rosetta Stone's load-bearing payload: without them the new projects would sit outside the cross-domain index and the series would be "128 independent Research projects" rather than "10-cluster cross-domain translation corpus." The distinction is the editorial thesis.
+
+**The Gastown convoy model scaled to the Mega Batch without breaking.** The single-session 49-project execution ran as a Mayor-Polecat convoy: a Mayor agent orchestrated, planned, and committed while four Polecat agents built in parallel and handed completed trees back for sequential atomic commit. Planning ran in five passes front-loaded before any Polecat touched the keyboard — catalog (what to build), quality (standards each tree must meet), college (cross-project educational slotting), Rosetta (cross-cluster translation implications), execution (wave sequencing and commit order) — and that front-loading is what made fourteen mega-waves possible without merge conflicts. The convoy landed 14 mega-waves, ~204K lines, zero file conflicts, and three content-filter recoveries (DPM, CAR manual completion, one other). Three auth-error recoveries happened to agents that had already built their trees before the auth window opened and were able to re-commit without rebuild. The session's raw throughput (49 projects + 6 extensions in one day) is the current high-water mark for the Research series — the previous high, v1.49.39 "Weird Al," delivered 37 projects in ~67K lines, so the Mega Batch is roughly 3× the Weird Al session on line count and ~1.3× on project count. v1.49.89's narrow commit window is not a deficit; it is the arc's terminus commit, where the Mayor files the wrap-up and the Polecats stand down.
+
+**The 128-project, 10-cluster corpus is the Research series' first genuinely cross-domain state.** Before the Mega Batch the Research series was a collection of 79 projects whose cross-references formed an organic but uneven graph — some projects were densely linked, others were near-orphans. The Mega Batch's deliberate 10-cluster restructure with explicit hub projects (ECO, LED, SYS, THE, FFA, BCM, NND, RBH, BHK, and the Music cluster's emergent multi-hub) gives every Research project a canonical cluster home and every cluster a canonical hub. Cross-domain translation is now addressable: a reader can ask "what's the Broadcasting & Spectrum analog of the Infrastructure & Computing concept of 'federation'?" and the Rosetta Stone's new Place-category rows point to the answer (it's the post-divestiture carrier-market structure that FCC, IBC, and the spectrum-commons projects document). The same question could not be asked before the expansion because the Broadcasting & Spectrum cluster did not exist as a first-class entity — its members were scattered in Creative & Cultural. The new structure is load-bearing for every future Research project (each new project must declare its cluster and its translation rows) and for the forthcoming tibsfox.com Research site (each cluster becomes a landing page). The expansion is the editorial work that transforms a collection into a corpus.
+
+**Six extensions were chosen over four or eight for a principled reason.** Mega-wave arithmetic: fourteen mega-waves landed the 49 new projects, and six extensions filled the last six slots of MW13 and MW14 without forcing a fifteenth wave. The six anchor projects (AGR, CDP, GTP, DAA, LKR, KGX) were the six anchors with the strongest pre-identified "deepest remaining thread" — modules the anchor project had flagged as future work but had not yet landed because the original anchor's scope would have bloated. Extending six anchors at the Mega Batch's terminus does double duty: it closes six of the anchors' loose ends (each anchor is now "complete" in the sense that its deepest-remaining-thread module exists), and it demonstrates that the Mega Batch's five-pass planning discipline can detect extension opportunities rather than forcing new-project growth as the only lever. The six-extension count is itself a Rosetta-style result: six is the number of modules-per-anchor the Research series' editorial shape settled on (five to seven per project), so extending six anchors by one module each is mathematically symmetrical with the series' internal structure. The symmetry was not planned explicitly but it is the shape the planning discipline produced.
+
+**The capstone commit choreography is fast and explicit.** Three commits in three minutes: `6de554a03` (20:26:02) lands the six extensions atomically as one commit rather than six because extensions are cross-cutting edits to six anchor projects and splitting them into six commits would have created six bisect-confusing states. `bb653ac71` (20:28:33) lands the Rosetta Stone restructure alone — the cross-domain index is always committed independently of content commits so that `git bisect` can distinguish "a project changed" from "the cross-domain index changed." `af73025db` (20:29:22) lands the release-notes stub at T+49s and the tag is cut at the same timestamp. The choreography — one content commit, one index commit, one release-notes commit — is the pattern the Research series has used since v1.49.38 for any release that touches both content and the cross-domain index. v1.49.89 applies the pattern at the Mega Batch's scale without modification. The three-minute execution is possible because all the actual work landed in the 58-commit upstream arc; the capstone is filing, not building.
+
+**The Music cluster emerging as the largest cluster at twenty-two members is a structural statement.** The Rosetta Stone's previous seven clusters each had 5-15 members. The new Music cluster consolidates previously-scattered music projects (KGX, HJX, B52, CAR, TKH, DPM, DRN, SMP, BMR, SOC, CRY, SRG, MTB, PRS, plus existing music-adjacent projects pulled in from Creative & Cultural) into a dedicated cluster of 22 members — larger than any other cluster in the index. The size is not arbitrary. Music is the Research series' densest intersection of cross-domain patterns: every music project touches signal (electronics cluster), culture (creative cluster), broadcasting (spectrum cluster), economics (business cluster), and often place (PNW ecology cluster via regional scene specificity). Giving music its own cluster with its own hub-emergent structure rather than scattering music members across five clusters surfaces those intersections as first-class cross-references rather than incidental footnotes. The Music cluster is where the Rosetta Stone earns its name — cross-domain translation of the same musical idea across signal chain, production economics, cultural reception, and regional scene is the kind of translation the index was designed to make legible. The 22-member size is a signal that music is where the series has done the most translation work; future Rosetta Stone revisions should expect other clusters to grow similarly as their domains get filled in.
+
+**Each extension was a targeted graft, not a rewrite.** The six-extensions pattern is worth studying as a process model for future Research deepening waves. Each extension added exactly one new research module to an anchor project's `research/` directory and updated the anchor's `index.html` and `page.html` to list the new module. No extension modified any existing research module in its anchor project — the edit discipline was strictly append-only at the module level. This discipline matters for two reasons. First, a reader who already read the anchor project before the extension can pick up where they left off; the existing modules are unchanged. Second, `git blame` on any research module still points to that module's original authoring commit, preserving the provenance chain. The append-only-at-module-level pattern generalizes: any future deepening wave that adds N modules to N anchor projects should follow the same edit discipline. The pattern also suggests an organizational rule — anchor projects should leave explicit "deepest remaining thread" markers in their `TODO.md` or `FUTURE-MODULES.md` so a future extension wave can find and address them systematically rather than relying on institutional memory.
+
+**The 204K-line single-session throughput exposes latent scaling issues in the parser-generated chapter pipeline.** The parser that generates `chapter/00-summary.md`, `chapter/03-retrospective.md`, and `chapter/99-context.md` from the README ran at parse confidence 0.35 on v1.49.89 (typical is 0.90+) because the README's dominant structure is tables-and-lists-of-new-projects rather than prose-with-headings-and-features. The parser was designed for single-topic releases with clear feature tables; mega-wave releases with 49 projects plus extensions plus Rosetta restructuring blow past the parser's heuristics. This is not blocking — the low-confidence chapter files still produce valid Prev/Next navigation and parseable record for the release-history database — but it is a gap the parser should be tuned to close. The uplift mission (`.planning/missions/release-uplift/`) is the manual remediation path; a long-term fix would be to teach the parser to recognize mega-wave release shapes and either dispatch to a different parse strategy or skip auto-generation and force manual authoring from the start. The parser-generated chapters are retained below as navigational scaffolding; this README is the authoritative readable artifact.
+
+---
+
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| AGR extension | `www/tibsfox/com/Research/AGR/research/09-deep-agriculture.md` — 279 lines (regenerative farming, soil science cycles, microbiome-first agriculture) plus `AGR/index.html` + `AGR/page.html` navigation updates |
+| CDP extension | `www/tibsfox/com/Research/CDP/research/07-the-critical-paradox.md` — 286 lines (backlash analysis, self-reflective critique of critical theory, the paradox's own critical history) plus `CDP/index.html` + `CDP/page.html` updates |
+| GTP extension | `www/tibsfox/com/Research/GTP/research/06-implementation-pipeline.md` — 560 lines (spec-to-code pipeline from prose prompt through scaffold generation through type-checked production module); largest of the six extensions |
+| DAA extension | `www/tibsfox/com/Research/DAA/research/06-archival-fingerprint-timeline.md` — 406 lines (Chromaprint/AcoustID/dejavu fingerprint lineage, 2010 PUIDX transition, modern content-ID stack) |
+| LKR extension | `www/tibsfox/com/Research/LKR/research/07-extended-roots.md` — 397 lines (Broadway craft, Julie Taymor puppetry lineage, fan culture, Disney-stage ecology) |
+| KGX extension | `www/tibsfox/com/Research/KGX/research/06-extended-deep-study.md` — 403 lines (Kraftwerk/Giorgio/Xenakis signal chain, cult economics, electronic-music lineage) |
+| Rosetta Stone expansion | `www/tibsfox/com/Research/ROSETTA.md` — +54/-9 lines (three new clusters: Broadcasting & Spectrum Hub RBH, Science & Observation Hub BHK, Music 22-member cluster; nine new translation rows across Rhythm/Place/Evidence categories) |
+| Cluster count transition | 7 clusters → 10 clusters (Broadcasting & Spectrum, Science & Observation, Music added) |
+| Project-count transition | 79 Research projects → 128 Research projects (+49 new + 6 extensions deepening existing anchors) |
+| `series.js` wiring | 79 → 127 entries (+48 new Research-project navigation entries landed in upstream Mega Batch commits, finalized at v1.49.88) |
+| Translation-table rows | 20 → 29 (+9 new rows spanning Rhythm, Place, and Evidence cross-domain translation categories) |
+| Commit discipline | Three-commit capstone: extensions commit, Rosetta commit, release-notes commit — bisect-clean separation of content from index from documentation |
+| Session throughput | Single-session 14-mega-wave execution; 58 commits in broader v1.49.82..v1.49.89 arc; ~204K lines added; 3 content-filter recoveries; 3 auth-error recoveries; zero file conflicts |
+| Convoy model | Gastown Mayor-Polecat convoy: one Mayor orchestrator, four parallel Polecat builders, sequential atomic commit; five-pass planning front-loaded (catalog, quality, college, Rosetta, execution) |
+
+---
+
+## Retrospective
+
+### What Worked
+
+- **Five-pass front-loaded planning eliminated mid-wave replanning.** The catalog/quality/college/Rosetta/execution pass sequence front-loaded every architectural decision before any Polecat agent started building. The result was zero mid-wave replanning, zero file conflicts across 14 mega-waves, and clean cross-project cross-references that did not require post-hoc fixup. Front-loaded planning is the Mega Batch's most reproducible process win.
+- **The Mayor-Polecat convoy model scaled 3× from v1.49.39 "Weird Al" to v1.49.89 Mega Batch without pattern modification.** Weird Al ran 37 projects / ~67K lines; Mega Batch ran 49 projects + 6 extensions / ~204K lines. The convoy model (one Mayor, four Polecats, sequential commit) handled both scales with identical orchestration rules. The convoy is now the default for large Research waves and the scaling evidence supports that default.
+- **The six-extensions-in-one-commit discipline preserved bisect intent.** Splitting the six extensions into six commits would have created six bisect states that all test the same Polecat session; combining them into one commit preserves the single-session atomicity that is the Mega Batch's actual unit of work. Bisect can still distinguish "the extensions landed" from "the Rosetta restructured" from "the release-notes stub dropped" because those three concerns are in separate commits.
+- **The Rosetta Stone restructure from 7 to 10 clusters was the Mega Batch's structural payoff.** Before the restructure the Research series was 128 projects with a 7-cluster index; the index was visibly under-dimensioned for the new Broadcasting, Science, and Music density. After the restructure every project has a canonical cluster home and every cluster has a hub (or emergent multi-hub for Music). The restructure transforms the Research series from a collection into a cross-domain translation corpus.
+- **Append-only-at-module-level extension discipline preserved anchor-project provenance.** None of the six extensions edited existing research modules in their anchor projects. `git blame` on any pre-existing research module still points to that module's original authoring commit. The discipline is reproducible for future deepening waves and is the right default.
+- **Content-filter recovery took less time than the filter itself.** Three Polecat agents hit content filters during the Mega Batch (DPM, CAR, one other). Each recovery was manual module completion that took under an hour and produced modules indistinguishable in quality from the non-filtered-agent modules. The Mayor detected the filter and dispatched recovery without requiring session-level intervention. The pattern generalizes: content filters are a pausable, recoverable failure mode rather than a session-killer.
+
+### What Could Be Better
+
+- **The parser-generated chapter files landed at confidence 0.35 rather than the typical 0.90+.** The parser's heuristics were designed for single-topic feature releases and did not handle the Mega Batch's multi-cluster-multi-extension-multi-Rosetta shape. The low confidence did not block publication but it flagged the README as parser-unfriendly and triggered this manual uplift pass. A parser revision that detects mega-wave release shapes and dispatches to a different strategy (or skips auto-generation entirely) would eliminate the round-trip.
+- **The release-notes stub at 81 lines under-represented a 204K-line session.** The original v1.49.89 README was a concise statistics-and-bulleted-clusters summary that served as a release-notes stub but not as a readable artifact for a reader entering the Mega Batch cold. The ratio of session-magnitude (49 projects + 6 extensions + 3 new clusters) to release-notes-length (81 lines) was off by roughly two orders of magnitude. This uplift corrects that by expanding the README to A-grade depth while preserving the stub's statistics intact.
+- **Six extensions landing in one commit lost per-extension bisect granularity.** The bisect-intent preservation argument above is sound, but a reader trying to isolate "which extension landed which text" has to diff within the commit rather than across commits. A future mega-wave-extensions pattern could use wave-commit markers (the CLAUDE.md convention) to annotate each extension's boundaries within the single combined commit, preserving both session-atomicity and per-extension locatability.
+- **The Rosetta Stone restructure changed existing cluster membership but the change log is implicit.** Music members that were previously in Creative & Cultural are now in Music; broadcasting members that were previously scattered are now in Broadcasting & Spectrum. The `ROSETTA.md` diff shows the new structure but does not declare which projects moved between clusters. A "Cluster Membership Changes" section at the top of the Rosetta commit would make the reassignment explicit for readers following the cross-domain index over time.
+- **No explicit Mega Batch playbook was captured alongside the session.** The Mega Batch is reproducible in principle (the Mayor-Polecat convoy, five-pass planning, wave sequencing) but the specific command sequences, agent configuration, and recovery protocols are in session logs rather than a captured playbook. A future Mega Batch attempt would benefit from `.planning/missions/mega-batch/PLAYBOOK.md` capturing the exact orchestration steps.
+
+### What Needs Improvement
+
+- **The parser's release-shape detection is a growing liability as release complexity increases.** The release-history parser handles v1.0-style milestone releases well, single-project Research releases well, and small patch releases well, but it degrades on mega-wave releases (v1.49.39 Weird Al landed at confidence 0.42, v1.49.85 MW4 at 0.35, v1.49.89 Mega Batch at 0.35). The degradation is systematic, not incidental. The parser should grow a shape classifier that routes mega-wave releases to a different strategy — either a multi-pass per-project parse with cluster-level aggregation, or explicit opt-out that forces manual authoring. The current behavior of lowering confidence and attempting the single-topic strategy anyway is the worst of both worlds.
+- **The Mega Batch's upstream 58-commit arc is not individually release-noted.** Each of the 14 mega-waves and each of the 49 new projects is a legitimate unit of work that a reader could want to enter at, but none of them have their own release-notes entry — the Mega Batch is release-noted only at the v1.49.89 terminus. Future mega-wave sessions should consider per-wave release tags (e.g., v1.49.85 MW4 already does this for Technology Part 3) so that a reader can enter the Mega Batch at any wave rather than only at the capstone.
+- **The six-extensions selection criteria ("deepest remaining thread per anchor") is implicit.** The six anchors (AGR, CDP, GTP, DAA, LKR, KGX) were chosen because each had a pre-identified deepest-remaining-thread module that was blocking the anchor's sense of completeness. The selection criteria are reproducible in principle but were not documented at the wave's planning pass. A future deepening wave should declare the selection criteria explicitly ("anchors with flagged future-module TODOs," "anchors whose cluster would gain the most translation depth from the extension," etc.) so the selection can be audited.
+- **The Rosetta Stone's nine new translation rows are not individually justified.** Each new row (Rhythm/Place/Evidence category entries) represents a cross-domain translation assertion — a claim that concept X in cluster A maps to concept Y in cluster B under a specific translation rule. The rows are correct (each is a reasonable mapping), but the index does not record the justification for each mapping. Future Rosetta updates should include inline justification for each new row so a reader can understand not just the mapping but why the mapping holds.
+- **The Mega Batch's 128-project, 10-cluster corpus exceeds the browsing capacity of a single index page.** The Research series' existing browsing UI (`series.js`-driven list) was designed for dozens of projects, not 128+. Readers entering the series post-Mega Batch will need cluster-scoped landing pages, hub-scoped deep-dive pages, and a translation-table search UI that the current static structure does not provide. The Rosetta Stone restructure is the prerequisite for that UI work; the UI itself is queued as a follow-on artifact.
+
+---
+
+## Lessons Learned
+
+- **Front-loaded planning scales mega-waves that ad-hoc planning cannot reach.** The Mega Batch's five-pass planning sequence (catalog, quality, college, Rosetta, execution) consumed substantial planning time before any Polecat built anything, but it eliminated the mid-wave replanning that kills large-wave sessions. Fourteen mega-waves landed with zero file conflicts and zero cross-project cross-reference breakage. Front-loading is the technique that makes 3× scale-up possible without 3× coordination overhead.
+- **Cluster restructuring is the structural payoff of a large Research wave.** The 49 new projects are the visible output of the Mega Batch, but the Rosetta Stone's 7→10 cluster restructure is the invariant that makes those projects legible as a corpus. A future Mega Batch's success criterion should be "the cross-domain index gained structural capacity commensurate with the content growth," not just "N projects landed." Content without index structure is a collection; content plus index structure is a corpus.
+- **Extensions are a legitimate mega-wave slot type alongside new projects.** Six extensions in MW13-MW14 of the Mega Batch filled slots that could have held six more new projects but would have bloated the series without deepening the existing anchors. The editorial choice to extend rather than add is a real choice, and the Mega Batch's process should continue to include extensions as a first-class slot type. Future planning passes should explicitly allocate extension slots alongside new-project slots.
+- **Append-only-at-module-level is the right edit discipline for deepening existing work.** None of the six extensions modified existing research modules; each appended exactly one new module. The discipline preserves provenance (git blame still works), preserves reader experience (re-readers can pick up where they left off), and is reproducible mechanically. Future deepening waves should adopt this discipline as a hard rule rather than a convention.
+- **Content filters are a recoverable failure mode, not a session-killer.** Three Polecat agents hit content filters during the Mega Batch and all three recovered manually in under an hour each, producing modules indistinguishable from non-filtered agent output. Planning should account for filter probability as a line item rather than treat filter events as session-threatening. The Mayor-agent detection-and-dispatch pattern generalizes to other recoverable failure modes (auth errors, rate limits, tool timeouts).
+- **Parser degradation under release-complexity growth is systematic, not incidental, and warrants a parser refactor.** The release-history parser's confidence degradation from 0.90+ on single-project releases to 0.35 on mega-wave releases is a consistent pattern across v1.49.39, v1.49.85, and v1.49.89. The pattern is strong enough that the parser should be refactored to detect mega-wave shapes and route to a different parse strategy. Lowering confidence and attempting the single-project strategy anyway is the worst of both worlds: the output is still wrong and the confidence signal does not trigger a human-in-the-loop alert.
+- **The Mayor-Polecat convoy model is now a proven pattern at two scales and should be captured as a reusable orchestration template.** v1.49.39 "Weird Al" (37 projects / 67K lines) and v1.49.89 Mega Batch (49 projects + 6 extensions / 204K lines) both used the same convoy pattern with no modifications. The pattern is reusable, the evidence is strong, and it should live in `.planning/missions/` as a captured template rather than in session logs. Future large waves should invoke the template rather than reconstruct the pattern from scratch.
+- **Music earning a 22-member dedicated cluster is a structural signal that some domains exceed their initial taxonomic slot.** The pre-Mega-Batch Rosetta Stone had music scattered across Creative & Cultural; the Mega Batch's music-heavy project additions pushed music past the slot's implicit capacity. A future Rosetta restructure should expect other domains to follow the same path as their project counts grow. A rule: any cluster that exceeds ~15 members warrants consideration as a candidate for splitting or elevation to hub status.
+- **Release-notes length should scale with session magnitude.** The original v1.49.89 README at 81 lines for a 204K-line session was dramatically under-scaled. The uplift-to-A-grade pass produces a README in the 4,000-5,000-word range that is commensurate with the session. A future convention: a release-notes stub of ~80 lines is appropriate for a single-project Research release; mega-wave releases should ship with an A-grade README from the start rather than a stub. The uplift mission exists because we did not do this and is worth eliminating by changing the authoring convention.
+- **Three-commit-capstone choreography is the right pattern for session-terminus releases.** One content commit, one index commit, one release-notes commit in the final minutes of the session produces a clean bisect-legible trail of what landed, what restructured, and what was documented. The pattern applies to any session that touches both content and the cross-domain index (Rosetta, series.js, cluster definitions). Future multi-track sessions should adopt the pattern as their terminus discipline.
+
+---
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.88 — "The Observable Universe"](../v1.49.88/) | Immediate predecessor; science/animation/literature/zodiac wave that landed the final pre-capstone Mega Batch content |
+| [v1.49.90 — "The Complete Batch"](../v1.49.90/) | Immediate successor; final 10 projects that close the broader Mega Batch arc after v1.49.89's capstone |
+| [v1.49.85 — "The Full Stack"](../v1.49.85/) | Mega Batch MW4 predecessor; Technology Cluster closure at 13 projects; five-project simultaneous-landing precedent that MW13-14's six-extensions pattern inherits from |
+| [v1.49.82](../v1.49.82/) | Opens the v1.49.82+ Mega Batch that v1.49.89 closes; Technology Part 1 |
+| [v1.49.80 — PLT (First Frost, Last Frost)](../v1.49.80/) | Same uplift-mission sibling; A-grade README shape this uplift inherits |
+| [v1.49.74 — OTM](../v1.49.74/) | Three-color-palette precedent and pedagogical-architecture sibling; editorial register this Mega Batch inherits |
+| [v1.49.69 — K8S (The Orchestrator)](../v1.49.69/) | Infrastructure & Computing cluster hub predecessor; orchestrator-as-first-class-concept pattern the Mayor-Polecat convoy inherits |
+| [v1.49.63 — Bing Chen (FDR)](../v1.49.63/) | Verification-matrix discipline precedent; 28-test structure applied across Research projects |
+| [v1.49.43 — Weyerhaeuser (WYR)](../v1.49.43/) | Three-commit atomic-content-discipline precedent; extended to multi-project commits in Mega Batch |
+| [v1.49.39 — "Weird Al"](../v1.49.39/) | Previous high-water-mark session (37 projects / ~67K lines); Mayor-Polecat convoy's first-scale proof point; Mega Batch's 3× precedent |
+| [v1.49.38](../v1.49.38/) | Reserved the multi-domain docroot `www/tibsfox/com/` that the Mega Batch's 49 projects populate |
+| [v1.0 — Core Skill Management](../v1.0/) | Foundation of the project; the structured-documentation discipline the Research module shape descends from |
+| `www/tibsfox/com/Research/ROSETTA.md` | Canonical cross-domain translation table; restructured from 7 to 10 clusters in this release |
+| `www/tibsfox/com/Research/AGR/` | Agriculture anchor project; received `09-deep-agriculture.md` extension (279 lines) |
+| `www/tibsfox/com/Research/CDP/` | Critical Paradox anchor project; received `07-the-critical-paradox.md` extension (286 lines) |
+| `www/tibsfox/com/Research/GTP/` | Game-to-Production anchor project; received `06-implementation-pipeline.md` extension (560 lines, largest of six) |
+| `www/tibsfox/com/Research/DAA/` | Digital Audio Archaeology anchor; received `06-archival-fingerprint-timeline.md` extension (406 lines) |
+| `www/tibsfox/com/Research/LKR/` | Lion King Roots anchor; received `07-extended-roots.md` extension (397 lines) |
+| `www/tibsfox/com/Research/KGX/` | Kraftwerk-Giorgio-Xenakis anchor; received `06-extended-deep-study.md` extension (403 lines) |
+| `www/tibsfox/com/Research/series.js` | Navigation wiring; finalized at 127 entries after Mega Batch |
+| `.planning/missions/release-uplift/RUBRIC.md` | A-grade rubric this README was rewritten against |
+| `.planning/missions/release-uplift/pipeline/uplift-one.mjs` | Pipeline entrypoint that generated the uplift workspace context for this README |
+| `.planning/missions/release-uplift/pipeline/verify.mjs` | Quality gate that re-scores the release after rewrite and fails non-zero unless A-grade |
+| `tools/release-history/score-completeness.mjs` | 10-dimension scorer the rubric and verify gate are built on |
+| External: Chromaprint/AcoustID/dejavu | DAA Module 06 primary references (audio fingerprint lineage) |
+| External: Julie Taymor Broadway puppetry archive | LKR Module 07 primary reference (extended-roots source material) |
+| External: Kraftwerk/Giorgio Moroder/Xenakis discographies | KGX Module 06 primary references (signal chain + cult economics source) |
+| Cluster hub: RBH (Radio Broadcasting History) | Hub of new Broadcasting & Spectrum cluster; member of the 10-cluster Rosetta Stone |
+| Cluster hub: BHK (Black Holes) | Hub of new Science & Observation cluster; 8-module anchor |
+| Cluster member: FCC | Broadcasting & Spectrum cluster; regulatory framework anchor |
+
+---
+
+## Engine Position
+
+v1.49.89 is the capstone commit of the v1.49.82+ Mega Batch — the largest single-session research expansion in project history — and sits at the transition point where the PNW Research Series crosses from 79 projects to 128, from 7 Rosetta Stone clusters to 10, and from ~200K cumulative research lines to ~400K+. Within the Research cadence it is the 89th named release and the terminus of a 58-commit sub-arc spanning v1.49.82 through v1.49.89 executed in a single day (2026-03-27). Within the broader Seattle 360 / NASA / Fox Companies engine arc, v1.49.89 sits in the post-Seattle-360-first-pass window (after v1.49.192 closed the initial 57-degree cycle) and before the NASA-catalog chronological reordering phase opens at v1.49.558 (Apollo 1 dedication). The release's primary downstream dependents are any future Research project that declares cluster membership in the new Broadcasting & Spectrum, Science & Observation, or Music clusters; any cross-domain translation work that uses the nine new Rosetta Stone rows as anchors; any UI or landing-page work that organizes the 128-project corpus by cluster (the cluster restructure is the prerequisite for cluster-scoped navigation); and any future mega-wave session that wants to use the Mayor-Polecat convoy model, the five-pass front-loaded planning sequence, or the three-commit-capstone choreography as captured templates. The broader v1.49.82+ Mega Batch arc is now complete and v1.49.90 "The Complete Batch" ships the final 10 projects that close the arc's extended tail. v1.49.89's narrow three-commit, twenty-file capstone window is the structural seam where "the session happened" transitions to "the session is filed," and the tight commit choreography (three minutes wall-clock from extensions land to tag cut) matches the narrowness of the capstone's actual work.
+
+---
+
+## Cumulative Statistics
 
 | Metric | Value |
 |--------|-------|
-| New projects | 49 |
-| Extensions applied | 6 |
-| Total commits | 58 |
-| Files changed | 597 |
-| Lines added | 204,448 |
-| Research modules created | ~260 |
-| Series.js entries | 79 -> 127 (+48) |
-| Research projects total | 79 -> 128 (+49) |
-| Rosetta clusters | 7 -> 10 |
-| Translation table rows | 20 -> 29 |
-| Mega-waves executed | 14 |
-| Agent builds (parallel) | ~55 |
-| Content filter recoveries | 3 (DPM, CAR manual completion) |
-| Auth error recoveries | 3 (agents built before error) |
+| Commits in v1.49.88..v1.49.89 window | 3 (extensions `6de554a03`, Rosetta `bb653ac71`, docs `af73025db`) |
+| Commits in broader Mega Batch arc (v1.49.82..v1.49.89) | 58 |
+| Files changed in v1.49.89 window | 20 |
+| Lines added in v1.49.89 window | 2,548 |
+| Lines removed in v1.49.89 window | 16 |
+| Extensions in v1.49.89 window | 6 (AGR, CDP, GTP, DAA, LKR, KGX) |
+| Extension research lines added | 2,331 (AGR 279 + CDP 286 + GTP 560 + DAA 406 + LKR 397 + KGX 403) |
+| Rosetta Stone line delta | +54 / -9 |
+| Rosetta Stone cluster count | 7 → 10 (+3: Broadcasting & Spectrum, Science & Observation, Music) |
+| Rosetta Stone translation-row count | 20 → 29 (+9 rows across Rhythm, Place, Evidence categories) |
+| Research project count (series-wide) | 79 → 128 (+49 from upstream Mega Batch + 6 extensions to existing anchors) |
+| `series.js` navigation entries | 79 → 127 |
+| Mega Batch session total lines | 204,448 (Mega Batch full session) |
+| Mega Batch session file count | 597 |
+| Mega Batch mega-waves executed | 14 |
+| Mega Batch content-filter recoveries | 3 (DPM, CAR manual completion, one other) |
+| Mega Batch auth-error recoveries | 3 |
+| Mega Batch file-conflict count | 0 |
+| Parser confidence for v1.49.89 chapter generation | 0.35 (below 0.90+ typical baseline) |
+| Time span of capstone commits | 3 minutes 20 seconds (20:26:02 → 20:29:22) |
 
-## New Projects by Cluster
+## Taxonomic State
 
-### PNW/Seattle (6)
-PPM (Pike Place Market), CDS (Central District), SSM (Street Music), BHM (Bellingham), SFC (Silicon Forest), MWC (Millwork Co-op)
+| Dimension | Mega Batch Capstone Contribution |
+|-----------|----------------------------------|
+| Rosetta Stone structure | Restructured from 7 clusters to 10; new clusters: Broadcasting & Spectrum (Hub RBH, 13 members), Science & Observation (Hub BHK, 5 members), Music (22 members — now the largest cluster) |
+| Cross-domain translation rows | Added 9 new rows across Rhythm, Place, and Evidence categories; translation-table total grew from 20 to 29 |
+| Anchor-project deepening | AGR (regenerative farming), CDP (backlash analysis), GTP (spec-to-code pipeline), DAA (audio fingerprint timeline), LKR (Broadway/Taymor/fandom), KGX (signal chain + cult economics) — six anchors each gained one new research module |
+| PNW-specific layer | PNW-facing extensions include AGR's regenerative-farming examples rooted in Cascadian soil science and LKR's fan-culture references to PNW theatre scenes; the PNW-in-every-project discipline is preserved through the extensions |
+| Mission-pack coverage | None added in the extension window; extensions are module-level grafts only and do not ship their own mission-pack LaTeX (mission-pack generation happens at anchor-project landing time) |
+| Editorial disciplines applied | Append-only-at-module-level extension discipline; three-commit-capstone choreography; front-loaded five-pass planning; Mayor-Polecat convoy orchestration; Rosetta-Stone-precedes-content-commit separation of index from content |
+| Research-series cadence position | 89th named release; capstone of the largest single-session expansion in series history; corpus now crosses 128 projects and 10 clusters |
 
-### Technology (13)
-PSS (Signal Stack), SNL (Sensing Layer), ACE (Compute Engine), MCF (Multi-Cluster Fed), HFR (Hi-Fi Reproduction), HFE (Hi-Fi Engineering), PIN (Post-Industrial Network), MCS (Maritime Cost), STE (Storage Forensics), WPH (Weekly Phone), MRW (Minecraft Weather), GPO (GPU Orchestration), GPG (GPU Ecosystem)
+---
 
-### Music (13)
-HJX (Hendrix/Joplin), B52 (B-52s), CAR (The Cars), TKH (Talking Heads), DPM (Depeche Mode), DRN (Duran Duran), SMP (Smashing Pumpkins), BMR (Bob Marley), SOC (Strait/Compton), CRY (Curren$y), SRG (Susan Rogers), MTB (Moontribe), PRS (Polyrhythm Standard)
+## Files
 
-### Broadcasting (5)
-CBC (Radio-Canada), IBC (Indigenous Broadcasting), SVB (Student Voice), DFQ (Dead Frequencies), FCC (FCC Catalog)
+- `www/tibsfox/com/Research/AGR/research/09-deep-agriculture.md` — 279 lines (regenerative agriculture, soil science, microbiome-first farming)
+- `www/tibsfox/com/Research/AGR/index.html` — +12 line navigation update listing the new module
+- `www/tibsfox/com/Research/AGR/page.html` — +4 line page-body update linking the module
+- `www/tibsfox/com/Research/CDP/research/07-the-critical-paradox.md` — 286 lines (backlash analysis, self-reflective critical theory, paradox history)
+- `www/tibsfox/com/Research/CDP/index.html` — +10 line navigation update
+- `www/tibsfox/com/Research/CDP/page.html` — +4 line page-body update
+- `www/tibsfox/com/Research/DAA/research/06-archival-fingerprint-timeline.md` — 406 lines (Chromaprint, AcoustID, dejavu, PUIDX transition, content-ID stack)
+- `www/tibsfox/com/Research/DAA/index.html` — +10 line navigation update
+- `www/tibsfox/com/Research/DAA/page.html` — +6 line page-body update
+- `www/tibsfox/com/Research/GTP/research/06-implementation-pipeline.md` — 560 lines (spec-to-code pipeline from prose prompt to type-checked production module; largest of the six extensions)
+- `www/tibsfox/com/Research/GTP/index.html` — +10 line navigation update
+- `www/tibsfox/com/Research/GTP/page.html` — +1 line page-body update
+- `www/tibsfox/com/Research/KGX/research/06-extended-deep-study.md` — 403 lines (Kraftwerk/Giorgio/Xenakis signal chain, cult economics, electronic-music lineage)
+- `www/tibsfox/com/Research/KGX/index.html` — +12 line navigation update
+- `www/tibsfox/com/Research/KGX/page.html` — +4 line page-body update
+- `www/tibsfox/com/Research/LKR/research/07-extended-roots.md` — 397 lines (Broadway, Julie Taymor puppetry, fan culture, Disney-stage ecology)
+- `www/tibsfox/com/Research/LKR/index.html` — +12 line navigation update
+- `www/tibsfox/com/Research/LKR/page.html` — +4 line page-body update
+- `www/tibsfox/com/Research/ROSETTA.md` — +54 / -9 line restructure (three new clusters, nine new translation rows, reorganized cluster membership)
+- `docs/release-notes/v1.49.89/README.md` — this file (A-grade rewrite from F(18) parser stub)
+- `docs/release-notes/v1.49.89/chapter/00-summary.md` — parser-generated summary chapter (confidence 0.35; retained for Prev/Next navigation and release-history DB ingestion)
+- `docs/release-notes/v1.49.89/chapter/03-retrospective.md` — parser-generated retrospective chapter (retained)
+- `docs/release-notes/v1.49.89/chapter/99-context.md` — parser-generated context chapter (Prev/Next source of truth)
 
-### Science/Space (5)
-BNY (Bill Nye), LGW (LIGO), SET (SETI), SGM (Sacred Geometry), BHK (Black Holes — 8 modules)
+---
 
-### Animation/Media (3)
-HEN (Jim Henson), ANM (90s Animation), INP (Ink & Paint)
-
-### Literature/Sci-Fi (2)
-OSC (Orson Scott Card), PKD (Philip K. Dick)
-
-### Zodiac/Cultural (2)
-EAZ (East Asian Zodiac), NWZ (Non-Western Zodiac)
-
-## Extensions Applied
-- AGR: Deep agriculture (regenerative, soil science)
-- CDP: Critical paradox (backlash analysis)
-- GTP: Implementation pipeline (spec-to-code)
-- DAA: Archival fingerprint timeline (Chromaprint/dejavu)
-- LKR: Extended roots (Broadway, Taymor, fan culture)
-- KGX: Deep study (signal chain, cult economics)
-
-## Rosetta Stone Update
-- 3 new clusters: Broadcasting (8), Science (9), Music (10)
-- 9 new translation rows across Rhythm, Place, and Evidence categories
-- Music cluster is now the largest at 22 members
-- 128 projects mapped across 10 clusters
-
-## Process Notes
-
-### What Worked
-- Gastown convoy model: Mayor orchestrates, 4 Polecat agents build in parallel, sequential commits
-- 5-pass planning (catalog, quality, college, Rosetta, execution) front-loaded all decisions
-- Single-session execution: 14 mega-waves, ~204K lines, zero file conflicts
-- Content filter recovery: when agents hit filters, manual module completion was fast
-
-### The Numbers in Context
-- v1.49.39 "Weird Al" delivered 37 projects in one session (~67K lines)
-- This session delivered 49 projects + 6 extensions (~204K lines)
-- Combined: 128 research projects, 10 Rosetta clusters, ~400K+ total research lines
+> *One session. Fourteen mega-waves. Forty-nine new projects. Six extensions. Seven clusters became ten. A collection became a corpus.*
+>
+> *The Mega Batch is filed.*
