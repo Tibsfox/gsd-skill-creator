@@ -80,6 +80,14 @@
             "command": "node .claude/hooks/gsd-response-scan.cjs"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/observe-tool-trace.cjs"
+          }
+        ]
       }
     ]
   },

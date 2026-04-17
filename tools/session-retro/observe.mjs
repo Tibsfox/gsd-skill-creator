@@ -109,6 +109,17 @@ function cmdEnd() {
     console.error('[observe] no session in progress');
     process.exit(1);
   }
+
+  // Run the trace analyzer so PostToolUse-detected patterns land in
+  // current.jsonl before it's archived. Best-effort — don't fail `end`
+  // if the analyzer errors or the trace file is missing.
+  try {
+    const analyzerPath = join(HERE, 'analyze-trace.mjs');
+    if (existsSync(analyzerPath)) {
+      execSync(`node "${analyzerPath}"`, { cwd: REPO_ROOT, stdio: 'ignore' });
+    }
+  } catch {}
+
   const meta = JSON.parse(readFileSync(META_FILE, 'utf8'));
   const endedAt = new Date().toISOString();
   const startedStamp = meta.started_at.slice(0, 19).replace(/[:T]/g, '-');
@@ -119,6 +130,12 @@ function cmdEnd() {
   const finalMeta = { ...meta, ended_at: endedAt, ended_commit: tryGetCommit(), archive: archiveName };
   writeFileSync(archivePath.replace(/\.jsonl$/, '.meta.json'), JSON.stringify(finalMeta, null, 2));
   renameSync(CURRENT_FILE, archivePath);
+  // Also rotate the tool-trace file so the next session starts clean.
+  const TRACE_ARCHIVE = archivePath.replace(/\.jsonl$/, '.tool-trace.jsonl');
+  const traceFile = join(SESSIONS_DIR, 'current.tool-trace.jsonl');
+  if (existsSync(traceFile)) {
+    try { renameSync(traceFile, TRACE_ARCHIVE); } catch {}
+  }
   try { renameSync(META_FILE, archivePath.replace(/\.jsonl$/, '.meta.json.bak')); } catch {}
   console.log(JSON.stringify({ action: 'end', ...finalMeta }));
 }
