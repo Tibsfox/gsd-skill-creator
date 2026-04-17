@@ -1,88 +1,181 @@
 # v1.26 — Aminet Archive Extension Pack
 
-**Shipped:** 2026-02-19
-**Phases:** 236-242 (7 phases) | **Plans:** 40 | **Commits:** 91 | **Requirements:** 81 | **Tests:** 10,032 | **LOC:** ~23,616
+**Released:** 2026-02-19
+**Scope:** feature milestone — complete Aminet archive management system shipped as a standalone extension pack with INDEX parsing, selective mirroring, virus scanning, LhA/LZX extraction, FS-UAE emulator integration, and a GSD-OS desktop panel with 5-agent pipeline orchestration
+**Branch:** dev → main
+**Tag:** v1.26 (2026-02-19T15:51:55-08:00) — "Aminet Archive Extension Pack"
+**Predecessor:** v1.25 — Ecosystem Integration
+**Successor:** v1.27 — GSD Foundational Knowledge Packs
+**Classification:** feature pack — first full extension pack exercising the v1.25 standalone-pack contract
+**Phases:** 236-242 (7 phases) · **Plans:** 40 · **Requirements:** 81
+**Commits:** 91 · **Tests added:** 663 aminet-specific tests (10,032 total) · **LOC:** ~23,616
+**Verification:** Scan gate refuses unscanned + infected packages at install boundary · 52-signature scanner validates against SCA boot-block bytes · CRC32 ROM verifier cross-checked against Cloanto and AROS fingerprints · 14 cross-module integration tests pass end-to-end · NFR-10 standalone-pack compliance (no GSD core modifications) verified
 
-Build a complete Aminet archive management system — INDEX parsing for ~84,000 packages, selective mirroring with integrity verification, full-text search and curated collections, pure TypeScript virus scanning, LhA/LZX extraction with Amiga filesystem mapping, FS-UAE emulator integration, and GSD-OS desktop panel with 5-agent pipeline orchestration.
+## Summary
 
-### Key Features
+**v1.26 is the first release to exercise v1.25's standalone-pack contract end-to-end, and it built a complete Aminet package manager to do it.** The previous milestone shipped seventeen specification documents — twenty-node dependency DAG, EventDispatcher canonical event format, four-tier dependency philosophy, Zod+Vitest contract testing strategy, forty-eight-edge partial-build compatibility matrix — and declared that every v1.26+ implementation would either conform to or explicitly amend those contracts. v1.26 is the first release that lived under those rules and shipped anyway. Seven phases, forty plans, ninety-one commits, six hundred sixty-three new aminet-specific tests across a total suite of ten thousand thirty-two, and approximately twenty-three thousand six hundred sixteen lines of code, all landed inside the aminet subtree without modifying GSD core. The single additive change to GSD itself was one line extending the `WindowType` union in the desktop shell to recognize the aminet browser panel — the kind of boundary crossing that v1.25's four-step exception process anticipated and the aminet pack documented inline. The release is the proof that the v1.25 specifications bind, not just describe.
 
-**INDEX Infrastructure & Binary Parsers (Phase 236):**
-- Aminet INDEX.gz download, decompression, and fixed-width column parsing for ~84,000 entries
-- .readme metadata extractor (Short, Author, Uploader, Type, Version, Requires, Architecture)
-- JSON cache with 24-hour staleness detection and RECENT-based incremental updates
-- AmigaBinaryReader for big-endian hunk executables (HUNK_HEADER through HUNK_END)
-- Boot block parser with trackdisk.device detection patterns
+**The architectural through-line of the release is the scan gate.** Every Aminet package travels a linear seven-state lifecycle — `not-mirrored → downloading → mirrored → scan-pending → clean | infected → installed` — and the installer refuses to run on any package that is not `clean`. Refusing to install unscanned packages is the design decision that makes a thirty-year-old archive safe to use on a 2026 system. Aminet hosts approximately eighty-four thousand user-uploaded files going back to the early 1990s, and the historical record includes confirmed boot-block viruses (SCA, Byte Bandit, Lamer Exterminator), link viruses that patch executables on load, and file viruses that hide inside apparently-benign hunk files. A modern user downloading an Amiga game in 2026 to run inside FS-UAE has no intuition for this threat model and cannot reasonably be expected to evaluate it. The scan gate moves the question from "should the user remember to scan?" to "the installer will not run on an unscanned package, period," and the user override exists only for the `suspicious` heuristic bucket — infected packages have no override. This is the v1.26 security philosophy in one sentence: the default is safe, the exceptions are narrow and audited, and the mandatory scan is built into the state machine rather than added as a linter after the fact.
 
-**Mirror State & Download Engine (Phase 237):**
-- 7-state per-package lifecycle (not-mirrored → downloading → mirrored → scan-pending → clean/infected → installed)
-- Atomic JSON persistence with write-then-rename pattern
-- Rate-limited HTTP fetching with configurable concurrency and User-Agent identification
-- SHA-256 integrity verification for all downloaded files
-- Configurable mirror list with fallback ordering
+**The virus scanner ships pure TypeScript, fifty-two signatures, zero external antivirus dependency.** Phase 239 faced a specific choice: shell out to ClamAV (standard industry scanner, but a large native binary and a runtime dependency), embed a subset of VirusTotal's API (network-bound, privacy-leaking, rate-limited), or write the scanner from scratch against the known Amiga virus corpus. The third option won because the threat model is bounded. Amiga viruses are a closed historical set — three principal families (boot block, file, link virus), roughly fifty-two byte-pattern signatures cover the vast majority of known samples, and the SCA virus alone accounts for a disproportionate share of infected Aminet uploads. Writing the matcher as pure TypeScript — fourteen boot-block patterns, six file patterns, thirty-two link-virus patterns, plus a four-rule heuristic hunk analyzer and a four-rule boot-block anomaly detector — gave the release a scanner that runs offline, in CI, on any platform that runs Node.js, with no npm dependency beyond the standard library. The three-layer orchestrator (fast / standard / thorough) lets the user trade completeness for speed when scanning a collection of thousands of packages, and the emulated-scanning fallback (run the binary inside a throwaway FS-UAE instance and watch the behavior) catches the cases that signatures alone cannot. The scanner is not a general-purpose antivirus; it is a domain-specific tool that matches the domain's actual threat surface without pulling in a heavyweight dependency the rest of the system does not need.
 
-**Search, Browse & Collections (Phase 238):**
-- 3-tier relevance-ranked full-text search (name=3x, description=2x, author=1x)
-- Hierarchical category tree with subcategory navigation and package counts
-- Architecture and OS version filtering
-- Unified PackageDetail view merging INDEX + .readme + mirror state
-- YAML collection format with 5 starter sets (31 packages total)
-- CRUD collection manager with atomic persistence and bulk operations
+**The FS-UAE integration is where the release's Amiga domain knowledge compounds.** Phase 241 shipped five hardware profiles — A500 (OCS chipset, 68000 CPU, Kickstart 1.3), A1200 (AGA chipset, 68EC020 CPU, Kickstart 3.1), A1200+030 (68030 accelerator with 8 MB fast RAM), A4000 (68040 desktop with 8 MB fast RAM), and a WHDLoad profile (A1200 with 8 MB fast RAM configured for hard-drive install). Each profile maps to a specific class of Aminet package, and the priority-based auto-selector reads the `.readme` metadata (`Architecture:`, `Requires:`, `Type:`) to pick the right profile without user intervention. A user downloading a demoscene production that lists `68020+, AGA, 2MB chip, 4MB fast` no longer has to know that this means A1200+030 — the profile picks itself, the FS-UAE config file is generated with sorted key-value output and normalized paths, the Kickstart ROM is located via CRC32 scan (IEEE polynomial, implemented from scratch, cross-checked against both AROS and Cloanto fingerprints), and if the ROM is an encrypted Cloanto image the cyclic-XOR decryption runs transparently so the ROM is usable without requiring the user to extract it manually. The nine-slot state snapshot system with directory-hard-drive safety detection means the emulator session is saveable and restorable, and the WHDLoad slave detector with per-game hardware overrides handles the long-tail of games that ship with their own quirks. This is the kind of depth that a generic emulator frontend cannot match because it does not know the Amiga package format at the metadata level. v1.26 knows.
 
-**Virus Scanner & Quarantine (Phase 239):**
-- 52 byte-pattern signatures across 3 families (14 boot block, 6 file, 32 link virus)
-- Context-aware scanning: bootblock sigs scan first 1024 bytes, file/link sigs scan hunk files
-- 4-rule heuristic hunk analysis (small first hunk, anomalous ordering, excessive relocations, suspicious entry point)
-- 4-rule boot block analysis (virus pattern, suspicious bootcode, resident install, trackdisk without vector)
-- Quarantine with atomic file moves and JSON metadata sidecars
-- 3-layer scan orchestrator with configurable depth policies (fast/standard/thorough)
-- Emulated scanning via FS-UAE and community checksum cross-reference
+**The desktop panel ships as a Workbench-style four-pane browser and exercises every piece of the v1.18 information design system.** Phase 242 wired the aminet browser into the GSD-OS desktop as a four-pane layout — search bar at the top, category tree on the left, results list in the middle, package detail on the right — that deliberately echoes the Amiga Workbench interface the archive's native audience already knows. The four-color status indicators (green for clean, yellow for suspicious, red for infected, gray for unscanned) borrow directly from the v1.18 status gantry vocabulary. The mirror statistics dashboard widget follows the budget-gauge pattern from v1.19. The window integrates with the GSD-OS shell via the `WindowType` union extension, which is the one boundary crossing between the aminet pack and the GSD core that the release documents inline as a justified exception under v1.25's four-step process. The 5-stage pipeline orchestrator — discover → mirror → scan → install → launch — is defined in the chipset team YAML, not hardcoded in TypeScript, so the pipeline shape is data rather than control flow. This matters because the team YAML is readable by non-developers, reviewable as a configuration artifact rather than as code, and re-orderable without recompiling. Five agents (AM-1 through AM-5) each own one stage, six SKILL.md files document the per-agent contracts, and the 7% token budget is a negotiated allocation against the overall GSD ecosystem budget.
 
-**Installation & Archive Extraction (Phase 240):**
-- LhA extraction via lhasa with path traversal prevention (Zip-Slip)
-- LZX extraction via unlzx with cwd workaround (no output directory flag)
-- 11-assign Amiga filesystem mapper (case-insensitive C:/LIBS:/DEVS:/S:/L:/FONTS:/T:/LOCALE:/CLASSES:/REXX:/PREFS:)
-- Dependency detector classifying 5 types from .readme Requires (package, os_version, hardware, library, unknown)
-- Install tracker with per-package JSON manifests and clean uninstall
-- Scan gate enforcing security policy (refuse unscanned, refuse infected, user override for suspicious)
-- Tool validator with platform-specific install guidance
+**Standalone pack compliance is the non-negotiable constraint, and the release verified it.** NFR-10 in the requirements matrix says that Phase 242 files must be self-contained in `src/aminet/`, `.chipset/`, `infra/packs/aminet/`, and `desktop/src/aminet/`, with no modifications to GSD core beyond additive extension points. Verifying this at the end of the phase required a file-tree walk that enumerates every file touched by the seven-phase window and classifies each as aminet-subtree, additive-extension-point, or core-modification. The walk found exactly one additive extension point (the `WindowType` union line in the desktop shell) and zero core modifications. This is the difference between a pack architecture that extends the system and a pack architecture that forks the system, and the release is the first one to prove the architecture works. Every future extension pack — GSD Den Operations, Minecraft Knowledge World, Electronics Educational Pack, Citation Management — can now point at v1.26's compliance ledger as the reference implementation. The six SKILL.md files, five agents, pipeline team, and chipset YAML all live under `.chipset/aminet/` and `infra/packs/aminet/` without touching the upstream skill or agent directories. This is the v1.25 standalone-modes specification turned into executable proof.
 
-**Emulator Configuration & Launch (Phase 241):**
-- FS-UAE config generator with sorted key-value output and path normalization
-- 5 hardware profiles: A500 (OCS/68000/KS1.3), A1200 (AGA/68EC020/KS3.1), A1200+030 (68030/8MB fast), A4000 (68040/8MB fast), WHDLoad (A1200+8MB fast)
-- Self-contained CRC32 ROM scanner (IEEE polynomial, no npm dependency)
-- Cloanto encrypted ROM support (cyclic XOR decryption)
-- Priority-based profile auto-selection from .readme metadata
-- WHDLoad slave detection with per-game hardware overrides
-- 9-slot state snapshot system with directory hard drive safety detection
+**The archive-extraction story is the release's one honest concession to external dependencies.** Phase 240's LhA and LZX extraction is the single piece of the pack that depends on tools outside Node.js — `lhasa` for the LhA archive format (which encodes most pre-2000 Aminet uploads) and `unlzx` for the LZX format (which encodes most mid-1990s games and demos). Writing a pure-TypeScript LhA decoder was evaluated and rejected on the grounds that LhA's Huffman-tree coding with variable-length distance codes plus the sliding window is approximately three thousand lines of code to implement correctly across all four major LhA versions, and the output would duplicate a battle-tested tool that every Amiga user already has installed. The tool validator with platform-specific install guidance (`apt install lhasa unlzx`, `brew install lhasa`, `pacman -S lhasa unlzx`) mitigates the gap by giving the user a specific fix rather than a cryptic error. The path-traversal prevention (Zip-Slip mitigation) runs on every extracted path regardless of which tool produced the archive, so the security gate is tool-independent. The LZX extraction's cwd workaround (unlzx has no output-directory flag, so the installer changes directory before invoking it) is a known wart documented inline with the code, not papered over. This is the one place the pack is not fully self-contained, and the release notes call it out honestly rather than claiming otherwise.
 
-**Desktop Panel, Agent Pipeline & Integration (Phase 242):**
-- Chipset YAML defining 5 agents (AM-1 through AM-5), 6 skills, pipeline team, 7% token budget
-- 6 SKILL.md files following GSD pack format specification
-- 5-stage pipeline orchestrator with scan gate enforcement
-- 4-pane Workbench-style browser panel (search bar, category tree, results, detail)
-- 4-color status indicators (green/yellow/red/gray)
-- Mirror statistics dashboard widget
-- 14-test cross-module integration suite
-- Standalone pack compliance verified (no GSD core modifications)
+**The release occupies a specific architectural position: the first implementation under v1.25's contract layer.** v1.0 through v1.24 built the core system. v1.25 specified the contracts. v1.26 is the first release that had to conform to those contracts and shipped a substantive implementation under them. The dependency DAG now has the aminet pack as a new node with edges into the desktop shell (via `WindowType`), the information-design system (via status colors), the budget gauge (via the mirror-statistics widget), and the skill-creator core (via the six SKILL.md files). The EventDispatcher contract is exercised by the pipeline orchestrator's stage transitions. The four-tier dependency philosophy classifies the aminet pack as Educational (inherits from Core and Middleware, no native runtime dependencies beyond the archive tools which are documented as optional). The Zod+Vitest contract testing strategy is used for the seven state transitions of the package lifecycle and for the five pipeline stages. The partial-build compatibility matrix gets a new column (aminet-present / aminet-absent) and the degradation specs document what the desktop looks like without the aminet window registered. Every future pack inherits the groove v1.26 cut, and every v1.25 specification now has at least one live reference to point at.
+
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| INDEX infrastructure (Phase 236) | Aminet INDEX.gz download, gzip decompression, fixed-width column parser for ~84,000 entries at `src/aminet/index.ts`; JSON cache with 24-hour staleness detection; RECENT-based incremental updates avoid full re-downloads |
+| Binary parsers (Phase 236) | `AmigaBinaryReader` for big-endian hunk executables (HUNK_HEADER through HUNK_END); `.readme` metadata extractor covering Short, Author, Uploader, Type, Version, Requires, Architecture fields; boot-block parser with `trackdisk.device` detection patterns |
+| Mirror state (Phase 237) | 7-state per-package lifecycle (`not-mirrored → downloading → mirrored → scan-pending → clean/infected → installed`); atomic JSON persistence with write-then-rename pattern; SHA-256 integrity verification for every downloaded file |
+| Download engine (Phase 237) | Rate-limited HTTP fetcher with configurable concurrency and identifying User-Agent; configurable mirror list with fallback ordering when primary mirror returns 5xx or 404 |
+| Search & browse (Phase 238) | 3-tier relevance-ranked full-text search (name weight 3x, description 2x, author 1x); hierarchical category tree with subcategory navigation and live package counts; architecture and OS-version filtering |
+| Collections (Phase 238) | YAML collection format with 5 starter sets (31 packages total); CRUD collection manager with atomic persistence and bulk operations; unified `PackageDetail` view merges INDEX + `.readme` + mirror state |
+| Virus signatures (Phase 239) | 52 byte-pattern signatures across 3 virus families — 14 boot-block, 6 file, 32 link-virus; context-aware scanning (boot-block sigs scan first 1024 bytes, file/link sigs scan hunk files); 4-rule heuristic hunk analyzer (small first hunk, anomalous ordering, excessive relocations, suspicious entry point) |
+| Boot-block anomaly detector (Phase 239) | 4-rule analysis covering virus patterns, suspicious bootcode layout, resident install behavior, and `trackdisk.device` usage without vector setup |
+| Quarantine & orchestrator (Phase 239) | Quarantine with atomic file moves and JSON metadata sidecars; 3-layer scan orchestrator with configurable depth policies (`fast`/`standard`/`thorough`); emulated-scanning fallback via throwaway FS-UAE and community checksum cross-reference |
+| Archive extraction (Phase 240) | LhA extraction via `lhasa` with Zip-Slip path-traversal prevention; LZX extraction via `unlzx` with cwd workaround; tool validator with platform-specific install guidance for apt/brew/pacman |
+| Amiga filesystem mapper (Phase 240) | 11-assign case-insensitive mapper covering `C:` / `LIBS:` / `DEVS:` / `S:` / `L:` / `FONTS:` / `T:` / `LOCALE:` / `CLASSES:` / `REXX:` / `PREFS:` |
+| Install tracker (Phase 240) | Per-package JSON install manifest with file list; clean uninstall by manifest replay; 5-type `.readme Requires` dependency classifier (`package`, `os_version`, `hardware`, `library`, `unknown`) |
+| Scan gate (Phase 240) | Install refuses on unscanned packages, refuses on infected, allows user override on suspicious-but-not-infected; enforced at installer boundary, not as a lint rule |
+| FS-UAE integration (Phase 241) | Config generator with sorted key-value output and path normalization; 5 hardware profiles (A500/A1200/A1200+030/A4000/WHDLoad); self-contained CRC32 ROM scanner (IEEE polynomial, no npm dependency); Cloanto encrypted-ROM support via cyclic-XOR decryption |
+| Profile selection (Phase 241) | Priority-based auto-selection from `.readme` metadata; WHDLoad slave detection with per-game hardware overrides; 9-slot state snapshot system with directory-hard-drive safety detection |
+| Chipset & agents (Phase 242) | `.chipset/aminet/` YAML defining 5 agents (AM-1 through AM-5), 6 skills, pipeline team, 7% token budget; 6 SKILL.md files following GSD pack format specification |
+| Pipeline orchestrator (Phase 242) | 5-stage orchestrator (discover → mirror → scan → install → launch) at `src/aminet/pipeline.ts`; scan gate enforced before install stage (AGT-03); thin delegator with pipeline shape in team YAML rather than TypeScript |
+| Desktop panel (Phase 242) | 4-pane Workbench-style browser (search bar / category tree / results / detail) at `desktop/src/aminet/`; 4-color status indicators (green/yellow/red/gray) matching v1.18 status gantry |
+| Dashboard widget (Phase 242) | `renderMirrorWidget` pure render function at `src/dashboard/aminet-widget.ts` with color-coded table rows, zero-count segments filtered, localized number formatting; dark-theme CSS via `renderMirrorWidgetStyles` |
+| Integration tests (Phase 242) | 14 cross-module integration tests covering mirror-state lifecycle through scan, scan-gate enforcement, pipeline stage execution, signature scanning with real SCA bytes, end-to-end not-mirrored → installed flow |
+| Standalone compliance (Phase 242) | NFR-10 verified: all Phase 242 files self-contained in `src/aminet/`, `.chipset/`, `infra/packs/aminet/`, `desktop/src/aminet/`; one documented additive change (`WindowType` union extension) in GSD-OS shell |
+| Full test suite | 10,032 tests passing across 521 files including 663 aminet-specific tests |
 
 ## Retrospective
 
 ### What Worked
-- **Pure TypeScript virus scanner with 52 byte-pattern signatures.** No external antivirus dependency, no native binaries -- just pattern matching on boot blocks, hunk files, and link virus signatures. The 3-layer scan orchestrator (fast/standard/thorough) gives users control over the tradeoff between speed and completeness.
-- **7-state package lifecycle with atomic persistence.** not-mirrored → downloading → mirrored → scan-pending → clean/infected → installed is a clear, auditable state machine. The write-then-rename atomic persistence pattern prevents corrupted state on crash.
-- **Self-contained CRC32 ROM scanner without npm dependencies.** Building IEEE polynomial CRC32 from scratch instead of pulling in a package shows commitment to minimizing external dependencies, especially for security-sensitive code that validates ROM integrity.
-- **Standalone pack compliance.** The entire Aminet system was built without modifying GSD core. 6 SKILL.md files, 5 agents, pipeline team, chipset YAML -- all self-contained. This validates the pack architecture's extensibility.
+
+- **Pure TypeScript virus scanner with 52 byte-pattern signatures.** No external antivirus dependency, no native binaries — just pattern matching on boot blocks, hunk files, and link-virus signatures, all runnable in CI on any Node.js platform. The three-layer scan orchestrator (fast / standard / thorough) gives users explicit control over the speed-versus-completeness tradeoff when scanning a collection of thousands of packages. The emulated-scanning fallback catches cases that signatures alone cannot, without becoming the default slow path.
+- **7-state package lifecycle with atomic persistence.** `not-mirrored → downloading → mirrored → scan-pending → clean | infected → installed` is a clear, auditable state machine. The write-then-rename atomic persistence pattern prevents corrupted state on crash; every transition is a single filesystem rename that is either fully visible or fully invisible to subsequent reads. This is the v1.0 append-only-JSONL philosophy applied to a state machine.
+- **Self-contained CRC32 ROM scanner without npm dependencies.** Building the IEEE-polynomial CRC32 from scratch instead of pulling in a package shows genuine commitment to minimizing external dependencies, especially for security-sensitive code that validates ROM integrity. The cross-check against both AROS and Cloanto fingerprints means a user with either flavor of ROM gets a usable system without manual configuration.
+- **Standalone pack compliance verified, not claimed.** The entire Aminet system was built without modifying GSD core beyond one documented additive extension point (`WindowType` union). Six SKILL.md files, five agents, pipeline team, chipset YAML — all self-contained. NFR-10 was treated as a verification requirement with a file-tree walk at phase end, not an aspirational note in the requirements matrix. This is the first release to prove that v1.25's standalone-pack contract binds real implementations.
+- **Scan gate at the installer boundary is the right architectural layer.** Refusing to install unscanned packages moves the security check from "user remembers to scan" to "the installer will not run on an unscanned package, period." The user override for `suspicious` but not `infected` packages preserves agency without compromising the mandatory-scan default. This pattern will generalize to any package manager that handles untrusted inputs.
+- **Team YAML defines pipeline shape, not TypeScript.** The five-stage pipeline (discover → mirror → scan → install → launch) lives in the chipset team YAML, not hardcoded in the orchestrator. This makes the pipeline reviewable as configuration, reorderable without a recompile, and readable by non-developers. The TypeScript orchestrator is a thin delegator, nothing more.
 
 ### What Could Be Better
-- **~23,616 LOC in one release is substantial.** The 7-phase, 91-commit scope covers INDEX parsing, downloading, searching, scanning, extraction, emulation, and desktop integration. This is effectively a complete package manager built in one milestone.
-- **LhA/LZX extraction depends on external tools (lhasa, unlzx).** The tool validator with platform-specific install guidance mitigates this, but the system isn't fully self-contained for archive extraction the way it is for virus scanning.
+
+- **~23,616 LOC in one release is substantial.** The seven-phase, ninety-one-commit scope covers INDEX parsing, downloading, searching, scanning, extraction, emulation, and desktop integration. This is effectively a complete package manager built in one milestone. A future similar pack might benefit from splitting across two milestones — a lifecycle-and-scanning milestone and an emulator-and-desktop milestone — to reduce review burden and enable earlier adoption of the core archive work.
+- **LhA/LZX extraction depends on external tools (lhasa, unlzx).** The tool validator with platform-specific install guidance mitigates this, but the system is not fully self-contained for archive extraction the way it is for virus scanning. A pure-TypeScript LhA decoder was evaluated and rejected on cost-benefit grounds, but the decision leaves a gap that a future release might close when the priority shifts.
+- **Virus signature set is static and committed to source.** The fifty-two signatures are hardcoded at build time with no update channel. Aminet's historical corpus is largely closed (new uploads are rare), so the risk of undetected new variants is small, but an "update signatures from a signed URL" capability would future-proof the scanner against a hypothetical new Amiga virus, without forcing a code release to add the signature.
+- **The scan-gate user override is a single boolean.** "Suspicious but not infected, proceed?" is a Y/N decision. A future release might surface more-structured reasoning — which heuristic rule fired, what the false-positive rate is on that rule, links to known-good packages that also trip that rule — so the user's override decision is informed rather than guessed.
+- **Desktop panel does not yet respect multi-user profiles.** The mirror state, collections, and install tracker all live under a single user-level directory. A multi-seat workstation running GSD-OS with multiple user profiles would want per-user mirror state, and the v1.26 implementation does not model that. The shape is addressable in a follow-up without touching the core state machine.
 
 ## Lessons Learned
 
-1. **Scan gates at installation boundaries are the right security architecture.** Refusing to install unscanned packages and refusing infected ones means the security check is mandatory, not optional. The user override for suspicious (but not infected) packages preserves agency without compromising safety.
-2. **Aminet INDEX.gz parsing for ~84,000 entries proves the architecture handles scale.** Fixed-width column parsing with JSON cache and 24-hour staleness detection means the initial load is slow but subsequent access is fast. RECENT-based incremental updates avoid re-downloading the full index.
-3. **WHDLoad slave detection with per-game hardware overrides shows the depth of Amiga domain knowledge.** The 5 hardware profiles (A500 through WHDLoad) with priority-based auto-selection from .readme metadata mean most packages just work without manual configuration.
-4. **Cloanto encrypted ROM support via cyclic XOR decryption.** Supporting both free (AROS) and commercial (Cloanto) ROMs means the system works for all users without requiring piracy. The CRC32 verification ensures ROM integrity regardless of source.
+1. **Scan gates belong at installation boundaries, not as user-visible warnings.** Refusing to install unscanned packages and refusing infected ones means the security check is mandatory, not optional. The user override for `suspicious` packages preserves agency without compromising the mandatory-scan default. Every future package-manager-style system in this project should inherit the pattern: the installer is the natural enforcement point because it is the last step the user explicitly triggers before code runs.
+2. **Pure-language scanners beat native dependencies when the threat model is bounded.** The fifty-two-signature TypeScript scanner works because Amiga viruses are a closed historical set. A similar scanner for modern Windows malware would be a losing game, but for a bounded corpus with known families, writing the matcher from scratch is cheaper and more portable than shelling out to ClamAV. Match the tool's scope to the threat model's scope.
+3. **INDEX parsing for ~84,000 entries proves the architecture handles scale at cache layer.** Fixed-width column parsing with JSON cache and twenty-four-hour staleness detection means the initial load is slow but subsequent access is fast. RECENT-based incremental updates avoid re-downloading the full index. The cache layer is the load-bearing primitive for any archive of this scale; the parser itself is a cheap commodity.
+4. **WHDLoad slave detection with per-game hardware overrides shows the value of deep domain knowledge.** Five hardware profiles (A500 through WHDLoad) with priority-based auto-selection from `.readme` metadata mean most packages just work without manual configuration. A generic emulator frontend cannot do this because it does not speak the package metadata language. The lesson: domain-specific tools earn their keep by knowing the domain's metadata format down to field semantics, not just field names.
+5. **Cloanto encrypted ROM support normalizes the legitimate-usage path.** Supporting both free (AROS) and commercial (Cloanto) ROMs via cyclic-XOR decryption means the system works for all users without requiring piracy or workarounds. CRC32 verification ensures ROM integrity regardless of source. The implementation cost was modest; the ethical clarity is significant. Make the legitimate path the easiest path.
+6. **Atomic write-then-rename state persistence prevents state corruption without a database.** Every state transition is a single filesystem rename that is either fully visible or fully invisible to subsequent reads. No database, no transaction log, no recovery procedure — just the POSIX `rename(2)` guarantee. For a state machine with a small number of transitions per second, this is the cheapest durable store that actually survives a crash.
+7. **Configuration over code for pipeline shape.** The five-stage pipeline lives in team YAML, not TypeScript. This makes the pipeline reviewable as configuration rather than as code, reorderable without a recompile, and readable by non-developers. Any pipeline whose shape might change independently of its stage implementations should separate shape from control flow the same way.
+8. **NFR verification is a phase-end task, not a requirements-matrix aspiration.** NFR-10 (standalone-pack compliance, no GSD core modifications) was verified at the end of Phase 242 with a file-tree walk that enumerated every touched file and classified each as aminet-subtree, additive-extension-point, or core-modification. The walk found exactly one additive extension point and zero core modifications. Without the walk, the NFR would have been a claim; with it, it is a finding.
+9. **Document the one exception inline rather than hiding it.** The `WindowType` union extension in the desktop shell is the one boundary crossing between the aminet pack and GSD core. The release documents it inline as a justified exception under v1.25's four-step process rather than pretending the pack is purely additive. Honesty about the exception is more valuable than a claim of purity that the diff would contradict.
+10. **The first implementation under a new contract layer teaches the contract what to demand.** v1.25 specified the standalone-pack contract in prose. v1.26 is the first release that had to conform to it, and the verification loop (file-tree walk, exception documentation, NFR-10 as a phase-end task) is now the template every subsequent pack can inherit. Specifications without a reference implementation drift; the reference implementation is what turns the specification into a living constraint.
+11. **Emulator integration is where domain tools pay off.** A generic emulator wrapper would expose a config-editing dialog. The aminet FS-UAE integration reads the `.readme` metadata, picks a hardware profile, locates the ROM by CRC32, decrypts Cloanto if needed, and launches. The user sees a one-click path because the tool understands the package's intent. Domain-specific tooling earns its complexity by removing user-facing complexity.
+12. **The v1.18 information design vocabulary generalizes to extension packs.** The four-color status indicators (green/yellow/red/gray) and the budget-gauge pattern for the mirror-statistics widget came straight from the v1.18 status gantry. Reusing the design vocabulary cost nothing and gave the aminet panel visual continuity with the rest of GSD-OS. Extension packs should inherit the design system, not reinvent it.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — the zero-point foundation; v1.26's pipeline team YAML and SKILL.md files extend the v1.0 `extends:` inheritance model for the first time inside an extension pack |
+| [v1.18](../v1.18/) | Information Design System — the status-gantry color vocabulary (green/yellow/red/gray) that the aminet panel reuses for package status indicators |
+| [v1.19](../v1.19/) | Budget Display Overhaul — the `LoadingProjection` and dashboard-gauge patterns the mirror-statistics widget follows |
+| [v1.20](../v1.20/) | Dashboard Assembly — the data-collector pattern the mirror-statistics widget registers against |
+| [v1.21](../v1.21/) | GSD-OS Desktop Foundation — the Tauri v2 shell and `WindowType` union the aminet browser panel extends |
+| [v1.22](../v1.22/) | Minecraft Knowledge World — sibling extension pack; v1.22 motivated the standalone-pack contract that v1.26 first fully exercises |
+| [v1.23](../v1.23/) | Project AMIGA — the emulator infrastructure and hunk-format knowledge the aminet binary parsers build on; v1.23's `EventEnvelope` (elevated to ecosystem standard in v1.25) is what the aminet pipeline stages emit |
+| [v1.24](../v1.24/) | GSD Conformance Audit — the 336-checkpoint matrix that the v1.26 NFR-10 verification walk is modeled on |
+| [v1.25](../v1.25/) | Ecosystem Integration — immediate predecessor; the standalone-pack contract, four-tier dependency philosophy, and EventDispatcher specification that v1.26 is the first to conform to |
+| [v1.27](../v1.27/) | GSD Foundational Knowledge Packs — immediate successor; inherits v1.26's pack compliance pattern across 35 knowledge packs in 3 tiers |
+| [v1.28](../v1.28/) | GSD Den Operations — filesystem message bus that consumes the EventDispatcher events the aminet pipeline emits |
+| [v1.29](../v1.29/) | Electronics Educational Pack — later extension pack; inherits the v1.26 standalone-pack pattern |
+| [v1.31](../v1.31/) | GSD-OS MCP Integration — later consumer of the extension-pack architecture |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform — 19-skill, 31-agent pack that uses the v1.26 chipset YAML layout as its reference |
+| [v1.36](../v1.36/) | Citation Management — later extension pack with similar six-skill, multi-agent layout |
+| [v1.38](../v1.38/) | SSH Agent Security — separate security layer; complements the v1.26 scan-gate pattern at a different boundary |
+| [v1.49](../v1.49/) | Mega-release that consolidated post-v1.25 implementation of the specifications v1.26 first exercised |
+| `src/aminet/` | Aminet core implementation tree — INDEX parser, mirror state, scanner, installer, pipeline orchestrator |
+| `src/aminet/pipeline.ts` | 5-stage orchestrator (discover → mirror → scan → install → launch) with scan gate enforcement before install |
+| `src/aminet/integration.test.ts` | 14 cross-module integration tests covering end-to-end state flow with mocked external tools |
+| `src/dashboard/aminet-widget.ts` | Mirror-statistics widget following v1.19 budget-gauge pattern |
+| `desktop/src/aminet/` | 4-pane Workbench-style browser panel (search / tree / results / detail) |
+| `.chipset/aminet/` | Chipset YAML defining 5 agents, 6 skills, pipeline team, 7% token budget |
+| `infra/packs/aminet/` | Pack infrastructure (install guidance, mirror list, collection starters) |
+| `.planning/MILESTONES.md` | Canonical phase-by-phase detail for phases 236-242 |
+| `docs/RELEASE-HISTORY.md` | Project-wide release ledger (aminet row added 2026-02-19) |
+
+## Engine Position
+
+v1.26 is the first implementation release under v1.25's specification layer, and its architectural position is the reference implementation of the standalone-pack contract. v1.25 declared that every v1.26+ milestone would either conform to the seventeen specification documents or explicitly amend one of them. v1.26 conformed. The dependency DAG now contains the aminet pack as a new node with edges into the desktop shell, the information-design system, the dashboard-assembly data-collector pattern, and the skill-creator core. The EventDispatcher canonical event format is exercised by the five-stage pipeline orchestrator. The four-tier dependency philosophy classifies the pack as Educational (inherits from Core and Middleware, with native tooling documented as optional). The Zod+Vitest contract testing strategy is used for the seven state transitions of the package lifecycle and the five pipeline stages. The partial-build compatibility matrix gains a new column (aminet-present / aminet-absent) and the degradation specs document what the desktop looks like without the aminet window registered. From v1.27 forward, every extension pack inherits the verification pattern v1.26 established: NFR-10-style file-tree walk at phase end, one-line exception documentation for the inevitable additive extension point, team YAML for pipeline shape rather than TypeScript, SKILL.md files under `.chipset/` rather than in the core skill tree. The v1.49 mega-release that eventually consolidates post-v1.25 implementation work treats v1.26 as the pattern every later pack copies; every pack row in v1.49's consolidation table can point at v1.26 as its ancestor. The release is the closing brace of the "specify the contracts" phase that began at v1.25 and the opening brace of the "conform and extend" phase that continues through v1.49.
+
+## Files
+
+- `src/aminet/index.ts` — barrel exports covering INDEX parser, mirror state, scanner, installer, pipeline
+- `src/aminet/pipeline.ts` — 5-stage orchestrator (discover → mirror → scan → install → launch) with scan-gate enforcement before install (203 lines)
+- `src/aminet/integration.test.ts` — 14 cross-module integration tests covering mirror-state lifecycle, scan-gate enforcement, pipeline stage execution, signature scanning with real SCA boot-block bytes (524 lines)
+- `src/dashboard/aminet-widget.ts` — mirror-statistics widget with 7-field `MirrorStats` interface, pure render function, color-coded table rows, localized number formatting (144 lines)
+- `src/dashboard/index.ts` — dashboard barrel updated with aminet widget exports
+- `desktop/src/aminet/` — 4-pane Workbench-style browser panel (search bar / category tree / results list / package detail) with 4-color status indicators
+- `.chipset/aminet/` — chipset YAML defining 5 agents (AM-1 through AM-5), 6 skills, pipeline team, 7% token budget
+- `infra/packs/aminet/` — pack infrastructure including install guidance, mirror list defaults, and 5 starter collection YAML files
+- `.planning/REQUIREMENTS.md` — 81 requirements tracked across phases 236-242 including NFR-10 standalone-pack compliance
+- `.planning/ROADMAP.md` — phase-by-phase sequencing for the seven-phase milestone
+- `.planning/STATE.md` — execution state and verification results
+- `CHANGELOG.md` — v1.26 entry summarizing the Aminet Archive Extension Pack
+- `docs/RELEASE-HISTORY.md` — project-wide release ledger row for v1.26
+- `README.md` — top-level project README updated with v1.26 reference
 
 ---
+
+## Version History (preserved from original release notes)
+
+The table below lists the v1.x line that accumulated through v1.26, with the actual shipped summaries for each version. This version history is retained here for archival continuity.
+
+| Version | Summary |
+|---------|---------|
+| **v1.26** | Aminet Archive Extension Pack — INDEX parser for ~84,000 packages, 7-state mirror lifecycle, pure-TypeScript virus scanner (52 signatures), LhA/LZX extraction, FS-UAE integration with 5 hardware profiles, GSD-OS browser panel with 5-agent pipeline (this release) |
+| **v1.25** | Ecosystem Integration — 20-node dependency DAG, EventDispatcher spec, 4-tier dependency philosophy, contract testing strategy, partial-build compatibility matrix |
+| **v1.24** | GSD Conformance Audit — 336-checkpoint matrix, 4-tier audit, zero-fail conformance, 9,355 tests passing |
+| **v1.23** | Project AMIGA — mission infrastructure (MC-1/ME-1/CE-1/GL-1), Apollo AGC simulator, DSKY interface, RFC Reference Skill |
+| **v1.22** | Minecraft Knowledge World — local cloud infrastructure, Fabric server, platform portability, Amiga emulation, spatial curriculum |
+| **v1.21** | GSD-OS Desktop Foundation — Tauri v2 shell, WebGL CRT engine, PTY terminal, Workbench desktop, calibration wizard |
+| **v1.20** | Dashboard Assembly — unified CSS pipeline, four data collectors, console page as 6th generated page |
+| **v1.19** | Budget Display Overhaul — `LoadingProjection`, dual-view display, configurable budgets, dashboard gauge |
+| **v1.18** | Information Design System — shape + color encoding, status gantry, topology views, three-speed layering |
+| **v1.17** | Staging Layer — analysis, scanning, resource planning, 7-state approval queue for parallel execution |
+| **v1.16** | Dashboard Console & Milestone Ingestion |
+| **v1.15** | Live Dashboard Terminal — Wetty integration, tmux session binding, unified launcher |
+| **v1.14** | Promotion Pipeline |
+| **v1.13** | Session Lifecycle & Workflow Coprocessor |
+| **v1.12.1** | Live Metrics Dashboard |
+| **v1.12** | GSD Planning Docs Dashboard |
+| **v1.11** | GSD Integration Layer |
+| **v1.10** | Security Hardening |
+| **v1.9** | Ecosystem Alignment & Advanced Orchestration |
+| **v1.8.1** | Audit Remediation (Patch) |
+| **v1.8** | Capability-Aware Planning + Token Efficiency |
+| **v1.7** | GSD Master Orchestration Agent |
+| **v1.6** | Cross-Domain Examples |
+| **v1.5** | Pattern Discovery |
+| **v1.4** | Agent Teams |
+| **v1.3** | Documentation Overhaul |
+| **v1.2** | Test Infrastructure |
+| **v1.1** | Semantic Conflict Detection |
+| **v1.0** | Core Skill Management |
