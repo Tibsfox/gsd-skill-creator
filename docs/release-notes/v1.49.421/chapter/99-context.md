@@ -1,0 +1,16 @@
+# Context — v1.49.421
+
+- **Version:** `v1.49.421`
+- **Shipped:** 2026-04-03
+- **Branch:** —
+- **Tag:** —
+- **Dedication:** —
+- **Phases:** — · **Plans:** —
+- **Parse confidence:** 0.50
+- **Retrospective:** missing
+- **Prev:** [v1.49.420](../v1.49.420/00-summary.md)
+- **Next:** [v1.49.422](../v1.49.422/00-summary.md)
+
+## Source
+
+Parsed from: `docs/release-notes/v1.49.421/README.md`
