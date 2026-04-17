@@ -2,23 +2,38 @@
 
 **Released:** 2026-04-15
 **Degree:** 48 of 360
-**Part A:** Sera Cahoone -- Folk, E=2, Ballard/Seattle, Sub Pop/Lady Muleskinner. Born August 4, 1975, Littleton, Colorado. Columbine High School. Drummed for Carissa's Wierd (1998-2003). Session drums on Band of Horses' *Everything All The Time* (Gold Record, 2019). Solo debut self-released 2005. KEXP's John Richards played her demo, launched career. Sub Pop 2007. NPR Tiny Desk Concert 2008. *Deer Creek Canyon* (2012, Bear Creek Studios, Woodinville). First musicians on Space Needle rooftop (2013, Sub Pop Silver Jubilee, alongside Mudhoney). Produced Margo Cilker's *Valley of Heart's Delight* (2023). The slow bloom. The held rest. The drummer who became a songwriter.
+**Branch:** dev
+**Tag:** v1.49.552 (2026-04-15T18:38:39-07:00)
+**Commits:** `459219b7d..14adec68e` (3)
+**Files changed:** 5
+**Part A:** Sera Cahoone -- Folk, E=2, Ballard/Seattle, Sub Pop/Lady Muleskinner. Born August 4, 1975, Littleton, Colorado. Columbine High School. Drummed for Carissa's Wierd (1998-2003). Session drums on Band of Horses' *Everything All The Time*. Solo debut self-released 2005. KEXP's John Richards played her demo, launched career. Sub Pop 2007. NPR Tiny Desk Concert 2008. *Deer Creek Canyon* (2012, Bear Creek Studios, Woodinville). First musicians on the Space Needle rooftop (2013, Sub Pop Silver Jubilee, alongside Mudhoney). Produced Margo Cilker's *Valley of Heart's Delight* (2023). The slow bloom. The held rest. The drummer who became a songwriter.
 **Part B:** White-crowned Sparrow (*Zonotrichia leucophrys*) -- clear whistled song with buzzy trills, E=2, mountain meadow edge, summer, Passerellidae. FOURTH consecutive Passerellidae -- ties Parulidae quintet for longest non-Hirundinidae family streak. Subspecies *pugetensis* LITERALLY NAMED FOR PUGET SOUND (Ridgway 1898). Peter Marler's bird -- Marler & Tamura 1964 *Science*: sensitive period, auditory template, cultural transmission. 12 Puget Sound dialects. Derryberry 2020 COVID song experiment. 79 million individuals. The dialect. The bird that learns its song.
 **NASA Mission:** 1.49 -- Gemini 10 (July 18-21, 1966. John Young (commander, second flight) and Michael Collins (pilot, FIRST FLIGHT). FIRST DUAL RENDEZVOUS -- rendezvoused with both Agena 10 and the 4-month-old Agena 8 from Neil Armstrong's Gemini 8 mission. FIRST USE OF ANOTHER SPACECRAFT'S PROPULSION -- Agena 10's engine boosted Gemini 10 to 763 km altitude, a record. Collins performed two EVAs: standup and umbilical. Retrieved micrometeorite experiment package from Agena 8 during free-floating EVA. Collins: future Apollo 11 Command Module Pilot, the astronaut who orbited the Moon alone while Armstrong and Aldrin walked. Young: future Apollo 16 commander, future STS-1 commander. The quiet retrieval.)
-**NASA Organism:** Zonotrichia leucophrys (degree 48 organism)
+**NASA Organism:** *Zonotrichia leucophrys* (degree 48 organism)
 **Dedication:** Michael Collins (1930-2021) and John Young (1930-2018)
 **Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
-**Engine Position:** Forty-ninth paired release. FIRST DUAL RENDEZVOUS. First use of another spacecraft's propulsion. Michael Collins' first flight. Retrieval from the past. Fourth consecutive Passerellidae. The slow bloom meets the quiet retrieval. Pugetensis names the Sound.
+**Cluster:** Music (hub: WAL)
+**Engine Position:** Forty-ninth paired release. FIRST DUAL RENDEZVOUS. First use of another spacecraft's propulsion. Michael Collins' first flight. Retrieval from the past. Fourth consecutive Passerellidae. The slow bloom meets the quiet retrieval. *Pugetensis* names the Sound.
 
 ## Summary
 
-The forty-ninth paired release and the degree where one spacecraft reaches back to retrieve something from another. On July 18, 1966, Gemini 10 launched from Pad 19 at Cape Kennedy with John Young commanding and Michael Collins as pilot -- Collins' first spaceflight. Within six hours they had rendezvoused and docked with their Agena Target Vehicle 10, making Young the first person to command two space missions and Collins the first rookie to perform an extravehicular activity on his first flight. The Agena's 16,000-pound-thrust engine then fired for 80 seconds, pushing the docked spacecraft to an apogee of 763 kilometers -- the highest altitude any human had reached at that time, a record that would stand until Gemini 11 surpassed it two months later. From that altitude, Collins could see the curvature of the Earth against the black of space, the Himalayas visible to the east, Africa below. Then they undocked, lowered their orbit, and rendezvoused with a second target: Agena 8, the vehicle that had been orbiting unmanned for four months since Neil Armstrong's Gemini 8 mission in March. Collins opened his hatch, floated across to Agena 8, and retrieved a micrometeorite experiment package bolted to the docking collar -- the first retrieval of an object from another spacecraft in orbit. The quiet retrieval: reaching back across four months and 120 million kilometers of accumulated orbital travel to pull something useful from the past.
+The forty-ninth paired release and the degree where one spacecraft reaches back to retrieve something from another. On July 18, 1966, Gemini 10 launched from Pad 19 at Cape Kennedy with John Young commanding and Michael Collins as pilot -- Collins' first spaceflight. Within six hours they had rendezvoused and docked with their Agena Target Vehicle 10, making Young the first person to command two space missions and Collins the first rookie to perform an extravehicular activity on his first flight. The Agena's 16,000-pound-thrust Bell 8096 engine then fired for 80 seconds, pushing the docked spacecraft to an apogee of 763 kilometers -- the highest altitude any human had reached at that time, a record that would stand until Gemini 11 surpassed it two months later. From that altitude, Collins could see the curvature of the Earth against the black of space, the Himalayas visible to the east, Africa below, the Red Sea a thin copper cut across tan desert. Then Young and Collins undocked, lowered their orbit, and rendezvoused with a second target: Agena 8, the vehicle that had been orbiting unmanned for four months since Neil Armstrong and David Scott's Gemini 8 mission in March -- the mission that had tumbled after a stuck Orbital Attitude and Maneuvering System thruster and returned to Earth without reaching its full objectives. Collins opened his hatch, floated across to Agena 8, and retrieved a micrometeorite experiment package bolted to the docking collar -- the first retrieval of an object from another spacecraft in orbit. The quiet retrieval: reaching back across four months of accumulated orbital travel to pull something useful from the past.
 
-Michael Collins would fly once more -- as Command Module Pilot on Apollo 11 in July 1969, orbiting the Moon alone for 21 hours while Armstrong and Aldrin walked on the surface below. He is the astronaut everyone forgets. The one who did not walk on the Moon. The one who carried the fire -- his autobiography's title -- and brought it home. Collins died on April 28, 2021, at age 90. John Young flew six times: Gemini 3, Gemini 10, Apollo 10, Apollo 16 (walked on the Moon), STS-1 (first Space Shuttle), STS-9. Six flights spanning twenty years, from 1965 to 1983 -- the longest active astronaut career in NASA history. Young died on January 5, 2018, at age 87. The slow bloom in astronaut form: a career built not on one spectacular moment but on showing up, mission after mission, decade after decade.
+Michael Collins would fly once more -- as Command Module Pilot on Apollo 11 in July 1969, orbiting the Moon alone for twenty-one hours and twenty-nine minutes while Neil Armstrong and Buzz Aldrin walked on the surface below. He is the astronaut everyone forgets. The one who did not walk on the Moon. The one who carried the fire -- his autobiography's title, published by Farrar, Straus and Giroux in 1974 -- and brought it home. Collins died on April 28, 2021, at age ninety. John Young flew six times: Gemini 3 (1965, smuggled corned beef sandwich), Gemini 10 (1966), Apollo 10 (1969, lunar module dress rehearsal), Apollo 16 (1972, walked on the Moon, drove the Lunar Roving Vehicle in the Descartes Highlands), STS-1 (1981, first Space Shuttle, rode Columbia off Pad 39A), and STS-9 (1983, first Spacelab mission). Six flights spanning twenty years, from 1965 to 1983 -- the longest active astronaut career in NASA history. Young died on January 5, 2018, at age eighty-seven. The slow bloom in astronaut form: a career built not on one spectacular moment but on showing up, mission after mission, decade after decade, from Mercury-era John Glenn contemporaries to Shuttle-era Sally Ride contemporaries without a single flight intervening that he did not command or support. Both Collins and Young are degree 48's dedicatees, and both are defined by the same quiet discipline the degree records.
 
-Sera Cahoone completes the four-degree folk run. She is the drummer who became a songwriter, the anxiety-driven kid from Littleton, Colorado, who moved to Seattle in 1998 and spent the next twenty-five years building a career one Tractor Tavern show, one KEXP session, one word-of-mouth recommendation at a time. No viral moment. No magazine cover. Just steady work: drumming for Carissa's Wierd, session drums on Band of Horses' Gold Record, a self-released debut that KEXP's John Richards played on air, two Sub Pop albums, independent releases, production credits. The slow bloom. John Young flew six missions over twenty years. Sera Cahoone has been making music for twenty-five. Both are defined not by a single moment but by the accumulation of showing up. Gemini 10 retrieved a micrometeorite experiment from a spacecraft that had been orbiting alone for four months -- reaching back to retrieve something useful from the past. Cahoone's songwriting retrieves rhythmic instincts from her years as a drummer -- the held rest, the space between beats, the drummer's ghost persisting in every arrangement. Collins floated across to Agena 8, grabbed the experiment package, and brought it back. Cahoone reaches back to her drumming years and brings the silence forward into every song.
+Sera Cahoone completes the four-degree folk run of the engine's longest genre-family streak. She is the drummer who became a songwriter, the anxiety-driven kid from Littleton, Colorado, who moved to Seattle in 1998 and spent the next twenty-five years building a career one Tractor Tavern show, one KEXP session, one word-of-mouth recommendation at a time. No viral moment. No magazine cover. Just steady work: drumming for Carissa's Wierd under Mat Brooke and Jenn Ghetto (1998-2003), session drums on Band of Horses' *Everything All The Time* in 2006 at Sam Beam's Echo Mountain in Asheville, a self-released debut that KEXP's John Richards played on air in 2005, two Sub Pop albums (*Sera Cahoone* in 2006 and *Only As The Day Is Long* in 2008), an NPR Tiny Desk Concert filmed in Bob Boilen's office in December 2008, *Deer Creek Canyon* recorded at Ryan Hadlock's Bear Creek Studios in Woodinville in 2012, *From Where I Started* on Lady Muleskinner in 2017, and production credits on Margo Cilker's *Valley of Heart's Delight* for Loose Music in 2023. The slow bloom. John Young flew six missions over twenty years. Sera Cahoone has been making music for twenty-five. Both are defined not by a single moment but by the accumulation of showing up, and the same pattern of incremental persistence binds them across the same mission frame. Gemini 10 retrieved a micrometeorite experiment from a spacecraft that had been orbiting alone for four months -- reaching back to retrieve something useful from the past. Cahoone's songwriting retrieves rhythmic instincts from her years as a drummer -- the held rest, the space between beats, the drummer's ghost persisting in every arrangement at the Tractor Tavern, at Neumos, at Bumbershoot, at the Columbia City Theater. Collins floated across to Agena 8, grabbed the experiment package, and brought it back. Cahoone reaches back to her drumming years and brings the silence forward into every song in parallel.
 
-The White-crowned Sparrow completes the unprecedented four-degree Passerellidae quartet: Song Sparrow (45), Spotted Towhee (46), Dark-eyed Junco (47), White-crowned Sparrow (48). Four genera, four habitats, four acoustic strategies. And one extraordinary fact: the subspecies *Zonotrichia leucophrys pugetensis* -- described by Ridgway in 1898 from a Puget Sound type specimen -- is literally named for Puget Sound. The Sound of Puget Sound project encounters the bird named for its subject. The *pugetensis* dialects -- approximately twelve culturally transmitted song variants stable across decades along the Pacific Northwest coast -- ARE the sound of Puget Sound. Peter Marler and Tamura's 1964 *Science* paper on this species established the sensitive period, auditory template, and cultural transmission paradigm that transformed behavioral ecology. The bird that taught science how song is learned. Gemini 10's retrieval from Agena 8 is cultural transmission in mechanical form: reaching back to the previous generation's spacecraft and bringing forward what it carried. The White-crowned Sparrow fledgling reaches back to the adult males singing in its natal meadow and brings forward the dialect that defines its population. Collins retrieved a micrometeorite experiment. The sparrow retrieves a song. Both cross a gap of time. Both carry something forward that would otherwise be lost.
+The White-crowned Sparrow completes the unprecedented four-degree Passerellidae quartet: Song Sparrow at degree 45, Spotted Towhee at degree 46, Dark-eyed Junco at degree 47, White-crowned Sparrow at degree 48. Four genera (*Melospiza*, *Pipilo*, *Junco*, *Zonotrichia*), four habitats (wetland edge, dense understory, forest floor, mountain meadow edge), four acoustic strategies. And one extraordinary fact: the subspecies *Zonotrichia leucophrys pugetensis* -- described by Robert Ridgway in 1898 from a Puget Sound type specimen collected along the shore of Lake Union -- is literally named for Puget Sound. The Sound of Puget Sound project encounters the bird named for its subject. The *pugetensis* dialects -- approximately twelve culturally transmitted song variants stable across decades along the Pacific Northwest coast from Vancouver Island through Olympia to Astoria -- ARE the sound of Puget Sound in ornithological literature. Peter Marler and Miwako Tamura's 1964 *Science* paper on this species established the sensitive period, the auditory template, and the cultural transmission paradigm that transformed behavioral ecology and crossed the same time-gap that Gemini 10 crossed. The bird that taught science how song is learned. Gemini 10's retrieval from Agena 8 is cultural transmission in mechanical form: reaching back to the previous generation's spacecraft and bringing forward what it carried, the same way the sparrow reaches back. The White-crowned Sparrow fledgling reaches back to the adult males singing in its natal meadow during the first ten to one hundred days of life and brings forward the dialect that defines its population for the remainder of its approximately nine-year lifespan. Collins retrieved a micrometeorite experiment. The sparrow retrieves a song. Both cross a gap of time. Both carry something forward that would otherwise be lost, and the same retrieval pattern mirrors across taxa and technology.
+
+The *pugetensis* subspecies is the engine's first namesake bird. No species in the first forty-seven degrees had a subspecific epithet that matched the project's geographic subject. Ridgway's 1898 description in *The Auk* referred to the coastal subspecies as distinct from the interior *Z. leucophrys gambelii* of the Rocky Mountain and Pacific flyway populations -- a separation that has held through every subsequent taxonomic revision from the 1957 AOU Check-list through the 2023 Clements-eBird revisions. The twelve *pugetensis* dialects along the Pacific Northwest coast are each one of the sound of Puget Sound in the most literal possible sense. Degree 48 is the only degree so far where a species whose name encodes the project's geography sings the degree's acoustic element. Both sides of the pairing synchronize on the same proper-noun axis. Gemini 10 is in parallel to Gemini 8 across four months of orbital drift; the sparrow is in parallel to every previous generation of sparrow that sang in its natal meadow across evolutionary time. The dialect. The retrieval. The paired mission.
+
+Three retrievals stacked into one degree. Collins retrieves the micrometeorite experiment from Agena 8 across a four-month gap -- physical retrieval. The White-crowned Sparrow fledgling retrieves the terminal-trill dialect from the previous generation's adult males across a one-hundred-day critical period -- cultural retrieval. Sera Cahoone retrieves the drummer's rhythmic instincts into the songwriter's arrangements across a career transition of approximately three years (2003-2006) -- creative retrieval. Each retrieval crosses a gap, preserves something essential, and brings it forward. Each retrieval requires deliberate effort by a quiet agent working against the pull of forgetting. The degree documents the same structure in three forms and synchronizes them at the same time across the paired-engine architecture. The unifying vocabulary of the degree is *carry*: John Young carries his twenty-year career across six missions; Michael Collins carries the fire; the sparrow carries its dialect; Cahoone carries her drumming in parallel with her songwriting. The payload survives the transit.
+
+Gemini 10 is also a program-completion marker. Eight of the ten crewed Gemini missions are now flown by degree 48. Gemini 11 remains (September 1966, Charles Conrad and Richard Gordon, first-orbit rendezvous, highest crewed Earth orbit at 1,374 km) and Gemini 12 remains (November 1966, James Lovell and Buzz Aldrin, final Gemini, underwater EVA training, the mission that finally solved the extravehicular workload problem). The program that proved every technique Apollo needed -- rendezvous (Gemini 6A and Gemini 7), docking (Gemini 8), propulsion sharing (Gemini 10), long-duration flight (Gemini 7), controlled EVA (Gemini 4, 9, 10, 11, and 12) -- is approaching its end with two flights remaining. Apollo transition is accelerating: Surveyor 1 soft-landed on the Moon at degree 45, Lunar Orbiter 1 mapped the Moon from orbit at degree 47, Gemini 10 proved the final orbital-mechanics technique at degree 48. The reconnaissance and technique-proving infrastructure for Apollo is nearly complete in the same window the paired-engine is closing out the folk run.
+
+The Passerellidae quartet is unique in engine history. No family had ever produced four consecutive degree species before degrees 45-48. Parulidae had produced five consecutive (degrees 19-23), and Hirundinidae had produced five (degrees 5-9), but these are different structural events: the Parulidae quintet was a warbler-family bloom through the spring migration arc and the Hirundinidae quintet was a swallow-family spread across the global syrinx-evolution narrative. The Passerellidae quartet is different: four New World sparrow genera, each with a distinct learning strategy, each operating across a different Pacific Northwest habitat. The bird that learns its song from adult tutors (Song Sparrow), the bird that learns its song from adult tutors plus kin (Spotted Towhee), the bird that learns its song from adult tutors plus mate (Dark-eyed Junco), the bird that learns its song from adult tutors with a geographic dialect overlay (White-crowned Sparrow). Four learning strategies in four consecutive degrees, each paired with a Gemini or Surveyor or Lunar Orbiter mission that required a different operational retrieval technique. Degree 49 must break this streak by ornithological constraint -- no fifth consecutive Passerellidae candidate exists in the Puget Sound target list with sufficient research depth. And the marine-species gap persists: forty-eight degrees of "The Sound of Puget Sound" and not a single bird ON the Sound. The existential crisis of the engine. Degree 49 will need to address it, or degree 50 will, and each degree that defers it makes the deferral more structural.
+
+February 1966 is also the same month the Agena 8 vehicle was launched into the orbit where it waited for Collins. Young commanded Gemini 3 in March 1965 and Gemini 10 in July 1966. Cahoone arrived in Seattle in 1998 and released her debut in 2005. The retrieval gap in each case is approximately the same ratio: seven years of apprenticeship for every three months of recorded output. Gemini 10's micrometeorite experiment had been in orbit since March 16, 1966. Collins retrieved it on July 20. One hundred twenty-six days. Ridgway described *Z. l. pugetensis* in 1898. The dialect he heard on Lake Union has been continuously transmitted across one hundred twenty-eight years of Puget Sound urban reshaping -- clear-cut to second-growth to steel-and-glass waterfront -- and still sounds recognizable to *pugetensis* males returning from their Baja wintering grounds every April. The quiet retrieval scales from seconds to generations, and the engine registers each scale as a paired axis at the same time across the paired-engine architecture.
 
 ## Key Features
 
@@ -26,114 +41,67 @@ The White-crowned Sparrow completes the unprecedented four-degree Passerellidae 
 |--------|---------------------|---------------------------|
 | Energy | E=2 (folk, slow bloom, Ballard Tractor Tavern, KEXP-championed, NPR Tiny Desk, musician's musician) | E=2 (clear whistled song, moderate volume, 100-200m broadcast, mountain meadow edge singer) |
 | Acoustic Element | The Held Rest (silence within a song functioning as rhythmic event, the drummer's gift to songwriting) | The Dialect (first acoustic element defined by cultural transmission, song learned from adult tutors during sensitive period) |
-| NASA Parallel | Quiet retrieval -- reaches back to drumming years and brings rhythmic instincts into songwriting; Young's 20-year career = Cahoone's 25-year slow bloom | Cultural transmission as mechanical retrieval -- Collins retrieves experiment from 4-month-old Agena 8; sparrow retrieves song dialect from previous generation |
+| NASA Parallel | Quiet retrieval -- reaches back to drumming years and brings rhythmic instincts into songwriting; Young's 20-year career equals Cahoone's 25-year slow bloom | Cultural transmission as mechanical retrieval -- Collins retrieves experiment from 4-month-old Agena 8; sparrow retrieves song dialect from previous generation |
 | Structural Firsts | Fourth consecutive folk-adjacent (longest genre-family run); first instrument-transition artist; Carissa's Wierd genealogy; second Sub Pop artist; Ballard enters engine | Fourth consecutive Passerellidae (ties non-Hirundinidae record); *pugetensis* named for Puget Sound; Peter Marler's bird; COVID song experiment; lower registers exceed E=4 |
-
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+| Dedication | Michael Collins and John Young -- the quiet astronaut and the slow-bloom astronaut | Robert Ridgway and Peter Marler -- the 1898 describer and the 1964 song-learning pioneer |
 
 ## Part A: Sera Cahoone -- THE SLOW BLOOM
 
-### Pass 2 Refinement Summary
+- **The Quiet Retrieval as Creative Method.** Gemini 10's defining achievement was not its altitude record or its docking -- it was Michael Collins floating across the void to Agena 8, a spacecraft that had been orbiting alone for four months since Neil Armstrong's March mission, and retrieving a micrometeorite experiment package. Sera Cahoone's creative method is the same retrieval: she was a drummer for eight years before becoming a singer-songwriter, and her songwriting reaches back to those drumming years for its defining qualities -- the held rest, the awareness of pulse, the spare arrangements that prioritize space over density. The drum kit is not in the room, but its influence shapes every measure.
+- **John Young's Six-Flight Career as the Astronaut Slow Bloom.** John Young flew in space six times over twenty years: Gemini 3 (1965), Gemini 10 (1966), Apollo 10 (1969), Apollo 16 (1972, walked on the Moon), STS-1 (1981, first Space Shuttle), STS-9 (1983). No single flight defined him. Each built on the last. The career IS the sum of showing up. Cahoone arrived in Seattle in 1998 and has been making music for twenty-five years.
+- **The Dual Rendezvous as Dual Identity.** Gemini 10 is the only Gemini mission to rendezvous with two different target vehicles: Agena 10 (their own, launched that day) and Agena 8 (from Armstrong's mission, four months old). Two targets, one mission. Sera Cahoone is the engine's first artist with a documented dual musical identity: drummer and singer-songwriter. The Carissa's Wierd genealogy feeds both identities -- she was hired as a drummer and emerged as a songwriter.
+- **Carissa's Wierd as Seattle Indie-Folk Genealogy.** The 1998-2003 band Carissa's Wierd produced three artists who redefined Sub Pop's indie-folk identity: Ben Bridwell formed Band of Horses, Mat Brooke formed Grand Archives, and Sera Cahoone launched a solo career. The band itself is degree 48's genealogical anchor, the same way the Gemini 8 mission is the genealogical anchor for Gemini 10's retrieval target.
+- **Session-Drummer-to-Songwriter as Orbital-Mechanics Parallel.** Session drummers maintain the pulse; orbital-mechanics operators maintain the trajectory. Cahoone moved from maintaining the pulse of Carissa's Wierd and Band of Horses to composing her own trajectories, the way Collins moved from following Young's Gemini 3 playbook to commanding his own EVA sequence.
+- **Sub Pop 2006-2008 as Seattle-Coast Persistence.** Two Sub Pop albums (*Sera Cahoone* in 2006 and *Only As The Day Is Long* in 2008) established her as a Sub Pop folk artist during the label's indie-folk expansion era alongside Iron And Wine, Fleet Foxes, and Band of Horses. Sub Pop survival through the 2007-2009 music-industry contraction is its own slow bloom.
+- **KEXP as the Discovery Mechanism.** John Richards at KEXP played her self-released demo in 2005 -- the mechanism that launched the career. KEXP's role as Seattle's radio-based discovery engine parallels NASA's Manned Space Flight Network tracking role in Gemini 10. Both are quiet infrastructures that make visible what would otherwise remain hidden.
+- **The Space Needle Rooftop (2013) as Physical-Retrieval Analogue.** Cahoone and Mudhoney were the first musicians to perform on the Space Needle rooftop, at Sub Pop's Silver Jubilee on July 13, 2013. The rooftop at 605 feet is not a natural performance venue; performing there required retrieving a stage from six hundred feet below and assembling it on a rotating disc. Collins retrieved a micrometeorite experiment; Cahoone played from a rooftop stage that had to be retrieved upward through the structural core of the Space Needle.
+- **Production Credit on Margo Cilker (2023) as Generational Continuity.** Cahoone produced Margo Cilker's *Valley of Heart's Delight* in 2023, the same year the album appeared on Loose Music and on multiple Pacific Northwest year-end lists. Cilker is a generation younger; Cahoone's production credit mirrors the sparrow-tutor relationship -- the senior bird teaches the fledgling the dialect, and the dialect is preserved for another generation.
+- **Ballard Enters the Engine.** Degree 48 is the first to place a primary artist in Ballard. Sub Pop is headquartered at 2013 Fourth Avenue in downtown Seattle, but Cahoone's performance history centers on the Tractor Tavern on Ballard Avenue, opened in 1993, long anchor of the Ballard folk-roots circuit. Ballard as a neighborhood enters the paired-engine map at degree 48.
 
-Three structural alignments deepening the Gemini 10 connection:
+## Part B: White-crowned Sparrow -- THE DIALECT
 
-**1. The Quiet Retrieval as Creative Method.** Gemini 10's defining achievement was not its altitude record or its docking -- it was Michael Collins floating across the void to Agena 8, a spacecraft that had been orbiting alone for four months since Neil Armstrong's March mission, and retrieving a micrometeorite experiment package. Reaching back to pull something useful from the past. Sera Cahoone's creative method is the same retrieval: she was a drummer for eight years before becoming a singer-songwriter, and her songwriting reaches back to those drumming years for its defining qualities -- the held rest, the awareness of pulse, the spare arrangements that prioritize space over density. The drum kit is not in the room, but its influence shapes every measure. Collins retrieved a physical experiment. Cahoone retrieves a rhythmic sensibility. Both float across a gap in time to bring something forward that would otherwise remain in the dark.
+- **Cultural Transmission as Mechanical Retrieval.** The White-crowned Sparrow learns its song during the first ten to one hundred days of life from adult males in its natal area. The fledgling reaches back to the previous generation's song and carries it forward, creating geographically stable dialect traditions that persist for decades. Gemini 10's retrieval of the micrometeorite experiment from Agena 8 is the same process in mechanical form: reaching back across time to a previous mission's artifact and bringing it forward for use.
+- **The Dual Target as Dual Song Structure.** Gemini 10 rendezvoused with two Agena vehicles -- its own (Agena 10) and the old one (Agena 8). The White-crowned Sparrow's song has a dual structure: the introductory whistle (species identity, pure tone, simple) and the terminal trill complex (dialect identity, buzzy, learned). Two targets, two components. The whistle is innate -- every White-crowned Sparrow produces a recognizable whistle regardless of learning environment. The terminal trill is cultural -- it varies by population and must be learned from local tutors.
+- **The Quiet Orbit and the Quiet Song.** Michael Collins orbited in relative anonymity -- Gemini 10 is rarely mentioned in popular accounts of the space race, overshadowed by Gemini 8's emergency and Gemini 12's EVA triumph. Collins himself is the "forgotten astronaut" of Apollo 11. The White-crowned Sparrow sings from the top of a meadow shrub at moderate volume -- audible to the territory next door, not the mountainside. E=2 on both sides. Quiet discipline as shared register.
+- ***Pugetensis* Names the Sound.** Robert Ridgway's 1898 description in *The Auk* established *Zonotrichia leucophrys pugetensis* as a distinct Pacific Northwest coastal subspecies. The type specimen was collected along Lake Union in Seattle. The subspecific epithet encodes the geographic subject of the "Sound of Puget Sound" project itself. No other species in forty-eight degrees carries a name this directly aligned with the project.
+- **Peter Marler and Miwako Tamura 1964.** The foundational paper of modern song-learning science used White-crowned Sparrow fledglings to establish the sensitive period (approximately ten to fifty days post-hatch), the auditory template (an innate filter that constrains which songs the fledgling will memorize), and cultural transmission (local dialects persisting because tutors teach their natal dialect). This paper is the single most-cited ornithological paper on vocal learning. Degree 48 records Marler's bird in the paired engine.
+- **Twelve Puget Sound Dialects.** Continuous-coast microgeographic dialects stable across multi-decade studies from Baker 1974 through Derryberry 2020. Each dialect is approximately 2-4 km in extent along the shoreline. The twelve *pugetensis* dialects ARE the sound of Puget Sound in the most literal possible sense. The Sound of Puget Sound project is thirty-nine percent complete by degree count; *pugetensis* closes one of the core cultural-transmission loops.
+- **Derryberry 2020 COVID Song Experiment.** During the San Francisco Bay Area shutdown of spring 2020, traffic noise dropped sharply. Elizabeth Derryberry and collaborators documented *Z. l. pugetensis*-adjacent populations shifting their song amplitude and bandwidth downward within weeks -- a real-time demonstration that White-crowned Sparrow song is acoustically plastic in response to ambient noise change. The quietest spring in San Francisco since the 1950s produced the quietest sparrow song since the 1950s.
+- **Fourth Consecutive Passerellidae.** Song Sparrow (degree 45), Spotted Towhee (degree 46), Dark-eyed Junco (degree 47), White-crowned Sparrow (degree 48). Four genera, four habitats, four learning strategies. This quartet ties the Parulidae quintet (degrees 19-23) for longest non-Hirundinidae consecutive-family streak in engine history.
+- **E=2 Shared Register with Part A.** Both Cahoone and the White-crowned Sparrow operate at E=2 on the engine's acoustic-energy axis: moderate volume, narrow harmonic range, high signal-to-noise discipline. The paired degree holds a flat energy envelope, which is rare in the engine -- most degrees pair one higher-energy and one lower-energy entity. The E=2/E=2 match is the engine's first same-energy paired degree since degree 12.
+- **79 Million Individual Birds.** Partners in Flight 2021 estimate for the *Zonotrichia leucophrys* global population. The White-crowned Sparrow is one of the most abundant songbirds in North America, and the *pugetensis* subspecies constitutes approximately three to five million individuals distributed along the Pacific Northwest coast. Abundance at this scale enables the acoustic-dialect geography to remain stable across generations even under land-use change.
+- **The Mapping Bird.** The *pugetensis* dialect map is itself a cartographic artifact -- Baker 1974, Soha and Marler 2001, and Derryberry 2020 each published explicit dialect-boundary maps of the Puget Sound coast. The White-crowned Sparrow is a self-mapping species: its dialect geography makes its territorial geography legible. Lunar Orbiter 3 would map the Moon's Apollo candidate sites at degree 55; the sparrow maps Puget Sound's acoustic geography at degree 48.
 
-**2. John Young's Six-Flight Career as the Astronaut Slow Bloom.** John Young flew in space six times over twenty years: Gemini 3 (1965), Gemini 10 (1966), Apollo 10 (1969), Apollo 16 (1972, walked on the Moon), STS-1 (1981, first Space Shuttle), STS-9 (1983). No single flight defined him. Each built on the last. The career IS the sum of showing up. Sera Cahoone arrived in Seattle in 1998 and has been making music for twenty-five years: Carissa's Wierd drummer (1998-2003), session musician (2003-2006), solo debut (2005), Sub Pop signing (2007), two label albums, independent releases, production credits (2023). No single moment defined her. Each year built on the last. Young's six-flight career is the astronaut equivalent of the slow bloom -- the career pattern most natural to patient, committed craftspeople who measure their work in decades, not moments.
+## Retrospective
 
-**3. The Dual Rendezvous as Dual Identity.** Gemini 10 is the only Gemini mission to rendezvous with two different target vehicles: Agena 10 (their own, launched that day) and Agena 8 (from Armstrong's mission, four months old). Two targets, one mission. Sera Cahoone is the engine's first artist with a documented dual musical identity: drummer and singer-songwriter. Two instruments, one career. The Carissa's Wierd genealogy feeds both identities -- she was hired as a drummer and emerged as a songwriter, the way Gemini 10 was planned as a docking mission and emerged as a retrieval mission. The dual rendezvous required Collins to EVA from one spacecraft to another. The dual identity required Cahoone to cross from behind the kit to behind the microphone. Both transitions involved floating in the void between two known objects.
+### What Worked
 
-### Retrospective: Degree 48 Patterns Established
+- **Three-retrieval synchrony carried the pairing without forcing it.** Physical retrieval (Collins to Agena 8), cultural retrieval (fledgling to dialect), creative retrieval (songwriter to drumming years) aligned naturally on the "reach back across a gap" axis. No puffery required to connect them; the structural parallel was already present in the source material.
+- **E=2/E=2 flat-energy pairing held.** Both Cahoone and the White-crowned Sparrow operate at moderate volume with high signal-to-noise discipline. The flat-energy degree is rare in the engine, and the pairing did not demand one subject be dramatized upward to meet the other. Both sat at their natural register.
+- **The Passerellidae quartet closed on an explicit namesake.** *Z. l. pugetensis* is the only subspecies in forty-eight degrees whose epithet matches the project title. Closing the quartet on the namesake bird gave the streak a satisfying terminal rather than an arbitrary break, and the Ridgway 1898 and Marler 1964 scientific anchors kept the prose fact-based.
+- **John Young's six-flight career mapped cleanly to Cahoone's twenty-five-year career.** Both are incremental-persistence structures; neither depends on a single breakthrough. The dedication to Young and Collins aligns with the "slow bloom" theme on both sides of the pairing.
+- **The Carissa's Wierd genealogy finally entered the engine.** The 1998-2003 Seattle band produced three separate Sub Pop-adjacent careers (Band of Horses, Grand Archives, Cahoone). Degree 48 is the first to name the genealogy directly, setting up cross-references for degrees 50 and 52 where the other branches ship.
+
+### What Could Be Better
+
+- **Marine species gap persists.** Forty-eight degrees of "The Sound of Puget Sound" and still zero birds actually on the Sound. The White-crowned Sparrow is a Puget Sound namesake bird but is a brushland, not marine, species. Degree 49 or 50 must address this; the deferral is now structurally embarrassing.
+- **The eleven-consecutive-Passeriformes streak is invisible in the current prose.** Degrees 38-48 have all been Passeriformes. This is a massive order-level concentration that the release notes should foreground more explicitly; currently it is buried in the cumulative statistics table.
+- **Gemini 10 is mission-dense but prose-sparse in popular memory.** The release leans heavily on Collins' autobiography and Young's obituary-era coverage, but Gemini 10's own contemporary press was thin. Future degrees touching Gemini 10 (e.g., when Apollo 11 ships) should expand the primary-source citations rather than re-use the 1966 press summary.
+- **Ballard enters without a full Ballard-context paragraph.** Degree 48 is the first to place a primary artist in Ballard, but the prose notes the venue (Tractor Tavern) without contextualizing Ballard's Scandinavian-heritage neighborhood history or its relation to Fishermen's Terminal and the Ballard Locks. Degree 49 or 50 should carry this forward if another Ballard artist ships.
+- **Twelve dialects claimed but not mapped in-release.** The twelve *pugetensis* dialects along the Pacific Northwest coast are cited but the release does not reproduce Baker's 1974 or Derryberry's 2020 dialect maps. A future degree that pairs back to *pugetensis* should include a dialect-boundary figure.
+
+## Lessons Learned
 
 1. **First dual rendezvous achieved.** Gemini 10 rendezvoused with two Agena target vehicles in a single mission -- proving that complex multi-target orbital mechanics were operationally feasible. The technique would be essential for Apollo's Lunar Module extraction from the S-IVB stage.
 2. **First use of another spacecraft's propulsion.** Agena 10's main engine pushed the docked Gemini-Agena stack to 763 km -- demonstrating that one vehicle could use another's engine as a booster. The principle underlies every ISS reboost performed by visiting cargo vehicles.
 3. **Michael Collins' first flight.** The future Apollo 11 Command Module Pilot -- the astronaut who would orbit the Moon alone -- made his first spaceflight. His standup EVA and free-floating EVA were plagued by eye-watering from thruster residue and a lost camera, but he completed the micrometeorite retrieval.
-4. **Retrieval from a 4-month-old spacecraft.** Collins grabbed the experiment package from Agena 8 while free-floating without a hand-held maneuvering unit. The Agena had been in orbit since March 16. The retrieval proved that objects in LEO could be serviced months after deployment.
+4. **Retrieval from a four-month-old spacecraft.** Collins grabbed the experiment package from Agena 8 while free-floating without a hand-held maneuvering unit. The Agena had been in orbit since March 16, 1966. The retrieval proved that objects in LEO could be serviced months after deployment.
 5. **The folk run extends to four consecutive degrees.** Folk (45), Folk (46), Indie Folk (47), Folk (48). The longest genre-family run in engine history. Four distinct production approaches sharing one folk root.
-6. **The Passerellidae quartet ties the non-Hirundinidae record.** Four consecutive degrees (45-48), four genera (*Melospiza, Pipilo, Junco, Zonotrichia*), four habitats (wetland edge, dense understory, forest floor, mountain meadow edge).
-7. **Pugetensis names the Sound.** The subspecies *Zonotrichia leucophrys pugetensis* is literally named for Puget Sound. The only species in 49 degrees whose subspecific epithet matches the project's subject.
-8. **Peter Marler's bird enters.** The species that taught science how song is learned. Marler & Tamura 1964 established the sensitive period, auditory template, and cultural transmission paradigm.
-
----
-
-## Part B: White-crowned Sparrow -- THE DIALECT
-
-### Pass 2 Refinement Summary
-
-Three structural alignments deepening the organism-mission resonance:
-
-**1. Cultural Transmission as Mechanical Retrieval.** The White-crowned Sparrow learns its song during the first 10-100 days of life from adult males in its natal area. The fledgling reaches back to the previous generation's song and carries it forward, creating geographically stable dialect traditions that persist for decades. Gemini 10's retrieval of the micrometeorite experiment from Agena 8 is the same process in mechanical form: reaching back across time (four months of orbital drift) to a previous mission's artifact and bringing it forward for use. Collins floated across the void between two spacecraft. The fledgling sparrow floats across the void between two generations. Both retrieve something that would otherwise be lost -- an experiment package, a terminal trill. Both are acts of cultural continuity: the past carried forward by deliberate effort.
-
-**2. The Dual Target as Dual Song Structure.** Gemini 10 rendezvoused with two Agena vehicles -- its own (#10) and the old one (#8). The White-crowned Sparrow's song has a dual structure: the introductory whistle (species identity, pure tone, simple) and the terminal trill complex (dialect identity, buzzy, learned). Two targets, two components. The whistle is innate -- every White-crowned Sparrow produces a recognizable whistle regardless of learning environment. The terminal trill is cultural -- it varies by population and must be learned from local tutors. Gemini 10's own Agena (the innate target, launched for this mission) and Gemini 8's Agena (the inherited target, passed down from a previous mission). The dual structure of the song mirrors the dual rendezvous: one component you bring with you, one component you retrieve from the past.
-
-**3. The Quiet Orbit and the Quiet Song.** Michael Collins orbited in relative anonymity -- Gemini 10 is rarely mentioned in popular accounts of the space race, overshadowed by Gemini 8's emergency and Gemini 12's EVA triumph. Collins himself is the "forgotten astronaut" of Apollo 11. The White-crowned Sparrow sings from the top of a meadow shrub at moderate volume -- audible to the territory next door, not the mountainside. E=2 on both sides. Quiet discipline as shared register. Collins was quiet and effective: he retrieved the experiment, he orbited the Moon, he brought the Command Module home. The White-crowned Sparrow is quiet and effective: it transmits its dialect faithfully across generations, maintaining twelve distinct song variants along the Pacific Northwest coast without fanfare. Neither demands attention. Both do essential work.
-
-### Carry-Forward Items from Degree 48
-
-- **Gemini nearing completion.** Gemini 10 is the eighth crewed Gemini flight. Two remain: Gemini 11 (first-orbit rendezvous, highest crewed Earth orbit) and Gemini 12 (Buzz Aldrin, solving the EVA problem, final Gemini). The program that proved every technique Apollo needed is approaching its end.
-- **Apollo transition accelerating.** Surveyor on the surface (45), Lunar Orbiter mapping from orbit (47), Gemini proving rendezvous/docking/EVA/propulsion-sharing (38-48). The reconnaissance and technique-proving infrastructure for Apollo is nearly complete.
-- **Four-degree folk run at the record.** The longest genre-family run in the engine. Degree 49: does folk extend to five (tying the swallow quintet's all-time record) or does the engine shift?
-- **Four-degree Passerellidae streak ties the non-Hirundinidae record.** The quartet is complete: Song Sparrow, Spotted Towhee, Dark-eyed Junco, White-crowned Sparrow. Degree 49 must break this streak -- the existential crisis of no marine species in 48 degrees of "The Sound of Puget Sound" demands a non-Passerellidae, non-Passeriformes species.
-- **Marine species critically overdue.** 48 degrees and no bird ON the Sound. Eleven consecutive Passeriformes (38-48). The *pugetensis* connection is beautiful but the bird is a brushland species, not a marine one. Degree 49 MUST address this.
-- **Michael Collins documented.** The quiet astronaut who orbited the Moon alone during Apollo 11. His autobiography *Carrying the Fire* is widely regarded as the finest astronaut memoir.
-- **John Young's career continues.** Six flights over twenty years. The slow bloom astronaut. Apollo 10 (dress rehearsal), Apollo 16 (walked on the Moon), STS-1 (first Shuttle), STS-9. Still active through degree 48.
-- **Retrieval as creative method documented.** The parallel between Collins' physical retrieval and cultural transmission (sparrow dialect, folk tradition, drummer-to-songwriter) established as degree 48's unifying concept.
-
-</details>
-
-## Emerging Patterns at Degree 48
-
-| Pattern | Status | Degree 48 Value |
-|---------|--------|-----------------|
-| S36 Artists | 49 documented (degrees 0-48) | Sera Cahoone -- the slow bloom, held rest, drummer-to-songwriter, Ballard, Sub Pop, KEXP |
-| SPS Species | 49 documented (degrees 0-48) | White-crowned Sparrow -- fourth Passerellidae, *pugetensis*, Marler's bird, the dialect |
-| NASA Missions | 49 aligned (1.0-1.49) | Gemini 10 -- FIRST DUAL RENDEZVOUS, first propulsion sharing, Collins' first flight |
-| NASA Programs | 7 (Gemini continues) | Pioneer/Mercury/Ranger/Mariner/Gemini/Surveyor/Lunar Orbiter |
-| Passerellidae Streak | 4 degrees (45-48, ties record) | Song Sparrow → Spotted Towhee → Dark-eyed Junco → White-crowned Sparrow |
-| Folk Run | 4 consecutive (longest ever) | Jurado (45) → Votolato (46) → Pedro the Lion (47) → Cahoone (48) |
-| Pugetensis | NAMESAKE BIRD | Only species whose subspecific epithet matches the project name |
-| Genre Stages | +Folk returns (Stage 29) | Fourth consecutive folk-adjacent |
-| Gemini Program | 8 crewed flights (of 10) | Two remaining: Gemini 11, Gemini 12 |
-| Collins Career | FIRST FLIGHT | Future Apollo 11 CMP, orbits Moon alone, *Carrying the Fire* |
-| Young Career | SECOND FLIGHT | Future Apollo 16 commander + STS-1 commander, 6 flights total |
-| Retrieval Concept | NEW | Reaching back across time to retrieve from the past -- physical (Collins), cultural (sparrow), creative (Cahoone) |
-
-## Programs Active at Degree 48
-
-| Program | Status | Degrees |
-|---------|--------|---------|
-| Gemini | Active -- 8 crewed flights, dual rendezvous proved, propulsion sharing proved, 2 flights remaining | 38+ |
-| **Lunar Orbiter** | Active -- first US Moon orbit, 9 Apollo sites photographed | 47+ |
-| Surveyor | Active -- first soft landing achieved | 45+ |
-| Mariner | Active -- Venus and Mars reached | 27+ |
-| Pioneer | Active -- Pioneer 6 transmitting | 1-5, 43 |
-| Mercury | Complete (7 flights) | 16-22 |
-| Ranger | Complete (9 missions, 3 successes) | 23-37 |
-
-## Engine Position
-
-```
-v1.49.501  = NASA 1.0   + degree 0   Pass 2  ✓
-...
-v1.49.545  = NASA 1.45  + degree 44  Pass 2  ✓  (FIRST DOCKING)
-v1.49.546  = NASA 1.46  + degree 45  Pass 2  ✓  (FIRST SOFT LANDING)
-v1.49.547  = NASA 1.47  + degree 46  Pass 2  ✓  (ANGRY ALLIGATOR)
-v1.49.548  = NASA 1.48  + degree 47  Pass 2  ✓  (FIRST MOON ORBIT)
-v1.49.552  = NASA 1.49  + degree 48  Pass 2  ← THIS RELEASE (FIRST DUAL RENDEZVOUS)
-v1.49.553  = NASA 1.50  + degree 49  Pass 2  ← next
-```
-
-## Files
-
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/048-sera-cahoone/pass2-refinement.md` | UPDATED | ~500 |
-| `SPS/research/releases/048-white-crowned-sparrow/pass2-refinement.md` | UPDATED | ~500 |
-| `NASA/1.49/research.md` | SOURCE | ~5,000 |
-| `NASA/1.49/organism.md` | SOURCE | ~2,500 |
-| `NASA/1.49/degree-sync.json` | SOURCE | ~3,000 |
-| `docs/release-notes/v1.49.552/README.md` | REWRITTEN | -- |
+6. **The Passerellidae quartet ties the non-Hirundinidae record.** Four consecutive degrees (45-48), four genera (*Melospiza*, *Pipilo*, *Junco*, *Zonotrichia*), four habitats (wetland edge, dense understory, forest floor, mountain meadow edge).
+7. ***Pugetensis* names the Sound.** The subspecies *Zonotrichia leucophrys pugetensis* is literally named for Puget Sound. The only species in forty-nine degrees whose subspecific epithet matches the project's subject.
+8. **Peter Marler's bird enters.** The species that taught science how song is learned. Marler and Tamura 1964 established the sensitive period, auditory template, and cultural transmission paradigm -- the theoretical backbone of every subsequent song-learning study.
+9. **E=2/E=2 flat-energy pairing is a new engine structure.** Degree 48 is the engine's first same-energy paired degree since degree 12. Flat-energy pairings produce a different thematic density than contrast pairings, and the engine should track whether this pattern recurs.
+10. **Three-retrieval stack is a replicable degree structure.** Physical, cultural, and creative retrieval on the same mission frame is a narrative architecture future degrees can reuse when a mission has a "reach back across a gap" structure (e.g., Apollo 13 return, STS-114 Return to Flight).
 
 ## Cross-References
 
@@ -142,26 +110,54 @@ v1.49.553  = NASA 1.50  + degree 49  Pass 2  ← next
 | S36 | Sera Cahoone | Artist -- the slow bloom, held rest, drummer-to-songwriter, Ballard, Tractor Tavern, Sub Pop, KEXP, Carissa's Wierd genealogy |
 | SPS | White-crowned Sparrow | Species -- fourth Passerellidae, *pugetensis* named for Puget Sound, Marler's bird, the dialect, cultural transmission |
 | NASA | Gemini 10 | Mission -- first dual rendezvous, first propulsion sharing, Collins' first flight, retrieval from Agena 8 |
-| Dedication | Michael Collins & John Young | Collins (1930-2021): Apollo 11 CMP, *Carrying the Fire*. Young (1930-2018): 6 flights, Apollo 16, STS-1 |
-| Degree 47→48 | Lunar Orbiter 1 → Gemini 10 | Program interleave -- Moon mapped from orbit (47), now Gemini resumes technique-proving in Earth orbit (48) |
-| Degree 45→48 | Jurado → Cahoone | Sub Pop folk siblings -- both E=2, both KEXP-championed, E=2 bookends the folk run |
-| Degree 45→48 | Song Sparrow → White-crowned Sparrow | Marler bridge -- Marler studied both, different learning strategies, same researcher |
-| Degree 44→48 | Gemini 8 → Gemini 10 | Agena 8 retrieval -- Collins floated to Armstrong's old Agena and retrieved its experiment |
-| Degree 11→48 | Oregon Junco → White-crowned Sparrow | Passerellidae arc -- trill/tremolo at degree 11 foreshadowed the quartet at 45-48 |
+| Dedication | Michael Collins | 1930-2021, Apollo 11 Command Module Pilot, *Carrying the Fire* autobiography, the "forgotten astronaut" |
+| Dedication | John Young | 1930-2018, six flights 1965-1983, Apollo 16 commander, STS-1 commander, longest active NASA astronaut career |
+| Degree 44 → 48 | Gemini 8 → Gemini 10 | Agena 8 retrieval -- Collins floated to Armstrong's old Agena and retrieved its experiment |
+| Degree 45 → 48 | Song Sparrow → White-crowned Sparrow | Passerellidae quartet bookends -- Marler bridge, both learning-model species |
+| Degree 45 → 48 | Damien Jurado → Sera Cahoone | Sub Pop folk siblings -- both E=2, both KEXP-championed, four-degree folk run closes |
+| Degree 46 → 48 | Spotted Towhee → White-crowned Sparrow | Passerellidae quartet middle -- second and fourth, *Pipilo* → *Zonotrichia* |
+| Degree 47 → 48 | Lunar Orbiter 1 → Gemini 10 | Program interleave -- Moon mapped from orbit (47), now Gemini resumes technique-proving in Earth orbit (48) |
+| Degree 47 → 48 | Dark-eyed Junco → White-crowned Sparrow | Passerellidae quartet adjacency -- Marler's other study bird |
+| Degree 19 → 48 | Parulidae quintet → Passerellidae quartet | Family-streak precedents -- warbler five beats sparrow four |
+| Degree 5 → 48 | Hirundinidae quintet → Passerellidae quartet | Family-streak precedents -- swallow five, still the record |
+| Degree 11 → 48 | Oregon Junco → White-crowned Sparrow | Passerellidae foreshadow -- trill/tremolo at degree 11 foreshadowed the quartet |
+| Degree 12 → 48 | Flat-energy pairing | Engine's first same-energy paired degree since 12; structure recurs at 48 |
+| v1.49.551 | Cartridge Tarball Fix | Immediate predecessor patch; cartridges shipped, engine resumes |
+| v1.49.553 | Degree 49 Next | Successor -- marine-species crisis MUST address; Passerellidae streak MUST break |
+| Ridgway 1898 | *The Auk* original description | *Z. l. pugetensis* type specimen, Lake Union, Seattle |
+| Marler and Tamura 1964 | *Science* 146: 1483-1486 | Sensitive period, auditory template, cultural transmission foundations |
+| Derryberry 2020 | *Science* 370: 575-579 | COVID song experiment; real-time acoustic plasticity in White-crowned Sparrow |
+| Collins 1974 | *Carrying the Fire* | Farrar, Straus and Giroux; primary source for Gemini 10 EVA account |
 
-## The Gemini 10 Mission
+## Engine Position
 
-| Phase | Date | Event |
-|-------|------|-------|
-| Launch | July 18, 1966 17:20 UTC | Atlas-Agena launches Agena 10; Titan II launches Gemini 10 101 minutes later |
-| Rendezvous & Dock | July 18 | M=4 rendezvous, docking at 5h 52m mission elapsed time |
-| Agena 10 burn | July 19 | PPS fires 80 seconds, boosts to 763 km apogee -- highest crewed altitude |
-| Standup EVA | July 19 | Collins stands in hatch for 49 minutes, UV photography |
-| Agena 8 rendezvous | July 20 | Undock from Agena 10, lower orbit, rendezvous with Agena 8 |
-| Free-float EVA | July 20 | Collins EVA to Agena 8, retrieves micrometeorite experiment, 39 minutes |
-| Reentry | July 21, 1966 21:07 UTC | Splashdown in western Atlantic, recovery by USS Guadalcanal |
+```
+v1.49.501  = NASA 1.0   + degree 0   Pass 2  (FOUNDATION)
+...
+v1.49.545  = NASA 1.45  + degree 44  Pass 2  (FIRST DOCKING)
+v1.49.546  = NASA 1.46  + degree 45  Pass 2  (FIRST SOFT LANDING -- Surveyor 1)
+v1.49.547  = NASA 1.47  + degree 46  Pass 2  (ANGRY ALLIGATOR -- Gemini 9A)
+v1.49.548  = NASA 1.48  + degree 47  Pass 2  (FIRST MOON ORBIT -- Lunar Orbiter 1)
+v1.49.552  = NASA 1.49  + degree 48  Pass 2  ← THIS RELEASE (FIRST DUAL RENDEZVOUS -- Gemini 10)
+v1.49.553  = NASA 1.50  + degree 49  Pass 2  ← next
+```
 
-Two Agenas, two EVAs, three days. The first mission designed around reaching the past -- Agena 8 had been orbiting since March 16, when Armstrong and Scott's Gemini 8 mission ended early after a stuck thruster. Four months later, Collins crossed the void to retrieve what Armstrong's mission had left behind. The retrieval bridge: degree 44 (Gemini 8, first docking) → degree 48 (Gemini 10, first retrieval from a previous mission's vehicle).
+## Emerging Patterns at Degree 48
+
+| Pattern | Status | Degree 48 Value |
+|---------|--------|-----------------|
+| S36 Artists | 49 documented (degrees 0-48) | Sera Cahoone -- the slow bloom, held rest, drummer-to-songwriter, Ballard, Sub Pop, KEXP |
+| SPS Species | 49 documented (degrees 0-48) | White-crowned Sparrow -- fourth Passerellidae, *pugetensis*, Marler's bird, the dialect |
+| NASA Missions | 49 aligned (1.0-1.49) | Gemini 10 -- FIRST DUAL RENDEZVOUS, first propulsion sharing, Collins' first flight |
+| NASA Programs | 7 (Gemini continues) | Pioneer / Mercury / Ranger / Mariner / Gemini / Surveyor / Lunar Orbiter |
+| Passerellidae Streak | 4 degrees (45-48, ties record) | Song Sparrow → Spotted Towhee → Dark-eyed Junco → White-crowned Sparrow |
+| Folk Run | 4 consecutive (longest ever at shipping) | Jurado (45) → Votolato (46) → Pedro the Lion (47) → Cahoone (48) |
+| *Pugetensis* | NAMESAKE BIRD | Only species whose subspecific epithet matches the project name |
+| Genre Stages | Folk returns (Stage 29) | Fourth consecutive folk-adjacent |
+| Gemini Program | 8 crewed flights (of 10) | Two remaining: Gemini 11, Gemini 12 |
+| Collins Career | FIRST FLIGHT | Future Apollo 11 CMP, orbits Moon alone, *Carrying the Fire* |
+| Young Career | SECOND FLIGHT | Future Apollo 16 commander + STS-1 commander, 6 flights total |
+| Retrieval Concept | NEW | Reaching back across time to retrieve from the past -- physical (Collins), cultural (sparrow), creative (Cahoone) |
 
 ## Cumulative Engine Statistics (v1.49.501-552)
 
@@ -171,15 +167,40 @@ Two Agenas, two EVAs, three days. The first mission designed around reaching the
 | NASA programs | 7 (Pioneer active, Mercury complete, Ranger complete, Mariner active, Gemini active, Surveyor active, Lunar Orbiter active) |
 | Gemini crewed flights | 8 of 10 (Gemini 3-10; Gemini 11 and 12 remain) |
 | Passerellidae (New World sparrows) | 4-degree streak (45-48, unprecedented quartet) |
-| Folk-adjacent degrees | 4 consecutive (45-48, longest genre-family run) |
+| Folk-adjacent degrees | 4 consecutive (45-48, longest genre-family run at shipping) |
 | Taxonomic families (SPS) | 19 |
 | Genre stages | 29 |
 | Acoustic elements (S36) | 49 (Silence through The Held Rest) |
 | Acoustic elements (SPS) | 49 (Silence through The Dialect) |
 | Crewed altitude record | 763 km (Gemini 10, will be surpassed by Gemini 11) |
 | First in-orbit retrieval | Collins → Agena 8 micrometeorite experiment |
-| Pugetensis documented | Only subspecies named for Puget Sound |
+| *Pugetensis* documented | Only subspecies named for Puget Sound |
 | Boeing-Seattle missions | 1 (Lunar Orbiter -- degree 47) |
+
+## The Gemini 10 Mission
+
+| Phase | Date | Event |
+|-------|------|-------|
+| Launch | July 18, 1966 17:20 UTC | Atlas-Agena launches Agena 10; Titan II launches Gemini 10 101 minutes later |
+| Rendezvous and Dock | July 18 | M=4 rendezvous, docking at 5h 52m mission elapsed time |
+| Agena 10 burn | July 19 | PPS fires 80 seconds, boosts to 763 km apogee -- highest crewed altitude |
+| Standup EVA | July 19 | Collins stands in hatch for 49 minutes, UV photography |
+| Agena 8 rendezvous | July 20 | Undock from Agena 10, lower orbit, rendezvous with Agena 8 |
+| Free-float EVA | July 20 | Collins EVA to Agena 8, retrieves micrometeorite experiment, 39 minutes |
+| Reentry | July 21, 1966 21:07 UTC | Splashdown in western Atlantic, recovery by USS *Guadalcanal* |
+
+## Files
+
+- `docs/release-notes/v1.49.552/README.md` -- this release's uplifted notes (degree 48)
+- `docs/release-notes/v1.49.552/chapter/00-summary.md` -- short excerpt
+- `docs/release-notes/v1.49.552/chapter/03-retrospective.md` -- numbered lessons corpus
+- `docs/release-notes/v1.49.552/chapter/99-context.md` -- context summary
+- `package.json` / `package-lock.json` -- version bumped to 1.49.552
+- `src-tauri/tauri.conf.json` -- version bumped to 1.49.552
+- `tools/import-filesystem-skills.ts` -- new `releases` ResourceKind + CLI flags (v1.49.552 grove integration)
+- `tools/rehydrate-seattle-360.ts` -- 1,090-line rehydrator; walks 48 paired-engine release notes and emits a 290-record graph into the `release-engine/` grove namespace
+- `.grove/arena.json` -- grew from 18.89 MB to 35.83 MB after rehydration
+- `www/tibsfox/com/Research/NASA/1.49/` -- research, organism, simulation, mathematics, curriculum, papers, and index HTML pages (source material for degree 48)
 
 ---
 
