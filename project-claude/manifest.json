@@ -343,6 +343,18 @@
         "target": ".claude/skills/gupp-propulsion",
         "description": "Gupp propulsion skill (gastown wave 2D)",
         "files": ["SKILL.md", "heartbeat.md", "references/boundaries.md", "references/gastown-origin.md", "references/metrics-and-learning.md", "references/runtime-strategies.md"]
+      },
+      {
+        "source": "skills/vision-to-mission",
+        "target": ".claude/skills/vision-to-mission",
+        "description": "Vision-to-mission skill — transform builder vision into GSD mission package",
+        "files": ["SKILL.md", "references/mission-templates.md", "references/vision-archetypes.md"]
+      },
+      {
+        "source": "skills/research-mission-generator",
+        "target": ".claude/skills/research-mission-generator",
+        "description": "Research mission generator — package conversation research into GSD mission LaTeX pipeline",
+        "files": ["SKILL.md", "references/test-patterns.md", "references/crew-profiles.md", "references/latex-template.md"]
       }
     ],
     "hookScripts": [
