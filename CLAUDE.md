@@ -59,3 +59,4 @@ This preserves bisect intent in the commit message even when commit boundaries d
 - This is a self-modifying system -- the security-hygiene skill handles safety
 - `.planning/patterns/` should be in `.gitignore`
 - Skills load automatically based on context -- no explicit invocation needed
+- **Session auto-init:** when starting a new mission, run `node tools/session-retro/observe.mjs start '<mission-name>'` as your first Bash call. This captures `started_commit` for `generate.mjs --since …` and gives the retrospective real event data. Close with `observe.mjs end` + `generate.mjs` before context dies. Token usage can be dual-logged via `observe.mjs event tokens <in> <out> [label]`.
