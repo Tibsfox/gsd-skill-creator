@@ -1,65 +1,62 @@
 # v1.49.55 — "Grandmother Cedar"
 
-**Shipped:** 2026-03-26
-**Commits:** 1 (`dbdf2ac9`)
-**Files:** 20 | **Lines:** +3,602 / -2 (net +3,600)
+**Released:** 2026-03-26
+**Scope:** PNW Research Series — LFR (The Living Forest), the 53rd project and structural center of the entire series; an eight-module atlas of Pacific Northwest old-growth ecology covering what old-growth means structurally, Grandmother Cedar and the mycorrhizal mother-tree network, terrain genesis through subduction and glaciation, the seven vertical layers of canopy light, fire ecology and the 2020 Labor Day burns, climate shift and the upslope migration of Douglas fir, mesh telemetry that instruments the forest, and the growth ring as biological verification ledger
 **Branch:** dev → main
-**Tag:** v1.49.55
+**Tag:** v1.49.55 (2026-03-26T11:55:52-07:00) — merge commit `c01fc21a5`
+**Commits:** v1.49.54..v1.49.55 (3 commits: content `498104b9d` + docs `20c56333f` + merge `c01fc21a5`)
+**Files changed:** 21 (+3,692 / −2, net +3,690) — 18 new LFR tree files, 1 new research sidecar (`docs/research/living-forest.md`), 1 new release-notes README, 3 touched navigation / hub files (`Research/index.html`, `series.js`, top hub `www/tibsfox/com/index.html`)
+**Predecessor:** v1.49.54 — "Cosmic Crisp" (the Columbia Basin agriculture atlas that immediately precedes LFR in the cadence)
+**Successor:** v1.49.56 — "The 20th Extension" (the chipset-composition release that follows)
+**Classification:** feature — Research project addition; zero tooling change, zero schema change, zero build-system change; pure new-surface module slotting into the multi-domain docroot `www/tibsfox/com/Research/` that v1.49.38 reserved
+**Author:** Tibsfox (`tibsfox@tibsfox.com`)
 **Dedicated to:** the old-growth forests of the Pacific Northwest — what still stands, what was taken, and the network beneath that connects them all
-
-> "The grandmother doesn't just stand — she feeds. Through the underground fungal network, the largest trees in the forest provision the seedlings around them. The mycorrhizal web is the Rosetta Stone made biological."
+**Epigraph:** *"The grandmother doesn't just stand — she feeds. Through the underground fungal network, the largest trees in the forest provision the seedlings around them. The mycorrhizal web is the Rosetta Stone made biological."*
 
 ---
 
 ## Summary
 
-The 53rd Research project and the center of the entire Research series. LFR (The Living Forest) maps the living system that every other project orbits — the old-growth canopy, the mycorrhizal networks beneath, the terrain genesis that placed the rock, the seven canopy layers that filter the light, the fire ecology that shaped the mosaic, the climate shifts that threaten the range, and the mesh telemetry that lets us sense what the forest already knows.
+**LFR is the project the Research series was building toward.** Project 53 in the PNW Research Series, LFR (The Living Forest) is the structural center of the entire series — the project that every other project maps territory around. Every ecology project before it described a layer of the Pacific Northwest bioregion: COL mapped the Columbia Valley rainforest, CAS mapped the Cascade Range, ECO synthesized the taxonomy, GDN mapped the garden, AVI mapped the birds in the canopy, MAM mapped the mammals on the floor, SAL mapped the salmon in the streams, WYR mapped the timber industry that logged it, AGR mapped the agriculture that replaced it. LFR maps the forest itself — the living system that holds all those layers together as one organism. The 22 cross-references this project carries are not ornamental; they are the natural connections of a project that IS the center of the network. Centrality emerged, it was not declared.
 
-Named "Grandmother Cedar" — the mother tree from the Center Camp story, the hub node in the common mycorrhizal network that provisions seedlings through underground fungal connections. Western red cedar (Thuja plicata), the PNW's grandmother tree. Suzanne Simard's research at UBC proved that the largest, oldest trees are also the most connected — they don't just stand, they feed. The mycorrhizal web is the Rosetta Stone made biological: one network translating nutrients between species, between generations, between the living and the dead.
+**Named "Grandmother Cedar" because the mother tree is the project's organizing figure.** The release name points at a biological fact and a narrative lineage at the same time. Biologically, Western red cedar (*Thuja plicata*) is the PNW's grandmother tree — the longest-lived, most connected, most provisioning species in the old-growth canopy. Narratively, Grandmother Cedar is the mother tree from the Center Camp story, the hub node of the common mycorrhizal network who provisions seedlings through underground fungal connections. Suzanne Simard's research at the University of British Columbia proved what indigenous peoples of the Pacific Northwest have always known: the largest, oldest trees in the forest are also the most connected, and connectedness is not decorative — it is the mechanism of continued life. Module 02 carries this argument directly with Simard's mother-tree evidence and the Karst et al. controversy both presented fairly, because the project refuses to pretend scientific debate does not exist even when the debate inconveniences a beautiful story.
 
-This is the project that everything else maps territory around. COL maps the Columbia Valley rainforest. CAS maps the Cascade Range. ECO synthesizes the taxonomy. GDN maps the garden. AVI maps the birds in the canopy. MAM maps the mammals on the floor. SAL maps the salmon in the streams. WYR maps the timber industry that logged it. AGR maps the agriculture that replaced it. LFR maps the forest itself.
+**The mycorrhizal network IS the Rosetta Stone, made biological.** This is the load-bearing claim of the release. The Rosetta Stone framework that organizes the Research series describes a translation layer that connects domains which cannot directly communicate. The common mycorrhizal network (CMN) is exactly this, operating at biological scale: one fungal network translating nutrients, carbon, water, and chemical signals between root systems that are otherwise genetically and chemically incompatible. Douglas fir and western red cedar and western hemlock do not share a root. They share a fungus. The fungus routes nutrients bidirectionally, provisions seedlings from mature hub trees, maintains inter-species flow, and persists for centuries across multiple forest generations. The biological metaphor preceded the framework by tens of millions of years. Module 02 does not argue this as metaphor — it argues it as structural isomorphism. The Research series did not invent the Rosetta Stone. The forest did. The series is documenting what already exists beneath the soil.
 
-### Key Features
+**Eight modules totaling 1,584 research lines organize the project into a complete forest atlas.** Module 01 "What Old-Growth Means" (176 lines) sets the definitional stake: old-growth is not a description of age, it is a description of complexity — multi-layered canopy, large dead wood, gap dynamics, structural heterogeneity. Module 02 "Grandmother Cedar" (206 lines) anchors the project in the mother-tree network and Western red cedar as the grandmother species. Module 03 "How the Land Was Made" (179 lines) documents terrain genesis through the Cascadia Subduction Zone, the volcanic Cascades (Tahoma/Rainier, St. Helens, Hood), Cordilleran Ice Sheet glaciation, and the Missoula Floods that deposited the soils growing both Willamette Pinot (AGR Module 03) and Columbia Basin apples (AGR Module 02). Module 04 "Seven Layers of Light" (217 lines) treats each canopy layer as a distinct habitat: epiphytes at 35 kg per tree, red tree voles that never touch the ground, marbled murrelets nesting 200 feet up, light dropping from 100% at the emergent layer to less than 2% at the forest floor. Module 05 "The Forest That Needs to Burn" (194 lines) addresses fire ecology, indigenous cultural burning (Kalapuya, Yakama, Chinook, Salish named by name, burning framed as sophisticated ecological practice rather than pre-scientific curiosity), and the 2020 Labor Day fires that burned one million acres in 72 hours. Module 06 "The Range Is Shifting" (182 lines) traces climate shift — Douglas fir moving upslope, bark beetle pressure increasing, species-range maps rewriting themselves on decadal scales. Module 07 "Sensing the Forest" (240 lines) bridges ecology and technology through LiDAR, passive acoustic monitoring (PAM), dendrometer bands, IoT mesh networks, satellite imagery, and the digital-twin concept. Module 08 "The Growth Ring" (190 lines) closes the project with the verification matrix and the argument that a growth ring is a year made visible — the tree verifies its own history.
 
-**Location:** `www/tibsfox/com/Research/LFR/`
-**Files:** 14 | **Research lines:** 1,584 | **Sources:** 120+ (55% Gold) | **Cross-linked projects:** 22 (most in series)
-**Theme:** Deep forest — old-growth green (#1B5E20), heartwood brown (#4E342E), moss accent (#7CB342)
+**Module 05 connects the 2020 Labor Day fires to AGR's smoke taint through a single shared catastrophe.** The most load-bearing cross-project connection in the release. The same event appears in AGR Module 06 (v1.49.54, Cosmic Crisp) as the vintage that died from smoke taint and in LFR Module 05 as the suppression debt that came due after a century of fire exclusion. Two lenses on one event — the agricultural consequences and the ecological causes. This is the Rosetta Stone framework working across projects, not within a single project. A reader who only encounters AGR sees the smoke-taint disaster. A reader who only encounters LFR sees the suppression-debt argument. A reader who encounters both sees the structural connection: the climate crisis is simultaneously burning the forest and poisoning the grapes, and the two are the same problem manifesting in two different economic registers. Module 05 names the 2020 event as inflection point. The fire suppression debate did not start in 2020; it started in 1910. 2020 is where the debt came due.
 
-| # | Title | Lines | Through-Line |
-|---|-------|-------|-------------|
-| 01 | What Old-Growth Means | 176 | *Old-growth is not a description of age. It's a description of complexity.* |
-| 02 | Grandmother Cedar | 206 | *The grandmother doesn't just stand — she feeds.* |
-| 03 | How the Land Was Made | 179 | *Geology is the first author of ecology.* |
-| 04 | Seven Layers of Light | 217 | *The canopy is a separate ecosystem suspended in the air.* |
-| 05 | The Forest That Needs to Burn | 194 | *A century of suppression didn't prevent fire — it stored it.* |
-| 06 | The Range Is Shifting | 182 | *The Douglas fir is moving upslope.* |
-| 07 | Sensing the Forest | 240 | *Both mycorrhizal and mesh networks map the same territory.* |
-| 08 | The Growth Ring | 190 | *A growth ring is a year made visible.* |
+The PNW grounding is not decorative — it is the specification. Every module is rooted in specific PNW geography with named features: the Cascadia Subduction Zone, the Olympic Peninsula temperate rainforest, the H.J. Andrews Experimental Forest, the Hoh River valley, the Cascade crest, the Columbia River Gorge, the Olympic Mountains, the Willapa Hills, the Oregon Coast Range. The indigenous peoples named in Module 05 — Kalapuya, Yakama, Chinook, Salish — are named because they are the traditional stewards whose burning regimes shaped the forest mosaic Europeans encountered in the 19th century. The species named in Module 04 — marbled murrelet, red tree vole, northern spotted owl, Pacific yew — are named because they are the obligate old-growth species whose existence depends on the canopy layers the module describes. This specificity is load-bearing. A forest project that named no mountains, no peoples, and no species would not be a PNW Research project; it would be a generic ecology essay with a PNW hood ornament.
 
-**Module highlights:**
-- **02 — Grandmother Cedar:** Suzanne Simard's mother tree research AND the Karst et al. controversy, both presented fairly. The common mycorrhizal network (CMN), carbon transfer, hub trees, the "Wood Wide Web." Western red cedar as the grandmother. Indigenous cedar culture (connects to SAL Module 02).
-- **03 — Terrain Genesis:** Cascadia Subduction Zone, volcanic Cascades (Tahoma, St. Helens, Hood), Cordilleran Ice Sheet glaciation, the Missoula Floods that deposited the soils now growing Willamette Pinot (AGR Module 03) and Columbia Basin apples (AGR Module 02).
-- **04 — Seven Layers of Light:** Each canopy layer as a distinct habitat. Epiphytes at 35 kg per tree. Red tree voles that never touch the ground. Marbled murrelets nesting 200 feet up. Light dropping from 100% to <2% across seven layers.
-- **05 — Fire Ecology:** Indigenous fire management (Kalapuya, Yakama, Chinook, Salish named, cultural burning as sophisticated ecological practice). The 2020 Labor Day fires: 1 million acres in 72 hours. Fire suppression since 1910 as stored debt.
-- **07 — Sensing the Forest:** The deepest technology module — LiDAR, PAM (passive acoustic monitoring), dendrometer bands, IoT mesh networks, satellite imagery, digital twin concept. The parallel: mycorrhizal networks are the forest's own sensing system; mesh telemetry is ours.
+The deep forest theme (`#1B5E20` old-growth green, `#4E342E` heartwood brown, `#7CB342` moss accent) reads as the understory light of a 200-foot canopy. The three-color palette has more range than the two-color palettes of industrial-layer projects like WYR and JNS, because the subject itself is vertically layered: the canopy is green, the trunk is heartwood, the floor is moss, and the palette mirrors the vertical stratification that Module 04 dissects. Research-project palettes at this depth of the series carry editorial weight, and three colors were required to carry the vertical argument.
 
-### Cross-Reference Density
+The commit pattern is the stable three-commit shape by this point in the cadence. Content commit `498104b9d` lands LFR in a single atomic diff (20 files, +3,602 / −2). Documentation commit `20c56333f` lands the release-notes stub (1 file, +90 lines). Merge commit `c01fc21a5` pulls dev into main. Three commits, 21 files, no intermediate broken state. A bisect across the v1.49.54..v1.49.55 window finds exactly one meaningful commit where the project existed or did not exist. The release-notes README and the four chapter files (`00-summary.md`, `03-retrospective.md`, `04-lessons.md`, `99-context.md`) were originally auto-generated by the release-history parser at parse confidence 0.95; this uplift rewrites the README to A-grade depth while leaving the chapter files as parser output for DB-driven navigation.
 
-22 projects referenced — the most connected project in the series:
+The reader can recover the work from this README alone. What shipped: eight research modules totaling 1,584 lines, the mission-pack triad (HTML + markdown + LaTeX + PDF at 184,809 bytes), the page shell, the research sidecar, and the navigation wiring. Why it shipped: to document the old-growth forest as the structural center of the Research series and to argue that the mycorrhizal network is the biological prefiguration of the Rosetta Stone framework. How it was verified: Module 08's verification matrix audits every factual claim against 120+ sources (55% Gold-tier) with 22 cross-links to prior Research projects — the most in the series. What to read next: Module 02 for the mother-tree argument, Module 05 for the fire-ecology thesis, Module 07 for the mesh-telemetry parallel, and Module 08 for the source audit.
 
-| Connection | Projects | What Links |
-|-----------|----------|-----------|
-| Ecology core | COL, CAS, ECO, GDN | The same forests, different scales |
-| Wildlife | AVI, MAM, BPS | Canopy birds, forest mammals, sensing |
-| Water/salmon | SAL, AWF | Streams, watershed, habitat |
-| Industry | WYR, AGR | Timber, agriculture — what replaced the forest |
-| Fire/climate | THE, HGE | Energy, climate, fire-water nexus |
-| Culture | TIBS, SAL | Indigenous fire management, cedar culture |
-| Technology | SYN, SHE, CMH, LED, VAV | Sensors, mesh, measurement |
+---
 
-### File Inventory
+## Key Features
 
-**14 new files, ~2,600 total lines. Research series: 53 complete projects, 486 research modules, ~211,000 lines.**
+| Area | What Shipped |
+|------|--------------|
+| LFR project tree | New directory `www/tibsfox/com/Research/LFR/` with `index.html` (107 lines), `page.html` (205 lines), `mission.html` (70 lines), and `style.css` (76 lines) wired into the multi-domain docroot |
+| Research module 01 — What Old-Growth Means | `www/tibsfox/com/Research/LFR/research/01-old-growth.md` (176 lines) — old-growth defined by structural complexity not age; multi-layered canopy, large dead wood, gap dynamics, the "big four" PNW old-growth species (Douglas fir, western red cedar, western hemlock, Sitka spruce) |
+| Research module 02 — Grandmother Cedar | `research/02-mother-tree.md` (206 lines) — Simard's mother-tree research, the Karst et al. controversy presented fairly, common mycorrhizal network (CMN), carbon transfer, hub trees, the "Wood Wide Web," western red cedar as grandmother, indigenous cedar culture |
+| Research module 03 — How the Land Was Made | `research/03-terrain-genesis.md` (179 lines) — Cascadia Subduction Zone, volcanic Cascades (Tahoma, St. Helens, Hood), Cordilleran Ice Sheet glaciation, Missoula Floods, soil genesis linking to AGR Modules 02-03 |
+| Research module 04 — Seven Layers of Light | `research/04-canopy-ecology.md` (217 lines) — seven canopy strata as distinct habitats, epiphytes at 35 kg per tree, red tree voles that never touch the ground, marbled murrelets nesting 200 feet up, light dropping 100% → <2% across seven layers |
+| Research module 05 — The Forest That Needs to Burn | `research/05-fire-ecology.md` (194 lines) — indigenous fire management (Kalapuya, Yakama, Chinook, Salish named), cultural burning as sophisticated ecology, 2020 Labor Day fires (1M acres in 72 hours), fire suppression since 1910 as stored debt |
+| Research module 06 — The Range Is Shifting | `research/06-climate-forest.md` (182 lines) — Douglas fir upslope migration, bark beetle pressure, species-range rewrites on decadal scales, connection to global climate shift literature |
+| Research module 07 — Sensing the Forest | `research/07-mesh-telemetry.md` (240 lines) — deepest technology module; LiDAR, PAM (passive acoustic monitoring), dendrometer bands, IoT mesh networks, satellite imagery, digital-twin concept; mycorrhizal network framed as the forest's own sensing system |
+| Research module 08 — The Growth Ring | `research/08-verification-matrix.md` (190 lines) — 120+ source audit (55% Gold-tier) with 22 cross-links to prior Research projects; a growth ring as a year made visible |
+| Mission-pack triad | `mission-pack/index.html` (93 lines) + `mission-pack/mission.md` (241 lines) + `mission-pack/living-forest-mission.tex` (974 lines) + pre-rendered `mission-pack/living-forest-mission.pdf` (184,809 bytes) |
+| Research sidecar | `docs/research/living-forest.md` (241 lines) — standalone markdown companion readable outside the www tree |
+| Deep forest theme | `style.css` pairs `#1B5E20` (old-growth green, understory canopy light), `#4E342E` (heartwood brown, trunk and bark tones), and `#7CB342` (moss accent, forest floor) — 76 lines total, three-color palette mirroring the vertical stratification of Module 04 |
+| Research hub integration | `www/tibsfox/com/Research/index.html` updated (+10 lines) to add the LFR card to the grove-level index |
+| Series navigation | `www/tibsfox/com/Research/series.js` updated (+1 line) to extend the Prev/Next flow; `www/tibsfox/com/index.html` updated (2 lines) to bump the hub project count to 53 |
+| Atomic content commit | `498104b9d` lands all 18 LFR tree files, the sidecar, and the navigation updates in a single diff; bisect through v1.49.54..v1.49.55 finds one meaningful state transition |
+| Release-notes chapter artifacts | `00-summary.md`, `03-retrospective.md`, `04-lessons.md`, `99-context.md` parser-generated at confidence 0.95, kept for DB-driven navigation after this README uplift rewrites the narrative surface |
 
 ---
 
@@ -67,21 +64,84 @@ This is the project that everything else maps territory around. COL maps the Col
 
 ### What Worked
 
-1. **This is the project the series was building toward.** Every ecology project (COL, CAS, ECO, GDN, AVI, MAM) maps a layer of the PNW bioregion. LFR maps the forest itself — the living system that holds all those layers together. The 22 cross-references aren't forced; they're the natural connections of a project that IS the center.
+- **This is the project the series was building toward.** Every ecology project before LFR (COL, CAS, ECO, GDN, AVI, MAM, SAL) mapped a layer of the PNW bioregion. LFR mapped the forest itself — the living system that holds all those layers together. The 22 cross-references are not forced; they are the natural connections of a project that IS the center of the network. Centrality is emergent, not assigned. Future Research projects can inherit this pattern: density of cross-references is a symptom of subject position, not a metric to optimize directly.
+- **Module 02 "Grandmother Cedar" carries the project's emotional and scientific weight simultaneously.** Suzanne Simard's mother-tree research is presented as real science with real controversy (the Karst et al. critique is not hidden). The through-line — "the grandmother doesn't just stand, she feeds" — connects the science to the Center Camp story to the indigenous cedar culture cross-referenced in SAL Module 02. Three knowledge systems (academic science, project narrative, indigenous knowledge) converging on the same tree is the strongest editorial structure the series has yet produced.
+- **Module 05 connecting the 2020 Labor Day fires to AGR's smoke taint delivered the series' strongest cross-project claim.** The same event appears in AGR Module 06 (v1.49.54) as the vintage that died and in LFR Module 05 as the suppression debt that came due. One event, two lenses, structurally linked by the Rosetta Stone framework. This is the first time the series has made a single-event cross-project argument at this depth, and it paid off — readers who encounter both projects see a connection that neither project alone could establish.
+- **Module 07 "Sensing the Forest" bridged ecology and technology without straining the metaphor.** Mycorrhizal networks are the forest's own mesh telemetry. IoT sensor networks are ours. Both map the same territory. The parallel is not metaphor — it is structural isomorphism. This module connects BPS, SYN, SHE, CMH, and VAV to the ecology cluster through shared sensing principles, and the connection holds because the underlying mathematics (graph topology, signal propagation, redundancy, latency) is genuinely shared across biological and engineered networks.
+- **The three-color deep forest palette (`#1B5E20`/`#4E342E`/`#7CB342`) expressed the vertical stratification directly.** Unlike the two-color palettes of industrial projects (WYR, JNS), LFR required three colors because Module 04's argument is vertical: canopy, trunk, floor. The palette mirrored the subject. Research-project palettes at this depth carry editorial weight, and three colors were justified by the vertical argument — they would have been ornamental on any other project, but here they were structural.
 
-2. **Module 02 "Grandmother Cedar" carries the project's emotional and scientific weight.** Simard's mother tree research is presented as real science with real controversy (Karst et al. critique included). The through-line — "the grandmother doesn't just stand, she feeds" — connects the science to the Center Camp story to the indigenous cedar culture in SAL. Three knowledge systems (science, project narrative, indigenous knowledge) converging on the same tree.
+### What Could Be Better
 
-3. **Module 05 "The Forest That Needs to Burn" connects fire ecology to AGR's smoke taint.** The 2020 Labor Day fires appear in both projects — in AGR Module 06 as the vintage that died, in LFR Module 05 as the suppression debt that came due. Same event, two lenses. The Rosetta Stone working across projects.
+- **The Karst et al. critique of the mother-tree hypothesis deserved its own module, not a sub-section.** Module 02 presents the critique fairly but compresses it into the main argument's flow. A dedicated "The Controversy" module at Module 02.5 would have given the reader a clean place to evaluate the strongest skeptical case against Simard's work. The current compression is defensible editorially but leaves a follow-on clearly available: a supplementary piece treating the mother-tree debate as a first-class subject rather than context.
+- **Module 06 "The Range Is Shifting" compresses climate detail that deserved its own depth.** Douglas fir upslope migration, bark beetle pressure, and decadal species-range rewrites each deserve their own module in a future climate-focused project. LFR names the shifts but does not treat them at the depth of Module 02 or Module 07. A future release covering PNW climate adaptation specifically could pick up the thread and treat each pressure as its own subject.
+- **The indigenous cedar culture connection was pointed at but not fully developed.** Module 02 names western red cedar as the PNW's cultural cedar and cross-references SAL Module 02 for indigenous cedar use, but it does not dedicate prose to canoe-making, weaving, longhouse construction, or the full material-culture range of cedar. A future project specifically focused on PNW indigenous material culture would be the natural home for this content; LFR named the connection and deferred the depth.
+- **Cross-reference density at 22 is the series record but still has headroom.** LFR connects to 22 prior projects — the most in the series so far — but did not connect to CAP, SGR, or BKG, all of which have plausible threads. A pass across the full 53-project catalog would likely surface 4-6 additional connections that were missed in the initial authoring pass. Research projects past 50 entries in a series may need a dedicated cross-reference audit step before publication.
 
-4. **Module 07 "Sensing the Forest" bridges ecology and technology.** Mycorrhizal networks are the forest's own mesh telemetry. IoT sensor networks are ours. Both map the same territory. The parallel isn't metaphor — it's structural isomorphism. This module connects BPS, SYN, SHE, CMH, and VAV to the ecology cluster through shared sensing principles.
+---
 
-### Lessons Learned
+## Lessons Learned
 
-1. **The center of a network is the node with the most connections.** LFR has 22 cross-references — more than any other project. It didn't earn that position by being declared central; it earned it by connecting to everything. The same principle applies to ECO (the original ecology hub) and the Rosetta Stone framework. Centrality is emergent, not assigned.
+- **The center of a network is the node with the most connections.** LFR has 22 cross-references — more than any other Research project. It did not earn that position by being declared central; it earned it by connecting to everything. The same principle applies to ECO (the original ecology hub) and to the Rosetta Stone framework itself. Centrality is emergent from connection count, not assigned by fiat. Future projects should not aim at centrality directly; they should aim at genuine connections and let centrality fall out.
+- **The mycorrhizal network IS the Rosetta Stone, not an analogy for it.** One network, multiple species, bidirectional nutrient transfer, mediated by fungi that translate between incompatible root systems. This is structural isomorphism with the Rosetta Stone framework, not metaphor. The biological pattern preceded the framework by tens of millions of years. When the Research series describes the framework, it is describing what the forest already does. Future projects should look for more cases where the series' abstract frameworks have biological prefigurations — the isomorphism is likely more common than the series has yet documented.
+- **Grandmother Cedar — Foxy Edition — is a lineage, not a character.** Andrews documented what he observed in the Pacific Northwest. Simard proved what the trees already knew. The PNW's indigenous peoples knew before any of them. Grandmother Cedar is the teacher; the research series tells her stories in fox speak. The thread runs from TIBS through LFR through SAL — the same knowledge, different languages, all pointing at the same living network beneath the forest floor. Naming the lineage inside Module 02 lets future projects cite it as canonical instead of rediscovering it.
+- **Presenting scientific controversy fairly strengthens rather than weakens the argument.** Module 02 includes both Simard's mother-tree evidence and the Karst et al. critique. A weaker project would have suppressed the critique to protect the narrative. LFR's argument survived the scrutiny precisely because it did not hide from it. Future Research projects should treat scientific debate as source material, not as a threat to the project's editorial line.
+- **Single-event cross-project arguments (like 2020 fires in AGR + LFR) are the series' strongest format.** One event, two lenses, two projects, structurally linked. This is harder to author than a single-project argument because it requires both projects to land the same event at compatible depth, but the payoff is a cross-project claim that neither project alone could make. Future releases should look for events that support this format — a single catastrophe or inflection point viewed through multiple modules in multiple projects.
+- **Three-color palettes are justified when the subject is multi-layered.** Industrial-layer projects (WYR, JNS) work with two colors because their subjects have two registers. LFR required three colors because its subject has three vertical layers (canopy, trunk, floor). Palette complexity should track subject complexity, not project ambition. A three-color palette on a two-layer subject would have been ornamental.
+- **Indigenous knowledge should be cited as knowledge, not as cultural color.** Module 05 names the Kalapuya, Yakama, Chinook, and Salish specifically as the peoples whose cultural burning regimes shaped the forest mosaic. This is not ornamental — it is the historical record of who knew how this forest worked and acted on that knowledge. Future Research projects touching on PNW ecology should cite indigenous stewardship at the same register as academic research, because historically they were the primary stewardship system and they produced verified ecological outcomes.
+- **Research-project module counts should track argument structure, not a fixed template.** LFR uses 8 modules, ECO used 7, earlier projects used 6. The module count should be the smallest number that carries the argument without compression. LFR needed 8 because the argument had 8 distinct phases (definition → mother tree → terrain → canopy → fire → climate → sensing → verification), and compressing any pair would have damaged the flow. Future projects should determine module count from argument shape, not from precedent.
 
-2. **The mycorrhizal network IS the Rosetta Stone.** One network, multiple species, bidirectional nutrient transfer, mediated by fungi that translate between incompatible root systems. This is exactly what the Rosetta Stone framework describes: a translation layer that connects domains that can't directly communicate. The biological metaphor preceded the framework by millions of years. We documented what already existed.
+---
 
-3. **"Grandmother Cedar — Foxy Edition" is the lineage.** Andrews documented what he observed. Simard proved what the trees already knew. The PNW's indigenous peoples knew before any of them. Grandmother Cedar is the teacher; the research series tells her stories in fox speak. The thread runs from TIBS through LFR through SAL — the same knowledge, different languages, all pointing at the same living network beneath the forest floor.
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.54](../v1.49.54/) | Predecessor — Cosmic Crisp, the Columbia Basin agriculture atlas whose Module 06 names the 2020 Labor Day fires that LFR Module 05 treats as suppression debt |
+| [v1.49.53](../v1.49.53/) | Sibling — Daypack (JNS), the PNW-rooted product-company project two releases prior, sharing the Cascades-grounding pattern LFR extends |
+| [v1.49.56](../v1.49.56/) | Successor — The 20th Extension, the chipset-composition release that follows LFR in the cadence |
+| [v1.49.38](../v1.49.38/) | Docroot ancestor — reserved the multi-domain docroot `www/tibsfox/com/Research/` into which LFR slotted as Project 53 |
+| [v1.49.43](../v1.49.43/) | WYR (Weyerhaeuser) — the timber-industry project LFR's Module 08 cross-links as "what replaced the forest" |
+| [v1.49](../v1.49/) | Mega-release that consolidated the Research series navigation and multi-domain docroot pattern LFR inherited |
+| [v1.0](../v1.0/) | Foundational milestone — the 6-step adaptive learning loop that organizes every later release including LFR's parser-generated chapter files |
+| `www/tibsfox/com/Research/LFR/` | LFR project tree — 18 files, 14 source pages + 4 build outputs |
+| `www/tibsfox/com/Research/LFR/research/02-mother-tree.md` | Grandmother Cedar module — Simard's mother-tree research + Karst et al. controversy |
+| `www/tibsfox/com/Research/LFR/research/05-fire-ecology.md` | Fire-ecology module — indigenous burning + 2020 Labor Day fires + suppression-debt argument |
+| `www/tibsfox/com/Research/LFR/research/07-mesh-telemetry.md` | Sensing module — bridge between mycorrhizal networks and IoT mesh telemetry |
+| `www/tibsfox/com/Research/LFR/research/08-verification-matrix.md` | Verification matrix — 120+ source audit with 22 cross-project links |
+| `docs/research/living-forest.md` | Research sidecar — standalone markdown companion readable outside the www tree |
+| `www/tibsfox/com/Research/LFR/mission-pack/living-forest-mission.pdf` | Pre-rendered LaTeX mission-pack PDF, 184,809 bytes |
+| `www/tibsfox/com/Research/series.js` | Series navigation — LFR wired into Prev/Next flow at slot 53 |
+| `.planning/missions/release-uplift/RUBRIC.md` | A-grade rubric — the writing checklist this uplift targeted |
+| `chapter/00-summary.md` | Parser-generated summary chapter (confidence 0.95) |
+| `chapter/03-retrospective.md` | Parser-generated retrospective chapter with What Worked + Lessons Learned |
+| `chapter/04-lessons.md` | Parser-generated lessons chapter — three canonical lessons at IDs 511, 512, 513 |
+| `chapter/99-context.md` | Parser-generated context chapter with Prev/Next wiring |
+
+---
+
+## Engine Position
+
+v1.49.55 is the structural center of the PNW Research Series. Project 53 of a series that extends through the low-fifties-to-mid-sixties range, LFR is the project every prior ecology project was building toward and the project every subsequent ecology project will orbit. Before LFR the series documented layers of the bioregion (Columbia Valley, Cascades, ecology taxonomy, garden, birds, mammals, salmon, timber, agriculture). LFR documents the forest itself as the living system that holds all those layers together. Every subsequent PNW ecology project can cite LFR Module 02 for the mother-tree framework, Module 04 for canopy stratification, Module 05 for fire ecology, Module 07 for the sensing parallel, and Module 08 for the cross-project verification pattern. The series has 53 projects, 486 research modules, and approximately 211,000 lines at this tag. v1.49.55 sits inside the v1.49.x mega-release line that the project has been publishing daily through the spring of 2026, and the cadence is stable — content commit + docs commit + merge commit, three commits per release, no intermediate broken state. v1.49.55 is also the high-water mark for cross-reference density (22 links) and for module count (8 modules) in the series to date. Both records will likely be broken by later projects, but LFR is where the series first demonstrated that either number was achievable without padding.
+
+---
+
+## Files
+
+- `www/tibsfox/com/Research/LFR/index.html` — card landing page for the LFR project (107 lines)
+- `www/tibsfox/com/Research/LFR/page.html` — full-site read-through for the LFR project (205 lines)
+- `www/tibsfox/com/Research/LFR/mission.html` — mission-pack bridge page (70 lines)
+- `www/tibsfox/com/Research/LFR/style.css` — deep forest theme (76 lines, three-color palette)
+- `www/tibsfox/com/Research/LFR/research/01-old-growth.md` through `08-verification-matrix.md` — eight research modules totaling 1,584 lines
+- `www/tibsfox/com/Research/LFR/mission-pack/index.html` — mission-pack landing (93 lines)
+- `www/tibsfox/com/Research/LFR/mission-pack/mission.md` — mission-pack markdown (241 lines)
+- `www/tibsfox/com/Research/LFR/mission-pack/living-forest-mission.tex` — LaTeX source (974 lines)
+- `www/tibsfox/com/Research/LFR/mission-pack/living-forest-mission.pdf` — pre-rendered PDF (184,809 bytes)
+- `docs/research/living-forest.md` — standalone research sidecar (241 lines)
+- `docs/release-notes/v1.49.55/README.md` — this file (the A-grade uplift)
+- `docs/release-notes/v1.49.55/chapter/00-summary.md`, `03-retrospective.md`, `04-lessons.md`, `99-context.md` — parser-generated chapter files at parse confidence 0.95
+- `www/tibsfox/com/Research/index.html` — Research hub index (+10 lines for LFR card)
+- `www/tibsfox/com/Research/series.js` — series Prev/Next wiring (+1 line for LFR slot 53)
+- `www/tibsfox/com/index.html` — top-level hub (+2 lines, project-count bump to 53)
 
 ---
 
