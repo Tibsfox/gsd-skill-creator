@@ -1,93 +1,200 @@
 # v1.31 — GSD-OS MCP Integration
 
-**Shipped:** 2026-02-22
-**Phases:** 293-304 (12 phases) | **Plans:** 28 | **Commits:** 37 | **Requirements:** 80 | **Tests:** 838 (771 TS + 67 Rust) | **LOC:** ~24K
+**Released:** 2026-02-22
+**Scope:** feature milestone — Model Context Protocol (MCP) as a first-class integration surface, shipped as `src/mcp/` (TypeScript) + `src-tauri/src/mcp_host/` (Rust)
+**Branch:** dev → main
+**Tag:** v1.31 (2026-02-22T08:59:13-08:00) — "GSD-OS MCP Integration"
+**Predecessor:** v1.30 — Vision-to-Mission Pipeline
+**Successor:** v1.32 — Brainstorm Session Support
+**Classification:** feature — dual-role MCP surface (Host and Server) with unbypassable staging pipeline
+**Phases:** 293-304 (12 phases) · **Plans:** 28 · **Requirements:** 80 · **Tests:** 838 (771 TS + 67 Rust)
+**Commits:** `276ddc1cf..f011bc252` (37 commits in the v1.31 release window) · **Files changed (tip window):** 11 · **LOC:** ~24K across `src/mcp/` and `src-tauri/src/mcp_host/`
+**Verification:** Phase 303 integration testing suite passes (30 E2E tests + 18 mandatory safety-critical tests) · Per-tool scope enforcement gated at HTTP level with body buffering · Rust StagingGate validates before every `mcp_call_tool` · Agent bridge staging pipeline closes SECR-13 bypass · E2E test discovers and invokes one tool from each of the 6 tool groups
 
-Make GSD-OS a first-class MCP citizen — both as an MCP Host (Rust backend managing server processes) and as an MCP Server (exposing 19 tools to external AI agents). Includes template skills, agent bridge adapters, staging security gates, blueprint editor integration, and comprehensive integration testing.
+## Summary
 
-### Key Features
+**v1.31 made GSD-OS a first-class MCP citizen on both sides of the protocol.** The Model Context Protocol is the wire between AI agents and the capabilities they call; before this release, GSD-OS could neither spawn external MCP servers nor expose its own capabilities as MCP tools. Phases 293 through 304 changed that on both fronts. The release ships a Rust MCP Host Manager at `src-tauri/src/mcp_host/` that spawns server processes, completes the MCP handshake, routes tool calls, and emits a Tauri trace event for every JSON-RPC message — and a TypeScript Gateway Server at `src/mcp/gateway/` that exposes nineteen GSD-OS tools over Streamable HTTP, guarded by bearer auth, per-tool scope enforcement, and a staging pipeline that no code path can skip. The bidirectional capability is the architecturally significant bet of the release: GSD-OS can orchestrate external AI agents and be orchestrated by them, using the same protocol in both directions. The release closes out at 838 tests across TypeScript and Rust, zero regressions against the pre-v1.31 baseline, and a gap-closure phase (304) that wired the pieces the integration testing phase proved were still loose.
 
-**Foundation Types (Phase 293):**
-- Shared TypeScript + Rust type definitions for all MCP structures
-- Zod v4 schemas for runtime validation, serde round-trip parity for Rust FFI
-- Staging gate interfaces: TrustState enum, SecurityGate trait, HashRecord, ValidationResult
+**The security pipeline is one composed gate with no bypass path.** Phase 301 landed five security primitives — a SHA-256 hash gate with deterministic tool-definition hashing, a trust manager cycling quarantine → provisional → trusted with 30-day decay and immediate reset on change, an invocation validator that blocks prompt-injection and path-traversal patterns, a per-server and per-tool rate limiter, and an audit logger that redacts API keys and bearer tokens on the way to disk. These five composed into the `StagingPipeline` class at `src/mcp/security/staging-pipeline.ts`, which implements a single `SecurityGate` interface. Every MCP call path — the Gateway Server's `tools/call` handler, the agent bridge's `AgentClientAdapter.invokeTool`, and the Rust `mcp_call_tool` command — goes through this one gate. Per-server promise queues inside the pipeline serialize validation per server while keeping cross-server calls concurrent, which is the shape a production concurrency model needs to hit. Eighteen mandatory-pass safety-critical tests back the claim; the test file at `src/mcp/integration-security.test.ts` fails the build if any of them regress. The "unbypassable" claim is not aspirational: the Gateway's body-buffering pattern, the agent bridge's optional-but-default staging pipeline constructor parameter, and the Rust `StagingGate` struct each route through this one gate by construction, and phase 304 added the integration tests that prove each surface calls it.
 
-**Rust MCP Host Manager (Phase 294):**
-- ServerConnection: stdio process spawn, MCP handshake, crash detection, exponential backoff restart
-- HostManager: multi-server orchestration, concurrent connection management
-- ToolRouter: tool-name-to-server dispatch with timeout handling
-- ServerRegistry: JSON persistence, health tracking, quarantine state
-- TraceEmitter: ring buffer, Tauri event emission for every MCP message
-- 5 Tauri IPC commands: connect, disconnect, list, call_tool, get_trace
+**Nineteen tools across six groups give external agents a coherent GSD-OS surface.** The Gateway Server at `src/mcp/gateway/` registers tools in six named groups — project (list / get / create / execute-phase), skill (search / inspect / activate), agent (spawn / status / logs), workflow (research / requirements / plan / execute), session (query / patterns), and chipset (get / modify / synthesize) — for nineteen tools in total. Each tool declares a required scope (`admin`, `write`, or `read`), and the gateway enforces `canInvokeTool()` at the HTTP level with body buffering so the scope check runs before dispatch, not after. Unknown tools are denied by default, which is the design choice that keeps the security posture from drifting permissive as new tools land. Four resource providers expose resources via URI templates (project configs, skill registry, agent telemetry, chipset state), and three prompt templates (create-project, diagnose-agent, optimize-chipset) round out the server-side surface. Bearer tokens are read from `~/.gsd/gateway-token` and compared with `crypto.timingSafeEqual` to avoid the timing side channel that naive string equality invites. Streamable HTTP transport with per-session isolation means a misbehaving caller cannot cross-contaminate another session's state.
 
-**Gateway Server (Phases 295-298):**
-- Streamable HTTP transport with per-session isolation
-- Bearer token auth from ~/.gsd/gateway-token with timing-safe comparison
-- 19 tools across 6 groups: project (list/get/create/execute-phase), skill (search/inspect/activate), agent (spawn/status/logs), workflow (research/requirements/plan/execute), session (query/patterns), chipset (get/modify/synthesize)
-- 4 resource providers via URI templates (project configs, skill registry, agent telemetry, chipset state)
-- 3 prompt templates (create-project, diagnose-agent, optimize-chipset)
-- Per-tool scope enforcement: admin > write > read, deny by default for unknown tools
+**The Rust MCP Host Manager is a production-grade process supervisor, not a demo.** `src-tauri/src/mcp_host/` ships six modules — `connection.rs` (stdio process spawn, MCP handshake, crash detection, exponential-backoff restart), `manager.rs` (multi-server orchestration with concurrent connection management), `router.rs` (tool-name-to-server dispatch with timeout handling), `registry.rs` (JSON persistence, health tracking, quarantine state), `trace.rs` (ring buffer with Tauri event emission for every MCP message), and `commands.rs` (five Tauri IPC commands: connect, disconnect, list, call_tool, get_trace). Crash detection and exponential-backoff restart are the load-bearing reliability features; a Python MCP server that faults during a handshake does not take down the GSD-OS UI, it gets restarted with backoff and its trust state transitions to quarantine until the next successful handshake. The trace emitter is the debugging surface: every JSON-RPC message flows through a ring buffer and out to the Tauri event bus, so the Blueprint Editor and MCP Trace Panel can render the wire traffic in real time with SVG sparklines and server/tool filtering. Sixty-seven Rust tests validate the subsystem in its native environment with serde round-trip parity against the TypeScript `src/mcp/index.ts` type definitions, which is the way to test an FFI boundary without a single harness that papers over the two languages.
 
-**MCP Templates (Phase 299):**
-- Server template: package.json, tsconfig.json, SDK setup, example tool/resource/prompt, tests, CLAUDE.md, chipset.yaml
-- Host template: client pool, lifecycle management, transport abstraction, approval gates
-- Client template: tool discovery, resource subscription, typed responses
-- Custom project name propagation, sub-120s generation time
+**The agent bridge turns GSD-OS sub-agents into MCP servers and clients.** Phase 300's `src/mcp/agent-bridge/` introduces a generic `AgentServerAdapter` factory that creates an MCP server from a config object. Two concrete adapters ship out of the box: `scout-server.ts` exposes SCOUT with three tools (`scout.research`, `scout.evaluate-dependency`, `scout.survey-landscape`) plus two resources, and `verify-server.ts` exposes VERIFY with four tools (`verify.run-tests`, `verify.check-types`, `verify.audit`, `verify.coverage`) plus two resources. The `AgentClientAdapter` at `src/mcp/agent-bridge/agent-client-adapter.ts` is the symmetric piece — it gives any agent MCP-client capability, so EXEC can consume external MCP tools the same way SCOUT exposes them. A counting semaphore enforces concurrency limits per adapter, and each invocation gets an isolated context, which means two parallel SCOUT research calls do not leak state across each other. Phase 304-02 wired the `StagingPipeline` into the `AgentClientAdapter` constructor as an optional parameter with `source='agent-to-agent'` propagation, closing the SECR-13 requirement that agent-to-agent bridge calls must go through the same staging validator as external-to-agent calls. The five new integration tests at `src/mcp/integration-security.test.ts` verify the audit trail, quarantine blocking, injection blocking, backward compatibility, and Rust-gate documentation for the bridge path.
 
-**Agent Bridge (Phase 300):**
-- Generic AgentServerAdapter factory creating MCP servers from config
-- SCOUT exposed with scout.research, scout.evaluate-dependency, scout.survey-landscape tools + 2 resources
-- VERIFY exposed with verify.run-tests, verify.check-types, verify.audit, verify.coverage tools + 2 resources
-- AgentClientAdapter giving EXEC MCP client capability
-- Counting semaphore for concurrency limiting, per-invocation context isolation
+**MCP templates turn "write an MCP server" into a sub-120-second scaffold.** Phase 299's `src/mcp/templates/` ships three template generators — server (`server-template.ts`), host (`host-template.ts`), and client (`client-template.ts`) — each producing a complete buildable TypeScript project. The server template writes `package.json` with the MCP SDK dependency pinned, `tsconfig.json` with strict mode, SDK initialization, an example tool / resource / prompt triplet so the output is immediately testable, a vitest test file, a `CLAUDE.md` orientation file, and a `chipset.yaml` declaring the server as a cartridge. The host template scaffolds a client pool with lifecycle management, transport abstraction, and approval gates for tool invocations. The client template generates tool discovery, resource subscription, and typed response handling. Custom project names propagate through every file, and the generator's own tests assert the generated project builds in under 120 seconds from scratch. This turns the MCP ecosystem onboarding experience from "read the spec and write a stub" into "generate the scaffold and edit the tool implementations" — the delta that decides whether someone actually builds an MCP integration.
 
-**Security Pipeline (Phase 301):**
-- Hash gate: SHA-256 tool definition hashing with deterministic sorting, drift detection
-- Trust manager: quarantine → provisional → trusted lifecycle, 30-day decay, immediate reset on change
-- Invocation validator: prompt injection blocking, path traversal prevention
-- Rate limiter: per-server and per-tool limits
-- Audit logger: full invocation logging with API key/token redaction
-- StagingPipeline as single unbypassable SecurityGate implementation
-- Per-server promise queues for thread-safe concurrent validation
+**The Blueprint Editor presentation layer makes MCP topology a visible object.** Phase 302's `src/mcp/presentation/` ships a WebGL-adjacent visual layer for MCP topology. The `blueprint-blocks.ts` module defines three block types (MCP Server, Tool, Resource) with port rendering and live status indicators. The `blueprint-wiring.ts` module is a typed wiring engine that connects ports, rejects type mismatches at wire time, and defaults to deny for any wire that does not have an explicit type-compatible pairing. The `trace-panel.ts` component renders the real-time JSON-RPC flow with SVG sparklines per server and server/tool filter controls; the `security-dashboard.ts` component shows trust state per server, hash-change alerts when a server's tool definitions drift, and a blocked-call log. The `boot-peripherals.ts` module carries forward the Amiga POST aesthetic from v1.21 with green monospace and four-letter trust abbreviations `[Q/P/T/S]` for Quarantine / Provisional / Trusted / Suspended. The `tauri-ipc-bridge.ts` module uses a dynamic import so the presentation layer stays safe to render in non-Tauri environments — the blueprint editor works in a browser storybook the same way it works in the desktop shell.
 
-**Presentation (Phase 302):**
-- Blueprint Editor: MCP Server, Tool, Resource block types with port rendering and status indicators
-- Wiring engine with type-safe connections and deny-by-default rules
-- MCP Trace Panel: real-time JSON-RPC flow with SVG sparklines and server/tool filtering
-- Security Dashboard: trust state per server, hash change alerts, blocked call log
-- Boot peripherals: Amiga POST aesthetic, green monospace, trust abbreviations [Q/P/T/S]
-- Tauri IPC bridge with dynamic import for non-Tauri environment safety
+**Phase 304 was honest about the gap that integration testing surfaced.** The "gap closure" phase is the release's most important admission: phases 293-303 landed the primitives, phases 295-298 built the Gateway Server, phase 300 built the agent bridge, phase 301 built the security pipeline, phase 303 ran the integration tests — and the integration tests revealed that the production gateway factory did not yet register every tool, that the per-tool scope check needed an HTTP-level body-buffering step before dispatch, that the Rust side needed a concrete `StagingGate` struct, and that the agent bridge was still an optional staging caller. Phase 304 closed those gaps in two plans: 304-01 wired all nineteen tools into `createGsdGatewayFactory()` with body buffering + `rawBody` pattern for scope checking in `handleRequest`, and added an E2E test discovering and invoking one tool from each of the six groups (`src/mcp/gateway/create-gateway-server.ts`, `src/mcp/gateway/server.ts`, `src/mcp/integration.test.ts`). Plan 304-02 wired `StagingPipeline` into the agent bridge with the `source='agent-to-agent'` marker, closed SECR-13, and added five integration tests (`src/mcp/agent-bridge/agent-client-adapter.ts`, `src/mcp/agent-bridge/exec-client.ts`, `src/mcp/integration-security.test.ts`). The honest framing in the retrospective is the right one: integration wiring was not fully planned in the initial phases, and the gap-closure phase is what a mature release looks like when it catches its own rough edges before tagging.
 
-**Integration Testing (Phase 303):**
-- 30 end-to-end tests across all MCP subsystems
-- 18 safety-critical security tests (mandatory-pass)
-- Performance verification: MCP overhead < 50ms
-- Coverage validation: 85%+ across all MCP components
+**The 838-test surface spans two languages and validates them independently.** Seven hundred seventy-one TypeScript tests cover the Gateway Server, agent bridge, security primitives, templates, presentation layer, and integration surfaces; sixty-seven Rust tests cover the Host Manager's connection lifecycle, router dispatch, registry persistence, trace emission, and Tauri IPC commands. Crucially, the two test suites run in their native environments. There is no unified harness that treats Rust FFI as a black box, which means the `serde` round-trip tests in Rust actually exercise the Rust serialization and the Zod validation tests in TypeScript actually exercise the Zod schemas — the two sides of the FFI boundary are checked against each other's types, not against a synthetic intermediate. Eighteen of the TypeScript tests are marked mandatory-pass safety-critical and the build fails if any of them regress. MCP overhead is measured at under 50 ms in the performance verification suite, and coverage validation runs at 85%+ across all MCP components. These are the numbers that let a downstream release consume the v1.31 surface without reimplementing confidence from scratch.
 
-**Integration Wiring (Phase 304 — Gap Closure):**
-- Production gateway factory registering all 19 tools across 6 groups
-- Per-tool scope enforcement via canInvokeTool at HTTP level with body buffering
-- Rust StagingGate: zero-size struct, string-contains injection detection, validates before mcp_call_tool
-- Agent bridge staging: optional StagingPipeline with source='agent-to-agent'
-- E2E test discovering and invoking tools from all 6 groups
+**v1.31 is the release where the chipset concept stopped being abstract.** Every MCP template ships with a `chipset.yaml` declaring the generated server as a cartridge. Every agent-bridge server registers through the same cartridge metadata. The Gateway Server's tool registry is itself a cartridge-shaped object. When a downstream release — v1.49's consolidation, for example — wants to enumerate "every tool surface GSD-OS exposes" it walks the cartridge metadata, not the source tree. The v1.30 `src/vtm/chipset.yaml` was the first subsystem-level chipset; v1.31's five chipset-shaped registrations (Gateway, agent-bridge SCOUT, agent-bridge VERIFY, and the three template-generated chipsets) are the second generation. The pattern the project has been trending toward since v1.25's dependency DAG — subsystems expose their public surfaces through cartridge metadata, consumers import through cartridge imports — moved meaningfully forward here.
+
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| Foundation types (Phase 293) | Shared TypeScript + Rust type definitions for all MCP structures; Zod v4 schemas for runtime validation; `serde` round-trip parity for Rust FFI; staging-gate interfaces (`TrustState` enum, `SecurityGate` trait, `HashRecord`, `ValidationResult`) (`src/mcp/llm-types.ts`, `src-tauri/src/mcp_host/types.rs`) |
+| Rust MCP Host Manager (Phase 294) | `connection.rs` stdio process spawn + MCP handshake + crash detection + exponential-backoff restart; `manager.rs` multi-server orchestration; `router.rs` tool-name-to-server dispatch with timeout handling; `registry.rs` JSON persistence + health tracking + quarantine state; `trace.rs` ring buffer + Tauri event emission; `commands.rs` with 5 Tauri IPC commands (`connect`, `disconnect`, `list`, `call_tool`, `get_trace`) |
+| Gateway Server transport (Phase 295) | Streamable HTTP transport at `src/mcp/gateway/server.ts` with per-session isolation; `~/.gsd/gateway-token` bearer auth via `crypto.timingSafeEqual`; JSON-RPC envelope with body-buffering pattern for scope enforcement; rawBody pattern for pre-dispatch validation (`src/mcp/gateway/auth.ts`, `src/mcp/gateway/token-manager.ts`) |
+| Gateway tools (Phases 295-298) | 19 tools across 6 groups — project (list / get / create / execute-phase), skill (search / inspect / activate), agent (spawn / status / logs), workflow (research / requirements / plan / execute), session (query / patterns), chipset (get / modify / synthesize); per-tool scope declarations (admin > write > read); deny-by-default for unknown tools (`src/mcp/gateway/tools/`, `src/mcp/gateway/create-gateway-server.ts`) |
+| Gateway resources + prompts (Phase 298) | 4 resource providers via URI templates (project configs, skill registry, agent telemetry, chipset state); 3 prompt templates (create-project, diagnose-agent, optimize-chipset) (`src/mcp/gateway/resources/`, `src/mcp/gateway/prompts/`) |
+| MCP templates (Phase 299) | Server template (package.json / tsconfig / SDK setup / example tool+resource+prompt / tests / CLAUDE.md / chipset.yaml); host template (client pool / lifecycle / transport abstraction / approval gates); client template (tool discovery / resource subscription / typed responses); custom project-name propagation; sub-120s generation time (`src/mcp/templates/server-template.ts`, `host-template.ts`, `client-template.ts`, `generator.ts`) |
+| Agent bridge (Phase 300) | `AgentServerAdapter` generic factory; SCOUT exposed with 3 tools + 2 resources (`src/mcp/agent-bridge/scout-server.ts`); VERIFY exposed with 4 tools + 2 resources (`src/mcp/agent-bridge/verify-server.ts`); `AgentClientAdapter` giving EXEC MCP-client capability (`agent-client-adapter.ts`, `exec-client.ts`); counting-semaphore concurrency limiter; per-invocation context isolation |
+| Security pipeline (Phase 301) | `hash-gate.ts` SHA-256 tool-definition hashing with deterministic sorting + drift detection; `trust-manager.ts` quarantine → provisional → trusted lifecycle with 30-day decay + immediate reset on change; `invocation-validator.ts` prompt-injection + path-traversal blocking; `rate-limiter.ts` per-server + per-tool limits; `audit-logger.ts` full invocation logging with API-key/token redaction; `staging-pipeline.ts` single unbypassable `SecurityGate` implementation with per-server promise queues for thread-safe concurrent validation |
+| Presentation layer (Phase 302) | `blueprint-blocks.ts` MCP Server / Tool / Resource block types with port rendering + status indicators; `blueprint-wiring.ts` typed wiring engine with deny-by-default rules; `trace-panel.ts` real-time JSON-RPC flow with SVG sparklines + server/tool filtering; `security-dashboard.ts` trust state + hash-change alerts + blocked-call log; `boot-peripherals.ts` Amiga POST aesthetic + trust abbreviations `[Q/P/T/S]`; `tauri-ipc-bridge.ts` dynamic import for non-Tauri safety |
+| Integration testing (Phase 303) | 30 end-to-end tests across all MCP subsystems (`src/mcp/integration.test.ts`); 18 safety-critical security tests marked mandatory-pass (`src/mcp/integration-security.test.ts`); performance verification with MCP overhead < 50 ms (`src/mcp/integration-perf.test.ts`); coverage validation 85%+ across all MCP components |
+| Integration wiring — plan 304-01 (Phase 304) | Registered agent, workflow, and session tools in `createGsdGatewayFactory`; body-buffering + `rawBody` pattern for scope checking in `handleRequest`; `canInvokeTool()` called for every `tools/call` request before dispatch; read-only tokens receive `PERMISSION_DENIED` for write-scope tools; E2E test discovering all 19 tools from the production gateway factory and invoking one tool from each group (commit `1d825031f`, `117c9f770`) |
+| Integration wiring — plan 304-02 (Phase 304) | `AgentClientAdapter` constructor accepts optional `StagingPipeline`; staging validation inserted before tool invocation in `invokeTool` method with `source='agent-to-agent'`; `ExecClient` + `createExecClient` pass through staging pipeline; 5 new integration tests (audit trail, quarantine blocking, injection blocking, backward compatibility, Rust-gate docs); closes SECR-13 agent-bridge bypass path (commit `276ddc1cf`) |
+| Total test footprint | 838 tests — 771 TypeScript + 67 Rust; zero regressions against pre-v1.31 baseline; 18 mandatory-pass safety-critical tests; serde round-trip parity between the Rust `mcp_host` crate and the TypeScript `src/mcp/index.ts` exports |
 
 ## Retrospective
 
 ### What Worked
-- **Dual MCP role: Host AND Server.** GSD-OS as both MCP Host (Rust backend managing server processes) and MCP Server (19 tools across 6 groups) means it can orchestrate external AI agents while also being orchestrated by them. This bidirectional capability is rare and architecturally significant.
-- **Security pipeline as a single unbypassable gate.** Hash gate, trust manager (quarantine → provisional → trusted), invocation validator, rate limiter, and audit logger -- all composed into StagingPipeline as a single SecurityGate implementation. Per-server promise queues for thread-safe validation show the concurrency model is production-grade. 18 mandatory-pass safety-critical tests.
-- **Agent bridge with generic adapter factory.** AgentServerAdapter creating MCP servers from config and AgentClientAdapter giving agents MCP client capability means any agent can expose its tools via MCP or consume external MCP tools. SCOUT and VERIFY as concrete examples prove the pattern works.
-- **838 tests (771 TS + 67 Rust) across two languages.** The Rust MCP Host Manager with serde round-trip parity and the TypeScript Gateway Server with Zod v4 schemas are tested in their native environments, not through a single test harness that papers over FFI boundaries.
+
+- **Dual MCP role (Host AND Server) is the architectural bet that paid off.** GSD-OS as both an MCP Host (Rust backend spawning server processes) and an MCP Server (19 tools across 6 groups) means it can orchestrate external AI agents while being orchestrated by them. This bidirectional capability is rare in practice and gives every later release a single protocol surface to extend rather than two one-off integrations to maintain.
+- **Security pipeline composed into a single unbypassable gate.** The hash gate, trust manager, invocation validator, rate limiter, and audit logger all implement the `SecurityGate` interface through the `StagingPipeline` composite. Per-server promise queues serialize validation per server while keeping cross-server calls concurrent — this is a production-grade concurrency model, not a demo. 18 mandatory-pass safety-critical tests back the claim.
+- **Agent bridge with a generic adapter factory generalizes to every future agent.** `AgentServerAdapter` creates MCP servers from a config object and `AgentClientAdapter` gives any agent MCP-client capability. SCOUT with 3 tools + 2 resources and VERIFY with 4 tools + 2 resources are the concrete proofs, but the pattern means every subsequent agent automatically has an MCP surface without per-agent wiring.
+- **838 tests across two languages validated in native environments.** The Rust MCP Host Manager with serde round-trip parity and the TypeScript Gateway Server with Zod v4 schemas are tested in their own languages, not through a unified harness that papers over the FFI boundary. This is the way to test a cross-language surface without the test suite becoming a fiction.
+- **Per-tool scope enforcement with deny-by-default is the right security posture.** Unknown tools are denied, not allowed. Adding a new tool to a server requires explicit scope assignment; the security model does not silently become permissive as tools are added. The `admin > write > read` ordering and the HTTP-level body-buffering check at the Gateway make the enforcement mechanical rather than documentary.
+- **SHA-256 tool-definition hashing catches both malicious and accidental drift.** The hash gate sorts tool definitions deterministically and records a per-server hash; if a server's tool definitions change between invocations the hash changes and the trust manager resets to quarantine. This catches prompt-injection retrofits and accidental server upgrades with the same mechanism.
 
 ### What Could Be Better
-- **Phase 304 (Gap Closure) suggests integration wiring wasn't fully planned in the initial phases.** The production gateway factory, per-tool scope enforcement at HTTP level with body buffering, and Rust StagingGate were discovered during integration testing. Earlier end-to-end thinking would have caught these gaps.
-- **30-day trust decay with immediate reset on change may be too aggressive.** A server that updates legitimately (new version, new tools) gets reset to quarantine immediately. A grace period for known-good servers with minor changes would reduce friction for frequently-updated MCP servers.
+
+- **Phase 304 (Gap Closure) existed because integration wiring was not fully planned up front.** The production gateway factory, per-tool scope enforcement at HTTP level with body buffering, and Rust `StagingGate` were discovered during integration testing, not during phase planning. Earlier end-to-end thinking in phase 295 would have caught these gaps and saved a whole gap-closure phase. The lesson is that integration wiring deserves its own plan from day one, not a post-hoc plan at the end.
+- **30-day trust decay with immediate reset on change is too aggressive for legitimate updates.** A server that ships a new version (adding a new tool, renaming an existing one) gets reset to quarantine immediately. A grace period for known-good servers with minor changes — say, a single minor-version bump — would reduce friction for frequently-updated MCP servers without meaningfully weakening the security posture. Deferred to a v1.31.x patch or the next security revision.
+- **19 tools across 6 groups is a sensible starting set but not a complete surface.** Workflow tools (research / requirements / plan / execute) duplicate CLI functionality without exposing the full richness of the CLI; session tools (query / patterns) are read-only; chipset.synthesize is the most complex tool and its contract is still first-draft. A coverage audit comparing the CLI surface against the MCP surface would identify the missing tools the ecosystem actually wants.
+- **Blueprint Editor lives inside the desktop shell; browser-only users cannot see it.** The `tauri-ipc-bridge.ts` dynamic-import pattern keeps the presentation layer renderable in a storybook, but the security dashboard's real-time status signals only flow through the Tauri event bus. A browser-rendered trace viewer consuming the Gateway's JSON-RPC stream directly would close the gap for users who run the Gateway without the desktop.
+- **Rust tests at 67 are adequate for the Host Manager surface but thin relative to 771 TypeScript tests.** The asymmetry reflects the scope split — most of the logic lives in TypeScript — but the Host Manager is the process supervisor, which is the component a production deployment depends on most. A coverage push on `connection.rs` crash recovery and `registry.rs` persistence edge cases is warranted.
 
 ## Lessons Learned
 
-1. **MCP templates (server, host, client) accelerate ecosystem adoption.** Generating a complete MCP server with package.json, tsconfig, SDK setup, example tool/resource/prompt, tests, and chipset.yaml in under 120 seconds means new MCP integrations start from a working baseline, not a blank file.
-2. **Per-tool scope enforcement (admin > write > read) with deny-by-default is the right security posture.** Unknown tools are denied, not allowed. This means new tools added to a server require explicit scope assignment -- the security model doesn't silently become permissive as tools are added.
-3. **SHA-256 tool definition hashing with deterministic sorting enables drift detection.** If a server's tool definitions change between invocations, the hash changes and the trust manager resets. This catches both malicious and accidental tool definition changes.
-4. **Blueprint Editor with wiring engine and deny-by-default rules makes MCP topology visible.** The visual layer (SVG sparklines, trust state indicators, blocked call log) turns an abstract protocol into something users can inspect and debug.
+- **Plan the integration wiring in the first phase, not the last.** Phase 304's gap closure was honest work, but it would not have existed if phases 295-298 had included "register every planned tool in the production factory" as an explicit acceptance criterion. Integration wiring is not a free consequence of shipping primitives — it is its own deliverable with its own test coverage, and omitting it from the phase plan guarantees a cleanup phase.
+- **One unbypassable gate beats three optional gates.** Earlier security designs inside the project had validated per-call-site, meaning a new caller could forget to validate and silently become a bypass. The `StagingPipeline` as a single `SecurityGate` implementation, referenced from every call path (Gateway, agent bridge, Rust `mcp_call_tool`), makes the "did this call validate" question structural rather than reviewable-by-eye. Every future security gate in the project should use the same composite-gate shape.
+- **Per-server promise queues are the right concurrency primitive for staging validation.** A single global lock serializes all validation and throws away the server-parallel path; a per-call lock permits race conditions where a trust-state transition lands mid-validation. Per-server promise queues get both properties — cross-server parallelism and per-server ordering — with about forty lines of code and are the pattern future cross-agent security boundaries should copy.
+- **`serde` round-trip parity is the right FFI test contract.** The Rust `mcp_host` crate serializes MCP message types to JSON, the TypeScript surface deserializes with Zod, and the two languages' tests verify their own halves. A single harness across the two would either test the intersection (missing both languages' edge cases) or use a synthetic intermediate (testing neither language's actual surface). Round-trip parity tests land the burden on each side to handle its own types and converge at the wire.
+- **Generic adapter factories let two concrete agents prove a general pattern.** `AgentServerAdapter` with SCOUT + VERIFY as the first two instantiations proved the factory pattern works without locking the API into either agent's specifics. Every subsequent agent (EXEC as a client, whatever GSD-OS ships next as a server) plugs into the same factory rather than a per-agent bespoke path. A factory with zero concrete instantiations is hypothetical; a factory with two is a pattern.
+- **Template generators with `chipset.yaml` scaffolding move the chipset convention forward per release.** The v1.30 release added one chipset (`src/vtm/chipset.yaml`); the v1.31 server template generator writes a chipset.yaml into every generated MCP server, which means the chipset convention propagates through the ecosystem instead of being hand-written per project. The sub-120-second generation time is the forcing function — developers will accept the chipset convention if it ships with the scaffold, not if they have to hand-author it.
+- **Deny-by-default at the scope enforcement layer keeps the security posture from drifting.** Adding a new tool without declaring a scope makes the tool invokable only by admin tokens, which fails closed. The alternative (default-read or default-write) would have let new tools silently become more permissive than they should be. Every security boundary in the project should default closed and require explicit opening.
+- **Hash deterministic sort is the cheap trick that makes drift detection real.** If the hash sorted tool definitions by their `name` field but not their parameter schema, a parameter reorder would change the hash without reflecting a real drift. The deterministic sort (canonicalize JSON keys, sort arrays in defined cases) means the hash only changes when the observable tool surface changes. Hash-based drift detection without canonicalization is superstition; with canonicalization it is evidence.
+- **The Amiga POST aesthetic in `boot-peripherals.ts` carries project identity forward cheaply.** The v1.21 desktop shell established the aesthetic; the v1.31 trust-abbreviation strip `[Q/P/T/S]` and green-monospace status line continue it. Visual identity is not decoration — it is the cue that tells a user "this is GSD-OS, not a generic MCP tool." Propagating the aesthetic through new UI surfaces keeps the project recognizable as new modules land.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — the adaptive loop's Apply step is what the Gateway's skill-scope tools invoke when external agents ask to activate a skill |
+| [v1.10](../v1.10/) | Security Hardening — the path-handling and input-validation baseline the v1.31 `invocation-validator.ts` extends for prompt-injection and path-traversal detection |
+| [v1.21](../v1.21/) | GSD-OS Desktop Foundation — the Tauri v2 shell v1.31's Blueprint Editor, Trace Panel, and Security Dashboard render inside; the Amiga POST aesthetic v1.31 carries forward |
+| [v1.24](../v1.24/) | GSD Conformance Audit — the conformance baseline v1.31's 838 tests extend; audit-log redaction conforms to the audit's API-key-handling rules |
+| [v1.25](../v1.25/) | Ecosystem Integration — the dependency DAG + EventDispatcher spec the Gateway's tool-group architecture conforms to |
+| [v1.27](../v1.27/) | Foundational Knowledge Packs — GSD-OS dashboard consumers that v1.31's Security Dashboard fits alongside |
+| [v1.28](../v1.28/) | GSD Den Operations — filesystem message bus; the agent-bridge's MCP channel is an alternate transport to the filesystem bus for the same inter-agent traffic |
+| [v1.29](../v1.29/) | Electronics Educational Pack — predecessor-minus-one; exemplar pack consumed via the Gateway's skill-scope tools |
+| [v1.30](../v1.30/) | Vision-to-Mission Pipeline — immediate predecessor; v1.31's workflow tool group exposes VTM pipeline entry points over MCP |
+| [v1.32](../v1.32/) | Brainstorm Session Support — immediate successor; first downstream consumer of v1.31's agent-bridge pattern for specialized brainstorm agents |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform — 31-agent fleet consumes v1.31's agent-bridge to expose specialized agents as MCP servers |
+| [v1.34](../v1.34/) | Documentation Ecosystem — canonical docs pattern that v1.31's MCP templates include in their scaffolding (CLAUDE.md + chipset.yaml) |
+| [v1.35](../v1.35/) | Mathematical Foundations Engine — consumers access math primitives through v1.31's Gateway skill-scope tools |
+| [v1.36](../v1.36/) | Citation Management — shares the chipset pattern v1.31 scaffolds into every generated MCP server |
+| [v1.37](../v1.37/) | Complex Plane Learning Framework — later algorithmic layer that can sit on top of v1.31's Gateway for MCP-exposed complex-plane tools |
+| [v1.38](../v1.38/) | SSH Agent Security — security track continuing v1.31's staging-gate lineage for the shell-access surface |
+| [v1.39](../v1.39/) | GSD-OS Bootstrap & READY Prompt — IPC foundation (29 event types) that v1.31's Tauri trace events feed into |
+| [v1.42](../v1.42/) | Test infrastructure release — applies v1.31's lesson on wiring-as-first-class-deliverable from this retrospective |
+| [v1.45](../v1.45/) | MCP templates' downstream consumer; the chipset-yaml convention v1.31 propagates through every generated server |
+| [v1.49](../v1.49/) | Mega-release that consolidated post-v1.31 MCP implementation work; Gateway + agent bridge + security pipeline re-registered through the unified cartridge pipeline |
+| `src/mcp/gateway/` | Gateway Server — 19 tools across 6 groups, Streamable HTTP transport, per-tool scope enforcement |
+| `src/mcp/security/staging-pipeline.ts` | Load-bearing `StagingPipeline` — single unbypassable `SecurityGate` composite |
+| `src/mcp/agent-bridge/` | Agent bridge — `AgentServerAdapter` + `AgentClientAdapter` + SCOUT + VERIFY |
+| `src/mcp/templates/` | Three template generators (server / host / client) producing buildable projects |
+| `src/mcp/presentation/` | Blueprint Editor + Trace Panel + Security Dashboard |
+| `src-tauri/src/mcp_host/` | Rust MCP Host Manager — connection / manager / router / registry / trace / commands |
+| `src/mcp/integration.test.ts` | 30 end-to-end integration tests across all MCP subsystems |
+| `src/mcp/integration-security.test.ts` | 18 mandatory-pass safety-critical tests |
+| `.planning/phases/293..304/` | 12 phase directories with PLAN and SUMMARY artifacts |
+| `.planning/MILESTONES.md` | Canonical milestone detail for phases 293-304 |
+
+## Engine Position
+
+v1.31 is the release where GSD-OS became multi-directional on the Model Context Protocol. The v1.0 → v1.29 arc built the adaptive loop, the skill/agent substrate, ecosystem integration, and the first pack-based consumers; v1.30 closed the vision-to-mission pipeline as a typed library. v1.31 opened the external surface — every capability the project has built up to this point is now addressable over MCP by an external AI agent with the right scope, and every external MCP server is addressable by GSD-OS through the Rust Host Manager with the staging pipeline gating every call. From v1.32 forward, every release that exposes a new capability inherits the decision to expose it via MCP as one of its delivery vectors: v1.32's brainstorm agents hook through the agent-bridge pattern, v1.33's OpenStack platform uses the Gateway for its 31-agent fleet coordination, v1.36's citation management registers as a chipset the way v1.31's template generators scaffold, v1.38's SSH agent security continues the staging-gate lineage, and v1.39's GSD-OS Bootstrap feeds its IPC events into the Tauri trace surface that v1.31 introduced. The 19-tool Gateway surface is the baseline the v1.49 mega-release expands and consolidates; the `StagingPipeline` composite-gate shape is the pattern every future security boundary follows. The release is the pivot from "build capabilities inside GSD-OS" to "expose capabilities through GSD-OS to the broader AI-agent ecosystem," and the bidirectional Host-and-Server architecture is the invariant that every later MCP-adjacent release extends rather than restructures.
+
+## Files
+
+- `src/mcp/gateway/server.ts` — Streamable HTTP Gateway with per-session isolation + bearer auth + body-buffering scope enforcement
+- `src/mcp/gateway/create-gateway-server.ts` — `createGsdGatewayFactory()` registering all 19 tools across 6 groups (tip-window commit `1d825031f`)
+- `src/mcp/gateway/tools/` — tool-scope implementations (project / skill / agent / workflow / session / chipset)
+- `src/mcp/gateway/resources/` — 4 resource providers via URI templates
+- `src/mcp/gateway/prompts/` — 3 prompt templates
+- `src/mcp/gateway/auth.ts` + `token-manager.ts` — bearer-token auth with `crypto.timingSafeEqual`
+- `src/mcp/security/staging-pipeline.ts` — unbypassable `SecurityGate` composite
+- `src/mcp/security/hash-gate.ts` — SHA-256 deterministic tool-definition hashing
+- `src/mcp/security/trust-manager.ts` — quarantine → provisional → trusted lifecycle
+- `src/mcp/security/invocation-validator.ts` — prompt-injection + path-traversal blocking
+- `src/mcp/security/rate-limiter.ts` — per-server + per-tool rate limits
+- `src/mcp/security/audit-logger.ts` — full invocation logging with redaction
+- `src/mcp/agent-bridge/agent-server-adapter.ts` — generic `AgentServerAdapter` factory
+- `src/mcp/agent-bridge/agent-client-adapter.ts` — `AgentClientAdapter` with optional `StagingPipeline` (tip-window commit `276ddc1cf`)
+- `src/mcp/agent-bridge/exec-client.ts` — EXEC's MCP-client wrapper
+- `src/mcp/agent-bridge/scout-server.ts` + `verify-server.ts` — SCOUT / VERIFY as concrete MCP servers
+- `src/mcp/templates/server-template.ts` + `host-template.ts` + `client-template.ts` + `generator.ts` — three template generators
+- `src/mcp/presentation/blueprint-blocks.ts` + `blueprint-wiring.ts` — Blueprint Editor blocks + wiring engine
+- `src/mcp/presentation/trace-panel.ts` + `security-dashboard.ts` + `boot-peripherals.ts` + `tauri-ipc-bridge.ts` — presentation components
+- `src/mcp/integration.test.ts` — 30 E2E tests including the 19-tool discovery test (tip-window commit `117c9f770`)
+- `src/mcp/integration-security.test.ts` — 18 mandatory-pass safety-critical tests + 5 new agent-bridge tests
+- `src/mcp/integration-perf.test.ts` — performance verification (< 50 ms overhead)
+- `src-tauri/src/mcp_host/connection.rs` — stdio spawn + MCP handshake + crash detection + exponential-backoff restart
+- `src-tauri/src/mcp_host/manager.rs` — multi-server orchestration
+- `src-tauri/src/mcp_host/router.rs` — tool-name-to-server dispatch with timeout handling
+- `src-tauri/src/mcp_host/registry.rs` — JSON persistence + health tracking + quarantine state
+- `src-tauri/src/mcp_host/trace.rs` — ring buffer + Tauri event emission
+- `src-tauri/src/mcp_host/commands.rs` — 5 Tauri IPC commands (`connect`, `disconnect`, `list`, `call_tool`, `get_trace`)
+- `src-tauri/src/mcp_host/security.rs` — Rust `StagingGate` struct validating before `mcp_call_tool`
+- `.planning/phases/293..304/` — 12 phase directories with PLAN and SUMMARY artifacts
+- `.planning/phases/304-mcp-integration-wiring/304-01-SUMMARY.md` + `304-02-SUMMARY.md` — gap-closure plan summaries
+- `.planning/MILESTONES.md` — canonical milestone detail for phases 293-304
 
 ---
+
+## Version History (preserved from original release notes)
+
+The table below lists the v1.x line that accumulated through v1.31, with the shipped summaries for each version. Retained here for archival continuity.
+
+| Version | Summary |
+|---------|---------|
+| **v1.31** | GSD-OS MCP Integration — Rust Host Manager, Gateway Server with 19 tools across 6 groups, staging security pipeline, agent bridge (SCOUT/VERIFY), MCP template generators, Blueprint Editor MCP blocks (this release) |
+| **v1.30** | Vision-to-Mission Pipeline — 8 Zod schemas, vision parser, research compiler, mission assembler, wave planner with greedy graph coloring, model assignment with downgrade-only rebalance, cache optimizer, test plan generator, template system, pipeline orchestrator |
+| **v1.29** | Electronics Educational Pack — MNA simulator, logic simulator, safety warden, learn mode, 15 modules, 77 labs |
+| **v1.28** | GSD Den Operations — filesystem message bus, 10 staff positions, 5 divisions, topology profiles, integration exercise |
+| **v1.27** | Foundational Knowledge Packs — 35 packs across 3 tiers, GSD-OS dashboard, observation infrastructure, pathway adaptation |
+| **v1.26** | Aminet Archive Extension Pack — INDEX parser, mirror engine, virus scanner, archive extraction, FS-UAE integration |
+| **v1.25** | Ecosystem Integration — 20-node dependency DAG, EventDispatcher spec, 4-tier dependency philosophy, contract testing strategy, partial-build compatibility matrix |
+| **v1.24** | GSD Conformance Audit — 336-checkpoint matrix, 4-tier audit, zero-fail conformance, 9,355 tests passing |
+| **v1.23** | Project AMIGA — mission infrastructure (MC-1/ME-1/CE-1/GL-1), Apollo AGC simulator, DSKY interface, RFC Reference Skill |
+| **v1.22** | Minecraft Knowledge World — local cloud infrastructure, Fabric server, platform portability, Amiga emulation, spatial curriculum |
+| **v1.21** | GSD-OS Desktop Foundation — Tauri v2 shell, WebGL CRT engine, PTY terminal, Workbench desktop, calibration wizard |
+| **v1.20** | Dashboard Assembly — unified CSS pipeline, four data collectors, console page as 6th generated page |
+| **v1.19** | Budget Display Overhaul — `LoadingProjection`, dual-view display, configurable budgets, dashboard gauge |
+| **v1.18** | Information Design System — shape + color encoding, status gantry, topology views, three-speed layering |
+| **v1.17** | Staging Layer — analysis, scanning, resource planning, 7-state approval queue for parallel execution |
+| **v1.16** | Dashboard Console & Milestone Ingestion |
+| **v1.15** | Live Dashboard Terminal — Wetty integration, tmux session binding, unified launcher |
+| **v1.14** | Promotion Pipeline |
+| **v1.13** | Session Lifecycle & Workflow Coprocessor |
+| **v1.12.1** | Live Metrics Dashboard |
+| **v1.12** | GSD Planning Docs Dashboard |
+| **v1.11** | GSD Integration Layer |
+| **v1.10** | Security Hardening |
+| **v1.9** | Ecosystem Alignment & Advanced Orchestration |
+| **v1.8.1** | Audit Remediation (Patch) |
+| **v1.8** | Capability-Aware Planning + Token Efficiency |
+| **v1.7** | GSD Master Orchestration Agent |
+| **v1.6** | Cross-Domain Examples |
+| **v1.5** | Pattern Discovery |
+| **v1.4** | Agent Teams |
+| **v1.3** | Documentation Overhaul |
+| **v1.2** | Test Infrastructure |
+| **v1.1** | Semantic Conflict Detection |
+| **v1.0** | Core Skill Management |
