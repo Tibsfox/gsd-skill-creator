@@ -55,9 +55,11 @@ const extractors = [
 ];
 
 function extractName(text) {
-  // Try: "# v1.49.39 — name" / "# v1.49.39 -- name" / "# Release v1.X name"
+  // Try: "# v1.49.39 — name" / "# v1.49.39 -- name" / "# Release v1.X name" /
+  //      `# v1.49.192 "Quoted Name"` (whitespace-only separator, quoted body)
   const patterns = [
     /^#\s*v[\d.]+\s*[—–-]{1,2}\s*"?([^"\n]+?)"?\s*$/m,
+    /^#\s*v[\d.]+\s+"([^"\n]+)"\s*$/m,
     /^#\s*v[\d.]+\s*:\s*(.+?)\s*$/m,
     /^#\s*Release\s+v[\d.]+\s*[-—:]\s*(.+?)\s*$/m,
     /^#\s*(.+?)\s*\(v[\d.]+\)\s*$/m,
