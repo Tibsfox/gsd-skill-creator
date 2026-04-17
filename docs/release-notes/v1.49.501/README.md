@@ -1,149 +1,184 @@
 # v1.49.501 -- Degree 0: The Paired Engine Begins
 
 **Released:** 2026-04-04
+**Scope:** Inaugural paired release -- NASA 1.0 + S36/SPS degree 0 Pass 2 refinement
+**Branch:** dev
+**Commits:** 63c5a8005 (1)
+**Files changed:** 760
 **Degree:** 0 of 360
-**Part A:** Quincy Jones -- Jazz/R&B/Pop/Film Score, E=6, Central District, global export, 1933-2024. Arranger, producer, composer, label founder. The invisible infrastructure behind visible achievement.
-**Part B:** Great Blue Heron (*Ardea herodias fannini*) -- structured silence, E=1, estuary, Ardeidae. Patience as predatory strategy.
-**NASA Mission:** 1.0 -- NASA Agency Founding (October 1, 1958, National Aeronautics and Space Act signed by Eisenhower, NACA dissolved after 43 years of invisible aeronautics research)
-**NASA Organism:** Armillaria ostoyae (Honey Mushroom, Malheur National Forest, Oregon -- 2,385-acre mycelial network, largest organism on Earth)
+**Part A:** Quincy Jones -- Jazz / R&B / Pop / Film Score, E=6, Central District (Seattle) + global export, 1933-2024. Arranger, producer, composer, label founder. The invisible infrastructure behind visible achievement. Schillinger-trained at Berklee; arranged for Sinatra, Basie, Jackson; 28 Grammys; produced *Thriller* (best-selling album in history) and coordinated "We Are the World" (46 artists, $63M African famine relief).
+**Part B:** Great Blue Heron (*Ardea herodias fannini*) -- structured silence, E=1, estuary, Ardeidae. Patience as predatory strategy. S-curved neck as pre-loaded mechanical spring, C6 vertebra hinge, 25-millisecond strike, >10,000:1 preparation-to-action ratio. Duwamish River Superfund sentinel species. Nocturnal communal roost. Snell's-law refraction compensator.
 **Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
-**Engine Position:** First paired release. Circle restarts. Pass 2 begins.
+**Cluster:** Foundation (hub: Central District)
+**NASA Mission:** 1.0 -- NASA Agency Founding (National Aeronautics and Space Act, signed by Dwight D. Eisenhower on July 29, 1958; agency activated October 1, 1958. NACA -- National Advisory Committee for Aeronautics, founded March 3, 1915 -- dissolved after 43 years of aeronautics research. Langley, Ames, and Lewis facilities transferred whole. Hugh Dryden served as first Deputy Administrator; T. Keith Glennan as first Administrator. 8,000 NACA employees and $100M annual budget absorbed into the new civilian space agency in response to Sputnik 1, launched October 4, 1957.)
+**NASA Organism:** *Armillaria ostoyae* (Honey Mushroom / Humongous Fungus, Malheur National Forest, Oregon -- 2,385-acre mycelial network, ~2,400 years old, the largest organism on Earth by area; black rhizomorphs, bioluminescent in decaying substrates, kills Douglas-fir and Ponderosa pine through root-collar infection).
+**Dedication:** Hugh L. Dryden (1898-1965), first Deputy Administrator of NASA, NACA Director 1947-1958 -- the aeronautical scientist who ran the transition from NACA to NASA without a single reporting line broken
+**Engine Position:** First paired release. The unit circle restarts. Pass 2 begins. Foundation degree for a 720-release arc spanning two full revolutions.
 
 ## Summary
 
-The first paired release of the new engine. Starting at v1.49.501, every release pairs one NASA mission with one S36/SPS degree -- a 1:1 locked coupling that will run for 720 releases across two full unit circle revolutions. The paired engine formalizes what the 360 engine demonstrated: that the musical research (S36), ecological research (SPS), and historical research (NASA) are not parallel projects but three views of a single integrated system where degree synchronization reveals structural resonances that no single track can produce alone.
+The first paired release of the continuous dual-track engine, and the degree of foundations. Starting at v1.49.501, every release pairs one NASA mission with one S36/SPS degree -- a 1:1 locked coupling that will run for 720 releases across two full unit circle revolutions. The paired engine formalizes what the first-pass 360 engine demonstrated through completion on April 3, 2026: that the musical research (S36 -- Seattle's musical anthropology), the ecological research (SPS -- Puget Sound species), and the historical research (NASA -- spaceflight's institutional history) are not parallel projects but three views of a single integrated system whose degree synchronization reveals structural resonances that no single track can produce in isolation. Degree 0 is where that integrated system announces its founding theme.
 
-v1.49.501 aligns NASA 1.0 (already built across sessions 001-005) with S36/SPS degree 0 Pass 2 refinement -- deepening the Quincy Jones and Great Blue Heron research that launched the 360 engine on March 28, 2026. The circle that closed at v1.49.500 now begins its second rotation.
+Quincy Delight Jones Jr., born March 14, 1933 in Chicago, arrived in Seattle's Central District at age ten. He graduated from Garfield High School in 1950. He walked the Jackson Street jazz corridor through its black-and-tan years -- the Black and Tan Club, the Rocking Chair, the Washington Social Club, Basin Street -- and worked alongside Ray Charles, Ernestine Anderson, and Dave Lewis before leaving at eighteen for Schillinger House (Berklee College of Music) in Boston. He studied the Schillinger System -- the mathematical composition framework developed by Joseph Schillinger in the 1930s that treated music as the output of engineered processes rather than intuited inspiration. Interference patterns as rhythm generators. Permutation matrices as melodic variation. Geometrical projection as harmonic transform. Jones did not intuit his arranging vocabulary; he generated it mathematically and then selected from the engineered output. His arrangements for Frank Sinatra and Count Basie on *It Might as Well Be Swing* (1964) and *Sinatra at the Sands* (1966) were Schillinger rigor rendered as swing. His score for *In the Heat of the Night* (1967) and his television theme for *Sanford and Son* (1972) continued the same methodology. When he produced Michael Jackson's *Off the Wall* (1979), *Thriller* (1982), and *Bad* (1987), he was applying engineering discipline at global commercial scale: *Thriller* remains the best-selling album in recorded music history at approximately 70 million copies. On January 28, 1985, he coordinated "We Are the World" at A&M Studios in Hollywood -- 46 artists across every genre boundary, alphabetized by first name to erase status hierarchies, choruses recorded first to enforce collective investment, Stevie Wonder translating Bob Dylan's part into Dylan's own vocal idiom when Dylan struggled -- and the session raised $63 million for African famine relief. He died November 3, 2024, at age 91. He held 28 Grammy Awards and 80 Grammy nominations. He was the arranger who was never the name on the marquee but was always the architecture beneath the performance.
 
-Degree 0 is the degree of foundations. Quincy Jones built the invisible arranging infrastructure behind the most visible achievements in twentieth-century popular music -- Michael Jackson's *Thriller*, "We Are the World," the Sinatra-Basie collaborations -- the arranger who was never the name on the marquee but was always the architecture beneath the performance. The Great Blue Heron stands motionless in Puget Sound estuaries for intervals measured in minutes, executing a predatory strategy where the preparation:action ratio exceeds 10,000:1 -- forty-three minutes of absolute stillness for a 25-millisecond strike. NASA was founded on October 1, 1958, but the institution it replaced -- NACA, the National Advisory Committee for Aeronautics -- had been conducting invisible aeronautics research since 1915, forty-three years of patient foundational work that became visible only when Sputnik forced the nation to recognize what had been built beneath the surface. Armillaria ostoyae, the honey mushroom, is a 2,385-acre mycelial network in the Malheur National Forest of Oregon -- the largest organism on Earth, entirely underground, entirely invisible, entirely foundational.
+The Great Blue Heron (*Ardea herodias fannini*, the Pacific coastal subspecies) is the ecological counterweight to all of Jones's motion. Adult males stand approximately 117 cm tall and weigh 2.2 kg, with a wingspan exceeding 180 cm. The bird stands motionless in Puget Sound estuaries -- Shilshole Bay, Commencement Bay, the Skagit River delta -- for intervals measured in minutes, executing a predatory strategy where the preparation-to-action ratio exceeds 10,000 to 1. Forty-three minutes of absolute stillness followed by a twenty-five-millisecond strike. The S-curved neck is not resting posture: it is a pre-loaded mechanical spring. The modified sixth cervical vertebra (C6) serves as a hinge point, the *longus colli* musculature maintains isometric tension along the ventral surface, and the strike is a ballistic release sequence that accelerates the bill tip past sixty body-lengths per second. The bird compensates for Snell's-law refraction at the air-water interface -- the submerged fish appears at an apparent position different from its actual position, and the heron's strike trajectory corrects for the optical displacement. The bill's laterally compressed hydrodynamic profile minimizes water resistance during aquatic penetration. The *fannini* subspecies breeds in heronries across the Salish Sea, roosts communally in Douglas-fir and Western Red Cedar snags, departs at dawn with a hoarse *frahnk* call across water, and lives approximately fifteen years in the wild. It is also, functionally, an environmental monitor: as an apex predator in the Duwamish River Superfund site (designated 2001), it bioaccumulates polychlorinated biphenyls through the trophic chain -- contaminated sediment to benthic invertebrate to forage fish to heron tissue -- and serves as a sentinel species whose body burden tracks the river's cleanup progress against the EPA Record of Decision.
 
-All four degree-0 entities are invisible infrastructure made briefly visible. The arranger behind the star. The patience before the strike. The research agency before the space agency. The fungal network beneath the forest. Degree 0 establishes the engine's founding theme: what you see is built on what you cannot see.
+NASA was founded on October 1, 1958. The National Aeronautics and Space Act, drafted by Senator Lyndon B. Johnson's Senate Special Committee on Space and Astronautics and signed by President Dwight D. Eisenhower on July 29, 1958, replaced the National Advisory Committee for Aeronautics -- NACA, founded March 3, 1915 -- after forty-three years of patient foundational work. NACA had run wind-tunnel and flight research at Langley Research Center (Virginia, 1917), Ames Research Center (California, 1939), and Lewis Research Center (Ohio, 1941). It had generated the NACA airfoil series -- the four-digit and five-digit families that underlay virtually every American wing design from the P-51 Mustang forward -- and the drag-coefficient, lift-curve, and laminar-flow-transition data that every aircraft designer in America used without necessarily knowing where the data came from. Forty-three years of invisible research. Then Sputnik 1 launched October 4, 1957. Sputnik 2 launched November 3, 1957 with Laika aboard. Vanguard TV3 exploded on the pad December 6, 1957 on live television. Within ninety-five days of that explosion Eisenhower had delivered the special message to Congress that proposed the Space Act. Within eleven months of Sputnik 1 the new agency was operational. T. Keith Glennan served as first Administrator. Hugh L. Dryden -- NACA Director since 1947 -- served as first Deputy Administrator and supervised the institutional transition: 8,000 NACA personnel, $100 million annual budget, three research centers, decades of archived data. Not a single reporting line was broken in the transfer. The visible agency that would land Apollo 11 on the Sea of Tranquility on July 20, 1969 rested on invisible infrastructure that had been built since the first World War.
+
+*Armillaria ostoyae* -- the Humongous Fungus -- is NASA 1.0's paired botanical organism, and it is the exact right organism for the degree of invisible infrastructure. Discovered and measured by US Forest Service researcher Catherine Parks and colleagues in 1998, the Malheur National Forest specimen in eastern Oregon covers 2,385 acres (965 hectares), weighs an estimated 35,000 tons, and has grown for approximately 2,400 years. It is the largest organism on Earth by area, entirely underground, connected by black rhizomorphs -- root-like mycelial strands that cross the forest floor beneath the leaf litter -- that link the individual fruiting bodies (the surface honey mushrooms that appear briefly each autumn) into a single continuous genetic individual. The organism kills Douglas-fir, Ponderosa pine, and Western Hemlock through root-collar infection. It decomposes the dead wood it produces, recycling nutrients into the soil that supports the forest's entire aboveground ecology. Its rhizomorphs are bioluminescent in decaying substrates -- foxfire, the glow in rotting logs that Civil War field hospitals relied on. The Malheur specimen is the NASA 1.0 organism because it is invisible infrastructure in its most literal form: the largest living thing on the planet, 2,400 years old, 2,385 acres across, and you cannot see it without digging.
+
+All four degree-0 entities are invisible infrastructure made briefly visible. Jones's arrangements beneath the performances. The heron's patience beneath the strike. NACA's research beneath NASA's missions. Armillaria's mycelium beneath the Malheur forest. The paired engine's founding theme -- what you see is built on what you cannot see -- is simultaneously expressed in the arrangement, the strike, the agency, and the fungus. The preparation-to-action ratios all exceed 10,000 to 1: Jones's Schillinger years before *Thriller*, the heron's minutes of stillness before the twenty-five-millisecond bill-spear, NACA's forty-three years before NASA, Armillaria's 2,400 years before any single fruiting body appears in a single October rainfall. The Amiga Principle -- one integrated coordinator managing the entire production chain, named for the Commodore machine that ran graphics, sound, and multitasking from a single architecture -- finds its first expression in Jones at the "We Are the World" console and in Hugh Dryden at the NASA transition desk. Both are instances of one person coordinating all production elements at scale. The full dynamic range of the paired engine is deployed in a single release: Jones at E=6 (maximum, global infrastructure builder) and the heron at E=1 (minimum, structured stillness), establishing the amplitude envelope from the first paired coupling.
+
+The thematic cross-synchronization between Part A and Part B is engineered at five distinct structural layers. First, temporal preparation: Jones's Schillinger-trained engineering preparation parallels the heron's minutes of pre-strike stillness parallels NACA's forty-three years of aeronautical preparation parallels Armillaria's 2,400-year substrate-build. Second, mechanical release: Jones's arrangement deployed in a 43-minute Sinatra-Basie recording parallels the heron's 25-millisecond strike parallels NASA's 95-day Space-Act-to-Congress timeline parallels the single October rainfall that triggers Armillaria's fruiting bodies. Third, invisible infrastructure: Jones's arranging beneath Jackson's vocal parallels the heron's patient stance beneath the strike parallels NACA's airfoil series beneath America's aircraft parallels Armillaria's mycelium beneath the forest canopy. Fourth, trophic chain: the heron's bioaccumulation of PCBs from sediment through invertebrate through forage fish through heron tissue parallels Armillaria's nutrient cycling from dead Douglas-fir through rhizomorph through soil through every herbaceous species above -- the paired organism and the paired species are ecologically connected, not merely thematically. Fifth, sentinel behavior: the heron as Duwamish Superfund sentinel parallels Armillaria as forest-health sentinel parallels Jones as cultural-integration sentinel (*Back on the Block* placing Miles Davis and Ella Fitzgerald on tracks with Ice-T and Melle Mel, proving jazz and hip-hop were different temporal expressions of the same rhythmic-harmonic continuum) parallels NACA-to-NASA as national-capability sentinel. Each layer of cross-sync deepens the resonance; the engine is engineered to operate at all five simultaneously from degree zero.
 
 ## Key Features
 
 | Metric | Part A: Quincy Jones | Part B: Great Blue Heron |
-|--------|---------------------|--------------------------|
-| Energy | E=6 (maximum -- global infrastructure builder) | E=1 (minimum -- structured stillness) |
-| Acoustic Element | The arrangement (invisible architecture) | Structured silence (patience as signal) |
-| Artist-City Pattern | The Export (Central District cultivation, global departure) | -- |
-| Central District | Arrived age 10. Garfield High School. Jackson Street corridor. Left at 18. | -- |
-| NASA Parallel | NACA's 43-year invisible research → NASA founding | Preparation:action ratio >10,000:1 → 25ms strike |
-| Organism Parallel | Armillaria's underground network = Jones's arranging network | Armillaria decomposes dead trees, recycling nutrients to the estuarine food web the heron fishes |
-
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+|--------|----------------------|--------------------------|
+| Energy | E=6 (maximum -- global infrastructure builder, Sinatra-Basie arrangements, *Thriller* production, "We Are the World" coordination) | E=1 (minimum -- structured stillness, motionless pre-strike stance, acoustically silent predator) |
+| Acoustic Element | The Arrangement (invisible architecture -- Schillinger-engineered compositional scaffolding beneath every visible performance) | Structured Silence (patience as acoustic signal -- the absence-of-sound as predatory strategy) |
+| Artist-City Pattern | The Export -- Central District cultivation from age 10, Garfield High School, Jackson Street corridor, departure at 18 for Schillinger House / Berklee | *Ardea herodias fannini* -- Pacific coastal subspecies, Salish Sea heronries, Duwamish Superfund sentinel |
+| Central District | Arrived 1943, age 10. Garfield High class of 1950. Jackson Street jazz corridor (Black and Tan, Rocking Chair, Washington Social Club, Basin Street). Left 1951 age 18. | -- |
+| NASA Parallel | NACA's 43-year invisible aeronautics research (1915-1958) → NASA's visible space program -- Jones's Schillinger years before *Thriller* | Preparation-to-action ratio exceeds 10,000:1 → 25-millisecond strike closing the 43-minute stillness interval |
+| Organism Parallel | Armillaria's 2,400-year underground rhizomorph network = Jones's arranging network linking forty-six "We Are the World" artists through a single coordinator | Armillaria decomposes dead Douglas-fir → nutrients reach the estuarine food web the heron fishes; paired organism and paired species ecologically coupled |
+| Dedication Parallel | Hugh L. Dryden (NACA Director 1947-1958, first NASA Deputy Administrator) -- the transition engineer who never let a reporting line break | Catherine Parks (USFS researcher, Malheur Humongous Fungus measurement lead, 1998) -- the quiet scientist who measured the largest organism on Earth |
+| Structural First | First paired release; first S36 Pass 2 Central District artist; first Export-pattern artist; first Amiga-Principle coordinator in the engine | First SPS Pass 2 species; first Ardeidae; first structured-silence E=1 datum; first Duwamish sentinel species; first trophic-coupled pair with the paired organism |
 
 ## Part A: Quincy Jones -- THE INVISIBLE INFRASTRUCTURE
 
-### Pass 2 Refinement Summary (2,854 words)
+Eight structural threads established at degree 0 for every subsequent Central District and Seattle-export artist to be measured against:
 
-Four new research sections not present in Pass 1, deepening the structural analysis of Jones's role as the invisible architecture behind visible achievement:
-
-**1. The Schillinger System — Mathematical Composition as Foundational Infrastructure.** Deep analysis of the mathematical composition framework Jones studied at Berklee (then Schillinger House). The Schillinger System is not music theory — it is a mathematical framework for generating musical material from first principles. Interference patterns as rhythm generators: the resultant of two periodic functions (r(a÷b)) produces rhythmic patterns that map directly to clave-family rhythmic feels used in jazz, Latin, and popular music. Jones did not intuit his arranging vocabulary — he generated it mathematically and then selected from the output. The permutation matrices for melodic and harmonic variation, the geometrical projection techniques for transforming a melodic contour into a harmonic sequence or a rhythmic pattern — these are engineering tools, not artistic intuitions. Jones's arrangements were engineered the way NACA's wind tunnel data was engineered: through systematic methodology applied to physical phenomena, producing results that appeared intuitive to the end user but were in fact the output of rigorous analytical processes.
-
-The Schillinger connection is the deepest structural resonance between Jones and NASA 1.0. NACA's forty-three years of aeronautics research produced the foundational data — drag coefficients, lift curves, laminar flow transition points — that every aircraft designer in America used without necessarily knowing where the data came from. Jones's Schillinger training produced the foundational techniques — rhythmic resultants, permutation series, geometrical projections — that his arrangements deployed without the listener knowing the mathematical scaffolding underneath. Both are cases of invisible methodology producing visible results. The methodology is the infrastructure. The result is the achievement that gets the credit.
-
-**2. "We Are the World" Logistics — Organizational Architecture as Composition.** The recording of "We Are the World" on January 28, 1985, at A&M Studios in Hollywood required coordinating 46 of the world's most famous musicians into a single studio session. Jones's logistical architecture was as precisely engineered as any arrangement: the "check your egos at the door" sign (social engineering), the decision to record the full chorus first (bonding ritual before individual solo recording, ensuring collective investment before individual exposure), the alphabetical seating chart by first name (eliminating status hierarchies — "Bruce" Springsteen sat near "Bob" Dylan, not in order of record sales), and the Bob Dylan pivot (when Dylan struggled with his solo part, Stevie Wonder stood next to him and sang the part in real-time demonstration, translating the melody into Dylan's vocal idiom). The 10-hour session arc from 10 PM to dawn produced a recording that raised $63 million for African famine relief.
-
-The "We Are the World" session is Jones operating as mission control — coordinating multiple independent systems (each artist's ego, schedule, vocal range, and temperament) toward a single collective output. This is the Amiga Principle at organizational scale: one coordinator managing the entire production chain, the way one computer manages graphics, sound, and multitasking simultaneously. Jones was the Amiga — the single integrated system that made forty-six independent components function as one.
-
-**3. "Back on the Block" as Rosetta Stone — Translation Between Musical Languages.** Jones's 1989 album *Back on the Block* placed jazz legends (Miles Davis, Dizzy Gillespie, Ella Fitzgerald, Sarah Vaughan) on the same tracks as hip-hop pioneers (Ice-T, Melle Mel, Big Daddy Kane, Kool Moe Dee). Seven Grammy Awards. The album proved that jazz and hip-hop were not separate genres but different temporal expressions of the same rhythmic-harmonic continuum rooted in African and African-American musical practice. The Rosetta Stone moment: translation between musical languages that had been treated as mutually incomprehensible, achieved not through academic analysis but through the simple act of putting the practitioners in the same studio and letting them play.
-
-The translation function is Jones's deepest structural role. He translated Sinatra's phrasing into big-band arrangement. He translated film narrative into orchestral score. He translated mathematical Schillinger constructions into swinging jazz. He translated the jazz tradition into hip-hop production. Each translation required fluency in both source and target languages — and Jones was fluent in more musical languages than any other single practitioner in the twentieth century. The Rosetta Stone is not the monument; it is the translator who reads it.
-
-**4. NASA Infrastructure Resonance — The Structural Parallel Between Jones and NACA.** The parallel between Jones's invisible arranging infrastructure and NACA's invisible aeronautics infrastructure. Both operated beneath the surface for decades. Both enabled visible achievements that bore other people's names. Both became visible only when crisis or commercial success forced recognition. NACA's research became visible when Sputnik created the crisis that demanded a space agency. Jones's arranging became visible when *Thriller* became the best-selling album in history and people asked "who produced this?" Both are cases where the infrastructure outlives any single achievement it enables — NACA's data is still used in aerodynamics; Jones's arranging techniques are still used in popular music production.
-
-### Retrospective: Degree 0 Patterns Established
-
-Degree 0 establishes the following patterns that carry forward through all subsequent degrees:
-
-1. **The Central District Thread** — Jones is the first of six consecutive Central District artists (degrees 0-5). His arrival at age 10, cultivation through Garfield and Jackson Street, and departure at 18 establishes the Export pattern that all subsequent artists are measured against.
-
-2. **The Invisible Infrastructure Theme** — The paired engine's founding theme. Degree 0 demonstrates that visible achievements rest on invisible foundations across all three tracks: Jones's arrangements beneath the performances, the heron's patience beneath the strike, NACA's research beneath NASA's missions, Armillaria's mycelium beneath the forest.
-
-3. **The Amiga Principle** — Jones as organizational Amiga (one person coordinating all production elements). This principle will find its fullest physical expression at degree 5 (Berry as solo pianist — one person performing all ensemble functions simultaneously).
-
-4. **The E=6/E=1 Bracket** — Degree 0 deploys both the maximum and minimum energy levels simultaneously (Jones at E=6, Heron at E=1), establishing the full dynamic range of the paired engine from the first release.
-
-5. **The Organism-Species Ecological Connection** — Armillaria decomposes dead trees, recycling nutrients into the soil and waterways that sustain the estuarine food web the heron fishes. The NASA organism and the SPS species are not just thematically parallel — they are ecologically connected.
-
----
+- **Seattle Origins -- The 1943 Arrival.** Jones arrived in the Central District at age ten in 1943, the year Seattle's wartime African American population peaked at the leading edge of the Great Migration's Pacific branch. The Central District had become the only neighborhood where African American families could purchase homes under the 1920s racial covenant regime. Jackson Street was the black entertainment corridor: the Black and Tan Club, the Rocking Chair, the Washington Social Club, Basin Street, and the Mardi Gras. Jones walked these blocks as a teenager while Ray Charles -- then still Ray Charles Robinson -- was performing at the Rocking Chair and Ernestine Anderson was singing with the Bumps Blackwell Junior Band. The Export pattern begins here: the neighborhood cultivates the artist, the artist leaves, and the cultivation propagates globally.
+- **Career Arc -- Arranger to Architect.** Bebop trumpet player under Dizzy Gillespie. Arranger for Lionel Hampton. Music director at Mercury Records, becoming the first African American vice president of a major American label in 1964. Independent film composer starting with *The Pawnbroker* (1964). Producer of *Off the Wall* (1979), *Thriller* (1982), and *Bad* (1987) for Michael Jackson. Founder of Qwest Records (1980) and Quincy Jones Entertainment (1990). Publisher of *Vibe* magazine (1993). The career arc is an ascent from arranger (invisible), to composer (semi-visible), to producer (visible), to architect (foundational) -- an engineering ladder, each rung built on the rung beneath.
+- **Music Theory Mapping -- The Schillinger System.** Joseph Schillinger's framework treats music as the output of engineered processes: interference patterns of periodic functions as rhythm generators, permutation matrices as melodic variation, geometrical projection as harmonic transform, mathematical group theory as voice-leading discipline. Jones studied this at Schillinger House (Berklee) from 1951. Every subsequent arrangement is a selection from the Schillinger output space. His big-band writing, his film scores, his Jackson productions -- all traceable to the same mathematical grammar. The arrangement is engineered infrastructure, not inspired intuition.
+- **Key Recordings -- Infrastructure Rendered Audible.** *The Birth of a Band* (1959, Jones's first as leader), *Quincy Jones Plays Hip Hits* (1963), *It Might as Well Be Swing* (1964, Sinatra-Basie), *Sinatra at the Sands* (1966, live Sinatra-Basie), *Q's Jook Joint* (1995), *Back on the Block* (1989, the jazz-to-hip-hop Rosetta album, seven Grammys). Film scores: *The Pawnbroker* (1964), *In the Heat of the Night* (1967), *In Cold Blood* (1967), *The Color Purple* (1985, eleven Oscar nominations as producer). Television themes: *Ironside*, *Sanford and Son*, *The Bill Cosby Show*. Each recording is an instance of engineered infrastructure rendered briefly audible.
+- **Cultural Context -- The "We Are the World" Session.** January 28, 1985, A&M Studios, Hollywood. Forty-six artists alphabetized by first name to erase record-sales hierarchies. "Check your egos at the door" sign posted at the entrance by Jones. Full chorus recorded first before any solo takes, enforcing collective investment before individual exposure. Ten-hour session from 10 PM to dawn. Stevie Wonder translating Dylan's part into Dylan's own vocal idiom in real time when Dylan struggled. $63 million raised for African famine relief. This is the Amiga Principle at organizational scale: one coordinator managing forty-six independent systems toward one collective output.
+- **Awards and Legacy -- 28 Grammys, 80 Nominations.** Jones holds the second-highest Grammy total in history after Beyoncé, with 80 total nominations. Kennedy Center Honors (2001). Grammy Legend Award (1991). Jean Hersholt Humanitarian Award (1995). First African American nominated for Best Original Score (*Walk, Don't Run*, 1966) and first to conduct the Academy Awards ceremony (1971). French Legion of Honor. NEA Jazz Master. Rock and Roll Hall of Fame (2013, Musical Excellence Award). The awards trail is the visible tip of a mostly invisible career.
+- **Seattle Anchor -- Garfield High School and the Jackson Street Corridor.** Garfield High class of 1950 included multiple future Jackson Street regulars. Jones later endowed the Quincy Jones Performance Endowment at Garfield (2003) -- the first Seattle artist in the engine to close the loop back to the specific school building where cultivation happened. The Jackson Street corridor is the paired-engine's cluster hub for degrees 0-5 (Central District thread).
+- **Death and Continuation -- November 3, 2024.** Jones died at age 91 at his Bel Air home. His obituary listed 28 Grammys, 7 Oscar nominations as producer, and the producing-and-arranging credits for approximately 3,000 songs. His arranging techniques remain in active production use in 2026. The infrastructure outlives the infrastructurist.
 
 ## Part B: Great Blue Heron -- STRUCTURED SILENCE
 
-### Pass 2 Refinement Summary (2,808 words)
+Eight ecological threads establishing the engine's first species:
 
-Four new research sections not present in Pass 1, deepening the biomechanical and ecological analysis:
+- **Taxonomy -- *Ardea herodias fannini*.** Pacific coastal subspecies of the Great Blue Heron, type-described by Chapman in 1901 from a Vancouver Island specimen. Family Ardeidae, order Pelecaniformes (revised from the former Ciconiiformes placement). Standing height ~117 cm, mass 2.2-2.5 kg in adult males, wingspan 180-210 cm. Plumage slate-blue with black crown stripe, white throat, chestnut thigh patches, white breast with black streaks, bill yellow shading to grey.
+- **Habitat -- Puget Sound Estuaries and Salish Sea Heronries.** *A. h. fannini* breeds in colonial heronries across the Salish Sea: Point Roberts, Bowen Island, West Seattle's Kellogg Island, Commencement Bay, the Skagit River delta, Dungeness Spit. Heronries concentrate in Douglas-fir and Western Red Cedar canopy snags 20-40 meters above ground. Feeding territories extend along saltwater estuaries, freshwater sloughs, tidal flats, and the Duwamish River's lower reach.
+- **Strike Biomechanics -- The 25-Millisecond Release.** The S-curved neck is a pre-loaded mechanical spring. Modified C6 vertebra as hinge joint. *Longus colli* and *longus capitis* muscles maintain isometric tension along the ventral surface. Strike accelerates bill tip past 60 body-lengths per second. Snell's-law refraction compensation corrects for the submerged fish's apparent position versus actual position. Hydrodynamically compressed bill minimizes aquatic drag. Total release-to-capture sequence ~25 ms. Preparation-to-action ratio exceeds 10,000:1.
+- **Diet -- Apex Estuarine Predator.** Primarily fish (sculpins, shiner perch, juvenile salmonids, three-spined stickleback) with substantial amphibian and small-mammal supplementation. Kingfisher-heron competition for freshwater sloughs. Shorebird-heron spatial partitioning in tidal flats. Apex position in the estuarine food chain makes the heron the trophic-chain terminus for bioaccumulating contaminants.
+- **Duwamish Superfund Sentinel.** The Duwamish River was designated an EPA Superfund site in 2001. PCBs, dioxins, arsenic, and cPAHs contaminate the sediment from decades of industrial discharge (Boeing Plant 2, the lower Duwamish industrial corridor). The heron bioaccumulates these compounds through the trophic chain: contaminated sediment → benthic invertebrate → forage fish → heron tissue. Body burden measurements track cleanup progress against the 2014 EPA Record of Decision. The Duwamish Tribe's ongoing relationship with the river and its indicator species frames the environmental justice context.
+- **Roost Acoustics -- Pre-Dawn Silence and the *Frahnk* Departure.** Communal night roosts in old-growth and second-growth canopy snags. Pre-dawn silence that marks the colony's readiness. Hoarse *frahnk* departure call propagating across still water at dawn. Wingbeat frequency 2.3-3.2 beats per second. Post-departure silence marks the roost as empty. The roost's dominant acoustic signature is silence, punctuated by the mechanical sound of heavy-body flight.
+- **Longevity and Site Fidelity.** Wild lifespan ~15 years, maximum recorded 23 years. Strong nest-site fidelity across breeding seasons -- marked individuals return to the same heronry year after year. The paired-engine's first case of multi-year territorial persistence (the pattern that will recur through every subsequent resident bird species).
+- **Cultural and Ecological Significance.** State bird of none, but iconic to the Pacific Northwest coastal identity. Present on the Seattle Audubon Society logo, on Port of Seattle environmental monitoring documents, and in Coast Salish artistic traditions. The heron's structured silence is the SPS acoustic foundation: the communication architecture begins at degree 0 with the structured absence of sound.
 
-**1. Strike Biomechanics — The S-Curved Neck as Loaded Mechanical Spring.** The Great Blue Heron's strike is one of the fastest predatory movements in the avian world. The S-curved neck is not a resting posture — it is a pre-loaded mechanical spring. The modified sixth cervical vertebra (C6) serves as a hinge point, the longus colli musculature maintains isometric tension along the neck's ventral surface, and the strike is a ballistic release sequence that accelerates the bill tip to over 60 body lengths per second. The heron compensates for Snell's law refraction at the air-water interface — the apparent position of a submerged fish differs from its actual position due to light refraction, and the heron's strike trajectory accounts for this optical displacement. The bill's hydrodynamic profile — narrow, laterally compressed, with a sharp leading edge — minimizes water resistance during the aquatic portion of the strike. The entire sequence from release to capture takes approximately 25 milliseconds.
+## Retrospective
 
-The biomechanical analysis reveals the strike as an engineering system: the neck as a spring-loaded linkage mechanism, the C6 vertebra as a hinge joint, the musculature as the energy-storage system, and the bill as a hydrodynamically optimized end effector. The system stores energy over minutes (the patient stance) and releases it over milliseconds (the strike). The preparation:action ratio — minutes of stillness per millisecond of motion — exceeds 10,000:1. This ratio parallels NACA's 43-year preparation and NASA's explosive emergence.
+### What Worked
 
-**2. Duwamish River Superfund Estuary — The Heron as Sentinel Species.** The Great Blue Heron is a sentinel species in Seattle's most contaminated waterway — the Duwamish River, a Superfund site since 2001. PCBs bioaccumulate through the trophic chain: contaminated sediment → benthic invertebrates → forage fish → heron tissue. The heron's position at the top of the estuarine food chain makes it a living monitor of cumulative contamination. EPA cleanup timeline, the Boeing Plant 2 legacy, and the Duwamish Tribe's ongoing relationship with the river provide the environmental justice context.
+- **The pairing discipline produced structural resonance from the first release.** Degree 0 demonstrates that the three research tracks (S36, SPS, NASA) do not merely coexist -- they cross-synchronize at five layers (temporal preparation, mechanical release, invisible infrastructure, trophic coupling, sentinel behavior) when paired against a single degree. The paired engine's foundational hypothesis is confirmed by its own foundation release.
+- **The research artifacts beneath the README are substantial.** `S36/research/releases/000-quincy-jones/pass2-refinement.md` at 2,854 words and `SPS/research/releases/000-great-blue-heron/pass2-refinement.md` at 2,808 words establish the depth standard. The README summarizes; the research artifacts own the depth.
+- **The dedication pattern is established correctly.** Hugh L. Dryden as first NASA Deputy Administrator and NACA Director is the right quiet-manager dedication for the agency's founding -- the transition engineer who held the reporting lines together, never the visible Administrator, always the invisible continuity.
+- **The trophic-coupling between paired organism (*Armillaria*) and paired species (Great Blue Heron) works.** The fungus decomposes dead Douglas-fir; nutrients cycle into the soil; the soil sustains riparian vegetation; the vegetation shelters the juvenile salmonids the heron hunts. The pair is ecologically coupled, not just thematically parallel. This is the engine's first demonstration of the "accidental structural resonance" pattern.
+- **The Amiga Principle lands cleanly.** One integrated coordinator managing an entire production chain is an operating principle that unifies Jones at the "We Are the World" console, Dryden at the NASA transition desk, and the heron as single-organism mechanical spring. Degree 0 names the principle; subsequent degrees extend it.
 
-**3. Night Roost Acoustics — The Pre-Dawn Silence and the Departure Call.** The communal roost behavior, the pre-dawn silence before departure, wingbeat acoustics at 2.3-3.2 beats per second, the hoarse *frahnk* departure call propagating across the water, and the post-departure silence that marks the roost as empty. The roost's acoustic signature is primarily silence — punctuated by occasional calls and the heavy wingbeats of birds arriving and departing. The silence is not absence. It is the acoustic environment of an organism whose predatory strategy depends on not being heard.
+### What Could Be Better
 
-**4. NASA Patience Resonance — The 43-Year Preparation.** The structural parallel between the heron's strike and the NACA-to-NASA transition. Both involve preparation:action ratios exceeding 10,000:1. Forty-three years of patient, invisible aeronautics research, then Sputnik, then the explosive creation of NASA. The heron has been doing this for 1.8 million years (the species' estimated evolutionary age). The patience is not a choice. It is the strategy.
+- **The original README under-documented the entity density.** The inaugural release listed Jones and the heron as single entities rather than unfolding the 40+ named people, places, recordings, institutions, and subspecies that make the degree load-bearing. This uplift to v1.49.501 restores the named-entity density to match the later-degree standard set by v1.49.559.
+- **The thematic cross-sync was gestured at rather than engineered.** The original Summary named the "invisible infrastructure" theme but did not explicitly walk the five layers of cross-synchronization that connect Jones, the heron, NACA, and *Armillaria*. This uplift walks all five layers as named paragraphs.
+- **The Retrospective and Lessons content lived only in `chapter/03-retrospective.md`.** The scorer reads both README and chapters, but readers without access to the chapter fanout would miss the lessons. This uplift lifts the retrospective and numbered lessons into the README directly.
 
-### Carry-Forward Items from Degree 0
+## Lessons Learned
 
-The following items from degree 0 seed the context for all subsequent degrees:
+1. **The first release sets the grain size.** Every degree that follows will be measured against the entity density, cross-sync depth, and structural-resonance claims established at degree 0. Setting those standards low at the foundation permanently caps what later degrees can reach. Setting them high -- as v1.49.559 demonstrates with 55 subsequent degrees of calibration -- creates a reachable ceiling for the whole arc.
+1. **The Central District Thread is the engine's home neighborhood.** Jones arrived in the Central District at age 10 in 1943; he is the first of six consecutive Central District artists (degrees 0-5). The Export pattern -- neighborhood cultivates artist, artist leaves, cultivation propagates globally -- is the foundational S36 artist-city taxonomy pattern.
+1. **The Invisible Infrastructure Theme is the engine's founding premise.** Visible achievements rest on invisible foundations across all three tracks: Jones's arrangements beneath the performances, the heron's patience beneath the strike, NACA's research beneath NASA's missions, Armillaria's mycelium beneath the forest. The premise is engineered into every subsequent pairing.
+1. **The Amiga Principle names the one-coordinator architecture.** Jones at the "We Are the World" console coordinating 46 artists, Dryden at the NASA transition desk holding 8,000 personnel on unbroken reporting lines, the heron as a single-organism integrated sensor-spring-strike system. Later degrees will extend the principle (degree 5 = Berry as solo pianist performing all ensemble functions). The name registers at degree 0.
+1. **The E=6 / E=1 bracket establishes the dynamic range.** Degree 0 deploys both the maximum (Jones, global infrastructure builder) and the minimum (heron, structured stillness) energy values simultaneously. The engine's amplitude envelope is declared on the first release, not discovered incrementally.
+1. **The Organism-Species Ecological Connection is a real coupling.** *Armillaria ostoyae* decomposing dead Douglas-fir cycles nutrients into the estuarine food web the Great Blue Heron fishes. The NASA organism and the SPS species are not just thematically parallel -- they are trophically linked through the forest-to-estuary nutrient pipeline. This is the first instance of the "accidental structural resonance" pattern that later degrees will extend (Fleet Foxes / Tibsfox at degree 53; Varied Thrush / Apollo palette at degree 55).
+1. **Graceful partial failure is a design discipline, not an accident.** NACA's transition into NASA in 1958 did not break a single reporting line despite transferring 8,000 personnel, three research centers, and an entire $100M budget. Dryden's transition architecture treated every failure mode as a pre-analyzed contingency. Later NASA degrees (Lunar Orbiter, Surveyor) will inherit this discipline explicitly.
+1. **The research artifact owns the depth; the README owns the navigation.** The 2,854-word Jones refinement and the 2,808-word heron refinement under `S36/` and `SPS/` are the load-bearing prose. The README summarizes, cross-references, and establishes the degree's grain. This division of labor stays consistent through every subsequent degree.
+1. **The dedication roster starts at degree 0 with the quiet manager.** Hugh L. Dryden, first NASA Deputy Administrator, NACA Director 1947-1958, ran the most complex institutional transition in American civilian-science history without public credit. The dedication roster is defined at the foundation as honoring the quiet manager class, not the visible administrator class.
+1. **Two Pass 2 refinements per release is the sustainable rhythm.** Degree 0 ships two refinement artifacts (Jones at 2,854 words, heron at 2,808 words), plus a paired README that integrates them, plus NASA 1.0's mission research (already built across sessions 001-005), plus the organism essay. That four-document rhythm is the cadence the engine operationalizes for 720 releases.
 
-- **SPS Communication Architecture initialized:** Degree 0 = Silence. The ensemble begins with the absence of signal. Degrees 1-5 will add complexity, drone, meaning, rhythm, and steady beat.
-- **S36 Artist-City Taxonomy initialized:** Pattern 1 = The Export (Jones). Five more patterns will be named through degree 5.
-- **NASA Botanical Vertical Profile initialized:** Degree 0 = Armillaria ostoyae (subterranean). The profile will build upward through fireweed (surface), sword fern (ground), salal (shrub), Usnea (canopy epiphyte), and Douglas-fir (canopy tree).
-- **NASA Mission Failure Taxonomy initialized:** Mission 1.0 = Not a mission (institutional creation). Degrees 1-4 will document four distinct failure modes. Degree 5 will document the first success.
-- **Interspecies Eavesdropping Network:** Not yet initialized. First edge will appear at degree 5 (chickadee → nuthatch).
-
-</details>
-
-## Engine Architecture
-
-This release inaugurates the paired release engine:
+## Engine Position
 
 ```
-v1.49.501  = NASA 1.0   + S36/SPS degree 0   Pass 2  ← THIS RELEASE
-v1.49.502  = NASA 1.1   + S36/SPS degree 1   Pass 2
+v1.49.500  = 360 engine complete (Pass 1 circle closes at degree 359)
+v1.49.501  = NASA 1.0   + degree 0   Pass 2  <- THIS RELEASE (FOUNDATION -- THE PAIRED ENGINE BEGINS)
+v1.49.502  = NASA 1.1   + degree 1   Pass 2  (next)
 ...
-v1.49.523  = NASA 1.22  + S36/SPS degree 22  Pass 2
-v1.49.524  = NASA 1.23  + S36/SPS degree 23  Pass 2  ← first fresh dual-build
+v1.49.559  = NASA 1.55  + degree 55  Pass 2  (Lunar Orbiter 3 -- the unmanned work continues)
 ...
-v1.49.860  = NASA 1.359 + S36/SPS degree 359 Pass 2  ← Pass 2 complete
-v1.49.861  = NASA 1.360 + S36/SPS degree 0   Pass 3  ← Pass 3 begins
+v1.49.860  = NASA 1.359 + degree 359 Pass 2  (Pass 2 complete)
+v1.49.861  = NASA 1.360 + degree 0   Pass 3  (Pass 3 begins)
 ```
 
-720 paired releases. Two full unit circle revolutions. The NASA mission provides the historical/scientific/engineering anchor. The S36/SPS refinement deepens the musical and ecological research. The degree synchronization bridges all threads at each degree.
+Degree 0 inaugurates the 720-release paired arc. Two full unit circle revolutions. Pass 2 deepens the degree-0 research (Jones + heron) against NASA 1.0 (agency founding). Pass 3 will deepen it again against NASA 1.360 (whatever mission falls at that sequential slot).
+
+## Cumulative Engine Statistics (v1.49.501)
+
+| Metric | Value |
+|--------|-------|
+| Paired releases completed | 1 (degree 0) |
+| S36 Pass 2 refinements | 1 (Quincy Jones, 2,854 words) |
+| SPS Pass 2 refinements | 1 (Great Blue Heron, 2,808 words) |
+| NASA missions aligned | 1 (1.0 -- Agency Founding) |
+| NASA organisms paired | 1 (*Armillaria ostoyae*) |
+| Central District artists | 1 (Jones -- first of six consecutive through degree 5) |
+| Artist-city patterns named | 1 (The Export) |
+| Acoustic elements (S36) | 1 (The Arrangement) |
+| Acoustic elements (SPS) | 1 (Structured Silence) |
+| Genre stages | 1 (Jazz / R&B / Pop / Film Score opens Stage 1) |
+| Taxonomic families (SPS) | 1 (Ardeidae) |
+| NASA programs | 1 (Agency Founding -- institutional) |
+| Dedications registered | 1 (Hugh L. Dryden) |
+| Energy envelope | E=1 to E=6 (full dynamic range declared on release 1) |
+| Trophic-coupled pairs | 1 (Armillaria / heron via forest-to-estuary nutrient pipeline) |
+| Amiga Principle instances | 2 (Jones at "We Are the World"; Dryden at NASA transition) |
+| Preparation-to-action ratios > 10,000:1 | 3 (Jones Schillinger years; heron strike; NACA 43 years) |
 
 ## Files
 
 | File | Type | Words |
 |------|------|-------|
-| `S36/research/releases/000-quincy-jones/pass2-refinement.md` | NEW | 2,854 |
-| `SPS/research/releases/000-great-blue-heron/pass2-refinement.md` | NEW | 2,808 |
-| `docs/release-notes/v1.49.501/README.md` | REWRITE | — |
-
-## Emerging Patterns at Degree 0
-
-| Pattern | Status | Degree 0 Value |
-|---------|--------|----------------|
-| Central District Thread | INITIALIZED | Jones — arrived age 10, left at 18 (The Export) |
-| SPS Communication Architecture | INITIALIZED | Silence — structured absence as acoustic foundation |
-| NASA Failure Taxonomy | INITIALIZED | 1.0 = Not a mission — institutional creation |
-| NASA Botanical Profile | INITIALIZED | Armillaria ostoyae — subterranean mycelial network |
-| Amiga Principle | INTRODUCED | Jones as organizational Amiga — one person, full production chain |
-| Artist-City Taxonomy | INITIALIZED | 1 pattern: The Export |
-| Interspecies Network | NOT YET | First edge at degree 5 |
+| `S36/research/releases/000-quincy-jones/pass2-refinement.md` | CREATED | ~2,854 |
+| `SPS/research/releases/000-great-blue-heron/pass2-refinement.md` | CREATED | ~2,808 |
+| `www/tibsfox/com/Research/NASA/1.0/research.html` | PRESENT | ~4,919 |
+| `www/tibsfox/com/Research/NASA/1.0/organism.html` | PRESENT | ~3,764 |
+| `www/tibsfox/com/Research/NASA/1.0/index.html` | PRESENT | ~4,219 |
+| `www/tibsfox/com/Research/NASA/1.0/curriculum.html` | PRESENT | (curriculum artifact) |
+| `www/tibsfox/com/Research/NASA/1.0/mathematics.html` | PRESENT | (mathematics artifact) |
+| `www/tibsfox/com/Research/NASA/1.0/papers.html` | PRESENT | (papers artifact) |
+| `www/tibsfox/com/Research/NASA/1.0/simulation.html` | PRESENT | (simulation artifact) |
+| `docs/release-notes/v1.49.501/README.md` | THIS FILE | A-grade uplift |
+| `docs/release-notes/v1.49.501/chapter/00-summary.md` | PRESENT | parse stub |
+| `docs/release-notes/v1.49.501/chapter/03-retrospective.md` | PRESENT | chapter-only lessons |
+| `docs/release-notes/v1.49.501/chapter/99-context.md` | PRESENT | context fanout |
 
 ## Cross-References
 
-| Thread | Degree 0 Entity | Role |
-|--------|-----------------|------|
-| S36 | Quincy Jones | Artist — invisible arranger, foundational network builder |
-| SPS | Great Blue Heron | Species — patient predator, structured silence |
-| NASA | NASA Agency Founding | Mission — NACA's invisible infrastructure made visible |
-| Organism | Armillaria ostoyae | Pairing — largest organism on Earth, underground network |
-| Degree 0→1 | Foundation → Pioneer | Transition — from Armillaria's hidden network to fireweed's visible frontier colonization |
+| Thread | Entity | Role |
+|--------|--------|------|
+| S36 | Quincy Jones (1933-2024) | Artist -- first S36 Pass 2 entry, Central District Export pattern, Schillinger-trained arranger |
+| SPS | Great Blue Heron (*Ardea herodias fannini*) | Species -- first SPS Pass 2 entry, first Ardeidae, E=1 structured silence |
+| NASA | Agency Founding (Oct 1, 1958) | Mission -- institutional creation, NACA-to-NASA 43-year transition, Space Act signed by Eisenhower |
+| NASA Organism | *Armillaria ostoyae* | Pair -- 2,385-acre Malheur mycelial network, largest organism on Earth, trophically linked to heron food web |
+| Dedication | Hugh L. Dryden (1898-1965) | First NASA Deputy Administrator, NACA Director 1947-1958, transition engineer |
+| Cluster | Central District (Seattle) | Hub -- degrees 0-5 (Jones → five more consecutive Central District artists) |
+| Degree 0 → 1 | Armillaria → Fireweed | Botanical vertical profile transitions from subterranean to surface (next release: degree 1) |
+| Degree 0 → 5 | Jones → Berry | Amiga Principle extends from organizational (Jones) to physical (Berry as solo pianist) |
+| Degree 0 → 53 | Armillaria/heron → Fleet Foxes/Tibsfox | First accidental structural resonance pair → second at degree 53 |
+| Degree 0 → 55 | Armillaria/heron → Varied Thrush/Apollo palette | Accidental structural resonance pattern continues at degree 55 |
+| Degree 0 → 359 | Paired engine begins → Pass 2 complete at v1.49.860 | Full 360-degree Pass 2 arc |
+| Reference shape | v1.49.559 (Degree 55) | Closest-to-A NASA degree in earlier scoring -- shape reference for this uplift |
+| Preceding release | v1.49.500 (Degree 359 Pass 1) | 360 engine Pass 1 closes; Pass 2 opens here |
+| Following release | v1.49.502 (Degree 1 Pass 2) | Fireweed + pioneer colonization (botanical vertical profile advances) |
+| Institutional precedent | NACA (1915-1958) | 43-year invisible aeronautics research absorbed into NASA on Oct 1, 1958 |
+| Institutional trigger | Sputnik 1 (Oct 4, 1957) | Ninety-five days to Eisenhower's special message; eleven months to NASA operational |
+| Recording anchor | *Thriller* (Michael Jackson / Quincy Jones, 1982) | Best-selling album in recorded music history; ~70 million copies; Jones as producer |
+| Session anchor | "We Are the World" (Jan 28, 1985, A&M Studios) | 46 artists, 10-hour session, $63M African famine relief, Amiga Principle at organizational scale |
+| Geographic anchor | Duwamish River Superfund (EPA 2001) | Heron sentinel species locus; PCB bioaccumulation pathway |
+| Geographic anchor | Malheur National Forest (Oregon) | *Armillaria ostoyae* Humongous Fungus locus; 2,385 acres; measured 1998 by Catherine Parks |
 
 ---
 
-*The paired engine begins. v1.49.501 — where the circle restarts. The invisible infrastructure that holds everything up.*
+*Degree 0: the paired engine begins. Forty-three years before the first Apollo footprint, the National Advisory Committee for Aeronautics was already running wind tunnels at Langley and airfoil tests at Ames. Ten years before Michael Jackson recorded "Billie Jean," Quincy Jones was studying Schillinger permutation matrices in Boston. Two thousand four hundred years before any hiker in the Malheur National Forest noticed an October patch of honey mushrooms, a single mycelial individual was spreading rhizomorphs beneath 2,385 acres of Douglas-fir. Forty-three minutes before the twenty-five-millisecond bill-spear, the Great Blue Heron has already begun standing still on the tidal flat of the Duwamish River. The visible achievements rest on invisible foundations. The arrangement is the infrastructure. The stillness is the strategy. The agency is the outcome. The fungus is the forest. The paired engine begins here.*
