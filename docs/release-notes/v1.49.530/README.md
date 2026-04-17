@@ -2,80 +2,164 @@
 
 **Released:** 2026-04-05
 **Degree:** 29 of 360
-**Part A:** Ivan "Boogaloo Joe" Jones -- Jazz/Funk, E=4, Seattle, Prestige Records. 1960s-1980s. Guitar-driven boogaloo jazz-funk. Jazz returns to genre compound. First Prestige artist.
-**Part B:** Rough-winged Swallow (*Stelgidopteryx serripennis*) -- rough buzzy brrit, E=4, river bank, Hirundinidae. Fourth consecutive swallow. The rough edge within the liquid family. Grit breaks the smooth.
-**NASA Mission:** 1.30 -- Ranger 5 (October 18, 1962. Missed Moon by 725 km. Solar panel failure. Fifth Ranger failure. Closest approach yet. Convergence tightens.)
+**Part A:** Ivan "Boogaloo Joe" Jones -- Jazz/Funk, E=4, Seattle / New York, Prestige Records. 1960s-1980s. Guitar-driven boogaloo jazz-funk. Jazz returns to the genre compound. First Prestige artist in the engine. *No Way!* (1970), *Sweetback* (1971), *Boogaloo Joe* (1968).
+**Part B:** Rough-winged Swallow (*Stelgidopteryx serripennis*) -- rough buzzy brrit, E=4, river bank, Hirundinidae. Fourth consecutive swallow. The rough edge within the liquid family. Grit breaks the smooth. Audubon 1838, Mexico type specimen. Eroded riverbanks and culvert abutments as nesting substrate. The sandpaper swallow.
+**NASA Mission:** 1.30 -- Ranger 5 (October 18, 1962. Missed Moon by 725 km. Solar panel deployment anomaly cut power during transit. Fifth Ranger failure in a row. Closest approach yet. Convergence tightens. Block II Ranger production frozen pending redesign after this flight.)
 **Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
-**Engine Position:** Thirtieth paired release. Degree 29 = the rough edge. The near-miss. The grit in the smooth.
+**Cluster:** Jazz/Funk (Prestige branch) + Hirundinidae quartet (fourth swallow)
+**Dedication:** The Ranger engineering discipline at JPL -- William H. Pickering's team who kept flying Rangers while Washington asked whether the program should be cancelled. Five missions, zero successes, one program that would eventually deliver Ranger 7's 4,316 images before impact in 1964.
+**Engine Position:** Thirtieth paired release. Degree 29 = the rough edge. The near-miss. The grit in the smooth. Ninth consecutive E=4 degree (longest sustained energy run in engine history). First Prestige Records artist. Fourth Hirundinidae (quartet complete for this sweep). Jazz reasserts through the Jazz/Funk compound after four pure-soul degrees.
 
 ## Summary
 
-Ranger 5 missed the Moon by 725 km — the closest any Ranger has come. The convergence tightens: orbit-stuck → 36,793 km miss → dead impact → 725 km miss. "Boogaloo Joe" Jones brings jazz back to the genre compound through guitar-driven funk. The Rough-winged Swallow introduces grit to the swallow family's liquid signature. E=4 sustained for ninth consecutive degree. Thirty releases. The engine runs.
+The thirtieth paired release and the degree where the engine records its sharpest near-miss. On October 18, 1962, Ranger 5 launched from Cape Canaveral aboard an Atlas-Agena B on a trajectory aimed at the lunar surface. At separation from the Agena upper stage, a short circuit in the spacecraft's solar panel deployment mechanism cut electrical power to the main bus. The spacecraft's 1,000-watt-hour silver-zinc battery carried the mission for approximately eight hours and forty-four minutes before exhausting. When the batteries died, Ranger 5 went dark -- no telemetry, no attitude control, no imaging capability, no ability to perform the terminal maneuver that would have aimed its television cameras at the lunar regolith and its seismograph capsule at the impact ellipse. The spacecraft continued on a ballistic trajectory and passed within 725 kilometers of the Moon's surface on October 21, 1962, then entered a heliocentric orbit where it remains today, a silent titanium-and-aluminum shell drifting between Earth and the asteroid belt, the closest any Ranger had come to its target and the fifth consecutive Ranger failure in a program that had launched its first mission in August 1961 and had not yet produced a single successful lunar encounter. The convergence was real. The convergence was slow. And the distance from 36,793 kilometers at Ranger 3 to 725 kilometers at Ranger 5 -- two orders of magnitude closer in two mission cycles -- was the measurable evidence that the program, despite public humiliation and congressional skepticism, was learning. William H. Pickering at the Jet Propulsion Laboratory kept flying. Washington kept asking whether the Ranger budget would be better spent on Apollo. The engineering teams kept debugging, test article by test article, until Ranger 7 finally delivered 4,316 television images of the Moon's surface in July 1964 before impacting the Sea of Clouds at 2.62 kilometers per second. The 725-kilometer miss at Ranger 5 was the rough edge of convergence -- close enough to see the craters at full resolution in the cameras that never turned on, too far to claim anything but a failure statistic, diagnostic of exactly the progress the program had made and the progress it still needed to make.
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+The S36 track synchronizes at the same degree with Ivan "Boogaloo Joe" Jones, a guitarist who recorded six albums for Prestige Records between 1968 and 1975 and who is the first Prestige artist in the engine's accumulating label infrastructure. Jones was born in Philadelphia in 1932 and developed his jazz-funk vocabulary in Seattle and New York club circuits during the late 1950s and early 1960s. His debut as leader, *Boogaloo Joe* (1968), and his Prestige catalog -- *Psychedelic Soul* (1969), *No Way!* (1970), *My Fire!* (1970), *Sweetback* (1971), *Snake Rhythm Rock* (1972), *Black Whip* (1973) -- document the boogaloo/jazz-funk crossover that preceded the smooth jazz of the mid-1970s and the neo-soul of the late 1990s. Boogaloo was a Latin-jazz-R&B dance style that flourished in New York's Latin-music scene from roughly 1966 to 1969, with Ray Barretto's "El Watusi," Joe Cuba's "Bang Bang," and Johnny Colon's "Boogaloo Blues" serving as the genre's anchoring records. Jones's guitar-driven interpretation, featuring Rusty Bryant on tenor saxophone, Sonny Phillips on organ, and Idris Muhammad on drums across multiple sessions, extended the boogaloo sensibility into the jazz-funk territory that Grant Green, Kenny Burrell, and Melvin Sparks were simultaneously developing on Blue Note, Prestige, and Cadet. The Jazz/Funk label at degree 29 returns jazz to the engine's genre compound after four consecutive pure-soul degrees (25-28, covering the Soul quadrant of Aretha, Otis, Sam Cooke, and the Night Owls), and the return is structurally significant: genres in the engine reappear through alloy before they reappear pure. Jazz has not vanished. It reasserts through the funk compound in the same way that Ranger 5's 725-kilometer miss reasserts the Ranger program's capability through failure. The genre thread is oscillating rather than linear, and the oscillation is part of how the engine documents the musical landscape of the mid-twentieth century American recording industry.
+
+The SPS track documents Rough-winged Swallow, *Stelgidopteryx serripennis*, the fourth consecutive Hirundinidae in the engine and the member of the swallow family that breaks the family's acoustic signature. Purple Martin (degree 26), Violet-green Swallow (degree 27), and Tree Swallow (degree 28) shared a liquid-timbre family signature: rolling, gurgling, chattering calls that integrate musically with the aerial feeding behavior and the open-sky acoustic environment that swallows occupy. The Rough-winged Swallow breaks that signature with a "rough buzzy brrit" -- a harsh, low-pitched, broadband vocalization whose spectral profile contains more noise than tone, whose acoustic character is gritty rather than liquid, whose diagnostic function in the field is precisely that it does not sound like the other swallows. The roughness is not a defect. It is an identification feature. You know the Rough-winged Swallow from the other swallows by the sandpaper quality of its call, the way you know Ranger 5 from the other Rangers by the 725-kilometer margin that separates its failure from Ranger 4's dead-impact zero-kilometer miss. The difference is the identification. The exception is the diagnostic. The fourth swallow introduces the rough edge within the liquid family, and the family signature becomes richer by admitting the exception -- the Hirundinidae cluster now contains a member whose vocalization deliberately diverges from the family norm, and future within-family analyses will operate against the backdrop of both the liquid signature and the rough exception.
+
+The swallow quartet maps onto the Ranger sequence across adjacent degrees, and the two tracks synchronize at the near-miss level. Degree 25 established the Soul quadrant and the Ranger 1 orbit-stuck failure. Degree 26 added Purple Martin and Ranger 2's second orbital failure. Degree 27 added Violet-green Swallow and Ranger 3's 36,793-kilometer lunar miss. Degree 28 added Tree Swallow and Ranger 4's dead-impact (a failure of success -- the spacecraft reached the Moon but its transmitter had died). Degree 29 adds Rough-winged Swallow and Ranger 5's 725-kilometer miss. Four swallows. Five Rangers. The swallow quartet completes the Hirundinidae family's major PNW-relevant species set. The Ranger quintet positions the program for its eventual Block III redesign and the Ranger 7 success in 1964. Both sequences progress through internal variation toward a destination that neither has yet reached. The swallows document the range of acoustic strategies available within a single passerine family at the airborne-insectivore niche. The Rangers document the range of failure modes available within a single spacecraft program at the lunar-impactor objective. Each new swallow refines the family's acoustic portrait. Each new Ranger refines the program's failure catalog. And the diagnostic value of both refinements is cumulative: the Rough-winged Swallow is comprehensible only against the liquid-family backdrop the previous three swallows established, and Ranger 5's solar-panel-deployment failure is comprehensible only against the guidance-error, timer-failure, and dead-impact failures that the previous four Rangers contributed to the catalog.
+
+The energy profile at degree 29 holds at E=4 for the ninth consecutive degree, extending a streak that began at degree 21 (Lou Rawls) and that is now the engine's longest sustained energy-level run across its entire history. The combined 8 × 9 reading -- eight on the peak-energy scale for nine consecutive degrees -- represents a deliberate choice by the S36/SPS curation to hold the engine in moderate-loud dynamics across the Soul quadrant and into the Jazz/Funk reassertion. Previous peak runs (E=3 × 7 in early degrees, E=5 × 3 at degrees 10-12) are shorter. The E=4 × 9 run is exceptional, and its persistence through the Ranger 5 near-miss is itself a structural statement: the engine does not flinch at the failure. The amplitude holds. The instruments keep playing. The birds keep singing. The rockets keep flying. The persistence is the message. And when the run finally breaks -- at degree 30 or beyond, when the engine chooses to modulate -- the break will be meaningful precisely because the E=4 plateau has been held for so long. Nine is a threshold: the engine has now spent more of its post-degree-20 lifetime at E=4 than at any other single energy level, and the streak is itself a carry-forward item for every subsequent degree that must decide whether to maintain, extend, or break it.
+
+Prestige Records joins the engine's label infrastructure at degree 29 as the seventh label in the accumulating catalog. Prior labels include Blue Note (established in the engine at degree 14 with Aaron Parks), Verve, Columbia (Patti Bown at degree 6), Impulse!, ECM (Bill Frisell at degree 1 and multiple subsequent artists), Motown (Soul quadrant at degrees 25-27), and Stax (Otis Redding at degree 26). Prestige Records was founded by Bob Weinstock in 1949 and operated as an independent jazz label from New York, producing Miles Davis's *The New Miles Davis Quintet* sessions (1955-1956), John Coltrane's early leadership dates, Eric Dolphy's *Outward Bound* (1960), and the hard bop and jazz-funk catalogs that defined its 1960s-1970s output. The label sold to Fantasy Records in 1971 and continued as a Fantasy imprint. Jones's six-album Prestige run places him in the second generation of Prestige artists, post-Coltrane and post-Dolphy, operating in the jazz-funk and soul-jazz subgenres that the label cultivated during its late independent and early Fantasy periods. The engine's label infrastructure grows by one, and the jazz-label coverage extends from the ECM-Blue Note-Verve axis to the Prestige-Cadet-Fantasy axis that documented the funk-adjacent jazz recordings of the late 1960s and early 1970s. Future degrees will likely add more Prestige artists (Grant Green, Melvin Sparks, Rusty Bryant, Sonny Phillips) and more jazz-funk artists across the other labels in the category (Lonnie Smith, Charles Earland, Jimmy McGriff), and the degree 29 Prestige entry is the seed for a cluster that will develop across subsequent degrees.
+
+The dedication at degree 29 honors the Ranger program's engineering discipline at JPL collectively rather than a single individual. William H. Pickering, Caltech physicist and director of the Jet Propulsion Laboratory from 1954 to 1976, oversaw the Ranger program through its five failures and its eventual three successes at Rangers 7, 8, and 9 in 1964-1965. Pickering's discipline was to keep flying, to keep debugging, to keep building test articles, and to refuse to cancel the program despite mounting political pressure. The Block III redesign that followed Ranger 5 removed the lunar capsule entirely and replaced it with a direct-impact camera payload, and the six television cameras that eventually rode Ranger 7 to the Sea of Clouds delivered 4,316 images at progressively finer resolution across the last seventeen minutes of the mission. The dedication therefore is not to a single launch or a single engineer but to the institutional persistence that converted five consecutive failures into a program that eventually mapped the Moon's near-side regolith at meter-scale resolution for the first time in human history. Ivan "Boogaloo Joe" Jones's Prestige catalog exhibits the same persistence: six albums across seven years, none of them commercial breakthroughs, all of them extending the boogaloo jazz-funk vocabulary into territory that the major labels would not touch. The Rough-winged Swallow's annual return to the same riverbank nesting sites across multi-year cycles exhibits the persistence at the species level. The engine documents persistence as a first-class structural value at degree 29, and the Ranger program's long-haul recovery is the canonical example.
+
+The Hirundinidae quartet at degrees 26-29 is the second four-species cluster in the engine after the Parulidae quartet at degrees 14-17 (MacGillivray's Warbler, Yellow Warbler, Common Yellowthroat, Wilson's Warbler, though the precise species sequence in that quartet varied by degree). Parulidae remains the most species-rich landbird family in North America with approximately 120 species, and the engine's four-warbler cluster sampled the family's PNW-relevant core. Hirundinidae contains roughly 90 species globally and about 8 in North America, and the engine's four-swallow cluster captures the majority of the PNW-relevant breeders. The two quartets -- warbler and swallow -- now stand as the engine's density clusters, each indicating a family where the PNW avifauna warrants extended sampling and each establishing within-family acoustic and ecological comparisons at four-species resolution. Future four-species clusters are likely (Corvidae at approximately degrees 53-54 based on the mentioned crow and raven appearances; Turdidae beginning at degree 55 with Varied Thrush; Paridae/Poecile with chickadee sampling already under way at degree 3). The quartet format has emerged as a structural device for family-level depth, and degree 29's Rough-winged Swallow completes the second instance of the device.
+
+The near-miss at 725 kilometers is the degree's central image, and the engine registers it as an acoustic metaphor for the Rough-winged Swallow's rough-buzzy-brrit call and as a structural metaphor for the jazz-funk compound's approximation of pure jazz. The 725 kilometers is not a success, but it is a measurable improvement over the 36,793-kilometer miss two Rangers earlier. The rough buzzy brrit is not liquid, but it is recognizable as swallow-family. The jazz-funk is not pure jazz, but it reasserts jazz after a four-degree absence. All three phenomena share a structural property: approximation that succeeds by being diagnostic rather than by being exact. The near-miss identifies the spacecraft by its margin. The rough timbre identifies the species by its divergence. The compound genre identifies the musician by his synthesis. None of the three claims exactness. All three claim identification. The engine at degree 29 therefore registers a new structural principle -- diagnostic approximation as a valid result -- that will inform subsequent degrees. A mission that misses its target by a measurable margin can still contribute to the program's convergence. A bird that breaks the family acoustic signature can still identify itself as family. A musician whose genre is a compound can still be primarily a jazz musician whose surface reflects funk. The rough edge is where the interesting things happen. The rough edge is how the ear learns to identify. The rough edge is what the convergence tightens toward.
+
+The thirtieth paired release therefore documents one structural commitment -- diagnostic approximation at the rough edge -- across three independent tracks, and introduces the first Prestige Records artist in the engine, the fourth consecutive Hirundinidae species, the fifth Ranger program failure, the ninth consecutive E=4 degree, the seventh labeled jazz infrastructure node, and the second four-species taxonomic quartet. Thirty degrees complete. Three hundred thirty remain. The engine runs. The grit defines. The convergence tightens at 725 kilometers. The liquid family admits its rough exception. Jazz returns through the funk compound. The curve holds.
+
+## Key Features
+
+| Metric | Part A: Ivan "Boogaloo Joe" Jones | Part B: Rough-winged Swallow |
+|--------|------------------------------------|-------------------------------|
+| Energy | E=4 (jazz-funk guitar-driven boogaloo, organ-heavy arrangements, Idris Muhammad drums, ninth consecutive E=4 degree -- engine's longest sustained energy run in history) | E=4 (rough buzzy brrit, low-frequency broadband noise profile, aerial hunting with continuous soft vocalizing, moderate volume, carries across 50-100m of river corridor) |
+| Acoustic Element | The Boogaloo Guitar (guitar-driven jazz-funk with Latin-R&B rhythmic foundation -- the engine's first documentation of guitar as primary boogaloo voice, pre-Grant Green peak and parallel to Melvin Sparks) | The Rough Brrit (broadband noise-dominant vocalization -- the engine's first diagnostic-rough-timbre species, where family identification works through divergence from signature rather than through adherence to signature) |
+| NASA Parallel | Ranger 5's 725-km miss as diagnostic approximation: Jones's jazz-funk compound approximates pure jazz the way Ranger 5 approximates a lunar impact -- both identify themselves by measurable margin rather than by exactness, both extend program capability despite not achieving the stated goal | Ranger 5's solar panel deployment anomaly as acoustic signature failure: Rough-winged Swallow breaks the liquid family signature the way Ranger 5 broke the post-Ranger-4 recovery expectation -- both produce identification through divergence, both refine the program's catalog by admitting an exception |
+| Structural Firsts | FIRST PRESTIGE RECORDS artist (seventh label in engine); FIRST boogaloo-genre documentation; FIRST artist whose nickname IS his genre; FIRST jazz-funk in S36; jazz reasserts through compound after four pure-soul degrees; 30th S36 artist total | FOURTH Hirundinidae (quartet complete); FIRST diagnostic-rough-timbre species; FIRST family-signature-exception in engine; FIRST river-bank nesting substrate in swallow family; second four-species taxonomic quartet in engine after Parulidae |
 
 ## Part A: Ivan "Boogaloo Joe" Jones -- JAZZ RETURNS THROUGH THE COMPOUND
 
-### Pass 2 Refinement Summary
-
-Ranger 5 missed the Moon by 725 km on October 18, 1962 — the closest approach of any Ranger mission so far. A solar panel failure cut power during transit and disabled the spacecraft's systems before impact. The Ranger convergence tightens: 36,793 km miss (Ranger 3) → dead impact (Ranger 4) → 725 km miss (Ranger 5). The distance to the target shrinks. The failure modes diversify — guidance error, timer failure, power failure — each different, each costing the mission. Every Ranger learns from the previous one's failure, but each also discovers a new way to fail. The convergence is real but slow.
-
-Ivan "Boogaloo Joe" Jones recorded for Prestige Records in the late 1960s and 1970s — the first Prestige artist in the engine and the first artist whose nickname IS his genre. "Boogaloo" was a dance and music style that fused jazz, R&B, and Latin rhythms in the late 1960s, and Jones's guitar-driven jazz-funk captured on Prestige albums like *No Way!* (1970) and *Sweetback* (1971) is the engine's first documentation of the boogaloo/jazz-funk crossover that preceded the smooth jazz and neo-soul movements appearing at later degrees.
-
-The Jazz/Funk label at degree 29 returns jazz to the genre compound after four consecutive pure-soul degrees (25-28). The genre oscillation reads: Jazz (0-15) → Jazz compounds (16-24) → Soul (25-28) → Jazz/Funk (29). Jazz hasn't disappeared from the engine. It reasserts through the funk compound — the same way Ranger 5's 725 km near-miss reasserts the program's capability even through failure. The genre thread is not linear. It oscillates.
-
-### Retrospective: Degree 29 Patterns Established
-
-1. **Jazz reasserts through compound.** After four pure-soul degrees, jazz returns not as a standalone label but bonded to funk. Genres in the engine reappear through alloy before they reappear pure.
-
-2. **Prestige Records joins the label map.** The seventh label in the engine's accumulating infrastructure layer — first Prestige artist, extending the jazz-label coverage.
-
-3. **A nickname IS a genre.** "Boogaloo Joe" encodes his style in his handle. The engine documents its first artist whose identifier is a direct pointer to the sound.
-
-4. **Convergence tightens at 725 km.** From 36,793 km (Ranger 3) to 725 km (Ranger 5) — two orders of magnitude closer in two Ranger cycles. The program is measurably improving even without a single success.
-
-5. **Failure-mode diversification.** Guidance error → timer failure → power failure. Each Ranger fails differently. The failure catalog grows wider with each mission, which is itself a form of progress — you only discover these modes by solving the previous ones.
-
-6. **The boogaloo crossover enters the timeline.** Pre-smooth-jazz, pre-neo-soul, this is the jazz-funk ancestor of later CD developments. The archaeological dig now reaches back into the late 1960s jazz-adjacent territory.
+- **Philadelphia origins and early New York scene (1932-1960s).** Ivan "Boogaloo Joe" Jones was born in Philadelphia on December 4, 1932, and began playing guitar professionally in the Philadelphia and New York jazz-R&B club circuits during the mid-1950s. The engine's thirtieth artist and the first Philadelphia-born S36 entry after a sequence dominated by Seattle, Chicago, Detroit, and Los Angeles origins. Jones developed his vocabulary in the small-group organ-trio and quintet format that defined the Philadelphia and New York soul-jazz scene -- guitar-organ-drums combos featuring musicians like Jimmy Smith, Jack McDuff, Shirley Scott, and Jimmy McGriff -- and the boogaloo sensibility that his Prestige catalog would later crystallize was present in his playing from the late 1950s onward, years before the boogaloo dance-music crossover hit mainstream Latin and R&B audiences in 1966-1969.
+- **The Prestige Records contract (1968-1975).** Jones signed with Prestige Records in 1968 and released six albums as leader across seven years: *Boogaloo Joe* (1968), *Psychedelic Soul* (1969), *No Way!* (1970), *My Fire!* (1970), *Sweetback* (1971), *Snake Rhythm Rock* (1972), and *Black Whip* (1973). Prestige was an independent New York jazz label founded by Bob Weinstock in 1949 with a catalog that included Miles Davis's first-quintet sessions, John Coltrane's early Prestige recordings, Eric Dolphy's *Outward Bound*, and the hard-bop and soul-jazz catalogs that the label cultivated through the 1960s. Jones's six-album run positions him as the engine's first Prestige artist and establishes the label as the seventh named infrastructure node in the accumulating S36 catalog. The Prestige contract also placed Jones in the label's late-independent and early-Fantasy periods, a transition that affected distribution and marketing of his records.
+- **The boogaloo jazz-funk crossover and the nickname-as-genre.** "Boogaloo Joe" is the engine's first documented artist whose stage nickname is a direct pointer to his musical genre. Boogaloo as a dance-music style flourished in New York's Latin scene from roughly 1966 to 1969 with Ray Barretto's "El Watusi," Joe Cuba's "Bang Bang," Johnny Colon's "Boogaloo Blues," and Pete Rodriguez's "I Like It Like That" serving as anchoring records. Jones's adoption of the boogaloo tag positioned his jazz-funk guitar work in dialogue with the Latin-boogaloo craze, and his records functioned as a jazz-instrumental counterpart to the Latin-dance-vocal boogaloo that dominated the crossover clubs. The nickname-as-genre convention is structurally unusual -- most artists carry nicknames that reference personal traits or performance characteristics ("Dizzy" Gillespie for rapid speech, "Cannonball" Adderley for appetite) rather than genre affiliations -- and Jones's "Boogaloo" tag therefore documents a stylistic commitment embedded in the artist's identity.
+- **Collaborator network: Rusty Bryant, Sonny Phillips, Idris Muhammad.** Jones's Prestige sessions featured a consistent collaborator network that defines the records' instrumental sound. Rusty Bryant, the Columbus, Ohio tenor saxophonist whose own Prestige catalog overlaps Jones's, appears on multiple dates and contributes the blues-inflected R&B tenor voice that anchors the horn sections. Sonny Phillips, the Mobile-born organist who played on Houston Person and Lou Donaldson dates throughout the period, provides the Hammond B-3 foundation that ties Jones's boogaloo guitar to the soul-jazz organ-trio tradition. Idris Muhammad, the New Orleans drummer whose career stretched from Fats Domino's 1950s sessions through Roberta Flack, the Fania All-Stars, and Pharoah Sanders's ECM period, supplies the funk-drumming pocket that makes the boogaloo rhythm legible. The three collaborators' presence on Jones's records documents the tight core of the late-1960s soul-jazz/jazz-funk New York session scene.
+- **Guitar technique and the amplifier voicing.** Jones's guitar tone across the Prestige catalog prioritizes a clean-to-slightly-compressed signal chain with emphasis on finger-picking syncopation and chord-melody voicings drawn from the Wes Montgomery and Grant Green lineages. His single-note lines favor pentatonic-blues figures and octave-doubled passages in the Montgomery tradition, and his rhythm guitar work foregrounds chord inversions and double-stop voicings that fill the harmonic space between Phillips's organ and Bryant's saxophone. The amplifier voicing across his Prestige records suggests a Fender Twin Reverb or similar clean-tube platform with minimal effects chain, producing a round, warm tone that contrasts with the more distorted and effects-laden guitar work that would define the fusion era after 1971.
+- **Jazz/Funk as genre-compound return after four soul degrees.** Degree 29's Jazz/Funk label returns jazz to the engine's genre catalog after four consecutive pure-soul degrees (25 Lou Rawls, 26 Aretha Franklin, 27 Otis Redding, 28 Night Owls). The Soul quadrant spanned degrees 25-28 as a deliberate structural block, and degree 29 breaks that block not by returning to pure jazz but by returning through the funk compound. The engine therefore documents genre oscillation as a non-linear process: genres disappear, reappear as compounds, and only later reappear as pure categories. The Jazz/Funk label at degree 29 is a bridge label -- it carries jazz forward through the funk-soul energy that the Soul quadrant established and into the pure jazz that subsequent degrees (likely 30+) may restore.
+- **The post-Coltrane Prestige era and the jazz-funk cohort.** Jones's Prestige tenure places him in the label's post-Coltrane era, a period when Prestige operated as a specialist soul-jazz and jazz-funk imprint under the Weinstock ownership and later as a Fantasy subsidiary. His cohort included Houston Person, Charles Earland, Johnny Hammond Smith, Sonny Phillips, Rusty Bryant, Jimmy McGriff, and Lonnie Smith -- artists whose Prestige and Fantasy catalogs documented the jazz-funk organ-group aesthetic across the late 1960s and early 1970s. The engine's degree 29 entry for Jones therefore indexes into a broader cohort that future degrees will likely expand, and the Prestige-Fantasy jazz-funk cluster will grow across subsequent paired releases.
+- **Influence propagation: pre-smooth-jazz, pre-neo-soul.** Jones's jazz-funk aesthetic preceded the smooth-jazz movement that emerged in the mid-1970s (George Benson's *Breezin'* in 1976 is a canonical inflection) and the neo-soul movement that emerged in the late 1990s (D'Angelo's *Brown Sugar* in 1995, Erykah Badu's *Baduizm* in 1997). Both later movements drew on the late-1960s soul-jazz vocabulary that Jones's Prestige catalog documented, and Jones's records therefore function as a chronological seed for the subsequent smooth-jazz and neo-soul developments. The engine's archaeological-dig framing registers this relationship: each degree's artist is a data point in a longer historical arc, and Jones at degree 29 anchors the pre-1971 jazz-funk period that fed the smooth-jazz and neo-soul successors.
 
 ---
 
 ## Part B: Rough-winged Swallow -- GRIT IN THE LIQUID FAMILY
 
-### Pass 2 Refinement Summary
+- **Species identity and the Audubon 1838 type description.** *Stelgidopteryx serripennis*. Hirundinidae, the swallow family. John James Audubon described the species in 1838 from a type specimen collected in Mexico, and the generic name *Stelgidopteryx* (from Greek *stelgis*, scraper, and *pteryx*, wing) references the serrated leading edge of the male's outermost primary feather -- a saw-tooth pattern of barb hooks whose function remains debated (possibly courtship display, possibly aerodynamic, possibly vestigial). The specific name *serripennis* ("saw-feathered") references the same trait. The engine's fourth consecutive Hirundinidae and the species whose taxonomic name itself documents the rough-edged morphology that parallels the rough-edged vocalization.
+- **Rough buzzy brrit: the family-signature exception.** The Rough-winged Swallow's call is a rough buzzy brrit -- a harsh, low-frequency, broadband vocalization that contrasts with the liquid, gurgling, chattering calls of Purple Martin (degree 26), Violet-green Swallow (degree 27), and Tree Swallow (degree 28). The spectral profile of the brrit contains more noise than tone, with energy distributed across 2-6 kilohertz rather than concentrated in discrete harmonic peaks, and the vocal texture is gritty rather than smooth. The call is the engine's first documentation of a species whose acoustic signature deliberately diverges from its family's signature while still functioning within the family -- the roughness does not exclude the bird from Hirundinidae, it identifies the specific Hirundinidae member by divergence from the family norm.
+- **River-bank nesting substrate and the fourth Hirundinidae habitat.** The Rough-winged Swallow nests in cavities in eroded riverbanks, road-cut embankments, culvert abutments, and other exposed earth faces with suitable burrow dimensions. The nest is a shallow cup at the end of a burrow approximately 15-90 centimeters deep, excavated by the birds themselves or occupying pre-existing mammal or bird burrows. This is the fourth and final nesting-substrate type in the Hirundinidae quartet: Purple Martin (colony boxes), Violet-green Swallow (forest-edge cavities and cliffs), Tree Swallow (tree cavities), Rough-winged Swallow (river banks). The quartet therefore covers the full range of Hirundinidae nesting strategies available in PNW habitats, and the engine's Hirundinidae ecological catalog is now complete for substrate type.
+- **Aerial insectivore niche and foraging behavior.** The Rough-winged Swallow forages on wing over water, open fields, and forest clearings, capturing flying insects from the lower strata of the aerial insectivore niche (typically 5-20 meters above ground), below the Purple Martin's higher strata (30-50 meters) and above the Tree Swallow's water-surface strata (0-5 meters). The stratification within the Hirundinidae quartet reduces inter-species competition for aerial prey and allows all four species to coexist along the same river corridor during the breeding season. The niche partitioning is a textbook example of vertical stratification within a single functional guild.
+- **Neotropical migrant with Central American wintering range.** The Rough-winged Swallow winters in Central America and Mexico and breeds across North America from southern Canada to the U.S.-Mexico border. The species is a short-to-medium-distance migrant with arrival in the PNW in late April and departure in late August or early September. The migration timing aligns with the other Hirundinidae migrants in the quartet, and the species contributes to the engine's growing catalog of neotropical migrants (Pacific-slope Flycatcher at degree 6, MacGillivray's Warbler at degree 14, and now the swallow quartet at 26-29).
+- **Sexual dimorphism and the serrated primary feather.** Male Rough-winged Swallows carry a diagnostic saw-toothed leading edge on the outermost primary feather (P10), a row of recurved barb hooks that produce a tactile "rough" sensation when the feather is stroked from tip to base. Females lack the serration. The function of the barb hooks remains debated: courtship display (though the feature is not visually prominent), aerodynamic noise reduction during display flight, or evolutionary vestige from a common ancestor. The morphological roughness parallels the acoustic roughness of the call -- the species is named for a rough feather and sings a rough song, and the two roughnesses co-define the bird.
+- **The grit-is-diagnostic principle.** The Rough-winged Swallow's rough vocalization functions as its primary field-identification feature. In mixed swallow flocks over rivers and open water, where visual identification is difficult because all four Hirundinidae members fly similar patterns and share similar silhouettes, the rough buzzy brrit instantly identifies the Rough-winged. The principle generalizes: within a family where members share a dominant acoustic signature, the exception that breaks the signature is the easiest member to identify. The grit is diagnostic. The exception is the identifier. The roughness marks the species.
+- **Conservation status and population stability.** The Rough-winged Swallow is categorized as Least Concern by the IUCN and by most national conservation assessments, with North American breeding populations estimated at 10-15 million individuals and showing stable or slightly increasing trends across recent Breeding Bird Survey data. The species's adaptability to human-modified substrates (culverts, road cuts, gravel pits) allows it to maintain nesting population density even where natural riverbank erosion has been reduced by channelization. The stability contrasts with the declines observed in some other aerial insectivores (Barn Swallow, Purple Martin locally) and positions the Rough-winged as the most resilient of the Hirundinidae quartet under contemporary anthropogenic conditions.
 
-The Rough-winged Swallow is the fourth consecutive Hirundinidae — extending the swallow triptych into a quartet. Purple Martin (26, heavy liquid), Violet-green Swallow (27, light liquid chips), Tree Swallow (28, liquid twittering gurgle), and now Rough-winged Swallow (29, "rough buzzy brrit"). The first three swallows shared the liquid-timbre family signature. The Rough-winged breaks it. The "rough buzzy brrit" is not liquid but gritty — a harsh, low-pitched, broadband vocalization that contrasts with the family's smooth aerial song. The fourth swallow introduces the rough edge within the liquid family.
+---
 
-Ranger 5's near-miss at 725 km is the rough edge of convergence. Close enough to see the target. Not close enough to hit it. The Rough-winged Swallow's rough timbre is the acoustic near-miss: almost the liquid family sound, but with a grit that distinguishes it. The roughness is diagnostic — you know the Rough-winged from the other swallows by the sandpaper quality of its call, the way you know Ranger 5 from the other Rangers by the 725 km margin. The difference IS the identification.
+<details>
+<summary>Full Research Appendix -- Click to expand</summary>
 
-The swallow quartet (degrees 26-29) maps onto the Ranger quartet (degrees 25-28 and 30): four species, four missions, parallel clusters. The swallows document the Hirundinidae family's acoustic range. The Rangers document the program's convergence toward the Moon. Both sequences progress through internal variation toward a destination that neither has yet reached.
+### Pass 2 Refinement Summary (Part A)
 
-E=4 for ninth consecutive degree (21-29). Combined 8 × 9. The peak shows no sign of modulating.
+**1. Genre Oscillation Through Compound.** After four pure-soul degrees (25-28), jazz returns at degree 29 not as a standalone label but bonded to funk. The engine documents genre oscillation as a non-linear process: genres disappear, reappear as compounds, reappear pure. The Jazz/Funk label is a bridge.
 
-### Retrospective: Degree 29 Lessons Learned
+**2. Prestige Records as Seventh Label.** Bob Weinstock's independent New York jazz label joins Blue Note, Verve, Columbia, Impulse!, ECM, and Motown in the engine's accumulating infrastructure. Jones's six-album Prestige run (1968-1975) occupies the label's late-independent/early-Fantasy transition.
 
-1. **A family signature admits exceptions.** Three swallows established liquid timbre; the fourth breaks it. The signature is real but not absolute — within-family variation is part of what family means.
+**3. The Nickname-As-Genre Convention.** "Boogaloo Joe" is the engine's first documented artist whose stage handle is a direct pointer to his musical genre. The convention is structurally unusual and documents a stylistic commitment embedded in the artist identity.
 
-2. **Grit is diagnostic.** The Rough-winged's rough buzzy brrit is the way you identify it in the field. The exception to the signature becomes the ID marker.
+**4. Influence Arc: Pre-Smooth-Jazz, Pre-Neo-Soul.** Jones's late-1960s jazz-funk vocabulary fed the smooth-jazz movement (George Benson, 1976) and the neo-soul movement (D'Angelo 1995, Erykah Badu 1997). Degree 29 anchors the pre-1971 seed for both later developments.
 
-3. **The triptych extends into a quartet.** Hirundinidae joins Parulidae as a four-species cluster. The swallow family is now the second-largest cluster in the engine.
+### Pass 2 Refinement Summary (Part B)
 
-4. **Near-miss at 725 km is an acoustic metaphor.** Ranger 5's margin maps onto the Rough-winged's rough edge — close to the target/family but distinguishable by residual difference.
+**1. Family-Signature Exception at Fourth Hirundinidae.** Three swallows established the liquid family signature; the fourth breaks it with a rough buzzy brrit. The exception is diagnostic -- the bird is identified by divergence from the family norm rather than by adherence to it.
 
-5. **The river-bank habitat adds a new nesting substrate.** Martin (colony boxes), Violet-green (forest edge), Tree Swallow (cavities), Rough-winged (river banks). The quartet covers the full range of Hirundinidae nesting strategies.
+**2. Quartet Complete: Hirundinidae Nesting Catalog.** Martin (colony boxes), Violet-green (forest-edge cavities), Tree Swallow (tree cavities), Rough-winged (river banks). The four nesting substrates cover the full range of Hirundinidae strategies in PNW habitats.
 
-6. **E=4 holds through the ninth consecutive degree.** Nine is a threshold: the engine has now spent more time at E=4 than at any other single energy level across its history.
+**3. Morphological Roughness Parallels Acoustic Roughness.** The species name *Stelgidopteryx serripennis* ("saw-winged saw-feathered") references the male's serrated primary feather. The bird is named rough and sings rough; the two roughnesses co-define the species.
+
+**4. Aerial Niche Stratification.** The Hirundinidae quartet partitions the aerial insectivore niche by vertical strata: Tree Swallow 0-5m, Rough-winged 5-20m, Violet-green 10-30m, Purple Martin 30-50m. Niche partitioning allows coexistence along shared river corridors.
 
 ### Carry-Forward Items from Degree 29
 
-- **Ranger program:** 5 missions, 5 failures. Closest approach yet at 725 km. Failure-mode catalog still diversifying.
-- **Swallow quartet:** Rough edge added to liquid signature. Hirundinidae now a 4-species cluster.
-- **Jazz return:** Through the Jazz/Funk compound; pure jazz still absent since degree 24.
-- **Prestige Records:** First appearance; label infrastructure layer grows.
-- **E=4 streak:** Ninth consecutive degree (21-29). Combined 8 × 9.
+- **Ranger program: 5 missions, 5 failures.** Closest approach 725 km. Failure-mode catalog: guidance error (Ranger 3) / timer failure (Ranger 4) / solar panel deployment anomaly (Ranger 5). Block II production frozen; Block III redesign underway. Ranger 6 next.
+- **Swallow quartet complete.** Hirundinidae now a 4-species cluster. Rough-winged adds the signature exception. Family catalog closed for this sweep.
+- **Jazz returns through Jazz/Funk compound.** Pure jazz still absent since degree 24. Track when pure jazz reappears vs when it continues through compound.
+- **Prestige Records joins label map.** Seventh label. Future Prestige artists (Grant Green, Melvin Sparks, Houston Person, Rusty Bryant, Sonny Phillips) likely entries.
+- **E=4 streak at ninth consecutive degree.** Combined 8 × 9. Longest sustained energy run in engine history. Track when the streak breaks.
+- **Second four-species taxonomic quartet.** Parulidae (14-17) and Hirundinidae (26-29) now stand as the engine's density clusters.
+- **Diagnostic-approximation principle registered.** Near-miss identifies by margin (Ranger 5 at 725 km), rough timbre identifies by divergence (Rough-winged brrit), compound genre identifies by synthesis (Jazz/Funk). Three tracks, one principle.
 
 </details>
+
+## Retrospective
+
+### What Worked
+
+- **The rough-edge theme carried all three tracks cleanly.** Ranger 5 (725-km near-miss), Rough-winged Swallow (rough buzzy brrit), and Ivan "Boogaloo Joe" Jones (jazz reasserted through funk compound) each independently perform the diagnostic-approximation operation. Three tracks, one structural commitment, no forced alignment. The paired-engine method documented diagnostic approximation as a first-class structural principle without requiring any track to misrepresent its subject.
+- **The Hirundinidae quartet closed with a meaningful exception.** The fourth swallow could have simply continued the liquid-signature trend established by Purple Martin, Violet-green, and Tree Swallow. Instead, the Rough-winged broke the signature. The quartet therefore closes with diagnostic richness rather than signature uniformity, and the Hirundinidae family catalog gains both the norm and the exception at a single four-degree sweep.
+- **The Prestige Records entry seeded a broad jazz-funk cohort.** Ivan "Boogaloo Joe" Jones is the first Prestige artist in the engine, and his collaborator network (Rusty Bryant, Sonny Phillips, Idris Muhammad) indexes into the broader late-1960s soul-jazz/jazz-funk cluster that future degrees will expand. The label entry is not an isolated data point; it is a seed for subsequent growth.
+- **E=4 held through the ninth consecutive degree despite the near-miss narrative.** The engine could have modulated energy to match the Ranger 5 failure's downbeat tone. Instead, E=4 held. The persistence of the energy level through the narrative of failure registered persistence as a structural value, and the choice not to modulate is itself diagnostic.
+
+### What Could Be Better
+
+- **The Ranger Block III redesign documentation was thinner than the dedication warrants.** The carry-forward notes the Block III redesign began after Ranger 5, but the specific engineering changes (lunar capsule removed, direct-impact camera payload added, redundant systems increased) are only gestured at. A release that dedicates itself to JPL engineering discipline should document the specific technical decisions that constituted the discipline. Future Ranger degrees (6, 7, 8, 9) should expand this technical thread.
+- **The Boogaloo Latin-music connection stayed at naming-convention level.** The boogaloo dance-music crossover of 1966-1969 featured Ray Barretto, Joe Cuba, Johnny Colon, and Pete Rodriguez as primary vocalists in the Latin-vocal boogaloo tradition. Jones's jazz-instrumental boogaloo is the jazz-side parallel, but the release did not document the dialogue between the Latin-vocal and jazz-instrumental boogaloo scenes. A future Latin-jazz entry (possibly Eddie Palmieri, Ray Barretto himself, or Tito Puente) could close this gap.
+- **The serrated-primary-feather biology remained speculative.** The male Rough-winged Swallow's saw-toothed P10 primary feather is a real morphological feature, but the functional interpretation (courtship, aerodynamic, vestigial) is debated and the release did not weigh the competing hypotheses. A future morphology-focused degree could return to the feature with a proper functional-morphology literature review.
+
+## Lessons Learned
+
+1. **Jazz reasserts through compound before it reasserts pure.** After four pure-soul degrees (25-28), jazz returns at degree 29 not as a standalone label but bonded to funk. The engine documents genre oscillation as non-linear: genres disappear, reappear as compounds, and only later reappear pure. The Jazz/Funk label is the bridge, and the compound-before-pure pattern is now a first-class engine principle.
+
+2. **A family signature admits diagnostic exceptions.** Three swallows established liquid timbre as the Hirundinidae signature. The fourth -- Rough-winged -- broke the signature with a rough buzzy brrit. The exception is not a failure of the signature; it is the signature's diagnostic richness. Within-family variation is part of what family means, and the exception member is often the easiest to identify.
+
+3. **Near-miss at 725 km is measurable progress.** From Ranger 3's 36,793 km to Ranger 5's 725 km is two orders of magnitude of convergence in two mission cycles. The program is improving even without a single success. Diagnostic approximation -- identification by measurable margin rather than by achievement of the target -- is a valid result category for the engine.
+
+4. **Failure-mode diversification is a form of progress.** Ranger 3 (guidance error), Ranger 4 (timer failure), Ranger 5 (solar panel deployment anomaly). Each Ranger fails differently. The failure catalog grows wider with each mission, and the growth is itself progress -- you only discover these modes by solving the previous ones. The catalog of known failures is the program's accumulating expertise.
+
+5. **Prestige Records joins the label infrastructure as the seventh node.** Blue Note, Verve, Columbia, Impulse!, ECM, Motown, and now Prestige. The engine's label catalog grows by one, and the jazz-label coverage extends from the Blue Note-ECM-Verve axis to the Prestige-Cadet-Fantasy axis. Future Prestige artists (Grant Green, Melvin Sparks, Houston Person, Rusty Bryant, Sonny Phillips) are seeded as likely entries.
+
+6. **The nickname-as-genre convention is structurally unusual and documents stylistic commitment.** "Boogaloo Joe" is the engine's first documented artist whose stage handle is a direct pointer to his musical genre. Most nicknames reference personal traits ("Dizzy," "Cannonball") rather than genre affiliations. The convention documents a stylistic commitment embedded in the artist identity, and the engine now has a category for nickname-as-genre artists.
+
+7. **The Hirundinidae quartet completes the family's nesting-substrate catalog in four degrees.** Purple Martin (colony boxes), Violet-green (forest-edge cavities), Tree Swallow (tree cavities), Rough-winged (river banks). Four swallows, four substrates, full PNW coverage at the family level. The quartet format emerges as a structural device for family-level depth, and the Hirundinidae quartet is the second instance after Parulidae (14-17).
+
+8. **E=4 at nine consecutive degrees establishes sustained-energy as a structural value.** Degrees 21-29 all ship at E=4, combined 8 × 9. The engine has now spent more post-degree-20 lifetime at E=4 than at any other energy level. The persistence of the plateau through the Ranger 5 near-miss -- where modulation would have been thematically obvious -- registers persistence itself as a meaningful engine statement.
+
+9. **Diagnostic approximation applies across domains.** A mission that misses its target by a measurable margin can still contribute to convergence. A bird that breaks the family acoustic signature can still identify itself as family. A musician whose genre is a compound can still be primarily a jazz musician whose surface reflects funk. The rough edge is where identification happens, and the principle is transferable across the NASA, SPS, and S36 tracks.
+
+10. **The archaeological dig reaches the late-1960s jazz-adjacent territory.** Jones's pre-1971 Prestige catalog predates the smooth-jazz movement (George Benson, 1976) and the neo-soul movement (D'Angelo, 1995; Erykah Badu, 1997). The engine now documents the structural seed for both later developments, and the late-1960s jazz-funk cohort is open for subsequent entries.
+
+## Cross-References
+
+| Thread | Degree 29 Entity | Role |
+|--------|------------------|------|
+| S36 | Ivan "Boogaloo Joe" Jones | Artist -- 30th in engine, first Prestige Records, first boogaloo, jazz returns through Jazz/Funk compound |
+| SPS | Rough-winged Swallow (*Stelgidopteryx serripennis*) | Species -- fourth Hirundinidae, first family-signature exception, first river-bank substrate |
+| NASA | Ranger 5 | Mission -- fifth Ranger failure, 725 km miss, solar panel anomaly, closest approach yet |
+| Dedication | JPL Ranger engineering discipline (Pickering-era) | William H. Pickering at Jet Propulsion Laboratory 1954-1976; kept flying through 5 failures to 3 successes (Rangers 7/8/9) |
+| Degree 27 -> 29 | Ranger 3 -> Ranger 5 | 36,793 km -> 725 km convergence over two Ranger cycles; 2 orders of magnitude closer |
+| Degree 26 -> 27 -> 28 -> 29 | Martin -> Violet-green -> Tree Swallow -> Rough-winged | Hirundinidae quartet -- liquid signature established then broken at fourth member |
+| Degree 24 -> 29 | Last pure jazz -> Jazz/Funk compound | Jazz reasserts through alloy after four-degree absence |
+| Degree 14-17 -> 26-29 | Parulidae quartet -> Hirundinidae quartet | Two four-species family clusters documented; quartet as structural device |
+| Degree 28 -> 29 | Night Owls -> Jones | Soul quadrant yields to jazz compound; genre oscillation resumes |
+| Ranger Program | Rangers 1 through 5 | Five missions, zero successes, but measurable convergence; Block III redesign underway after Ranger 5 |
+| Prestige Records Cohort | Jones + (future) Grant Green, Melvin Sparks, Houston Person | Seventh label, jazz-funk cluster seeded |
+| Boogaloo Latin Cohort | Jones + (future) Ray Barretto, Joe Cuba, Johnny Colon, Pete Rodriguez | Jazz-instrumental side of 1966-1969 Latin-boogaloo crossover |
+| Smooth-Jazz Lineage | Jones (1968-1975) -> George Benson *Breezin'* (1976) | Pre-smooth-jazz seed; late-1960s jazz-funk precedes mid-1970s smooth-jazz movement |
+| Neo-Soul Lineage | Jones (1968-1975) -> D'Angelo (1995) -> Erykah Badu (1997) | Pre-neo-soul seed; late-1960s jazz-funk precedes late-1990s neo-soul movement |
+| E=4 Streak | Degrees 21-29 (nine consecutive) | Longest sustained energy run in engine history; combined 8 × 9 |
+| Aerial Niche Stratification | Tree Swallow 0-5m / Rough-winged 5-20m / Violet-green 10-30m / Purple Martin 30-50m | Niche partitioning allows Hirundinidae coexistence along shared river corridors |
+| Ranger Failure Catalog | Guidance (R3) / timer (R4) / solar panel (R5) | Three distinct failure modes across three missions; catalog still expanding |
 
 ## Emerging Patterns at Degree 29
 
@@ -83,43 +167,84 @@ E=4 for ninth consecutive degree (21-29). Combined 8 × 9. The peak shows no sig
 |---------|--------|-----------------|
 | S36 Artists | 30 documented (degrees 0-29) | Ivan "Boogaloo Joe" Jones -- Jazz/Funk, Prestige Records, guitar-driven boogaloo |
 | SPS Species | 30 documented (degrees 0-29) | Rough-winged Swallow -- fourth Hirundinidae, rough buzzy brrit, river bank |
-| NASA Missions | 30 aligned (1.0-1.30) | Ranger 5 -- closest approach yet (725 km), solar panel failure |
-| Ranger Program | 5 consecutive failures | Convergence tightens from 36,793 km to 725 km in two cycles |
-| Energy Profile | E=4 × 9 consecutive | Degrees 21-29 -- longest sustained maximum in engine history |
-| Hirundinidae Quartet | Extended from triptych | Martin 26 → Violet-green 27 → Tree Swallow 28 → Rough-winged 29 |
+| NASA Missions | 30 aligned (1.0-1.30) | Ranger 5 -- closest approach yet (725 km), solar panel deployment anomaly |
+| Ranger Program | 5 consecutive failures | Convergence 36,793 km -> 725 km in two cycles; Block III redesign triggered |
+| Energy Profile | E=4 x 9 consecutive | Degrees 21-29 -- longest sustained maximum in engine history |
+| Hirundinidae Quartet | Complete (4 species) | Martin 26 -> Violet-green 27 -> Tree Swallow 28 -> Rough-winged 29 |
 | Family Signature Variance | First documented exception | Rough timbre breaks liquid signature; variance as ID marker |
 | Genre Compound Return | Jazz/Funk | Jazz reasserts through alloy after four pure-soul degrees |
 | Label Infrastructure | 7 labels mapped | +Prestige Records (first appearance) |
-| Failure-Mode Catalog | 3 distinct modes | Guidance / timer / power — each Ranger fails differently |
+| Failure-Mode Catalog | 3 distinct modes | Guidance / timer / solar panel -- each Ranger fails differently |
 | Nesting Strategy Range | Complete for Hirundinidae | Colony / forest-edge / cavity / river-bank |
 | Near-Miss Motif | Quantified | 725 km = the rough edge of convergence |
+| Four-Species Taxonomic Quartets | 2 documented | Parulidae (14-17) + Hirundinidae (26-29) |
+| Nickname-as-Genre Convention | 1 documented | "Boogaloo Joe" as genre-embedded stage name |
 
-## Cross-References
+## Acoustic Progression at Degree 29
 
-| Thread | Degree 29 Entity | Role |
-|--------|-----------------|------|
-| S36 | Ivan "Boogaloo Joe" Jones | Artist -- jazz returns through funk compound, Prestige Records first |
-| SPS | Rough-winged Swallow | Species -- fourth Hirundinidae, breaks liquid signature with grit |
-| NASA | Ranger 5 | Mission -- closest approach yet at 725 km, solar panel failure |
-| Degree 27→29 | Ranger 3 → Ranger 5 | 36,793 km → 725 km convergence over two cycles |
-| Degree 26→27→28→29 | Martin → Violet-green → Tree Swallow → Rough-winged | Swallow triptych extends into quartet |
-| Degree 24→29 | Last pure jazz → Jazz/Funk | Jazz reasserts through compound after four-degree absence |
-| Degree 14-17 → 26-29 | Parulidae quartet → Hirundinidae quartet | Two four-species clusters now tracked |
-| Degree 28→29 | Night Owls → Jones | Soul quadrant yields to jazz compound — genre oscillation resumes |
+| Strategy | Species | Degree | Description |
+|----------|---------|--------|-------------|
+| Liquid Chatter | Purple Martin | 26 | Heavy liquid gurgle, high-canopy colony calls |
+| Liquid Chips | Violet-green Swallow | 27 | Light liquid chips, forest-edge twitter |
+| Liquid Twitter | Tree Swallow | 28 | Liquid gurgling twittering, cavity nesters |
+| **Rough Brrit** | **Rough-winged Swallow** | **29** | **Broadband noise-dominant; family-signature exception; diagnostic by divergence** |
+
+## NASA Ranger Program Arc at Degree 29
+
+| Mission | Degree | Date | Result | Failure Mode |
+|---------|--------|------|--------|--------------|
+| Ranger 1 | 25 | Aug 23 1961 | Stuck in Earth parking orbit | Agena restart failure |
+| Ranger 2 | 26 | Nov 18 1961 | Stuck in Earth parking orbit | Agena restart failure (repeat) |
+| Ranger 3 | 27 | Jan 26 1962 | Missed Moon by 36,793 km | Guidance error at midcourse |
+| Ranger 4 | 28 | Apr 23 1962 | Impacted Moon (silent) | Timer failure; no data returned |
+| Ranger 5 | **29** | **Oct 18 1962** | **Missed Moon by 725 km** | **Solar panel deployment anomaly** |
+| Ranger 6 | ~30-32 | Jan 30 1964 | Impacted Moon (TV silent) | Camera high-voltage short |
+| Ranger 7 | ~33-35 | Jul 28 1964 | 4,316 images before impact | First Ranger success |
+
+## Engine Position
+
+```
+v1.49.501-509 = degrees 0-8    Pass 2  (opening nonad)
+v1.49.510-520 = degrees 9-19   Pass 2  (first teen arc)
+v1.49.521-525 = degrees 20-24  Pass 2  (Soul setup)
+v1.49.526-529 = degrees 25-28  Pass 2  (Soul quadrant)
+v1.49.530     = degree 29      Pass 2  <- THIS RELEASE (THE ROUGH EDGE)
+v1.49.531     = degree 30      Pass 2  <- next (post-Soul, post-Hirundinidae)
+```
 
 ## Cumulative Engine Statistics (v1.49.501-530)
 
 | Metric | Value |
 |--------|-------|
 | Paired releases completed | 30 (degrees 0-29) |
-| Ranger program | 5 consecutive failures; closest approach 725 km |
-| Hirundinidae species | 4 (Martin, Violet-green, Tree Swallow, Rough-winged); quartet |
+| S36 artists documented | 30 |
+| SPS species documented | 30 |
+| NASA missions aligned | 30 (1.0-1.30) |
+| Ranger program | 5 consecutive failures; closest approach 725 km; Block III redesign underway |
+| Hirundinidae species | 4 (Martin, Violet-green, Tree Swallow, Rough-winged); quartet complete |
 | Consecutive E=4 degrees | 9 (21-29); engine's longest sustained energy run |
 | Soul quadrant (consecutive) | 4 (25-28); broken at 29 by Jazz/Funk return |
-| Labels mapped | 7 (+Prestige Records) |
-| Ranger failure modes | 3 (guidance, timer, power); catalog still expanding |
+| Labels mapped | 7 (+Prestige Records at degree 29) |
+| Ranger failure modes | 3 (guidance, timer, solar panel); catalog still expanding |
 | Taxonomic families | 16 |
+| Four-species taxonomic quartets | 2 (Parulidae 14-17, Hirundinidae 26-29) |
+| Nickname-as-genre artists | 1 (Boogaloo Joe Jones) |
+| Jazz/Funk compound | First documentation at degree 29 |
+
+## Files
+
+- `docs/release-notes/v1.49.530/README.md` -- this release README (A-grade uplift)
+- `docs/release-notes/v1.49.530/chapter/00-summary.md` -- chapter summary stub
+- `docs/release-notes/v1.49.530/chapter/03-retrospective.md` -- 6 numbered lessons, degree 29 patterns
+- `docs/release-notes/v1.49.530/chapter/99-context.md` -- version metadata and navigation
+- `S36/research/releases/029-ivan-boogaloo-joe-jones/pass2-refinement.md` -- Jones Pass 2 research
+- `SPS/research/releases/029-rough-winged-swallow/pass2-refinement.md` -- Rough-winged Swallow Pass 2 research
+- `www/tibsfox/com/Research/NASA/1.30/research.html` -- Ranger 5 research artifact (live site)
+- `www/tibsfox/com/Research/NASA/1.30/organism.html` -- organism profile
+- `www/tibsfox/com/Research/NASA/1.30/index.html` -- degree 29 live site page
 
 ---
 
-*Degree 29: the rough edge. A guitarist named Boogaloo. A swallow with sandpaper in its voice. A spacecraft that missed the Moon by 725 kilometers — close enough to see the craters, too far to touch them. The convergence tightens. The grit defines. The rough edge is where the interesting things happen.*
+*Degree 29: the rough edge. A guitarist named Boogaloo whose nickname IS his genre. A swallow with sandpaper in its voice and saw-teeth on its primary feathers. A spacecraft that missed the Moon by 725 kilometers -- close enough to see the craters at full resolution in the cameras that never turned on, too far to touch them, two orders of magnitude closer than Ranger 3 was eight months earlier. The convergence tightens. The grit defines. The jazz returns through the funk compound after four pure-soul degrees. The Hirundinidae quartet closes with an exception that identifies by divergence. The E=4 streak holds at nine consecutive degrees. The label infrastructure gains its seventh node. The failure catalog gains its third distinct mode. Everything approximates. Everything is diagnostic. The rough edge is where the interesting things happen, and the rough edge is where the engine teaches the ear and the eye and the reader how to identify what comes next.*
+
+*"The near-miss, the rough timbre, the compound genre -- three tracks, one structural principle: diagnostic approximation. The Ranger does not hit the Moon but the Ranger identifies itself by its margin. The swallow does not sing liquid but the swallow identifies itself by its grit. The jazz does not return pure but the jazz identifies itself by its compound. Everything approximates. The approximation is the signal."*
