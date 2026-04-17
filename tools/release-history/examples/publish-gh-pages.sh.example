@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+# Publish release chapters to the `gh-pages` branch for GitHub Pages hosting.
+#
+# Strategy:
+#   - Use a detached git worktree so we don't disturb the working tree.
+#   - Copy chapters into the worktree, commit, push.
+#
+# Usage:
+#   ./publish-gh-pages.sh                # dry-run (prints plan)
+#   ./publish-gh-pages.sh --execute      # commit + push
+
+set -euo pipefail
+
+# --- Configure these ---
+STAGING_DIR=".release-story-staging"
+GH_PAGES_BRANCH="gh-pages"
+WORKTREE_DIR=".gh-pages-worktree"
+SUBDIR_ON_BRANCH="release-story"   # where chapters live inside the gh-pages branch
+COMMIT_MSG="Update release-story chapters"
+# ------------------------
+
+EXECUTE=0
+for arg in "$@"; do
+  case "$arg" in --execute) EXECUTE=1 ;; esac
+done
+
+if [ ! -d "$STAGING_DIR" ]; then
+  echo "Staging dir $STAGING_DIR not found."
+  exit 1
+fi
+
+# Ensure branch exists locally (orphan init if needed)
+if ! git rev-parse --verify "$GH_PAGES_BRANCH" >/dev/null 2>&1; then
+  echo "Creating orphan $GH_PAGES_BRANCH branch..."
+  if [ "$EXECUTE" -eq 1 ]; then
+    git worktree add --detach "$WORKTREE_DIR"
+    git -C "$WORKTREE_DIR" checkout --orphan "$GH_PAGES_BRANCH"
+    git -C "$WORKTREE_DIR" rm -rf . || true
+    git -C "$WORKTREE_DIR" commit --allow-empty -m "Init gh-pages"
+    git -C "$WORKTREE_DIR" push -u origin "$GH_PAGES_BRANCH"
+    git worktree remove --force "$WORKTREE_DIR" || true
+  else
+    echo "  (dry-run: would orphan-init $GH_PAGES_BRANCH)"
+  fi
+fi
+
+echo "=== Preparing worktree at $WORKTREE_DIR ==="
+if [ -d "$WORKTREE_DIR" ]; then
+  git worktree remove --force "$WORKTREE_DIR" || true
+fi
+
+if [ "$EXECUTE" -eq 1 ]; then
+  git worktree add "$WORKTREE_DIR" "$GH_PAGES_BRANCH"
+  mkdir -p "$WORKTREE_DIR/$SUBDIR_ON_BRANCH"
+  rsync -a --delete \
+    --exclude='.git/' \
+    "$STAGING_DIR/" "$WORKTREE_DIR/$SUBDIR_ON_BRANCH/"
+
+  cd "$WORKTREE_DIR"
+  git add .
+  if git diff --cached --quiet; then
+    echo "No changes to commit."
+  else
+    git commit -m "$COMMIT_MSG"
+    git push origin "$GH_PAGES_BRANCH"
+  fi
+  cd - >/dev/null
+  git worktree remove --force "$WORKTREE_DIR"
+  echo "=== Published to $GH_PAGES_BRANCH ==="
+else
+  echo "  (dry-run: would rsync $STAGING_DIR/ → $WORKTREE_DIR/$SUBDIR_ON_BRANCH/ and push)"
+fi
