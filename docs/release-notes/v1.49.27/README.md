@@ -1,78 +1,183 @@
 # v1.49.27 — Spatial Awareness: The Chorus Protocol (Shiny Things Charf-Charf Edition)
 
-**Shipped:** 2026-03-09
-**Commits:** 6
-**Files:** 30 changed | **New Code:** ~9,954 LOC (27 files in `src/spatial-awareness/`)
-**Tests:** 285/285 passing across 12 test files | **Safety-Critical:** 4/4 PASS
+**Released:** 2026-03-09
+**Scope:** Spatial Awareness chipset (Paula Chipset Release 2) — a 6-module passive sensing, threat assessment, and coordinated signaling system for multi-agent environments, with physical output synthesis across audio oscillators, DMX-512 lighting, WS2812B LED strips, and ILDA laser projectors
+**Branch:** dev → main
+**Tag:** v1.49.27 (2026-03-09, commit `34c70b25b`)
+**Commits:** v1.49.26..v1.49.27 (10 commits, 7 spatial-awareness, 2 chore, 1 PNW index, head `34c70b25b`)
+**Files changed:** 35 (+10,402 / −51)
+**Predecessor:** v1.49.26 — Bio-Physics Sensing Systems (PNW BPS atlas)
+**Successor:** v1.49.28
+**Classification:** feature — second chipset in the Paula family, first to read physical USB sensors and drive physical output devices, first to ship the Frog Protocol as a testable multi-agent coordination state machine
+**Phases covered:** 4 waves (Wave 0 foundation → Wave 1 Track A sensing / Track B comm+output → Wave 2+3 integration + verification + packaging → Zod v4 type compat)
+**Author:** Tibsfox (`tibsfox@tibsfox.com`)
+**Verification:** 285/285 deterministic tests across 12 test files · 4/4 safety-critical requirements PASS (SC-HUM human approval gate, SC-RES no-resume-while-blocked, SC-COR ≥2-source correlation, SC-LAS laser interlock) · 3 adversarial verification suites (threat simulation ≥85% TPR / ≤10% FPR, 50-signal broadcast reliability with CF-12 zero missed broadcasts, 10-cycle pause/resume with CF-14 zero work loss) · 11 Zod v4-compatible schemas at every interface boundary · SKILL.md + chipset.yaml (6 modules declared) · mission pack expanded 27 → 39 pages covering USB I/O, output synthesis, and laser projection
 
 ## Summary
 
-Adds the Spatial Awareness chipset (Paula Chipset Release 2) — a passive sensing, threat assessment, and coordinated signaling system for multi-agent environments. The system reads ambient computational signals (context fill, token budget, error rates) and physical sensor data (USB audio, accelerometer, RF spectrum), detects threats through probabilistic scoring with multi-source correlation, and coordinates graduated responses using the 5-phase Frog Protocol. The output synthesis layer maps agent state to audio oscillators, DMX-512 lighting, WS2812B LED strips, and ILDA laser projectors. Delivered in 4 waves across 6 commits with 285 deterministic tests.
+**The Frog Protocol shipped as a five-phase, testable state machine, not a timer-driven heuristic.** v1.49.27 is the release where a multi-agent coordination protocol — BASELINE → SILENCE → ASSESS → PROBE → CLASSIFY → RESUME — became a concrete TypeScript state machine with explicit phase advancement, deterministic transitions, a scout-first dispatch rule, and a human/CAPCOM approval gate for BLOCK-level threats. The entire protocol is exercised by 557 lines of tests in `frog-protocol.test.ts` without any `setTimeout` calls, without async waits, and without flakiness retries. The design decision — explicit `advancePhase()` over timer-based transitions — is the load-bearing choice of the release: it converts a protocol that usually reads like prose specification into one that the test suite can drive through every legal transition and every illegal one. Getting the protocol onto that testable footing at Release 2 of the Paula chipset family means every later release that extends it inherits the determinism for free, and every failure mode has a test signature to reproduce it.
+
+**The chipset split into sensing (Track A) and coordination/output (Track B) let two parallel wave-1 tracks ship without file conflicts.** Wave 0 (`06f159e78`, 2068 insertions) landed the Zod schema set, the unified `SensorStream` / `OutputDevice` contracts, and the 5-agent `SimulatedEnvironment` with 10 scenario presets so that Wave 1 could fork cleanly. Track A (`1c77a0c3d`, 2412 insertions) brought up `passive-sensor.ts`, `threat-engine.ts`, `geometry-mapper.ts`, and `usb-device.ts` — everything that reads the world. Track B (`096e155ea`, 2111 insertions) brought up `comm-bus.ts`, `chorus-proto.ts`, and `output-synthesis.ts` — everything that writes to the world. The two tracks shared only the Wave-0 type system and the `index.ts` barrel; no source file was touched by both. That surface discipline is what makes a 10-commit chipset land in one session: the modules are orthogonal by construction, so the review cost of each commit scales with that commit's diff rather than with the chipset's total surface area.
+
+**Output synthesis is where agent state becomes visible in physical space.** `output-synthesis.ts` (436 lines) maps each Frog Protocol phase to a deterministic lighting signature — green at BASELINE, blue at SILENCE, orange at ASSESS, yellow at PROBE, red at CLASSIFY, teal at RESUME — and routes the signature across four physical output channels simultaneously: audio oscillators (CF-19 parameter generation), DMX-512 at 44 Hz with full fixture addressing (CF-20), WS2812B addressable LED strips (CF-21), and ILDA laser projectors with a mandatory safety interlock (CF-22, SC-LAS). The laser path refuses to emit without an `ENGAGED + confirmed` interlock handshake — a real safety constraint enforced in code, not a comment block. The physical-output layer is not decoration; it is a deliberate decision to make operational state legible in a way that a terminal scroll cannot replicate. A running chipset emits a color for its current phase, and a human sharing the room with the agents can read the phase at a glance instead of reading tool-call logs.
+
+**The laser interlock (SC-LAS) is the release's hardest-edged safety contract.** `OutputSynthesis.emitLaser()` reads a laser-interlock status record (from the Zod schema at `types.ts`) before every emission and refuses any path that does not report both `interlock.engaged === true` and `interlock.confirmed === true`. The refusal is not a warning or a log entry — it is a hard early return, tested twelve different ways in `output-synthesis.test.ts` including an engaged-but-unconfirmed case, a confirmed-but-disengaged case, a stale-interlock case (timestamp past the TTL), and a null-interlock case. The ILDA laser path in particular needs this treatment: a galvo controller emitting high-power beams into an arbitrary direction without a physical interlock is a Class-3B/4 safety incident waiting to happen, and the chipset is explicitly designed to run with physical hardware attached. Coding the interlock as a software predicate in addition to the hardware one produces defense in depth at the software/firmware boundary that other laser projects often leave at a single check.
+
+**Threat detection is probabilistic, correlated, and adversarial-tested.** `threat-engine.ts` (388 lines) ships exponential-moving-average scoring over ambient signals, with multi-source correlation as the gate that turns a single-signal anomaly into an escalatable threat — any threat that triggers SILENCE entry must produce correlated evidence from ≥ 2 independent sources (SC-COR). The sliding-window trend analysis distinguishes a briefly noisy channel from a systemically degrading one. The 15-scenario threat simulation suite in `threat-simulation.test.ts` (327 lines) validates the engine against a target of ≥ 85% true positive rate and ≤ 10% false positive rate, covering single-signal probes, multi-source attacks, mixed signal-types, and full-pipeline scenarios where the threat must travel through the sensor → engine → protocol → comm → output chain end to end. Hitting those error-rate targets at Release 2 of the chipset means the TPR/FPR envelope is a measured property, not an aspirational one.
+
+**The communication bus is the multi-tier primitive the chorus protocol sits on top of.** `comm-bus.ts` (355 lines) ships three independent message tiers — COVERT (invisible point-to-point), DIRECTED (named recipients), and BROADCAST (all agents receive) — over a signal-file protocol that does not depend on network transport. The 50-signal broadcast reliability suite in `broadcast-reliability.test.ts` (254 lines) rotates senders across 5 agents, asserts tier isolation (covert messages never leak into broadcast reception logs), and verifies the CF-12 "zero missed broadcasts" invariant across the full run. The chorus protocol (`chorus-proto.ts`, 414 lines) then uses the bus to coordinate distributed pause/resume with state preservation, scout-first re-engagement after a pause, and tempo synchronization across agents — all without any leader election step. The 10-cycle pause/resume integration test (`state-preservation.test.ts`, 368 lines) validates the CF-14 "zero work loss" invariant across every cycle.
+
+**SimulatedEnvironment makes integration tests reproducible instead of flaky.** `test-env.ts` (587 lines) is the longest non-protocol source file in the release and carries a 5-agent simulator with configurable noise profiles (LOW, DEFAULT, HIGH), injectable anomalies with explicit timing delays, and 10 scenario presets ranging from `nominal-operation` through `cascading-failure`. Every integration test in the suite runs against a deterministic simulator snapshot — inject a known anomaly at a known tick, assert the exact downstream behavior, and reset. The scenario presets are important because they let the next release add an eleventh scenario without rewriting the test harness: the simulator is stable, only the scripts change. This is the pattern that keeps 285 tests at zero flakes.
+
+**The Wave-3 verification suites are the adversarial complement to the unit tests.** Unit tests exercise each module against its own contract; the Wave-3 suites exercise the chipset as a whole against its safety-critical claims. Threat Simulation (15 scenarios) tests "does the detection + classification pipeline actually meet the TPR/FPR envelope." Broadcast Reliability (50 signals across 5 agents) tests "does the comm bus actually isolate its tiers and deliver every broadcast." State Preservation (10 cycles) tests "does the chorus protocol actually preserve agent work across pause/resume." Each suite is adversarial by construction — it is trying to produce the bad outcome, and the chipset must demonstrably prevent it. The 89 Wave-3 tests are the ones a future refactor cannot break without being noticed, because they encode the contract the chipset promises to the rest of the project.
+
+**Zod v4 compatibility caught the one type-level bug that the tests could not.** The final commit in the window (`34c70b25b`, "fix(spatial-awareness): use z.record(z.string(), z.unknown()) for Zod v4 compat") is a two-line diff in `types.ts` that replaced two single-argument `z.record(z.unknown())` calls with the explicit two-argument form `z.record(z.string(), z.unknown())`. Every one of the 285 tests passed before the fix — Zod v3 accepted the single-argument form at runtime and produced identical validation behavior — but `tsc --noEmit` flagged the call sites under the project's Zod v4 type declarations. The build-check hook caught this on push. The lesson the release records: tests and type checks cover different failure surfaces, and both must pass before a chipset with 11 schema boundaries can claim clean compile.
+
+**Wave 2+3 combined into a single commit because the session boundary forced it.** The retrospective records this honestly. In the ideal bisect-history shape, Wave 2 (Frog Protocol state machine + SpatialAwarenessSystem integration bridge) and Wave 3 (three verification suites + SKILL.md + chipset.yaml) would have been two separate commits, so a future bisect narrowing to "which wave introduced the regression" could walk the history without hopping a chunk of 3363 insertions at once. The wave-commit marker `Wave N:` convention exists precisely for this situation, and the commit message for `e9987d8e7` records the combined scope in the extended body. It is the kind of pragmatic tradeoff the release will absorb once, then prefer to avoid on subsequent chipsets by planning wave boundaries against likely session boundaries rather than against ideal engineering separation.
+
+**The Paula chipset architecture is extensible because each module is orthogonal.** spatial-awareness (Release 2) and audio-engineering (Release 1) share the same shape: Zod types at the boundary, a barrel `index.ts` for the public surface, one test file per runtime module, a SKILL.md describing the chipset's capabilities, and a chipset.yaml declaring the modules. The two chipsets do not import each other, share no runtime state, and were built in independent mission sessions. The scaling claim is therefore a real one — the chipset family grows by adding new chipsets, not by modifying existing ones — and every subsequent chipset can inherit the Wave-0 / Track-A / Track-B / Wave-2+3 wave shape as its default build plan.
+
+**Mission-pack expansion from 27 pages to 39 pages captured the USB I/O and laser projection scope.** The Wave-0 work was preceded by a mission-pack expansion (`36d9489a6`, `feat(spatial-awareness): expand mission with USB I/O, output synthesis, and laser projection`) that added bidirectional sensor pipeline sections, new vision scenarios (crowd-reactive art installations, laser skywriting from mesh topology, DMX light rigs driven by Frog Protocol), and a dedicated "Sensor-Driven Output Synthesis" research section covering audio, LED, and laser mapping engines with declarative bindings. The token budget for the mission grew from 179K to 213K and the component count from 11 to 13; the test count landed at 48 with 7 safety-critical entries including SC-LAS. The mission pack PDF (`spatial-awareness-mission.pdf`) grew from 200,357 bytes to 230,863 bytes in lockstep. The `.tex` source ships alongside the compiled PDF so the artifact is regenerable.
+
+**Two MCP tunnel cleanups and a PNW series refresh rode along in the release window.** Two small chore commits removed the stale `claudeus-wp-mcp` tunnel URL and swapped `planning-bridge` for `claudeus-wp-mcp` in the MCP registry (`.mcp.json` + `.claude/get-shit-done/workflows/complete-milestone.md`). A separate PNW-index commit (`79a1c8e00`) added AVI, MAM, and BPS to the PNW series index with cross-references — the catch-up work that v1.49.26's retrospective called out — and the v1.49.26 README itself landed as a `docs(release-notes)` commit (`10af8a409`). These three commits are not part of the spatial-awareness chipset itself but are part of the v1.49.27 release window and are listed here so the shortstat numbers reconcile against the git log without mystery deltas.
 
 ## Key Features
 
-### Chipset Modules (6 chips)
-
-| ID | Module | Purpose |
-|----|--------|---------|
-| M1 | Passive Environmental Sensor | Reads ambient signals without tool calls, builds spatial model, detects anomalies via configurable thresholds |
-| M2 | Threat Detection Engine | Probabilistic EMA scoring, multi-source correlation (>=2 sources to escalate), sliding window trend analysis |
-| M3 | Environmental Geometry Mapper | ResourceDimension model, constraint boundaries with time-to-hit estimates, fill % tracking |
-| M4 | Frog Protocol Controller | 5-phase state machine: BASELINE->SILENCE->ASSESS->PROBE->CLASSIFY->RESUME. Scout-first dispatch, human approval gate for BLOCK threats |
-| M5 | Multi-Tier Communication Bus | COVERT (invisible point-to-point), DIRECTED (named recipients), BROADCAST (all agents). Signal file protocol |
-| M6 | Chorus Coordination Protocol | Distributed pause/resume with state preservation. Scout-first re-engagement. No leader election |
-
-### Supporting Layers
-- **types.ts** — 11 Zod schemas covering all data structures (Zod v4 compatible)
-- **sensor-interface.ts** — SensorStream/OutputDevice contracts, 3 built-in sensors (ContextFill, TokenBudget, ErrorRate)
-- **usb-device.ts** — USB device abstraction for audio, serial, bulk, and HID endpoints
-- **output-synthesis.ts** — Audio oscillators (CF-19), DMX-512 at 44Hz (CF-20), WS2812B LED strips (CF-21), ILDA laser with safety interlock (CF-22)
-- **integration.ts** — SpatialAwarenessSystem factory wiring: sensor -> threat -> protocol -> comm -> chorus -> output
-- **test-env.ts** — 5-agent SimulatedEnvironment with anomaly injection and 9 preset scenarios
-
-### Verification Suites (Wave 3)
-- **Threat Simulation** — 15-scenario suite: >=85% true positive rate, <=10% false positive rate, single-signal/multi-source/mixed/pipeline coverage
-- **Broadcast Reliability** — 50-signal broadcast with 5 agents, rotating senders, tier isolation. CF-12 zero missed broadcasts verified
-- **State Preservation** — 10-cycle pause/resume. CF-14 zero work loss. Scout-first re-engagement across all cycles
-
-### Safety-Critical Requirements
-
-| ID | Requirement | Status |
-|----|-------------|--------|
-| SC-HUM | BLOCK threats require human/CAPCOM approval before irreversible action | PASS |
-| SC-RES | No agent resumes work while BLOCK-level threat is active and unapproved | PASS |
-| SC-COR | SILENCE entry requires correlated signals from >=2 sources | PASS |
-| SC-LAS | Laser output REFUSED without confirmed interlock (ENGAGED + confirmed) | PASS |
-
-### Mission Document
-- **PRD expanded** from 27 to 39 pages with USB I/O, output synthesis, and laser projection sections
-- Mission pack at `www/MISSIONS/spatial-awareness/spatial-awareness-mission.pdf`
-
-## Wave Execution Timeline
-
-| Wave | Scope | Commits | Tests |
-|------|-------|---------|-------|
-| 0 | Foundation (types, sensors, test env) | `2fead652` | 56 |
-| 1A | Sensing (passive sensor, threat engine, geometry, USB) | `56f6128a` | 62 |
-| 1B | Comm/Output (comm bus, chorus, output synthesis) | `d6447b2a` | 78 |
-| 2+3 | Integration + Verification + Packaging | `15f0f65f`, `4986c650` | 89 |
-| **Total** | | **6 commits** | **285** |
+| Area | What Shipped |
+|------|--------------|
+| Type system (Wave 0) | `src/spatial-awareness/types.ts` (261 lines) + `types.test.ts` (234 lines) — 11 Zod schemas with passthrough covering ambient signals, threat events, coordination messages, spatial model, output mappings, USB device descriptors, and laser interlock status |
+| Sensor interface (Wave 0B) | `sensor-interface.ts` (362 lines) + `sensor-interface.test.ts` (263 lines) — unified `SensorStream` / `OutputDevice` contracts, `ComputationalSensor` base class, 3 built-in sensors (ContextFill, TokenBudget, ErrorRate), `DefaultSensorRegistry` + `DefaultOutputRegistry` |
+| Simulated environment (Wave 0C) | `test-env.ts` (587 lines) + `test-env.test.ts` (272 lines) — 5 mock agents, noise profiles (LOW/DEFAULT/HIGH), injectable anomalies with delay, 10 scenario presets (nominal through cascading-failure), spatial model builder |
+| Passive sensor (Wave 1A) | `passive-sensor.ts` (373 lines) — ambient signal aggregation, threshold monitoring, anomaly detection without tool calls (CF-01..CF-03) |
+| Threat engine (Wave 1A) | `threat-engine.ts` (388 lines) — probabilistic EMA scoring, multi-source correlation (≥2 sources to escalate, SC-COR), sliding-window trend analysis (CF-04..CF-05) |
+| Geometry mapper (Wave 1A) | `geometry-mapper.ts` (378 lines) — `ResourceDimension` model, constraint boundaries with time-to-hit estimates, fill-percent tracking (CF-15) |
+| USB device abstraction (Wave 1A) | `usb-device.ts` (343 lines) — `SimulatedUsbDeviceManager`, hot-plug events, device factory covering audio, serial, bulk, and HID endpoints (CF-17..CF-18) |
+| Wave-1A test suite | `wave1-track-a.test.ts` (930 lines) — 62 tests covering sensing half end to end |
+| Communication bus (Wave 1B) | `comm-bus.ts` (355 lines) + `comm-bus.test.ts` (208 lines) — three-tier bus (COVERT / DIRECTED / BROADCAST), signal file protocol, tier isolation (CF-11 <1s broadcast, CF-12 zero missed, CF-13 covert invisibility) |
+| Chorus protocol (Wave 1B) | `chorus-proto.ts` (414 lines) + `chorus-proto.test.ts` (242 lines) — distributed pause/resume with state preservation, scout-first re-engagement, tempo sync, no leader election (CF-06 pause <500ms, CF-08/CF-10 scout-first, CF-14 zero work loss) |
+| Output synthesis (Wave 1B) | `output-synthesis.ts` (436 lines) + `output-synthesis.test.ts` (359 lines) — audio oscillators (CF-19), DMX-512 at 44Hz (CF-20), WS2812B LED strips (CF-21), ILDA laser with safety interlock (CF-22/SC-LAS), Frog-Protocol phase-to-lighting sequence mapping, hot-reloadable output mapping configuration |
+| Frog Protocol (Wave 2) | `frog-protocol.ts` (785 lines) + `frog-protocol.test.ts` (557 lines) — 5-phase state machine (BASELINE→SILENCE→ASSESS→PROBE→CLASSIFY→RESUME) with explicit `advancePhase()` transitions, scout-first dispatch, human approval gate for BLOCK threats (SC-HUM/SC-RES) |
+| Integration bridge (Wave 2) | `integration.ts` (379 lines) + `integration.test.ts` (378 lines) — `SpatialAwarenessSystem` factory wiring sensor → threat → protocol → comm → chorus → output |
+| Threat simulation (Wave 3) | `threat-simulation.test.ts` (327 lines) — 15 scenarios, ≥85% TPR / ≤10% FPR, single-signal / multi-source / mixed / pipeline coverage |
+| Broadcast reliability (Wave 3) | `broadcast-reliability.test.ts` (254 lines) — 50-signal broadcast with 5 agents, rotating senders, tier isolation, CF-12 zero missed broadcasts verified |
+| State preservation (Wave 3) | `state-preservation.test.ts` (368 lines) — 10-cycle pause/resume, CF-14 zero work loss, scout-first re-engagement across all cycles |
+| Chipset documentation | `SKILL.md` (76 lines) + `chipset.yaml` (209 lines) — 6-module chipset declaration (M1 passive sensor, M2 threat engine, M3 geometry mapper, M4 Frog Protocol controller, M5 comm bus, M6 chorus protocol) |
+| Barrel export | `index.ts` — two-stage expansion (Wave 0 89 lines, Wave 1B expansion +97 lines, Wave 2 expansion +30 lines) — single public entry point for the chipset surface |
+| Mission pack expansion | `spatial-awareness-mission.tex` (+231 lines) + `spatial-awareness-mission.pdf` (200,357 → 230,863 bytes) + `index.html` (+12 lines) — 27 → 39 pages covering USB I/O, output synthesis, laser projection; new scenarios for crowd-reactive art, laser skywriting, DMX light rigs; token budget 179K → 213K; components 11 → 13; tests 35 → 48 with 7 safety-critical |
+| Zod v4 type fix | `types.ts` (4 lines changed) — `z.record(z.unknown())` → `z.record(z.string(), z.unknown())` at two call sites; caught by the `tsc --noEmit` build-check hook on push |
+| PNW series catch-up | `www/PNW/index.html` (+152 lines) + `series.js` (+3 lines) + `style.css` (+3 lines) — AVI / MAM / BPS added to the PNW series index with cross-references, closing the catch-up debt called out in v1.49.26's retrospective |
+| MCP registry cleanup | `.mcp.json` + `.claude/get-shit-done/workflows/complete-milestone.md` — removed stale `claudeus-wp-mcp` tunnel URL, swapped `planning-bridge` for `claudeus-wp-mcp` entry |
 
 ## Retrospective
 
 ### What Worked
-- **Wave-based parallel execution scales to chipset code.** The same pattern used for PNW research docs (COL, CAS, AVI+MAM, BPS) translates cleanly to TypeScript chipset implementation. Waves 1A and 1B were fully parallel tracks — sensing and communication — with no file conflicts.
-- **Frog Protocol as testable state machine.** Using explicit phase advancement (not timers) made all 285 tests deterministic. Zero flakiness, zero async waits. The protocol is complex (5 phases, scout-first dispatch, human approval gates) but the test-first design keeps it fully controllable.
-- **Output synthesis creates physical feedback.** Mapping Frog Protocol phases to colors (green BASELINE, blue SILENCE, orange ASSESS, yellow PROBE, red CLASSIFY, teal RESUME) across DMX, LED, and laser outputs means agent state becomes visible in physical space. The laser interlock (SC-LAS) is a genuine safety constraint, not a checkbox.
-- **SimulatedEnvironment enables realistic integration tests.** The 5-agent test environment with anomaly injection and 9 preset scenarios (nominal, context exhaustion, cascading failure, noisy) provided enough coverage to catch subtle multi-source correlation bugs during Wave 2.
+
+- **Wave-based parallel execution scales to chipset code.** The same pattern used for PNW research atlases (COL, CAS, AVI+MAM, BPS) translated cleanly to TypeScript chipset implementation. Waves 1A and 1B were fully parallel tracks — sensing and communication/output — with no file conflicts, so each wave's review cost scaled with its own diff rather than with the chipset's total surface area.
+- **Frog Protocol as a testable state machine.** Using explicit `advancePhase()` transitions instead of timer-based transitions made all 285 tests deterministic. Zero flakiness, zero async waits, zero retry logic. The protocol is complex (5 phases, scout-first dispatch, human approval gates for BLOCK threats) but the test-first design keeps every transition fully controllable from the test harness.
+- **Output synthesis creates physical feedback.** Mapping Frog Protocol phases to colors (green BASELINE, blue SILENCE, orange ASSESS, yellow PROBE, red CLASSIFY, teal RESUME) across DMX, LED, and laser outputs makes agent state visible in physical space. The laser interlock (SC-LAS) is a genuine safety constraint enforced in code with multiple failure-mode tests, not a checkbox or a comment.
+- **SimulatedEnvironment enables realistic integration tests.** The 5-agent test environment with anomaly injection and 10 scenario presets (nominal, context exhaustion, cascading failure, noisy) provided enough coverage to catch subtle multi-source correlation bugs during Wave 2 development, and keeps every integration test runnable against a deterministic simulator snapshot.
+- **Types-first wave 0.** Landing all 11 Zod schemas, the sensor/output contracts, and the simulator in Wave 0 before any sensing or coordination code existed meant Waves 1A and 1B compiled clean against Wave 0 on first landing. Every fixture shape was decided once.
+- **Safety-critical requirements exist as concrete tests, not prose.** SC-HUM, SC-RES, SC-COR, and SC-LAS each trace to specific test cases with specific failure signatures. "PASS" in the safety matrix is an assertion the test suite can reproduce on demand, not a declaration in a README.
 
 ### What Could Be Better
-- **Two `z.record(z.unknown())` calls slipped through to Wave 0.** The Zod v4 incompatibility (needs `z.record(z.string(), z.unknown())`) was documented in the handoff but wasn't caught until the build-check hook blocked the push. Future waves should run `tsc --noEmit` as part of the pre-commit, not just pre-push.
-- **Wave 2+3 combined into a single commit.** Ideally the Frog Protocol (Wave 2) and verification suites (Wave 3) would have separate commits for cleaner bisect history. The session boundary forced a combined commit.
+
+- **Two `z.record(z.unknown())` calls slipped through to Wave 0.** The Zod v4 incompatibility (needs `z.record(z.string(), z.unknown())`) was documented in the handoff but was not caught until the build-check hook blocked the push. Future waves should run `tsc --noEmit` as part of pre-commit, not just pre-push, so type errors surface at author time rather than at push time.
+- **Wave 2+3 combined into a single commit.** Ideally the Frog Protocol state machine (Wave 2) and the three verification suites (Wave 3) would have separate commits for cleaner bisect history. The session boundary forced a combined commit; future chipsets should plan wave boundaries against likely session boundaries rather than against ideal engineering separation.
+- **Scenario presets stop at 10.** The simulator ships with 10 scenarios, which is enough to exercise the current threat/comm/chorus pipeline but not enough to stress-test edge cases like Byzantine agent behavior, network partition simulation, or interlock-spoofing attempts. The simulator design allows extension without harness changes, but the adversarial preset library needs to grow.
+- **Chipset and mission-pack live in separate trees.** The `src/spatial-awareness/` chipset and the `www/MISSIONS/spatial-awareness/` mission pack evolved together in this release but are not linked by tooling — a future refactor where the chipset surface changes has no mechanism to flag the mission pack as stale. A manifest link between chipset and mission-pack would close that gap.
+- **No hardware-in-the-loop validation yet.** The USB device layer, DMX driver, LED strip driver, and laser driver all run against simulated endpoints. The real hardware (DMX interface, WS2812B strip on an ESP32, ILDA galvo controller) has not been exercised against the shipped code; a HIL verification pass is the logical next release milestone.
 
 ## Lessons Learned
 
-1. **Build-check hooks catch what tests miss.** The 285 tests all passed but `tsc --noEmit` caught the Zod v4 type error. Runtime behavior was correct (Zod v3 accepts single-arg `z.record()`), but the type signatures were wrong. Hooks as quality gates work.
-2. **Explicit phase advancement > timer-based for testability.** The Frog Protocol could have used `setTimeout` for phase transitions, but explicit `advancePhase()` calls made every state transition deterministic and testable. This is the right pattern for any protocol state machine.
-3. **Physical output mapping makes abstract systems concrete.** Seeing "ASSESS = orange, pulsing at 1Hz" on an LED strip or DMX fixture gives immediate feedback about system state that log files can't match. The output synthesis layer is an investment in operational visibility.
-4. **The Paula Chipset is growing.** With audio-engineering (Release 1) and spatial-awareness (Release 2), the chipset architecture is proving extensible. Each release adds modules without modifying existing ones — the barrel export pattern and typed interfaces keep modules orthogonal.
+- **Build-check hooks catch what tests miss.** All 285 tests passed, but `tsc --noEmit` caught the Zod v4 type error. Runtime behavior was correct (Zod v3 accepts single-arg `z.record()`), but the type signatures under Zod v4 were wrong. Tests and type checks cover different failure surfaces, and shipping a chipset with 11 schema boundaries means both must pass before "green" is green. (Lesson #395.)
+- **Explicit phase advancement beats timer-based for testability.** The Frog Protocol could have used `setTimeout` for phase transitions, but explicit `advancePhase()` calls made every state transition deterministic and testable. This is the right pattern for any protocol state machine: the test suite, not the wall clock, drives the state machine. The 557-line `frog-protocol.test.ts` is evidence — it could not exist in its current shape against a timer-based design. (Lesson #396.)
+- **Physical output mapping makes abstract systems concrete.** Seeing "ASSESS = orange, pulsing at 1Hz" on an LED strip or DMX fixture gives immediate feedback about system state that log files cannot match. The output synthesis layer is an investment in operational visibility that pays off the moment the chipset runs against physical hardware in a real room. (Lesson #397.)
+- **The Paula Chipset family is growing.** With audio-engineering (Release 1) and spatial-awareness (Release 2), the chipset architecture is proving extensible. Each release adds modules without modifying existing ones — the barrel export pattern and typed interfaces keep modules orthogonal. The scaling claim is now backed by two shipped instances rather than one. (Lesson #398.)
+- **Track A vs Track B (sensing vs comm/output) is the right parallel split.** Two parallel wave-1 tracks with no shared files and only a shared type module produced 2,412 lines on Track A and 2,111 lines on Track B in a single session without merge conflicts. The split is not accidental — sensing reads the world, comm/output writes to the world, and the two concerns share nothing except the schema that describes the world. Future chipsets with this input/output asymmetry should inherit the split. (Lesson #399.)
+- **Session boundaries should shape wave boundaries, not the other way around.** Wave 2 and Wave 3 ideally deserved separate commits for bisect cleanliness, but the session boundary forced a combined commit. The lesson is prescriptive: plan the wave split against the session budget, not against the Platonic ideal of engineering separation. When the two align, both goals are met; when they do not, the session budget wins in practice. (Lesson #400.)
+- **Safety-critical requirements need test signatures, not README bullets.** Every one of SC-HUM, SC-RES, SC-COR, and SC-LAS corresponds to a specific test case — a specific file name, a specific `it(...)` block, a specific assertion. That traceability is the difference between a safety matrix that is true and a safety matrix that is claimed. Future chipsets with safety-critical surfaces should copy the pattern: every requirement row maps to a test signature the reader can locate by grep.
+- **Adversarial verification suites are not the same as unit tests.** The three Wave-3 suites (threat simulation, broadcast reliability, state preservation) each try to produce the bad outcome. Unit tests check "does each module honor its own contract?"; verification suites check "does the chipset as a whole keep its promise under hostile conditions?" Both are necessary, neither is sufficient, and shipping both at Release 2 sets the expected floor for Release 3 and beyond.
+- **Mission-pack source alongside compiled PDF keeps the artifact regenerable.** `spatial-awareness-mission.tex` shipped with `spatial-awareness-mission.pdf` so the PDF is not a binary black box. A future environment change (new LaTeX engine, different font path, revised template) can regenerate the PDF from source without reverse-engineering the compiled binary. The same lesson from v1.49.26's BPS retrospective applies here: source carries intent, PDFs carry compilation-specific rendering.
+- **Zod v4's stricter record signature is a net good.** The two-argument form `z.record(z.string(), z.unknown())` is explicit about both key and value types where the one-argument form only constrained values. The Zod v4 migration surfaced the ambiguity and forced a small, correct fix. This is the right kind of upstream-breaking change — the fix is trivial, the clarity is permanent.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.26](../v1.49.26/README.md) | Predecessor — Bio-Physics Sensing Systems (PNW BPS atlas); the v1.49.27 window includes the v1.49.26 README landing and the PNW-index catch-up work BPS's retrospective called out |
+| [v1.49.28](../v1.49.28/) | Successor — first post-spatial-awareness release in the v1.49.x line |
+| [v1.49.25](../v1.49.25/) | AVI + MAM compendiums — the PNW-index catch-up in this release window added AVI, MAM, and BPS entries to `www/PNW/index.html` |
+| [v1.49.21](../v1.49.21/) | Sibling uplift exemplar — shares the types-first wave-0 pattern and the four-wave shape; ITM pipeline's Zod-schemas-first discipline parallels spatial-awareness's types-first discipline |
+| [v1.49.17](../v1.49.17/) | Types-first discipline antecedent — cartridge format landing that established "contracts before implementation" as the wave-0 pattern spatial-awareness inherits |
+| [v1.49.20](../v1.49.20/) | Documentation-consolidation precursor — the release that established the documentation counter discipline continued in the PNW-index catch-up here |
+| [v1.49.12](../v1.49.12/) | Heritage-skills-pack pattern — pack-shape content analogous to the spatial-awareness chipset's SKILL.md + chipset.yaml + mission-pack triad |
+| [v1.49.10](../v1.49.10/) | Flat-atoms architecture — upstream pattern for the one-module-per-concern layout of `src/spatial-awareness/` |
+| [v1.49.0](../v1.49.0/) | Parent mega-release — v1.49.x line and GSD-OS desktop surface where the Paula chipset family lives |
+| [v1.36](../v1.36/) | Citation chipset shape — earliest chipset-as-module template; Paula chipset extends the pattern to runtime orchestration |
+| [v1.27](../v1.27/) | Foundational Knowledge Packs — pack template the spatial-awareness mission pack inherits |
+| [v1.0](../v1.0/) | Foundation — 6-step adaptive loop; spatial-awareness extends the Observe and Detect steps with ambient-signal sensing and probabilistic threat scoring |
+| `src/spatial-awareness/SKILL.md` | 76-line chipset capability declaration with 6-module surface |
+| `src/spatial-awareness/chipset.yaml` | 209-line machine-readable chipset manifest (M1..M6 module declarations, CF/SC requirement mappings) |
+| `src/spatial-awareness/frog-protocol.ts` | 785-line Frog Protocol state machine — the load-bearing coordination primitive |
+| `src/spatial-awareness/output-synthesis.ts` | 436-line physical-output layer — audio, DMX-512, WS2812B, ILDA laser with interlock |
+| `src/spatial-awareness/__tests__/threat-simulation.test.ts` | 15-scenario threat simulation (≥85% TPR / ≤10% FPR) |
+| `src/spatial-awareness/__tests__/broadcast-reliability.test.ts` | 50-signal broadcast reliability across 5 agents |
+| `src/spatial-awareness/__tests__/state-preservation.test.ts` | 10-cycle pause/resume zero-work-loss suite |
+| `www/MISSIONS/spatial-awareness/spatial-awareness-mission.tex` | 39-page LaTeX source for the spatial-awareness mission pack |
+| `www/MISSIONS/spatial-awareness/spatial-awareness-mission.pdf` | 230,863-byte compiled mission pack |
+
+## Engine Position
+
+v1.49.27 is the second chipset in the Paula family and the first in the project to read physical USB sensors, drive physical output devices (audio, DMX-512, WS2812B, ILDA laser), and ship a multi-agent coordination state machine (Frog Protocol) with an adversarial verification suite attached. It sits between v1.49.26 (Bio-Physics Sensing Systems — the PNW BPS research atlas) and the v1.49.28+ window, and together with v1.49.26 forms a brief "sensing" diptych: v1.49.26 catalogued how biology senses its world, v1.49.27 built a runtime that lets a multi-agent system sense its computational and physical environment. In the broader v1.49.x line this release is a mid-size feature: 35 files and 10,402 insertions place it materially smaller than v1.49.26's 29-file / 18,371-insertion research landing but architecturally more load-bearing, because the chipset code executes at runtime rather than rendering as documentation. The chipset shape introduced here — Wave 0 types + simulator, Wave 1 parallel tracks, Wave 2 integration, Wave 3 adversarial verification — becomes the default build plan for subsequent Paula chipsets. Any future chipset that inherits the wave shape also inherits the 0-flake test discipline, the explicit-transition state-machine pattern, the SC-* traceability rule (every safety requirement traces to a test), and the mission-pack-source-with-PDF convention.
+
+## Cumulative Statistics
+
+| Metric | Value |
+|--------|-------|
+| Commits (v1.49.26..v1.49.27) | 10 (7 spatial-awareness feat/fix, 2 chore, 1 PNW-index feat, with docs landing) |
+| Files changed | 35 |
+| Lines inserted / deleted | 10,402 / 51 |
+| New source files (chipset runtime) | 10 (passive-sensor, threat-engine, geometry-mapper, usb-device, comm-bus, chorus-proto, output-synthesis, frog-protocol, integration, sensor-interface) |
+| New type/schema files | 1 (`types.ts`, 261 lines, 11 schemas) |
+| New simulator file | 1 (`test-env.ts`, 587 lines, 5 agents, 10 scenarios) |
+| Test files | 12 (types, sensor-interface, test-env, wave1-track-a, comm-bus, chorus-proto, output-synthesis, frog-protocol, integration, threat-simulation, broadcast-reliability, state-preservation) |
+| Tests passing | 285 / 285 |
+| Safety-critical requirements PASS | 4 / 4 (SC-HUM, SC-RES, SC-COR, SC-LAS) |
+| Verification suites (Wave 3) | 3 (threat simulation 15 scenarios, broadcast reliability 50 signals × 5 agents, state preservation 10 cycles) |
+| Chipset modules declared | 6 (M1 passive sensor, M2 threat engine, M3 geometry mapper, M4 Frog Protocol controller, M5 comm bus, M6 chorus protocol) |
+| Capability requirements mapped (CF-*) | CF-01..CF-22 across the 6 modules |
+| Zod schemas at interface boundaries | 11 (all v4-compatible after `34c70b25b` fix) |
+| Mission pack page count (before → after) | 27 → 39 |
+| Mission pack PDF size (before → after) | 200,357 → 230,863 bytes |
+| Mission pack test count (before → after) | 35 → 48 |
+| Mission pack components (before → after) | 11 → 13 |
+| Mission pack token budget (before → after) | 179K → 213K |
+| Paula chipset family (before → after) | 1 (audio-engineering) → 2 (audio-engineering + spatial-awareness) |
+
+## Files
+
+- `src/spatial-awareness/types.ts` (261 lines) — 11 Zod schemas with passthrough covering every pipeline interface; Zod v4 compatible after `34c70b25b`
+- `src/spatial-awareness/sensor-interface.ts` (362 lines) — `SensorStream`/`OutputDevice` contracts, `ComputationalSensor` base class, 3 built-in sensors (ContextFill, TokenBudget, ErrorRate), `DefaultSensorRegistry` + `DefaultOutputRegistry`
+- `src/spatial-awareness/test-env.ts` (587 lines) — 5-agent SimulatedEnvironment with configurable noise (LOW/DEFAULT/HIGH), injectable anomalies with delay, 10 scenario presets (nominal through cascading-failure)
+- `src/spatial-awareness/passive-sensor.ts` (373 lines) — ambient signal aggregation, threshold monitoring, anomaly detection without tool calls
+- `src/spatial-awareness/threat-engine.ts` (388 lines) — probabilistic EMA scoring, multi-source correlation (≥2 sources to escalate), sliding-window trend analysis
+- `src/spatial-awareness/geometry-mapper.ts` (378 lines) — `ResourceDimension` model, constraint boundaries, time-to-hit estimates, fill-percent tracking
+- `src/spatial-awareness/usb-device.ts` (343 lines) — USB device abstraction for audio, serial, bulk, and HID endpoints with hot-plug events
+- `src/spatial-awareness/comm-bus.ts` (355 lines) — three-tier message bus (COVERT / DIRECTED / BROADCAST) over a signal-file protocol
+- `src/spatial-awareness/chorus-proto.ts` (414 lines) — distributed pause/resume with state preservation, scout-first re-engagement, tempo sync, no leader election
+- `src/spatial-awareness/output-synthesis.ts` (436 lines) — audio oscillators, DMX-512 at 44Hz, WS2812B LED strips, ILDA laser with safety interlock; Frog-Protocol phase-to-lighting sequence mapping
+- `src/spatial-awareness/frog-protocol.ts` (785 lines) — 5-phase state machine (BASELINE→SILENCE→ASSESS→PROBE→CLASSIFY→RESUME) with explicit `advancePhase()` transitions
+- `src/spatial-awareness/integration.ts` (379 lines) — `SpatialAwarenessSystem` factory wiring sensor → threat → protocol → comm → chorus → output
+- `src/spatial-awareness/index.ts` — barrel export, grew across waves (Wave 0 89 lines → Wave 1B +97 → Wave 2 +30)
+- `src/spatial-awareness/SKILL.md` (76 lines) + `src/spatial-awareness/chipset.yaml` (209 lines) — chipset capability declaration and 6-module manifest
+- `src/spatial-awareness/__tests__/*.test.ts` — 12 test files totalling 285 passing tests (types 234, sensor-interface 263, test-env 272, wave1-track-a 930, comm-bus 208, chorus-proto 242, output-synthesis 359, frog-protocol 557, integration 378, threat-simulation 327, broadcast-reliability 254, state-preservation 368)
+- `www/MISSIONS/spatial-awareness/spatial-awareness-mission.tex` (+231 lines) + `spatial-awareness-mission.pdf` (230,863 bytes) + `index.html` (+12 lines) — mission pack expanded 27 → 39 pages with USB I/O, output synthesis, and laser projection sections
+- `www/PNW/index.html` (+152 lines) + `series.js` (+3) + `style.css` (+3) — PNW series index catch-up adding AVI / MAM / BPS entries with cross-references
+- `.mcp.json` + `.claude/get-shit-done/workflows/complete-milestone.md` — MCP registry cleanup (removed `claudeus-wp-mcp` tunnel URL, swapped `planning-bridge` for `claudeus-wp-mcp`)
+- `docs/release-notes/v1.49.26/README.md` — v1.49.26 BPS release notes landed as part of this window via commit `10af8a409`
+- `docs/release-notes/v1.49.27/chapter/00-summary.md` — auto-generated parse of this README (Prev/Next navigation to v1.49.26 / v1.49.28)
+- `docs/release-notes/v1.49.27/chapter/03-retrospective.md` — retrospective chapter with What Worked / What Could Be Better
+- `docs/release-notes/v1.49.27/chapter/04-lessons.md` — 6 lessons extracted with tracker status (investigate / needs review)
+- `docs/release-notes/v1.49.27/chapter/99-context.md` — release context chapter
+
+Aggregate: 35 files changed, 10,402 insertions, 51 deletions, 10 commits (`79a1c8e00..34c70b25b`), v1.49.26..v1.49.27 window.
