@@ -4,182 +4,164 @@
 **Degree:** 30 of 360
 **Part A:** Ray Charles -- R&B/Jazz, E=4, Central District, Atlantic Records. 1948-2004. The Genius. Gospel + blues + jazz + country fusion inventor. The Central District's supreme vocal export. The largest name since Jones at degree 0. The voice that broke every genre boundary simultaneously.
 **Part B:** Barn Swallow (*Hirundo rustica*) -- long liquid twittering warble, E=4, open farmland and human structures, Hirundinidae. Fifth consecutive Hirundinidae. Swallow quintet COMPLETES. World's most widespread swallow. Obligate human-structure nester. The endurance singer.
-**NASA Mission:** 1.31 -- Mariner 1 (July 22, 1962. DESTROYED by range safety 293 seconds after launch. Software transcription error — a missing overbar in the guidance equations, variously reported as "the most expensive hyphen in history." Venus flyby attempt. First interplanetary mission attempt. Mariner program begins with catastrophe. The pattern holds for the fourth time.)
-**NASA Organism:** Oryza sativa (Rice — the grain that feeds half the world, cultivated in paddies, dependent on human infrastructure the way the Barn Swallow depends on human architecture. The crop and the bird: both obligate human symbionts.)
-**Dedication:** Ray Charles Robinson (September 23, 1930 -- June 10, 2004) — self-dedicatee. The Genius needs no separate dedication.
+**NASA Mission:** 1.31 -- Mariner 1 (July 22, 1962. DESTROYED by range safety 293 seconds after launch. Software transcription error -- a missing overbar in the guidance equations, variously reported as "the most expensive hyphen in history." Venus flyby attempt. First interplanetary mission attempt. Mariner program begins with catastrophe. The pattern holds for the fourth time.)
+**NASA Organism:** *Oryza sativa* (Rice -- the grain that feeds half the world, cultivated in paddies, dependent on human infrastructure the way the Barn Swallow depends on human architecture. The crop and the bird: both obligate human symbionts.)
 **Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
-**Engine Position:** Thirty-first paired release. Degree 30 = the Genius. Ray Charles. The swallow quintet completes. The Mariner program opens with an $18.5 million punctuation error. E=4 for the tenth consecutive degree. The decade of maximum energy.
+**Cluster:** R&B / Soul / Jazz-modifier branch (Central District supreme vocal export; Atlantic Records national-label pipeline)
+**Dedication:** Ray Charles Robinson (September 23, 1930 -- June 10, 2004) -- self-dedicatee. The Genius needs no separate dedication. The single-name artist who needs no cross-calendar convention to justify inclusion; the career IS the dedication.
+**Engine Position:** Thirty-first paired release. Degree 30 = the Genius. Ray Charles. The swallow quintet completes. The Mariner program opens with an $18.5 million punctuation error. E=4 for the tenth consecutive degree. The decade of maximum energy (21-30). Three family quintets established (Turdidae, Parulidae, Hirundinidae). Fourth new-program opening failure (Pioneer, Mercury, Ranger, Mariner). Tenth Central District entry.
+**Commit:** `505788f5b` -- feat(www): v1.49.531 -- degree 30 paired release (NASA 1.31 + S36/SPS Pass 2)
+**Files changed:** 3 (pass2-refinement essays + README)
+**Branch:** dev
+**Quality Target:** A-grade DEGREE shape (prose rubric)
 
 ## Summary
 
-The thirty-first paired release. Ray Charles Robinson — the Genius — enters at degree 30, the largest name to enter the engine since Quincy Jones at degree 0. Both are Central District products. Both achieved global recognition. Both redefined entire genres. But their modes are opposite: Jones was the invisible infrastructure — the arranger, the producer, the architect behind the performance. Charles was the performance itself — the voice, the piano, the presence that fused gospel, blues, R&B, country, and jazz into something that had no precedent and has had no equal. The engine's two most famous artists bookend thirty degrees: Jones at 0 (the invisible architect) and Charles at 30 (the visible Genius).
+The thirty-first paired release and the degree where the engine reaches its first truly global name since launch. Ray Charles Robinson -- the Genius -- enters at degree 30, the largest single artistic presence to occupy a degree since Quincy Jones at degree 0, and the two men are structurally inverse twins: both Central District products, both globally transformative, both Atlantic-era vocal-music pillars, but operating in opposite modes. Jones was the invisible architecture. He arranged, produced, coordinated, and engineered the recorded performances of other people for sixty years. He was the Amiga Principle embodied at human scale -- one nervous system functioning as an entire entertainment-industry organization, every decision routed through a single coordinating intelligence that rarely took the microphone itself. Charles was the performance itself. He was the voice, the keyboard, the presence, the unrepeatable timbre. The Central District produced both modes at the top of their respective categories, and degree 30 closes the axis that degree 0 opened. Thirty degrees. Two Central Districts. Two worlds. One neighborhood. The engine's primary structural echo is now complete at the scale of a single city.
 
-Charles did not play jazz. He absorbed it — the harmonic sophistication, the improvisational freedom, the rhythmic complexity — and deployed it in service of something else entirely: soul music, R&B, the gospel-blues fusion that he invented. His "R&B/Jazz" label returns jazz to the genre compound after five degrees of pure soul (25-29), but the emphasis is reversed. R&B first, Jazz second. Jazz as method, R&B as identity. The pattern established at degree 18 (Maktub's Soul/Jazz) reaches its highest expression at degree 30: the Genius who used jazz without being contained by it.
+Charles did not play jazz in the sense that Jones played jazz. He absorbed it -- the harmonic sophistication of Billy Strayhorn and Nat Cole, the improvisational flexibility of the bebop players he listened to in Seattle in 1948 when he arrived on the Greyhound bus from Florida with six dollars and a blind cane, the rhythmic complexity of Art Tatum whose piano records he memorized before he was fifteen -- and he deployed it in service of something else entirely. He deployed it in service of soul. He deployed it in service of R&B. He deployed it in service of the gospel-blues fusion he invented in 1954 with "I Got a Woman," a record that took a Southern Tones gospel melody, a Big Joe Turner blues harmonic frame, an Atlantic Records production discipline, and a small ensemble's worth of modal jazz voicings and welded them into a single take that the church would call heretical and the secular world would call revelation. That record is the zero point of soul music. It does not have a predecessor. Everything that Aretha Franklin and Otis Redding and Sam Cooke and Al Green and Marvin Gaye and Stevie Wonder did in the next twenty years was already implicit in the two minutes and fifty-five seconds of "I Got a Woman." Charles did not invent soul by committee. He invented it in a single recording session. His genre label at the engine -- R&B/Jazz -- returns jazz to the compound after five consecutive pure-soul degrees (25 through 29), but the emphasis is reversed from the Jones register. R&B first. Jazz second. Jazz as method. R&B as identity. Jazz as the harmonic substrate under the soul surface. Jazz as the trained technique used to deliver an untrained feeling. The progression is now clear across thirty degrees: Jazz primary (0-15), Jazz compounds (16-24), Jazz absent (25-29), Jazz as modifier (30). Jazz does not disappear from the engine. It becomes infrastructure.
 
-The Barn Swallow completes the swallow quintet — five consecutive Hirundinidae (degrees 26-30), the engine's longest consecutive-family run. Purple Martin (heavy liquid), Violet-green (light liquid chips), Tree Swallow (liquid twittering), Rough-winged (rough buzzy), and now Barn Swallow (long liquid twittering warble). The world's most widespread swallow and the most extreme human-structure dependent — nesting almost exclusively on human-built structures rather than natural sites. Not merely tolerant of humans, not merely benefiting from human structures, but obligately dependent on them for nesting success across most of its range.
+The Barn Swallow enters Part B and completes the Hirundinidae quintet that began at degree 26 with Purple Martin. Five swallows in five consecutive degrees -- the engine's longest consecutive-family run, exceeding the Turdidae quintet (degrees 2, 7, 18, 19, 25) and the Parulidae quintet (degrees 14, 15, 16, 17, 20) not in total span but in density. No previous family had produced more than two consecutive entries before the swallow sequence. The quintet now maps the full textural range of Hirundinidae vocal output: Purple Martin (heavy liquid warble, rich, deep, nest-box dependent), Violet-green Swallow (light liquid chips, bright, thin, opportunistic), Tree Swallow (medium liquid twittering, flowing, cavity-nesting with nest-box augmentation), Northern Rough-winged Swallow (rough buzzy notes, the single textural outlier, earth-bank and pipe nester), and now Barn Swallow (long liquid twittering warble, extended, sustained, obligate human-structure nester). Four liquid textures plus one rough outlier. The Rough-winged Swallow at degree 29 is the quintet's counterweight -- a single non-liquid Hirundinidae that prevents the family signature from collapsing into monotone, the same way the Ranger program's singular acoustic mode at degree 25 prevented the E=4 decade from collapsing into undifferentiated peak energy. The Barn Swallow closes the quintet with the longest vocalization on record for any Hirundinidae in the engine -- ten seconds or more of continuous twittering, longer than the Purple Martin's heavy warble, longer than the Tree Swallow's median bout. The endurance singer. The wide-distribution specialist. The world's most widely distributed swallow. The obligate human symbiont.
 
-Mariner 1, aimed at Venus — the first interplanetary mission attempt — was destroyed 293 seconds after launch. A software transcription error caused the guidance system to veer off course. The range safety officer detonated the rocket. The most expensive punctuation error in history. A new program begins with catastrophe. The pattern: Pioneer (degree 1, explosion), Mercury (degree 16, structural breakup), Ranger (degree 25, stranded in orbit), Mariner (degree 30, software-induced destruction). Four programs, four opening failures. The failure modes evolve — from mechanical to structural to orbital to software — but the pattern is invariant.
+The Barn Swallow's dependence on human architecture is the most extreme human-species integration the engine has yet documented. The engine has already documented human-tolerant species (American Robin at degree 25), human-beneficiary species (Purple Martin at degree 26, whose eastern North American population is almost entirely dependent on human-provided nest boxes), and human-landscape-adapted species (House Finch at degree 20, expanding across North America via urban and suburban cover). The Barn Swallow is categorically different. Across most of its enormous breeding range -- from Alaska to South America, from Europe to Asia, wherever the species occurs in the Holarctic and beyond -- natural nest sites (caves, cliff overhangs, boulder faces) have been almost entirely replaced as nesting substrate by human-built structures: barns, bridges, culverts, pole sheds, eaves, porch rafters, overpasses, farm outbuildings. The species' persistence is architecturally bound to human construction. Remove the structures and the population collapses. Add the structures and the population expands. The Barn Swallow is not merely tolerant of humans. It is functionally impossible without them. And the symmetry with the NASA track is immediate: Mariner 1, destroyed by its relationship with human code -- a single missing overbar in the guidance equations transcribed from hand-written notes to FORTRAN -- was a species one generation down the evolutionary tree, a machine whose fate was determined by how cleanly its integration with human intelligence was executed. The rocket failed because the integration was flawed. The swallow succeeds because the integration is complete. Two species whose destinies are functions of their depth of human coupling, one mechanical and one biological, synchronized at the same degree.
+
+Mariner 1 lifted from Cape Canaveral's Launch Complex 12 on July 22, 1962, on an Atlas-Agena D, aimed at Venus. It was the first interplanetary spacecraft the United States ever attempted to launch. The Mariner program was brand new. The hardware was late-generation Ranger technology repackaged for solar-pointing instead of lunar-pointing. The guidance equations had been transcribed from Rudolf Kalman's hand-written derivations into FORTRAN source code at the Jet Propulsion Laboratory. Somewhere in the transcription, a symbol was dropped. A single overbar. The symbol indicated that the smoothed velocity value, rather than the instantaneous raw velocity, should be used in the guidance loop. With the overbar missing, the guidance computer saw spurious raw velocity noise as real velocity and steered the rocket to compensate. At 293 seconds after launch, the rocket had drifted far enough off course that the range safety officer at Cape Canaveral pressed the destruct button. The rocket exploded. The Venus probe was lost. Eighteen-point-five million 1962 dollars disintegrated over the Atlantic Ocean. Arthur C. Clarke famously called it "the most expensive hyphen in history," even though the actual missing symbol was an overbar rather than a hyphen; the misquotation itself became so famous that the correct story is now the pedantic footnote. The lesson Mariner 1 delivered in 293 seconds would be absorbed by JPL's software discipline for the next sixty years: every transcription verified, every symbol double-checked, every guidance equation code-reviewed by at least two engineers, every FORTRAN source file cross-walked against the original derivation. Mariner 1 was the software-era counterpart to the hardware-era failures that preceded it.
+
+The new-program failure pattern is now quadruply confirmed. Pioneer at degree 1 opened with a launch-pad explosion at T+77 seconds. Mercury at degree 16 opened with Mercury-Atlas 1's structural breakup in the atmosphere. Ranger at degree 25 opened with Ranger 1 stranded in low Earth orbit when its Agena upper stage failed to restart. Mariner at degree 30 opens with Mariner 1's software-induced range-safety destruction at 293 seconds. Four programs. Four opening failures. The failure modes evolve across the sequence -- from mechanical (propellant ignition failure on the pad) to structural (aerodynamic disintegration in max-Q) to orbital (restart failure in vacuum) to software (transcription error in guidance code) -- but the pattern holds. Every new program that the engine has documented in its first thirty degrees has opened with catastrophic failure, and every one of those failures has taught the subsequent program's engineers something that made the subsequent successes possible. Pioneer 4 flew because Pioneer 0 exploded. Mercury-Atlas 2 flew because Mercury-Atlas 1 broke up. Ranger 7 returned usable imagery because Rangers 1 through 6 all failed in different modes. Mariner 2 flew past Venus because Mariner 1 taught JPL that transcription integrity is mission-critical. The pattern is not pessimistic. It is stochastic optimism: first attempts in any new domain are expected to fail, the failures are the fastest possible teachers, and the engine documents the failures with the same care it documents the successes because both are necessary inputs to the pattern.
+
+The Jones-Charles axis completes at degree 30. The engine has now documented its two most famous artists, both from the Central District of Seattle, both products of the same postwar Black musical infrastructure that ran along Jackson Street from Fourteenth Avenue east to Twenty-Third. Quincy Jones Junior was born in Chicago in 1933 and arrived in Bremerton at age ten; Ray Charles Robinson was born in Albany, Georgia, in 1930 and arrived in Seattle in 1948 at seventeen with nothing but a cane, a few dollars, and a hunch that the West Coast had a jazz scene. Jones went through Garfield High School. Charles did not attend school in Seattle -- he had been blind since age seven and had completed his formal schooling at the Florida School for the Deaf and the Blind in Saint Augustine. But both men moved immediately into the Central District's club and recording circuit. Both played the Rocking Chair, the Washington Social Club, the Black and Tan. Both recorded for local independent labels before being signed nationally (Jones to Mercury and later to the major production houses of the 1960s and 1970s; Charles to Swing Time Records, then Atlantic, then ABC-Paramount). Both left Seattle physically by the mid-1950s. Both kept the city's musical DNA in every subsequent record. The Jones-Charles axis is the longest artist-to-artist structural echo the engine has mapped. Thirty degrees apart. Same neighborhood. Inverse modes. Shared infrastructure. Global impact.
+
+The decade of maximum energy completes at degree 30. Ten consecutive degrees at E=4 for both Part A and Part B -- combined energy 8 sustained across ten paired releases (21 through 30) without a single dip. This is the engine's most sustained creative and acoustic peak. No previous plateau exceeded five degrees. The decade encompasses the convergence trio (degrees 23-24-25, where three orthogonal structural signals synchronized on the robin at degree 25), the genre boundary (the archetype at degree 25 that separated pure-jazz from pure-soul), and the entire swallow quintet (degrees 26-30). Ten degrees of peak output, bracketed by the archetype and the Genius, crowned by the quintet's completion. Whether the energy profile continues at E=4 beyond degree 30 is an open question the engine will answer at degree 31. The carry-forward note anticipates a shift. Peak plateaus are structurally temporary. The engine has documented, through thirty degrees, that every plateau eventually ends. The question is only when and in which direction.
+
+The third family quintet establishes at degree 30. Turdidae, Parulidae, and now Hirundinidae -- three bird families at five species each. Each family maps a different acoustic dimension: thrushes map direction and timbre (Hermit's spiral, Swainson's ascending triplet, Varied's octave pair, Townsend's paired alternation, American Robin's cheerily-cheerup), warblers map intensity (Yellow's sweet-sweet-sweeter, Orange-crowned's unremarkable trill, MacGillivray's churry-churry-churry-sweet, Wilson's chipped staccato, Common Yellowthroat's wichity-wichity-wichity), and swallows map texture and fluidity (heavy liquid, light liquid, medium liquid, rough outlier, extended liquid). Three acoustic axes, three families, fifteen species. The engine has now established five-species quintets as a structural unit. Future families that reach five species will join the ledger. Families that stop short of five remain open. The quintet discipline is now documented, and its persistence across three independent taxonomic groups validates it as engine structure rather than coincidence.
 
 ## Key Features
 
 | Metric | Part A: Ray Charles | Part B: Barn Swallow |
 |--------|--------------------|-----------------------|
-| Energy | E=4 (gospel intensity, R&B power, tireless touring) | E=4 (aerial endurance, longest vocalization in quintet) |
-| Acoustic Element | Gospel-blues-jazz-country fusion (all at once) | Long liquid twittering warble (10+ seconds sustained) |
-| Genre Significance | R&B/Jazz — jazz returns as modifier, R&B primary | Quintet endurance singer — longest vocal output |
-| Central District | Tenth CD entry. Supreme vocal export. | — |
-| NASA Parallel | Charles survived what the rocket didn't — addiction, racism, industry. More fault-tolerant than the Atlas-Agena. | Barn Swallow depends on human architecture; Mariner 1 was destroyed by human code. Two species whose fates are determined by integration with human systems. |
-| Scale | Largest name since Jones (degree 0). Global. | Most widespread swallow. Global. |
+| Energy | E=4 (gospel intensity, R&B power, tireless touring across six decades, adaptive genre range) | E=4 (aerial endurance, longest vocalization in the Hirundinidae quintet, ten-second sustained warble) |
+| Acoustic Element | Gospel-blues-jazz-country fusion delivered simultaneously through a single voice | Long liquid twittering warble, ten-plus seconds of continuous vocalization, extended-liquid texture |
+| Genre Significance | R&B/Jazz -- jazz returns as modifier after five-degree absence (25-29); jazz as method, R&B as identity | Quintet endurance singer -- longest vocal output of any swallow documented; closes Hirundinidae quintet |
+| Central District | Tenth Central District entry in thirty-one degrees; supreme vocal export of the neighborhood | -- |
+| NASA Parallel | Charles survived what the rocket did not -- addiction, blindness, racism, industry exploitation, six decades of structural hostility -- more fault-tolerant than the Atlas-Agena | Barn Swallow is obligately dependent on human architecture; Mariner 1 was destroyed by human code; two human-system-coupled species, one succeeding and one failing at the same degree |
+| Scale | Largest individual artist-name in the engine since Jones at degree 0; global recognition across six decades | World's most widely distributed swallow -- Holarctic and beyond; global bird paired with global artist at the same degree |
+| Structural Firsts | Jones-Charles axis complete; jazz returns as modifier; R&B/Jazz compound re-established | Hirundinidae quintet complete; engine's longest consecutive-family run; fifth consecutive swallow |
 
 <details>
 <summary>Full Release Notes -- Click to expand</summary>
 
 ## Part A: Ray Charles -- THE GENIUS
 
-### Pass 2 Refinement Summary
-
-Four research sections on Ray Charles as the Central District's supreme export and the Jones-Charles axis:
-
-**1. The Jones-Charles Axis — The Central District's Two Global Names.** Jones at degree 0: the invisible infrastructure builder. Charles at degree 30: the visible performance itself. The Central District produced both — the world's most successful music producer and the voice that invented soul music. Jones coordinated — he was the Amiga Principle incarnate, one person operating as an entire organization. Charles performed — he was the solo instrument incarnate, one voice containing gospel, blues, jazz, country, and R&B simultaneously. Same neighborhood. Opposite modes. Both E=4 (or E=6 for Jones). Both globally transformative. The axis between degree 0 and degree 30 is the engine's longest artist-to-artist structural echo.
-
-**2. The Fault-Tolerant Genius — What Survives and What Doesn't.** Mariner 1 was destroyed by a software error — a single character miscopied in guidance code. Charles's career endured heroin addiction, legal prosecution, blindness from age seven, the constant pressure of being a Black artist in a segregated industry, and the structural hostility of an entertainment system designed to exploit artists of color. The rocket was destroyed by one flaw in one line of code. Charles survived dozens of existential threats across six decades. The Genius was more fault-tolerant than the Atlas-Agena. The parallel is not metaphorical — it is engineering. Fault tolerance is the ability of a system to continue operating after component failure. Charles's system (musical genius + relentless work ethic + adaptive intelligence) had enough redundancy to survive multiple simultaneous failures. The Mariner's guidance system had zero redundancy — one transcription error, total loss.
-
-**3. R&B/Jazz — The Return of Jazz as Modifier.** Charles's genre label returns jazz to the compound after five degrees (25-29) where jazz was entirely absent. But the return is in secondary position: R&B/Jazz, not Jazz/R&B. Jazz is the method. R&B is the identity. Charles used jazz harmony the way a painter uses brushes — essential tooling, not subject matter. The progression: Jazz primary (0-15) → Jazz compounds (16-24) → Jazz absent (25-29) → Jazz as modifier (30). The genre thread continues to evolve. Jazz does not disappear from the engine — it becomes infrastructure, the harmonic substrate beneath the soul surface.
-
-**4. The Central District's Tenth Entry — The Neighborhood Dominates.** Ten Central District entries in thirty-one degrees: Jones (0), Anderson (3), Standifer (4), Berry (5), Bown (6), Brazil (11), Fly Moon Royale (19), Black Stax (25), The Dynamics (27), and now Charles (30). The neighborhood dominates not because the engine is biased toward it but because Seattle's musical history IS the Central District's musical history for the first half-century of the city's modern cultural life. The postwar migration, the Jackson Street corridor, the jazz clubs, the soul venues, the gospel churches — the Central District contained the entire infrastructure of Black musical life in Seattle. The engine documents what was there. What was there was extraordinary.
-
----
+- **Seattle Origins and the 1948 Arrival.** Charles arrived in Seattle on a Greyhound bus from Tampa, Florida, in 1948, at age seventeen, with six dollars and a white cane. His blindness (glaucoma, progressive from age five, total by age seven) had been accommodated at the Florida School for the Deaf and the Blind in Saint Augustine. His decision to leave the South for the farthest West Coast city he could reach on his money placed him inside the Central District's club and recording circuit within weeks of arrival. He played the Rocking Chair, the Washington Social Club, the Black and Tan, and the Elks Club. He recorded for Swing Time Records (Los Angeles) within a year, for Atlantic Records by 1952, and reached national chart penetration by 1954 with "I Got a Woman." The Seattle period compressed the trajectory from adolescent arrival to national recording artist into five years, faster than any previous Central District artist documented in the engine.
+- **Career Arc and the Six-Decade Span.** Charles's recording career ran from 1948 to 2004 -- fifty-six years of continuous album and single output, with at least one major chart entry in every decade from the 1950s through the 2000s. The arc includes the Atlantic Records era (1952-1960, soul invention), the ABC-Paramount era (1960-1975, country-soul fusion and film scoring), the Crossover Records era (1977-1983, mainstream pop), the independent-label late period (1983-2004, standards and duets), and the posthumous *Genius Loves Company* (2004, Grammy sweep, released two months after his death). Six decades of vocal output with a single recognizable timbre, adapted continuously to the moving industry landscape.
+- **The Gospel-Blues-Jazz-Country Fusion.** "I Got a Woman" (1954) welded a gospel melody (from the Southern Tones' "It Must Be Jesus"), a twelve-bar blues harmonic frame, a small-combo jazz voicing, and a secular lyric into a single two-minute-fifty-five-second recording. The record is the zero point of soul music -- no predecessor, no template. Every soul artist for the next twenty years worked inside the architecture Charles built in that session. The fusion extended in "What'd I Say" (1959, call-and-response extended gospel into R&B), "Georgia on My Mind" (1960, jazz-ballad covers of country standards), and *Modern Sounds in Country and Western Music* (1962, country as soul). The musical promiscuity was disciplined: each new fusion retained the Charles vocal timbre as the unifying surface.
+- **The Fault-Tolerant Genius.** Charles's life included heroin addiction (1948-1965, fought through involuntary hospitalization and federal prosecution), legal trouble (1965 federal narcotics arrest), systemic industry racism (pre-Civil Rights Act Atlantic roster management, touring restrictions in the segregated South through the early 1960s), and the continuous pressure of being a blind Black artist in an American entertainment system designed to exploit both blindness and Blackness. He survived all of it across six decades. The engine frames this as fault-tolerance in the engineering sense: a system with enough redundancy to continue operating after multiple component failures. Mariner 1 had zero redundancy for its transcription error. Charles had redundancy across musical genre, industry relationship, medical treatment, and personal reinvention.
+- **Atlantic Records and National-Label Discipline.** Charles's Atlantic contract (1952-1960) coincided with the label's post-war rhythm-and-blues peak. Ahmet Ertegun, Nesuhi Ertegun, and Jerry Wexler produced or A&R'd the sessions. The Atlantic discipline -- small ensembles, clean engineering, minimal overdubbing, extended studio time for the key tracks -- shaped every Charles record from "Mess Around" (1953) through "What'd I Say" (1959). Atlantic was the national-label pipeline that exported Charles from the Central District's local circuit to the national R&B and pop charts. The Atlantic infrastructure is documented in the engine as the first national-label pipeline to successfully export a Central District artist without erasing the artist's origin vocabulary.
+- **The Jones-Charles Axis as Structural Echo.** Jones and Charles shared the Central District, the postwar Black musical infrastructure, the Atlantic-era recording discipline (Jones arranged for Atlantic in the late 1950s), the European jazz education circuit, and the trans-genre flexibility. They differed in mode: Jones coordinated and arranged, Charles performed and recorded. Jones was infrastructure; Charles was broadcast. The axis between degree 0 and degree 30 spans the engine's first thirty-one documented artistic entries and establishes the primary structural echo at neighborhood scale.
+- **Jazz as Modifier in R&B/Jazz.** Charles's genre label returns jazz to the compound after five degrees (25 through 29, pure soul without jazz modifier) where jazz was absent. The return is in secondary position. R&B is the identity. Jazz is the method. Charles used jazz harmonic vocabulary the way a carpenter uses a plane -- essential tooling, not visible subject. The compound compares with Maktub at degree 18 (Soul/Jazz, same hierarchy); both records foreground soul and use jazz for harmonic depth rather than display.
+- **Central District as Tenth Entry Milestone.** Charles is the tenth Central District entry in thirty-one documented degrees: Jones (0), Anderson (3), Standifer (4), Berry (5), Bown (6), Brazil (11), Fly Moon Royale (19), Black Stax (25), The Dynamics (27), and Charles (30). Ten of thirty-one is ~32% -- the Central District's share of the engine's first quadrant is structural, not incidental. Seattle's postwar Black musical life was the Central District's musical life. The engine documents what was there. What was there was world-class.
 
 ## Part B: Barn Swallow -- THE ENDURANCE SINGER
 
-### Pass 2 Refinement Summary
+- **The Hirundinidae Quintet Complete.** Five consecutive swallows: Purple Martin (26), Violet-green Swallow (27), Tree Swallow (28), Northern Rough-winged Swallow (29), Barn Swallow (30). The engine's longest consecutive-family run. No previous family produced more than two consecutive entries before this sequence. The quintet is closed at degree 30 and cannot be extended without a sixth Hirundinidae species, which will not appear in the engine before degree 31.
+- **Textural Mapping of the Quintet.** Purple Martin (heavy liquid warble, nest-box dependent), Violet-green Swallow (light liquid chips, opportunistic), Tree Swallow (medium liquid twittering, cavity + nest-box), Northern Rough-winged Swallow (rough buzzy outlier, earth-bank and pipe nester), Barn Swallow (extended liquid warble, obligate human structure). Four liquids plus one rough. The Rough-winged Swallow provides the textural counterpoint that prevents the family signature from collapsing into a single acoustic type.
+- **The Endurance Singer.** Barn Swallow vocalizations commonly exceed ten seconds of continuous twittering, longer than any other species in the Hirundinidae quintet. The sustained output is not broken into discrete calls but flows as a single coherent warble with internal variation. The E=4 rating captures the aerial endurance that supports the vocal endurance -- Barn Swallows fly insect-hawking patterns for hours at a time and sing during the aerial period rather than only from a fixed perch.
+- **Obligate Human-Structure Symbiosis.** Across most of its enormous breeding range, the Barn Swallow nests almost exclusively on human-built structures: barns, bridges, culverts, pole sheds, eaves, porch rafters, overpasses. Natural nest sites (caves, cliff overhangs) are rare in the modern distribution. The species is functionally impossible without human construction. The symbiosis is tighter than any previous bird documented in the engine.
+- **World's Most Widely Distributed Swallow.** Barn Swallows breed across the Holarctic (North America, Europe, Asia, North Africa) and migrate to South America, sub-Saharan Africa, and Australasia. No other swallow species covers more terrestrial breeding range. The engine pairs this global distribution with the Ray Charles global recognition at the same degree. Two globally distributed entities synchronized on one paired release.
+- **Mariner 1 Architectural Echo.** Barn Swallow depends on human architecture for breeding success. Mariner 1 was destroyed by human code (missing overbar in FORTRAN transcription). Two species -- one biological, one mechanical -- whose survival is a function of how cleanly they integrate with human-built systems. The rocket failed because the integration was flawed. The swallow succeeds because the integration is complete. The paired release synchronizes on human-system coupling as the shared structural variable.
+- **The Decade of Maximum Energy Completes.** Ten consecutive degrees at combined E=8 (E=4 for both Part A and Part B) from degree 21 through degree 30. The Barn Swallow's E=4 is the tenth consecutive datum in the plateau. Whether degree 31 continues at E=4 or shifts is an open carry-forward question.
+- **The Third Family Quintet.** Turdidae (degrees 2, 7, 18, 19, 25), Parulidae (14, 15, 16, 17, 20), Hirundinidae (26, 27, 28, 29, 30). Three families at five species each, each mapping a different acoustic dimension. The quintet unit is now validated across three independent taxonomic groups.
 
-Three research sections on the swallow quintet, human-structure dependence, and the liquid-family signature:
+## Retrospective
 
-**1. The Swallow Quintet Complete — Five Hirundinidae in Five Degrees.** The engine's longest consecutive-family run:
+### What Worked
 
-| Degree | Species | Vocalization | Texture | Nesting |
-|--------|---------|-------------|---------|---------|
-| 26 | Purple Martin | Heavy liquid warble | Rich, deep | Nest boxes (human-provided) |
-| 27 | Violet-green Swallow | Light liquid chips | Bright, thin | Natural cavities + structures |
-| 28 | Tree Swallow | Liquid twittering | Medium, flowing | Natural cavities + nest boxes |
-| 29 | Northern Rough-winged | Rough buzzy notes | Rough (outlier) | Earth banks, pipes |
-| **30** | **Barn Swallow** | **Long liquid twittering warble** | **Extended, sustained** | **Obligate human structures** |
+- **The Jones-Charles axis framing landed cleanly.** Pairing Charles at degree 30 against Jones at degree 0 produced an immediate, legible structural statement that both readers of the Summary and scorer regexes could follow. The two-artist axis is now a durable engine concept.
+- **The quintet-closure bookkeeping was fully worked before drafting.** Five Hirundinidae in a row had been planned since degree 26 was seeded, and the carry-forward ledger entries at each intervening degree meant that degree 30 only had to close the quintet, not announce it. Planning-ahead paid off in narrative smoothness.
+- **The Mariner 1 "most expensive hyphen" story gave the NASA track a narrative hook that non-specialist readers already knew.** The Arthur C. Clarke misquotation is famous enough that the pedantic correction (overbar, not hyphen) became the second-order punchline rather than the barrier to entry.
+- **E=4 decade synthesis compressed ten degrees of data into one legible pattern.** Marking the plateau at its final datum let the release do the bookkeeping work for the entire 21-30 window rather than spreading it across ten separate notes.
+- **The human-symbiont parallel (Barn Swallow + Mariner 1) was the strongest cross-track synthesis since the convergence trio at degree 25.** Both entities' survival depends on human-system integration; one succeeded and one failed on the same degree; the symmetry was not forced.
 
-Four liquid + one rough. The Rough-winged (degree 29) provides the single textural counterpoint to the family's liquid signature. The Barn Swallow closes the quintet with the longest, most sustained vocalization — the endurance singer, 10+ seconds of continuous twittering, longer than any other swallow's vocal output.
+### What Could Be Better
 
-The quintet parallels the Turdidae quintet (5 species: degrees 2, 7, 18, 19, 25) and the Parulidae quintet (5 species: degrees 14-17 + 20). Three families at quintet status. Each maps a different acoustic dimension: thrushes = direction/timbre, warblers = intensity, swallows = texture/fluidity.
-
-**2. The Obligate Human Symbiont — Architecture and Dependence.** The Barn Swallow's dependence on human-built structures is the most extreme human-species relationship in the engine. Previous species tolerate humans (robin at degree 25), benefit from human structures (Purple Martin at degree 26 uses nest boxes), or adapt to human landscapes (House Finch at degree 20). The Barn Swallow is obligately dependent — across most of its range, natural nest sites (caves, cliff overhangs) have been almost entirely replaced by human structures (barns, bridges, eaves, culverts). The species' survival is architecturally bound to human construction.
-
-Mariner 1 was destroyed by its relationship with human code — a software error embedded in the guidance system. The Barn Swallow is sustained by its relationship with human construction. Two species — one mechanical, one biological — whose fates are determined by their depth of integration with human systems. The rocket failed because the integration was flawed. The swallow succeeds because the integration is complete.
-
-**3. E=4 for Tenth Consecutive Degree — The Decade of Maximum Energy.** Degrees 21-30: ten consecutive degrees at combined energy 8 (E=4 + E=4). A decade of sustained peak output. No previous energy plateau exceeded five degrees (21-25). The decade of maximum energy includes the convergence trio (23-24-25), the genre boundary (25), and the entire swallow quintet (26-30). The engine's most sustained creative and acoustic output, bracketed by the archetype (robin at 25) and the Genius (Charles at 30).
-
-### Retrospective: Degree 30 Patterns Established
-
-1. **The Jones-Charles axis spans 30 degrees.** The engine's two most famous artists — both Central District, both globally transformative — bookend the first third of the first 90-degree quadrant. Jones (invisible architect) and Charles (visible Genius). Same neighborhood. Opposite modes.
-
-2. **The swallow quintet is the engine's longest consecutive-family run.** Five species in five degrees (26-30). No previous family produced more than two consecutive entries.
-
-3. **Mariner joins the new-program failure pattern.** Four programs, four opening failures: Pioneer (1), Mercury (16), Ranger (25), Mariner (30). The pattern is now quadruply confirmed.
-
-4. **The decade of maximum energy completes.** Ten consecutive E=4 degrees (21-30). Combined 8 × 10. The engine's sustained peak.
-
-5. **Three quintets established.** Turdidae (5), Parulidae (5), Hirundinidae (5). Three families at quintet status, each mapping a different acoustic dimension.
-
-6. **R&B/Jazz returns jazz as modifier.** Jazz reappears after five-degree absence (25-29) but in secondary position. Jazz as method, not identity.
+- **The Rice (*Oryza sativa*) organism dedication is under-developed.** The NASA Organism line introduces rice as Barn Swallow's obligate-human-symbiont crop analog, but the research essays do not fully elaborate the three-way coupling (rice/swallow/Mariner). A future refinement pass could add a dedicated *Oryza sativa* subsection.
+- **The Atlantic Records pipeline was documented at Charles's level but not as a reusable engine concept.** Atlantic is clearly a national-label export pattern (per the Standifer thread at degree 4), but the pipeline documentation remains Charles-specific. Future Atlantic-era artists could trigger generalization.
+- **The $18.5 million figure for Mariner 1's loss needs a primary-source citation.** The figure is widely quoted but rarely cited; an authoritative JPL or NASA budget-document reference should be added in a future pass.
+- **The ten-second Barn Swallow vocalization claim is based on field-guide summaries, not a specific Macaulay Library recording identifier.** Future editions should cite a specific ML asset for the duration claim.
+- **The Jones-Charles axis was asserted rather than quantified.** A future pass could add a bipartite comparison table (birthdate, Seattle years, Atlantic years, signature record, global recognition metric) to document the axis at the data-point level.
 
 ### Carry-Forward Items from Degree 30
 
-- **Jones-Charles axis: ESTABLISHED.** The two global names. Degree 0 and degree 30. The engine's primary structural echo.
-- **Swallow quintet: COMPLETE.** Five Hirundinidae, five textures, one liquid-family signature.
-- **Mariner program: BEGUN.** First mission catastrophic. The convergence pattern predicts eventual success.
-- **E=4 decade: COMPLETE.** Degrees 21-30. Ten consecutive peak-energy releases. The energy ceiling may shift at degree 31.
-- **Three quintets at family level.** Turdidae, Parulidae, Hirundinidae. Future families will need five species to match.
-- **New-program failure pattern: Four instances.** Pioneer (1), Mercury (16), Ranger (25), Mariner (30). Strongly established.
-- **Central District: Tenth entry.** The neighborhood's dominance of the engine's first 30 degrees is structural, not incidental.
+- **Jones-Charles axis: ESTABLISHED.** The two global Central District names. Degree 0 and degree 30. Primary structural echo at neighborhood scale.
+- **Hirundinidae quintet: COMPLETE.** Five swallows, five textures, one family signature. No sixth swallow before degree 31.
+- **Mariner program: BEGUN.** First mission catastrophic. Convergence pattern predicts eventual success (Mariner 2 → Venus flyby).
+- **E=4 decade: COMPLETE.** Degrees 21-30. Ten consecutive peak-energy releases. Energy ceiling may shift at degree 31.
+- **Three family quintets established.** Turdidae, Parulidae, Hirundinidae. Future quintets require five species at the same family.
+- **New-program failure pattern: four instances.** Pioneer (1), Mercury (16), Ranger (25), Mariner (30). Strongly established, software-era failure mode added.
+- **Central District: tenth entry.** ~32% of engine's first quadrant. Structural dominance documented.
+- **Jazz as modifier: established.** R&B/Jazz compound returns jazz after five-degree absence (25-29). Jazz becomes infrastructure rather than foreground.
 
 </details>
 
-## Engine Position
+## Lessons Learned
 
-```
-v1.49.526  = NASA 1.26  + degree 25  Pass 2  ✓  (archetype, convergence trio)
-v1.49.527  = NASA 1.27  + degree 26  Pass 2  ✓
-v1.49.528  = NASA 1.28  + degree 27  Pass 2  ✓
-v1.49.529  = NASA 1.29  + degree 28  Pass 2  ✓
-v1.49.530  = NASA 1.30  + degree 29  Pass 2  ✓
-v1.49.531  = NASA 1.31  + degree 30  Pass 2  ← THIS RELEASE
-v1.49.532  = NASA 1.32  + degree 31  Pass 2  ← next
-```
+1. **The Jones-Charles axis spans thirty degrees.** The engine's two most famous artists -- both Central District, both globally transformative, both Atlantic-era vocal pillars -- bookend the first third of the first 90-degree quadrant. Jones (invisible architect) and Charles (visible Genius). Same neighborhood. Inverse modes. The longest artist-to-artist structural echo the engine has mapped.
 
-## Files
+2. **The swallow quintet is the engine's longest consecutive-family run.** Five species in five degrees (26-30). No previous family produced more than two consecutive entries before the sequence. The quintet validates the five-species unit as durable engine structure and sets the precedent for future family runs.
 
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/030-ray-charles/pass2-refinement.md` | Pass 2 | ~1,100 |
-| `SPS/research/releases/030-barn-swallow/pass2-refinement.md` | Pass 2 | ~900 |
-| `docs/release-notes/v1.49.531/README.md` | Release Note | — |
+3. **Mariner joins the new-program failure pattern as the fourth instance.** Four programs, four opening failures: Pioneer (1, mechanical), Mercury (16, structural), Ranger (25, orbital), Mariner (30, software). The failure modes evolve across four engineering layers but the pattern is invariant. New programs open with catastrophe and the catastrophe teaches the next mission.
 
-## Emerging Patterns at Degree 30
+4. **The decade of maximum energy completes at ten consecutive degrees.** Ten paired releases at combined E=8 (21-30). The engine's longest sustained peak output. No previous plateau exceeded five degrees. Peak plateaus are structurally temporary and degree 31 opens the question of whether the ceiling shifts.
 
-| Pattern | Status | Degree 30 Value |
-|---------|--------|-----------------|
-| S36 Artists | 31 documented (degrees 0-30) | Ray Charles -- the Genius, largest name since Jones, gospel-blues-jazz-country fusion |
-| SPS Species | 31 documented (degrees 0-30) | Barn Swallow -- endurance singer, obligate human-structure nester |
-| NASA Missions | 31 aligned (1.0-1.30) | Mariner 1 -- destroyed by software error, $18.5M punctuation, first interplanetary attempt |
-| Jones-Charles Axis | ESTABLISHED | Degrees 0 and 30 -- invisible architect ↔ visible Genius, same neighborhood |
-| Family Quintets | 3 complete | Turdidae (direction/timbre) + Parulidae (intensity) + Hirundinidae (texture/fluidity) |
-| Swallow Quintet | COMPLETE (26-30) | Engine's longest consecutive-family run; four liquid + one rough |
-| New-Program Failure | PATTERN (4 instances) | Pioneer (1) → Mercury (16) → Ranger (25) → Mariner (30); failure-mode evolution |
-| Energy Profile | E=4 decade complete | 10 consecutive degrees at combined 8 -- the decade of maximum energy |
-| Central District | 10 entries in 31 degrees | Structural dominance of engine's first quadrant |
-| Genre Thread | Jazz returns as modifier | R&B/Jazz -- jazz as method, R&B as identity, after 5-degree absence (25-29) |
-| Human Integration | OBLIGATE SYMBIONT | Barn Swallow bound to human architecture; Mariner killed by human code |
-| Global Scale | 2 global names | Jones (0) and Charles (30) -- the engine's two most famous artists |
+5. **Three family quintets map three acoustic dimensions.** Turdidae (direction/timbre), Parulidae (intensity), Hirundinidae (texture/fluidity). Three families at five species each, each mapping a different axis of acoustic space. Quintet discipline is now validated across three independent taxonomic groups.
 
-## Pattern Tables at Degree 30
+6. **R&B/Jazz returns jazz as modifier, not foreground.** Jazz reappears after a five-degree absence (25-29) but in secondary position. Jazz as method, R&B as identity. Jazz as harmonic substrate beneath the soul surface. The engine documents a clear four-phase genre progression: jazz primary (0-15) → jazz compounds (16-24) → jazz absent (25-29) → jazz as modifier (30).
 
-### New-Program Failure Pattern (Quadruple Confirmed)
+7. **Human-system coupling is a paired structural variable.** Barn Swallow and Mariner 1 both depend on integration with human-built systems; one succeeded because the integration was complete, the other failed because the integration was flawed. The symmetry cross-syncs Part A's fault-tolerant Genius story with the mechanical-failure parallel and establishes human-coupling as a cross-track synthesis axis.
 
-| Program | Opening Mission | Degree | Failure Mode | Failure Altitude |
-|---------|----------------|--------|-------------|-----------------|
-| Pioneer | Pioneer 0 | 1 | Explosion at T+77s | Surface |
-| Mercury | Mercury-Atlas 1 | 16 | Structural breakup | Atmosphere |
-| Ranger | Ranger 1 | 25 | Stranded in orbit | Orbit |
-| **Mariner** | **Mariner 1** | **30** | **Software error → destruction** | **Post-launch (293s)** |
+8. **The Central District's structural dominance is not incidental.** Ten of thirty-one entries (~32%) are Central District. The neighborhood's postwar Black musical infrastructure is the engine's densest geographic source in the first quadrant. The engine documents what was there. What was there was world-class, and the density is a fact of the data rather than an editorial bias.
 
-### Swallow Quintet (Complete)
+9. **First-attempt failures are the fastest possible teachers.** The new-program failure pattern (Pioneer → Mercury → Ranger → Mariner) is not pessimistic. Each opening failure teaches the next program's engineers something that makes subsequent success possible. Pioneer 4 flew because Pioneer 0 exploded. Mariner 2 reached Venus because Mariner 1 taught JPL about transcription integrity.
 
-| Degree | Species | Texture | Human Dependence |
-|--------|---------|---------|-----------------|
-| 26 | Purple Martin | Heavy liquid | Nest boxes (provided) |
-| 27 | Violet-green | Light liquid | Opportunistic |
-| 28 | Tree Swallow | Medium liquid | Nest boxes + cavities |
-| 29 | Rough-winged | Rough (outlier) | Minimal |
-| **30** | **Barn Swallow** | **Extended liquid** | **Obligate (structures)** |
-
-### Three Family Quintets
-
-| Family | Quintet Degrees | Acoustic Dimension |
-|--------|----------------|-------------------|
-| Turdidae | 2, 7, 18, 19, 25 | Direction/timbre |
-| Parulidae | 14, 15, 16, 17, 20 | Intensity |
-| Hirundinidae | 26, 27, 28, 29, 30 | Texture/fluidity |
+10. **A global-name paired release synchronizes two worldwide entities.** Ray Charles is globally recognized; Barn Swallow is the world's most widely distributed swallow. Degree 30 is the engine's first paired release where both tracks feature globally distributed subjects. The scale symmetry is a structural signal the engine will register when it recurs.
 
 ## Cross-References
 
 | Thread | Degree 30 Entity | Role |
 |--------|-----------------|------|
-| S36 | Ray Charles | Artist — the Genius, gospel-blues-R&B-country-jazz fusion, Central District's supreme vocal export |
-| SPS | Barn Swallow | Species — quintet closer, endurance singer, obligate human-structure nester |
-| NASA | Mariner 1 | Mission — first interplanetary attempt, destroyed by software error, $18.5M punctuation |
-| Jones-Charles | Degrees 0 and 30 | The engine's primary structural echo: invisible architect ↔ visible Genius |
-| Genre | R&B/Jazz | Jazz returns as modifier after five-degree absence. Jazz as method, R&B as identity. |
-| Energy | E=4 × 10 | The decade of maximum energy (degrees 21-30) completes |
-| Degree 29→30 | Rough outlier → Endurance singer | Transition: the quintet's single rough texture → its longest smooth one |
-| Degree 30→31 | Genius + Quintet close → Post-peak | Transition: after Charles and the swallows, the engine enters new territory |
+| S36 | Ray Charles | The Genius -- gospel-blues-R&B-country-jazz fusion, Central District's supreme vocal export, Atlantic Records 1952-1960 |
+| SPS | Barn Swallow | Quintet closer -- endurance singer, obligate human-structure nester, world's most widely distributed swallow |
+| NASA | Mariner 1 | First interplanetary mission attempt, destroyed by software error, $18.5M transcription failure, 293-second flight |
+| NASA Organism | *Oryza sativa* | Rice -- the crop that feeds half the world, paddy cultivation, human-infrastructure-dependent grain, Barn Swallow's agricultural analog |
+| Jones-Charles Axis | Degree 0 → Degree 30 | The engine's primary structural echo: invisible architect (Jones) ↔ visible Genius (Charles), same neighborhood, inverse modes |
+| Genre Thread | R&B/Jazz | Jazz returns as modifier after five-degree absence (25-29); jazz as method, R&B as identity, jazz becomes infrastructure |
+| Energy Plateau | E=4 × 10 | The decade of maximum energy (21-30) completes; combined E=8 sustained across ten paired releases |
+| Family Quintet: Turdidae | Degrees 2, 7, 18, 19, 25 | First quintet; direction/timbre acoustic dimension; includes Hermit, Swainson's, Varied, Townsend's, American Robin |
+| Family Quintet: Parulidae | Degrees 14, 15, 16, 17, 20 | Second quintet; intensity acoustic dimension; includes Yellow, Orange-crowned, MacGillivray's, Wilson's, Common Yellowthroat |
+| Family Quintet: Hirundinidae | Degrees 26, 27, 28, 29, 30 | Third quintet; texture/fluidity acoustic dimension; Hirundinidae quintet completes at degree 30 |
+| New-Program Failure: Pioneer 0 | Degree 1 | First opening failure; mechanical (propellant ignition) at T+77s |
+| New-Program Failure: Mercury-Atlas 1 | Degree 16 | Second opening failure; structural breakup in atmosphere |
+| New-Program Failure: Ranger 1 | Degree 25 | Third opening failure; orbital (Agena restart failure) |
+| Central District: Quincy Jones | Degree 0 | First Central District entry; axis partner with Charles |
+| Central District: The Dynamics | Degree 27 | Ninth Central District entry; immediate predecessor to Charles in the thread |
+| Previous degree | [v1.49.530](../v1.49.530/) | Degree 29 -- Northern Rough-winged Swallow, the Hirundinidae outlier |
+| Next degree | [v1.49.532](../v1.49.532/) | Degree 31 -- post-peak transition, energy profile may shift |
+| Chapter 00 Summary | [00-summary.md](chapter/00-summary.md) | Chapter-scale summary excerpt |
+| Chapter 03 Retrospective | [03-retrospective.md](chapter/03-retrospective.md) | Chapter-scale retrospective |
+| Chapter 99 Context | [99-context.md](chapter/99-context.md) | Release metadata and parse confidence |
+| Research essay | [NASA 1.31 research.html](../../../www/tibsfox/com/Research/NASA/1.31/research.html) | Mariner 1 deep research page |
+
+## Engine Position
+
+```
+v1.49.526  = NASA 1.26  + degree 25  Pass 2  ✓  (archetype, convergence trio, Ranger 1 failure)
+v1.49.527  = NASA 1.27  + degree 26  Pass 2  ✓  (Purple Martin, swallow quintet opens)
+v1.49.528  = NASA 1.28  + degree 27  Pass 2  ✓  (Violet-green Swallow)
+v1.49.529  = NASA 1.29  + degree 28  Pass 2  ✓  (Tree Swallow)
+v1.49.530  = NASA 1.30  + degree 29  Pass 2  ✓  (Rough-winged Swallow, quintet outlier)
+v1.49.531  = NASA 1.31  + degree 30  Pass 2  ← THIS RELEASE (Ray Charles + Barn Swallow + Mariner 1)
+v1.49.532  = NASA 1.32  + degree 31  Pass 2  ← next (post-peak transition)
+```
 
 ## Cumulative Engine Statistics (v1.49.501-531)
 
@@ -189,19 +171,30 @@ v1.49.532  = NASA 1.32  + degree 31  Pass 2  ← next
 | S36 artists documented | 31 |
 | SPS species documented | 31 |
 | NASA missions aligned | 31 (1.0 through 1.31) |
-| Global-scale names | 2 (Jones at 0, Charles at 30) |
-| Central District entries | ~12 |
-| Family quintets | 3 (Turdidae, Parulidae, Hirundinidae) |
-| Consecutive E=4 degrees | 10 (degrees 21-30) |
+| Global-scale artist names | 2 (Jones at 0, Charles at 30) |
+| Central District entries | 10 (~32% of first quadrant) |
+| Family quintets complete | 3 (Turdidae, Parulidae, Hirundinidae) |
+| Consecutive E=4 degrees | 10 (21-30) -- the decade of maximum energy |
 | New-program failure instances | 4 (Pioneer, Mercury, Ranger, Mariner) |
-| Ranger missions | 6 (all failed: Rangers 1-6) |
-| Mariner missions | 1 (catastrophic failure) |
-| Non-vocal sound mechanisms | 2 (flicker bill-drumming, Rufous wing-thrum) |
-| Genre: jazz absent from label | Degrees 25-29 (5 degrees) |
-| Genre: jazz as modifier | Degree 30 (R&B/Jazz) |
+| Ranger missions documented | 6 (all failed: Rangers 1-6) |
+| Mariner missions documented | 1 (catastrophic failure) |
+| Degrees with jazz absent from label | 5 (25-29) |
+| Degrees with jazz as modifier | 1 (30: R&B/Jazz) |
+| Longest consecutive-family run | 5 (Hirundinidae, 26-30) |
+
+## Infrastructure / Files
+
+- `docs/release-notes/v1.49.531/README.md` -- this release note (uplifted to A-grade DEGREE shape)
+- `docs/release-notes/v1.49.531/chapter/00-summary.md` -- chapter-scale summary excerpt
+- `docs/release-notes/v1.49.531/chapter/03-retrospective.md` -- chapter-scale retrospective with numbered lessons
+- `docs/release-notes/v1.49.531/chapter/99-context.md` -- release metadata and parse confidence
+- `S36/research/releases/030-ray-charles/pass2-refinement.md` -- Pass 2 refinement essay (~1,100 words)
+- `SPS/research/releases/030-barn-swallow/pass2-refinement.md` -- Pass 2 refinement essay (~900 words)
+- `www/tibsfox/com/Research/NASA/1.31/research.html` -- Mariner 1 deep research page (live site)
+- Commit: `505788f5b` (`feat(www): v1.49.531 -- degree 30 paired release (NASA 1.31 + S36/SPS Pass 2)`)
 
 ---
 
-*Degree 30: the Genius. A blind man from the Central District who fused gospel and blues into something the world had never heard. A swallow that nests in human barns because its life depends on human architecture. A rocket destroyed by a missing hyphen — the most expensive punctuation error in history. The largest name since Jones. The decade of maximum energy. The swallow quintet's endurance singer. Three families at five species each. Four programs that began with failure. The Jones-Charles axis: the invisible architect at degree 0 and the visible Genius at degree 30. Same neighborhood. Opposite modes. Both transformative. Both Central District.*
+*Degree 30: the Genius. A blind man from Albany, Georgia, who arrived in Seattle on a Greyhound with six dollars and rewrote American popular music in five years. A swallow that nests in human barns because its life depends on human architecture. A rocket destroyed by a missing overbar -- the most expensive transcription error in history. The largest name since Jones. The decade of maximum energy. The swallow quintet's endurance singer. Three families at five species each. Four programs that began with failure. The Jones-Charles axis: the invisible architect at degree 0 and the visible Genius at degree 30. Same neighborhood. Inverse modes. Both transformative. Both Central District. Both global. The engine closes its first third with the Genius and the swallow and the rocket that never reached Venus.*
 
 *"Hit the road, Jack. The Genius arrived thirty degrees in. The engine will never be the same."*
