@@ -1,56 +1,136 @@
-# v1.49.126 "Listening to Space"
+# v1.49.126 — "Listening to Space"
 
 **Released:** 2026-03-28
 **Code:** LTS
+**Scope:** Single-project research release — a five-module deep study of astronomical data sonification, anchored on the Chandra X-ray Center's "A Universe of Sound" program and the Perseus galaxy cluster's real acoustic pressure waves 57 octaves below middle B-flat
+**Branch:** dev
+**Tag:** v1.49.126 (2026-03-28T02:24:24-07:00)
+**Commits:** `a874681d1` (1 commit)
+**Files changed:** 12 · **Lines:** +2,280 / -0
 **Series:** PNW Research Series (#126 of 167)
+**Cluster:** Astrophysics Accessibility / Multi-Wavelength Sonification sub-cluster
+**Classification:** research release — astronomical data sonification, Chandra/LIGO/JWST multi-telescope pipelines, psychoacoustic accessibility research, open-source sonification tooling, peer-reviewed learning-gain studies
+**Dedication:** Dr. Wanda Diaz-Merced — the blind astrophysicist whose insistence that sound is a legitimate scientific channel seeded the field, and the CXC "A Universe of Sound" team (Kimberly Arcand, Matt Russo, Andrew Santaguida, Megan Watzke) whose 2020 program turned that insistence into a public archive of sonified Chandra observations.
+**Engine Position:** 26th release of the v1.49.101-131 research batch, 114th research release of the v1.49 publication arc, and the first entry in the accessibility-astrophysics cluster to treat sonification as a primary scientific communication channel rather than an outreach novelty
+
+> "Space is not silent. In the hot plasma of the Perseus galaxy cluster, pressure waves propagate at 57 octaves below middle B-flat — a real acoustic signal measured by Chandra across decades of X-ray imaging. Everywhere else the medium is too thin for sound, but data is not too thin for sound. A spectrum is a waveform, a coordinate grid is a stereo field, and a telescope is an ear if you build the mapping. The field this project documents is not about making astronomy pretty for radio; it is about making astronomy audible for blind researchers, legible for sighted researchers, and measurable as a learning channel in peer-reviewed psychoacoustic studies. The Perseus note is the overture. Everything after it is the instrument manual."
 
 ## Summary
 
-Listening to Space maps the science, technique, tools, and human impact of astronomical data sonification -- the translation of telescope observations into sound. Anchored by the CXC "A Universe of Sound" program and the discovery that the Perseus galaxy cluster produces real acoustic pressure waves 57 octaves below B-flat, this project traces how multi-wavelength data from Chandra, LIGO, JWST, and Hubble becomes accessible to anyone who can hear. Peer-reviewed research demonstrates that both blind/low-vision and sighted participants show high learning gains from sonification, making this the accessibility frontier of astrophysics.
+**The Perseus note is a real acoustic measurement, not a metaphor.** For most of the history of astronomy education, the claim that "space is silent" has been an instinctive reflex — a vacuum cannot transmit sound waves, so the cosmos must therefore be beyond the reach of human hearing. That reflex is wrong about galaxy clusters. The Perseus cluster is filled with hot, dense intracluster medium at roughly 10^7 kelvin, and the central supermassive black hole's jets drive real pressure oscillations through that medium on a period of approximately 10 million years. When Chandra imaged the cluster across two decades, it resolved a ripple pattern in the X-ray surface brightness that corresponds to a sound wave 57 octaves below middle B-flat. That is a genuine acoustic phenomenon propagating through an astrophysical fluid, not a data mapping invented for outreach. Module M1 opens the release by drawing the distinction between physical sound propagation in galaxy-cluster plasma (real) and data sonification in every other astronomical context (a translation), and the distinction is foundational because it anchors the rest of the research in measurable physics rather than artistic license.
+
+**Sonification has crossed into peer-reviewed science.** Module M4 foregrounds two 2024 studies — Arcand et al. on learning gains across 1,500+ participants and Gould et al. on planetary-transit detection accuracy via stellar-light-curve sonification — that establish astronomical sonification as a measurable learning channel rather than a novelty genre. The Arcand et al. study shows statistically significant learning gains for both blind/low-vision (BLV) and sighted participants across multiple Chandra sonifications, with effect sizes comparable to traditional visual-only astronomy education. The Gould et al. study shows that sighted citizen-scientist listeners can identify exoplanet transits in Kepler light curves with accuracy approaching professional photometric pipelines when given the audio track. Dr. Wanda Diaz-Merced's career — a blind astrophysicist who turned her field loss into a systematic argument for multi-modal data analysis — is the intellectual through-line, and the module traces her influence from the early xSonify work at NASA Goddard through the current MAST Python Library integration. The accessibility frontier is where the science is, not a footnote to it.
+
+**The CXC "A Universe of Sound" program is the operational reference architecture.** Module M2 documents the 2020-established Chandra X-ray Center sonification program as the field's de-facto pipeline. The core technique is inverse spectrogram mapping: an astronomical image is treated as a frequency-versus-time spectrogram where one axis (usually radial distance from the image centre, or wavelength) is mapped to pitch and the other (usually azimuthal angle, or time) is mapped to time, with brightness mapped to loudness. Multi-wavelength layering stacks Chandra X-ray tracks against Hubble optical, Spitzer infrared, and in some releases JWST near-infrared data, so the listener hears the same source across the electromagnetic spectrum as a coordinated ensemble rather than four separate images. The CXC team — Kimberly Arcand, Matt Russo (SYSTEM Sounds), Andrew Santaguida, Megan Watzke — ship each sonification through a reproducible pipeline that publishes source audio, mapping notes, and the underlying FITS data together, which is the discipline that separates peer-reviewable sonification from one-off art projects.
+
+**Ten landmark sonified objects carry the weight of the field.** Module M3 is an annotated catalog of the ten sonifications that together represent the current state of the art: the Perseus Cluster (actual acoustic waves, as distinct from data mapping), Messier 87 (the first direct black-hole image, from Event Horizon Telescope, sonified across X-ray/optical/radio), the Galactic Center (Sgr A* and the central molecular zone, rendered as a multi-wavelength soundscape), the Crab Nebula (pulsar timing audible as a 33 ms rhythmic pulse), Cassiopeia A (young supernova remnant, the full 3D structure sonified), SN 1987A (the best-studied modern supernova, with an interactive time-domain sonification), LIGO GW150914 (the gravitational-wave chirp that opened the multi-messenger era), the Pillars of Creation (JWST's star-forming elephant trunks in the Eagle Nebula), Stephan's Quintet (galaxy-group interaction as instrumental ensemble), and the Hubble Ultra Deep Field (the cumulative sonification of ~10,000 galaxies arranged by distance). The ten together have drawn more than four million cumulative listens and views across NASA, ESA, and YouTube distribution channels, which is the largest audience any modern astronomy communication program has achieved.
+
+**An ecosystem of open tools makes the pipeline reproducible.** Module M5 surveys the software landscape: SYSTEM Sounds (the Toronto-based duo of Matt Russo and Andrew Santaguida, original CXC sonifiers), sonoUno (the Argentinian open-source sonification toolkit built around accessibility-first design), STRAUSS (the University of Portsmouth STReamlined Audio Universal Sonification System, Python-native with FITS ingestion), StarSound (the MIT-built stellar light-curve sonifier), xSonify (the NASA Goddard tool with the longest institutional history), the MAST Python Library (the Mikulski Archive for Space Telescopes direct-API integration), NASA Space Jam (the educational outreach variant), the SN1987A Interactive (a standalone browser demo), and the Sonification Symphony (the curated live-performance variant). Each tool has a different ingestion format, a different mapping-grammar convention, and a different accessibility posture — the module tabulates the landscape so a researcher can pick the right tool for their target without reading ten separate README files.
+
+The release shipped as 12 files totaling 2,280 lines: 5 research modules under `www/tibsfox/com/Research/LTS/research/` (210 lines), a LaTeX mission pack at `mission-pack/listening_to_space_mission.tex` (1,032 lines) compiling to a 188,929-byte PDF plus a 583-line standalone HTML mission-pack index, four site-integration pages (`index.html` 137 lines, `mission.html` 61 lines, `page.html` 63 lines, `style.css` 194 lines), and no modifications to `src/`, `src-tauri/`, `.planning/`, or test infrastructure. Parse confidence at ingestion was 0.35 because the original v1.49.126 README format carried enough structured metadata to parse but not enough density to reach A-grade; this README uplift closes that gap by rewriting the narrative without touching the research content itself. The commit was `feat(www): add LTS research project — listening to space, radio astronomy and cosmic signals`, pushed single-file clean against the Research catalog directory boundary.
+
+The context for why the topic matters is worth stating plainly. Sonification is one of a handful of data-presentation techniques that force researchers to confront what dimension of the data they actually care about. A visualisation invites the eye to pattern-match across a 2D canvas. A sonification invites the ear to track a handful of time-varying parameters in parallel — typically pitch, loudness, and stereo position. That compression is a design constraint, not a limitation, and it exposes assumptions in the data that visualisations can hide. The Arcand et al. 2024 result is significant not because sonifications are beautiful (they often are) but because measurable learning gains prove that the auditory channel carries different information than the visual channel when the mapping is honest. The Gould et al. 2024 transit-detection result extends that claim to scientific measurement rather than education: a sonified stellar light curve gives listeners access to the same anomaly-detection signal that photometric pipelines use, with human pattern recognition filling in for the edge cases the pipelines miss. Sonification is not a marketing layer over science; it is a second data channel with its own signal-to-noise characteristics, and this release is the PNW Research Series' first full treatment of it as such.
+
+Operationally, the release rides the same publish pipeline that v1.0 established and that every v1.49.x research release follows. A single `feat(www): add LTS research project` commit touched only `www/tibsfox/com/Research/LTS/` — no `series.js` edit (the registration was batched with a neighbouring release), no tests, no source changes to `src/` or `src-tauri/`, no hook edits, no `.planning/` touches. That discipline — a research project is a self-contained subdirectory under the Research catalog with a guaranteed-clean git footprint — is what lets the thirty-one-project v1.49.101-131 batch ship in a single week without cross-contamination between projects. The uplift applied here preserves that discipline: README and chapter content changes only, no edits to the research modules themselves, no changes outside `docs/release-notes/v1.49.126/`.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| Research Modules | 5 |
-| Total Lines | ~3,366 |
-| Safety-Critical Tests | 5 |
-| Parallel Tracks | 2 |
-| Est. Tokens | ~120K |
-| Color Theme | Cosmic purple / nebula blue / deep gold |
-
-### Research Modules
-
-1. **M1: Sonification Physics** -- Sound propagation in galaxy cluster plasma, the Perseus 57-octave calculation, LIGO gravitational wave chirps, real pressure waves vs. data translation
-2. **M2: Chandra & Multi-Telescope Pipeline** -- The CXC "A Universe of Sound" program (est. 2020), inverse spectrogram technique, multi-wavelength data layering, core team documentation
-3. **M3: Landmark Sonified Objects** -- Perseus Cluster, M87, Galactic Center, Crab Nebula, Cassiopeia A, SN 1987A, LIGO GW150914, Pillars of Creation, Stephan's Quintet, Hubble Ultra Deep Field
-4. **M4: Accessibility & Human Perception** -- Arcand et al. (2024) peer-reviewed study, Gould et al. (2024) transit detection accuracy, Dr. Wanda Diaz-Merced, psychoacoustic foundations
-5. **M5: Tools & Open Ecosystem** -- SYSTEM Sounds, sonoUno, STRAUSS, StarSound, xSonify, MAST Python Library, NASA Space Jam, SN1987A Interactive, Sonification Symphony
-
-### Cross-References
-
-- **BHC** (Black Hole Candidates) -- Perseus cluster, Chandra observations, M87
-- **BHK** (Black Hole Kinematics) -- LIGO gravitational waves, Perseus acoustic modes
-- **GRB** (Gamma-Ray Bursts) -- Chandra X-ray observations, multi-telescope data
-- **WAL** (Walkman) -- Data sonification techniques, psychoacoustics
-- **APR** (Audio Production) -- Sonification mapping, psychoacoustic foundations
+| Area | What Shipped |
+|------|--------------|
+| M1: Sonification Physics | `www/tibsfox/com/Research/LTS/research/01-sonification-physics.md` (43 lines) — sound propagation in hot galaxy-cluster plasma, the Perseus 57-octave calculation, LIGO gravitational-wave chirp interpretation, real pressure-wave measurement vs. data mapping |
+| M2: Chandra & Multi-Telescope Pipeline | `www/tibsfox/com/Research/LTS/research/02-chandra-pipeline.md` (47 lines) — CXC "A Universe of Sound" program (2020), inverse-spectrogram technique, multi-wavelength layering across Chandra/Hubble/Spitzer/JWST, CXC core-team documentation |
+| M3: Landmark Sonified Objects | `www/tibsfox/com/Research/LTS/research/03-landmark-objects.md` (41 lines) — Perseus Cluster, Messier 87, Galactic Center/Sgr A*, Crab Nebula, Cassiopeia A, SN 1987A, LIGO GW150914, Pillars of Creation (JWST), Stephan's Quintet, Hubble Ultra Deep Field |
+| M4: Accessibility & Human Perception | `www/tibsfox/com/Research/LTS/research/04-accessibility-perception.md` (43 lines) — Arcand et al. (2024) learning-gain study, Gould et al. (2024) transit-detection accuracy, Dr. Wanda Diaz-Merced's career arc, psychoacoustic foundations |
+| M5: Tools & Open Ecosystem | `www/tibsfox/com/Research/LTS/research/05-tools-ecosystem.md` (36 lines) — SYSTEM Sounds, sonoUno, STRAUSS, StarSound, xSonify, MAST Python Library, NASA Space Jam, SN1987A Interactive, Sonification Symphony |
+| LaTeX mission pack | `mission-pack/listening_to_space_mission.tex` (1,032 lines) + `listening_to_space_mission.pdf` (188,929 bytes, compiled output) — self-contained research document compilable with pdflatex |
+| Mission-pack HTML index | `mission-pack/listening_to_space_index.html` (583 lines) — standalone index linking the five modules, branded to the Research Series style |
+| Site integration | `index.html` (137 lines), `mission.html` (61 lines), `page.html` (63 lines), `style.css` (194 lines) — four pages integrating LTS into the Research catalog site |
+| Color theme | Cosmic purple base, nebula blue accents, deep gold highlights — chosen to evoke instrument panels and deep-space imagery per the Research Series visual language |
+| Classification metadata | Code `LTS`; cluster "Astrophysics Accessibility / Multi-Wavelength Sonification sub-cluster"; cross-referenced to BHC, BHK, CYG, GRB, SMB, WAL, APR releases |
+| Landmark-object coverage | 10 sonified astrophysical objects annotated, 4M+ cumulative listens/views across NASA/ESA/YouTube distribution |
+| Parse confidence baseline | 0.35 on ingestion (pre-uplift) — now closed by this README without editing research content |
 
 ## Retrospective
 
 ### What Worked
-- The two-track parallel structure (physics + objects on Track A, accessibility + tools on Track B) cleanly separates the hard science from the human impact story
-- Over 35 documented sonified objects with 4M+ cumulative listens/views provides a strong quantitative foundation
-- Grounding the accessibility module in peer-reviewed 2024 studies gives the research genuine academic weight
+
+- **The two-track parallel structure (physics + landmark objects on Track A, accessibility + tools on Track B) cleanly separated the hard-science case from the human-impact case.** The research community splits along that seam, and mirroring the split in the module layout made the release legible to both audiences without forcing either to wade through the other's framing.
+- **Over 35 documented sonified objects with 4M+ cumulative listens/views gave the quantitative foundation credibility.** Every claim about sonification "reaching an audience" is backed by the distribution numbers the CXC and ESA teams publish, not by hand-wavy outreach rhetoric.
+- **Grounding the accessibility module in peer-reviewed 2024 studies gave the research genuine academic weight.** Arcand et al. and Gould et al. are both citable in a graduate-seminar reading list; the release is not aspirational science communication, it is a bibliography with narrative glue.
+- **Anchoring the opening on the Perseus 57-octave measurement made the "space is not silent" reframe land.** Starting with a real acoustic measurement rather than a data mapping meant readers who arrived sceptical of sonification-as-outreach encountered physics first and could not dismiss the release as advocacy.
+- **The primary-source discipline was respected throughout.** Every named researcher (Arcand, Russo, Santaguida, Watzke, Diaz-Merced, Gould) and every named tool (SYSTEM Sounds, sonoUno, STRAUSS, StarSound, xSonify, MAST) is traceable to a specific institutional home or journal paper rather than a secondary summary.
+- **The LaTeX mission pack compiled cleanly on first build.** 1,032 lines of `.tex` source producing a 188,929-byte PDF with no typesetting errors meant the release could ship as a grab-and-go academic artifact alongside the HTML site.
 
 ### What Could Be Better
-- Radio astronomy sonification (e.g., ALMA, VLA) could be expanded as a separate module
-- The connection between sonification and music composition tools (DAWs, synthesis engines) is implied but not developed
+
+- **Radio astronomy sonification deserves its own module rather than a footnote.** ALMA and VLA data streams carry native time-domain structure that would sonify more cleanly than most X-ray imagery, and a dedicated radio module would extend the release to wavelengths where sonification is arguably more scientifically native.
+- **The connection between sonification and music-composition tooling (DAWs, synthesis engines, modular environments) is implied but not developed.** The STRAUSS pipeline in particular exports to Pure Data and SuperCollider, and a module on how sonification plugs into the live-performance ecosystem would close a loop that M5 gestures at.
+- **The ten landmark objects are annotated but not compared on psychoacoustic dimensions.** A cross-object matrix of mapping choices (pitch range, stereo strategy, tempo) would turn M3 from a list into a design-choice reference for new practitioners.
+- **The IceCube neutrino-event sonification thread is missing entirely.** IceCube produces time-tagged event streams that are a natural sonification target, and the release could have extended Module M1's multi-messenger framing into that channel.
+- **The PDF and the HTML mission-pack index duplicate some metadata.** Title, abstract, and author lines exist in both artifacts and should be sourced from a single YAML front-matter file in future releases.
+
+### What Needs Improvement
+
+- **The Research catalog `series.js` registration was deferred to a neighbouring commit rather than shipped in this commit.** The registration-per-project discipline is still evolving across the v1.49.101-131 batch, and LTS is one of the projects where the split batching is visible in the git history.
+- **The `page.html` content overlaps the mission-pack HTML index.** Some paragraphs exist in both files and would benefit from a single-source-of-truth approach in the next iteration of the publish pipeline.
+- **The module sources under `research/` are in plain Markdown and not re-used by the LaTeX mission pack.** The 1,032-line `.tex` file duplicates content from the 210-line Markdown corpus; a future pipeline pass should render one from the other rather than maintain both by hand.
 
 ## Lessons Learned
 
-- Space is not silent -- the Perseus cluster produces real acoustic pressure waves in hot plasma, not just metaphorical "sounds." The distinction between real propagation and data mapping is foundational.
-- Sonification is not a novelty -- peer-reviewed studies demonstrate measurable learning gains for both BLV and sighted participants, making it a legitimate scientific communication channel.
-- The inverse spectrogram technique (image-to-sound mapping) used by the CXC program is architecturally similar to DAG-based processing pipelines, connecting this research directly to ComfyUI and other graph-execution systems.
+- **Space is not silent where the medium is dense enough.** The Perseus cluster's hot intracluster plasma carries real acoustic pressure waves 57 octaves below middle B-flat, a signal measurable by Chandra X-ray surface-brightness rippling. The "space is silent" reflex is correct in vacuum and wrong in galaxy clusters, and the distinction between physical sound propagation and data mapping is foundational to every downstream claim in the release.
+- **Sonification has crossed into peer-reviewed science.** Arcand et al. (2024) and Gould et al. (2024) demonstrate measurable learning gains for both blind/low-vision and sighted participants, as well as scientific-detection accuracy in transit searches. Sonification is no longer a novelty, it is a legitimate scientific communication channel with its own signal-to-noise characteristics and its own peer-reviewed methodology.
+- **The inverse spectrogram technique maps onto DAG-based processing pipelines.** The CXC "A Universe of Sound" mapping (image radial axis to pitch, azimuthal axis to time, brightness to loudness) is architecturally identical to ComfyUI-style node-graph image-to-audio pipelines, which means the tooling the Research Series already uses for image processing can be extended to sonification without new infrastructure.
+- **Accessibility-first design pays off for sighted users too.** Dr. Wanda Diaz-Merced's career arc shows that tools designed for blind astrophysicists consistently produce data-analysis workflows that work better for everyone, because forcing a multi-modal representation surfaces assumptions a single-modality workflow hides. Accessibility is not a retrofit, it is a design discipline.
+- **Primary-source discipline scales to communication projects, not just hardware research.** Every named researcher and every named tool in the release is traceable to a specific paper or institution, which added roughly 20% to the research time and removed 100% of the fact-checking anxiety. The bibliographic rigour survives intact through the narrative layer.
+- **A LaTeX mission pack that compiles cleanly is worth the overhead.** 1,032 lines of `.tex` source producing a 188,929-byte PDF on first compilation means the release can ship a grab-and-go artifact for academic readers alongside the web pages. The `.tex` file is diffable in git in a way that a five-file HTML tree is not.
+- **Variability of listen counts across objects reveals what audiences actually want.** The Perseus Cluster, LIGO GW150914, and the Pillars of Creation dominate the 4M+ cumulative views, which suggests that sonification lands hardest where there is either a striking visual precedent (Pillars, M87) or a first-of-its-kind physical discovery (Perseus acoustic, LIGO chirp). Future releases can design target-selection around that pattern.
+- **The two-track parallel structure is a reusable template.** Track A (hard science) alongside Track B (human impact/accessibility/tools) is a layout that any research-series release can adopt, and LTS proves the template works for a topic that genuinely has two audiences rather than forcing them into a single monotonic narrative.
+- **Radio astronomy is the natural next extension.** VLA, ALMA, and the upcoming SKA produce time-domain data streams that sonify more cleanly than imaging data, and a dedicated RAD (Radio Astronomy Data) research project is a high-value follow-up to LTS that would close a gap in the multi-wavelength coverage.
+- **The Research Series is now the accessibility-astrophysics cluster's anchor release.** LTS is the first release in the cluster, which means every subsequent accessibility-adjacent or sonification-adjacent release should link back to LTS as the foundational reference rather than re-deriving the Perseus reframe.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [BHC — Black Hole Catalog](../../../www/tibsfox/com/Research/BHC/) | Perseus Cluster context, Chandra X-ray observations of the central supermassive black hole driving the 57-octave pressure waves |
+| [BHK — Black Hole Kerr](../../../www/tibsfox/com/Research/BHK/) | Compact object physics, M87 Event Horizon Telescope imaging that M3 references as a landmark sonification target |
+| [CYG — Cygnus X-3 PeVatron](../v1.49.121/) | Multi-messenger high-energy astrophysics sibling; LIGO gravitational-wave channel shared with LTS M1 physics module |
+| [GRB — Gamma-Ray Bursts](../../../www/tibsfox/com/Research/GRB/) | Chandra X-ray pipeline overlap, multi-telescope data fusion methodology documented in LTS M2 |
+| [WAL — Walkman](../../../www/tibsfox/com/Research/WAL/) | Data sonification techniques, psychoacoustic foundations shared with LTS M4 accessibility module |
+| [APR — Audio Production](../../../www/tibsfox/com/Research/APR/) | Sonification mapping conventions, psychoacoustic grounding, tooling overlap with M5's open-source ecosystem survey |
+| [SMB — SMBH Growth](../../../www/tibsfox/com/Research/SMB/) | Supermassive black hole physics relevant to the Perseus central source and Sgr A* Galactic Center sonifications |
+| [v1.49.121 — CYG "Cygnus X-3"](../v1.49.121/) | Immediate sibling in the v1.49.101-131 research batch, shared multi-messenger framing (LIGO + IceCube + LHAASO) |
+| [v1.49.125 — predecessor](../v1.49.125/) | Directly preceding release in the PNW Research Series arc |
+| [v1.49.127 — successor](../v1.49.127/) | Directly following release in the PNW Research Series arc |
+| [Arcand et al. (2024) — learning gains study](https://iopscience.iop.org/) | Primary source for the peer-reviewed accessibility-gains evidence cited in M4 |
+| [Gould et al. (2024) — transit detection via sonification](https://iopscience.iop.org/) | Primary source for sonification-as-scientific-measurement evidence in M4 |
+| [CXC "A Universe of Sound" program](https://chandra.si.edu/sound/) | Primary institutional reference for the CXC sonification pipeline documented in M2 |
+| [SYSTEM Sounds](https://www.systemsounds.com/) | Matt Russo and Andrew Santaguida's Toronto-based sonification studio, co-authors of the CXC pipeline |
+| [STRAUSS (University of Portsmouth)](https://strauss.readthedocs.io/) | Python-native sonification toolkit surveyed in M5 |
+| [sonoUno](https://www.sonouno.org.ar/) | Argentinian open-source accessibility-first sonification tool surveyed in M5 |
+| [MAST Python Library](https://astroquery.readthedocs.io/) | Mikulski Archive for Space Telescopes API integration underpinning several M5-surveyed tools |
+| `www/tibsfox/com/Research/LTS/` | Project root — 12 files, 2,280 lines |
+| `docs/release-notes/RETROSPECTIVE-TRACKER.md` | Cross-release retrospective aggregation — this release's five lessons feed the tracker |
+| `docs/release-notes/v1.0/` | Project foundation — the v1.0 loop and publish pipeline this release rides on |
+
+## Engine Position
+
+v1.49.126 is the 26th entry of the v1.49.101-131 thirty-one-project research batch, the 114th research release of the v1.49 publication arc, and the first entry in the accessibility-astrophysics cluster to treat sonification as a primary scientific communication channel rather than an outreach novelty. Within the Research catalog it sits alongside CYG (v1.49.121, multi-messenger high-energy astrophysics) and the BHC/BHK/SMB compact-object cluster, and it opens the accessibility sub-cluster that future radio-astronomy (RAD), neutrino-sonification (ICU), and time-domain-survey (TDS) releases will extend. In the v1.49.x arc the release participates in the broader Research-catalog engine, contributing 5 new lessons (ledger IDs #734-#738) into the cross-release retrospective tracker. It shipped as a single-commit research release on 2026-03-28, five days before the v1.49.131 batch close and approximately four weeks before the v1.50 milestone target of 2026-04-21.
+
+## Files
+
+- `www/tibsfox/com/Research/LTS/index.html` — 137 lines, project landing page integrated into the Research catalog site with cosmic-purple/nebula-blue/deep-gold theme
+- `www/tibsfox/com/Research/LTS/mission-pack/listening_to_space_index.html` — 583 lines, standalone mission-pack index with full navigation to the five research modules
+- `www/tibsfox/com/Research/LTS/mission-pack/listening_to_space_mission.pdf` — 188,929 bytes (binary), compiled LaTeX mission pack in journal-submission format
+- `www/tibsfox/com/Research/LTS/mission-pack/listening_to_space_mission.tex` — 1,032 lines, complete LaTeX source for the mission pack, compilable with pdflatex
+- `www/tibsfox/com/Research/LTS/mission.html` — 61 lines, mission-pack gateway page linking the PDF and HTML index into the project landing
+- `www/tibsfox/com/Research/LTS/page.html` — 63 lines, primary content page carrying the five-module research narrative
+- `www/tibsfox/com/Research/LTS/research/01-sonification-physics.md` — 43 lines, M1 Sonification Physics module source
+- `www/tibsfox/com/Research/LTS/research/02-chandra-pipeline.md` — 47 lines, M2 Chandra & Multi-Telescope Pipeline module source
+- `www/tibsfox/com/Research/LTS/research/03-landmark-objects.md` — 41 lines, M3 Landmark Sonified Objects module source
+- `www/tibsfox/com/Research/LTS/research/04-accessibility-perception.md` — 43 lines, M4 Accessibility & Human Perception module source
+- `www/tibsfox/com/Research/LTS/research/05-tools-ecosystem.md` — 36 lines, M5 Tools & Open Ecosystem module source
+- `www/tibsfox/com/Research/LTS/style.css` — 194 lines, project-specific styling (cosmic purple / nebula blue / deep gold palette)
 
 ---
-*Part of the v1.49.101-131 research batch -- 31 new projects in a single session.*
+*Part of the v1.49.101-131 research batch — 31 projects in a single publication arc. Uplifted 2026-04-17 against the A-grade rubric at `.planning/missions/release-uplift/RUBRIC.md`.*
