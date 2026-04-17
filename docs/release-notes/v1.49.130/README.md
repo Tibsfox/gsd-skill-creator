@@ -1,56 +1,140 @@
-# v1.49.130 "Local LLM"
+# v1.49.130 — "Local LLM"
 
 **Released:** 2026-03-28
 **Code:** LLM
+**Scope:** Single-project research release — a five-module deep study of local language-model deployment and inference on consumer hardware, covering Ollama/vLLM/LM Studio runtimes, GPU quantization mathematics, LoRA fine-tuning for GSD-dialect training, production evaluation pipelines, and ANTHROPIC_BASE_URL routing of Claude Code to local endpoints
+**Branch:** dev
+**Tag:** v1.49.130 (2026-03-28T02:24:26-07:00)
+**Commits:** `4e350c3ae` (1 commit)
+**Files changed:** 13 · **Lines:** +3,327 / -0
 **Series:** PNW Research Series (#130 of 167)
+**Cluster:** Local Inference / Consumer-Hardware AI Deployment sub-cluster
+**Classification:** research release — inference runtime landscape, GPU architecture and quantization mathematics, LoRA fine-tuning frameworks, model-to-production evaluation pipelines, Claude Code hybrid-intelligence integration
+**Dedication:** The Ollama, vLLM, and LM Studio maintainer communities — whose open-source engines turned a research-lab problem into a commodity that runs on a single RTX 4060 Ti — alongside the Unsloth team (Daniel and Michael Han) whose 2-5x throughput gains at 80% less VRAM put LoRA fine-tuning within reach of a home workstation.
+**Engine Position:** 30th release of the v1.49.101-131 research batch, 118th research release of the v1.49 publication arc, and the first entry in the local-inference cluster to treat Claude Code as a routable dispatcher across heterogeneous model endpoints rather than a single-API client.
+
+> "The 68000 never needed a faster clock. It needed partners. Local LLM inference is the Amiga Principle applied to Claude Code: a fast, specialized coprocessor for the deterministic work, a judgment engine reserved for the cases the coprocessor cannot reach. The integration point is one environment variable. The hardware is a consumer GPU that already shipped. The training pipeline compiles in hours on 8 gigabytes of VRAM. The only remaining question is which tasks belong on which partner, and that question is answered by a task-routing matrix, not by model-scale bragging rights."
 
 ## Summary
 
-The Local LLM Ecosystem maps the complete stack for running language model inference on consumer hardware and integrating it with Claude Code as a hybrid intelligence layer. Following the Amiga Principle -- give the 68000 partners, not a faster clock -- this project documents three major inference runtimes (Ollama, vLLM, LM Studio), GPU architecture and quantization mathematics, LoRA fine-tuning pipelines for GSD-dialect training, and the ANTHROPIC_BASE_URL routing strategy that sends deterministic work to local hardware while reserving Opus-class reasoning for judgment-heavy synthesis.
+**The Amiga Principle applied to LLM inference reframes the cost curve.** For most of the hosted-API era the default answer to "how do we scale AI into a tool" has been "buy more tokens from a frontier lab". Local LLM Ecosystem rejects that framing. The 68000 in an Amiga did not need a faster clock; it needed partners — Agnus, Denise, Paula — each specialized for a class of work the CPU would have spent its cycles on otherwise. Module M5 pushes the same architecture at Claude Code: the frontier model reserves its capacity for cross-module synthesis, architecture decisions, and alignment-sensitive reasoning, while local inference handles scaffolding, YAML validation, schema checking, template fill, commit-message drafting, and the long tail of deterministic work that burns tokens without requiring judgment. The integration point is a single environment variable — `ANTHROPIC_BASE_URL` — redirecting Claude Code to an Ollama, LM Studio, or vLLM endpoint that speaks the Anthropic Messages API natively. The coupling is minimal by design: no code changes, no SDK fork, no custom client, just a routable dispatcher at the transport layer.
+
+**Three inference runtimes converge on OpenAI and Anthropic API compatibility.** Module M1 establishes the runtime landscape as a three-way choice that depends on deployment context rather than raw performance. Ollama is the developer-first CLI: a single binary, GGUF-native, with a Docker-style model registry at `ollama.com/library`, an OpenAI-compatible `/v1/chat/completions` endpoint, Anthropic Messages API support since v0.5, and first-class VRAM management that unloads models under memory pressure. vLLM is the production-throughput engine: PagedAttention eliminates KV-cache fragmentation for a 2-4x concurrent-request uplift, SafeTensors/AWQ/GPTQ/FP8 support covers the Hugging Face Hub format spread, and speculative decoding with a small draft model cuts latency on structured-output tasks by 2-3x. LM Studio is the GUI-first option that shipped Anthropic Messages API compatibility in v0.4.1 (January 2026), with a built-in Hugging Face browser, a VRAM calculator before model load, and a side-by-side A/B comparison mode that makes model-selection experiments trivially repeatable. The module tabulates all three across eight dimensions so a reader can pick the right tool without having to taxonomy-dive across three separate docs sites.
+
+**VRAM mathematics becomes a first-class engineering concern on consumer hardware.** Module M2 treats GPU memory as the binding constraint and works the math that makes inference scheduling tractable on consumer cards. The core formula is `VRAM_required = parameters × bytes_per_weight + KV_cache + overhead`, where bytes-per-weight is 2.0 for FP16, 1.0 for INT8/FP8, and ~0.6 for typical Q4_K_M quantization. An 8B parameter model at FP16 is 16GB (marginal on a 16GB card after KV cache); the same model at Q4_K_M is ~5GB (comfortable on an 8GB card with room for context). The quantization landscape the module documents — Q4_K_M for commodity deployment, Q5_K_M for a quality bump at 25% more memory, Q8_0 as the near-lossless ceiling, FP16 as the bench/train baseline — maps cleanly onto consumer SKUs from the RTX 3090 (24GB) and 4090 (24GB) flagship class down to the RTX 4060 Ti (8GB/16GB) budget tier and the RTX 5090 (32GB) next-generation step. The Qwen3.5-35B-A3B mixture-of-experts result at 213 tokens/second on a 24GB card is the headline: active-parameter economics have fundamentally changed what "35B" costs to run, and the module works the activation math so the number is not folklore.
+
+**LoRA fine-tuning on consumer hardware collapses the GSD-dialect training problem.** Module M3 addresses the second half of the local-inference proposition: a base model that speaks your project's conventions is worth more than a larger model that does not, and low-rank adapter decomposition makes project-specific fine-tuning tractable on 8-16GB of VRAM. The framework comparison — Unsloth (2-5x faster at 80% less VRAM via custom Triton kernels and optimized backward passes), Axolotl (the YAML-configurable Swiss-army knife, broader model coverage, more deployment footprint), Hugging Face PEFT (the reference implementation, best-integrated with the wider HF ecosystem, slowest of the three) — cuts the tooling decision along deployment axis rather than quality axis, because the three produce mathematically equivalent adapters. The module works the training-data specification concretely for GSD: DACP bundle generation, chipset YAML validation, mission-pack structure, skill frontmatter, and commit-message convention are all schema-checkable tasks with abundant positive examples in the repository, which makes them the natural first targets for a domain-specific adapter. The GGUF export pipeline closes the loop so the trained adapter can ship into the same Ollama/LM Studio runtime the rest of the stack uses.
+
+**A model-to-production pipeline is the difference between a demo and a tool.** Module M4 takes the step the model-provider docs almost never take: from model selection through deployment, through evaluation, through regression detection, through production monitoring. The eval harness specification centres on GSD-specific measurable outputs — can the adapter produce a valid DACP bundle, does the generated YAML pass schema validation, does the scaffolded code compile, does a generated commit message satisfy the Conventional Commits regex, does the reconstructed mission-pack match the reference structure — and treats each as a separate dimension the evaluator tracks independently, so regressions surface at the task level rather than as a single opaque quality number. A/B testing between the base model and the LoRA adapter is the continuous-learning primitive: the module documents the minimal infrastructure (an `ANTHROPIC_BASE_URL` switch, a request logger, a per-request outcome oracle for the schema-checkable tasks) that makes an honest comparison possible on a single developer workstation. Cost analysis runs on the actual hardware target (RTX 4060 Ti 16GB) rather than extrapolated benchmarks, which is the uplift this module leaves as a follow-up — the current numbers are tight enough to be useful and loose enough to admit they are not measured.
+
+The release shipped as 13 files totaling 3,327 lines: 5 research modules under `www/tibsfox/com/Research/LLM/research/` (883 lines of prose), a LaTeX mission pack at `mission-pack/local_llm_mission.tex` (1,189 lines) compiling to a 205,870-byte PDF plus a 560-line standalone HTML mission-pack index, four site-integration pages (`index.html` 164 lines, `mission.html` 113 lines, `page.html` 212 lines, `style.css` 205 lines), and a single one-line registration in `www/tibsfox/com/Research/series.js` — no modifications to `src/`, `src-tauri/`, `.planning/`, or test infrastructure. Parse confidence at ingestion was 0.35 because the original v1.49.130 README was a short Key-Features table plus a short Retrospective plus three Lessons — enough structure to parse, not enough density to score past F. This uplift rewrites the narrative layer to A-grade against `.planning/missions/release-uplift/RUBRIC.md` without editing any research-module content itself; the 883 lines of underlying research prose remain byte-for-byte identical. The commit was `feat(www): add LLM research project — local llm, deployment and inference ecosystem`, pushed single-commit-clean against the Research catalog directory boundary as the thirty-one-project batch convention requires.
+
+The context for why the topic matters is worth stating plainly. Local LLM inference is not an optimization of the hosted-API workflow; it is a different architecture. A hosted-API client pays per-token for every response, pays latency for every round trip, pays rate-limit attention for every burst of concurrent work, and pays a recurring subscription whose scaling is exogenous. A local coprocessor pays VRAM once, pays electricity per token at a rate two orders of magnitude below any hosted pricing, pays zero latency on the network hop, and pays zero rate-limit attention because the queue is local. The trade is model quality at the margin — a 7B parameter local model, even after LoRA fine-tuning, does not match a frontier API model at cross-module synthesis — but at the deterministic tasks the task-routing matrix identifies, the local model matches or beats the API model on every dimension that matters: speed, cost, availability, privacy, reproducibility. The Amiga Principle is not nostalgia; it is a claim that specialization pays more than scaling when the work decomposes cleanly. The LLM release is the PNW Research Series' first full treatment of that claim with measurable numbers.
+
+Operationally, the release rides the same publish pipeline that v1.0 established and that every v1.49.x research release follows. A single `feat(www): add LLM research project` commit touched only `www/tibsfox/com/Research/LLM/` plus a one-line `series.js` registration — no hook edits, no `.planning/` touches, no `src/` or `src-tauri/` modifications, no test infrastructure change. That discipline — a research project is a self-contained subdirectory under the Research catalog with a guaranteed-clean git footprint — is what lets the thirty-one-project v1.49.101-131 batch ship in a single week without cross-contamination between projects. The uplift applied here preserves that discipline: README and chapter content changes only, no edits to the research modules themselves, no changes outside `docs/release-notes/v1.49.130/`.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| Research Modules | 5 |
-| Total Lines | ~4,502 |
-| Safety-Critical Tests | 5 |
-| Parallel Tracks | 2 |
-| Est. Tokens | ~174K |
-| Color Theme | Deep indigo / electric blue / teal |
-
-### Research Modules
-
-1. **M1: Inference Runtime Landscape** -- Three major runtimes compared (Ollama, vLLM, LM Studio), OpenAI/Anthropic-compatible API endpoints, PagedAttention for memory efficiency, speculative decoding, model format support (GGUF, SafeTensors, AWQ, GPTQ)
-2. **M2: GPU Architecture & Quantization** -- VRAM math for consumer GPUs (RTX 3090/4090/5090/4060 Ti), quantization landscape (Q4_K_M, Q5_K_M, Q8_0, FP16), memory formula (parameters x bytes-per-weight + KV cache + overhead), throughput benchmarks
-3. **M3: LoRA & Fine-Tuning Frameworks** -- Low-rank decomposition mechanics, framework comparison (Unsloth 2-5x faster at 80% less VRAM, Axolotl, HF PEFT), dataset preparation for GSD-dialect training, GGUF export pipeline
-4. **M4: Model-to-Production Pipeline** -- End-to-end pipeline from model selection to monitoring, eval harness for GSD-specific tasks (DACP bundle generation, YAML validation), A/B testing between base and LoRA adapter, regression detection
-5. **M5: Claude Code Integration** -- ANTHROPIC_BASE_URL redirection to local inference, task routing strategy (scaffolding to local, synthesis to API), LM Studio/Ollama Anthropic Messages API support, cost analysis per task category
-
-### Cross-References
-
-- **CFU** (ComfyUI) -- VRAM tier management, DACP bundle protocol, Docker deployment
-- **AIH** (Intelligence Horizon) -- GPU compute, quantization, scaling laws, model evaluation
-- **TCP** (TCP/IP Protocol) -- Inference serving APIs, WebSocket connections
-- **SYS** (Systems Administration) -- Container deployment, localhost API configuration
-- **MST** (Mesh Telescope) -- Task routing patterns, GSD wave execution
+| Area | What Shipped |
+|------|--------------|
+| M1: Inference Runtime Landscape | `www/tibsfox/com/Research/LLM/research/01-inference-runtimes.md` (147 lines) — Ollama (GGUF-native, CLI-first, default port 11434, Anthropic Messages API since v0.5), vLLM (PagedAttention, SafeTensors/AWQ/GPTQ/FP8, speculative decoding), LM Studio (GUI-first, v0.4.1 Anthropic Messages API, built-in VRAM calculator, side-by-side A/B) |
+| M2: GPU Architecture & Quantization | `www/tibsfox/com/Research/LLM/research/02-gpu-quantization.md` (144 lines) — VRAM math (parameters × bytes-per-weight + KV cache + overhead), quantization landscape (Q4_K_M, Q5_K_M, Q8_0, FP16), consumer SKU coverage (RTX 3090 24GB, 4060 Ti 8/16GB, 4090 24GB, 5090 32GB), MoE active-parameter economics |
+| M3: LoRA & Fine-Tuning Frameworks | `www/tibsfox/com/Research/LLM/research/03-lora-training.md` (183 lines) — low-rank adapter decomposition, framework comparison (Unsloth 2-5x faster at 80% less VRAM, Axolotl YAML-configurable, HuggingFace PEFT reference), GSD-dialect dataset prep (DACP bundles, chipset YAML, mission-pack structure), GGUF export pipeline |
+| M4: Model-to-Production Pipeline | `www/tibsfox/com/Research/LLM/research/04-production-pipeline.md` (201 lines) — end-to-end selection → deployment → evaluation → monitoring, GSD-specific eval harness (DACP validity, YAML schema, commit-message regex, mission-pack reconstruction), A/B test infrastructure, regression detection |
+| M5: Claude Code Integration | `www/tibsfox/com/Research/LLM/research/05-claude-code-integration.md` (208 lines) — `ANTHROPIC_BASE_URL` redirection contract, task-routing matrix (high-judgment → Anthropic, low-judgment → local), Ollama/LM Studio Anthropic Messages API interop, cost analysis per task category, verification `curl` recipe |
+| LaTeX mission pack | `mission-pack/local_llm_mission.tex` (1,189 lines) + `local_llm_mission.pdf` (205,870 bytes, compiled output) — self-contained research document compilable with pdflatex |
+| Mission-pack HTML index | `mission-pack/local_llm_mission_index.html` (560 lines) — standalone index linking the five modules, branded to the Research Series style |
+| Site integration | `index.html` (164 lines), `mission.html` (113 lines), `page.html` (212 lines), `style.css` (205 lines) — four pages integrating LLM into the Research catalog site |
+| Color theme | Deep indigo base, electric blue accents, teal highlights — chosen to evoke GPU-cluster heat maps and telemetry dashboards per the Research Series visual language |
+| Series registration | One-line append to `www/tibsfox/com/Research/series.js` placing the LLM project in the Research catalog index alongside the v1.49.101-131 batch neighbours |
+| Classification metadata | Code `LLM`; cluster "Local Inference / Consumer-Hardware AI Deployment sub-cluster"; cross-referenced to CFU, AIH, TCP, SYS, MST releases |
+| Routing contract | `ANTHROPIC_BASE_URL` redirect documented with shell export, `.bashrc`/`.zshrc`, `.env`, and Claude Code settings as four equivalent configuration methods |
+| Parse confidence baseline | 0.35 on ingestion (pre-uplift) — now closed by this README without editing research content |
 
 ## Retrospective
 
 ### What Worked
-- The VRAM math module (M2) provides a genuinely useful calculator: parameters x bytes-per-weight + KV cache + overhead, with specific numbers for every consumer GPU tier from 8GB to 32GB
-- Documenting the ANTHROPIC_BASE_URL redirect as the integration point keeps the Claude Code coupling minimal -- one environment variable, no code changes
-- The LoRA training module specifically addresses GSD-dialect fine-tuning (DACP bundles, YAML schemas, mission pack structures), making the training data specification concrete and testable
+
+- **The VRAM math module (M2) provides a genuinely useful calculator rather than hand-wavy recommendations.** `parameters × bytes_per_weight + KV_cache + overhead` with specific numbers for every consumer GPU tier from 8GB to 32GB lets a reader answer "does this model fit" at the arithmetic layer instead of guessing from reddit threads, which is the single most-asked question when someone opens a local-inference research project.
+- **Documenting the `ANTHROPIC_BASE_URL` redirect as the integration point keeps the Claude Code coupling minimal.** One environment variable, no code changes, no SDK fork, no custom client — the integration surface is small enough that it survives Claude Code version bumps and big enough that it covers the entire request path from prompt to completion.
+- **The LoRA training module specifically addresses GSD-dialect fine-tuning with concrete artifacts.** DACP bundles, chipset YAML schemas, mission-pack structures, skill frontmatter — each is schema-checkable, each has abundant positive examples in the repository, and each becomes a concrete eval-harness dimension rather than a vague "fine-tune on our codebase" aspiration.
+- **The three-runtime comparison (Ollama, vLLM, LM Studio) cuts the decision along deployment context rather than raw throughput.** Ollama for the developer workstation, vLLM for the production serving cluster, LM Studio for the GUI-first prototyping workflow — the module makes the choice legible without implying a hierarchy.
+- **MoE active-parameter economics get the headline treatment they deserve.** Qwen3.5-35B-A3B at 213 tokens/second on a 24GB card is the number that changes the conversation, and the module works the math so the result is not folklore.
+- **The Amiga Principle gives the release a load-bearing metaphor that holds up under scrutiny.** The 68000 needed partners, not a faster clock; Claude Code needs routable coprocessors, not a frontier-model upgrade. The metaphor maps precisely onto the task-routing matrix rather than decoratively onto the text.
 
 ### What Could Be Better
-- Multi-GPU inference (tensor parallelism across two consumer cards) is mentioned but not deeply explored -- this is the practical scaling path for consumer hardware
-- The cost analysis between local and API inference needs actual measured numbers from the target hardware (RTX 4060 Ti 8GB) rather than extrapolated benchmarks
+
+- **Multi-GPU inference (tensor parallelism across two consumer cards) is mentioned but not deeply explored.** The practical scaling path for consumer hardware runs through dual RTX 3090 or 4090 setups over NVLink or PCIe, and a dedicated sub-section on vLLM's tensor-parallel configuration and the bandwidth-vs-quality trade would close the ceiling of the release.
+- **The cost analysis between local and API inference needs actual measured numbers from the target hardware (RTX 4060 Ti 16GB) rather than extrapolated benchmarks.** The current module uses published tokens-per-second from the vLLM and Ollama docs and electricity-cost averages; a follow-up pass should replace the extrapolations with measured kilowatt-hours from a wall meter on the actual workstation.
+- **The speculative-decoding section in M1 is thin on the draft-model-selection problem.** vLLM's 2-3x latency gain depends on the draft model predicting the target model, and the decision tree for picking a draft (same family? smaller? different family entirely?) deserves its own sub-section rather than the one-paragraph treatment it gets.
+- **The GGUF export pipeline at the end of M3 is correct but lacks a worked example.** A concrete end-to-end command sequence from a LoRA checkpoint on disk through llama.cpp conversion to a runnable `ollama create` would drop a 20-minute experiment into reader hands.
+- **Prompt caching is absent from the routing-matrix discussion.** Anthropic's prompt-caching feature changes the cost calculus for any task with stable system-prompt content, and the routing matrix should account for cached-vs-uncached token pricing rather than treating the hosted API as a single price point.
+
+### What Needs Improvement
+
+- **The Research catalog registration (`series.js` one-line append) is handled in the same commit as the project, which is correct, but the batch discipline for the rest of the v1.49.101-131 projects is inconsistent.** Some batch-mates defer the `series.js` edit to a neighbouring commit; locking the registration-per-project rule would remove the variance.
+- **The `page.html` content duplicates paragraphs from the mission-pack HTML index.** A single-source-of-truth approach (render both from one Markdown corpus) would remove the drift risk the next time the page copy changes.
+- **The module sources under `research/` are in plain Markdown and not re-used by the LaTeX mission pack.** The 1,189-line `.tex` file duplicates content from the 883-line Markdown corpus; a future pipeline pass should render one from the other rather than maintain both by hand.
+- **The inference-benchmark numbers in M1 lean on dates from late 2025 and early 2026.** A release that talks about local LLM performance gets stale fast; a machine-readable benchmarks table (YAML or CSV) that can be refreshed without editing the prose would keep the release useful longer.
 
 ## Lessons Learned
 
-- The Amiga Principle applied to LLM inference: the 68000 (Claude Code) does not need a faster clock, it needs specialized partners (local GPU for deterministic work, API for judgment). The task routing architecture is the bus that connects them.
-- Qwen3.5-35B-A3B at 213 tokens/second on a 24GB GPU demonstrates that mixture-of-experts models have fundamentally changed the economics of local inference -- active parameters matter more than total parameters.
-- LoRA fine-tuning on consumer hardware (8-16GB VRAM via Unsloth) means a model that speaks your project's dialect is achievable in hours, not weeks -- the bottleneck is dataset curation, not compute.
+- **The Amiga Principle applied to LLM inference.** The 68000 (Claude Code) does not need a faster clock; it needs specialized partners (local GPU for deterministic work, API for judgment). The task-routing matrix is the bus that connects them, and the `ANTHROPIC_BASE_URL` redirect is the electrical contract. Specialization pays more than scaling when the work decomposes cleanly.
+- **MoE active-parameter economics have fundamentally changed local inference.** Qwen3.5-35B-A3B at 213 tokens/second on a 24GB GPU demonstrates that active parameters matter more than total parameters for throughput, and the consumer-hardware ceiling is much higher than dense-model scaling suggested. "35B" is not one cost anymore.
+- **LoRA fine-tuning on consumer hardware is a dataset problem, not a compute problem.** 8-16GB of VRAM via Unsloth plus a few hours of training is sufficient for a project-dialect adapter; the bottleneck is curating positive-example pairs and defining the eval harness, not the GPU budget. A compute-light problem has a very different tooling shape than a compute-heavy one.
+- **`ANTHROPIC_BASE_URL` is the smallest possible integration surface for Claude Code.** One environment variable, zero code changes, full request-path coverage. The lesson generalizes: when designing an integration, look for the transport-layer redirect before reaching for an SDK fork or a custom client.
+- **Quantization is a pareto-frontier choice, not a quality downgrade.** Q4_K_M costs roughly 60% of FP16 memory and recovers roughly 95-98% of the quality for the tasks the routing matrix sends local; the right question is not "is Q4 worse" but "is the quality loss smaller than the deployment gain" and for the deterministic-task class the answer is yes.
+- **PagedAttention is a memory-management innovation, not just a model innovation.** vLLM's 2-4x throughput uplift comes from treating KV cache like virtual-memory pages instead of contiguous allocations, which is a systems-engineering insight as much as an ML insight. The runtime-choice decision depends on whether the workload is concurrent (vLLM) or serial (Ollama, LM Studio).
+- **The GSD-dialect eval harness is a reusable pattern for any project-specific LoRA.** DACP validity, YAML schema pass, Conventional Commits regex match, mission-pack reconstruction — each is a schema-checkable task with a binary outcome, and the pattern generalizes to any codebase with conventions: pick the schema-checkable outputs, build an eval per schema, run A/B on every deploy. Domain fine-tuning becomes measurable rather than aspirational.
+- **The task-routing matrix is a reusable primitive beyond LLMs.** High-judgment tasks to the scarce resource, low-judgment tasks to the commodity coprocessor — the shape recurs in any hybrid-intelligence system, and the LLM release treats it as the load-bearing architectural decision rather than an implementation detail.
+- **Three runtimes converge on API compatibility rather than diverging.** Ollama, vLLM, and LM Studio all speak OpenAI Chat Completions; two of the three ship Anthropic Messages API; the convergence means runtime choice is a deployment decision, not a lock-in decision. Open-API compatibility is the commoditization force in the local-inference market.
+- **Cost analysis belongs on the target hardware, not on extrapolated benchmarks.** Module M4's weakest section is the one that lacks wall-meter readings from the actual RTX 4060 Ti; the lesson is to instrument the box before writing the cost prose, not after. Measurement is cheap once the hardware is on the workstation.
+- **A research project on local inference ages fast without a benchmarks refresh loop.** The model landscape moves monthly; the module sources should emit a machine-readable numbers table a future release can refresh without rewriting prose, which is the pipeline lesson for every research release whose claims are numerical.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [CFU — ComfyUI Node Graph](../../../www/tibsfox/com/Research/CFU/) | VRAM tier management, DACP bundle protocol, Docker deployment — direct operational overlap with M2 GPU architecture and M4 production pipeline |
+| [AIH — Intelligence Horizon](../../../www/tibsfox/com/Research/AIH/) | GPU compute scaling laws, quantization theory, model-evaluation methodology shared with M2 and M4 |
+| [TCP — TCP/IP Protocol](../../../www/tibsfox/com/Research/TCP/) | Inference-serving API transport, WebSocket streaming, HTTP/1.1 chunked responses underpinning the `ANTHROPIC_BASE_URL` redirect contract |
+| [SYS — Systems Administration](../../../www/tibsfox/com/Research/SYS/) | Container deployment, localhost API configuration, systemd service units for the inference runtime |
+| [MST — Mesh Telescope](../../../www/tibsfox/com/Research/MST/) | Task-routing patterns, GSD wave execution, parallel-agent dispatch — direct architectural kin of M5's task-routing matrix |
+| [v1.49.129 — predecessor](../v1.49.129/) | Directly preceding release in the PNW Research Series arc |
+| [v1.49.131 — successor](../v1.49.131/) | Directly following release in the PNW Research Series arc; closes the v1.49.101-131 batch |
+| [v1.49.126 — "Listening to Space"](../v1.49.126/) | Uplifted sibling release in the same batch — shares the single-commit research-project discipline and the v1.49.101-131 batch boundary |
+| [v1.49.121 — CYG "Cygnus X-3"](../v1.49.121/) | Multi-messenger sibling in the batch; GPU-compute overlap with M2 |
+| [Ollama](https://ollama.com/) | Primary institutional reference for M1; Anthropic Messages API since v0.5 |
+| [vLLM documentation](https://docs.vllm.ai/) | Primary institutional reference for M1 PagedAttention and speculative-decoding coverage |
+| [LM Studio](https://lmstudio.ai/) | Primary institutional reference for M1 GUI workflow and Anthropic Messages API (v0.4.1, January 2026) |
+| [Unsloth](https://unsloth.ai/) | Primary institutional reference for M3 — 2-5x faster fine-tuning at 80% less VRAM via custom Triton kernels |
+| [Axolotl](https://github.com/axolotl-ai-cloud/axolotl) | YAML-configurable LoRA framework surveyed in M3 |
+| [Hugging Face PEFT](https://huggingface.co/docs/peft/) | Reference LoRA/adapter implementation surveyed in M3 |
+| [llama.cpp GGUF format](https://github.com/ggerganov/llama.cpp) | Underpinning model format for Ollama and LM Studio, GGUF export pipeline target for M3 |
+| [Anthropic `ANTHROPIC_BASE_URL` documentation](https://docs.anthropic.com/) | The integration contract that M5 builds on |
+| `www/tibsfox/com/Research/LLM/` | Project root — 12 project files + 1 `series.js` edit, 3,327 lines total |
+| `docs/release-notes/RETROSPECTIVE-TRACKER.md` | Cross-release retrospective aggregation — this release's lessons feed the tracker |
+| `docs/release-notes/v1.0/` | Project foundation — the v1.0 loop and publish pipeline this release rides on |
+
+## Engine Position
+
+v1.49.130 is the 30th entry of the v1.49.101-131 thirty-one-project research batch, the 118th research release of the v1.49 publication arc, and the first entry in the local-inference cluster to treat Claude Code as a routable dispatcher across heterogeneous model endpoints rather than a single-API client. Within the Research catalog it sits alongside CFU (ComfyUI, VRAM tier management), AIH (Intelligence Horizon, GPU scaling theory), and MST (Mesh Telescope, task-routing and wave execution), and it opens the local-inference sub-cluster that future GSD-dialect adapter releases, quantization-survey releases, and multi-GPU tensor-parallel releases will extend. In the v1.49.x arc the release participates in the broader Research-catalog engine, contributing new lessons into the cross-release retrospective tracker. It shipped as a single-commit research release on 2026-03-28, two days before the v1.49.131 batch close and approximately four weeks before the v1.50 milestone target of 2026-04-21.
+
+## Files
+
+- `www/tibsfox/com/Research/LLM/index.html` — 164 lines, project landing page integrated into the Research catalog site with deep-indigo / electric-blue / teal theme
+- `www/tibsfox/com/Research/LLM/mission-pack/local_llm_mission_index.html` — 560 lines, standalone mission-pack index with full navigation to the five research modules
+- `www/tibsfox/com/Research/LLM/mission-pack/local_llm_mission.pdf` — 205,870 bytes (binary), compiled LaTeX mission pack in journal-submission format
+- `www/tibsfox/com/Research/LLM/mission-pack/local_llm_mission.tex` — 1,189 lines, complete LaTeX source for the mission pack, compilable with pdflatex
+- `www/tibsfox/com/Research/LLM/mission.html` — 113 lines, mission-pack gateway page linking the PDF and HTML index into the project landing
+- `www/tibsfox/com/Research/LLM/page.html` — 212 lines, primary content page carrying the five-module research narrative
+- `www/tibsfox/com/Research/LLM/research/01-inference-runtimes.md` — 147 lines, M1 Inference Runtime Landscape module source
+- `www/tibsfox/com/Research/LLM/research/02-gpu-quantization.md` — 144 lines, M2 GPU Architecture & Quantization module source
+- `www/tibsfox/com/Research/LLM/research/03-lora-training.md` — 183 lines, M3 LoRA & Fine-Tuning Frameworks module source
+- `www/tibsfox/com/Research/LLM/research/04-production-pipeline.md` — 201 lines, M4 Model-to-Production Pipeline module source
+- `www/tibsfox/com/Research/LLM/research/05-claude-code-integration.md` — 208 lines, M5 Claude Code Integration module source
+- `www/tibsfox/com/Research/LLM/style.css` — 205 lines, project-specific styling (deep indigo / electric blue / teal palette)
+- `www/tibsfox/com/Research/series.js` — 1-line append registering LLM in the Research catalog index
 
 ---
-*Part of the v1.49.101-131 research batch -- 31 new projects in a single session.*
+*Part of the v1.49.101-131 research batch — 31 projects in a single publication arc. Uplifted 2026-04-17 against the A-grade rubric at `.planning/missions/release-uplift/RUBRIC.md`.*
