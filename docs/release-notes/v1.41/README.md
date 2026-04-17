@@ -1,56 +1,136 @@
 # v1.41 — Claude Code Integration Reliability
 
-**Shipped:** 2026-02-26 | **Phases:** 4 (390-393) | **Plans:** 8 | **Commits:** 11
+**Released:** 2026-02-26
+**Scope:** reliability milestone — dismantles the 417-line monolithic `project-claude/CLAUDE.md` and redistributes every responsibility across three distinct enforcement mechanisms (auto-activating skills, deterministic hooks, scoped subagents), with the install script updated to deploy the new surface reproducibly
+**Branch:** dev → main
+**Tag:** v1.41 (2026-02-26T14:22:00-08:00) — "CLAUDE.md Reliability — skills, hooks, agents architecture"
+**Predecessor:** v1.40 — sc:learn Dogfood Mission
+**Successor:** v1.42 — Test Infrastructure & Coverage
+**Classification:** reliability/refactor — the release that turned project-level Claude Code configuration from ignored prose into enforced mechanism
+**Phases:** 390–393 (4 phases) · **Plans:** 8 · **Commits:** 5 (`5df18880c..48f84dd01`)
+**Files changed (commit window):** 14 files, +891 / −6
+**Verification:** `project-claude/install.cjs` idempotent deploy of skills/hooks/agents · `project-claude/manifest.json` enumerates every deployable artifact · three subagents shipped with distinct tool permissions (executor write, verifier read-only, planner write-without-edit) · `project-claude/CLAUDE.md` collapsed to 46 lines of universally-read context · commit-convention PreToolUse and phase-boundary PostToolUse hooks live in `settings-hooks.json`
 
-## Overview
+## Summary
 
-Dismantled the 417-line monolithic CLAUDE.md and rebuilt its capabilities using the right architectural mechanism for each concern: skills for contextual intelligence, hooks for deterministic enforcement, subagents for scoped expertise.
+**The 417-line `project-claude/CLAUDE.md` was functionally ignored; v1.41 replaced it with a 46-line file plus three mechanisms.** v1.40 closed the `sc:learn` format-breadth gap by dogfooding the pipeline against a 923-page PDF. v1.41 turned the lens back on the project's own Claude Code configuration and asked a blunter question: is any of this surface actually being read by the assistant session-to-session? The answer, after measurement, was no. The 417-line `CLAUDE.md` that accumulated through v1.27–v1.40 had grown past the threshold at which Claude Code's session-initialization pass effectively internalizes project instructions. The prose was there, version-controlled, sincere, and invisible. Phase 390–393 deleted almost all of it. The replacement — a slim 46-line `CLAUDE.md` that contains only universally-relevant project context — is short enough to be internalized at every session start. The remainder of the prose was not discarded; it was redistributed into three distinct mechanisms, each matched to the shape of the concern it now enforces.
 
-## Key Changes
+**Skills, hooks, and subagents are three orthogonal enforcement surfaces, and v1.41 mapped each concern to the right one.** The insight that made the refactor tractable is that "project instructions" is a category that hides at least three different shapes of requirement. Some instructions are contextual — they need to activate when a relevant topic comes up and otherwise stay out of the way. Those became auto-activating **skills**: `gsd-workflow` (command routing and phase behavior), `skill-integration` (loading rules and guardrails for the adaptive layer), `session-awareness` (state checking at session start and after resumes), and `security-hygiene` (self-modifying-system safety for a project that writes its own skills and agents). Other instructions are deterministic — they must fire at a specific tool-call boundary, not when a model decides they're relevant. Those became **hooks** in `project-claude/settings-hooks.json`: a PreToolUse hook validates commit messages against the Conventional Commits convention before the commit lands, and a PostToolUse hook watches for phase-boundary transitions. Other instructions are role-scoped — they describe what a particular kind of worker should do with what permissions. Those became **subagents** in `project-claude/agents/`: `gsd-executor` has write and edit tools, `gsd-verifier` is read-only (the skeptical-verification stance is enforced by the absence of Write/Edit, not by polite request), `gsd-planner` can write new files but not edit existing ones. The three-way split is not arbitrary; it matches what Claude Code's own surface exposes as distinct integration points.
 
-- **Slim CLAUDE.md**: Replaced 417-line monolithic file with 46-line universally-relevant project context
-- **4 Auto-Activating Skills**: gsd-workflow (routing + phase behavior), skill-integration (loading + guardrails), session-awareness (state checking), security-hygiene (self-modifying system safety)
-- **3 GSD Subagent Definitions**: executor, verifier, planner agents with scoped tool permissions
-- **Install Script Update**: Updated `project-claude/install.cjs` to deploy skills, hooks, and agents
-- **Reference Documents**: Command routing tables, phase behavior guides, YOLO mode rules, bounded guardrails, observation patterns
+**`project-claude/install.cjs` became the deployment mechanism that makes the new surface reproducible.** A skills/hooks/agents architecture that only works in one clone and drifts in every other clone would be worse than the monolithic CLAUDE.md it replaced, because at least the CLAUDE.md drifted in one obvious place. The v1.41 commit `8c147accc` (`feat(392-02): add install support for skills/hooks/agents`) extended `install.cjs` by 237 lines to handle the expanded surface: it reads `project-claude/manifest.json`, deploys each skill directory into `.claude/skills/`, each hook configuration into `.claude/settings.json`, each subagent definition into `.claude/agents/`, and verifies that what's on disk matches what the manifest says should be there. The install script is idempotent: re-running it against an up-to-date checkout is a no-op. The manifest is the source of truth. Every subsequent release that adds a skill, hook, or subagent adds a manifest entry, and the install script handles the rest. This pattern (`install.cjs` + `manifest.json`) is the one that later releases — including v1.45's ecosystem-alignment work and v1.49's cartridge pipeline — inherit and extend.
 
-## Architecture
+**Three subagent definitions with distinct tool permissions were shipped in commit `c1e788b7a`.** The `gsd-executor` subagent lives at `project-claude/agents/gsd-executor.md` and ships with Write and Edit tools plus three companion skills (`gsd-workflow`, `skill-integration`, `security-hygiene`) — it is the agent that does the work of a GSD phase plan. The `gsd-verifier` subagent lives at `project-claude/agents/gsd-verifier.md` and is 56 lines long; its tool list deliberately excludes Write and Edit, which means the verifier cannot modify the artifacts it inspects, which means its verdicts are structurally credible in a way that a promise-based "please don't modify" could never be. The `gsd-planner` subagent lives at `project-claude/agents/gsd-planner.md` and ships with Write but not Edit, matching the shape of planning work — new `PLAN.md` files get written, existing ones rarely get in-place edits. All three subagents are self-contained prompts with explicit memory instructions and land at 56–60 lines each. The length is deliberate: a subagent definition long enough to require its own scrollbar is one that will drift from the project's evolving conventions, and a short subagent is more likely to be kept honest. This is the same size-discipline lesson that the 417→46 line CLAUDE.md refactor taught, applied one level up.
 
-| Concern | Before (CLAUDE.md) | After |
-|---------|-------------------|-------|
-| Project context | 417 lines, ignored | 46 lines, always read |
-| GSD routing | Prose in CLAUDE.md | gsd-workflow skill |
-| Skill loading | Prose in CLAUDE.md | skill-integration skill |
-| Session recovery | Prose in CLAUDE.md | session-awareness skill |
-| Security | Prose in CLAUDE.md | security-hygiene skill |
-| Commit conventions | Prose in CLAUDE.md | PreToolUse hook |
-| Phase transitions | Prose in CLAUDE.md | PostToolUse hook |
+**The five-commit window is small because most of v1.41's work happened in content, not code.** The git range `v1.41~5..v1.41` covers five commits (`5df18880c` gsd-workflow references, `c1e788b7a` subagent definitions, `8c147accc` install support, `0dc199ff9` integration README, `48f84dd01` version bump) totaling 14 files and 891 insertions against 6 deletions. The small delta is the release's character, not its weakness: the bulk of the dismantled prose was moved from `project-claude/CLAUDE.md` into the newly-added skill reference files (`command-routing.md`, `phase-behavior.md`, `yolo-mode.md` under `project-claude/skills/gsd-workflow/references/`), into the three new subagent markdown files, and into the install-script logic that routes each artifact to the right destination. A clean restructuring release looks like a small commit window when the restructuring is disciplined, and v1.41 was disciplined: the project-claude surface was the only thing touched, and it was touched once, deliberately, across five commits that cleanly separate the new skills, new subagents, new install logic, new integration README, and version bump.
 
-## Wave Execution
+**The retrospective honestly flags what v1.41 did not produce: validation tests.** Skills, hooks, and subagents are structural artifacts — they do not have a "runs successfully on 362 test cases" story the way v1.40's `sc:learn` pipeline did. The v1.33–v1.40 releases each reported an explicit test count as a shipping signal; v1.41 shipped without one, which made it the only release in that range to do so. The "What Could Be Better" section of the retrospective calls this out directly. The lesson was carried forward: v1.42 added `@vitest/coverage-v8` and re-established test-count reporting as a per-release discipline. v1.41 is the hinge where the test-count discipline momentarily lapsed, got recorded as an honest gap, and got paid down in the immediate next release — exactly the pattern the retrospective format is supposed to produce.
 
-| Wave | Phases | Description |
-|------|--------|-------------|
-| 0A | 390 | Slim CLAUDE.md + session-awareness + security-hygiene skills |
-| 1A | 391 | gsd-workflow + skill-integration skills |
-| 2 | 392 | Subagent definitions + install script migration |
-| 3 | 393 | Integration testing + validation |
+**The slim CLAUDE.md is the load-bearing v1.41 artifact; the rest follows from it.** If there is a single file in this release whose shape every subsequent release inherits, it is `project-claude/CLAUDE.md` at 46 lines. The file is short enough to contain: a one-line project identity statement, a tech-stack summary, the key file-location map, the commit-convention one-liner (with a note that the hook enforces it automatically), the wave-commit-marker format, a few quick-reference pointers, and the short list of notes that specifically warrant top-of-mind status (the "self-modifying system" caveat, the `.planning/patterns/` gitignore note, and the observation that skills load automatically without explicit invocation). Everything else that used to live in the 417-line version is now reachable through one of the three mechanisms — skills for the contextually-relevant, hooks for the deterministic, subagents for the role-scoped. The CLAUDE.md that remains is the file every session actually reads, and because every session actually reads it, the rest of the surface has somewhere dependable to be announced from.
 
-## Files Changed
+**v1.41 closes a quiet reliability gap that had been accumulating since v1.27.** The project's Claude Code integration surface grew organically across v1.27 (foundational knowledge packs introduced per-pack instructions into CLAUDE.md), v1.31 (MCP integration added a block), v1.33 (GSD OpenStack added a block), v1.34 (documentation ecosystem added a block), and v1.38 (SSH agent security added a block). Each addition was reasonable in isolation; the cumulative effect was a file that had stopped being read. The v1.41 retrospective frames this as "the threshold between useful context and ignored wall of text is real and lower than expected" — and the number the release produced is the empirical finding that the threshold is closer to 50 lines than to 500. That number is not universal (different models, different context budgets, different session shapes all move it), but it is the number this project measured in this release, and the 46-line replacement is dimensioned against it with a small safety margin.
 
-84 files changed, 5,460 insertions, 2,853 deletions
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| `project-claude/CLAUDE.md` (slim) | 417-line monolithic file collapsed to 46 lines of universally-relevant project context; read at every session init; deployed via `install.cjs` (`feat(392-02)`, commit `8c147accc`) |
+| `gsd-workflow` skill references | Three reference documents under `project-claude/skills/gsd-workflow/references/`: `command-routing.md` (55 lines), `phase-behavior.md` (93 lines), `yolo-mode.md` (45 lines) — activate contextually when GSD workflow topics come up (`feat(391-01)`, commit `5df18880c`) |
+| `skill-integration` skill | Loading rules, bounded guardrails, and observation patterns for the adaptive skill-creator layer; activates when skills are being created, edited, or applied |
+| `session-awareness` skill | State-checking activation at session start and after resumes; surfaces the current `.planning/STATE.md` and `.planning/ROADMAP.md` shape without requiring explicit invocation |
+| `security-hygiene` skill | Safety surface for the self-modifying nature of the project (writing its own skills and agents); activates when edits touch `.claude/skills/`, `.claude/agents/`, or hook configurations |
+| `gsd-executor` subagent | `project-claude/agents/gsd-executor.md` (60 lines); Write and Edit tools; companion skills `gsd-workflow`, `skill-integration`, `security-hygiene`; executes GSD phase plans (`feat(392-01)`, commit `c1e788b7a`) |
+| `gsd-verifier` subagent | `project-claude/agents/gsd-verifier.md` (56 lines); read-only tool surface (no Write, no Edit); skeptical verification stance enforced structurally, not by polite request |
+| `gsd-planner` subagent | `project-claude/agents/gsd-planner.md` (57 lines); Write tool (no Edit); companion skills `gsd-workflow`, `session-awareness`; produces new `PLAN.md` files |
+| `settings-hooks.json` | 37-line hook configuration deployed into `.claude/settings.json` by the install script; PreToolUse hook enforces Conventional Commits on git commits; PostToolUse hook handles phase-boundary transitions |
+| `manifest.json` (project-claude) | 71 lines; enumerates every deployable artifact — slim CLAUDE.md, 4 skills, 3 subagents, hook configuration — as the source of truth for what `install.cjs` deploys |
+| `install.cjs` expansion | +237 lines in commit `8c147accc`; idempotent deploy of skills (→ `.claude/skills/`), hooks (→ `.claude/settings.json`), subagents (→ `.claude/agents/`); manifest-driven; re-run as a no-op on an up-to-date checkout |
+| `README-integration.md` | 131-line migration README added in `docs(392-02)` (commit `0dc199ff9`); explains the three-mechanism architecture, the rationale for each split, and the upgrade path from a pre-v1.41 `.claude/` directory |
+| Version bump | `package.json`, `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json` synchronized to `1.41.0` in commit `48f84dd01` |
 
 ## Retrospective
 
 ### What Worked
-- **Dismantling the 417-line monolithic CLAUDE.md into 4 skills + 3 agents + hooks.** Each concern moved to the right architectural mechanism: skills for contextual intelligence, hooks for deterministic enforcement, subagents for scoped expertise. The 46-line replacement is universally read because it's short enough to matter.
-- **The architecture table tells the whole story.** The before/after comparison (GSD routing: prose in CLAUDE.md -> gsd-workflow skill; commit conventions: prose -> PreToolUse hook; etc.) makes the refactoring rationale obvious. Every row is a concern that moved from "ignored prose" to "active mechanism."
-- **Net deletion (2,853 deletions vs. 5,460 insertions across 84 files).** This is a restructuring release, not a feature release. The deletions represent prose that was being ignored; the insertions represent mechanisms that are enforced.
+
+- **Dismantling the 417-line monolithic `project-claude/CLAUDE.md` into a 46-line core plus 4 skills, 3 subagents, and hooks.** Each concern moved to the architectural mechanism that matches its shape: skills for contextual intelligence, hooks for deterministic enforcement, subagents for scoped expertise. The 46-line replacement is universally read because it is short enough to matter in every session.
+- **The architecture table tells the whole story in one glance.** The before/after comparison (GSD routing: prose in CLAUDE.md → `gsd-workflow` skill; commit conventions: prose → PreToolUse hook; session recovery: prose → `session-awareness` skill; security: prose → `security-hygiene` skill) makes the refactoring rationale obvious. Every row is a concern that moved from "ignored prose" to "active mechanism," and the table is the best single artifact to hand to a reviewer asking "why did you do this?"
+- **Five-commit window with a clean separation between references, subagents, install logic, migration README, and version bump.** The release does one thing (restructure the project-claude surface) and the commit log reads that way. Bisecting any future integration regression back to a specific decision in v1.41 is tractable because the commits are small and mutually orthogonal.
+- **`install.cjs` + `manifest.json` became the reproducible deployment mechanism that every subsequent release inherits.** Without this pair, the `.claude/` directory would drift between clones and between machines. With it, the source of truth is the manifest in git and the install script is idempotent. v1.45's ecosystem-alignment work and v1.49's cartridge pipeline both layer on top of this pattern without modifying it.
+- **Three subagent tool-permission profiles (executor write, verifier read-only, planner write-without-edit) make the roles structurally credible.** A verifier that cannot write is a verifier whose verdicts cannot be quietly self-edited into correctness. A planner that cannot edit is one that cannot overwrite an approved plan. The permission shape is the role definition, not a side effect of it.
 
 ### What Could Be Better
-- **No test count reported.** This is the only release in the v1.33-v1.41 range without a test count. Skills, hooks, and agent definitions should have validation tests, even if they're structural rather than functional.
+
+- **No test count reported.** This is the only release in the v1.33–v1.41 range to ship without an explicit test count, because skills/hooks/subagents are structural artifacts rather than functional pipelines with clear unit-test surfaces. The gap was recorded honestly and paid down in v1.42 (which added `@vitest/coverage-v8` and re-established test-count reporting as a per-release discipline).
+- **The 46-line CLAUDE.md target is empirical for this project, not universal.** Other projects, other models, and other session shapes will find their own thresholds. The release note implicitly treats the 46-line target as a recommendation, but the number was measured, not derived. Future integration-reliability work should articulate the measurement procedure so that follow-on projects can find their own thresholds rather than copying ours.
+- **The migration README (`README-integration.md`, 131 lines) is not yet linked from the project's top-level documentation.** A reader arriving at the repo root without knowing v1.41 happened has no path to the explanation of why `.claude/` is now populated by an install script rather than by hand. A subsequent docs release should wire the migration README into the main navigation.
+- **Install-script idempotency is claimed but not test-covered.** The install script is built to be a no-op on a repeatable clone, but v1.41 ships without an automated test that asserts that property. A follow-up test that runs `install.cjs` twice and diffs the resulting `.claude/` directory would make the idempotency claim verifiable rather than asserted.
 
 ## Lessons Learned
 
-1. **A monolithic CLAUDE.md that grows past ~50 lines stops being read.** The 417-line version was functionally ignored. The 46-line replacement works because Claude Code actually reads it every session. The threshold between "useful context" and "ignored wall of text" is real and lower than expected.
-2. **Skills, hooks, and subagents are three distinct enforcement mechanisms.** Skills activate contextually (session awareness, security hygiene). Hooks fire deterministically on tool use (commit validation, phase transitions). Subagents operate with scoped permissions (executor, verifier, planner). Mapping each concern to the right mechanism is the architecture decision.
-3. **install.cjs as a deployment mechanism for skills/hooks/agents makes the configuration reproducible.** Without it, the .claude/ directory would drift between machines. The install script is the source of truth for what Claude Code loads.
+- **A monolithic CLAUDE.md that grows past ~50 lines stops being read.** The 417-line version was functionally ignored; the 46-line replacement is read every session. The threshold between "useful context" and "ignored wall of text" is real and lower than expected. The v1.41 measurement puts it around 50 lines for this project; the general principle is that project-level Claude Code configuration files should be aggressively short, with depth deferred to mechanisms that activate on-demand.
+- **Skills, hooks, and subagents are three distinct enforcement mechanisms, and the right mechanism depends on the shape of the requirement.** Skills activate contextually (they know when they are relevant). Hooks fire deterministically on tool-call boundaries (they do not decide; they enforce). Subagents operate with scoped tool permissions (their capability surface is their role definition). Every "project instruction" worth keeping should be classified into one of these three buckets, and the bucket determines the file location.
+- **`install.cjs` + `manifest.json` is the reproducibility pattern for project-level Claude Code configuration.** Skills, hooks, and subagents shipped as loose files in a repo drift between machines. The same artifacts deployed by a manifest-driven install script are reproducible, idempotent, and bisectable. The source of truth is the manifest; the install script is the mechanism; the destination is `.claude/`.
+- **Tool-permission shape is role definition.** A read-only verifier is structurally incapable of self-editing its verdict; a write-without-edit planner cannot overwrite an approved plan; a write-plus-edit executor has the capability surface the work requires. Defining subagent roles by the tools they have, rather than by the instructions they are given, is what makes the role boundaries credible to reviewers who cannot audit the full prompt surface.
+- **Dismantling beats rewriting when the target is a prose monolith that stopped being read.** v1.41 did not "improve" the 417-line `CLAUDE.md`; it disassembled the file, routed each responsibility to a better mechanism, and left a 46-line remainder whose purpose is unambiguous. Rewriting would have produced a marginally better file that continued to be ignored. Dismantling produced a slim file plus a set of mechanisms that are individually testable.
+- **A reliability release can have a small commit window and still be load-bearing.** Five commits, 14 files, +891/−6 is a small diff in a release-history comparison, but v1.41 is the release that turned project-level Claude Code configuration from prose-that-is-ignored into mechanism-that-is-enforced. Small-diff releases are sometimes the most important ones; the size of the diff is not the measure of the release's consequence.
+- **Honest test-count gaps in a retrospective beat padded test counts in a release note.** v1.41 shipped without an explicit test count because the surface being shipped (skills, hooks, subagents) was structural. The retrospective said so plainly, and v1.42 paid the gap down. This is the retrospective format working as designed: the gap gets recorded, the next release carries it forward, and the overall quality-of-the-fleet gradient stays upward.
+- **The migration README is the artifact a future reviewer will reach for first.** `README-integration.md` (131 lines, commit `0dc199ff9`) is the document a reviewer arriving at the project one year after v1.41 needs in order to understand why `.claude/` is shaped the way it is. Every architecture-reshaping release should produce a migration README as a first-class deliverable, not as a footnote.
+- **Size discipline composes: the lesson that applied to CLAUDE.md also applied to the subagents.** The 417→46 line refactor taught that project-level files over ~50 lines drift out of usefulness. The same lesson, applied one level up, produced 56–60 line subagent definitions rather than 200-line ones. A prompt surface that requires its own scrollbar will drift from the project's conventions; a prompt surface that fits in one screen stays honest.
+- **A hook that enforces the commit convention is more reliable than a paragraph in CLAUDE.md that describes it.** The Conventional Commits convention was documented in the pre-v1.41 CLAUDE.md and was routinely violated anyway, because documentation-in-a-prose-file is not enforcement. The PreToolUse hook shipped in `settings-hooks.json` rejects a non-conforming commit message before the commit lands. The convention went from "described and sometimes followed" to "enforced at the tool boundary," which is the correct shape for any requirement that is meant to hold universally.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — the 6-step adaptive loop (Observe → Detect → Suggest → Apply → Learn → Compose) that v1.41's `skill-integration` skill wraps with loading rules and bounded guardrails |
+| [v1.27](../v1.27/) | Foundational Knowledge Packs — the release where `CLAUDE.md` first started accumulating per-pack instructions that v1.41 eventually redistributed |
+| [v1.31](../v1.31/) | GSD-OS MCP Integration — added an MCP block to `CLAUDE.md`; its responsibilities live in `gsd-workflow` and related skills after v1.41 |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform — contributed another block to the pre-v1.41 `CLAUDE.md`; the install-script pattern v1.41 formalizes makes v1.33's 19-skill deployment reproducible |
+| [v1.34](../v1.34/) | Documentation Ecosystem Refinement — canonical docs/ source that the post-v1.41 skill reference files (`command-routing.md`, `phase-behavior.md`, `yolo-mode.md`) inherit their shape from |
+| [v1.35](../v1.35/) | Mathematical Foundations Engine — the release that first stressed the `CLAUDE.md` surface past its useful length by adding extensive primitive-registry guidance |
+| [v1.38](../v1.38/) | SSH Agent Security — added a security block to `CLAUDE.md`; its responsibilities live in `security-hygiene` after v1.41 |
+| [v1.39](../v1.39/) | GSD-OS Bootstrap & READY Prompt — the IPC foundation that the v1.41 subagents route their telemetry through |
+| [v1.40](../v1.40/) | sc:learn Dogfood Mission — immediate predecessor; proved the `sc:learn` pipeline end-to-end and left v1.41 room to focus on the project-claude surface |
+| [v1.42](../v1.42/) | Immediate successor — added `@vitest/coverage-v8` and paid down the test-count gap v1.41's retrospective recorded; also added the first idempotency-style tests around install artifacts |
+| [v1.45](../v1.45/) | Layered ecosystem-alignment work on top of the v1.41 `install.cjs` + `manifest.json` pattern without modifying it; lesson "install.cjs as deployment mechanism" classified as `applied` here |
+| [v1.49](../v1.49/) | Mega-release whose unified cartridge pipeline reuses the manifest-driven install pattern that v1.41 established |
+| `project-claude/CLAUDE.md` | The 46-line slim replacement — the load-bearing v1.41 artifact |
+| `project-claude/install.cjs` | Deployment mechanism (+237 lines in commit `8c147accc`); idempotent, manifest-driven |
+| `project-claude/manifest.json` | Source of truth for what `install.cjs` deploys |
+| `project-claude/settings-hooks.json` | PreToolUse commit-convention hook + PostToolUse phase-boundary hook |
+| `project-claude/agents/gsd-executor.md` | Write/Edit subagent, 60 lines |
+| `project-claude/agents/gsd-verifier.md` | Read-only subagent, 56 lines — skeptical verification stance enforced by tool-permission shape |
+| `project-claude/agents/gsd-planner.md` | Write-without-Edit subagent, 57 lines |
+| `project-claude/skills/gsd-workflow/references/command-routing.md` | 55-line reference document — GSD command routing table |
+| `project-claude/skills/gsd-workflow/references/phase-behavior.md` | 93-line reference document — per-phase behavior guide |
+| `project-claude/skills/gsd-workflow/references/yolo-mode.md` | 45-line reference document — YOLO mode rules |
+| `README-integration.md` | 131-line migration README (commit `0dc199ff9`) explaining the three-mechanism architecture |
+| `docs/release-notes/v1.41/chapter/03-retrospective.md` | Chapter retrospective with the What Worked / What Could Be Better inventory |
+| `docs/release-notes/v1.41/chapter/04-lessons.md` | Lessons chapter with classification and apply/investigate status |
+| `docs/release-notes/v1.41/chapter/99-context.md` | Prev/next navigation and parse-confidence metadata |
+
+## Engine Position
+
+v1.41 sits in the "integration-reliability" slot immediately after v1.40's `sc:learn` dogfood mission and immediately before v1.42's test-infrastructure release. In the longer arc of the project, v1.41 is the hinge where project-level Claude Code configuration stopped being a prose document and started being a structured surface with three distinct mechanisms (auto-activating skills, deterministic hooks, scoped subagents). Every subsequent release that adds a skill, a hook, or a subagent extends v1.41's shape rather than restructuring it: v1.42 added coverage-reporting hooks on top of the same `settings-hooks.json` surface, v1.45 layered ecosystem-alignment skills onto the same `.claude/skills/` destination, v1.49 reused the `install.cjs` + `manifest.json` deployment pattern for its cartridge pipeline. The 46-line `project-claude/CLAUDE.md` established here is still the file every session reads; the install script, manifest, hook surface, and subagent tool-permission profiles are still load-bearing at the current release. v1.41 is small in commit count (5) and diff size (+891/−6) but foundational in shape: it is the release that made the project's own Claude Code integration honestly enforced rather than aspirationally documented.
+
+## Files
+
+- `project-claude/CLAUDE.md` — 46-line slim replacement; universally-read project context
+- `project-claude/install.cjs` — idempotent deploy of skills/hooks/subagents (+237 lines in commit `8c147accc`)
+- `project-claude/manifest.json` — source-of-truth enumeration of deployable artifacts (71 lines)
+- `project-claude/settings-hooks.json` — PreToolUse (commit-convention) and PostToolUse (phase-boundary) hook configuration (37 lines)
+- `project-claude/agents/gsd-executor.md` — Write/Edit subagent (60 lines)
+- `project-claude/agents/gsd-verifier.md` — read-only subagent (56 lines)
+- `project-claude/agents/gsd-planner.md` — Write-without-Edit subagent (57 lines)
+- `project-claude/skills/gsd-workflow/references/command-routing.md` — 55 lines
+- `project-claude/skills/gsd-workflow/references/phase-behavior.md` — 93 lines
+- `project-claude/skills/gsd-workflow/references/yolo-mode.md` — 45 lines
+- `README-integration.md` — 131-line migration README (commit `0dc199ff9`)
+- `package.json`, `src-tauri/Cargo.toml`, `src-tauri/tauri.conf.json` — version bump to 1.41.0 (commit `48f84dd01`)
+- `docs/release-notes/v1.41/chapter/00-summary.md` — chapter summary pointing to this README
+- `docs/release-notes/v1.41/chapter/03-retrospective.md` — retrospective inventory
+- `docs/release-notes/v1.41/chapter/04-lessons.md` — lessons extraction with classification
+- `docs/release-notes/v1.41/chapter/99-context.md` — prev/next navigation and parse-confidence metadata
+
+---
+
+_Parse confidence: 1.00 — authored from the Phase 390–393 plan set, the five-commit window (`5df18880c..48f84dd01`), the shipped `project-claude/` surface, and the v1.41 tag message "CLAUDE.md Reliability — skills, hooks, agents architecture."_
