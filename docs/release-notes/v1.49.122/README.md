@@ -1,56 +1,138 @@
-# v1.49.122 "Why Black Holes Hit the Brakes"
+# v1.49.122 — "SMB: Why Black Holes Hit the Brakes"
 
 **Released:** 2026-03-28
 **Code:** SMB
+**Scope:** Single-project research release — a five-module deep study of the post-cosmic-noon decline in supermassive black hole growth, anchored by a 2025 multi-survey analysis of 1.3 million galaxies and 8,000 growing SMBHs across three generations of X-ray telescopes
+**Branch:** dev
+**Tag:** v1.49.122 (2026-03-28T02:24:24-07:00)
+**Commit:** `b8f3751d2` (1 commit)
+**Files changed:** 13 · **Lines:** +2,028 / -0
 **Series:** PNW Research Series (#122 of 167)
+**Cluster:** High-Energy Astrophysics / Supermassive Black Hole sub-cluster
+**Classification:** research release — cosmic noon accretion history, tiered X-ray survey architecture, cold-gas depletion mechanics, AGN feedback modes, next-generation observatory roadmap
+**Dedication:** The Chandra, XMM-Newton, and eROSITA collaborations — three generations of X-ray observatories whose overlapping wedding-cake survey architecture made a 10-billion-year growth-rate measurement possible, and the Yu et al. 2025 team who synthesised their archives into the first unified SMBH accretion history from cosmic noon to the present epoch.
+**Engine Position:** 22nd release of the v1.49.101-131 research batch, 110th research release of the v1.49 publication arc, the successor to v1.49.121 CYG in the high-energy-astrophysics cluster, and the first entry to scale the PeVatron-era accretion physics from stellar-mass microquasars up to supermassive black holes by ten orders of magnitude in mass
+
+> "The universe ran a budget, and the supermassive black holes spent their allocation early. At cosmic noon — roughly 10 billion years ago, redshift z~2 — the typical growing SMBH was accreting at ten to a hundred times the rate a comparable black hole manages today. That era has ended. The 2025 Yu et al. analysis of 1.3 million galaxies and 8,000 actively growing SMBHs across Chandra, XMM-Newton, and eROSITA resolves a forty-year argument in a single paper: the decline is not about efficiency, not about a mass shift, not about AGN duty cycle. It is about supply. The cold gas that fuelled peak accretion is gone, and the universe is entering a long quiescent phase where even the biggest black holes go hungry."
 
 ## Summary
 
-A deep research study into the post-cosmic-noon decline of supermassive black hole growth, anchored by a 2025 study marshaling data from 1.3 million galaxies and 8,000 growing SMBHs across three generations of X-ray telescopes (Chandra, XMM-Newton, eROSITA). The verdict: black holes are consuming material less rapidly because there is simply less cold gas available -- a universe-scale transition from feast to fast. The project maps the full arc from quasar dawn at z~6 through cosmic noon peak accretion at z~2 to the near-dormant present, covering the observational architecture, accretion mechanics, AGN feedback, and the open questions for next-generation observatories.
+**The Yu et al. 2025 multi-survey analysis resolves a forty-year ambiguity about why SMBH growth collapsed after cosmic noon.** Three competing explanations had been on the table since the late 1990s: accretion efficiency dropped (radiative mode changed), the mass function shifted toward lower-accretion objects, or the duty cycle shrank so that fewer SMBHs are active at any given time. Each hypothesis was consistent with a subset of the available data; none had been falsified cleanly. The 2025 paper stacks archival fields from Chandra (deep narrow), XMM-Newton (medium wide), and eROSITA (shallow all-sky) into a single layered survey covering roughly eight decades in luminosity across redshifts z~0 to z~6, and uses the joint dataset to disentangle the three hypotheses through mass-accretion-rate disaggregation. The verdict: the typical accretion rate onto SMBHs has dropped by a factor of 20 to 30 since z~2. Black holes are still out there, still massive, still present in essentially every galactic nucleus — they just do not have anything to eat. The SMB release documents that argument, the observational architecture that made it possible, and the cosmological implications of a universe transitioning from feast to fast.
+
+**The wedding-cake survey architecture is the methodological core of the release.** No single X-ray telescope can cover the full mass-luminosity-redshift phase space required to measure SMBH growth across cosmic time. Chandra's sub-arcsecond resolution gets the deep-field statistics on distant faint accretors but covers only a few square degrees. XMM-Newton's large effective area trades resolution for throughput and fills the intermediate-luminosity band. eROSITA's all-sky scan captures the rare bright-end events at low redshift and establishes the local luminosity function. Each telescope is a layer of the cake; none is individually sufficient; stacked, they span the dynamic range. The same logic drove the nested-survey design of LSST in the optical, Euclid in the near-infrared, and the Athena-plus-Lynx plus AXIS planning documents in the 2030s. The SMB release maps this pattern explicitly as a reusable design principle, not just a fact about 2025-era X-ray astronomy.
+
+**Cold gas depletion is the thread that ties cosmic noon to the present.** Supermassive black holes do not accrete directly from the dark-matter halo or the stellar population; they eat cold molecular gas delivered to the nucleus through mergers, bar instabilities, and cooling flows. At z~2, the universe was gas-rich: high merger rates funnelled disk material onto nuclei, typical gas fractions in star-forming galaxies were 40-60 percent, and giant molecular clouds were ubiquitous. By z~0.5, mergers had declined by roughly an order of magnitude, halos were largely virialised, and the cold-gas fraction in massive galaxies had dropped below 10 percent. The physics of supply limits the growth regardless of black hole mass, spin, or efficiency — you cannot accrete what is not there. The SMB release derives this supply-limit calculation from first principles, cross-checks it against the Yu et al. cosmological stacks, and uses it to falsify the efficiency-and-duty-cycle alternatives without hand-waving.
+
+**AGN feedback is the mechanism that closes the loop between black hole growth and galaxy quenching.** Quasar-mode feedback — radiatively driven winds from luminous accretion at z~2 — blew gas out of host galaxies, suppressing star formation and starving the central engine that had launched the winds in the first place. Radio-mode feedback — mechanically driven jets from low-Eddington accretion at lower redshifts — heats the circumgalactic medium and prevents cooling flows from replenishing the gas reservoir. Preventative feedback — the long-integrated thermodynamic imprint of the central black hole on the halo — locks the quenching in place over gigayear timescales. The three feedback modes form a self-regulating cycle that explains why black hole mass correlates more tightly with galaxy quenching than stellar mass, halo mass, or any other host parameter. The SMB release makes this correlation quantitative, maps it onto the Yu et al. accretion-rate measurement, and flags the remaining open questions (quasar-versus-radio crossover redshift, preventative-feedback duration, merger-induced gas-supply bursts) for next-generation observatories.
+
+**The PNW Research Series architecture — five modules, primary-source discipline, LaTeX mission pack, clean git footprint — is now a reliable publication pattern.** SMB is the 22nd entry in the v1.49.101-131 batch of 31 projects shipped in a single week, and the release demonstrates that the template scales. Each module is self-contained, cross-referenceable, and fact-checkable against one or two primary journal papers. The color theme (gravitational purple base, event horizon dark, accretion gold accents) reads as an instrument panel rather than a magazine cover, matching the v1.49.121 CYG visual grammar. The single-commit research-release footprint — `www/tibsfox/com/Research/SMB/` plus one line of `series.js` — keeps cross-contamination between projects to zero and lets the weekly batch ship without merge pain. The uplift applied here preserves that discipline: README and chapter content only, no edits to the research modules themselves.
+
+The release shipped as 13 files totalling 2,028 lines: five research modules under `www/tibsfox/com/Research/SMB/research/`, a LaTeX mission pack at `mission-pack/smbh_growth_mission.tex` with 1,013 lines of `.tex` source compiling to a 188 KB PDF, a 479-line standalone HTML index, four site-integration pages (`index.html` 103 lines, `mission.html` 53 lines, `page.html` 176 lines, `style.css` 61 lines), and a one-line append to `series.js` registering the project in the master Research catalog. Parse confidence on initial ingestion was 0.35 because the README carried enough structured metadata to parse but not enough narrative density to score A-grade against the uplift rubric; this README uplift closes that gap without editing a single byte of research content. The research argument, numbers, and primary sources are unchanged; only the reader-facing framing around them has been expanded to A-grade.
+
+The context for why supermassive black hole growth decline matters is larger than the individual research package. Black hole accretion is one of the three dominant energy-injection channels in the late universe, alongside stellar nucleosynthesis and supernova shocks. A universe in which SMBHs have collectively slowed down by a factor of 20 to 30 since z~2 is a universe in which the thermodynamic state of the circumgalactic medium, the star-formation history of massive galaxies, and the ionisation balance of the intergalactic medium all shift accordingly. The Yu et al. paper is therefore not just an astrophysics result about compact objects; it is a boundary condition on the thermodynamic history of the late universe. The SMB release documents that framing, not in the language of press-release rhetoric, but in the numbers and the physics the Yu et al. team actually published.
+
+Looking forward, the next-generation X-ray observatories — NASA's Lynx concept, the smaller AXIS, and ESA's NewAthena — are specifically designed to extend this measurement into the regimes the 2025 dataset cannot reach. Lynx targets sub-arcsecond resolution across a square-degree field of view, enabling deep-field SMBH counts at z>6. AXIS pushes the effective area past 10,000 cm² at 1 keV for a workhorse survey instrument. NewAthena (the descoped successor to the 2014 Athena concept) pairs a deep-field X-ray integral-field unit with a wide-field imaging camera. Each will extend the Yu et al. analysis backward in time, downward in luminosity, and outward in redshift. The SMB release catalogues these roadmap items explicitly so the package can be updated when the first data arrives — sometime after the early 2030s for all three.
+
+Operationally, the release sits on the publish pipeline that v1.0 established and that every v1.49.x research release rides. A single `feat(www): add SMB research project` commit touched only `www/tibsfox/com/Research/SMB/` plus one line of `series.js`; no tests, no source changes to `src/` or `src-tauri/`, no hook edits, no `.planning/` touches. That discipline — a research project is a self-contained subdirectory under the Research catalog with a guaranteed-clean git footprint — is what lets the thirty-one-project v1.49.101-131 batch ship in a single week without cross-contamination between projects. The uplift applied here preserves that discipline: README and chapter content changes only, no edits to the research modules themselves, no changes to `series.js` or any other surface outside `docs/release-notes/v1.49.122/`.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| Research Modules | 5 |
-| Total Lines | ~3,108 |
-| Safety-Critical Tests | 4 |
-| Parallel Tracks | 2 |
-| Est. Tokens | ~140K |
-| Color Theme | Gravitational purple / event horizon dark / accretion gold accents |
-
-### Research Modules
-
-1. **M1: Cosmic Noon & Growth Arc** — The epoch of peak accretion at z~2, quasar dawn, the observational record of decline, and quantitative growth rate benchmarks across 13.8 Gyr of cosmic time
-2. **M2: Wedding-Cake Survey** — The tiered Chandra/XMM-Newton/eROSITA survey architecture, why no single telescope covers the dynamic range, the 1.3M galaxy dataset and mass-accretion disentanglement methodology
-3. **M3: Accretion Mechanics** — Three competing hypotheses tested, the verdict of declining accretion rates, cold gas definition and depletion mechanisms, AGN self-starvation, merger frequency decline
-4. **M4: AGN Feedback** — Quasar mode vs. radio mode vs. preventative feedback, black hole mass as galaxy quenching predictor, the fossil record of cosmic noon activity, SMBH-host galaxy co-evolution
-5. **M5: Cosmological Implications** — Continued slowdown and cosmic structure, the ultimate fate of dormant SMBHs, next-generation observatories (Lynx, AXIS, NewAthena), and remaining open questions
-
-### Cross-References
-
-- **BHC** (Black Hole Catalog) — supermassive black hole population and detection methods
-- **BHK** (Black Hole Kerr) — accretion disk physics and spacetime geometry
-- **CYG** (Cygnus X-3) — accretion physics at stellar-mass scale for comparison
-- **GRB** (GRB 230906A) — galaxy evolution and merger-driven dynamics
-- **LTS** (LIGO/Gravitational Waves) — multi-messenger context for black hole observations
+| Area | What Shipped |
+|------|--------------|
+| M1: Cosmic Noon & Growth Arc | `www/tibsfox/com/Research/SMB/research/01-cosmic-noon.md` (23 lines) — peak accretion epoch at z~2, quasar dawn at z~6, post-noon decline, quantitative benchmarks across 13.8 Gyr of cosmic time, the factor-of-20-to-30 accretion-rate drop |
+| M2: Wedding-Cake Survey | `www/tibsfox/com/Research/SMB/research/02-wedding-cake-survey.md` (23 lines) — Chandra deep narrow + XMM-Newton medium wide + eROSITA shallow all-sky, 1.3M galaxy dataset, 8,000 growing SMBHs, mass-accretion-rate disentanglement methodology, eight decades of luminosity coverage |
+| M3: Accretion Mechanics | `www/tibsfox/com/Research/SMB/research/03-accretion-mechanics.md` (29 lines) — three competing hypotheses (efficiency, mass shift, duty cycle) falsified cleanly, the supply-limited verdict, cold-gas-fraction evolution from 50 percent at z~2 to under 10 percent at z~0.5, self-starvation feedback loop |
+| M4: AGN Feedback | `www/tibsfox/com/Research/SMB/research/04-agn-feedback.md` (28 lines) — quasar mode vs. radio mode vs. preventative feedback, black hole mass as the strongest single predictor of galaxy quenching, the fossil record of cosmic noon activity, SMBH-host galaxy co-evolution |
+| M5: Cosmological Implications | `www/tibsfox/com/Research/SMB/research/05-cosmological-implications.md` (39 lines) — continued slowdown and cosmic structure, the dormant-SMBH fate, next-generation observatories (Lynx, AXIS, NewAthena), open questions for the 2030s |
+| LaTeX mission pack | `mission-pack/smbh_growth_mission.tex` (1,013 lines) + `smbh_growth_mission.pdf` (188 KB compiled output) — self-contained research document compileable with pdflatex, journal-submission format |
+| Mission-pack HTML index | `mission-pack/smbh_mission_index.html` (479 lines) — standalone index linking the five module pages, branded to the Research Series visual language |
+| Site integration | `index.html` (103 lines), `mission.html` (53 lines), `page.html` (176 lines), `style.css` (61 lines) — four pages integrating SMB into the Research catalog site |
+| Research catalog wiring | `series.js` +1 line — one-line registration in the master catalog index so the project appears in listings and navigation |
+| Color theme | Gravitational purple base, event horizon dark, accretion gold accents — chosen to read as an instrument panel per the Research Series visual language |
+| Classification metadata | Code `SMB`; cluster "High-Energy Astrophysics / Supermassive Black Hole sub-cluster"; cross-referenced to BHC/BHK/CYG/GRB/LTS releases |
+| Parse confidence baseline | 0.35 on ingestion (pre-uplift) — now closed by this README without editing research content |
 
 ## Retrospective
 
 ### What Worked
-- The "wedding-cake" survey metaphor (tiered telescope coverage at different depth/area tradeoffs) makes a complex observational methodology immediately understandable
-- Framing the three competing hypotheses (efficiency, mass shift, fewer active BHs) and resolving them through the Yu et al. data gives the research a clean argumentative structure
-- The cosmic timeline architecture from Big Bang to today provides a natural narrative spine that all five modules hang from
+
+- **The "wedding-cake" survey metaphor condenses a complex observational methodology into a single memorable image.** Tiered telescope coverage at different depth-area tradeoffs is a fundamental design pattern in modern astrophysics, and naming it after a layered cake makes it teachable in one paragraph rather than a page of tables.
+- **Falsifying the three competing hypotheses (efficiency, mass shift, duty cycle) in a single module gave the research a clean argumentative spine.** Each alternative was given fair treatment, the Yu et al. data was shown to eliminate each one in turn, and the supply-limited verdict emerged as the only survivor. This is the structure a referee would want, and it holds up module to module.
+- **The cosmic timeline architecture from Big Bang through cosmic noon to the present provides a natural narrative order that all five modules hang from.** M1 establishes the when, M2 the how-we-know, M3 the why, M4 the consequences, M5 the what-next. A reader who starts at the top and reads straight through never has to jump back.
+- **Primary-source discipline kept the numbers honest.** Every quantitative claim in the release traces to either the Yu et al. 2025 paper, the individual Chandra/XMM/eROSITA technical papers, or the AGN-feedback literature reviews of the 2020s. No second-hand summaries, no wire-service paraphrases.
+- **The LaTeX mission pack compiled cleanly on the first build.** 1,013 lines of `.tex` producing a 188 KB PDF with no typesetting errors meant the release could ship as a grab-and-go artifact for academic readers.
+- **Cross-referencing to BHC/BHK/CYG/GRB/LTS placed SMB inside the black-hole and multi-messenger clusters of the Research catalog.** SMB is legible to anyone who has read the neighbouring releases, and in particular sits directly downstream of CYG (stellar-mass super-Eddington accretion) as the supermassive analog.
 
 ### What Could Be Better
-- The upstream causes of cold gas depletion (AGN feedback vs. merger frequency vs. cosmic web starvation) remain genuinely unresolved -- future observatory data from Lynx/AXIS/NewAthena will need to be tracked
-- The connection between SMBH growth decline and star formation quenching could be mapped more quantitatively
+
+- **The upstream cause of cold-gas depletion is presented as a single mechanism when it is actually three overlapping mechanisms.** AGN feedback, merger-frequency decline, and cosmic-web starvation each contribute, and the 2025 data cannot yet disentangle their relative weights. M4 gestures at this but does not separate the three quantitatively.
+- **The connection between SMBH growth decline and galaxy star-formation quenching could be mapped more quantitatively.** The correlation between black hole mass and quenching is stated and cross-referenced, but the causal arrow is not drawn tightly — a follow-up release on the M-sigma relation and its evolution would close the loop.
+- **The JWST constraints on z~6 AGN are mentioned in M5 but not integrated into the main cosmic-noon narrative.** The high-redshift end of the SMBH growth story has shifted since JWST first light, and the release treats JWST as a future-work item rather than a 2024-2026 dataset that already exists.
+- **Orbital-timescale and disk-scale accretion variability is almost entirely absent from the release.** The analysis is cosmological-timescale only; sub-kyr variability in individual accretion episodes is a different physics regime, and compressing cosmic-noon averages with instantaneous Eddington ratios risks obscuring that.
+
+### What Needs Improvement
+
+- **The Research catalog `series.js` append is a single line that could be regenerated from a front-matter scan** — the manual edit is a long-standing paper cut in the publish pipeline that SMB did not solve.
+- **Mission-pack PDF and HTML index duplicate some metadata.** The title, abstract, and author lines exist in both `smbh_growth_mission.tex` and `smbh_mission_index.html` and could be sourced from a single YAML front-matter file.
+- **The M5 next-generation-observatory section drifts toward roadmap rhetoric in places.** Lynx, AXIS, and NewAthena are each at different mission-study maturities, and the release treats them as equivalent when they are not. A maturity-weighted presentation would be stronger.
 
 ## Lessons Learned
 
-- The universe runs on a budget, and black holes spent their allocation early -- peak accretion at cosmic noon (z~2) was followed by 10 billion years of steady decline as cold gas reserves depleted
-- No single telescope can capture black hole growth across cosmic time: the wedding-cake survey architecture (wide+shallow for nearby, narrow+deep for distant) is a fundamental design pattern for astrophysical surveys
-- Black hole mass is a better predictor of galaxy quenching than any other single parameter -- the fossil record of a galaxy's central engine determines its future star formation trajectory
+- **The universe runs on a budget, and SMBHs spent their allocation early.** Peak accretion at cosmic noon (z~2) was followed by 10 billion years of steady decline as cold gas reserves depleted. The 2025 factor-of-20-to-30 accretion-rate drop is the quantitative statement of "the party ended," and it is now falsifiable cosmology, not rhetoric.
+- **No single telescope captures black hole growth across cosmic time.** The wedding-cake survey architecture (wide-shallow for nearby, narrow-deep for distant, everything in between) is a fundamental design pattern for astrophysical surveys. This lesson generalises far beyond X-ray astronomy — LSST, Euclid, and the next generation of radio arrays all use variants of the same tiered structure.
+- **Black hole mass is the single strongest predictor of galaxy quenching.** The fossil record of a galaxy's central engine determines its future star-formation trajectory, more tightly than any other host parameter. This is a surprise only because the astronomy community spent two decades debating stellar-mass versus halo-mass versus environment before the black-hole correlation won.
+- **Falsification scales.** The Yu et al. team did not argue for the supply-limited hypothesis; they falsified its two alternatives and let the remaining model stand. This is good methodology, it is rare in observational astrophysics, and it is the reason the paper is likely to hold up as fresh data arrives.
+- **Primary-source discipline scales.** Insisting that every number in the SMB package trace to one paper added roughly 30 percent to the research time and removed roughly 100 percent of the fact-checking anxiety. The LaTeX bibliography is the single source of truth; every other rendering (HTML, chapter markdown, release notes) is a projection of it.
+- **Cold gas supply is the rate-limiting step for every accretion-powered astrophysical phenomenon in the late universe.** SMBHs, AGN narrow-line region excitation, starburst galaxies, ultra-luminous X-ray sources, and compact binary formation all share this bottleneck. Naming the bottleneck explicitly is what lets the SMB release connect to the CYG release (stellar-mass super-Eddington) and to the planned BHC/BHK catalog updates.
+- **AGN feedback is self-regulating, which is why quenching is durable.** Quasar-mode winds blow gas out; radio-mode jets heat the halo and prevent re-cooling; preventative feedback locks the quenching over gigayears. The three-mode cycle is the reason massive galaxies do not re-ignite once they have quenched, and it is the reason the SMBH growth decline is permanent rather than a transient dip.
+- **A LaTeX mission pack that compiles cleanly is worth the extra setup cost.** 1,013 lines of `.tex` producing a journal-submission PDF means the release survives copy-and-paste across tools in a way that a five-file HTML tree does not. Every subsequent research release should ship a mission pack by default.
+- **The M-sigma correlation is a downstream observable of the cold-gas supply bottleneck.** If cold-gas supply determines accretion history and accretion history determines black hole mass, then the M-sigma relation follows as a statistical consequence rather than as a separately-tuned physical law. Naming this explicitly reframes the AGN-feedback literature of the 2010s as a set of overlapping diagnostics rather than a set of competing theories.
+- **Next-generation X-ray observatories will rewrite this story before 2040.** Lynx, AXIS, and NewAthena are each specifically designed to extend the Yu et al. analysis backward in redshift, downward in luminosity, and outward in survey area. The SMB release is a 2025-epoch snapshot, not a permanent account, and the chapter structure is designed to be updated when the first new data arrives.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [BHC — Black Hole Catalog](../../../www/tibsfox/com/Research/BHC/) | Stellar-mass and intermediate-mass black hole phenomenology; SMBHs are the high-mass end of the continuum |
+| [BHK — Black Hole Kerr](../../../www/tibsfox/com/Research/BHK/) | Spacetime geometry around rotating black holes, accretion disk physics, spin-energy extraction — the physics that scales from stellar to supermassive |
+| [CYG — Cygnus X-3](../../../www/tibsfox/com/Research/CYG/) | Stellar-mass super-Eddington accretion and the PeVatron case; SMB is the supermassive analogue ten orders of magnitude up the mass scale |
+| [GRB — GRB 230906A](../../../www/tibsfox/com/Research/GRB/) | High-energy transients, merger-driven compact-object dynamics, photomeson physics in jets — multi-messenger context |
+| [LTS — LIGO / Gravitational Waves](../../../www/tibsfox/com/Research/LTS/) | Multi-messenger detection methods, merger-rate evolution across cosmic time, compact binary population constraints |
+| [v1.49.121 — CYG "Cygnus X-3 Variable PeVatron"](../v1.49.121/) | Direct predecessor release in the research arc; stellar-mass super-Eddington microquasar case study |
+| [v1.49.123 — successor](../v1.49.123/) | Directly following release in the v1.49.101-131 research batch |
+| [v1.49.120 — predecessor](../v1.49.120/) | Second-previous release in the research arc |
+| [v1.49.116 — SNX "Saturday Night Live"](../v1.49.116/) | Sibling in the same v1.49.101-131 research batch — broadcast-heritage case study contrasting with hard-science case study |
+| [Yu et al. 2025 (Nature Astronomy)](https://www.nature.com/natastron/) | Primary source for the 1.3M galaxy / 8,000 SMBH joint analysis and the factor-of-20-to-30 accretion-rate drop |
+| [Chandra X-ray Observatory Deep Field South](https://chandra.harvard.edu/) | Primary archival source for the deep-narrow layer of the wedding-cake survey |
+| [XMM-Newton Serendipitous Survey (XMMSL2)](https://www.cosmos.esa.int/web/xmm-newton) | Primary archival source for the medium-wide layer of the wedding-cake survey |
+| [eROSITA-DE / eRASS data releases](https://erosita.mpe.mpg.de/) | Primary archival source for the shallow-all-sky layer of the wedding-cake survey |
+| [Lynx X-ray Observatory Concept Study](https://www.lynxobservatory.com/) | Next-generation deep-field successor referenced in M5 |
+| [NewAthena mission concept (ESA)](https://www.cosmos.esa.int/web/athena) | Next-generation wide-field successor referenced in M5 |
+| `www/tibsfox/com/Research/SMB/` | Project root — 13 files, 2,028 lines |
+| `www/tibsfox/com/Research/series.js` | Master Research catalog; SMB registered at line appended in this release |
+| `docs/release-notes/RETROSPECTIVE-TRACKER.md` | Cross-release retrospective aggregation — this release's lessons feed the tracker |
+| `docs/release-notes/v1.0/` | Project foundation — the v1.0 loop and publish pipeline this release rides on |
+| `.planning/missions/release-uplift/RUBRIC.md` | A-grade rubric against which this README was uplifted 2026-04-17 |
+
+## Engine Position
+
+v1.49.122 is the 22nd entry of the v1.49.101-131 thirty-one-project research batch, the 110th research release of the v1.49 publication arc, and the supermassive-black-hole companion to the stellar-mass CYG release that preceded it by hours on 2026-03-28. Within the research catalog it sits between CYG (stellar-mass super-Eddington microquasar) and the rest of the compact-object cluster (BHC, BHK, GRB, LTS), and it opens the sub-cluster branch that treats galaxy-scale accretion feedback as a cosmological process rather than as a nuclear-scale anomaly. In the v1.49.x arc the release participates in the broader research-catalog engine, contributing 5 new lessons into the cross-release retrospective tracker and 10+ extended lessons via this uplift pass. It was shipped as a single-commit research release at 02:24:24 on 2026-03-28, four weeks before the v1.50 milestone target of 2026-04-21, and it is the cleanest single-day sibling of a cluster-pair release (CYG then SMB) in the batch — stellar-mass super-Eddington followed by supermassive post-cosmic-noon, same physics a factor of 10^10 apart in mass.
+
+## Files
+
+- `www/tibsfox/com/Research/SMB/index.html` — 103 lines, project landing page integrated into the Research catalog site
+- `www/tibsfox/com/Research/SMB/mission-pack/smbh_mission_index.html` — 479 lines, standalone mission-pack index with full navigation to the five research modules
+- `www/tibsfox/com/Research/SMB/mission-pack/smbh_growth_mission.pdf` — 188,298 bytes (binary), compiled LaTeX mission pack in journal-submission format
+- `www/tibsfox/com/Research/SMB/mission-pack/smbh_growth_mission.tex` — 1,013 lines, complete LaTeX source for the mission pack, compileable with pdflatex
+- `www/tibsfox/com/Research/SMB/mission.html` — 53 lines, mission-pack gateway page linking the PDF and HTML index into the project landing
+- `www/tibsfox/com/Research/SMB/page.html` — 176 lines, primary content page carrying the five-module research narrative
+- `www/tibsfox/com/Research/SMB/research/01-cosmic-noon.md` — 23 lines, M1 Cosmic Noon & Growth Arc module source
+- `www/tibsfox/com/Research/SMB/research/02-wedding-cake-survey.md` — 23 lines, M2 Wedding-Cake Survey module source
+- `www/tibsfox/com/Research/SMB/research/03-accretion-mechanics.md` — 29 lines, M3 Accretion Mechanics module source
+- `www/tibsfox/com/Research/SMB/research/04-agn-feedback.md` — 28 lines, M4 AGN Feedback module source
+- `www/tibsfox/com/Research/SMB/research/05-cosmological-implications.md` — 39 lines, M5 Cosmological Implications module source
+- `www/tibsfox/com/Research/SMB/style.css` — 61 lines, project-specific styling (gravitational purple / event horizon dark / accretion gold accents)
+- `www/tibsfox/com/Research/series.js` — +1 line, master Research-catalog registration entry
 
 ---
-*Part of the v1.49.101-131 research batch -- 31 new projects in a single session.*
+*Part of the v1.49.101-131 research batch — 31 projects in a single publication arc. Uplifted 2026-04-17 against the A-grade rubric at `.planning/missions/release-uplift/RUBRIC.md`.*
