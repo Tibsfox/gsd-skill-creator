@@ -6,7 +6,13 @@
 **Part B:** Red-breasted Sapsucker (*Sphyrapicus ruber*) -- mewing call + irregular drumming, E=3, mixed conifer, resident, Picidae
 **Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
 **Cluster:** Music (hub: WAL)
+**Scope:** Degree 54 deep research -- Ivan & Alyosha (Folk, E=3) x Red-breasted Sapsucker (*Sphyrapicus ruber*, E=3)
+**Branch:** main
+**Commit:** f0d4e0f382fcf038cf61b2ad10ec4e43de96e3d3
+**Files changed:** 9 (+3,437 lines)
 **Note:** Part B substitution -- Red-breasted Sapsucker replaces Clouded Salamander (CSV original) per SPS scope rule: birds and mammals only.
+**Dedication:** To the quiet builders -- the two friends on Capitol Hill who borrowed Dostoevsky's arguing brothers for a name and made jangly folk-pop under the literary weight, and to the red-headed woodpecker whose neat rows of drilled holes feed a hummingbird three-grams-light and a forest ten-thousand-strong, proving that the smallest unit of collaboration creates the broadest community benefit when applied with precision and sustained with care.
+**Engine Position:** Degree 54 of 360 (15.0% of the circle); the tenth consecutive folk-adjacent degree EXTENDS the double-digit record set at degree 53; the first literary-named band in the engine (Dostoevsky); Picidae RETURNS after a 32-degree absence with new genus *Sphyrapicus*; Passeriformes 16-consecutive streak BROKEN (first Piciformes since degree 22); the fraternal jangle (55th acoustic element, artist-side); the sap-well rhythm (55th acoustic element, species-side -- first arrhythmic percussion); the neighborhood anchor (55th artist-city pattern -- Capitol Hill); the borrowed name (54th blue note); Genre Stage 35; 21st avian family holds (Picidae rises from 2 to 3 -- ties Trochilidae and Paridae); 14th non-male artist count held at 14:41 (~25.5%); first keystone ecosystem engineer on species side; Rufous Hummingbird 19-degree hidden thread revealed; tenth consecutive CSV substitution (Clouded Salamander replaced per birds-and-mammals-only scope rule).
 
 ## Summary
 
@@ -385,3 +391,47 @@ The progression tells the story. The heron stood in silence. The wren poured out
 7. **The Part A/B resonance works best when both sides share energy level.** E=3 on both sides creates clean symmetry. The "quiet builders" theme emerges naturally when neither side overwhelms.
 
 8. **Marine species gap is now the engine's most critical structural debt.** Fifty-four degrees without saltwater in a project named for Puget Sound. This must be addressed at degree 55.
+
+## Cross-References
+
+| Ref | Side | Title | Resonance |
+|-----|------|-------|-----------|
+| S36-053 | Part A | Fleet Foxes | Consecutive folk-adjacent, cathedral harmony vs fraternal jangle, Bruegel vs Dostoevsky literary sources, both indie-scale folk acts in Seattle's orbit |
+| S36-052 | Part A | Brandi Carlile | Bear Creek to Benaroya Hall -- institutional music infrastructure arc, testimony roar vs fraternal jangle, E=4 vs E=3 |
+| S36-051 | Part A | Grand Archives | Communal harmony vs fraternal jangle, both E=3, multi-voice aesthetic, horizontal vs diagonal collaboration |
+| S36-050 | Part A | Mirah | Intimate architecture comparison -- small songs with spatial depth vs bright duo warmth, Olympia lo-fi vs Capitol Hill folk-pop |
+| S36-049 | Part A | Kimya Dawson | Folk Punk Olympia vs Folk Capitol Hill, Trojan lullaby vs borrowed name, decad mid-point to decad end |
+| S36-048 | Part A | Sera Cahoone | Held rest vs fraternal jangle, E=2 vs E=3, both Americana-adjacent |
+| S36-047 | Part A | Pedro the Lion | Parable tone vs fraternal jangle, narrative restraint vs harmonic invitation |
+| S36-046 | Part A | Rocky Votolato | Sibling bond -- Rocky/Cody Votolato and Tim/Pete Wilson, brothers in Seattle folk, confessional vs fraternal jangle |
+| S36-045 | Part A | Damien Jurado | Murmur vs fraternal jangle, decad bookends, E=2 vs E=3, Sub Pop vs Dualtone/Nettwerk independent labels |
+| S36-043 | Part A | Ann Wilson | Ann/Nancy Wilson (Heart) vs Tim/Pete Wilson (Ivan & Alyosha), sibling bond threads across Seattle's music scene |
+| S36-041 | Part A | Shawn Smith | Capitol Hill returns -- thirteen-degree gap, Rock/Alternative vs Folk, same neighborhood cultural gravity |
+| S36-000 | Part A | Quincy Jones | Mercury orchestras to Benaroya Hall folk-pop, fifty-five degrees of American music infrastructure evolution |
+| SPS-053 | Part B | Steller's Jay | Consecutive degrees, E=4 to E=3, cognition to engineering, corvid alarm commands the forest / sap-well rhythm builds infrastructure, Passeriformes streak ends |
+| SPS-052 | Part B | American Dipper | Two resource specialists in different media (water vs wood), both physically enter their medium to extract food |
+| SPS-051 | Part B | Brown Creeper | Two bark specialists -- one reads the tree passively, the other writes on it actively |
+| SPS-036 | Part B | Anna's Hummingbird | Secondary sap-well visitor, less tight association than Rufous, Trochilidae tied with Picidae at 3 each |
+| SPS-035 | Part B | Rufous Hummingbird | The hidden thread revealed -- sap-well dependency, co-evolved timing, early-spring sugar source, 19-degree retroactive connection |
+| SPS-022 | Part B | Northern Flicker (Red-shafted) | Picidae reunited after 32 degrees, metronomic 25 bps vs irregular fast-slow-fast, *Colaptes* vs *Sphyrapicus*, ground-foraging vs arboreal sap extraction |
+| SPS-021 | Part B | Northern Flicker (Pileated aspect) | Three Picidae total, hammer + groove + rubato, full rhythmic diversity within one family |
+| AVI | Part B | Wings of the Pacific Northwest | Red-breasted Sapsucker documented across western Washington and British Columbia |
+| ECO | Part B | Living Systems of the PNW | Keystone ecosystem engineering, sap wells as shared infrastructure, hummingbird-sapsucker mutualism, old-growth indicator |
+| NASA-1.55 | Cross | Apollo 1 (Dedication) | Paired release resonance -- the quiet builders vs the crew that did not return, both about what persists after the doing, dedication as practice |
+
+## Files
+
+- `docs/release-notes/v1.49.190/README.md` -- this release note
+- `docs/release-notes/v1.49.190/chapter/00-summary.md` -- chapter summary index
+- `docs/release-notes/v1.49.190/chapter/03-retrospective.md` -- retrospective chapter (12 worked + 7 improve)
+- `docs/release-notes/v1.49.190/chapter/04-lessons.md` -- lessons chapter (15 lessons extracted)
+- `docs/release-notes/v1.49.190/chapter/99-context.md` -- context and navigation
+- `www/tibsfox/com/Research/S36/research/releases/054-ivan-and-alyosha/research.md` (342 lines, ~5,500 words)
+- `www/tibsfox/com/Research/S36/research/releases/054-ivan-and-alyosha/retrospective.md` (249 lines)
+- `www/tibsfox/com/Research/S36/research/releases/054-ivan-and-alyosha/index.html` (762 lines, branded deep-research page)
+- `www/tibsfox/com/Research/S36/research/releases/054-ivan-and-alyosha/knowledge-nodes.json` (210 lines, 7 theory nodes)
+- `www/tibsfox/com/Research/SPS/research/releases/054-red-breasted-sapsucker/research.md` (375 lines, ~5,500 words)
+- `www/tibsfox/com/Research/SPS/research/releases/054-red-breasted-sapsucker/retrospective.md` (245 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/054-red-breasted-sapsucker/index.html` (673 lines, branded deep-research page)
+- `www/tibsfox/com/Research/SPS/research/releases/054-red-breasted-sapsucker/knowledge-nodes.json` (194 lines, 6 theory nodes)
+- **Commit:** `f0d4e0f382fcf038cf61b2ad10ec4e43de96e3d3` -- `feat(www): degree 54 -- Ivan and Alyosha + Red-breasted Sapsucker` (9 files changed, +3,437 lines)
