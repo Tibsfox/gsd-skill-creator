@@ -4,86 +4,141 @@
 **Degree:** 39 of 360
 **Part A:** Ron Artis Jr -- Blues/Soul, E=5, Hawaii to Seattle, self-released. Second Artis sibling. The EVA as solo career.
 **Part B:** Townsend's Warbler (*Setophaga townsendi*) -- buzzy zee-zee-zee-zwee, E=4, conifer canopy, Parulidae. SEVENTH warbler. Canopy apex. Synthesizes prior warbler strategies.
-**NASA Mission:** 1.40 -- Gemini 4 (June 3, 1965. McDivitt and White. ED WHITE — FIRST AMERICAN SPACEWALK. 23 minutes EVA. Four-day mission.)
-**Engine Position:** Fortieth release. First EVA. Seventh warbler. Second Artis sibling.
+**NASA Mission:** 1.40 -- Gemini 4 (June 3-7, 1965. McDivitt and White. ED WHITE -- FIRST AMERICAN SPACEWALK. 23 minutes EVA. Four-day mission.)
+**NASA Organism:** *Setophaga townsendi* (Townsend's Warbler -- canopy-apex Parulidae, PNW conifer canopy specialist, seventh warbler in engine)
+**Series:** NASA Paired Release Engine -- Continuous Dual-Track Build, Pass 2 Refinement
+**Cluster:** First EVA / Canopy Apex / Artis Dynasty (Hawaii-to-Seattle bridge)
+**Dedication:** Auguste Piccard (Swiss physicist, 1884-1962) -- stratospheric balloonist and bathyscaphe pioneer, the terrestrial precedent for Ed White's vertical exit from the capsule into vacuum
+**Engine Position:** Fortieth paired release. First EVA in engine. Seventh Parulidae (engine's largest family). Second Artis sibling after degree 24. Second round-number milestone after the 10% mark at degree 35.
+**Commits:** `b6a0216dd` -- feat(www): v1.49.540 -- degree 39 paired release (NASA 1.40 + S36/SPS Pass 2)
+**Files changed:** 3 (README + S36 Pass 2 essay + SPS Pass 2 essay)
+**Branch:** dev
+**Quality Target:** A-grade DEGREE shape (prose rubric, merged with NASA 1.40 deep research)
 
 ## Summary
 
-Ed White walks in space — 23 minutes outside Gemini 4, the first American EVA. Ron Artis Jr is the second Artis sibling, the EVA from the family spacecraft. Townsend's Warbler is the seventh Parulidae, canopy apex, synthesizing buzzy acceleration with terminal flourish. Forty releases. The engine runs.
+Ed White pushed himself out of the Gemini 4 hatch on June 3, 1965, at approximately 15:46 UTC, and for the next twenty-three minutes became the freest human being who had ever lived. The spacecraft was traveling 7.8 kilometers per second, 28,000 kilometers per hour, at an altitude of roughly 280 kilometers above the Pacific Ocean. Below him the Earth was a curved blue-white expanse filling half the visible sky; above him, the blackness of space, star-free because of the Earth's reflected brightness and the gold-coated visor filtering the intense solar radiation. He carried a Hand-Held Maneuvering Unit (HHMU) -- a small compressed-oxygen gas gun the size and shape of a pistol -- and a 25-foot umbilical that carried oxygen from the spacecraft's environmental control system, voice communication with James McDivitt and with Houston, and served as his only physical connection to the vehicle keeping him alive. He squeezed the trigger of the HHMU and the oxygen fired from the nozzle, pushing him away from the Gemini. He released it and the thrust stopped. He fired it in different directions. He exhausted its 0.5-kilogram oxygen supply in less than a minute of total thrust, and for the remaining twenty-two minutes he maneuvered by pulling on the umbilical and by twisting his body to conserve angular momentum. McDivitt photographed him from the commander's seat. Those photographs -- the gold-visored helmet, the umbilical trailing in a lazy loop, the Earth curving behind, the HHMU still in his right hand after its propellant was gone -- became among the most iconic images in the history of human spaceflight. When Mission Control called for the EVA to end, White said: "I'm coming back in, and it's the saddest moment of my life." The statement was not theatrical. The engine's first EVA enters at degree 39 through a cabin hatch that was never designed for one.
+
+Gemini 4 had not been planned as America's first spacewalk. The original mission profile called for a four-day endurance flight with experiments and Earth photography, validating crew performance for approximately half the duration a lunar mission would require. Then, on March 18, 1965, Alexei Leonov stepped outside Voskhod 2 and performed the first spacewalk in history. The Space Race calculus changed overnight. NASA accelerated the EVA timeline from a later mission to Gemini 4 itself, and the preparation time collapsed from months to weeks. The Gemini spacecraft was not designed for EVA. McDonnell Aircraft Corporation in St. Louis had built a two-seat capsule roughly the dimensions of the front seat of a Volkswagen Beetle, with no airlock and no dedicated EVA hatch -- just a pair of hinged doors directly above the crew seats that, when opened, exposed the entire cabin to vacuum. Both astronauts had to be in fully sealed pressure suits before the hatch could be opened. James McDivitt, the command pilot, remained in his seat operating the spacecraft while White performed the EVA, but McDivitt was in the same vacuum environment as White, separated from space by nothing but the layers of his Gemini suit. The HHMU had been tested in zero-gravity aircraft flights and in ground simulations but never in the actual vacuum of space at orbital velocity. The 25-foot umbilical had been qualification-tested, but the dynamics of a tethered astronaut at 28,000 kilometers per hour in thermal cycling between -150°C in shadow and +120°C in sunlight were, by definition, unknown. The checklist had been rehearsed, revised, and rehearsed again, but every item on it was being performed for the first time by an American in space.
+
+Before the EVA, Gemini 4 produced one of the most pedagogically valuable failures in the history of spaceflight. After Titan II second-stage separation, McDivitt attempted to station-keep with the spent stage, flying in formation as a precursor to the rendezvous techniques that would be essential for Apollo. The logic seemed straightforward: the Titan stage was right there, visible through the window, a few hundred meters away. McDivitt fired his Orbital Attitude and Maneuvering System thrusters toward the stage. Instead of closing the distance, the Gemini moved away from it. He fired again, harder. The distance increased. The stage appeared to drift upward and ahead. McDivitt -- a combat veteran, a test pilot, a man whose instincts for flying machines had been honed through thousands of hours in high-performance aircraft -- found that his instincts were completely wrong. Orbital mechanics does not work like atmospheric flight. Thrusting toward a target in orbit changes your orbit in ways that move you away from the target; the intuitive response is exactly wrong. The Clohessy-Wiltshire equations describe the counter-intuitive truth: slowing down makes you catch up, speeding up makes you fall behind. Buzz Aldrin would formalize these rules in his 1963 MIT doctoral thesis, and every subsequent Gemini rendezvous mission would benefit from McDivitt's 1965 failure. The Gemini 4 station-keeping failure proved, in the most visceral possible way, that rendezvous in orbit is a solved mathematical problem, not a flying problem. You compute the intercept and execute the burns. You do not eyeball it.
+
+Ron Artis Jr arrives at degree 39 as the second Artis sibling in the engine after Ron Artis II at degree 24, establishing the engine's first family dynasty pattern: two members of the same family, fifteen degrees apart, each with their own independent degree assignment. The Artis family -- rooted in Motown pedigree, formed on the North Shore of Oahu, Hawaii -- operates like a spacecraft with multiple astronauts aboard. Ron II (degree 24) was the vocalist-pianist in the family ensemble. Ron Jr (degree 39) works in the Blues/Soul space with his own approach, self-released without a major label, operating at E=5 in the soul-quadrant energy register. The family is the spacecraft. Each sibling is an astronaut who exits the vehicle for their own EVA. Ed White's EVA was the first time a crew member operated independently outside the capsule -- still connected, still dependent on the spacecraft's life support, but physically separate, in their own suit, making their own decisions about movement and orientation. Ron Jr's solo career follows the same structural pattern: still connected to the Artis family (the spacecraft), still drawing on the shared Motown pedigree (the life support), but physically separate, performing under his own name, making his own artistic decisions. The EVA as solo career. The umbilical as family lineage. White's 25-foot tether and Ron Jr's Motown pedigree are the same structural object in two different media: a connection to the source vehicle that permits independent operation without requiring reinvention of the infrastructure that keeps the astronaut alive.
+
+The Townsend's Warbler (*Setophaga townsendi*) arrives at degree 39 as the seventh Parulidae in the engine -- the warbler family now surpasses every other in size, with seven species documented across degrees 14-20 and 38-39, more than Turdidae (5), Hirundinidae (5), and every other family the engine has catalogued. The Townsend's occupies conifer canopy, returning warblers to the high-canopy habitat that the Black-throated Gray at degree 38 approached from the dry side. The Townsend's is the conifer-canopy specialist: a brilliant yellow face with bold black markings, foraging at the top of Douglas-fir and western hemlock forty meters above the forest floor, the most visually striking warbler in the Pacific Northwest conifer forest. Its buzzy *zee-zee-zee-zwee-zweee* call is an ascending buzzy series that accelerates toward a terminal flourish, and every element of that song recombines strategies the warbler family has already documented: the buzz from the Orange-crowned (degree 20), the acceleration from the Wilson's (degree 15), the terminal contrast from the MacGillivray's (degree 14). The seventh warbler is not introducing a new acoustic strategy. It is synthesizing prior strategies into a mature compound signal. Synthesis rather than innovation. After seven entries, the Parulidae has enough internal material to recombine without introducing new elements, and the Townsend's is the engine's first documented instance of mature-family synthesis as a structural trait.
+
+The parallel between Ed White and the Townsend's Warbler lands on the vertical axis. Both entities operate at the top of their respective structures: White above the Gemini spacecraft, the Townsend's above the forest floor. White's EVA was the first time any American had been outside the vehicle, above the capsule, in the highest possible position a human could occupy in relation to a spacecraft in orbit. The Townsend's occupies the conifer canopy apex, the highest position in the forest, above every other warbler the engine has documented. Both are at the top of their vertical structure. Both are at the point of maximum exposure. Both are beyond the protective shelter of the surrounding enclosure. The canopy is the bird's EVA zone, the open space above the forest's internal shelter where the organism is most exposed to wind, rain, predators, and thermal extremes, and also most visible to conspecifics and potential mates. The EVA is the canopy exit, the point at which the astronaut leaves the vehicle's internal pressurized shelter and operates in the vacuum at maximum exposure. Ed White's gold-visored helmet and the Townsend's yellow-and-black face are both the bright markers that conspecifics use to identify the individual at the highest exposed position. Both entities wear bright colors because they operate where bright colors can be seen. The spacecraft and the forest are both vertical structures with habitable zones at multiple layers, and the astronaut and the bird both occupy the top layer -- the one where exposure is maximal and where mature competence is required to survive.
+
+The Hand-Held Maneuvering Unit synchronizes with the Townsend's acoustic synthesis on the question of limited resources. The HHMU carried 0.5 kilograms of oxygen at high pressure, enough for roughly twenty seconds of continuous thrust or a larger number of short bursts. White exhausted it relatively quickly, and for the remaining twenty-two minutes of the EVA he maneuvered by pulling on the umbilical and twisting his body to change orientation through angular momentum conservation. The HHMU ran out because the EVA schedule did not permit oxygen resupply. The limit was the propellant budget, and White reached it before the EVA was half complete. The Townsend's synthesis strategy operates under the same kind of constraint: the syrinx is a finite physical apparatus with a fixed range of sounds it can produce, and after seven warblers the engine has documented every basic acoustic strategy that Parulidae can generate. The Townsend's does not introduce an eighth strategy because the syrinx's repertoire is exhausted at seven. It recombines the existing strategies into a compound signal -- buzz plus acceleration plus terminal contrast -- because recombination is the only remaining option within the family's acoustic budget. Both the HHMU and the Townsend's syrinx are finite-resource systems whose occupants have learned to operate through depletion and recombination rather than through indefinite expansion. White used his umbilical for most of the EVA because the HHMU's propellant was gone. The Townsend's recombines prior warbler strategies because novel strategies are no longer available. In parallel, both the astronaut and the bird work at the boundary of what their equipment can produce.
+
+Forty releases is the second round-number milestone after the 10% mark at degree 35. The engine has now completed one-ninth of its full 360-degree arc and has accumulated enough structural material that meta-patterns are beginning to emerge: mature-family synthesis at the Parulidae, family dynasty patterns in the Artis siblings, first-EVA operational boundary crossings in the NASA track, second-round-number milestones in the release count, geographic range expansion into Hawaii via the Ron Jr entry, and cross-domain vertical-axis alignment between astronaut and canopy bird. The engine is no longer just accumulating firsts; it is documenting second-instances, recurrence patterns, and the meta-structure that emerges when enough instances have been collected to compare them against each other. Degree 39 sits exactly at the boundary between first-instance accumulation and second-instance pattern recognition, and it is the right place for the first EVA to enter: the astronaut who first occupies the exposed exterior position synchronizes with the warbler who first occupies the canopy-apex habitat, and both synchronize with the second Artis sibling who operates in the space outside the family ensemble for the second time, both connected to and separate from the infrastructure that produced them. The engine runs. The hatch opens. The astronaut floats. The warbler sings from the canopy. The Sun rises over the Pacific.
+
+## Key Features
+
+| Metric | Part A: Ron Artis Jr | Part B: Townsend's Warbler |
+|--------|----------------------|------------------------------|
+| Energy | E=5 (soul-quadrant ceiling, full professional output at the independent-artist scale, Hawaii-to-Seattle touring circuit, self-released label independence at peak energy) | E=4 (buzzy canopy-apex territorial song, ascending acoustic intensity, seventh-warbler synthesis of buzz plus acceleration plus terminal contrast) |
+| Acoustic Element | The Independent EVA -- full-energy artistic operation outside the major-label shelter, still connected to the Artis family lineage through Motown pedigree but operating physically separate under his own name | The Synthesis Song -- buzzy *zee-zee-zee-zwee-zweee* ascending series accelerating to terminal flourish; recombination of prior warbler strategies rather than introduction of novel ones |
+| Genre / Taxonomic Significance | Second Artis sibling in engine; first family dynasty pattern (Ron II at degree 24 + Ron Jr at degree 39 = 15-degree span); self-released at full soul-quadrant energy | Seventh Parulidae; engine's largest bird family; first documented instance of mature-family synthesis (after 7 members, recombination becomes the dominant strategy) |
+| Geography | Hawaii-to-Seattle bridge -- first cross-Pacific geographic extension for S36, extending the engine's musical range beyond the continental PNW to include the North Shore of Oahu | Conifer canopy apex -- new habitat layer at forty meters above forest floor, highest warbler position in engine, above Black-throated Gray's approach from dry side at degree 38 |
+| NASA Parallel | The EVA as solo career -- still tethered to the family spacecraft, still drawing life support from the Motown pedigree, but physically separate and independently directed, exactly like Ed White exiting Gemini 4 into the vacuum | Canopy apex as EVA zone -- the bird operates above the forest's protective shelter where exposure is maximal, the same way White operated above the spacecraft's protective enclosure where vacuum exposure was maximal |
+| Scale | Independent-artist-at-high-energy profile; self-released; E=5 sustained across career; Hawaii-based with Seattle touring circuit | 3-gram canopy specialist; forty-meter perch height; buzzy territorial song audible at 100-200 meter range in Douglas-fir forest; Parulidae family complete at seven members |
+| Structural Firsts | First family dynasty (Artis II + Jr); first Hawaii geographic bridge in S36; first second-Artis entry; confirms Motown pedigree as durable engine pipeline | First mature-family synthesis instance; first canopy-apex warbler; Parulidae reaches engine-largest family size; seventh warbler completes the family's acoustic strategy catalog |
 
 <details>
 <summary>Full Release Notes -- Click to expand</summary>
 
 ## Part A: Ron Artis Jr -- THE EVA AS SOLO CAREER
 
-### Pass 2 Refinement Summary
-
-Gemini 4's Ed White became the first American to walk in space on June 3, 1965 — 23 minutes floating outside the spacecraft, tethered by a 25-foot umbilical, the first time an American left the vehicle and trusted the suit. The EVA was the Gemini program's most dramatic moment: a human being, in vacuum, attached to a spacecraft by a cord, with the Earth below and nothing above. White's EVA is the engine's first documentation of an astronaut operating as an independent unit outside the capsule.
-
-Ron Artis Jr is the second Artis sibling in the engine (after Ron Artis II at degree 24). The family dynasty continues: same Motown pedigree, same North Shore Hawaii formation, same Blues/Soul genre territory. The dual-sibling entry is unprecedented — two members of the same family at different degrees, each with their own creative identity. Ron II (degree 24) was the vocalist-pianist. Ron Jr (degree 39) works in the Blues/Soul space with his own approach. The family is the spacecraft. Each sibling is an astronaut who exits the vehicle for their own EVA.
-
-White's EVA was the first time a crew member operated independently outside the capsule — still connected, still dependent on the spacecraft's life support, but physically separate, in their own suit, making their own decisions about movement and orientation. Ron Jr's solo career follows the same model: still connected to the Artis family (the spacecraft), still drawing on the Motown pedigree (the life support), but physically separate, performing under his own name, making his own artistic decisions. The EVA as solo career. The umbilical as family lineage.
-
-### Retrospective: Degree 39 Patterns Established
-
-1. **The first EVA.** Ed White's 23 minutes outside Gemini 4 opens a new mission category the engine has never documented. Inside-the-capsule operations dominate through degree 38; degree 39 is the first step outside.
-
-2. **Family dynasty across degrees.** Ron Artis II (24) + Ron Artis Jr (39) — two members of the same family, 15 degrees apart, each with independent degree assignment. First dynasty pattern in the engine.
-
-3. **The EVA metaphor fits a solo career.** Still connected to family, still drawing on shared infrastructure, but physically separate and independently directed. The structural match is clean.
-
-4. **The umbilical is the lineage.** White's 25-foot tether = Ron Jr's Motown pedigree. Both carry life support back to the source vehicle.
-
-5. **Hawaii-to-Seattle geography.** The Artis formation bridges two distant musical scenes. Geographic range expands for the S36 corpus.
-
-6. **Self-released + E=5.** Ron Jr operates without a major label at full soul-quadrant energy — the independent-artist-at-high-energy profile.
-
----
+- **Hawaii Origins and the North Shore Formation.** Ron Artis Jr was born into the Artis musical family on the North Shore of Oahu, where the family's Motown-rooted collective had established itself as a multi-generational Hawaiian musical institution. The North Shore formation is the spacecraft, the cultural vehicle that carried the Motown pedigree from Detroit to Hawaii across generations of the Artis family, and the one from which each sibling eventually exits for solo work. Hawaii enters the engine's geography at degree 39 as the first cross-Pacific extension of the S36 corpus, breaking the engine's prior continental limit of Seattle-Tacoma and adding a 2,400-mile geographic leap.
+- **The Second Artis Sibling.** Ron II entered the engine at degree 24 as the first Artis sibling -- the vocalist-pianist, the eldest in the family ensemble, the primary creative voice in the collective. Ron Jr arrives fifteen degrees later as the second Artis, working in the Blues/Soul register with his own approach distinct from his brother's. The dual-sibling entry is unprecedented in the engine: two members of the same family at different degrees, each with independent degree assignment, each with their own creative identity, same pedigree but not the same artist. Family dynasty enters the engine as a structural pattern at degree 39.
+- **Motown Pedigree as Umbilical.** The Artis family's Motown lineage is not decorative biography; it is the functional life-support system that permits each sibling to operate solo. Ron Jr draws vocal technique, harmonic vocabulary, rhythmic pocket, and arrangement sensibility from the shared family education, the same way an EVA astronaut draws oxygen and communications from the spacecraft via the umbilical. The family is the pressurized cabin; the pedigree is the 25-foot tether; the solo career is the vacuum operation. Cut the umbilical and the astronaut dies; sever the pedigree and the solo career loses the infrastructure that taught the artist how to operate at performance level.
+- **Self-Released at Full Energy.** Ron Jr operates without a major label, releasing through his own channels at E=5 -- the soul-quadrant energy ceiling. The independent-artist-at-high-energy profile is newly documented by the engine at degree 39. Self-release has appeared before in the engine at lower energy registers (the DIY/lo-fi profile), but Ron Jr establishes that full professional output can be sustained without major-label infrastructure. The independent operator at peak energy. The astronaut outside the capsule, running on the umbilical, not on the cabin's full life support.
+- **The EVA Metaphor Fits Cleanly.** Every element of Ed White's Gemini 4 EVA maps structurally onto Ron Jr's solo career configuration. White was still dependent on Gemini's environmental control (Ron Jr on the Artis family's musical education). White was physically separate from the vehicle (Ron Jr performs under his own name, not the family ensemble's). White made his own decisions about movement and orientation (Ron Jr makes his own artistic choices). White had limited propellant in the HHMU (Ron Jr has limited self-release budget relative to major-label funding). The structural match is clean because both entities are operating the same pattern: independent operation from a shared infrastructure, with the shared infrastructure remaining visible and durable across the separation.
+- **Blues/Soul as Genre Register.** Ron Jr's Blues/Soul positioning places him in the same genre-family neighborhood as his brother but with sufficient distinction to avoid redundancy. Where Ron II occupied the vocalist-pianist-arranger role in the family ensemble, Ron Jr works in the Blues/Soul register as a lead artist with his own instrumental emphasis. The engine documents two siblings in adjacent genre territory without collapsing them into duplicates, which confirms that family dynasty in the engine requires genre-proximity plus artistic-distinctness rather than genre-identity.
+- **Hawaii-to-Seattle Touring Circuit.** Ron Jr's professional range covers the Hawaii-to-Pacific-Northwest corridor, with Seattle and Tacoma venues as regular touring stops. The circuit is the post-EVA rendezvous pattern: Hawaii as home base (the orbital parking orbit), Seattle as the primary touring destination (the rendezvous target), with regular transitions between the two. The engine documents multi-city operational ranges as structural variables at degree 39, extending the single-city-focus that characterized earlier S36 entries.
+- **The Second Round-Number Milestone.** Ron Jr's entry at degree 39 coincides with the engine's fortieth paired release -- the second round-number milestone after the 10% mark at degree 35. The engine now has forty S36 artists documented, forty SPS species documented, and forty NASA missions aligned. Ron Jr's entry is the one that pushes the count to forty, and the choice of a second-Artis-sibling at this exact degree is not coincidental: round-number milestones are where the engine documents meta-patterns (dynasty, synthesis, exposure), and the Artis dynasty is a perfect match for the fortieth-release position.
 
 ## Part B: Townsend's Warbler -- CANOPY APEX AS SYNTHESIS
 
-### Pass 2 Refinement Summary
+- **The Seventh Parulidae and the Family Catalog.** Townsend's Warbler introduces the seventh member of Parulidae to the engine, making warblers the largest bird family in the corpus -- seven species documented against Turdidae's five, Hirundinidae's five, and every other family's smaller counts. The family catalog is complete at seven in the sense that every basic acoustic strategy the syrinx can produce has now been assigned to a specific warbler: intensification (MacGillivray's at 14), acceleration (Wilson's at 15), terminal contrast (Common Yellowthroat at 16), chip-note (Yellow-rumped at 17), descending pitch (Yellow at 18), dry-side buzz (Black-throated Gray at 38), and now synthesis (Townsend's at 39). Seven members, seven strategies, one family catalog closed.
+- **The Conifer Canopy Apex.** Townsend's Warbler forages at the top of Douglas-fir and western hemlock stands, typically at heights of thirty to forty meters above the forest floor. This is the canopy apex, the highest habitable position in the PNW conifer forest, above the Black-throated Gray's dry-edge habitat from degree 38 and above every other warbler in the engine. The apex position is the forest's EVA zone: maximum exposure to wind, rain, solar radiation, and thermal extremes; maximum visibility to potential mates and conspecific rivals; minimum protection from predators. The bird that occupies the apex trades shelter for visibility, the same way the astronaut who performs the EVA trades pressurized cabin for photographable external position.
+- **The Buzzy Synthesis Song.** The Townsend's territorial song is an ascending buzzy series -- *zee-zee-zee-zwee-zweee* -- that accelerates from a lower-pitch starting register to a terminal flourish at a higher pitch and greater acoustic intensity. Every element of this song recombines a prior warbler strategy: the buzz is the Orange-crowned's dry trill (degree 20), the acceleration is the Wilson's tempo push (degree 15), the terminal contrast is the MacGillivray's falling phrase inverted (degree 14). Synthesis rather than innovation. The seventh warbler does not add new material to the family's repertoire; it recombines the six prior members' contributions into a compound signal that is recognizably Parulidae-family but not reducible to any single prior species.
+- **Visual Striking as Exposure Marker.** The Townsend's is the most visually striking warbler in the PNW: brilliant yellow face with bold black mask, yellow breast, gray back, white wing bars. These are not camouflage colors; they are conspicuousness colors, optimized for visibility at the canopy apex where the bird needs to be seen by conspecifics across the Douglas-fir gaps. Ed White's gold-visored helmet operated on the same principle: not camouflage, but conspicuousness, designed to be visible from the spacecraft and from Earth-based tracking. Both the Townsend's and White wear bright markers at their maximum-exposure position because visibility is the primary function at that position. The canopy apex and the EVA zone both select for bright coloration.
+- **Habitat Return Not Repeat.** The Black-throated Gray at degree 38 approached conifer habitat from the dry side, occupying the lower-canopy dry-slope niche. The Townsend's at degree 39 returns to conifer habitat from the canopy-apex side, occupying the upper-canopy wet-conifer niche. Same forest, different layer. Same genus (*Setophaga*), different ecological stratum. The engine documents two consecutive *Setophaga* species without duplication because their habitat layers are structurally distinct: dry-edge lower canopy versus wet-conifer upper canopy. Two warblers in two degrees filling two layers of the same forest. The Parulidae family's ecological range expands vertically at degree 39 to include the apex stratum.
+- **Synthesis as Mature-Family Trait.** After seven entries, the Parulidae family shifts from introduction to recombination. Every basic acoustic strategy has been assigned; every major habitat layer has been occupied; every plumage pattern has been documented. The seventh species does not introduce novel material because the family's material budget is exhausted at seven. The Townsend's recombines prior strategies because recombination is the only remaining option. The engine documents synthesis as a structural signature of mature families, which will recur in future degrees when other families reach their natural member-count ceiling.
+- **Mechanical Limit as Structural Variable.** The syrinx of a Parulidae species is a finite physical apparatus with a fixed range of producible sounds. After seven warblers in the engine, the syrinx's repertoire is effectively exhausted; no novel acoustic strategy remains for the eighth warbler to introduce. The Townsend's synthesis strategy operates at this mechanical limit, the same way Ed White's HHMU operated at its 0.5-kilogram propellant limit: both the bird and the astronaut have worked through the recoverable resource envelope and arrived at recombination (the Townsend's) or umbilical-dependence (White) as the remaining operational mode. Both entities document what happens at the boundary of their equipment's capacity.
+- **Parulidae Engine Dominance.** Seven species at degree 39 makes Parulidae the dominant family in the engine's SPS track. The closest competitor (Turdidae at five species) would require two additional entries to match, and no other family exceeds three. Parulidae's dominance is not coincidental: the Pacific Northwest hosts more warbler species per unit area than most North American biomes, and the engine's SPS curriculum necessarily reflects that ecological reality. The fact that warbler species outnumber every other family in the engine is a direct signature of the Pacific Northwest biome's own acoustic diversity. The family's dominance mirrors the NASA track's Mariner program dominance at the same phase: both programs produced more individual entries than any competing program in the same time window.
 
-Townsend's Warbler is the seventh Parulidae — the warbler family now has more entries than any other in the engine (7 vs Turdidae's 5). The Townsend's occupies conifer canopy — returning warblers to the high-canopy habitat that the Black-throated Gray (degree 38) approached from the dry side. The Townsend's is the conifer-canopy warbler: brilliant yellow face with bold black markings, foraging at the top of Douglas-fir and western hemlock, the most visually striking warbler in the PNW conifer forest.
+## Retrospective
 
-The "buzzy zee-zee-zee-zwee-zweee" is an ascending buzzy series that accelerates toward a terminal flourish — combining elements from earlier warbler strategies: the buzz of the Orange-crowned (degree 20), the acceleration of the Wilson's (degree 15), and the terminal contrast of the MacGillivray's (degree 14). The Townsend's synthesizes. The seventh warbler is not introducing a new strategy — it is combining strategies the family has already documented.
+### What Worked
 
-Ed White floated outside Gemini 4 — the first American in the open, above the canopy of the spacecraft, in the highest possible "canopy" position. The Townsend's Warbler occupies the conifer canopy apex — the highest position in the forest, above the other warblers. Both entities operate at the top of their respective vertical structures: White above the spacecraft, the Townsend's above the forest floor. The EVA is the canopy exit. The canopy is the bird's EVA zone — the open space above the shelter where the organism is most exposed and most visible.
+- **The EVA metaphor.** The mapping of Ed White's Gemini 4 spacewalk onto Ron Jr's solo career and the Townsend's Warbler's canopy-apex position held across multiple structural dimensions (tether, exposure, visibility, propellant, limited resources). The three-way alignment was stronger than any two-way cross-sync the engine had previously produced.
+- **The second Artis sibling.** Registering Ron Jr at degree 39 after Ron II at degree 24 established family dynasty as a structural pattern without requiring any changes to the engine's sibling-handling logic. The 15-degree span between the two Artis entries is clean and non-redundant.
+- **The seventh Parulidae.** Reaching seven warblers and documenting mature-family synthesis as a structural outcome was a payoff that the engine had been setting up since degree 14. The synthesis strategy emerged organically at exactly the point where the syrinx's acoustic budget was exhausted.
+- **Round-number milestone alignment.** The fortieth release landing on a degree that carries first-EVA + family-dynasty + family-synthesis content produced a milestone that felt earned rather than assigned.
 
-### Retrospective: Degree 39 Lessons Learned
+### What Could Be Better
 
-1. **Parulidae becomes the engine's largest family.** Seven species — more than any other. The warbler family is now the engine's primary reference for acoustic diversity.
+- **NASA research depth on the McDivitt station-keeping failure.** The Clohessy-Wiltshire equations and Buzz Aldrin's MIT thesis deserved more explicit treatment in the Pass 2 refinement; the failure-as-pedagogy story was compressed into a paragraph where it merited a section.
+- **The hatch-closing problem.** The thermal-expansion-causing-hatch-sticking narrative from the post-EVA return to the capsule was under-documented in the release notes. This is a durable engineering lesson that propagates to Apollo EVA hatch design, and it should have been surfaced.
+- **Ron Jr discography specifics.** The prose is strong on the structural mapping but sparse on the actual record-by-record trajectory. A future Pass 3 could anchor more specifically to named albums, release years, and collaborator credits.
+- **Townsend's Warbler hybridization.** The Townsend's x Hermit Warbler hybrid zone in the Cascades is one of the best-studied avian hybridization systems in North America and was mentioned only in passing. The synthesis-at-the-species-level story and the synthesis-at-the-family-level story are the same story at two scales.
 
-2. **Synthesis as a mature-family trait.** After seven entries, the Townsend's combines rather than innovates. The family has enough internal material to recombine without introducing new elements.
+## Lessons Learned
 
-3. **Canopy apex as an EVA analogue.** Both the warbler and the astronaut operate above their shelter structures. Elevation = exposure.
+1. **The first EVA sets the grain size for every subsequent spacewalk.** Ed White's 23 minutes outside Gemini 4 established the template -- umbilical tether, HHMU propulsion, pressure-suit rigidity, thermal-cycling hatch problems -- that every Gemini and Apollo EVA would inherit. The engine's documentation of this first-instance has to carry enough specificity that second-instances can be compared against it meaningfully.
 
-4. **Visual striking paired with acoustic synthesis.** The Townsend's is the most visually striking warbler and also the synthesis bird. Form matches function.
+2. **Family dynasty requires both pedigree-shared and artist-distinct.** Ron II and Ron Jr occupy adjacent genre territory (Blues/Soul) and share Motown pedigree, but their artistic voices are distinct enough that the engine does not collapse them into duplicates. Family dynasty in the engine is not redundancy; it is the same infrastructure producing distinguishable outputs across generations.
 
-5. **Habitat return, not repeat.** The Black-throated Gray (38) approached conifer habitat from the dry side; the Townsend's (39) occupies the canopy apex. Same forest, different layer.
+3. **Mature-family synthesis emerges at the mechanical limit.** The Townsend's recombines prior warbler strategies because the Parulidae syrinx's acoustic budget is exhausted at seven members. Synthesis is not a stylistic choice; it is what organisms do when novel options are no longer available. The engine documents this as a structural signature of any mature family.
 
-6. **The warbler family has a full strategy catalog.** Intensification, acceleration, terminal contrast, buzz, synthesis — the acoustic toolkit is complete at seven members.
+4. **The umbilical is the lineage.** White's 25-foot tether and Ron Jr's Motown pedigree are the same structural object: a connection to the source vehicle that permits independent operation without requiring reinvention of the life-support infrastructure. The engine extends this metaphor to any artist-lineage or organism-family relationship where the derivative operates outside the source.
 
-### Carry-Forward Items from Degree 39
+5. **Counter-intuitive physics rewards pedagogy, not instinct.** McDivitt's station-keeping failure on Gemini 4 demonstrated that orbital rendezvous is governed by the Clohessy-Wiltshire equations, not by atmospheric-flight intuition. Every subsequent Gemini pilot internalized the lesson: compute the intercept, do not eyeball it. The engine documents pedagogical failures as more valuable than procedural successes when the failure reveals a fundamental principle.
 
-- **Gemini program:** First EVA documented. White's 23 minutes outside.
-- **Parulidae:** 7 species, engine's largest family. Strategy catalog complete.
-- **Artis dynasty:** 2 siblings across degrees 24 + 39; first family dynasty pattern.
-- **EVA/canopy-apex mirror:** White above Gemini, Townsend's above the forest.
-- **Hawaii-to-Seattle:** New geographic bridge for S36.
-- **Forty releases:** Second round-number milestone after 10% at degree 35.
+6. **Canopy apex selects for bright coloration and synthesis vocalization.** The Townsend's Warbler operates at the forest's maximum-exposure position and produces a compound acoustic signal audible across canopy gaps. Both traits are adaptations to the apex habitat. The engine notes this as a general rule: vertical-axis extreme positions select for conspicuous markers and compound signals because those are what function at maximum exposure.
 
-</details>
+7. **Thermal cycling breaks designs that work in isothermal tests.** The Gemini 4 hatch worked in ground tests and in the thermal-stable cabin environment but stuck when it transitioned between -150°C shadow and +120°C sunlight during the EVA. Every orbital mechanism the engine documents from degree 39 forward must account for thermal-cycling stress as a first-order design variable.
+
+8. **Round-number milestones are where meta-patterns surface.** The engine has now hit two round-number milestones (10% at degree 35, forty releases at degree 39), and at each one a meta-pattern crystallized (genre-root-after-branches at 35, family-dynasty-and-synthesis at 39). Round numbers are not cosmetic; they are the positions where sufficient instance-count permits pattern recognition to overtake instance accumulation.
+
+9. **The Space Race calculus compresses preparation timelines.** Gemini 4's EVA was accelerated from a later mission to June 1965 because Alexei Leonov beat the United States to the first spacewalk on March 18, 1965. The compressed timeline meant the HHMU was minimally tested and the umbilical dynamics were unknown at launch. The engine documents competitive pressure as a first-order determinant of mission-risk profile.
+
+10. **The saddest moment of his life.** Ed White's "I'm coming back in, and it's the saddest moment of my life" statement marks the emotional register that the engine has to carry forward from degree 39. The EVA was not just a technical achievement; it was an experience that no words in his vocabulary could adequately describe, and the transition from outside-the-capsule to inside-the-capsule was felt as a loss. Future EVAs in the engine inherit this emotional frame.
+
+## Cross-References
+
+| Thread | Degree 39 Entity | Role |
+|--------|-----------------|------|
+| S36 | Ron Artis Jr | Artist -- second Artis sibling, Blues/Soul, self-released, Hawaii-to-Seattle bridge, E=5 |
+| SPS | Townsend's Warbler | Species -- seventh Parulidae, canopy apex, synthesis of prior warbler strategies, E=4 |
+| NASA | Gemini 4 | Mission -- first American EVA, 23 minutes outside, McDivitt and White, June 3-7 1965 |
+| Dedication | Auguste Piccard | Swiss stratospheric balloonist and bathyscaphe pioneer, terrestrial precedent for vertical exit |
+| Degree 24 -> 39 | Ron Artis II -> Ron Artis Jr | First family dynasty pattern in the engine, 15-degree span, independent degree assignments |
+| Degree 14 -> 39 | MacGillivray's -> Townsend's | Warbler terminal-contrast strategy inverted into ascending terminal flourish |
+| Degree 15 -> 39 | Wilson's -> Townsend's | Warbler acceleration strategy recombined into ascending buzzy series |
+| Degree 20 -> 39 | Orange-crowned -> Townsend's | Warbler buzz strategy recombined into buzzy synthesis |
+| Degree 38 -> 39 | Black-throated Gray -> Townsend's | Same genus (*Setophaga*) two layers of conifer forest (dry side -> canopy apex) |
+| Degree 14-20 + 38 -> 39 | Parulidae sextet -> seventh warbler | Family reaches engine-largest size; strategy catalog closes at synthesis |
+| Pre-39 capsule ops -> 39 | Inside-capsule missions -> first EVA | Engine crosses inside-the-spacecraft -> outside-the-spacecraft operational boundary |
+| Degree 35 -> 39 | 10% milestone -> forty releases | Second round-number milestone; meta-pattern recognition overtakes instance accumulation |
+| Voskhod 2 (1965-03-18) -> Gemini 4 | Leonov first-EVA -> White first-American-EVA | Space Race acceleration forces NASA EVA timeline compression |
+| Gemini 4 -> Gemini 9A/11/12 | First EVA -> subsequent EVAs | Cernan, Gordon, Aldrin inherit White's hatch-thermal and suit-exertion lessons |
+| Gemini 4 -> Apollo | EVA hatch thermal cycling -> Apollo EVA hatch redesign | Engineering lesson propagates to Moon-mission program |
+| HHMU -> MMU (Manned Maneuvering Unit) | Gemini 4 handheld -> Shuttle-era backpack | Same propulsion principle, larger propellant envelope, no umbilical |
+| Clohessy-Wiltshire equations | McDivitt station-keeping failure -> Aldrin MIT thesis | Orbital mechanics formalized after the failure that demonstrated its necessity |
 
 ## Emerging Patterns at Degree 39
 
 | Pattern | Status | Degree 39 Value |
 |---------|--------|-----------------|
-| S36 Artists | 40 documented (degrees 0-39) | Ron Artis Jr -- Blues/Soul, second Artis sibling, Hawaii-to-Seattle |
+| S36 Artists | 40 documented (degrees 0-39) | Ron Artis Jr -- Blues/Soul, second Artis sibling, Hawaii-to-Seattle, self-released |
 | SPS Species | 40 documented (degrees 0-39) | Townsend's Warbler -- seventh Parulidae, canopy apex, synthesis |
-| NASA Missions | 40 aligned (1.0-1.40) | Gemini 4 -- first American EVA, White's 23 minutes |
-| Gemini Program | First EVA milestone | Inside-capsule → outside-capsule operational boundary crossed |
-| Parulidae Family | 7 species (engine's largest) | Strategy catalog complete (intensification / acceleration / terminal / buzz / synthesis) |
+| NASA Missions | 40 aligned (1.0-1.40) | Gemini 4 -- first American EVA, White's 23 minutes, McDivitt's station-keeping failure |
+| Gemini Program | First EVA milestone | Inside-capsule -> outside-capsule operational boundary crossed |
+| Parulidae Family | 7 species (engine's largest) | Strategy catalog closed (intensification / acceleration / terminal / buzz / synthesis / dry-buzz / canopy-synthesis) |
 | Family Dynasty | First instance | Artis II (24) + Artis Jr (39); 15-degree span |
 | EVA Metaphor | Cross-domain | Astronaut / solo career / canopy-apex bird all "outside the shelter" |
 | Release Count | 40 | Second round-number milestone after 10% at degree 35 |
@@ -91,20 +146,23 @@ Ed White floated outside Gemini 4 — the first American in the open, above the 
 | Geographic Range | Hawaii bridge | S36 extends to cross-Pacific formation |
 | Canopy Apex Habitat | New niche | Conifer top layer, above prior warbler habitats |
 | Independent-at-High-Energy | Ron Jr self-released E=5 | Profile documented |
+| Thermal Cycling Stress | First documented | Gemini 4 hatch-close difficulty under -150°C/+120°C cycling |
+| Counter-Intuitive Orbital Mechanics | First documented | McDivitt station-keeping failure -> Clohessy-Wiltshire equations |
 
-## Cross-References
+</details>
 
-| Thread | Degree 39 Entity | Role |
-|--------|-----------------|------|
-| S36 | Ron Artis Jr | Artist -- second Artis sibling, Blues/Soul, self-released, Hawaii bridge |
-| SPS | Townsend's Warbler | Species -- seventh Parulidae, canopy apex, synthesis of prior strategies |
-| NASA | Gemini 4 | Mission -- first American EVA, 23 minutes outside, tethered |
-| Degree 24→39 | Artis II → Artis Jr | First family dynasty: 15-degree span, independent degree assignments |
-| Degree 14/15/20 → 39 | MacGillivray's / Wilson's / Orange-crowned → Townsend's | Warbler strategy synthesis |
-| Degree 14-17 → 39 | Parulidae quartet → seventh warbler | Family reaches engine-largest size |
-| Degree 38→39 | Black-throated Gray → Townsend's | Conifer habitat filled by layer (dry side → canopy apex) |
-| Degree 0-38 → 39 | Inside-capsule ops → EVA | First outside-the-spacecraft documentation |
-| Degree 35→39 | 10% milestone → 40 | Second round-number checkpoint |
+## Engine Position
+
+```
+v1.49.501  = NASA 1.0   + degree 0   Pass 2  (FOUNDATION)
+...
+v1.49.536  = NASA 1.36  + degree 35  Pass 2  (FIRST IMAGES OF MARS, 10% milestone)
+v1.49.537  = NASA 1.37  + degree 36  Pass 2  (SURVEYOR 1)
+v1.49.538  = NASA 1.38  + degree 37  Pass 2  (GEMINI 3)
+v1.49.539  = NASA 1.39  + degree 38  Pass 2  (GEMINI BEGINS)
+v1.49.540  = NASA 1.40  + degree 39  Pass 2  <- THIS RELEASE (GEMINI 4 -- THE SPACEWALK, 40 releases)
+v1.49.541  = NASA 1.41  + degree 40  Pass 2  <- next
+```
 
 ## Cumulative Engine Statistics (v1.49.501-540)
 
@@ -118,7 +176,24 @@ Ed White floated outside Gemini 4 — the first American in the open, above the 
 | Geographic range | Seattle + Tacoma + Hawaii bridge |
 | Mature-family synthesis instances | 1 (Townsend's Warbler) |
 | Round-number checkpoints | 2 (10% at 35, 40 releases at 39) |
+| Inside-to-outside operational transitions | 1 (Gemini 4 EVA) |
+| Thermal cycling stress instances | 1 (hatch-close difficulty) |
+| Orbital-mechanics pedagogy instances | 1 (McDivitt station-keeping failure) |
+
+## Files
+
+| File | Type | Words |
+|------|------|-------|
+| `S36/research/releases/039-ron-artis-jr/pass2-refinement.md` | CREATED | ~2,400 |
+| `SPS/research/releases/039-townsends-warbler/pass2-refinement.md` | CREATED | ~2,600 |
+| `NASA/1.40/research.html` | PUBLISHED | ~4,200 |
+| `NASA/1.40/organism.html` | PUBLISHED | ~2,100 |
+| `NASA/1.40/mathematics.html` | PUBLISHED | ~1,800 |
+| `NASA/1.40/simulation.html` | PUBLISHED | ~3,000 |
+| `NASA/1.40/curriculum.html` | PUBLISHED | ~2,000 |
+| `NASA/1.40/papers.html` | PUBLISHED | ~1,500 |
+| `docs/release-notes/v1.49.540/README.md` | THIS FILE | ~5,800 |
 
 ---
 
-*Degree 39: the spacewalk. Ed White floating outside Gemini 4 for 23 minutes, tethered to the spacecraft, the Earth below. A second Artis sibling stepping outside the family vessel for his own solo career. A warbler at the conifer canopy apex, the most exposed position in the forest. The EVA. The exit. The open space above the shelter.*
+*Degree 39: the spacewalk. Ed White floating outside Gemini 4 for 23 minutes, tethered to the spacecraft by a 25-foot umbilical, the Hand-Held Maneuvering Unit in his right hand, the gold-visored helmet reflecting the Sun and the Earth, the Pacific Ocean curving blue-white below him at 28,000 kilometers per hour. A second Artis sibling stepping outside the family vessel for his own solo career, still connected by the Motown pedigree that taught him how to sing, still separate enough to perform under his own name at E=5. A Townsend's Warbler at the conifer canopy apex forty meters above the forest floor, singing a buzzy ascending synthesis of every prior warbler strategy the engine has catalogued, visible to conspecifics across Douglas-fir gaps because its yellow-and-black face is conspicuous at the maximum-exposure position. Three entities at the top of three vertical structures, each one beyond the protective shelter of the surrounding enclosure, each one operating at the boundary of what their equipment permits. The EVA. The exit. The open space above the shelter. I'm coming back in. And it's the saddest moment of my life.*
