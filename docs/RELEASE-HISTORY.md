@@ -377,107 +377,107 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.195](release-notes/v1.49.195) | Ecosystem Alignment, Helium Corridor, OOPS Analysis, OPEN Problems | 2026-03-31 | 17 | — | — | [✓](release-notes/v1.49.195/chapter/03-retrospective.md) | [7](release-notes/v1.49.195/chapter/04-lessons.md) | F 32 |  |
 | [v1.49.194](release-notes/v1.49.194) | HEL: Helium Supply Chain & Pacific Rim Semiconductor Infrastructure | 2026-03-31 | 1 | — | — | [✓](release-notes/v1.49.194/chapter/03-retrospective.md) | [1/6](release-notes/v1.49.194/chapter/04-lessons.md) | F 32 |  |
 | [v1.49.193](release-notes/v1.49.193) | Ecosystem Alignment | 2026-03-31 | 1 | — | — | [✓](release-notes/v1.49.193/chapter/03-retrospective.md) | [1/4](release-notes/v1.49.193/chapter/04-lessons.md) | F 29 |  |
-| [v1.49.192](release-notes/v1.49.192) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.192/chapter/03-retrospective.md) | [3/10](release-notes/v1.49.192/chapter/04-lessons.md) | C 74 |  |
-| [v1.49.191](release-notes/v1.49.191) | — | 2026-03-30 | 2 | — | — | [✓](release-notes/v1.49.191/chapter/03-retrospective.md) | [2/8](release-notes/v1.49.191/chapter/04-lessons.md) | C 74 |  |
-| [v1.49.190](release-notes/v1.49.190) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.190/chapter/03-retrospective.md) | [6/15](release-notes/v1.49.190/chapter/04-lessons.md) | C 75 |  |
-| [v1.49.189](release-notes/v1.49.189) | — | 2026-03-30 | 1 | — | — | — | — | F 55 |  |
-| [v1.49.188](release-notes/v1.49.188) | — | 2026-03-30 | 1 | — | — | — | — | F 55 |  |
-| [v1.49.187](release-notes/v1.49.187) | — | 2026-03-30 | 1 | — | — | — | — | F 53 |  |
-| [v1.49.186](release-notes/v1.49.186) | — | 2026-03-30 | 1 | — | — | — | — | F 53 |  |
-| [v1.49.185](release-notes/v1.49.185) | — | 2026-03-30 | 1 | — | — | — | — | F 53 |  |
-| [v1.49.184](release-notes/v1.49.184) | — | 2026-03-30 | 2 | — | — | — | — | F 55 |  |
-| [v1.49.183](release-notes/v1.49.183) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.183/chapter/03-retrospective.md) | 4/8 _(no file)_ | F 45 |  |
-| [v1.49.182](release-notes/v1.49.182) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.182/chapter/03-retrospective.md) | [5/15](release-notes/v1.49.182/chapter/04-lessons.md) | C 75 |  |
-| [v1.49.181](release-notes/v1.49.181) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.181/chapter/03-retrospective.md) | [4/12](release-notes/v1.49.181/chapter/04-lessons.md) | D 65 |  |
-| [v1.49.180](release-notes/v1.49.180) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.180/chapter/03-retrospective.md) | [2/7](release-notes/v1.49.180/chapter/04-lessons.md) | D 65 |  |
-| [v1.49.179](release-notes/v1.49.179) | — | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.179/chapter/03-retrospective.md) | [1/5](release-notes/v1.49.179/chapter/04-lessons.md) | D 61 |  |
-| [v1.49.178](release-notes/v1.49.178) | — | 2026-03-30 | 2 | — | — | [✓](release-notes/v1.49.178/chapter/03-retrospective.md) | [5](release-notes/v1.49.178/chapter/04-lessons.md) | D 61 |  |
-| [v1.49.177](release-notes/v1.49.177) | — | 2026-03-29 | 1 | — | — | — | — | F 55 |  |
-| [v1.49.176](release-notes/v1.49.176) | — | 2026-03-29 | 2 | — | — | — | — | F 55 |  |
-| [v1.49.175](release-notes/v1.49.175) | — | 2026-03-29 | 1 | — | — | — | — | F 52 |  |
-| [v1.49.174](release-notes/v1.49.174) | — | 2026-03-29 | 1 | — | — | — | — | F 49 |  |
-| [v1.49.173](release-notes/v1.49.173) | — | 2026-03-29 | 1 | — | — | — | — | F 52 |  |
-| [v1.49.172](release-notes/v1.49.172) | — | 2026-03-29 | 1 | — | — | — | — | F 52 |  |
-| [v1.49.171](release-notes/v1.49.171) | — | 2026-03-29 | 1 | — | — | — | — | F 52 |  |
-| [v1.49.170](release-notes/v1.49.170) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.170/chapter/03-retrospective.md) | [8](release-notes/v1.49.170/chapter/04-lessons.md) | D 67 |  |
-| [v1.49.169](release-notes/v1.49.169) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.169/chapter/03-retrospective.md) | [7](release-notes/v1.49.169/chapter/04-lessons.md) | D 64 |  |
-| [v1.49.168](release-notes/v1.49.168) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.168/chapter/03-retrospective.md) | [1/7](release-notes/v1.49.168/chapter/04-lessons.md) | D 64 |  |
-| [v1.49.167](release-notes/v1.49.167) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.167/chapter/03-retrospective.md) | [7](release-notes/v1.49.167/chapter/04-lessons.md) | D 65 |  |
-| [v1.49.166](release-notes/v1.49.166) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.166/chapter/03-retrospective.md) | [7/21](release-notes/v1.49.166/chapter/04-lessons.md) | A 95 |  |
-| [v1.49.165](release-notes/v1.49.165) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.165/chapter/03-retrospective.md) | [5/22](release-notes/v1.49.165/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.164](release-notes/v1.49.164) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.164/chapter/03-retrospective.md) | [5/20](release-notes/v1.49.164/chapter/04-lessons.md) | A 98 |  |
-| [v1.49.163](release-notes/v1.49.163) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.163/chapter/03-retrospective.md) | [1/15](release-notes/v1.49.163/chapter/04-lessons.md) | B 83 |  |
-| [v1.49.162](release-notes/v1.49.162) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.162/chapter/03-retrospective.md) | [4/21](release-notes/v1.49.162/chapter/04-lessons.md) | A 98 |  |
-| [v1.49.161](release-notes/v1.49.161) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.161/chapter/03-retrospective.md) | [3/19](release-notes/v1.49.161/chapter/04-lessons.md) | A 98 |  |
-| [v1.49.160](release-notes/v1.49.160) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.160/chapter/03-retrospective.md) | [4/21](release-notes/v1.49.160/chapter/04-lessons.md) | A 98 |  |
-| [v1.49.159](release-notes/v1.49.159) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.159/chapter/03-retrospective.md) | [6/20](release-notes/v1.49.159/chapter/04-lessons.md) | A 95 |  |
-| [v1.49.158](release-notes/v1.49.158) | — | 2026-03-29 | 2 | — | — | [✓](release-notes/v1.49.158/chapter/03-retrospective.md) | [6/17](release-notes/v1.49.158/chapter/04-lessons.md) | A 92 |  |
-| [v1.49.157](release-notes/v1.49.157) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.157/chapter/03-retrospective.md) | [4/17](release-notes/v1.49.157/chapter/04-lessons.md) | A 92 |  |
-| [v1.49.156](release-notes/v1.49.156) | — | 2026-03-29 | 2 | — | — | [✓](release-notes/v1.49.156/chapter/03-retrospective.md) | [4/15](release-notes/v1.49.156/chapter/04-lessons.md) | B 82 |  |
-| [v1.49.155](release-notes/v1.49.155) | — | 2026-03-29 | 80 | — | — | [✓](release-notes/v1.49.155/chapter/03-retrospective.md) | [12](release-notes/v1.49.155/chapter/04-lessons.md) | F 25 |  |
-| [v1.49.154](release-notes/v1.49.154) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.154/chapter/03-retrospective.md) | [3/10](release-notes/v1.49.154/chapter/04-lessons.md) | C 74 |  |
-| [v1.49.153](release-notes/v1.49.153) | — | 2026-03-28 | 2 | — | — | [✓](release-notes/v1.49.153/chapter/03-retrospective.md) | [3/9](release-notes/v1.49.153/chapter/04-lessons.md) | C 74 |  |
-| [v1.49.152](release-notes/v1.49.152) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.152/chapter/03-retrospective.md) | [2/10](release-notes/v1.49.152/chapter/04-lessons.md) | B 80 |  |
-| [v1.49.151](release-notes/v1.49.151) | — | 2026-03-28 | 2 | — | — | [✓](release-notes/v1.49.151/chapter/03-retrospective.md) | [2/9](release-notes/v1.49.151/chapter/04-lessons.md) | C 77 |  |
-| [v1.49.150](release-notes/v1.49.150) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.150/chapter/03-retrospective.md) | [1/8](release-notes/v1.49.150/chapter/04-lessons.md) | C 74 |  |
-| [v1.49.149](release-notes/v1.49.149) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.149/chapter/03-retrospective.md) | [1/8](release-notes/v1.49.149/chapter/04-lessons.md) | C 77 |  |
-| [v1.49.148](release-notes/v1.49.148) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.148/chapter/03-retrospective.md) | [8](release-notes/v1.49.148/chapter/04-lessons.md) | C 71 |  |
-| [v1.49.147](release-notes/v1.49.147) | — | 2026-03-28 | 2 | — | — | [✓](release-notes/v1.49.147/chapter/03-retrospective.md) | [1/8](release-notes/v1.49.147/chapter/04-lessons.md) | C 74 |  |
-| [v1.49.146](release-notes/v1.49.146) | — | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.146/chapter/03-retrospective.md) | [8](release-notes/v1.49.146/chapter/04-lessons.md) | C 74 |  |
-| [v1.49.145](release-notes/v1.49.145) | — | 2026-03-29 | 2 | — | — | [✓](release-notes/v1.49.145/chapter/03-retrospective.md) | [8](release-notes/v1.49.145/chapter/04-lessons.md) | C 74 |  |
-| [v1.49.144](release-notes/v1.49.144) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.144/chapter/03-retrospective.md) | [6](release-notes/v1.49.144/chapter/04-lessons.md) | D 69 |  |
-| [v1.49.143](release-notes/v1.49.143) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.143/chapter/03-retrospective.md) | [1/6](release-notes/v1.49.143/chapter/04-lessons.md) | D 69 |  |
-| [v1.49.142](release-notes/v1.49.142) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.142/chapter/03-retrospective.md) | [6](release-notes/v1.49.142/chapter/04-lessons.md) | D 66 |  |
-| [v1.49.141](release-notes/v1.49.141) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.141/chapter/03-retrospective.md) | [6](release-notes/v1.49.141/chapter/04-lessons.md) | D 66 |  |
-| [v1.49.140](release-notes/v1.49.140) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.140/chapter/03-retrospective.md) | [6](release-notes/v1.49.140/chapter/04-lessons.md) | D 69 |  |
-| [v1.49.139](release-notes/v1.49.139) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.139/chapter/03-retrospective.md) | [6](release-notes/v1.49.139/chapter/04-lessons.md) | C 72 |  |
-| [v1.49.138](release-notes/v1.49.138) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.138/chapter/03-retrospective.md) | [6](release-notes/v1.49.138/chapter/04-lessons.md) | C 72 |  |
-| [v1.49.137](release-notes/v1.49.137) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.137/chapter/03-retrospective.md) | [6](release-notes/v1.49.137/chapter/04-lessons.md) | D 66 |  |
-| [v1.49.136](release-notes/v1.49.136) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.136/chapter/03-retrospective.md) | [6](release-notes/v1.49.136/chapter/04-lessons.md) | F 49 |  |
-| [v1.49.135](release-notes/v1.49.135) | — | 2026-03-28 | 5 | — | — | [✓](release-notes/v1.49.135/chapter/03-retrospective.md) | [8](release-notes/v1.49.135/chapter/04-lessons.md) | F 50 |  |
-| [v1.49.134](release-notes/v1.49.134) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.134/chapter/03-retrospective.md) | [9](release-notes/v1.49.134/chapter/04-lessons.md) | F 40 |  |
-| [v1.49.133](release-notes/v1.49.133) | — | 2026-03-28 | 5 | — | — | [✓](release-notes/v1.49.133/chapter/03-retrospective.md) | [1/8](release-notes/v1.49.133/chapter/04-lessons.md) | F 40 |  |
-| [v1.49.132](release-notes/v1.49.132) | — | 2026-03-28 | 2 | — | — | [✓](release-notes/v1.49.132/chapter/03-retrospective.md) | [1/9](release-notes/v1.49.132/chapter/04-lessons.md) | F 29 |  |
-| [v1.49.131](release-notes/v1.49.131) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.131/chapter/03-retrospective.md) | [5](release-notes/v1.49.131/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.130](release-notes/v1.49.130) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.130/chapter/03-retrospective.md) | [5](release-notes/v1.49.130/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.129](release-notes/v1.49.129) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.129/chapter/03-retrospective.md) | [1/5](release-notes/v1.49.129/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.128](release-notes/v1.49.128) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.128/chapter/03-retrospective.md) | [5](release-notes/v1.49.128/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.127](release-notes/v1.49.127) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.127/chapter/03-retrospective.md) | [1/5](release-notes/v1.49.127/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.126](release-notes/v1.49.126) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.126/chapter/03-retrospective.md) | [5](release-notes/v1.49.126/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.125](release-notes/v1.49.125) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.125/chapter/03-retrospective.md) | [5](release-notes/v1.49.125/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.124](release-notes/v1.49.124) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.124/chapter/03-retrospective.md) | [5](release-notes/v1.49.124/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.123](release-notes/v1.49.123) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.123/chapter/03-retrospective.md) | [5](release-notes/v1.49.123/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.122](release-notes/v1.49.122) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.122/chapter/03-retrospective.md) | [5](release-notes/v1.49.122/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.121](release-notes/v1.49.121) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.121/chapter/03-retrospective.md) | [5](release-notes/v1.49.121/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.120](release-notes/v1.49.120) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.120/chapter/03-retrospective.md) | [5](release-notes/v1.49.120/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.119](release-notes/v1.49.119) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.119/chapter/03-retrospective.md) | [5](release-notes/v1.49.119/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.118](release-notes/v1.49.118) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.118/chapter/03-retrospective.md) | [5](release-notes/v1.49.118/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.117](release-notes/v1.49.117) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.117/chapter/03-retrospective.md) | [5](release-notes/v1.49.117/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.116](release-notes/v1.49.116) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.116/chapter/03-retrospective.md) | [5](release-notes/v1.49.116/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.115](release-notes/v1.49.115) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.115/chapter/03-retrospective.md) | [5](release-notes/v1.49.115/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.114](release-notes/v1.49.114) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.114/chapter/03-retrospective.md) | [5](release-notes/v1.49.114/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.113](release-notes/v1.49.113) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.113/chapter/03-retrospective.md) | [5](release-notes/v1.49.113/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.112](release-notes/v1.49.112) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.112/chapter/03-retrospective.md) | [5](release-notes/v1.49.112/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.111](release-notes/v1.49.111) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.111/chapter/03-retrospective.md) | [5](release-notes/v1.49.111/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.110](release-notes/v1.49.110) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.110/chapter/03-retrospective.md) | [5](release-notes/v1.49.110/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.109](release-notes/v1.49.109) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.109/chapter/03-retrospective.md) | [5](release-notes/v1.49.109/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.108](release-notes/v1.49.108) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.108/chapter/03-retrospective.md) | [5](release-notes/v1.49.108/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.107](release-notes/v1.49.107) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.107/chapter/03-retrospective.md) | [5](release-notes/v1.49.107/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.106](release-notes/v1.49.106) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.106/chapter/03-retrospective.md) | [5](release-notes/v1.49.106/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.105](release-notes/v1.49.105) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.105/chapter/03-retrospective.md) | [5](release-notes/v1.49.105/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.104](release-notes/v1.49.104) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.104/chapter/03-retrospective.md) | [5](release-notes/v1.49.104/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.103](release-notes/v1.49.103) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.103/chapter/03-retrospective.md) | [5](release-notes/v1.49.103/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.102](release-notes/v1.49.102) | — | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.102/chapter/03-retrospective.md) | [5](release-notes/v1.49.102/chapter/04-lessons.md) | F 34 |  |
-| [v1.49.101](release-notes/v1.49.101) | — | 2026-03-28 | 12 | — | — | [✓](release-notes/v1.49.101/chapter/03-retrospective.md) | [5](release-notes/v1.49.101/chapter/04-lessons.md) | F 28 |  |
-| [v1.49.90](release-notes/v1.49.90) | — | 2026-03-27 | 13 | — | — | — | — | F 17 |  |
-| [v1.49.89](release-notes/v1.49.89) | — | 2026-03-27 | 3 | — | — | [✓](release-notes/v1.49.89/chapter/03-retrospective.md) | — | F 4 |  |
-| [v1.49.88](release-notes/v1.49.88) | — | 2026-03-27 | 13 | — | — | [✓](release-notes/v1.49.88/chapter/03-retrospective.md) | [3](release-notes/v1.49.88/chapter/04-lessons.md) | F 21 |  |
-| [v1.49.87](release-notes/v1.49.87) | — | 2026-03-27 | 11 | — | — | [✓](release-notes/v1.49.87/chapter/03-retrospective.md) | [3](release-notes/v1.49.87/chapter/04-lessons.md) | F 24 |  |
-| [v1.49.86](release-notes/v1.49.86) | — | 2026-03-27 | 9 | — | — | [✓](release-notes/v1.49.86/chapter/03-retrospective.md) | [3](release-notes/v1.49.86/chapter/04-lessons.md) | F 21 |  |
-| [v1.49.85](release-notes/v1.49.85) | — | 2026-03-27 | 6 | — | — | [✓](release-notes/v1.49.85/chapter/03-retrospective.md) | [3](release-notes/v1.49.85/chapter/04-lessons.md) | F 21 |  |
-| [v1.49.84](release-notes/v1.49.84) | — | 2026-03-27 | 5 | — | — | [✓](release-notes/v1.49.84/chapter/03-retrospective.md) | [3](release-notes/v1.49.84/chapter/04-lessons.md) | F 21 |  |
-| [v1.49.83](release-notes/v1.49.83) | — | 2026-03-27 | 5 | — | — | [✓](release-notes/v1.49.83/chapter/03-retrospective.md) | [3](release-notes/v1.49.83/chapter/04-lessons.md) | F 31 |  |
-| [v1.49.82](release-notes/v1.49.82) | — | 2026-03-27 | 7 | — | — | [✓](release-notes/v1.49.82/chapter/03-retrospective.md) | [5](release-notes/v1.49.82/chapter/04-lessons.md) | F 36 |  |
+| [v1.49.192](release-notes/v1.49.192) | Degree Fifty-Six | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.192/chapter/03-retrospective.md) | [3/10](release-notes/v1.49.192/chapter/04-lessons.md) | C 74 |  |
+| [v1.49.191](release-notes/v1.49.191) | Degree Fifty-Five | 2026-03-30 | 2 | — | — | [✓](release-notes/v1.49.191/chapter/03-retrospective.md) | [2/8](release-notes/v1.49.191/chapter/04-lessons.md) | C 74 |  |
+| [v1.49.190](release-notes/v1.49.190) | Degree Fifty-Four | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.190/chapter/03-retrospective.md) | [6/15](release-notes/v1.49.190/chapter/04-lessons.md) | C 75 |  |
+| [v1.49.189](release-notes/v1.49.189) | Degree Fifty-Three | 2026-03-30 | 1 | — | — | — | — | F 55 |  |
+| [v1.49.188](release-notes/v1.49.188) | Degree Fifty-Two | 2026-03-30 | 1 | — | — | — | — | F 55 |  |
+| [v1.49.187](release-notes/v1.49.187) | Degree Fifty-One | 2026-03-30 | 1 | — | — | — | — | F 53 |  |
+| [v1.49.186](release-notes/v1.49.186) | Degree Fifty | 2026-03-30 | 1 | — | — | — | — | F 53 |  |
+| [v1.49.185](release-notes/v1.49.185) | Degree Forty-Nine | 2026-03-30 | 1 | — | — | — | — | F 53 |  |
+| [v1.49.184](release-notes/v1.49.184) | Degree Forty-Eight | 2026-03-30 | 2 | — | — | — | — | F 55 |  |
+| [v1.49.183](release-notes/v1.49.183) | Degree Forty-Seven | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.183/chapter/03-retrospective.md) | 4/8 _(no file)_ | F 45 |  |
+| [v1.49.182](release-notes/v1.49.182) | Degree Forty-Six | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.182/chapter/03-retrospective.md) | [5/15](release-notes/v1.49.182/chapter/04-lessons.md) | C 75 |  |
+| [v1.49.181](release-notes/v1.49.181) | Degree Forty-Five | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.181/chapter/03-retrospective.md) | [4/12](release-notes/v1.49.181/chapter/04-lessons.md) | D 65 |  |
+| [v1.49.180](release-notes/v1.49.180) | Degree Forty-Four | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.180/chapter/03-retrospective.md) | [2/7](release-notes/v1.49.180/chapter/04-lessons.md) | D 65 |  |
+| [v1.49.179](release-notes/v1.49.179) | Degree Forty-Three | 2026-03-30 | 1 | — | — | [✓](release-notes/v1.49.179/chapter/03-retrospective.md) | [1/5](release-notes/v1.49.179/chapter/04-lessons.md) | D 61 |  |
+| [v1.49.178](release-notes/v1.49.178) | Degree Forty-Two | 2026-03-30 | 2 | — | — | [✓](release-notes/v1.49.178/chapter/03-retrospective.md) | [5](release-notes/v1.49.178/chapter/04-lessons.md) | D 61 |  |
+| [v1.49.177](release-notes/v1.49.177) | Degree Forty-One | 2026-03-29 | 1 | — | — | — | — | F 55 |  |
+| [v1.49.176](release-notes/v1.49.176) | Degree Forty | 2026-03-29 | 2 | — | — | — | — | F 55 |  |
+| [v1.49.175](release-notes/v1.49.175) | Degree Thirty-Nine | 2026-03-29 | 1 | — | — | — | — | F 52 |  |
+| [v1.49.174](release-notes/v1.49.174) | Degree Thirty-Eight | 2026-03-29 | 1 | — | — | — | — | F 49 |  |
+| [v1.49.173](release-notes/v1.49.173) | Degree Thirty-Seven | 2026-03-29 | 1 | — | — | — | — | F 52 |  |
+| [v1.49.172](release-notes/v1.49.172) | Degree Thirty-Six | 2026-03-29 | 1 | — | — | — | — | F 52 |  |
+| [v1.49.171](release-notes/v1.49.171) | Degree Thirty-Five | 2026-03-29 | 1 | — | — | — | — | F 52 |  |
+| [v1.49.170](release-notes/v1.49.170) | Degree Thirty-Four | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.170/chapter/03-retrospective.md) | [8](release-notes/v1.49.170/chapter/04-lessons.md) | D 67 |  |
+| [v1.49.169](release-notes/v1.49.169) | Degree Thirty-Three | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.169/chapter/03-retrospective.md) | [7](release-notes/v1.49.169/chapter/04-lessons.md) | D 64 |  |
+| [v1.49.168](release-notes/v1.49.168) | Degree Thirty-Two | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.168/chapter/03-retrospective.md) | [1/7](release-notes/v1.49.168/chapter/04-lessons.md) | D 64 |  |
+| [v1.49.167](release-notes/v1.49.167) | Degree Thirty-One | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.167/chapter/03-retrospective.md) | [7](release-notes/v1.49.167/chapter/04-lessons.md) | D 65 |  |
+| [v1.49.166](release-notes/v1.49.166) | Degree Thirty | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.166/chapter/03-retrospective.md) | [7/21](release-notes/v1.49.166/chapter/04-lessons.md) | A 95 |  |
+| [v1.49.165](release-notes/v1.49.165) | Degree Twenty-Nine | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.165/chapter/03-retrospective.md) | [5/22](release-notes/v1.49.165/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.164](release-notes/v1.49.164) | Degree Twenty-Eight | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.164/chapter/03-retrospective.md) | [5/20](release-notes/v1.49.164/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.163](release-notes/v1.49.163) | Degree Twenty-Seven | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.163/chapter/03-retrospective.md) | [1/15](release-notes/v1.49.163/chapter/04-lessons.md) | B 83 |  |
+| [v1.49.162](release-notes/v1.49.162) | Degree Twenty-Six | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.162/chapter/03-retrospective.md) | [4/21](release-notes/v1.49.162/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.161](release-notes/v1.49.161) | Degree Twenty-Five | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.161/chapter/03-retrospective.md) | [3/19](release-notes/v1.49.161/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.160](release-notes/v1.49.160) | Degree Twenty-Four | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.160/chapter/03-retrospective.md) | [4/21](release-notes/v1.49.160/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.159](release-notes/v1.49.159) | Degree Twenty-Three | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.159/chapter/03-retrospective.md) | [6/20](release-notes/v1.49.159/chapter/04-lessons.md) | A 95 |  |
+| [v1.49.158](release-notes/v1.49.158) | Degree Twenty-Two | 2026-03-29 | 2 | — | — | [✓](release-notes/v1.49.158/chapter/03-retrospective.md) | [6/17](release-notes/v1.49.158/chapter/04-lessons.md) | A 92 |  |
+| [v1.49.157](release-notes/v1.49.157) | Degree Twenty-One | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.157/chapter/03-retrospective.md) | [4/17](release-notes/v1.49.157/chapter/04-lessons.md) | A 92 |  |
+| [v1.49.156](release-notes/v1.49.156) | Degree Twenty | 2026-03-29 | 2 | — | — | [✓](release-notes/v1.49.156/chapter/03-retrospective.md) | [4/15](release-notes/v1.49.156/chapter/04-lessons.md) | B 82 |  |
+| [v1.49.155](release-notes/v1.49.155) | Fleet Feature Refinement — v1.50 Blueprint | 2026-03-29 | 80 | — | — | [✓](release-notes/v1.49.155/chapter/03-retrospective.md) | [12](release-notes/v1.49.155/chapter/04-lessons.md) | F 25 |  |
+| [v1.49.154](release-notes/v1.49.154) | Degree Nineteen | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.154/chapter/03-retrospective.md) | [3/10](release-notes/v1.49.154/chapter/04-lessons.md) | C 74 |  |
+| [v1.49.153](release-notes/v1.49.153) | Degree Eighteen | 2026-03-28 | 2 | — | — | [✓](release-notes/v1.49.153/chapter/03-retrospective.md) | [3/9](release-notes/v1.49.153/chapter/04-lessons.md) | C 74 |  |
+| [v1.49.152](release-notes/v1.49.152) | Degree Seventeen | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.152/chapter/03-retrospective.md) | [2/10](release-notes/v1.49.152/chapter/04-lessons.md) | B 80 |  |
+| [v1.49.151](release-notes/v1.49.151) | Degree Sixteen | 2026-03-28 | 2 | — | — | [✓](release-notes/v1.49.151/chapter/03-retrospective.md) | [2/9](release-notes/v1.49.151/chapter/04-lessons.md) | C 77 |  |
+| [v1.49.150](release-notes/v1.49.150) | Degree Fifteen | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.150/chapter/03-retrospective.md) | [1/8](release-notes/v1.49.150/chapter/04-lessons.md) | C 74 |  |
+| [v1.49.149](release-notes/v1.49.149) | Degree Fourteen | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.149/chapter/03-retrospective.md) | [1/8](release-notes/v1.49.149/chapter/04-lessons.md) | C 77 |  |
+| [v1.49.148](release-notes/v1.49.148) | Degree Thirteen | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.148/chapter/03-retrospective.md) | [8](release-notes/v1.49.148/chapter/04-lessons.md) | C 71 |  |
+| [v1.49.147](release-notes/v1.49.147) | Degree Twelve | 2026-03-28 | 2 | — | — | [✓](release-notes/v1.49.147/chapter/03-retrospective.md) | [1/8](release-notes/v1.49.147/chapter/04-lessons.md) | C 74 |  |
+| [v1.49.146](release-notes/v1.49.146) | Degree Eleven | 2026-03-29 | 1 | — | — | [✓](release-notes/v1.49.146/chapter/03-retrospective.md) | [8](release-notes/v1.49.146/chapter/04-lessons.md) | C 74 |  |
+| [v1.49.145](release-notes/v1.49.145) | Degree Ten | 2026-03-29 | 2 | — | — | [✓](release-notes/v1.49.145/chapter/03-retrospective.md) | [8](release-notes/v1.49.145/chapter/04-lessons.md) | C 74 |  |
+| [v1.49.144](release-notes/v1.49.144) | Degree Nine | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.144/chapter/03-retrospective.md) | [6](release-notes/v1.49.144/chapter/04-lessons.md) | D 69 |  |
+| [v1.49.143](release-notes/v1.49.143) | Degree Eight | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.143/chapter/03-retrospective.md) | [1/6](release-notes/v1.49.143/chapter/04-lessons.md) | D 69 |  |
+| [v1.49.142](release-notes/v1.49.142) | Degree Seven | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.142/chapter/03-retrospective.md) | [6](release-notes/v1.49.142/chapter/04-lessons.md) | D 66 |  |
+| [v1.49.141](release-notes/v1.49.141) | Degree Six | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.141/chapter/03-retrospective.md) | [6](release-notes/v1.49.141/chapter/04-lessons.md) | D 66 |  |
+| [v1.49.140](release-notes/v1.49.140) | Degree Five | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.140/chapter/03-retrospective.md) | [6](release-notes/v1.49.140/chapter/04-lessons.md) | D 69 |  |
+| [v1.49.139](release-notes/v1.49.139) | Degree Four | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.139/chapter/03-retrospective.md) | [6](release-notes/v1.49.139/chapter/04-lessons.md) | C 72 |  |
+| [v1.49.138](release-notes/v1.49.138) | Degree Three | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.138/chapter/03-retrospective.md) | [6](release-notes/v1.49.138/chapter/04-lessons.md) | C 72 |  |
+| [v1.49.137](release-notes/v1.49.137) | Degree Two | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.137/chapter/03-retrospective.md) | [6](release-notes/v1.49.137/chapter/04-lessons.md) | D 66 |  |
+| [v1.49.136](release-notes/v1.49.136) | Degree One | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.136/chapter/03-retrospective.md) | [6](release-notes/v1.49.136/chapter/04-lessons.md) | F 49 |  |
+| [v1.49.135](release-notes/v1.49.135) | Degree Zero | 2026-03-28 | 5 | — | — | [✓](release-notes/v1.49.135/chapter/03-retrospective.md) | [8](release-notes/v1.49.135/chapter/04-lessons.md) | F 50 |  |
+| [v1.49.134](release-notes/v1.49.134) | Days of Future Passed | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.134/chapter/03-retrospective.md) | [9](release-notes/v1.49.134/chapter/04-lessons.md) | F 40 |  |
+| [v1.49.133](release-notes/v1.49.133) | The Gorge | 2026-03-28 | 5 | — | — | [✓](release-notes/v1.49.133/chapter/03-retrospective.md) | [1/8](release-notes/v1.49.133/chapter/04-lessons.md) | F 40 |  |
+| [v1.49.132](release-notes/v1.49.132) | Lex Said Prove It | 2026-03-28 | 2 | — | — | [✓](release-notes/v1.49.132/chapter/03-retrospective.md) | [1/9](release-notes/v1.49.132/chapter/04-lessons.md) | F 29 |  |
+| [v1.49.131](release-notes/v1.49.131) | AI Horizon | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.131/chapter/03-retrospective.md) | [5](release-notes/v1.49.131/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.130](release-notes/v1.49.130) | Local LLM | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.130/chapter/03-retrospective.md) | [5](release-notes/v1.49.130/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.129](release-notes/v1.49.129) | ComfyUI | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.129/chapter/03-retrospective.md) | [1/5](release-notes/v1.49.129/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.128](release-notes/v1.49.128) | Mesh Telescope | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.128/chapter/03-retrospective.md) | [5](release-notes/v1.49.128/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.127](release-notes/v1.49.127) | Yuri's Night | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.127/chapter/03-retrospective.md) | [1/5](release-notes/v1.49.127/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.126](release-notes/v1.49.126) | Listening to Space | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.126/chapter/03-retrospective.md) | [5](release-notes/v1.49.126/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.125](release-notes/v1.49.125) | Black Hole Catalog & Mapping | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.125/chapter/03-retrospective.md) | [5](release-notes/v1.49.125/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.124](release-notes/v1.49.124) | A Merger Within a Merger | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.124/chapter/03-retrospective.md) | [5](release-notes/v1.49.124/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.123](release-notes/v1.49.123) | So You Want To Be An Artist | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.123/chapter/03-retrospective.md) | [5](release-notes/v1.49.123/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.122](release-notes/v1.49.122) | Why Black Holes Hit the Brakes | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.122/chapter/03-retrospective.md) | [5](release-notes/v1.49.122/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.121](release-notes/v1.49.121) | Cygnus X-3 Variable PeVatron | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.121/chapter/03-retrospective.md) | [5](release-notes/v1.49.121/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.120](release-notes/v1.49.120) | A Beautiful Mind | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.120/chapter/03-retrospective.md) | [5](release-notes/v1.49.120/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.119](release-notes/v1.49.119) | Cartoon Network & Adult Swim | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.119/chapter/03-retrospective.md) | [5](release-notes/v1.49.119/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.118](release-notes/v1.49.118) | Comedy Central & The Daily Show | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.118/chapter/03-retrospective.md) | [5](release-notes/v1.49.118/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.117](release-notes/v1.49.117) | Late Night Television | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.117/chapter/03-retrospective.md) | [5](release-notes/v1.49.117/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.116](release-notes/v1.49.116) | Live From New York, It's Saturday Night | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.116/chapter/03-retrospective.md) | [5](release-notes/v1.49.116/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.115](release-notes/v1.49.115) | Almost Live! | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.115/chapter/03-retrospective.md) | [5](release-notes/v1.49.115/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.114](release-notes/v1.49.114) | The Television Era | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.114/chapter/03-retrospective.md) | [5](release-notes/v1.49.114/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.113](release-notes/v1.49.113) | The Latent Morphisms That Were Always There | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.113/chapter/03-retrospective.md) | [5](release-notes/v1.49.113/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.112](release-notes/v1.49.112) | The System Dreaming | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.112/chapter/03-retrospective.md) | [5](release-notes/v1.49.112/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.111](release-notes/v1.49.111) | Specialized Execution Paths Faithfully Composed | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.111/chapter/03-retrospective.md) | [5](release-notes/v1.49.111/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.110](release-notes/v1.49.110) | Every Lesson a Handshake Between a Beginner and a Coordinate System | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.110/chapter/03-retrospective.md) | [5](release-notes/v1.49.110/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.109](release-notes/v1.49.109) | The Hardware is Fixed; The Software is Leverage | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.109/chapter/03-retrospective.md) | [5](release-notes/v1.49.109/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.108](release-notes/v1.49.108) | The Architecture of Instant Gratification | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.108/chapter/03-retrospective.md) | [5](release-notes/v1.49.108/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.107](release-notes/v1.49.107) | The Space Between Improvisation and Composition | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.107/chapter/03-retrospective.md) | [5](release-notes/v1.49.107/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.106](release-notes/v1.49.106) | The AM Radio Dial | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.106/chapter/03-retrospective.md) | [5](release-notes/v1.49.106/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.105](release-notes/v1.49.105) | Storage Is Cheap; Understanding Is Not | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.105/chapter/03-retrospective.md) | [5](release-notes/v1.49.105/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.104](release-notes/v1.49.104) | The Shannon Machine | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.104/chapter/03-retrospective.md) | [5](release-notes/v1.49.104/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.103](release-notes/v1.49.103) | The Meaning Lives Between the Nodes | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.103/chapter/03-retrospective.md) | [5](release-notes/v1.49.103/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.102](release-notes/v1.49.102) | The Wire Format Is Architecture | 2026-03-28 | 1 | — | — | [✓](release-notes/v1.49.102/chapter/03-retrospective.md) | [5](release-notes/v1.49.102/chapter/04-lessons.md) | F 34 |  |
+| [v1.49.101](release-notes/v1.49.101) | States, Symbols, and Tape | 2026-03-28 | 12 | — | — | [✓](release-notes/v1.49.101/chapter/03-retrospective.md) | [1/5](release-notes/v1.49.101/chapter/04-lessons.md) | F 28 |  |
+| [v1.49.90](release-notes/v1.49.90) | The Complete Batch | 2026-03-27 | 13 | — | — | — | — | F 17 |  |
+| [v1.49.89](release-notes/v1.49.89) | The Mega Batch | 2026-03-27 | 3 | — | — | [✓](release-notes/v1.49.89/chapter/03-retrospective.md) | — | F 4 |  |
+| [v1.49.88](release-notes/v1.49.88) | The Observable Universe | 2026-03-27 | 13 | — | — | [✓](release-notes/v1.49.88/chapter/03-retrospective.md) | [3](release-notes/v1.49.88/chapter/04-lessons.md) | F 21 |  |
+| [v1.49.87](release-notes/v1.49.87) | The Frequency Spectrum | 2026-03-27 | 11 | — | — | [✓](release-notes/v1.49.87/chapter/03-retrospective.md) | [3](release-notes/v1.49.87/chapter/04-lessons.md) | F 24 |  |
+| [v1.49.86](release-notes/v1.49.86) | The Music Wall | 2026-03-27 | 9 | — | — | [✓](release-notes/v1.49.86/chapter/03-retrospective.md) | [3](release-notes/v1.49.86/chapter/04-lessons.md) | F 21 |  |
+| [v1.49.85](release-notes/v1.49.85) | The Full Stack | 2026-03-27 | 6 | — | — | [✓](release-notes/v1.49.85/chapter/03-retrospective.md) | [3](release-notes/v1.49.85/chapter/04-lessons.md) | F 21 |  |
+| [v1.49.84](release-notes/v1.49.84) | The Invisible Layer | 2026-03-27 | 5 | — | — | [✓](release-notes/v1.49.84/chapter/03-retrospective.md) | [3](release-notes/v1.49.84/chapter/04-lessons.md) | F 21 |  |
+| [v1.49.83](release-notes/v1.49.83) | The Signal Stack | 2026-03-27 | 5 | — | — | [✓](release-notes/v1.49.83/chapter/03-retrospective.md) | [3](release-notes/v1.49.83/chapter/04-lessons.md) | F 31 |  |
+| [v1.49.82](release-notes/v1.49.82) | Pike Place to Bellingham | 2026-03-27 | 7 | — | — | [✓](release-notes/v1.49.82/chapter/03-retrospective.md) | [5](release-notes/v1.49.82/chapter/04-lessons.md) | F 36 |  |
 | [v1.49.81](release-notes/v1.49.81) | The Last Signal | 2026-03-27 | 1 | — | — | [✓](release-notes/v1.49.81/chapter/03-retrospective.md) | [3](release-notes/v1.49.81/chapter/04-lessons.md) | F 37 |  |
 | [v1.49.80](release-notes/v1.49.80) | First Frost, Last Frost | 2026-03-26 | 1 | — | — | [✓](release-notes/v1.49.80/chapter/03-retrospective.md) | [2](release-notes/v1.49.80/chapter/04-lessons.md) | F 32 |  |
 | [v1.49.79](release-notes/v1.49.79) | The Listening Trail | 2026-03-26 | 1 | — | — | [✓](release-notes/v1.49.79/chapter/03-retrospective.md) | [1](release-notes/v1.49.79/chapter/04-lessons.md) | F 32 |  |
@@ -573,7 +573,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.39](release-notes/v1.39) | GSD-OS Bootstrap & READY Prompt | 2026-02-26 | 36 | 9 | 18 | [✓](release-notes/v1.39/chapter/03-retrospective.md) | [1/6](release-notes/v1.39/chapter/04-lessons.md) | F 23 |  |
 | [v1.38](release-notes/v1.38) | SSH Agent Security | 2026-02-26 | 39 | 8 | 16 | [✓](release-notes/v1.38/chapter/03-retrospective.md) | [3/5](release-notes/v1.38/chapter/04-lessons.md) | F 23 |  |
 | [v1.37](release-notes/v1.37) | Complex Plane Learning Framework | 2026-02-26 | 28 | 8 | 16 | [✓](release-notes/v1.37/chapter/03-retrospective.md) | [1/6](release-notes/v1.37/chapter/04-lessons.md) | F 23 |  |
-| [v1.36](release-notes/v1.36) | Citation Management & Source Attribution | 2026-02-26 | 17 | 8 | 16 | [✓](release-notes/v1.36/chapter/03-retrospective.md) | [5](release-notes/v1.36/chapter/04-lessons.md) | F 23 |  |
+| [v1.36](release-notes/v1.36) | Citation Management & Source Attribution | 2026-02-26 | 17 | 8 | 16 | [✓](release-notes/v1.36/chapter/03-retrospective.md) | [1/5](release-notes/v1.36/chapter/04-lessons.md) | F 23 |  |
 | [v1.35](release-notes/v1.35) | Mathematical Foundations Engine | 2026-02-26 | 79 | 16 | 50 | [✓](release-notes/v1.35/chapter/03-retrospective.md) | [1/6](release-notes/v1.35/chapter/04-lessons.md) | F 23 |  |
 | [v1.34](release-notes/v1.34) | Documentation Ecosystem Refinement | 2026-02-26 | 9 | 9 | 23 | [✓](release-notes/v1.34/chapter/03-retrospective.md) | [2/5](release-notes/v1.34/chapter/04-lessons.md) | F 23 |  |
 | [v1.33](release-notes/v1.33) | GSD OpenStack Cloud Platform (NASA SE Edition) | 2026-02-23 | 124 | 14 | 33 | [✓](release-notes/v1.33/chapter/03-retrospective.md) | [1/7](release-notes/v1.33/chapter/04-lessons.md) | F 23 |  |
