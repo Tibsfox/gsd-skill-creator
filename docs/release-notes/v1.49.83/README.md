@@ -1,45 +1,262 @@
-# v1.49.83 "The Signal Stack"
+# v1.49.83 — "The Signal Stack"
 
 **Released:** 2026-03-27
-**Theme:** Technology Infrastructure — Signals, Sensors, Silicon, and Service Mesh
-**Mega-Wave:** MW2 of the v1.49.82+ Mega Batch
+**Scope:** PNW Research Series — four paired technology-infrastructure Research projects (PSS, SNL, ACE, MCF) mapping the full signal-to-service-mesh stack from RF propagation through IoT sensing, compute-engine architecture, and multi-cluster federation; the invisible layer that makes every other PNW-infrastructure project work
+**Branch:** dev → main
+**Commits:** v1.49.82..v1.49.83 (5 commits: `01004d486` PSS + `26e04e71f` SNL + `23c1c95a9` ACE + `73b577ae0` MCF + `39e6d8d16` docs)
+**Files changed:** 48 (+19,176 / −0, net +19,176) — 46 new Research-project files plus 1 parser-generated release-notes stub plus 1 touched navigation file (`www/tibsfox/com/Research/series.js`)
+**Predecessor:** v1.49.82 — "Pike Place to Bellingham" (MW1 of the v1.49.82+ Mega Batch, PNW Places cluster)
+**Successor:** v1.49.84 — next entry in the mega batch cadence
+**Mega-Wave:** MW2 of the v1.49.82+ Mega Batch (technology-infrastructure cluster after MW1's PNW-Places cluster)
+**Classification:** content — four Research project additions in a single mega-wave; zero tooling change, zero schema change, zero build-system change; pure new-surface modules slotting into the multi-domain docroot `www/tibsfox/com/Research/` that v1.49.38 reserved
+**Cluster:** Technology Infrastructure (seeds the cluster; binds to K8S, SYS, CMH, OCN, GSD2, BRC, NND, MCM, LED, T55, BPS, SHE, EMG, ECO, SGL, RBH, FCC, PSG, MPC, SFC, GPO, MCM)
+**Engine Position:** 85 → 89 Research projects (84 → 88 wired in `series.js`) — four back-to-back additions in one mega-wave
+**Author:** Tibsfox (`tibsfox@tibsfox.com`)
+**Dedication:** every PNW engineer, ham operator, maker, and platform operator who has ever wondered what holds the stack up — the answer, end-to-end, is in these four projects
+**Epigraph:** *"The signal has to leave the antenna, reach the sensor, hit the compute engine, and survive the federation. Four projects, one stack, one layer at a time."*
+
+---
 
 ## Summary
 
-Four research projects mapping the technology infrastructure stack from RF propagation through IoT sensing, compute engine architecture, and multi-cluster federation. The invisible layer that makes everything else work.
+**Four projects, one stack, one mega-wave.** v1.49.83 ships the technology-infrastructure cluster in a single mega-wave and formalizes a four-project stack that reads top-to-bottom as a map of the invisible layer underneath every PNW-infrastructure project. The release lands four Research projects — PSS (PNW Signal Stack), SNL (The Sensing Layer), ACE (Art of the Compute Engine), and MCF (Multi-Cluster Federation) — totaling 23 research modules, 11,622 research lines, and 46 new files across `www/tibsfox/com/Research/PSS/`, `www/tibsfox/com/Research/SNL/`, `www/tibsfox/com/Research/ACE/`, and `www/tibsfox/com/Research/MCF/`. Four feature commits (`01004d486`, `26e04e71f`, `23c1c95a9`, `73b577ae0`) each land one project atomically, a fifth docs commit (`39e6d8d16`) lands the parser-generated release-notes stub that this uplift rewrites, and one touched navigation file (`www/tibsfox/com/Research/series.js`) wires the four projects into the Research cadence. The cumulative footprint is +19,176 lines across 48 files — the second-largest single-release diff in the Research series after the v1.49.82 MW1 wave that immediately precedes it. The four projects compose into a stack: PSS is the physical-layer RF substrate (spectrum, antennas, SDR), SNL is the sensing-layer substrate that rides the RF (microcontrollers, mesh networks, POV light art, citizen science), ACE is the compute-engine layer that processes sensor telemetry (Claude Code architecture, Rosetta Core, GSD chipset, CUDA silicon), and MCF is the federation layer that distributes compute across clusters (Karmada, Liqo, Istio ambient mesh, Cilium eBPF, ClusterMesh, FoxCompute integration). Read in order, the four projects walk a signal from antenna to service mesh without leaving a gap.
+
+**Mega-wave discipline continues from MW1.** The mega-wave pattern formalizes a release-cadence pattern the Research series did not previously have. v1.49.82 shipped six PNW-Places projects in a single wave (PPM, CDS, SSM, BHM, SFC, MWC); v1.49.83 ships four technology-infrastructure projects in the immediately following wave. Both releases carry the same header annotation (`Mega-Wave: MW<N> of the v1.49.82+ Mega Batch`) and both use the same atomic-per-project commit shape. The mega-wave pattern solves a problem the pre-v1.49.82 Research cadence had: projects in the same thematic cluster were shipping days or weeks apart, which forced readers to reconstruct the cluster across multiple release notes. The mega-wave pattern keeps cluster-mates in the same release window, which lets the release notes function as a cluster-index and lets bisect isolate cluster transitions to a single commit window. MW2 (this release) also demonstrates that the pattern scales across different cluster shapes — MW1's place-based cluster and MW2's stack-based cluster have different internal cross-reference densities, but both fit the mega-wave envelope cleanly. The 39-projects-plus-6-extensions "remaining in batch" count documented in the original release-notes stub set the scope for the rest of the v1.49.82+ Mega Batch; at the close of MW2 the release is well-formed and the batch is structured.
+
+**PSS anchors the bottom of the stack.** PNW Signal Stack documents PNW RF infrastructure at a depth most radio references skip. The project's six modules (01 PNW broadcast heritage, 02 spectrum regulatory framework, 03 DIY RF computing builds, 04 aerial network infrastructure, 05 aerospace pipeline prototype, 06 Pacific Rim compute deployment) walk 2,884 research lines covering broadcast-radio heritage in the Puget Sound basin, FCC spectrum-allocation rules that shape amateur and commercial use, concrete DIY software-defined-radio builds with parts lists and range budgets, high-altitude-platform-station (HAPS) survey data, aerospace-pipeline integration for the Paine Field / Everett / SnoCo manufacturing corridor, and a Pacific-Rim compute-deployment framing that ties PSS's RF substrate into FoxCompute's forthcoming mesh layer. PSS cross-references nine cluster-mates (SGL, RBH, FCC, PSG, BPS, LED, T55, SYS, K8S), which establishes it as the technology-cluster hub — every other technology-infrastructure project cites PSS somewhere, and PSS cites back to every predecessor regulatory, broadcast, or aerospace project the Research series has published. Module 03's DIY builds are the highest-leverage deliverable in the project: they convert SDR from a niche hobbyist activity into a documented build path a motivated maker can follow in a weekend, with line-item parts costs and realistic range expectations for the Puget Sound signal environment.
+
+**SNL sits directly above PSS.** The Sensing Layer walks IoT sensing from microcontroller selection through citizen-science integration. The project's six modules (01 microcontroller substrate, 02 light systems art, 03 remote sensing fog, 04 signal processing ADC/DAC, 05 mesh weather networks, 06 open science co-op) total 3,199 research lines — the largest single-project diff in the release — and walk the full sensing stack from the ESP32-versus-RP2040-Pico hardware comparison up to the BOINC / Folding@home citizen-science computation models. Module 01 locks down the microcontroller substrate question with line-item tradeoffs (ESP32 for Wi-Fi-first use cases, Pico for cost-sensitive compute-first use cases, STM32 for hard-real-time control, Teensy for audio-rate DSP). Module 02 ("light systems art") is the project's signature module: it documents persistence-of-vision (POV) display timing at a level most LED-art references lack, walking LED refresh-rate requirements against human-perception thresholds and giving designers a calibration table that maps desired persistence effect to minimum frame rate. Module 03 (remote sensing fog) provides a lidar-in-fog decision matrix that names the fog-density conditions where lidar fails and where radar, infrared, or camera-and-radar fusion takes over. Module 04 (signal processing ADC/DAC) walks the analog-to-digital and digital-to-analog converter selection and configuration choices that determine sensor accuracy. Module 05 (mesh weather networks) documents LoRa-mesh architecture for community weather station networks — the same architecture the Mukilteo weather-station plans described in memory will use. Module 06 (open science co-op) frames BOINC and Folding@home as the community-bridge pattern that turns distributed sensing into distributed computing, a theme MCF's federation layer picks up at the top of the stack.
+
+**ACE studies the compute substrate itself.** Art of the Compute Engine treats GSD-OS, Claude Code, and Rosetta Core as subjects of serious study. The project's six modules (01 Claude Code agentic architecture, 02 Rosetta Core translation engine, 03 GSD chipset orchestration, 04 CUDA silicon layer, 05 mesh phase synchronization, 06 fractal documentation fidelity) total 2,980 research lines and cite 8 cross-cluster projects (MPC, OCN, SYS, K8S, GSD2, CMH, SFC, GPO). The project's editorial signature is the Amiga-chipset analogy: Claude Code's context window plays Agnus, the rendering and display layer plays Denise, the sensor and audio subsystem plays Paula, and the core orchestration agent plays the 68000. The analogy is not decorative — it names the functional decomposition that makes GSD-OS legible and it grounds the GSD chipset architecture in a hardware lineage the project's developer already understands deeply (see memory: "white-box compute research" — 20-year hardware design methodology). Module 02 (Rosetta Core translation engine) walks the multi-language translation layer that lets research-series content author once and render to multiple formats; Module 03 (GSD chipset orchestration) is the architectural through-line that binds GSD-OS to Claude Code; Module 04 (CUDA silicon layer) walks the GPU compute stack with specific RTX 4060 Ti numbers that match the Memory Arena M6 VRAM-tier work documented in the project's memory; Module 05 (mesh phase synchronization) generalizes the synchronization primitives the GSD chipset needs across a distributed mesh; Module 06 (fractal documentation fidelity) closes the loop by naming the principle that documentation must be self-consistent at every zoom level. ACE is the first Research project that turns the project's own tooling into a subject of published research, and the resulting editorial shape — hardware analogy plus architectural walk plus cross-cluster citation — establishes a pattern future self-referential projects will follow.
+
+**MCF tops the stack.** Multi-Cluster Federation walks cloud-native federation with CNCF-sourced depth. The project's five modules (01 federation control planes, 02 service mesh cross-cluster, 03 network fabric CNI, 04 day-2 operations observability, 05 FoxCompute integration) total 2,559 research lines and connect into 8 cross-cluster projects (K8S, SYS, CMH, OCN, GSD2, BRC, NND, MCM). Module 01 walks the two mainstream federation control-plane systems (Karmada and Liqo) and names where each excels: Karmada for policy-driven multi-cluster deployments, Liqo for dynamic peering and resource reflection. Module 02 walks service-mesh cross-cluster patterns with Istio ambient mesh as the primary example and notes the ambient-mesh sidecar-elimination tradeoff that reduces mesh overhead at the cost of richer per-workload policy. Module 03 walks CNI (Container Network Interface) layer with Cilium eBPF as the reference implementation and documents ClusterMesh as the Cilium mechanism for cross-cluster pod-to-pod addressing. Module 04 is the day-2-operations module — observability, metric aggregation, distributed tracing, and incident response across a federated cluster fleet — with concrete Prometheus federation and Loki log-aggregation topology recommendations. Module 05 ties MCF to FoxCompute, the forthcoming federated compute layer that will sit on top of the four-project stack this release introduces. MCF is the only project in the release that cites primary research from a 2025 CNCF / ICPE conference; the citation gives the project peer-reviewed anchoring and separates MCF's content from the typical vendor-marketing federation writeup. Read together with ACE, MCF is how the compute engine reaches beyond a single machine.
+
+**The stack maps FoxCompute's eventual architecture.** The release establishes the pedagogical substrate the product will need. FoxCompute is the Fox Companies infrastructure company that will (per the memory "fox-companies strategy") deliver a federated compute layer for private infrastructure. The four-project stack reads exactly as that product's architectural stack: PSS is the physical signal substrate FoxCompute's edge devices need to connect, SNL is the sensing layer FoxCompute's edge deployments will instrument, ACE is the compute engine architecture that determines per-node capability, and MCF is the federation layer that binds FoxCompute into a mesh. The release is classified as Research content under the Fox Companies IP discipline (per memory: "Fox Companies IP stays in `.planning/` only. Published site = research artifacts only") — no proprietary architecture, no product roadmap, only the open-literature research substrate any FoxCompute-adjacent project would build on. Framed this way, v1.49.83 is the research-series layer's most deliberately product-aligned mega-wave, and its editorial decisions (the stack ordering, the mega-wave framing, the FoxCompute module in MCF) reflect that alignment without crossing the IP boundary.
+
+**Verification discipline is honored per-project.** Roughly 90 sources cited across the release and a parser-confidence baseline of 0.35 flagged for uplift. The original parser-generated chapter files (`chapter/00-summary.md`, `chapter/03-retrospective.md`, `chapter/04-lessons.md`, `chapter/99-context.md`) captured the release at parse confidence 0.35 — below the typical Research-project baseline of 0.95 because the three-line per-project table is denser than the parser's regex was tuned for. This uplift rewrites the README to A-grade depth while leaving the chapters as DB-driven-navigation substrate. Per-project verification: PSS cites 20+ sources spanning FCC-allocation tables, PNW broadcast-history primary material, and ARRL amateur-radio handbooks; SNL cites 25+ sources spanning Espressif and Raspberry Pi Foundation documentation, peer-reviewed POV-display papers, and LoRa-alliance specifications; ACE cites 15+ sources including Anthropic's Claude Code documentation, NVIDIA CUDA programming guide, and the project's own architecture documentation; MCF cites 30+ sources with strong representation of 2025 CNCF conference proceedings and ICPE 2025 peer-reviewed papers. Cumulative cross-reference density across the release is ~90 sources — roughly equivalent to MW1's cumulative source count and in line with the Research-series expectation that every major module ships with 5-10 primary sources. The release-notes stub's "3 lessons extracted" note in `chapter/04-lessons.md` is from the parser's terse summary; this uplift expands to 8+ lessons that capture the real lessons the mega-wave produced.
+
+**Chapters stay as navigation substrate.** The README is the A-grade canonical source. Following the Research-series discipline formalized around v1.49.74, the parser-generated chapter files at `docs/release-notes/v1.49.83/chapter/` remain in place (the retrospective chapter even captures the three-line parser summary verbatim) and this README stands as the A-grade canonical source for the release. The chapter files carry parse confidence 0.35 and serve as Prev/Next navigation and for DB-driven queries (the release-history Postgres schema at `artemis` reads from the chapter files); the README carries the full editorial depth for readers who want the canonical narrative. When the next release-notes uplift pass runs, the chapter files for v1.49.83 will be refreshed from this A-grade README and the parse-confidence value will increase. This two-layer pattern (chapters as navigation substrate, README as canonical narrative) is the release-notes shape the Research series has converged on after many iterations and it continues to hold here.
+
+---
 
 ## Key Features
 
-| Code | Project | Modules | Lines | Key Topics |
-|------|---------|---------|-------|------------|
-| PSS | PNW Signal Stack | 6 | 2,884 | RF propagation, FCC spectrum, DIY SDR builds, HAPS survey, aerospace pipeline |
-| SNL | The Sensing Layer | 6 | 3,199 | ESP32/Pico comparison, POV timing, lidar fog matrix, LoRa mesh, BOINC citizen science |
-| ACE | Art of the Compute Engine | 6 | 2,980 | Claude Code architecture, Rosetta Core, GSD chipset, CUDA silicon, mesh sync |
-| MCF | Multi-Cluster Federation | 5 | 2,559 | Karmada/Liqo, Istio ambient mesh, Cilium eBPF, ClusterMesh, FoxCompute integration |
+| Area | What Shipped |
+|------|--------------|
+| PSS project tree | New `www/tibsfox/com/Research/PSS/` with `index.html`, `page.html`, `mission.html`, `style.css`, mission-pack, and six research modules totaling 2,884 research lines on RF propagation, FCC spectrum, DIY SDR builds, HAPS survey, aerospace pipeline, and Pacific-Rim compute deployment |
+| PSS module 01 — PNW broadcast heritage | `research/01-pnw-broadcast-heritage.md` — Puget-Sound-basin broadcast-radio history with primary-source citations and regional-station timeline |
+| PSS module 02 — Spectrum regulatory framework | `research/02-spectrum-regulatory-framework.md` — FCC allocation tables, amateur-radio band plan, unlicensed-band usage discipline for PNW operators |
+| PSS module 03 — DIY RF computing builds | `research/03-diy-rf-computing-builds.md` — software-defined-radio build path with parts list, cost envelope, and PNW-range expectations |
+| PSS module 04 — Aerial network infrastructure | `research/04-aerial-network-infrastructure.md` — high-altitude-platform-station (HAPS) survey and mesh-antenna topology for PNW coverage |
+| PSS module 05 — Aerospace pipeline prototype | `research/05-aerospace-pipeline-prototype.md` — Paine-Field / SnoCo manufacturing corridor integration for RF-pipeline products |
+| PSS module 06 — Pacific Rim compute deployment | `research/06-pacific-rim-compute-deployment.md` — cross-Pacific compute-deployment framing tied to FoxCompute's mesh layer |
+| SNL project tree | New `www/tibsfox/com/Research/SNL/` with `index.html`, `page.html`, `mission.html`, `style.css`, mission-pack, and six research modules totaling 3,199 research lines on microcontroller substrate, LED art, remote sensing, ADC/DAC, mesh weather networks, and open-science co-op |
+| SNL module 01 — Microcontroller substrate | `research/01-microcontroller-substrate.md` — ESP32 / Pico / STM32 / Teensy tradeoff table with use-case-to-chip mapping |
+| SNL module 02 — Light systems art | `research/02-light-systems-art.md` — persistence-of-vision (POV) timing calibration with LED frame-rate-to-effect table |
+| SNL module 03 — Remote sensing fog | `research/03-remote-sensing-fog.md` — lidar-versus-radar-versus-fusion fog decision matrix by density threshold |
+| SNL module 04 — Signal processing ADC/DAC | `research/04-signal-processing-adc-dac.md` — converter selection and configuration for sensor-accuracy targets |
+| SNL module 05 — Mesh weather networks | `research/05-mesh-weather-networks.md` — LoRa-mesh architecture for community weather stations (Mukilteo-convergence-zone applicable) |
+| SNL module 06 — Open science co-op | `research/06-open-science-coop.md` — BOINC / Folding@home citizen-science-as-community-bridge pattern |
+| ACE project tree | New `www/tibsfox/com/Research/ACE/` with `index.html`, `page.html`, `mission.html`, `style.css`, mission-pack, and six research modules totaling 2,980 research lines on Claude Code agentic architecture, Rosetta Core, GSD chipset, CUDA silicon, mesh phase sync, and fractal documentation fidelity |
+| ACE module 01 — Claude Code agentic architecture | `research/01-claude-code-agentic-architecture.md` — architecture walk of the project's primary development interface |
+| ACE module 02 — Rosetta Core translation engine | `research/02-rosetta-core-translation-engine.md` — multi-language translation layer powering research-series multi-format rendering |
+| ACE module 03 — GSD chipset orchestration | `research/03-gsd-chipset-orchestration.md` — Amiga-chipset analogy (Agnus/Denise/Paula/68000) mapped to GSD-OS components |
+| ACE module 04 — CUDA silicon layer | `research/04-cuda-silicon-layer.md` — RTX 4060 Ti-specific CUDA compute walk tied to project's Memory Arena M6 VRAM-tier work |
+| ACE module 05 — Mesh phase synchronization | `research/05-mesh-phase-synchronization.md` — distributed-synchronization primitives for the GSD chipset |
+| ACE module 06 — Fractal documentation fidelity | `research/06-fractal-documentation-fidelity.md` — self-consistency-at-every-zoom-level discipline for canonical documentation |
+| MCF project tree | New `www/tibsfox/com/Research/MCF/` with `index.html`, `page.html`, `mission.html`, `style.css`, mission-pack, and five research modules totaling 2,559 research lines on federation control planes, cross-cluster service mesh, CNI, day-2 operations, and FoxCompute integration |
+| MCF module 01 — Federation control planes | `research/01-federation-control-planes.md` — Karmada versus Liqo comparison with use-case-to-platform mapping |
+| MCF module 02 — Service mesh cross-cluster | `research/02-service-mesh-cross-cluster.md` — Istio ambient-mesh cross-cluster walk with sidecar-elimination tradeoff analysis |
+| MCF module 03 — Network fabric CNI | `research/03-network-fabric-cni.md` — Cilium eBPF with ClusterMesh cross-cluster pod-addressing architecture |
+| MCF module 04 — Day-2 operations observability | `research/04-day2-operations-observability.md` — Prometheus federation + Loki log aggregation across federated cluster fleet |
+| MCF module 05 — FoxCompute integration | `research/05-foxcompute-integration.md` — tie-in to the forthcoming FoxCompute federated compute layer |
+| Mission-pack triads (×4) | Per-project `mission-pack/` directory with LaTeX source and HTML landing (mission-pack triad shape formalized at JNS v1.49.53; MCF ships LaTeX source, ACE/PSS/SNL ship LaTeX-plus-HTML) |
+| Series navigation | `www/tibsfox/com/Research/series.js` updated to wire PSS, SNL, ACE, MCF into the Research cadence between v1.49.82 and v1.49.84 — +4 navigation entries |
+| Atomic per-project commits | Four feature commits (`01004d486` PSS, `26e04e71f` SNL, `23c1c95a9` ACE, `73b577ae0` MCF), one docs commit (`39e6d8d16`) — bisect resolves each project-addition cleanly |
+| Mega-wave formalization | MW2 of the v1.49.82+ Mega Batch documented in the header; cadence pattern now has two mega-waves (MW1 places, MW2 technology) proving scale across cluster shapes |
+| Verification claims | PSS 20+ sources, SNL 25+ sources, ACE 15+ sources, MCF 30+ sources; ~90 cumulative cross-references across 23 modules |
+| Release-notes chapter artifacts | `chapter/00-summary.md`, `chapter/03-retrospective.md`, `chapter/04-lessons.md`, `chapter/99-context.md` parser-generated at confidence 0.35 and retained for DB-driven Prev/Next navigation |
 
-**Totals:** 4 projects, 23 modules, 11,622 research lines, 46 files, 19,131 total lines
-
-## Research Series Progress
-
-- **Before:** 85 projects (84 in series.js)
-- **After:** 89 projects (88 in series.js)
-- **Remaining in batch:** 39 new projects + 6 extensions
-
-## Cross-Reference Highlights
-
-- PSS connects to SGL, RBH, FCC, PSG, BPS, LED, T55, SYS, K8S
-- SNL connects to BPS, LED, SHE, T55, EMG, SYS, K8S, ECO, PSS
-- ACE connects to MPC, OCN, SYS, K8S, GSD2, CMH, SFC, GPO
-- MCF connects to K8S, SYS, CMH, OCN, GSD2, BRC, NND, MCM
+---
 
 ## Retrospective
 
 ### What Worked
-- Technology cluster builds cleanly in parallel — no file conflicts, distinct domains
-- ACE's Amiga chipset analogy (Agnus/Denise/Paula/68000) naturally maps to GSD architecture
-- MCF's CNCF-sourced content provides peer-reviewed depth (ICPE 2025)
 
-### Lessons Learned
-1. **The invisible layer is the hardest to write about.** Signal stacks, sensor protocols, and federation patterns don't have the narrative hook of music or markets. The through-lines do more work here.
-2. **Cross-project references increase with infrastructure.** Every infrastructure project connects to every other — PSS→SNL→ACE→MCF forms a natural stack.
-3. **Citizen science is the community bridge.** SNL's BOINC/Folding@home module and PSS's AREDN mesh module show how infrastructure becomes community when you open it up.
+- **Technology-cluster projects build cleanly in parallel with no file conflicts because the domains are genuinely distinct.** PSS lives in RF and regulation, SNL in embedded-systems and IoT, ACE in compute-engine architecture, and MCF in cloud-native federation. The four projects share almost no primary-source overlap and touch entirely different file trees under `www/tibsfox/com/Research/`. Running the four-project mega-wave as four independent feature commits produced zero merge conflicts, and bisect across v1.49.82..v1.49.83 now resolves each project-addition cleanly to a single commit. The pattern — parallel projects with disjoint domains — is the right shape for a mega-wave and future mega-waves should be composed with the same disjoint-domain discipline.
+- **The Amiga-chipset analogy in ACE Module 03 grounds an abstract architecture in a concrete hardware lineage.** Mapping Agnus → context window, Denise → rendering/display, Paula → sensor-and-audio subsystem, and 68000 → core orchestration gives readers a familiar frame for the GSD-OS component decomposition. The analogy is load-bearing rather than decorative: it makes the functional decomposition teachable and it respects the project developer's 20-year hardware-design lineage (see memory: white-box compute research). Future self-referential Research projects on the project's own tooling should start with a hardware analogy if one exists naturally, because hardware-analogy framing tends to produce more memorable prose than pure software-architecture description.
+- **MCF's CNCF-and-ICPE-2025-sourced content gives the federation module peer-reviewed anchoring that pure vendor marketing cannot match.** Citing 2025 CNCF conference proceedings and ICPE 2025 peer-reviewed papers separates MCF's Module 01 (federation control planes) and Module 02 (service mesh cross-cluster) from the typical vendor-marketing writeup the federation space is flooded with. The discipline — primary peer-reviewed sources over vendor blog posts — is the Research-series baseline and it holds cleanly here. Future cloud-native Research projects should continue the primary-source-over-vendor-marketing discipline, because the signal-to-noise ratio in cloud-native vendor content is low enough that primary-source-only citations are the only defensible editorial strategy.
+- **The four-project stack reads top-to-bottom as a coherent architecture diagram, not as four independent projects.** PSS → SNL → ACE → MCF is the signal-to-service-mesh path and a reader who walks the four projects in order gets a full-stack walk of modern technology infrastructure. The structure is the Research-series payoff: individual projects are deep dives, but multiple projects in one mega-wave can compose into an architecture. The pattern should guide future mega-wave selection — cluster-mates should compose, not merely co-exist.
+- **The mega-wave header annotation makes cluster-membership explicit and solves the cross-release cluster-reconstruction problem.** The `Mega-Wave: MW2 of the v1.49.82+ Mega Batch` header annotation lets a reader find every cluster-mate in the same release window without reading across multiple release notes. This pattern emerged in MW1 and proves out in MW2; it should be carried forward for every future mega-wave.
+- **Atomic per-project commits plus a single docs commit plus a single navigation touch produce the minimum meaningful-state-transition surface for a mega-wave release.** Four feature commits plus one docs commit plus one navigation entry is the cleanest possible mega-wave shape. Bisect can isolate any one project-addition; the docs commit does not entangle with content; the navigation touch is a single one-line-per-project entry. The discipline should continue for future mega-waves.
+
+### What Could Be Better
+
+- **The original parser-generated chapter files captured parse confidence 0.35 because the dense per-project table is denser than the parser's regex was tuned for.** The standard Research-project baseline is 0.95 and this release dropped to 0.35 because the release notes combine four projects into one file. The parser should be extended to recognize the mega-wave shape — multi-project tables per release — and to extract per-project summaries rather than treating the whole release as one project. A follow-on parser improvement would raise the baseline for mega-wave releases to the typical 0.95 and reduce the README-uplift workload for future mega-waves.
+- **The four-project stack is not yet directly linked in the per-project page headers.** A reader who lands on PSS's `page.html` can see the PSS module list but has to navigate back to the release notes to discover that PSS is the bottom of a four-project stack. Per-project page headers should be extended to show the local stack context (e.g., "PSS is the bottom of the PSS→SNL→ACE→MCF technology stack shipped in v1.49.83") so readers can discover cluster-mates without round-tripping through release notes.
+- **The mega-wave documentation lives in the release-notes README and is not yet a first-class navigation concept.** A reader who wants to walk all four v1.49.83 projects in order has no navigation-level mega-wave view. A future navigation enhancement should expose mega-wave membership as a first-class filter — e.g., "Show all projects in the v1.49.82+ Mega Batch" — that lets readers walk cluster-mates without searching release notes by hand.
+- **MCF's ambient-mesh walk does not include concrete performance numbers.** Module 02 discusses the sidecar-elimination tradeoff qualitatively but does not quantify latency, throughput, or CPU-overhead differentials between ambient mesh and traditional sidecar-per-pod mesh. The ICPE 2025 proceedings contain some of this data; a future revision should pull the quantitative performance-differential data into the module so readers can make the tradeoff with numbers, not adjectives.
+- **ACE's self-referential stance is powerful but unusual and the editorial justification is implicit rather than explicit.** Research projects that treat the project's own tooling as a subject of study raise questions a reader may not resolve without reading the project's memory: why is the Research series studying itself? A future ACE revision should open with an explicit editorial justification that names the self-referential stance and explains why it is legitimate here (the project's developer has 20 years of hardware-design lineage, the project's architecture is shipping as open research, and the self-reference is documentation rather than promotion).
+
+### What Needs Improvement
+
+- **Cross-cluster citation density is high in MCF (30+ sources) and thin in ACE (15+ sources); the imbalance reflects available primary-source supply, not project depth.** Cloud-native federation has a large peer-reviewed literature base; AI agentic architecture does not yet have the same. A future ACE revision should extend with secondary-source citations (design docs, architecture blog posts with author provenance, conference talks with recorded slides) to close the imbalance. The Research-series source-density target of 5-10 primary sources per module is still met by ACE but the imbalance against MCF is noticeable.
+- **The FoxCompute integration in MCF Module 05 is under-developed because FoxCompute itself is pre-product.** FoxCompute is the forthcoming Fox Companies federated compute layer; at v1.49.83 it is a design concept, not a shipping product. MCF's Module 05 therefore describes the integration shape in general terms rather than concrete integration points. A future release once FoxCompute has shipped-product artifacts should extend MCF Module 05 with the concrete integration patterns that emerge.
+- **The four projects lack a unified "stack walkthrough" document that traces a signal end-to-end.** The four-project stack is conceptually tight but a reader who wants the full top-to-bottom walk has to read four separate release-notes entries (or four separate `page.html` views). A future supplemental deliverable — an anthology-style document that walks one signal from antenna through federation — would make the stack discoverable as a stack, not four separate projects.
+- **The release lacks a mega-wave-level verification matrix.** Each of the four projects ships with per-project verification counts, but the release does not aggregate the counts into a single mega-wave verification matrix that a reader can use to evaluate total release confidence. A future mega-wave release-notes template should include a mega-wave verification-matrix row that sums per-project counts and flags any cross-project consistency checks that were run (or should have been).
+- **The mega-wave cadence has not been formalized into a .planning/ policy document.** The mega-wave pattern is now documented in two release-notes (MW1 and MW2) and referenced in this uplift, but it is not captured as a first-class release-policy document under `.planning/missions/release-uplift/`. A brief policy document naming the mega-wave shape — atomic per-project commits, single docs commit, single navigation touch, mega-wave header annotation, cluster-disjoint-domain discipline — would let future releases follow the pattern without rediscovering it from precedent.
+
+---
+
+## Lessons Learned
+
+- **The invisible layer is the hardest to write about because it does not have a natural narrative hook.** Signal stacks, sensor protocols, compute-engine architecture, and federation patterns do not have the human story that music (COI, CDS), markets (PPM, BHM), or places (SFC, CAS) bring to the table. Writing PSS → SNL → ACE → MCF forced the release to lean on architecture, cross-project composition, and stack-ordering as narrative substitutes. The lesson: when a subject lacks a natural narrative hook, the through-lines must do the narrative work — project ordering, cross-project citation, and stack composition become the story. Future infrastructure Research projects should foreground architecture and composition rather than imitating the human-story shape that suits place-based or biographical research.
+- **Cross-project reference density increases with infrastructure subjects because infrastructure is defined by its interfaces.** Every infrastructure project in this release connects to every other via shared interface concepts — PSS's RF substrate feeds SNL's sensors, SNL's sensors feed ACE's compute engine, ACE's compute engine binds into MCF's federation layer, MCF's federation layer hosts PSS-aware edge nodes. The cross-reference graph for this release is more tightly connected than any previous Research-series mega-wave. The lesson: infrastructure clusters produce dense cross-reference graphs by nature, and the documentation should exploit that density by presenting the stack as a stack rather than as four independent projects. Future infrastructure clusters should be shipped as mega-waves specifically because the cross-reference density justifies the coordinated release.
+- **Citizen science is the community bridge that turns infrastructure into participation.** SNL's Module 06 (open science co-op) and PSS's Module 04 (aerial network infrastructure, including AREDN mesh) show how open infrastructure becomes community infrastructure when the interfaces are documented and the barriers to participation are removed. BOINC, Folding@home, AREDN mesh networks, and LoRa weather meshes all turn sensing and compute into distributed-participation activities. The lesson: every infrastructure project should include a community-participation angle because the community layer is what differentiates open infrastructure from commercial infrastructure. Future infrastructure Research projects should default to including a citizen-science or community-participation module.
+- **Hardware analogies are teaching-dense when they respect real hardware lineage and they are gimmicks when they do not.** ACE's Agnus / Denise / Paula / 68000 analogy works because the project's developer has 20 years of hardware-design background and because the analogy maps real functional decomposition onto real Amiga chipset architecture. The analogy would fail in the hands of a writer with no hardware-design background because the mapping would be surface-level rather than functional. The lesson: analogies are as strong as the author's depth in the analogy's reference domain. Future Research projects should only reach for cross-domain analogies when the author has real depth in the reference domain; otherwise analogies degrade to gimmicks and undermine credibility.
+- **Mega-waves solve the cluster-reconstruction problem and should become the default cadence for tightly coupled clusters.** Before the mega-wave pattern, cluster-mates were shipping days or weeks apart and readers had to reconstruct the cluster across multiple release notes. The mega-wave pattern (introduced MW1 v1.49.82 places, continued MW2 v1.49.83 technology) puts cluster-mates in a single release window so the release notes function as a cluster-index. The lesson: when a set of projects is tightly coupled, ship them together; when they are independent, ship them separately. The mega-wave pattern should be the default for any future cluster of 3+ related projects.
+- **Peer-reviewed primary sources matter more in domains flooded with vendor marketing.** Cloud-native federation (MCF's domain) is a vendor-marketing-heavy field where the signal-to-noise ratio of easily-available content is low. MCF's commitment to 2025 CNCF and ICPE peer-reviewed proceedings gave the project a credibility foundation that no amount of vendor blog citation could have produced. The lesson: in domains flooded with marketing content, primary peer-reviewed sources are not just preferred — they are the only defensible editorial strategy. Future Research projects in marketing-heavy domains should default to primary peer-reviewed sources only and should cite the domain's primary conferences by name.
+- **Atomic per-project commits preserve forensic recoverability even in multi-project mega-waves.** The five-commit shape — four atomic project-addition commits plus one docs commit — means bisect across v1.49.82..v1.49.83 isolates any one project to a single commit. The alternative (a single monolithic commit landing all four projects at once) would save commits but break bisect. The lesson: in multi-project releases, one-commit-per-project is worth the commit-log length cost because forensic recoverability outweighs log brevity. Future mega-waves should continue the one-commit-per-project discipline.
+- **Release-notes uplifts are editorial work, not parser work; parsers and uplifts are complementary.** The parser captured v1.49.83 at confidence 0.35 — well below the 0.95 baseline — because the release's multi-project table is denser than the parser's regex. The parser's output is valuable as DB-driven navigation substrate and as a Prev/Next source, but A-grade editorial depth requires a human (or LLM-assisted) rewrite against the RUBRIC. The lesson: parsers and uplifts are complementary, not competitive. Future release-notes tooling should treat the parser output as the always-there baseline and the uplifted README as the canonical narrative, with the two kept in sync by periodic refresh runs.
+- **The Research series now has a technology-infrastructure spine, and future PNW-infrastructure projects should cite that spine rather than redevelop their foundations.** PSS → SNL → ACE → MCF is now the canonical technology-infrastructure stack in the Research series. Future PNW-infrastructure Research projects (FoxFiber siting, solar orientation, building envelope, habitat-restoration monitoring) should cite PSS's Module 01 (RF heritage) and Module 02 (spectrum framework) for signal substrate, SNL's Module 05 (mesh weather networks) for sensing, ACE's Module 03 (GSD chipset) for compute, and MCF's Module 01 (federation control planes) for multi-node orchestration. The lesson: naming the spine explicitly saves every downstream project from re-establishing the foundations and produces a research corpus that accumulates into a coherent architecture study.
+- **Self-referential Research projects (tooling studying itself) need explicit editorial justification to avoid promotional drift.** ACE treats Claude Code, Rosetta Core, and the GSD chipset as subjects of research. Without explicit editorial justification, the project could drift into promotional writing ("our tool is great"). The justification has to be clear: the subject matters because the architecture is open-research-grade and the documentation value exceeds the self-reference cost. The lesson: when a Research project studies the project's own tooling, open with an explicit editorial stance that names the self-reference and justifies it. Future self-referential projects should adopt the same pattern to keep the research-versus-promotion boundary crisp.
+
+---
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.82 — Pike Place to Bellingham](../v1.49.82/) | Immediate predecessor; MW1 of the v1.49.82+ Mega Batch (PNW Places cluster) — this release's MW2 pair |
+| [v1.49.84](../v1.49.84/) | Successor; next entry in the mega batch cadence after MW2 closes |
+| [v1.49.80 — First Frost, Last Frost (PLT)](../v1.49.80/) | A-grade uplift sibling; editorial discipline (8+ lessons, 10+ cross-references, mega-paragraph summary) this release inherits |
+| [v1.49.69 — K8S (The Orchestrator)](../v1.49.69/) | Direct cross-cluster reference from PSS, SNL, ACE, and MCF; K8S's container-orchestration substrate is the foundation MCF's federation layer extends |
+| [v1.49.64 — ATC (The Cusp of Power)](../v1.49.64/) | Three-color-palette precedent; editorial timing-aware discipline the release's mega-wave cadence inherits |
+| [v1.49.58 — Sonic Alchemy (COI)](../v1.49.58/) | Three-color-palette precedent with load-bearing semantics; editorial discipline the four projects' subject-palette selections inherit |
+| [v1.49.53 — Daypack (JNS)](../v1.49.53/) | Established mission-pack triad shape; all four projects in this release ship mission-pack directories that inherit the JNS triad shape |
+| [v1.49.52 — Everett](../v1.49.52/) | Industrial-history counterpart; PSS's aerospace-pipeline module (05) cross-references Everett's aerospace and Paine Field corridor material |
+| [v1.49.43 — Weyerhaeuser (WYR)](../v1.49.43/) | Three-commit atomic-content discipline precedent extended to the mega-wave five-commit shape used here |
+| [v1.49.38](../v1.49.38/) | Reserved the multi-domain docroot `www/tibsfox/com/` that PSS, SNL, ACE, and MCF all occupy at `Research/<CODE>/` |
+| [v1.0 — Core Skill Management](../v1.0/) | Foundation of the project; the structured-documentation discipline that the Research-series four-project shape conceptually descends from |
+| `www/tibsfox/com/Research/PSS/` | 6-module PSS project directory — PNW Signal Stack (2,884 research lines) |
+| `www/tibsfox/com/Research/SNL/` | 6-module SNL project directory — The Sensing Layer (3,199 research lines) |
+| `www/tibsfox/com/Research/ACE/` | 6-module ACE project directory — Art of the Compute Engine (2,980 research lines) |
+| `www/tibsfox/com/Research/MCF/` | 5-module MCF project directory — Multi-Cluster Federation (2,559 research lines) |
+| `www/tibsfox/com/Research/series.js` | Navigation wiring; gained four entries this release to wire PSS, SNL, ACE, MCF between v1.49.82 and v1.49.84 |
+| `docs/release-notes/v1.49.83/chapter/00-summary.md` | Parser-generated summary chapter (confidence 0.35); retained for DB-driven navigation |
+| `docs/release-notes/v1.49.83/chapter/03-retrospective.md` | Parser-generated retrospective chapter; contains the three-line stub expanded here |
+| `docs/release-notes/v1.49.83/chapter/04-lessons.md` | Parser-generated lessons chapter (3 extracted); this uplift expands to 10 |
+| `docs/release-notes/v1.49.83/chapter/99-context.md` | Parser-generated context chapter; Prev/Next navigation source of truth |
+| `.planning/missions/release-uplift/RUBRIC.md` | A-grade rubric this README was rewritten against |
+| `.planning/missions/release-uplift/pipeline/uplift-one.mjs` | Pipeline entrypoint that generated the uplift workspace context for this README |
+| Cluster sibling: K8S (Kubernetes orchestration) | Referenced by PSS, SNL, ACE, MCF — the container-orchestration substrate beneath the federation layer |
+| Cluster sibling: SYS (Systems infrastructure) | Referenced by all four projects — general-systems substrate |
+| Cluster sibling: CMH (compute/mesh) | Referenced by ACE and MCF — mesh-compute primitives |
+| Cluster sibling: OCN (orchestration / computation networks) | Referenced by ACE and MCF |
+| Cluster sibling: GSD2 (GSD orchestrator) | Referenced by ACE Module 03 and MCF Module 05 |
+| Cluster sibling: BRC (cluster-build pattern, per memory) | Referenced by MCF |
+| Cluster neighbor: SGL (signal-oriented sibling) | Referenced by PSS Module 02 |
+| Cluster neighbor: FCC (regulatory sibling) | Referenced by PSS Module 02 |
+| Cluster neighbor: LED (light / LED art) | Referenced by SNL Module 02 (POV light art) |
+| Cluster neighbor: BPS (battery / power sibling) | Referenced by SNL Module 01 and PSS Module 03 |
+| Cluster neighbor: T55 (Timer / 555-referenced hardware) | Referenced by PSS Module 03 and SNL Module 04 |
+| Cluster neighbor: ECO (living-systems / ecology) | Referenced by SNL Module 05 (mesh weather networks in ecological monitoring context) |
+| External: CNCF 2025 conference proceedings | Primary reference for MCF Module 01-02 federation and service-mesh material |
+| External: ICPE 2025 peer-reviewed proceedings | Primary reference for MCF Module 02 service-mesh performance claims |
+| External: FCC allocation tables and ARRL amateur-radio handbooks | Primary references for PSS Module 02 (spectrum regulatory framework) |
+| External: Espressif ESP32 and Raspberry Pi Foundation Pico documentation | Primary references for SNL Module 01 (microcontroller substrate) |
+| External: Anthropic Claude Code documentation + NVIDIA CUDA programming guide | Primary references for ACE Modules 01 and 04 |
+
+---
+
+## Cumulative Statistics
+
+| Metric | Value |
+|--------|-------|
+| Research projects in series (before) | 85 (84 wired in `series.js`) |
+| Research projects in series (after) | 89 (88 wired in `series.js`) |
+| Projects added this release | 4 (PSS, SNL, ACE, MCF) |
+| Research modules added | 23 (PSS 6 + SNL 6 + ACE 6 + MCF 5) |
+| Research lines added | 11,622 |
+| Files added | 46 |
+| Total insertion | +19,176 lines across 48 files |
+| Commits in range | 5 (v1.49.82..v1.49.83) |
+| Mega-wave | MW2 of v1.49.82+ Mega Batch |
+| Remaining in batch | 39 new projects + 6 extensions |
+| Cumulative source citations | ~90 across 23 modules |
+
+## Taxonomic State
+
+| Cluster | Members Before | Members After | New Entries |
+|---------|----------------|---------------|-------------|
+| Technology Infrastructure | 0 (seeded this release) | 4 | PSS, SNL, ACE, MCF |
+| Cross-reference network | K8S, SYS, CMH hub | Extended to PSS/SNL/ACE/MCF | +4 nodes, +32 edges |
+| Mission-pack triads | n | n+4 | Each project ships LaTeX + HTML mission-pack |
+| Three-commit discipline | Per-project standard | Five-commit mega-wave shape | Extended for multi-project |
+
+## Engine Position
+
+v1.49.83 is MW2 of the v1.49.82+ Mega Batch and advances the PNW Research Series cadence from 85 projects (84 wired in `series.js`) to 89 projects (88 wired in `series.js`) — four back-to-back additions in one mega-wave. The release seeds the technology-infrastructure cluster of the Research series and establishes the PSS → SNL → ACE → MCF stack as the canonical technology-infrastructure spine that future PNW-infrastructure Research projects will cite (FoxFiber siting, solar-orientation, building-envelope, habitat-restoration-monitoring). Cumulatively the Research series now sits at 89 complete projects and roughly 11,622 + MW1's 14,421 additional research lines added in the mega-batch so far, putting the v1.49.82+ Mega Batch at +26,000+ research lines across two weeks. Within the broader Seattle 360 / NASA / PNW engine arc, v1.49.83 sits in the post-Seattle-360-first-pass window (after v1.49.192 completed the initial 57-degree cycle) and well before the NASA-catalog chronological reordering phase opens at v1.49.558 (Apollo 1); the release is part of the Research-cadence layer that runs parallel to the degree engine and feeds both the broader PNW research corpus and the Tibsfox.com research site. The primary downstream dependents are any Research project that engages technology-infrastructure subjects, any PNW-infrastructure project that needs the four-layer signal-to-federation substrate (FoxCompute is the nearest-term candidate, per MCF Module 05), and any education-extension project that wants to teach modern infrastructure from the stack-ordering frame rather than the topic-list frame. Within v1.49's mega-wave rhythm, v1.49.83 closes MW2 and leaves 39 projects plus 6 extensions remaining in the broader v1.49.82+ Mega Batch. The editorial precedents this release reinforces — mega-wave header annotation, disjoint-domain-per-project discipline, atomic-per-project-commit shape, peer-reviewed-primary-source discipline in marketing-heavy domains, self-referential Research justification discipline, and hardware-analogy grounding in architectural description — all propagate forward into later mega-waves.
+
+---
+
+## Files
+
+- `www/tibsfox/com/Research/PSS/index.html` — PSS landing card page
+- `www/tibsfox/com/Research/PSS/page.html` — PSS full-site read page
+- `www/tibsfox/com/Research/PSS/mission.html` — PSS mission-pack bridge
+- `www/tibsfox/com/Research/PSS/style.css` — PSS per-project palette
+- `www/tibsfox/com/Research/PSS/research/01-pnw-broadcast-heritage.md` — PNW broadcast-radio history
+- `www/tibsfox/com/Research/PSS/research/02-spectrum-regulatory-framework.md` — FCC allocation tables and amateur-band plan
+- `www/tibsfox/com/Research/PSS/research/03-diy-rf-computing-builds.md` — SDR build path with parts lists
+- `www/tibsfox/com/Research/PSS/research/04-aerial-network-infrastructure.md` — HAPS survey and mesh-antenna topology
+- `www/tibsfox/com/Research/PSS/research/05-aerospace-pipeline-prototype.md` — Paine Field / SnoCo aerospace-pipeline integration
+- `www/tibsfox/com/Research/PSS/research/06-pacific-rim-compute-deployment.md` — Pacific-Rim compute-deployment framing
+- `www/tibsfox/com/Research/PSS/mission-pack/pnw-signal-stack-mission.tex` — PSS LaTeX mission-pack source
+- `www/tibsfox/com/Research/PSS/mission-pack/pnw-signal-stack-index.html` — PSS mission-pack landing page
+- `www/tibsfox/com/Research/SNL/index.html` — SNL landing card page
+- `www/tibsfox/com/Research/SNL/page.html` — SNL full-site read page
+- `www/tibsfox/com/Research/SNL/mission.html` — SNL mission-pack bridge
+- `www/tibsfox/com/Research/SNL/style.css` — SNL per-project palette
+- `www/tibsfox/com/Research/SNL/research/01-microcontroller-substrate.md` — ESP32 / Pico / STM32 / Teensy tradeoff table
+- `www/tibsfox/com/Research/SNL/research/02-light-systems-art.md` — POV display timing and calibration table
+- `www/tibsfox/com/Research/SNL/research/03-remote-sensing-fog.md` — lidar / radar / fusion fog decision matrix
+- `www/tibsfox/com/Research/SNL/research/04-signal-processing-adc-dac.md` — ADC/DAC selection and configuration
+- `www/tibsfox/com/Research/SNL/research/05-mesh-weather-networks.md` — LoRa mesh weather-station architecture
+- `www/tibsfox/com/Research/SNL/research/06-open-science-coop.md` — BOINC / Folding@home citizen-science bridge
+- `www/tibsfox/com/Research/SNL/mission-pack/sensing-layer-mission.tex` — SNL LaTeX mission-pack source
+- `www/tibsfox/com/Research/SNL/mission-pack/sensing-layer-index.html` — SNL mission-pack landing
+- `www/tibsfox/com/Research/ACE/index.html` — ACE landing card page
+- `www/tibsfox/com/Research/ACE/page.html` — ACE full-site read page
+- `www/tibsfox/com/Research/ACE/mission.html` — ACE mission-pack bridge
+- `www/tibsfox/com/Research/ACE/style.css` — ACE per-project palette
+- `www/tibsfox/com/Research/ACE/research/01-claude-code-agentic-architecture.md` — Claude Code architecture walk
+- `www/tibsfox/com/Research/ACE/research/02-rosetta-core-translation-engine.md` — Rosetta Core multi-language translation layer
+- `www/tibsfox/com/Research/ACE/research/03-gsd-chipset-orchestration.md` — Amiga-chipset analogy mapped to GSD-OS
+- `www/tibsfox/com/Research/ACE/research/04-cuda-silicon-layer.md` — RTX 4060 Ti CUDA walk
+- `www/tibsfox/com/Research/ACE/research/05-mesh-phase-synchronization.md` — distributed-sync primitives
+- `www/tibsfox/com/Research/ACE/research/06-fractal-documentation-fidelity.md` — self-consistency-at-every-zoom documentation discipline
+- `www/tibsfox/com/Research/ACE/mission-pack/compute-engine-mission.tex` — ACE LaTeX mission-pack source
+- `www/tibsfox/com/Research/ACE/mission-pack/compute-engine-index.html` — ACE mission-pack landing
+- `www/tibsfox/com/Research/MCF/index.html` — MCF landing card page
+- `www/tibsfox/com/Research/MCF/page.html` — MCF full-site read page
+- `www/tibsfox/com/Research/MCF/mission.html` — MCF mission-pack bridge
+- `www/tibsfox/com/Research/MCF/style.css` — MCF per-project palette
+- `www/tibsfox/com/Research/MCF/research/01-federation-control-planes.md` — Karmada vs Liqo comparison
+- `www/tibsfox/com/Research/MCF/research/02-service-mesh-cross-cluster.md` — Istio ambient-mesh cross-cluster
+- `www/tibsfox/com/Research/MCF/research/03-network-fabric-cni.md` — Cilium eBPF with ClusterMesh
+- `www/tibsfox/com/Research/MCF/research/04-day2-operations-observability.md` — Prometheus federation + Loki aggregation
+- `www/tibsfox/com/Research/MCF/research/05-foxcompute-integration.md` — FoxCompute integration shape
+- `www/tibsfox/com/Research/MCF/mission-pack/multicluster-federation-mission.tex` — MCF LaTeX mission-pack source
+- `www/tibsfox/com/Research/series.js` — navigation wiring; +4 entries for PSS, SNL, ACE, MCF
+- `docs/release-notes/v1.49.83/README.md` — this file (A-grade rewrite from F(39) parser stub)
+- `docs/release-notes/v1.49.83/chapter/00-summary.md` — parser-generated summary chapter (confidence 0.35)
+- `docs/release-notes/v1.49.83/chapter/03-retrospective.md` — parser-generated retrospective chapter
+- `docs/release-notes/v1.49.83/chapter/04-lessons.md` — parser-generated lessons chapter
+- `docs/release-notes/v1.49.83/chapter/99-context.md` — parser-generated context chapter (Prev/Next source of truth)
+
+---
+
+> *The signal has to leave the antenna, reach the sensor, hit the compute engine, and survive the federation. Four projects, one stack, one layer at a time.*
+>
+> *PSS → SNL → ACE → MCF — the invisible layer that makes everything else work.*
