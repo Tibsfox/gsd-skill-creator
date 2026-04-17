@@ -2,9 +2,12 @@
 name: session-observatory-live
 description: "Conversational guide for using tools/session-retro/observe.mjs to capture friction, wins, corrections, decisions, gaps, tool-use, and checkpoints as they happen during a session. Use at session start (to kick off the log), at inflection points (to record events), and at session end (to archive and feed the retrospective generator)."
 format: 2025-10-02
-version: 1.0.0
+version: 1.1.0
 status: active
 updated: 2026-04-17
+version_history:
+  - 1.0.0 (2026-04-17): initial
+  - 1.1.0 (2026-04-17): document `event tokens` dual-write shortcut
 ---
 
 # Session Observatory — Live Event Logging
@@ -53,9 +56,24 @@ node tools/session-retro/observe.mjs end
 | `decision` | Judgment call deserving review | `"committed 1,881 generated files"` |
 | `gap` | Missing skill/agent/chipset | `"no batch-rewriter for N-script cascade"` |
 | `checkpoint` | Progress marker for long-running work | `"Pass 2 chapters: 300/602"` |
+| `tokens` | Token consumption (dual-writes to token-budget) | `"pass-2-chapter-gen"` |
 
 Free-form kinds are allowed but less useful for aggregation. Prefer the
 standard list.
+
+### Tokens event — special positional form
+
+`tokens` is the one kind where positional args are reinterpreted to keep the
+call site short and to dual-write to `current.tokens.jsonl`:
+
+```bash
+# observe.mjs event tokens <in_tokens> <out_tokens> [label]
+node tools/session-retro/observe.mjs event tokens 45000 3200 "pass-2-chapter-gen"
+```
+
+The entry lands in both `current.jsonl` (as a `tokens` event) and
+`current.tokens.jsonl` (as a budget entry), so `token-budget.mjs status` and
+the retrospective observations stay in sync without a second call.
 
 ## Payload Conventions
 
