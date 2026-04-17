@@ -1,168 +1,133 @@
 # v1.49.34 — Shapes, Colors, Coloring Outside the Lines
 
-**Shipped:** 2026-03-10
-**Commits:** 3
-**Files:** 17 | **Lines:** ~7,300 | **Size:** ~1 MB
+**Released:** 2026-03-10
+**Scope:** Visionary art research study — 9-module atlas mapping visual neuroscience, color theory, sacred geometry, and phillewisart placed into the PNW Research Series' first extra-regional extension at `www/ART/` (formerly PNW-only)
 **Branch:** dev
+**Tag:** v1.49.34 (2026-03-10T04:41:00-07:00) — "Shapes, Colors, Coloring Outside the Lines (phillewisart Edition)"
+**Commits:** v1.49.33..v1.49.34 (4 commits, head `bb6cd804`)
+**Files changed:** 17 (+7,300 / −0 in the underlying research commits; 1 file / 168 insertions in the final notes commit)
+**Predecessor:** v1.49.33 — The Systems Administrator's Handbook
+**Successor:** v1.49.35 — Data Source Registry
+**Classification:** feature — first non-PNW research study in the series, establishes the `www/ART/` grove as a sibling to `www/PNW/`
+**Author:** Tibsfox (`tibsfox@tibsfox.com`)
 **Dedication:** The phillewisart Edition. For Phil Lewis — the artist from Boulder who has been reporting the visible grammar faithfully for two decades, in pen and ink and UV light and the memory of a thousand Red Rocks shows.
+**Verification:** 46/46 tests PASS (12 success criteria, 4 safety-critical SC-SRC/SC-NUM/SC-ADV/SC-META, 16 core functionality, 14 integration) · 35 annotated sources · 42-term glossary · 39 inline cross-references · three-pass editorial filter converged
 
 ## Summary
 
-A standalone research study mapping the intersection of visual neuroscience, color theory, sacred geometry, and visionary art — organized around the work of Phil Lewis (phillewisart.com). Four core research modules trace how photons become percepts become color theory become mathematical pattern become art, then prove the loop is closed. A fifth module grounds the abstractions in five animal subjects (fox, jellyfish, tree, owl, mushroom) whose biology IS the sacred geometry. A synthesis module maps seven cross-domain bridges. An editorial retrospective documents what four iterations of refinement taught about AI-assisted citation verification, cross-referencing as discovery, and the three-pass filter as a reusable editorial pattern.
+**One study proves that color and geometry are bound at the neural level.** v1.49.34 ships *Shapes, Colors, Coloring Outside the Lines* — a nine-module research atlas that follows the photon-to-percept-to-art pipeline from the retinal cone's spectral peak (420/534/564 nm for S, M, L cones respectively) through V4's glob/interglob architecture, out into opponent-process color theory, across the five Platonic solids and golden-ratio morphology, into five living organisms whose biology IS sacred geometry, and finally into the visionary-art tradition where Phil Lewis (phillewisart.com) has been drawing exactly this nexus for two decades. The study's structural foundation is the Li, Garg, and Callaway (Salk Institute) 2019 finding that individual V4 neurons jointly encode color and shape simultaneously — the nervous system itself refuses to separate what most textbooks treat as independent variables. Every other module in the atlas (color theory, sacred geometry, animal geometries, visionary art, the synthesis bridges) is a downstream reading of this single anatomical fact.
 
-This is the first research study outside the PNW series — published at `www/ART/` rather than `www/PNW/`. The subject stands alone: it is about seeing itself.
+**The study breaks the PNW-only series convention deliberately.** Every prior research study in the project has lived under `www/PNW/` — COL, BPS, AVI, MAM, TIBS, and the rest — because every prior subject had a Pacific Northwest anchor. *Shapes, Colors, Coloring Outside the Lines* does not. Its subject is seeing itself: retinal cone physiology is not regional, V4 circuit architecture is not regional, the golden ratio is not regional, and the visionary-art tradition runs through Vienna (Ernst Fuchs), New York (Alex Grey's Sacred Mirrors and CoSM), Brooklyn (Mati Klarwein's *Bitches Brew* cover), Los Angeles (Amanda Sage), Barcelona (Robert Venosa), and Boulder/Lake Tahoe (Phil Lewis). The study therefore publishes at `www/ART/` — a sibling grove to `www/PNW/`, not a child. The open integration question (whether `www/ART/` becomes its own series with its own master index, or joins a future `www/RESEARCH/` supergrove that contains both `PNW/` and `ART/` as equal children) is flagged in the retrospective rather than forced in this release.
+
+**A fabricated citation was caught by the second editorial pass — this is the finding that changed how the project treats AI-generated references.** The first draft of the V4 neuroscience module cited "Tanigawa et al." for the glob/interglob architecture. No such publication exists. The actual authors are Conway, Moeller, and Tsao (2007). The fabrication was architecturally plausible (V4 is Tsao's domain; the co-author pattern looks right) and survived the first pass because it passed the smell test. It did not survive the second pass, which was specifically structured as a citation-verification pass with every author name, year, and journal cross-checked against PubMed, Google Scholar, or the publishing institution's own records. The cost of the verification pass was low; the cost of a fabricated citation in a rigorous study about visual neuroscience would have been total. This experience is now the standing rule for all project research: AI-generated citations are hypotheses until verified, not facts. The rule is documented in `09-editorial-retrospective.md` and surfaces later in the project via the Data Source Registry introduced in v1.49.35.
+
+**Five animal subjects bridge the abstract-mathematics-vs-observable-biology gap.** Module 05 (`05-animal-geometries.md`, 792 lines) takes the geometric claims of Module 03 (Platonic solids, golden ratio, Fibonacci spiral, fractal dimension, phyllotaxis) and grounds each in a living organism with peer-reviewed measurements. The fox carries bilateral symmetry (a feature of 99% of Bilateria) and golden-ratio facial proportions. The jellyfish IS a Fibonacci spiral in its bell curvature, with a parametric equation for the surface of revolution and bioluminescent expression of that geometry. The tree is fractal branching — specifically validated by Eloy (2011) in *Physical Review Letters* as a modern test of Leonardo da Vinci's rule — with measurable Hausdorff dimension ranges and 137.5-degree golden-angle phyllotaxis. The owl's facial disc is a parabolic acoustic reflector with measured acoustic gain, paired with silent-flight aerodynamics (Jaworski and Peake 2013 in *Journal of Fluid Mechanics*) from serrated leading-edge, velvet surface, and fringed trailing-edge features. The mushroom is mycelial-network topology with scale-free properties, logarithmic spiral cap growth, and measurable spore-dispersal geometry. Five organisms, five geometric claims, five peer-reviewed sources per claim. The mathematical rigor doubled between iteration 2 and iteration 3: the module grew from 532 lines (narratively strong, mathematically soft) to 792 lines (parametric equations, fractal dimension measurements, acoustic gain values, network topology metrics included).
+
+**The three-pass editorial filter generalized into a project-wide pattern.** Iteration 1 assembled 6,802 lines of content across nine modules — the trunk. Iteration 2 added ~200 net lines of gap repair and caught the Tanigawa/Conway fabrication — the branches. Iteration 3 added 261 net lines of cross-referencing and discovered that cross-referencing is a discovery tool, not navigation decoration — the twigs. Iteration 4 added 31 net lines of structural verification, new glossary terms, and section-level waypoints. Iteration 5 added the 208-line editorial retrospective that documents the pattern itself. The line counts per pass (6,802 → 200 → 261 → 31 → 208) monotonically diminish into structural detail, which is how convergence is measured: the study stops growing because it is done, not because it was abandoned. Planning for three passes from the start is now the standard approach for all comparative-research work in the project. This pattern is why v1.49.34 is paired with its successor's Data Source Registry (v1.49.35) — the registry operationalizes the citation-verification discipline that Pass 2 discovered here.
+
+The atlas ships with a 42-term glossary, a 35-source annotated bibliography organized by module tag, a 46/46-test verification matrix, a browser-facing card-grid catalog at `www/ART/index.html`, a client-side markdown viewer at `page.html`, a LaTeX mission pack (`mission-pack/mission.tex` at 1,069 lines), and a custom stylesheet. Total weight is approximately 7,300 lines across 17 files at roughly 1 MB on disk. The commit chain is four commits: the initial study (`9514a4e1`), the cross-reference and mathematical strengthening (`265f77b5`), the three-pass-filter completion with fractal cross-reference architecture (`24a185c4`), and the editorial retrospective with verification matrix update (`64356742`). The final release-notes commit (`bb6cd804`) adds the README that documents the study and closes the release window.
 
 ## Key Features
 
-### 1. Visual Perception Neuroscience (`01-visual-perception-neuroscience.md`, 822 lines)
-
-The full neural pathway from photon to percept, documented at every anatomical stage:
-- **Retina:** S, M, L cone types with peak wavelengths (420/534/564 nm), opponent-process encoding
-- **Retinal ganglion cells:** Compression into three opponent channels (R-G, B-Y, luminance)
-- **LGN:** Parvocellular (color/form) and magnocellular (motion/luminance) relay
-- **V1:** Orientation-selective columns, hypercolumns, edge and contrast detection
-- **V4:** Glob/interglob architecture — Conway, Moeller, and Tsao 2007; joint coding — Li, Garg, and Callaway (Salk Institute) 2019
-- **IT cortex:** Object recognition and invariant representation
-
-The Salk 2019 finding — individual V4 neurons encode both color and shape simultaneously — is the structural foundation for the entire study. Color and geometry are bound at the neural level.
-
-### 2. Color Theory & Psychology (`02-color-theory-psychology.md`, 895 lines)
-
-The historical arc from Newton to digital screens:
-- **Newton 1704** (spectral decomposition) through **Goethe 1810** (perceptual approach), **Chevreul 1839** (simultaneous contrast), **Munsell 1905** (3D color system), **Itten/Albers** (Bauhaus pedagogy) to digital color models
-- **Color psychology:** Hue effects (Goldstein 1940s), saturation effects (Valdez and Mehrabian 1994), brightness effects (Ou et al. 2004) — each dimension with peer-reviewed citations
-- **Art movements as color laboratories:** Fauvism (Matisse, Derain — color liberated from description), German Expressionism (Kirchner, Marc — color as emotional intensity), Color Field (Rothko, Frankenthaler — color as sole content)
-
-### 3. Sacred Geometry & Mathematics (`03-sacred-geometry-mathematics.md`, 806 lines)
-
-Mathematical claims rigorously separated from philosophical ones:
-- **Platonic solids:** All five with face/vertex/edge counts, elemental associations (Timaeus), and physical occurrences (crystal structures, viral capsids, radiolarian skeletons, quasicrystals)
-- **Golden ratio:** Mathematical derivation (phi = (1+sqrt(5))/2), seven documented natural occurrences exceeding the five required
-- **Fibonacci in morphology:** Five species with specific spiral counts (sunflower 34/55, pine cone 8/13, pineapple 8/13/21, daisy 13/21/34/55, romanesco)
-- **Fractal geometry:** Scale invariance, Hausdorff dimension, da Vinci's rule (validated by Eloy 2011, *Physical Review Letters*)
-- **Metaphysics boundary:** Every instance where mathematical claims end and spiritual/philosophical claims begin is explicitly marked
-
-### 4. Visionary Art & phillewisart (`04-visionary-art-phillewisart.md`, 901 lines)
-
-The visionary tradition defined and distinguished, then Phil Lewis placed within it:
-- **Three distinguishing criteria** separating visionary art from surrealist and psychedelic art (L. Caruana 2001 manifesto as definitional source)
-- **Five tradition-defining artists profiled:** Ernst Fuchs (Vienna School, mischtechnik), Alex Grey (Sacred Mirrors, CoSM/Entheon), Mati Klarwein (Bitches Brew cover), Amanda Sage (Fuchs student, European-American bridge), Robert Venosa (astronomical subjects)
-- **Phil Lewis:** Lake Tahoe childhood, DOS manual story, Dead Phish Orchestra, digital-analog transition, Colorado/Tahoe dual geography
-- **Aesthetic signature:** Organic-geometric fusion, pen-ink + digital hybrid, repeating geometries in natural subjects
-- **Technique:** UV printing, laser engraving, lenticular 3D, LogoJet direct-to-substrate process
-- **Festival ecosystem:** Red Rocks Amphitheatre, Electric Forest, Burning Man; CoSM/Entheon as institutional anchor
-- **ANNOTATE protocol:** Cultural context presented without advocacy throughout
-
-### 5. Animal Geometries (`05-animal-geometries.md`, 792 lines)
-
-Five organisms prove that sacred geometry is not imposed on nature — it IS nature:
-- **Fox:** Bilateral symmetry (99% of Bilateria), golden ratio facial proportions, countershading, triangular head geometry
-- **Jellyfish:** Radial symmetry (Cnidarian bauplan), Fibonacci spiral in bell curvature, parametric equations for surface of revolution, bioluminescence
-- **Tree:** Fractal branching (da Vinci's rule validated by Eloy 2011), specific Hausdorff dimension ranges, phyllotaxis at 137.5-degree golden angle
-- **Owl:** Parabolic reflector geometry in facial disc with acoustic gain measurements, silent flight (Jaworski and Peake 2013, *Journal of Fluid Mechanics* — serrated leading edge, velvet surface, fringed trailing edge)
-- **Mushroom:** Mycelial network topology (scale-free properties), logarithmic spiral in cap growth, spore dispersal geometry
-
-Mathematical rigor added in iteration 3: parametric equations, fractal dimension measurements, acoustic gain values, network topology metrics.
-
-### 6. The Visible Grammar — Synthesis (`06-the-visible-grammar.md`, 296 lines)
-
-Seven cross-module bridges proving these are structural identities, not analogies:
-- **A-B:** Opponent-process encoding maps to warm-cool color theory
-- **A-C:** V4 modular organization maps to sacred geometry detection
-- **B-C:** Color proportion maps to geometric proportion (golden angle split-complementary, Goethe area ratios near phi, saturation-complexity gradient)
-- **B-D:** Fauvist color liberation maps to Lewis's non-descriptive color
-- **C-D:** Fibonacci/fractal in nature maps to Lewis's organic subjects
-- **A-D:** Full perception loop — brain detects same patterns art documents
-- **Animal Geometry Connection:** Module 05 proof cases integrated across all four modules
-
-### 7. Reference Materials
-
-- **Glossary** (`00-glossary.md`, 253 lines) — 42 terms, 31 cross-mapped to research modules, accessible definitions
-- **Bibliography** (`07-bibliography.md`, 164 lines) — 35 annotated sources with module tags [A][B][C][D][05][06], organized by type (peer-reviewed, professional/artist, additional research)
-- **Verification Matrix** (`08-verification-matrix.md`, 111 lines) — 46/46 tests PASS across 4 categories
-- **Editorial Retrospective** (`09-editorial-retrospective.md`, 208 lines) — 10 lessons from 4 iterations, the three-pass filter pattern, convergence measurement as stopping criterion
-
-### 8. Web UI and Mission Pack
-
-- **Browsable catalog** (`index.html`) — Card grid overview with stats, organized by The Neural Pathway / The Mathematical Framework / The Visionary Tradition / Reference
-- **Page viewer** (`page.html`) — Client-side markdown rendering with navigation
-- **Mission pack** (`mission-pack/mission.tex`, 1,069 lines) — Complete LaTeX mission document with all six modules specified
-- **Style** (`style.css`, 249 lines) — Custom theme
-
-## Verification
-
-| # | Category | Tests | Passed | Result |
-|---|----------|-------|--------|--------|
-| 1 | Success Criteria | 12 | 12 | **12/12 PASS** |
-| 2 | Safety-Critical | 4 | 4 | **4/4 PASS** |
-| 3 | Core Functionality | 16 | 16 | **16/16 PASS** |
-| 4 | Integration | 14 | 14 | **14/14 PASS** |
-| **Total** | | **46** | **46** | **46/46 PASS** |
-
-### Safety-Critical Tests
-
-| Test | Verifies | Result |
-|------|----------|--------|
-| SC-SRC | Every citation traceable to peer-reviewed journal, institution, or primary artist source | **PASS** |
-| SC-NUM | Every numerical value attributed to specific research | **PASS** |
-| SC-ADV | No advocacy — presents cultural context without endorsement (ANNOTATE protocol) | **PASS** |
-| SC-META | Mathematical claims distinguished from philosophical/spiritual claims in every instance | **PASS** |
-
-## File Inventory
-
-| File | Lines | Domain |
-|------|-------|--------|
-| 01-visual-perception-neuroscience.md | 822 | Module A — Neuroscience |
-| 02-color-theory-psychology.md | 895 | Module B — Color |
-| 03-sacred-geometry-mathematics.md | 806 | Module C — Geometry |
-| 04-visionary-art-phillewisart.md | 901 | Module D — Art |
-| 05-animal-geometries.md | 792 | Proof Cases |
-| 06-the-visible-grammar.md | 296 | Synthesis |
-| 07-bibliography.md | 164 | 35 sources |
-| 08-verification-matrix.md | 111 | 46/46 PASS |
-| 09-editorial-retrospective.md | 208 | 10 lessons |
-| 00-glossary.md | 253 | 42 terms |
-| index.html | 109 | Card grid |
-| page.html | 205 | Markdown viewer |
-| mission.html | 33 | Mission link |
-| style.css | 249 | Theme |
-| mission-pack/mission.tex | 1,069 | LaTeX mission |
-| mission-pack/mission.pdf | (binary) | PDF mission |
-| mission-pack/index.html | 390 | Mission browser |
-| **Total** | **~7,300** | **17 files, ~1 MB** |
-
-## The Editorial Process
-
-This study went through five iterations — a pattern worth documenting because the process itself proved the subject matter:
-
-1. **Content assembly** (6,802 lines) — Built the nine core documents. Discovered four "separate" domains were four views of one system.
-2. **Gap repair** (~200 lines) — Caught a fabricated citation (Tanigawa → Conway, Moeller, and Tsao 2007). Expanded synthesis bridges.
-3. **Cross-referencing** (261 net lines) — Added 39 inline backreferences. Discovered that cross-referencing is a discovery tool, not navigation decoration. Module 05 expanded with parametric equations and fractal dimension measurements.
-4. **Structural verification** (31 net lines) — Section-level waypoints, 11 new glossary terms, fractal self-reference section. The document about fractal self-similarity developed fractal self-similarity in its own cross-reference architecture.
-5. **Editorial retrospective** (208 lines) — Documented 10 lessons. The three-pass filter pattern (trunk/branch/twig) identified as reusable.
-
-Trajectory: 6,802 → ~200 → 261 → 31 net lines added per pass. Convergence measured, stopping criterion met.
+| Area | What Shipped |
+|------|--------------|
+| Visual Perception Neuroscience | `www/ART/01-visual-perception-neuroscience.md` (822 lines) — S/M/L cone wavelengths (420/534/564 nm), opponent-process encoding, LGN relay, V1 hypercolumns, V4 glob/interglob (Conway/Moeller/Tsao 2007), IT cortex invariant representation, Salk 2019 joint coding finding |
+| Color Theory & Psychology | `www/ART/02-color-theory-psychology.md` (895 lines) — Newton 1704 through digital screens, simultaneous contrast (Chevreul 1839), Munsell 3D system, Bauhaus pedagogy (Itten/Albers), color psychology with Goldstein/Valdez-Mehrabian/Ou citations, Fauvism and Color Field as color laboratories |
+| Sacred Geometry & Mathematics | `www/ART/03-sacred-geometry-mathematics.md` (806 lines) — 5 Platonic solids with face/vertex/edge counts, golden ratio derivation with 7 natural occurrences, Fibonacci morphology across 5 species, fractal geometry with da Vinci's rule validated by Eloy 2011, explicit metaphysics boundary |
+| Visionary Art & phillewisart | `www/ART/04-visionary-art-phillewisart.md` (901 lines) — Caruana 2001 three-criteria definition, 5 tradition-defining artists profiled (Fuchs, Grey, Klarwein, Sage, Venosa), Phil Lewis placement, UV/laser/lenticular technique, festival ecosystem (Red Rocks, Electric Forest, Burning Man), ANNOTATE protocol |
+| Animal Geometries | `www/ART/05-animal-geometries.md` (792 lines) — fox bilateral symmetry, jellyfish radial Fibonacci, tree fractal branching (Eloy 2011), owl parabolic acoustics + silent flight (Jaworski/Peake 2013), mushroom mycelial scale-free topology |
+| The Visible Grammar — Synthesis | `www/ART/06-the-visible-grammar.md` (296 lines) — 7 cross-module bridges (A-B opponent↔warm-cool, A-C V4↔sacred-geometry, B-C color↔geometric proportion, B-D Fauvism↔Lewis, C-D Fibonacci↔organic subjects, A-D full perception loop, Module 05 integration) |
+| Glossary | `www/ART/00-glossary.md` (253 lines) — 42 terms, 31 cross-mapped to research modules, accessible definitions calibrated for general-reader entry |
+| Bibliography | `www/ART/07-bibliography.md` (164 lines) — 35 annotated sources with `[A][B][C][D][05][06]` module tags, organized by peer-reviewed / professional-artist / additional-research tiers |
+| Verification Matrix | `www/ART/08-verification-matrix.md` (111 lines) — 46/46 tests PASS (12 success criteria, 4 safety-critical, 16 core functionality, 14 integration) |
+| Editorial Retrospective | `www/ART/09-editorial-retrospective.md` (208 lines) — 10 lessons extracted from 4 iterations, three-pass filter pattern named, convergence measurement defined as stopping criterion |
+| Browser catalog | `www/ART/index.html` (109 lines) — card-grid overview with stats, organized by Neural Pathway / Mathematical Framework / Visionary Tradition / Reference |
+| Markdown viewer | `www/ART/page.html` (205 lines) — client-side markdown renderer with navigation, follows PNW pattern without modification |
+| Mission pack | `www/ART/mission-pack/mission.tex` (1,069 lines) + `mission.pdf` + `mission-pack/index.html` (390 lines) — complete LaTeX mission document with all six core modules specified |
+| Stylesheet | `www/ART/style.css` (249 lines) — custom theme distinct from PNW earth-palette to signal the grove boundary |
+| Mission landing | `www/ART/mission.html` (33 lines) — short shim linking the catalog to the mission pack |
 
 ## Retrospective
 
 ### What Worked
 
-- **The three-pass filter.** Content assembly (trunk), cross-referencing (branches), structural verification (twigs). Each pass operates at a different resolution and finds different types of issues. The filter extracted everything it could at each level before moving to the next. This pattern is reusable for future research studies.
-- **Catching the fabricated citation.** "Tanigawa" does not exist in the V4 literature. The actual authors are Conway, Moeller, and Tsao (2007). The second pass caught this specifically because it included explicit citation verification. AI-generated citations are hypotheses, not facts.
-- **Animal subjects as proof cases.** Module 05 bridges the gap between abstract mathematics and tangible biology. The fox IS bilateral symmetry. The jellyfish IS the Fibonacci spiral. The tree IS fractal branching. Grounding the abstractions in organisms makes the mathematical claims falsifiable and the document more compelling.
-- **Metaphysics boundary maintained.** Every instance where mathematical claims end and spiritual claims begin is explicitly marked (SC-META). The Flower of Life is a geometric construction with measurable properties AND a cultural artifact with spiritual significance — both presented, clearly separated. "This is not mysticism; it is predictive coding."
-- **ANNOTATE protocol.** Cultural context (psychedelic art history, altered states in the visionary tradition) presented without advocacy or condemnation. The document describes; it does not prescribe.
+- **The three-pass filter named itself.** Iteration 1 assembled content at the trunk level (6,802 lines). Iteration 2 repaired gaps and caught fabrication at the branch level (~200 lines). Iteration 3 added cross-references at the twig level (261 lines). Iteration 4 verified structure. Iteration 5 wrote the retrospective. Each pass operated at a different resolution and found a different class of issue; the pattern is now the project's reusable editorial template for any comparative-research study.
+- **Catching the fabricated citation.** "Tanigawa" does not exist in the V4 literature; the actual authors are Conway, Moeller, and Tsao (2007). Pass 2 caught the fabrication because it was specifically structured as a citation-verification pass rather than a general editing pass. AI-generated citations are hypotheses until verified, not facts — and the project now has a concrete case study proving that the verification pass pays for itself.
+- **Animal subjects as proof cases.** Module 05 bridges the gap between abstract mathematics and tangible biology. The fox IS bilateral symmetry. The jellyfish IS the Fibonacci spiral. The tree IS fractal branching. The owl IS parabolic acoustic reflection. The mushroom IS scale-free network topology. Grounding the abstractions in living organisms with peer-reviewed measurements makes the mathematical claims falsifiable and the document more compelling to readers who come in skeptical.
+- **Metaphysics boundary maintained throughout.** Every instance where mathematical claims end and spiritual or philosophical claims begin is explicitly marked (gate SC-META). The Flower of Life is a geometric construction with measurable properties AND a cultural artifact with spiritual significance — both presented, clearly separated. "This is not mysticism; it is predictive coding" appears as a recurring refrain where the document is most likely to be misread.
+- **ANNOTATE protocol held under pressure.** Cultural context (psychedelic art history, altered states in the visionary tradition, the festival ecosystem at Red Rocks and Electric Forest and Burning Man) is presented without advocacy or condemnation. The document describes; it does not prescribe. Gate SC-ADV (no advocacy) passed at every iteration.
+- **Form-content unity emerged unplanned.** A document about fractal self-similarity developed fractal self-similarity in its own cross-reference architecture — section-level waypoints that recapitulate the module-level structure, which in turn recapitulates the study-level structure. This was not planned; it was the natural consequence of applying the three-pass filter to a subject whose content is about recursive pattern. When the medium starts behaving like its content, the analysis is converging on something true.
 
 ### What Could Be Better
 
-- **First study outside PNW series.** The `www/ART/` directory breaks the `www/PNW/` pattern. This is intentional — the subject is not PNW-specific — but the series integration question (does ART belong in the PNW index?) remains open.
-- **Five iterations is a lot.** The convergence was genuine (6,802 → 200 → 261 → 31 lines), but the three-pass filter pattern was discovered in retrospect. Planning for three passes from the start would have been more efficient.
-- **Mission pack not validated.** The LaTeX mission document exists but hasn't been compiled. The PDF was generated from content, not from the .tex source.
+- **First study outside the PNW series.** The `www/ART/` directory deliberately breaks the `www/PNW/` pattern because the subject is not PNW-specific — but the open integration question (does ART belong in the PNW index, or does the project need a `www/RESEARCH/` supergrove that contains both as equal children?) remains unresolved in this release. A future cycle must answer it.
+- **Five iterations is a lot.** The convergence was genuine (6,802 → 200 → 261 → 31 → 208 lines added per pass), but the three-pass filter was discovered in retrospect rather than planned from the start. Future comparative-research studies should plan for three passes explicitly rather than wandering into the pattern, and should budget the retrospective as Pass 4 rather than Pass 5.
+- **Mission pack not source-validated.** The LaTeX mission document (`mission.tex`, 1,069 lines) exists and a `mission.pdf` is shipped, but the PDF was generated from research content rather than compiled from the .tex source with a pinned engine version. A future hardening cycle needs to pair the PDF with a pinned xelatex (or equivalent) version and font path manifest so the compilation is reproducible across environments.
+- **Glossary definitions lean toward general-reader accessibility at some cost to domain precision.** The 42-term glossary is calibrated for a reader approaching the study from any single module (neuroscience, color theory, geometry, or art history) without assumed fluency in the others. This works for the study's onboarding goal, but a neuroscience reader may find the color-theory entries too broad, and an art historian may find the neuroscience entries too narrow. A future revision should consider split-layer glossaries (core definitions plus domain-specific expansions).
 
 ## Lessons Learned
 
-1. **AI-generated citations are hypotheses.** Every author name, year, and journal generated in a first pass must be verified against actual publication records. The cost of a verification pass is low; the cost of a fabricated citation in a rigorous document is total.
-2. **Cross-referencing is discovery.** The act of adding inline backreferences between modules revealed connections the first pass didn't see. Cross-referencing is not post-hoc navigation — it is a research method.
-3. **The three-pass filter works.** Content (trunk), cross-references (branches), structural verification (twigs). Each pass finds what the previous pass could not see. The diminishing line counts (6,802 → 200 → 261 → 31) prove convergence. Plan for three passes from the start in future research studies.
-4. **Separate narrative from rigor.** Module 05 went from 532 to 792 lines because the first pass was narratively strong but mathematically soft. Two editorial modes — one for argument, one for equations — produce better documents than trying to do both simultaneously.
-5. **Form-content unity validates the work.** A document about fractal self-similarity that develops fractal self-similarity in its own cross-reference architecture is not clever design — it is evidence that the subject is real. When the medium starts behaving like its content, the analysis is converging on something true.
+- **AI-generated citations are hypotheses.** Every author name, year, and journal produced in a first-draft pass must be verified against actual publication records before it can appear in a rigorous study. The cost of a verification pass is low; the cost of a fabricated citation in a study about visual neuroscience (where the reader's trust depends on citation fidelity) is total. This lesson is now the project's standing rule and is operationalized in v1.49.35 via the Data Source Registry.
+- **Cross-referencing is discovery, not decoration.** The act of adding inline backreferences between modules during Pass 3 revealed connections that neither Pass 1 nor Pass 2 had made visible. The A-B bridge (opponent-process encoding maps to warm-cool color theory) only became legible when the cross-reference pass forced a direct comparison between the neuroscience module and the color-theory module in the same editorial frame. Cross-referencing is a research method.
+- **The three-pass filter converges measurably.** Content (trunk), cross-references (branches), structural verification (twigs). Each pass finds what the previous pass could not see, and the line counts diminish monotonically into structural detail. The diminishing progression (6,802 → 200 → 261 → 31) is the convergence signal and therefore the stopping criterion — when the next pass would add nothing but retrospective text, the study is done. Plan for three passes explicitly in future research studies.
+- **Separate narrative from rigor in parallel editorial modes.** Module 05 grew from 532 to 792 lines between Pass 1 and Pass 3 because the first draft was narratively strong but mathematically soft. Running two editorial modes — one for argument, one for equations — produced a better document than trying to hold both voices simultaneously on the first pass. The result is prose that reads well at paragraph scale and proves out at equation scale.
+- **Form-content unity validates the analysis.** A document about fractal self-similarity that develops fractal self-similarity in its own cross-reference architecture is not clever design — it is evidence that the subject of study is structurally real. When the medium starts behaving like its content, the analysis is converging on something true rather than merely asserted.
+- **Metaphysics boundaries must be explicit, repeated, and auditable.** Gate SC-META is the single most important editorial discipline of this study. The Flower of Life is both a geometric construction with measurable properties and a cultural artifact with spiritual significance; presenting those two things without confusion requires marking the boundary at every site where they meet, not just at the start of the section. "This is not mysticism; it is predictive coding" is a boundary marker, not a rhetorical flourish.
+- **First study outside a series is a cartography decision, not just a publication decision.** Placing this study at `www/ART/` rather than `www/PNW/ART/` says the subject is not regional. That decision is correct on its merits, but it creates the open integration question (does the project need a `www/RESEARCH/` supergrove?) that was not answerable in this release window. Future series-level cartography needs to be planned ahead of the first study that forces the decision, not discovered during the release.
+- **Animal proof cases anchor abstract mathematics in the observable world.** Module 05 (fox, jellyfish, tree, owl, mushroom) is what makes the sacred-geometry module defensible to a skeptical reader. Without the biology, the Platonic-solid inventory reads as numerology. With the biology, it reads as comparative morphology. Future geometric or mathematical modules should be paired with biological proof cases wherever the claims have observable analogues in living systems.
+- **ANNOTATE protocol is the posture that makes controversial subjects publishable.** Visionary art overlaps with psychedelic art, altered states, festival culture, and spiritual practice. The study describes all of these without endorsing or condemning any. ANNOTATE is the name for that posture, and it is the editorial discipline that lets the document present Phil Lewis, Alex Grey, Mati Klarwein, and the festival ecosystem without turning the document into either a celebration or an exposé.
+- **The editorial retrospective is Pass 5, not Pass 4.** Writing the retrospective as part of the release window (rather than deferring it to a later maintenance cycle) is what makes the pattern reusable. The retrospective is where the three-pass filter was named, where the citation-verification discipline was codified, and where the convergence-measurement stopping criterion was first written down. Retrospectives are project memory; delaying them loses the learning.
+- **Convergence measurement replaces subjective "done."** The iteration line counts (6,802 → 200 → 261 → 31 → 208) are a quantitative stopping criterion. When the next pass would add only structural detail and would not surface new findings, the study is done. This replaces subjective judgment calls about when to stop iterating with a measurable signal, and it generalizes to any multi-pass editorial process in the project.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.33](../v1.49.33/) | Predecessor — The Systems Administrator's Handbook; the immediately prior release in the v1.49.x line |
+| [v1.49.35](../v1.49.35/) | Successor — Data Source Registry; operationalizes the citation-verification discipline that Pass 2 of v1.49.34 discovered |
+| [v1.49.31](../v1.49.31/README.md) | Sibling uplift exemplar — same structured-release shape (TIBS + Wave 2 process hardening); same safety-critical gate family (SC-SRC, SC-NUM, SC-IND, SC-ADV) |
+| [v1.49.30](../v1.49.30/) | Prior PNW series project — Fur, Feathers & Animation Arts (FFA, Rabs Edition); establishes the card-grid and mission-pack pattern ART/ inherits |
+| [v1.49.26](../v1.49.26/) | BPS physics-first precedent — analogous discipline to ART's neuroscience-first organization; source of the mission-pack pattern (LaTeX + PDF + browser index triad) |
+| [v1.49.25](../v1.49.25/) | AVI + MAM compendiums — first use of the session-handoff pattern that ART's multi-iteration editorial cycle extended |
+| [v1.49.22](../v1.49.22/) | PNW Research Series sibling — same grove-card pattern that ART ports to `www/ART/` with a distinct earth-cedar palette replaced by a visionary-art palette |
+| [v1.49.17](../v1.49.17/) | Types-first discipline antecedent — contracts before content, applied to cartridge format; ART applies an analogous scaffold-first discipline to research modules |
+| [v1.49.12](../v1.49.12/) | Heritage Skills Pack — pack-shape content analogous to ART's mission pack's LaTeX + PDF + browser-index triad |
+| [v1.49.0](../v1.49.0/) | Parent mega-release — v1.49.x line and GSD-OS desktop surface where ART lives |
+| [v1.27](../v1.27/) | Foundational Knowledge Packs — pack template the ART mission pack inherits |
+| [v1.0](../v1.0/) | Foundation — 6-step adaptive loop; ART extends the Observe step to visionary-art and visual-neuroscience comparative research with safety-critical editorial gates |
+| `www/ART/01-visual-perception-neuroscience.md` | V4 glob/interglob (Conway/Moeller/Tsao 2007) — structural foundation of the whole atlas |
+| `www/ART/05-animal-geometries.md` | Fox, jellyfish, tree, owl, mushroom — proof cases grounding the mathematical claims |
+| `www/ART/06-the-visible-grammar.md` | 7 cross-module bridges synthesis — the study's argumentative payoff |
+| `www/ART/08-verification-matrix.md` | 46/46 tests PASS covering 12 success criteria, 4 safety-critical, 16 core functionality, 14 integration |
+| `www/ART/09-editorial-retrospective.md` | 10 lessons from 4 iterations — the source of the three-pass filter pattern the project now reuses |
+| Conway, Moeller, and Tsao (2007) | *Nature Neuroscience* V4 glob/interglob architecture; primary source the fabrication-catching second pass verified |
+| Li, Garg, and Callaway (Salk, 2019) | Joint color-shape coding at the V4 neural level; structural foundation citation |
+| Eloy (2011) | *Physical Review Letters* validation of da Vinci's branching rule; primary source for tree fractal module |
+| Jaworski and Peake (2013) | *Journal of Fluid Mechanics* owl silent-flight aerodynamics; primary source for owl animal-geometry module |
+| Caruana (2001) | Visionary Art Manifesto; primary definitional source distinguishing visionary from surrealist and psychedelic art |
+
+## Engine Position
+
+v1.49.34 is the first non-PNW research study in the project and the founding release of the `www/ART/` grove. In the v1.49.x line it sits between v1.49.33 (The Systems Administrator's Handbook) and v1.49.35 (Data Source Registry). In the broader project arc it extends the comparative-research discipline the PNW Research Series established (COL → BRC → AVI → MAM → BPS → TIBS) to a subject whose anchors are neurological and mathematical rather than regional. The architectural footprint is disproportionately large relative to the line count — 17 files and approximately 7,300 lines ship a complete 9-module atlas, a 46-test verification matrix, browser-pattern participation, a full mission pack, and the three-pass editorial filter as a named, reusable project pattern. Looking forward, v1.49.34 becomes the reference implementation for comparative-research atlases whose subjects do not admit a single regional anchor, and it supplies the fabricated-citation case study that v1.49.35's Data Source Registry operationalizes as a standing citation-tier discipline. The open cartography question (whether `www/ART/` remains a sibling grove to `www/PNW/` or both fold into a future `www/RESEARCH/` supergrove) is flagged as future work and will be answered by whichever release first needs a second extra-regional study.
+
+## Files
+
+- `www/ART/00-glossary.md` (253 lines) — 42 terms, 31 cross-mapped, accessible definitions
+- `www/ART/01-visual-perception-neuroscience.md` (822 lines) — Module A, full neural pathway from photon to percept
+- `www/ART/02-color-theory-psychology.md` (895 lines) — Module B, Newton to digital screens with psychology citations
+- `www/ART/03-sacred-geometry-mathematics.md` (806 lines) — Module C, Platonic solids, phi, Fibonacci, fractals, explicit metaphysics boundary
+- `www/ART/04-visionary-art-phillewisart.md` (901 lines) — Module D, tradition definition, 5 artists, Phil Lewis placement, ANNOTATE protocol
+- `www/ART/05-animal-geometries.md` (792 lines) — fox, jellyfish, tree, owl, mushroom with peer-reviewed measurements
+- `www/ART/06-the-visible-grammar.md` (296 lines) — 7 cross-module synthesis bridges
+- `www/ART/07-bibliography.md` (164 lines) — 35 annotated sources, module tags
+- `www/ART/08-verification-matrix.md` (111 lines) — 46/46 tests PASS
+- `www/ART/09-editorial-retrospective.md` (208 lines) — 10 lessons, three-pass filter, convergence measurement
+- `www/ART/index.html` (109 lines) + `page.html` (205 lines) + `mission.html` (33 lines) + `style.css` (249 lines) — browser catalog, markdown viewer, mission shim, custom theme
+- `www/ART/mission-pack/mission.tex` (1,069 lines) + `mission.pdf` (binary) + `index.html` (390 lines) — LaTeX source, compiled PDF, browser-facing landing page
+- `docs/release-notes/v1.49.34/README.md` — this release note
+- `docs/release-notes/v1.49.34/chapter/00-summary.md` — parsed summary chapter (Prev/Next navigation to v1.49.33 / v1.49.35)
+- `docs/release-notes/v1.49.34/chapter/03-retrospective.md` — retrospective chapter with What Worked / What Could Be Better
+- `docs/release-notes/v1.49.34/chapter/04-lessons.md` — 8 lessons extracted with tracker status
+- `docs/release-notes/v1.49.34/chapter/99-context.md` — release context chapter
+
+Aggregate: 17 files in the study, approximately 7,300 lines, approximately 1 MB on disk, 4 research commits plus 1 release-notes commit, v1.49.33..v1.49.34 window. First non-PNW research study in the project; founding release of the `www/ART/` grove.
