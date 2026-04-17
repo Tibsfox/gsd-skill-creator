@@ -142,34 +142,56 @@ function installAutoDiscover(block, manifest) {
     return;
   }
 
-  // Build set of already-claimed source paths from the manifest
+  // Build set of already-claimed source paths from the manifest.
+  // Include hookScripts so auto-discovery of hook/*.cjs files doesn't
+  // double-install entries already listed there.
   const claimed = new Set();
   for (const s of (manifest.files.standalone || [])) claimed.add(s.source);
   for (const s of (manifest.files.skills || [])) claimed.add(s.source);
+  for (const s of (manifest.files.hookScripts || [])) claimed.add(s.source);
 
-  const candidates = enumerateMatches(sourceBase, block.source_dir, block.pattern);
+  // Honor explicit exclude list (e.g. skip `.test.ts` files that live
+  // alongside hook sources).
+  const exclude = new Set(block.exclude || []);
+
+  const patterns = Array.isArray(block.pattern) ? block.pattern : [block.pattern];
+  const seen = new Set();
+  const candidates = [];
+  for (const p of patterns) {
+    for (const rel of enumerateMatches(sourceBase, block.source_dir, p)) {
+      if (seen.has(rel)) continue;
+      seen.add(rel);
+      candidates.push(rel);
+    }
+  }
+
+  const handler = block.kind === 'hook-scripts' ? installHookScript : installStandalone;
   let found = 0;
   for (const rel of candidates) {
-    if (claimed.has(rel)) continue; // already handled by manifest
+    if (claimed.has(rel)) continue;
+    if (exclude.has(rel)) continue;
     found++;
     const entry = {
       source: rel,
       target: path.join(block.target_dir, path.relative(block.source_dir, rel)),
       description: `[auto-discovered from ${block.source_dir}]`,
     };
-    installStandalone(entry);
+    handler(entry);
   }
   if (found === 0) log(`  = ${block.kind}: no new files to discover`);
 }
 
 // Return source-dir-relative paths matching pattern.
-// Supported patterns: "*.md" (flat), "*/SKILL.md" (one level deep).
+// Supported patterns: "*.md" / "*.cjs" / "*.js" / "*.sh" (flat),
+//                     "*/SKILL.md" (one level deep).
 function enumerateMatches(sourceBase, sourceDirRel, pattern) {
   const out = [];
-  if (pattern === '*.md') {
+  const flatExt = pattern.match(/^\*\.([a-zA-Z0-9]+)$/);
+  if (flatExt) {
+    const ext = '.' + flatExt[1];
     for (const name of fs.readdirSync(sourceBase)) {
       const full = path.join(sourceBase, name);
-      if (fs.statSync(full).isFile() && name.endsWith('.md')) {
+      if (fs.statSync(full).isFile() && name.endsWith(ext)) {
         out.push(path.join(sourceDirRel, name));
       }
     }
