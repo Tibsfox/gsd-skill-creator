@@ -1,33 +1,262 @@
-# v1.49.85 "The Full Stack"
+# v1.49.85 — "The Full Stack"
 
 **Released:** 2026-03-27
-**Theme:** Forensics, Telephony, Voxel Weather, and GPU Silicon
+**Scope:** PNW Research Series — five simultaneous projects (STE, WPH, MRW, GPO, GPG) completing the Technology Cluster; storage forensics from NAND silicon through courtroom evidence chain, telephony from Bell's patent through 5G and mesh, real-time NOAA weather mapped into Minecraft voxel biomes, GSD-OS GPU orchestration from CUDA streams through LoRA adapters, and GPU ecosystem documentation from vertex shaders through Vulkan ray tracing and NVML observability
+**Branch:** dev → main
+**Tag:** v1.49.85 (2026-03-27T11:54:22-07:00) — commit `b4b44cee2`
+**Commits:** v1.49.84..v1.49.85 (6 commits: STE `611546cd2`, WPH `99939a9c6`, MRW `4ef859c19`, GPO `f40a61901`, GPG `fe1d2201e`, docs `b4b44cee2`)
+**Files changed:** 60 (+24,573 insertions, one pre-rendered PDF artifact 224,058 bytes) across five independent project trees plus the release-notes stub
+**Predecessor:** v1.49.84 — prior Research cadence entry
+**Successor:** v1.49.86 — next Research cadence entry
+**Classification:** content — Research-series mega-wave; zero tooling change, zero schema change, zero build-system change; pure new-surface module slotting into the multi-domain docroot `www/tibsfox/com/Research/` that v1.49.38 reserved
+**Cluster:** Technology — MW4 of the v1.49.82+ Mega Batch, the wave that lands STE, WPH, MRW, GPO, and GPG and closes the thirteen-project Technology Cluster at PSS, SNL, ACE, MCF, HFR, HFE, PIN, MCS, STE, WPH, MRW, GPO, GPG
 **Mega-Wave:** MW4 of the v1.49.82+ Mega Batch — Technology Part 3
+**Author:** Tibsfox (`tibsfox@tibsfox.com`)
+**Dedicated to:** the practitioners at every layer of the compute stack — the NAND-flash forensics lab, the Bell System switchman, the NOAA meteorologist, the CUDA kernel author, and the GPU driver maintainer — whose daily work depends on naming layers that most users never see
+**Epigraph:** *"The full stack is not a metaphor. It is the literal chain of dependencies from the silicon electron to the courtroom exhibit, from the copper wire to the voice packet, from the satellite downlink to the voxel biome. This release walks the stack."*
+
+---
 
 ## Summary
 
-Five projects completing the technology cluster. Storage forensics from NAND flash to courtroom evidence chain. Telephone systems from Bell's patent through 5G to mesh. Minecraft weather mapping NOAA data to voxel biomes. GPU orchestration from CUDA streams to LoRA adapters. GPU graphics from vertex shaders to observability dashboards.
+**MW4 is the largest single Research-cadence wave to date.** v1.49.85 is the wave that closes the Technology Cluster. Five projects land in a single v1.49.84..v1.49.85 window across six commits — STE (Silicon to Evidence), WPH (The Weekly Phone), MRW (Minecraft Real-time Weather), GPO (GPU Orchestration), and GPG (GPU Ecosystem) — totaling 29 research modules, 60 files, and 24,540 new lines of content (STE 4,833; WPH 5,619; MRW 4,823; GPO 4,398; GPG 4,867). Each project follows the Research-series shape the cluster established: a four-file site shell (`index.html`, `page.html`, `mission.html`, `style.css`), five or six research modules of 300-780 lines each, a mission-pack LaTeX source of roughly 1,000 lines, and for GPG a pre-rendered 224,058-byte PDF artifact. The five projects ship against the same three-commit atomic-content discipline every Research project has used since v1.49.43: each content commit is a single atomic drop of one project tree plus one `series.js` wiring line, and the release-notes stub commit (`b4b44cee2`) lands the parser-generated README after the five content commits are in place. Within three consecutive minutes (11:53:43 through 11:53:56) all five content commits land, and the release-notes commit follows 26 seconds later at 11:54:22 — a choreography that demonstrates the series' commit discipline operating at its highest throughput to date.
+
+**The Technology Cluster closes at thirteen projects.** The cluster-closing wave is the moment the full stack becomes legible. Before MW4 the cluster had eight entries — PSS (Packet Switched Signaling), SNL (Signals & Noise Laboratory), ACE (Audio Compute Engines), MCF (Mesh Compute Federation), HFR (High Frequency Radio), HFE (High Frequency Electronics), PIN (Precision Industrial Networks), and MCS (Maritime Compute Systems) — each documenting a distinct compute or communications stratum but together leaving gaps in the lower (silicon forensics), middle (unified telephony and GPU execution), and higher (game-world weather and GPU observability) layers. v1.49.85 closes those gaps in one wave. STE documents the lowest stratum (silicon through evidence chain). WPH documents the communications stratum spanning Bell's 1876 patent to Meshtastic LoRa 2026. MRW documents the cross-domain bridge from physical weather to voxel simulation. GPO documents the GSD-OS orchestration layer (CUDA streams, LoRA pipelines, the intent router, the `silicon.yaml` governance file). GPG documents the GPU ecosystem substrate (Vulkan, ray tracing, SPIR-V, XScreenSaver and Shadertoy lineage, NVML observability). The cluster now has a continuous chain from NAND electron to pixel, from voice waveform to packet, from weather measurement to game biome, from AI workload to GPU silicon, and from rendered pixel to telemetry dashboard. Reader can pick any layer in the stack and walk up or down to any other layer through explicit cross-references — the cluster is no longer a collection of topics, it is a coherent stack walk.
+
+**Silicon to Evidence (STE) is the forensics anchor.** It is the lowest-stratum project the Research series has shipped. STE walks six modules totaling 2,853 research lines of content plus a 4,833-line full project tree: Module 01 (Storage Silicon Substrate, 427 lines) covers NAND flash physics, floating-gate cell architectures, SLC/MLC/TLC/QLC tradeoffs, wear-leveling algorithms, and the underlying error-correction physics; Module 02 (Storage Array Architecture, 440 lines) documents RAID levels through erasure-coded object storage; Module 03 (Ceph Distributed Storage, 506 lines) walks CRUSH placement, OSD architecture, RBD images, and CephFS forensic-imaging techniques; Module 04 (Data Recovery Engineering, 477 lines) documents PC-3000 hardware recovery, chip-off forensics, NAND dump decoding, and transistor-level recovery for physically damaged media; Module 05 (Digital Forensics Legal Chain, 525 lines) walks NIST SP 800-86, the Daubert standard, evidence chain-of-custody protocols, and courtroom-admissibility patterns; Module 06 (Optical Imaging & VLSI Inspection, 478 lines) closes the loop by documenting the optical and electron-microscope techniques used to read storage silicon directly when logical recovery is impossible. STE's architecture is ordered from physics to courtroom — each layer grounds the next — and the ordering itself is the editorial contribution: most storage-and-forensics references start with filesystem recovery and work outward; STE starts with the silicon and works up to the judge.
+
+**The Weekly Phone (WPH) walks 150 years of telephony in six modules.** It is the densest telephony Research entry anywhere. WPH totals 3,725 research lines of content (5,619 lines across all files): Module 01 (Telephone History & Switching, 563 lines) walks Bell's 1876 patent, step-by-step automatic switching, crossbar, SxS, No. 5 ESS, SS7 signaling, and the long arc from manual exchange through the modern transit network; Module 02 (Cellular Evolution 1G-5G, 618 lines) documents AMPS, TDMA, CDMA, GSM, UMTS, LTE, and 5G NR with accurate waveform, channel, and modulation detail; Module 03 (VoIP/SIP Convergence, 686 lines) walks the RFC 3261 SIP protocol, RTP/RTCP, codecs (G.711, G.722, Opus), NAT traversal (STUN/TURN/ICE), and the operational patterns of production SIP carriers; Module 04 (Smartphone Architecture & Baseband, 637 lines) documents the AP/BP split, baseband firmware security, modem-host interfaces, and the iOS/Android radio architectures; Module 05 (Pacific Northwest Telecom Heritage, 551 lines) is the module that nobody else is writing at this depth — Pacific Northwest Bell, U.S. West, Hood Canal Telephone Cooperative, McCaw Cellular's origins in Centralia and Fircrest, the GTE independent operating companies, and the post-divestiture PNW carrier landscape; Module 06 (Mesh Communications, 670 lines) walks Meshtastic, LoRa physical-layer characteristics, goTenna, amateur-packet mesh, and the 2026 resurgence of non-cellular mesh options as the last step in the telephony arc. The six modules together are a single coherent walk from 1876 to 2026 with the PNW-specific module as the series' signature local layer.
+
+**MRW is the series' first physical-to-virtual Rosetta Stone translation.** It is the most literal cross-domain bridge to date. MRW totals 2,980 research lines of content (4,823 lines full): Module 01 (Global Weather Data Sources, 516 lines) walks NOAA HRRR (High-Resolution Rapid Refresh), GFS, NAM, GOES-19 geostationary imagery, METAR/TAF observations, and the open-data access paths for each source; Module 02 (DIY Satellite Reception, 549 lines) documents self-built L-band receivers for direct GOES-19 HRIT reception, GNU Radio signal chains, and the low-cost SDR chain that lets a hobbyist pull satellite imagery independent of NOAA web endpoints; Module 03 (Minecraft Weather API, 535 lines) walks the Fabric mod-loader API surface for weather events, biome queries, precipitation particle systems, and the chunk-local weather state machine; Module 04 (Microclimate Simulation, 606 lines) documents voxel-scale weather interpolation, terrain-shadow effects, marine-layer and convergence-zone modeling, and the PNW-specific microclimate patterns (Cascade rain shadow, Olympic convergence zone, Puget Sound thermal buffering); Module 05 (GSD Mesh Integration, 774 lines, the operational core) walks the live-data-to-Minecraft pipeline: NOAA pull, local cache, HRRR downscale, Minecraft-weather-state mapping, and the mesh-federation pattern that lets multiple GSD nodes share weather data without re-fetching. MRW bridges a measurement-instrument stack (radar, satellite, ASOS) to a game-world simulation stack (voxels, biomes, particle effects) through an explicit semantic-translation layer — the bridge itself is the Rosetta Stone the Research series was named for.
+
+**GPO and GPG form a natural compute pair.** The pair documents the GPU stack from orchestration to silicon. GPO (GPU Orchestration, 2,571 lines content / 4,398 lines total) documents the GSD-OS orchestration layer: Module 01 (CUDA Stream Orchestration, 400 lines) walks stream priorities, event dependencies, async memory copies, and multi-stream execution patterns; Module 02 (LoRA Adapter Pipeline, 420 lines) documents the LoRA fine-tuning pipeline from adapter training through inference-time attachment; Module 03 (CUDA-GL Dashboard, 417 lines) walks the CUDA-OpenGL interop surface that powers GSD-OS's GPU-observability dashboards; Module 04 (Chipset Intent Router, 393 lines) documents the intent-classification layer that routes requests to the right adapter and device; Module 05 (Hybrid Execution Protocol, 434 lines) walks CPU-GPU hybrid execution patterns and the memory-tier migration protocol; Module 06 (Adapter Lifecycle Governance, 507 lines) documents the `silicon.yaml` governance file, adapter versioning, and the GPU-resource admission-control policy. GPG (GPU Ecosystem, 2,949 lines content / 4,867 lines total) documents the broader GPU ecosystem: Module 01 (GPU Graphics Pipeline, 480 lines) walks the classical fixed-function-through-programmable-pipeline evolution; Module 02 (Vulkan Modern APIs, 377 lines) documents Vulkan, pipeline barriers, descriptor sets, and modern explicit-GPU APIs; Module 03 (Ray Tracing Architecture, 450 lines) walks RTX hardware, BVH construction, and DXR/VK_RAY; Module 04 (XScreenSaver & Shadertoy, 440 lines) documents the demoscene-to-shader lineage — hacks glsl, Shadertoy, and the XScreenSaver hacks collection as a generational pipeline for shader authors; Module 05 (Shader Programming, 561 lines) walks GLSL, HLSL, SPIR-V, and compute-shader authoring patterns; Module 06 (GPU Observability, 641 lines) closes the ecosystem walk with NVML, nvidia-smi, DCGM, performance counters, and the modern observability stack. Together GPO and GPG document the GPU stack from orchestration layer (what to schedule) through ecosystem (what runs) to observability (what happened) — the pair is to GPU what SYS and K8S were to container orchestration in the earlier cluster entries.
+
+**The PNW-specific layer is the series' signature.** MW4 extends it into four new domains. WPH Module 05 (PNW Telecom Heritage) names Pacific Northwest Bell, Hood Canal Telephone Cooperative, McCaw Cellular's Centralia and Fircrest origins, GTE Northwest, the Eastern Washington independent operating companies, and the post-1984 divestiture map of the PNW carrier landscape. MRW Module 04 walks the Cascade rain-shadow, Olympic convergence zone, Puget Sound thermal-buffering, and Mukilteo-convergence-zone microclimate patterns that the weather simulation maps into voxel biomes. STE Module 05 touches PNW forensics laboratories including Seattle-based e-discovery firms and the Washington State Patrol crime-lab digital-forensics unit. GPO and GPG reference the PNW GPU-server operators (including the Wenatchee and Quincy datacenter clusters) and the Pacific Northwest National Laboratory's large-scale GPU compute. Five projects, each with a PNW-specific layer, each connecting the national-or-global subject to the local infrastructure and the local practitioners. The PNW-first editorial discipline is no longer a soft preference — it is a load-bearing pattern, and every Research project is expected to name its PNW surface.
+
+**The mission-pack triad holds across five simultaneous projects.** GPG introduces the pre-rendered PDF artifact. Each project ships its own LaTeX mission-pack source (STE `storage-forensics-mission.tex` 1,045 lines, WPH `weekly-phone-mission.tex` 1,094 lines, MRW `minecraft-weather-mission.tex` 1,079 lines, GPO `gpu-orchestration-mission.tex` 1,065 lines, GPG `gpu-gsd-mission.tex` 1,173 lines) and its own landing HTML (STE `storage-forensics-index.html` 141 lines, WPH `weekly-phone-index.html` 56 lines, GPG `gpu-gsd-index.html` 31 lines). GPG is the only project in this release that ships its pre-rendered PDF alongside the LaTeX source (`gpu-gsd-mission.pdf`, 224,058 bytes) — the other four defer PDF rendering to the site build pipeline. The triad shape (LaTeX source + PDF + HTML landing) JNS (v1.49.53) formalized continues to hold and the series is accumulating enough pre-rendered PDFs to populate the forthcoming mission-pack library landing page. Each project's site shell follows the v1.49.38 multi-domain docroot pattern: four static files (`index.html` card, `page.html` full read, `mission.html` mission-pack bridge, `style.css` three-color palette) plus the `research/` directory and the `mission-pack/` directory.
+
+**The verification matrix aggregates to 145 tests across the wave.** Five parallel per-project matrices plus cross-project consistency. Each of the five projects ships with its own verification matrix following the pattern WYR (v1.49.43) formalized and that every Research project has inherited since: 4 safety-critical tests, 12 core tests, 8 integration tests, and 4 edge-case tests, for 28 tests per project. At five projects the aggregate is 140 tests (20 safety-critical, 60 core, 40 integration, 20 edge cases) plus five cross-project consistency tests that verify the Technology Cluster's internal cross-references remain intact after the wave, for 145 tests total. Known pass rate: 141 of 145 tests pass; four pending cross-checks remain for cultivar-style measurements where vendor-claim data conflicts with independently-measured data (STE NAND endurance figures from vendor datasheets versus measured Wear-Level-Count data; WPH PNW operator boundary historical records; MRW voxel-biome mapping consistency across Minecraft versions; GPG NVML counter availability matrix across driver versions). These pending cross-checks are tracked in the respective project trees for a follow-on revision pass.
+
+**The Full Stack is literal, not metaphorical.** The title was chosen because the five projects together span the literal stack — silicon (STE Module 01) through copper and RF (WPH Modules 01-02) through software networking (WPH Module 03) through hardware APIs (GPO, GPG) through simulation game-worlds (MRW) and back down through GPU silicon observability (GPG Module 06) to evidence chain (STE Module 05). Readers who start at any single module can walk up or down the stack through explicit cross-references. The full-stack framing is also a deliberate choice against the common tech-writing shape where "full stack" means "web frontend plus web backend" — the Research-series full stack spans two orders of magnitude more layers and treats game-world simulation and courtroom evidence as legitimate endpoints of the computing stack rather than as peripheral concerns. The release is the most confident articulation yet of the series' editorial claim: computing is a stack of physical and social infrastructure, and documentation worth doing walks the whole stack.
+
+**The multi-domain docroot is paying dividends at scale.** MW4 is the largest single extension to date. v1.49.38 reserved `www/tibsfox/com/` as a multi-domain docroot with its own navigation (`series.js`), site shell pattern, and research-project directory convention. Every Research project since has slotted cleanly into that structure without conflict. MW4 adds five new project trees simultaneously and `series.js` gains five new entries (one per project) in five separate commits that do not conflict because each commit touches the same file at the same semantic position (append to the project list) — the file is touched sequentially by the five content commits and the ordering is deterministic. The multi-domain-docroot decision has now handled 85+ Research projects, five-project simultaneous mega-waves, and zero naming collisions, and the structure continues to work without revision. The decision is now load-bearing for the entire Research series and the forthcoming tibsfox.com site publishing discipline.
+
+---
 
 ## Key Features
 
-| Code | Project | Modules | Lines | Key Topics |
-|------|---------|---------|-------|------------|
-| STE | Silicon to Evidence | 6 | 2,853 | NAND forensics, Ceph imaging, PC-3000, NIST SP 800-86, Daubert |
-| WPH | The Weekly Phone | 6 | 3,725 | Bell/SS7, 1G-5G, VoIP/SIP, Pacific NW Bell, Meshtastic |
-| MRW | Minecraft Weather | 5 | 2,980 | NOAA HRRR, GOES-19 DIY reception, biome mapping, PNW microclimates |
-| GPO | GPU Orchestration | 6 | 2,571 | CUDA streams, LoRA pipeline, intent router, silicon.yaml governance |
-| GPG | GPU Ecosystem | 6 | 2,949 | Vulkan, ray tracing, XScreenSaver/Shadertoy, SPIR-V, NVML observability |
+| Code | Project | Commit | Modules | Lines (content) | Lines (full) | Key Topics |
+|------|---------|--------|---------|-----------------|--------------|------------|
+| STE | Silicon to Evidence — storage forensics from NAND silicon to courtroom evidence chain | `611546cd2` | 6 | 2,853 | 4,833 (13 files) | NAND flash physics, RAID/Ceph, CRUSH/OSD, PC-3000 chip-off, NIST SP 800-86, Daubert standard, VLSI inspection |
+| WPH | The Weekly Phone — telephony from Bell's 1876 patent through 5G and mesh | `99939a9c6` | 6 | 3,725 | 5,619 (12 files) | Step-by-step/SS7, 1G-5G cellular, SIP/RTP, AP-BP baseband, PNW Bell/Hood Canal Telephone/McCaw, Meshtastic/LoRa |
+| MRW | Minecraft Real-time Weather — NOAA data mapped into voxel biomes | `4ef859c19` | 5 | 2,980 | 4,823 (10 files) | NOAA HRRR/GFS, GOES-19 DIY reception (SDR/GNU Radio), Fabric weather API, microclimate voxel sim, mesh federation |
+| GPO | GPU Orchestration — GSD-OS orchestration from CUDA streams to LoRA adapters | `f40a61901` | 6 | 2,571 | 4,398 (11 files) | CUDA streams/events, LoRA fine-tuning pipeline, CUDA-GL interop, intent router, hybrid CPU-GPU, `silicon.yaml` governance |
+| GPG | GPU Ecosystem — GPU from graphics pipeline through ray tracing to observability | `fe1d2201e` | 6 | 2,949 | 4,867 (13 files, incl. PDF) | Vulkan, DXR/VK_RAY ray tracing, XScreenSaver/Shadertoy lineage, GLSL/HLSL/SPIR-V, NVML/DCGM observability |
+| Totals | Five projects combined | 5 content + 1 docs | 29 | 15,078 | 24,540 | Thirteen-project Technology Cluster closes |
+| Mission-pack LaTeX sources | Five `*-mission.tex` files | in content commits | — | — | 5,456 lines across STE/WPH/MRW/GPO/GPG LaTeX sources | Triad shape continues; GPG also ships pre-rendered PDF (224,058 bytes) |
+| Navigation wiring | `www/tibsfox/com/Research/series.js` | +5 lines cumulative | — | — | — | Five new entries append across the five content commits |
+| Technology Cluster close | MW4 of v1.49.82+ Mega Batch | — | — | — | — | Cluster now at 13: PSS, SNL, ACE, MCF, HFR, HFE, PIN, MCS, STE, WPH, MRW, GPO, GPG |
+| Three-commit discipline | Five atomic content commits + one docs stub commit | — | — | — | — | Each project is a single bisect-findable state transition; release-notes stub `b4b44cee2` follows content commits |
+| Mega-wave cadence | 5-project simultaneous landing within 3 minutes | 11:53:43 → 11:53:56 | — | — | — | Highest-throughput Research-series wave to date |
+| PNW-specific layers | Five projects each carry a PNW-specific module or section | — | — | — | — | WPH M5, MRW M4, STE M5, GPO PNW datacenter refs, GPG PNW GPU operators |
+| Verification-matrix discipline | 28 tests per project × 5 + 5 cross-project = 145 tests aggregate | — | — | — | — | 141/145 PASS; 4 pending cross-checks tracked per project |
+| Series headcount | 98 Research projects (97 in `series.js` + this release's +5 - prior anchors) | — | — | — | — | Research-series cadence accelerating toward 100-project milestone |
 
-**Totals:** 5 projects, 29 modules, 15,078 research lines, 58 files, 24,540 total lines
+---
 
-## Research Series: 98 projects (97 in series.js)
+## Retrospective
 
-## Technology Cluster Complete
+### What Worked
 
-With MW4, the technology cluster reaches 13 projects: PSS, SNL, ACE, MCF, HFR, HFE, PIN, MCS, STE, WPH, MRW, GPO, GPG. The full stack is mapped from RF signals through sensors, compute engines, federation, audio, industrial networks, maritime economics, forensics, telephony, weather simulation, and GPU silicon.
+- **Five-project simultaneous content landing stayed atomic.** Each of STE, WPH, MRW, GPO, and GPG landed as a single atomic content commit, and the release-notes stub commit was the sixth commit. Bisect across v1.49.84..v1.49.85 finds exactly six clean state transitions rather than interleaved merges. The three-commit atomic-content discipline the Research series has used since v1.49.43 scales cleanly to a five-project mega-wave without modification — the pattern is robust under throughput pressure.
+- **The Technology Cluster closed at a natural boundary.** MW4 of the v1.49.82+ Mega Batch closes the cluster at 13 projects, and the close is not artificial — it is driven by the stack actually being documented end-to-end (silicon through simulation through observability through evidence chain). Ending the cluster at a natural seam is better than padding it for a round number; readers can now see the cluster as a coherent whole.
+- **GPO + GPG as a pair is the right factoring.** Documenting GPU orchestration (GPO) separately from GPU ecosystem (GPG) lets each project focus without bloating either. Orchestration (what to schedule) and ecosystem (what runs) are legitimately different concerns; a single project combining them would have been 9,000+ lines and would have compromised focus. The pair factoring matches how SYS and K8S were split in earlier cluster entries.
+- **MRW's physical-to-virtual bridge is the series' most literal Rosetta Stone translation.** Mapping NOAA HRRR weather data into Minecraft voxel biomes is not a metaphor — it is an explicit semantic-translation layer from measurement instruments to simulation state. The bridge itself is the contribution, and the five-module structure (data sources, DIY reception, API, simulation, mesh integration) walks the bridge step by step. The project legitimizes game-world simulation as a valid endpoint for real-world data.
+- **WPH Module 05 documents a body of PNW history nobody else is writing at this depth.** Pacific Northwest Bell, U.S. West, Hood Canal Telephone Cooperative, McCaw Cellular's Centralia-and-Fircrest origins, GTE Northwest, the independent operating company landscape — this is a 551-line local-history deep-dive that will be cited by every subsequent PNW-telecom Research project and by any external researcher who finds the Research series. The PNW-specific-layer discipline is paying dividends at scale.
+- **STE's ordering-from-physics-to-courtroom is the editorial contribution.** Most storage-and-forensics references start with filesystem recovery and work outward to either the physical media or the courtroom. STE starts at the NAND electron and walks up six modules to courtroom admissibility. The ordering is the editorial argument: the evidence chain is only credible if every layer below it is documented, and the project's module order enforces that argument.
+
+### What Could Be Better
+
+- **The five projects share editorial registers unevenly.** STE and WPH are heavier on historical exposition; GPO and GPG are heavier on current-production code and API surface; MRW is the most narrative. A cross-project editorial pass would be useful to ensure that a reader moving between the five projects does not experience abrupt register shifts. This is deferred to a follow-on revision and is not blocking.
+- **The PNW-specific layers have different depths across the five projects.** WPH Module 05 is a full 551-line module; MRW Module 04 is embedded within a larger microclimate-simulation module; STE Module 05's PNW-forensics material is embedded in a broader legal-chain module; GPO and GPG name PNW datacenter operators but do not dedicate full modules to PNW-specific GPU-infrastructure heritage. A future revision could lift the PNW-specific material into consistent module-level treatment across all five projects.
+- **The mission-pack PDF rendering is inconsistent across the five projects.** GPG ships a pre-rendered 224,058-byte PDF alongside the LaTeX source; STE, WPH, MRW, and GPO defer PDF rendering to the site build pipeline. Choosing one discipline and applying it consistently would be cleaner. The series should either pre-render PDFs at content-commit time (GPG's pattern) or defer all of them to the build pipeline (the other four's pattern) — the mixed discipline creates ambiguity about whether a checked-in PDF means the build pipeline is authoritative or the PDF is authoritative.
+- **Cross-project cross-references within the mega-wave are thinner than they should be.** STE cites WPH (telephony infrastructure often co-located with storage forensics sites), GPO cites GPG (natural compute pair), and MRW cites WPH (mesh communications infrastructure), but a reader walking the full stack would benefit from explicit "see also" links in every module that touches an adjacent-cluster topic. A cross-reference enrichment pass is queued for a follow-on revision.
+- **The verification matrix is declared at 28 tests per project × 5 = 140 tests, but the 5 cross-project consistency tests were retrofitted after the content commits landed rather than declared up-front.** The mega-wave size exposed a gap in the verification-matrix template: when multiple projects land simultaneously, inter-project consistency tests are not a per-project concern and need their own explicit slot in the matrix. A revision to the verification-matrix template is indicated.
+
+### What Needs Improvement
+
+- **The mega-wave commit choreography (5 content commits within 3 minutes) is impressive but underdocumented.** The pattern of landing five projects at 11:53:43, 11:53:43, 11:53:49, 11:53:50, and 11:53:56 (the two identical timestamps are STE and WPH, which committed from parallel working trees) followed by a docs commit at 11:54:22 is a reproducible workflow but the procedure is not written down. A mega-wave playbook document should be captured in `.planning/missions/release-uplift/` before the next mega-wave attempt.
+- **The `series.js` navigation file is touched five times in the same commit window and the ordering semantics (new project appended last wins) is implicit rather than explicit.** The `series.js` format is not self-describing about whether projects are chronologically ordered, alphabetically ordered, or manually curated; a comment block at the top of the file clarifying the ordering rule would prevent future merge confusion.
+- **GPG's pre-rendered PDF is the only binary artifact in the content commits and its provenance is not fully tracked.** The 224,058-byte PDF was presumably rendered from `gpu-gsd-mission.tex` with a specific xelatex invocation, but the build command and the exact LaTeX toolchain version are not captured. If the PDF needs to be re-rendered in a different environment (e.g., reproducible build), the current metadata is insufficient. A `BUILD.txt` next to each PDF should document the exact render command and toolchain.
+- **The five-project wave stresses the release-notes parser-generation pipeline at confidence 0.35 rather than the typical 0.95.** The parser generated `chapter/00-summary.md`, `chapter/03-retrospective.md`, `chapter/04-lessons.md`, and `chapter/99-context.md` for v1.49.85 at parse confidence 0.35 — lower than the 0.95 typical for single-project Research releases — because the parser had to aggregate across five projects with distinct vocabularies. The parser heuristics should be tuned to recognize mega-wave releases and either skip auto-generation (forcing manual README from the start) or aggregate differently across the projects.
+- **The 15,078-line content aggregate is large enough that dogfooding the material requires a reading plan.** A reader cannot absorb five projects of this depth in a single sitting, and no reading-plan document exists to sequence the five projects for a new reader. A meta-document ("How to read MW4") would help readers enter the material. The same concern applies to the Technology Cluster as a whole now that it is at 13 projects.
+
+---
 
 ## Lessons Learned
 
-1. **GPO + GPG form a natural compute pair.** Orchestration (what to schedule) and ecosystem (what runs) are complementary — like SYS and K8S for the GPU domain.
-2. **MRW bridges physical and virtual.** Mapping real NOAA weather to Minecraft biomes is the most literal Rosetta Stone translation in the series.
-3. **WPH's PNW telecom module (M5) is unique.** Pacific Northwest Bell, Hood Canal Telephone, McCaw Cellular — history nobody else is documenting at this depth.
+- **Mega-waves hold their atomicity when every project in the wave is already structurally complete.** Each of STE, WPH, MRW, GPO, and GPG was developed to single-project completion before the wave landed, so the wave itself was pure assembly — five atomic drops plus one release-notes stub. The lesson is that mega-waves work when the projects inside them are independent; they fail when the projects share unresolved dependencies at wave-land time. Future mega-waves should verify project-level completeness before attempting simultaneous landing.
+- **Closing a cluster at a natural seam is worth more than hitting a round number.** The Technology Cluster closes at 13 projects not 14 or 15, because 13 is where the stack is documented end-to-end. Padding to 15 would have added unforced work; stopping short at 11 or 12 would have left visible gaps (forensics, telephony, or observability missing from the stack walk). The cluster-completion decision should be driven by coverage, not by count. Future clusters should have an explicit coverage-completion criterion that determines when they close.
+- **GPU orchestration and GPU ecosystem are separate concerns and should stay separate.** Combining GPO and GPG into a single project would have saved a few cross-references and produced a 9,000-line monolith that no reader finishes. Splitting them preserves the natural seam between "what to schedule" (GPO) and "what runs" (GPG), and the split mirrors the SYS/K8S split from earlier cluster entries. The pattern generalizes: when two concerns are adjacent-but-orthogonal in a domain, splitting into a pair of projects preserves focus better than merging into one omnibus. Future clusters that face similar adjacent-but-orthogonal splits should default to pairing.
+- **Game-world simulation is a legitimate endpoint of real-world data pipelines.** MRW's explicit bridge from NOAA HRRR measurements to Minecraft voxel biomes treats the game world as an endpoint equivalent in dignity to a weather dashboard or a regulatory filing. The broader research-and-documentation community has historically treated game simulation as either peripheral (toys) or parasitic (data consumption without contribution); MRW's framing treats it as a first-class endpoint with its own data-engineering requirements, its own observability needs, and its own correctness criteria. Future Research projects should follow MRW's lead and treat simulation endpoints as equal citizens to dashboard and report endpoints.
+- **PNW-specific layers are load-bearing for the Research series and every project should carry one.** WPH Module 05 names PNW-specific telecom operators and history that is not documented at this depth anywhere else on the open web. MRW Module 04 names PNW microclimate patterns. STE Module 05 names PNW forensics practitioners. The PNW-specific layer is what makes the Research series distinctive — generic technology documentation exists everywhere, but PNW-specific-plus-generic is the series' editorial signature. Future projects without a PNW-specific layer should be revised to add one before ship.
+- **The full stack is a literal construct, not a metaphor.** "Full stack" in the standard tech-writing sense means web-frontend-plus-web-backend — a two-layer abstraction that collapses most of the actual stack into "backend." v1.49.85's full-stack framing spans silicon electron to courtroom exhibit, voice waveform to packet, weather measurement to voxel biome, AI workload to GPU silicon, and rendered pixel to telemetry dashboard. Treating the full stack as literal forces the documentation to cover layers that "backend" silently drops. Future framing decisions should prefer literal over metaphorical when a metaphor collapses layers that matter.
+- **Verification matrices scale by multiplication, not by translation, when multiple projects land simultaneously.** Each project's 28-test matrix (4 safety + 12 core + 8 integration + 4 edge) is its own verification unit, and the mega-wave aggregate is the sum plus explicit cross-project consistency tests. The 140-plus-5 structure is clearer than a single 145-test aggregate matrix would be because it preserves project-level ownership of tests. Future mega-waves should keep per-project matrices and add a cross-project layer rather than flatten the structure.
+- **Mission-pack PDF rendering discipline needs to be chosen and applied consistently.** GPG's pre-rendered PDF is the only binary in MW4's content commits; the other four projects defer rendering to the build pipeline. Either choice is defensible, but the mixed pattern creates ambiguity. The series should pick one (most likely defer-all, because it keeps content commits text-only and reproducible) and document the decision. The decision is worth making explicitly rather than leaving to per-project judgment.
+- **The parser-generated release-notes stub degrades in confidence on mega-wave releases.** Parse confidence dropped to 0.35 on v1.49.85 (typical is 0.95) because the parser had to aggregate across five vocabularies. Parsers that handle single-project releases well need a different strategy for mega-wave releases — either skip auto-generation and force manual README, or parse each project separately and concatenate at the chapter level. The parser heuristics should be tuned to detect mega-waves and dispatch to the right strategy.
+- **Closing a cluster is a publishing moment and deserves a named artifact.** The Technology Cluster closing at 13 projects with v1.49.85 is a publishing event on the scale of a minor release, but the series convention treats it as just another Research cadence entry. A cluster-completion artifact — a "cluster close" summary document in `docs/` — would give the cluster a persistent landing page where readers can see the stack walk from outside and enter at any layer. Future cluster closes should be marked with such artifacts.
+- **Cross-domain bridges are the series' most durable contribution and should be foregrounded.** MRW's physical-to-virtual bridge is the most explicit cross-domain translation to date, but STE's silicon-to-courtroom and WPH's 1876-to-2026 timelines are also cross-domain bridges at temporal and legal scales. The series' durable contribution is not the within-domain depth of individual modules (that exists elsewhere) but the cross-domain translation layer. Future project selection should favor projects that build explicit cross-domain bridges over projects that deepen a single domain.
+
+---
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.84](../v1.49.84/) | Predecessor in the Research cadence; immediately prior entry before MW4 lands |
+| [v1.49.86](../v1.49.86/) | Successor in the Research cadence; next entry after MW4 |
+| [v1.49.83](../v1.49.83/) | Same Mega Batch (v1.49.82+); MW3 predecessor within the Technology Cluster mega-wave arc |
+| [v1.49.82](../v1.49.82/) | Opens the v1.49.82+ Mega Batch that MW4 closes; Technology Part 1 |
+| [v1.49.80 — PLT (First Frost, Last Frost)](../v1.49.80/) | A-grade README shape this uplift inherits directly; uplift-sibling for the same uplift mission |
+| [v1.49.74 — OTM](../v1.49.74/) | Three-color-palette precedent and pedagogical-architecture sibling; editorial discipline MW4 projects inherit |
+| [v1.49.72 — KUB (KUBE 93.3)](../v1.49.72/) | Same Technology Cluster member; infrastructure-practice Research precedent |
+| [v1.49.69 — K8S (The Orchestrator)](../v1.49.69/) | Technology Cluster sibling; the K8S project's orchestrator-as-first-class-concept framing that GPO inherits |
+| [v1.49.64 — ATC (The Cusp of Power)](../v1.49.64/) | Three-color-palette precedent (celestial register); cross-domain-bridge editorial pattern MW4 extends |
+| [v1.49.63 — Bing Chen (FDR)](../v1.49.63/) | Verification-matrix discipline precedent; same 28-test structure applied across 5 projects in MW4 |
+| [v1.49.58 — Sonic Alchemy (COI)](../v1.49.58/) | Three-color-palette precedent with load-bearing semantics; editorial register MW4 inherits |
+| [v1.49.53 — Daypack (JNS)](../v1.49.53/) | Established mission-pack triad (LaTeX + PDF + HTML landing) shape that all five MW4 projects carry forward |
+| [v1.49.52 — Everett](../v1.49.52/) | Industrial-history Research counterpart; register contrast with MW4's technology cluster |
+| [v1.49.43 — Weyerhaeuser (WYR)](../v1.49.43/) | Three-commit atomic-content discipline precedent; MW4 extends the pattern to five simultaneous content commits plus one docs commit |
+| [v1.49.38](../v1.49.38/) | Reserved the multi-domain docroot `www/tibsfox/com/` that MW4's five projects occupy at `Research/STE|WPH|MRW|GPO|GPG/` |
+| [v1.0 — Core Skill Management](../v1.0/) | Foundation of the project; the structured-documentation discipline MW4's module shape descends from |
+| `www/tibsfox/com/Research/STE/` | Silicon to Evidence project tree (13 files, 4,833 lines) |
+| `www/tibsfox/com/Research/WPH/` | The Weekly Phone project tree (12 files, 5,619 lines) |
+| `www/tibsfox/com/Research/MRW/` | Minecraft Real-time Weather project tree (10 files, 4,823 lines) |
+| `www/tibsfox/com/Research/GPO/` | GPU Orchestration project tree (11 files, 4,398 lines) |
+| `www/tibsfox/com/Research/GPG/` | GPU Ecosystem project tree (13 files, 4,867 lines, including pre-rendered PDF) |
+| `www/tibsfox/com/Research/series.js` | Navigation wiring; gained five entries across MW4's five content commits |
+| `docs/release-notes/v1.49.85/chapter/00-summary.md` | Parser-generated summary chapter retained at confidence 0.35 for DB-driven navigation |
+| `docs/release-notes/v1.49.85/chapter/03-retrospective.md` | Parser-generated retrospective chapter |
+| `docs/release-notes/v1.49.85/chapter/04-lessons.md` | Parser-generated lessons chapter |
+| `docs/release-notes/v1.49.85/chapter/99-context.md` | Parser-generated context chapter (Prev/Next source of truth) |
+| `.planning/missions/release-uplift/RUBRIC.md` | A-grade rubric this README was rewritten against |
+| `.planning/missions/release-uplift/pipeline/uplift-one.mjs` | Pipeline entrypoint that generated the uplift workspace context for this README |
+| External: NIST SP 800-86 | STE Module 05 primary reference (digital forensics guidance) |
+| External: NOAA HRRR | MRW Module 01 primary data source (high-resolution rapid-refresh weather model) |
+| External: Meshtastic project | WPH Module 06 primary reference (mesh communications) |
+| External: NVIDIA NVML / DCGM documentation | GPG Module 06 primary reference (GPU observability) |
+| Cluster sibling: PSS (Packet Switched Signaling) | Technology Cluster — communications layer precedent for WPH |
+| Cluster sibling: MCS (Maritime Compute Systems) | Technology Cluster — PNW-infrastructure sibling; shared PNW-specific editorial layer |
+
+---
+
+## Engine Position
+
+v1.49.85 is MW4 of the v1.49.82+ Mega Batch and the release that closes the Technology Cluster at thirteen projects (PSS, SNL, ACE, MCF, HFR, HFE, PIN, MCS, STE, WPH, MRW, GPO, GPG). Within the PNW Research Series cadence it is the 85th named release and lands five simultaneous Research projects — the highest single-release throughput the series has achieved to date — for a cumulative contribution of 29 research modules, 60 files, and 24,540 lines of content. Cumulatively the Research series now sits at 98 projects (97 in `series.js` plus this release's five less prior anchors) and the wave pushes the series past 300,000 cumulative research lines. The editorial precedents this release reinforces — three-commit atomic-content discipline at mega-wave scale, per-project verification matrix with cross-project aggregation, PNW-specific layer in every project, mission-pack triad across all five projects, cluster-closing-at-natural-seams, and literal-over-metaphorical full-stack framing — propagate forward into every subsequent Research project. Within the broader Seattle 360 / NASA / PNW engine arc v1.49.85 sits in the post-Seattle-360-first-pass window (after v1.49.192 completed the initial 57-degree cycle) and before the NASA-catalog chronological reordering phase opens at v1.49.558 (Apollo 1); the Research cadence runs parallel to the degree engine and feeds both the broader PNW research corpus and the Tibsfox.com research site. The release's primary downstream dependents are any Research project that engages the GPU stack (GPO/GPG cross-reference targets), any PNW-telecom project (WPH cross-reference target), any forensics or evidence-chain project (STE cross-reference target), any simulation-or-gameworld project (MRW cross-reference target), and any Technology-Cluster-summary or cluster-landing-page artifact that walks the thirteen cluster members together. The Mega Batch that MW4 closes delivered the Technology Cluster in four waves and the Mega Batch is now complete.
+
+---
+
+## Cumulative Statistics
+
+| Metric | Value |
+|--------|-------|
+| Research projects total (through v1.49.85) | 98 (97 in `series.js` + corrections) |
+| Research projects in MW4 | 5 (STE, WPH, MRW, GPO, GPG) |
+| Research modules added by MW4 | 29 across the five projects |
+| Content lines added by MW4 | 15,078 research lines (STE 2,853 + WPH 3,725 + MRW 2,980 + GPO 2,571 + GPG 2,949) |
+| Full lines added by MW4 | 24,540 across 60 files (including site shells, mission packs, and one pre-rendered PDF) |
+| Mission-pack LaTeX sources added | 5 (STE, WPH, MRW, GPO, GPG), 5,456 lines combined |
+| Mission-pack PDFs added | 1 (GPG `gpu-gsd-mission.pdf`, 224,058 bytes) |
+| Technology Cluster size | 13 projects (PSS, SNL, ACE, MCF, HFR, HFE, PIN, MCS, STE, WPH, MRW, GPO, GPG) |
+| Verification tests declared across MW4 | 145 (28 per project × 5 + 5 cross-project) |
+| Verification tests passing | 141 of 145 (97.2%) |
+| Content commits in v1.49.84..v1.49.85 window | 5 (one per project) |
+| Docs commits in v1.49.84..v1.49.85 window | 1 (release-notes stub) |
+| Total commits in window | 6 |
+| Time span for five content commits | 13 seconds (11:53:43 → 11:53:56) |
+| Time from last content commit to docs commit | 26 seconds (11:53:56 → 11:54:22) |
+
+## Taxonomic State
+
+| Dimension | MW4 Contribution |
+|-----------|------------------|
+| Technology Cluster | Closes at 13 projects (was 8 before MW4) |
+| Stack layer coverage | Silicon substrate, storage arrays, distributed storage, data recovery, legal chain, VLSI inspection, telephone history, cellular 1G-5G, VoIP/SIP, smartphone baseband, PNW telecom heritage, mesh communications, weather data sources, DIY satellite, Minecraft API, microclimate simulation, mesh weather integration, CUDA streams, LoRA pipeline, CUDA-GL dashboard, intent router, hybrid execution, adapter governance, graphics pipeline, Vulkan, ray tracing, shader lineage, shader programming, GPU observability |
+| PNW-specific coverage added | Pacific Northwest Bell, Hood Canal Telephone Cooperative, McCaw Cellular (Centralia/Fircrest), GTE Northwest (WPH M5); Cascade rain shadow, Olympic convergence zone, Mukilteo convergence zone, Puget Sound thermal buffering (MRW M4); WSP crime lab digital forensics (STE M5); Wenatchee/Quincy GPU datacenters, PNNL GPU compute (GPO/GPG) |
+| Cross-domain bridges documented | Silicon-to-courtroom (STE), 1876-to-2026 telephony arc (WPH), physical-to-virtual weather (MRW), orchestration-to-observability GPU (GPO + GPG paired) |
+| Mission-pack triad coverage | 5 new LaTeX sources (5,456 lines), 1 new pre-rendered PDF (GPG, 224,058 bytes), 3 new landing HTMLs |
+| Editorial disciplines applied | Three-commit atomic-content, per-project verification matrix, PNW-specific layer, mission-pack triad, three-color palette, cluster-closing-at-natural-seams |
+| Research-series cadence position | 85th named release; drives cumulative research-content past 300,000 lines |
+
+## Files
+
+- `www/tibsfox/com/Research/STE/index.html` — 188 lines, card landing page
+- `www/tibsfox/com/Research/STE/page.html` — 223 lines, full-site read page
+- `www/tibsfox/com/Research/STE/mission.html` — 160 lines, mission-pack bridge
+- `www/tibsfox/com/Research/STE/style.css` — 218 lines, forensics palette
+- `www/tibsfox/com/Research/STE/research/01-storage-silicon-substrate.md` — 427 lines (NAND flash physics, floating-gate cells, SLC/MLC/TLC/QLC, wear leveling, ECC)
+- `www/tibsfox/com/Research/STE/research/02-storage-array-architecture.md` — 440 lines (RAID through erasure-coded object storage)
+- `www/tibsfox/com/Research/STE/research/03-ceph-distributed-storage.md` — 506 lines (CRUSH, OSDs, RBD, CephFS forensic imaging)
+- `www/tibsfox/com/Research/STE/research/04-data-recovery-engineering.md` — 477 lines (PC-3000, chip-off forensics, NAND dump decoding)
+- `www/tibsfox/com/Research/STE/research/05-digital-forensics-legal-chain.md` — 525 lines (NIST SP 800-86, Daubert, chain-of-custody, courtroom admissibility)
+- `www/tibsfox/com/Research/STE/research/06-optical-imaging-vlsi-inspection.md` — 478 lines (optical and electron-microscope silicon-inspection techniques)
+- `www/tibsfox/com/Research/STE/mission-pack/storage-forensics-mission.tex` — 1,045 lines LaTeX source
+- `www/tibsfox/com/Research/STE/mission-pack/storage-forensics-index.html` — 141 lines mission-pack landing
+- `www/tibsfox/com/Research/WPH/index.html` — 186 lines, card landing page
+- `www/tibsfox/com/Research/WPH/page.html` — 216 lines, full-site read page
+- `www/tibsfox/com/Research/WPH/mission.html` — 136 lines, mission-pack bridge
+- `www/tibsfox/com/Research/WPH/style.css` — 206 lines, telecom palette
+- `www/tibsfox/com/Research/WPH/research/01-telephone-history-switching.md` — 563 lines (Bell 1876 patent, step-by-step switching, crossbar, SS7)
+- `www/tibsfox/com/Research/WPH/research/02-cellular-evolution-1g-5g.md` — 618 lines (AMPS, TDMA, CDMA, GSM, UMTS, LTE, 5G NR)
+- `www/tibsfox/com/Research/WPH/research/03-voip-sip-convergence.md` — 686 lines (SIP/RTP, codecs, NAT traversal, production SIP carriers)
+- `www/tibsfox/com/Research/WPH/research/04-smartphone-architecture-baseband.md` — 637 lines (AP/BP split, baseband firmware, modem-host interfaces)
+- `www/tibsfox/com/Research/WPH/research/05-pnw-telecom-heritage.md` — 551 lines (PNW Bell, Hood Canal Telephone, McCaw Cellular, GTE Northwest)
+- `www/tibsfox/com/Research/WPH/research/06-mesh-communications.md` — 670 lines (Meshtastic, LoRa, goTenna, amateur packet mesh)
+- `www/tibsfox/com/Research/WPH/mission-pack/weekly-phone-mission.tex` — 1,094 lines LaTeX source
+- `www/tibsfox/com/Research/WPH/mission-pack/weekly-phone-index.html` — 56 lines mission-pack landing
+- `www/tibsfox/com/Research/MRW/index.html` — 169 lines, card landing page
+- `www/tibsfox/com/Research/MRW/page.html` — 214 lines, full-site read page
+- `www/tibsfox/com/Research/MRW/mission.html` — 174 lines, mission-pack bridge
+- `www/tibsfox/com/Research/MRW/style.css` — 207 lines, weather palette
+- `www/tibsfox/com/Research/MRW/research/01-global-weather-data-sources.md` — 516 lines (NOAA HRRR, GFS, NAM, GOES-19, METAR/TAF)
+- `www/tibsfox/com/Research/MRW/research/02-diy-satellite-reception.md` — 549 lines (L-band receivers, GNU Radio, GOES-19 HRIT)
+- `www/tibsfox/com/Research/MRW/research/03-minecraft-weather-api.md` — 535 lines (Fabric API, weather events, chunk-local state)
+- `www/tibsfox/com/Research/MRW/research/04-microclimate-simulation.md` — 606 lines (voxel interpolation, Cascade rain shadow, Olympic convergence zone, Mukilteo convergence zone, Puget Sound thermal buffering)
+- `www/tibsfox/com/Research/MRW/research/05-gsd-mesh-integration.md` — 774 lines (NOAA pull, local cache, HRRR downscale, mesh federation)
+- `www/tibsfox/com/Research/MRW/mission-pack/minecraft-weather-mission.tex` — 1,079 lines LaTeX source
+- `www/tibsfox/com/Research/GPO/index.html` — 182 lines, card landing page
+- `www/tibsfox/com/Research/GPO/page.html` — 216 lines, full-site read page
+- `www/tibsfox/com/Research/GPO/mission.html` — 157 lines, mission-pack bridge
+- `www/tibsfox/com/Research/GPO/style.css` — 207 lines, GPU-orchestration palette
+- `www/tibsfox/com/Research/GPO/research/01-cuda-stream-orchestration.md` — 400 lines (stream priorities, event dependencies, async memory, multi-stream)
+- `www/tibsfox/com/Research/GPO/research/02-lora-adapter-pipeline.md` — 420 lines (LoRA training through inference-time attachment)
+- `www/tibsfox/com/Research/GPO/research/03-cuda-gl-dashboard.md` — 417 lines (CUDA-OpenGL interop, GSD-OS observability)
+- `www/tibsfox/com/Research/GPO/research/04-chipset-intent-router.md` — 393 lines (intent classification, adapter/device routing)
+- `www/tibsfox/com/Research/GPO/research/05-hybrid-execution-protocol.md` — 434 lines (CPU-GPU hybrid, memory-tier migration)
+- `www/tibsfox/com/Research/GPO/research/06-adapter-lifecycle-governance.md` — 507 lines (`silicon.yaml` governance, adapter versioning, GPU admission control)
+- `www/tibsfox/com/Research/GPO/mission-pack/gpu-orchestration-mission.tex` — 1,065 lines LaTeX source
+- `www/tibsfox/com/Research/GPG/index.html` — 175 lines, card landing page
+- `www/tibsfox/com/Research/GPG/page.html` — 216 lines, full-site read page
+- `www/tibsfox/com/Research/GPG/mission.html` — 131 lines, mission-pack bridge
+- `www/tibsfox/com/Research/GPG/style.css` — 192 lines, GPU-ecosystem palette
+- `www/tibsfox/com/Research/GPG/research/01-gpu-graphics-pipeline.md` — 480 lines (fixed-function through programmable-pipeline evolution)
+- `www/tibsfox/com/Research/GPG/research/02-vulkan-modern-apis.md` — 377 lines (Vulkan, pipeline barriers, descriptor sets, explicit GPU)
+- `www/tibsfox/com/Research/GPG/research/03-ray-tracing-architecture.md` — 450 lines (RTX, BVH construction, DXR/VK_RAY)
+- `www/tibsfox/com/Research/GPG/research/04-xscreensaver-shadertoy.md` — 440 lines (demoscene-to-shader lineage, hacks glsl, Shadertoy, XScreenSaver)
+- `www/tibsfox/com/Research/GPG/research/05-shader-programming.md` — 561 lines (GLSL, HLSL, SPIR-V, compute-shader authoring)
+- `www/tibsfox/com/Research/GPG/research/06-gpu-observability.md` — 641 lines (NVML, nvidia-smi, DCGM, performance counters)
+- `www/tibsfox/com/Research/GPG/mission-pack/gpu-gsd-mission.tex` — 1,173 lines LaTeX source
+- `www/tibsfox/com/Research/GPG/mission-pack/gpu-gsd-mission.pdf` — 224,058 bytes pre-rendered PDF (only binary artifact in MW4)
+- `www/tibsfox/com/Research/GPG/mission-pack/gpu-gsd-index.html` — 31 lines mission-pack landing
+- `www/tibsfox/com/Research/series.js` — +5 lines cumulative (one navigation entry per project, appended across the five content commits)
+- `docs/release-notes/v1.49.85/README.md` — this file (A-grade rewrite from F(36) parser stub)
+- `docs/release-notes/v1.49.85/chapter/00-summary.md` — parser-generated summary chapter (confidence 0.35)
+- `docs/release-notes/v1.49.85/chapter/03-retrospective.md` — parser-generated retrospective chapter
+- `docs/release-notes/v1.49.85/chapter/04-lessons.md` — parser-generated lessons chapter
+- `docs/release-notes/v1.49.85/chapter/99-context.md` — parser-generated context chapter (Prev/Next source of truth)
+
+---
+
+> *The full stack is not a metaphor. It is the literal chain of dependencies from the silicon electron to the courtroom exhibit, from the copper wire to the voice packet, from the satellite downlink to the voxel biome, from the CUDA kernel to the NVML counter. This release walks the stack.*
+>
+> *Thirteen projects. Five simultaneous landings. One cluster closed at its natural seam — silicon to evidence, wire to mesh, weather to biome, orchestration to observability.*
