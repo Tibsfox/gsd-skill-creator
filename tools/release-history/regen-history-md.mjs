@@ -33,7 +33,7 @@ async function main() {
   const { rows } = await client.query(`
     SELECT r.version, r.name,
            to_char(r.shipped_at, 'YYYY-MM-DD') AS shipped,
-           r.phases, r.plans,
+           r.commits, r.files_changed, r.phases, r.plans,
            r.has_retrospective,
            r.source_readme,
            COALESCE(lc.n, 0)::int AS lesson_count,
@@ -66,14 +66,14 @@ async function main() {
     '',
     `${rows.length} milestones shipped across the ${oldest} → ${newest} arc. The table below lists every shipped release, newest first.`,
     '',
-    'Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. The `Retro` column shows whether a retrospective was captured (`✓` when present). `Lessons` counts extracted retrospective lessons, with `applied/total` when any are known to be applied in a later release. See `.planning/roadmap/RETROSPECTIVE-TRACKER.md` (private) for the full backlog.',
+    'Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don\'t have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed.',
     '',
     `**Snapshot:** ${rows.length} releases · ${retroCount} with retrospectives · `
       + `${rows.filter(r => r.lesson_count > 0).length} with extracted lessons · `
       + `source of truth: Postgres \`release_history\` schema, regenerated via \`tools/release-history/regen-history-md.mjs\`.`,
     '',
-    '| Version | Name | Shipped | Phases | Plans | Retro | Lessons | Notes |',
-    '|---------|------|---------|--------|-------|-------|---------|-------|',
+    '| Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Notes |',
+    '|---------|------|---------|---------|--------|-------|-------|---------|-------|',
   ];
 
   // Track any drift between DB claims and actual chapter files on disk.
@@ -113,7 +113,7 @@ async function main() {
     }
 
     const notes = isGhost ? '_no original README, chapter stub only_' : '';
-    return `| ${versionCell} | ${esc(r.name) || '—'} | ${r.shipped || '—'} | ${r.phases ?? '—'} | ${r.plans ?? '—'} | ${retroCell} | ${lessonsCell} | ${notes} |`;
+    return `| ${versionCell} | ${esc(r.name) || '—'} | ${r.shipped || '—'} | ${r.commits ?? '—'} | ${r.phases ?? '—'} | ${r.plans ?? '—'} | ${retroCell} | ${lessonsCell} | ${notes} |`;
   });
 
   // Surface drift in the summary line so it doesn't hide
