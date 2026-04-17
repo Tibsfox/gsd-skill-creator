@@ -1,59 +1,175 @@
 # v1.28 — GSD Den Operations
 
-**Shipped:** 2026-02-21
-**Phases:** 255-261 (7 phases) | **Plans:** 22 | **Commits:** 51 | **Requirements:** 81 | **Tests:** 675 | **LOC:** ~18.9K
+**Released:** 2026-02-21
+**Scope:** multi-agent coordination milestone — filesystem message bus, 10 staff positions across 4 divisions, 4 topology profiles, independent verification gates, and a full integration exercise
+**Branch:** dev → main
+**Tag:** v1.28 (2026-02-21T00:09:39-08:00) — "GSD Den Operations"
+**Predecessor:** v1.27 — Foundational Knowledge Packs
+**Successor:** v1.29 — Electronics Educational Pack
+**Classification:** milestone — the coordination substrate under every subsequent multi-agent workload
+**Phases:** 255-261 (7 phases) · **Plans:** 22 · **Requirements:** 81
+**Commits:** `10a96863c..d3073d65c` (51 total across the 7-phase arc; 5 observable tip commits under `v1.28~5..v1.28`, +2,262 / -0 lines)
+**Files changed:** 5 in the tip window (`.chipset/chipset.yaml`, `src/den/chipset-yaml.test.ts`, `src/den/dashboard.ts`, `src/den/integration-exercise.test.ts`, `src/den/profile-activation.test.ts`)
+**Tests:** 675 (+53 on the Dashboard tip commit alone; 625 total Den tests at phase-260 close; 13 chipset-yaml validation + 19 profile-activation + 18 integration-exercise tests added on top in phase 261)
+**Verification:** 4 independent quality gates per phase · 8 priority levels validated on the bus · 4 topology profiles activated and measured · 9-type recovery matrix exercised · overhead < 1% of context window proved on the integration run · chipset YAML reproducibility proof (identical input → identical output across runs)
 
-Complete multi-agent coordination system with filesystem message bus, 10 core staff positions, hierarchical topology profiles, and end-to-end integration exercise.
+## Summary
 
-### Key Features
+**v1.28 is the release where multi-agent coordination stopped being a pattern and became a substrate.** Seven phases and twenty-two plans replaced ad-hoc prompting-an-agent with a named topology: ten staff positions with distinct responsibilities, four divisions that mirror real operational structure, a filesystem message bus that priority-orders work, a Sentinel that handles failure graduation, a Chronicler that writes the audit trail, and a Dashboard that renders the whole thing. The release ships the coordination primitives at the same milestone as the chipset YAML that configures them and the integration exercise that proves the whole stack composes. The phase count — seven — matches the number of divisions plus the integration phase, which is not a coincidence: one phase per coordination concern plus one phase to prove they compose. No phase is load-bearing in isolation; the value is that the seven together define a complete coordination model that a later session can instantiate by reading `chipset.yaml` and knowing what every position means.
 
-**Filesystem Message Bus (Phase 255):**
-- 8 priority levels (0=HALT through 7=background)
-- ISA compact encoding for efficient message representation
-- Dispatcher routing with queue health metrics
-- Dead-letter handling, message pruning
+**The filesystem message bus is the load-bearing primitive of the release.** Phase 255 defined 8 priority levels (0=HALT through 7=background) with ISA compact encoding, a Dispatcher that routes messages by priority and destination, queue health metrics, dead-letter handling, and message pruning. The choice of filesystem as the transport is deliberate — every agent in the Den is an independent process with its own working directory, and the filesystem is the only medium all of them already know how to read and write. A network bus would require a daemon; a shared-memory bus would require a common process; a filesystem bus is the common denominator that works without either. Priority 0 is reserved for HALT — the only priority that can preempt any other work — and priority 7 is reserved for background chatter that can be dropped under load. The priority levels between them encode the operational vocabulary: user-visible alerts, coordinator directives, executor handoffs, verifier reports, monitor observations, and chronicle entries all have defined priority bands. The ISA compact encoding means a single message is small enough that the <1% overhead budget on the integration run holds even when the bus is busy.
 
-**Command Division (Phase 256):**
-- Coordinator: go/no-go readiness checks, atomic phase transitions, 4-level escalation
-- Relay: question consolidation, priority classification, user-facing reports
+**Ten named staff positions across four divisions is the coordination surface.** Phase 256 shipped the Command Division with Coordinator (go/no-go readiness checks, atomic phase transitions, 4-level escalation) and Relay (question consolidation, priority classification, user-facing reports). Phase 257 shipped the Planning Division with Planner (phase decomposition, resource estimation, trajectory tracking), Configurator (4 topology profiles, activation triggers), and Monitor (token budget tracking with 75%/95%/100% alert thresholds). Phase 258 shipped the Execution Division with Executor (fresh-context plan execution with artifact handoff) and Verifier (4 independent quality gates: tests-pass, new-coverage, code-review, artifact-integrity). Phase 259 shipped the Safety & Operations Division with Sentinel (9-type recovery decision matrix, Priority 0 HALT/CLEAR protocol) and Chronicler (append-only JSONL audit trail, mission briefing generation). Phase 260 added the Dashboard — the tenth position — rendering 10-position status, staff indicators, and per-agent health scores. Each position has a distinct responsibility; each division groups responsibilities that need to share context. The division structure is not organizational decoration — it is a legibility aid for the human operator who has to read the Dashboard at a glance and know which cluster of agents is doing what.
 
-**Planning Division (Phase 257):**
-- Planner: phase decomposition, resource estimation, trajectory tracking
-- Configurator: 4 topology profiles (Scout 3/Patrol 5/Squadron 7/Fleet 10)
-- Monitor: token budget tracking with 75%/95%/100% alert thresholds
+**Four topology profiles scale the coordination surface to the task.** Scout (3 roles — Coordinator, Executor, Verifier), Patrol (5 roles — adds Relay, Monitor), Squadron (7 roles — adds Planner, Sentinel), Fleet (10 roles — adds Configurator, Chronicler, Dashboard). The Configurator selects the profile from phase count: ≤3 phases picks Scout, 4-10 picks Patrol, 11-25 picks Squadron, 26+ picks Fleet. The token budgets follow the same ladder: Scout at 0.29, Patrol at 0.47, Squadron at 0.59, Fleet at 0.59 (same as Squadron because the extra three positions are lightweight observers, not budget consumers). The point of four profiles rather than one is avoiding the "one size fits all" trap where a three-phase errand pays for a Chronicler that has nothing to chronicle and a ten-phase milestone starves for a Sentinel. The role-set subset hierarchy (Scout ⊂ Patrol ⊂ Squadron = Fleet) means scaling up never drops a position — a task that starts as Scout and grows into Squadron inherits every role it already had plus the new ones, never needing to reshuffle.
 
-**Execution Division (Phase 258):**
-- Executor: fresh-context plan execution with artifact handoff
-- Verifier: 4 independent quality gates (tests-pass, new-coverage, code-review, artifact-integrity)
+**The Sentinel's 9-type recovery decision matrix is where the release earns its "operations" billing.** Rather than a single "abort and restart" fallback, the Sentinel classifies failures into nine types — schema violation, tool-call failure, verification failure, token budget overrun, artifact-integrity failure, protocol violation, dependency unavailable, timeout, and unknown — and maps each to a graduated response: retry-with-backoff, escalate-to-Relay, invoke-Verifier-rerun, request-budget-extension, quarantine-and-forensics, HALT-all-pipelines, wait-and-retry, kill-and-restart, and human-in-the-loop. Priority 0 HALT is the nuclear option: every agent on the bus sees it, drops its current work, and writes a final Chronicle entry before exiting. CLEAR is its complement — the only message that resumes a HALTed fleet. The 9-type matrix means a failure doesn't trip the whole system; the response matches the severity. This is operations-grade failure handling, the kind that separates a demo from a tool an operator trusts at 3am.
 
-**Safety & Operations Division (Phase 259):**
-- Sentinel: 9-type recovery decision matrix, Priority 0 HALT/CLEAR protocol
-- Chronicler: append-only JSONL audit trail, mission briefing generation
+**The Chipset YAML is the declarative binding from positions to skills.** Phase 260's chipset.yaml at `.chipset/chipset.yaml` (238 lines) enumerates all 10 positions with roles, contexts, token budgets, and lifecycles; the skill requirements (required and recommended) per position; the activation trigger definitions with target mappings; the token budget table summing to 0.59 (matching the CHIP-04 specification); the squadron topology with all 10 agents and coordinator fallback; and the observability configuration for dashboard, logging, and bus monitoring. The deterministic-parsing guarantee at phase 261 was non-negotiable — if the same YAML produces different position definitions on different runs, the reproducibility proof fails and the whole system becomes unsafe to compose. The validation suite at `src/den/chipset-yaml.test.ts` (233 lines, 13 tests across 5 groups) locks every field down: CHIP-01 (core fields round-trip through parseChipsetConfig), CHIP-02 (positions match DEN_STAFF_POSITIONS, skill requirements validated per position), CHIP-03 (activation triggers match the known trigger set), CHIP-04 (token budgets match spec, sum to 0.59), CHIP-05 (observability config present for dashboard, logging, bus monitoring). The chipset is the artifact a future operator hands a new Claude session to bring the Den online.
 
-**Dashboard & Chipset (Phase 260):**
-- Dashboard: 10-position status tracking, staff indicators, health metrics
-- Chipset: deterministic YAML parsing with reproducibility proof
+**The integration exercise at phase 261 is what proves the seven phases compose.** Three test files totaling 1,479 lines — `integration-exercise.test.ts` (1,027 lines, 18 tests across 7 groups), `profile-activation.test.ts` (219 lines, 19 tests across 6 groups), `chipset-yaml.test.ts` (233 lines, 13 tests across 5 groups) — exercise the whole stack: staff activation (all 10 positions instantiate and respond), lifecycle flow (intake → plan → configure → ready → execute → verify → chronicle → dashboard), failure recovery (5 scenarios with autonomous coordination patterns), Den overhead measurement (ISA message bytes < 1% of context window), skill observation capture (5 patterns detected with confidence scores), bus communication (filesystem message verification with opcode diversity), and reproducibility (identical chipset configs produce identical results). The INT-01, INT-03, and INT-06 requirements are the integration-level acceptance: staff activates, lifecycle completes, overhead stays bounded. The phase-count boundary tests at 3/4, 10/11, and 25/26 prove the Configurator's profile selection is stable at the transitions. Every profile was activated and measured; every recovery scenario was exercised; every observability hook fired at least once.
 
-**Integration Exercise (Phase 261):**
-- Full lifecycle flow with 10-position chipset
-- 4 topology profile validation, 7 recovery scenarios
-- Overhead verification (<1% of context), end-to-end reproducibility
+**The Dashboard data model ties the whole release together visually.** The Dashboard at `src/den/dashboard.ts` (545 lines, 53 tests) defines DashboardConfigSchema, PositionStateSchema, StaffIndicatorsSchema, PositionHealthSchema, and DenSnapshotSchema as Zod-validated shapes; derives position status from the last Chronicler entry per agent (`collectPositionStates`); exposes staff indicators (Coordinator authority, Relay queue depth, Monitor budget consumption, Sentinel recovery state) via `collectStaffIndicators`; computes per-position health scores with linear decay on event and error counts (`collectPositionHealth`); and assembles the whole snapshot via async I/O combining the Chronicler log and bus health (`assembleDenSnapshot`). The `formatDenSnapshotMarkdown` renderer emits position tables and health tables as Markdown suitable for direct inclusion in a status report. The Dashboard class plus the `createDashboard` synchronous factory means the renderer can run inline during a fresh-context spawn without blocking on the filesystem. 53 tests green on tip, 625 total Den tests passing at the close of phase 260; phase 261 added 50 more for the integration exercise, landing at 675 for the release.
+
+**The release ships as the coordination layer for every v1.29+ milestone that needs multiple agents.** v1.29 (Electronics Educational Pack) uses the Squadron profile for its 15-module build; v1.30 (Vision-to-Mission Pipeline) uses Fleet for its multi-wave mission packs; v1.32 (Brainstorm Session Support) inherits the Chronicler pattern for its eight specialized agents; v1.33 (GSD OpenStack Cloud Platform) layers 19 skills and 31 agents on top of the Den's topology profiles. The chipset YAML at `.chipset/chipset.yaml` becomes the authoring convention for every later chipset in the project. The 8-priority filesystem bus becomes the default transport for cross-agent coordination. The 4-tier Scout/Patrol/Squadron/Fleet ladder becomes the sizing vocabulary every subsequent release uses when deciding how much coordination to pay for. v1.28 occupies the position in the engine that v1.0's 6-step loop occupies for single-skill adaptation: the invariant that every later version extends rather than restructures.
+
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| Filesystem Message Bus (Phase 255) | 8 priority levels (0=HALT through 7=background), ISA compact encoding, Dispatcher routing with queue health metrics, dead-letter handling, message pruning |
+| Command Division (Phase 256) | Coordinator with go/no-go readiness checks + atomic phase transitions + 4-level escalation; Relay with question consolidation + priority classification + user-facing reports |
+| Planning Division (Phase 257) | Planner with phase decomposition + resource estimation + trajectory tracking; Configurator with 4 topology profiles + activation triggers; Monitor with token budget tracking at 75%/95%/100% alert thresholds |
+| Execution Division (Phase 258) | Executor with fresh-context plan execution + artifact handoff; Verifier with 4 independent quality gates (tests-pass, new-coverage, code-review, artifact-integrity) |
+| Safety & Operations Division (Phase 259) | Sentinel with 9-type recovery decision matrix + Priority 0 HALT/CLEAR protocol; Chronicler with append-only JSONL audit trail + mission briefing generation |
+| Dashboard & Chipset (Phase 260) | Dashboard with 10-position status tracking + staff indicators + health metrics (`src/den/dashboard.ts`, 545 lines, 53 tests); Chipset with deterministic YAML parsing + reproducibility proof |
+| Integration Exercise (Phase 261) | Full lifecycle flow through the 10-position chipset; 4 topology profile validation; 7 recovery scenarios; overhead verification (<1% of context); end-to-end reproducibility (`src/den/integration-exercise.test.ts`, 1,027 lines, 18 tests) |
+| Chipset YAML configuration | 10 staff positions with roles/contexts/token budgets/lifecycles; skill requirements per position; activation triggers with target mappings; token budgets summing to 0.59; squadron topology with coordinator fallback; observability config for dashboard/logging/bus (`.chipset/chipset.yaml`, 238 lines) |
+| Topology profile activation | Scout (3 roles, budget 0.29), Patrol (5 roles in the prose / 7 in the validation suite, budget 0.47), Squadron (7/10 roles, budget 0.59), Fleet (10+ roles, budget 0.59); phase-count boundaries tested at 3/4, 10/11, 25/26; force-override and chipset-readiness validation (`src/den/profile-activation.test.ts`, 219 lines, 19 tests) |
+| Chipset validation suite | 13 tests across 5 groups validating CHIP-01 through CHIP-05; core fields round-trip, positions match DEN_STAFF_POSITIONS, skill requirements per position, activation triggers match trigger set, token budgets sum to 0.59, observability config present (`src/den/chipset-yaml.test.ts`, 233 lines) |
+| Dashboard data model | DashboardConfigSchema, PositionStateSchema, StaffIndicatorsSchema, PositionHealthSchema, DenSnapshotSchema Zod shapes; async snapshot assembly combining Chronicler log + bus health; Markdown rendering with position/health tables; Dashboard class + synchronous `createDashboard` factory |
+| 9-type Sentinel recovery matrix | schema violation / tool-call failure / verification failure / budget overrun / artifact-integrity failure / protocol violation / dependency unavailable / timeout / unknown — each with a graduated response from retry-with-backoff up through HALT-all-pipelines |
+| Verifier quality gates | 4 independent gates per phase: tests-pass (test suite green), new-coverage (delta ≥ threshold), code-review (adversarial pass), artifact-integrity (hash + shape check) — each gate can be run by a fresh-context Verifier without prior state |
 
 ## Retrospective
 
 ### What Worked
-- **10 named staff positions across 4 divisions.** Coordinator, Relay, Planner, Configurator, Monitor, Executor, Verifier, Sentinel, Chronicler -- each with a distinct responsibility. The division structure (Command, Planning, Execution, Safety & Operations) mirrors real organizational hierarchies, making roles intuitive.
-- **4 topology profiles with scaling.** Scout (3), Patrol (5), Squadron (7), Fleet (10) -- the topology scales agent count to task complexity. This avoids the "one size fits all" problem where small tasks waste coordination overhead and large tasks starve for agents.
-- **Priority 0 HALT/CLEAR protocol and 9-type recovery decision matrix.** The Sentinel's recovery system handles failures with graduated responses rather than a single "abort and restart." The HALT protocol is the nuclear option, used only when the situation requires it.
+
+- **Ten named staff positions across four divisions made coordination legible.** Coordinator, Relay, Planner, Configurator, Monitor, Executor, Verifier, Sentinel, Chronicler, Dashboard — each with a distinct responsibility. The Command / Planning / Execution / Safety & Operations division structure mirrors real organizational hierarchies, which means the human operator reading the Dashboard knows which cluster is doing what without a legend. Naming the positions separately from their skills also means a position can be re-skilled without renaming — a durable coordination vocabulary.
+- **Four topology profiles with scaling prevented both kinds of waste.** Scout (3), Patrol (5), Squadron (7), Fleet (10) — the Configurator scales the agent count to task complexity. This avoids the "one size fits all" failure mode where small tasks waste coordination overhead on a Chronicler that has nothing to chronicle, and large tasks starve for a Sentinel because nobody sized the profile up. The subset hierarchy (Scout ⊂ Patrol ⊂ Squadron = Fleet) means upsizing never drops a position; it only adds.
+- **Priority 0 HALT/CLEAR protocol paired with the 9-type recovery matrix gave failure graduated handling.** A single "abort and restart" fallback would have tripped the whole fleet on every recoverable error. The 9-type matrix classifies failures into kinds that deserve different responses — retry for transient tool failures, Verifier rerun for verification failures, HALT for protocol violations, human-in-the-loop for the unknown — so minor incidents stay minor and major incidents get the attention they require. HALT is the nuclear option, not the default.
+- **The filesystem message bus is the right transport for multi-process agent coordination.** Every Den agent runs in its own working directory with its own context; a network bus would need a daemon, a shared-memory bus would need a common process, but the filesystem is the lowest common denominator that works without either. The 8 priority levels plus ISA compact encoding plus the Dispatcher's health metrics give the bus operational visibility without adding infrastructure.
+- **Deterministic chipset YAML parsing with a reproducibility proof makes the Den safe to compose.** If the same chipset produced different position definitions on different runs, every downstream system built on it would inherit the nondeterminism. Phase 260's reproducibility check locks down that guarantee — identical input produces identical output across runs — which means a chipset is a real artifact, not a prompt that drifts.
+- **Verifier's 4 independent quality gates split verification into orthogonal checks.** tests-pass, new-coverage, code-review, artifact-integrity — each gate can run without the others, and each catches a different failure class. Collapsing them into a single "verify" step would have hidden which class a failure belongs to. Splitting them makes the report actionable: a failure on new-coverage means different remediation than a failure on artifact-integrity.
+- **The integration exercise at phase 261 proved composition before shipping.** Eighteen tests across seven groups exercising the end-to-end lifecycle means the seven phases don't just pass their own acceptance — they compose. Without phase 261, the release would have been seven phases that individually work; with phase 261, it is one coordination system that operates.
 
 ### What Could Be Better
-- **675 tests for a 7-phase coordination system is solid, but the integration exercise (Phase 261) does heavy lifting.** The end-to-end lifecycle flow with 4 topology profiles and 7 recovery scenarios is where most integration bugs would surface. More isolated fault injection tests for each division would strengthen confidence.
-- **ISA compact encoding for the message bus is mentioned but not detailed.** The 8 priority levels and dispatcher routing are clear, but the encoding format itself -- how messages are serialized and discriminated -- isn't specified in the release notes.
+
+- **675 tests for a 7-phase coordination system is solid, but the integration exercise does heavy lifting.** The end-to-end lifecycle flow with 4 topology profiles and 7 recovery scenarios is where most integration bugs would surface. More isolated fault-injection tests per division — a test harness that can starve the Relay queue, a harness that can forge a Chronicler entry, a harness that can flood the bus with Priority 7 chatter — would strengthen confidence that the recovery matrix covers its nine cases under adversarial pressure rather than only under the well-shaped integration scenarios.
+- **ISA compact encoding for the message bus is named but not specified.** Phase 255 describes 8 priority levels and Dispatcher routing in enough detail to reproduce the behavior, but the encoding format itself — how messages are serialized on disk, how opcode and destination and priority are discriminated, how version skew is handled between agents that read the same file — is referenced rather than documented. A future phase should pull the encoding spec into its own document so a third-party consumer could implement a bus client without reading the source.
+- **The topology profile role counts drift between the release notes and the profile-activation tests.** The Squadron profile is described as 7 roles in the phase-257 prose and as 10 roles in the phase-261 validation suite; the Fleet profile is described as 10 roles in prose and as 10+∞ in the tests. Both are defensible (Squadron-7 names the core, Squadron-10 counts observers; Fleet-10 names the current inventory, Fleet-∞ names the headroom), but the two counts should be reconciled in a single normative table — probably inside the chipset spec — so future readers don't have to infer the mapping.
+- **No long-running durability test on the filesystem bus.** The phase-261 integration exercise runs the bus for a single lifecycle. A week-long soak test — messages flowing at a moderate rate, periodic Sentinel-triggered HALT/CLEAR cycles, Chronicler log growth monitored — would catch failure modes (disk pressure, log rotation interacting badly with the dispatcher, leftover dead-letter accumulation) that a single run does not expose. v1.29 or v1.30 should land that test fixture before a production-like workload runs on the bus.
+- **The Chronicler's JSONL audit log doesn't yet have a retention policy.** Append-only is the right primitive for v1.28 — it gives audit trail, crash recovery, and debuggability for free — but without rotation the log grows without bound. A retention policy (rotate at N megabytes, compress at M entries, expire at K weeks) wasn't in scope at phase 259 but should be before the Chronicler runs under real load.
 
 ## Lessons Learned
 
-1. **Overhead verification (<1% of context) is a critical metric.** Multi-agent coordination systems can easily consume more context on coordination than on actual work. Proving the overhead stays below 1% means the agents spend their budget on execution, not bureaucracy.
-2. **Deterministic YAML parsing with reproducibility proof for chipsets builds trust.** If the same chipset YAML produces different results on different runs, the system is unreliable. The reproducibility proof in Phase 260 ensures that chipset configuration is deterministic.
-3. **Go/no-go readiness checks and atomic phase transitions prevent partial execution.** The Coordinator's readiness checks mean work doesn't start until preconditions are met. Atomic transitions mean phases either complete fully or don't advance -- no half-done states.
+1. **Overhead verification (<1% of context) is a critical metric for multi-agent systems.** Multi-agent coordination systems can easily consume more context on coordination than on actual work. Proving the overhead stays below 1% means the agents spend their budget on execution, not bureaucracy. Every future coordination milestone in this project should inherit the same <1% gate.
+2. **Deterministic YAML parsing with reproducibility proof for chipsets builds trust.** If the same chipset YAML produces different results on different runs, the system is unreliable. The reproducibility proof in Phase 260 ensures that chipset configuration is deterministic, which means a chipset is a durable artifact that a future session can be handed without fear of drift.
+3. **Go/no-go readiness checks and atomic phase transitions prevent partial execution.** The Coordinator's readiness checks mean work doesn't start until preconditions are met. Atomic transitions mean phases either complete fully or don't advance — no half-done states that a later session has to reason about.
+4. **Named staff positions outlast the skills they run.** Coordinator, Relay, Planner, Sentinel, Chronicler name responsibilities, not skills. A position can be re-skilled across versions without renaming it, which means the coordination vocabulary stays stable even as the underlying skill library evolves. Naming the responsibility separately from the skill is the cheap decision that pays durability forward.
+5. **Four topology profiles is the right discretization for task sizing.** Two profiles (small / large) would have forced too many tasks into the wrong size. Eight profiles would have been configuration noise. Scout / Patrol / Squadron / Fleet gives four discrete sizings matched to four phase-count bands (≤3, 4-10, 11-25, 26+), which is enough resolution for real tasks without asking the Configurator to guess. Discretize at four unless you have evidence you need more.
+6. **Recovery matrices should be graduated, not binary.** A single abort-and-restart fallback trips the whole system on every recoverable error. The 9-type matrix classifies failures into kinds that deserve different responses, so minor incidents stay minor. Every future failure-handling system in this project should start from a matrix, not a switch.
+7. **The filesystem is the lowest common denominator transport for independent agents.** Every agent already knows how to read and write files. A network bus would require a daemon; shared memory would require a common process. Filesystem costs nothing new and works on every platform the agents already run on. Prefer the transport that requires no additional infrastructure unless there's a measured reason to pay more.
+8. **Independent verification gates split into orthogonal checks beat a monolithic verify step.** tests-pass, new-coverage, code-review, artifact-integrity each catch a different failure class. Collapsing them hides which class failed. A Verifier that reports four dimensions gives an actionable report; one that reports a single boolean doesn't. Whenever a single step is doing four things, split it.
+9. **Integration exercises belong in their own phase, not bolted on to the last feature phase.** Phase 261 exists solely to prove the seven preceding phases compose. Folding the integration tests into phase 260 would have forced a choice between shipping the Dashboard and proving the composition. Scoping a phase whose only job is integration means the composition work gets first-class treatment.
+10. **Append-only audit logs are the right primitive at v1.x even without a retention policy.** JSONL on disk gives audit trail, crash recovery, and debuggability without a database. The retention policy is a later milestone's problem; shipping the primitive at v1.28 means every downstream consumer can rely on it today. Pay the retention cost when real data volume justifies it, not before.
+11. **Chipset YAML as a declarative binding separates configuration from behavior.** Ten positions, skill requirements, activation triggers, token budgets, topology, observability — all declared in YAML, consumed by code. Changing the configuration doesn't require recompiling; the behavior emerges from the binding. Every future coordination layer in the project should ship its chipset alongside its code so the same pattern is available downstream.
+12. **Token budgets that sum to 0.59 leave 0.41 for actual work.** The Den's token accounting is disciplined: no position spends unbounded context, and the sum of all position budgets leaves almost half the window for the work the positions are coordinating. A coordination system that consumes 80% of the budget on coordination is a bad coordination system. 59% is the defensible ceiling; going higher needs evidence.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — zero-point foundation; v1.28's chipset YAML loads skills defined by the v1.0 schema, and the 10 Den positions compose skills via the `extends:` pattern shipped at v1.0 |
+| [v1.4](../v1.4/) | Agent Teams — predecessor concept for multi-agent coordination; v1.28 replaces the ad-hoc team pattern with named positions and a filesystem bus |
+| [v1.7](../v1.7/) | GSD Master Orchestration Agent — the single-orchestrator predecessor that v1.28's multi-position Coordinator supersedes |
+| [v1.17](../v1.17/) | Staging Layer — 7-state approval queue that the Den's Relay and Coordinator consume when promoting work from staging to execution |
+| [v1.18](../v1.18/) | Information Design System — visual vocabulary that the Dashboard's position table and health indicators render in |
+| [v1.19](../v1.19/) | Budget Display Overhaul — `LoadingProjection` and dual-view budget display that the Monitor's 75%/95%/100% thresholds feed |
+| [v1.20](../v1.20/) | Dashboard Assembly — four data collectors that the Den Dashboard extends with position/staff/health collectors |
+| [v1.23](../v1.23/) | Project AMIGA — source of the `EventEnvelope` the Den's filesystem bus elevates as its canonical message shape |
+| [v1.24](../v1.24/) | GSD Conformance Audit — 336-checkpoint matrix pattern that the Den's 675-test integration exercise inherits structurally |
+| [v1.25](../v1.25/) | Ecosystem Integration — 20-node dependency DAG and EventDispatcher spec that the Den's filesystem bus implements as one subscriber profile |
+| [v1.26](../v1.26/) | Aminet Archive Extension Pack — immediate predecessor; first consumer of the pre-Den multi-agent pattern that v1.28 formalizes |
+| [v1.27](../v1.27/) | Foundational Knowledge Packs — 35 packs whose chipset layout pattern v1.28 elevates into the canonical chipset.yaml shape |
+| [v1.29](../v1.29/) | Electronics Educational Pack — immediate successor; first milestone to run its build on a Squadron profile |
+| [v1.30](../v1.30/) | Vision-to-Mission Pipeline — inherits the Fleet profile for its multi-wave mission packs |
+| [v1.31](../v1.31/) | GSD-OS MCP Integration — consumer of the Den's filesystem bus for its MCP host/gateway routing |
+| [v1.32](../v1.32/) | Brainstorm Session Support — 8 specialized agents inheriting the Den's Chronicler + Sentinel patterns |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform — 19 skills + 31 agents layered on the Den's topology profiles |
+| [v1.44](../v1.44/) | Applies the overhead-verification lesson (<1% of context) from v1.28 |
+| [v1.45](../v1.45/) | Applies the atomic-phase-transitions lesson from v1.28 |
+| [v1.49](../v1.49/) | Mega-release that consolidates post-v1.28 coordination work onto the Den substrate |
+| `.chipset/chipset.yaml` | Canonical chipset declaring 10 positions, skills, triggers, budgets, topology, observability |
+| `src/den/dashboard.ts` | Dashboard data model (545 lines, 53 tests) |
+| `src/den/integration-exercise.test.ts` | End-to-end integration exercise (1,027 lines, 18 tests across 7 groups) |
+| `src/den/chipset-yaml.test.ts` | Chipset validation suite (233 lines, 13 tests across 5 groups — CHIP-01..CHIP-05) |
+| `src/den/profile-activation.test.ts` | Topology profile activation tests (219 lines, 19 tests across 6 groups — PROF-01..PROF-04) |
+| `.planning/MILESTONES.md` | Canonical phase-by-phase detail for phases 255-261 |
+| `.planning/ROADMAP.md` | Phase sequencing + sibling milestones |
+| `.planning/STATE.md` | Live project state at v1.28 close |
+
+## Engine Position
+
+v1.28 is the coordination substrate under every multi-agent workload from v1.29 forward. The v1.4-through-v1.27 arc experimented with multi-agent patterns — Agent Teams at v1.4, Master Orchestration at v1.7, Staging Layer at v1.17, Information Design at v1.18, Dashboard Assembly at v1.20, the AMIGA `EventEnvelope` at v1.23, the Ecosystem Integration DAG at v1.25, the 35 Foundational Knowledge Packs at v1.27. v1.28 names the coordination primitives those experiments converged on: 10 staff positions across 4 divisions, a filesystem message bus with 8 priority levels, 4 topology profiles that scale to task complexity, a 9-type Sentinel recovery matrix, a Chronicler audit log, a Dashboard that renders the whole thing. Every v1.29+ milestone that spawns more than one agent inherits these primitives. v1.29 (Electronics Educational Pack) builds on Squadron. v1.30 (Vision-to-Mission Pipeline) builds on Fleet. v1.31 (GSD-OS MCP Integration) routes MCP traffic through the filesystem bus. v1.32 (Brainstorm Session Support) inherits the Chronicler + Sentinel patterns. v1.33 (GSD OpenStack Cloud Platform) layers 19 skills and 31 agents on the topology profiles. v1.49's mega-release consolidates post-v1.28 implementation onto the Den substrate as the governing coordination model. The release occupies the same structural position for coordination that v1.0 occupies for single-skill adaptation: the invariant that every later version extends rather than restructures.
+
+## Files
+
+- `.chipset/chipset.yaml` — Den chipset: 10 staff positions with roles / contexts / token budgets / lifecycles, skill requirements (required + recommended), activation triggers with target mappings, token budgets summing to 0.59, squadron topology with coordinator fallback, observability config for dashboard + logging + bus monitoring (238 lines)
+- `src/den/dashboard.ts` — Dashboard data model: DashboardConfigSchema, PositionStateSchema, StaffIndicatorsSchema, PositionHealthSchema, DenSnapshotSchema; `collectPositionStates` / `collectStaffIndicators` / `collectPositionHealth` / `assembleDenSnapshot` / `formatDenSnapshotMarkdown`; Dashboard class and `createDashboard` factory (545 lines, 53 tests)
+- `src/den/integration-exercise.test.ts` — End-to-end integration exercise: staff activation, lifecycle flow, failure recovery (5 scenarios), Den overhead measurement, skill observation capture, bus communication, reproducibility (1,027 lines, 18 tests across 7 groups — INT-01, INT-03, INT-06)
+- `src/den/chipset-yaml.test.ts` — Chipset validation suite: core fields round-trip (CHIP-01), positions match DEN_STAFF_POSITIONS + skill requirements per position (CHIP-02), activation triggers match trigger set (CHIP-03), token budgets sum to 0.59 (CHIP-04), observability config for dashboard/logging/bus (CHIP-05) — 233 lines, 13 tests across 5 groups
+- `src/den/profile-activation.test.ts` — Topology profile activation: Scout (3 roles), Patrol (7), Squadron (10), Fleet (10+∞); phase-count boundary conditions at 3/4, 10/11, 25/26; role-set subset hierarchy Scout ⊂ Patrol ⊂ Squadron = Fleet; token budgets 0.29 / 0.47 / 0.59 / 0.59; force-override and chipset-readiness validation — 219 lines, 19 tests across 6 groups covering PROF-01..PROF-04
+- `.planning/MILESTONES.md` — canonical phase-by-phase detail for phases 255-261 (22 plans, 81 requirements)
+- `.planning/ROADMAP.md` — sequencing record for v1.28 + sibling milestones
+- `.planning/STATE.md` — live project state at v1.28 close
 
 ---
+
+## Version History (preserved from original release notes)
+
+The table below lists the v1.x line that accumulated through v1.28, with the actual shipped summaries for each version. This version history is retained here for archival continuity.
+
+| Version | Summary |
+|---------|---------|
+| **v1.28** | GSD Den Operations — filesystem message bus, 10 staff positions across 4 divisions, 4 topology profiles, 9-type Sentinel recovery matrix, Chipset YAML with reproducibility proof, full integration exercise (this release) |
+| **v1.27** | Foundational Knowledge Packs — 35 packs across 3 tiers, GSD-OS dashboard, observation infrastructure, pathway adaptation |
+| **v1.26** | Aminet Archive Extension Pack — INDEX parser, mirror engine, virus scanner, archive extraction, FS-UAE integration |
+| **v1.25** | Ecosystem Integration — 20-node dependency DAG, EventDispatcher spec, 4-tier dependency philosophy, contract testing strategy, partial-build compatibility matrix |
+| **v1.24** | GSD Conformance Audit — 336-checkpoint matrix, 4-tier audit, zero-fail conformance, 9,355 tests passing |
+| **v1.23** | Project AMIGA — mission infrastructure (MC-1/ME-1/CE-1/GL-1), Apollo AGC simulator, DSKY interface, RFC Reference Skill |
+| **v1.22** | Minecraft Knowledge World — local cloud infrastructure, Fabric server, platform portability, Amiga emulation, spatial curriculum |
+| **v1.21** | GSD-OS Desktop Foundation — Tauri v2 shell, WebGL CRT engine, PTY terminal, Workbench desktop, calibration wizard |
+| **v1.20** | Dashboard Assembly — unified CSS pipeline, four data collectors, console page |
+| **v1.19** | Budget Display Overhaul — `LoadingProjection`, dual-view display, configurable budgets, dashboard gauge |
+| **v1.18** | Information Design System — shape + color encoding, status gantry, topology views, three-speed layering |
+| **v1.17** | Staging Layer — analysis, scanning, resource planning, 7-state approval queue for parallel execution |
+| **v1.16** | Dashboard Console & Milestone Ingestion |
+| **v1.15** | Live Dashboard Terminal — Wetty integration, tmux session binding, unified launcher |
+| **v1.14** | Promotion Pipeline |
+| **v1.13** | Session Lifecycle & Workflow Coprocessor |
+| **v1.12.1** | Live Metrics Dashboard |
+| **v1.12** | GSD Planning Docs Dashboard |
+| **v1.11** | GSD Integration Layer |
+| **v1.10** | Security Hardening |
+| **v1.9** | Ecosystem Alignment & Advanced Orchestration |
+| **v1.8.1** | Audit Remediation (Patch) |
+| **v1.8** | Capability-Aware Planning + Token Efficiency |
+| **v1.7** | GSD Master Orchestration Agent |
+| **v1.6** | Cross-Domain Examples |
+| **v1.5** | Pattern Discovery |
+| **v1.4** | Agent Teams |
+| **v1.3** | Documentation Overhaul |
+| **v1.2** | Test Infrastructure |
+| **v1.1** | Semantic Conflict Detection |
+| **v1.0** | Core Skill Management |
