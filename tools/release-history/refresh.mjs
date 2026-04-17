@@ -33,16 +33,17 @@ const publish = args.includes('--publish');
 const quiet = args.includes('--quiet');
 
 const STEPS = [
-  { name: 'scan',             script: 'scan.mjs',               required: true },
-  { name: 'ingest',           script: 'ingest.mjs',             required: true },
-  { name: 'seed-ghosts',      script: 'seed-ghosts.mjs',        required: true },
-  { name: 'ingest-deep',      script: 'ingest-deep.mjs',        required: true },
-  { name: 'extract-metrics',  script: 'extract-metrics.mjs',    required: !fast },
-  { name: 'extract-lessons',  script: 'extract-lessons.mjs',    required: true },
-  { name: 'classify',         script: 'classify-and-track.mjs', required: !noClassify },
-  { name: 'chapter',          script: 'chapter.mjs',            required: true },
-  { name: 'regen-history-md', script: 'regen-history-md.mjs',   required: true },
-  { name: 'audit',            script: 'audit.mjs',              required: true },
+  { name: 'scan',              script: 'scan.mjs',                required: true },
+  { name: 'ingest',            script: 'ingest.mjs',              required: true },
+  { name: 'seed-ghosts',       script: 'seed-ghosts.mjs',         required: true },
+  { name: 'ingest-deep',       script: 'ingest-deep.mjs',         required: true },
+  { name: 'backfill-git-stats',script: 'backfill-git-stats.mjs',  required: true },
+  { name: 'extract-metrics',   script: 'extract-metrics.mjs',     required: !fast },
+  { name: 'extract-lessons',   script: 'extract-lessons.mjs',     required: true },
+  { name: 'classify',          script: 'classify-and-track.mjs',  required: !noClassify },
+  { name: 'chapter',           script: 'chapter.mjs',             required: true },
+  { name: 'regen-history-md',  script: 'regen-history-md.mjs',    required: true },
+  { name: 'audit',             script: 'audit.mjs',               required: true },
 ];
 
 function run(step) {
