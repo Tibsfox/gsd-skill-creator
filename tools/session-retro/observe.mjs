@@ -11,6 +11,9 @@
 //   node tools/session-retro/observe.mjs event correction "user reminded: no Co-Authored-By" '{"impact":"workflow"}'
 //   node tools/session-retro/observe.mjs event tool-use "better-sqlite3 installed" '{"reason":"SQLite driver"}'
 //
+//   # Token usage — records BOTH an event and a token-budget entry
+//   node tools/session-retro/observe.mjs event tokens 45000 3200 "pass-2-chapter-gen"
+//
 //   # End + archive to a session-specific file
 //   node tools/session-retro/observe.mjs end
 //
@@ -29,12 +32,14 @@
 import { readFileSync, writeFileSync, appendFileSync, existsSync, renameSync, mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execSync } from 'node:child_process';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, '..', '..');
 const SESSIONS_DIR = join(REPO_ROOT, '.planning', 'sessions');
 const CURRENT_FILE = join(SESSIONS_DIR, 'current.jsonl');
 const META_FILE = join(SESSIONS_DIR, 'current.meta.json');
+const TOKENS_FILE = join(SESSIONS_DIR, 'current.tokens.jsonl');
 
 function ensureDir() { mkdirSync(SESSIONS_DIR, { recursive: true }); }
 
@@ -54,8 +59,36 @@ function cmdStart(mission) {
   console.log(JSON.stringify({ action: 'start', ...meta }));
 }
 
-function cmdEvent(kind, label, payloadJson) {
+function cmdEvent(kind, label, payloadJson, extra) {
   ensureDir();
+
+  // Shortcut: `event tokens <in> <out> [label]` records both an event and a
+  // token-budget entry so the two streams stay in sync. Positional args shift:
+  //   argv: ['tokens', '<in>', '<out>', '<label?>']
+  if (kind === 'tokens') {
+    const inTok  = parseInt(label, 10) || 0;
+    const outTok = parseInt(payloadJson, 10) || 0;
+    const tokenLabel = (extra || '').trim();
+    const total = inTok + outTok;
+    const tokenEntry = {
+      t: new Date().toISOString(),
+      in_tokens: inTok,
+      out_tokens: outTok,
+      label: tokenLabel,
+      total,
+    };
+    appendFileSync(TOKENS_FILE, JSON.stringify(tokenEntry) + '\n');
+    const event = {
+      t: tokenEntry.t,
+      kind: 'tokens',
+      label: tokenLabel,
+      payload: { in_tokens: inTok, out_tokens: outTok, total },
+    };
+    appendFileSync(CURRENT_FILE, JSON.stringify(event) + '\n');
+    console.log(JSON.stringify({ action: 'event', ...event, recorded_to: ['current.jsonl', 'current.tokens.jsonl'] }));
+    return;
+  }
+
   let payload = null;
   if (payloadJson) {
     try { payload = JSON.parse(payloadJson); }
@@ -115,8 +148,7 @@ function cmdStatus() {
 
 function tryGetCommit() {
   try {
-    const { execSync } = require('node:child_process');
-    return execSync('git rev-parse HEAD', { encoding: 'utf8' }).trim();
+    return execSync('git rev-parse HEAD', { encoding: 'utf8', cwd: REPO_ROOT }).trim();
   } catch {
     return null;
   }
@@ -128,7 +160,7 @@ const [cmd, ...args] = process.argv.slice(2);
 try {
   switch (cmd) {
     case 'start':  cmdStart(args.join(' ')); break;
-    case 'event':  cmdEvent(args[0], args[1], args[2]); break;
+    case 'event':  cmdEvent(args[0], args[1], args[2], args[3]); break;
     case 'end':    cmdEnd(); break;
     case 'status': cmdStatus(); break;
     default:
