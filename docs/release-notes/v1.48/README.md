@@ -1,185 +1,136 @@
 # v1.48 — Physical Infrastructure Engineering Pack
 
-**Shipped:** 2026-02-27
-**Phases:** 12 (434-445) | **Plans:** 30 | **Commits:** 52
-**Requirements:** 80 | **Tests:** 401 | **LOC:** ~21.4K
+**Released:** 2026-02-27
+**Scope:** milestone — 8-skill / 6-agent engineering pack for data-center-grade physical infrastructure design (fluid, power, thermal, blueprint, dimensional, simulation, construction, creative) with a non-bypassable Safety Warden layer
+**Branch:** dev → main
+**Tag:** v1.48 (2026-02-26T22:16:38-08:00) — "Physical Infrastructure Engineering Pack"
+**Predecessor:** v1.47 — Holomorphic Dynamics Educational Pack
+**Successor:** v1.49 — Mega-Release Consolidation (the 600+ patch arc that grew out of v1.48's dogfooding)
+**Classification:** milestone — first domain-engineering skill pack that gates every output through a structural safety architecture
+**Phases:** 434–445 (12 phases) · **Plans:** 30 · **Commits:** 52 (release window) · **Full milestone commits:** 55 (`d5a46fbe1..deead427f`)
+**Requirements:** 80 · **Tests:** 401 (22 safety-critical SC-01..SC-22 mandatory-pass + calc-accuracy + blueprint + integration) · **LOC:** ~21.4K
+**Verification:** Safety audit report at `skills/physical-infrastructure/audit/safety-audit-report.md` — all 22 SC tests PASS; PE disclaimer verified across 5 output types; 3-layer bypass-resistance confirmed; thresholds validated against ASME B31.3, NFPA 70E, ASHRAE TC 9.9, NEC, and OSHA
 
 ## Summary
 
-A comprehensive engineering skill pack for physical infrastructure design: data center cooling, electrical power distribution, thermal analysis, and construction documentation. Provides domain-specific analysis skills with a blueprint engine generating P&ID, single-line diagrams, floor plans, and isometric views. All outputs pass through a non-bypassable Safety Warden enforcing PE disclaimer requirements and HITL gates before any engineering calculation leaves the system.
+**v1.48 is the first release to treat structural safety as a release-zero deliverable.** Phase 434 was Wave 0 — before fluid systems, before power systems, before any calculation engine shipped, the Safety Warden went in. The Warden operates in three modes (annotate, gate, redirect) and carries a mandatory Professional Engineer disclaimer on every engineering output. Non-bypassable means exactly that: the safety layer is structural, not configurable. No flag, no environment variable, no alternate code path removes it. The audit report at `skills/physical-infrastructure/audit/safety-audit-report.md` confirms 3-layer defense-in-depth — output interception at the agent boundary, disclaimer injection at the artifact boundary, and HITL gate at the application boundary. All 22 safety-critical tests (SC-01 through SC-22) pass on the release tag, against thresholds calibrated to ASME B31.3 (pressure piping), NFPA 70E (electrical safety), ASHRAE TC 9.9 (data-center environmental), NEC (conductor + service), and OSHA (general industry). Shipping safety before features meant every subsequent phase inherited the Warden's constraints rather than needing retrofit.
+
+**Eight interconnected skills span the entire physical-infrastructure design workflow from load calculation to construction handoff.** Fluid systems (Phase 435) landed first after the foundation, implementing Darcy-Weisbach and Hazen-Williams pressure-drop calculations with pipe roughness tables, ASHRAE TC 9.9 thermal guidelines for cooling classes A1–A4 and H1, Coolant Distribution Unit selection with flow/delta-T matching, pump-curve modeling with system-curve intersection, and glycol concentration effects on viscosity and heat transfer coefficients. Power systems (Phase 436) followed with NEC Article 220 demand-factor calculations, NEC Article 310 conductor ampacity with temperature derating and conduit fill, NEC Article 690 solar PV design (string sizing, inverter matching, rapid shutdown), transformer sizing with K-factor harmonic derating, UPS runtime calculations with battery aging + temperature correction, PDU whip scheduling, BESS (Battery Energy Storage System) capacity with depth-of-discharge limits, and DC distribution bus voltage-drop analysis at 48V and 380V. Thermal engineering (Phase 437) covered conduction, convection, radiation, LMTD for counter-flow and cross-flow exchangers, effectiveness-NTU sizing for unknown outlet temperatures, PUE/TUE/WUE efficiency metrics, IT load profiling with sensible + latent cooling load, and free-cooling economizer hours by climate zone. Dimensional analysis (Phase 438) provided the cross-cutting validation layer that makes the handoffs safe.
+
+**The Blueprint Engine (Phases 439–440) is the release's most visible artifact and shipped 80 standards-compliant SVG symbols.** 50 ISA-5.1 P&ID symbols (valves, instruments, vessels, pumps) landed in Phase 439; 30 IEEE C2-2023 SLD symbols (breakers, transformers, buses) landed in Phase 440 alongside floor-plan layout with rack placement and hot/cold aisle containment, isometric piping views with elevation markers and support spacing, and SVG output with optional DXF export for downstream CAD tooling. The symbol library is parametric — scale, annotation, and variant are configurable at render time — but the underlying geometries are faithful to the standards. That faithfulness is the reason the Warden's output interception can trust the drawing-generation pipeline: the symbols carry their standard citation inline, so any P&ID or SLD the engine produces is traceable to a named clause of ISA-5.1 or IEEE C2-2023.
+
+**Dimensional analysis is not a domain skill — it is structural correctness.** Phase 438 shipped physical-unit tracking across all calculations (SI and Imperial with conversion), tolerance stack-up analysis for mechanical assemblies (RSS and worst-case), Buckingham Pi theorem for dimensional-homogeneity validation, interference checking between piping / conduit / structural members, and cable-tray fill under NEC 392. The E2E integration pipelines (Phase 445) validate dimensional consistency at every stage boundary, not just at the final output. The cooling pipeline (IT load → thermal calc → fluid sizing → P&ID → BOM) fails closed if a stage hands off a quantity with inconsistent units; the power pipeline (demand calc → conductor sizing → SLD → panel schedule → BOM) does the same. The combined cross-domain pipeline (power + cooling + thermal with interference checking) is the release's most ambitious E2E test — three domain chains converge through a single interference resolver that catches "the conduit wants to go through the chilled-water supply" before the drawing pipeline emits a conflicting spatial arrangement.
+
+**The simulation bridge (Phase 441) spans professional and educational audiences from a single analysis layer.** OpenFOAM case-file generation for CFD airflow / thermal-plume analysis, ngspice netlist generation for power-distribution circuit simulation, FreeCAD macro generation for 3D mechanical-assembly review, React artifact output for interactive parameter exploration, Minecraft redstone mapping for educational visualization of power distribution, and Factorio blueprint patterns for cooling-loop and power-grid layouts — all six output targets consume the same upstream analysis. A professional engineer asks for a CFD case file; a student asks for a Minecraft redstone circuit; both get the same validated numeric substrate, just serialized for their target environment. The bridge pattern is the load-bearing design decision: keep the analysis layer clean, translate at the boundary, never fork the numeric core. Construction documents (Phase 442) — Bill of Materials with quantity takeoff and lead-time estimates, installation sequence with predecessor dependencies, commissioning checklists mapped to ASHRAE Guideline 0 and NETA ATS, O&M manual generation with preventive maintenance schedules, and spare-parts lists with criticality A/B/C — use the same substrate for a third target: the construction trailer.
+
+**The Router Topology Chipset (Phase 444) is the cost-efficient execution model: Opus Architect + 4 Sonnet specialists.** The Architect agent classifies design intent and dispatches to the Fluid, Power, Thermal, or Blueprint specialist based on confidence thresholds. Running Opus on the small routing decision and Sonnet on the large domain-calculation work is the right model allocation: routing is hard-to-get-right-and-cheap-to-run; domain calculation is well-structured-and-expensive-to-run. Three team topologies matched agent count to problem complexity — `domain-specialist.yaml` for single-domain work (1 specialist + Warden), `cross-domain.yaml` for multi-system coordination (Architect + 2–3 specialists + Warden), and `full-build.yaml` for end-to-end design-to-docs (Architect + all 4 specialists + Warden). A pipe-sizing question does not need 5 agents; a full data-center design does. The topology files make that tradeoff visible and configurable at team-assembly time. Across the 12 phases the commit graph shows tests-first discipline — `test(434-01)` before `feat(434-01)`, `test(434-02)` before `feat(434-02)`, `test(434-03)` before `feat(434-03)` — which made the Phase 445 integration and safety audit runs find problems in the boundaries, not the internals.
+
+**The educational bridge turns engineering concepts into domains the learner already inhabits.** Minecraft redstone circuits map to electrical distribution concepts — AND/OR gates to boolean logic, repeaters to signal amplification, latches to state memory — while preserving the underlying Boolean-algebra mathematics. Factorio fluid and logistics systems map to cooling loops and piping: throughput, pressure, backflow, and buffering all show up in the game's fluid simulation and match the real mathematical structure. The "Space Between" curriculum (a mathematical thread running through the project) supplies the connective tissue — fluid dynamics connects to complex-plane analysis, thermodynamics connects to state-space geometry. The bridge is not simplification; it is translation. Lesson #256 of the extracted-lessons corpus classifies the educational bridge as `applied` in v1.49.17 — it landed as a reusable pattern, not a one-off.
+
+**401 tests across 14 requirement domains landed alongside the features, not after.** The test shape is unusually weighted toward safety and boundaries: 22 safety-critical tests (SC-01..SC-22) gate the entire release as mandatory-pass, calculation-accuracy tests exercise the numeric cores of fluid / power / thermal / dimensional modules, blueprint tests validate SVG geometry against reference renderings, and integration tests exercise the three E2E pipelines (cooling, power, combined). The commit log for Phase 445 shows `test(445-01): add 22 safety-critical mandatory-pass tests SC-01 through SC-22` landed before the audit report; the audit report confirms they all pass. This is TDD discipline made visible at the commit-boundary level. Two follow-on Phase 445 commits — `test(445-01): add calculation accuracy, blueprint, and integration test suites` and `docs(445-02): add safety audit report for physical infrastructure v1.48` — are the verifier's closing pair.
+
+**v1.48 is the predecessor that seeded v1.49's 600+ patch arc.** v1.49 is a mega-release that consolidated many post-v1.48 tracks; a material fraction of v1.49's early patches are v1.48 dogfooding refinements. The Phase 445 dogfooding observation targets document (`skills/physical-infrastructure/dogfood/observation-targets.md`) defined 12 structured targets for skill-creator pattern detection: 3 safety-focused (override attempts, disclaimer suppression, safety class), 2 calculation-accuracy (numeric corrections, method preferences), 2 agent-selection (team topology, output format), and 5 cross-domain / simulation / educational / symbol / voltage targets. That observation schema is what the v1.49.x patch stream executed against. v1.48 is the release that declared the observation surface; v1.49 is the release that ran the observation loop at scale. Understanding v1.49 requires reading v1.48 first — the safety-first architecture, the dimensional-analysis invariants, and the 3-team topology model are all v1.48 decisions that v1.49 did not relitigate.
 
 ## Key Features
 
-### Fluid Systems Engineering
-- Darcy-Weisbach and Hazen-Williams pressure drop calculations with pipe roughness tables
-- ASHRAE TC 9.9 thermal guidelines for data center cooling classes (A1-A4, H1)
-- CDU (Coolant Distribution Unit) selection with flow rate, delta-T, and capacity matching
-- Pump curve modeling with system curve intersection and operating point determination
-- Glycol concentration effects on viscosity and heat transfer coefficients
-
-### Power Systems Engineering
-- NEC Article 220 demand factor calculations for service entrance sizing
-- NEC Article 310 conductor ampacity with temperature derating and conduit fill
-- NEC Article 690 solar PV system design: string sizing, inverter matching, rapid shutdown
-- Transformer sizing with K-factor harmonic derating for non-linear loads
-- UPS runtime calculations with battery aging, temperature correction, and efficiency curves
-- PDU whip scheduling and branch circuit load balancing
-- BESS (Battery Energy Storage System) capacity planning with depth-of-discharge limits
-- DC distribution bus voltage drop analysis (48V, 380V)
-
-### Thermal Engineering
-- Conduction, convection, and radiation heat transfer with composite wall R-values
-- LMTD (Log Mean Temperature Difference) for counter-flow and cross-flow heat exchangers
-- Effectiveness-NTU method for heat exchanger sizing when outlet temperatures are unknown
-- PUE, TUE, and WUE efficiency metric calculations with trending
-- IT load profiling and cooling load estimation (sensible + latent)
-- Free cooling economizer hour calculations by climate zone
-
-### Blueprint Engine
-- P&ID generation with 50 ISA-5.1 standard symbols (valves, instruments, vessels, pumps)
-- Single-Line Diagram (SLD) generation with 30 IEEE C2-2023 symbols (breakers, transformers, buses)
-- Floor plan layout with rack placement, hot/cold aisle containment, and clearance zones
-- Isometric piping views with elevation markers and support spacing
-- SVG output with optional DXF export for CAD integration
-- Parametric symbol helpers with configurable scale and annotation
-
-### Dimensional Analysis
-- Physical unit tracking across all calculations (SI and Imperial with conversion)
-- Tolerance stack-up analysis for mechanical assemblies (RSS and worst-case)
-- Buckingham Pi theorem for dimensional homogeneity validation
-- Interference checking between piping, conduit, and structural members
-- Cable tray fill calculations with NEC 392 compliance
-
-### Simulation Bridge
-- OpenFOAM case file generation for CFD analysis (airflow, thermal plumes)
-- ngspice netlist generation for power distribution circuit simulation
-- React artifact output for interactive parameter exploration
-- Minecraft redstone mapping for educational visualization of power distribution
-- Factorio blueprint patterns for cooling loop and power grid layouts
-- FreeCAD macro generation for 3D mechanical assembly review
-
-### Construction Documents
-- Bill of Materials (BOM) generation with quantity takeoff and lead-time estimates
-- Installation sequence planning with predecessor dependencies
-- Commissioning checklists mapped to ASHRAE Guideline 0 and NETA ATS
-- Operations & Maintenance manual generation with preventive maintenance schedules
-- Spare parts lists with criticality classification (A/B/C)
-
-### Creative Pipeline
-- Blender bpy script generation for 3D walkthroughs of mechanical rooms
-- ffmpeg assembly scripts for construction progress timelapse from photo sequences
-- Social media export templates (LinkedIn technical posts, Instagram carousel dimensions)
-- Render preset management for different output targets
-
-### Safety Architecture
-- Safety Warden operating in 3 modes: annotate, gate, redirect
-- Mandatory PE (Professional Engineer) disclaimer on all engineering outputs
-- Non-bypassable architecture: safety checks are structural, not configurable
-- HITL gate requiring explicit acknowledgment before calculation results are applied
-- IEC/NEC/ASHRAE standard citation on every calculation output
-
-### Router Topology Chipset
-- Architect agent (Opus) as entry point for design intent classification
-- 4 Sonnet specialist agents: Fluid, Power, Thermal, Blueprint
-- 3 team topologies: domain-specialist (single domain), cross-domain (multi-system), full-build (end-to-end)
-- Router dispatches to specialists based on intent signals with confidence thresholds
-
-### Integration Pipelines
-- Cooling E2E pipeline: IT load -> thermal calc -> fluid sizing -> P&ID -> BOM
-- Power E2E pipeline: demand calc -> conductor sizing -> SLD -> panel schedule -> BOM
-- Combined cross-domain pipeline: power + cooling + thermal with interference checking
-- Each pipeline validates dimensional consistency at every stage boundary
-
-### Educational Bridge
-- Minecraft redstone circuits mapping to electrical distribution concepts
-- Factorio fluid/logistics mapping to cooling and piping systems
-- Mathematical connections to "The Space Between" curriculum (fluid dynamics, thermodynamics)
-- Progressive disclosure from practical overview to full engineering reference
-
-## Architecture
-
-```
-skills/physical-infrastructure/
-├── SKILL.md                        # Progressive disclosure entry point
-├── references/
-│   ├── fluid-systems.md            # Darcy-Weisbach, Hazen-Williams, pump curves
-│   ├── power-systems.md            # NEC 220/310/690, transformers, UPS, solar
-│   ├── thermal-engineering.md      # Heat transfer, LMTD, e-NTU, efficiency
-│   ├── blueprint-engine.md         # P&ID, SLD, floor plan, isometric generation
-│   ├── dimensional-analysis.md     # Units, tolerances, Buckingham Pi
-│   ├── simulation-bridge.md        # OpenFOAM, ngspice, FreeCAD inputs
-│   ├── construction-docs.md        # BOM, sequences, commissioning, O&M
-│   └── creative-pipeline.md        # Blender, ffmpeg, social media
-├── symbols/
-│   ├── isa-5.1/                    # 50 ISA-5.1 P&ID SVG symbols
-│   └── ieee-c2/                    # 30 IEEE SLD SVG symbols
-├── agents/
-│   ├── architect.md                # Opus entry point — design intent router
-│   ├── fluid-specialist.md         # Sonnet — pipe sizing, pressure drop
-│   ├── power-specialist.md         # Sonnet — electrical loads, conductors
-│   ├── thermal-specialist.md       # Sonnet — heat transfer, cooling
-│   ├── blueprint-specialist.md     # Sonnet — drawing generation
-│   └── safety-warden.md            # Safety agent — annotate/gate/redirect
-├── teams/
-│   ├── domain-specialist.yaml      # Single-domain focused team
-│   ├── cross-domain.yaml           # Multi-system coordination
-│   └── full-build.yaml             # End-to-end design-to-docs
-└── chipset.yaml                    # Router topology with budget allocation
-```
-
-Layers:
-
-```
-                    +-----------------------+
-                    |    Safety Warden      |  (crosscut — all outputs)
-                    +-----------------------+
-                              |
-  +----------+  +----------+  +----------+  +-----------+
-  |  Fluid   |  |  Power   |  | Thermal  |  | Blueprint |  Domain Skills
-  +----------+  +----------+  +----------+  +-----------+
-       |              |             |              |
-  +----------+  +----------+  +----------+  +-----------+
-  | Dim Anal |  | Sim Brdg |  | Constr   |  | Creative  |  Analysis / Output
-  +----------+  +----------+  +----------+  +-----------+
-       |              |             |              |
-  +---------------------------------------------------+
-  |            Integration Pipelines                   |  E2E Orchestration
-  +---------------------------------------------------+
-```
-
-## Wave Execution
-
-| Wave | Phases | Description |
-|------|--------|-------------|
-| 0 | 434 | Foundation types, unit system, safety warden architecture |
-| 1A | 435 | Fluid systems: Darcy-Weisbach, Hazen-Williams, pump curves |
-| 1B | 436 | Power systems: NEC calculations, transformer sizing, UPS |
-| 2A | 437 | Thermal engineering: heat transfer, LMTD, efficiency metrics |
-| 2B | 438 | Dimensional analysis: unit tracking, tolerance, Buckingham Pi |
-| 3A | 439 | Blueprint engine: P&ID with ISA-5.1 symbols |
-| 3B | 440 | Blueprint engine: SLD with IEEE symbols, floor plan, isometric |
-| 4A | 441 | Simulation bridge: OpenFOAM, ngspice, FreeCAD, game patterns |
-| 4B | 442 | Construction documents: BOM, sequences, commissioning, O&M |
-| 5A | 443 | Creative pipeline: Blender, ffmpeg, social media export |
-| 5B | 444 | Router topology chipset: Architect + 4 specialists, 3 teams |
-| 6 | 445 | Integration pipelines, educational bridge, SKILL.md, tests |
+| Area | What Shipped |
+|------|--------------|
+| Safety Warden (Phase 434) | 3-mode operation (annotate / gate / redirect) + mandatory PE disclaimer + non-bypassable structural architecture + HITL gate; 3-layer defense-in-depth verified by the audit report |
+| Foundation types & unit system (Phase 434) | Shared type interfaces for physical quantities, engineering constants registry (NPS, NEC 310.16, fluid/material data), unit conversion library with dimensional tracking (SI + Imperial) |
+| Fluid systems skill (Phase 435) | Darcy-Weisbach + Hazen-Williams pressure drop, ASHRAE TC 9.9 cooling classes A1–A4 / H1, CDU selection, pump curves with system-curve intersection, glycol viscosity/heat-transfer corrections |
+| Power systems skill (Phase 436) | NEC 220 demand factors, NEC 310 ampacity with derating + conduit fill, NEC 690 solar PV design, transformer K-factor derating, UPS runtime with aging + temperature, PDU whip scheduling, BESS depth-of-discharge, 48V/380V DC voltage drop |
+| Thermal engineering skill (Phase 437) | Conduction/convection/radiation heat transfer, composite-wall R-values, LMTD for counter-flow + cross-flow exchangers, effectiveness-NTU sizing, PUE/TUE/WUE metrics, IT load + cooling load (sensible + latent), free-cooling economizer hours |
+| Dimensional analysis skill (Phase 438) | Physical-unit tracking across all calculations, tolerance stack-up (RSS + worst-case), Buckingham Pi validation, interference checking between systems, NEC 392 cable tray fill |
+| Blueprint engine (Phase 439–440) | P&ID generation with 50 ISA-5.1 SVG symbols + SLD with 30 IEEE C2-2023 symbols + floor plan with rack placement & hot/cold aisle + isometric piping with elevation markers; SVG output + optional DXF export; parametric scale/annotation helpers |
+| Simulation bridge skill (Phase 441) | OpenFOAM CFD case files, ngspice netlists, FreeCAD macros, React artifacts, Minecraft redstone mapping, Factorio blueprint patterns — 6 targets from one analysis substrate |
+| Construction docs skill (Phase 442) | BOM with quantity takeoff + lead times, installation sequence with predecessor dependencies, commissioning checklists (ASHRAE Guideline 0, NETA ATS), O&M manuals with preventive-maintenance schedules, spare-parts lists with A/B/C criticality |
+| Creative pipeline skill (Phase 443) | Blender bpy scripts for 3D mechanical-room walkthroughs, ffmpeg assembly for construction timelapse, social-media export templates (LinkedIn technical posts, Instagram carousel), render preset management |
+| Router topology chipset (Phase 444) | Architect agent on Opus + 4 Sonnet specialists (Fluid / Power / Thermal / Blueprint); 3 team topologies (`domain-specialist.yaml`, `cross-domain.yaml`, `full-build.yaml`) right-sized to problem complexity |
+| Integration pipelines (Phase 445) | Cooling E2E (IT load → thermal → fluid sizing → P&ID → BOM) + Power E2E (demand → conductors → SLD → panel schedule → BOM) + Combined cross-domain (power + cooling + thermal with interference resolver) |
+| Educational bridge (Phase 445) | Minecraft redstone mapping to electrical distribution, Factorio fluid/logistics mapping to cooling & piping, "The Space Between" mathematical connections (fluid dynamics / thermodynamics), progressive disclosure from overview to full reference |
+| Safety audit report (Phase 445, `audit/safety-audit-report.md`) | All 22 SC-01..SC-22 tests PASS; PE disclaimer verified across 5 output types; bypass-resistance 3 layers; thresholds validated against ASME B31.3, NFPA 70E, ASHRAE, NEC, OSHA; overall verdict PASS |
+| Quick-start guides (Phase 445, `docs/quick-start-*`) | `quick-start-cooling.md` with CA-01/CA-02 reference values, `quick-start-power.md` with CA-06/CA-09/CA-12 reference values, `skill-summaries.md` covering 8 domain skills + 6 agents |
+| Dogfooding observation targets (Phase 445, `dogfood/observation-targets.md`) | 12 structured observation targets (3 safety, 2 calc-accuracy, 2 agent-selection, 5 cross-domain/simulation/educational/symbol/voltage) + `sessions.jsonl` schema + 10-session emergent sub-skill projections |
 
 ## Retrospective
 
 ### What Worked
-- **Non-bypassable Safety Warden architecture.** Operating in 3 modes (annotate, gate, redirect) with mandatory PE disclaimer on all engineering outputs, the safety system is structural -- it cannot be turned off through configuration. For a skill pack that generates engineering calculations, this is the only acceptable design.
-- **Router topology chipset with Opus architect dispatching to 4 Sonnet specialists.** The Architect classifies design intent and routes to Fluid, Power, Thermal, or Blueprint specialists based on confidence thresholds. This is cost-effective (Opus for routing, Sonnet for domain work) and scalable (adding a specialist doesn't change the routing logic).
-- **Dimensional analysis as a cross-cutting validation layer.** Physical unit tracking, tolerance stack-up analysis, Buckingham Pi theorem, and interference checking catch errors that domain-specific calculations miss. Validating dimensional consistency at every stage boundary in the E2E pipelines is structural correctness.
-- **Simulation bridge outputs (OpenFOAM, ngspice, FreeCAD, Minecraft, Factorio) span professional and educational audiences.** The same engineering analysis can produce a CFD case file for a professional engineer and a Minecraft redstone circuit for a student. The bridge pattern keeps the analysis layer clean while supporting multiple output targets.
+
+- **Non-bypassable Safety Warden architecture.** Operating in 3 modes (annotate, gate, redirect) with mandatory PE disclaimer on all engineering outputs, the safety system is structural — it cannot be turned off through configuration. For a skill pack that generates engineering calculations, this is the only acceptable design, and the audit report confirms 3-layer defense-in-depth and 22/22 SC tests passing at the release tag.
+- **Router topology chipset with Opus architect dispatching to 4 Sonnet specialists.** The Architect classifies design intent and routes to Fluid, Power, Thermal, or Blueprint specialists based on confidence thresholds. This is cost-effective (Opus for the small hard decision, Sonnet for the large structured work) and scalable — adding a specialist does not change the routing logic, only the dispatch table.
+- **Dimensional analysis as a cross-cutting validation layer.** Physical-unit tracking, tolerance stack-up, Buckingham Pi, and interference checking catch errors that domain-specific calculations miss. Validating dimensional consistency at every stage boundary in the E2E pipelines (not just at the final output) is structural correctness — the pipeline fails closed on unit inconsistency rather than producing a wrong-but-plausible answer.
+- **Simulation bridge outputs span professional and educational audiences from one analysis substrate.** The same engineering analysis produces a CFD case file for a professional engineer and a Minecraft redstone circuit for a student. The bridge pattern keeps the analysis layer clean while supporting six distinct output targets (OpenFOAM, ngspice, FreeCAD, React, Minecraft, Factorio) without forking the numeric core.
+- **Tests-first discipline showed up at the commit-boundary level.** The commit log lands `test(434-01)` before `feat(434-01)`, `test(434-02)` before `feat(434-02)`, and `test(434-03)` before `feat(434-03)` — the ordering is a checkable property, not ceremonial. The 22 SC mandatory-pass tests landed before the audit report, and the audit confirmed them passing. TDD as a commit-graph invariant, not a policy statement.
+- **Wave sequencing matched dependency shape.** Wave 0 (Phase 434 — foundation + safety) gated everything; Waves 1A/1B (435/436 — fluid + power) ran in parallel on separate domains; Waves 2A/2B (437/438 — thermal + dimensional) did the same; Waves 3A/3B (439/440 — P&ID + SLD) split the blueprint engine into two symbol standards; Wave 4A/4B (441/442 — simulation + construction docs) carried the substrate outward; Wave 5A/5B (443/444 — creative + router) finished the output surfaces and the agent topology; Wave 6 (445 — integration + tests + audit + docs) closed the loop.
 
 ### What Could Be Better
-- **12 phases and 30 plans is the largest release since v1.33 (14 phases).** The scope spans fluid, power, thermal, blueprint, dimensional analysis, simulation, construction docs, and creative pipeline -- essentially 8 engineering disciplines in one release. Any one of these could be a standalone release.
-- **80 ISA-5.1 + IEEE C2-2023 symbols in SVG are a maintenance commitment.** Symbol libraries need updates when standards revise. 80 symbols is a meaningful surface area to maintain for standard compliance.
-- **Minecraft redstone and Factorio blueprints as educational bridges are creative but untested against actual game versions.** Game updates can change redstone mechanics or blueprint formats. These outputs need version-pinning or validation against specific game versions.
+
+- **12 phases and 30 plans is the largest release since v1.33 (14 phases).** The scope spans fluid, power, thermal, blueprint, dimensional analysis, simulation, construction docs, and creative pipeline — essentially 8 engineering disciplines in one release. Any one of these could be a standalone release; combining them risked shallow coverage in each. The 401-test count is adequate but thin at roughly 50 tests per skill, and v1.49-era work had to fill gaps.
+- **80 ISA-5.1 + IEEE C2-2023 symbols in SVG are a maintenance commitment.** Symbol libraries need updates when standards revise. 80 symbols is a meaningful surface area to maintain for standard compliance, and no current process watches ISA or IEEE for revisions. The next standard update is a known debt.
+- **Minecraft redstone and Factorio blueprints are creative but untested against actual game versions.** Game updates can change redstone mechanics or blueprint formats. These outputs need version-pinning (Minecraft 1.20.x, Factorio 1.1.x) or validation against specific game versions; v1.48 ships them without either.
+- **Dogfooding observation targets shipped as document, not implementation.** The 12 observation targets at `dogfood/observation-targets.md` define the schema for skill-creator pattern detection, but the sessions.jsonl writer that would populate them is not yet part of the release. v1.49.x patches picked that up, but v1.48 itself is implementation-ready, not observation-active.
+- **No staging tier for the physical-infrastructure pipeline.** The E2E pipelines run in-process against fixtures; there is no external integration environment that mirrors a real CAD + CFD + ngspice toolchain. The first real multi-tool integration is whatever the first external user runs, which is a risk surface the Safety Warden mitigates but does not eliminate.
 
 ## Lessons Learned
 
-1. **Engineering skill packs need safety architecture before domain features.** The Safety Warden was Phase 434 (Wave 0) -- the first thing built. Every subsequent phase inherits its constraints. Building safety last would have required retrofitting 11 phases of existing code.
-2. **E2E integration pipelines (cooling, power, combined) validate that domain modules compose correctly.** Individual modules can pass all their tests while failing at the handoff boundary. The E2E pipelines specifically test the boundaries: IT load -> thermal calc -> fluid sizing -> P&ID -> BOM.
-3. **3 team topologies (domain-specialist, cross-domain, full-build) right-size the agent deployment.** A simple pipe sizing question doesn't need 5 agents. A full data center design does. Topologies let the system match agent count to problem complexity.
-4. **The educational bridge (Minecraft, Factorio, The Space Between) makes engineering concepts accessible without dumbing them down.** Mapping electrical distribution to redstone circuits isn't simplification -- it's translation to a domain the learner already understands. The mathematical connections are preserved.
+- **Safety architecture ships first or it ships retrofitted.** The Safety Warden was Phase 434 — Wave 0 — before any calculation, skill, or agent. Every subsequent phase inherited its constraints rather than being instrumented later. Building safety last would have required retrofitting 11 phases of existing code; building it first made the Warden's interception points a property of the architecture, not a patch over it.
+- **Non-bypassable means structural, not configurable.** A "safety mode" that can be toggled off is not a safety mode; it is an off-by-default feature. The Warden has no disable flag, no environment variable, no alternate code path. The audit report's 3-layer defense-in-depth (output interception + disclaimer injection + HITL gate) is the shape of a structural guarantee — no single point can be bypassed and succeed.
+- **E2E integration pipelines catch boundary failures that domain tests miss.** Individual modules pass all their own tests and still fail at the handoff. The cooling pipeline (IT load → thermal calc → fluid sizing → P&ID → BOM) specifically exercises the five boundaries. If the thermal calc returns BTUs and the fluid sizing expects watts, only an E2E test catches it. Wave 6 closed that gap by design.
+- **Dimensional analysis is structural correctness, not a validation afterthought.** Unit tracking across every calculation, Buckingham Pi checks at every stage boundary, and interference checks at the spatial layer mean the pipeline fails closed rather than producing a wrong-but-plausible answer. The cross-cutting validation layer is the reason the E2E pipelines can be trusted; remove it and the whole stack becomes opinion, not engineering.
+- **Right-size the agent topology to the problem.** A simple pipe-sizing question does not need 5 agents; a full data-center design does. Three team topologies (`domain-specialist.yaml`, `cross-domain.yaml`, `full-build.yaml`) let the system match agent count to problem complexity at team-assembly time. Declaring topologies as files made the tradeoff inspectable and reusable.
+- **Model allocation: Opus for the small hard decision, Sonnet for the large structured work.** The Architect's intent classification is hard-to-get-right and cheap-to-run; the specialists' domain calculation is well-structured and expensive-to-run. Flipping that allocation (Sonnet routing to Opus specialists) would have been backwards — cheaper in the wrong place and more expensive in the wrong place. The router topology chipset encodes the correct direction.
+- **The educational bridge is translation, not simplification.** Mapping electrical distribution to Minecraft redstone is not dumbing down — it is rendering the same Boolean-algebra structure into a target substrate the learner already operates in. Factorio fluid systems carry the same throughput / pressure / buffering mathematics that real cooling loops do. Preserving the mathematics while changing the substrate is the load-bearing property.
+- **Standards compliance belongs inline with the output, not in a separate document.** Every calculation output cites its IEC / NEC / ASHRAE / ASME clause; every P&ID symbol carries its ISA-5.1 reference; every SLD symbol carries its IEEE C2-2023 reference. Inline citation means any downstream reader (agent or human) can trace any artifact back to a named standard clause without a side-channel lookup.
+- **Dogfooding observation targets are the schema for the next release's patch stream.** The 12 structured targets at `dogfood/observation-targets.md` declared what would be observed during real use. v1.49's patch arc consumed that schema as its work item source. Writing the observation surface as a document before capturing data is the correct ordering — the schema defines what "data" even means.
+- **Dogfooding is observation, not validation.** v1.48 ships with no claim that the pack has been used against a real data-center project. The observation targets document specifies what would be captured if it were. Distinguishing "this shipped" from "this has been used in anger" is integrity in release notes; v1.48 is the former, and v1.49-era patches carry the story of the latter.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.47](../v1.47/) | Predecessor — Holomorphic Dynamics Educational Pack; the "Space Between" mathematical thread v1.48's educational bridge extends |
+| [v1.49](../v1.49/) | Successor — mega-release consolidating post-v1.48 tracks; the 600+ patch arc whose early patches are v1.48 dogfooding refinements driven by the observation-targets schema |
+| [v1.46](../v1.46/) | Upstream Intelligence Pack — change-monitoring infrastructure that the physical-infrastructure pack could feed through for standards-revision tracking |
+| [v1.45](../v1.45/) | Agent-Ready Static Site — publishing substrate that the physical-infrastructure docs (`quick-start-*`, `skill-summaries.md`, safety audit report) can be shipped through |
+| [v1.44](../v1.44/) | SC Learn PyDMD Dogfood — prior dogfooding discipline that v1.48's observation-targets document builds on |
+| [v1.40](../v1.40/) | sc:learn Dogfood Mission — the observation-loop pattern v1.48's dogfood schema reuses |
+| [v1.37](../v1.37/) | Complex Plane Learning Framework — "Space Between" curriculum's mathematical substrate referenced in the educational bridge |
+| [v1.35](../v1.35/) | Mathematical Foundations Engine — dimensional-analysis primitives (Buckingham Pi, unit tracking) that v1.48 extends into engineering domains |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform — previous largest release (14 phases); v1.48 is the first to approach that scope (12 phases) |
+| [v1.31](../v1.31/) | GSD-OS MCP Integration — the MCP stack the router topology chipset hooks into |
+| [v1.27](../v1.27/) | Foundational Knowledge Packs — skill-pack conventions v1.48's physical-infrastructure pack conforms to |
+| [v1.25](../v1.25/) | Ecosystem Integration — dependency DAG the Safety Warden registers into |
+| [v1.8.1](../v1.8.1/) | First adversarial audit — precedent for the SC-01..SC-22 mandatory-pass discipline |
+| [v1.0](../v1.0/) | Core Skill Management — adaptive-loop substrate every release including v1.48 extends |
+| `skills/physical-infrastructure/` | Complete pack root — 8 skills, 6 agents, 3 teams, 80 symbols, integration + educational modules |
+| `skills/physical-infrastructure/audit/safety-audit-report.md` | Phase 445-02 safety audit — 22/22 SC tests PASS, 3-layer defense-in-depth, overall verdict PASS |
+| `skills/physical-infrastructure/dogfood/observation-targets.md` | Phase 445-04 observation schema — 12 targets, sessions.jsonl schema, 10-session projections |
+| `skills/physical-infrastructure/README.md` | Phase 445-03 pack README — architecture diagram, quick-start examples, file manifest, topology descriptions |
+| `skills/physical-infrastructure/docs/quick-start-cooling.md` | Phase 445-03 cooling walkthrough with CA-01/CA-02 reference values |
+| `skills/physical-infrastructure/docs/quick-start-power.md` | Phase 445-03 power walkthrough with CA-06/CA-09/CA-12 reference values |
+
+## Engine Position
+
+v1.48 is the pack-maturity release of the v1.33–v1.49 infrastructure-hardening arc and the immediate substrate for v1.49's mega-release consolidation. Where v1.33 (GSD OpenStack Cloud Platform) proved that a 14-phase wave could ship coherently, v1.48 proved that a 12-phase wave with a non-bypassable safety layer could do the same against an externally standardized domain (NEC, ASHRAE, ISA-5.1, IEEE C2-2023). Where v1.45 (Agent-Ready Static Site) established the publishing substrate and v1.46 (Upstream Intelligence Pack) established change monitoring, v1.48 established domain-engineering rigor — the first release where wrong output could cause physical-world harm and the architecture had to reflect that stakes gradient. The Router Topology Chipset's Opus-Architect + Sonnet-specialist allocation became a reusable cost-efficient execution pattern picked up across v1.49.x chipsets. The dogfooding observation-targets document became the schema that drove v1.49.x early patches. The dimensional-analysis cross-cutting validation layer became the correctness model for subsequent engineering-style packs. v1.48 is not a foundation release (v1.0 already holds that slot), but it is a template release: the shape a domain-engineering pack takes when it is built safety-first, standards-inline, and tests-first at the commit level.
+
+## Files
+
+- `skills/physical-infrastructure/` — complete pack root: 8 domain skills, 6 agents (Architect + 4 specialists + Warden), 3 team topologies, 80 SVG symbols (50 ISA-5.1 + 30 IEEE C2-2023), integration pipelines, educational bridge, dogfood observation targets, docs, data, lib, types
+- `skills/physical-infrastructure/README.md` — Phase 445-03 pack README; architecture diagram showing 6-agent pipeline, quick-start examples for cooling and power, 55-file manifest across 8 directories, three team-topology descriptions (design-review, rapid-prototype, construction-package), safety architecture section with audit-report link, 80-requirements / 14-domains coverage table
+- `skills/physical-infrastructure/audit/safety-audit-report.md` — Phase 445-02 safety audit; all 22 SC-01..SC-22 tests pass, PE disclaimer verified across 5 output types, bypass-resistance 3 layers, thresholds validated against ASME B31.3 / NFPA 70E / ASHRAE / NEC / OSHA, overall verdict PASS
+- `skills/physical-infrastructure/docs/quick-start-cooling.md` — Phase 445-03 cooling 5-step walkthrough with CA-01/CA-02 reference calculations, PE-disclaimer and Safety-Warden references
+- `skills/physical-infrastructure/docs/quick-start-power.md` — Phase 445-03 power 5-step walkthrough with CA-06/CA-09/CA-12 reference calculations, PE-disclaimer and Safety-Warden references
+- `skills/physical-infrastructure/docs/skill-summaries.md` — Phase 445-03 one-paragraph summaries for 8 domain skills and 6 agents, PE-disclaimer and Safety-Warden references
+- `skills/physical-infrastructure/dogfood/observation-targets.md` — Phase 445-04 observation schema; 12 targets (3 safety, 2 calc-accuracy, 2 agent-selection, 5 cross-domain/simulation/educational/symbol/voltage), sessions.jsonl writer schema, 10-session emergent sub-skill projections
+- `skills/physical-infrastructure/skills/` — 9 skill subdirectories (fluid-systems, power-systems, thermal-engineering, blueprint-engine, dimensional-analysis, simulation-bridge, construction-docs, creative-pipeline, minecraft-socketedit)
+- `skills/physical-infrastructure/agents/` — architect-agent.md, safety-warden.md, specialist-agents.md
+- `skills/physical-infrastructure/chipset.yaml` + `chipset-docs.md` — Router topology configuration and documentation
+- `package.json`, `src-tauri/Cargo.toml`, `src-tauri/tauri.conf.json` — release-window version bumps to 1.48.0 (commit `deead427f`)
+- `docs/release-notes/v1.48/chapter/00-summary.md` — chapter summary with prev/next navigation
+- `docs/release-notes/v1.48/chapter/03-retrospective.md` — What Worked / What Could Be Better inventory
+- `docs/release-notes/v1.48/chapter/04-lessons.md` — 7-lesson extraction with classification and apply/investigate status (lesson #256 applied in v1.49.17)
+- `docs/release-notes/v1.48/chapter/99-context.md` — prev/next navigation and parse-confidence metadata
+
+---
+
+_Parse confidence: 1.00 — authored from the Phase 434–445 plan set, the `skills/physical-infrastructure/` tree, the Phase 445 safety audit report and its 22 SC-01..SC-22 mandatory-pass tests, the v1.48 git log (release window `v1.48~5..v1.48` plus the full 55-commit milestone footprint `d5a46fbe1..deead427f`), and the chapter artifacts under `docs/release-notes/v1.48/chapter/`._
