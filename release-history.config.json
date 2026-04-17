@@ -1,0 +1,65 @@
+{
+  "$schema": "./tools/release-history/config.schema.json",
+  "_comment": "Release History feature — generic defaults. Any repo can use this tool by pointing the paths at its release-notes tree. Project-specific overrides live in release-history.local.json (gitignored).",
+
+  "source_dir": "docs/release-notes",
+  "index_file": "docs/RELEASE-HISTORY.md",
+  "roadmap_dir": ".planning/roadmap",
+  "cache_dir": ".planning/release-cache",
+  "mission_dir": ".planning/missions/release-history-tracking",
+
+  "db": {
+    "driver": "sqlite",
+    "sqlite_path": ".planning/release-history.db",
+    "postgres_url_env": "RH_POSTGRES_URL",
+    "postgres_schema": "release_history"
+  },
+
+  "version_regex": "^v(\\d+)\\.(\\d+)(?:\\.(\\d+))?(?:\\.\\d+)?(?:-(.+))?$",
+
+  "publish": {
+    "enabled": true,
+    "allowlist": [
+      "00-summary.md",
+      "01-features.md",
+      "02-metrics.md",
+      "03-retrospective.md",
+      "04-lessons.md",
+      "99-context.md"
+    ],
+    "allowlist_prefix_regex": "^(00|01|02|03|04|99)[a-z]?-",
+    "toplevel_allowlist": ["STORY.md", "INDEX.md"],
+    "targets": [
+      {
+        "name": "github",
+        "kind": "local_copy",
+        "dest": "docs/release-notes/{version}/chapter/{file}",
+        "description": "Mirror chapters into the repo's own release-notes tree. Commit + push to publish on GitHub."
+      }
+    ]
+  },
+
+  "leak_scan_patterns": [
+    "\\.planning/(?:fox-companies|HANDOFF|memory|missions|intel|agent-memory)",
+    "CLASSIFIED|PRIVATE — "
+  ],
+
+  "ghosts": [],
+
+  "classifier": {
+    "distinctive_keyword_min_length": 6,
+    "max_lookahead_releases": 100,
+    "rule_threshold": {
+      "min_distinctive_hits": 2,
+      "min_total_hits_with_one_distinctive": 3
+    }
+  },
+
+  "llm_tiebreaker": {
+    "enabled": true,
+    "cli_command": "claude",
+    "cli_args": ["-p", "{prompt}", "--output-format", "text"],
+    "batch_size": 5,
+    "timeout_ms": 180000
+  }
+}
