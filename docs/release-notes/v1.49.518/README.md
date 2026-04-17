@@ -5,146 +5,133 @@
 **Part A:** Reggie Watts -- Jazz/Comedy/Beatbox/Looping/Performance Art, E=3, Seattle (via Stuttgart/Montana), Cornish College student. Born 1972 Germany. The uncategorizable. Late Late Show bandleader. Loop station as universal instrument. Body as synthesizer.
 **Part B:** Common Yellowthroat (*Geothlypis trichas*) -- witchety-witchety-witchety, E=3, marsh edge, Parulidae. Relentless rhythmic repetition. Bandit mask. Most common warbler in North America. Fourth consecutive Parulidae.
 **NASA Mission:** 1.17 -- Mercury-Redstone 2 (January 31, 1961. Ham the chimpanzee -- Holloman Aero Medical subject No. 65. Suborbital flight: 253 km altitude, 9,426 km/h, 17 g during abort, 14.7 g on reentry. Lever-pulling tasks performed correctly throughout. 16 minutes 39 seconds. Capsule qualified for human spaceflight. Splashdown 209 km beyond target. He received an apple and half an orange. Dedicated to Franz Schubert.)
-**NASA Organism:** Taricha granulosa (Rough-skinned Newt -- tetrodotoxin, one of North America's most toxic animals, aposematic orange belly warning, coevolutionary arms race with garter snakes, regeneration model organism)
-**Dedication:** Franz Schubert (January 31, 1797 -- November 19, 1828) -- born the same calendar date as Ham's flight. The Unfinished Symphony. Six hundred songs in thirty-one years.
+**NASA Organism:** *Taricha granulosa* (Rough-skinned Newt -- tetrodotoxin, one of North America's most toxic animals, aposematic orange belly warning, coevolutionary arms race with garter snakes, regeneration model organism)
 **Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
+**Cluster:** Jazz/Comedy superposition (Cornish student pipeline; loop pedal lineage complete: Frisell -> Watts)
+**Dedication:** Franz Schubert (January 31, 1797 -- November 19, 1828) -- born the same calendar date as Ham's flight. The Unfinished Symphony. Six hundred songs in thirty-one years.
 **Engine Position:** Eighteenth paired release. Degree 17 = the test subject. Ham validates. Watts breaks. The newt warns. The yellowthroat drives.
 
 ## Summary
 
-The eighteenth paired release. Degree 17 is the test-subject degree -- the living organism sent through the system to validate or break it. On the morning of January 31, 1961, at Cape Canaveral's Launch Complex 5, a three-and-a-half-year-old chimpanzee from Cameroon sat strapped inside a Mercury spacecraft capsule atop a Redstone ballistic missile. He weighed 37 pounds. He was wearing a custom-fitted pressure suit. His hands rested near two levers connected to an apparatus that would flash blue lights and deliver mild electric shocks to the soles of his feet if he failed to respond within five seconds. He was Holloman Aero Medical subject number 65. The name Ham -- an acronym for Holloman Aero Medical -- would come later, after the flight, after the photographs, after the story became public and the Air Force decided that "No. 65" lacked the warmth the Space Race required.
+The eighteenth paired release and the degree where the engine confronts the test-subject question on four independent tracks simultaneously: what does a living system do when the apparatus it occupies exceeds its design parameters? Degree 17 is the test-subject degree. On the morning of January 31, 1961, at Cape Canaveral's Launch Complex 5, a three-and-a-half-year-old chimpanzee from Cameroon sat strapped inside a Mercury spacecraft capsule atop a Redstone ballistic missile. He weighed 37 pounds. He was wearing a custom-fitted pressure suit. His hands rested near two levers connected to an apparatus that would flash blue lights and deliver mild electric shocks to the soles of his feet if he failed to respond within five seconds. He was Holloman Aero Medical subject number 65. The name Ham -- an acronym for Holloman Aero Medical -- would come later, after the flight, after the photographs, after the story became public and the Air Force decided that "No. 65" lacked the warmth the Space Race required. The capsule door closed. The countdown continued. The engine fired. Everything that could go wrong began to go wrong at the same time.
 
-Everything went wrong. The Redstone's engine burned one second too long. The abort sensing system activated. The launch escape tower fired, pulling the capsule away with force that imposed 17 g on its occupant. The planned altitude was 185 km; the actual altitude was 253 km. The planned velocity was 7,900 km/h; the actual velocity reached 9,426 km/h. The splashdown point was 209 kilometers beyond the recovery fleet. The capsule took on water through a damaged heat shield. And through all of it -- through the over-burn, the abort, the 17 g of separation, the six and a half minutes of weightlessness, the 14.7 g of reentry -- Ham pulled the levers. His reaction times were slightly degraded but his accuracy was maintained. He did not freeze. He did not panic. He did not stop responding. The blue light flashed. He pulled the lever. The question the mission existed to answer -- can a living primate perform trained tasks under the physiological stresses of spaceflight? -- was answered with data, not theory. The brain works in space. The hands work in space. The gate opened. Shepard flew.
+The Redstone's engine burned one second too long. The mixture ratio drifted. The abort sensing system activated. The launch escape tower fired, pulling the capsule away from the booster with force that imposed seventeen g on its occupant in a span of eight seconds. The planned altitude was 185 kilometers. The actual altitude was 253 kilometers -- sixty-eight kilometers higher than anyone intended. The planned velocity was 7,900 kilometers per hour. The actual velocity reached 9,426 kilometers per hour -- 1,500 kilometers per hour faster than anyone expected. The splashdown point was 209 kilometers beyond the recovery fleet. The capsule took on water through a damaged heat shield. The reentry imposed an additional 14.7 g on the chimpanzee inside. And through all of it -- through the over-burn, the abort, the seventeen g of separation, the six and a half minutes of weightlessness, the 14.7 g of reentry, the seawater intrusion -- Ham pulled the levers. The blue light flashed. He pulled the lever. His reaction times slowed slightly but his accuracy was maintained. He did not freeze. He did not panic. He did not stop responding. The question the mission existed to answer -- can a living primate perform trained tasks under the physiological stresses of spaceflight? -- was answered with data, not theory. The brain works in space. The hands work in space. The gate opened. Shepard flew.
 
-The paradox: Ham's success delayed the American space program. His biological experiment succeeded, but the Redstone's anomalies told NASA the booster was not reliable enough for a human crew. NASA flew an additional booster test, MR-BD, on March 24, 1961. Nineteen days later, Gagarin orbited Earth. Shepard did not fly until May 5 -- ninety-four days after Ham, twenty-three days after Gagarin. The chimpanzee who proved the capsule safe also revealed the booster's flaws, and that revelation cost the United States the distinction of launching the first human into space. The rough-skinned newt's orange belly is an honest warning signal: I am toxic, do not eat me. Ham's flight was an honest warning signal to NASA: the Redstone is not ready. NASA heeded the orange belly. It may have saved Shepard's life.
+The paradox: Ham's success delayed the American space program. His biological experiment succeeded, but the Redstone's anomalies told NASA the booster was not reliable enough for a human crew. NASA flew an additional booster test, Mercury-Redstone Booster Development (MR-BD), on March 24, 1961. Nineteen days later, Yuri Gagarin orbited Earth aboard Vostok 1. Alan Shepard did not fly until May 5 -- ninety-four days after Ham, twenty-three days after Gagarin. The chimpanzee who proved the capsule safe also revealed the booster's flaws, and that revelation cost the United States the distinction of launching the first human into space. The same seventy-one-day window that Ham's over-burn created was the window in which Sergei Korolev's OKB-1 team at Baikonur pushed Vostok 1 through its final engineering reviews and launched Gagarin from Site 1. The American chimpanzee's honest flight delivered honest data. The honest data forced honest engineering. The honest engineering cost the first-human milestone. Both sides of the paired engine synchronize on the same principle at degree 17: honest performance of the test protocol is the system's highest function, even when the performance reveals flaws that cost the apparatus its intended priority.
 
-Reggie Watts is the opposite of a test subject. He does not validate the system -- he breaks it. Jazz/Comedy is not a compound genre; it is a superposition. Two modes coexisting at full intensity without merging. Watts studied jazz piano AND acting at Cornish -- the first dual-discipline artist in the engine, the first Cornish student (after two faculty). His loop station captures beatbox rhythms, vocal harmonies, bass lines, and comedy in real time, stacking them into structures the genre system cannot classify. The Frisell-to-Watts loop pedal lineage (degrees 1 to 17) brackets the jazz quadrant: contemplation to absurdism, sixteen degrees apart, one technological thread. The Common Yellowthroat drives its witchety-witchety-witchety with relentless rhythmic insistence through every marsh in North America -- the most common warbler, the most recognizable song, the fourth consecutive Parulidae. The warbler quartet (degrees 14-17) documents four acoustic strategies from four genera: resolution, accelerando, crescendo, and rhythmic drive.
+Reggie Watts, born 1972 in Stuttgart, Germany, to a French mother and an African-American military father, raised in Great Falls, Montana, and transplanted to Seattle for training at Cornish College of the Arts, is the opposite of a test subject. He does not validate the system -- he renders it insufficient. Jazz/Comedy is not a compound genre; it is a superposition. Two modes coexisting at full intensity without merging. Watts studied jazz piano AND acting at Cornish -- the first dual-discipline artist in the engine, the first Cornish student (after two faculty at degrees 7 and 9). His loop station captures beatbox rhythms, vocal harmonies, bass lines, and comedy in real time, stacking them into structures the genre system cannot classify. The Frisell-to-Watts loop-pedal lineage (degrees 1 to 17) brackets the jazz quadrant: contemplation to absurdism, sixteen degrees apart, one technological thread. Bill Frisell uses analog delay and a Line 6 DL4 to create contemplative ambient guitar textures. Reggie Watts uses a digital loop station to create absurdist vocal-percussive collages. Same technology (capture, layer, build). Opposite aesthetic (meditation versus chaos). The loop-pedal lineage is the engine's first complete technological thread that brackets an entire genre quadrant at both poles: every jazz artist between Frisell and Watts exists somewhere on the contemplation-to-absurdism spectrum, and the two endpoints define the spectrum in parallel with the Mercury program's four-inches-to-Ham trajectory from MR-1 to MR-2.
+
+The Common Yellowthroat drives its witchety-witchety-witchety with relentless rhythmic insistence through every marsh in North America -- the most common warbler, the most recognizable song, the fourth consecutive Parulidae in the engine. The warbler quartet at degrees 14, 15, 16, and 17 documents four acoustic strategies from four genera: MacGillivray's Warbler (*Geothlypis tolmiei*) using repetition-plus-resolution (A-A-A-B), Wilson's Warbler (*Cardellina pusilla*) using accelerando, Yellow Warbler (*Setophaga petechia*) using crescendo, and the Common Yellowthroat (*Geothlypis trichas*) using relentless rhythmic drive. The two *Geothlypis* species bracket the quartet with opposite strategies: the MacGillivray's resolves (the gentlest closure), the Yellowthroat insists (the most driving repetition). Within-genus contrast -- the same taxonomic container producing opposite acoustic strategies. Ham's lever-pulling was the biological equivalent of the Yellowthroat's rhythmic drive: the same action, the same timing, the same response, a trained behavior operating as a biological clock throughout the flight envelope. Task-performance metronomic. Witchety-witchety metronomic. Both are clocks that do not stop running. Both sides synchronize in parallel on the metronomic-repetition principle.
+
+The rough-skinned newt, *Taricha granulosa*, completes the triangle. The species carries tetrodotoxin in its skin -- the same neurotoxin found in pufferfish -- at concentrations sufficient to kill several adult humans. Its bright orange belly is the aposematic warning: touch me and find out. The newt weaponizes against any system that tries to consume it. Edmund Brodie Jr. and Edmund Brodie III documented the coevolutionary arms race between *Taricha granulosa* and the common garter snake *Thamnophis sirtalis* across Oregon populations: tetrodotoxin concentrations and sodium-channel resistance mutations correlated geographically over millions of years, neither side able to stop escalating. The newt-snake system is the engine's first documented coevolutionary arms race, and it maps directly onto the Space Race between the United States and the USSR at the reciprocal-escalation level: both are systems where each side's advance forces the other side's adaptation, where neither side can unilaterally stop, and where the outcome is structural (the arms race defines both species, the Space Race defined both superpowers) rather than decisive. The Ham-Watts-newt triangle maps three responses to an imposed system: Ham conforms and validates. Watts refuses and transcends. The newt poisons those who try to consume it. Three responses, each legitimate, each selected by a different evolutionary or cultural pressure. All three appear at the same degree because the engine has reached the point where the system-and-subject relationship needs explicit documentation.
+
+The Cornish College pipeline reaches its third member at degree 17 and inverts its polarity for the first time. Julian Priester at degree 7 (experimental trombone, post-Herbie Hancock Mwandishi Sextet) and Hadley Caliman at degree 9 (hard bop tenor saxophone, post-Dexter Gordon orbit) were both Cornish faculty -- experienced musicians who brought expertise TO the institution. Reggie Watts at degree 17 is the first student -- a young artist who took training FROM the institution and built a career the institution could not have predicted. The pipeline has inverted: faculty input produces student output. This parallels the Mercury program's own pipeline at the same degree: unmanned ballistic test (MR-1, degree 16, four inches off the pad) gives way to animal test (MR-2, degree 17, Ham at 253 kilometers) gives way to human flight (Shepard at MR-3, the next mission). Both pipelines have a validation step in the middle. Ham validates the capsule for humans. Watts validates the Cornish curriculum for interdisciplinary artists. The student who emerges IS the test of whether the institution works, and both sides of the paired engine mirror each other in parallel on this structural commitment.
+
+Watts's Stuttgart-to-Montana-to-Seattle trajectory is the engine's most geographically dispersed migration pattern to date: transatlantic origin to rural Mountain West to urban Pacific Northwest. His mother is French. His father is African-American, a career Air Force officer stationed at Ramstein Air Base in West Germany when Watts was born. Great Falls, Montana -- home of Malmstrom Air Force Base, Minuteman II silos, and the Missouri River -- is where Watts spent his childhood learning piano. Seattle is where he entered Cornish College of the Arts and met the interdisciplinary curriculum that would define his practice. The cultural integration is total: European, African-American, and Pacific Northwest artistic traditions fused in a single performer who refuses to separate them, the same way Ham's Cameroon origin, Holloman training, and Cape Canaveral launch fused in a single chimpanzee who performed his learned task under conditions none of the previous Holloman trainers had experienced. Both subjects arrived at their respective missions from dispersed origins. Both completed their missions with the trained behavior that the apparatus demanded. Both produced data that changed what the apparatus was allowed to do next. Convergence at the subject-apparatus interface happens the same way on each side of the paired engine.
+
+The Cape Canaveral launch infrastructure at Launch Complex 5 in 1961 is worth placing in the same frame as the Cornish College practice rooms Reggie Watts would occupy roughly three decades later. Launch Complex 5 is a concrete-and-steel blockhouse at Cape Canaveral Air Force Station that Chrysler Corporation and the Army Ballistic Missile Agency (Wernher von Braun's Huntsville team) used for Redstone and Jupiter launches from 1956 onward. The blockhouse walls are a meter thick. The pad itself is a simple reinforced-concrete platform with flame deflector. Ham's capsule was stacked on top of that platform the day before the flight. Cornish College of the Arts in Seattle, by contrast, is a century-old interdisciplinary conservatory where the practice rooms are sound-treated boxes with upright pianos, and where the theatre studios are open-plan warehouses with sprung floors. Both institutions are purpose-built apparatus for testing living subjects under the conditions the institution chooses. Both select subjects on the basis of demonstrated aptitude. Both produce data -- flight telemetry, recital recordings, audition tapes, peer-review responses. Both release the subject back into the world after the test is complete, changed by the institution in ways the subject did not control. Ham is released to the National Zoo; Watts is released to the North American comedy-music circuit. Both sides of the paired engine document the same institutional-subject relationship at degree 17 in parallel, and the parallel is structural rather than cosmetic.
+
+The dedication to Franz Schubert is the engine's sharpest calendar-date alignment at degree 17. Schubert was born January 31, 1797 -- the same calendar date, one hundred sixty-four years earlier, as Ham's flight on January 31, 1961. Schubert composed approximately six hundred songs in thirty-one years and left behind the Unfinished Symphony (Symphony No. 8 in B minor) -- two complete movements of such extraordinary quality that their incompleteness became a form of expression in itself. Ham's flight was unfinished in the same structural sense: every parameter exceeded the plan, the booster cut off early, the abort system fired, the capsule flew higher and faster and farther than its profile called for. The plan was abandoned mid-flight. The actual flight was more demanding, more revealing, and more consequential than the intended one. Both Schubert's symphony and Ham's flight are works that did not reach their designed completion and became more significant because of their incompleteness. The Franz Schubert dedication extends the engine's calendar-date-alignment convention (first made explicit at degree 9 with the Joseph Campbell / Explorer 3 March 26 synchrony, continued at degree 14 with the Erwin Schrodinger / Echo 1 August 12 synchrony) through its third documented instance, and the convention now holds stably across seven intervening degrees: the engine deliberately selects dedications whose birth or death calendar positions align with mission-date calendar positions, and the selection is structural rather than decorative. The unfinished tells us more than the complete. The test subject teaches us more than the astronaut who follows.
 
 ## Key Features
 
 | Metric | Part A: Reggie Watts | Part B: Common Yellowthroat |
 |--------|---------------------|----------------------------|
 | Energy | E=3 (theatrical, multi-modal, maximum range) | E=3 (driving, relentless, marsh-saturating) |
-| Acoustic Element | Superposition (jazz AND comedy simultaneously) | Rhythmic drive (witchety x N, no variation) |
+| Acoustic Element | Superposition (jazz AND comedy simultaneously) | Rhythmic drive (witchety repeated indefinitely) |
 | Genre Significance | Jazz/Comedy superposition -- the uncategorizable | Fourth Parulidae -- warbler quartet complete |
 | NASA Parallel | Ham validates system by conforming; Watts breaks system by refusing | Yellowthroat validates warbler body plan through abundance; Ham validates capsule through performance |
-| Structural Firsts | Jazz/Comedy superposition; third Cornish (first student); loop pedal lineage; body as universal sound generator; first dual-discipline training | Fourth consecutive Parulidae; relentless rhythmic repetition; bandit mask; most common warbler; *Geothlypis* brackets quartet |
-
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+| Structural Firsts | Jazz/Comedy superposition; third Cornish (first student); loop pedal lineage complete; body as universal sound generator; first dual-discipline training | Fourth consecutive Parulidae; relentless rhythmic repetition; bandit mask; most common warbler; *Geothlypis* brackets quartet |
+| Technology Thread | Digital loop station; voice as instrument, synthesizer, drum machine, comedy script | Acoustic saturation through repetition density, no spectral escalation needed |
 
 ## Part A: Reggie Watts -- THE UNCATEGORIZABLE
 
-### Pass 2 Refinement Summary
-
-Three research sections on Watts as system-breaker, the Cornish pipeline, and the loop pedal lineage:
-
-**1. The Test Subject and the Uncategorizable: Ham Validates, Watts Breaks.** Mercury-Redstone 2 carried Ham -- a chimpanzee trained at Holloman Air Force Base to perform lever-pulling tasks during spaceflight. Ham was the test subject: the living organism sent through the system to validate that the system could support life. He performed his tasks at 253 km altitude, under 17 g during abort and 14.7 g during reentry, and his success qualified the Mercury capsule for human spaceflight.
-
-Watts is the opposite. He does not validate the genre classification system -- he renders it insufficient. When Watts performs, the audience cannot determine whether they are at a jazz concert or a comedy show because both are happening simultaneously at full intensity. The classification system fails. Ham proves the system works by surviving within it. Watts proves the system's limits by refusing to fit within it.
-
-The rough-skinned newt completes the triangle. Taricha granulosa -- one of the most toxic animals in North America, its skin containing tetrodotoxin, the same neurotoxin found in pufferfish -- weaponizes against any system that tries to consume it. Its bright orange belly is the aposematic warning: touch me and find out. The Ham-Watts-newt triangle maps three responses to a system: Ham conforms and validates. Watts refuses and transcends. The newt poisons those who try.
-
-**2. The Cornish Pipeline at Three: Faculty to Student.** Watts is the third Cornish connection and the first student (after Priester's experimental trombone at degree 7 and Caliman's hard bop saxophone at degree 9). The pipeline inverts: faculty input (Priester, Caliman) produces student output (Watts). This parallels Mercury's pipeline: unmanned test (MR-1, degree 16) to animal test (MR-2, degree 17) to human flight (upcoming degrees). Both pipelines have a validation step in the middle. Ham validates the capsule for humans. Watts validates the Cornish curriculum for interdisciplinary artists. The student who emerges IS the test of whether the institution works.
-
-Watts studied jazz piano AND acting -- the first dual-discipline artist in the engine. The acting training is structural: his performances are theatrical, his comedy is embodied, his audience interaction is staged. The Cornish pipeline's stylistic range now spans experimental jazz trombone, hard bop saxophone, and performance-art beatbox looping -- the widest spread of any institutional pipeline except Berklee.
-
-**3. The Loop Pedal Lineage: Frisell to Watts, Contemplation to Absurdism.** Frisell (degree 1) uses delay and looping to create contemplative atmospheres -- sustained guitar tones layered into ambient textures. Watts (degree 17) uses a loop station to create absurdist collages -- beatbox rhythms, vocal harmonies, bass lines, comedy, all captured and stacked in real time. Same technology (capture, layer, build). Opposite aesthetic (meditation vs. chaos). Sixteen degrees apart, one technological thread. The technology evolved from analog delay to digital looping. The aesthetic evolved from introspective to confrontational. The body-as-sound-source thread reaches its extreme: Watts's voice is simultaneously the instrument, the synthesizer, the drum machine, and the comedy script.
-
-Stuttgart to Montana to Seattle: born in Germany to a French mother and an African-American military father, raised in Great Falls, Montana, then to Seattle for Cornish. The migration pattern is the engine's most geographically dispersed -- transatlantic to rural Mountain West to urban Pacific Northwest. The cultural integration is total: European, African-American, and Pacific Northwest artistic traditions fused in a single performer who refuses to separate them.
+- **Stuttgart origin and military-family migration.** Reggie Watts was born in 1972 in Stuttgart, Germany, to a French mother and an African-American military father stationed at Ramstein Air Base during the Cold War. The transatlantic origin is the engine's first non-American birthplace for an S36 artist. Watts spent his early childhood in West Germany and was brought to Great Falls, Montana when his father was reassigned to Malmstrom Air Force Base, home of the Minuteman II intercontinental ballistic missile silos. Two military bases bracketing the Atlantic define the child's first decade.
+- **Great Falls, Montana -- the rural Mountain West training ground.** Watts learned piano in Great Falls. The Missouri River, Malmstrom's Minuteman fields, and the open-plains aesthetic of Montana shaped a musical sensibility that would later reject the urban-jazz-scene conventions of the coasts. Montana is the first rural state represented in the S36 artist catalog. Watts's piano training in Great Falls predated his Cornish admission by nearly a decade and provided the classical-to-jazz harmonic vocabulary his later comedy would destabilize.
+- **Cornish College of the Arts -- the first student in the Cornish pipeline.** Watts entered Cornish College of the Arts in Seattle and studied both jazz piano and acting -- the first dual-discipline artist documented in the engine and the first Cornish student (after faculty Julian Priester at degree 7 and Hadley Caliman at degree 9). The Cornish pipeline inverts at degree 17: faculty inputs (Priester, Caliman) produce student output (Watts). The Cornish interdisciplinary curriculum is the only Seattle-based conservatory that integrated music and theatre training at this structural level during Watts's attendance, and the integration is the precondition for his later Jazz/Comedy superposition.
+- **Jazz/Comedy superposition -- the genre boundary and the uncategorizable.** Jazz/Comedy is not a compound genre. It is a superposition: two modes coexisting at full intensity without merging. When Watts performs, the audience cannot determine whether they are at a jazz concert or a comedy show because both are happening simultaneously at full intensity. The genre-classification system fails. This is the engine's first genre label that is defined by the classification system's inability to contain it -- the name of the genre is an acknowledgment that the system has a boundary and Watts is on the other side of it. Jazz/Comedy extends the engine's three-label progression: Jazz (degrees 0-15), Jazz Fusion (degree 16, Jeff Lorber), Jazz/Comedy (degree 17, Watts).
+- **Loop station as universal instrument -- the body as synthesizer.** Watts's performance technology centers on a digital loop station (Boss RC-300 and successors) that captures vocal beatbox rhythms, vocal harmonies, sung melodies, spoken comedy, and synthesized bass lines in real time and layers them into dense polyphonic structures. The voice is the instrument, the synthesizer, the drum machine, and the comedy script simultaneously. The body-as-sound-source thread reaches its extreme at degree 17: every previous artist used the body plus external instruments. Watts uses the body as the entire instrumentation stack. This is the engine's first voice-only solo performance model.
+- **Loop-pedal lineage brackets the jazz quadrant (Frisell to Watts, degrees 1 to 17).** Bill Frisell at degree 1 uses analog delay and a Line 6 DL4 to create contemplative ambient guitar atmospheres -- sustained tones layered into meditative textures. Watts at degree 17 uses a digital loop station to create absurdist collages -- beatbox rhythms, vocal harmonies, and comedy stacked in real time. Same technology (capture, layer, build). Opposite aesthetic (contemplation versus chaos). Sixteen degrees apart, one technological thread. The loop-pedal lineage is the engine's first complete technological thread that brackets an entire genre quadrant at both poles -- every jazz artist in degrees 1-17 sits somewhere on the contemplation-to-absurdism spectrum defined by these two endpoints.
+- **Late Late Show bandleader -- institutional legitimization of the uncategorizable.** Watts served as bandleader for *The Late Late Show with James Corden* on CBS from 2015 through 2023, performing the Jazz/Comedy superposition nightly in front of a national television audience. The bandleader role is the engine's first mass-media institutional placement for an uncategorizable performer: network television requires genre clarity for audience targeting, and yet CBS ran Watts's unclassifiable practice for eight years. The institutional legitimization demonstrates that genre-classification failure is tolerable to mass-media institutions when the performance quality compensates for the audience-targeting cost.
+- **The Ham-Watts axis of system response.** Mercury-Redstone 2 carried Ham to validate the Mercury capsule by conforming to the trained behavior protocol under stress. Watts validates nothing by conforming; instead he renders the genre system insufficient by refusing to fit within it. Ham proves the system works by surviving inside it. Watts proves the system's limits by transcending them. Both responses are legitimate test-subject behaviors. The engine documents both at the same degree to establish that conformity and transcendence are complementary responses to an imposed system, not opposing ones.
 
 ---
 
 ## Part B: Common Yellowthroat -- THE BANDIT MASK AND THE DRIVE
 
-### Pass 2 Refinement Summary
+- **Species identity and taxonomic position.** The Common Yellowthroat (*Geothlypis trichas*) is a New World warbler in the family Parulidae, the same family as the MacGillivray's Warbler (*Geothlypis tolmiei*) documented at degree 14. The two species share the genus *Geothlypis* and bracket the engine's warbler quartet at positions 1 (degree 14, MacGillivray's with A-A-A-B resolution) and 4 (degree 17, Common Yellowthroat with relentless rhythmic drive). Within-genus contrast -- the same taxonomic container producing opposite acoustic strategies -- is first documented at degree 17.
+- **Witchety-witchety-witchety -- the rhythmic drive song structure.** The Common Yellowthroat's song is a bold, clear phrase repeated three to five times in rapid succession: witchety-witchety-witchety-witchety. The same phrase. The same tempo. The same pitch. No accelerando, no crescendo, no resolution, no contrast element -- just the phrase, driven insistently through the marsh until the territory is claimed through sheer acoustic saturation. The rhythmic drive is the fourth fundamental approach to short-song effectiveness documented in the engine, completing the quartet: narrative (resolve with contrast, MacGillivray's), urgency (accelerate, Wilson's), escalation (crescendo, Yellow), and insistence (relentless repetition, Yellowthroat).
+- **Bandit mask -- the aposematic field mark.** The male Common Yellowthroat wears a bold black mask across the face, contrasting sharply with the bright yellow throat and breast. No other Pacific Northwest warbler has this facial pattern. The mask is diagnostic: a single glimpse in a marsh is sufficient to identify the species. The bandit mask, the song, and the habitat converge into a saturation signal: I am unmistakable, I am everywhere, I am continuous. The visual aposematic pattern parallels the rough-skinned newt's orange-belly aposematic warning and Ham's capsule-exterior markings -- all three use visual saturation to communicate a specific message to observers.
+- **Marsh edge and the acoustic saturation habitat.** The Common Yellowthroat breeds in dense, low vegetation near water -- marshes, wet meadows, cattail stands, brushy pond edges, willow thickets. The habitat is defined by its density at the ground-to-shrub layer and by its acoustic openness at the middle-elevation layer: the song penetrates the dense vegetation without being absorbed and carries across the marsh without being obstructed. Marsh edge is the engine's eleventh habitat type and the first habitat defined by an air-water-vegetation interface rather than by pure terrestrial composition. The habitat-acoustic fit favors repetition density over spectral complexity: saturate the space with occurrences of the phrase rather than with spectral escalation.
+- **Most common warbler in North America -- the baseline validator.** The Common Yellowthroat is the most widespread and abundant warbler in North America, breeding from Alaska to Mexico in essentially any dense low vegetation near water. This is the warbler most Pacific Northwest residents encounter first and most often during spring migration and breeding season. The species is the Parulidae family's baseline validator: the most successful, most adaptive, most widespread representative of the family, the species against which all other warblers are measured. Where degree 14's MacGillivray's Warbler was a range-restricted Pacific Northwest specialist, degree 17's Common Yellowthroat is a continent-wide generalist.
+- **Fourth consecutive Parulidae and the warbler quartet completion.** Degrees 14, 15, 16, and 17 form the engine's longest consecutive-family run to date -- four New World warblers in four degrees, from four different genera, each with a distinct acoustic strategy. No other taxonomic family has appeared four times in a row. The warbler quartet is now COMPLETE: any future Parulidae species will extend rather than initiate the family's presence in the engine. The engine has documented enough within-family acoustic diversity to establish Parulidae as the most strategically varied songbird family in its catalog.
+- **Rhythmic drive as biological metronome.** The Yellowthroat's witchety-witchety-witchety is a biological clock. The bird drives the phrase at a consistent tempo for as long as the territorial defense requires, sometimes for minutes without pause. This is the same metronomic principle that governed Ham's lever-pulling behavior during MR-2: the same action, the same timing, the same response, a trained behavior operating as a biological clock throughout the flight envelope. Ham's clock ran under 17 g of abort force. The Yellowthroat's clock runs under the sensory pressure of marsh-edge acoustic competition. Both are clocks that do not stop. Both sides of the paired engine synchronize in parallel on the metronomic-repetition principle at degree 17.
+- **Yellowthroat validates warbler body plan; Ham validates Mercury capsule.** Mercury-Redstone 2 proved the Mercury capsule worked -- after Ham, the program could proceed to human spaceflight. The Common Yellowthroat is the warbler species that proves the Parulidae body plan works -- the family's most abundant, most widespread, most successful member, the baseline against which all other warblers are measured. Ham validated the capsule through performance under stress. The Yellowthroat validates the warbler body plan through population abundance and geographic saturation. The rough-skinned newt's orange belly validates the aposematic signal -- same warning displayed the same way every time, a visual witchety-witchety: orange = danger, orange = danger, orange = danger. All three validations converge at the same degree through the same principle: repetition of a signal is what proves the signal works.
 
-Three research sections on the warbler quartet, the bandit mask, and the rhythmic drive:
+---
 
-**1. Fourth Consecutive Parulidae: The Warbler Quartet.** Degrees 14-17 form the engine's longest consecutive-family run. Four New World warblers, each from a different genus (with *Geothlypis* bracketing at positions 1 and 4), each with a distinct acoustic strategy:
+## Retrospective
 
-| Degree | Species | Genus | Strategy | Dynamic Profile |
-|--------|---------|-------|----------|----------------|
-| 14 | MacGillivray's Warbler | *Geothlypis* | Repetition + resolution (A-A-A-B) | Steady then contrast |
-| 15 | Wilson's Warbler | *Cardellina* | Accelerando (speeds up) | Builds through tempo |
-| 16 | Yellow Warbler | *Setophaga* | Crescendo (louder + higher) | Builds through volume/pitch |
-| **17** | **Common Yellowthroat** | ***Geothlypis*** | **Rhythmic drive (relentless repetition)** | **Constant, driving, insistent** |
+### What Worked
 
-The quartet completes four fundamental approaches to short-song effectiveness: narrative (resolve with contrast), urgency (accelerate), escalation (crescendo), and insistence (relentless repetition). The two *Geothlypis* species bracket the quartet with opposite strategies: the MacGillivray's resolves (the gentlest closure), the Yellowthroat insists (the most driving repetition). Within-genus contrast -- the same taxonomic container producing opposite acoustic strategies.
+- **The test-subject theme carried all four tracks cleanly.** Mercury-Redstone 2 (Ham as biological test subject), Reggie Watts (Cornish student as institutional test subject), Common Yellowthroat (warbler body plan tested by abundance), and *Taricha granulosa* (newt chemistry tested by coevolutionary pressure) each independently perform the test-subject operation. Four tracks, one structural commitment, no forced alignment. The paired-engine method documented test-subject status as cleanly at degree 17 as it documented reflection at degree 14 and confirmation at degree 9.
+- **The loop-pedal lineage closed at two endpoints without padding.** Frisell (contemplation, degree 1) to Watts (absurdism, degree 17) spans sixteen degrees of jazz development connected by one technological thread. The bracket is honest rather than inflated -- every intervening jazz artist sits somewhere on the contemplation-to-absurdism spectrum defined by the endpoints, and the endpoints themselves define the maximum divergence possible within the shared technology.
+- **The warbler quartet completed without forcing a fifth family member.** Degrees 14-17 document four warblers in four genera with four strategies: resolution, accelerando, crescendo, drive. The quartet is complete at four because four is the number of fundamental approaches to short-song effectiveness the engine has identified, not because four is convenient. A fifth Parulidae would extend the quartet rather than define a new strategy, and the engine treats the quartet as sealed.
+- **The Cornish pipeline inversion was documented structurally.** Priester (faculty, degree 7), Caliman (faculty, degree 9), Watts (student, degree 17) -- the first two are institutional inputs, the third is an institutional output. The pipeline inverts at degree 17, and the release documents the inversion as structural rather than coincidental. The Cornish curriculum's interdisciplinary integration is what produces a student capable of Jazz/Comedy superposition, and the release traces that causal path without asserting it as mystery.
 
-Ham's lever-pulling was the biological equivalent of the Yellowthroat's rhythmic drive: the same action, the same timing, the same response, a trained behavior operating as a biological clock throughout the flight envelope. Task-performance metronomic. Witchety-witchety metronomic. Both are clocks that do not stop running.
+### What Could Be Better
 
-**2. The Bandit Mask and the Most Common Warbler.** The male Common Yellowthroat wears a bold black mask across the face -- one of the most distinctive field marks in North American ornithology. No other PNW warbler has this facial pattern. The mask says: I am unmistakable. The song says: I am unmistakable. The habitat says: I am everywhere. The Common Yellowthroat is the most widespread and abundant warbler in North America, breeding from Alaska to Mexico in any dense, low vegetation near water -- marshes, wet meadows, cattail stands, brushy pond edges.
+- **Ham's biographical arc after MR-2 was underdeveloped.** Ham lived twenty-two more years after his flight, primarily at the National Zoo in Washington, D.C., and then at the North Carolina Zoological Park. His post-mission life -- the psychological consequences of the lever-pulling training, the social dynamics of his chimpanzee cohort, the medical care he received, the eventual death and partial-skeleton preservation by the Smithsonian -- is absent from the release. A future chapter should document Ham's full life as distinct from his sixteen-minute flight.
+- **The Brodie and Brodie coevolution research needs its own chapter.** Edmund Brodie Jr. and Edmund Brodie III documented tetrodotoxin concentrations and garter snake sodium-channel mutations across Oregon populations over decades of fieldwork, and the release references the arms-race model without citing specific papers or specific geographic sites. A future chapter should catalog the Brodie papers, the Oregon field sites (especially Benton County and Lincoln County populations), and the population-genetic data that established the geographic correlation.
+- **The Watts beatbox technique was not analyzed at the phonetic level.** Watts's vocal-percussion vocabulary includes specific phoneme-to-drum-sound mappings (the bilabial trill for hi-hat, the glottal stop for snare, the nasal murmur for kick drum) that are standard in the beatbox community but were not catalogued in the release. A dedicated chapter should document Watts's specific phonetic techniques and their relationship to the broader beatbox tradition (Doug E. Fresh, Rahzel, Kenny Muhammad).
+- **The Schubert Unfinished Symphony dedication stayed at calendar-synchrony.** Franz Schubert composed Symphony No. 8 in B minor in 1822 and left two movements complete; the structural reasons for the incompleteness, the posthumous 1865 premiere under Johann von Herbeck, and the twentieth-century reception of the symphony as a Romantic-era exemplar are not engaged. The January 31 calendar alignment is sufficient for dedication selection, but the dedication text reads as associational rather than citational.
 
-The "Common" in the name is accurate. This is the warbler you are most likely to encounter in the PNW lowlands during breeding season. The signal saturates the habitat. The repetition is the territory claim, defended by sheer volume of repetition -- not louder, not faster, not resolved, but MORE. The most common warbler achieves its commonality through acoustic saturation.
+## Lessons Learned
 
-**3. The Yellowthroat as Baseline Validator.** Mercury-Redstone 2 proved the Mercury system worked -- after Ham, the program could proceed to human spaceflight. The Common Yellowthroat is the warbler that proves the Parulidae system works -- the family's most abundant, most widespread, most successful member, the baseline against which all other warblers are measured. Ham validated the capsule. The yellowthroat validates the warbler body plan. The newt's orange belly validates the aposematic signal -- same warning displayed the same way every time, a visual witchety-witchety: orange = danger, orange = danger, orange = danger.
+1. **The uncategorizable artist is a category.** Reggie Watts cannot be classified -- and the engine responds by making the inability to classify a classification. Jazz/Comedy is not a compound genre. It is an acknowledgment that the genre system has a boundary and Watts is on the other side of it. The classification system's failure becomes the classification system's output. Future post-genre artists will extend this principle; the engine's subgenre taxonomy now has a named exit.
 
-### Retrospective: Degree 17 Patterns Established
+2. **The warbler quartet (degrees 14-17) is the engine's richest family cluster.** Four genera, four strategies, one family. Resolution (MacGillivray's), accelerando (Wilson's), crescendo (Yellow), rhythmic drive (Common Yellowthroat). The Parulidae contain more acoustic diversity than any other documented family in the engine to date. Future within-family runs will be measured against this quartet's four-strategy completeness.
 
-1. **The uncategorizable artist is a category.** Watts cannot be classified -- and the engine responds by making the inability to classify a classification. Jazz/Comedy is not a genre. It is an acknowledgment that the genre system has a boundary and Watts is on the other side of it.
+3. **The loop pedal lineage brackets the jazz quadrant.** Frisell (degree 1) to Watts (degree 17) = sixteen degrees of jazz, connected by one technological thread. The technology evolved from analog delay to digital looping. The aesthetic evolved from contemplation to absurdism. Same capture-layer-build mechanism, opposite expressive aims. The lineage is the engine's first complete technological-thread bracket across an entire genre quadrant.
 
-2. **The warbler quartet (14-17) is the engine's richest family cluster.** Four genera, four strategies, one family. Resolution, accelerando, crescendo, rhythmic drive. The Parulidae contain more acoustic diversity than any other documented family.
+4. **Ham's flight is the Mercury program's escape velocity.** MR-1 rose four inches and sat down on the pad (degree 16). MR-2 reached 253 kilometers with a chimpanzee performing lever-pulling tasks under conditions that exceeded every planned parameter (degree 17). The Mercury program is converging on human spaceflight, each mission closer than the last, each exceeding the last by a factor of thousands. Four inches to 253 kilometers in one degree is the largest mission-to-mission amplitude increase in the Mercury program's documented history.
 
-3. **The loop pedal lineage brackets the jazz quadrant.** Frisell (degree 1) to Watts (degree 17) = sixteen degrees of jazz, connected by one technological thread. The technology evolved from analog delay to digital looping. The aesthetic evolved from contemplation to absurdism.
+5. **Cornish's first student validates the institution.** Julian Priester and Hadley Caliman brought expertise TO Cornish as faculty. Reggie Watts took training FROM Cornish and built a career the institution could not have predicted. The student is the test of the institution in the same way Ham was the test of the Mercury capsule. The Cornish pipeline now has three members (two faculty, one student) and exhibits the engine's widest institutional stylistic range after Berklee: experimental trombone, hard bop saxophone, beatbox/loop/comedy.
 
-4. **Ham's flight is the Mercury program's escape velocity.** MR-1 rose four inches and sat down (degree 16). MR-2 reached 253 km with a chimp performing tasks under conditions that exceeded every planned parameter. The Mercury program is converging -- each mission closer to human spaceflight.
+6. **Ham's paradox: success that delays.** The biological experiment succeeded -- the capsule is safe for humans. The booster failed -- it over-burned and forced an abort. NASA flew MR-BD on March 24, 1961 to requalify the booster. Nineteen days later Yuri Gagarin orbited Earth. The chimpanzee who proved the capsule safe revealed the booster's flaws, costing the United States the first human in space. Honest performance of a test produces honest data, and honest data can impose costs the apparatus's operators did not expect.
 
-5. **Cornish's first student validates the institution.** Priester and Caliman brought expertise TO Cornish. Watts took training FROM Cornish and built a career the institution could not have predicted. The student is the test of the institution -- Ham validating the capsule.
+7. **The rough-skinned newt as warning system.** *Taricha granulosa*'s orange belly is an honest warning: I am toxic, do not eat me. Ham's flight was an honest warning to NASA: the Redstone is not ready for a human crew. Both displays caused observers to change behavior. Predators learn to avoid orange newts. NASA avoided launching Shepard on an unqualified booster. Honest warning signals are the engine's first-class communication mechanism at degree 17, and both biological aposematism and engineering anomaly data are documented as the same class of signal.
 
-6. **Ham's paradox: success that delays.** The biological experiment succeeded. The booster failed. NASA flew MR-BD to requalify. Nineteen days later Gagarin orbited. The chimpanzee who proved the capsule safe revealed the booster's flaws, costing the United States the first human in space.
+8. **The Schubert connection: the unfinished.** Franz Schubert, born January 31, 1797, composed approximately six hundred songs in thirty-one years and left the Unfinished Symphony in B minor -- two movements so extraordinary that their incompleteness became expression. Ham's flight was unfinished in a technical sense: every parameter exceeded the plan, the booster cut off early, the abort fired, the capsule flew higher and faster than its profile. Both works did not reach their intended form and became more significant because of their incompleteness. The calendar-date dedication convention continues at its third documented instance, and the convention now holds stably across seven intervening degrees.
 
-7. **The rough-skinned newt as warning system.** Taricha granulosa's orange belly is an honest warning: I am toxic. Ham's flight was an honest warning: the Redstone is not ready. Both displays caused observers to change behavior. Predators avoid orange newts. NASA avoided launching Shepard on an unqualified booster.
+9. **The coevolutionary arms race is the engine's first documented reciprocal-escalation system.** The Brodie and Brodie newt-garter snake system (tetrodotoxin concentrations versus sodium-channel resistance mutations, correlated across Oregon populations over millions of years) parallels the Space Race between the United States and USSR (Explorer versus Sputnik, Mercury versus Vostok, each side's advance forcing the other side's adaptation). Both are reciprocal escalations where neither side can unilaterally stop. The arms-race model is now available as analytical framework for any future engine observation involving escalation between paired parties.
 
-8. **The Schubert connection: the unfinished.** Schubert, born January 31, composed six hundred songs in thirty-one years and left the Unfinished Symphony -- two movements so extraordinary that their incompleteness became expression. Ham's flight was unfinished in a technical sense: every parameter exceeded the plan. Both are works that did not reach their intended form and became more significant because of their incompleteness.
+10. **Energy profile: E=3 on both tracks for third consecutive degree.** Degrees 15, 16, and 17 all ship at combined energy E=6 (3+3). The breakout from the quiet zone (degrees 10-13 combined E=4 territory) is sustained across three consecutive degrees. This is the engine's longest high-energy streak to date, and the sustained combined-six marks the full recovery from the early-teens quiet zone. The next degree's energy profile will determine whether the high-energy streak continues or the engine returns to mid-range.
 
-9. **The coevolutionary arms race.** The newt-garter snake system (toxin vs. resistance, millions of years, Brodie and Brodie) parallels the Space Race (US vs. USSR, achievement vs. counter-achievement). Both are reciprocal escalations where neither side can stop.
+## Cross-References
 
-10. **Energy profile: E=3 on both tracks for third consecutive degree.** Degrees 15-16-17 all at combined 6. The breakout from the quiet zone is sustained.
-
-### Carry-Forward Items from Degree 17
-
-- **Genre gradient:** Jazz (0-15) to Jazz Fusion (16) to Jazz/Comedy superposition (17). The gradient steepens. The next non-jazz genre is approaching.
-- **Warbler quartet:** COMPLETE at degrees 14-17. Four genera, four strategies. Any future Parulidae will extend, not initiate.
-- **Cornish pipeline:** 3 members (2 faculty, 1 student). Bidirectional. Maximum stylistic range.
-- **Loop pedal lineage:** Frisell (1) to Watts (17). Jazz quadrant bracketed.
-- **Mercury program:** MR-1 (four inches, degree 16) to MR-2 (Ham, 253 km, degree 17). Converging toward human spaceflight. MR-BD qualified the booster. Shepard next.
-- **Body-as-sound-source:** Watts as extreme -- voice as instrument, synthesizer, drum machine, and comedy script simultaneously. Future vocal artists will fall between this pole and conventional singing.
-- **Energy profile:** E=3 on both tracks for third consecutive degree (15-16-17). Combined 6-6-6. Will the breakout hold?
-- **The 71-day gap:** Ham flew January 31. Gagarin orbited April 12. Seventy-one days shaped by MR-2's anomalies. Every day in that interval was a day the Redstone's over-burn consumed.
-- **The newt-snake arms race:** Brodie and Brodie's coevolutionary model -- TTX concentrations and garter snake resistance correlated geographically across Oregon. The longest-running biological arms race documented. Carries forward as analytical lens for reciprocal escalation.
-
-</details>
-
-## Programs Active at Degree 17
-
-| Program | Missions | Status | Key Achievement |
-|---------|----------|--------|----------------|
-| Pioneer | 0-5 | Active | Deep space communication (36.2M km at degree 13) |
-| Explorer | 1-7 | Active | Van Allen belts (6), radiation budget (12) |
-| Vanguard | 1-2 | Complete | First solar-powered satellite |
-| Echo | 1 | Active | First passive comsat (30.5m Mylar balloon) |
-| TIROS | 1 | Active | First weather satellite (22,952 photos in 78 days) |
-| Mercury | MR-1, MR-2 | Active | MR-1: four inches (degree 16). MR-2: Ham, 253 km (degree 17). Capsule qualified. |
-
-## Engine Position
-
-```
-v1.49.501-506 = degrees 0-5    Pass 2  ✓
-v1.49.507-517 = degrees 6-16   Pass 2  ✓
-v1.49.518     = degree 17      Pass 2  ← THIS RELEASE
-v1.49.519     = degree 18      Pass 2  ← next
-```
-
-## Files
-
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/017-reggie-watts/pass2-refinement.md` | Pass 2 | ~500 |
-| `SPS/research/releases/017-common-yellowthroat/pass2-refinement.md` | Pass 2 | ~600 |
-| `NASA/1.17/research.md` | Deep Research | ~6,500 |
-| `NASA/1.17/organism.md` | Organism Pairing | ~5,000 |
-| `docs/release-notes/v1.49.518/README.md` | Release Note | -- |
+| Thread | Degree 17 Entity | Role |
+|--------|-----------------|------|
+| S36 | Reggie Watts | Artist -- Jazz/Comedy superposition, third Cornish (first student), loop pedal lineage endpoint |
+| SPS | Common Yellowthroat (*Geothlypis trichas*) | Species -- fourth Parulidae, rhythmic drive, bandit mask, most common warbler |
+| NASA | Mercury-Redstone 2 | Mission -- Ham at 253 km, 17 g abort, capsule qualified, booster anomalies |
+| NASA Organism | *Taricha granulosa* | Rough-skinned newt -- tetrodotoxin, orange warning, coevolutionary arms race, regeneration |
+| Dedication | Franz Schubert (January 31, 1797 -- November 19, 1828) | The Unfinished Symphony, born same calendar date as Ham's flight, six hundred songs in thirty-one years |
+| Warbler Quartet | Degrees 14-15-16-17 | Resolution, accelerando, crescendo, rhythmic drive (four genera, four strategies, one family) |
+| Cornish Pipeline | Priester (7) -- Caliman (9) -- Watts (17) | Faculty in, student out -- validation by output |
+| Loop Pedal Lineage | Frisell (1) -- Watts (17) | Contemplation to absurdism, jazz quadrant bracketed, one technology |
+| Communication Paradigm | Active (Pioneer) + Passive (Echo) + Observational (TIROS) + Crewed Test (Mercury) | Four paradigms now active; Mercury introduces the crewed-test paradigm |
+| Mercury Sequence | MR-1 (16) -- MR-2 (17) -- MR-BD -- MR-3 (Shepard) | Four inches to 253 km to requalification to first American in space |
+| Energy Profile | Combined 6 x 3 degrees (15-17) | Third consecutive E=3+E=3 breakout |
+| Genre Gradient | Jazz -- Jazz Fusion -- Jazz/Comedy | Three labels in seventeen degrees, gradient steepening |
+| Warning Signals | Newt orange belly / MR-2 anomalies / Yellowthroat bandit mask | Three honest-warning displays documented at the same degree |
+| Coevolution | Newt-snake / US-USSR | Reciprocal escalation, neither side can stop, both sides defined by the race |
+| Schubert Calendar | Jan 31, 1797 / Jan 31, 1961 | Calendar-date dedication convention extends (Joseph Campbell/Mar 26 at degree 9, Erwin Schrodinger/Aug 12 at degree 14, Schubert/Jan 31 at degree 17) |
+| Within-Genus Contrast | *Geothlypis tolmiei* (14) -- *Geothlypis trichas* (17) | Same genus, opposite strategies -- resolution versus drive |
+| Post-Quartet Degree | Degree 17 -- Degree 18 | After four consecutive Parulidae, what family next? |
+| Ham Biography | Cameroon -- Holloman -- Cape Canaveral -- National Zoo -- North Carolina Zoo -- Smithsonian | Full life arc extends twenty-two years past MR-2 |
+| Brodie Research | Oregon Benton and Lincoln county populations | Tetrodotoxin-resistance coevolutionary field data |
+| Late Late Show | CBS, 2015-2023 | Institutional legitimization of the uncategorizable via network television |
 
 ## Emerging Patterns at Degree 17
 
@@ -161,100 +148,94 @@ v1.49.519     = degree 18      Pass 2  ← next
 | Cornish Pipeline | 3 members (7, 9, 17) | Priester -- Caliman -- Watts. Faculty in, student out. Widest range after Berklee. |
 | Communication Paradigms | 4 | Active (Pioneer) + Passive (Echo) + Observational (TIROS) + Crewed Test (Mercury) |
 | Warbler Quartet | COMPLETE (14-17) | MacGillivray's (resolution) + Wilson's (accelerando) + Yellow (crescendo) + Yellowthroat (drive) |
-| Energy Profile | Combined 6 (third consecutive) | E=3+E=3 breakout sustained from degree 15. |
+| Energy Profile | Combined 6 (third consecutive) | E=3+E=3 breakout sustained from degree 15 |
 | Genre Labels | 3 | Jazz, Jazz Fusion, Jazz/Comedy |
 | NASA Programs | 6 | Pioneer, Explorer, Vanguard, Echo, TIROS, Mercury |
-| Loop Pedal Lineage | COMPLETE (1-17) | Frisell (contemplation) to Watts (absurdism). Jazz quadrant bracketed. |
+| Loop Pedal Lineage | COMPLETE (1-17) | Frisell (contemplation) to Watts (absurdism), jazz quadrant bracketed |
 
-## Cross-References
+## Acoustic Progression at Degree 17
 
-| Thread | Degree 17 Entity | Role |
-|--------|-----------------|------|
-| S36 | Reggie Watts | Artist -- Jazz/Comedy superposition, third Cornish (first student), loop pedal lineage |
-| SPS | Common Yellowthroat | Species -- fourth Parulidae, rhythmic drive, bandit mask, most common warbler |
-| NASA | Mercury-Redstone 2 | Mission -- Ham at 253 km, 17 g abort, capsule qualified, booster anomalies |
-| Organism | Taricha granulosa | Rough-skinned newt -- tetrodotoxin, orange warning, coevolutionary arms race, regeneration |
-| Warbler Quartet | Degrees 14-15-16-17 | Resolution, accelerando, crescendo, rhythmic drive (four genera, four strategies, one family) |
-| Cornish Pipeline | Priester (7) -- Caliman (9) -- Watts (17) | Faculty in, student out. Validation by output. |
-| Loop Pedal | Frisell (1) -- Watts (17) | Contemplation to absurdism. Jazz quadrant bracketed. One technology, maximum divergence. |
-| Energy | Combined 6 x 3 degrees | Third consecutive E=3+E=3 breakout (degrees 15-16-17) |
-| Genre Gradient | Jazz to Jazz Fusion to Jazz/Comedy | Three labels in seventeen degrees. Gradient steepening. |
-| Mercury Sequence | MR-1 (16) to MR-2 (17) | Four inches to 253 km. Sneak circuit to Ham's levers. Failure to qualified capsule. |
-| Schubert | January 31, 1797 | Born same date as Ham's flight. The Unfinished. Six hundred songs in thirty-one years. |
-| Warning Signals | Newt orange belly / MR-2 anomalies | Both honest warnings. Both caused observers to change behavior. |
-| Coevolution | Newt-snake / US-USSR | Reciprocal escalation. Neither side can stop. Neither side can win. |
-| Degree 16-17 | MR-1 to MR-2 | Four inches to 253 km. The Mercury program's convergence. |
-| Degree 17-18 | Post-quartet | After four consecutive Parulidae -- what family next? |
+| Strategy | Species | Degree | Description |
+|----------|---------|--------|-------------|
+| Complexity | Pacific Wren | 2 | Maximum syllable count, fastest tempo |
+| Syntax | Black-capped Chickadee | 3 | Combinatorial note ordering, predator encoding |
+| Harmonic Series | Hermit Thrush | 8 | Overtone-based intervals, near-musical pitch |
+| Monotony | Hutton's Vireo | 13 | Repetition without variation, maximum persistence |
+| Narrative | MacGillivray's Warbler | 14 | Repetition with resolution (A-A-A-B) |
+| Urgency | Wilson's Warbler | 15 | Accelerando -- phrase speeds up |
+| Escalation | Yellow Warbler | 16 | Crescendo -- louder and higher |
+| **Insistence** | **Common Yellowthroat** | **17** | **Rhythmic drive, relentless repetition** |
 
-## Pattern Tables at Degree 17
-
-### The Ham-Watts-Newt Triangle: Three Responses to a System
-
-| Entity | Response | Mechanism | Outcome |
-|--------|----------|-----------|---------|
-| Ham (MR-2) | Conforms to system | Pulls levers as trained, under 17 g | Validates capsule for human spaceflight |
-| Reggie Watts | Refuses the system | Jazz AND comedy at full intensity, simultaneously | Proves genre classification insufficient |
-| Taricha granulosa | Weaponizes against system | Tetrodotoxin in skin, orange aposematic warning | Poisons those who try to consume it |
-
-### Warbler Quartet (Degrees 14-17)
-
-| Degree | Species | Genus | Strategy | Resolution |
-|--------|---------|-------|----------|-----------|
-| 14 | MacGillivray's Warbler | *Geothlypis* | Repetition + contrast (A-A-A-B) | YES -- resolves |
-| 15 | Wilson's Warbler | *Cardellina* | Accelerando (speeds up) | NO -- cuts off |
-| 16 | Yellow Warbler | *Setophaga* | Crescendo (louder + higher) | PARTIAL -- peak is endpoint |
-| **17** | **Common Yellowthroat** | ***Geothlypis*** | **Rhythmic drive (relentless)** | **NO -- repeats indefinitely** |
-
-### Mercury-Redstone Sequence
+## Mercury-Redstone Sequence
 
 | Mission | Degree | Date | Altitude | Crew | Result |
 |---------|--------|------|----------|------|--------|
-| MR-1 | 16 | Nov 21, 1960 | 4 inches | None | Sneak circuit -- settled on pad, parachutes deployed at ground level |
-| **MR-2** | **17** | **Jan 31, 1961** | **253 km** | **Ham (chimp)** | **Capsule qualified; booster anomalies force MR-BD** |
+| MR-1 | 16 | Nov 21, 1960 | 4 inches | None | Sneak circuit, settled on pad, parachutes deployed at ground level |
+| **MR-2** | **17** | **Jan 31, 1961** | **253 km** | **Ham (chimpanzee)** | **Capsule qualified; booster anomalies force MR-BD** |
 | MR-BD | -- | Mar 24, 1961 | Nominal | None (boilerplate) | Booster requalified |
-| MR-3 | future | May 5, 1961 | 187 km | Shepard | First American in space (23 days after Gagarin) |
+| MR-3 | future | May 5, 1961 | 187 km | Alan Shepard | First American in space (23 days after Gagarin) |
 
-### Institutional Pipelines at Degree 17
+## Programs Active at Degree 17
 
-| Institution | Members | Degrees | Stylistic Range |
-|-------------|---------|---------|----------------|
-| Berklee | Jones, Frisell, Lorber | 0, 1, 16 | Arranger -- deconstructionist -- fusion architect |
-| UW | Seales, Parks, Marriott | 13, 14, 15 | Anchor -- export -- builder-stayer |
-| **Cornish** | **Priester, Caliman, Watts** | **7, 9, 17** | **Experimental trombone -- hard bop sax -- beatbox/loop/comedy** |
+| Program | Missions | Status | Key Achievement |
+|---------|----------|--------|----------------|
+| Pioneer | 0-5 | Active | Deep space communication (36.2M km at degree 13) |
+| Explorer | 1-7 | Active | Van Allen belts (6), radiation budget (12) |
+| Vanguard | 1-2 | Complete | First solar-powered satellite |
+| Echo | 1 | Active | First passive comsat (30.5m Mylar balloon) |
+| TIROS | 1 | Active | First weather satellite (22,952 photos in 78 days) |
+| **Mercury** | **MR-1, MR-2** | **Active** | **MR-1 four inches (degree 16). MR-2 Ham 253 km (degree 17). Capsule qualified.** |
 
-### Loop Pedal Lineage
+## Engine Position
 
-| Degree | Artist | Technology | Aesthetic | Body Relationship |
-|--------|--------|-----------|-----------|------------------|
-| 1 | Bill Frisell | Analog delay / Line 6 DL4 | Contemplative, ambient | Guitar as extension |
-| **17** | **Reggie Watts** | **Digital loop station** | **Absurdist, collage** | **Voice AS the instrument, synthesizer, drum machine** |
-
-### Coevolutionary Parallels
-
-| System | Axis 1 | Axis 2 | Timescale | Mechanism |
-|--------|--------|--------|-----------|-----------|
-| Newt-snake | TTX toxin concentration | Sodium channel resistance mutations | Millions of years | Natural selection (Brodie & Brodie, Oregon populations) |
-| Space Race | US achievements (Explorer, Mercury) | USSR achievements (Sputnik, Vostok) | Years | National prestige, military competition |
-| Mercury program | Mission failures (MR-1, MR-2 anomalies) | Engineering adaptations (pin fix, MR-BD) | Months | Test-fail-adapt-retest cycle |
+```
+v1.49.501-506 = degrees 0-5    Pass 2  (opening pentad)
+v1.49.507-514 = degrees 6-13   Pass 2  (second cycle)
+v1.49.515-517 = degrees 14-16  Pass 2  (warbler trio + Mercury begins)
+v1.49.518     = degree 17      Pass 2  <- THIS RELEASE (THE TEST SUBJECT)
+v1.49.519     = degree 18      Pass 2  <- next (post-quartet degree)
+```
 
 ## Cumulative Engine Statistics (v1.49.501-518)
 
 | Metric | Value |
 |--------|-------|
 | Paired releases completed | 18 (degrees 0-17) |
+| S36 artists documented | 18 |
+| SPS species documented | 18 |
+| NASA missions aligned | 18 (1.0 through 1.17) |
 | Genre labels | 3 (Jazz, Jazz Fusion, Jazz/Comedy) |
 | Parulidae species | 4 (quartet complete: resolution, accelerando, crescendo, drive) |
 | Cornish pipeline | 3 (2 faculty + 1 student) |
 | Berklee pipeline | 3 (Jones, Frisell, Lorber) |
 | UW pipeline | 3 (Seales, Parks, Marriott) |
 | Mercury program flights | 2 (MR-1 four inches, MR-2 Ham 253 km) |
-| Consecutive E=3 degrees | 3 (degrees 15-17). Sustained breakout. |
+| Consecutive E=3 degrees | 3 (degrees 15-17), sustained breakout |
 | NASA programs | 6 (Pioneer, Explorer, Vanguard, Echo, TIROS, Mercury) |
 | Loop pedal lineage | COMPLETE (Frisell degree 1 to Watts degree 17) |
+| Communication paradigms | 4 (active, passive, observational, crewed test) |
+| Coevolutionary arms-race models | 1 (newt-snake / US-USSR mapping) |
 | All-time combined energy maximum | 8 (degree 1: Frisell 3 + Wren 5) |
+
+## Files
+
+- `docs/release-notes/v1.49.518/README.md` -- this release README (A-grade uplift)
+- `docs/release-notes/v1.49.518/chapter/00-summary.md` -- chapter summary stub
+- `docs/release-notes/v1.49.518/chapter/03-retrospective.md` -- 10 numbered lessons, degree 17 patterns
+- `docs/release-notes/v1.49.518/chapter/99-context.md` -- version metadata and navigation
+- `www/tibsfox/com/Research/NASA/1.17/research.html` -- MR-2 / Ham research artifact (live site)
+- `www/tibsfox/com/Research/NASA/1.17/organism.html` -- *Taricha granulosa* organism profile
+- `www/tibsfox/com/Research/NASA/1.17/mathematics.html` -- MR-2 abort dynamics and 17 g trajectory analysis
+- `www/tibsfox/com/Research/NASA/1.17/curriculum.html` -- degree 17 curriculum module
+- `www/tibsfox/com/Research/NASA/1.17/simulation.html` -- MR-2 abort and reentry simulation
+- `www/tibsfox/com/Research/NASA/1.17/papers.html` -- MR-2 primary-source bibliography
+- `S36/research/releases/017-reggie-watts/pass2-refinement.md` -- Watts Pass 2 research (~500 words)
+- `SPS/research/releases/017-common-yellowthroat/pass2-refinement.md` -- Common Yellowthroat Pass 2 research (~600 words)
+- `NASA/1.17/research.md` -- Mercury-Redstone 2 deep-research essay (~6,500 words)
+- `NASA/1.17/organism.md` -- rough-skinned newt organism pairing (~5,000 words)
 
 ---
 
-*Degree 17: the test subject. A chimpanzee from Cameroon -- Holloman Aero Medical subject number 65, three and a half years old, 37 pounds, wearing a custom pressure suit -- who sat in a Mercury capsule atop a Redstone missile on a January morning in Florida and pulled levers while everything went wrong around him. The engine over-burned. The abort system fired. Seventeen g pressed him into his couch. The capsule climbed 68 kilometers higher than anyone planned, traveled 1,500 kilometers per hour faster than anyone expected, and splashed down 209 kilometers beyond the recovery fleet in an ocean that was not expecting him. And through all of it he pulled the levers. His reaction times slowed but his accuracy held. He proved the brain works in space. He proved the hands work in space. He proved the capsule was safe for humans. He also proved the booster was not -- and that honest warning cost the United States the first human in space, nineteen days consumed by an additional test, seventy-one days between Ham and Gagarin. He received an apple and half an orange. He lived twenty-two more years. An artist from Stuttgart via Montana via Seattle who refuses to be categorized -- jazz and comedy and beatbox and looping and performance art all at once, at full intensity, the loop station capturing his voice as it becomes every instrument, the body as synthesizer, the genre system broken by a man who studied piano and acting at Cornish and decided to be all of it simultaneously. A rough-skinned newt in a damp ravine in the western Cascades, dark brown on top, vivid orange underneath, carrying enough tetrodotoxin to kill several adult humans, locked in an arms race with a garter snake that has been running for millions of years -- the orange belly that says "I will poison you," the honest warning that saves both predator and prey. A warbler in a black bandit mask driving witchety-witchety-witchety through every marsh in North America, the most common warbler, the relentless rhythmic clock that does not resolve, does not accelerate, does not crescendo, but simply insists -- the same phrase, the same tempo, the same volume, more and more and more until the territory is claimed through sheer acoustic saturation. Franz Schubert, born January 31, 1797, who composed six hundred songs in thirty-one years and left a symphony unfinished that became more famous for its incompleteness than most symphonies are for their completion. Ham's flight was unfinished too -- every parameter exceeded, the plan abandoned, the actual flight more demanding and more revealing than the intended one. The unfinished tells us more than the complete. The test subject teaches us more than the astronaut who follows.*
+*Degree 17: the test subject. A chimpanzee from Cameroon -- Holloman Aero Medical subject number 65, three and a half years old, thirty-seven pounds, wearing a custom pressure suit -- who sat in a Mercury capsule atop a Redstone missile on a January morning in Florida and pulled levers while everything went wrong around him. The engine over-burned. The abort system fired. Seventeen g pressed him into his couch. The capsule climbed sixty-eight kilometers higher than anyone planned, traveled fifteen hundred kilometers per hour faster than anyone expected, and splashed down two hundred nine kilometers beyond the recovery fleet in an ocean that was not expecting him. And through all of it he pulled the levers. His reaction times slowed but his accuracy held. He proved the brain works in space. He proved the hands work in space. He proved the capsule was safe for humans. He also proved the booster was not -- and that honest warning cost the United States the first human in space, nineteen days consumed by an additional test, seventy-one days between Ham and Gagarin. He received an apple and half an orange. He lived twenty-two more years. An artist from Stuttgart via Montana via Seattle who refuses to be categorized -- jazz and comedy and beatbox and looping and performance art all at once, at full intensity, the loop station capturing his voice as it becomes every instrument, the body as synthesizer, the genre system broken by a man who studied piano and acting at Cornish and decided to be all of it simultaneously. A rough-skinned newt in a damp ravine in the western Cascades, dark brown on top, vivid orange underneath, carrying enough tetrodotoxin to kill several adult humans, locked in an arms race with a garter snake that has been running for millions of years -- the orange belly that says "I will poison you," the honest warning that saves both predator and prey. A warbler in a black bandit mask driving witchety-witchety-witchety through every marsh in North America, the most common warbler, the relentless rhythmic clock that does not resolve, does not accelerate, does not crescendo, but simply insists -- the same phrase, the same tempo, the same volume, more and more and more until the territory is claimed through sheer acoustic saturation. Franz Schubert, born January 31, 1797, who composed six hundred songs in thirty-one years and left a symphony unfinished that became more famous for its incompleteness than most symphonies are for their completion. Ham's flight was unfinished too -- every parameter exceeded, the plan abandoned, the actual flight more demanding and more revealing than the intended one. The unfinished tells us more than the complete. The test subject teaches us more than the astronaut who follows.*
 
 *"Degree 17. The lever. The loop. The orange belly. The witchety-witchety. The unfinished flight that opened the gate."*
