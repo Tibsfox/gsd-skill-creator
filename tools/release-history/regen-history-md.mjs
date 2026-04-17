@@ -37,7 +37,8 @@ async function main() {
            r.has_retrospective,
            r.source_readme,
            COALESCE(lc.n, 0)::int AS lesson_count,
-           COALESCE(ac.n, 0)::int AS applied_count
+           COALESCE(ac.n, 0)::int AS applied_count,
+           s.score AS quality_score, s.grade AS quality_grade
     FROM release_history.release r
     LEFT JOIN (
       SELECT first_seen_version AS version, COUNT(*) AS n
@@ -50,6 +51,7 @@ async function main() {
       WHERE status = 'applied'
       GROUP BY first_seen_version
     ) ac ON ac.version = r.version
+    LEFT JOIN release_history.release_score s ON s.version = r.version
     ORDER BY r.semver_major DESC, r.semver_minor DESC, r.semver_patch DESC,
              r.semver_prerelease DESC NULLS LAST
   `);
@@ -61,19 +63,30 @@ async function main() {
   const newest = rows[0]?.version || '';
   const retroCount = rows.filter(r => r.has_retrospective).length;
 
+  const qualityDist = { A: 0, B: 0, C: 0, D: 0, F: 0, scored: 0, total_score: 0 };
+  for (const r of rows) {
+    if (r.quality_grade) {
+      qualityDist[r.quality_grade] = (qualityDist[r.quality_grade] || 0) + 1;
+      qualityDist.scored++;
+      qualityDist.total_score += r.quality_score || 0;
+    }
+  }
+  const avgScore = qualityDist.scored > 0 ? Math.round(qualityDist.total_score / qualityDist.scored) : 0;
+
   const header = [
     '# Release History',
     '',
     `${rows.length} milestones shipped across the ${oldest} → ${newest} arc. The table below lists every shipped release, newest first.`,
     '',
-    'Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don\'t have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed.',
+    'Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don\'t have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.',
     '',
     `**Snapshot:** ${rows.length} releases · ${retroCount} with retrospectives · `
       + `${rows.filter(r => r.lesson_count > 0).length} with extracted lessons · `
-      + `source of truth: Postgres \`release_history\` schema, regenerated via \`tools/release-history/regen-history-md.mjs\`.`,
+      + `quality A:${qualityDist.A} B:${qualityDist.B} C:${qualityDist.C} D:${qualityDist.D} F:${qualityDist.F} (avg ${avgScore}) · `
+      + `source of truth: Postgres \`release_history\` schema, regenerated via \`tools/release-history/refresh.mjs\`.`,
     '',
-    '| Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Notes |',
-    '|---------|------|---------|---------|--------|-------|-------|---------|-------|',
+    '| Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |',
+    '|---------|------|---------|---------|--------|-------|-------|---------|---------|-------|',
   ];
 
   // Track any drift between DB claims and actual chapter files on disk.
@@ -112,8 +125,13 @@ async function main() {
       }
     }
 
+    // Quality cell — grade + score (e.g. "A 95" or "D 65")
+    const qualityCell = r.quality_grade
+      ? `${r.quality_grade} ${r.quality_score}`
+      : '—';
+
     const notes = isGhost ? '_no original README, chapter stub only_' : '';
-    return `| ${versionCell} | ${esc(r.name) || '—'} | ${r.shipped || '—'} | ${r.commits ?? '—'} | ${r.phases ?? '—'} | ${r.plans ?? '—'} | ${retroCell} | ${lessonsCell} | ${notes} |`;
+    return `| ${versionCell} | ${esc(r.name) || '—'} | ${r.shipped || '—'} | ${r.commits ?? '—'} | ${r.phases ?? '—'} | ${r.plans ?? '—'} | ${retroCell} | ${lessonsCell} | ${qualityCell} | ${notes} |`;
   });
 
   // Surface drift in the summary line so it doesn't hide
