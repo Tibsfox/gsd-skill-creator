@@ -2,238 +2,162 @@
 
 **Released:** 2026-04-05
 **Degree:** 16 of 360
-**Part A:** Jeff Lorber -- Jazz Fusion/Keyboards/Smooth, E=3, Seattle area (via Portland/Philadelphia), Arista/Verve. Born 1952 Philadelphia. Berklee → Portland → Jeff Lorber Fusion → Kenny G discovery → smooth jazz era → Grammy. First "Jazz Fusion" label. Third Berklee graduate. The genre gradient begins.
+**Part A:** Jeff Lorber -- Jazz Fusion / Keyboards / Smooth, E=3, Seattle area (via Portland / Philadelphia), Arista / Verve. Born 1952 Philadelphia. Berklee → Portland → Jeff Lorber Fusion → Kenny G discovery → smooth jazz era → Grammy. First "Jazz Fusion" label in the engine. Third Berklee graduate. The genre gradient begins.
 **Part B:** Yellow Warbler (*Setophaga petechia*) -- sweet-sweet-sweeter-than-sweet crescendo, E=3, riparian willow, Parulidae. Third consecutive Parulidae. The brightest warbler in the Pacific Northwest. Pocket Bolero -- Ravel's escalation principle in feathers.
 **NASA Mission:** 1.16 -- Mercury-Redstone 1 (November 21, 1960. FAILURE -- rose 4 inches, shut down, settled back on pad. Escape tower jettisoned from capsule sitting on ground. Drogue, main, and reserve parachutes deployed at sea level. The most humiliating failure in NASA history. Every system worked. The integration failed. Dedicated to Voltaire.)
-**NASA Organism:** Dictyostelium discoideum (Social Amoeba -- aggregates from individual cells into multicellular slug under stress. The false start organism. The biological four-inch flight.)
+**NASA Organism:** *Dictyostelium discoideum* (Social Amoeba -- aggregates from individual cells into multicellular slug under stress. The false start organism. The biological four-inch flight.)
 **Dedication:** Voltaire (November 21, 1694 -- May 30, 1778) -- born the same calendar date as MR-1's launch, 266 years earlier. The supreme ironist. *Il faut cultiver notre jardin.*
 **Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
+**Cluster:** Jazz / Keys (fusion branch; institutional pipeline: Berklee College of Music → Portland → Seattle corridor)
+**Branch:** main
 **Engine Position:** Seventeenth paired release. Degree 16 = four inches. The ignition that doesn't quite make orbit. The genre boundary cracks. The warbler triptych completes. Mercury enters.
 
 ## Summary
 
-The seventeenth paired release and the degree that breaks three boundaries at once: the genre boundary (Jazz Fusion enters), the program boundary (Mercury -- the first human spaceflight program -- enters), and the warbler family ceiling (three consecutive Parulidae, the engine's first within-family triptych). Degree 16 is the four-inch degree. Everything at this degree starts building and the question is whether it reaches orbit.
+The seventeenth paired release and the degree where the engine crosses three boundaries at once: the genre boundary (Jazz Fusion enters), the program boundary (Mercury -- the first human-spaceflight program -- enters), and the warbler-family ceiling (three consecutive Parulidae, the engine's first within-family triptych). Degree 16 is the four-inch degree. Every object at this degree starts building and the question posed by the degree is whether the construction reaches orbit. Mercury-Redstone 1 does not. Jeff Lorber's fusion partially does. The Yellow Warbler's crescendo completes. The social amoeba sometimes completes, sometimes stalls. Four tracks synchronize on the same structural question -- ignition without guaranteed arrival -- and the paired engine documents the question from four independent angles at the same time.
 
-Mercury-Redstone 1 is one of the greatest stories in spaceflight -- not because of what it achieved but because of how perfectly it failed. On November 21, 1960, at 9:00 AM Eastern Standard Time, the Rocketdyne A-7 engine ignited at Launch Complex 5, Cape Canaveral. Seventy-eight thousand pounds of thrust exceeded the vehicle's weight. The 66-foot Redstone began to rise. It rose four inches -- ten centimeters -- and then the engine shut down. The rocket settled back onto the launch pedestal with a gentle bump. Silence. A fully fueled ballistic missile standing on the pad in the warm Florida morning, motionless, hissing oxidizer vapor into the air.
+Mercury-Redstone 1 is one of the greatest stories in the history of spaceflight, and not because of what it achieved. On November 21, 1960, at nine in the morning Eastern Standard Time, the Rocketdyne A-7 engine ignited at Launch Complex 5 at Cape Canaveral Air Force Station. Seventy-eight thousand pounds of thrust exceeded the vehicle's weight. The sixty-six-foot Redstone began to rise. It rose four inches -- ten centimeters -- and then the engine shut down. The rocket settled back onto the launch pedestal with a gentle bump. Silence. A fully fueled ballistic missile standing on the pad in the warm Florida morning, motionless, hissing oxidizer vapor into the air. Then the escape tower fired. The jettison motor ignited and the tower structure separated from the capsule and flew away on a ballistic arc, tumbling end over end, trailing smoke, landing in the scrub palmetto several hundred meters away. The onboard sequencer had detected liftoff -- the rocket had, after all, risen four inches -- and initiated the post-liftoff sequence. One second later, the drogue parachute deployed from the capsule. The capsule that was sitting on the ground. Then the main parachute billowed out and draped itself over the side of the rocket -- orange and white canopy hanging limply against the white cylindrical body of the Redstone. Then the reserve parachute. Three parachutes festooning a fully fueled, still-pressurized, still-armed booster in a tangle of nylon and suspension lines. The entire sequence -- ignition, four-inch rise, shutdown, settling, tower jettison, drogue, main, reserve -- took less than ninety seconds. Every system worked. The escape tower fired correctly. The parachutes deployed correctly. The sequencer executed a flawless post-flight sequence for a flight that had lasted four inches. The failure was not in the parts. It was in the integration -- a sneak circuit caused by two tail-plug connectors that separated in the wrong order, a physical difference measured in fractions of an inch. Chris Kraft, the Flight Director at the Mercury Control Center, called it "the most embarrassing failure in the history of the space program." The word "embarrassing" is precise. Not catastrophic. Not dangerous, at first. Embarrassing. Parachutes deployed from a capsule at an altitude of zero.
 
-Then the escape tower fired. The jettison motor ignited, and the tower structure separated from the capsule and flew away on a ballistic arc, tumbling end over end, trailing smoke, landing in the scrub palmetto several hundred meters away. The onboard sequencer had detected liftoff -- the rocket had, after all, risen four inches -- and initiated the post-liftoff sequence. One second later, the drogue parachute deployed from the capsule. The capsule that was sitting on the ground. Then the main parachute billowed out and draped itself over the side of the rocket -- orange and white canopy hanging limply against the white cylindrical body of the Redstone. Then the reserve parachute. Three parachutes festooning a fully fueled, still-pressurized, still-armed booster in a tangle of nylon and suspension lines. The entire sequence -- ignition, four-inch rise, shutdown, settling, tower jettison, drogue, main, reserve -- took less than ninety seconds. Every system worked. The escape tower fired correctly. The parachutes deployed correctly. The sequencer executed a flawless post-flight sequence for a flight that had lasted four inches. The failure was not in the parts. It was in the integration -- a sneak circuit caused by two tail-plug connectors that separated in the wrong order, a physical difference measured in fractions of an inch.
+Jeff Lorber's jazz fusion is the genre equivalent of the four-inch launch. The ignition happens -- the jazz vocabulary fires, the groove establishes, the ambition is real: jazz plus funk plus electronic, a synthesis across three idioms built on the harmonic foundation Lorber absorbed at Berklee College of Music in the early 1970s. The early Jeff Lorber Fusion albums -- *Jeff Lorber Fusion* (1977), *Soft Space* (1978), *Water Sign* (1979), *Wizard Island* (1980) -- achieve liftoff. The instrumental voicings are specific and the rhythmic integration is disciplined. In the smooth jazz period that followed, the vehicle settles back -- harmonic vocabulary simplified, funk energy smoothed, textures polished into the late-1980s Arista and Verve production aesthetic that dominated instrumental radio formats. The escape tower fires (commercial success is real -- Kenny Gorelick, who became Kenny G, was hired as the Jeff Lorber Fusion saxophonist in 1977 and went on to become the best-selling instrumental musician in recorded history; smooth jazz radio formats emerged; Arista signed Lorber to solo contracts; the Grammy acknowledged his production work) but the capsule is sitting on the ground. This is not a dismissal of Lorber as an artist. It is a structural observation about fusion's trajectory -- the genre that launched with enormous ambition and settled into smooth jazz the way MR-1 settled back onto the pad. The four-inch gap between ignition and orbit. Lorber inhabits that gap and, at the same time, paired in parallel with the Mercury-Redstone 1 story, the gap is precisely the shape the engine documents at degree 16.
 
-Jeff Lorber's jazz fusion is the genre equivalent of the four-inch launch. The ignition happens -- the jazz vocabulary fires, the groove establishes, the ambition is real: jazz + funk + electronic. The early Jeff Lorber Fusion albums achieve liftoff. In the smooth jazz period that followed, the vehicle settles back -- harmonic vocabulary simplified, funk energy smoothed, textures polished into pleasantness. The escape tower fires (commercial success is real -- Kenny G discovered, smooth jazz radio, Arista Records, Grammy) but the capsule is sitting on the ground. This is not a dismissal of Lorber. It is a structural observation about fusion's trajectory -- the genre that launched with enormous ambition and settled into smooth jazz the way MR-1 settled back onto the pad. The four-inch gap between ignition and orbit. Lorber inhabits that gap.
+The Yellow Warbler's crescendo -- sweet-sweet-sweeter-than-sweet -- builds from moderate volume and pitch through louder, higher repetitions, reaching its peak and stopping. The crescendo that completes where Mercury-Redstone 1's crescendo aborted. Two crescendos at degree 16: one that delivers (the warbler), one that fails (the rocket). Both sides of the paired engine mirror the same acoustic shape -- escalation through repetition -- and the two tracks synchronize at the same structural level. The biological track synchronizes too: the social amoeba *Dictyostelium discoideum* aggregates from individual cells into a multicellular slug under starvation stress, builds toward fruiting body formation, and can stall and collapse back to individual cells. The biological false start. The aggregation that initiates and reverses. Three crescendos, three outcomes: the warbler completes, the amoeba sometimes completes, the rocket does not. The paired engine's four tracks synchronize on the same principle in parallel: ignition without guaranteed arrival. The crescendo whose peak is conditional.
 
-The Yellow Warbler's crescendo -- sweet-sweet-sweeter-than-sweet -- builds from moderate volume and pitch through louder, higher repetitions, reaching its peak and stopping. The crescendo that completes where Mercury-Redstone 1's crescendo aborted. Two crescendos at degree 16: one that delivers (the warbler), one that fails (the rocket). The social amoeba aggregates from individuals into a multicellular slug under stress, builds toward fruiting body formation, and can stall and collapse back to individual cells -- the biological false start, the aggregation that initiates and reverses.
+The genre boundary cracks at degree 16. Lorber's "Jazz Fusion" label is the first non-straight-jazz classification in the engine's catalog. Sixteen degrees of pure jazz give way to jazz-plus-something. The boundary is not a wall -- it is a gradient, and Lorber occupies the transition zone. Third Berklee graduate (after Quincy Jones at degree 0 and Bill Frisell at degree 1, both Berklee alumni whose stylistic outputs share only their origin). Third consecutive Parulidae warbler (MacGillivray's at degree 14, Wilson's at degree 15, Yellow at degree 16) -- the warbler triptych documenting three intensification strategies: resolution, accelerando, crescendo, each paired in parallel with a genus and a habitat preference. Mercury program enters -- the first human-spaceflight program in the series, following the unmanned Pioneer, Explorer, Vanguard, Echo, and TIROS programs that occupied degrees 0 through 15. The communication paradigm shifts again: from continuous observation (TIROS-1, degree 15) to crewed flight testing. Four boundaries crossed at one degree. All four track together in parallel at the paired-engine level.
 
-The genre boundary cracks. Lorber's "Jazz Fusion" label is the first non-straight-jazz classification in the engine. Sixteen degrees of pure jazz give way to jazz-plus-something. The boundary is not a wall -- it is a gradient, and Lorber occupies the transition zone. Third Berklee graduate (after Jones at 0 and Frisell at 1). Third consecutive Parulidae warbler (MacGillivray's at 14, Wilson's at 15, Yellow at 16) -- the warbler triptych documenting three intensification strategies: resolution, accelerando, crescendo. Mercury program enters -- the first human spaceflight program in the series. The communication paradigm shifts again: from continuous observation (TIROS-1, degree 15) to crewed flight testing. Four boundaries crossed at one degree.
+The Berklee divergence engine now has three data points spanning sixteen degrees: Jones (arranger and producer, degree 0), Frisell (ambient deconstructionist, degree 1), and Lorber (fusion architect, degree 16). Same school, maximum stylistic divergence. Three graduates, three completely different outputs, no stylistic overlap whatsoever. Berklee is the institutional equivalent of the harmonic series -- one source, many overtones, the fundamental frequency (jazz education) generating a spectrum of outputs that share only their origin at the same institution. The Berklee pipeline parallels the University of Washington pipeline that produced Seales, Parks, and Marriott at degrees 13 through 15, but the Berklee pipeline is distributed across sixteen degrees and three cities (Jones from Chicago via Seattle, Frisell from Denver via Seattle, Lorber from Philadelphia via Portland) while the UW pipeline is concentrated in three consecutive degrees in one city. Berklee diverges. UW converges. Both institutions produce maximum range. Each side of each pipeline, paired in parallel with the other, illuminates a different institutional shape.
+
+Lorber discovered Kenny Gorelick in 1977, hiring the young saxophonist for the Jeff Lorber Fusion band. Kenny G went on to become the best-selling instrumental musician of the modern era, with more than seventy-five million albums sold worldwide. The Lorber-to-Kenny G relay is the engine's most commercially consequential artist-to-artist connection so far. Lorber himself is a respected but not mega-selling artist. His discovery is one of the best-selling musicians alive. The launch pad produced a vehicle that far exceeded the pad's own altitude. The parallel to Mercury-Redstone 1 is structural: MR-1 was a test mission, a stepping stone, a platform designed to validate systems for the flights that would follow, and it failed on its own terms (four-inch flight) but the program it served succeeded beyond measure -- Mercury led to Gemini led to Apollo led to the Moon. Lorber's own fusion career followed a similar trajectory: the ignition was real, the orbit was partial, but the discovery that launched from his platform reached heights he did not. The same structural diagram at the personal scale that Mercury-Redstone 1 played out at the institutional scale.
+
+The cause of Mercury-Redstone 1's failure was a sneak circuit -- an unintended current path created when two tail-plug connectors at the base of the rocket separated in the wrong order. The power connector, fractionally shorter than the control connector, separated first. This created a transient electrical condition that the guidance computer interpreted as a shutdown command. The engine obeyed. The fix was almost insultingly simple: lengthen one connector pin by millimeters. The entire mission failed because one connector was a fraction of an inch shorter than it should have been. The gap between the drawing and the hardware. The gap between specification and reality. Jazz fusion's own sneak circuit is the genre's inherent tension between complexity and accessibility. The fusion circuit works when the jazz complexity and the funk groove and the electronic texture are all connected in the correct order -- harmonic sophistication driving rhythmic energy driving textural innovation. When commercial pressure reorders the connections -- accessibility first, then groove, then (maybe) harmonic depth -- the circuit produces smooth jazz instead of fusion. The sneak circuit is the reordering of priorities that produces an unintended output. Same components, wrong sequence, different result. The parallel with the social amoeba's aggregation cascade is exact: *Dictyostelium discoideum* cells must respond to cyclic AMP signals in a specific temporal order, and if the cAMP pulse train arrives out of sequence, aggregation stalls and the colony disperses. Paired in parallel at three scales -- rocket, genre, organism -- the same failure mode: sequence-dependent cascades where individually correct components produce system-level failure through wrong ordering.
+
+Mercury-Redstone 1A launched successfully on December 19, 1960, twenty-eight days after MR-1's four-inch flight. The fix was millimeters. The tail-plug connector pins were lengthened. The sneak circuit was closed. The same rocket, the same launch pedestal, the same Launch Complex 5, the same Cape Canaveral, the same Chrysler-built Redstone booster, the same Rocketdyne A-7 engine. One connector changed by a fraction of an inch. MR-1A's flight duration was sixteen minutes and thirty-nine seconds. Apogee 209 kilometers. Landing at sea. Every system worked, as they had on MR-1, but this time in the correct order. The difference between the two missions was a millimeter and a month. Voltaire, born November 21, 1694 -- two hundred sixty-six years to the day before Mercury-Redstone 1 sat on its launch pedestal draped in parachutes -- would have appreciated both the absurdity and the fix. *Candide*, published in 1759, concludes: *Il faut cultiver notre jardin.* Tend your garden. Pangloss would have said the failure was for the best because in the best of all possible worlds all failures are ultimately instructive. Voltaire would have said something more precise: test your connectors.
+
+The Voltaire dedication closes the reflection at the cultural level: satire as engineering, the literary tradition that treats optimism itself as a system that can fail by integration error. The calendar-date dedication convention that degree 9 established (Joseph Campbell's March 26 birthday aligned to Explorer 3's March 26 launch) and that degree 14 continued (Erwin Schrodinger's August 12 birthday aligned to Echo 1's August 12 launch) extends to degree 16: Voltaire's November 21, 1694 birthday aligns to Mercury-Redstone 1's November 21, 1960 launch across two hundred sixty-six years. The convention is structural rather than decorative. The engine deliberately selects dedications whose birth or death dates align with mission-date calendar positions, and at degree 16 the convention also carries thematic weight: Voltaire's ironic disposition is the correct philosophical frame for a rocket that executed a flawless post-flight sequence for a flight that had not occurred.
+
+Three crescendos at degree 16, paired in parallel across the four tracks: one musical (Lorber's fusion-to-smooth arc, the crescendo that settles), one biological (the warbler's sweet-to-sweeter-than-sweet escalation, the crescendo that completes), and one mechanical (Mercury-Redstone 1's ignition-to-four-inch abort, the crescendo that fails). The engine documents the same acoustic shape at three scales and shows that the shape has three distinct outcomes. Combined energy across both sides of the paired engine reaches 6 for the second consecutive degree (Lorber E=3 plus Yellow Warbler E=3, following Marriott E=3 plus Wilson's Warbler E=3 at degree 15), sustaining the breakout from the moderate-energy zone established at degree 15. Degree 16 is the four-inch degree. Every object at this degree starts building and the engine documents each object's answer to the question of whether construction reaches orbit.
 
 ## Key Features
 
 | Metric | Part A: Jeff Lorber | Part B: Yellow Warbler |
 |--------|---------------------|------------------------|
-| Energy | E=3 (fusion energy, layered grooves) | E=3 (crescendo, brightest warbler) |
-| Acoustic Element | Jazz fusion (genre gradient, jazz+funk+electronic) | Crescendo (volume + pitch build through song) |
-| Artist-City Pattern | Portland-Seattle corridor (eighteenth pattern) | -- |
-| NASA Parallel | MR-1 four-inch flight = fusion's gap between ignition and orbit | MR-1's aborted crescendo vs. warbler's completed crescendo |
-| Organism Parallel | Social amoeba aggregation/dispersal = fusion's conditional collectivity | Social amoeba crescendo (individual → slug → fruiting body) = warbler's crescendo |
-| Structural Firsts | First "Jazz Fusion" label; third Berklee; Kenny G launchpad; genre gradient; Portland-Seattle corridor; smooth jazz era documented | Third consecutive Parulidae; crescendo; third genus in warbler triptych; brightest PNW warbler; Ravel *Bolero* parallel |
-
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+| Energy | E=3 (fusion energy, layered grooves) | E=3 (crescendo, brightest warbler in PNW) |
+| Acoustic Element | Jazz fusion (genre gradient, jazz + funk + electronic) | Crescendo (volume + pitch build through song) |
+| Artist-City Pattern | Portland-to-Seattle corridor (eighteenth pattern) | -- |
+| NASA Parallel | Mercury-Redstone 1's four-inch flight = fusion's gap between ignition and orbit | MR-1's aborted crescendo vs. warbler's completed crescendo |
+| Organism Parallel | Social amoeba aggregation / dispersal = fusion's conditional collectivity | *Dictyostelium* crescendo (individual → slug → fruiting body) = warbler's crescendo |
+| Structural Firsts | First "Jazz Fusion" genre label; third Berklee graduate; Kenny G discovery launchpad; genre gradient enters; Portland-Seattle corridor first instance; smooth jazz era documented | Third consecutive Parulidae; crescendo acoustic strategy; third genus in warbler triptych; brightest warbler in PNW; Ravel *Bolero* parallel |
 
 ## Part A: Jeff Lorber -- THE FOUR-INCH FUSION
 
-### Pass 2 Refinement Summary
-
-Four research sections on Lorber as genre-gradient pioneer, the Berklee divergence engine's third output, the Kenny G connection, and the MR-1 structural parallel:
-
-**1. The Genre Gradient: Jazz Fusion Breaks the Sixteen-Degree Monopoly.** The shift at degree 16 is not discrete. It is continuous. Jazz fusion is still jazz -- it uses jazz harmony, jazz improvisation, jazz ensemble interaction. But it adds funk rhythm, synthesizer texture, and pop production values that pull the music toward adjacent genres. The label changes from "Jazz" to "Jazz Fusion" without a hard boundary -- the genre spectrum is continuous, and Lorber occupies the transition zone where jazz begins to blend into what will eventually become funk, R&B, soul, and rock in the circle's later degrees.
-
-Mercury-Redstone 1's four-inch flight was also a transition -- the Mercury program's first suborbital test, the boundary between unmanned rocket tests and human spaceflight. The capsule was empty (no astronaut aboard), but the mission was testing the systems that would carry Alan Shepard into space five months later. The four-inch flight was the transition zone between ground testing and flight testing -- the same kind of liminal space that fusion occupies between jazz and pop. The genre gradient and the program transition both occupy the space where one thing is becoming another, where the old label no longer applies and the new label has not yet solidified.
-
-**2. The Berklee Divergence Engine at Three.** Jones (arranger/producer, degree 0), Frisell (ambient deconstructionist, degree 1), Lorber (fusion architect, degree 16). Same school, maximum stylistic divergence. Three graduates, three completely different outputs, no stylistic overlap whatsoever. Berklee is the institutional equivalent of the harmonic series -- one source, many overtones, the fundamental frequency (jazz education) generating a spectrum of outputs that share only the origin.
-
-The Berklee pipeline parallels the UW pipeline (Seales/Parks/Marriott at degrees 13-15): both are institutional systems that produce structurally different outputs from a single source. But the Berklee pipeline is distributed across sixteen degrees and three cities (Jones from Chicago via Seattle, Frisell from Denver via Seattle, Lorber from Philadelphia via Portland). The UW pipeline is concentrated in three consecutive degrees and one city. Berklee diverges. UW converges. Both produce maximum range.
-
-**3. The Kenny G Connection: The Most Commercially Successful Discovery in the Engine.** Lorber discovered Kenny Gorelick -- Kenny G -- in 1977, hiring the young saxophonist for the Jeff Lorber Fusion band. Kenny G went on to become the best-selling instrumental musician of the modern era, with over 75 million albums sold worldwide. The Lorber-Kenny G connection is the engine's most commercially consequential artist-to-artist relationship. Lorber himself is a respected but not mega-selling artist. His discovery is one of the best-selling musicians alive. The launch pad produced a vehicle that far exceeded the pad's own altitude.
-
-The parallel to MR-1 is structural: MR-1 was a test mission, a stepping stone, a platform designed to validate systems for the flights that would follow. It failed on its own terms (four-inch flight) but the program it served succeeded beyond measure (Mercury → Gemini → Apollo → Moon). Lorber's own fusion career followed a similar trajectory -- the ignition was real, the orbit was partial, but the discovery that launched from his platform reached heights he did not.
-
-**4. The False Start and the Sneak Circuit.** The cause of MR-1's failure was a sneak circuit -- an unintended current path created when two tail-plug connectors separated in the wrong order. The power connector, fractionally shorter than the control connector, separated first. This created a transient condition that the guidance computer interpreted as a shutdown command. The engine obeyed. The fix was almost insultingly simple: lengthen one connector pin by millimeters. The entire mission failed because one connector was a fraction of an inch shorter than it should have been. The gap between the drawing and the hardware. The gap between specification and reality.
-
-Jazz fusion's sneak circuit is the genre's inherent tension between complexity and accessibility. The fusion circuit works when the jazz complexity and the funk groove and the electronic texture are all connected in the correct order -- harmonic sophistication driving rhythmic energy driving textural innovation. When commercial pressure reorders the connections -- accessibility first, then groove, then (maybe) harmonic depth -- the circuit produces smooth jazz instead of fusion. The sneak circuit is the reordering of priorities that produces an unintended output. Same components, wrong sequence, different result.
+- **Philadelphia origins and the pre-Berklee keyboard vocabulary.** Jeff Lorber was born in 1952 in Philadelphia, a city whose jazz-funk scene (the Philadelphia International Records production machine, the Gamble-Huff sound, the Philly soul aesthetic) shaped his early ear before he entered Berklee College of Music. His keyboard foundation combined classical piano training with the electric-keyboard vocabulary that Herbie Hancock and Chick Corea were codifying during the early fusion years. Lorber entered Berklee in the early 1970s, the third Berklee graduate documented in the engine after Quincy Jones at degree 0 and Bill Frisell at degree 1, and his compositional instincts were already oriented toward cross-idiom synthesis before he arrived at the school that formalized that orientation.
+- **The Portland incubation and the Pacific Northwest move.** After Berklee, Lorber moved to Portland, Oregon, and formed the Jeff Lorber Fusion there in the mid-1970s. The Portland move establishes the eighteenth artist-city pattern in the engine's catalog: the Portland-to-Seattle corridor, a regional pipeline that differs structurally from the direct-Seattle patterns (Berry, Bown, Seales) and from the transcontinental export patterns (Jones, Parks). Portland is not a destination in Lorber's trajectory -- it is an incubation site where the Jeff Lorber Fusion band crystallized before the smooth-jazz era pulled him toward the Los Angeles and New York production markets. The Pacific Northwest corridor extends the engine's geographic range beyond the Seattle city limits.
+- **The Jeff Lorber Fusion band and the early-fusion album sequence.** The Jeff Lorber Fusion released four albums on Inner City and Arista Records between 1977 and 1980: the self-titled *Jeff Lorber Fusion* (1977), *Soft Space* (1978), *Water Sign* (1979), and *Wizard Island* (1980). The albums establish the band's instrumental signature -- electric piano, synthesizer, bass, drums, saxophone (Kenny Gorelick), guitar -- and document the early-fusion sound before its commercial simplification. The band's personnel rotated but Lorber's compositional and keyboard voice remained the constant. The early-fusion period is the band's ignition phase: full jazz-plus-funk-plus-electronic ambition, harmonic sophistication intact, groove energy at its maximum.
+- **Kenny Gorelick's 1977 hire and the most consequential artist-to-artist discovery.** Lorber hired Kenny Gorelick -- soon to be known as Kenny G -- for the Jeff Lorber Fusion in 1977. Kenny G went on to become the best-selling instrumental musician in recorded history, with more than seventy-five million albums sold worldwide. The Lorber-to-Kenny G discovery is the most commercially consequential artist-to-artist relay in the engine's catalog. The parallel to Mercury-Redstone 1 is structural: MR-1 was a test platform designed to validate systems for the flights that followed, failed on its own terms, but the program it served succeeded beyond measure. Lorber's platform produced a vehicle that far exceeded the platform's own reach.
+- **The smooth-jazz transition and the commercial-pressure trajectory.** In the early 1980s, Lorber's solo career moved toward the smooth-jazz format that Arista and Verve Records were building for instrumental radio play. The harmonic vocabulary simplified. The funk energy smoothed into polished grooves. The textural innovation contracted into recognizable smooth-jazz production aesthetics. This is the four-inch phase of Lorber's trajectory: the ignition was real, the early fusion albums achieved liftoff, but the commercial reorientation pulled the vehicle back toward ground-level radio formats. The genre's sneak circuit fired -- accessibility first, groove second, harmonic depth conditional -- and the output reordered from fusion into smooth jazz.
+- **The Grammy era and the late-career production credits.** Lorber's later career extended into production work and collaborative projects that carried his fusion vocabulary into hip-hop, R&B, and contemporary instrumental formats. He earned Grammy recognition for production work across the 2000s and 2010s, and his keyboard playing appears on sessions spanning genres from straight-ahead jazz to pop production. The late-career phase is the settling phase: the rocket is on the ground, the systems are intact, the influence continues through the vehicles it launched rather than through its own altitude.
+- **The Berklee divergence engine at three graduates.** Quincy Jones (arranger and producer, degree 0), Bill Frisell (ambient deconstructionist, degree 1), Jeff Lorber (fusion architect, degree 16). Same school, maximum stylistic divergence. Three graduates, three completely different outputs, no stylistic overlap whatsoever. Berklee is the institutional equivalent of the harmonic series -- one source, many overtones, the fundamental frequency (jazz education) generating a spectrum of outputs that share only their origin. The Berklee pipeline parallels the UW pipeline (Seales, Parks, Marriott at degrees 13-15) but spans sixteen degrees and three cities rather than three consecutive degrees in one city. Berklee diverges; UW converges.
+- **The Portland-Seattle corridor as the eighteenth artist-city pattern.** Lorber's Philadelphia-to-Portland-to-Seattle-region trajectory establishes a new artist-city pattern in the engine: the Portland-to-Seattle corridor, where the regional Pacific Northwest creative geography functions as a coherent destination rather than as two separate cities. Previous patterns include Export (Jones, Anderson, Parks), Draw (Frisell, Horvitz), Builder (Horvitz), Stay (Berry), Pedagogue-Draw (Priester, Caliman), Institutional Anchor (Seales), and Prodigy-Export (Parks, Marriott). The Portland-Seattle corridor is structurally distinct: it treats the Cascadia regional culture as a single destination system rather than treating Portland and Seattle as discrete nodes.
 
 ---
 
 ## Part B: Yellow Warbler -- THE CRESCENDO AND THE BRIGHTEST BIRD
 
-### Pass 2 Refinement Summary
+- **Species identity and the Parulidae family membership.** *Setophaga petechia*, the Yellow Warbler, is a New World warbler in the family Parulidae, the same family as the MacGillivray's Warbler at degree 14 and the Wilson's Warbler at degree 15. The species name *petechia* refers to the small red streaks on the male's breast that suggest petechiae (small hemorrhagic skin spots), a morphological marker that distinguishes males from females. The genus *Setophaga* is the third Parulidae genus documented in the engine, following *Geothlypis* (MacGillivray's) and *Cardellina* (Wilson's), and completes the family's first within-family genus triptych.
+- **The crescendo song structure and the completed peak.** The Yellow Warbler's song builds from moderate volume and pitch through progressively louder, higher repetitions -- sweet, sweet, SWEET, SWEETER-THAN-SWEET -- reaching its peak and stopping. The peak IS the resolution: the loudest, highest moment is the song's climax, and the silence after it is the cadence. The crescendo reaches its destination. This is structurally distinct from the MacGillivray's A-A-A-B narrative arc (resolution by contrast) at degree 14 and from the Wilson's accelerando (resolution by cutoff) at degree 15. The Yellow Warbler's crescendo resolves by escalation -- the peak is the endpoint, not an intermediate waypoint.
+- **Conspicuousness as strategy: the brightest bird.** The Yellow Warbler is the brightest-colored warbler in the Pacific Northwest -- vivid yellow with no camouflage, no wing bars to break the outline, no streaking to blur the shape, no cryptic patterning at all. The song is the brightest in the triptych -- clear whistled tones rather than the buzzy chattering of Wilson's or the harsh churring of MacGillivray's. The bird does not hide. It does not accelerate to urgency. It simply gets louder and brighter, overwhelming the acoustic and visual environment through sheer conspicuousness. Mercury-Redstone 1 was conspicuous too -- a rocket with its parachute deployed on the pad is impossible to ignore -- but MR-1's conspicuousness was failure made visible. The Yellow Warbler's conspicuousness is success made audible.
+- **Riparian willow habitat and the wet-margin acoustic niche.** The Yellow Warbler breeds in riparian willow thickets, wet-margin alder stands, and streamside deciduous vegetation across the Pacific Northwest. The habitat is the eleventh habitat type documented in the engine (following dense shrub at degree 14 and willow riparian at degree 15), and it differs from the Wilson's Warbler's willow-riparian habitat by its wetter microhabitat preference -- Yellow Warblers favor active stream margins where the willow stratum is tallest and most vertically layered, while Wilson's Warblers occupy the drier willow thickets one step back from the water's edge. The two warblers overlap in habitat but segregate at the microhabitat level.
+- **Three consecutive Parulidae: the warbler triptych of intensification.** Degrees 14, 15, and 16 form the engine's first three-consecutive-family run -- three New World warblers in three degrees, each from a different genus, each with a different intensification strategy. MacGillivray's (*Geothlypis*, degree 14) uses repetition with contrast (A-A-A-B); Wilson's (*Cardellina*, degree 15) uses accelerando (tempo increase); Yellow (*Setophaga*, degree 16) uses crescendo (volume + pitch increase). Three genera, three strategies, one family. The triptych demonstrates that Parulidae contains multiple solutions to the same acoustic problem: how to make a short song effective in dense riparian vegetation. Same family, same habitat type, three different answers.
+- **The Pocket Bolero: the Ravel parallel.** The Yellow Warbler's crescendo maps to Maurice Ravel's *Bolero* (1928) -- the orchestral work built on a single repeated melody that crescendos from pianissimo to fortissimo over seventeen minutes, adding instruments and volume but never changing the theme. The warbler's song is a pocket-sized version: same melody repeated, volume and pitch increasing with each iteration, the accumulation of repetitions building toward a climax that is achieved purely through escalation, not through melodic development. Ravel's *Bolero* never modulates until the final bars. The warbler never changes its theme. Both build through accumulation. Both rely on the audience's growing awareness that the thing is getting louder. Both are studies in the power of repetition with escalation.
+- **Neotropical migration and the seasonal voice.** The Yellow Warbler is a neotropical migrant, present in the Pacific Northwest from May through September and wintering in Mexico, Central America, and northern South America. This is the fourth neotropical migrant in the engine (following the Pacific-slope Flycatcher at degree 6, MacGillivray's Warbler at degree 14, and Wilson's Warbler at degree 15), and it extends the engine's documentation of seasonal voice to four species across ten degrees. The migration corridor is the same as MacGillivray's and Wilson's -- the three warblers share a Pacific Flyway migration system -- but the Yellow Warbler's wintering range extends further south into northern South America than the other two.
+- **The social-amoeba parallel and the conditional collectivity.** The Yellow Warbler's crescendo pairs in parallel with the *Dictyostelium discoideum* aggregation cascade at the structural level: both systems build through sequential escalation from an individual unit (one cell, one sweet note) toward a collective climax (fruiting body, sweeter-than-sweet peak), and both systems depend on signal-timing coordination to complete the cascade. The warbler's cascade always completes. The amoeba's cascade sometimes stalls. The parallel illuminates the warbler's reliability -- the crescendo as a closed-loop biological system that has solved the sequence-dependent failure mode that MR-1 could not. The bird sings the same song every time, and the same song always reaches its peak. The amoeba sometimes does. The rocket once did not.
 
-Four research sections on the crescendo, the warbler triptych, conspicuousness as strategy, and the Pocket Bolero:
+---
 
-**1. The Crescendo That Completes: Opposite of MR-1.** The Yellow Warbler's song builds from moderate volume and pitch through progressively louder, higher repetitions -- sweet, sweet, SWEET, SWEETER-THAN-SWEET -- reaching its peak and stopping. The peak IS the resolution: the loudest, highest moment is the song's climax, and the silence after it is the cadence. The crescendo reaches its destination. Mercury-Redstone 1's crescendo did not -- the four-inch rise was the first note of a song that never reached its peak. Two crescendos at degree 16: one biological, one mechanical. One completes. One aborts.
+## Retrospective
 
-The Dictyostelium parallel is temporal: the social amoeba aggregation IS a biological crescendo, starting soft (individual cells) and building to a climax (spore release from the fruiting body). But the aggregation can fail if conditions change before the process completes -- the cells may begin to aggregate and then disperse, a false start, a crescendo that reverses. Three crescendos: the warbler completes, the amoeba sometimes completes, the rocket does not.
+### What Worked
 
-**2. Three Consecutive Parulidae: The Warbler Triptych of Intensification.** Degrees 14, 15, and 16 form the engine's first three-consecutive-family run -- three New World warblers in three degrees, each from a different genus, each with a different intensification strategy:
+- **The three-crescendo synchrony carried all four tracks cleanly.** Lorber's fusion-to-smooth arc, the Yellow Warbler's sweet-to-sweeter-than-sweet escalation, Mercury-Redstone 1's ignition-to-four-inch abort, and *Dictyostelium discoideum*'s individual-to-slug aggregation all perform the same structural operation -- sequential escalation from an individual unit toward a collective or ambitious peak. Four tracks, one structural commitment, four distinct outcomes. The paired-engine method has shown it can document the same acoustic shape at three scales and honestly record that the shape has three different resolutions.
+- **The Berklee divergence engine closed its first triptych at degree 16.** Jones (arranger-producer, degree 0), Frisell (ambient deconstructionist, degree 1), Lorber (fusion architect, degree 16). Three graduates, maximum stylistic divergence, no stylistic overlap whatsoever. The Berklee pipeline's first triptych is institutionally complete, and the completion is honest rather than inflated. Future Berklee products will extend the count, but the primary divergence arc is now visible.
+- **The warbler triptych completed as the engine's first within-family three-genus run.** Degrees 14-16 form the first three-consecutive-Parulidae sequence, with three different genera (*Geothlypis*, *Cardellina*, *Setophaga*) and three different intensification strategies (resolution, accelerando, crescendo). The triptych demonstrates that Parulidae contains multiple solutions to the same acoustic problem, and the engine now has a within-family comparison baseline that future within-family clusters (Paridae, Turdidae) can be measured against.
+- **The sneak-circuit principle transferred across three scales.** The MR-1 tail-plug connector failure, the jazz fusion commercial-pressure reordering, and the *Dictyostelium* cAMP pulse-train timing failure all instantiate the same structural mode: sequence-dependent cascades where individually correct components produce system-level failure through wrong ordering. The principle is now a transferable analytical lens for the engine's later degrees.
 
-| Degree | Species | Genus | Strategy | Resolution |
-|--------|---------|-------|----------|-----------|
-| 14 | MacGillivray's Warbler | *Geothlypis* | Repetition + contrast (A-A-A-B) | YES -- the "sweet" resolves |
-| 15 | Wilson's Warbler | *Cardellina* | Accelerando (speeds up) | NO -- cuts off mid-acceleration |
-| **16** | **Yellow Warbler** | ***Setophaga*** | **Crescendo (volume + pitch increase)** | **PARTIAL -- peak is the endpoint** |
+### What Could Be Better
 
-Three genera, three strategies, three relationships to resolution. The MacGillivray's resolves through contrast. The Wilson's doesn't resolve at all. The Yellow Warbler partially resolves -- the peak is the completion. The triptych demonstrates that Parulidae contains multiple solutions to the same acoustic problem: how to make a short song effective in dense riparian vegetation. Same family, same habitat type, three different answers.
+- **The Lorber Portland-Seattle corridor needs a dedicated accounting.** The eighteenth artist-city pattern is introduced at degree 16, but the release documents the pattern through Lorber alone. The Pacific Northwest regional geography includes other Portland-to-Seattle artist trajectories (James DePreist, Esperanza Spalding as Portland-origin artists who relate to the Seattle jazz community) that the engine has not yet documented. A future release should produce a regional-corridor ledger that places Lorber in a broader Pacific Northwest framework rather than leaving the corridor pattern with a single data point.
+- **The Kenny G discovery documentation stays at the biographical level and does not engage the smooth-jazz format's structural implications.** The 1977 Gorelick hire is the most commercially consequential artist-to-artist relay in the engine, but the release treats the discovery primarily as a biographical fact rather than as a structural mechanism for how commercial scaling operates on fusion-adjacent genres. A future chapter should produce a discovery-pipeline ledger that accounts for the full structural flow from Lorber's fusion band through Kenny G's solo career into the smooth-jazz format's radio-play economics.
+- **The Voltaire dedication engaged the *Candide* reference but did not cite the *Philosophical Dictionary* or Voltaire's engineering contemporaries.** The *Il faut cultiver notre jardin* quotation is sufficient for the dedication's thematic close, but Voltaire's correspondence with Émilie du Châtelet on Newtonian mechanics and his later engagement with the French Academy's empirical-science program offer a more specific philosophical bridge between Enlightenment satire and aerospace engineering. The dedication text reads as associational rather than citational.
 
-**3. Conspicuousness as Strategy: The Brightest Bird.** The Yellow Warbler is the brightest-colored warbler in the PNW -- vivid yellow with no camouflage, no wing bars to break the outline, no streaking to blur the shape. The song is the brightest in the triptych -- clear whistled tones rather than buzzy chattering (Wilson's) or harsh churring (MacGillivray's). The bird does not hide. It does not accelerate to urgency. It simply gets louder and brighter, overwhelming the acoustic and visual environment through sheer conspicuousness.
+## Lessons Learned
 
-This is fundamentally different from the MacGillivray's concealment (degree 14 -- hides in dense shrub) and the Wilson's urgency (degree 15 -- conspicuous but frantic). The Yellow Warbler is conspicuous and calm -- the loudest, brightest thing in the riparian thicket. The crescendo is not desperate. It is declarative. Mercury-Redstone 1 was conspicuous too -- a rocket with its parachute deployed on the pad is impossible to ignore. But MR-1's conspicuousness was failure made visible. The Yellow Warbler's conspicuousness is success made audible.
-
-**4. Pocket Bolero: The Ravel Parallel.** The Yellow Warbler's crescendo maps to Ravel's *Bolero* (1928) -- the orchestral work built on a single repeated melody that crescendos from pianissimo to fortissimo over seventeen minutes, adding instruments and volume but never changing the theme. The warbler's song is a pocket-sized version: same melody repeated, volume and pitch increasing with each iteration, the accumulation of repetitions building toward a climax that is achieved purely through escalation, not through melodic development. The Bolero never modulates (until the final bars). The warbler never changes its theme. Both build through accumulation. Both rely on the audience's growing awareness that the thing is getting louder. Both are studies in the power of repetition with escalation.
-
-Lorber's fusion grooves work the same way at their best -- a rhythmic figure that repeats, layers accumulating (bass, keys, horns, synths), the groove building in density and intensity without fundamentally changing its harmonic content. The jazz-funk vamp is the fusion equivalent of the Bolero principle: repetition + escalation = crescendo.
-
-### Retrospective: Degree 16 Patterns Established
-
-1. **The genre boundary is a gradient, not a wall.** Jazz Fusion at degree 16 is not a departure from jazz -- it is jazz at the edge of its genre space, blending into adjacent territories. The engine's genre rotation is continuous, not discrete.
+1. **The genre boundary is a gradient, not a wall.** Jazz Fusion at degree 16 is not a departure from jazz -- it is jazz at the edge of its genre space, blending into adjacent territories. The engine's genre rotation is continuous, not discrete. Lorber occupies the transition zone and the engine's later degrees will continue the gradient toward funk, R&B, soul, and rock.
 
 2. **Mercury-Redstone 1 is the funniest failure in the series.** Every system worked. The escape tower fired correctly. The parachutes deployed correctly. The capsule sat on the ground correctly. The failure was in the integration -- the same lesson as the social amoeba's conditional aggregation: individual components functioning correctly does not guarantee collective function. Chris Kraft called it "the most embarrassing failure in the history of the space program." The word "embarrassing" is precise. Not catastrophic. Not dangerous (at first). Embarrassing. The parachutes deployed from a capsule at an altitude of zero.
 
 3. **The warbler triptych (degrees 14-16) is the engine's richest within-family cluster.** Three consecutive Parulidae from three different genera, each with a different intensification strategy. Resolution (MacGillivray's), accelerando (Wilson's), crescendo (Yellow). The family contains all three solutions to the same acoustic problem: how to make a short song effective in dense riparian vegetation.
 
-4. **The Berklee divergence engine produces maximum spread.** Three graduates (Jones/0, Frisell/1, Lorber/16): arranger, deconstructionist, fusion architect. Same school, no stylistic overlap. Berklee is the institutional equivalent of the harmonic series -- one source, many overtones.
+4. **The Berklee divergence engine produces maximum spread.** Three graduates (Jones/0, Frisell/1, Lorber/16): arranger, deconstructionist, fusion architect. Same school, no stylistic overlap. Berklee is the institutional equivalent of the harmonic series -- one source, many overtones. The UW pipeline converges; the Berklee pipeline diverges. Both produce maximum range by different means.
 
-5. **The Mercury program enters.** The first human-spaceflight program in the series. Previous missions were unmanned -- Pioneer, Explorer, Vanguard, Echo, TIROS. Mercury-Redstone 1 is the transition from robotic to human exploration, even though this particular test was unmanned and achieved four inches. The Space Race context is critical: Gagarin would orbit five months after MR-1A. Every day MR-1 cost was a day the gap widened.
+5. **The Mercury program enters.** The first human-spaceflight program in the series. Previous missions were unmanned -- Pioneer, Explorer, Vanguard, Echo, TIROS. Mercury-Redstone 1 is the transition from robotic to human exploration, even though this particular test was unmanned and achieved four inches. The Space Race context is critical: Yuri Gagarin would orbit five months after MR-1A. Every day MR-1 cost was a day the gap widened.
 
 6. **The sneak circuit as universal failure mode.** An unintended current path caused by connectors separating in the wrong order -- a timing problem measured in milliseconds, a physical problem measured in fractions of an inch. The gap between the schematic and the hardware. Applicable to genre transitions (reordering priorities produces smooth jazz instead of fusion), to biological development (wrong signal timing stalls aggregation), to any complex system where sequence matters.
 
-7. **The Voltaire dedication links satire to engineering.** MR-1 is a Voltairean parable -- ambition mocked by absurdity, optimism collapsed by a fraction-of-an-inch connector. The engineers responded as Candide did: they tended their garden. Found the sneak circuit. Lengthened the pin. Launched MR-1A twenty-eight days later. *Il faut cultiver notre jardin.* Pangloss would have said the failure was for the best. Voltaire would have said: test your connectors.
+7. **The Voltaire dedication links satire to engineering.** Mercury-Redstone 1 is a Voltairean parable -- ambition mocked by absurdity, optimism collapsed by a fraction-of-an-inch connector. The engineers responded as Candide did: they tended their garden. Found the sneak circuit. Lengthened the pin. Launched MR-1A twenty-eight days later. *Il faut cultiver notre jardin.* Pangloss would have said the failure was for the best. Voltaire would have said: test your connectors.
 
-8. **The social amoeba as false-start model.** Dictyostelium aggregation that stalls and disperses = MR-1's four-inch flight that initiates and aborts. Both are sequence-dependent cascades that fail when any link in the chain breaks. Both are model systems -- studied more for what they reveal about failure than for what they accomplished.
+8. **The social amoeba as false-start model.** *Dictyostelium discoideum* aggregation that stalls and disperses = MR-1's four-inch flight that initiates and aborts. Both are sequence-dependent cascades that fail when any link in the chain breaks. Both are model systems -- studied more for what they reveal about failure than for what they accomplished. The engine now has a transferable biological model for cascade-failure analysis.
 
-9. **The dangerous aftermath.** The twenty-four-hour vigil. A fully fueled Redstone -- 24,000 pounds of alcohol, 27,000 pounds of liquid oxygen -- standing on the pad draped in parachutes that caught the wind and threatened to topple the whole stack. The engineers waited for the batteries to drain and the LOX to boil off before approaching. The funniest failure in the series was also, after the laughter stopped, genuinely terrifying.
+9. **The dangerous aftermath teaches that comedy and terror share a pad.** The twenty-four-hour vigil. A fully fueled Redstone -- 24,000 pounds of alcohol, 27,000 pounds of liquid oxygen -- standing on the pad draped in parachutes that caught the wind and threatened to topple the whole stack. The engineers waited for the batteries to drain and the LOX to boil off before approaching. The funniest failure in the series was also, after the laughter stopped, genuinely terrifying. Humor and risk are rarely on separate pedestals.
 
-10. **The sequencer's epistemology.** The MR-1 sequencer had data but not understanding. It knew liftoff had occurred. It did not know the rocket was sitting on the ground. It had no sensor for absurdity. The lesson about the gap between data and context -- between specification and reality -- is taught in aerospace engineering courses to this day.
+10. **The sequencer's epistemology.** The MR-1 sequencer had data but not understanding. It knew liftoff had occurred. It did not know the rocket was sitting on the ground. It had no sensor for absurdity. The lesson about the gap between data and context -- between specification and reality -- is taught in aerospace engineering courses to this day, and the engine now has a concrete instance of the lesson that pairs in parallel with the jazz-fusion sneak circuit and the social-amoeba cAMP cascade.
 
-### Carry-Forward Items from Degree 16
+## Cross-References
 
-- **Genre gradient:** Jazz Fusion breaks the 16-degree jazz monopoly. The transition zone is entered. Future degrees will continue the gradient toward funk, R&B, soul, rock.
-- **Warbler triptych:** COMPLETE at degrees 14-16. Three genera (*Geothlypis*, *Cardellina*, *Setophaga*), three strategies (resolution, accelerando, crescendo), one family. The richest within-family cluster.
-- **Mercury program:** Enters at degree 16. First human-spaceflight program. Four-inch start. MR-1A succeeded 28 days later -- the fix was millimeters.
-- **Berklee pipeline:** 3 graduates (Jones, Frisell, Lorber). Maximum divergence engine. Future Berklee products will extend the count.
-- **Kenny G connection:** The most commercially successful artist-to-artist discovery in the engine. The launch pad that produced a vehicle exceeding its own altitude.
-- **Energy profile:** E=3 on both tracks (combined 6) for second consecutive degree. The breakout from the quiet zone continues.
-- **Social amoeba model:** Conditional aggregation -- collective behavior that is temporary and stress-dependent. Applicable to fusion bands, genre movements, institutional partnerships.
-- **Sneak circuit principle:** Sequence-dependent failures where individually correct components produce system-level failure through wrong ordering. Carries forward as an analytical lens.
-- **Voltaire thread:** The satirist-engineer connection. *Il faut cultiver notre jardin* as the engineering response to absurd failure. The first philosopher dedication in the series.
-- **Conspicuousness vs. concealment:** Yellow Warbler (visible, declarative) vs. MacGillivray's (hidden, cryptic). Two survival strategies at adjacent degrees within the same family.
-
-</details>
+| Thread | Degree 16 Entity | Role |
+|--------|-----------------|------|
+| S36 | Jeff Lorber | Artist -- first Jazz Fusion genre label, third Berklee graduate, Kenny G discovery, genre gradient enters |
+| SPS | Yellow Warbler (*Setophaga petechia*) | Species -- third Parulidae, third genus, crescendo, brightest warbler in PNW, triptych complete |
+| NASA | Mercury-Redstone 1 | Mission -- four-inch flight, sneak circuit, first Mercury program, most humiliating failure |
+| NASA Organism | *Dictyostelium discoideum* | Social amoeba -- false-start model, conditional aggregation, cAMP sequence sensitivity |
+| Dedication | Voltaire (November 21, 1694 -- May 30, 1778) | Born same calendar date as MR-1 launch, 266 years earlier; *Candide*; satire as engineering |
+| Warbler Triptych | Degrees 14-15-16 | Resolution → accelerando → crescendo (three genera, three strategies, one family) |
+| Berklee Pipeline | Jones (0) -- Frisell (1) -- Lorber (16) | Arranger-producer -- ambient deconstructionist -- fusion architect (maximum divergence) |
+| UW Pipeline | Seales (13) -- Parks (14) -- Marriott (15) | Converges in three consecutive degrees (contrast with Berklee's sixteen-degree divergence) |
+| Genre | Jazz → Jazz Fusion | Gradient, not boundary. Sixteen-degree jazz monopoly broken. |
+| Energy | Combined 6 × 2 degrees | Second consecutive E=3+E=3 breakout (degrees 15-16) |
+| MR-1 → MR-1A | 28-day gap | Fix: lengthen one connector pin by millimeters. December 19, 1960 success. |
+| Conspicuousness | Yellow Warbler vs. MacGillivray's Warbler | Visible / declarative vs. hidden / cryptic (same family, opposite strategies) |
+| False Start | MR-1 + *Dictyostelium* | Rocket settles on pad = slug stalls on substrate. Sequence-dependent cascade failure. |
+| Degree 15 → 16 | TIROS 1 → Mercury-Redstone 1 | Observation satellite → crewed-flight test platform. Passive eye → active ambition. |
+| Degree 16 → 17 | Post-genre-gradient | The engine after the boundary crack: what genre territory opens next? |
+| Kenny G Discovery | 1977 Gorelick hire | Most commercially consequential artist-to-artist relay in the engine. |
+| Portland-Seattle Corridor | Lorber trajectory | Eighteenth artist-city pattern; regional rather than city-level destination. |
+| Ravel *Bolero* | Yellow Warbler crescendo | Pocket Bolero -- same acoustic shape at different temporal scales. |
+| Voltaire / November 21 | MR-1 launch date | Calendar-date dedication convention across 266 years. |
+| Previous Release | [v1.49.516](../v1.49.516/README.md) | Degree 15 -- The Weather Eye (TIROS 1 + Wilson's Warbler + Marriott) |
+| Next Release | [v1.49.518](../v1.49.518/README.md) | Degree 17 -- post-gradient genre territory |
+| Sibling Release | [v1.49.515](../v1.49.515/README.md) | Degree 14 -- The Reflector (Echo 1 + MacGillivray's Warbler + Parks) |
+| Research Artifact | `www/tibsfox/com/Research/NASA/1.16/research.html` | Mercury-Redstone 1 deep-research essay |
+| Organism Artifact | `www/tibsfox/com/Research/NASA/1.16/organism.html` | *Dictyostelium discoideum* organism profile |
 
 ## Programs Active at Degree 16
 
 | Program | Missions | Status | Key Achievement |
 |---------|----------|--------|----------------|
 | Pioneer | 0-5 | Active | Deep space communication (36.2M km at degree 13) |
-| Explorer | 1-7 | Active | Van Allen belts (6), radiation budget (12) |
+| Explorer | 1-7 | Active | Van Allen belts (degree 6), radiation budget (degree 12) |
 | Vanguard | 1-2 | Complete | First solar-powered satellite |
-| Echo | 1 | Active | First passive comsat (30.5m Mylar balloon) |
-| TIROS | 1 | Active | First weather satellite (22,952 photos in 78 days) |
+| Echo | 1 | Active | First passive comsat (30.5m Mylar balloon, degree 14) |
+| TIROS | 1 | Active | First weather satellite (22,952 photos in 78 days, degree 15) |
 | **Mercury** | **MR-1** | **New at degree 16** | **First human-spaceflight program (4-inch test flight)** |
 
 ## Engine Position
 
 ```
-v1.49.501-506 = degrees 0-5    Pass 2  ✓
-v1.49.507-516 = degrees 6-15   Pass 2  ✓
-v1.49.517     = degree 16      Pass 2  ← THIS RELEASE
-v1.49.518     = degree 17      Pass 2  ← next
+v1.49.501-506 = degrees 0-5    Pass 2  (opening pentad)
+v1.49.507-516 = degrees 6-15   Pass 2  (second cycle)
+v1.49.517     = degree 16      Pass 2  <- THIS RELEASE (FOUR INCHES)
+v1.49.518     = degree 17      Pass 2  <- next
 ```
-
-## Files
-
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/016-jeff-lorber/pass2-refinement.md` | Pass 2 | ~500 |
-| `SPS/research/releases/016-yellow-warbler/pass2-refinement.md` | Pass 2 | ~500 |
-| `NASA/1.16/research.md` | Deep Research | ~5,800 |
-| `NASA/1.16/organism.md` | Organism Pairing | ~5,400 |
-| `docs/release-notes/v1.49.517/README.md` | Release Note | -- |
-
-## Emerging Patterns at Degree 16
-
-| Pattern | Status | Degree 16 Value |
-|---------|--------|-----------------|
-| S36 Artists | 17 documented (degrees 0-16) | First Jazz Fusion. Third Berklee. Kenny G discovery. Genre gradient enters. |
-| SPS Species | 17 documented (degrees 0-16) | Third Parulidae. Crescendo. Brightest warbler. Triptych complete. |
-| NASA Missions | 17 aligned (1.0-1.16) | Mercury enters. MR-1 four-inch failure. Sneak circuit. |
-| Piano Lineage | CLOSED at 4 | Stride (5) -- Hard Bop (6) -- Modal (13) -- Post-Genre (14) |
-| Keyboard Shift | Degree 16 | Lorber = synthesizer/keyboards. Piano arc closed; keyboard era begins. |
-| Trumpet Pair | 2 trumpeters | Standifer (4, multi-instrumental) + Marriott (15, specialist). Both E=3. |
-| UW Pipeline | 3 products (13-15) | Anchor -- Export -- Builder-Stayer. Most documented institution. |
-| Berklee Pipeline | 3 graduates (0, 1, 16) | Jones -- Frisell -- Lorber. Maximum divergence engine. |
-| Communication Paradigms | 4 | Active (Pioneer) + Passive (Echo) + Observational (TIROS) + Crewed Test (Mercury) |
-| Warbler Triptych | COMPLETE (14-16) | MacGillivray's (resolution) + Wilson's (accelerando) + Yellow (crescendo) |
-| Energy Profile | Combined 6 (second consecutive) | E=3+E=3 breakout continues from degree 15. |
-| Genre Labels | 2 | Jazz, Jazz Fusion (gradient, not discrete) |
-| NASA Programs | 6 | Pioneer, Explorer, Vanguard, Echo, TIROS, Mercury |
-
-## Cross-References
-
-| Thread | Degree 16 Entity | Role |
-|--------|-----------------|------|
-| S36 | Jeff Lorber | Artist -- first Jazz Fusion, third Berklee, Kenny G discovery, genre gradient |
-| SPS | Yellow Warbler | Species -- third Parulidae, crescendo, brightest warbler, triptych complete |
-| NASA | Mercury-Redstone 1 | Mission -- four-inch flight, sneak circuit, first Mercury, most humiliating failure |
-| Organism | Dictyostelium discoideum | Social amoeba -- false start, conditional aggregation, sequence sensitivity |
-| Warbler Triptych | Degrees 14-15-16 | Resolution → accelerando → crescendo (three genera, three strategies, one family) |
-| Berklee Pipeline | Jones (0) -- Frisell (1) -- Lorber (16) | Arranger -- deconstructionist -- fusion architect (maximum divergence) |
-| Genre | Jazz → Jazz Fusion | Gradient, not boundary. Sixteen-degree monopoly broken. |
-| Energy | Combined 6 × 2 degrees | Second consecutive E=3+E=3 breakout (degrees 15-16) |
-| MR-1 → MR-1A | 28-day gap | Fix: lengthen one connector pin by millimeters. December 19, 1960 success. |
-| Voltaire | November 21, 1694 | Born same date as MR-1 launch. Candide. Satire as engineering. |
-| Conspicuousness | Yellow Warbler vs. MacGillivray's | Visible/declarative vs. hidden/cryptic (same family, opposite strategies) |
-| False Start | MR-1 + Dictyostelium | Rocket settles on pad = slug stalls on substrate. Sequence-dependent cascade failure. |
-| Degree 15→16 | TIROS → Mercury | Observation satellite → crewed-flight test. Passive eye → active ambition. |
-| Degree 16→17 | Post-genre-gradient | The engine after the boundary crack: what genre territory opens next? |
-
-## Pattern Tables at Degree 16
-
-### Warbler Triptych (Degrees 14-16)
-
-| Degree | Species | Genus | Strategy | Resolution | Habitat |
-|--------|---------|-------|----------|-----------|---------|
-| 14 | MacGillivray's Warbler | *Geothlypis* | Repetition + contrast (A-A-A-B) | YES -- resolves | Dense shrub |
-| 15 | Wilson's Warbler | *Cardellina* | Accelerando (speeds up) | NO -- cuts off | Willow riparian |
-| **16** | **Yellow Warbler** | ***Setophaga*** | **Crescendo (louder + higher)** | **PARTIAL -- peak is endpoint** | **Riparian willow** |
-
-### Berklee Divergence Engine
-
-| Degree | Graduate | Style | Instrument | City Pattern |
-|--------|----------|-------|-----------|-------------|
-| 0 | Quincy Jones | Arranger/Producer | Orchestra/Studio | Chicago → Seattle → Global |
-| 1 | Bill Frisell | Ambient deconstruction | Guitar | Denver → Seattle |
-| **16** | **Jeff Lorber** | **Jazz Fusion/Smooth** | **Keyboards/Synth** | **Philadelphia → Portland → Seattle area** |
-
-### Mercury-Redstone 1 Timeline
-
-| Event | Time | Altitude | What Happened |
-|-------|------|----------|--------------|
-| Ignition | T-0 | 0 ft | Rocketdyne A-7 fires, 78,000 lbs thrust |
-| Liftoff | T+0.5s | 4 inches | Rocket rises, connectors separate (wrong order) |
-| Shutdown | T+1s | 4 inches | Sneak circuit sends cutoff command |
-| Settle | T+1.5s | 0 ft | Rocket returns to pedestal |
-| Tower jettison | T+10s | 0 ft | Escape tower fires from grounded capsule |
-| Drogue deploy | T+30s | 0 ft | Drogue parachute deploys at sea level |
-| Main deploy | T+50s | 0 ft | Main chute drapes over rocket |
-| Reserve deploy | T+70s | 0 ft | Reserve chute completes the tableau |
-| Battery drain | T+24h | 0 ft | Engineers finally approach |
-
-### False Start Parallels
-
-| System | Initiation | Rise | Failure | Recovery |
-|--------|-----------|------|---------|----------|
-| MR-1 | Engine ignition | 4 inches | Sneak circuit shutdown | MR-1A in 28 days |
-| Social amoeba | cAMP signal | Slug formation | Unfavorable conditions | Disaggregation, restart |
-| Jazz Fusion | Jazz + funk + electronic | Early fusion albums | Commercial pressure | Smooth jazz |
-| Yellow Warbler | First "sweet" | Crescendo builds | -- | Peak delivered (success) |
 
 ## Cumulative Engine Statistics (v1.49.501-517)
 
@@ -242,15 +166,58 @@ v1.49.518     = degree 17      Pass 2  ← next
 | Paired releases completed | 17 (degrees 0-16) |
 | Genre labels | 2 (Jazz, Jazz Fusion -- gradient, not discrete) |
 | Parulidae species | 3 (MacGillivray's, Wilson's, Yellow -- triptych complete) |
-| Berklee graduates | 3 (Jones, Frisell, Lorber) |
+| Berklee graduates | 3 (Jones, Frisell, Lorber -- maximum divergence) |
 | NASA programs | 6 (Pioneer, Explorer, Vanguard, Echo, TIROS, Mercury) |
 | Consecutive E=3 degrees | 2 (degrees 15-16). Breakout from quiet zone continues. |
 | Artist-city patterns | 18 |
 | Within-family triptychs | 1 (Parulidae at degrees 14-16) |
-| Communication paradigms | 4 (active, passive, observational, crewed test) |
+| Communication paradigms | 4 (active, passive, observational, crewed-flight test) |
 | Piano lineage | CLOSED at 4 |
-| Keyboard shift | Active at degree 16 (Lorber = synthesizer/keys) |
-| All-time combined energy maximum | 8 (degree 1: Frisell 3 + Wren 5) |
+| Keyboard shift | Active at degree 16 (Lorber = synthesizer / electric keys) |
+| All-time combined energy maximum | 8 (degree 1: Frisell 3 + Pacific Wren 5) |
+
+## Acoustic Progression at Degree 16
+
+| Strategy | Species / Artist | Degree | Description |
+|----------|------------------|--------|-------------|
+| Complexity | Pacific Wren | 2 | Maximum syllable count, fastest tempo |
+| Syntax | Black-capped Chickadee | 3 | Combinatorial note ordering, predator encoding |
+| Harmonic Series | Hermit Thrush | 8 | Overtone-based intervals, near-musical pitch |
+| Monotony | Hutton's Vireo | 13 | Repetition without variation, maximum persistence |
+| Narrative | MacGillivray's Warbler | 14 | Repetition with resolution (A-A-A-B) |
+| Accelerando | Wilson's Warbler | 15 | Tempo increase, cutoff ending |
+| **Crescendo** | **Yellow Warbler** | **16** | **Volume + pitch increase to completed peak** |
+
+## Mercury-Redstone 1 Timeline
+
+| Event | Time | Altitude | What Happened |
+|-------|------|----------|--------------|
+| Ignition | T-0 | 0 ft | Rocketdyne A-7 fires, 78,000 lbs thrust |
+| Liftoff | T+0.5s | 4 inches | Rocket rises, tail-plug connectors separate (wrong order) |
+| Shutdown | T+1s | 4 inches | Sneak circuit sends cutoff command |
+| Settle | T+1.5s | 0 ft | Rocket returns to pedestal |
+| Tower jettison | T+10s | 0 ft | Escape tower fires from grounded capsule |
+| Drogue deploy | T+30s | 0 ft | Drogue parachute deploys at sea level |
+| Main deploy | T+50s | 0 ft | Main chute drapes over rocket |
+| Reserve deploy | T+70s | 0 ft | Reserve chute completes the tableau |
+| Battery drain | T+24h | 0 ft | Engineers finally approach |
+
+## Files
+
+- `docs/release-notes/v1.49.517/README.md` -- this release README (A-grade uplift)
+- `docs/release-notes/v1.49.517/chapter/00-summary.md` -- chapter summary stub
+- `docs/release-notes/v1.49.517/chapter/03-retrospective.md` -- 10 numbered lessons, degree 16 patterns
+- `docs/release-notes/v1.49.517/chapter/99-context.md` -- version metadata and navigation
+- `www/tibsfox/com/Research/NASA/1.16/research.html` -- Mercury-Redstone 1 research artifact (live site)
+- `www/tibsfox/com/Research/NASA/1.16/organism.html` -- *Dictyostelium discoideum* organism profile
+- `www/tibsfox/com/Research/NASA/1.16/mathematics.html` -- MR-1 thrust curve + sneak-circuit electrical analysis
+- `www/tibsfox/com/Research/NASA/1.16/curriculum.html` -- degree 16 curriculum module
+- `www/tibsfox/com/Research/NASA/1.16/simulation.html` -- MR-1 four-inch flight simulation
+- `www/tibsfox/com/Research/NASA/1.16/papers.html` -- MR-1 primary-source bibliography
+- `S36/research/releases/016-jeff-lorber/pass2-refinement.md` -- Lorber Pass 2 research
+- `SPS/research/releases/016-yellow-warbler/pass2-refinement.md` -- Yellow Warbler Pass 2 research
+- `NASA/1.16/research.md` -- Mercury-Redstone 1 deep-research essay
+- `NASA/1.16/organism.md` -- *Dictyostelium discoideum* organism pairing
 
 ---
 
