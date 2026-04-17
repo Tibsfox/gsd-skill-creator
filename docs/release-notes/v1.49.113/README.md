@@ -1,57 +1,161 @@
-# v1.49.113 "The Latent Morphisms That Were Always There"
+# v1.49.113 — "The Latent Morphisms That Were Always There"
 
 **Released:** 2026-03-28
 **Code:** CHS
+**Scope:** Single-project research release — chaos sense, a unified framework for interface design across color theory, information theory, category theory, complex systems, and agentic UX
+**Branch:** dev
+**Tag:** v1.49.113 (2026-03-28T02:24:22-07:00)
+**Commits:** `8e397ccb4` (1 commit)
+**Files changed:** 14 · **Lines:** +2,727 / -0
 **Series:** PNW Research Series (#113 of 167)
+**Cluster:** PNW Infrastructure / Design & Human-Agent Interaction sub-cluster
+**Classification:** research release — interdisciplinary synthesis of design as information channel
+**Dedication:** Thomas Young and Hermann von Helmholtz for trichromatic theory, Ewald Hering for opponent-process encoding, Claude Shannon for the scalar measure of complexity, Brendan Fong and David Spivak for applied category theory, and every engineer at Commodore-Amiga who taught the chipset to sing in three voices at once.
+**Engine Position:** 13th release of the v1.49.101-131 research batch, 101st research release of the v1.49 publication arc, and the first entry to integrate color perception, Shannon entropy, applied category theory, complex systems, and Human-Agent Centered Design into a single formal model of the interface as an information channel
+
+> "Making sense of chaos is not the imposition of order upon disorder — it is the discovery of the latent morphisms that were always there, waiting for a chipset elegant enough to express them."
 
 ## Summary
 
-Chaos is not the enemy of design -- it is design's raw material. This research synthesizes five disciplines into a unified framework for interface design in the age of autonomous agents: color theory (trichromatic perception, opponent-process encoding, CIE color systems), information theory (Shannon entropy as a scalar measure of perceptual complexity), category theory (functors as structure-preserving maps, natural transformations as refactors), complex systems (emergence, self-organization, edge of chaos), and agentic interface design (Human-Agent Centered Design, dual-audience interfaces, design tokens as machine-readable contracts). The result is a formal model of the interface as an information channel.
+**Chaos is not the enemy of design — it is design's raw material.** v1.49.113 ships the CHS (Chaos Sense) research project: six research modules totaling roughly 470 lines of prose plus a 1,099-line LaTeX mission-pack compiled to a 211 KB PDF, the full HTML viewer stack, and a 514-line mission-pack index. The through-line of the release is that an interface is a specialized information channel whose capacity is bounded by Shannon entropy, whose composition obeys categorical structure, and whose signals are perceived through the geometry of a compressed three-channel color space. The project synthesizes five disciplines that usually do not meet — trichromatic color perception, information-theoretic bandwidth analysis, applied category theory, complex-systems emergence, and Human-Agent Centered Design (H-ACD) — into a unified vocabulary that a skill-creator agent and a human designer can both read. The synthesis is not an attempt to reduce design to mathematics; it is an attempt to give the designer-and-agent pair a shared language precise enough to describe what a well-tuned interface is actually doing.
+
+**The interface-as-information-channel formalism makes Shannon entropy a first-class design primitive.** Module 2 (Entropy & Perception) applies Shannon's H(X) = -Σ p(x) log p(x) to visual interfaces and derives a normalized scalar — perceptual complexity — that can be measured at design time. Kolmogorov complexity frames the compressibility of the interface; the entropy-aesthetic preference relationship explains why wildly-patterned dashboards feel chaotic and minimalist ones feel sterile. The sweet spot is not minimalism and not maximalism but a calibrated entropy level matched to task bandwidth and cognitive load. Treating entropy as a numeric property of a design token set turns "this UI feels too busy" from a taste assertion into a measurement with units, and it turns generative UI — interfaces an agent assembles on demand — into a search problem over a bounded entropy budget rather than a free-form generation task.
+
+**Color is a compressed information channel, not a palette.** Module 1 (Chromatic Signal) maps the geometry of color perception — Young-Helmholtz trichromatic theory, Hering's opponent-process encoding, the CIE 1931 XYZ and CIELAB color systems — as a cascade of lossy compressions from the continuous electromagnetic spectrum to the three-channel LMS cone response to the opponent-channel brainstem signal to the perceptual categorization layer. Every color model in practical use (RGB, sRGB, CMYK, HSL, Oklab) is a mathematical transformation of that cascade. The design implication is concrete: a palette is a point cloud in a perceptual color space, and distance in that space — the ΔE metric for CIELAB, the OKLCh chroma radius, the opponent-channel separation — predicts whether two hues will be distinguishable, whether a colorblind viewer will collapse them, and how much information the palette can carry per token. The synesthetic palette for CHS itself — indigo (#1A237E), teal (#006064), violet (#4A148C) — is an embodiment of the thesis: the three cluster colors encode the three disciplinary pairs (perception+entropy, category+complexity, agentic interface) as chromatic signals a reader can recognize before reading a single word.
+
+**Applied category theory gives the interface a composition grammar.** Module 3 (Categorical Structure) reads Fong and Spivak's *An Invitation to Applied Category Theory* and NIST Special Publication 1249 on categorical foundations, then maps the apparatus onto UI: objects are UI states, morphisms are state transitions, functors are structure-preserving refactors that translate one UI subsystem into another, and natural transformations are the equivalences that let two implementations of the same feature remain interchangeable under composition. Design tokens — the canonical color-spacing-typography contracts — become the typing discipline of the category. The payoff is that a refactor stops being a bespoke rewrite and starts being a functor with preserved source and target invariants; a design system update becomes a natural transformation that applies across every category-typed surface simultaneously; and the composition algebra gives agents a mechanical way to reason about whether two UI components can be safely combined. Category theory is not abstract mathematics here — it is a practical composition grammar that an agent can apply without a human decomposing the problem manually.
+
+**Emergence and the edge of chaos explain why rigid design systems fail and organic ones breathe.** Module 4 (Order From Chaos) pulls complex-systems theory — Holland's emergence framework, the edge-of-chaos attractor, parametric architecture, fractal complexity, and Conway's Law read as an organizational functor — into the design conversation. A design system that over-specifies freezes the interface into a brittle grid that cannot adapt to new content; one that under-specifies produces a chaotic surface with no shared vocabulary. The sweet spot is the edge of chaos, where structure is rich enough to compose but loose enough to let unexpected compositions emerge. Parametric architecture — the design tradition of Zaha Hadid and her collaborators — is the built-world exemplar: buildings defined by parametric rules rather than fixed blueprints. The CHS module argues that generative UI built on design tokens is the same idea in software, and that Conway's Law — systems mirror the communication structure of the teams that build them — is literally a functor from the category of team topologies to the category of system architectures. The practical consequence is that a design system is not a freeze but a tuning problem, and the tuning knob is the entropy level the team is willing to accept.
+
+**Human-Agent Centered Design (H-ACD) replaces Human-Centered Design for the agent era.** Module 5 (Agentic Interface) reads Microsoft's Agent UX Principles, Salesforce's intent-first architecture, and Google's Generative UI guidelines as a single design discipline and gives it a name: H-ACD. The central observation is that interfaces in the age of autonomous agents have two audiences simultaneously — the human user, who reads pixels, and the autonomous agent, who reads design tokens, component contracts, and event schemas. The dual-audience problem is that both audiences need the same interface to speak to them in different grammars: the human wants visual hierarchy, progressive disclosure, and aesthetic coherence; the agent wants machine-readable contracts, explicit affordances, and traceable intent. Design tokens are the bridge — a color token is `--color-primary: #1A237E` to the CSS pipeline and `{role: "primary", hue: "indigo", weight: 800}` to an agent, and both descriptions point at the same pixel. Multi-agent dashboards, human-in-the-loop (HITL) transparency, and intent-first routing are the surface patterns H-ACD codifies; the deeper contribution is recognizing that the agent is now a first-class interface user who must be designed-for, not designed-around.
+
+**The Amiga chipset is the closest historical analogue to the interface-as-information-channel thesis.** The synthesis module (M6) lands on the Amiga as the archetype the research has been circling. Agnus managed DMA flow, Denise encoded color into scanlines, and Paula handled audio — each chip a morphism from one information domain to another, each composition entropy-efficient, each bandwidth-matched to its signal. The custom-chip bus was the channel; the chips were the functors; the display was the terminal object. An interface designed well today is playing the same game against a different substrate: the substrate is the human visual system plus an autonomous agent, and the chips are the design token set, the component contract library, and the event schema. The Amiga principle — solve the problem with the simplest specialized hardware that composes — translates to a design principle: solve the interface problem with the smallest set of tokens and contracts that compose into every surface the product needs. Calling out the Amiga is not nostalgia; it is pointing at a working proof that the information-channel model describes real engineering, not just a theoretical frame.
+
+**Parallel-track architecture holds across another subject-matter boundary.** The three-track structure proven at v1.49.101 (SST), v1.49.103 (VKS), v1.49.106 (AMR), and v1.49.111 (VKD) applies cleanly at CHS. Track Alpha (Perception + Entropy, Modules 1 + 2) covers the signal side — what the channel carries and how its capacity is measured. Track Beta (Category + Complexity, Modules 3 + 4) covers the structure side — how the channel composes and how it behaves under emergent dynamics. Track Gamma (Agentic Interface, Module 5) covers the audience side — who reads the channel and under what contract. Module 6 is the synthesis join: it braids the three tracks into a single formal model and lands on the Amiga analogue as the closing image. The tracks cross-reference each other at specific join points — Module 1 color-space geometry feeds Module 2's entropy calculation when a palette is measured; Module 3's functor apparatus operates on the emergent structures Module 4 describes; Module 5's dual-audience problem is solved by the design-token-as-categorical-type construction that Module 3 provides. Three parallel tracks plus a synthesis module is now a research-mission-generator invariant, validated across computability, graphics, broadcast heritage, GPU reference architecture, and interdisciplinary design theory.
+
+**CHS sits at the intersection of design philosophy and the Fox Companies product strategy.** The research maps directly onto how FoxCompute-class agent platforms will present themselves: a multi-agent dashboard is exactly the dual-audience surface H-ACD describes, and the design token system that underwrites the GSD-OS Workbench aesthetic is exactly the categorical typing Module 3 formalizes. The cross-references to TSB (The Space Between) — Shannon entropy, applied category theory, information theory — anchor the work against earlier foundational research; the VKS (Vulkan Screensaver) reference covers trichromatic perception and shader aesthetics from the graphics side; HLO (Holomorphic Dynamics) covers applied category theory from the mathematics side; ECO (Ecology) contributes complex-systems and emergence; and BRC (Black Rock City) contributes H-ACD and the dual-audience interface problem as lived practice. Taken together, the cross-reference block traces a lattice across perception, mathematics, computation, ecology, and community — the same lattice that Fox Companies' product roadmap is meant to stand on.
 
 ## Key Features
 
-| Metric | Value |
-|--------|-------|
-| Research Modules | 6 |
-| Total Lines | ~3,861 |
-| Safety-Critical Tests | 12 (success criteria) |
-| Parallel Tracks | 3 |
-| Est. Tokens | ~250K |
-| Color Theme | Synesthetic indigo / fractal teal / cosmic violet (#1A237E primary, #006064 teal, #4A148C violet) |
+**Location:** `www/tibsfox/com/Research/CHS/` · **Files:** 14 · **Lines:** +2,727 / -0
+**Rosetta Stone cluster touched:** PNW Infrastructure / Design & Human-Agent Interaction sub-cluster
+**Publication pipeline:** research-mission-generator → tex-to-project → HTML viewer + compiled PDF
+**Parallel tracks:** 3 (Alpha: Perception + Entropy · Beta: Category + Complexity · Gamma: Agentic Interface)
+**Safety-critical tests:** 12 success criteria · **Estimated tokens:** ~250K · **Color theme:** Synesthetic indigo (#1A237E) · Fractal teal (#006064) · Cosmic violet (#4A148C)
 
-### Research Modules
+| Code | Module / Artifact | Lines | Theme | Key Topics |
+|------|-------------------|-------|-------|------------|
+| CHS.M1 | Chromatic Signal | 81 | Perception | Young-Helmholtz trichromatic theory, Hering opponent-process encoding, LMS cone responses, CIE XYZ + CIELAB + OKLCh color systems, Gestalt color grouping, color as compressed information channel |
+| CHS.M2 | Entropy & Perception | 87 | Information | Shannon entropy H(X) = -Σ p(x) log p(x) applied to visual interfaces, normalized perceptual complexity scalar, Kolmogorov complexity, entropy-aesthetic preference relationship, cognitive load as bandwidth limitation |
+| CHS.M3 | Categorical Structure | 66 | Composition | Fong & Spivak applied category theory, NIST SP-1249 categorical foundations, UI states as objects, transitions as morphisms, functors as refactors, natural transformations, design tokens as categorical typing discipline |
+| CHS.M4 | Order From Chaos | 66 | Emergence | Holland's emergence framework, edge-of-chaos attractor, parametric architecture, fractal complexity, Conway's Law as organizational functor, design system tuning as entropy-level selection |
+| CHS.M5 | Agentic Interface | 85 | Human-Agent UX | Human-Agent Centered Design (H-ACD), Microsoft Agent UX Principles, Salesforce intent-first architecture, Google Generative UI, design tokens as machine-readable contracts, multi-agent dashboards, HITL transparency |
+| CHS.M6 | Synthesis | 85 | Integration | Interface as information channel formal model, color as compressed entropy channel, categorical compositionality as design grammar, agentic patterns through information theory, Amiga chipset as hardware archetype |
+| MP | Mission-Pack LaTeX | 1,099 | Publication | `chaos_sense.tex` full citation chain, compiled to 211 KB PDF, teaching artifact for the College of Knowledge, cross-references to TSB / VKS / HLO / ECO / BRC |
+| MP-Index | Mission-Pack HTML Index | 514 | Navigation | `chaos_sense_index.html` with mission-pack navigation, PDF embed, module-level jumps, cluster-palette styling |
+| Site | HTML Viewer Stack | 448 | UX | `index.html` (172), `page.html` sticky-TOC viewer (176), `mission.html` PDF embed (100) |
+| Theme | Palette + Stylesheet | 195 | Branding | Synesthetic indigo + fractal teal + cosmic violet; signals Design & Human-Agent Interaction sub-cluster on the research index |
+| Series | Series Registration | 1 | Catalog | `series.js` entry registers CHS in the PNW Research Series index at position 113 |
+| Dual-Audience Pattern | Design tokens as dual contract | — | Agentic UX | Single token (`--color-primary: #1A237E`) serves CSS pipeline AND structured agent contract (`{role: "primary", hue: "indigo", weight: 800}`) |
+| Entropy Budget | Measurable UI complexity | — | Information | Normalized Shannon entropy as scalar complexity measure — turns "this UI feels too busy" into a measurement with units |
+| Total | Full release footprint | 2,727 | — | 14 files across one project directory plus one series-index entry, one clean `feat(www)` commit |
 
-1. **M1: Chromatic Signal** -- The geometry of color perception: trichromatic theory (Young-Helmholtz), opponent-process encoding (Hering), CIE color system, quantum information-theoretic models, Gestalt color grouping, color as compressed information channel.
-2. **M2: Entropy & Perception** -- Shannon entropy formalism applied to visual interfaces. Normalized Shannon entropy as scalar complexity measure, Kolmogorov complexity, entropy-aesthetic preference relationship, cognitive load as information bandwidth limitation.
-3. **M3: Categorical Structure** -- Applied Category Theory (Fong & Spivak, NIST SP-1249): objects as UI states, morphisms as transitions, functors as structure-preserving maps, natural transformations as refactors, design tokens as categorical typing.
-4. **M4: Order From Chaos** -- Complex systems and design: emergence, self-organization, edge of chaos, parametric architecture, fractal complexity, Holland's emergence framework, Conway's Law as organizational functor.
-5. **M5: Agentic Interface** -- Human-Agent Centered Design (H-ACD), Microsoft Agent UX Principles, Salesforce intent-first architecture, Google Generative UI, design tokens as machine-readable contracts, multi-agent dashboards, HITL transparency.
-6. **M6: Synthesis** -- Cross-domain integration: interface as information channel (formal model), color as compressed entropy channel, categorical compositionality as design grammar, agentic patterns through information theory, dual-audience design recommendations.
+### The Through-Line
 
-### Cross-References
-
-- **TSB** (The Space Between) -- Shannon entropy, applied category theory, information theory foundations
-- **VKS** (Vulkan Screensaver) -- Trichromatic color perception, shader fitness / aesthetics
-- **HLO** (Holomorphic Dynamics) -- Applied category theory, Shannon entropy, information theory
-- **ECO** (Ecology) -- Complex systems / emergence
-- **BRC** (Black Rock City) -- Agentic UX / H-ACD, complex systems, dual-audience interface
+> A well-tuned interface is a specialized information channel. The channel has a capacity bounded by Shannon entropy. Its elements compose according to categorical structure. Its signals are perceived through the geometry of a compressed color space. Its audience is now two — a human and an autonomous agent, simultaneously. Design the channel for both, tune it to the edge of chaos, and the interface stops feeling designed and starts feeling inevitable.
 
 ## Retrospective
 
 ### What Worked
-- The three-track parallel structure (Perception+Entropy, Category+Complexity, Agentic Interface) respects the natural disciplinary boundaries while forcing cross-pollination in the synthesis
-- Treating category theory not as abstract mathematics but as a practical composition grammar for UI states and transitions makes it immediately applicable to design token systems
-- The synesthetic color scheme (indigo/teal/violet) is itself an embodiment of the research -- the colors encode disciplinary domains as chromatic signals
+
+- **The three-track parallel structure (Perception+Entropy, Category+Complexity, Agentic Interface) respects the natural disciplinary boundaries while forcing cross-pollination in the synthesis.** A reader who enters through perception can follow a continuous chain from cones-to-entropy-to-category-to-emergence-to-agents without feeling the seam between physiology and mathematics; a reader who enters through category theory can walk backward into perception and find the entropy chain waiting as bridge.
+- **Treating category theory not as abstract mathematics but as a practical composition grammar for UI states and transitions makes it immediately applicable to design token systems.** The functor-as-refactor and natural-transformation-as-design-system-update mappings turn a classically-daunting apparatus into a design-review vocabulary that a working engineer can use without reading Mac Lane end-to-end.
+- **The synesthetic color scheme (indigo / teal / violet) is itself an embodiment of the research.** The palette encodes the three disciplinary pairs as chromatic signals — the reader sees the thesis before reading it, and the cluster-index immediately groups CHS with other Design & Human-Agent Interaction work by palette rather than by title alone.
+- **The Amiga chipset analogue landed as the closing image.** Using Agnus / Denise / Paula as the historical proof that an information-channel architecture ships in hardware gave the synthesis a concrete anchor rather than ending on abstraction; the analogue also binds CHS back to the project's broader Amiga lineage without forcing the reference.
+- **Cross-references to TSB, VKS, HLO, ECO, and BRC are five real anchors, not name-drops.** Each cross-reference identifies a specific conceptual overlap (Shannon entropy in TSB, trichromatic perception in VKS, applied category theory in HLO, emergence in ECO, dual-audience interface in BRC) rather than a shallow shared-tag pointer, which keeps the lattice load-bearing.
 
 ### What Could Be Better
-- Empirical validation of the entropy-aesthetic preference relationship needs real user studies -- the theory is sound but the thresholds are domain-specific
-- The dual-audience interface problem (designing for both humans and autonomous agents) is identified but the concrete design patterns need implementation testing
+
+- **Empirical validation of the entropy-aesthetic preference relationship needs real user studies.** The theory is sound, the formalism is clean, and the Shannon-entropy scalar is measurable — but the thresholds (what entropy level is "too busy" versus "too sterile") are domain-specific and audience-specific, and CHS cites the literature without running the studies. A follow-up companion project that measures perceived complexity against Shannon entropy across a half-dozen interface genres would close the gap.
+- **The dual-audience interface problem is identified but the concrete design patterns need implementation testing.** Design tokens as dual contracts, multi-agent dashboards, HITL transparency — each pattern is described as a specification but none is validated against a shipped product. The CHS claims should be re-evaluated after the GSD-OS Workbench ships a real H-ACD surface, and the patterns that survived contact with production should be lifted back into the research as case studies.
+- **The Amiga analogue could be extended into a full worked example.** The synthesis module lands on Agnus / Denise / Paula as the archetype but does not walk the morphism map through a specific Amiga demo (e.g., the Copper interrupting the display list to swap palettes mid-scanline as a runtime natural transformation). A standalone follow-up mapping the Amiga copper-and-bitplane pipeline as a literal category would make the analogue teachable rather than evocative.
+- **Module 4 (Order From Chaos) is the thinnest module at 66 lines and deserves a second pass.** The edge-of-chaos story, parametric architecture, and Conway's Law treatment are each worth their own full-length module — folding all three into 66 lines compresses them past the point where the reader can actually use them. A CHS.1 follow-up release with an expanded complex-systems module would bring the track weighting back into balance.
 
 ## Lessons Learned
 
-- Good interface design is always the design of a specialized information channel -- the channel has a capacity (Shannon entropy bounds), its elements compose (categorical structure), and its signals are perceived (color space geometry)
-- The Amiga chipset was a specialized information channel in hardware: Agnus managed DMA flow, Denise encoded color into scanlines, Paula handled audio -- each chip a morphism from one domain to another, composable and entropy-efficient
-- Making sense of chaos is not the imposition of order upon disorder -- it is the discovery of the latent morphisms that were always there, waiting for a chipset elegant enough to express them
+- **Good interface design is always the design of a specialized information channel.** The channel has a capacity (Shannon entropy bounds), its elements compose (categorical structure), and its signals are perceived (color space geometry). Every design decision is a decision about the channel — capacity, compression, composition, or perception — and naming the axis makes the decision reviewable rather than stylistic.
+- **The Amiga chipset was a specialized information channel in hardware.** Agnus managed DMA flow, Denise encoded color into scanlines, Paula handled audio — each chip a morphism from one domain to another, composable and entropy-efficient. Citing the Amiga as the archetype is not nostalgia; it is pointing at a working proof that the information-channel model describes real engineering, and every well-designed interface since has been playing the same game against a different substrate.
+- **Making sense of chaos is the discovery of latent morphisms, not the imposition of order.** The release title is the thesis. A good design system does not suppress the chaos of real content; it reveals the compositional structure that was already there and makes it explicit as tokens, contracts, and schemas. Design is archaeology more often than it is authorship.
+- **Entropy is a first-class numeric design primitive, not a metaphor.** Once Shannon's H(X) is applied to visual interfaces and normalized, "too busy" becomes a measurement, a design system becomes a bounded-entropy search space, and generative UI becomes a constrained-generation problem rather than a free-form one. Turning a taste assertion into a measurement with units is how engineering disciplines mature.
+- **Design tokens are the dual-audience bridge.** A color token is simultaneously `--color-primary: #1A237E` to the CSS pipeline and `{role: "primary", hue: "indigo", weight: 800}` to an agent. The dual reading is not coincidence; it is the direct consequence of the token being a categorical type. Any interface that wants to serve human and agent audiences together should push the token set up to first-class contract status, not treat it as styling infrastructure.
+- **Category theory is a practical composition grammar for UI, not a graduate seminar.** The mapping — objects as states, morphisms as transitions, functors as refactors, natural transformations as design-system updates — is teachable in a single page and immediately usable. Research releases should default to showing the mapping before citing the mathematical source, because the mapping is the deliverable and the citation is the proof.
+- **The edge of chaos is the right tuning target for design systems.** A system that over-specifies freezes; one that under-specifies fragments. Parametric architecture, generative UI, and design tokens all converge on the same answer: define enough structure to compose, leave enough looseness to admit surprise. The entropy level is the tuning knob.
+- **Human-Agent Centered Design (H-ACD) is a design discipline, not an agent feature.** Microsoft, Salesforce, and Google arrived at similar patterns independently because the dual-audience problem is structural, not product-specific. Treating H-ACD as the successor discipline to Human-Centered Design — rather than as an add-on layer — is how design practice catches up with deployed agents.
+- **Conway's Law reads as a functor from team topologies to system architectures.** The traditional statement ("systems mirror the communication structure of the teams that build them") is a functoriality claim in category-theoretic language. Rewriting Conway as a functor makes it a usable lens: when a team reorganizes, the system will drift to reflect the new topology, and you can either fight the drift or ride it. Either way, knowing it is a functor makes the drift predictable.
+- **One research project per commit continues to hold at v1.49.113.** CHS shipped in a single `feat(www)` commit (`8e397ccb4`) with 14 files and no scaffolding commits. The one-commit-per-project pattern validated across the v1.49.89 mega-batch and confirmed across 13 of the 31 v1.49.101-131 releases so far holds without exception. A convention that holds across two orders of magnitude of batch size is an invariant.
+- **Five disciplinary cross-references is the right density for a synthesis release.** TSB, VKS, HLO, ECO, and BRC each anchor a specific conceptual overlap rather than a shallow shared-tag pointer. Any fewer and the synthesis feels floating; any more and the cross-reference block becomes a directory rather than a lattice. Five load-bearing anchors is the size at which the reader can hold the whole graph.
+- **The color palette is part of the argument, not decoration.** The indigo/teal/violet synesthetic scheme is chosen to encode the three disciplinary pairs as chromatic signals, and placing it in the cluster-index means the palette performs the thesis before the prose arrives. Every future research release should pick a palette that says something rather than a palette that merely matches.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| `www/tibsfox/com/Research/CHS/` | Chaos Sense — release artifact, 6 modules + mission-pack + HTML viewer, ~2,727 lines |
+| `www/tibsfox/com/Research/CHS/research/01-chromatic-signal.md` | 81 lines — Young-Helmholtz trichromatic theory, Hering opponent process, LMS / CIE / CIELAB / OKLCh color systems |
+| `www/tibsfox/com/Research/CHS/research/02-entropy-perception.md` | 87 lines — Shannon entropy applied to visual interfaces, normalized perceptual complexity scalar, Kolmogorov complexity |
+| `www/tibsfox/com/Research/CHS/research/03-categorical-structure.md` | 66 lines — applied category theory, objects/morphisms/functors/natural transformations, design tokens as categorical typing |
+| `www/tibsfox/com/Research/CHS/research/04-order-from-chaos.md` | 66 lines — Holland emergence, edge of chaos, parametric architecture, Conway's Law as functor |
+| `www/tibsfox/com/Research/CHS/research/05-agentic-interface.md` | 85 lines — Human-Agent Centered Design, Microsoft/Salesforce/Google principles, multi-agent dashboards, HITL transparency |
+| `www/tibsfox/com/Research/CHS/research/06-synthesis.md` | 85 lines — interface as information channel, Amiga chipset as archetype, synthesis across all five disciplines |
+| `www/tibsfox/com/Research/CHS/mission-pack/chaos_sense.tex` | 1,099-line LaTeX source, full citation chain, compiled to 211 KB PDF |
+| `www/tibsfox/com/Research/CHS/mission-pack/chaos_sense.pdf` | Compiled 211 KB PDF, teaching artifact for the College of Knowledge |
+| `www/tibsfox/com/Research/CHS/style.css` | Synesthetic indigo + fractal teal + cosmic violet palette, 195 lines, signals Design & Human-Agent Interaction sub-cluster |
+| TSB (research series) | The Space Between — Shannon entropy, applied category theory, information theory foundations |
+| VKS (research series) | Vulkan Screensaver — trichromatic color perception, shader fitness / aesthetics, shared perception-side substrate |
+| HLO (research series) | Holomorphic Dynamics — applied category theory, Shannon entropy, information theory from the mathematics side |
+| ECO (research series) | Ecology — complex systems / emergence, parallel treatment of edge-of-chaos dynamics |
+| BRC (research series) | Black Rock City — agentic UX / H-ACD, complex systems, dual-audience interface as lived practice |
+| [v1.49.111](../v1.49.111/) | VKD (Vulkan Desktop) — same v1.49.101-131 batch, same three-track parallel structure applied to GPU reference architecture |
+| [v1.49.112](../v1.49.112/) | Immediate predecessor in the v1.49.101-131 research batch |
+| [v1.49.114](../v1.49.114/) | Immediate successor in the research batch |
+| [v1.49.101](../v1.49.101/) | SST — first post-drain release, established the depth-test pattern that CHS inherits |
+| [v1.49.103](../v1.49.103/) | VKS — earlier Vulkan-focused release, pairs with CHS on the color-perception cross-reference |
+| [v1.49.106](../v1.49.106/) | AMR (AM Radio) — contemporaneous research release, parallel-track structure applied to broadcast heritage |
+| [v1.49.89](../v1.49.89/) | Mega-batch that validated the research-mission pipeline at 49-project breadth |
+| [v1.49.90](../v1.49.90/) | Drain-to-zero batch that emptied the intake queue; every post-drain release including CHS is a chosen topic |
+| [v1.0](../v1.0/) | The 6-step adaptive learning loop — CHS's design-token-as-contract framing is the Compose step operating over a UX surface |
+| [v1.25](../v1.25/) | Ecosystem Integration — dependency DAG substrate for CHS's cross-links to TSB/VKS/HLO/ECO/BRC |
+| [v1.36](../v1.36/) | Citation Management — mission-pack citation chains rely on the v1.36 citation infrastructure |
+
+## Engine Position
+
+v1.49.113 is the **13th release of the v1.49.101-131 research batch** and the **101st research release of the v1.49 publication arc**. The v1.49.101-131 batch is the thirty-one-project cohort shipped across a single session in the post-drain arc that began with v1.49.101 (SST). Series state at tag: approximately 160 `series.js` entries after CHS registers, ~150 real research directories on disk, Design & Human-Agent Interaction consolidated as a sub-cluster within PNW Infrastructure (joined by BRC through cross-reference, with TSB and HLO anchoring the information-theory and category-theory sides), approximately 267,700 cumulative lines shipped across the v1.49 arc. CHS is the first entry to integrate color perception, Shannon entropy, applied category theory, complex systems, and H-ACD into a single formal model of the interface as an information channel, and it sets the grain size — six modules, three parallel tracks, synesthetic palette as embodiment of thesis, Amiga chipset as closing archetype, LaTeX mission-pack plus HTML viewer plus compiled PDF — that future cross-disciplinary synthesis releases will inherit.
+
+## Cumulative Statistics
+
+As of v1.49.113, the v1.49 research arc has shipped: ~160 series entries, ~150 research directories on disk, ~267,700 cumulative prose lines across the arc, 101 research releases inside the v1.49 line, 13 releases of the 31-project v1.49.101-131 batch complete, Design & Human-Agent Interaction sub-cluster established within PNW Infrastructure, five load-bearing cross-references to TSB/VKS/HLO/ECO/BRC forming a synthesis lattice, one clean `feat(www)` commit per project maintained across the arc, zero known citation regressions.
+
+## Files
+
+**14 files changed across one project directory plus one series-index entry. +2,727 insertions, -0 deletions in a single commit (`8e397ccb4`).**
+
+- `www/tibsfox/com/Research/CHS/index.html` — project landing page, cluster palette, TOC to all six modules, 172 lines
+- `www/tibsfox/com/Research/CHS/page.html` — sticky-TOC Markdown viewer for the research modules, 176 lines
+- `www/tibsfox/com/Research/CHS/mission.html` — mission-pack wrapper with PDF embed and LaTeX source link, 100 lines
+- `www/tibsfox/com/Research/CHS/research/01-chromatic-signal.md` — Young-Helmholtz, Hering opponent process, CIE color systems, 81 lines
+- `www/tibsfox/com/Research/CHS/research/02-entropy-perception.md` — Shannon entropy applied to interfaces, Kolmogorov complexity, 87 lines
+- `www/tibsfox/com/Research/CHS/research/03-categorical-structure.md` — applied category theory, UI states as objects, functors as refactors, 66 lines
+- `www/tibsfox/com/Research/CHS/research/04-order-from-chaos.md` — emergence, edge of chaos, parametric architecture, Conway's Law, 66 lines
+- `www/tibsfox/com/Research/CHS/research/05-agentic-interface.md` — Human-Agent Centered Design, multi-agent dashboards, HITL transparency, 85 lines
+- `www/tibsfox/com/Research/CHS/research/06-synthesis.md` — interface as information channel, Amiga chipset archetype, 85 lines
+- `www/tibsfox/com/Research/CHS/mission-pack/chaos_sense.tex` — full LaTeX source with citation chain, 1,099 lines
+- `www/tibsfox/com/Research/CHS/mission-pack/chaos_sense.pdf` — compiled 211 KB PDF, teaching artifact
+- `www/tibsfox/com/Research/CHS/mission-pack/chaos_sense_index.html` — mission-pack HTML wrapper with navigation, 514 lines
+- `www/tibsfox/com/Research/CHS/style.css` — synesthetic indigo + fractal teal + cosmic violet palette, 195 lines
+- `www/tibsfox/com/Research/series.js` — series index registration for CHS at position 113, +1 line
+
+Cumulative series state at tag: **~160 `series.js` entries, ~150 real research directories, Design & Human-Agent Interaction sub-cluster consolidated within PNW Infrastructure, ~267,700 lines shipped across the v1.49 arc, 13th release of the 31-project v1.49.101-131 batch, 1 project chosen rather than processed.**
 
 ---
-*Part of the v1.49.101-131 research batch -- 31 new projects in a single session.*
+
+> *One project. Six modules. Five disciplines. Three parallel tracks. The Chaos Sense research asks a simple question — what is an interface, really? — and answers with a formal model: a specialized information channel whose capacity is bounded by Shannon entropy, whose composition obeys categorical structure, whose signals are perceived through the geometry of a compressed color space, and whose audience is now two. The Amiga chipset did this in hardware in 1985 with three chips singing in three voices. We are doing it now in software with design tokens and contracts, and the lesson is the same: discover the latent morphisms that were already there.*
