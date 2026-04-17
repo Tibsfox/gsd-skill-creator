@@ -6,19 +6,28 @@
 **Part B:** Song Sparrow (*Melospiza melodia*) -- complex melodious song with 2-4 clear introductory preamble notes, E=2, wetland edge/pond margin, Passerellidae. FIRST PASSERELLIDAE. Margaret Morse Nice's bird -- the most studied songbird in North America. Named *melodia* by Alexander Wilson in 1810: "song song." 6-20 song types per male. 50+ subspecies from the Aleutians to Florida. The bird that lands everywhere and survives.
 **NASA Mission:** 1.46 -- Surveyor 1 (May 30, 1966 launch. FIRST US SOFT LUNAR LANDING June 2, 1966. Oceanus Procellarum -- Ocean of Storms. Three-phase autonomous descent: solid retrorocket 2,600 m/s to 110 m/s, vernier engines 110 m/s to 1.5 m/s, free-fall from 3.4 meters. Touchdown at 3.4 m/s. Footpads sank 5 cm. 11,237 photographs. PROVED THE SURFACE WAS SOLID. Hughes Aircraft Company. The deep dust question answered.)
 **NASA Organism:** Melospiza melodia (degree 45 organism)
-**Dedication:** Surveyor engineering team at Hughes Aircraft Company
 **Series:** NASA Paired Release Engine -- Continuous Dual-Track Build
+**Cluster:** Music (hub: WAL)
+**Dedication:** Surveyor engineering team at Hughes Aircraft Company
 **Engine Position:** Forty-sixth paired release. FIRST SOFT LUNAR LANDING. First Passerellidae. E=2/E=2 -- the softest degree in the engine. First folk-primary artist. The exhale after the crisis. The deep dust question answered.
 
 ## Summary
 
-The forty-sixth paired release and the degree where the engine learns to land softly. At 06:17:37 UTC on June 2, 1966, Surveyor 1 touched down on the surface of the Moon in Oceanus Procellarum -- the Ocean of Storms. Three aluminum honeycomb landing pads contacted the lunar regolith and held. The spacecraft did not sink. It did not tip. It did not bounce. It sat on the Moon's surface, upright and stable, its solar panel drinking sunlight, its camera ready. The landing was so gentle -- final velocity approximately 3.4 meters per second -- that the shock absorbers barely compressed. The three footpads left shallow impressions approximately 5 centimeters deep. The surface bore the weight. After eight years of uncertainty, after Thomas Gold's deep-dust hypothesis that predicted meters-thick powder would swallow any lander, after six Rangers that crashed into the Moon at 2.6 km/s transmitting photographs on the way down -- the question was answered. The surface was firm. A spacecraft could land. Apollo could proceed.
+The forty-sixth paired release and the degree where the engine learns to land softly. At 06:17:37 UTC on June 2, 1966, Surveyor 1 touched down on the surface of the Moon in Oceanus Procellarum -- the Ocean of Storms. Three aluminum honeycomb landing pads contacted the lunar regolith and held. The spacecraft did not sink. It did not tip. It did not bounce. It sat on the Moon's surface, upright and stable, its solar panel drinking sunlight, its camera ready. The landing was so gentle -- final velocity approximately 3.4 meters per second -- that the shock absorbers barely compressed. The three footpads left shallow impressions approximately 5 centimeters deep. The surface bore the weight. After eight years of uncertainty, after Thomas Gold's deep-dust hypothesis that predicted meters-thick powder would swallow any lander, after six Rangers that crashed into the Moon at 2.6 km/s transmitting photographs on the way down, the question was answered. The surface was firm. A spacecraft could land. Apollo could proceed. The Hughes Aircraft Company engineers who had designed the vernier engines, the RADVS radar, the explosive bolts, and the three-legged footpad geometry had built the first human artifact that survived contact with another world under soft power. The Jet Propulsion Laboratory team at Pasadena who commanded the descent sequence watched the telemetry resolve into a still, stable readout and then took the rest of the afternoon off because there was nothing left to do. The surface held. The Moon permitted a visitor.
 
-The descent was a three-phase autonomous sequence -- no human controlled it in real time, the 2.6-second communication delay made piloting impossible. At 75 kilometers altitude, the Thiokol solid-propellant main retrorocket ignited, decelerating from 2,600 m/s to approximately 110 m/s in forty seconds. The motor casing was jettisoned by explosive bolts. Three small throttleable vernier engines took over -- liquid-propellant rockets burning monomethyl hydrazine, controlled by a radar altimeter and Doppler velocity sensor, reducing velocity from 110 m/s to 1.5 m/s over 2.5 minutes of controlled fall. At 3.4 meters above the surface, the verniers shut down. The spacecraft fell the remaining distance under lunar gravity alone. Six minutes to slow from 2,600 m/s to 3.4 m/s. The sequence worked on the first try. Over the next forty-two days, the camera transmitted 11,237 photographs -- surface texture, rock distribution, crater density, shadow patterns, the landscape extending to a sharp horizon 2.5 kilometers away under a black sky. The regolith behaved more like damp sand than dry flour. Apollo's final structural concern was cleared.
+The descent was a three-phase autonomous sequence, no human controlled it in real time; the 2.6-second communication delay made piloting impossible. At 75 kilometers altitude, the Thiokol Chemical Corporation solid-propellant main retrorocket ignited, decelerating from 2,600 m/s to approximately 110 m/s in forty seconds. The motor casing was jettisoned by explosive bolts. Three small throttleable vernier engines took over, liquid-propellant rockets burning monomethyl hydrazine, controlled by the Ryan Aeronautical radar altimeter and Doppler velocity sensor, reducing velocity from 110 m/s to 1.5 m/s over 2.5 minutes of controlled fall. At 3.4 meters above the surface, the verniers shut down. The spacecraft fell the remaining distance under lunar gravity alone. Six minutes to slow from 2,600 m/s to 3.4 m/s. The sequence worked on the first try. Over the next forty-two days, the camera transmitted 11,237 photographs, surface texture, rock distribution, crater density, shadow patterns, the landscape extending to a sharp horizon 2.5 kilometers away under a black sky. The regolith behaved more like damp sand than dry flour. Apollo's final structural concern was cleared. The Flagstaff USGS astrogeologists who had been training Apollo crews on simulated regolith for two years watched the Surveyor images come in and understood that the simulations had been broadly correct. The geologic stratigraphy of Oceanus Procellarum, the fine-grained dust layer over fragmented basalt, matched predictions built from Ranger impact photography and Earth-based radar. The Moon was knowable. The Moon was landable. The Moon was waiting.
 
-Damien Jurado enters the engine as its first folk-primary artist -- Genre Stage 27, the degree where the acoustic guitar and the unadorned voice stand alone. Born in 1972, his earliest recordings were lo-fi cassettes made in basements and bedrooms on his own Casa Recordings label (1995). Sub Pop signed him in 1996 after Jeremy Enigk of Sunny Day Real Estate heard his demo cassettes on a recreational baseball team -- the most improbable A&R story in the engine. Twenty-two studio albums. A hushed tenor that critics consistently compare to Nick Drake. The Maraqopa trilogy with Richard Swift -- analog tape, reverb as architecture, recorded in Swift's National Freedom studio in Cottage Grove, Oregon. Swift died in 2018. Jurado's subsequent work carries the echo. E=2 is the quietest energy level in the engine, and degree 45 is E=2 on both tracks -- the softest degree. After the crisis of Gemini 8 at degree 44 (Armstrong, stuck thruster, one revolution per second), Surveyor 1 is the soft landing. After Ann Wilson's E=6 ceiling at degree 43 and the electronic intensity of degree 44, Jurado's whispered folk is the retrorocket firing. The murmur replacing the shout.
+Damien Jurado enters the engine as its first folk-primary artist, Genre Stage 27, the degree where the acoustic guitar and the unadorned voice stand alone. Born in 1972 in Burien, south of Seattle, his earliest recordings were lo-fi cassettes made in basements and bedrooms on his own Casa Recordings label in 1995. Sub Pop Records signed him in 1996 after Jeremy Enigk of Sunny Day Real Estate heard his demo cassettes on a recreational baseball team, the most improbable A&R story in the engine. Twenty-two studio albums. A hushed tenor that critics consistently compare to Nick Drake. The Maraqopa trilogy with Richard Swift, analog tape, reverb as architecture, recorded in Swift's National Freedom studio in Cottage Grove, Oregon. Swift died in 2018. Jurado's subsequent work carries the echo. E=2 is the quietest energy level in the engine, and degree 45 is E=2 on both tracks, the softest degree. After the crisis of Gemini 8 at degree 44 where Neil Armstrong and David Scott fought a stuck thruster at one revolution per second and saved their lives by separating from the Agena, Surveyor 1 is the soft landing. After Ann Wilson's E=6 vocal ceiling at degree 43 and the electronic intensity of Chong the Nomad at degree 44, Jurado's whispered folk is the retrorocket firing. The murmur replacing the shout. Both Surveyor's touchdown and Jurado's voice arrive with minimal kinetic energy and maximal information content. Both prove that the softest landing, the softest register, the softest arrival, is the one that stays. At the same time that Thomas Gold's dust hypothesis was collapsing in the telemetry from Oceanus Procellarum, a quieter premise was being built on Sub Pop's artist roster: that a grunge label could sign a folk singer and the surface would hold, that the label known for Nirvana and Mudhoney and Soundgarden could bear the weight of a hushed tenor.
 
-The Song Sparrow is the bird that lands everywhere and survives -- the most geographically widespread New World sparrow, 50+ subspecies from the Aleutian Islands to the Florida Keys, each adapted to local conditions, the Aleutian form almost twice the mass of the desert form. It is the first Passerellidae in the engine -- the first representative of the New World sparrow family that defines ground-level bird life in North America. Named *Melospiza melodia* -- "song song-finch" -- by Alexander Wilson in 1810. Margaret Morse Nice tracked individual Song Sparrows across their entire lives in her Columbus, Ohio backyard from 1928 to 1943, inventing modern population ecology methodology. The species is to ornithology what *Drosophila* is to genetics. Each male sings 6 to 20 song types, cycling through them systematically. The Song Sparrow's feeding scratch -- a vigorous double-footed kick through leaf litter -- is a direct physical engagement with the surface, the terrestrial equivalent of Surveyor's footpad pressing into the regolith. The bird proves, by its presence in 50+ distinct environments, that the ground is habitable. Surveyor proved, by its survival on the Moon, that the surface was landable.
+The Song Sparrow is the bird that lands everywhere and survives, the most geographically widespread New World sparrow, fifty-plus subspecies from the Aleutian Islands to the Florida Keys, each adapted to local conditions, the Aleutian form almost twice the mass of the desert form. It is the first Passerellidae in the engine, the first representative of the New World sparrow family that defines ground-level bird life in North America. Named *Melospiza melodia*, song song-finch, by Alexander Wilson in 1810. Margaret Morse Nice tracked individual Song Sparrows across their entire lives in her Columbus, Ohio backyard from 1928 to 1943, inventing modern population ecology methodology. The species is to ornithology what *Drosophila melanogaster* is to genetics. Each male sings 6 to 20 song types, cycling through them systematically. The Song Sparrow's feeding scratch, a vigorous double-footed kick through leaf litter, is a direct physical engagement with the surface, the terrestrial equivalent of Surveyor's footpad pressing into the regolith. The bird proves, by its presence in fifty distinct environments, that the ground is habitable. Surveyor proved, by its survival on the Moon, that the surface was landable. Both sides of the paired engine arrive at the same claim from orthogonal directions: the ground will bear weight, and the weight-bearer can persist. Nice's Columbus field notebooks and the Jet Propulsion Laboratory's Surveyor mission logs record the same protocol: watch, photograph, annotate, return, repeat. Each morning Nice opened her notebook to document the territorial boundaries of male M4 and M1. Each morning JPL's Deep Space Network opened its logs to document the temperature, battery state, and panoramic frame index of Surveyor 1. Both are catalogs of persistence. Both operate across days, weeks, months, years. Both mirror each other in the texture of their attention.
+
+Gold's deep-dust hypothesis, formalized in a 1955 paper and amplified through the early 1960s, predicted that micrometeoroid impact over geologic time would grind the lunar surface to a powder tens of meters deep, incapable of bearing any significant load. The Ranger program (1961-1965) crashed nine spacecraft into the Moon at 2.6 kilometers per second, three of them (Ranger 7, 8, 9) transmitting 17,259 close-up photographs on the way down. The photographs showed rocks at meter-scale and crater walls that appeared solid, but Ranger's terminal velocity gave no measurement of bearing strength. The question required a soft landing. It required a spacecraft that survived contact. The Lunar Program Planning Group at the Manned Spacecraft Center in Houston had built Apollo's entire architectural schedule around the assumption that Surveyor would answer the question before Apollo 11 was ready to fly. Surveyor 1 answered the question in the affirmative on the first attempt, four years ahead of the Apollo 11 landing at Mare Tranquillitatis in July 1969. The five additional Surveyor missions that followed (Surveyors 3, 5, 6, 7 successful; Surveyor 2 and Surveyor 4 failed) mapped surface properties at additional sites. Surveyor 3 would later sit in Oceanus Procellarum as the Apollo 12 landing target; Pete Conrad and Alan Bean would walk four hundred meters from the Intrepid Lunar Module to the Surveyor 3 spacecraft in November 1969 and remove its camera and its soil scoop for return to Earth. The cartographic loop would close: the mapper became the visited. The degree 45 release documents the first half of that loop; the second half arrives in a later degree when Apollo 12 puts feet next to Surveyor 3's footpads.
+
+Jurado's career tracks the same persistence protocol in the music register. Twenty-two albums across three decades is not an explosion, it is a soft landing held across time. The cassette self-releases on Casa Recordings, the Sub Pop catalog entries, the Secretly Canadian years, the self-released Maraqopa Records tier, the Richard Swift collaboration, the post-Swift continuation, all of these are the equivalent of Surveyor's forty-two days of photographic survey extended to thirty years of emotional survey. Each album is a frame in the panoramic sweep. The subject matter stays steady: loss, place, the passage of time, the particular quality of Pacific Northwest light, the sense of narrators who have failed quietly and are looking for the small detail that makes the failure survivable. The Maraqopa trilogy (Maraqopa 2012, Brothers and Sisters of the Eternal Son 2014, Visions of Us on the Land 2016) is the deep survey, three albums recorded at Swift's National Freedom studio in Cottage Grove, Oregon, on analog tape, each album photographing the same emotional landscape at a different exposure. Swift's death in 2018 is the moment the camera loses its processing partner; Jurado's subsequent output, The Horizon Just Laughed (2018), In The Shape of a Storm (2019), What's New Tomboy? (2020), Reggae Film Star (2022), continues the sequence but alone. The camera still pans. The regolith still holds. The Sub Pop folk lineage that Jurado opened in 1996 has since extended to include Iron & Wine, Rocky Votolato, Damien Rice-adjacent acts, and the entire acoustic-confessional tier of the label's 21st-century roster. The label that signed Nirvana signed the quietest artist it could find, and both signings proved the surface would hold. In parallel, across the same decades, Surveyor 1's footpads still sit in Oceanus Procellarum; they have not moved; they have recorded, in their unchanging position, four and a half decades of continuous silent proof that the surface holds.
+
+The Song Sparrow is the paired-engine's species-register answer to the same question. Melospiza melodia persists, the way Jurado's voice persists, the way Surveyor's footpads persist. The subspecies count, fifty and climbing, is the bird's equivalent of Jurado's twenty-two albums: each an iteration, each adapted to local conditions, each proof that the species survives the substrate it landed on. Margaret Morse Nice's Columbus, Ohio study site was effectively one territorial polygon of approximately forty acres; she knew every territory, every male, every nest, every song pattern, across fifteen breeding seasons. The study ran longer than most human institutions. It is the ornithological equivalent of the Surveyor mission's forty-two days of continuous photographic survey extended to human-lifetime scale. The methodology, individual identification with color bands, exhaustive life-history documentation, statistical treatment of returns and departures, became the foundation of modern behavioral ecology. Every subsequent long-term songbird study, from the Galapagos finch work of Peter Grant and Rosemary Grant to the Seychelles warbler work of Jan Komdeur, descends from Nice's Song Sparrow methodology. The bird's song structure, two to four clear introductory preamble notes followed by a complex body of trills and buzzes, is itself a soft-landing architecture: the preamble establishes bearing, the complex body follows once the acoustic surface has been probed. Each male cycles through six to twenty song types. The cycling is deterministic within a bout, stochastic across bouts, territorial in overall function, and paired-engine-resonant at degree 45 with both Surveyor's three-phase descent (retrorocket, vernier, free-fall) and Jurado's three-part Maraqopa trilogy. Three is the soft-landing number. Three footpads. Three song phases. Three albums with Richard Swift. The ground is probed, the ground is contacted, the ground holds.
+
+The dedication of Degree 45 to the Hughes Aircraft Company engineering team at Culver City, California is the engine's first explicit naming of a build crew rather than a pilot or commander. The Surveyor spacecraft was designed at Hughes under chief engineer Robert Sears, with the Thiokol retrorocket subsystem contracted out to Brigham City, Utah, the vernier engine subsystem to Reaction Motors Division of Thiokol at Denville, New Jersey, and the RADVS to Ryan Aeronautical at San Diego. The Jet Propulsion Laboratory at Pasadena, California managed the mission and operated the Deep Space Network tracking sites at Goldstone, Madrid, and Canberra through the forty-two-day photographic survey. The distributed build architecture, Culver City airframe, Brigham City retrorocket, Denville verniers, San Diego radar, Pasadena operations, mirrors the distributed architecture of Jurado's discography across Casa Recordings, Sub Pop, Secretly Canadian, Maraqopa Records, and National Freedom studio in Cottage Grove, Oregon. Both the mission and the career are assembled from contributions made in many rooms by people who mostly did not meet each other. Both the mission and the career hold their shape because the contributions were built to fit together. The surface of the Moon holds the spacecraft at the same time that the Sub Pop catalog holds the folk artist at the same time that the Ohio study site holds the song sparrow population across fifteen breeding seasons. Each substrate bears the weight it was asked to bear. Each holds.
 
 ## Key Features
 
@@ -28,154 +37,72 @@ The Song Sparrow is the bird that lands everywhere and survives -- the most geog
 | Acoustic Element | The Murmur (voice barely above speaking volume, songs that arrive without announcing themselves) | The Preamble (2-4 clear introductory notes before the complex body -- the structured opening that signals the survey) |
 | NASA Parallel | Soft landing as career arc -- cassette self-release to Sub Pop to sustained quiet output; gentle arrival that outlasts the impact | Universal landing capability -- 50+ subspecies proving 50+ surfaces; systematic survey through song cycling mirrors camera panning |
 | Structural Firsts | First folk-primary artist; Genre Stage 27; E=2 returns after 31 degrees; widest genre leap (Electronic/R&B 44 to Folk 45) | First Passerellidae (19th family); first ground sparrow; first species named for its song ("song song"); model organism for behavioral ecology |
-
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+| Dedication | The Sub Pop signing of a folk artist in a grunge era -- the label's surface held | Margaret Morse Nice's fifteen-year Columbus, Ohio study -- the methodological foundation of modern behavioral ecology |
 
 ## Part A: Damien Jurado -- THE MURMUR
 
-### Pass 2 Refinement Summary
-
-Three structural alignments deepening the Surveyor 1 connection:
-
-**1. The Soft Landing After the Rangers.** The Ranger program (degrees 23-37) deliberately smashed into the Moon at thousands of miles per hour, cameras transmitting until the instant of destruction. Surveyor 1 did the opposite: retrorockets at 75 km, vernier engines for final approach, touchdown at walking speed. Jurado's career follows the same transition. The Seattle music scene of the early-to-mid 1990s was the Ranger era -- grunge crashing into the cultural surface at maximum velocity, Nirvana and Soundgarden and Pearl Jam as impact probes. When Sub Pop signed Jurado in 1996, the question was whether a quiet folk artist could survive in that landscape. Jurado proved the surface would hold: twenty-two albums, decades of touring, a steady audience that grew without explosions. The deep-dust hypothesis -- that only loud music could survive in the Seattle market -- was wrong.
-
-**2. Three Decades of Quiet Output as 11,237 Photographs.** Surveyor 1's camera panned 360 degrees in azimuth and swept from +40 to -60 degrees in elevation, using four color filters, building comprehensive local knowledge frame by frame. Jurado's discography is itself a survey -- twenty-two albums, each examining a slightly different angle of the same emotional terrain: loss, place, persistence, the passage of time. Each album is a frame in a panoramic sweep. The Maraqopa trilogy (Maraqopa, Brothers and Sisters of the Eternal Son, Visions of Us on the Land) with Richard Swift was the deep survey -- three albums recorded on analog tape in the same studio, each photograph of the same emotional landscape at a different exposure. Swift's death in 2018 is the moment the camera loses its processing partner. Jurado's subsequent work is the spacecraft operating alone.
-
-**3. E=2/E=2 as the Softest Degree.** Both tracks at E=2 -- the gentlest pairing in the engine. Previous E=2 was degree 13 (Marc Seales). A gap of 31 degrees -- the longest absence for any energy level. Folk demands it. Surveyor demands it. The landing velocity was 3.4 m/s. The voice is barely above speaking volume. The Song Sparrow's song opens with 2-4 clear, quiet introductory notes before the complex body. Everything at degree 45 arrives gently.
-
-### Retrospective: Degree 45 Patterns Established
-
-1. **The deep dust question answered.** Surveyor 1's footpad sinkage of 5 cm indicated bearing strength of at least 3-5 kPa. The regolith was firm, cohesive, and capable of supporting the Lunar Module. Thomas Gold's hypothesis was disproved. Apollo could land.
-2. **Autonomous precision validated.** The entire descent sequence was automatic -- no human piloting. The RADVS (Radar Altimeter and Doppler Velocity Sensor) controlled the vernier engines. The first try worked. Autonomous soft landing as engineering achievement.
-3. **Folk enters the engine.** Genre Stage 27. The acoustic guitar and unadorned voice as primary genre. After forty-five degrees of genre evolution through increasingly complex production architectures, folk returns to the elemental.
-4. **The widest genre leap.** Electronic/R&B (degree 44) to Folk (degree 45) -- from the most digital to the most analog, from the laptop to the acoustic guitar, from Chong the Nomad's FL Studio to Jurado's finger-picked cassette recordings. The two consecutive degrees represent the widest possible spectrum of modern music-making.
-5. **Passerellidae opens.** The New World sparrow family enters. Ground-dwelling, ground-feeding, intimate interaction with the substrate. The family that lives on the ground paired with the mission that proved the ground existed.
-6. **E=2 returns after 31 degrees.** The longest absence for any energy level. The energy drop from E=5/4 (degree 44) to E=2/2 (degree 45) is the engine's steepest single-degree energy decline.
-7. **Hughes Aircraft Company dedication.** The engineers who built the spacecraft -- not astronauts, not famous, not named in the public record. The people who designed a machine that sat on the Moon and proved it could be done.
-8. **The Sub Pop folk lineage opens.** Jurado signed to Sub Pop in 1996. The label known for grunge signs the quietest artist. The surface holds.
-
----
+- **Seattle Origins.** Born in Burien south of Seattle in 1972. Self-released cassettes on Casa Recordings starting 1995 in basements and bedrooms. Signed to Sub Pop in 1996 on the strength of demo cassettes passed through a recreational baseball team by Jeremy Enigk of Sunny Day Real Estate. The most improbable A&R provenance in the engine.
+- **Career Arc.** Twenty-two studio albums across thirty years. Sub Pop years (1996-2010) into Secretly Canadian years (2012-2016) into self-released Maraqopa Records years (2018-present). Each label transition a step down in volume, a step up in control. The arc moves from shared label catalog to sovereign artist catalog without ever raising volume.
+- **Music Theory Mapping.** E=2 on both tracks. Acoustic-guitar finger-picking in DADGAD and open-C tunings. Tempo range 65-95 BPM, narrow by design. Vocal register hushed tenor, rarely exceeds E4. Dynamic range deliberately compressed. Song structure typically verse-chorus-verse without bridge. Production aesthetic favors room sound over close-miked detail.
+- **Key Recordings.** *Waters Ave S.* (1997, Sub Pop debut), *Rehearsals for Departure* (1999), *Ghost of David* (2000), *Where Shall You Take Me?* (2003), *And Now That I'm in Your Shadow* (2006), the Maraqopa trilogy (2012, 2014, 2016) with Richard Swift, *The Horizon Just Laughed* (2018), *In The Shape of a Storm* (2019), *What's New, Tomboy?* (2020), *Reggae Film Star* (2022).
+- **Cultural Context.** Sub Pop's 1996 signing of Jurado was a structural statement. The label of Nirvana and Mudhoney and Soundgarden added its quietest artist at the peak of post-Nevermind grunge saturation. The signing proved the label's surface would hold a folk catalog. The catalog has since expanded through Iron & Wine, Fleet Foxes, Father John Misty, and much of the Pacific Northwest folk revival that Jurado's signing made financially plausible.
+- **Richard Swift Collaboration.** Three albums (*Maraqopa*, *Brothers and Sisters of the Eternal Son*, *Visions of Us on the Land*) at Swift's National Freedom studio in Cottage Grove, Oregon. Analog tape. Tape saturation as architecture. Reverb as architecture. The trilogy completed in 2016. Swift died in 2018. Jurado's subsequent work carries the echo.
+- **Nick Drake Comparison.** Critics consistently invoke Nick Drake, *Pink Moon*-era, for Jurado's voice-and-guitar register. The comparison is descriptively accurate: hushed tenor, finger-picked accompaniment, melodic lines that avoid peaks. The comparison is also historically interesting: Drake died in 1974 at age 26; Jurado, born 1972, has now produced across a career longer than Drake's life by decades. Jurado is the Drake who did not die, extended into old age, still recording.
+- **Soft Landing as Career Architecture.** The Ranger missions crashed into the Moon at 2.6 km/s. Jurado did not crash into Seattle in 1996; he landed softly, made quiet records, endured. The career arc is a thirty-year soft landing. The footpads did not sink. The surface holds. Twenty-two albums are the panoramic sweep, each frame at a different angle on the same emotional terrain of loss, place, persistence.
 
 ## Part B: Song Sparrow -- THE PREAMBLE
 
-### Pass 2 Refinement Summary
+- **Taxonomic Placement.** *Melospiza melodia*, Passerellidae (New World sparrows), Passeriformes. First Passerellidae in the engine. Nineteenth bird family overall. Sister genus to Lincoln's Sparrow (*Melospiza lincolnii*) and Swamp Sparrow (*Melospiza georgiana*), both future degree candidates.
+- **Naming History.** Named *Fringilla melodia* by Alexander Wilson in 1810 in *American Ornithology* volume 2. Transferred to genus *Melospiza* by Spencer Fullerton Baird in 1858. *Melospiza* from Greek *melos* (song) + *spiza* (finch). *Melodia* from Latin *melodia* (melody). The only North American bird species whose binomial translates roughly to "song song" -- the species epithet intensifies the genus noun.
+- **Song Architecture.** Complex song with 2-4 clear introductory notes (the preamble) followed by a complex body of trills, buzzes, and rattles. Each male has a repertoire of 6 to 20 song types. Cycling is deterministic within a bout (one type repeated 5-15 times, then switch), stochastic across bouts. Song types are learned from neighboring males during the first six months of life, a critical period with a hard close.
+- **Margaret Morse Nice.** Studied Song Sparrows from 1928 to 1943 in a forty-acre study site along Interpont, near the Olentangy River in Columbus, Ohio. Individually color-banded the entire breeding population. Two volumes of *Studies in the Life History of the Song Sparrow* (1937, 1943) became the foundational texts of modern behavioral ecology. Nice's methodology (individual identification, exhaustive life-history documentation, statistical treatment of demography) descends through every subsequent long-term songbird study.
+- **Geographic Range.** Breeding range from the Aleutian Islands of Alaska south through the Pacific coast to northern Baja California, east through the boreal forest, the Great Plains, the eastern deciduous forest, to the Florida Keys and the northern Gulf coast. Non-breeding range adds the southern United States and much of Mexico. Over fifty recognized subspecies, the highest subspecific diversity of any North American passerine.
+- **Subspecies as Soft Landings.** The Aleutian subspecies *M. m. maxima* is a 52-gram coastal giant; the Sonoran Desert subspecies *M. m. saltonis* is an 18-gram desert specialist. Body mass across the species varies by nearly three times. Each subspecies is a successful soft landing on a different North American surface. The species has answered fifty versions of the bearing-strength question that Surveyor 1 answered once for the lunar regolith.
+- **Feeding Behavior.** Characteristic double-footed hop-and-scratch through leaf litter. Direct physical engagement with the substrate. The scratch clears a patch of ground to expose seeds, arthropods, and small invertebrates. The bird reads the ground by touching it with both feet at once, the way Surveyor's three footpads read the regolith by pressing into it at once. Footpad sinkage tells the engineer about bearing strength; leaf-litter displacement tells the bird about food availability.
+- **Model Organism Status.** The Song Sparrow is to avian behavioral ecology what *Drosophila melanogaster* is to genetics or *Caenorhabditis elegans* is to developmental biology. More peer-reviewed studies exist on Song Sparrow territoriality, song learning, demography, and population ecology than on any other passerine species. The species is the standard reference against which new songbird studies calibrate their methods.
 
-Three structural alignments deepening the organism-mission resonance:
+## Retrospective
 
-**1. Universal Landing Capability.** The Song Sparrow occupies habitats from the Aleutian Islands to the Florida Keys, from sea-level salt marshes to mountain meadows at 3,000 meters. Fifty subspecies, each adapted to its local surface. The Aleutian *M. m. maxima* at 52 grams; the desert *M. m. saltonis* at 18 grams. Every subspecies is a successful soft landing on a different terrain. Surveyor 1 proved one site -- Oceanus Procellarum. The Song Sparrow has proved fifty.
+### What Worked
 
-**2. The Documentation Parallel.** Surveyor 1's 11,237 photographs were an exhaustive survey of one small patch of regolith, catalogued frame by frame, rock by rock, shadow by shadow. Margaret Morse Nice's Song Sparrow studies were the same kind of work: exhaustive life-history catalog of one species in one backyard, individual by individual, territory by territory. Both represent the transition from impact to study -- from crashing through a domain to settling down and documenting it completely.
+- **Paired-engine synchrony at degree 45 landed cleanly.** Surveyor 1's first-try autonomous soft landing and Damien Jurado's twenty-two-album career arc and the Song Sparrow's fifty-plus-subspecies range all converge on a single claim: the surface holds. The three registers (mission, music, species) aligned without forced interpretation.
+- **E=2 return after a 31-degree absence.** The longest silence for any energy level in Pass 2 resolved cleanly into a both-tracks E=2 pairing. The engine breathed out. The register became available again without losing narrative traction.
+- **First Passerellidae opened the ground-sparrow vocabulary.** The family that dominates ground-level bird life in North America entered through its most studied species. The precedent sets up Spotted Towhee (degree 46) and Dark-eyed Junco (degree 47) for a three-degree Passerellidae streak, a family-run unprecedented in the engine to this point.
 
-**3. The Feeding Scratch as Surface Contact.** The Song Sparrow feeds by scratching through leaf litter with a characteristic double-foot hop-and-scratch, clearing a patch of bare ground to expose seeds. The scratch is direct physical engagement with the surface -- the bird reads the ground by touching it, the way Surveyor read the Moon by landing on it. Footpad sinkage told engineers about bearing strength. Leaf litter displacement tells the bird about food availability.
+### What Could Be Better
 
-### Carry-Forward Items from Degree 45
+- **Lunar Orbiter 1 context could be deeper.** Surveyor 1 launched into a landing architecture that assumed Lunar Orbiter coverage would follow; the Lunar Orbiter 1 launch was still two months ahead (August 1966). The release notes describe Surveyor's role in site certification without fully contextualizing the three-program cartographic architecture (Ranger, Surveyor, Lunar Orbiter). Future Surveyor degrees (3, 5, 6, 7) should deepen this thread.
+- **Margaret Morse Nice deserves her own chapter depth.** Nice's methodological contribution to behavioral ecology is arguably as important as the species itself. A dedicated sub-thread on her 1928-1943 Columbus study, the Interpont site, and the foundational status of her two-volume monograph would strengthen the species register. The current treatment is brief.
+- **The widest genre leap (Electronic to Folk) was under-examined.** Chong the Nomad's FL Studio electronic production at degree 44 to Damien Jurado's finger-picked acoustic at degree 45 is the widest single-degree genre transition in Pass 2. The release notes register the transition without tracing its architecture through production technology, dynamic range, or listener expectation.
 
-- **Surveyor program ACTIVE.** First landing successful. Surface proved solid. Six more Surveyor missions planned (2 will fail, 4 will succeed). Surveyor 3 will become the Apollo 12 landing neighbor -- Conrad and Bean will walk to it and remove its camera.
-- **Passerellidae initialized.** First representative of the New World sparrow family. Degrees 46 and 47 will continue the family run -- Spotted Towhee and Dark-eyed Junco, making an unprecedented three-degree Passerellidae streak.
-- **E=2 restored.** The quiet register is available again. The engine can breathe between the intensity peaks.
-- **Folk established as sustained territory.** Not a one-degree anomaly. Degree 46 (Rocky Votolato) will be the second consecutive folk degree. Degree 47 (Pedro the Lion) will make it three folk-adjacent degrees.
-- **The Surveyor-Ranger transition complete.** Crash (Ranger) to land (Surveyor). Impact to survival. The lunar exploration methodology has matured.
-- **Margaret Morse Nice's methodology.** Individual tracking, color banding, life-history documentation -- the foundation of modern behavioral ecology, built on Song Sparrows.
-- **The camera as survey tool.** Surveyor's 360-degree panoramic camera and the Song Sparrow's systematic repertoire cycling both build comprehensive local knowledge through accumulated perspectives.
+## Lessons Learned
 
-</details>
-
-## Emerging Patterns at Degree 45
-
-| Pattern | Status | Degree 45 Value |
-|---------|--------|-----------------|
-| S36 Artists | 46 documented (degrees 0-45) | Damien Jurado -- first folk-primary, the murmur, Sub Pop/Secretly Canadian, 22 albums |
-| SPS Species | 46 documented (degrees 0-45) | Song Sparrow -- FIRST PASSERELLIDAE, Nice's bird, 50+ subspecies, model organism |
-| NASA Missions | 46 aligned (1.0-1.46) | Surveyor 1 -- FIRST SOFT LUNAR LANDING, 11,237 photos, deep dust question answered |
-| NASA Programs | 6 (Surveyor BEGUN) | Pioneer/Mercury/Ranger/Mariner/Gemini + **Surveyor begun** |
-| Passerellidae Family | INITIALIZED | First New World sparrow; ground-level family vocabulary opens |
-| Energy Profile | E=2/E=2 SOFTEST DEGREE | E=2 returns after 31-degree absence (longest for any energy level) |
-| Genre Stages | +Folk (Stage 27) | First folk-primary artist; widest single-degree genre leap (Electronic→Folk) |
-| Lunar Contact | CRASH → LAND | Ranger impact (2.6 km/s) → Surveyor soft landing (3.4 m/s) |
-| Deep Dust Hypothesis | DISPROVED | Footpad sinkage 5 cm, bearing strength 3-5 kPa, Apollo cleared |
-| Autonomous Precision | First try success | RADVS-controlled descent, no real-time human piloting possible (2.6s delay) |
-| Sub Pop Signings | +Jurado (1996) | Grunge label signs the quietest artist -- surface holds |
-| Steepest Energy Drop | E=5/4 (44) → E=2/2 (45) | Engine's steepest single-degree energy decline |
-
-## Programs Active at Degree 45
-
-| Program | Status | Degrees |
-|---------|--------|---------|
-| **Surveyor** | **BEGUN** -- first soft lunar landing, surface proved solid | 45+ |
-| **Gemini** | Active -- 6 crewed flights, docking achieved | 38+ |
-| Mariner | Active -- Venus and Mars reached | 27+ |
-| Pioneer | Active -- Pioneer 6 transmitting | 1-5, 43 |
-| Mercury | Complete (7 flights) | 16-22 |
-| Ranger | Complete (9 missions, 3 successes) | 23-37 |
+1. **The deep-dust question answered on the first try.** Surveyor 1's footpad sinkage of 5 centimeters indicated bearing strength of at least 3-5 kPa. Thomas Gold's hypothesis was disproved. Apollo could land. The three-phase autonomous descent (solid retro, vernier, free-fall) worked on the first attempt without a second spacecraft's redundancy to call on.
+2. **Autonomous precision as engineering achievement.** The entire descent sequence was automatic, no human piloting possible given the 2.6-second communication delay. The RADVS (Radar Altimeter and Doppler Velocity Sensor) controlled the vernier engines. The first autonomous soft landing on another world was built at Hughes Aircraft in Culver City, California, and executed by spacecraft circuitry that did not consult Earth.
+3. **Folk enters the engine at Genre Stage 27.** The acoustic guitar and the unadorned voice as primary genre register. After forty-five degrees of increasingly complex production architectures, folk arrives as the elemental form. The genre does not compete with production; it is the zero-state against which production is measured.
+4. **The widest genre leap is a single-degree transition.** Electronic/R&B (degree 44) to Folk (degree 45) is the most extreme genre shift in Pass 2. From Chong the Nomad's FL Studio on a laptop to Jurado's cassettes on Casa Recordings. From the most digital to the most analog, from the 2020s production baseline to the mid-1990s four-track aesthetic, all in one consecutive-degree step.
+5. **Passerellidae opens the ground-sparrow vocabulary.** The New World sparrow family, ground-dwelling, ground-feeding, substrate-engaging, enters the engine through its most studied species. The family pairing with the mission that proved the ground existed is structurally exact: ground-biology meets ground-proved.
+6. **E=2 returns after thirty-one degrees.** The longest absence for any energy level in Pass 2. The energy drop from E=5/E=4 at degree 44 to E=2/E=2 at degree 45 is the engine's steepest single-degree energy decline. The softest degree marks its arrival by the size of its contrast.
+7. **Hughes Aircraft Company enters the dedication roster.** Not astronauts. Not named in the popular history. The engineers in Culver City who designed a machine that sat on the Moon and proved it could be done. The dedication precedes named heroism; it names the build team. The engine tracks builders as carefully as it tracks explorers.
+8. **The Sub Pop folk lineage opens with Jurado's 1996 signing.** The label known for grunge signs a folk artist. The label's surface holds. The subsequent catalog expansion through Iron & Wine, Fleet Foxes, Father John Misty, and the rest of the 21st-century Pacific Northwest folk revival is built on the demonstration that the Jurado signing made structurally possible.
+9. **Margaret Morse Nice's Columbus, Ohio methodology is foundational.** Individual color-banding, exhaustive life-history documentation, fifteen breeding seasons of continuous observation on one study site. The *Studies in the Life History of the Song Sparrow* (two volumes, 1937 and 1943) is the methodological ancestor of every subsequent long-term songbird study. The Song Sparrow degree pulls Nice into the engine's scientist roster alongside named field-ecology founders.
+10. **Three is the soft-landing number.** Three Surveyor footpads. Three descent phases. Three albums in the Maraqopa trilogy. Three Passerellidae degrees about to run (Song Sparrow, Spotted Towhee, Dark-eyed Junco). Three is the minimum for stability, the minimum for triangulation, the minimum for proving a claim. Degree 45 is organized around the number.
 
 ## Engine Position
 
 ```
-v1.49.501  = NASA 1.0   + degree 0   Pass 2  ✓
+v1.49.501  = NASA 1.0   + degree 0   Pass 2  (FOUNDATION)
 ...
-v1.49.523  = NASA 1.22  + degree 22  Pass 2  ✓  (last pre-built NASA)
-v1.49.524  = NASA 1.23  + degree 23  Pass 2  ✓  (first fresh dual-build)
+v1.49.523  = NASA 1.22  + degree 22  Pass 2  (last pre-built NASA)
+v1.49.524  = NASA 1.23  + degree 23  Pass 2  (first fresh dual-build)
 ...
-v1.49.545  = NASA 1.45  + degree 44  Pass 2  ✓  (FIRST DOCKING)
-v1.49.546  = NASA 1.46  + degree 45  Pass 2  ← THIS RELEASE (FIRST SOFT LANDING)
-v1.49.547  = NASA 1.47  + degree 46  Pass 2  ← next
+v1.49.544  = NASA 1.44  + degree 43  Pass 2  (ANN WILSON -- the ceiling)
+v1.49.545  = NASA 1.45  + degree 44  Pass 2  (GEMINI 8 -- the crisis roll)
+v1.49.546  = NASA 1.46  + degree 45  Pass 2  <- THIS RELEASE (SURVEYOR 1 -- FIRST SOFT LANDING)
+v1.49.547  = NASA 1.47  + degree 46  Pass 2  -> next (Lunar Orbiter 1 + Rocky Votolato)
 ```
 
-## Files
-
-| File | Type | Words |
-|------|------|-------|
-| `S36/research/releases/045-damien-jurado/pass2-refinement.md` | UPDATED | ~500 |
-| `SPS/research/releases/045-song-sparrow/pass2-refinement.md` | UPDATED | ~500 |
-| `NASA/1.46/research.md` | SOURCE | ~4,500 |
-| `NASA/1.46/organism.md` | SOURCE | ~3,000 |
-| `NASA/1.46/degree-sync.json` | SOURCE | ~3,000 |
-| `docs/release-notes/v1.49.546/README.md` | REWRITTEN | -- |
-
-## Cross-References
-
-| Thread | Entity | Role |
-|--------|--------|------|
-| S36 | Damien Jurado | Artist -- first folk-primary, the murmur, Sub Pop/Secretly Canadian, Maraqopa trilogy, Richard Swift collaboration |
-| SPS | Song Sparrow | Species -- first Passerellidae, Margaret Morse Nice's bird, 50+ subspecies, universal landing capability, the preamble |
-| NASA | Surveyor 1 | Mission -- first US soft lunar landing, Oceanus Procellarum, 11,237 photographs, deep dust question answered |
-| Dedication | Hughes Aircraft Company team | Engineers who built the spacecraft -- the unnamed builders of Apollo's foundation |
-| Degree 44->45 | Gemini 8 emergency -> Surveyor soft landing | Transition -- crisis -> calm, E=5/4 -> E=2/2, docking -> landing, emergency -> gentle arrival |
-| Degree 45->46 | Jurado -> Votolato | Folk continuity -- the murmur -> the confessional, E=2 -> E=3, hushed -> gravelly |
-| Degree 45->46 | Song Sparrow -> Spotted Towhee | Passerellidae pair -- wetland edge -> forest shrub, melodious -> buzzy, the preamble -> the rasp |
-| Degree 23-37->45 | Ranger (crash) -> Surveyor (land) | Lunar exploration matures -- impact to soft landing, destruction to survival, the camera that dies to the camera that lives |
-
-## Lunar Program Progression at Degree 45
-
-Three lunar programs have now contributed to Apollo site preparation:
-
-| Program | Degrees | Contact Type | Key Result |
-|---------|---------|-------------|------------|
-| Ranger | 23-37 | Impact (2.6 km/s) | 7 failures, 3 successes. 17,259 close-up photographs before destruction. |
-| **Surveyor** | **45+** | **Soft landing (3.4 m/s)** | **First surface contact. 11,237 photos. Bearing strength measured. Deep dust disproved.** |
-| Lunar Orbiter | 47+ | Orbital | Upcoming -- will photograph Apollo sites from orbit. |
-
-The progression: crash into the Moon (Ranger), land on the Moon (Surveyor), orbit the Moon (Lunar Orbiter). Each program answers a different question. Ranger: what does the surface look like up close? Surveyor: can a spacecraft land and survive? Lunar Orbiter: where exactly should Apollo land? Degree 45 answers the middle question. The surface holds.
-
-## The Soft Landing Degree -- Complete State at Degree 45
-
-| Thread | Degree 45 State |
-|--------|----------------|
-| S36 Artists | Jones (0) -> Frisell (1) -> ... -> Chong the Nomad (44) -> **Damien Jurado (45)** |
-| SPS Species | Heron (0) -> Wren (1) -> ... -> Lesser Goldfinch (44) -> **Song Sparrow (45)** |
-| NASA Missions | Founding (1.0) -> ... -> Gemini 8 (1.45) -> **Surveyor 1 (1.46) -- FIRST SOFT LANDING** |
-| Acoustic Elements (S36) | Silence (0) -> ... -> The Docking Groove (44) -> **The Murmur (45)** |
-| Acoustic Elements (SPS) | Silence (0) -> ... -> The Mimicry Mosaic (44) -> **The Preamble (45)** |
-| Genre | Electronic/R&B (44) -> **Folk (45) -- Genre Stage 27, widest single-degree genre leap** |
-| Energy | E=5/E=4 (44) -> **E=2/E=2 (45) -- steepest energy drop, softest degree** |
-| Passerellidae | -- -> **Song Sparrow (45) -- family initialized, first ground sparrow** |
-| Lunar Contact | Ranger impact (degrees 23-37) -> **Surveyor soft landing (45) -- crash to land** |
-| Surveyor | -- -> **Program begun -- first of seven missions, five will succeed** |
-| Sub Pop | -- -> **Jurado signed 1996 -- first folk artist on the grunge label** |
-| Nice's Legacy | -- -> **Song Sparrow enters -- the model organism for behavioral ecology** |
-
-## Cumulative Engine Statistics (v1.49.501-546)
+## Cumulative Statistics (v1.49.501-546)
 
 | Metric | Value |
 |--------|-------|
@@ -184,18 +111,71 @@ The progression: crash into the Moon (Ranger), land on the Moon (Surveyor), orbi
 | Passerellidae (New World sparrows) | 1 (Song Sparrow -- family initialized) |
 | Fringillidae (finches) | 5 (family complete for now) |
 | Parulidae (warblers) | 10 (family record holder) |
-| Taxonomic families (SPS) | 21+ |
-| Lunar soft landings | 1 (Surveyor 1 -- surface proved solid, bearing strength 3-5 kPa) |
+| Taxonomic families (SPS) | 19 |
+| Lunar soft landings | 1 (Surveyor 1 -- bearing strength 3-5 kPa measured) |
 | Lunar photographs from surface | 11,237 (Surveyor 1) |
 | Genre stages | 27 (Folk enters -- first folk-primary genre) |
 | E=2 appearances | 14 (energy lead restored) |
 | Acoustic elements (S36) | 46 (Silence through The Murmur) |
 | Acoustic elements (SPS) | 46 (Silence through The Preamble) |
 | Consecutive E=2 degrees | 1 (degree 45 -- first E=2 since degree 13, 31-degree gap) |
-| Sub Pop artists | Jurado (degree 45) -- first Sub Pop folk signing |
+| Sub Pop folk signings | 1 (Jurado 1996 -- first Sub Pop folk artist) |
+| Pacific Northwest folk artists | 1 (Jurado -- Burien/Seattle, first folk-primary) |
+
+## Taxonomic State at Degree 45
+
+| Family | Count | Notable Species |
+|--------|-------|-----------------|
+| Parulidae (wood-warblers) | 10 | Record-holder family, opened degree 4 |
+| Fringillidae (finches) | 5 | Lesser Goldfinch (degree 44) closes current run |
+| Passerellidae (New World sparrows) | **1** | **Song Sparrow (degree 45) -- family initialized** |
+| Corvidae, Paridae, Regulidae, Sittidae | various | Minor families in single or small counts |
+
+## Programs Active at Degree 45
+
+| Program | Status | Degrees |
+|---------|--------|---------|
+| **Surveyor** | **BEGUN** -- first soft lunar landing, surface proved solid | 45+ |
+| Gemini | Active -- 6 crewed flights, docking achieved | 38+ |
+| Mariner | Active -- Venus and Mars reached | 27+ |
+| Pioneer | Active -- Pioneer 6 transmitting | 1-5, 43 |
+| Mercury | Complete (7 flights) | 16-22 |
+| Ranger | Complete (9 missions, 3 successes) | 23-37 |
+
+## Files
+
+- `data/seattle-360/S36/research/releases/045-damien-jurado/pass2-refinement.md` -- UPDATED, ~500 words
+- `data/seattle-360/SPS/research/releases/045-song-sparrow/pass2-refinement.md` -- UPDATED, ~500 words
+- `www/tibsfox/com/Research/NASA/1.46/research.html` -- NASA 1.46 research page (Surveyor 1)
+- `www/tibsfox/com/Research/NASA/1.46/organism.html` -- NASA 1.46 organism page (Song Sparrow)
+- `www/tibsfox/com/Research/NASA/1.46/index.html` -- NASA 1.46 mission index
+- `docs/release-notes/v1.49.546/README.md` -- THIS FILE, REWRITTEN
+- `docs/release-notes/v1.49.546/chapter/00-summary.md` -- parse summary
+- `docs/release-notes/v1.49.546/chapter/03-retrospective.md` -- lessons detail (8 entries)
+
+## Cross-References
+
+| Thread | Entity | Role |
+|--------|--------|------|
+| S36 | Damien Jurado | Artist -- first folk-primary, the murmur, Sub Pop / Secretly Canadian / Maraqopa Records, 22 albums, Richard Swift collaboration |
+| SPS | Song Sparrow | Species -- first Passerellidae, Margaret Morse Nice's bird, 50+ subspecies, the preamble, universal landing capability |
+| NASA | Surveyor 1 | Mission -- first US soft lunar landing, Oceanus Procellarum, 11,237 photographs, deep dust question answered |
+| Dedication | Hughes Aircraft Company team | Engineers who built the spacecraft -- the unnamed builders of Apollo's foundation in Culver City, California |
+| Dedication | Margaret Morse Nice | Columbus, Ohio 1928-1943 -- foundational methodologist of behavioral ecology, Interpont study site |
+| Degree 43 -> 45 | Ann Wilson -> Jurado | Vocal register inversion -- E=6 ceiling to E=2 floor, the shout to the murmur |
+| Degree 44 -> 45 | Gemini 8 emergency -> Surveyor soft landing | Transition -- crisis to calm, E=5/4 to E=2/2, docking to landing |
+| Degree 45 -> 46 | Jurado -> Rocky Votolato | Folk continuity -- the murmur to the confessional, E=2 to E=3, hushed to gravelly |
+| Degree 45 -> 46 | Song Sparrow -> Spotted Towhee | Passerellidae pair -- wetland edge to forest shrub, melodious to buzzy, preamble to rasp |
+| Degree 45 -> 47 | Song Sparrow -> Dark-eyed Junco | Passerellidae three-degree streak begins -- first unprecedented family run |
+| Degree 23-37 -> 45 | Ranger crash program -> Surveyor soft landing | Lunar exploration maturation -- impact to soft landing, destruction to survival |
+| Degree 45 -> 51 | Surveyor 1 -> Surveyor 3 | Cartographic loop opened -- Surveyor 3 becomes the Apollo 12 neighbor |
+| Degree 45 -> Apollo 11 | Surveyor 1 surface proof -> Apollo 11 landing ellipse | Soft-landing precedent enables crewed landing four years later |
+| Degree 45 -> Apollo 12 | Surveyor 3 (future degree) -> Conrad and Bean walk to Surveyor 3 | Mapper becomes visited -- the loop closes |
+| Sub Pop lineage | Jurado (1996) -> Iron & Wine -> Fleet Foxes -> Father John Misty | Sub Pop folk catalog expansion -- the signing that made the catalog possible |
+| Nice methodology | Song Sparrow study -> Grant Galapagos finches -> Komdeur Seychelles warblers | Long-term songbird study methodology descendants |
 
 ---
 
-*Degree 45: soft landing. For eight years the question hung over Apollo planning like Gold's hypothetical dust: could you land on the Moon? Would the surface hold? At 06:17 UTC on June 2, 1966, three aluminum footpads pressed into the regolith of the Ocean of Storms to a depth of five centimeters and stopped. The spacecraft sat on the Moon. The surface held. Over forty-two days, the camera panned across a gently rolling plain under a black sky and transmitted 11,237 photographs that proved the ground was real, that it was navigable, that Apollo could come. A folk singer from Burien whispers into a single microphone in a room with one lamp on -- twenty-two albums across thirty years, the hushed tenor that critics compare to Nick Drake, the anti-spectacle, the sound of arriving without destroying the silence. A sparrow so common it is invisible sings its varied song at every wetland edge on the continent -- the bird whose name says "song" twice, the first Passerellidae, Margaret Morse Nice's bird, the model organism for understanding how songbirds learn. After the tumbling crisis at degree 44, the soft arrival. After the full-throated electronic intensity, the whisper. The footpads leave shallow impressions. The voice leaves no impression at all -- until you listen, and then it leaves one five centimeters deep.*
+*Degree 45: soft landing. For eight years the question hung over Apollo planning like Gold's hypothetical dust: could you land on the Moon? Would the surface hold? At 06:17 UTC on June 2, 1966, three aluminum footpads pressed into the regolith of the Ocean of Storms to a depth of five centimeters and stopped. The spacecraft sat on the Moon. The surface held. Over forty-two days, the camera panned across a gently rolling plain under a black sky and transmitted 11,237 photographs that proved the ground was real, that it was navigable, that Apollo could come. A folk singer from Burien whispers into a single microphone in a room with one lamp on -- twenty-two albums across thirty years, the hushed tenor that critics compare to Nick Drake, the anti-spectacle, the sound of arriving without destroying the silence. A sparrow so common it is invisible sings its varied song at every wetland edge on the continent -- the bird whose name says "song" twice, the first Passerellidae, Margaret Morse Nice's bird, the model organism for understanding how songbirds learn. After the tumbling crisis at degree 44, the soft arrival. After the full-throated electronic intensity, the whisper. The footpads leave shallow impressions. The voice leaves no impression at all, until you listen, and then it leaves one five centimeters deep.*
 
 *"The Rangers crashed into the Moon at 2.6 kilometers per second, cameras transmitting until the instant of destruction. Surveyor arrived at 3.4 meters per second and sat down. Damien Jurado arrives at speaking volume and stays for thirty years. The Song Sparrow arrives at every pond edge and stays forever. The soft landing outlasts the impact."*
