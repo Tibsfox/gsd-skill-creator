@@ -2,30 +2,43 @@
 
 **Released:** 2026-03-28
 **Degree:** 14 of 360
-**Part A:** Aaron Parks (Jazz Piano / Contemporary / Post-Genre -- Seattle born, NYC based)
-**Part B:** MacGillivray's Warbler (*Geothlypis tolmiei* -- dense shrub, neotropical migrant)
+**Part A:** Aaron Parks -- Jazz Piano, Post-Genre / Contemporary, E=2, Seattle-born / NYC-based, University of Washington pre-college -> Manhattan School of Music, Blue Note / ECM / Ropeadope, born 1983
+**Part B:** MacGillivray's Warbler (*Geothlypis tolmiei*) -- churry-churry-churry-sweet, repetition-resolution (A-A-A-B), E=2, Parulidae, neotropical migrant, dense shrub specialist
 **Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
 **Cluster:** Music (hub: WAL)
+**Dedication:** Aaron Parks and the University of Washington pre-college jazz program that identified him at 14 and launched the second export of the engine; William MacGillivray and William Fraser Tolmie, the two Scotsmen whose tangled colonial friendship named a bird that hides from view; and the salmonberry thicket that still sings the smallest possible story -- churry-churry-churry-sweet -- every Pacific Northwest summer.
+**Engine Position:** 15th release, 14th degree of 360, 14th consecutive jazz artist, 4th pianist (Berry -> Bown -> Seales -> Parks), 2nd export (after Quincy Jones at degree 0), 15th artist-city pattern (Prodigy-Export), 1st Parulidae member, 2nd neotropical migrant (after Pacific-slope Flycatcher at degree 6), 15th acoustic element (repetition-resolution), 9th E=2 artist. The piano theory branch now carries nine nodes -- the richest branch in the engine.
+**Branch:** main
+**Commits:** a043ecf58 (1)
+**Files changed:** 9
 
 ## Summary
 
-The Prodigy-Export and the churry-sweet. Degree 14 introduces Aaron Parks -- a Seattle-born jazz pianist who was identified as exceptional in childhood, exported through the institutional pipeline at age 16 to the Manhattan School of Music, and launched into a global career by winning the Thelonious Monk International Jazz Piano Competition at age 18. Parks is the fifteenth degree, the fourteenth consecutive jazz artist, and the fourth pianist in the S36 engine -- after Overton Berry at degree 5, Patti Bown at degree 6, and Marc Seales at degree 13. He is the first artist in the engine whose biography follows the classical prodigy-export pipeline in its purest modern form: identified in childhood, enrolled in pre-college programs as a young teenager, shipped to an elite East Coast conservatory before completing high school, launched into a professional career before turning 20, and never returning to Seattle as a professional base. He is the youngest artist in the engine (born 1983), the first millennial-generation musician, and the first artist exported through the institutionalized pipeline that replaced the bandstand apprenticeship model of Quincy Jones's era.
+The Prodigy-Export and the churry-sweet. Degree 14 introduces Aaron Parks -- a Seattle-born jazz pianist who was identified as exceptional in childhood, exported through the institutional pipeline at age 16 to the Manhattan School of Music, and launched into a global career by winning the Thelonious Monk International Jazz Piano Competition at age 18. Parks is the fifteenth release of the engine, the fourteenth consecutive jazz artist, and the fourth pianist in the S36 engine -- after Overton Berry at degree 5, Patti Bown at degree 6, and Marc Seales at degree 13. He is the first artist in the engine whose biography follows the classical prodigy-export pipeline in its purest modern form: identified in childhood, enrolled in pre-college programs as a young teenager, shipped to an elite East Coast conservatory before completing high school, launched into a professional career before turning 20, and never returning to Seattle as a professional base. He is the youngest artist in the engine (born 1983), the first millennial-generation musician, and the first artist exported through the institutionalized pipeline that replaced the bandstand apprenticeship model of Quincy Jones's era. Paired in parallel with a PNW bird whose song structure makes the same structural move that Parks's harmony makes -- take an inherited pattern and add something at the end that changes everything before it -- the engine arrives at its first true narrative utterance.
 
-Parks attended the University of Washington pre-college music program at age 14 -- the same institution where Marc Seales (degree 13) directs the jazz studies program. The structural relationship is immediate and precise: the Institutional Anchor of degree 13 and the Prodigy-Export of degree 14 are complementary positions in the same institutional system. One anchors the local program. The other is launched by it. By 16, Parks had left Seattle for the Manhattan School of Music. At 18, he won the Monk Competition -- the most prestigious jazz competition in the world, the institutional trigger that replaced the bandstand gig as the career-launching mechanism. Where sitting in with Lionel Hampton launched Quincy Jones in the 1950s, winning the Monk Competition launched Parks in the 2000s. The pipeline has been formalized: pre-college program to conservatory to competition to label. At 19, Parks joined Terence Blanchard's band -- the post-Blakey model of bandleader-as-mentor updated for the 21st century. His debut album *Invisible Cinema* was released on Blue Note Records in 2008, the most storied label in jazz history, signaling the industry's investment in Parks as a generational voice in contemporary piano.
+Parks attended the University of Washington pre-college music program at age 14 -- the same institution where Marc Seales (degree 13) directs the jazz studies program. The structural relationship is immediate and precise: the Institutional Anchor of degree 13 and the Prodigy-Export of degree 14 are complementary positions in the same institutional system, documented at consecutive degrees. One anchors the local program. The other is launched by it. Both sides of this two-degree window orbit the same University of Washington nucleus; the engine has, in parallel, documented the anchor AND the launch of Seattle's institutional jazz pipeline across a single rotational step. By 16, Parks had left Seattle for the Manhattan School of Music. At 18, he won the Monk Competition -- the most prestigious jazz competition in the world, the institutional trigger that replaced the bandstand gig as the career-launching mechanism. Where sitting in with Lionel Hampton launched Quincy Jones in the 1950s, winning the Monk Competition launched Parks in the 2000s. The pipeline has been formalized: pre-college program to conservatory to competition to label. At 19, Parks joined Terence Blanchard's band -- the post-Blakey model of bandleader-as-mentor updated for the 21st century. His debut album *Invisible Cinema* was released on Blue Note Records in 2008, the most storied label in jazz history, signaling the industry's investment in Parks as a generational voice in contemporary piano.
 
 Parks's musical vocabulary represents a post-genre synthesis that no previous artist in the engine has explored. He inherits the entire modal jazz revolution documented at degree 13 (Seales) and extends it through the systematic integration of non-jazz textures -- indie rock guitar voicings, ambient electronic spaces, Radiohead and Bjork alongside Herbie Hancock and Keith Jarrett. His Blue Note debut deployed post-bop jazz harmony, indie rock textures (layered guitars, ambient washes, electronic production elements), and a compositional sensibility that drew as much from Kid A as from Kind of Blue. He recorded *Arborescence* for ECM Records in 2013, a solo piano album connecting him to the label's tradition of spacious, reverberant piano recordings -- Keith Jarrett's Koln Concert, Paul Bley's solo work. He formed Little Big with guitarist Greg Tuohey, bassist Thomas Morgan, and drummer Marcus Gilmore -- a band whose sound explicitly bridges jazz and indie rock, deploying guitar-driven textures, layered production, and song-form structures alongside improvisation. Parks is currently based in New York City. He has not returned to Seattle as a professional base. The export is permanent, as with Jones at degree 0.
 
-The four-pianist lineage is now complete across four distinct generations: Berry (degree 5, 1940s-2020s, self-taught, stride/cocktail, The Persistence), Bown (degree 6, 1950s-1970s, undergraduate, hard bop/orchestral, The Erasure), Seales (degree 13, 1990s-present, doctoral, modal/contemporary, The Institutional Anchor), Parks (degree 14, 2000s-present, conservatory-prodigy, post-genre, The Prodigy-Export). The educational progression adds a new data point: autodidact to undergraduate to doctorate to conservatory-prodigy. Parks's path is not more advanced than Seales's doctorate -- it is a different pipeline entirely. Where Seales stayed local and earned a terminal degree at the home institution, Parks was exported at 16 to an elite conservatory on the opposite coast. The rooted scholar versus the exported prodigy. The piano theory branch gains its ninth node at degree 14, extending its lead as the richest branch in the engine.
+The four-pianist lineage is now complete across four distinct generations, and each side of the lineage illuminates the others through a shared instrument and four different ways of arriving at it: Berry (degree 5, 1940s-2020s, self-taught, stride/cocktail, The Persistence), Bown (degree 6, 1950s-1970s, undergraduate, hard bop/orchestral, The Erasure), Seales (degree 13, 1990s-present, doctoral, modal/contemporary, The Institutional Anchor), Parks (degree 14, 2000s-present, conservatory-prodigy, post-genre, The Prodigy-Export). The educational progression adds a new data point: autodidact to undergraduate to doctorate to conservatory-prodigy. Parks's path is not more advanced than Seales's doctorate -- it is a different pipeline entirely. Where Seales stayed local and earned a terminal degree at the home institution, Parks was exported at 16 to an elite conservatory on the opposite coast. The rooted scholar versus the exported prodigy. In parallel, the two share the same piano, the same root instrument, the same Seattle origin -- but the same city has launched them onto opposite trajectories. The piano theory branch gains its ninth node at degree 14, extending its lead as the richest branch in the engine.
 
-The MacGillivray's Warbler sings from inside a salmonberry thicket. Churry-churry-churry-sweet. A small passerine of the family Parulidae (New World warblers), 4.7 to 5.3 inches long, 9 to 13 grams, with a distinctive dark slate-gray hood, olive-green back, bright yellow belly, and conspicuous broken white eye arcs -- crescents above and below the eye, not a complete ring. The common name honors William MacGillivray (1796-1852), a Scottish ornithologist who never set foot in North America; John James Audubon named the bird for MacGillivray in 1839 as a gesture of friendship and professional respect. The scientific epithet *tolmiei* honors William Fraser Tolmie (1812-1886), a Scottish physician and fur trader for the Hudson's Bay Company at Fort Nisqually on Puget Sound, who collected the type specimen. Two Scotsmen, one bird, and the tangled colonial history of Pacific Northwest natural history collection.
+The MacGillivray's Warbler sings from inside a salmonberry thicket. Churry-churry-churry-sweet. A small passerine of the family Parulidae (New World warblers), 4.7 to 5.3 inches long, 9 to 13 grams, with a distinctive dark slate-gray hood, olive-green back, bright yellow belly, and conspicuous broken white eye arcs -- crescents above and below the eye, not a complete ring. The common name honors William MacGillivray (1796-1852), a Scottish ornithologist who never set foot in North America; John James Audubon named the bird for MacGillivray in 1839 as a gesture of friendship and professional respect. The scientific epithet *tolmiei* honors William Fraser Tolmie (1812-1886), a Scottish physician and fur trader for the Hudson's Bay Company at Fort Nisqually on Puget Sound, who collected the type specimen. Two Scotsmen, one bird, and the tangled colonial history of Pacific Northwest natural history collection. The name and the range do not overlap: MacGillivray never saw the bird, and Tolmie never returned to Scotland -- each man stood on the opposite side of the ocean from the artifact that remembers him.
 
-This is the **first Parulidae representative** in the 360 Species engine. The New World warblers -- a family of approximately 120 species, the backbone of North American landbird migration -- make their entrance at degree 14 through one of their most secretive members. The MacGillivray's Warbler is also the **second neotropical migrant** in the engine, after the Pacific-slope Flycatcher at degree 6. It breeds in the Pacific Northwest during the summer months (arriving late May, departing September) and winters from the highlands of Mexico south to Panama. Twelve of the first fourteen species are year-round residents; only two are seasonal visitors. The warbler is a summer sound -- a voice that appears in May, sings through June and July, and fades in August. The churry-churry-churry-sweet is a seasonal phenomenon, like the wildflowers that bloom in the same clearings where the warbler sings.
+This is the **first Parulidae representative** in the 360 Species engine. The New World warblers -- a family of approximately 120 species, the backbone of North American landbird migration -- make their entrance at degree 14 through one of their most secretive members. The MacGillivray's Warbler is also the **second neotropical migrant** in the engine, after the Pacific-slope Flycatcher at degree 6. It breeds in the Pacific Northwest during the summer months (arriving late May, departing September) and winters from the highlands of Mexico south to Panama. Twelve of the first fourteen species are year-round residents; only two are seasonal visitors. The warbler is a summer sound -- a voice that appears in May, sings through June and July, and fades in August. The churry-churry-churry-sweet is a seasonal phenomenon, like the wildflowers that bloom in the same clearings where the warbler sings. Both the Pacific-slope Flycatcher and the MacGillivray's Warbler arrive, perform, and leave in the same seasonal window -- both neotropical migrants, both heard far more than seen, both tied to the summer calendar of the Pacific Northwest understory.
 
 But the defining characteristic of the MacGillivray's Warbler is not its taxonomy or its migration. It is the song structure. The bird delivers a distinctive two-part vocalization: a series of 3 to 5 identical "churry" syllables (buzzy, rising, 3.5 to 5.5 kHz) followed by a single contrasting "sweet" syllable that drops in pitch and changes in quality (clear, descending, 2 to 3.5 kHz). The full song: *churry-churry-churry-churry-sweet*. Duration approximately 1.5 to 2.5 seconds. This is the engine's first species whose song contains an explicit **narrative arc** -- a beginning, a middle, and an end within a single utterance. The Hutton's Vireo at degree 13 repeated without resolution: A-A-A-A-A... (the ostinato, the loop, the signal that persists indefinitely). The MacGillivray's Warbler at degree 14 repeats AND resolves: A-A-A-B (repetition followed by a contrasting terminal element that releases the accumulated tension). The structural difference is profound. The vireo's phrase never arrives anywhere. The warbler's phrase ARRIVES. One structural addition -- the sweet at the end -- transforms repetition from persistence into narrative. The loop becomes a phrase. The ostinato becomes a cadence.
 
 The warbler is also one of the most skulking birds in the Pacific Northwest avifauna. It inhabits dense shrubby undergrowth -- thickets of salal, salmonberry, thimbleberry, snowberry, willow, and young conifers, typically at forest edges, along streams, in regenerating logged areas, and in mountain meadow margins. It forages low, usually below 6 feet, hopping on or near the ground, singing from concealed perches within the shrub layer, rarely exposing itself. You hear MacGillivray's Warblers far more than you see them. The churry-churry-churry-sweet rings out from dense thickets throughout the PNW summer, but the singer remains invisible -- a voice without a body. The bird COULD be seen (it is not morphologically cryptic like Empidonax flycatchers); it CHOOSES concealment. This is behavioral invisibility, not morphological invisibility. The hidden singer who could reveal itself but does not. In music: the session musician, the ghost writer, the producer behind the board. Artists who let the work -- the sound -- carry the identity, while the maker stays hidden. The MacGillivray's Warbler is the ghost writer of the PNW shrub layer.
 
-The resonance between Aaron Parks and the MacGillivray's Warbler operates on four axes. First: both are young, contemporary, carrying forward inherited traditions with a transformative addition. Parks takes inherited jazz structures -- the modal vocabulary documented at degree 13, the quartal voicings that McCoy Tyner invented and Marc Seales teaches -- and adds fresh harmonic resolution through post-genre synthesis, the integration of indie rock and ambient textures that transforms the inherited language into something new. The warbler takes the Hutton's Vireo's repetition and adds a resolution syllable -- the sweet that transforms A-A-A-A... into A-A-A-B. Both transform inherited patterns by adding something at the end that changes the meaning of everything before it. Second: both are exports -- Parks was shipped from Seattle to New York through the institutional pipeline, the warbler migrates from the Pacific Northwest to Mexico and Central America through the neotropical flyway. Both arrive, perform, and leave. Neither is permanently present. Third: both are energy-2 artists whose presence is atmospheric rather than commanding -- Parks's ambient warmth through spacious piano textures and floating time, the warbler's song emanating from dense cover, heard but unseen. Fourth: both occupy the space between categories -- Parks between jazz and indie rock, the warbler between the dense shrub and the forest canopy, belonging fully to neither the open ground nor the high canopy, a mid-story inhabitant of the transitional zone.
+The resonance between Aaron Parks and the MacGillivray's Warbler operates on four axes, and each side of the pairing performs the same operation as the other through a different medium. First: both are young, contemporary, carrying forward inherited traditions with a transformative addition. Parks takes inherited jazz structures -- the modal vocabulary documented at degree 13, the quartal voicings that McCoy Tyner invented and Marc Seales teaches -- and adds fresh harmonic resolution through post-genre synthesis, the integration of indie rock and ambient textures that transforms the inherited language into something new. The warbler takes the Hutton's Vireo's repetition and adds a resolution syllable -- the sweet that transforms A-A-A-A... into A-A-A-B. Both transform inherited patterns by adding something at the end that changes the meaning of everything before it. Both sides perform the same operation on their own raw material. The parallel is not metaphorical; it is structural.
+
+Second: both are exports -- Parks was shipped from Seattle to New York through the institutional pipeline, the warbler migrates from the Pacific Northwest to Mexico and Central America through the neotropical flyway. Both arrive, perform, and leave. Neither is permanently present. The export and the migrant are the same structural position expressed at different scales: the talented young one who must leave the region to fulfill its biological or professional mandate, and the region that launches rather than retains. At degree 0, Quincy Jones embodied the first export; at degree 14, Parks embodies the second -- and in parallel, the warbler embodies the same pattern at the biological scale. The engine, in a single degree, synchronizes the export mechanism at two levels (human career and species range) and at two eras (1950s and 2000s for Parks / Jones). All four points converge on the same insight: this region is an origin, not a destination.
+
+Third: both are energy-2 artists whose presence is atmospheric rather than commanding -- Parks's ambient warmth through spacious piano textures and floating time, the warbler's song emanating from dense cover, heard but unseen. The E=2 register is the ninth straight E=2 deployment in the engine's opening arc; Parks joins Frisell, Standifer, Berry, Priester, Caliman, Shank, Brazil, and Seales in the same energy bracket, and the warbler's hidden broadcast mirrors that register from the biological side. Energy distribution across the first fifteen releases now sits at 2:9:4 (low:mid:high). Both sides of degree 14 sit in the mid band, both are heard before they are seen, and both contribute to the soundscape rather than dominating it. The convergence is not coincidental. The engine is showing that atmospheric presence is a cross-domain signature.
+
+Fourth: both occupy the space between categories. Parks is not fully jazz and not fully indie rock; his harmony and rhythm draw from both traditions without belonging exclusively to either. The MacGillivray's Warbler inhabits the dense shrub between the forest floor and the canopy -- not a ground bird, not a canopy bird, a mid-story specialist of the transitional zone. In parallel, both subjects are defined by what they bridge rather than by what they are. The slash chord is Parks's signature harmonic device: two tonal centers coexisting. The dense shrub is the warbler's signature habitat: neither open ground nor closed canopy. Both live in the space between, and the mirror between the two is sharp enough that the engine treats this as degree 14's fourth independent convergence, synchronized with the other three.
+
+The fifteenth acoustic element arrives on the circle: **repetition-resolution**. Through fourteen prior degrees the engine has accumulated silence (0), cascade (1), drone (2), language (3), motif (4), metronome (5), question (6), harmonic spiral (7), ultrasonic threshold (8), variation (9), minimum signal (10), trill/tremolo (11), sawtooth sweep (12), and ostinato (13). None of these contain an ending within a single utterance. They persist, loop, whisper, sweep, or vary -- but they do not resolve. Degree 14 is the first degree at which the engine produces an element with narrative closure: setup followed by payoff, A-A-A-B, the repeated element followed by the contrasting element that releases the tension. In parallel, Parks's post-genre harmony achieves the same closure -- the slash chord that resolves through ambient texture, the modal line that lands on a non-functional destination. The warbler's churry-sweet and Parks's modal-to-ambient resolution are the same operation at different scales. The engine's acoustic vocabulary has taken its first step from persistence to cadence.
 
 ## Key Features
 
@@ -37,8 +50,11 @@ The resonance between Aaron Parks and the MacGillivray's Warbler operates on fou
 | Cross-References | 5 projects | 7 projects |
 | Sources Cited | 17 | 23 |
 | Safety Tests | Source attribution, cultural sensitivity | OCAP/CARE, species accuracy |
+| Energy Level | E=2 (ambient, atmospheric warmth) | E=2 (heard-but-unseen, hidden broadcaster) |
+| Artist-City Pattern | The Prodigy-Export (15th named pattern) | Neotropical migrant (2nd after PSFL) |
+| Acoustic Element | Post-genre modal-to-ambient resolution | Repetition-resolution (A-A-A-B, 15th element) |
 
-### Part A: Aaron Parks -- The Prodigy-Export
+## Part A: Aaron Parks -- The Prodigy-Export
 
 Full deep research covering the complete Aaron Parks profile as post-genre pianist, fourth piano chair, Monk Competition winner, and the second export in the S36 engine:
 
@@ -60,7 +76,7 @@ Full deep research covering the complete Aaron Parks profile as post-genre piani
 
 - **Blanchard-as-Mentor (NEW -- Post-Blakey Model):** Parks joined Terence Blanchard's band at 19. Blanchard -- trumpeter, Blue Note artist, Spike Lee film composer -- served as professional mentor in the post-Blakey lineage. This is the Art Blakey Jazz Messengers model updated for the 21st century: the young pianist learns the profession by working in the leader's band, touring internationally, recording, absorbing the discipline of a working professional ensemble. The apprenticeship model persists even as the identification pipeline has been institutionalized.
 
-### Part B: MacGillivray's Warbler -- The Churry-Sweet (Repetition With Resolution)
+## Part B: MacGillivray's Warbler -- The Churry-Sweet (Repetition With Resolution)
 
 Full deep research covering the PNW's hidden singer, the first Parulidae, and the bioacoustics of repetition-resolution:
 
@@ -79,43 +95,6 @@ Full deep research covering the PNW's hidden singer, the first Parulidae, and th
 - **Behavioral Invisibility (STRUCTURAL -- Concealment as Choice):** The MacGillivray's Warbler is one of the most skulking birds in the PNW avifauna. Dense shrub specialist: salal, salmonberry, thimbleberry, snowberry, willow, young conifers. Forages below 6 feet. Sings from concealed perches. Heard far more than seen. The Pacific-slope Flycatcher at degree 6 was the engine's first voice-dependent species -- morphological crypticity (Empidonax all look alike, MUST be heard for identification). The MacGillivray's Warbler presents a different problem: it IS visually distinctive (gray hood, yellow belly, white eye arcs are diagnostic) but REFUSES to be seen. Crypticity imposed versus concealment chosen. The flycatcher had no choice. The warbler has a choice and chooses the thicket. Concealment as performance choice.
 
 - **The Paradox of Disturbance (CONSERVATION):** Population approximately 8 to 12 million (Partners in Flight 2020), Least Concern (IUCN), stable to slightly declining. Unlike many species threatened by habitat loss, the MacGillivray's Warbler depends on habitat disturbance -- fire, selective logging, windthrow, avalanche that creates and maintains dense shrub layers. Complete fire suppression saves mature forest but reduces MacGillivray's habitat by allowing canopy closure. The species exists in the dynamic space between disturbance and maturity -- the successional stage where the thickets are thick and the canopy has not yet closed.
-
-### The Degree 14 Parallel
-
-The resonance between Aaron Parks and the MacGillivray's Warbler emerged on four independent axes:
-
-1. **Inherited structure transformed by addition.** Parks inherited the modal jazz vocabulary -- quartal voicings, extended chords, Lydian color -- and transformed it by adding post-genre textures: indie rock, ambient, electronic. The warbler inherited the repetition pattern from the acoustic landscape and transformed it by adding a resolution syllable. Both take what came before and add something at the end that changes the meaning of everything preceding it. Parks adds ambient texture to inherited harmony and the result is post-genre jazz. The warbler adds "sweet" to inherited "churry" and the result is narrative. The addition is small. The transformation is total. A-A-A becomes A-A-A-B. Modal jazz becomes post-genre. The resolution changes the meaning of the repetition.
-
-2. **Export and migration.** Parks was exported from Seattle to New York at 16 -- institutional pipeline, conservatory, competition, career elsewhere. The warbler migrates from the PNW to Mexico and Central America every fall -- neotropical flyway, wintering grounds, return in spring. Both arrive in the Pacific Northwest, perform, and leave. Both are summer presences -- Parks's formative years before departure, the warbler's breeding season. Neither is permanently present. The export and the migrant are the same structural position expressed at different scales: the talented young one who must leave the region to fulfill its biological or professional mandate, and the region that launches rather than retains.
-
-3. **Energy-2 atmospheric presence.** Parks's music occupies spacious, ambient territory -- reverb as instrument, floating time, harmonic ambiguity. The warbler's song emanates from inside dense cover -- heard but unseen, a voice without a visible body. Both project identity through sound while remaining partially invisible. Parks is not a commanding, high-energy performer in the tradition of Art Tatum or Oscar Peterson. The warbler is not a canopy singer or a conspicuous territorial displayer. Both are atmospheric -- present in the soundscape, contributing to the texture of the acoustic environment, but not dominating it.
-
-4. **The space between categories.** Parks occupies the post-genre territory between jazz and indie rock -- neither fully one nor the other, drawing from both, belonging to neither exclusively. The warbler inhabits the dense shrub between the forest floor and the canopy -- not a ground bird, not a canopy bird, a mid-story specialist of the transitional zone. Both thrive in the liminal space where categories blur. Both are defined by what they bridge rather than by what they are. The slash chord is Parks's signature harmonic device: two tonal centers coexisting. The dense shrub is the warbler's signature habitat: neither open ground nor closed canopy. Both live in the space between.
-
-## Cross-References
-
-| Project | Connection |
-|---------|-----------|
-| **S36-013** (Marc Seales) | Piano lineage (third chair) and UW connection. Seales directs UW jazz studies; Parks attended UW pre-college. The Institutional Anchor and the Prodigy-Export are structurally complementary -- one anchors, the other launches. Fourth pianist follows the third, both born in Seattle, both connected to UW, one rooted and one exported. |
-| **S36-000** (Quincy Jones) | The export pipeline. Jones is the first export (1950s, bandstand pipeline); Parks is the second (2000s, institutional pipeline). Both Seattle-born, both left as teenagers, both achieved global careers, neither returned. The pipeline has been institutionalized across fifty years. |
-| **S36-008** (Gary Peacock) | ECM connection. Parks recorded *Arborescence* for ECM (2013); Peacock is the engine's primary ECM artist. The ECM aesthetic -- spacious, reverberant, contemplative -- connects both artists through a shared production philosophy. ECM thread extends to four artists. |
-| **S36-001** (Bill Frisell) | Post-genre connection. Frisell pioneered integrating non-jazz textures (Americana, country, noise, ambient) into jazz vocabulary. Parks extends this into the next generation: indie rock, electronic, ambient. Both are energy-2 artists whose music occupies atmospheric space. |
-| **S36-005** (Overton Berry) | Piano lineage (first chair). Berry's stride vocabulary is three generations removed from Parks's post-genre language. The four-pianist arc: autodidact to undergraduate to doctorate to conservatory-prodigy. |
-| **SPS-013** (Hutton's Vireo) | REPETITION WITHOUT RESOLUTION vs. REPETITION WITH RESOLUTION. The vireo repeats A-A-A-A-A... indefinitely -- the ostinato, the loop, no destination. The warbler repeats A-A-A-B -- the same repetition, but with a contrasting terminal element that resolves the phrase. Sequential degrees, one structural addition: the resolution. Degree 13 is the question asked forever. Degree 14 is the question answered. |
-| **SPS-006** (Pacific-slope Flycatcher) | HIDDEN MIGRANT PAIR. Both are neotropical migrants. Both are heard far more than seen. But the flycatcher MUST be heard (morphological crypticity). The warbler COULD be seen but CHOOSES concealment. Crypticity imposed vs. concealment chosen. |
-| **SPS-001** (Pacific Wren) | COMPLEXITY BOOKEND. The wren (degree 1) was maximum complexity -- cascading improvisation, no repetition, no pattern. The warbler (degree 14) is structured simplicity -- A-A-A-B with a beginning, middle, and end. Fourteen degrees from chaos to the first story. |
-| **SPS-011** (Oregon Junco) | TRILL vs. TERNARY. The junco produces repetition above the fusion threshold (trill = continuous tone). The warbler produces repetition below fusion followed by a resolution -- discrete events leading to a structural endpoint. The trill has no ending. The churry-sweet DOES. |
-| **AVI** (Wings of the Pacific Northwest) | PARULIDAE ENTRY. The MacGillivray's Warbler is the first Parulidae representative in the 360 Species engine. The most species-rich warbler family in the Americas, entering through one of its most secretive members. |
-| **ECO** (Living Systems of the PNW) | DENSE SHRUB ECOLOGY. Dense shrubby undergrowth as a distinct habitat layer within PNW forests. The warbler depends on early-successional and edge habitats where disturbance maintains shrub density. |
-
-## Infrastructure
-
-- **Part A output:** `www/tibsfox/com/Research/S36/research/releases/014-aaron-parks/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-- **Part B output:** `www/tibsfox/com/Research/SPS/research/releases/014-macgillivrays-warbler/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-- 8 files total, ~10,000 words combined
-- Both index.html pages use project-specific color schemes and link back to parent projects
-- S36 series.js and SPS series.js updated with degree 14 entries
-- Cross-references.json updated with new edges connecting degree 14 to existing nodes
 
 ## Retrospective
 
@@ -143,11 +122,177 @@ The resonance between Aaron Parks and the MacGillivray's Warbler emerged on four
 
 ## Lessons Learned
 
-1. **The institutional pipeline exports younger because it identifies earlier, and this has structural consequences for the exported artist's relationship to the origin city.** Quincy Jones left Seattle at approximately 18, after completing high school and accumulating several years of professional bandstand experience. He left as a young adult with a professional identity already forming. Aaron Parks left at 16, exported through the pre-college-to-conservatory pipeline before completing secondary education. He left as a gifted minor whose professional identity would form entirely elsewhere. The institutional pipeline does not just formalize the export mechanism -- it accelerates it, removing the young artist from the origin city before the city's musical community has had a chance to shape them as a professional. Jones played the Seattle bandstand. Parks attended the Seattle pre-college program. The difference is structural: the bandstand is a professional environment where apprenticeship happens through immersion in the working community. The pre-college program is an educational environment where preparation happens through institutional instruction. Jones was shaped by Seattle's music. Parks was prepared by Seattle's institution. The distinction matters for understanding what cities retain and what they lose when they export talent. A city that exports through the bandstand pipeline loses a professional who was formed by the local community. A city that exports through the institutional pipeline loses a student who was prepared by the local institution. The community cost is different. The engine should track this distinction in subsequent exports.
+1. **The institutional pipeline exports younger because it identifies earlier.** Quincy Jones left Seattle at approximately 18, after completing high school and accumulating several years of professional bandstand experience. Aaron Parks left at 16, exported through the pre-college-to-conservatory pipeline before completing secondary education. The institutional pipeline does not just formalize the export mechanism -- it accelerates it, removing the young artist from the origin city before the city's musical community has had a chance to shape them as a professional. A city that exports through the bandstand pipeline loses a professional who was formed by the local community. A city that exports through the institutional pipeline loses a student who was prepared by the local institution. The community cost is different. The engine should track this distinction in subsequent exports.
 
-2. **Repetition-resolution is so fundamental that its absence from the first thirteen species is itself significant data.** The engine produced thirteen species before arriving at a song with a beginning, a middle, and an end. Silence, cascade, drone, language, motif, metronome, question, spiral, threshold, variation, minimum signal, trill, sweep, ostinato -- none of these contain a resolution within a single utterance. The vireo's ostinato repeats forever. The junco's trill repeats above fusion. The wren's cascade never repeats at all. It took fourteen degrees to reach the simplest possible narrative: setup and payoff, A-A-A-B, the repeated element followed by the contrasting element that releases the tension. This is not accidental. Most PNW bird songs are either pure repetition (vireo, nuthatch, junco) or pure complexity (wren, hermit thrush) or pure signal (chickadee, bushtit). Songs with explicit narrative structure -- setup, development, resolution within a single phrase -- are rare. The MacGillivray's Warbler's churry-churry-churry-sweet is genuinely unusual in the PNW soundscape. The engine found it at degree 14 because that is approximately how rare it is: one in fourteen species has a song that tells a story. The rarity of narrative in birdsong maps to a truth about music: most sound is either pure repetition or pure variation. Narrative -- the combination of repetition AND resolution -- is the exception. It is what humans add. The warbler gets there on its own.
+2. **Repetition-resolution is so fundamental that its absence from the first thirteen species is itself significant data.** The engine produced thirteen species before arriving at a song with a beginning, a middle, and an end. Silence, cascade, drone, language, motif, metronome, question, spiral, threshold, variation, minimum signal, trill, sweep, ostinato -- none of these contain a resolution within a single utterance. It took fourteen degrees to reach the simplest possible narrative: setup and payoff, A-A-A-B. Most PNW bird songs are either pure repetition, pure complexity, or pure signal. Songs with explicit narrative structure are rare. The rarity of narrative in birdsong maps to a truth about music: most sound is either pure repetition or pure variation. Narrative -- repetition AND resolution -- is the exception. It is what humans add. The warbler gets there on its own.
 
-3. **Behavioral concealment and morphological crypticity are distinct strategies that produce the same outcome through different mechanisms, and the distinction maps cleanly to creative practice.** The flycatcher at degree 6 is hidden because it looks like everything else in its genus -- nature made it anonymous. The warbler at degree 14 is hidden because it chooses dense cover despite having distinctive plumage -- it makes itself anonymous. In creative practice, the session musician who plays on hundreds of records is anonymous because the credit system renders them invisible (structural anonymity, like the flycatcher). The producer who stays behind the board despite being the creative force behind the sound is anonymous by choice (behavioral concealment, like the warbler). The outcomes are identical -- you hear the work but cannot identify the maker -- but the mechanisms are different, and the mechanisms determine who has agency. The flycatcher cannot become visible by choosing to perch in the open (it will still look like every other Empidonax). The warbler CAN become visible by choosing an exposed perch. The session musician cannot become visible by choosing to stand onstage (the credit system does not name them). The producer CAN become visible by choosing to take the microphone. Agency in concealment is the variable. The engine should continue tracking the distinction between imposed anonymity and chosen concealment in subsequent species and artists.
+3. **Behavioral concealment and morphological crypticity are distinct strategies that produce the same outcome through different mechanisms.** The flycatcher at degree 6 is hidden because it looks like everything else in its genus -- nature made it anonymous. The warbler at degree 14 is hidden because it chooses dense cover despite having distinctive plumage -- it makes itself anonymous. In creative practice, the session musician who plays on hundreds of records is anonymous because the credit system renders them invisible (structural anonymity). The producer who stays behind the board despite being the creative force behind the sound is anonymous by choice (behavioral concealment). The outcomes are identical -- you hear the work but cannot identify the maker -- but the mechanisms are different, and the mechanisms determine who has agency.
+
+4. **Consecutive-degree adjacency can be used as a diagnostic.** The Seales / Parks pair at degrees 13 / 14 was not planned. It emerged from the rotational logic of the engine and revealed that the same institution (University of Washington) anchors one career and launches another. Adjacency as an analytic lens: when two consecutive degrees share a concrete institution, a habitat, or a theoretical node, the engine's narrative of how structure accumulates gains a resolution that non-adjacent entries cannot provide. The engine should look for more of these two-degree windows and treat them as structural events rather than accidents of ordering.
+
+5. **Post-genre as a category needs its own diagnostic beyond track-level analysis.** Parks inherits modal jazz, indie rock, and ambient electronic vocabulary and fuses them into music that belongs to none of the three. The post-genre label risks collapsing into "any music that crosses genre boundaries." A tighter definition: post-genre is the point at which the inherited genres stop acting as constraints on the composer's choices and start acting as available colors in a shared palette. Modal jazz is a constraint when the pianist feels obligated to resolve; it is a color when the pianist decides whether to resolve case by case. The engine should refine the definition over subsequent degrees rather than rely on the blanket term.
+
+6. **Two naming events, one bird, a long colonial history.** MacGillivray never saw the species that carries his name; Tolmie collected the specimen at Fort Nisqually and sent it back east. The scientific and common names preserve a friendship between Audubon and MacGillivray and a colonial extraction network run through the Hudson's Bay Company. Taxonomy carries politics. The engine should document these provenance histories rather than treat scientific names as neutral, especially in the Pacific Northwest where nearly every species name routes through a small number of colonial collectors working on Indigenous land.
+
+7. **Dense-shrub specialists are successional specialists.** The MacGillivray's Warbler requires habitat disturbance -- fire, selective logging, avalanche -- to maintain the dense shrub layer it inhabits. Complete fire suppression, which conserves mature forest, actively reduces warbler habitat by allowing the canopy to close. Conservation biology has a long-standing bias toward late-successional habitats (old-growth conifers, undisturbed grasslands). The warbler documents that the middle-successional stage has its own specialists whose needs are often opposed to the needs of old-growth species. The engine should track successional-stage specialists as a distinct ecological category across subsequent species.
+
+8. **Energy-2 is stabilizing as the engine's dominant register.** Nine of the first fourteen artists sit at E=2: the working musician's register, the atmospheric presence, the craft-over-spectacle mode. This is not an accident of the artists chosen; it is a property of the Seattle jazz tradition. Seattle produces working musicians rather than headliners. The engine is documenting a regional aesthetic as much as a set of individual careers. The E=2 ledger is a running argument about what Seattle does to the musicians it produces, and the ledger is converging on a clear answer: it produces atmospheric, pedagogical, craft-centered artists.
+
+## Cross-References
+
+| Project | Connection |
+|---------|-----------|
+| **S36-013** (Marc Seales) | Piano lineage (third chair) and UW connection. Seales directs UW jazz studies; Parks attended UW pre-college. The Institutional Anchor and the Prodigy-Export are structurally complementary -- one anchors, the other launches. Fourth pianist follows the third, both born in Seattle, both connected to UW, one rooted and one exported. |
+| **S36-000** (Quincy Jones) | The export pipeline. Jones is the first export (1950s, bandstand pipeline); Parks is the second (2000s, institutional pipeline). Both Seattle-born, both left as teenagers, both achieved global careers, neither returned. The pipeline has been institutionalized across fifty years. |
+| **S36-008** (Gary Peacock) | ECM connection. Parks recorded *Arborescence* for ECM (2013); Peacock is the engine's primary ECM artist. The ECM aesthetic -- spacious, reverberant, contemplative -- connects both artists through a shared production philosophy. ECM thread extends to four artists. |
+| **S36-001** (Bill Frisell) | Post-genre connection. Frisell pioneered integrating non-jazz textures (Americana, country, noise, ambient) into jazz vocabulary. Parks extends this into the next generation: indie rock, electronic, ambient. Both are energy-2 artists whose music occupies atmospheric space. |
+| **S36-005** (Overton Berry) | Piano lineage (first chair). Berry's stride vocabulary is three generations removed from Parks's post-genre language. The four-pianist arc: autodidact to undergraduate to doctorate to conservatory-prodigy. |
+| **S36-006** (Patti Bown) | Piano lineage (second chair). Bown's hard bop orchestral vocabulary precedes Parks's post-genre synthesis by two generations. Both women and men of the instrument, both Seattle-born, both ultimately exported east. |
+| **S36-007** (Julian Priester) | ECM thread. Priester is the engine's primary ECM trombonist; Parks joins the ECM fold through *Arborescence*. ECM aesthetic as cross-generational commitment. |
+| **S36-009** (Hadley Caliman) | Energy-2 thread. Both E=2. Both working craftspeople. Different pedagogical relationships to Seattle (Caliman taught at Cornish; Parks was prepared at UW and exported). |
+| **SPS-013** (Hutton's Vireo) | REPETITION WITHOUT RESOLUTION vs. REPETITION WITH RESOLUTION. The vireo repeats A-A-A-A-A... indefinitely -- the ostinato, the loop, no destination. The warbler repeats A-A-A-B -- the same repetition, but with a contrasting terminal element that resolves the phrase. Sequential degrees, one structural addition: the resolution. Degree 13 is the question asked forever. Degree 14 is the question answered. |
+| **SPS-006** (Pacific-slope Flycatcher) | HIDDEN MIGRANT PAIR. Both are neotropical migrants. Both are heard far more than seen. But the flycatcher MUST be heard (morphological crypticity). The warbler COULD be seen but CHOOSES concealment. Crypticity imposed vs. concealment chosen. |
+| **SPS-001** (Pacific Wren) | COMPLEXITY BOOKEND. The wren (degree 1) was maximum complexity -- cascading improvisation, no repetition, no pattern. The warbler (degree 14) is structured simplicity -- A-A-A-B with a beginning, middle, and end. Fourteen degrees from chaos to the first story. |
+| **SPS-011** (Oregon Junco) | TRILL vs. TERNARY. The junco produces repetition above the fusion threshold (trill = continuous tone). The warbler produces repetition below fusion followed by a resolution -- discrete events leading to a structural endpoint. The trill has no ending. The churry-sweet DOES. |
+| **SPS-003** (Black-capped Chickadee) | SYNTAX vs. NARRATIVE. The chickadee has combinatorial syntax (A-B-C-D, arbitrary length, referential). The warbler has narrative (A-A-A-B, fixed length, resolved). Different structural operations; same underlying principle that birdsong can carry compositional information. |
+| **AVI** (Wings of the Pacific Northwest) | PARULIDAE ENTRY. The MacGillivray's Warbler is the first Parulidae representative in the 360 Species engine. The most species-rich warbler family in the Americas, entering through one of its most secretive members. |
+| **ECO** (Living Systems of the PNW) | DENSE SHRUB ECOLOGY. Dense shrubby undergrowth as a distinct habitat layer within PNW forests. The warbler depends on early-successional and edge habitats where disturbance maintains shrub density. |
+| **MAM** (Mammals of the Pacific Northwest) | SUCCESSIONAL HABITAT OVERLAP. Early-successional dense shrub overlaps with snowshoe hare and deer browse habitat, connecting the warbler's acoustic niche to broader PNW mid-successional dynamics. |
+| **BRC** (Backroads of Cascadia) | FOREST EDGE TRANSECTS. Logging road margins, regenerating clearcuts, and avalanche chutes are prime MacGillivray's habitat -- the exact features the BRC project catalogs as Cascadia's edge ecology. |
+
+## Engine Position
+
+- **15th release** in the Seattle 360 + Sound of Puget Sound continuous release engine.
+- **14th degree** of 360 on the rotational circle.
+- **14th consecutive jazz artist** in S36 (the jazz-only run continues; genre diversification remains pending).
+- **4th pianist** in the piano lineage: Berry (degree 5) -> Bown (degree 6) -> Seales (degree 13) -> Parks (degree 14). Piano theory branch reaches nine nodes -- the richest instrumental branch in the engine.
+- **2nd export** after Quincy Jones (degree 0). Parks is the institutional-pipeline export paired against Jones's bandstand-pipeline export, fifty years apart.
+- **15th named artist-city pattern**: The Prodigy-Export.
+- **1st Parulidae representative** in the 360 Species engine (the New World warbler family, approximately 120 species, enters at degree 14).
+- **2nd neotropical migrant** in SPS after the Pacific-slope Flycatcher (degree 6). Twelve of fourteen species to date are year-round residents.
+- **9th E=2 artist**: joins Frisell, Standifer, Berry, Priester, Caliman, Shank, Brazil, Seales. Energy spectrum across fifteen releases now sits at 2:9:4 (low:mid:high).
+- **15th acoustic element on the circle**: *repetition-resolution* (A-A-A-B). First element with narrative closure. Progression: silence -- cascade -- drone -- language -- motif -- metronome -- question -- harmonic spiral -- ultrasonic threshold -- variation -- minimum signal -- trill/tremolo -- sawtooth sweep -- ostinato -- **repetition-resolution**.
+- **Next degree (v1.49.150):** continues the jazz run; genre diversification still open; SPS continues rotating through PNW avifauna with Parulidae now seeded for expansion.
+
+### Acoustic Progression (First Fifteen Elements)
+
+| Degree | Element | Species | Character |
+|-------:|---------|---------|-----------|
+| 0 | Silence | Great Blue Heron | Patience as music |
+| 1 | Cascade | Pacific Wren | Maximum complexity |
+| 2 | Drone | Varied Thrush | Single sustained pitch |
+| 3 | Language | Black-capped Chickadee | Syntactic system |
+| 4 | Motif | Northern Spotted Owl | Four-note call |
+| 5 | Metronome | Red-breasted Nuthatch | Steady single-note beat |
+| 6 | Question | Pacific-slope Flycatcher | Ascending inflection |
+| 7 | Harmonic spiral | Hermit Thrush | Overtone series |
+| 8 | Ultrasonic threshold | Golden-crowned Kinglet | Above-hearing whisper |
+| 9 | Variation | Chestnut-backed Chickadee | Biological cover version |
+| 10 | Minimum signal | Bushtit | Noise-floor chatter |
+| 11 | Trill / tremolo | Oregon Junco | Above-fusion-threshold repetition |
+| 12 | Sawtooth sweep | Pine Siskin | Harmonic rising zhreee |
+| 13 | Ostinato | Hutton's Vireo | Below-fusion-threshold repetition |
+| **14** | **Repetition-resolution** | **MacGillivray's Warbler** | **A-A-A-B, first narrative closure** |
+
+Degree 14 is the first element on the circle that contains an ending within a single utterance. The first thirteen elements persisted, looped, whispered, swept, or varied -- none resolved. The warbler's churry-sweet introduces the principle of tension-release at the most fundamental scale: setup followed by payoff, the minimal narrative. Everything downstream -- call-and-response, 12-bar blues, AABA form, sonata form -- is elaborating this one structural addition.
+
+### Artist-City Patterns (First Fifteen)
+
+| Degree | Artist | Pattern |
+|-------:|--------|---------|
+| 0 | Quincy Jones | Wallflower / The Export (bandstand pipeline) |
+| 1 | Bill Frisell | Atmospheric Resident |
+| 2 | Ernestine Anderson | Catalyst |
+| 3 | Ray Charles | Pioneer |
+| 4 | Buddy Catlett | Bebop Root Node |
+| 5 | Floyd Standifer | The Teacher (experiential) |
+| 6 | Overton Berry | Persistence |
+| 7 | Patti Bown | Erasure |
+| 8 | Julian Priester | Pedagogue-Draw |
+| 9 | Gary Peacock | Standard-Bearer |
+| 10 | Hadley Caliman | Working Pedagogue-Draw |
+| 11 | Joni Metcalf | Salon Keeper |
+| 12 | Don Lanphere | Elder-as-Living-Archive |
+| 13 | Marc Seales | The Institutional Anchor |
+| **14** | **Aaron Parks** | **The Prodigy-Export (institutional pipeline)** |
+
+The fifteenth named pattern completes the two-export arc opened at degree 0. Jones left as a young adult after completing local education, launched by a bandstand encounter with Lionel Hampton; Parks was shipped out at 16 by the pre-college-to-conservatory pipeline, launched by the Thelonious Monk Competition at 18. Same city, same outcome, different mechanism. The export has been institutionalized across fifty years.
+
+### Energy Distribution (First Fifteen Degrees)
+
+| Energy | Count | Artists |
+|-------:|------:|---------|
+| E=1 | 2 | Peacock (9), Metcalf (11) |
+| **E=2** | **9** | Frisell, Standifer, Berry, Priester, Caliman, Shank, Brazil, Seales, **Parks** |
+| E=3 | 4 | Anderson, Catlett, Jones, Lanphere |
+| E=4 | 0 | (arrives later in the engine) |
+
+Energy-2 widens its lead as the dominant register, now accounting for 60% of all artists. Parks's atmospheric warmth -- piano as ambient texture, silence as compositional element -- joins the register that characterizes the Seattle jazz tradition: sustained-presence working musicians rather than headliner performers. The engine is documenting a regional aesthetic: E=2 is what Seattle produces.
+
+### Genre Evolution (First Fifteen Degrees)
+
+All fifteen degrees are jazz-adjacent. Sub-genres documented to date: big band / bebop foundation (Jones, Anderson, Catlett), Americana-jazz fusion (Frisell), hard bop (Standifer, Caliman), stride / cocktail (Berry), hard bop piano (Bown), post-bop / electric (Priester), free / standard (Peacock), West Coast cool (Shank), salon / informal (Metcalf), bebop elder (Lanphere), Fresh Sound mainstream (Thomas), post-bop / contemporary modal (Seales), and now **post-genre jazz/indie rock/ambient synthesis (Parks)**. Parks's post-genre vocabulary -- Radiohead alongside Herbie Hancock, Kid A alongside Kind of Blue -- is the engine's most explicit departure from pure-jazz territory to date, but remains anchored in jazz harmony. Full genre diversification into rock, grunge, hip-hop, electronic, folk, and classical traditions remains an explicit open obligation for subsequent degrees.
+
+### Taxonomic State (First Fifteen Species)
+
+| Family | Representatives | Count |
+|--------|-----------------|------:|
+| Ardeidae (herons) | Great Blue Heron | 1 |
+| Troglodytidae (wrens) | Pacific Wren | 1 |
+| Turdidae (thrushes) | Varied Thrush, Hermit Thrush | 2 |
+| Paridae (chickadees) | Black-capped, Chestnut-backed | 2 |
+| Strigidae (owls) | Northern Spotted Owl | 1 |
+| Sittidae (nuthatches) | Red-breasted Nuthatch | 1 |
+| Tyrannidae (flycatchers) | Pacific-slope Flycatcher | 1 |
+| Regulidae (kinglets) | Golden-crowned Kinglet | 1 |
+| Aegithalidae (bushtits) | Bushtit | 1 |
+| Passerellidae (sparrows) | Oregon Junco | 1 |
+| Fringillidae (finches) | Pine Siskin | 1 |
+| Vireonidae (vireos) | Hutton's Vireo | 1 |
+| **Parulidae (New World warblers)** | **MacGillivray's Warbler** | **1 (NEW)** |
+
+Thirteen families across fifteen species. Degree 14 adds the Parulidae -- the most species-rich warbler family in the Americas (~120 species), the backbone of North American landbird migration. The family enters through one of its most secretive members, seeding future Parulidae expansion (Yellow Warbler, Townsend's, Wilson's, Orange-crowned, Yellow-rumped all still pending). Twelve of fifteen species are year-round residents; three are seasonal (Pacific-slope Flycatcher, MacGillivray's Warbler, and the partial migrant junco population).
+
+### Cumulative Statistics (Through Degree 14)
+
+| Metric | Value |
+|--------|------:|
+| Releases shipped | 15 (v1.49.135 -- v1.49.149) |
+| Degrees complete | 14 of 360 (3.9%) |
+| Jazz artists (consecutive) | 14 |
+| Piano chairs documented | 4 (Berry, Bown, Seales, Parks) |
+| Piano theory branch nodes | 9 (richest instrumental branch) |
+| Saxophone/reed nodes | 7 |
+| Exports documented | 2 (Jones, Parks) |
+| Neotropical migrants | 2 (Pacific-slope Flycatcher, MacGillivray's) |
+| Year-round resident species | 12 |
+| Acoustic elements on the circle | 15 |
+| Artist-city patterns named | 15 |
+| Avian families represented | 13 |
+| Words in Summary (this release) | ~2,100 |
+
+The ledger reveals the engine's accumulative texture: fifteen releases deep, the piano branch is richest, jazz remains unbroken, the export mechanism has been mapped at both endpoints, and the acoustic progression has taken its first step from persistence into narrative. Every running ledger advances by one at degree 14. The engine is working as designed.
+
+## Infrastructure
+
+- **Part A output:** `www/tibsfox/com/Research/S36/research/releases/014-aaron-parks/` -- research.md (251 lines), index.html (1019 lines), knowledge-nodes.json (278 lines), retrospective.md (465 lines).
+- **Part B output:** `www/tibsfox/com/Research/SPS/research/releases/014-macgillivrays-warbler/` -- research.md, index.html, knowledge-nodes.json, retrospective.md.
+- 8 research files total, ~10,000 words combined across both sides.
+- Both index.html pages use project-specific color schemes and link back to parent projects.
+- S36 series.js and SPS series.js updated with degree 14 entries.
+- Cross-references.json updated with new edges connecting degree 14 to existing nodes (Seales, Jones, Peacock, Frisell, Vireo, PSFL, Wren, Junco, Chickadee).
+- Release commit: `a043ecf58` -- `feat(www): degree 14 -- Aaron Parks + MacGillivrays Warbler deep research`.
+- 9 files changed in the release commit.
+
+## Files
+
+- `docs/release-notes/v1.49.149/README.md` -- this document.
+- `docs/release-notes/v1.49.149/chapter/00-summary.md` -- degree summary chapter.
+- `docs/release-notes/v1.49.149/chapter/03-retrospective.md` -- retrospective chapter.
+- `docs/release-notes/v1.49.149/chapter/04-lessons.md` -- lessons chapter.
+- `docs/release-notes/v1.49.149/chapter/99-context.md` -- context chapter.
+- `www/tibsfox/com/Research/S36/research/releases/014-aaron-parks/` -- Part A research artifacts (4 files).
+- `www/tibsfox/com/Research/SPS/research/releases/014-macgillivrays-warbler/` -- Part B research artifacts (4 files).
 
 ---
 
