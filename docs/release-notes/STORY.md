@@ -1,0 +1,612 @@
+# The Story of This Project
+
+Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
+The story begins at `v1.0` and continues to `v1.49.559`.
+
+**602 chapters.** 333 have retrospectives.
+For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
+
+## Chapters
+
+- **[v1.0](v1.0/00-summary.md)** — Core Skill Management · 2026-01-31
+- **[v1.1](v1.1/00-summary.md)** — Semantic Conflict Detection · 2026-02-04
+- **[v1.2](v1.2/00-summary.md)** — Test Infrastructure · 2026-02-05
+- **[v1.3](v1.3/00-summary.md)** — Documentation Overhaul · 2026-02-05
+- **[v1.4](v1.4/00-summary.md)** — Agent Teams · 2026-02-05
+- **[v1.5](v1.5/00-summary.md)** — Pattern Discovery · 2026-02-07
+- **[v1.6](v1.6/00-summary.md)** — Cross-Domain Examples · 2026-02-07
+- **[v1.7](v1.7/00-summary.md)** — GSD Master Orchestration Agent · 2026-02-08
+- **[v1.8](v1.8/00-summary.md)** — Capability-Aware Planning + Token Efficiency · 2026-02-08
+- **[v1.8.1](v1.8.1/00-summary.md)** — Audit Remediation (Patch) · 2026-02-11
+- **[v1.9](v1.9/00-summary.md)** — Ecosystem Alignment & Advanced Orchestration · 2026-02-12
+- **[v1.10](v1.10/00-summary.md)** — Security Hardening · 2026-02-12
+- **[v1.11](v1.11/00-summary.md)** — GSD Integration Layer · 2026-02-12
+- **[v1.12](v1.12/00-summary.md)** — GSD Planning Docs Dashboard · 2026-02-12
+- **[v1.12.1](v1.12.1/00-summary.md)** — Live Metrics Dashboard · 2026-02-12
+- **[v1.13](v1.13/00-summary.md)** — Session Lifecycle & Workflow Coprocessor · 2026-02-12
+- **[v1.14](v1.14/00-summary.md)** — Promotion Pipeline · 2026-02-13
+- **[v1.15](v1.15/00-summary.md)** — Live Dashboard Terminal · 2026-02-13
+- **[v1.16](v1.16/00-summary.md)** — Dashboard Console & Milestone Ingestion · 2026-02-13
+- **[v1.17](v1.17/00-summary.md)** — Staging Layer · 2026-02-13
+- **[v1.18](v1.18/00-summary.md)** — Information Design System · 2026-02-14
+- **[v1.19](v1.19/00-summary.md)** — Budget Display Overhaul · 2026-02-14
+- **[v1.20](v1.20/00-summary.md)** — Dashboard Assembly · 2026-02-14
+- **[v1.21](v1.21/00-summary.md)** — GSD-OS Desktop Foundation · 2026-02-14
+- **[v1.22](v1.22/00-summary.md)** — Minecraft Knowledge World · 2026-02-19
+- **[v1.23](v1.23/00-summary.md)** — Project AMIGA · 2026-02-19
+- **[v1.24](v1.24/00-summary.md)** — GSD Conformance Audit & Hardening · 2026-02-19
+- **[v1.25](v1.25/00-summary.md)** — Ecosystem Integration · 2026-02-19
+- **[v1.26](v1.26/00-summary.md)** — Aminet Archive Extension Pack · 2026-02-19
+- **[v1.27](v1.27/00-summary.md)** — GSD Foundational Knowledge Packs · 2026-02-20
+- **[v1.28](v1.28/00-summary.md)** — GSD Den Operations · 2026-02-21
+- **[v1.29](v1.29/00-summary.md)** — Electronics Educational Pack · 2026-02-21
+- **[v1.30](v1.30/00-summary.md)** — Vision-to-Mission Pipeline · 2026-02-22
+- **[v1.31](v1.31/00-summary.md)** — GSD-OS MCP Integration · 2026-02-22
+- **[v1.32](v1.32/00-summary.md)** — Brainstorm Session Support · 2026-02-22
+- **[v1.33](v1.33/00-summary.md)** — GSD OpenStack Cloud Platform (NASA SE Edition) · 2026-02-23
+- **[v1.34](v1.34/00-summary.md)** — Documentation Ecosystem Refinement · 2026-02-26
+- **[v1.35](v1.35/00-summary.md)** — Mathematical Foundations Engine · 2026-02-26
+- **[v1.36](v1.36/00-summary.md)** — Citation Management & Source Attribution · 2026-02-26
+- **[v1.37](v1.37/00-summary.md)** — Complex Plane Learning Framework · 2026-02-26
+- **[v1.38](v1.38/00-summary.md)** — SSH Agent Security · 2026-02-26
+- **[v1.39](v1.39/00-summary.md)** — GSD-OS Bootstrap & READY Prompt · 2026-02-26
+- **[v1.40](v1.40/00-summary.md)** — sc:learn Dogfood Mission · 2026-02-26
+- **[v1.41](v1.41/00-summary.md)** — Claude Code Integration Reliability · 2026-02-26
+- **[v1.42](v1.42/00-summary.md)** — SC Git Support · 2026-02-26
+- **[v1.43](v1.43/00-summary.md)** — Gource Visualization Pack · 2026-02-26
+- **[v1.44](v1.44/00-summary.md)** — SC Learn PyDMD Dogfood · 2026-02-26
+- **[v1.45](v1.45/00-summary.md)** — Agent-Ready Static Site · 2026-02-26
+- **[v1.46](v1.46/00-summary.md)** — Upstream Intelligence Pack · 2026-02-26
+- **[v1.47](v1.47/00-summary.md)** — Holomorphic Dynamics Educational Pack · 2026-02-27
+- **[v1.48](v1.48/00-summary.md)** — Physical Infrastructure Engineering Pack · 2026-02-27
+- **[v1.49](v1.49/00-summary.md)** — Deterministic Agent Communication Protocol · 2026-02-27
+- **[v1.49.1](v1.49.1/00-summary.md)** — DACP CLI Field Alignment (Patch) · 2026-02-27
+- **[v1.49.2](v1.49.2/00-summary.md)** — GSD-OS Indicator Wiring & TypeScript Fixes (Patch) · 2026-02-27
+- **[v1.49.3](v1.49.3/00-summary.md)** — GSD-OS Desktop Polish (Patch) · 2026-02-27
+- **[v1.49.4](v1.49.4/00-summary.md)** — Filesystem Management Strategy · 2026-02-27
+- **[v1.49.5](v1.49.5/00-summary.md)** — Project Filesystem Reorganization · 2026-02-27
+- **[v1.49.6](v1.49.6/00-summary.md)** — macOS Compatibility & Dependency Hardening · 2026-03-01
+- **[v1.49.7](v1.49.7/00-summary.md)** — Optional tmux with Graceful Degradation · 2026-03-01
+- **[v1.49.8](v1.49.8/00-summary.md)** — Cooking With Claude · 2026-03-01
+- **[v1.49.9](v1.49.9/00-summary.md)** — Learn Kung Fu · 2026-03-01
+- **[v1.49.10](v1.49.10/00-summary.md)** — College Expansion · 2026-03-02
+- **[v1.49.11](v1.49.11/00-summary.md)** — gsd-init Hardening · 2026-03-02
+- **[v1.49.12](v1.49.12/00-summary.md)** — Heritage Skills Educational Pack · 2026-03-02
+- **[v1.49.13](v1.49.13/00-summary.md)** — Skill Usage Telemetry & Adaptive Pipeline · 2026-03-03
+- **[v1.49.14](v1.49.14/00-summary.md)** — Dependency Health Monitor & Progressive Internalization Engine · 2026-03-03
+- **[v1.49.15](v1.49.15/00-summary.md)** — Self-Improving Mesh Architecture · 2026-03-04
+- **[v1.49.16](v1.49.16/00-summary.md)** — Muse Integration & MCP Pipeline · 2026-03-04
+- **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
+- **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
+- **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
+- **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
+- **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
+- **[v1.49.24](v1.49.24/00-summary.md)** — Building Construction & Smart Home Electronics · 2026-03-08
+- **[v1.49.25](v1.49.25/00-summary.md)** — Wings of the Pacific Northwest & Fur, Fin & Fang · 2026-03-09
+- **[v1.49.26](v1.49.26/00-summary.md)** — Bio-Physics Sensing Systems · 2026-03-09
+- **[v1.49.27](v1.49.27/00-summary.md)** — Spatial Awareness: The Chorus Protocol (Shiny Things Charf-Charf Edition) · 2026-03-09
+- **[v1.49.28](v1.49.28/00-summary.md)** — Retro-Driven Improvements · 2026-03-09
+- **[v1.49.29](v1.49.29/00-summary.md)** — Retrospective-Driven Process Hardening · 2026-03-09
+- **[v1.49.30](v1.49.30/00-summary.md)** — Fur, Feathers & Animation Arts (Rabs Edition) · 2026-03-09
+- **[v1.49.31](v1.49.31/00-summary.md)** — Animal Speak, Sacred Landscapes & Process Hardening (Grandmother Cedar — Foxy Edition) · 2026-03-09
+- **[v1.49.32](v1.49.32/00-summary.md)** — Release Integrity & Agent Heartbeat · 2026-03-09
+- **[v1.49.33](v1.49.33/00-summary.md)** — The Systems Administrator's Handbook · 2026-03-10
+- **[v1.49.34](v1.49.34/00-summary.md)** — Shapes, Colors, Coloring Outside the Lines · 2026-03-10
+- **[v1.49.35](v1.49.35/00-summary.md)** — Voxel as Vessel, Grandmother Cedar's Complete Inventory, and the Data Source Registry · 2026-03-10
+- **[v1.49.36](v1.49.36/00-summary.md)** — AWF Living Systems Research and the Root Landing Page · 2026-03-10
+- **[v1.49.37](v1.49.37/00-summary.md)** — Thermal & Hydrogen Energy Systems and the 16-Project Hub · 2026-03-10
+- **[v1.49.38](v1.49.38/00-summary.md)** — License Change (BSL 1.1) · 2026-03-25
+- **[v1.49.39](v1.49.39/00-summary.md)** — Weird Al: Eat It · 2026-03-25
+- **[v1.49.40](v1.49.40/00-summary.md)** — Dizz Knee Land · 2026-03-25
+- **[v1.49.41](v1.49.41/00-summary.md)** — Green River · 2026-03-25
+- **[v1.49.42](v1.49.42/00-summary.md)** — The Mote in God's Eye · 2026-03-26
+- **[v1.49.43](v1.49.43/00-summary.md)** — Evergreen · 2026-03-26
+- **[v1.49.44](v1.49.44/00-summary.md)** — Skill Check · 2026-03-26
+- **[v1.49.45](v1.49.45/00-summary.md)** — Ten · 2026-03-26
+- **[v1.49.46](v1.49.46/00-summary.md)** — Room 101 · 2026-03-26
+- **[v1.49.47](v1.49.47/00-summary.md)** — West of the Rockies · 2026-03-26
+- **[v1.49.48](v1.49.48/00-summary.md)** — Secret Masters of Fandom · 2026-03-26
+- **[v1.49.49](v1.49.49/00-summary.md)** — Shields Up · 2026-03-26
+- **[v1.49.50](v1.49.50/00-summary.md)** — Double Entry · 2026-03-26
+- **[v1.49.51](v1.49.51/00-summary.md)** — Daydream Nation · 2026-03-26
+- **[v1.49.52](v1.49.52/00-summary.md)** — Everett · 2026-03-26
+- **[v1.49.53](v1.49.53/00-summary.md)** — Daypack · 2026-03-26
+- **[v1.49.54](v1.49.54/00-summary.md)** — Cosmic Crisp · 2026-03-26
+- **[v1.49.55](v1.49.55/00-summary.md)** — Grandmother Cedar · 2026-03-26
+- **[v1.49.56](v1.49.56/00-summary.md)** — The 20th Extension · 2026-03-26
+- **[v1.49.57](v1.49.57/00-summary.md)** — Ground Truth · 2026-03-26
+- **[v1.49.58](v1.49.58/00-summary.md)** — Sonic Alchemy · 2026-03-26
+- **[v1.49.59](v1.49.59/00-summary.md)** — Whoever You Are · 2026-03-26
+- **[v1.49.60](v1.49.60/00-summary.md)** — Inclusionary Wave · 2026-03-26
+- **[v1.49.61](v1.49.61/00-summary.md)** — Fix You · 2026-03-26
+- **[v1.49.62](v1.49.62/00-summary.md)** — Over My Head · 2026-03-26
+- **[v1.49.63](v1.49.63/00-summary.md)** — Bing Chen · 2026-03-26
+- **[v1.49.64](v1.49.64/00-summary.md)** — The Cusp of Power · 2026-03-26
+- **[v1.49.65](v1.49.65/00-summary.md)** — The Signal at Night · 2026-03-26
+- **[v1.49.66](v1.49.66/00-summary.md)** — Cross-Border Signal · 2026-03-26
+- **[v1.49.67](v1.49.67/00-summary.md)** — The Wolf · 2026-03-26
+- **[v1.49.68](v1.49.68/00-summary.md)** — The Radio Wars · 2026-03-26
+- **[v1.49.69](v1.49.69/00-summary.md)** — The Orchestrator · 2026-03-26
+- **[v1.49.70](v1.49.70/00-summary.md)** — The Signal · 2026-03-26
+- **[v1.49.71](v1.49.71/00-summary.md)** — The Blue Infrastructure · 2026-03-26
+- **[v1.49.72](v1.49.72/00-summary.md)** — Three Exiles · 2026-03-26
+- **[v1.49.73](v1.49.73/00-summary.md)** — Baby Got Back · 2026-03-26
+- **[v1.49.74](v1.49.74/00-summary.md)** — Outside Assistance · 2026-03-26
+- **[v1.49.75](v1.49.75/00-summary.md)** — The Patch · 2026-03-26
+- **[v1.49.76](v1.49.76/00-summary.md)** — 57 Octaves Below Middle C · 2026-03-26
+- **[v1.49.77](v1.49.77/00-summary.md)** — Circle of Life · 2026-03-26
+- **[v1.49.78](v1.49.78/00-summary.md)** — Raven Steals the Sun · 2026-03-26
+- **[v1.49.79](v1.49.79/00-summary.md)** — The Listening Trail · 2026-03-26
+- **[v1.49.80](v1.49.80/00-summary.md)** — First Frost, Last Frost · 2026-03-26
+- **[v1.49.81](v1.49.81/00-summary.md)** — The Last Signal · 2026-03-27
+- **[v1.49.82](v1.49.82/00-summary.md)** — _(unnamed)_ · 2026-03-27
+- **[v1.49.83](v1.49.83/00-summary.md)** — _(unnamed)_ · 2026-03-27
+- **[v1.49.84](v1.49.84/00-summary.md)** — _(unnamed)_ · 2026-03-27
+- **[v1.49.85](v1.49.85/00-summary.md)** — _(unnamed)_ · 2026-03-27
+- **[v1.49.86](v1.49.86/00-summary.md)** — _(unnamed)_ · 2026-03-27
+- **[v1.49.87](v1.49.87/00-summary.md)** — _(unnamed)_ · 2026-03-27
+- **[v1.49.88](v1.49.88/00-summary.md)** — _(unnamed)_ · 2026-03-27
+- **[v1.49.89](v1.49.89/00-summary.md)** — _(unnamed)_ · 2026-03-27
+- **[v1.49.90](v1.49.90/00-summary.md)** — _(unnamed)_ · 2026-03-27
+- **[v1.49.101](v1.49.101/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.102](v1.49.102/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.103](v1.49.103/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.104](v1.49.104/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.105](v1.49.105/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.106](v1.49.106/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.107](v1.49.107/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.108](v1.49.108/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.109](v1.49.109/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.110](v1.49.110/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.111](v1.49.111/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.112](v1.49.112/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.113](v1.49.113/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.114](v1.49.114/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.115](v1.49.115/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.116](v1.49.116/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.117](v1.49.117/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.118](v1.49.118/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.119](v1.49.119/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.120](v1.49.120/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.121](v1.49.121/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.122](v1.49.122/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.123](v1.49.123/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.124](v1.49.124/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.125](v1.49.125/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.126](v1.49.126/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.127](v1.49.127/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.128](v1.49.128/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.129](v1.49.129/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.130](v1.49.130/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.131](v1.49.131/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.132](v1.49.132/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.133](v1.49.133/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.134](v1.49.134/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.135](v1.49.135/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.136](v1.49.136/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.137](v1.49.137/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.138](v1.49.138/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.139](v1.49.139/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.140](v1.49.140/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.141](v1.49.141/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.142](v1.49.142/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.143](v1.49.143/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.144](v1.49.144/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.145](v1.49.145/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.146](v1.49.146/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.147](v1.49.147/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.148](v1.49.148/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.149](v1.49.149/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.150](v1.49.150/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.151](v1.49.151/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.152](v1.49.152/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.153](v1.49.153/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.154](v1.49.154/00-summary.md)** — _(unnamed)_ · 2026-03-28
+- **[v1.49.155](v1.49.155/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.156](v1.49.156/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.157](v1.49.157/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.158](v1.49.158/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.159](v1.49.159/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.160](v1.49.160/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.161](v1.49.161/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.162](v1.49.162/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.163](v1.49.163/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.164](v1.49.164/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.165](v1.49.165/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.166](v1.49.166/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.167](v1.49.167/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.168](v1.49.168/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.169](v1.49.169/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.170](v1.49.170/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.171](v1.49.171/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.172](v1.49.172/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.173](v1.49.173/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.174](v1.49.174/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.175](v1.49.175/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.176](v1.49.176/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.177](v1.49.177/00-summary.md)** — _(unnamed)_ · 2026-03-29
+- **[v1.49.178](v1.49.178/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.179](v1.49.179/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.180](v1.49.180/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.181](v1.49.181/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.182](v1.49.182/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.183](v1.49.183/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.184](v1.49.184/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.185](v1.49.185/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.186](v1.49.186/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.187](v1.49.187/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.188](v1.49.188/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.189](v1.49.189/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.190](v1.49.190/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.191](v1.49.191/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.192](v1.49.192/00-summary.md)** — _(unnamed)_ · 2026-03-30
+- **[v1.49.193](v1.49.193/00-summary.md)** — Ecosystem Alignment · 2026-03-31
+- **[v1.49.194](v1.49.194/00-summary.md)** — HEL: Helium Supply Chain & Pacific Rim Semiconductor Infrastructure · 2026-03-31
+- **[v1.49.195](v1.49.195/00-summary.md)** — Ecosystem Alignment, Helium Corridor, OOPS Analysis, OPEN Problems · 2026-03-31
+- **[v1.49.196](v1.49.196/00-summary.md)** — Degree 57: Laura Gibson + Belted Kingfisher · 2026-03-31
+- **[v1.49.197](v1.49.197/00-summary.md)** — Degree 58: Death Cab for Cutie + Wood Duck · 2026-04-01
+- **[v1.49.198](v1.49.198/00-summary.md)** — Degree 59: The Long Winters + Mallard · 2026-04-01
+- **[v1.49.199](v1.49.199/00-summary.md)** — Degree 60: Ben Gibbard (solo) + Pied-billed Grebe · 2026-04-01
+- **[v1.49.200](v1.49.200/00-summary.md)** — Degree 61: Y La Bamba + American Beaver · 2026-04-01
+- **[v1.49.201](v1.49.201/00-summary.md)** — Degree 62: Pickwick + Beaver Chewing · 2026-04-01
+- **[v1.49.202](v1.49.202/00-summary.md)** — Degree 63: Kenny Loggins + River Otter · 2026-04-01
+- **[v1.49.203](v1.49.203/00-summary.md)** — Thicc Splines Save Lives: BLN Blender User Manual · 2026-04-01
+- **[v1.49.204](v1.49.204/00-summary.md)** — Degree 64: Jesse Sykes + Mink · 2026-04-01
+- **[v1.49.205](v1.49.205/00-summary.md)** — Degree 65: Philip Aaberg + American Marten · 2026-04-01
+- **[v1.49.206](v1.49.206/00-summary.md)** — Degree 66: Neko Case + Fisher · 2026-04-01
+- **[v1.49.207](v1.49.207/00-summary.md)** — Degree 67: Chris Walla + Short-tailed Weasel · 2026-04-01
+- **[v1.49.208](v1.49.208/00-summary.md)** — Degree 68: Sam Beam (Iron & Wine) + Long-tailed Weasel · 2026-04-01
+- **[v1.49.209](v1.49.209/00-summary.md)** — Degree 69: Kris Orlowski + Striped Skunk · 2026-04-01
+- **[v1.49.210](v1.49.210/00-summary.md)** — Degree 70: Horse Feathers + Raccoon · 2026-04-01
+- **[v1.49.211](v1.49.211/00-summary.md)** — Degree 71: Phil Elverum (Mount Eerie) + Red Fox · 2026-04-01
+- **[v1.49.212](v1.49.212/00-summary.md)** — Degree 72: Briana Marela + Opossum · 2026-04-01
+- **[v1.49.213](v1.49.213/00-summary.md)** — Degree 73: LAKE + Snowshoe Hare · 2026-04-01
+- **[v1.49.214](v1.49.214/00-summary.md)** — Degree 74: Poor Moon + American Pika · 2026-04-01
+- **[v1.49.215](v1.49.215/00-summary.md)** — Degree 75: The Lonely Forest + Yellow-bellied Marmot · 2026-04-01
+- **[v1.49.216](v1.49.216/00-summary.md)** — Degree 76: Chris Pureka + Hoary Marmot · 2026-04-01
+- **[v1.49.217](v1.49.217/00-summary.md)** — Degree 77: Mree + Olympic Marmot · 2026-04-01
+- **[v1.49.218](v1.49.218/00-summary.md)** — Degree 78: Acid Tongue + Townsend's Ground Squirrel · 2026-04-01
+- **[v1.49.219](v1.49.219/00-summary.md)** — Degree 79: Jesse Marchant + Golden-mantled Ground Squirrel · 2026-04-01
+- **[v1.49.220](v1.49.220/00-summary.md)** — Degree 80: Mates of State + Douglas Squirrel · 2026-04-01
+- **[v1.49.221](v1.49.221/00-summary.md)** — Degree 81: Sara Bareilles + Eastern Fox Squirrel · 2026-04-01
+- **[v1.49.222](v1.49.222/00-summary.md)** — Degree 82: Death Cab for Cutie (Acoustic Context) + Northern Flying Squirrel · 2026-04-01
+- **[v1.49.223](v1.49.223/00-summary.md)** — Degree 83: Pearl Jam (Acoustic Context) + Deer Mouse · 2026-04-01
+- **[v1.49.224](v1.49.224/00-summary.md)** — Degree 84: Damien Jurado (Late Career) + Bushy-tailed Woodrat · 2026-04-01
+- **[v1.49.225](v1.49.225/00-summary.md)** — Degree 85: Rocky Votolato (Acoustic) + Muskrat · 2026-04-01
+- **[v1.49.226](v1.49.226/00-summary.md)** — Degree 86: The Postal Service + Pacific Treefrog Night Chorus · 2026-04-01
+- **[v1.49.227](v1.49.227/00-summary.md)** — Degree 87: Neko Case (Early Folk) + Cricket Chorus (Gryllidae) · 2026-04-01
+- **[v1.49.228](v1.49.228/00-summary.md)** — Degree 88: Kimya Dawson (Solo) + Katydid (Tettigoniidae) · 2026-04-01
+- **[v1.49.229](v1.49.229/00-summary.md)** — Degree 89: Parenthetical Girls + Cicada (Annual) (Cicadidae) · 2026-04-02
+- **[v1.49.230](v1.49.230/00-summary.md)** — Degree 90: Sky Cries Mary + Spring Peeper-Like Chorus -- THE QUARTER-MARK · 2026-04-02
+- **[v1.49.231](v1.49.231/00-summary.md)** — Degree 91: Hovercraft + Mosquito Swarm -- QUADRANT II OPENS · 2026-04-02
+- **[v1.49.232](v1.49.232/00-summary.md)** — Degree 92: Trance Mission + Bumblebee Drone -- THE CROSS-POLLINATORS · 2026-04-02
+- **[v1.49.233](v1.49.233/00-summary.md)** — Degree 93: NAVVI + Hornet Nest Buzz -- THE SHIMMER AND THE STING · 2026-04-02
+- **[v1.49.234](v1.49.234/00-summary.md)** — Degree 94: Erik Blood + Stonefly Hatch -- THE STUDIO AND THE STREAM · 2026-04-02
+- **[v1.49.235](v1.49.235/00-summary.md)** — Degree 95: ODESZA + Mayfly Emergence -- THE EUPHORIC AND THE EPHEMERAL · 2026-04-01
+- **[v1.49.236](v1.49.236/00-summary.md)** — Degree 96: STRFKR + Wood Frog -- THE PULSE AND THE FREEZE · 2026-04-01
+- **[v1.49.237](v1.49.237/00-summary.md)** — Degree 97: The Postal Service (Electronic Context) + Toad Chorus -- THE ALGORITHM AND THE PURR · 2026-04-01
+- **[v1.49.238](v1.49.238/00-summary.md)** — Degree 98: Gold Casio + Tree Cricket Song -- THE SHIMMER AND THE TRILL · 2026-04-01
+- **[v1.49.239](v1.49.239/00-summary.md)** — Degree 99: Kaina + Click Beetle -- THE SYNTHESIS AND THE SNAP · 2026-04-01
+- **[v1.49.240](v1.49.240/00-summary.md)** — Degree 100: Summer Heart + Common Raven -- THE CENTENNIAL -- THE CASCADE AND THE CRONK · 2026-04-01
+- **[v1.49.241](v1.49.241/00-summary.md)** — Degree 101: Hecuba + Common Raven Pair -- THE POST-CENTENNIAL -- THE KINETIC SURGE AND THE DUET · 2026-04-01
+- **[v1.49.242](v1.49.242/00-summary.md)** — Degree 102: Campfire OK + American Crow -- THE ORGANIC CIRCUIT AND THE CAW -- CORVIDAE TRIO · 2026-04-01
+- **[v1.49.243](v1.49.243/00-summary.md)** — Degree 103: Briana Marela (Electronic) + Steller's Jay (Raucous) -- THE LAYERED DISSOLUTION AND THE ALARM -- DOUBLE RETURN · 2026-04-01
+- **[v1.49.244](v1.49.244/00-summary.md)** — Degree 104: Lemolo (Electronic) + Gray Jay -- THE DREAM CIRCUIT AND THE SOFT WHISTLE -- CORVIDAE QUINTET · 2026-04-01
+- **[v1.49.245](v1.49.245/00-summary.md)** — Degree 105: Parenthetical Girls (Electronic) + Clark's Nutcracker -- THE THEATRICAL CIRCUIT AND THE ALPINE BROADCASTER -- CORVIDAE SEXTET · 2026-04-01
+- **[v1.49.246](v1.49.246/00-summary.md)** — Degree 106: Knife Knights (Experimental Hip-Hop) + Black-billed Magpie -- THE BEAT ARCHITECTURE AND THE OPEN-COUNTRY CORVID -- CORVIDAE SEPTET · 2026-04-01
+- **[v1.49.247](v1.49.247/00-summary.md)** — Degree 107: Chong the Nomad (production) + Acorn Woodpecker -- THE PRODUCTION ARCHITECTURE AND THE COLONIAL WOODPECKER -- PICIDAE RETURNS · 2026-04-01
+- **[v1.49.248](v1.49.248/00-summary.md)** — Degree 108: Veronica Lipgloss (Punk/Electronic) + Pileated Woodpecker wild laughing -- E=6 ON BOTH SIDES -- THE PUNK CIRCUIT AND THE PRIMAL SCREAM -- MAXIMUM ENERGY · 2026-04-01
+- **[v1.49.249](v1.49.249/00-summary.md)** — Degree 109: No-Anchor (Noise/Experimental) + Pileated Woodpecker drumming -- E=6 THREE-PEAT -- THE NOISE WALL AND THE RESONANT DRUM -- UNPRECEDENTED THREE CONSECUTIVE MAXIMUM ENERGY DEGREES · 2026-04-02
+- **[v1.49.250](v1.49.250/00-summary.md)** — Degree 110: Kinski (Krautrock/Experimental) + Hairy Woodpecker -- FIRST KRAUTROCK -- THE THREE-PEAT ENDS -- CAPITOL HILL BEGINS -- PICIDAE FOUR-STREAK · 2026-04-02
+- **[v1.49.251](v1.49.251/00-summary.md)** — Degree 111: Helms Alee (Noise/Experimental) + Downy Woodpecker -- THE AMPLIFIER FORGE AND THE SMALLEST DRUMMER -- FOURTH E=6 IN FIVE DEGREES · 2026-04-02
+- **[v1.49.252](v1.49.252/00-summary.md)** — Degree 112: 764-HERO (Indie/Electronic) + Lewis's Woodpecker -- THE ELECTRONIC PIONEERS AND THE FLYCATCHING WOODPECKER -- ENERGY DESCENT AFTER THE CORRIDOR · 2026-04-02
+- **[v1.49.253](v1.49.253/00-summary.md)** — Degree 113: Minus the Bear + White-headed Woodpecker · 2026-04-02
+- **[v1.49.254](v1.49.254/00-summary.md)** — Degree 114: Haunted Horses + Three-toed Woodpecker · 2026-04-02
+- **[v1.49.255](v1.49.255/00-summary.md)** — Degree 115: Pretty Girls Make Graves + Black-backed Woodpecker · 2026-04-02
+- **[v1.49.256](v1.49.256/00-summary.md)** — Degree 116: Pony Time + American Dipper · 2026-04-02
+- **[v1.49.257](v1.49.257/00-summary.md)** — Degree 117: Deep Sea Diver + Dipper Dunking · 2026-04-02
+- **[v1.49.258](v1.49.258/00-summary.md)** — Degree 118: Loomer + Harlequin Duck -- DOUBLE FIRST · 2026-04-02
+- **[v1.49.259](v1.49.259/00-summary.md)** — Degree 119: Hollis Resnik + Common Merganser · 2026-04-02
+- **[v1.49.260](v1.49.260/00-summary.md)** — Degree 120: Mark Lanegan + Hooded Merganser -- ONE-THIRD MARK · 2026-04-02
+- **[v1.49.261](v1.49.261/00-summary.md)** — Degree 121: Smokey Brights + Wood Duck · 2026-04-02
+- **[v1.49.262](v1.49.262/00-summary.md)** — Degree 122: Sabzi + Bufflehead · 2026-04-02
+- **[v1.49.263](v1.49.263/00-summary.md)** — Degree 123: Wellwater Conspiracy + Barrow's Goldeneye · 2026-04-02
+- **[v1.49.264](v1.49.264/00-summary.md)** — Degree 124: Horse Feathers + Common Goldeneye · 2026-04-02
+- **[v1.49.265](v1.49.265/00-summary.md)** — Degree 125: These Arms Are Snakes + Greater Scaup · 2026-04-02
+- **[v1.49.266](v1.49.266/00-summary.md)** — Degree 126: Nasty Nes Rodriguez + Canvasback · 2026-04-02
+- **[v1.49.267](v1.49.267/00-summary.md)** — Degree 127: Jonathan Poneman + Tundra Swan · 2026-04-02
+- **[v1.49.268](v1.49.268/00-summary.md)** — Degree 128: Bruce Pavitt + Trumpeter Swan · 2026-04-02
+- **[v1.49.269](v1.49.269/00-summary.md)** — Degree 129: Pat O'Day + Canada Goose · 2026-04-02
+- **[v1.49.270](v1.49.270/00-summary.md)** — Degree 130: Cheryl Waters + Cackling Goose · 2026-04-02
+- **[v1.49.271](v1.49.271/00-summary.md)** — Degree 131: John Richards + Brant · 2026-04-02
+- **[v1.49.272](v1.49.272/00-summary.md)** — Degree 132: Darek Mazzone + Greater White-fronted Goose · 2026-04-02
+- **[v1.49.273](v1.49.273/00-summary.md)** — Degree 133: Kevin Cole + Snow Goose · 2026-04-02
+- **[v1.49.274](v1.49.274/00-summary.md)** — Degree 134: DJ B-Mello + Ross's Goose · 2026-04-02
+- **[v1.49.275](v1.49.275/00-summary.md)** — Degree 135: Indica Jones + Great Horned Owl · 2026-04-02
+- **[v1.49.276](v1.49.276/00-summary.md)** — Degree 136: DJ Riz + Great Horned Owl Pair Duet · 2026-04-02
+- **[v1.49.277](v1.49.277/00-summary.md)** — Degree 137: DJ Revolution + Barred Owl · 2026-04-02
+- **[v1.49.278](v1.49.278/00-summary.md)** — Degree 138: Vitamin D + Barred Owl Caterwauling · 2026-04-02
+- **[v1.49.279](v1.49.279/00-summary.md)** — Degree 139: Jake One + Long-eared Owl · 2026-04-02
+- **[v1.49.280](v1.49.280/00-summary.md)** — Degree 140: Sabzi DJ + Short-eared Owl · 2026-04-02
+- **[v1.49.281](v1.49.281/00-summary.md)** — Degree 141: DJ Sounds + Northern Saw-whet Owl · 2026-04-02
+- **[v1.49.282](v1.49.282/00-summary.md)** — Degree 142: 206 Zulu + Western Screech-Owl · 2026-04-02
+- **[v1.49.283](v1.49.283/00-summary.md)** — Degree 143: Spaceman Scotty + Northern Pygmy-Owl · 2026-04-02
+- **[v1.49.284](v1.49.284/00-summary.md)** — Degree 144: Digable Planets + Flammulated Owl · 2026-04-02
+- **[v1.49.285](v1.49.285/00-summary.md)** — Degree 145: Common Market + Common Poorwill · 2026-04-02
+- **[v1.49.286](v1.49.286/00-summary.md)** — Degree 146: THEESatisfaction + Common Nighthawk · 2026-04-02
+- **[v1.49.287](v1.49.287/00-summary.md)** — Degree 147: Vitamin D + Vaux's Swift · 2026-04-02
+- **[v1.49.288](v1.49.288/00-summary.md)** — Degree 148: Gabriel Teodros + Black Swift · 2026-04-02
+- **[v1.49.289](v1.49.289/00-summary.md)** — Degree 149: J. Pinder + Band-tailed Pigeon · 2026-04-02
+- **[v1.49.290](v1.49.290/00-summary.md)** — Degree 150: Mr. Hill + Mourning Dove · 2026-04-02
+- **[v1.49.291](v1.49.291/00-summary.md)** — Degree 151: Sol + Eurasian Collared-Dove · 2026-04-02
+- **[v1.49.292](v1.49.292/00-summary.md)** — Degree 152: Prometheus Brown + Rock Pigeon · 2026-04-02
+- **[v1.49.293](v1.49.293/00-summary.md)** — Degree 153: Geo + Wild Turkey · 2026-04-02
+- **[v1.49.294](v1.49.294/00-summary.md)** — Degree 154: Key Losada + Blue Grouse · 2026-04-02
+- **[v1.49.295](v1.49.295/00-summary.md)** — Degree 155: The Physics + Ruffed Grouse · 2026-04-02
+- **[v1.49.296](v1.49.296/00-summary.md)** — Degree 156: Blue Scholars + Sooty Grouse · 2026-04-02
+- **[v1.49.297](v1.49.297/00-summary.md)** — Degree 157: Shabazz Palaces + Spruce Grouse · 2026-04-02
+- **[v1.49.298](v1.49.298/00-summary.md)** — Degree 158: Draze + White-tailed Ptarmigan · 2026-04-02
+- **[v1.49.299](v1.49.299/00-summary.md)** — Degree 159: Sango + California Quail · 2026-04-02
+- **[v1.49.300](v1.49.300/00-summary.md)** — Degree 160: Ryan Lewis + Mountain Quail · 2026-04-02
+- **[v1.49.301](v1.49.301/00-summary.md)** — Degree 161: Boom Bap Project + Virginia Rail · 2026-04-02
+- **[v1.49.302](v1.49.302/00-summary.md)** — Degree 162: Grieves + Sora · 2026-04-02
+- **[v1.49.303](v1.49.303/00-summary.md)** — Degree 163: Porter Ray + American Bittern · 2026-04-02
+- **[v1.49.304](v1.49.304/00-summary.md)** — Degree 164: Kung Foo Grip + American Coot · 2026-04-02
+- **[v1.49.305](v1.49.305/00-summary.md)** — Degree 165: Khingz + Sandhill Crane · 2026-04-02
+- **[v1.49.306](v1.49.306/00-summary.md)** — Degree 166: Travis Thompson + Black Oystercatcher · 2026-04-02
+- **[v1.49.307](v1.49.307/00-summary.md)** — Degree 167: ShowYouSuck + Killdeer · 2026-04-02
+- **[v1.49.308](v1.49.308/00-summary.md)** — Degree 168: Gifted Gab + Snipe · 2026-04-02
+- **[v1.49.309](v1.49.309/00-summary.md)** — Degree 169: Nacho Picasso + Dunlin Flock · 2026-04-02
+- **[v1.49.310](v1.49.310/00-summary.md)** — Degree 170: Ishmael Butler Solo + Whimbrel · 2026-04-02
+- **[v1.49.311](v1.49.311/00-summary.md)** — Degree 171: Knife Knights Return + Long-billed Curlew · 2026-04-02
+- **[v1.49.312](v1.49.312/00-summary.md)** — Degree 172: Eighty4 Fly + Marbled Godwit · 2026-04-02
+- **[v1.49.313](v1.49.313/00-summary.md)** — Degree 173: Stas THEE Boss + Greater Yellowlegs · 2026-04-02
+- **[v1.49.314](v1.49.314/00-summary.md)** — Degree 174: Grynch + Pigeon Guillemot · 2026-04-02
+- **[v1.49.315](v1.49.315/00-summary.md)** — Degree 175: DoNormaal + Rhinoceros Auklet · 2026-04-02
+- **[v1.49.316](v1.49.316/00-summary.md)** — Degree 176: Maliibu Miitch + Tufted Puffin · 2026-04-02
+- **[v1.49.317](v1.49.317/00-summary.md)** — Degree 177: Kid Sensation + Common Murre · 2026-04-02
+- **[v1.49.318](v1.49.318/00-summary.md)** — Degree 178: High Performance + Marbled Murrelet · 2026-04-02
+- **[v1.49.319](v1.49.319/00-summary.md)** — Degree 179: Sir Mix-a-Lot + Ancient Murrelet · 2026-04-02
+- **[v1.49.320](v1.49.320/00-summary.md)** — Degree 180: Macklemore + Harbor Seal · 2026-04-02
+- **[v1.49.321](v1.49.321/00-summary.md)** — The Anti-Podal Point: 180 Degrees and the Mathematics of Halfway · 2026-04-02
+- **[v1.49.322](v1.49.322/00-summary.md)** — Degree 181: Macklemore & Ryan Lewis + Harbor Seal pup · 2026-04-02
+- **[v1.49.323](v1.49.323/00-summary.md)** — Degree 182: Criminal Nation + Steller Sea Lion · 2026-04-02
+- **[v1.49.324](v1.49.324/00-summary.md)** — Degree 183: Raz Simone + California Sea Lion · 2026-04-02
+- **[v1.49.325](v1.49.325/00-summary.md)** — Degree 184: Renz + Northern Fur Seal · 2026-04-02
+- **[v1.49.326](v1.49.326/00-summary.md)** — Degree 185: Cosmic Zingaro + Sea Otter · 2026-04-02
+- **[v1.49.327](v1.49.327/00-summary.md)** — Degree 186: Erica Campbell + Dall's Porpoise · 2026-04-02
+- **[v1.49.328](v1.49.328/00-summary.md)** — Degree 187: Stas THEE Boss + Harbor Porpoise · 2026-04-02
+- **[v1.49.329](v1.49.329/00-summary.md)** — Degree 188: DoNormaal + Pacific White-Sided Dolphin · 2026-04-02
+- **[v1.49.330](v1.49.330/00-summary.md)** — Degree 189: Mudhoney + Risso's Dolphin · 2026-04-02
+- **[v1.49.331](v1.49.331/00-summary.md)** — Degree 190: Harvey Danger + Minke Whale · 2026-04-02
+- **[v1.49.332](v1.49.332/00-summary.md)** — Degree 191: The Posies + Humpback Whale song · 2026-04-02
+- **[v1.49.333](v1.49.333/00-summary.md)** — Degree 192: Young Fresh Fellows + Gray Whale blow · 2026-04-02
+- **[v1.49.334](v1.49.334/00-summary.md)** — Degree 193: Fastbacks + Gray Whale breach · 2026-04-02
+- **[v1.49.335](v1.49.335/00-summary.md)** — Degree 194: Tullycraft + Blue Whale infrasound · 2026-04-02
+- **[v1.49.336](v1.49.336/00-summary.md)** — Degree 195: Flop + Black-tailed Deer fawn · 2026-04-02
+- **[v1.49.337](v1.49.337/00-summary.md)** — Degree 196: 764-HERO + Black-tailed Deer buck · 2026-04-02
+- **[v1.49.338](v1.49.338/00-summary.md)** — Degree 197: Sunny Day Real Estate + Roosevelt Elk bugle · 2026-04-02
+- **[v1.49.339](v1.49.339/00-summary.md)** — Degree 198: Pedro the Lion + Roosevelt Elk cow call · 2026-04-02
+- **[v1.49.340](v1.49.340/00-summary.md)** — Degree 199: Modest Mouse + Roosevelt Elk rut roar · 2026-04-02
+- **[v1.49.341](v1.49.341/00-summary.md)** — Degree 200: Death Cab for Cutie + Black Bear huff · 2026-04-02
+- **[v1.49.342](v1.49.342/00-summary.md)** — Degree 201: Chastity Belt + Black Bear jaw-pop · 2026-04-02
+- **[v1.49.343](v1.49.343/00-summary.md)** — Degree 202: La Luz + Black Bear cub distress · 2026-04-02
+- **[v1.49.344](v1.49.344/00-summary.md)** — Degree 203: Tacocat + Mountain Goat bleat · 2026-04-02
+- **[v1.49.345](v1.49.345/00-summary.md)** — Degree 204: Childbirth + Mountain Goat kid · 2026-04-02
+- **[v1.49.346](v1.49.346/00-summary.md)** — Degree 205: Naked Giants + Bighorn Sheep clash · 2026-04-02
+- **[v1.49.347](v1.49.347/00-summary.md)** — Degree 206: The Black Tones + Mountain Beaver · 2026-04-02
+- **[v1.49.348](v1.49.348/00-summary.md)** — Degree 207: Wimps + Porcupine · 2026-04-02
+- **[v1.49.349](v1.49.349/00-summary.md)** — Degree 208: Pickwick + Coyote howl · 2026-04-02
+- **[v1.49.350](v1.49.350/00-summary.md)** — Degree 209: Campfire OK + Coyote pup yipping · 2026-04-02
+- **[v1.49.351](v1.49.351/00-summary.md)** — Degree 210: Telekinesis + Gray Wolf howl · 2026-04-02
+- **[v1.49.352](v1.49.352/00-summary.md)** — Degree 211: Iska Dhaaf + Red Fox bark · 2026-04-02
+- **[v1.49.353](v1.49.353/00-summary.md)** — Degree 212: Cumulus + Cougar scream · 2026-04-02
+- **[v1.49.354](v1.49.354/00-summary.md)** — Degree 213: Kinski + Cougar chirp · 2026-04-02
+- **[v1.49.355](v1.49.355/00-summary.md)** — Degree 214: Helms Alee + Bobcat yowl · 2026-04-02
+- **[v1.49.356](v1.49.356/00-summary.md)** — Degree 215: Minus the Bear + Canada Lynx · 2026-04-02
+- **[v1.49.357](v1.49.357/00-summary.md)** — Degree 216: TAAS + Wolverine · 2026-04-02
+- **[v1.49.358](v1.49.358/00-summary.md)** — Degree 217: Pretty Girls Make Graves + Grizzly Bear roar · 2026-04-02
+- **[v1.49.359](v1.49.359/00-summary.md)** — Degree 218: The Blood Brothers + Grizzly Bear jaw-pop · 2026-04-02
+- **[v1.49.360](v1.49.360/00-summary.md)** — Degree 219: Brad + American Badger · 2026-04-02
+- **[v1.49.361](v1.49.361/00-summary.md)** — Degree 220: Truly + Ringtail · 2026-04-02
+- **[v1.49.362](v1.49.362/00-summary.md)** — Degree 221: Love Battery + Bald Eagle call · 2026-04-03
+- **[v1.49.363](v1.49.363/00-summary.md)** — Degree 222: Hammerbox + Bald Eagle territorial · 2026-04-03
+- **[v1.49.364](v1.49.364/00-summary.md)** — Degree 223: Candlebox + Golden Eagle · 2026-04-03
+- **[v1.49.365](v1.49.365/00-summary.md)** — Degree 224: Mad Season + Osprey · 2026-04-03
+- **[v1.49.366](v1.49.366/00-summary.md)** — Degree 225: Temple of the Dog + Northern Goshawk · 2026-04-03
+- **[v1.49.367](v1.49.367/00-summary.md)** — Degree 226: Wellwater Conspiracy + Cooper's Hawk · 2026-04-03
+- **[v1.49.368](v1.49.368/00-summary.md)** — Degree 227: Hovercraft + Sharp-shinned Hawk · 2026-04-03
+- **[v1.49.369](v1.49.369/00-summary.md)** — Degree 228: Gas Huffer + Red-tailed Hawk · 2026-04-03
+- **[v1.49.370](v1.49.370/00-summary.md)** — Degree 229: Alcohol Funnycar + Ferruginous Hawk · 2026-04-03
+- **[v1.49.371](v1.49.371/00-summary.md)** — Degree 230: Pond + Rough-legged Hawk · 2026-04-03
+- **[v1.49.372](v1.49.372/00-summary.md)** — Degree 231: Flop + Peregrine Falcon · 2026-04-03
+- **[v1.49.373](v1.49.373/00-summary.md)** — Degree 232: Gruntruck + Prairie Falcon · 2026-04-03
+- **[v1.49.374](v1.49.374/00-summary.md)** — Degree 233: Love Battery (return) + Merlin · 2026-04-03
+- **[v1.49.375](v1.49.375/00-summary.md)** — Degree 234: Heart + American Kestrel · 2026-04-03
+- **[v1.49.376](v1.49.376/00-summary.md)** — Degree 235: Heart (hard rock) + Turkey Vulture · 2026-04-03
+- **[v1.49.377](v1.49.377/00-summary.md)** — Degree 236: Queensryche + Pacific Salmon · 2026-04-03
+- **[v1.49.378](v1.49.378/00-summary.md)** — Degree 237: Foo Fighters + Chinook Salmon · 2026-04-03
+- **[v1.49.379](v1.49.379/00-summary.md)** — Degree 238: Presidents of the USA + Coho Salmon · 2026-04-03
+- **[v1.49.380](v1.49.380/00-summary.md)** — Degree 239: The Ventures + Steelhead · 2026-04-03
+- **[v1.49.381](v1.49.381/00-summary.md)** — Degree 240: Paul Revere and the Raiders + Bull Trout · 2026-04-03
+- **[v1.49.382](v1.49.382/00-summary.md)** — Degree 241: The Sonics + Dolly Varden · 2026-04-03
+- **[v1.49.383](v1.49.383/00-summary.md)** — Degree 242: The Wailers (Tacoma) + Cutthroat Trout · 2026-04-03
+- **[v1.49.384](v1.49.384/00-summary.md)** — Degree 243: The Frantics + Pacific Lamprey · 2026-04-03
+- **[v1.49.385](v1.49.385/00-summary.md)** — Degree 244: The Kingsmen + White Sturgeon · 2026-04-03
+- **[v1.49.386](v1.49.386/00-summary.md)** — Degree 245: Jimi Hendrix + River Current Over Boulders · 2026-04-03
+- **[v1.49.387](v1.49.387/00-summary.md)** — Degree 246: Jimi Hendrix (Early) + Waterfall Snoqualmie · 2026-04-03
+- **[v1.49.388](v1.49.388/00-summary.md)** — Degree 247: Alice in Chains + Waterfall Sol Duc · 2026-04-03
+- **[v1.49.389](v1.49.389/00-summary.md)** — Degree 248: Thunderpussy + Hoh Rain on Maple · 2026-04-03
+- **[v1.49.390](v1.49.390/00-summary.md)** — Degree 249: The Black Tones + Wind Sitka Spruce · 2026-04-03
+- **[v1.49.391](v1.49.391/00-summary.md)** — Degree 250: Ayron Jones + Wind Old-Growth Fir · 2026-04-03
+- **[v1.49.392](v1.49.392/00-summary.md)** — Degree 251: Naked Giants + Pacific Rain on Water · 2026-04-03
+- **[v1.49.393](v1.49.393/00-summary.md)** — Degree 252: No-Anchor + Tidal Surge Cobble · 2026-04-03
+- **[v1.49.394](v1.49.394/00-summary.md)** — Degree 253: Helms Alee + Puget Sound Tidal Current · 2026-04-03
+- **[v1.49.395](v1.49.395/00-summary.md)** — Degree 254: Botch + Fog Horn Admiralty Inlet · 2026-04-03
+- **[v1.49.396](v1.49.396/00-summary.md)** — Degree 255: Valley of the Giants + Log Truck Vibration · 2026-04-03
+- **[v1.49.397](v1.49.397/00-summary.md)** — Degree 256: Monster Truck Thundercat + Winter Storm Surf · 2026-04-03
+- **[v1.49.398](v1.49.398/00-summary.md)** — Degree 257: Wellwater Conspiracy + Juan de Fuca Surf · 2026-04-03
+- **[v1.49.399](v1.49.399/00-summary.md)** — Degree 258: Norm Greenbaum + Olympic Wind Storm · 2026-04-03
+- **[v1.49.400](v1.49.400/00-summary.md)** — Degree 259: Ann Wilson + Thunderstorm Cascades · 2026-04-03
+- **[v1.49.401](v1.49.401/00-summary.md)** — Degree 260: Nancy Wilson + Lightning Strike Tree · 2026-04-03
+- **[v1.49.402](v1.49.402/00-summary.md)** — Degree 261: Screaming Trees + Volcanic Tremor Rainier · 2026-04-03
+- **[v1.49.403](v1.49.403/00-summary.md)** — Degree 262: Gas Huffer (return) + Lahar Simulation Osceola · 2026-04-03
+- **[v1.49.404](v1.49.404/00-summary.md)** — Degree 263: Treepeople + Earthquake P-Wave Cascadia · 2026-04-03
+- **[v1.49.405](v1.49.405/00-summary.md)** — Degree 264: Skin Yard + Submarine Canyon Infrasound · 2026-04-03
+- **[v1.49.406](v1.49.406/00-summary.md)** — Degree 265: Ten Minute Warning + Glacier Calving Rainier · 2026-04-03
+- **[v1.49.407](v1.49.407/00-summary.md)** — Degree 266: The Accused + Rockslide Cascades · 2026-04-03
+- **[v1.49.408](v1.49.408/00-summary.md)** — Degree 267: Candlebox + Mudslide Oso · 2026-04-03
+- **[v1.49.409](v1.49.409/00-summary.md)** — Degree 268: The Sonics + Pacific Wren Chorus · 2026-04-03
+- **[v1.49.410](v1.49.410/00-summary.md)** — Degree 269: Heart (Live Barracuda) + Dawn Chorus · 2026-04-03
+- **[v1.49.411](v1.49.411/00-summary.md)** — Degree 270: The Fartz + Orca S01 Pod Call · 2026-04-03
+- **[v1.49.412](v1.49.412/00-summary.md)** — Degree 271: Solger + SRKW Whistles and Clicks · 2026-04-03
+- **[v1.49.413](v1.49.413/00-summary.md)** — Degree 272: The U-Men + Transient Orca Hunt · 2026-04-03
+- **[v1.49.414](v1.49.414/00-summary.md)** — Degree 273: The Refuzors + Orca Breaching · 2026-04-03
+- **[v1.49.415](v1.49.415/00-summary.md)** — Degree 274: Vexed + Orca Spy-Hop · 2026-04-03
+- **[v1.49.416](v1.49.416/00-summary.md)** — Degree 275: Beat Happening + Orca Pec-Slap · 2026-04-03
+- **[v1.49.417](v1.49.417/00-summary.md)** — Degree 276: Bikini Kill + Orca Echolocation · 2026-04-03
+- **[v1.49.418](v1.49.418/00-summary.md)** — Degree 277: Sleater-Kinney + Orca Multi-Pod Chorus · 2026-04-03
+- **[v1.49.419](v1.49.419/00-summary.md)** — Degree 278: Unwound + Humpback Whale Breach · 2026-04-03
+- **[v1.49.420](v1.49.420/00-summary.md)** — Degree 279: Seven Year Bitch + Blue Whale 20Hz Pulse · 2026-04-03
+- **[v1.49.421](v1.49.421/00-summary.md)** — Degree 280: The Gits + Sperm Whale Click Train · 2026-04-03
+- **[v1.49.422](v1.49.422/00-summary.md)** — Degree 281: Wimps + Dall's Porpoise · 2026-04-03
+- **[v1.49.423](v1.49.423/00-summary.md)** — Degree 282: Tacocat + Pacific White-Sided Dolphin · 2026-04-03
+- **[v1.49.424](v1.49.424/00-summary.md)** — Degree 283: Childbirth + Steller Sea Lion Bull Roar · 2026-04-03
+- **[v1.49.425](v1.49.425/00-summary.md)** — Degree 284: Veronica Lipgloss + California Sea Lion Dock Chorus · 2026-04-03
+- **[v1.49.426](v1.49.426/00-summary.md)** — Degree 285: The Fastbacks + Elephant Seal Bull Roar · 2026-04-03
+- **[v1.49.427](v1.49.427/00-summary.md)** — Degree 286: Dead Kennedys (influence) + Storm Petrel Colony · 2026-04-03
+- **[v1.49.428](v1.49.428/00-summary.md)** — Degree 287: Black Flag (influence) + Brandt's Cormorant · 2026-04-03
+- **[v1.49.429](v1.49.429/00-summary.md)** — Degree 288: Blood Brothers (HC) + Double-crested Cormorant · 2026-04-03
+- **[v1.49.430](v1.49.430/00-summary.md)** — Degree 289: Botch (return) + Glaucous-winged Gull · 2026-04-03
+- **[v1.49.431](v1.49.431/00-summary.md)** — Degree 290: These Arms Are Snakes + Herring Gull Alarm · 2026-04-03
+- **[v1.49.432](v1.49.432/00-summary.md)** — Degree 291: Alcohol Funnycar (return) + Western Gull Colony · 2026-04-03
+- **[v1.49.433](v1.49.433/00-summary.md)** — Degree 292: Gas Huffer (return) + Common Tern Colony · 2026-04-03
+- **[v1.49.434](v1.49.434/00-summary.md)** — Degree 293: Swallow + Caspian Tern · 2026-04-03
+- **[v1.49.435](v1.49.435/00-summary.md)** — Degree 294: Green River + Tufted Puffin · 2026-04-03
+- **[v1.49.436](v1.49.436/00-summary.md)** — Degree 295: Malfunkshun + Rhinoceros Auklet · 2026-04-03
+- **[v1.49.437](v1.49.437/00-summary.md)** — Degree 296: Mother Love Bone + Peregrine Stoop · 2026-04-03
+- **[v1.49.438](v1.49.438/00-summary.md)** — Degree 297: Skin Yard (return) + Bald Eagle Combat · 2026-04-03
+- **[v1.49.439](v1.49.439/00-summary.md)** — Degree 298: Treepeople (return) + Northern Goshawk Full Alarm · 2026-04-03
+- **[v1.49.440](v1.49.440/00-summary.md)** — Degree 299: Love Battery (return) + Great Horned Owl War · 2026-04-03
+- **[v1.49.441](v1.49.441/00-summary.md)** — Degree 300: Pond (return) + Pileated Woodpecker Drum · 2026-04-03
+- **[v1.49.442](v1.49.442/00-summary.md)** — Degree 301: Hovercraft + Roosevelt Elk Bugle · 2026-04-03
+- **[v1.49.443](v1.49.443/00-summary.md)** — Degree 302: Truly + Cougar Scream · 2026-04-03
+- **[v1.49.444](v1.49.444/00-summary.md)** — Degree 303: Brad + Gray Wolf Pack Howl · 2026-04-03
+- **[v1.49.445](v1.49.445/00-summary.md)** — Degree 304: Hammerbox + Grizzly Bear Charge · 2026-04-03
+- **[v1.49.446](v1.49.446/00-summary.md)** — Degree 305: Mad Season + Black Bear Tree-Shaking · 2026-04-03
+- **[v1.49.447](v1.49.447/00-summary.md)** — Degree 306: Love Battery (return) + Steller Sea Lion Battle · 2026-04-03
+- **[v1.49.448](v1.49.448/00-summary.md)** — Degree 307: Screaming Trees (return) + Salmon Run River Wall · 2026-04-03
+- **[v1.49.449](v1.49.449/00-summary.md)** — Degree 308: Melvins + Marten Scream · 2026-04-03
+- **[v1.49.450](v1.49.450/00-summary.md)** — Degree 309: TAD + Great Horned Owl Pair · 2026-04-03
+- **[v1.49.451](v1.49.451/00-summary.md)** — Degree 310: Mudhoney + Dawn Chorus Storm · 2026-04-03
+- **[v1.49.452](v1.49.452/00-summary.md)** — Degree 311: Nirvana + Orca Greeting Ceremony · 2026-04-03
+- **[v1.49.453](v1.49.453/00-summary.md)** — Degree 312: Soundgarden + Winter Storm Surge · 2026-04-03
+- **[v1.49.454](v1.49.454/00-summary.md)** — Degree 313: Alice in Chains + Cougar-Wolf Encounter · 2026-04-03
+- **[v1.49.455](v1.49.455/00-summary.md)** — Degree 314: Pearl Jam + Elk Herd Full Bugle · 2026-04-03
+- **[v1.49.456](v1.49.456/00-summary.md)** — Degree 315: Foo Fighters + Varied Thrush · 2026-04-03
+- **[v1.49.457](v1.49.457/00-summary.md)** — Degree 316: Gruntruck + Steller Sea Lion Apex · 2026-04-03
+- **[v1.49.458](v1.49.458/00-summary.md)** — Degree 317: Temple of the Dog + Humpback-Orca Overlap · 2026-04-03
+- **[v1.49.459](v1.49.459/00-summary.md)** — Degree 318: Candlebox + Cascadia Subduction Current · 2026-04-03
+- **[v1.49.460](v1.49.460/00-summary.md)** — Degree 319: Hammerbox + Red-tailed Hawk Scream · 2026-04-03
+- **[v1.49.461](v1.49.461/00-summary.md)** — Degree 320: Alcohol Funnycar + Raven Complex Vocalizing · 2026-04-03
+- **[v1.49.462](v1.49.462/00-summary.md)** — Degree 321: Gas Huffer + Night Chorus · 2026-04-03
+- **[v1.49.463](v1.49.463/00-summary.md)** — Degree 322: Pond + Cascade Rock Avalanche · 2026-04-03
+- **[v1.49.464](v1.49.464/00-summary.md)** — Degree 323: Ten Minute Warning + Puget Sound Tidal Bore · 2026-04-03
+- **[v1.49.465](v1.49.465/00-summary.md)** — Degree 324: Swallow + Hoh Rainforest Winter Storm All Layers · 2026-04-03
+- **[v1.49.466](v1.49.466/00-summary.md)** — Degree 325: Love Battery + Salmon-Bear-Eagle Convergence · 2026-04-03
+- **[v1.49.467](v1.49.467/00-summary.md)** — Degree 326: Truly + Douglas Fir Crown Gale · 2026-04-03
+- **[v1.49.468](v1.49.468/00-summary.md)** — Degree 327: Brad + Rainier Wind Above Treeline · 2026-04-03
+- **[v1.49.469](v1.49.469/00-summary.md)** — Degree 328: Seven Year Bitch + Night Predator Chorus GHO+Coyote · 2026-04-03
+- **[v1.49.470](v1.49.470/00-summary.md)** — Degree 329: The Accused + Stonefly+Caddisfly Hatch · 2026-04-03
+- **[v1.49.471](v1.49.471/00-summary.md)** — Degree 330: Queensryche + Trumpeter Swan+Sandhill Crane · 2026-04-03
+- **[v1.49.472](v1.49.472/00-summary.md)** — Degree 331: Helms Alee + Orca Echolocation Full · 2026-04-03
+- **[v1.49.473](v1.49.473/00-summary.md)** — Degree 332: Botch + Polyrhythm Woodpecker+River+Frog · 2026-04-03
+- **[v1.49.474](v1.49.474/00-summary.md)** — Degree 333: TAAS + Pacific Storm Full Spectrum · 2026-04-03
+- **[v1.49.475](v1.49.475/00-summary.md)** — Degree 334: Melvins + Whale+Volcano Infrasonic · 2026-04-03
+- **[v1.49.476](v1.49.476/00-summary.md)** — Degree 335: Soundgarden + Hurricane Ridge Wind · 2026-04-03
+- **[v1.49.477](v1.49.477/00-summary.md)** — Degree 336: Alice in Chains + Wolf Howl+Thunder · 2026-04-03
+- **[v1.49.478](v1.49.478/00-summary.md)** — Degree 337: TAD + Grizzly+Waterfall+Storm · 2026-04-03
+- **[v1.49.479](v1.49.479/00-summary.md)** — Degree 338: Skin Yard + Old-Growth Windstorm · 2026-04-03
+- **[v1.49.480](v1.49.480/00-summary.md)** — Degree 339: Green River + Snowmelt Flood Surge · 2026-04-03
+- **[v1.49.481](v1.49.481/00-summary.md)** — Degree 340: Nirvana + Orca Breach Cascade · 2026-04-03
+- **[v1.49.482](v1.49.482/00-summary.md)** — Degree 341: Pearl Jam (heavy) + Elk+Storm+Eagle · 2026-04-03
+- **[v1.49.483](v1.49.483/00-summary.md)** — Degree 342: Gruntruck + Sea Lion Colony Storm · 2026-04-03
+- **[v1.49.484](v1.49.484/00-summary.md)** — Degree 343: Blood Brothers + Peregrine Through Tern Colony · 2026-04-03
+- **[v1.49.485](v1.49.485/00-summary.md)** — Degree 344: Botch (peak) + Multi-Species Polyrhythmic Apex · 2026-04-03
+- **[v1.49.486](v1.49.486/00-summary.md)** — Degree 345: Melvins (peak sludge) + Full Pacific Infrasound · 2026-04-03
+- **[v1.49.487](v1.49.487/00-summary.md)** — Degree 346: Soundgarden Superunknown + Cascades Full Storm · 2026-04-03
+- **[v1.49.488](v1.49.488/00-summary.md)** — Degree 347: Alice in Chains Dirt + Cougar+Wolf+Bear Convergence · 2026-04-03
+- **[v1.49.489](v1.49.489/00-summary.md)** — Degree 348: Nirvana Nevermind + Full SRKW Pod Reunion · 2026-04-03
+- **[v1.49.490](v1.49.490/00-summary.md)** — Degree 349: Pearl Jam Ten + Elk Rut+Storm+Dawn Chorus · 2026-04-03
+- **[v1.49.491](v1.49.491/00-summary.md)** — Degree 350: TAD (peak intensity) + Cascades Full Avalanche · 2026-04-03
+- **[v1.49.492](v1.49.492/00-summary.md)** — Degree 351: The Accused (peak crossover) + Insect+Bird+Rain Maximum · 2026-04-03
+- **[v1.49.493](v1.49.493/00-summary.md)** — Degree 352: Botch (We Are the Romans) + River+Percussion+Wind Geological · 2026-04-03
+- **[v1.49.494](v1.49.494/00-summary.md)** — Degree 353: These Arms Are Snakes (peak) + Mixed Owl Chorus Full Night · 2026-04-03
+- **[v1.49.495](v1.49.495/00-summary.md)** — Degree 354: Blood Brothers (peak) + Orca Breach+Bird Colony Chaos · 2026-04-03
+- **[v1.49.496](v1.49.496/00-summary.md)** — Degree 355: Solger (peak hardcore) + Stonefly Emergence Full River · 2026-04-03
+- **[v1.49.497](v1.49.497/00-summary.md)** — Degree 356: The Fartz (peak hardcore) + Pacific Wren Storm-Chorus Max · 2026-04-03
+- **[v1.49.498](v1.49.498/00-summary.md)** — Degree 357: Bikini Kill + Orca Female-Led Hunt · 2026-04-03
+- **[v1.49.499](v1.49.499/00-summary.md)** — Degree 358: Sleater-Kinney Dig Me Out + All-Species Dawn Chorus · 2026-04-03
+- **[v1.49.500](v1.49.500/00-summary.md)** — Degree 359: Unwound Leaves Turn Inside You + Puget Sound in Silence · 2026-04-03
+- **[v1.49.501](v1.49.501/00-summary.md)** — Degree 0: The Paired Engine Begins · 2026-04-04
+- **[v1.49.502](v1.49.502/00-summary.md)** — Degree 1: Pioneer Signal · 2026-04-04
+- **[v1.49.503](v1.49.503/00-summary.md)** — Degree 2: The Infrastructure Builder · 2026-04-04
+- **[v1.49.504](v1.49.504/00-summary.md)** — Degree 3: The Meaning-Maker · 2026-04-04
+- **[v1.49.505](v1.49.505/00-summary.md)** — Degree 4: The Indicator Species · 2026-04-04
+- **[v1.49.506](v1.49.506/00-summary.md)** — Degree 5: Escape Velocity · 2026-04-04
+- **[v1.49.507](v1.49.507/00-summary.md)** — Degree 6: The Erasure and the Question · 2026-04-04
+- **[v1.49.508](v1.49.508/00-summary.md)** — Degree 7: The Harmonic Series · 2026-04-04
+- **[v1.49.509](v1.49.509/00-summary.md)** — Degree 8: The Threshold of Perception · 2026-04-04
+- **[v1.49.510](v1.49.510/00-summary.md)** — Degree 9: The Confirmation · 2026-04-04
+- **[v1.49.511](v1.49.511/00-summary.md)** — Degree 10: The Noise Floor · 2026-04-04
+- **[v1.49.512](v1.49.512/00-summary.md)** — Degree 11: The Edge · 2026-04-05
+- **[v1.49.513](v1.49.513/00-summary.md)** — Degree 12: The Prodigal and the Irruption · 2026-04-05
+- **[v1.49.514](v1.49.514/00-summary.md)** — Degree 13: The Long Call · 2026-04-05
+- **[v1.49.515](v1.49.515/00-summary.md)** — Degree 14: The Reflector · 2026-04-05
+- **[v1.49.516](v1.49.516/00-summary.md)** — Degree 15: The Weather Eye · 2026-04-05
+- **[v1.49.517](v1.49.517/00-summary.md)** — Degree 16: Four Inches · 2026-04-05
+- **[v1.49.518](v1.49.518/00-summary.md)** — Degree 17: The Test Subject · 2026-04-05
+- **[v1.49.519](v1.49.519/00-summary.md)** — Degree 18: The Ascending Spiral · 2026-04-05
+- **[v1.49.520](v1.49.520/00-summary.md)** — Degree 19: The Leap · 2026-04-05
+- **[v1.49.521](v1.49.521/00-summary.md)** — Degree 20: The Bell That Sank · 2026-04-05
+- **[v1.49.522](v1.49.522/00-summary.md)** — Degree 21: Godspeed · 2026-04-05
+- **[v1.49.523](v1.49.523/00-summary.md)** — Degree 22: Luminescence · 2026-04-05
+- **[v1.49.524](v1.49.524/00-summary.md)** — Degree 23: The Precision Flight · 2026-04-05
+- **[v1.49.525](v1.49.525/00-summary.md)** — Degree 24: Faith 7 · 2026-04-05
+- **[v1.49.526](v1.49.526/00-summary.md)** — Degree 25: The Archetype · 2026-04-05
+- **[v1.49.527](v1.49.527/00-summary.md)** — Degree 26: The Second Failure · 2026-04-05
+- **[v1.49.528](v1.49.528/00-summary.md)** — Degree 27: The Near Miss · 2026-04-05
+- **[v1.49.529](v1.49.529/00-summary.md)** — Degree 28: Impact Without Data · 2026-04-05
+- **[v1.49.530](v1.49.530/00-summary.md)** — Degree 29: The Rough Edge · 2026-04-05
+- **[v1.49.531](v1.49.531/00-summary.md)** — Degree 30: The Genius · 2026-04-05
+- **[v1.49.532](v1.49.532/00-summary.md)** — Degree 31: First Interplanetary · 2026-04-05
+- **[v1.49.533](v1.49.533/00-summary.md)** — Degree 32: Cameras Failed · 2026-04-05
+- **[v1.49.534](v1.49.534/00-summary.md)** — Degree 33: The Photographs · 2026-04-05
+- **[v1.49.535](v1.49.535/00-summary.md)** — Degree 34: Mars Begins · 2026-04-05
+- **[v1.49.536](v1.49.536/00-summary.md)** — Degree 35: First Images of Mars · 2026-04-05
+- **[v1.49.537](v1.49.537/00-summary.md)** — Degree 36: Hendrix · 2026-04-05
+- **[v1.49.538](v1.49.538/00-summary.md)** — Degree 37: The Final Ranger · 2026-04-05
+- **[v1.49.539](v1.49.539/00-summary.md)** — Degree 38: Gemini Begins · 2026-04-05
+- **[v1.49.540](v1.49.540/00-summary.md)** — Degree 39: The Spacewalk · 2026-04-05
+- **[v1.49.541](v1.49.541/00-summary.md)** — Degree 40: Eight Days or Bust · 2026-04-05
+- **[v1.49.542](v1.49.542/00-summary.md)** — Degree 41: Fourteen Days in a Volkswagen · 2026-04-05
+- **[v1.49.543](v1.49.543/00-summary.md)** — Degree 42: The First Rendezvous · 2026-04-05
+- **[v1.49.544](v1.49.544/00-summary.md)** — Degree 43: Thirty-Five Years of Listening · 2026-04-05
+- **[v1.49.545](v1.49.545/00-summary.md)** — Degree 44: The Roll That Made an Astronaut · 2026-04-05
+- **[v1.49.546](v1.49.546/00-summary.md)** — Degree 45: Soft Landing · 2026-04-05
+- **[v1.49.547](v1.49.547/00-summary.md)** — Degree 46: The Angry Alligator · 2026-04-05
+- **[v1.49.548](v1.49.548/00-summary.md)** — Degree 47: The Darkroom in Space · 2026-04-05
+- **[v1.49.549](v1.49.549/00-summary.md)** — Artemis II: The Space Between the Moon and the Earth · 2026-04-14
+- **[v1.49.550](v1.49.550/00-summary.md)** — Platform Alignment Milestone · 2026-04-15
+- **[v1.49.551](v1.49.551/00-summary.md)** — Cartridge Tarball Fix · 2026-04-15
+- **[v1.49.552](v1.49.552/00-summary.md)** — Degree 48: The Quiet Retrieval · 2026-04-15
+- **[v1.49.553](v1.49.553/00-summary.md)** — Degree 49: The First Revolution · 2026-04-15
+- **[v1.49.554](v1.49.554/00-summary.md)** — Degree 50: The Midcourse Correction · 2026-04-15
+- **[v1.49.555](v1.49.555/00-summary.md)** — Degree 51: The Fix · 2026-04-15
+- **[v1.49.556](v1.49.556/00-summary.md)** — Degree 52: The Complete Picture · 2026-04-15
+- **[v1.49.557](v1.49.557/00-summary.md)** — Degree 53: The Last Gemini · 2026-04-15
+- **[v1.49.558](v1.49.558/00-summary.md)** — Degree 54: In Memoriam -- Tough and Competent · 2026-04-16
+- **[v1.49.559](v1.49.559/00-summary.md)** — Degree 55: The Unmanned Work Continues · 2026-04-16
