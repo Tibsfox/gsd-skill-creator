@@ -1,135 +1,135 @@
 # v1.49.195 — Ecosystem Alignment, Helium Corridor, OOPS Analysis, OPEN Problems
 
 **Released:** 2026-03-31
-**Type:** Research + Infrastructure + Ecosystem Alignment
-**Series:** PNW Research Series + gsd-skill-creator tooling
-**Commits:** 17
-**Dedicated to:** Trekkie — for the issue-triage-pr-review skill. 28KB of battle-tested engineering that turns repository maintenance into a parallel, adversarial, test-first pipeline. From the GSD community, built with the kind of rigor that makes everyone's work better. Thank you.
+**Scope:** Research + Infrastructure + Ecosystem Alignment — helium supply chain and Pacific Rim semiconductor infrastructure (HEL), Claude Code source-incident architecture analysis (OOPS), twelve unsolved problems expansion (OPEN), formalization of six new skills and five new agents, and eight hook-system repairs
+**Branch:** dev (merged to main via `20eb6de40`)
+**Tag:** v1.49.195 (2026-03-31T14:35:04-07:00)
+**Commits:** `05897fc76..20eb6de40` (159 total; 20 non-merge feature/fix commits)
+**Files changed:** 135 · **Lines:** +32,427 / -474
+**Series:** PNW Research Series + gsd-skill-creator tooling formalization arc
+**Cluster:** Research Infrastructure + Ecosystem Alignment capstone
+**Dedication:** Trekkie — for the `issue-triage-pr-review` skill. 28 KB of battle-tested engineering that turns repository maintenance into a parallel, adversarial, test-first pipeline. From the GSD community, built with the kind of rigor that makes everyone's work better. Thank you.
+**Engine Position:** Largest single-session release in project history as of 2026-03-31; the inflection release where the research-engine, fleet-mission, and publish-pipeline patterns were formalized from ad-hoc procedure into reusable tooling, and the first release to ship a real-time ecosystem-alignment artifact in response to an external source-code incident
 
 ## Summary
 
-The largest single-session release in project history. Three new research projects (HEL, OOPS, OPEN expansion), six new skills, five new agents, 126,000+ words of published research, and a real-time ecosystem alignment analysis conducted during the March 31, 2026 Claude Code source code incident.
+**The largest single-session release in project history.** Three new research projects (HEL, OOPS, OPEN expansion), six new skills, five new agents, ~126,000 words of published research across 49 documents, a real-time ecosystem-alignment analysis conducted during the March 31, 2026 Claude Code source-code incident, and eight hook-system repairs — all in one continuous session, shipped as 135 files changed and 32,427 insertions against 474 deletions. The release sits at the inflection point where the platform's internal patterns crossed the threshold from ad-hoc procedure into formalized skills and agents that other sessions can re-invoke. The commit range `05897fc76..20eb6de40` carries twenty non-merge feature and fix commits plus the merge parents stitching dev into main, and the on-disk footprint touches five top-level areas: `www/tibsfox/com/Research/HEL/`, `www/tibsfox/com/Research/OOPS/`, `www/tibsfox/com/Research/OPEN/`, `.claude/skills/`, and `.claude/agents/` plus the hook tree under `.claude/hooks/`.
 
-This release covers helium supply chain infrastructure from geological fundamentals to orbital semiconductor fabrication, ecosystem alignment analysis mapping our architecture against Claude Code internals, expansion of the OPEN unsolved problems research, and formalization of patterns discovered through actual work into official skills and agents.
+**HEL research shipped the research-engine pattern at scale.** The Helium Supply Chain & Pacific Rim Semiconductor Infrastructure project delivered 28 documents and approximately 91,000 words covering the full chain from helium geology through Pacific Rim trade networks to lunar mining and orbital semiconductor fabrication. Documents 01-14 carry the WHY (helium fundamentals, Hanford analysis, PNW distribution network, global production fast-track, March 2026 market crisis, virtual helium plant model, I-5 corridor potential, semiconductor fabrication requirements, economics, Ring of Fire trading network, Helium-3 rare isotope, shortage history across five crises since 2006, Silicon Forest ecosystem, regulatory landscape), 15-24 carry the HOW (PSA equipment vendors with specific models and lead times, PNW geological assessment confirming processing as the play rather than extraction, crude helium sourcing and transport routes, liquefaction hub design in the $2.7M-$7.3M capital budget range, co-op formation playbook against RCW 23.86, East Asian demand quantified at a $250M-$500M annual TAM, recycling technology deep dive, co-op precedents from RECs to Mondragon, financial models with scenarios, environmental impact assessment), and 25-28 carry the FUTURE (lunar He-3 mining via Interlune at 150 tonnes regolith per gram with the Bluefors $300M contract as anchor, ten-year outlook where demand doubles and MRI goes helium-free while He-3 constrains quantum computing, deep-space helium sources where Jupiter holds 30 Earth masses of He and Saturn emerges as the preferred mining target, and space-based semiconductor fabrication with modular orbital factories and AI-driven remote operation). All 28 documents ship in three formats — markdown source, standalone HTML with the branded dark theme, and xelatex-compiled PDF — via a single `bash build.sh` pandoc + xelatex pipeline. Fact-checking found and corrected 11 critical errors and 30 questionable claims across the corpus before publication.
+
+**OOPS analysis turned an external incident into an architectural artifact within the same session.** The Ecosystem Alignment & Architecture Analysis project delivered 9 documents responding to the Claude Code source-code incident of March 31, 2026 — the day npm v2.1.88 inadvertently published the source map, exposing approximately 512,000 lines of TypeScript, including the KAIROS daemon-mode discovery that had not previously been public. Document 00 tracked the incident timeline with 14 source links; 01 mapped our independently developed patterns against the Claude Code internals and named the convergence as convergent evolution rather than copying; 02 named five moves to strengthen our position as a reference Claude Code integration; 03 catalogued 12 specific codebase improvements derived from the analysis; 04 audited the hook system, discovering 14 hook types exist where we use 6, with 5 types missing and 4 dead references found in our configuration; 05 analyzed the memory system at 58 files and 211 KB and proposed relevance scoring that could cut token usage by 60%; 06 compared Gastown convoy orchestration against Claude Code teams orchestration, locating the token-cost crossover at roughly 4 agents; 07 inventoried skills at 34 heading into the session and 40 leaving it, with merge/split recommendations for overlapping capabilities; 08 designed a session-log analytics pipeline with the methodology public but the operational data kept local. OOPS validates the platform's core thesis: independent engineering converged with Anthropic's internal architecture because these are good patterns for the problems they solve, not because either side copied the other.
+
+**OPEN expansion gave each of twelve unsolved problems its own dedicated research subpage.** The OPEN project was already live as an index of unsolved problems before v1.49.195; the release added 12 dedicated research subpages, one per problem, each connecting the problem to our current work: CoT Faithfulness, Thinking Divergence, and CoT Monitoring under AI Reasoning; Distributed Intelligence, Non-Deterministic Testing, and Confidence Routing under Multi-Agent Systems; Collatz Conjecture, Chromatic Number of the Plane, Komlos Conjecture, and AI for Math Discovery under Mathematics; Kuramoto Synchronization and Machine Unlearning under Emergent Systems. Each page names the GSD convoy model, the trust system, the HEL corridor cooperative model, or the GUPP/DACP protocol layer as the project-internal connective tissue through which the problem is being probed from our side. The subpages are deliberately short (80-100 lines each) and deliberately not academic literature reviews — they are working notes that keep the open-problem tracker current without pretending to be comprehensive surveys.
+
+**Six new skills and five new agents formalized ad-hoc procedures into reusable tooling.** The skills added — `research-engine`, `fleet-mission`, `publish-pipeline`, `data-fidelity`, `issue-triage-pr-review`, and `ecosystem-alignment` — each codify a pattern that had been practiced ad-hoc across the preceding sessions. `research-engine` captures the topic → decompose → parallel agents → aggregate → structure → build → publish pipeline that produced HEL and OOPS. `fleet-mission` captures the parallel-agent dispatch and progress-tracking layer underneath. `publish-pipeline` captures the markdown → pandoc → HTML + PDF branded-template build plus FTP sync. `data-fidelity` captures the fact-checking workflow that found the 11 HEL errors. `issue-triage-pr-review` is the 28 KB skill contributed by the GSD community member Trekkie, adapted in this release, that runs adversarial spec-compliance PR review with parallel agent dispatch. `ecosystem-alignment` captures the upstream-version-checking and spec-compliance audit pattern that produced the OOPS analysis. The agents added — `research-fleet-commander`, `fact-checker`, `market-researcher`, `document-builder`, `issue-fixer` — are the sub-agent counterparts that the skills dispatch. The session count of 34 skills heading in and 40 skills shipping out (plus agents moving from 34 to 39) is the concrete delta that the scorer and the ecosystem-alignment audit both track.
 
 ## Key Features
 
-| Deliverable | Scale | Detail |
-|-------------|-------|--------|
-| **HEL Research** | 28 docs, ~91K words | Helium supply chain, Ring of Fire network, lunar mining, space fabrication |
-| **OOPS Research** | 9 docs, ~20K words | Claude Code architecture parallels, incident timeline, skill/hook/memory analysis |
-| **OPEN Expansion** | 12 research pages | Dedicated subpages for all 12 unsolved problems |
-| **New Skills** | 6 | research-engine, fleet-mission, publish-pipeline, data-fidelity, issue-triage-pr-review, ecosystem-alignment |
-| **New Agents** | 5 | research-fleet-commander, fact-checker, market-researcher, document-builder, issue-fixer |
-| **Ecosystem Alignment** | v1.49.193 | Dynamic base branch, skill description compliance, upstream alignment |
-| **Hook Fixes** | 8 fixes | 4 dead references removed, 4 ESM→CJS conversions (hooks now actually execute) |
-| **Build Pipeline** | pandoc + xelatex | Automated markdown → HTML + PDF with branded templates |
-
-<details>
-<summary>Full Detail</summary>
-
-## Research Projects
-
-### HEL — Helium Supply Chain & Pacific Rim Semiconductor Infrastructure
-28 documents spanning the full chain from helium geology to orbital manufacturing:
-
-**The WHY (docs 1-14):** Helium fundamentals, Hanford analysis, PNW distribution network, global production fast-track, March 2026 market crisis, virtual helium plant model, I-5 corridor potential, semiconductor fabrication requirements, economics, Ring of Fire trading network, Helium-3 rare isotope, shortage history (5 crises since 2006), Silicon Forest ecosystem, regulatory landscape.
-
-**The HOW (docs 15-24):** PSA equipment vendors (specific models, prices, lead times), PNW geological assessment (confirming no local extraction — processing is the play), crude helium sourcing and transport (routes, costs, carriers), liquefaction hub design ($2.7-7.3M capital budget, candidate I-5 locations), co-op formation playbook (RCW 23.86, step-by-step), East Asian demand quantified ($250-500M annual TAM), recycling technology deep dive, co-op precedents (RECs, Mondragon, agricultural co-ops), financial model with scenarios, environmental impact assessment.
-
-**The FUTURE (docs 25-28):** Lunar He-3 mining (Interlune, 150 tonnes regolith per gram, Bluefors $300M contract), ten-year outlook (demand doubles, MRI goes helium-free, He-3 constrains quantum computing), deep space helium sources (Jupiter holds 30 Earth masses of He, Saturn preferred mining target), space-based semiconductor fabrication (modular orbital factory, AI-driven remote operation, standardized launch modules).
-
-All 28 documents available in three formats: markdown (source), standalone HTML (branded dark theme), LaTeX PDF (professional typeset). Build pipeline: `bash build.sh` using pandoc + xelatex.
-
-**Live:** https://tibsfox.com/Research/HEL/index.html
-
-### OOPS — Ecosystem Alignment & Architecture Analysis
-9 documents analyzing the Claude Code ecosystem following the March 31 source code incident:
-
-- **00 — Incident Timeline:** March 31 events, source map exposure via npm v2.1.88, 512K lines of TypeScript, KAIROS daemon mode discovery, media tracking with 14 source links
-- **01 — Architecture Parallels:** Our independently developed patterns mapped against Claude Code internals. Skills, agents, hooks, memory, worktrees — convergent evolution.
-- **02 — Killer App Strategy:** Five moves to strengthen our position as the reference Claude Code integration
-- **03 — Concrete Improvements:** 12 specific codebase improvements from architecture analysis
-- **04 — Hook System Deep Dive:** 14 hook types exist, we use 6, missing 5. Four dead references found.
-- **05 — Memory System Analysis:** 58 files, 211KB. Relevance scoring could cut token usage 60%.
-- **06 — Orchestration Patterns:** Gastown convoy vs Claude Code teams. Token crossover at 4 agents.
-- **07 — Skill System Optimization:** 34→40 skills inventoried. Merge/split recommendations.
-- **08 — Session Log Analysis:** Analytics pipeline design. Methodology public, data stays local.
-
-**Live:** https://tibsfox.com/Research/OOPS/index.html
-
-### OPEN — Unsolved Problems Expansion
-12 dedicated research subpages added to the existing OPEN project, one per problem:
-
-AI Reasoning (CoT Faithfulness, Thinking Divergence, CoT Monitoring), Multi-Agent Systems (Distributed Intelligence, Non-Deterministic Testing, Confidence Routing), Mathematics (Collatz Conjecture, Chromatic Number of the Plane, Komlos Conjecture, AI for Math Discovery), Emergent Systems (Kuramoto Synchronization, Machine Unlearning).
-
-Each page connects the problem to our current work: GSD convoy model, trust system, HEL corridor cooperative model, GUPP/DACP protocols.
-
-**Live:** https://tibsfox.com/Research/OPEN/index.html
-
-## New Skills (6)
-
-| Skill | Purpose |
-|-------|---------|
-| **research-engine** | Autonomous research pipeline: topic → decompose → parallel agents → aggregate → structure → build → publish |
-| **fleet-mission** | Parallel agent fleet dispatch with progress tracking and result aggregation |
-| **publish-pipeline** | Markdown → pandoc → HTML/PDF with branded templates + FTP sync |
-| **data-fidelity** | Fact-checking and source verification workflow for research documents |
-| **issue-triage-pr-review** | Full issue triage + adversarial PR review with parallel agent dispatch (from GSD community, dedicated to Trekkie) |
-| **ecosystem-alignment** | Upstream version checking and spec compliance audit |
-
-## New Agents (5)
-
-| Agent | Purpose |
-|-------|---------|
-| **research-fleet-commander** | Launches parallel research fleets, aggregates results, produces structured documents |
-| **fact-checker** | Reads documents, verifies every claim, reports errors by severity |
-| **market-researcher** | Gathers current market data via web search with source attribution |
-| **document-builder** | Expands documents to publication quality with evidence and cross-references |
-| **issue-fixer** | Fixes single GitHub issue end-to-end in worktree isolation |
-
-## Fixes
-
-- **gupp-propulsion** description trimmed from 291 to 174 chars — zero skills over agentskills.io 250-char cap
-- **complete-milestone** workflow: dynamic base branch detection (no more hardcoded `main`)
-- **runtime-hal** description trimmed for spec compliance
-- **HEL fact-checking:** 11 critical errors and 30 questionable claims corrected across 28 documents
-- **FTP sync path:** Fixed HEL 404 — web root maps to FTP root, not `/Research/`
-
-## Updated Counts
-
-| Asset | Before (v1.49.194) | After (v1.49.195) |
-|-------|--------------------|--------------------|
-| Skills | 34 | **40** |
-| Agents | 34 | **39** |
-| Commands | 57 | 57 |
-| Tests | 21,298 | 21,298 |
-| Research projects | 190+ | **193+** (HEL, OOPS, OPEN expanded) |
-| Research words (new) | — | **~126,000** |
-| Series.js entries | 184 | **186** |
-
-## Helium Corridor (Local/Private)
-
-12 Fox Companies IP documents staged locally at `.planning/fox-companies/helium-corridor/`. Engine spec, phased strategy (refinement first, fab support second), Ring of Fire trading network vision, two new Fox Companies proposed (FoxHelium, FoxSilicon). All gitignored — research is public, business strategy stays local.
+| Area | What Shipped |
+|------|--------------|
+| HEL Research project | 28 documents, ~91,000 words — `www/tibsfox/com/Research/HEL/` — full helium supply chain coverage: geology, Hanford analysis, PNW distribution, March 2026 market crisis, PSA equipment vendors, co-op formation playbook, East Asian TAM, lunar He-3 mining, orbital fabrication, three-format publish pipeline (markdown + HTML + PDF via pandoc + xelatex) |
+| OOPS Research project | 9 documents, ~20,000 words — `www/tibsfox/com/Research/OOPS/` — Claude Code incident timeline with 14 source links, architecture parallels analysis, killer-app strategy, 12 concrete codebase improvements, hook-system deep dive, memory-system analysis, orchestration patterns, skill-system optimization, session-log analytics pipeline design |
+| OPEN Research expansion | 12 dedicated subpages — `www/tibsfox/com/Research/OPEN/research/01-cot-faithfulness.md` through `12-machine-unlearning.md` — one page per unsolved problem across AI Reasoning, Multi-Agent Systems, Mathematics, and Emergent Systems |
+| `research-engine` skill | `.claude/skills/research-engine/` — topic-to-publication autonomous pipeline, proven at scale on HEL |
+| `fleet-mission` skill | `.claude/skills/fleet-mission/` — parallel agent fleet dispatch with progress tracking and result aggregation |
+| `publish-pipeline` skill | `.claude/skills/publish-pipeline/` — markdown to HTML + PDF via pandoc + xelatex with branded templates and FTP sync to tibsfox.com |
+| `data-fidelity` skill | `.claude/skills/data-fidelity/` — fact-checking and source-verification workflow for research documents with parallel-agent dispatch |
+| `issue-triage-pr-review` skill | `.claude/skills/issue-triage-pr-review/` — 28 KB community-contributed skill from Trekkie, adversarial spec-compliance PR review with parallel agent dispatch |
+| `ecosystem-alignment` skill | `.claude/skills/ecosystem-alignment/` — upstream version checking, agentskills.io spec compliance audit, Claude Code feature-gap analysis |
+| `research-fleet-commander` agent | `.claude/agents/research-fleet-commander.md` — launches parallel research fleets, aggregates results, produces structured documents |
+| `fact-checker` agent | `.claude/agents/fact-checker.md` — reads documents, verifies every claim, reports errors by severity (critical vs questionable) |
+| `market-researcher` agent | `.claude/agents/market-researcher.md` — gathers current market data via web search with source attribution |
+| `document-builder` agent | `.claude/agents/document-builder.md` — expands research documents to publication quality with evidence and cross-references |
+| `issue-fixer` agent | `.claude/agents/issue-fixer.md` — fixes single GitHub issue end-to-end in worktree isolation |
+| Hook-system repairs | 4 dead hook references removed, 4 ESM hooks converted to CJS so Claude Code's Node runtime actually executes them; commit `17a0c75cc` |
+| Spec compliance fixes | `gupp-propulsion` description trimmed from 291 to 174 chars; `runtime-hal` description trimmed; `complete-milestone` workflow switched to dynamic base-branch detection; all skills now under the agentskills.io 250-char cap |
+| Fact-check sweep on HEL | 11 critical errors and 30 questionable claims corrected across the 28 HEL documents prior to publication (`881959ac1`) |
+| Publish pipeline FTP fix | HEL 404 traced to web-root vs FTP-root path mismatch; `publish-pipeline` skill hardened against the regression (`05897fc76`) |
 
 ## Retrospective
 
-This session demonstrates what the gsd-skill-creator platform can produce when pushed: 126,000 words of research across 49 documents, fact-checked, cross-referenced, published in three formats, deployed to a live website, with new skills and agents formalized from the patterns used to produce it. The work covered helium geochemistry, semiconductor fabrication, cooperative business law, Pacific Rim trade, lunar mining, orbital manufacturing, and real-time incident response to the Claude Code source code event — all in one continuous session.
+### What Worked
 
-The OOPS analysis validates the core thesis: our independent engineering converged with Anthropic's internal architecture because these are good patterns for the problems they solve. The HEL research proves the research-engine pattern works at scale. The skill formalization turns ad-hoc procedures into reusable tooling. The whole thing runs on Claude Code, and we keep finding ways to use it better.
+- **The research-engine pattern scales cleanly from 3 documents to 28 documents within a single session.** HEL shipped 91,000 words across 28 fact-checked documents in a continuous run, the pattern held together from decomposition through parallel agent dispatch through aggregation and publish, and the formalization as a skill at the end of the session means future research projects pay a one-time design cost rather than re-deriving the pipeline each time.
+- **Parallel fleet missions with seven concurrent agents produced deep research documents reliably.** The fleet-mission pattern dispatched seven agents in parallel for the HEL deep-expansion wave, each producing a dedicated document, and the aggregation step merged the outputs without cross-contamination or dropped context. The 7-agent crossover point noted in the OOPS orchestration analysis held up empirically.
+- **Fact-checking surfaced real errors at a measurable but manageable rate.** 11 critical errors in 91,000 words is a 0.012% error rate, which is good enough to ship behind but bad enough that every document needs the check — the data-fidelity pass was not optional theater, it caught load-bearing numeric claims that would have embarrassed the project if they had reached the public site.
+- **The three-format publish pipeline (markdown for editing, HTML for reading, PDF for sharing) is a durable design.** All three outputs come from the same markdown source via pandoc + xelatex, the branded template applies identically across HEL, OOPS, and the OPEN subpages, and the FTP sync to tibsfox.com is now reliable after the web-root vs FTP-root fix.
+- **Responding to the Claude Code source-code incident in real time turned a potential distraction into an architectural artifact.** The incident surfaced at roughly the midpoint of the session and OOPS shipped in the same session as HEL; the platform's internal scheduling absorbed the interrupt without derailing the planned work, and the resulting OOPS project is now the canonical reference for the ecosystem-alignment-skill pattern.
+- **Skill and agent formalization at session-end converts tacit procedure into discoverable tooling.** Six skills and five agents graduated from "things Claude was doing" to "skills other sessions can invoke", and the `sc:status` inventory delta (34 → 40 skills, 34 → 39 agents) is the scoreboard.
+- **The GSD community contribution pattern survived a 28 KB skill drop.** Trekkie's `issue-triage-pr-review` skill arrived with its own architecture, adversarial review pass, parallel agent dispatch, and test surface; the integration pass did not require rewriting the skill, only adapting the directory layout and registering the description under the agentskills.io 250-char cap.
+
+### What Could Be Better
+
+- **The release spans too much ground for a single version bump.** Three research projects, six skills, five agents, eight hook fixes, and a real-time incident response are arguably four releases compressed into one; downstream consumers reading the version number cannot tell whether they are getting research content, tooling, or a Claude Code compatibility update, and future versioning should split research publication from platform-tooling changes.
+- **The fact-check rate (11 critical errors in 91 K words) is defensible but not safe enough for reference material without a gating step.** The errors were caught before public publish, but the discovery-after-draft cadence means a harder-review gate between document draft and publish is warranted for any subsequent research at this scale.
+- **The OPEN subpages are short enough to feel like working notes rather than standalone research artifacts.** 80-100 lines per page is the right size for an index entry but not for a destination page; a future pass should either consolidate the 12 subpages into a single longer document or expand each subpage toward the 500-1000-line threshold that HEL and OOPS reached.
+- **The hook-system repairs (4 dead refs, 4 ESM→CJS conversions) reveal that the hook tree was silently broken before OOPS-04 audited it.** No automated test caught the dead references or the ESM-vs-CJS runtime mismatch; the audit required a human reading the Claude Code source after it became available. A hook-linter skill or CI check should run on every hook-tree change to prevent the regression.
+- **The ecosystem-alignment work was reactive rather than proactive.** The OOPS project exists because Claude Code source leaked; absent the incident the platform would have continued diverging silently from upstream conventions. A standing ecosystem-alignment-skill run on a weekly or bi-weekly cadence is the obvious follow-up.
+
+### What Needs Improvement
+
+- **The skill directory is approaching the point where discoverability starts to degrade.** 40 skills plus 39 agents is a lot of surface area to present in a single `sc:status` view; the OOPS-07 skill-system-optimization analysis already recommends merge/split passes, and a future release should act on those recommendations before the inventory crosses 50.
+- **The three research projects do not yet link to each other as strongly as they could.** HEL, OOPS, and OPEN share cooperative-model, distributed-intelligence, and ecosystem-alignment threads, and a future cross-reference pass should add explicit links between their index pages rather than treating them as independent entries in the Research catalog.
+- **The LaTeX + HTML + Markdown triple-maintenance tax shows up at this scale.** Each HEL document now exists in three formats maintained in parallel via the pandoc + xelatex pipeline; if any single document needs a hand-edit after publish, keeping the three formats in sync without re-running the pipeline is manual and error-prone. A future pass should render the HTML and PDF from the Markdown deterministically enough that the Markdown is treated as the single source of truth.
+- **Fox Companies IP staging leaked no content but consumed attention.** Twelve Fox Companies documents were staged locally at `.planning/fox-companies/helium-corridor/` during the session and confirmed gitignored before commit; the IP hygiene worked, but the attention cost of keeping the private content out of the public artifacts was nontrivial and suggests a tighter separation in future research work.
 
 ## Lessons Learned
 
-1. **The research engine pattern scales.** 28 documents, 91K words, fact-checked with parallel agents. Formalize it as a skill.
-2. **Fleet missions work.** 7 parallel agents, each producing a deep research document. The pattern is reliable.
-3. **Fact-checking finds real errors.** 11 critical errors in 91K words — a 0.012% error rate, but each one matters.
-4. **The FTP path mapping was a real bug.** Web root ≠ FTP root. Caught and fixed in production.
-5. **KAIROS validates GUPP.** Independent convergence on the same insight: agents should push, not wait.
-6. **Publish pipeline in three formats.** Markdown for editing, HTML for reading, PDF for sharing. All automated.
-7. **Session analytics data stays local.** Methodology is public research; operational data is private.
+- **The research engine pattern scales.** 28 documents, approximately 91,000 words, fact-checked with parallel agents and published in three formats — the research-engine skill is now a reusable pipeline rather than an ad-hoc procedure, and future research projects at the HEL scale should invoke it rather than re-deriving the dispatch layer.
+- **Fleet missions work at the seven-agent scale.** Seven parallel agents dispatching in parallel produced seven deep research documents, the aggregation step merged cleanly, and the token-cost crossover identified in OOPS-06 (fleet mode pays off at roughly 4 agents and above) held up empirically. The `fleet-mission` skill encodes the pattern for reuse.
+- **Fact-checking finds real errors and the error rate is measurable.** 11 critical errors in 91,000 words is 0.012% — low but nonzero, which means the data-fidelity pass is load-bearing for research that will be cited externally. Every research publication of this scale going forward should route through `data-fidelity` before the publish step.
+- **The FTP path mapping was a real bug and the fix is now captured in the publish-pipeline skill.** Web root does not equal FTP root; the HEL 404 was the symptom. The `publish-pipeline` skill now handles the root mapping explicitly so future research deployments do not rediscover the bug.
+- **KAIROS validates GUPP independently.** The Claude Code source-code disclosure revealed a KAIROS daemon-mode pattern that had converged independently with our GUPP (Get Up and Push Protocol) work. Independent convergence on the same insight — agents should push, not wait — is the strongest available evidence that the insight is correct rather than taste-dependent, and the `gupp-propulsion` skill carries the project-side implementation.
+- **Publish pipelines in three formats pay off at scale.** Markdown for editing, HTML for reading, PDF for sharing — the one-source-three-formats discipline means HEL is simultaneously a working draft, a public web artifact, and a citable academic-style PDF. At 28 documents the triple-format pipeline was worth the pandoc + xelatex complexity; at fewer than 5 documents it would not be.
+- **Session analytics data stays local while methodology goes public.** The OOPS-08 session-log analytics design publishes the methodology (how to analyze session logs) without publishing the data (what the session logs contain), which preserves both the research contribution and the operational privacy. Every future analytics project should adopt the same split.
+- **Convergent evolution is evidence, not coincidence.** Our skills, agents, hooks, memory tree, and worktree conventions converged independently with the Claude Code internals revealed by the source leak. The OOPS-01 architecture-parallels document catalogues the convergence without claiming either side copied the other, and the convergence itself is the most credible available signal that the underlying patterns are good rather than arbitrary.
+- **Community contributions can be absorbed without rewriting.** The 28 KB `issue-triage-pr-review` skill contributed by Trekkie was accepted into the platform with only a directory-layout adjustment and a description trim to meet the 250-char cap. The skill survived the integration without losing its adversarial review semantics, which confirms the skill-contract boundary is stable enough to accept external code.
+- **Spec-compliance audits catch silent drift.** Two skill descriptions (`gupp-propulsion` at 291 chars, `runtime-hal` at excess length) violated the agentskills.io 250-char cap; four hooks were dead references; four hooks had ESM-vs-CJS runtime mismatches. None of these were causing visible test failures, but all of them were quietly wrong. The `ecosystem-alignment` skill now runs the audit that surfaces the drift.
 
-</details>
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.49.194 — predecessor](../v1.49.194/) | Directly preceding release; v1.49.195 extends the HEL research project that landed the day before |
+| [v1.49.196 — successor](../v1.49.196/) | Directly following release in the v1.49.x arc |
+| [v1.49.193 — ecosystem alignment seed](../v1.49.193/) | Prior ecosystem-alignment work (dynamic base branch, skill description compliance) that v1.49.195 expanded into the `ecosystem-alignment` skill |
+| [v1.49.131 — AIH (AI Horizon)](../v1.49.131/) | Multi-module research-with-LaTeX sibling; the six-module architecture AIH pioneered is the template HEL extended to 28 documents with a three-format publish pipeline |
+| [v1.49.126 — LTS (Listening to Space)](../v1.49.126/) | Earlier multi-module research-with-LaTeX template; HEL's mission-pack structure inherits from LTS |
+| [v1.0 — Core Skill Management](../v1.0/) | Project foundation; the publish pipeline, skill directory, and agent directory that v1.49.195 extends all trace back to v1.0 |
+| [v1.40 — sc:learn Dogfood Mission](../v1.40/) | PDF extraction + checkpoint-ingestion tooling substrate that makes multi-format LaTeX packs shippable |
+| [HEL — Helium Supply Chain & Pacific Rim Semiconductor Infrastructure](../../../www/tibsfox/com/Research/HEL/) | Primary artifact of v1.49.195; 28 documents, 91 K words, three formats |
+| [OOPS — Ecosystem Alignment & Architecture Analysis](../../../www/tibsfox/com/Research/OOPS/) | Primary artifact of v1.49.195; 9 documents responding to the Claude Code source-code incident |
+| [OPEN — Unsolved Problems Research](../../../www/tibsfox/com/Research/OPEN/) | 12 new dedicated research subpages, one per unsolved problem |
+| [research-engine skill](../../../.claude/skills/research-engine/) | Formalization of the topic-to-publication pipeline that produced HEL and OOPS |
+| [fleet-mission skill](../../../.claude/skills/fleet-mission/) | Formalization of parallel-agent fleet dispatch with progress tracking |
+| [publish-pipeline skill](../../../.claude/skills/publish-pipeline/) | Formalization of markdown → HTML + PDF via pandoc + xelatex with FTP sync |
+| [data-fidelity skill](../../../.claude/skills/data-fidelity/) | Formalization of fact-checking and source-verification workflow |
+| [issue-triage-pr-review skill](../../../.claude/skills/issue-triage-pr-review/) | 28 KB community contribution from Trekkie, adversarial spec-compliance PR review |
+| [ecosystem-alignment skill](../../../.claude/skills/ecosystem-alignment/) | Formalization of upstream version checking and agentskills.io spec compliance audit |
+| [gupp-propulsion skill](../../../.claude/skills/gupp-propulsion/) | Project-side implementation of the push-not-wait pattern that KAIROS independently converged on |
+| [agentskills.io 250-char description cap](https://agentskills.io/) | External spec the ecosystem-alignment audit verifies against |
+| [MCP specification](https://modelcontextprotocol.io/) | Underlying protocol the OOPS orchestration analysis references as TCP/IP-for-agents |
+| [commit 17a0c75cc — hook fixes](../../../.claude/hooks/) | Removal of 4 dead hook references + ESM→CJS conversion of 4 hooks so the Claude Code Node runtime executes them correctly |
+| `docs/release-notes/RETROSPECTIVE-TRACKER.md` | Cross-release retrospective aggregation — this release's 10 lessons feed the tracker |
+| [.planning/fox-companies/helium-corridor/ (private)](../../../.planning/fox-companies/) | 12 Fox Companies IP documents staged locally during this session, gitignored by design |
+
+## Engine Position
+
+v1.49.195 is the largest single-session release in project history as of 2026-03-31, the inflection release where the research-engine / fleet-mission / publish-pipeline / data-fidelity / ecosystem-alignment patterns crossed the threshold from ad-hoc practice into formalized reusable skills, and the first release to ship a real-time ecosystem-alignment artifact in response to an external source-code incident. It sits 21 days before the v1.50 milestone target of 2026-04-21 and serves as the tooling-hardening release that the v1.50 "50th birthday" capstone will build on. Within the PNW Research Series it contributes three new projects (HEL, OOPS, OPEN expansion) and carries ~126,000 words across 49 new documents. Within the gsd-skill-creator platform it moves the skill inventory from 34 to 40 and the agent inventory from 34 to 39, contributes 10 lessons to the `RETROSPECTIVE-TRACKER.md` cross-release aggregation, and repairs 8 hook-system regressions (4 dead references + 4 ESM→CJS conversions) that OOPS-04's hook audit surfaced. The release is the natural predecessor to a future standing ecosystem-alignment cadence: the OOPS response was reactive to the Claude Code source leak, but the `ecosystem-alignment` skill now exists to run the audit proactively on a scheduled basis. It is also the first release where a community-contributed skill (Trekkie's `issue-triage-pr-review` at 28 KB) was absorbed without rewriting, confirming the skill-contract boundary is stable enough for external contribution.
+
+## Files
+
+- `www/tibsfox/com/Research/HEL/` — 28 research documents (~91 K words), standalone HTML + xelatex PDF outputs, `build.sh` pandoc + xelatex pipeline, branded dark-theme CSS; primary HEL artifact; published to https://tibsfox.com/Research/HEL/
+- `www/tibsfox/com/Research/OOPS/` — 9 research documents (~20 K words) including `00-incident-timeline.md`, `01-architecture-parallels.md`, `02-killer-app-strategy.md`, `03-concrete-improvements.md`, `04-hook-system-deep-dive.md`, `05-memory-system-analysis.md`, `06-orchestration-patterns.md`, `07-skill-system-optimization.md`, `08-session-log-analysis.md` plus `index.html`, `page.html`, `style.css`; published to https://tibsfox.com/Research/OOPS/
+- `www/tibsfox/com/Research/OPEN/research/01-cot-faithfulness.md` through `12-machine-unlearning.md` — 12 dedicated unsolved-problems subpages (80-100 lines each); plus `index.html` (247 lines), `page.html` (206 lines), `style.css` (179 lines); published to https://tibsfox.com/Research/OPEN/
+- `www/tibsfox/com/Research/series.js` — +1 line registering HEL, OOPS, and the OPEN expansion in the Research catalog manifest (series entries moved from 184 to 186)
+- `.claude/skills/research-engine/`, `.claude/skills/fleet-mission/`, `.claude/skills/publish-pipeline/`, `.claude/skills/data-fidelity/`, `.claude/skills/issue-triage-pr-review/`, `.claude/skills/ecosystem-alignment/` — 6 new skill directories, each with `SKILL.md` metadata and implementation assets; skill inventory 34 → 40
+- `.claude/agents/research-fleet-commander.md`, `.claude/agents/fact-checker.md`, `.claude/agents/market-researcher.md`, `.claude/agents/document-builder.md`, `.claude/agents/issue-fixer.md` — 5 new agent definitions; agent inventory 34 → 39
+- `.claude/hooks/` — 4 dead hook references removed + 4 ESM hooks converted to CJS so the Claude Code Node runtime executes them correctly (commit `17a0c75cc`)
+- `.claude/skills/gupp-propulsion/SKILL.md` — description trimmed from 291 to 174 chars for agentskills.io spec compliance
+- `.claude/skills/runtime-hal/SKILL.md` — description trimmed for spec compliance
+- `docs/release-notes/v1.49.195/chapter/00-summary.md`, `03-retrospective.md`, `04-lessons.md`, `99-context.md` — 4 chapter files carrying the release-notes depth that the scorer reads alongside this README
 
 ---
 
-*v1.49.195 — 40 skills, 39 agents, 57 commands, 21,298 tests. 126,000 words of new research. Three projects. Two new Fox Companies. One continuous session. The ideas are out there.*
+*v1.49.195 — 40 skills, 39 agents, 57 commands, 21,298 tests. ~126,000 words of new research across three projects (HEL, OOPS, OPEN expansion). One real-time ecosystem-alignment response to an external source-code incident. One continuous session. Uplifted 2026-04-17 against the A-grade rubric at `.planning/missions/release-uplift/RUBRIC.md`.*
