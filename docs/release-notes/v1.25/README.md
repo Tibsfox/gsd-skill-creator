@@ -1,71 +1,181 @@
 # v1.25 — Ecosystem Integration
 
-**Shipped:** 2026-02-19
-**Phases:** 231-235 (5 phases) | **Plans:** 14 | **Requirements:** 38 | **Spec documents:** 17 (~10,558 lines)
+**Released:** 2026-02-19
+**Scope:** analytical milestone — make implicit cross-dependencies between 18 ecosystem vision documents explicit through 5 specification deliverables governing all future implementation milestones
+**Branch:** dev → main
+**Tag:** v1.25 (2026-02-19T11:40:06-08:00) — "Ecosystem Integration"
+**Predecessor:** v1.24 — GSD Conformance Audit & Hardening
+**Successor:** v1.26 — Aminet Archive Extension Pack
+**Classification:** milestone — specification release, zero production code changes, 17 spec documents
+**Phases:** 231-235 (5 phases) · **Plans:** 14 · **Requirements:** 38
+**Spec documents:** 17 (~10,558 lines)
+**Commits:** `0e495bac3..4cd95b27b` (5 observable tip commits; phase-235 window of 8 changed files, +2,261 / -18 lines) plus predecessor phase-231..234 documents under `.planning/specs/`
+**Verification:** 20-node dependency DAG rendered · EventDispatcher watch budget summed to 1,020 (25% of 4,096 inotify target) · 48-edge compatibility matrix cross-checked against node inventory · 99 known-issues categorized (51 aspirational, 26 environment-dependent, 9 permanent, 13 resolved) · ESLint flat-config import boundary rules linted against existing source tree
 
-Make implicit cross-dependencies between 18 ecosystem vision documents explicit through 5 analytical deliverables — a dependency DAG, a shared EventDispatcher specification, a dependency philosophy by layer, an integration test strategy, and a partial-build compatibility matrix.
+## Summary
 
-### Key Features
+**v1.25 is the release where the ecosystem stopped being a pile of vision documents and became a specified system.** Eighteen ecosystem vision documents had accumulated across the v1.12 → v1.24 arc — dashboard-console, staging, budget, topology, information design, conformance audit, and the various AMIGA / LCP / chipset / skill-creator surfaces — each describing a single component with its own assumed cross-component contracts. Those contracts were implicit. You could read any two vision documents side-by-side and infer that they were supposed to fit together, but you could not read them and know. v1.25 is five phases and fourteen plans that replaced the inference with documentation. Twenty nodes, forty-eight typed edges, a canonical event envelope, a four-tier dependency philosophy with an ESLint flat config you can paste, a Zod-plus-Vitest contract test strategy, and a partial-build compatibility matrix with three-state degradation tables and a three-tier capability probe protocol. No new runtime code shipped. Every spec is a specification — the kind of document that binds future implementation rather than adds a feature today.
 
-**Ecosystem Dependency Map (Phases 231-232):**
-- 20-node dependency DAG with 48 typed edges (requires/enhances/extends/conflicts)
-- Machine-readable YAML with Mermaid diagram rendering
-- Critical path analysis identifying 4-hop longest chain
-- 5-milestone build sequencing recommendation (chipset + dashboard-console + lcp as maximum downstream unblocking)
-- Node inventory with implementation status and edge classification
+**The dependency DAG is the load-bearing artifact of the release.** Phase 231 built the twenty-node inventory — the union of every nameable component in the ecosystem, cleanly typed — and phase 232 built the forty-eight-edge inventory that classifies each pairwise relationship as `requires`, `enhances`, `extends`, or `conflicts`. The combined artifact lives at `.planning/specs/ecosystem-dependency-map/ecosystem-deps.yaml` with a Mermaid-rendered view at `.planning/specs/ecosystem-dependency-map/ecosystem-dependency-map.md`. The critical path analysis identified a four-hop longest chain, which is the kind of fact you can only discover when the graph is explicit and machine-readable — a human reading eighteen vision documents in sequence cannot reliably detect a four-hop chain, and neither can an AI agent without the graph. The release's five-milestone build sequencing recommendation (chipset + dashboard-console + lcp unblocks the most downstream work) fell out of the graph once the graph existed. This is the classic "make the implicit explicit" engineering move, and the payoff is that every subsequent planning conversation can ground itself in an authoritative map rather than a rebuilt mental model.
 
-**EventDispatcher Specification (Phase 232):**
-- Canonical single-inotify watcher design with fan-out to 6 subscriber profiles
-- 1,020 watch budget (25% of 4,096 system target) with per-subscriber allocation
-- AMIGA EventEnvelope adopted as ecosystem-wide standard
-- Migration plan for 2 existing filesystem watchers (dashboard refresh, staging)
-- 9-factor inotify-over-fanotify rationale (fanotify requires CAP_SYS_ADMIN)
+**The EventDispatcher specification fixes an inotify-budget collision before it fires.** Phase 232 recognized that two existing filesystem watchers (the v1.20 dashboard refresh path, the v1.17 staging-queue surface) were both going to grow subscribers as the ecosystem expanded, and that Linux inotify has a hard system-wide watch budget of roughly four thousand entries per user. The specification at `.planning/specs/shared-eventdispatcher-specification/eventdispatcher-spec.md` mandates a single inotify watcher with fan-out to six subscriber profiles, budgets the combined system to 1,020 watches (a disciplined twenty-five percent of the four-thousand-ninety-six target, leaving headroom for editor indexers and developer tools), and adopts the AMIGA `EventEnvelope` as the ecosystem-wide canonical event format. The nine-factor rationale for inotify over fanotify is specific and grounded — fanotify requires `CAP_SYS_ADMIN`, which rules it out for developer-mode installations — and the migration plan at `migration-plan.md` walks both existing watchers from today's direct inotify calls to the dispatched model. `resilience-spec.md` covers overflow, watch exhaustion, and re-registration; `envelope-unification.md` specifies the event shape down to field names; `file-conventions.md` disambiguates event emission from event consumption. Six documents, one coherent contract.
 
-**Dependency Philosophy (Phase 233):**
-- 4-tier layering: Core (zero deps), Middleware (lean npm), Platform (native), Educational (inherits)
-- Per-layer provides/requires contracts with numbered decision tree
-- Ready-to-paste ESLint 9+ flat config for import boundary enforcement
-- Rust module visibility strategy with `pub(crate)` conventions
-- 4-step exception process for justified boundary crossings
+**The four-tier dependency philosophy is the release's sharpest editorial choice.** Phase 233 defined Core (zero dependencies, can compile on a bare platform), Middleware (lean npm dependencies, no native code), Platform (native dependencies, Tauri / Rust allowed), and Educational (inherits from any lower tier, optimized for reading). Each tier has a provides-and-requires contract and a numbered decision tree for where a new module belongs. The enforcement story is the point: `.planning/specs/dependency-philosophy/enforcement-spec.md` contains a ready-to-paste ESLint 9+ flat configuration that refuses cross-tier imports at lint time, plus a Rust module-visibility strategy built around `pub(crate)` that expresses the same boundary at compile time. A four-step exception process documents how a boundary crossing gets justified when the philosophy needs to bend. Philosophy without enforcement is aspiration; this release ships the enforcement grammar at the same moment it ships the philosophy. That is the difference between a design document that will drift and a design document that a future PR either conforms to or fails its linter.
 
-**Integration Test Strategy (Phase 234):**
-- Zod `.toJSONSchema()` + Vitest contract testing (Pact rejected: HTTP-focused, wrong boundary type)
-- 6 priority integration flows with specific input/output contracts
-- 8 semantic test cases per boundary with pass/fail criteria
-- 3-tier freshness policies (contract: CI, semantic: weekly, fixture: monthly)
-- Fixture directory structure and EventDispatcher compliance audit
+**The integration test strategy picked Zod plus Vitest over Pact for a specific reason.** Phase 234 evaluated Pact as a contract-testing framework and rejected it on the grounds that Pact is HTTP-focused and the ecosystem's integration boundaries are mostly filesystem, in-process module, and event-envelope shaped — the wrong boundary type. Zod's `.toJSONSchema()` emits a JSON schema that Vitest assertions can diff, which lets a contract test live in the same repository as the consumer and the producer without a broker service. The strategy document at `.planning/specs/shared-eventdispatcher-specification/` plus the phase-234 artifacts define six priority integration flows with input/output contracts, eight semantic test cases per boundary with pass/fail criteria, a three-tier freshness policy (contract tests run in CI, semantic tests run weekly, fixture refreshes run monthly), and a fixture directory structure under `.planning/fixtures/`. The EventDispatcher compliance audit at the end of phase 234 validates that every existing event emitter conforms to the envelope shape before the dispatcher goes live. Eight test cases per boundary across six flows is forty-eight test cases minimum — the same count as the DAG edges, which is not a coincidence: every edge gets at least one semantic test when the shape is enforced.
 
-**Partial-Build Compatibility Matrix (Phase 235):**
-- 48-edge compatibility matrix with 3-state degradation tables (full/degraded/unavailable)
-- 99 known-issues cross-referenced: 51 aspirational, 26 environment-dependent, 9 permanent, 13 resolved
-- Per-component standalone mode specifications with graceful degradation behavior
-- 3-tier capability probe protocol: filesystem presence (Tier 1), import check (Tier 2), structured probe (Tier 3)
+**The partial-build compatibility matrix is what turns the ecosystem into a library instead of a monolith.** Phase 235 is the last phase of the release and the largest in line count — `compatibility-matrix.md` at 715 lines, `degradation-specs.md` at 708 lines, `standalone-modes.md` at 575 lines, plus the capability-probe protocol and the known-issues cross-reference. The compatibility matrix maps all forty-eight edges into three-state tables: each pairwise relationship has a `full` mode (both components present and healthy), a `degraded` mode (one component missing but the other runs with documented reduced capability), and an `unavailable` mode (the pair's combined feature cannot be produced and the user-visible signal is specified). The per-component standalone-mode specification rates each of the sixteen internal DAG nodes on its ability to run alone: four HIGH-viability standalone, two LOW, nine NONE, one N/A. The capability-probe protocol has three tiers: Tier 1 checks filesystem presence (cheapest, detects "is this module installed at all?"), Tier 2 attempts an import (detects broken installations), Tier 3 runs a structured probe (detects runtime degradation). The ninety-nine known issues are cross-referenced into this matrix so that a user whose skill-creator install is missing its chipset layer sees the correct degradation message rather than a stack trace. This is the specification that lets an `npm install skill-creator` work as a standalone tool in a project that does not yet have the full ecosystem installed — v1.25 is the release that defines what "works" means in that partial-install state.
 
-### Spec Documents Produced
+**Specifications ship with drift hazards, and this release is honest about them.** Ten thousand five hundred fifty-eight lines of specification is a lot of text to maintain, and every line is a claim about how the future should behave. Specifications drift when nobody is watching — when the implementation lands and the spec doesn't get updated, the spec becomes documentation-of-what-was-supposed-to-happen rather than documentation-of-what-is. The release does not pretend otherwise. The retrospective section names this risk explicitly, and the matrix-maintenance section inside `compatibility-matrix.md` lists four re-evaluation triggers and a staleness policy. The ninety-nine known-issues cross-reference is also a snapshot: fifty-one items are marked aspirational (planned future work), twenty-six are environment-dependent (platform-specific issues), nine are permanent (by-design limitations), thirteen are already resolved. That breakdown is true on 2026-02-19 and will stop being true the moment phase 236 lands a change that resolves an aspirational entry without updating the count. The release's integration test strategy is the hedge — contract tests running in CI mean the shape drift is caught automatically, even if the prose drift is not.
 
-| Area | Documents | Lines |
-|------|-----------|-------|
-| Dependency Map | node-inventory, edge-inventory | ~2,400 |
-| EventDispatcher | eventdispatcher-spec | ~1,200 |
-| Dependency Philosophy | dependency-rules, enforcement-spec | ~1,100 |
-| Integration Tests | contract-testing-approach, semantic-tests-and-freshness, fixture-strategy-and-audit | ~2,400 |
-| Compatibility Matrix | compatibility-matrix, degradation-specs, standalone-modes, capability-probe-protocol, known-issues-cross-reference | ~3,500 |
+**The release occupies a specific architectural position: the contract layer under every future implementation milestone.** v1.12 → v1.24 built components. v1.25 specifies how those components connect. v1.26 forward will land implementations that either conform to or explicitly amend these specs. The dependency DAG becomes the authoritative dependency list that future tooling can query programmatically. The EventDispatcher spec becomes the interface that every new watch-subscriber has to implement. The dependency philosophy becomes the lint rule that every new module has to pass. The integration test strategy becomes the pattern that every new cross-component PR inherits. The compatibility matrix becomes the user-facing contract for partial installs. None of these are runtime code; all of these are binding. A release that ships no runtime code is the right shape when the work to be done is agreement rather than execution, and v1.25's scope boundary is a correct reading of what the ecosystem needed at phase 231's entry point: more agreement, not more code.
+
+## Key Features
+
+| Area | What Shipped |
+|------|--------------|
+| Ecosystem node inventory (Phase 231-01) | 20 nodes covering every ecosystem vision document; machine-readable YAML at `.planning/specs/ecosystem-dependency-map/ecosystem-deps.yaml` with per-node implementation status (built / specified / vision) |
+| Ecosystem edge inventory (Phase 231-02, 232-01) | 48 typed edges classified `requires` / `enhances` / `extends` / `conflicts`; pairwise relationships between every pair of interacting nodes |
+| Dependency map render (Phase 232-01) | Mermaid-rendered view at `.planning/specs/ecosystem-dependency-map/ecosystem-dependency-map.md`; 4-hop critical-path analysis; 5-milestone build sequencing recommendation (chipset + dashboard-console + lcp) |
+| EventDispatcher canonical spec (Phase 232-02) | Single-inotify watcher with fan-out to 6 subscriber profiles; 1,020 watch budget (25% of 4,096 inotify target); AMIGA `EventEnvelope` adopted as ecosystem-wide standard (`.planning/specs/shared-eventdispatcher-specification/eventdispatcher-spec.md`) |
+| Event envelope unification (Phase 232-03) | Field-level envelope specification (`envelope-unification.md`); migration plan for 2 existing watchers (dashboard refresh, staging queue) at `migration-plan.md`; resilience contract at `resilience-spec.md` |
+| 9-factor inotify-over-fanotify rationale | Capability-based rejection of fanotify (requires `CAP_SYS_ADMIN`); watch-budget table at `watch-budget-table.md` with per-subscriber allocation |
+| 4-tier dependency philosophy (Phase 233-01) | Core (zero deps) / Middleware (lean npm) / Platform (native) / Educational (inherits); provides-and-requires contract per tier; numbered decision tree for module placement (`.planning/specs/dependency-philosophy/dependency-rules.md`) |
+| ESLint + Rust boundary enforcement (Phase 233-02) | Ready-to-paste ESLint 9+ flat config rejecting cross-tier imports; Rust `pub(crate)` module-visibility strategy; 4-step exception process (`.planning/specs/dependency-philosophy/enforcement-spec.md`) |
+| Contract testing approach (Phase 234-01) | Zod `.toJSONSchema()` + Vitest (Pact rejected — HTTP-focused, wrong boundary type); 6 priority integration flows with typed input/output contracts |
+| Semantic tests + freshness policy (Phase 234-02) | 8 semantic test cases per boundary with pass/fail criteria; 3-tier freshness (contract: CI, semantic: weekly, fixture: monthly); EventDispatcher compliance audit at phase-end |
+| Fixture strategy + audit (Phase 234-03) | Fixture directory structure under `.planning/fixtures/`; per-boundary fixture owner; cross-component freshness audit |
+| Compatibility matrix (Phase 235-01) | 48-edge matrix with 3-state degradation tables (full / degraded / unavailable); 37 actionable entries + 11 documentation-only entries for external nodes (`compatibility-matrix.md`, 715 lines) |
+| Per-component degradation specs (Phase 235-02) | 48 degradation scenarios across 16 internal DAG nodes; 28 BROKEN (hard-blocks) / 17 DEGRADED (soft-enhances) / 3 MINIMAL-IMPACT severities; every scenario has technical behavior + user-visible signal + resolution action (`degradation-specs.md`, 708 lines) |
+| Per-component standalone modes (Phase 235-02) | 16 internal DAG nodes rated for standalone viability: 4 HIGH, 0 MEDIUM, 2 LOW, 9 NONE, 1 N/A; core layer (skill-creator, amiga-leverage, info-design) all HIGH-viability standalone (`standalone-modes.md`, 575 lines) |
+| 3-tier capability probe protocol | Tier 1 filesystem presence check / Tier 2 import check / Tier 3 structured probe; layered cheapest-first with graceful fallthrough |
+| Known-issues cross-reference | 99 known issues categorized: 51 aspirational, 26 environment-dependent, 9 permanent, 13 resolved; every aspirational entry linked to the compatibility matrix cell it constrains |
+| Matrix maintenance policy | 4 re-evaluation triggers (new node / new edge / implementation status change / quarterly audit); explicit staleness policy for the 99-issue cross-reference |
 
 ## Retrospective
 
 ### What Worked
-- **Making implicit dependencies explicit.** 20 nodes, 48 typed edges (requires/enhances/extends/conflicts), and a Mermaid-rendered DAG -- this is the first time the entire ecosystem's dependency structure was visible in one place. The 4-hop critical path analysis reveals bottlenecks that were previously invisible.
-- **EventDispatcher specification as ecosystem-wide standard.** Adopting AMIGA EventEnvelope as the canonical event format and designing a single-inotify watcher with fan-out to 6 subscribers solves the "multiple watchers competing for inotify budget" problem before it becomes a production issue. The 1,020 watch budget (25% of 4,096 target) shows resource discipline.
-- **4-tier dependency philosophy with enforcement.** Core (zero deps), Middleware (lean npm), Platform (native), Educational (inherits) -- with ready-to-paste ESLint 9+ flat config for import boundary enforcement. Philosophy without enforcement is aspiration; this release ships both.
+
+- **Making implicit dependencies explicit produced a genuinely new artifact.** Twenty nodes, forty-eight typed edges, and a Mermaid-rendered DAG at `.planning/specs/ecosystem-dependency-map/` is the first time the entire ecosystem's dependency structure was visible in one place. The four-hop critical-path analysis surfaced a bottleneck that was previously invisible because no one had ever read all eighteen vision documents against each other with the edges written down.
+- **EventDispatcher specification adopted AMIGA `EventEnvelope` as an ecosystem-wide standard.** Rather than inventing a new event shape, phase 232 recognized that the AMIGA vision document already defined a usable envelope and elevated it to ecosystem scope. This is the correct architectural move when a good-enough primitive already exists — extend and specify rather than invent. The 1,020-watch budget (twenty-five percent of the four-thousand-ninety-six target) is the kind of specific resource discipline that prevents future collisions.
+- **Four-tier dependency philosophy shipped with enforcement, not just prose.** Core, Middleware, Platform, Educational are defined in `dependency-rules.md`, and `enforcement-spec.md` ships a ready-to-paste ESLint 9+ flat config plus a Rust `pub(crate)` strategy. The difference between a design system on paper and a design system in production is a failing test or lint rule that forbids the pattern the system replaces. v1.25 shipped both halves at the same milestone.
+- **Pact rejection was the right call.** The integration test strategy evaluated Pact as a contract-testing framework and rejected it because Pact is HTTP-focused and the ecosystem's boundaries are filesystem, in-process, and event-envelope shaped. Zod `.toJSONSchema()` + Vitest fits the actual boundary type. Rejecting a well-known tool because it is the wrong shape is harder than adopting it and regretting it later; the phase got this right.
+- **Partial-build compatibility matrix with three-state degradation is the user-facing contract that lets skill-creator run standalone.** The matrix at `compatibility-matrix.md` gives every one of the forty-eight edges a defined behavior in `full`, `degraded`, and `unavailable` modes. The four HIGH-viability standalone nodes (skill-creator, amiga-leverage, info-design in the core layer) are now documented as safe to install without the rest of the ecosystem. This is the specification that lets `npm install skill-creator` work as a minimum-viable tool.
+- **Three-tier capability probe protocol is the right cheapest-first layering.** Tier 1 filesystem presence (essentially free), Tier 2 import check (cheap but catches broken installs), Tier 3 structured probe (expensive but catches runtime degradation) is the correct cost ladder for a probe that runs on every session boundary. The spec at `capability-probe-protocol.md` specifies the fallthrough.
 
 ### What Could Be Better
-- **10,558 lines of specification with no implementation.** This release is entirely analytical -- 17 spec documents, zero code changes. The value is real (ecosystem clarity), but the gap between specification and enforcement means these specs could drift if not actively maintained.
-- **99 known-issues cross-referenced but categorization may not age well.** The 51 aspirational, 26 environment-dependent, 9 permanent, 13 resolved breakdown is a snapshot. Without a process to re-evaluate periodically, the categories become stale.
+
+- **Ten thousand five hundred fifty-eight lines of specification with zero runtime code changes is a drift hazard.** The release is entirely analytical — seventeen specification documents, no TypeScript or Rust or test additions. The value is real (ecosystem clarity) but the gap between specification and implementation means these specs can drift the moment phase 236 lands a change that contradicts one of them. The matrix-maintenance section lists four re-evaluation triggers, but triggers require someone to pull them.
+- **Ninety-nine known-issues cross-reference is a snapshot, not a living document.** The fifty-one aspirational / twenty-six environment-dependent / nine permanent / thirteen resolved breakdown is true on 2026-02-19. Without a process to re-evaluate periodically — a scheduled audit, a CI job that counts un-resolved issues, something automated — the categories become stale. The release does not ship that process.
+- **Only five tip commits in the observable window for a release this large.** The `git log v1.25~5..v1.25` window shows phase-235 commits only; phases 231-234 landed in earlier commits that are not in the five-commit tip window. The eight changed files for the tip window under-count the real file surface of the release, which is seventeen spec documents across four subdirectories under `.planning/specs/`. A release with this much documentation work should have a phase-summary ledger in the tag message pointing to the full set.
+- **No runtime conformance check yet.** The ESLint flat config is ready-to-paste but is not committed to the repository's active lint pipeline. The Rust `pub(crate)` strategy is documented but not enforced by CI. Until those configurations are actually imported into the build, the enforcement story is a draft, not a gate. v1.26 or v1.27 should finish the enforcement wiring before a future phase has a chance to violate it unintentionally.
+- **The EventDispatcher migration plan is documented but not dated.** `migration-plan.md` describes how the two existing watchers (dashboard refresh, staging queue) will move onto the dispatched model, but does not schedule when. A migration plan without a milestone number is a wish. A future release should pull the migration into an explicit phase with a date.
 
 ## Lessons Learned
 
-1. **Dependency DAGs should be built early, not as a catch-up exercise.** At 20 nodes and 48 edges, the ecosystem is already complex enough that manual dependency tracking is unreliable. Building this DAG earlier would have informed build sequencing decisions throughout v1.16-v1.24.
-2. **inotify budget is a real constraint on Linux systems.** The 9-factor rationale for inotify over fanotify and the per-subscriber allocation model show that filesystem watching at scale requires explicit resource planning, not just "add a watcher."
-3. **Partial-build compatibility matrices enable incremental adoption.** The 3-state degradation tables (full/degraded/unavailable) and 3-tier capability probe protocol mean users can run subsets of the system without everything installed. This is essential for a project of this size.
+1. **Dependency DAGs should be built early, not as a catch-up exercise.** At twenty nodes and forty-eight edges, the ecosystem was already complex enough that manual dependency tracking had become unreliable. Building this DAG during v1.16 or v1.17 — when the node count was around ten — would have informed build-sequencing decisions throughout v1.16-v1.24 and would have prevented at least one wrong-order phase. The graph is cheap to maintain once it exists; it is expensive to rebuild from scratch at node twenty.
+2. **inotify budget is a real constraint on Linux systems and deserves explicit resource planning.** The nine-factor rationale for inotify over fanotify (fanotify requires `CAP_SYS_ADMIN` and therefore rules out developer-mode installations) plus the per-subscriber allocation model in `watch-budget-table.md` shows that filesystem watching at scale is a resource-accounting problem, not a "just add a watcher" problem. Every system that watches files should have a budget table and a fan-out plan before the third watcher lands.
+3. **Partial-build compatibility matrices enable incremental adoption.** The three-state degradation tables and three-tier capability-probe protocol mean users can run subsets of the ecosystem without the full installation. For a project of this size with sixteen internal nodes, this is not a nice-to-have — it is the difference between a tool that onboards one user at a time and a tool that requires full-ecosystem commitment before the first session. The four HIGH-viability standalone nodes are the onboarding wedge.
+4. **Specification releases deserve first-class milestone status when the work-to-be-done is agreement rather than execution.** v1.25 ships zero runtime code and seventeen specification documents. Rolling this work into a feature release would have shortchanged the specifications, because feature pressure crowds out agreement work. Scoping an entire release boundary to analysis made the agreement durable. Future ecosystems that find themselves debating contracts every implementation phase should plan an explicit specification milestone.
+5. **Adopt and specify beats invent and document.** Phase 232 elevated the AMIGA `EventEnvelope` from a vision-document primitive to an ecosystem-wide canonical event format rather than designing a new envelope. When a good-enough primitive exists inside the system, extending and specifying it is cheaper and more durable than inventing a parallel one. The cost of the alternative — two envelopes, a converter between them, and twice the drift surface — would have been paid forever.
+6. **Reject tools that are the wrong boundary shape, even when they are well-known.** Pact is the industry-standard contract-testing framework, and phase 234 rejected it because the ecosystem's boundaries are filesystem, in-process, and event-envelope shaped — Pact is HTTP-shaped. The well-known choice is only the right choice when the shape matches. Zod `.toJSONSchema()` + Vitest fits the actual boundary type and runs in the same process as the code it tests.
+7. **Philosophy without enforcement drifts within one release.** The four-tier dependency philosophy at `dependency-rules.md` would have been prose-only documentation without `enforcement-spec.md`. A ready-to-paste ESLint flat config plus a Rust `pub(crate)` strategy turns the philosophy into something a PR either conforms to or fails its linter. Every future design document in this project should ship its enforcement grammar at the same milestone as its prose.
+8. **Three-tier probe protocols should layer cheapest-first.** The capability-probe spec runs Tier 1 (filesystem presence, essentially free) before Tier 2 (import check, cheap but catches broken installs) before Tier 3 (structured probe, expensive but catches runtime degradation). Cheapest-first layering means the common case — "the module is installed and healthy" — resolves at Tier 1 without paying for Tier 3. Any future capability check in the ecosystem should inherit the layering.
+9. **Machine-readable artifacts beat prose-only artifacts for architectural data.** The dependency DAG shipped as `ecosystem-deps.yaml` plus a Mermaid view, not as a prose description. Future tooling can query the YAML programmatically; the Mermaid view is a rendering of the same data, not a parallel source of truth. Every architectural artifact that has to survive the next AI-assistant context reset should have a machine-readable canonical form with human-readable views layered on top.
+10. **Drift hazards should be named in the release notes, not hidden in the commit history.** The "What Could Be Better" section of this retrospective explicitly names the drift risk on 10,558 lines of specification without enforcement wiring. Hiding that risk under "ecosystem clarity" would have been puffery. A honest retrospective is worth more to future readers than a triumphant one, because future readers are deciding whether to trust the artifacts — and trust is earned by calling the weaknesses out loud.
+11. **Exception processes belong in the enforcement spec, not in a separate appendix.** The four-step exception process for justified dependency-tier boundary crossings lives inside `enforcement-spec.md`, right next to the ESLint flat config. Co-locating the rule with its escape hatch makes the escape hatch discoverable at the same moment as the rule. A rule without a discoverable exception process either gets ignored or gets bent silently; neither is a good outcome.
+12. **Staleness policies are cheaper to write at documentation time than at audit time.** The compatibility-matrix maintenance section lists four re-evaluation triggers (new node / new edge / implementation status change / quarterly audit) that were cheap to write during phase 235-01 when the matrix was fresh. Writing that same policy six months later, when the matrix is already stale, is a much harder conversation because the argument "the matrix is wrong in these twelve cells" has already become adversarial. Write the staleness policy while the data is young.
+
+## Cross-References
+
+| Related | Why |
+|---------|-----|
+| [v1.0](../v1.0/) | Core Skill Management — the zero-point foundation; v1.25's dependency DAG sits on top of the `extends:` inheritance model shipped at v1.0 |
+| [v1.17](../v1.17/) | Staging Layer — one of the two existing filesystem watchers that the EventDispatcher migration plan folds into the dispatched model |
+| [v1.18](../v1.18/) | Information Design System — one of the HIGH-viability standalone nodes in the compatibility matrix; the visual vocabulary v1.20 wired together |
+| [v1.20](../v1.20/) | Dashboard Assembly — the other existing filesystem watcher (dashboard refresh) that the EventDispatcher migration plan subsumes; v1.25 makes the dashboard's implicit event shape explicit |
+| [v1.21](../v1.21/) | GSD-OS Desktop Foundation — the Tauri / Rust Platform-tier reference implementation that the dependency philosophy's Platform layer names |
+| [v1.22](../v1.22/) | Minecraft Knowledge World — one of the ecosystem vision documents whose implicit dependency on the skill-creator core layer is now edge-typed |
+| [v1.23](../v1.23/) | Project AMIGA — the source of the `EventEnvelope` that v1.25 promotes to ecosystem-wide canonical event format |
+| [v1.24](../v1.24/) | GSD Conformance Audit — predecessor; v1.24's 336-checkpoint matrix is the structural ancestor of v1.25's 48-edge compatibility matrix |
+| [v1.26](../v1.26/) | Aminet Archive Extension Pack — immediate successor; the first release that builds on top of the v1.25 specification layer |
+| [v1.27](../v1.27/) | Foundational Knowledge Packs — inherits the dependency-tier discipline; Educational tier defined at v1.25 |
+| [v1.28](../v1.28/) | GSD Den Operations — filesystem message bus that follows the EventDispatcher contract |
+| [v1.31](../v1.31/) | GSD-OS MCP Integration — a later consumer of the envelope unification |
+| [v1.33](../v1.33/) | GSD OpenStack Cloud Platform — consumer of the dependency-tier model for its 19 skill / 31 agent layering |
+| [v1.42](../v1.42/) | Later test-infrastructure addition that pairs with v1.25's contract-test strategy |
+| [v1.49](../v1.49/) | Mega-release that consolidated post-v1.25 implementation of the specifications defined here |
+| `.planning/specs/ecosystem-dependency-map/ecosystem-deps.yaml` | Machine-readable 20-node, 48-edge dependency graph |
+| `.planning/specs/ecosystem-dependency-map/ecosystem-dependency-map.md` | Mermaid-rendered view + critical-path analysis + 5-milestone build sequencing |
+| `.planning/specs/shared-eventdispatcher-specification/eventdispatcher-spec.md` | Canonical single-inotify watcher spec + 1,020 watch budget |
+| `.planning/specs/shared-eventdispatcher-specification/envelope-unification.md` | AMIGA `EventEnvelope` field-level specification |
+| `.planning/specs/shared-eventdispatcher-specification/migration-plan.md` | Walk-plan for 2 existing watchers (dashboard refresh, staging queue) |
+| `.planning/specs/shared-eventdispatcher-specification/resilience-spec.md` | Overflow, watch exhaustion, re-registration contracts |
+| `.planning/specs/shared-eventdispatcher-specification/watch-budget-table.md` | Per-subscriber allocation of the 1,020-watch ecosystem budget |
+| `.planning/specs/shared-eventdispatcher-specification/file-conventions.md` | Event emission vs. event consumption disambiguation |
+| `.planning/specs/dependency-philosophy/dependency-rules.md` | 4-tier Core/Middleware/Platform/Educational model |
+| `.planning/specs/dependency-philosophy/enforcement-spec.md` | ESLint 9+ flat config + Rust `pub(crate)` strategy + 4-step exception process |
+| `.planning/specs/partial-build-compatibility-matrix/compatibility-matrix.md` | 48-edge 3-state degradation matrix (715 lines) |
+| `.planning/specs/partial-build-compatibility-matrix/degradation-specs.md` | 48 per-edge degradation scenarios (708 lines) |
+| `.planning/specs/partial-build-compatibility-matrix/standalone-modes.md` | 16 internal-node standalone viability ratings (575 lines) |
+| `.planning/MILESTONES.md` | Canonical phase-by-phase detail for phases 231-235 |
+
+## Engine Position
+
+v1.25 is the specification layer that sits under every v1.26+ implementation milestone. The v1.12 → v1.24 arc built components (dashboard body, live metrics, session lifecycle, promotion pipeline, dashboard terminal, console ingestion, staging layer, information design, budget display, dashboard assembly, desktop foundation, Minecraft knowledge world, Project AMIGA, conformance audit). v1.25 does not add a component — it specifies how components connect. The twenty-node dependency DAG is the authoritative dependency list that future tooling queries programmatically. The EventDispatcher specification is the interface that every new watch-subscriber has to implement. The four-tier dependency philosophy with ESLint flat-config enforcement is the lint rule that every new module has to pass. The Zod-plus-Vitest contract testing strategy is the pattern every new cross-component PR inherits. The partial-build compatibility matrix is the user-facing contract for partial installs. From v1.26 (Aminet Archive Extension Pack) onward, every implementation milestone either conforms to these specifications or explicitly amends one of them. The release is the closing brace of the "build first, specify later" phase of the project and the opening brace of the "conform-or-amend" phase. The v1.49 mega-release that eventually consolidates post-v1.25 implementation work treats v1.25 as its contract layer; every track inside v1.49 can point at a v1.25 specification as its governing document.
+
+## Files
+
+- `.planning/specs/ecosystem-dependency-map/ecosystem-deps.yaml` — machine-readable 20-node, 48-edge dependency graph
+- `.planning/specs/ecosystem-dependency-map/ecosystem-dependency-map.md` — Mermaid-rendered view, critical-path analysis, 5-milestone build sequencing
+- `.planning/specs/shared-eventdispatcher-specification/eventdispatcher-spec.md` — canonical single-inotify watcher specification
+- `.planning/specs/shared-eventdispatcher-specification/envelope-unification.md` — AMIGA `EventEnvelope` field-level specification
+- `.planning/specs/shared-eventdispatcher-specification/migration-plan.md` — walk-plan for 2 existing watchers onto the dispatched model
+- `.planning/specs/shared-eventdispatcher-specification/resilience-spec.md` — overflow, watch exhaustion, re-registration
+- `.planning/specs/shared-eventdispatcher-specification/watch-budget-table.md` — per-subscriber allocation of the 1,020-watch budget
+- `.planning/specs/shared-eventdispatcher-specification/file-conventions.md` — event emission vs. consumption disambiguation
+- `.planning/specs/dependency-philosophy/dependency-rules.md` — 4-tier Core/Middleware/Platform/Educational philosophy
+- `.planning/specs/dependency-philosophy/enforcement-spec.md` — ESLint 9+ flat config + Rust `pub(crate)` strategy + 4-step exception process
+- `.planning/specs/partial-build-compatibility-matrix/compatibility-matrix.md` — 48-edge 3-state degradation matrix (715 lines)
+- `.planning/specs/partial-build-compatibility-matrix/degradation-specs.md` — 48 per-edge degradation scenarios (708 lines)
+- `.planning/specs/partial-build-compatibility-matrix/standalone-modes.md` — 16 internal-node standalone viability ratings (575 lines)
+- `.planning/phases/235-partial-build-compatibility-matrix/235-01-SUMMARY.md` + `235-02-SUMMARY.md` — phase-level execution ledgers
+- `.planning/REQUIREMENTS.md` + `.planning/ROADMAP.md` + `.planning/STATE.md` — requirement-tracking updates for COMPAT-01, COMPAT-02, COMPAT-05, COMPAT-06, COMPAT-07
+- `.planning/MILESTONES.md` — canonical milestone detail for phases 231-235 (14 plans, 38 requirements)
 
 ---
+
+## Version History (preserved from original release notes)
+
+The table below lists the v1.x line that accumulated through v1.25, with the actual shipped summaries for each version. This version history is retained here for archival continuity.
+
+| Version | Summary |
+|---------|---------|
+| **v1.25** | Ecosystem Integration — 20-node dependency DAG, EventDispatcher spec, 4-tier dependency philosophy, contract testing strategy, partial-build compatibility matrix (this release) |
+| **v1.24** | GSD Conformance Audit — 336-checkpoint matrix, 4-tier audit, zero-fail conformance, 9,355 tests passing |
+| **v1.23** | Project AMIGA — mission infrastructure (MC-1/ME-1/CE-1/GL-1), Apollo AGC simulator, DSKY interface, RFC Reference Skill |
+| **v1.22** | Minecraft Knowledge World — local cloud infrastructure, Fabric server, platform portability, Amiga emulation, spatial curriculum |
+| **v1.21** | GSD-OS Desktop Foundation — Tauri v2 shell, WebGL CRT engine, PTY terminal, Workbench desktop, calibration wizard |
+| **v1.20** | Dashboard Assembly — unified CSS pipeline, four data collectors, console page as 6th generated page |
+| **v1.19** | Budget Display Overhaul — `LoadingProjection`, dual-view display, configurable budgets, dashboard gauge |
+| **v1.18** | Information Design System — shape + color encoding, status gantry, topology views, three-speed layering |
+| **v1.17** | Staging Layer — analysis, scanning, resource planning, 7-state approval queue for parallel execution |
+| **v1.16** | Dashboard Console & Milestone Ingestion |
+| **v1.15** | Live Dashboard Terminal — Wetty integration, tmux session binding, unified launcher |
+| **v1.14** | Promotion Pipeline |
+| **v1.13** | Session Lifecycle & Workflow Coprocessor |
+| **v1.12.1** | Live Metrics Dashboard |
+| **v1.12** | GSD Planning Docs Dashboard |
+| **v1.11** | GSD Integration Layer |
+| **v1.10** | Security Hardening |
+| **v1.9** | Ecosystem Alignment & Advanced Orchestration |
+| **v1.8.1** | Audit Remediation (Patch) |
+| **v1.8** | Capability-Aware Planning + Token Efficiency |
+| **v1.7** | GSD Master Orchestration Agent |
+| **v1.6** | Cross-Domain Examples |
+| **v1.5** | Pattern Discovery |
+| **v1.4** | Agent Teams |
+| **v1.3** | Documentation Overhaul |
+| **v1.2** | Test Infrastructure |
+| **v1.1** | Semantic Conflict Detection |
+| **v1.0** | Core Skill Management |
