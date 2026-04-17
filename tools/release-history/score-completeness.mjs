@@ -247,7 +247,13 @@ function scoreRelease(text, releaseType) {
     return { score, grade: gradeOf(score), dimensions };
   }
 
-  // Structured rubric — feature, milestone, patch, unclassified
+  // Structured rubric — feature, milestone, patch, unclassified.
+  //
+  // Non-degree releases rarely use Part A / Part B structure, so the
+  // 20 points those dimensions hold are unreachable by design. To
+  // avoid auto-penalizing them 20 points, score those dims (they still
+  // store in the table for visibility) but normalize the final score
+  // to [0, 100] across the 80 points that are actually achievable.
   const dimensions = {
     header_block:            scoreHeaderBlock(text),
     summary_findings:        scoreSummaryFindings(text),
@@ -260,7 +266,9 @@ function scoreRelease(text, releaseType) {
     running_ledgers:         scoreRunningLedgers(text),
     infrastructure_block:    scoreInfrastructure(text),
   };
-  const score = Object.values(dimensions).reduce((s, v) => s + v, 0);
+  const raw = Object.values(dimensions).reduce((s, v) => s + v, 0);
+  // Skip Part A/B for non-degree types: raw is out of 80, scale to 100.
+  const score = Math.round(((raw - dimensions.part_a_depth - dimensions.part_b_depth) / 80) * 100);
   return { score, grade: gradeOf(score), dimensions };
 }
 
